@@ -60,11 +60,24 @@ export const DraggableProvider = ({
   onDragEnd,
   onDrop,
   onDragOver,
-  dropZone = 'ghost',
-  dropZoneColor = 'neutral',
-  dropZoneDirection = 'horizontal'
+  dropZone = { type: 'ghost', color: 'neutral', direction: 'horizontal' }
 }: DraggableProviderType) => {
   const [state, dispatch] = useReducer(reducer, initialState);
+
+  // Parse dropZone prop - handle both string format (backward compatibility) and object format
+  let dropZoneType = 'ghost';
+  let dropZoneColor = 'neutral';
+  let dropZoneDirection = 'horizontal';
+
+  if (typeof dropZone === 'string') {
+    // Legacy format - just the type is provided as a string
+    dropZoneType = dropZone;
+  } else {
+    // New object format
+    dropZoneType = dropZone.type || 'ghost';
+    dropZoneColor = dropZone.color || 'neutral';
+    dropZoneDirection = dropZone.direction || 'horizontal';
+  }
 
   useEffect(() => {
     dispatch({ type: 'SET_ITEMS', payload: initialItems });
@@ -116,15 +129,15 @@ export const DraggableProvider = ({
     dragData: state.dragData,
     isDragging: state.isDragging,
     activeContainer: state.activeContainer,
-    dropZone,
+    dropZone: dropZoneType,
     dropZoneColor,
-    dropZoneDirection,
+    direction: dropZoneDirection,
     handleDragStart,
     handleDragEnter,
     handleDragEnd,
     handleDrop,
     handleDragOver
-  }), [state, dropZone, dropZoneColor, dropZoneDirection]);
+  }), [state, dropZoneType, dropZoneColor, dropZoneDirection]);
 
   return (
     <DragContext.Provider value={contextValue}>{children}</DragContext.Provider>

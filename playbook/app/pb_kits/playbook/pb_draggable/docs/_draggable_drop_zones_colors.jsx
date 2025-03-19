@@ -41,8 +41,7 @@ const DraggableDropZonesColors = (props) => {
       Primary
     </Caption>
     <DraggableProvider
-        dropZone="shadow"
-        dropZoneColor="primary"
+        dropZone={{type: "shadow", color: "primary"}}
         initialItems={dataPrimary}
         onReorder={(items) => setInitialPrimaryState(items)}
     >
@@ -66,8 +65,7 @@ const DraggableDropZonesColors = (props) => {
       Purple
     </Caption>
     <DraggableProvider
-        dropZone="line"
-        dropZoneColor="purple"
+        dropZone={{type: "line", color: "purple"}}
         initialItems={dataPurple}
         onReorder={(items) => setInitialPurpleState(items)}
     >

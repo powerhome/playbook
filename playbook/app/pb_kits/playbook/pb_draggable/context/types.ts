@@ -19,6 +19,12 @@ export type ActionType =
   | { type: 'CHANGE_CATEGORY'; payload: { itemId: string; container: string } }
   | { type: 'REORDER_ITEMS'; payload: { dragId: string; targetId: string } };
 
+  export interface DropZoneConfig {
+    type?: 'ghost' | 'outline' | 'shadow' | 'line';
+    color?: 'primary' | 'secondary' | 'tertiary' | 'success' | 'warning' | 'info' | 'neutral' | 'royal' | 'purple' | 'teal' | 'red' | 'yellow' | 'green' | 'orange';
+    direction?: 'horizontal' | 'vertical';
+  }
+
   export interface DraggableProviderType {
     children: React.ReactNode;
     initialItems: ItemType[];
@@ -28,7 +34,5 @@ export type ActionType =
     onDragEnd?: () => void;
     onDrop?: (container: string) => void;
     onDragOver?: (e: Event, container: string) => void;
-    dropZone?: 'ghost' | 'outline' | 'shadow' | 'line';
-    dropZoneColor?: string;
-    dropZoneDirection?: 'horizontal' | 'vertical';
+    dropZone?: DropZoneConfig | string; // Can accept string for backward compatibility
   }
