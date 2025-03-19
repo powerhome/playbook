@@ -119,7 +119,9 @@ const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>((pr
       return;
     }
     return tree.map((item: { [key: string]: any }) => {
-      item.checked = check;
+      if (!item.disabled) {
+        item.checked = check;
+      }
       item.children = modifyRecursive(item.children, check);
       return item;
     });
@@ -130,12 +132,16 @@ const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>((pr
     treeData: { [key: string]: any }[],
     selectedIds: string[],
     parent_id: string | null = null,
-    depth = 0
+    depth = 0,
+    parentDisabled = false
   ) => {
     if (!Array.isArray(treeData)) {
       return;
     }
     return treeData.map((item: { [key: string]: any } | any) => {
+      // An item is disabled if it is explicitly set as disabled or if its parent is disabled
+      const isDisabled = item.disabled || (parentDisabled && !returnAllSelected);
+
       const newItem = {
         ...item,
         checked: Boolean(
@@ -143,6 +149,7 @@ const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>((pr
         ),
         parent_id,
         depth,
+        disabled: isDisabled,
       };
       if (newItem.children && newItem.children.length > 0) {
         const children =
@@ -153,7 +160,8 @@ const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>((pr
           children,
           selectedIds,
           newItem.id,
-          depth + 1
+          depth + 1,
+          isDisabled
         );
       }
       return newItem;
@@ -250,8 +258,9 @@ const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>((pr
     return tree.map((item: any) => {
       if (item.id != id) item.children = modifyValue(id, item.children, check);
       else {
-        item.checked = check;
-
+        if (!item.disabled) {
+          item.checked = check;
+        }
         if (variant === "single") {
           // Single select: no children should be checked
           item.children = modifyRecursive(item.children, !check);

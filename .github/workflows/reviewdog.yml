@@ -13,7 +13,7 @@ jobs:
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
       - name: "Brakeman playbook"
-        uses: reviewdog/action-brakeman@2a6e4356f87d023571b20b09850e6e5d3ed6856b # v2
+        uses: reviewdog/action-brakeman@5083efd49634e26645a0736681b618ccc3fb7f14 # v2
         with:
           brakeman_version: gemfile
           tool_name: "playbook"
