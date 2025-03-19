@@ -45,7 +45,7 @@ const IconDefault = (props) => {
             {...props}
         />
         <Icon
-            color="default"
+            color="link"
             fixedWidth
             icon="product-roofing"
             size="2x"
