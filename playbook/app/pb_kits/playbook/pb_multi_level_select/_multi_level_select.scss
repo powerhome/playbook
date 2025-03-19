@@ -13,11 +13,10 @@
 &.error {
   .wrapper {
     .input_wrapper {
-      border-color: $error_dark;
+      border-color: $error;
     }
   }
   [class*=pb_body_kit_negative] {
-    color: $error_dark;
     margin-top: $space_xxs;
   }
 }
@@ -102,5 +101,18 @@
 
   .open {
     display: block;
+  }
+
+  &.dark {
+    &.error {
+      .wrapper {
+        .input_wrapper {
+          border-color: $error_dark;
+        }
+      }
+      [class*=pb_body_kit_negative] {
+        color: $error_dark;
+      }
+    }
   }
 }
