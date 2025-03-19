@@ -45,12 +45,12 @@ const CurrentFilters = ({ dark, filters }: CurrentFiltersProps): React.ReactElem
                     dark={dark}
                     size={4}
                     tag="h4"
-                    text={name}
+                    text={`${name}`}
                 /> :
                 <div>
                   <Caption
                       dark={dark}
-                      text={name}
+                      text={`${name}`}
                   />
                   <Title
                       dark={dark}
