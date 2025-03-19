@@ -26,7 +26,7 @@ const directionIcon = (dir: Direction) => (
 
 const renderOptions = (options: SortOptions, value: SortValue[], handleChange: (arg0: SortValue) => void) => (
   map(options, (label, name) => {
-    const next = nextValue(value, name)
+    const next = nextValue(value, String(name))
     return (
       <ListItem key={`option-${next.name}-${next.dir}`}>
         <Button
