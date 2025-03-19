@@ -180,7 +180,7 @@ class PagesController < ApplicationController
   end
 
   def parse_erb(code)
-    parsed = code.scan(/<%=?\s*(.*?)\s*%>/).flatten.join("\n")
+    parsed = code.scan(/<%=?\s*(.*?)\s*%>/m).flatten.join("\n")
     Parser::CurrentRuby.parse(parsed)
   end
 
