@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 import Flex from '../../pb_flex/_flex'
+import Image from '../../pb_image/_image'
 import Draggable from '../../pb_draggable/_draggable'
 import { DraggableProvider } from '../../pb_draggable/context'
 
