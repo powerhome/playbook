@@ -92,7 +92,7 @@ const Round = (props: LayoutRoundProps) => {
   const { children, className } = props
   const dynamicInlineProps = globalInlineProps(props)
 
-  const numberOfChildren = React.Children.count(children)
+  const numberOfChildren = Array.isArray(children) ? children.length : 0
 
   const leftConnectors = Array.from({ length: numberOfChildren }, (_, index) => (
     <div
@@ -148,7 +148,7 @@ const Game = (props: LayoutGameProps) => {
   const { children, className } = props
   const dynamicInlineProps = globalInlineProps(props)
 
-  const numberOfChildren = React.Children.count(children)
+  const numberOfChildren = Array.isArray(children) ? children.length : 0
 
   if (numberOfChildren === 2) {
     const firstChild = React.Children.toArray(children)[0];
