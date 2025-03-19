@@ -11,7 +11,7 @@ type DraggableProps = {
   children?: React.ReactNode;
   data?: { [key: string]: string };
   dropZone?: 'ghost' | 'outline' | 'shadow' | 'line';
-  dropZoneColor?: string; // This will accept color tokens like 'neutral', 'primary', etc.
+  dropZoneColor?: 'primary' | 'secondary' | 'tertiary' | 'success' | 'warning' | 'info' | 'neutral' | 'royal' | 'purple' | 'teal' | 'red' | 'yellow' | 'green' | 'orange';
   htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string;
 };
