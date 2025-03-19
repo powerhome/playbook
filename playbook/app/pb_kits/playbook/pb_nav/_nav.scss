@@ -42,9 +42,9 @@
       font-weight: $regular;
     }
   }
-}
 
-[class*="pb_nav_list_kit_item"],
-[class*="pb_nav_list_item"] {
-  &:hover { cursor: pointer; }
+  [class*="pb_nav_list_kit_item"],
+  [class*="pb_nav_list_item"] {
+    &:hover { cursor: pointer; }
+  }
 }
