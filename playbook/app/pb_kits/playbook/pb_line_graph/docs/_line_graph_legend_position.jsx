@@ -1,5 +1,6 @@
 import React from 'react'
-import { LineGraph, Title } from 'playbook-ui'
+import LineGraph from '../../pb_line_graph/_line_graph'
+import Title from '../../pb_title/_title'
 
 const data = [{
   name: 'Installation',

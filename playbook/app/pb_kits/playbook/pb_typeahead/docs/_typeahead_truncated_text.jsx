@@ -1,5 +1,5 @@
 import React from 'react'
-import { Typeahead } from 'playbook-ui'
+import Typeahead from '../../pb_typeahead/_typeahead'
 
 const names = [
   { label: 'Alexander Nathaniel Montgomery', value: 'Alexander Nathaniel Montgomery' },

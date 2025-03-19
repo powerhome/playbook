@@ -17,3 +17,5 @@ examples:
   - phone_number_input_only_countries: Limited Countries
   - phone_number_input_validation: Form Validation
   - phone_number_input_format: Format as You Type
+  - phone_number_input_hidden_inputs: Hidden Inputs
+  

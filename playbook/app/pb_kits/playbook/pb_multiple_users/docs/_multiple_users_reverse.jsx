@@ -1,5 +1,5 @@
 import React from 'react'
-import { MultipleUsers } from 'playbook-ui'
+import MultipleUsers from '../../pb_multiple_users/_multiple_users'
 
 const MultipleUsersReverse = (props) => {
   return (

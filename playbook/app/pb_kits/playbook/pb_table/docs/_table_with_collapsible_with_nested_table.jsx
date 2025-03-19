@@ -1,5 +1,9 @@
 import React from 'react'
-import {Pill, Background, Table, Icon} from "playbook-ui"
+
+import Pill from '../../pb_pill/_pill'
+import Background from '../../pb_background/_background'
+import Table from '../../pb_table/_table'
+import Icon from '../../pb_icon/_icon'
 
 const TableWithCollapsibleWithNestedTable = (props) => {
 

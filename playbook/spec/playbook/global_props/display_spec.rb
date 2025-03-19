@@ -8,7 +8,7 @@ RSpec.describe Playbook::Flex do
 
   describe "#classname" do
     it "returns proper class name", :aggregate_failures do
-      %w[block inline_block inline flex inline_flex none].each do |word|
+      %w[block inline_block inline flex inline_flex none grid].each do |word|
         expect(subject.new({ display: word }).classname).to include("display_#{word}")
 
         screen_sizes.each do |size|

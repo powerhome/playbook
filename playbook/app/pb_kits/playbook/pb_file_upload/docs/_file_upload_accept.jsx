@@ -1,10 +1,9 @@
 
 import React, { useState } from 'react'
-import {
-  FileUpload,
-  List,
-  ListItem,
-} from 'playbook-ui'
+
+import FileUpload from '../../pb_file_upload/_file_upload'
+import List from '../../pb_list/_list'
+import ListItem from '../../pb_list/_list_item'
 
 const AcceptedFilesList = ({ files }) => (
   <List>

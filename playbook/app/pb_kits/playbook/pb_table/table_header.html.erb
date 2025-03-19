@@ -1,11 +1,7 @@
 <% if object.tag == "table" %>  
-  <%= content_tag(:th,
+  <%= pb_content_tag(:th,
       colspan: object.colspan,
-      aria: object.aria,
-      class: object.classname,
-      data: object.data,
-      id: "pb-th#{object.id}",
-      **combined_html_options) do %>
+      id: "pb-th#{object.id}") do %>
     <% unless sorting_style? %>
         <%= content.presence || object.text %>
     <% else %>
@@ -46,12 +42,7 @@
     <% end %>
   <% end %>
 <% else %>
-  <%= content_tag(:div,
-    aria: object.aria,
-    class: object.classname,
-    data: object.data,
-    id: object.id,
-    **combined_html_options) do %>
+  <%= pb_content_tag do %>
       <% unless sorting_style? %>
         <%= content.presence || object.text %>
       <% else %>

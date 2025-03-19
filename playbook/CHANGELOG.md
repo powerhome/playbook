@@ -1,5 +1,10 @@
-# 14.15.0
+# 🚀 Rails Typeahead Kit Update
 ##### March 7, 2025
+
+![Dynamic-Typeahead-Release-graphic](https://github.com/user-attachments/assets/d7965b0d-85c8-4c34-baab-ee77beedbf1a)
+
+
+The Rails Typeahead kit now supports dynamic option rendering, matching the React version! Previously, only React could update options in real-time using state—now, Rails can too, making search experiences more flexible and interactive. No breaking changes—just update to the latest version and enjoy a more dynamic Typeahead! 🎉
 
 [14.15.0](https://github.com/powerhome/playbook/tree/14.15.0) full list of changes:
 

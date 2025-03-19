@@ -1,12 +1,9 @@
 <% if object.collapsible && object.tag == "table" %>
-    <%= content_tag(:tr,
-    aria: object.aria,
+    <%= pb_content_tag(:tr,
     class: object.classname + " collapsible-tr",
-    data: object.data.merge(id: object.id),  
-    id: object.id,
+    data: object.data.merge(id: object.id),
     'data-pb-table-collapsible-wrapper' => true,
-    'data-pb-table-collapsible-cell-id' => object.toggle_cell_id,
-    **combined_html_options) do %>
+    'data-pb-table-collapsible-cell-id' => object.toggle_cell_id) do %>
     <%= content.presence %>
   <% end %>
 
@@ -24,22 +21,12 @@
         <%= content.presence %>
       <% end %>
     <% else %>
-      <%= content_tag(:tr,
-        aria: object.aria,
-        class: object.classname,
-        data: object.data,
-        id: object.id,
-        **combined_html_options) do %>
+      <%= pb_content_tag(:tr) do %>
         <%= content.presence %>
       <% end %>
     <% end %>
 <% else %>
-    <%= content_tag(:div,
-      aria: object.aria,
-      class: object.classname,
-      data: object.data,
-      id: object.id,
-      **combined_html_options) do %>
+    <%= pb_content_tag do %>
       <%= content.presence %>
     <% end %>
 <% end %>
