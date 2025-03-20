@@ -20,17 +20,23 @@ export default class PbMultiLevelSelect extends PbEnhancedElement {
     const inputElement = this.element.querySelector("input");
 
     inputElement.addEventListener("invalid", () => {
-      this.handleErrorLabel(200);
+      this.handleErrorLabel(300);
     });
   }
 
   handleErrorLabel(delay) {
     setTimeout(() => {
       const errorLabelElement = this.target;
+      const wrapper = this.element.querySelector(".wrapper");
 
       if (errorLabelElement) {
         errorLabelElement.remove();
-        this.element.querySelector(".wrapper").appendChild(errorLabelElement);
+        if (wrapper) {
+          if (wrapper.querySelector(".pb_body_kit_negative")) {
+            wrapper.querySelector(".pb_body_kit_negative").remove();
+          }
+          wrapper.appendChild(errorLabelElement);
+        }
         this.element.classList.add("error");
       } else {
         this.handleErrorLabel(100);
