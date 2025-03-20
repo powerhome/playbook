@@ -22,6 +22,72 @@
 
 %>
 
+<% treeData = [{
+    label: "Power Home Remodeling",
+    value: "Power Home Remodeling",
+    id: "100",
+    expanded: true,
+    children: [
+      {
+        label: "People",
+        value: "People",
+        id: "101",
+        expanded: true,
+        children: [
+          {
+            label: "Talent Acquisition",
+            value: "Talent Acquisition",
+            id: "102",
+          },
+          {
+            label: "Business Affairs",
+            value: "Business Affairs",
+            id: "103",
+            children: [
+              {
+                label: "Initiatives",
+                value: "Initiatives",
+                id: "104",
+              },
+              {
+                label: "Learning & Development",
+                value: "Learning & Development",
+                id: "105",
+              },
+            ],
+          },
+          {
+            label: "People Experience",
+            value: "People Experience",
+            id: "106",
+          },
+        ],
+      },
+      {
+        label: "Contact Center",
+        value: "Contact Center",
+        id: "107",
+        children: [
+          {
+            label: "Appointment Management",
+            value: "Appointment Management",
+            id: "108",
+          },
+          {
+            label: "Customer Service",
+            value: "Customer Service",
+            id: "109",
+          },
+          {
+            label: "Energy",
+            value: "Energy",
+            id: "110",
+          },
+        ],
+      },
+    ],
+}] %>
+
 <%= pb_form_with(scope: :example, url: "", method: :get) do |form| %>
   <%= form.typeahead :example_typeahead, props: { data: { typeahead_example1: true, user: {} }, label: true, placeholder: "Search for a user" } %>
   <%= form.text_field :example_text_field, props: { label: true } %>
@@ -47,6 +113,7 @@
   <%= form.date_picker :example_date_picker_1, props: { label: true } %>
   <%= form.star_rating_field :example_star_rating, props: { variant: "interactive", label: true } %>
   <%= form.time_zone_select_field :example_time_zone_select, ActiveSupport::TimeZone.us_zones, { default: "Eastern Time (US & Canada)" }, props: { label: true } %>
+  <%= form.multi_level_select :example_multi_level_select, props: { id: "multi-level-select-form", label: true, tree_data: treeData, margin_bottom: "sm" } %>
 
   <%= form.actions do |action| %>
     <%= action.submit %>
