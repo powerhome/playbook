@@ -70,7 +70,7 @@ const DraggableDropZonesColors = (props) => {
       Purple
     </Caption>
     <DraggableProvider
-        dropZone={{type: "line", color: "purple"}}
+        dropZone={{type: "outline", color: "purple"}}
         initialItems={dataPurple}
         onReorder={(items) => setInitialPurpleState(items)}
     >
