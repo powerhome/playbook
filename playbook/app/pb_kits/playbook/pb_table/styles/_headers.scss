@@ -14,3 +14,79 @@
     }
   }
 }
+// remove all outward facing borders from header
+.header-borderless > thead,
+.header-borderless > thead > tr,
+.header-borderless > thead > tr > th,
+.header-borderless > .pb_table_thead,
+.header-borderless > .pb_table_thead > .pb_table_tr,
+.header-borderless > .pb_table_thead .pb_table_th {
+  border-top: none !important;
+  border-left: none !important;
+  border-right: none !important;
+}
+
+// remove bottom border (internal to table) on header cells - only light mode needs this redundancy handled likely due to a difference in the base scss and table-dark.scss
+.header-borderless:not(.table-dark) > thead > tr:last-child > th,
+.header-borderless:not(.table-dark) > .pb_table_thead > .pb_table_tr:last-child > .pb_table_th {
+  border-bottom: none !important;
+}
+
+// preserves top rounded corners to header at top of table-card for unnested card
+.header-borderless > thead > tr:first-child > th:first-child,
+.header-borderless > .pb_table_thead > .pb_table_tr:first-child > .pb_table_th:first-child {
+  border-top-left-radius: $border_radius_md !important;
+}
+
+.header-borderless > thead > tr:first-child > th:last-child,
+.header-borderless > .pb_table_thead > .pb_table_tr:first-child > .pb_table_th:last-child {
+  border-top-right-radius: $border_radius_md !important;
+}
+
+// ensures top border is from first row of body to prevent double borders
+.header-borderless > tbody > tr:first-child > td,
+.header-borderless > .pb_table_tbody > .pb_table_tr:first-child > .pb_table_td {
+  border-top: 1px solid $border_light !important;
+}
+
+// floating code - this carries over everything for header-borderless
+.header-floating > thead,
+.header-floating > thead > tr,
+.header-floating > thead > tr > th,
+.header-floating > .pb_table_thead,
+.header-floating > .pb_table_thead > .pb_table_tr,
+.header-floating > .pb_table_thead .pb_table_th {
+  border-top: none !important;
+  border-left: none !important;
+  border-right: none !important;
+}
+
+.header-floating:not(.table-dark) > thead > tr:last-child > th,
+.header-floating:not(.table-dark) > .pb_table_thead > .pb_table_tr:last-child > .pb_table_th {
+  border-bottom: none !important;
+}
+
+.header-floating > thead > tr:first-child > th:first-child,
+.header-floating > .pb_table_thead > .pb_table_tr:first-child > .pb_table_th:first-child {
+  border-top-left-radius: $border_radius_md !important;
+}
+
+.header-floating > thead > tr:first-child > th:last-child,
+.header-floating > .pb_table_thead > .pb_table_tr:first-child > .pb_table_th:last-child {
+  border-top-right-radius: $border_radius_md !important;
+}
+
+.header-floating > tbody > tr:first-child > td,
+.header-floating > .pb_table_tbody > .pb_table_tr:first-child > .pb_table_td {
+  border-top: 1px solid $border_light !important;
+}
+
+// flatten out corners for floating headerstyle variant to avoid small triangle of white/empty space
+.header-floating > thead > tr:first-child > th:first-child,
+.header-floating > .pb_table_thead > .pb_table_tr:first-child > .pb_table_th:first-child { 
+  border-top-left-radius: 0 !important; 
+} 
+.header-floating > thead > tr:first-child > th:last-child, 
+.header-floating > .pb_table_thead > .pb_table_tr:first-child > .pb_table_th:last-child { 
+  border-top-right-radius: 0 !important; 
+}
