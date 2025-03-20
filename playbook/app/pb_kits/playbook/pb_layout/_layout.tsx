@@ -136,43 +136,41 @@ const Footer = (props: LayoutFooterProps) => {
   )
 }
 
+// Helper function for Round
+const generateConnectors = (type: 'left' | 'right', count: number) => {
+  const connectorClass = type === 'left' ? 'left_connector' : 'right_connector'
+  return Array.from({ length: count }, (_, index) => (
+    <div
+        className={connectorClass}
+        key={`${connectorClass}_${index}`}
+    />
+  ))
+}
+
 // Round component (based off Body)
 const Round = (props: LayoutRoundProps) => {
   const { children, className } = props
   const dynamicInlineProps = globalInlineProps(props)
-
   const numberOfChildren = Array.isArray(children) ? children.length : 0
 
-  const leftConnectors = Array.from({ length: numberOfChildren }, (_, index) => (
-    <div
-        className='left_connector'
-        key={'left_connector' + index}
-    />
-  ));
+  const leftConnectors = generateConnectors('left', numberOfChildren)
+  const rightConnectors = generateConnectors('right', numberOfChildren / 2)
 
-  const rightConnectors = Array.from({ length: numberOfChildren / 2 }, (_, index) => (
-    <div
-        className='right_connector'
-        key={'right_connector' + index}
-    />
-  ));
-
-  const numberOfGamesClass = numberOfChildren === 8 ? "eight_games" : numberOfChildren === 4 ? "four_games" : numberOfChildren === 2 ? "two_games" : ""
+  const numberOfGamesClass = 
+    numberOfChildren === 8 ? 'eight_games' :
+    numberOfChildren === 4 ? 'four_games' :
+    numberOfChildren === 2 ? 'two_games' : ''
 
   return (
     <>
-    <div
-        className={classnames('layout_round', globalProps(props), className, numberOfGamesClass)}
-        style={dynamicInlineProps}
-    >
-      {children}
-    </div>
-    <div className='connector_container'>
-      {leftConnectors}
-    </div>
-    <div className='connector_container'>
-      {rightConnectors}
-    </div>
+      <div
+          className={classnames('layout_round', globalProps(props), className, numberOfGamesClass)}
+          style={dynamicInlineProps}
+      >
+        {children}
+      </div>
+      <div className="connector_container">{leftConnectors}</div>
+      <div className="connector_container">{rightConnectors}</div>
     </>
   )
 }
@@ -185,8 +183,7 @@ const Game = (props: LayoutGameProps) => {
   const numberOfChildren = Array.isArray(children) ? children.length : 0
 
   if (numberOfChildren === 2) {
-    const firstChild = React.Children.toArray(children)[0];
-    const secondChild = React.Children.toArray(children)[1];
+    const [firstChild, secondChild] = React.Children.toArray(children)
 
     if (React.isValidElement(firstChild) && React.isValidElement(secondChild)) { 
       return (
@@ -199,49 +196,33 @@ const Game = (props: LayoutGameProps) => {
               padding="none"
               shadow="deep"
           >
-            <Card.Body padding="xs">
-              { firstChild }
-            </Card.Body>
+            <Card.Body padding="xs">{firstChild}</Card.Body>
             <SectionSeparator />
-            <Card.Body padding="xs">
-              { secondChild }
-            </Card.Body>
+            <Card.Body padding="xs">{secondChild}</Card.Body>
           </Card>
         </div>
       )
     }
   }
 
-  if (numberOfChildren >= 1) {
-    return (
-      <div
-          className={classnames('layout_game', globalProps(props), className)}
-          style={dynamicInlineProps}
-      >
-        {children}
-      </div>
-    )
-  }
-
-  // To be determined...
   return (
     <div
         className={classnames('layout_game', globalProps(props), className)}
         style={dynamicInlineProps}
     >
-      <Card
-          marginY="xs"
-          padding="none"
-          shadow="deep"
-      >
-        <Card.Body padding="xs">
-          To be determined...
-        </Card.Body>
-        <SectionSeparator />
-        <Card.Body padding="xs">
-          To be determined...
-        </Card.Body>
-      </Card>
+      {numberOfChildren >= 1 ? (
+        children
+      ) : (
+        <Card
+            marginY="xs"
+            padding="none"
+            shadow="deep"
+        >
+          <Card.Body padding="xs">To be determined...</Card.Body>
+          <SectionSeparator />
+          <Card.Body padding="xs">To be determined...</Card.Body>
+        </Card>
+      )}
     </div>
   )
 }
