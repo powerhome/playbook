@@ -283,7 +283,7 @@ const Layout = (props: LayoutPropTypes) => {
   const htmlProps = buildHtmlProps(htmlOptions)
 
   const layoutCss =
-    layout == 'collection'
+    (layout == 'collection' || layout == 'bracket')
       ? `pb_layout_kit_${layout}`
       : layout == 'kanban'
         ? `pb_layout_kit_${layout}${responsiveClass}`
@@ -294,11 +294,9 @@ const Layout = (props: LayoutPropTypes) => {
         })
 
   const layoutCollapseCss =
-    layout == 'collection'
+    (layout == 'collection' || layout == 'kanban' || layout == 'bracket')
       ? ''
-      : layout == 'kanban'
-        ? ''
-        : buildCss('layout', position, 'collapse', collapse)
+      : buildCss('layout', position, 'collapse', collapse)
 
   const layoutChildren = React.Children.toArray(children)
 
