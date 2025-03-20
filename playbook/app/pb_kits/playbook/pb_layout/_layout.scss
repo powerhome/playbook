@@ -191,6 +191,11 @@ $bracket-line-width: 4px;
       border-top: $bracket-line-width solid $border_light;
       width: $bracket-connector-width;
     }
+    
+    .left_connector {
+      border-top-right-radius: $border_radius_lg;
+      border-bottom-right-radius: $border_radius_lg;
+    }
 
     .layout_round .layout_game {
       position: relative;
