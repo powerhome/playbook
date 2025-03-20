@@ -1,7 +1,7 @@
 
 import React from 'react'
 import classnames from 'classnames'
-import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
+import { buildAriaProps, buildCss, buildDataProps, noop } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps'
 
 import Button from '../pb_button/_button'
@@ -17,6 +17,7 @@ type IconButtonProps = {
   id?: string,
   link?: string,
   newWindow?: boolean,
+  onClick?: React.MouseEventHandler<HTMLElement>,
   size?: IconSizes,
   target?: string,
   variant?: 'default' | 'link',
@@ -32,6 +33,7 @@ const IconButton = (props: IconButtonProps) => {
     id,
     link,
     newWindow = false,
+    onClick = noop,
     size = "2x",
     target,
     variant = "default",
@@ -53,6 +55,7 @@ const IconButton = (props: IconButtonProps) => {
           htmlType={htmlType}
           link={link}
           newWindow={newWindow}
+          onClick={onClick}
           target={target}
       >
         <Icon
