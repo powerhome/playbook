@@ -60,14 +60,14 @@ export const DraggableProvider = ({
   onDragEnd,
   onDrop,
   onDragOver,
-  dropZone = { type: 'ghost', color: 'neutral', direction: 'horizontal' }
+  dropZone = { type: 'ghost', color: 'neutral', direction: 'vertical' }
 }: DraggableProviderType) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   // Parse dropZone prop - handle both string format (backward compatibility) and object format
   let dropZoneType = 'ghost';
   let dropZoneColor = 'neutral';
-  let dropZoneDirection = 'horizontal';
+  let dropZoneDirection = 'vertical';
 
   if (typeof dropZone === 'string') {
     // Legacy format - just the type is provided as a string
@@ -75,8 +75,13 @@ export const DraggableProvider = ({
   } else {
     // New object format
     dropZoneType = dropZone.type || 'ghost';
-    dropZoneColor = dropZone.type === 'line' ? (dropZone.color || 'primary') : (dropZone.color || 'neutral'); // Line default is set to primary. Other types default to neutral.
-    dropZoneDirection = dropZone.direction || 'horizontal';
+    // Line default is set to primary. Other types default to neutral.
+    dropZoneColor = dropZone.type === 'line' ? (dropZone.color || 'primary') : (dropZone.color || 'neutral');
+
+    // Only use direction if the type is 'line'
+    if (dropZoneType === 'line') {
+      dropZoneDirection = dropZone.direction || 'vertical';
+    }
   }
 
   useEffect(() => {
@@ -124,6 +129,7 @@ export const DraggableProvider = ({
     if (onDragOver) onDragOver(e, container);
   };
 
+  // Include direction in contextValue only if type is 'line'
   const contextValue = useMemo(() => ({
     items: state.items,
     dragData: state.dragData,
@@ -131,7 +137,8 @@ export const DraggableProvider = ({
     activeContainer: state.activeContainer,
     dropZone: dropZoneType,
     dropZoneColor,
-    direction: dropZoneDirection,
+    // Only include direction when type is 'line'
+    ...(dropZoneType === 'line' ? { direction: dropZoneDirection } : {}),
     handleDragStart,
     handleDragEnter,
     handleDragEnd,

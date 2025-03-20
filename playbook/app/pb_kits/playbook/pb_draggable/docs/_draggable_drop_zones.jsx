@@ -65,7 +65,7 @@ const DraggableDropZones = (props) => {
     >
       <FlexItem marginRight="xl">
         <DraggableProvider
-            dropZone={{type: "shadow", direction: "vertical"}}
+            dropZone={{type: "shadow"}}
             initialItems={dataShadow}
             onReorder={(items) => setInitialShadowState(items)}
         >
@@ -102,7 +102,7 @@ const DraggableDropZones = (props) => {
       </FlexItem>
       <FlexItem marginRight="xl">
         <DraggableProvider
-            dropZone={{type: "outline", direction: "vertical"}}
+            dropZone={{type: "outline"}}
             initialItems={dataOutline}
             onReorder={(items) => setInitialOutlineState(items)}
         >
@@ -141,7 +141,7 @@ const DraggableDropZones = (props) => {
       </FlexItem>
       <FlexItem>
         <DraggableProvider
-            dropZone={{type: "line", direction: "vertical"}}
+            dropZone={{type: "line"}}
             initialItems={dataLine}
             onReorder={(items) => setInitialLineState(items)}
         >

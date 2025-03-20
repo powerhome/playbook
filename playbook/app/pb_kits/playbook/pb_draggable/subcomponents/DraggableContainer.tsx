@@ -22,12 +22,16 @@ type DraggableContainerProps = {
 
 const DraggableContainer = (props: DraggableContainerProps) => {
   const { aria = {}, children, className, container, data = {}, htmlOptions = {}, id, tag="div" } = props;
+  const contextValues = DraggableContext();
   const {
     handleDragOver,
     handleDrop,
     activeContainer,
-    direction = 'horizontal'
-  } = DraggableContext();
+    dropZone
+  } = contextValues;
+
+  // Only get direction if dropZone is 'line'
+  const direction = dropZone === 'line' ? (contextValues.direction || 'vertical') : 'vertical';
 
   const ariaProps = buildAriaProps(aria);
   const dataProps = buildDataProps(data);
@@ -37,7 +41,8 @@ const DraggableContainer = (props: DraggableContainerProps) => {
   const classes = classnames(
     buildCss("pb_draggable_container"),
     `${activeContainer === container ? "active" : ""}`,
-    direction === 'vertical' ? 'vertical' : '', // Add vertical class based on direction
+    // Only add vertical class if dropZone is 'line' and direction is 'vertical'
+    (dropZone === 'line' && direction === 'vertical') ? 'vertical' : '',
     globalProps(props),
     className
   );
