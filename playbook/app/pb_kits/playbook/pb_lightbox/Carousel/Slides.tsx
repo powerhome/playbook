@@ -1,4 +1,4 @@
-import { noop } from 'lodash'
+import { noop } from '../../utilities/object'
 import React, { useState } from 'react'
 import CircleIconButton from '../../pb_circle_icon_button/_circle_icon_button'
 
