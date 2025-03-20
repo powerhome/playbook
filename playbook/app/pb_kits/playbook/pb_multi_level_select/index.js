@@ -14,6 +14,7 @@ export default class PbMultiLevelSelect extends PbEnhancedElement {
   connect() {
     this.addEventListeners();
     this.observeHiddenInputs();
+    this.observeRogueErrorInsideInnerContainer();
   }
 
   addEventListeners() {
@@ -21,6 +22,13 @@ export default class PbMultiLevelSelect extends PbEnhancedElement {
 
     inputElement.addEventListener("invalid", () => {
       this.handleErrorLabel(300);
+    });
+    inputElement.addEventListener("blur", () => {
+      this.justBlurred = true;
+
+      setTimeout(() => {
+        this.justBlurred = false;
+      }, 300);
     });
   }
 
@@ -60,6 +68,31 @@ export default class PbMultiLevelSelect extends PbEnhancedElement {
       childList: true,
     });
   }
+
+  observeRogueErrorInsideInnerContainer() {
+    const container = this.element.querySelector(".input_inner_container");
+
+    this.rogueErrorObserver = new MutationObserver((mutations) => {
+      for (const mutation of mutations) {
+        for (const node of mutation.addedNodes) {
+          if (
+            node.nodeType === Node.ELEMENT_NODE &&
+            node.classList.contains("pb_body_kit_negative")
+          ) {
+            if (this.justBlurred) {
+              node.remove();
+            }
+          }
+        }
+      }
+    });
+
+    this.rogueErrorObserver.observe(container, {
+      childList: true,
+      subtree: true,
+    });
+  }
+
   clearError(e) {
     const errorLabelElement = this.target;
 
