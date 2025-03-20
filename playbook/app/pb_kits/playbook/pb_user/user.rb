@@ -11,6 +11,9 @@ module Playbook
       prop :avatar_url
       prop :bold, type: Playbook::Props::Boolean, default: true
       prop :name
+      prop :name_style, type: Playbook::Props::Enum,
+                        values: %w[title body caption detail],
+                        default: "title"
       prop :orientation, type: Playbook::Props::Enum,
                          values: %w[vertical horizontal],
                          default: "horizontal"
@@ -19,6 +22,9 @@ module Playbook
                   default: "sm"
       prop :subtitle
       prop :title
+      prop :title_style, type: Playbook::Props::Enum,
+                         values: %w[body caption detail],
+                         default: "body"
       prop :territory
 
       def classname
@@ -36,8 +42,18 @@ module Playbook
         end
       end
 
+      def name_size
+        if name_style == "caption"
+          size == "sm" ? "xs" : size
+        else
+          size == "lg" ? 3 : 4
+        end
+      end
+
       def title_size
-        size == "lg" ? 3 : 4
+        if title_style == "caption"
+          size == "sm" ? "xs" : size
+        end
       end
 
       def details
