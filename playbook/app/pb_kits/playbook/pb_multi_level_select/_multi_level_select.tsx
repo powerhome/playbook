@@ -10,6 +10,7 @@ import {
 import Icon from "../pb_icon/_icon";
 import FormPill from "../pb_form_pill/_form_pill";
 import Body from "../pb_body/_body";
+import Caption from "../pb_caption/_caption";
 import { cloneDeep } from "lodash";
 import MultiLevelSelectOptions from "./multi_level_select_options";
 import MultiLevelSelectContext from "./context";
@@ -41,6 +42,7 @@ type MultiLevelSelectProps = {
   id?: string
   inputDisplay?: "pills" | "none"
   inputName?: string
+  label?: string
   name?: string
   required?: boolean
   returnAllSelected?: boolean
@@ -65,6 +67,7 @@ const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>((pr
     inputDisplay = "pills",
     inputName,
     name,
+    label,
     required = false,
     returnAllSelected = false,
     treeData,
@@ -445,6 +448,12 @@ const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>((pr
         className={classes}
         id={id}
     >
+      {label &&
+        <Caption
+            marginBottom="xs"
+            text={label}
+        />
+      }
       <MultiLevelSelectContext.Provider value={{
           variant,
           inputName,
