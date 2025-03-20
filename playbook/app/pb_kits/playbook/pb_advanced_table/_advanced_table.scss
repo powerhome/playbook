@@ -286,10 +286,6 @@
     box-shadow: 1px 0px 0px 0px $border_light !important;
   }
 
-  .align-right-after-checkbox {
-    justify-content: end !important;
-  }
-
   @include chrome_styles($border-color);
 
   tr:hover {
@@ -460,6 +456,16 @@
         ) !important;
       }
     }
+
+    // Vertical separator
+    .table-header-cells:first-child,
+    .table-header-cells-custom:first-child,
+    td:first-child,
+    .pb_table_td:first-child,
+    .checkbox-cell.checkbox-cell-header:first-child {
+      box-shadow: 1px 0px 0px 0px $border_dark !important;
+    }
+
     // Dark Mode Responsive Styles
     @media only screen and (max-width: $screen-xl-min) {
       &[class*="advanced-table-responsive-scroll"] {
