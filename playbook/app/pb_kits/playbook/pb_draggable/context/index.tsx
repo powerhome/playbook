@@ -75,7 +75,7 @@ export const DraggableProvider = ({
   } else {
     // New object format
     dropZoneType = dropZone.type || 'ghost';
-    dropZoneColor = dropZone.type === 'line' ? 'primary' : (dropZone.color || 'neutral'); // Line default is set to primary. Other types default to neutral.
+    dropZoneColor = dropZone.type === 'line' ? (dropZone.color || 'primary') : (dropZone.color || 'neutral'); // Line default is set to primary. Other types default to neutral.
     dropZoneDirection = dropZone.direction || 'horizontal';
   }
 
