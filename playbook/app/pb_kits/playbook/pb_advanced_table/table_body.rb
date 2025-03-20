@@ -83,7 +83,7 @@ module Playbook
       def classname
         additional_classes = []
         additional_classes << "advanced-table-responsive-#{responsive} pinned-left" if responsive == "scroll"
-
+        additional_classes << "selectable-rows-enabled" if selectable_rows && enable_toggle_expansion == "none"
         generate_classname("pb_advanced_table_body", *additional_classes, separator: " ")
       end
 

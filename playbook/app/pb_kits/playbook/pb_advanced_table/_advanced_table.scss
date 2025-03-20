@@ -101,6 +101,15 @@
       border-top-left-radius: 0px !important;
       border-top-right-radius: 0px !important;
     }
+    // Right align header content of first data column in selectable row no subrow setup
+    &.selectable-rows-enabled {
+      tr { 
+        th:nth-child(2),
+        .pb_flex_kit_orientation_row_justify_content_start_align_items_center_spacing_none.gap_none {
+          justify-content: flex-end;
+        }
+      }
+    }
 
     // Set fixed width for header cells to match table body
     th {
@@ -167,6 +176,15 @@
         padding: 0 $space_xxs;
         font-size: 14px;
         text-align: right;
+      }
+    }
+    // Right align row content of first data column in selectable row no subrow setup
+    &.selectable-rows-enabled {
+      tr {
+        td:nth-child(2),
+        .pb_flex_kit_orientation_row_justify_content_start_align_items_center_spacing_none {
+          justify-content: end;
+        }
       }
     }
   }
@@ -263,8 +281,13 @@
   .table-header-cells:first-child,
   .table-header-cells-custom:first-child,
   td:first-child,
-  .pb_table_td:first-child {
+  .pb_table_td:first-child,
+  .checkbox-cell.checkbox-cell-header:first-child {
     box-shadow: 1px 0px 0px 0px $border_light !important;
+  }
+
+  .align-right-after-checkbox {
+    justify-content: end !important;
   }
 
   @include chrome_styles($border-color);
@@ -319,6 +342,7 @@
       .table-header-cells:first-child,
       td:first-child,
       .pb_table_td:first-child,
+      .checkbox-cell.checkbox-cell-header:first-child,
       [class*="pinned-left"] {
           background-color: $white;
           box-shadow: $shadow_deep !important;
@@ -460,6 +484,7 @@
         .table-header-cells:first-child,
         td:first-child,
         .pb_table_td:first-child,
+        .checkbox-cell.checkbox-cell-header:first-child,
         [class*="pinned-left"] {
           background: $bg_dark_card;
           border-right: $border_dark;

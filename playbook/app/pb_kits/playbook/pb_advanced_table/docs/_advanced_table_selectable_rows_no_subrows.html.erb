@@ -30,11 +30,4 @@
     }
 ] %>
 
-<%= pb_rails("caption", props: { text: "Table no Subrows and just AdvancedTable" }) %>
 <%= pb_rails("advanced_table", props: { id: "selectable_rows_no_subrows", table_data: @table_data_no_subrows, column_definitions: column_definitions, selectable_rows: true, enable_toggle_expansion: "none", }) %>
-<br />
-<%= pb_rails("caption", props: { text: "Table no Subrows and Header/Body" }) %>
-<%= pb_rails("advanced_table", props: { id: "selectable_rows_no_subrows_2", table_data: @table_data_no_subrows, column_definitions: column_definitions, selectable_rows: true, enable_toggle_expansion: "none" }) do %>
-  <%= pb_rails("advanced_table/table_header", props: { column_definitions: column_definitions, selectable_rows: true, enable_toggle_expansion: "none" }) %>
-  <%= pb_rails("advanced_table/table_body", props: { id: "selectable_rows", table_data: @table_data_no_subrows, column_definitions: column_definitions, enable_toggle_expansion: "none", selectable_rows: true }) %>
-<% end %>
