@@ -1,5 +1,5 @@
 import React from 'react'
-import { DateRangeStacked } from 'playbook-ui'
+import DateRangeStacked from '../../pb_date_range_stacked/_date_range_stacked'
 
 const DateRangeStackedDefault = (props) => (
   <div>

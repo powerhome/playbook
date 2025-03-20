@@ -1,5 +1,10 @@
 import React, { useState } from "react";
-import { Flex, Table, Body, Avatar, DraggableProvider } from "playbook-ui";
+
+import Flex from '../../pb_flex/_flex'
+import { DraggableProvider } from '../../pb_draggable/context'
+import Avatar from '../../pb_avatar/_avatar'
+import Body from '../../pb_body/_body'
+import Table from '../../pb_table/_table'
 
 // Initial items to be dragged
 const data = [

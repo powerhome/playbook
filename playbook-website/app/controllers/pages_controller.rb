@@ -88,6 +88,10 @@ class PagesController < ApplicationController
 
   def changelog; end
 
+  def drawer_page
+    render "pages/drawer_page", layout: "layouts/fullscreen"
+  end
+
   def icons
     @data = Playbook::Engine.root.join("../playbook-website/app/views/guides/getting_started/icons.md").read
     @page_title = "Icon Integration"
@@ -180,7 +184,7 @@ class PagesController < ApplicationController
   end
 
   def parse_erb(code)
-    parsed = code.scan(/<%=?\s*(.*?)\s*%>/).flatten.join("\n")
+    parsed = code.scan(/<%=?\s*(.*?)\s*%>/m).flatten.join("\n")
     Parser::CurrentRuby.parse(parsed)
   end
 

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, forwardRef } from "react";
 import classnames from "classnames";
 import { globalProps, GlobalProps } from "../utilities/globalProps";
 import {
@@ -23,6 +23,13 @@ import {
   getExpandedItems,
 } from "./_helper_functions";
 
+interface MultiLevelSelectComponent
+  extends React.ForwardRefExoticComponent<
+    MultiLevelSelectProps & React.RefAttributes<HTMLInputElement>
+  > {
+  Options: typeof MultiLevelSelectOptions;
+}
+
 type MultiLevelSelectProps = {
   aria?: { [key: string]: string }
   className?: string
@@ -35,6 +42,7 @@ type MultiLevelSelectProps = {
   name?: string
   returnAllSelected?: boolean
   treeData?: { [key: string]: string; }[] | any
+  onChange?: (event: { target: { name?: string; value: any } }) => void
   onSelect?: (prop: { [key: string]: any }) => void
   selectedIds?: string[] | any
   variant?: "multi" | "single"
@@ -42,7 +50,7 @@ type MultiLevelSelectProps = {
   pillColor?: "primary" | "neutral" | "success" | "warning" | "error" | "info" | "data_1" | "data_2" | "data_3" | "data_4" | "data_5" | "data_6" | "data_7" | "data_8" | "windows" | "siding" | "roofing" | "doors" | "gutters" | "solar" | "insulation" | "accessories",
 } & GlobalProps
 
-const MultiLevelSelect = (props: MultiLevelSelectProps) => {
+const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>((props) => {
   const {
     aria = {},
     className,
@@ -55,6 +63,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     name,
     returnAllSelected = false,
     treeData,
+    onChange = () => null,
     onSelect = () => null,
     selectedIds,
     variant = "multi",
@@ -104,7 +113,9 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
       return;
     }
     return tree.map((item: { [key: string]: any }) => {
-      item.checked = check;
+      if (!item.disabled) {
+        item.checked = check;
+      }
       item.children = modifyRecursive(item.children, check);
       return item;
     });
@@ -115,12 +126,16 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     treeData: { [key: string]: any }[],
     selectedIds: string[],
     parent_id: string | null = null,
-    depth = 0
+    depth = 0,
+    parentDisabled = false
   ) => {
     if (!Array.isArray(treeData)) {
       return;
     }
     return treeData.map((item: { [key: string]: any } | any) => {
+      // An item is disabled if it is explicitly set as disabled or if its parent is disabled
+      const isDisabled = item.disabled || (parentDisabled && !returnAllSelected);
+
       const newItem = {
         ...item,
         checked: Boolean(
@@ -128,6 +143,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
         ),
         parent_id,
         depth,
+        disabled: isDisabled,
       };
       if (newItem.children && newItem.children.length > 0) {
         const children =
@@ -138,7 +154,8 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
           children,
           selectedIds,
           newItem.id,
-          depth + 1
+          depth + 1,
+          isDisabled
         );
       }
       return newItem;
@@ -235,8 +252,9 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     return tree.map((item: any) => {
       if (item.id != id) item.children = modifyValue(id, item.children, check);
       else {
-        item.checked = check;
-
+        if (!item.disabled) {
+          item.checked = check;
+        }
         if (variant === "single") {
           // Single select: no children should be checked
           item.children = modifyRecursive(item.children, !check);
@@ -287,8 +305,10 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     // Logic for removing items from returnArray or defaultReturn when pills clicked
     if (returnAllSelected) {
       onSelect(getCheckedItems(updatedTree));
+      onChange({ target: { name, value: getCheckedItems(updatedTree) } });
     } else {
       onSelect(getDefaultCheckedItems(updatedTree));
+      onChange({ target: { name, value: getDefaultCheckedItems(updatedTree) } });
     }
   };
 
@@ -314,8 +334,10 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     const updatedTree = changeItem(filtered[0], check);
     if (returnAllSelected) {
       onSelect(getCheckedItems(updatedTree));
+      onChange({ target: { name, value: getCheckedItems(updatedTree) } });
     } else {
       onSelect(getDefaultCheckedItems(updatedTree));
+      onChange({ target: { name, value: getDefaultCheckedItems(updatedTree) } });
     }
   };
 
@@ -348,6 +370,7 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
     setIsDropdownClosed(true);
 
     onSelect(selectedItem);
+    onChange({ target: { name, value: selectedItem } });
   };
 
   // Single select: reset the tree state upon typing
@@ -389,12 +412,12 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
   // Rendering formattedData to UI based on typeahead
   const renderNestedOptions = (items: { [key: string]: string; }[] | any ) => {
     const hasOptionsChild = React.Children.toArray(props.children).some(
-      (child: any) => child.type === MultiLevelSelect.Options
+      (child) => React.isValidElement(child) && child.type === MultiLevelSelect.Options
     );
 
     if (hasOptionsChild) {
       return React.Children.map(props.children, (child) => {
-        if (child.type === MultiLevelSelect.Options) {
+        if (React.isValidElement(child) && child.type === MultiLevelSelect.Options) {
           return React.cloneElement(child, { items });
         }
         return null;
@@ -452,6 +475,18 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
                       <input
                           disabled={disabled}
                           key={item.id}
+                          name={`${name}[]`}
+                          type="hidden"
+                          value={item.id}
+                      />
+                    ))
+                  : null}
+
+                {!returnAllSelected
+                  ? defaultReturn.map((item) => (
+                      <input
+                          disabled={disabled}
+                          key={item.id} 
                           name={`${name}[]`}
                           type="hidden"
                           value={item.id}
@@ -547,8 +582,9 @@ const MultiLevelSelect = (props: MultiLevelSelectProps) => {
       </MultiLevelSelectContext.Provider>
     </div>
   );
-};
+}) as MultiLevelSelectComponent;
 
+MultiLevelSelect.displayName = "MultiLevelSelect";
 MultiLevelSelect.Options = MultiLevelSelectOptions;
 
 export default MultiLevelSelect;

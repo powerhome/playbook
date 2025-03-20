@@ -1,5 +1,9 @@
 import React, { useState } from 'react'
-import {  Button, Body, Flex, FlexItem, Tooltip } from 'playbook-ui'
+import Button from '../../pb_button/_button'
+import Body from '../../pb_body/_body'
+import Tooltip from '../../pb_tooltip/_tooltip'
+import Flex from '../../pb_flex/_flex'
+import FlexItem from '../../pb_flex/_flex_item'
 
 const TooltipShowTooltipReact = (props) => {
   const [showTooltip, setShowTooltip] = useState(true);

@@ -1,5 +1,7 @@
 import React from 'react'
-import { Caption, Timestamp, Title } from 'playbook-ui'
+import Caption from '../../pb_caption/_caption'
+import Timestamp from '../../pb_timestamp/_timestamp'
+import Title from '../../pb_title/_title'
 
 const TimestampUnstyled = (props) => {
   return (

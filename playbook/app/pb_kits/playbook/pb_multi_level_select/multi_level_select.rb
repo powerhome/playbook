@@ -40,7 +40,7 @@ module Playbook
           treeData: tree_data,
           returnAllSelected: return_all_selected,
           selectedIds: selected_ids,
-          input_name: input_name,
+          inputName: input_name,
           variant: variant,
           pillColor: pill_color,
           wrapped: wrapped,

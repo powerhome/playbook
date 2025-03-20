@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
-import { DatePicker, LabelValue } from 'playbook-ui'
+
+import DatePicker from '../../pb_date_picker/_date_picker'
+import LabelValue from '../../pb_label_value/_label_value'
 
 const DatePickerOnChange = (props) => {
   const today = new Date()

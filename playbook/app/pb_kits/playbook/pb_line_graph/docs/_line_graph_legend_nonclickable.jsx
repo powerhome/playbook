@@ -1,5 +1,5 @@
 import React from 'react'
-import { LineGraph } from 'playbook-ui'
+import LineGraph from '../../pb_line_graph/_line_graph'
 
 const data = [{
   name: 'Number of Installations',

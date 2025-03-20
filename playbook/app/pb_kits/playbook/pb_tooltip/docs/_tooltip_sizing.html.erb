@@ -1,0 +1,22 @@
+<%= pb_rails "flex", props: { flex_direction: "row", gap: "md", wrap: true } do %>
+  <%= pb_rails "button", props: { id: "tool-tip-sizing-1", text: "Height and Width" } %>
+  <%= pb_rails "tooltip", props: { trigger_element_selector: "#tool-tip-sizing-1", tooltip_id: "tool-tip-sizing-1", position: "top", height: "150px", width: "100px" } do %>
+    I'm 150px high and 100px wide!
+  <% end %>
+  <%= pb_rails "button", props: { id: "tool-tip-sizing-2", text: "max_height" } %>
+  <%= pb_rails "tooltip", props: { trigger_element_selector: "#tool-tip-sizing-2", tooltip_id: "tool-tip-sizing-2", position: "top", width: "250px", max_height: "100px" } do %>
+    I have a max_height of 100px! Lorem ipsum dolor sit amet consectetur adipisicing elit.
+  <% end %>
+  <%= pb_rails "button", props: { id: "tool-tip-sizing-3", text: "max_width" } %>
+  <%= pb_rails "tooltip", props: { trigger_element_selector: "#tool-tip-sizing-3", tooltip_id: "tool-tip-sizing-3", position: "top", max_width: "150px" } do %>
+    I have a max_width of 150px! Lorem ipsum dolor sit amet consectetur adipisicing elit.
+  <% end %>
+  <%= pb_rails "button", props: { id: "tool-tip-sizing-4", text: "min_width" } %>
+  <%= pb_rails "tooltip", props: { trigger_element_selector: "#tool-tip-sizing-4", tooltip_id: "tool-tip-sizing-4", position: "top", min_width: "300px" } do %>
+    I have a min_width of 300px!
+  <% end %>
+  <%= pb_rails "button", props: { id: "tool-tip-sizing-5", text: "min_height" } %>
+  <%= pb_rails "tooltip", props: { trigger_element_selector: "#tool-tip-sizing-5", tooltip_id: "tool-tip-sizing-5", position: "top", min_height: "300px", height: "200px"  } do %>
+    I have a min_height of 300px!
+  <% end %>
+<% end %>

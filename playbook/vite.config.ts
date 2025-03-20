@@ -3,7 +3,6 @@ import { resolve } from 'path';
 import RubyPlugin from 'vite-plugin-ruby'
 import react from '@vitejs/plugin-react'
 import copy from 'rollup-plugin-copy'
-import typescript from '@rollup/plugin-typescript'
 import consolidate from './app/javascript/rollup/consolidate-plugin';
 import cssUrl from './app/javascript/rollup/css-url-plugin';
 import { env } from 'process';
@@ -80,11 +79,6 @@ export default defineConfig({
           dest: 'dist/pb_bar_graph/',
         },
       ]
-    }),
-    typescript({
-      tsconfig: resolve(__dirname, 'tsconfig.json'),
-      declarationDir: resolve(__dirname, 'dist'),
-      declaration: true,
     }),
     consolidate({
       groups: [

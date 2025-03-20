@@ -4,22 +4,12 @@
         <%= content.presence %>
       <% end %>
     <% else %>
-      <%= content_tag(:tbody,
-        aria: object.aria,
-        class: object.classname,
-        data: object.data,
-        id: object.id,
-        **combined_html_options) do %>
+      <%= pb_content_tag(:tbody) do %>
         <%= content.presence %>
       <% end %>
     <% end %>
 <% else %>
-    <%= content_tag(:div,
-      aria: object.aria,
-      class: object.classname,
-      data: object.data,
-      id: object.id,
-      **combined_html_options) do %>
+    <%= pb_content_tag do %>
       <%= content.presence %>
     <% end %>
 <% end %>

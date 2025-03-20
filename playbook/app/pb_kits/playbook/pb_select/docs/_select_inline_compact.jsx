@@ -1,5 +1,6 @@
 import React from 'react'
-import { Body, Select } from 'playbook-ui'
+import Body from '../../pb_body/_body'
+import Select from '../../pb_select/_select'
 
 const SelectInlineCompact = (props) => {
   const options = [

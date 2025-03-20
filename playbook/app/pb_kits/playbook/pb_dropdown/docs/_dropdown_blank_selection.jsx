@@ -1,5 +1,5 @@
 import React from 'react'
-import { Dropdown } from 'playbook-ui'
+import Dropdown from '../../pb_dropdown/_dropdown'
 
 const DropdownBlankSelection = (props) => {
   const options = [

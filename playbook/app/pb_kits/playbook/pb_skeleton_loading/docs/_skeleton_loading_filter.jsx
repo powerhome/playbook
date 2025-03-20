@@ -1,5 +1,12 @@
 import React, { useState } from 'react';
-import { Button, Card, Filter, Flex, Select, SkeletonLoading, TextInput } from "playbook-ui";
+
+import Button from '../../pb_button/_button'
+import SkeletonLoading from '../../pb_skeleton_loading/_skeleton_loading'
+import Card from '../../pb_card/_card'
+import Filter from '../../pb_filter/_filter'
+import Flex from '../../pb_flex/_flex'
+import Select from '../../pb_select/_select'
+import TextInput from '../../pb_text_input/_text_input'
 
 const SortingChangeCallback = (sortOptions) => {
   alert(JSON.stringify(sortOptions[0]))
