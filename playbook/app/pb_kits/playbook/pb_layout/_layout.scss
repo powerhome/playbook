@@ -186,12 +186,10 @@ $bracket-line-width: 4px;
       flex-direction: column;
       justify-content: space-around;
     }
-
     .left_connector, .right_connector {
       border-top: $bracket-line-width solid $border_light;
       width: $bracket-connector-width;
     }
-    
     .left_connector {
       border-top-right-radius: $border_radius_lg;
       border-bottom-right-radius: $border_radius_lg;
@@ -199,58 +197,48 @@ $bracket-line-width: 4px;
 
     .layout_round .layout_game {
       position: relative;
-    }
+      &::after {
+        content: '';
+        position: absolute;
+        height: 100%;
+        width: $bracket-line-width;
+        background-color: $border_light;
+        right: -$bracket-connector-width;
+      }
 
-    .layout_round .layout_game:not(:only-child)::after {
-      content: '';
-      position: absolute;
-      width: $bracket-line-width;
-      height: 100%;
-      background-color: $border_light;
+      &:nth-child(even)::after {
+        bottom: 50%;
+      }
+
+      &:nth-child(odd)::after {
+        top: 50%;
+      }
     }
 
     .layout_round.eight_games .layout_game:not(:only-child)::after {
       height: 100%;
     }
-
-    .layout_round.eight_games ~ .layout_round.four_games .layout_game:not(:only-child)::after {
-      height: 200%;
-    }
-
+    .layout_round.eight_games ~ .layout_round.four_games .layout_game:not(:only-child)::after,
     .layout_round.four_games ~ .layout_round.two_games .layout_game:not(:only-child)::after {
       height: 200%;
     }
-
     .layout_round.eight_games ~ .layout_round.four_games ~ .layout_round.two_games .layout_game:not(:only-child)::after {
       height: 400%;
     }
-    
-    .layout_round .layout_game:nth-child(even)::after {
-      right: -$bracket-connector-width;
-      bottom: 50%;
-    }
-    
-    .layout_round .layout_game:nth-child(odd)::after {
-      right: -$bracket-connector-width;
-      top: 50%;
-    }
-
     .layout_round_label {
       display: none;
     }
 
     @media (max-width: $screen-md-max) {
       flex-direction: column;
-
       .layout_round_label {
         display: block;
       }
-
-      .layout_round .layout_game::after, .connector_container {
+      .layout_round .layout_game::after,
+      .connector_container {
         display: none;
       }
     }
-    
   }
 
   &[class*=_sidebar]{
