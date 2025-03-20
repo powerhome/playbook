@@ -45,6 +45,12 @@ type LayoutGameProps = {
   className?: string,
 } & GlobalProps
 
+type LayoutRoundLabelProps = {
+  children: React.ReactNode[] | React.ReactNode,
+  className?: string,
+} & GlobalProps
+
+
 type LayoutRoundProps = {
   children: React.ReactNode[] | React.ReactNode,
   className?: string,
@@ -212,6 +218,20 @@ const Game = (props: LayoutGameProps) => {
   )
 }
 
+// Round Label component (modeled after Item)
+const RoundLabel = (props: LayoutRoundLabelProps) => {
+  const { children, className } = props
+  const dynamicInlineProps = globalInlineProps(props)
+  return (
+    <div
+        className={classnames('layout_round_label', className)}
+        style={dynamicInlineProps}
+    >
+      {children}
+    </div>
+  )
+}
+
 // Header component
 const Header = (props: LayoutHeaderProps) => {
   const { children, className } = props
@@ -331,5 +351,6 @@ Layout.Header = Header
 Layout.Footer = Footer
 Layout.Round = Round
 Layout.Game = Game
+Layout.RoundLabel = RoundLabel
 
 export default Layout

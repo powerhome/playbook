@@ -3,6 +3,9 @@ import React from 'react'
 import Layout from '../../pb_layout/_layout'
 import Flex from '../../pb_flex/_flex'
 import Body from '../../pb_body/_body'
+import Caption from '../../pb_caption/_caption'
+import Title from '../../pb_title/_title'
+import SectionSeparator from '../../pb_section_separator/_section_separator'
 
 const LayoutBracket = () => {
   return (
@@ -10,6 +13,10 @@ const LayoutBracket = () => {
       <Layout
           layout="bracket"
       >
+        <Layout.RoundLabel>
+          <Caption>Wild Card</Caption>
+          <SectionSeparator marginY="sm"/>
+        </Layout.RoundLabel>
         <Layout.Round>
           <Layout.Game>
             <Flex justify="between">
@@ -88,6 +95,10 @@ const LayoutBracket = () => {
             </Flex>
           </Layout.Game>
         </Layout.Round>
+        <Layout.RoundLabel>
+          <Caption>Divisional</Caption>
+          <SectionSeparator marginY="sm"/>
+        </Layout.RoundLabel>
         <Layout.Round>
           <Layout.Game>
             <Flex justify="between">
@@ -130,6 +141,10 @@ const LayoutBracket = () => {
             </Flex>
           </Layout.Game>
         </Layout.Round>
+        <Layout.RoundLabel>
+          <Caption>Conference</Caption>
+          <SectionSeparator marginY="sm"/>
+        </Layout.RoundLabel>
         <Layout.Round>
           <Layout.Game>
             <Flex justify="between">
@@ -152,6 +167,10 @@ const LayoutBracket = () => {
             </Flex>
           </Layout.Game>
         </Layout.Round>
+        <Layout.RoundLabel>
+          <Title>Super Bowl</Title>
+          <SectionSeparator marginY="sm"/>
+        </Layout.RoundLabel>
         <Layout.Round>
           <Layout.Game>
             <Flex justify="between">

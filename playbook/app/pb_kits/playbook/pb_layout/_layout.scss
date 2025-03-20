@@ -229,6 +229,23 @@ $bracket-line-width: 4px;
       right: -$bracket-connector-width;
       top: 50%;
     }
+
+    .layout_round_label {
+      display: none;
+    }
+
+    @media (max-width: $screen-md-max) {
+      flex-direction: column;
+
+      .layout_round_label {
+        display: block;
+      }
+
+      .layout_round .layout_game::after, .connector_container {
+        display: none;
+      }
+    }
+    
   }
 
   &[class*=_sidebar]{
