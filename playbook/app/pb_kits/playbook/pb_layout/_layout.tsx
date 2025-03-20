@@ -161,6 +161,7 @@ const Game = (props: LayoutGameProps) => {
             style={dynamicInlineProps}
         >
           <Card
+              marginBottom="md"
               padding="none"
               shadow="deep"
           >
@@ -195,6 +196,7 @@ const Game = (props: LayoutGameProps) => {
         style={dynamicInlineProps}
     >
       <Card
+          marginBottom="md"
           padding="none"
           shadow="deep"
       >

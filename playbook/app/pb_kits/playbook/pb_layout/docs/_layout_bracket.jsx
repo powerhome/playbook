@@ -8,7 +8,6 @@ const LayoutBracket = () => {
   return (
     <div>
       <Layout
-          height="800px"
           layout="bracket"
       >
         <Layout.Round>
