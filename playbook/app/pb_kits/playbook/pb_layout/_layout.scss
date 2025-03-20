@@ -195,7 +195,7 @@ $bracket-line-width: 4px;
       border-bottom-right-radius: $border_radius_lg;
     }
 
-    .layout_round .layout_game {
+    .layout_round .layout_game:not(:only-child) {
       position: relative;
       &::after {
         content: '';
