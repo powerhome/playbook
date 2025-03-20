@@ -118,6 +118,7 @@ const classes = classnames(
                     >
                         <input
                             checked={item.checked}
+                            disabled={item.disabled}
                             name={item.label}
                             onChange={(e) => {
                               handledropdownItemClick(e, !item.checked);

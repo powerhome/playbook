@@ -1,72 +1,93 @@
-<% treeData = [{
+import React from "react";
+import MultiLevelSelect from "../_multi_level_select";
+
+const treeData = [
+  {
     label: "Power Home Remodeling",
     value: "Power Home Remodeling",
-    id: "100",
+    id: "powerhome1",
     expanded: true,
     children: [
       {
         label: "People",
         value: "People",
-        id: "101",
+        id: "people1",
         expanded: true,
         children: [
           {
             label: "Talent Acquisition",
             value: "Talent Acquisition",
-            id: "102",
+            id: "talent1",
           },
           {
             label: "Business Affairs",
             value: "Business Affairs",
-            id: "103",
+            id: "business1",
+            expanded: true,
+            disabled: true,
             children: [
               {
                 label: "Initiatives",
                 value: "Initiatives",
-                id: "104",
+                id: "initiative1",
               },
               {
                 label: "Learning & Development",
                 value: "Learning & Development",
-                id: "105",
+                id: "development1",
               },
             ],
           },
           {
             label: "People Experience",
             value: "People Experience",
-            id: "106",
+            id: "experience1",
           },
         ],
       },
       {
         label: "Contact Center",
         value: "Contact Center",
-        id: "107",
+        id: "contact1",
         children: [
           {
             label: "Appointment Management",
             value: "Appointment Management",
-            id: "108",
+            id: "appointment1",
           },
           {
             label: "Customer Service",
             value: "Customer Service",
-            id: "109",
+            id: "customer1",
           },
           {
             label: "Energy",
             value: "Energy",
-            id: "110",
+            id: "energy1",
           },
         ],
       },
     ],
-}] %>
+  },
+];
 
-<%= pb_rails("multi_level_select", props: {
-    disabled: true,
-    id: "multi-level-select-disabled-rails",
-    name: "my_array",
-    tree_data: treeData
-}) %>
+const MultiLevelSelectDisabledOptionsParent = (props) => {
+  return (
+    <div>
+      <MultiLevelSelect
+          id='multiselect-disabled-options-parent'
+          onSelect={(selectedNodes) =>
+          console.log(
+            "Selected Items",
+            selectedNodes
+          )
+        }
+          returnAllSelected
+          treeData={treeData}
+          {...props}
+      />
+    </div>
+  )
+};
+
+export default MultiLevelSelectDisabledOptionsParent;
