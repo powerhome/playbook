@@ -22,12 +22,9 @@ const Draggable = (props: DraggableProps) => {
     className,
     children,
     data = {},
-    dropZone = 'ghost',
-    dropZoneColor = 'neutral',
     htmlOptions = {},
-    id
+    id,
   } = props;
-
 
   const ariaProps = buildAriaProps(aria);
   const dataProps = buildDataProps(data);
@@ -39,14 +36,6 @@ const Draggable = (props: DraggableProps) => {
     className
   );
 
-  // Pass down the dropZone and dropZoneColor props to children
-  const childrenWithProps = React.Children.map(children, child => {
-    if (React.isValidElement(child)) {
-      return React.cloneElement(child, { dropZone, dropZoneColor });
-    }
-    return child;
-  });
-
   return (
     <div
         {...ariaProps}
@@ -55,7 +44,7 @@ const Draggable = (props: DraggableProps) => {
         className={classes}
         id={id}
     >
-      {childrenWithProps}
+      {children}
     </div>
   );
 };
