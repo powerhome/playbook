@@ -21,7 +21,7 @@ export type ActionType =
 
   export interface DropZoneConfig {
     type?: 'ghost' | 'outline' | 'shadow' | 'line';
-    color?: 'primary' | 'secondary' | 'tertiary' | 'success' | 'warning' | 'info' | 'neutral' | 'royal' | 'purple' | 'teal' | 'red' | 'yellow' | 'green' | 'orange';
+    color?: 'primary' | 'neutral' | 'purple';
     direction?: 'horizontal' | 'vertical';
   }
 

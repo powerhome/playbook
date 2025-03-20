@@ -1,5 +1,11 @@
 import React, { useState } from "react";
-import { Body, Flex, FlexItem, Card, Caption, Draggable, DraggableProvider } from "playbook-ui";
+import Body from '../../pb_body/_body'
+import Flex from '../../pb_flex/_flex'
+import FlexItem from '../../pb_flex/_flex_item'
+import Card from '../../pb_card/_card'
+import Caption from '../../pb_caption/_caption'
+import Draggable from '../../pb_draggable/_draggable'
+import { DraggableProvider } from '../../pb_draggable/context'
 
 // Initial items to be dragged
 const dataShadow = [
@@ -55,10 +61,9 @@ const DraggableDropZones = (props) => {
   return (
     <>
     <Flex justify="between"
-        justifyContent="center"
         {...props}
     >
-      <FlexItem marginRight="lg">
+      <FlexItem marginRight="xl">
         <DraggableProvider
             dropZone={{type: "shadow", direction: "vertical"}}
             initialItems={dataShadow}
@@ -95,7 +100,7 @@ const DraggableDropZones = (props) => {
             </Draggable.Container>
         </DraggableProvider>
       </FlexItem>
-      <FlexItem marginRight="lg">
+      <FlexItem marginRight="xl">
         <DraggableProvider
             dropZone={{type: "outline", direction: "vertical"}}
             initialItems={dataOutline}

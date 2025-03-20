@@ -42,19 +42,7 @@
 
         // Apply color variants to the ::before element
         &.drop_zone_color_primary::before { border-color: $primary; }
-        &.drop_zone_color_secondary::before { border-color: $secondary; }
-        &.drop_zone_color_tertiary::before { border-color: $tertiary; }
-        &.drop_zone_color_success::before { border-color: $success; }
-        &.drop_zone_color_warning::before { border-color: $warning; }
-        &.drop_zone_color_error::before { border-color: $error; }
-        &.drop_zone_color_info::before { border-color: $info; }
-        &.drop_zone_color_royal::before { border-color: $royal; }
         &.drop_zone_color_purple::before { border-color: $purple; }
-        &.drop_zone_color_teal::before { border-color: $teal; }
-        &.drop_zone_color_red::before { border-color: $red; }
-        &.drop_zone_color_yellow::before { border-color: $yellow; }
-        &.drop_zone_color_green::before { border-color: $green; }
-        &.drop_zone_color_orange::before { border-color: $orange; }
       }
 
       // Shadow variant
@@ -83,19 +71,7 @@
 
         // Apply rgba color variants to the ::before element
         &.drop_zone_color_primary::before { background-color: rgba($primary, $opacity_5); }
-        &.drop_zone_color_secondary::before { background-color: rgba($secondary, $opacity_5); }
-        &.drop_zone_color_tertiary::before { background-color: rgba($tertiary, $opacity_5); }
-        &.drop_zone_color_success::before { background-color: rgba($success, $opacity_5); }
-        &.drop_zone_color_warning::before { background-color: rgba($warning, $opacity_5); }
-        &.drop_zone_color_error::before { background-color: rgba($error, $opacity_5); }
-        &.drop_zone_color_info::before { background-color: rgba($info, $opacity_5); }
-        &.drop_zone_color_royal::before { background-color: rgba($royal, $opacity_5); }
         &.drop_zone_color_purple::before { background-color: rgba($purple, $opacity_5); }
-        &.drop_zone_color_teal::before { background-color: rgba($teal, $opacity_5); }
-        &.drop_zone_color_red::before { background-color: rgba($red, $opacity_5); }
-        &.drop_zone_color_yellow::before { background-color: rgba($yellow, $opacity_5); }
-        &.drop_zone_color_green::before { background-color: rgba($green, $opacity_5); }
-        &.drop_zone_color_orange::before { background-color: rgba($orange, $opacity_5); }
       }
 
       // Line variant
@@ -121,19 +97,7 @@
 
         // Apply color variants
         &.drop_zone_color_primary::before { background-color: $primary; }
-        &.drop_zone_color_secondary::before { background-color: $secondary; }
-        &.drop_zone_color_tertiary::before { background-color: $tertiary; }
-        &.drop_zone_color_success::before { background-color: $success; }
-        &.drop_zone_color_warning::before { background-color: $warning; }
-        &.drop_zone_color_error::before { background-color: $error; }
-        &.drop_zone_color_info::before { background-color: $info; }
-        &.drop_zone_color_royal::before { background-color: $royal; }
         &.drop_zone_color_purple::before { background-color: $purple; }
-        &.drop_zone_color_teal::before { background-color: $teal; }
-        &.drop_zone_color_red::before { background-color: $red; }
-        &.drop_zone_color_yellow::before { background-color: $yellow; }
-        &.drop_zone_color_green::before { background-color: $green; }
-        &.drop_zone_color_orange::before { background-color: $orange; }
       }
     }
   }
