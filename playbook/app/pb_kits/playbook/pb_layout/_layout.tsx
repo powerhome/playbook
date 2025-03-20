@@ -93,6 +93,49 @@ const Body = (props: LayoutBodyProps) => {
   )
 }
 
+// Item component
+const Item = (props: LayoutItemProps) => {
+  const { children, className, size = 'sm' } = props
+  const sizeClass = `size_${size}`
+  const dynamicInlineProps = globalInlineProps(props)
+  return (
+    <div
+        className={classnames('layout_item', sizeClass, globalProps(props), className)}
+        style={dynamicInlineProps}
+    >
+      {children}
+    </div>
+  )
+}
+
+// Header component
+const Header = (props: LayoutHeaderProps) => {
+  const { children, className } = props
+  const dynamicInlineProps = globalInlineProps(props)
+  return (
+    <div
+        className={classnames('layout_header', globalProps(props), className)}
+        style={dynamicInlineProps}
+    >
+      {children}
+    </div>
+  )
+}
+
+// Footer component
+const Footer = (props: LayoutFooterProps) => {
+  const { children, className } = props
+  const dynamicInlineProps = globalInlineProps(props)
+  return (
+    <div
+        className={classnames('layout_footer', globalProps(props), className)}
+        style={dynamicInlineProps}
+    >
+      {children}
+    </div>
+  )
+}
+
 // Round component (based off Body)
 const Round = (props: LayoutRoundProps) => {
   const { children, className } = props
@@ -131,21 +174,6 @@ const Round = (props: LayoutRoundProps) => {
       {rightConnectors}
     </div>
     </>
-  )
-}
-
-// Item component
-const Item = (props: LayoutItemProps) => {
-  const { children, className, size = 'sm' } = props
-  const sizeClass = `size_${size}`
-  const dynamicInlineProps = globalInlineProps(props)
-  return (
-    <div
-        className={classnames('layout_item', sizeClass, globalProps(props), className)}
-        style={dynamicInlineProps}
-    >
-      {children}
-    </div>
   )
 }
 
@@ -225,34 +253,6 @@ const RoundLabel = (props: LayoutRoundLabelProps) => {
   return (
     <div
         className={classnames('layout_round_label', className)}
-        style={dynamicInlineProps}
-    >
-      {children}
-    </div>
-  )
-}
-
-// Header component
-const Header = (props: LayoutHeaderProps) => {
-  const { children, className } = props
-  const dynamicInlineProps = globalInlineProps(props)
-  return (
-    <div
-        className={classnames('layout_header', globalProps(props), className)}
-        style={dynamicInlineProps}
-    >
-      {children}
-    </div>
-  )
-}
-
-// Footer component
-const Footer = (props: LayoutFooterProps) => {
-  const { children, className } = props
-  const dynamicInlineProps = globalInlineProps(props)
-  return (
-    <div
-        className={classnames('layout_footer', globalProps(props), className)}
         style={dynamicInlineProps}
     >
       {children}
