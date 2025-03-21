@@ -22,6 +22,7 @@ type TableRowPropTypes = {
   dark?: boolean;
   dragId?: string;
   draggableItem?: boolean;
+  headerStyle?: "default" | "borderless" | "floating";
   htmlOptions?: { [key: string]: string | number | boolean | (() => void) };
   id?: string;
   toggleCellId?: string;
@@ -41,6 +42,7 @@ const TableRow = (props: TableRowPropTypes): React.ReactElement => {
     dark = false,
     dragId,
     draggableItem = false,
+    headerStyle = "default",
     htmlOptions = {},
     id,
     toggleCellId,
@@ -60,6 +62,9 @@ const TableRow = (props: TableRowPropTypes): React.ReactElement => {
   const classes = classnames(
     buildCss("pb_table_row_kit", sideHighlightClass),
     "pb_table_tr",
+    {
+      "pb_table_tr_borderless_header": headerStyle === "borderless",
+    },
     collapsibleRow,
     globalProps(props),
     className
