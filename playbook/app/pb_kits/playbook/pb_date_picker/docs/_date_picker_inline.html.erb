@@ -4,14 +4,3 @@
   inline: true,
   picker_id: "date-picker-inline"
 }) %>
-
-<%= javascript_tag do %>
-  window.addEventListener("DOMContentLoaded", (event) => {
-    const fpInline = document.querySelector("#date-picker-inline")._flatpickr
-    <!-- Display the angle-down icon when a date has been selected -->
-    const showAngleDownHandler = () => {
-      document.querySelector('.inline-date-picker').classList.add('show-angle-down-icon')
-    }
-    fpInline.config.onChange.push(showAngleDownHandler)
-  })
-<% end %>
