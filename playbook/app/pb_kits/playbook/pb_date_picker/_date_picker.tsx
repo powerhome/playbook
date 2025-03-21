@@ -125,37 +125,37 @@ const DatePicker = (props: DatePickerProps): React.ReactElement => {
     }
   }
 
-useEffect(() => {
-  datePickerHelper({
-    allowInput,
-    customQuickPickDates,
-    defaultDate,
-    disableDate,
-    disableRange,
-    disableWeekdays,
-    enableTime,
-    format,
-    hideIcon,
-    inLine,
-    maxDate,
-    minDate,
-    mode,
-    onChange: handleDatePickerChange,
-    onClose,
-    pickerId,
-    plugins,
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    position,
-    positionElement,
-    selectionType,
-    showTimezone,
-    staticPosition,
-    thisRangesEndToday,
-    yearRange,
-    required: false,
-  }, scrollContainer)
-}, initializeOnce ? [] : undefined)
+  useEffect(() => {
+    datePickerHelper({
+      allowInput,
+      customQuickPickDates,
+      defaultDate,
+      disableDate,
+      disableRange,
+      disableWeekdays,
+      enableTime,
+      format,
+      hideIcon,
+      inLine,
+      maxDate,
+      minDate,
+      mode,
+      onChange: handleDatePickerChange,
+      onClose,
+      pickerId,
+      plugins,
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      position,
+      positionElement,
+      selectionType,
+      showTimezone,
+      staticPosition,
+      thisRangesEndToday,
+      yearRange,
+      required: false,
+    }, scrollContainer)
+  }, initializeOnce ? [] : undefined)
   const filteredProps = {...props}
   if (filteredProps.marginBottom === undefined) {
     filteredProps.marginBottom = "sm"
