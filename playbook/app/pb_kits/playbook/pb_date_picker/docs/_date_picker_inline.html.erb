@@ -4,22 +4,3 @@
   inline: true,
   picker_id: "date-picker-inline"
 }) %>
-
-<%= javascript_tag do %>
-  <!-- Display the angle-down icon when a date has been selected and revert when date is deleted-->
-  window.addEventListener("DOMContentLoaded", (event) => {
-    const fpInline = document.querySelector("#date-picker-inline")._flatpickr
-    const toggleAngleDownHandler = (selectedDates, dateStr, instance) => {
-      const inlineDatePickerElem = document.querySelector('.inline-date-picker');
-      if (!inlineDatePickerElem) return;
-
-      if (selectedDates.length > 0) {
-        inlineDatePickerElem.classList.add('show-angle-down-icon');
-      } else {
-        inlineDatePickerElem.classList.remove('show-angle-down-icon');
-      }
-    };
-
-    fpInline.config.onChange.push(toggleAngleDownHandler);
-  })
-<% end %>

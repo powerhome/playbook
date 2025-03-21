@@ -91,6 +91,21 @@
           loadDatePicker()
         })
       }
+
+      window.addEventListener("DOMContentLoaded", (event) => {
+        const fpInline = document.querySelector("#date-picker-inline")._flatpickr
+        if (!fpInline) return;
+
+        const toggleAngleDownHandler = (selectedDates, dateStr, instance) => {
+          const inlineDatePickerElem = document.querySelector('.inline-date-picker');
+          if (selectedDates.length > 0) {
+            inlineDatePickerElem.classList.add('show-angle-down-icon');
+          } else {
+            inlineDatePickerElem.classList.remove('show-angle-down-icon');
+          }
+        };
+        fpInline.config.onChange.push(toggleAngleDownHandler);
+      })
     })()
   <% end %>
 <% end %>
