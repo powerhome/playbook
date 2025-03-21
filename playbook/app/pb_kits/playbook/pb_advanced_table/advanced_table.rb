@@ -20,6 +20,8 @@ module Playbook
       prop :max_height, type: Playbook::Props::Enum,
                         values: %w[auto xs sm md lg xl xxl xxxl],
                         default: "auto"
+      prop :selectable_rows, type: Playbook::Props::Boolean,
+                             default: false
 
       def classname
         generate_classname("pb_advanced_table", responsive_classname, max_height_classname, separator: " ")
@@ -31,6 +33,14 @@ module Playbook
 
       def max_height_classname
         max_height.present? ? "advanced-table-max-height-#{max_height}" : ""
+      end
+
+      def selected_rows
+        @selected_rows ||= []
+      end
+
+      def selected_rows_length
+        selected_rows.length
       end
     end
   end

@@ -1,48 +1,60 @@
 <%= pb_content_tag(:tr) do %>
-        <% object.column_definitions.each_with_index do |column, index| %>
-            <% next unless column[:accessor].present? %>
-            <%= pb_rails("table/table_cell", props: { classname:object.td_classname(column, index)}) do %>
-                <%= pb_rails("flex", props:{ align: "center", justify: index.zero? ? "start" : "end", classname: object.loading ? "loading-cell" : "" }) do %>
-                    <% if collapsible_trail && index.zero? %>
-                        <% (1..depth).each do |i| %>
-                            <% additional_offset = i > 1 ? (i - 1) * 0.25 : 0 %>
-                            <% left_offset = i * 1.0 + additional_offset %>
-                            <div class="collapsible-trail" style="left: <%= left_offset %>em"></div>
-                        <% end %>
+    <% has_separate_checkbox = object.selectable_rows && object.enable_toggle_expansion == "none" %>
+    <% if has_separate_checkbox %>
+        <%= object.render_checkbox_cell %>
+    <% end %>
+    <% object.column_definitions.each_with_index do |column, index| %>
+        <% next unless column[:accessor].present? %>
+        <%= pb_rails("table/table_cell", props: { classname:object.td_classname(column, index)}) do %>
+            <%= pb_rails("flex", props:{ align: "center", justify: index.zero? ? "start" : "end", classname: object.loading ? "loading-cell" : "" }) do %>
+                <% if collapsible_trail && index.zero? %>
+                    <% (1..depth).each do |i| %>
+                        <% additional_offset = i > 1 ? (i - 1) * 0.25 : 0 %>
+                        <% left_offset = i * 1.0 + additional_offset %>
+                        <div class="collapsible-trail" style="left: <%= left_offset %>em"></div>
                     <% end %>
+                <% end %>
 
-                    <div style="padding-left: <%= depth * 1.25 %>em">
-                        <%= pb_rails("flex", props:{align: "center", column_gap: "xs"}) do %>
-                            <% if index.zero? && object.row[:children].present? %>
-                              <button
-                                id="<%= "#{object.id}_#{object.row.object_id}" %>"
-                                class="gray-icon expand-toggle-icon"
-                                data-advanced-table="true">
-                                <%= pb_rails("icon", props: { id: "advanced-table_open_icon", icon: "circle-play", cursor: "pointer" }) %>
-                                <%= pb_rails("icon", props: { id: "advanced-table_close_icon", display: "none", icon: "circle-play", cursor: "pointer", rotation: 90 }) %>
-                              </button>
-                            <% end %>
-                            <%= pb_rails("flex/flex_item", props:{padding_left: index.zero? && object.row[:children].present? ? "none" : "xs"}) do %>
-                                <% if column[:custom_renderer].present? %>
-                                    <%= raw(column[:custom_renderer].call(object.row, custom_renderer_value(column, index))) %>
-                                <% elsif index.zero? %>
-                                    <% if object.depth.zero? %>
-                                        <%= object.row[column[:accessor].to_sym] %>
-                                    <% else %>
-                                        <% object.depth_accessors.each_with_index do |item, accessor_index| %>
-                                            <% if object.depth - 1 == accessor_index %>
-                                                <% key = item.to_sym %>
-                                                <%= object.row[key] %>
-                                            <% end %>
-                                        <% end %>
-                                    <% end %>
-                                <% else %>
-                                    <%= object.row[column[:accessor].to_sym] %>
+                <div style="padding-left: <%= depth * 1.25 %>em">
+                    <%= pb_rails("flex", props:{align: "center", column_gap: "xs"}) do %>
+                        <% if index.zero? %>
+                            <% has_integrated_checkbox = object.selectable_rows && object.enable_toggle_expansion != "none" %>
+                            <% if has_integrated_checkbox %>
+                                <%= pb_rails("flex/flex_item", props: { padding_right: "xs" }) do %>
+                                    <%= object.render_row_checkbox %>
                                 <% end %>
                             <% end %>
+                            <% if object.row[:children].present? %>
+                                <button
+                                    id="<%= "#{object.id}_#{object.row.object_id}" %>"
+                                    class="gray-icon expand-toggle-icon"
+                                    data-advanced-table="true">
+                                    <%= pb_rails("icon", props: { id: "advanced-table_open_icon", icon: "circle-play", cursor: "pointer" }) %>
+                                    <%= pb_rails("icon", props: { id: "advanced-table_close_icon", display: "none", icon: "circle-play", cursor: "pointer", rotation: 90 }) %>
+                                </button>
+                            <% end %>
                         <% end %>
-                    </div>
-                <% end %>
+                        <%= pb_rails("flex/flex_item", props:{padding_left: index.zero? && (object.row[:children].present? || has_integrated_checkbox) ? "none" : "xs"}) do %>       
+                            <% if column[:custom_renderer].present? %>
+                                <%= raw(column[:custom_renderer].call(object.row, custom_renderer_value(column, index))) %>
+                            <% elsif index.zero? %>
+                                <% if object.depth.zero? %>
+                                    <%= object.row[column[:accessor].to_sym] %>
+                                <% else %>
+                                    <% object.depth_accessors.each_with_index do |item, accessor_index| %>
+                                        <% if object.depth - 1 == accessor_index %>
+                                            <% key = item.to_sym %>
+                                            <%= object.row[key] %>
+                                        <% end %>
+                                    <% end %>
+                                <% end %>
+                            <% else %>
+                                <%= object.row[column[:accessor].to_sym] %>
+                            <% end %>
+                        <% end %>
+                    <% end %>
+                </div>
             <% end %>
         <% end %>
+    <% end %>
 <% end %>
