@@ -156,7 +156,9 @@
       }
     }
     .date_picker_input.flatpickr-input,
-    .date_picker_input.flatpickr-input .active {
+    .date_picker_input.flatpickr-input .active,
+    .text_input.flatpickr-input,
+    .text_input.flatpickr-input .active {
       background-color: rgba($white,.10);
       border: none;
       padding: 5px 5px 5px 10px;

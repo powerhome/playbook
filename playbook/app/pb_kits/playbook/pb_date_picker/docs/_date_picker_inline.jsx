@@ -9,14 +9,6 @@ const DatePickerInline = (props) => {
           className="inline-date-picker"
           hideIcon
           inLine
-          pickerId="date-picker-inline1"
-          {...props}
-      />
-
-      <DatePicker
-          className="inline-date-picker"
-          hideIcon
-          inLine
           pickerId="date-picker-inline"
           {...props}
       />
