@@ -44,7 +44,7 @@
     <% if object.hide_icon && object.inline %>
       <!-- Plus Icon -->
       <div
-          class="<%= object.icon_wrapper_class %>"
+          class="<%= object.icon_wrapper_class %> date-picker-inline-icon-plus"
           id="<%= object.picker_id %>-icon-plus"
       >
         <%= pb_rails("icon", props: {
@@ -55,7 +55,7 @@
 
       <!-- Angle Down Icon -->
       <div
-          class="<%= object.icon_wrapper_class %>"
+          class="<%= object.icon_wrapper_class %> date-picker-inline-angle-down"
           id="<%= object.picker_id %>-angle-down"
       >
         <%= pb_rails("icon", props: {
@@ -92,19 +92,26 @@
         })
       }
 
-      window.addEventListener("DOMContentLoaded", (event) => {
-        const fpInline = document.querySelector("#date-picker-inline")._flatpickr
-        if (!fpInline) return;
+      window.addEventListener("DOMContentLoaded", () => {
+        const datePickerInputs = document.querySelectorAll(".inline-date-picker .flatpickr-input")
 
-        const toggleAngleDownHandler = (selectedDates, dateStr, instance) => {
-          const inlineDatePickerElem = document.querySelector('.inline-date-picker');
-          if (selectedDates.length > 0) {
-            inlineDatePickerElem.classList.add('show-angle-down-icon');
-          } else {
-            inlineDatePickerElem.classList.remove('show-angle-down-icon');
+        datePickerInputs.forEach((input) => {
+          const fp = input._flatpickr
+          if (!fp) return
+
+          const toggleAngleDownHandler = (selectedDates) => {
+            const inlineDatePickerElem = input.closest('.inline-date-picker')
+            if (!inlineDatePickerElem) return
+
+            if (selectedDates.length > 0) {
+              inlineDatePickerElem.classList.add('show-angle-down-icon')
+            } else {
+              inlineDatePickerElem.classList.remove('show-angle-down-icon')
+            }
           }
-        };
-        fpInline.config.onChange.push(toggleAngleDownHandler);
+
+          fp.config.onChange.push(toggleAngleDownHandler)
+        })
       })
     })()
   <% end %>

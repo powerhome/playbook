@@ -106,6 +106,25 @@ const DatePicker = (props: DatePickerProps): React.ReactElement => {
   const inputAriaProps = buildAriaProps(inputAria)
   const inputDataProps = buildDataProps(inputData)
 
+  function handleDatePickerChange(dateStr: string, selectedDates: Date[]): void {
+    const inputEl = document.getElementById(props.pickerId || '')
+
+    if (inputEl) {
+      const inlineDatePickerElem = inputEl.closest('.inline-date-picker')
+      if (inlineDatePickerElem) {
+        if (selectedDates && selectedDates.length > 0) {
+          inlineDatePickerElem.classList.add('show-angle-down-icon')
+        } else {
+          inlineDatePickerElem.classList.remove('show-angle-down-icon')
+        }
+      }
+    }
+
+    if (typeof onChange === 'function') {
+      onChange(dateStr, selectedDates)
+    }
+  }
+
 useEffect(() => {
   datePickerHelper({
     allowInput,
@@ -121,7 +140,7 @@ useEffect(() => {
     maxDate,
     minDate,
     mode,
-    onChange,
+    onChange: handleDatePickerChange,
     onClose,
     pickerId,
     plugins,
@@ -140,7 +159,7 @@ useEffect(() => {
   const filteredProps = {...props}
   if (filteredProps.marginBottom === undefined) {
     filteredProps.marginBottom = "sm"
-  } 
+  }
   delete filteredProps?.position
 
   const classes = classnames(
@@ -221,7 +240,7 @@ useEffect(() => {
             {hideIcon && inLine ?
               <div>
                 <div
-                    className={iconWrapperClass()}
+                    className={`${iconWrapperClass()} date-picker-inline-icon-plus`}
                     id={`${pickerId}-icon-plus`}
                 >
                   <Icon
@@ -230,7 +249,7 @@ useEffect(() => {
                   />
                 </div>
                 <div
-                    className={iconWrapperClass()}
+                    className={`${iconWrapperClass()} date-picker-inline-angle-down`}
                     id={`${pickerId}-angle-down`}
                 >
                   <Icon
