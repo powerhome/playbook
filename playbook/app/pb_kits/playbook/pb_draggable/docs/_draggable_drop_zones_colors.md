@@ -1,0 +1,1 @@
+By default, the Draggable kit sets the default color of drop zones to "neutral" (or "primary" if using the "line" style.)
