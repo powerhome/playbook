@@ -7,7 +7,7 @@ const SAFE_ZONE_MARGIN = 1
 
 export default class PbTooltipFloatingUi extends PbEnhancedElement {
   static get selector() {
-    return '[data-pb-tooltip-kit="true"][data-pb-tooltip-delay-open], [data-pb-tooltip-kit="true"][data-pb-tooltip-delay-close], [data-pb-tooltip-kit="true"][data-pb-tooltip-interaction="true"]'
+    return '[data-pb-tooltip-kit="true"]'
   }
 
   connect() {
