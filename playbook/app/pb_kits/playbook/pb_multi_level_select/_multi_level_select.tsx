@@ -7,11 +7,12 @@ import {
   buildDataProps,
   buildHtmlProps,
 } from "../utilities/props";
+import { cloneDeep } from "../utilities/object";
+
 import Icon from "../pb_icon/_icon";
 import FormPill from "../pb_form_pill/_form_pill";
 import Body from "../pb_body/_body";
 import Caption from "../pb_caption/_caption";
-import { cloneDeep } from "lodash";
 import MultiLevelSelectOptions from "./multi_level_select_options";
 import MultiLevelSelectContext from "./context";
 

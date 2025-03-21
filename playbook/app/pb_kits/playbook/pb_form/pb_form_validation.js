@@ -1,5 +1,5 @@
 import PbEnhancedElement from '../pb_enhanced_element'
-import { debounce } from 'lodash'
+import { debounce } from '../utilities/object'
 
 // Kit selectors
 const KIT_SELECTOR             = '[class^="pb_"][class*="_kit"]'
