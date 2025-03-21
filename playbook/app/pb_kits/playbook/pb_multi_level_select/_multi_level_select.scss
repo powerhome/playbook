@@ -10,6 +10,16 @@
 .pb_multi_level_select {
   font-family: $font-family-base;
 
+&.error {
+  .wrapper {
+    .input_wrapper {
+      border-color: $error;
+    }
+  }
+  [class*=pb_body_kit_negative] {
+    margin-top: $space_xxs;
+  }
+}
   .wrapper {
     position: relative;
 
@@ -91,5 +101,18 @@
 
   .open {
     display: block;
+  }
+
+  &.dark {
+    &.error {
+      .wrapper {
+        .input_wrapper {
+          border-color: $error_dark;
+        }
+      }
+      [class*=pb_body_kit_negative] {
+        color: $error_dark;
+      }
+    }
   }
 }
