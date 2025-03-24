@@ -88,7 +88,7 @@ const RichTextEditor = (props: RichTextEditorProps): React.ReactElement => {
       if (oldId) {
         const hiddenInput = document.getElementById(oldId)
         if (hiddenInput) {
-          const newId = (inputOptions.id as string) || 'duck' 
+          const newId = (inputOptions.id as string) || oldId  
           hiddenInput.id = newId
           editorInstance.element.setAttribute('input', newId)
 
