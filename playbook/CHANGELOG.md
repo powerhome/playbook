@@ -6,7 +6,7 @@
 - Icon Button Kit: OnClick Handler [\#4412](https://github.com/powerhome/playbook/pull/4412) ([kangaree](https://github.com/kangaree))
 - Draggable Kit: Drop Zones - Shadow, Line and Outline [\#4404](https://github.com/powerhome/playbook/pull/4404) ([skduncan](https://github.com/skduncan))
 - Typeahead Kit - Disabled Prop for Rails and React [\#4403](https://github.com/powerhome/playbook/pull/4403) ([nickamantia](https://github.com/nickamantia))
--  MultiLeveLSelect Kit: Implementing Required for Forms + Error State for React and Rails [\#4401](https://github.com/powerhome/playbook/pull/4401) ([carloslimasd](https://github.com/carloslimasd))
+-  MultiLeveLSelect Kit: Implementing Required for Forms + Error State for React and Rails [\#4401](https://github.com/powerhome/playbook/pull/4401) ([carloslimasd](https://github.com/carloslimasd), [nidaqg](https://github.com/nidaqg))
 - User Kit: Add Font Choices [\#4391](https://github.com/powerhome/playbook/pull/4391) ([gmorris1242](https://github.com/gmorris1242))
 - MultilevelSelect Kit: Ability to Disable Options [\#4396](https://github.com/powerhome/playbook/pull/4396) ([nidaqg](https://github.com/nidaqg))
 - Selectable List, Star Rating, Text Input, and Table: Update Pb\_content\_tag [\#4389](https://github.com/powerhome/playbook/pull/4389) ([kangaree](https://github.com/kangaree))
