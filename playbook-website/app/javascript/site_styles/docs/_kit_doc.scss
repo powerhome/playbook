@@ -143,4 +143,10 @@
       }
     }
   }
+
+  &:fullscreen {
+    .hide_fullscreen {
+      display: none;
+    }
+  }
 }
