@@ -1,10 +1,17 @@
 @import "../tokens/colors";
 
+$additional_colors: (
+  "light": $text_lt_light,
+  "lighter": $text_lt_lighter,
+  "link": $primary
+);
+
 // All the merges below create $icon_colors, a map of all color tokens in colors.scss
 $merge_kits1: map-merge($status_colors, $category_colors);
 $merge_kits2: map-merge($merge_kits1, $product_colors);
 $merge_kits3: map-merge($merge_kits2, $text_colors);
-$icon_colors: map-merge($merge_kits3, $data_colors);
+$merge_kits4: map-merge($merge_kits3, $data_colors);
+$icon_colors: map-merge($merge_kits4, $additional_colors);
 
 .pb_custom_icon, .pb_icon_kit {
   @each $color_name, $color_value in $icon_colors {

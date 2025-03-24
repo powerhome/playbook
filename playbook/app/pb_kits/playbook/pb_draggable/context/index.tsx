@@ -51,17 +51,38 @@ export const DraggableContext = () => {
   return useContext(DragContext);
 };
 
-export const DraggableProvider = ({ 
-  children, 
-  initialItems, 
+export const DraggableProvider = ({
+  children,
+  initialItems,
   onReorder,
-  onDragStart, 
-  onDragEnter, 
-  onDragEnd, 
-  onDrop, 
-  onDragOver 
+  onDragStart,
+  onDragEnter,
+  onDragEnd,
+  onDrop,
+  onDragOver,
+  dropZone = { type: 'ghost', color: 'neutral', direction: 'vertical' }
 }: DraggableProviderType) => {
   const [state, dispatch] = useReducer(reducer, initialState);
+
+  // Parse dropZone prop - handle both string format (backward compatibility) and object format
+  let dropZoneType = 'ghost';
+  let dropZoneColor = 'neutral';
+  let dropZoneDirection = 'vertical';
+
+  if (typeof dropZone === 'string') {
+    // Legacy format - just the type is provided as a string
+    dropZoneType = dropZone;
+  } else {
+    // New object format
+    dropZoneType = dropZone.type || 'ghost';
+    // Line default is set to primary. Other types default to neutral.
+    dropZoneColor = dropZone.type === 'line' ? (dropZone.color || 'primary') : (dropZone.color || 'neutral');
+
+    // Only use direction if the type is 'line'
+    if (dropZoneType === 'line') {
+      dropZoneDirection = dropZone.direction || 'vertical';
+    }
+  }
 
   useEffect(() => {
     dispatch({ type: 'SET_ITEMS', payload: initialItems });
@@ -108,17 +129,22 @@ export const DraggableProvider = ({
     if (onDragOver) onDragOver(e, container);
   };
 
+  // Include direction in contextValue only if type is 'line'
   const contextValue = useMemo(() => ({
     items: state.items,
     dragData: state.dragData,
     isDragging: state.isDragging,
     activeContainer: state.activeContainer,
+    dropZone: dropZoneType,
+    dropZoneColor,
+    // Only include direction when type is 'line'
+    ...(dropZoneType === 'line' ? { direction: dropZoneDirection } : {}),
     handleDragStart,
     handleDragEnter,
     handleDragEnd,
     handleDrop,
     handleDragOver
-  }), [state]);
+  }), [state, dropZoneType, dropZoneColor, dropZoneDirection]);
 
   return (
     <DragContext.Provider value={contextValue}>{children}</DragContext.Provider>
