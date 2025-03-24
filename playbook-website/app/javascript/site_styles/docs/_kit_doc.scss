@@ -146,7 +146,7 @@
 
   &:fullscreen {
     .hide_fullscreen {
-      display: none;
+      display: none !important;
     }
   }
 }
