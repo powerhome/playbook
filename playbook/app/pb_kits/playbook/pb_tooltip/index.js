@@ -7,7 +7,7 @@ const SAFE_ZONE_MARGIN = 1
 
 export default class PbTooltipFloatingUi extends PbEnhancedElement {
   static get selector() {
-    return '[data-pb-tooltip-kit="true"]'
+    return '[data-pb-tooltip-kit]'
   }
 
   connect() {
