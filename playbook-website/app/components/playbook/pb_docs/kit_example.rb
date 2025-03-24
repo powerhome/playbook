@@ -60,6 +60,11 @@ module Playbook
         end
       end
 
+      def full_screen
+        full_screen_kits = ["drawer_menu"]
+        full_screen_kits.include?(example_key)
+      end
+
     private
 
       def exec_in_fork

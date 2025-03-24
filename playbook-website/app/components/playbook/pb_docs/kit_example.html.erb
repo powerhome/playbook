@@ -21,7 +21,7 @@
     <div id="code-wrapper">
       <div class="pb--codeControls">
         <ul>
-          <% if example_key == "drawer_menu" %>
+          <% if full_screen %>
             <li>
               <%= pb_rails("button", props: { id: "fullscreen-#{example_key}", icon: "expand", text: "Fullscreen", classname: dark ? "dark" : "", variant: "link", size: "sm" }) %>
             </li>
