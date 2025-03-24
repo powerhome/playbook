@@ -20,6 +20,7 @@ module Playbook
       prop :value
       prop :template
       prop :placeholder
+      prop :input_options
 
       def classname
         generate_classname("pb_rich_text_editor_kit", simple_class, focus_class, sticky_class, separator: " ")
@@ -49,6 +50,7 @@ module Playbook
           value: value,
           template: template,
           placeholder: placeholder,
+          inputOptions: input_options,
         }
       end
     end

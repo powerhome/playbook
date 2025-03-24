@@ -32,11 +32,12 @@ type RichTextEditorProps = {
   advancedEditor?: any,
   advancedEditorToolbar?: boolean,
   toolbarBottom?: boolean,
-  children?: React.ReactNode | React.ReactNode[]
+  children?: React.ReactNode | React.ReactNode[],
   className?: string,
   data?: { [key: string]: string },
   focus?: boolean,
-  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
+  htmlOptions?: { [key: string]: string | number | boolean | (() => void) },
+  inputOptions?: { [key: string]: string | number | boolean | (() => void) },
   id?: string,
   inline?: boolean,
   extensions?: { [key: string]: string }[],
@@ -61,6 +62,7 @@ const RichTextEditor = (props: RichTextEditorProps): React.ReactElement => {
     data = {},
     focus = false,
     htmlOptions = {},
+    inputOptions = {},
     inline = false,
     extensions,
     name,
@@ -70,7 +72,7 @@ const RichTextEditor = (props: RichTextEditorProps): React.ReactElement => {
     sticky = false,
     template = '',
     value = '',
-    maxWidth="md"
+    maxWidth = "md"
   } = props
 
   const ariaProps = buildAriaProps(aria),
@@ -78,13 +80,30 @@ const RichTextEditor = (props: RichTextEditorProps): React.ReactElement => {
     [editor, setEditor] = useState<Editor>()
 
   const htmlProps = buildHtmlProps(htmlOptions)
+  console.log(inputOptions, 'inputOptions')
   
-  const handleOnEditorReady = (editorInstance: Editor) => setEditor(editorInstance),
-    element = editor?.element
+  const handleOnEditorReady = (editorInstance: Editor) => {
+    setEditor(editorInstance)
+    setTimeout(() => {
+      const oldId = editorInstance.element.getAttribute('input')
+      if (oldId) {
+        const hiddenInput = document.getElementById(oldId)
+        if (hiddenInput) {
+          const newId = (inputOptions.id as string) || 'duck' 
+          hiddenInput.id = newId
+          editorInstance.element.setAttribute('input', newId)
+
+          if (inputOptions.name) {
+            hiddenInput.setAttribute('name', inputOptions.name as string)
+          }
+        }
+      }
+    })
+  }
 
   // DOM manipulation must wait for editor to be ready
-  if (editor) {
-    const toolbarElement = element.parentElement.querySelector('trix-toolbar') as HTMLElement,
+  if (editor && editor.element) {
+    const toolbarElement = editor.element.parentElement.querySelector('trix-toolbar') as HTMLElement,
       blockCodeButton = toolbarElement.querySelector('[data-trix-attribute=code]') as HTMLElement
 
     // replace default trix "block code" button with "inline code" button
@@ -118,8 +137,8 @@ const RichTextEditor = (props: RichTextEditorProps): React.ReactElement => {
   }, [editor, template])
 
   useEffect(() => {
-    if (!element) return
-    element.addEventListener('click', ({ target }: Event) => {
+    if (!editor?.element) return
+    editor.element.addEventListener('click', ({ target }: Event) => {
       const trixEditorContainer = (target as Element).closest('.pb_rich_text_editor_kit')
       if (!trixEditorContainer) return
 
@@ -128,7 +147,7 @@ const RichTextEditor = (props: RichTextEditorProps): React.ReactElement => {
 
       if (anchorElement.hasAttribute('href')) window.open(anchorElement.href)
     })
-  }, [element])
+  }, [editor])
 
   const richTextEditorClass = 'pb_rich_text_editor_kit',
     simpleClass = simple ? 'simple' : '',
@@ -137,7 +156,7 @@ const RichTextEditor = (props: RichTextEditorProps): React.ReactElement => {
     inlineClass = inline ? 'inline' : '',
     toolbarBottomClass = toolbarBottom ? 'toolbar-bottom' : ''
 
-  let css = classnames(globalProps(props, {maxWidth}), className)
+  let css = classnames(globalProps(props, { maxWidth }), className)
   css = classnames(
     richTextEditorClass,
     simpleClass,
