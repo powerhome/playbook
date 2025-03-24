@@ -13,17 +13,20 @@ module Playbook
       prop :responsive, type: Playbook::Props::Enum,
                         values: %w[none scroll],
                         default: "scroll"
+      prop :selectable_rows, type: Playbook::Props::Boolean,
+                             default: false
 
       def classname
         additional_classes = []
         additional_classes << "advanced-table-responsive-#{responsive} pinned-left" if responsive == "scroll"
+        additional_classes << "selectable-rows-enabled" if selectable_rows && enable_toggle_expansion == "none"
 
         generate_classname("pb_advanced_table_header", "pb_table_thead", *additional_classes, separator: " ")
       end
 
       def th_classname(is_first_column: false)
         additional_classes = []
-        additional_classes << "pinned-left" if is_first_column && responsive == "scroll"
+        additional_classes << "pinned-left" if is_first_column && responsive == "scroll" && !selectable_rows
 
         generate_classname("table-header-cells", *additional_classes, separator: " ")
       end
@@ -36,6 +39,40 @@ module Playbook
         max_depth.times { rows << [] }
         process_columns(wrapped_columns, rows, 0, max_depth)
         rows
+      end
+
+      # Selectable Rows No Subrows - checkboxes in their own first cell
+      def render_select_all_header
+        if selectable_rows
+          additional_classes = []
+          additional_classes << "table-header-cells-custom"
+          additional_classes << "checkbox-cell-header"
+          additional_classes << "pinned-left" if responsive == "scroll"
+          pb_rails("table/table_header", props: {
+                     classname: additional_classes.join(" "),
+                   }) do
+            pb_rails("checkbox", props: {
+                       id: "select-all-rows",
+                       name: "select-all-rows",
+                       data: {
+                         action: "click->pb-advanced-table#toggleAllRowSelection",
+                       },
+                     })
+          end
+        end
+      end
+
+      # Selectable Rows w/ Subrows - checkboxes part of toggleable first cell
+      def render_select_all_checkbox
+        if selectable_rows
+          pb_rails("checkbox", props: {
+                     id: "select-all-rows",
+                     name: "select-all-rows",
+                     data: {
+                       action: "click->pb-advanced-table#toggleAllRowSelection",
+                     },
+                   })
+        end
       end
 
     private
