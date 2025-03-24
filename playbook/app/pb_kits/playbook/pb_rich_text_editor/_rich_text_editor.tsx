@@ -80,7 +80,6 @@ const RichTextEditor = (props: RichTextEditorProps): React.ReactElement => {
     [editor, setEditor] = useState<Editor>()
 
   const htmlProps = buildHtmlProps(htmlOptions)
-  console.log(inputOptions, 'inputOptions')
   
   const handleOnEditorReady = (editorInstance: Editor) => {
     setEditor(editorInstance)
