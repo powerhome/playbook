@@ -106,25 +106,6 @@ const DatePicker = (props: DatePickerProps): React.ReactElement => {
   const inputAriaProps = buildAriaProps(inputAria)
   const inputDataProps = buildDataProps(inputData)
 
-  function handleDatePickerChange(dateStr: string, selectedDates: Date[]): void {
-    const inputEl = document.getElementById(props.pickerId || '')
-
-    if (inputEl) {
-      const inlineDatePickerElem = inputEl.closest('.inline-date-picker')
-      if (inlineDatePickerElem) {
-        if (selectedDates && selectedDates.length > 0) {
-          inlineDatePickerElem.classList.add('show-angle-down-icon')
-        } else {
-          inlineDatePickerElem.classList.remove('show-angle-down-icon')
-        }
-      }
-    }
-
-    if (typeof onChange === 'function') {
-      onChange(dateStr, selectedDates)
-    }
-  }
-
   useEffect(() => {
     datePickerHelper({
       allowInput,
@@ -140,7 +121,7 @@ const DatePicker = (props: DatePickerProps): React.ReactElement => {
       maxDate,
       minDate,
       mode,
-      onChange: handleDatePickerChange,
+      onChange,
       onClose,
       pickerId,
       plugins,
