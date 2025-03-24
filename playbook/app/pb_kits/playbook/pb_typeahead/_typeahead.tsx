@@ -38,6 +38,7 @@ type TypeaheadProps = {
   createable?: boolean,
   dark?: boolean,
   data?: { [key: string]: string },
+  disabled?: boolean,
   error?: string,
   htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
@@ -79,6 +80,7 @@ const Typeahead = forwardRef<HTMLInputElement, TypeaheadProps>(({
   createable,
   error = "",
   data = {},
+  disabled = false,
   getOptionLabel,
   getOptionValue,
   htmlOptions = {},
@@ -205,6 +207,7 @@ const Typeahead = forwardRef<HTMLInputElement, TypeaheadProps>(({
       <Tag
           classNamePrefix="typeahead-kit-select"
           error={error}
+          isDisabled={disabled}
           onChange={handleOnChange}
           {...selectProps}
       />

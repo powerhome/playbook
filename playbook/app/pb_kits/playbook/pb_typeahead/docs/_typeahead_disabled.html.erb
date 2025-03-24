@@ -1,0 +1,19 @@
+<%
+  options = [
+    { label: 'Orange', value: '#FFA500' },
+    { label: 'Red', value: '#FF0000' },
+    { label: 'Green', value: '#00FF00' },
+    { label: 'Blue', value: '#0000FF' },
+  ]
+%>
+
+<%= pb_rails("typeahead", props: {
+    id: "typeahead-disabled",
+    disabled: true,
+    placeholder: "All Colors",
+    options: options,
+    label: "Colors",
+    name: :foo,
+    is_multi: false
+  })
+%>

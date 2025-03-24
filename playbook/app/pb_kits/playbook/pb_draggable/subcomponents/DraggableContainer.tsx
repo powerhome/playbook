@@ -22,18 +22,27 @@ type DraggableContainerProps = {
 
 const DraggableContainer = (props: DraggableContainerProps) => {
   const { aria = {}, children, className, container, data = {}, htmlOptions = {}, id, tag="div" } = props;
+  const contextValues = DraggableContext();
+  const {
+    handleDragOver,
+    handleDrop,
+    activeContainer,
+    dropZone
+  } = contextValues;
 
-  const { handleDragOver, handleDrop, activeContainer } = DraggableContext();
+  // Only get direction if dropZone is 'line'
+  const direction = dropZone === 'line' ? (contextValues.direction || 'vertical') : 'vertical';
 
   const ariaProps = buildAriaProps(aria);
   const dataProps = buildDataProps(data);
   const htmlProps = buildHtmlProps(htmlOptions);
-
   const Tag: React.ReactElement | any = `${tag}`;
 
   const classes = classnames(
     buildCss("pb_draggable_container"),
     `${activeContainer === container ? "active" : ""}`,
+    // Only add vertical class if dropZone is 'line' and direction is 'vertical'
+    (dropZone === 'line' && direction === 'vertical') ? 'vertical' : '',
     globalProps(props),
     className
   );

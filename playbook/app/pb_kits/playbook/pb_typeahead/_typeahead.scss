@@ -126,6 +126,9 @@
         color: $text_lt_default;
       }
       &__control {
+        &--is-disabled {
+          background-color: shade($white, 5%);
+        }
         &--is-focused {
           @include pb_textarea_focus;
           @include transition_default;
@@ -252,6 +255,7 @@
           color: $text_dk_default;
         }
         &__control {
+        
           &--is-focused {
             @include pb_textarea_focus;
             @include transition_default;
