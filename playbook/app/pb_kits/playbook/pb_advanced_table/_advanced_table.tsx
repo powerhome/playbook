@@ -244,7 +244,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
             </Table>
           </React.Fragment>
         </AdvancedTableProvider>
-        {/* Bottom Pagination */}
+     
       </div>
 
       {pagination && (
