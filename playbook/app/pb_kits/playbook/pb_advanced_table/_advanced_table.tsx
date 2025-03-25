@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState, useCallback } from "react";
 import classnames from "classnames";
 
 import { GenericObject } from "../types";
@@ -18,6 +18,15 @@ import TableActionBar from "./Components/TableActionBar";
 
 import { useTableState } from "./Hooks/useTableState";
 import { useTableActions } from "./Hooks/useTableActions";
+
+import Card from "../pb_card/_card"
+import Flex from "../pb_flex/_flex"
+import Icon from "../pb_icon/_icon"
+
+type FullscreenControls = {
+  toggleFullscreen: () => void;
+  isFullscreen: boolean;
+};
 
 type AdvancedTableProps = {
   aria?: { [key: string]: string }
@@ -49,6 +58,9 @@ type AdvancedTableProps = {
   toggleExpansionIcon?: string | string[]
   onRowSelectionChange?: (arg: RowSelectionState) => void
   virtualizedRows?: boolean
+  fullscreenable?: boolean
+  onFullscreenChange?: (isFullscreen: boolean) => void
+  getFullscreenControls?: (controls: FullscreenControls) => void
 } & GlobalProps;
 
 const AdvancedTable = (props: AdvancedTableProps) => {
@@ -82,6 +94,9 @@ const AdvancedTable = (props: AdvancedTableProps) => {
     toggleExpansionIcon = "arrows-from-line",
     onRowSelectionChange,
     virtualizedRows = false,
+    fullscreenable = false,
+    onFullscreenChange,
+    getFullscreenControls,
   } = props;
 
   // Component refs
@@ -146,6 +161,71 @@ const AdvancedTable = (props: AdvancedTableProps) => {
     );
   }, [fetchMoreOnBottomReached, fetchNextPage, isFetching, totalFetched, fullData.length]);
 
+  // Fullscreen
+  const [isFullscreen, setIsFullscreen] = useState(false)
+
+  const toggleFullscreen = useCallback(() => {
+    const newFullscreenState = !isFullscreen
+    setIsFullscreen(newFullscreenState)
+    
+    onFullscreenChange?.(newFullscreenState)
+  }, [isFullscreen, onFullscreenChange])
+
+  useEffect(() => {
+    if (fullscreenable && getFullscreenControls) {
+      getFullscreenControls({
+        toggleFullscreen,
+        isFullscreen
+      })
+    }
+  }, [fullscreenable, getFullscreenControls, toggleFullscreen, isFullscreen])
+
+  const renderFullscreenHeader = () => {
+    if (!isFullscreen) return null
+
+    const defaultMinimizeIcon = (
+      <button
+          className="gray-icon fullscreen-icon"
+          onClick={toggleFullscreen}
+      >
+        <Icon
+            cursor="pointer"
+            fixedWidth
+            icon="grid-2"
+            {...props}
+        />
+      </button>
+    )
+
+    return (
+      <Card 
+          borderNone
+          borderRadius="none"
+          className="advanced-table-fullscreen-header" 
+          {...props}
+        >
+          <Flex justify="end">
+            {defaultMinimizeIcon}
+          </Flex>
+      </Card>
+    )
+  }
+
+  useEffect(() => {
+    if (!fullscreenable) return
+  
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape' && isFullscreen) {
+        event.preventDefault()
+        toggleFullscreen()
+      }
+    }
+    document.addEventListener('keydown', handleKeyDown)
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown)
+    }
+  }, [fullscreenable, toggleFullscreen])
+
   // Build CSS classes and props
   const ariaProps = buildAriaProps(aria);
   const dataProps = buildDataProps(data);
@@ -154,6 +234,10 @@ const AdvancedTable = (props: AdvancedTableProps) => {
     buildCss("pb_advanced_table"),
     `advanced-table-responsive-${responsive}`,
     maxHeight ? `advanced-table-max-height-${maxHeight}` : '',
+    {
+      'advanced-table-fullscreen': isFullscreen,
+      'advanced-table-fullscreenable': fullscreenable
+    },
     globalProps(props),
     className
   );
@@ -183,6 +267,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
         ref={tableWrapperRef}
         style={tableWrapperStyle as React.CSSProperties}
     >
+      {renderFullscreenHeader()}
       <AdvancedTableProvider
           columnDefinitions={columnDefinitions}
           enableToggleExpansion={enableToggleExpansion}
@@ -193,6 +278,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
           hasAnySubRows={hasAnySubRows}
           inlineRowLoading={inlineRowLoading}
           isActionBarVisible={isActionBarVisible}
+          isFullscreen={isFullscreen}
           loading={loading}
           responsive={responsive}
           selectableRows={selectableRows}

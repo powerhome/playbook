@@ -499,3 +499,16 @@ test("customRenderer prop functions as expected", () => {
   const pill = kit.querySelector(".pb_pill_kit_success_lowercase")
   expect(pill).toBeInTheDocument()
 })
+
+test("fullscreenable prop adds fullscreen class", () => {
+  render(
+    <AdvancedTable
+        columnDefinitions={columnDefinitions}
+        fullscreenable
+        tableData={MOCK_DATA}
+    />
+  )
+
+  const tableContainer = screen.getByRole("table").closest("div")
+  expect(tableContainer).toHaveClass("advanced-table-fullscreenable")
+})
