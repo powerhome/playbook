@@ -1,0 +1,3 @@
+Trigger Fullscreen mode with the `fullscreenable`and `getFullscreenControls` props.  `fullscreenable` is a boolean that enables Fullscreen functionality for an Advanced Table. `getFullscreenControls` is a callback function that receives an object containing the table's internal `toggleFullscreen` function, allowing you to store and trigger Fullscreen from the parent component. An external trigger (like a button) must be used to activate Fullscreen mode.
+
+Exit Fullscreen mode by clicking the minimize top-right-corner icon or by pressing the "Escape" keyboard key.
