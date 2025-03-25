@@ -4,7 +4,6 @@ import Layout from '../../pb_layout/_layout'
 import Flex from '../../pb_flex/_flex'
 import Body from '../../pb_body/_body'
 import Caption from '../../pb_caption/_caption'
-import Title from '../../pb_title/_title'
 import SectionSeparator from '../../pb_section_separator/_section_separator'
 
 const LayoutBracket = () => {
@@ -168,7 +167,7 @@ const LayoutBracket = () => {
           </Layout.Game>
         </Layout.Round>
         <Layout.RoundLabel>
-          <Title>Super Bowl</Title>
+          <Caption>Super Bowl</Caption>
           <SectionSeparator marginY="sm"/>
         </Layout.RoundLabel>
         <Layout.Round>
