@@ -246,7 +246,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
         </AdvancedTableProvider>
      
       </div>
-
+ {/* Bottom Pagination */}
       {pagination && (
         <TablePagination
             onChange={onPageChange}
