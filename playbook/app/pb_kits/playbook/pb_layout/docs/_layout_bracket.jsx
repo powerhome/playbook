@@ -16,7 +16,7 @@ const LayoutBracket = () => {
           <Caption>Wild Card</Caption>
           <SectionSeparator marginY="sm"/>
         </Layout.RoundLabel>
-        <Layout.Round>
+        <Layout.Round marginBottom={{ xs: "md", sm: "md" }}>
           <Layout.Game>
             <Flex justify="between">
               <Body>Packers</Body>
@@ -98,7 +98,7 @@ const LayoutBracket = () => {
           <Caption>Divisional</Caption>
           <SectionSeparator marginY="sm"/>
         </Layout.RoundLabel>
-        <Layout.Round>
+        <Layout.Round marginBottom={{ xs: "md", sm: "md" }}>
           <Layout.Game>
             <Flex justify="between">
               <Body>Rams</Body>
@@ -144,7 +144,7 @@ const LayoutBracket = () => {
           <Caption>Conference</Caption>
           <SectionSeparator marginY="sm"/>
         </Layout.RoundLabel>
-        <Layout.Round>
+        <Layout.Round marginBottom={{ xs: "md", sm: "md" }}>
           <Layout.Game>
             <Flex justify="between">
               <Body>Commanders</Body>
