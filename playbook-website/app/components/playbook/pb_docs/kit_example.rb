@@ -61,7 +61,7 @@ module Playbook
       end
 
       def full_screen
-        full_screen_kits = ["drawer_menu"]
+        full_screen_kits = %w[drawer_menu drawer_breakpoints]
         full_screen_kits.include?(example_key)
       end
 
