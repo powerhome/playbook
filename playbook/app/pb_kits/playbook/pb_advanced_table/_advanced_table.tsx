@@ -278,6 +278,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
           ref={tableWrapperRef}
           style={tableWrapperStyle as React.CSSProperties}
       >
+        {renderFullscreenHeader()}
         <AdvancedTableProvider
             columnDefinitions={columnDefinitions}
             enableToggleExpansion={enableToggleExpansion}
@@ -287,8 +288,8 @@ const AdvancedTable = (props: AdvancedTableProps) => {
             handleExpandOrCollapse={handleExpandOrCollapse}
             hasAnySubRows={hasAnySubRows}
             inlineRowLoading={inlineRowLoading}
-            isFullscreen={isFullscreen}
             isActionBarVisible={isActionBarVisible}
+            isFullscreen={isFullscreen}
             loading={loading}
             responsive={responsive}
             selectableRows={selectableRows}
