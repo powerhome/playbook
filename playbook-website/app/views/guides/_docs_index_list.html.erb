@@ -5,12 +5,13 @@
   <%= pb_rails("layout", props: { layout: "collection", margin_y: "xl", padding_bottom: "xl" }) do %>
     <%= pb_rails("layout/body") do %>
       <% @navigation[:pages].each do |page_name| %>
+
         <% link_path = if missing_token_pages.include?(page_name[:page_id])
                          "/guides/tokens/#{page_name[:page_id]}"
                        elsif missing_global_pages.include?(page_name[:page_id])
                          "/guides/global_props/#{page_name[:page_id]}"
                        else
-                         "/visual_guidelines/#{page_name[:page_id]}"
+                         "/#{page_name[:url]}"
                        end %>
         <%= link_to link_path, class: "display_flex align_items_stretch" do %>
           <%= pb_rails("card", props: { padding: "none", hover: { shadow: "deep" }, flex: 1 } ) do %>
