@@ -63,11 +63,6 @@ $pb_button_sizes: (
     color: $text_lt_lighter;
   }
 
-  // Disabled =================
-  &[class*=_disabled]  {
-    @include pb_button_disabled;
-  }
-
   // Block ====================
   &[class*=_block]  {
     @include pb_button_block;
@@ -81,6 +76,11 @@ $pb_button_sizes: (
   // Danger ===================
   &[class*=_danger] {
     @include pb_button_danger;
+  }
+
+  // Disabled =================
+  &[class*=_disabled]  {
+    @include pb_button_disabled;
   }
 
   // Dark Variants =============
