@@ -5,7 +5,6 @@
   <%= pb_rails("layout", props: { layout: "collection", margin_y: "xl", padding_bottom: "xl" }) do %>
     <%= pb_rails("layout/body") do %>
       <% @navigation[:pages].each do |page_name| %>
-
         <% link_path = if missing_token_pages.include?(page_name[:page_id])
                          "/guides/tokens/#{page_name[:page_id]}"
                        elsif missing_global_pages.include?(page_name[:page_id])
