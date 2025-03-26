@@ -197,8 +197,8 @@ $bracket-border-width: 4px;
       &:nth-child(odd)::after {
         content: '';
         position: absolute;
-        top: 50%;
-        height: 100%;
+        top: calc(50% - $bracket-border-width / 2);
+        height: calc(100% + $bracket-border-width);
         width: $bracket-connector-width;
         right: -$bracket-connector-width;
         border-top-right-radius: $border_radius_lg;
@@ -210,14 +210,14 @@ $bracket-border-width: 4px;
     }
 
     .layout_round.eight_games .layout_game:not(:only-child)::after {
-      height: 100%;
+      height: calc(100% + $bracket-border-width);
     }
     .layout_round.eight_games ~ .layout_round.four_games .layout_game:not(:only-child)::after,
     .layout_round.four_games ~ .layout_round.two_games .layout_game:not(:only-child)::after {
-      height: 200%;
+      height: calc(200% + $bracket-border-width);
     }
     .layout_round.eight_games ~ .layout_round.four_games ~ .layout_round.two_games .layout_game:not(:only-child)::after {
-      height: 400%;
+      height: calc(400% + $bracket-border-width);
     }
     .layout_round_label {
       display: none;
