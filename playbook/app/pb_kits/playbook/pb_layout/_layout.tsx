@@ -4,8 +4,8 @@ import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../uti
 
 import { GlobalProps, globalProps, globalInlineProps } from '../utilities/globalProps'
 
-import Card from '../pb_card/_card'
-import SectionSeparator from '../pb_section_separator/_section_separator'
+import { Round, RoundLabel } from "./subcomponents/_round";
+import Game from "./subcomponents/_game";
 
 type LayoutPropTypes = {
   aria?: {[key: string]: string},
@@ -38,22 +38,6 @@ type LayoutItemProps = {
   children: React.ReactNode[] | React.ReactNode,
   className?: string,
   size?: "sm" | "md" | "lg"
-} & GlobalProps
-
-type LayoutGameProps = {
-  children: React.ReactNode[] | React.ReactNode,
-  className?: string,
-} & GlobalProps
-
-type LayoutRoundLabelProps = {
-  children: React.ReactNode[] | React.ReactNode,
-  className?: string,
-} & GlobalProps
-
-
-type LayoutRoundProps = {
-  children: React.ReactNode[] | React.ReactNode,
-  className?: string,
 } & GlobalProps
 
 type LayoutHeaderProps = {
@@ -129,103 +113,6 @@ const Footer = (props: LayoutFooterProps) => {
   return (
     <div
         className={classnames('layout_footer', globalProps(props), className)}
-        style={dynamicInlineProps}
-    >
-      {children}
-    </div>
-  )
-}
-
-// Round component (based off Body)
-const Round = (props: LayoutRoundProps) => {
-  const { children, className } = props
-  const dynamicInlineProps = globalInlineProps(props)
-  const numberOfChildren = Array.isArray(children) ? children.length : 0
-
-  const rightConnectors = Array.from({ length: numberOfChildren / 2 }, (_, index) => (
-    <div
-        className="right_connector"
-        key={`right_connector_${index}`}
-    />
-  ))
-
-  const numberOfGamesClass = 
-    numberOfChildren === 8 ? 'eight_games' :
-    numberOfChildren === 4 ? 'four_games' :
-    numberOfChildren === 2 ? 'two_games' : ''
-
-  return (
-    <>
-      <div
-          className={classnames('layout_round', globalProps(props), className, numberOfGamesClass)}
-          style={dynamicInlineProps}
-      >
-        {children}
-      </div>
-      <div className="connector_container">{rightConnectors}</div>
-    </>
-  )
-}
-
-// Game component (modeled after Item)
-const Game = (props: LayoutGameProps) => {
-  const { children, className } = props
-  const dynamicInlineProps = globalInlineProps(props)
-
-  const numberOfChildren = Array.isArray(children) ? children.length : 0
-
-  if (numberOfChildren === 2) {
-    const [firstChild, secondChild] = React.Children.toArray(children)
-
-    if (React.isValidElement(firstChild) && React.isValidElement(secondChild)) { 
-      return (
-        <div
-            className={classnames('layout_game', globalProps(props), className)}
-            style={dynamicInlineProps}
-        >
-          <Card
-              marginY="xs"
-              padding="none"
-              shadow="deep"
-          >
-            <Card.Body padding="xs">{firstChild}</Card.Body>
-            <SectionSeparator />
-            <Card.Body padding="xs">{secondChild}</Card.Body>
-          </Card>
-        </div>
-      )
-    }
-  }
-
-  return (
-    <div
-        className={classnames('layout_game', globalProps(props), className)}
-        style={dynamicInlineProps}
-    >
-      {numberOfChildren >= 1 ? (
-        children
-      ) : (
-        <Card
-            marginY="xs"
-            padding="none"
-            shadow="deep"
-        >
-          <Card.Body padding="xs">To be determined...</Card.Body>
-          <SectionSeparator />
-          <Card.Body padding="xs">To be determined...</Card.Body>
-        </Card>
-      )}
-    </div>
-  )
-}
-
-// Round Label component (modeled after Item)
-const RoundLabel = (props: LayoutRoundLabelProps) => {
-  const { children, className } = props
-  const dynamicInlineProps = globalInlineProps(props)
-  return (
-    <div
-        className={classnames('layout_round_label', className)}
         style={dynamicInlineProps}
     >
       {children}
