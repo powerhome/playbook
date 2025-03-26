@@ -136,25 +136,18 @@ const Footer = (props: LayoutFooterProps) => {
   )
 }
 
-// Helper function for Round
-const generateConnectors = (type: 'left' | 'right', count: number) => {
-  const connectorClass = type === 'left' ? 'left_connector' : 'right_connector'
-  return Array.from({ length: count }, (_, index) => (
-    <div
-        className={connectorClass}
-        key={`${connectorClass}_${index}`}
-    />
-  ))
-}
-
 // Round component (based off Body)
 const Round = (props: LayoutRoundProps) => {
   const { children, className } = props
   const dynamicInlineProps = globalInlineProps(props)
   const numberOfChildren = Array.isArray(children) ? children.length : 0
 
-  const leftConnectors = generateConnectors('left', numberOfChildren)
-  const rightConnectors = generateConnectors('right', numberOfChildren / 2)
+  const rightConnectors = Array.from({ length: numberOfChildren / 2 }, (_, index) => (
+    <div
+        className="right_connector"
+        key={`right_connector_${index}`}
+    />
+  ))
 
   const numberOfGamesClass = 
     numberOfChildren === 8 ? 'eight_games' :
@@ -169,7 +162,6 @@ const Round = (props: LayoutRoundProps) => {
       >
         {children}
       </div>
-      <div className="connector_container">{leftConnectors}</div>
       <div className="connector_container">{rightConnectors}</div>
     </>
   )
