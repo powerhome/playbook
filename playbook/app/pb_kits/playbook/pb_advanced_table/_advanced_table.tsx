@@ -58,9 +58,8 @@ type AdvancedTableProps = {
   toggleExpansionIcon?: string | string[]
   onRowSelectionChange?: (arg: RowSelectionState) => void
   virtualizedRows?: boolean
-  fullscreenable?: boolean
-  onFullscreenChange?: (isFullscreen: boolean) => void
-  getFullscreenControls?: (controls: FullscreenControls) => void
+  allowFullScreen?: boolean
+  fullScreenControl?: (controls: FullscreenControls) => void
 } & GlobalProps;
 
 const AdvancedTable = (props: AdvancedTableProps) => {
@@ -94,9 +93,8 @@ const AdvancedTable = (props: AdvancedTableProps) => {
     toggleExpansionIcon = "arrows-from-line",
     onRowSelectionChange,
     virtualizedRows = false,
-    fullscreenable = false,
-    onFullscreenChange,
-    getFullscreenControls,
+    allowFullScreen = false,
+    fullScreenControl,
   } = props;
 
   // Component refs
@@ -165,20 +163,17 @@ const AdvancedTable = (props: AdvancedTableProps) => {
   const [isFullscreen, setIsFullscreen] = useState(false)
 
   const toggleFullscreen = useCallback(() => {
-    const newFullscreenState = !isFullscreen
-    setIsFullscreen(newFullscreenState)
-    
-    onFullscreenChange?.(newFullscreenState)
-  }, [isFullscreen, onFullscreenChange])
+    setIsFullscreen(prevState => !prevState)
+  }, [])
 
   useEffect(() => {
-    if (fullscreenable && getFullscreenControls) {
-      getFullscreenControls({
+    if (allowFullScreen && fullScreenControl) {
+      fullScreenControl({
         toggleFullscreen,
         isFullscreen
       })
     }
-  }, [fullscreenable, getFullscreenControls, toggleFullscreen, isFullscreen])
+  }, [allowFullScreen, fullScreenControl, toggleFullscreen, isFullscreen])
 
   const renderFullscreenHeader = () => {
     if (!isFullscreen) return null
@@ -203,7 +198,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
           borderRadius="none"
           className="advanced-table-fullscreen-header" 
           {...props}
-        >
+      >
           <Flex justify="end">
             {defaultMinimizeIcon}
           </Flex>
@@ -212,7 +207,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
   }
 
   useEffect(() => {
-    if (!fullscreenable) return
+    if (!allowFullScreen) return
   
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape' && isFullscreen) {
@@ -224,7 +219,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
     return () => {
       document.removeEventListener('keydown', handleKeyDown)
     }
-  }, [fullscreenable, toggleFullscreen])
+  }, [allowFullScreen, toggleFullscreen, isFullscreen])
 
   // Build CSS classes and props
   const ariaProps = buildAriaProps(aria);
@@ -236,7 +231,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
     maxHeight ? `advanced-table-max-height-${maxHeight}` : '',
     {
       'advanced-table-fullscreen': isFullscreen,
-      'advanced-table-fullscreenable': fullscreenable
+      'advanced-table-allow-fullscreen': allowFullScreen
     },
     globalProps(props),
     className

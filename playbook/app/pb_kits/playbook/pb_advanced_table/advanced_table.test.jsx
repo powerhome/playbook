@@ -149,7 +149,7 @@ return (
         data={{testid: testId}}
         sortControl={sortControl}
         tableData={MOCK_DATA}
-      >
+    >
         <AdvancedTable.Header enableSorting />
         <AdvancedTable.Body />
       </AdvancedTable>
@@ -500,15 +500,15 @@ test("customRenderer prop functions as expected", () => {
   expect(pill).toBeInTheDocument()
 })
 
-test("fullscreenable prop adds fullscreen class", () => {
+test("allowFullScreen prop adds fullscreen class", () => {
   render(
     <AdvancedTable
+        allowFullScreen
         columnDefinitions={columnDefinitions}
-        fullscreenable
         tableData={MOCK_DATA}
     />
   )
 
   const tableContainer = screen.getByRole("table").closest("div")
-  expect(tableContainer).toHaveClass("advanced-table-fullscreenable")
+  expect(tableContainer).toHaveClass("advanced-table-allow-fullscreen")
 })

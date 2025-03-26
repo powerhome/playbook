@@ -54,9 +54,9 @@ const AdvancedTableFullscreen = (props) => {
           />
       </Flex>
       <AdvancedTable
+          allowFullScreen
           columnDefinitions={columnDefinitions}
-          fullscreenable
-          getFullscreenControls={({ toggleFullscreen }) => setFullscreenToggleSmall(() => toggleFullscreen)}
+          fullScreenControl={({ toggleFullscreen }) => setFullscreenToggleSmall(() => toggleFullscreen)}
           tableData={MOCK_DATA}
           {...props}
       >
@@ -72,9 +72,9 @@ const AdvancedTableFullscreen = (props) => {
           />
       </Flex>
       <AdvancedTable
+          allowFullScreen
           columnDefinitions={columnDefinitions}
-          fullscreenable
-          getFullscreenControls={({ toggleFullscreen }) => setFullscreenToggleLarge(() => toggleFullscreen)}
+          fullScreenControl={({ toggleFullscreen }) => setFullscreenToggleLarge(() => toggleFullscreen)}
           responsive="none"
           tableData={PAGINATION_MOCK_DATA}
           tableProps={tableProps}
