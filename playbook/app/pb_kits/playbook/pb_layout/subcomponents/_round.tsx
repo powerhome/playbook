@@ -38,10 +38,7 @@ export const Round = (props: LayoutRoundProps) => {
     />
   ))
 
-  const numberOfGamesClass = 
-    numberOfChildren === 8 ? 'eight_games' :
-    numberOfChildren === 4 ? 'four_games' :
-    numberOfChildren === 2 ? 'two_games' : ''
+  const numberOfGamesClass = `games_${numberOfChildren}`
 
   return (
     <>
