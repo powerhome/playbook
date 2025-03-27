@@ -24,12 +24,17 @@ export const RoundLabel = (props: LayoutRoundLabelProps) => {
 type LayoutRoundProps = {
   children: React.ReactNode[] | React.ReactNode,
   className?: string,
+  numberOfRounds: number,
 } & GlobalProps
 
 export const Round = (props: LayoutRoundProps) => {
-  const { children, className } = props
+  const { children, className, numberOfRounds } = props
   const dynamicInlineProps = globalInlineProps(props)
   const numberOfChildren = Array.isArray(children) ? children.length : 0
+
+  const childrenWithProps = Array.isArray(children) ? children.map((child, index) =>
+    React.isValidElement(child) ? React.cloneElement(child, { numberOfRounds, numberOfGames: numberOfChildren, isOdd: index % 2 === 0 }) : child
+  ) : children
 
   const rightConnectors = Array.from({ length: numberOfChildren / 2 }, (_, index) => (
     <div
@@ -38,15 +43,13 @@ export const Round = (props: LayoutRoundProps) => {
     />
   ))
 
-  const numberOfGamesClass = `games_${numberOfChildren}`
-
   return (
     <>
       <div
-          className={classnames('layout_round', globalProps(props), className, numberOfGamesClass)}
+          className={classnames('layout_round', globalProps(props), className)}
           style={dynamicInlineProps}
       >
-        {children}
+        {childrenWithProps}
       </div>
       <div className="connector_container">{rightConnectors}</div>
     </>

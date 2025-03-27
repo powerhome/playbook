@@ -192,34 +192,22 @@ $bracket-border-width: 4px;
       margin-left: $bracket-connector-width;
     }
 
-    .layout_round .layout_game:not(:only-child) {
+    .layout_round .layout_game {
       position: relative;
-      &:nth-child(odd)::after {
-        content: '';
-        position: absolute;
-        top: calc(50% - $bracket-border-width / 2);
-        height: calc(100% + $bracket-border-width);
-        width: $bracket-connector-width;
-        right: -$bracket-connector-width;
-        border-top-right-radius: $border_radius_lg;
-        border-bottom-right-radius: $border_radius_lg;
-        border-top: $bracket-border-width solid $border_light;
-        border-bottom: $bracket-border-width solid $border_light;
-        border-right: $bracket-border-width solid $border_light;
-      }
     }
 
-    .layout_round.games_16 ~ .layout_round.games_8 .layout_game:not(:only-child)::after,
-    .layout_round.games_8 ~ .layout_round.games_4 .layout_game:not(:only-child)::after,
-    .layout_round.games_4 ~ .layout_round.games_2 .layout_game:not(:only-child)::after {
-      height: calc(200% + $bracket-border-width);
-    }
-    .layout_round.games_16 ~ .layout_round.games_8 ~ .layout_round.games_4 .layout_game:not(:only-child)::after,
-    .layout_round.games_8 ~ .layout_round.games_4 ~ .layout_round.games_2 .layout_game:not(:only-child)::after {
-      height: calc(400% + $bracket-border-width);
-    }
-    .layout_round.games_16 ~ .layout_round.games_8 ~ .layout_round.games_4 ~ .layout_round.games_2 .layout_game:not(:only-child)::after {
-      height: calc(800% + $bracket-border-width);
+    .half_box {
+      content: '';
+      position: absolute;
+      top: calc(50% - $bracket-border-width / 2);
+      height: calc(100% + $bracket-border-width);
+      width: $bracket-connector-width;
+      right: -$bracket-connector-width;
+      border-top-right-radius: $border_radius_lg;
+      border-bottom-right-radius: $border_radius_lg;
+      border-top: $bracket-border-width solid $border_light;
+      border-bottom: $bracket-border-width solid $border_light;
+      border-right: $bracket-border-width solid $border_light;
     }
 
     .layout_round_label {

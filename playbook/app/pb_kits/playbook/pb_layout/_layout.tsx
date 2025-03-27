@@ -176,6 +176,11 @@ const Layout = (props: LayoutPropTypes) => {
     (child: React.ReactElement & {type: {displayName: string}}) => child.type?.displayName !== 'Side'
   )
 
+  const numberOfRounds = Array.isArray(nonSideChildren) ? nonSideChildren.filter((child: any) => child.type?.name === 'Round').length : 0
+  const bracketChildren = nonSideChildren.map(child =>
+    React.isValidElement(child) ? React.cloneElement(child, { numberOfRounds }) : child
+  )
+  
   const filteredProps = {...props}
   delete filteredProps?.position
 
@@ -197,7 +202,7 @@ const Layout = (props: LayoutPropTypes) => {
         style={dynamicInlineProps}
     >
       {subComponentTags('Side')}
-      {nonSideChildren}
+      {layout === 'bracket' ? bracketChildren : nonSideChildren}
     </div>
   )
 }
