@@ -44,12 +44,6 @@ const Game = (props: LayoutGameProps) => {
             padding="none"
             shadow="deep"
         >
-          {/* TODO: Remove these lines! */}
-          <div>numberOfRounds: {numberOfRounds}</div>
-          <div>numberOfGames: {numberOfGames}</div>
-          <div>ratio: {ratio}</div>
-          <div>exponent: {exponent}</div>
-          <div>height: {`calc(${ratio} * 100% + 4px)`}</div>
           <Card.Body padding="xs">{firstChild}</Card.Body>
           <SectionSeparator />
           <Card.Body padding="xs">{secondChild}</Card.Body>
