@@ -80,7 +80,7 @@ const Game = (props: LayoutGameProps) => {
       {isOdd && numberOfGames > 1  &&
         <div
             className="half_box"
-            style={{ height: `calc(${ratio} * 100% + 4px)` }}
+            style={{ height: `calc(${ratio}00% + 4px)` }}
         />
       }
     </div>
