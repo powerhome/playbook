@@ -1,4 +1,4 @@
-import { omit } from 'lodash'
+import { omit } from './object'
 import { camelToSnakeCase } from './text'
 
 import {
