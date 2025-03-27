@@ -232,10 +232,14 @@
   }
   
   // Fullscreen
+  &.advanced-table-allow-fullscreen {
+    transition: all 0.3s ease;
+  }
+  
   &.advanced-table-fullscreen {
     background-color: $border_light;
     box-sizing: border-box;
-    height: 100%;
+    height: 100vh;
     left: 0;
     overflow: auto;
     position: fixed;

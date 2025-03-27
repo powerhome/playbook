@@ -162,73 +162,15 @@ const AdvancedTable = (props: AdvancedTableProps) => {
   // Fullscreen
   const [isFullscreen, setIsFullscreen] = useState(false)
 
-  const enterFullscreen = useCallback(async () => {
-    const element = tableWrapperRef.current
-    if (!element) return
-
-    try {
-      if (element.requestFullscreen) {
-        await element.requestFullscreen()
-      } else if ((element as any).webkitRequestFullscreen) {
-        await (element as any).webkitRequestFullscreen()
-      } else if ((element as any).msRequestFullscreen) {
-        await (element as any).msRequestFullscreen()
-      }
-    } catch (error) {
-      console.error('Error attempting to enable fullscreen:', error)
-    }
-  }, [])
-
-  const exitFullscreen = useCallback(async () => {
-    try {
-      if (document.exitFullscreen) {
-        await document.exitFullscreen()
-      } else if ((document as any).webkitExitFullscreen) {
-        await (document as any).webkitExitFullscreen()
-      } else if ((document as any).msExitFullscreen) {
-        await (document as any).msExitFullscreen()
-      }
-    } catch (error) {
-      console.error('Error exiting fullscreen:', error)
-    }
-  }, [])
-
   const toggleFullscreen = useCallback(() => {
-    if (isFullscreen) {
-      exitFullscreen()
-    } else {
-      enterFullscreen()
-    }
-  }, [isFullscreen, enterFullscreen, exitFullscreen])
-
-  const handleFullscreenChange = useCallback(() => {
-    const isCurrentlyFullscreen = !!(
-      document.fullscreenElement ||
-      (document as any).webkitFullscreenElement ||
-      (document as any).msFullscreenElement
-    )
-    setIsFullscreen(isCurrentlyFullscreen)
+    setIsFullscreen(prevState => !prevState)
   }, [])
 
   useEffect(() => {
-    if (!allowFullScreen) return
-
-    document.addEventListener('fullscreenchange', handleFullscreenChange)
-    document.addEventListener('webkitfullscreenchange', handleFullscreenChange)
-    document.addEventListener('msfullscreenchange', handleFullscreenChange)
-
-    return () => {
-      document.removeEventListener('fullscreenchange', handleFullscreenChange)
-      document.removeEventListener('webkitfullscreenchange', handleFullscreenChange)
-      document.removeEventListener('msfullscreenchange', handleFullscreenChange)
-    }
-  }, [allowFullScreen, handleFullscreenChange])
-
-  useEffect(() => {
-    if (fullScreenControl && allowFullScreen) {
-      fullScreenControl({ 
-        toggleFullscreen, 
-        isFullscreen 
+    if (allowFullScreen && fullScreenControl) {
+      fullScreenControl({
+        toggleFullscreen,
+        isFullscreen
       })
     }
   }, [allowFullScreen, fullScreenControl, toggleFullscreen, isFullscreen])
@@ -264,6 +206,20 @@ const AdvancedTable = (props: AdvancedTableProps) => {
     )
   }
 
+  useEffect(() => {
+    if (!allowFullScreen) return
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape' && isFullscreen) {
+        event.preventDefault()
+        toggleFullscreen()
+      }
+    }
+    document.addEventListener('keydown', handleKeyDown)
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown)
+    }
+  }, [allowFullScreen, toggleFullscreen, isFullscreen])
 
   // Build CSS classes and props
   const ariaProps = buildAriaProps(aria);
