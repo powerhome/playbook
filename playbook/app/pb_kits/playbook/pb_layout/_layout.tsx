@@ -176,7 +176,9 @@ const Layout = (props: LayoutPropTypes) => {
     (child: React.ReactElement & {type: {displayName: string}}) => child.type?.displayName !== 'Side'
   )
 
-  const numberOfRounds = Array.isArray(nonSideChildren) ? nonSideChildren.filter((child: any) => child.type?.name === 'Round').length : 0
+  const numberOfRounds = Array.isArray(nonSideChildren) ? React.Children.toArray(children).filter(
+    (child) => child.type === Layout.Round
+  ).length : 0
   const bracketChildren = nonSideChildren.map(child =>
     React.isValidElement(child) ? React.cloneElement(child, { numberOfRounds }) : child
   )
