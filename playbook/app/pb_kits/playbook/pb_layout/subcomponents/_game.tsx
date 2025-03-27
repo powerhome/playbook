@@ -19,9 +19,10 @@ const Game = (props: LayoutGameProps) => {
   const { children, className, numberOfRounds, numberOfGames, isOdd } = props
   const dynamicInlineProps = globalInlineProps(props)
   
+  const numberOfChildren = Array.isArray(children) ? children.length : 0
+  
   const isMultiple = Array.isArray(children)
-  const numberOfChildren = isMultiple ? children.length : 0
-
+  
   let ratio = 0
   let exponent
   if (numberOfGames > 1) {
