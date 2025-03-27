@@ -37,9 +37,6 @@ PbPopover.start()
 import PbTooltip from 'kits/pb_tooltip'
 PbTooltip.start()
 
-import PbTooltipFLoatingUi from 'kits/pb_tooltip/floating_ui'
-PbTooltipFLoatingUi.start()
-
 import PbFixedConfirmationToast from 'kits/pb_fixed_confirmation_toast'
 PbFixedConfirmationToast.start()
 
