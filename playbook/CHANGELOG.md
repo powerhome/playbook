@@ -1,5 +1,11 @@
-# 14.16.0
+# ✨ The Multi Level Select Kit Just Got Better! ✨
 ##### March 21, 2025
+
+<img width="945" alt="14 16 0 Release Banner" src="https://github.com/user-attachments/assets/770f3a2c-1377-4f0f-a6ba-2f68302653fd" />
+
+Our latest release introduces the ability to disable individual or parent options, validations for Rails, and React Hook Form support. We also made a few bug fixes for a smoother experience with the Multi Level Select in Rails forms!
+
+[14.16.0](https://github.com/powerhome/playbook/tree/14.16.0) full list of changes:
 
 **Kit Enhancements:**
 
