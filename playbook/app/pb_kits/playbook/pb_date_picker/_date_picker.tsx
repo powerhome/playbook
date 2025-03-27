@@ -106,41 +106,41 @@ const DatePicker = (props: DatePickerProps): React.ReactElement => {
   const inputAriaProps = buildAriaProps(inputAria)
   const inputDataProps = buildDataProps(inputData)
 
-useEffect(() => {
-  datePickerHelper({
-    allowInput,
-    customQuickPickDates,
-    defaultDate,
-    disableDate,
-    disableRange,
-    disableWeekdays,
-    enableTime,
-    format,
-    hideIcon,
-    inLine,
-    maxDate,
-    minDate,
-    mode,
-    onChange,
-    onClose,
-    pickerId,
-    plugins,
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    position,
-    positionElement,
-    selectionType,
-    showTimezone,
-    staticPosition,
-    thisRangesEndToday,
-    yearRange,
-    required: false,
-  }, scrollContainer)
-}, initializeOnce ? [] : undefined)
+  useEffect(() => {
+    datePickerHelper({
+      allowInput,
+      customQuickPickDates,
+      defaultDate,
+      disableDate,
+      disableRange,
+      disableWeekdays,
+      enableTime,
+      format,
+      hideIcon,
+      inLine,
+      maxDate,
+      minDate,
+      mode,
+      onChange,
+      onClose,
+      pickerId,
+      plugins,
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      position,
+      positionElement,
+      selectionType,
+      showTimezone,
+      staticPosition,
+      thisRangesEndToday,
+      yearRange,
+      required: false,
+    }, scrollContainer)
+  }, initializeOnce ? [] : undefined)
   const filteredProps = {...props}
   if (filteredProps.marginBottom === undefined) {
     filteredProps.marginBottom = "sm"
-  } 
+  }
   delete filteredProps?.position
 
   const classes = classnames(
@@ -221,7 +221,7 @@ useEffect(() => {
             {hideIcon && inLine ?
               <div>
                 <div
-                    className={iconWrapperClass()}
+                    className={`${iconWrapperClass()} date-picker-inline-icon-plus`}
                     id={`${pickerId}-icon-plus`}
                 >
                   <Icon
@@ -230,7 +230,7 @@ useEffect(() => {
                   />
                 </div>
                 <div
-                    className={iconWrapperClass()}
+                    className={`${iconWrapperClass()} date-picker-inline-angle-down`}
                     id={`${pickerId}-angle-down`}
                 >
                   <Icon
