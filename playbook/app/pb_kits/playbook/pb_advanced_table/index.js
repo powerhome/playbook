@@ -9,12 +9,59 @@ export default class PbAdvancedTable extends PbEnhancedElement {
     return ADVANCED_TABLE_SELECTOR;
   }
 
+    handleCheckboxClick(event) {
+      const checkbox = event.currentTarget;
+      const rowId = checkbox.id;
+      const isChecked = checkbox.checked;
+  
+      if (isChecked) {
+        PbAdvancedTable.selectedRows.add(rowId);
+      } else {
+        PbAdvancedTable.selectedRows.delete(rowId);
+      }
+      const rowEl = checkbox.closest("tr");
+      if (rowEl) {
+        const table = rowEl.closest("table");
+        const rowContent = rowEl.dataset.advancedTableContent;
+  
+        if (rowContent) {
+          const childRows = table.querySelectorAll(
+            `[data-advanced-table-content^="${rowContent}-"]`
+          );
+  
+          childRows.forEach((childRow) => {
+            const label = childRow.querySelector("label[data-row-id]");
+            if (!label) return;
+            
+            const childCheckbox = label.querySelector("input[type='checkbox']");
+            if (!childCheckbox) return;
+  
+            childCheckbox.checked = isChecked;
+            
+            const childRowId = childCheckbox.dataset.rowId;
+            if (isChecked) {
+              PbAdvancedTable.selectedRows.add(childRowId);
+            } else {
+              PbAdvancedTable.selectedRows.delete(childRowId);
+            }
+          });
+        }
+      }
+      console.log(
+        "Currently selected row IDs: ",
+        Array.from(PbAdvancedTable.selectedRows)
+      );
+    }
+  
+
   get target() {
     const table = this.element.closest("table");
     return table.querySelectorAll(`[data-row-parent="${this.element.id}"]`);
   }
 
   static expandedRows = new Set();
+  static selectedRows = new Set();
+
   static isCollapsing = false;
 
   connect() {
@@ -31,6 +78,21 @@ export default class PbAdvancedTable extends PbEnhancedElement {
         this.toggleElement(this.target);
       }
     });
+
+    const checkboxLabels = this.element
+    .closest("table")
+    .querySelectorAll("label[data-row-id]");
+    checkboxLabels.forEach((label) => {
+      const checkbox = label.querySelector("input[type='checkbox']");
+      console.log("hello")
+
+      if (!checkbox) return;
+  
+      checkbox.addEventListener("change", (event) => {
+        this.handleCheckboxClick(event);
+      });
+    });
+  
 
     const nestedButtons = this.element
       .closest("table")
