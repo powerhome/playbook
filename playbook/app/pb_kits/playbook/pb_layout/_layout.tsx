@@ -177,9 +177,9 @@ const Layout = (props: LayoutPropTypes) => {
   )
 
   const numberOfRounds = Array.isArray(nonSideChildren) ? React.Children.toArray(children).filter(
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    //@ts-ignore
-    (child) => child.type === Layout.Round
+    (child) => {
+      return (child as React.ReactElement).type === Layout.Round;
+    }
   ).length : 0
   const bracketChildren = nonSideChildren.map(child =>
     React.isValidElement(child) ? React.cloneElement(child, { numberOfRounds }) : child
