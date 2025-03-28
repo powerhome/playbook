@@ -33,7 +33,7 @@ export const Round = (props: LayoutRoundProps) => {
   const numberOfChildren = Array.isArray(children) ? children.length : 0
 
   const childrenWithProps = Array.isArray(children) ? children.map((child, index) =>
-    React.isValidElement(child) ? React.cloneElement(child, { numberOfRounds, numberOfGames: numberOfChildren, isOdd: index % 2 === 0 }) : child
+    React.isValidElement(child) ? React.cloneElement(child, { numberOfRounds, numberOfGames: numberOfChildren, isOdd: index % 2 === 0, key: `child_${index}` }) : child
   ) : children
 
   const rightConnectors = Array.from({ length: numberOfChildren / 2 }, (_, index) => (
