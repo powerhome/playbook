@@ -7,4 +7,5 @@ export { default as LayoutKanbanResponsive } from './_layout_kanban_responsive.j
 export { default as LayoutCollectionDetail } from './_layout_collection_detail.jsx'
 export { default as LayoutContent } from './_layout_content.jsx'
 export { default as LayoutMasonry } from './_layout_masonry.jsx'
+export { default as LayoutBracket } from './_layout_bracket.jsx'
 
