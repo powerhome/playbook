@@ -186,7 +186,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
         <Icon
             cursor="pointer"
             fixedWidth
-            icon="grid-2"
+            icon="arrow-down-left-and-arrow-up-right-to-center"
             {...props}
         />
       </button>

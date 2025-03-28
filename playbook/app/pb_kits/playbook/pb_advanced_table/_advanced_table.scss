@@ -237,7 +237,7 @@
   }
   
   &.advanced-table-fullscreen {
-    background-color: $border_light;
+    background-color: $bg_light;
     box-sizing: border-box;
     height: 100vh;
     left: 0;
@@ -526,7 +526,7 @@
 
     // Fullscreen
     &.advanced-table-fullscreen {
-      background: $border_dark;
+      background: $bg_dark;
     }
 
     .advanced-table-fullscreen-header {
