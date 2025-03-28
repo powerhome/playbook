@@ -205,4 +205,9 @@
       border-top-left-radius: 0;
     }
   }
+
+  .pb_text_input_kit.error + * input,
+  .pb_text_input_kit.error + * select {
+    border-left-color: $red;
+  }
 }
