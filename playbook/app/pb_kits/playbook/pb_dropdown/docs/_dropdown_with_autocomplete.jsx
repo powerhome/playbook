@@ -12,7 +12,7 @@ const DropdownWithAutocomplete = (props) => {
       label: "Jasper Furniss",
       value: "Jasper Furniss",
       territory: "PHL",
-      title: "Senior UX Engineer",
+      title: "Lead UX Engineer",
       id: "jasper-furniss",
       status: "Offline"
     },
@@ -25,18 +25,18 @@ const DropdownWithAutocomplete = (props) => {
       status: "Away"
     },
     {
-      label: "Jason Cypret",
-      value: "Jason Cypret",
+      label: "Carlos Lima",
+      value: "Carlos Lima",
       territory: "PHL",
-      title: "VP of User Experience",
-      id: "jason-cypret",
+      title: "Nitro Developer",
+      id: "carlos-lima",
       status: "Online"
     },
     {
       label: "Courtney Long",
       value: "Courtney Long",
       territory: "PHL",
-      title: "UX Design Mentor",
+      title: "Lead UX Designer",
       id: "courtney-long",
       status: "Online"
     }

@@ -18,18 +18,18 @@ const USERS = [
     territory: "PHL",
   },
   {
-    name: "Jason Cypret",
-    title: "Vice President of User Experience",
+    name: "Carlos Lima",
+    title: "Nitro Developer",
     territory: "PHL",
   },
   {
     name: "Stephen Marshall",
-    title: "Senior User Experience Engineer",
+    title: "Senior Nitro Developer",
     territory: "PHL",
   },
   {
     name: "Jasper Furniss",
-    title: "Senior User Experience Engineer",
+    title: "Lead User Experience Engineer",
     territory: "PHL",
   },
 ];
