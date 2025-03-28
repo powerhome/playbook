@@ -1,7 +1,4 @@
-<%= content_tag(:div,
-      id: object.id,
-      data: object.data,
-      class: object.classname,
+<%= pb_content_tag(:div,
       style: remove_height_properties(combined_html_options[:style]) || "",
       **combined_html_options.except(:style)) do %>
   <div class="tooltip_tooltip" id="<%= object.tooltip_id %>" role="tooltip" style="<%= object.height_and_width_helper %>">
