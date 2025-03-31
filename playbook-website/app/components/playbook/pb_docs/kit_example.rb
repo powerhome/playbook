@@ -61,8 +61,9 @@ module Playbook
       end
 
       def full_screen
-        full_screen_kits = ["drawer_menu"]
-        full_screen_kits.include?(example_key)
+        full_screen_kits = %w[advanced_table]
+        full_screen_kit_docs = %w[drawer_menu]
+        full_screen_kits.include?(kit) || full_screen_kit_docs.include?(example_key)
       end
 
     private
