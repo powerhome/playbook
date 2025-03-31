@@ -4,6 +4,9 @@ import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../uti
 
 import { GlobalProps, globalProps, globalInlineProps } from '../utilities/globalProps'
 
+import { Round, RoundLabel } from "./subcomponents/_round";
+import Game from "./subcomponents/_game";
+
 type LayoutPropTypes = {
   aria?: {[key: string]: string},
   children?: React.ReactChild[] | React.ReactChild,
@@ -18,7 +21,7 @@ type LayoutPropTypes = {
   size?: "xs" | "sm" | "md" | "base" | "lg" | "xl",
   variant?: "light" | "dark" | "gradient",
   transparent?: boolean,
-  layout?: "sidebar" | "collection" | "kanban" | "content" | "masonry",
+  layout?: "sidebar" | "collection" | "kanban" | "content" | "masonry" | "bracket",
 } & GlobalProps
 
 type LayoutSideProps = {
@@ -140,7 +143,7 @@ const Layout = (props: LayoutPropTypes) => {
   const htmlProps = buildHtmlProps(htmlOptions)
 
   const layoutCss =
-    layout == 'collection'
+    (layout == 'collection' || layout == 'bracket')
       ? `pb_layout_kit_${layout}`
       : layout == 'kanban'
         ? `pb_layout_kit_${layout}${responsiveClass}`
@@ -151,11 +154,9 @@ const Layout = (props: LayoutPropTypes) => {
         })
 
   const layoutCollapseCss =
-    layout == 'collection'
+    (layout == 'collection' || layout == 'kanban' || layout == 'bracket')
       ? ''
-      : layout == 'kanban'
-        ? ''
-        : buildCss('layout', position, 'collapse', collapse)
+      : buildCss('layout', position, 'collapse', collapse)
 
   const layoutChildren = React.Children.toArray(children)
 
@@ -175,6 +176,15 @@ const Layout = (props: LayoutPropTypes) => {
     (child: React.ReactElement & {type: {displayName: string}}) => child.type?.displayName !== 'Side'
   )
 
+  const numberOfRounds = Array.isArray(nonSideChildren) ? React.Children.toArray(children).filter(
+    (child) => {
+      return (child as React.ReactElement).type === Layout.Round;
+    }
+  ).length : 0
+  const bracketChildren = nonSideChildren.map(child =>
+    React.isValidElement(child) ? React.cloneElement(child, { numberOfRounds }) : child
+  )
+  
   const filteredProps = {...props}
   delete filteredProps?.position
 
@@ -196,7 +206,7 @@ const Layout = (props: LayoutPropTypes) => {
         style={dynamicInlineProps}
     >
       {subComponentTags('Side')}
-      {nonSideChildren}
+      {layout === 'bracket' ? bracketChildren : nonSideChildren}
     </div>
   )
 }
@@ -206,5 +216,8 @@ Layout.Body = Body
 Layout.Item = Item
 Layout.Header = Header
 Layout.Footer = Footer
+Layout.Round = Round
+Layout.Game = Game
+Layout.RoundLabel = RoundLabel
 
 export default Layout

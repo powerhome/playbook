@@ -82,6 +82,10 @@ test("render all layout variants", () => {
       layout: "masonry",
       expected: "pb_layout_kit_masonry_size_md_left_light",
     },
+    {
+      layout: "bracket",
+      expected: "pb_layout_kit_bracket",
+    },
   ]
 
   testValues.forEach(({ layout, expected }) => {
