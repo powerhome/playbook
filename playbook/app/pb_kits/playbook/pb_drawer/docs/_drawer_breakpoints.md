@@ -1,0 +1,1 @@
+The <strong> breakpoint </strong> prop determines when the Drawer is always visible. Above the specified breakpoint, the Drawer remains open on the page. Below it, only the trigger element is shown, allowing you to toggle the drawer open and closed. Resize your window to see this in action.

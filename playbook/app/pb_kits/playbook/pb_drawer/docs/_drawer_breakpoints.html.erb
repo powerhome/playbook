@@ -32,4 +32,26 @@
     <%= pb_rails("body", props: { padding: "lg" }) do %>
         The <strong> breakpoint </strong> prop determines when the Drawer is always visible. Above the specified breakpoint, the Drawer remains open on the page. Below it, only the trigger element is shown, allowing you to toggle the drawer open and closed. Resize your window to see this in action.
     <% end %>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const body = document.querySelector("body");
+            const drawer = document.querySelector("#drawer-overlay-breakpoint-drawer");
+        
+            function setStylesForFullscreen(isFullscreen) {
+                if (isFullscreen) {
+                    body.style.cssText = "margin-left: 250px !important; margin-right: 0 !important;";
+                    drawer.style.cssText = 'position: fixed !important;';
+                } else {
+                    body.style.cssText = "margin-left: 0 !important; margin-right: 0 !important;";
+                    drawer.style.cssText = 'position: static !important;';
+                }
+            }
+        
+            setStylesForFullscreen(document.fullscreenElement);
+        
+            document.addEventListener('fullscreenchange', function() {
+                setStylesForFullscreen(document.fullscreenElement);
+            });
+        });
+    </script>
 </div>
