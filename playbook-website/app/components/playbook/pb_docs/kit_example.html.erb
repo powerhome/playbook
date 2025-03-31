@@ -23,7 +23,8 @@
         <ul>
           <% if full_screen %>
             <li>
-              <%= pb_rails("button", props: { id: "fullscreen-#{example_key}", icon: "expand", text: "Fullscreen", classname: dark ? "dark" : "", variant: "link", size: "sm" }) %>
+              <%= pb_rails("button", props: { id: "fullscreen-open-#{example_key}", icon: "expand", text: "Fullscreen", classname: "hide_fullscreen#{' dark' if dark}", variant: "link", size: "sm" }) %>
+              <%= pb_rails("button", props: { id: "fullscreen-close-#{example_key}", icon: "arrow-down-left-and-arrow-up-right-to-center", text: "Fullscreen", classname: "hide_not_fullscreen#{' dark' if dark}", variant: "link", size: "sm" }) %>
             </li>
           <% end %>
           <% hide_button = type == "rails" ? 'flex' : 'none' %>
@@ -83,14 +84,17 @@
     })
   }
 
-  var fullscreenButton = document.getElementById('<%= "fullscreen-#{example_key}" %>')
-  if (fullscreenButton) {
-    fullscreenButton.addEventListener('click', function() {
-      if (document.fullscreenElement){
-        document.exitFullscreen()
-      } else {
-        document.getElementById('<%= "pb--doc-#{example_key}" %>').requestFullscreen()
-      }
+  var fullscreenOpenButton = document.getElementById('<%= "fullscreen-open-#{example_key}" %>')
+  if (fullscreenOpenButton) {
+    fullscreenOpenButton.addEventListener('click', function() {
+      document.getElementById('<%= "pb--doc-#{example_key}" %>').requestFullscreen()
+    })
+  }
+
+  var fullscreenCloseButton = document.getElementById('<%= "fullscreen-close-#{example_key}" %>')
+  if (fullscreenCloseButton) {
+    fullscreenCloseButton.addEventListener('click', function() {
+      document.exitFullscreen()
     })
   }
 </script>
