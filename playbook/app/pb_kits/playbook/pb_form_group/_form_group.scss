@@ -224,7 +224,7 @@
     input,
     select {
       border-left: none;
-      padding-left: calc(var(--iti-flag-width), 1px);
+      padding-left: calc(var(--iti-flag-width) + 1px);
     }
   }
 }
