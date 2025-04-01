@@ -218,4 +218,13 @@
       border-left-color: $red;
     }
   }
+
+  .pb_text_input_kit:focus-within + .error,
+  .pb_text_input_kit:focus-within + .pb_select .error {
+    input,
+    select {
+      border-left: none;
+      padding-left: calc(var(--iti-flag-width), 1px);
+    }
+  }
 }
