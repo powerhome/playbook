@@ -6,8 +6,12 @@
   &.table-lg {
     thead, .pb_table_thead {
       tr, .pb_table_tr {
-        th, .pb_table_th {
+        th:not(:has([class*="pb"][class*="kit"])),
+        .pb_table_th:not(:has([class*="pb"][class*="kit"])) {
           @include caption;
+        }
+
+        th, .pb_table_th {
           border-bottom: 1px solid $border_light;
         }
       }
@@ -83,10 +87,10 @@
 
 // flatten out corners for floating headerstyle variant to avoid small triangle of white/empty space
 .header-floating > thead > tr:first-child > th:first-child,
-.header-floating > .pb_table_thead > .pb_table_tr:first-child > .pb_table_th:first-child { 
-  border-top-left-radius: 0 !important; 
-} 
-.header-floating > thead > tr:first-child > th:last-child, 
-.header-floating > .pb_table_thead > .pb_table_tr:first-child > .pb_table_th:last-child { 
-  border-top-right-radius: 0 !important; 
+.header-floating > .pb_table_thead > .pb_table_tr:first-child > .pb_table_th:first-child {
+  border-top-left-radius: 0 !important;
+}
+.header-floating > thead > tr:first-child > th:last-child,
+.header-floating > .pb_table_thead > .pb_table_tr:first-child > .pb_table_th:last-child {
+  border-top-right-radius: 0 !important;
 }
