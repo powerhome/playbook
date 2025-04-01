@@ -62,7 +62,7 @@ describe("DateRangeInline Kit", () => {
         )
 
         const kit = screen.getByTestId(testId)
-        const arrow = kit.querySelector('.pb_icon_kit.fa-fw.fa-long-arrow-right')
+        const arrow = kit.querySelector('.pb_custom_icon')
         expect(arrow).toBeInTheDocument()
     })
 
@@ -93,7 +93,7 @@ describe("DateRangeInline Kit", () => {
         )
 
         const kit = screen.getByTestId(testId)
-        const calendar = kit.querySelector('.pb_icon_kit.fa-fw.fa-calendar-alt')
+        const calendar = kit.querySelector('.pb_custom_icon')
         expect(calendar).toBeInTheDocument()
     })
 

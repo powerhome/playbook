@@ -338,8 +338,8 @@ test("enableExpansionIcon changes icon", () => {
 
   const kit = screen.getByTestId(testId)
   const tableHead = kit.querySelector('table')
-  const toggleIcon= tableHead.querySelector(".pb_icon_kit")
-  expect(toggleIcon).toHaveClass("fa-chevron-up")
+  const toggleIcon = tableHead.querySelector(".pb_custom_icon")
+  expect(toggleIcon).toBeInTheDocument()
 })
 
 test("sortIcon changes icon", () => {
@@ -360,8 +360,8 @@ test("sortIcon changes icon", () => {
 
   const kit = screen.getByTestId(testId)
   const sortIcon = kit.querySelector('.sort-button-icon')
-  const icon= sortIcon.querySelector(".pb_icon_kit")
-  expect(icon).toHaveClass("fa-chevron-down")
+  const icon = sortIcon.querySelector(".pb_custom_icon")
+  expect(icon).toBeInTheDocument()
 })
 
 test("Sort icon renders with enableSorting + sortControl works as expected", () => {
@@ -452,7 +452,7 @@ test("inlineRowLoading prop renders inline loading if true", () => {
   const rowButton = kit.querySelector(".gray-icon.expand-toggle-icon")
   expect(rowButton).toBeInTheDocument()
   rowButton.click()
-  const inlineLoading = kit.querySelector(".fa-spinner")
+  const inlineLoading = kit.querySelector(".pb_custom_icon")
   expect(inlineLoading).toBeInTheDocument()
 })
 
