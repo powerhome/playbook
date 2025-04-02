@@ -100,7 +100,6 @@ export default defineConfig({
       'tokens': resolve(__dirname, 'app/pb_kits/playbook/tokens'),
       'utilities': resolve(__dirname, 'app/pb_kits/playbook/utilities'),
       'playbook-ui': resolve(__dirname, 'app/entrypoints/playbook'),
-      'lodash': 'lodash-es',
     },
   },
 })
