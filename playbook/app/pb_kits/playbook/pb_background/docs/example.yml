@@ -11,6 +11,7 @@ examples:
   - background_size: Size
 
   react:
+  - background_overlay: Overlay
   - background_light: Light
   - background_white: White
   - background_gradient: Gradient

@@ -25,6 +25,7 @@ type BackgroundProps = {
   backgroundPosition?: ResponsiveProp<string> | string,
   backgroundRepeat?: ResponsiveProp<BackgroundRepeat> | BackgroundRepeat,
   imageUrl?: ResponsiveProp<string> | string,
+  imageOverlay?: 'opacity_2' | 'opacity_4' | 'opacity_6' | 'opacity_8',
   children?: React.ReactChild[] | React.ReactNode,
   className?: string,
   customColor?: string,
@@ -86,8 +87,9 @@ const Background = (props: BackgroundProps): React.ReactElement => {
     imageUrl = '',
     tag = 'div',
     transition = '',
+    imageOverlay,
   } = props
-  
+
   const [responsiveProps, setResponsiveProps] = useState({
     backgroundSize: getResponsiveValue(backgroundSize),
     backgroundPosition: getResponsiveValue(backgroundPosition),
@@ -132,7 +134,8 @@ const Background = (props: BackgroundProps): React.ReactElement => {
       [`pb_background_color_${resBackgroundColor}`]: resBackgroundColor && !customColor,
       [`pb_background_custom_color`]: !!customColor,
     },
-    className
+    className,
+    imageOverlay ? "imageoverlay" : ""
   );
 
   const backgroundStyle = {
@@ -155,7 +158,7 @@ const Background = (props: BackgroundProps): React.ReactElement => {
   const ariaProps = buildAriaProps(aria);
   const dataProps = buildDataProps(data);
   const htmlProps = buildHtmlProps(htmlOptions);
-  
+
   return (
     <Tag
         {...ariaProps}
@@ -164,11 +167,12 @@ const Background = (props: BackgroundProps): React.ReactElement => {
         alt={alt}
         className={classes}
         id={id}
+        imageOverlay={imageOverlay}
         style={combinedStyles}
     >
       {children}
     </Tag>
-  
+
   )
 }
 
