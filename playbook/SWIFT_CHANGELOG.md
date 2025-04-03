@@ -3,7 +3,6 @@
 
 <img width="889" alt="staticswifticonsizereleaseimage" src="https://github.com/user-attachments/assets/5f23940f-21c5-4f29-a701-ddff32f1d99b" />
 
-
 The Icon Circle now comes in more sizes! We’ve expanded beyond small, medium, and large to offer the full range of sizes available in Playbook.
 Web, xxs, xs, sm, md, lg, and xl, giving you more options to fit your needs. 
 
