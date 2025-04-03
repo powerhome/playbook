@@ -84,10 +84,10 @@ const Background = (props: BackgroundProps): React.ReactElement => {
     data = {},
     htmlOptions = {},
     id,
+    imageOverlay,
     imageUrl = '',
     tag = 'div',
     transition = '',
-    imageOverlay,
   } = props
 
   const [responsiveProps, setResponsiveProps] = useState({
@@ -134,8 +134,8 @@ const Background = (props: BackgroundProps): React.ReactElement => {
       [`pb_background_color_${resBackgroundColor}`]: resBackgroundColor && !customColor,
       [`pb_background_custom_color`]: !!customColor,
     },
-    className,
-    imageOverlay ? "imageoverlay" : ""
+    imageOverlay ? `imageoverlay_${imageOverlay}` : "",
+    className
   );
 
   const backgroundStyle = {
@@ -167,7 +167,6 @@ const Background = (props: BackgroundProps): React.ReactElement => {
         alt={alt}
         className={classes}
         id={id}
-        imageOverlay={imageOverlay}
         style={combinedStyles}
     >
       {children}

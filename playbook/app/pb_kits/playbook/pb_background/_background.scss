@@ -56,7 +56,7 @@ $background_colors: map-merge($additional_colors, $merge_kits7);
     }
   }
 
-  &.imageoverlay {
+  &[class*=imageoverlay] {
     position: relative;
 
     &:before {
@@ -77,7 +77,7 @@ $background_colors: map-merge($additional_colors, $merge_kits7);
   }
 
   @each $key, $value in $opacity {
-    &.imageoverlay[imageoverlay="#{$key}"]::before {
+    &.imageoverlay_#{$key}::before {
       opacity: $value;
     }
   }
