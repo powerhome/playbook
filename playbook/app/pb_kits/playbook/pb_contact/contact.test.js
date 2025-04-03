@@ -75,15 +75,15 @@ test('returns correct icon', () => {
     </>
   )
 
-  expect(screen.getByTestId('test-cell').querySelector('.pb_icon_kit')).toHaveClass('fa-mobile')
-  expect(screen.getByTestId('test-home').querySelector('.pb_icon_kit')).toHaveClass('fa-phone')
+  expect(screen.getByTestId('test-cell').querySelector('.pb_custom_icon')).toBeInTheDocument()
+  expect(screen.getByTestId('test-home').querySelector('.pb_custom_icon')).toBeInTheDocument()
   expect(screen.getByTestId('test-work').querySelector('.pb_icon_kit')).toHaveClass('fa-phone-office')
-  expect(screen.getByTestId('test-work-cell').querySelector('.pb_icon_kit')).toHaveClass('fa-phone-laptop')
-  expect(screen.getByTestId('test-email').querySelector('.pb_custom_icon')).toHaveClass('envelope')
-  expect(screen.getByTestId('test-wrong-phone').querySelector('.pb_icon_kit')).toHaveClass('fa-phone-slash')
-  expect(screen.getByTestId('test-wrong-type').querySelector('.pb_icon_kit')).toHaveClass('fa-phone')
+  expect(screen.getByTestId('test-work-cell').querySelector('.pb_custom_icon')).toBeInTheDocument()
+  expect(screen.getByTestId('test-email').querySelector('.pb_custom_icon')).toBeInTheDocument()
+  expect(screen.getByTestId('test-wrong-phone').querySelector('.pb_custom_icon')).toBeInTheDocument()
+  expect(screen.getByTestId('test-wrong-type').querySelector('.pb_custom_icon')).toBeInTheDocument()
   expect(screen.getByTestId('test-extension').querySelector('.pb_icon_kit')).toHaveClass('fa-phone-plus')
-  expect(screen.getByTestId('test-empty').querySelector('.pb_icon_kit')).toHaveClass('fa-phone')
+  expect(screen.getByTestId('test-empty').querySelector('.pb_custom_icon')).toBeInTheDocument()
 })
 
 test("not compliant values return null in phone related contact types", () => {

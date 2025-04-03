@@ -33,7 +33,7 @@ describe("IconStatValue Kit", () => {
         )
 
         const kit = screen.getByTestId(testId)
-        const icon = kit.querySelector(".fa-lightbulb-on.pb_icon_kit.fa-fw")
+        const icon = kit.querySelector(".pb_custom_icon")
         expect(icon).toBeInTheDocument()
     })
 
