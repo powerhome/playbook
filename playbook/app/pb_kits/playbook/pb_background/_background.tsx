@@ -25,7 +25,7 @@ type BackgroundProps = {
   backgroundPosition?: ResponsiveProp<string> | string,
   backgroundRepeat?: ResponsiveProp<BackgroundRepeat> | BackgroundRepeat,
   imageUrl?: ResponsiveProp<string> | string,
-  imageOverlay?: 'opacity_2' | 'opacity_4' | 'opacity_6' | 'opacity_8',
+  imageOverlay?: 'opacity_1' | 'opacity_2' | 'opacity_3' | 'opacity_4' | 'opacity_5' | 'opacity_6' | 'opacity_7' | 'opacity_8' | 'opacity_9' | 'opacity_10',
   children?: React.ReactChild[] | React.ReactNode,
   className?: string,
   customColor?: string,
