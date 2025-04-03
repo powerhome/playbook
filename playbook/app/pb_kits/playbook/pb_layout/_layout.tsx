@@ -6,6 +6,7 @@ import { GlobalProps, globalProps, globalInlineProps } from '../utilities/global
 
 import { Round, RoundLabel } from "./subcomponents/_round";
 import Game from "./subcomponents/_game";
+import Participant from "./subcomponents/_participant";
 
 type LayoutPropTypes = {
   aria?: {[key: string]: string},
@@ -219,5 +220,6 @@ Layout.Footer = Footer
 Layout.Round = Round
 Layout.Game = Game
 Layout.RoundLabel = RoundLabel
+Layout.Participant = Participant
 
 export default Layout

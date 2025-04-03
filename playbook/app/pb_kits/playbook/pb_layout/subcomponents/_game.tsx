@@ -44,9 +44,9 @@ const Game = (props: LayoutGameProps) => {
             padding="none"
             shadow="deep"
         >
-          <Card.Body padding="xs">{firstChild}</Card.Body>
+          <Card.Body padding="none">{firstChild}</Card.Body>
           <SectionSeparator />
-          <Card.Body padding="xs">{secondChild}</Card.Body>
+          <Card.Body padding="none">{secondChild}</Card.Body>
         </Card>
         {isOdd && numberOfGames > 1  &&
           <div
