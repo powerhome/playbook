@@ -91,11 +91,11 @@ module Playbook
     # rubocop:disable Layout/CommentIndentation
     # pb_content_tag information (potentially to be abstracted into its own dev doc in the future)
     # The pb_content_tag generates HTML content tags for rails kits with flexible options.
-    # Modify a generated kit.html.erb file accordingly (the default_options listed below no longer need to be explictly outlined in that file, only modifications).
+    # Modify a generated kit.html.erb file accordingly (the kit_base_default_options listed below no longer need to be explictly outlined in that file, only modifications).
     # name - the first argument is for HTML tag. The default is :div.
     # content_or_options_with_block - additional content or options for the tag (i.e., the customizations a dev adds to kit.html.erb).
     # options - Within combined_options, the empty options hash allows for customizations to
-        # merge with the default_options and combined_html_options.
+        # merge with the kit_base_default_options and combined_html_options.
     # escape - set to true, this allows for HTML-escape.
     # block - an optional block for content inside the tag.
     # The return is a HTML tag that includes any provided customizations. If nothing is specified in kit.html.erb, the default shape is:
@@ -111,7 +111,7 @@ module Playbook
     def pb_content_tag(name = :div, content_or_options_with_block = {}, options = {}, escape = true, &block)
       combined_options = options
                          .merge(combined_html_options)
-                         .merge(default_options.merge(content_or_options_with_block))
+                         .merge(kit_base_default_options.merge(content_or_options_with_block))
       content_tag(name, combined_options, options, escape, &block)
     end
     # rubocop:enable Style/OptionalBooleanParameter
@@ -146,7 +146,7 @@ module Playbook
 
   private
 
-    def default_options
+    def kit_base_default_options
       options = {
         id: id,
         data: data,

@@ -1,9 +1,4 @@
-<%= content_tag(:div,
-    aria: object.aria,
-    class: object.classname,
-    data: object.data,
-    id: object.id,
-    **combined_html_options) do %>
+<%= pb_content_tag do %>
   <% if object.avatar_url.present? || object.avatar %>
     <%= pb_rails("avatar", props: {
       name: object.name,

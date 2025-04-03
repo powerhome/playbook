@@ -16,7 +16,7 @@ describe("Icon Kit", () => {
         )
 
         const kit = screen.getByTestId(testId)
-        expect(kit).toHaveClass("fa-user pb_icon_kit fa-fw far")
+        expect(kit).toHaveClass("pb_custom_icon svg-inline--fa svg_fw")
     })
 
     test("renders rotate prop", () => {[
@@ -31,7 +31,7 @@ describe("Icon Kit", () => {
         )
 
         const kit = screen.getByTestId(testId)
-        expect(kit).toHaveClass(`fa-user pb_icon_kit fa-fw fa-rotate-${rotateProp} far`)
+        expect(kit).toHaveClass(`pb_custom_icon svg-inline--fa rotate_${rotateProp} svg_fw`)
 
         cleanup()
     })
@@ -48,7 +48,7 @@ describe("Icon Kit", () => {
         )
 
         const kit = screen.getByTestId(testId)
-        expect(kit).toHaveClass("fa-user pb_icon_kit fa-fw fa-flip-horizontal far")
+        expect(kit).toHaveClass("pb_custom_icon svg-inline--fa flip_horizontal svg_fw")
     })
 
 
@@ -63,7 +63,7 @@ describe("Icon Kit", () => {
         )
 
         const kit = screen.getByTestId(testId)
-        expect(kit).toHaveClass("fa-spinner pb_icon_kit fa-fw fa-spin far")
+        expect(kit).toHaveClass("pb_custom_icon svg-inline--fa spin svg_fw")
     })
 
     test("renders pull icon", () => {
@@ -77,7 +77,7 @@ describe("Icon Kit", () => {
         )
 
         const kit = screen.getByTestId(testId)
-        expect(kit).toHaveClass("fa-arrow-left pb_icon_kit fa-fw fa-pull-left far")
+        expect(kit).toHaveClass("pb_custom_icon svg-inline--fa svg_fw pull_left")
     })
 
     test("renders pull icon", () => {
@@ -91,7 +91,7 @@ describe("Icon Kit", () => {
         )
 
         const kit = screen.getByTestId(testId)
-        expect(kit).toHaveClass("fa-arrow-left pb_icon_kit fa-fw fa-pull-left far")
+        expect(kit).toHaveClass("pb_custom_icon svg-inline--fa svg_fw pull_left")
     })
 
     test("renders border around icon", () => {
@@ -105,7 +105,7 @@ describe("Icon Kit", () => {
         )
 
         const kit = screen.getByTestId(testId)
-        expect(kit).toHaveClass("fa-user pb_icon_kit fa-border fa-fw far")
+        expect(kit).toHaveClass("pb_custom_icon svg-inline--fa svg_border svg_fw")
     })
 
     test("renders size prop", () => {
@@ -132,7 +132,7 @@ describe("Icon Kit", () => {
             )
     
             const kit = screen.getByTestId(testId)
-            expect(kit).toHaveClass(`pb_icon_kit fa-user fa-fw fa-${sizeProp} far`)
+            expect(kit).toHaveClass(`pb_custom_icon svg-inline--fa svg_${sizeProp} svg_fw`)
 
             cleanup()
         }) 
@@ -149,7 +149,7 @@ describe("Icon Kit", () => {
         )
 
         const kit = screen.getByTestId(testId)
-        expect(kit).toHaveClass("fa-user pb_icon_kit fa-fw fas")
+        expect(kit).toHaveClass("pb_custom_icon svg-inline--fa svg_fw")
     })
 
     test("renders with color prop", () => {

@@ -205,4 +205,26 @@
       border-top-left-radius: 0;
     }
   }
+
+  .pb_text_input_kit.error {
+    .text_input_wrapper {
+      input:focus {
+        outline: none;
+      }
+    }
+
+    & + * input,
+    & + * select {
+      border-left-color: $red;
+    }
+  }
+
+  .pb_text_input_kit:not(.error):focus-within + .error,
+  .pb_text_input_kit:not(.error):focus-within + .pb_select .error {
+    input,
+    select {
+      border-left: none;
+      padding-left: calc(var(--iti-flag-width) + 1px);
+    }
+  }
 }

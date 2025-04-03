@@ -73,7 +73,7 @@ test('adds icon', () => {
 
   const kit = screen.getByTestId('icon-test')
 
-  const icon = kit.querySelector('.pb_icon_kit')
+  const icon = kit.querySelector('.pb_custom_icon')
   expect(icon).toBeInTheDocument();
 })
 
@@ -87,7 +87,7 @@ test('adds icon right', () => {
 
   const kit = screen.getByTestId('icon-right-test')
 
-  const icon = kit.querySelector('.pb_icon_kit')
+  const icon = kit.querySelector('.pb_custom_icon')
   expect(icon).toBeInTheDocument();
 })
 
