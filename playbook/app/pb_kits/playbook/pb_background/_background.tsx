@@ -157,7 +157,6 @@ const Background = (props: BackgroundProps): React.ReactElement => {
   const ariaProps = buildAriaProps(aria);
   const dataProps = buildDataProps(data);
   const htmlProps = buildHtmlProps(htmlOptions);
-
   return (
     <Tag
         {...ariaProps}
