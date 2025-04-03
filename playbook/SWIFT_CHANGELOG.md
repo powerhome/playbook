@@ -1,3 +1,36 @@
+# ✨ The Perfect Fit! ✨  
+#### Apr 2, 2025  
+
+<img width="889" alt="staticswifticonsizereleaseimage" src="https://github.com/user-attachments/assets/5f23940f-21c5-4f29-a701-ddff32f1d99b" />
+
+
+The Icon Circle now comes in more sizes! We’ve expanded beyond small, medium, and large to offer the full range of sizes available in Playbook.
+Web, xxs, xs, sm, md, lg, and xl, giving you more options to fit your needs. 
+
+#### Full List of Changes
+
+**Kit Enhancements:**
+- Added Action Variant [PBIOS-696] [#516](https://github.com/powerhome/playbook-swift/pull/516) (RachelRadford21)  
+- Badge Refactor [PBIOS-712] [#521](https://github.com/powerhome/playbook-swift/pull/521) (RachelRadford21)  
+- Icon Circle Audit [PBIOS-684] [#527](https://github.com/powerhome/playbook-swift/pull/527) (isismsilva)  
+- Add Typeahead Deselected Listener [PBIOS-705] [#522](https://github.com/powerhome/playbook-swift/pull/522) (isismsilva)  
+- IconCircle Audit (Additional) [PBIOS-684] [#518](https://github.com/powerhome/playbook-swift/pull/518) (isismsilva)  
+
+**Fixed Bugs:**
+- Typeahead – Cursor not appearing [PBIOS-680] [#522](https://github.com/powerhome/playbook-swift/pull/522) (isismsilva)  
+- Typeahead – Backspace not working on iOS [PBIOS-681] [#522](https://github.com/powerhome/playbook-swift/pull/522) (isismsilva)  
+
+**Platform Updates**
+- Notarize macOS and send it as .zip to Nitro App Portal [RANGR-934] [#517](https://github.com/powerhome/playbook-swift/pull/517) (AlexandreHauber)  
+- Update to new certificate and profile type [RANGR-962] [#519](https://github.com/powerhome/playbook-swift/pull/519) (AlexandreHauber)  
+- Clean Keychain on Failed Jobs [RANGR-966] [#520](https://github.com/powerhome/playbook-swift/pull/520) (AlexandreHauber)  
+- Remove AppCenter and update Runway comment with NitroAppPortal link [RANGR-975] [#523](https://github.com/powerhome/playbook-swift/pull/523) (AlexandreHauber)  
+- Update macOS certificate [RANGR-981] [#524](https://github.com/powerhome/playbook-swift/pull/524) (AlexandreHauber)  
+
+**Full Changelog**: [6.8.0 → 6.9.0](https://github.com/powerhome/playbook-swift/compare/6.8.0...6.9.0)
+
+---
+
 # 🚀 Playbook Swift 6.7.1: Adjustments and Fixes! 🚀
 ##### Feb 14, 2025
 
