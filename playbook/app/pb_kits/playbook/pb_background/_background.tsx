@@ -89,7 +89,6 @@ const Background = (props: BackgroundProps): React.ReactElement => {
     tag = 'div',
     transition = '',
   } = props
-
   const [responsiveProps, setResponsiveProps] = useState({
     backgroundSize: getResponsiveValue(backgroundSize),
     backgroundPosition: getResponsiveValue(backgroundPosition),
@@ -171,7 +170,6 @@ const Background = (props: BackgroundProps): React.ReactElement => {
     >
       {children}
     </Tag>
-
   )
 }
 
