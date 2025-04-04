@@ -89,6 +89,7 @@ const Background = (props: BackgroundProps): React.ReactElement => {
     tag = 'div',
     transition = '',
   } = props
+
   const [responsiveProps, setResponsiveProps] = useState({
     backgroundSize: getResponsiveValue(backgroundSize),
     backgroundPosition: getResponsiveValue(backgroundPosition),
@@ -157,6 +158,7 @@ const Background = (props: BackgroundProps): React.ReactElement => {
   const ariaProps = buildAriaProps(aria);
   const dataProps = buildDataProps(data);
   const htmlProps = buildHtmlProps(htmlOptions);
+
   return (
     <Tag
         {...ariaProps}
