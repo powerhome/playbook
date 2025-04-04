@@ -5,6 +5,8 @@
 
 We have done some spring cleaning and officially kicked Lodash to the curb, and swept out a bunch of bugs along the way! No more Lodash, fewer bugs, and a smoother ride!
 
+[14.17.0](https://github.com/powerhome/playbook/tree/14.17.0) full list of changes:
+
 **Kit Enhancements:**
 
 - Typeahead, Tooltip, User, Userbadge Kits: Convert to Use Content Tag [\#4437](https://github.com/powerhome/playbook/pull/4437) ([markdoeswork](https://github.com/markdoeswork))
