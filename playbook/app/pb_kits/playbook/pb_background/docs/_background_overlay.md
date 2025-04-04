@@ -1,0 +1,1 @@
+An overlay can be added to the background image by setting the `imageOverlay` prop and adding a `backgroundColor`. The `imageOverlay` prop can be set to any opacity ranging from `opacity_1` to `opacity_10`.

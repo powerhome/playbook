@@ -19,3 +19,4 @@ examples:
   - background_status_subtle: Status Subtle
   - background_category: Category
   - background_size: Size
+  - background_overlay: Overlay
