@@ -1,0 +1,1 @@
+Customize your header by removing the header borders with the `header_style: "borderless"` prop.
