@@ -8,11 +8,11 @@ const BackgroundOverlay = (props) => {
   return (
     <Background
         alt="colorful background"
+        backgroundColor="category_21"
         className="background lazyload"
-        imageOverlay="opacity_6"
-        imageUrl="https://images.unsplash.com/photo-1528459801416-a9e53bbf4e17?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=80"
+        imageOverlay="opacity_2"
+        imageUrl="https://unsplash.it/500/400/?image=633"
         {...props}
-        backgroundColor="light"
       >
         <Flex
             orientation="column"
@@ -25,7 +25,6 @@ const BackgroundOverlay = (props) => {
                 padding="lg"
                 size={1}
                 text="Background Kit Image"
-                {...props}
             />
           </FlexItem>
         </Flex>
