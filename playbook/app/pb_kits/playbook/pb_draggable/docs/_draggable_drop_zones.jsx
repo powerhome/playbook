@@ -60,123 +60,120 @@ const DraggableDropZones = (props) => {
 
   return (
     <>
-    <Flex justify="between"
-        {...props}
-    >
-      <FlexItem marginRight="xl">
-        <DraggableProvider
-            dropZone={{type: "shadow"}}
-            initialItems={dataShadow}
-            onReorder={(items) => setInitialShadowState(items)}
-        >
-            <Caption
-                marginBottom="xs"
-                textAlign="center"
-            >
-              {"Shadow"}
-            </Caption>
-            <Draggable.Container
-                htmlOptions={{style:{ width: "200px"}}}
-                {...props}
-            >
-            {initialShadowState.map(({ id, text }) => (
-              <Card dragId={id}
-                  draggableItem
-                  key={id}
+      <Flex justify="between"
+          {...props}
+      >
+        <FlexItem marginRight="xl">
+          <DraggableProvider
+              dropZone={{type: "shadow"}}
+              initialItems={dataShadow}
+              onReorder={(items) => setInitialShadowState(items)}
+          >
+              <Caption
                   marginBottom="xs"
-                  padding="xs"
+                  text="Shadow"
+                  textAlign="center"
+              />
+              <Draggable.Container
+                  htmlOptions={{style:{ width: "200px"}}}
                   {...props}
               >
-                <Flex alignItems="stretch"
-                    flexDirection="column"
+              {initialShadowState.map(({ id, text }) => (
+                <Card dragId={id}
+                    draggableItem
+                    key={id}
+                    marginBottom="xs"
+                    padding="xs"
+                    {...props}
                 >
-                  <Body
-                      text={text}
-                      {...props}
-                  />
-                </Flex>
-              </Card>
-            ))}
-            </Draggable.Container>
-        </DraggableProvider>
-      </FlexItem>
-      <FlexItem marginRight="xl">
-        <DraggableProvider
-            dropZone={{type: "outline"}}
-            initialItems={dataOutline}
-            onReorder={(items) => setInitialOutlineState(items)}
-        >
-            <Caption
-                marginBottom="xs"
-                textAlign="center"
-            >
-              {"Outline"}
-            </Caption>
-            <Draggable.Container
-                htmlOptions={{style:{ width: "200px"}}}
-                {...props}
-            >
-            {initialOutlineState.map(({ id, text }) => (
-              <Card
-                  dragId={id}
-                  draggableItem
-                  key={id}
+                  <Flex alignItems="stretch"
+                      flexDirection="column"
+                  >
+                    <Body
+                        text={text}
+                        {...props}
+                    />
+                  </Flex>
+                </Card>
+              ))}
+              </Draggable.Container>
+          </DraggableProvider>
+        </FlexItem>
+        <FlexItem marginRight="xl">
+          <DraggableProvider
+              dropZone={{type: "outline"}}
+              initialItems={dataOutline}
+              onReorder={(items) => setInitialOutlineState(items)}
+          >
+              <Caption
                   marginBottom="xs"
-                  padding="xs"
+                  text="Outline"
+                  textAlign="center"
+              />
+              <Draggable.Container
+                  htmlOptions={{style:{ width: "200px"}}}
                   {...props}
               >
-                <Flex
-                    alignItems="stretch"
-                    flexDirection="column"
+              {initialOutlineState.map(({ id, text }) => (
+                <Card
+                    dragId={id}
+                    draggableItem
+                    key={id}
+                    marginBottom="xs"
+                    padding="xs"
+                    {...props}
                 >
-                  <Body
-                      text={text}
-                      {...props}
-                  />
-                </Flex>
-              </Card>
-            ))}
-            </Draggable.Container>
-        </DraggableProvider>
-      </FlexItem>
-      <FlexItem>
-        <DraggableProvider
-            dropZone={{type: "line"}}
-            initialItems={dataLine}
-            onReorder={(items) => setInitialLineState(items)}
-        >
-            <Caption
-                marginBottom="xs"
-                textAlign="center"
-            >
-              {"Line"}
-            </Caption>
-            <Draggable.Container
-                htmlOptions={{style:{ width: "200px"}}}
-                {...props}
-            >
-            {initialLineState.map(({ id, text }) => (
-              <Card dragId={id}
-                  draggableItem
-                  key={id}
+                  <Flex
+                      alignItems="stretch"
+                      flexDirection="column"
+                  >
+                    <Body
+                        text={text}
+                        {...props}
+                    />
+                  </Flex>
+                </Card>
+              ))}
+              </Draggable.Container>
+          </DraggableProvider>
+        </FlexItem>
+        <FlexItem>
+          <DraggableProvider
+              dropZone={{type: "line"}}
+              initialItems={dataLine}
+              onReorder={(items) => setInitialLineState(items)}
+          >
+              <Caption
                   marginBottom="xs"
-                  padding="xs"
+                  text="Line"
+                  textAlign="center"
+              />
+              <Draggable.Container
+                  htmlOptions={{style:{ width: "200px"}}}
                   {...props}
               >
-                <Flex alignItems="stretch"
-                    flexDirection="column"
+              {initialLineState.map(({ id, text }) => (
+                <Card dragId={id}
+                    draggableItem
+                    key={id}
+                    marginBottom="xs"
+                    padding="xs"
+                    {...props}
                 >
-                  <Body
-                      text={text}
-                      {...props}
-                  />
-                </Flex>
-              </Card>
-            ))}
-            </Draggable.Container>
-        </DraggableProvider>
-      </FlexItem>
-    </Flex>
+                  <Flex alignItems="stretch"
+                      flexDirection="column"
+                  >
+                    <Body
+                        text={text}
+                        {...props}
+                    />
+                  </Flex>
+                </Card>
+              ))}
+              </Draggable.Container>
+          </DraggableProvider>
+        </FlexItem>
+      </Flex>
     </>
   );
 };

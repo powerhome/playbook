@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 import Flex from '../../pb_flex/_flex'
-import { DraggableProvider } from '../../pb_draggable/context'
+import { DraggableProvider } from '../context'
 import Avatar from '../../pb_avatar/_avatar'
 import Body from '../../pb_body/_body'
 import Table from '../../pb_table/_table'

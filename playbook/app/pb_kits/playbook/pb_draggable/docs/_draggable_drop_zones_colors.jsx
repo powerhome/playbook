@@ -6,6 +6,8 @@ import Caption from '../../pb_caption/_caption'
 import Draggable from '../../pb_draggable/_draggable'
 import { DraggableProvider } from '../../pb_draggable/context'
 
+
+
 // Initial items to be dragged
 const dataPrimary = [
   {
@@ -42,54 +44,54 @@ const DraggableDropZonesColors = (props) => {
 
   return (
     <>
-    <Caption marginBottom="xs">
-      Primary
-    </Caption>
-    <DraggableProvider
-        dropZone={{type: "shadow", color: "primary"}}
-        initialItems={dataPrimary}
-        onReorder={(items) => setInitialPrimaryState(items)}
-    >
-        <Draggable.Container {...props}>
-        <Flex>
-            {initialPrimaryState.map(({ id, url }) => (
-              <Draggable.Item dragId={id}
-                  key={id}
-                  marginRight="sm"
-              >
-                <Image alt={id}
-                    size="md"
-                    url={url}
-                />
-              </Draggable.Item>
-            ))}
-         </Flex>
-        </Draggable.Container>
-    </DraggableProvider>
-    <Caption marginBottom="xs">
-      Purple
-    </Caption>
-    <DraggableProvider
-        dropZone={{type: "outline", color: "purple"}}
-        initialItems={dataPurple}
-        onReorder={(items) => setInitialPurpleState(items)}
-    >
-        <Draggable.Container {...props}>
-        <Flex>
-            {initialPurpleState.map(({ id, url }) => (
-              <Draggable.Item dragId={id}
-                  key={id}
-                  marginRight="sm"
-              >
-                <Image alt={id}
-                    size="md"
-                    url={url}
-                />
-              </Draggable.Item>
-            ))}
-         </Flex>
-        </Draggable.Container>
-    </DraggableProvider>
+      <Caption marginBottom="xs"
+          text="Primary"
+      />
+      <DraggableProvider
+          dropZone={{type: "shadow", color: "primary"}}
+          initialItems={dataPrimary}
+          onReorder={(items) => setInitialPrimaryState(items)}
+      >
+          <Draggable.Container {...props}>
+              <Flex>
+                  {initialPrimaryState.map(({ id, url }) => (
+                    <Draggable.Item dragId={id}
+                        key={id}
+                        marginRight="sm"
+                    >
+                        <Image alt={id}
+                            size="md"
+                            url={url}
+                        />
+                    </Draggable.Item>
+                  ))}
+              </Flex>
+          </Draggable.Container>
+      </DraggableProvider>
+      <Caption marginBottom="xs"
+          text="Purple"
+      />
+      <DraggableProvider
+          dropZone={{type: "outline", color: "purple"}}
+          initialItems={dataPurple}
+          onReorder={(items) => setInitialPurpleState(items)}
+      >
+          <Draggable.Container {...props}>
+              <Flex>
+                  {initialPurpleState.map(({ id, url }) => (
+                    <Draggable.Item dragId={id}
+                        key={id}
+                        marginRight="sm"
+                    >
+                        <Image alt={id}
+                            size="md"
+                            url={url}
+                        />
+                    </Draggable.Item>
+                  ))}
+              </Flex>
+          </Draggable.Container>
+      </DraggableProvider>
     </>
   );
 };
