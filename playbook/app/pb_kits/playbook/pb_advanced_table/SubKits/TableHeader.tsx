@@ -6,16 +6,33 @@ import { GenericObject } from "../../types"
 
 import { buildCss } from "../../utilities/props"
 import { globalProps } from "../../utilities/globalProps"
-
 import Checkbox from "../../pb_checkbox/_checkbox"
 import Dropdown from "../../pb_dropdown/_dropdown"
-import Icon from "../../pb_icon/_icon"
+
 import Caption from "../../pb_caption/_caption"
 import Flex from "../../pb_flex/_flex"
 
 import { TableHeaderCell } from "../Components/TableHeaderCell"
 import { isChrome } from "../Utilities/BrowserCheck"
 import AdvancedTableContext from "../Context/AdvancedTableContext"
+
+// Define types for Dropdown subcomponents
+interface DropdownSubComponents {
+  Trigger: React.FC<{ children: React.ReactNode }>
+  Container: React.FC<{ children: React.ReactNode; maxWidth?: string }>
+  Option: React.FC<{ 
+    children: React.ReactNode
+    key?: string | number
+    onClick?: () => void
+    option?: any
+  }>
+}
+
+// Extend the Dropdown type with subcomponents
+type DropdownWithSubComponents = React.FC<any> & DropdownSubComponents
+
+// Cast the imported Dropdown to include subcomponents
+const TypedDropdown = Dropdown as DropdownWithSubComponents
 
 type TableHeaderProps = {
   children?: React.ReactNode | React.ReactNode[]
@@ -24,7 +41,6 @@ type TableHeaderProps = {
   enableSorting?: boolean
   id?: string
   sortIcon?: string | string[]
-  // dropdownHeader?: boolean // Added missing prop
 }
 
 export const TableHeader = ({
@@ -34,7 +50,6 @@ export const TableHeader = ({
   enableSorting = false,
   id,
   sortIcon = ["arrow-up-short-wide", "arrow-down-short-wide"],
-  // dropdownHeader = false, // Added default value
   ...props
 }: TableHeaderProps) => {
   const {
@@ -55,29 +70,6 @@ export const TableHeader = ({
     className
   )
 
-  const options = [
-    {
-      label: "Year",
-      value: "Year",
-    },
-    {
-      label: "Quarter",
-      value: "Quarter",
-    },
-    {
-      label: "Month",
-      value: "Month",
-    },
-    {
-      label: "Week",
-      value: "Week",
-    },
-    {
-      label: "Day",
-      value: "Day",
-    }
-  ];
-
   const columnPinning = table.getState().columnPinning;
 
   const customCellClassnames = classnames(
@@ -92,7 +84,6 @@ export const TableHeader = ({
         className={classes} 
         id={id}
     >
-      {/* Get the header groups (only one in this example) */}
       {table.getHeaderGroups().map((headerGroup: HeaderGroup<GenericObject>) => (
         <tr key={`${headerGroup.id}-headerGroup`}>
           {!hasAnySubRows && selectableRows && (
@@ -108,12 +99,12 @@ export const TableHeader = ({
             const isPinnedLeft = columnPinning.left.includes(header.id)
             return (
               dropdownHeader && header?.index === 0 ? (
-                <Dropdown
+                <TypedDropdown
                     key={`${header.id}-dropdown`}
                     options={dropdownHeader}
-                    separators={false} // Added the missing separators prop
+                    separators={false}
                 >
-                  <Dropdown.Trigger>
+                  <TypedDropdown.Trigger>
                     <div>
                       <TableHeaderCell
                           enableSorting={enableSorting}
@@ -127,10 +118,10 @@ export const TableHeader = ({
                           table={table}
                       />
                     </div>
-                  </Dropdown.Trigger>
-                  <Dropdown.Container maxWidth="xs">
+                  </TypedDropdown.Trigger>
+                  <TypedDropdown.Container maxWidth="xs">
                     {dropdownHeader.map((option) => (
-                      <Dropdown.Option 
+                      <TypedDropdown.Option 
                           key={option.value} 
                           onClick={option.handleOnClick}
                           option={option}
@@ -138,10 +129,10 @@ export const TableHeader = ({
                         <Flex align="start">
                           <Caption text={option.label} />
                         </Flex>
-                      </Dropdown.Option>
+                      </TypedDropdown.Option>
                     ))}
-                  </Dropdown.Container>
-                </Dropdown>
+                  </TypedDropdown.Container>
+                </TypedDropdown>
               ) : (
                 <TableHeaderCell
                     enableSorting={enableSorting}
