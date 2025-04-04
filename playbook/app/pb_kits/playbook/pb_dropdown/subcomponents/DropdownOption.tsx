@@ -23,7 +23,7 @@ type DropdownOptionProps = {
   htmlOptions?: { [key: string]: string | number | boolean | (() => void) };
   id?: string;
   key?: string;
-  onClick?: () => void;
+  onClick?: (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
   option?: GenericObject;
   padding?: string;
 }  & GlobalProps;

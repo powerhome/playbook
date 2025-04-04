@@ -111,6 +111,7 @@ export const TableHeader = ({
                 <Dropdown
                     key={`${header.id}-dropdown`}
                     options={dropdownHeader}
+                    separators={false} // Added the missing separators prop
                 >
                   <Dropdown.Trigger>
                     <div>
