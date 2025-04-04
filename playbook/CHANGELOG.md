@@ -1,6 +1,8 @@
 # 📞 Lodash has left the chat
 ##### April 03, 2025
 
+![bye](https://github.com/user-attachments/assets/a4000f44-5f60-458c-b0ed-c0eb750e65d6)
+
 We have done some spring cleaning and officially kicked Lodash to the curb, and swept out a bunch of bugs along the way! No more Lodash, fewer bugs, and a smoother ride!
 
 **Kit Enhancements:**
