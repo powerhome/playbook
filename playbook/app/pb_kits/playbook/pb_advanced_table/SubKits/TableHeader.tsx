@@ -24,6 +24,7 @@ type TableHeaderProps = {
   enableSorting?: boolean
   id?: string
   sortIcon?: string | string[]
+  // dropdownHeader?: boolean // Added missing prop
 }
 
 export const TableHeader = ({
@@ -33,6 +34,7 @@ export const TableHeader = ({
   enableSorting = false,
   id,
   sortIcon = ["arrow-up-short-wide", "arrow-down-short-wide"],
+  // dropdownHeader = false, // Added default value
   ...props
 }: TableHeaderProps) => {
   const {
@@ -52,6 +54,29 @@ export const TableHeader = ({
     globalProps(props),
     className
   )
+
+  const options = [
+    {
+      label: "Year",
+      value: "Year",
+    },
+    {
+      label: "Quarter",
+      value: "Quarter",
+    },
+    {
+      label: "Month",
+      value: "Month",
+    },
+    {
+      label: "Week",
+      value: "Week",
+    },
+    {
+      label: "Day",
+      value: "Day",
+    }
+  ];
 
   const columnPinning = table.getState().columnPinning;
 

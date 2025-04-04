@@ -248,88 +248,75 @@ const AdvancedTable = (props: AdvancedTableProps) => {
   const isActionBarVisible = selectableRows && showActionsBar && selectedRowsLength > 0;
 
   return (
-    <>
-      {/* Top Pagination */}
-      {pagination && (
-        <TablePagination
-            onChange={onPageChange}
-            position="top"
-            range={paginationProps?.range}
-            table={table}
-        />
-      )}
-
-      <div
-          {...ariaProps}
-          {...dataProps}
-          {...htmlProps}
-          className={classes}
-          id={id}
-          onScroll={virtualizedRows ? e => fetchMoreOnBottomReached(
-            e.currentTarget,
-            fetchNextPage,
-            isFetching,
-            totalFetched,
-            fullData.length
-          ) : undefined}
-          ref={tableWrapperRef}
-          style={tableWrapperStyle as React.CSSProperties}
+    <div
+        {...ariaProps}
+        {...dataProps}
+        {...htmlProps}
+        className={classes}
+        id={id}
+        onScroll={virtualizedRows ? e => fetchMoreOnBottomReached(
+          e.currentTarget,
+          fetchNextPage,
+          isFetching,
+          totalFetched,
+          fullData.length
+        ) : undefined}
+        ref={tableWrapperRef}
+        style={tableWrapperStyle as React.CSSProperties}
+    >
+      <AdvancedTableProvider
+          columnDefinitions={columnDefinitions}
+          dropdownHeader={dropdownHeader}
+          enableToggleExpansion={enableToggleExpansion}
+          enableVirtualization={virtualizedRows}
+          expanded={expanded}
+          expandedControl={expandedControl}
+          handleExpandOrCollapse={handleExpandOrCollapse}
+          hasAnySubRows={hasAnySubRows}
+          inlineRowLoading={inlineRowLoading}
+          isActionBarVisible={isActionBarVisible}
+          loading={loading}
+          responsive={responsive}
+          selectableRows={selectableRows}
+          setExpanded={setExpanded}
+          showActionsBar={showActionsBar}
+          sortControl={sortControl}
+          subRowHeaders={tableOptions?.subRowHeaders}
+          table={table}
+          tableContainerRef={tableWrapperRef}
+          toggleExpansionIcon={toggleExpansionIcon}
+          virtualizedRows={virtualizedRows}
       >
         {renderFullscreenHeader()}
-        <AdvancedTableProvider
-            columnDefinitions={columnDefinitions}
-            dropdownHeader={dropdownHeader}
-            enableToggleExpansion={enableToggleExpansion}
-            enableVirtualization={virtualizedRows}
-            expanded={expanded}
-            expandedControl={expandedControl}
-            handleExpandOrCollapse={handleExpandOrCollapse}
-            hasAnySubRows={hasAnySubRows}
-            inlineRowLoading={inlineRowLoading}
-            isActionBarVisible={isActionBarVisible}
-            isFullscreen={isFullscreen}
-            loading={loading}
-            responsive={responsive}
-            selectableRows={selectableRows}
-            setExpanded={setExpanded}
-            showActionsBar={showActionsBar}
-            sortControl={sortControl}
-            subRowHeaders={tableOptions?.subRowHeaders}
-            table={table}
-            tableContainerRef={tableWrapperRef}
-            toggleExpansionIcon={toggleExpansionIcon}
-            virtualizedRows={virtualizedRows}
-        >
-          <React.Fragment>
-            {/* Selection Action Bar */}
-            <TableActionBar
-                actions={actions}
-                isVisible={isActionBarVisible}
-                selectedCount={selectedRowsLength}
-            />
+        <React.Fragment>
+          {/* Selection Action Bar */}
+          <TableActionBar
+              actions={actions}
+              isVisible={isActionBarVisible}
+              selectedCount={selectedRowsLength}
+          />
 
-            {/* Main Table */}
-            <Table
-                className={`${loading ? "content-loading" : ""}`}
-                dark={dark}
-                dataTable
-                numberSpacing="tabular"
-                responsive="none"
-                {...tableProps}
-            >
-              {children ? (
-                children
-              ) : (
-                <>
-                  <TableHeader />
-                  <TableBody />
-                </>
-              )}
-            </Table>
-          </React.Fragment>
-        </AdvancedTableProvider>
-     
-      </div>
+          {/* Main Table */}
+          <Table
+              className={`${loading ? "content-loading" : ""}`}
+              dark={dark}
+              dataTable
+              numberSpacing="tabular"
+              responsive="none"
+              {...tableProps}
+          >
+            {children ? (
+              children
+            ) : (
+              <>
+                <TableHeader />
+                <TableBody />
+              </>
+            )}
+          </Table>
+        </React.Fragment>
+      </AdvancedTableProvider>
+      
       {/* Bottom Pagination */}
       {pagination && (
         <TablePagination
@@ -339,10 +326,9 @@ const AdvancedTable = (props: AdvancedTableProps) => {
             table={table}
         />
       )}
-    </>
+    </div>
   );
 };
-
 // Re-export sub-components
 AdvancedTable.Header = TableHeader;
 AdvancedTable.Body = TableBody;
