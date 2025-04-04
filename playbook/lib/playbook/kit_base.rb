@@ -122,9 +122,7 @@ module Playbook
       html_options.each do |key, value|
         if key == :style && value.is_a?(Hash)
           # Convert style hash to CSS string
-          # rubocop:disable Performance/StringReplacement
-          merged[:style] = value.map { |k, v| "#{k.to_s.gsub('_', '-')}: #{v}" }.join("; ")
-          # rubocop:enable Performance/StringReplacement
+          # merged[:style] = value.map { |k, v| "#{k.to_s.gsub('_', '-')}: #{v}" }.join("; ")
         else
           merged[key] = value
         end
@@ -174,10 +172,8 @@ module Playbook
     end
 
     def dynamic_inline_props
-      # rubocop:disable Performance/StringReplacement
-      styles = global_inline_props.map { |key, value| "#{key.to_s.gsub('_', '-')}: #{value}" if inline_validator(key, value) }.compact
-      styles.join("; ").presence
-      # rubocop:enable Performance/StringReplacement
+      # styles = global_inline_props.map { |key, value| "#{key.to_s.gsub('_', '-')}: #{value}" if inline_validator(key, value) }.compact
+      # styles.join("; ").presence
     end
 
     def inline_validator(key, value)
