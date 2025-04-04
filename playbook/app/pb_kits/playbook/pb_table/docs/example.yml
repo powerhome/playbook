@@ -37,6 +37,8 @@ examples:
     - table_with_collapsible_with_nested_table_rails: Table with Collapsible with Nested Table
     - table_with_clickable_rows: Table with Clickable Rows
     - table_with_selectable_rows: Table with Selectable Rows
+    - table_with_header_style_borderless: Header Style Borderless
+    - table_with_header_style_floating: Header Style Floating
 
   react:
     - table_sm: Small

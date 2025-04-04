@@ -1,0 +1,36 @@
+<%= pb_rails("card", props: { background: "light" })  do %>
+    <%= pb_rails("table", props: { size: "sm", header_style: "floating" }) do %>
+        <%= pb_rails("table/table_head") do %>
+            <%= pb_rails("background", props: { background_color: "light", tag: "tr" }) do %>
+                <%= pb_rails("table/table_header", props: { text: "Column 1"}) %>
+                <%= pb_rails("table/table_header", props: { text: "Column 2"}) %>
+                <%= pb_rails("table/table_header", props: { text: "Column 3"}) %>
+                <%= pb_rails("table/table_header", props: { text: "Column 4"}) %>
+                <%= pb_rails("table/table_header", props: { text: "Column 5"}) %>       
+            <% end %>
+        <% end %>
+        <%= pb_rails("table/table_body") do %>
+            <%= pb_rails("table/table_row") do %>
+                <%= pb_rails("table/table_cell", props: { text: "Value 1"}) %>
+                <%= pb_rails("table/table_cell", props: { text: "Value 2"}) %>
+                <%= pb_rails("table/table_cell", props: { text: "Value 3"}) %>
+                <%= pb_rails("table/table_cell", props: { text: "Value 4"}) %>
+                <%= pb_rails("table/table_cell", props: { text: "Value 5"}) %>
+            <% end %>
+            <%= pb_rails("table/table_row") do %>
+                <%= pb_rails("table/table_cell", props: { text: "Value 1"}) %>
+                <%= pb_rails("table/table_cell", props: { text: "Value 2"}) %>
+                <%= pb_rails("table/table_cell", props: { text: "Value 3"}) %>
+                <%= pb_rails("table/table_cell", props: { text: "Value 4"}) %>
+                <%= pb_rails("table/table_cell", props: { text: "Value 5"}) %>
+            <% end %>
+            <%= pb_rails("table/table_row") do %>
+                <%= pb_rails("table/table_cell", props: { text: "Value 1"}) %>
+                <%= pb_rails("table/table_cell", props: { text: "Value 2"}) %>
+                <%= pb_rails("table/table_cell", props: { text: "Value 3"}) %>
+                <%= pb_rails("table/table_cell", props: { text: "Value 4"}) %>
+                <%= pb_rails("table/table_cell", props: { text: "Value 5"}) %>
+            <% end %>
+        <% end %>
+    <% end %>
+<% end %>
