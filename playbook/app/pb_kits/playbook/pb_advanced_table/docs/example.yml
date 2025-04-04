@@ -14,6 +14,7 @@ examples:
 
 
   react:
+  - advanced_table_dropdown_header: Dropdown Header
   - advanced_table_default: Default (Required Props)
   - advanced_table_loading: Loading State
   - advanced_table_sort: Enable Sorting

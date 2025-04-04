@@ -27,6 +27,7 @@ type AdvancedTableProps = {
   columnDefinitions: GenericObject[]
   dark?: boolean
   data?: { [key: string]: string }
+  dropdownHeader?: GenericObject[],
   enableToggleExpansion?: "all" | "header" | "none"
   expandedControl?: GenericObject
   htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
@@ -60,6 +61,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
     columnDefinitions,
     dark = false,
     data = {},
+    dropdownHeader,
     enableToggleExpansion = "header",
     expandedControl,
     htmlOptions = {},
@@ -98,7 +100,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
     updateLoadingStateRowCount,
     fullData,
     totalFetched,
-    isFetching
+    isFetching,
   } = useTableState({
     tableData,
     columnDefinitions,
@@ -185,6 +187,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
     >
       <AdvancedTableProvider
           columnDefinitions={columnDefinitions}
+          dropdownHeader={dropdownHeader}
           enableToggleExpansion={enableToggleExpansion}
           enableVirtualization={virtualizedRows}
           expanded={expanded}

@@ -190,6 +190,6 @@ export function useTableState({
     rowSelection,
     fullData,
     totalFetched,
-    isFetching
+    isFetching,    
   };
 }

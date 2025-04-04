@@ -23,6 +23,7 @@ type DropdownOptionProps = {
   htmlOptions?: { [key: string]: string | number | boolean | (() => void) };
   id?: string;
   key?: string;
+  onClick?: () => void;
   option?: GenericObject;
   padding?: string;
 }  & GlobalProps;
@@ -37,6 +38,7 @@ const DropdownOption = (props: DropdownOptionProps) => {
     htmlOptions = {},
     id,
     key,
+    onClick,
     option,
   } = props;
 
@@ -87,7 +89,10 @@ const DropdownOption = (props: DropdownOptionProps) => {
         className={classes}
         id={id}
         key={key}
-        onClick= {() => handleOptionClick(option)}
+        onClick={(e) => {
+          handleOptionClick(option);
+          onClick?.(e);
+      }}
     >
       <ListItem
           cursor="pointer"
