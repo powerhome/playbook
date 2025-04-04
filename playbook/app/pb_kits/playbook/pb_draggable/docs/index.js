@@ -6,3 +6,4 @@ export { default as DraggableMultipleContainers } from './_draggable_multiple_co
 export { default as DraggableWithTableReact } from './_draggable_with_table_react.jsx'
 export { default as DraggableDropZones } from './_draggable_drop_zones.jsx'
 export { default as DraggableDropZonesColors } from './_draggable_drop_zones_colors.jsx'
+export { default as DraggableDropZonesLine } from './_draggable_drop_zones_line.jsx'
