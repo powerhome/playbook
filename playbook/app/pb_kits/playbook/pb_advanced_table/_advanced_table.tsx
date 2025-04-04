@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState, useCallback } from "react";
 import classnames from "classnames";
 
 import { GenericObject } from "../types";
@@ -18,6 +18,15 @@ import TableActionBar from "./Components/TableActionBar";
 
 import { useTableState } from "./Hooks/useTableState";
 import { useTableActions } from "./Hooks/useTableActions";
+
+import Card from "../pb_card/_card"
+import Flex from "../pb_flex/_flex"
+import Icon from "../pb_icon/_icon"
+
+type FullscreenControls = {
+  toggleFullscreen: () => void;
+  isFullscreen: boolean;
+};
 
 type AdvancedTableProps = {
   aria?: { [key: string]: string }
@@ -50,6 +59,8 @@ type AdvancedTableProps = {
   toggleExpansionIcon?: string | string[]
   onRowSelectionChange?: (arg: RowSelectionState) => void
   virtualizedRows?: boolean
+  allowFullScreen?: boolean
+  fullScreenControl?: (controls: FullscreenControls) => void
 } & GlobalProps;
 
 const AdvancedTable = (props: AdvancedTableProps) => {
@@ -84,6 +95,8 @@ const AdvancedTable = (props: AdvancedTableProps) => {
     toggleExpansionIcon = "arrows-from-line",
     onRowSelectionChange,
     virtualizedRows = false,
+    allowFullScreen = false,
+    fullScreenControl,
   } = props;
 
   // Component refs
@@ -148,6 +161,68 @@ const AdvancedTable = (props: AdvancedTableProps) => {
     );
   }, [fetchMoreOnBottomReached, fetchNextPage, isFetching, totalFetched, fullData.length]);
 
+  // Fullscreen
+  const [isFullscreen, setIsFullscreen] = useState(false)
+
+  const toggleFullscreen = useCallback(() => {
+    setIsFullscreen(prevState => !prevState)
+  }, [])
+
+  useEffect(() => {
+    if (allowFullScreen && fullScreenControl) {
+      fullScreenControl({
+        toggleFullscreen,
+        isFullscreen
+      })
+    }
+  }, [allowFullScreen, fullScreenControl, toggleFullscreen, isFullscreen])
+
+  const renderFullscreenHeader = () => {
+    if (!isFullscreen) return null
+
+    const defaultMinimizeIcon = (
+      <button
+          className="gray-icon fullscreen-icon"
+          onClick={toggleFullscreen}
+      >
+        <Icon
+            cursor="pointer"
+            fixedWidth
+            icon="arrow-down-left-and-arrow-up-right-to-center"
+            {...props}
+        />
+      </button>
+    )
+
+    return (
+      <Card 
+          borderNone
+          borderRadius="none"
+          className="advanced-table-fullscreen-header" 
+          {...props}
+      >
+          <Flex justify="end">
+            {defaultMinimizeIcon}
+          </Flex>
+      </Card>
+    )
+  }
+
+  useEffect(() => {
+    if (!allowFullScreen) return
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape' && isFullscreen) {
+        event.preventDefault()
+        toggleFullscreen()
+      }
+    }
+    document.addEventListener('keydown', handleKeyDown)
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown)
+    }
+  }, [allowFullScreen, toggleFullscreen, isFullscreen])
+
   // Build CSS classes and props
   const ariaProps = buildAriaProps(aria);
   const dataProps = buildDataProps(data);
@@ -156,6 +231,10 @@ const AdvancedTable = (props: AdvancedTableProps) => {
     buildCss("pb_advanced_table"),
     `advanced-table-responsive-${responsive}`,
     maxHeight ? `advanced-table-max-height-${maxHeight}` : '',
+    {
+      'advanced-table-fullscreen': isFullscreen,
+      'advanced-table-allow-fullscreen': allowFullScreen
+    },
     globalProps(props),
     className
   );
@@ -169,94 +248,98 @@ const AdvancedTable = (props: AdvancedTableProps) => {
   const isActionBarVisible = selectableRows && showActionsBar && selectedRowsLength > 0;
 
   return (
-    <div
-        {...ariaProps}
-        {...dataProps}
-        {...htmlProps}
-        className={classes}
-        id={id}
-        onScroll={virtualizedRows ? e => fetchMoreOnBottomReached(
-          e.currentTarget,
-          fetchNextPage,
-          isFetching,
-          totalFetched,
-          fullData.length
-        ) : undefined}
-        ref={tableWrapperRef}
-        style={tableWrapperStyle as React.CSSProperties}
-    >
-      <AdvancedTableProvider
-          columnDefinitions={columnDefinitions}
-          dropdownHeader={dropdownHeader}
-          enableToggleExpansion={enableToggleExpansion}
-          enableVirtualization={virtualizedRows}
-          expanded={expanded}
-          expandedControl={expandedControl}
-          handleExpandOrCollapse={handleExpandOrCollapse}
-          hasAnySubRows={hasAnySubRows}
-          inlineRowLoading={inlineRowLoading}
-          isActionBarVisible={isActionBarVisible}
-          loading={loading}
-          responsive={responsive}
-          selectableRows={selectableRows}
-          setExpanded={setExpanded}
-          showActionsBar={showActionsBar}
-          sortControl={sortControl}
-          subRowHeaders={tableOptions?.subRowHeaders}
-          table={table}
-          tableContainerRef={tableWrapperRef}
-          toggleExpansionIcon={toggleExpansionIcon}
-          virtualizedRows={virtualizedRows}
+    <>
+      {/* Top Pagination */}
+      {pagination && (
+        <TablePagination
+            onChange={onPageChange}
+            position="top"
+            range={paginationProps?.range}
+            table={table}
+        />
+      )}
+
+      <div
+          {...ariaProps}
+          {...dataProps}
+          {...htmlProps}
+          className={classes}
+          id={id}
+          onScroll={virtualizedRows ? e => fetchMoreOnBottomReached(
+            e.currentTarget,
+            fetchNextPage,
+            isFetching,
+            totalFetched,
+            fullData.length
+          ) : undefined}
+          ref={tableWrapperRef}
+          style={tableWrapperStyle as React.CSSProperties}
       >
-        <React.Fragment>
-          {/* Top Pagination */}
-          {pagination && (
-            <TablePagination
-                onChange={onPageChange}
-                position="top"
-                range={paginationProps?.range}
-                table={table}
+        {renderFullscreenHeader()}
+        <AdvancedTableProvider
+            columnDefinitions={columnDefinitions}
+            dropdownHeader={dropdownHeader}
+            enableToggleExpansion={enableToggleExpansion}
+            enableVirtualization={virtualizedRows}
+            expanded={expanded}
+            expandedControl={expandedControl}
+            handleExpandOrCollapse={handleExpandOrCollapse}
+            hasAnySubRows={hasAnySubRows}
+            inlineRowLoading={inlineRowLoading}
+            isActionBarVisible={isActionBarVisible}
+            isFullscreen={isFullscreen}
+            loading={loading}
+            responsive={responsive}
+            selectableRows={selectableRows}
+            setExpanded={setExpanded}
+            showActionsBar={showActionsBar}
+            sortControl={sortControl}
+            subRowHeaders={tableOptions?.subRowHeaders}
+            table={table}
+            tableContainerRef={tableWrapperRef}
+            toggleExpansionIcon={toggleExpansionIcon}
+            virtualizedRows={virtualizedRows}
+        >
+          <React.Fragment>
+            {/* Selection Action Bar */}
+            <TableActionBar
+                actions={actions}
+                isVisible={isActionBarVisible}
+                selectedCount={selectedRowsLength}
             />
-          )}
 
-          {/* Selection Action Bar */}
-          <TableActionBar
-              actions={actions}
-              isVisible={isActionBarVisible}
-              selectedCount={selectedRowsLength}
-          />
-
-          {/* Main Table */}
-          <Table
-              className={`${loading ? "content-loading" : ""}`}
-              dark={dark}
-              dataTable
-              numberSpacing="tabular"
-              responsive="none"
-              {...tableProps}
-          >
-            {children ? (
-              children
-            ) : (
-              <>
-                <TableHeader />
-                <TableBody />
-              </>
-            )}
-          </Table>
-
-          {/* Bottom Pagination */}
-          {pagination && (
-            <TablePagination
-                onChange={onPageChange}
-                position="bottom"
-                range={paginationProps?.range}
-                table={table}
-            />
-          )}
-        </React.Fragment>
-      </AdvancedTableProvider>
-    </div>
+            {/* Main Table */}
+            <Table
+                className={`${loading ? "content-loading" : ""}`}
+                dark={dark}
+                dataTable
+                numberSpacing="tabular"
+                responsive="none"
+                {...tableProps}
+            >
+              {children ? (
+                children
+              ) : (
+                <>
+                  <TableHeader />
+                  <TableBody />
+                </>
+              )}
+            </Table>
+          </React.Fragment>
+        </AdvancedTableProvider>
+     
+      </div>
+      {/* Bottom Pagination */}
+      {pagination && (
+        <TablePagination
+            onChange={onPageChange}
+            position="bottom"
+            range={paginationProps?.range}
+            table={table}
+        />
+      )}
+    </>
   );
 };
 

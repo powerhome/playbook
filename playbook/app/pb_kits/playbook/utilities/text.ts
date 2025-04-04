@@ -1,4 +1,4 @@
-import { filter } from 'lodash'
+import { filter } from './object'
 
 const isEmpty = (value: string | unknown): boolean => !value || value == ''
 

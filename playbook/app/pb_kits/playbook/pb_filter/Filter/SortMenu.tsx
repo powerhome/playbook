@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { find, map, partial } from 'lodash'
+import { find, partial, map } from  '../../utilities/object'
 
 import Button from '../../pb_button/_button'
 import Icon from '../../pb_icon/_icon'
@@ -26,7 +26,7 @@ const directionIcon = (dir: Direction) => (
 
 const renderOptions = (options: SortOptions, value: SortValue[], handleChange: (arg0: SortValue) => void) => (
   map(options, (label, name) => {
-    const next = nextValue(value, name)
+    const next = nextValue(value, String(name))
     return (
       <ListItem key={`option-${next.name}-${next.dir}`}>
         <Button

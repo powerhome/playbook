@@ -10,6 +10,8 @@ type DraggableProps = {
   className?: string;
   children?: React.ReactNode;
   data?: { [key: string]: string };
+  dropZone?: 'ghost' | 'outline' | 'shadow' | 'line';
+  dropZoneColor?: 'primary' | 'neutral' | 'purple';
   htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string;
 };
@@ -24,7 +26,6 @@ const Draggable = (props: DraggableProps) => {
     id,
   } = props;
 
-
   const ariaProps = buildAriaProps(aria);
   const dataProps = buildDataProps(data);
   const htmlProps = buildHtmlProps(htmlOptions);
@@ -36,10 +37,11 @@ const Draggable = (props: DraggableProps) => {
   );
 
   return (
-    <div {...ariaProps} 
-        {...dataProps} 
+    <div
+        {...ariaProps}
+        {...dataProps}
         {...htmlProps}
-        className={classes} 
+        className={classes}
         id={id}
     >
       {children}

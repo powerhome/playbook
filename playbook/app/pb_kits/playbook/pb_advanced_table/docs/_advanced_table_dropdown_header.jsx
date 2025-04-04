@@ -53,8 +53,15 @@ const AdvancedTableDropdownHeader = (props) => {
     {
       label: "Month",
       value: "Month",
-      onClick: () => {
+      handleOnClick: () => {
         console.log("Month clicked")
+      },
+    },
+    {
+      label: "Week",
+      value: "Week",
+      handleOnClick: () => {
+        console.log("Week clicked")
       }
     },
   ]

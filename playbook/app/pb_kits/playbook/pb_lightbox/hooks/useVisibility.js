@@ -1,4 +1,4 @@
-import { debounce } from 'lodash'
+import { debounce } from "../../utilities/object" 
 import { useCallback, useMemo, useState } from 'react'
 
 export default function useVisibility(initialState = false) {

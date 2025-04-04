@@ -88,6 +88,10 @@ class PagesController < ApplicationController
 
   def changelog; end
 
+  def drawer_page
+    render "pages/drawer_page", layout: "layouts/fullscreen"
+  end
+
   def icons
     @data = Playbook::Engine.root.join("../playbook-website/app/views/guides/getting_started/icons.md").read
     @page_title = "Icon Integration"
@@ -125,6 +129,8 @@ class PagesController < ApplicationController
     @type = params[:type]
     @users = Array.new(9) { Faker::Name.name }.paginate(page: params[:page], per_page: 2)
     @table_data = advanced_table_mock_data
+    @table_data_with_id = advanced_table_mock_data_with_id
+    @table_data_no_subrows = advanced_table_mock_data_no_subrows
   end
 
   def kit_category_show_rails
@@ -132,6 +138,8 @@ class PagesController < ApplicationController
     @type = params[:type]
     @users = Array.new(9) { Faker::Name.name }.paginate(page: params[:page], per_page: 2)
     @table_data = advanced_table_mock_data
+    @table_data_with_id = advanced_table_mock_data_with_id
+    @table_data_no_subrows = advanced_table_mock_data_no_subrows
     render template: "pages/kit_category_show"
   end
 
@@ -143,6 +151,8 @@ class PagesController < ApplicationController
     @type = "rails"
     @users = Array.new(9) { Faker::Name.name }.paginate(page: params[:page], per_page: 2)
     @table_data = advanced_table_mock_data if @kit == "advanced_table"
+    @table_data_with_id = advanced_table_mock_data_with_id if @kit == "advanced_table"
+    @table_data_no_subrows = advanced_table_mock_data_no_subrows if @kit == "advanced_table"
     render "pages/kit_show"
   end
 
@@ -505,6 +515,16 @@ private
   def advanced_table_mock_data
     advanced_table_mock_data = File.read(Rails.root.join("app/components/playbook/pb_docs/advanced_table_mock_data.json"))
     JSON.parse(advanced_table_mock_data, object_class: OpenStruct)
+  end
+
+  def advanced_table_mock_data_with_id
+    advanced_table_mock_data_with_id = File.read(Rails.root.join("app/components/playbook/pb_docs/advanced_table_mock_data_with_id.json"))
+    JSON.parse(advanced_table_mock_data_with_id, object_class: OpenStruct)
+  end
+
+  def advanced_table_mock_data_no_subrows
+    advanced_table_mock_data_no_subrows = File.read(Rails.root.join("app/components/playbook/pb_docs/advanced_table_mock_data_no_subrows.json"))
+    JSON.parse(advanced_table_mock_data_no_subrows, object_class: OpenStruct)
   end
 
   def page_not_found

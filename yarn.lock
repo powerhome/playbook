@@ -3352,15 +3352,15 @@
   resolved "https://npm.powerapp.cloud/@powerhome/eslint-config/-/eslint-config-0.1.0.tgz#f1e1151481f51421186ba8caad99fadb24b1fe51"
   integrity sha512-8e5DRgnKPbJ+ofAtqjUPZTxcgHg/TVf52WeNqAGBUXSS4QWHemL6fj1n/YHfAIvx3aMUhFwrw2lUNofUocgK3A==
 
-"@powerhome/playbook-icons-react@0.0.1-alpha.36":
-  version "0.0.1-alpha.36"
-  resolved "https://npm.powerapp.cloud/@powerhome/playbook-icons-react/-/a61d892fea391c7c0fb49e865d5a71701b88f10c#a61d892fea391c7c0fb49e865d5a71701b88f10c"
-  integrity sha512-iYgFebBOXr+Kiu7ZlWNbQJL0v3KbDP69rFBhHoooXQFszt1ygb8sfqoTp4UMrP75TkvgeeEsF4JJwMGu005PaQ==
+"@powerhome/playbook-icons-react@0.0.1-alpha.38":
+  version "0.0.1-alpha.38"
+  resolved "https://npm.powerapp.cloud/@powerhome/playbook-icons-react/-/110cb9030470881c89104c2e287554174bea2503#110cb9030470881c89104c2e287554174bea2503"
+  integrity sha512-GN8udtDBiwoV1lvwByqGL8/z0AJZSTtWYtO63OxKTp+p/TxxFzhb2dq6tXIJ9vYbzKdcQ6FfKr3Row7y5TXYGQ==
 
-"@powerhome/playbook-icons@0.0.1-alpha.36":
-  version "0.0.1-alpha.36"
-  resolved "https://npm.powerapp.cloud/@powerhome/playbook-icons/-/b30f922bb0a2187e6771a1c49f1a574f6f6c516e#b30f922bb0a2187e6771a1c49f1a574f6f6c516e"
-  integrity sha512-sX1le9wO7lzMKVq89Ka5XJLlPbAxIs5aarFxoyYrudsWBhJ75UU89BdV28l0RyUpZ1k8yxhN6E13D2LD8cGNLQ==
+"@powerhome/playbook-icons@0.0.1-alpha.38":
+  version "0.0.1-alpha.38"
+  resolved "https://npm.powerapp.cloud/@powerhome/playbook-icons/-/7336947a1b8e91909a54ad2664cc0ea7e80be352#7336947a1b8e91909a54ad2664cc0ea7e80be352"
+  integrity sha512-cKFsJo+hILxbktdjeNLJiNOBc5nSBgWaiH/1nsvb5aeQLcpALyx348GeWja0uBRnr8MzAcVNxCTs1Hqn7H0Geg==
 
 "@powerhome/power-fonts@0.0.1-alpha.6":
   version "0.0.1-alpha.6"
@@ -3967,18 +3967,6 @@
   version "7.0.15"
   resolved "https://npm.powerapp.cloud/@types/json-schema/-/json-schema-7.0.15.tgz#596a1747233694d50f6ad8a7869fcb6f56cf5841"
   integrity sha512-5+fP8P8MFNC+AyZCDxrB2pkZFPGzqQWUzpSeuuVLvm8VMcorNYavBqoFcxK8bQz4Qsbn4oUEEem4wDLfcysGHA==
-
-"@types/lodash-es@4.17.12":
-  version "4.17.12"
-  resolved "https://npm.powerapp.cloud/@types/lodash-es/-/lodash-es-4.17.12.tgz#65f6d1e5f80539aa7cfbfc962de5def0cf4f341b"
-  integrity sha512-0NgftHUcV4v34VhXm8QBSftKVXtbkBG3ViCjs6+eJ5a6y6Mi/jiFGPc1sC7QK+9BFhWrURE3EOggmWaSxL9OzQ==
-  dependencies:
-    "@types/lodash" "*"
-
-"@types/lodash@*":
-  version "4.17.7"
-  resolved "https://npm.powerapp.cloud/@types/lodash/-/lodash-4.17.7.tgz#2f776bcb53adc9e13b2c0dfd493dfcbd7de43612"
-  integrity sha512-8wTvZawATi/lsmNu10/j2hk1KEP0IvjubqPE3cu1Xz7xfXXt5oCq3SNUz4fMIP4XGF9Ky+Ue2tBA3hcS7LSBlA==
 
 "@types/mapbox__point-geometry@*", "@types/mapbox__point-geometry@^0.1.2":
   version "0.1.2"
@@ -8657,11 +8645,6 @@ locate-path@^6.0.0:
   integrity sha512-iPZK6eYjbxRu3uB4/WZ3EsEIMJFMqAoopl3R+zuq0UjcAm/MO6KCweDgPfP3elTztoKP3KtnVHxTn2NHBSDVUw==
   dependencies:
     p-locate "^5.0.0"
-
-lodash-es@^4.17.12:
-  version "4.17.21"
-  resolved "https://npm.powerapp.cloud/lodash-es/-/lodash-es-4.17.21.tgz#43e626c46e6591b7750beb2b50117390c609e3ee"
-  integrity sha512-mKnC+QJ9pWVzv+C4/U3rRsHapFfHvQFoFB92e52xeyGMcX6/OlIl78je1u8vePzYZSkkogMPJ2yjxxsb89cxyw==
 
 lodash.debounce@^4.0.8:
   version "4.0.8"

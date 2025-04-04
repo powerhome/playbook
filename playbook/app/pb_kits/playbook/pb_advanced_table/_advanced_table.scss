@@ -7,6 +7,7 @@
 @import "./scss_partials/chrome_styles";
 @import "../tokens/screen_sizes";
 @import "../tokens/shadows";
+@import "../tokens/positioning";
 
 .pb_advanced_table {
   $border-color: 1px solid $border_light;
@@ -101,6 +102,15 @@
       border-top-left-radius: 0px !important;
       border-top-right-radius: 0px !important;
     }
+    // Right align header content of first data column in selectable row no subrow setup
+    &.selectable-rows-enabled {
+      tr { 
+        th:nth-child(2),
+        .pb_flex_kit_orientation_row_justify_content_start_align_items_center_spacing_none.gap_none {
+          justify-content: flex-end;
+        }
+      }
+    }
 
     // Set fixed width for header cells to match table body
     th {
@@ -112,7 +122,8 @@
       }
 
       // Set fixed width for checkbox column
-      &.table-header-cells-custom {
+      &.table-header-cells-custom, 
+      &.checkbox-cell.checkbox-cell-header {
         width: 40px !important;
         min-width: 40px !important;
         box-sizing: border-box !important;
@@ -168,6 +179,15 @@
         text-align: right;
       }
     }
+    // Right align row content of first data column in selectable row no subrow setup
+    &.selectable-rows-enabled {
+      tr {
+        td:nth-child(2),
+        .pb_flex_kit_orientation_row_justify_content_start_align_items_center_spacing_none {
+          justify-content: end;
+        }
+      }
+    }
   }
 
   .table-header-cells-active:first-child {
@@ -210,6 +230,53 @@
     max-height: 1920px;
     overflow-y: auto;
   }
+  
+  // Fullscreen
+  &.advanced-table-allow-fullscreen {
+    transition: all 0.3s ease;
+  }
+  
+  &.advanced-table-fullscreen {
+    background-color: $bg_light;
+    box-sizing: border-box;
+    height: 100vh;
+    left: 0;
+    overflow: auto;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: $z_10;
+
+    .pb_table {
+      th, td, div, button {
+        font-size: calc(100%);
+      }
+      box-sizing: border-box;
+      margin: $space_lg;
+      max-width: calc(100% - 64px);
+      width: calc(100% - 64px);
+    }
+
+    .pb_table.sticky-header {
+      thead,
+      .pb_advanced_table_header {
+        position: sticky !important;
+        top: 44px !important;
+        z-index: $z_10;
+      }
+    }
+  }
+  
+  .advanced-table-fullscreen-header {
+    background-color: $white;
+    height: 44px;
+    padding: 13px 20px;
+    position: sticky;
+    top: 0;
+    width: 100%;
+    z-index: $z_10;
+  }
+
   // Icons
   .button-icon {
     display: flex;
@@ -258,11 +325,22 @@
     }
   }
 
+  .fullscreen-icon {
+    @extend .button-icon;
+    @extend %primary-color-pseudo;
+    padding: 2px 0;
+
+    &:focus-visible {
+      border-radius: $border_rad_lighter;
+    }
+  }
+
   // Vertical separator
   .table-header-cells:first-child,
   .table-header-cells-custom:first-child,
   td:first-child,
-  .pb_table_td:first-child {
+  .pb_table_td:first-child,
+  .checkbox-cell.checkbox-cell-header:first-child {
     box-shadow: 1px 0px 0px 0px $border_light !important;
   }
 
@@ -318,6 +396,7 @@
       .table-header-cells:first-child,
       td:first-child,
       .pb_table_td:first-child,
+      .checkbox-cell.checkbox-cell-header:first-child,
       [class*="pinned-left"] {
           background-color: $white;
           box-shadow: $shadow_deep !important;
@@ -435,6 +514,28 @@
         ) !important;
       }
     }
+
+    // Vertical separator
+    .table-header-cells:first-child,
+    .table-header-cells-custom:first-child,
+    td:first-child,
+    .pb_table_td:first-child,
+    .checkbox-cell.checkbox-cell-header:first-child {
+      box-shadow: 1px 0px 0px 0px $border_dark !important;
+    }
+
+    // Fullscreen
+    &.advanced-table-fullscreen {
+      background: $bg_dark;
+    }
+
+    .advanced-table-fullscreen-header {
+      background-color: $bg_dark_card;
+      position: sticky;
+      top: 0;
+      z-index: $z_10;
+    }
+
     // Dark Mode Responsive Styles
     @media only screen and (max-width: $screen-xl-min) {
       &[class*="advanced-table-responsive-scroll"] {
@@ -459,6 +560,7 @@
         .table-header-cells:first-child,
         td:first-child,
         .pb_table_td:first-child,
+        .checkbox-cell.checkbox-cell-header:first-child,
         [class*="pinned-left"] {
           background: $bg_dark_card;
           border-right: $border_dark;

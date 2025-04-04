@@ -41,8 +41,7 @@ $interface_colors: (
   silver:             $silver,
   slate:              $slate,
   charcoal:           $charcoal,
-  black:              $black,
-
+  black:              $black
 );
 
 /* Main colors ------------------------*/
@@ -204,8 +203,6 @@ $status_colors: (
   primary:            $primary,
   primary_secondary:    $primary_secondary
 );
-
-
 
 $status_color_text: (
   success:            $success,

@@ -19,23 +19,27 @@ test('it renders preset icon', () => {
     render(
       <StatChange
           change="increase"
+          id="preset-icon"
           value="28.4"
       />
     )
 
-    const kit = screen.getByLabelText('arrow-up icon')
-    expect(kit).toBeTruthy
+    const kit = document.querySelector('#preset-icon')
+    const icon = kit.querySelector(".pb_custom_icon")
+    expect(icon).toBeInTheDocument()
 })
 
 test('it renders custom icon', () => {
     render(
       <StatChange
           icon="chart-line-down"
+          id="custom-icon"
           value={6.1}
       />
 
     )
 
-    const kit = screen.getByLabelText('chart-line-down icon')
-    expect(kit).toBeTruthy
+    const kit = document.querySelector('#custom-icon')
+    const icon = kit.querySelector(".pb_custom_icon")
+    expect(icon).toBeInTheDocument()
 })

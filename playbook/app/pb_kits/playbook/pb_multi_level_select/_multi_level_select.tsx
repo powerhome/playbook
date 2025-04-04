@@ -7,9 +7,12 @@ import {
   buildDataProps,
   buildHtmlProps,
 } from "../utilities/props";
+import { cloneDeep } from "../utilities/object";
+
 import Icon from "../pb_icon/_icon";
 import FormPill from "../pb_form_pill/_form_pill";
-import { cloneDeep } from "lodash";
+import Body from "../pb_body/_body";
+import Caption from "../pb_caption/_caption";
 import MultiLevelSelectOptions from "./multi_level_select_options";
 import MultiLevelSelectContext from "./context";
 
@@ -35,11 +38,14 @@ type MultiLevelSelectProps = {
   className?: string
   data?: { [key: string]: string }
   disabled?: boolean
+  error?: string
   htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string
   inputDisplay?: "pills" | "none"
   inputName?: string
+  label?: string
   name?: string
+  required?: boolean
   returnAllSelected?: boolean
   treeData?: { [key: string]: string; }[] | any
   onChange?: (event: { target: { name?: string; value: any } }) => void
@@ -56,11 +62,14 @@ const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>((pr
     className,
     data = {},
     disabled = false,
+    error,
     htmlOptions = {},
     id,
     inputDisplay = "pills",
     inputName,
     name,
+    label,
+    required = false,
     returnAllSelected = false,
     treeData,
     onChange = () => null,
@@ -77,6 +86,7 @@ const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>((pr
   const htmlProps = buildHtmlProps(htmlOptions);
   const classes = classnames(
     buildCss("pb_multi_level_select"),
+    error && "error",
     globalProps(props),
     className
   );
@@ -113,7 +123,9 @@ const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>((pr
       return;
     }
     return tree.map((item: { [key: string]: any }) => {
-      item.checked = check;
+      if (!item.disabled) {
+        item.checked = check;
+      }
       item.children = modifyRecursive(item.children, check);
       return item;
     });
@@ -124,12 +136,16 @@ const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>((pr
     treeData: { [key: string]: any }[],
     selectedIds: string[],
     parent_id: string | null = null,
-    depth = 0
+    depth = 0,
+    parentDisabled = false
   ) => {
     if (!Array.isArray(treeData)) {
       return;
     }
     return treeData.map((item: { [key: string]: any } | any) => {
+      // An item is disabled if it is explicitly set as disabled or if its parent is disabled
+      const isDisabled = item.disabled || (parentDisabled && !returnAllSelected);
+
       const newItem = {
         ...item,
         checked: Boolean(
@@ -137,6 +153,7 @@ const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>((pr
         ),
         parent_id,
         depth,
+        disabled: isDisabled,
       };
       if (newItem.children && newItem.children.length > 0) {
         const children =
@@ -147,7 +164,8 @@ const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>((pr
           children,
           selectedIds,
           newItem.id,
-          depth + 1
+          depth + 1,
+          isDisabled
         );
       }
       return newItem;
@@ -244,8 +262,9 @@ const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>((pr
     return tree.map((item: any) => {
       if (item.id != id) item.children = modifyValue(id, item.children, check);
       else {
-        item.checked = check;
-
+        if (!item.disabled) {
+          item.checked = check;
+        }
         if (variant === "single") {
           // Single select: no children should be checked
           item.children = modifyRecursive(item.children, !check);
@@ -430,6 +449,12 @@ const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>((pr
         className={classes}
         id={id}
     >
+      {label &&
+        <Caption
+            marginBottom="xs"
+            text={label}
+        />
+      }
       <MultiLevelSelectContext.Provider value={{
           variant,
           inputName,
@@ -453,6 +478,7 @@ const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>((pr
                       disabled={disabled}
                       key={selectedItem.id}
                       name={`${name}[]`}
+                      required={required}
                       type="hidden"
                       value={selectedItem.id}
                   />
@@ -467,6 +493,7 @@ const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>((pr
                           disabled={disabled}
                           key={item.id}
                           name={`${name}[]`}
+                          required={required}
                           type="hidden"
                           value={item.id}
                       />
@@ -479,6 +506,7 @@ const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>((pr
                           disabled={disabled}
                           key={item.id} 
                           name={`${name}[]`}
+                          required={required}
                           type="hidden"
                           value={item.id}
                       />
@@ -539,6 +567,7 @@ const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>((pr
                       } selected`
                     : "Start typing..."
                 }
+                required={required}
                 value={singleSelectedItem.value || filterItem}
             />
           </div>
@@ -571,6 +600,13 @@ const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>((pr
         </div>
       </div>
       </MultiLevelSelectContext.Provider>
+      {error &&
+          <Body
+              dark={props.dark}
+              status="negative"
+              text={error}
+          />
+        }
     </div>
   );
 }) as MultiLevelSelectComponent;

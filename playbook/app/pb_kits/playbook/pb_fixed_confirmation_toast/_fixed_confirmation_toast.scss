@@ -7,7 +7,7 @@ $pb_pill_height: 25px;
 
 
 $confirmation_toast_colors: (
-  neutral:        $neutral,
+  neutral:        $text_lt_light,
   success:        $success,
   error:          $error,
   tip:          transparent,
@@ -87,7 +87,7 @@ $confirmation_toast_colors: (
         overflow: hidden;
         display: -webkit-box;
         -webkit-line-clamp: 3;
-        -webkit-box-orient: vertical; 
+        -webkit-box-orient: vertical;
         white-space: normal;
         text-align: left;
       }

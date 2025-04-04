@@ -26,6 +26,12 @@ module Playbook
                      default: false
       prop :disabled, type: Playbook::Props::Boolean,
                       default: false
+      prop :required, type: Playbook::Props::Boolean,
+                      default: false
+      prop :error, type: Playbook::Props::String,
+                   default: ""
+      prop :label, type: Playbook::Props::String,
+                   default: ""
 
       def classname
         generate_classname("pb_multi_level_select")
@@ -33,11 +39,15 @@ module Playbook
 
       def multi_level_select_options
         {
+          data: data,
           disabled: disabled,
+          error: error,
           id: id,
           inputDisplay: input_display,
           name: name,
+          label: label,
           treeData: tree_data,
+          required: required,
           returnAllSelected: return_all_selected,
           selectedIds: selected_ids,
           inputName: input_name,

@@ -1,3 +1,62 @@
+# ✨ The Multi Level Select Kit Just Got Better! ✨
+##### March 21, 2025
+
+<img width="945" alt="14 16 0 Release Banner" src="https://github.com/user-attachments/assets/770f3a2c-1377-4f0f-a6ba-2f68302653fd" />
+
+Our latest release introduces the ability to disable individual or parent options, validations for Rails, and React Hook Form support. We also made a few bug fixes for a smoother experience with the Multi Level Select in Rails forms!
+
+[14.16.0](https://github.com/powerhome/playbook/tree/14.16.0) full list of changes:
+
+**Kit Enhancements:**
+
+- Icon Button Kit: OnClick Handler [\#4412](https://github.com/powerhome/playbook/pull/4412) ([kangaree](https://github.com/kangaree))
+- Draggable Kit: Drop Zones - Shadow, Line and Outline [\#4404](https://github.com/powerhome/playbook/pull/4404) ([skduncan](https://github.com/skduncan))
+- Typeahead Kit - Disabled Prop for Rails and React [\#4403](https://github.com/powerhome/playbook/pull/4403) ([nickamantia](https://github.com/nickamantia))
+-  MultiLeveLSelect Kit: Implementing Required for Forms + Error State for React and Rails [\#4401](https://github.com/powerhome/playbook/pull/4401) ([carloslimasd](https://github.com/carloslimasd), [nidaqg](https://github.com/nidaqg))
+- User Kit: Add Font Choices [\#4391](https://github.com/powerhome/playbook/pull/4391) ([gmorris1242](https://github.com/gmorris1242))
+- MultilevelSelect Kit: Ability to Disable Options [\#4396](https://github.com/powerhome/playbook/pull/4396) ([nidaqg](https://github.com/nidaqg))
+- Selectable List, Star Rating, Text Input, and Table: Update Pb\_content\_tag [\#4389](https://github.com/powerhome/playbook/pull/4389) ([kangaree](https://github.com/kangaree))
+- Global Props: Add Grid to Display Global Prop Code and Example Page [\#4395](https://github.com/powerhome/playbook/pull/4395) ([elisashapiro](https://github.com/elisashapiro))
+- Tooltip Kit - Pass Global Props Height and Width to Tooltip - Rails [\#4386](https://github.com/powerhome/playbook/pull/4386) ([gabbymassaro](https://github.com/gabbymassaro))
+- TextArea, Time, Title and Toggle kits: Update Pb\_content\_tag [\#4385](https://github.com/powerhome/playbook/pull/4385) ([yuriyivanenko](https://github.com/yuriyivanenko))
+- Icon Button Kit: Border Radius [\#4384](https://github.com/powerhome/playbook/pull/4384) ([yuriyivanenko](https://github.com/yuriyivanenko))
+- Adding Phone Number Input Hidden [\#4381](https://github.com/powerhome/playbook/pull/4381) ([carloslimasd](https://github.com/carloslimasd))
+- Advanced Table Kit: Inline Cell Editing Doc Example [\#4375](https://github.com/powerhome/playbook/pull/4375) ([nidaqg](https://github.com/nidaqg))
+- MultiLevelSelect Kit: React Hook Forms Support [\#4371](https://github.com/powerhome/playbook/pull/4371) ([yuriyivanenko](https://github.com/yuriyivanenko))
+- Tooltip Kit: With Icons - Rails [\#4363](https://github.com/powerhome/playbook/pull/4363) ([gabbymassaro](https://github.com/gabbymassaro))
+- PB Website: Global Props Index Page [\#4359](https://github.com/powerhome/playbook/pull/4359) ([gabbymassaro](https://github.com/gabbymassaro))
+- Typeahead Kit: React Hook Form [\#4330](https://github.com/powerhome/playbook/pull/4330) ([yuriyivanenko](https://github.com/yuriyivanenko))
+- Dialog Kit: Implementing Enhanced Element for Rails [\#4355](https://github.com/powerhome/playbook/pull/4355) ([carloslimasd](https://github.com/carloslimasd))
+- Overlay Kit: Horizontal Scroll Bar Toggle [\#4346](https://github.com/powerhome/playbook/pull/4346) ([elisashapiro](https://github.com/elisashapiro))
+
+**Fixed Bugs:**
+
+- Nav Kit: Set Default Cursor to Pointer for All Nav Items [\#4406](https://github.com/powerhome/playbook/pull/4406) ([gmorris1242](https://github.com/gmorris1242))
+- Draggable Kit: Fix for Image Error In Doc Examples [\#4405](https://github.com/powerhome/playbook/pull/4405) ([skduncan](https://github.com/skduncan))
+- MultiLevelSelect Kit - Return All Selected Bug - Rails [\#4376](https://github.com/powerhome/playbook/pull/4376) ([elisashapiro](https://github.com/elisashapiro))
+- Text Input Kit: Allowing Zero Values on Currency Mask [\#4343](https://github.com/powerhome/playbook/pull/4343) ([carloslimasd](https://github.com/carloslimasd))
+
+**Improvements:**
+
+- Icon Kit: Add Values to Color Prop [\#4402](https://github.com/powerhome/playbook/pull/4402) ([gmorris1242](https://github.com/gmorris1242))
+- Fixed Confirmation Toast: Update Neutral Color [\#4397](https://github.com/powerhome/playbook/pull/4397) ([gmorris1242](https://github.com/gmorris1242))
+- Drawer Kit: Breakpoint Doc Example [\#4390](https://github.com/powerhome/playbook/pull/4390) ([markdoeswork](https://github.com/markdoeswork))
+- Bar Graph, Circle Chart, Filter, Gauge, Lightbox, Line Graph: Lodash Removal 2 Of 3 [\#4377](https://github.com/powerhome/playbook/pull/4377) ([markdoeswork](https://github.com/markdoeswork))
+- PB Website: Evaluate Playground Erb Code Better [\#4398](https://github.com/powerhome/playbook/pull/4398) ([markdoeswork](https://github.com/markdoeswork))
+- PB Website: Playground Fixes - Click Anywhere and Scroll [\#4383](https://github.com/powerhome/playbook/pull/4383) ([kangaree](https://github.com/kangaree))
+- PB Website: Improve Sample Show Code [\#4382](https://github.com/powerhome/playbook/pull/4382) ([yuriyivanenko](https://github.com/yuriyivanenko))
+- DatePicker Kit: Add Onclose and Onchange Rails Doc Examples [\#4374](https://github.com/powerhome/playbook/pull/4374) ([kangaree](https://github.com/kangaree))
+- PB Website: Speed Up Local Vite Builds [\#4373](https://github.com/powerhome/playbook/pull/4373) ([kangaree](https://github.com/kangaree))
+- PB Website: Update Changelog.md [\#4392](https://github.com/powerhome/playbook/pull/4392) ([amax1296](https://github.com/amax1296))
+- Filter Kit: Popoverprops Width Removing Internal Padding Of Filter Elements [\#4369](https://github.com/powerhome/playbook/pull/4369) ([elisashapiro](https://github.com/elisashapiro))
+
+**New Kits:**
+
+- Empty State Kit: Build Beta React Kit [\#4370](https://github.com/powerhome/playbook/pull/4370) ([gabbymassaro](https://github.com/gabbymassaro))
+
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/v14.16.0-rc.6...14.16.0)
+
 # 🚀 Rails Typeahead Kit Update
 ##### March 7, 2025
 

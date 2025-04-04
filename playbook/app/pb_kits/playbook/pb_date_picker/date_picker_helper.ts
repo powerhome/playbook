@@ -174,6 +174,21 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
       yearInput.value = fp.currentYear?.toString()
   }
 
+  const handleDatePickerChange = (fp: Instance, selectedDates: Date[]) => {
+    const inputEl = fp.input
+
+    if (inputEl) {
+      const inlineDatePickerElem = inputEl.closest('.inline-date-picker')
+      if (inlineDatePickerElem) {
+        if (selectedDates && selectedDates.length > 0) {
+          inlineDatePickerElem.classList.add('show-angle-down-icon')
+        } else {
+          inlineDatePickerElem.classList.remove('show-angle-down-icon')
+        }
+      }
+    }
+  }
+
   // ===========================================================
   // |             Flatpickr initializer w/ config             |
   // ===========================================================
@@ -204,6 +219,7 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
       onClose(selectedDates, dateStr)
     }],
     onChange: [(selectedDates, dateStr, fp) => {
+      handleDatePickerChange(fp, selectedDates)
       yearChangeHook(fp)
       onChange(dateStr, selectedDates)
     }],

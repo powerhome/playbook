@@ -165,7 +165,7 @@ test("generated dragHandle with List", () => {
 
   const list = kit.querySelector(".pb_list_kit");
   expect(list).toBeInTheDocument();
-  const dragHandle = list.querySelector(".fa-grip-dots-vertical");
+  const dragHandle = list.querySelector(".pb_custom_icon");
   expect(dragHandle).toBeInTheDocument();
 });
 
@@ -175,7 +175,7 @@ test("generated dragHandle with SelectableList", () => {
 
   const selectabellist = kit.querySelector(".pb_selectable_list_kit");
   expect(selectabellist).toBeInTheDocument();
-  const dragHandle = selectabellist.querySelector(".fa-grip-dots-vertical");
+  const dragHandle = selectabellist.querySelector(".pb_custom_icon");
   expect(dragHandle).toBeInTheDocument();
 });
 
@@ -185,6 +185,6 @@ test("generated dragHandle with Card", () => {
 
   const card = kit.querySelector(".pb_card_kit_deselected_border_radius_md");
   expect(card).toBeInTheDocument();
-  const dragHandle = card.querySelector(".fa-grip-dots-vertical");
+  const dragHandle = card.querySelector(".pb_custom_icon");
   expect(dragHandle).toBeInTheDocument();
 });

@@ -44,7 +44,7 @@
     <% if object.hide_icon && object.inline %>
       <!-- Plus Icon -->
       <div
-          class="<%= object.icon_wrapper_class %>"
+          class="<%= object.icon_wrapper_class %> date-picker-inline-icon-plus"
           id="<%= object.picker_id %>-icon-plus"
       >
         <%= pb_rails("icon", props: {
@@ -55,7 +55,7 @@
 
       <!-- Angle Down Icon -->
       <div
-          class="<%= object.icon_wrapper_class %>"
+          class="<%= object.icon_wrapper_class %> date-picker-inline-angle-down"
           id="<%= object.picker_id %>-angle-down"
       >
         <%= pb_rails("icon", props: {

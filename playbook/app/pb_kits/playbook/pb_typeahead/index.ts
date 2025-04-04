@@ -1,5 +1,5 @@
 import PbEnhancedElement from '../pb_enhanced_element'
-import { debounce } from 'lodash'
+import { debounce } from '../utilities/object'
 
 export default class PbTypeahead extends PbEnhancedElement {
   _searchInput: HTMLInputElement

@@ -1,5 +1,11 @@
-<%= pb_rails("flex", props: {orientation: "column"}) do %>
-    <%= pb_rails("icon", props: { icon: "user", fixed_width: true, color: "primary", padding_bottom: "sm", size: "2x" }) %>
-    <%= pb_rails("icon", props: { icon: "recycle", fixed_width: true, color: "data_4", padding_bottom: "sm", size: "2x" }) %>
+<%= pb_rails("flex", props: { margin_bottom: "sm" }) do %>
+    <%= pb_rails("icon", props: { icon: "user", fixed_width: true, color: "primary", size: "2x" }) %>
+    <%= pb_rails("icon", props: { icon: "recycle", fixed_width: true, color: "data_4", size: "2x" }) %>
     <%= pb_rails("icon", props: { icon: "roofing", fixed_width: true, color: "product_5_background", size: "2x" }) %>
+<% end %>
+
+<%= pb_rails("flex", props: {}) do %>
+    <%= pb_rails("icon", props: { icon: "user", fixed_width: true, color: "light", size: "2x" }) %>
+    <%= pb_rails("icon", props: { icon: "recycle", fixed_width: true, color: "lighter", size: "2x" }) %>
+    <%= pb_rails("icon", props: { icon: "roofing", fixed_width: true, color: "link", size: "2x" }) %>
 <% end %>

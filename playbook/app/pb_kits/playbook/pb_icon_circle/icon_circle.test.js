@@ -29,7 +29,7 @@ describe("IconCircle Kit", () => {
         )
 
         const kit = screen.getByTestId(testId)
-        const icon = kit.querySelector('.pb_icon_kit')
+        const icon = kit.querySelector('.pb_custom_icon')
         expect(icon).toBeInTheDocument()
     })
 

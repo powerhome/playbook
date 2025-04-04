@@ -37,9 +37,6 @@ PbPopover.start()
 import PbTooltip from 'kits/pb_tooltip'
 PbTooltip.start()
 
-import PbTooltipFLoatingUi from 'kits/pb_tooltip/floating_ui'
-PbTooltipFLoatingUi.start()
-
 import PbFixedConfirmationToast from 'kits/pb_fixed_confirmation_toast'
 PbFixedConfirmationToast.start()
 
@@ -81,6 +78,9 @@ PbDialog.start()
 
 import PbDatePicker from 'kits/pb_date_picker'
 PbDatePicker.start()
+
+import PbMultiLevelSelect from 'kits/pb_multi_level_select'
+PbMultiLevelSelect.start()
 
 import 'flatpickr'
 

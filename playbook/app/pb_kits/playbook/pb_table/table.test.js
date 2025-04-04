@@ -167,3 +167,20 @@ test("Should have outerPadding class", () => {
   const kit = renderKit(Table, props, { outerPadding: "sm" })
   expect(kit).toHaveClass("pb_table table-sm table-responsive-collapse table-card outer_padding_space_sm table-collapse-sm")
 })
+
+test("when headerStyle is default", () => {
+  const kit = renderKit(Table, props)
+  expect(kit).toHaveClass("pb_table table-sm table-responsive-collapse table-card table-collapse-sm")
+  expect(kit).not.toHaveClass("header-borderless")
+  expect(kit).not.toHaveClass("header-floating")
+})
+
+test("when headerStyle is borderless", () => {
+  const kit = renderKit(Table, props, { headerStyle: "borderless" })
+  expect(kit).toHaveClass("pb_table table-sm table-responsive-collapse table-card header-borderless table-collapse-sm")
+})
+
+test("when headerStyle is floating", () => {
+  const kit = renderKit(Table, props, { headerStyle: "floating" })
+  expect(kit).toHaveClass("pb_table table-sm table-responsive-collapse table-card header-floating table-collapse-sm")
+})

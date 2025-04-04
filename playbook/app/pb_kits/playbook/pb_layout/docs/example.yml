@@ -18,4 +18,5 @@ examples:
   - layout_kanban: Kanban Layout
   - layout_content: Content Layout
   - layout_masonry: Masonry Layout
+  - layout_bracket: Bracket Layout
 

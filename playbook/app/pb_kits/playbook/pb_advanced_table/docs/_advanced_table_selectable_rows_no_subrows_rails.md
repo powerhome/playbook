@@ -1,0 +1,1 @@
+`selectable_rows` can also be used with tables without nested row data. Set `enable_toggle_expansion: none` to adjust the Advanced Table styling to fit a table without subrows.
