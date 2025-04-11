@@ -48,4 +48,28 @@
   .border-active {
     border-bottom: 1px;
   }
+
+  // Removing borders from nested collapsible tables and table rows to prevent visual border doubling
+  .pb_collapsible_content_kit {
+    .pb_table {
+      th {
+        border-left: none !important;
+        border-right: none !important;
+        border-top: none !important;
+      }
+      tr td:first-child {
+        border-left: none !important;
+      }  
+      tr td:last-child {
+        border-right: none !important;
+      }
+      tr:first-child td {
+        border-top: none !important;
+      }
+      tr:last-child td {
+        border-bottom: none !important;
+      }
+  
+    }
+  }
 }
