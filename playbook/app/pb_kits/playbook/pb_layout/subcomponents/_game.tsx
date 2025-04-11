@@ -41,6 +41,7 @@ const Game = (props: LayoutGameProps) => {
       >
         <Card
             marginY="xs"
+            overflow="hidden"
             padding="none"
             shadow="deep"
         >

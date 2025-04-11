@@ -1,6 +1,7 @@
 import React from 'react'
 import classnames from 'classnames'
 
+import { buildCss } from '../../utilities/props'
 import { GlobalProps, globalProps, globalInlineProps } from '../../utilities/globalProps'
 
 import Avatar from "../../pb_avatar/_avatar";
@@ -23,10 +24,11 @@ type LayoutParticipantProps = {
 export const Participant = (props: LayoutParticipantProps) => {
   const { className, name = 'To be determined...', territory = '', points, rank, avatar, winner } = props
   const dynamicInlineProps = globalInlineProps(props)
+  const classes = classnames(buildCss('layout_participant', winner ? 'winner' : ''), globalProps(props), className)
   return (
     <Background
         backgroundColor={winner ? "success_subtle" : "white"}
-        className={classnames('layout_participant', globalProps(props), className)}
+        className={classes}
         padding="xs"
         style={dynamicInlineProps}
     >
@@ -39,7 +41,7 @@ export const Participant = (props: LayoutParticipantProps) => {
         />
         <Body flexGrow={1}>
           <Flex justify="between">
-            <Body color={winner ? "success" : "default"}>{name}</Body>
+            <Body color={winner ? "success" : "default"}>{winner ? <strong>{name}</strong> : name}</Body>
             <Body display="flex">
               <strong>{points}</strong>
               <Detail
@@ -49,7 +51,14 @@ export const Participant = (props: LayoutParticipantProps) => {
               />
             </Body>
           </Flex>
-          <Body>{territory} <Badge text={rank}/></Body>
+          <Body>
+            {territory}
+            &nbsp;
+            <Badge
+                text={rank}
+                variant={winner ? "success" : "neutral"}
+            />
+          </Body>
         </Body>
       </Flex>
     </Background>
