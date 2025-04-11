@@ -1,3 +1,46 @@
+# 📞 Lodash has left the chat
+##### April 03, 2025
+
+![bye](https://github.com/user-attachments/assets/8d738162-7a89-46f8-9665-e9bdc8ae8f58)
+
+We have done some spring cleaning and officially kicked Lodash to the curb, and swept out a bunch of bugs along the way! No more Lodash, fewer bugs, and a smoother ride!
+
+[14.17.0](https://github.com/powerhome/playbook/tree/14.17.0) full list of changes:
+
+**Kit Enhancements:**
+
+- Typeahead, Tooltip, User, Userbadge Kits: Convert to Use Content Tag [\#4437](https://github.com/powerhome/playbook/pull/4437) ([markdoeswork](https://github.com/markdoeswork))
+- Advanced Table Kit: Full Screen Mode - React Only [\#4428](https://github.com/powerhome/playbook/pull/4428) ([elisashapiro](https://github.com/elisashapiro))
+- Layout Kit: Bracket Variant - React [\#4407](https://github.com/powerhome/playbook/pull/4407) ([kangaree](https://github.com/kangaree))
+- Table Kit: Custom Headers - React Only [\#4413](https://github.com/powerhome/playbook/pull/4413) ([elisashapiro](https://github.com/elisashapiro))
+- Advanced Table: Selectable Rows for Rails [\#4408](https://github.com/powerhome/playbook/pull/4408) ([elisashapiro](https://github.com/elisashapiro))
+
+**Fixed Bugs:**
+
+- Draggable Kit: Doc Examples Break When Dragging Items Between Doc Examples - React [\#4453](https://github.com/powerhome/playbook/pull/4453) ([elisashapiro](https://github.com/elisashapiro))
+- Form Group Kit: Fix Error Border Styles [\#4436](https://github.com/powerhome/playbook/pull/4436) ([gmorris1242](https://github.com/gmorris1242))
+- Playbook Website: Fix Incorrect Links on Getting Started Page [\#4432](https://github.com/powerhome/playbook/pull/4432) ([gmorris1242](https://github.com/gmorris1242))
+- Table Kit: Fix Striped Styles Overriding Background Styles [\#4431](https://github.com/powerhome/playbook/pull/4431) ([gmorris1242](https://github.com/gmorris1242))
+- Date Picker Kit: Fix Inline Date Picker Icon Logic [\#4416](https://github.com/powerhome/playbook/pull/4416) ([gmorris1242](https://github.com/gmorris1242))
+- Button Kit: Fix Disable Prop on Danger Variant [\#4422](https://github.com/powerhome/playbook/pull/4422) ([gmorris1242](https://github.com/gmorris1242))
+- Advance Table Kit: Fix Visible Container on Pagination [\#4421](https://github.com/powerhome/playbook/pull/4421) ([gmorris1242](https://github.com/gmorris1242))
+- Rich Text Editor Kit: Input Options [\#4420](https://github.com/powerhome/playbook/pull/4420) ([markdoeswork](https://github.com/markdoeswork))
+
+**Improvements:**
+
+- Section Separator Kit: Vertical Section Separator Documentation [\#4474](https://github.com/powerhome/playbook/pull/4474) ([elisashapiro](https://github.com/elisashapiro))
+- Playbook Website: Remove Font Awesome from Tests [\#4469](https://github.com/powerhome/playbook/pull/4469) ([kangaree](https://github.com/kangaree))
+- Playbook Website: Fullscreen Button - Advanced Table, Multi Level Select, and Drawer Examples [\#4451](https://github.com/powerhome/playbook/pull/4451) ([kangaree](https://github.com/kangaree))
+- Playbook Website: Fixes for Docs [\#4443](https://github.com/powerhome/playbook/pull/4443) ([nidaqg](https://github.com/nidaqg))
+- Icons: Update Playbook Icons [\#4433](https://github.com/powerhome/playbook/pull/4433) ([markdoeswork](https://github.com/markdoeswork))
+- Tooltip Kit: Transition Rails Tooltip to @floating-ui/dom [\#4417](https://github.com/powerhome/playbook/pull/4417) ([kangaree](https://github.com/kangaree))
+- Lodash Removal 3 Of 3 [\#4399](https://github.com/powerhome/playbook/pull/4399) ([markdoeswork](https://github.com/markdoeswork))
+- Playbook Website: Remove Lodash from Playbook [\#4450](https://github.com/powerhome/playbook/pull/4450) ([markdoeswork](https://github.com/markdoeswork))
+- Playbook Website: Update Changelog.md [\#4435](https://github.com/powerhome/playbook/pull/4435) ([amax1296](https://github.com/amax1296))
+
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/v14.16.0...14.17.0)
+
 # ✨ The Multi Level Select Kit Just Got Better! ✨
 ##### March 21, 2025
 
