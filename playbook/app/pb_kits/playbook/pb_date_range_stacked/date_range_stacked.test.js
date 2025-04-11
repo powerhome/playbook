@@ -58,7 +58,7 @@ describe("DateRangeStacked Kit", () => {
         )
 
         const kit = screen.getByTestId(testId)
-        const arrowicon = kit.querySelector('.pb_icon_kit.fa-fw.pb_date_range_stacked_arrow')
+        const arrowicon = kit.querySelector('.pb_custom_icon')
         expect(arrowicon).toBeInTheDocument()
     })
 

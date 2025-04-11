@@ -1,0 +1,1 @@
+To guarantee the vertical section separator displays properly, please add the `vertical: "stretch"`/`vertical="stretch"` property to the parent container (which is commonly a Flex container). This will stretch the container’s child elements vertically and ensure the section separator appears as expected.

@@ -27,13 +27,20 @@ exports[`html structure is correct 1`] = `
               class="icon_wrapper"
               style="vertical-align: middle; color: rgb(193, 205, 214);"
             >
-              <i
-                class="pb_icon_kit far fa-lg fa-fw fa-lg fa-chevron-down"
-              />
-              <span
-                aria-label="chevron-down icon"
-                hidden=""
-              />
+              <svg
+                class="pb_custom_icon svg-inline--fa svg_lg svg_fw"
+                color="currentColor"
+                fill="none"
+                height="auto"
+                viewBox="0 0 30 25"
+                width="auto"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M14.203 19.297l-9-9c-.469-.422-.469-1.125 0-1.594.422-.422 1.125-.422 1.594 0L15 16.953l8.203-8.203c.422-.469 1.125-.469 1.594 0a1.103 1.103 0 010 1.547l-9.047 9a1.027 1.027 0 01-1.547 0z"
+                  fill="#242B42"
+                />
+              </svg>
             </div>
           </div>
         </div>
