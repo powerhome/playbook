@@ -5,6 +5,7 @@ import { GlobalProps, globalProps, globalInlineProps } from '../../utilities/glo
 
 import Card from '../../pb_card/_card'
 import SectionSeparator from '../../pb_section_separator/_section_separator'
+import Body from '../../pb_body/_body'
 
 type LayoutGameProps = {
   children: React.ReactNode[] | React.ReactNode,
@@ -80,9 +81,17 @@ const Game = (props: LayoutGameProps) => {
             padding="none"
             shadow="deep"
         >
-          <Card.Body padding="xs">To be determined...</Card.Body>
+          <Card.Body padding="xs">
+            <Body color="lighter">
+              To be determined...
+            </Body>
+          </Card.Body>
           <SectionSeparator />
-          <Card.Body padding="xs">To be determined...</Card.Body>
+          <Card.Body padding="xs">
+            <Body color="lighter">
+              To be determined...
+            </Body>
+          </Card.Body>
         </Card>
       )}
       {isOdd && numberOfGames > 1 &&
