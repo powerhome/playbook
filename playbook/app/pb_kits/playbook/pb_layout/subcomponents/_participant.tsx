@@ -47,11 +47,13 @@ export const Participant = (props: LayoutParticipantProps) => {
                 color={winner ? "success" : "light"}
                 display="flex"
             >
-              <strong>{points}</strong>
-              <Detail
-                  color={winner ? "success" : "light"}
-                  text="pts"
-              />
+              {points && (<>
+                <strong>{points}</strong>
+                <Detail
+                    color={winner ? "success" : "light"}
+                    text="pts"
+                />
+              </>)}
             </Body>
           </Flex>
           <Body color="light">
