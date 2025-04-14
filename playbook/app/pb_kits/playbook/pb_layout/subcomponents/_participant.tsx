@@ -19,12 +19,13 @@ type LayoutParticipantProps = {
   rank?: string,
   avatar?: string,
   winner?: boolean,
+  self?: boolean,
 } & GlobalProps
 
 export const Participant = (props: LayoutParticipantProps) => {
-  const { className, name = 'To be determined...', territory = '', points, rank, avatar, winner } = props
+  const { className, name = 'To be determined...', territory = '', points, rank, avatar, winner, self } = props
   const dynamicInlineProps = globalInlineProps(props)
-  const classes = classnames(buildCss('layout_participant', winner ? 'winner' : ''), globalProps(props), className)
+  const classes = classnames(buildCss('layout_participant', winner ? 'winner' : '', self ? 'self' : ''), globalProps(props), className)
   return (
     <Background
         backgroundColor={winner ? "success_subtle" : "white"}
@@ -41,7 +42,7 @@ export const Participant = (props: LayoutParticipantProps) => {
         />
         <Body flexGrow={1}>
           <Flex justify="between">
-            <Body color={winner ? "success" : "default"}>{winner ? <strong>{name}</strong> : name}</Body>
+            <Body color={winner ? "success" : "default"}>{winner ? <strong>{name}</strong> : name}{self ? ' (You)' : ''}</Body>
             <Body display="flex">
               <strong>{points}</strong>
               <Detail
@@ -56,7 +57,7 @@ export const Participant = (props: LayoutParticipantProps) => {
             &nbsp;
             <Badge
                 text={rank}
-                variant={winner ? "success" : "neutral"}
+                variant={winner ? "success" : self ? "notification" : "neutral"}
             />
           </Body>
         </Body>
