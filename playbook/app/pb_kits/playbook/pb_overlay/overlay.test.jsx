@@ -71,8 +71,46 @@ test('should add overlay-hide-scrollbar class when scrollBarNone is true', () =>
       data: { testid: testId },
       scrollBarNone: true
     }
-  
+
     render(<Overlay {...props} />)
     const kit = screen.getByTestId(testId)
     expect(kit).toHaveClass('overlay-hide-scrollbar')
+})
+
+test('should have no_gradient class if gradient prop is false', () => {
+    const props = {
+        children,
+        data: { testid: testId },
+        id: testId,
+        gradient: false
+    }
+
+    render(<Overlay {...props} />)
+    const kit = screen.getByTestId(testId)
+    expect(kit).toHaveClass('no_gradient')
+})
+
+test('should not have no_gradient class if gradient is not passed', () => {
+    const props = {
+        children,
+        data: { testid: testId },
+        id: testId
+    }
+
+    render(<Overlay {...props} />)
+    const kit = screen.getByTestId(testId)
+    expect(kit).not.toHaveClass('no_gradient')
+})
+
+test('should have the correct opacity class if opacity prop is passed', () => {
+    const props = {
+        children,
+        data: { testid: testId },
+        id: testId,
+        opacity: "opacity_5"
+    }
+
+    render(<Overlay {...props} />)
+    const kit = screen.getByTestId(testId)
+    expect(kit).toHaveClass('opacity_5')
 })
