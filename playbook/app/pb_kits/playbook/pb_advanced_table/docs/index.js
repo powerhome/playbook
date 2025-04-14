@@ -23,3 +23,4 @@ export { default as AdvancedTableTablePropsStickyHeader } from './_advanced_tabl
 export { default as AdvancedTableColumnHeadersCustomCell } from './_advanced_table_column_headers_custom_cell.jsx'
 export { default as AdvancedTableInlineEditing } from './_advanced_table_inline_editing.jsx'
 export { default as AdvancedTableFullscreen } from './_advanced_table_fullscreen.jsx'
+export { default as AdvancedTableStickyColumns } from './_advanced_table_sticky_columns.jsx'
