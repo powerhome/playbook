@@ -210,6 +210,18 @@ $bracket-border-width: 4px;
       border-right: $bracket-border-width solid $border_light;
     }
 
+    .polygon_node {
+      position: absolute;
+      top: calc(50% - 5px);
+      right: -10px;
+
+      width: 0;
+      height: 0;
+      border-top: 5px solid transparent;
+      border-bottom: 5px solid transparent;
+      border-left: 10px solid $border_light;
+    }
+
     .layout_round_label {
       display: none;
     }

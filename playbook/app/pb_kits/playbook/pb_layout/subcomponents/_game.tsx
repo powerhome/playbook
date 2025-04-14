@@ -30,10 +30,14 @@ const Game = (props: LayoutGameProps) => {
     ratio = 2 ** exponent
   }
   
+  let hasWinner = false
   if (numberOfChildren === 2) {
     const [firstChild, secondChild] = React.Children.toArray(children)
   
     if (React.isValidElement(firstChild) && React.isValidElement(secondChild)) { 
+      if ('winner' in firstChild.props || 'winner' in secondChild.props) {
+        hasWinner = true
+      }
     return (
       <div
           className={classnames('layout_game', globalProps(props), className)}
@@ -54,6 +58,9 @@ const Game = (props: LayoutGameProps) => {
               className="half_box"
               style={{ height: `calc(${ratio} * 100% + 4px)` }}
           />
+        }
+        {numberOfGames > 1 && hasWinner &&
+          <div className="polygon_node" />
         }
       </div>
       )
