@@ -43,16 +43,18 @@ export const Participant = (props: LayoutParticipantProps) => {
         <Body flexGrow={1}>
           <Flex justify="between">
             <Body color={winner ? "success" : "default"}>{winner ? <strong>{name}</strong> : name}{self ? ' (You)' : ''}</Body>
-            <Body display="flex">
+            <Body
+                color={winner ? "success" : "light"}
+                display="flex"
+            >
               <strong>{points}</strong>
               <Detail
-                  color="light"
-                  paddingLeft="xxs"
+                  color={winner ? "success" : "light"}
                   text="pts"
               />
             </Body>
           </Flex>
-          <Body>
+          <Body color="light">
             {territory}
             &nbsp;
             <Badge
