@@ -4,14 +4,17 @@ examples:
   - draggable_with_list: Draggable with List Kit
   - draggable_with_selectable_list: Draggable with SelectableList Kit
   - draggable_with_cards: Draggable with Cards
-  - draggable_with_table_react: Draggable with Table
+  - draggable_with_table: Draggable with Table
   - draggable_multiple_containers: Dragging Across Multiple Containers
+  - draggable_drop_zones: Draggable Drop Zones
+  - draggable_drop_zones_colors: Draggable Drop Zones Colors
+  - draggable_drop_zones_line: Draggable Drop Zones Line
 
   rails:
-  - draggable_default_rails: Default
-  - draggable_with_list_rails: Draggable with List Kit
-  - draggable_with_selectable_list_rails: Draggable with SelectableList Kit
-  - draggable_with_cards_rails: Draggable with Cards
+  - draggable_default: Default
+  - draggable_with_list: Draggable with List Kit
+  - draggable_with_selectable_list: Draggable with SelectableList Kit
+  - draggable_with_cards: Draggable with Cards
   - draggable_with_table: Draggable with Table
-  - draggable_multiple_containers_rails: Dragging Across Multiple Containers
+  - draggable_multiple_containers: Dragging Across Multiple Containers
 

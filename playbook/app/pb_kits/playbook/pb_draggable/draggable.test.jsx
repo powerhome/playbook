@@ -128,6 +128,58 @@ const DraggableKitWithCard = () => {
   );
 };
 
+const DraggableWithLineVertical = () => {
+  const [initialState, setInitialState] = useState(data);
+  return (
+    <div data-testid={testId}>
+      <DraggableProvider
+          dropZone={{ type: "line" }}
+          initialItems={data}
+          onReorder={(items) => setInitialState(items)}
+      >
+        <Draggable>
+          <Draggable.Container>
+            {initialState.map(({ id, text }) => (
+              <Draggable.Item
+                  dragId={id}
+                  key={id}
+              >
+                {text}
+              </Draggable.Item>
+            ))}
+          </Draggable.Container>
+        </Draggable>
+      </DraggableProvider>
+    </div>
+  );
+};
+
+const DraggableWithLineHorizontal = () => {
+  const [initialState, setInitialState] = useState(data);
+  return (
+    <div data-testid={testId}>
+      <DraggableProvider
+          dropZone={{ type: "line", direction: "horizontal" }}
+          initialItems={data}
+          onReorder={(items) => setInitialState(items)}
+      >
+        <Draggable>
+          <Draggable.Container>
+            {initialState.map(({ id, text }) => (
+              <Draggable.Item
+                  dragId={id}
+                  key={id}
+              >
+                {text}
+              </Draggable.Item>
+            ))}
+          </Draggable.Container>
+        </Draggable>
+      </DraggableProvider>
+    </div>
+  );
+};
+
 test("generated default kit and classname", () => {
   render(<DefaultDraggableKit />);
   const kit = screen.getByTestId(testId);
@@ -187,4 +239,20 @@ test("generated dragHandle with Card", () => {
   expect(card).toBeInTheDocument();
   const dragHandle = card.querySelector(".pb_custom_icon");
   expect(dragHandle).toBeInTheDocument();
+});
+
+test("line dropZone with default direction applies 'line_vertical' class to container", () => {
+  render(<DraggableWithLineVertical />);
+  const kit = screen.getByTestId(testId);
+  const container = kit.querySelector(".pb_draggable_container");
+  
+  expect(container).toHaveClass("line_vertical");
+});
+
+test("line dropZone with horizontal direction applies 'line_horizontal' class to container", () => {
+  render(<DraggableWithLineHorizontal />);
+  const kit = screen.getByTestId(testId);
+  const container = kit.querySelector(".pb_draggable_container");
+  
+  expect(container).toHaveClass("line_horizontal");
 });

@@ -31,7 +31,7 @@ const DraggableContainer = (props: DraggableContainerProps) => {
   } = contextValues;
 
   // Only get direction if dropZone is 'line'
-  const direction = dropZone === 'line' ? (contextValues.direction || 'vertical') : 'vertical';
+  const direction = dropZone === 'line' ? (contextValues.direction || 'vertical') : null; 
 
   const ariaProps = buildAriaProps(aria);
   const dataProps = buildDataProps(data);
@@ -41,8 +41,9 @@ const DraggableContainer = (props: DraggableContainerProps) => {
   const classes = classnames(
     buildCss("pb_draggable_container"),
     `${activeContainer === container ? "active" : ""}`,
-    // Only add vertical class if dropZone is 'line' and direction is 'vertical'
-    (dropZone === 'line' && direction === 'vertical') ? 'vertical' : '',
+    // Line variant gets line_{direction} classname on container no matter what
+    dropZone === 'line' && direction === 'vertical' ? 'line_vertical' : '',
+    dropZone === 'line' && direction === 'horizontal' ? 'line_horizontal' : '',
     globalProps(props),
     className
   );
