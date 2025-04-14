@@ -256,7 +256,8 @@ $bracket-border-width: 4px;
       }
       .layout_round .layout_game::after,
       .connector_container,
-      .half_box {
+      .half_box,
+      .polygon_node {
         display: none !important;
       }
     }
