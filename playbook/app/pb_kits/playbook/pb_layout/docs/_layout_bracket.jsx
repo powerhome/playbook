@@ -121,6 +121,7 @@ const LayoutBracket = () => {
                 name={teamData.eagles.name}
                 points="22"
                 rank={teamData.eagles.rank}
+                self
                 territory={teamData.eagles.territory}
                 winner
             />
@@ -263,6 +264,7 @@ const LayoutBracket = () => {
                 name={teamData.eagles.name}
                 points="28"
                 rank={teamData.eagles.rank}
+                self
                 territory={teamData.eagles.territory}
                 winner
             />
@@ -337,6 +339,7 @@ const LayoutBracket = () => {
                 name={teamData.eagles.name}
                 points="55"
                 rank={teamData.eagles.rank}
+                self
                 territory={teamData.eagles.territory}
                 winner
             />
@@ -379,6 +382,7 @@ const LayoutBracket = () => {
                 rank={teamData.eagles.rank}
                 self
                 territory={teamData.eagles.territory}
+                winner
             />
           </Layout.Game>
         </Layout.Round>
