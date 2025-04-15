@@ -52,7 +52,7 @@ const Game = (props: LayoutGameProps) => {
               shadow="deep"
           >
             <Card.Body padding="none">{firstChild}</Card.Body>
-            <SectionSeparator />
+            <SectionSeparator className="game_separator"/>
             <Card.Body padding="none">{secondChild}</Card.Body>
           </Card>
           {isOdd && numberOfGames > 1 &&
@@ -88,7 +88,7 @@ const Game = (props: LayoutGameProps) => {
                 To be determined...
               </Body>
             </Card.Body>
-            <SectionSeparator />
+            <SectionSeparator className="game_separator"/>
             <Card.Body padding="xs">
               <Body color="light">
                 To be determined...
