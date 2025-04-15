@@ -240,7 +240,8 @@ $bracket-border-width: 4px;
     }
 
     .layout_participant_winner,
-    .layout_participant_self {
+    .layout_participant_self,
+    .layout_participant_winner_self {
       position: relative;
 
       &::after {
@@ -260,6 +261,11 @@ $bracket-border-width: 4px;
     .layout_participant_self::after {
       left: 0;
       background: $category_1;
+    }
+
+    .layout_participant_winner_self::after {
+      right: 0;
+      background: $product_6_highlight;
     }
 
     @media (max-width: $screen-md-max) {
