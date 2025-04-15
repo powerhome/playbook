@@ -1,0 +1,1 @@
+By default, the overlay is rendered as a gradient. Setting the `gradient` prop to `false` renders the overlay as a solid color. You can adjust the transparency of the solid overlay by using the `opacity` prop.
