@@ -375,6 +375,7 @@
 
 
     &[class*="advanced-table-sticky-left-columns"] {
+      overflow-x: scroll;
       .sticky-left {
         position: sticky !important;
         z-index: 2;
@@ -386,6 +387,7 @@
   // Responsive Styles
   @media only screen and (max-width: $screen-xl-min) {
     &[class*="advanced-table-responsive-scroll"] {
+      overflow-x: auto;
       width: 100%;
       @include advanced-table-sticky-mixin;
     }

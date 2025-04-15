@@ -2,7 +2,6 @@
   border-radius: 4px;
   box-shadow: 1px 0 0 0px $border_light, -1px 0 0 0px $border_light;
   display: block;
-  overflow-x: auto;
   [class^="pb_table"].table-sm.table-card thead tr th:first-child,
   [class^="pb_table"].table-sm:not(.no-hover).table-card
     tbody
@@ -32,13 +31,18 @@
     left: 0;
     z-index: 2;
   }
-  .bg-silver td:first-child {
-    background-color: lighten($silver, $opacity_7);
-  }
-  .bg-white td:first-child {
-    background-color: $white;
-  }
-
+    .bg-silver {
+      td:first-child,
+        .sticky-left {
+        background-color: lighten($silver, $opacity_7);
+      }
+    }
+  
+    .bg-white {
+      td:first-child, .sticky-left {
+        background-color: $white;
+      }
+    }
   .virtualized-table-row {
     &.bg-silver td:first-child {
       background-color: lighten($silver, $opacity_7);
