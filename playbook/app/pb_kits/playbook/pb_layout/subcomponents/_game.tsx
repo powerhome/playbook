@@ -84,13 +84,13 @@ const Game = (props: LayoutGameProps) => {
               shadow="deep"
           >
             <Card.Body padding="xs">
-              <Body color="lighter">
+              <Body color="light">
                 To be determined...
               </Body>
             </Card.Body>
             <SectionSeparator />
             <Card.Body padding="xs">
-              <Body color="lighter">
+              <Body color="light">
                 To be determined...
               </Body>
             </Card.Body>
