@@ -77,42 +77,25 @@ const Game = (props: LayoutGameProps) => {
       {((!isMultiple && children) || numberOfChildren >= 1) ? (
         children
       ) : (
-        <Card
-            height="123px"
-            marginY="xs"
-            padding="none"
-            shadow="deep"
-        >
-          <Card.Body
-              flexGrow={1}
-              padding="xs"
+        <div className="layout_tbd">
+          <Card
+              marginY="xs"
+              padding="none"
+              shadow="deep"
           >
-            <Flex
-                height="100%"
-                justify="center"
-                orientation="column"
-            >
+            <Card.Body padding="xs">
               <Body color="lighter">
                 To be determined...
               </Body>
-            </Flex>
-          </Card.Body>
-          <SectionSeparator />
-          <Card.Body
-              flexGrow={1}
-              padding="xs"
-          >
-            <Flex
-                height="100%"
-                justify="center"
-                orientation="column"
-            >
+            </Card.Body>
+            <SectionSeparator />
+            <Card.Body padding="xs">
               <Body color="lighter">
                 To be determined...
               </Body>
-            </Flex>
-          </Card.Body>
-        </Card>
+            </Card.Body>
+          </Card>
+        </div>
       )}
       {isOdd && numberOfGames > 1 &&
         <div

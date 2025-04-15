@@ -232,6 +232,13 @@ $bracket-border-width: 4px;
       height: 60px;
     }
 
+    .layout_tbd {
+      height: 139px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
     .layout_participant_winner,
     .layout_participant_self {
       position: relative;
