@@ -6,6 +6,7 @@ import { GlobalProps, globalProps, globalInlineProps } from '../../utilities/glo
 import Card from '../../pb_card/_card'
 import SectionSeparator from '../../pb_section_separator/_section_separator'
 import Body from '../../pb_body/_body'
+import Flex from '../../pb_flex/_flex'
 
 type LayoutGameProps = {
   children: React.ReactNode[] | React.ReactNode,
@@ -77,20 +78,39 @@ const Game = (props: LayoutGameProps) => {
         children
       ) : (
         <Card
+            height="123px"
             marginY="xs"
             padding="none"
             shadow="deep"
         >
-          <Card.Body padding="xs">
-            <Body color="lighter">
-              To be determined...
-            </Body>
+          <Card.Body
+              flexGrow={1}
+              padding="xs"
+          >
+            <Flex
+                height="100%"
+                justify="center"
+                orientation="column"
+            >
+              <Body color="lighter">
+                To be determined...
+              </Body>
+            </Flex>
           </Card.Body>
           <SectionSeparator />
-          <Card.Body padding="xs">
-            <Body color="lighter">
-              To be determined...
-            </Body>
+          <Card.Body
+              flexGrow={1}
+              padding="xs"
+          >
+            <Flex
+                height="100%"
+                justify="center"
+                orientation="column"
+            >
+              <Body color="lighter">
+                To be determined...
+              </Body>
+            </Flex>
           </Card.Body>
         </Card>
       )}

@@ -226,6 +226,12 @@ $bracket-border-width: 4px;
       display: none;
     }
 
+    .layout_participant,
+    .layout_participant_winner,
+    .layout_participant_self {
+      height: 60px;
+    }
+
     .layout_participant_winner,
     .layout_participant_self {
       position: relative;
