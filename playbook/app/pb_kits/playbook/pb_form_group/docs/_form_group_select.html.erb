@@ -1,5 +1,4 @@
-<div>
-
+<%= pb_rails("flex", props: {orientation: "column", row_gap:"md"}) do %>
   <%= pb_rails("form_group") do %>
     <%= pb_rails("text_input", props: { placeholder: "Enter Artist Name" }) %>
     <%= pb_rails("select", props: {
@@ -17,8 +16,6 @@
       ]
     }) %>
   <% end %>
-  <br>
-  <br>
   <%= pb_rails("form_group") do %>
     <%= pb_rails("select", props: {
         blank_selection: "Phone",
@@ -32,8 +29,6 @@
         id: "phone"
     }) %>
   <% end %>
-  <br>
-  <br>
   <%= pb_rails("form_group") do %>
       <%= pb_rails("phone_number_input", props: {
         id: "phone2"
@@ -47,4 +42,4 @@
         ]
       }) %>
   <% end %>
-</div>
+<% end %>
