@@ -4,4 +4,4 @@ Create a sticky header that works for responsive Advanced Tables by setting `sti
 
 Expand the table above to see this in action.
 
-A sticky header on a nonresponsive table is demonstrated in the ["Sticky Header"](https://playbook.powerapp.cloud/kits/advanced_table/react##sticky-header) doc example above.
+A sticky header on a nonresponsive table is demonstrated in the ["Sticky Header"](https://playbook.powerapp.cloud/kits/advanced_table/react#sticky-header) doc example above.
