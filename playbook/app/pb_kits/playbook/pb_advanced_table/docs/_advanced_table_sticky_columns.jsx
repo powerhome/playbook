@@ -47,7 +47,7 @@ const AdvancedTableStickyColumns = (props) => {
       <AdvancedTable
           columnDefinitions={columnDefinitions}
           responsive="none"
-          stickyLeftColumn={["year", "newEnrollments"]}
+          stickyLeftColumn={["year"]}
           tableData={MOCK_DATA}
           {...props}
       />
