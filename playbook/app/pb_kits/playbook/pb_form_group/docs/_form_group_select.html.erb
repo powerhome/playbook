@@ -32,4 +32,19 @@
         id: "phone"
     }) %>
   <% end %>
+  <br>
+  <br>
+  <%= pb_rails("form_group") do %>
+      <%= pb_rails("phone_number_input", props: {
+        id: "phone2"
+      }) %>
+      <%= pb_rails("select", props: {
+        blank_selection: "Phone",
+        options: [
+          { value: "Cell" },
+          { value: "Work" },
+          { value: "Home" },
+        ]
+      }) %>
+  <% end %>
 </div>

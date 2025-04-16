@@ -48,6 +48,17 @@ const FormGroupSelect = (props) => {
             id='default'
         />
     </FormGroup>
+    <br />
+    <br />
+    <FormGroup>
+      <PhoneNumberInput
+          id='default-2'
+      />
+      <Select
+          blankSelection="Phone"
+          options={phoneOptions}
+      />
+    </FormGroup>
     </div>
   )
 }
