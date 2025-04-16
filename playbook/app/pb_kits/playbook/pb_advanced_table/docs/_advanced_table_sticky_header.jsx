@@ -2,7 +2,7 @@ import React from "react"
 import AdvancedTable from '../../pb_advanced_table/_advanced_table'
 import MOCK_DATA from "./advanced_table_mock_data.json"
 
-const AdvancedTableTableProps = (props) => {
+const AdvancedTableStickyHeader = (props) => {
   const columnDefinitions = [
     {
       accessor: "year",
@@ -36,14 +36,14 @@ const AdvancedTableTableProps = (props) => {
   ]
 
   const tableProps = {
-    container: false,
-    verticalBorder: true
+    sticky: true
   }
 
   return (
     <div>
       <AdvancedTable
           columnDefinitions={columnDefinitions}
+          responsive="none"
           tableData={MOCK_DATA}
           tableProps={tableProps}
           {...props}
@@ -52,4 +52,4 @@ const AdvancedTableTableProps = (props) => {
   )
 }
 
-export default AdvancedTableTableProps
+export default AdvancedTableStickyHeader
