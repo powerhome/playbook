@@ -41,11 +41,14 @@ const Game = (props: LayoutGameProps) => {
   if (numberOfChildren === 2) {
     const [firstChildWithoutProps, secondChildWithoutProps] = React.Children.toArray(children)
 
-    const firstChild = React.cloneElement(firstChildWithoutProps, { hasLastWinnerAndSelf })
-    const secondChild = React.cloneElement(secondChildWithoutProps, { hasLastWinnerAndSelf })
+    const firstChild = React.isValidElement(firstChildWithoutProps) ? React.cloneElement(firstChildWithoutProps, { hasLastWinnerAndSelf }) : firstChildWithoutProps
+    const secondChild = React.isValidElement(secondChildWithoutProps) ? React.cloneElement(secondChildWithoutProps, { hasLastWinnerAndSelf }) : secondChildWithoutProps
 
     if (React.isValidElement(firstChild) && React.isValidElement(secondChild)) {
-      if ('winner' in firstChild.props || 'winner' in secondChild.props) {
+      if (
+        firstChild?.props && typeof firstChild.props === 'object' && 'winner' in firstChild.props ||
+        secondChild?.props && typeof secondChild.props === 'object' && 'winner' in secondChild.props
+      ) {
         hasWinner = true
       }
       return (
