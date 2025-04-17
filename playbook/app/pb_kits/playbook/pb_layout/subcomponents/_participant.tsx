@@ -43,7 +43,12 @@ export const Participant = (props: LayoutParticipantProps) => {
         />
         <Body flexGrow={1}>
           <Flex justify="between">
-            <Body color={winner && !isLastWinnerAndSelf ? "success" : "default"}>{winner ? <strong>{name}{self ? ' (You)' : ''}</strong> : name + (self && !isLastWinnerAndSelf ? ' (You)' : '')}</Body>
+            <Body
+                color={winner && !isLastWinnerAndSelf ? "success" : "default"}
+                truncate={1}
+            >
+              {winner ? <strong>{name}{self ? ' (You)' : ''}</strong> : name + (self && !isLastWinnerAndSelf ? ' (You)' : '')}
+            </Body>
             <Body
                 color={winner && !isLastWinnerAndSelf ? "success" : "light"}
                 display="flex"
