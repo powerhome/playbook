@@ -23,9 +23,10 @@ type LayoutParticipantProps = {
 } & GlobalProps
 
 export const Participant = (props: LayoutParticipantProps) => {
-  const { className, name = 'To be determined...', territory = '', points, rank, avatar, winner, self } = props
+  const { className, name = 'To be determined...', territory = '', points, rank, avatar, winner, self, hasLastWinnerAndSelf } = props
   const dynamicInlineProps = globalInlineProps(props)
-  const classes = classnames(buildCss('layout_participant', winner ? 'winner' : '', self ? 'self' : ''), globalProps(props), className)
+  const isLastWinnerAndSelf = hasLastWinnerAndSelf && self && winner
+  const classes = classnames(buildCss('layout_participant', winner ? 'winner' : '', self ? 'self' : '', isLastWinnerAndSelf ? 'last' : ''), globalProps(props), className)
   return (
     <Background
         backgroundColor={winner ? "success_subtle" : "white"}
@@ -42,15 +43,15 @@ export const Participant = (props: LayoutParticipantProps) => {
         />
         <Body flexGrow={1}>
           <Flex justify="between">
-            <Body color={winner ? "success" : "default"}>{winner ? <strong>{name}</strong> : name}{self ? ' (You)' : ''}</Body>
+            <Body color={winner && !isLastWinnerAndSelf ? "success" : "default"}>{winner ? <strong>{name}{self ? ' (You)' : ''}</strong> : name + (self && !isLastWinnerAndSelf ? ' (You)' : '')}</Body>
             <Body
-                color={winner ? "success" : "light"}
+                color={winner && !isLastWinnerAndSelf ? "success" : "light"}
                 display="flex"
             >
               {points && (<>
                 <strong>{points}</strong>
                 <Detail
-                    color={winner ? "success" : "light"}
+                    color={winner && !isLastWinnerAndSelf ? "success" : "light"}
                     text="pts"
                 />
               </>)}
@@ -61,7 +62,7 @@ export const Participant = (props: LayoutParticipantProps) => {
             &nbsp;
             <Badge
                 text={rank}
-                variant={winner ? "success" : self ? "notification" : "neutral"}
+                variant={winner && !isLastWinnerAndSelf ? "success" : self ? "notification" : "neutral"}
             />
           </Body>
         </Body>

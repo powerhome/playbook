@@ -177,13 +177,38 @@ const Layout = (props: LayoutPropTypes) => {
     (child: React.ReactElement & {type: {displayName: string}}) => child.type?.displayName !== 'Side'
   )
 
-  const numberOfRounds = Array.isArray(nonSideChildren) ? React.Children.toArray(children).filter(
+  const numberOfRounds = Array.isArray(children) ? React.Children.toArray(children).filter(
     (child) => {
       return (child as React.ReactElement).type === Layout.Round;
     }
   ).length : 0
+
+  const lastRoundWithSelf = React.Children.toArray(children).filter((child) => {
+    if ((child as React.ReactElement).type !== Layout.Round) {
+      return false
+    }
+  
+    const roundElement = child as React.ReactElement
+  
+    const gameChildren = React.Children.toArray(roundElement.props.children)
+  
+    const hasWinningSelfParticipant = gameChildren.some((gameChild) => {
+      const gameElement = gameChild as React.ReactElement
+  
+      const participantChildren = React.Children.toArray(gameElement.props.children)
+  
+      return participantChildren.some((participantChild) => {
+        const participantElement = participantChild as React.ReactElement
+        const { self } = participantElement.props
+        return self === true
+      })
+    })
+  
+    return hasWinningSelfParticipant
+  }).length
+
   const bracketChildren = nonSideChildren.map(child =>
-    React.isValidElement(child) ? React.cloneElement(child, { numberOfRounds }) : child
+    React.isValidElement(child) ? React.cloneElement(child, { numberOfRounds, lastRoundWithSelf }) : child
   )
   
   const filteredProps = {...props}

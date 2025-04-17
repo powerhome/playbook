@@ -13,12 +13,13 @@ type LayoutGameProps = {
   className?: string,
   numberOfRounds: number,
   numberOfGames: number,
+  lastRoundWithSelf?: number,
   isOdd: boolean,
 } & GlobalProps
 
 // Game component (modeled after Item)
 const Game = (props: LayoutGameProps) => {
-  const { children, className, numberOfRounds, numberOfGames, isOdd } = props
+  const { children, className, numberOfRounds, numberOfGames, isOdd, lastRoundWithSelf } = props
   const dynamicInlineProps = globalInlineProps(props)
 
   const numberOfChildren = Array.isArray(children) ? children.length : 0
@@ -27,14 +28,21 @@ const Game = (props: LayoutGameProps) => {
 
   let ratio = 0
   let exponent
+  let currentRound = numberOfRounds
   if (numberOfGames > 1) {
     exponent = (numberOfRounds) - Math.log2(numberOfGames) - 1
     ratio = 2 ** exponent
+
+    currentRound = exponent + 1
   }
 
   let hasWinner = false
+  const hasLastWinnerAndSelf = lastRoundWithSelf === currentRound
   if (numberOfChildren === 2) {
-    const [firstChild, secondChild] = React.Children.toArray(children)
+    const [firstChildWithoutProps, secondChildWithoutProps] = React.Children.toArray(children)
+
+    const firstChild = React.cloneElement(firstChildWithoutProps, { hasLastWinnerAndSelf })
+    const secondChild = React.cloneElement(secondChildWithoutProps, { hasLastWinnerAndSelf })
 
     if (React.isValidElement(firstChild) && React.isValidElement(secondChild)) {
       if ('winner' in firstChild.props || 'winner' in secondChild.props) {
