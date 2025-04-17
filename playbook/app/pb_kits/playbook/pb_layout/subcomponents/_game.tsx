@@ -5,79 +5,110 @@ import { GlobalProps, globalProps, globalInlineProps } from '../../utilities/glo
 
 import Card from '../../pb_card/_card'
 import SectionSeparator from '../../pb_section_separator/_section_separator'
+import Body from '../../pb_body/_body'
+import Flex from '../../pb_flex/_flex'
 
 type LayoutGameProps = {
   children: React.ReactNode[] | React.ReactNode,
   className?: string,
   numberOfRounds: number,
   numberOfGames: number,
+  lastRoundWithSelf?: number,
   isOdd: boolean,
 } & GlobalProps
 
 // Game component (modeled after Item)
 const Game = (props: LayoutGameProps) => {
-  const { children, className, numberOfRounds, numberOfGames, isOdd } = props
+  const { children, className, numberOfRounds, numberOfGames, isOdd, lastRoundWithSelf } = props
   const dynamicInlineProps = globalInlineProps(props)
-  
+
   const numberOfChildren = Array.isArray(children) ? children.length : 0
-  
+
   const isMultiple = Array.isArray(children)
-  
+
   let ratio = 0
   let exponent
+  let currentRound = numberOfRounds
   if (numberOfGames > 1) {
     exponent = (numberOfRounds) - Math.log2(numberOfGames) - 1
     ratio = 2 ** exponent
+
+    currentRound = exponent + 1
   }
-  
+
+  let hasWinner = false
+  const hasLastWinnerAndSelf = lastRoundWithSelf === currentRound
   if (numberOfChildren === 2) {
-    const [firstChild, secondChild] = React.Children.toArray(children)
-  
-    if (React.isValidElement(firstChild) && React.isValidElement(secondChild)) { 
-    return (
-      <div
-          className={classnames('layout_game', globalProps(props), className)}
-          style={dynamicInlineProps}
-      >
-        <Card
-            marginY="xs"
-            padding="none"
-            shadow="deep"
+    const [firstChildWithoutProps, secondChildWithoutProps] = React.Children.toArray(children)
+
+    const firstChild = React.isValidElement(firstChildWithoutProps) ? React.cloneElement(firstChildWithoutProps, { hasLastWinnerAndSelf }) : firstChildWithoutProps
+    const secondChild = React.isValidElement(secondChildWithoutProps) ? React.cloneElement(secondChildWithoutProps, { hasLastWinnerAndSelf }) : secondChildWithoutProps
+
+    if (React.isValidElement(firstChild) && React.isValidElement(secondChild)) {
+      if (
+        firstChild?.props && typeof firstChild.props === 'object' && 'winner' in firstChild.props ||
+        secondChild?.props && typeof secondChild.props === 'object' && 'winner' in secondChild.props
+      ) {
+        hasWinner = true
+      }
+      return (
+        <div
+            className={classnames('layout_game', globalProps(props), className)}
+            style={dynamicInlineProps}
         >
-          <Card.Body padding="xs">{firstChild}</Card.Body>
-          <SectionSeparator />
-          <Card.Body padding="xs">{secondChild}</Card.Body>
-        </Card>
-        {isOdd && numberOfGames > 1  &&
-          <div
-              className="half_box"
-              style={{ height: `calc(${ratio} * 100% + 4px)` }}
-          />
-        }
-      </div>
+          <Card
+              marginY="xs"
+              overflow="hidden"
+              padding="none"
+              shadow="deep"
+          >
+            <Card.Body padding="none">{firstChild}</Card.Body>
+            <SectionSeparator className="game_separator"/>
+            <Card.Body padding="none">{secondChild}</Card.Body>
+          </Card>
+          {isOdd && numberOfGames > 1 &&
+            <div
+                className="half_box"
+                style={{ height: `calc(${ratio} * 100% + 4px)` }}
+            />
+          }
+          {numberOfGames > 1 && hasWinner &&
+            <div className="polygon_node" />
+          }
+        </div>
       )
     }
   }
-  
+
   return (
     <div
         className={classnames('layout_game', globalProps(props), className)}
         style={dynamicInlineProps}
     >
-    {((!isMultiple && children) || numberOfChildren >= 1 )? (
-      children
-    ) : (
-      <Card
-          marginY="xs"
-          padding="none"
-          shadow="deep"
-      >
-        <Card.Body padding="xs">To be determined...</Card.Body>
-        <SectionSeparator />
-        <Card.Body padding="xs">To be determined...</Card.Body>
-      </Card>
-    )}
-      {isOdd && numberOfGames > 1  &&
+      {((!isMultiple && children) || numberOfChildren >= 1) ? (
+        children
+      ) : (
+        <div className="layout_tbd">
+          <Card
+              marginY="xs"
+              padding="none"
+              shadow="deep"
+          >
+            <Card.Body padding="xs">
+              <Body color="light">
+                To be determined...
+              </Body>
+            </Card.Body>
+            <SectionSeparator className="game_separator"/>
+            <Card.Body padding="xs">
+              <Body color="light">
+                To be determined...
+              </Body>
+            </Card.Body>
+          </Card>
+        </div>
+      )}
+      {isOdd && numberOfGames > 1 &&
         <div
             className="half_box"
             style={{ height: `calc(${ratio} * 100% + 4px)` }}

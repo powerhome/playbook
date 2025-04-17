@@ -25,16 +25,33 @@ type LayoutRoundProps = {
   children: React.ReactNode[] | React.ReactNode,
   className?: string,
   numberOfRounds: number,
+  lastRoundWithSelf: number,
 } & GlobalProps
 
 export const Round = (props: LayoutRoundProps) => {
-  const { children, className, numberOfRounds } = props
+  const { children, className, numberOfRounds, lastRoundWithSelf } = props
   const dynamicInlineProps = globalInlineProps(props)
   const numberOfChildren = Array.isArray(children) ? children.length : 0
 
-  const childrenWithProps = Array.isArray(children) ? children.map((child, index) =>
-    React.isValidElement(child) ? React.cloneElement(child, { numberOfRounds, numberOfGames: numberOfChildren, isOdd: index % 2 === 0, key: `child_${index}` }) : child
-  ) : children
+  const childrenWithProps = Array.isArray(children)
+  ? children.map((child, index) =>
+      React.isValidElement(child)
+        ? React.cloneElement(child, {
+            numberOfRounds,
+            numberOfGames: numberOfChildren,
+            isOdd: index % 2 === 0,
+            key: `child_${index}`,
+            lastRoundWithSelf
+          })
+        : child
+    )
+  : React.isValidElement(children)
+    ? React.cloneElement(children, {
+        numberOfRounds,
+        numberOfGames: numberOfChildren,
+        lastRoundWithSelf
+      })
+    : children
 
   const rightConnectors = Array.from({ length: numberOfChildren / 2 }, (_, index) => (
     <div
