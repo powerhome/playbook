@@ -85,8 +85,16 @@
     .text_input_wrapper input, [class^=pb_text_input_kit] .text_input_wrapper .text_input {
       border-bottom-right-radius: 0;
       border-top-right-radius: 0;
-      border-right-width: 0;
+      border-right-color: transparent;
     }
+    [class^=pb_text_input_kit] .text_input_wrapper input:focus,
+    [class^=pb_text_input_kit] .text_input_wrapper .text_input:focus {
+      border-right-color: $primary;
+    } 
+    [class^=pb_text_input_kit].error .text_input_wrapper input,
+    [class^=pb_text_input_kit].error .text_input_wrapper .text_input {
+      border-right-color: $error;
+    }   
   }
 
   & > [class^=pb_phone_number_input]:not(:first-child) {
@@ -107,8 +115,16 @@
     .text_input {
       border-bottom-right-radius: 0;
       border-top-right-radius: 0;
-      border-right: none;
+      border-right-color: transparent;
     }
+    [class^=pb_text_input_kit] .text_input_wrapper input:focus,
+    [class^=pb_text_input_kit] .text_input_wrapper .text_input:focus {
+      border-right-color: $primary;
+    } 
+    [class^=pb_text_input_kit].error .text_input_wrapper input,
+    [class^=pb_text_input_kit].error .text_input_wrapper .text_input {
+      border-right-color: $error;
+    }  
   }
 
   &[class*=rails] > [class^=pb_date_picker_kit] {

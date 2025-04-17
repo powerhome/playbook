@@ -4,6 +4,7 @@ import FormGroup from '../_form_group'
 import PhoneNumberInput from '../../pb_phone_number_input/_phone_number_input'
 import Select from '../../pb_select/_select'
 import TextInput from '../../pb_text_input/_text_input'
+import Flex from '../../pb_flex/_flex'
 
 const FormGroupSelect = (props) => {
   const options = [
@@ -25,7 +26,10 @@ const FormGroupSelect = (props) => {
   ]
 
   return (
-    <div>
+    <Flex 
+        orientation="column" 
+        rowGap="md"
+    >
       <FormGroup>
         <TextInput
             placeholder="Enter Artist Name"
@@ -37,18 +41,29 @@ const FormGroupSelect = (props) => {
             {...props}
         />
       </FormGroup>
-      <br />
-      <br />
       <FormGroup>
         <Select
             blankSelection="Phone"
             options={phoneOptions}
-            />
+            {...props}
+        />
         <PhoneNumberInput
             id='default'
+            {...props}
         />
     </FormGroup>
-    </div>
+    <FormGroup>
+      <PhoneNumberInput
+          id='default-2'
+          {...props}
+      />
+      <Select
+          blankSelection="Phone"
+          options={phoneOptions}
+          {...props}
+      />
+    </FormGroup>
+    </Flex>
   )
 }
 
