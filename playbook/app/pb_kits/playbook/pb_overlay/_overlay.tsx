@@ -7,7 +7,7 @@ import OverlayToken from './subcomponents/_overlay_token'
 
 export type OverlayChildrenProps = {
     children: React.ReactNode[] | React.ReactNode,
-    color: "card_light" | "bg_light" | "card_dark" | "bg_dark",
+    color: "card_light" | "bg_light" | "card_dark" | "bg_dark" | "black" | "white" | "success" | "error",
     dynamic?: boolean,
     position: string,
     size: string,
@@ -18,14 +18,16 @@ type OverlayProps = {
     aria?: { [key: string]: string },
     className?: string,
     children: React.ReactNode[] | React.ReactNode,
-    color: "card_light" | "bg_light" | "card_dark" | "bg_dark",
+    color: "card_light" | "bg_light" | "card_dark" | "bg_dark" | "black" | "white" | "success" | "error",
     data?: { [key: string]: string },
     dynamic?: false,
+    gradient?: boolean,
     htmlOptions?: { [key: string]: string | number | boolean | (() => void) },
     id?: string,
     layout: { [key: string]: string },
+    opacity: 'opacity_1' | 'opacity_2' | 'opacity_3' | 'opacity_4' | 'opacity_5' | 'opacity_6' | 'opacity_7' | 'opacity_8' | 'opacity_9' | 'opacity_10',
     scrollBarNone?: boolean,
-    
+
 }
 
 const Overlay = (props: OverlayProps) => {
@@ -36,15 +38,24 @@ const Overlay = (props: OverlayProps) => {
         color = "card_light",
         data = {},
         dynamic = false,
+        gradient = true,
         htmlOptions = {},
         id,
         layout = { "bottom": "full" },
+        opacity,
         scrollBarNone = false,
     } = props
 
     const ariaProps = buildAriaProps(aria)
     const dataProps = buildDataProps(data)
-    const classes = classnames(buildCss('pb_overlay'), { 'overlay-hide-scrollbar': scrollBarNone }, globalProps(props), className )
+    const classes = classnames(
+        buildCss('pb_overlay'),
+        { 'overlay-hide-scrollbar': scrollBarNone },
+        globalProps(props),
+        gradient === false ? 'no_gradient' : '',
+        opacity,
+        className
+    )
     const htmlProps = buildHtmlProps(htmlOptions)
     const dynamicInlineProps = globalInlineProps(props)
 

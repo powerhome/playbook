@@ -18,34 +18,39 @@ $overlay_colors: (
   card_dark: $card_dark,
   bg_dark: $bg_dark,
   bg_light: $bg_light,
+  black: $black,
+  white: $white,
+  success: $success,
+  error: $error
 );
 
-@mixin overlay($direction, $size, $color) {
+@mixin overlay($direction, $size, $color, $apply_gradient: true) {
   display: block;
   position: absolute;
   pointer-events: none;
   z-index: 1;
   content: "";
 
-  @if $direction == "left" {
-    inset: 0 auto 0 0;
-    background: linear-gradient(to right, $color 0%, transparent 100%);
-    width: $size;
-  }
-  @if $direction == "right" {
-    inset: 0 0 0 auto;
-    background: linear-gradient(to left, $color 0%, transparent 100%);
-    width: $size;
-  }
-  @if $direction == "top" {
-    inset: 0 0 auto 0;
-    background: linear-gradient(to bottom, $color 0%, transparent 100%);
-    height: $size;
-  }
-  @if $direction == "bottom" {
-    inset: auto 0 0 0;
-    background: linear-gradient(to top, $color 0%, transparent 100%);
-    height: $size;
+  @if $apply_gradient {
+    @if $direction == "left" {
+      inset: 0 auto 0 0;
+      background: linear-gradient(to right, $color 0%, transparent 100%);
+      width: $size;
+    } @else if $direction == "right" {
+      inset: 0 0 0 auto;
+      background: linear-gradient(to left, $color 0%, transparent 100%);
+      width: $size;
+    } @else if $direction == "top" {
+      inset: 0 0 auto 0;
+      background: linear-gradient(to bottom, $color 0%, transparent 100%);
+      height: $size;
+    } @else if $direction == "bottom" {
+      inset: auto 0 0 0;
+      background: linear-gradient(to top, $color 0%, transparent 100%);
+      height: $size;
+    }
+  } @else {
+    background: $color;
   }
 }
 
@@ -69,7 +74,7 @@ $overlay_colors: (
     pointer-events: none;
     z-index: 1;
   }
-  
+
   &.overlay-hide-scrollbar {
     & [class*="overflow_x_auto"],
     & [class*="overflow_y_auto"],
@@ -77,9 +82,31 @@ $overlay_colors: (
       &::-webkit-scrollbar {
         display: none !important;
       }
-      
+
       -ms-overflow-style: none !important;
       scrollbar-width: none !important;
+    }
+  }
+
+  &.no_gradient {
+    @each $color_name, $color in $overlay_colors {
+      .overlay_#{$color_name} {
+        @each $name, $size in $overlay_sizes {
+          @each $position in $overlay_positions {
+            &_#{$position}_#{$name} {
+              @include overlay($position, $size, $color, false);
+            }
+          }
+        }
+      }
+    }
+
+    @each $key, $value in $opacity {
+      &.#{$key} {
+        [class^=overlay] {
+          opacity: $value;
+        }
+      }
     }
   }
 }

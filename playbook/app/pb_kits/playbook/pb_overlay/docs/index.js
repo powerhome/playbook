@@ -1,4 +1,7 @@
 export { default as OverlayDefault } from './_overlay_default.jsx'
+export { default as OverlayGradientOpacity } from './_overlay_gradient_opacity.jsx'
+export { default as OverlayColor } from './_overlay_color.jsx'
+export { default as OverlayLayout } from './_overlay_layout.jsx'
 export { default as OverlayMultiDirectional } from './_overlay_multi_directional.jsx'
 export { default as OverlayToggle } from './_overlay_toggle.jsx'
 export { default as OverlayVerticalDynamicMultiDirectional } from './_overlay_vertical_dynamic_multi_directional.jsx'
