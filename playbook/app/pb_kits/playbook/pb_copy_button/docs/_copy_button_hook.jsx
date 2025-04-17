@@ -5,7 +5,7 @@ import Textarea from '../../pb_textarea/_textarea'
 
 const CopyButtonHook = (props) => {
   // eslint-disable-next-line no-unused-vars
-  const [hasCopied, copyToClipboard] = usePBCopy({ from: 'hookbody' })
+  const [copiedText, copyToClipboard] = usePBCopy({ from: 'hookbody' })
   
   useEffect(() => {
     const el = document.getElementById('hookbody')
