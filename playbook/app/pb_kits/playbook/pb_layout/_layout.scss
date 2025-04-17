@@ -228,7 +228,9 @@ $bracket-border-width: 4px;
 
     .layout_participant,
     .layout_participant_winner,
-    .layout_participant_self {
+    .layout_participant_self,
+    .layout_participant_winner_self,
+    .layout_participant_winner_self_last {
       height: 60px;
     }
 
