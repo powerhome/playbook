@@ -21,23 +21,25 @@ type CopyButtonProps = {
   timeout?: number
 }
 
-const CopyButton = ({
-  aria = {},
-  className,
-  data = {},
-  from = '',
-  id,
-  text = 'Copy',
-  tooltipPlacement = 'bottom',
-  tooltipText = 'Copied!',
-  value = '',
-  timeout = 1000,
-}: CopyButtonProps) => {
+const CopyButton = (props: CopyButtonProps) => {
+  const {
+    aria = {},
+    className,
+    data = {},
+    from = '',
+    id,
+    text= 'Copy',
+    timeout = 1000,
+    tooltipPlacement= 'bottom',
+    tooltipText = 'Copied!',
+    value = '',
+  } = props
+
   const [copied, copy] = usePBCopy({ value, from, timeout })
 
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
-  const classes = classnames(buildCss('pb_copy_button_kit'), globalProps({ aria, className, data, id }), className)
+  const classes = classnames(buildCss('pb_copy_button_kit'), globalProps(props), className)
 
   return (
     <div {...ariaProps}
