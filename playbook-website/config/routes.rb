@@ -60,6 +60,12 @@ Rails.application.routes.draw do
                                to: "samples#show",
                                as: "sample_show"
 
+  # Patterns
+  get "patterns", to: "patterns#index"
+  get "patterns/:name(/:type)", defaults: { type: "rails" },
+                                to: "patterns#show",
+                                as: "patterns_show"
+
   # dark mode
   get "/enable_dark_mode", to: "pages#enable_dark_mode", as: "enable_dark_mode"
   get "/disable_dark_mode", to: "pages#disable_dark_mode", as: "disable_dark_mode"
