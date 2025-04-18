@@ -1,6 +1,6 @@
-<%= pb_rails("flex", props: {margin_left: "xl", margin_top: "lg", orientation: "column"}) do %>
+<%= pb_rails("flex", props: {orientation: "column"}) do %>
     <%= pb_rails("flex", props: {margin_bottom: "lg", orientation: "column"}) do %>
-        <%= pb_rails("caption", props: {padding_bottom: "md", text: "EXAMPLE 1 without tweaking Image kit:"}) %>
+        <%= pb_rails("caption", props: {padding_bottom: "md", text: "EXAMPLE 1: Image kit with Badge"}) %>
         <%# EXAMPLE 1 without tweaking Image kit: %>
         <%= pb_rails("flex", props: {position: "relative"}) do %>
         <%= pb_rails("image", props: {alt: "picture of a misty forest", size: "xs", url: "https://unsplash.it/500/400/?image=634"}) %>
@@ -11,7 +11,7 @@
     <% end %>
 
     <%= pb_rails("flex", props: {margin_bottom: "lg", orientation: "column"}) do %>
-        <%= pb_rails("caption", props: {padding_bottom: "md", text: "EXAMPLE 2 with Card with Badge (no kit changes needed):"}) %>
+        <%= pb_rails("caption", props: {padding_bottom: "md", text: "EXAMPLE 2: Card kit with Badge"}) %>
         <%# EXAMPLE 2 with Card with Badge (no kit changes needed): %>
         <%= pb_rails("card", props: {position: "relative"}) do %>
             A bunch of awesome content goes here. Yeah! It sure does! Okay!
@@ -22,7 +22,7 @@
     <% end %>
 
     <%= pb_rails("flex", props: {margin_bottom: "lg", orientation: "column"}) do %>
-        <%= pb_rails("caption", props: {padding_bottom: "md", text: "EXAMPLE 3 with Card with IconCircle (no kit changes needed):"}) %>
+        <%= pb_rails("caption", props: {padding_bottom: "md", text: "EXAMPLE 3: Card kit with IconCircle"}) %>
         <%# EXAMPLE 3 with Card with IconCircle (no kit changes needed): %>
         <%= pb_rails("card", props: {position: "relative"}) do %>
             A bunch of awesome content goes here. Yeah! It sure does! Okay!
@@ -33,7 +33,7 @@
     <% end %>
 
     <%= pb_rails("flex", props: {margin_bottom: "lg", orientation: "column"}) do %>
-        <%= pb_rails("caption", props: {padding_bottom: "md", text: "EXAMPLE 4 with NavItem (no kit changes needed):"}) %>
+        <%= pb_rails("caption", props: {padding_bottom: "md", text: "EXAMPLE 4: NavItem with a Badge"}) %>
         <%# EXAMPLE 4 with NavItem (no kit changes needed): %>
         <%= pb_rails("nav", props: {link: "#", orientation: "horizontal"}) do %>
             <%= pb_rails("nav/item", props: {link: "#"}) do %>
@@ -49,7 +49,7 @@
     <% end %>
 
     <%= pb_rails("flex", props: {margin_bottom: "lg", orientation: "column"}) do %>
-        <%= pb_rails("caption", props: {padding_bottom: "md", text: "EXAMPLE 5: Avatar with a Badge"}) %>
+        <%= pb_rails("caption", props: {padding_bottom: "md", text: "EXAMPLE 5: Avatar kit with a Badge"}) %>
         <%# EXAMPLE 5: Avatar with a Badge %>
         <%= pb_rails("flex", props: {position: "relative"}) do %>
             <%= pb_rails("avatar", props: {image_alt: "Terry Johnson Standing", image_url: "https://randomuser.me/api/portraits/women/90.jpg", name: "Terry Johnson", size: "lg"}) %>
@@ -58,7 +58,7 @@
     <% end %>
 
     <%= pb_rails("flex", props: {margin_bottom: "lg", orientation: "column"}) do %>
-        <%= pb_rails("caption", props: {padding_bottom: "md", text: "EXAMPLE 6: Avatar with a Card (with a Badge)"}) %>
+        <%= pb_rails("caption", props: {padding_bottom: "md", text: "EXAMPLE 6: Avatar kit with a Card and Badge"}) %>
         <%# EXAMPLE 6: Avatar with a Card (with a Badge) %>
         <%= pb_rails("flex", props: {justify: "center", position: "relative"}) do %>
             <%= pb_rails("avatar", props: {image_alt: "Terry Johnson Standing", image_url: "https://randomuser.me/api/portraits/women/90.jpg", name: "Terry Johnson", size: "lg"}) %>

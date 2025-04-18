@@ -14,11 +14,11 @@ import {
 
 const GlobalPositioning = () => {
   return (
-    <Flex marginLeft='xl' marginTop='lg' orientation='column'>
+    <Flex orientation='column'>
       <Flex marginBottom='lg' orientation='column'>
         <Caption
           paddingBottom='md'
-          text='EXAMPLE 1 without tweaking Image kit:'
+          text='EXAMPLE 1: Image kit with Badge'
         />
 
         {/* Example 1 */}
@@ -43,7 +43,7 @@ const GlobalPositioning = () => {
       <Flex marginBottom='lg' orientation='column'>
         <Caption
           paddingBottom='md'
-          text='EXAMPLE 2 with Card with Badge (no kit changes needed):'
+          text='EXAMPLE 2: Card kit with Badge'
         />
         {/* Example 2 */}
         <Card position='relative'>
@@ -63,7 +63,7 @@ const GlobalPositioning = () => {
       <Flex marginBottom='lg' orientation='column'>
         <Caption
           paddingBottom='md'
-          text='EXAMPLE 3 with Card with IconCircle (no kit changes needed):'
+          text='EXAMPLE 3: Card kit with IconCircle'
         />
         {/* Example 3 */}
         <Card position='relative'>
@@ -84,7 +84,7 @@ const GlobalPositioning = () => {
       <Flex marginBottom='lg' orientation='column'>
         <Caption
           paddingBottom='md'
-          text='EXAMPLE 4 with NavItem (no kit changes needed):'
+          text='EXAMPLE 4: NavItem with a Badge'
         />
         {/* Example 4 */}
         <Nav link='#' orientation='horizontal'>
@@ -107,7 +107,7 @@ const GlobalPositioning = () => {
       </Flex>
 
       <Flex marginBottom='lg' orientation='column'>
-        <Caption paddingBottom='md' text='EXAMPLE 5: Avatar with a Badge' />
+        <Caption paddingBottom='md' text='EXAMPLE 5: Avatar kit with a Badge' />
         {/* Example 5 */}
         <Flex position='relative'>
           <Avatar
@@ -130,7 +130,7 @@ const GlobalPositioning = () => {
       <Flex marginBottom='lg' orientation='column'>
         <Caption
           paddingBottom='md'
-          text='EXAMPLE 6: Avatar with a Card (with a Badge)'
+          text='EXAMPLE 6: Avatar kit with a Card and Badge'
         />
         {/* Example 6 */}
         <Flex justify='center' position='relative'>
