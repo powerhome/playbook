@@ -3,6 +3,7 @@ type InputMask = {
     formatDefaultValue: (value: string) => string
     pattern: string
     placeholder: string
+    sanitize?: (value: string) => string;
 }
 
 type InputMaskDictionary = {
@@ -73,35 +74,41 @@ export const INPUTMASKS: InputMaskDictionary = {
         // eslint-disable-next-line no-useless-escape
         pattern: '^\\$\\d{1,3}(?:,\\d{3})*(?:\\.\\d{2})?$',
         placeholder: '$0.00',
+        sanitize: (value: string) => value.replace(/[$,]/g, ''),
     },
     zipCode: {
         format: formatBasicPostal,
         formatDefaultValue: formatBasicPostal,
         pattern: '\\d{5}',
         placeholder: '12345',
+        sanitize: (value: string) => value,
     },
     postalCode: {
         format: formatExtendedPostal,
         formatDefaultValue: formatExtendedPostal,
         pattern: '\\d{5}-\\d{4}',
         placeholder: '12345-6789',
+        sanitize: (value: string) => value.replace(/-/g, ''),
     },
     ssn: {
         format: formatSSN,
         formatDefaultValue: formatSSN,
         pattern: '\\d{3}-\\d{2}-\\d{4}',
         placeholder: '123-45-6789',
+        sanitize: (value: string) => value.replace(/-/g, ''),
     },
     creditCard: {
         format: formatCreditCard,
         formatDefaultValue: formatCreditCard,
         pattern: '\\d{4} \\d{4} \\d{4} \\d{4}',
         placeholder: '1234 5678 9012 3456',
+        sanitize: (value: string) => value.replace(/\s/g, ''),
     },
     cvv: {
         format: formatCVV,
         formatDefaultValue: formatCVV,
         pattern: '\\d{3,4}',
         placeholder: '123',
+        sanitize: (value: string) => value,
     },
-} 
+}
