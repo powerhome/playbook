@@ -1,12 +1,16 @@
-import React from 'react'
+import React, {useState} from 'react'
 
 import FormGroup from '../_form_group'
 import PhoneNumberInput from '../../pb_phone_number_input/_phone_number_input'
 import Select from '../../pb_select/_select'
 import TextInput from '../../pb_text_input/_text_input'
 import Flex from '../../pb_flex/_flex'
+import Passphrase from '../../pb_passphrase/_passphrase'
 
 const FormGroupSelect = (props) => {
+  const [input, setInput] = useState("");
+  const handleChange = (e) => setInput(e.target.value);
+
   const options = [
     { value: 'Country' },
     { value: 'Pop' },
@@ -63,6 +67,20 @@ const FormGroupSelect = (props) => {
           {...props}
       />
     </FormGroup>
+    <FormGroup>
+        <Select 
+            blankSelection="Phone" 
+            options={phoneOptions}
+            {...props}
+        />
+        <Passphrase
+            id="my-passphrase"
+            label=""
+            onChange={handleChange}
+            value={input}
+            {...props}
+        />
+      </FormGroup>
     </Flex>
   )
 }
