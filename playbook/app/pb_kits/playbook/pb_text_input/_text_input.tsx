@@ -25,7 +25,7 @@ type TextInputProps = {
   name: string,
   label: string,
   mask?: 'currency' | 'zipCode' | 'postalCode' | 'ssn',
-  onChange: (e: React.FormEvent<HTMLInputElement>) => void,
+  onChange: (e: React.FormEvent<HTMLInputElement>, sanitizedValue?: string) => void,
   placeholder: string,
   required?: boolean,
   type: string,
@@ -102,10 +102,16 @@ const TextInput = (props: TextInputProps, ref: React.LegacyRef<HTMLInputElement>
 
       let cursorPosition = e.target.selectionStart;
       const isAtEnd = cursorPosition === inputValue.length;
-      
+
       const formattedValue = INPUTMASKS[mask].format(inputValue)
+
+      let sanitizedValue = formattedValue;
+      if (INPUTMASKS[mask].sanitize) {
+        sanitizedValue = INPUTMASKS[mask].sanitize(formattedValue)
+      }
+
       e.target.value = formattedValue
-      
+
       // Keep cursor position
       if (!isAtEnd) {
         // Account for extra characters (e.g., commas added/removed in currency)
@@ -116,9 +122,11 @@ const TextInput = (props: TextInputProps, ref: React.LegacyRef<HTMLInputElement>
         }
         e.target.selectionStart = e.target.selectionEnd = cursorPosition
       }
+
+      onChange(e, sanitizedValue);
+    } else {
+      onChange(e)
     }
-    
-    onChange(e)
   }
 
   const childInput = children ? children.type === "input" : undefined
