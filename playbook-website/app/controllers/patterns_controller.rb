@@ -14,6 +14,10 @@ class PatternsController < ApplicationController
     @show_sidebar = true
   end
 
+  def icons
+    @show_sidebar = true
+  end
+
 private
 
   def current_pattern_type

@@ -62,6 +62,7 @@ Rails.application.routes.draw do
 
   # Patterns
   get "patterns", to: "patterns#index"
+  get "patterns/icons", to: "patterns#icons"
   get "patterns/:name(/:type)", defaults: { type: "rails" },
                                 to: "patterns#show",
                                 as: "patterns_show"

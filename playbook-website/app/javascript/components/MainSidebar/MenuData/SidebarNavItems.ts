@@ -41,7 +41,13 @@ export const SideBarNavItems = [
         children: true,
         leftIcon:"vial"
     },
-
+    {
+        name: "Patterns",
+        key: "top-nav-item-8",
+        link: "/patterns",
+        children: true,
+        leftIcon:"chalkboard-teacher"
+    },
     {
       name: "Playground",
       key: "top-nav-item-7",

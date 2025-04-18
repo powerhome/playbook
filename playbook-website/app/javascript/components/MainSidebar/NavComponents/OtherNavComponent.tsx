@@ -7,6 +7,7 @@ export const OtherNavItems = ({
   currentURL,
   dark,
   samples,
+  patterns,
   setIsActive,
   isActive,
   updateTopLevelNav,
@@ -28,6 +29,11 @@ export const OtherNavItems = ({
   }
 
   const samplesMenu: string[] = []
+
+  const patternsMenu = patterns?.Patterns?.map((item) => ({
+    name: item.name,
+    link: `/patterns/${item.link}`,
+  }))
 
   //Get samples pages from Samples yml file
   for (const key in samples) {
@@ -62,6 +68,8 @@ export const OtherNavItems = ({
     menuItems = tokensAndGuidelinesMenu
   } else if (name === "UI Samples" && samples) {
     menuItems = samplesMenu
+  } else if (name === "Patterns" && patterns) {
+    menuItems = patternsMenu
   } else if (name === "Getting Started") {
     menuItems = guidesNavItems
   } else if (name === "Design Guidelines") {
