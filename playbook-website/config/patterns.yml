@@ -1,3 +1,7 @@
 ---
-Display:
-- global_positioning
+Patterns:
+  - name: "Global Positioning"
+    description: "Use our global positioning props (position, top, bottom, right, left) with various kits to create common UI patterns."
+    tags:
+      - Global Props
+    link: "global_positioning"

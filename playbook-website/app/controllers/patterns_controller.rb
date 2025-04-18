@@ -7,18 +7,11 @@ class PatternsController < ApplicationController
 
   def index
     @show_sidebar = true
+    @patterns = PATTERNS["Patterns"]
   end
 
   def show
     @show_sidebar = true
-  end
-
-  def get_category(pattern)
-    cat = ""
-    PATTERNS.each do |category, patterns|
-      cat = category if patterns.include?(pattern)
-    end
-    cat
   end
 
 private
@@ -30,15 +23,16 @@ private
 
   def set_pattern
     @application_js.concat ["pattern-show"]
+    pattern = PATTERNS["Patterns"].find { |p| p["link"] == params[:name] }
 
-    if PATTERNS.flatten(2).include?(params[:name])
-      @patterns = params[:name]
+    if pattern
+      @pattern = pattern
     else
       redirect_to "/patterns", flash: { error: "That pattern does not exist" }
     end
   end
 
   def set_js
-    @application_js.concat ["samples"]
+    @application_js.concat ["patterns"]
   end
 end
