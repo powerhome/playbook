@@ -6,7 +6,6 @@ export const OtherNavItems = ({
   name,
   currentURL,
   dark,
-  samples,
   patterns,
   setIsActive,
   isActive,
@@ -16,31 +15,12 @@ export const OtherNavItems = ({
   design_guidelines,
   whats_new,
 }) => {
-  //transform text from samples yml
-  const transformMenuTitle = (link) => {
-    if (name === "UI Samples") {
-      const words = link
-        .split("_")
-        .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-      return words.join(" ")
-    } else {
-      return link.name
-    }
-  }
-
-  const samplesMenu: string[] = []
 
   const patternsMenu = patterns?.Patterns?.map((item) => ({
     name: item.name,
     link: `/patterns/${item.link}`,
   }))
 
-  //Get samples pages from Samples yml file
-  for (const key in samples) {
-    if (samples.hasOwnProperty(key)) {
-      samples[key].forEach((item: string) => samplesMenu.push(item))
-    }
-  }
   let menuItems: { [key: string]: string }[] | string[] = []
 
   const guidesNavItems = getting_started["pages"].map(guide => ({
@@ -66,8 +46,6 @@ export const OtherNavItems = ({
   //conditionally render navitems depending on name
   if (name === "Tokens & Guidelines") {
     menuItems = tokensAndGuidelinesMenu
-  } else if (name === "UI Samples" && samples) {
-    menuItems = samplesMenu
   } else if (name === "Patterns" && patterns) {
     menuItems = patternsMenu
   } else if (name === "Getting Started") {
@@ -79,7 +57,7 @@ export const OtherNavItems = ({
   }
 
   const handleItemClick = (link, i) => {
-    const key = name === "UI Samples" ? `${link}-${i}` : `${link.link}-${i}`
+    const key = `${link.link}-${i}`
     setIsActive(() => {
       const newIsActive = {}
       newIsActive[key] = true
@@ -92,15 +70,18 @@ export const OtherNavItems = ({
     if (currentURL.startsWith("/guides/getting_started/icons") && link.name === "Icon Integration") {
       return true;
     }
-
-    const key = name === "UI Samples" ? `${link}-${i}` : `${link.link}-${i}`
-    return isActive[key]
-      ? true
-      : Object.keys(isActive).length === 0
-      ? name === "UI Samples"
-        ? `/samples/${link}` === currentURL
-        : link.link === currentURL
-      : null
+  
+    const key = `${link.link}-${i}`
+  
+    if (isActive[key]) {
+      return true
+    }
+  
+    if (Object.keys(isActive).length === 0) {
+      return link.link === currentURL
+    }
+  
+    return null
   }
 
   return (
@@ -111,13 +92,13 @@ export const OtherNavItems = ({
           cursor="pointer"
           dark={dark}
           fontSize="small"
-          key={name === "UI Samples" ? `${link}-${i}` : `${link.link}-${i}`}
-          link={name === "UI Samples" ? `/samples/${link}` : link.link}
+          key={`${link.link}-${i}`}
+          link={link.link}
           marginBottom="none"
           marginTop="xxs"
           onClick={() => handleItemClick(link, i)}
           paddingY="xxs"
-          text={transformMenuTitle(link)}
+          text={link.name}
         />
       ))}
     </>

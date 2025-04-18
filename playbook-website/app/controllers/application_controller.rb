@@ -7,7 +7,6 @@ class ApplicationController < ActionController::Base
 
   helper ApplicationHelper
   helper PatternHelper
-  helper SampleHelper
 
   def delete_dark_mode_cookie
     cookies.delete :dark_mode

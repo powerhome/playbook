@@ -53,13 +53,6 @@ Rails.application.routes.draw do
   get "guides/:parent",         to: "guides#md_doc", as: "guides_parent"
   get "guides/:parent/:page",   to: "guides#md_doc", as: "guides_parent_page"
 
-  # Samples
-  get "samples", to: "samples#index"
-  get "samples/icons", to: "samples#icons"
-  get "samples/:name(/:type)", defaults: { type: "rails" },
-                               to: "samples#show",
-                               as: "sample_show"
-
   # Patterns
   get "patterns", to: "patterns#index"
   get "patterns/icons", to: "patterns#icons"

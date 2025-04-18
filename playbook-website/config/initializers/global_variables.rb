@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 MENU = Rails.cache.fetch("menu_yml") { YAML.load_file(Rails.root.join("config/menu.yml")) }
-SAMPLES = Rails.cache.fetch("samples_yml") { YAML.load_file(Rails.root.join("config/samples.yml")) }
 PATTERNS = Rails.cache.fetch("patterns_yml") { YAML.load_file(Rails.root.join("config/patterns.yml")) }
 
 require "markdown_helper"
