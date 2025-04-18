@@ -14,7 +14,7 @@ import {
 
 const GlobalPositioning = () => {
   return (
-    <Flex marginLeft='xl' marginTop='lg' orientation='column'>
+    <Flex orientation='column'>
       <Flex marginBottom='lg' orientation='column'>
         <Caption
           paddingBottom='md'
