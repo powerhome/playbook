@@ -87,6 +87,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
     showActionsBar = true,
     selectableRows,
     sortControl,
+    stickyLeftColumn,
     tableData,
     tableOptions,
     tableProps,
@@ -233,6 +234,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
       'advanced-table-fullscreen': isFullscreen,
       'advanced-table-allow-fullscreen': allowFullScreen
     },
+    {'advanced-table-sticky-left-columns': stickyLeftColumn && stickyLeftColumn.length > 0},
     globalProps(props),
     className
   );
@@ -291,6 +293,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
             setExpanded={setExpanded}
             showActionsBar={showActionsBar}
             sortControl={sortControl}
+            stickyLeftColumn={stickyLeftColumn}
             subRowHeaders={tableOptions?.subRowHeaders}
             table={table}
             tableContainerRef={tableWrapperRef}
