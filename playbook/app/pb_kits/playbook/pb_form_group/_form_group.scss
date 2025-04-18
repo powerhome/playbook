@@ -97,7 +97,7 @@
     }   
   }
 
-  & > [class^=pb_phone_number_input]:not(:first-child) {
+  & > [class^=pb_phone_number_input]:not(:first-child), [class^=pb_passphrase]:not(:first-child) {
     .text_input_wrapper input, [class^=pb_text_input_kit] .text_input_wrapper .text_input {
       border-bottom-left-radius: 0;
       border-top-left-radius: 0;
@@ -242,5 +242,9 @@
       border-left: none;
       padding-left: calc(var(--iti-flag-width) + 1px);
     }
+  }
+  
+  &:has(> [class^="pb_select"]):has(> .pb_passphrase) [class^="pb_select"] {
+      align-self: baseline;
   }
 }
