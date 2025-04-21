@@ -18,7 +18,7 @@
 
 <%= pb_rails("flex", props: { justify: "between" }) do %>
   <%= pb_rails("flex/flex_item", props: { margin_right: "xl" }) do %>
-    <%= pb_rails("draggable", props: { drop_zone: { type: "shadow" }, initial_items: data_shadow }) do %>
+    <%= pb_rails("draggable", props: { drop_zone_type: "shadow", initial_items: data_shadow }) do %>
       <%= pb_rails("caption", props: { margin_bottom: "xs", text: "Shadow", text_align: "center" }) %>
       <%= pb_rails("draggable/draggable_container", props: { html_options: { style: { width: "200px" } } }) do %>
         <% data_shadow.each do |item| %>
@@ -33,7 +33,7 @@
   <% end %>
 
   <%= pb_rails("flex/flex_item", props: { margin_right: "xl" }) do %>
-    <%= pb_rails("draggable", props: { drop_zone: { type: "outline" }, initial_items: data_outline }) do %>
+    <%= pb_rails("draggable", props: { drop_zone_type: "outline", initial_items: data_outline }) do %>
       <%= pb_rails("caption", props: { margin_bottom: "xs", text: "Outline", text_align: "center" }) %>
       <%= pb_rails("draggable/draggable_container", props: { html_options: { style: { width: "200px" } } }) do %>
         <% data_outline.each do |item| %>
@@ -48,7 +48,7 @@
   <% end %>
 
   <%= pb_rails("flex/flex_item") do %>
-    <%= pb_rails("draggable", props: { drop_zone: { type: "line" }, initial_items: data_line }) do %>
+    <%= pb_rails("draggable", props: { drop_zone_type: "line", initial_items: data_line }) do %>
       <%= pb_rails("caption", props: { margin_bottom: "xs", text: "Line", text_align: "center" }) %>
       <%= pb_rails("draggable/draggable_container", props: { html_options: { style: { width: "200px" } } }) do %>
         <% data_line.each do |item| %>
