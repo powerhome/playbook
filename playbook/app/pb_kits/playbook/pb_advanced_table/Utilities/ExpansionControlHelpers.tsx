@@ -1,4 +1,4 @@
-import { RowModel } from "@tanstack/react-table"
+import { RowModel, Row } from "@tanstack/react-table"
 import { ExpandedStateObject } from "./types"
 import { GenericObject } from "../../types"
 
@@ -20,8 +20,7 @@ export const updateExpandAndCollapseState = (
   const updateExpandedRows: Record<string, boolean> = {};
   const rows = targetDepth !== undefined ? tableRows.flatRows : tableRows.rows;
 
-  let isExpansionConsistent = true;
-  const areRowsExpanded = new Set<boolean>();
+  const rowsToToggle: Row<GenericObject>[] = [];
 
   for (const row of rows) {
     const shouldBeUpdated =
@@ -30,20 +29,25 @@ export const updateExpandAndCollapseState = (
         : targetParent === undefined
         ? row.depth === 0
         : targetParent === row.parentId;
-    
+
     if (shouldBeUpdated) {
-      const isExpanded = row.getIsExpanded();
-      areRowsExpanded.add(isExpanded);
+      rowsToToggle.push(row);
+    }
+  }
 
-      updateExpandedRows[row.id] = !isExpansionConsistent ? true : !isExpanded;
+  // Check if we are expanding or collapsing
+  const anyCollapsed = rowsToToggle.some((row) => !row.getIsExpanded());
+  const isExpandAction = anyCollapsed;
 
-      if (areRowsExpanded.size > 1) {
-        isExpansionConsistent = false;
-        // If expansion inconsistent, ensure all target rows are set to expand
-        for (const key in updateExpandedRows) {
-          updateExpandedRows[key] = true;
-        }
-      }
+  
+  for (const row of rowsToToggle) {
+    const shouldUpdate =
+      isExpandAction || targetDepth === undefined
+        ? true
+        : row.depth === targetDepth;
+
+    if (shouldUpdate) {
+      updateExpandedRows[row.id] = isExpandAction;
     }
   }
 
