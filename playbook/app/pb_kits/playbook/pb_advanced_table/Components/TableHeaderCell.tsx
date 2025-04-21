@@ -8,8 +8,10 @@ import { GlobalProps } from "../../utilities/globalProps"
 
 import Flex from "../../pb_flex/_flex"
 import Checkbox from "../../pb_checkbox/_checkbox"
-// Import different for Dropdown due to TS issues
-import { Dropdown } from "playbook-ui"
+import Dropdown from "../../pb_dropdown/_dropdown"
+import DropdownTrigger from "../../pb_dropdown/subcomponents/DropdownTrigger"
+import DropdownOption from "../../pb_dropdown/subcomponents/DropdownOption"
+import DropdownContainer from "../../pb_dropdown/subcomponents/DropdownContainer"
 import Icon from "../../pb_icon/_icon"
 
 import { SortIconButton } from "./SortIconButton"
@@ -168,12 +170,12 @@ const isToggleExpansionEnabled =
             )}
           {isToggleExpansionEnabled && hasAnySubRows && expandByDepth && (
               <Dropdown options={expandByDepth}>
-                <Dropdown.Trigger className="gray-icon toggle-all-icon">
+                <DropdownTrigger className="gray-icon toggle-all-icon">
                   <Icon icon={displayIcon(toggleExpansionIcon)[0]} />
-                </Dropdown.Trigger>
-                <Dropdown.Container className="expand-by-depth-dropdown">
-                  {expandByDepth.map((option, index) => (
-                    <Dropdown.Option
+                </DropdownTrigger>
+                <DropdownContainer className="expand-by-depth-dropdown">
+                  {expandByDepth.map((option:{ [key: string]: any }, index: number) => (
+                    <DropdownOption
                         key={index}
                         option={option}
                         padding="none"
@@ -186,9 +188,9 @@ const isToggleExpansionEnabled =
                           >
                             {option.label}
                           </Flex>
-                    </Dropdown.Option>
+                    </DropdownOption>
                   ))}
-                </Dropdown.Container>
+                </DropdownContainer>
               </Dropdown>
             )}
 
