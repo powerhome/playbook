@@ -14,16 +14,22 @@ const filterExpandableRows = (expandedState: Record<string, boolean>) => {
 export const updateExpandAndCollapseState = (
   tableRows: RowModel<GenericObject>,
   expanded: Record<string, boolean>,
-  targetParent: string
+  targetParent?: string,
+  targetDepth?: number,
 ) => {
   const updateExpandedRows: Record<string, boolean> = {};
-  const rows = tableRows.rows;
+  const rows = targetDepth !== undefined ? tableRows.flatRows : tableRows.rows;
 
   let isExpansionConsistent = true;
   const areRowsExpanded = new Set<boolean>();
 
   for (const row of rows) {
-    const shouldBeUpdated = targetParent === undefined ? row.depth === 0 : targetParent === row.parentId;
+    const shouldBeUpdated =
+      targetDepth !== undefined
+        ? row.depth <= targetDepth
+        : targetParent === undefined
+        ? row.depth === 0
+        : targetParent === row.parentId;
     
     if (shouldBeUpdated) {
       const isExpanded = row.getIsExpanded();

@@ -35,7 +35,7 @@ type DropdownProps = {
     label?: string;
     onSelect?: (arg: GenericObject) => null;
     options: GenericObject;
-    separators: boolean;
+    separators?: boolean;
     triggerRef?: any;
     variant?: "default" | "subtle";
 };
