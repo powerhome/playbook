@@ -45,6 +45,7 @@ export const TableHeaderCell = ({
     selectableRows,
     hasAnySubRows,
     showActionsBar,
+    stickyLeftColumn,
     inlineRowLoading,
     isActionBarVisible,
   } = useContext(AdvancedTableContext);
@@ -76,7 +77,9 @@ const cellClassName = classnames(
   `${isChrome() ? "chrome-styles" : ""}`,
   `${enableSorting ? "table-header-cells-active" : ""}`,
   { "pinned-left": responsive === "scroll" && isPinnedLeft },
-   isLastHeaderCell ? "last-header-cell" : ""
+   isLastHeaderCell ? "last-header-cell" : "",
+  stickyLeftColumn && stickyLeftColumn.length > 0 && isPinnedLeft ? 'sticky-left' : "",
+
 ); 
 
 const cellId = `${loading ? 
@@ -111,6 +114,13 @@ const isToggleExpansionEnabled =
         colSpan={header?.colSpan}
         id={cellId}
         key={`${header?.id}-header`}
+        style={{
+          left: isPinnedLeft
+            ? header?.index === 1 //Accounting for set min-width for first column
+              ? '180px'
+              : `${header?.column.getStart("left")}px`
+            : undefined,
+        }}
     >
       {header?.isPlaceholder ? null : headerChildren && header?.index === 0 ? (
         <Flex alignItems="center">

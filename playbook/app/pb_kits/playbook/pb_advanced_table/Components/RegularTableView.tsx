@@ -1,4 +1,4 @@
-import React, { useContext } from "react"
+import React, { useContext, useEffect } from "react"
 import classnames from "classnames"
 import { flexRender, Row, Cell } from "@tanstack/react-table"
 
@@ -32,8 +32,20 @@ export const RegularTableView = ({
     table,
     selectableRows,
     hasAnySubRows,
-    isPinnedLeft = false,
+    stickyLeftColumn
   } = useContext(AdvancedTableContext)
+
+
+  useEffect(() => {
+    if (stickyLeftColumn && Array.isArray(stickyLeftColumn)) {
+      stickyLeftColumn.forEach((columnId) => {
+        const column = table.getColumn(columnId);
+        if (column && column.getCanPin()) {
+          column.pin('left');
+        }
+      });
+    }
+  },[stickyLeftColumn, table]);
 
   const columnPinning = table.getState().columnPinning || { left: [] };
   const columnDefinitions = table.options.meta?.columnDefinitions || [];
@@ -82,7 +94,7 @@ export const RegularTableView = ({
               {row.getVisibleCells().map((cell: Cell<GenericObject, unknown>, i: number) => {
                 const isPinnedLeft = columnPinning.left.includes(cell.column.id);
                 const isLastCell = cell.column.parent?.columns?.at(-1)?.id === cell.column.id;
-
+                const { column } = cell;
                 return (
                   <td
                       align="right"
@@ -90,9 +102,17 @@ export const RegularTableView = ({
                         `${cell.id}-cell position_relative`,
                         isChrome() ? "chrome-styles" : "",
                         isPinnedLeft && 'pinned-left',
+                        stickyLeftColumn && stickyLeftColumn.length > 0 && isPinnedLeft && 'sticky-left',
                         isLastCell && 'last-cell',
                       )}
                       key={`${cell.id}-data`}
+                      style={{
+                        left: isPinnedLeft
+                          ? i === 1 //Accounting for set min-width for first column
+                            ? '180px'
+                            : `${column.getStart("left")}px`
+                          : undefined,
+                      }}
                   >
                     {collapsibleTrail && i === 0 && row.depth > 0 && renderCollapsibleTrail(row.depth)}
                     <span id={`${cell.id}-span`}>
