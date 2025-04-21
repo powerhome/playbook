@@ -8,7 +8,8 @@ import { GlobalProps } from "../../utilities/globalProps"
 
 import Flex from "../../pb_flex/_flex"
 import Checkbox from "../../pb_checkbox/_checkbox"
-import Dropdown from "../../pb_dropdown/_dropdown"
+// Import different for Dropdown due to TS issues
+import { Dropdown } from "playbook-ui"
 import Icon from "../../pb_icon/_icon"
 
 import { SortIconButton } from "./SortIconButton"
