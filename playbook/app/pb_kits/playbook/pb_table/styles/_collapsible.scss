@@ -1,5 +1,4 @@
 @import "../../tokens/colors";
-@import "../../tokens/screen_sizes";
 
 .table_collapsible_side_highlight {
   border-left: 4px solid $primary;
@@ -48,88 +47,5 @@
   
   .border-active {
     border-bottom: 1px;
-  }
-
-  // Removing borders from nested collapsible tables and table rows to prevent visual border doubling
-  &.table-sm.table-collapse-sm,
-  &.table-md.table-collapse-sm,
-  &.table-lg.table-collapse-sm {
-    .pb_collapsible_content_kit {
-      .pb_table {
-        @media only screen and (min-width: $screen-xs-max) {
-          th {
-            border-left: none;
-            border-right: none;
-            border-top: none;
-          }
-          tr td:first-child {
-            border-left: none;
-          }
-          tr td:last-child {
-            border-right: none;
-          }
-          tr:first-child td {
-            border-top: none;
-          }
-          tr:last-child td {
-            border-bottom: none;
-          }
-        }
-      }
-    }
-  }
-  &.table-sm.table-collapse-md,
-  &.table-md.table-collapse-md,
-  &.table-lg.table-collapse-md {
-    .pb_collapsible_content_kit {
-      .pb_table {
-        @media only screen and (min-width: $screen-lg-min) {
-          th {
-            border-left: none;
-            border-right: none;
-            border-top: none;
-          }
-          tr td:first-child {
-            border-left: none;
-          }
-          tr td:last-child {
-            border-right: none;
-          }
-          tr:first-child td {
-            border-top: none;
-          }
-          tr:last-child td {
-            border-bottom: none;
-          }
-        }
-      }
-    }
-  }
-  &.table-sm.table-collapse-lg,
-  &.table-md.table-collapse-lg,
-  &.table-lg.table-collapse-lg {
-    .pb_collapsible_content_kit {
-      .pb_table {
-        @media only screen and (min-width: $screen-xl-min) {
-          th {
-            border-left: none;
-            border-right: none;
-            border-top: none;
-          }
-          tr td:first-child {
-            border-left: none;
-          }
-          tr td:last-child {
-            border-right: none;
-          }
-          tr:first-child td {
-            border-top: none;
-          }
-          tr:last-child td {
-            border-bottom: none;
-          }
-        }
-      }
-    }
   }
 }
