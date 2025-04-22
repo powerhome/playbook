@@ -96,7 +96,7 @@ kits:
     enhanced_element_used: false
   - name: copy_button
     platforms: *1
-    status: beta
+    status: stable
     icons_used: false
     react_rendered: false
     enhanced_element_used: true
