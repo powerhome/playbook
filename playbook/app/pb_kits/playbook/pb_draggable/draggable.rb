@@ -9,11 +9,8 @@ module Playbook
                             values: %w[ghost shadow outline line],
                             default: "shadow"
       prop :drop_zone_color, type: Playbook::Props::Enum,
-                             values: %w[primary purple],
-                             default: "primary"
-      prop :drop_zone_orientation, type: Playbook::Props::Enum,
-                                   values: %w[horizontal vertical],
-                                   default: "vertical"
+                             values: %w[neutral primary purple],
+                             default: "neutral"
 
       def data
         Hash(prop(:data)).merge(pb_draggable: true)
@@ -22,8 +19,7 @@ module Playbook
       def classname
         generate_classname("pb_draggable",
                            "drop_zone_#{drop_zone_type}",
-                           "drop_zone_#{drop_zone_color}",
-                           "drop_zone_#{drop_zone_orientation}")
+                           "drop_zone_#{drop_zone_color}")
       end
     end
   end
