@@ -26,6 +26,14 @@ export default class PbCopyButton extends PbEnhancedElement {
   }
 
   handleClick() {
+    const textToCopy = this.element.getAttribute('data-copy-value')
+    if (textToCopy) {
+      navigator.clipboard.writeText(textToCopy)
+        .catch(err => console.error('Failed to copy text', err))
+
+      return
+    }
+
     const fromId = this.element.getAttribute('data-from')
     if (fromId) {
       const fromElement = document.querySelector(`#${fromId}`)
@@ -38,14 +46,7 @@ export default class PbCopyButton extends PbEnhancedElement {
         }
         navigator.clipboard.writeText(contentToCopy)
           .catch(err => console.error('Failed to copy text', err))
-        return
       }
-    }
-
-    const textToCopy = this.element.getAttribute('data-copy-value')
-    if (textToCopy) {
-      navigator.clipboard.writeText(textToCopy)
-        .catch(err => console.error('Failed to copy text', err))
     } else {
       console.warn('No data-copy-value attribute found or data-from element')
     }
