@@ -11,6 +11,12 @@ export default class PbCopyButton extends PbEnhancedElement {
     if (this.button) {
       this.button.addEventListener('click', this.handleClick)
     }
+
+    const fromId = this.element.getAttribute('data-from')
+
+    document.addEventListener(`${fromId}`, () => {
+      this.handleClick()
+    })
   }
 
   disconnect() {

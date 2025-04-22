@@ -1,0 +1,24 @@
+<%= pb_rails("copy_button", props: { display: "none", from: "hookbody" } ) %>
+
+<div onclick="usePBCopy('hookbody')">
+  <%= pb_rails("body", props: { cursor: "pointer" }) do %>
+    <span id="hookbody">I'm a custom copy hook! Click this body to copy this text!</span>
+  <% end %>
+</div>
+
+<%= pb_rails("tooltip", props: {
+  trigger_element_selector: "#hookbody",
+  tooltip_id: "hookbody_tooltip",
+  position: 'top',
+  trigger_method: "click"
+}) do %>
+  Copied!
+<% end %>
+
+<%= pb_rails("textarea", props: { margin_top: "xs", placeholder: "Paste here" }) %>
+
+<script>
+  const usePBCopy = (id) => {
+    document.dispatchEvent(new CustomEvent(id));
+  };
+</script>
