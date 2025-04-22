@@ -7,7 +7,7 @@ module Playbook
                            default: []
       prop :drop_zone_type, type: Playbook::Props::Enum,
                             values: %w[ghost shadow outline line],
-                            default: "shadow"
+                            default: "ghost"
       prop :drop_zone_color, type: Playbook::Props::Enum,
                              values: %w[neutral primary purple],
                              default: "neutral"
