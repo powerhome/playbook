@@ -6,7 +6,7 @@ import HighchartsMore from "highcharts/highcharts-more"
 import SolidGauge from "highcharts/modules/solid-gauge"
 import '../GaugeStyles.scss'
 // Your path might look more like this
-//import "playbook-ui/dist/pb_bar_graph/GaugeThemeStyles.scss";
+//import "playbook-ui/dist/pb_gauge/GaugeThemeStyles.scss";
 
 HighchartsMore(Highcharts);
 SolidGauge(Highcharts);
