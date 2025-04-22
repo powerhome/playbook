@@ -21,6 +21,7 @@ type OverlayProps = {
     color: "card_light" | "bg_light" | "card_dark" | "bg_dark" | "black" | "white" | "success" | "error",
     data?: { [key: string]: string },
     dynamic?: false,
+    fullScreen?: boolean,
     gradient?: boolean,
     htmlOptions?: { [key: string]: string | number | boolean | (() => void) },
     id?: string,
@@ -38,6 +39,7 @@ const Overlay = (props: OverlayProps) => {
         color = "card_light",
         data = {},
         dynamic = false,
+        fullScreen = false,
         gradient = true,
         htmlOptions = {},
         id,
@@ -51,6 +53,7 @@ const Overlay = (props: OverlayProps) => {
     const classes = classnames(
         buildCss('pb_overlay'),
         { 'overlay-hide-scrollbar': scrollBarNone },
+        { 'overlay-full-screen': fullScreen },
         globalProps(props),
         gradient === false ? 'no_gradient' : '',
         opacity,
@@ -64,6 +67,9 @@ const Overlay = (props: OverlayProps) => {
     }
 
     const getSize = () => {
+        if (fullScreen) {
+            return "100%"
+        }
         return Object.values(layout)[0]
     }
 
@@ -76,7 +82,17 @@ const Overlay = (props: OverlayProps) => {
             {...htmlProps}
             className={classes}
             id={id}
-            style={dynamicInlineProps}
+            style={{
+                ...(fullScreen ? {
+                    position: 'fixed',
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    bottom: 0,
+                    zIndex: 9999,
+                } : {}),
+                ...dynamicInlineProps
+            }}
         >
             {isSizePercentage ?
                 OverlayPercentage({

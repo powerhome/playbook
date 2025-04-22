@@ -8,6 +8,8 @@ examples:
   - overlay_vertical_dynamic_multi_directional: Vertical Dynamic Multi-directional
   - overlay_toggle: Toggle
   - overlay_hide_scroll_bar: Hide Scroll Bar
+  - overlay_fullscreen_opacity: Full Page Opacity
+  - overlay_fullscreen_background: Full Page Using Background Color Tokens
 
   rails:
   - overlay_default: Default
