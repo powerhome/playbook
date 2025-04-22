@@ -31,6 +31,8 @@ export default class PbAdvancedTable extends PbEnhancedElement {
         this.toggleElement(this.target);
       }
     });
+    
+    this.hideCloseIcon()
 
     const nestedButtons = this.element
       .closest("table")
@@ -48,6 +50,11 @@ export default class PbAdvancedTable extends PbEnhancedElement {
       });
     });
   }
+
+  hideCloseIcon() {
+    const closeIcon = this.element.querySelector(UP_ARROW_SELECTOR);
+    closeIcon.style.display = "none";
+}
 
   showElement(elements) {
     elements.forEach((elem) => {
