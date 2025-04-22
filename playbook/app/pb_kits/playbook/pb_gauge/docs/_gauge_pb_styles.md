@@ -1,0 +1,1 @@
+You don't need to use the Gauge Kit to apply Playbook styles to your Highcharts gauge graph. Just import gaugeTheme.ts and GaugeStyles.scss into your component, and the styles will apply automatically.

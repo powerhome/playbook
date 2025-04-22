@@ -78,6 +78,10 @@ export default defineConfig({
           src: resolve(__dirname, 'app/pb_kits/playbook/pb_bar_graph/BarGraphStyles.scss'),
           dest: 'dist/pb_bar_graph/',
         },
+        {
+          src: resolve(__dirname, 'app/pb_kits/playbook/pb_gauge/GaugeStyles.scss'),
+          dest: 'dist/pb_gauge/',
+        }
       ]
     }),
     consolidate({
