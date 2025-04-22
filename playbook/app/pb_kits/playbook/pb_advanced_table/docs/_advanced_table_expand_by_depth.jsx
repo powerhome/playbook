@@ -55,6 +55,7 @@ const AdvancedTableExpandByDepth = (props) => {
       <AdvancedTable
           columnDefinitions={columnDefinitions}
           expandByDepth={expandByDepth}
+          onExpandByDepthClick={(depth, rows) => {console.log(depth, rows)}}
           tableData={MOCK_DATA}
           {...props}
       />

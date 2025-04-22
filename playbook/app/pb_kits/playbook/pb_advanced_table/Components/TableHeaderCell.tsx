@@ -50,6 +50,7 @@ export const TableHeaderCell = ({
     expanded,
     setExpanded,
     expandByDepth,
+    onExpandByDepthClick,
     toggleExpansionIcon,
     sortControl,
     responsive,
@@ -119,6 +120,10 @@ const isToggleExpansionEnabled =
   }
   
   const handleExpandDepth = (depth: number) => {
+    if (onExpandByDepthClick) {
+      const flatRows = table?.getRowModel().flatRows
+      onExpandByDepthClick(depth, flatRows)
+    }
     const updated = updateExpandAndCollapseState(
       table.getRowModel(),
       expanded,
@@ -169,7 +174,9 @@ const isToggleExpansionEnabled =
               <ToggleIconButton onClick={handleExpandOrCollapse} />
             )}
           {isToggleExpansionEnabled && hasAnySubRows && expandByDepth && (
-              <Dropdown options={expandByDepth}>
+              <Dropdown className="expand-by-depth-dropdown-wrapper" 
+                  options={expandByDepth}
+              >
                 <DropdownTrigger className="gray-icon toggle-all-icon">
                   <Icon icon={displayIcon(toggleExpansionIcon)[0]} />
                 </DropdownTrigger>

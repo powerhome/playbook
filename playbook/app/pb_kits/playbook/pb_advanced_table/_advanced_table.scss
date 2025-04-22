@@ -130,8 +130,12 @@
         box-sizing: border-box !important;
       }
     }
+    .expand-by-depth-dropdown-wrapper {
+      position: unset !important;
+    }
     .expand-by-depth-dropdown {
-      min-width: 150px;
+      width: unset !important;
+      text-align: left;
     }
   }
 

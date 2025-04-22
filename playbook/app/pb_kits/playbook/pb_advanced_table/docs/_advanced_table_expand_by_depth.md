@@ -6,4 +6,5 @@ The `expandByDepth` prop enables users to expand or collapse table rows by speci
 
 **Collapsing a depth**: Only collapses rows at the selected depth, keeping parent rows expanded for context.
 
+If you want to attach further logic to each option click, the **optional** `onExpandByDepthClick` prop can be used. This click event provides 2 arguments that can be hooked into: the depth level of the clicked item AND all flattened table rows. Any additional functionality provided through this onClick will be applied in addition to the default.
 
