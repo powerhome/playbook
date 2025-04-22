@@ -24,56 +24,56 @@ const OverlayFullscreenOpacity = () => {
 
   return (
     <>
-      <Button
-          onClick={handleClickOpacity40}
-          text="40% Opacity"
-          variant="secondary"
-      />
-      {' '}
-      <Button
-          onClick={handleClickOpacity80}
-          text="80% Opacity"
-          variant="secondary"
-      />
+      <div>
+        <Button
+            onClick={handleClickOpacity40}
+            text="40% Opacity"
+            variant="secondary"
+        />
+        {' '}
+        <Button
+            onClick={handleClickOpacity80}
+            text="80% Opacity"
+            variant="secondary"
+        />
 
-      {openOpacity40 && (
-          <Overlay
-              color="black"
-              fullScreen
-              gradient={false}
-              opacity="opacity_4"
-          >
-            <FixedConfirmationToast
-                closeable
-                horizontal='center'
-                onClose={handleCloseOpacity40}
-                open={openOpacity40}
-                status="tip"
-                text='Lost connection. Check your internet connectivity.'
-                vertical='top'
-            />
-          </Overlay>
-      )}
+        {openOpacity40 && (
+            <Overlay
+                fullScreen
+                gradient={false}
+                opacity="opacity_4"
+            >
+              <FixedConfirmationToast
+                  closeable
+                  horizontal='center'
+                  onClose={handleCloseOpacity40}
+                  open={openOpacity40}
+                  status="tip"
+                  text='Lost connection. Check your internet connectivity.'
+                  vertical='top'
+              />
+            </Overlay>
+        )}
 
-      {openOpacity80 && (
-          <Overlay
-              color="black"
-              fullScreen
-              gradient={false}
-              opacity="opacity_8"
-          >
-            <FixedConfirmationToast
-                closeable
-                display="block"
-                horizontal='center'
-                onClose={handleCloseOpacity80}
-                open={openOpacity80}
-                status="tip"
-                text='Lost connection. Check your internet connectivity.'
-                vertical='top'
-            />
-          </Overlay>
-      )}
+        {openOpacity80 && (
+            <Overlay
+                fullScreen
+                gradient={false}
+                opacity="opacity_8"
+            >
+              <FixedConfirmationToast
+                  closeable
+                  display="block"
+                  horizontal='center'
+                  onClose={handleCloseOpacity80}
+                  open={openOpacity80}
+                  status="tip"
+                  text='Lost connection. Check your internet connectivity.'
+                  vertical='top'
+              />
+            </Overlay>
+        )}
+      </div>
     </>
   )
 }

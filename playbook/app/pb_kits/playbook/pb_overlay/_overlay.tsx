@@ -54,8 +54,8 @@ const Overlay = (props: OverlayProps) => {
         buildCss('pb_overlay'),
         { 'overlay-hide-scrollbar': scrollBarNone },
         { 'overlay-full-screen': fullScreen },
+        { 'no_gradient': gradient === false },
         globalProps(props),
-        gradient === false ? 'no_gradient' : '',
         opacity,
         className
     )
@@ -90,6 +90,7 @@ const Overlay = (props: OverlayProps) => {
                     right: 0,
                     bottom: 0,
                     zIndex: 9999,
+                    background: gradient === false ? color : undefined,
                 } : {}),
                 ...dynamicInlineProps
             }}
