@@ -1,4 +1,3 @@
-// src/javascript/pb_draggable/index.js
 import PbEnhancedElement from "../pb_enhanced_element";
 
 const DRAGGABLE_SELECTOR  = "[data-pb-draggable]";
