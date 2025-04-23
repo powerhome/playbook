@@ -39,8 +39,16 @@ const gaugeTheme = {
       '<span style="font-weight: bold; color:{point.color};">●</span>{point.name}: ' +
       "<b>{point.y}</b>",
     followPointer: true,
+    shadow: false,
+    borderWidth: 0,
+    borderRadius: 10,
+    style: {
+      fontFamily: typography.font_family_base,
+      color: colors.text_dk_default,
+      fontWeight: typography.regular,
+      fontSize: typography.text_smaller,
+    },
   },
-  colors: colors.data_1,
   yAxis: {
     min: 0,
     max: 100,
@@ -51,6 +59,7 @@ const gaugeTheme = {
     solidgauge: {
       borderColor: colors.data_1,
       borderWidth: 20,
+      color: colors.data_1,
       radius: 90,
       innerRadius: "90%",
       y: -26,
