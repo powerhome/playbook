@@ -1,6 +1,6 @@
 import React, { useContext } from "react"
 import classnames from "classnames"
-import { flexRender, Header, Table } from "@tanstack/react-table"
+import { flexRender, Header, Table, RowModel } from "@tanstack/react-table"
 
 import { GenericObject } from "../../types"
 
@@ -8,9 +8,16 @@ import { GlobalProps } from "../../utilities/globalProps"
 
 import Flex from "../../pb_flex/_flex"
 import Checkbox from "../../pb_checkbox/_checkbox"
+import Dropdown from "../../pb_dropdown/_dropdown"
+import DropdownTrigger from "../../pb_dropdown/subcomponents/DropdownTrigger"
+import DropdownOption from "../../pb_dropdown/subcomponents/DropdownOption"
+import DropdownContainer from "../../pb_dropdown/subcomponents/DropdownContainer"
+import Icon from "../../pb_icon/_icon"
 
 import { SortIconButton } from "./SortIconButton"
 import { ToggleIconButton } from "./ToggleIconButton"
+import { displayIcon } from "../Utilities/IconHelpers"
+import { updateExpandAndCollapseState } from "../Utilities/ExpansionControlHelpers"
 
 import { isChrome } from "../Utilities/BrowserCheck"
 
@@ -40,6 +47,11 @@ export const TableHeaderCell = ({
   table
 }: TableHeaderCellProps) => {
   const {
+    expanded,
+    setExpanded,
+    expandByDepth,
+    onExpandByDepthClick,
+    toggleExpansionIcon,
     sortControl,
     responsive,
     selectableRows,
@@ -107,6 +119,21 @@ const isToggleExpansionEnabled =
     justifyHeader = isLeafColumn ? "end" : "center";
   }
   
+  const handleExpandDepth = (depth: number) => {
+    if (onExpandByDepthClick) {
+      const flatRows = table?.getRowModel().flatRows
+      onExpandByDepthClick(depth, flatRows)
+    }
+    const updated = updateExpandAndCollapseState(
+      table.getRowModel(),
+      expanded,
+      undefined,
+      depth
+    )
+    setExpanded(updated)
+  }
+  
+
   return (
     <th
         align="right"
@@ -143,8 +170,35 @@ const isToggleExpansionEnabled =
               />
             )
           }
-          {isToggleExpansionEnabled && hasAnySubRows && (
+          {isToggleExpansionEnabled && hasAnySubRows && !expandByDepth && (
               <ToggleIconButton onClick={handleExpandOrCollapse} />
+            )}
+          {isToggleExpansionEnabled && hasAnySubRows && expandByDepth && (
+              <Dropdown className="expand-by-depth-dropdown-wrapper" 
+                  options={expandByDepth}
+              >
+                <DropdownTrigger className="gray-icon toggle-all-icon">
+                  <Icon icon={displayIcon(toggleExpansionIcon)[0]} />
+                </DropdownTrigger>
+                <DropdownContainer className="expand-by-depth-dropdown">
+                  {expandByDepth.map((option:{ [key: string]: any }, index: number) => (
+                    <DropdownOption
+                        key={index}
+                        option={option}
+                        padding="none"
+                    > 
+                      <Flex
+                          alignItems="center"
+                          htmlOptions={{onClick: () => {handleExpandDepth(option.depth)} }}
+                          paddingX="sm"
+                          paddingY="xs"
+                          >
+                            {option.label}
+                          </Flex>
+                    </DropdownOption>
+                  ))}
+                </DropdownContainer>
+              </Dropdown>
             )}
 
           {isToggleExpansionEnabledLoading &&(

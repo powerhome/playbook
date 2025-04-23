@@ -22,10 +22,9 @@ export function useTableActions({
   // Handle expand/collapse
   const handleExpandOrCollapse = useCallback(async (row: Row<GenericObject>) => {
     onToggleExpansionClick && onToggleExpansionClick(row);
-
     const expandedState = expanded;
     const targetParent = row?.parentId;
-    const updatedRows = await updateExpandAndCollapseState(table.getRowModel(), expandedState, targetParent);
+    const updatedRows = await updateExpandAndCollapseState(table.getRowModel(), expandedState, targetParent, undefined);
     setExpanded(updatedRows);
   }, [expanded, setExpanded, onToggleExpansionClick, table]);
 
