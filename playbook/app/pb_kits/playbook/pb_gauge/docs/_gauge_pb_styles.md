@@ -1,1 +1,1 @@
-You don't need to use the Gauge Kit to apply Playbook styles to your Highcharts gauge chart. Just import gaugeTheme.ts and GaugeStyles.scss into your component, and the styles will apply automatically.
+You don't need to use the Gauge Kit to apply Playbook styles to your Highcharts gauge chart. Just import gaugeTheme.ts and merge it with your chart options—Playbook’s styling will apply automatically.

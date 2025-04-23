@@ -3,6 +3,7 @@ import typography from '../tokens/exports/_typography.module.scss'
 
 const gaugeTheme = {
   chart: {
+    type: "solidgauge",
     events: {
       render() {
         this.container
