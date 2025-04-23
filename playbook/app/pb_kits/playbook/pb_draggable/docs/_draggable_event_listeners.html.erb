@@ -1,0 +1,42 @@
+<% initial_items = [
+  {
+    id: "100",
+    url: "https://unsplash.it/500/400/?image=638",
+  },
+  {
+    id: "200",
+    url: "https://unsplash.it/500/400/?image=639",
+  },
+  {
+    id: "300",
+    url: "https://unsplash.it/500/400/?image=640",
+  },
+] %>
+
+<%= pb_rails("draggable", props: {initial_items: initial_items}) do %>
+  <%= pb_rails("draggable/draggable_container") do %>
+    <%= pb_rails("flex") do %>
+      <% initial_items.each do |item| %>
+        <%= pb_rails("draggable/draggable_item", props:{drag_id: item[:id]}) do %>
+          <%= pb_rails("image", props: { alt: item[:id], size: "md", url: item[:url], margin: "xs" }) %>
+        <% end %>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>
+
+<script>
+  const itemIds = ["item_100", "item_200", "item_300"];
+
+  itemIds.forEach((id) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.addEventListener("dragstart", (event) => {
+        console.log(`${id} drag start!`);
+      });
+      element.addEventListener("dragend", (event) => {
+        console.log(`${id} drag end!`);
+      });
+    }
+  });
+</script>
