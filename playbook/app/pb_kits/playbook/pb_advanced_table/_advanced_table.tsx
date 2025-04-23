@@ -38,6 +38,8 @@ type AdvancedTableProps = {
   data?: { [key: string]: string }
   enableToggleExpansion?: "all" | "header" | "none"
   expandedControl?: GenericObject
+  expandByDepth?: { [key: string]: string | number }
+  onExpandByDepthClick?: (arg: number, arg1: any) => void
   htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string
   initialLoadingRowsCount?: number
@@ -73,6 +75,8 @@ const AdvancedTable = (props: AdvancedTableProps) => {
     data = {},
     enableToggleExpansion = "header",
     expandedControl,
+    expandByDepth,
+    onExpandByDepthClick,
     htmlOptions = {},
     id,
     initialLoadingRowsCount = 10,
@@ -280,6 +284,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
             columnDefinitions={columnDefinitions}
             enableToggleExpansion={enableToggleExpansion}
             enableVirtualization={virtualizedRows}
+            expandByDepth={expandByDepth}
             expanded={expanded}
             expandedControl={expandedControl}
             handleExpandOrCollapse={handleExpandOrCollapse}
@@ -288,6 +293,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
             isActionBarVisible={isActionBarVisible}
             isFullscreen={isFullscreen}
             loading={loading}
+            onExpandByDepthClick={onExpandByDepthClick}
             responsive={responsive}
             selectableRows={selectableRows}
             setExpanded={setExpanded}

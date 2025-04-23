@@ -22,7 +22,7 @@ type DropdownOptionProps = {
   data?: { [key: string]: string };
   htmlOptions?: { [key: string]: string | number | boolean | (() => void) };
   id?: string;
-  key?: string;
+  key?: string | number;
   option?: GenericObject;
   padding?: string;
 }  & GlobalProps;

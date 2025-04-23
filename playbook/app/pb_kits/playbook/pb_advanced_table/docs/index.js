@@ -26,3 +26,4 @@ export { default as AdvancedTableFullscreen } from './_advanced_table_fullscreen
 export { default as AdvancedTableStickyColumns } from './_advanced_table_sticky_columns.jsx'
 export { default as AdvancedTableStickyHeader } from './_advanced_table_sticky_header.jsx'
 export { default as AdvancedTableStickyColumnsAndHeader } from './_advanced_table_sticky_columns_and_header.jsx'
+export { default as AdvancedTableExpandByDepth } from './_advanced_table_expand_by_depth.jsx'
