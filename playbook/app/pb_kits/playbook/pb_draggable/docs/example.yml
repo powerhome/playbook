@@ -17,4 +17,5 @@ examples:
   - draggable_with_cards: Draggable with Cards
   - draggable_with_table: Draggable with Table
   - draggable_multiple_containers: Dragging Across Multiple Containers
+  - draggable_event_listeners: Draggable Event Listeners
 
