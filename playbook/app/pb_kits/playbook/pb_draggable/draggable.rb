@@ -13,13 +13,13 @@ module Playbook
                              default: "neutral"
 
       def data
-        Hash(prop(:data)).merge(pb_draggable: true)
+        Hash(prop(:data)).merge(pb_draggable: true,
+                                drop_zone_type: drop_zone_type,
+                                drop_zone_color: drop_zone_color)
       end
 
       def classname
-        generate_classname("pb_draggable",
-                           "drop_zone_#{drop_zone_type}",
-                           "drop_zone_#{drop_zone_color}")
+        generate_classname("pb_draggable")
       end
     end
   end

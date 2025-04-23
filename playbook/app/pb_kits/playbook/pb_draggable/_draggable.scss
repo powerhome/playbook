@@ -136,81 +136,9 @@
         }
 
         // Apply color variants to the ::before element
-        &.drop_zone_color_primary::before { background-color: red; }
+        &.drop_zone_color_primary::before { background-color: $primary; }
         &.drop_zone_color_purple::before { background-color: $purple; }
       }
-    }
-  }
-}
-
-[data-pb-draggable="true"] {
-  // Ghost (50% opacity)
-  &[class*="pb_draggable_drop_zone_ghost"] {
-    .pb_draggable_container .pb_draggable_item.is_dragging {
-      opacity: $opacity_4 !important;
-    }
-  }
-
-  // Outline
-  &[class*="pb_draggable_drop_zone_outline"] {
-    .pb_draggable_container .pb_draggable_item.is_dragging {
-      position: relative !important;
-      & > * { opacity: 0 !important; }
-
-      &::before {
-        content: '';
-        position: absolute;
-        top: 0; left: 0;
-        width: 100%; height: 100%;
-        border: 2px dashed $neutral;
-        border-radius: $border_radius_sm;
-        box-sizing: border-box;
-        z-index: 10;
-        pointer-events: none;
-      }
-    }
-
-    // Primary outline
-    &[class*="drop_zone_primary"]
-      .pb_draggable_container .pb_draggable_item.is_dragging::before {
-      border-color: $primary !important;
-    }
-
-    // Purple outline
-    &[class*="drop_zone_purple"]
-      .pb_draggable_container .pb_draggable_item.is_dragging::before {
-      border-color: $purple !important;
-    }
-  }
-
-  // Shadow
-  &[class*="pb_draggable_drop_zone_shadow"] {
-    .pb_draggable_container .pb_draggable_item.is_dragging {
-      position: relative !important;
-      & > * { opacity: 0 !important; }
-
-      &::before {
-        content: '';
-        position: absolute;
-        top: 0; left: 0;
-        width: 100%; height: 100%;
-        background-color: rgba($neutral, $opacity_5);
-        border-radius: $border_radius_sm;
-        z-index: 10;
-        pointer-events: none;
-      }
-    }
-
-    // Primary shadow
-    &[class*="drop_zone_primary"]
-      .pb_draggable_container .pb_draggable_item.is_dragging::before {
-      background-color: rgba($primary, $opacity_5) !important;
-    }
-
-    // Purple shadow
-    &[class*="drop_zone_purple"]
-      .pb_draggable_container .pb_draggable_item.is_dragging::before {
-      background-color: rgba($purple, $opacity_5) !important;
     }
   }
 }
