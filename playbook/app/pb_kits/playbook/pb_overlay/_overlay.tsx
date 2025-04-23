@@ -9,6 +9,7 @@ export type OverlayChildrenProps = {
     children: React.ReactNode[] | React.ReactNode,
     color: "card_light" | "bg_light" | "card_dark" | "bg_dark" | "black" | "white" | "success" | "error",
     dynamic?: boolean,
+    gradient?: boolean,
     position: string,
     size: string,
     scrollBarNone?: boolean,
@@ -81,34 +82,37 @@ const Overlay = (props: OverlayProps) => {
             {...dataProps}
             {...htmlProps}
             className={classes}
+            data-overlay-color={color}
             id={id}
             style={{
                 ...(fullScreen ? {
-                    position: 'fixed',
-                    top: 0,
-                    left: 0,
-                    right: 0,
-                    bottom: 0,
-                    zIndex: 9999,
-                    background: gradient === false ? color : undefined,
+                  position: 'fixed',
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  bottom: 0,
+                  zIndex: 9999,
+                  '--overlay-color': `var(--${color})`,
                 } : {}),
                 ...dynamicInlineProps
-            }}
+              }}
         >
             {isSizePercentage ?
                 OverlayPercentage({
                     children,
                     color,
+                    gradient,
                     position: getPosition(),
                     scrollBarNone,
-                    size: getSize()
+                    size: getSize(),
                 }) : OverlayToken({
                     children,
                     color,
                     dynamic: dynamic,
+                    gradient,
                     position: getPosition(),
                     scrollBarNone,
-                    size: getSize()
+                    size: getSize(),
                 })
             }
         </div>

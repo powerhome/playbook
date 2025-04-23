@@ -100,23 +100,24 @@ $overlay_colors: (
 
     &.no_gradient {
       @each $color_name, $color in $overlay_colors {
-        .overlay_#{$color_name} {
-          @each $name, $size in $overlay_sizes {
-            @each $position in $overlay_positions {
-              &_#{$position}_#{$name} {
-                @include overlay($position, $size, $color, false);
-              }
-            }
+        &[data-overlay-color="#{$color_name}"] {
+          &::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: $color;
+            pointer-events: none;
           }
         }
       }
     }
 
     @each $key, $value in $opacity {
-      &.#{$key} {
-        [class^=overlay] {
-          opacity: $value;
-        }
+      &.#{$key}::before {
+        opacity: $value;
       }
     }
   }

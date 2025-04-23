@@ -28,6 +28,7 @@ const OverlayFullscreenBackground = () => {
               color="bg_dark"
               fullScreen
               gradient={false}
+              opacity="opacity_4"
           >
             <FixedConfirmationToast
                 closeable
@@ -35,7 +36,7 @@ const OverlayFullscreenBackground = () => {
                 onClose={handleCloseBackground}
                 open={openBackground}
                 status="tip"
-                text='Lost connection. Check your internet connectivity.'
+                text='Fullscreen Overlay with color set to Background Dark.'
                 vertical='top'
             />
           </Overlay>

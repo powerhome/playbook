@@ -49,7 +49,7 @@ const OverlayFullscreenOpacity = () => {
                   onClose={handleCloseOpacity40}
                   open={openOpacity40}
                   status="tip"
-                  text='Lost connection. Check your internet connectivity.'
+                  text='Fullscreen Overlay at 40% Opacity.'
                   vertical='top'
               />
             </Overlay>
@@ -68,7 +68,7 @@ const OverlayFullscreenOpacity = () => {
                   onClose={handleCloseOpacity80}
                   open={openOpacity80}
                   status="tip"
-                  text='Lost connection. Check your internet connectivity.'
+                  text='Fullscreen Overlay at 80% Opacity.'
                   vertical='top'
               />
             </Overlay>
