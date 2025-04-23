@@ -1,0 +1,1 @@
+To enable the overlay to cover the full size of your screen, you can pass the `fullScreen` prop. You can also pass an opacity along with it.
