@@ -1,0 +1,1 @@
+You can add drag event listeners for `drag`, `dragend`, `dragenter`, `dragleave`, `dragover`, `dragstart`, and `drop`.

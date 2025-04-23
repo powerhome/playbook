@@ -18,6 +18,8 @@ examples:
   - text_input_inline: Inline
   - text_input_no_label: No Label
   - text_input_mask: Mask
+  - text_input_sanitize: Sanitized Masked Input
+
 
   swift:
     - text_input_default_swift: Default

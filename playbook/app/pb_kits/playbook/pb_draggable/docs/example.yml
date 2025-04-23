@@ -19,3 +19,4 @@ examples:
   - draggable_multiple_containers: Dragging Across Multiple Containers
   - draggable_drop_zones: Draggable Drop Zones
   - draggable_drop_zones_colors: Draggable Drop Zones Colors
+  - draggable_event_listeners: Draggable Event Listeners
