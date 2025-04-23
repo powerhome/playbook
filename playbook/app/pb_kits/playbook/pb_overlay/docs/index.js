@@ -6,3 +6,5 @@ export { default as OverlayMultiDirectional } from './_overlay_multi_directional
 export { default as OverlayToggle } from './_overlay_toggle.jsx'
 export { default as OverlayVerticalDynamicMultiDirectional } from './_overlay_vertical_dynamic_multi_directional.jsx'
 export { default as OverlayHideScrollBar } from './_overlay_hide_scroll_bar.jsx'
+export { default as OverlayFullscreenOpacity } from './_overlay_fullscreen_opacity.jsx'
+export { default as OverlayFullscreenBackground } from './_overlay_fullscreen_background.jsx'
