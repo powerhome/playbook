@@ -10,7 +10,7 @@ import { highchartsDarkTheme } from "../pb_dashboard/pbChartsDarkTheme";
 import mapColors from "../pb_dashboard/pbChartsColorsHelper";
 import { globalProps } from "../utilities/globalProps";
 import { buildAriaProps, buildDataProps, buildHtmlProps } from "../utilities/props";
-import { merge } from '../utilities/object' 
+import { merge } from '../utilities/object'
 
 type CircleChartProps = {
   align?: "left" | "right" | "center";
