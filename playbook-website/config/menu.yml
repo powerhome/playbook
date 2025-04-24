@@ -28,7 +28,7 @@ kits:
     status: stable
     icons_used: true
     react_rendered: false
-    enhanced_element_used: false
+    enhanced_element_used: true
   - name: fixed_confirmation_toast
     platforms: *1
     description: Fixed Confirmation Toast is used as an alert. Success is used when
@@ -96,7 +96,7 @@ kits:
     enhanced_element_used: false
   - name: copy_button
     platforms: *1
-    status: beta
+    status: stable
     icons_used: false
     react_rendered: false
     enhanced_element_used: true

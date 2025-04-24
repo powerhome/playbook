@@ -4,9 +4,11 @@ examples:
   - circle_icon_button_default: Default
   - circle_icon_button_link: Link
   - circle_icon_button_loading: Loading
+  - circle_icon_button_size: Size
   
   react:
   - circle_icon_button_default: Default
   - circle_icon_button_click: Click Handler
   - circle_icon_button_link: Link
   - circle_icon_button_loading: Loading
+  - circle_icon_button_size: Size

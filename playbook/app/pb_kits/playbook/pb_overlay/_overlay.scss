@@ -88,6 +88,40 @@ $overlay_colors: (
     }
   }
 
+  &.overlay-full-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 9999;
+
+    &.no_gradient {
+      @each $color_name, $color in $overlay_colors {
+        &[data-overlay-color="#{$color_name}"] {
+          &::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: $color;
+            pointer-events: none;
+          }
+        }
+      }
+    }
+
+    @each $key, $value in $opacity {
+      &.#{$key}::before {
+        opacity: $value;
+      }
+    }
+  }
+
   &.no_gradient {
     @each $color_name, $color in $overlay_colors {
       .overlay_#{$color_name} {

@@ -1,0 +1,1 @@
+The `fullScreen` prop also allows you to use `color` along with it.

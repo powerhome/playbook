@@ -53,4 +53,42 @@ $pb_button_styles: (
       }
     }
   }
+  &.size_small {
+    @each $style in $pb_button_styles {
+      [class^=pb_button_kit][class*=_#{$style}] {
+        width: 20px;
+        height: 20px;
+        min-height: 20px;
+        border-radius: 10px;
+        line-height: 20px;
+        flex-basis: 20px;
+        min-width: 20px;
+        padding: 0;
+      }
+    }
+    // centering small icon svg
+    .pb_button_content {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      // rails
+      svg.pb_custom_icon {
+        height: 14px;
+        width: 14px;
+        vertical-align: middle;
+      }
+      // react (nested within an additional span)
+      > span {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        > svg.pb_custom_icon {
+          height: 14px;
+          width: 14px;
+          vertical-align: middle;
+          display: inline-block;
+        }
+      }
+    }
+  }
 }

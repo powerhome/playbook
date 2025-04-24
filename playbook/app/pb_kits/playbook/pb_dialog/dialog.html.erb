@@ -1,7 +1,16 @@
 <div
     class="pb_dialog_wrapper_rails <%= object.full_height_style %>"
     data-pb-dialog-wrapper="true"
-    data-overlay-click= <%= object.overlay_close %>
+    data-overlay-click="<%= object.overlay_close %>"
+    <% if object.custom_event_type.present? %>
+        data-custom-event-type="<%= object.custom_event_type %>"
+    <% end %>
+    <% if object.confirm_button_id.present? %>
+        data-confirm-button-id="<%= object.confirm_button_id %>"
+    <% end %>
+    <% if object.cancel_button_id.present? %>
+        data-cancel-button-id="<%= object.cancel_button_id %>"
+    <% end %>
 >
     <%= pb_content_tag(:dialog) do %>
             <% if object.status === "" && object.title %>
