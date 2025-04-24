@@ -31,7 +31,7 @@ test('passes loading prop to button', () => {
   expect(button).toBeInTheDocument()
 })
 
-test('adds small class when size is sm', () => {
+test('adds size_small class when size is sm', () => {
   render(
     <CircleIconButton
         data={{ testid: 'small-size-test' }}
@@ -42,5 +42,5 @@ test('adds small class when size is sm', () => {
 
   const kit = screen.getByTestId('small-size-test')
   
-  expect(kit).toHaveClass('pb_circle_icon_button_kit small')
+  expect(kit).toHaveClass('pb_circle_icon_button_kit size_small')
 })

@@ -31,9 +31,9 @@ RSpec.describe Playbook::PbCircleIconButton::CircleIconButton do
       expect { subject.new {} }.to raise_error(Playbook::Props::Error)
     end
 
-    it "adds small class when size is sm" do
+    it "adds size_small class when size is sm" do
       icon = "user"
-      expect(subject.new(icon: icon, size: "sm").classname).to eq "pb_circle_icon_button_kit small"
+      expect(subject.new(icon: icon, size: "sm").classname).to eq "pb_circle_icon_button_kit size_small"
     end
   end
 end

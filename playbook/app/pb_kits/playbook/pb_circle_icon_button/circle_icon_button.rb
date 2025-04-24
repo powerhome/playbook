@@ -27,7 +27,7 @@ module Playbook
       end
 
       def size_class
-        size == "sm" ? " small" : ""
+        size == "sm" ? " size_small" : ""
       end
     end
   end

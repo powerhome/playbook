@@ -53,7 +53,7 @@ $pb_button_styles: (
       }
     }
   }
-  &.small {
+  &.size_small {
     @each $style in $pb_button_styles {
       [class^=pb_button_kit][class*=_#{$style}] {
         width: 20px;

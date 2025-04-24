@@ -48,7 +48,7 @@ const CircleIconButton = (props: CircleIconButtonProps): React.ReactElement => {
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
   const htmlProps = buildHtmlProps(htmlOptions)
-  const sizeClass = size === 'sm' ? 'small' : ''
+  const sizeClass = size === 'sm' ? 'size_small' : ''
   const classes = classnames(
     buildCss('pb_circle_icon_button_kit'),
     sizeClass,
