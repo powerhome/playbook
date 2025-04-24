@@ -15,7 +15,7 @@
       )
       %>
 
-      <div class="sandpack-markdown markdown pb--kit-example-markdown <%= defined?(type) && type == "swift" ? "kit_show_swift" : "" %> <%= cookies[:dark_mode] == "true" ? 'dark' : '' %>">
+      <div class="markdown pb--kit-example-markdown <%= defined?(type) && type == "swift" ? "kit_show_swift" : "" %> <%= cookies[:dark_mode] == "true" ? 'dark' : '' %>">
         <%= render_markdown(description(@kit, example.keys.first)) %>
       </div>
     <% end %>

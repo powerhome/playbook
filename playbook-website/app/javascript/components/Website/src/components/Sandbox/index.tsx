@@ -1,11 +1,5 @@
 import React, { useState, useEffect } from "react"
 import { Flex } from "playbook-ui"
-import {
-  SandpackCodeEditor,
-  SandpackLayout,
-  SandpackPreview,
-  useActiveCode,
-} from "@codesandbox/sandpack-react"
 import { Buttons } from "./Buttons"
 import { useClipboard } from "../../hooks/useClipboard"
 
@@ -27,32 +21,8 @@ export default function Sandbox({ backgroundColor = "white" }) {
   }
 
   return (
-    <SandpackLayout
-      className={`sandbox-layout`}
-      style={{
-        border: "none",
-        fontFamily: "Power Centra",
-      }}
-    >
-      <Flex orientation='column' alignSelf='stretch'>
-        <SandpackPreview
-          className={`sandbox-preview ${isExpanded ? "expanded" : ""}`}
-          showOpenInCodeSandbox={false}
-          showRefreshButton={false}
-          style={{ backgroundColor: backgroundColor, height: "auto" }}
-          actionsChildren={
-            <Buttons
-              isExpanded={isExpanded}
-              setIsExpanded={setIsExpanded}
-              hasCopied={hasCopied}
-              showCopyTooltip={showCopyTooltip}
-              handleCopy={handleCopy}
-            />
-          }
-        />
-
-        {isExpanded && <SandpackCodeEditor style={{ height: "auto" }} />}
-      </Flex>
-    </SandpackLayout>
+  <>
+  this is the sandbox index 
+  </>
   )
 }

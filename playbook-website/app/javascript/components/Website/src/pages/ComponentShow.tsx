@@ -1,9 +1,6 @@
 import React from "react"
 
-import Sandbox from "../components/Sandbox"
-import { SandpackProvider } from "@codesandbox/sandpack-react"
 import { useLoaderData } from "react-router-dom"
-import sandpackIndexFile from "./sandpackIndexFile"
 
 export default function ComponentShow() {
   const { examples } = useLoaderData()
@@ -22,33 +19,7 @@ export default function ComponentShow() {
 
   return (
     <>
-      <SandpackProvider
-        files={{
-          "/App.js": {
-            code: code,
-          },
-          "/index.js": {
-            code: sandpackIndexFile,
-            hidden: true,
-          },
-        }}
-        template='react'
-        customSetup={{
-          entry: "/src/index.js",
-          dependencies: {
-            "playbook-ui": "latest",
-          },
-        }}
-        options={{
-          externalResources: ["https://kit.fontawesome.com/098a1cd4d5.js"],
-          classes: {
-            "sp-preview-actions": "sandbox-button-toolbar",
-            "sp-preview-iframe": "sandbox-preview-iframe",
-          },
-        }}
-      >
-        <Sandbox />
-      </SandpackProvider>
+      i moved this
     </>
   )
 }

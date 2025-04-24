@@ -1,6 +1,5 @@
 import React from "react"
 import { Button, Detail, Icon, Flex, Tooltip } from "playbook-ui"
-import { UnstyledOpenInCodeSandboxButton } from "@codesandbox/sandpack-react"
 import CodeSandboxIcon from "../../assets/CodeSandboxIcon"
 import "./styles.scss"
 export const Buttons = ({
@@ -50,11 +49,6 @@ export const Buttons = ({
         position='fixed'
         zIndex={10}
       >
-        <UnstyledOpenInCodeSandboxButton className='pb_button_kit_inline_enabled rounded m_xs'>
-          <Detail>
-            <Icon customIcon={CodeSandboxIcon()} />
-          </Detail>
-        </UnstyledOpenInCodeSandboxButton>
       </Tooltip>
     </Flex>
   )
