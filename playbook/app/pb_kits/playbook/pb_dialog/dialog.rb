@@ -21,6 +21,8 @@ module Playbook
       prop :status, type: Playbook::Props::Enum,
                     values: ["info", "caution", "delete", "error", "success", "default", ""],
                     default: ""
+      prop :custom_event_type, type: Playbook::Props::String,
+                               default: ""
 
       def classname
         generate_classname("pb_dialog pb_dialog_rails pb_dialog_#{size}_#{placement}")

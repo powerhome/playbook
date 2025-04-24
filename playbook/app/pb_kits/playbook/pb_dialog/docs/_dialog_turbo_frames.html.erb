@@ -1,0 +1,117 @@
+<%= pb_rails("flex", props:{ gap: "xs", wrap:true}) do %>
+    <%= pb_rails("button", props: { id: "button-open-example-turbo-frames", margin_right: "md", text: "Open Dialog via Custom Event" }) %>
+    <%= pb_rails("button", props: { id: "open-dialog-button", data: { open_dialog: "dialog-confirm-turbo-frames" }, margin_right: "md", text: "Custom Event Linked to Confirm Button" }) %>
+    <%= pb_rails("button", props: { id: "button-open-multi-dialog", text: "Mutliple Events Example" }) %>
+<% end %>
+
+<!-- Example 1: Basic dialog with custom event opening -->
+<%= pb_rails("dialog", props: { 
+  id: "dialog-open-turbo-frames", 
+  title: "Click Event Simulation", 
+  text: "Demonstrating Opening the Dialog with a Custom Event.",
+  custom_event_type: "dialogOpen",
+  cancel_button: "Cancel Button",
+  confirm_button: "Okay", 
+  confirm_button_id: "confirm-button-turbo-frames"
+}) %>
+
+<script>
+    document.getElementById("button-open-example-turbo-frames").addEventListener("click", () => {
+        console.log("📣 Dispatching 'dialogOpen' custom event")
+
+        window.dispatchEvent(new CustomEvent("dialogOpen", { 
+            bubbles: true,
+            detail: { 
+                dialogId: "dialog-open-turbo-frames",
+                action: "open"
+            }
+        }))
+
+        console.log("✅ Custom event dispatched - dialog should open")
+    })
+</script>
+
+<!-- Example 2: Dialog with custom event linking confirm button to closing the dialog-->
+<%= pb_rails("dialog", props: { 
+  id: "dialog-confirm-turbo-frames", 
+  title: "Custom Event Button Action", 
+  text: "Clicking this dialog's confirm button triggers closing the dialog as well.",
+  custom_event_type: "turboResponse",
+  cancel_button: "Cancel",
+  cancel_button_id: "cancel-button-id-turbo-frames",
+  confirm_button: "Confirm Button", 
+  confirm_button_id: "confirm-button-id-turbo-frames"
+}) %>
+
+<script>
+  window.addEventListener("turboResponse", (event) => {
+    const { dialogId, action, cancelButtonId } = event.detail || {}
+    console.log("📦 turboResponse event triggered:", { dialogId, action, cancelButtonId })
+
+    if (action === "close" && cancelButtonId) {
+        const dialog = document.getElementById(dialogId)
+        if (dialog?.close) {
+          console.log("🚪 Closing dialog programmatically")
+          dialog.close()
+        }
+    }
+  })
+
+  document.getElementById("confirm-button-id-turbo-frames").addEventListener("click", function () {
+    console.log("✅ Confirm button clicked! Triggering cancel via turboResponse")
+
+    window.dispatchEvent(new CustomEvent("turboResponse", {
+      detail: {
+        dialogId: "dialog-confirm-turbo-frames",
+        action: "close", 
+        cancelButtonId: "cancel-button-id-turbo-frames"
+      }
+    }))
+  })
+</script>
+
+<!-- Example 3: Dialog with multiple custom event types -->
+<%= pb_rails("dialog", props: { 
+  id: "multi-event-dialog", 
+  title: "Multiple Event Types", 
+  text: "This dialog responds to multiple custom event types - see console logs.",
+  custom_event_type: "dialogOpenMutli,turboResponseMulti",
+  cancel_button: "Cancel",
+  cancel_button_id: "multi-event-cancel",
+  confirm_button: "Confirm", 
+  confirm_button_id: "multi-event-confirm"
+}) %>
+
+<script>
+  document.getElementById("button-open-multi-dialog").addEventListener("click", () => {
+    console.log("📣 Dispatching 'dialogOpenMutli' custom event")
+    window.dispatchEvent(new CustomEvent("dialogOpenMutli", { 
+      detail: { 
+        dialogId: "multi-event-dialog",
+        action: "open"
+      }
+    }))
+  })
+
+  document.getElementById("multi-event-confirm")?.addEventListener("click", function() {
+    console.log("✅ Confirm clicked — dispatching 'turboResponseMulti' to simulate dialog close")
+
+    window.dispatchEvent(new CustomEvent("turboResponseMulti", {
+      detail: {
+        dialogId: "multi-event-dialog",
+        action: "close",
+        cancelButtonId: "multi-event-cancel"
+      }
+    }))
+  })
+
+  window.addEventListener("turboResponseMulti", (event) => {
+    const { dialogId, action, cancelButtonId } = event.detail || {}
+  
+    if (action === "close" && dialogId) {
+      const dialog = document.getElementById(dialogId)
+      dialog.close?.()
+      console.log("🚪 Closing dialog programmatically")
+    }
+  })
+</script>
