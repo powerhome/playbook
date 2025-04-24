@@ -291,12 +291,12 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
       const [start, end] = selectedDates;
 
       if (controlsStartId) {
-        const startPicker = document.querySelector(`#${controlsStartId}`)?._flatpickr;
+        const startPicker = (document.querySelector(`#${controlsStartId}`) as HTMLElement & { _flatpickr?: any })?._flatpickr;
         startPicker?.setDate(start, true);
       }
 
       if (controlsEndId) {
-        const endPicker = document.querySelector(`#${controlsEndId}`)?._flatpickr;
+        const endPicker = (document.querySelector(`#${controlsEndId}`) as HTMLElement & { _flatpickr?: any })?._flatpickr;
         endPicker?.setDate(end, true);
       }
     });
@@ -306,7 +306,7 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
   if (syncStartWith) {
     picker.config.onClose.push((selectedDates: string) => {
       if (selectedDates?.length) {
-        const quickpick = document.querySelector(`#${syncStartWith}`)?._flatpickr;
+        const quickpick = (document.querySelector(`#${syncStartWith}`) as HTMLElement & { _flatpickr?: any })?._flatpickr;
         quickpick?.clear();
       }
     });
@@ -316,7 +316,7 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
   if (syncEndWith) {
     picker.config.onClose.push((selectedDates: string) => {
       if (selectedDates?.length) {
-        const quickpick = document.querySelector(`#${syncEndWith}`)?._flatpickr;
+        const quickpick = (document.querySelector(`#${syncEndWith}`) as HTMLElement & { _flatpickr?: any })?._flatpickr;
         quickpick?.clear();
       }
     });
