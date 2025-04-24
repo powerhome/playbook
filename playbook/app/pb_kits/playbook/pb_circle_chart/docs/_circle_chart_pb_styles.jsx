@@ -13,7 +13,7 @@ const data = [
     y: 49,
   },
   {
-    name: 'After call',
+    name: 'After Call',
     y: 10,
   },
 ]

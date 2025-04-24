@@ -28,7 +28,7 @@ test('uses exact classname', () => {
       value: 49,
     },
     {
-      name: 'After call',
+      name: 'After Call',
       value: 10,
     },
   ]
@@ -39,7 +39,7 @@ test('uses exact classname', () => {
         id='circlechartid'
     />
   );
- 
+
   const kit = screen.getByTestId(testId);
   expect(kit).toHaveClass('pb_circle_chart');
 });
