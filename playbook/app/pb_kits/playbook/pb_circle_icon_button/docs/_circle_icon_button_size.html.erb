@@ -1,27 +1,27 @@
 <%= pb_rails("flex", props: { orientation: "column", gap: "sm" }) do %>
   <%= pb_rails("circle_icon_button", props: {
     icon: "plus",
-    size: "small",
+    size: "sm",
     variant: "primary"
   }) %>
 
   <%= pb_rails("circle_icon_button", props: {
     icon: "pen",
     loading: true,
-    size: "small",
+    size: "sm",
     variant: "secondary"
   }) %>
 
   <%= pb_rails("circle_icon_button", props: {
     disabled: true,
     icon: "times",
-    size: "small"
+    size: "sm"
   }) %>
 
   <%= pb_rails("circle_icon_button", props: {
     icon: "info",
     link: "https://playbook.powerapp.cloud/",
-    size: "small",
+    size: "sm",
     target: "child",
     variant: "link"
   }) %>

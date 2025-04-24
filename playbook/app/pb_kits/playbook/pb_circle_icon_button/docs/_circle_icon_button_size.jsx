@@ -10,27 +10,27 @@ const CircleIconButtonSize = (props) => (
     >
         <CircleIconButton
             icon="plus"
-            size="small"
+            size="sm"
             variant="primary"
             {...props}
         />
         <CircleIconButton
             icon="pen"
             loading
-            size="small"
+            size="sm"
             variant="secondary"
             {...props}
         />
         <CircleIconButton
             disabled
             icon="times"
-            size="small"
+            size="sm"
             {...props}
         />
         <CircleIconButton
             icon="info"
             link="https://playbook.powerapp.cloud/"
-            size="small"
+            size="sm"
             target="child"
             variant="link"
             {...props}

@@ -19,7 +19,7 @@ RSpec.describe Playbook::PbCircleIconButton::CircleIconButton do
   it {
     is_expected.to define_enum_prop(:size)
       .with_default("default")
-      .with_values("default", "small")
+      .with_values("default", "sm")
   }
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
@@ -31,9 +31,9 @@ RSpec.describe Playbook::PbCircleIconButton::CircleIconButton do
       expect { subject.new {} }.to raise_error(Playbook::Props::Error)
     end
 
-    it "adds small class when size is small" do
+    it "adds small class when size is sm" do
       icon = "user"
-      expect(subject.new(icon: icon, size: "small").classname).to eq "pb_circle_icon_button_kit small"
+      expect(subject.new(icon: icon, size: "sm").classname).to eq "pb_circle_icon_button_kit small"
     end
   end
 end

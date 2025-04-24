@@ -1,1 +1,1 @@
-The `size` prop accepts "small" as a value to make the Circle Icon Button 20px x 20px instead of the default 40px x 40px size.
+The `size` prop accepts "sm" as a value to make the Circle Icon Button 20px x 20px instead of the default 40px x 40px size.

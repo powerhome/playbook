@@ -31,12 +31,12 @@ test('passes loading prop to button', () => {
   expect(button).toBeInTheDocument()
 })
 
-test('adds small class when size is small', () => {
+test('adds small class when size is sm', () => {
   render(
     <CircleIconButton
         data={{ testid: 'small-size-test' }}
         icon="plus"
-        size="small"
+        size="sm"
     />
   )
 

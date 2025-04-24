@@ -19,7 +19,7 @@ module Playbook
                         default: false
       prop :target
       prop :size, type: Playbook::Props::Enum,
-                  values: %w[default small],
+                  values: %w[default sm],
                   default: "default"
 
       def classname
@@ -27,7 +27,7 @@ module Playbook
       end
 
       def size_class
-        size == "small" ? " small" : ""
+        size == "sm" ? " small" : ""
       end
     end
   end
