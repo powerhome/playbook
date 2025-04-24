@@ -37,7 +37,6 @@ Rails.application.routes.draw do
 
   # Experiments
   #
-  get "kits/:name/sandpack",        to: "pages#kit_show_new",         as: "kit_show_new"
   get "kits/:name/rails_in_react",  to: "pages#rails_in_react",       as: "rails_in_react"
   get "kits/:name/rails_raw",       to: "pages#rails_raw",            as: "rails_raw"
   get "kit_playground_rails",       to: "pages#kit_playground_rails", as: "kit_playground_rails"
