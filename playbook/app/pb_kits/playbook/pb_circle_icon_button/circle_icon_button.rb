@@ -18,8 +18,16 @@ module Playbook
       prop :new_window, type: Playbook::Props::Boolean,
                         default: false
       prop :target
+      prop :size, type: Playbook::Props::Enum,
+                  values: %w[default sm],
+                  default: "default"
+
       def classname
-        generate_classname("pb_circle_icon_button_kit")
+        generate_classname("pb_circle_icon_button_kit") + size_class
+      end
+
+      def size_class
+        size == "sm" ? " size_small" : ""
       end
     end
   end
