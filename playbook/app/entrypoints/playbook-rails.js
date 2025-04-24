@@ -3,8 +3,9 @@ import PbTextInput from 'kits/pb_text_input'
 PbTextInput.start()
 
 // Copy Button
-import PbCopyButton from 'kits/pb_copy_button'
+import { PbCopyButton, addCopyEventListeners } from 'kits/pb_copy_button'
 PbCopyButton.start()
+addCopyEventListeners()
 
 // Drawer
 import PbDrawer from 'kits/pb_drawer'

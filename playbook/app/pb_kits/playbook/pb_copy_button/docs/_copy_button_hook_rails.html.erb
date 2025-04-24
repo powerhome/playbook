@@ -1,6 +1,4 @@
-<%= pb_rails("copy_button", props: { display: "none", from: "hookbody" } ) %>
-
-<div onclick="usePBCopy('hookbody')">
+<div data-external-copy-from="hookbody">
   <%= pb_rails("body", props: { cursor: "pointer" }) do %>
     <span id="hookbody">I'm a custom copy hook! Click this body to copy this text!</span>
   <% end %>
@@ -16,9 +14,3 @@
 <% end %>
 
 <%= pb_rails("textarea", props: { margin_top: "xs", placeholder: "Paste here" }) %>
-
-<script>
-  const usePBCopy = (id) => {
-    document.dispatchEvent(new CustomEvent(id));
-  };
-</script>
