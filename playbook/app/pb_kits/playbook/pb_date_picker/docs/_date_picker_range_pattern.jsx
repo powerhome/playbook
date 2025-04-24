@@ -5,8 +5,8 @@ const DatePickerRangePattern = (props) => {
   return (
     <>
       <DatePicker
-          controlsEndId="end"
-          controlsStartId="start"
+          controlsEndId="end-date-picker"
+          controlsStartId="start-date-picker"
           mode="range"
           pickerId="quickpick-for-range"
           placeholder="Select a Range"
