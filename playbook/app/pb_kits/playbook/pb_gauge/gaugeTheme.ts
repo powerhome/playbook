@@ -78,8 +78,8 @@ const gaugeTheme = {
         y: -26,
       },
     },
-    credits: { enabled: false }
-  }
+  },
+  credits: { enabled: false }
 }
 
 export default gaugeTheme;
