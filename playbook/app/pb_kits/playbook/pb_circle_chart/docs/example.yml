@@ -25,5 +25,3 @@ examples:
   - circle_chart_with_title: Title
   - circle_chart_inner_sizes: Inner Circle Size Options
   - circle_chart_custom_tooltip: Tooltip Customization
-
-

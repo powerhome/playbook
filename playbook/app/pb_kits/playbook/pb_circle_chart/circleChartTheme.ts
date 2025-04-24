@@ -38,8 +38,7 @@ const circleChartTheme = {
       borderWidth: null as number | null,
     },
   },
-  credits: false,
-
+  credits: { enabled: false }
 }
 
 export default circleChartTheme;

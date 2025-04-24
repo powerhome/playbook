@@ -78,7 +78,7 @@ const gaugeTheme = {
         y: -26,
       },
     },
-    credits: false,
+    credits: { enabled: false }
   }
 }
 
