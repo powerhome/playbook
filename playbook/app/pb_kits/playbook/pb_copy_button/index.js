@@ -1,5 +1,32 @@
 import PbEnhancedElement from "../pb_enhanced_element"
 
+function getTextFromElement(element) {
+  if (!element) return ''
+  return element.tagName.toLowerCase() === 'input'
+    ? element.value
+    : element.innerText
+}
+
+function copyTextToClipboard(text) {
+  if (!text) return
+  navigator.clipboard.writeText(text)
+    .catch(err => console.error('Failed to copy text:', err))
+}
+
+function handleExternalControlCopyClick(element) {
+  const value = element.getAttribute('data-external-copy-value')
+  const fromId = element.getAttribute('data-external-copy-from')
+
+  if (value) {
+    copyTextToClipboard(value)
+  } else if (fromId) {
+    const fromElement = document.querySelector(`#${fromId}`)
+    copyTextToClipboard(getTextFromElement(fromElement))
+  } else {
+    console.warn('Failed to copy:', element)
+  }
+}
+
 export class PbCopyButton extends PbEnhancedElement {
   static get selector() {
     return '.pb_copy_button_kit'
@@ -20,63 +47,27 @@ export class PbCopyButton extends PbEnhancedElement {
   }
 
   handleClick() {
-    const textToCopy = this.element.getAttribute('data-copy-value')
-    if (textToCopy) {
-      navigator.clipboard.writeText(textToCopy)
-        .catch(err => console.error('Failed to copy text', err))
-
-      return
-    }
-
+    const value = this.element.getAttribute('data-copy-value')
     const fromId = this.element.getAttribute('data-from')
-    if (fromId) {
+
+    if (value) {
+      copyTextToClipboard(value)
+    } else if (fromId) {
       const fromElement = document.querySelector(`#${fromId}`)
-      if (fromElement) {
-        let contentToCopy = ''
-        if (fromElement.tagName.toLowerCase() === 'input') {
-          contentToCopy = fromElement.value
-        } else {
-          contentToCopy = fromElement.innerText
-        }
-        navigator.clipboard.writeText(contentToCopy)
-          .catch(err => console.error('Failed to copy text', err))
-      }
+      copyTextToClipboard(getTextFromElement(fromElement))
     } else {
-      console.warn('No data-copy-value attribute found or data-from element')
+      console.warn('No data-copy-value or data-from attribute found')
     }
   }
 }
 
 export function addCopyEventListeners() {
-  const divsWithDataExternalCopyValue = document.querySelectorAll('div[data-external-copy-value]')
+  const externalCopyElements = [
+    ...document.querySelectorAll('div[data-external-copy-value]'),
+    ...document.querySelectorAll('div[data-external-copy-from]')
+  ]
 
-  divsWithDataExternalCopyValue.forEach((element) => {
-    element.addEventListener('click', function () {
-      const textToCopy = element.getAttribute('data-external-copy-value')
-      if (textToCopy) {
-        navigator.clipboard.writeText(textToCopy)
-          .catch(err => console.error('Failed to copy text', err))
-      }
-    })
-  })
-
-
-  const divsWithDataExternalCopyFrom = document.querySelectorAll('div[data-external-copy-from]')
-
-  divsWithDataExternalCopyFrom.forEach((element) => {
-    element.addEventListener('click', function () {
-      const fromId = element.getAttribute('data-external-copy-from')
-      const fromElement = document.querySelector(`#${fromId}`)
-      if (fromElement) {
-        let contentToCopy = ''
-        if (fromElement.tagName.toLowerCase() === 'input') {
-          contentToCopy = fromElement.value
-        } else {
-          contentToCopy = fromElement.innerText
-        }
-        navigator.clipboard.writeText(contentToCopy)
-          .catch(err => console.error('Failed to copy text', err))
-      }
-    })
+  externalCopyElements.forEach(element => {
+    element.addEventListener('click', () => handleExternalControlCopyClick(element))
   })
 }
