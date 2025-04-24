@@ -50,6 +50,10 @@ type DatePickerProps = {
   timeFormat?: string,
   type?: string,
   yearRange?: number[],
+  controlsStartId?: string,
+    controlsEndId?: string,
+    syncStartWith?: string,
+    syncEndWith?: string,
 } & GlobalProps
 
 const DatePicker = (props: DatePickerProps): React.ReactElement => {
@@ -98,6 +102,10 @@ const DatePicker = (props: DatePickerProps): React.ReactElement => {
     staticPosition = true,
     thisRangesEndToday = false,
     yearRange = [1900, 2100],
+    controlsStartId,
+    controlsEndId,
+    syncStartWith,
+    syncEndWith,
   } = props
 
   const ariaProps = buildAriaProps(aria)
@@ -134,6 +142,10 @@ const DatePicker = (props: DatePickerProps): React.ReactElement => {
       staticPosition,
       thisRangesEndToday,
       yearRange,
+      controlsStartId,
+      controlsEndId,
+      syncStartWith,
+      syncEndWith,
       required: false,
     }, scrollContainer)
   }, initializeOnce ? [] : undefined)
