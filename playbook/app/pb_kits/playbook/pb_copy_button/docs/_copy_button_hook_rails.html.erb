@@ -1,8 +1,6 @@
-<div data-external-copy-from="hookbody">
-  <%= pb_rails("body", props: { cursor: "pointer" }) do %>
-    <span id="hookbody">I'm a custom copy hook! Click this body to copy this text!</span>
-  <% end %>
-</div>
+<%= pb_rails("body", props: { cursor: "pointer", data: { "external-copy-from": "hookbody"} }) do %>
+  <span id="hookbody">I'm a custom copy hook! Click this body to copy this text!</span>
+<% end %>
 
 <%= pb_rails("tooltip", props: {
   trigger_element_selector: "#hookbody",
