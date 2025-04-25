@@ -38,9 +38,12 @@ export default class PbDraggable extends PbEnhancedElement {
   }
 
   bindEventListeners() {
+    // Check for multiple containers
     const containers = this.element.querySelectorAll(DRAGGABLE_CONTAINER);
     this.hasMultipleContainers = containers.length > 1;
 
+    // Needed to prevent images within draggable items from being independently draggable
+    // Needed if using Image kit in draggable items
     this.element.querySelectorAll(".pb_draggable_item img")
       .forEach(img => img.setAttribute("draggable", "false"));
 
@@ -59,6 +62,8 @@ export default class PbDraggable extends PbEnhancedElement {
 
   /* ---------------- DRAG START ---------------- */
   handleDragStart(event) {
+    // Needed to prevent images within draggable items from being independently draggable
+    // Needed if using Image kit in draggable items
     if (event.target.tagName.toLowerCase() === "img") {
       event.preventDefault();
       return;
@@ -124,6 +129,7 @@ export default class PbDraggable extends PbEnhancedElement {
 
   handleSingleContainerDragEnter(event) {
     const targetItem = event.target.closest(".pb_draggable_item");
+    // If we're entering a container directly or there's no target item
     if (!targetItem) return;
 
     const container = targetItem.parentNode;
@@ -208,10 +214,12 @@ export default class PbDraggable extends PbEnhancedElement {
     container.classList.remove("active_container");
     this.draggedItem.style.opacity = "1";
 
+    // Handle empty containers
     if (this.hasMultipleContainers && !container.querySelector(".pb_draggable_item")) {
       container.appendChild(this.draggedItem);
     }
 
+    // Updated order of items as an array of item IDs
     const reorderedItems = Array.from(this.element.querySelectorAll(".pb_draggable_item"))
       .map(i => ({ id: i.id, container: i.closest(DRAGGABLE_CONTAINER).id }));
 
