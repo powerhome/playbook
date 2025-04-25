@@ -8,13 +8,6 @@
 <div class="kit-show-wrapper">
   <% @examples.each do |example| %>
     <%= pb_rails("card", props: { classname: "pb--doc", padding: "none" }) do %>
-      <%= react_component("KitDocs",
-        kit: @kit,
-        source: get_source(example.keys.first),
-        exampleTitle: example.values.first
-      )
-      %>
-
       <div class="markdown pb--kit-example-markdown <%= defined?(type) && type == "swift" ? "kit_show_swift" : "" %> <%= cookies[:dark_mode] == "true" ? 'dark' : '' %>">
         <%= render_markdown(description(@kit, example.keys.first)) %>
       </div>
