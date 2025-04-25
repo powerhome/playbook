@@ -6,6 +6,7 @@ examples:
     - popover_z_index: Set Z-Index
     - popover_scroll_height: Scroll and Height Settings
     - popover_actionable_content: With Actionable Content
+    - popover_append_to: Append To
 
   react:
     - popover_default: Default

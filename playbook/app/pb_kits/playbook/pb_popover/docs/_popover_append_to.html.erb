@@ -1,0 +1,46 @@
+<%= pb_rails("flex", props: {
+    dark: true,
+    orientation: "row",
+    vertical: "center",
+    margin_bottom: "md"
+    }) do %>
+    <%= pb_rails("body", props: { text: "Click info for more details" }) %>
+    &nbsp;
+    <%= pb_rails("circle_icon_button", props: {
+        variant: "secondary",
+        icon: "info",
+        id: "append-to-popover-1"
+    }) %>
+    <%= pb_rails("popover", props: {
+        trigger_element_id: "append-to-popover-1",
+        tooltip_id: "append-to-tooltip-1",
+        offset: true,
+        position: "top",
+        append_to: "parent",
+    }) do %>
+        I'm a popover. I have been appended to my parent element.
+    <% end %>
+<% end %>
+
+<%= pb_rails("flex", props: {
+    dark: true,
+    orientation: "row",
+    vertical: "center"
+    }) do %>
+    <%= pb_rails("body", props: { text: "Click info for more details" }) %>
+    &nbsp;
+    <%= pb_rails("circle_icon_button", props: {
+        variant: "secondary",
+        icon: "info",
+        id: "append-to-popover-2"
+    }) %>
+    <%= pb_rails("popover", props: {
+        trigger_element_id: "append-to-popover-2",
+        tooltip_id: "append-to-tooltip-2",
+        offset: true,
+        position: "top",
+        append_to: ".kit-show-wrapper",
+    }) do %>
+        I'm a popover. I have been appended to the .kit-show-wrapper.
+    <% end %>
+<% end %>

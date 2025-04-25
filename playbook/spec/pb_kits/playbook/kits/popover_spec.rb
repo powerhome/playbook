@@ -5,6 +5,7 @@ require_relative "../../../../app/pb_kits/playbook/pb_popover/popover"
 RSpec.describe Playbook::PbPopover::Popover do
   subject { Playbook::PbPopover::Popover }
 
+  it { is_expected.to define_prop(:append_to).with_default("body") }
   it { is_expected.to define_prop(:position) }
   it { is_expected.to define_prop(:trigger_element_id) }
   it { is_expected.to define_prop(:tooltip_id) }
