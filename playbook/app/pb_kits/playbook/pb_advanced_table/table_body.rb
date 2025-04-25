@@ -55,7 +55,15 @@ module Playbook
         # Subrow header if applicable
         output << pb_rails("advanced_table/table_subrow_header", props: { row: row, column_definitions: leaf_columns, depth: current_depth, subrow_header: subrow_headers[current_depth - 1], collapsible_trail: collapsible_trail, classname: "toggle-content", responsive: responsive, subrow_data_attributes: subrow_data_attributes }) if is_first_child_of_subrow && enable_toggle_expansion == "all"
 
-        current_data_attributes = current_depth.zero? ? { row_depth: 0 } : table_data_attributes
+        current_data_attributes = if current_depth.zero?
+                                    {
+                                      row_depth: 0,
+                                      advanced_table_content: row.object_id.to_s,
+                                      row_parent: nil,
+                                    }
+                                  else
+                                    table_data_attributes
+                                  end
 
         # Additional class and data attributes needed for toggle logic
         output << pb_rails("advanced_table/table_row", props: { id: id, row: row, column_definitions: leaf_columns, depth: current_depth, collapsible_trail: collapsible_trail, classname: additional_classes, table_data_attributes: current_data_attributes, responsive: responsive, loading: loading, selectable_rows: selectable_rows, row_id: row[:id], enable_toggle_expansion: enable_toggle_expansion })
