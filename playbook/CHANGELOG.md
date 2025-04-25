@@ -1,6 +1,11 @@
-# 14.18.0
-
+# 🎙️Copy That - Introducing the New Copy Button Kit!
 ##### April 25, 2025
+
+![14 18 0](https://github.com/user-attachments/assets/deecf1e7-2515-4b7e-9df2-ef3a6150ac6f)
+
+This release brings the brand new Copy Button Kit that makes copy/pasting text super easy out-of-the-box! Also highlighted in this release are several major updates to the Table and the Advanced Table kits including sticky columns and extended expansion control for the Advanced Table and customizable headers for the Table Kit!
+
+[14.18.0](https://github.com/powerhome/playbook/tree/14.18.0) full list of changes:
 
 **Kit Enhancements:**
 
