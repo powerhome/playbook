@@ -506,8 +506,48 @@ private
     @kits_array = @kits.first.split("&")
     params[:name] ||= @kits_array[0]
     @selected_kit = params[:name]
-    @variants = params[:variants].present? ? params[:variants].split("&") : []
+
+    @variant_mappings = {}
+
+    @kits_array.each do |kit|
+      @variant_mappings[kit] = {
+        url_to_key: {}, # map from URL names (values from example.yml) to internal keys (keys from example.yml)
+        key_to_url: {}, # map from internal keys (keys from example.yml) to URL names (values from example.yml)
+      }
+
+      examples = pb_doc_kit_examples(kit, type)
+      examples.each do |example|
+        variant_key = example.keys.first.to_s
+        variant_title = example.values.first.to_s
+        url_friendly_title = variant_title.downcase.gsub(/\s+/, "-")
+
+        @variant_mappings[kit][:url_to_key][url_friendly_title] = variant_key
+        @variant_mappings[kit][:key_to_url][variant_key] = url_friendly_title
+      end
+    end
+
+    @all_kit_variants = {}
+
+    if params[:kit_variants].present?
+      kit_variant_pairs = params[:kit_variants].split("&")
+
+      kit_variant_pairs.each do |pair|
+        kit, variants = pair.split(":")
+        next unless kit && variants.present?
+
+        url_variant_names = variants.split(";")
+        @all_kit_variants[kit] = url_variant_names.map do |url_name|
+          @variant_mappings.dig(kit, :url_to_key, url_name) || url_name
+        end.compact
+      end
+    end
+
+    @variants = @all_kit_variants[@selected_kit] || []
+
     @type = type
+    puts "Selected Kit: #{@selected_kit}"
+    puts "All Kit Variants: #{@all_kit_variants.inspect}"
+    puts "Active Variants: #{@variants.inspect}"
 
     render template: "pages/kit_collection", layout: "layouts/fullscreen"
   end
