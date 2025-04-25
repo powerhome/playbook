@@ -21,8 +21,6 @@ export default class PbPopover extends PbEnhancedElement {
       container = document.querySelector(this.appendTo);
     }
 
-    console.log(container);
-
     (container || document.body).appendChild(this.tooltip);
   }
 
