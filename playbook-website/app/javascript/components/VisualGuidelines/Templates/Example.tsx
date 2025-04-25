@@ -22,7 +22,6 @@ type ExampleType = {
   backgroundClass?: string,
   children?: React.ReactChild[] | React.ReactChild,
   captionTitle?: string,
-  // codesandboxExample? : boolean,
   customChildren?: boolean,
   description?: React.ReactChild[] | React.ReactChild | string | (() => JSX.Element),
   example?: string,
@@ -39,7 +38,6 @@ const Example = ({
   backgroundClass= '',
   captionTitle="Visual Guide",
   children,
-  // codesandboxExample,
   customChildren,
   description,
   example = '',
@@ -154,25 +152,6 @@ const Example = ({
               <span dangerouslySetInnerHTML={{ __html: exampleHtml }} />
             </pre>
           </div>
-          {/* { codesandboxExample && (
-              <Flex className="codeSandBoxLink" justify="end" >
-              <Tooltip
-                placement='top'
-                text='Codesandbox'
-                zIndex={10}
-                dark
-              >
-                <CircleIconButton
-                  dark
-                  icon="arrow-up-right-from-square"
-                  link="https://codesandbox.io/s/epic-wozniak-2i0i6r?file=/src/App.js"
-                  newWindow
-                  padding="xs"
-                  variant="secondary"
-                />
-                </Tooltip>
-              </Flex>
-          )} */}
         </Card>
       </Card>
     </div>
