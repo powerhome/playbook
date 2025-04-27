@@ -9,6 +9,56 @@ export default class PbAdvancedTable extends PbEnhancedElement {
     return ADVANCED_TABLE_SELECTOR;
   }
 
+  updateParentCheckboxes(checkbox) {
+    const rowEl = checkbox.closest("tr");
+    if (!rowEl) return;
+  
+    const table = rowEl.closest("table");
+    if (!table) return;
+  
+    const contentTrail = rowEl.dataset.advancedTableContent;
+    if (!contentTrail) return;
+  
+    const ancestorIds = contentTrail.split("-").slice(0, -1);
+  
+    ancestorIds.reverse();
+  
+    ancestorIds.forEach((ancestorId) => {
+      const parentRowSelector = `[data-advanced-table-content$="${ancestorId}"]`;
+      const parentRow = table.querySelector(parentRowSelector);
+      if (!parentRow) return;
+  
+      const parentLabel = parentRow.querySelector("label[data-row-id]");
+      if (!parentLabel) return;
+  
+      const parentCheckbox = parentLabel.querySelector("input[type='checkbox']");
+      if (!parentCheckbox) return;
+  
+      // Find all immediate children of this parent
+      const children = table.querySelectorAll(
+        `tr[data-row-parent$="${ancestorId}"]`
+      );
+  
+      const allChildrenChecked = Array.from(children).every((child) => {
+        const label = child.querySelector("label[data-row-id]");
+        if (!label) return false;
+  
+        const childCheckbox = label.querySelector("input[type='checkbox']");
+        return childCheckbox && childCheckbox.checked;
+      });
+  
+      // Update parent checkbox
+      parentCheckbox.checked = allChildrenChecked;
+  
+      const parentCheckboxId = parentCheckbox.id;
+      if (allChildrenChecked) {
+        PbAdvancedTable.selectedRows.add(parentCheckboxId);
+      } else {
+        PbAdvancedTable.selectedRows.delete(parentCheckboxId);
+      }
+    });
+  }
+  
   handleCheckboxClick(event) {
     const checkbox = event.currentTarget;
     const rowId = checkbox.id;
@@ -47,6 +97,9 @@ export default class PbAdvancedTable extends PbEnhancedElement {
         });
       }
     }
+
+    this.updateParentCheckboxes(checkbox);
+
     console.log(
       "Currently selected row IDs: ",
       Array.from(PbAdvancedTable.selectedRows)
