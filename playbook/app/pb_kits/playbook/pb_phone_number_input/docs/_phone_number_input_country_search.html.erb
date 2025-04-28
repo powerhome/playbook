@@ -1,0 +1,10 @@
+<%= pb_rails("phone_number_input", props: {
+    country_search: true, 
+    id: "country-search",
+}) %>
+
+<%= pb_rails("phone_number_input", props: {
+    country_search: true, 
+    id: "country-search-limited",
+    only_countries: ["br", "us", "ph", "gb"],
+}) %>

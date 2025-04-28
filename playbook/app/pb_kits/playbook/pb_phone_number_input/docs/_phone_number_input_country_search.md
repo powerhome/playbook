@@ -1,0 +1,1 @@
+Set `country_search` / `countrySearch` to true to allow users to search for a specific Country within the dropdown. If the range of countries has been limited, only the selected countries will be searchable.
