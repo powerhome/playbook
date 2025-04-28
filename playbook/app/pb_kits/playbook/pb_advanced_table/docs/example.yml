@@ -14,6 +14,7 @@ examples:
   - advanced_table_column_headers_multiple: Multi-Header Columns (Multiple Levels)
   # - advanced_table_selectable_rows: Selectable Rows
   # - advanced_table_selectable_rows_no_subrows: Selectable Rows (No Subrows)
+  - advanced_table_column_border_color_rails: Column Group Border Color
 
 
   react:
@@ -46,3 +47,4 @@ examples:
   - advanced_table_selectable_rows_header: Selectable Rows (No Actions Bar)
   - advanced_table_inline_editing: Inline Cell Editing
   - advanced_table_fullscreen: Fullscreen
+  - advanced_table_column_border_color: Column Group Border Color

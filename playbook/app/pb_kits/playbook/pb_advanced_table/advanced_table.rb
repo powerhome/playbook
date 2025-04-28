@@ -7,6 +7,9 @@ module Playbook
                         default: []
       prop :column_definitions, type: Playbook::Props::Array,
                                 default: []
+      prop :column_group_border_color, type: Playbook::Props::Enum,
+                                       values: %w[text_lt_default text_lt_light text_lt_lighter text_dk_default text_dk_light text_dk_lighter none],
+                                       default: "none"
       prop :enable_toggle_expansion, type: Playbook::Props::Enum,
                                      values: %w[all header none],
                                      default: "header"
@@ -24,7 +27,9 @@ module Playbook
                              default: false
 
       def classname
-        generate_classname("pb_advanced_table", responsive_classname, max_height_classname, separator: " ")
+        additional_classes = [responsive_classname, max_height_classname]
+        additional_classes << "column-group-border-#{column_group_border_color}" if column_group_border_color != "none"
+        generate_classname("pb_advanced_table", *additional_classes, separator: " ")
       end
 
       def responsive_classname
