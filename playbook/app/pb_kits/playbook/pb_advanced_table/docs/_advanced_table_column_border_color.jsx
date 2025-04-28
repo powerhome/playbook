@@ -45,12 +45,17 @@ const AdvancedTableColumnBorderColors = (props) => {
     },
   ];
 
+  const tableProps = {
+    verticalBorder: true
+  }
+
   return (
     <>
       <AdvancedTable
           columnDefinitions={columnDefinitions}
           columnGroupBorderColor="text_lt_default"
           tableData={MOCK_DATA}
+          tableProps={tableProps}
           {...props}
       />
     </>
