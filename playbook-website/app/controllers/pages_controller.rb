@@ -16,7 +16,7 @@ class PagesController < ApplicationController
   before_action :ensure_kit_type_exists, only: %i[kit_show_rails kit_show_react kit_show_swift]
   before_action :set_category, only: %i[kit_category_show_rails kit_category_show_react kit_category_show_swift]
   before_action :delete_dark_mode_cookie, only: %i[home getting_started visual_guidelines]
-  before_action :set_show_sidebar, only: %i[kits kit_category_show_rails kit_category_show_react kit_category_show_swift kit_show_react kit_show_rails kit_show_swift rails_in_react kit_show_demo kit_show_new visual_guidelines home]
+  before_action :set_show_sidebar, only: %i[kits kit_category_show_rails kit_category_show_react kit_category_show_swift kit_show_react kit_show_rails kit_show_swift rails_in_react kit_show_demo visual_guidelines home]
 
   def application_beta
     @kits = MENU["kits"]
@@ -299,12 +299,6 @@ class PagesController < ApplicationController
                                            show_raw: true,
                                          })
     render "pages/rails_in_react"
-  end
-
-  def kit_show_new
-    @kit = params[:name]
-    @examples = kit_examples
-    render "pages/kit_show_new"
   end
 
   def rails_raw
