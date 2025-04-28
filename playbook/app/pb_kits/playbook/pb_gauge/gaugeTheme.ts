@@ -2,6 +2,7 @@ import colors from '../tokens/exports/_colors.module.scss'
 import typography from '../tokens/exports/_typography.module.scss'
 
 const gaugeTheme = {
+  title: { text: "" },
   chart: {
     type: "solidgauge",
     events: {
@@ -77,7 +78,8 @@ const gaugeTheme = {
         y: -26,
       },
     },
-  }
+  },
+  credits: { enabled: false }
 }
 
 export default gaugeTheme;

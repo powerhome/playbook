@@ -14,6 +14,7 @@ examples:
 
   react:
   - circle_chart_default: Default Style
+  - circle_chart_pb_styles: Playbook Styles
   - circle_chart_live_data: Live Data
   - circle_chart_rounded: Rounded Corners
   - circle_chart_block: Accepts Any Block
@@ -22,7 +23,5 @@ examples:
   - circle_chart_with_legend_kit: Legend
   - circle_chart_legend_position: Legend Position
   - circle_chart_with_title: Title
-  - circle_chart_inner_sizes: Inner Circle Size Options  
+  - circle_chart_inner_sizes: Inner Circle Size Options
   - circle_chart_custom_tooltip: Tooltip Customization
-
-

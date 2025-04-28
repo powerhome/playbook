@@ -14,7 +14,7 @@ const CircleChartLiveData = (props) => {
       value: 49,
     },
     {
-      name: 'After call',
+      name: 'After Call',
       value: 10,
     },
   ])
@@ -29,7 +29,7 @@ const CircleChartLiveData = (props) => {
       value: 12,
     },
     {
-      name: 'After call',
+      name: 'After Call',
       value: 140,
     },
   ]
