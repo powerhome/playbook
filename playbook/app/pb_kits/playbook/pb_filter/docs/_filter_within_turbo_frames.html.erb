@@ -1,0 +1,41 @@
+<%=
+  pb_rails("filter", props: {
+    id: "filter_within_trubo_frames",
+    position: "top",
+    filters: [
+      { name: "name", value: "John Wick" },
+      { name: "city", value: "San Francisco"}
+    ],
+    sort_menu: [
+      { item: "Popularity", link: "?q[sorts]=managers_popularity+asc", active: true, direction: "desc" },
+      { item: "Mananger's Title", link: "?q[sorts]=managers_title+asc", active: false },
+      { item: "Manager's Name", link: "?q[sorts]=managers_name+asc", active: false },
+    ],
+    template: "default",
+    results: 1,
+    popover_props: { append_to: "parent"  },
+  }) do
+%>
+  <%
+   example_collection = [
+      OpenStruct.new(name: "USA", value: 1),
+      OpenStruct.new(name: "Canada", value: 2),
+      OpenStruct.new(name: "Brazil", value: 3),
+      OpenStruct.new(name: "Philippines", value: 4),
+      OpenStruct.new(name: "A galaxy far far away, like really far far far far far far far far far far far far far far far far far far far far far far far far far far far far far far far far far far far far far far far far far far far far far far far far away...", value: 5)
+    ]
+  %>
+  <%= pb_rails("form", props: { form_system_options: { scope: :example, method: :get } }) do |form| %>
+    <%= form.text_field :example_text_field, props: { label: true } %>
+    <%= form.collection_select :example_collection_select, example_collection, :value, :name, props: {max_width: "sm", label: true } %>
+
+    <%= form.actions do |action| %>
+      <%= action.submit props: {
+        text: "Apply",
+        data: {
+          disable_with: "pb_rails('icon', props: { icon: 'spinner', spin: true, fixed_width: true })Searching...".html_safe
+      },}%>
+      <%= action.button props: { type: "reset", text: "Clear", variant: "secondary" } %>
+    <% end %>
+  <% end %>
+<% end %>
