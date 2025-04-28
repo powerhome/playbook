@@ -1,6 +1,7 @@
 import React from 'react'
 import Body from '../../pb_body/_body'
 import Select from '../../pb_select/_select'
+import Icon from '../../pb_icon/_icon'
 
 const SelectError = (props) => {
   const options = [
@@ -18,10 +19,14 @@ const SelectError = (props) => {
     },
   ]
 
+  const error = (<>
+    <Icon icon="warning" /> Please make a valid selection
+  </>)
+
   return (
     <div>
       <Select
-          error="Please make a valid selection"
+          error={error}
           label="Favorite Food"
           name="food"
           options={options}
@@ -29,7 +34,7 @@ const SelectError = (props) => {
           {...props}
       />
       <Body
-          error="Please make a valid selection"
+          error={error}
           status="negative"
           {...props}
       />
