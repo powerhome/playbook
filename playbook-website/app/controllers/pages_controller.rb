@@ -175,6 +175,15 @@ class PagesController < ApplicationController
     handle_kit_collection("react")
   end
 
+  def kit_variants_collection_show_rails
+    @users = Array.new(9) { Faker::Name.name }.paginate(page: params[:page], per_page: 2)
+    handle_kit_variants_collection("rails")
+  end
+
+  def kit_variants_collection_show_react
+    handle_kit_variants_collection("react")
+  end
+
   def kit_playground_rails
     @kit = "avatar"
     @examples = pb_doc_kit_examples(@kit, "rails")
@@ -506,6 +515,17 @@ private
     @kits_array = @kits.first.split("&")
     params[:name] ||= @kits_array[0]
     @selected_kit = params[:name]
+    @variants = params[:variants].present? ? params[:variants].split("&") : []
+    @type = type
+
+    render template: "pages/kit_collection", layout: "layouts/fullscreen"
+  end
+
+  def handle_kit_variants_collection(type)
+    @kits = params[:names].split("%26")
+    @kits_array = @kits.first.split("&")
+    params[:name] ||= @kits_array[0]
+    @selected_kit = params[:name]
 
     @variant_mappings = {}
 
@@ -549,7 +569,7 @@ private
     puts "All Kit Variants: #{@all_kit_variants.inspect}"
     puts "Active Variants: #{@variants.inspect}"
 
-    render template: "pages/kit_collection", layout: "layouts/fullscreen"
+    render template: "pages/kit_variants_collection", layout: "layouts/fullscreen"
   end
 
   def advanced_table_mock_data
