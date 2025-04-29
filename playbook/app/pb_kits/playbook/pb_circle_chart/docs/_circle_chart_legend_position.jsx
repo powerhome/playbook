@@ -14,7 +14,7 @@ const data = [
     value: 49,
   },
   {
-    name: 'After call',
+    name: 'After Call',
     value: 10,
   },
 ]

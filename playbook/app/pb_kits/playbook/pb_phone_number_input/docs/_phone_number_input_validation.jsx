@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import Button from '../../pb_button/_button'
 import FixedConfirmationToast from '../../pb_fixed_confirmation_toast/_fixed_confirmation_toast'
 import PhoneNumberInput from '../../pb_phone_number_input/_phone_number_input'
+import Icon from '../../pb_icon/_icon'
 
 const PhoneNumberInputValidation = (props) => {
     const [formErrors, setFormErrors] = useState("");
@@ -29,6 +30,12 @@ const PhoneNumberInputValidation = (props) => {
         setShowFormErrors(formErrors.length > 0);
     }, [formErrors]);
 
+    const error = (
+        <>
+            <Icon icon="warning" /> Missing phone number.
+        </>
+    )
+
     return (
         <form
             action=""
@@ -43,7 +50,7 @@ const PhoneNumberInputValidation = (props) => {
                 />
             )}
             <PhoneNumberInput
-                error="Missing phone number."
+                error={error}
                 id="validation"
                 initialCountry={countryCode}
                 onChange={handleOnChange}

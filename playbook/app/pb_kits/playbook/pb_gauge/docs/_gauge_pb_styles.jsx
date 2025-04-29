@@ -11,7 +11,6 @@ SolidGauge(Highcharts);
 const data = [{ name: "Name", y: 45 }]
 
 const baseOptions = {
-  title: { text: "" },
   series: [{ data: data }],
 };
 

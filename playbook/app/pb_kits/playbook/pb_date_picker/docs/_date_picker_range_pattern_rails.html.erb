@@ -1,0 +1,20 @@
+<%= pb_rails("date_picker", props: {
+  mode: "range",
+  picker_id: "quick-pick-date-range",
+  placeholder: "Select a Date Range",
+  selection_type: "quickpick",
+  controls_end_id: "quick-pick-date-range-end",
+  controls_start_id: "quick-pick-date-range-start",
+}) %>
+
+<%= pb_rails("date_picker", props: {
+  picker_id: "quick-pick-date-range-start",
+  placeholder: "Select a Start Date",
+  sync_start_with:"quick-pick-date-range",
+}) %>
+
+<%= pb_rails("date_picker", props: {
+  picker_id: "quick-pick-date-range-end",
+  placeholder: "Select an End Date",
+  sync_end_with:"quick-pick-date-range",
+}) %>
