@@ -34,6 +34,9 @@ Rails.application.routes.draw do
   get "kit_collection/*names/:name(/*variants)/react",    to: "pages#kit_collection_show_react", as: "kit_collection_show_react"
   get "kit_collection/*names/:name(/*variants)/swift",    to: "pages#kit_collection_show_swift", as: "kit_collection_show_swift"
   get "kit_collection/*names/(/:name)(/*variants)(/:type)", to: "pages#kit_collection_show_rails", defaults: { type: "rails" }, as: "kit_collection_show"
+  get "kit_variants_collection/*names/:name(/*kit_variants)/rails",    to: "pages#kit_variants_collection_show_rails", as: "kit_variants_collection_show_rails"
+  get "kit_variants_collection/*names/:name(/*kit_variants)/react",    to: "pages#kit_variants_collection_show_react", as: "kit_variants_collection_show_react"
+  get "kit_variants_collection/*names/(/:name)(/*kit_variants)(/:type)", to: "pages#kit_variants_collection_show_rails", defaults: { type: "rails" }, as: "kit_variants_collection_show"
 
   # Experiments
   #
