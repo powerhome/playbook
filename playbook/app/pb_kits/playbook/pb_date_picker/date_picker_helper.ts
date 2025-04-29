@@ -32,7 +32,11 @@ type DatePickerConfig = {
   thisRangesEndToday?: boolean,
   timeCaption?: string,
   timeFormat?: string,
-  yearRange: number[]
+  yearRange: number[],
+  controlsStartId?: string,
+    controlsEndId?: string,
+    syncStartWith?: string,
+    syncEndWith?: string,
 } & Pick<BaseOptions, "allowInput" | "defaultDate" | "enableTime" | "maxDate" | "minDate" | "mode" | "plugins" | "position" | "positionElement" >
 
 const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HTMLElement) => {
@@ -67,6 +71,10 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
     timeCaption = 'Select Time',
     timeFormat = 'at h:i K',
     yearRange,
+    controlsStartId,
+    controlsEndId,
+    syncStartWith,
+    syncEndWith,
   } = config
 
   // ===========================================================
@@ -275,6 +283,47 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
     })
   }
 
+  // === Automatic Sync Logic for 3 input range pattern===
+
+  // If this is a quickpick that controls start and end
+  if (selectionType === "quickpick" && (controlsStartId || controlsEndId)) {
+    picker.config.onClose.push((selectedDates:string) => {
+      const [start, end] = selectedDates;
+
+      if (controlsStartId) {
+        const startPicker = (document.querySelector(`#${controlsStartId}`) as HTMLElement & { _flatpickr?: any })?._flatpickr;
+        startPicker?.setDate(start, true);
+      }
+
+      if (controlsEndId) {
+        const endPicker = (document.querySelector(`#${controlsEndId}`) as HTMLElement & { _flatpickr?: any })?._flatpickr;
+        endPicker?.setDate(end, true);
+      }
+    });
+  }
+
+  // If this is a start picker that syncs with a quickpick
+  if (syncStartWith) {
+    picker.config.onClose.push((selectedDates: string) => {
+      if (selectedDates?.length) {
+        const quickpick = (document.querySelector(`#${syncStartWith}`) as HTMLElement & { _flatpickr?: any })?._flatpickr;
+        quickpick?.clear();
+      }
+    });
+  }
+
+  // If this is an end picker that syncs with a quickpick
+  if (syncEndWith) {
+    picker.config.onClose.push((selectedDates: string) => {
+      if (selectedDates?.length) {
+        const quickpick = (document.querySelector(`#${syncEndWith}`) as HTMLElement & { _flatpickr?: any })?._flatpickr;
+        quickpick?.clear();
+      }
+    });
+  }
+// === End of Automatic Sync Logic ===
+
+    
   // Adding dropdown icons to year and month select
   dropdown.insertAdjacentHTML('afterend', `<i class="year-dropdown-icon">${angleDown}</i>`)
   if (picker.monthElements[0].parentElement) {

@@ -1,1 +1,1 @@
-Because the Quick Pick variant has `allowInput` set to `true` by default, use the `onClose` handler function to access the startDate and endDate values. See the `onClose` example for details.
+Use `this_ranges_end_today`/`thisRangesEndToday` to set end date on all ranges that start with 'this' to today's date. For instance, by default 'This Year' will set end day to 12/31/(current year), but if the `this_ranges_end_today`/`thisRangesEndToday` prop is used, end date on that range will be today's date.

@@ -238,6 +238,16 @@ const quickPickPlugin = (thisRangesEndToday: boolean, customQuickPickDates: cust
       },
 
       onClose(selectedDates: Array<Date>) {
+        // Patch .clear() to also remove active state if cleared
+        const originalClear = fp.clear;
+        fp.clear = function (...args: any) {
+          const current = pluginData.rangesNav.querySelector('.active');
+          if (current) {
+            current.classList.remove('active');
+          }
+          activeLabel = "";
+          return originalClear.apply(this, args);
+        };
         // remove the active class from the button if the selected dates don't match the label
         if (!isLabelMatchingSelectedDates(selectedDates)) {
           pluginData.rangesButtons[activeLabel]?.classList.remove('active');
