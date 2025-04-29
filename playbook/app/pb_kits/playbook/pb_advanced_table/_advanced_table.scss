@@ -386,8 +386,8 @@
 
   // Make sure all horizontal borders use the default border color
   tr, th, td {
-    border-top: 1px solid $border_light !important;
-    border-bottom: 1px solid $border_light !important;
+    border-top-color: $border_light !important;
+    border-bottom-color: $border_light !important;
   }
 
   // Apply border colors when columnGroupBorderColor is set
