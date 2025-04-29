@@ -600,8 +600,8 @@
 
     // Make sure all horizontal borders use the default border color in dark mode
     tr, th, td {
-      border-top: 1px solid $border_dark !important;
-      border-bottom: 1px solid $border_dark !important;
+      border-top-color: $border_dark !important;
+      border-bottom-color: $border_dark !important;
     }
 
     .bg-white {
