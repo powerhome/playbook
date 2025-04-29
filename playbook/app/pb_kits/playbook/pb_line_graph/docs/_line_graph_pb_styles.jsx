@@ -37,7 +37,7 @@ const baseOptions = {
 }
 
 const LineGraphPbStyles = () => {
-  const options = Highcharts.merge({}, lineGraphTheme, baseOptions )
+  const options = Highcharts.merge({}, lineGraphTheme, baseOptions)
 
   return(
     <div>
