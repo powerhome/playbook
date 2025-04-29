@@ -15,9 +15,6 @@ const lineGraphTheme = {
         [1, colors.bg_dark],
       ],
     },
-    pointFormat:
-      '<span style="font-weight: bold; color:{point.color};">●</span>{point.name}: ' +
-      "<b>{point.y}</b>",
     followPointer: true,
     shadow: false,
     borderWidth: 0,
