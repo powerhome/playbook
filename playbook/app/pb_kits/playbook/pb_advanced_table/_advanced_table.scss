@@ -377,11 +377,17 @@
 
   // Color for collapsible trail
   .collapsible-trail {
-    background-color: var(--column-border-color);
+    background-color: $border_light !important;
     position: absolute;
     top: 0;
     bottom: 0;
     width: 2px;
+  }
+
+  // Make sure all horizontal borders use the default border color
+  tr, th, td {
+    border-top: 1px solid $border_light !important;
+    border-bottom: 1px solid $border_light !important;
   }
 
   // Apply border colors when columnGroupBorderColor is set
@@ -435,7 +441,7 @@
     // Sub-row headers
     .toggle-content {
       td {
-        border-bottom: 1px solid var(--column-border-color) !important;
+        border-bottom: 1px solid $border_light !important;
       }
     }
   }
@@ -587,6 +593,17 @@
     // Override default border color for dark mode
     --column-border-color: #{$border_dark};
 
+    // Dark mode default border colors for trails and horizontal borders
+    .collapsible-trail {
+      background-color: $border_dark !important;
+    }
+
+    // Make sure all horizontal borders use the default border color in dark mode
+    tr, th, td {
+      border-top: 1px solid $border_dark !important;
+      border-bottom: 1px solid $border_dark !important;
+    }
+
     .bg-white {
       background: $bg_dark_card;
     }
@@ -624,9 +641,9 @@
 
     // Apply border colors in dark mode
     &[class*="column-group-border-"] {
-      // For top-level column groups
+      // For top-level column groups (ENROLLMENT DATA, PERFORMANCE DATA)
       .pb_advanced_table_header {
-        // The main column group headers
+        // The main column group headers - NOT the last column
         > tr:first-child {
           th[colspan]:not([colspan="1"]):not(:last-child) {
             border-right: 1px solid var(--column-border-color) !important;
@@ -673,7 +690,7 @@
       // Sub-row headers
       .toggle-content {
         td {
-          border-bottom: 1px solid var(--column-border-color) !important;
+          border-bottom: 1px solid $border_dark !important;
         }
       }
     }
@@ -713,10 +730,6 @@
           }
         }
       }
-    }
-
-    .collapsible-trail {
-      background-color: var(--column-border-color) !important;
     }
 
     .sort-button-icon,
