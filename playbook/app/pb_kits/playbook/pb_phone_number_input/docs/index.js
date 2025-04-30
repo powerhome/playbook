@@ -6,3 +6,4 @@ export { default as PhoneNumberInputValidation } from './_phone_number_input_val
 export { default as PhoneNumberInputClearField } from './_phone_number_input_clear_field'
 export { default as PhoneNumberInputAccessInputElement } from './_phone_number_input_access_input_element'
 export { default as PhoneNumberInputFormat } from './_phone_number_input_format'
+export { default as PhoneNumberInputCountrySearch } from './_phone_number_input_country_search'

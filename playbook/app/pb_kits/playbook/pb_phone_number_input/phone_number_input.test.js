@@ -139,3 +139,22 @@ test("should format phone number as '555-555-5555' with formatAsYouType and 'us'
 
     expect(input.value).toBe("555-555-5555");
 });
+
+test("should pass countrySearch prop to component", () => {
+    window.intlTelInput = jest.fn(() => ({
+      getSelectedCountryData: jest.fn(() => ({})),
+      isValidNumber: jest.fn(() => true),
+      getValidationError: jest.fn(() => 0),
+    }));
+    
+    const props = {
+      id: testId,
+      countrySearch: true,
+      data: { testid: 'phone-input-with-search' }
+    };
+  
+    render(<PhoneNumberInput {...props} />);
+    
+    const wrapper = screen.getByTestId('phone-input-with-search');
+    expect(wrapper).toBeInTheDocument();
+});
