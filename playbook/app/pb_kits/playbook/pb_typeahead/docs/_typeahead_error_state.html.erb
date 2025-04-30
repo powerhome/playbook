@@ -8,7 +8,14 @@
 
 %>
 
-<%= pb_rails("typeahead", props: { id: "typeahead-error-example", options: options, error: "Please make a valid selection", label: "Products", name: :foo, is_multi: false }) %>
+<%= pb_rails("typeahead", props: {
+  id: "typeahead-error-example",
+  options: options,
+  error: pb_rails("icon", props: { icon: "warning" }) + " Please make a valid selection",
+  label: "Products",
+  name: :foo,
+  is_multi: false
+}) %>
 
 <!-- This section is an example of the available JavaScript event hooks -->
 <%= javascript_tag defer: "defer" do %>

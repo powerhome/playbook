@@ -1,1 +1,5 @@
-<%= pb_rails("textarea", props: { error: "This field has an error!", label: "Label", rows: 4}) %>
+<%= pb_rails("textarea", props: {
+  error: raw(pb_rails("icon", props: { icon: "warning" }) + " This field has an error!"),
+  label: "Label",
+  rows: 4
+}) %>

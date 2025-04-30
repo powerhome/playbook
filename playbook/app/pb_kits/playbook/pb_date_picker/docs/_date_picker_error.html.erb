@@ -1,4 +1,4 @@
-<%= pb_rails("date_picker", props: { 
-  error: "Invalid date. Please pick a valid date.",
+<%= pb_rails("date_picker", props: {
+  error: raw(pb_rails("icon", props: { icon: "warning" }) + " Invalid date. Please pick a valid date."),
   picker_id: "date-picker-error"
 }) %>
