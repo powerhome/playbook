@@ -1,0 +1,1 @@
+By default, the popover tooltip attaches to the `<body>`. To attach it elsewhere, use the `append_to` prop. Set it to `"parent"` to place the tooltip inside its parent element, or pass any CSS selector (`#id` or `.class`) to specify a custom container.

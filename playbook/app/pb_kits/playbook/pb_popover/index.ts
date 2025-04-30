@@ -13,7 +13,15 @@ export default class PbPopover extends PbEnhancedElement {
   }
 
   moveTooltip() {
-    document.querySelector('body').appendChild(this.tooltip)
+    let container: HTMLElement | null;
+
+    if (this.appendTo === "parent") {
+      container = this.element.parentElement;
+    } else if (this.appendTo) {
+      container = document.querySelector(this.appendTo);
+    }
+
+    (container || document.body).appendChild(this.tooltip);
   }
 
   connect() {
@@ -107,5 +115,9 @@ export default class PbPopover extends PbEnhancedElement {
 
   get closeOnClick() {
     return this.element.dataset.pbPopoverCloseOnClick
+  }
+
+  get appendTo() {
+    return this.element.dataset.pbPopoverAppendTo;
   }
 }

@@ -1,0 +1,43 @@
+<% data_shadow = [
+  { id: "51", text: "Task 1" },
+  { id: "52", text: "Task 2" },
+  { id: "53", text: "Task 3" }
+] %>
+
+<% data_outline = [
+  { id: "61", text: "Task 1" },
+  { id: "62", text: "Task 2" },
+  { id: "63", text: "Task 3" }
+] %>
+
+<%= pb_rails("flex", props: { justify: "around" }) do %>
+  <%= pb_rails("flex/flex_item", props: { margin_right: "xl" }) do %>
+    <%= pb_rails("draggable", props: { drop_zone_type: "shadow", initial_items: data_shadow }) do %>
+      <%= pb_rails("caption", props: { margin_bottom: "xs", text: "Shadow", text_align: "center" }) %>
+      <%= pb_rails("draggable/draggable_container", props: { html_options: { style: { width: "200px" } } }) do %>
+        <% data_shadow.each do |item| %>
+          <%= pb_rails("card", props: { drag_id: item[:id], draggable_item: true, margin_bottom: "xs", padding: "xs", padding_right: "xl" }) do %>
+            <%= pb_rails("flex", props: { align_items: "stretch", flex_direction: "column" }) do %>
+              <%= pb_rails("body", props: { text: item[:text] }) %>
+            <% end %>
+          <% end %>
+        <% end %>
+      <% end %>
+    <% end %>
+  <% end %>
+
+  <%= pb_rails("flex/flex_item", props: { margin_right: "xl" }) do %>
+    <%= pb_rails("draggable", props: { drop_zone_type: "outline", initial_items: data_outline }) do %>
+      <%= pb_rails("caption", props: { margin_bottom: "xs", text: "Outline", text_align: "center" }) %>
+      <%= pb_rails("draggable/draggable_container", props: { html_options: { style: { width: "200px" } } }) do %>
+        <% data_outline.each do |item| %>
+          <%= pb_rails("card", props: { drag_id: item[:id], draggable_item: true, margin_bottom: "xs", padding: "xs", padding_right: "xl" }) do %>
+            <%= pb_rails("flex", props: { align_items: "stretch", flex_direction: "column" }) do %>
+              <%= pb_rails("body", props: { text: item[:text] }) %>
+            <% end %>
+          <% end %>
+        <% end %>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>

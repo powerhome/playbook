@@ -39,6 +39,9 @@ $flag-min-resolution: 192dpi;
     color: $charcoal;
   }
 
+  .iti__country-list {
+    min-width: $dropdown-min-width;
+  }
   // iti-spacer-horizontal's default is 8px, or $space_xs 
   .iti__country-list .iti__flag, .iti__country-name {
     margin-right: $space_xs;
@@ -227,6 +230,16 @@ $flag-min-resolution: 192dpi;
     .iti__dropdown-content {
       border-radius: $space_xs; 
       border: 1px solid $border_dark !important;
+      .iti__search-input {
+        background-color: $bg_dark_card;
+        &:hover {
+          background-color: $bg_dark_card;
+        }      
+        &:active,
+        &:focus {
+          background-color: $card_dark;
+        }
+      }
     }
 
     .iti__divider {
