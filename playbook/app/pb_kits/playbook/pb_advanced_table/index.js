@@ -12,44 +12,50 @@ export default class PbAdvancedTable extends PbEnhancedElement {
   updateParentCheckboxes(checkbox) {
     const rowEl = checkbox.closest("tr");
     if (!rowEl) return;
-  
+
     const table = rowEl.closest("table");
     if (!table) return;
-  
+
     const contentTrail = rowEl.dataset.advancedTableContent;
     if (!contentTrail) return;
-  
+
     const ancestorIds = contentTrail.split("-").slice(0, -1);
-  
+
     ancestorIds.reverse();
-  
     ancestorIds.forEach((ancestorId) => {
       const parentRowSelector = `[data-advanced-table-content$="${ancestorId}"]`;
       const parentRow = table.querySelector(parentRowSelector);
       if (!parentRow) return;
-  
+
       const parentLabel = parentRow.querySelector("label[data-row-id]");
       if (!parentLabel) return;
-  
-      const parentCheckbox = parentLabel.querySelector("input[type='checkbox']");
-      if (!parentCheckbox) return;
-  
-      // Find all immediate children of this parent
-      const children = table.querySelectorAll(
-        `tr[data-row-parent$="${ancestorId}"]`
+
+      const parentCheckbox = parentLabel.querySelector(
+        "input[type='checkbox']"
       );
-  
-      const allChildrenChecked = Array.from(children).every((child) => {
-        const label = child.querySelector("label[data-row-id]");
-        if (!label) return false;
-  
-        const childCheckbox = label.querySelector("input[type='checkbox']");
-        return childCheckbox && childCheckbox.checked;
+      if (!parentCheckbox) return;
+
+      // Find all immediate children of parent linked to ancestor Id, filter our subrow headers
+      const children = Array.from(
+        table.querySelectorAll(`tr[data-row-parent$="_${ancestorId}"]`)
+      ).filter((child) => {
+        const content = child.dataset.advancedTableContent;
+        return !(content && content.endsWith("sr"));
       });
-  
+
+      const allChildrenChecked = Array.from(children).every((child) => {
+        const childLabel = child.querySelector("label[data-row-id]");
+        if (!childLabel) return false;
+        const childCheckbox = childLabel.querySelector(
+          "input[type='checkbox']"
+        );
+        if (!childCheckbox) return false;
+        return childCheckbox.checked;
+      });
+
       // Update parent checkbox
       parentCheckbox.checked = allChildrenChecked;
-  
+
       const parentCheckboxId = parentCheckbox.id;
       if (allChildrenChecked) {
         PbAdvancedTable.selectedRows.add(parentCheckboxId);
@@ -58,7 +64,7 @@ export default class PbAdvancedTable extends PbEnhancedElement {
       }
     });
   }
-  
+
   handleCheckboxClick(event) {
     const checkbox = event.currentTarget;
     const rowId = checkbox.id;
@@ -129,12 +135,12 @@ export default class PbAdvancedTable extends PbEnhancedElement {
         this.toggleElement(this.target);
       }
     });
-    
-    this.hideCloseIcon()
+
+    this.hideCloseIcon();
 
     const checkboxLabels = this.element
-    .closest("table")
-    .querySelectorAll("label[data-row-id]");
+      .closest("table")
+      .querySelectorAll("label[data-row-id]");
     checkboxLabels.forEach((label) => {
       const checkbox = label.querySelector("input[type='checkbox']");
 
@@ -165,7 +171,7 @@ export default class PbAdvancedTable extends PbEnhancedElement {
   hideCloseIcon() {
     const closeIcon = this.element.querySelector(UP_ARROW_SELECTOR);
     closeIcon.style.display = "none";
-}
+  }
 
   showElement(elements) {
     elements.forEach((elem) => {
@@ -261,7 +267,6 @@ export default class PbAdvancedTable extends PbEnhancedElement {
       row.classList.toggle("bg-white", isVisible);
     }
   }
-
 
   displayDownArrow() {
     this.element.querySelector(DOWN_ARROW_SELECTOR).style.display =
