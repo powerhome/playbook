@@ -23,35 +23,39 @@
 @mixin error-state-right-side-select-kit {
   &:has(.pb_text_input_kit:not(.error)):has(.pb_text_input_kit_label):has(.pb_select_kit_wrapper.error),
   &:has(.pb_text_input_kit.error):has(.pb_text_input_kit_label):has(.pb_select_kit_wrapper) {
-    align-items: flex-start;
+    &:not(:has(.pb_phone_number_input)) {
+      align-items: flex-start;
 
-    .pb_select_kit_wrapper {
-      padding-top: $space_md;
-      margin-top: 2px;
-
-      .pb_select_kit_caret {
+      .pb_select_kit_wrapper {
         padding-top: $space_md;
+        margin-top: 2px;
+
+        .pb_select_kit_caret {
+          padding-top: $space_md;
+        }
       }
-    }
 
-    .pb_select_kit_wrapper.error {
-      padding-top: $space_md;
-      margin-top: 2px;
+      .pb_select_kit_wrapper.error {
+        padding-top: $space_md;
+        margin-top: 2px;
 
-      .pb_select_kit_caret {
-        padding-top: $space_xl;
+        .pb_select_kit_caret {
+          padding-top: $space_xl;
+        }
       }
     }
   }
 }
 
 @mixin error-state-left-side-select-kit {
-  &:has(.pb_select_kit_label):has(.pb_select_kit_wrapper):has(.pb_phone_number_input):has(.pb_text_input_kit.error) {
-    align-items: flex-start;
+  &:has(.pb_select_kit_label):has(.pb_select_kit_wrapper):has(.pb_text_input_kit.error) {
+    &:not(:has(.pb_phone_number_input)) {
+      align-items: flex-start;
 
-    .pb_text_input_kit.error {
-      padding-top: $space_md;
-      margin-top: 2px;
+      .pb_text_input_kit.error {
+        padding-top: $space_md;
+        margin-top: 2px;
+      }
     }
   }
 }
