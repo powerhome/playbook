@@ -1,8 +1,8 @@
 import React from "react"
-import AdvancedTable from '../../pb_advanced_table/_advanced_table'
+import AdvancedTable from '../_advanced_table'
 import MOCK_DATA from "./advanced_table_mock_data_no_subrows.json"
 
-const AdvancedTableSelectableRowsNoSubrows = (props) => {
+const AdvancedTableSelectableRowsNoSubrowsReact = (props) => {
   const columnDefinitions = [
     {
       accessor: "year",
@@ -49,4 +49,4 @@ const AdvancedTableSelectableRowsNoSubrows = (props) => {
   )
 }
 
-export default AdvancedTableSelectableRowsNoSubrows
+export default AdvancedTableSelectableRowsNoSubrowsReact

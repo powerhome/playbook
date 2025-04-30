@@ -157,7 +157,7 @@ export default class PbAdvancedTable extends PbEnhancedElement {
   
     const table = this.element.closest("table");
   
-    // 🧠 Prevent duplicate initialization
+    // Prevent duplicate initialization
     if (table.dataset.pbAdvancedTableInitialized) return;
     table.dataset.pbAdvancedTableInitialized = "true";
   

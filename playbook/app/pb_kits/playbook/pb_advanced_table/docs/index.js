@@ -15,7 +15,7 @@ export { default as AdvancedTablePaginationWithProps } from './_advanced_table_p
 export { default as AdvancedTableColumnHeaders } from './_advanced_table_column_headers.jsx'
 export { default as AdvancedTableColumnHeadersMultiple } from './_advanced_table_column_headers_multiple.jsx'
 export { default as AdvancedTableSelectableRows } from './_advanced_table_selectable_rows.jsx'
-export { default as AdvancedTableSelectableRowsNoSubrows } from './_advanced_table_selectable_rows_no_subrows.jsx'
+export { default as AdvancedTableSelectableRowsNoSubrowsReact } from './_advanced_table_selectable_rows_no_subrows_react.jsx'
 export { default as AdvancedTableNoSubrows } from './_advanced_table_no_subrows.jsx'
 export { default as AdvancedTableSelectableRowsHeader } from './_advanced_table_selectable_rows_header.jsx'
 export { default as AdvancedTableSelectableRowsActions } from './_advanced_table_selectable_rows_actions.jsx'
