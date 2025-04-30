@@ -9,6 +9,11 @@ export default class PbAdvancedTable extends PbEnhancedElement {
     return ADVANCED_TABLE_SELECTOR;
   }
 
+  updateTableSelectedRowsAttribute(table) {
+    if (!table) return;
+    table.dataset.selectedRows = JSON.stringify(Array.from(PbAdvancedTable.selectedRows));
+  }
+
   updateParentCheckboxes(checkbox) {
     const rowEl = checkbox.closest("tr");
     if (!rowEl) return;
@@ -106,10 +111,7 @@ export default class PbAdvancedTable extends PbEnhancedElement {
 
     this.updateParentCheckboxes(checkbox);
 
-    console.log(
-      "Currently selected row IDs: ",
-      Array.from(PbAdvancedTable.selectedRows)
-    );
+    this.updateTableSelectedRowsAttribute(checkbox.closest("table"));
 
     const table = checkbox.closest("table");
     const selectAllCheckbox = table.querySelector("#select-all-rows");
@@ -150,30 +152,31 @@ export default class PbAdvancedTable extends PbEnhancedElement {
         this.toggleElement(this.target);
       }
     });
-
+  
     this.hideCloseIcon();
-
-    const checkboxLabels = this.element
-      .closest("table")
-      .querySelectorAll("label[data-row-id]");
+  
+    const table = this.element.closest("table");
+  
+    // 🧠 Prevent duplicate initialization
+    if (table.dataset.pbAdvancedTableInitialized) return;
+    table.dataset.pbAdvancedTableInitialized = "true";
+  
+    // Bind checkbox change handlers for all row checkboxes
+    const checkboxLabels = table.querySelectorAll("label[data-row-id]");
     checkboxLabels.forEach((label) => {
       const checkbox = label.querySelector("input[type='checkbox']");
-
       if (!checkbox) return;
-
       checkbox.addEventListener("change", (event) => {
         this.handleCheckboxClick(event);
       });
     });
-
-    const nestedButtons = this.element
-      .closest("table")
-      .querySelectorAll("[data-advanced-table]");
+  
+    // Bind nested row expansion logic
+    const nestedButtons = table.querySelectorAll("[data-advanced-table]");
     nestedButtons.forEach((button) => {
       button.addEventListener("click", () => {
         const isExpanded =
-          button.querySelector(UP_ARROW_SELECTOR).style.display ===
-          "inline-block";
+          button.querySelector(UP_ARROW_SELECTOR).style.display === "inline-block";
         if (isExpanded) {
           PbAdvancedTable.expandedRows.add(button.id);
         } else {
@@ -181,23 +184,20 @@ export default class PbAdvancedTable extends PbEnhancedElement {
         }
       });
     });
-    const table = this.element.closest("table");
+  
+    // Bind select-all logic for this table
     const selectAllCheckbox = table.querySelector("#select-all-rows");
-
     if (selectAllCheckbox) {
       selectAllCheckbox.addEventListener("change", () => {
-        const checkboxInput = selectAllCheckbox.querySelector(
-          'input[type="checkbox"]'
-        );
+        const checkboxInput = selectAllCheckbox.querySelector('input[type="checkbox"]');
         const checkAll = checkboxInput.checked;
-
+  
         const checkboxes = Array.from(
           table.querySelectorAll("label[data-row-id] input[type='checkbox']")
         );
-
+  
         checkboxes.forEach((cb) => {
           cb.checked = checkAll;
-
           const rowId = cb.id;
           if (checkAll) {
             PbAdvancedTable.selectedRows.add(rowId);
@@ -205,16 +205,14 @@ export default class PbAdvancedTable extends PbEnhancedElement {
             PbAdvancedTable.selectedRows.delete(rowId);
           }
         });
-
+  
         checkboxes.forEach((cb) => this.updateParentCheckboxes(cb));
-
-        console.log(
-          "Currently selected row IDs: ",
-          Array.from(PbAdvancedTable.selectedRows)
-        );
+  
+        this.updateTableSelectedRowsAttribute(table);
       });
     }
   }
+  
 
   hideCloseIcon() {
     const closeIcon = this.element.querySelector(UP_ARROW_SELECTOR);
