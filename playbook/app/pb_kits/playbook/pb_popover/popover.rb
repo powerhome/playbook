@@ -3,6 +3,7 @@
 module Playbook
   module PbPopover
     class Popover < Playbook::KitBase
+      prop :append_to, type: Playbook::Props::String, default: "body"
       prop :position, type: Playbook::Props::Enum,
                       values: %w[top bottom left right top-start top-end bottom-start bottom-end right-start right-end left-start left-end],
                       default: "left"
@@ -47,6 +48,7 @@ module Playbook
 
       def data
         Hash(values[:data]).merge(
+          pb_popover_append_to: append_to,
           pb_popover_kit: true,
           pb_popover_position: position,
           pb_popover_trigger_element_id: trigger_element_id,
