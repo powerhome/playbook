@@ -60,7 +60,7 @@ module Playbook
                        name: "select-row-#{row_id || row.object_id}",
                        data: {
                          row_id: row_id || row.object_id.to_s,
-                         action: "click->pb-advanced-table#toggleRowSelection",
+                         advanced_table_select: true,
                        },
                      })
           end

@@ -9,9 +9,9 @@ export default class PbAdvancedTable extends PbEnhancedElement {
     return ADVANCED_TABLE_SELECTOR;
   }
 
-  updateTableSelectedRowsAttribute(table) {
-    if (!table) return;
-    table.dataset.selectedRows = JSON.stringify(Array.from(PbAdvancedTable.selectedRows));
+  updateTableSelectedRowsAttribute() {
+    const mainTable = this.element.closest(".pb_advanced_table");
+    mainTable.dataset.selectedRows = JSON.stringify(Array.from(PbAdvancedTable.selectedRows));
   }
 
   updateParentCheckboxes(checkbox) {
@@ -111,7 +111,7 @@ export default class PbAdvancedTable extends PbEnhancedElement {
 
     this.updateParentCheckboxes(checkbox);
 
-    this.updateTableSelectedRowsAttribute(checkbox.closest("table"));
+    this.updateTableSelectedRowsAttribute();
 
     const table = checkbox.closest("table");
     const selectAllCheckbox = table.querySelector("#select-all-rows");
@@ -208,7 +208,7 @@ export default class PbAdvancedTable extends PbEnhancedElement {
   
         checkboxes.forEach((cb) => this.updateParentCheckboxes(cb));
   
-        this.updateTableSelectedRowsAttribute(table);
+        this.updateTableSelectedRowsAttribute();
       });
     }
   }
