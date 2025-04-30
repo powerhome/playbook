@@ -1,5 +1,5 @@
 <form id="example-form-validation" action="" method="get">
-    <%= pb_rails("phone_number_input", props: { error: raw(pb_rails("icon", props: { icon: "warning"}) + " Missing phone number"), id: "validation", initial_country: "af", value: "", required: true }) %>
+    <%= pb_rails("phone_number_input", props: { error: "Missing phone number", id: "validation", initial_country: "af", value: "", required: true }) %>
     <%= pb_rails("button", props: {html_type: "submit", text: "Save Phone Number"}) %>
 </form>
 
