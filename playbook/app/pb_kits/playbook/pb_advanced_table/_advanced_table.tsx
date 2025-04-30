@@ -34,7 +34,6 @@ type AdvancedTableProps = {
   children?: React.ReactNode | React.ReactNode[]
   className?: string
   columnDefinitions: GenericObject[]
-  columnGroupBorderColor?: "text_lt_default" | "text_lt_light" | "text_lt_lighter" | "text_dk_default" | "text_dk_light" | "text_dk_lighter"
   dark?: boolean
   data?: { [key: string]: string }
   enableToggleExpansion?: "all" | "header" | "none"
@@ -72,7 +71,6 @@ const AdvancedTable = (props: AdvancedTableProps) => {
     children,
     className,
     columnDefinitions,
-    columnGroupBorderColor,
     dark = false,
     data = {},
     enableToggleExpansion = "header",
@@ -241,7 +239,6 @@ const AdvancedTable = (props: AdvancedTableProps) => {
       'advanced-table-allow-fullscreen': allowFullScreen
     },
     {'advanced-table-sticky-left-columns': stickyLeftColumn && stickyLeftColumn.length > 0},
-    columnGroupBorderColor ? `column-group-border-${columnGroupBorderColor}` : '',
     globalProps(props),
     className
   );
@@ -285,7 +282,6 @@ const AdvancedTable = (props: AdvancedTableProps) => {
         {renderFullscreenHeader()}
         <AdvancedTableProvider
             columnDefinitions={columnDefinitions}
-            columnGroupBorderColor={columnGroupBorderColor}
             enableToggleExpansion={enableToggleExpansion}
             enableVirtualization={virtualizedRows}
             expandByDepth={expandByDepth}
@@ -338,7 +334,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
             </Table>
           </React.Fragment>
         </AdvancedTableProvider>
-
+     
       </div>
       {/* Bottom Pagination */}
       {pagination && (

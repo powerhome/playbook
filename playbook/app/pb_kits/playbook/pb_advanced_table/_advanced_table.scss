@@ -13,26 +13,6 @@
 .pb_advanced_table {
   $border-color: 1px solid $border_light;
 
-  // Base vertical border color variable setup
-  --column-border-color: #{$border_light};
-
-  // Define color tokens once
-  $border_color_options: (
-    "text_lt_default": $text_lt_default,
-    "text_lt_light": $text_lt_light,
-    "text_lt_lighter": $text_lt_lighter,
-    "text_dk_default": $text_dk_default,
-    "text_dk_light": $text_dk_light,
-    "text_dk_lighter": $text_dk_lighter
-  );
-
-  // Generate classes for each color option
-  @each $color_name, $color_value in $border_color_options {
-    &.column-group-border-#{$color_name} {
-      --column-border-color: #{$color_value};
-    }
-  }
-
   [id$="-span"] {
     word-wrap: normal;
   }
@@ -366,133 +346,13 @@
     }
   }
 
-  // First column separator/border
+  // Vertical separator
   .table-header-cells:first-child,
   .table-header-cells-custom:first-child,
   td:first-child,
   .pb_table_td:first-child,
   .checkbox-cell.checkbox-cell-header:first-child {
-    box-shadow: 1px 0px 0px 0px var(--column-border-color) !important;
-  }
-
-  // Color for collapsible trail
-  .collapsible-trail {
-    background-color: $border_light !important;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    width: 2px;
-  }
-
-  // Make sure all horizontal borders use the default border color
-  tr, th, td {
-    border-top-color: $border_light !important;
-    border-bottom-color: $border_light !important;
-  }
-
-  // Apply border colors when columnGroupBorderColor is set
-  &[class*="column-group-border-"] {
-    // For top-level column groups
-    .pb_advanced_table_header {
-      // The main column group headers
-      > tr:first-child {
-        th[colspan]:not([colspan="1"]):not(:last-child) {
-          border-right: 1px solid var(--column-border-color) !important;
-        }
-      }
-
-      // Subgroup headers
-      > tr:nth-child(2) {
-        th[colspan]:not([colspan="1"]):not(:last-child) {
-          border-right: 1px solid var(--column-border-color) !important;
-        }
-
-        // Last cell in each subgroup
-        th.last-header-cell:not(:last-child) {
-          border-right: 1px solid var(--column-border-color) !important;
-        }
-      }
-
-      // Individual column headers at subgroup boundaries
-      > tr:last-child {
-        // Last cell in each subgroup
-        th.last-header-cell:not(:last-child) {
-          border-right: 1px solid var(--column-border-color) !important;
-        }
-      }
-    }
-
-    // For data cells at column group boundaries
-    .pb_advanced_table_body {
-      // Apply to cells that are at column group boundaries
-      td.last-cell:not(:last-child),
-      .pb_table_td.last-cell:not(:last-child) {
-        border-right: 1px solid var(--column-border-color) !important;
-      }
-
-      // Virtualized row cells at column group boundaries
-      tr.virtualized-table-row {
-        td.last-cell:not(:last-child) {
-          border-right: 1px solid var(--column-border-color) !important;
-        }
-      }
-    }
-
-    // Sub-row headers
-    .toggle-content {
-      td {
-        border-bottom: 1px solid $border_light !important;
-      }
-    }
-  }
-
-  // Restore vertical border styling when verticalBorder is true
-  .pb_table[data-vertical-border="true"] {
-    .pb_advanced_table_header {
-      > tr:not(:first-child) {
-        th:not(:last-child) {
-          border-right: 1px solid $border_light !important;
-        }
-      }
-    }
-
-    .pb_advanced_table_body {
-      td:not(:last-child),
-      .pb_table_td:not(:last-child) {
-        border-right: 1px solid $border_light !important;
-      }
-    }
-
-    tr.virtualized-table-row {
-      td:not(:last-child) {
-        border-right: 1px solid $border_light !important;
-      }
-    }
-
-    // When both verticalBorder AND columnGroupBorderColor are set,
-    // override the default border-light with the custom color
-    &.pb_advanced_table[class*="column-group-border-"] {
-      .pb_advanced_table_header {
-        > tr:not(:first-child) {
-          th:not(:last-child) {
-            border-right: 1px solid var(--column-border-color) !important;
-          }
-        }
-      }
-
-      .pb_advanced_table_body {
-        td:not(:last-child),
-        .pb_table_td:not(:last-child) {
-          border-right: 1px solid var(--column-border-color) !important;
-        }
-      }
-
-      tr.virtualized-table-row {
-        td:not(:last-child) {
-          border-right: 1px solid var(--column-border-color) !important;
-        }
-      }
-    }
+    box-shadow: 1px 0px 0px 0px $border_light !important;
   }
 
   @include chrome_styles($border-color);
@@ -515,25 +375,12 @@
     height: auto;
   }
 
-  // Mixin to apply sticky column styles for different color modes and themes
-  @mixin apply-sticky-colors($theme) {
-    @each $color_name, $color_value in $border_color_options {
-      &.column-group-border-#{$color_name} {
-        @if $theme == "light" {
-          @include advanced-table-sticky-mixin(
-            $color_value,
-            $white,
-            lighten($silver, $opacity_7)
-          );
-        } @else if $theme == "dark" {
-          @include advanced-table-sticky-mixin(
-            $color_value,
-            $bg_dark_card,
-            $bg_dark
-          );
-        }
-      }
-    }
+  .collapsible-trail {
+    background-color: $border_light;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 2px;
   }
 
   // Sticky Left Columns Styling
@@ -550,9 +397,6 @@
       $white,
       lighten($silver, $opacity_7)
     );
-
-    // Apply border colors for sticky columns
-    @include apply-sticky-colors("light");
   }
 
   // Responsive Styles
@@ -560,29 +404,13 @@
     &[class*="advanced-table-responsive-scroll"] {
       overflow-x: auto;
       width: 100%;
-
-      // These are the responsive borders that should NOT inherit the custom color
       @include advanced-table-sticky-mixin(
         $border_light,
         $white,
         lighten($silver, $opacity_7)
       );
-
-      // Override any columnGroupBorderColor inheritance for responsive borders
-      .sticky-left {
-        box-shadow: $shadow_deep !important;
-      }
-
-      .pb_advanced_table_header,
-      .pb_advanced_table_body {
-        th.sticky-left,
-        td.sticky-left {
-          border-right: 1px solid $border_light !important;
-        }
-      }
     }
   }
-
   @media only screen and (min-width: $screen-xl-min) {
     &[class*="advanced-table-responsive-scroll"] {
       overflow-x: visible;
@@ -590,20 +418,6 @@
   }
 
   &.dark {
-    // Override default border color for dark mode
-    --column-border-color: #{$border_dark};
-
-    // Dark mode default border colors for trails and horizontal borders
-    .collapsible-trail {
-      background-color: $border_dark !important;
-    }
-
-    // Make sure all horizontal borders use the default border color in dark mode
-    tr, th, td {
-      border-top-color: $border_dark !important;
-      border-bottom-color: $border_dark !important;
-    }
-
     .bg-white {
       background: $bg_dark_card;
     }
@@ -632,104 +446,13 @@
     }
 
     .table-header-cells:first-child,
-    .table-header-cells-custom:first-child,
     td:first-child,
-    .pb_table_td:first-child,
-    .checkbox-cell.checkbox-cell-header:first-child {
-      box-shadow: 1px 0px 0px 0px var(--column-border-color) !important;
+    .pb_table_td:first-child {
+      box-shadow: 1px 0px 0px 0px $border_dark !important;
     }
 
-    // Apply border colors in dark mode
-    &[class*="column-group-border-"] {
-      // For top-level column groups (ENROLLMENT DATA, PERFORMANCE DATA)
-      .pb_advanced_table_header {
-        // The main column group headers - NOT the last column
-        > tr:first-child {
-          th[colspan]:not([colspan="1"]):not(:last-child) {
-            border-right: 1px solid var(--column-border-color) !important;
-          }
-        }
-
-        // Subgroup headers
-        > tr:nth-child(2) {
-          th[colspan]:not([colspan="1"]):not(:last-child) {
-            border-right: 1px solid var(--column-border-color) !important;
-          }
-
-          // Last cell in each subgroup
-          th.last-header-cell:not(:last-child) {
-            border-right: 1px solid var(--column-border-color) !important;
-          }
-        }
-
-        // Individual column headers at subgroup boundaries
-        > tr:last-child {
-          // Last cell in each subgroup
-          th.last-header-cell:not(:last-child) {
-            border-right: 1px solid var(--column-border-color) !important;
-          }
-        }
-      }
-
-      // For data cells at column group boundaries in dark mode
-      .pb_advanced_table_body {
-        // Apply to cells that are at column group boundaries
-        td.last-cell:not(:last-child),
-        .pb_table_td.last-cell:not(:last-child) {
-          border-right: 1px solid var(--column-border-color) !important;
-        }
-
-        // Virtualized row cells at column group boundaries
-        tr.virtualized-table-row {
-          td.last-cell:not(:last-child) {
-            border-right: 1px solid var(--column-border-color) !important;
-          }
-        }
-      }
-
-      // Sub-row headers
-      .toggle-content {
-        td {
-          border-bottom: 1px solid $border_dark !important;
-        }
-      }
-    }
-
-    // Restore vertical border styling in dark mode when verticalBorder is true
-    .pb_table[data-vertical-border="true"] {
-      .pb_advanced_table_header {
-        > tr:not(:first-child) {
-          th:not(:last-child) {
-            border-right: 1px solid $border_dark !important;
-          }
-        }
-      }
-
-      .pb_advanced_table_body {
-        td:not(:last-child),
-        .pb_table_td:not(:last-child) {
-          border-right: 1px solid $border_dark !important;
-        }
-      }
-
-      // When both verticalBorder AND columnGroupBorderColor are set in dark mode,
-      // override the default border-dark with the custom color
-      &.pb_advanced_table[class*="column-group-border-"] {
-        .pb_advanced_table_header {
-          > tr:not(:first-child) {
-            th:not(:last-child) {
-              border-right: 1px solid var(--column-border-color) !important;
-            }
-          }
-        }
-
-        .pb_advanced_table_body {
-          td:not(:last-child),
-          .pb_table_td:not(:last-child) {
-            border-right: 1px solid var(--column-border-color) !important;
-          }
-        }
-      }
+    .collapsible-trail {
+      background-color: $border_dark !important;
     }
 
     .sort-button-icon,
@@ -759,6 +482,15 @@
           $bg_dark 100%
         ) !important;
       }
+    }
+
+    // Vertical separator
+    .table-header-cells:first-child,
+    .table-header-cells-custom:first-child,
+    td:first-child,
+    .pb_table_td:first-child,
+    .checkbox-cell.checkbox-cell-header:first-child {
+      box-shadow: 1px 0px 0px 0px $border_dark !important;
     }
 
     // Fullscreen
@@ -794,26 +526,11 @@
             }
           }
         }
-
-        // These are the responsive borders that should NOT inherit the custom color
         @include advanced-table-sticky-mixin(
           $border_dark,
           $bg_dark_card,
           $bg_dark
         );
-
-        // Override any columnGroupBorderColor inheritance for responsive borders in dark mode
-        .sticky-left {
-          box-shadow: $shadow_deep !important;
-        }
-
-        .pb_advanced_table_header,
-        .pb_advanced_table_body {
-          th.sticky-left,
-          td.sticky-left {
-            border-right: 1px solid $border_dark !important;
-          }
-        }
       }
     }
   }
