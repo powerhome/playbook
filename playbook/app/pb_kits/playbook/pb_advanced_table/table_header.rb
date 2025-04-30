@@ -54,9 +54,6 @@ module Playbook
             pb_rails("checkbox", props: {
                        id: "select-all-rows",
                        name: "select-all-rows",
-                       data: {
-                         action: "click->pb-advanced-table#toggleAllRowSelection",
-                       },
                      })
           end
         end

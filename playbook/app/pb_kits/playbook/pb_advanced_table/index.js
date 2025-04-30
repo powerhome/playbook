@@ -110,6 +110,21 @@ export default class PbAdvancedTable extends PbEnhancedElement {
       "Currently selected row IDs: ",
       Array.from(PbAdvancedTable.selectedRows)
     );
+
+    const table = checkbox.closest("table");
+    const selectAllCheckbox = table.querySelector("#select-all-rows");
+
+    if (selectAllCheckbox) {
+      const allCheckboxes = table.querySelectorAll(
+        "label[data-row-id] input[type='checkbox']"
+      );
+      const allChecked = Array.from(allCheckboxes).every((cb) => cb.checked);
+
+      const selectAllInput = selectAllCheckbox.querySelector(
+        'input[type="checkbox"]'
+      );
+      selectAllInput.checked = allChecked;
+    }
   }
 
   get target() {
@@ -166,6 +181,39 @@ export default class PbAdvancedTable extends PbEnhancedElement {
         }
       });
     });
+    const table = this.element.closest("table");
+    const selectAllCheckbox = table.querySelector("#select-all-rows");
+
+    if (selectAllCheckbox) {
+      selectAllCheckbox.addEventListener("change", () => {
+        const checkboxInput = selectAllCheckbox.querySelector(
+          'input[type="checkbox"]'
+        );
+        const checkAll = checkboxInput.checked;
+
+        const checkboxes = Array.from(
+          table.querySelectorAll("label[data-row-id] input[type='checkbox']")
+        );
+
+        checkboxes.forEach((cb) => {
+          cb.checked = checkAll;
+
+          const rowId = cb.id;
+          if (checkAll) {
+            PbAdvancedTable.selectedRows.add(rowId);
+          } else {
+            PbAdvancedTable.selectedRows.delete(rowId);
+          }
+        });
+
+        checkboxes.forEach((cb) => this.updateParentCheckboxes(cb));
+
+        console.log(
+          "Currently selected row IDs: ",
+          Array.from(PbAdvancedTable.selectedRows)
+        );
+      });
+    }
   }
 
   hideCloseIcon() {
