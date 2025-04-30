@@ -40,6 +40,17 @@ export default class PbFlatAdvancedTable extends PbEnhancedElement {
           PbFlatAdvancedTable.selectedRows.delete(rowId);
         }
       
+        // Update row background color based on checkbox state
+        const rowEl = checkbox.closest("tr");
+        if (rowEl) {
+          if (isChecked) {
+            rowEl.classList.add("bg-row-selection");
+            rowEl.classList.remove("bg-white");
+          } else {
+            rowEl.classList.remove("bg-row-selection");
+            rowEl.classList.add("bg-white");
+          }
+        }
         const allCheckboxes = table.querySelectorAll(
           "label[data-flat-advanced-table-select='true'] input[type='checkbox']"
         );
@@ -73,11 +84,16 @@ export default class PbFlatAdvancedTable extends PbEnhancedElement {
           const cb = label.querySelector("input[type='checkbox']");
           cb.checked = checkAll;
           const rowId = cb.id;
+          const rowEl = cb.closest("tr");
 
           if (checkAll) {
             PbFlatAdvancedTable.selectedRows.add(rowId);
+            rowEl?.classList.add("bg-row-selection");
+            rowEl?.classList.remove("bg-white");
           } else {
             PbFlatAdvancedTable.selectedRows.delete(rowId);
+            rowEl?.classList.remove("bg-row-selection");
+            rowEl?.classList.add("bg-white");
           }
         });
 
