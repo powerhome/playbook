@@ -1,0 +1,3 @@
+When using the "line" style, make sure to set the appropriate `direction` attribute within the `drop_zone_direction` prop on the `draggable/draggable_container` component based on the orientation of your draggable view: "vertical" or "horizontal." Note that the direction attribute only applies to the "line" style and does not affect other drop zone styles. Also, set the `drop_zone_line_color` prop on the `draggable/draggable_item` component to "primary" or "purple".
+
+The length of the line is calculated based off of the width (for "vertical") or height (for "horizontal") of the parent container holding the draggable items. 
