@@ -14,6 +14,14 @@ export default class PbAdvancedTable extends PbEnhancedElement {
     mainTable.dataset.selectedRows = JSON.stringify(Array.from(PbAdvancedTable.selectedRows));
   }
 
+  // Check if the row is expanded or collapsed
+  // This is used to determine the background color of the row
+  // when the checkbox is checked or unchecked
+  isRowExpanded(rowEl) {
+    const closeIcon = rowEl.querySelector(UP_ARROW_SELECTOR);
+    return closeIcon?.style.display === "none" || !closeIcon;
+  }
+
   updateParentCheckboxes(checkbox) {
     const rowEl = checkbox.closest("tr");
     if (!rowEl) return;
@@ -64,8 +72,21 @@ export default class PbAdvancedTable extends PbEnhancedElement {
       const parentCheckboxId = parentCheckbox.id;
       if (allChildrenChecked) {
         PbAdvancedTable.selectedRows.add(parentCheckboxId);
+        parentRow.classList.add("bg-row-selection");
+        parentRow.classList.remove("bg-white", "bg-silver");
       } else {
         PbAdvancedTable.selectedRows.delete(parentCheckboxId);
+      }
+      if (!allChildrenChecked) {
+        parentRow.classList.remove("bg-row-selection");
+  
+        if (this.isRowExpanded(parentRow)) {
+          parentRow.classList.remove("bg-silver");
+          parentRow.classList.add("bg-white");
+        } else {
+          parentRow.classList.remove("bg-white");
+          parentRow.classList.add("bg-silver");
+        }
       }
     });
   }
@@ -74,13 +95,27 @@ export default class PbAdvancedTable extends PbEnhancedElement {
     const checkbox = event.currentTarget;
     const rowId = checkbox.id;
     const isChecked = checkbox.checked;
+    const rowEl = checkbox.closest("tr");
 
     if (isChecked) {
       PbAdvancedTable.selectedRows.add(rowId);
+      rowEl.classList.add("bg-row-selection");
+      rowEl.classList.remove("bg-white", "bg-silver");
     } else {
       PbAdvancedTable.selectedRows.delete(rowId);
     }
-    const rowEl = checkbox.closest("tr");
+     // Update background color on row
+    if (!isChecked) {
+      rowEl.classList.remove("bg-row-selection");
+
+      if (this.isRowExpanded(rowEl)) {
+        rowEl.classList.remove("bg-silver");
+        rowEl.classList.add("bg-white");
+      } else {
+        rowEl.classList.remove("bg-white");
+        rowEl.classList.add("bg-silver");
+      }
+    }
     if (rowEl) {
       const table = rowEl.closest("table");
       const rowContent = rowEl.dataset.advancedTableContent;
@@ -100,10 +135,24 @@ export default class PbAdvancedTable extends PbEnhancedElement {
           childCheckbox.checked = isChecked;
 
           const childRowId = childCheckbox.id;
+          const childRowEl = childCheckbox.closest("tr");
           if (isChecked) {
             PbAdvancedTable.selectedRows.add(childRowId);
+            childRowEl?.classList.add("bg-row-selection");
+            childRowEl?.classList.remove("bg-white", "bg-silver");
           } else {
             PbAdvancedTable.selectedRows.delete(childRowId);
+          }
+          if (!isChecked) {
+            childRowEl?.classList.remove("bg-row-selection");
+
+            if (this.isRowExpanded(childRowEl)) {
+              childRowEl?.classList.remove("bg-silver");
+              childRowEl?.classList.add("bg-white");
+            } else {
+              childRowEl?.classList.remove("bg-white");
+              childRowEl?.classList.add("bg-silver");
+            }
           }
         });
       }
@@ -199,10 +248,16 @@ export default class PbAdvancedTable extends PbEnhancedElement {
         checkboxes.forEach((cb) => {
           cb.checked = checkAll;
           const rowId = cb.id;
+          const rowEl = cb.closest("tr");
+
           if (checkAll) {
             PbAdvancedTable.selectedRows.add(rowId);
+            rowEl?.classList.add("bg-row-selection");
+            rowEl?.classList.remove("bg-white", "bg-silver");
           } else {
             PbAdvancedTable.selectedRows.delete(rowId);
+            rowEl?.classList.remove("bg-row-selection");
+            rowEl?.classList.add("bg-white");
           }
         });
   
