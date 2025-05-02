@@ -2,6 +2,7 @@ import React from 'react'
 
 import Dropdown from '../../pb_dropdown/_dropdown'
 import Badge from '../../pb_badge/_badge'
+import Flex from '../../pb_flex/_flex'
 import FlexItem from '../../pb_flex/_flex_item'
 import User from '../../pb_user/_user'
 
@@ -53,7 +54,10 @@ const DropdownWithAutocomplete = (props) => {
           <Dropdown.Option key={option.id} 
               option={option}
           >
-            <>
+            <Flex
+                align="center"
+                justify="between"
+            >
               <FlexItem>
                 <User
                     align="left"
@@ -66,6 +70,7 @@ const DropdownWithAutocomplete = (props) => {
               </FlexItem>
               <FlexItem>
                 <Badge
+                    dark
                     rounded
                     text={option.status}
                     variant={`${
@@ -77,7 +82,7 @@ const DropdownWithAutocomplete = (props) => {
                     }`}
                 />
               </FlexItem>
-            </>
+            </Flex>
           </Dropdown.Option>
         ))}
     </Dropdown>
