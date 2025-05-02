@@ -1,6 +1,7 @@
 examples:
   rails:
   - dropdown_default: Default
+  - dropdown_with_autocomplete: Autocomplete
   - dropdown_subtle_variant: Subtle Variant
   - dropdown_subcomponent_structure_rails: Subcomponent Structure
   - dropdown_with_label: With Label

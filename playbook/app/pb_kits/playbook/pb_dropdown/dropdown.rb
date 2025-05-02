@@ -18,6 +18,8 @@ module Playbook
                      default: "default"
       prop :separators, type: Playbook::Props::Boolean,
                         default: true
+      prop :autocomplete, type: Playbook::Props::Boolean,
+                          default: false
 
       def data
         Hash(prop(:data)).merge(pb_dropdown: true)
