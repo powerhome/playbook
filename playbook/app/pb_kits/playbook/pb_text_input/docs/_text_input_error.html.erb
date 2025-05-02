@@ -4,7 +4,7 @@
     border: true,
     icon: "user"
   },
-  error: "Please enter a valid email address",
+  error: raw(pb_rails("icon", props: { icon: "warning" }) + " Please enter a valid email address"),
   label: "Email Address",
   placeholder: "Enter email address",
   type: "email"
