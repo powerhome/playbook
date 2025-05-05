@@ -3781,10 +3781,10 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react-highlight-words@^0.16.5":
-  version "0.16.7"
-  resolved "https://npm.powerapp.cloud/@types/react-highlight-words/-/react-highlight-words-0.16.7.tgz#82fdd2d2abe4c4a5c0da44be749660f6ec42f0c2"
-  integrity sha512-+upXTIaRd3rGvh1aDQSs9z5X+sV3UM6Jrmjk03GN2GXl4v/+iOJKQj2LZHo6Vp2IoTvMdtxgME26feqo12xXLg==
+"@types/react-highlight-words@^0.20.0":
+  version "0.20.0"
+  resolved "https://npm.powerapp.cloud/@types/react-highlight-words/-/react-highlight-words-0.20.0.tgz#c7e3e8302acb5082980e611ce2d93c6e6d3b4022"
+  integrity sha512-Qm512TiOakvtNzHJ2+TNVHnLn5cJ2wLQV0+LrhuispVth6dRf5b8ydjq3Kc0thpZ7bz4s6RnG6meboAXHWRK+Q==
   dependencies:
     "@types/react" "*"
 
