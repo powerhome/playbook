@@ -9,6 +9,7 @@ examples:
   - dropdown_with_custom_options_rails: Custom Options
   - dropdown_with_custom_display_rails: Custom Display
   - dropdown_with_custom_trigger_rails: Custom Trigger
+  - dropdown_with_search: Custom Trigger Dropdown with Search
   - dropdown_with_custom_padding: Custom Option Padding
   - dropdown_error: Dropdown with Error
   - dropdown_default_value: Default Value
@@ -25,7 +26,7 @@ examples:
   - dropdown_with_custom_options: Custom Options
   - dropdown_with_custom_display: Custom Display
   - dropdown_with_custom_trigger: Custom Trigger
-  - dropdown_with_search: Dropdown with Search
+  - dropdown_with_search: Custom Trigger Dropdown with Search
   - dropdown_with_custom_padding: Custom Option Padding
   - dropdown_error: Dropdown with Error
   - dropdown_default_value: Default Value

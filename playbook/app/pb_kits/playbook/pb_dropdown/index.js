@@ -12,6 +12,7 @@ const DROPDOWN_TRIGGER_DISPLAY = "#dropdown_trigger_display";
 const DROPDOWN_PLACEHOLDER = "[data-dropdown-placeholder]";
 const DROPDOWN_INPUT = "#dropdown-selected-option";
 const SEARCH_INPUT_SELECTOR = "[data-dropdown-autocomplete]";
+const SEARCH_BAR_SELECTOR = "[data-dropdown-search]";
 
 export default class PbDropdown extends PbEnhancedElement {
   static get selector() {
@@ -30,6 +31,7 @@ export default class PbDropdown extends PbEnhancedElement {
     this.updateArrowDisplay(false);
     this.handleFormValidation();
     this.handleFormReset();
+    this.bindSearchBar();
   }
 
   bindEventListeners() {
@@ -44,6 +46,15 @@ export default class PbDropdown extends PbEnhancedElement {
       "click",
       this.handleDocumentClick.bind(this),
       true
+    );
+  }
+
+  bindSearchBar() {
+    this.searchBar = this.element.querySelector(SEARCH_BAR_SELECTOR);
+    if (!this.searchBar) return;
+  
+    this.searchBar.addEventListener("input", (e) =>
+      this.handleSearch(e.target.value)
     );
   }
 
@@ -99,6 +110,7 @@ export default class PbDropdown extends PbEnhancedElement {
   }
 
   handleDocumentClick(event) {
+    if (event.target.closest(SEARCH_BAR_SELECTOR)) return;
     if (this.isClickOutside(event) && this.target.classList.contains("open")) {
       this.hideElement(this.target);
       this.updateArrowDisplay(false);

@@ -1,2 +1,2 @@
-The optional `searchbar` boolean prop can also be used on the `Dropdown.Container` to redner a searchbar with typeahead functionality within the dropdown itself. This is especially useful when a custom trigger is being used.
+The optional `searchbar` boolean prop can also be used on the `Dropdown.Container` to render a searchbar with typeahead functionality within the dropdown itself. This is especially useful when a custom trigger is being used.
 `searchbar` is set to false by default. 
