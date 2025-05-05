@@ -24,6 +24,9 @@ module Playbook
                          default: true
       prop :items, type: Playbook::Props::Array,
                    default: []
+      prop :drop_zone_line_color, type: Playbook::Props::Enum,
+                                  values: ["primary", "purple", nil],
+                                  default: nil
 
       def classname
         generate_classname("pb_card_kit",
@@ -59,6 +62,15 @@ module Playbook
 
       def border_radius_class
         border_radius != "md" ? "border_radius_#{border_radius}" : nil
+      end
+
+      def line_color_class
+        case drop_zone_line_color
+        when "primary"
+          "drop_zone_color_primary"
+        when "purple"
+          "drop_zone_color_purple"
+        end
       end
     end
   end
