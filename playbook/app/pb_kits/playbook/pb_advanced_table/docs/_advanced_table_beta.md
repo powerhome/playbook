@@ -1,9 +1,3 @@
-**BETA VERSION**
-This kit's Rails version is currently under development. Some features may not work as expected, and breaking changes may still occur; use with caution.
-<br />
-<br />
-<br />
-
 The AdvancedTable kit accepts tree data and automatically renders expansion controls for nested subrows, to any depth, based on the data it is given. In it's simplest form, __the kit has two required props__: 
 
 ### table_data

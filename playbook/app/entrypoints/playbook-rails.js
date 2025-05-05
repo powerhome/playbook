@@ -56,6 +56,9 @@ PbDropdown.start()
 import PbAdvancedTable from 'kits/pb_advanced_table'
 PbAdvancedTable.start()
 
+import PbFlatAdvancedTable from 'kits/pb_advanced_table/flat_advanced_table'
+PbFlatAdvancedTable.start()
+
 import PbNav from 'kits/pb_nav'
 PbNav.start()
 
