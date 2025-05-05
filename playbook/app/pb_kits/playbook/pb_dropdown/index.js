@@ -139,6 +139,11 @@ export default class PbDropdown extends PbEnhancedElement {
       }
     }
 
+    const autocompleteInput = this.element.querySelector(SEARCH_INPUT_SELECTOR);
+    if (autocompleteInput){
+      autocompleteInput.value = JSON.parse(value).label;
+    }
+
     const customTrigger = this.element.querySelector(CUSTOM_DISPLAY_SELECTOR);
     if (customTrigger) {
       if (this.target.classList.contains("open")) {
