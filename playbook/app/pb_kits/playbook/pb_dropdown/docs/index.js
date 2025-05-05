@@ -3,7 +3,7 @@ export { default as DropdownWithCustomDisplay } from './_dropdown_with_custom_di
 export { default as DropdownWithCustomOptions } from './_dropdown_with_custom_options.jsx'
 export { default as DropdownWithCustomTrigger } from './_dropdown_with_custom_trigger.jsx'
 export { default as DropdownWithAutocomplete } from './_dropdown_with_autocomplete.jsx'
-export { default as DropdownWithAutocompleteAndCustomDisplay } from './_dropdown_with_autocomplete_and_custom_display.jsx'
+export { default as DropdownWithAutocompleteWithSubcomponents } from './_dropdown_with_autocomplete_with_subcomponents.jsx'
 export { default as DropdownWithCustomPadding } from './_dropdown_with_custom_padding.jsx'
 export { default as DropdownWithLabel } from './_dropdown_with_label.jsx'
 export { default as DropdownWithExternalControl } from './_dropdown_with_external_control.jsx'
