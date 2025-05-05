@@ -1,0 +1,33 @@
+<%= pb_rails("flex", props: {orientation: "column", margin: "xl"}) do %>
+  <%= pb_rails("nav", props: { margin_bottom: "md", orientation: "horizontal" }) do %>
+    <%= pb_rails("flex", props: {wrap: true}) do %>
+      <% # variant part of URL built outside of loop
+        kit_variant_parts = []
+        @all_kit_variants.each do |kit_name, variant_keys|
+          if variant_keys.present?
+            url_friendly_variants = variant_keys.map do |key|
+              @variant_mappings.dig(kit_name, :key_to_url, key) || key
+            end.compact
+            
+            if url_friendly_variants.present?
+              kit_variant_parts << "#{kit_name}:#{url_friendly_variants.join(';')}"
+            end
+          end
+        end
+        
+        variant_url_part = kit_variant_parts.join('&')
+      %>
+      <% @kits_array.each do |kit| %>
+        <%= pb_rails("nav/item", props: { id: "nav-item-#{kit}", text: kit.titleize, link: kit_variants_collection_show_path(names: params[:names], name: kit, kit_variants: variant_url_part.presence, type: @type), active: kit == @selected_kit}) %>
+      <% end %>
+    <% end %>
+  <% end %>
+  <div class="multi-kits-container">
+    <% if @type == "rails" %>
+      <%= pb_kit(kit: @selected_kit, dark_mode: dark_mode?, variants: @variants) %>
+      <%= pb_rails("docs/kit_api", props: { kit: @selected_kit, dark: dark_mode? }) %>
+    <% elsif @type == "react" %>
+      <%= pb_kit(kit: @selected_kit, type: "react", dark_mode: dark_mode?, variants: @variants) %>
+    <% end %>
+  </div>
+<% end %>

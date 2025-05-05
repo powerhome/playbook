@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 
 import TextInput from '../_text_input'
+import Icon from '../../pb_icon/_icon'
 
 const TextInputError = (props) => {
   const [email, setEmail] = useState('')
@@ -8,11 +9,18 @@ const TextInputError = (props) => {
   const handleUpdateEmail = ({ target }) => {
     setEmail(target.value)
   }
+
+  const error = (
+    <>
+      <Icon icon="warning" /> Please enter a valid email address
+    </>
+  )
+  
   return (
     <div>
       <TextInput
           addOn={{ icon: 'user', alignment: 'left', border: true }}
-          error="Please enter a valid email address"
+          error={error}
           label="Email Address"
           onChange={handleUpdateEmail}
           placeholder="Enter email address"

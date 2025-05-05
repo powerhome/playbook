@@ -25,6 +25,8 @@ module Playbook
                                 default: false
       prop :hidden_inputs, type: Playbook::Props::Boolean,
                            default: false
+      prop :country_search, type: Playbook::Props::Boolean,
+                            default: false
 
       def classname
         generate_classname("pb_phone_number_input")
@@ -45,6 +47,7 @@ module Playbook
           preferredCountries: preferred_countries,
           required: required,
           value: value,
+          countrySearch: country_search,
         }
       end
     end

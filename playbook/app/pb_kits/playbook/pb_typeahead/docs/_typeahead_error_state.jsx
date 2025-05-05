@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 
 import Typeahead from '../_typeahead'
+import Icon from '../../pb_icon/_icon'
 
 const options = [
   { label: 'Orange', value: '#FFA500' },
@@ -10,7 +11,10 @@ const options = [
 ]
 
 const TypeaheadErrorState = (props) => {
-  const [errorState, setErrorState] = useState("Please make a valid selection");
+  const error = (<>
+    <Icon icon="warning" /> Please make a valid selection
+  </>)
+  const [errorState, setErrorState] = useState(error);
   const [searchValue, setSearchValue] = useState(null);
   
   const handleOnChange = (value) => setSearchValue(value)
@@ -19,7 +23,7 @@ const TypeaheadErrorState = (props) => {
       if(searchValue) {
         setErrorState("")
       } else {
-        setErrorState("Please make a valid selection")
+        setErrorState(error)
       }
     }, [searchValue])
   

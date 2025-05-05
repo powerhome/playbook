@@ -6,3 +6,5 @@ export {default as useDropdown } from '../pb_kits/playbook/pb_dropdown/hooks/use
 export { highchartsTheme } from '../pb_kits/playbook/pb_dashboard/pbChartsLightTheme'
 export { highchartsDarkTheme } from '../pb_kits/playbook/pb_dashboard/pbChartsDarkTheme'
 export { default as gaugeTheme } from '../pb_kits/playbook/pb_gauge/gaugeTheme'
+export { default as circleChartTheme } from '../pb_kits/playbook/pb_circle_chart/circleChartTheme'
+export { default as lineGraphTheme } from '../pb_kits/playbook/pb_line_graph/lineGraphTheme'

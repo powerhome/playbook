@@ -46,10 +46,6 @@
 
   .pb--kit-example, .pb--kit-example-markdown {
     padding: calc(2rem + 4px) 2rem 1rem;
-    &.sandpack-markdown {
-      padding-bottom: 0;
-      padding-top: 0;
-    }
   }
 
   .pb--kit-example {

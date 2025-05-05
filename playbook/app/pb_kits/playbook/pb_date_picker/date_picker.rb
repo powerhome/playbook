@@ -77,6 +77,14 @@ module Playbook
                                default: ""
       prop :validation_message, type: Playbook::Props::String,
                                 default: ""
+      prop :controls_start_id, type: Playbook::Props::String,
+                               default: ""
+      prop :controls_end_id, type: Playbook::Props::String,
+                             default: ""
+      prop :sync_start_with, type: Playbook::Props::String,
+                             default: ""
+      prop :sync_end_with, type: Playbook::Props::String,
+                           default: ""
 
       def classname
         default_margin_bottom = margin_bottom.present? ? "" : " mb_sm"
@@ -108,6 +116,10 @@ module Playbook
           staticPosition: static_position,
           thisRangesEndToday: this_ranges_end_today,
           yearRange: year_range,
+          controlsStartId: controls_start_id,
+          controlsEndId: controls_end_id,
+          syncStartWith: sync_start_with,
+          syncEndWith: sync_end_with,
         }.to_json.html_safe
       end
 

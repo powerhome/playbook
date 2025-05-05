@@ -9,7 +9,6 @@ import {
 
 import App from './Website'
 import ComponentList from './Website/src/pages/ComponentList'
-import ComponentShow from './Website/src/pages/ComponentShow'
 import CategoryShow from './Website/src/pages/CategoryShow'
 import IconList from './Website/src/pages/IconList'
 import Error from './Error'
@@ -28,11 +27,6 @@ const router = createBrowserRouter(
           loader={ComponentsLoader}
           path="kits"
       >
-        <Route
-            element={<ComponentShow />}
-            loader={ComponentShowLoader}
-            path=":name"
-        />
         <Route
             element={<Navigate to="react" />}
             loader={ComponentShowLoader}

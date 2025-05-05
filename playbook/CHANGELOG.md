@@ -1,3 +1,48 @@
+# 🎙️Copy That - Introducing the New Copy Button Kit!
+##### April 25, 2025
+
+![14 18 0](https://github.com/user-attachments/assets/deecf1e7-2515-4b7e-9df2-ef3a6150ac6f)
+
+This release brings the brand new Copy Button Kit that makes copy/pasting text super easy out-of-the-box! Also highlighted in this release are several major updates to the Table and the Advanced Table kits including sticky columns and extended expansion control for the Advanced Table and customizable headers for the Table Kit!
+
+[14.18.0](https://github.com/powerhome/playbook/tree/14.18.0) full list of changes:
+
+**Kit Enhancements:**
+
+- Circle Icon Button Kit: Add New 20x20 Size [\#4543](https://github.com/powerhome/playbook/pull/4543) ([elisashapiro](https://github.com/elisashapiro))
+- Copy Button Kit: Rails Copy Hook + Kit Out Of Beta [\#4538](https://github.com/powerhome/playbook/pull/4538) ([kangaree](https://github.com/kangaree))
+- Gauge Kit: Added the Ability to Use Gauge Styles W/o Gauge Kit [\#4536](https://github.com/powerhome/playbook/pull/4536) ([gmorris1242](https://github.com/gmorris1242))
+- Dialog Kit: Add Turbo Support [\#4514](https://github.com/powerhome/playbook/pull/4514) ([elisashapiro](https://github.com/elisashapiro))
+- Advanced Table Kit: Expansion Control by Depth [\#4527](https://github.com/powerhome/playbook/pull/4527) ([nidaqg](https://github.com/nidaqg))
+- Form Group: Added Passphrase With Select Kit Configuration [\#4521](https://github.com/powerhome/playbook/pull/4521) ([nickamantia](https://github.com/nickamantia))
+- Copy Kit: Add React Hook [\#4515](https://github.com/powerhome/playbook/pull/4515) ([markdoeswork](https://github.com/markdoeswork))
+- Form Group: Phone Number Input and Select With Select on the Right [\#4512](https://github.com/powerhome/playbook/pull/4512) ([nidaqg](https://github.com/nidaqg))
+- Advanced Table Kit: Stickyleftcolumn Prop [\#4503](https://github.com/powerhome/playbook/pull/4503) ([nidaqg](https://github.com/nidaqg))
+- Layout Kit: Bracket Layout - Participant and Completed Games- React [\#4502](https://github.com/powerhome/playbook/pull/4502) ([kangaree](https://github.com/kangaree))
+- Overlay Kit: Add Opacity & Gradient Prop - React [\#4501](https://github.com/powerhome/playbook/pull/4501) ([gmorris1242](https://github.com/gmorris1242))
+- Table Kit: Custom Headers - Rails [\#4486](https://github.com/powerhome/playbook/pull/4486) ([elisashapiro](https://github.com/elisashapiro))
+- Background Kit: Add Overlay W/ Opacity to Background Image [\#4478](https://github.com/powerhome/playbook/pull/4478) ([gmorris1242](https://github.com/gmorris1242))
+- Draggable Kit: Line Drop Zone Design Fixes [\#4476](https://github.com/powerhome/playbook/pull/4476) ([elisashapiro](https://github.com/elisashapiro))
+- Overlay Kit: Add a "full Screen" Prop - React [\#4537](https://github.com/powerhome/playbook/pull/4537) ([skduncan](https://github.com/skduncan))
+- Text Input Kit: Mask Prop Sanitized Values - React Only [\#4520](https://github.com/powerhome/playbook/pull/4520) ([skduncan](https://github.com/skduncan))
+
+**Improvements:**
+
+- Draggable Kit: Event Listeners Doc - Rails [\#4541](https://github.com/powerhome/playbook/pull/4541) ([kangaree](https://github.com/kangaree))
+- Playbook Website: Add New Patterns Page and Remove Samples [\#4517](https://github.com/powerhome/playbook/pull/4517) ([nidaqg](https://github.com/nidaqg))
+- Update @tiptap Dependencies to 2.11.7 [\#4516](https://github.com/powerhome/playbook/pull/4516) ([kangaree](https://github.com/kangaree))
+- Playbook Website: Update Swift\_changelog.md [\#4479](https://github.com/powerhome/playbook/pull/4479) ([isismsilva](https://github.com/isismsilva))
+
+**Fixed Bugs:**
+
+- Advanced Table Kit: Double Icon In Nitro - Rails [\#4535](https://github.com/powerhome/playbook/pull/4535) ([nickamantia](https://github.com/nickamantia))
+- Table Kit: Remove Unnecessary Sticky Left/right Column Classes - React [\#4528](https://github.com/powerhome/playbook/pull/4528) ([kangaree](https://github.com/kangaree))
+- Table Kit: Add Copy to Expansion Docs [\#4495](https://github.com/powerhome/playbook/pull/4495) ([elisashapiro](https://github.com/elisashapiro))
+- Table Kit: Fix Text Transform In Table Headers [\#4452](https://github.com/powerhome/playbook/pull/4452) ([gmorris1242](https://github.com/gmorris1242))
+
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/v14.18.0-rc.4...14.18.0)
+
 # 📞 Lodash has left the chat
 ##### April 03, 2025
 

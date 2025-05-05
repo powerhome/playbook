@@ -1,0 +1,55 @@
+<% initial_items = [
+  {
+    id: "141",
+    url: "https://unsplash.it/500/400/?image=633",
+  },
+  {
+    id: "142",
+    url: "https://unsplash.it/500/400/?image=634",
+  },
+  {
+    id: "143",
+    url: "https://unsplash.it/500/400/?image=637",
+  },
+] %>
+
+<% next_init_items = [
+  {
+    id: "151",
+    url: "https://unsplash.it/500/400/?image=633",
+  },
+  {
+    id: "152",
+    url: "https://unsplash.it/500/400/?image=634",
+  },
+  {
+    id: "153",
+    url: "https://unsplash.it/500/400/?image=637",
+  },
+] %>
+
+<%= pb_rails("draggable", props: {initial_items: initial_items, drop_zone_type: "shadow", drop_zone_color: "primary"}) do %>
+  <%= pb_rails("draggable/draggable_container") do %>
+    <%= pb_rails("flex", props: { gap: "sm" }) do %>
+      <% initial_items.each do |item| %>
+        <%= pb_rails("draggable/draggable_item", props:{drag_id: item[:id]}) do %>
+          <%= pb_rails("image", props: { alt: item[:id], size: "md", url: item[:url] }) %>
+        <% end %>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>
+
+<br/>
+
+<%= pb_rails("draggable", props: {initial_items: next_init_items, drop_zone_type: "outline", drop_zone_color: "purple"}) do %>
+  <%= pb_rails("draggable/draggable_container") do %>
+    <%= pb_rails("flex", props: { gap: "sm" }) do %>
+      <% initial_items.each do |item| %>
+        <%= pb_rails("draggable/draggable_item", props:{drag_id: item[:id]}) do %>
+          <%= pb_rails("image", props: { alt: item[:id], size: "md", url: item[:url] }) %>
+        <% end %>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>
