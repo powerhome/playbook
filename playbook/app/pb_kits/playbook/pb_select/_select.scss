@@ -143,6 +143,16 @@
       select {
         font-size: 12px;
       }
+      .pb_select_kit_wrapper.error {
+        .pb_select_kit_caret {
+          top: 13.7px;
+        }
+      }
+    }
+    .pb_select_kit_wrapper.error {
+      .pb_select_kit_caret {
+        top: 16.2px;
+      }
     }
   }
 }
