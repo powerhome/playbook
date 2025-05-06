@@ -739,6 +739,12 @@ kits:
 - category: state_and_progress_indicators
   description:
   components:
+  - name: empty_state
+    platforms: *2
+    status: stable
+    icons_used: false
+    react_rendered: false
+    enhanced_element_used: false
   - name: loading_inline
     platforms: *1
     description: The loading kit is used to indicate to users that a page is still
@@ -904,11 +910,3 @@ kits:
     icons_used: false
     react_rendered: false
     enhanced_element_used: false
-- category: empty_state
-  components:
-    - name: empty_state
-      platforms: *2
-      status: beta
-      icons_used: false
-      react_rendered: false
-      enhanced_element_used: false
