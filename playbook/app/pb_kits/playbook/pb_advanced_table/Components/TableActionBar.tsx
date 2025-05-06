@@ -45,6 +45,7 @@ const TableActionBar: React.FC<TableActionBarProps> = ({
   // ----------- Column visibility logic -----------
   const includeIds = columnVisibilityControl?.includeIds;
   const tree = buildVisibilityTree(columnDefinitions, includeIds);
+
   const renderLeaf = (id: string, label: string) => {
     const col   = table.getColumn(id);
     const show  = col.getIsVisible();
@@ -60,8 +61,15 @@ const TableActionBar: React.FC<TableActionBarProps> = ({
     );
   };
 
+  const gatherLeafIds = (node: VisibilityNode): string[] =>
+    node.children && node.children.length
+      ? node.children.flatMap(gatherLeafIds)
+      : node.id
+      ? [node.id]
+      : [];
+
   const renderGroup = (node: VisibilityNode ) => {
-    const leaves   = node?.children?.map((c) => (c.children ? [] : c.id)).flat();
+     const leaves = gatherLeafIds(node);
     const visibleArray   = leaves.map((id) => table.getColumn(id).getIsVisible());
     const allOn    = visibleArray.every(Boolean);
     const someOn   = visibleArray.some(Boolean);
