@@ -1,0 +1,24 @@
+<%= pb_content_tag(:div,
+aria: aria,
+class: classname,
+data: data,
+id: id,
+**combined_html_options) do %>
+  <%= pb_rails("flex", props: { align: flex_align, orientation: config[:flex_direction], padding_left: padding_size, padding_right: padding_size, vertical: "center", classname: config[:scss_class] }) do %>
+    <%= pb_rails("image", props: { url: image == "default" ? default_image_data_uri : image, alt: "Empty State Image", html_options: { width: config[:image_width], height: "auto", alignment: "start" } }) %>
+    <%= pb_rails("flex/flex_item") do %>
+      <%= pb_rails("title", props: { text: object.header, size: config[:title_size], padding_bottom: config[:title_padding], text_align: alignment }) %>
+      <% if size == "sm" %>
+        <%= pb_rails("detail", props: { text: object.description, padding_bottom: config[:description_pad], text_align: alignment }) %>
+      <% else %>
+        <%= pb_rails("body", props: { text: object.description, padding_bottom: config[:description_pad], text_align: alignment }) %>
+      <% end %>
+      <% if primary_button.present? %>
+        <%= pb_rails("button", props: { text: primary_button, variant: "primary", width: "100%", size: config[:button_size], href: primary_button_url,  margin_bottom: config[:button_margin] }) %>
+      <% end %>
+      <% if link_button.present? %>
+        <%= pb_rails("button", props: { text: link_button, variant: "link", size: config[:button_size], href: primary_button_url, width: "100%" }) %>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>

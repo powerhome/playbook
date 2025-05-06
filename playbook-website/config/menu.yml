@@ -907,7 +907,7 @@ kits:
 - category: empty_state
   components:
     - name: empty_state
-      platforms: react_only
+      platforms: *2
       status: beta
       icons_used: false
       react_rendered: false

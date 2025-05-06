@@ -35,4 +35,10 @@
     }
   }
 
+  &.dark {
+    [class*="pb_title_kit"],
+    [class*="pb_body_kit"],
+    [class*="pb_detail_kit"],
+    [class*="pb_button_kit_link"]:hover { color: $white; }
+  }
 }
