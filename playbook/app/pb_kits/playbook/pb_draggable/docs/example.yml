@@ -9,6 +9,7 @@ examples:
   - draggable_drop_zones: Draggable Drop Zones
   - draggable_drop_zones_colors: Draggable Drop Zones Colors
   - draggable_drop_zones_line: Draggable Drop Zones Line
+  - draggable_event_listeners: Draggable Event Listeners
 
   rails:
   - draggable_default: Default
