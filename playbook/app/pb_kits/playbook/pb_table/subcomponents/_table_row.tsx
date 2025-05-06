@@ -83,7 +83,7 @@ const TableRow = (props: TableRowPropTypes): React.ReactElement => {
       target instanceof SVGElement &&
       (target.matches("svg.pb_custom_icon") || target.closest("svg.pb_custom_icon"));
 
-        if (clickedCell && isIconClick) {
+        if (clickedCell || (clickedCell && isIconClick)) {
       setIsCollapsed(!isCollapsed);
       }
     } else {
