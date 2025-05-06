@@ -47,3 +47,4 @@ examples:
   - advanced_table_selectable_rows_header: Selectable Rows (No Actions Bar)
   - advanced_table_inline_editing: Inline Cell Editing
   - advanced_table_fullscreen: Fullscreen
+  - advanced_table_column_visibility: Column Visibility Control

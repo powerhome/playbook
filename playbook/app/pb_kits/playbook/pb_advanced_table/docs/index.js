@@ -28,3 +28,4 @@ export { default as AdvancedTableStickyHeader } from './_advanced_table_sticky_h
 export { default as AdvancedTableStickyColumnsAndHeader } from './_advanced_table_sticky_columns_and_header.jsx'
 export { default as AdvancedTableExpandByDepth } from './_advanced_table_expand_by_depth.jsx'
 export { default as AdvancedTableColumnBorderColor} from './_advanced_table_column_border_color.jsx'
+export { default as AdvancedTableColumnVisibility } from './_advanced_table_column_visibility.jsx'
