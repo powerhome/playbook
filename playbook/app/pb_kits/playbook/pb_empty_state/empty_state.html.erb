@@ -14,10 +14,10 @@ id: id,
         <%= pb_rails("body", props: { text: object.description, padding_bottom: config[:description_pad], text_align: alignment }) %>
       <% end %>
       <% if primary_button.present? %>
-        <%= pb_rails("button", props: { text: primary_button, variant: "primary", width: "100%", size: config[:button_size], href: primary_button_url,  margin_bottom: config[:button_margin] }) %>
+        <%= pb_rails("button", props: { text: primary_button, variant: "primary", width: "100%", size: config[:button_size], link: primary_button_url,  margin_bottom: config[:button_margin] }) %>
       <% end %>
       <% if link_button.present? %>
-        <%= pb_rails("button", props: { text: link_button, variant: "link", size: config[:button_size], href: primary_button_url, width: "100%" }) %>
+        <%= pb_rails("button", props: { text: link_button, variant: "link", size: config[:button_size], link: link_button_url, width: "100%" }) %>
       <% end %>
     <% end %>
   <% end %>
