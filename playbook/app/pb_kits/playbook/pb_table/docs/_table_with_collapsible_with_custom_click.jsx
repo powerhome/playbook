@@ -8,7 +8,7 @@ const TableWithCollapsibleWithCustomClick = (props) => {
 
   const Content = () => {
     return (
-      <Card 
+      <Card
           borderNone
           borderRadius="none"
           padding="md"
@@ -37,7 +37,7 @@ return (
 
         </Table.Head>
         <Table.Body>
-          <Table.Row collapsible 
+          <Table.Row collapsible
               collapsibleContent={<Content/>}
               toggleCellId="cell-1"
               {...props}
@@ -46,8 +46,16 @@ return (
             <Table.Cell>{'Value 2'}</Table.Cell>
             <Table.Cell>{'Value 3'}</Table.Cell>
             <Table.Cell>{'Value 4'}</Table.Cell>
-            <Table.Cell>{'Value 5'}</Table.Cell>
-            <Table.Cell cursor="pointer" 
+            <Table.Cell cursor="pointer"
+                id="cell-100"
+            >
+              <Icon
+                  color="primary"
+                  fixedWidth
+                  icon="chevron-down"
+              />
+            </Table.Cell>
+            <Table.Cell cursor="pointer"
                 id="cell-1"
                 textAlign="right"
             >
@@ -59,7 +67,7 @@ return (
             </Table.Cell>
 
           </Table.Row>
-          <Table.Row collapsible 
+          <Table.Row collapsible
               collapsibleContent={<Content/>}
               toggleCellId="cell-2"
               {...props}
@@ -69,7 +77,7 @@ return (
             <Table.Cell>{'Value 3'}</Table.Cell>
             <Table.Cell>{'Value 4'}</Table.Cell>
             <Table.Cell>{'Value 5'}</Table.Cell>
-            <Table.Cell cursor="pointer" 
+            <Table.Cell cursor="pointer"
                 id="cell-2"
                 textAlign="right"
             >
@@ -81,7 +89,7 @@ return (
             </Table.Cell>
 
           </Table.Row>
-          <Table.Row collapsible 
+          <Table.Row collapsible
               collapsibleContent={<Content/>}
               toggleCellId="cell-3"
               {...props}
@@ -91,7 +99,7 @@ return (
             <Table.Cell>{'Value 3'}</Table.Cell>
             <Table.Cell>{'Value 4'}</Table.Cell>
             <Table.Cell>{'Value 5'}</Table.Cell>
-            <Table.Cell cursor="pointer" 
+            <Table.Cell cursor="pointer"
                 id="cell-3"
                 textAlign="right"
             >

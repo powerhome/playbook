@@ -55,7 +55,7 @@ const TableRow = (props: TableRowPropTypes): React.ReactElement => {
   const htmlProps = buildHtmlProps(htmlOptions);
   const sideHighlightClass =
     sideHighlightColor != "" ? `side_highlight_${sideHighlightColor}` : null;
-  
+
   const [isCollapsed, setIsCollapsed] = useCollapsible(true);
 
   const collapsibleRow = collapsible && isCollapsed === true ? "collapsible_table_row" : null;
@@ -83,14 +83,14 @@ const TableRow = (props: TableRowPropTypes): React.ReactElement => {
       target instanceof SVGElement &&
       (target.matches("svg.pb_custom_icon") || target.closest("svg.pb_custom_icon"));
 
-        if (clickedCell || isIconClick) { 
+        if (clickedCell && isIconClick) {
       setIsCollapsed(!isCollapsed);
       }
     } else {
       setIsCollapsed(!isCollapsed);
     }
   };
-    
+
   return (
     <>
       {collapsible ? (
@@ -116,7 +116,7 @@ const TableRow = (props: TableRowPropTypes): React.ReactElement => {
                   tag="td"
               >
                 <tr/>
-                <Collapsible.Content 
+                <Collapsible.Content
                     className={collapsibleSideHighlight ? `table_collapsible_side_highlight` : ''}
                     dark={dark}
                     margin="none"
@@ -149,7 +149,7 @@ const TableRow = (props: TableRowPropTypes): React.ReactElement => {
                   tag="td"
               >
                 <tr/>
-                <Collapsible.Content 
+                <Collapsible.Content
                     className={collapsibleSideHighlight ? `table_collapsible_side_highlight` : ''}
                     dark={dark}
                     margin="none"
