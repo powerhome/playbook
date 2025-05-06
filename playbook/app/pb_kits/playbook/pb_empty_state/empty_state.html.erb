@@ -3,8 +3,9 @@ aria: aria,
 class: classname,
 data: data,
 id: id,
+html_options: html_options,
 **combined_html_options) do %>
-  <%= pb_rails("flex", props: { align: flex_align, orientation: config[:flex_direction], padding_left: padding_size, padding_right: padding_size, vertical: "center", classname: config[:scss_class] }) do %>
+  <%= pb_rails("flex", props: { align: flex_align, orientation: config[:flex_direction], padding_left: padding_size, padding_right: padding_size, vertical: "center", classname: config[:scss_class], max_width: "100%" }) do %>
     <%= pb_rails("image", props: { url: image == "default" ? default_image_data_uri : image, alt: "Empty State Image", html_options: { width: config[:image_width], height: "auto", alignment: "start" } }) %>
     <%= pb_rails("flex/flex_item") do %>
       <%= pb_rails("title", props: { text: object.header, size: config[:title_size], padding_bottom: config[:title_padding], text_align: alignment }) %>
