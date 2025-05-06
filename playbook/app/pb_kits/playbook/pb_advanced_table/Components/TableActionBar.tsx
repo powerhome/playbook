@@ -17,9 +17,10 @@ import {
   showActionBar,
   hideActionBar,
 } from "../Utilities/ActionBarAnimationHelper";
+import { GenericObject } from "../../types";
 
 interface TableActionBarProps {
-  isVisible: boolean;
+  isVisible: boolean | GenericObject | undefined;
   selectedCount: number;
   actions?: React.ReactNode[] | React.ReactNode;
   type?: string;
@@ -105,7 +106,7 @@ const TableActionBar: React.FC<TableActionBarProps> = ({
     >
       <Flex
           alignItems="center"
-          justify={type === "row-selection" ? "space-between" : "end"}
+          justify={type === "row-selection" ? "between" : "end"}
       >
         {type === "row-selection" ? (
           <>
