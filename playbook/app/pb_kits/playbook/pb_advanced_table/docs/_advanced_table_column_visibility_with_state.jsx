@@ -1,8 +1,8 @@
-import React from "react"
+import React, { useState } from "react"
 import AdvancedTable from '../../pb_advanced_table/_advanced_table'
 import MOCK_DATA from "./advanced_table_mock_data.json"
 
-const AdvancedTableColumnVisibility = (props) => {
+const AdvancedTableColumnVisibilityWithState = (props) => {
   const columnDefinitions = [
     {
       accessor: "year",
@@ -42,11 +42,19 @@ const AdvancedTableColumnVisibility = (props) => {
     },
   ]
 
+  const [columnVisibility, setColumnVisibility] = useState({
+    newEnrollments: false 
+  })
+
+  const columnVisibilityControl = {
+    value: columnVisibility,
+    onChange: setColumnVisibility,
+  }
   return (
     <div>
       <AdvancedTable
           columnDefinitions={columnDefinitions}
-          columnVisibilityControl={{default: true}}
+          columnVisibilityControl={columnVisibilityControl}
           tableData={MOCK_DATA}
           {...props}
       />
@@ -54,4 +62,4 @@ const AdvancedTableColumnVisibility = (props) => {
   )
 }
 
-export default AdvancedTableColumnVisibility
+export default AdvancedTableColumnVisibilityWithState

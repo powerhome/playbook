@@ -48,5 +48,6 @@ examples:
   # - advanced_table_inline_editing: Inline Cell Editing
   # - advanced_table_fullscreen: Fullscreen
   - advanced_table_column_visibility: Column Visibility Control
+  - advanced_table_column_visibility_with_state: Column Visibility Control With State
   - advanced_table_column_visibility_custom: Column Visibility Control with Custom Dropdown
   - advanced_table_column_visibility_multi: Column Visibility Control with Multi-Header Columns

@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React from "react"
 import AdvancedTable from '../../pb_advanced_table/_advanced_table'
 import MOCK_DATA from "./advanced_table_mock_data.json"
 
@@ -67,17 +67,11 @@ const AdvancedTableColumnVisibilityMulti = (props) => {
         },
       ];
 
-  const [columnVisibility, setColumnVisibility] = useState()
-
-  const columnVisibilityControl = {
-    value: columnVisibility,
-    onChange: setColumnVisibility,
-  }
   return (
     <div>
       <AdvancedTable
           columnDefinitions={columnDefinitions}
-          columnVisibilityControl={columnVisibilityControl}
+          columnVisibilityControl={{default: true}}
           tableData={MOCK_DATA}
           {...props}
       />

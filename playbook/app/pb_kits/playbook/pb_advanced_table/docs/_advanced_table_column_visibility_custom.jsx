@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React from "react"
 import AdvancedTable from '../../pb_advanced_table/_advanced_table'
 import MOCK_DATA from "./advanced_table_mock_data.json"
 
@@ -42,10 +42,7 @@ const AdvancedTableColumnVisibilityCustom = (props) => {
     },
   ]
 
-  const [columnVisibility, setColumnVisibility] = useState()
   const columnVisibilityControl = {
-    value: columnVisibility,
-    onChange: setColumnVisibility,
     // This is the list of column ids that will be included in the column visibility control
     includeIds:["newEnrollments", "scheduledMeetings", "attendanceRate", "completedClasses"],
   }

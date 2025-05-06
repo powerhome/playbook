@@ -53,8 +53,8 @@ export function useTableState({
   // Determine whether to use the prop or the local state
   const expanded = expandedControl ? expandedControl.value : localExpanded;
   const setExpanded = expandedControl ? expandedControl.onChange : setLocalExpanded;
-  const columnVisibility = columnVisibilityControl ? columnVisibilityControl.value : localColumnVisibility;
-  const setColumnVisibility = columnVisibilityControl ? columnVisibilityControl.onChange : setLocalColumnVisibility;
+  const columnVisibility = (columnVisibilityControl && columnVisibilityControl.value) ? columnVisibilityControl.value : localColumnVisibility;
+  const setColumnVisibility = (columnVisibilityControl && columnVisibilityControl.onChange) ? columnVisibilityControl.onChange : setLocalColumnVisibility;
 
   // Virtualized data handling (chunked loading)
   const fetchSize = 20; // Number of rows per "page"

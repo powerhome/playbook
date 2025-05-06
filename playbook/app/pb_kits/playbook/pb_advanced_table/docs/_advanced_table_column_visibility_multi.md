@@ -1,0 +1,1 @@
+The `columnVisibilityControl` prop can also be used with multi-header columns as shown.
