@@ -8,6 +8,7 @@ import {
 } from "../../utilities/props";
 import { globalProps } from "../../utilities/globalProps";
 import { DraggableContext } from "../context";
+import { noop } from '../../utilities/object'
 
 type DraggableItemProps = {
   aria?: { [key: string]: string };
@@ -17,6 +18,13 @@ type DraggableItemProps = {
   data?: { [key: string]: string };
   htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string;
+  onDrag: () => void,
+  onDragEnd?: () => void,
+  onDragEnter?: () => void,
+  onDragLeave?: () => void,
+  onDragOver?: () => void,
+  onDragStart?: () => void,
+  onDrop?: () => void,
   dragId?: string;
   tag?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'span' | 'div' | 'tr' | 'th' | 'td' | 'thead' | 'col' | 'tbody',
 };
@@ -31,7 +39,14 @@ const DraggableItem = (props: DraggableItemProps) => {
     htmlOptions = {},
     id,
     dragId,
-    tag="div"
+    tag="div",
+    onDrag = noop,
+    onDragEnd = noop,
+    onDragEnter = noop,
+    onDragLeave = noop,
+    onDragOver = noop,
+    onDragStart = noop,
+    onDrop = noop,
   } = props;
 
   const {
@@ -61,7 +76,7 @@ const DraggableItem = (props: DraggableItemProps) => {
   );
 
   // Enhanced drag start handler that preserves dimensions
-  const onDragStart = (e: React.DragEvent) => {
+  const handleDragStartWithCustom = (e: React.DragEvent) => {
     if (dropZone !== 'ghost' && itemRef.current) {
       // Create a clone for the drag image
       const clone = itemRef.current.cloneNode(true) as HTMLElement;
@@ -96,6 +111,9 @@ const DraggableItem = (props: DraggableItemProps) => {
 
     // Call the original handler
     handleDragStart(dragId, container);
+
+    // Custom event handler
+    onDragStart()
   };
 
   return (
@@ -107,9 +125,19 @@ const DraggableItem = (props: DraggableItemProps) => {
         draggable
         id={id}
         key={dragId}
-        onDragEnd={() => handleDragEnd()}
-        onDragEnter={() => handleDragEnter(dragId, container)}
-        onDragStart={onDragStart}
+        onDrag={onDrag}
+        onDragEnd={() => {
+          handleDragEnd()
+          onDragEnd()
+        }}
+        onDragEnter={() => {
+          handleDragEnter(dragId, container)
+          onDragEnter()
+        }}
+        onDragLeave={onDragLeave}
+        onDragOver={onDragOver}
+        onDragStart={handleDragStartWithCustom}
+        onDrop={onDrop}
         ref={itemRef}
     >
       {children}
