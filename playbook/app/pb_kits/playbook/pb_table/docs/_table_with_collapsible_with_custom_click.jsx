@@ -46,15 +46,7 @@ return (
             <Table.Cell>{'Value 2'}</Table.Cell>
             <Table.Cell>{'Value 3'}</Table.Cell>
             <Table.Cell>{'Value 4'}</Table.Cell>
-            <Table.Cell cursor="pointer"
-                id="cell-100"
-            >
-              <Icon
-                  color="primary"
-                  fixedWidth
-                  icon="chevron-down"
-              />
-            </Table.Cell>
+            <Table.Cell>{'Value 5'}</Table.Cell>
             <Table.Cell cursor="pointer"
                 id="cell-1"
                 textAlign="right"
