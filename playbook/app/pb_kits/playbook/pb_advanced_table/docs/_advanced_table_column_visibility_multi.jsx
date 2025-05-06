@@ -61,11 +61,6 @@ const AdvancedTableColumnVisibilityMulti = (props) => {
                   label: "Attendance Rate",
                   id: "attendanceRate",
                 },
-                {
-                  accessor: "scheduledMeetings",
-                  label: "Scheduled Meetings",
-                  id: "scheduledMeetings",
-                },
               ],
             },
           ],

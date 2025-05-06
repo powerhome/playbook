@@ -26,6 +26,12 @@ interface TableActionBarProps {
   type?: string;
 }
 
+interface VisibilityNode {
+  id?: string | undefined;
+  label?: string | undefined;
+  children?: VisibilityNode[];
+}
+
 const TableActionBar: React.FC<TableActionBarProps> = ({
   isVisible,
   selectedCount,
@@ -54,8 +60,8 @@ const TableActionBar: React.FC<TableActionBarProps> = ({
     );
   };
 
-  const renderGroup = (node) => {
-    const leaves   = node.children.map((c) => (c.children ? [] : c.id)).flat();
+  const renderGroup = (node: VisibilityNode ) => {
+    const leaves   = node?.children?.map((c) => (c.children ? [] : c.id)).flat();
     const visibleArray   = leaves.map((id) => table.getColumn(id).getIsVisible());
     const allOn    = visibleArray.every(Boolean);
     const someOn   = visibleArray.some(Boolean);
@@ -76,7 +82,7 @@ const TableActionBar: React.FC<TableActionBarProps> = ({
         <Flex flexDirection="column" 
             paddingLeft="xs"
         >
-          {node.children.map((child) =>
+          {node?.children?.map((child) =>
             child.children ? renderGroup(child) : renderLeaf(child.id, child.label),
           )}
         </Flex>
@@ -86,7 +92,7 @@ const TableActionBar: React.FC<TableActionBarProps> = ({
 // ------------ End of column visibility logic --------
 
   useEffect(() => {
-    if (cardRef.current) {
+    if (cardRef.current && type === "row-selection") {
       if (isVisible) {
         showActionBar(cardRef.current);
       } else {
@@ -134,7 +140,7 @@ const TableActionBar: React.FC<TableActionBarProps> = ({
                 className="column-visibility-dropdown"
                 padding="xs"
             >
-              {tree.map((node) => (
+              {tree.map((node: VisibilityNode) => (
                 <Flex cursor="pointer" 
                     flexDirection="column" 
                     key={node.id}
