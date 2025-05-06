@@ -133,7 +133,7 @@ const TableActionBar: React.FC<TableActionBarProps> = ({
               <Icon 
                   color="primary" 
                   cursor="pointer" 
-                  icon="sliders" 
+                  icon="sliders-h" 
               />
             </DropdownTrigger>
             <DropdownContainer
