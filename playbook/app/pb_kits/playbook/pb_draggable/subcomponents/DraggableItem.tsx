@@ -18,7 +18,7 @@ type DraggableItemProps = {
   data?: { [key: string]: string };
   htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string;
-  onDrag: () => void,
+  onDrag?: () => void,
   onDragEnd?: () => void,
   onDragEnter?: () => void,
   onDragLeave?: () => void,
