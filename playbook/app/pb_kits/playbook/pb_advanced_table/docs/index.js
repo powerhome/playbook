@@ -29,3 +29,5 @@ export { default as AdvancedTableStickyColumnsAndHeader } from './_advanced_tabl
 export { default as AdvancedTableExpandByDepth } from './_advanced_table_expand_by_depth.jsx'
 export { default as AdvancedTableColumnBorderColor} from './_advanced_table_column_border_color.jsx'
 export { default as AdvancedTableColumnVisibility } from './_advanced_table_column_visibility.jsx'
+export { default as AdvancedTableColumnVisibilityCustom } from './_advanced_table_column_visibility_custom.jsx'
+export { default as AdvancedTableColumnVisibilityMulti } from './_advanced_table_column_visibility_multi.jsx'

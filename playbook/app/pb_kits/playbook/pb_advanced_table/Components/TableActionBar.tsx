@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useContext } from "react";
 
 import AdvancedTableContext from "../Context/AdvancedTableContext";
+import { buildVisibilityTree } from "../Utilities/VisibilityTree";
+
 import Card from "../../pb_card/_card";
 import Caption from "../../pb_caption/_caption";
 import Flex from "../../pb_flex/_flex";
@@ -32,11 +34,56 @@ const TableActionBar: React.FC<TableActionBarProps> = ({
   const cardRef = useRef(null);
   const { table, columnVisibilityControl, columnDefinitions } =
     useContext(AdvancedTableContext);
-  const includeIds = columnVisibilityControl?.includeIds;
 
-  const columns = table
-    .getAllLeafColumns()
-    .filter((col) => !includeIds?.length || includeIds.includes(col.id));
+  // ----------- Column visibility logic -----------
+  const includeIds = columnVisibilityControl?.includeIds;
+  const tree = buildVisibilityTree(columnDefinitions, includeIds);
+  const renderLeaf = (id: string, label: string) => {
+    const col   = table.getColumn(id);
+    const show  = col.getIsVisible();
+
+    return (
+      <Checkbox
+          checked={show}
+          key={id}
+          onChange={() => col.toggleVisibility()}
+          paddingBottom="xs"
+          text={label}
+      />
+    );
+  };
+
+  const renderGroup = (node) => {
+    const leaves   = node.children.map((c) => (c.children ? [] : c.id)).flat();
+    const visibleArray   = leaves.map((id) => table.getColumn(id).getIsVisible());
+    const allOn    = visibleArray.every(Boolean);
+    const someOn   = visibleArray.some(Boolean);
+
+    return (
+      <>
+        <Checkbox
+            checked={allOn}
+            indeterminate={!allOn && someOn}
+            onChange={() =>
+              leaves.forEach((id) =>
+                table.getColumn(id).toggleVisibility(!allOn),
+              )
+            }
+            paddingBottom="xs"
+            text={node.label}
+        />
+        <Flex flexDirection="column" 
+            paddingLeft="xs"
+        >
+          {node.children.map((child) =>
+            child.children ? renderGroup(child) : renderLeaf(child.id, child.label),
+          )}
+        </Flex>
+      </>
+    );
+  };
+// ------------ End of column visibility logic --------
+
   useEffect(() => {
     if (cardRef.current) {
       if (isVisible) {
@@ -86,17 +133,12 @@ const TableActionBar: React.FC<TableActionBarProps> = ({
                 className="column-visibility-dropdown"
                 padding="xs"
             >
-              {columns.map((col) => (
+              {tree.map((node) => (
                 <Flex cursor="pointer" 
                     flexDirection="column" 
-                    key={col.id}
-                    padding="xs"
+                    key={node.id}
                 >
-                  <Checkbox
-                      checked={col.getIsVisible()}
-                      onChange={() => col.toggleVisibility()}
-                      text={col.columnDef.header}
-                  />
+                  {node.children ? renderGroup(node) : renderLeaf(node.id, node.label)}
                 </Flex>
               ))}
             </DropdownContainer>
