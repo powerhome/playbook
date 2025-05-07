@@ -78,7 +78,8 @@ $overlay_colors: (
   &.overlay-hide-scrollbar {
     & [class*="overflow_x_auto"],
     & [class*="overflow_y_auto"],
-    & [class*="overflow_auto"] {
+    & [class*="overflow_auto"],
+    .overlay_token_container {
       &::-webkit-scrollbar {
         display: none !important;
       }

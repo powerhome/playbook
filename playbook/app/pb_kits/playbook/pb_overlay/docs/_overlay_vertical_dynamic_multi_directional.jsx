@@ -9,7 +9,7 @@ const InlineCardsExample = forwardRef(function InlineCardsExample(ref) {
         <Flex
             columnGap="lg"
             orientation="row"
-            ref={ref} 
+            ref={ref}
         >
             {Array.from({ length: 15 }, (_, index) => (
                 <FlexItem key={index}>

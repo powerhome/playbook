@@ -30,7 +30,7 @@ const OverlayToken = (props: OverlayChildrenProps) => {
         if (container) {
             const { scrollLeft, scrollWidth, clientWidth } = container;
             const atStart = scrollLeft === 0;
-            const atEnd = scrollLeft + clientWidth >= scrollWidth - 1; 
+            const atEnd = scrollLeft + clientWidth >= scrollWidth - 1;
 
             setIsAtStart(atStart);
             setIsAtEnd(atEnd);
@@ -64,16 +64,17 @@ const OverlayToken = (props: OverlayChildrenProps) => {
     return (
         <>
             <div className={dynamic ? isAtStart ? '' : previousOverlayClassName : previousOverlayClassName} />
-            {dynamic ? 
+            {dynamic ?
                 <div
+                    className="overlay_token_container"
                     ref={scrollContainerRef}
                     style={{
-                        overflowX: 'auto',     
+                        overflowX: 'auto',
                     }}
                 >
                     {children}
                 </div>
-                : 
+                :
                     children
                 }
             {hasSubsequentOverlay &&
