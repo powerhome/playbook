@@ -44,7 +44,11 @@ const TableActionBar: React.FC<TableActionBarProps> = ({
 
   // ----------- Column visibility logic -----------
   const includeIds = columnVisibilityControl?.includeIds;
-  const tree = buildVisibilityTree(columnDefinitions, includeIds);
+  const firstLeafId = table.getAllLeafColumns()[0]?.id;
+  // Get the first leaf column ID to exclude it from the visibility tree
+  // This is to avoid showing the first column in the dropdown
+  // as toggling it's visibility breaks the expanded row functionality
+  const tree = buildVisibilityTree(columnDefinitions, includeIds).filter(node => node.id !== firstLeafId);
 
   const renderLeaf = (id: string, label: string) => {
     const col   = table.getColumn(id);
