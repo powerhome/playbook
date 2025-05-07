@@ -12,6 +12,8 @@ import DropdownContainer from "../../pb_dropdown/subcomponents/DropdownContainer
 import DropdownTrigger from "../../pb_dropdown/subcomponents/DropdownTrigger";
 import Icon from "../../pb_icon/_icon";
 import Checkbox from "../../pb_checkbox/_checkbox";
+import SectionSeparator from "../../pb_section_separator/_section_separator";
+import Tooltip from "../../pb_tooltip/_tooltip";
 
 import {
   showActionBar,
@@ -142,25 +144,39 @@ const TableActionBar: React.FC<TableActionBarProps> = ({
               options={columnDefinitions}
           >
             <DropdownTrigger>
-              <Icon 
-                  color="primary" 
-                  cursor="pointer" 
-                  icon="sliders-h" 
-              />
+            <Tooltip 
+                placement='top' 
+                text="Column Configuration" 
+                zIndex={10}
+            >
+                <Icon 
+                    color="primary" 
+                    cursor="pointer" 
+                    icon="sliders-h" 
+                />
+            </Tooltip>
             </DropdownTrigger>
             <DropdownContainer
                 className="column-visibility-dropdown"
-                paddingTop="xs"
-                paddingX="xs"
+                paddingTop="sm"
             >
+              <>
+              <Caption 
+                  paddingBottom="sm" 
+                  text="Columns Config"
+                  textAlign="center" 
+              />
+              <SectionSeparator paddingBottom="xs" />
               {tree.map((node: VisibilityNode) => (
                 <Flex cursor="pointer" 
                     flexDirection="column" 
                     key={node.id}
+                    paddingX="xs"
                 >
                   {node.children ? renderGroup(node) : renderLeaf(node.id, node.label)}
                 </Flex>
               ))}
+              </>
             </DropdownContainer>
           </Dropdown>
         )}
