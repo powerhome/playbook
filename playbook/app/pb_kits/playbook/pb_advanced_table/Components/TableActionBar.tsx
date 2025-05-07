@@ -92,7 +92,7 @@ const TableActionBar: React.FC<TableActionBarProps> = ({
             text={node.label}
         />
         <Flex flexDirection="column" 
-            paddingLeft="sm"
+            paddingLeft="lg"
         >
           {node?.children?.map((child) =>
             child.children ? renderGroup(child) : renderLeaf(child.id, child.label),
