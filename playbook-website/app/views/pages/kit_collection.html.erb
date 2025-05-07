@@ -9,9 +9,9 @@
   <div class="multi-kits-container">
     <% if @type == "rails" %>
       <%= pb_kit(kit: @selected_kit, dark_mode: dark_mode?, variants: @variants) %>
-      <%= pb_rails("docs/kit_api", props: { kit: @selected_kit, dark: dark_mode? }) %>
     <% elsif @type == "react" %>
       <%= pb_kit(kit: @selected_kit, type: "react", dark_mode: dark_mode?, variants: @variants) %>
     <% end %>
+    <%= pb_rails("docs/kit_api", props: { kit: @selected_kit, dark: dark_mode? }) %>
   </div>
 <% end %>
