@@ -150,7 +150,8 @@ const TableActionBar: React.FC<TableActionBarProps> = ({
             </DropdownTrigger>
             <DropdownContainer
                 className="column-visibility-dropdown"
-                padding="xs"
+                paddingTop="xs"
+                paddingX="xs"
             >
               {tree.map((node: VisibilityNode) => (
                 <Flex cursor="pointer" 
