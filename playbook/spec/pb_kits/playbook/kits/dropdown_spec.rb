@@ -13,6 +13,8 @@ RSpec.describe Playbook::PbDropdown::Dropdown do
   it { is_expected.to define_enum_prop(:variant).with_values("default", "subtle").with_default("default") }
   it { is_expected.to define_boolean_prop(:separators).with_default(true) }
   it { is_expected.to define_string_prop(:default_value) }
+  it { is_expected.to define_boolean_prop(:autocomplete) }
+  it { is_expected.to define_boolean_prop(:searchbar) }
 
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do

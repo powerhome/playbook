@@ -1,0 +1,1 @@
+You can add drag event listeners for `onDrag`, `onDragEnd`, `onDragEnter`, `onDragLeave`, `onDragOver`, `onDragStart`, and `onDrop`.

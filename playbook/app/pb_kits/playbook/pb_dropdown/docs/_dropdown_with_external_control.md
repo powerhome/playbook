@@ -1,0 +1,1 @@
+The `useDropdown` hook can also be used to toggle the dropdown open and closed using an external control. To do so, you must manage state with the custom hook, pass the `dropdown:'pb-dropdown-trigger'` data attribute to the external control and use the `isClosed` prop as shown. 

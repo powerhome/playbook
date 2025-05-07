@@ -1,4 +1,14 @@
 <%= pb_content_tag do %>
+    <% if object.searchbar %>
+        <%= pb_rails("text_input", props: {padding_top:"xs", padding_x:"xs"}) do %>
+            <input 
+            type="text"
+            placeholder="Search…"
+            data-dropdown-search
+            autocomplete="off"
+            />
+        <% end %>
+    <% end %>
     <%= pb_rails("list", props: {ordered: false, borderless: false}) do %>
             <% if content.present? %>
                 <%= content.presence %>
