@@ -1,10 +1,5 @@
-import React from 'react'
-
-import Dropdown from '../../pb_dropdown/_dropdown'
-
-const DropdownWithAutocomplete = (props) => {
-
-  const options = [
+<% 
+  options = [
     {
       label: "United States",
       value: "United States",
@@ -28,14 +23,6 @@ const DropdownWithAutocomplete = (props) => {
     }
   ]
 
-  return (
-  <div>
-    <Dropdown autocomplete
-        options={options}
-        {...props}
-    /> 
-  </div>
-  )
-}
+%>
 
-export default  DropdownWithAutocomplete
+<%= pb_rails("dropdown", props: {options: options, autocomplete: true}) %>

@@ -8,7 +8,7 @@
         align: "center",
         border_radius:"lg",
         classname: object.trigger_wrapper_classes,
-        cursor: "pointer",
+        cursor: object.autocomplete ? "text" : "pointer",
         justify: "between",
         padding_x:"sm",
         padding_y:"xs",
@@ -24,7 +24,17 @@
                         <%= pb_rails("body", props: {text: object.default_display_placeholder, id: "dropdown_trigger_display"}) %>
                     <% end %>
                 <% else %>
-                <%= pb_rails("body", props: {text: object.default_display_placeholder, id: "dropdown_trigger_display"}) %>
+                    <% if object.autocomplete %>
+                        <input
+                            data-dropdown-autocomplete
+                            class="dropdown_input"
+                            type="text"
+                            placeholder="<%= object.placeholder || 'Select…' %>"
+                            autocomplete="off"
+                        />
+                    <% else %>
+                        <%= pb_rails("body", props: {text: object.default_display_placeholder, id: "dropdown_trigger_display"}) %>
+                    <% end %>
                 <% end %>
             <% end %>
         <% end %>

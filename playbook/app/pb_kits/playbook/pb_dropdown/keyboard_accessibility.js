@@ -1,4 +1,6 @@
 const OPTION_SELECTOR = "[data-dropdown-option-label]";
+const SEARCH_INPUT_SELECTOR = "[data-dropdown-autocomplete]";
+
 export class PbDropdownKeyboard {
   constructor(dropdown) {
     this.dropdown = dropdown;
@@ -7,6 +9,9 @@ export class PbDropdownKeyboard {
       this.dropdownElement.querySelectorAll(OPTION_SELECTOR)
     );
     this.focusedOptionIndex = -1;
+    this.searchInput = this.dropdownElement.querySelector(
+      SEARCH_INPUT_SELECTOR
+    );
     this.init();
   }
 
@@ -15,6 +20,18 @@ export class PbDropdownKeyboard {
       "keydown",
       this.handleKeyDown.bind(this)
     );
+    if (this.searchInput) {
+      this.searchInput.addEventListener("input", () =>
+        this.openDropdownIfClosed()
+      );
+    }
+  }
+
+  openDropdownIfClosed() {
+    if (!this.dropdown.target.classList.contains("open")) {
+      this.dropdown.showElement(this.dropdown.target);
+      this.dropdown.updateArrowDisplay(true);
+    }
   }
 
   handleKeyDown(event) {
@@ -49,6 +66,15 @@ export class PbDropdownKeyboard {
         this.dropdown.hideElement(this.dropdown.target);
         this.dropdown.updateArrowDisplay(false);
         this.resetFocus();
+        break;
+      case "Backspace":
+        if (this.searchInput) {
+          setTimeout(() => {
+            if (this.searchInput.value.trim() === "") {
+              this.dropdown.resetDropdownValue();
+            }
+          }, 0); 
+        }
         break;
       default:
         break;

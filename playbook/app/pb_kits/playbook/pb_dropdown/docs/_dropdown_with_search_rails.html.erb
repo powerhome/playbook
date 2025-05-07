@@ -1,0 +1,52 @@
+<% 
+  options = [
+    {
+      label: "United States",
+      value: "United States",
+      areaCode: "+1",
+      icon: "🇺🇸",
+      id: "us"
+    },
+    {
+      label: "United Kingdom",
+      value: "United Kingdom",
+      areaCode: "+44",
+      icon: "🇬🇧",
+      id: "gb"
+    },
+    {
+      label: "Pakistan",
+      value: "Pakistan",
+      areaCode: "+92",
+      icon: "🇵🇰",
+      id: "pk"
+    }
+  ]
+
+%>
+
+<%= pb_rails("dropdown", props: {options: options}) do %>
+    <%= pb_rails("dropdown/dropdown_trigger") do %>
+        <%= pb_rails("icon_circle", props: {icon:"flag", cursor: "pointer", variant:"royal"}) %>
+    <% end %>
+    <%= pb_rails("dropdown/dropdown_container", props:{max_width:"xs", searchbar: true}) do %>
+        <% options.each do |option| %>
+            <%= pb_rails("dropdown/dropdown_option", props: {option: option}) do %>
+              <%= pb_rails("flex", props: {
+                align: "center",
+                justify: "between",
+                }) do %>
+                <%= pb_rails("flex/flex_item") do %>
+                      <%= pb_rails("flex") do %>
+                          <%= pb_rails("icon", props: {icon: option[:icon]}) %>
+                          <%= pb_rails("body", props: {text: option[:label], padding_left:"xs"}) %>
+                      <% end %>
+                  <% end %>
+                  <%= pb_rails("flex/flex_item") do %>
+                      <%= pb_rails("body", props: {color:"light", text: option[:areaCode]}) %>
+                  <% end %>
+              <% end %>
+            <% end %>
+        <% end %>
+    <% end %>
+<% end %>

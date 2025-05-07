@@ -11,6 +11,8 @@ const CUSTOM_DISPLAY_SELECTOR = "[data-dropdown-custom-trigger]";
 const DROPDOWN_TRIGGER_DISPLAY = "#dropdown_trigger_display";
 const DROPDOWN_PLACEHOLDER = "[data-dropdown-placeholder]";
 const DROPDOWN_INPUT = "#dropdown-selected-option";
+const SEARCH_INPUT_SELECTOR = "[data-dropdown-autocomplete]";
+const SEARCH_BAR_SELECTOR = "[data-dropdown-search]";
 
 export default class PbDropdown extends PbEnhancedElement {
   static get selector() {
@@ -25,9 +27,11 @@ export default class PbDropdown extends PbEnhancedElement {
     this.keyboardHandler = new PbDropdownKeyboard(this);
     this.setDefaultValue();
     this.bindEventListeners();
+    this.bindSearchInput();
     this.updateArrowDisplay(false);
     this.handleFormValidation();
     this.handleFormReset();
+    this.bindSearchBar();
   }
 
   bindEventListeners() {
@@ -45,6 +49,53 @@ export default class PbDropdown extends PbEnhancedElement {
     );
   }
 
+  bindSearchBar() {
+    this.searchBar = this.element.querySelector(SEARCH_BAR_SELECTOR);
+    if (!this.searchBar) return;
+  
+    this.searchBar.addEventListener("input", (e) =>
+      this.handleSearch(e.target.value)
+    );
+  }
+
+  bindSearchInput() {
+    this.searchInput = this.element.querySelector(SEARCH_INPUT_SELECTOR);
+    if (!this.searchInput) return;
+
+    // Focus the input when anyone clicks the wrapper
+    this.element
+      .querySelector(TRIGGER_SELECTOR)
+      ?.addEventListener("click", () => this.searchInput.focus());
+
+    // Live filter
+    this.searchInput.addEventListener("input", (e) =>
+      this.handleSearch(e.target.value)
+    );
+  }
+
+  handleSearch(term = "") {
+    const lcTerm = term.toLowerCase();
+    this.element.querySelectorAll(OPTION_SELECTOR).forEach((opt) => {
+      const label = JSON.parse(opt.dataset.dropdownOptionLabel).label
+        .toString()
+        .toLowerCase();
+
+      // hide or show option
+      const match = label.includes(lcTerm);
+      opt.style.display = match ? "" : "none";
+    });
+
+    if (this.target.classList.contains("open")) {
+      const el = this.target;
+        el.style.height = "auto";
+        requestAnimationFrame(() => {
+        const newHeight = el.scrollHeight + "px";
+          el.offsetHeight; // force reflow
+        el.style.height = newHeight;
+      });
+    }
+  }
+
   handleOptionClick(event) {
     const option = event.target.closest(OPTION_SELECTOR);
     const hiddenInput = this.element.querySelector(DROPDOWN_INPUT);
@@ -59,6 +110,7 @@ export default class PbDropdown extends PbEnhancedElement {
   }
 
   handleDocumentClick(event) {
+    if (event.target.closest(SEARCH_BAR_SELECTOR)) return;
     if (this.isClickOutside(event) && this.target.classList.contains("open")) {
       this.hideElement(this.target);
       this.updateArrowDisplay(false);
@@ -97,6 +149,11 @@ export default class PbDropdown extends PbEnhancedElement {
         customDisplayElement.style.display = "block";
         customDisplayElement.style.paddingRight = "8px";
       }
+    }
+
+    const autocompleteInput = this.element.querySelector(SEARCH_INPUT_SELECTOR);
+    if (autocompleteInput){
+      autocompleteInput.value = JSON.parse(value).label;
     }
 
     const customTrigger = this.element.querySelector(CUSTOM_DISPLAY_SELECTOR);

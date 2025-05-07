@@ -1,7 +1,7 @@
 import React from "react"
 import { render, screen } from "../utilities/test-utils"
 
-import { Dropdown, Icon } from 'playbook-ui'
+import { Dropdown, Icon, IconCircle } from 'playbook-ui'
 
 
 const testId = 'dropdown'
@@ -219,4 +219,48 @@ test('show error message', () => {
 
   const kit = screen.getByTestId(testId)
   expect(kit).toHaveTextContent(errorMessage)
+})
+
+test("autocomplete prop to render input", () => {
+  render (
+    <Dropdown
+        autocomplete
+        data={{ testid: testId }}
+        options={options}
+    />   
+  )
+
+  const kit = screen.getByTestId(testId)
+  const input = kit.querySelector('.dropdown_input')
+  expect(input).toBeInTheDocument()
+})
+
+test("searchbar prop to render TextInput in container", () => {  
+  render (
+    <Dropdown
+        data={{ testid: testId }}
+        options={options}
+    >
+      <Dropdown.Trigger>
+          <IconCircle
+              cursor="pointer"
+              icon="flag"
+              variant="royal"
+          />
+      </Dropdown.Trigger>
+      <Dropdown.Container maxWidth="xs"
+          searchbar
+      >
+      {options.map((option) => (
+      <Dropdown.Option key={option.id} 
+          option={option}
+      /> 
+    ))}
+    </Dropdown.Container>
+    </Dropdown>
+  )
+
+  const kit = screen.getByTestId(testId)
+  const searchbar = kit.querySelector('.pb_text_input_kit')
+  expect(searchbar).toBeInTheDocument()
 })

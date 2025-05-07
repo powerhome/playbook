@@ -36,7 +36,6 @@ type DropdownProps = {
     onSelect?: (arg: GenericObject) => null;
     options: GenericObject;
     separators?: boolean;
-    triggerRef?: any;
     variant?: "default" | "subtle";
 };
 
@@ -65,7 +64,6 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
         onSelect,
         options,
         separators = true,
-        triggerRef,
         variant = "default",
     } = props;
 
@@ -91,7 +89,7 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
     const [focusedOptionIndex, setFocusedOptionIndex] = useState(-1);
 
     const dropdownRef = useRef(null);
-    const inputRef = useRef(null);
+    const inputRef = useRef<HTMLInputElement>(null);
     const inputWrapperRef = useRef(null);
     const dropdownContainerRef = useRef(null);
 
@@ -99,15 +97,7 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
         separateChildComponents(children);
 
     useEffect(() => {
-        // Set the parent element of the trigger to relative to allow for absolute positioning of the dropdown
-        //Only needed for when useDropdown hook used with external trigger
-        if (triggerRef?.current) {
-            const parentElement = triggerRef.current.parentNode;
-            if (parentElement) {
-                parentElement.style.position = 'relative';
-            }
-        }
-        // Handle clicks outside the dropdown
+     // Handle clicks outside the dropdown
         const handleClick = handleClickOutside({
             inputWrapperRef,
             dropdownContainerRef,
@@ -167,7 +157,7 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
     };
 
     const handleWrapperClick = () => {
-        autocomplete && inputRef.current.focus();
+        autocomplete && inputRef?.current?.focus();
         toggleDropdown();
     };
 
@@ -202,7 +192,7 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
             {...htmlProps}
             className={classes}
             id={id}
-            style={triggerRef ? { position: "absolute" } : { position: "relative" }}
+            style={{position: "relative"}}
         >
             <DropdownContext.Provider
                 value={{
@@ -225,8 +215,7 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
                     setIsDropDownClosed,
                     setIsInputFocused,
                     setSelected,
-                    toggleDropdown,
-                    triggerRef
+                    toggleDropdown
                 }}
             >
                 {label &&
