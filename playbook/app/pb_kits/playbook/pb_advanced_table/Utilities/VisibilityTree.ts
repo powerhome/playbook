@@ -1,21 +1,47 @@
+export interface VisibilityNode {
+  id: string;
+  label: string;
+  children?: VisibilityNode[];
+}
 export const buildVisibilityTree = (
   defs: any[],
   allowed?: string[] | null
-): { id: string; label: string; children?: any[] }[] =>
+): VisibilityNode[] =>
   defs
     .map((def) => {
-      // leaf column
-      if (!def.columns || def.columns.length === 0) {
-        if (allowed && allowed.length && !allowed.includes(def.id)) return null;
-        return { id: def.id, label: def.label };
+      const isGroup = Array.isArray(def.columns) && def.columns.length > 0;
+
+      // No filter at all → keep it
+      if (!allowed?.length) {
+        return isGroup
+          ? {
+              id: def.id,
+              label: def.label,
+              children: buildVisibilityTree(def.columns, allowed),
+            }
+          : { id: def.id, label: def.label };
       }
 
-      // column group
-      const children = buildVisibilityTree(def.columns, allowed).filter(
-        Boolean
-      );
-      if (children.length === 0) return null;
+      // 1️⃣ If *this* ID is explicitly allowed → keep it & all its children
+      if (allowed.includes(def.id)) {
+        return isGroup
+          ? {
+              id: def.id,
+              label: def.label,
+              children: buildVisibilityTree(def.columns, null),
+            }
+          : { id: def.id, label: def.label };
+      }
 
-      return { id: def.id, label: def.label, children };
+      // Otherwise, if it’s a group, recurse & keep only if kids survive
+      if (isGroup) {
+        const kids = buildVisibilityTree(def.columns, allowed).filter(Boolean);
+        return kids.length
+          ? { id: def.id, label: def.label, children: kids }
+          : null;
+      }
+
+      // Leaf not allowed → drop it
+      return null;
     })
     .filter(Boolean);
