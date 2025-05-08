@@ -6,7 +6,7 @@ import Flex from '../../pb_flex/_flex'
 import FlexItem from '../../pb_flex/_flex_item'
 import Avatar from '../../pb_avatar/_avatar'
 import User from '../../pb_user/_user'
-import Title from '../../pb_title/_title'
+import Body from '../../pb_body/_body'
 
 const DropdownWithCustomDisplay = (props) => {
   const [selectedOption, setSelectedOption] = useState();
@@ -56,9 +56,8 @@ const DropdownWithCustomDisplay = (props) => {
                 name={selectedOption.label}
                 size="xs"
             />
-            <Title 
+            <Body 
                 marginLeft="xxs"
-                size={4} 
                 text={selectedOption.label} 
             />
           </>
