@@ -2,5 +2,6 @@
 
 When a parent row is clicked, it will check all nested children rows, Children rows can be manually checked or unchecked as well. 
 
-__ALERT TO DEVS__: UPDATE THIS PARAGRAPH IN THE FOLLOW UP STORY WHEN CHECKBOX FUNCTIONALITY IS SET PLEASE
-The `onRowSelectionChange` prop returns an array of ids of all Rows that have been selected. Open the console on this example and check and uncheck checkboxes to see this is action! __NOTE__: Each object within the `tableData`Array must contain a unique id in order to attach an id to all Rows for this to function. 
+The data attribute `data-selected-rows` on the parent `pb_advanced_table` div will update dynamically with each selection to show an array of ids corresponding to the current selection. 
+
+__NOTE__: Each object within the `table_data` Array must contain a unique id in order to attach an id to all Rows for this to function. 

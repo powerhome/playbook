@@ -28,6 +28,9 @@
       <%= pb_rails("docs/kit_api", props: { kit: @selected_kit, dark: dark_mode? }) %>
     <% elsif @type == "react" %>
       <%= pb_kit(kit: @selected_kit, type: "react", dark_mode: dark_mode?, variants: @variants) %>
+      <%= react_component("AvailableProps",
+        availableProps: Playbook::PbDocs::KitExample.new(kit: @selected_kit, example_title: "Default", example_key: @selected_kit, type: "react").available_props )
+      %>
     <% end %>
   </div>
 <% end %>

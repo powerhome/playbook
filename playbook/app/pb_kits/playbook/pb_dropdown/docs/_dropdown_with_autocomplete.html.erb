@@ -1,0 +1,28 @@
+<% 
+  options = [
+    {
+      label: "United States",
+      value: "United States",
+      areaCode: "+1",
+      icon: "🇺🇸",
+      id: "us"
+    },
+    {
+      label: "United Kingdom",
+      value: "United Kingdom",
+      areaCode: "+44",
+      icon: "🇬🇧", 
+      id: "gb"
+    },
+    {
+      label: "Pakistan",
+      value: "Pakistan",
+      areaCode: "+92",
+      icon: "🇵🇰",
+      id: "pk"
+    }
+  ]
+
+%>
+
+<%= pb_rails("dropdown", props: {options: options, autocomplete: true}) %>

@@ -1,5 +1,5 @@
 <% if object.draggable_item %>
-    <%= pb_rails("draggable/draggable_item", props:{drag_id: object.drag_id}) do %>
+    <%= pb_rails("draggable/draggable_item", props:{drag_id: object.drag_id, classname: drop_zone_line_color ? line_color_class : nil}) do %>
         <%= pb_content_tag(object.tag) do %>
             <% if object.draggable_item %>
                 <%= pb_rails("flex", props: { align: "center" }) do %>

@@ -2,7 +2,7 @@ import PbEnhancedElement from "../pb_enhanced_element";
 
 const DRAGGABLE_SELECTOR  = "[data-pb-draggable]";
 const DRAGGABLE_CONTAINER = ".pb_draggable_container";
-const NEEDS_CLONE         = ["shadow", "outline"];   // clone only for these types
+const NEEDS_CLONE         = ["shadow", "outline", "line"];   // clone only for these types
 
 export default class PbDraggable extends PbEnhancedElement {
   static get selector() { return DRAGGABLE_SELECTOR; }
@@ -116,7 +116,9 @@ export default class PbDraggable extends PbEnhancedElement {
       /* ---------------------------------------------------------------- */
     }
 
-    requestAnimationFrame(() => (event.target.style.opacity = "0.5"));
+    if (this.dragZoneType !== "line") {
+      requestAnimationFrame(() => (event.target.style.opacity = "0.5"));
+    }
   }
 
   /* ---------------- DRAG ENTER ---------------- */

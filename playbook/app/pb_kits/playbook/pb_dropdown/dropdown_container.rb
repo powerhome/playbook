@@ -3,6 +3,9 @@
 module Playbook
   module PbDropdown
     class DropdownContainer < Playbook::KitBase
+      prop :searchbar, type: Playbook::Props::Boolean,
+                       default: false
+
       def classname
         generate_classname("pb_dropdown_container", "close", separator: " ")
       end

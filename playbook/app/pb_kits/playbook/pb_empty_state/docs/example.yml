@@ -1,5 +1,9 @@
 examples:
-
+  rails:
+  - empty_state_default: Default
+  - empty_state_size: Size
+  - empty_state_orientation: Orientation
+  - empty_state_alignment: Alignment
 
   react:
   - empty_state_default: Default

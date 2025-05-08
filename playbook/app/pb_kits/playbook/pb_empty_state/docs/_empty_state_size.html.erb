@@ -1,0 +1,23 @@
+<%= pb_rails("flex", props: {align: "center", spacing: "evenly", wrap: true}) do %>
+  <%= pb_rails("empty_state", props: {
+    description: "Body text goes into detail with possible steps for user to take",
+    header: "Title Explains",
+    image: "default",
+    primary_button: "Next Action",
+    primary_button_url: "#primary_button_url",
+    link_button: "Alt Action",
+    link_button_url: "#link_button_url",
+    size: "sm",
+  }) %>
+
+  <%= pb_rails("empty_state", props: {
+    description: "Body text goes into detail with possible steps for user to take",
+    header: "Title Explains",
+    image: "default",
+    primary_button: "Next Action",
+    primary_button_url: "#primary_button_url",
+    link_button: "Alt Action",
+    link_button_url: "#link_button_url",
+    size: "lg",
+  }) %>
+<% end %>

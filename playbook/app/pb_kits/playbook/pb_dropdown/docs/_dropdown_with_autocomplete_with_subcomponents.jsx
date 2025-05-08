@@ -1,15 +1,13 @@
-import React, { useState } from 'react'
+import React from 'react'
 
-import Dropdown from '../../pb_dropdown/_dropdown'
+import Dropdown from '../_dropdown'
 import Badge from '../../pb_badge/_badge'
+import Flex from '../../pb_flex/_flex'
 import FlexItem from '../../pb_flex/_flex_item'
-import Avatar from '../../pb_avatar/_avatar'
 import User from '../../pb_user/_user'
 
 
-const DropdownWithAutocompleteAndCustomDisplay = (props) => {
-  const [selectedOption, setSelectedOption] = useState();
-
+const DropdownWithAutocompleteWithSubcomponents = (props) => {
   const options = [
     {
       label: "Jasper Furniss",
@@ -45,34 +43,21 @@ const DropdownWithAutocompleteAndCustomDisplay = (props) => {
     }
   ];
 
-  const CustomDisplay = () => {
-    return (
-      <>
-      {
-        selectedOption && (
-            <Avatar
-                name={selectedOption.label}
-                size="xs"
-            />
-        )
-      }
-    </>
-    )
-  };
 
   return (
   <div>
     <Dropdown autocomplete
-        onSelect={(selectedItem) => setSelectedOption(selectedItem)}
         options={options}
         {...props}
     >
-        <Dropdown.Trigger customDisplay={<CustomDisplay/>} />
         {options.map((option) => (
           <Dropdown.Option key={option.id} 
               option={option}
           >
-            <>
+            <Flex
+                align="center"
+                justify="between"
+            >
               <FlexItem>
                 <User
                     align="left"
@@ -85,6 +70,7 @@ const DropdownWithAutocompleteAndCustomDisplay = (props) => {
               </FlexItem>
               <FlexItem>
                 <Badge
+                    dark
                     rounded
                     text={option.status}
                     variant={`${
@@ -96,7 +82,7 @@ const DropdownWithAutocompleteAndCustomDisplay = (props) => {
                     }`}
                 />
               </FlexItem>
-            </>
+            </Flex>
           </Dropdown.Option>
         ))}
     </Dropdown>
@@ -104,4 +90,4 @@ const DropdownWithAutocompleteAndCustomDisplay = (props) => {
   )
 }
 
-export default  DropdownWithAutocompleteAndCustomDisplay
+export default  DropdownWithAutocompleteWithSubcomponents

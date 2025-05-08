@@ -53,7 +53,6 @@ const DropdownTrigger = (props: DropdownTriggerProps) => {
     selected,
     setIsInputFocused,
     toggleDropdown,
-    triggerRef,
   } = useContext(DropdownContext);
 
   const handleKeyDown = useHandleOnKeyDown();
@@ -99,7 +98,6 @@ const DropdownTrigger = (props: DropdownTriggerProps) => {
         id={id}
     >
       {
-        !triggerRef && (
           children ? (
             <div
                 onClick={() => toggleDropdown()}
@@ -147,7 +145,10 @@ const DropdownTrigger = (props: DropdownTriggerProps) => {
                       <input
                           className="dropdown_input"
                           onChange={handleChange}
-                          onClick={() => toggleDropdown()}
+                          onClick={(e) => {
+                            e.stopPropagation();// keep the wrapper’s handler from firing
+                            toggleDropdown();
+                          }}
                           onFocus={() => setIsInputFocused(true)}
                           onKeyDown={handleKeyDown}
                           placeholder={
@@ -181,7 +182,6 @@ const DropdownTrigger = (props: DropdownTriggerProps) => {
               </Flex>
             </>
           )
-        )
       }
     </div>
   );
