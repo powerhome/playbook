@@ -38,7 +38,10 @@
 
 <%
   custom_display = capture do
-    pb_rails("avatar", props: { name: "Courtney Long", size: "xs" })
+    pb_rails("flex", props: { align: "center" }) do
+      concat(pb_rails("avatar", props: { name: "Courtney Long", size: "xs" }))
+      concat(pb_rails("body", props: { text: "Courtney Long", size: "xs", margin_left: "xxs" }))
+    end
   end
 %>
 
