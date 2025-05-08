@@ -10,6 +10,7 @@ module Playbook
                     default: false
       prop :avatar_url
       prop :bold, type: Playbook::Props::Boolean, default: true
+      prop :grayscale, type: Playbook::Props::Boolean, default: false
       prop :name
       prop :name_style, type: Playbook::Props::Enum,
                         values: %w[title body caption detail],

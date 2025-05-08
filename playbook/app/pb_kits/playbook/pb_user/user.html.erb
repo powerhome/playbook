@@ -3,7 +3,8 @@
     <%= pb_rails("avatar", props: {
       name: object.name,
       size: object.avatar_size,
-      image_url: object.avatar_url
+      image_url: object.avatar_url,
+      grayscale: object.grayscale,
     }) %>
   <% end %>
   <%= content_tag(:div, class: "content_wrapper") do %>
