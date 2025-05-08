@@ -13,13 +13,13 @@ import MessageMention from './_message_mention'
 
 type MessageProps = {
   aria: { [key: string]: string },
+  avatarGrayscale?: boolean,
   avatarName?: string,
   avatarStatus?: "away" | "offline" | "online",
   avatarUrl?: string,
   children?: React.ReactChild[] | React.ReactChild,
   className?: string,
   data?: Record<string, unknown>,
-  grayscale?: boolean,
   htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
   label?: string,
@@ -33,13 +33,13 @@ type MessageProps = {
 const Message = (props: MessageProps) => {
   const {
     aria = {},
+    avatarGrayscale = false,
     avatarName,
     avatarStatus = null,
     avatarUrl,
     children,
     className,
     data = {},
-    grayscale = false,
     htmlOptions = {},
     id,
     label,
@@ -73,7 +73,7 @@ const Message = (props: MessageProps) => {
     >
       {shouldDisplayAvatar &&
         <Avatar
-            grayscale={grayscale}
+            grayscale={avatarGrayscale}
             imageUrl={avatarUrl}
             name={avatarName}
             size="xs"

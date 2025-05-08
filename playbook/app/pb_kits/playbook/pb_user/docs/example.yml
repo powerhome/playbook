@@ -10,7 +10,7 @@ examples:
   - user_subtitle: Subtitle
   - user_block_content_subtitle_rails: Block Content Subtitle
   - user_font_options: Font Options
-  - user_grayscale: Grayscale
+  - user_grayscale: Grayscale Avatar
 
   react:
   - user_default: Default
@@ -22,7 +22,7 @@ examples:
   - user_subtitle: Subtitle
   - user_block_content_subtitle_react: Block Content Subtitle
   - user_font_options: Font Options
-  - user_grayscale: Grayscale
+  - user_grayscale: Grayscale Avatar
 
   swift:
   - user_horizontal_swift: Horizontal
