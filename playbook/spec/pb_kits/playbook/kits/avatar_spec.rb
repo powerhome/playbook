@@ -17,6 +17,10 @@ RSpec.describe Playbook::PbAvatar::Avatar do
       .with_default("md")
       .with_values("xxs", "xs", "sm", "md", "base", "lg", "xl")
   }
+  it {
+    is_expected.to define_boolean_prop(:grayscale)
+      .with_default(false)
+  }
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
       expect(subject.new({}).classname).to eq "pb_avatar_kit_size_md"
