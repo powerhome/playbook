@@ -180,12 +180,6 @@ kits:
     icons_used: false
     react_rendered: true
     enhanced_element_used: false
-  - name: gantt_chart
-    platforms: *2
-    status: beta
-    icons_used: false
-    react_rendered: false
-    enhanced_element_used: false
   - name: line_graph
     platforms: *1
     description: Line graphs are used to show changes in data over time.
