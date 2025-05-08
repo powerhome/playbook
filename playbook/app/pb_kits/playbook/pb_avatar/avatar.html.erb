@@ -3,7 +3,7 @@
   <% if object.component_overlay && object.component_overlay[:component] == "icon_circle" %>
     <%= pb_rails("flex", props: { display: "display_inline_block", position: "relative" }) do %>
       <%= content_tag(:div, data: { initials: object.initials }, class: "avatar_wrapper") do %>
-        <%= pb_rails("image", props: { alt: object.alt_text, url: object.image_url, on_error: object.handle_img_error }) if object.image_url.present? %>
+        <%= pb_rails("image", props: { alt: object.alt_text, url: object.image_url, on_error: object.handle_img_error, classname: object.grayscale ? "grayscale" : "" }) if object.image_url.present? %>
       <% end %>
       <%= pb_rails("card", props: { border_none: true, border_radius: "rounded", dark: object.dark, position: "absolute" }.merge(specific_placement_style)) do %>
         
@@ -13,7 +13,7 @@
   <% elsif object.component_overlay && object.component_overlay[:component] == "badge" %>
   <%= pb_rails("flex", props: { display: "display_inline_block", position: "relative" }) do %>
     <%= content_tag(:div, data: { initials: object.initials }, class: "avatar_wrapper") do %>
-      <%= pb_rails("image", props: { alt: object.alt_text, url: object.image_url, on_error: object.handle_img_error }) if object.image_url.present? %>
+      <%= pb_rails("image", props: { alt: object.alt_text, url: object.image_url, on_error: object.handle_img_error, classname: object.grayscale ? "grayscale" : "" }) if object.image_url.present? %>
     <% end %>
     <%= pb_rails("card", props: { border_none: true, border_radius: "rounded", dark: object.dark, padding: "none", position: "absolute" }.merge(specific_placement_style)) do %>
     <%= pb_rails("badge", props: { dark: object.dark, rounded: true, text: object.component_overlay[:text], variant: object.component_overlay[:variant] }) %>
@@ -21,7 +21,7 @@
     <% end %>
   <% else %>
     <%= content_tag(:div, data: { initials: object.initials }, class: "avatar_wrapper") do %>
-      <%= pb_rails("image", props: { alt: object.alt_text, url: object.image_url, on_error: object.handle_img_error }) if object.image_url.present? %>
+      <%= pb_rails("image", props: { alt: object.alt_text, url: object.image_url, on_error: object.handle_img_error, classname: object.grayscale ? "grayscale" : "" }) if object.image_url.present? %>
     <% end %>
     <%= pb_rails("online_status", props: object.online_status_props) if object.status %>
   <% end %>

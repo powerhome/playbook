@@ -82,6 +82,10 @@ $avatar-sizes: (
           object-fit: cover;
           display: block;
         }
+
+        .grayscale {
+          filter: grayscale(1);
+        }
       }
     }
   }
