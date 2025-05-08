@@ -106,3 +106,21 @@ test('renders with online status', () => {
   const onlineStatus = onlineStatusAvatar.querySelector('.pb_online_status_kit_online_size_md')
   expect(onlineStatus).toBeInTheDocument();
 });
+
+test('renders with grayscale filter', () => {
+  render(
+    <Avatar
+        data={{ testid: testId }}
+        grayscale
+        imageAlt={imageAlt}
+        imageUrl={imageUrl}
+        name={name}
+    />
+  );
+
+  const grayscaleAvatar = screen.getByTestId(testId);
+  expect(grayscaleAvatar).toBeInTheDocument();
+
+  const grayscaleImage = grayscaleAvatar.querySelector('.grayscale')
+  expect(grayscaleImage).toBeInTheDocument();
+});

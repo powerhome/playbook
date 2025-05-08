@@ -6,6 +6,7 @@ module Playbook
       prop :avatar_name
       prop :avatar_status
       prop :avatar_url
+      prop :avatar_grayscale, type: Playbook::Props::Boolean, default: false
       prop :label
       prop :message
       prop :timestamp

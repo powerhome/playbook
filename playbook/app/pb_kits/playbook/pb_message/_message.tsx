@@ -13,6 +13,7 @@ import MessageMention from './_message_mention'
 
 type MessageProps = {
   aria: { [key: string]: string },
+  avatarGrayscale?: boolean,
   avatarName?: string,
   avatarStatus?: "away" | "offline" | "online",
   avatarUrl?: string,
@@ -32,6 +33,7 @@ type MessageProps = {
 const Message = (props: MessageProps) => {
   const {
     aria = {},
+    avatarGrayscale = false,
     avatarName,
     avatarStatus = null,
     avatarUrl,
@@ -71,6 +73,7 @@ const Message = (props: MessageProps) => {
     >
       {shouldDisplayAvatar &&
         <Avatar
+            grayscale={avatarGrayscale}
             imageUrl={avatarUrl}
             name={avatarName}
             size="xs"

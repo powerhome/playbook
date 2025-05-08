@@ -25,6 +25,7 @@ export type AvatarProps = {
   },
   dark?: boolean,
   data?: {[key: string]: string},
+  grayscale?:  boolean,
   htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
   imageAlt?: string,
@@ -47,6 +48,7 @@ const Avatar = (props: AvatarProps): React.ReactElement => {
     htmlOptions = {},
     name = undefined,
     componentOverlay,
+    grayscale = false,
     id = '',
     imageAlt = '',
     imageUrl,
@@ -155,6 +157,7 @@ const Avatar = (props: AvatarProps): React.ReactElement => {
             {canShowImage && (
               <Image
                   alt={imageAlt ? imageAlt : name}
+                  className={grayscale ? "grayscale" : ""}
                   onError={handleError}
                   url={imageUrl}
               />

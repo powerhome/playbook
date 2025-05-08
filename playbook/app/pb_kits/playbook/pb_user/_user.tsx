@@ -19,6 +19,7 @@ type UserProps = {
   className?: string,
   dark?: boolean,
   data?: {[key: string]: string},
+  avatarGrayscale?: boolean,
   htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
   name?: string,
@@ -41,6 +42,7 @@ const User = (props: UserProps): React.ReactElement => {
     className,
     dark = false,
     data = {},
+    avatarGrayscale = false,
     htmlOptions = {},
     id,
     name,
@@ -145,6 +147,7 @@ const User = (props: UserProps): React.ReactElement => {
     >
       { avatarPresent &&
         <Avatar
+            grayscale={avatarGrayscale}
             imageUrl={avatarUrl}
             name={name}
             size={size}
