@@ -5,12 +5,14 @@ examples:
   - message_timestamp: With Timestamp Hover
   - message_hover: Hover
   - message_mentions: Mentions
+  - message_grayscale: Grayscale
 
   react:
   - message_default: Default
   - message_timestamp: With Timestamp Hover
   - message_hover: Hover
   - message_mentions: Mentions
+  - message_grayscale: Grayscale
 
   swift:
    - message_default_swift: Default

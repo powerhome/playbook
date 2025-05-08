@@ -19,6 +19,7 @@ type MessageProps = {
   children?: React.ReactChild[] | React.ReactChild,
   className?: string,
   data?: Record<string, unknown>,
+  grayscale?: boolean,
   htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
   label?: string,
@@ -38,6 +39,7 @@ const Message = (props: MessageProps) => {
     children,
     className,
     data = {},
+    grayscale = false,
     htmlOptions = {},
     id,
     label,
@@ -71,6 +73,7 @@ const Message = (props: MessageProps) => {
     >
       {shouldDisplayAvatar &&
         <Avatar
+            grayscale={grayscale}
             imageUrl={avatarUrl}
             name={avatarName}
             size="xs"

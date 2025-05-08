@@ -12,6 +12,7 @@ module Playbook
       prop :timestamp_object
       prop :timezone, default: "America/New_York"
       prop :align_timestamp, type: Playbook::Props::Enum, values: %w[left right], default: "right"
+      prop :grayscale, type: Playbook::Props::Boolean, default: false
 
       def classname
         generate_classname("pb_message_kit", avatar_class)
