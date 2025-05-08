@@ -1,3 +1,45 @@
+# 14.19.0
+##### May 08, 2025
+
+**Kit Enhancements:**
+
+- Avatar, User, Message Kits: Grayscale Prop [\#4603](https://github.com/powerhome/playbook/pull/4603) ([kangaree](https://github.com/kangaree))
+- Empty State Kit: Kit Buildout - Rails [\#4581](https://github.com/powerhome/playbook/pull/4581) ([gmorris1242](https://github.com/gmorris1242))
+- Draggable Kit: Expose Draggable Callbacks - React [\#4580](https://github.com/powerhome/playbook/pull/4580) ([kangaree](https://github.com/kangaree))
+- Dropdown Kit: Autocomplete and Searchbar Props [\#4571](https://github.com/powerhome/playbook/pull/4571) ([nidaqg](https://github.com/nidaqg))
+- Draggable Kit: Line Drop Zones - Rails [\#4569](https://github.com/powerhome/playbook/pull/4569) ([kangaree](https://github.com/kangaree))
+- Advanced Table Kit: Selectable Rows - Rails [\#4552](https://github.com/powerhome/playbook/pull/4552) ([nidaqg](https://github.com/nidaqg))
+- Advanced Table Kit: Add Support for Different Column Border Colors for Column Groups - Rails & React [\#4568](https://github.com/powerhome/playbook/pull/4568) ([skduncan](https://github.com/skduncan))
+- Phone Number Input Kit: Add Country Search [\#4560](https://github.com/powerhome/playbook/pull/4560) ([elisashapiro](https://github.com/elisashapiro))
+- Line Graph: Add Ability to Use Line Graph Styles W/o Line Graph [\#4562](https://github.com/powerhome/playbook/pull/4562) ([gmorris1242](https://github.com/gmorris1242))
+- Popover Kit: Add Turbo Support - Rails [\#4551](https://github.com/powerhome/playbook/pull/4551) ([gmorris1242](https://github.com/gmorris1242))
+- Draggable Kit: Add Dropzones and Colors - Rails [\#4529](https://github.com/powerhome/playbook/pull/4529) ([markdoeswork](https://github.com/markdoeswork))
+- Date Picker: Quick Pick and 3 Input Pattern [\#4545](https://github.com/powerhome/playbook/pull/4545) ([nidaqg](https://github.com/nidaqg))
+- Circle Chart: Add Ability to Use Circle Chart Styles W/o Circle Chart [\#4544](https://github.com/powerhome/playbook/pull/4544) ([gmorris1242](https://github.com/gmorris1242))
+
+**Fixed Bugs:**
+
+- Overlay Kit: Dynamic Variant Bug Fix - React [\#4597](https://github.com/powerhome/playbook/pull/4597) ([gmorris1242](https://github.com/gmorris1242))
+- Table Kit: Expandable/collapsible Not Behaving Correctly When Multiple Icons Are Present [\#4582](https://github.com/powerhome/playbook/pull/4582) ([skduncan](https://github.com/skduncan))
+- Select Kit: Inline Error Misaligns Arrow [\#4572](https://github.com/powerhome/playbook/pull/4572) ([elisashapiro](https://github.com/elisashapiro))
+- Phone Number Input Kit: Error Causes Label to Move [\#4561](https://github.com/powerhome/playbook/pull/4561) ([skduncan](https://github.com/skduncan))
+
+**Deprecated:**
+
+- Highcharts: Remove Gantt Chart from Playbook [\#4605](https://github.com/powerhome/playbook/pull/4605) ([elisashapiro](https://github.com/elisashapiro))
+
+**Improvements:**
+
+- Playbook Website: Fix React Prop Table on Kit Collection Pages [\#4598](https://github.com/powerhome/playbook/pull/4598) ([skduncan](https://github.com/skduncan))
+- Dependency Update/upgrade: @types/react-highlight-words [\#4570](https://github.com/powerhome/playbook/pull/4570) ([skduncan](https://github.com/skduncan))
+- Add "triangle-exclamation" Icon to Error State Docs - Rails [\#4566](https://github.com/powerhome/playbook/pull/4566) ([skduncan](https://github.com/skduncan))
+- Playbook Website: Kit Collection Variants Url Improvements [\#4554](https://github.com/powerhome/playbook/pull/4554) ([elisashapiro](https://github.com/elisashapiro))
+- Playbook Website: Remove Sandpack [\#4546](https://github.com/powerhome/playbook/pull/4546) ([markdoeswork](https://github.com/markdoeswork))
+- Playbook Website: Add Warning Icon to Error Docs - React [\#4548](https://github.com/powerhome/playbook/pull/4548) ([kangaree](https://github.com/kangaree))
+
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/v14.19.0-rc.2...14.19.0)
+
 # 🎙️Copy That - Introducing the New Copy Button Kit!
 ##### April 25, 2025
 
