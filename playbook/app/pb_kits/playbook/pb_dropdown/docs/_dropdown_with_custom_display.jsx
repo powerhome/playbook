@@ -8,7 +8,6 @@ import Avatar from '../../pb_avatar/_avatar'
 import User from '../../pb_user/_user'
 import Title from '../../pb_title/_title'
 
-
 const DropdownWithCustomDisplay = (props) => {
   const [selectedOption, setSelectedOption] = useState();
 
