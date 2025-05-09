@@ -15,3 +15,5 @@
 - [ ] **LABELS** Add a label: `enhancement`, `bug`, `improvement`, `new kit`, `deprecated`, or `breaking`. See [Changelog & Labels](https://github.com/powerhome/playbook/wiki/Changelog-&-Labels) for details.
 - [ ] **DEPLOY** I have added the `milano` label to show I'm ready for a review.
 - [ ] **TESTS** I have added test coverage to my code.
+- [ ] **SEMVER** I have added a `minor`, `major`, or `patch` label for release.
+- [ ] **RC** I have added an `inactive RC` label if not an active RC.
