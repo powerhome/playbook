@@ -71,7 +71,7 @@
     }
     &.error {
       .text_input_wrapper {
-        input,
+        input:not(.iti__search-input),
         .text_input {
           border-color: $error_dark;
         }
@@ -102,7 +102,7 @@
       [class*="pb_body_kit"] {
         margin-top: $space_xs / 2;
       }
-      input,
+      input:not(.iti__search-input),
       .text_input {
         border-color: $error;
       }
