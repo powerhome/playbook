@@ -38,7 +38,11 @@
 
 <%
   custom_display = capture do
-    pb_rails("avatar", props: { name: "Courtney Long", size: "xs" })
+    pb_rails("flex", props: { align: "center" }) do
+      concat(pb_rails("avatar", props: { name: "", size: "xs", id: "dropdown-avatar" }))
+      concat(pb_rails("body", props: { text: "", size: "xs", margin_x: "xs", id: "dropdown-avatar-name" }))
+      concat(pb_rails("badge", props: { text: "", id: "dropdown-avatar-status" }))
+    end
   end
 %>
 
@@ -63,3 +67,30 @@
         <% end %>
     <% end %>
 <% end %>
+
+
+<script>
+  document.addEventListener("pb:dropdown:selected", (e) => {
+    const option   = e.detail;
+    const dropdown = e.target;
+
+    const display = dropdown.querySelector("#dropdown_trigger_custom_display");
+    if (!display) return;
+
+    const nameEl = display.querySelector("#dropdown-avatar-name");
+    if (nameEl) nameEl.textContent = option.label;
+
+    const avatarEl = display.querySelector("#dropdown-avatar").querySelector(".avatar_wrapper");
+    const initials = (option.label[0] + option.label.split(" ").pop()[0]).toUpperCase();
+    if (avatarEl) {
+      avatarEl.dataset.name = option.label;
+      avatarEl.setAttribute("data-initials", initials);
+    }
+    const badgeEl   = display.querySelector("#dropdown-avatar-status");
+    const variant = option.status === "Online"  ? "success" : option.status === "Offline" ? "neutral" : "warning";
+    if (badgeEl) {
+      badgeEl.querySelector("span").textContent = option.status;
+      badgeEl.className = 'pb_badge_kit_' + variant;
+    }
+  });
+</script>
