@@ -147,6 +147,14 @@ export default class PbDropdown extends PbEnhancedElement {
       const selectedLabel = JSON.parse(value).label;
       if (customDisplayElement) {
         triggerElement.textContent = ""
+        this.element.setAttribute("data-option-selected", value);
+        const selectedObj = JSON.parse(value);
+        this.element.dispatchEvent(
+          new CustomEvent("pb:dropdown:selected", {
+            detail: selectedObj,
+            bubbles: true,
+          })
+        );
       } else {
         triggerElement.textContent = selectedLabel
       }
