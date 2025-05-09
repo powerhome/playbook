@@ -1,25 +1,112 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useContext } from "react";
+
+import AdvancedTableContext from "../Context/AdvancedTableContext";
+import { buildVisibilityTree } from "../Utilities/VisibilityTree";
+
 import Card from "../../pb_card/_card";
 import Caption from "../../pb_caption/_caption";
 import Flex from "../../pb_flex/_flex";
 import FlexItem from "../../pb_flex/_flex_item";
-import { showActionBar, hideActionBar } from "../Utilities/ActionBarAnimationHelper";
+import Dropdown from "../../pb_dropdown/_dropdown";
+import DropdownContainer from "../../pb_dropdown/subcomponents/DropdownContainer";
+import DropdownTrigger from "../../pb_dropdown/subcomponents/DropdownTrigger";
+import Icon from "../../pb_icon/_icon";
+import Checkbox from "../../pb_checkbox/_checkbox";
+import SectionSeparator from "../../pb_section_separator/_section_separator";
+import Tooltip from "../../pb_tooltip/_tooltip";
+
+import {
+  showActionBar,
+  hideActionBar,
+} from "../Utilities/ActionBarAnimationHelper";
+import { GenericObject } from "../../types";
 
 interface TableActionBarProps {
-  isVisible: boolean;
+  isVisible: boolean | GenericObject | undefined;
   selectedCount: number;
   actions?: React.ReactNode[] | React.ReactNode;
+  type?: string;
+}
+
+interface VisibilityNode {
+  id?: string | undefined;
+  label?: string | undefined;
+  children?: VisibilityNode[];
 }
 
 const TableActionBar: React.FC<TableActionBarProps> = ({
   isVisible,
   selectedCount,
-  actions
+  actions,
+  type = "row-selection",
 }) => {
   const cardRef = useRef(null);
+  const { table, columnVisibilityControl, columnDefinitions } =
+    useContext(AdvancedTableContext);
+
+  // ----------- Column visibility logic -----------
+  const includeIds = columnVisibilityControl?.includeIds;
+  const firstLeafId = table.getAllLeafColumns()[0]?.id;
+  // Get the first leaf column ID to exclude it from the visibility tree
+  // This is to avoid showing the first column in the dropdown
+  // as toggling it's visibility breaks the expanded row functionality
+  const tree = buildVisibilityTree(columnDefinitions, includeIds).filter(node => node.id !== firstLeafId);
+
+  const renderLeaf = (id: string, label: string) => {
+    const col   = table.getColumn(id);
+    const show  = col.getIsVisible();
+
+    return (
+      <Checkbox
+          checked={show}
+          key={id}
+          onChange={() => col.toggleVisibility()}
+          paddingBottom="xs"
+          text={label}
+      />
+    );
+  };
+
+  const gatherLeafIds = (node: VisibilityNode): string[] =>
+    node.children && node.children.length
+      ? node.children.flatMap(gatherLeafIds)
+      : node.id
+      ? [node.id]
+      : [];
+
+  const renderGroup = (node: VisibilityNode ) => {
+     const leaves = gatherLeafIds(node);
+    const visibleArray   = leaves.map((id) => table.getColumn(id).getIsVisible());
+    const allOn    = visibleArray.every(Boolean);
+    const someOn   = visibleArray.some(Boolean);
+
+    return (
+      <>
+        <Checkbox
+            checked={allOn}
+            indeterminate={!allOn && someOn}
+            onChange={() =>
+              leaves.forEach((id) =>
+                table.getColumn(id).toggleVisibility(!allOn),
+              )
+            }
+            paddingBottom="xs"
+            text={node.label}
+        />
+        <Flex flexDirection="column" 
+            paddingLeft="lg"
+        >
+          {node?.children?.map((child) =>
+            child.children ? renderGroup(child) : renderLeaf(child.id, child.label),
+          )}
+        </Flex>
+      </>
+    );
+  };
+// ------------ End of column visibility logic --------
 
   useEffect(() => {
-    if (cardRef.current) {
+    if (cardRef.current && type === "row-selection") {
       if (isVisible) {
         showActionBar(cardRef.current);
       } else {
@@ -31,22 +118,68 @@ const TableActionBar: React.FC<TableActionBarProps> = ({
   return (
     <Card
         borderNone={!isVisible}
-        className={`${isVisible && "show-action-card row-selection-actions-card"}`}
+        className={`${
+          isVisible && "show-action-card row-selection-actions-card"
+        }`}
         htmlOptions={{ ref: cardRef as any }}
         padding={`${isVisible ? "xs" : "none"}`}
     >
       <Flex
           alignItems="center"
-          justify="between"
+          justify={type === "row-selection" ? "between" : "end"}
       >
-        <Caption
-            color="light"
-            paddingLeft="xs"
-            size="xs"
-        >
-          {selectedCount} Selected
-        </Caption>
-        <FlexItem>{actions}</FlexItem>
+        {type === "row-selection" ? (
+          <>
+            <Caption color="light" 
+                paddingLeft="xs" 
+                size="xs"
+            >
+              {selectedCount} Selected
+            </Caption>
+            <FlexItem>{actions}</FlexItem>
+          </>
+        ) : (
+          <Dropdown
+              className="column-visibility-dropdown-wrapper"
+              options={columnDefinitions}
+          >
+            <DropdownTrigger>
+            <Tooltip 
+                placement='top' 
+                text="Column Configuration" 
+                zIndex={10}
+            >
+                <Icon 
+                    color="primary" 
+                    cursor="pointer" 
+                    icon="sliders-h" 
+                />
+            </Tooltip>
+            </DropdownTrigger>
+            <DropdownContainer
+                className="column-visibility-dropdown"
+                paddingTop="sm"
+            >
+              <>
+              <Caption 
+                  paddingBottom="sm" 
+                  text="Columns Config"
+                  textAlign="center" 
+              />
+              <SectionSeparator paddingBottom="xs" />
+              {tree.map((node: VisibilityNode) => (
+                <Flex cursor="pointer" 
+                    flexDirection="column" 
+                    key={node.id}
+                    paddingX="xs"
+                >
+                  {node.children ? renderGroup(node) : renderLeaf(node.id, node.label)}
+                </Flex>
+              ))}
+              </>
+            </DropdownContainer>
+          </Dropdown>
+        )}
       </Flex>
     </Card>
   );

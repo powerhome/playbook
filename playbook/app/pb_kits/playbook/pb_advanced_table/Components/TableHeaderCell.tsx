@@ -79,9 +79,26 @@ export const TableHeaderCell = ({
   header?.column.getLeafColumns().length === 1 &&
   header?.column.getLeafColumns()[0].id === header.column.id
 
-  const isLastHeaderCell =
-    header?.column.parent?.columns.at(-1) === header?.column ||
-    (header?.colSpan > 1 && header?.column.parent !== undefined);
+  const columnHasVisibleLeaf = (col: any): boolean =>
+    col.getIsVisible?.() ||
+    (Array.isArray(col.columns) &&
+      col.columns.some((child: any) => columnHasVisibleLeaf(child)));
+      
+   // Check on column position in stack + visibility to add the vertical border 
+  const isLastHeaderCell = (() => {
+    if (!header) return false;
+  
+    if (header.colSpan > 1 && header.column.parent !== undefined) return true;
+  
+    const parent = header.column.parent;
+  
+    if (!parent) {
+      const topHeaders = table?.getHeaderGroups()[0].headers.filter((h: any) => columnHasVisibleLeaf(h.column));
+      return topHeaders?.at(-1)?.id === header.id;
+    }
+    const visibleSiblings = parent.columns.filter(columnHasVisibleLeaf);
+    return visibleSiblings.at(-1) === header.column;
+  })();
  
 const cellClassName = classnames(
   "table-header-cells",

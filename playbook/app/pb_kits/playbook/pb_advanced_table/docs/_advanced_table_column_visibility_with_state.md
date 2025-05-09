@@ -1,0 +1,1 @@
+The `columnVisibilityControl` prop also allows for greater control over the columnVisibility state. Devs can manage state themselves by passing in `value` and `onChange` as shown.

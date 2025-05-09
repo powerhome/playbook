@@ -26,6 +26,8 @@ interface UseTableStateProps {
   virtualizedRows?: boolean;
   tableOptions?: GenericObject;
   onRowSelectionChange?: (arg: RowSelectionState) => void;
+  columnVisibilityControl?: GenericObject;
+
 }
 
 export function useTableState({
@@ -40,16 +42,19 @@ export function useTableState({
   pagination = false,
   paginationProps,
   virtualizedRows = false,
-  tableOptions
+  tableOptions,
+  columnVisibilityControl
 }: UseTableStateProps) {
   // Create a local state for expanded and setExpanded if expandedControl not used
   const [localExpanded, setLocalExpanded] = useState({});
   const [loadingStateRowCount, setLoadingStateRowCount] = useState(initialLoadingRowsCount);
   const [rowSelection, setRowSelection] = useState<RowSelectionState>({});
-
+  const [localColumnVisibility, setLocalColumnVisibility] = useState({});
   // Determine whether to use the prop or the local state
   const expanded = expandedControl ? expandedControl.value : localExpanded;
   const setExpanded = expandedControl ? expandedControl.onChange : setLocalExpanded;
+  const columnVisibility = (columnVisibilityControl && columnVisibilityControl.value) ? columnVisibilityControl.value : localColumnVisibility;
+  const setColumnVisibility = (columnVisibilityControl && columnVisibilityControl.onChange) ? columnVisibilityControl.onChange : setLocalColumnVisibility;
 
   // Virtualized data handling (chunked loading)
   const fetchSize = 20; // Number of rows per "page"
@@ -104,17 +109,21 @@ export function useTableState({
   }]), [columnDefinitions, sortControl]);
 
   // Custom state based on features enabled
-  const customState = useCallback(() => {
-    if (sortControl && selectableRows) {
-      return { state: { expanded, sorting, rowSelection } };
-    } else if (sortControl) {
-      return { state: { expanded, sorting } };
-    } else if (selectableRows) {
-      return { state: { expanded, rowSelection } };
-    } else {
-      return { state: { expanded } };
-    }
-  }, [expanded, rowSelection, sortControl, selectableRows, sorting]);
+  const customState = useCallback(() => ({
+    state: {
+      expanded,
+      ...(sortControl     && { sorting }),
+      ...(selectableRows  && { rowSelection }),
+      ...(columnVisibility && { columnVisibility }),
+    },
+  }), [
+    expanded,
+    sortControl,
+    sorting,
+    selectableRows,
+    rowSelection,
+    columnVisibility,
+  ]);
 
   // Pagination configuration
   const paginationInitializer = useMemo(() => {
@@ -145,6 +154,7 @@ export function useTableState({
     sortDescFirst: true,
     onRowSelectionChange: setRowSelection,
     getRowId: selectableRows ? row => row.id : undefined,
+    onColumnVisibilityChange: setColumnVisibility,
     meta: {
       columnDefinitions
     },

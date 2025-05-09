@@ -93,7 +93,17 @@ export const RegularTableView = ({
 
               {row.getVisibleCells().map((cell: Cell<GenericObject, unknown>, i: number) => {
                 const isPinnedLeft = columnPinning.left.includes(cell.column.id);
-                const isLastCell = cell.column.parent?.columns?.at(-1)?.id === cell.column.id;
+                const isLastCell = (() => {
+                  const parent = cell.column.parent;
+                    if (!parent) {
+                      const last = row.getVisibleCells().at(-1);
+                      return last?.column.id === cell.column.id;
+                    }
+                  
+                    const visibleSiblings = parent.columns.filter(col => col.getIsVisible());
+                    return visibleSiblings.at(-1)?.id === cell.column.id;
+                   })();
+
                 const { column } = cell;
                 return (
                   <td

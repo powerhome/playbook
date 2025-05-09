@@ -6,7 +6,7 @@ import {
   buildDataProps,
   buildHtmlProps
 } from "../../utilities/props";
-import { globalProps } from "../../utilities/globalProps";
+import { globalProps, GlobalProps } from "../../utilities/globalProps";
 
 import DropdownContext from "../context";
 
@@ -24,7 +24,7 @@ type DropdownContainerProps = {
   htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string;
   searchbar?: boolean;
-};
+} & GlobalProps;
 
 const DropdownContainer = (props: DropdownContainerProps) => {
   const {

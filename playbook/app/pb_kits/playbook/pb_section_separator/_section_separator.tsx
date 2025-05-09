@@ -2,7 +2,7 @@ import React from 'react'
 import classnames from 'classnames'
 
 import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
-import { globalProps, globalInlineProps } from '../utilities/globalProps'
+import { globalProps, globalInlineProps, GlobalProps } from '../utilities/globalProps'
 
 import Caption from '../pb_caption/_caption'
 
@@ -19,7 +19,7 @@ type SectionSeparatorProps = {
   orientation?: "horizontal" | "vertical",
   text?: string,
   variant?: "card" | "background",
-}
+} & GlobalProps
 
 const SectionSeparator = (props: SectionSeparatorProps): React.ReactElement => {
   const {
