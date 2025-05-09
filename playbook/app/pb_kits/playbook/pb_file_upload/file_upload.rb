@@ -21,13 +21,19 @@ module Playbook
       prop :input_options, type: Playbook::Props::HashProp,
                            default: {}
 
+      prop :error, type: Playbook::Props::String
+
       def classname
         file_upload_class = generate_classname("pb_file_upload_kit")
-        file_upload_class + full_width_class
+        file_upload_class + error_class + full_width_class
       end
 
       def full_width_class
         full_width ? " full_width" : ""
+      end
+
+      def error_class
+        error.present? ? "_error" : ""
       end
     end
   end
