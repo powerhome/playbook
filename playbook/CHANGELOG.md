@@ -1,5 +1,9 @@
-# 14.19.0
+# ✨ Glow Up: Activated ✨
 ##### May 08, 2025
+
+Playbook just got a little more magical! No data? No problem — we’ve got a new Empty State Kit for that! We also supercharged our Dropdown which now supports typeahead functionality in both React and Rails, making it faster to find what you need. The Draggable Kit too got a glow-up with new dropzone UI options. And yes, the DatePicker got smarter about ranges and quickpicks! It’s a glow-up all around!
+
+[14.19.0](https://github.com/powerhome/playbook/tree/14.19.0) full list of changes:
 
 **Kit Enhancements:**
 
