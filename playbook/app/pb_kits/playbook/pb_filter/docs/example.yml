@@ -14,6 +14,7 @@ examples:
   - filter_within_turbo_frames: Within Turbo Frames
 
   react:
+  - filter_side: Sidebar
   - filter_default: Default
   - filter_no_background: No Background
   - filter_single: Single
