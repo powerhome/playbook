@@ -20,7 +20,7 @@ const FileUploadError = (props) => {
   }
 
   const error = (<>
-    <Icon icon="warning" /> Please make a valid selection
+    <Icon icon="warning" /> Please upload a valid file
   </>)
 
   return (
