@@ -10,12 +10,12 @@ import { globalProps } from "../../utilities/globalProps";
 import { useHandleOnKeyDown } from "../hooks/useHandleOnKeydown";
 
 import DropdownContext from "../context";
+import MultiSelectTriggerDisplay from "./MultiSelectTriggerDisplay";
 
 import Body from "../../pb_body/_body";
 import Icon from "../../pb_icon/_icon";
 import Flex from "../../pb_flex/_flex";
 import FlexItem from "../../pb_flex/_flex_item";
-import FormPill from "../../pb_form_pill/_form_pill";
 
 type DropdownTriggerProps = {
   aria?: { [key: string]: string };
@@ -52,6 +52,7 @@ const DropdownTrigger = (props: DropdownTriggerProps) => {
     isDropDownClosed,
     isInputFocused,
     multiSelect,
+    multiSelectDisplay,
     selected,
     setIsInputFocused,
     toggleDropdown,
@@ -150,19 +151,12 @@ const DropdownTrigger = (props: DropdownTriggerProps) => {
                       </Flex>
                     ) : (
                       multiSelect ? (
-                        selectedArray.length > 0 ? (
-                          selectedArray.map((option, index) => (
-                            <FormPill
-                                dark={dark}
-                                key={index}
-                                text={option.label}
-                            />
-                          ))
-                        ) : (
-                          <Body dark={dark} 
-                              text={placeholder ? placeholder : "Select..."} 
-                          />
-                        )
+                        <MultiSelectTriggerDisplay
+                            dark={dark}
+                            multiSelectDisplay={multiSelectDisplay}
+                            placeholder={placeholder}
+                            selected={selectedArray}
+                        />
                       ) : (
                         <Body dark={dark} 
                             text={defaultDisplayPlaceholder} 

@@ -34,6 +34,7 @@ type DropdownProps = {
     isClosed?: boolean;
     label?: string;
     multiSelect?: boolean;
+    multiSelectDisplay?: "default" | "smallPill" | "badge";
     onSelect?: (arg: GenericObject) => null;
     options: GenericObject;
     separators?: boolean;
@@ -63,6 +64,7 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
         isClosed = true,
         label,
         multiSelect = false,
+        multiSelectDisplay = "default",
         onSelect,
         options,
         separators = true,
@@ -250,6 +252,7 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
                     isDropDownClosed,
                     isInputFocused,
                     multiSelect,
+                    multiSelectDisplay,
                     optionsWithBlankSelection,
                     selected,
                     setFocusedOptionIndex,
