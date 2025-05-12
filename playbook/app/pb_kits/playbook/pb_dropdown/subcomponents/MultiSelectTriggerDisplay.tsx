@@ -31,15 +31,14 @@ const MultiSelectTriggerDisplay = ({
   }
 
   return (
-    <Flex paddingRight={autocomplete ? "xs" : "none"} 
-        wrap
-    >
+    <Flex wrap>
       {selected.map((option, i) =>
         multiSelectDisplay === "default" ||
         multiSelectDisplay === "smallPill" ? (
           <FormPill
               dark={dark}
               key={i}
+              marginRight="xs"
               size={multiSelectDisplay === "smallPill" ? "small" : "default"}
               text={option.label}
           />
@@ -47,6 +46,7 @@ const MultiSelectTriggerDisplay = ({
            <Badge
                dark={dark}
                key={i}
+               marginRight="xs"
                text={option.label}
                variant="primary"
            />
