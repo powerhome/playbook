@@ -148,7 +148,7 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
     useEffect(() => {
         if (!isDropDownClosed) {
             let newIndex = 0;
-            if (selected && selected?.label) {
+            if (selected && !Array.isArray(selected) && selected.label) {
                 const selectedIndex = filteredOptions.findIndex((option: GenericObject) => option.label === selected.label);
                 if (selectedIndex >= 0) {
                     newIndex = selectedIndex;

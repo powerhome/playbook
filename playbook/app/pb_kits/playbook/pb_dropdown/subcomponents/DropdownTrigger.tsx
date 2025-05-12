@@ -15,6 +15,7 @@ import Body from "../../pb_body/_body";
 import Icon from "../../pb_icon/_icon";
 import Flex from "../../pb_flex/_flex";
 import FlexItem from "../../pb_flex/_flex_item";
+import FormPill from "../../pb_form_pill/_form_pill";
 
 type DropdownTriggerProps = {
   aria?: { [key: string]: string };
@@ -74,12 +75,14 @@ const DropdownTrigger = (props: DropdownTriggerProps) => {
   );
 
   const selectedArray = Array.isArray(selected)
-   ? selected
+    ? selected
     : selected && Object.keys(selected).length
     ? [selected]
     : [];
 
-  const joinedLabels = multiSelect ? "" : selectedArray.map((option) => option.label).join(", ");
+  const joinedLabels = multiSelect
+    ? ""
+    : selectedArray.map((option) => option.label).join(", ");
 
   const customDisplayPlaceholder = selected?.label ? (
     <b>{selected.label}</b>
@@ -146,9 +149,25 @@ const DropdownTrigger = (props: DropdownTriggerProps) => {
                         </Body>
                       </Flex>
                     ) : (
-                      <Body dark={dark} 
-                          text={defaultDisplayPlaceholder} 
-                      />
+                      multiSelect ? (
+                        selectedArray.length > 0 ? (
+                          selectedArray.map((option, index) => (
+                            <FormPill
+                                dark={dark}
+                                key={index}
+                                text={option.label}
+                            />
+                          ))
+                        ) : (
+                          <Body dark={dark} 
+                              text={placeholder ? placeholder : "Select..."} 
+                          />
+                        )
+                      ) : (
+                        <Body dark={dark} 
+                            text={defaultDisplayPlaceholder} 
+                        />
+                      )
                     )}
                     {autocomplete && (
                       <input
