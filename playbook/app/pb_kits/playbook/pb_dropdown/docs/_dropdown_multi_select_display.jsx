@@ -46,17 +46,8 @@ const DropdownMultiSelectDisplay = (props) => {
   return (
   <div>
     <Dropdown
-        label="Multi Select with Small Pills"
+        formPillProps={{size:"small", color:"neutral"}}
         multiSelect
-        multiSelectDisplay='smallPill'
-        options={options}
-        {...props}
-    />
-    <br/>
-    <Dropdown
-        label="Multi Select with Badges"
-        multiSelect
-        multiSelectDisplay='badge'
         options={options}
         {...props}
     />

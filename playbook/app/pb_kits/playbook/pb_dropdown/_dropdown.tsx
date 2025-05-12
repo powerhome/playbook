@@ -25,6 +25,7 @@ type DropdownProps = {
     blankSelection?: string;
     children?: React.ReactChild[] | React.ReactChild | React.ReactElement[];
     className?: string;
+    formPillProps?: GenericObject;
     dark?: boolean;
     data?: { [key: string]: string };
     defaultValue?: GenericObject;
@@ -34,7 +35,6 @@ type DropdownProps = {
     isClosed?: boolean;
     label?: string;
     multiSelect?: boolean;
-    multiSelectDisplay?: "default" | "smallPill" | "badge";
     onSelect?: (arg: GenericObject) => null;
     options: GenericObject;
     separators?: boolean;
@@ -64,7 +64,7 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
         isClosed = true,
         label,
         multiSelect = false,
-        multiSelectDisplay = "default",
+        formPillProps,
         onSelect,
         options,
         separators = true,
@@ -243,6 +243,7 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
                     filteredOptions,
                     filterItem,
                     focusedOptionIndex,
+                    formPillProps,
                     handleBackspace,
                     handleChange,
                     handleOptionClick,
@@ -252,7 +253,6 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
                     isDropDownClosed,
                     isInputFocused,
                     multiSelect,
-                    multiSelectDisplay,
                     onSelect,
                     optionsWithBlankSelection,
                     selected,

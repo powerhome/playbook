@@ -53,7 +53,6 @@ const DropdownTrigger = (props: DropdownTriggerProps) => {
     isDropDownClosed,
     isInputFocused,
     multiSelect,
-    multiSelectDisplay,
     selected,
     setIsInputFocused,
     toggleDropdown,
@@ -158,7 +157,6 @@ const DropdownTrigger = (props: DropdownTriggerProps) => {
                         <MultiSelectTriggerDisplay
                             autocomplete={autocomplete}
                             dark={dark}
-                            multiSelectDisplay={multiSelectDisplay}
                             placeholder={placeholder}
                             selected={selectedArray}
                         />

@@ -21,7 +21,7 @@ examples:
   - dropdown_with_autocomplete: Autocomplete
   - dropdown_multi_select: Multi Select
   - dropdown_multi_select_with_autocomplete: Multi Select with Autocomplete
-  - dropdown_multi_select_display: Multi Select with Display Options
+  - dropdown_multi_select_display: Multi Select with Form Pill Props
   - dropdown_subtle_variant: Subtle Variant
   - dropdown_subcomponent_structure: Subcomponent Structure
   - dropdown_with_autocomplete_with_subcomponents: Autocomplete with Subcomponent Structure
