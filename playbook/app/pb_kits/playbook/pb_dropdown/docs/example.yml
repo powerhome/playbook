@@ -19,6 +19,7 @@ examples:
   react:
   - dropdown_default: Default
   - dropdown_with_autocomplete: Autocomplete
+  - dropdown_multi_select: Multi Select
   - dropdown_subtle_variant: Subtle Variant
   - dropdown_subcomponent_structure: Subcomponent Structure
   - dropdown_with_autocomplete_with_subcomponents: Autocomplete with Subcomponent Structure

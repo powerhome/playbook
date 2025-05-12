@@ -50,6 +50,7 @@ const DropdownTrigger = (props: DropdownTriggerProps) => {
     inputWrapperRef,
     isDropDownClosed,
     isInputFocused,
+    multiSelect,
     selected,
     setIsInputFocused,
     toggleDropdown,
@@ -72,6 +73,14 @@ const DropdownTrigger = (props: DropdownTriggerProps) => {
     !autocomplete && "select_only"
   );
 
+  const selectedArray = Array.isArray(selected)
+   ? selected
+    : selected && Object.keys(selected).length
+    ? [selected]
+    : [];
+
+  const joinedLabels = multiSelect ? "" : selectedArray.map((option) => option.label).join(", ");
+
   const customDisplayPlaceholder = selected?.label ? (
     <b>{selected.label}</b>
   ) : autocomplete ? (
@@ -82,8 +91,8 @@ const DropdownTrigger = (props: DropdownTriggerProps) => {
     "Select..."
   );
 
-  const defaultDisplayPlaceholder = selected?.label
-    ? selected.label
+  const defaultDisplayPlaceholder = joinedLabels
+    ? joinedLabels
     : autocomplete
     ? ""
     : placeholder
@@ -131,7 +140,7 @@ const DropdownTrigger = (props: DropdownTriggerProps) => {
                       <Flex align="center">
                         {customDisplay}
                         <Body dark={dark} 
-                            paddingLeft={`${selected.label ? "xs" : "none"}`}
+                            paddingLeft={`${joinedLabels ? "xs" : "none"}`}
                         >
                           {customDisplayPlaceholder}
                         </Body>
@@ -152,7 +161,7 @@ const DropdownTrigger = (props: DropdownTriggerProps) => {
                           onFocus={() => setIsInputFocused(true)}
                           onKeyDown={handleKeyDown}
                           placeholder={
-                            selected.label
+                            joinedLabels
                               ? ""
                               : placeholder
                               ? placeholder

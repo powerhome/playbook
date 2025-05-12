@@ -15,3 +15,4 @@ export { default as DropdownClearSelection } from './_dropdown_clear_selection.j
 export { default as DropdownSubtleVariant } from './_dropdown_subtle_variant.jsx'
 export { default as DropdownSeparatorsHidden } from './_dropdown_separators_hidden.jsx'
 export {default as DropdownWithSearch} from './_dropdown_with_search.jsx'
+export { default as DropdownMultiSelect } from './_dropdown_multi_select.jsx'

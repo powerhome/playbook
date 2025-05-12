@@ -45,6 +45,7 @@ const DropdownOption = (props: DropdownOptionProps) => {
     filterItem,
     focusedOptionIndex,
     handleOptionClick,
+    multiSelect,
     selected,
   } = useContext(DropdownContext);
 
@@ -61,11 +62,12 @@ const DropdownOption = (props: DropdownOptionProps) => {
     filteredOptions[focusedOptionIndex].label === option.label;
   const focusedClass = isFocused && "focused";
 
-  const selectedClass = `${
-    selected?.label === option.label
-      ? "selected"
-      : "list"
-  }`;
+  const isSelected = Array.isArray(selected)
+   ? selected.some((item) => item.label === option?.label)
+   : (selected as GenericObject)?.label === option?.label;
+
+  const selectedClass = isSelected ? "selected" : "list";
+
   const ariaProps = buildAriaProps(aria);
   const dataProps = buildDataProps(data);
   const htmlProps = buildHtmlProps(htmlOptions);

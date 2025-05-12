@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, forwardRef, useImperativeHandle } from "react";
+import React, { useState, useRef, useEffect, forwardRef, useImperativeHandle, useMemo } from "react";
 import classnames from "classnames";
 import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from "../utilities/props";
 import { globalProps } from "../utilities/globalProps";
@@ -33,6 +33,7 @@ type DropdownProps = {
     id?: string;
     isClosed?: boolean;
     label?: string;
+    multiSelect?: boolean;
     onSelect?: (arg: GenericObject) => null;
     options: GenericObject;
     separators?: boolean;
@@ -61,6 +62,7 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
         id,
         isClosed = true,
         label,
+        multiSelect = false,
         onSelect,
         options,
         separators = true,
@@ -80,7 +82,20 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
     const [isDropDownClosed, setIsDropDownClosed, toggleDropdown] = useDropdown(isClosed);
 
     const [filterItem, setFilterItem] = useState("");
-    const [selected, setSelected] = useState<GenericObject>(defaultValue);
+    const initialSelected = useMemo(() => {
+      if (multiSelect) {
+        if (Array.isArray(defaultValue)) return defaultValue;
+        return defaultValue && Object.keys(defaultValue).length
+          ? [defaultValue]
+          : [];
+      }
+      return defaultValue || {};
+    }, [multiSelect, defaultValue]);
+
+    const [selected, setSelected] = useState<GenericObject | GenericObject[]>(
+      initialSelected
+    );
+
     const [isInputFocused, setIsInputFocused] = useState(false);
     const [hasTriggerSubcomponent, setHasTriggerSubcomponent] = useState(true);
     const [hasContainerSubcomponent, setHasContainerSubcomponent] =
@@ -149,12 +164,27 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
         setIsDropDownClosed(false);
     };
 
-    const handleOptionClick = (selectedItem: GenericObject) => {
-        setSelected(selectedItem);
-        setFilterItem("");
-        setIsDropDownClosed(true);
-        onSelect && onSelect(selectedItem);
-    };
+
+      const handleOptionClick = (clickedItem: GenericObject) => {
+                if (multiSelect) {
+                    setSelected((prev) => {
+                       const list = prev as GenericObject[];
+                       const exists = list.find((option) => option.value === clickedItem.value);
+                       const next = exists
+                       ? list.filter((option) => option.value !== clickedItem.value)
+                           : [...list, clickedItem];
+                   onSelect && onSelect(next);
+                       return next;
+                   });
+                   setFilterItem("");
+                   setIsDropDownClosed(true);
+               } else {
+                   setSelected(clickedItem);
+                   setFilterItem("");
+                   setIsDropDownClosed(true);
+                   onSelect && onSelect(clickedItem);
+            }
+             };
 
     const handleWrapperClick = () => {
         autocomplete && inputRef?.current?.focus();
@@ -162,9 +192,14 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
     };
 
     const handleBackspace = () => {
+      if (multiSelect) {
+        setSelected([]);
+        onSelect && onSelect([]);
+      } else {
         setSelected({});
         onSelect && onSelect(null);
         setFocusedOptionIndex(-1);
+      }
     };
 
     const componentsToRender = prepareSubcomponents({
@@ -178,12 +213,17 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
     });
 
     useImperativeHandle(ref, () => ({
-        clearSelected: () => {
-            setSelected({});
-            setFilterItem("");
-            setIsDropDownClosed(true);
-            onSelect && onSelect(null);
-        },
+      clearSelected: () => {
+        if (multiSelect) {
+          setSelected([]);
+          onSelect && onSelect([]);
+        } else {
+          setSelected({});
+          onSelect && onSelect(null);
+        }
+        setFilterItem("");
+        setIsDropDownClosed(true);
+      },
     }));
 
     return (
@@ -209,6 +249,7 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
                     inputWrapperRef,
                     isDropDownClosed,
                     isInputFocused,
+                    multiSelect,
                     optionsWithBlankSelection,
                     selected,
                     setFocusedOptionIndex,
