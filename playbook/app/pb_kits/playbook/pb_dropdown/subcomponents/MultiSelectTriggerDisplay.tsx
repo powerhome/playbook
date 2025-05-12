@@ -1,10 +1,13 @@
 import React from "react";
 import FormPill from "../../pb_form_pill/_form_pill";
+import Flex from "../../pb_flex/_flex";
 import Body from "../../pb_body/_body";
 import { GenericObject } from "../../types";
 import Badge from "../../pb_badge/_badge";
+import { auto } from "@popperjs/core";
 
 type MultiSelectTriggerDisplayProps = {
+  autocomplete?: boolean;
   selected: GenericObject[];
   placeholder?: string;
   dark?: boolean;
@@ -12,12 +15,14 @@ type MultiSelectTriggerDisplayProps = {
 };
 
 const MultiSelectTriggerDisplay = ({
+  autocomplete,
   selected,
   placeholder,
   dark = false,
   multiSelectDisplay,
 }: MultiSelectTriggerDisplayProps) => {
   if (selected.length === 0) {
+    if (autocomplete) return null;
     return (
     <Body dark={dark} 
         text={placeholder ? placeholder : "Select..."} 
@@ -26,7 +31,9 @@ const MultiSelectTriggerDisplay = ({
   }
 
   return (
-    <>
+    <Flex paddingRight={autocomplete ? "xs" : "none"} 
+        wrap
+    >
       {selected.map((option, i) =>
         multiSelectDisplay === "default" ||
         multiSelectDisplay === "smallPill" ? (
@@ -45,7 +52,7 @@ const MultiSelectTriggerDisplay = ({
            />
         )
       )}
-    </>
+    </Flex>
   );
 };
 

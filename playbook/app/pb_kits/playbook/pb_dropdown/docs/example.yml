@@ -20,6 +20,7 @@ examples:
   - dropdown_default: Default
   - dropdown_with_autocomplete: Autocomplete
   - dropdown_multi_select: Multi Select
+  - dropdown_multi_select_with_autocomplete: Multi Select with Autocomplete
   - dropdown_multi_select_display: Multi Select with Display Options
   - dropdown_subtle_variant: Subtle Variant
   - dropdown_subcomponent_structure: Subcomponent Structure

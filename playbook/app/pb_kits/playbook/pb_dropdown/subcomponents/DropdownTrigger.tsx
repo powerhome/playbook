@@ -138,8 +138,10 @@ const DropdownTrigger = (props: DropdownTriggerProps) => {
                   paddingX="sm"
                   paddingY="xs"
               >
-                <FlexItem>
-                  <Flex align="center">
+                <FlexItem fixedSize={multiSelect ? "95%" : ""}>
+                  <Flex align="center"
+                      wrap
+                  >
                     {customDisplay ? (
                       <Flex align="center">
                         {customDisplay}
@@ -151,19 +153,43 @@ const DropdownTrigger = (props: DropdownTriggerProps) => {
                       </Flex>
                     ) : (
                       multiSelect ? (
+                        <>
                         <MultiSelectTriggerDisplay
+                            autocomplete={autocomplete}
                             dark={dark}
                             multiSelectDisplay={multiSelectDisplay}
                             placeholder={placeholder}
                             selected={selectedArray}
                         />
+                        {autocomplete && (
+                          <input
+                              className="dropdown_input"
+                              onChange={handleChange}
+                              onClick={(e) => {
+                                e.stopPropagation();// keep the wrapper’s handler from firing
+                                toggleDropdown();
+                              }}
+                              onFocus={() => setIsInputFocused(true)}
+                              onKeyDown={handleKeyDown}
+                              placeholder={
+                                joinedLabels
+                                  ? ""
+                                  : placeholder
+                                  ? placeholder
+                                  : "Select..."
+                              }
+                              ref={inputRef}
+                              value={filterItem}
+                          />
+                        )}
+                        </>
                       ) : (
                         <Body dark={dark} 
                             text={defaultDisplayPlaceholder} 
                         />
                       )
                     )}
-                    {autocomplete && (
+                    {autocomplete && !multiSelect && (
                       <input
                           className="dropdown_input"
                           onChange={handleChange}
@@ -186,6 +212,7 @@ const DropdownTrigger = (props: DropdownTriggerProps) => {
                     )}
                   </Flex>
                 </FlexItem>
+                <FlexItem>
                   <Body
                       dark={dark}
                       display="flex"
@@ -201,6 +228,7 @@ const DropdownTrigger = (props: DropdownTriggerProps) => {
                         size="sm"
                     />
                   </Body>
+                </FlexItem>
               </Flex>
             </>
           )
