@@ -77,7 +77,7 @@ const DropdownTrigger = (props: DropdownTriggerProps) => {
   ) : autocomplete ? (
     ""
   ) : placeholder ? (
-    "placeholder"
+    placeholder
   ) : (
     "Select..."
   );
