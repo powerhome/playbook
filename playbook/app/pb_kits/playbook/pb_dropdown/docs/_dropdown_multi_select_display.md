@@ -1,0 +1,1 @@
+By default, the `multiSelect` prop will render selected options as Pills within the Trigger. The `multiSelectDisplay` prop can be used to change this display to `smallPill` or `badge` as shown here. 
