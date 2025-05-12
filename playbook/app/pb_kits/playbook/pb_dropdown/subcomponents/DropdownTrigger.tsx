@@ -45,6 +45,7 @@ const DropdownTrigger = (props: DropdownTriggerProps) => {
   const {
     autocomplete,
     filterItem,
+    handleBackspace,
     handleChange,
     handleWrapperClick,
     inputRef,
@@ -138,7 +139,7 @@ const DropdownTrigger = (props: DropdownTriggerProps) => {
                   paddingX="sm"
                   paddingY="xs"
               >
-                <FlexItem fixedSize={multiSelect ? "95%" : ""}>
+                <FlexItem fixedSize={multiSelect ? "90%" : ""}>
                   <Flex align="center"
                       wrap
                   >
@@ -214,13 +215,27 @@ const DropdownTrigger = (props: DropdownTriggerProps) => {
                 </FlexItem>
                 <FlexItem>
                   <Body
+                      alignItems="center"
                       dark={dark}
                       display="flex"
                       htmlOptions={{
                         onClick: (e: Event) => {e.stopPropagation();handleWrapperClick()}
                       }}
                       key={`${isDropDownClosed ? "chevron-down" : "chevron-up"}`}
-                  >
+                  > 
+                  {
+                    selectedArray.length > 0 && (
+                      <div onClick={(e)=>{e.stopPropagation();handleBackspace()}}>
+                        <Icon
+                            cursor="pointer"
+                            dark={dark}
+                            icon="times"
+                            paddingRight="xs"
+                            size="sm"
+                        />
+                      </div>
+                    )
+                  }
                     <Icon
                         cursor="pointer"
                         dark={dark}
