@@ -253,6 +253,7 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
                     isInputFocused,
                     multiSelect,
                     multiSelectDisplay,
+                    onSelect,
                     optionsWithBlankSelection,
                     selected,
                     setFocusedOptionIndex,
