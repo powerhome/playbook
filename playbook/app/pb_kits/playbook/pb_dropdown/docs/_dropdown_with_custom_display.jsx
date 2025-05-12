@@ -57,8 +57,12 @@ const DropdownWithCustomDisplay = (props) => {
                 size="xs"
             />
             <Body 
-                marginLeft="xxs"
+                marginX="xs"
                 text={selectedOption.label} 
+            />
+            <Badge 
+                text={selectedOption.status} 
+                variant={selectedOption.status == "Offline" ? "neutral" : selectedOption.status == "Online" ? "success" : "warning"}
             />
           </>
         )
