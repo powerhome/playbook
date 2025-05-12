@@ -4,11 +4,14 @@ import Filter from '../../pb_filter/_filter'
 import Select from '../../pb_select/_select'
 import TextInput from '../../pb_text_input/_text_input'
 
+import { Collapsible, useCollapsible, Caption, SectionSeparator } from 'playbook-ui'
+
 const SortingChangeCallback = (sortOptions) => {
   alert(JSON.stringify(sortOptions[0]))
 }
 
 const FilterSide = (props) => {
+  const [isCollapsed, setIsCollapsed] = useCollapsible(true)
   const options = [
     { value: 'USA' },
     { value: 'Canada' },
@@ -24,8 +27,10 @@ const FilterSide = (props) => {
             'Full Name': 'John Wick',
             'City': 'San Francisco',
           }}
+          isCollapsed={isCollapsed}
           marginBottom="xl"
           minWidth="375px"
+          onCollapse={() => setIsCollapsed(!isCollapsed)}
           onSortChange={SortingChangeCallback}
           results={1}
           side
@@ -39,24 +44,39 @@ const FilterSide = (props) => {
           sortValue={[{ name: 'popularity', dir: 'desc' }]}
           {...props}
       >
-      {() => (
-        <form>
-          <TextInput
-              label="Full Name"
-              placeholder="Enter name"
-              {...props}
-          />
-
-          <Select
-              blankSelection="Select One..."
-              label="Territory"
-              name="location"
-              options={options}
-              {...props}
-          />
-        </form>
-      )}
-
+        <Collapsible
+            collapsed={isCollapsed}
+            iconColor='white'
+            padding="none"
+        >
+          <Collapsible.Main padding="sm" >
+              <Caption>{"Full Name"}</Caption>
+          </Collapsible.Main>
+          <Collapsible.Content>
+            <TextInput
+                placeholder="Enter name"
+                {...props}
+            />
+          </Collapsible.Content>
+        </Collapsible>
+        <SectionSeparator />
+        <Collapsible
+            collapsed={isCollapsed}
+            iconColor='white'
+            padding="none"
+        >
+          <Collapsible.Main padding="sm" >
+              <Caption>{"Territory"}</Caption>
+          </Collapsible.Main>
+          <Collapsible.Content>
+            <Select
+                blankSelection="Select One..."
+                name="location"
+                options={options}
+                {...props}
+            />
+          </Collapsible.Content>
+        </Collapsible>
       </Filter>
     </>
   )

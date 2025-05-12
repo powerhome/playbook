@@ -7,6 +7,7 @@ import ResultsCount from './ResultsCount'
 import Flex from '../../pb_flex/_flex'
 import SectionSeparator from '../../pb_section_separator/_section_separator'
 import Card from '../../pb_card/_card'
+import Button from '../../pb_button/_button'
 
 export type FilterSideProps = {
   children?: React.ReactChild[] | React.ReactChild,
@@ -15,6 +16,7 @@ export type FilterSideProps = {
 } & FilterBackgroundProps
 
 const FilterSide = ({
+  onCollapse,
   onSortChange,
   sortOptions,
   sortValue,
@@ -22,6 +24,7 @@ const FilterSide = ({
   results,
   children,
   dark,
+  isCollapsed,
   maxHeight,
   minWidth,
   placement,
@@ -34,7 +37,8 @@ const FilterSide = ({
   >
     <Card.Body padding="sm">
       <Flex
-          justify="start"
+          align="center"
+          justify="between"
           orientation="row"
       >
         <ResultsCount
@@ -42,12 +46,16 @@ const FilterSide = ({
             results={results}
             title
         />
+        <Button
+            onClick={onCollapse}
+            padding="none"
+            text={isCollapsed ? "Expand All" : "Collapse All"}
+            variant='link'
+        />
       </Flex>
     </Card.Body>
     <SectionSeparator dark={dark} />
-    <Card.Body padding="sm">
-      { children({ closePopover: () => ((true)) }) }
-    </Card.Body>
+    { children }
   </FilterBackground>
 )
 
