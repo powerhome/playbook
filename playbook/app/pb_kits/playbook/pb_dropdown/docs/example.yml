@@ -33,6 +33,7 @@ examples:
   - dropdown_with_custom_padding: Custom Option Padding
   - dropdown_error: Dropdown with Error
   - dropdown_default_value: Default Value
+  - dropdown_multi_select_with_default: Multi Select Default Value
   - dropdown_blank_selection: Blank Selection
   - dropdown_clear_selection: Clear Selection
   - dropdown_separators_hidden: Separators Hidden
