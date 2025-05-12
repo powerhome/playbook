@@ -51,7 +51,7 @@ const DropdownWithCustomDisplay = (props) => {
       <>
       {
         selectedOption && (
-          <>
+          <Flex align="center">
             <Avatar
                 name={selectedOption.label}
                 size="xs"
@@ -64,7 +64,7 @@ const DropdownWithCustomDisplay = (props) => {
                 text={selectedOption.status} 
                 variant={selectedOption.status == "Offline" ? "neutral" : selectedOption.status == "Online" ? "success" : "warning"}
             />
-          </>
+          </Flex>
         )
       }
     </>
