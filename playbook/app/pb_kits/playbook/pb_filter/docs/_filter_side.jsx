@@ -36,7 +36,7 @@ const FilterSide = (props) => {
           isCollapsed={isCollapsed}
           onCollapse={() => setIsCollapsed(!isCollapsed)}
           onSortChange={SortingChangeCallback}
-          results={1}
+          results={116}
           side
           sortOptions={{
             popularity: 'Popularity',
