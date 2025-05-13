@@ -26,7 +26,7 @@ module Playbook
       prop :selectable_rows, type: Playbook::Props::Boolean,
                              default: false
       prop :show_actions_bar, type: Playbook::Props::Boolean,
-                              default: false
+                              default: true
       prop :actions, type: Playbook::Props::Array,
                      default: []
 

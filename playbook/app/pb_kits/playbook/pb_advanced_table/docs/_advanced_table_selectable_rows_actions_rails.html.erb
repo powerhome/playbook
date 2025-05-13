@@ -1,6 +1,4 @@
-<%
-# Define column definitions
-column_definitions = [
+<% column_definitions = [
   {
     accessor: "year",
     label: "Year",
@@ -32,15 +30,22 @@ column_definitions = [
   }
 ]
 
-# Define actions for the selection bar
 actions = [
   pb_rails("circle_icon_button", props: {
     icon: "file-csv",
-    variant: "link"
+    variant: "link",
+    id: "export-selected-rows-btn",
+    data: {
+      action_type: "export"
+    }
   }),
   pb_rails("circle_icon_button", props: {
     icon: "trash-alt",
-    variant: "link"
+    variant: "link",
+    id: "delete-selected-rows-btn",
+    data: {
+      action_type: "delete"
+    }
   })
 ]
 %>
@@ -54,3 +59,64 @@ actions = [
   actions: actions,
   show_actions_bar: true
 }) %>
+
+<script>
+  window.handleActionClick = function(actionType) {
+    const tableContainer = document.getElementById('selectable_rows_with_actions');
+    if (!tableContainer) return;
+
+    const checkboxes = tableContainer.querySelectorAll('input[type="checkbox"]:checked');
+
+    const selectedCheckboxes = Array.from(checkboxes).filter(checkbox =>
+      checkbox.id !== 'select-all-rows' &&
+      !checkbox.closest('#select-all-rows')
+    );
+
+    const selectedRowIds = selectedCheckboxes.map(checkbox => checkbox.id);
+
+    if (selectedRowIds.length === 0) {
+      alert('No Selection Made');
+    } else {
+      if (actionType === 'export') {
+        alert(`Row ids ${selectedRowIds.join(', ')} will be exported!`);
+      } else if (actionType === 'delete') {
+        alert(`Row ids ${selectedRowIds.join(', ')} will be deleted!`);
+      }
+    }
+  };
+
+  document.addEventListener('DOMContentLoaded', function() {
+    const exportBtn = document.getElementById('export-selected-rows-btn');
+    const deleteBtn = document.getElementById('delete-selected-rows-btn');
+
+    if (exportBtn) {
+      exportBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        window.handleActionClick('export');
+      });
+    }
+
+    if (deleteBtn) {
+      deleteBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        window.handleActionClick('delete');
+      });
+    }
+
+    const actionBar = document.querySelector('.row-selection-actions-card');
+    if (actionBar) {
+      actionBar.addEventListener('click', function(e) {
+        const exportButton = e.target.closest('#export-selected-rows-btn');
+        const deleteButton = e.target.closest('#delete-selected-rows-btn');
+
+        if (exportButton) {
+          e.preventDefault();
+          window.handleActionClick('export');
+        } else if (deleteButton) {
+          e.preventDefault();
+          window.handleActionClick('delete');
+        }
+      });
+    }
+  });
+</script>
