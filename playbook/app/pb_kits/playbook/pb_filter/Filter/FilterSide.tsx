@@ -7,7 +7,7 @@ import ResultsCount from './ResultsCount'
 import Flex from '../../pb_flex/_flex'
 import SectionSeparator from '../../pb_section_separator/_section_separator'
 import Card from '../../pb_card/_card'
-import Button from '../../pb_button/_button'
+import Caption from '../../pb_caption/_caption'
 
 export type FilterSideProps = {
   children?: React.ReactChild[] | React.ReactChild,
@@ -35,7 +35,10 @@ const FilterSide = ({
       dark={dark}
       {...bgProps}
   >
-    <Card.Body padding="sm">
+    <Card.Body
+        paddingX="sm"
+        paddingY="xs"
+    >
       <Flex
           align="center"
           justify="between"
@@ -46,12 +49,14 @@ const FilterSide = ({
             results={results}
             title
         />
-        <Button
-            onClick={onCollapse}
-            padding="none"
-            text={isCollapsed ? "Expand All" : "Collapse All"}
-            variant='link'
-        />
+        <div onClick={onCollapse}>
+          <Caption
+              color="link"
+              cursor="pointer"
+              size="xs"
+              text={isCollapsed ? "Expand All" : "Collapse All"}
+          />
+        </div>
       </Flex>
     </Card.Body>
     <SectionSeparator dark={dark} />
