@@ -9,71 +9,71 @@ export default class PbAdvancedTable extends PbEnhancedElement {
     return ADVANCED_TABLE_SELECTOR;
   }
 
+  // Track selections per table
+  static tableData = new Map();
+
+  // Get or initialize data for a specific table
+  static getTableData(tableId) {
+    if (!PbAdvancedTable.tableData.has(tableId)) {
+      PbAdvancedTable.tableData.set(tableId, {
+        selectedRows: new Set(),
+        expandedRows: new Set(),
+        initialized: false
+      });
+    }
+    return PbAdvancedTable.tableData.get(tableId);
+  }
+
+  // Get the table container from any element within the table
+  getTableContainer() {
+    return this.element.closest(".pb_advanced_table");
+  }
+
+  // Get table ID, create one if needed
+  getTableId() {
+    const tableContainer = this.getTableContainer();
+    if (!tableContainer) return null;
+
+    // Generate ID if none exists
+    if (!tableContainer.id) {
+      tableContainer.id = `table-${Date.now()}-${Math.floor(Math.random() * 10000)}`;
+    }
+
+    return tableContainer.id;
+  }
+
+  // Update the data attribute with selected rows
   updateTableSelectedRowsAttribute() {
-    const mainTable = this.element.closest(".pb_advanced_table");
-    mainTable.dataset.selectedRows = JSON.stringify(Array.from(PbAdvancedTable.selectedRows));
+    const tableContainer = this.getTableContainer();
+    const tableId = this.getTableId();
+    if (!tableId) return;
+
+    const tableData = PbAdvancedTable.getTableData(tableId);
+    const selectedRowsArray = Array.from(tableData.selectedRows);
+
+    // Update data attribute
+    tableContainer.dataset.selectedRows = JSON.stringify(selectedRowsArray);
+
+    // Update action bar visibility
+    this.updateActionBarVisibility(tableContainer, tableData.selectedRows);
   }
 
-  // Check if the row is expanded or collapsed
-  isRowExpanded(rowEl) {
-    const closeIcon = rowEl.querySelector(UP_ARROW_SELECTOR);
-    return closeIcon?.style.display === "none" || !closeIcon;
-  }
+  // Update action bar visibility based on selection state
+  updateActionBarVisibility(tableContainer, selectedRows) {
+    if (!tableContainer) return;
 
-  // Direct ActionBar Methods to match React implementation
-  showActionBar(actionBarElement) {
-    if (!actionBarElement) return;
-    
-    // Precisely match the React implementation
-    actionBarElement.style.display = "block";
-    const height = actionBarElement.scrollHeight + "px";
-    actionBarElement.style.height = height;
-    actionBarElement.classList.add("is-visible");
-    actionBarElement.classList.add("show-action-card");
-    actionBarElement.style.overflow = "hidden";
-    
-    window.setTimeout(() => {
-      if (actionBarElement.classList.contains("is-visible")) {
-        actionBarElement.style.height = "";
-        actionBarElement.style.overflow = "visible";
-      }
-    }, 300);
-  }
-  
-  hideActionBar(actionBarElement) {
-    if (!actionBarElement) return;
-    
-    // Precisely match the React implementation
-    actionBarElement.style.height = actionBarElement.scrollHeight + "px";
-    actionBarElement.offsetHeight; // Trigger reflow
-    
-    window.setTimeout(() => {
-      actionBarElement.style.height = "0";
-      actionBarElement.style.overflow = "hidden";
-    }, 10);
-    
-    window.setTimeout(() => {
-      actionBarElement.classList.remove("is-visible");
-      actionBarElement.classList.remove("show-action-card");
-    }, 300);
-  }
-  
-  updateActionBarVisibility() {
-    const mainTable = this.element.closest(".pb_advanced_table");
-    if (!mainTable) return;
-    
-    const actionBar = mainTable.querySelector(".row-selection-actions-card");
+    const actionBar = tableContainer.querySelector(".row-selection-actions-card");
     if (!actionBar) return;
-    
-    const selectedCount = PbAdvancedTable.selectedRows.size;
-    
-    // Update selected count display
+
+    const selectedCount = selectedRows.size;
+
+    // Update count display
     const countElement = actionBar.querySelector(".selected-count");
     if (countElement) {
       countElement.textContent = `${selectedCount} Selected`;
     }
-    
-    // Show/hide action bar based on selection
+
+    // Show/hide based on selection
     if (selectedCount > 0) {
       this.showActionBar(actionBar);
     } else {
@@ -81,12 +81,70 @@ export default class PbAdvancedTable extends PbEnhancedElement {
     }
   }
 
+  // Show action bar with animation
+  showActionBar(actionBar) {
+    if (!actionBar) return;
+
+    // Force display block
+    actionBar.style.display = "block";
+
+    // Get the height before animation
+    const height = actionBar.scrollHeight + "px";
+
+    // Force all style changes directly
+    actionBar.style.height = height;
+    actionBar.classList.add("is-visible");
+    actionBar.classList.add("show-action-card");
+    actionBar.style.overflow = "hidden";
+
+    // Complete animation after delay
+    window.setTimeout(() => {
+      if (actionBar.classList.contains("is-visible")) {
+        actionBar.style.height = "";
+        actionBar.style.overflow = "visible";
+      }
+    }, 300);
+  }
+
+  // Hide action bar with animation
+  hideActionBar(actionBar) {
+    if (!actionBar) return;
+
+    // Set exact height before animation
+    actionBar.style.height = actionBar.scrollHeight + "px";
+    actionBar.offsetHeight; // Trigger reflow
+
+    // Animate to height 0
+    window.setTimeout(() => {
+      actionBar.style.height = "0";
+      actionBar.style.overflow = "hidden";
+    }, 10);
+
+    // Remove visibility classes after animation
+    window.setTimeout(() => {
+      actionBar.classList.remove("is-visible");
+      actionBar.classList.remove("show-action-card");
+    }, 300);
+  }
+
+  // Check if row is expanded
+  isRowExpanded(rowEl) {
+    const closeIcon = rowEl.querySelector(UP_ARROW_SELECTOR);
+    return closeIcon?.style.display === "none" || !closeIcon;
+  }
+
+  // Update parent checkboxes based on child selections
   updateParentCheckboxes(checkbox) {
     const rowEl = checkbox.closest("tr");
     if (!rowEl) return;
 
     const table = rowEl.closest("table");
     if (!table) return;
+
+    const tableId = this.getTableId();
+    if (!tableId) return;
+
+    const tableData = PbAdvancedTable.getTableData(tableId);
 
     const contentTrail = rowEl.dataset.advancedTableContent;
     if (!contentTrail) return;
@@ -130,15 +188,15 @@ export default class PbAdvancedTable extends PbEnhancedElement {
 
       const parentCheckboxId = parentCheckbox.id;
       if (allChildrenChecked) {
-        PbAdvancedTable.selectedRows.add(parentCheckboxId);
+        tableData.selectedRows.add(parentCheckboxId);
         parentRow.classList.add("bg-row-selection");
         parentRow.classList.remove("bg-white", "bg-silver");
       } else {
-        PbAdvancedTable.selectedRows.delete(parentCheckboxId);
+        tableData.selectedRows.delete(parentCheckboxId);
       }
       if (!allChildrenChecked) {
         parentRow.classList.remove("bg-row-selection");
-  
+
         if (this.isRowExpanded(parentRow)) {
           parentRow.classList.remove("bg-silver");
           parentRow.classList.add("bg-white");
@@ -150,18 +208,24 @@ export default class PbAdvancedTable extends PbEnhancedElement {
     });
   }
 
+  // Handle row checkbox click
   handleCheckboxClick(event) {
     const checkbox = event.currentTarget;
     const rowId = checkbox.id;
     const isChecked = checkbox.checked;
     const rowEl = checkbox.closest("tr");
 
+    const tableId = this.getTableId();
+    if (!tableId) return;
+
+    const tableData = PbAdvancedTable.getTableData(tableId);
+
     if (isChecked) {
-      PbAdvancedTable.selectedRows.add(rowId);
+      tableData.selectedRows.add(rowId);
       rowEl.classList.add("bg-row-selection");
       rowEl.classList.remove("bg-white", "bg-silver");
     } else {
-      PbAdvancedTable.selectedRows.delete(rowId);
+      tableData.selectedRows.delete(rowId);
     }
      // Update background color on row
     if (!isChecked) {
@@ -175,6 +239,7 @@ export default class PbAdvancedTable extends PbEnhancedElement {
         rowEl.classList.add("bg-silver");
       }
     }
+
     if (rowEl) {
       const table = rowEl.closest("table");
       const rowContent = rowEl.dataset.advancedTableContent;
@@ -196,11 +261,11 @@ export default class PbAdvancedTable extends PbEnhancedElement {
           const childRowId = childCheckbox.id;
           const childRowEl = childCheckbox.closest("tr");
           if (isChecked) {
-            PbAdvancedTable.selectedRows.add(childRowId);
+            tableData.selectedRows.add(childRowId);
             childRowEl?.classList.add("bg-row-selection");
             childRowEl?.classList.remove("bg-white", "bg-silver");
           } else {
-            PbAdvancedTable.selectedRows.delete(childRowId);
+            tableData.selectedRows.delete(childRowId);
           }
           if (!isChecked) {
             childRowEl?.classList.remove("bg-row-selection");
@@ -220,9 +285,6 @@ export default class PbAdvancedTable extends PbEnhancedElement {
     this.updateParentCheckboxes(checkbox);
 
     this.updateTableSelectedRowsAttribute();
-    
-    // Explicitly update the action bar visibility
-    this.updateActionBarVisibility();
 
     const table = checkbox.closest("table");
     const selectAllCheckbox = table.querySelector("#select-all-rows");
@@ -245,55 +307,121 @@ export default class PbAdvancedTable extends PbEnhancedElement {
     return table.querySelectorAll(`[data-row-parent="${this.element.id}"]`);
   }
 
-  static expandedRows = new Set();
-  static selectedRows = new Set();
   static isCollapsing = false;
 
   connect() {
+    // Get table container and generate ID if needed
+    const tableContainer = this.getTableContainer();
+    if (!tableContainer) return;
+
+    const tableId = this.getTableId();
+    if (!tableId) return;
+
+    // Get or initialize table data
+    const tableData = PbAdvancedTable.getTableData(tableId);
+
+    // Handle toggle click
     this.element.addEventListener("click", () => {
       if (!PbAdvancedTable.isCollapsing) {
         const isExpanded =
           this.element.querySelector(UP_ARROW_SELECTOR).style.display ===
           "inline-block";
         if (!isExpanded) {
-          PbAdvancedTable.expandedRows.add(this.element.id);
+          tableData.expandedRows.add(this.element.id);
         } else {
-          PbAdvancedTable.expandedRows.delete(this.element.id);
+          tableData.expandedRows.delete(this.element.id);
         }
-        this.toggleElement(this.target);
+        this.toggleElement(this.target, tableData.expandedRows);
       }
     });
-  
+
     this.hideCloseIcon();
-  
+
     const table = this.element.closest("table");
-  
-    // Prevent duplicate initialization
-    if (table.dataset.pbAdvancedTableInitialized) return;
-    table.dataset.pbAdvancedTableInitialized = "true";
-  
-    // Initialize the action bar for this table
-    const mainTable = table.closest(".pb_advanced_table");
-    if (mainTable) {
-      const actionBar = mainTable.querySelector(".row-selection-actions-card");
-      if (actionBar) {
-        // Initial setup - hide action bar
-        actionBar.style.height = "0";
-        actionBar.style.overflow = "hidden";
-        actionBar.classList.remove("is-visible", "show-action-card");
+    if (!table) return;
+
+    // Skip if this table is already initialized
+    if (tableData.initialized) return;
+
+    // Initialize the action bar
+    const actionBar = tableContainer.querySelector(".row-selection-actions-card");
+    if (actionBar) {
+      // Direct style application
+      Object.assign(actionBar.style, {
+        height: '0px',
+        overflow: 'hidden',
+        display: 'block',
+        opacity: '0'
+      });
+
+      // Remove visibility classes
+      actionBar.classList.remove("is-visible", "show-action-card");
+
+      // Add CSS rules
+      const styleId = `action-bar-styles-${tableId}`;
+      let styleTag = document.getElementById(styleId);
+      if (!styleTag) {
+        styleTag = document.createElement('style');
+        styleTag.id = styleId;
+        document.head.appendChild(styleTag);
       }
+
+      styleTag.textContent = `
+        #${tableId} .row-selection-actions-card.is-visible.show-action-card {
+          height: auto !important;
+          overflow: visible !important;
+          display: block !important;
+          opacity: 1 !important;
+          transition: height 0.3s ease, opacity 0.3s ease !important;
+        }
+      `;
+
+      // Direct DOM event listeners for checkboxes
+      const checkboxes = table.querySelectorAll('input[type="checkbox"]');
+      checkboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', function() {
+          // Count selected checkboxes
+          const selectedCount = Array.from(checkboxes).filter(cb => cb.checked).length;
+
+          if (selectedCount > 0) {
+            // Show action bar directly
+            actionBar.style.height = 'auto';
+            actionBar.style.overflow = 'visible';
+            actionBar.style.opacity = '1';
+            actionBar.classList.add("is-visible", "show-action-card");
+
+            // Update the count
+            const countElement = actionBar.querySelector(".selected-count");
+            if (countElement) {
+              countElement.textContent = `${selectedCount} Selected`;
+            }
+          } else {
+            // Hide action bar directly
+            actionBar.style.height = '0px';
+            actionBar.style.overflow = 'hidden';
+            actionBar.style.opacity = '0';
+            actionBar.classList.remove("is-visible", "show-action-card");
+          }
+        });
+      });
     }
-  
-    // Bind checkbox change handlers for all row checkboxes
+
+    // Bind checkbox change handlers
     const checkboxLabels = table.querySelectorAll("label[data-row-id]");
     checkboxLabels.forEach((label) => {
       const checkbox = label.querySelector("input[type='checkbox']");
       if (!checkbox) return;
-      checkbox.addEventListener("change", (event) => {
+
+      // Remove any existing event listeners
+      const newCheckbox = checkbox.cloneNode(true);
+      checkbox.parentNode.replaceChild(newCheckbox, checkbox);
+
+      // Add our event listener
+      newCheckbox.addEventListener("change", (event) => {
         this.handleCheckboxClick(event);
       });
     });
-  
+
     // Bind nested row expansion logic
     const nestedButtons = table.querySelectorAll("[data-advanced-table]");
     nestedButtons.forEach((button) => {
@@ -301,48 +429,53 @@ export default class PbAdvancedTable extends PbEnhancedElement {
         const isExpanded =
           button.querySelector(UP_ARROW_SELECTOR).style.display === "inline-block";
         if (isExpanded) {
-          PbAdvancedTable.expandedRows.add(button.id);
+          tableData.expandedRows.add(button.id);
         } else {
-          PbAdvancedTable.expandedRows.delete(button.id);
+          tableData.expandedRows.delete(button.id);
         }
       });
     });
-  
-    // Bind select-all logic for this table
+
+    // Bind select-all logic
     const selectAllCheckbox = table.querySelector("#select-all-rows");
     if (selectAllCheckbox) {
-      selectAllCheckbox.addEventListener("change", () => {
-        const checkboxInput = selectAllCheckbox.querySelector('input[type="checkbox"]');
+      // Remove any existing event listeners
+      const newSelectAllCheckbox = selectAllCheckbox.cloneNode(true);
+      selectAllCheckbox.parentNode.replaceChild(newSelectAllCheckbox, selectAllCheckbox);
+
+      // Add our event listener
+      newSelectAllCheckbox.addEventListener("change", () => {
+        const checkboxInput = newSelectAllCheckbox.querySelector('input[type="checkbox"]');
         const checkAll = checkboxInput.checked;
-  
+
         const checkboxes = Array.from(
           table.querySelectorAll("label[data-row-id] input[type='checkbox']")
         );
-  
+
         checkboxes.forEach((cb) => {
           cb.checked = checkAll;
           const rowId = cb.id;
           const rowEl = cb.closest("tr");
 
           if (checkAll) {
-            PbAdvancedTable.selectedRows.add(rowId);
+            tableData.selectedRows.add(rowId);
             rowEl?.classList.add("bg-row-selection");
             rowEl?.classList.remove("bg-white", "bg-silver");
           } else {
-            PbAdvancedTable.selectedRows.delete(rowId);
+            tableData.selectedRows.delete(rowId);
             rowEl?.classList.remove("bg-row-selection");
             rowEl?.classList.add("bg-white");
           }
         });
-  
+
         checkboxes.forEach((cb) => this.updateParentCheckboxes(cb));
-  
+
         this.updateTableSelectedRowsAttribute();
-        
-        // Explicitly update the action bar visibility
-        this.updateActionBarVisibility();
       });
     }
+
+    // Mark table as initialized
+    tableData.initialized = true;
   }
 
   hideCloseIcon() {
@@ -350,7 +483,7 @@ export default class PbAdvancedTable extends PbEnhancedElement {
     closeIcon.style.display = "none";
   }
 
-  showElement(elements) {
+  showElement(elements, expandedRows) {
     elements.forEach((elem) => {
       elem.style.display = "table-row";
       elem.classList.add("is-visible");
@@ -373,7 +506,7 @@ export default class PbAdvancedTable extends PbEnhancedElement {
           (id) => `${childRow.id}_${id}`
         );
         const allAncestorsExpanded = prefixedAncestorIds.every((id) =>
-          PbAdvancedTable.expandedRows.has(id)
+          expandedRows.has(id)
         );
 
         const checkIfParentIsExpanded = () => {
@@ -382,7 +515,7 @@ export default class PbAdvancedTable extends PbEnhancedElement {
             const isParentVisible =
               childRow.previousElementSibling.classList.contains("is-visible");
             if (parentRowId) {
-              const isInSet = PbAdvancedTable.expandedRows.has(parentRowId);
+              const isInSet = expandedRows.has(parentRowId);
               if (isInSet && isParentVisible) {
                 return true;
               }
@@ -402,14 +535,14 @@ export default class PbAdvancedTable extends PbEnhancedElement {
     });
   }
 
-  hideElement(elements) {
+  hideElement(elements, expandedRows) {
     elements.forEach((elem) => {
       elem.style.display = "none";
       elem.classList.remove("is-visible");
 
       // Remove the row ID from expandedRows when this row is hidden
-      if (PbAdvancedTable.expandedRows.has(elem.id)) {
-        PbAdvancedTable.expandedRows.delete(elem.id);
+      if (expandedRows.has(elem.id)) {
+        expandedRows.delete(elem.id);
       }
 
       const childrenArray = elem.dataset.advancedTableContent.split("-");
@@ -430,12 +563,12 @@ export default class PbAdvancedTable extends PbEnhancedElement {
     });
   }
 
-  toggleElement(elements) {
+  toggleElement(elements, expandedRows) {
     if (!elements.length) return;
 
     const isVisible = elements[0].classList.contains("is-visible");
 
-    isVisible ? this.hideElement(elements) : this.showElement(elements);
+    isVisible ? this.hideElement(elements, expandedRows) : this.showElement(elements, expandedRows);
     isVisible ? this.displayDownArrow() : this.displayUpArrow();
 
     const row = this.element.closest("tr");
@@ -458,6 +591,12 @@ export default class PbAdvancedTable extends PbEnhancedElement {
   }
 
   static handleToggleAllHeaders(element) {
+    // Get table ID
+    const tableContainer = element.closest(".pb_advanced_table");
+    if (!tableContainer || !tableContainer.id) return;
+
+    const tableData = PbAdvancedTable.getTableData(tableContainer.id);
+
     const table = element.closest(".pb_table");
     const firstLevelButtons = table.querySelectorAll(
       ".pb_advanced_table_body > .pb_table_tr[data-row-depth='0'] [data-advanced-table]"
@@ -471,17 +610,17 @@ export default class PbAdvancedTable extends PbEnhancedElement {
     if (allExpanded) {
       firstLevelButtons.forEach((button) => {
         button.click();
-        PbAdvancedTable.expandedRows.delete(button.id);
+        tableData.expandedRows.delete(button.id);
       });
     } else {
       firstLevelButtons.forEach((button) => {
-        if (!PbAdvancedTable.expandedRows.has(button.id)) {
+        if (!tableData.expandedRows.has(button.id)) {
           button.click();
-          PbAdvancedTable.expandedRows.add(button.id);
+          tableData.expandedRows.add(button.id);
         }
       });
 
-      PbAdvancedTable.expandedRows.forEach((rowId) => {
+      tableData.expandedRows.forEach((rowId) => {
         const nestedButton = table.querySelector(
           `[data-advanced-table][id="${rowId}"]`
         );
@@ -493,6 +632,12 @@ export default class PbAdvancedTable extends PbEnhancedElement {
   }
 
   static handleToggleAllSubRows(element, rowDepth) {
+    // Get table ID
+    const tableContainer = element.closest(".pb_advanced_table");
+    if (!tableContainer || !tableContainer.id) return;
+
+    const tableData = PbAdvancedTable.getTableData(tableContainer.id);
+
     const table = element.closest(".pb_table");
     const parentRow = element.closest("tr");
     if (!parentRow) {
@@ -512,13 +657,13 @@ export default class PbAdvancedTable extends PbEnhancedElement {
     if (allExpanded) {
       subRowButtons.forEach((button) => {
         button.click();
-        PbAdvancedTable.expandedRows.delete(button.id);
+        tableData.expandedRows.delete(button.id);
       });
     } else {
       subRowButtons.forEach((button) => {
-        if (!PbAdvancedTable.expandedRows.has(button.id)) {
+        if (!tableData.expandedRows.has(button.id)) {
           button.click();
-          PbAdvancedTable.expandedRows.add(button.id);
+          tableData.expandedRows.add(button.id);
         }
       });
     }
@@ -527,12 +672,61 @@ export default class PbAdvancedTable extends PbEnhancedElement {
 
 // Initialize on page load
 document.addEventListener('DOMContentLoaded', () => {
-  // Ensure all action bars start hidden
-  const actionBars = document.querySelectorAll('.row-selection-actions-card');
-  actionBars.forEach(actionBar => {
-    // Start hidden
-    actionBar.style.height = "0";
-    actionBar.style.overflow = "hidden";
+  const advancedTables = document.querySelectorAll('.pb_advanced_table');
+
+  // Initialize each table and its action bar
+  advancedTables.forEach(table => {
+    // Generate ID if needed
+    if (!table.id) {
+      table.id = `table-${Date.now()}-${Math.floor(Math.random() * 10000)}`;
+    }
+
+    // Initialize table data
+    PbAdvancedTable.getTableData(table.id);
+
+    // Initialize action bar
+    const actionBar = table.querySelector('.row-selection-actions-card');
+    if (actionBar) {
+      // Direct styling override
+      Object.assign(actionBar.style, {
+        height: '0px',
+        overflow: 'hidden',
+        display: 'block',
+        opacity: '0'
+      });
+
+      // Remove any visibility classes
+      actionBar.classList.remove("is-visible", "show-action-card");
+
+      // Direct DOM manipulation for checkboxes
+      const checkboxes = table.querySelectorAll('input[type="checkbox"]');
+      checkboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', function() {
+          // Count selected checkboxes
+          const selectedCount = Array.from(checkboxes).filter(cb => cb.checked).length;
+
+          if (selectedCount > 0) {
+            // Show action bar directly
+            actionBar.style.height = 'auto';
+            actionBar.style.overflow = 'visible';
+            actionBar.style.opacity = '1';
+            actionBar.classList.add("is-visible", "show-action-card");
+
+            // Update the count
+            const countElement = actionBar.querySelector(".selected-count");
+            if (countElement) {
+              countElement.textContent = `${selectedCount} Selected`;
+            }
+          } else {
+            // Hide action bar directly
+            actionBar.style.height = '0px';
+            actionBar.style.overflow = 'hidden';
+            actionBar.style.opacity = '0';
+            actionBar.classList.remove("is-visible", "show-action-card");
+          }
+        });
+      });
+    }
   });
 });
 

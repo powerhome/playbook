@@ -1,5 +1,5 @@
 <%= pb_rails("card", props: {
-  border_none: !object.is_visible,
+  border_none: object.is_visible,
   classname: object.classname,
   padding: object.is_visible ? "xs" : "none",
   data: {
@@ -11,9 +11,11 @@
       <span class="selected-count"><%= object.selected_count %> Selected</span>
     <% end %>
     <%= pb_rails("flex/flex_item") do %>
-      <% if object.actions.present? %>
-        <% object.actions.each do |action| %>
-          <%= action %>
+      <%= pb_rails("flex") do %>
+        <% if object.actions.present? %>
+          <% object.actions.each do |action| %>
+            <%= action %>
+          <% end %>
         <% end %>
       <% end %>
     <% end %>
