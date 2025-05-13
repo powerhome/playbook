@@ -15,11 +15,70 @@ export default class PbAdvancedTable extends PbEnhancedElement {
   }
 
   // Check if the row is expanded or collapsed
-  // This is used to determine the background color of the row
-  // when the checkbox is checked or unchecked
   isRowExpanded(rowEl) {
     const closeIcon = rowEl.querySelector(UP_ARROW_SELECTOR);
     return closeIcon?.style.display === "none" || !closeIcon;
+  }
+
+  // Direct ActionBar Methods to match React implementation
+  showActionBar(actionBarElement) {
+    if (!actionBarElement) return;
+    
+    // Precisely match the React implementation
+    actionBarElement.style.display = "block";
+    const height = actionBarElement.scrollHeight + "px";
+    actionBarElement.style.height = height;
+    actionBarElement.classList.add("is-visible");
+    actionBarElement.classList.add("show-action-card");
+    actionBarElement.style.overflow = "hidden";
+    
+    window.setTimeout(() => {
+      if (actionBarElement.classList.contains("is-visible")) {
+        actionBarElement.style.height = "";
+        actionBarElement.style.overflow = "visible";
+      }
+    }, 300);
+  }
+  
+  hideActionBar(actionBarElement) {
+    if (!actionBarElement) return;
+    
+    // Precisely match the React implementation
+    actionBarElement.style.height = actionBarElement.scrollHeight + "px";
+    actionBarElement.offsetHeight; // Trigger reflow
+    
+    window.setTimeout(() => {
+      actionBarElement.style.height = "0";
+      actionBarElement.style.overflow = "hidden";
+    }, 10);
+    
+    window.setTimeout(() => {
+      actionBarElement.classList.remove("is-visible");
+      actionBarElement.classList.remove("show-action-card");
+    }, 300);
+  }
+  
+  updateActionBarVisibility() {
+    const mainTable = this.element.closest(".pb_advanced_table");
+    if (!mainTable) return;
+    
+    const actionBar = mainTable.querySelector(".row-selection-actions-card");
+    if (!actionBar) return;
+    
+    const selectedCount = PbAdvancedTable.selectedRows.size;
+    
+    // Update selected count display
+    const countElement = actionBar.querySelector(".selected-count");
+    if (countElement) {
+      countElement.textContent = `${selectedCount} Selected`;
+    }
+    
+    // Show/hide action bar based on selection
+    if (selectedCount > 0) {
+      this.showActionBar(actionBar);
+    } else {
+      this.hideActionBar(actionBar);
+    }
   }
 
   updateParentCheckboxes(checkbox) {
@@ -161,6 +220,9 @@ export default class PbAdvancedTable extends PbEnhancedElement {
     this.updateParentCheckboxes(checkbox);
 
     this.updateTableSelectedRowsAttribute();
+    
+    // Explicitly update the action bar visibility
+    this.updateActionBarVisibility();
 
     const table = checkbox.closest("table");
     const selectAllCheckbox = table.querySelector("#select-all-rows");
@@ -209,6 +271,18 @@ export default class PbAdvancedTable extends PbEnhancedElement {
     // Prevent duplicate initialization
     if (table.dataset.pbAdvancedTableInitialized) return;
     table.dataset.pbAdvancedTableInitialized = "true";
+  
+    // Initialize the action bar for this table
+    const mainTable = table.closest(".pb_advanced_table");
+    if (mainTable) {
+      const actionBar = mainTable.querySelector(".row-selection-actions-card");
+      if (actionBar) {
+        // Initial setup - hide action bar
+        actionBar.style.height = "0";
+        actionBar.style.overflow = "hidden";
+        actionBar.classList.remove("is-visible", "show-action-card");
+      }
+    }
   
     // Bind checkbox change handlers for all row checkboxes
     const checkboxLabels = table.querySelectorAll("label[data-row-id]");
@@ -264,10 +338,12 @@ export default class PbAdvancedTable extends PbEnhancedElement {
         checkboxes.forEach((cb) => this.updateParentCheckboxes(cb));
   
         this.updateTableSelectedRowsAttribute();
+        
+        // Explicitly update the action bar visibility
+        this.updateActionBarVisibility();
       });
     }
   }
-  
 
   hideCloseIcon() {
     const closeIcon = this.element.querySelector(UP_ARROW_SELECTOR);
@@ -448,6 +524,17 @@ export default class PbAdvancedTable extends PbEnhancedElement {
     }
   }
 }
+
+// Initialize on page load
+document.addEventListener('DOMContentLoaded', () => {
+  // Ensure all action bars start hidden
+  const actionBars = document.querySelectorAll('.row-selection-actions-card');
+  actionBars.forEach(actionBar => {
+    // Start hidden
+    actionBar.style.height = "0";
+    actionBar.style.overflow = "hidden";
+  });
+});
 
 window.expandAllRows = (element) => {
   PbAdvancedTable.handleToggleAllHeaders(element);
