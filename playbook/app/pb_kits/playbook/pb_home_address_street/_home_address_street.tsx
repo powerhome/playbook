@@ -83,6 +83,9 @@ const HomeAddressStreet = (props: HomeAddressStreetProps): React.ReactElement =>
 
   const uppercaseState = state?.toUpperCase() ?? ''
 
+  const fields = [address, addressCont, city, homeId, homeUrl, houseStyle, state, territory, zipcode]
+  const hasAllEmptyProps = fields.every(field => field === undefined || field === null || field === '')
+
   return (
     <div
         className={classes(className, dark)}
@@ -90,7 +93,8 @@ const HomeAddressStreet = (props: HomeAddressStreetProps): React.ReactElement =>
         {...dataProps}
         {...htmlProps}
     >
-      {emphasis == 'street' &&
+      {hasAllEmptyProps && '--'}
+      {emphasis == 'street' && !hasAllEmptyProps &&
         <div>
           <Title
               className="pb_home_address_street_address"
@@ -111,7 +115,7 @@ const HomeAddressStreet = (props: HomeAddressStreetProps): React.ReactElement =>
           </Body>
         </div>
       }
-      {emphasis == 'city' &&
+      {emphasis == 'city' && !hasAllEmptyProps &&
         <div>
           <Body color="light">
             {joinPresent([formatStreetAdr(address), houseStyle], ' · ')}
@@ -135,7 +139,7 @@ const HomeAddressStreet = (props: HomeAddressStreetProps): React.ReactElement =>
           </div>
         </div>
       }
-      {emphasis == 'none' &&
+      {emphasis == 'none' && !hasAllEmptyProps &&
         <div>
           <Body dark={dark}>
             {joinPresent([formatStreetAdr(address), houseStyle], ' · ')}
