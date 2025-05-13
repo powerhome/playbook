@@ -81,6 +81,8 @@ const HomeAddressStreet = (props: HomeAddressStreetProps): React.ReactElement =>
 
   const formatStreetAdr = (address: string): string => preserveCase ? address : titleize(address)
 
+  const uppercaseState = state?.toUpperCase() ?? ''
+
   return (
     <div
         className={classes(className, dark)}
@@ -105,7 +107,7 @@ const HomeAddressStreet = (props: HomeAddressStreetProps): React.ReactElement =>
             {titleize(addressCont)}
           </Title>
           <Body color="light">
-            {`${titleize(city)}, ${state.toUpperCase()} ${zipcode}`}
+            {`${titleize(city)}, ${uppercaseState} ${zipcode}`}
           </Body>
         </div>
       }
@@ -122,7 +124,7 @@ const HomeAddressStreet = (props: HomeAddressStreetProps): React.ReactElement =>
                 size={4}
                 tag="span"
             >
-              {`${titleize(city)}, ${state.toUpperCase()}`}
+              {`${titleize(city)}, ${uppercaseState}`}
             </Title>
             <Body
                 color="light"
@@ -144,7 +146,7 @@ const HomeAddressStreet = (props: HomeAddressStreetProps): React.ReactElement =>
                 color="light"
                 dark={dark}
               >
-            {`${titleize(city)}, ${state.toUpperCase()} ${zipcode}`}
+            {`${titleize(city)}, ${uppercaseState} ${zipcode}`}
           </Body>
           </div>
         </div>
