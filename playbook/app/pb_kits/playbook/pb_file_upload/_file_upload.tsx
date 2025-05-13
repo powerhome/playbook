@@ -22,6 +22,7 @@ type FileUploadProps = {
   maxSize?: number,
   onFilesAccepted: Callback<File, File>,
   onFilesRejected: (error: string, files: readonly FileRejection[]) => void,
+  error?: string,
 }
 
 const getFormattedFileSize = (fileSize: number): string => {
@@ -36,6 +37,7 @@ const FileUpload = (props: FileUploadProps): React.ReactElement => {
     customMessage,
     dark = false,
     data = {},
+    error,
     htmlOptions = {},
     maxSize,
     onFilesAccepted = noop,
@@ -100,7 +102,7 @@ const FileUpload = (props: FileUploadProps): React.ReactElement => {
 
   return (
     <div
-        className={classnames(buildCss('pb_file_upload_kit'), globalProps(props), className)}
+        className={classnames(buildCss('pb_file_upload_kit'), { 'error': error }, globalProps(props), className)}
         {...dataProps}
         {...htmlProps}
         {...getRootProps()}
@@ -118,6 +120,14 @@ const FileUpload = (props: FileUploadProps): React.ReactElement => {
           }
         </Body>
       </Card>
+      {error && (
+        <Body
+            dark={dark}
+            marginTop="xxs"
+            status="negative"
+            text={error}
+        />
+      )}
     </div>
   )
 }
