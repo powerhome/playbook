@@ -52,7 +52,10 @@ const FilterSide = (props) => {
             iconColor='white'
             padding="none"
         >
-          <Collapsible.Main padding="sm" >
+          <Collapsible.Main
+              paddingX="sm"
+              paddingY="xs"
+          >
               <Caption>{"Full Name"}</Caption>
           </Collapsible.Main>
           <Collapsible.Content>
@@ -70,7 +73,10 @@ const FilterSide = (props) => {
             iconColor='white'
             padding="none"
         >
-          <Collapsible.Main padding="sm" >
+          <Collapsible.Main
+              paddingX="sm"
+              paddingY="xs"
+          >
               <Caption>{"Territory"}</Caption>
           </Collapsible.Main>
           <Collapsible.Content>
@@ -88,7 +94,10 @@ const FilterSide = (props) => {
             iconColor='white'
             padding="none"
         >
-          <Collapsible.Main padding="sm" >
+          <Collapsible.Main
+              paddingX="sm"
+              paddingY="xs"
+          >
               <Caption>{"Products"}</Caption>
           </Collapsible.Main>
           <Collapsible.Content>
@@ -99,7 +108,6 @@ const FilterSide = (props) => {
                   value="1"
               />
               <SelectableList.Item
-                  checked
                   label="Windows"
                   name="checkbox-name-2"
                   value="2"
