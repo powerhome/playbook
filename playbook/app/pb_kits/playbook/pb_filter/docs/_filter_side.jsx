@@ -4,7 +4,7 @@ import Filter from '../../pb_filter/_filter'
 import Select from '../../pb_select/_select'
 import TextInput from '../../pb_text_input/_text_input'
 
-import { Collapsible, useCollapsible, Caption, SectionSeparator } from 'playbook-ui'
+import { Collapsible, useCollapsible, Caption, SectionSeparator, SelectableList } from 'playbook-ui'
 
 const SortingChangeCallback = (sortOptions) => {
   alert(JSON.stringify(sortOptions[0]))
@@ -30,6 +30,7 @@ const FilterSide = (props) => {
           filters={{
             'Full Name': 'John Wick',
             'City': 'San Francisco',
+            'Products': ['Doors'],
           }}
           isCollapsed={isCollapsed}
           marginBottom="xl"
@@ -81,6 +82,36 @@ const FilterSide = (props) => {
                 options={options}
                 {...props}
             />
+          </Collapsible.Content>
+        </Collapsible>
+        <SectionSeparator />
+        <Collapsible
+            collapsed={isCollapsed}
+            iconColor='white'
+            padding="none"
+        >
+          <Collapsible.Main padding="sm" >
+              <Caption>{"Products"}</Caption>
+          </Collapsible.Main>
+          <Collapsible.Content>
+            <SelectableList variant="checkbox">
+              <SelectableList.Item
+                  label="Doors"
+                  name="checkbox-name-1"
+                  value="1"
+              />
+              <SelectableList.Item
+                  checked
+                  label="Windows"
+                  name="checkbox-name-2"
+                  value="2"
+              />
+              <SelectableList.Item
+                  label="Siding"
+                  name="checkbox-name-3"
+                  value="3"
+              />
+            </SelectableList>
           </Collapsible.Content>
         </Collapsible>
       </Filter>
