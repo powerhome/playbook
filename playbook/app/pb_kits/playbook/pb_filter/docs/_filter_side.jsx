@@ -58,7 +58,7 @@ const FilterSide = (props) => {
           >
               <Caption>{"Full Name"}</Caption>
           </Collapsible.Main>
-          <Collapsible.Content>
+          <Collapsible.Content paddingX="sm">
             <TextInput
                 onChange={handleUpdateName}
                 placeholder="Enter name"
@@ -79,7 +79,7 @@ const FilterSide = (props) => {
           >
               <Caption>{"Territory"}</Caption>
           </Collapsible.Main>
-          <Collapsible.Content>
+          <Collapsible.Content paddingX="sm">
             <Select
                 blankSelection="Select One..."
                 name="location"
@@ -100,7 +100,7 @@ const FilterSide = (props) => {
           >
               <Caption>{"Products"}</Caption>
           </Collapsible.Main>
-          <Collapsible.Content>
+          <Collapsible.Content paddingX="sm">
             <SelectableList variant="checkbox">
               <SelectableList.Item
                   label="Doors"
