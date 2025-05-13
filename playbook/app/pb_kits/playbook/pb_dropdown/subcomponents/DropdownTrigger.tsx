@@ -169,7 +169,10 @@ const DropdownTrigger = (props: DropdownTriggerProps) => {
                                 toggleDropdown();
                               }}
                               onFocus={() => setIsInputFocused(true)}
-                              onKeyDown={handleKeyDown}
+                              onKeyDown={(e) => {
+                                 handleKeyDown(e);
+                                 e.stopPropagation(); //Fixes issue with keyboard accessibility
+                               }}
                               placeholder={
                                 joinedLabels
                                   ? ""
