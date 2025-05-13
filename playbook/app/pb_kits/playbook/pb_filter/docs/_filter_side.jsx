@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import Filter from '../../pb_filter/_filter'
 import Select from '../../pb_select/_select'
@@ -11,6 +11,10 @@ const SortingChangeCallback = (sortOptions) => {
 }
 
 const FilterSide = (props) => {
+  const [name, setName] = useState('')
+  const handleUpdateName = ({ target }) => {
+    setName(target.value)
+  }
   const [isCollapsed, setIsCollapsed] = useCollapsible(true)
   const options = [
     { value: 'USA' },
@@ -54,7 +58,9 @@ const FilterSide = (props) => {
           </Collapsible.Main>
           <Collapsible.Content>
             <TextInput
+                onChange={handleUpdateName}
                 placeholder="Enter name"
+                value={name}
                 {...props}
             />
           </Collapsible.Content>
