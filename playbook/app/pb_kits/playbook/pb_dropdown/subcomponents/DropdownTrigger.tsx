@@ -72,7 +72,7 @@ const DropdownTrigger = (props: DropdownTriggerProps) => {
   const triggerWrapperClasses = buildCss(
     "dropdown_trigger_wrapper",
     isInputFocused && "focus",
-    !autocomplete && "select_only"
+    !autocomplete && !multiSelect && "select_only"
   );
 
   const selectedArray = Array.isArray(selected)

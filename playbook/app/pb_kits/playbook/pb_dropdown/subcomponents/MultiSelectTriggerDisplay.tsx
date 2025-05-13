@@ -46,6 +46,7 @@ const MultiSelectTriggerDisplay = ({
               key={i}
               marginRight="xs"
               onClick={(e)=>{e.stopPropagation();handleRemoveIconClick(option)}}
+              tabIndex={0}
               text={option.label}
               {...formPillProps}
           />

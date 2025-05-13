@@ -110,6 +110,12 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
     const inputWrapperRef = useRef(null);
     const dropdownContainerRef = useRef(null);
 
+    const selectedArray = Array.isArray(selected)
+    ? selected
+    : selected && Object.keys(selected).length
+    ? [selected]
+    : [];
+
     const { trigger, container, otherChildren } =
         separateChildComponents(children);
 
@@ -141,10 +147,17 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
 
     const blankSelectionOption: GenericObject = blankSelection ? [{ label: blankSelection, value: "" }] : [];
     const optionsWithBlankSelection = blankSelectionOption.concat(options);
-    const filteredOptions = optionsWithBlankSelection?.filter((option: GenericObject) => {
-        const label = typeof option.label === 'string' ? option.label.toLowerCase() : option.label;
-        return String(label).toLowerCase().includes(filterItem.toLowerCase());
-    });
+
+    const availableOptions = useMemo(()=> {
+        if (!multiSelect) return optionsWithBlankSelection;
+        return optionsWithBlankSelection.filter((option: GenericObject) => !selectedArray.some((sel) => sel.label === option.label));
+    }, [optionsWithBlankSelection, selectedArray, multiSelect]);
+    
+    const filteredOptions = useMemo(() => {
+          return availableOptions.filter((opt) =>
+            String(opt.label).toLowerCase().includes(filterItem.toLowerCase())
+          );
+        }, [availableOptions, filterItem]);
 
     // For keyboard accessibility: Set focus within dropdown to selected item if it exists
     useEffect(() => {

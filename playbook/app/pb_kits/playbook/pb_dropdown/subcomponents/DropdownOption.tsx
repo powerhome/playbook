@@ -49,22 +49,24 @@ const DropdownOption = (props: DropdownOptionProps) => {
     selected,
   } = useContext(DropdownContext);
 
-  const isItemMatchingFilter = (option: GenericObject) => {
-    const label = typeof option.label === 'string' ? option.label.toLowerCase() : option.label;
+  const isItemMatchingFilter = (option: GenericObject | undefined) => {
+    const label = typeof option?.label === 'string' ? option.label.toLowerCase() : option?.label;
     return String(label).toLowerCase().includes(filterItem.toLowerCase());
   }
 
-  if (!isItemMatchingFilter(option)) {
+  // When multiSelect, then if an option is selected, remove from dropdown
+  const isSelected = Array.isArray(selected)
+   ? selected.some((item) => item.label === option?.label)
+   : (selected as GenericObject)?.label === option?.label;
+
+  
+  if (!isItemMatchingFilter(option) || (multiSelect && isSelected)) {
     return null;
   }
   const isFocused =
     focusedOptionIndex >= 0 &&
-    filteredOptions[focusedOptionIndex].label === option.label;
+    filteredOptions[focusedOptionIndex].label === option?.label;
   const focusedClass = isFocused && "focused";
-
-  const isSelected = Array.isArray(selected)
-   ? selected.some((item) => item.label === option?.label)
-   : (selected as GenericObject)?.label === option?.label;
 
   const selectedClass = isSelected ? "selected" : "list";
 
@@ -94,14 +96,14 @@ const DropdownOption = (props: DropdownOptionProps) => {
       <ListItem
           cursor="pointer"
           dark={dark}
-          data-name={option.value}
-          key={option.label}
+          data-name={option?.value}
+          key={option?.label}
           padding="none"
       >
           {children ? 
           <div className="dropdown_option_wrapper">{children}</div> :
               <Body dark={dark} 
-                  text={option.label} 
+                  text={option?.label} 
               />
           }
       </ListItem>

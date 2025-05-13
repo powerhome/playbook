@@ -1,9 +1,7 @@
-import React, { useState } from 'react'
+import React from 'react'
 import Dropdown from '../../pb_dropdown/_dropdown'
 
 const DropdownMultiSelect = (props) => {
-
-  const [selectedOption, setSelectedOption] = useState();
 
   const options = [
     {
@@ -44,13 +42,10 @@ const DropdownMultiSelect = (props) => {
     }
   ];  
 
-  console.log('selectedOption', selectedOption)
-
   return (
   <div>
     <Dropdown
         multiSelect
-        onSelect={(selectedItem) => setSelectedOption(selectedItem)}
         options={options}
         {...props}
     />

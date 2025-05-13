@@ -27,6 +27,7 @@ examples:
   - dropdown_with_autocomplete_with_subcomponents: Autocomplete with Subcomponent Structure
   - dropdown_with_label: With Label
   - dropdown_with_custom_options: Custom Options
+  - dropdown_multi_select_with_custom_options: Multi Select with Custom Options
   - dropdown_with_custom_display: Custom Display
   - dropdown_with_custom_trigger: Custom Trigger
   - dropdown_with_search: Custom Trigger Dropdown with Search
