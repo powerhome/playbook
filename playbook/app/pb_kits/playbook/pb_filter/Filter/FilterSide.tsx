@@ -60,7 +60,9 @@ const FilterSide = ({
       </Flex>
     </Card.Body>
     <SectionSeparator dark={dark} />
-    { children }
+    <>
+      { children }
+    </>
   </FilterBackground>
 )
 
