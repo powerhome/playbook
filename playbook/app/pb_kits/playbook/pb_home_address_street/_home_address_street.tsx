@@ -93,7 +93,7 @@ const HomeAddressStreet = (props: HomeAddressStreetProps): React.ReactElement =>
         {...dataProps}
         {...htmlProps}
     >
-      {hasAllEmptyProps && '--'}
+      {hasAllEmptyProps && '—'}
       {emphasis == 'street' && !hasAllEmptyProps &&
         <div>
           <Title
