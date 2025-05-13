@@ -127,7 +127,9 @@ export default class PbAdvancedTable extends PbEnhancedElement {
     }, 300);
   }
 
-  // Check if row is expanded
+  // Check if the row is expanded or collapsed
+  // This is used to determine the background color of the row
+  // when the checkbox is checked or unchecked
   isRowExpanded(rowEl) {
     const closeIcon = rowEl.querySelector(UP_ARROW_SELECTOR);
     return closeIcon?.style.display === "none" || !closeIcon;
