@@ -33,8 +33,6 @@ const FilterSide = (props) => {
             'Products': ['Doors'],
           }}
           isCollapsed={isCollapsed}
-          marginBottom="xl"
-          minWidth="375px"
           onCollapse={() => setIsCollapsed(!isCollapsed)}
           onSortChange={SortingChangeCallback}
           results={1}
