@@ -4,7 +4,7 @@ import Filter from '../../pb_filter/_filter'
 import Select from '../../pb_select/_select'
 import TextInput from '../../pb_text_input/_text_input'
 
-import { Collapsible, useCollapsible, Caption, SectionSeparator, SelectableList } from 'playbook-ui'
+import { Collapsible, useCollapsible, Caption, SectionSeparator, Checkbox, Button } from 'playbook-ui'
 
 const SortingChangeCallback = (sortOptions) => {
   alert(JSON.stringify(sortOptions[0]))
@@ -16,6 +16,7 @@ const FilterSide = (props) => {
     setName(target.value)
   }
   const [isCollapsed, setIsCollapsed] = useCollapsible(true)
+  const [isProductsCollapsed, setIsProductsCollapsed] = useCollapsible(true)
   const options = [
     { value: 'USA' },
     { value: 'Canada' },
@@ -101,23 +102,60 @@ const FilterSide = (props) => {
               <Caption>{"Products"}</Caption>
           </Collapsible.Main>
           <Collapsible.Content paddingX="sm">
-            <SelectableList variant="checkbox">
-              <SelectableList.Item
-                  label="Doors"
-                  name="checkbox-name-1"
-                  value="1"
+            <div>
+              <Checkbox
+                  marginBottom="sm"
+                  text="Doors"
               />
-              <SelectableList.Item
-                  label="Windows"
-                  name="checkbox-name-2"
-                  value="2"
+            </div>
+            <div>
+              <Checkbox
+                  marginBottom="sm"
+                  text="Windows"
               />
-              <SelectableList.Item
-                  label="Siding"
-                  name="checkbox-name-3"
-                  value="3"
+            </div>
+            <div>
+              <Checkbox
+                  marginBottom="sm"
+                  text="Siding"
               />
-            </SelectableList>
+            </div>
+            {!isProductsCollapsed &&
+              <>
+                <div>
+                  <Checkbox
+                      marginBottom="sm"
+                      text="Roofing"
+                  />
+                </div>
+                <div>
+                  <Checkbox
+                      marginBottom="sm"
+                      text="Gutters"
+                  />
+                </div>
+                <div>
+                  <Checkbox
+                      marginBottom="sm"
+                      text="Solar"
+                  />
+                </div>
+                <div>
+                  <Checkbox
+                      marginBottom="sm"
+                      text="Insulation"
+                  />
+                </div>
+              </>
+            }
+            <Button
+                icon={isProductsCollapsed ? "chevron-down" : "chevron-up"}
+                iconRight
+                onClick={() => setIsProductsCollapsed(!isProductsCollapsed)}
+                padding="none"
+                text={isProductsCollapsed ? "Show More" : "Show Less"}
+                variant="link"
+            />
           </Collapsible.Content>
         </Collapsible>
       </Filter>
