@@ -154,7 +154,7 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
     }, [optionsWithBlankSelection, selectedArray, multiSelect]);
     
     const filteredOptions = useMemo(() => {
-          return availableOptions.filter((opt) =>
+          return availableOptions.filter((opt: GenericObject) =>
             String(opt.label).toLowerCase().includes(filterItem.toLowerCase())
           );
         }, [availableOptions, filterItem]);
