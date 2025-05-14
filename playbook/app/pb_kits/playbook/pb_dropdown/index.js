@@ -86,6 +86,18 @@ export default class PbDropdown extends PbEnhancedElement {
     );
   }
 
+  adjustDropdownHeight() {
+     if (this.target.classList.contains("open")) {
+      const el = this.target;
+      el.style.height = "auto";
+      requestAnimationFrame(() => {
+        const newHeight = el.scrollHeight + "px";
+        el.offsetHeight; // force reflow
+        el.style.height = newHeight;
+      });
+    }
+  }
+
   handleSearch(term = "") {
     const lcTerm = term.toLowerCase();
     this.element.querySelectorAll(OPTION_SELECTOR).forEach((opt) => {
@@ -98,15 +110,7 @@ export default class PbDropdown extends PbEnhancedElement {
       opt.style.display = match ? "" : "none";
     });
 
-    if (this.target.classList.contains("open")) {
-      const el = this.target;
-      el.style.height = "auto";
-      requestAnimationFrame(() => {
-        const newHeight = el.scrollHeight + "px";
-        el.offsetHeight; // force reflow
-        el.style.height = newHeight;
-      });
-    }
+  this.adjustDropdownHeight();
   }
 
   handleOptionClick(event) {
@@ -198,15 +202,7 @@ export default class PbDropdown extends PbEnhancedElement {
           JSON.parse(selectedOption.dataset.dropdownOptionLabel).id
         ) {
           selectedOption.style.display = "none";
-          if (this.target.classList.contains("open")) {
-            const el = this.target;
-            el.style.height = "auto";
-            requestAnimationFrame(() => {
-              const newHeight = el.scrollHeight + "px";
-              el.offsetHeight; // force reflow
-              el.style.height = newHeight;
-            });
-          }
+          this.adjustDropdownHeight();
         }
       });
     } else {
@@ -325,12 +321,26 @@ export default class PbDropdown extends PbEnhancedElement {
     const options = this.element.querySelectorAll(OPTION_SELECTOR);
     options.forEach((option) => {
       option.classList.remove("pb_dropdown_option_selected");
+      option.style.display = "";
     });
 
     hiddenInput.value = "";
 
     const defaultPlaceholder = this.element.querySelector(DROPDOWN_PLACEHOLDER);
     this.setTriggerElementText(defaultPlaceholder.dataset.dropdownPlaceholder);
+
+    if (this.searchInput) {
+      this.searchInput.value = "";
+       if (this.target.classList.contains("open")) {
+      const el = this.target;
+      el.style.height = "auto";
+      requestAnimationFrame(() => {
+        const newHeight = el.scrollHeight + "px";
+        el.offsetHeight; // force reflow
+        el.style.height = newHeight;
+      });
+    }
+    }
   }
 
   setTriggerElementText(text) {
@@ -408,23 +418,7 @@ export default class PbDropdown extends PbEnhancedElement {
         this.showElement(this.target);
       }
     }
-    const hiddenInput = this.element.querySelector(DROPDOWN_INPUT);
-    hiddenInput.value = "";
-
-    const triggerEl = this.element.querySelector(DROPDOWN_TRIGGER_DISPLAY);
-    if (triggerEl) {
-      const defaultPlaceholder = this.element.querySelector(DROPDOWN_PLACEHOLDER);
-      this.setTriggerElementText(defaultPlaceholder.dataset.dropdownPlaceholder);  
-    }
-    if (this.searchInput) {
-      this.searchInput.value = "";
-    }
-  
-    this.element
-      .querySelectorAll(OPTION_SELECTOR)
-      .forEach((opt) =>
-        opt.classList.remove("pb_dropdown_option_selected")
-      );
+    this.resetDropdownValue()
     this.updatePills();
   }
 }
