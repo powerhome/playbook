@@ -6,6 +6,7 @@ examples:
     - avatar_status: Status
     - avatar_circle_icon_component_overlay: Icon Circle Component Overlay
     - avatar_badge_component_overlay: Badge Component Overlay
+    - avatar_grayscale: Grayscale
   react:
     - avatar_default: Default
     - avatar_monogram: Monogram
@@ -13,6 +14,7 @@ examples:
     - avatar_status: Status
     - avatar_circle_icon_component_overlay: Icon Circle Component Overlay
     - avatar_badge_component_overlay: Badge Component Overlay
+    - avatar_grayscale: Grayscale
   swift:
     - avatar_default_swift: Default
     - avatar_monogram_swift: Monogram

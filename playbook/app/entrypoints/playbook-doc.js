@@ -44,7 +44,6 @@ import * as FixedConfirmationToast from 'kits/pb_fixed_confirmation_toast/docs'
 import * as Flex from 'kits/pb_flex/docs'
 import * as FormGroup from 'kits/pb_form_group/docs'
 import * as FormPill from 'kits/pb_form_pill/docs'
-import * as GanttChart from 'kits/pb_gantt_chart/docs'
 import * as Gauge from 'kits/pb_gauge/docs'
 import * as Hashtag from 'kits/pb_hashtag/docs'
 import * as Highlight from 'kits/pb_highlight/docs'
@@ -156,7 +155,6 @@ WebpackerReact.registerComponents({
   ...Flex,
   ...FormGroup,
   ...FormPill,
-  ...GanttChart,
   ...Gauge,
   ...Hashtag,
   ...Highlight,

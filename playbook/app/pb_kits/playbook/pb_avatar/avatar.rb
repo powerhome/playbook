@@ -15,6 +15,8 @@ module Playbook
                   values: %w[xxs xs sm md base lg xl],
                   default: "md"
       prop :status
+      prop :grayscale, type: Playbook::Props::Boolean,
+                       default: false
 
       def initials
         name.split.map(&:first).join.downcase

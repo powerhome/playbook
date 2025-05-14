@@ -8,6 +8,7 @@ module Playbook
                    default: "left"
       prop :avatar, type: Playbook::Props::Boolean,
                     default: false
+      prop :avatar_grayscale, type: Playbook::Props::Boolean, default: false
       prop :avatar_url
       prop :bold, type: Playbook::Props::Boolean, default: true
       prop :name

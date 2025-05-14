@@ -35,6 +35,7 @@ type AdvancedTableProps = {
   className?: string
   columnDefinitions: GenericObject[]
   columnGroupBorderColor?: "text_lt_default" | "text_lt_light" | "text_lt_lighter" | "text_dk_default" | "text_dk_light" | "text_dk_lighter"
+  columnVisibilityControl?: GenericObject
   dark?: boolean
   data?: { [key: string]: string }
   enableToggleExpansion?: "all" | "header" | "none"
@@ -73,6 +74,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
     className,
     columnDefinitions,
     columnGroupBorderColor,
+    columnVisibilityControl,
     dark = false,
     data = {},
     enableToggleExpansion = "header",
@@ -132,7 +134,8 @@ const AdvancedTable = (props: AdvancedTableProps) => {
     paginationProps,
     virtualizedRows,
     tableOptions,
-    onRowSelectionChange
+    onRowSelectionChange,
+    columnVisibilityControl,
   });
 
   // Initialize table actions
@@ -252,7 +255,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
     : {};
 
   // Visibility flag for action bar
-  const isActionBarVisible = selectableRows && showActionsBar && selectedRowsLength > 0;
+  const isActionBarVisible = (selectableRows && showActionsBar && selectedRowsLength > 0) || columnVisibilityControl;
 
   return (
     <>
@@ -286,6 +289,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
         <AdvancedTableProvider
             columnDefinitions={columnDefinitions}
             columnGroupBorderColor={columnGroupBorderColor}
+            columnVisibilityControl={columnVisibilityControl}
             enableToggleExpansion={enableToggleExpansion}
             enableVirtualization={virtualizedRows}
             expandByDepth={expandByDepth}
@@ -316,6 +320,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
                 actions={actions}
                 isVisible={isActionBarVisible}
                 selectedCount={selectedRowsLength}
+                type={columnVisibilityControl ? "column-visibility" : "row-selection"}
             />
 
             {/* Main Table */}
