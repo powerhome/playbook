@@ -143,6 +143,7 @@ const FilterSidebar = (props) => {
               <>
                 <div>
                   <Checkbox
+                      checked={products["Roofing"]}
                       marginBottom="sm"
                       name="Roofing"
                       onChange={handleCheckboxChange}
@@ -151,6 +152,7 @@ const FilterSidebar = (props) => {
                 </div>
                 <div>
                   <Checkbox
+                      checked={products["Gutters"]}
                       marginBottom="sm"
                       name="Gutters"
                       onChange={handleCheckboxChange}
@@ -159,6 +161,7 @@ const FilterSidebar = (props) => {
                 </div>
                 <div>
                   <Checkbox
+                      checked={products["Solar"]}
                       marginBottom="sm"
                       name="Solar"
                       onChange={handleCheckboxChange}
@@ -167,6 +170,7 @@ const FilterSidebar = (props) => {
                 </div>
                 <div>
                   <Checkbox
+                      checked={products["Insulation"]}
                       marginBottom="sm"
                       name="Insulation"
                       onChange={handleCheckboxChange}
