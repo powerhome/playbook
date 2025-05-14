@@ -14,7 +14,7 @@
         padding_y:"xs",
         html_options: {tabindex:"0"}
         }) do %>
-        <%= pb_rails("flex/flex_item") do %>
+        <%= pb_rails("flex/flex_item", props: { fixed_size: object.multi_select ? "90%" : "" }) do %>
             <%= pb_rails("flex", props: {align: "center"}) do %>
                 <% if object.custom_display.present?  %>
                     <%= pb_rails("flex", props: {align: "center"}) do %>
@@ -44,9 +44,12 @@
                 <% end %>
             <% end %>
         <% end %>
-            <%= pb_rails("body", props: {display: "flex"}) do  %>
-                <%= pb_rails("icon", props: {icon: "chevron-down", cursor: "pointer", size:"sm", id: "dropdown_open_icon"}) %>
-                <%= pb_rails("icon", props: {icon: "chevron-up", cursor: "pointer", size:"sm", id: "dropdown_close_icon"}) %>
+            <%= pb_rails("flex/flex_item") do %>
+                <%= pb_rails("body", props: {display: "flex", align_items:"center" }) do  %>
+                    <%= pb_rails("icon", props: {icon: "times", cursor: "pointer", size:"sm", id: "dropdown_clear_icon", padding_right:"xs" }) %>
+                    <%= pb_rails("icon", props: {icon: "chevron-down", cursor: "pointer", size:"sm", id: "dropdown_open_icon"}) %>
+                    <%= pb_rails("icon", props: {icon: "chevron-up", cursor: "pointer", size:"sm", id: "dropdown_close_icon"}) %>
+                <% end %>
             <% end %>
     <% end %>
     <% end %>

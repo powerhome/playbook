@@ -13,6 +13,7 @@ const DROPDOWN_PLACEHOLDER = "[data-dropdown-placeholder]";
 const DROPDOWN_INPUT = "#dropdown-selected-option";
 const SEARCH_INPUT_SELECTOR = "[data-dropdown-autocomplete]";
 const SEARCH_BAR_SELECTOR = "[data-dropdown-search]";
+const CLEAR_ICON_SELECTOR = "#dropdown_clear_icon"; 
 
 export default class PbDropdown extends PbEnhancedElement {
   static get selector() {
@@ -34,6 +35,14 @@ export default class PbDropdown extends PbEnhancedElement {
     this.bindSearchBar();
     this.updatePills();
     this.isMultiSelect = this.element.dataset.pbDropdownMultiSelect === "true";
+
+    const clearBtn = this.element.querySelector(CLEAR_ICON_SELECTOR);
+    if (clearBtn) {
+    clearBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      this.clearSelection();
+    });
+    }
   }
 
   static selectedOptions = new Set();
@@ -351,7 +360,7 @@ export default class PbDropdown extends PbEnhancedElement {
     Array.from(PbDropdown.selectedOptions).map((option) => {
       // Create a form pill for each selected option
       const pill = document.createElement("div");
-      pill.className = "pb_form_pill_kit_primary";
+      pill.className = "pb_form_pill_kit_primary mr_xs";
       pill.tabIndex = 0;
       pill.dataset.pillId = JSON.parse(option).id;
       const innerDiv = document.createElement("h3");
@@ -385,5 +394,37 @@ export default class PbDropdown extends PbEnhancedElement {
       });
       wrapper.appendChild(pill);
     });
+  }
+
+  clearSelection() {
+    if (this.isMultiSelect) {
+      PbDropdown.selectedOptions.clear();
+      this.element
+      .querySelectorAll(OPTION_SELECTOR)
+      .forEach((opt) => {
+        opt.style.display = "";
+      });
+      if (this.target.classList.contains("open")) {
+        this.showElement(this.target);
+      }
+    }
+    const hiddenInput = this.element.querySelector(DROPDOWN_INPUT);
+    hiddenInput.value = "";
+
+    const triggerEl = this.element.querySelector(DROPDOWN_TRIGGER_DISPLAY);
+    if (triggerEl) {
+      const defaultPlaceholder = this.element.querySelector(DROPDOWN_PLACEHOLDER);
+      this.setTriggerElementText(defaultPlaceholder.dataset.dropdownPlaceholder);  
+    }
+    if (this.searchInput) {
+      this.searchInput.value = "";
+    }
+  
+    this.element
+      .querySelectorAll(OPTION_SELECTOR)
+      .forEach((opt) =>
+        opt.classList.remove("pb_dropdown_option_selected")
+      );
+    this.updatePills();
   }
 }
