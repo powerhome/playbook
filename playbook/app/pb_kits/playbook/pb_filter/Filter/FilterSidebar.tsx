@@ -9,13 +9,13 @@ import SectionSeparator from '../../pb_section_separator/_section_separator'
 import Card from '../../pb_card/_card'
 import Caption from '../../pb_caption/_caption'
 
-export type FilterSideProps = {
+export type FilterSidebarProps = {
   children?: React.ReactChild[] | React.ReactChild,
   filters?: FilterDescription,
   results?: number,
 } & FilterBackgroundProps
 
-const FilterSide = ({
+const FilterSidebar = ({
   onCollapse,
   onSortChange,
   sortOptions,
@@ -30,7 +30,7 @@ const FilterSide = ({
   placement,
   popoverProps,
   ...bgProps
-}: FilterSideProps): React.ReactElement => (
+}: FilterSidebarProps): React.ReactElement => (
   <FilterBackground
       dark={dark}
       {...bgProps}
@@ -66,4 +66,4 @@ const FilterSide = ({
   </FilterBackground>
 )
 
-export default FilterSide
+export default FilterSidebar

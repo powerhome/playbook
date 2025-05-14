@@ -1,26 +1,26 @@
 import React from 'react'
 import FilterSingle, { FilterSingleProps } from './FilterSingle'
 import FilterDouble, { FilterDoubleProps } from './FilterDouble'
-import FilterSide, { FilterSideProps } from './FilterSide'
+import FilterSidebar, { FilterSidebarProps } from './FilterSidebar'
 
 type FilterProps =
   | FilterSingleProps
   | (FilterDoubleProps & {
       double?: boolean,
     })
-  | (FilterSideProps & {
-    side?: boolean,
+  | (FilterSidebarProps & {
+    sidebar?: boolean,
   })
 
 const Filter = ({
   double = false,
-  side = false,
+  sidebar = false,
   ...templateProps
   }: FilterProps): React.ReactElement => {
   const displayFilter = () => {
-    if (side === true) {
+    if (sidebar === true) {
       return (
-        <FilterSide {...templateProps} />
+        <FilterSidebar {...templateProps} />
       )
     }
     if (double === true) {

@@ -24,5 +24,5 @@ examples:
   - filter_max_height: Max Height for Popover Inside of Filter
   - filter_placement: Filter Placement
   - filter_popover_props: Popover Props
-  - filter_side: Sidebar
+  - filter_sidebar: Sidebar
 

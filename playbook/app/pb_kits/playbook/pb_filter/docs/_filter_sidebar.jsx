@@ -10,7 +10,7 @@ const SortingChangeCallback = (sortOptions) => {
   alert(JSON.stringify(sortOptions[0]))
 }
 
-const FilterSide = (props) => {
+const FilterSidebar = (props) => {
   const [name, setName] = useState('')
   const handleUpdateName = ({ target }) => {
     setName(target.value)
@@ -37,7 +37,7 @@ const FilterSide = (props) => {
           onCollapse={() => setIsCollapsed(!isCollapsed)}
           onSortChange={SortingChangeCallback}
           results={116}
-          side
+          sidebar
           sortOptions={{
             popularity: 'Popularity',
             // eslint-disable-next-line
@@ -163,4 +163,4 @@ const FilterSide = (props) => {
   )
 }
 
-export default FilterSide
+export default FilterSidebar
