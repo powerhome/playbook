@@ -2,6 +2,7 @@ import React from 'react'
 import FilterSingle, { FilterSingleProps } from './FilterSingle'
 import FilterDouble, { FilterDoubleProps } from './FilterDouble'
 import FilterSidebar, { FilterSidebarProps } from './FilterSidebar'
+import FilterSection from './FilterSection'
 
 type FilterProps =
   | FilterSingleProps
@@ -39,5 +40,7 @@ const Filter = ({
     </>
   )
 }
+
+Filter.Section = FilterSection
 
 export default Filter

@@ -4,7 +4,7 @@ import Filter from '../../pb_filter/_filter'
 import Select from '../../pb_select/_select'
 import TextInput from '../../pb_text_input/_text_input'
 
-import { Collapsible, useCollapsible, Caption, SectionSeparator, Checkbox, Button } from 'playbook-ui'
+import { useCollapsible, SectionSeparator, Checkbox, Button } from 'playbook-ui'
 
 const SortingChangeCallback = (sortOptions) => {
   alert(JSON.stringify(sortOptions[0]))
@@ -25,7 +25,6 @@ const FilterSidebar = (props) => {
     { value: 'A galaxy far far away, like really far away...' },
   ]
   return (
-
     <>
       <Filter
           filters={{
@@ -48,116 +47,95 @@ const FilterSidebar = (props) => {
           sortValue={[{ name: 'popularity', dir: 'desc' }]}
           {...props}
       >
-        <Collapsible
+        <Filter.Section
             collapsed={isCollapsed}
-            iconColor='white'
-            padding="none"
+            collapsible
+            header
+            headerText="Full Name"
         >
-          <Collapsible.Main
-              paddingX="sm"
-              paddingY="xs"
-          >
-              <Caption>{"Full Name"}</Caption>
-          </Collapsible.Main>
-          <Collapsible.Content paddingX="sm">
-            <TextInput
-                onChange={handleUpdateName}
-                placeholder="Enter name"
-                value={name}
-                {...props}
-            />
-          </Collapsible.Content>
-        </Collapsible>
+          <TextInput
+              onChange={handleUpdateName}
+              placeholder="Enter name"
+              value={name}
+              {...props}
+          />
+        </Filter.Section>
         <SectionSeparator />
-        <Collapsible
+        <Filter.Section
             collapsed={isCollapsed}
-            iconColor='white'
-            padding="none"
+            collapsible
+            header
+            headerText="Territory"
         >
-          <Collapsible.Main
-              paddingX="sm"
-              paddingY="xs"
-          >
-              <Caption>{"Territory"}</Caption>
-          </Collapsible.Main>
-          <Collapsible.Content paddingX="sm">
-            <Select
-                blankSelection="Select One..."
-                name="location"
-                options={options}
-                {...props}
-            />
-          </Collapsible.Content>
-        </Collapsible>
+          <Select
+              blankSelection="Select One..."
+              name="location"
+              options={options}
+              {...props}
+          />
+        </Filter.Section>
         <SectionSeparator />
-        <Collapsible
+        <Filter.Section
             collapsed={isCollapsed}
-            iconColor='white'
-            padding="none"
+            collapsible
+            header
+            headerText="Products"
         >
-          <Collapsible.Main
-              paddingX="sm"
-              paddingY="xs"
-          >
-              <Caption>{"Products"}</Caption>
-          </Collapsible.Main>
-          <Collapsible.Content paddingX="sm">
-            <div>
-              <Checkbox
-                  marginBottom="sm"
-                  text="Doors"
-              />
-            </div>
-            <div>
-              <Checkbox
-                  marginBottom="sm"
-                  text="Windows"
-              />
-            </div>
-            <div>
-              <Checkbox
-                  marginBottom="sm"
-                  text="Siding"
-              />
-            </div>
-            {!isProductsCollapsed &&
-              <>
-                <div>
-                  <Checkbox
-                      marginBottom="sm"
-                      text="Roofing"
-                  />
-                </div>
-                <div>
-                  <Checkbox
-                      marginBottom="sm"
-                      text="Gutters"
-                  />
-                </div>
-                <div>
-                  <Checkbox
-                      marginBottom="sm"
-                      text="Solar"
-                  />
-                </div>
-                <div>
-                  <Checkbox
-                      marginBottom="sm"
-                      text="Insulation"
-                  />
-                </div>
-              </>
-            }
-            <Button
-                icon={isProductsCollapsed ? "chevron-down" : "chevron-up"}
-                iconRight
-                onClick={() => setIsProductsCollapsed(!isProductsCollapsed)}
-                padding="none"
-                text={isProductsCollapsed ? "Show More" : "Show Less"}
-                variant="link"
+          <div>
+            <Checkbox
+                marginBottom="sm"
+                text="Doors"
             />
-          </Collapsible.Content>
-        </Collapsible>
+          </div>
+          <div>
+            <Checkbox
+                marginBottom="sm"
+                text="Windows"
+            />
+          </div>
+          <div>
+            <Checkbox
+                marginBottom="sm"
+                text="Siding"
+            />
+          </div>
+          {!isProductsCollapsed &&
+            <>
+              <div>
+                <Checkbox
+                    marginBottom="sm"
+                    text="Roofing"
+                />
+              </div>
+              <div>
+                <Checkbox
+                    marginBottom="sm"
+                    text="Gutters"
+                />
+              </div>
+              <div>
+                <Checkbox
+                    marginBottom="sm"
+                    text="Solar"
+                />
+              </div>
+              <div>
+                <Checkbox
+                    marginBottom="sm"
+                    text="Insulation"
+                />
+              </div>
+            </>
+          }
+          <Button
+              icon={isProductsCollapsed ? "chevron-down" : "chevron-up"}
+              iconRight
+              onClick={() => setIsProductsCollapsed(!isProductsCollapsed)}
+              padding="none"
+              text={isProductsCollapsed ? "Show More" : "Show Less"}
+              variant="link"
+          />
+        </Filter.Section>
       </Filter>
     </>
   )
