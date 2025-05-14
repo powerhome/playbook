@@ -24,16 +24,22 @@
                         <%= pb_rails("body", props: {text: object.default_display_placeholder, id: "dropdown_trigger_display"}) %>
                     <% end %>
                 <% else %>
-                    <% if object.autocomplete %>
-                        <input
-                            data-dropdown-autocomplete
-                            class="dropdown_input"
-                            type="text"
-                            placeholder="<%= object.placeholder || 'Select…' %>"
-                            autocomplete="off"
-                        />
+                    <% if object.multi_select %>
+                        <%= pb_rails("body", props: {text: object.default_display_placeholder, id: "dropdown_trigger_display_multi_select"}) %>
+                        <%= pb_rails("flex", props: { id:"dropdown_pills_wrapper", wrap: true }) do %>
+                        <% end %>                  
                     <% else %>
-                        <%= pb_rails("body", props: {text: object.default_display_placeholder, id: "dropdown_trigger_display"}) %>
+                        <% if object.autocomplete %>
+                            <input
+                                data-dropdown-autocomplete
+                                class="dropdown_input"
+                                type="text"
+                                placeholder="<%= object.placeholder || 'Select…' %>"
+                                autocomplete="off"
+                            />
+                        <% else %>
+                            <%= pb_rails("body", props: {text: object.default_display_placeholder, id: "dropdown_trigger_display"}) %>
+                        <% end %>
                     <% end %>
                 <% end %>
             <% end %>
