@@ -11,6 +11,8 @@ module Playbook
       prop :custom_display
       prop :autocomplete, type: Playbook::Props::Boolean,
                           default: false
+      prop :multi_select, type: Playbook::Props::Boolean,
+                          default: false
 
       def data
         Hash(prop(:data)).merge(dropdown_trigger: true, dropdown_placeholder: default_display_placeholder)
@@ -25,7 +27,7 @@ module Playbook
       end
 
       def trigger_wrapper_classes
-        generate_classname("dropdown_trigger_wrapper", ("select_only" unless autocomplete))
+        generate_classname("dropdown_trigger_wrapper", ("select_only" unless autocomplete || multi_select))
       end
     end
   end

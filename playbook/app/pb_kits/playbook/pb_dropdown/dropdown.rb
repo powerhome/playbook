@@ -22,9 +22,14 @@ module Playbook
                           default: false
       prop :searchbar, type: Playbook::Props::Boolean,
                        default: false
+      prop :multi_select, type: Playbook::Props::Boolean,
+                          default: false
 
       def data
-        Hash(prop(:data)).merge(pb_dropdown: true)
+        Hash(prop(:data)).merge(
+          pb_dropdown: true,
+          pb_dropdown_multi_select: multi_select
+        )
       end
 
       def classname
