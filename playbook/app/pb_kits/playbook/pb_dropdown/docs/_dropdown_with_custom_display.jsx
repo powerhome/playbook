@@ -6,6 +6,7 @@ import Flex from '../../pb_flex/_flex'
 import FlexItem from '../../pb_flex/_flex_item'
 import Avatar from '../../pb_avatar/_avatar'
 import User from '../../pb_user/_user'
+import Body from '../../pb_body/_body'
 
 const DropdownWithCustomDisplay = (props) => {
   const [selectedOption, setSelectedOption] = useState();
@@ -50,10 +51,20 @@ const DropdownWithCustomDisplay = (props) => {
       <>
       {
         selectedOption && (
+          <Flex align="center">
             <Avatar
                 name={selectedOption.label}
                 size="xs"
             />
+            <Body 
+                marginX="xs"
+                text={selectedOption.label} 
+            />
+            <Badge 
+                text={selectedOption.status} 
+                variant={selectedOption.status == "Offline" ? "neutral" : selectedOption.status == "Online" ? "success" : "warning"}
+            />
+          </Flex>
         )
       }
     </>

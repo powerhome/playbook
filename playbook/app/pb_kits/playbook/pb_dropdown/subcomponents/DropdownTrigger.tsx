@@ -73,7 +73,7 @@ const DropdownTrigger = (props: DropdownTriggerProps) => {
   );
 
   const customDisplayPlaceholder = selected?.label ? (
-    <b>{selected.label}</b>
+    ""
   ) : autocomplete ? (
     ""
   ) : placeholder ? (
