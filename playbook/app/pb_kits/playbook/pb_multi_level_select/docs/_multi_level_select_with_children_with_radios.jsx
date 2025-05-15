@@ -5,25 +5,25 @@ import Badge from "../../pb_badge/_badge";
 const treeData = [
   {
     label: "Power Home Remodeling",
-    value: "Power Home Remodeling",
+    value: "powerHomeRemodeling",
     id: "powerhome1",
     expanded: true,
     children: [
       {
         label: "People",
-        value: "People",
+        value: "people",
         id: "people1",
         expanded: true,
         status: "active",
         children: [
           {
             label: "Talent Acquisition",
-            value: "Talent Acquisition",
+            value: "talentAcquisition",
             id: "talent1",
           },
           {
             label: "Business Affairs",
-            value: "Business Affairs",
+            value: "businessAffairs",
             id: "business1",
             status: "active",
             variant: "primary",
@@ -31,12 +31,12 @@ const treeData = [
             children: [
               {
                 label: "Initiatives",
-                value: "Initiatives",
+                value: "initiatives",
                 id: "initiative1",
               },
               {
                 label: "Learning & Development",
-                value: "Learning & Development",
+                value: "learningAndDevelopment",
                 id: "development1",
                 status: "Inactive",
               },
@@ -44,31 +44,31 @@ const treeData = [
           },
           {
             label: "People Experience",
-            value: "People Experience",
+            value: "peopleExperience",
             id: "experience1",
           },
         ],
       },
       {
         label: "Contact Center",
-        value: "Contact Center",
+        value: "contactCenter",
         id: "contact1",
         status: "Inactive",
         variant: "error",
         children: [
           {
             label: "Appointment Management",
-            value: "Appointment Management",
+            value: "appointmentManagement",
             id: "appointment1",
           },
           {
             label: "Customer Service",
-            value: "Customer Service",
+            value: "customerService",
             id: "customer1",
           },
           {
             label: "Energy",
-            value: "Energy",
+            value: "energy",
             id: "energy1",
           },
         ],

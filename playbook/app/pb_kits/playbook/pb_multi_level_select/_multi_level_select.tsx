@@ -195,8 +195,8 @@ const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>((pr
           if (!selectedItem.length) {
             setSingleSelectedItem({ id: [], value: "", item: [] });
           } else {
-            const { id, value } = selectedItem[0];
-            setSingleSelectedItem({ id: [id], value, item: selectedItem });
+            const { id, label } = selectedItem[0];
+            setSingleSelectedItem({ id: [id], value: label, item: selectedItem });
           }
         }
       }
