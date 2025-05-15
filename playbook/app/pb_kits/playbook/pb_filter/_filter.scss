@@ -88,6 +88,10 @@
     z-index: 1;
   }
 
+  [class^=pb_collapsible_kit] .toggle-content.filter_section_collapsible {
+    padding-top: 8px !important;
+  }
+
   &[class*=dark] {
     .filters .filter {
     border-right: 1px solid $border_dark !important;

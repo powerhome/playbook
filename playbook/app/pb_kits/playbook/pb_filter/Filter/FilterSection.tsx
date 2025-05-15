@@ -23,7 +23,10 @@ const FilterSection = ({ children, collapsible = false, collapsed = true, header
         >
             <Caption>{ headerText }</Caption>
         </Collapsible.Main>
-        <Collapsible.Content paddingX="sm">
+        <Collapsible.Content
+            className="filter_section_collapsible"
+            paddingX="sm"
+        >
           { children }
         </Collapsible.Content>
       </Collapsible>
