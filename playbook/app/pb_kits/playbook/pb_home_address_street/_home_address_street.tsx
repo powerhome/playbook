@@ -81,6 +81,11 @@ const HomeAddressStreet = (props: HomeAddressStreetProps): React.ReactElement =>
 
   const formatStreetAdr = (address: string): string => preserveCase ? address : titleize(address)
 
+  const uppercaseState = state?.toUpperCase() ?? ''
+
+  const fields = [address, addressCont, city, homeId, homeUrl, houseStyle, state, territory, zipcode]
+  const hasAllEmptyProps = fields.every(field => field === undefined || field === null || field === '')
+
   return (
     <div
         className={classes(className, dark)}
@@ -88,7 +93,8 @@ const HomeAddressStreet = (props: HomeAddressStreetProps): React.ReactElement =>
         {...dataProps}
         {...htmlProps}
     >
-      {emphasis == 'street' &&
+      {hasAllEmptyProps && '—'}
+      {emphasis == 'street' && !hasAllEmptyProps &&
         <div>
           <Title
               className="pb_home_address_street_address"
@@ -105,11 +111,11 @@ const HomeAddressStreet = (props: HomeAddressStreetProps): React.ReactElement =>
             {titleize(addressCont)}
           </Title>
           <Body color="light">
-            {`${titleize(city)}, ${state.toUpperCase()} ${zipcode}`}
+            {`${city ? `${titleize(city)}, ` : ''}${uppercaseState}${zipcode ? ` ${zipcode}` : ''}`}
           </Body>
         </div>
       }
-      {emphasis == 'city' &&
+      {emphasis == 'city' && !hasAllEmptyProps &&
         <div>
           <Body color="light">
             {joinPresent([formatStreetAdr(address), houseStyle], ' · ')}
@@ -122,18 +128,18 @@ const HomeAddressStreet = (props: HomeAddressStreetProps): React.ReactElement =>
                 size={4}
                 tag="span"
             >
-              {`${titleize(city)}, ${state.toUpperCase()}`}
+              {`${city ? `${titleize(city)}, ` : ''}${uppercaseState}`}
             </Title>
             <Body
                 color="light"
                 tag="span"
             >
-              {` ${zipcode}`}
+              {` ${zipcode ?? ''}`}
             </Body>
           </div>
         </div>
       }
-      {emphasis == 'none' &&
+      {emphasis == 'none' && !hasAllEmptyProps &&
         <div>
           <Body dark={dark}>
             {joinPresent([formatStreetAdr(address), houseStyle], ' · ')}
@@ -144,7 +150,7 @@ const HomeAddressStreet = (props: HomeAddressStreetProps): React.ReactElement =>
                 color="light"
                 dark={dark}
               >
-            {`${titleize(city)}, ${state.toUpperCase()} ${zipcode}`}
+            {`${city ? `${titleize(city)}, ` : ''}${uppercaseState}${zipcode ? ` ${zipcode}` : ''}`}
           </Body>
           </div>
         </div>
