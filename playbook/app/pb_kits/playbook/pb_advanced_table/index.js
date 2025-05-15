@@ -95,6 +95,9 @@ export default class PbAdvancedTable extends PbEnhancedElement {
     actionBar.style.height = height;
     actionBar.classList.add("is-visible");
     actionBar.classList.add("show-action-card");
+    actionBar.classList.replace("p_none", "p_xs");
+    // This is for keeping the border around the card when showing the action bar
+    actionBar.classList.replace("pb_card_kit_deselected_border_none", "pb_card_kit_deselected");
     actionBar.style.overflow = "hidden";
 
     // Complete animation after delay
@@ -124,6 +127,9 @@ export default class PbAdvancedTable extends PbEnhancedElement {
     window.setTimeout(() => {
       actionBar.classList.remove("is-visible");
       actionBar.classList.remove("show-action-card");
+      actionBar.classList.replace("p_xs", "p_none");
+      // This is for removing the border when hiding the action bar
+      actionBar.classList.replace( "pb_card_kit_deselected", "pb_card_kit_deselected_border_none");
     }, 300);
   }
 
@@ -357,7 +363,8 @@ export default class PbAdvancedTable extends PbEnhancedElement {
       });
 
       // Remove visibility classes
-      actionBar.classList.remove("is-visible", "show-action-card");
+      actionBar.classList.remove("p_xs", "is-visible", "show-action-card");
+      actionBar.classList.add("p_none");
 
       // Add CSS rules
       const styleId = `action-bar-styles-${tableId}`;
@@ -390,7 +397,8 @@ export default class PbAdvancedTable extends PbEnhancedElement {
             actionBar.style.height = 'auto';
             actionBar.style.overflow = 'visible';
             actionBar.style.opacity = '1';
-            actionBar.classList.add("is-visible", "show-action-card");
+            actionBar.classList.remove("p_none");
+            actionBar.classList.add("p_xs", "is-visible", "show-action-card");
 
             // Update the count
             const countElement = actionBar.querySelector(".selected-count");
@@ -402,7 +410,8 @@ export default class PbAdvancedTable extends PbEnhancedElement {
             actionBar.style.height = '0px';
             actionBar.style.overflow = 'hidden';
             actionBar.style.opacity = '0';
-            actionBar.classList.remove("is-visible", "show-action-card");
+            actionBar.classList.remove("p_xs", "is-visible", "show-action-card");
+            actionBar.classList.add("p_none");
           }
         });
       });
@@ -698,21 +707,31 @@ document.addEventListener('DOMContentLoaded', () => {
       });
 
       // Remove any visibility classes
-      actionBar.classList.remove("is-visible", "show-action-card");
+      actionBar.classList.remove("p_xs", "is-visible", "show-action-card");
+      actionBar.classList.add("p_none");
 
-      // Direct DOM manipulation for checkboxes
+      // Direct DOM manipulation for checkboxes - exclude select-all checkbox
       const checkboxes = table.querySelectorAll('input[type="checkbox"]');
       checkboxes.forEach(checkbox => {
         checkbox.addEventListener('change', function() {
-          // Count selected checkboxes
-          const selectedCount = Array.from(checkboxes).filter(cb => cb.checked).length;
+          // Get all checked checkboxes
+          const allCheckedCheckboxes = Array.from(checkboxes).filter(cb => cb.checked);
+
+          // Filter out the select-all checkbox
+          const selectedRowCheckboxes = allCheckedCheckboxes.filter(cb => {
+            return cb.id !== 'select-all-rows' && !cb.closest('#select-all-rows');
+          });
+
+          // Get the selected count (excluding select-all)
+          const selectedCount = selectedRowCheckboxes.length;
 
           if (selectedCount > 0) {
             // Show action bar directly
             actionBar.style.height = 'auto';
             actionBar.style.overflow = 'visible';
             actionBar.style.opacity = '1';
-            actionBar.classList.add("is-visible", "show-action-card");
+            actionBar.classList.remove("p_none");
+            actionBar.classList.add("p_xs", "is-visible", "show-action-card");
 
             // Update the count
             const countElement = actionBar.querySelector(".selected-count");
@@ -724,7 +743,8 @@ document.addEventListener('DOMContentLoaded', () => {
             actionBar.style.height = '0px';
             actionBar.style.overflow = 'hidden';
             actionBar.style.opacity = '0';
-            actionBar.classList.remove("is-visible", "show-action-card");
+            actionBar.classList.add("p_none");
+            actionBar.classList.remove("p_xs", "is-visible", "show-action-card");
           }
         });
       });

@@ -61,20 +61,32 @@ actions = [
 }) %>
 
 <script>
+  // Handle action clicks using the data-selected-rows attribute
   window.handleActionClick = function(actionType) {
     const tableContainer = document.getElementById('selectable_rows_with_actions');
     if (!tableContainer) return;
 
-    const checkboxes = tableContainer.querySelectorAll('input[type="checkbox"]:checked');
+    // Get selected rows from the data attribute
+    const selectedRowsJSON = tableContainer.getAttribute('data-selected-rows');
+    let selectedRowIds = [];
 
-    const selectedCheckboxes = Array.from(checkboxes).filter(checkbox =>
-      checkbox.id !== 'select-all-rows' &&
-      !checkbox.closest('#select-all-rows')
-    );
+    try {
+      // Parse the JSON string from the data attribute
+      if (selectedRowsJSON) {
+        selectedRowIds = JSON.parse(selectedRowsJSON);
+      }
+    } catch (e) {
+      // Fallback if JSON parsing fails
+      const checkboxes = tableContainer.querySelectorAll('input[type="checkbox"]:checked');
+      const selectedCheckboxes = Array.from(checkboxes).filter(checkbox =>
+        checkbox.id !== 'select-all-rows' &&
+        !checkbox.closest('#select-all-rows')
+      );
+      selectedRowIds = selectedCheckboxes.map(checkbox => checkbox.id);
+    }
 
-    const selectedRowIds = selectedCheckboxes.map(checkbox => checkbox.id);
-
-    if (selectedRowIds.length === 0) {
+    // Show appropriate message
+    if (!selectedRowIds || selectedRowIds.length === 0) {
       alert('No Selection Made');
     } else {
       if (actionType === 'export') {
@@ -85,10 +97,13 @@ actions = [
     }
   };
 
+  // Add event listeners when the DOM is ready
   document.addEventListener('DOMContentLoaded', function() {
+    // Get the buttons
     const exportBtn = document.getElementById('export-selected-rows-btn');
     const deleteBtn = document.getElementById('delete-selected-rows-btn');
 
+    // Add click event listeners
     if (exportBtn) {
       exportBtn.addEventListener('click', function(e) {
         e.preventDefault();
@@ -103,6 +118,7 @@ actions = [
       });
     }
 
+    // Optional: Event delegation through the action bar
     const actionBar = document.querySelector('.row-selection-actions-card');
     if (actionBar) {
       actionBar.addEventListener('click', function(e) {
