@@ -22,5 +22,72 @@
   document.addEventListener("pb-typeahead-kit-typeahead-error-example-result-option-select", function(event) {
     console.log('Option selected')
     console.dir(event.detail)
-  })
+  });
+
+  // Add the warning icon to error messages
+  document.addEventListener('DOMContentLoaded', function() {
+    // Set a timeout to ensure the error elements are fully rendered
+    setTimeout(function() {
+      const errorElements = document.querySelectorAll('.pb_body_kit_negative');
+
+      if (errorElements.length > 0) {
+        errorElements.forEach(element => {
+          // Check if we've already added an icon to this element
+          if (!element.querySelector('svg')) {
+            const svgElement = document.createElement('span');
+            svgElement.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 31 24" fill="none" class="pb_custom_icon svg-inline--fa pb_icon_kit svg_fw"><path d="M15.168 3.98438L5.88672 19.2188C5.79297 19.3594 5.79297 19.4531 5.79297 19.5938C5.79297 19.9688 6.07422 20.25 6.44922 20.25H24.5898C24.9648 20.25 25.293 19.9688 25.293 19.5938C25.293 19.4531 25.2461 19.3594 25.1523 19.2188L15.8711 3.98438C15.8242 3.84375 15.6836 3.75 15.543 3.75C15.3555 3.75 15.2617 3.84375 15.168 3.98438ZM13.2461 2.8125C13.7148 2.01562 14.6055 1.5 15.543 1.5C16.4336 1.5 17.3242 2.01562 17.793 2.8125L27.0742 18.0469C27.3555 18.5156 27.543 19.0312 27.543 19.5938C27.543 21.1875 26.2305 22.5 24.5898 22.5H6.44922C4.85547 22.5 3.54297 21.1875 3.54297 19.5938C3.54297 19.0312 3.68359 18.5156 3.96484 18.0469L13.2461 2.8125ZM17.043 17.25C17.043 18.0938 16.3398 18.75 15.543 18.75C14.6992 18.75 14.043 18.0938 14.043 17.25C14.043 16.4531 14.6992 15.75 15.543 15.75C16.3398 15.75 17.043 16.4531 17.043 17.25ZM16.668 8.625V13.125C16.668 13.7812 16.1523 14.25 15.543 14.25C14.8867 14.25 14.418 13.7812 14.418 13.125V8.625C14.418 8.01562 14.8867 7.5 15.543 7.5C16.1523 7.5 16.668 8.01562 16.668 8.625Z" fill="currentColor"></path></svg>';
+            svgElement.style.marginRight = '6px';
+            svgElement.style.display = 'inline-flex';
+            svgElement.style.verticalAlign = 'middle';
+            svgElement.style.color = 'currentColor'; // Use the current text color
+            svgElement.style.width = '16px';
+            svgElement.style.height = '16px';
+            element.prepend(svgElement);
+          }
+        });
+        console.log('Added warning icons to', errorElements.length, 'error elements');
+      }
+    }, 500); // 500ms delay to ensure elements are loaded
+  });
+
+  // Additionally, set up a MutationObserver to catch dynamically added error elements
+  document.addEventListener('DOMContentLoaded', function() {
+    const observer = new MutationObserver(function(mutations) {
+      mutations.forEach(function(mutation) {
+        if (mutation.addedNodes.length) {
+          // Check for newly added error elements
+          mutation.addedNodes.forEach(function(node) {
+            if (node.nodeType === Node.ELEMENT_NODE) {
+              // Check the node itself
+              if (node.classList && node.classList.contains('pb_body_kit_negative')) {
+                addWarningIcon(node);
+              }
+
+              // Check children of the node
+              const errorElements = node.querySelectorAll('.pb_body_kit_negative');
+              errorElements.forEach(addWarningIcon);
+            }
+          });
+        }
+      });
+    });
+
+    function addWarningIcon(element) {
+      // Only add icon if it doesn't already have one
+      if (element.querySelector('svg')) return;
+
+      const svgElement = document.createElement('span');
+      svgElement.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 31 24" fill="none" class="pb_custom_icon svg-inline--fa pb_icon_kit svg_fw"><path d="M15.168 3.98438L5.88672 19.2188C5.79297 19.3594 5.79297 19.4531 5.79297 19.5938C5.79297 19.9688 6.07422 20.25 6.44922 20.25H24.5898C24.9648 20.25 25.293 19.9688 25.293 19.5938C25.293 19.4531 25.2461 19.3594 25.1523 19.2188L15.8711 3.98438C15.8242 3.84375 15.6836 3.75 15.543 3.75C15.3555 3.75 15.2617 3.84375 15.168 3.98438ZM13.2461 2.8125C13.7148 2.01562 14.6055 1.5 15.543 1.5C16.4336 1.5 17.3242 2.01562 17.793 2.8125L27.0742 18.0469C27.3555 18.5156 27.543 19.0312 27.543 19.5938C27.543 21.1875 26.2305 22.5 24.5898 22.5H6.44922C4.85547 22.5 3.54297 21.1875 3.54297 19.5938C3.54297 19.0312 3.68359 18.5156 3.96484 18.0469L13.2461 2.8125ZM17.043 17.25C17.043 18.0938 16.3398 18.75 15.543 18.75C14.6992 18.75 14.043 18.0938 14.043 17.25C14.043 16.4531 14.6992 15.75 15.543 15.75C16.3398 15.75 17.043 16.4531 17.043 17.25ZM16.668 8.625V13.125C16.668 13.7812 16.1523 14.25 15.543 14.25C14.8867 14.25 14.418 13.7812 14.418 13.125V8.625C14.418 8.01562 14.8867 7.5 15.543 7.5C16.1523 7.5 16.668 8.01562 16.668 8.625Z" fill="currentColor"></path></svg>';
+      svgElement.style.marginRight = '6px';
+      svgElement.style.display = 'inline-flex';
+      svgElement.style.verticalAlign = 'middle';
+      svgElement.style.color = 'currentColor';
+      svgElement.style.width = '16px';
+      svgElement.style.height = '16px';
+      element.prepend(svgElement);
+    }
+
+    // Start observing the document body for changes
+    observer.observe(document.body, { childList: true, subtree: true });
+  });
 <% end %>
