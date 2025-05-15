@@ -4,7 +4,7 @@ import Filter from '../../pb_filter/_filter'
 import Select from '../../pb_select/_select'
 import TextInput from '../../pb_text_input/_text_input'
 
-import { useCollapsible, SectionSeparator, Checkbox, Button, Flex, Table } from 'playbook-ui'
+import { useCollapsible, SectionSeparator, Checkbox, Flex, Table, Caption, Icon } from 'playbook-ui'
 
 const people = [
   { name: 'Anakin Skywalker', territory: 'A galaxy far far away, like really far away...', products: ['Doors', 'Windows', 'Solar'] },
@@ -179,14 +179,22 @@ const FilterSidebar = (props) => {
                 </div>
               </>
             }
-            <Button
-                icon={isProductsCollapsed ? "chevron-down" : "chevron-up"}
-                iconRight
-                onClick={() => setIsProductsCollapsed(!isProductsCollapsed)}
-                padding="none"
-                text={isProductsCollapsed ? "Show More" : "Show Less"}
-                variant="link"
-            />
+            <div onClick={() => setIsProductsCollapsed(!isProductsCollapsed)}>
+              <Flex
+                  cursor="pointer"
+                  marginBottom="sm"
+              >
+                <Caption
+                    color="link"
+                    marginRight="xxs"
+                    size="xs"
+                    text={isProductsCollapsed ? "Show More" : "Show Less"}
+                />
+                <Icon
+                    icon={isProductsCollapsed ? "chevron-down" : "chevron-up"}
+                />
+              </Flex>
+            </div>
           </Filter.Section>
         </Filter>
         <Table
