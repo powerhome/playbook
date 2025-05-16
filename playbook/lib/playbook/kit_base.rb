@@ -129,9 +129,9 @@ module Playbook
       end
 
       inline_styles = dynamic_inline_props
-      merged[:style] = if inline_styles.present?
-                         merged[:style].present? ? "#{merged[:style]}; #{inline_styles}" : inline_styles
-                       end
+      if inline_styles.present?
+        merged[:style] = merged[:style].present? ? "#{merged[:style]}; #{inline_styles}" : inline_styles
+      end
 
       merged.deep_merge(data_attributes)
     end
