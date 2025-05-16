@@ -5,7 +5,6 @@
     { label: 'Doors', value: '#00FF00' },
     { label: 'Roofs', value: '#0000FF' },
   ]
-
 %>
 
 <%= pb_rails("typeahead", props: {
@@ -24,56 +23,59 @@
     console.dir(event.detail)
   });
 
-  // Add the warning icon to error messages
+  // Add the warning icon to error messages in this specific typeahead component
   document.addEventListener('DOMContentLoaded', function() {
-    // Set a timeout to ensure the error elements are fully rendered
-    setTimeout(function() {
-      const errorElements = document.querySelectorAll('.pb_body_kit_negative');
+    // Function to locate and add icons to the typeahead error elements
+    function addIconsToTypeaheadErrors() {
+      // Try different selector strategies to find our target container
+      // First, try finding directly by ID
+      let container = document.getElementById('typeahead-error-example');
 
-      if (errorElements.length > 0) {
-        errorElements.forEach(element => {
-          // Check if we've already added an icon to this element
-          if (!element.querySelector('svg')) {
-            const svgElement = document.createElement('span');
-            svgElement.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 31 24" fill="none" class="pb_custom_icon svg-inline--fa pb_icon_kit svg_fw"><path d="M15.168 3.98438L5.88672 19.2188C5.79297 19.3594 5.79297 19.4531 5.79297 19.5938C5.79297 19.9688 6.07422 20.25 6.44922 20.25H24.5898C24.9648 20.25 25.293 19.9688 25.293 19.5938C25.293 19.4531 25.2461 19.3594 25.1523 19.2188L15.8711 3.98438C15.8242 3.84375 15.6836 3.75 15.543 3.75C15.3555 3.75 15.2617 3.84375 15.168 3.98438ZM13.2461 2.8125C13.7148 2.01562 14.6055 1.5 15.543 1.5C16.4336 1.5 17.3242 2.01562 17.793 2.8125L27.0742 18.0469C27.3555 18.5156 27.543 19.0312 27.543 19.5938C27.543 21.1875 26.2305 22.5 24.5898 22.5H6.44922C4.85547 22.5 3.54297 21.1875 3.54297 19.5938C3.54297 19.0312 3.68359 18.5156 3.96484 18.0469L13.2461 2.8125ZM17.043 17.25C17.043 18.0938 16.3398 18.75 15.543 18.75C14.6992 18.75 14.043 18.0938 14.043 17.25C14.043 16.4531 14.6992 15.75 15.543 15.75C16.3398 15.75 17.043 16.4531 17.043 17.25ZM16.668 8.625V13.125C16.668 13.7812 16.1523 14.25 15.543 14.25C14.8867 14.25 14.418 13.7812 14.418 13.125V8.625C14.418 8.01562 14.8867 7.5 15.543 7.5C16.1523 7.5 16.668 8.01562 16.668 8.625Z" fill="currentColor"></path></svg>';
-            svgElement.style.marginRight = '6px';
-            svgElement.style.display = 'inline-flex';
-            svgElement.style.verticalAlign = 'middle';
-            svgElement.style.color = 'currentColor'; // Use the current text color
-            svgElement.style.width = '16px';
-            svgElement.style.height = '16px';
-            element.prepend(svgElement);
-          }
-        });
-        console.log('Added warning icons to', errorElements.length, 'error elements');
+      // If we found the element, get its parent container that would contain the error message
+      if (container) {
+        // Try to find the closest container that might contain the error message
+        // Using multiple approaches for better reliability
+        container = container.closest('.pb_type_ahead_kit_container') ||
+                   container.closest('.pb_form_kit_field_wrapper') ||
+                   container.parentElement;
       }
-    }, 500); // 500ms delay to ensure elements are loaded
-  });
 
-  // Additionally, set up a MutationObserver to catch dynamically added error elements
-  document.addEventListener('DOMContentLoaded', function() {
-    const observer = new MutationObserver(function(mutations) {
-      mutations.forEach(function(mutation) {
-        if (mutation.addedNodes.length) {
-          // Check for newly added error elements
-          mutation.addedNodes.forEach(function(node) {
-            if (node.nodeType === Node.ELEMENT_NODE) {
-              // Check the node itself
-              if (node.classList && node.classList.contains('pb_body_kit_negative')) {
-                addWarningIcon(node);
-              }
+      // If we didn't find a container, try finding error elements near the typeahead
+      if (!container) {
+        // Look for any error elements that are siblings or children of elements with our ID
+        const typeahead = document.getElementById('typeahead-error-example');
+        if (typeahead) {
+          const nearbyErrors = [];
 
-              // Check children of the node
-              const errorElements = node.querySelectorAll('.pb_body_kit_negative');
-              errorElements.forEach(addWarningIcon);
+          // Check siblings
+          let sibling = typeahead.nextElementSibling;
+          while (sibling) {
+            if (sibling.classList.contains('pb_body_kit_negative')) {
+              nearbyErrors.push(sibling);
             }
-          });
-        }
-      });
-    });
+            sibling = sibling.nextElementSibling;
+          }
 
-    function addWarningIcon(element) {
-      // Only add icon if it doesn't already have one
+          // If we found nearby errors, add icons to them
+          nearbyErrors.forEach(addIconToElement);
+          return;
+        }
+      }
+
+      // If we have a container, look for error elements within it
+      if (container) {
+        const errorElements = container.querySelectorAll('.pb_body_kit_negative');
+        errorElements.forEach(addIconToElement);
+      }
+
+      // As a fallback, look for any error elements with a specific pattern related to our ID
+      const specificErrorElements = document.querySelectorAll('[id*="typeahead-error-example"] .pb_body_kit_negative, [id*="typeahead-error-example"].pb_body_kit_negative');
+      specificErrorElements.forEach(addIconToElement);
+    }
+
+    // Helper function to add the SVG icon
+    function addIconToElement(element) {
+      // Skip if already has an SVG
       if (element.querySelector('svg')) return;
 
       const svgElement = document.createElement('span');
@@ -87,7 +89,62 @@
       element.prepend(svgElement);
     }
 
+    // Try immediately and then with multiple timeouts
+    addIconsToTypeaheadErrors();
+
+    // Try again after a short delay
+    setTimeout(addIconsToTypeaheadErrors, 100);
+
+    // And again after a longer delay to ensure all components are loaded
+    setTimeout(addIconsToTypeaheadErrors, 500);
+
+    // Set up a MutationObserver to watch for DOM changes
+    const observer = new MutationObserver(function(mutations) {
+      let shouldCheck = false;
+
+      mutations.forEach(function(mutation) {
+        // Check if any added nodes match our target or contain elements we care about
+        if (mutation.addedNodes.length) {
+          for (let i = 0; i < mutation.addedNodes.length; i++) {
+            const node = mutation.addedNodes[i];
+            if (node.nodeType === Node.ELEMENT_NODE) {
+              // If the node has an ID that matches our target
+              if (node.id === 'typeahead-error-example' ||
+                  node.querySelector('#typeahead-error-example')) {
+                shouldCheck = true;
+                break;
+              }
+
+              // If the node has error class
+              if (node.classList && node.classList.contains('pb_body_kit_negative')) {
+                shouldCheck = true;
+                break;
+              }
+
+              // If the node contains error elements
+              if (node.querySelector('.pb_body_kit_negative')) {
+                shouldCheck = true;
+                break;
+              }
+            }
+          }
+        }
+
+        // Also check for attribute changes which might indicate an error being shown
+        if (mutation.type === 'attributes' &&
+            mutation.attributeName === 'class' &&
+            mutation.target.classList.contains('pb_body_kit_negative')) {
+          shouldCheck = true;
+        }
+      });
+
+      // If we found relevant changes, run our check function
+      if (shouldCheck) {
+        addIconsToTypeaheadErrors();
+      }
+    });
+
     // Start observing the document body for changes
-    observer.observe(document.body, { childList: true, subtree: true });
+    observer.observe(document.body, { childList: true, subtree: true, attributes: true });
   });
 <% end %>
