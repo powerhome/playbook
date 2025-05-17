@@ -49,6 +49,7 @@ module Playbook
         if selectable_rows
           additional_classes = []
           additional_classes << "table-header-cells-custom"
+          additional_classes << "header-cells-with-actions" if show_actions_bar
           additional_classes << "checkbox-cell-header"
           additional_classes << "pinned-left" if responsive == "scroll"
           pb_rails("table/table_header", props: {
