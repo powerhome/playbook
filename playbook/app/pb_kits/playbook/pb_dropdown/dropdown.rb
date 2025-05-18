@@ -43,7 +43,13 @@ module Playbook
       end
 
       def input_default_value
-        default_value.present? ? default_value.transform_keys(&:to_s)["id"] : ""
+        return "" unless default_value.present?
+
+        if multi_select
+          default_value.map { |v| v.transform_keys(&:to_s)["id"] }.join(",")
+        else
+          default_value.transform_keys(&:to_s)["id"]
+        end
       end
 
       def separators_class

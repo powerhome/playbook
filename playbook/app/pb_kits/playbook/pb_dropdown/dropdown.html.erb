@@ -6,7 +6,7 @@
         <input
             data-default-value="<%= input_default_value %>"
             id="dropdown-selected-option"
-            name="<%= object.name %>"
+            name="<%= object.name %><%= '[]' if object.multi_select %>"
             style="display: none"
             <%= object.required ? "required" : ""%>
         />

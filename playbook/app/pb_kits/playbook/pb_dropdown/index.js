@@ -29,6 +29,7 @@ export default class PbDropdown extends PbEnhancedElement {
 
   connect() {
     this.keyboardHandler = new PbDropdownKeyboard(this);
+    this.isMultiSelect = this.element.dataset.pbDropdownMultiSelect === "true";
     this.setDefaultValue();
     this.bindEventListeners();
     this.bindSearchInput();
@@ -37,27 +38,26 @@ export default class PbDropdown extends PbEnhancedElement {
     this.handleFormReset();
     this.bindSearchBar();
     this.updatePills();
-    this.isMultiSelect = this.element.dataset.pbDropdownMultiSelect === "true";
 
     this.clearBtn = this.element.querySelector(CLEAR_ICON_SELECTOR);
     if (this.clearBtn) {
       this.clearBtn.style.display = "none";
-    this.clearBtn.addEventListener("click", (e) => {
-      e.stopPropagation();
-      this.clearSelection();
-    });
+      this.clearBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        this.clearSelection();
+      });
     }
     this.updateClearButton();
   }
 
   updateClearButton() {
-  if (!this.clearBtn) return;
-     const hasSelection = this.isMultiSelect
-     ? PbDropdown.selectedOptions.size > 0
-     : Boolean(this.element.querySelector(DROPDOWN_INPUT).value);
+    if (!this.clearBtn) return;
+    const hasSelection = this.isMultiSelect
+      ? PbDropdown.selectedOptions.size > 0
+      : Boolean(this.element.querySelector(DROPDOWN_INPUT).value);
 
-   this.clearBtn.style.display = hasSelection ? "" : "none";
- }
+    this.clearBtn.style.display = hasSelection ? "" : "none";
+  }
 
   bindEventListeners() {
     const customTrigger =
@@ -99,7 +99,7 @@ export default class PbDropdown extends PbEnhancedElement {
   }
 
   adjustDropdownHeight() {
-     if (this.target.classList.contains("open")) {
+    if (this.target.classList.contains("open")) {
       const el = this.target;
       el.style.height = "auto";
       requestAnimationFrame(() => {
@@ -122,7 +122,7 @@ export default class PbDropdown extends PbEnhancedElement {
       opt.style.display = match ? "" : "none";
     });
 
-  this.adjustDropdownHeight();
+    this.adjustDropdownHeight();
   }
 
   handleOptionClick(event) {
@@ -301,22 +301,53 @@ export default class PbDropdown extends PbEnhancedElement {
 
   setDefaultValue() {
     const hiddenInput = this.element.querySelector(DROPDOWN_INPUT);
-    const options = this.element.querySelectorAll(OPTION_SELECTOR);
-
+    const optionEls   = Array.from(
+        this.element.querySelectorAll(OPTION_SELECTOR)
+      );
     const defaultValue = hiddenInput.dataset.defaultValue || "";
     hiddenInput.value = defaultValue;
+    if (!defaultValue) return;
 
-    if (defaultValue) {
-      const selectedOption = Array.from(options).find((option) => {
-        return (
-          JSON.parse(option.dataset.dropdownOptionLabel).id === defaultValue
-        );
+  if (this.isMultiSelect) {
+    const ids = defaultValue.split(",")
+    ids.forEach((id) => {
+      const selectedOption = optionEls.find((opt) => {
+        try {
+          return JSON.parse(opt.dataset.dropdownOptionLabel).id === id;
+        } catch {
+          return false;
+        }
       });
-      selectedOption.classList.add("pb_dropdown_option_selected");
-      this.setTriggerElementText(
-        JSON.parse(selectedOption.dataset.dropdownOptionLabel).label
-      );
-    }
+      if (!selectedOption) {
+        console.warn(`Dropdown default ID ${id} not found`);
+        return;
+      }
+
+      const raw = selectedOption.dataset.dropdownOptionLabel;
+      PbDropdown.selectedOptions.add(raw);
+
+      selectedOption.style.display = "none";
+    });
+
+    this.updatePills();
+    this.updateClearButton();       
+    this.adjustDropdownHeight(); 
+
+  } else {
+    const selectedOption = optionEls.find((opt) => {
+      try {
+        return JSON.parse(opt.dataset.dropdownOptionLabel).id === defaultValue;
+      } catch {
+        return false;
+      }
+    });
+    if (!selectedOption) return;
+
+    selectedOption.classList.add("pb_dropdown_option_selected");
+    this.setTriggerElementText(
+      JSON.parse(selectedOption.dataset.dropdownOptionLabel).label
+    );
+  } 
   }
 
   handleFormReset() {
@@ -344,15 +375,15 @@ export default class PbDropdown extends PbEnhancedElement {
 
     if (this.searchInput) {
       this.searchInput.value = "";
-       if (this.target.classList.contains("open")) {
-      const el = this.target;
-      el.style.height = "auto";
-      requestAnimationFrame(() => {
-        const newHeight = el.scrollHeight + "px";
-        el.offsetHeight; // force reflow
-        el.style.height = newHeight;
-      });
-    }
+      if (this.target.classList.contains("open")) {
+        const el = this.target;
+        el.style.height = "auto";
+        requestAnimationFrame(() => {
+          const newHeight = el.scrollHeight + "px";
+          el.offsetHeight; // force reflow
+          el.style.height = newHeight;
+        });
+      }
     }
   }
 
@@ -423,16 +454,14 @@ export default class PbDropdown extends PbEnhancedElement {
   clearSelection() {
     if (this.isMultiSelect) {
       PbDropdown.selectedOptions.clear();
-      this.element
-      .querySelectorAll(OPTION_SELECTOR)
-      .forEach((opt) => {
+      this.element.querySelectorAll(OPTION_SELECTOR).forEach((opt) => {
         opt.style.display = "";
       });
       if (this.target.classList.contains("open")) {
         this.showElement(this.target);
       }
     }
-    this.resetDropdownValue()
+    this.resetDropdownValue();
     this.updatePills();
     this.updateClearButton();
   }
