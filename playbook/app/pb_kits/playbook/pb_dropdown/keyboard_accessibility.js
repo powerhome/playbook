@@ -97,7 +97,8 @@ export class PbDropdownKeyboard {
 
   selectOption() {
     const option = this.options[this.focusedOptionIndex];
-    this.dropdown.onOptionSelected(option.dataset.dropdownOptionLabel, option);
-    this.dropdown.hideElement(this.dropdown.target);
+    this.dropdown.handleOptionClick({ target: option });
+    this.dropdown.toggleElement(this.dropdown.target);
+    this.dropdown.updateClearButton();
   }
 }

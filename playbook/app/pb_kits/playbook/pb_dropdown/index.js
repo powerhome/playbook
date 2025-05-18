@@ -24,6 +24,9 @@ export default class PbDropdown extends PbEnhancedElement {
     return this.element.parentNode.querySelector(CONTAINER_SELECTOR);
   }
 
+  static selectedOptions = new Set();
+  clearBtn = null;
+
   connect() {
     this.keyboardHandler = new PbDropdownKeyboard(this);
     this.setDefaultValue();
@@ -36,16 +39,25 @@ export default class PbDropdown extends PbEnhancedElement {
     this.updatePills();
     this.isMultiSelect = this.element.dataset.pbDropdownMultiSelect === "true";
 
-    const clearBtn = this.element.querySelector(CLEAR_ICON_SELECTOR);
-    if (clearBtn) {
-    clearBtn.addEventListener("click", (e) => {
+    this.clearBtn = this.element.querySelector(CLEAR_ICON_SELECTOR);
+    if (this.clearBtn) {
+      this.clearBtn.style.display = "none";
+    this.clearBtn.addEventListener("click", (e) => {
       e.stopPropagation();
       this.clearSelection();
     });
     }
+    this.updateClearButton();
   }
 
-  static selectedOptions = new Set();
+  updateClearButton() {
+  if (!this.clearBtn) return;
+     const hasSelection = this.isMultiSelect
+     ? PbDropdown.selectedOptions.size > 0
+     : Boolean(this.element.querySelector(DROPDOWN_INPUT).value);
+
+   this.clearBtn.style.display = hasSelection ? "" : "none";
+ }
 
   bindEventListeners() {
     const customTrigger =
@@ -132,8 +144,8 @@ export default class PbDropdown extends PbEnhancedElement {
       }
 
       this.clearFormValidation(hiddenInput);
-
       this.onOptionSelected(value, option);
+      this.updateClearButton();
     }
   }
 
@@ -211,6 +223,7 @@ export default class PbDropdown extends PbEnhancedElement {
       });
       selectedOption.classList.add("pb_dropdown_option_selected");
     }
+    this.updateClearButton();
   }
 
   showElement(elem) {
@@ -401,6 +414,7 @@ export default class PbDropdown extends PbEnhancedElement {
         }
 
         this.updatePills();
+        this.updateClearButton();
       });
       wrapper.appendChild(pill);
     });
@@ -420,5 +434,6 @@ export default class PbDropdown extends PbEnhancedElement {
     }
     this.resetDropdownValue()
     this.updatePills();
+    this.updateClearButton();
   }
 }
