@@ -41,6 +41,16 @@ const Person = (props: PersonProps): React.ReactElement => {
     className
   )
 
+  const hasAllEmptyProps = [firstName, lastName].every(field => field === undefined || field === null || field === '')
+
+  if (hasAllEmptyProps) {
+    return (
+      <>
+        —
+      </>
+    )
+  }
+
   return (
     <div
         {...ariaProps}
@@ -53,13 +63,13 @@ const Person = (props: PersonProps): React.ReactElement => {
           className="pb_person_first"
           tag="span"
       >
-        {firstName}
+        {firstName ?? ''}
       </Body>
       {lastName && 
         <Title
             className="pb_person_first"
             size={4}
-            text={` ${lastName}`}
+            text={lastName ? ` ${lastName}` : ''}
         />
       }
     </div>

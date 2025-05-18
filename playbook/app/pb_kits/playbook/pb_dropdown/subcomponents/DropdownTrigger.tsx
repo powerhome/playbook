@@ -86,7 +86,7 @@ const DropdownTrigger = (props: DropdownTriggerProps) => {
     : selectedArray.map((option) => option.label).join(", ");
 
   const customDisplayPlaceholder = selected?.label ? (
-    <b>{selected.label}</b>
+    ""
   ) : autocomplete ? (
     ""
   ) : placeholder ? (

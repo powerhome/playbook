@@ -20,8 +20,11 @@ $form_pill_colors: map-merge($status_color_text, map-merge($data_colors, $produc
   margin-bottom: 2px;
   margin-top: 2px;
   cursor: pointer;
-  .pb_form_pill_text, .pb_form_pill_close, .pb_form_pill_tag{
+  .pb_form_pill_text, .pb_form_pill_tag {
     font-size: $font_small !important;
+  }
+  .pb_form_pill_close {
+    font-size: 17px;
   }
 
   &[class*=wrapped] {
@@ -96,7 +99,9 @@ $form_pill_colors: map-merge($status_color_text, map-merge($data_colors, $produc
         display: flex;
         align-items: center;
         height: 17px;
-        border-radius: calc(50%);
+        width: 17px;
+        justify-content: center;
+        border-radius: 50%;
         cursor: pointer;
         @if ($color_name == "neutral") {
           color: $text_lt_default;
@@ -146,8 +151,7 @@ $form_pill_colors: map-merge($status_color_text, map-merge($data_colors, $produc
     outline-offset: -1px;
   }
   .pb_form_pill_icon {
-    height: 12px !important;
-    width: 12px !important;
+    height: 0.875em;
     padding-right: $space_xs;
     + .pb_form_pill_text, + .pb_form_pill_tag,
     + .pb_tooltip_kit .pb_form_pill_text, + .pb_tooltip_kit .pb_form_pill_tag,
@@ -158,7 +162,7 @@ $form_pill_colors: map-merge($status_color_text, map-merge($data_colors, $produc
   &.small {
     height: 17px;
     padding: 0 $space-xs;
-    .pb_form_pill_text, .pb_form_pill_close, .pb_form_pill_tag {
+    .pb_form_pill_text, .pb_form_pill_tag {
       font-size: $font_smallest !important;
     }
     .pb_form_pill_text, .pb_form_pill_tag {
@@ -166,17 +170,20 @@ $form_pill_colors: map-merge($status_color_text, map-merge($data_colors, $produc
       padding: 0 $space_xxs;
     }
     .pb_form_pill_close {
-      height: 10px;
-      border-radius: calc(50%);
+      height: 14px;
+      width: 14px;
+      font-size: 15px;
+      border-radius: 50%;
     }
     [class^=pb_avatar_kit] .avatar_wrapper {
-      flex-basis: 16px;
-      height: 16px;
-      margin-top: 2px;
-      width: 16px;
-      &::before { line-height: 16.5px; }
+      flex-basis: 14px;
+      height: 14px;
+      margin-top: 3px;
+      width: 14px;
+      &::before { line-height: 15px; }
     }
     .pb_form_pill_icon {
+      height: 0.75em;
       padding-right: $space_xxs;
       + .pb_form_pill_text, + .pb_form_pill_tag,
       + .pb_tooltip_kit .pb_form_pill_text, + .pb_tooltip_kit .pb_form_pill_tag,

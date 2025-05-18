@@ -9,6 +9,7 @@
         <%= pb_rails("text_input", props: {
           type: "file",
           dark: object.dark,
+          error: object.error.presence,
           input_options: {
             id: "upload-#{object.id}",
             classname: "cursor_pointer",

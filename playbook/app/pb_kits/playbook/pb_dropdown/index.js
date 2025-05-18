@@ -182,12 +182,22 @@ export default class PbDropdown extends PbEnhancedElement {
     const customDisplayElement = this.element.querySelector(
       "#dropdown_trigger_custom_display"
     );
+
     if (triggerElement) {
-      if (!this.isMultiSelect) {
-        const selectedLabel = JSON.parse(value).label;
-        triggerElement.textContent = selectedLabel;
-      }
+      if (!this.isMultiSelect && !customDisplayElement) {
+      const selectedLabel = JSON.parse(value).label;
+        triggerElement.textContent = selectedLabel
+     }
       if (customDisplayElement) {
+          triggerElement.textContent = ""
+        this.element.setAttribute("data-option-selected", value);
+        const selectedObj = JSON.parse(value);
+        this.element.dispatchEvent(
+          new CustomEvent("pb:dropdown:selected", {
+            detail: selectedObj,
+            bubbles: true,
+          })
+        );
         customDisplayElement.style.display = "block";
         customDisplayElement.style.paddingRight = "8px";
       }

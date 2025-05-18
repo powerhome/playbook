@@ -50,3 +50,21 @@ test('displays custom message', () => {
   const kit = screen.getByTestId(testid)
   expect(kit).toHaveTextContent('Hello world!')
 })
+
+test('handles error state with error prop', () => {
+  const errorText = "Test error message"
+  render(
+    <FileUpload
+        data={{ testid: testid }}
+        error={errorText}
+    />
+  )
+
+  const kit = screen.getByTestId(testid)
+  
+  expect(kit).toHaveClass('pb_file_upload_kit')
+  expect(kit).toHaveClass('error')
+  
+  const errorElement = screen.getByText(errorText)
+  expect(errorElement).toBeInTheDocument()
+})

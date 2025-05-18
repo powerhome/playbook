@@ -53,6 +53,15 @@
     width: 100%;
   }
 
+  .column-visibility-dropdown-wrapper {
+    position: unset !important;
+  }
+  .column-visibility-dropdown {
+    width: unset !important;
+    right: $space_xxs;
+    text-align: left;
+  }
+
   // Virtualized table styles
   .virtualized-table-row {
     display: table !important;
