@@ -23,7 +23,7 @@
 @mixin error-state-right-side-select-kit {
   &:has(.pb_text_input_kit:not(.error)):has(.pb_text_input_kit_label):has(.pb_select_kit_wrapper.error),
   &:has(.pb_text_input_kit.error):has(.pb_text_input_kit_label):has(.pb_select_kit_wrapper) {
-    &:not(:has(.pb_phone_number_input)) {
+    &:not(:has(.pb_phone_number_input)):not(:has(.passphrase-text-input)) {
       align-items: flex-start;
 
       .pb_select_kit_wrapper {
@@ -49,7 +49,7 @@
 
 @mixin error-state-left-side-select-kit {
   &:has(.pb_select_kit_label):has(.pb_select_kit_wrapper):has(.pb_text_input_kit.error) {
-    &:not(:has(.pb_phone_number_input)) {
+    &:not(:has(.pb_phone_number_input)):not(:has(.passphrase-text-input)) {
       align-items: flex-start;
 
       .pb_text_input_kit.error {
