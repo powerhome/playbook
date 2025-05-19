@@ -228,6 +228,7 @@ export default class PbDropdown extends PbEnhancedElement {
     const autocompleteInput = this.element.querySelector(SEARCH_INPUT_SELECTOR);
     if (autocompleteInput && !this.isMultiSelect) {
       autocompleteInput.value = JSON.parse(value).label;
+      this.emitSelectionChange();
     }
 
     const customTrigger = this.element.querySelector(CUSTOM_DISPLAY_SELECTOR);
