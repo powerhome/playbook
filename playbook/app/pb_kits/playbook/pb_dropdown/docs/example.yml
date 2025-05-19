@@ -3,6 +3,7 @@ examples:
   - dropdown_default: Default
   - dropdown_with_autocomplete: Autocomplete
   - dropdown_multi_select_rails: Multi Select
+  - dropdown_multi_select_with_autocomplete: Multi Select with Autocomplete
   - dropdown_multi_select_display_rails: Multi Select with Form Pill Props
   - dropdown_subtle_variant: Subtle Variant
   - dropdown_subcomponent_structure_rails: Subcomponent Structure

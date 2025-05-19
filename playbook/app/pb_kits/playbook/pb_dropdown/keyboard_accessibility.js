@@ -71,7 +71,7 @@ export class PbDropdownKeyboard {
         if (this.searchInput) {
           setTimeout(() => {
             if (this.searchInput.value.trim() === "") {
-              this.dropdown.resetDropdownValue();
+              this.dropdown.handleBackspaceClear();
             }
           }, 0); 
         }

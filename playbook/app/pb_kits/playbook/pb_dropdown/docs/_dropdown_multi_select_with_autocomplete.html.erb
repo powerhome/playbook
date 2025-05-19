@@ -1,0 +1,29 @@
+<%
+  options = [
+    { label: 'United States', value: 'United States', id: 'us' },
+    { label: 'Canada', value: 'Canada', id: 'ca' },
+    { label: 'Pakistan', value: 'Pakistan', id: 'pk' },
+    { label: 'India', value: 'India', id: 'in' },
+    { label: 'United Kingdom', value: 'United Kingdom', id: 'uk' },
+    { label: 'Australia', value: 'Australia', id: 'au' },
+    { label: 'New Zealand', value: 'New Zealand', id: 'nz' },
+    { label: 'Germany', value: 'Germany', id: 'de' },
+    { label: 'France', value: 'France', id: 'fr' },
+    { label: 'Italy', value: 'Italy', id: 'it' },
+  ]
+%>
+
+<%= pb_rails("dropdown", props: {
+  autocomplete: true,
+  options: options,
+  multi_select: true,
+}) %>
+
+<script>
+  document.addEventListener("pb:dropdown:selected", (e) => {
+    const option   = e.detail;
+    const dropdown = e.target;
+
+    console.log("Selected option:", option);
+})
+</script>

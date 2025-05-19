@@ -189,9 +189,6 @@ export default class PbDropdown extends PbEnhancedElement {
       if (!this.isMultiSelect) {
         const selectedLabel = JSON.parse(value).label;
         triggerElement.textContent = selectedLabel;
-      }
-      if (customDisplayElement) {
-        triggerElement.textContent = "";
         this.element.setAttribute("data-option-selected", value);
         const selectedObj = JSON.parse(value);
         this.element.dispatchEvent(
@@ -200,13 +197,16 @@ export default class PbDropdown extends PbEnhancedElement {
             bubbles: true,
           })
         );
+      }
+      if (customDisplayElement) {
+        triggerElement.textContent = "";
         customDisplayElement.style.display = "block";
         customDisplayElement.style.paddingRight = "8px";
       } 
     }
 
     const autocompleteInput = this.element.querySelector(SEARCH_INPUT_SELECTOR);
-    if (autocompleteInput) {
+    if (autocompleteInput && !this.isMultiSelect) {
       autocompleteInput.value = JSON.parse(value).label;
     }
 
@@ -220,6 +220,7 @@ export default class PbDropdown extends PbEnhancedElement {
 
     const options = this.element.querySelectorAll(OPTION_SELECTOR);
     if (this.isMultiSelect) {
+      this.element.setAttribute("data-option-selected", Array.from(this.selectedOptions));
       this.element.dispatchEvent(
         new CustomEvent("pb:dropdown:selected", {
           detail: Array.from(this.selectedOptions),
@@ -405,6 +406,12 @@ export default class PbDropdown extends PbEnhancedElement {
         });
       }
     }
+    if (this.isMultiSelect) {
+      this.selectedOptions.clear();
+      this.updatePills();
+      this.updateClearButton();
+      this.syncHiddenInputs();
+    }
   }
 
   setTriggerElementText(text) {
@@ -425,10 +432,12 @@ export default class PbDropdown extends PbEnhancedElement {
 
     wrapper.innerHTML = "";
     // Show or hide the placeholder based on selected options
-    if (this.selectedOptions.size > 0) {
-      placeholder.style.display = "none";
-    } else {
-      placeholder.style.display = "";
+    if (placeholder) {
+      if (this.selectedOptions.size > 0) {
+        placeholder.style.display = "none";
+      } else {
+        placeholder.style.display = "";
+      }
     }
 
     Array.from(this.selectedOptions).map((option) => {
@@ -513,4 +522,32 @@ export default class PbDropdown extends PbEnhancedElement {
     });
     baseInput.value = "";
   }
+
+  handleBackspaceClear() {
+  if (!this.isMultiSelect) {
+    this.element.querySelectorAll(OPTION_SELECTOR).forEach((opt) => {
+      opt.classList.remove("pb_dropdown_option_selected");
+      opt.style.display = "";
+      this.adjustDropdownHeight();
+    });
+
+    const hiddenInput = this.element.querySelector(DROPDOWN_INPUT);
+    if (hiddenInput) hiddenInput.value = "";
+
+    const placeholder = this.element.querySelector(DROPDOWN_PLACEHOLDER);
+    if (placeholder)
+      this.setTriggerElementText(placeholder.dataset.dropdownPlaceholder);
+  }
+  if (this.isMultiSelect) {
+  this.element.querySelectorAll(OPTION_SELECTOR).forEach((opt) => {
+    const optValue = opt.dataset.dropdownOptionLabel;
+    if (this.selectedOptions.size > 0 && this.selectedOptions.has(optValue)) {
+    opt.style.display = "none";
+    } else {
+    opt.style.display = "";
+    }
+    this.adjustDropdownHeight();
+  });
+  }
+}
 }
