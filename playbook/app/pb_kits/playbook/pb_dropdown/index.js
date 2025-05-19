@@ -220,6 +220,12 @@ export default class PbDropdown extends PbEnhancedElement {
 
     const options = this.element.querySelectorAll(OPTION_SELECTOR);
     if (this.isMultiSelect) {
+      this.element.dispatchEvent(
+        new CustomEvent("pb:dropdown:selected", {
+          detail: Array.from(this.selectedOptions),
+          bubbles: true,
+        })
+      );
       Array.from(this.selectedOptions).map((option) => {
         if (
           JSON.parse(option).id ===
