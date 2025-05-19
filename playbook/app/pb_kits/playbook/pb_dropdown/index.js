@@ -179,6 +179,30 @@ export default class PbDropdown extends PbEnhancedElement {
     }
   }
 
+  emitSelectionChange() {
+  let detail;
+
+  if (this.isMultiSelect) {
+    detail = Array.from(this.selectedOptions).map(JSON.parse);
+  } else {
+    const hiddenInput = this.element.querySelector(DROPDOWN_INPUT);
+    detail = hiddenInput.value
+      ? JSON.parse(
+          this.element
+            .querySelector(OPTION_SELECTOR + `[data-dropdown-option-label*='"id":"${hiddenInput.value}"']`)
+            .dataset.dropdownOptionLabel
+        )
+      : null;
+  }
+  this.element.setAttribute("data-option-selected", JSON.stringify(detail));
+  this.element.dispatchEvent(
+    new CustomEvent("pb:dropdown:selected", {
+      detail,
+      bubbles: true,
+    })
+  );
+}
+
   onOptionSelected(value, selectedOption) {
     const triggerElement = this.element.querySelector(DROPDOWN_TRIGGER_DISPLAY);
     const customDisplayElement = this.element.querySelector(
@@ -189,14 +213,7 @@ export default class PbDropdown extends PbEnhancedElement {
       if (!this.isMultiSelect) {
         const selectedLabel = JSON.parse(value).label;
         triggerElement.textContent = selectedLabel;
-        this.element.setAttribute("data-option-selected", value);
-        const selectedObj = JSON.parse(value);
-        this.element.dispatchEvent(
-          new CustomEvent("pb:dropdown:selected", {
-            detail: selectedObj,
-            bubbles: true,
-          })
-        );
+        this.emitSelectionChange();
       }
       if (customDisplayElement) {
         triggerElement.textContent = "";
@@ -220,13 +237,7 @@ export default class PbDropdown extends PbEnhancedElement {
 
     const options = this.element.querySelectorAll(OPTION_SELECTOR);
     if (this.isMultiSelect) {
-      this.element.setAttribute("data-option-selected", Array.from(this.selectedOptions));
-      this.element.dispatchEvent(
-        new CustomEvent("pb:dropdown:selected", {
-          detail: Array.from(this.selectedOptions),
-          bubbles: true,
-        })
-      );
+      this.emitSelectionChange();
       Array.from(this.selectedOptions).map((option) => {
         if (
           JSON.parse(option).id ===
@@ -479,6 +490,7 @@ export default class PbDropdown extends PbEnhancedElement {
 
         this.updatePills();
         this.updateClearButton();
+        this.emitSelectionChange();
         this.syncHiddenInputs();
       });
       wrapper.appendChild(pill);
@@ -499,6 +511,7 @@ export default class PbDropdown extends PbEnhancedElement {
     this.updatePills();
     this.updateClearButton();
     this.syncHiddenInputs();
+    this.emitSelectionChange();
   }
 
   syncHiddenInputs() {
