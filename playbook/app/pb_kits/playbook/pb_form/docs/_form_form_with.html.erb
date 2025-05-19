@@ -99,6 +99,7 @@
   <%= form.url_field :example_url_field, props: { label: true } %>
   <%= form.text_area :example_text_area, props: { label: true } %>
   <%= form.dropdown_field :example_dropdown, props: { label: true, options: example_dropdown_options } %>
+  <%= form.dropdown_field :example_dropdown_multi, props: { label: true, options: example_dropdown_options, multi_select: true } %>
   <%= form.select :example_select, [ ["Yes", 1], ["No", 2] ], props: { label: true } %>
   <%= form.collection_select :example_collection_select, example_collection, :value, :name, props: { label: true } %>
   <%= form.check_box :example_checkbox,

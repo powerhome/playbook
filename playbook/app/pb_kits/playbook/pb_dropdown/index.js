@@ -21,7 +21,7 @@ export default class PbDropdown extends PbEnhancedElement {
   }
 
   get target() {
-    return this.element.parentNode.querySelector(CONTAINER_SELECTOR);
+    return this.element.querySelector(CONTAINER_SELECTOR);
   }
 
   selectedOptions = new Set();
@@ -328,6 +328,18 @@ export default class PbDropdown extends PbEnhancedElement {
       );
       if (errorLabelElement) {
         errorLabelElement.remove();
+      }
+    }
+    if (this.isMultiSelect) {
+      if (this.selectedOptions.size > 0) {
+        const dropdownWrapperElement = input.closest(".dropdown_wrapper");
+        dropdownWrapperElement.classList.remove("error");
+        const errorLabelElement = dropdownWrapperElement.querySelector(
+          ".pb_body_kit_negative"
+        );
+        if (errorLabelElement) {
+          errorLabelElement.remove();
+        }
       }
     }
   }
