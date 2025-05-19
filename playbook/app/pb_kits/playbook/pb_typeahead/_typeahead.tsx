@@ -29,7 +29,7 @@ import { GenericObject, Noop } from '../types'
  * @prop {boolean} async - whether Typeahead should fetch data from
  * a remote location to populate the options
  * @prop {string} label - the text for the optional typeahead input label
- * @prop {boolean} preserveSearchInput - whether Typeahed should preserve input when the field loses focus
+ * @prop {boolean} preserveSearchInput - whether to preserve the input value when the field loses focus
  */
 
 type TypeaheadProps = {
@@ -95,11 +95,43 @@ const Typeahead = forwardRef<HTMLInputElement, TypeaheadProps>(({
   optionsByContext = {},
   searchContextSelector,
   clearOnContextChange = false,
-  preserveSearchInput = false,
+  preserveSearchInput = false, // Default to false to maintain backward compatibility
   ...props
 }: TypeaheadProps) => {
-  // State to manage input value for preserveSearchInput prop
+  // State to manage the input value when preserveSearchInput is true
   const [inputValue, setInputValue] = useState("")
+
+  // If preserveSearchInput is true, we need to control the input value
+  const handleInputChange = preserveSearchInput
+    ? (newValue: string, actionMeta: {action: string}) => {
+        // Only update the input value for certain actions
+        if (actionMeta.action === 'input-change') {
+          setInputValue(newValue)
+        } else if (actionMeta.action === 'menu-close' && !props.value) {
+          // Don't clear the input when the menu closes without a selection
+          // unless the component is controlled and has a value
+        } else if (actionMeta.action === 'set-value') {
+          // When an option is selected, clear the input
+          setInputValue('')
+        }
+
+        // If the original onInputChange was provided, call it too
+        if (props.onInputChange) {
+          return props.onInputChange(newValue, actionMeta)
+        }
+        return newValue
+      }
+    : props.onInputChange
+
+  // Handle blur events if we're preserving input
+  const handleBlur = preserveSearchInput
+    ? (event: React.FocusEvent<HTMLInputElement>) => {
+        // Do not clear input on blur - the value is preserved in our state
+        if (props.onBlur) {
+          props.onBlur(event)
+        }
+      }
+    : props.onBlur
 
   const selectProps = {
     cacheOptions: true,
@@ -130,39 +162,10 @@ const Typeahead = forwardRef<HTMLInputElement, TypeaheadProps>(({
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     onMultiValueClick: (_option: SelectValueType): any => undefined,
     pillColor: pillColor,
+    ...(preserveSearchInput ? { inputValue } : {}),
+    onInputChange: handleInputChange,
+    onBlur: handleBlur,
     ...props,
-  }
-
-  // If preserveSearchInput is true, manage the input value
-  if (preserveSearchInput) {
-    selectProps.inputValue = inputValue
-    selectProps.onInputChange = (newValue: string, actionMeta: {action: string}) => {
-      // Only update the input value for certain actions
-      if (actionMeta.action === 'input-change') {
-        setInputValue(newValue)
-      } else if (actionMeta.action === 'menu-close' && !props.value) {
-        // Don't clear the input when the menu closes without a selection
-        // unless the component is controlled and has a value
-      } else if (actionMeta.action === 'set-value') {
-        // When an option is selected, clear the input
-        setInputValue('')
-      }
-
-      // If the original onInputChange was provided, call it too
-      if (props.onInputChange) {
-        return props.onInputChange(newValue, actionMeta)
-      }
-      return newValue
-    }
-
-    // Handle blur events
-    const originalOnBlur = props.onBlur
-    selectProps.onBlur = (event: React.FocusEvent<HTMLInputElement>) => {
-      // Do not clear input on blur - the value is preserved in our state
-      if (originalOnBlur) {
-        originalOnBlur(event)
-      }
-    }
   }
 
   const [contextValue, setContextValue] = useState("")
