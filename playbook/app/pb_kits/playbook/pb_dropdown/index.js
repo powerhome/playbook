@@ -24,7 +24,7 @@ export default class PbDropdown extends PbEnhancedElement {
     return this.element.parentNode.querySelector(CONTAINER_SELECTOR);
   }
 
-  static selectedOptions = new Set();
+  selectedOptions = new Set();
   clearBtn = null;
 
   connect() {
@@ -53,7 +53,7 @@ export default class PbDropdown extends PbEnhancedElement {
   updateClearButton() {
     if (!this.clearBtn) return;
     const hasSelection = this.isMultiSelect
-      ? PbDropdown.selectedOptions.size > 0
+      ? this.selectedOptions.size > 0
       : Boolean(this.element.querySelector(DROPDOWN_INPUT).value);
 
     this.clearBtn.style.display = hasSelection ? "" : "none";
@@ -132,13 +132,14 @@ export default class PbDropdown extends PbEnhancedElement {
     if (option) {
       const value = option.dataset.dropdownOptionLabel;
       if (this.isMultiSelect) {
-        const alreadySelected = PbDropdown.selectedOptions.has(value);
+        const alreadySelected = this.selectedOptions.has(value);
         if (alreadySelected) {
-          PbDropdown.selectedOptions.delete(value);
+          this.selectedOptions.delete(value);
         } else {
-          PbDropdown.selectedOptions.add(value);
+          this.selectedOptions.add(value);
         }
         this.updatePills();
+        this.syncHiddenInputs();
       } else {
         hiddenInput.value = JSON.parse(value).id;
       }
@@ -184,12 +185,12 @@ export default class PbDropdown extends PbEnhancedElement {
     );
 
     if (triggerElement) {
-      if (!this.isMultiSelect && !customDisplayElement) {
-      const selectedLabel = JSON.parse(value).label;
-        triggerElement.textContent = selectedLabel
-     }
+      if (!this.isMultiSelect) {
+        const selectedLabel = JSON.parse(value).label;
+        triggerElement.textContent = selectedLabel;
+      }
       if (customDisplayElement) {
-          triggerElement.textContent = ""
+        triggerElement.textContent = "";
         this.element.setAttribute("data-option-selected", value);
         const selectedObj = JSON.parse(value);
         this.element.dispatchEvent(
@@ -200,7 +201,7 @@ export default class PbDropdown extends PbEnhancedElement {
         );
         customDisplayElement.style.display = "block";
         customDisplayElement.style.paddingRight = "8px";
-      }
+      } 
     }
 
     const autocompleteInput = this.element.querySelector(SEARCH_INPUT_SELECTOR);
@@ -218,7 +219,7 @@ export default class PbDropdown extends PbEnhancedElement {
 
     const options = this.element.querySelectorAll(OPTION_SELECTOR);
     if (this.isMultiSelect) {
-      Array.from(PbDropdown.selectedOptions).map((option) => {
+      Array.from(this.selectedOptions).map((option) => {
         if (
           JSON.parse(option).id ===
           JSON.parse(selectedOption.dataset.dropdownOptionLabel).id
@@ -311,53 +312,55 @@ export default class PbDropdown extends PbEnhancedElement {
 
   setDefaultValue() {
     const hiddenInput = this.element.querySelector(DROPDOWN_INPUT);
-    const optionEls   = Array.from(
-        this.element.querySelectorAll(OPTION_SELECTOR)
-      );
+    const optionEls = Array.from(
+      this.element.querySelectorAll(OPTION_SELECTOR)
+    );
     const defaultValue = hiddenInput.dataset.defaultValue || "";
-    hiddenInput.value = defaultValue;
     if (!defaultValue) return;
 
-  if (this.isMultiSelect) {
-    const ids = defaultValue.split(",")
-    ids.forEach((id) => {
+    if (this.isMultiSelect) {
+      const ids = defaultValue.split(",");
+      ids.forEach((id) => {
+        const selectedOption = optionEls.find((opt) => {
+          try {
+            return JSON.parse(opt.dataset.dropdownOptionLabel).id === id;
+          } catch {
+            return false;
+          }
+        });
+        if (!selectedOption) {
+          console.warn(`Dropdown default ID ${id} not found`);
+          return;
+        }
+
+        const raw = selectedOption.dataset.dropdownOptionLabel;
+        this.selectedOptions.add(raw);
+
+        selectedOption.style.display = "none";
+      });
+
+      this.updatePills();
+      this.updateClearButton();
+      this.adjustDropdownHeight();
+      this.syncHiddenInputs();
+    } else {
+      hiddenInput.value = defaultValue;
       const selectedOption = optionEls.find((opt) => {
         try {
-          return JSON.parse(opt.dataset.dropdownOptionLabel).id === id;
+          return (
+            JSON.parse(opt.dataset.dropdownOptionLabel).id === defaultValue
+          );
         } catch {
           return false;
         }
       });
-      if (!selectedOption) {
-        console.warn(`Dropdown default ID ${id} not found`);
-        return;
-      }
+      if (!selectedOption) return;
 
-      const raw = selectedOption.dataset.dropdownOptionLabel;
-      PbDropdown.selectedOptions.add(raw);
-
-      selectedOption.style.display = "none";
-    });
-
-    this.updatePills();
-    this.updateClearButton();       
-    this.adjustDropdownHeight(); 
-
-  } else {
-    const selectedOption = optionEls.find((opt) => {
-      try {
-        return JSON.parse(opt.dataset.dropdownOptionLabel).id === defaultValue;
-      } catch {
-        return false;
-      }
-    });
-    if (!selectedOption) return;
-
-    selectedOption.classList.add("pb_dropdown_option_selected");
-    this.setTriggerElementText(
-      JSON.parse(selectedOption.dataset.dropdownOptionLabel).label
-    );
-  } 
+      selectedOption.classList.add("pb_dropdown_option_selected");
+      this.setTriggerElementText(
+        JSON.parse(selectedOption.dataset.dropdownOptionLabel).label
+      );
+    }
   }
 
   handleFormReset() {
@@ -415,13 +418,13 @@ export default class PbDropdown extends PbEnhancedElement {
 
     wrapper.innerHTML = "";
     // Show or hide the placeholder based on selected options
-    if (PbDropdown.selectedOptions.size > 0) {
+    if (this.selectedOptions.size > 0) {
       placeholder.style.display = "none";
     } else {
       placeholder.style.display = "";
     }
 
-    Array.from(PbDropdown.selectedOptions).map((option) => {
+    Array.from(this.selectedOptions).map((option) => {
       // Create a form pill for each selected option
       const pill = document.createElement("div");
       pill.className = "pb_form_pill_kit_primary mr_xs";
@@ -440,7 +443,7 @@ export default class PbDropdown extends PbEnhancedElement {
       closeIcon.addEventListener("click", (e) => {
         e.stopPropagation();
         const id = pill.dataset.pillId;
-        PbDropdown.selectedOptions.delete(option);
+        this.selectedOptions.delete(option);
 
         const optEl = this.element.querySelector(
           `${OPTION_SELECTOR}[data-dropdown-option-label*='"id":${JSON.stringify(
@@ -456,6 +459,7 @@ export default class PbDropdown extends PbEnhancedElement {
 
         this.updatePills();
         this.updateClearButton();
+        this.syncHiddenInputs();
       });
       wrapper.appendChild(pill);
     });
@@ -463,7 +467,7 @@ export default class PbDropdown extends PbEnhancedElement {
 
   clearSelection() {
     if (this.isMultiSelect) {
-      PbDropdown.selectedOptions.clear();
+      this.selectedOptions.clear();
       this.element.querySelectorAll(OPTION_SELECTOR).forEach((opt) => {
         opt.style.display = "";
       });
@@ -474,5 +478,28 @@ export default class PbDropdown extends PbEnhancedElement {
     this.resetDropdownValue();
     this.updatePills();
     this.updateClearButton();
+    this.syncHiddenInputs();
+  }
+
+  syncHiddenInputs() {
+    if (!this.isMultiSelect) return;
+    this.element
+      .querySelectorAll('input[data-generated="true"]')
+      .forEach((n) => n.remove());
+
+    const baseInput = this.element.querySelector(DROPDOWN_INPUT);
+    if (!baseInput) return;
+    // for multi_select, for each selectedOption, create a hidden input
+    const name = baseInput.getAttribute("name");
+    this.selectedOptions.forEach((raw) => {
+      const id = JSON.parse(raw).id;
+      const inp = document.createElement("input");
+      inp.type = "hidden";
+      inp.name = name;
+      inp.value = id;
+      inp.dataset.generated = "true";
+      baseInput.insertAdjacentElement("afterend", inp);
+    });
+    baseInput.value = "";
   }
 }
