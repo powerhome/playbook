@@ -30,6 +30,7 @@ export default class PbDropdown extends PbEnhancedElement {
   connect() {
     this.keyboardHandler = new PbDropdownKeyboard(this);
     this.isMultiSelect = this.element.dataset.pbDropdownMultiSelect === "true";
+    this.formPillProps = this.element.dataset.formPillProps ? JSON.parse(this.element.dataset.formPillProps) : {};
     this.setDefaultValue();
     this.bindEventListeners();
     this.bindSearchInput();
@@ -427,7 +428,11 @@ export default class PbDropdown extends PbEnhancedElement {
     Array.from(this.selectedOptions).map((option) => {
       // Create a form pill for each selected option
       const pill = document.createElement("div");
-      pill.className = "pb_form_pill_kit_primary mr_xs";
+      const color = this.formPillProps.color || "primary";
+      pill.classList.add(`pb_form_pill_kit_${color}`, "mr_xs");
+      if (this.formPillProps.size === "small") {
+        pill.classList.add("small");
+      }
       pill.tabIndex = 0;
       pill.dataset.pillId = JSON.parse(option).id;
       const innerDiv = document.createElement("h3");
@@ -437,7 +442,7 @@ export default class PbDropdown extends PbEnhancedElement {
 
       const closeIcon = document.createElement("div");
       closeIcon.className = "pb_form_pill_close";
-      closeIcon.innerHTML = `<svg class="pb_custom_icon svg-inline--fa svg_sm svg_fw" xmlns="http://www.w3.org/2000/svg" width="auto" height="auto" viewBox="0 0 31 25"><path fill="currentColor" d="M23.0762 6.77734L17.4512 12.4023L23.0293 17.9805C23.498 18.4023 23.498 19.1055 23.0293 19.5273C22.6074 19.9961 21.9043 19.9961 21.4824 19.5273L15.8574 13.9492L10.2793 19.5273C9.85742 19.9961 9.1543 19.9961 8.73242 19.5273C8.26367 19.1055 8.26367 18.4023 8.73242 17.9336L14.3105 12.3555L8.73242 6.77734C8.26367 6.35547 8.26367 5.65234 8.73242 5.18359C9.1543 4.76172 9.85742 4.76172 10.3262 5.18359L15.9043 10.8086L21.4824 5.23047C21.9043 4.76172 22.6074 4.76172 23.0762 5.23047C23.498 5.65234 23.498 6.35547 23.0762 6.77734Z"/></svg>`;
+      closeIcon.innerHTML = `<svg class="pb_custom_icon svg-inline--fa svg_${this.formPillProps.size === "small" ? "xs" : "sm"} svg_fw" xmlns="http://www.w3.org/2000/svg" width="auto" height="auto" viewBox="0 0 31 25"><path fill="currentColor" d="M23.0762 6.77734L17.4512 12.4023L23.0293 17.9805C23.498 18.4023 23.498 19.1055 23.0293 19.5273C22.6074 19.9961 21.9043 19.9961 21.4824 19.5273L15.8574 13.9492L10.2793 19.5273C9.85742 19.9961 9.1543 19.9961 8.73242 19.5273C8.26367 19.1055 8.26367 18.4023 8.73242 17.9336L14.3105 12.3555L8.73242 6.77734C8.26367 6.35547 8.26367 5.65234 8.73242 5.18359C9.1543 4.76172 9.85742 4.76172 10.3262 5.18359L15.9043 10.8086L21.4824 5.23047C21.9043 4.76172 22.6074 4.76172 23.0762 5.23047C23.498 5.65234 23.498 6.35547 23.0762 6.77734Z"/></svg>`;
       pill.appendChild(closeIcon);
 
       closeIcon.addEventListener("click", (e) => {

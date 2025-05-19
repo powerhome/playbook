@@ -138,7 +138,7 @@ const DropdownTrigger = (props: DropdownTriggerProps) => {
                   paddingX="sm"
                   paddingY="xs"
               >
-                <FlexItem fixedSize={multiSelect ? "90%" : ""}>
+                <FlexItem fixedSize={multiSelect ? "85%" : ""}>
                   <Flex align="center"
                       wrap
                   >

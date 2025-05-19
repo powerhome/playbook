@@ -24,11 +24,14 @@ module Playbook
                        default: false
       prop :multi_select, type: Playbook::Props::Boolean,
                           default: false
+      prop :form_pill_props, type: Playbook::Props::HashProp,
+                             default: {}
 
       def data
         Hash(prop(:data)).merge(
           pb_dropdown: true,
-          pb_dropdown_multi_select: multi_select
+          pb_dropdown_multi_select: multi_select,
+          form_pill_props: form_pill_props.to_json
         )
       end
 

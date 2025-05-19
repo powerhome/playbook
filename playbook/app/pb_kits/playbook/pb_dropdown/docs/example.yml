@@ -2,7 +2,8 @@ examples:
   rails:
   - dropdown_default: Default
   - dropdown_with_autocomplete: Autocomplete
-  - dropdown_multi_select: Multi Select
+  - dropdown_multi_select_rails: Multi Select
+  - dropdown_multi_select_display_rails: Multi Select with Form Pill Props
   - dropdown_subtle_variant: Subtle Variant
   - dropdown_subcomponent_structure_rails: Subcomponent Structure
   - dropdown_with_autocomplete_with_subcomponents: Autocomplete with Subcomponent Structure
