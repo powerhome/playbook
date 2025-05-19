@@ -37,7 +37,7 @@
     "axe-core": "4.10.2",
     "babel-plugin-react-docgen": "^4.2.1",
     "copy-to-clipboard": "^3.3.3",
-    "eslint": "6.8.0",
+    "eslint": "9.27.0",
     "postcss-flexbugs-fixes": "^5.0.2",
     "postcss-import": "^14.1.0",
     "postcss-preset-env": "^7.0.1",
