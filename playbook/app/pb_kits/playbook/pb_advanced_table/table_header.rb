@@ -15,8 +15,6 @@ module Playbook
                         default: "scroll"
       prop :selectable_rows, type: Playbook::Props::Boolean,
                              default: false
-      prop :show_actions_bar, type: Playbook::Props::Boolean,
-                              default: true
 
       def classname
         additional_classes = []
@@ -29,7 +27,6 @@ module Playbook
       def th_classname(is_first_column: false)
         additional_classes = []
         additional_classes << "pinned-left" if is_first_column && responsive == "scroll" && !selectable_rows
-        additional_classes << "header-cells-with-actions" if selectable_rows && show_actions_bar
 
         generate_classname("table-header-cells", *additional_classes, separator: " ")
       end
@@ -49,7 +46,6 @@ module Playbook
         if selectable_rows
           additional_classes = []
           additional_classes << "table-header-cells-custom"
-          additional_classes << "header-cells-with-actions" if show_actions_bar
           additional_classes << "checkbox-cell-header"
           additional_classes << "pinned-left" if responsive == "scroll"
           pb_rails("table/table_header", props: {
