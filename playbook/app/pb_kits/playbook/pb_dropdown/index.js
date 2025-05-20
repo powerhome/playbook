@@ -116,6 +116,11 @@ export default class PbDropdown extends PbEnhancedElement {
   handleSearch(term = "") {
     const lcTerm = term.toLowerCase();
     this.element.querySelectorAll(OPTION_SELECTOR).forEach((opt) => {
+      //make it so that if the option is selected, it will not show up in the search results
+      if (this.isMultiSelect && this.selectedOptions.has(opt.dataset.dropdownOptionLabel)) {
+      opt.style.display = "none";
+      return;
+    }
       const label = JSON.parse(opt.dataset.dropdownOptionLabel)
         .label.toString()
         .toLowerCase();
@@ -143,6 +148,10 @@ export default class PbDropdown extends PbEnhancedElement {
         }
         this.updatePills();
         this.syncHiddenInputs();
+        if (this.searchInput && this.isMultiSelect) {
+          this.searchInput.value = "";
+          this.handleBackspaceClear();
+        }
       } else {
         hiddenInput.value = JSON.parse(value).id;
       }
