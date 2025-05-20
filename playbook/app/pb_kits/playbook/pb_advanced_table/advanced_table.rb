@@ -25,10 +25,6 @@ module Playbook
                         default: "auto"
       prop :selectable_rows, type: Playbook::Props::Boolean,
                              default: false
-      prop :show_actions_bar, type: Playbook::Props::Boolean,
-                              default: true
-      prop :actions, type: Playbook::Props::Array,
-                     default: []
 
       def classname
         additional_classes = [responsive_classname, max_height_classname]
@@ -50,11 +46,6 @@ module Playbook
 
       def selected_rows_length
         selected_rows.length
-      end
-
-      def is_action_bar_visible
-        # Action bar visibility is controlled by JS based on selection
-        false
       end
     end
   end
