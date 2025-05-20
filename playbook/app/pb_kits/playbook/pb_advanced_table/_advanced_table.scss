@@ -555,9 +555,6 @@
       box-shadow: $shadow_deep;
     }
 
-    // Apply border colors for sticky columns
-    @include apply-sticky-colors("light");
-
     @include advanced-table-sticky-mixin(
       $border_light,
       $white,
