@@ -9,19 +9,18 @@ export default class PbAdvancedTable extends PbEnhancedElement {
     return ADVANCED_TABLE_SELECTOR;
   }
 
-  // Track selections per table
-  static tableData = new Map();
+  tableData = new Map();
 
   // Get or initialize data for a specific table
-  static getTableData(tableId) {
-    if (!PbAdvancedTable.tableData.has(tableId)) {
-      PbAdvancedTable.tableData.set(tableId, {
+  getTableData(tableId) {
+    if (!this.tableData.has(tableId)) {
+      this.tableData.set(tableId, {
         selectedRows: new Set(),
         expandedRows: new Set(),
         initialized: false
       });
     }
-    return PbAdvancedTable.tableData.get(tableId);
+    return this.tableData.get(tableId);
   }
 
   // Get the table container from any element within the table
@@ -29,16 +28,10 @@ export default class PbAdvancedTable extends PbEnhancedElement {
     return this.element.closest(".pb_advanced_table");
   }
 
-  // Get table ID, create one if needed
+  // Get table ID
   getTableId() {
     const tableContainer = this.getTableContainer();
-    if (!tableContainer) return null;
-
-    // Generate ID if none exists
-    if (!tableContainer.id) {
-      tableContainer.id = `table-${Date.now()}-${Math.floor(Math.random() * 10000)}`;
-    }
-
+    if (!tableContainer || !tableContainer.id) return null;
     return tableContainer.id;
   }
 
@@ -48,7 +41,7 @@ export default class PbAdvancedTable extends PbEnhancedElement {
     const tableId = this.getTableId();
     if (!tableId) return;
 
-    const tableData = PbAdvancedTable.getTableData(tableId);
+    const tableData = this.getTableData(tableId);
     const selectedRowsArray = Array.from(tableData.selectedRows);
 
     // Update data attribute
@@ -129,7 +122,7 @@ export default class PbAdvancedTable extends PbEnhancedElement {
       actionBar.classList.remove("show-action-card");
       actionBar.classList.replace("p_xs", "p_none");
       // This is for removing the border when hiding the action bar
-      actionBar.classList.replace( "pb_card_kit_deselected", "pb_card_kit_deselected_border_none");
+      actionBar.classList.replace("pb_card_kit_deselected", "pb_card_kit_deselected_border_none");
     }, 300);
   }
 
@@ -152,7 +145,7 @@ export default class PbAdvancedTable extends PbEnhancedElement {
     const tableId = this.getTableId();
     if (!tableId) return;
 
-    const tableData = PbAdvancedTable.getTableData(tableId);
+    const tableData = this.getTableData(tableId);
 
     const contentTrail = rowEl.dataset.advancedTableContent;
     if (!contentTrail) return;
@@ -226,7 +219,7 @@ export default class PbAdvancedTable extends PbEnhancedElement {
     const tableId = this.getTableId();
     if (!tableId) return;
 
-    const tableData = PbAdvancedTable.getTableData(tableId);
+    const tableData = this.getTableData(tableId);
 
     if (isChecked) {
       tableData.selectedRows.add(rowId);
@@ -235,7 +228,7 @@ export default class PbAdvancedTable extends PbEnhancedElement {
     } else {
       tableData.selectedRows.delete(rowId);
     }
-     // Update background color on row
+    // Update background color on row
     if (!isChecked) {
       rowEl.classList.remove("bg-row-selection");
 
@@ -318,15 +311,13 @@ export default class PbAdvancedTable extends PbEnhancedElement {
   static isCollapsing = false;
 
   connect() {
-    // Get table container and generate ID if needed
+    // Get table container and check for ID
     const tableContainer = this.getTableContainer();
-    if (!tableContainer) return;
-
     const tableId = this.getTableId();
-    if (!tableId) return;
+    if (!tableContainer || !tableId) return;
 
     // Get or initialize table data
-    const tableData = PbAdvancedTable.getTableData(tableId);
+    const tableData = this.getTableData(tableId);
 
     // Handle toggle click
     this.element.addEventListener("click", () => {
@@ -388,7 +379,7 @@ export default class PbAdvancedTable extends PbEnhancedElement {
       // Direct DOM event listeners for checkboxes
       const checkboxes = table.querySelectorAll('input[type="checkbox"]');
       checkboxes.forEach(checkbox => {
-        checkbox.addEventListener('change', function() {
+        checkbox.addEventListener('change', () => {
           // Count selected checkboxes
           const selectedCount = Array.from(checkboxes).filter(cb => cb.checked).length;
 
@@ -601,12 +592,11 @@ export default class PbAdvancedTable extends PbEnhancedElement {
     this.element.querySelector(DOWN_ARROW_SELECTOR).style.display = "none";
   }
 
-  static handleToggleAllHeaders(element) {
-    // Get table ID
+  handleToggleAllHeaders(element) {
     const tableContainer = element.closest(".pb_advanced_table");
     if (!tableContainer || !tableContainer.id) return;
 
-    const tableData = PbAdvancedTable.getTableData(tableContainer.id);
+    const tableData = this.getTableData(tableContainer.id);
 
     const table = element.closest(".pb_table");
     const firstLevelButtons = table.querySelectorAll(
@@ -642,12 +632,11 @@ export default class PbAdvancedTable extends PbEnhancedElement {
     }
   }
 
-  static handleToggleAllSubRows(element, rowDepth) {
-    // Get table ID
+  handleToggleAllSubRows(element, rowDepth) {
     const tableContainer = element.closest(".pb_advanced_table");
     if (!tableContainer || !tableContainer.id) return;
 
-    const tableData = PbAdvancedTable.getTableData(tableContainer.id);
+    const tableData = this.getTableData(tableContainer.id);
 
     const table = element.closest(".pb_table");
     const parentRow = element.closest("tr");
@@ -687,13 +676,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Initialize each table and its action bar
   advancedTables.forEach(table => {
-    // Generate ID if needed
-    if (!table.id) {
-      table.id = `table-${Date.now()}-${Math.floor(Math.random() * 10000)}`;
-    }
-
-    // Initialize table data
-    PbAdvancedTable.getTableData(table.id);
+    if (!table.id) return; // Skip tables without IDs
 
     // Initialize action bar
     const actionBar = table.querySelector('.row-selection-actions-card');
@@ -753,9 +736,19 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 window.expandAllRows = (element) => {
-  PbAdvancedTable.handleToggleAllHeaders(element);
+  const table = element.closest('.pb_advanced_table');
+  if (!table) return;
+
+  const pbAdvancedTable = new PbAdvancedTable();
+  pbAdvancedTable.element = element;
+  pbAdvancedTable.handleToggleAllHeaders(element);
 };
 
 window.expandAllSubRows = (element, rowDepth) => {
-  PbAdvancedTable.handleToggleAllSubRows(element, rowDepth);
+  const table = element.closest('.pb_advanced_table');
+  if (!table) return;
+
+  const pbAdvancedTable = new PbAdvancedTable();
+  pbAdvancedTable.element = element;
+  pbAdvancedTable.handleToggleAllSubRows(element, rowDepth);
 };

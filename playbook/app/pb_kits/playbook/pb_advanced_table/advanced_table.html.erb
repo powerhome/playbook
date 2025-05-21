@@ -1,5 +1,5 @@
 <%= pb_content_tag do %>
-  <% if object.selectable_rows && object.show_actions_bar %>
+  <% if object.id && object.selectable_rows && object.show_actions_bar %>
     <%= pb_rails("advanced_table/table_action_bar", props: {
       actions: object.actions,
       is_visible: false,
