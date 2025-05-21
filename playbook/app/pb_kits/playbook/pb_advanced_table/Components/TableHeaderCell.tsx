@@ -1,4 +1,4 @@
-import React, { useContext } from "react"
+import React, { useContext, useState } from "react"
 import classnames from "classnames"
 import { flexRender, Header, Table, RowModel } from "@tanstack/react-table"
 
@@ -8,10 +8,8 @@ import { GlobalProps } from "../../utilities/globalProps"
 
 import Flex from "../../pb_flex/_flex"
 import Checkbox from "../../pb_checkbox/_checkbox"
-import Dropdown from "../../pb_dropdown/_dropdown"
-import DropdownTrigger from "../../pb_dropdown/subcomponents/DropdownTrigger"
-import DropdownOption from "../../pb_dropdown/subcomponents/DropdownOption"
-import DropdownContainer from "../../pb_dropdown/subcomponents/DropdownContainer"
+import SectionSeparator from "../../pb_section_separator/_section_separator"
+import PbReactPopover from "../../pb_popover/_popover";
 import Icon from "../../pb_icon/_icon"
 
 import { SortIconButton } from "./SortIconButton"
@@ -136,6 +134,20 @@ const isToggleExpansionEnabled =
     justifyHeader = isLeafColumn ? "end" : "center";
   }
   
+  const [showPopover, setShowPopover] = useState(false)
+
+  const togglePopover = () => setShowPopover((prev) => !prev)
+  const handleShouldClose = (shouldClose: boolean) =>
+    setShowPopover(!shouldClose)
+
+  const popoverReference = (
+      <div className="gray-icon toggle-all-icon" 
+          onClick={togglePopover}
+      >
+          <Icon icon={displayIcon(toggleExpansionIcon)[0]} />
+      </div>
+  )
+
   const handleExpandDepth = (depth: number) => {
     if (onExpandByDepthClick) {
       const flatRows = table?.getRowModel().flatRows
@@ -191,31 +203,33 @@ const isToggleExpansionEnabled =
               <ToggleIconButton onClick={handleExpandOrCollapse} />
             )}
           {isToggleExpansionEnabled && hasAnySubRows && expandByDepth && (
-              <Dropdown className="expand-by-depth-dropdown-wrapper" 
-                  options={expandByDepth}
-              >
-                <DropdownTrigger className="gray-icon toggle-all-icon">
-                  <Icon icon={displayIcon(toggleExpansionIcon)[0]} />
-                </DropdownTrigger>
-                <DropdownContainer className="expand-by-depth-dropdown">
-                  {expandByDepth.map((option:{ [key: string]: any }, index: number) => (
-                    <DropdownOption
-                        key={index}
-                        option={option}
-                        padding="none"
+
+                    <PbReactPopover
+                        closeOnClick="any"
+                        placement="bottom-start"
+                        reference={popoverReference}
+                        shouldClosePopover={handleShouldClose}
+                        show={showPopover}
+                        zIndex={3}
                     > 
+                    {expandByDepth.map((option:{ [key: string]: any }, index: number) => (
+                      <>
                       <Flex
                           alignItems="center"
+                          cursor="pointer"
+                          hover={{background: "bg_light"}}
                           htmlOptions={{onClick: () => {handleExpandDepth(option.depth)} }}
                           paddingX="sm"
                           paddingY="xs"
                           >
                             {option.label}
-                          </Flex>
-                    </DropdownOption>
-                  ))}
-                </DropdownContainer>
-              </Dropdown>
+                      </Flex>
+                      {index !== expandByDepth.length - 1 && <SectionSeparator/>}
+                      </>
+                        ))}
+                    </PbReactPopover>
+                 
+
             )}
 
           {isToggleExpansionEnabledLoading &&(

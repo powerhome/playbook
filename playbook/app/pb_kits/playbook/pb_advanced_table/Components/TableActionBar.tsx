@@ -54,11 +54,24 @@ const TableActionBar: React.FC<TableActionBarProps> = ({
     const col   = table.getColumn(id);
     const show  = col.getIsVisible();
 
+    const handleVisibilityChange = () => {
+      col.toggleVisibility();
+      if (columnVisibilityControl?.onColumnVisibilityChange) {
+        const updatedVisibilityState = {
+          ...table.getAllColumns().reduce((acc, col) => {
+            acc[col.id] = col.getIsVisible();
+            return acc;
+          }, {}),
+        };
+        columnVisibilityControl?.onColumnVisibilityChange(updatedVisibilityState);
+      }
+    };
+
     return (
       <Checkbox
           checked={show}
           key={id}
-          onChange={() => col.toggleVisibility()}
+          onChange={handleVisibilityChange}
           paddingBottom="xs"
           text={label}
       />
@@ -78,16 +91,24 @@ const TableActionBar: React.FC<TableActionBarProps> = ({
     const allOn    = visibleArray.every(Boolean);
     const someOn   = visibleArray.some(Boolean);
 
+       const handleGroupVisibilityChange = () => {
+      leaves.forEach((id) => table.getColumn(id).toggleVisibility(!allOn));
+      if (columnVisibilityControl?.onColumnVisibilityChange) {
+        const updatedVisibilityState = {
+          ...table.getAllColumns().reduce((acc, col) => {
+            acc[col.id] = col.getIsVisible();
+            return acc;
+          }, {}),
+        };
+        columnVisibilityControl?.onColumnVisibilityChange(updatedVisibilityState);
+      }
+    };
     return (
       <>
         <Checkbox
             checked={allOn}
             indeterminate={!allOn && someOn}
-            onChange={() =>
-              leaves.forEach((id) =>
-                table.getColumn(id).toggleVisibility(!allOn),
-              )
-            }
+            onChange={handleGroupVisibilityChange}
             paddingBottom="xs"
             text={node.label}
         />
