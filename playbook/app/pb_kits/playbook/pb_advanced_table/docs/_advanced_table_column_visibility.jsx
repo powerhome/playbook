@@ -46,7 +46,7 @@ const AdvancedTableColumnVisibility = (props) => {
     <div>
       <AdvancedTable
           columnDefinitions={columnDefinitions}
-          columnVisibilityControl={{default: true, portal:true}}
+          columnVisibilityControl={{default: true}}
           tableData={MOCK_DATA}
           {...props}
       />
