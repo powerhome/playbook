@@ -1,0 +1,1 @@
+`show_actions_bar` is an optional prop that renders the header at the top showing the row count. This is set to `true` by default but can be toggled off by setting it to `false`
