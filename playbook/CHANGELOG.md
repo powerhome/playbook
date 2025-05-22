@@ -1,3 +1,35 @@
+# 14.20.0
+##### May 22, 2025
+
+**Kit Enhancements:**
+
+- Advanced Table Kit: Replace Dropdown With Popover for Columnvisibility + Expandbydepth Props [\#4639](https://github.com/powerhome/playbook/pull/4639) ([nidaqg](https://github.com/nidaqg))
+- Dropdown Kit: New Multiselect Functionality [\#4615](https://github.com/powerhome/playbook/pull/4615) ([nidaqg](https://github.com/nidaqg))
+- Dropdown Kit: Allow More Customization Of the Dropdown Display [\#4604](https://github.com/powerhome/playbook/pull/4604) ([nickamantia](https://github.com/nickamantia))
+- File Upload Kit: Error State [\#4614](https://github.com/powerhome/playbook/pull/4614) ([elisashapiro](https://github.com/elisashapiro))
+- Advanced Table Kit: Columnvisibility Control [\#4579](https://github.com/powerhome/playbook/pull/4579) ([nidaqg](https://github.com/nidaqg))
+- Typeahead Kit: Option to Preserve Search Input on Click - React [\#4633](https://github.com/powerhome/playbook/pull/4633) ([skduncan](https://github.com/skduncan))
+
+**Fixed Bugs:**
+
+- Advanced Table Kit: Fix for Border When Stickyleftcolumn, Sticky Header and Columnbordercolor Used Together [\#4636](https://github.com/powerhome/playbook/pull/4636) ([nidaqg](https://github.com/nidaqg))
+- All Kits: Fix `html\_options Style` Without Inline Styles Bug - Rails [\#4629](https://github.com/powerhome/playbook/pull/4629) ([kangaree](https://github.com/kangaree))
+- Form Group Kit: Fix Select and Passphrase Inputs Error Misalignment [\#4626](https://github.com/powerhome/playbook/pull/4626) ([kangaree](https://github.com/kangaree))
+- Multi Level Select Kit: Single Variant With Selectedids Are Rendering Value and Not Label [\#4623](https://github.com/powerhome/playbook/pull/4623) ([elisashapiro](https://github.com/elisashapiro))
+- Form Pill Kit: Icon and Avatar Sizing Is Off [\#4620](https://github.com/powerhome/playbook/pull/4620) ([elisashapiro](https://github.com/elisashapiro))
+- Home Address Street and Person Kits: Handle Undefined/null Values - React [\#4618](https://github.com/powerhome/playbook/pull/4618) ([kangaree](https://github.com/kangaree))
+- Phone Number Input: Fix the Error Styles for Country Search - Rails & React [\#4610](https://github.com/powerhome/playbook/pull/4610) ([gmorris1242](https://github.com/gmorris1242))
+
+**Improvements:**
+
+- Update Power-fonts to 0.0.1 [\#4634](https://github.com/powerhome/playbook/pull/4634) ([elisashapiro](https://github.com/elisashapiro))
+- Playbook Website: Upgrade Puma Dependency [\#4613](https://github.com/powerhome/playbook/pull/4613) ([nidaqg](https://github.com/nidaqg))
+- Add Semver and Inactive Rc to Github Pr Checklist [\#4609](https://github.com/powerhome/playbook/pull/4609) ([elisashapiro](https://github.com/elisashapiro))
+
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/v14.20.0-rc.2...14.20.0)
+
+
 # ✨ Glow Up: Activated ✨
 ##### May 08, 2025
 
