@@ -554,14 +554,12 @@
       background-color: $white;
       box-shadow: $shadow_deep;
     }
+
     @include advanced-table-sticky-mixin(
       $border_light,
       $white,
       lighten($silver, $opacity_7)
     );
-
-    // Apply border colors for sticky columns
-    @include apply-sticky-colors("light");
   }
 
   // Responsive Styles
