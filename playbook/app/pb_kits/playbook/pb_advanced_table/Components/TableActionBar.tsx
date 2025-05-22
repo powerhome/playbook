@@ -58,7 +58,7 @@ const TableActionBar: React.FC<TableActionBarProps> = ({
       col.toggleVisibility();
       if (columnVisibilityControl?.onColumnVisibilityChange) {
         const updatedVisibilityState = {
-          ...table.getAllColumns().reduce((acc, col) => {
+          ...table.getAllColumns().reduce((acc: { [x: string]: any; }, col: { id: string | number; getIsVisible: () => any; }) => {
             acc[col.id] = col.getIsVisible();
             return acc;
           }, {}),
@@ -95,7 +95,7 @@ const TableActionBar: React.FC<TableActionBarProps> = ({
       leaves.forEach((id) => table.getColumn(id).toggleVisibility(!allOn));
       if (columnVisibilityControl?.onColumnVisibilityChange) {
         const updatedVisibilityState = {
-          ...table.getAllColumns().reduce((acc, col) => {
+          ...table.getAllColumns().reduce((acc: { [x: string]: any; }, col: { id: string | number; getIsVisible: () => any; }) => {
             acc[col.id] = col.getIsVisible();
             return acc;
           }, {}),

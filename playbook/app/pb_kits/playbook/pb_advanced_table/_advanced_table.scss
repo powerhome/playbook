@@ -811,3 +811,8 @@
     }
   }
 }
+
+// Outside of the pb_advanced_table class for popover
+.pb-advanced-table-popover-option:hover {
+  background-color: $bg_light;
+}

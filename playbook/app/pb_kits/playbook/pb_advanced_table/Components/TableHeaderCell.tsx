@@ -216,8 +216,8 @@ const isToggleExpansionEnabled =
                       <>
                       <Flex
                           alignItems="center"
+                          className="pb-advanced-table-popover-option"
                           cursor="pointer"
-                          hover={{background: "bg_light"}}
                           htmlOptions={{onClick: () => {handleExpandDepth(option.depth)} }}
                           paddingX="sm"
                           paddingY="xs"
