@@ -17,7 +17,7 @@ Our Dropdown kit now supports typeahead functionality and multi-select out of th
 **Fixed Bugs:**
 
 - Advanced Table Kit: Fix for Border When Stickyleftcolumn, Sticky Header and Columnbordercolor Used Together [\#4636](https://github.com/powerhome/playbook/pull/4636) ([nidaqg](https://github.com/nidaqg))
-- All Kits: Fix `html\_options Style` Without Inline Styles Bug - Rails [\#4629](https://github.com/powerhome/playbook/pull/4629) ([kangaree](https://github.com/kangaree))
+- All Kits: Fix html_options Style Without Inline Styles Bug - Rails [\#4629](https://github.com/powerhome/playbook/pull/4629) ([kangaree](https://github.com/kangaree))
 - Form Group Kit: Fix Select and Passphrase Inputs Error Misalignment [\#4626](https://github.com/powerhome/playbook/pull/4626) ([kangaree](https://github.com/kangaree))
 - Multi Level Select Kit: Single Variant With Selectedids Are Rendering Value and Not Label [\#4623](https://github.com/powerhome/playbook/pull/4623) ([elisashapiro](https://github.com/elisashapiro))
 - Form Pill Kit: Icon and Avatar Sizing Is Off [\#4620](https://github.com/powerhome/playbook/pull/4620) ([elisashapiro](https://github.com/elisashapiro))
