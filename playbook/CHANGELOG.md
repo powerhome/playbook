@@ -1,5 +1,9 @@
-# 14.20.0
+# Supercharged Dropdown Kit: Now with Typeahead & Multi-Select
 ##### May 22, 2025
+
+Our Dropdown kit now supports typeahead functionality and multi-select out of the box! Type to filter results instantly, click to select, and enjoy seamless keyboard navigation. Under the hood we handle hidden inputs, form resets, and custom events—so you can ship rich, accessible selection controls faster! Both our React and Rails kits are fully standalone, each encapsulating its own logic so you (and we) only have one version of the kit for each language to deal with/break/fall in love with.
+
+[14.20.0](https://github.com/powerhome/playbook/tree/14.20.0) full list of changes:
 
 **Kit Enhancements:**
 
