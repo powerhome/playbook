@@ -53,15 +53,6 @@
     width: 100%;
   }
 
-  .column-visibility-dropdown-wrapper {
-    position: unset !important;
-  }
-  .column-visibility-dropdown {
-    width: unset !important;
-    right: $space_xxs;
-    text-align: left;
-  }
-
   // Virtualized table styles
   .virtualized-table-row {
     display: table !important;
@@ -158,13 +149,6 @@
         min-width: 40px !important;
         box-sizing: border-box !important;
       }
-    }
-    .expand-by-depth-dropdown-wrapper {
-      position: unset !important;
-    }
-    .expand-by-depth-dropdown {
-      width: unset !important;
-      text-align: left;
     }
   }
 
@@ -824,4 +808,9 @@
       }
     }
   }
+}
+
+// Outside of the pb_advanced_table class for popover
+.pb-advanced-table-popover-option:hover {
+  background-color: $bg_light;
 }
