@@ -1,0 +1,12 @@
+<%= pb_rails("select", props: { label: "Favorite Animal" }) do %>
+  <select name="animal" id="animal">
+    <optgroup label="Mammal">
+      <option value="1">Cat</option>
+      <option value="2">Dog</option>
+    </optgroup>
+    <optgroup label="Amphibian">
+      <option value="3">Frog</option>
+      <option value="4">Salamander</option>
+    </optgroup>
+  </select>
+<% end %>
