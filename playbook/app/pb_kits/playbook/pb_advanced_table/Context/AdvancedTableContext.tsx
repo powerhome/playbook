@@ -132,7 +132,13 @@ export const AdvancedTableProvider = ({ children, ...props }: {
     virtualizer: isVirtualized ? virtualizer : null,
     flattenedItems,
     virtualizedRows: isVirtualized,
-    enableVirtualization: isVirtualized
+    enableVirtualization: isVirtualized,
+    rowPinning: props.rowPinning,
+    setRowPinning: props.setRowPinning,
+    enableRowPinning: props.enableRowPinning,
+    keepPinnedRows: props.keepPinnedRows,
+    // includeLeafRows: props.includeLeafRows,
+    // includeParentRows: props.includeParentRows
   };
 
   return (
