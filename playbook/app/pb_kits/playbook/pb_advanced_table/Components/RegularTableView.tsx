@@ -28,13 +28,11 @@ export const RegularTableView = ({
     handleExpandOrCollapse,
     inlineRowLoading,
     loading,
-    responsive,
     table,
     selectableRows,
     hasAnySubRows,
     stickyLeftColumn,
-    rowPinning,
-    enableRowPinning,
+    pinnedRows,
   } = useContext(AdvancedTableContext)
 
 
@@ -53,40 +51,84 @@ export const RegularTableView = ({
   const columnDefinitions = table.options.meta?.columnDefinitions || [];
 
   // Row pinning
-  const pinnedTopRows = rowPinning?.top || [];
-  const pinnedBottomRows = rowPinning?.bottom || [];
-  
-  const allRows = table.getRowModel().rows;
+  function PinnedRow({ row, table }: { row: Row<any>; table: any }) {
+    return (
+      <tr
+          style={{
+            backgroundColor: 'black',
+            position: 'sticky',
+            top:
+              row.getIsPinned() === 'top'
+                ? `40px`
+                : undefined,
+            bottom:
+              row.getIsPinned() === 'bottom'
+                ? `${
+                    (table.getBottomRows().length - 1 - row.getPinnedIndex()) * 26
+                  }px`
+                : undefined,
+            zIndex: '3'
+          }}
+      >
+        {row.getVisibleCells().map((cell: Cell<GenericObject, unknown>, i: number) => {
+          const isPinnedLeft = columnPinning.left.includes(cell.column.id);
+          const isLastCell = (() => {
+            const parent = cell.column.parent;
+              if (!parent) {
+                const last = row.getVisibleCells().at(-1);
+                return last?.column.id === cell.column.id;
+              }
 
-  const normalRows = allRows.filter((row: Row<GenericObject>) => 
-    !pinnedTopRows.includes(row.id) && !pinnedBottomRows.includes(row.id)
-  );
+              const visibleSiblings = parent.columns.filter(col => col.getIsVisible());
+              return visibleSiblings.at(-1)?.id === cell.column.id;
+              })();
+
+          const { column } = cell;
+          return (
+            <td
+                align="right"
+                className={classnames(
+                  `${cell.id}-cell position_relative`,
+                  isChrome() ? "chrome-styles" : "",
+                  isPinnedLeft && 'pinned-left',
+                  stickyLeftColumn && stickyLeftColumn.length > 0 && isPinnedLeft && 'sticky-left',
+                  isLastCell && 'last-cell',
+                )}
+                key={`${cell.id}-data`}
+                style={{
+                  left: isPinnedLeft
+                    ? i === 1 //Accounting for set min-width for first column
+                      ? '180px'
+                      : `${column.getStart("left")}px`
+                    : undefined,
+                }}
+            >
+              {collapsibleTrail && i === 0 && row.depth > 0 && renderCollapsibleTrail(row.depth)}
+              <span id={`${cell.id}-span`}>
+                {loading ? (
+                  <LoadingCell />
+                ) : (
+                  flexRender(cell.column.columnDef.cell, cell.getContext())
+                )}
+              </span>
+            </td>
+          );
+        })}
+      </tr>
+    )
+  }
+
+  const totalRows = pinnedRows ? table.getCenterRows() : table.getRowModel().rows
 
   return (
     <>
-      {/* Pinned Top Rows */}
-      {pinnedTopRows.length > 0 && pinnedTopRows.map((rowId: string) => {
-        const row = allRows.find((r: { id: string }) => r.id === rowId);
-        if (row) {
-          return (
-            <tr className="pinned-top-row"
-                key={`${row.id}-pinned-top`} 
-            >
-              {row.getVisibleCells().map((cell: Cell<GenericObject, unknown>) => (
-                <td className="pinned-row"
-                    key={cell.id}
-                >
-                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                </td>
-              ))}
-            </tr>
-          );
-        }
-        return null;
-      })}
-
-      {/* Regular Rows */}
-      {normalRows.map((row: Row<GenericObject>) => {
+      {pinnedRows && table.getTopRows().map(row => (
+        <PinnedRow key={row.id} 
+            row={row} 
+            table={table} 
+        />
+      ))}
+      {totalRows.map((row: Row<GenericObject>) => {
         const isExpandable = row.getIsExpanded();
         const isFirstChildofSubrow = row.depth > 0 && row.index === 0;
         const rowHasNoChildren = row.original?.children && !row.original.children.length ? true : false;
@@ -184,136 +226,8 @@ export const RegularTableView = ({
           </React.Fragment>
         );
       })}
-
-      {/* Pinned Bottom Rows */}
-      {pinnedBottomRows.length > 0 && pinnedBottomRows.map((rowId: string) => {
-        const row = allRows.find((r: { id: string }) => r.id === rowId);
-        if (row) {
-          return (
-            <tr className="pinned-bottom-row"
-                key={`${row.id}-pinned-bottom`}
-            >
-              {row.getVisibleCells().map((cell: Cell<GenericObject, unknown>) => (
-                <td className="pinned-row"
-                    key={cell.id}
-                >
-                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                </td>
-              ))}
-            </tr>
-          );
-        }
-        return null;
-      })}
     </>
   );
 }
 
 export default RegularTableView;
-
-// Original code return down
-//   return (
-//     <>
-//       {table.getRowModel().rows.map((row: Row<GenericObject>) => {
-//         const isExpandable = row.getIsExpanded();
-//         const isFirstChildofSubrow = row.depth > 0 && row.index === 0;
-//         const rowHasNoChildren = row.original?.children && !row.original.children.length ? true : false;
-//         const numberOfColumns = table.getAllFlatColumns().length;
-//         const isDataLoading = isExpandable && (inlineRowLoading && rowHasNoChildren) && (row.depth < columnDefinitions[0]?.cellAccessors?.length);
-//         const rowBackground = isExpandable && ((!inlineRowLoading && row.getCanExpand()) || (inlineRowLoading && rowHasNoChildren));
-//         const rowColor = row.getIsSelected() ? "bg-row-selection" : rowBackground ? "bg-silver" : "bg-white";
-
-//         return (
-//           <React.Fragment key={`${row.index}-${row.id}-${row.depth}-row`}>
-//             {isFirstChildofSubrow && subRowHeaders && (
-//               <SubRowHeaderRow
-//                   collapsibleTrail={collapsibleTrail}
-//                   enableToggleExpansion={enableToggleExpansion}
-//                   onClick={handleExpandOrCollapse}
-//                   row={row}
-//                   subRowHeaders={subRowHeaders}
-//                   table={table}
-//               />
-//             )}
-
-//             <tr
-//                 className={`${rowColor} ${row.depth > 0 ? `depth-sub-row-${row.depth}` : ""}`}
-//                 id={`${row.index}-${row.id}-${row.depth}-row`}
-//             >
-//               {/* Render custom checkbox column when we want selectableRows for non-expanding tables */}
-//               {selectableRows && !hasAnySubRows && (
-//                 <td className="checkbox-cell">
-//                   <Checkbox
-//                       checked={row.getIsSelected()}
-//                       disabled={!row.getCanSelect()}
-//                       indeterminate={row.getIsSomeSelected()}
-//                       name={row.id}
-//                       onChange={row.getToggleSelectedHandler()}
-//                   />
-//                 </td>
-//               )}
-
-//               {row.getVisibleCells().map((cell: Cell<GenericObject, unknown>, i: number) => {
-//                 const isPinnedLeft = columnPinning.left.includes(cell.column.id);
-//                 const isLastCell = (() => {
-//                   const parent = cell.column.parent;
-//                     if (!parent) {
-//                       const last = row.getVisibleCells().at(-1);
-//                       return last?.column.id === cell.column.id;
-//                     }
-                  
-//                     const visibleSiblings = parent.columns.filter(col => col.getIsVisible());
-//                     return visibleSiblings.at(-1)?.id === cell.column.id;
-//                    })();
-
-//                 const { column } = cell;
-//                 return (
-//                   <td
-//                       align="right"
-//                       className={classnames(
-//                         `${cell.id}-cell position_relative`,
-//                         isChrome() ? "chrome-styles" : "",
-//                         isPinnedLeft && 'pinned-left',
-//                         stickyLeftColumn && stickyLeftColumn.length > 0 && isPinnedLeft && 'sticky-left',
-//                         isLastCell && 'last-cell',
-//                       )}
-//                       key={`${cell.id}-data`}
-//                       style={{
-//                         left: isPinnedLeft
-//                           ? i === 1 //Accounting for set min-width for first column
-//                             ? '180px'
-//                             : `${column.getStart("left")}px`
-//                           : undefined,
-//                       }}
-//                   >
-//                     {collapsibleTrail && i === 0 && row.depth > 0 && renderCollapsibleTrail(row.depth)}
-//                     <span id={`${cell.id}-span`}>
-//                       {loading ? (
-//                         <LoadingCell />
-//                       ) : (
-//                         flexRender(cell.column.columnDef.cell, cell.getContext())
-//                       )}
-//                     </span>
-//                   </td>
-//                 );
-//               })}
-//             </tr>
-
-//             {/* Display LoadingInline if Row Data is querying and there are no children already */}
-//             {isDataLoading && (
-//               <tr key={`${row.id}-row`}>
-//                 <td colSpan={numberOfColumns}
-//                     style={{ paddingLeft: `${row.depth === 0 ? 0.5 : (row.depth * 2)}em` }}
-//                 >
-//                   <LoadingInline />
-//                 </td>
-//               </tr>
-//             )}
-//           </React.Fragment>
-//         );
-//       })}
-//     </>
-//   );
-// }
-
-// export default RegularTableView;

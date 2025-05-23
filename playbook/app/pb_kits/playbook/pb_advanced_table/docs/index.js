@@ -32,4 +32,4 @@ export { default as AdvancedTableColumnVisibility } from './_advanced_table_colu
 export { default as AdvancedTableColumnVisibilityCustom } from './_advanced_table_column_visibility_custom.jsx'
 export { default as AdvancedTableColumnVisibilityMulti } from './_advanced_table_column_visibility_multi.jsx'
 export { default as AdvancedTableColumnVisibilityWithState } from './_advanced_table_column_visibility_with_state.jsx'
-export { default as AdvancedTableRowPinning } from './_advanced_table_row_pinning.jsx'
+export { default as AdvancedTablePinnedRows } from './_advanced_table_pinned_rows.jsx'

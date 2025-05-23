@@ -28,13 +28,6 @@ type FullscreenControls = {
   isFullscreen: boolean;
 };
 
-// type RowPinningPosition = false | 'top' | 'bottom';
-
-// type RowPinningState = {
-//   top?: string[];
-//   bottom?: string[];
-// };
-
 type AdvancedTableProps = {
   aria?: { [key: string]: string }
   actions?: React.ReactNode[] | React.ReactNode
@@ -58,7 +51,8 @@ type AdvancedTableProps = {
   onRowToggleClick?: (arg: Row<GenericObject>) => void
   onToggleExpansionClick?: (arg: Row<GenericObject>) => void
   pagination?: boolean,
-  paginationProps?: GenericObject
+  paginationProps?: GenericObject,
+  pinnedRows?: any,
   responsive?: "scroll" | "none",
   selectableRows?: boolean,
   showActionsBar?: boolean,
@@ -71,14 +65,14 @@ type AdvancedTableProps = {
   virtualizedRows?: boolean
   allowFullScreen?: boolean
   fullScreenControl?: (controls: FullscreenControls) => void
-  enableRowPinning?: boolean | ((row: Row<GenericObject>) => boolean);
-  keepPinnedRows?: boolean;
-  rowPinningControl?: {
-    value: RowPinningState;
-    onChange: (updater: RowPinningState) => void;
-  };
-  includeLeafRows?: boolean;
-  includeParentRows?: boolean;
+  // enableRowPinning?: boolean | ((row: Row<GenericObject>) => boolean);
+  // keepPinnedRows?: boolean;
+  // rowPinningControl?: {
+  //   value: RowPinningState;
+  //   onChange: (updater: RowPinningState) => void;
+  // };
+  // includeLeafRows?: boolean;
+  // includeParentRows?: boolean;
   // showRowPinningControls?: boolean;
 } & GlobalProps;
 
@@ -107,6 +101,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
     onToggleExpansionClick,
     pagination = false,
     paginationProps,
+    pinnedRows,
     responsive = "scroll",
     showActionsBar = true,
     selectableRows,
@@ -120,11 +115,11 @@ const AdvancedTable = (props: AdvancedTableProps) => {
     virtualizedRows = false,
     allowFullScreen = false,
     fullScreenControl,
-    enableRowPinning = false,
-    keepPinnedRows = true,
-    rowPinningControl,
-    includeLeafRows = true,
-    includeParentRows = false,
+    // enableRowPinning = false,
+    // keepPinnedRows = true,
+    // rowPinningControl,
+    // includeLeafRows = true,
+    // includeParentRows = false,
     // showRowPinningControls = true,
   } = props;
 
@@ -158,9 +153,10 @@ const AdvancedTable = (props: AdvancedTableProps) => {
     tableOptions,
     onRowSelectionChange,
     columnVisibilityControl,
-    enableRowPinning,
-    keepPinnedRows,
-    rowPinningControl,
+    pinnedRows,
+    // enableRowPinning,
+    // keepPinnedRows,
+    // rowPinningControl,
   });
 
   // Initialize table actions
@@ -267,7 +263,6 @@ const AdvancedTable = (props: AdvancedTableProps) => {
     {
       'advanced-table-fullscreen': isFullscreen,
       'advanced-table-allow-fullscreen': allowFullScreen,
-      'advanced-table-row-pinning-enabled': enableRowPinning,
     },
     {'advanced-table-sticky-left-columns': stickyLeftColumn && stickyLeftColumn.length > 0},
     columnGroupBorderColor ? `column-group-border-${columnGroupBorderColor}` : '',
@@ -316,7 +311,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
             columnDefinitions={columnDefinitions}
             columnGroupBorderColor={columnGroupBorderColor}
             columnVisibilityControl={columnVisibilityControl}
-            enableRowPinning={enableRowPinning}
+            // enableRowPinning={enableRowPinning}
             enableToggleExpansion={enableToggleExpansion}
             enableVirtualization={virtualizedRows}
             expandByDepth={expandByDepth}
@@ -329,9 +324,10 @@ const AdvancedTable = (props: AdvancedTableProps) => {
             inlineRowLoading={inlineRowLoading}
             isActionBarVisible={isActionBarVisible}
             isFullscreen={isFullscreen}
-            keepPinnedRows={keepPinnedRows}
+            // keepPinnedRows={keepPinnedRows}
             loading={loading}
             onExpandByDepthClick={onExpandByDepthClick}
+            pinnedRows={pinnedRows}
             responsive={responsive}
             // rowPinning={rowPinning}
             selectableRows={selectableRows}

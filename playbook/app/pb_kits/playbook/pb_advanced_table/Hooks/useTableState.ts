@@ -24,18 +24,19 @@ interface UseTableStateProps {
   loading?: boolean | string;
   pagination?: boolean;
   paginationProps?: GenericObject;
+  pinnedRows?: any;
   virtualizedRows?: boolean;
   tableOptions?: GenericObject;
   onRowSelectionChange?: (arg: RowSelectionState) => void;
   columnVisibilityControl?: GenericObject;
-  enableRowPinning?: boolean | ((row: Row<GenericObject>) => boolean);
-  keepPinnedRows?: boolean;
-  rowPinningControl?: {
-    value: RowPinningState;
-    onChange: (updater: RowPinningState) => void;
-  };
-  includeLeafRows?: boolean;
-  includeParentRows?: boolean;
+  // enableRowPinning?: boolean | ((row: Row<GenericObject>) => boolean);
+  // keepPinnedRows?: boolean;
+  // rowPinningControl?: {
+  //   value: RowPinningState;
+  //   onChange: (updater: RowPinningState) => void;
+  // };
+  // includeLeafRows?: boolean;
+  // includeParentRows?: boolean;
 }
 
 export function useTableState({
@@ -52,9 +53,10 @@ export function useTableState({
   virtualizedRows = false,
   tableOptions,
   columnVisibilityControl,
-  enableRowPinning = false,
-  keepPinnedRows = true,
-  rowPinningControl,
+  pinnedRows,
+  // enableRowPinning = false,
+  // keepPinnedRows = true,
+  // rowPinningControl,
   // includeLeafRows = true,
   // includeParentRows = false,
 }: UseTableStateProps) {
@@ -72,8 +74,10 @@ export function useTableState({
   const setExpanded = expandedControl ? expandedControl.onChange : setLocalExpanded;
   const columnVisibility = (columnVisibilityControl && columnVisibilityControl.value) ? columnVisibilityControl.value : localColumnVisibility;
   const setColumnVisibility = (columnVisibilityControl && columnVisibilityControl.onChange) ? columnVisibilityControl.onChange : setLocalColumnVisibility;
-  const rowPinning = rowPinningControl ? rowPinningControl.value : localRowPinning;
-  const setRowPinning = rowPinningControl ? rowPinningControl.onChange : setLocalRowPinning;
+  // const rowPinning = rowPinningControl ? rowPinningControl.value : localRowPinning;
+  // const setRowPinning = rowPinningControl ? rowPinningControl.onChange : setLocalRowPinning;
+  const rowPinning = pinnedRows && pinnedRows.value || localRowPinning;
+  const setRowPinning = (pinnedRows && pinnedRows.onChange) ? pinnedRows.onChange : setLocalRowPinning;
 
   // Virtualized data handling (chunked loading)
   const fetchSize = 20; // Number of rows per "page"
@@ -134,7 +138,7 @@ export function useTableState({
       ...(sortControl     && { sorting }),
       ...(selectableRows  && { rowSelection }),
       ...(columnVisibility && { columnVisibility }),
-      ...(enableRowPinning && { rowPinning }),
+      ...(pinnedRows && { rowPinning }),
     },
   }), [
     expanded,
@@ -143,8 +147,6 @@ export function useTableState({
     selectableRows,
     rowSelection,
     columnVisibility,
-    enableRowPinning,
-    rowPinning
   ]);
 
   // Pagination configuration
@@ -175,13 +177,12 @@ export function useTableState({
     enableSortingRemoval: false,
     sortDescFirst: true,
     onRowSelectionChange: setRowSelection,
-    getRowId: selectableRows ? row => row.id : undefined,
+    getRowId: (selectableRows || pinnedRows) ? row => row.id : undefined,
     onColumnVisibilityChange: setColumnVisibility,
     meta: {
       columnDefinitions
     },
-    enableRowPinning,
-    keepPinnedRows,
+    enableRowPinning: true,
     onRowPinningChange: setRowPinning,
     ...customState(),
     ...paginationInitializer,
@@ -225,8 +226,6 @@ export function useTableState({
     rowSelection,
     fullData,
     totalFetched,
-    isFetching,
-    rowPinning,
-    setRowPinning,
+    isFetching
   };
 }

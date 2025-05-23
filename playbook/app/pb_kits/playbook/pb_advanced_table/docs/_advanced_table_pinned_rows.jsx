@@ -41,11 +41,11 @@ const AdvancedTableRowPinning = (props) => {
   //  // bottom: ["5"]
   // })
 
-  const [rowPinning, setRowPinning] = useState({
-    top: ["1"],
-    // top: ["0-0-0-row"],
-    bottom: []
-  })
+  // const [rowPinning, setRowPinning] = useState({
+  //   top: ["1"],
+  //   // top: ["0-0-0-row"],
+  //   bottom: []
+  // })
 
   // const handleRowPinningChange = (newPinningState) => {
   //   setRowPinning(newPinningState)
@@ -61,22 +61,27 @@ const AdvancedTableRowPinning = (props) => {
   //   console.log("Row pinning changed:", newPinningState);
   // };
 
+  const [pinnedRows, setPinnedRows] = useState({top: ["8"], bottom: []})
+
 
   return (
     <div>
       <AdvancedTable
           columnDefinitions={columnDefinitions}
-          enableRowPinning
-          keepPinnedRows
+          enableToggleExpansion="all"
+          pinnedRows={{value: pinnedRows, onChange: setPinnedRows}}
+          // enableRowPinning
+          // keepPinnedRows
           // rowPinning={["1"]}
-          rowPinning={rowPinning}
+          // rowPinning={rowPinning}
           // rowPinningControl={{
           //   value: rowPinning,
           //   onChange: handleRowPinningChange
           // }}
-          setRowPinning={setRowPinning}
+          // setRowPinning={setRowPinning}
           // setRowPinning={handleRowPinningChange}
           tableData={MOCK_DATA}
+          tableProps={{sticky: true}}
           {...props}
       >
         <AdvancedTable.Header enableSorting />
