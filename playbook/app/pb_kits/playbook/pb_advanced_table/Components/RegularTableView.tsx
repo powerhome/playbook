@@ -65,8 +65,8 @@ export const RegularTableView = ({
   return (
     <>
       {/* Pinned Top Rows */}
-      {pinnedTopRows.length > 0 && pinnedTopRows.map((rowId) => {
-        const row = allRows.find(r => r.id === rowId);
+      {pinnedTopRows.length > 0 && pinnedTopRows.map((rowId: string) => {
+        const row = allRows.find((r: { id: string }) => r.id === rowId);
         if (row) {
           return (
             <tr className="pinned-top-row"
@@ -186,8 +186,8 @@ export const RegularTableView = ({
       })}
 
       {/* Pinned Bottom Rows */}
-      {pinnedBottomRows.length > 0 && pinnedBottomRows.map((rowId) => {
-        const row = allRows.find(r => r.id === rowId);
+      {pinnedBottomRows.length > 0 && pinnedBottomRows.map((rowId: string) => {
+        const row = allRows.find((r: { id: string }) => r.id === rowId);
         if (row) {
           return (
             <tr className="pinned-bottom-row"
