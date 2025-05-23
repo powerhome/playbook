@@ -11,3 +11,4 @@ export { default as SelectInlineShowArrow } from './_select_inline_show_arrow.js
 export { default as SelectInlineCompact } from './_select_inline_compact.jsx'
 export { default as SelectMultiple } from './_select_multiple.jsx'
 export { default as SelectReactHook } from './_select_react_hook.jsx'
+export { default as SelectCustomSelectSubheaders } from './_select_custom_select_subheaders.jsx'
