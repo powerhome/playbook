@@ -28,10 +28,10 @@ export const RegularTableView = ({
     handleExpandOrCollapse,
     inlineRowLoading,
     loading,
-    responsive,
     table,
     selectableRows,
     hasAnySubRows,
+    pinnedRows,
     stickyLeftColumn
   } = useContext(AdvancedTableContext)
 
@@ -50,9 +50,82 @@ export const RegularTableView = ({
   const columnPinning = table.getState().columnPinning || { left: [] };
   const columnDefinitions = table.options.meta?.columnDefinitions || [];
 
+  function PinnedRow({ row, table }: { row: Row<any>; table: any }) {
+  return (
+    <tr
+        style={{
+          backgroundColor: 'black',
+          position: 'sticky',
+          top:
+            row.getIsPinned() === 'top'
+              ? `36px`
+              : undefined,
+          bottom:
+            row.getIsPinned() === 'bottom'
+              ? `${
+                  (table.getBottomRows().length - 1 - row.getPinnedIndex()) * 26
+                }px`
+              : undefined,
+        }}
+    >
+                    {row.getVisibleCells().map((cell: Cell<GenericObject, unknown>, i: number) => {
+                const isPinnedLeft = columnPinning.left.includes(cell.column.id);
+                const isLastCell = (() => {
+                  const parent = cell.column.parent;
+                    if (!parent) {
+                      const last = row.getVisibleCells().at(-1);
+                      return last?.column.id === cell.column.id;
+                    }
+                  
+                    const visibleSiblings = parent.columns.filter(col => col.getIsVisible());
+                    return visibleSiblings.at(-1)?.id === cell.column.id;
+                   })();
+
+                const { column } = cell;
+                return (
+                  <td
+                      align="right"
+                      className={classnames(
+                        `${cell.id}-cell position_relative`,
+                        isChrome() ? "chrome-styles" : "",
+                        isPinnedLeft && 'pinned-left',
+                        stickyLeftColumn && stickyLeftColumn.length > 0 && isPinnedLeft && 'sticky-left',
+                        isLastCell && 'last-cell',
+                      )}
+                      key={`${cell.id}-data`}
+                      style={{
+                        left: isPinnedLeft
+                          ? i === 1 //Accounting for set min-width for first column
+                            ? '180px'
+                            : `${column.getStart("left")}px`
+                          : undefined,
+                      }}
+                  >
+                    {collapsibleTrail && i === 0 && row.depth > 0 && renderCollapsibleTrail(row.depth)}
+                    <span id={`${cell.id}-span`}>
+                      {loading ? (
+                        <LoadingCell />
+                      ) : (
+                        flexRender(cell.column.columnDef.cell, cell.getContext())
+                      )}
+                    </span>
+                  </td>
+                );
+              })}
+    </tr>
+  )
+}
+
+const totalRows = pinnedRows ? table.getCenterRows() : table.getRowModel().rows
   return (
     <>
-      {table.getRowModel().rows.map((row: Row<GenericObject>) => {
+    {pinnedRows && table.getTopRows().map(row => (
+              <PinnedRow key={row.id} 
+                  row={row} 
+                  table={table} 
+              />
+    ))}
+      {totalRows.map((row: Row<GenericObject>) => {
         const isExpandable = row.getIsExpanded();
         const isFirstChildofSubrow = row.depth > 0 && row.index === 0;
         const rowHasNoChildren = row.original?.children && !row.original.children.length ? true : false;

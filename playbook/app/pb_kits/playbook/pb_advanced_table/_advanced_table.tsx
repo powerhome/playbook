@@ -51,7 +51,8 @@ type AdvancedTableProps = {
   onRowToggleClick?: (arg: Row<GenericObject>) => void
   onToggleExpansionClick?: (arg: Row<GenericObject>) => void
   pagination?: boolean,
-  paginationProps?: GenericObject
+  paginationProps?: GenericObject,
+  pinnedRows?: any,
   responsive?: "scroll" | "none",
   selectableRows?: boolean,
   showActionsBar?: boolean,
@@ -91,6 +92,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
     onToggleExpansionClick,
     pagination = false,
     paginationProps,
+    pinnedRows,
     responsive = "scroll",
     showActionsBar = true,
     selectableRows,
@@ -136,6 +138,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
     tableOptions,
     onRowSelectionChange,
     columnVisibilityControl,
+    pinnedRows,
   });
 
   // Initialize table actions
@@ -302,6 +305,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
             isFullscreen={isFullscreen}
             loading={loading}
             onExpandByDepthClick={onExpandByDepthClick}
+            pinnedRows={pinnedRows}
             responsive={responsive}
             selectableRows={selectableRows}
             setExpanded={setExpanded}

@@ -6,7 +6,8 @@ import {
   getPaginationRowModel,
   getSortedRowModel,
   RowSelectionState,
-  Row
+  Row,
+  RowPinningState,
 } from "@tanstack/react-table";
 import { GenericObject } from "../../types";
 import { createColumnHelper } from "@tanstack/react-table";
@@ -23,6 +24,7 @@ interface UseTableStateProps {
   loading?: boolean | string;
   pagination?: boolean;
   paginationProps?: GenericObject;
+  pinnedRows?: any;
   virtualizedRows?: boolean;
   tableOptions?: GenericObject;
   onRowSelectionChange?: (arg: RowSelectionState) => void;
@@ -43,18 +45,25 @@ export function useTableState({
   paginationProps,
   virtualizedRows = false,
   tableOptions,
-  columnVisibilityControl
+  columnVisibilityControl,
+  pinnedRows,
 }: UseTableStateProps) {
   // Create a local state for expanded and setExpanded if expandedControl not used
   const [localExpanded, setLocalExpanded] = useState({});
   const [loadingStateRowCount, setLoadingStateRowCount] = useState(initialLoadingRowsCount);
   const [rowSelection, setRowSelection] = useState<RowSelectionState>({});
   const [localColumnVisibility, setLocalColumnVisibility] = useState({});
+  const [localRowPinning, setLocalRowPinning] = useState<RowPinningState>({
+    top: [],
+    bottom: [],
+  });
   // Determine whether to use the prop or the local state
   const expanded = expandedControl ? expandedControl.value : localExpanded;
   const setExpanded = expandedControl ? expandedControl.onChange : setLocalExpanded;
   const columnVisibility = (columnVisibilityControl && columnVisibilityControl.value) ? columnVisibilityControl.value : localColumnVisibility;
   const setColumnVisibility = (columnVisibilityControl && columnVisibilityControl.onChange) ? columnVisibilityControl.onChange : setLocalColumnVisibility;
+  const rowPinning = pinnedRows && pinnedRows.value || localRowPinning;
+  const setRowPinning = (pinnedRows && pinnedRows.onChange) ? pinnedRows.onChange : setLocalRowPinning;
 
   // Virtualized data handling (chunked loading)
   const fetchSize = 20; // Number of rows per "page"
@@ -115,6 +124,7 @@ export function useTableState({
       ...(sortControl     && { sorting }),
       ...(selectableRows  && { rowSelection }),
       ...(columnVisibility && { columnVisibility }),
+      ...(pinnedRows && { rowPinning }),
     },
   }), [
     expanded,
@@ -153,11 +163,13 @@ export function useTableState({
     enableSortingRemoval: false,
     sortDescFirst: true,
     onRowSelectionChange: setRowSelection,
-    getRowId: selectableRows ? row => row.id : undefined,
+    getRowId: (selectableRows || pinnedRows)  ? row => row.id : undefined,
     onColumnVisibilityChange: setColumnVisibility,
     meta: {
       columnDefinitions
     },
+    enableRowPinning: true,
+    onRowPinningChange: setRowPinning,
     ...customState(),
     ...paginationInitializer,
     ...tableOptions,
