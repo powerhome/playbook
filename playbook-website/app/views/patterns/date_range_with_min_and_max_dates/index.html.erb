@@ -1,0 +1,34 @@
+<% max_date = Time.zone.now.utc.iso8601
+   year_range   = [2021, Date.current.year]      
+%>
+
+<%= pb_rails("date_picker", props: {
+  mode: "range",
+  picker_id: "quick-pick-date-range",
+  placeholder: "Select a Date Range",
+  selection_type: "quickpick",
+  controls_end_id: "quick-pick-date-range-end",
+  controls_start_id: "quick-pick-date-range-start",
+  label: "Date Range",
+  this_ranges_end_today: true
+}) %>
+
+<%= pb_rails("date_picker", props: {
+  picker_id: "quick-pick-date-range-start",
+  placeholder: "Select a Start Date",
+  sync_start_with:"quick-pick-date-range",
+  label: "Start Date",
+  min_date: "01/01/2021",
+  max_date: max_date,
+  year_range: year_range,
+}) %>
+
+<%= pb_rails("date_picker", props: {
+  picker_id: "quick-pick-date-range-end",
+  placeholder: "Select an End Date",
+  sync_end_with:"quick-pick-date-range",
+  label: "End Date",
+  min_date: "01/01/2021",
+  max_date: max_date,
+  year_range: year_range,
+}) %>

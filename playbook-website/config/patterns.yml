@@ -10,3 +10,8 @@ Patterns:
     tags:
       - User
     link: "custom_user_display"
+  - name: "Date Range with Min and Max Dates"
+    description: "Use the Date Range with a collection of available props to create a date range selection component. This pattern is useful for selecting a range of dates within a specific time frame."
+    tags:
+      - DatePicker
+    link: "date_range_with_min_and_max_dates"
