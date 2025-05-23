@@ -51,3 +51,4 @@ examples:
   - advanced_table_column_visibility_with_state: Column Visibility Control With State
   - advanced_table_column_visibility_custom: Column Visibility Control with Custom Dropdown
   - advanced_table_column_visibility_multi: Column Visibility Control with Multi-Header Columns
+  - advanced_table_row_pinning: Row Pinning

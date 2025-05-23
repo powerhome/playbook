@@ -13,6 +13,31 @@
 .pb_advanced_table {
   $border-color: 1px solid $border_light;
 
+  // scss classes w/ background for testing Row Pinning
+  .pinned-row {
+    background-color: red !important;
+  }
+  
+  .pinned-top-row {
+    background-color: blue !important;
+  }
+  
+  .pinned-bottom-row {
+    background-color: green !important;
+  }
+  
+  .bg-pinned-top {
+    background-color: orange !important;
+  }
+  
+  .bg-pinned-bottom {
+    background-color: yellow !important;
+  }
+  
+  .pinned-row:hover {
+    background-color: pink !important;
+  }
+
   // Base vertical border color variable setup
   --column-border-color: #{$border_light};
 
