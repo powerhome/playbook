@@ -147,6 +147,7 @@ export function useTableState({
     selectableRows,
     rowSelection,
     columnVisibility,
+    rowPinning,
   ]);
 
   // Pagination configuration
@@ -184,6 +185,7 @@ export function useTableState({
     },
     enableRowPinning: true,
     onRowPinningChange: setRowPinning,
+    // keepPinnedRows: true,
     ...customState(),
     ...paginationInitializer,
     ...tableOptions,

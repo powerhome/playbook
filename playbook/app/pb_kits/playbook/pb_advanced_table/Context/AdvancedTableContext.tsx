@@ -1,4 +1,4 @@
-import React, { createContext, useRef, useMemo, useEffect } from 'react';
+import React, { createContext, useRef, useMemo, useEffect, useState, useCallback } from 'react';
 import { useVirtualizer } from '@tanstack/react-virtual';
 
 import { Row } from "@tanstack/react-table";
@@ -23,6 +23,54 @@ export const AdvancedTableProvider = ({ children, ...props }: {
 
   const table = props.table;
   const isVirtualized = props.virtualizedRows || props.enableVirtualization;
+  
+  // Pinned Row: height calculations for Header and Row 
+  const headerRef = useRef(null);
+  const sampleRowRef = useRef(null);
+  
+  const [headerHeight, setHeaderHeight] = useState(44);
+  const [rowHeight, setRowHeight] = useState(38);
+
+  const measureHeights = useCallback(() => {
+    if (headerRef.current) {
+      const headerRect = headerRef.current.getBoundingClientRect();
+      if (headerRect.height > 0) {
+        setHeaderHeight(headerRect.height);
+      }
+    }
+    if (sampleRowRef.current) {
+      const rowRect = sampleRowRef.current.getBoundingClientRect();
+      if (rowRect.height > 0) {
+        setRowHeight(rowRect.height);
+      }
+    }
+  }, []);
+
+  useEffect(() => {
+    const resizeObserver = new ResizeObserver(() => {
+      measureHeights();
+    });
+
+    if (headerRef.current) {
+      resizeObserver.observe(headerRef.current);
+    }
+
+    if (sampleRowRef.current) {
+      resizeObserver.observe(sampleRowRef.current);
+    }
+
+    const timeoutId = setTimeout(measureHeights, 100);
+
+    return () => {
+      resizeObserver.disconnect();
+      clearTimeout(timeoutId);
+    };
+  }, [measureHeights]);
+
+  useEffect(() => {
+    measureHeights();
+  }, [table?.getRowModel().rows.length, measureHeights]);
+
 
   // Create a flattened data array that includes ALL components for virtualization
   const flattenedItems = useMemo(() => {
@@ -137,8 +185,11 @@ export const AdvancedTableProvider = ({ children, ...props }: {
     setRowPinning: props.setRowPinning,
     enableRowPinning: props.enableRowPinning,
     keepPinnedRows: props.keepPinnedRows,
-    // includeLeafRows: props.includeLeafRows,
-    // includeParentRows: props.includeParentRows
+    headerHeight,
+    rowHeight,
+    headerRef,
+    sampleRowRef,
+    measureHeights,
   };
 
   return (

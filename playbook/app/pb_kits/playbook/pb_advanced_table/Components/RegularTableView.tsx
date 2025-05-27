@@ -33,6 +33,10 @@ export const RegularTableView = ({
     hasAnySubRows,
     stickyLeftColumn,
     pinnedRows,
+    headerHeight,
+    rowHeight,
+    headerRef,
+    sampleRowRef,
   } = useContext(AdvancedTableContext)
 
 
@@ -54,19 +58,15 @@ export const RegularTableView = ({
   function PinnedRow({ row, table }: { row: Row<any>; table: any }) {
     return (
       <tr
+          className="pinned-row"
           style={{
-            backgroundColor: 'black',
+            // backgroundColor: 'black',
+            backgroundColor: 'white',
             position: 'sticky',
-            top:
+            top:   
               row.getIsPinned() === 'top'
-                ? `40px`
-                : undefined,
-            bottom:
-              row.getIsPinned() === 'bottom'
-                ? `${
-                    (table.getBottomRows().length - 1 - row.getPinnedIndex()) * 26
-                  }px`
-                : undefined,
+                  ? `${row.getPinnedIndex() * rowHeight + headerHeight}px`
+                  : undefined,
             zIndex: '3'
           }}
       >
@@ -128,7 +128,7 @@ export const RegularTableView = ({
             table={table} 
         />
       ))}
-      {totalRows.map((row: Row<GenericObject>) => {
+      {totalRows.map((row: Row<GenericObject>, rowIndex: number) => {
         const isExpandable = row.getIsExpanded();
         const isFirstChildofSubrow = row.depth > 0 && row.index === 0;
         const rowHasNoChildren = row.original?.children && !row.original.children.length ? true : false;
@@ -136,6 +136,7 @@ export const RegularTableView = ({
         const isDataLoading = isExpandable && (inlineRowLoading && rowHasNoChildren) && (row.depth < columnDefinitions[0]?.cellAccessors?.length);
         const rowBackground = isExpandable && ((!inlineRowLoading && row.getCanExpand()) || (inlineRowLoading && rowHasNoChildren));
         const rowColor = row.getIsSelected() ? "bg-row-selection" : rowBackground ? "bg-silver" : "bg-white";
+        const isFirstRegularRow = rowIndex === 0 && !row.getIsPinned();
 
         return (
           <React.Fragment key={`${row.index}-${row.id}-${row.depth}-row`}>
@@ -153,6 +154,7 @@ export const RegularTableView = ({
             <tr
                 className={`${rowColor} ${row.depth > 0 ? `depth-sub-row-${row.depth}` : ""}`}
                 id={`${row.index}-${row.id}-${row.depth}-row`}
+                ref={isFirstRegularRow ? sampleRowRef : null}
             >
               {/* Render custom checkbox column when we want selectableRows for non-expanding tables */}
               {selectableRows && !hasAnySubRows && (

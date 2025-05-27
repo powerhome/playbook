@@ -61,25 +61,19 @@ const AdvancedTableRowPinning = (props) => {
   //   console.log("Row pinning changed:", newPinningState);
   // };
 
-  const [pinnedRows, setPinnedRows] = useState({top: ["8"], bottom: []})
-
+  // const [pinnedRows, setPinnedRows] = useState({top: ["8"]})
+  const [pinnedRows, setPinnedRows] = useState({top: ["8", "9", "10", "11", "12", "13", "14"]})
+  // const [pinnedRows, setPinnedRows] = useState({top: ["1", "2", "3", "4", "5", "6", "7"]})
+  // const [pinnedRows, setPinnedRows] = useState({top: ["14"]})
 
   return (
     <div>
       <AdvancedTable
           columnDefinitions={columnDefinitions}
           enableToggleExpansion="all"
+          // maxHeight="sm"
           pinnedRows={{value: pinnedRows, onChange: setPinnedRows}}
-          // enableRowPinning
-          // keepPinnedRows
-          // rowPinning={["1"]}
-          // rowPinning={rowPinning}
-          // rowPinningControl={{
-          //   value: rowPinning,
-          //   onChange: handleRowPinningChange
-          // }}
-          // setRowPinning={setRowPinning}
-          // setRowPinning={handleRowPinningChange}
+          // stickyLeftColumn={["year"]}
           tableData={MOCK_DATA}
           tableProps={{sticky: true}}
           {...props}
