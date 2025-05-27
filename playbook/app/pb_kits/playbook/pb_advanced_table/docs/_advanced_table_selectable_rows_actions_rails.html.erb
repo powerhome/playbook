@@ -1,0 +1,137 @@
+<% column_definitions = [
+  {
+    accessor: "year",
+    label: "Year",
+    cellAccessors: ["quarter", "month", "day"],
+  },
+  {
+    accessor: "newEnrollments",
+    label: "New Enrollments",
+  },
+  {
+    accessor: "scheduledMeetings",
+    label: "Scheduled Meetings",
+  },
+  {
+    accessor: "attendanceRate",
+    label: "Attendance Rate",
+  },
+  {
+    accessor: "completedClasses",
+    label: "Completed Classes",
+  },
+  {
+    accessor: "classCompletionRate",
+    label: "Class Completion Rate",
+  },
+  {
+    accessor: "graduatedStudents",
+    label: "Graduated Students",
+  }
+]
+
+actions = [
+  pb_rails("circle_icon_button", props: {
+    icon: "file-csv",
+    variant: "link",
+    id: "export-selected-rows-btn",
+    data: {
+      action_type: "export"
+    }
+  }),
+  pb_rails("circle_icon_button", props: {
+    icon: "trash-alt",
+    variant: "link",
+    id: "delete-selected-rows-btn",
+    data: {
+      action_type: "delete"
+    }
+  })
+]
+%>
+
+<%= pb_rails("advanced_table", props: {
+  id: "selectable_rows_with_actions",
+  table_data: @table_data_no_subrows,
+  column_definitions: column_definitions,
+  selectable_rows: true,
+  enable_toggle_expansion: "none",
+  actions: actions
+}) %>
+
+<script>
+  // Handle action clicks using the data-selected-rows attribute
+  window.handleActionClick = function(actionType) {
+    const tableContainer = document.getElementById('selectable_rows_with_actions');
+    if (!tableContainer) return;
+
+    // Get selected rows from the data attribute
+    const selectedRowsJSON = tableContainer.getAttribute('data-selected-rows');
+    let selectedRowIds = [];
+
+    try {
+      // Parse the JSON string from the data attribute
+      if (selectedRowsJSON) {
+        selectedRowIds = JSON.parse(selectedRowsJSON);
+      }
+    } catch (e) {
+      // Fallback if JSON parsing fails
+      const checkboxes = tableContainer.querySelectorAll('input[type="checkbox"]:checked');
+      const selectedCheckboxes = Array.from(checkboxes).filter(checkbox =>
+        checkbox.id !== 'select-all-rows' &&
+        !checkbox.closest('#select-all-rows')
+      );
+      selectedRowIds = selectedCheckboxes.map(checkbox => checkbox.id);
+    }
+
+    // Show appropriate message
+    if (!selectedRowIds || selectedRowIds.length === 0) {
+      alert('No Selection Made');
+    } else {
+      if (actionType === 'export') {
+        alert(`Row ids ${selectedRowIds.join(', ')} will be exported!`);
+      } else if (actionType === 'delete') {
+        alert(`Row ids ${selectedRowIds.join(', ')} will be deleted!`);
+      }
+    }
+  };
+
+  // Add event listeners when the DOM is ready
+  document.addEventListener('DOMContentLoaded', function() {
+    // Get the buttons
+    const exportBtn = document.getElementById('export-selected-rows-btn');
+    const deleteBtn = document.getElementById('delete-selected-rows-btn');
+
+    // Add click event listeners
+    if (exportBtn) {
+      exportBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        window.handleActionClick('export');
+      });
+    }
+
+    if (deleteBtn) {
+      deleteBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        window.handleActionClick('delete');
+      });
+    }
+
+    // Optional: Event delegation through the action bar
+    const actionBar = document.querySelector('.row-selection-actions-card');
+    if (actionBar) {
+      actionBar.addEventListener('click', function(e) {
+        const exportButton = e.target.closest('#export-selected-rows-btn');
+        const deleteButton = e.target.closest('#delete-selected-rows-btn');
+
+        if (exportButton) {
+          e.preventDefault();
+          window.handleActionClick('export');
+        } else if (deleteButton) {
+          e.preventDefault();
+          window.handleActionClick('delete');
+        }
+      });
+    }
+  });
+</script>
