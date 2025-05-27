@@ -2,9 +2,6 @@
   "extends": [
     "github>powerhome/renovate-config"
   ],
-  "major": {
-    "enabled": false
-  },
   "prCreation": "not-pending",
   "prConcurrentLimit": 2,
   "packageRules": [
