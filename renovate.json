@@ -6,7 +6,7 @@
   "prConcurrentLimit": 2,
   "packageRules": [
     {
-      "packageNames": [
+      "matchPackageNames": [
         "@rails/webpacker",
         "babel",
         "bundler",
@@ -15,10 +15,8 @@
         "react-dom",
         "react-select",
         "yarn",
-        "typescript"
-      ],
-      "packagePatterns": [
-        "^(@babel|babel|webpacker|webpack|node)"
+        "typescript",
+        "/^(@babel|babel|webpacker|webpack|node)/"
       ],
       "enabled": false
     }
