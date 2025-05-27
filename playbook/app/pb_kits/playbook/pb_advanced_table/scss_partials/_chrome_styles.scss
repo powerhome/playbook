@@ -5,21 +5,9 @@
     border-right: $border-color;
   }
 
-
-    .chrome-styles {
-        // box-shadow: 1px 0px 0px 0px red !important;
-        // position: inherit !important;
-      }
-    
-  
-
   .table-card {
     .chrome-styles:first-child {
       border-right: $transparent !important;
     }
   }
 }
-
-// .pb_table_tr:hover {
-//   position: relative !important;
-// }
