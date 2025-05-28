@@ -7,7 +7,7 @@ import {
   getSortedRowModel,
   RowSelectionState,
   Row,
-  RowPinningState,
+  RowPinningState
 } from "@tanstack/react-table";
 import { GenericObject } from "../../types";
 import { createColumnHelper } from "@tanstack/react-table";
@@ -29,14 +29,6 @@ interface UseTableStateProps {
   tableOptions?: GenericObject;
   onRowSelectionChange?: (arg: RowSelectionState) => void;
   columnVisibilityControl?: GenericObject;
-  // enableRowPinning?: boolean | ((row: Row<GenericObject>) => boolean);
-  // keepPinnedRows?: boolean;
-  // rowPinningControl?: {
-  //   value: RowPinningState;
-  //   onChange: (updater: RowPinningState) => void;
-  // };
-  // includeLeafRows?: boolean;
-  // includeParentRows?: boolean;
 }
 
 export function useTableState({
@@ -54,11 +46,6 @@ export function useTableState({
   tableOptions,
   columnVisibilityControl,
   pinnedRows,
-  // enableRowPinning = false,
-  // keepPinnedRows = true,
-  // rowPinningControl,
-  // includeLeafRows = true,
-  // includeParentRows = false,
 }: UseTableStateProps) {
   // Create a local state for expanded and setExpanded if expandedControl not used
   const [localExpanded, setLocalExpanded] = useState({});
@@ -67,15 +54,12 @@ export function useTableState({
   const [localColumnVisibility, setLocalColumnVisibility] = useState({});
   const [localRowPinning, setLocalRowPinning] = useState<RowPinningState>({
     top: [],
-    bottom: [],
   });
   // Determine whether to use the prop or the local state
   const expanded = expandedControl ? expandedControl.value : localExpanded;
   const setExpanded = expandedControl ? expandedControl.onChange : setLocalExpanded;
   const columnVisibility = (columnVisibilityControl && columnVisibilityControl.value) ? columnVisibilityControl.value : localColumnVisibility;
   const setColumnVisibility = (columnVisibilityControl && columnVisibilityControl.onChange) ? columnVisibilityControl.onChange : setLocalColumnVisibility;
-  // const rowPinning = rowPinningControl ? rowPinningControl.value : localRowPinning;
-  // const setRowPinning = rowPinningControl ? rowPinningControl.onChange : setLocalRowPinning;
   const rowPinning = pinnedRows && pinnedRows.value || localRowPinning;
   const setRowPinning = (pinnedRows && pinnedRows.onChange) ? pinnedRows.onChange : setLocalRowPinning;
 
@@ -183,9 +167,6 @@ export function useTableState({
     meta: {
       columnDefinitions
     },
-    enableRowPinning: true,
-    onRowPinningChange: setRowPinning,
-    // keepPinnedRows: true,
     ...customState(),
     ...paginationInitializer,
     ...tableOptions,

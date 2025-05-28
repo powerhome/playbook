@@ -1,5 +1,5 @@
 import { useCallback, useEffect } from 'react';
-import { Row } from "@tanstack/react-table";
+import { Row, RowPinningState } from "@tanstack/react-table";
 import { GenericObject } from "../../types";
 import { updateExpandAndCollapseState } from "../Utilities/ExpansionControlHelpers";
 
@@ -57,33 +57,9 @@ export function useTableActions({
     }
   }, [table.getState().rowSelection, onRowSelectionChange]);
 
-  // Row Pinning
-  const pinRow = useCallback((row: Row<GenericObject>, position: 'top' | 'bottom' = 'top') => {
-    const rowId = row.id;
-    table.setRowPinning((prev: any) => {
-      const top = (prev.top || []).filter((id: string) => id !== rowId);
-      const bottom = (prev.bottom || []).filter((id: string) => id !== rowId);
-  
-      return {
-        top: position === 'top' ? [...top, rowId] : top,
-        bottom: position === 'bottom' ? [...bottom, rowId] : bottom,
-      };
-    });
-  }, [table]);
-  
-  const unpinRow = useCallback((row: Row<GenericObject>) => {
-    const rowId = row.id;
-    table.setRowPinning((prev: any) => ({
-      top: (prev.top || []).filter((id: string) => id !== rowId),
-      bottom: (prev.bottom || []).filter((id: string) => id !== rowId),
-    }));
-  }, [table]);
-
   return {
     handleExpandOrCollapse,
     onPageChange,
-    fetchMoreOnBottomReached,
-    pinRow,
-    unpinRow,
+    fetchMoreOnBottomReached
   };
 }

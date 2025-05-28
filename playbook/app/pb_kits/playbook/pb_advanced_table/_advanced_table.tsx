@@ -2,7 +2,7 @@ import React, { useRef, useEffect, useState, useCallback } from "react";
 import classnames from "classnames";
 
 import { GenericObject } from "../types";
-import { Row, RowSelectionState, RowPinning, RowPinningState, RowPinningPosition } from "@tanstack/react-table";
+import { Row, RowSelectionState } from "@tanstack/react-table";
 
 import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from "../utilities/props";
 import { globalProps, GlobalProps } from "../utilities/globalProps";
@@ -65,15 +65,6 @@ type AdvancedTableProps = {
   virtualizedRows?: boolean
   allowFullScreen?: boolean
   fullScreenControl?: (controls: FullscreenControls) => void
-  // enableRowPinning?: boolean | ((row: Row<GenericObject>) => boolean);
-  // keepPinnedRows?: boolean;
-  // rowPinningControl?: {
-  //   value: RowPinningState;
-  //   onChange: (updater: RowPinningState) => void;
-  // };
-  // includeLeafRows?: boolean;
-  // includeParentRows?: boolean;
-  // showRowPinningControls?: boolean;
 } & GlobalProps;
 
 const AdvancedTable = (props: AdvancedTableProps) => {
@@ -115,12 +106,6 @@ const AdvancedTable = (props: AdvancedTableProps) => {
     virtualizedRows = false,
     allowFullScreen = false,
     fullScreenControl,
-    // enableRowPinning = false,
-    // keepPinnedRows = true,
-    // rowPinningControl,
-    // includeLeafRows = true,
-    // includeParentRows = false,
-    // showRowPinningControls = true,
   } = props;
 
   // Component refs
@@ -154,9 +139,6 @@ const AdvancedTable = (props: AdvancedTableProps) => {
     onRowSelectionChange,
     columnVisibilityControl,
     pinnedRows,
-    // enableRowPinning,
-    // keepPinnedRows,
-    // rowPinningControl,
   });
 
   // Initialize table actions
@@ -311,7 +293,6 @@ const AdvancedTable = (props: AdvancedTableProps) => {
             columnDefinitions={columnDefinitions}
             columnGroupBorderColor={columnGroupBorderColor}
             columnVisibilityControl={columnVisibilityControl}
-            // enableRowPinning={enableRowPinning}
             enableToggleExpansion={enableToggleExpansion}
             enableVirtualization={virtualizedRows}
             expandByDepth={expandByDepth}
@@ -319,22 +300,16 @@ const AdvancedTable = (props: AdvancedTableProps) => {
             expandedControl={expandedControl}
             handleExpandOrCollapse={handleExpandOrCollapse}
             hasAnySubRows={hasAnySubRows}
-            // includeLeafRows={includeLeafRows}
-            // includeParentRows={includeParentRows}
             inlineRowLoading={inlineRowLoading}
             isActionBarVisible={isActionBarVisible}
             isFullscreen={isFullscreen}
-            // keepPinnedRows={keepPinnedRows}
             loading={loading}
             onExpandByDepthClick={onExpandByDepthClick}
             pinnedRows={pinnedRows}
             responsive={responsive}
-            // rowPinning={rowPinning}
             selectableRows={selectableRows}
             setExpanded={setExpanded}
-            // setRowPinning={setRowPinning}
             showActionsBar={showActionsBar}
-            // showRowPinningControls={showRowPinningControls}
             sortControl={sortControl}
             stickyLeftColumn={stickyLeftColumn}
             subRowHeaders={tableOptions?.subRowHeaders}

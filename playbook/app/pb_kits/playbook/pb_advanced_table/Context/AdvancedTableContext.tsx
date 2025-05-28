@@ -24,7 +24,7 @@ export const AdvancedTableProvider = ({ children, ...props }: {
   const table = props.table;
   const isVirtualized = props.virtualizedRows || props.enableVirtualization;
   
-  // Pinned Row: height calculations for Header and Row 
+  // Pinned Row: height calculations for Header and Row
   const headerRef = useRef(null);
   const sampleRowRef = useRef(null);
   
@@ -183,7 +183,6 @@ export const AdvancedTableProvider = ({ children, ...props }: {
     enableVirtualization: isVirtualized,
     rowPinning: props.rowPinning,
     setRowPinning: props.setRowPinning,
-    enableRowPinning: props.enableRowPinning,
     keepPinnedRows: props.keepPinnedRows,
     headerHeight,
     rowHeight,
