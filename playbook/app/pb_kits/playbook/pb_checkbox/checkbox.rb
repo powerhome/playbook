@@ -6,6 +6,8 @@ module Playbook
       prop :error, type: Playbook::Props::Boolean, default: false
       prop :checked, type: Playbook::Props::Boolean, default: false
       prop :indeterminate, type: Playbook::Props::Boolean, default: false
+      prop :indeterminate_main, type: Playbook::Props::Boolean, default: false
+      prop :indeterminate_parent
       prop :text
       prop :value
       prop :name

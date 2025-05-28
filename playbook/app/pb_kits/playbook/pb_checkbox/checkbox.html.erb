@@ -1,4 +1,7 @@
-<%= pb_content_tag(:label) do %>
+<%= pb_content_tag(:label, data: {
+  pb_checkbox_indeterminate_main: object.indeterminate_main,
+  pb_checkbox_indeterminate_parent: object.indeterminate_parent,
+}) do %>
   <%= content.presence || object.input %>
   <% if object.indeterminate %>
     <span data-pb-checkbox-icon-span="true" class="pb_checkbox_indeterminate">
