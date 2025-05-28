@@ -382,7 +382,7 @@ const PROP_CATEGORIES: {[key:string]: (props: {[key: string]: any}) => string} =
     return css.trimEnd()
   },
   minHeightProps: ({ minHeight }: MinHeight) => {
-    const heightValues = ["auto", "xs", "sm", "md", "lg", "xl", "xxl", "xxxl"]
+    const heightValues = ["auto", "xs", "sm", "md", "lg", "xl", "xxl", "xxxl", "100%"]
     if (heightValues.includes(minHeight)) {
       let css = ''
       css += minHeight ? `min_height_${filterClassName(minHeight)} ` : ''
@@ -390,7 +390,7 @@ const PROP_CATEGORIES: {[key:string]: (props: {[key: string]: any}) => string} =
     }
   },
   maxHeightProps: ({ maxHeight }: MaxHeight) => {
-    const heightValues = ["auto", "xs", "sm", "md", "lg", "xl", "xxl", "xxxl"]
+    const heightValues = ["auto", "xs", "sm", "md", "lg", "xl", "xxl", "xxxl", "100%"]
     if (heightValues.includes(maxHeight)) {
       let css = ''
       css += maxHeight ? `max_height_${filterClassName(maxHeight)} ` : ''
@@ -398,7 +398,7 @@ const PROP_CATEGORIES: {[key:string]: (props: {[key: string]: any}) => string} =
     }
   },
   heightProps: ({ height }: Height) => {
-    const heightValues = ["auto", "xs", "sm", "md", "lg", "xl", "xxl", "xxxl"]
+    const heightValues = ["auto", "xs", "sm", "md", "lg", "xl", "xxl", "xxxl", "100%"]
     if (heightValues.includes(height)) {
       let css = ''
       css += height ? `height_${filterClassName(height)} ` : ''
