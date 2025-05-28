@@ -14,7 +14,6 @@ RSpec.describe Playbook::PbCheckbox::Checkbox do
   it { is_expected.to define_prop(:name) }
   it { is_expected.to define_prop(:disabled).with_default(false) }
   it { is_expected.to define_boolean_prop(:checked).with_default(false) }
-  it { is_expected.to define_boolean_prop(:indeterminate).with_default(false) }
   it { is_expected.to define_boolean_prop(:indeterminate_main).with_default(false) }
   it { is_expected.to define_prop(:indeterminate_parent) }
   it { is_expected.to define_hash_prop(:input_options).with_default({}) }
@@ -22,7 +21,6 @@ RSpec.describe Playbook::PbCheckbox::Checkbox do
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
       expect(subject.new({}).classname).to eq "pb_checkbox_kit_off"
-      expect(subject.new(indeterminate: true).classname).to eq "pb_checkbox_kit_off indeterminate"
       expect(subject.new(dark: true).classname).to eq "pb_checkbox_kit_off dark"
       expect(subject.new(checked: true).classname).to eq "pb_checkbox_kit_on"
       expect(subject.new(dark: true, checked: true).classname).to eq "pb_checkbox_kit_on dark"
