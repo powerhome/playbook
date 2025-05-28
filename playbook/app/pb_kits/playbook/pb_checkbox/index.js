@@ -41,6 +41,9 @@ export default class PbCheckbox extends PbEnhancedElement {
       mainCheckboxWrapper.getElementsByClassName("check_icon")[0].classList.toggle('hidden', indeterminate);
     };
 
+    // Set indeterminate icon on main checkbox if initial children checkboxes are checked
+    updateMainCheckbox();
+
     this.element.querySelector('input').addEventListener('change', function() {
       childCheckboxes.forEach(cb => cb.checked = this.checked);
       updateMainCheckbox();
