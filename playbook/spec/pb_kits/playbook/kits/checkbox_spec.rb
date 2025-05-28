@@ -15,6 +15,8 @@ RSpec.describe Playbook::PbCheckbox::Checkbox do
   it { is_expected.to define_prop(:disabled).with_default(false) }
   it { is_expected.to define_boolean_prop(:checked).with_default(false) }
   it { is_expected.to define_boolean_prop(:indeterminate).with_default(false) }
+  it { is_expected.to define_boolean_prop(:indeterminate_main).with_default(false) }
+  it { is_expected.to define_prop(:indeterminate_parent) }
   it { is_expected.to define_hash_prop(:input_options).with_default({}) }
 
   describe "#classname" do
