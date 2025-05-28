@@ -16,6 +16,7 @@ RSpec.describe Playbook::PbDropdown::Dropdown do
   it { is_expected.to define_boolean_prop(:autocomplete) }
   it { is_expected.to define_boolean_prop(:searchbar) }
   it { is_expected.to define_boolean_prop(:multi_select).with_default(false) }
+  it { is_expected.to define_hash_prop(:form_pill_props).with_default({}) }
 
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
