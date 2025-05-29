@@ -13,19 +13,24 @@ export default class PbPopover extends PbEnhancedElement {
   }
 
   moveTooltip() {
-    let container: HTMLElement | null;
+    let container: HTMLElement | null = document.querySelector('body');
 
     if (this.appendTo === "parent") {
-      container = this.element.parentElement;
+      container = this.element.parentElement && this.element.parentElement
     } else if (this.appendTo) {
-      container = document.querySelector(this.appendTo);
+      container = document.querySelector(this.appendTo)
     }
 
-    (container || document.body).appendChild(this.tooltip);
+    container.appendChild(this.tooltip);
   }
 
   connect() {
+    if (!this.triggerElement || !this.tooltip) {
+      console.log('Popover requires both trigger and tooltip elements to be defined.')
+      return
+    }
     this.moveTooltip()
+
     this.popper = createPopper (this.triggerElement, this.tooltip, {
       placement: this.position as Placement,
       strategy: 'fixed',
