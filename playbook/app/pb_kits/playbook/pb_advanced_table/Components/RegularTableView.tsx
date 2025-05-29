@@ -54,7 +54,7 @@ export const RegularTableView = ({
   const columnDefinitions = table.options.meta?.columnDefinitions || [];
 
   // Row pinning
-  function PinnedRow({ row, table }: { row: Row<any>; table: any }) {
+  function PinnedRow({ row }: { row: Row<any> }) {
     return (
       <tr
           className={classnames(
@@ -122,10 +122,9 @@ export const RegularTableView = ({
 
   return (
     <>
-      {pinnedRows && table.getTopRows().map(row => (
+      {pinnedRows && table.getTopRows().map((row: Row<GenericObject>) => (
         <PinnedRow key={row.id} 
             row={row} 
-            table={table} 
         />
       ))}
       {totalRows.map((row: Row<GenericObject>, rowIndex: number) => {
