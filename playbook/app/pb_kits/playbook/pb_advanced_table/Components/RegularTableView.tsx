@@ -57,12 +57,10 @@ export const RegularTableView = ({
   function PinnedRow({ row, table }: { row: Row<any>; table: any }) {
     return (
       <tr
-          // className="pinned-row"
           className={classnames(
             `pinned-row`,
           )}
           style={{
-            // backgroundColor: 'black',
             backgroundColor: 'white',
             position: 'sticky',
             top:   
