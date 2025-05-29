@@ -2,7 +2,7 @@ import React, { useRef, useEffect, useState, useCallback } from "react";
 import classnames from "classnames";
 
 import { GenericObject } from "../types";
-import { Row, RowSelectionState } from "@tanstack/react-table";
+import { Row, RowSelectionState, RowPinningState } from "@tanstack/react-table";
 
 import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from "../utilities/props";
 import { globalProps, GlobalProps } from "../utilities/globalProps";
@@ -52,7 +52,10 @@ type AdvancedTableProps = {
   onToggleExpansionClick?: (arg: Row<GenericObject>) => void
   pagination?: boolean,
   paginationProps?: GenericObject,
-  pinnedRows?: any,
+  pinnedRows?: {
+    value?: RowPinningState;
+    onChange?: (value: RowPinningState) => void;
+  };
   responsive?: "scroll" | "none",
   selectableRows?: boolean,
   showActionsBar?: boolean,

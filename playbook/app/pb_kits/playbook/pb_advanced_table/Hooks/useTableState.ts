@@ -24,7 +24,10 @@ interface UseTableStateProps {
   loading?: boolean | string;
   pagination?: boolean;
   paginationProps?: GenericObject;
-  pinnedRows?: any;
+  pinnedRows?: {
+    value?: RowPinningState;
+    onChange?: (value: RowPinningState) => void;
+  };
   virtualizedRows?: boolean;
   tableOptions?: GenericObject;
   onRowSelectionChange?: (arg: RowSelectionState) => void;

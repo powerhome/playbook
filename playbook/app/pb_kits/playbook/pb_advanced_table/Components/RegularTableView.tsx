@@ -19,6 +19,71 @@ type RegularTableViewProps = {
   subRowHeaders?: string[]
 }
 
+// Helper function for Table Rendering
+const TableCellRenderer = ({
+  row,
+  collapsibleTrail = true,
+  loading = false,
+  stickyLeftColumn,
+  columnPinning
+}: {
+  row: Row<GenericObject>
+  collapsibleTrail?: boolean
+  loading?: boolean | string
+  stickyLeftColumn?: string[]
+  columnPinning: { left: string[] }
+}) => {
+  return (
+    <>
+      {row.getVisibleCells().map((cell: Cell<GenericObject, unknown>, i: number) => {
+        const isPinnedLeft = columnPinning.left.includes(cell.column.id);
+        const isLastCell = (() => {
+          const parent = cell.column.parent;
+          if (!parent) {
+            const last = row.getVisibleCells().at(-1);
+            return last?.column.id === cell.column.id;
+          }
+
+          const visibleSiblings = parent.columns.filter(col => col.getIsVisible());
+          return visibleSiblings.at(-1)?.id === cell.column.id;
+        })();
+
+        const { column } = cell;
+        
+        return (
+          <td
+              align="right"
+              className={classnames(
+                `${cell.id}-cell position_relative`,
+                isChrome() ? "chrome-styles" : "",
+                isPinnedLeft && 'pinned-left',
+                stickyLeftColumn && stickyLeftColumn.length > 0 && isPinnedLeft && 'sticky-left',
+                isLastCell && 'last-cell',
+              )}
+              key={`${cell.id}-data`}
+              style={{
+                left: isPinnedLeft
+                  ? i === 1 // Accounting for set min-width for first column
+                    ? '180px'
+                    : `${column.getStart("left")}px`
+                  : undefined,
+            }}
+          >
+            {collapsibleTrail && i === 0 && row.depth > 0 && renderCollapsibleTrail(row.depth)}
+            <span id={`${cell.id}-span`}>
+              {loading ? (
+                <LoadingCell />
+              ) : (
+                flexRender(cell.column.columnDef.cell, cell.getContext())
+              )}
+            </span>
+          </td>
+        );
+      })}
+    </>
+  )
+}
+
 export const RegularTableView = ({
   collapsibleTrail = true,
   subRowHeaders,
@@ -70,50 +135,13 @@ export const RegularTableView = ({
             zIndex: '3'
           }}
       >
-        {row.getVisibleCells().map((cell: Cell<GenericObject, unknown>, i: number) => {
-          const isPinnedLeft = columnPinning.left.includes(cell.column.id);
-          const isLastCell = (() => {
-            const parent = cell.column.parent;
-              if (!parent) {
-                const last = row.getVisibleCells().at(-1);
-                return last?.column.id === cell.column.id;
-              }
-
-              const visibleSiblings = parent.columns.filter(col => col.getIsVisible());
-              return visibleSiblings.at(-1)?.id === cell.column.id;
-              })();
-
-          const { column } = cell;
-          return (
-            <td
-                align="right"
-                className={classnames(
-                  `${cell.id}-cell position_relative`,
-                  isChrome() ? "chrome-styles" : "",
-                  isPinnedLeft && 'pinned-left',
-                  stickyLeftColumn && stickyLeftColumn.length > 0 && isPinnedLeft && 'sticky-left',
-                  isLastCell && 'last-cell',
-                )}
-                key={`${cell.id}-data`}
-                style={{
-                  left: isPinnedLeft
-                    ? i === 1 //Accounting for set min-width for first column
-                      ? '180px'
-                      : `${column.getStart("left")}px`
-                    : undefined,
-                }}
-            >
-              {collapsibleTrail && i === 0 && row.depth > 0 && renderCollapsibleTrail(row.depth)}
-              <span id={`${cell.id}-span`}>
-                {loading ? (
-                  <LoadingCell />
-                ) : (
-                  flexRender(cell.column.columnDef.cell, cell.getContext())
-                )}
-              </span>
-            </td>
-          );
-        })}
+        <TableCellRenderer
+            collapsibleTrail={collapsibleTrail}
+            columnPinning={columnPinning}
+            loading={loading}
+            row={row}
+            stickyLeftColumn={stickyLeftColumn}
+        />
       </tr>
     )
   }
@@ -167,51 +195,13 @@ export const RegularTableView = ({
                   />
                 </td>
               )}
-
-              {row.getVisibleCells().map((cell: Cell<GenericObject, unknown>, i: number) => {
-                const isPinnedLeft = columnPinning.left.includes(cell.column.id);
-                const isLastCell = (() => {
-                  const parent = cell.column.parent;
-                    if (!parent) {
-                      const last = row.getVisibleCells().at(-1);
-                      return last?.column.id === cell.column.id;
-                    }
-
-                    const visibleSiblings = parent.columns.filter(col => col.getIsVisible());
-                    return visibleSiblings.at(-1)?.id === cell.column.id;
-                   })();
-
-                const { column } = cell;
-                return (
-                  <td
-                      align="right"
-                      className={classnames(
-                        `${cell.id}-cell position_relative`,
-                        isChrome() ? "chrome-styles" : "",
-                        isPinnedLeft && 'pinned-left',
-                        stickyLeftColumn && stickyLeftColumn.length > 0 && isPinnedLeft && 'sticky-left',
-                        isLastCell && 'last-cell',
-                      )}
-                      key={`${cell.id}-data`}
-                      style={{
-                        left: isPinnedLeft
-                          ? i === 1 //Accounting for set min-width for first column
-                            ? '180px'
-                            : `${column.getStart("left")}px`
-                          : undefined,
-                      }}
-                  >
-                    {collapsibleTrail && i === 0 && row.depth > 0 && renderCollapsibleTrail(row.depth)}
-                    <span id={`${cell.id}-span`}>
-                      {loading ? (
-                        <LoadingCell />
-                      ) : (
-                        flexRender(cell.column.columnDef.cell, cell.getContext())
-                      )}
-                    </span>
-                  </td>
-                );
-              })}
+              <TableCellRenderer
+                  collapsibleTrail={collapsibleTrail}
+                  columnPinning={columnPinning}
+                  loading={loading}
+                  row={row}
+                  stickyLeftColumn={stickyLeftColumn}
+              />
             </tr>
 
             {/* Display LoadingInline if Row Data is querying and there are no children already */}
