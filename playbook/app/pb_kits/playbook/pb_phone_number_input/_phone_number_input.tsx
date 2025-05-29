@@ -33,6 +33,7 @@ type PhoneNumberInputProps = {
   onChange?: (e: React.FormEvent<HTMLInputElement>) => void,
   onValidate?: Callback<boolean, void>,
   onlyCountries: string[],
+  excludeCountries: string[],
   preferredCountries?: string[],
   required?: boolean,
   value?: string,
@@ -88,6 +89,7 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.MutableRefOb
     },
     onValidate = () => null,
     onlyCountries = [],
+    excludeCountries = [],
     required = false,
     preferredCountries = [],
     value = "",
@@ -234,6 +236,7 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.MutableRefOb
   const fallbackCountry =
     preferredCountries.length > 0 ? preferredCountries[0] :
       onlyCountries.length > 0 ? onlyCountries.sort()[0] :
+      excludeCountries.length > 0 ? excludeCountries.sort()[0] :
         "af";
 
   useEffect(() => {
@@ -244,6 +247,7 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.MutableRefOb
       autoInsertDialCode: false,
       initialCountry: initialCountry || fallbackCountry,
       onlyCountries,
+      excludeCountries,
       countrySearch: countrySearch,
       fixDropdownWidth: false,
       formatAsYouType: formatAsYouType,
