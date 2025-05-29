@@ -26,7 +26,7 @@ export default class PbPopover extends PbEnhancedElement {
 
   connect() {
     if (!this.triggerElement || !this.tooltip) {
-      console.log('Popover requires both trigger and tooltip elements to be defined.')
+      console.warn('Popover requires both trigger and tooltip elements to be defined.')
       return
     }
     this.moveTooltip()
