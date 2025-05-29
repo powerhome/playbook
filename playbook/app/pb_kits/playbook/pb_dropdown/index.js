@@ -115,6 +115,7 @@ export default class PbDropdown extends PbEnhancedElement {
 
   handleSearch(term = "") {
     const lcTerm = term.toLowerCase();
+    let hasMatch = false
     this.element.querySelectorAll(OPTION_SELECTOR).forEach((opt) => {
       //make it so that if the option is selected, it will not show up in the search results
       if (this.isMultiSelect && this.selectedOptions.has(opt.dataset.dropdownOptionLabel)) {
@@ -128,9 +129,32 @@ export default class PbDropdown extends PbEnhancedElement {
       // hide or show option
       const match = label.includes(lcTerm);
       opt.style.display = match ? "" : "none";
+      if (match) hasMatch = true
     });
 
     this.adjustDropdownHeight();
+
+    this.removeNoOptionsMessage()
+    if (!hasMatch) {
+      this.showNoOptionsMessage()
+    }
+  }
+
+  showNoOptionsMessage() {
+    if (this.element.querySelector(".dropdown_no_options")) return;
+
+    const noOptionElement = document.createElement("div");
+    noOptionElement.className = "pb_body_kit_light dropdown_no_options pb_item_kit p_xs display_flex justify_content_center";
+    noOptionElement.textContent = "no option";
+
+    this.target.appendChild(noOptionElement);
+  }
+
+  removeNoOptionsMessage() {
+    const existing = this.element.querySelector(".dropdown_no_options");
+    if (existing) {
+      existing.remove();
+    }
   }
 
   handleOptionClick(event) {
