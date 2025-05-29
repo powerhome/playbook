@@ -16,7 +16,7 @@ RUN /pd_build/ruby_support/finalize.sh
 
 ENV BUNDLE_TO /usr/local/rvm/gems
 ENV NVM_VERSION v0.33.8
-ENV NODE_VERSION v20.11.0
+ENV NODE_VERSION v22.15.1
 ENV NPM_VERSION 6.14.10
 ENV YARN_VERSION 1.22.19
 ENV NVM_DIR /home/app/.nvm

@@ -22,7 +22,7 @@ metadata:
     pagerduty.com/integration-key: aa4876104a614402c057d129aa5ccace
     jenkins.io/github-folder: powerhome/playbook
 spec:
-  owner: playbook-web
+  owner: ghost-crew
   domain: ux
   lifecycle: production
 ---
@@ -41,7 +41,7 @@ metadata:
       icon: build
 spec:
   type: website
-  owner: playbook-web
+  owner: ghost-crew
   lifecycle: production
   system: playbook
 ---
@@ -60,6 +60,6 @@ metadata:
       icon: public
 spec:
   type: library
-  owner: playbook-web
+  owner: ghost-crew
   lifecycle: production
   system: playbook
