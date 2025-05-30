@@ -394,10 +394,6 @@
     box-shadow: 1px 0px 0px 0px var(--column-border-color) !important;
   }
 
-  .pb_table_td:nth-child(2) {
-    box-shadow: inset 1px 0px 0px 0px var(--column-border-color) !important;
-  }
-
   // Color for collapsible trail
   .collapsible-trail {
     background-color: $border_light !important;
@@ -594,10 +590,6 @@
       // Override any columnGroupBorderColor inheritance for responsive borders
       .sticky-left {
         box-shadow: $shadow_deep !important;
-      }
-
-      .pb_table_td:nth-child(2) {
-        box-shadow: 0 0 0 0 !important;
       }
 
       .pb_advanced_table_header,
