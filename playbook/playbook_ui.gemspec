@@ -28,7 +28,7 @@ Gem::Specification.new do |s|
     "dist/playbook-doc.js",
     "dist/playbook-rails.js",
     "dist/playbook-rails-react-bindings.js",
-    "dist/menu.yml",
+    "dist/menu.yml"
   ] + ["Rakefile"]
 
   s.files.reject! { |file| file == "dist/chunks/lib.js" }
