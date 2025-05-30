@@ -39,9 +39,13 @@ const AdvancedTableDefault = (props) => {
     <div>
       <AdvancedTable
           columnDefinitions={columnDefinitions}
+          maxHeight="xs"
+          overflow="auto"
+          responsive="scroll"
+          scrollBarNone
           tableData={MOCK_DATA}
           {...props}
-      />
+          />
     </div>
   )
 }
