@@ -31,6 +31,13 @@ module Playbook
         error ? "negative" : nil
       end
 
+      def data
+        Hash(prop(:data)).merge(
+          pb_checkbox_indeterminate_main: indeterminate_main,
+          pb_checkbox_indeterminate_parent: indeterminate_parent
+        )
+      end
+
     private
 
       def error_class
