@@ -23,7 +23,7 @@ module Playbook
     end
 
     def min_height_values
-      %w[auto xs sm md lg xl xxl xxxl]
+      %w[auto xs sm md lg xl xxl xxxl 100%]
     end
   end
 end

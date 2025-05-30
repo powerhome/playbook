@@ -20,6 +20,7 @@ const HEIGHTS: { [size: string]: string } = {
   'xl': '1280px max',
   'xxl': '1440px max',
   'xxxl': '1920px max',
+  '100%': '100%',
 }
 
 const VALUES: { [value: string]: string } = {
@@ -31,6 +32,7 @@ const VALUES: { [value: string]: string } = {
   'xl': 'xl',
   'xxl': 'xxl',
   'xxxl': 'xxxl',
+  '100%': '100%',
 }
 
 const MaxHeightDescription = () => (
@@ -54,7 +56,7 @@ const MaxHeight = ({ example }: {example: string}) => (
         height="sm"
         overflowY="auto"
     >
-      <Flex justify="between">
+      <Flex justify="between" height="xxxl">
         {Object.keys(HEIGHTS).map((size: string) => (
           <Background
               backgroundColor="gradient"

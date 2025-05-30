@@ -7,6 +7,7 @@ $height_lg: 1024px !default;
 $height_xl: 1280px !default;
 $height_2xl: 1440px !default;
 $height_3xl: 1920px !default;
+$height_100: 100% !default;
 $heights: (
   height_auto: $height_auto,
   height_xs: $height_xs,
@@ -15,5 +16,6 @@ $heights: (
   height_lg: $height_lg,
   height_xl: $height_xl,
   height_xxl: $height_2xl,
-  height_xxxl: $height_3xl
+  height_xxxl: $height_3xl,
+  height_100: $height_100,
 );
