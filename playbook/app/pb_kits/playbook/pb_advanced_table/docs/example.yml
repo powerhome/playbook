@@ -1,18 +1,18 @@
 examples:
   rails:
-  # - advanced_table_beta: Default (Required Props)
-  # - advanced_table_loading: Loading State
-  # - advanced_table_beta_subrow_headers: SubRow Headers
-  # - advanced_table_collapsible_trail_rails: Collapsible Trail
-  # - advanced_table_table_props: Table Props
-  # - advanced_table_sticky_header_rails: Sticky Header
-  # - advanced_table_table_props_sticky_header: Sticky Header for Responsive Table
-  # - advanced_table_beta_sort: Enable Sorting
-  # - advanced_table_responsive: Responsive Tables
-  # - advanced_table_custom_cell_rails: Custom Components for Cells
-  # - advanced_table_column_headers: Multi-Header Columns
-  # - advanced_table_column_headers_multiple: Multi-Header Columns (Multiple Levels)
-  # - advanced_table_column_border_color_rails: Column Group Border Color
+  - advanced_table_beta: Default (Required Props)
+  - advanced_table_loading: Loading State
+  - advanced_table_beta_subrow_headers: SubRow Headers
+  - advanced_table_collapsible_trail_rails: Collapsible Trail
+  - advanced_table_table_props: Table Props
+  - advanced_table_sticky_header_rails: Sticky Header
+  - advanced_table_table_props_sticky_header: Sticky Header for Responsive Table
+  - advanced_table_beta_sort: Enable Sorting
+  - advanced_table_responsive: Responsive Tables
+  - advanced_table_custom_cell_rails: Custom Components for Cells
+  - advanced_table_column_headers: Multi-Header Columns
+  - advanced_table_column_headers_multiple: Multi-Header Columns (Multiple Levels)
+  - advanced_table_column_border_color_rails: Column Group Border Color
   - advanced_table_selectable_rows_rails: Selectable Rows
   - advanced_table_selectable_rows_no_subrows_rails: Selectable Rows (No Subrows)
   - advanced_table_selectable_rows_actions_rails: Selectable Rows (With Actions)
