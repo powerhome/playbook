@@ -1,7 +1,4 @@
-<%= pb_content_tag(:label, data: {
-  pb_checkbox_indeterminate_main: object.indeterminate_main,
-  pb_checkbox_indeterminate_parent: object.indeterminate_parent,
-}) do %>
+<%= pb_content_tag(:label) do %>
   <%= content.presence || object.input %>
   <span data-pb-checkbox-icon-span="true" class="pb_checkbox_checkmark">
     <%= pb_rails("icon", props: { icon: "check", classname: "check_icon", fixed_width: true}) %>
