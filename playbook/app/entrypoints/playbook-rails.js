@@ -86,6 +86,9 @@ PbDatePicker.start()
 import PbMultiLevelSelect from 'kits/pb_multi_level_select'
 PbMultiLevelSelect.start()
 
+import PbCheckbox from 'kits/pb_checkbox'
+PbCheckbox.start()
+
 import 'flatpickr'
 
 // React-Rendered Rails Kits =====
