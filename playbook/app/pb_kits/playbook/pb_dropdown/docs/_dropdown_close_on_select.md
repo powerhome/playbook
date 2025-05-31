@@ -1,0 +1,1 @@
+By default, the dropdown menu will close when a selection is made. You can prevent this behavior by using the `closeOnSelection` prop, which will leave the menu open after a selection is made when set to 'false'.

@@ -25,7 +25,7 @@ type DropdownOptionProps = {
   key?: string | number;
   option?: GenericObject;
   padding?: string;
-}  & GlobalProps;
+} & GlobalProps;
 
 const DropdownOption = (props: DropdownOptionProps) => {
   const {
@@ -56,16 +56,17 @@ const DropdownOption = (props: DropdownOptionProps) => {
 
   // When multiSelect, then if an option is selected, remove from dropdown
   const isSelected = Array.isArray(selected)
-   ? selected.some((item) => item.label === option?.label)
-   : (selected as GenericObject)?.label === option?.label;
+    ? selected.some((item) => item.label === option?.label)
+    : (selected as GenericObject)?.label === option?.label;
 
-  
   if (!isItemMatchingFilter(option) || (multiSelect && isSelected)) {
     return null;
   }
+
   const isFocused =
     focusedOptionIndex >= 0 &&
     filteredOptions[focusedOptionIndex].label === option?.label;
+
   const focusedClass = isFocused && "focused";
 
   const selectedClass = isSelected ? "selected" : "list";
@@ -91,7 +92,10 @@ const DropdownOption = (props: DropdownOptionProps) => {
         className={classes}
         id={id}
         key={key}
-        onClick= {() => handleOptionClick(option)}
+        onClick={(e) => {
+            e.stopPropagation();
+            handleOptionClick(option);
+        }}
     >
       <ListItem
           cursor="pointer"
@@ -100,12 +104,12 @@ const DropdownOption = (props: DropdownOptionProps) => {
           key={option?.label}
           padding="none"
       >
-          {children ? 
+        {children ?
           <div className="dropdown_option_wrapper">{children}</div> :
-              <Body dark={dark} 
-                  text={option?.label} 
-              />
-          }
+          <Body dark={dark}
+              text={option?.label}
+          />
+        }
       </ListItem>
     </div>
   );
