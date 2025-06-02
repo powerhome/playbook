@@ -1,0 +1,1 @@
+When using a custom checkbox wrapped in the Checkbox kit, hidden inputs are not automatically included and cannot be prop enabled. Manually add a hidden input before the checkbox if necessary to submit a value when the checkbox is unchecked (as is standard in Rails forms).

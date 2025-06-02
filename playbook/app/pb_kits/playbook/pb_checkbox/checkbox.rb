@@ -28,9 +28,19 @@ module Playbook
 
       def input
         inputs = []
-        inputs << hidden_field_tag(name, hidden_value || "0") if hidden_input && name.present?
+        effective_name = name || input_options[:name]
+        effective_value = value || input_options[:value] || "1"
+        is_checked = checked || input_options[:checked]
 
-        inputs << check_box_tag(name, value || "1", checked, input_options.merge(disabled: disabled))
+        inputs << hidden_field_tag(effective_name, hidden_value || "0") if hidden_input && effective_name.present?
+
+        inputs << check_box_tag(
+          effective_name,
+          effective_value,
+          is_checked,
+          input_options.merge(disabled: disabled)
+        )
+
         safe_join(inputs)
       end
 
