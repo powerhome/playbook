@@ -554,7 +554,7 @@ kits:
     status: stable
     icons_used: true
     react_rendered: false
-    enhanced_element_used: false
+    enhanced_element_used: true
   - name: selectable_list
     platforms: *1
     description:

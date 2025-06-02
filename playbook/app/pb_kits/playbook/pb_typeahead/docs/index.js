@@ -15,3 +15,4 @@ export { default as TypeaheadWithPillsColor } from './_typeahead_with_pills_colo
 export { default as TypeaheadTruncatedText } from './_typeahead_truncated_text.jsx'
 export { default as TypeaheadReactHook } from './_typeahead_react_hook.jsx'
 export { default as TypeaheadDisabled } from './_typeahead_disabled.jsx'
+export { default as TypeaheadPreserveInput } from './_typeahead_preserve_input.jsx'

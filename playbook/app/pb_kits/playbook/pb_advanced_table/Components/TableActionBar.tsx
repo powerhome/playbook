@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useContext } from "react";
+import React, { useEffect, useRef, useContext, useState } from "react";
 
 import AdvancedTableContext from "../Context/AdvancedTableContext";
 import { buildVisibilityTree } from "../Utilities/VisibilityTree";
@@ -7,13 +7,11 @@ import Card from "../../pb_card/_card";
 import Caption from "../../pb_caption/_caption";
 import Flex from "../../pb_flex/_flex";
 import FlexItem from "../../pb_flex/_flex_item";
-import Dropdown from "../../pb_dropdown/_dropdown";
-import DropdownContainer from "../../pb_dropdown/subcomponents/DropdownContainer";
-import DropdownTrigger from "../../pb_dropdown/subcomponents/DropdownTrigger";
 import Icon from "../../pb_icon/_icon";
 import Checkbox from "../../pb_checkbox/_checkbox";
 import SectionSeparator from "../../pb_section_separator/_section_separator";
 import Tooltip from "../../pb_tooltip/_tooltip";
+import PbReactPopover from "../../pb_popover/_popover";
 
 import {
   showActionBar,
@@ -56,11 +54,24 @@ const TableActionBar: React.FC<TableActionBarProps> = ({
     const col   = table.getColumn(id);
     const show  = col.getIsVisible();
 
+    const handleVisibilityChange = () => {
+      col.toggleVisibility();
+      if (columnVisibilityControl?.onColumnVisibilityChange) {
+        const updatedVisibilityState = {
+          ...table.getAllColumns().reduce((acc: { [x: string]: any; }, col: { id: string | number; getIsVisible: () => any; }) => {
+            acc[col.id] = col.getIsVisible();
+            return acc;
+          }, {}),
+        };
+        columnVisibilityControl?.onColumnVisibilityChange(updatedVisibilityState);
+      }
+    };
+
     return (
       <Checkbox
           checked={show}
           key={id}
-          onChange={() => col.toggleVisibility()}
+          onChange={handleVisibilityChange}
           paddingBottom="xs"
           text={label}
       />
@@ -80,16 +91,24 @@ const TableActionBar: React.FC<TableActionBarProps> = ({
     const allOn    = visibleArray.every(Boolean);
     const someOn   = visibleArray.some(Boolean);
 
+       const handleGroupVisibilityChange = () => {
+      leaves.forEach((id) => table.getColumn(id).toggleVisibility(!allOn));
+      if (columnVisibilityControl?.onColumnVisibilityChange) {
+        const updatedVisibilityState = {
+          ...table.getAllColumns().reduce((acc: { [x: string]: any; }, col: { id: string | number; getIsVisible: () => any; }) => {
+            acc[col.id] = col.getIsVisible();
+            return acc;
+          }, {}),
+        };
+        columnVisibilityControl?.onColumnVisibilityChange(updatedVisibilityState);
+      }
+    };
     return (
       <>
         <Checkbox
             checked={allOn}
             indeterminate={!allOn && someOn}
-            onChange={() =>
-              leaves.forEach((id) =>
-                table.getColumn(id).toggleVisibility(!allOn),
-              )
-            }
+            onChange={handleGroupVisibilityChange}
             paddingBottom="xs"
             text={node.label}
         />
@@ -113,7 +132,28 @@ const TableActionBar: React.FC<TableActionBarProps> = ({
         hideActionBar(cardRef.current);
       }
     }
-  }, [isVisible]);
+  }, [isVisible, type]);
+
+  const [showPopover, setShowPopover] = useState(false)
+
+  const togglePopover = () => setShowPopover((prev) => !prev)
+  const handleShouldClose = (shouldClose: boolean) =>
+    setShowPopover(!shouldClose)
+
+  const popoverReference = (
+    <Tooltip 
+        placement="top" 
+        text="Column Configuration"
+    >
+      <div onClick={togglePopover}>
+      <Icon
+          color="primary"
+          cursor="pointer"
+          icon="sliders-h"
+      />
+      </div>
+    </Tooltip>
+  )
 
   return (
     <Card
@@ -139,30 +179,17 @@ const TableActionBar: React.FC<TableActionBarProps> = ({
             <FlexItem>{actions}</FlexItem>
           </>
         ) : (
-          <Dropdown
-              className="column-visibility-dropdown-wrapper"
-              options={columnDefinitions}
+          <PbReactPopover
+              closeOnClick="outside"
+              placement="bottom-end"
+              reference={popoverReference}
+              shouldClosePopover={handleShouldClose}
+              show={showPopover}
+              zIndex={3}
           >
-            <DropdownTrigger>
-            <Tooltip 
-                placement='top' 
-                text="Column Configuration" 
-                zIndex={10}
-            >
-                <Icon 
-                    color="primary" 
-                    cursor="pointer" 
-                    icon="sliders-h" 
-                />
-            </Tooltip>
-            </DropdownTrigger>
-            <DropdownContainer
-                className="column-visibility-dropdown"
-                paddingTop="sm"
-            >
-              <>
+            <>
               <Caption 
-                  paddingBottom="sm" 
+                  paddingY="sm" 
                   text="Columns Config"
                   textAlign="center" 
               />
@@ -177,8 +204,7 @@ const TableActionBar: React.FC<TableActionBarProps> = ({
                 </Flex>
               ))}
               </>
-            </DropdownContainer>
-          </Dropdown>
+          </PbReactPopover>
         )}
       </Flex>
     </Card>

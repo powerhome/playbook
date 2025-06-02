@@ -15,7 +15,7 @@
       @include pb_body;
       border: 1px solid $border_light;
       background-color: $white;
-      height: 45px;
+      min-height: 45px;
       @media (hover: hover) {
         &:hover,
         &:active,

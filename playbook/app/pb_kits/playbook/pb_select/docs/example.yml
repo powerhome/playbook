@@ -8,6 +8,7 @@ examples:
   - select_required: Required Select Field
   - select_value_text_same: Equal option value and value text
   - select_custom_select: Custom Select
+  - select_custom_select_subheaders: Custom Select Subheaders
   - select_error: Select w/ Error
   - select_inline: Select Inline
   - select_inline_show_arrow: Select Inline (Always Show Arrow)
@@ -25,6 +26,7 @@ examples:
   - select_required: Required Select Field
   - select_value_text_same: Equal option value and value text
   - select_custom_select: Custom Select
+  - select_custom_select_subheaders: Custom Select Subheaders
   - select_error: Select w/ Error
   - select_inline: Select Inline
   - select_inline_show_arrow: Select Inline (Always Show Arrow)

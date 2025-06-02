@@ -49,6 +49,7 @@ const AdvancedTableColumnVisibilityWithState = (props) => {
   const columnVisibilityControl = {
     value: columnVisibility,
     onChange: setColumnVisibility,
+    onColumnVisibilityChange: (currentState) => console.log(currentState),
   }
   return (
     <div>

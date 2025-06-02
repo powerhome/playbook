@@ -29,6 +29,7 @@ import { GenericObject, Noop } from '../types'
  * @prop {boolean} async - whether Typeahead should fetch data from
  * a remote location to populate the options
  * @prop {string} label - the text for the optional typeahead input label
+ * @prop {boolean} preserveSearchInput - whether to preserve the input value when the field loses focus
  */
 
 type TypeaheadProps = {
@@ -54,6 +55,7 @@ type TypeaheadProps = {
   optionsByContext?: Record<string, Array<{ label: string; value?: string }>>
   searchContextSelector?: string,
   clearOnContextChange?: boolean,
+  preserveSearchInput?: boolean,
 } & GlobalProps
 
 export type SelectValueType = {
@@ -93,8 +95,44 @@ const Typeahead = forwardRef<HTMLInputElement, TypeaheadProps>(({
   optionsByContext = {},
   searchContextSelector,
   clearOnContextChange = false,
+  preserveSearchInput = false, // Default to false to maintain backward compatibility
   ...props
 }: TypeaheadProps) => {
+  // State to manage the input value when preserveSearchInput is true
+  const [inputValue, setInputValue] = useState("")
+
+  // If preserveSearchInput is true, we need to control the input value
+  const handleInputChange = preserveSearchInput
+    ? (newValue: string, actionMeta: {action: string}) => {
+        // Only update the input value for certain actions
+        if (actionMeta.action === 'input-change') {
+          setInputValue(newValue)
+        } else if (actionMeta.action === 'menu-close' && !props.value) {
+          // Don't clear the input when the menu closes without a selection
+          // unless the component is controlled and has a value
+        } else if (actionMeta.action === 'set-value') {
+          // When an option is selected, clear the input
+          setInputValue('')
+        }
+
+        // If the original onInputChange was provided, call it too
+        if (props.onInputChange) {
+          return props.onInputChange(newValue, actionMeta)
+        }
+        return newValue
+      }
+    : props.onInputChange
+
+  // Handle blur events if we're preserving input
+  const handleBlur = preserveSearchInput
+    ? (event: React.FocusEvent<HTMLInputElement>) => {
+        // Do not clear input on blur - the value is preserved in our state
+        if (props.onBlur) {
+          props.onBlur(event)
+        }
+      }
+    : props.onBlur
+
   const selectProps = {
     cacheOptions: true,
     components: {
@@ -124,10 +162,28 @@ const Typeahead = forwardRef<HTMLInputElement, TypeaheadProps>(({
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     onMultiValueClick: (_option: SelectValueType): any => undefined,
     pillColor: pillColor,
+    ...(preserveSearchInput ? { inputValue } : {}),
+    onInputChange: handleInputChange,
+    onBlur: handleBlur,
     ...props,
   }
 
   const [contextValue, setContextValue] = useState("")
+
+  // Add listener for clearing
+  useEffect(() => {
+    const handleClear = () => {
+      if (preserveSearchInput) {
+        setInputValue('')
+      }
+    }
+
+    document.addEventListener(`pb-typeahead-kit-${selectProps.id}:clear`, handleClear)
+
+    return () => {
+      document.removeEventListener(`pb-typeahead-kit-${selectProps.id}:clear`, handleClear)
+    }
+  }, [selectProps.id, preserveSearchInput])
 
   useEffect(() => {
     if (searchContextSelector) {
@@ -137,7 +193,12 @@ const Typeahead = forwardRef<HTMLInputElement, TypeaheadProps>(({
       const handleContextChange = (e: Event) => {
         const target = e.target as HTMLInputElement;
         setContextValue(target.value);
-        if (clearOnContextChange) document.dispatchEvent(new CustomEvent(`pb-typeahead-kit-${selectProps.id}:clear`))
+        if (clearOnContextChange) {
+          document.dispatchEvent(new CustomEvent(`pb-typeahead-kit-${selectProps.id}:clear`))
+          if (preserveSearchInput) {
+            setInputValue('')
+          }
+        }
       }
 
       if (searchContextElement) searchContextElement.addEventListener('change', handleContextChange)
@@ -146,7 +207,7 @@ const Typeahead = forwardRef<HTMLInputElement, TypeaheadProps>(({
         if (searchContextElement) searchContextElement.removeEventListener('change', handleContextChange)
       }
     }
-  }, [searchContextSelector])
+  }, [searchContextSelector, clearOnContextChange, selectProps.id, preserveSearchInput])
 
   const contextArray = optionsByContext[contextValue]
   if (Array.isArray(contextArray) && contextArray.length > 0) {
@@ -168,7 +229,12 @@ const Typeahead = forwardRef<HTMLInputElement, TypeaheadProps>(({
         onChange(_data)
       }
     }
-    
+
+    // If a value is selected and we're preserving input on blur, clear the input
+    if (action === 'select-option' && preserveSearchInput) {
+      setInputValue('')
+    }
+
     if (action === 'select-option') {
       if (selectProps.onMultiValueClick) selectProps.onMultiValueClick(option)
       const multiValueClearEvent = new CustomEvent(`pb-typeahead-kit-${selectProps.id}-result-option-select`, { detail: option ? option : _data })
@@ -181,6 +247,10 @@ const Typeahead = forwardRef<HTMLInputElement, TypeaheadProps>(({
     if (action === 'clear') {
       const multiValueClearEvent = new CustomEvent(`pb-typeahead-kit-${selectProps.id}-result-clear`)
       document.dispatchEvent(multiValueClearEvent)
+      // If preserving input on blur, also clear input on explicit clear
+      if (preserveSearchInput) {
+        setInputValue('')
+      }
     }
   }
 

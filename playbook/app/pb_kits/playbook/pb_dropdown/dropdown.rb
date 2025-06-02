@@ -22,9 +22,17 @@ module Playbook
                           default: false
       prop :searchbar, type: Playbook::Props::Boolean,
                        default: false
+      prop :multi_select, type: Playbook::Props::Boolean,
+                          default: false
+      prop :form_pill_props, type: Playbook::Props::HashProp,
+                             default: {}
 
       def data
-        Hash(prop(:data)).merge(pb_dropdown: true)
+        Hash(prop(:data)).merge(
+          pb_dropdown: true,
+          pb_dropdown_multi_select: multi_select,
+          form_pill_props: form_pill_props.to_json
+        )
       end
 
       def classname
@@ -38,7 +46,13 @@ module Playbook
       end
 
       def input_default_value
-        default_value.present? ? default_value.transform_keys(&:to_s)["id"] : ""
+        return "" unless default_value.present?
+
+        if multi_select
+          default_value.map { |v| v.transform_keys(&:to_s)["id"] }.join(",")
+        else
+          default_value.transform_keys(&:to_s)["id"]
+        end
       end
 
       def separators_class

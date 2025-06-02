@@ -1,0 +1,1 @@
+`multiSelect` can also be used with the `autocomplete` functionality.
