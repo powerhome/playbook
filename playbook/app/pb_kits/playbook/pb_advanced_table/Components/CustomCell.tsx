@@ -47,7 +47,7 @@ export const CustomCell = ({
       <Flex 
           alignItems="center" 
           columnGap="xs"
-          justify={!hasAnySubRows && !inlineRowLoading ? "end" : "start"}
+          justify={"start"}
           orientation="row"
       >
         {
