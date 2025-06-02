@@ -598,6 +598,11 @@
     }
   }
 
+  // Row Pinning - additional inline styles in RegularTableView.tsx
+  .pinned-row {
+    box-shadow: 0 4px 10px 0 rgba($shadow, 0.16) !important;
+  }
+
   &.dark {
     // Override default border color for dark mode
     --column-border-color: #{$border_dark};

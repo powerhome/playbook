@@ -1,8 +1,8 @@
-import React from "react"
-import AdvancedTable from '../../pb_advanced_table/_advanced_table'
-import MOCK_DATA from "./advanced_table_mock_data_no_subrows.json"
+import React, { useState } from "react"
+import AdvancedTable from '../_advanced_table'
+import MOCK_DATA from "./advanced_table_mock_data_with_id.json"
 
-const AdvancedTableNoSubrows = (props) => {
+const AdvancedTableRowPinning = (props) => {
   const columnDefinitions = [
     {
       accessor: "year",
@@ -35,15 +35,23 @@ const AdvancedTableNoSubrows = (props) => {
     },
   ]
 
+  const [pinnedRows, setPinnedRows] = useState({top: ["8", "9", "10", "11", "12", "13", "14"]})
+
   return (
     <div>
       <AdvancedTable
           columnDefinitions={columnDefinitions}
+          maxHeight="xs"
+          pinnedRows={{value: pinnedRows, onChange: setPinnedRows}}
           tableData={MOCK_DATA}
+          tableProps={{sticky: true}}
           {...props}
-      />
+      >
+        <AdvancedTable.Header enableSorting />
+        <AdvancedTable.Body />
+      </AdvancedTable>
     </div>
   )
 }
 
-export default AdvancedTableNoSubrows
+export default AdvancedTableRowPinning

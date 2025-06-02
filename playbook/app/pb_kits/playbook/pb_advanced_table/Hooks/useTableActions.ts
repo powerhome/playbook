@@ -1,5 +1,5 @@
 import { useCallback, useEffect } from 'react';
-import { Row } from "@tanstack/react-table";
+import { Row, RowPinningState } from "@tanstack/react-table";
 import { GenericObject } from "../../types";
 import { updateExpandAndCollapseState } from "../Utilities/ExpansionControlHelpers";
 
