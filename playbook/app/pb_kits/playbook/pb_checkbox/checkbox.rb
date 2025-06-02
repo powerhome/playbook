@@ -18,13 +18,20 @@ module Playbook
                       default: false
       prop :form_spacing, type: Playbook::Props::Boolean,
                           default: false
+      prop :hidden_input, type: Playbook::Props::Boolean,
+                          default: false
+      prop :hidden_value
 
       def classname
         generate_classname("pb_checkbox_kit", checked_class) + error_class
       end
 
       def input
-        check_box_tag(name, value, checked, input_options.merge(disabled: disabled))
+        inputs = []
+        inputs << hidden_field_tag(name, hidden_value || "0") if hidden_input && name.present?
+
+        inputs << check_box_tag(name, value || "1", checked, input_options.merge(disabled: disabled))
+        safe_join(inputs)
       end
 
       def checkbox_label_status
