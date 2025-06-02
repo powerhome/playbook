@@ -2,7 +2,7 @@ import React from "react"
 import AdvancedTable from '../../pb_advanced_table/_advanced_table'
 import MOCK_DATA from "./advanced_table_mock_data.json"
 
-const AdvancedTableDefault = (props) => {
+const AdvancedTableScrollbarNone = (props) => {
   const columnDefinitions = [
     {
       accessor: "year",
@@ -39,6 +39,10 @@ const AdvancedTableDefault = (props) => {
     <div>
       <AdvancedTable
           columnDefinitions={columnDefinitions}
+          maxHeight="xs"
+          overflow="auto"
+          responsive="scroll"
+          scrollBarNone
           tableData={MOCK_DATA}
           {...props}
       />
@@ -46,4 +50,4 @@ const AdvancedTableDefault = (props) => {
   )
 }
 
-export default AdvancedTableDefault
+export default AdvancedTableScrollbarNone

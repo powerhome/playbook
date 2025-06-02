@@ -25,9 +25,11 @@ module Playbook
                         default: "auto"
       prop :selectable_rows, type: Playbook::Props::Boolean,
                              default: false
+      prop :scroll_bar_none, type: Playbook::Props::Boolean,
+                             default: false
 
       def classname
-        additional_classes = [responsive_classname, max_height_classname]
+        additional_classes = [responsive_classname, max_height_classname, scrollbar_none_class]
         additional_classes << "column-group-border-#{column_group_border_color}" if column_group_border_color != "none"
         generate_classname("pb_advanced_table", *additional_classes, separator: " ")
       end
@@ -38,6 +40,10 @@ module Playbook
 
       def max_height_classname
         max_height.present? ? "advanced-table-max-height-#{max_height}" : ""
+      end
+
+      def scrollbar_none_class
+        scroll_bar_none ? "advanced-table-hide-scrollbar " : ""
       end
 
       def selected_rows
