@@ -34,7 +34,7 @@
   },
   "homepage": "https://github.com/powerhome/playbook#readme",
   "dependencies": {
-    "@floating-ui/dom": "^1.6.13",
+    "@floating-ui/dom": "^1.7.1",
     "@fortawesome/fontawesome-free": "^6.2.1",
     "@popperjs/core": "^2.11.8",
     "classnames": "2.5.1",
