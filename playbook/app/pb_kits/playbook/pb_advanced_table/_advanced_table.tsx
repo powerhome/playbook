@@ -2,7 +2,7 @@ import React, { useRef, useEffect, useState, useCallback } from "react";
 import classnames from "classnames";
 
 import { GenericObject } from "../types";
-import { Row, RowSelectionState } from "@tanstack/react-table";
+import { Row, RowSelectionState, RowPinningState } from "@tanstack/react-table";
 
 import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from "../utilities/props";
 import { globalProps, GlobalProps } from "../utilities/globalProps";
@@ -51,7 +51,11 @@ type AdvancedTableProps = {
   onRowToggleClick?: (arg: Row<GenericObject>) => void
   onToggleExpansionClick?: (arg: Row<GenericObject>) => void
   pagination?: boolean,
-  paginationProps?: GenericObject
+  paginationProps?: GenericObject,
+  pinnedRows?: {
+    value?: RowPinningState;
+    onChange?: (value: RowPinningState) => void;
+  };
   responsive?: "scroll" | "none",
   selectableRows?: boolean,
   showActionsBar?: boolean,
@@ -91,6 +95,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
     onToggleExpansionClick,
     pagination = false,
     paginationProps,
+    pinnedRows,
     responsive = "scroll",
     showActionsBar = true,
     selectableRows,
@@ -136,6 +141,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
     tableOptions,
     onRowSelectionChange,
     columnVisibilityControl,
+    pinnedRows,
   });
 
   // Initialize table actions
@@ -241,7 +247,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
     maxHeight ? `advanced-table-max-height-${maxHeight}` : '',
     {
       'advanced-table-fullscreen': isFullscreen,
-      'advanced-table-allow-fullscreen': allowFullScreen
+      'advanced-table-allow-fullscreen': allowFullScreen,
     },
     {'advanced-table-sticky-left-columns': stickyLeftColumn && stickyLeftColumn.length > 0},
     columnGroupBorderColor ? `column-group-border-${columnGroupBorderColor}` : '',
@@ -302,6 +308,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
             isFullscreen={isFullscreen}
             loading={loading}
             onExpandByDepthClick={onExpandByDepthClick}
+            pinnedRows={pinnedRows}
             responsive={responsive}
             selectableRows={selectableRows}
             setExpanded={setExpanded}
