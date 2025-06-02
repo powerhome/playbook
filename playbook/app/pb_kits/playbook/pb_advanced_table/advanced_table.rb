@@ -29,7 +29,7 @@ module Playbook
                              default: false
 
       def classname
-        additional_classes = [responsive_classname, max_height_classname, scrollbar_none_class]
+        additional_classes = [responsive_classname, max_height_classname, hide_scroll_bar_class]
         additional_classes << "column-group-border-#{column_group_border_color}" if column_group_border_color != "none"
         generate_classname("pb_advanced_table", *additional_classes, separator: " ")
       end
@@ -42,7 +42,7 @@ module Playbook
         max_height.present? ? "advanced-table-max-height-#{max_height}" : ""
       end
 
-      def scrollbar_none_class
+      def hide_scroll_bar_class
         scroll_bar_none ? "advanced-table-hide-scrollbar " : ""
       end
 
