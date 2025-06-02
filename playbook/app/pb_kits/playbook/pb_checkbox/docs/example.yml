@@ -7,6 +7,7 @@ examples:
     - checkbox_options: Checkbox w/ Options
     - checkbox_indeterminate: Indeterminate Checkbox
     - checkbox_disabled: Disabled Checkbox
+    - checkbox_form: Form and Hidden Input
 
   react:
   - checkbox_default: Default

@@ -1,0 +1,22 @@
+
+<%= pb_form_with(scope: :example, url: "", method: :get) do |form| %>
+  <%=pb_rails("flex", props: { gap: "sm", orientation: "column"}) do %>
+    <%= pb_rails("checkbox" , props: {
+      text: "1. pb_rails(\"checkbox\") Checkbox from kit",
+      value: "checkbox-value",
+      name: "checkbox-name",
+      hidden_input: true
+      }) %>
+    <%= form.check_box :example_checkbox,
+      data: { field1: "value1", field2: "value2" },
+      props: { text: "2. form.check_box Checkbox from Form Builder" },
+      unchecked_value: "no",
+      id: "checkbox-id",
+      name: "checkbox-name",
+      class: "checkbox-class"
+    %>
+    <%= form.actions do |action| %>
+      <%= action.button props: { type: "submit", text: "Submit", variant: "primary" } %>
+    <% end %>   
+  <% end %>
+<% end %>
