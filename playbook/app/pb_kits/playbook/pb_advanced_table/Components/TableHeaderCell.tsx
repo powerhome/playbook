@@ -128,7 +128,7 @@ const isToggleExpansionEnabled =
 
   let justifyHeader:justifyTypes;
 
-  if (header?.index === 0 && hasAnySubRows || (header?.index === 0 && inlineRowLoading)) {
+  if (header?.index === 0 && hasAnySubRows || (header?.index === 0 && inlineRowLoading) || (header?.index === 0 && isToggleExpansionEnabled)) {
     justifyHeader = enableSorting ? "between" : "start";
   } else {
     justifyHeader = isLeafColumn ? "end" : "center";
