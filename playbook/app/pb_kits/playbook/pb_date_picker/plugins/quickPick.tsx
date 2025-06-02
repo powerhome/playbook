@@ -26,7 +26,8 @@ type customQuickPickDatesType = {
 
 let activeLabel = ""
 
-const quickPickPlugin = (thisRangesEndToday: boolean, customQuickPickDates: customQuickPickDatesType | undefined, defaultDate: string) => {
+const quickPickPlugin = (thisRangesEndToday: boolean, customQuickPickDates: customQuickPickDatesType | undefined, defaultDate: string, dateDisplay: boolean) => {
+  // console.log(thisRangesEndToday)
   return function (fp: FpTypes & any): any {
     const today = new Date()
     const yesterday = DateTime.getYesterdayDate(new Date())
@@ -82,19 +83,45 @@ const quickPickPlugin = (thisRangesEndToday: boolean, customQuickPickDates: cust
       [key: string]: Date[]
     };
 
-    let ranges: rangesType = {
-      'Today': [today, today],
-      'Yesterday': [yesterday, yesterday],
-      'This week': [thisWeekStartDate, thisWeekEndDate],
-      'This month': [thisMonthStartDate, thisMonthEndDate],
-      'This quarter': [thisQuarterStartDate, thisQuarterEndDate],
-      'This year': [thisYearStartDate, thisYearEndDate],
-      'Last week': [lastWeekStartDate, lastWeekEndDate],
-      'Last month': [lastMonthStartDate, lastMonthEndDate],
-      'Last quarter': [lastQuarterStartDate, lastQuarterEndDate],
-      'Last year': [lastYearStartDate, lastYearEndDate]
+    const formatDate = (date: Date): string => {
+      const month = String(date.getMonth() + 1).padStart(2, '0');
+      const day = String(date.getDate()).padStart(2, '0');
+      const year = date.getFullYear();
+      return `${month}/${day}/${year}`;
     };
 
+
+    let ranges: rangesType = {}
+
+    console.log(dateDisplay)
+
+    if (dateDisplay) {
+      ranges = {
+        [formatDate(today)]: [today, today],
+        [formatDate(yesterday)]: [yesterday, yesterday],
+        [`${formatDate(thisWeekStartDate)} to ${formatDate(thisWeekEndDate)}`]: [thisWeekStartDate, thisWeekEndDate],
+        [`${formatDate(thisMonthStartDate)} to ${formatDate(thisMonthEndDate)}`]: [thisMonthStartDate, thisMonthEndDate],
+        [`${formatDate(thisQuarterStartDate)} to ${formatDate(thisQuarterEndDate)}`]: [thisQuarterStartDate, thisQuarterEndDate],
+        [`${formatDate(thisYearStartDate)} to ${formatDate(thisYearEndDate)}`]: [thisYearStartDate, thisYearEndDate],
+        [`${formatDate(lastWeekStartDate)} to ${formatDate(lastWeekEndDate)}`]: [lastWeekStartDate, lastWeekEndDate],
+        [`${formatDate(lastMonthStartDate)} to ${formatDate(lastMonthEndDate)}`]: [lastMonthStartDate, lastMonthEndDate],
+        [`${formatDate(lastQuarterStartDate)} to ${formatDate(lastQuarterEndDate)}`]: [lastQuarterStartDate, lastQuarterEndDate],
+        [`${formatDate(lastYearStartDate)} to ${formatDate(lastYearEndDate)}`]: [lastYearStartDate, lastYearEndDate]
+      }
+    } else {
+      ranges = {
+        'Today': [today, today],
+        'Yesterday': [yesterday, yesterday],
+        'This week': [thisWeekStartDate, thisWeekEndDate],
+        'This month': [thisMonthStartDate, thisMonthEndDate],
+        'This quarter': [thisQuarterStartDate, thisQuarterEndDate],
+        'This year': [thisYearStartDate, thisYearEndDate],
+        'Last week': [lastWeekStartDate, lastWeekEndDate],
+        'Last month': [lastMonthStartDate, lastMonthEndDate],
+        'Last quarter': [lastQuarterStartDate, lastQuarterEndDate],
+        'Last year': [lastYearStartDate, lastYearEndDate]
+      }
+    }
 
     if (customQuickPickDates && Object.keys(customQuickPickDates).length !== 0) {
       if (customQuickPickDates.dates.length && customQuickPickDates.override === false) {
@@ -108,7 +135,7 @@ const quickPickPlugin = (thisRangesEndToday: boolean, customQuickPickDates: cust
             )
           }
         })
-      } else if(customQuickPickDates.dates.length && customQuickPickDates.override !== false) {
+      } else if (customQuickPickDates.dates.length && customQuickPickDates.override !== false) {
         ranges = {}
         customQuickPickDates.dates.forEach((item) => {
           if (Array.isArray(item.value)) {

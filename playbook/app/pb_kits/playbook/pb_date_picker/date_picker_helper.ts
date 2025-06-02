@@ -16,6 +16,7 @@ const getPositionElement = (element: string | Element) => {
 type DatePickerConfig = {
   closeOnSelect?: boolean,
   customQuickPickDates: { override: boolean, dates: any[] },
+  dateDisplay?: boolean,
   disableDate?: number[],
   disableRange?: number[],
   disableWeekdays?: number[],
@@ -48,6 +49,7 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
     allowInput,
     closeOnSelect = true,
     customQuickPickDates = { override: true, dates: [] },
+    dateDisplay = false,
     defaultDate,
     disableDate,
     disableRange,
@@ -151,7 +153,7 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
 
     } else if (selectionType === "quickpick") {
       //------- QUICKPICK VARIANT PLUGIN -------------//
-      pluginList.push(quickPickPlugin(thisRangesEndToday, customQuickPickDates, defaultDate as string))
+      pluginList.push(quickPickPlugin(thisRangesEndToday, customQuickPickDates, defaultDate as string, dateDisplay))
     }
 
     // time selection
