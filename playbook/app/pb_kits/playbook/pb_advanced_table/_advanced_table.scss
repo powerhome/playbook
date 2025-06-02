@@ -33,6 +33,16 @@
     }
   }
 
+  @mixin scrollbar-styling {
+     &::-webkit-scrollbar {
+        width: 8px;
+      }
+
+      -ms-overflow-style: none !important;
+      scrollbar-width: thin !important;
+      scrollbar-color: rgb(0 0 0 / .20) transparent;
+  }
+
   [id$="-span"] {
     word-wrap: normal;
   }
@@ -236,30 +246,37 @@
   &.advanced-table-max-height-xs {
     max-height: 320px;
     overflow-y: auto;
+    @include scrollbar-styling;
   }
   &.advanced-table-max-height-sm {
     max-height: 480px;
     overflow-y: auto;
+    @include scrollbar-styling;
   }
   &.advanced-table-max-height-md {
     max-height: 768px;
     overflow-y: auto;
+    @include scrollbar-styling;
   }
   &.advanced-table-max-height-lg {
     max-height: 1024px;
     overflow-y: auto;
+    @include scrollbar-styling;
   }
   &.advanced-table-max-height-xl {
     max-height: 1280px;
     overflow-y: auto;
+    @include scrollbar-styling;
   }
   &.advanced-table-max-height-xxl {
     max-height: 1440px;
     overflow-y: auto;
+    @include scrollbar-styling;
   }
   &.advanced-table-max-height-xxxl {
     max-height: 1920px;
     overflow-y: auto;
+    @include scrollbar-styling;
   }
 
   // Fullscreen
