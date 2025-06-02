@@ -2,10 +2,16 @@
 
 <%= pb_rails("dialog", props: { 
     id:"dialog-1", 
-    size: "sm", 
-    title: "Header Title is the Title Prop", 
-    text: "Hello Body Text, Nice to meet ya.", 
+    size: "md", 
     cancel_button: "Cancel Button", 
     confirm_button: "Okay", 
     confirm_button_id: "confirm-button-1"
-}) %>
+})  do %>
+
+
+  <%= pb_rails("date_picker", props: {
+        label:           "Pick a date",
+        picker_id:       "date-picker-position-element222",
+      }) %>
+
+<% end %>
