@@ -57,6 +57,7 @@ type AdvancedTableProps = {
     onChange?: (value: RowPinningState) => void;
   };
   responsive?: "scroll" | "none",
+  scrollBarNone?: boolean,
   selectableRows?: boolean,
   showActionsBar?: boolean,
   sortControl?: GenericObject
@@ -97,6 +98,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
     paginationProps,
     pinnedRows,
     responsive = "scroll",
+    scrollBarNone= false,
     showActionsBar = true,
     selectableRows,
     sortControl,
@@ -251,6 +253,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
     },
     {'advanced-table-sticky-left-columns': stickyLeftColumn && stickyLeftColumn.length > 0},
     columnGroupBorderColor ? `column-group-border-${columnGroupBorderColor}` : '',
+    scrollBarNone ? 'advanced-table-hide-scrollbar' : '',
     globalProps(props),
     className
   );

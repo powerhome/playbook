@@ -18,6 +18,7 @@ examples:
   - advanced_table_selectable_rows_no_subrows_rails: Selectable Rows (No Subrows)
   - advanced_table_selectable_rows_actions_rails: Selectable Rows (With Actions)
   - advanced_table_selectable_rows_header_rails: Selectable Rows (No Actions Bar)
+  - advanced_table_scrollbar_none: Advanced Table Scrollbar None
 
   react:
   - advanced_table_default: Default (Required Props)
@@ -55,3 +56,4 @@ examples:
   - advanced_table_column_visibility_custom: Column Visibility Control with Custom Dropdown
   - advanced_table_column_visibility_multi: Column Visibility Control with Multi-Header Columns
   - advanced_table_pinned_rows: Pinned Rows
+  - advanced_table_scrollbar_none: Advanced Table Scrollbar None
