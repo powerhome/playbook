@@ -12,11 +12,13 @@ const AdvancedTableColumnStyling = (props) => {
     {
       accessor: "newEnrollments",
       label: "New Enrollments",
-      columnStyling:{headerAlignment: "left"},
+      columnStyling:{headerAlignment: "left", cellAlignment: "left"},
     },
     {
       accessor: "scheduledMeetings",
       label: "Scheduled Meetings",
+      columnStyling:{headerAlignment: "center", cellAlignment: "center"},
+
     },
     {
       accessor: "attendanceRate",

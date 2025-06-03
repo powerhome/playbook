@@ -25,13 +25,15 @@ const TableCellRenderer = ({
   collapsibleTrail = true,
   loading = false,
   stickyLeftColumn,
-  columnPinning
+  columnPinning,
+  columnDefinitions,
 }: {
   row: Row<GenericObject>
   collapsibleTrail?: boolean
   loading?: boolean | string
   stickyLeftColumn?: string[]
   columnPinning: { left: string[] }
+  columnDefinitions?: any
 }) => {
   return (
     <>
@@ -49,10 +51,12 @@ const TableCellRenderer = ({
         })();
 
         const { column } = cell;
-        
+        const columnIndex = column.getIndex();
+        const cellAlignment = columnDefinitions[columnIndex]?.columnStyling?.cellAlignment || "right";
+
         return (
           <td
-              align="right"
+              align={cellAlignment}
               className={classnames(
                 `${cell.id}-cell position_relative`,
                 isChrome() ? "chrome-styles" : "",
@@ -117,7 +121,7 @@ export const RegularTableView = ({
 
   const columnPinning = table.getState().columnPinning || { left: [] };
   const columnDefinitions = table.options.meta?.columnDefinitions || [];
-
+console.log("columnDefinitions", columnDefinitions);
   // Row pinning
   function PinnedRow({ row }: { row: Row<any> }) {
     return (
@@ -197,6 +201,7 @@ export const RegularTableView = ({
               )}
               <TableCellRenderer
                   collapsibleTrail={collapsibleTrail}
+                  columnDefinitions={columnDefinitions}
                   columnPinning={columnPinning}
                   loading={loading}
                   row={row}

@@ -272,7 +272,7 @@ const isToggleExpansionEnabled =
                   },
                 })}
               justify={header?.index === 0 && enableSorting ? "between" : headerAlignment ? alignmentMap[headerAlignment] : "none"}
-              paddingLeft={enableSorting ? "xxs" : "xs"}
+              paddingLeft={header?.index === 0 ? enableSorting ? "xxs" : "xs" : "none"}
           >
             <div>
               {flexRender(header?.column.columnDef.header, header?.getContext())}
