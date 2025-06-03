@@ -1,7 +1,9 @@
-# 14.21.0
+# 🔥 Advanced Table Advancements 🔥
 ##### June 03, 2025
 
 ![release_image](https://github.com/user-attachments/assets/41c6e9a1-5ad0-407a-9184-55e01664ea46)
+
+The spotlight’s on the Advanced Table Kit this release! Sleeker scrollbars, brand-new row-pinning logic, and a smoother selectable row experience - because wrangling big tables should feel slick, not sticky (unless you WANT sticky, in which case have you seen our sticky headers, sticky columns and sticky rows?)
 
 [14.21.0](https://github.com/powerhome/playbook/tree/14.21.0) full list of changes:
 
