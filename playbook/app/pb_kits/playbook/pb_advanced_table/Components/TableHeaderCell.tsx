@@ -138,18 +138,19 @@ const isToggleExpansionEnabled =
   (enableToggleExpansion === "all" || "header") &&
   enableToggleExpansion !== "none"
 
-  let justifyHeader:justifyTypes;
-if (headerAlignment && alignmentMap[headerAlignment]) {
-  justifyHeader = alignmentMap[headerAlignment];
-} else if (
-  (header?.index === 0 && hasAnySubRows) ||
-  (header?.index === 0 && inlineRowLoading) ||
-  (header?.index === 0 && isToggleExpansionEnabled)
-) {
-  justifyHeader = enableSorting ? "between" : "start";
-} else {
-  justifyHeader = isLeafColumn ? "end" : "center";
-}
+  let justifyHeader: justifyTypes;
+
+  if (headerAlignment && alignmentMap[headerAlignment]) {
+    justifyHeader = alignmentMap[headerAlignment];
+  } else if (
+    (header?.index === 0 && hasAnySubRows) ||
+    (header?.index === 0 && inlineRowLoading) ||
+    (header?.index === 0 && isToggleExpansionEnabled)
+  ) {
+    justifyHeader = enableSorting ? "between" : "start";
+  } else {
+    justifyHeader = isLeafColumn ? "end" : "center";
+  }
   
   const [showPopover, setShowPopover] = useState(false)
 
@@ -182,7 +183,7 @@ if (headerAlignment && alignmentMap[headerAlignment]) {
 
   return (
     <th
-        align="right"
+        align={headerAlignment ? headerAlignment : "right"}
         className={cellClassName}
         colSpan={header?.colSpan}
         id={cellId}
@@ -270,7 +271,7 @@ if (headerAlignment && alignmentMap[headerAlignment]) {
                     tabIndex: 0,
                   },
                 })}
-              justify={header?.index === 0 && enableSorting ? "between" : "none"}
+              justify={header?.index === 0 && enableSorting ? "between" : headerAlignment ? alignmentMap[headerAlignment] : "none"}
               paddingLeft={enableSorting ? "xxs" : "xs"}
           >
             <div>
