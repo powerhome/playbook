@@ -33,6 +33,16 @@
     }
   }
 
+  @mixin scrollbar-styling {
+     &::-webkit-scrollbar {
+        width: 8px;
+      }
+
+      -ms-overflow-style: none !important;
+      scrollbar-width: thin !important;
+      scrollbar-color: #00000033 transparent !important;
+  }
+
   [id$="-span"] {
     word-wrap: normal;
   }
@@ -86,6 +96,16 @@
       text-align: left;
     }
   }
+
+  &.advanced-table-hide-scrollbar {
+      &::-webkit-scrollbar {
+        display: none !important;
+      }
+
+      -ms-overflow-style: none !important;
+      scrollbar-width: none !important;
+    }
+  
 
   .row-selection-actions-card {
     border-bottom-right-radius: 0px !important;
@@ -226,30 +246,37 @@
   &.advanced-table-max-height-xs {
     max-height: 320px;
     overflow-y: auto;
+    @include scrollbar-styling;
   }
   &.advanced-table-max-height-sm {
     max-height: 480px;
     overflow-y: auto;
+    @include scrollbar-styling;
   }
   &.advanced-table-max-height-md {
     max-height: 768px;
     overflow-y: auto;
+    @include scrollbar-styling;
   }
   &.advanced-table-max-height-lg {
     max-height: 1024px;
     overflow-y: auto;
+    @include scrollbar-styling;
   }
   &.advanced-table-max-height-xl {
     max-height: 1280px;
     overflow-y: auto;
+    @include scrollbar-styling;
   }
   &.advanced-table-max-height-xxl {
     max-height: 1440px;
     overflow-y: auto;
+    @include scrollbar-styling;
   }
   &.advanced-table-max-height-xxxl {
     max-height: 1920px;
     overflow-y: auto;
+    @include scrollbar-styling;
   }
 
   // Fullscreen
@@ -536,6 +563,7 @@
   // Sticky Left Columns Styling
   &[class*="advanced-table-sticky-left-columns"] {
     overflow-x: scroll;
+    @include scrollbar-styling;
     .sticky-left {
       position: sticky !important;
       z-index: 2;
@@ -555,6 +583,7 @@
     &[class*="advanced-table-responsive-scroll"] {
       overflow-x: auto;
       width: 100%;
+      @include scrollbar-styling;
 
       // These are the responsive borders that should NOT inherit the custom color
       @include advanced-table-sticky-mixin(
@@ -586,6 +615,11 @@
     &[class*="advanced-table-responsive-scroll"] {
       overflow-x: visible;
     }
+  }
+
+  // Row Pinning - additional inline styles in RegularTableView.tsx
+  .pinned-row {
+    box-shadow: 0 4px 10px 0 rgba($shadow, 0.16) !important;
   }
 
   &.dark {

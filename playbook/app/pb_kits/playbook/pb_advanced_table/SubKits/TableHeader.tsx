@@ -39,7 +39,8 @@ export const TableHeader = ({
     hasAnySubRows,
     showActionsBar,
     selectableRows,
-    responsive
+    responsive,
+    headerRef
   } = useContext(AdvancedTableContext)
 
   const classes = classnames(
@@ -62,8 +63,11 @@ export const TableHeader = ({
           id={id}
       >
         {/* Get the header groups (only one in this example) */}
-        {table.getHeaderGroups().map((headerGroup: HeaderGroup<GenericObject>) => (
-          <tr key={`${headerGroup.id}-headerGroup`}>
+        {table.getHeaderGroups().map((headerGroup: HeaderGroup<GenericObject>, index: number) => (
+          <tr 
+              key={`${headerGroup.id}-headerGroup`}
+              ref={index === 0 ? headerRef : null}
+          >
             {!hasAnySubRows && selectableRows && (
               <th className={customCellClassnames}>
                 <Checkbox

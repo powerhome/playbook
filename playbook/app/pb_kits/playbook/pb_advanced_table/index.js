@@ -569,6 +569,8 @@ class PbAdvancedTableActionBar {
     actionBar.style.height = 'auto';
     actionBar.style.overflow = 'visible';
     actionBar.style.opacity = '1';
+    actionBar.style.transitionProperty = 'all';
+    actionBar.style.transitionTimingFunction = 'ease-in-out';
     actionBar.classList.remove("p_none");
     actionBar.classList.add("p_xs", "is-visible", "show-action-card");
 
