@@ -40,7 +40,7 @@
 
       -ms-overflow-style: none !important;
       scrollbar-width: thin !important;
-      scrollbar-color: rgb(0 0 0 / .20) transparent;
+      scrollbar-color: #00000033 transparent !important;
   }
 
   [id$="-span"] {
@@ -562,6 +562,7 @@
   // Sticky Left Columns Styling
   &[class*="advanced-table-sticky-left-columns"] {
     overflow-x: scroll;
+    @include scrollbar-styling;
     .sticky-left {
       position: sticky !important;
       z-index: 2;
@@ -581,6 +582,7 @@
     &[class*="advanced-table-responsive-scroll"] {
       overflow-x: auto;
       width: 100%;
+      @include scrollbar-styling;
 
       // These are the responsive borders that should NOT inherit the custom color
       @include advanced-table-sticky-mixin(
