@@ -45,6 +45,7 @@ export const TableHeaderCell = ({
   table
 }: TableHeaderCellProps) => {
   const {
+    columnDefinitions,
     expanded,
     setExpanded,
     expandByDepth,
@@ -72,6 +73,17 @@ export const TableHeaderCell = ({
       header?.column.getToggleSortingHandler()(event)
     }
   }
+const alignmentMap: Record<string, "start" | "center" | "end"> = {
+  left: "start",
+  center: "center",
+  right: "end",
+};
+
+const headerAlignment =
+  header?.index !== undefined
+    ? columnDefinitions?.[header.index]?.columnStyling?.headerAlignment ??
+      columnDefinitions?.[header.index]?.columnStyling?.headerAligment
+    : undefined;
 
   const isLeafColumn =
   header?.column.getLeafColumns().length === 1 &&
@@ -127,12 +139,17 @@ const isToggleExpansionEnabled =
   enableToggleExpansion !== "none"
 
   let justifyHeader:justifyTypes;
-
-  if (header?.index === 0 && hasAnySubRows || (header?.index === 0 && inlineRowLoading) || (header?.index === 0 && isToggleExpansionEnabled)) {
-    justifyHeader = enableSorting ? "between" : "start";
-  } else {
-    justifyHeader = isLeafColumn ? "end" : "center";
-  }
+if (headerAlignment && alignmentMap[headerAlignment]) {
+  justifyHeader = alignmentMap[headerAlignment];
+} else if (
+  (header?.index === 0 && hasAnySubRows) ||
+  (header?.index === 0 && inlineRowLoading) ||
+  (header?.index === 0 && isToggleExpansionEnabled)
+) {
+  justifyHeader = enableSorting ? "between" : "start";
+} else {
+  justifyHeader = isLeafColumn ? "end" : "center";
+}
   
   const [showPopover, setShowPopover] = useState(false)
 
