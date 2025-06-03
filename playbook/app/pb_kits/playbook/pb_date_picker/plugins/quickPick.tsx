@@ -27,7 +27,6 @@ type customQuickPickDatesType = {
 let activeLabel = ""
 
 const quickPickPlugin = (thisRangesEndToday: boolean, customQuickPickDates: customQuickPickDatesType | undefined, defaultDate: string, dateDisplay: boolean) => {
-  // console.log(thisRangesEndToday)
   return function (fp: FpTypes & any): any {
     const today = new Date()
     const yesterday = DateTime.getYesterdayDate(new Date())
