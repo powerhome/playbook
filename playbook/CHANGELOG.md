@@ -5,7 +5,7 @@
 
 The spotlight’s on the Advanced Table Kit this release! Sleeker scrollbars, brand-new row-pinning logic, and a smoother selectable row experience - because wrangling big tables should feel slick, not sticky (unless you WANT sticky, in which case have you seen our sticky headers, sticky columns and sticky rows?)
 
-[14.21.0](https://github.com/powerhome/playbook/tree/14.21.0) full list of changes:
+[14.21.1](https://github.com/powerhome/playbook/tree/14.21.1) full list of changes:
 
 **Kit Enhancements:**
 
@@ -28,6 +28,7 @@ The spotlight’s on the Advanced Table Kit this release! Sleeker scrollbars, br
 - Checkbox Kit: Fix Bug Overwriting Data Attributes - Rails [\#4679](https://github.com/powerhome/playbook/pull/4679) ([kangaree](https://github.com/kangaree))
 - Dropdown Kit: Display 'no Option' With No Results In Autocomplete - Rails [\#4673](https://github.com/powerhome/playbook/pull/4673) ([kangaree](https://github.com/kangaree))
 - Advanced Table Container: False First Column Border Bug - Rails Only [\#4654](https://github.com/powerhome/playbook/pull/4654) ([nickamantia](https://github.com/nickamantia))
+- Advanced Table: SCSS Syntax Error Fix for rgb Value [\#4699](https://github.com/powerhome/playbook/pull/4699) ([nidaqg](https://github.com/nidaqg))
 
 
 **Improvements:**
@@ -42,7 +43,7 @@ The spotlight’s on the Advanced Table Kit this release! Sleeker scrollbars, br
 
 
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/v14.21.0-rc.2...14.21.0)
+[Full Changelog](https://github.com/powerhome/playbook/compare/v14.21.0-rc.2...14.21.1)
 
 # Supercharged Dropdown Kit: Now with Typeahead & Multi-Select
 ##### May 22, 2025
