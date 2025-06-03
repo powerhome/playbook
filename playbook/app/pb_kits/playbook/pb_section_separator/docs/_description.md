@@ -1,1 +1,3 @@
-Section separator is a divider line that compartmentalizes content, typically used on cards or white backgrounds. This should only be used on light backgrounds (with our variable `$bg_light`).
+Section separator is a divider line that compartmentalizes content, typically used on cards or white backgrounds.
+
+To ensure that the section separator is properly rendered, please be sure to set `width` to 100%.
