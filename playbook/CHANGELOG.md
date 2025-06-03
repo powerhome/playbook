@@ -1,5 +1,54 @@
+# 🔥 Advanced Table Advancements 🔥
+##### June 03, 2025
+
+![release_image](https://github.com/user-attachments/assets/41c6e9a1-5ad0-407a-9184-55e01664ea46)
+
+The spotlight’s on the Advanced Table Kit this release! Sleeker scrollbars, brand-new row-pinning logic, and a smoother selectable row experience - because wrangling big tables should feel slick, not sticky (unless you WANT sticky, in which case have you seen our sticky headers, sticky columns and sticky rows?)
+
+[14.21.1](https://github.com/powerhome/playbook/tree/14.21.1) full list of changes:
+
+**Kit Enhancements:**
+
+- Advanced Table Kit: Reduced Opacity on Scrollbar When Overflow-y Is Auto [\#4690](https://github.com/powerhome/playbook/pull/4690) ([nidaqg](https://github.com/nidaqg))
+- Dropdown Kit: Closeonselection Prop - React Only [\#4681](https://github.com/powerhome/playbook/pull/4681) ([skduncan](https://github.com/skduncan))
+- Advanced Table Kit: Scrollbarnone Prop for React and Rails [\#4677](https://github.com/powerhome/playbook/pull/4677) ([nickamantia](https://github.com/nickamantia))
+- Advanced Table Kit: Row Pinning Logic [\#4642](https://github.com/powerhome/playbook/pull/4642) ([elisashapiro](https://github.com/elisashapiro))
+- Checkbox Kit: Indeterminate Checkbox Logic - Rails [\#4671](https://github.com/powerhome/playbook/pull/4671) ([kangaree](https://github.com/kangaree))
+- Phone Number Input Kit: Option to Exclude Countries [\#4661](https://github.com/powerhome/playbook/pull/4661) ([skduncan](https://github.com/skduncan))
+- Advanced Table Kit: Action Bar for Selectable Rows Logic - Rails \(revert\) [\#4638](https://github.com/powerhome/playbook/pull/4638) ([skduncan](https://github.com/skduncan))
+
+
+**Fixed Bugs:**
+
+- Advanced Table Kit: Fixes for Cell Alignment When No Subrows [\#4686](https://github.com/powerhome/playbook/pull/4686) ([nidaqg](https://github.com/nidaqg))
+- Advanced Table Kit: Fixes for Animation for Actions Bar [\#4678](https://github.com/powerhome/playbook/pull/4678) ([nidaqg](https://github.com/nidaqg))
+- Filter and Popover Kit: Safeguards for When Node Is Null [\#4674](https://github.com/powerhome/playbook/pull/4674) ([nidaqg](https://github.com/nidaqg))
+- Table Kit: Sticky Left and Right Columns With Responsive=none Should Not Go Into Mobile View on Small Screens [\#4670](https://github.com/powerhome/playbook/pull/4670) ([nickamantia](https://github.com/nickamantia))
+- Draggable Kit: Fixes Bug for Cross Container Drag Between Two Tables [\#4645](https://github.com/powerhome/playbook/pull/4645) ([kangaree](https://github.com/kangaree))
+- Checkbox Kit: Fix Bug Overwriting Data Attributes - Rails [\#4679](https://github.com/powerhome/playbook/pull/4679) ([kangaree](https://github.com/kangaree))
+- Dropdown Kit: Display 'no Option' With No Results In Autocomplete - Rails [\#4673](https://github.com/powerhome/playbook/pull/4673) ([kangaree](https://github.com/kangaree))
+- Advanced Table Container: False First Column Border Bug - Rails Only [\#4654](https://github.com/powerhome/playbook/pull/4654) ([nickamantia](https://github.com/nickamantia))
+- Advanced Table: SCSS Syntax Error Fix for rgb Value [\#4699](https://github.com/powerhome/playbook/pull/4699) ([nidaqg](https://github.com/nidaqg))
+
+
+**Improvements:**
+
+- Dropdown Kit: Adding Jest and Rspec Tests [\#4667](https://github.com/powerhome/playbook/pull/4667) ([nidaqg](https://github.com/nidaqg))
+- Update Portal.yml [\#4668](https://github.com/powerhome/playbook/pull/4668) ([nidaqg](https://github.com/nidaqg))
+- Migrate Renovate Config [\#4660](https://github.com/powerhome/playbook/pull/4660) ([renovate[bot]](https://github.com/apps/renovate))
+- Update Dependency Powerhome/ci-kubed to V9 [\#4656](https://github.com/powerhome/playbook/pull/4656) ([nidaqg](https://github.com/nidaqg))
+- Nodejs Upgrade to V22.15.1 [\#4653](https://github.com/powerhome/playbook/pull/4653) ([nidaqg](https://github.com/nidaqg))
+- Renovate Should Propose Major Upgrades [\#4649](https://github.com/powerhome/playbook/pull/4649) ([benlangfeld](https://github.com/benlangfeld))
+- Select Kit: Doc Examples Demonstrating Non-selectable Subheaders Separating Selectable Options [\#4646](https://github.com/powerhome/playbook/pull/4646) ([elisashapiro](https://github.com/elisashapiro))
+
+
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/v14.21.0-rc.2...14.21.1)
+
 # Supercharged Dropdown Kit: Now with Typeahead & Multi-Select
 ##### May 22, 2025
+
+![release_image](https://github.com/user-attachments/assets/7fcd86b9-2e00-4de9-ae3a-24e10e44d78d)
 
 Our Dropdown kit now supports typeahead functionality and multi-select out of the box! Type to filter results instantly, click to select, and enjoy seamless keyboard navigation. Under the hood we handle hidden inputs, form resets, and custom events—so you can ship rich, accessible selection controls faster! Both our React and Rails kits are fully standalone, each encapsulating its own logic so you (and we) only have one version of the kit for each language to deal with/break/fall in love with.
 
@@ -36,6 +85,9 @@ Our Dropdown kit now supports typeahead functionality and multi-select out of th
 
 # ✨ Glow Up: Activated ✨
 ##### May 08, 2025
+
+![release_image](https://github.com/user-attachments/assets/e2314525-c859-4a05-97be-ae55813b8027)
+
 
 Playbook just got a little more magical! No data? No problem — we’ve got a new Empty State Kit for that! We also supercharged our Dropdown which now supports typeahead functionality in both React and Rails, making it faster to find what you need. The Draggable Kit too got a glow-up with new dropzone UI options. And yes, the DatePicker got smarter about ranges and quickpicks! It’s a glow-up all around!
 
