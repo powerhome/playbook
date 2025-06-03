@@ -9,6 +9,8 @@ module Playbook
                                      default: {}
       prop :dark, type: Playbook::Props::Boolean,
                   default: false
+      prop :date_display, type: Playbook::Props::Boolean,
+                          default: false
       prop :default_date, type: Playbook::Props::String,
                           default: ""
       prop :disable_date, type: Playbook::Props::Array,
@@ -95,6 +97,7 @@ module Playbook
         {
           allowInput: allow_input,
           customQuickPickDates: custom_quick_pick_dates,
+          dateDisplay: date_display,
           defaultDate: default_date,
           disableDate: disable_date,
           disableRange: disable_range,
