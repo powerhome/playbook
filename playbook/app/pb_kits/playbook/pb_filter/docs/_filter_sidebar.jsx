@@ -7,18 +7,18 @@ import TextInput from '../../pb_text_input/_text_input'
 import { useCollapsible, SectionSeparator, Checkbox, Flex, Table, Caption, Icon } from 'playbook-ui'
 
 const people = [
+  { name: 'Hera Syndulla', territory: 'A galaxy far far away, like really far away...', products: ['Insulation'] },
+  { name: 'Kanan Jarrus', territory: 'USA', products: ['Siding', 'Roofing', 'Gutters'] },
+  { name: 'C1-10P', territory: 'USA', products: ['Roofing'] },
   { name: 'Anakin Skywalker', territory: 'A galaxy far far away, like really far away...', products: ['Doors', 'Windows', 'Solar'] },
-  { name: 'Maxwell Keeper', territory: 'USA', products: ['Roofing'] },
   { name: 'Leia Organa', territory: 'Canada', products: ['Windows', 'Doors'] },
   { name: 'Luke Skywalker', territory: 'Brazil', products: ['Solar', 'Roofing'] },
   { name: 'Padmé Amidala', territory: 'Philippines', products: ['Siding', 'Gutters'] },
   { name: 'Obi-Wan Kenobi', territory: 'USA', products: ['Windows', 'Siding'] },
   { name: 'Ahsoka Tano', territory: 'Canada', products: ['Insulation', 'Solar'] },
-  { name: 'Hera Syndulla', territory: 'A galaxy far far away, like really far away...', products: ['Insulation'] },
   { name: 'Boba Fett', territory: 'Brazil', products: ['Roofing', 'Gutters'] },
   { name: 'Mace Windu', territory: 'Philippines', products: ['Doors', 'Siding'] },
   { name: 'Grogu', territory: 'A galaxy far far away, like really far away...', products: ['Insulation'] },
-  { name: 'Din Djarin', territory: 'USA', products: ['Siding', 'Roofing', 'Gutters'] },
   { name: 'Sabine Wren', territory: 'Canada', products: ['Solar', 'Doors'] },
   { name: 'C-3PO', territory: 'Brazil', products: ['Windows'] },
   { name: 'R2-D2', territory: 'Philippines', products: ['Doors', 'Gutters'] },
