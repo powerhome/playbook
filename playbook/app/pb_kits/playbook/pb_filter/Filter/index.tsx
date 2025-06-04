@@ -10,16 +10,16 @@ type FilterProps =
       double?: boolean,
     })
   | (FilterSidebarProps & {
-    sidebar?: boolean,
+    variant?: null | 'sidebar',
   })
 
 const Filter = ({
   double = false,
-  sidebar = false,
+  variant,
   ...templateProps
   }: FilterProps): React.ReactElement => {
   const displayFilter = () => {
-    if (sidebar === true) {
+    if (variant === 'sidebar') {
       return (
         <FilterSidebar {...templateProps} />
       )

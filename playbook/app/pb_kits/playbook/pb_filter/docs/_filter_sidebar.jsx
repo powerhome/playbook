@@ -68,7 +68,6 @@ const FilterSidebar = (props) => {
             marginRight="xs"
             onCollapse={() => setIsCollapsed(!isCollapsed)}
             results={filteredPeople.length}
-            sidebar
             sortOptions={{
               popularity: 'Popularity',
               // eslint-disable-next-line
@@ -77,6 +76,7 @@ const FilterSidebar = (props) => {
               manager_name: 'Manager\'s Name',
             }}
             sortValue={[{ name: 'popularity', dir: 'desc' }]}
+            variant="sidebar"
             width="xs"
             {...props}
         >
