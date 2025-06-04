@@ -34,7 +34,7 @@
                                 </button>
                             <% end %>
                         <% end %>
-                        <%= pb_rails("flex/flex_item", props:{padding_left: index.zero? && (object.row[:children].present? || has_integrated_checkbox) ? "none" : "xs"}) do %>       
+                        <%= pb_rails("flex/flex_item") do %>       
                             <% if column[:custom_renderer].present? %>
                                 <%= raw(column[:custom_renderer].call(object.row, custom_renderer_value(column, index))) %>
                             <% elsif index.zero? %>
