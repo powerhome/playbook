@@ -83,7 +83,6 @@ const FilterSidebar = (props) => {
           <Filter.Section
               collapsed={isCollapsed}
               collapsible
-              header
               headerText="Full Name"
           >
             <TextInput
@@ -97,7 +96,6 @@ const FilterSidebar = (props) => {
           <Filter.Section
               collapsed={isCollapsed}
               collapsible
-              header
               headerText="Territory"
           >
             <Select
@@ -112,7 +110,6 @@ const FilterSidebar = (props) => {
           <Filter.Section
               collapsed={isCollapsed}
               collapsible
-              header
               headerText="Products"
           >
             <div>

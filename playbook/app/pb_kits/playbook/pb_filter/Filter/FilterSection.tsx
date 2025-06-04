@@ -7,10 +7,9 @@ type FilterSectionProps = {
   children?: React.ReactChild[] | React.ReactChild,
   collapsible?: boolean,
   collapsed?: boolean,
-  header?: boolean,
   headerText?: string,
 }
-const FilterSection = ({ children, collapsible = false, collapsed = true, header = false, headerText, }: FilterSectionProps): React.ReactElement => {
+const FilterSection = ({ children, collapsible = false, collapsed = true, headerText, }: FilterSectionProps): React.ReactElement => {
   if (collapsible) {
     return (
       <Collapsible
@@ -35,7 +34,7 @@ const FilterSection = ({ children, collapsible = false, collapsed = true, header
   
   return (
     <>
-      {header && <Caption>{ headerText }</Caption>}
+      {headerText && <Caption>{ headerText }</Caption>}
       { children }
     </>
   )
