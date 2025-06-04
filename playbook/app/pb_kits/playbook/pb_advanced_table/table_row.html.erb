@@ -6,7 +6,7 @@
     <% object.column_definitions.each_with_index do |column, index| %>
         <% next unless column[:accessor].present? %>
         <%= pb_rails("table/table_cell", props: { classname:object.td_classname(column, index)}) do %>
-            <%= pb_rails("flex", props:{ align: "center", justify: index.zero? ? "start" : "end", classname: object.loading ? "loading-cell" : "" }) do %>
+            <%= pb_rails("flex", props:{ align: "center", justify: object.justify_for(column, index), classname: object.loading ? "loading-cell" : "" }) do %>
                 <% if collapsible_trail && index.zero? %>
                     <% (1..depth).each do |i| %>
                         <% additional_offset = i > 1 ? (i - 1) * 0.25 : 0 %>

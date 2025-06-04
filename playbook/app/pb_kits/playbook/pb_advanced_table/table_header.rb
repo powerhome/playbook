@@ -98,6 +98,10 @@ module Playbook
 
             process_columns(col[:columns], rows, current_depth + 1, max_depth)
           else
+            orig_def = find_column_def_by_accessor(column_definitions, col[:accessor])
+            header_alignment = nil
+            header_alignment = orig_def[:column_styling][:header_alignment] if orig_def && orig_def[:column_styling].is_a?(Hash)
+
             colspan = 1
             rows[current_depth] << {
               label: col[:label],
@@ -105,6 +109,7 @@ module Playbook
               accessor: col[:accessor],
               sort_menu: col[:sort_menu],
               is_last_in_group: is_last && current_depth.positive?,
+              header_alignment: header_alignment,
             }
           end
         end
@@ -142,6 +147,18 @@ module Playbook
           wrapped = { label: "", columns: [wrapped] }
         end
         wrapped
+      end
+
+      def find_column_def_by_accessor(defs, target_accessor)
+        defs.each do |col|
+          return col if col[:accessor] == target_accessor
+
+          if col[:columns].is_a?(Array)
+            found = find_column_def_by_accessor(col[:columns], target_accessor)
+            return found if found
+          end
+        end
+        nil
       end
     end
   end
