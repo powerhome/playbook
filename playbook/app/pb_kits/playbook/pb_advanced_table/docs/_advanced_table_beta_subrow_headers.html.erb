@@ -34,7 +34,7 @@
   subrow_headers = ["Quarter", "Month", "Day"]
 %>
 
-<%= pb_rails("advanced_table", props: { table_data: @table_data, column_definitions: column_definitions, id: "subrow_headers" }) do %>
+<%= pb_rails("advanced_table", props: { table_data: @table_data, column_definitions: column_definitions, id: "test_table" }) do %>
   <%= pb_rails("advanced_table/table_header", props: { column_definitions: column_definitions }) %>
   <%= pb_rails("advanced_table/table_body", props: { id: "test_table", table_data: @table_data, column_definitions: column_definitions, subrow_headers: subrow_headers, enable_toggle_expansion: "all" }) %>
 <% end %>
