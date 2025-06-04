@@ -2,6 +2,7 @@ import React from 'react'
 
 import Collapsible from '../../pb_collapsible/_collapsible'
 import Caption from '../../pb_caption/_caption'
+import Body from '../../pb_body/_body'
 
 type FilterSectionProps = {
   children?: React.ReactChild[] | React.ReactChild,
@@ -33,10 +34,15 @@ const FilterSection = ({ children, collapsible = false, collapsed = true, header
   }
   
   return (
-    <>
-      {headerText && <Caption>{ headerText }</Caption>}
-      { children }
-    </>
+    <Body
+        paddingTop="xs"
+        paddingX="sm"
+    >
+      <>
+        {headerText && <Caption marginBottom="sm">{ headerText }</Caption>}
+        { children }
+      </>
+    </Body>
   )
 }
 
