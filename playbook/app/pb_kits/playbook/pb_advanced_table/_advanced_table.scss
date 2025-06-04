@@ -410,7 +410,6 @@
 
   // Make sure all horizontal borders use the default border color
   tr, th, td {
-    border-top-color: $border_light !important;
     border-bottom-color: $border_light !important;
   }
 
@@ -633,7 +632,6 @@
 
     // Make sure all horizontal borders use the default border color in dark mode
     tr, th, td {
-      border-top-color: $border_dark !important;
       border-bottom-color: $border_dark !important;
     }
 
