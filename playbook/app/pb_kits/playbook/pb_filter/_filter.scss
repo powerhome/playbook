@@ -89,7 +89,7 @@
   }
 
   [class^=pb_collapsible_kit] .toggle-content.filter_section_collapsible {
-    padding-top: 8px !important;
+    padding-top: $space_xs !important;
   }
 
   &[class*=dark] {
