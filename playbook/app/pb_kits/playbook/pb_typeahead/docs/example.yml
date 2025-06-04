@@ -34,3 +34,4 @@ examples:
     - typeahead_with_pills_color: With Pills (Custom Color)
     - typeahead_truncated_text: Truncated Text
     - typeahead_disabled: Disabled
+    - typeahead_preserve_input: Preserve Search Input

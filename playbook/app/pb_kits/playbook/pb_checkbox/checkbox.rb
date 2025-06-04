@@ -5,7 +5,8 @@ module Playbook
     class Checkbox < Playbook::KitBase
       prop :error, type: Playbook::Props::Boolean, default: false
       prop :checked, type: Playbook::Props::Boolean, default: false
-      prop :indeterminate, type: Playbook::Props::Boolean, default: false
+      prop :indeterminate_main, type: Playbook::Props::Boolean, default: false
+      prop :indeterminate_parent
       prop :text
       prop :value
       prop :name
@@ -19,7 +20,7 @@ module Playbook
                           default: false
 
       def classname
-        generate_classname("pb_checkbox_kit", checked_class) + indeterminate_class + error_class
+        generate_classname("pb_checkbox_kit", checked_class) + error_class
       end
 
       def input
@@ -30,6 +31,13 @@ module Playbook
         error ? "negative" : nil
       end
 
+      def data
+        Hash(prop(:data)).merge(
+          pb_checkbox_indeterminate_main: indeterminate_main,
+          pb_checkbox_indeterminate_parent: indeterminate_parent
+        )
+      end
+
     private
 
       def error_class
@@ -38,10 +46,6 @@ module Playbook
 
       def checked_class
         checked ? "on" : "off"
-      end
-
-      def indeterminate_class
-        indeterminate ? " indeterminate" : ""
       end
     end
   end

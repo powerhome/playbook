@@ -27,6 +27,13 @@ export class PbDropdownKeyboard {
     }
   }
 
+  getVisibleOptions() {
+    // We only want to return the options that are visible
+    return Array.from(
+      this.dropdownElement.querySelectorAll(OPTION_SELECTOR)
+    ).filter((opt) => opt.style.display !== "none");
+  }
+
   openDropdownIfClosed() {
     if (!this.dropdown.target.classList.contains("open")) {
       this.dropdown.showElement(this.dropdown.target);
@@ -71,7 +78,7 @@ export class PbDropdownKeyboard {
         if (this.searchInput) {
           setTimeout(() => {
             if (this.searchInput.value.trim() === "") {
-              this.dropdown.resetDropdownValue();
+              this.dropdown.handleBackspaceClear();
             }
           }, 0); 
         }
@@ -81,23 +88,43 @@ export class PbDropdownKeyboard {
     }
   }
 
-  moveFocus(direction) {
+moveFocus(direction) {
+    const allOptions = Array.from(
+      this.dropdownElement.querySelectorAll(OPTION_SELECTOR)
+    );
+    const visible = this.getVisibleOptions();
+    if (!visible.length) return;
+
     if (this.focusedOptionIndex !== -1) {
-      this.options[this.focusedOptionIndex].classList.remove(
+      allOptions[this.focusedOptionIndex].classList.remove(
         "pb_dropdown_option_focused"
       );
     }
-    this.focusedOptionIndex =
-      (this.focusedOptionIndex + direction + this.options.length) %
-      this.options.length;
-    this.options[this.focusedOptionIndex].classList.add(
-      "pb_dropdown_option_focused"
-    );
+
+    const prevVisibleIndex =
+      this.focusedOptionIndex === -1
+        ? -1
+        : visible.indexOf(allOptions[this.focusedOptionIndex]);
+
+    const nextVisibleIndex =
+      (prevVisibleIndex + direction + visible.length) % visible.length;
+
+    const nextEl = visible[nextVisibleIndex];
+    nextEl.classList.add("pb_dropdown_option_focused");
+
+    this.focusedOptionIndex = allOptions.indexOf(nextEl);
   }
 
+
   selectOption() {
-    const option = this.options[this.focusedOptionIndex];
-    this.dropdown.onOptionSelected(option.dataset.dropdownOptionLabel, option);
-    this.dropdown.hideElement(this.dropdown.target);
+    const allOptions = Array.from(
+      this.dropdownElement.querySelectorAll(OPTION_SELECTOR)
+    );
+    if (this.focusedOptionIndex < 0) return;
+
+    const optionEl = allOptions[this.focusedOptionIndex];
+    this.dropdown.handleOptionClick({ target: optionEl });
+    this.dropdown.toggleElement(this.dropdown.target);
+    this.dropdown.updateClearButton();
   }
 }

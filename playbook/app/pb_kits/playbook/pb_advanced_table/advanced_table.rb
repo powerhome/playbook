@@ -25,9 +25,15 @@ module Playbook
                         default: "auto"
       prop :selectable_rows, type: Playbook::Props::Boolean,
                              default: false
+      prop :show_actions_bar, type: Playbook::Props::Boolean,
+                              default: true
+      prop :actions, type: Playbook::Props::Array,
+                     default: []
+      prop :scroll_bar_none, type: Playbook::Props::Boolean,
+                             default: false
 
       def classname
-        additional_classes = [responsive_classname, max_height_classname]
+        additional_classes = [responsive_classname, max_height_classname, hide_scroll_bar_class]
         additional_classes << "column-group-border-#{column_group_border_color}" if column_group_border_color != "none"
         generate_classname("pb_advanced_table", *additional_classes, separator: " ")
       end
@@ -40,12 +46,21 @@ module Playbook
         max_height.present? ? "advanced-table-max-height-#{max_height}" : ""
       end
 
+      def hide_scroll_bar_class
+        scroll_bar_none ? "advanced-table-hide-scrollbar " : ""
+      end
+
       def selected_rows
         @selected_rows ||= []
       end
 
       def selected_rows_length
         selected_rows.length
+      end
+
+      def is_action_bar_visible
+        # Action bar visibility is controlled by JS based on selection
+        false
       end
     end
   end

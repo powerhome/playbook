@@ -39,7 +39,6 @@ const AdvancedTableNoSubrows = (props) => {
     <div>
       <AdvancedTable
           columnDefinitions={columnDefinitions}
-          enableToggleExpansion="all"
           tableData={MOCK_DATA}
           {...props}
       />

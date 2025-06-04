@@ -9,10 +9,23 @@
     border: none;
     width: 0;
   }
+  &.error {
+    [class^='pb_card_kit'] {
+      border-color: $error;
+    }
+    [class^='pb_body_kit'][status="negative"] {
+      margin-top: $space_xs;
+    }
+  }
 }
 
 .dark [class*='pb_file_upload_kit'] {
   [class*='pb_card_kit'] {
     border: 1px $text_dk_lighter dashed;
+  }
+  &.error {
+    [class^='pb_card_kit'] {
+      border-color: $error_dark;
+    }
   }
 }

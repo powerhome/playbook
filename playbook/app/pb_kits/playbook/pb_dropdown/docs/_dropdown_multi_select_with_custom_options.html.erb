@@ -1,0 +1,50 @@
+<% 
+  options = [
+    {
+      label: "United States",
+      value: "United States",
+      areaCode: "+1",
+      icon: "🇺🇸",
+      id: "us"
+    },
+    {
+      label: "Canada",
+      value: "Canada",
+      areaCode: "+1",
+      icon: "🇨🇦",
+      id: "ca"
+    },
+    {
+      label: "Pakistan",
+      value: "Pakistan",
+      areaCode: "+92",
+      icon: "🇵🇰",
+      id: "pk"
+    }
+  ]
+
+%>
+
+<%= pb_rails("dropdown", props: { options: options, multi_select: true }) do %>
+    <%= pb_rails("dropdown/dropdown_trigger", props:{ multi_select: true }) %>
+    <%= pb_rails("dropdown/dropdown_container") do %>
+        <% options.each do |option| %>
+            <%= pb_rails("dropdown/dropdown_option", props: {option: option}) do %>
+              <%= pb_rails("flex", props: {
+                align: "center",
+                justify: "between",
+                }) do %>
+                  <%= pb_rails("flex/flex_item") do %>
+                      <%= pb_rails("flex") do %>
+                          <%= pb_rails("icon", props: {icon: option[:icon]}) %>
+                          <%= pb_rails("body", props: {text: option[:label], padding_left:"xs"}) %>
+                      <% end %>
+                  <% end %>
+                  <%= pb_rails("flex/flex_item") do %>
+                      <%= pb_rails("body", props: {color:"light", text: option[:areaCode]}) %>
+                  <% end %>
+                <% end %>
+            <% end %>
+        <% end %>
+    <% end %>
+<% end %>

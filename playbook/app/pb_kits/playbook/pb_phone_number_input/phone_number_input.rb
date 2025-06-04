@@ -15,6 +15,8 @@ module Playbook
                   default: ""
       prop :only_countries, type: Playbook::Props::Array,
                             default: []
+      prop :exclude_countries, type: Playbook::Props::Array,
+                               default: []
       prop :preferred_countries, type: Playbook::Props::Array,
                                  default: []
       prop :error, type: Playbook::Props::String,
@@ -44,6 +46,7 @@ module Playbook
           label: label,
           name: name,
           onlyCountries: only_countries,
+          excludeCountries: exclude_countries,
           preferredCountries: preferred_countries,
           required: required,
           value: value,

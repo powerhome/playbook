@@ -1,0 +1,33 @@
+<% column_definitions = [
+    {
+      accessor: "year",
+      label: "Year",
+      cellAccessors: ["quarter", "month", "day"],
+    },
+    {
+      accessor: "newEnrollments",
+      label: "New Enrollments",
+    },
+    {
+      accessor: "scheduledMeetings",
+      label: "Scheduled Meetings",
+    },
+    {
+      accessor: "attendanceRate",
+      label: "Attendance Rate",
+    },
+    {
+      accessor: "completedClasses",
+      label: "Completed Classes",
+    },
+    {
+      accessor: "classCompletionRate",
+      label: "Class Completion Rate",
+    },
+    {
+      accessor: "graduatedStudents",
+      label: "Graduated Students",
+    }
+] %>
+
+<%= pb_rails("advanced_table", props: { id: "table-no-children", enable_toggle_expansion: "none", table_data: @table_data_no_subrows, column_definitions: column_definitions }) %>

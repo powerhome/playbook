@@ -1,0 +1,1 @@
+By using the `includeIds` key/value pair as shown within the `columnVisibilityControl` prop, you can control which columns show up as options in the columnVisibility dropdown.

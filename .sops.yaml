@@ -8,6 +8,8 @@ creation_rules:
             role: "arn:aws:iam::205083374951:role/playbook-admins"
           - arn: "arn:aws:kms:us-east-1:205083374951:key/405f40cd-a18a-40ed-bf2f-a0e7816a9a5c"
             role: "arn:aws:iam::205083374951:role/forever-people"
+          - arn: "arn:aws:kms:us-east-1:205083374951:key/405f40cd-a18a-40ed-bf2f-a0e7816a9a5c"
+            role: "arn:aws:iam::205083374951:role/Guardians"
 
   - key_groups:
       - kms:
@@ -16,3 +18,5 @@ creation_rules:
             role: "arn:aws:iam::205083374951:role/playbook-admins"
           - arn: "arn:aws:kms:us-east-1:205083374951:key/d46e780d-ee0a-4a7d-b049-0443e1b91d41"
             role: "arn:aws:iam::205083374951:role/forever-people"
+          - arn: "arn:aws:kms:us-east-1:205083374951:key/d46e780d-ee0a-4a7d-b049-0443e1b91d41"
+            role: "arn:aws:iam::205083374951:role/Guardians"

@@ -1,0 +1,1 @@
+To create a select with non-selectable subheaders, use a Custom Select component to render a native `<select>` containing `<optgroup>` elements. The [optgroup HTML element](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/optgroup) groups related options under a non-selectable label in the dropdown.

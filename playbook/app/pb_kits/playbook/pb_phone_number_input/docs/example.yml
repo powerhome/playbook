@@ -4,7 +4,8 @@ examples:
   - phone_number_input_default: Default
   - phone_number_input_preferred_countries: Preferred Countries
   - phone_number_input_initial_country: Initial Country
-  - phone_number_input_only_countries: Limited Countries
+  - phone_number_input_only_countries: Only Countries
+  - phone_number_input_exclude_countries: Exclude Countries
   - phone_number_input_validation: Form Validation
   - phone_number_input_clear_field: Clearing the Input Field
   - phone_number_input_access_input_element: Accessing the Input Element
@@ -15,9 +16,9 @@ examples:
   - phone_number_input_default: Default
   - phone_number_input_preferred_countries: Preferred Countries
   - phone_number_input_initial_country: Initial Country
-  - phone_number_input_only_countries: Limited Countries
+  - phone_number_input_only_countries: Only Countries
+  - phone_number_input_exclude_countries: Exclude Countries
   - phone_number_input_validation: Form Validation
   - phone_number_input_format: Format as You Type
   - phone_number_input_hidden_inputs: Hidden Inputs
   - phone_number_input_country_search: Country Search
-  

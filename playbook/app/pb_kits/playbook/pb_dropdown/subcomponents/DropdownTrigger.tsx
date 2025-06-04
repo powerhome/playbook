@@ -10,6 +10,7 @@ import { globalProps } from "../../utilities/globalProps";
 import { useHandleOnKeyDown } from "../hooks/useHandleOnKeydown";
 
 import DropdownContext from "../context";
+import MultiSelectTriggerDisplay from "./MultiSelectTriggerDisplay";
 
 import Body from "../../pb_body/_body";
 import Icon from "../../pb_icon/_icon";
@@ -43,14 +44,18 @@ const DropdownTrigger = (props: DropdownTriggerProps) => {
 
   const {
     autocomplete,
+    closeOnSelection,
     filterItem,
+    handleBackspace,
     handleChange,
     handleWrapperClick,
     inputRef,
     inputWrapperRef,
     isDropDownClosed,
     isInputFocused,
+    multiSelect,
     selected,
+    setIsDropDownClosed,
     setIsInputFocused,
     toggleDropdown,
   } = useContext(DropdownContext);
@@ -69,11 +74,21 @@ const DropdownTrigger = (props: DropdownTriggerProps) => {
   const triggerWrapperClasses = buildCss(
     "dropdown_trigger_wrapper",
     isInputFocused && "focus",
-    !autocomplete && "select_only"
+    !autocomplete && !multiSelect && "select_only"
   );
 
+  const selectedArray = Array.isArray(selected)
+    ? selected
+    : selected && Object.keys(selected).length
+    ? [selected]
+    : [];
+
+  const joinedLabels = multiSelect
+    ? ""
+    : selectedArray.map((option) => option.label).join(", ");
+
   const customDisplayPlaceholder = selected?.label ? (
-    <b>{selected.label}</b>
+    ""
   ) : autocomplete ? (
     ""
   ) : placeholder ? (
@@ -82,19 +97,34 @@ const DropdownTrigger = (props: DropdownTriggerProps) => {
     "Select..."
   );
 
-  const defaultDisplayPlaceholder = selected?.label
-    ? selected.label
+  const defaultDisplayPlaceholder = joinedLabels
+    ? joinedLabels
     : autocomplete
     ? ""
     : placeholder
     ? placeholder
     : "Select...";
 
+  // Click handler that respects closeOnSelection
+  const handleInputClick = (e: React.MouseEvent) => {
+    e.stopPropagation(); // keep the wrapper's handler from firing
+    if (isDropDownClosed) {
+      // Always open if closed
+      setIsDropDownClosed(false);
+    } else if (!closeOnSelection) {
+      // Keep open if closeOnSelection is false
+      return;
+    } else {
+      // Default behavior - toggle
+      toggleDropdown();
+    }
+  };
+
   return (
-    <div {...ariaProps} 
-        {...dataProps} 
+    <div {...ariaProps}
+        {...dataProps}
         {...htmlProps}
-        className={classes} 
+        className={classes}
         id={id}
     >
       {
@@ -125,34 +155,65 @@ const DropdownTrigger = (props: DropdownTriggerProps) => {
                   paddingX="sm"
                   paddingY="xs"
               >
-                <FlexItem>
-                  <Flex align="center">
+                <FlexItem fixedSize={multiSelect ? "85%" : ""}>
+                  <Flex align="center"
+                      wrap
+                  >
                     {customDisplay ? (
                       <Flex align="center">
                         {customDisplay}
-                        <Body dark={dark} 
-                            paddingLeft={`${selected.label ? "xs" : "none"}`}
+                        <Body dark={dark}
+                            paddingLeft={`${joinedLabels ? "xs" : "none"}`}
                         >
                           {customDisplayPlaceholder}
                         </Body>
                       </Flex>
                     ) : (
-                      <Body dark={dark} 
-                          text={defaultDisplayPlaceholder} 
-                      />
+                      multiSelect ? (
+                        <>
+                        <MultiSelectTriggerDisplay
+                            autocomplete={autocomplete}
+                            dark={dark}
+                            placeholder={placeholder}
+                            selected={selectedArray}
+                        />
+                        {autocomplete && (
+                          <input
+                              className="dropdown_input"
+                              onChange={handleChange}
+                              onClick={handleInputClick}
+                              onFocus={() => setIsInputFocused(true)}
+                              onKeyDown={(e) => {
+                                 handleKeyDown(e);
+                                 e.stopPropagation(); //Fixes issue with keyboard accessibility
+                               }}
+                              placeholder={
+                                joinedLabels
+                                  ? ""
+                                  : placeholder
+                                  ? placeholder
+                                  : "Select..."
+                              }
+                              ref={inputRef}
+                              value={filterItem}
+                          />
+                        )}
+                        </>
+                      ) : (
+                        <Body dark={dark}
+                            text={defaultDisplayPlaceholder}
+                        />
+                      )
                     )}
-                    {autocomplete && (
+                    {autocomplete && !multiSelect && (
                       <input
                           className="dropdown_input"
                           onChange={handleChange}
-                          onClick={(e) => {
-                            e.stopPropagation();// keep the wrapper’s handler from firing
-                            toggleDropdown();
-                          }}
+                          onClick={handleInputClick}
                           onFocus={() => setIsInputFocused(true)}
                           onKeyDown={handleKeyDown}
                           placeholder={
-                            selected.label
+                            joinedLabels
                               ? ""
                               : placeholder
                               ? placeholder
@@ -164,7 +225,9 @@ const DropdownTrigger = (props: DropdownTriggerProps) => {
                     )}
                   </Flex>
                 </FlexItem>
+                <FlexItem>
                   <Body
+                      alignItems="center"
                       dark={dark}
                       display="flex"
                       htmlOptions={{
@@ -172,6 +235,19 @@ const DropdownTrigger = (props: DropdownTriggerProps) => {
                       }}
                       key={`${isDropDownClosed ? "chevron-down" : "chevron-up"}`}
                   >
+                  {
+                    selectedArray.length > 0 && (
+                      <div onClick={(e)=>{e.stopPropagation();handleBackspace()}}>
+                        <Icon
+                            cursor="pointer"
+                            dark={dark}
+                            icon="times"
+                            paddingRight="xs"
+                            size="sm"
+                        />
+                      </div>
+                    )
+                  }
                     <Icon
                         cursor="pointer"
                         dark={dark}
@@ -179,6 +255,7 @@ const DropdownTrigger = (props: DropdownTriggerProps) => {
                         size="sm"
                     />
                   </Body>
+                </FlexItem>
               </Flex>
             </>
           )

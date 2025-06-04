@@ -1,5 +1,5 @@
 import React from "react"
-import { render, screen } from "../utilities/test-utils"
+import { render, screen, fireEvent } from "../utilities/test-utils"
 
 import { Dropdown, Icon, IconCircle } from 'playbook-ui'
 
@@ -264,3 +264,109 @@ test("searchbar prop to render TextInput in container", () => {
   const searchbar = kit.querySelector('.pb_text_input_kit')
   expect(searchbar).toBeInTheDocument()
 })
+
+test("MultiSelect prop to allow multiple selections + add correct Form Pills", () => {
+  render(
+    <Dropdown 
+        data={{ testid: testId }} 
+        multiSelect 
+        options={options} 
+    />
+ );
+
+  const kit = screen.getByTestId(testId);
+  const option = Array.from(kit.querySelectorAll(".pb_dropdown_option_list"));
+  fireEvent.click(option[0]); // Select first option
+  fireEvent.click(option[1]); // Select second option
+  const formPills = kit.querySelectorAll(".pb_form_pill_kit_primary");
+  expect(formPills.length).toBe(2);
+  expect(formPills[0]).toHaveTextContent("United States");
+  expect(formPills[1]).toHaveTextContent("Canada");
+});
+
+ test("hides each selected option from the dropdown", () => {
+
+    render(
+      <Dropdown 
+          data={{ testid: testId }} 
+          multiSelect 
+          options={options} 
+      />
+    );
+
+  const kit = screen.getByTestId(testId);
+  const option = Array.from(kit.querySelectorAll(".pb_dropdown_option_list"));
+  const firstOpt = options[0].label
+  fireEvent.click(option[0]);
+  const option2 = Array.from(kit.querySelectorAll(".pb_dropdown_option_list"));
+  expect(option2[0]).not.toHaveTextContent(firstOpt)
+  })
+
+test("renders form pills inside trigger", () => {
+      render(
+        <Dropdown 
+            data={{ testid: testId }} 
+            multiSelect 
+            options={options} 
+        />
+      );
+
+  const kit = screen.getByTestId(testId)
+  const option = kit.querySelector('.pb_dropdown_option_list')
+  fireEvent.click(option)
+  const formPill = kit.querySelector(".pb_form_pill_kit_primary")
+  expect(formPill).toBeInTheDocument()
+  })
+
+test("multiSelect and autocomplete to work together", () => {
+  render (
+    <Dropdown
+        autocomplete
+        data={{ testid: testId }}
+        multiSelect
+        options={options}
+    />   
+  )
+
+  const kit = screen.getByTestId(testId)
+  const input = kit.querySelector('.dropdown_input')
+  expect(input).toBeInTheDocument()
+    const option = kit.querySelector('.pb_dropdown_option_list')
+  fireEvent.click(option)
+  const formPill = kit.querySelector(".pb_form_pill_kit_primary")
+  expect(formPill).toBeInTheDocument()
+})
+
+test("renders form pills with size and color", () => {
+      render(
+        <Dropdown 
+            data={{ testid: testId }} 
+            formPillProps={{ size: "small", color: "neutral" }}
+            multiSelect 
+            options={options} 
+        />
+      );
+
+  const kit = screen.getByTestId(testId)
+  const option = kit.querySelector('.pb_dropdown_option_list')
+  fireEvent.click(option)
+  const formPill = kit.querySelector(".pb_form_pill_kit_neutral")
+  expect(formPill).toBeInTheDocument()
+  expect(formPill).toHaveClass("small")
+  })
+
+test("defaultValue works with multiSelect", () => {
+    render(
+      <Dropdown
+          data={{ testid: testId }}
+          defaultValue={[options[0], options[2]]}
+          multiSelect
+          options={options}
+      />
+    )
+    const kit = screen.getByTestId(testId)
+    expect(kit.querySelectorAll(".pb_form_pill_kit_primary")).toHaveLength(2)
+    const option2 = Array.from(kit.querySelectorAll(".pb_dropdown_option_list"));
+    const firstOpt = options[0].label
+    expect(option2[0]).not.toHaveTextContent(firstOpt)
+  })

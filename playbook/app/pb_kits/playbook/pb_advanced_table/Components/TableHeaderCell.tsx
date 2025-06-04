@@ -1,4 +1,4 @@
-import React, { useContext } from "react"
+import React, { useContext, useState } from "react"
 import classnames from "classnames"
 import { flexRender, Header, Table, RowModel } from "@tanstack/react-table"
 
@@ -8,10 +8,8 @@ import { GlobalProps } from "../../utilities/globalProps"
 
 import Flex from "../../pb_flex/_flex"
 import Checkbox from "../../pb_checkbox/_checkbox"
-import Dropdown from "../../pb_dropdown/_dropdown"
-import DropdownTrigger from "../../pb_dropdown/subcomponents/DropdownTrigger"
-import DropdownOption from "../../pb_dropdown/subcomponents/DropdownOption"
-import DropdownContainer from "../../pb_dropdown/subcomponents/DropdownContainer"
+import SectionSeparator from "../../pb_section_separator/_section_separator"
+import PbReactPopover from "../../pb_popover/_popover";
 import Icon from "../../pb_icon/_icon"
 
 import { SortIconButton } from "./SortIconButton"
@@ -79,9 +77,26 @@ export const TableHeaderCell = ({
   header?.column.getLeafColumns().length === 1 &&
   header?.column.getLeafColumns()[0].id === header.column.id
 
-  const isLastHeaderCell =
-    header?.column.parent?.columns.at(-1) === header?.column ||
-    (header?.colSpan > 1 && header?.column.parent !== undefined);
+  const columnHasVisibleLeaf = (col: any): boolean =>
+    col.getIsVisible?.() ||
+    (Array.isArray(col.columns) &&
+      col.columns.some((child: any) => columnHasVisibleLeaf(child)));
+      
+   // Check on column position in stack + visibility to add the vertical border 
+  const isLastHeaderCell = (() => {
+    if (!header) return false;
+  
+    if (header.colSpan > 1 && header.column.parent !== undefined) return true;
+  
+    const parent = header.column.parent;
+  
+    if (!parent) {
+      const topHeaders = table?.getHeaderGroups()[0].headers.filter((h: any) => columnHasVisibleLeaf(h.column));
+      return topHeaders?.at(-1)?.id === header.id;
+    }
+    const visibleSiblings = parent.columns.filter(columnHasVisibleLeaf);
+    return visibleSiblings.at(-1) === header.column;
+  })();
  
 const cellClassName = classnames(
   "table-header-cells",
@@ -113,12 +128,26 @@ const isToggleExpansionEnabled =
 
   let justifyHeader:justifyTypes;
 
-  if (header?.index === 0 && hasAnySubRows || (header?.index === 0 && inlineRowLoading)) {
+  if (header?.index === 0 && hasAnySubRows || (header?.index === 0 && inlineRowLoading) || (header?.index === 0 && isToggleExpansionEnabled)) {
     justifyHeader = enableSorting ? "between" : "start";
   } else {
     justifyHeader = isLeafColumn ? "end" : "center";
   }
   
+  const [showPopover, setShowPopover] = useState(false)
+
+  const togglePopover = () => setShowPopover((prev) => !prev)
+  const handleShouldClose = (shouldClose: boolean) =>
+    setShowPopover(!shouldClose)
+
+  const popoverReference = (
+      <div className="gray-icon toggle-all-icon" 
+          onClick={togglePopover}
+      >
+          <Icon icon={displayIcon(toggleExpansionIcon)[0]} />
+      </div>
+  )
+
   const handleExpandDepth = (depth: number) => {
     if (onExpandByDepthClick) {
       const flatRows = table?.getRowModel().flatRows
@@ -174,31 +203,33 @@ const isToggleExpansionEnabled =
               <ToggleIconButton onClick={handleExpandOrCollapse} />
             )}
           {isToggleExpansionEnabled && hasAnySubRows && expandByDepth && (
-              <Dropdown className="expand-by-depth-dropdown-wrapper" 
-                  options={expandByDepth}
-              >
-                <DropdownTrigger className="gray-icon toggle-all-icon">
-                  <Icon icon={displayIcon(toggleExpansionIcon)[0]} />
-                </DropdownTrigger>
-                <DropdownContainer className="expand-by-depth-dropdown">
-                  {expandByDepth.map((option:{ [key: string]: any }, index: number) => (
-                    <DropdownOption
-                        key={index}
-                        option={option}
-                        padding="none"
+
+                    <PbReactPopover
+                        closeOnClick="any"
+                        placement="bottom-start"
+                        reference={popoverReference}
+                        shouldClosePopover={handleShouldClose}
+                        show={showPopover}
+                        zIndex={3}
                     > 
+                    {expandByDepth.map((option:{ [key: string]: any }, index: number) => (
+                      <>
                       <Flex
                           alignItems="center"
+                          className="pb-advanced-table-popover-option"
+                          cursor="pointer"
                           htmlOptions={{onClick: () => {handleExpandDepth(option.depth)} }}
                           paddingX="sm"
                           paddingY="xs"
                           >
                             {option.label}
-                          </Flex>
-                    </DropdownOption>
-                  ))}
-                </DropdownContainer>
-              </Dropdown>
+                      </Flex>
+                      {index !== expandByDepth.length - 1 && <SectionSeparator/>}
+                      </>
+                        ))}
+                    </PbReactPopover>
+                 
+
             )}
 
           {isToggleExpansionEnabledLoading &&(

@@ -1,4 +1,8 @@
-The AdvancedTable kit accepts tree data and automatically renders expansion controls for nested subrows, to any depth, based on the data it is given. In it's simplest form, __the kit has two required props__: 
+The AdvancedTable kit accepts tree data and automatically renders expansion controls for nested subrows, to any depth, based on the data it is given. In it's simplest form, __the kit has three required props__:
+
+### id
+
+A unique `id` is required to allow the table functionality to work properly. Without it, certain functions like the action bar will not be able to properly reference the correct table.
 
 ### table_data
 
@@ -13,6 +17,6 @@ Column definitions are the single most important part of building a table as the
 - `accessor`: this is the key from your data for the value you want rendered in that column
 - `label`: this is what will be rendered as the column header label
 
-There is also one optional item that is only required if the table has nested data: 
+There is also one optional item that is only required if the table has nested data:
 
 - `cellAccessors`: This is an array of strings that represent keys from your data object. This is only required for the first column in case of nested data. If you have nested data, the AdvancedTable needs to know what to render in that first column for nested items. This array represents the nested data in the order you want it rendered.

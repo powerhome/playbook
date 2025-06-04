@@ -3,6 +3,12 @@ import { render, screen, waitFor } from "../utilities/test-utils"
 
 import { AdvancedTable, Pill } from "playbook-ui"
 
+global.ResizeObserver = class {
+  observe() {}
+  unobserve() {}
+  disconnect() {}
+};
+
 const MOCK_DATA = [
   {
     year: "2021",
@@ -69,6 +75,36 @@ const MOCK_DATA_LOADING = [
         scheduledMeetings: "35",
       },
     ],
+  },
+]
+
+const MOCK_DATA_WITH_ID = [
+  {
+    id: "1",
+    year: "2021",
+    quarter: null,
+    month: null,
+    day: null,
+    newEnrollments: "20",
+    scheduledMeetings: "10",
+  },
+  {
+    id: "2", 
+    year: "2022",
+    quarter: null,
+    month: null,
+    day: null,
+    newEnrollments: "25",
+    scheduledMeetings: "15",
+  },
+  {
+    id: "3",
+    year: "2023", 
+    quarter: null,
+    month: null,
+    day: null,
+    newEnrollments: "30",
+    scheduledMeetings: "20",
   },
 ]
 
@@ -511,4 +547,29 @@ test("allowFullScreen prop adds fullscreen class", () => {
 
   const tableContainer = screen.getByRole("table").closest("div")
   expect(tableContainer).toHaveClass("advanced-table-allow-fullscreen")
+})
+
+test("pinnedRows prop renders pinned rows at top", () => {
+  const pinnedRowsControl = {
+    value: { top: ["1", "3"] },
+    onChange: jest.fn()
+  }
+
+  render(
+    <AdvancedTable
+        columnDefinitions={columnDefinitions}
+        data={{ testid: testId }}
+        pinnedRows={pinnedRowsControl}
+        tableData={MOCK_DATA_WITH_ID}
+    />
+  )
+
+  const kit = screen.getByTestId(testId)
+  const pinnedRows = kit.querySelectorAll(".pinned-row")
+  
+  expect(pinnedRows).toHaveLength(2)
+  
+  const firstPinnedRow = pinnedRows[0]
+  expect(firstPinnedRow).toHaveStyle("position: sticky")
+  expect(firstPinnedRow).toHaveStyle("background-color: white")
 })

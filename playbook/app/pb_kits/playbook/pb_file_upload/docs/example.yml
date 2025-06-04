@@ -3,6 +3,7 @@ examples:
   rails:
   - file_upload_default: File Upload
   - file_upload_custom: Custom
+  - file_upload_error: Error
 
   react:
   - file_upload_default: Default List of files to upload
@@ -10,3 +11,4 @@ examples:
   - file_upload_custom_message: Add a custom message
   - file_upload_custom_description: Add your one accepted files description
   - file_upload_max_size: Set a file size limit
+  - file_upload_error: Error

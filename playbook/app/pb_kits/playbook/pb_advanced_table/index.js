@@ -79,7 +79,7 @@ export default class PbAdvancedTable extends PbEnhancedElement {
       }
       if (!allChildrenChecked) {
         parentRow.classList.remove("bg-row-selection");
-  
+
         if (this.isRowExpanded(parentRow)) {
           parentRow.classList.remove("bg-silver");
           parentRow.classList.add("bg-white");
@@ -201,15 +201,15 @@ export default class PbAdvancedTable extends PbEnhancedElement {
         this.toggleElement(this.target);
       }
     });
-  
+
     this.hideCloseIcon();
-  
+
     const table = this.element.closest("table");
-  
+
     // Prevent duplicate initialization
     if (table.dataset.pbAdvancedTableInitialized) return;
     table.dataset.pbAdvancedTableInitialized = "true";
-  
+
     // Bind checkbox change handlers for all row checkboxes
     const checkboxLabels = table.querySelectorAll("label[data-row-id]");
     checkboxLabels.forEach((label) => {
@@ -219,7 +219,7 @@ export default class PbAdvancedTable extends PbEnhancedElement {
         this.handleCheckboxClick(event);
       });
     });
-  
+
     // Bind nested row expansion logic
     const nestedButtons = table.querySelectorAll("[data-advanced-table]");
     nestedButtons.forEach((button) => {
@@ -233,18 +233,18 @@ export default class PbAdvancedTable extends PbEnhancedElement {
         }
       });
     });
-  
+
     // Bind select-all logic for this table
     const selectAllCheckbox = table.querySelector("#select-all-rows");
     if (selectAllCheckbox) {
       selectAllCheckbox.addEventListener("change", () => {
         const checkboxInput = selectAllCheckbox.querySelector('input[type="checkbox"]');
         const checkAll = checkboxInput.checked;
-  
+
         const checkboxes = Array.from(
           table.querySelectorAll("label[data-row-id] input[type='checkbox']")
         );
-  
+
         checkboxes.forEach((cb) => {
           cb.checked = checkAll;
           const rowId = cb.id;
@@ -260,14 +260,14 @@ export default class PbAdvancedTable extends PbEnhancedElement {
             rowEl?.classList.add("bg-white");
           }
         });
-  
+
         checkboxes.forEach((cb) => this.updateParentCheckboxes(cb));
-  
+
         this.updateTableSelectedRowsAttribute();
       });
     }
   }
-  
+
 
   hideCloseIcon() {
     const closeIcon = this.element.querySelector(UP_ARROW_SELECTOR);
@@ -448,6 +448,151 @@ export default class PbAdvancedTable extends PbEnhancedElement {
     }
   }
 }
+
+// Isolate action bar functionality so it doesn't mix with existing functionality
+class PbAdvancedTableActionBar {
+  constructor() {
+    this.init();
+  }
+
+  init() {
+    // Initialize action bars for all advanced tables with action bars
+    document.addEventListener('DOMContentLoaded', () => {
+      this.setupActionBars();
+    });
+
+    // Also run immediately in case DOM is already loaded
+    if (document.readyState === 'loading') {
+      // DOM is still loading
+    } else {
+      // DOM is already loaded
+      this.setupActionBars();
+    }
+  }
+
+  setupActionBars() {
+    const advancedTables = document.querySelectorAll('.pb_advanced_table');
+
+    advancedTables.forEach(table => {
+      // Only proceed if this table has both selectable rows AND an action bar
+      if (!this.shouldEnableActionBar(table)) return;
+
+      const actionBar = table.querySelector('.row-selection-actions-card');
+      if (!actionBar) return; // Skip tables without action bars
+
+      // Initialize action bar styles
+      this.initializeActionBar(actionBar);
+
+      // Set up checkbox listeners for this table
+      this.setupCheckboxListeners(table, actionBar);
+    });
+  }
+
+  shouldEnableActionBar(table) {
+    // Check if the table has selectable rows
+    const hasSelectableRows = table.querySelector('input[type="checkbox"]') !== null;
+
+    // Check if the table has a row selection action bar (not other types of action bars)
+    const hasRowSelectionActionBar = table.querySelector('.row-selection-actions-card') !== null;
+
+    // Additional check: look for the presence of row checkboxes with data-row-id
+    const hasRowCheckboxes = table.querySelector('label[data-row-id] input[type="checkbox"]') !== null;
+
+    // Only enable if ALL conditions are met:
+    // 1. Has selectable checkboxes
+    // 2. Has the specific row selection action bar
+    // 3. Has row checkboxes (not just other types of checkboxes)
+    return hasSelectableRows && hasRowSelectionActionBar && hasRowCheckboxes;
+  }
+
+  initializeActionBar(actionBar) {
+    // Set initial hidden state
+    Object.assign(actionBar.style, {
+      height: '0px',
+      overflow: 'hidden',
+      display: 'block',
+      opacity: '0'
+    });
+
+    // Remove any visibility classes
+    actionBar.classList.remove("p_xs", "is-visible", "show-action-card");
+    actionBar.classList.add("p_none");
+  }
+
+  setupCheckboxListeners(table, actionBar) {
+    // Only listen to row checkboxes (those with data-row-id), not all checkboxes
+    const rowCheckboxes = table.querySelectorAll('label[data-row-id] input[type="checkbox"]');
+
+    rowCheckboxes.forEach(checkbox => {
+      checkbox.addEventListener('change', () => {
+        // Use setTimeout to ensure this runs after the main checkbox logic
+        setTimeout(() => {
+          this.updateActionBarVisibility(table, actionBar);
+        }, 0);
+      });
+    });
+
+    // Special handling for select-all checkbox (only if it exists)
+    const selectAllCheckbox = table.querySelector("#select-all-rows");
+    if (selectAllCheckbox) {
+      const selectAllInput = selectAllCheckbox.querySelector('input[type="checkbox"]');
+      if (selectAllInput) {
+        selectAllInput.addEventListener('change', () => {
+          // Use setTimeout to ensure this runs after the main select-all logic
+          setTimeout(() => {
+            this.updateActionBarVisibility(table, actionBar);
+          }, 10); // Slightly longer delay for select-all to ensure all row checkboxes are updated
+        });
+      }
+    }
+  }
+
+  updateActionBarVisibility(table, actionBar) {
+    // Only count row checkboxes (those with data-row-id), not all checkboxes
+    const rowCheckboxes = table.querySelectorAll('label[data-row-id] input[type="checkbox"]');
+
+    // Get all checked row checkboxes
+    const selectedRowCheckboxes = Array.from(rowCheckboxes).filter(cb => cb.checked);
+
+    // Get the selected count
+    const selectedCount = selectedRowCheckboxes.length;
+
+    if (selectedCount > 0) {
+      this.showActionBar(actionBar, selectedCount);
+    } else {
+      this.hideActionBar(actionBar);
+    }
+  }
+
+  showActionBar(actionBar, selectedCount) {
+    // Show action bar directly
+    actionBar.style.height = 'auto';
+    actionBar.style.overflow = 'visible';
+    actionBar.style.opacity = '1';
+    actionBar.style.transitionProperty = 'all';
+    actionBar.style.transitionTimingFunction = 'ease-in-out';
+    actionBar.classList.remove("p_none");
+    actionBar.classList.add("p_xs", "is-visible", "show-action-card");
+
+    // Update the count
+    const countElement = actionBar.querySelector(".selected-count");
+    if (countElement) {
+      countElement.textContent = `${selectedCount} Selected`;
+    }
+  }
+
+  hideActionBar(actionBar) {
+    // Hide action bar directly
+    actionBar.style.height = '0px';
+    actionBar.style.overflow = 'hidden';
+    actionBar.style.opacity = '0';
+    actionBar.classList.add("p_none");
+    actionBar.classList.remove("p_xs", "is-visible", "show-action-card");
+  }
+}
+
+// Initialize the isolated action bar functionality
+new PbAdvancedTableActionBar();
 
 window.expandAllRows = (element) => {
   PbAdvancedTable.handleToggleAllHeaders(element);

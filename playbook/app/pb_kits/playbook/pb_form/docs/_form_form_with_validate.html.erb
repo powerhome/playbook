@@ -98,6 +98,7 @@
   <%= form.url_field :example_url_field_validation, props: { label: true, required: true } %>
   <%= form.text_area :example_text_area_validation, props: { label: true, required: true } %>
   <%= form.dropdown_field :example_dropdown_validation, props: { label: true, options: example_dropdown_options, required: true } %>
+  <%= form.dropdown_field :example_dropdown_validation_multi, props: { label: true, options: example_dropdown_options, multi_select: true, required: true } %>
   <%= form.select :example_select_validation, [ ["Yes", 1], ["No", 2] ], props: { label: true, blank_selection: "Select One...", required: true, validation_message: "Please, select an option." } %>
   <%= form.collection_select :example_collection_select_validation, example_collection, :value, :name, props: { label: true, blank_selection: "Select One...", required: true } %>
   <%= form.check_box :example_checkbox, props: { text: "Example Checkbox", label: true, required: true } %>
