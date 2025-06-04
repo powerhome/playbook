@@ -3,8 +3,13 @@ import React, { useState } from 'react'
 import Filter from '../../pb_filter/_filter'
 import Select from '../../pb_select/_select'
 import TextInput from '../../pb_text_input/_text_input'
-
-import { useCollapsible, SectionSeparator, Checkbox, Flex, Table, Caption, Icon } from 'playbook-ui'
+import useCollapsible from '../../pb_collapsible/useCollapsible'
+import SectionSeparator from '../../pb_section_separator/_section_separator'
+import Checkbox from '../../pb_checkbox/_checkbox'
+import Flex from '../../pb_flex/_flex'
+import Table from '../../pb_table/_table'
+import Caption from '../../pb_caption/_caption'
+import Icon from '../../pb_icon/_icon'
 
 const people = [
   { name: 'Hera Syndulla', territory: 'A galaxy far far away, like really far away...', products: ['Insulation'] },
