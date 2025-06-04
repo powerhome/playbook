@@ -57,10 +57,11 @@ export const getVirtualizedContainerStyles = (maxHeight?: string): React.CSSProp
       position: 'absolute',
       top: 0,
       left: 0,
-      width: '100%',
+      // width: '100%',
       height: '40px', // Match standard table row height
       transform: `translateY(${startPosition}px)`,
       tableLayout: 'fixed',
+      // backgroundColor: "blue",
     };
   };
 
