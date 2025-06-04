@@ -13,7 +13,7 @@
     "@powerhome/playbook-icons-react": "0.0.1-alpha.38",
     "@powerhome/power-fonts": "0.0.1",
     "anchor-js": "^5.0.0",
-    "maplibre-gl": "^2.4.0",
+    "maplibre-gl": "^5.6.0",
     "match-sorter": "^8.0.0",
     "playbook-ui": ">= 1",
     "react-hook-form": "^7.28.1"
