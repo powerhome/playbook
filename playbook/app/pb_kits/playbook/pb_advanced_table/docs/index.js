@@ -35,3 +35,4 @@ export { default as AdvancedTableColumnVisibilityWithState } from './_advanced_t
 export { default as AdvancedTablePinnedRows } from './_advanced_table_pinned_rows.jsx'
 export { default as AdvancedTableScrollbarNone} from './_advanced_table_scrollbar_none.jsx'
 export { default as AdvancedTableColumnStyling } from './_advanced_table_column_styling.jsx'
+export { default as AdvancedTableColumnStylingColumnHeaders } from './_advanced_table_column_styling_column_headers.jsx'

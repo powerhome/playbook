@@ -4,6 +4,7 @@ import { flexRender, Row, Cell } from "@tanstack/react-table"
 
 import { GenericObject } from "../../types"
 import { isChrome } from "../Utilities/BrowserCheck"
+import { findColumnDefByAccessor } from "../Utilities/ColumnStylingHelper"
 
 import LoadingInline from "../../pb_loading_inline/_loading_inline"
 import Checkbox from "../../pb_checkbox/_checkbox"
@@ -51,8 +52,10 @@ const TableCellRenderer = ({
         })();
 
         const { column } = cell;
-        const columnIndex = column.getIndex();
-        const cellAlignment = columnDefinitions[columnIndex]?.columnStyling?.cellAlignment || "right";
+
+        // Find the “owning” colDefinition by accessor. Needed for multi column logic
+        const colDef = findColumnDefByAccessor(columnDefinitions, column.id)
+        const cellAlignment = colDef?.columnStyling?.cellAlignment ?? "right"
 
         return (
           <td

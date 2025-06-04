@@ -15,6 +15,7 @@ import Icon from "../../pb_icon/_icon"
 import { SortIconButton } from "./SortIconButton"
 import { ToggleIconButton } from "./ToggleIconButton"
 import { displayIcon } from "../Utilities/IconHelpers"
+import { findColumnDefByAccessor } from "../Utilities/ColumnStylingHelper"
 import { updateExpandAndCollapseState } from "../Utilities/ExpansionControlHelpers"
 
 import { isChrome } from "../Utilities/BrowserCheck"
@@ -73,17 +74,18 @@ export const TableHeaderCell = ({
       header?.column.getToggleSortingHandler()(event)
     }
   }
-const alignmentMap: Record<string, "start" | "center" | "end"> = {
-  left: "start",
-  center: "center",
-  right: "end",
-};
+  const alignmentMap: Record<string, "start" | "center" | "end"> = {
+    left: "start",
+    center: "center",
+    right: "end",
+  };
 
-const headerAlignment =
-  header?.index !== undefined
-    ? columnDefinitions?.[header.index]?.columnStyling?.headerAlignment ??
-      columnDefinitions?.[header.index]?.columnStyling?.headerAligment
-    : undefined;
+ // Look up the “owning” columnDefinition by accessor. Needed for multi column logic
+ const colDef = header
+   ? findColumnDefByAccessor(columnDefinitions, header.column.id)
+   : undefined
+
+ const headerAlignment =   colDef?.columnStyling?.headerAlignment ?? colDef?.columnStyling?.headerAligment
 
   const isLeafColumn =
   header?.column.getLeafColumns().length === 1 &&
