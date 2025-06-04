@@ -82,7 +82,6 @@ const FilterSidebar = (props) => {
         >
           <Filter.Section
               collapsed={isCollapsed}
-              collapsible
               headerText="Full Name"
           >
             <TextInput
