@@ -5,17 +5,17 @@
 
 The spotlight’s on the Advanced Table Kit this release! Sleeker scrollbars, brand-new row-pinning logic, and a smoother selectable row experience - because wrangling big tables should feel slick, not sticky (unless you WANT sticky, in which case have you seen our sticky headers, sticky columns and sticky rows?)
 
-[14.21.1](https://github.com/powerhome/playbook/tree/14.21.1) full list of changes:
+[14.21.2](https://github.com/powerhome/playbook/tree/14.21.2) full list of changes:
 
 **Kit Enhancements:**
 
 - Advanced Table Kit: Reduced Opacity on Scrollbar When Overflow-y Is Auto [\#4690](https://github.com/powerhome/playbook/pull/4690) ([nidaqg](https://github.com/nidaqg))
-- Dropdown Kit: Closeonselection Prop - React Only [\#4681](https://github.com/powerhome/playbook/pull/4681) ([skduncan](https://github.com/skduncan))
 - Advanced Table Kit: Scrollbarnone Prop for React and Rails [\#4677](https://github.com/powerhome/playbook/pull/4677) ([nickamantia](https://github.com/nickamantia))
 - Advanced Table Kit: Row Pinning Logic [\#4642](https://github.com/powerhome/playbook/pull/4642) ([elisashapiro](https://github.com/elisashapiro))
 - Checkbox Kit: Indeterminate Checkbox Logic - Rails [\#4671](https://github.com/powerhome/playbook/pull/4671) ([kangaree](https://github.com/kangaree))
 - Phone Number Input Kit: Option to Exclude Countries [\#4661](https://github.com/powerhome/playbook/pull/4661) ([skduncan](https://github.com/skduncan))
 - Advanced Table Kit: Action Bar for Selectable Rows Logic - Rails \(revert\) [\#4638](https://github.com/powerhome/playbook/pull/4638) ([skduncan](https://github.com/skduncan))
+- Checkbox Kit: Add Hidden Input Logic Rails [\#4689](https://github.com/powerhome/playbook/pull/4689) ([ElisaShapiro](https://github.com/ElisaShapiro))
 
 
 **Fixed Bugs:**
@@ -29,6 +29,8 @@ The spotlight’s on the Advanced Table Kit this release! Sleeker scrollbars, br
 - Dropdown Kit: Display 'no Option' With No Results In Autocomplete - Rails [\#4673](https://github.com/powerhome/playbook/pull/4673) ([kangaree](https://github.com/kangaree))
 - Advanced Table Container: False First Column Border Bug - Rails Only [\#4654](https://github.com/powerhome/playbook/pull/4654) ([nickamantia](https://github.com/nickamantia))
 - Advanced Table: SCSS Syntax Error Fix for rgb Value [\#4699](https://github.com/powerhome/playbook/pull/4699) ([nidaqg](https://github.com/nidaqg))
+- Advanced Table: scrollBarNone scss Fixes [\#4705](https://github.com/powerhome/playbook/pull/4705) ([nidaqg](https://github.com/nidaqg))
+- Advanced Table: Fixes for Horizontal Rows Double when Container True [\#4698](https://github.com/powerhome/playbook/pull/4698) ([ElisaShapiro](https://github.com/ElisaShapiro))
 
 
 **Improvements:**
@@ -40,10 +42,12 @@ The spotlight’s on the Advanced Table Kit this release! Sleeker scrollbars, br
 - Nodejs Upgrade to V22.15.1 [\#4653](https://github.com/powerhome/playbook/pull/4653) ([nidaqg](https://github.com/nidaqg))
 - Renovate Should Propose Major Upgrades [\#4649](https://github.com/powerhome/playbook/pull/4649) ([benlangfeld](https://github.com/benlangfeld))
 - Select Kit: Doc Examples Demonstrating Non-selectable Subheaders Separating Selectable Options [\#4646](https://github.com/powerhome/playbook/pull/4646) ([elisashapiro](https://github.com/elisashapiro))
+- Section Separator Kit: Add Documentation for Width Requirement [\#4704](https://github.com/powerhome/playbook/pull/4704) ([skduncan](https://github.com/skduncan))
+- Grant GoG secrets access [\#4710](https://github.com/powerhome/playbook/pull/4710) ([indiebrain](https://github.com/indiebrain))
 
 
 
-[Full Changelog](https://github.com/powerhome/playbook/compare/v14.21.0-rc.2...14.21.1)
+[Full Changelog](https://github.com/powerhome/playbook/compare/v14.21.0-rc.2...14.21.2)
 
 # Supercharged Dropdown Kit: Now with Typeahead & Multi-Select
 ##### May 22, 2025
