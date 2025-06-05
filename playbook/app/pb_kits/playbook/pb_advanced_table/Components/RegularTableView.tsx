@@ -34,7 +34,7 @@ const TableCellRenderer = ({
   loading?: boolean | string
   stickyLeftColumn?: string[]
   columnPinning: { left: string[] }
-  columnDefinitions?: any
+  columnDefinitions?: {[key:string]:any}[]
 }) => {
   return (
     <>
@@ -54,7 +54,7 @@ const TableCellRenderer = ({
         const { column } = cell;
 
         // Find the “owning” colDefinition by accessor. Needed for multi column logic
-        const colDef = findColumnDefByAccessor(columnDefinitions, column.id)
+        const colDef = findColumnDefByAccessor(columnDefinitions ?? [], column.id)
         const cellAlignment = colDef?.columnStyling?.cellAlignment ?? "right"
 
         return (
