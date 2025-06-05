@@ -8,7 +8,7 @@ import { getRowHeightEstimate } from '../Utilities/TableContainerStyles';
 const AdvancedTableContext = createContext<any>({});
 
 interface FlattenedItem {
-    type: 'header' | 'row' | 'loading';
+    type: 'header' | 'row' | 'loading' | 'footer';
     row: Row<GenericObject>;
     id: string;
 }
@@ -116,6 +116,18 @@ export const AdvancedTableProvider = ({ children, ...props }: {
       }
     });
 
+    const isFetching = props.isFetching || false;
+    // const shouldAddFooter = true // ← temp for testing
+    const shouldAddFooter = table && !isFetching && tableRows.length > 0
+
+    if (shouldAddFooter) {
+      items.push({
+        type: 'footer',
+        row: {} as Row<GenericObject>,
+        id: `footer-row`,
+      });
+    }
+
     return items;
   }, [
     isVirtualized,
@@ -159,10 +171,14 @@ export const AdvancedTableProvider = ({ children, ...props }: {
   useEffect(() => {
     if (isVirtualized && virtualizer && table && containerRef.current) {
       // Force recalculation of all virtual items
+      virtualizer.setOptions({
+        ...virtualizer.options,
+        count: flattenedItems.length,
+      });
       virtualizer.measure();
 
       // Reset scroll position when sorting changes
-      containerRef.current.scrollTop = 0;
+      // containerRef.current.scrollTop = 0; // this now goes all the way to the top
     }
   }, [
     isVirtualized,
@@ -170,7 +186,8 @@ export const AdvancedTableProvider = ({ children, ...props }: {
     table,
     containerRef,
     JSON.stringify(table?.getState().sorting || []),
-    JSON.stringify(table?.getState().expanded || {})
+    JSON.stringify(table?.getState().expanded || {}),
+    flattenedItems.length,
   ]);
 
   const contextValue = {

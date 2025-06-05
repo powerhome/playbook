@@ -10,6 +10,8 @@ import { getVirtualizedRowStyle } from "../Utilities/TableContainerStyles"
 
 import LoadingInline from "../../pb_loading_inline/_loading_inline"
 import Checkbox from "../../pb_checkbox/_checkbox"
+import Detail from "../../pb_detail/_detail"
+import Flex from "../../pb_flex/_flex"
 
 import { SubRowHeaderRow } from "../Components/SubRowHeaderRow"
 import { LoadingCell } from "../Components/LoadingCell"
@@ -20,11 +22,17 @@ import AdvancedTableContext from "../Context/AdvancedTableContext"
 type VirtualizedTableViewProps = {
   collapsibleTrail?: boolean
   subRowHeaders?: string[]
+  isFetching: boolean
+  totalRowCount: number
+  // onReachedBottom?: () => void
 }
 
 export const VirtualizedTableView = ({
   collapsibleTrail = true,
   subRowHeaders,
+  isFetching,
+  totalRowCount,
+  // onReachedBottom,
 }: VirtualizedTableViewProps) => {
   const {
     enableToggleExpansion,
@@ -36,6 +44,7 @@ export const VirtualizedTableView = ({
     hasAnySubRows,
     virtualizer,
     flattenedItems,
+    totalAvailableCount,
   } = useContext(AdvancedTableContext)
 
   const columnPinning = table.getState().columnPinning || { left: [] };
@@ -109,6 +118,27 @@ export const VirtualizedTableView = ({
     };
   }, [table, selectableRows, hasAnySubRows]);
 
+  // Explored observer method for a while - linked to anchor row at bottom of file
+  // const bottomRef = useRef<HTMLTableRowElement | null>(null);
+
+  // useEffect(() => {
+  //   if (!bottomRef.current) return;
+
+  //   const observer = new IntersectionObserver(([entry]) => {
+  //     if (entry.isIntersecting) {
+  //       const timeout = setTimeout(() => {
+  //         if (!isFetching && flattenedItems.length < totalRowCount) {
+  //           onReachedBottom?.();
+  //         }
+  //       }, 1000);
+  //       return () => clearTimeout(timeout);
+  //     }
+  //   }, { threshold: 1 });
+
+  //   observer.observe(bottomRef.current);
+  //   return () => observer.disconnect();
+  // }, [flattenedItems.length, totalRowCount, isFetching, onReachedBottom]);
+
   // Safety check
   if (!virtualizer || !flattenedItems) {
     return (
@@ -121,19 +151,7 @@ export const VirtualizedTableView = ({
   }
 
   // Get virtual items
-  let virtualItems: VirtualItem[] = [];
-  try {
-    virtualItems = virtualizer.getVirtualItems();
-  } catch (err) {
-    return (
-      <tr>
-        <td colSpan={table.getAllFlatColumns().length || 1}>
-          Error loading virtualized data.
-        </td>
-      </tr>
-    );
-  }
-
+  const virtualItems: VirtualItem[] = virtualizer.getVirtualItems?.() || [];
   if (!virtualItems.length) {
     return (
       <tr>
@@ -143,10 +161,19 @@ export const VirtualizedTableView = ({
       </tr>
     );
   }
+  
+  // Establish # of Parent Rows (so that Footer count does not include every single row)
+  const topLevelRowCount = table.getRowModel().flatRows.filter(row => row.depth === 0).length;
 
   return (
     <>
       {virtualItems.map((virtualRow: VirtualItem) => {
+        console.log("Virtual items map:", virtualItems.map(v => flattenedItems[v.index]?.type));
+        console.log("Flattened items map:", flattenedItems.map(item => item.type));
+        console.log("Footer virtual row:", virtualItems.find(v => flattenedItems[v.index]?.type === 'footer'));
+        console.log("Total available count:", totalAvailableCount)
+        console.log("Total row count:", totalRowCount)
+        console.log("Top level row count:", topLevelRowCount)
         const item = flattenedItems[virtualRow.index];
         if (!item) return null;
 
@@ -177,7 +204,7 @@ export const VirtualizedTableView = ({
         if (item.type === 'row') {
           const row = item.row;
           const isExpandable = row.getIsExpanded();
-          const rowHasNoChildren = row.original?.children && !row.original.children.length ? true : false;
+          const rowHasNoChildren = row.original?.children && !row.original.children.length;
           const rowBackground = isExpandable && ((!inlineRowLoading && row.getCanExpand()) || (inlineRowLoading && rowHasNoChildren));
           const rowColor = row.getIsSelected() ? "bg-row-selection" : rowBackground ? "bg-silver" : "bg-white";
 
@@ -266,8 +293,41 @@ export const VirtualizedTableView = ({
           );
         }
 
+        if (item.type === 'footer') {
+          // Render footer
+          return (
+            <tr
+                className="virtualized-table-row virtualized-footer"
+                key={`footer-row`}
+                style={virtualItemStyle}
+            >
+              <td colSpan={table.getAllFlatColumns().length}>
+                <Flex align="center"
+                    justify="center"
+                >
+
+                {/* {isFetching ? "Loading..." : `Showing ${flattenedItems.length - 1} of ${totalAvailableCount} rows`} */}
+                {/* {isFetching ? <LoadingInline /> : `Showing ${flattenedItems.length - 1} of ${totalRowCount} rows`} */}
+                {/* {isFetching ? "Loading..." : `Showing ${topLevelRowCount} of ${totalAvailableCount} rows`} */}
+                {isFetching ? (
+                  <LoadingInline />
+                ) : (
+                  <Detail text={`Showing ${topLevelRowCount} of ${totalAvailableCount} rows`} />
+                )}
+                </Flex>
+              </td>
+            </tr>
+          )
+        }
+
         return null;
       })}
+      {/* // Anchor/ref row of height 1px for Observer method when explored
+      /* {flattenedItems.length < totalRowCount && (
+        <tr ref={bottomRef} style={{ height: 1 }}>
+          <td colSpan={table.getAllFlatColumns().length} />
+        </tr>
+      )} */}
     </>
   );
 }

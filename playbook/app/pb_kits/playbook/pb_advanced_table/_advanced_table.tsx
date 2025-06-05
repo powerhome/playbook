@@ -281,7 +281,10 @@ const AdvancedTable = (props: AdvancedTableProps) => {
       ) : (
         <>
           <TableHeader />
-          <TableBody />
+          <TableBody   
+              isFetching={isFetching}
+              totalRowCount={fullData.length}
+          />
         </>
       )}
     </Table>
@@ -343,6 +346,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
             table={table}
             tableContainerRef={tableWrapperRef}
             toggleExpansionIcon={toggleExpansionIcon}
+            totalAvailableCount={fullData.length}
             virtualizedRows={virtualizedRows}
         >
           <React.Fragment>

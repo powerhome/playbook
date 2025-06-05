@@ -68,12 +68,14 @@ export const getVirtualizedContainerStyles = (maxHeight?: string): React.CSSProp
   /**
    * Get height estimates for different row types
    */
-  export const getRowHeightEstimate = (rowType: 'header' | 'row' | 'loading') => {
+  export const getRowHeightEstimate = (rowType: 'header' | 'row' | 'loading' | 'footer') => {
     switch (rowType) {
       case 'header':
         return 40; // Header height
       case 'loading':
         return 30; // Loading indicator height
+      case 'footer':
+        return 40
       case 'row':
       default:
         return 40; // Standard row height - match this to your design system

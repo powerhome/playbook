@@ -120,6 +120,15 @@
     table-layout: fixed !important;
     width: 100% !important;
   }
+  .virtualized-footer {
+    width: 100% !important;
+    td {
+      border-bottom-left-radius: 4px !important;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
   .virtualized-table-row {
     display: table !important;
     table-layout: fixed !important;
