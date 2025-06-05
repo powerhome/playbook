@@ -24,7 +24,6 @@ const AdvancedTableColumnStylingColumnHeaders = (props) => {
             {
               accessor: "scheduledMeetings",
               label: "Scheduled Meetings",
-              columnStyling:{headerAlignment: "center", cellAlignment: "center"},
             },
           ],
         },
@@ -39,6 +38,7 @@ const AdvancedTableColumnStylingColumnHeaders = (props) => {
             {
               accessor: "completedClasses",
               label: "Completed Classes",
+              columnStyling:{headerAlignment: "center", cellAlignment: "center"},
             },
             {
               accessor: "classCompletionRate",

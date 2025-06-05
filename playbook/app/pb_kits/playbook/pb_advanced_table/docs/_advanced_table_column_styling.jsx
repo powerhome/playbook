@@ -18,7 +18,6 @@ const AdvancedTableColumnStyling = (props) => {
       accessor: "scheduledMeetings",
       label: "Scheduled Meetings",
       columnStyling:{headerAlignment: "center", cellAlignment: "center"},
-
     },
     {
       accessor: "attendanceRate",
