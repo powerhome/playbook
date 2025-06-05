@@ -13,13 +13,14 @@ import SortMenu, {
   SortValue,
 } from './SortMenu'
 
-export type FilterSingleProps = {
+type FilterSingleProps = {
   children?: React.ReactChild[] | React.ReactChild,
   filters?: FilterDescription,
   onSortChange?: SortingChangeCallback,
   results?: number,
   sortOptions?: SortOptions,
   sortValue?: SortValue[],
+  onPopoverOpen?: () => void // Add this new prop
 } & FilterBackgroundProps
 
 const FilterSingle = ({
@@ -34,50 +35,52 @@ const FilterSingle = ({
   minWidth,
   placement,
   popoverProps,
+  onPopoverOpen, // Destructure the new prop
   ...bgProps
 }: FilterSingleProps): React.ReactElement => {
+
   return (
-    <FilterBackground
-        dark={dark}
+    <FilterBackground 
+        dark={dark} 
         {...bgProps}
     >
-      <Flex
+      <Flex 
           orientation="row"
           paddingRight="lg"
           vertical="center"
       >
-        { children &&
+          {children && (
           <>
             <FiltersPopover
                 dark={dark}
                 maxHeight={maxHeight}
                 minWidth={minWidth}
+                onPopoverOpen={onPopoverOpen}
                 placement={placement}
                 popoverProps={popoverProps}
             >
-            {children}
+              {children}
             </FiltersPopover>
-            <CurrentFilters
-                dark={dark}
-                filters={filters}
+            <CurrentFilters 
+                dark={dark} 
+                filters={filters} 
             />
-          </>
-        }
-        <ResultsCount
+            </>
+        )}
+        <ResultsCount 
             dark={dark}
-            results={results}
+            results={results} 
         />
-        { !isEmpty(sortOptions) &&
-            <SortMenu
-                dark={dark}
-                onChange={onSortChange}
-                options={sortOptions}
-                value={sortValue}
-            />
-        }
+        {!isEmpty(sortOptions) && (
+          <SortMenu
+              dark={dark}
+              onChange={onSortChange}
+              options={sortOptions}
+              value={sortValue}
+          />
+        )}
       </Flex>
     </FilterBackground>
   )
 }
-
 export default FilterSingle

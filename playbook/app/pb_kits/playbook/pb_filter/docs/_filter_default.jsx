@@ -5,6 +5,7 @@ import Filter from '../../pb_filter/_filter'
 import Flex from '../../pb_flex/_flex'
 import Select from '../../pb_select/_select'
 import TextInput from '../../pb_text_input/_text_input'
+import DatePicker from '../../pb_date_picker/_date_picker'
 
 const SortingChangeCallback = (sortOptions) => {
   alert(JSON.stringify(sortOptions[0]))
@@ -22,7 +23,6 @@ const FilterDefault = (props) => {
 
     <>
       <Filter
-          double
           filters={{
             'Full Name': 'John Wick',
             'City': 'San Francisco',
@@ -43,6 +43,14 @@ const FilterDefault = (props) => {
       >
       {({ closePopover }) => (
         <form>
+
+          <DatePicker
+              allowInput
+              mode="range"
+              pickerId="date-picker-quick-pick"
+              placeholder="mm/dd/yyyy to mm/dd/yyyy"
+              selectionType="quickpick"
+          />
 
           <TextInput
               label="Full Name"
