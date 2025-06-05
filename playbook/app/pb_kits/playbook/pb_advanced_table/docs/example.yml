@@ -19,8 +19,8 @@ examples:
   - advanced_table_selectable_rows_actions_rails: Selectable Rows (With Actions)
   - advanced_table_selectable_rows_header_rails: Selectable Rows (No Actions Bar)
   - advanced_table_scrollbar_none: Advanced Table Scrollbar None
-  - advanced_table_column_styling_rails: Column Styling
-  - advanced_table_column_styling_column_headers_rails: Column Styling with Multiple Headers
+  # - advanced_table_column_styling_rails: Column Styling
+  # - advanced_table_column_styling_column_headers_rails: Column Styling with Multiple Headers
 
   react:
   - advanced_table_default: Default (Required Props)
