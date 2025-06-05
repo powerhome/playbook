@@ -88,10 +88,11 @@ actions = [
     if (!selectedRowIds || selectedRowIds.length === 0) {
       alert('No Selection Made');
     } else {
+      const selectedRowsString = selectedRowIds.join(', ');
       if (actionType === 'export') {
-        alert(`Row ids ${selectedRowIds.join(', ')} will be exported!`);
+        alert('Row ids ' + selectedRowsString + ' will be exported!');
       } else if (actionType === 'delete') {
-        alert(`Row ids ${selectedRowIds.join(', ')} will be deleted!`);
+        alert('Row ids ' + selectedRowsString + ' will be deleted!');
       }
     }
   };
