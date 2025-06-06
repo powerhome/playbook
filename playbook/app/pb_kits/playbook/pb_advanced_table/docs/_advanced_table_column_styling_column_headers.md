@@ -1,0 +1,1 @@
+`columnStyling` can also be used with the multi column logic. When used in this way, `columnStyling` must be used within the leaf column's columnDefinition as shown.

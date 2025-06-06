@@ -1,0 +1,1 @@
+`column_styling` can also be used with the multi column logic. When used in this way, `column_styling` must be used within the leaf column's column_definition as shown.

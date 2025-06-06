@@ -15,6 +15,7 @@ import Icon from "../../pb_icon/_icon"
 import { SortIconButton } from "./SortIconButton"
 import { ToggleIconButton } from "./ToggleIconButton"
 import { displayIcon } from "../Utilities/IconHelpers"
+import { findColumnDefByAccessor } from "../Utilities/ColumnStylingHelper"
 import { updateExpandAndCollapseState } from "../Utilities/ExpansionControlHelpers"
 
 import { isChrome } from "../Utilities/BrowserCheck"
@@ -45,6 +46,7 @@ export const TableHeaderCell = ({
   table
 }: TableHeaderCellProps) => {
   const {
+    columnDefinitions,
     expanded,
     setExpanded,
     expandByDepth,
@@ -72,6 +74,18 @@ export const TableHeaderCell = ({
       header?.column.getToggleSortingHandler()(event)
     }
   }
+  const alignmentMap: Record<string, "start" | "center" | "end"> = {
+    left: "start",
+    center: "center",
+    right: "end",
+  };
+
+ // Look up the “owning” columnDefinition by accessor. Needed for multi column logic
+ const colDef = header
+   ? findColumnDefByAccessor(columnDefinitions, header.column.id)
+   : undefined
+
+ const headerAlignment =   colDef?.columnStyling?.headerAlignment ?? colDef?.columnStyling?.headerAligment
 
   const isLeafColumn =
   header?.column.getLeafColumns().length === 1 &&
@@ -126,9 +140,15 @@ const isToggleExpansionEnabled =
   (enableToggleExpansion === "all" || "header") &&
   enableToggleExpansion !== "none"
 
-  let justifyHeader:justifyTypes;
+  let justifyHeader: justifyTypes;
 
-  if (header?.index === 0 && hasAnySubRows || (header?.index === 0 && inlineRowLoading) || (header?.index === 0 && isToggleExpansionEnabled)) {
+  if (headerAlignment && alignmentMap[headerAlignment]) {
+    justifyHeader = alignmentMap[headerAlignment];
+  } else if (
+    (header?.index === 0 && hasAnySubRows) ||
+    (header?.index === 0 && inlineRowLoading) ||
+    (header?.index === 0 && isToggleExpansionEnabled)
+  ) {
     justifyHeader = enableSorting ? "between" : "start";
   } else {
     justifyHeader = isLeafColumn ? "end" : "center";
@@ -165,7 +185,7 @@ const isToggleExpansionEnabled =
 
   return (
     <th
-        align="right"
+        align={headerAlignment ? headerAlignment : "right"}
         className={cellClassName}
         colSpan={header?.colSpan}
         id={cellId}
@@ -253,8 +273,8 @@ const isToggleExpansionEnabled =
                     tabIndex: 0,
                   },
                 })}
-              justify={header?.index === 0 && enableSorting ? "between" : "none"}
-              paddingLeft={enableSorting ? "xxs" : "xs"}
+              justify={header?.index === 0 && enableSorting ? "between" : headerAlignment ? alignmentMap[headerAlignment] : "none"}
+              paddingLeft={header?.index === 0 ? enableSorting ? "xxs" : "xs" : "none"}
           >
             <div>
               {flexRender(header?.column.columnDef.header, header?.getContext())}

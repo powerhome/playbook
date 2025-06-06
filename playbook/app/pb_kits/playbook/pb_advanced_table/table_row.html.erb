@@ -6,7 +6,7 @@
     <% object.column_definitions.each_with_index do |column, index| %>
         <% next unless column[:accessor].present? %>
         <%= pb_rails("table/table_cell", props: { classname:object.td_classname(column, index)}) do %>
-            <%= pb_rails("flex", props:{ align: "center", justify: index.zero? ? "start" : "end", classname: object.loading ? "loading-cell" : "" }) do %>
+            <%= pb_rails("flex", props:{ align: "center", justify: object.justify_for(column, index), classname: object.loading ? "loading-cell" : "" }) do %>
                 <% if collapsible_trail && index.zero? %>
                     <% (1..depth).each do |i| %>
                         <% additional_offset = i > 1 ? (i - 1) * 0.25 : 0 %>
@@ -34,7 +34,7 @@
                                 </button>
                             <% end %>
                         <% end %>
-                        <%= pb_rails("flex/flex_item", props:{padding_left: index.zero? && (object.row[:children].present? || has_integrated_checkbox) ? "none" : "xs"}) do %>       
+                        <%= pb_rails("flex/flex_item") do %>       
                             <% if column[:custom_renderer].present? %>
                                 <%= raw(column[:custom_renderer].call(object.row, custom_renderer_value(column, index))) %>
                             <% elsif index.zero? %>
