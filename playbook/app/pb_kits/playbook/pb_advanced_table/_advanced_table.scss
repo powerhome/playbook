@@ -78,6 +78,35 @@
       // background-color: red;
     }
   }
+  // Styles for Safari Div Header
+  .safari-virtualized-header-row-header {
+    display: block;
+    width: 100%;
+    background-color: white;
+    z-index: 3;
+    position: sticky;
+    top: 0;
+  }
+  .safari-virtualized-header-row {
+    display: flex;
+    width: 100%;
+    height: 40px;
+    align-items: center;
+    border-bottom: 1px $border_light;
+    font-size: medium;
+    font-weight: normal;
+  }
+  .safari-virtualized-header-cell {
+    // flex: 1 0 auto;
+    // min-width: 180px;
+    // padding: 0 8px;
+    white-space: nowrap;
+    // overflow: hidden;
+    text-overflow: ellipsis;
+    background-color: white;
+    border-bottom: 1px $border_light;
+    // font-weight: 400;
+  }
   .virtualized-footer {
     width: 100% !important;
     td {
