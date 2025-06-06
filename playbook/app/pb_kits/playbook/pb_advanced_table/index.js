@@ -266,6 +266,25 @@ export default class PbAdvancedTable extends PbEnhancedElement {
         this.updateTableSelectedRowsAttribute();
       });
     }
+    this.addBorderRadiusOnLastVisibleRow()
+  }
+
+  addBorderRadiusOnLastVisibleRow() {
+    const parentElement = this.element.closest('.pb_advanced_table');
+    
+    const table = document.getElementById(parentElement.id);
+
+    if (table) {
+      const visibleRows = table.querySelectorAll('tr.is-visible, tr:not(.toggle-content)');
+  
+      visibleRows.forEach(row => row.classList.remove('last-visible-row'));
+  
+      const lastVisibleRow = visibleRows[visibleRows.length - 1];
+
+      if (lastVisibleRow) {
+        lastVisibleRow.classList.add('last-visible-row');
+      }
+    }
   }
 
 
@@ -367,6 +386,8 @@ export default class PbAdvancedTable extends PbEnhancedElement {
       row.classList.toggle("bg-silver", !isVisible);
       row.classList.toggle("bg-white", isVisible);
     }
+
+    this.addBorderRadiusOnLastVisibleRow();
   }
 
   displayDownArrow() {
