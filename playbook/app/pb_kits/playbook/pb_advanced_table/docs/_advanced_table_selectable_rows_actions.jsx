@@ -47,14 +47,14 @@ const CustomActions = () => {
       <CircleIconButton
           icon="file-csv"
           onClick={() =>
-            alert(rowIds.length === 0 ? "No Selection Made" : `Row ids ${rowIds.join(", ")} will be exported!`)
+            alert(rowIds.length === 0 ? "No Selection Made" : 'Row ids ' + rowIds.join(", ") + 'will be exported!')
           }
           variant="link"
       />
       <CircleIconButton
           icon="trash-alt"
           onClick={() =>
-            alert(rowIds.length === 0 ? "No Selection Made" : `Row ids ${rowIds.join(", ")} will be deleted!`)
+            alert(rowIds.length === 0 ? "No Selection Made" : 'Row ids ' + rowIds.join(", ") + 'will be deleted!')
           }
           variant="link"
         />
