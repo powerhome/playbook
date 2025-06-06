@@ -1,4 +1,4 @@
-import React, { useContext, useLayoutEffect, useState, useEffect } from "react"
+import React, { useContext, useLayoutEffect, useState, useEffect, useRef } from "react"
 import classnames from "classnames"
 import { flexRender, Cell } from "@tanstack/react-table"
 import { VirtualItem } from "@tanstack/react-virtual"
@@ -79,6 +79,25 @@ export const VirtualizedTableView = ({
     return widths;
   };
 
+  // Trying to set a ref to measure the first row of cell widths to match header to it
+  // const firstRowRef = useRef<HTMLTableRowElement | null>(null);
+  // const getFirstRowCellWidths = () => {
+  //   const widths: {[key: string]: string} = {};
+  
+  //   const cellElements = firstRowRef.current?.querySelectorAll('td') || [];
+  
+  //   const visibleHeaders = table.getVisibleFlatColumns();
+  
+  //   cellElements.forEach((cell, index) => {
+  //     const header = visibleHeaders[index];
+  //     if (header) {
+  //       widths[header.id] = `${cell.getBoundingClientRect().width}px`;
+  //     }
+  //   });
+  
+  //   return widths;
+  // };
+
   // Debounce function to prevent too many updates during resize
   const debounce = <T extends (...args: any[]) => any>(func: T, wait: number): ((...args: Parameters<T>) => void) => {
     let timeout: ReturnType<typeof setTimeout>;
@@ -97,8 +116,16 @@ export const VirtualizedTableView = ({
     // Apply widths after a small delay to ensure header is rendered
     const timer = setTimeout(() => {
       setColumnWidths(getHeaderCellWidths());
+      // setColumnWidths(getFirstRowCellWidths());
     }, 0);
 
+    return () => clearTimeout(timer);
+    // const timer = setTimeout(() => {
+    //   requestAnimationFrame(() => {
+    //     setColumnWidths(getHeaderCellWidths());
+    //     // setColumnWidths(getFirstRowCellWidths())
+    //   });
+    // }, 100);
     return () => clearTimeout(timer);
   }, [table, selectableRows, hasAnySubRows, sortingState]);
 
@@ -107,6 +134,7 @@ export const VirtualizedTableView = ({
     // Create debounced version of the width measurement function
     const handleResize = debounce(() => {
       setColumnWidths(getHeaderCellWidths());
+      // setColumnWidths(getFirstRowCellWidths());
     }, 0);
 
     // Add the event listener
@@ -165,17 +193,27 @@ export const VirtualizedTableView = ({
   // Establish # of Parent Rows (so that Footer count does not include every single row)
   const topLevelRowCount = table.getRowModel().flatRows.filter(row => row.depth === 0).length;
 
+  // useEffect(() => {
+  //   if (!virtualizer) return;
+  
+  //   const hasFooter = flattenedItems.some(item => item.type === 'footer');
+  //   if (hasFooter) {
+  //     virtualizer.measure();
+  //   }
+  // }, [virtualizer, flattenedItems]);
+
   return (
     <>
       {virtualItems.map((virtualRow: VirtualItem) => {
-        console.log("Virtual items map:", virtualItems.map(v => flattenedItems[v.index]?.type));
-        console.log("Flattened items map:", flattenedItems.map(item => item.type));
-        console.log("Footer virtual row:", virtualItems.find(v => flattenedItems[v.index]?.type === 'footer'));
-        console.log("Total available count:", totalAvailableCount)
-        console.log("Total row count:", totalRowCount)
-        console.log("Top level row count:", topLevelRowCount)
+        // console.log("Virtual items map:", virtualItems.map(v => flattenedItems[v.index]?.type));
+        // console.log("Flattened items map:", flattenedItems.map(item => item.type));
+        // console.log("Footer virtual row:", virtualItems.find(v => flattenedItems[v.index]?.type === 'footer'));
+        // console.log("Total available count:", totalAvailableCount)
+        // console.log("Total row count:", totalRowCount)
+        // console.log("Top level row count:", topLevelRowCount)
         const item = flattenedItems[virtualRow.index];
         if (!item) return null;
+        // let firstRowCaptured = false;
 
         // Use consistent row styling
         const virtualItemStyle = getVirtualizedRowStyle(virtualRow.start);
@@ -220,6 +258,12 @@ export const VirtualizedTableView = ({
                     } catch (err) {
                       // Silent error handling
                     }
+                    // try {
+                    //   if (!firstRowRef.current) {
+                    //     firstRowRef.current = node;
+                    //   }
+                    //   virtualizer.measureElement(node);
+                    // } catch (err) {}
                   }
                 }}
                 style={virtualItemStyle}
@@ -244,6 +288,7 @@ export const VirtualizedTableView = ({
                 const isPinnedLeft = columnPinning.left.includes(cell.column.id);
                 const isLastCell = cell.column.parent?.columns?.at(-1)?.id === cell.column.id;
                 const cellWidth = columnWidths[cell.column.id] || 'auto';
+                // const cellWidth = `${cell.column.getSize()}px`;
 
                 return (
                   <td
@@ -256,6 +301,7 @@ export const VirtualizedTableView = ({
                       )}
                       key={`${cell.id}-data`}
                       style={{ width: cellWidth }}
+                      // style={{ width: cellWidth, minWidth: cellWidth, maxWidth: cellWidth }}
                   >
                     {collapsibleTrail && i === 0 && row.depth > 0 && renderCollapsibleTrail(row.depth)}
                     <span id={`${cell.id}-span`}>
@@ -294,6 +340,9 @@ export const VirtualizedTableView = ({
         }
 
         if (item.type === 'footer') {
+          // Toggles Footer off once reach end
+          // const shouldRenderFooter = topLevelRowCount < totalAvailableCount;
+          // if (!shouldRenderFooter) return null;
           // Render footer
           return (
             <tr

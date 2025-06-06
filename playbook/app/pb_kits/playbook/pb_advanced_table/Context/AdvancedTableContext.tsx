@@ -117,7 +117,6 @@ export const AdvancedTableProvider = ({ children, ...props }: {
     });
 
     const isFetching = props.isFetching || false;
-    // const shouldAddFooter = true // ← temp for testing
     const shouldAddFooter = table && !isFetching && tableRows.length > 0
 
     if (shouldAddFooter) {
@@ -127,6 +126,19 @@ export const AdvancedTableProvider = ({ children, ...props }: {
         id: `footer-row`,
       });
     }
+    // const topLevelRowCount = tableRows.filter((row: Row<GenericObject>) => row.depth === 0).length;
+    // const totalAvailableCount = props.totalAvailableCount || 0;
+
+    // // const allRowsVisible = topLevelRowCount >= totalAvailableCount;
+
+    // const shouldAddFooter = table && !props.isFetching && topLevelRowCount < totalAvailableCount && tableRows.length > 0;
+    // if (shouldAddFooter) {
+    //   items.push({
+    //     type: 'footer',
+    //     row: {} as Row<GenericObject>,
+    //     id: `footer-row`,
+    //   });
+    // }
 
     return items;
   }, [

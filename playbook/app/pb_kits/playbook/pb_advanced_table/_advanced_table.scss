@@ -63,67 +63,26 @@
     width: 100%;
   }
 
-  // Virtualized table styles
-  // .virtualized-header {
-  //   display: table !important;
-  //   table-layout: fixed !important;
-  //   width: 100% !important;
-  // }
-  // .virtualized-header-row {
-  //   display: table !important;
-  //   table-layout: fixed !important;
-  //   width: 100% !important;
-  // }
-  // .virtualized-header {
-  //   display: table !important;
-  //   table-layout: fixed !important;
-  //   width: 100% !important;
-    
-  //   .virtualized-header-row-header {
-  //     display: table-row !important;
-  //     width: 100% !important;
-      
-  //     // Header cells should match row cell styling
-  //     th {
-  //       display: table-cell !important;
-  //       box-sizing: border-box !important;
-  //       white-space: nowrap;
-  //       overflow: hidden;
-  //       text-overflow: ellipsis;
-  //       height: 40px; // Match row height
-  //     }
-  
-  //     // Ensure the first column has proper width (matches your row styling)
-  //     th:first-child {
-  //       min-width: 180px !important;
-  //     }
-  
-  //     // First column (typically the checkbox column) - match your row checkbox styling
-  //     th:first-child.table-header-cells-custom {
-  //       width: 40px !important;
-  //       min-width: 40px !important;
-  //       box-sizing: border-box !important;
-  //       text-align: center;
-  //     }
-  
-  //     // Ensure the first data column has proper alignment with rows
-  //     th:first-of-type:not(.table-header-cells-custom) {
-  //       min-width: 180px;
-  //       text-align: left;
-  //     }
-  //   }
-  // }
   // Should scrollbar-gutter be tied to a class link it to virtualized table only?
   scrollbar-gutter: stable right-edges;
-  .virtualized-header {
-    display: table !important;
-    table-layout: fixed !important;
+  .virtualized-header-row-header {
+    // if display table and layout fixed header will not be responsive - columns stay put do no go under column
+    // display: table !important;
+    // table-layout: fixed !important;
     width: 100% !important;
+    // th:first-child {
+    // z-index: 10;
+    .table-header-cells:first-child {
+      min-width: 180px;
+      // width: 180px;
+      // background-color: red;
+    }
   }
   .virtualized-footer {
     width: 100% !important;
     td {
       border-bottom-left-radius: 4px !important;
+      border-bottom-right-radius: 4px !important;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -672,6 +631,16 @@
         th.sticky-left,
         td.sticky-left {
           border-right: 1px solid $border_light !important;
+        }
+        // Virtualized Table in Responsive Styles
+        .virtualized-header,
+        .virtualized-header-row-header,
+        .virtualized-table-row,
+        .virtualized-footer {
+          border-right: 1px solid $border_light !important;
+          .table-header-cells:first-child {
+            box-shadow: 0 0 10px 0 rgba($shadow, 0.16) !important;
+          }
         }
       }
     }
