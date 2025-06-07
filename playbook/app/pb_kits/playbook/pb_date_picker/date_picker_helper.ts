@@ -80,14 +80,23 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
   // ===========================================================
   // |                   Hook Definitions                      |
   // ===========================================================
+  const pickerInput = document.querySelector<HTMLElement & { [x: string]: any }>(`#${pickerId}`)
+  const inTurboFrames = pickerInput?.closest('turbo-frame') !== null
 
   const defaultDateGetter = () => {
-    if (defaultDate === '') {
-      return null
+    if (inTurboFrames) {
+      const initialValue = pickerInput?.value?.trim();
+      if (initialValue === "") return null;
+      if (initialValue) return initialValue;
+      return defaultDate || null
     } else {
-      return defaultDate
+      if (defaultDate === "") {
+        return null;
+      } else {
+        return defaultDate;
+      }
     }
-  }
+  };
 
   const disabledWeekDays = () => {
     return (
