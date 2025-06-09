@@ -17,7 +17,8 @@ export const createCellFunction = (
   customRenderer?: (row: Row<GenericObject>, value: any) => JSX.Element,
   isFirstColumn?: boolean,
   onRowToggleClick?: (row: Row<GenericObject>) => void,
-  selectableRows?: boolean
+  selectableRows?: boolean,
+  rowStyling?: GenericObject
 ) => {
   // Add display name to the returned function
   const cellRenderer = ({
@@ -28,6 +29,7 @@ export const createCellFunction = (
     getValue: Getter<string>
   }) => {
     const rowData = row.original;
+    const customStyle = rowStyling?.length > 0 && rowStyling?.find((s:GenericObject) => s?.rowId === row.id);
 
     if (isFirstColumn) {
       switch (row.depth) {
@@ -35,6 +37,7 @@ export const createCellFunction = (
           return (
             <CustomCell
                 customRenderer={customRenderer}
+                customStyle={customStyle}
                 getValue={getValue}
                 onRowToggleClick={onRowToggleClick}
                 row={row}

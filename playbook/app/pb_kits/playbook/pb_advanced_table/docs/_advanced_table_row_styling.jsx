@@ -45,6 +45,7 @@ const rowStyling = [
     rowId: "8",
     backgroundColor: colors.category_1,
     fontColor: colors.white,
+    expandButtonColor: colors.white,
   },
 ];
 

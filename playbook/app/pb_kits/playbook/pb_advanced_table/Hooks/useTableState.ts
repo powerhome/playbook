@@ -104,7 +104,8 @@ export function useTableState({
           column.customRenderer,
           isFirstColumn,
           onRowToggleClick,
-          selectableRows
+          selectableRows,
+          rowStyling
         );
       }
 

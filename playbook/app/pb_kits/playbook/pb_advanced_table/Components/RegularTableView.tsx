@@ -25,13 +25,15 @@ const TableCellRenderer = ({
   collapsibleTrail = true,
   loading = false,
   stickyLeftColumn,
-  columnPinning
+  columnPinning,
+  customRowStyle,
 }: {
   row: Row<GenericObject>
   collapsibleTrail?: boolean
   loading?: boolean | string
   stickyLeftColumn?: string[]
   columnPinning: { left: string[] }
+  customRowStyle?: GenericObject
 }) => {
   return (
     <>
@@ -67,6 +69,8 @@ const TableCellRenderer = ({
                     ? '180px'
                     : `${column.getStart("left")}px`
                   : undefined,
+                  backgroundColor: customRowStyle?.backgroundColor,
+                  color: customRowStyle?.fontColor,
             }}
           >
             {collapsibleTrail && i === 0 && row.depth > 0 && renderCollapsibleTrail(row.depth)}
@@ -165,7 +169,7 @@ export const RegularTableView = ({
         const rowBackground = isExpandable && ((!inlineRowLoading && row.getCanExpand()) || (inlineRowLoading && rowHasNoChildren));
         const rowColor = row.getIsSelected() ? "bg-row-selection" : rowBackground ? "bg-silver" : "bg-white";
         const isFirstRegularRow = rowIndex === 0 && !row.getIsPinned();
-        const customStyle = rowStyling?.length > 0 && rowStyling?.find(s => s?.rowId === row.id);
+        const customRowStyle = rowStyling?.length > 0 && rowStyling?.find((s: GenericObject) => s?.rowId === row.id);
 
         return (
           <React.Fragment key={`${row.index}-${row.id}-${row.depth}-row`}>
@@ -184,7 +188,7 @@ export const RegularTableView = ({
                 className={`${rowColor} ${row.depth > 0 ? `depth-sub-row-${row.depth}` : ""}`}
                 id={`${row.index}-${row.id}-${row.depth}-row`}
                 ref={isFirstRegularRow ? sampleRowRef : null}
-                style={{backgroundColor: customStyle?.backgroundColor, color: customStyle?.fontColor}}
+                style={{backgroundColor: customRowStyle?.backgroundColor, color: customRowStyle?.fontColor}}
             >
               {/* Render custom checkbox column when we want selectableRows for non-expanding tables */}
               {selectableRows && !hasAnySubRows && (
@@ -201,6 +205,7 @@ export const RegularTableView = ({
               <TableCellRenderer
                   collapsibleTrail={collapsibleTrail}
                   columnPinning={columnPinning}
+                  customRowStyle={customRowStyle}
                   loading={loading}
                   row={row}
                   stickyLeftColumn={stickyLeftColumn}
