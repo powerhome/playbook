@@ -595,5 +595,5 @@ test("rowStyling prop works as expected", () => {
   const kit = screen.getByTestId(testId)
   const tableBody = kit.querySelector('tbody')
   const row1 = tableBody.querySelector('tr:nth-child(1)') 
-  expect(row1).toHaveStyle({backgroundColor: colors.white, fontColor: colors.black})
+  expect(row1).toHaveStyle({backgroundColor: colors.white, color: colors.black})
 })
