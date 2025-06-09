@@ -573,3 +573,22 @@ test("pinnedRows prop renders pinned rows at top", () => {
   expect(firstPinnedRow).toHaveStyle("position: sticky")
   expect(firstPinnedRow).toHaveStyle("background-color: white")
 })
+
+test("renders virtualized table rows and header", () => {
+  render(
+    <AdvancedTable
+        columnDefinitions={columnDefinitions}
+        data={{ testid: testId }}
+        tableData={MOCK_DATA_WITH_ID}
+        virtualizedRows
+    />
+  )
+
+  const kit = screen.getByTestId(testId)
+
+  const virtualizedHeader = kit.querySelector('.virtualized-header-row-header')
+  expect(virtualizedHeader).toBeInTheDocument()
+
+  const virtualizedRows = kit.querySelectorAll('.virtualized-table-row')
+  expect(virtualizedRows.length).toBeLessThan(MOCK_DATA_WITH_ID.length)
+})
