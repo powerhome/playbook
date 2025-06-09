@@ -126,19 +126,6 @@ export const AdvancedTableProvider = ({ children, ...props }: {
         id: `footer-row`,
       });
     }
-    // const topLevelRowCount = tableRows.filter((row: Row<GenericObject>) => row.depth === 0).length;
-    // const totalAvailableCount = props.totalAvailableCount || 0;
-
-    // // const allRowsVisible = topLevelRowCount >= totalAvailableCount;
-
-    // const shouldAddFooter = table && !props.isFetching && topLevelRowCount < totalAvailableCount && tableRows.length > 0;
-    // if (shouldAddFooter) {
-    //   items.push({
-    //     type: 'footer',
-    //     row: {} as Row<GenericObject>,
-    //     id: `footer-row`,
-    //   });
-    // }
 
     return items;
   }, [
@@ -188,9 +175,6 @@ export const AdvancedTableProvider = ({ children, ...props }: {
         count: flattenedItems.length,
       });
       virtualizer.measure();
-
-      // Reset scroll position when sorting changes
-      // containerRef.current.scrollTop = 0; // this now goes all the way to the top
     }
   }, [
     isVirtualized,

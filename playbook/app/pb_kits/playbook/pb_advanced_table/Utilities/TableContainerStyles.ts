@@ -52,21 +52,14 @@ export const getVirtualizedContainerStyles = (maxHeight?: string): React.CSSProp
    * Creates consistent row styles for virtualized table rows
    * Matches the virtualized row height to the standard table
    */
-  const isSafari = typeof navigator !== "undefined" &&
-    /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
   export const getVirtualizedRowStyle = (startPosition: number): React.CSSProperties => {
-    const safariHeaderHeight = 40 // match your actual header height
-    const topOffset = isSafari ? safariHeaderHeight : 0
     return {
       position: 'absolute',
       top: 0,
       left: 0,
-      // width: '100%',
       height: '40px', // Match standard table row height
-      // transform: `translateY(${startPosition}px)`,
-      transform: `translateY(${startPosition + topOffset}px)`,
+      transform: `translateY(${startPosition}px)`,
       tableLayout: 'fixed',
-      // backgroundColor: "blue",
     };
   };
 

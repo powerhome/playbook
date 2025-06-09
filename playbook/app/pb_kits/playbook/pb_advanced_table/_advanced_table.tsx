@@ -283,7 +283,6 @@ const AdvancedTable = (props: AdvancedTableProps) => {
           <TableHeader />
           <TableBody   
               isFetching={isFetching}
-              totalRowCount={fullData.length}
           />
         </>
       )}

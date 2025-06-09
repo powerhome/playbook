@@ -41,7 +41,6 @@ export const TableHeader = ({
     selectableRows,
     responsive,
     headerRef,
-    // virtualizer,
     virtualizedRows,
     enableVirtualization,
   } = useContext(AdvancedTableContext)
@@ -103,26 +102,11 @@ export const TableHeader = ({
     </thead>
   );
 
-  // These added styles allows the standard Virtualized Header to appear in Safari but poorly aligned
-  // const getVirtualizedHeaderStyle = (): React.CSSProperties => {
-  //   return {
-  //     position: 'absolute',
-  //     top: 0,
-  //     left: 0,
-  //     width: '100%',
-  //     height: '44px',
-  //     zIndex: 3,
-  //     tableLayout: 'fixed',
-  //     backgroundColor: 'white',
-  //   };
-  // };
-  
   const renderVirtualizedTableHeader = () => (
     <thead 
         className={classes} 
         data-virtualized="true"
         id={id}
-        // style={getVirtualizedHeaderStyle()}
     >
       {table.getHeaderGroups().map((headerGroup: HeaderGroup<GenericObject>, index: number) => (
         <tr 
@@ -161,56 +145,9 @@ export const TableHeader = ({
       ))}
     </thead>
   );
-  // Safari workaround - create a Header comprised of divs that appears only when Safari detected as browser
-  const isSafari = typeof navigator !== "undefined" &&
-    /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
-    const renderVirtualizedSafariHeader = () => (
-      <div className="safari-virtualized-header-row-header"
-          role="rowgroup"
-      >
-        <div className="safari-virtualized-header-row"
-            role="row"
-        >
-          {!hasAnySubRows && selectableRows && (
-            <div className={classnames(customCellClassnames, "safari-virtualized-header-cell")}
-                role="columnheader"
-            >
-              <Checkbox
-                  checked={table?.getIsAllRowsSelected()}
-                  indeterminate={table?.getIsSomeRowsSelected()}
-                  onChange={table?.getToggleAllRowsSelectedHandler()}
-              />
-            </div>
-          )}
-          {table.getHeaderGroups()[0].headers.map(header => {
-            const isPinnedLeft = columnPinning.left.includes(header.id);
-            return (
-              <TableHeaderCell
-                  enableSorting={enableSorting}
-                  enableToggleExpansion={enableToggleExpansion}
-                  handleExpandOrCollapse={handleExpandOrCollapse}
-                  header={header}
-                  headerChildren={children}
-                  isPinnedLeft={isPinnedLeft}
-                  isVirtualized
-                  key={`${header.id}-header-virtualized-safari`}
-                  loading={loading}
-                  sortIcon={sortIcon}
-                  table={table}
-              />
-            );
-          })}
-        </div>
-      </div>
-    );
   return (
-    // <>      
-    //   {isVirtualized ? renderVirtualizedTableHeader() : renderRegularTableHeader()}
-    // </>
-    <>
-      {isVirtualized && isSafari ? renderVirtualizedSafariHeader() :
-      isVirtualized ? renderVirtualizedTableHeader() :
-      renderRegularTableHeader()}
+    <>      
+      {isVirtualized ? renderVirtualizedTableHeader() : renderRegularTableHeader()}
     </>
   )
 }
