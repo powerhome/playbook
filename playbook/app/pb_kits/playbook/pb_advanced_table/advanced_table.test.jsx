@@ -574,6 +574,66 @@ test("pinnedRows prop renders pinned rows at top", () => {
   expect(firstPinnedRow).toHaveStyle("background-color: white")
 })
 
+test("columnStyling.headerAlignment aligns header as expected", () => {
+  const styledColumnDefs = [
+    {
+      accessor: "year",
+      label: "Year",
+      cellAccessors: ["quarter", "month", "day"],
+    },
+    {
+      accessor: "newEnrollments",
+      label: "New Enrollments",
+      columnStyling: { headerAlignment: "left" },
+    },
+    {
+      accessor: "scheduledMeetings",
+      label: "Scheduled Meetings",
+    },
+  ];
+
+  render(
+    <AdvancedTable
+        columnDefinitions={styledColumnDefs}
+        data={{ testid: testId }}
+        tableData={MOCK_DATA}
+    />
+  );
+
+  const headerCell = screen.getByText("New Enrollments").closest("th");
+  expect(headerCell).toHaveAttribute("align", "left");
+});
+
+test("columnStyling.cellAlignment sets each <td> align attribute as expected", () => {
+  const styledColumnDefs = [
+    {
+      accessor: "year",
+      label: "Year",
+      cellAccessors: ["quarter", "month", "day"],
+    },
+    {
+      accessor: "newEnrollments",
+      label: "New Enrollments",
+      columnStyling: { cellAlignment: "left" },
+    },
+    {
+      accessor: "scheduledMeetings",
+      label: "Scheduled Meetings",
+    },
+  ];
+
+  render(
+    <AdvancedTable
+        columnDefinitions={styledColumnDefs}
+        data={{ testid: testId }}
+        tableData={MOCK_DATA}
+    />
+  );
+
+  const firstEnrollmentCell = screen.getAllByText("20")[0].closest("td");
+  expect(firstEnrollmentCell).toHaveAttribute("align", "left");
+});
+
 test("rowStyling prop works as expected", () => {
   const rowStyling = [
   {

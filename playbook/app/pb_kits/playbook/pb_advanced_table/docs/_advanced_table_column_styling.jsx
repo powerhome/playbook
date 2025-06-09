@@ -1,4 +1,9 @@
-<% column_definitions = [
+import React from "react"
+import AdvancedTable from '../../pb_advanced_table/_advanced_table'
+import MOCK_DATA from "./advanced_table_mock_data.json"
+
+const AdvancedTableColumnStyling = (props) => {
+  const columnDefinitions = [
     {
       accessor: "year",
       label: "Year",
@@ -7,10 +12,12 @@
     {
       accessor: "newEnrollments",
       label: "New Enrollments",
+      columnStyling:{headerAlignment: "left", cellAlignment: "left"},
     },
     {
       accessor: "scheduledMeetings",
       label: "Scheduled Meetings",
+      columnStyling:{headerAlignment: "center", cellAlignment: "center"},
     },
     {
       accessor: "attendanceRate",
@@ -27,7 +34,18 @@
     {
       accessor: "graduatedStudents",
       label: "Graduated Students",
-    }
-] %>
+    },
+  ]
 
-<%= pb_rails("advanced_table", props: { id: "loading_table", table_data: @table_data, column_definitions: column_definitions, loading: true }) %>
+  return (
+    <div>
+      <AdvancedTable
+          columnDefinitions={columnDefinitions}
+          tableData={MOCK_DATA}
+          {...props}
+      />
+    </div>
+  )
+}
+
+export default AdvancedTableColumnStyling

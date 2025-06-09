@@ -7,7 +7,7 @@
       <% header_row.each_with_index do |cell, cell_index| %>
         <% header_id = cell[:accessor].present? ? cell[:accessor] : "header_#{row_index}_#{cell_index}" %>
         <%= pb_rails("table/table_header", props: { id: header_id, colspan: cell[:colspan], classname: [object.th_classname(is_first_column: cell_index.zero?), ('last-header-cell' if cell[:is_last_in_group] && cell_index != 0)].compact.join(' '), sort_menu: cell[:accessor] ? cell[:sort_menu] : nil }) do %>
-          <%= pb_rails("flex", props: { align: "center", justify: cell_index.zero? ? "start" : row_index === header_rows.size - 1 ? "end" : "center", text_align: "end" }) do %>
+          <%= pb_rails("flex", props: { align: "center", justify: cell_index.zero? ? "start" : row_index === header_rows.size - 1 ? "end" : "center", text_align: (cell[:header_alignment] || "end") }) do %>
             <% if cell_index.zero? && row_index === header_rows.size - 1 %>
               <% if object.selectable_rows && object.enable_toggle_expansion != "none" %>
                 <%= pb_rails("flex/flex_item", props: { padding_right: "xs" }) do %>
