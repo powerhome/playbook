@@ -155,11 +155,6 @@ const TableActionBar: React.FC<TableActionBarProps> = ({
     </Tooltip>
   )
 
-  const getPortalTarget = () => {
-    const el = document.fullscreenElement;
-    return el?.id ? `#${el.id}` : 'body';
-  }
-
   return (
     <Card
         borderNone={!isVisible}
@@ -187,7 +182,6 @@ const TableActionBar: React.FC<TableActionBarProps> = ({
           <PbReactPopover
               closeOnClick="outside"
               placement="bottom-end"
-              portal={getPortalTarget()}
               reference={popoverReference}
               shouldClosePopover={handleShouldClose}
               show={showPopover}
