@@ -39,7 +39,7 @@ const AdvancedTableRowStyling = (props) => {
 const rowStyling = [
   {
     rowId: "1",
-    backgroundColor: colors.warning,
+    backgroundColor: colors.warning_subtle,
   },
   {
     rowId: "8",

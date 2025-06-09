@@ -69,7 +69,7 @@ const TableCellRenderer = ({
                     ? '180px'
                     : `${column.getStart("left")}px`
                   : undefined,
-                  backgroundColor: customRowStyle?.backgroundColor,
+                  backgroundColor: i === 0 && customRowStyle?.backgroundColor,
                   color: customRowStyle?.fontColor,
             }}
           >
