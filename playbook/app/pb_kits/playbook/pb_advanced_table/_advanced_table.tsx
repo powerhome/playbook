@@ -57,6 +57,7 @@ type AdvancedTableProps = {
     onChange?: (value: RowPinningState) => void;
   };
   responsive?: "scroll" | "none",
+  rowStyling?: GenericObject[],
   scrollBarNone?: boolean,
   selectableRows?: boolean,
   showActionsBar?: boolean,
@@ -98,6 +99,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
     paginationProps,
     pinnedRows,
     responsive = "scroll",
+    rowStyling,
     scrollBarNone= false,
     showActionsBar = true,
     selectableRows,
@@ -144,6 +146,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
     onRowSelectionChange,
     columnVisibilityControl,
     pinnedRows,
+    rowStyling
   });
 
   // Initialize table actions
@@ -313,6 +316,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
             onExpandByDepthClick={onExpandByDepthClick}
             pinnedRows={pinnedRows}
             responsive={responsive}
+            rowStyling={rowStyling}
             selectableRows={selectableRows}
             setExpanded={setExpanded}
             showActionsBar={showActionsBar}
