@@ -1,7 +1,7 @@
 import React, {useState} from "react"
 import { render, screen, waitFor } from "../utilities/test-utils"
 
-import { AdvancedTable, Pill } from "playbook-ui"
+import { AdvancedTable, Pill, colors } from "playbook-ui"
 
 global.ResizeObserver = class {
   observe() {}
@@ -572,4 +572,28 @@ test("pinnedRows prop renders pinned rows at top", () => {
   const firstPinnedRow = pinnedRows[0]
   expect(firstPinnedRow).toHaveStyle("position: sticky")
   expect(firstPinnedRow).toHaveStyle("background-color: white")
+})
+
+test("rowStyling prop works as expected", () => {
+  const rowStyling = [
+  {
+    rowId: "1",
+    backgroundColor: colors.white,
+    fontColor: colors.black
+  },
+];
+
+  render(
+    <AdvancedTable
+        columnDefinitions={columnDefinitions}
+        data={{ testid: testId }}
+        rowStyling={rowStyling}
+        tableData={MOCK_DATA_WITH_ID}
+    />
+  )
+
+  const kit = screen.getByTestId(testId)
+  const tableBody = kit.querySelector('tbody')
+  const row1 = tableBody.querySelector('tr:nth-child(1)') 
+  expect(row1).toHaveStyle({backgroundColor: colors.white, fontColor: colors.black})
 })
