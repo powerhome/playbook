@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useRef, useState } from "react";
 import { Row, RowPinningState } from "@tanstack/react-table";
 import { GenericObject } from "../../types";
 import { updateExpandAndCollapseState } from "../Utilities/ExpansionControlHelpers";
@@ -19,13 +19,21 @@ export function useTableActions({
   onRowSelectionChange
 }: UseTableActionsProps) {
 
+  // State to achieve 1 second delay before fetching more rows
+  const [bottomReached, setBottomReached] = useState(false)
+  const bottomTimeout = useRef<NodeJS.Timeout | null>(null)
+
   // Handle expand/collapse
   const handleExpandOrCollapse = useCallback(async (row: Row<GenericObject>) => {
-    onToggleExpansionClick && onToggleExpansionClick(row);
-    const expandedState = expanded;
-    const targetParent = row?.parentId;
-    const updatedRows = await updateExpandAndCollapseState(table.getRowModel(), expandedState, targetParent, undefined);
-    setExpanded(updatedRows);
+    if (onToggleExpansionClick) onToggleExpansionClick(row)
+      const updatedExpandedState = await updateExpandAndCollapseState(
+        table.getRowModel(),
+        expanded,
+        row?.parentId,
+        undefined
+      )
+
+      setExpanded(updatedExpandedState)
   }, [expanded, setExpanded, onToggleExpansionClick, table]);
 
   // Handle pagination
@@ -35,20 +43,32 @@ export function useTableActions({
 
   // Handle scroll detection for infinite scroll/virtualization
   const fetchMoreOnBottomReached = useCallback((
-    containerRefElement: HTMLDivElement | null,
-    fetchNextPage: () => void,
-    isFetching: boolean,
-    totalFetched: number,
-    totalDBRowCount: number
+      containerRef: HTMLDivElement | null,
+      fetchNextPage: () => void,
+      isFetching: boolean,
+      totalFetched: number,
+      totalDBRowCount: number
   ) => {
-    if (containerRefElement) {
-      const { scrollHeight, scrollTop, clientHeight } = containerRefElement;
-      // If user scrolls near bottom, fetch more data
-      if (scrollHeight - scrollTop - clientHeight < 500 && !isFetching && totalFetched < totalDBRowCount) {
-        fetchNextPage();
+    if (!containerRef || isFetching || totalFetched >= totalDBRowCount) return
+    const { scrollTop, scrollHeight, clientHeight } = containerRef
+    const distanceFromBottom = scrollHeight - scrollTop - clientHeight
+    // If user scrolls near bottom, fetch more data after 1 second delay
+    if (distanceFromBottom < 50) {
+      if (!bottomReached) {
+        setBottomReached(true)
+        bottomTimeout.current = setTimeout(() => {
+          fetchNextPage()
+          setBottomReached(false)
+        }, 1000)
+      }
+    } else {
+      setBottomReached(false)
+      if (bottomTimeout.current) {
+        clearTimeout(bottomTimeout.current)
+        bottomTimeout.current = null
       }
     }
-  }, []);
+  },[bottomReached]);
 
   // Update selection state
   useEffect(() => {

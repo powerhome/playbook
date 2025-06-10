@@ -1,0 +1,3 @@
+The `virtualizedRows` boolean prop enables the rendering of a virtualized table using [Tanstack's Virtualizer Library](https://tanstack.com/virtual/v3/docs/api/virtualizer) with infinite scroll capabilities for large data sets.
+
+**Note:** Not all Advanced Table props work perfectly with the Virtualized Table - for complex table configurations with many added features or controls consider using the [Pagination](https://playbook.powerapp.cloud/kits/advanced_table/react#pagination) version instead. Additionally, it is a known issue that due to the use of absolute positioning for the virtualized header, it does not render in Safari.
