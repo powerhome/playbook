@@ -101,7 +101,7 @@
   <%= form.dropdown_field :example_dropdown_validation_multi, props: { label: true, options: example_dropdown_options, multi_select: true, required: true } %>
   <%= form.select :example_select_validation, [ ["Yes", 1], ["No", 2] ], props: { label: true, blank_selection: "Select One...", required: true, validation_message: "Please, select an option." } %>
   <%= form.collection_select :example_collection_select_validation, example_collection, :value, :name, props: { label: true, blank_selection: "Select One...", required: true } %>
-  <%= form.check_box :example_checkbox, props: { text: "Example Checkbox", label: true, required: true } %>
+  <%= form.check_box :example_checkbox_validation, props: { text: "Example Checkbox Validation", label: true, required: true }, checked_value: "1", unchecked_value: "0" %>
   <%= form.date_picker :example_date_picker_2, props: { label: true, required: true, validation_message: "Please, select a date.", allow_input: true } %>
   <%= form.star_rating_field :example_star_rating_validation, props: { variant: "interactive", label: true, required: true } %>
   <%= form.time_zone_select_field :example_time_zone_select, ActiveSupport::TimeZone.us_zones, { default: "Eastern Time (US & Canada)" }, props: { label: true, blank_selection: "Select a Time Zone...", required: true } %>

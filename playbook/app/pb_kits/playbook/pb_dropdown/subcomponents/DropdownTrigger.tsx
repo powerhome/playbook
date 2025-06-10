@@ -44,7 +44,6 @@ const DropdownTrigger = (props: DropdownTriggerProps) => {
 
   const {
     autocomplete,
-    closeOnSelection,
     filterItem,
     handleBackspace,
     handleChange,
@@ -55,7 +54,6 @@ const DropdownTrigger = (props: DropdownTriggerProps) => {
     isInputFocused,
     multiSelect,
     selected,
-    setIsDropDownClosed,
     setIsInputFocused,
     toggleDropdown,
   } = useContext(DropdownContext);
@@ -105,26 +103,11 @@ const DropdownTrigger = (props: DropdownTriggerProps) => {
     ? placeholder
     : "Select...";
 
-  // Click handler that respects closeOnSelection
-  const handleInputClick = (e: React.MouseEvent) => {
-    e.stopPropagation(); // keep the wrapper's handler from firing
-    if (isDropDownClosed) {
-      // Always open if closed
-      setIsDropDownClosed(false);
-    } else if (!closeOnSelection) {
-      // Keep open if closeOnSelection is false
-      return;
-    } else {
-      // Default behavior - toggle
-      toggleDropdown();
-    }
-  };
-
   return (
-    <div {...ariaProps}
-        {...dataProps}
+    <div {...ariaProps} 
+        {...dataProps} 
         {...htmlProps}
-        className={classes}
+        className={classes} 
         id={id}
     >
       {
@@ -162,7 +145,7 @@ const DropdownTrigger = (props: DropdownTriggerProps) => {
                     {customDisplay ? (
                       <Flex align="center">
                         {customDisplay}
-                        <Body dark={dark}
+                        <Body dark={dark} 
                             paddingLeft={`${joinedLabels ? "xs" : "none"}`}
                         >
                           {customDisplayPlaceholder}
@@ -181,7 +164,10 @@ const DropdownTrigger = (props: DropdownTriggerProps) => {
                           <input
                               className="dropdown_input"
                               onChange={handleChange}
-                              onClick={handleInputClick}
+                              onClick={(e) => {
+                                e.stopPropagation();// keep the wrapper’s handler from firing
+                                toggleDropdown();
+                              }}
                               onFocus={() => setIsInputFocused(true)}
                               onKeyDown={(e) => {
                                  handleKeyDown(e);
@@ -200,8 +186,8 @@ const DropdownTrigger = (props: DropdownTriggerProps) => {
                         )}
                         </>
                       ) : (
-                        <Body dark={dark}
-                            text={defaultDisplayPlaceholder}
+                        <Body dark={dark} 
+                            text={defaultDisplayPlaceholder} 
                         />
                       )
                     )}
@@ -209,7 +195,10 @@ const DropdownTrigger = (props: DropdownTriggerProps) => {
                       <input
                           className="dropdown_input"
                           onChange={handleChange}
-                          onClick={handleInputClick}
+                          onClick={(e) => {
+                            e.stopPropagation();// keep the wrapper’s handler from firing
+                            toggleDropdown();
+                          }}
                           onFocus={() => setIsInputFocused(true)}
                           onKeyDown={handleKeyDown}
                           placeholder={
@@ -234,7 +223,7 @@ const DropdownTrigger = (props: DropdownTriggerProps) => {
                         onClick: (e: Event) => {e.stopPropagation();handleWrapperClick()}
                       }}
                       key={`${isDropDownClosed ? "chevron-down" : "chevron-up"}`}
-                  >
+                  > 
                   {
                     selectedArray.length > 0 && (
                       <div onClick={(e)=>{e.stopPropagation();handleBackspace()}}>

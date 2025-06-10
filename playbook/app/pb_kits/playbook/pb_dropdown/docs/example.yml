@@ -44,6 +44,4 @@ examples:
   - dropdown_clear_selection: Clear Selection
   - dropdown_separators_hidden: Separators Hidden
   - dropdown_with_external_control: useDropdown Hook
-  - dropdown_close_on_select: Close On Selection
-
 

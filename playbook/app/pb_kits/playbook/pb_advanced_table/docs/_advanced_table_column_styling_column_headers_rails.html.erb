@@ -13,6 +13,7 @@
           {
             accessor: "newEnrollments",
             label: "New Enrollments",
+            column_styling:{header_alignment:"left", cell_alignment:"left"}
           },
           {
             accessor: "scheduledMeetings",
@@ -31,6 +32,7 @@
           {
             accessor: "completedClasses",
             label: "Completed Classes",
+            column_styling:{header_alignment:"center", cell_alignment:"center"}
           },
           {
             accessor: "classCompletionRate",
@@ -55,4 +57,7 @@
   },
 ] %>
 
-<%= pb_rails("advanced_table", props: { id: "beta_table_with_color_headers", table_data: @table_data, column_definitions: column_definitions, column_group_border_color: "text_lt_default", table_props: { vertical_border: true } }) %>
+<%= pb_rails("advanced_table", props: { id: "column-styling-multi", table_data: @table_data, column_definitions: column_definitions }) do %>
+  <%= pb_rails("advanced_table/table_header", props: { column_definitions: column_definitions }) %>
+  <%= pb_rails("advanced_table/table_body", props: { table_data: @table_data, column_definitions: column_definitions }) %>
+<% end %>

@@ -1,6 +1,6 @@
 {
   "name": "playbook-ui",
-  "version": "14.21.1",
+  "version": "14.21.2",
   "description": "Nitro's Design System",
   "main": "./dist/playbook.js",
   "types": "./dist/types/index.d.ts",
@@ -101,7 +101,7 @@
     "react-dom": "^17.0.2",
     "react-is": "^17.0.2",
     "react-trix": "0.10.1",
-    "trix": "^1.3.2",
+    "trix": "1.3.5",
     "webpacker-react": "^0.3.2"
   },
   "resolutions": {

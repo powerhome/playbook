@@ -25,7 +25,6 @@ type DropdownProps = {
     blankSelection?: string;
     children?: React.ReactChild[] | React.ReactChild | React.ReactElement[];
     className?: string;
-    closeOnSelection?: boolean;
     formPillProps?: GenericObject;
     dark?: boolean;
     data?: { [key: string]: string };
@@ -56,7 +55,6 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
         blankSelection = '',
         children,
         className,
-        closeOnSelection = true,
         dark = false,
         data = {},
         defaultValue = {},
@@ -154,7 +152,7 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
         if (!multiSelect) return optionsWithBlankSelection;
         return optionsWithBlankSelection.filter((option: GenericObject) => !selectedArray.some((sel) => sel.label === option.label));
     }, [optionsWithBlankSelection, selectedArray, multiSelect]);
-
+    
     const filteredOptions = useMemo(() => {
           return availableOptions.filter((opt: GenericObject) =>
             String(opt.label).toLowerCase().includes(filterItem.toLowerCase())
@@ -194,18 +192,12 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
                        return next;
                    });
                    setFilterItem("");
-                   // Only close dropdown if closeOnSelection is true
-                   if (closeOnSelection) {
-                       setIsDropDownClosed(true);
-                   }
+                   setIsDropDownClosed(true);
                } else {
                    setSelected(clickedItem);
                    setFilterItem("");
+                   setIsDropDownClosed(true);
                    onSelect && onSelect(clickedItem);
-                   // Only close dropdown if closeOnSelection is true
-                   if (closeOnSelection) {
-                       setIsDropDownClosed(true);
-                   }
             }
              };
 
@@ -260,7 +252,6 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
             <DropdownContext.Provider
                 value={{
                     autocomplete,
-                    closeOnSelection,
                     dropdownContainerRef,
                     filteredOptions,
                     filterItem,

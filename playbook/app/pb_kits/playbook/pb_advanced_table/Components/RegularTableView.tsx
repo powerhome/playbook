@@ -4,6 +4,7 @@ import { flexRender, Row, Cell } from "@tanstack/react-table"
 
 import { GenericObject } from "../../types"
 import { isChrome } from "../Utilities/BrowserCheck"
+import { findColumnDefByAccessor } from "../Utilities/ColumnStylingHelper"
 
 import LoadingInline from "../../pb_loading_inline/_loading_inline"
 import Checkbox from "../../pb_checkbox/_checkbox"
@@ -25,13 +26,15 @@ const TableCellRenderer = ({
   collapsibleTrail = true,
   loading = false,
   stickyLeftColumn,
-  columnPinning
+  columnPinning,
+  columnDefinitions,
 }: {
   row: Row<GenericObject>
   collapsibleTrail?: boolean
   loading?: boolean | string
   stickyLeftColumn?: string[]
   columnPinning: { left: string[] }
+  columnDefinitions?: {[key:string]:any}[]
 }) => {
   return (
     <>
@@ -49,10 +52,14 @@ const TableCellRenderer = ({
         })();
 
         const { column } = cell;
-        
+
+        // Find the “owning” colDefinition by accessor. Needed for multi column logic
+        const colDef = findColumnDefByAccessor(columnDefinitions ?? [], column.id)
+        const cellAlignment = colDef?.columnStyling?.cellAlignment ?? "right"
+
         return (
           <td
-              align="right"
+              align={cellAlignment}
               className={classnames(
                 `${cell.id}-cell position_relative`,
                 isChrome() ? "chrome-styles" : "",
@@ -117,7 +124,6 @@ export const RegularTableView = ({
 
   const columnPinning = table.getState().columnPinning || { left: [] };
   const columnDefinitions = table.options.meta?.columnDefinitions || [];
-
   // Row pinning
   function PinnedRow({ row }: { row: Row<any> }) {
     return (
@@ -137,6 +143,7 @@ export const RegularTableView = ({
       >
         <TableCellRenderer
             collapsibleTrail={collapsibleTrail}
+            columnDefinitions={columnDefinitions}
             columnPinning={columnPinning}
             loading={loading}
             row={row}
@@ -197,6 +204,7 @@ export const RegularTableView = ({
               )}
               <TableCellRenderer
                   collapsibleTrail={collapsibleTrail}
+                  columnDefinitions={columnDefinitions}
                   columnPinning={columnPinning}
                   loading={loading}
                   row={row}

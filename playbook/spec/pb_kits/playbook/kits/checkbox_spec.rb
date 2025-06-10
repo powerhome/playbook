@@ -17,6 +17,8 @@ RSpec.describe Playbook::PbCheckbox::Checkbox do
   it { is_expected.to define_boolean_prop(:indeterminate_main).with_default(false) }
   it { is_expected.to define_prop(:indeterminate_parent) }
   it { is_expected.to define_hash_prop(:input_options).with_default({}) }
+  it { is_expected.to define_boolean_prop(:hidden_input).with_default(false) }
+  it { is_expected.to define_prop(:hidden_value) }
 
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
@@ -28,6 +30,57 @@ RSpec.describe Playbook::PbCheckbox::Checkbox do
       expect(subject.new(error: true).classname).to eq "pb_checkbox_kit_off error"
       expect(subject.new(dark: true, error: true).classname).to eq "pb_checkbox_kit_off dark error"
       expect(subject.new(disabled: true).disabled).to eq true
+    end
+  end
+
+  describe "#input" do
+    context "when hidden_input is true" do
+      it "includes a hidden input with the correct name and value" do
+        checkbox = subject.new(
+          hidden_input: true,
+          name: "example_name",
+          value: "1",
+          hidden_value: "0"
+        )
+
+        rendered_input = checkbox.input
+
+        expect(rendered_input).to include('type="hidden"')
+        expect(rendered_input).to include('name="example_name"')
+        expect(rendered_input).to include('value="0"')
+      end
+    end
+
+    context "when name is set in input_options" do
+      it "resolves hidden input name from input_options" do
+        checkbox = subject.new(
+          hidden_input: true,
+          input_options: {
+            name: "option_name",
+            value: "option_value",
+          }
+        )
+
+        rendered_input = checkbox.input
+
+        expect(rendered_input).to include('type="hidden"')
+        expect(rendered_input).to include('name="option_name"')
+        expect(rendered_input).to include('value="0"')
+      end
+    end
+
+    context "when hidden_input is false" do
+      it "does not include a hidden input" do
+        checkbox = subject.new(
+          hidden_input: false,
+          name: "no_hidden"
+        )
+
+        rendered_input = checkbox.input
+
+        expect(rendered_input).not_to include('<input type="hidden"')
+        expect(rendered_input).to include('<input type="checkbox" name="no_hidden"')
+      end
     end
   end
 end
