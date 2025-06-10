@@ -4,7 +4,7 @@
       border-right: 1px solid $border_light !important;
     }
 
-    thead tr:last-child th {
+    thead tr:not(:first-child) th {
       border-right: 1px solid $border_light !important;
     }
     
