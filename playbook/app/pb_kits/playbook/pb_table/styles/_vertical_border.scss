@@ -4,6 +4,10 @@
       border-right: 1px solid $border_light !important;
     }
 
+    thead tr:last-child th {
+      border-right: 1px solid $border_light !important;
+    }
+    
     @media screen and (min-width: $screen-xs-min) {
       tr:hover, .pb_table_tr:hover {
         td:last-child, .pb_table_td:last-child {
