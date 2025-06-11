@@ -33,6 +33,7 @@ const HomepageHero = () => {
         justifyContent="center"
     >
       <Flex
+          align="center"
           className="homepage_hero_container"
           marginX="md"
           maxWidth="xl"
