@@ -64,8 +64,8 @@ export default class PbTable extends PbEnhancedElement {
 
     this.stickyLeftColumns.forEach((colId, index) => {
       const isLastColumn = index === this.stickyLeftColumns.length - 1;
-      const header = this.element.querySelector(`th[id="${colId}"]`);
-      const cells = this.element.querySelectorAll(`td[id="${colId}"]`);
+      const header = this.element.querySelector(`th[data-sticky-id="${colId}"]`);
+      const cells = this.element.querySelectorAll(`td[data-sticky-id="${colId}"]`);
 
       if (header) {
         header.classList.add('sticky');
@@ -125,8 +125,8 @@ export default class PbTable extends PbEnhancedElement {
 
     this.stickyRightColumnsReversed.forEach((colId, index) => {
       const isLastColumn = index === this.stickyRightColumns.length - 1;
-      const header = this.element.querySelector(`th[id="${colId}"]`);
-      const cells = this.element.querySelectorAll(`td[id="${colId}"]`);
+      const header = this.element.querySelector(`th[data-sticky-id="${colId}"]`);
+      const cells = this.element.querySelectorAll(`td[data-sticky-id="${colId}"]`);
 
       if (header) {
         header.classList.add('sticky');
