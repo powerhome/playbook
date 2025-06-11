@@ -2102,111 +2102,338 @@
     exec-sh "^0.3.2"
     minimist "^1.2.0"
 
-"@csstools/postcss-cascade-layers@^1.1.1":
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/@csstools/postcss-cascade-layers/-/postcss-cascade-layers-1.1.1.tgz#8a997edf97d34071dd2e37ea6022447dd9e795ad"
-  integrity sha512-+KdYrpKC5TgomQr2DlZF4lDEpHcoxnj5IGddYYfBWJAKfj1JtuHUIqMa+E1pJJ+z3kvDViWMqyqPlG4Ja7amQA==
-  dependencies:
-    "@csstools/selector-specificity" "^2.0.2"
-    postcss-selector-parser "^6.0.10"
+"@csstools/cascade-layer-name-parser@^2.0.5":
+  version "2.0.5"
+  resolved "https://npm.powerapp.cloud/@csstools/cascade-layer-name-parser/-/cascade-layer-name-parser-2.0.5.tgz#43f962bebead0052a9fed1a2deeb11f85efcbc72"
+  integrity sha512-p1ko5eHgV+MgXFVa4STPKpvPxr6ReS8oS2jzTukjR74i5zJNyWO1ZM1m8YKBXnzDKWfBN1ztLYlHxbVemDD88A==
 
-"@csstools/postcss-color-function@^1.1.1":
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/@csstools/postcss-color-function/-/postcss-color-function-1.1.1.tgz#2bd36ab34f82d0497cfacdc9b18d34b5e6f64b6b"
-  integrity sha512-Bc0f62WmHdtRDjf5f3e2STwRAl89N2CLb+9iAwzrv4L2hncrbDwnQD9PCq0gtAt7pOI2leIV08HIBUd4jxD8cw==
-  dependencies:
-    "@csstools/postcss-progressive-custom-properties" "^1.1.0"
-    postcss-value-parser "^4.2.0"
+"@csstools/color-helpers@^5.0.2":
+  version "5.0.2"
+  resolved "https://npm.powerapp.cloud/@csstools/color-helpers/-/color-helpers-5.0.2.tgz#82592c9a7c2b83c293d9161894e2a6471feb97b8"
+  integrity sha512-JqWH1vsgdGcw2RR6VliXXdA0/59LttzlU8UlRT/iUUsEeWfYq8I+K0yhihEUTTHLRm1EXvpsCx3083EU15ecsA==
 
-"@csstools/postcss-font-format-keywords@^1.0.1":
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/@csstools/postcss-font-format-keywords/-/postcss-font-format-keywords-1.0.1.tgz#677b34e9e88ae997a67283311657973150e8b16a"
-  integrity sha512-ZgrlzuUAjXIOc2JueK0X5sZDjCtgimVp/O5CEqTcs5ShWBa6smhWYbS0x5cVc/+rycTDbjjzoP0KTDnUneZGOg==
-  dependencies:
-    postcss-value-parser "^4.2.0"
+"@csstools/css-calc@^2.1.4":
+  version "2.1.4"
+  resolved "https://npm.powerapp.cloud/@csstools/css-calc/-/css-calc-2.1.4.tgz#8473f63e2fcd6e459838dd412401d5948f224c65"
+  integrity sha512-3N8oaj+0juUw/1H3YwmDDJXCgTB1gKU6Hc/bB502u9zR0q2vd786XJH9QfrKIEgFlZmhZiq6epXl4rHqhzsIgQ==
 
-"@csstools/postcss-hwb-function@^1.0.2":
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/@csstools/postcss-hwb-function/-/postcss-hwb-function-1.0.2.tgz#ab54a9fce0ac102c754854769962f2422ae8aa8b"
-  integrity sha512-YHdEru4o3Rsbjmu6vHy4UKOXZD+Rn2zmkAmLRfPet6+Jz4Ojw8cbWxe1n42VaXQhD3CQUXXTooIy8OkVbUcL+w==
+"@csstools/css-color-parser@^3.0.10":
+  version "3.0.10"
+  resolved "https://npm.powerapp.cloud/@csstools/css-color-parser/-/css-color-parser-3.0.10.tgz#79fc68864dd43c3b6782d2b3828bc0fa9d085c10"
+  integrity sha512-TiJ5Ajr6WRd1r8HSiwJvZBiJOqtH86aHpUjq5aEKWHiII2Qfjqd/HCWKPOW8EP4vcspXbHnXrwIDlu5savQipg==
   dependencies:
-    postcss-value-parser "^4.2.0"
+    "@csstools/color-helpers" "^5.0.2"
+    "@csstools/css-calc" "^2.1.4"
 
-"@csstools/postcss-ic-unit@^1.0.1":
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/@csstools/postcss-ic-unit/-/postcss-ic-unit-1.0.1.tgz#28237d812a124d1a16a5acc5c3832b040b303e58"
-  integrity sha512-Ot1rcwRAaRHNKC9tAqoqNZhjdYBzKk1POgWfhN4uCOE47ebGcLRqXjKkApVDpjifL6u2/55ekkpnFcp+s/OZUw==
+"@csstools/css-parser-algorithms@^3.0.5":
+  version "3.0.5"
+  resolved "https://npm.powerapp.cloud/@csstools/css-parser-algorithms/-/css-parser-algorithms-3.0.5.tgz#5755370a9a29abaec5515b43c8b3f2cf9c2e3076"
+  integrity sha512-DaDeUkXZKjdGhgYaHNJTV9pV7Y9B3b644jCLs9Upc3VeNGg6LWARAT6O+Q+/COo+2gg/bM5rhpMAtf70WqfBdQ==
+
+"@csstools/css-tokenizer@^3.0.4":
+  version "3.0.4"
+  resolved "https://npm.powerapp.cloud/@csstools/css-tokenizer/-/css-tokenizer-3.0.4.tgz#333fedabc3fd1a8e5d0100013731cf19e6a8c5d3"
+  integrity sha512-Vd/9EVDiu6PPJt9yAh6roZP6El1xHrdvIVGjyBsHR0RYwNHgL7FJPyIIW4fANJNG6FtyZfvlRPpFI4ZM/lubvw==
+
+"@csstools/media-query-list-parser@^4.0.3":
+  version "4.0.3"
+  resolved "https://npm.powerapp.cloud/@csstools/media-query-list-parser/-/media-query-list-parser-4.0.3.tgz#7aec77bcb89c2da80ef207e73f474ef9e1b3cdf1"
+  integrity sha512-HAYH7d3TLRHDOUQK4mZKf9k9Ph/m8Akstg66ywKR4SFAigjs3yBiUeZtFxywiTm5moZMAp/5W/ZuFnNXXYLuuQ==
+
+"@csstools/postcss-cascade-layers@^5.0.1":
+  version "5.0.1"
+  resolved "https://npm.powerapp.cloud/@csstools/postcss-cascade-layers/-/postcss-cascade-layers-5.0.1.tgz#9640313e64b5e39133de7e38a5aa7f40dc259597"
+  integrity sha512-XOfhI7GShVcKiKwmPAnWSqd2tBR0uxt+runAxttbSp/LY2U16yAVPmAf7e9q4JJ0d+xMNmpwNDLBXnmRCl3HMQ==
   dependencies:
-    "@csstools/postcss-progressive-custom-properties" "^1.1.0"
-    postcss-value-parser "^4.2.0"
+    "@csstools/selector-specificity" "^5.0.0"
+    postcss-selector-parser "^7.0.0"
 
-"@csstools/postcss-is-pseudo-class@^2.0.7":
-  version "2.0.7"
-  resolved "https://registry.yarnpkg.com/@csstools/postcss-is-pseudo-class/-/postcss-is-pseudo-class-2.0.7.tgz#846ae6c0d5a1eaa878fce352c544f9c295509cd1"
-  integrity sha512-7JPeVVZHd+jxYdULl87lvjgvWldYu+Bc62s9vD/ED6/QTGjy0jy0US/f6BG53sVMTBJ1lzKZFpYmofBN9eaRiA==
+"@csstools/postcss-color-function@^4.0.10":
+  version "4.0.10"
+  resolved "https://npm.powerapp.cloud/@csstools/postcss-color-function/-/postcss-color-function-4.0.10.tgz#11ad43a66ef2cc794ab826a07df8b5fa9fb47a3a"
+  integrity sha512-4dY0NBu7NVIpzxZRgh/Q/0GPSz/jLSw0i/u3LTUor0BkQcz/fNhN10mSWBDsL0p9nDb0Ky1PD6/dcGbhACuFTQ==
   dependencies:
-    "@csstools/selector-specificity" "^2.0.0"
-    postcss-selector-parser "^6.0.10"
+    "@csstools/css-color-parser" "^3.0.10"
+    "@csstools/css-parser-algorithms" "^3.0.5"
+    "@csstools/css-tokenizer" "^3.0.4"
+    "@csstools/postcss-progressive-custom-properties" "^4.1.0"
+    "@csstools/utilities" "^2.0.0"
 
-"@csstools/postcss-nested-calc@^1.0.0":
+"@csstools/postcss-color-mix-function@^3.0.10":
+  version "3.0.10"
+  resolved "https://npm.powerapp.cloud/@csstools/postcss-color-mix-function/-/postcss-color-mix-function-3.0.10.tgz#8c9d0ccfae5c45a9870dd84807ea2995c7a3a514"
+  integrity sha512-P0lIbQW9I4ShE7uBgZRib/lMTf9XMjJkFl/d6w4EMNHu2qvQ6zljJGEcBkw/NsBtq/6q3WrmgxSS8kHtPMkK4Q==
+  dependencies:
+    "@csstools/css-color-parser" "^3.0.10"
+    "@csstools/css-parser-algorithms" "^3.0.5"
+    "@csstools/css-tokenizer" "^3.0.4"
+    "@csstools/postcss-progressive-custom-properties" "^4.1.0"
+    "@csstools/utilities" "^2.0.0"
+
+"@csstools/postcss-color-mix-variadic-function-arguments@^1.0.0":
   version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@csstools/postcss-nested-calc/-/postcss-nested-calc-1.0.0.tgz#d7e9d1d0d3d15cf5ac891b16028af2a1044d0c26"
-  integrity sha512-JCsQsw1wjYwv1bJmgjKSoZNvf7R6+wuHDAbi5f/7MbFhl2d/+v+TvBTU4BJH3G1X1H87dHl0mh6TfYogbT/dJQ==
+  resolved "https://npm.powerapp.cloud/@csstools/postcss-color-mix-variadic-function-arguments/-/postcss-color-mix-variadic-function-arguments-1.0.0.tgz#0b29cb9b4630d7ed68549db265662d41554a17ed"
+  integrity sha512-Z5WhouTyD74dPFPrVE7KydgNS9VvnjB8qcdes9ARpCOItb4jTnm7cHp4FhxCRUoyhabD0WVv43wbkJ4p8hLAlQ==
+  dependencies:
+    "@csstools/css-color-parser" "^3.0.10"
+    "@csstools/css-parser-algorithms" "^3.0.5"
+    "@csstools/css-tokenizer" "^3.0.4"
+    "@csstools/postcss-progressive-custom-properties" "^4.1.0"
+    "@csstools/utilities" "^2.0.0"
+
+"@csstools/postcss-content-alt-text@^2.0.6":
+  version "2.0.6"
+  resolved "https://npm.powerapp.cloud/@csstools/postcss-content-alt-text/-/postcss-content-alt-text-2.0.6.tgz#548862226eac54bab0ee5f1bf3a9981393ab204b"
+  integrity sha512-eRjLbOjblXq+byyaedQRSrAejKGNAFued+LcbzT+LCL78fabxHkxYjBbxkroONxHHYu2qxhFK2dBStTLPG3jpQ==
+  dependencies:
+    "@csstools/css-parser-algorithms" "^3.0.5"
+    "@csstools/css-tokenizer" "^3.0.4"
+    "@csstools/postcss-progressive-custom-properties" "^4.1.0"
+    "@csstools/utilities" "^2.0.0"
+
+"@csstools/postcss-exponential-functions@^2.0.9":
+  version "2.0.9"
+  resolved "https://npm.powerapp.cloud/@csstools/postcss-exponential-functions/-/postcss-exponential-functions-2.0.9.tgz#fc03d1272888cb77e64cc1a7d8a33016e4f05c69"
+  integrity sha512-abg2W/PI3HXwS/CZshSa79kNWNZHdJPMBXeZNyPQFbbj8sKO3jXxOt/wF7juJVjyDTc6JrvaUZYFcSBZBhaxjw==
+  dependencies:
+    "@csstools/css-calc" "^2.1.4"
+    "@csstools/css-parser-algorithms" "^3.0.5"
+    "@csstools/css-tokenizer" "^3.0.4"
+
+"@csstools/postcss-font-format-keywords@^4.0.0":
+  version "4.0.0"
+  resolved "https://npm.powerapp.cloud/@csstools/postcss-font-format-keywords/-/postcss-font-format-keywords-4.0.0.tgz#6730836eb0153ff4f3840416cc2322f129c086e6"
+  integrity sha512-usBzw9aCRDvchpok6C+4TXC57btc4bJtmKQWOHQxOVKen1ZfVqBUuCZ/wuqdX5GHsD0NRSr9XTP+5ID1ZZQBXw==
+  dependencies:
+    "@csstools/utilities" "^2.0.0"
+    postcss-value-parser "^4.2.0"
+
+"@csstools/postcss-gamut-mapping@^2.0.10":
+  version "2.0.10"
+  resolved "https://npm.powerapp.cloud/@csstools/postcss-gamut-mapping/-/postcss-gamut-mapping-2.0.10.tgz#f518d941231d721dbecf5b41e3c441885ff2f28b"
+  integrity sha512-QDGqhJlvFnDlaPAfCYPsnwVA6ze+8hhrwevYWlnUeSjkkZfBpcCO42SaUD8jiLlq7niouyLgvup5lh+f1qessg==
+  dependencies:
+    "@csstools/css-color-parser" "^3.0.10"
+    "@csstools/css-parser-algorithms" "^3.0.5"
+    "@csstools/css-tokenizer" "^3.0.4"
+
+"@csstools/postcss-gradients-interpolation-method@^5.0.10":
+  version "5.0.10"
+  resolved "https://npm.powerapp.cloud/@csstools/postcss-gradients-interpolation-method/-/postcss-gradients-interpolation-method-5.0.10.tgz#3146da352c31142a721fdba062ac3a6d11dbbec3"
+  integrity sha512-HHPauB2k7Oits02tKFUeVFEU2ox/H3OQVrP3fSOKDxvloOikSal+3dzlyTZmYsb9FlY9p5EUpBtz0//XBmy+aw==
+  dependencies:
+    "@csstools/css-color-parser" "^3.0.10"
+    "@csstools/css-parser-algorithms" "^3.0.5"
+    "@csstools/css-tokenizer" "^3.0.4"
+    "@csstools/postcss-progressive-custom-properties" "^4.1.0"
+    "@csstools/utilities" "^2.0.0"
+
+"@csstools/postcss-hwb-function@^4.0.10":
+  version "4.0.10"
+  resolved "https://npm.powerapp.cloud/@csstools/postcss-hwb-function/-/postcss-hwb-function-4.0.10.tgz#f93f3c457e6440ac37ef9b908feb5d901b417d50"
+  integrity sha512-nOKKfp14SWcdEQ++S9/4TgRKchooLZL0TUFdun3nI4KPwCjETmhjta1QT4ICQcGVWQTvrsgMM/aLB5We+kMHhQ==
+  dependencies:
+    "@csstools/css-color-parser" "^3.0.10"
+    "@csstools/css-parser-algorithms" "^3.0.5"
+    "@csstools/css-tokenizer" "^3.0.4"
+    "@csstools/postcss-progressive-custom-properties" "^4.1.0"
+    "@csstools/utilities" "^2.0.0"
+
+"@csstools/postcss-ic-unit@^4.0.2":
+  version "4.0.2"
+  resolved "https://npm.powerapp.cloud/@csstools/postcss-ic-unit/-/postcss-ic-unit-4.0.2.tgz#7561e09db65fac8304ceeab9dd3e5c6e43414587"
+  integrity sha512-lrK2jjyZwh7DbxaNnIUjkeDmU8Y6KyzRBk91ZkI5h8nb1ykEfZrtIVArdIjX4DHMIBGpdHrgP0n4qXDr7OHaKA==
+  dependencies:
+    "@csstools/postcss-progressive-custom-properties" "^4.1.0"
+    "@csstools/utilities" "^2.0.0"
+    postcss-value-parser "^4.2.0"
+
+"@csstools/postcss-initial@^2.0.1":
+  version "2.0.1"
+  resolved "https://npm.powerapp.cloud/@csstools/postcss-initial/-/postcss-initial-2.0.1.tgz#c385bd9d8ad31ad159edd7992069e97ceea4d09a"
+  integrity sha512-L1wLVMSAZ4wovznquK0xmC7QSctzO4D0Is590bxpGqhqjboLXYA16dWZpfwImkdOgACdQ9PqXsuRroW6qPlEsg==
+
+"@csstools/postcss-is-pseudo-class@^5.0.3":
+  version "5.0.3"
+  resolved "https://npm.powerapp.cloud/@csstools/postcss-is-pseudo-class/-/postcss-is-pseudo-class-5.0.3.tgz#d34e850bcad4013c2ed7abe948bfa0448aa8eb74"
+  integrity sha512-jS/TY4SpG4gszAtIg7Qnf3AS2pjcUM5SzxpApOrlndMeGhIbaTzWBzzP/IApXoNWEW7OhcjkRT48jnAUIFXhAQ==
+  dependencies:
+    "@csstools/selector-specificity" "^5.0.0"
+    postcss-selector-parser "^7.0.0"
+
+"@csstools/postcss-light-dark-function@^2.0.9":
+  version "2.0.9"
+  resolved "https://npm.powerapp.cloud/@csstools/postcss-light-dark-function/-/postcss-light-dark-function-2.0.9.tgz#9fb080188907539734a9d5311d2a1cb82531ef38"
+  integrity sha512-1tCZH5bla0EAkFAI2r0H33CDnIBeLUaJh1p+hvvsylJ4svsv2wOmJjJn+OXwUZLXef37GYbRIVKX+X+g6m+3CQ==
+  dependencies:
+    "@csstools/css-parser-algorithms" "^3.0.5"
+    "@csstools/css-tokenizer" "^3.0.4"
+    "@csstools/postcss-progressive-custom-properties" "^4.1.0"
+    "@csstools/utilities" "^2.0.0"
+
+"@csstools/postcss-logical-float-and-clear@^3.0.0":
+  version "3.0.0"
+  resolved "https://npm.powerapp.cloud/@csstools/postcss-logical-float-and-clear/-/postcss-logical-float-and-clear-3.0.0.tgz#62617564182cf86ab5d4e7485433ad91e4c58571"
+  integrity sha512-SEmaHMszwakI2rqKRJgE+8rpotFfne1ZS6bZqBoQIicFyV+xT1UF42eORPxJkVJVrH9C0ctUgwMSn3BLOIZldQ==
+
+"@csstools/postcss-logical-overflow@^2.0.0":
+  version "2.0.0"
+  resolved "https://npm.powerapp.cloud/@csstools/postcss-logical-overflow/-/postcss-logical-overflow-2.0.0.tgz#c6de7c5f04e3d4233731a847f6c62819bcbcfa1d"
+  integrity sha512-spzR1MInxPuXKEX2csMamshR4LRaSZ3UXVaRGjeQxl70ySxOhMpP2252RAFsg8QyyBXBzuVOOdx1+bVO5bPIzA==
+
+"@csstools/postcss-logical-overscroll-behavior@^2.0.0":
+  version "2.0.0"
+  resolved "https://npm.powerapp.cloud/@csstools/postcss-logical-overscroll-behavior/-/postcss-logical-overscroll-behavior-2.0.0.tgz#43c03eaecdf34055ef53bfab691db6dc97a53d37"
+  integrity sha512-e/webMjoGOSYfqLunyzByZj5KKe5oyVg/YSbie99VEaSDE2kimFm0q1f6t/6Jo+VVCQ/jbe2Xy+uX+C4xzWs4w==
+
+"@csstools/postcss-logical-resize@^3.0.0":
+  version "3.0.0"
+  resolved "https://npm.powerapp.cloud/@csstools/postcss-logical-resize/-/postcss-logical-resize-3.0.0.tgz#4df0eeb1a61d7bd85395e56a5cce350b5dbfdca6"
+  integrity sha512-DFbHQOFW/+I+MY4Ycd/QN6Dg4Hcbb50elIJCfnwkRTCX05G11SwViI5BbBlg9iHRl4ytB7pmY5ieAFk3ws7yyg==
   dependencies:
     postcss-value-parser "^4.2.0"
 
-"@csstools/postcss-normalize-display-values@^1.0.1":
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/@csstools/postcss-normalize-display-values/-/postcss-normalize-display-values-1.0.1.tgz#15da54a36e867b3ac5163ee12c1d7f82d4d612c3"
-  integrity sha512-jcOanIbv55OFKQ3sYeFD/T0Ti7AMXc9nM1hZWu8m/2722gOTxFg7xYu4RDLJLeZmPUVQlGzo4jhzvTUq3x4ZUw==
+"@csstools/postcss-logical-viewport-units@^3.0.4":
+  version "3.0.4"
+  resolved "https://npm.powerapp.cloud/@csstools/postcss-logical-viewport-units/-/postcss-logical-viewport-units-3.0.4.tgz#016d98a8b7b5f969e58eb8413447eb801add16fc"
+  integrity sha512-q+eHV1haXA4w9xBwZLKjVKAWn3W2CMqmpNpZUk5kRprvSiBEGMgrNH3/sJZ8UA3JgyHaOt3jwT9uFa4wLX4EqQ==
+  dependencies:
+    "@csstools/css-tokenizer" "^3.0.4"
+    "@csstools/utilities" "^2.0.0"
+
+"@csstools/postcss-media-minmax@^2.0.9":
+  version "2.0.9"
+  resolved "https://npm.powerapp.cloud/@csstools/postcss-media-minmax/-/postcss-media-minmax-2.0.9.tgz#184252d5b93155ae526689328af6bdf3fc113987"
+  integrity sha512-af9Qw3uS3JhYLnCbqtZ9crTvvkR+0Se+bBqSr7ykAnl9yKhk6895z9rf+2F4dClIDJWxgn0iZZ1PSdkhrbs2ig==
+  dependencies:
+    "@csstools/css-calc" "^2.1.4"
+    "@csstools/css-parser-algorithms" "^3.0.5"
+    "@csstools/css-tokenizer" "^3.0.4"
+    "@csstools/media-query-list-parser" "^4.0.3"
+
+"@csstools/postcss-media-queries-aspect-ratio-number-values@^3.0.5":
+  version "3.0.5"
+  resolved "https://npm.powerapp.cloud/@csstools/postcss-media-queries-aspect-ratio-number-values/-/postcss-media-queries-aspect-ratio-number-values-3.0.5.tgz#f485c31ec13d6b0fb5c528a3474334a40eff5f11"
+  integrity sha512-zhAe31xaaXOY2Px8IYfoVTB3wglbJUVigGphFLj6exb7cjZRH9A6adyE22XfFK3P2PzwRk0VDeTJmaxpluyrDg==
+  dependencies:
+    "@csstools/css-parser-algorithms" "^3.0.5"
+    "@csstools/css-tokenizer" "^3.0.4"
+    "@csstools/media-query-list-parser" "^4.0.3"
+
+"@csstools/postcss-nested-calc@^4.0.0":
+  version "4.0.0"
+  resolved "https://npm.powerapp.cloud/@csstools/postcss-nested-calc/-/postcss-nested-calc-4.0.0.tgz#754e10edc6958d664c11cde917f44ba144141c62"
+  integrity sha512-jMYDdqrQQxE7k9+KjstC3NbsmC063n1FTPLCgCRS2/qHUbHM0mNy9pIn4QIiQGs9I/Bg98vMqw7mJXBxa0N88A==
+  dependencies:
+    "@csstools/utilities" "^2.0.0"
+    postcss-value-parser "^4.2.0"
+
+"@csstools/postcss-normalize-display-values@^4.0.0":
+  version "4.0.0"
+  resolved "https://npm.powerapp.cloud/@csstools/postcss-normalize-display-values/-/postcss-normalize-display-values-4.0.0.tgz#ecdde2daf4e192e5da0c6fd933b6d8aff32f2a36"
+  integrity sha512-HlEoG0IDRoHXzXnkV4in47dzsxdsjdz6+j7MLjaACABX2NfvjFS6XVAnpaDyGesz9gK2SC7MbNwdCHusObKJ9Q==
   dependencies:
     postcss-value-parser "^4.2.0"
 
-"@csstools/postcss-oklab-function@^1.1.1":
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/@csstools/postcss-oklab-function/-/postcss-oklab-function-1.1.1.tgz#88cee0fbc8d6df27079ebd2fa016ee261eecf844"
-  integrity sha512-nJpJgsdA3dA9y5pgyb/UfEzE7W5Ka7u0CX0/HIMVBNWzWemdcTH3XwANECU6anWv/ao4vVNLTMxhiPNZsTK6iA==
+"@csstools/postcss-oklab-function@^4.0.10":
+  version "4.0.10"
+  resolved "https://npm.powerapp.cloud/@csstools/postcss-oklab-function/-/postcss-oklab-function-4.0.10.tgz#d4c23c51dd0be45e6dedde22432d7d0003710780"
+  integrity sha512-ZzZUTDd0fgNdhv8UUjGCtObPD8LYxMH+MJsW9xlZaWTV8Ppr4PtxlHYNMmF4vVWGl0T6f8tyWAKjoI6vePSgAg==
   dependencies:
-    "@csstools/postcss-progressive-custom-properties" "^1.1.0"
-    postcss-value-parser "^4.2.0"
+    "@csstools/css-color-parser" "^3.0.10"
+    "@csstools/css-parser-algorithms" "^3.0.5"
+    "@csstools/css-tokenizer" "^3.0.4"
+    "@csstools/postcss-progressive-custom-properties" "^4.1.0"
+    "@csstools/utilities" "^2.0.0"
 
-"@csstools/postcss-progressive-custom-properties@^1.1.0", "@csstools/postcss-progressive-custom-properties@^1.3.0":
-  version "1.3.0"
-  resolved "https://registry.yarnpkg.com/@csstools/postcss-progressive-custom-properties/-/postcss-progressive-custom-properties-1.3.0.tgz#542292558384361776b45c85226b9a3a34f276fa"
-  integrity sha512-ASA9W1aIy5ygskZYuWams4BzafD12ULvSypmaLJT2jvQ8G0M3I8PRQhC0h7mG0Z3LI05+agZjqSR9+K9yaQQjA==
-  dependencies:
-    postcss-value-parser "^4.2.0"
-
-"@csstools/postcss-stepped-value-functions@^1.0.1":
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/@csstools/postcss-stepped-value-functions/-/postcss-stepped-value-functions-1.0.1.tgz#f8772c3681cc2befed695e2b0b1d68e22f08c4f4"
-  integrity sha512-dz0LNoo3ijpTOQqEJLY8nyaapl6umbmDcgj4AD0lgVQ572b2eqA1iGZYTTWhrcrHztWDDRAX2DGYyw2VBjvCvQ==
+"@csstools/postcss-progressive-custom-properties@^4.1.0":
+  version "4.1.0"
+  resolved "https://npm.powerapp.cloud/@csstools/postcss-progressive-custom-properties/-/postcss-progressive-custom-properties-4.1.0.tgz#70c8d41b577f4023633b7e3791604e0b7f3775bc"
+  integrity sha512-YrkI9dx8U4R8Sz2EJaoeD9fI7s7kmeEBfmO+UURNeL6lQI7VxF6sBE+rSqdCBn4onwqmxFdBU3lTwyYb/lCmxA==
   dependencies:
     postcss-value-parser "^4.2.0"
 
-"@csstools/postcss-text-decoration-shorthand@^1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@csstools/postcss-text-decoration-shorthand/-/postcss-text-decoration-shorthand-1.0.0.tgz#ea96cfbc87d921eca914d3ad29340d9bcc4c953f"
-  integrity sha512-c1XwKJ2eMIWrzQenN0XbcfzckOLLJiczqy+YvfGmzoVXd7pT9FfObiSEfzs84bpE/VqfpEuAZ9tCRbZkZxxbdw==
+"@csstools/postcss-random-function@^2.0.1":
+  version "2.0.1"
+  resolved "https://npm.powerapp.cloud/@csstools/postcss-random-function/-/postcss-random-function-2.0.1.tgz#3191f32fe72936e361dadf7dbfb55a0209e2691e"
+  integrity sha512-q+FQaNiRBhnoSNo+GzqGOIBKoHQ43lYz0ICrV+UudfWnEF6ksS6DsBIJSISKQT2Bvu3g4k6r7t0zYrk5pDlo8w==
   dependencies:
+    "@csstools/css-calc" "^2.1.4"
+    "@csstools/css-parser-algorithms" "^3.0.5"
+    "@csstools/css-tokenizer" "^3.0.4"
+
+"@csstools/postcss-relative-color-syntax@^3.0.10":
+  version "3.0.10"
+  resolved "https://npm.powerapp.cloud/@csstools/postcss-relative-color-syntax/-/postcss-relative-color-syntax-3.0.10.tgz#daa840583969461e1e06b12e9c591e52a790ec86"
+  integrity sha512-8+0kQbQGg9yYG8hv0dtEpOMLwB9M+P7PhacgIzVzJpixxV4Eq9AUQtQw8adMmAJU1RBBmIlpmtmm3XTRd/T00g==
+  dependencies:
+    "@csstools/css-color-parser" "^3.0.10"
+    "@csstools/css-parser-algorithms" "^3.0.5"
+    "@csstools/css-tokenizer" "^3.0.4"
+    "@csstools/postcss-progressive-custom-properties" "^4.1.0"
+    "@csstools/utilities" "^2.0.0"
+
+"@csstools/postcss-scope-pseudo-class@^4.0.1":
+  version "4.0.1"
+  resolved "https://npm.powerapp.cloud/@csstools/postcss-scope-pseudo-class/-/postcss-scope-pseudo-class-4.0.1.tgz#9fe60e9d6d91d58fb5fc6c768a40f6e47e89a235"
+  integrity sha512-IMi9FwtH6LMNuLea1bjVMQAsUhFxJnyLSgOp/cpv5hrzWmrUYU5fm0EguNDIIOHUqzXode8F/1qkC/tEo/qN8Q==
+  dependencies:
+    postcss-selector-parser "^7.0.0"
+
+"@csstools/postcss-sign-functions@^1.1.4":
+  version "1.1.4"
+  resolved "https://npm.powerapp.cloud/@csstools/postcss-sign-functions/-/postcss-sign-functions-1.1.4.tgz#a9ac56954014ae4c513475b3f1b3e3424a1e0c12"
+  integrity sha512-P97h1XqRPcfcJndFdG95Gv/6ZzxUBBISem0IDqPZ7WMvc/wlO+yU0c5D/OCpZ5TJoTt63Ok3knGk64N+o6L2Pg==
+  dependencies:
+    "@csstools/css-calc" "^2.1.4"
+    "@csstools/css-parser-algorithms" "^3.0.5"
+    "@csstools/css-tokenizer" "^3.0.4"
+
+"@csstools/postcss-stepped-value-functions@^4.0.9":
+  version "4.0.9"
+  resolved "https://npm.powerapp.cloud/@csstools/postcss-stepped-value-functions/-/postcss-stepped-value-functions-4.0.9.tgz#36036f1a0e5e5ee2308e72f3c9cb433567c387b9"
+  integrity sha512-h9btycWrsex4dNLeQfyU3y3w40LMQooJWFMm/SK9lrKguHDcFl4VMkncKKoXi2z5rM9YGWbUQABI8BT2UydIcA==
+  dependencies:
+    "@csstools/css-calc" "^2.1.4"
+    "@csstools/css-parser-algorithms" "^3.0.5"
+    "@csstools/css-tokenizer" "^3.0.4"
+
+"@csstools/postcss-text-decoration-shorthand@^4.0.2":
+  version "4.0.2"
+  resolved "https://npm.powerapp.cloud/@csstools/postcss-text-decoration-shorthand/-/postcss-text-decoration-shorthand-4.0.2.tgz#a3bcf80492e6dda36477538ab8e8943908c9f80a"
+  integrity sha512-8XvCRrFNseBSAGxeaVTaNijAu+FzUvjwFXtcrynmazGb/9WUdsPCpBX+mHEHShVRq47Gy4peYAoxYs8ltUnmzA==
+  dependencies:
+    "@csstools/color-helpers" "^5.0.2"
     postcss-value-parser "^4.2.0"
 
-"@csstools/postcss-trigonometric-functions@^1.0.2":
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/@csstools/postcss-trigonometric-functions/-/postcss-trigonometric-functions-1.0.2.tgz#94d3e4774c36d35dcdc88ce091336cb770d32756"
-  integrity sha512-woKaLO///4bb+zZC2s80l+7cm07M7268MsyG3M0ActXXEFi6SuhvriQYcb58iiKGbjwwIU7n45iRLEHypB47Og==
+"@csstools/postcss-trigonometric-functions@^4.0.9":
+  version "4.0.9"
+  resolved "https://npm.powerapp.cloud/@csstools/postcss-trigonometric-functions/-/postcss-trigonometric-functions-4.0.9.tgz#3f94ed2e319b57f2c59720b64e4d0a8a6fb8c3b2"
+  integrity sha512-Hnh5zJUdpNrJqK9v1/E3BbrQhaDTj5YiX7P61TOvUhoDHnUmsNNxcDAgkQ32RrcWx9GVUvfUNPcUkn8R3vIX6A==
   dependencies:
-    postcss-value-parser "^4.2.0"
+    "@csstools/css-calc" "^2.1.4"
+    "@csstools/css-parser-algorithms" "^3.0.5"
+    "@csstools/css-tokenizer" "^3.0.4"
 
-"@csstools/postcss-unset-value@^1.0.2":
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/@csstools/postcss-unset-value/-/postcss-unset-value-1.0.2.tgz#c99bb70e2cdc7312948d1eb41df2412330b81f77"
-  integrity sha512-c8J4roPBILnelAsdLr4XOAR/GsTm0GJi4XpcfvoWk3U6KiTCqiFYc63KhRMQQX35jYMp4Ao8Ij9+IZRgMfJp1g==
+"@csstools/postcss-unset-value@^4.0.0":
+  version "4.0.0"
+  resolved "https://npm.powerapp.cloud/@csstools/postcss-unset-value/-/postcss-unset-value-4.0.0.tgz#7caa981a34196d06a737754864baf77d64de4bba"
+  integrity sha512-cBz3tOCI5Fw6NIFEwU3RiwK6mn3nKegjpJuzCndoGq3BZPkUjnsq7uQmIeMNeMbMk7YD2MfKcgCpZwX5jyXqCA==
 
-"@csstools/selector-specificity@^2.0.0", "@csstools/selector-specificity@^2.0.2":
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/@csstools/selector-specificity/-/selector-specificity-2.2.0.tgz#2cbcf822bf3764c9658c4d2e568bd0c0cb748016"
-  integrity sha512-+OJ9konv95ClSTOJCmMZqpd5+YGsB2S+x6w3E1oaM8UuR5j8nTNHYSz8c9BEPGDOCMQYIEEGlVPj/VY64iTbGw==
+"@csstools/selector-resolve-nested@^3.1.0":
+  version "3.1.0"
+  resolved "https://npm.powerapp.cloud/@csstools/selector-resolve-nested/-/selector-resolve-nested-3.1.0.tgz#848c6f44cb65e3733e478319b9342b7aa436fac7"
+  integrity sha512-mf1LEW0tJLKfWyvn5KdDrhpxHyuxpbNwTIwOYLIvsTffeyOf85j5oIzfG0yosxDgx/sswlqBnESYUcQH0vgZ0g==
+
+"@csstools/selector-specificity@^5.0.0":
+  version "5.0.0"
+  resolved "https://npm.powerapp.cloud/@csstools/selector-specificity/-/selector-specificity-5.0.0.tgz#037817b574262134cabd68fc4ec1a454f168407b"
+  integrity sha512-PCqQV3c4CoVm3kdPhyeZ07VmBRdH2EpMFA/pd9OASpOEC3aXNGoqPDAZ80D0cLpMBxnmk0+yNhGsEx31hq7Gtw==
+
+"@csstools/utilities@^2.0.0":
+  version "2.0.0"
+  resolved "https://npm.powerapp.cloud/@csstools/utilities/-/utilities-2.0.0.tgz#f7ff0fee38c9ffb5646d47b6906e0bc8868bde60"
+  integrity sha512-5VdOr0Z71u+Yp3ozOx8T11N703wIFGVRgOWbOZMKgglPJsWA54MRIoMNVMa7shUToIhx5J8vX4sOZgD2XiihiQ==
 
 "@emotion/babel-plugin@^11.11.0":
   version "11.11.0"
@@ -4391,16 +4618,16 @@ attr-accept@^2.2.4:
   resolved "https://npm.powerapp.cloud/attr-accept/-/attr-accept-2.2.5.tgz#d7061d958e6d4f97bf8665c68b75851a0713ab5e"
   integrity sha512-0bDNnY/u6pPwHDMoF0FieU354oBi0a8rD9FcsLwzcGWbc8KS8KPIi7y+s13OlVY+gMWc/9xEMUgNE6Qm8ZllYQ==
 
-autoprefixer@^10.4.13:
-  version "10.4.19"
-  resolved "https://registry.yarnpkg.com/autoprefixer/-/autoprefixer-10.4.19.tgz#ad25a856e82ee9d7898c59583c1afeb3fa65f89f"
-  integrity sha512-BaENR2+zBZ8xXhM4pUaKUxlVdxZ0EZhjvbopwnXmxRUfqDmwSpC2lAi/QXvx7NRdPCo1WKEcEF6mV64si1z4Ew==
+autoprefixer@^10.4.21:
+  version "10.4.21"
+  resolved "https://npm.powerapp.cloud/autoprefixer/-/autoprefixer-10.4.21.tgz#77189468e7a8ad1d9a37fbc08efc9f480cf0a95d"
+  integrity sha512-O+A6LWV5LDHSJD3LjHYoNi4VLsj/Whi7k6zG12xTYaU4cQ8oxQGckXNX8cRHK5yOZ/ppVHe0ZBXGzSV9jXdVbQ==
   dependencies:
-    browserslist "^4.23.0"
-    caniuse-lite "^1.0.30001599"
+    browserslist "^4.24.4"
+    caniuse-lite "^1.0.30001702"
     fraction.js "^4.3.7"
     normalize-range "^0.1.2"
-    picocolors "^1.0.0"
+    picocolors "^1.1.1"
     postcss-value-parser "^4.2.0"
 
 available-typed-arrays@^1.0.5:
@@ -4642,45 +4869,15 @@ browser-process-hrtime@^1.0.0:
   resolved "https://npm.powerapp.cloud/browser-process-hrtime/-/browser-process-hrtime-1.0.0.tgz#3c9b4b7d782c8121e56f10106d84c0d0ffc94626"
   integrity sha512-9o5UecI3GhkpM6DrXr69PblIuWxPKk9Y0jHBRhdocZ2y7YECBFCsHm79Pr3OyR2AvjhDkabFJaDJMYRazHgsow==
 
-browserslist@^4.21.4:
-  version "4.21.4"
-  resolved "https://npm.powerapp.cloud/browserslist/-/browserslist-4.21.4.tgz#e7496bbc67b9e39dd0f98565feccdcb0d4ff6987"
-  integrity sha512-CBHJJdDmgjl3daYjN5Cp5kbTf1mUhZoS+beLklHIvkOWscs83YAhLlF3Wsh/lciQYAcbBJgTOD44VtG31ZM4Hw==
+browserslist@^4.21.4, browserslist@^4.22.2, browserslist@^4.23.0, browserslist@^4.23.1, browserslist@^4.24.4, browserslist@^4.25.0:
+  version "4.25.0"
+  resolved "https://npm.powerapp.cloud/browserslist/-/browserslist-4.25.0.tgz#986aa9c6d87916885da2b50d8eb577ac8d133b2c"
+  integrity sha512-PJ8gYKeS5e/whHBh8xrwYK+dAvEj7JXtz6uTucnMRB8OiGTsKccFekoRrjajPBHV8oOY+2tI4uxeceSimKwMFA==
   dependencies:
-    caniuse-lite "^1.0.30001400"
-    electron-to-chromium "^1.4.251"
-    node-releases "^2.0.6"
-    update-browserslist-db "^1.0.9"
-
-browserslist@^4.22.2:
-  version "4.22.3"
-  resolved "https://npm.powerapp.cloud/browserslist/-/browserslist-4.22.3.tgz#299d11b7e947a6b843981392721169e27d60c5a6"
-  integrity sha512-UAp55yfwNv0klWNapjs/ktHoguxuQNGnOzxYmfnXIS+8AsRDZkSDxg7R1AX3GKzn078SBI5dzwzj/Yx0Or0e3A==
-  dependencies:
-    caniuse-lite "^1.0.30001580"
-    electron-to-chromium "^1.4.648"
-    node-releases "^2.0.14"
-    update-browserslist-db "^1.0.13"
-
-browserslist@^4.23.0:
-  version "4.23.1"
-  resolved "https://registry.yarnpkg.com/browserslist/-/browserslist-4.23.1.tgz#ce4af0534b3d37db5c1a4ca98b9080f985041e96"
-  integrity sha512-TUfofFo/KsK/bWZ9TWQ5O26tsWW4Uhmt8IYklbnUa70udB6P2wA7w7o4PY4muaEPBQaAX+CEnmmIA41NVHtPVw==
-  dependencies:
-    caniuse-lite "^1.0.30001629"
-    electron-to-chromium "^1.4.796"
-    node-releases "^2.0.14"
-    update-browserslist-db "^1.0.16"
-
-browserslist@^4.23.1:
-  version "4.23.2"
-  resolved "https://registry.yarnpkg.com/browserslist/-/browserslist-4.23.2.tgz#244fe803641f1c19c28c48c4b6ec9736eb3d32ed"
-  integrity sha512-qkqSyistMYdxAcw+CzbZwlBy8AGmS/eEWs+sEV5TnLRGDOL+C5M2EnH6tlZyg0YoAxGJAFKh61En9BR941GnHA==
-  dependencies:
-    caniuse-lite "^1.0.30001640"
-    electron-to-chromium "^1.4.820"
-    node-releases "^2.0.14"
-    update-browserslist-db "^1.1.0"
+    caniuse-lite "^1.0.30001718"
+    electron-to-chromium "^1.5.160"
+    node-releases "^2.0.19"
+    update-browserslist-db "^1.1.3"
 
 bs-logger@0.x:
   version "0.2.6"
@@ -4789,25 +4986,10 @@ camelcase@^6.0.0:
   resolved "https://npm.powerapp.cloud/camelcase/-/camelcase-6.3.0.tgz#5685b95eb209ac9c0c177467778c9c84df58ba9a"
   integrity sha512-Gmy6FhYlCY7uOElZUSbxo2UCDH8owEk996gkbrpsgGtrJLM3J7jGxl9Ic7Qwwj4ivOE5AWZWRMecDdF7hqGjFA==
 
-caniuse-lite@^1.0.30001400:
-  version "1.0.30001444"
-  resolved "https://npm.powerapp.cloud/caniuse-lite/-/caniuse-lite-1.0.30001444.tgz#c0a530776eb44d933b493de1d05346f2527b30fc"
-  integrity sha512-ecER9xgJQVMqcrxThKptsW0pPxSae8R2RB87LNa+ivW9ppNWRHEplXcDzkCOP4LYWGj8hunXLqaiC41iBATNyg==
-
-caniuse-lite@^1.0.30001580:
-  version "1.0.30001581"
-  resolved "https://npm.powerapp.cloud/caniuse-lite/-/caniuse-lite-1.0.30001581.tgz#0dfd4db9e94edbdca67d57348ebc070dece279f4"
-  integrity sha512-whlTkwhqV2tUmP3oYhtNfaWGYHDdS3JYFQBKXxcUR9qqPWsRhFHhoISO2Xnl/g0xyKzht9mI1LZpiNWfMzHixQ==
-
-caniuse-lite@^1.0.30001599, caniuse-lite@^1.0.30001629:
-  version "1.0.30001638"
-  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001638.tgz#598e1f0c2ac36f37ebc3f5b8887a32ca558e5d56"
-  integrity sha512-5SuJUJ7cZnhPpeLHaH0c/HPAnAHZvS6ElWyHK9GSIbVOQABLzowiI2pjmpvZ1WEbkyz46iFd4UXlOHR5SqgfMQ==
-
-caniuse-lite@^1.0.30001640:
-  version "1.0.30001641"
-  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001641.tgz#3572862cd18befae3f637f2a1101cc033c6782ac"
-  integrity sha512-Phv5thgl67bHYo1TtMY/MurjkHhV4EDaCosezRXgZ8jzA/Ub+wjxAvbGvjoFENStinwi5kCyOYV3mi5tOGykwA==
+caniuse-lite@^1.0.30001702, caniuse-lite@^1.0.30001718:
+  version "1.0.30001722"
+  resolved "https://npm.powerapp.cloud/caniuse-lite/-/caniuse-lite-1.0.30001722.tgz#ec25a2b3085b25b9079b623db83c22a70882ce85"
+  integrity sha512-DCQHBBZtiK6JVkAGw7drvAMK0Q0POD/xZvEmDp6baiMMP6QXXk9HpD6mNYBZWhOPG6LvIDb82ITqtWjhDckHCA==
 
 capture-exit@^2.0.0:
   version "2.0.0"
@@ -5169,24 +5351,26 @@ cross-spawn@^7.0.0, cross-spawn@^7.0.2:
     shebang-command "^2.0.0"
     which "^2.0.1"
 
-css-blank-pseudo@^3.0.3:
-  version "3.0.3"
-  resolved "https://registry.yarnpkg.com/css-blank-pseudo/-/css-blank-pseudo-3.0.3.tgz#36523b01c12a25d812df343a32c322d2a2324561"
-  integrity sha512-VS90XWtsHGqoM0t4KpH053c4ehxZ2E6HtGI7x68YFV0pTo/QmkV/YFA+NnlvK8guxZVNWGQhVNJGC39Q8XF4OQ==
+css-blank-pseudo@^7.0.1:
+  version "7.0.1"
+  resolved "https://npm.powerapp.cloud/css-blank-pseudo/-/css-blank-pseudo-7.0.1.tgz#32020bff20a209a53ad71b8675852b49e8d57e46"
+  integrity sha512-jf+twWGDf6LDoXDUode+nc7ZlrqfaNphrBIBrcmeP3D8yw1uPaix1gCC8LUQUGQ6CycuK2opkbFFWFuq/a94ag==
   dependencies:
-    postcss-selector-parser "^6.0.9"
+    postcss-selector-parser "^7.0.0"
 
-css-has-pseudo@^3.0.4:
-  version "3.0.4"
-  resolved "https://registry.yarnpkg.com/css-has-pseudo/-/css-has-pseudo-3.0.4.tgz#57f6be91ca242d5c9020ee3e51bbb5b89fc7af73"
-  integrity sha512-Vse0xpR1K9MNlp2j5w1pgWIJtm1a8qS0JwS9goFYcImjlHEmywP9VUF05aGBXzGpDJF86QXk4L0ypBmwPhGArw==
+css-has-pseudo@^7.0.2:
+  version "7.0.2"
+  resolved "https://npm.powerapp.cloud/css-has-pseudo/-/css-has-pseudo-7.0.2.tgz#fb42e8de7371f2896961e1f6308f13c2c7019b72"
+  integrity sha512-nzol/h+E0bId46Kn2dQH5VElaknX2Sr0hFuB/1EomdC7j+OISt2ZzK7EHX9DZDY53WbIVAR7FYKSO2XnSf07MQ==
   dependencies:
-    postcss-selector-parser "^6.0.9"
+    "@csstools/selector-specificity" "^5.0.0"
+    postcss-selector-parser "^7.0.0"
+    postcss-value-parser "^4.2.0"
 
-css-prefers-color-scheme@^6.0.3:
-  version "6.0.3"
-  resolved "https://registry.yarnpkg.com/css-prefers-color-scheme/-/css-prefers-color-scheme-6.0.3.tgz#ca8a22e5992c10a5b9d315155e7caee625903349"
-  integrity sha512-4BqMbZksRkJQx2zAjrokiGMd07RqOa2IxIrrN10lyBe9xhn9DEvjUK79J6jkeiv9D9hQFXKb6g1jwU62jziJZA==
+css-prefers-color-scheme@^10.0.0:
+  version "10.0.0"
+  resolved "https://npm.powerapp.cloud/css-prefers-color-scheme/-/css-prefers-color-scheme-10.0.0.tgz#ba001b99b8105b8896ca26fc38309ddb2278bd3c"
+  integrity sha512-VCtXZAWivRglTZditUfB4StnsWr6YVZ2PRtuxQLKTNRdtAf8tpzaVPE9zXIF3VaSc7O70iK/j1+NXxyQCqdPjQ==
 
 css.escape@^1.5.1:
   version "1.5.1"
@@ -5207,10 +5391,10 @@ csscolorparser@~1.0.3:
   resolved "https://npm.powerapp.cloud/csscolorparser/-/csscolorparser-1.0.3.tgz#b34f391eea4da8f3e98231e2ccd8df9c041f171b"
   integrity sha512-umPSgYwZkdFoUrH5hIq5kf0wPSXiro51nPw0j2K/c83KflkPSTBGMz6NJvMB+07VlL0y7VPo6QJcDjcgKTTm3w==
 
-cssdb@^7.1.0:
-  version "7.11.2"
-  resolved "https://registry.yarnpkg.com/cssdb/-/cssdb-7.11.2.tgz#127a2f5b946ee653361a5af5333ea85a39df5ae5"
-  integrity sha512-lhQ32TFkc1X4eTefGfYPvgovRSzIMofHkigfH8nWtyRL4XJLsRhJFreRvEgKzept7x1rjBuy3J/MurXLaFxW/A==
+cssdb@^8.3.0:
+  version "8.3.0"
+  resolved "https://npm.powerapp.cloud/cssdb/-/cssdb-8.3.0.tgz#940becad497b8509ad822a28fb0cfe54c969ccfe"
+  integrity sha512-c7bmItIg38DgGjSwDPZOYF/2o0QU/sSgkWOMyl8votOfgFuyiFKWPesmCGEsrGLxEA9uL540cp8LdaGEjUGsZQ==
 
 cssesc@^3.0.0:
   version "3.0.0"
@@ -5480,25 +5664,10 @@ eastasianwidth@^0.2.0:
   resolved "https://registry.yarnpkg.com/eastasianwidth/-/eastasianwidth-0.2.0.tgz#696ce2ec0aa0e6ea93a397ffcf24aa7840c827cb"
   integrity sha512-I88TYZWc9XiYHRQ4/3c5rjjfgkjhLyW2luGIheGERbNQ6OY7yTybanSpDXZa8y7VUP9YmDcYa+eyq4ca7iLqWA==
 
-electron-to-chromium@^1.4.251:
-  version "1.4.284"
-  resolved "https://npm.powerapp.cloud/electron-to-chromium/-/electron-to-chromium-1.4.284.tgz#61046d1e4cab3a25238f6bf7413795270f125592"
-  integrity sha512-M8WEXFuKXMYMVr45fo8mq0wUrrJHheiKZf6BArTKk9ZBYCKJEOU5H8cdWgDT+qCVZf7Na4lVUaZsA+h6uA9+PA==
-
-electron-to-chromium@^1.4.648:
-  version "1.4.650"
-  resolved "https://npm.powerapp.cloud/electron-to-chromium/-/electron-to-chromium-1.4.650.tgz#b38ef9de16991b9f7b924246770576ab91ab3d64"
-  integrity sha512-sYSQhJCJa4aGA1wYol5cMQgekDBlbVfTRavlGZVr3WZpDdOPcp6a6xUnFfrt8TqZhsBYYbDxJZCjGfHuGupCRQ==
-
-electron-to-chromium@^1.4.796:
-  version "1.4.812"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.812.tgz#21b78709c5a13af5d5c688d135a22dcea7617acf"
-  integrity sha512-7L8fC2Ey/b6SePDFKR2zHAy4mbdp1/38Yk5TsARO66W3hC5KEaeKMMHoxwtuH+jcu2AYLSn9QX04i95t6Fl1Hg==
-
-electron-to-chromium@^1.4.820:
-  version "1.4.825"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.825.tgz#2d9c3d1eb81a67ecea0c06bcf70740b00ba52718"
-  integrity sha512-OCcF+LwdgFGcsYPYC5keEEFC2XT0gBhrYbeGzHCx7i9qRFbzO/AqTmc/C/1xNhJj+JA7rzlN7mpBuStshh96Cg==
+electron-to-chromium@^1.5.160:
+  version "1.5.166"
+  resolved "https://npm.powerapp.cloud/electron-to-chromium/-/electron-to-chromium-1.5.166.tgz#3fff386ed473cc2169dbe2d3ace9592262601114"
+  integrity sha512-QPWqHL0BglzPYyJJ1zSSmwFFL6MFXhbACOCcsCdUMCkzPdS9/OIBVxg516X/Ado2qwAq8k0nJJ7phQPCqiaFAw==
 
 emittery@^0.7.1:
   version "0.7.2"
@@ -5851,10 +6020,10 @@ escalade@^3.1.1:
   resolved "https://npm.powerapp.cloud/escalade/-/escalade-3.1.1.tgz#d8cfdc7000965c5a0174b4a82eaa5c0552742e40"
   integrity sha512-k0er2gUkLf8O0zKJiAhmkTnJlTvINGv7ygDNPbeIsX/TJjGJZHuh9B2UxbsaEkmlEo9MfhrSzmhIlhRlI2GXnw==
 
-escalade@^3.1.2:
-  version "3.1.2"
-  resolved "https://registry.yarnpkg.com/escalade/-/escalade-3.1.2.tgz#54076e9ab29ea5bf3d8f1ed62acffbb88272df27"
-  integrity sha512-ErCHMCae19vR8vQGe50xIsVomy19rg6gFu3+r3jkEO46suLMWBksvVyoGgQV+jOfl84ZSOSlmv6Gxa89PmTGmA==
+escalade@^3.2.0:
+  version "3.2.0"
+  resolved "https://npm.powerapp.cloud/escalade/-/escalade-3.2.0.tgz#011a3f69856ba189dffa7dc8fcce99d2a87903e5"
+  integrity sha512-WUj2qlxaQtO4g6Pq5c29GTcWGDyd8itL8zTlipgECz3JesAiiOKotd8JU6otB3PACgG6xkJUyVhboMS+bje/jA==
 
 escape-string-regexp@^1.0.5:
   version "1.0.5"
@@ -6982,10 +7151,15 @@ ignore@^4.0.3, ignore@^4.0.6:
   resolved "https://npm.powerapp.cloud/ignore/-/ignore-4.0.6.tgz#750e3db5862087b4737ebac8207ffd1ef27b25fc"
   integrity sha512-cyFDKrqc/YdcWFniJhzI42+AzS+gNwmUzOSFcRCQYwySuBBBy/KjuxWLZ/FHEH6Moq1NizMOBWyTcv8O4OZIMg==
 
-ignore@^5.1.1, ignore@^5.1.8:
+ignore@^5.1.1:
   version "5.3.1"
   resolved "https://registry.yarnpkg.com/ignore/-/ignore-5.3.1.tgz#5073e554cd42c5b33b394375f538b8593e34d4ef"
   integrity sha512-5Fytz/IraMjqpwfd34ke28PTVMjZjJG2MPn5t7OE4eUCUNf8BAa7b5WUS9/Qvr6mwOQS7Mk6vdsMno5he+T8Xw==
+
+ignore@^5.1.8:
+  version "5.3.2"
+  resolved "https://npm.powerapp.cloud/ignore/-/ignore-5.3.2.tgz#3cd40e729f3643fd87cb04e50bf0eb722bc596f5"
+  integrity sha512-hsBTNUqQTDwkWtcdYI2i06Y/nUBEsNEDJKjWdigLvegy8kDuJAS8uRlpkkcQpyEXL0Z/pjDy5HBmMjRCJ2gq+g==
 
 ignore@^5.2.0:
   version "5.2.4"
@@ -8712,15 +8886,10 @@ node-notifier@^8.0.0:
     uuid "^8.3.0"
     which "^2.0.2"
 
-node-releases@^2.0.14:
-  version "2.0.14"
-  resolved "https://npm.powerapp.cloud/node-releases/-/node-releases-2.0.14.tgz#2ffb053bceb8b2be8495ece1ab6ce600c4461b0b"
-  integrity sha512-y10wOWt8yZpqXmOgRo77WaHEmhYQYGNA6y421PKsKYWEK8aW+cqAphborZDhqfyKrbZEN92CN1X2KbafY2s7Yw==
-
-node-releases@^2.0.6:
-  version "2.0.8"
-  resolved "https://npm.powerapp.cloud/node-releases/-/node-releases-2.0.8.tgz#0f349cdc8fcfa39a92ac0be9bc48b7706292b9ae"
-  integrity sha512-dFSmB8fFHEH/s81Xi+Y/15DQY6VHW81nXRj86EMSL3lmuTmK1e+aT4wrFCkTbm+gSwkw4KpX+rT/pMM2c1mF+A==
+node-releases@^2.0.19:
+  version "2.0.19"
+  resolved "https://npm.powerapp.cloud/node-releases/-/node-releases-2.0.19.tgz#9e445a52950951ec4d177d843af370b411caf314"
+  integrity sha512-xxOWJsBKtzAq7DY0J+DTzuz58K8e7sJbdgwkbMWQe8UYB6ekmsQ45q0M/tJDsGaZmbC+l7n57UV8Hl5tHxO9uw==
 
 normalize-package-data@^2.5.0:
   version "2.5.0"
@@ -9141,11 +9310,6 @@ picocolors@^1.0.0:
   resolved "https://npm.powerapp.cloud/picocolors/-/picocolors-1.0.0.tgz#cb5bdc74ff3f51892236eaf79d68bc44564ab81c"
   integrity sha512-1fygroTLlHu66zi26VoTDv8yRgm0Fccecssto+MhsZ0D/DGW2sm8E8AjW7NU5VVTRt5GxbeZ5qBuJr+HyLYkjQ==
 
-picocolors@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/picocolors/-/picocolors-1.0.1.tgz#a8ad579b571952f0e5d25892de5445bcfe25aaa1"
-  integrity sha512-anP1Z8qwhkbmu7MFP5iTt+wQKXgwzf7zTyGlcdzabySa9vd0Xt392U0rVmz9poOaBj0uHJKyyo9/upk0HrEQew==
-
 picocolors@^1.1.1:
   version "1.1.1"
   resolved "https://npm.powerapp.cloud/picocolors/-/picocolors-1.1.1.tgz#3d321af3eab939b083c8f929a1d12cda81c26b6b"
@@ -9200,12 +9364,12 @@ posix-character-classes@^0.1.0:
   resolved "https://npm.powerapp.cloud/posix-character-classes/-/posix-character-classes-0.1.1.tgz#01eac0fe3b5af71a2a6c02feabb8c1fef7e00eab"
   integrity sha512-xTgYBc3fuo7Yt7JbiuFxSYGToMoz8fLoE6TC9Wx1P/u+LfeThMOAqmuyECnlBaaJb+u1m9hHiXUEtwW4OzfUJg==
 
-postcss-attribute-case-insensitive@^5.0.2:
-  version "5.0.2"
-  resolved "https://registry.yarnpkg.com/postcss-attribute-case-insensitive/-/postcss-attribute-case-insensitive-5.0.2.tgz#03d761b24afc04c09e757e92ff53716ae8ea2741"
-  integrity sha512-XIidXV8fDr0kKt28vqki84fRK8VW8eTuIa4PChv2MqKuT6C9UjmSKzen6KaWhWEoYvwxFCa7n/tC1SZ3tyq4SQ==
+postcss-attribute-case-insensitive@^7.0.1:
+  version "7.0.1"
+  resolved "https://npm.powerapp.cloud/postcss-attribute-case-insensitive/-/postcss-attribute-case-insensitive-7.0.1.tgz#0c4500e3bcb2141848e89382c05b5a31c23033a3"
+  integrity sha512-Uai+SupNSqzlschRyNx3kbCTWgY/2hcwtHEI/ej2LJWc9JJ77qKgGptd8DHwY1mXtZ7Aoh4z4yxfwMBue9eNgw==
   dependencies:
-    postcss-selector-parser "^6.0.10"
+    postcss-selector-parser "^7.0.0"
 
 postcss-clamp@^4.1.0:
   version "4.1.0"
@@ -9214,68 +9378,78 @@ postcss-clamp@^4.1.0:
   dependencies:
     postcss-value-parser "^4.2.0"
 
-postcss-color-functional-notation@^4.2.4:
-  version "4.2.4"
-  resolved "https://registry.yarnpkg.com/postcss-color-functional-notation/-/postcss-color-functional-notation-4.2.4.tgz#21a909e8d7454d3612d1659e471ce4696f28caec"
-  integrity sha512-2yrTAUZUab9s6CpxkxC4rVgFEVaR6/2Pipvi6qcgvnYiVqZcbDHEoBDhrXzyb7Efh2CCfHQNtcqWcIruDTIUeg==
+postcss-color-functional-notation@^7.0.10:
+  version "7.0.10"
+  resolved "https://npm.powerapp.cloud/postcss-color-functional-notation/-/postcss-color-functional-notation-7.0.10.tgz#f1e9c3e4371889dcdfeabfa8515464fd8338cedc"
+  integrity sha512-k9qX+aXHBiLTRrWoCJuUFI6F1iF6QJQUXNVWJVSbqZgj57jDhBlOvD8gNUGl35tgqDivbGLhZeW3Ongz4feuKA==
   dependencies:
+    "@csstools/css-color-parser" "^3.0.10"
+    "@csstools/css-parser-algorithms" "^3.0.5"
+    "@csstools/css-tokenizer" "^3.0.4"
+    "@csstools/postcss-progressive-custom-properties" "^4.1.0"
+    "@csstools/utilities" "^2.0.0"
+
+postcss-color-hex-alpha@^10.0.0:
+  version "10.0.0"
+  resolved "https://npm.powerapp.cloud/postcss-color-hex-alpha/-/postcss-color-hex-alpha-10.0.0.tgz#5dd3eba1f8facb4ea306cba6e3f7712e876b0c76"
+  integrity sha512-1kervM2cnlgPs2a8Vt/Qbe5cQ++N7rkYo/2rz2BkqJZIHQwaVuJgQH38REHrAi4uM0b1fqxMkWYmese94iMp3w==
+  dependencies:
+    "@csstools/utilities" "^2.0.0"
     postcss-value-parser "^4.2.0"
 
-postcss-color-hex-alpha@^8.0.4:
-  version "8.0.4"
-  resolved "https://registry.yarnpkg.com/postcss-color-hex-alpha/-/postcss-color-hex-alpha-8.0.4.tgz#c66e2980f2fbc1a63f5b079663340ce8b55f25a5"
-  integrity sha512-nLo2DCRC9eE4w2JmuKgVA3fGL3d01kGq752pVALF68qpGLmx2Qrk91QTKkdUqqp45T1K1XV8IhQpcu1hoAQflQ==
+postcss-color-rebeccapurple@^10.0.0:
+  version "10.0.0"
+  resolved "https://npm.powerapp.cloud/postcss-color-rebeccapurple/-/postcss-color-rebeccapurple-10.0.0.tgz#5ada28406ac47e0796dff4056b0a9d5a6ecead98"
+  integrity sha512-JFta737jSP+hdAIEhk1Vs0q0YF5P8fFcj+09pweS8ktuGuZ8pPlykHsk6mPxZ8awDl4TrcxUqJo9l1IhVr/OjQ==
   dependencies:
+    "@csstools/utilities" "^2.0.0"
     postcss-value-parser "^4.2.0"
 
-postcss-color-rebeccapurple@^7.1.1:
-  version "7.1.1"
-  resolved "https://registry.yarnpkg.com/postcss-color-rebeccapurple/-/postcss-color-rebeccapurple-7.1.1.tgz#63fdab91d878ebc4dd4b7c02619a0c3d6a56ced0"
-  integrity sha512-pGxkuVEInwLHgkNxUc4sdg4g3py7zUeCQ9sMfwyHAT+Ezk8a4OaaVZ8lIY5+oNqA/BXXgLyXv0+5wHP68R79hg==
+postcss-custom-media@^11.0.6:
+  version "11.0.6"
+  resolved "https://npm.powerapp.cloud/postcss-custom-media/-/postcss-custom-media-11.0.6.tgz#6b450e5bfa209efb736830066682e6567bd04967"
+  integrity sha512-C4lD4b7mUIw+RZhtY7qUbf4eADmb7Ey8BFA2px9jUbwg7pjTZDl4KY4bvlUV+/vXQvzQRfiGEVJyAbtOsCMInw==
   dependencies:
+    "@csstools/cascade-layer-name-parser" "^2.0.5"
+    "@csstools/css-parser-algorithms" "^3.0.5"
+    "@csstools/css-tokenizer" "^3.0.4"
+    "@csstools/media-query-list-parser" "^4.0.3"
+
+postcss-custom-properties@^14.0.6:
+  version "14.0.6"
+  resolved "https://npm.powerapp.cloud/postcss-custom-properties/-/postcss-custom-properties-14.0.6.tgz#1af73a650bf115ba052cf915287c9982825fc90e"
+  integrity sha512-fTYSp3xuk4BUeVhxCSJdIPhDLpJfNakZKoiTDx7yRGCdlZrSJR7mWKVOBS4sBF+5poPQFMj2YdXx1VHItBGihQ==
+  dependencies:
+    "@csstools/cascade-layer-name-parser" "^2.0.5"
+    "@csstools/css-parser-algorithms" "^3.0.5"
+    "@csstools/css-tokenizer" "^3.0.4"
+    "@csstools/utilities" "^2.0.0"
     postcss-value-parser "^4.2.0"
 
-postcss-custom-media@^8.0.2:
-  version "8.0.2"
-  resolved "https://registry.yarnpkg.com/postcss-custom-media/-/postcss-custom-media-8.0.2.tgz#c8f9637edf45fef761b014c024cee013f80529ea"
-  integrity sha512-7yi25vDAoHAkbhAzX9dHx2yc6ntS4jQvejrNcC+csQJAXjj15e7VcWfMgLqBNAbOvqi5uIa9huOVwdHbf+sKqg==
+postcss-custom-selectors@^8.0.5:
+  version "8.0.5"
+  resolved "https://npm.powerapp.cloud/postcss-custom-selectors/-/postcss-custom-selectors-8.0.5.tgz#9448ed37a12271d7ab6cb364b6f76a46a4a323e8"
+  integrity sha512-9PGmckHQswiB2usSO6XMSswO2yFWVoCAuih1yl9FVcwkscLjRKjwsjM3t+NIWpSU2Jx3eOiK2+t4vVTQaoCHHg==
   dependencies:
-    postcss-value-parser "^4.2.0"
+    "@csstools/cascade-layer-name-parser" "^2.0.5"
+    "@csstools/css-parser-algorithms" "^3.0.5"
+    "@csstools/css-tokenizer" "^3.0.4"
+    postcss-selector-parser "^7.0.0"
 
-postcss-custom-properties@^12.1.10:
-  version "12.1.11"
-  resolved "https://registry.yarnpkg.com/postcss-custom-properties/-/postcss-custom-properties-12.1.11.tgz#d14bb9b3989ac4d40aaa0e110b43be67ac7845cf"
-  integrity sha512-0IDJYhgU8xDv1KY6+VgUwuQkVtmYzRwu+dMjnmdMafXYv86SWqfxkc7qdDvWS38vsjaEtv8e0vGOUQrAiMBLpQ==
+postcss-dir-pseudo-class@^9.0.1:
+  version "9.0.1"
+  resolved "https://npm.powerapp.cloud/postcss-dir-pseudo-class/-/postcss-dir-pseudo-class-9.0.1.tgz#80d9e842c9ae9d29f6bf5fd3cf9972891d6cc0ca"
+  integrity sha512-tRBEK0MHYvcMUrAuYMEOa0zg9APqirBcgzi6P21OhxtJyJADo/SWBwY1CAwEohQ/6HDaa9jCjLRG7K3PVQYHEA==
   dependencies:
-    postcss-value-parser "^4.2.0"
+    postcss-selector-parser "^7.0.0"
 
-postcss-custom-selectors@^6.0.3:
-  version "6.0.3"
-  resolved "https://registry.yarnpkg.com/postcss-custom-selectors/-/postcss-custom-selectors-6.0.3.tgz#1ab4684d65f30fed175520f82d223db0337239d9"
-  integrity sha512-fgVkmyiWDwmD3JbpCmB45SvvlCD6z9CG6Ie6Iere22W5aHea6oWa7EM2bpnv2Fj3I94L3VbtvX9KqwSi5aFzSg==
+postcss-double-position-gradients@^6.0.2:
+  version "6.0.2"
+  resolved "https://npm.powerapp.cloud/postcss-double-position-gradients/-/postcss-double-position-gradients-6.0.2.tgz#185f8eab2db9cf4e34be69b5706c905895bb52ae"
+  integrity sha512-7qTqnL7nfLRyJK/AHSVrrXOuvDDzettC+wGoienURV8v2svNbu6zJC52ruZtHaO6mfcagFmuTGFdzRsJKB3k5Q==
   dependencies:
-    postcss-selector-parser "^6.0.4"
-
-postcss-dir-pseudo-class@^6.0.5:
-  version "6.0.5"
-  resolved "https://registry.yarnpkg.com/postcss-dir-pseudo-class/-/postcss-dir-pseudo-class-6.0.5.tgz#2bf31de5de76added44e0a25ecf60ae9f7c7c26c"
-  integrity sha512-eqn4m70P031PF7ZQIvSgy9RSJ5uI2171O/OO/zcRNYpJbvaeKFUlar1aJ7rmgiQtbm0FSPsRewjpdS0Oew7MPA==
-  dependencies:
-    postcss-selector-parser "^6.0.10"
-
-postcss-double-position-gradients@^3.1.2:
-  version "3.1.2"
-  resolved "https://registry.yarnpkg.com/postcss-double-position-gradients/-/postcss-double-position-gradients-3.1.2.tgz#b96318fdb477be95997e86edd29c6e3557a49b91"
-  integrity sha512-GX+FuE/uBR6eskOK+4vkXgT6pDkexLokPaz/AbJna9s5Kzp/yl488pKPjhy0obB475ovfT1Wv8ho7U/cHNaRgQ==
-  dependencies:
-    "@csstools/postcss-progressive-custom-properties" "^1.1.0"
-    postcss-value-parser "^4.2.0"
-
-postcss-env-function@^4.0.6:
-  version "4.0.6"
-  resolved "https://registry.yarnpkg.com/postcss-env-function/-/postcss-env-function-4.0.6.tgz#7b2d24c812f540ed6eda4c81f6090416722a8e7a"
-  integrity sha512-kpA6FsLra+NqcFnL81TnsU+Z7orGtDTxcOhl6pwXeEq1yFPpRMkCDpHhrz8CFQDr/Wfm0jLiNQ1OsGGPjlqPwA==
-  dependencies:
+    "@csstools/postcss-progressive-custom-properties" "^4.1.0"
+    "@csstools/utilities" "^2.0.0"
     postcss-value-parser "^4.2.0"
 
 postcss-flexbugs-fixes@^5.0.2:
@@ -9283,35 +9457,36 @@ postcss-flexbugs-fixes@^5.0.2:
   resolved "https://registry.yarnpkg.com/postcss-flexbugs-fixes/-/postcss-flexbugs-fixes-5.0.2.tgz#2028e145313074fc9abe276cb7ca14e5401eb49d"
   integrity sha512-18f9voByak7bTktR2QgDveglpn9DTbBWPUzSOe9g0N4WR/2eSt6Vrcbf0hmspvMI6YWGywz6B9f7jzpFNJJgnQ==
 
-postcss-focus-visible@^6.0.4:
-  version "6.0.4"
-  resolved "https://registry.yarnpkg.com/postcss-focus-visible/-/postcss-focus-visible-6.0.4.tgz#50c9ea9afa0ee657fb75635fabad25e18d76bf9e"
-  integrity sha512-QcKuUU/dgNsstIK6HELFRT5Y3lbrMLEOwG+A4s5cA+fx3A3y/JTq3X9LaOj3OC3ALH0XqyrgQIgey/MIZ8Wczw==
+postcss-focus-visible@^10.0.1:
+  version "10.0.1"
+  resolved "https://npm.powerapp.cloud/postcss-focus-visible/-/postcss-focus-visible-10.0.1.tgz#1f7904904368a2d1180b220595d77b6f8a957868"
+  integrity sha512-U58wyjS/I1GZgjRok33aE8juW9qQgQUNwTSdxQGuShHzwuYdcklnvK/+qOWX1Q9kr7ysbraQ6ht6r+udansalA==
   dependencies:
-    postcss-selector-parser "^6.0.9"
+    postcss-selector-parser "^7.0.0"
 
-postcss-focus-within@^5.0.4:
-  version "5.0.4"
-  resolved "https://registry.yarnpkg.com/postcss-focus-within/-/postcss-focus-within-5.0.4.tgz#5b1d2ec603195f3344b716c0b75f61e44e8d2e20"
-  integrity sha512-vvjDN++C0mu8jz4af5d52CB184ogg/sSxAFS+oUJQq2SuCe7T5U2iIsVJtsCp2d6R4j0jr5+q3rPkBVZkXD9fQ==
+postcss-focus-within@^9.0.1:
+  version "9.0.1"
+  resolved "https://npm.powerapp.cloud/postcss-focus-within/-/postcss-focus-within-9.0.1.tgz#ac01ce80d3f2e8b2b3eac4ff84f8e15cd0057bc7"
+  integrity sha512-fzNUyS1yOYa7mOjpci/bR+u+ESvdar6hk8XNK/TRR0fiGTp2QT5N+ducP0n3rfH/m9I7H/EQU6lsa2BrgxkEjw==
   dependencies:
-    postcss-selector-parser "^6.0.9"
+    postcss-selector-parser "^7.0.0"
 
 postcss-font-variant@^5.0.0:
   version "5.0.0"
   resolved "https://registry.yarnpkg.com/postcss-font-variant/-/postcss-font-variant-5.0.0.tgz#efd59b4b7ea8bb06127f2d031bfbb7f24d32fa66"
   integrity sha512-1fmkBaCALD72CK2a9i468mA/+tr9/1cBxRRMXOUaZqO43oWPR5imcyPjXwuv7PXbCid4ndlP5zWhidQVVa3hmA==
 
-postcss-gap-properties@^3.0.5:
-  version "3.0.5"
-  resolved "https://registry.yarnpkg.com/postcss-gap-properties/-/postcss-gap-properties-3.0.5.tgz#f7e3cddcf73ee19e94ccf7cb77773f9560aa2fff"
-  integrity sha512-IuE6gKSdoUNcvkGIqdtjtcMtZIFyXZhmFd5RUlg97iVEvp1BZKV5ngsAjCjrVy+14uhGBQl9tzmi1Qwq4kqVOg==
+postcss-gap-properties@^6.0.0:
+  version "6.0.0"
+  resolved "https://npm.powerapp.cloud/postcss-gap-properties/-/postcss-gap-properties-6.0.0.tgz#d5ff0bdf923c06686499ed2b12e125fe64054fed"
+  integrity sha512-Om0WPjEwiM9Ru+VhfEDPZJAKWUd0mV1HmNXqp2C29z80aQ2uP9UVhLc7e3aYMIor/S5cVhoPgYQ7RtfeZpYTRw==
 
-postcss-image-set-function@^4.0.7:
-  version "4.0.7"
-  resolved "https://registry.yarnpkg.com/postcss-image-set-function/-/postcss-image-set-function-4.0.7.tgz#08353bd756f1cbfb3b6e93182c7829879114481f"
-  integrity sha512-9T2r9rsvYzm5ndsBE8WgtrMlIT7VbtTfE7b3BQnudUqnBcBo7L758oc+o+pdj/dUV0l5wjwSdjeOH2DZtfv8qw==
+postcss-image-set-function@^7.0.0:
+  version "7.0.0"
+  resolved "https://npm.powerapp.cloud/postcss-image-set-function/-/postcss-image-set-function-7.0.0.tgz#538e94e16716be47f9df0573b56bbaca86e1da53"
+  integrity sha512-QL7W7QNlZuzOwBTeXEmbVckNt1FSmhQtbMRvGGqqU4Nf4xk6KUEQhAoWuMzwbSv5jxiRiSZ5Tv7eiDB9U87znA==
   dependencies:
+    "@csstools/utilities" "^2.0.0"
     postcss-value-parser "^4.2.0"
 
 postcss-import@^14.1.0:
@@ -9323,46 +9498,42 @@ postcss-import@^14.1.0:
     read-cache "^1.0.0"
     resolve "^1.1.7"
 
-postcss-initial@^4.0.1:
-  version "4.0.1"
-  resolved "https://registry.yarnpkg.com/postcss-initial/-/postcss-initial-4.0.1.tgz#529f735f72c5724a0fb30527df6fb7ac54d7de42"
-  integrity sha512-0ueD7rPqX8Pn1xJIjay0AZeIuDoF+V+VvMt/uOnn+4ezUKhZM/NokDeP6DwMNyIoYByuN/94IQnt5FEkaN59xQ==
-
-postcss-lab-function@^4.2.1:
-  version "4.2.1"
-  resolved "https://registry.yarnpkg.com/postcss-lab-function/-/postcss-lab-function-4.2.1.tgz#6fe4c015102ff7cd27d1bd5385582f67ebdbdc98"
-  integrity sha512-xuXll4isR03CrQsmxyz92LJB2xX9n+pZJ5jE9JgcnmsCammLyKdlzrBin+25dy6wIjfhJpKBAN80gsTlCgRk2w==
+postcss-lab-function@^7.0.10:
+  version "7.0.10"
+  resolved "https://npm.powerapp.cloud/postcss-lab-function/-/postcss-lab-function-7.0.10.tgz#0537bd7245b935fc133298c8896bcbd160540cae"
+  integrity sha512-tqs6TCEv9tC1Riq6fOzHuHcZyhg4k3gIAMB8GGY/zA1ssGdm6puHMVE7t75aOSoFg7UD2wyrFFhbldiCMyyFTQ==
   dependencies:
-    "@csstools/postcss-progressive-custom-properties" "^1.1.0"
+    "@csstools/css-color-parser" "^3.0.10"
+    "@csstools/css-parser-algorithms" "^3.0.5"
+    "@csstools/css-tokenizer" "^3.0.4"
+    "@csstools/postcss-progressive-custom-properties" "^4.1.0"
+    "@csstools/utilities" "^2.0.0"
+
+postcss-logical@^8.1.0:
+  version "8.1.0"
+  resolved "https://npm.powerapp.cloud/postcss-logical/-/postcss-logical-8.1.0.tgz#4092b16b49e3ecda70c4d8945257da403d167228"
+  integrity sha512-pL1hXFQ2fEXNKiNiAgtfA005T9FBxky5zkX6s4GZM2D8RkVgRqz3f4g1JUoq925zXv495qk8UNldDwh8uGEDoA==
+  dependencies:
     postcss-value-parser "^4.2.0"
 
-postcss-logical@^5.0.4:
-  version "5.0.4"
-  resolved "https://registry.yarnpkg.com/postcss-logical/-/postcss-logical-5.0.4.tgz#ec75b1ee54421acc04d5921576b7d8db6b0e6f73"
-  integrity sha512-RHXxplCeLh9VjinvMrZONq7im4wjWGlRJAqmAVLXyZaXwfDWP73/oq4NdIp+OZwhQUMj0zjqDfM5Fj7qby+B4g==
-
-postcss-media-minmax@^5.0.0:
-  version "5.0.0"
-  resolved "https://registry.yarnpkg.com/postcss-media-minmax/-/postcss-media-minmax-5.0.0.tgz#7140bddec173e2d6d657edbd8554a55794e2a5b5"
-  integrity sha512-yDUvFf9QdFZTuCUg0g0uNSHVlJ5X1lSzDZjPSFaiCWvjgsvu8vEVxtahPrLMinIDEEGnx6cBe6iqdx5YWz08wQ==
-
-postcss-nesting@^10.2.0:
-  version "10.2.0"
-  resolved "https://registry.yarnpkg.com/postcss-nesting/-/postcss-nesting-10.2.0.tgz#0b12ce0db8edfd2d8ae0aaf86427370b898890be"
-  integrity sha512-EwMkYchxiDiKUhlJGzWsD9b2zvq/r2SSubcRrgP+jujMXFzqvANLt16lJANC+5uZ6hjI7lpRmI6O8JIl+8l1KA==
+postcss-nesting@^13.0.2:
+  version "13.0.2"
+  resolved "https://npm.powerapp.cloud/postcss-nesting/-/postcss-nesting-13.0.2.tgz#fde0d4df772b76d03b52eccc84372e8d1ca1402e"
+  integrity sha512-1YCI290TX+VP0U/K/aFxzHzQWHWURL+CtHMSbex1lCdpXD1SoR2sYuxDu5aNI9lPoXpKTCggFZiDJbwylU0LEQ==
   dependencies:
-    "@csstools/selector-specificity" "^2.0.0"
-    postcss-selector-parser "^6.0.10"
+    "@csstools/selector-resolve-nested" "^3.1.0"
+    "@csstools/selector-specificity" "^5.0.0"
+    postcss-selector-parser "^7.0.0"
 
-postcss-opacity-percentage@^1.1.2:
-  version "1.1.3"
-  resolved "https://registry.yarnpkg.com/postcss-opacity-percentage/-/postcss-opacity-percentage-1.1.3.tgz#5b89b35551a556e20c5d23eb5260fbfcf5245da6"
-  integrity sha512-An6Ba4pHBiDtyVpSLymUUERMo2cU7s+Obz6BTrS+gxkbnSBNKSuD0AVUc+CpBMrpVPKKfoVz0WQCX+Tnst0i4A==
+postcss-opacity-percentage@^3.0.0:
+  version "3.0.0"
+  resolved "https://npm.powerapp.cloud/postcss-opacity-percentage/-/postcss-opacity-percentage-3.0.0.tgz#0b0db5ed5db5670e067044b8030b89c216e1eb0a"
+  integrity sha512-K6HGVzyxUxd/VgZdX04DCtdwWJ4NGLG212US4/LA1TLAbHgmAsTWVR86o+gGIbFtnTkfOpb9sCRBx8K7HO66qQ==
 
-postcss-overflow-shorthand@^3.0.4:
-  version "3.0.4"
-  resolved "https://registry.yarnpkg.com/postcss-overflow-shorthand/-/postcss-overflow-shorthand-3.0.4.tgz#7ed6486fec44b76f0eab15aa4866cda5d55d893e"
-  integrity sha512-otYl/ylHK8Y9bcBnPLo3foYFLL6a6Ak+3EQBPOTR7luMYCOsiVTUk1iLvNf6tVPNGXcoL9Hoz37kpfriRIFb4A==
+postcss-overflow-shorthand@^6.0.0:
+  version "6.0.0"
+  resolved "https://npm.powerapp.cloud/postcss-overflow-shorthand/-/postcss-overflow-shorthand-6.0.0.tgz#f5252b4a2ee16c68cd8a9029edb5370c4a9808af"
+  integrity sha512-BdDl/AbVkDjoTofzDQnwDdm/Ym6oS9KgmO7Gr+LHYjNWJ6ExORe4+3pcLQsLA9gIROMkiGVjjwZNoL/mpXHd5Q==
   dependencies:
     postcss-value-parser "^4.2.0"
 
@@ -9371,91 +9542,106 @@ postcss-page-break@^3.0.4:
   resolved "https://registry.yarnpkg.com/postcss-page-break/-/postcss-page-break-3.0.4.tgz#7fbf741c233621622b68d435babfb70dd8c1ee5f"
   integrity sha512-1JGu8oCjVXLa9q9rFTo4MbeeA5FMe00/9C7lN4va606Rdb+HkxXtXsmEDrIraQ11fGz/WvKWa8gMuCKkrXpTsQ==
 
-postcss-place@^7.0.5:
-  version "7.0.5"
-  resolved "https://registry.yarnpkg.com/postcss-place/-/postcss-place-7.0.5.tgz#95dbf85fd9656a3a6e60e832b5809914236986c4"
-  integrity sha512-wR8igaZROA6Z4pv0d+bvVrvGY4GVHihBCBQieXFY3kuSuMyOmEnnfFzHl/tQuqHZkfkIVBEbDvYcFfHmpSet9g==
+postcss-place@^10.0.0:
+  version "10.0.0"
+  resolved "https://npm.powerapp.cloud/postcss-place/-/postcss-place-10.0.0.tgz#ba36ee4786ca401377ced17a39d9050ed772e5a9"
+  integrity sha512-5EBrMzat2pPAxQNWYavwAfoKfYcTADJ8AXGVPcUZ2UkNloUTWzJQExgrzrDkh3EKzmAx1evfTAzF9I8NGcc+qw==
   dependencies:
     postcss-value-parser "^4.2.0"
 
-postcss-preset-env@^7.0.1:
-  version "7.8.3"
-  resolved "https://registry.yarnpkg.com/postcss-preset-env/-/postcss-preset-env-7.8.3.tgz#2a50f5e612c3149cc7af75634e202a5b2ad4f1e2"
-  integrity sha512-T1LgRm5uEVFSEF83vHZJV2z19lHg4yJuZ6gXZZkqVsqv63nlr6zabMH3l4Pc01FQCyfWVrh2GaUeCVy9Po+Aag==
+postcss-preset-env@^10.2.3:
+  version "10.2.3"
+  resolved "https://npm.powerapp.cloud/postcss-preset-env/-/postcss-preset-env-10.2.3.tgz#3a84bde7205b48f1304a656b25841bd3f40fb3cb"
+  integrity sha512-zlQN1yYmA7lFeM1wzQI14z97mKoM8qGng+198w1+h6sCud/XxOjcKtApY9jWr7pXNS3yHDEafPlClSsWnkY8ow==
   dependencies:
-    "@csstools/postcss-cascade-layers" "^1.1.1"
-    "@csstools/postcss-color-function" "^1.1.1"
-    "@csstools/postcss-font-format-keywords" "^1.0.1"
-    "@csstools/postcss-hwb-function" "^1.0.2"
-    "@csstools/postcss-ic-unit" "^1.0.1"
-    "@csstools/postcss-is-pseudo-class" "^2.0.7"
-    "@csstools/postcss-nested-calc" "^1.0.0"
-    "@csstools/postcss-normalize-display-values" "^1.0.1"
-    "@csstools/postcss-oklab-function" "^1.1.1"
-    "@csstools/postcss-progressive-custom-properties" "^1.3.0"
-    "@csstools/postcss-stepped-value-functions" "^1.0.1"
-    "@csstools/postcss-text-decoration-shorthand" "^1.0.0"
-    "@csstools/postcss-trigonometric-functions" "^1.0.2"
-    "@csstools/postcss-unset-value" "^1.0.2"
-    autoprefixer "^10.4.13"
-    browserslist "^4.21.4"
-    css-blank-pseudo "^3.0.3"
-    css-has-pseudo "^3.0.4"
-    css-prefers-color-scheme "^6.0.3"
-    cssdb "^7.1.0"
-    postcss-attribute-case-insensitive "^5.0.2"
+    "@csstools/postcss-cascade-layers" "^5.0.1"
+    "@csstools/postcss-color-function" "^4.0.10"
+    "@csstools/postcss-color-mix-function" "^3.0.10"
+    "@csstools/postcss-color-mix-variadic-function-arguments" "^1.0.0"
+    "@csstools/postcss-content-alt-text" "^2.0.6"
+    "@csstools/postcss-exponential-functions" "^2.0.9"
+    "@csstools/postcss-font-format-keywords" "^4.0.0"
+    "@csstools/postcss-gamut-mapping" "^2.0.10"
+    "@csstools/postcss-gradients-interpolation-method" "^5.0.10"
+    "@csstools/postcss-hwb-function" "^4.0.10"
+    "@csstools/postcss-ic-unit" "^4.0.2"
+    "@csstools/postcss-initial" "^2.0.1"
+    "@csstools/postcss-is-pseudo-class" "^5.0.3"
+    "@csstools/postcss-light-dark-function" "^2.0.9"
+    "@csstools/postcss-logical-float-and-clear" "^3.0.0"
+    "@csstools/postcss-logical-overflow" "^2.0.0"
+    "@csstools/postcss-logical-overscroll-behavior" "^2.0.0"
+    "@csstools/postcss-logical-resize" "^3.0.0"
+    "@csstools/postcss-logical-viewport-units" "^3.0.4"
+    "@csstools/postcss-media-minmax" "^2.0.9"
+    "@csstools/postcss-media-queries-aspect-ratio-number-values" "^3.0.5"
+    "@csstools/postcss-nested-calc" "^4.0.0"
+    "@csstools/postcss-normalize-display-values" "^4.0.0"
+    "@csstools/postcss-oklab-function" "^4.0.10"
+    "@csstools/postcss-progressive-custom-properties" "^4.1.0"
+    "@csstools/postcss-random-function" "^2.0.1"
+    "@csstools/postcss-relative-color-syntax" "^3.0.10"
+    "@csstools/postcss-scope-pseudo-class" "^4.0.1"
+    "@csstools/postcss-sign-functions" "^1.1.4"
+    "@csstools/postcss-stepped-value-functions" "^4.0.9"
+    "@csstools/postcss-text-decoration-shorthand" "^4.0.2"
+    "@csstools/postcss-trigonometric-functions" "^4.0.9"
+    "@csstools/postcss-unset-value" "^4.0.0"
+    autoprefixer "^10.4.21"
+    browserslist "^4.25.0"
+    css-blank-pseudo "^7.0.1"
+    css-has-pseudo "^7.0.2"
+    css-prefers-color-scheme "^10.0.0"
+    cssdb "^8.3.0"
+    postcss-attribute-case-insensitive "^7.0.1"
     postcss-clamp "^4.1.0"
-    postcss-color-functional-notation "^4.2.4"
-    postcss-color-hex-alpha "^8.0.4"
-    postcss-color-rebeccapurple "^7.1.1"
-    postcss-custom-media "^8.0.2"
-    postcss-custom-properties "^12.1.10"
-    postcss-custom-selectors "^6.0.3"
-    postcss-dir-pseudo-class "^6.0.5"
-    postcss-double-position-gradients "^3.1.2"
-    postcss-env-function "^4.0.6"
-    postcss-focus-visible "^6.0.4"
-    postcss-focus-within "^5.0.4"
+    postcss-color-functional-notation "^7.0.10"
+    postcss-color-hex-alpha "^10.0.0"
+    postcss-color-rebeccapurple "^10.0.0"
+    postcss-custom-media "^11.0.6"
+    postcss-custom-properties "^14.0.6"
+    postcss-custom-selectors "^8.0.5"
+    postcss-dir-pseudo-class "^9.0.1"
+    postcss-double-position-gradients "^6.0.2"
+    postcss-focus-visible "^10.0.1"
+    postcss-focus-within "^9.0.1"
     postcss-font-variant "^5.0.0"
-    postcss-gap-properties "^3.0.5"
-    postcss-image-set-function "^4.0.7"
-    postcss-initial "^4.0.1"
-    postcss-lab-function "^4.2.1"
-    postcss-logical "^5.0.4"
-    postcss-media-minmax "^5.0.0"
-    postcss-nesting "^10.2.0"
-    postcss-opacity-percentage "^1.1.2"
-    postcss-overflow-shorthand "^3.0.4"
+    postcss-gap-properties "^6.0.0"
+    postcss-image-set-function "^7.0.0"
+    postcss-lab-function "^7.0.10"
+    postcss-logical "^8.1.0"
+    postcss-nesting "^13.0.2"
+    postcss-opacity-percentage "^3.0.0"
+    postcss-overflow-shorthand "^6.0.0"
     postcss-page-break "^3.0.4"
-    postcss-place "^7.0.5"
-    postcss-pseudo-class-any-link "^7.1.6"
+    postcss-place "^10.0.0"
+    postcss-pseudo-class-any-link "^10.0.1"
     postcss-replace-overflow-wrap "^4.0.0"
-    postcss-selector-not "^6.0.1"
-    postcss-value-parser "^4.2.0"
+    postcss-selector-not "^8.0.1"
 
-postcss-pseudo-class-any-link@^7.1.6:
-  version "7.1.6"
-  resolved "https://registry.yarnpkg.com/postcss-pseudo-class-any-link/-/postcss-pseudo-class-any-link-7.1.6.tgz#2693b221902da772c278def85a4d9a64b6e617ab"
-  integrity sha512-9sCtZkO6f/5ML9WcTLcIyV1yz9D1rf0tWc+ulKcvV30s0iZKS/ONyETvoWsr6vnrmW+X+KmuK3gV/w5EWnT37w==
+postcss-pseudo-class-any-link@^10.0.1:
+  version "10.0.1"
+  resolved "https://npm.powerapp.cloud/postcss-pseudo-class-any-link/-/postcss-pseudo-class-any-link-10.0.1.tgz#06455431171bf44b84d79ebaeee9fd1c05946544"
+  integrity sha512-3el9rXlBOqTFaMFkWDOkHUTQekFIYnaQY55Rsp8As8QQkpiSgIYEcF/6Ond93oHiDsGb4kad8zjt+NPlOC1H0Q==
   dependencies:
-    postcss-selector-parser "^6.0.10"
+    postcss-selector-parser "^7.0.0"
 
 postcss-replace-overflow-wrap@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/postcss-replace-overflow-wrap/-/postcss-replace-overflow-wrap-4.0.0.tgz#d2df6bed10b477bf9c52fab28c568b4b29ca4319"
   integrity sha512-KmF7SBPphT4gPPcKZc7aDkweHiKEEO8cla/GjcBK+ckKxiZslIu3C4GCRW3DNfL0o7yW7kMQu9xlZ1kXRXLXtw==
 
-postcss-selector-not@^6.0.1:
-  version "6.0.1"
-  resolved "https://registry.yarnpkg.com/postcss-selector-not/-/postcss-selector-not-6.0.1.tgz#8f0a709bf7d4b45222793fc34409be407537556d"
-  integrity sha512-1i9affjAe9xu/y9uqWH+tD4r6/hDaXJruk8xn2x1vzxC2U3J3LKO3zJW4CyxlNhA56pADJ/djpEwpH1RClI2rQ==
+postcss-selector-not@^8.0.1:
+  version "8.0.1"
+  resolved "https://npm.powerapp.cloud/postcss-selector-not/-/postcss-selector-not-8.0.1.tgz#f2df9c6ac9f95e9fe4416ca41a957eda16130172"
+  integrity sha512-kmVy/5PYVb2UOhy0+LqUYAhKj7DUGDpSWa5LZqlkWJaaAV+dxxsOG3+St0yNLu6vsKD7Dmqx+nWQt0iil89+WA==
   dependencies:
-    postcss-selector-parser "^6.0.10"
+    postcss-selector-parser "^7.0.0"
 
-postcss-selector-parser@^6.0.10, postcss-selector-parser@^6.0.4, postcss-selector-parser@^6.0.9:
-  version "6.1.0"
-  resolved "https://registry.yarnpkg.com/postcss-selector-parser/-/postcss-selector-parser-6.1.0.tgz#49694cb4e7c649299fea510a29fa6577104bcf53"
-  integrity sha512-UMz42UD0UY0EApS0ZL9o1XnLhSTtvvvLe5Dc2H2O56fvRZi+KulDyf5ctDhhtYJBGKStV2FL1fy6253cmLgqVQ==
+postcss-selector-parser@^7.0.0:
+  version "7.1.0"
+  resolved "https://npm.powerapp.cloud/postcss-selector-parser/-/postcss-selector-parser-7.1.0.tgz#4d6af97eba65d73bc4d84bcb343e865d7dd16262"
+  integrity sha512-8sLjZwK0R+JlxlYcTuVnyT2v+htpdrjDOKuMcOVdYjt52Lh8hWRYpxBPoKx/Zg+bcjc3wx6fmQevMmUztS/ccA==
   dependencies:
     cssesc "^3.0.0"
     util-deprecate "^1.0.2"
@@ -11473,37 +11659,13 @@ unset-value@^1.0.0:
     has-value "^0.3.1"
     isobject "^3.0.0"
 
-update-browserslist-db@^1.0.13:
-  version "1.0.13"
-  resolved "https://npm.powerapp.cloud/update-browserslist-db/-/update-browserslist-db-1.0.13.tgz#3c5e4f5c083661bd38ef64b6328c26ed6c8248c4"
-  integrity sha512-xebP81SNcPuNpPP3uzeW1NYXxI3rxyJzF3pD6sH4jE7o/IX+WtSpwnVU+qIsDPyk0d3hmFQ7mjqc6AtV604hbg==
+update-browserslist-db@^1.1.3:
+  version "1.1.3"
+  resolved "https://npm.powerapp.cloud/update-browserslist-db/-/update-browserslist-db-1.1.3.tgz#348377dd245216f9e7060ff50b15a1b740b75420"
+  integrity sha512-UxhIZQ+QInVdunkDAaiazvvT/+fXL5Osr0JZlJulepYu6Jd7qJtDZjlur0emRlT71EN3ScPoE7gvsuIKKNavKw==
   dependencies:
-    escalade "^3.1.1"
-    picocolors "^1.0.0"
-
-update-browserslist-db@^1.0.16:
-  version "1.0.16"
-  resolved "https://registry.yarnpkg.com/update-browserslist-db/-/update-browserslist-db-1.0.16.tgz#f6d489ed90fb2f07d67784eb3f53d7891f736356"
-  integrity sha512-KVbTxlBYlckhF5wgfyZXTWnMn7MMZjMu9XG8bPlliUOP9ThaF4QnhP8qrjrH7DRzHfSk0oQv1wToW+iA5GajEQ==
-  dependencies:
-    escalade "^3.1.2"
-    picocolors "^1.0.1"
-
-update-browserslist-db@^1.0.9:
-  version "1.0.10"
-  resolved "https://npm.powerapp.cloud/update-browserslist-db/-/update-browserslist-db-1.0.10.tgz#0f54b876545726f17d00cd9a2561e6dade943ff3"
-  integrity sha512-OztqDenkfFkbSG+tRxBeAnCVPckDBcvibKd35yDONx6OU8N7sqgwc7rCbkJ/WcYtVRZ4ba68d6byhC21GFh7sQ==
-  dependencies:
-    escalade "^3.1.1"
-    picocolors "^1.0.0"
-
-update-browserslist-db@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/update-browserslist-db/-/update-browserslist-db-1.1.0.tgz#7ca61c0d8650766090728046e416a8cde682859e"
-  integrity sha512-EdRAaAyk2cUE1wOf2DkEhzxqOQvFOoRJFNS6NeyJ01Gp2beMRpBAINjM2iDXE3KCuKhwnvHIQCJm6ThL2Z+HzQ==
-  dependencies:
-    escalade "^3.1.2"
-    picocolors "^1.0.1"
+    escalade "^3.2.0"
+    picocolors "^1.1.1"
 
 uri-js@^4.2.2:
   version "4.4.1"
