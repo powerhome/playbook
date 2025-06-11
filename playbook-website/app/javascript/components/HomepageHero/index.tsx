@@ -33,13 +33,13 @@ const HomepageHero = () => {
         justifyContent="center"
     >
       <Flex
-          align="center"
           className="homepage_hero_container"
           marginX="md"
           maxWidth="xl"
           orientation="column"
           paddingTop="xl"
           position="relative"
+          width="xl"
       >
         {isMax ? (
           <MaxScreen />
