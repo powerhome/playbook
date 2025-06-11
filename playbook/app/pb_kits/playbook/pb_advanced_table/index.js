@@ -9,9 +9,33 @@ export default class PbAdvancedTable extends PbEnhancedElement {
     return ADVANCED_TABLE_SELECTOR;
   }
 
+  static expandedRows = new Set();
+  static selectedRows = new Set();
+  static isCollapsing = false;
+
+  constructor(...args) {
+    super(...args);
+    // Map parent row ID to array of its child rows
+    this.childRowsMap = new Map();
+  }
+
+   // Fetch and cache child rows for a given parent row ID
+  childRowsFor(parentId) {
+    if (!this.childRowsMap.has(parentId)) {
+      const table = this.element.closest("table");
+      const rows = Array.from(
+        table.querySelectorAll(`tr[data-row-parent="${parentId}"]`)
+      );
+      this.childRowsMap.set(parentId, rows);
+    }
+    return this.childRowsMap.get(parentId);
+  }
+
   updateTableSelectedRowsAttribute() {
     const mainTable = this.element.closest(".pb_advanced_table");
-    mainTable.dataset.selectedRows = JSON.stringify(Array.from(PbAdvancedTable.selectedRows));
+    mainTable.dataset.selectedRows = JSON.stringify(
+      Array.from(PbAdvancedTable.selectedRows)
+    );
   }
 
   // Check if the row is expanded or collapsed
@@ -104,7 +128,7 @@ export default class PbAdvancedTable extends PbEnhancedElement {
     } else {
       PbAdvancedTable.selectedRows.delete(rowId);
     }
-     // Update background color on row
+    // Update background color on row
     if (!isChecked) {
       rowEl.classList.remove("bg-row-selection");
 
@@ -179,31 +203,34 @@ export default class PbAdvancedTable extends PbEnhancedElement {
   }
 
   get target() {
-    const table = this.element.closest("table");
-    return table.querySelectorAll(`[data-row-parent="${this.element.id}"]`);
+    return this.childRowsFor(this.element.id) || [];
   }
 
-  static expandedRows = new Set();
-  static selectedRows = new Set();
-  static isCollapsing = false;
-
   connect() {
-    const table = this.element.closest('table');
-    
-    // Hide the close (up) icon initially
+    const table = this.element.closest("table");
+
     this.hideCloseIcon();
+
+    // Precompute parent→child rows mapping once
+    table.querySelectorAll("tr[data-row-parent]").forEach((row) => {
+      const parentId = row.dataset.rowParent;
+      if (!this.childRowsMap.has(parentId)) {
+        this.childRowsMap.set(parentId, []);
+      }
+      this.childRowsMap.get(parentId).push(row);
+    });
 
     // Prevent duplicate initialization
     if (table.dataset.pbAdvancedTableInitialized) return;
-    table.dataset.pbAdvancedTableInitialized = 'true';
+    table.dataset.pbAdvancedTableInitialized = "true";
 
     // Delegate checkbox changes
-    table.addEventListener('change', (event) => {
+    table.addEventListener("change", (event) => {
       const checkbox = event.target.closest('input[type="checkbox"]');
       if (!checkbox) return;
 
       // Header "select-all" logic
-      if (checkbox.closest('#select-all-rows')) {
+      if (checkbox.closest("#select-all-rows")) {
         const checkAll = checkbox.checked;
         const rowCheckboxes = table.querySelectorAll(
           'label[data-row-id] input[type="checkbox"]'
@@ -219,7 +246,7 @@ export default class PbAdvancedTable extends PbEnhancedElement {
       }
 
       // Individual row checkbox logic
-      const rowLabel = checkbox.closest('label[data-row-id]');
+      const rowLabel = checkbox.closest("label[data-row-id]");
       if (rowLabel) {
         this.handleCheckboxClick({ currentTarget: checkbox });
         this.updateTableSelectedRowsAttribute();
@@ -236,10 +263,9 @@ export default class PbAdvancedTable extends PbEnhancedElement {
       }
     });
 
-
     // Delegate expand/collapse toggles
-    table.addEventListener('click', (event) => {
-      const toggleBtn = event.target.closest('[data-advanced-table]');
+    table.addEventListener("click", (event) => {
+      const toggleBtn = event.target.closest("[data-advanced-table]");
       if (!toggleBtn || PbAdvancedTable.isCollapsing) return;
 
       // Temporarily bind `this.element` to the clicked toggle
@@ -249,7 +275,7 @@ export default class PbAdvancedTable extends PbEnhancedElement {
       // Update expandedRows set
       const isExpanded =
         toggleBtn.querySelector(UP_ARROW_SELECTOR).style.display ===
-        'inline-block';
+        "inline-block";
       if (!isExpanded) {
         PbAdvancedTable.expandedRows.add(toggleBtn.id);
       } else {
@@ -258,9 +284,7 @@ export default class PbAdvancedTable extends PbEnhancedElement {
 
       // Find direct child rows
       const childRows = Array.from(
-        table.querySelectorAll(
-          `[data-row-parent="${toggleBtn.id}"]`
-        )
+        table.querySelectorAll(`[data-row-parent="${toggleBtn.id}"]`)
       );
       this.toggleElement(childRows);
 
@@ -272,23 +296,24 @@ export default class PbAdvancedTable extends PbEnhancedElement {
   }
 
   addBorderRadiusOnLastVisibleRow() {
-    const parentElement = this.element.closest('.pb_advanced_table');
-    
+    const parentElement = this.element.closest(".pb_advanced_table");
+
     const table = document.getElementById(parentElement.id);
 
     if (table) {
-      const visibleRows = table.querySelectorAll('tr.is-visible, tr:not(.toggle-content)');
-  
-      visibleRows.forEach(row => row.classList.remove('last-visible-row'));
-  
+      const visibleRows = table.querySelectorAll(
+        "tr.is-visible, tr:not(.toggle-content)"
+      );
+
+      visibleRows.forEach((row) => row.classList.remove("last-visible-row"));
+
       const lastVisibleRow = visibleRows[visibleRows.length - 1];
 
       if (lastVisibleRow) {
-        lastVisibleRow.classList.add('last-visible-row');
+        lastVisibleRow.classList.add("last-visible-row");
       }
     }
   }
-
 
   hideCloseIcon() {
     const closeIcon = this.element.querySelector(UP_ARROW_SELECTOR);
@@ -480,12 +505,12 @@ class PbAdvancedTableActionBar {
 
   init() {
     // Initialize action bars for all advanced tables with action bars
-    document.addEventListener('DOMContentLoaded', () => {
+    document.addEventListener("DOMContentLoaded", () => {
       this.setupActionBars();
     });
 
     // Also run immediately in case DOM is already loaded
-    if (document.readyState === 'loading') {
+    if (document.readyState === "loading") {
       // DOM is still loading
     } else {
       // DOM is already loaded
@@ -494,13 +519,13 @@ class PbAdvancedTableActionBar {
   }
 
   setupActionBars() {
-    const advancedTables = document.querySelectorAll('.pb_advanced_table');
+    const advancedTables = document.querySelectorAll(".pb_advanced_table");
 
-    advancedTables.forEach(table => {
+    advancedTables.forEach((table) => {
       // Only proceed if this table has both selectable rows AND an action bar
       if (!this.shouldEnableActionBar(table)) return;
 
-      const actionBar = table.querySelector('.row-selection-actions-card');
+      const actionBar = table.querySelector(".row-selection-actions-card");
       if (!actionBar) return; // Skip tables without action bars
 
       // Initialize action bar styles
@@ -513,13 +538,16 @@ class PbAdvancedTableActionBar {
 
   shouldEnableActionBar(table) {
     // Check if the table has selectable rows
-    const hasSelectableRows = table.querySelector('input[type="checkbox"]') !== null;
+    const hasSelectableRows =
+      table.querySelector('input[type="checkbox"]') !== null;
 
     // Check if the table has a row selection action bar (not other types of action bars)
-    const hasRowSelectionActionBar = table.querySelector('.row-selection-actions-card') !== null;
+    const hasRowSelectionActionBar =
+      table.querySelector(".row-selection-actions-card") !== null;
 
     // Additional check: look for the presence of row checkboxes with data-row-id
-    const hasRowCheckboxes = table.querySelector('label[data-row-id] input[type="checkbox"]') !== null;
+    const hasRowCheckboxes =
+      table.querySelector('label[data-row-id] input[type="checkbox"]') !== null;
 
     // Only enable if ALL conditions are met:
     // 1. Has selectable checkboxes
@@ -531,10 +559,10 @@ class PbAdvancedTableActionBar {
   initializeActionBar(actionBar) {
     // Set initial hidden state
     Object.assign(actionBar.style, {
-      height: '0px',
-      overflow: 'hidden',
-      display: 'block',
-      opacity: '0'
+      height: "0px",
+      overflow: "hidden",
+      display: "block",
+      opacity: "0",
     });
 
     // Remove any visibility classes
@@ -544,10 +572,12 @@ class PbAdvancedTableActionBar {
 
   setupCheckboxListeners(table, actionBar) {
     // Only listen to row checkboxes (those with data-row-id), not all checkboxes
-    const rowCheckboxes = table.querySelectorAll('label[data-row-id] input[type="checkbox"]');
+    const rowCheckboxes = table.querySelectorAll(
+      'label[data-row-id] input[type="checkbox"]'
+    );
 
-    rowCheckboxes.forEach(checkbox => {
-      checkbox.addEventListener('change', () => {
+    rowCheckboxes.forEach((checkbox) => {
+      checkbox.addEventListener("change", () => {
         // Use setTimeout to ensure this runs after the main checkbox logic
         setTimeout(() => {
           this.updateActionBarVisibility(table, actionBar);
@@ -558,9 +588,11 @@ class PbAdvancedTableActionBar {
     // Special handling for select-all checkbox (only if it exists)
     const selectAllCheckbox = table.querySelector("#select-all-rows");
     if (selectAllCheckbox) {
-      const selectAllInput = selectAllCheckbox.querySelector('input[type="checkbox"]');
+      const selectAllInput = selectAllCheckbox.querySelector(
+        'input[type="checkbox"]'
+      );
       if (selectAllInput) {
-        selectAllInput.addEventListener('change', () => {
+        selectAllInput.addEventListener("change", () => {
           // Use setTimeout to ensure this runs after the main select-all logic
           setTimeout(() => {
             this.updateActionBarVisibility(table, actionBar);
@@ -572,10 +604,14 @@ class PbAdvancedTableActionBar {
 
   updateActionBarVisibility(table, actionBar) {
     // Only count row checkboxes (those with data-row-id), not all checkboxes
-    const rowCheckboxes = table.querySelectorAll('label[data-row-id] input[type="checkbox"]');
+    const rowCheckboxes = table.querySelectorAll(
+      'label[data-row-id] input[type="checkbox"]'
+    );
 
     // Get all checked row checkboxes
-    const selectedRowCheckboxes = Array.from(rowCheckboxes).filter(cb => cb.checked);
+    const selectedRowCheckboxes = Array.from(rowCheckboxes).filter(
+      (cb) => cb.checked
+    );
 
     // Get the selected count
     const selectedCount = selectedRowCheckboxes.length;
@@ -589,11 +625,11 @@ class PbAdvancedTableActionBar {
 
   showActionBar(actionBar, selectedCount) {
     // Show action bar directly
-    actionBar.style.height = 'auto';
-    actionBar.style.overflow = 'visible';
-    actionBar.style.opacity = '1';
-    actionBar.style.transitionProperty = 'all';
-    actionBar.style.transitionTimingFunction = 'ease-in-out';
+    actionBar.style.height = "auto";
+    actionBar.style.overflow = "visible";
+    actionBar.style.opacity = "1";
+    actionBar.style.transitionProperty = "all";
+    actionBar.style.transitionTimingFunction = "ease-in-out";
     actionBar.classList.remove("p_none");
     actionBar.classList.add("p_xs", "is-visible", "show-action-card");
 
@@ -606,9 +642,9 @@ class PbAdvancedTableActionBar {
 
   hideActionBar(actionBar) {
     // Hide action bar directly
-    actionBar.style.height = '0px';
-    actionBar.style.overflow = 'hidden';
-    actionBar.style.opacity = '0';
+    actionBar.style.height = "0px";
+    actionBar.style.overflow = "hidden";
+    actionBar.style.opacity = "0";
     actionBar.classList.add("p_none");
     actionBar.classList.remove("p_xs", "is-visible", "show-action-card");
   }
