@@ -25,7 +25,10 @@ const WelcomeComponent = ({
 }: WelcomeProps) => {
   return (
     <>
-      <Flex className="welcome_component">
+      <Flex
+        className="welcome_component"
+        width="md"
+      >
         <FlexItem
           fixedSize={fixedSize}
           textAlign={headerAlign}
