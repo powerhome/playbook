@@ -1,7 +1,7 @@
 import React from 'react'
 import Dropdown from '../_dropdown'
 
-import Detail from '../../pb_detail/_detail'
+import Body from '../../pb_body/_body'
 import Flex from '../../pb_flex/_flex'
 import Icon from '../../pb_icon/_icon'
 
@@ -32,7 +32,7 @@ const DropdownCustomIconOptions = (props) => {
                       paddingRight="xs"
                       {...props}    
                   />
-                  <Detail color="default" 
+                  <Body color="default" 
                       text={option.label}
                       {...props}
                   />
@@ -59,7 +59,7 @@ const DropdownCustomIconOptions = (props) => {
                   paddingRight="xs"
                   {...props}
               />
-              <Detail color="default" 
+              <Body color="default" 
                   text={option.label}
                   {...props}
               />
@@ -80,7 +80,7 @@ const DropdownCustomIconOptions = (props) => {
                 justify="between"
             >
               <Flex align="center">
-                <Detail color="default" 
+                <Body color="default" 
                     text={option.label}
                     {...props}
                 />

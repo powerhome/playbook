@@ -14,7 +14,7 @@
         <%= pb_rails("flex", props: { align: "center", justify: "between" }) do %>
           <%= pb_rails("flex") do %>
             <%= pb_rails("icon", props: { icon: "calendar", padding_right: "xs" }) %>
-            <%= pb_rails("detail", props: { color: "default", text: option[:label] }) %>
+            <%= pb_rails("body", props: { color: "default", text: option[:label] }) %>
           <% end %>
           <%= pb_rails("icon", props: { icon: "check" }) %>
         <% end %>
@@ -30,7 +30,7 @@
       <%= pb_rails("dropdown/dropdown_option", props: { option: option }) do %>
         <%= pb_rails("flex", props: { align: "center" }) do %>
           <%= pb_rails("icon", props: { icon: "calendar", padding_right: "xs" }) %>
-          <%= pb_rails("detail", props: { color: "default", text: option[:label] }) %>
+          <%= pb_rails("body", props: { color: "default", text: option[:label] }) %>
         <% end %>
       <% end %>
     <% end %>
@@ -43,7 +43,7 @@
     <% options.each do |option| %>
       <%= pb_rails("dropdown/dropdown_option", props: { option: option }) do %>
         <%= pb_rails("flex", props: { align: "center", justify: "between" }) do %>
-          <%= pb_rails("detail", props: { color: "default", text: option[:label] }) %>
+          <%= pb_rails("body", props: { color: "default", text: option[:label] }) %>
           <%= pb_rails("icon", props: { icon: "check" }) %>
         <% end %>
       <% end %>

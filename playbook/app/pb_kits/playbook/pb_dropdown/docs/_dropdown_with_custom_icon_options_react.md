@@ -1,0 +1,1 @@
+Use the `Dropdown.Option` subcomponent structure include custom layouts inside dropdown menus. Icons can be placed alongside the Body label text.

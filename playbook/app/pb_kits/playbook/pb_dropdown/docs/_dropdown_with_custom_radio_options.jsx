@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import Dropdown from '../_dropdown'
 
-import Detail from '../../pb_detail/_detail'
+import Body from '../../pb_body/_body'
 import Flex from '../../pb_flex/_flex'
 import Radio from '../../pb_radio/_radio'
 
@@ -34,7 +34,7 @@ const DropdownCustomRadioOptions = (props) => {
                     name="dropdown_radio"
                     value={option.value}
                 />
-                <Detail text={option.label} />
+                <Body text={option.label} />
               </Flex>
             </Dropdown.Option>
           )
