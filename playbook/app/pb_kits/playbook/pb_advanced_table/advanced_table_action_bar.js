@@ -24,17 +24,9 @@ function hideActionBar(actionBar) {
   actionBar.classList.remove("p_xs", "is-visible", "show-action-card");
 }
 
-export function updateSelectionActionBar(table) {
+export function updateSelectionActionBar(table, selectedCount) {
   const actionBar = table.querySelector(".row-selection-actions-card");
   if (!actionBar) return;
-  console.log("Updating selection action bar...");
-  const rowCheckboxes = table.querySelectorAll(
-    'label[data-row-id] input[type="checkbox"]'
-  );
-  const selectedRowCheckboxes = Array.from(rowCheckboxes).filter(
-    (cb) => cb.checked
-  );
-  const selectedCount = selectedRowCheckboxes.length;
 
   if (selectedCount > 0) {
     showActionBar(actionBar, selectedCount);

@@ -201,7 +201,7 @@ export default class PbAdvancedTable extends PbEnhancedElement {
       );
       selectAllInput.checked = allChecked;
     }
-    updateSelectionActionBar(table.closest(".pb_advanced_table"));
+    updateSelectionActionBar(table.closest(".pb_advanced_table"), PbAdvancedTable.selectedRows.size);
   }
 
   get target() {
@@ -250,7 +250,7 @@ export default class PbAdvancedTable extends PbEnhancedElement {
           }
         });
         this.updateTableSelectedRowsAttribute();
-        updateSelectionActionBar(table.closest(".pb_advanced_table"));
+        updateSelectionActionBar(table.closest(".pb_advanced_table"), PbAdvancedTable.selectedRows.size);
         return;
       }
 

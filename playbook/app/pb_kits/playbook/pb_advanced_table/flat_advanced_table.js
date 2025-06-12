@@ -24,7 +24,7 @@ export default class PbFlatAdvancedTable extends PbEnhancedElement {
     const mainTable = this.element.closest(".pb_advanced_table");
     // This so it is hidden on first render
     if (mainTable) {
-      updateSelectionActionBar(mainTable);
+      updateSelectionActionBar(mainTable, 0);
     }
 
     const updateCheckboxState = () => {
@@ -33,7 +33,7 @@ export default class PbFlatAdvancedTable extends PbEnhancedElement {
         mainTable.dataset.selectedRows = JSON.stringify(
           Array.from(this.selectedRows)
         );
-        updateSelectionActionBar(mainTable);
+        updateSelectionActionBar(mainTable, this.selectedRows.size);
       }
     };
 
