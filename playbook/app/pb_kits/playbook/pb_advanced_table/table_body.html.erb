@@ -1,5 +1,3 @@
 <%= pb_content_tag(:tbody) do %>
-        <% object.table_data.each do |row| %>
-          <%= render_row_and_children(row, object.column_definitions, 0, false) %>
-        <% end %>
+     <%= safe_join(object.table_data.map { |row| object.render_row_and_children(row) }) %>
 <% end %>
