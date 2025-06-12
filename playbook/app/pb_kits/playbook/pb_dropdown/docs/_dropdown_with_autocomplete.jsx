@@ -7,21 +7,21 @@ const DropdownWithAutocomplete = (props) => {
   const options = [
     {
       label: "United States",
-      value: "United States",
+      value: "unitedStates",
       areaCode: "+1",
       icon: "🇺🇸",
       id: "us"
     },
     {
       label: "United Kingdom",
-      value: "United Kingdom",
+      value: "unitedKingdom",
       areaCode: "+44",
       icon: "🇬🇧", 
       id: "gb"
     },
     {
       label: "Pakistan",
-      value: "Pakistan",
+      value: "pakistan",
       areaCode: "+92",
       icon: "🇵🇰",
       id: "pk"

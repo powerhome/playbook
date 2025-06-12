@@ -11,7 +11,7 @@ const DropdownWithAutocompleteWithSubcomponents = (props) => {
   const options = [
     {
       label: "Jasper Furniss",
-      value: "Jasper Furniss",
+      value: "jasperFurniss",
       territory: "PHL",
       title: "Lead UX Engineer",
       id: "jasper-furniss",
@@ -19,7 +19,7 @@ const DropdownWithAutocompleteWithSubcomponents = (props) => {
     },
     {
       label: "Ramon Ruiz",
-      value: "Ramon Ruiz",
+      value: "ramonRuiz",
       territory: "PHL",
       title: "Senior UX Designer",
       id: "ramon-ruiz",
@@ -27,7 +27,7 @@ const DropdownWithAutocompleteWithSubcomponents = (props) => {
     },
     {
       label: "Carlos Lima",
-      value: "Carlos Lima",
+      value: "carlosLima",
       territory: "PHL",
       title: "Nitro Developer",
       id: "carlos-lima",
@@ -35,7 +35,7 @@ const DropdownWithAutocompleteWithSubcomponents = (props) => {
     },
     {
       label: "Courtney Long",
-      value: "Courtney Long",
+      value: "courtneyLong",
       territory: "PHL",
       title: "Lead UX Designer",
       id: "courtney-long",
