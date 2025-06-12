@@ -24,111 +24,68 @@ module Playbook
       prop :selectable_rows, type: Playbook::Props::Boolean,
                              default: false
 
-      def leaf_columns
-        @leaf_columns ||= flatten_columns(column_definitions)
-      end
-
-      # Recursively render a row and its children, using memoized leaf_columns
-      def render_row_and_children(row,
-                                  current_depth = 0,
-                                  ancestor_ids  = [],
-                                  top_parent_id = nil,
-                                  first_child: false,
-                                  additional_classes: "",
-                                  table_data_attributes: {})
-        top_parent_id ||= row.object_id
-        new_ancestors = ancestor_ids + [row.object_id]
-
-        # Prepare data attributes for this row
-        attrs = if current_depth.zero?
-                  { row_depth: 0,
-                    advanced_table_content: row.object_id.to_s,
-                    row_parent: nil }
-                else
-                  table_data_attributes
-                end
-
-        output = ActiveSupport::SafeBuffer.new
-
-        # Optional subrow header
-        if current_depth.positive? && first_child && subrow_headers[current_depth - 1]
-          sub_attrs = {
-            advanced_table_content: (ancestor_ids + ["#{row.object_id}sr"]).join("-"),
-            row_depth: current_depth,
-            row_parent: "#{id}_#{ancestor_ids.last}",
-          }
-          output << pb_rails(
-            "advanced_table/table_subrow_header",
-            props: {
-              row: row,
-              column_definitions: leaf_columns,
-              depth: current_depth,
-              subrow_header: subrow_headers[current_depth - 1],
-              collapsible_trail: collapsible_trail,
-              classname: "toggle-content",
-              responsive: responsive,
-              subrow_data_attributes: sub_attrs,
-            }
-          )
-        end
-
-        # Main row
-        output << pb_rails(
-          "advanced_table/table_row",
-          props: {
-            id: id,
-            row: row,
-            column_definitions: leaf_columns,
-            depth: current_depth,
-            collapsible_trail: collapsible_trail,
-            classname: additional_classes,
-            table_data_attributes: attrs,
-            responsive: responsive,
-            loading: loading,
-            selectable_rows: selectable_rows,
-            row_id: row[:id],
-            enable_toggle_expansion: enable_toggle_expansion,
-          }
-        )
-
-        # Render children if present
-        if row[:children]&.any?
-          row[:children].each_with_index do |child, idx|
-            child_attrs = {
-              top_parent: "#{id}_#{top_parent_id}",
-              row_depth: current_depth + 1,
-              row_parent: "#{id}_#{row.object_id}",
-              advanced_table_content: (new_ancestors + [child.object_id]).join("-"),
-            }
-
-            output << render_row_and_children(
-              child,
-              current_depth + 1,
-              new_ancestors,
-              top_parent_id,
-              first_child: idx.zero?,
-              additional_classes: "toggle-content",
-              table_data_attributes: child_attrs
-            )
-          end
-        end
-
-        output
-      end
-
-      # Flatten columns, preserving group metadata
       def flatten_columns(columns)
         columns.flat_map do |col|
           if col[:columns]
             flatten_columns(col[:columns])
           elsif col[:accessor].present?
-            if column_definitions.any? { |c| c.key?(:columns) }
-              col.merge(is_last_in_group: columns.last[:accessor] == col[:accessor])
+            if has_grouped_headers?
+              col.merge(is_last_in_group: last_in_group?(columns, col))
             else
               col
             end
           end
         end.compact
+      end
+
+      def render_row_and_children(row, column_definitions, current_depth, first_parent_child, ancestor_ids = [], top_parent_id = nil, additional_classes: "", table_data_attributes: {})
+        top_parent_id ||= row.object_id
+        new_ancestor_ids = ancestor_ids + [row.object_id]
+        leaf_columns = flatten_columns(column_definitions)
+
+        output = ActiveSupport::SafeBuffer.new
+        is_first_child_of_subrow = current_depth.positive? && first_parent_child && subrow_headers[current_depth - 1].present?
+
+        subrow_ancestor_ids = ancestor_ids + ["#{row.object_id}sr"]
+        subrow_data_attributes = {
+          advanced_table_content: subrow_ancestor_ids.join("-"),
+          row_depth: current_depth,
+          row_parent: "#{id}_#{ancestor_ids.last}",
+        }
+        # Subrow header if applicable
+        output << pb_rails("advanced_table/table_subrow_header", props: { row: row, column_definitions: leaf_columns, depth: current_depth, subrow_header: subrow_headers[current_depth - 1], collapsible_trail: collapsible_trail, classname: "toggle-content", responsive: responsive, subrow_data_attributes: subrow_data_attributes }) if is_first_child_of_subrow && enable_toggle_expansion == "all"
+
+        current_data_attributes = if current_depth.zero?
+                                    {
+                                      row_depth: 0,
+                                      advanced_table_content: row.object_id.to_s,
+                                      row_parent: nil,
+                                    }
+                                  else
+                                    table_data_attributes
+                                  end
+
+        # Additional class and data attributes needed for toggle logic
+        output << pb_rails("advanced_table/table_row", props: { id: id, row: row, column_definitions: leaf_columns, depth: current_depth, collapsible_trail: collapsible_trail, classname: additional_classes, table_data_attributes: current_data_attributes, responsive: responsive, loading: loading, selectable_rows: selectable_rows, row_id: row[:id], enable_toggle_expansion: enable_toggle_expansion })
+
+        if row[:children].present?
+          row[:children].each do |child_row|
+            is_first_child = row[:children].first == child_row
+            immediate_parent_id = row.object_id
+            data_content = new_ancestor_ids.join("-") + "-#{child_row.object_id}"
+
+            child_data_attributes = {
+              top_parent: "#{id}_#{top_parent_id}",
+              row_depth: current_depth + 1,
+              row_parent: "#{id}_#{immediate_parent_id}",
+              advanced_table_content: data_content,
+            }
+
+            output << render_row_and_children(child_row, column_definitions, current_depth + 1, is_first_child, new_ancestor_ids, top_parent_id, additional_classes: "toggle-content", table_data_attributes: child_data_attributes)
+          end
+        end
+
+        output
       end
 
       def classname
@@ -139,7 +96,9 @@ module Playbook
       end
 
       def pinned_cell_class(index)
-        index.zero? && responsive == "scroll" ? "pinned-left" : ""
+        return "pinned-left" if index.zero? && responsive == "scroll"
+
+        ""
       end
 
     private
