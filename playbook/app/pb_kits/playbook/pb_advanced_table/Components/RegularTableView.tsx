@@ -27,6 +27,7 @@ const TableCellRenderer = ({
   loading = false,
   stickyLeftColumn,
   columnPinning,
+  customRowStyle,
   columnDefinitions,
 }: {
   row: Row<GenericObject>
@@ -34,6 +35,7 @@ const TableCellRenderer = ({
   loading?: boolean | string
   stickyLeftColumn?: string[]
   columnPinning: { left: string[] }
+  customRowStyle?: GenericObject
   columnDefinitions?: {[key:string]:any}[]
 }) => {
   return (
@@ -74,6 +76,8 @@ const TableCellRenderer = ({
                     ? '180px'
                     : `${column.getStart("left")}px`
                   : undefined,
+                  backgroundColor: i === 0 && customRowStyle?.backgroundColor,
+                  color: customRowStyle?.fontColor,
             }}
           >
             {collapsibleTrail && i === 0 && row.depth > 0 && renderCollapsibleTrail(row.depth)}
@@ -107,6 +111,7 @@ export const RegularTableView = ({
     pinnedRows,
     headerHeight,
     rowHeight,
+    rowStyling = [],
     sampleRowRef,
   } = useContext(AdvancedTableContext)
 
@@ -171,6 +176,7 @@ export const RegularTableView = ({
         const rowBackground = isExpandable && ((!inlineRowLoading && row.getCanExpand()) || (inlineRowLoading && rowHasNoChildren));
         const rowColor = row.getIsSelected() ? "bg-row-selection" : rowBackground ? "bg-silver" : "bg-white";
         const isFirstRegularRow = rowIndex === 0 && !row.getIsPinned();
+        const customRowStyle = rowStyling?.length > 0 && rowStyling?.find((s: GenericObject) => s?.rowId === row.id);
 
         return (
           <React.Fragment key={`${row.index}-${row.id}-${row.depth}-row`}>
@@ -189,6 +195,7 @@ export const RegularTableView = ({
                 className={`${rowColor} ${row.depth > 0 ? `depth-sub-row-${row.depth}` : ""}`}
                 id={`${row.index}-${row.id}-${row.depth}-row`}
                 ref={isFirstRegularRow ? sampleRowRef : null}
+                style={{backgroundColor: customRowStyle?.backgroundColor, color: customRowStyle?.fontColor}}
             >
               {/* Render custom checkbox column when we want selectableRows for non-expanding tables */}
               {selectableRows && !hasAnySubRows && (
@@ -206,6 +213,7 @@ export const RegularTableView = ({
                   collapsibleTrail={collapsibleTrail}
                   columnDefinitions={columnDefinitions}
                   columnPinning={columnPinning}
+                  customRowStyle={customRowStyle}
                   loading={loading}
                   row={row}
                   stickyLeftColumn={stickyLeftColumn}
