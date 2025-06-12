@@ -187,15 +187,6 @@ kits:
     icons_used: false
     react_rendered: true
     enhanced_element_used: false
-  - name: treemap_chart
-    platforms: *1
-    description: Treemap charts are used to compare the relative size of groups of
-      data. They can also use a nested data structure, allowing a user to drill down
-      into a group to see its constituent data points.
-    status: stable
-    icons_used: false
-    react_rendered: true
-    enhanced_element_used: false
 - category: date_and_time_text_patterns
   description: ''
   components:
