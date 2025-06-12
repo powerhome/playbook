@@ -19,6 +19,7 @@ interface CustomCellProps {
   value?: string
   customRenderer?: (row: Row<GenericObject>, value: string | undefined) => React.ReactNode
   selectableRows?: boolean
+  customStyle?: GenericObject
 } 
 
 export const CustomCell = ({
@@ -28,6 +29,7 @@ export const CustomCell = ({
   value,
   customRenderer,
   selectableRows,
+  customStyle = {},
 }: CustomCellProps & GlobalProps) => {
   const { setExpanded, expanded, expandedControl, inlineRowLoading, hasAnySubRows } = useContext(AdvancedTableContext);
 
@@ -43,7 +45,7 @@ export const CustomCell = ({
   const renderButton = inlineRowLoading ? RowHasChildren : row.getCanExpand()
 
   return (
-    <div style={{ paddingLeft: `${row.depth * 1.25}em` }}>
+    <div style={{ paddingLeft: `${row.depth * 1.25}em`}}>
       <Flex 
           alignItems="center" 
           columnGap="xs"
@@ -65,6 +67,7 @@ export const CustomCell = ({
           <button
               className="gray-icon expand-toggle-icon"
               onClick={() => handleOnExpand(row)}
+              style={{ color: customStyle?.expandButtonColor }}
           >
             {row.getIsExpanded() ? (
               <Icon cursor="pointer"
