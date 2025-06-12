@@ -40,8 +40,12 @@ export const TableHeader = ({
     showActionsBar,
     selectableRows,
     responsive,
-    headerRef
+    headerRef,
+    virtualizedRows,
+    enableVirtualization,
   } = useContext(AdvancedTableContext)
+
+  const isVirtualized = virtualizedRows || enableVirtualization;
 
   const classes = classnames(
     buildCss("pb_advanced_table_header"),
@@ -57,46 +61,93 @@ export const TableHeader = ({
     `${isChrome() ? "chrome-styles" : ""}`,
     `${responsive === "scroll" && "pinned-left"}`,
   );
+
+  const renderRegularTableHeader = () => (
+    <thead className={classes} 
+        id={id}
+    >
+      {table.getHeaderGroups().map((headerGroup: HeaderGroup<GenericObject>, index: number) => (
+        <tr 
+            key={`${headerGroup.id}-headerGroup`}
+            ref={index === 0 ? headerRef : null}
+        >
+          {!hasAnySubRows && selectableRows && (
+            <th className={customCellClassnames}>
+              <Checkbox
+                  checked={table?.getIsAllRowsSelected()}
+                  indeterminate={table?.getIsSomeRowsSelected()}
+                  onChange={table?.getToggleAllRowsSelectedHandler()}
+              />
+            </th>
+          )}
+          {headerGroup.headers.map(header => {
+            const isPinnedLeft = columnPinning.left.includes(header.id)
+            return (
+              <TableHeaderCell
+                  enableSorting={enableSorting}
+                  enableToggleExpansion={enableToggleExpansion}
+                  handleExpandOrCollapse={handleExpandOrCollapse}
+                  header={header}
+                  headerChildren={children}
+                  isPinnedLeft={isPinnedLeft}
+                  key={`${header.id}-header`}
+                  loading={loading}
+                  sortIcon={sortIcon}
+                  table={table}
+              />
+            )
+          })}
+        </tr>
+      ))}
+    </thead>
+  );
+
+  const renderVirtualizedTableHeader = () => (
+    <thead 
+        className={classes} 
+        data-virtualized="true"
+        id={id}
+    >
+      {table.getHeaderGroups().map((headerGroup: HeaderGroup<GenericObject>, index: number) => (
+        <tr 
+            className="virtualized-header-row-header"
+            key={`${headerGroup.id}-headerGroup-virtualized`}
+            ref={index === 0 ? headerRef : null}
+        >
+          {!hasAnySubRows && selectableRows && (
+            <th className={classnames(customCellClassnames, "virtualized-header-cell")}>
+              <Checkbox
+                  checked={table?.getIsAllRowsSelected()}
+                  indeterminate={table?.getIsSomeRowsSelected()}
+                  onChange={table?.getToggleAllRowsSelectedHandler()}
+              />
+            </th>
+          )}
+          {headerGroup.headers.map(header => {
+            const isPinnedLeft = columnPinning.left.includes(header.id)
+            return (
+              <TableHeaderCell
+                  enableSorting={enableSorting}
+                  enableToggleExpansion={enableToggleExpansion}
+                  handleExpandOrCollapse={handleExpandOrCollapse}
+                  header={header}
+                  headerChildren={children}
+                  isPinnedLeft={isPinnedLeft}
+                  isVirtualized
+                  key={`${header.id}-header-virtualized`}
+                  loading={loading}
+                  sortIcon={sortIcon}
+                  table={table}
+              />
+            )
+          })}
+        </tr>
+      ))}
+    </thead>
+  );
   return (
-    <>
-      <thead className={classes}
-          id={id}
-      >
-        {/* Get the header groups (only one in this example) */}
-        {table.getHeaderGroups().map((headerGroup: HeaderGroup<GenericObject>, index: number) => (
-          <tr 
-              key={`${headerGroup.id}-headerGroup`}
-              ref={index === 0 ? headerRef : null}
-          >
-            {!hasAnySubRows && selectableRows && (
-              <th className={customCellClassnames}>
-                <Checkbox
-                    checked={table?.getIsAllRowsSelected()}
-                    indeterminate={table?.getIsSomeRowsSelected()}
-                    onChange={table?.getToggleAllRowsSelectedHandler()}
-                />
-              </th>
-            )}
-            {headerGroup.headers.map(header => {
-              const isPinnedLeft = columnPinning.left.includes(header.id)
-              return (
-                <TableHeaderCell
-                    enableSorting={enableSorting}
-                    enableToggleExpansion={enableToggleExpansion}
-                    handleExpandOrCollapse={handleExpandOrCollapse}
-                    header={header}
-                    headerChildren={children}
-                    isPinnedLeft={isPinnedLeft}
-                    key={`${header.id}-header`}
-                    loading={loading}
-                    sortIcon={sortIcon}
-                    table={table}
-                />
-              )
-            })}
-          </tr>
-        ))}
-      </thead>
+    <>      
+      {isVirtualized ? renderVirtualizedTableHeader() : renderRegularTableHeader()}
     </>
   )
 }

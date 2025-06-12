@@ -634,6 +634,25 @@ test("columnStyling.cellAlignment sets each <td> align attribute as expected", (
   expect(firstEnrollmentCell).toHaveAttribute("align", "left");
 });
 
+test("renders virtualized table rows and header", () => {
+  render(
+    <AdvancedTable
+        columnDefinitions={columnDefinitions}
+        data={{ testid: testId }}
+        tableData={MOCK_DATA_WITH_ID}
+        virtualizedRows
+    />
+  )
+
+  const kit = screen.getByTestId(testId)
+
+  const virtualizedHeader = kit.querySelector('.virtualized-header-row-header')
+  expect(virtualizedHeader).toBeInTheDocument()
+
+  const virtualizedRows = kit.querySelectorAll('.virtualized-table-row')
+  expect(virtualizedRows.length).toBeLessThan(MOCK_DATA_WITH_ID.length)
+})
+
 test("rowStyling prop works as expected", () => {
   const rowStyling = [
   {

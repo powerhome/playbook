@@ -37,3 +37,4 @@ export { default as AdvancedTableScrollbarNone} from './_advanced_table_scrollba
 export { default as AdvancedTableRowStyling } from './_advanced_table_row_styling.jsx'
 export { default as AdvancedTableColumnStyling } from './_advanced_table_column_styling.jsx'
 export { default as AdvancedTableColumnStylingColumnHeaders } from './_advanced_table_column_styling_column_headers.jsx'
+export { default as AdvancedTableInfiniteScroll} from './_advanced_table_infinite_scroll.jsx'

@@ -269,6 +269,29 @@ const AdvancedTable = (props: AdvancedTableProps) => {
   // Visibility flag for action bar
   const isActionBarVisible = (selectableRows && showActionsBar && selectedRowsLength > 0) || columnVisibilityControl;
 
+  // The actual Main <Table /> element
+  const tableElement = (
+    <Table
+        className={`${loading ? "content-loading" : ""}`}
+        dark={dark}
+        dataTable
+        numberSpacing="tabular"
+        responsive="none"
+        {...tableProps}
+    >
+      {children ? (
+        children
+      ) : (
+        <>
+          <TableHeader />
+          <TableBody   
+              isFetching={isFetching}
+          />
+        </>
+      )}
+    </Table>
+  )
+
   return (
     <>
       {/* Top Pagination */}
@@ -326,6 +349,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
             table={table}
             tableContainerRef={tableWrapperRef}
             toggleExpansionIcon={toggleExpansionIcon}
+            totalAvailableCount={fullData.length}
             virtualizedRows={virtualizedRows}
         >
           <React.Fragment>
@@ -337,24 +361,14 @@ const AdvancedTable = (props: AdvancedTableProps) => {
                 type={columnVisibilityControl ? "column-visibility" : "row-selection"}
             />
 
-            {/* Main Table */}
-            <Table
-                className={`${loading ? "content-loading" : ""}`}
-                dark={dark}
-                dataTable
-                numberSpacing="tabular"
-                responsive="none"
-                {...tableProps}
-            >
-              {children ? (
-                children
-              ) : (
-                <>
-                  <TableHeader />
-                  <TableBody />
-                </>
-              )}
-            </Table>
+            {/* Virtualized wrapper div only if virtualizedRows is true */}
+            {virtualizedRows ? (
+              <div style={{ overflow: 'auto', width: '100%' }}>
+                {tableElement}
+              </div>
+            ) : (
+              tableElement
+            )}
           </React.Fragment>
         </AdvancedTableProvider>
 

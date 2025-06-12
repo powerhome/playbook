@@ -1,6 +1,6 @@
-import React, { useContext, useLayoutEffect, useState, useEffect } from "react"
+import React, { useContext, useLayoutEffect, useState, useEffect, useRef } from "react"
 import classnames from "classnames"
-import { flexRender, Cell } from "@tanstack/react-table"
+import { flexRender, Cell, Row } from "@tanstack/react-table"
 import { VirtualItem } from "@tanstack/react-virtual"
 
 import { GenericObject } from "../../types"
@@ -10,6 +10,8 @@ import { getVirtualizedRowStyle } from "../Utilities/TableContainerStyles"
 
 import LoadingInline from "../../pb_loading_inline/_loading_inline"
 import Checkbox from "../../pb_checkbox/_checkbox"
+import Detail from "../../pb_detail/_detail"
+import Flex from "../../pb_flex/_flex"
 
 import { SubRowHeaderRow } from "../Components/SubRowHeaderRow"
 import { LoadingCell } from "../Components/LoadingCell"
@@ -20,11 +22,13 @@ import AdvancedTableContext from "../Context/AdvancedTableContext"
 type VirtualizedTableViewProps = {
   collapsibleTrail?: boolean
   subRowHeaders?: string[]
+  isFetching: boolean
 }
 
 export const VirtualizedTableView = ({
   collapsibleTrail = true,
   subRowHeaders,
+  isFetching,
 }: VirtualizedTableViewProps) => {
   const {
     enableToggleExpansion,
@@ -36,6 +40,7 @@ export const VirtualizedTableView = ({
     hasAnySubRows,
     virtualizer,
     flattenedItems,
+    totalAvailableCount,
   } = useContext(AdvancedTableContext)
 
   const columnPinning = table.getState().columnPinning || { left: [] };
@@ -121,19 +126,7 @@ export const VirtualizedTableView = ({
   }
 
   // Get virtual items
-  let virtualItems: VirtualItem[] = [];
-  try {
-    virtualItems = virtualizer.getVirtualItems();
-  } catch (err) {
-    return (
-      <tr>
-        <td colSpan={table.getAllFlatColumns().length || 1}>
-          Error loading virtualized data.
-        </td>
-      </tr>
-    );
-  }
-
+  const virtualItems: VirtualItem[] = virtualizer.getVirtualItems?.() || [];
   if (!virtualItems.length) {
     return (
       <tr>
@@ -143,6 +136,9 @@ export const VirtualizedTableView = ({
       </tr>
     );
   }
+  
+  // Establish # of Parent Rows (so that Footer count does not include every single row)
+  const topLevelRowCount = table.getRowModel().flatRows.filter((row: Row<GenericObject>) => row.depth === 0).length;
 
   return (
     <>
@@ -177,7 +173,7 @@ export const VirtualizedTableView = ({
         if (item.type === 'row') {
           const row = item.row;
           const isExpandable = row.getIsExpanded();
-          const rowHasNoChildren = row.original?.children && !row.original.children.length ? true : false;
+          const rowHasNoChildren = row.original?.children && !row.original.children.length;
           const rowBackground = isExpandable && ((!inlineRowLoading && row.getCanExpand()) || (inlineRowLoading && rowHasNoChildren));
           const rowColor = row.getIsSelected() ? "bg-row-selection" : rowBackground ? "bg-silver" : "bg-white";
 
@@ -264,6 +260,30 @@ export const VirtualizedTableView = ({
               </td>
             </tr>
           );
+        }
+
+        if (item.type === 'footer') {
+          // Render footer
+          return (
+            <tr
+                className="virtualized-table-row virtualized-footer"
+                key={`footer-row`}
+                style={virtualItemStyle}
+            >
+              <td colSpan={table.getAllFlatColumns().length}>
+                <Flex align="center"
+                    justify="center"
+                >
+
+                {isFetching ? (
+                  <LoadingInline />
+                ) : (
+                  <Detail text={`Showing ${topLevelRowCount} of ${totalAvailableCount} rows`} />
+                )}
+                </Flex>
+              </td>
+            </tr>
+          )
         }
 
         return null;
