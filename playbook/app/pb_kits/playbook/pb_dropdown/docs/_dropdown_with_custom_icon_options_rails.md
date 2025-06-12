@@ -1,1 +1,1 @@
-Use the `dropdown/dropdown_option` subcomponent structure include custom layouts inside dropdown menus. Icons can be placed alongside the Body label text.
+Use the `dropdown/dropdown_option` subcomponent structure to include custom layouts inside dropdown menus. Icons can be placed alongside the Body label text.
