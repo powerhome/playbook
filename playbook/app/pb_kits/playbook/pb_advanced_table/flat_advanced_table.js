@@ -1,106 +1,82 @@
 import PbEnhancedElement from "../pb_enhanced_element";
+import { updateSelectionActionBar } from "./advanced_table_action_bar";
 
-const FLAT_ADVANCED_TABLE_SELECTOR = "[data-flat-advanced-table-select]";
+const FLAT_SELECTOR = "[data-flat-advanced-table-select='true']";
+const SELECT_ALL_SELECTOR = "#select-all-rows input[type='checkbox']";
 
 export default class PbFlatAdvancedTable extends PbEnhancedElement {
   static get selector() {
-    return FLAT_ADVANCED_TABLE_SELECTOR;
+    return FLAT_SELECTOR;
   }
 
-  get target() {
-    const table = this.element.closest("table");
-    return table.querySelectorAll(
-      `"label[data-flat-advanced-table-select='true']"`
-    );
+  constructor(...args) {
+    super(...args);
+    // keep track of selected IDs per-table-instance
+    this.selectedRows = new Set();
   }
-
-  static selectedRows = new Set();
 
   connect() {
     const table = this.element.closest("table");
-    if (!table) return;
+    if (!table || table.dataset.flatAdvancedInit) return;
+    table.dataset.flatAdvancedInit = "true";
+
+    // Reference to outer container for action bar
     const mainTable = this.element.closest(".pb_advanced_table");
-    // Prevent double-init
-    if (table.dataset.flatAdvancedTableInitialized) return;
-    table.dataset.flatAdvancedTableInitialized = "true";
-
-    const checkboxLabels = table.querySelectorAll(
-      "label[data-flat-advanced-table-select='true']"
-    );
-    checkboxLabels.forEach((label) => {
-      const checkbox = label.querySelector("input[type='checkbox']");
-      if (!checkbox) return;
-      checkbox.addEventListener("change", () => {
-        const rowId = checkbox.id;
-        const isChecked = checkbox.checked;
-      
-        if (isChecked) {
-          PbFlatAdvancedTable.selectedRows.add(rowId);
-        } else {
-          PbFlatAdvancedTable.selectedRows.delete(rowId);
-        }
-      
-        // Update row background color based on checkbox state
-        const rowEl = checkbox.closest("tr");
-        if (rowEl) {
-          if (isChecked) {
-            rowEl.classList.add("bg-row-selection");
-            rowEl.classList.remove("bg-white");
-          } else {
-            rowEl.classList.remove("bg-row-selection");
-            rowEl.classList.add("bg-white");
-          }
-        }
-        const allCheckboxes = table.querySelectorAll(
-          "label[data-flat-advanced-table-select='true'] input[type='checkbox']"
-        );
-      
-        const selectAllInput = table.querySelector(
-          "#select-all-rows input[type='checkbox']"
-        );
-      
-        if (selectAllInput) {
-          const allChecked = Array.from(allCheckboxes).every(cb => cb.checked);
-          selectAllInput.checked = allChecked;
-        }
-      
-        mainTable.dataset.selectedRows = JSON.stringify(
-          Array.from(PbFlatAdvancedTable.selectedRows)
-        );
-      });
-      
-    });
-
-    // Handle select-all checkbox
-    const selectAllWrapper = table.querySelector("#select-all-rows");
-    if (selectAllWrapper) {
-      const selectAllInput = selectAllWrapper.querySelector(
-        'input[type="checkbox"]'
-      );
-      selectAllInput.addEventListener("change", () => {
-        const checkAll = selectAllInput.checked;
-
-        checkboxLabels.forEach((label) => {
-          const cb = label.querySelector("input[type='checkbox']");
-          cb.checked = checkAll;
-          const rowId = cb.id;
-          const rowEl = cb.closest("tr");
-
-          if (checkAll) {
-            PbFlatAdvancedTable.selectedRows.add(rowId);
-            rowEl?.classList.add("bg-row-selection");
-            rowEl?.classList.remove("bg-white");
-          } else {
-            PbFlatAdvancedTable.selectedRows.delete(rowId);
-            rowEl?.classList.remove("bg-row-selection");
-            rowEl?.classList.add("bg-white");
-          }
-        });
-
-        mainTable.dataset.selectedRows = JSON.stringify(
-          Array.from(PbFlatAdvancedTable.selectedRows)
-        );
-      });
+    // This so it is hidden on first render
+    if (mainTable) {
+      updateSelectionActionBar(mainTable);
     }
+
+    const updateCheckboxState = () => {
+      // Sync dataset on main table
+      if (mainTable) {
+        mainTable.dataset.selectedRows = JSON.stringify(
+          Array.from(this.selectedRows)
+        );
+        updateSelectionActionBar(mainTable);
+      }
+    };
+
+    table.addEventListener("change", (e) => {
+      const rowCb = e.target.closest(FLAT_SELECTOR + " input[type='checkbox']");
+      const allCb = e.target.closest(SELECT_ALL_SELECTOR);
+      if (!rowCb && !allCb) return;
+
+      if (rowCb) {
+        const id = rowCb.id;
+        if (rowCb.checked) this.selectedRows.add(id);
+        else this.selectedRows.delete(id);
+
+        const tr = rowCb.closest("tr");
+        tr?.classList.toggle("bg-row-selection", rowCb.checked);
+        tr?.classList.toggle("bg-white", !rowCb.checked);
+
+        // Sync header checkbox
+        const header = table.querySelector(SELECT_ALL_SELECTOR);
+        if (header) {
+          const all = Array.from(
+            table.querySelectorAll(FLAT_SELECTOR + " input[type='checkbox']")
+          ).every((cb) => cb.checked);
+          header.checked = all;
+        }
+      }
+
+      if (allCb) {
+        const checked = allCb.checked;
+        Array.from(
+          table.querySelectorAll(FLAT_SELECTOR + " input[type='checkbox']")
+        ).forEach((cb) => {
+          cb.checked = checked;
+          const tr = cb.closest("tr");
+          tr?.classList.toggle("bg-row-selection", checked);
+          tr?.classList.toggle("bg-white", !checked);
+          const id = cb.id;
+          if (checked) this.selectedRows.add(id);
+          else this.selectedRows.delete(id);
+        });
+      }
+
+      updateCheckboxState();
+    });
   }
 }
