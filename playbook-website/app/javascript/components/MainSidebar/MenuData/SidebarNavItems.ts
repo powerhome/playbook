@@ -42,8 +42,15 @@ export const SideBarNavItems = [
         leftIcon:"chalkboard-teacher"
     },
     {
+        name: "Icons",
+        key: "top-nav-item-7",
+        link: "/playbook_icons",
+        children: false,
+        leftIcon:"icons"
+    },
+    {
       name: "Playground",
-      key: "top-nav-item-7",
+      key: "top-nav-item-8",
       link: "/kit_playground_rails",
       children: false,
       leftIcon:"laptop-code"

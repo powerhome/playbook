@@ -6,6 +6,7 @@ export const OtherNavItems = ({
   name,
   currentURL,
   dark,
+  icons,
   patterns,
   setIsActive,
   isActive,
@@ -42,6 +43,11 @@ export const OtherNavItems = ({
     name: guide.label,
     link: guide.value
   }))
+
+  // const iconsMenu = icons?.map((item) => ({
+  //   name: item.name,
+  //   link: `/icons/${item.link}`,
+  // }))
 
   //conditionally render navitems depending on name
   if (name === "Tokens & Guidelines") {
