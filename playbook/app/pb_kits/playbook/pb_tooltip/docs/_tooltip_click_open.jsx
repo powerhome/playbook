@@ -10,9 +10,9 @@ const TooltipClickOpen = (props) => {
         wrap
     >
       <Tooltip
-          clickOpen
           placement='top'
           text='Tooltip Opened'
+          useClickToOpen
           zIndex={10}
           {...props}
       >

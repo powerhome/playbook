@@ -24,7 +24,7 @@ type TooltipProps = {
   aria?: { [key: string]: string },
   className?: string | string[],
   children: JSX.Element,
-  clickOpen?: boolean,
+  useClickToOpen?: boolean,
   data?: { [key: string]: string },
   delay?: number | Partial<{open: number; close: number}>,
   height?: string,
@@ -48,7 +48,7 @@ const Tooltip = forwardRef((props: TooltipProps, ref: ForwardedRef<unknown>): Re
     aria = {},
     className,
     children,
-    clickOpen = false,
+    useClickToOpen = false,
     data = {},
     delay = 0,
     height,
@@ -118,11 +118,11 @@ const Tooltip = forwardRef((props: TooltipProps, ref: ForwardedRef<unknown>): Re
     handleClose: interaction ? safePolygon({
       blockPointerEvents: false
     }) : null,
-    enabled: !clickOpen // Disable hover when clickOpen is true
+    enabled: !useClickToOpen // Disable hover when useClickToOpen is true
   })
 
   const click = useClick(context, {
-    enabled: clickOpen // Only enable click when clickOpen is true
+    enabled: useClickToOpen // Only enable click when useClickToOpen is true
   })
 
   const { getFloatingProps, getReferenceProps } = useInteractions([
