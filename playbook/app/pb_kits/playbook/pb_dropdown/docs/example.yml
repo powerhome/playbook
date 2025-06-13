@@ -16,7 +16,7 @@ examples:
   - dropdown_with_search_rails: Custom Trigger Dropdown with Search
   - dropdown_with_custom_padding: Custom Option Padding
   - dropdown_with_custom_icon_options: Custom Icon Options
-  - dropdown_with_custom_radio_options: Custom Radio Options
+  # - dropdown_with_custom_radio_options: Custom Radio Options # TODO: Update and publish doc ex in [PLAY-2146](https://runway.powerhrg.com/backlog_items/PLAY-2146) (remove this comment afterwards)
   - dropdown_error: Dropdown with Error
   - dropdown_default_value: Default Value
   - dropdown_multi_select_with_default: Multi Select Default Value
@@ -40,7 +40,7 @@ examples:
   - dropdown_with_search: Custom Trigger Dropdown with Search
   - dropdown_with_custom_padding: Custom Option Padding
   - dropdown_with_custom_icon_options: Custom Icon Options
-  - dropdown_with_custom_radio_options: Custom Radio Options
+  # - dropdown_with_custom_radio_options: Custom Radio Options # TODO: Update and publish doc ex in [PLAY-2146](https://runway.powerhrg.com/backlog_items/PLAY-2146) (remove this comment afterwards)
   - dropdown_error: Dropdown with Error
   - dropdown_default_value: Default Value
   - dropdown_multi_select_with_default: Multi Select Default Value
