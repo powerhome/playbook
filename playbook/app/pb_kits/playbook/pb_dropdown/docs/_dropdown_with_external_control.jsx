@@ -11,21 +11,21 @@ const [isDropDownClosed, setIsDropdownClosed] = useDropdown(true);
   const options = [
     {
       label: "United States",
-      value: "United States",
+      value: "unitedStates",
       areaCode: "+1",
       icon: "🇺🇸",
       id: "United-states"
     },
     {
       label: "Canada",
-      value: "Canada",
+      value: "canada",
       areaCode: "+1",
       icon: "🇨🇦",
       id: "canada"
     },
     {
       label: "Pakistan",
-      value: "Pakistan",
+      value: "pakistan",
       areaCode: "+92",
       icon: "🇵🇰",
       id: "pakistan"

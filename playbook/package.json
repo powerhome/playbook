@@ -88,10 +88,10 @@
     "react-zoom-pan-pinch": "3.6.0",
     "rollup-plugin-copy": "^3.5.0",
     "sass": "^1.77.8",
-    "terser": "^5.31.3",
+    "terser": "^5.39.0",
     "ts-jest": "26.5.6",
     "typescript": "4.3.5",
-    "vite": "5.3.5",
+    "vite": "6.3.5",
     "vite-bundle-visualizer": "^1.2.1",
     "vite-plugin-ruby": "^5.0.0",
     "webpacker-react": "^0.3.2"
@@ -101,7 +101,7 @@
     "react-dom": "^17.0.2",
     "react-is": "^17.0.2",
     "react-trix": "0.10.1",
-    "trix": "^1.3.2",
+    "trix": "1.3.5",
     "webpacker-react": "^0.3.2"
   },
   "resolutions": {

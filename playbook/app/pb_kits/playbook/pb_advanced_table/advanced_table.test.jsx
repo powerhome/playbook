@@ -1,7 +1,7 @@
 import React, {useState} from "react"
 import { render, screen, waitFor } from "../utilities/test-utils"
 
-import { AdvancedTable, Pill } from "playbook-ui"
+import { AdvancedTable, Pill, colors } from "playbook-ui"
 
 global.ResizeObserver = class {
   observe() {}
@@ -572,4 +572,107 @@ test("pinnedRows prop renders pinned rows at top", () => {
   const firstPinnedRow = pinnedRows[0]
   expect(firstPinnedRow).toHaveStyle("position: sticky")
   expect(firstPinnedRow).toHaveStyle("background-color: white")
+})
+
+test("columnStyling.headerAlignment aligns header as expected", () => {
+  const styledColumnDefs = [
+    {
+      accessor: "year",
+      label: "Year",
+      cellAccessors: ["quarter", "month", "day"],
+    },
+    {
+      accessor: "newEnrollments",
+      label: "New Enrollments",
+      columnStyling: { headerAlignment: "left" },
+    },
+    {
+      accessor: "scheduledMeetings",
+      label: "Scheduled Meetings",
+    },
+  ];
+
+  render(
+    <AdvancedTable
+        columnDefinitions={styledColumnDefs}
+        data={{ testid: testId }}
+        tableData={MOCK_DATA}
+    />
+  );
+
+  const headerCell = screen.getByText("New Enrollments").closest("th");
+  expect(headerCell).toHaveAttribute("align", "left");
+});
+
+test("columnStyling.cellAlignment sets each <td> align attribute as expected", () => {
+  const styledColumnDefs = [
+    {
+      accessor: "year",
+      label: "Year",
+      cellAccessors: ["quarter", "month", "day"],
+    },
+    {
+      accessor: "newEnrollments",
+      label: "New Enrollments",
+      columnStyling: { cellAlignment: "left" },
+    },
+    {
+      accessor: "scheduledMeetings",
+      label: "Scheduled Meetings",
+    },
+  ];
+
+  render(
+    <AdvancedTable
+        columnDefinitions={styledColumnDefs}
+        data={{ testid: testId }}
+        tableData={MOCK_DATA}
+    />
+  );
+
+  const firstEnrollmentCell = screen.getAllByText("20")[0].closest("td");
+  expect(firstEnrollmentCell).toHaveAttribute("align", "left");
+});
+
+test("renders virtualized table rows and header", () => {
+  render(
+    <AdvancedTable
+        columnDefinitions={columnDefinitions}
+        data={{ testid: testId }}
+        tableData={MOCK_DATA_WITH_ID}
+        virtualizedRows
+    />
+  )
+
+  const kit = screen.getByTestId(testId)
+
+  const virtualizedHeader = kit.querySelector('.virtualized-header-row-header')
+  expect(virtualizedHeader).toBeInTheDocument()
+
+  const virtualizedRows = kit.querySelectorAll('.virtualized-table-row')
+  expect(virtualizedRows.length).toBeLessThan(MOCK_DATA_WITH_ID.length)
+})
+
+test("rowStyling prop works as expected", () => {
+  const rowStyling = [
+  {
+    rowId: "1",
+    backgroundColor: colors.white,
+    fontColor: colors.black
+  },
+];
+
+  render(
+    <AdvancedTable
+        columnDefinitions={columnDefinitions}
+        data={{ testid: testId }}
+        rowStyling={rowStyling}
+        tableData={MOCK_DATA_WITH_ID}
+    />
+  )
+
+  const kit = screen.getByTestId(testId)
+  const tableBody = kit.querySelector('tbody')
+  const row1 = tableBody.querySelector('tr:nth-child(1)') 
+  expect(row1).toHaveStyle({backgroundColor: colors.white, color: colors.black})
 })

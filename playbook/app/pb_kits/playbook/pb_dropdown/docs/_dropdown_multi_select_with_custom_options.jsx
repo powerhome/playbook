@@ -10,56 +10,56 @@ const DropdownMultiSelectWithCustomOptions = (props) => {
  const options = [
     {
       label: "United States",
-      value: "United States",
+      value: "unitedStates",
       areaCode: "+1",
       icon: "🇺🇸",
       id: "United-states"
     },
     {
       label: "Canada",
-      value: "Canada",
+      value: "canada",
       areaCode: "+1",
       icon: "🇨🇦",
       id: "canada"
     },
     {
       label: "Pakistan",
-      value: "Pakistan",
+      value: "pakistan",
       areaCode: "+92",
       icon: "🇵🇰",
       id: "pakistan"
     },
     {
       label: "India",
-      value: "India",
+      value: "india",
       areaCode: "+91",
       icon: "🇮🇳",
       id: "india"
     },
     {
       label: "Australia",
-      value: "Australia",
+      value: "australia",
       areaCode: "+61",
       icon: "🇦🇺",
       id: "australia"
     },
     {
       label: "New Zealand",
-      value: "New Zealand",
+      value: "newZealand",
       areaCode: "+64",
       icon: "🇳🇿",
       id: "new-zealand"
     },
     {
       label: "Italy",
-      value: "Italy",
+      value: "italy",
       areaCode: "+39",
       icon: "🇮🇹",
       id: "italy"
     },
     {
       label: "Spain",
-      value: "Spain",
+      value: "spain",
       areaCode: "+34",
       icon: "🇪🇸",
       id: "spain"

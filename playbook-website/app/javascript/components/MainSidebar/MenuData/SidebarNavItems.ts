@@ -47,12 +47,5 @@ export const SideBarNavItems = [
         link: "/playbook_icons",
         children: false,
         leftIcon:"icons"
-    },
-    {
-      name: "Playground",
-      key: "top-nav-item-8",
-      link: "/kit_playground_rails",
-      children: false,
-      leftIcon:"laptop-code"
     }
 ]

@@ -80,6 +80,20 @@ module Playbook
         end
       end
 
+      def justify_for(column, index)
+        if index.zero?
+          "start"
+        else
+          case cell_alignment_for(column)
+          when "left"   then "start"
+          when "center" then "center"
+          when "right"  then "end"
+          else
+            "end"
+          end
+        end
+      end
+
     private
 
       def custom_renderer_value(column, index)
@@ -102,6 +116,25 @@ module Playbook
 
       def subrow_depth_classname
         depth.positive? ? "depth-sub-row-#{depth}" : ""
+      end
+
+      def find_column_def_by_accessor(defs, target_accessor)
+        defs.each do |col|
+          return col if col[:accessor] == target_accessor
+
+          if col[:columns].is_a?(Array)
+            found = find_column_def_by_accessor(col[:columns], target_accessor)
+            return found if found
+          end
+        end
+        nil
+      end
+
+      def cell_alignment_for(column)
+        return nil unless column[:accessor]
+
+        orig_def = find_column_def_by_accessor(column_definitions, column[:accessor])
+        orig_def[:column_styling][:cell_alignment] if orig_def && orig_def[:column_styling].is_a?(Hash)
       end
     end
   end

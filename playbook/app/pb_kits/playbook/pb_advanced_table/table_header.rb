@@ -98,6 +98,9 @@ module Playbook
 
             process_columns(col[:columns], rows, current_depth + 1, max_depth)
           else
+            raw_styling       = col[:column_styling] || {}
+            header_alignment  = raw_styling[:header_alignment]
+
             colspan = 1
             rows[current_depth] << {
               label: col[:label],
@@ -105,6 +108,7 @@ module Playbook
               accessor: col[:accessor],
               sort_menu: col[:sort_menu],
               is_last_in_group: is_last && current_depth.positive?,
+              header_alignment: header_alignment,
             }
           end
         end
@@ -137,6 +141,7 @@ module Playbook
           accessor: col[:accessor],
           label: col[:label] || "",
           sort_menu: col[:sort_menu] || nil,
+          column_styling: col[:column_styling] || {},
         }
         (max_depth - 1).times do
           wrapped = { label: "", columns: [wrapped] }
