@@ -60,6 +60,9 @@ Rails.application.routes.draw do
                                 to: "patterns#show",
                                 as: "patterns_show"
 
+  # Icons
+  get "playbook_icons", to: "playbook_icons#index"
+
   # dark mode
   get "/enable_dark_mode", to: "pages#enable_dark_mode", as: "enable_dark_mode"
   get "/disable_dark_mode", to: "pages#disable_dark_mode", as: "disable_dark_mode"

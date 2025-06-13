@@ -40,5 +40,5 @@ export const SideBarNavItems = [
         link: "/patterns",
         children: true,
         leftIcon:"chalkboard-teacher"
-    }
+    },
 ]

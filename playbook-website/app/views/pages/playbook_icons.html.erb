@@ -1,0 +1,47 @@
+<div class="playbook_icons_index">
+  <%= pb_rails("background", props: {
+    background_color: "dark",
+    image_url: vite_asset_path("images/icon-banner.svg"),
+    background_repeat: "no-repeat",
+    background_size: "contain",
+    background_position: "center"
+  }) do %>
+    <div style="height:250px"></div>
+  <% end %>
+
+  <div class="content-wrapper">
+    <%= pb_rails("flex", props: { orientation: "row" }) do %>
+      <%= pb_rails("flex/flex_item", props: { classname:"icon-list-container", flex: "4" }) do %>
+        <%= pb_rails("title", props: { text: "Icons", tag: "h1", size: 1, padding_bottom: "xl" }) %>
+        <%= pb_rails("title", props: {
+          text: "Lorem ipsum dolor sit amet...",
+          tag: "h4",
+          size: 4,
+          bold: false
+        }) %>
+
+        <% @icon_categories.each do |category| %>
+          <%= pb_rails("caption", props: { 
+            text: category[:text], 
+            size: "lg", 
+            id: category[:link].gsub('#', ''),
+            padding_y: "lg"
+          }) %>
+     
+        <% end %>
+      <% end %>
+
+      <%= pb_rails("flex/flex_item", props: { flex: "1", padding_left: "md" }) do %>
+        <%= pb_rails("caption", props: { text: "Icon Categories" }) %>
+        <%= pb_rails("nav", props: { variant: "subtle" }) do %>
+          <% @icon_categories.each do |category| %>
+            <%= pb_rails("nav/item", props: { 
+              text: category[:text], 
+              link: category[:link] 
+            }) %>
+          <% end %>
+        <% end %>
+      <% end %>
+    <% end %>
+  </div>
+</div>
