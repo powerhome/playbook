@@ -1,1 +1,1 @@
-Set the prop `clickOpen` so that the tooltip will only appear when an item is clicked rather than hovered over.
+Set the prop `useClickToOpen` so that the tooltip will only appear when an item is clicked rather than hovered over.
