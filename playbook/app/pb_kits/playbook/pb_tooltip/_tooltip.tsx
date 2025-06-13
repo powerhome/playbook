@@ -9,6 +9,7 @@ import {
   shift,
   useFloating,
   useHover,
+  useClick,
   useInteractions,
 } from "@floating-ui/react"
 
@@ -23,6 +24,7 @@ type TooltipProps = {
   aria?: { [key: string]: string },
   className?: string | string[],
   children: JSX.Element,
+  clickOpen?: boolean,
   data?: { [key: string]: string },
   delay?: number | Partial<{open: number; close: number}>,
   height?: string,
@@ -46,6 +48,7 @@ const Tooltip = forwardRef((props: TooltipProps, ref: ForwardedRef<unknown>): Re
     aria = {},
     className,
     children,
+    clickOpen = false,
     data = {},
     delay = 0,
     height,
@@ -110,14 +113,21 @@ const Tooltip = forwardRef((props: TooltipProps, ref: ForwardedRef<unknown>): Re
     placement: preferredPlacement
   })
 
+  const hover = useHover(context, {
+    delay,
+    handleClose: interaction ? safePolygon({
+      blockPointerEvents: false
+    }) : null,
+    enabled: !clickOpen // Disable hover when clickOpen is true
+  })
 
-  const { getFloatingProps } = useInteractions([
-    useHover(context, {
-      delay,
-      handleClose: interaction ? safePolygon({
-        blockPointerEvents: false
-      }) : null
-    })
+  const click = useClick(context, {
+    enabled: clickOpen // Only enable click when clickOpen is true
+  })
+
+  const { getFloatingProps, getReferenceProps } = useInteractions([
+    hover,
+    click
   ])
 
   const staticSide = {
@@ -142,22 +152,24 @@ const Tooltip = forwardRef((props: TooltipProps, ref: ForwardedRef<unknown>): Re
   return (
     <>
       <div
-          className={`pb_tooltip_kit ${css}`}
-          ref={(element) => {
-            refs.setReference(element);
-            if (ref) {
-              if (typeof ref === "function") {
-                ref(element);
-              } else if (typeof ref === "object") {
-                ref.current = element;
+          {...getReferenceProps({
+            className: `pb_tooltip_kit ${css}`,
+            ref: (element) => {
+              refs.setReference(element);
+              if (ref) {
+                if (typeof ref === "function") {
+                  ref(element);
+                } else if (typeof ref === "object") {
+                  ref.current = element;
+                }
               }
-            }
-          }}
-          role="tooltip_trigger"
-          style={{ display: "inline-block" }}
-          {...ariaProps}
-          {...dataProps}
-          {...htmlProps}
+            },
+            role: "tooltip_trigger",
+            style: { display: "inline-block" },
+            ...ariaProps,
+            ...dataProps,
+            ...htmlProps,
+          })}
       >
         {children}
       </div>
