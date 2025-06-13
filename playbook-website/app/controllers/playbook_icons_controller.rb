@@ -15,7 +15,6 @@ class PlaybookIconsController < ApplicationController
       { text: "Checks", link: "#checks" },
       { text: "Clothing", link: "#clothing" },
       { text: "Communication", link: "#communication" },
-      { text: "Core", link: "#core" },
       { text: "Data Visualization", link: "#data-visualization" },
       { text: "Education", link: "#education" },
       { text: "Files", link: "#files" },
