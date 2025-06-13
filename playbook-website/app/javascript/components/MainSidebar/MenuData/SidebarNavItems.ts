@@ -40,12 +40,5 @@ export const SideBarNavItems = [
         link: "/patterns",
         children: true,
         leftIcon:"chalkboard-teacher"
-    },
-    {
-      name: "Playground",
-      key: "top-nav-item-7",
-      link: "/kit_playground_rails",
-      children: false,
-      leftIcon:"laptop-code"
     }
 ]

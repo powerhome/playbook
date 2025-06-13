@@ -6,15 +6,18 @@ const DropdownSeparatorsHidden = (props) => {
   const options = [
     {
       label: "United States",
-      value: "United States",
+      value: "unitedStates",
+      id: "us"
     },
     {
       label: "Canada",
-      value: "Canada",
+      value: "canada",
+      id: "ca"
     },
     {
       label: "Pakistan",
-      value: "Pakistan",
+      value: "pakistan",
+      id: "pk"
     }
   ];  
 

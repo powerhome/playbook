@@ -63,11 +63,30 @@
     width: 100%;
   }
 
-  // Virtualized table styles
+  // Virtualized Table and Rows for Infinite Scroll
+  scrollbar-gutter: stable right-edges;
+  .virtualized-header-row-header {
+    width: 100% !important;
+    .table-header-cells:first-child {
+      min-width: 180px;
+    }
+  }
+
+  .virtualized-footer {
+    width: 100% !important;
+    td {
+      border-bottom-left-radius: 4px !important;
+      border-bottom-right-radius: 4px !important;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+
   .virtualized-table-row {
     display: table !important;
     table-layout: fixed !important;
-    width: 100% !important;
+    box-sizing: border-box !important;
 
     td {
       display: table-cell !important;
@@ -104,7 +123,7 @@
 
       -ms-overflow-style: none !important;
       scrollbar-width: none !important;
-    }
+  }
   
 
   .row-selection-actions-card {
@@ -193,7 +212,6 @@
 
     // Fix virtualized row borders
     tr.virtualized-table-row {
-      border-bottom: 1px solid $border_light;
 
       &.bg-silver {
         td:first-child {
@@ -605,6 +623,16 @@
         th.sticky-left,
         td.sticky-left {
           border-right: 1px solid $border_light !important;
+        }
+        // Virtualized Table in Responsive Styles
+        .virtualized-header,
+        .virtualized-header-row-header,
+        .virtualized-table-row,
+        .virtualized-footer {
+          border-right: 1px solid $border_light !important;
+          .table-header-cells:first-child {
+            box-shadow: 0 0 10px 0 rgba($shadow, 0.16) !important;
+          }
         }
       }
     }

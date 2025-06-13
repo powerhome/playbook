@@ -6,39 +6,48 @@ const DropdownMultiSelectDisplay = (props) => {
   const options = [
     {
       label: "United States",
-      value: "United States",
+      value: "unitedStates",
+      id: "us"
     },
     {
-        label: "United Kingdom",
-        value: "United Kingdom",
+      label: "United Kingdom",
+      value: "unitedKingdom",
+      id: "gb"
     },  
     {
       label: "Canada",
-      value: "Canada",
+      value: "canada",
+      id: "ca"
     },
     {
       label: "Pakistan",
-      value: "Pakistan",
+      value: "pakistan",
+      id: "pk"
     },
     {
       label: "India",
-      value: "India",
+      value: "india",
+      id: "in"
     },
     {
       label: "Australia",
-      value: "Australia",
+      value: "australia",
+      id: "au"
     },
     {
       label: "New Zealand",
-      value: "New Zealand",
+      value: "new Zealand",
+      id: "nz"
     },
     {
       label: "Italy",
-      value: "Italy",
+      value: "italy",
+      id: "it"
     },
     {
       label: "Spain",
-      value: "Spain",
+      value: "spain",
+      id: "es"
     }
   ];  
 

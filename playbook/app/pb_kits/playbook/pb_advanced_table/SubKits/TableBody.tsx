@@ -16,6 +16,7 @@ type TableBodyProps = {
   dark?: boolean
   id?: string
   subRowHeaders?: string[]
+  isFetching: boolean
 }
 
 export const TableBody = ({
@@ -24,6 +25,7 @@ export const TableBody = ({
   dark = false,
   id,
   subRowHeaders,
+  isFetching,
   ...props
 }: TableBodyProps) => {
 
@@ -63,6 +65,7 @@ export const TableBody = ({
           // Virtualized table view
           <VirtualizedTableView
               collapsibleTrail={collapsibleTrail}
+              isFetching={isFetching}
               subRowHeaders={subRowHeaders}
           />
         ) : (

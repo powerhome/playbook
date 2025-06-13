@@ -59,5 +59,7 @@ examples:
   - advanced_table_column_visibility_multi: Column Visibility Control with Multi-Header Columns
   - advanced_table_pinned_rows: Pinned Rows
   - advanced_table_scrollbar_none: Advanced Table Scrollbar None
+  - advanced_table_row_styling: Row Styling
   - advanced_table_column_styling: Column Styling
   - advanced_table_column_styling_column_headers: Column Styling with Multiple Headers
+  - advanced_table_infinite_scroll: Infinite Scroll

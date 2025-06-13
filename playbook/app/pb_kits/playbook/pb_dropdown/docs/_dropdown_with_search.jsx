@@ -8,20 +8,20 @@ const [selectedOption, setSelectedOption] = useState();
   const options = [
     {
       label: "United States",
-      value: "United States",
+      value: "unitedStates",
       icon: "🇺🇸",
       id: "United-states"
 
     },
     {
       label: "United Kingdom",
-      value: "United Kingdom",
+      value: "unitedKingdom",
       icon: "🇬🇧",
       id: "united-kingdom"
     },
     {
       label: "Pakistan",
-      value: "Pakistan",
+      value: "pakistan",
       icon: "🇵🇰",
       id: "pakistan"
     }

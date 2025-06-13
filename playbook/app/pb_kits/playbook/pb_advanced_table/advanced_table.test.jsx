@@ -1,7 +1,7 @@
 import React, {useState} from "react"
 import { render, screen, waitFor } from "../utilities/test-utils"
 
-import { AdvancedTable, Pill } from "playbook-ui"
+import { AdvancedTable, Pill, colors } from "playbook-ui"
 
 global.ResizeObserver = class {
   observe() {}
@@ -633,3 +633,46 @@ test("columnStyling.cellAlignment sets each <td> align attribute as expected", (
   const firstEnrollmentCell = screen.getAllByText("20")[0].closest("td");
   expect(firstEnrollmentCell).toHaveAttribute("align", "left");
 });
+
+test("renders virtualized table rows and header", () => {
+  render(
+    <AdvancedTable
+        columnDefinitions={columnDefinitions}
+        data={{ testid: testId }}
+        tableData={MOCK_DATA_WITH_ID}
+        virtualizedRows
+    />
+  )
+
+  const kit = screen.getByTestId(testId)
+
+  const virtualizedHeader = kit.querySelector('.virtualized-header-row-header')
+  expect(virtualizedHeader).toBeInTheDocument()
+
+  const virtualizedRows = kit.querySelectorAll('.virtualized-table-row')
+  expect(virtualizedRows.length).toBeLessThan(MOCK_DATA_WITH_ID.length)
+})
+
+test("rowStyling prop works as expected", () => {
+  const rowStyling = [
+  {
+    rowId: "1",
+    backgroundColor: colors.white,
+    fontColor: colors.black
+  },
+];
+
+  render(
+    <AdvancedTable
+        columnDefinitions={columnDefinitions}
+        data={{ testid: testId }}
+        rowStyling={rowStyling}
+        tableData={MOCK_DATA_WITH_ID}
+    />
+  )
+
+  const kit = screen.getByTestId(testId)
+  const tableBody = kit.querySelector('tbody')
+  const row1 = tableBody.querySelector('tr:nth-child(1)') 
+  expect(row1).toHaveStyle({backgroundColor: colors.white, color: colors.black})
+})

@@ -32,6 +32,7 @@ interface UseTableStateProps {
   tableOptions?: GenericObject;
   onRowSelectionChange?: (arg: RowSelectionState) => void;
   columnVisibilityControl?: GenericObject;
+  rowStyling?: GenericObject;
 }
 
 export function useTableState({
@@ -49,6 +50,7 @@ export function useTableState({
   tableOptions,
   columnVisibilityControl,
   pinnedRows,
+  rowStyling
 }: UseTableStateProps) {
 
   // Create a local state for expanded and setExpanded if expandedControl not used
@@ -103,7 +105,8 @@ export function useTableState({
           column.customRenderer,
           isFirstColumn,
           onRowToggleClick,
-          selectableRows
+          selectableRows,
+          rowStyling
         );
       }
 
@@ -167,7 +170,7 @@ export function useTableState({
     sortDescFirst: true,
     onRowSelectionChange: setRowSelection,
     onRowPinningChange,
-    getRowId: (selectableRows || pinnedRows) ? row => row.id : undefined,
+    getRowId: (selectableRows || pinnedRows || rowStyling) ? row => row.id : undefined,
     onColumnVisibilityChange: setColumnVisibility,
     meta: {
       columnDefinitions

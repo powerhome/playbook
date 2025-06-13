@@ -34,5 +34,7 @@ export { default as AdvancedTableColumnVisibilityMulti } from './_advanced_table
 export { default as AdvancedTableColumnVisibilityWithState } from './_advanced_table_column_visibility_with_state.jsx'
 export { default as AdvancedTablePinnedRows } from './_advanced_table_pinned_rows.jsx'
 export { default as AdvancedTableScrollbarNone} from './_advanced_table_scrollbar_none.jsx'
+export { default as AdvancedTableRowStyling } from './_advanced_table_row_styling.jsx'
 export { default as AdvancedTableColumnStyling } from './_advanced_table_column_styling.jsx'
 export { default as AdvancedTableColumnStylingColumnHeaders } from './_advanced_table_column_styling_column_headers.jsx'
+export { default as AdvancedTableInfiniteScroll} from './_advanced_table_infinite_scroll.jsx'
