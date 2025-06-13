@@ -1,0 +1,1 @@
+Radio inputs can be used inside `Dropdown.Option` for a custom layout that mimics form-like selection within a dropdown.

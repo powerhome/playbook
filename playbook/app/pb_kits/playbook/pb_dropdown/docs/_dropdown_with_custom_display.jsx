@@ -14,7 +14,7 @@ const DropdownWithCustomDisplay = (props) => {
   const options = [
     {
       label: "Jasper Furniss",
-      value: "Jasper Furniss",
+      value: "jasperFurniss",
       territory: "PHL",
       title: "Lead UX Engineer",
       id: "jasper-furniss",
@@ -22,7 +22,7 @@ const DropdownWithCustomDisplay = (props) => {
     },
     {
       label: "Ramon Ruiz",
-      value: "Ramon Ruiz",
+      value: "ramonRuiz",
       territory: "PHL",
       title: "Senior UX Designer",
       id: "ramon-ruiz",
@@ -30,7 +30,7 @@ const DropdownWithCustomDisplay = (props) => {
     },
     {
       label: "Carlos Lima",
-      value: "Carlos Lima",
+      value: "carlosLima",
       territory: "PHL",
       title: "Nitro Developer",
       id: "carlos-lima",
@@ -38,7 +38,7 @@ const DropdownWithCustomDisplay = (props) => {
     },
     {
       label: "Courtney Long",
-      value: "Courtney Long",
+      value: "courtneyLong",
       territory: "PHL",
       title: "Lead UX Designer",
       id: "courtney-long",

@@ -20,3 +20,5 @@ export { default as DropdownMultiSelectDisplay } from './_dropdown_multi_select_
 export { default as DropdownMultiSelectWithAutocomplete } from './_dropdown_multi_select_with_autocomplete.jsx'
 export { default as DropdownMultiSelectWithDefault } from './_dropdown_multi_select_with_default.jsx'
 export { default as DropdownMultiSelectWithCustomOptions } from './_dropdown_multi_select_with_custom_options.jsx'
+export {default as DropdownWithCustomIconOptions} from './_dropdown_with_custom_icon_options.jsx'
+export {default as DropdownWithCustomRadioOptions} from './_dropdown_with_custom_radio_options.jsx'
