@@ -1,4 +1,4 @@
-import { useState, useCallback, useMemo } from 'react';
+import { useState, useCallback, useMemo, useEffect } from 'react';
 import {
   useReactTable,
   getCoreRowModel,
@@ -52,6 +52,7 @@ export function useTableState({
   pinnedRows,
   rowStyling
 }: UseTableStateProps) {
+
   // Create a local state for expanded and setExpanded if expandedControl not used
   const [localExpanded, setLocalExpanded] = useState({});
   const [loadingStateRowCount, setLoadingStateRowCount] = useState(initialLoadingRowsCount);
@@ -65,8 +66,8 @@ export function useTableState({
   const setExpanded = expandedControl ? expandedControl.onChange : setLocalExpanded;
   const columnVisibility = (columnVisibilityControl && columnVisibilityControl.value) ? columnVisibilityControl.value : localColumnVisibility;
   const setColumnVisibility = (columnVisibilityControl && columnVisibilityControl.onChange) ? columnVisibilityControl.onChange : setLocalColumnVisibility;
-  const rowPinning = pinnedRows && pinnedRows.value || localRowPinning;
-  const setRowPinning = (pinnedRows && pinnedRows.onChange) ? pinnedRows.onChange : setLocalRowPinning;
+  const rowPinning = pinnedRows?.value ?? localRowPinning
+  const onRowPinningChange = pinnedRows?.onChange ?? setLocalRowPinning
 
   // Virtualized data handling (chunked loading)
   const fetchSize = 20; // Number of rows per "page"
@@ -168,6 +169,7 @@ export function useTableState({
     enableSortingRemoval: false,
     sortDescFirst: true,
     onRowSelectionChange: setRowSelection,
+    onRowPinningChange,
     getRowId: (selectableRows || pinnedRows || rowStyling) ? row => row.id : undefined,
     onColumnVisibilityChange: setColumnVisibility,
     meta: {
@@ -177,6 +179,26 @@ export function useTableState({
     ...paginationInitializer,
     ...tableOptions,
   });
+
+  // Handle row pinning changes
+    useEffect(() => {
+    const topPins = pinnedRows?.value?.top ?? [];
+    if (topPins.length === 0) {
+      onRowPinningChange({ top: [] });
+      return;
+    }
+    const rows = table.getRowModel().rows;
+    const collectAllDescendantIds = (subs: Row<GenericObject>[]): string[] =>
+      subs.flatMap(r => [r.id, ...collectAllDescendantIds(r.subRows)]);
+    const allPinned: string[] = [];
+    topPins.forEach(id => {
+      const parent = rows.find(r => r.id === id && r.depth === 0);
+      if (parent) {
+        allPinned.push(parent.id, ...collectAllDescendantIds(parent.subRows));
+      }
+    });
+    onRowPinningChange({ top: allPinned });
+  }, [table, pinnedRows?.value?.top?.join(',')]);
 
   // Check if table has any sub-rows
   const hasAnySubRows = table.getRowModel().rows.some(row => row.subRows && row.subRows.length > 0);

@@ -35,7 +35,7 @@ const AdvancedTableRowPinning = (props) => {
     },
   ]
 
-  const [pinnedRows, setPinnedRows] = useState({top: ["8", "9", "10", "11", "12", "13", "14"]})
+  const [pinnedRows, setPinnedRows] = useState({top: ["8"]})
 
   return (
     <div>
