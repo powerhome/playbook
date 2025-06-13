@@ -58,12 +58,12 @@ function FilterTest(props) {
 }
 
 test("triggers popover on filter button click", () => {
-  render(<FilterTest data={{ testid: "render-test" }}/>);
+  const { container } = render(<FilterTest data={{ testid: "render-test" }}/>);
 
   const btn = screen.getAllByRole("button")[0];
 
   // checks if the sort menu rendered
-  expect(screen.getByLabelText("sort-amount-down icon")).toBeInTheDocument()
+  expect(container.querySelector('.pb_custom_icon')).toBeInTheDocument()
   expect(screen.getByText('Popularity')).toBeInTheDocument() // check if filter/sort is rendered 
 
   // hits the filter button and triggers popover
