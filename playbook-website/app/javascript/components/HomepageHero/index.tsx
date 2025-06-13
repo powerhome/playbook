@@ -39,6 +39,7 @@ const HomepageHero = () => {
           orientation="column"
           paddingTop="xl"
           position="relative"
+          width="xl"
       >
         {isMax ? (
           <MaxScreen />

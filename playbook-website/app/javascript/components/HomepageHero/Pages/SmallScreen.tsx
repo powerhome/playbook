@@ -23,6 +23,7 @@ const SmallScreen = () => {
         justifyContent="center"
         paddingTop="xl"
         paddingBottom="sm"
+        width="xl"
       >
         <WelcomeComponent
           fixedSize="599px"
