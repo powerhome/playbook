@@ -107,7 +107,6 @@ import * as TitleCount from 'kits/pb_title_count/docs'
 import * as TitleDetail from 'kits/pb_title_detail/docs'
 import * as Toggle from 'kits/pb_toggle/docs'
 import * as Tooltip from 'kits/pb_tooltip/docs'
-import * as TreemapChart from 'kits/pb_treemap_chart/docs'
 import * as Typeahead from 'kits/pb_typeahead/docs'
 import * as User from 'kits/pb_user/docs'
 import * as UserBadge from 'kits/pb_user_badge/docs'
@@ -218,7 +217,6 @@ WebpackerReact.registerComponents({
   ...TitleDetail,
   ...Toggle,
   ...Tooltip,
-  ...TreemapChart,
   ...Typeahead,
   ...User,
   ...UserBadge,

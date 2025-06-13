@@ -1,1 +1,0 @@
-Adding the `drillable` prop allows the tree to be traversed up and down by clicking into each box. Relationships are established through the `chartData`, detailed in the <a href="#treemap-grouped-data">Grouped Data section above</a>.

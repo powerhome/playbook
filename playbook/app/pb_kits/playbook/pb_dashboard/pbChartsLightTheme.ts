@@ -3,8 +3,6 @@ import typography from '../tokens/exports/_typography.module.scss'
 
 import { ThemeProps } from './themeTypes'
 
-import { PlotTreemapOptions } from "highcharts";
-
 const highchartsTheme: ThemeProps = {
   lang: {
     thousandsSep: ',',
@@ -165,43 +163,7 @@ const highchartsTheme: ThemeProps = {
       marker: {
         lineColor: '#333',
       },
-    },
-
-    //TREEMAP CHART STYLES
-    treemap: {
-      layoutAlgorithm: "squarified",
-      allowTraversingTree: false,
-      animationLimit: 1000,
-      colors: [
-        colors.data_1,
-        colors.data_2,
-        colors.data_3,
-        colors.data_4,
-        colors.data_5,
-        colors.data_6,
-        colors.data_7,
-        colors.data_8,
-      ],
-      dataLabels: {
-        enabled: true,
-        style: {
-          fontFamily: typography.font_family_base,
-          fontWeight: typography.bold,
-          fontSize: typography.heading_4,
-        },
-      },
-      levels: [
-        {
-          level: 1,
-          dataLabels: {
-            enabled: false,
-          },
-        },
-      ],
-      traverseUpButton: {
-        position: { y: -50 },
-      },
-    } as PlotTreemapOptions,
+    }
   },
   credits: {
     enabled: false

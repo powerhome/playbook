@@ -56,7 +56,6 @@ These kits use dependencies that are bundled with them; no additional installati
 | **Popover**            | [Popover](https://playbook.powerapp.cloud/kits/popover/react)               | [react-popper](https://www.npmjs.com/package/react-popper) | react-popper                 |
 | **Rich Text Editor**<br>(Trix Editor) | [Rich Text Editor](https://playbook.powerapp.cloud/kits/rich_text_editor/react) | [trix](https://www.npmjs.com/package/trix),<br>[react-trix](https://www.npmjs.com/package/react-trix) | trix,<br>react-trix                     |
 | **Tooltip**            | [Tooltip](https://playbook.powerapp.cloud/kits/tooltip/react)               | [@floating-ui/react](https://www.npmjs.com/package/@floating-ui/react)                            | @floating-ui/react                      |
-| **Treemap Chart**      | [Treemap Chart](https://playbook.powerapp.cloud/kits/treemap_chart/react)   | [highcharts](https://www.npmjs.com/package/highcharts),<br>[highcharts-react-official](https://www.npmjs.com/package/highcharts-react-official) | highcharts,<br>highcharts-react-official |
 | **Typeahead**          | [Typeahead](https://playbook.powerapp.cloud/kits/typeahead/react)           | [react-select](https://www.npmjs.com/package/react-select)| react-select
 | **Walkthrough**        | [Walkthrough](https://playbook.powerapp.cloud/kits/walkthrough/react)       | [react-joyride](https://www.npmjs.com/package/react-joyride)                                      | react-joyride                           |
 
