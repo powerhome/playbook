@@ -9,7 +9,6 @@ import {
   shift,
   useFloating,
   useHover,
-  useClick,
   useInteractions,
 } from "@floating-ui/react"
 
@@ -24,7 +23,6 @@ type TooltipProps = {
   aria?: { [key: string]: string },
   className?: string | string[],
   children: JSX.Element,
-  useClickToOpen?: boolean,
   data?: { [key: string]: string },
   delay?: number | Partial<{open: number; close: number}>,
   height?: string,
@@ -48,7 +46,6 @@ const Tooltip = forwardRef((props: TooltipProps, ref: ForwardedRef<unknown>): Re
     aria = {},
     className,
     children,
-    useClickToOpen = false,
     data = {},
     delay = 0,
     height,
@@ -113,21 +110,14 @@ const Tooltip = forwardRef((props: TooltipProps, ref: ForwardedRef<unknown>): Re
     placement: preferredPlacement
   })
 
-  const hover = useHover(context, {
-    delay,
-    handleClose: interaction ? safePolygon({
-      blockPointerEvents: false
-    }) : null,
-    enabled: !useClickToOpen // Disable hover when useClickToOpen is true
-  })
 
-  const click = useClick(context, {
-    enabled: useClickToOpen // Only enable click when useClickToOpen is true
-  })
-
-  const { getFloatingProps, getReferenceProps } = useInteractions([
-    hover,
-    click
+  const { getFloatingProps } = useInteractions([
+    useHover(context, {
+      delay,
+      handleClose: interaction ? safePolygon({
+        blockPointerEvents: false
+      }) : null
+    })
   ])
 
   const staticSide = {
@@ -152,24 +142,22 @@ const Tooltip = forwardRef((props: TooltipProps, ref: ForwardedRef<unknown>): Re
   return (
     <>
       <div
-          {...getReferenceProps({
-            className: `pb_tooltip_kit ${css}`,
-            ref: (element) => {
-              refs.setReference(element);
-              if (ref) {
-                if (typeof ref === "function") {
-                  ref(element);
-                } else if (typeof ref === "object") {
-                  ref.current = element;
-                }
+          className={`pb_tooltip_kit ${css}`}
+          ref={(element) => {
+            refs.setReference(element);
+            if (ref) {
+              if (typeof ref === "function") {
+                ref(element);
+              } else if (typeof ref === "object") {
+                ref.current = element;
               }
-            },
-            role: "tooltip_trigger",
-            style: { display: "inline-block" },
-            ...ariaProps,
-            ...dataProps,
-            ...htmlProps,
-          })}
+            }
+          }}
+          role="tooltip_trigger"
+          style={{ display: "inline-block" }}
+          {...ariaProps}
+          {...dataProps}
+          {...htmlProps}
       >
         {children}
       </div>

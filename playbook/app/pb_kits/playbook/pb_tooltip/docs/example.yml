@@ -18,4 +18,3 @@ examples:
   - tooltip_icon: Tooltip with Icon
   - tooltip_delay: Delay
   - tooltip_show_tooltip_react: Show Tooltip
-  - tooltip_click_open: Click to Open
