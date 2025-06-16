@@ -22,6 +22,10 @@
               border-radius: 0 4px 0 0;
               border-width: 1px 1px 1px 0;
             }
+            &:only-child {
+              border-radius: 4px 4px 0 0;
+              border-width: 1px 1px 1px 1px;
+            }
           }
         }
       }
@@ -39,6 +43,9 @@
             &:last-child {
               border-width: 0 1px 1px 0;
             }
+            &:only-child {
+              border-width: 0 1px 1px 1px;
+            }
           }
 
           &:last-child {
@@ -52,6 +59,10 @@
               &:last-child {
                 border-radius: 0 0 4px 0;
                 border-width: 0 1px 1px 0;
+              }
+              &:only-child {
+                border-radius: 0 0 4px 4px;
+                border-width: 0 1px 1px 1px;
               }
             }
           }
