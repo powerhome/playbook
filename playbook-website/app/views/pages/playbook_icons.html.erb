@@ -10,34 +10,46 @@
   <% end %>
 
   <div class="content-wrapper">
-    <%= pb_rails("flex", props: { orientation: "row" }) do %>
-      <%= pb_rails("flex/flex_item", props: { classname:"icon-list-container", flex: "4" }) do %>
-        <%= pb_rails("title", props: { text: "Icons", tag: "h1", size: 1, padding_bottom: "xl" }) %>
-        <%= pb_rails("title", props: {
+    <%= pb_rails("flex", props: { justify: "evenly", gap: "md" }) do %>
+      <%= pb_rails("flex", props: { gap: "md", max_width: "lg", orientation: "column"}) do %>
+        <%= pb_rails("title", props: { text: "Icons", tag: "h1", size: 1 }) %>
+        <%= pb_rails("body", props: {
           text: "Lorem ipsum dolor sit amet...",
-          tag: "h4",
-          size: 4,
-          bold: false
         }) %>
-
-        <% @icon_categories.each do |category| %>
-          <%= pb_rails("caption", props: { 
-            text: category[:text], 
-            size: "lg", 
-            id: category[:link].gsub('#', ''),
-            padding_y: "lg"
-          }) %>
-     
+        <% @icons_by_category.sort.each do |category, icons| %>
+          <%= pb_rails("flex", props: { align_self: "stretch", gap: "sm", orientation: "column"}) do %>
+            <%= pb_rails("caption", props: {
+              id: category.parameterize,
+              size: "lg",
+              text: category
+            }) %>
+            <%= pb_rails("layout", props: {
+              align_self: "stretch",
+              classname: "icon-grid",
+              layout: "collection"
+            }) do %>
+              <%= pb_rails("layout/body") do %>
+                <% icons.sort_by { |i| i["name"] }.each do |icon| %>
+                  <%= pb_rails("selectable_card_icon", props: {
+                    classname: "icon-card",
+                    icon: icon["name"],
+                    title_text: icon["name"]
+                  }) %>
+                <% end %>
+              <% end %>
+            <% end %>
+          <% end %>
         <% end %>
       <% end %>
 
-      <%= pb_rails("flex/flex_item", props: { flex: "1", padding_left: "md" }) do %>
+      <%= pb_rails("section_separator", props: { align_self: "stretch", classname: "icon-categories-section-separator", orientation: "vertical" }) %>
+      <%= pb_rails("flex/flex_item", props: { flex: "1", padding_left: "md", classname: "icon-categories-sidebar" }) do %>
         <%= pb_rails("caption", props: { text: "Icon Categories" }) %>
         <%= pb_rails("nav", props: { variant: "subtle" }) do %>
           <% @icon_categories.each do |category| %>
-            <%= pb_rails("nav/item", props: { 
-              text: category[:text], 
-              link: category[:link] 
+            <%= pb_rails("nav/item", props: {
+              text: category[:text],
+              link: category[:link]
             }) %>
           <% end %>
         <% end %>
