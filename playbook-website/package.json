@@ -4,8 +4,7 @@
   "version": "1.0.0",
   "scripts": {
     "lint": "eslint app/ --ext .js,.jsx",
-    "release": "bin/vite build",
-    "postinstall": "node scripts/generate_icon_list.mjs"
+    "release": "bin/vite build"
   },
   "dependencies": {
     "@fortawesome/fontawesome-pro": "6.2.1",
