@@ -113,7 +113,6 @@ export { default as TitleCount } from '../pb_kits/playbook/pb_title_count/_title
 export { default as TitleDetail } from '../pb_kits/playbook/pb_title_detail/_title_detail'
 export { default as Toggle } from '../pb_kits/playbook/pb_toggle/_toggle'
 export { default as Tooltip } from '../pb_kits/playbook/pb_tooltip/_tooltip'
-export { default as TreemapChart } from '../pb_kits/playbook/pb_treemap_chart/_treemap_chart'
 export { default as Typeahead } from '../pb_kits/playbook/pb_typeahead/_typeahead'
 export { default as User } from '../pb_kits/playbook/pb_user/_user'
 export { default as UserBadge } from '../pb_kits/playbook/pb_user_badge/_user_badge'

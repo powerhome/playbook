@@ -16,7 +16,6 @@ import LineGraph from 'kits/pb_line_graph/_line_graph'
 import MultiLevelSelect from 'kits/pb_multi_level_select/_multi_level_select'
 import Passphrase from 'kits/pb_passphrase/_passphrase'
 import RichTextEditor from 'kits/pb_rich_text_editor/_rich_text_editor'
-import TreemapChart from 'kits/pb_treemap_chart/_treemap_chart'
 import Typeahead from 'kits/pb_typeahead/_typeahead'
 import PhoneNumberInput from 'kits/pb_phone_number_input/_phone_number_input'
 
@@ -33,7 +32,6 @@ WebpackerReact.registerComponents({
   LineGraph,
   Passphrase,
   RichTextEditor,
-  TreemapChart,
   Typeahead,
   Gauge,
   PhoneNumberInput
