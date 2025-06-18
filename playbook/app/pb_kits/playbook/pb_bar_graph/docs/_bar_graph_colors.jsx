@@ -1,6 +1,13 @@
 import React from 'react'
+import colors from '../../tokens/exports/_colors.module.scss'
 
-import BarGraph from '../_bar_graph'
+import Highcharts from "highcharts";
+import HighchartsReact from "highcharts-react-official";
+
+import "../BarGraphStyles.scss";
+// Your path might look more like this
+//import "playbook-ui/dist/pb_bar_graph/BarGraphStyles.scss";
+
 
 const chartData = [{
   name: 'Installation',
@@ -19,18 +26,37 @@ const chartData = [{
   data: [1111, 677, 3245, 500, 200],
 }]
 
-const BarGraphColors = (props) => (
+const columnOptions = {
+  chart: {
+    type: "column",
+  },
+  series: chartData,
+  title: {
+    text: "Solar Employment Growth by Sector, 2010-2016",
+  },
+  subtitle: {
+    text: "Source: thesolarfoundation.com",
+  },
+  xAxis: {
+    categories: ["Jan", "Feb", "Mar", "Apr", "May"],
+  },
+  yAxis: {
+    min: 0,
+    title: {
+      text: "Number of Employees",
+    },
+  },
+  legend: { enabled: false },
+  credits: { enabled: false },
+  colors: [colors.data_4, colors.data_5, colors.data_6, colors.data_7, colors.data_8],
+}
+
+const BarGraphColors = () => (
   <div>
-    <BarGraph
-        axisTitle="Number of Employees"
-        chartData={chartData}
-        colors={['data-4', 'data-5', 'data-6', 'data-7', 'data-8']}
-        id="bar-colors"
-        title="Bar Graph with Custom Data Colors"
-        xAxisCategories={['Jan', 'Feb', 'Mar', 'Apr', 'May']}
-        yAxisMin={0}
-        {...props}
-    />
+      <HighchartsReact
+          highcharts={Highcharts}
+          options={columnOptions}
+      />
   </div>
 )
 

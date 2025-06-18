@@ -1,6 +1,7 @@
 import React from 'react'
-
-import BarGraph from '../_bar_graph'
+import Highcharts from "highcharts"
+import HighchartsReact from "highcharts-react-official"
+import "../BarGraphStyles.scss"
 
 const chartData = [{
   name: 'Number of Installations',
@@ -13,22 +14,38 @@ const chartData = [{
   yAxis: 1
 }]
 
-const axisTitles = [ {name: "Number of Installations"}, {name: "Percentage"}]
+const columnOptions = {
+  chart: {
+    type: "column",
+  },
+  series: chartData,
+  title: {
+    text: "Bar Graph with Secondary Y-axis",
+  },
+  xAxis: {
+    categories: ["Jan", "Feb", "Mar", "Apr", "May"],
+  },
+  yAxis: [{
+    min: 0,
+    title: {
+      text: "Number of Employees",
+    },
+  }, { 
+    title: {
+      text: "Percentage",
+    },
+    opposite: true,
+    min: 0,
+    max: 100
+  }],
+  credits: { enabled: false },
+}
 
-const axisFormats = [{format: ""}, {format: "{value}%"}]
-
-const BarGraphSecondaryYAxis= (props) => (
+const BarGraphSecondaryYAxis = () => (
   <div>
-    <BarGraph
-        axisFormat={axisFormats}
-        axisTitle={axisTitles}
-        chartData={chartData}
-        id="bar-spline"
-        legend
-        title="Bar Graph with Secondary Y-axis"
-        xAxisCategories={['Jan', 'Feb', 'Mar', 'Apr', 'May']}
-        yAxisMin={0}
-        {...props}
+    <HighchartsReact
+        highcharts={Highcharts}
+        options={columnOptions}
     />
   </div>
 )
