@@ -2,7 +2,8 @@
   $border-color,
   $bg-main,
   $bg-secondary,
-  $highlight: $info_subtle
+  $highlight: #E5EEFA,
+  $highlight-dark: #202850,
 ) {
   border-radius: 4px;
   box-shadow: 1px 0 0 0px $border-color, -1px 0 0 0px $border-color;
@@ -93,6 +94,20 @@
 
     .pb_advanced_table_header {
       box-shadow: none !important;
+    }
+  }
+
+  &.dark {
+    .bg-row-selection {
+      td:first-child,
+      .sticky-left {
+        background-color: $highlight-dark;
+      }
+    }
+    .virtualized-table-row {
+      &.bg-row-selection td:first-child {
+        background-color: $highlight-dark;
+      }
     }
   }
 }

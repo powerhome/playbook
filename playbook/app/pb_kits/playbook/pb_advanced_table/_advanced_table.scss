@@ -56,7 +56,7 @@
   }
 
   .bg-row-selection {
-    background-color: $info_subtle;
+    background-color: #E5EEFA;
   }
 
   .full-width {
@@ -227,7 +227,7 @@
 
       &.bg-row-selection {
         td:first-child {
-          background-color: $info_subtle;
+          background-color: #E5EEFA;
         }
       }
     }
@@ -888,6 +888,18 @@
           th.sticky-left,
           td.sticky-left {
             border-right: 1px solid $border_dark !important;
+          }
+        }
+      }
+    }
+    .bg-row-selection {
+      background-color: #202850;
+    }
+    .pb_advanced_table_body {
+      tr.virtualized-table-row {
+        &.bg-row-selection {
+          td:first-child {
+            background-color: #202850;
           }
         }
       }
