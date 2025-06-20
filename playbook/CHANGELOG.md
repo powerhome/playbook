@@ -10,7 +10,7 @@
 - Advanced Table Kit: Selectable Rows Color Opacity [\#4779](https://github.com/powerhome/playbook/pull/4779) ([elisashapiro](https://github.com/elisashapiro))
 - Table Kit: Styling Issue For One Column Table [\#4766](https://github.com/powerhome/playbook/pull/4766) ([elisashapiro](https://github.com/elisashapiro))
 - Advanced Table Kit: Refactored Enhanced Element File for Better Load Time [\#4754](https://github.com/powerhome/playbook/pull/4754) ([nidaqg](https://github.com/nidaqg))
-- Tooltip Kit: Add Useclick Prop - React Only [\#4764](https://github.com/powerhome/playbook/pull/4764) ([skduncan](https://github.com/skduncan))
+- Tooltip Kit: Add useClickToOpen Prop - React Only [\#4764](https://github.com/powerhome/playbook/pull/4764) ([skduncan](https://github.com/skduncan))
 - Advanced Table Kit: Pinned Rows to Always Pin Children [\#4747](https://github.com/powerhome/playbook/pull/4747) ([nidaqg](https://github.com/nidaqg))
 - Advanced Table Kit: Row Styling Prop [\#4735](https://github.com/powerhome/playbook/pull/4735) ([nidaqg](https://github.com/nidaqg))
 - Advanced Table: Continue Infinite Scroll - React [\#4734](https://github.com/powerhome/playbook/pull/4734) ([elisashapiro](https://github.com/elisashapiro))
