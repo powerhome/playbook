@@ -1,0 +1,1 @@
+By default, text is not preserved in the typeahead kit when you click off of the input field. You can utilize the `preserve_search_input` prop in order to prevent text from being cleared when the field loses focus

@@ -54,6 +54,8 @@ module Playbook
                                      default: nil
       prop :disabled, type: Playbook::Props::Boolean,
                       default: false
+      prop :preserve_search_input, type: Playbook::Props::Boolean,
+                                   default: false
 
       def classname
         default_margin_bottom = margin_bottom.present? ? "" : " mb_sm"
@@ -103,6 +105,7 @@ module Playbook
           optionsByContext: options_by_context,
           clearOnContextChange: clear_on_context_change,
           disabled: disabled,
+          preserveSearchInput: preserve_search_input,
         }
 
         base_options[:getOptionLabel] = get_option_label if get_option_label.present?
