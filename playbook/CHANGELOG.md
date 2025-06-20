@@ -1,7 +1,9 @@
-# 14.22.0
+# ⚒️ Click-to-Open Tooltips & Core Dependency Updates! 🤖
 ##### June 20, 2025
 
 ![release_image](https://github.com/user-attachments/assets/db119637-25e9-4157-9091-c5f7fdf034fc)
+
+Introducing the new useClickToOpen prop in the Tooltip Kit, so now you can set the tooltip to open on click instead of just hover! Core dependencies in Playbook have also been updated with Vite now at 6.3.5 and Terser at 5.39.0—for improved build performance and optimization. Lastly, we've updated Rails from 7.0.8.1 to 7.1, bringing in the latest framework enhancements and security updates. Dependabot has nothing on us!
 
 [14.22.0](https://github.com/powerhome/playbook/tree/14.22.0) full list of changes:
 
