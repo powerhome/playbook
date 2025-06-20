@@ -30,11 +30,11 @@
                                     class="gray-icon expand-toggle-icon"
                                     data-advanced-table="true">
                                     <%= pb_rails("icon", props: { id: "advanced-table_open_icon", icon: "circle-play", cursor: "pointer" }) %>
-                                    <%= pb_rails("icon", props: { id: "advanced-table_close_icon", icon: "circle-play", cursor: "pointer", rotation: 90 }) %>
+                                    <%= pb_rails("icon", props: { id: "advanced-table_close_icon", icon: "circle-play-down", cursor: "pointer" }) %>
                                 </button>
                             <% end %>
                         <% end %>
-                        <%= pb_rails("flex/flex_item") do %>       
+                        <%= pb_rails("flex/flex_item") do %>
                             <% if column[:custom_renderer].present? %>
                                 <%= raw(column[:custom_renderer].call(object.row, custom_renderer_value(column, index))) %>
                             <% elsif index.zero? %>
