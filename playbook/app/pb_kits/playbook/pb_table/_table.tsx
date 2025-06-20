@@ -104,8 +104,8 @@ const Table = (props: TableProps): React.ReactElement => {
 
             stickyLeftColumn.forEach((colId, index) => {
                 const isLastColumn = index === stickyLeftColumn.length - 1;
-                const header = document.querySelector(`th[id="${colId}"]`);
-                const cells = document.querySelectorAll(`td[id="${colId}"]`);
+                const header = document.querySelector(`th[data-sticky-id="${colId}"]`);
+                const cells = document.querySelectorAll(`td[data-sticky-id="${colId}"]`);
 
                 if (header) {
                     header.classList.add('sticky');
@@ -155,8 +155,8 @@ const Table = (props: TableProps): React.ReactElement => {
 
             stickyRightColumnReversed.forEach((colId, index) => {
                 const isLastColumn = index === stickyRightColumn.length - 1;
-                const header = document.querySelector(`th[id="${colId}"]`);
-                const cells = document.querySelectorAll(`td[id="${colId}"]`);
+                const header = document.querySelector(`th[data-sticky-id="${colId}"]`);
+                const cells = document.querySelectorAll(`td[data-sticky-id="${colId}"]`);
 
                 if (header) {
                     header.classList.add('sticky');
