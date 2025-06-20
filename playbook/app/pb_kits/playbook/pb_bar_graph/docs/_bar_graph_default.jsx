@@ -1,6 +1,11 @@
 import React from 'react'
+import Highcharts from "highcharts";
+import HighchartsReact from "highcharts-react-official";
 
-import BarGraph from '../_bar_graph'
+import "../BarGraphStyles.scss";
+// Your path might look more like this
+//import "playbook-ui/dist/pb_bar_graph/BarGraphStyles.scss";
+
 
 const chartData = [{
   name: 'Installation',
@@ -19,17 +24,35 @@ const chartData = [{
   data: [1111, 677, 3245, 500, 200],
 }]
 
-const BarGraphDefault = (props) => (
+const chartOptions = {
+  chart: {
+    type: 'column',
+  },
+  series: chartData,
+  title: {
+    text: 'Solar Employment Growth by Sector, 2010-2016',
+  },
+  subtitle: {
+    text: 'Source: thesolarfoundation.com',
+  },
+  xAxis: {
+    categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
+  },
+  yAxis: {
+    min: 0,
+    title: {
+      text: 'Number of Employees',
+    },
+  },
+  legend: { enabled: false },
+  credits: { enabled: false },
+}
+
+const BarGraphDefault = () => (
   <div>
-    <BarGraph
-        axisTitle="Number of Employees"
-        chartData={chartData}
-        id="bar-default"
-        subTitle="Source: thesolarfoundation.com"
-        title="Solar Employment Growth by Sector, 2010-2016"
-        xAxisCategories={['Jan', 'Feb', 'Mar', 'Apr', 'May']}
-        yAxisMin={0}
-        {...props}
+    <HighchartsReact
+        highcharts={Highcharts}
+        options={chartOptions}
     />
   </div>
 )

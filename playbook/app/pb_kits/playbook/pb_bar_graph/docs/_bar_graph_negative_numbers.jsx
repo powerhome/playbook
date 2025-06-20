@@ -1,6 +1,11 @@
 import React from 'react'
 
-import BarGraph from '../_bar_graph'
+import Highcharts from "highcharts";
+import HighchartsReact from "highcharts-react-official";
+
+import "../BarGraphStyles.scss";
+// Your path might look more like this
+//import "playbook-ui/dist/pb_bar_graph/BarGraphStyles.scss";
 
 const chartData = [{
   name: 'Installation',
@@ -17,18 +22,32 @@ const chartData = [{
   threshold: 0
 }]
 
+const columnOptions = {
+  chart: {
+    type: "column",
+  },
+  series: chartData,
+  title: {
+    text: "Bar Graph with Negative Numbers",
+  },
+  xAxis: {
+    categories: ["Jan", "Feb", "Mar", "Apr", "May"],
+  },
+  yAxis: {
+    title: {
+      text: "Number of Employees",
+    },
+  },
+  credits: { enabled: false },
+};
 
-const BarGraphStacked = (props) => (
+
+const BarGraphStacked = () => (
   <div>
-    <BarGraph
-        axisTitle="Number of Employees"
-        chartData={chartData}
-        id="bar-default"
-        legend
-        title="Bar Graph with Negative Numbers"
-        xAxisCategories={['Jan', 'Feb', 'Mar', 'Apr', 'May']}
-        {...props}
-    />
+     <HighchartsReact
+         highcharts={Highcharts}
+         options={columnOptions}
+     />
   </div>
 )
 

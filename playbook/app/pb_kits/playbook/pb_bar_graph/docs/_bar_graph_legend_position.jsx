@@ -1,6 +1,11 @@
 import React from 'react'
+import Highcharts from "highcharts";
+import HighchartsReact from "highcharts-react-official";
 
-import BarGraph from "../../pb_bar_graph/_bar_graph"
+import "../BarGraphStyles.scss";
+// Your path might look more like this
+//import "playbook-ui/dist/pb_bar_graph/BarGraphStyles.scss";
+
 import Title from "../../pb_title/_title"
 
 const chartData = [{
@@ -20,7 +25,85 @@ const chartData = [{
   data: [1111],
 }]
 
-const BarGraphLegendPosition = (props) => (
+const alignChartOptions = {
+  chart: {
+    type: 'column',
+  },
+  series: chartData,
+  title: {
+    text: 'Alignment of Legend',
+  },
+  subtitle: {
+    text: 'Source: thesolarfoundation.com',
+  },
+  xAxis: {
+    categories: ['Jan'],
+  },
+  yAxis: {
+    min: 0,
+    title: {
+      text: 'Number of Employees',
+    },
+  },
+  legend: { 
+    enabled: true,
+    verticalAlign: 'top',
+    align: 'right',
+   },
+  credits: { enabled: false },
+}
+
+const layoutChartOptions = {
+  chart: {
+    type: 'column',
+  },
+  series: chartData,
+  title: {
+    text: 'Layout of Legend',
+  },
+  xAxis: {
+    categories: ['Jan'],
+  },
+  yAxis: {
+    min: 0,
+    title: {
+      text: 'Number of Employees',
+    },
+  },
+  legend: { 
+    enabled: true,
+    layout: 'vertical',
+   },
+  credits: { enabled: false },
+}
+
+const offsetChartOptions = {
+  chart: {
+    type: 'column',
+  },
+  series: chartData,
+  title: {
+    text: 'Offset of Legend',
+  },
+  xAxis: {
+    categories: ['Jan'],
+  },
+  yAxis: {
+    min: 0,
+    title: {
+      text: 'Number of Employees',
+    },
+  },
+  legend: {
+    enabled: true,
+    layout: 'vertical',
+    x: 100,
+    y: 10,
+  },
+  credits: { enabled: false },
+}
+
+const BarGraphLegendPosition = () => (
   <div>
     <Title
         paddingBottom="sm"
@@ -29,19 +112,11 @@ const BarGraphLegendPosition = (props) => (
         tag="h4"
         text="align | verticalAlign"
     />
-    <BarGraph
-        align='right'
-        axisTitle="Number of Employees"
-        chartData={chartData}
-        id="legend-position-bar"
-        legend
-        paddingBottom="sm"
-        title="Alignment of Legend"
-        verticalAlign="top"
-        xAxisCategories={['Jan']}
-        yAxisMin={0}
-        {...props}
+    <HighchartsReact 
+        highcharts={Highcharts}
+        options={alignChartOptions}
     />
+
     <Title
         paddingBottom="sm"
         paddingTop="sm"
@@ -49,19 +124,11 @@ const BarGraphLegendPosition = (props) => (
         tag="h4"
         text="layout"
     />
-    <BarGraph
-        axisTitle="Number of Employees"
-        chartData={chartData}
-        id="legend-position-bar-1"
-        layout="vertical"
-        legend
-        paddingBottom="sm"
-        paddingTop="sm"
-        title="Layout of Legend"
-        xAxisCategories={['Jan']}
-        yAxisMin={0}
-        {...props}
+    <HighchartsReact 
+        highcharts={Highcharts}
+        options={layoutChartOptions}
     />
+
     <Title
         paddingBottom="sm"
         paddingTop="sm"
@@ -69,18 +136,9 @@ const BarGraphLegendPosition = (props) => (
         tag="h4"
         text="x | y"
     />
-    <BarGraph
-        axisTitle="Number of Employees"
-        chartData={chartData}
-        id="legend-position-bar-2"
-        layout="vertical"
-        legend
-        title="Offset of Legend"
-        x={100}
-        xAxisCategories={['Jan']}
-        y={10}
-        yAxisMin={0}
-        {...props}
+    <HighchartsReact 
+        highcharts={Highcharts}
+        options={offsetChartOptions}
     />
   </div>
 )

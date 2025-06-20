@@ -1,6 +1,11 @@
 import React from 'react'
 
-import BarGraph from '../_bar_graph'
+import Highcharts from "highcharts";
+import HighchartsReact from "highcharts-react-official";
+
+import "../BarGraphStyles.scss";
+// Your path might look more like this
+//import "playbook-ui/dist/pb_bar_graph/BarGraphStyles.scss";
 
 const chartData = [{
   name: 'Number of Installations',
@@ -12,17 +17,31 @@ const chartData = [{
   color: '#F9BB00',
 }]
 
-const BarGraphSpline = (props) => (
+const columnOptions = {
+  chart: {
+    type: "column",
+  },
+  series: chartData,
+  title: {
+    text: "Bar Graph with Spline",
+  },
+  xAxis: {
+    categories: ["Jan", "Feb", "Mar", "Apr", "May"],
+  },
+  yAxis: {
+    min: 0,
+    title: {
+      text: "Number of Employees",
+    },
+  },
+  credits: { enabled: false },
+};
+
+const BarGraphSpline = () => (
   <div>
-    <BarGraph
-        axisTitle="Number of Employees"
-        chartData={chartData}
-        id="bar-spline"
-        legend
-        title="Bar Graph with Spline"
-        xAxisCategories={['Jan', 'Feb', 'Mar', 'Apr', 'May']}
-        yAxisMin={0}
-        {...props}
+    <HighchartsReact
+        highcharts={Highcharts}
+        options={columnOptions}
     />
   </div>
 )

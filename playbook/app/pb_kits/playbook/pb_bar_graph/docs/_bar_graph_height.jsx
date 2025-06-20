@@ -1,39 +1,81 @@
 import React from 'react'
+import Highcharts from "highcharts";
+import HighchartsReact from "highcharts-react-official";
 
-import BarGraph from '../_bar_graph'
+import "../BarGraphStyles.scss";
+// Your path might look more like this
+//import "playbook-ui/dist/pb_bar_graph/BarGraphStyles.scss";
 
 const chartData = [{
   name: 'Number of Installations',
   data: [1475, 200, 3000, 654, 656],
 }]
 
-const BarGraphDefault = (props) => (
+const pixleHeightChartOptions = {
+  chart: {
+    type: "column",
+    height: "300"
+  },
+  series: chartData,
+  title: {
+    text: "Solar Employment Growth by Sector, 2010-2016",
+  },
+  subtitle: {
+    text: "Source: thesolarfoundation.com",
+  },
+  xAxis: {
+    categories: ["Jan", "Feb", "Mar", "Apr", "May"],
+  },
+  yAxis: {
+    min: 0,
+    title: {
+      text: "Number of Employees",
+    },
+  },
+  legend: { enabled: false },
+  credits: { enabled: false },
+};
+
+const percentageHeightChartOptions = {
+  chart: {
+    type: "column",
+    height: "50%"
+  },
+  series: chartData,
+  title: {
+    text: "Solar Employment Growth by Sector, 2010-2016",
+  },
+  subtitle: {
+    text: "Source: thesolarfoundation.com",
+  },
+  xAxis: {
+    categories: ["Jan", "Feb", "Mar", "Apr", "May"],
+  },
+  yAxis: {
+    min: 0,
+    title: {
+      text: "Number of Employees",
+    },
+  },
+  legend: { enabled: false },
+  credits: { enabled: false },
+};
+
+const BarGraphHeight = () => (
   <div>
-    <BarGraph
-        axisTitle="Number of Employees"
-        chartData={chartData}
-        height="300"
-        id="bar-fixed-height"
-        title="Fixed Height (300px)"
-        xAxisCategories={['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']}
-        yAxisMin={0}
-        {...props}
-    />
+      <HighchartsReact
+          highcharts={Highcharts}
+          options={pixleHeightChartOptions}
+      />
 
     <br />
     <br />
 
-    <BarGraph
-        axisTitle="Number of Employees"
-        chartData={chartData}
-        height="50%"
-        id="bar-percentage-height"
-        title="Percentage Height (50%)"
-        xAxisCategories={['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']}
-        yAxisMin={0}
-        {...props}
+    <HighchartsReact
+        highcharts={Highcharts}
+        options={percentageHeightChartOptions}
     />
   </div>
 )
 
-export default BarGraphDefault
+export default BarGraphHeight

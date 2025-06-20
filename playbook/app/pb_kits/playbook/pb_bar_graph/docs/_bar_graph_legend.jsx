@@ -1,22 +1,45 @@
 import React from 'react'
-import BarGraph from "../../pb_bar_graph/_bar_graph"
+import Highcharts from "highcharts";
+import HighchartsReact from "highcharts-react-official";
+
+import "../BarGraphStyles.scss";
+// Your path might look more like this
+//import "playbook-ui/dist/pb_bar_graph/BarGraphStyles.scss";
 
 const chartData = [{
   name: 'Number of Installations',
   data: [1475, 200, 3000, 654, 656],
 }]
 
-const BarGraphLegend = (props) => (
+const chartOptions = {
+  chart: {
+    type: 'column',
+  },
+  series: chartData,
+  title: {
+    text: 'Solar Employment Growth by Sector, 2010-2016',
+  },
+  subtitle: {
+    text: 'Source: thesolarfoundation.com',
+  },
+  xAxis: {
+    categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
+  },
+  yAxis: {
+    min: 0,
+    title: {
+      text: 'Number of Employees',
+    },
+  },
+  legend: { enabled: true },
+  credits: { enabled: false },
+}
+
+const BarGraphLegend = () => (
   <div>
-    <BarGraph
-        axisTitle="Number of Employees"
-        chartData={chartData}
-        id="bar-test-2"
-        legend
-        title="Bar Graph with Legend"
-        xAxisCategories={['Jan', 'Feb', 'Mar', 'Apr', 'May']}
-        yAxisMin={0}
-        {...props}
+    <HighchartsReact
+        highcharts={Highcharts}
+        options={chartOptions}
     />
   </div>
 )

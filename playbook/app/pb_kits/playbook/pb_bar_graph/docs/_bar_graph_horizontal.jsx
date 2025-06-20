@@ -1,9 +1,14 @@
 import React from 'react'
 
-import BarGraph from '../_bar_graph'
+import Highcharts from "highcharts";
+import HighchartsReact from "highcharts-react-official";
+
+import "../BarGraphStyles.scss";
+// Your path might look more like this
+//import "playbook-ui/dist/pb_bar_graph/BarGraphStyles.scss";
 
 
-const barGraphOptions = {
+const chartOptions = {
     chart: {
         type: 'bar'
     },
@@ -54,13 +59,11 @@ const barGraphOptions = {
     }]
 }
 
-const BarGraphHorizontal = (props) => (
+const BarGraphHorizontal = () => (
   <div>
-    <BarGraph
-        customOptions={barGraphOptions}
-        id="bar-horizontal"
-        yAxisMin={0}
-        {...props}
+    <HighchartsReact
+        highcharts={Highcharts}
+        options={chartOptions}
     />
   </div>
 )
