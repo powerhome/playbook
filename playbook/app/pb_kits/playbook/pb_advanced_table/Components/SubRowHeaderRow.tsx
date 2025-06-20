@@ -40,7 +40,6 @@ export const SubRowHeaderRow = ({
   const canExpand = inlineRowLoading ? rowHasChildren : row.getCanExpand()
   const hasSubrowsToSort = row.getParentRow()?.subRows
 
-  console.log()
 
   return (
     <tr className="custom-row bg-silver">
@@ -69,7 +68,7 @@ export const SubRowHeaderRow = ({
                   aria-label="Sort this group"
                   className="sort-button-icon"
                   onClick={() => {
-                    console.log(row.getParentRow()?.getIsGrouped(), "parent's subrows");
+                    console.log(row.getParentRow()?.subRows);
                 }}
               >
                 <Icon 
