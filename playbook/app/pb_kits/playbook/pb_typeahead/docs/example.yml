@@ -15,6 +15,7 @@ examples:
     - typeahead_dynamic_options: Dynamic Options
     - typeahead_dynamic_options_pure_rails: Dynamic Options (Pure Rails)
     - typeahead_disabled: Disabled
+    - typeahead_preserve_input: Preserve Search Input
 
   react:
     - typeahead_default: Default
