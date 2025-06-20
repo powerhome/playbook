@@ -1,0 +1,1950 @@
+[
+  {
+    "name": "asterisk",
+    "category": "Alert"
+  },
+  {
+    "name": "bell-on",
+    "category": "Alert"
+  },
+  {
+    "name": "bell",
+    "category": "Alert"
+  },
+  {
+    "name": "circle-exclamation",
+    "category": "Alert"
+  },
+  {
+    "name": "circle-info",
+    "category": "Alert"
+  },
+  {
+    "name": "exclamation",
+    "category": "Alert"
+  },
+  {
+    "name": "info",
+    "category": "Alert"
+  },
+  {
+    "name": "star",
+    "category": "Alert"
+  },
+  {
+    "name": "warning",
+    "category": "Alert"
+  },
+  {
+    "name": "bat",
+    "category": "Animals"
+  },
+  {
+    "name": "bug",
+    "category": "Animals"
+  },
+  {
+    "name": "cat",
+    "category": "Animals"
+  },
+  {
+    "name": "dog",
+    "category": "Animals"
+  },
+  {
+    "name": "fish",
+    "category": "Animals"
+  },
+  {
+    "name": "paw",
+    "category": "Animals"
+  },
+  {
+    "name": "angle-double-down",
+    "category": "Arrows"
+  },
+  {
+    "name": "angle-double-left",
+    "category": "Arrows"
+  },
+  {
+    "name": "angle-double-right",
+    "category": "Arrows"
+  },
+  {
+    "name": "angle-down",
+    "category": "Arrows"
+  },
+  {
+    "name": "angle-left",
+    "category": "Arrows"
+  },
+  {
+    "name": "angle-right",
+    "category": "Arrows"
+  },
+  {
+    "name": "angle-up",
+    "category": "Arrows"
+  },
+  {
+    "name": "arrow-circle-left",
+    "category": "Arrows"
+  },
+  {
+    "name": "arrow-circle-right",
+    "category": "Arrows"
+  },
+  {
+    "name": "arrow-down-left-and-arrow-up-right-to-center",
+    "category": "Arrows"
+  },
+  {
+    "name": "arrow-down-short-wide",
+    "category": "Arrows"
+  },
+  {
+    "name": "arrow-down-to-line",
+    "category": "Arrows"
+  },
+  {
+    "name": "arrow-down-up-across-line",
+    "category": "Arrows"
+  },
+  {
+    "name": "arrow-down-wide-short",
+    "category": "Arrows"
+  },
+  {
+    "name": "arrow-down",
+    "category": "Arrows"
+  },
+  {
+    "name": "arrow-left",
+    "category": "Arrows"
+  },
+  {
+    "name": "arrow-right",
+    "category": "Arrows"
+  },
+  {
+    "name": "arrow-up-arrow-down",
+    "category": "Arrows"
+  },
+  {
+    "name": "arrow-up-from-bracket",
+    "category": "Arrows"
+  },
+  {
+    "name": "arrow-up-right-and-arrow-down-left-from-center",
+    "category": "Arrows"
+  },
+  {
+    "name": "arrow-up-right-from-square",
+    "category": "Arrows"
+  },
+  {
+    "name": "arrow-up-short-wide",
+    "category": "Arrows"
+  },
+  {
+    "name": "arrow-up-to-line",
+    "category": "Arrows"
+  },
+  {
+    "name": "arrow-up-wide-short",
+    "category": "Arrows"
+  },
+  {
+    "name": "arrow-up",
+    "category": "Arrows"
+  },
+  {
+    "name": "arrows-alt-v",
+    "category": "Arrows"
+  },
+  {
+    "name": "arrows-from-dotted-line",
+    "category": "Arrows"
+  },
+  {
+    "name": "arrows-from-line",
+    "category": "Arrows"
+  },
+  {
+    "name": "arrows-left-right-to-line",
+    "category": "Arrows"
+  },
+  {
+    "name": "arrows-left-right",
+    "category": "Arrows"
+  },
+  {
+    "name": "arrows-repeat",
+    "category": "Arrows"
+  },
+  {
+    "name": "arrows-up-down-left-right",
+    "category": "Arrows"
+  },
+  {
+    "name": "arrows-up-down",
+    "category": "Arrows"
+  },
+  {
+    "name": "arrows-v",
+    "category": "Arrows"
+  },
+  {
+    "name": "arrows",
+    "category": "Arrows"
+  },
+  {
+    "name": "caret-down-solid",
+    "category": "Arrows"
+  },
+  {
+    "name": "caret-down",
+    "category": "Arrows"
+  },
+  {
+    "name": "caret-right",
+    "category": "Arrows"
+  },
+  {
+    "name": "caret-up",
+    "category": "Arrows"
+  },
+  {
+    "name": "chevron-circle-right",
+    "category": "Arrows"
+  },
+  {
+    "name": "chevron-double-down",
+    "category": "Arrows"
+  },
+  {
+    "name": "chevron-double-left",
+    "category": "Arrows"
+  },
+  {
+    "name": "chevron-double-right",
+    "category": "Arrows"
+  },
+  {
+    "name": "chevron-down",
+    "category": "Arrows"
+  },
+  {
+    "name": "chevron-left",
+    "category": "Arrows"
+  },
+  {
+    "name": "chevron-right",
+    "category": "Arrows"
+  },
+  {
+    "name": "chevron-up",
+    "category": "Arrows"
+  },
+  {
+    "name": "circle-arrow-down",
+    "category": "Arrows"
+  },
+  {
+    "name": "circle-chevron-down",
+    "category": "Arrows"
+  },
+  {
+    "name": "circle-chevron-right",
+    "category": "Arrows"
+  },
+  {
+    "name": "circle-left",
+    "category": "Arrows"
+  },
+  {
+    "name": "circle-play-down",
+    "category": "Arrows"
+  },
+  {
+    "name": "circle-right",
+    "category": "Arrows"
+  },
+  {
+    "name": "down",
+    "category": "Arrows"
+  },
+  {
+    "name": "exchange",
+    "category": "Arrows"
+  },
+  {
+    "name": "expand-alt",
+    "category": "Arrows"
+  },
+  {
+    "name": "left-to-line",
+    "category": "Arrows"
+  },
+  {
+    "name": "level-down",
+    "category": "Arrows"
+  },
+  {
+    "name": "level-up",
+    "category": "Arrows"
+  },
+  {
+    "name": "line-height",
+    "category": "Arrows"
+  },
+  {
+    "name": "long-arrow-alt-right",
+    "category": "Arrows"
+  },
+  {
+    "name": "long-arrow-down",
+    "category": "Arrows"
+  },
+  {
+    "name": "long-arrow-left",
+    "category": "Arrows"
+  },
+  {
+    "name": "long-arrow-right",
+    "category": "Arrows"
+  },
+  {
+    "name": "long-arrow-up",
+    "category": "Arrows"
+  },
+  {
+    "name": "recycle",
+    "category": "Arrows"
+  },
+  {
+    "name": "redo",
+    "category": "Arrows"
+  },
+  {
+    "name": "repeat",
+    "category": "Arrows"
+  },
+  {
+    "name": "retweet",
+    "category": "Arrows"
+  },
+  {
+    "name": "share-alt",
+    "category": "Arrows"
+  },
+  {
+    "name": "share",
+    "category": "Arrows"
+  },
+  {
+    "name": "sign-in-alt",
+    "category": "Arrows"
+  },
+  {
+    "name": "sign-in",
+    "category": "Arrows"
+  },
+  {
+    "name": "sign-out-alt",
+    "category": "Arrows"
+  },
+  {
+    "name": "sign-out",
+    "category": "Arrows"
+  },
+  {
+    "name": "sort",
+    "category": "Arrows"
+  },
+  {
+    "name": "square-arrow-up-right",
+    "category": "Arrows"
+  },
+  {
+    "name": "sync-alt",
+    "category": "Arrows"
+  },
+  {
+    "name": "sync",
+    "category": "Arrows"
+  },
+  {
+    "name": "undo",
+    "category": "Arrows"
+  },
+  {
+    "name": "up",
+    "category": "Arrows"
+  },
+  {
+    "name": "award",
+    "category": "Awards"
+  },
+  {
+    "name": "badge-check",
+    "category": "Awards"
+  },
+  {
+    "name": "crown",
+    "category": "Awards"
+  },
+  {
+    "name": "sparkles",
+    "category": "Awards"
+  },
+  {
+    "name": "trophy-alt",
+    "category": "Awards"
+  },
+  {
+    "name": "bank",
+    "category": "Buildings"
+  },
+  {
+    "name": "building",
+    "category": "Buildings"
+  },
+  {
+    "name": "door-open",
+    "category": "Buildings"
+  },
+  {
+    "name": "house-chimney",
+    "category": "Buildings"
+  },
+  {
+    "name": "house-circle-exclamation",
+    "category": "Buildings"
+  },
+  {
+    "name": "house-leave",
+    "category": "Buildings"
+  },
+  {
+    "name": "house",
+    "category": "Buildings"
+  },
+  {
+    "name": "industry-alt",
+    "category": "Buildings"
+  },
+  {
+    "name": "university",
+    "category": "Buildings"
+  },
+  {
+    "name": "address-book",
+    "category": "Business"
+  },
+  {
+    "name": "address-card",
+    "category": "Business"
+  },
+  {
+    "name": "briefcase",
+    "category": "Business"
+  },
+  {
+    "name": "circle-dollar",
+    "category": "Business"
+  },
+  {
+    "name": "clipboard-list-check",
+    "category": "Business"
+  },
+  {
+    "name": "clipboard-list",
+    "category": "Business"
+  },
+  {
+    "name": "clipboard",
+    "category": "Business"
+  },
+  {
+    "name": "gavel",
+    "category": "Business"
+  },
+  {
+    "name": "id-badge",
+    "category": "Business"
+  },
+  {
+    "name": "inventory",
+    "category": "Business"
+  },
+  {
+    "name": "print",
+    "category": "Business"
+  },
+  {
+    "name": "shopping-bag",
+    "category": "Business"
+  },
+  {
+    "name": "signature",
+    "category": "Business"
+  },
+  {
+    "name": "suitcase",
+    "category": "Business"
+  },
+  {
+    "name": "tag",
+    "category": "Business"
+  },
+  {
+    "name": "tags",
+    "category": "Business"
+  },
+  {
+    "name": "ticket-alt",
+    "category": "Business"
+  },
+  {
+    "name": "ticket",
+    "category": "Business"
+  },
+  {
+    "name": "check-circle",
+    "category": "Checks"
+  },
+  {
+    "name": "check-double",
+    "category": "Checks"
+  },
+  {
+    "name": "check-square",
+    "category": "Checks"
+  },
+  {
+    "name": "check",
+    "category": "Checks"
+  },
+  {
+    "name": "circle",
+    "category": "Checks"
+  },
+  {
+    "name": "boot",
+    "category": "Clothing"
+  },
+  {
+    "name": "tshirt",
+    "category": "Clothing"
+  },
+  {
+    "name": "broadcast-tower",
+    "category": "Communication"
+  },
+  {
+    "name": "bullhorn",
+    "category": "Communication"
+  },
+  {
+    "name": "comment-alt-check",
+    "category": "Communication"
+  },
+  {
+    "name": "comment-alt",
+    "category": "Communication"
+  },
+  {
+    "name": "comment",
+    "category": "Communication"
+  },
+  {
+    "name": "comments-alt",
+    "category": "Communication"
+  },
+  {
+    "name": "comments-dollar",
+    "category": "Communication"
+  },
+  {
+    "name": "comments",
+    "category": "Communication"
+  },
+  {
+    "name": "envelope",
+    "category": "Communication"
+  },
+  {
+    "name": "megaphone",
+    "category": "Communication"
+  },
+  {
+    "name": "mobile",
+    "category": "Communication"
+  },
+  {
+    "name": "paper-plane",
+    "category": "Communication"
+  },
+  {
+    "name": "phone-alt",
+    "category": "Communication"
+  },
+  {
+    "name": "phone-office",
+    "category": "Communication"
+  },
+  {
+    "name": "phone-plus",
+    "category": "Communication"
+  },
+  {
+    "name": "phone-slash",
+    "category": "Communication"
+  },
+  {
+    "name": "phone-square",
+    "category": "Communication"
+  },
+  {
+    "name": "phone-volume",
+    "category": "Communication"
+  },
+  {
+    "name": "phone",
+    "category": "Communication"
+  },
+  {
+    "name": "radio",
+    "category": "Communication"
+  },
+  {
+    "name": "sticky-note",
+    "category": "Communication"
+  },
+  {
+    "name": "analytics",
+    "category": "Data Visualization"
+  },
+  {
+    "name": "browser",
+    "category": "Data Visualization"
+  },
+  {
+    "name": "chart-bar",
+    "category": "Data Visualization"
+  },
+  {
+    "name": "chart-line-down",
+    "category": "Data Visualization"
+  },
+  {
+    "name": "chart-line-up",
+    "category": "Data Visualization"
+  },
+  {
+    "name": "chart-line",
+    "category": "Data Visualization"
+  },
+  {
+    "name": "chart-pie",
+    "category": "Data Visualization"
+  },
+  {
+    "name": "codepen",
+    "category": "Data Visualization"
+  },
+  {
+    "name": "columns",
+    "category": "Data Visualization"
+  },
+  {
+    "name": "cubes",
+    "category": "Data Visualization"
+  },
+  {
+    "name": "puzzle",
+    "category": "Data Visualization"
+  },
+  {
+    "name": "shapes",
+    "category": "Data Visualization"
+  },
+  {
+    "name": "sitemap",
+    "category": "Data Visualization"
+  },
+  {
+    "name": "table-cells-large",
+    "category": "Data Visualization"
+  },
+  {
+    "name": "table-list",
+    "category": "Data Visualization"
+  },
+  {
+    "name": "table",
+    "category": "Data Visualization"
+  },
+  {
+    "name": "tally-4",
+    "category": "Data Visualization"
+  },
+  {
+    "name": "wave-sine",
+    "category": "Data Visualization"
+  },
+  {
+    "name": "window",
+    "category": "Data Visualization"
+  },
+  {
+    "name": "book-open",
+    "category": "Education"
+  },
+  {
+    "name": "book",
+    "category": "Education"
+  },
+  {
+    "name": "books-medical",
+    "category": "Education"
+  },
+  {
+    "name": "calculator",
+    "category": "Education"
+  },
+  {
+    "name": "chalkboard-teacher",
+    "category": "Education"
+  },
+  {
+    "name": "chalkboard",
+    "category": "Education"
+  },
+  {
+    "name": "graduation-cap",
+    "category": "Education"
+  },
+  {
+    "name": "palette",
+    "category": "Education"
+  },
+  {
+    "name": "thumbtack",
+    "category": "Education"
+  },
+  {
+    "name": "file-alt",
+    "category": "Files"
+  },
+  {
+    "name": "file-archive",
+    "category": "Files"
+  },
+  {
+    "name": "file-audio",
+    "category": "Files"
+  },
+  {
+    "name": "file-circle-check",
+    "category": "Files"
+  },
+  {
+    "name": "file-code",
+    "category": "Files"
+  },
+  {
+    "name": "file-contract",
+    "category": "Files"
+  },
+  {
+    "name": "file-csv",
+    "category": "Files"
+  },
+  {
+    "name": "file-download",
+    "category": "Files"
+  },
+  {
+    "name": "file-excel",
+    "category": "Files"
+  },
+  {
+    "name": "file-export",
+    "category": "Files"
+  },
+  {
+    "name": "file-image",
+    "category": "Files"
+  },
+  {
+    "name": "file-invoice-dollar",
+    "category": "Files"
+  },
+  {
+    "name": "file-invoice",
+    "category": "Files"
+  },
+  {
+    "name": "file-minus",
+    "category": "Files"
+  },
+  {
+    "name": "file-pdf",
+    "category": "Files"
+  },
+  {
+    "name": "file-pen",
+    "category": "Files"
+  },
+  {
+    "name": "file-powerpoint",
+    "category": "Files"
+  },
+  {
+    "name": "file-spreadsheet",
+    "category": "Files"
+  },
+  {
+    "name": "file-upload",
+    "category": "Files"
+  },
+  {
+    "name": "file-video",
+    "category": "Files"
+  },
+  {
+    "name": "file-word",
+    "category": "Files"
+  },
+  {
+    "name": "file",
+    "category": "Files"
+  },
+  {
+    "name": "folder-plus",
+    "category": "Files"
+  },
+  {
+    "name": "folder",
+    "category": "Files"
+  },
+  {
+    "name": "memo-circle-check",
+    "category": "Files"
+  },
+  {
+    "name": "flag-checkered",
+    "category": "Flags"
+  },
+  {
+    "name": "flag-usa",
+    "category": "Flags"
+  },
+  {
+    "name": "flag",
+    "category": "Flags"
+  },
+  {
+    "name": "hand-holding-usd",
+    "category": "Hands"
+  },
+  {
+    "name": "hand-point-right",
+    "category": "Hands"
+  },
+  {
+    "name": "handshake",
+    "category": "Hands"
+  },
+  {
+    "name": "thumbs-down",
+    "category": "Hands"
+  },
+  {
+    "name": "thumbs-up",
+    "category": "Hands"
+  },
+  {
+    "name": "ball-basketball",
+    "category": "Health"
+  },
+  {
+    "name": "ball-football",
+    "category": "Health"
+  },
+  {
+    "name": "dumbbell",
+    "category": "Health"
+  },
+  {
+    "name": "heart-rate",
+    "category": "Health"
+  },
+  {
+    "name": "heart",
+    "category": "Health"
+  },
+  {
+    "name": "life-ring",
+    "category": "Health"
+  },
+  {
+    "name": "medkit",
+    "category": "Health"
+  },
+  {
+    "name": "syringe",
+    "category": "Health"
+  },
+  {
+    "name": "weight",
+    "category": "Health"
+  },
+  {
+    "name": "align-left",
+    "category": "Interface Core"
+  },
+  {
+    "name": "arrow-pointer",
+    "category": "Interface Core"
+  },
+  {
+    "name": "ban",
+    "category": "Interface Core"
+  },
+  {
+    "name": "bars",
+    "category": "Interface Core"
+  },
+  {
+    "name": "bezier-curve",
+    "category": "Interface Core"
+  },
+  {
+    "name": "bookmark",
+    "category": "Interface Core"
+  },
+  {
+    "name": "border-inner",
+    "category": "Interface Core"
+  },
+  {
+    "name": "border-outer",
+    "category": "Interface Core"
+  },
+  {
+    "name": "bring-front",
+    "category": "Interface Core"
+  },
+  {
+    "name": "circle-minus",
+    "category": "Interface Core"
+  },
+  {
+    "name": "circle-plus",
+    "category": "Interface Core"
+  },
+  {
+    "name": "circle-question",
+    "category": "Interface Core"
+  },
+  {
+    "name": "circle-xmark",
+    "category": "Interface Core"
+  },
+  {
+    "name": "circles-overlap",
+    "category": "Interface Core"
+  },
+  {
+    "name": "clone",
+    "category": "Interface Core"
+  },
+  {
+    "name": "cloud-upload",
+    "category": "Interface Core"
+  },
+  {
+    "name": "compress",
+    "category": "Interface Core"
+  },
+  {
+    "name": "copy",
+    "category": "Interface Core"
+  },
+  {
+    "name": "crop",
+    "category": "Interface Core"
+  },
+  {
+    "name": "cut",
+    "category": "Interface Core"
+  },
+  {
+    "name": "diagram-venn",
+    "category": "Interface Core"
+  },
+  {
+    "name": "dot-circle",
+    "category": "Interface Core"
+  },
+  {
+    "name": "download",
+    "category": "Interface Core"
+  },
+  {
+    "name": "draw-square",
+    "category": "Interface Core"
+  },
+  {
+    "name": "ellipsis-vertical",
+    "category": "Interface Core"
+  },
+  {
+    "name": "ellipsis",
+    "category": "Interface Core"
+  },
+  {
+    "name": "expand",
+    "category": "Interface Core"
+  },
+  {
+    "name": "eye-slash",
+    "category": "Interface Core"
+  },
+  {
+    "name": "eye",
+    "category": "Interface Core"
+  },
+  {
+    "name": "filter",
+    "category": "Interface Core"
+  },
+  {
+    "name": "font",
+    "category": "Interface Core"
+  },
+  {
+    "name": "grid-2",
+    "category": "Interface Core"
+  },
+  {
+    "name": "grip-dots-vertical",
+    "category": "Interface Core"
+  },
+  {
+    "name": "grip-lines-vertical",
+    "category": "Interface Core"
+  },
+  {
+    "name": "layer-plus",
+    "category": "Interface Core"
+  },
+  {
+    "name": "link",
+    "category": "Interface Core"
+  },
+  {
+    "name": "list-music",
+    "category": "Interface Core"
+  },
+  {
+    "name": "list",
+    "category": "Interface Core"
+  },
+  {
+    "name": "minus",
+    "category": "Interface Core"
+  },
+  {
+    "name": "object-exclude",
+    "category": "Interface Core"
+  },
+  {
+    "name": "objects-align-top",
+    "category": "Interface Core"
+  },
+  {
+    "name": "objects-column",
+    "category": "Interface Core"
+  },
+  {
+    "name": "paperclip",
+    "category": "Interface Core"
+  },
+  {
+    "name": "percent",
+    "category": "Interface Core"
+  },
+  {
+    "name": "plus-minus",
+    "category": "Interface Core"
+  },
+  {
+    "name": "plus",
+    "category": "Interface Core"
+  },
+  {
+    "name": "question",
+    "category": "Interface Core"
+  },
+  {
+    "name": "refresh",
+    "category": "Interface Core"
+  },
+  {
+    "name": "save",
+    "category": "Interface Core"
+  },
+  {
+    "name": "search",
+    "category": "Interface Core"
+  },
+  {
+    "name": "sliders-h",
+    "category": "Interface Core"
+  },
+  {
+    "name": "spinner-third",
+    "category": "Interface Core"
+  },
+  {
+    "name": "spinner",
+    "category": "Interface Core"
+  },
+  {
+    "name": "square-plus",
+    "category": "Interface Core"
+  },
+  {
+    "name": "square",
+    "category": "Interface Core"
+  },
+  {
+    "name": "text-size",
+    "category": "Interface Core"
+  },
+  {
+    "name": "times-circle",
+    "category": "Interface Core"
+  },
+  {
+    "name": "times",
+    "category": "Interface Core"
+  },
+  {
+    "name": "toggle-off",
+    "category": "Interface Core"
+  },
+  {
+    "name": "toggle-on",
+    "category": "Interface Core"
+  },
+  {
+    "name": "trash-alt",
+    "category": "Interface Core"
+  },
+  {
+    "name": "trash",
+    "category": "Interface Core"
+  },
+  {
+    "name": "up-down-left-right",
+    "category": "Interface Core"
+  },
+  {
+    "name": "upload",
+    "category": "Interface Core"
+  },
+  {
+    "name": "farm",
+    "category": "Location"
+  },
+  {
+    "name": "globe-africa",
+    "category": "Location"
+  },
+  {
+    "name": "globe-americas",
+    "category": "Location"
+  },
+  {
+    "name": "globe-europe",
+    "category": "Location"
+  },
+  {
+    "name": "globe-stand",
+    "category": "Location"
+  },
+  {
+    "name": "globe",
+    "category": "Location"
+  },
+  {
+    "name": "location-arrow",
+    "category": "Location"
+  },
+  {
+    "name": "map-marked-alt",
+    "category": "Location"
+  },
+  {
+    "name": "map-marked",
+    "category": "Location"
+  },
+  {
+    "name": "map-marker-alt",
+    "category": "Location"
+  },
+  {
+    "name": "map-marker-plus",
+    "category": "Location"
+  },
+  {
+    "name": "map-marker-smile",
+    "category": "Location"
+  },
+  {
+    "name": "map-marker",
+    "category": "Location"
+  },
+  {
+    "name": "map-pin",
+    "category": "Location"
+  },
+  {
+    "name": "map",
+    "category": "Location"
+  },
+  {
+    "name": "planet-moon",
+    "category": "Location"
+  },
+  {
+    "name": "planet-ringed",
+    "category": "Location"
+  },
+  {
+    "name": "solar-system",
+    "category": "Location"
+  },
+  {
+    "name": "album-collection",
+    "category": "Media"
+  },
+  {
+    "name": "backward",
+    "category": "Media"
+  },
+  {
+    "name": "camera-movie",
+    "category": "Media"
+  },
+  {
+    "name": "camera",
+    "category": "Media"
+  },
+  {
+    "name": "cassette-tape",
+    "category": "Media"
+  },
+  {
+    "name": "circle-estimate-photos",
+    "category": "Media"
+  },
+  {
+    "name": "circle-play",
+    "category": "Media"
+  },
+  {
+    "name": "compact-disc",
+    "category": "Media"
+  },
+  {
+    "name": "estimate-photos",
+    "category": "Media"
+  },
+  {
+    "name": "fast-backward",
+    "category": "Media"
+  },
+  {
+    "name": "fast-forward",
+    "category": "Media"
+  },
+  {
+    "name": "forward",
+    "category": "Media"
+  },
+  {
+    "name": "gamepad",
+    "category": "Media"
+  },
+  {
+    "name": "headphones",
+    "category": "Media"
+  },
+  {
+    "name": "image",
+    "category": "Media"
+  },
+  {
+    "name": "images",
+    "category": "Media"
+  },
+  {
+    "name": "music",
+    "category": "Media"
+  },
+  {
+    "name": "newspaper",
+    "category": "Media"
+  },
+  {
+    "name": "pause",
+    "category": "Media"
+  },
+  {
+    "name": "play",
+    "category": "Media"
+  },
+  {
+    "name": "presentation",
+    "category": "Media"
+  },
+  {
+    "name": "random",
+    "category": "Media"
+  },
+  {
+    "name": "step-backward",
+    "category": "Media"
+  },
+  {
+    "name": "step-forward",
+    "category": "Media"
+  },
+  {
+    "name": "video",
+    "category": "Media"
+  },
+  {
+    "name": "volume-mute",
+    "category": "Media"
+  },
+  {
+    "name": "volume",
+    "category": "Media"
+  },
+  {
+    "name": "face-smile-plus",
+    "category": "People"
+  },
+  {
+    "name": "frown-open",
+    "category": "People"
+  },
+  {
+    "name": "frown",
+    "category": "People"
+  },
+  {
+    "name": "hat-chef",
+    "category": "People"
+  },
+  {
+    "name": "hat-cowboy",
+    "category": "People"
+  },
+  {
+    "name": "hat-wizard",
+    "category": "People"
+  },
+  {
+    "name": "male",
+    "category": "People"
+  },
+  {
+    "name": "people",
+    "category": "People"
+  },
+  {
+    "name": "person-dress",
+    "category": "People"
+  },
+  {
+    "name": "person",
+    "category": "People"
+  },
+  {
+    "name": "portal-exit",
+    "category": "People"
+  },
+  {
+    "name": "smile-beam",
+    "category": "People"
+  },
+  {
+    "name": "smile",
+    "category": "People"
+  },
+  {
+    "name": "transgender-alt",
+    "category": "People"
+  },
+  {
+    "name": "user-circle",
+    "category": "People"
+  },
+  {
+    "name": "user-group",
+    "category": "People"
+  },
+  {
+    "name": "user-hard-hat",
+    "category": "People"
+  },
+  {
+    "name": "user-headset",
+    "category": "People"
+  },
+  {
+    "name": "user-helmet-safety",
+    "category": "People"
+  },
+  {
+    "name": "user-minus",
+    "category": "People"
+  },
+  {
+    "name": "user-plus",
+    "category": "People"
+  },
+  {
+    "name": "user-secret",
+    "category": "People"
+  },
+  {
+    "name": "user-shield",
+    "category": "People"
+  },
+  {
+    "name": "user-slash",
+    "category": "People"
+  },
+  {
+    "name": "user-tag",
+    "category": "People"
+  },
+  {
+    "name": "user",
+    "category": "People"
+  },
+  {
+    "name": "users",
+    "category": "People"
+  },
+  {
+    "name": "venus-mars",
+    "category": "People"
+  },
+  {
+    "name": "circle-product-accessories",
+    "category": "Power Products"
+  },
+  {
+    "name": "circle-product-attic-insulation",
+    "category": "Power Products"
+  },
+  {
+    "name": "circle-product-doors",
+    "category": "Power Products"
+  },
+  {
+    "name": "circle-product-gutters",
+    "category": "Power Products"
+  },
+  {
+    "name": "circle-product-roofing",
+    "category": "Power Products"
+  },
+  {
+    "name": "circle-product-siding",
+    "category": "Power Products"
+  },
+  {
+    "name": "circle-product-solar",
+    "category": "Power Products"
+  },
+  {
+    "name": "circle-product-windows",
+    "category": "Power Products"
+  },
+  {
+    "name": "product-accessories",
+    "category": "Power Products"
+  },
+  {
+    "name": "product-attic-insulation",
+    "category": "Power Products"
+  },
+  {
+    "name": "product-doors",
+    "category": "Power Products"
+  },
+  {
+    "name": "product-gutters",
+    "category": "Power Products"
+  },
+  {
+    "name": "product-roofing",
+    "category": "Power Products"
+  },
+  {
+    "name": "product-siding",
+    "category": "Power Products"
+  },
+  {
+    "name": "product-solar",
+    "category": "Power Products"
+  },
+  {
+    "name": "product-windows",
+    "category": "Power Products"
+  },
+  {
+    "name": "nitro-logo",
+    "category": "Power Tooling"
+  },
+  {
+    "name": "nitro-n",
+    "category": "Power Tooling"
+  },
+  {
+    "name": "runway-bars-solid",
+    "category": "Power Tooling"
+  },
+  {
+    "name": "runway-bars",
+    "category": "Power Tooling"
+  },
+  {
+    "name": "powergon-p",
+    "category": "Powergon"
+  },
+  {
+    "name": "powergon-wordmark",
+    "category": "Powergon"
+  },
+  {
+    "name": "balance-scale",
+    "category": "Sales"
+  },
+  {
+    "name": "barcode-read",
+    "category": "Sales"
+  },
+  {
+    "name": "credit-card",
+    "category": "Sales"
+  },
+  {
+    "name": "currency-dollar",
+    "category": "Sales"
+  },
+  {
+    "name": "currency-euro",
+    "category": "Sales"
+  },
+  {
+    "name": "currency-yen",
+    "category": "Sales"
+  },
+  {
+    "name": "money-bill",
+    "category": "Sales"
+  },
+  {
+    "name": "money-bills",
+    "category": "Sales"
+  },
+  {
+    "name": "money-check-edit",
+    "category": "Sales"
+  },
+  {
+    "name": "sack-dollar",
+    "category": "Sales"
+  },
+  {
+    "name": "key",
+    "category": "Security"
+  },
+  {
+    "name": "lock-keyhole-locked",
+    "category": "Security"
+  },
+  {
+    "name": "lock-keyhole-unlocked",
+    "category": "Security"
+  },
+  {
+    "name": "lock-open",
+    "category": "Security"
+  },
+  {
+    "name": "lock-unlocked",
+    "category": "Security"
+  },
+  {
+    "name": "lock",
+    "category": "Security"
+  },
+  {
+    "name": "shield-check",
+    "category": "Security"
+  },
+  {
+    "name": "shield-halved",
+    "category": "Security"
+  },
+  {
+    "name": "shield",
+    "category": "Security"
+  },
+  {
+    "name": "code",
+    "category": "Technology"
+  },
+  {
+    "name": "computer-speaker",
+    "category": "Technology"
+  },
+  {
+    "name": "desktop",
+    "category": "Technology"
+  },
+  {
+    "name": "github",
+    "category": "Technology"
+  },
+  {
+    "name": "laptop-code",
+    "category": "Technology"
+  },
+  {
+    "name": "laptop-mobile",
+    "category": "Technology"
+  },
+  {
+    "name": "lightbulb-dollar",
+    "category": "Technology"
+  },
+  {
+    "name": "lightbulb-exclamation-on",
+    "category": "Technology"
+  },
+  {
+    "name": "lightbulb-on",
+    "category": "Technology"
+  },
+  {
+    "name": "lightbulb",
+    "category": "Technology"
+  },
+  {
+    "name": "magic",
+    "category": "Technology"
+  },
+  {
+    "name": "microchip",
+    "category": "Technology"
+  },
+  {
+    "name": "mobile-alt",
+    "category": "Technology"
+  },
+  {
+    "name": "robot",
+    "category": "Technology"
+  },
+  {
+    "name": "rss",
+    "category": "Technology"
+  },
+  {
+    "name": "solar-panel",
+    "category": "Technology"
+  },
+  {
+    "name": "vial",
+    "category": "Technology"
+  },
+  {
+    "name": "wand-magic-sparkles",
+    "category": "Technology"
+  },
+  {
+    "name": "block-quote",
+    "category": "Text"
+  },
+  {
+    "name": "bold",
+    "category": "Text"
+  },
+  {
+    "name": "edit",
+    "category": "Text"
+  },
+  {
+    "name": "h1",
+    "category": "Text"
+  },
+  {
+    "name": "h2",
+    "category": "Text"
+  },
+  {
+    "name": "h3",
+    "category": "Text"
+  },
+  {
+    "name": "horizontal-rule",
+    "category": "Text"
+  },
+  {
+    "name": "italic",
+    "category": "Text"
+  },
+  {
+    "name": "list-ol",
+    "category": "Text"
+  },
+  {
+    "name": "paragraph",
+    "category": "Text"
+  },
+  {
+    "name": "pen-square",
+    "category": "Text"
+  },
+  {
+    "name": "pen",
+    "category": "Text"
+  },
+  {
+    "name": "pencil",
+    "category": "Text"
+  },
+  {
+    "name": "strikethrough",
+    "category": "Text"
+  },
+  {
+    "name": "text",
+    "category": "Text"
+  },
+  {
+    "name": "calendar-alt",
+    "category": "Time"
+  },
+  {
+    "name": "calendar-check",
+    "category": "Time"
+  },
+  {
+    "name": "calendar-circle-plus",
+    "category": "Time"
+  },
+  {
+    "name": "calendar-day",
+    "category": "Time"
+  },
+  {
+    "name": "calendar-minus",
+    "category": "Time"
+  },
+  {
+    "name": "calendar-plus",
+    "category": "Time"
+  },
+  {
+    "name": "calendar-times",
+    "category": "Time"
+  },
+  {
+    "name": "calendar",
+    "category": "Time"
+  },
+  {
+    "name": "calendars",
+    "category": "Time"
+  },
+  {
+    "name": "clock",
+    "category": "Time"
+  },
+  {
+    "name": "history",
+    "category": "Time"
+  },
+  {
+    "name": "hourglass-half",
+    "category": "Time"
+  },
+  {
+    "name": "stopwatch",
+    "category": "Time"
+  },
+  {
+    "name": "binoculars",
+    "category": "Tools"
+  },
+  {
+    "name": "cog",
+    "category": "Tools"
+  },
+  {
+    "name": "cogs",
+    "category": "Tools"
+  },
+  {
+    "name": "conveyor-belt-alt",
+    "category": "Tools"
+  },
+  {
+    "name": "dolly-flatbed",
+    "category": "Tools"
+  },
+  {
+    "name": "hammer",
+    "category": "Tools"
+  },
+  {
+    "name": "highlighter",
+    "category": "Tools"
+  },
+  {
+    "name": "pencil-paintbrush",
+    "category": "Tools"
+  },
+  {
+    "name": "ruler-triangle",
+    "category": "Tools"
+  },
+  {
+    "name": "tools",
+    "category": "Tools"
+  },
+  {
+    "name": "utensils",
+    "category": "Tools"
+  },
+  {
+    "name": "wrench",
+    "category": "Tools"
+  },
+  {
+    "name": "ambulance",
+    "category": "Vehicles"
+  },
+  {
+    "name": "bus",
+    "category": "Vehicles"
+  },
+  {
+    "name": "car",
+    "category": "Vehicles"
+  },
+  {
+    "name": "helicopter-symbol",
+    "category": "Vehicles"
+  },
+  {
+    "name": "rocket",
+    "category": "Vehicles"
+  },
+  {
+    "name": "space-shuttle",
+    "category": "Vehicles"
+  },
+  {
+    "name": "steering-wheel",
+    "category": "Vehicles"
+  },
+  {
+    "name": "subway",
+    "category": "Vehicles"
+  },
+  {
+    "name": "tachometer",
+    "category": "Vehicles"
+  },
+  {
+    "name": "truck",
+    "category": "Vehicles"
+  },
+  {
+    "name": "bolt",
+    "category": "Weather"
+  },
+  {
+    "name": "campfire",
+    "category": "Weather"
+  },
+  {
+    "name": "clouds-sun",
+    "category": "Weather"
+  },
+  {
+    "name": "fire",
+    "category": "Weather"
+  },
+  {
+    "name": "humidity",
+    "category": "Weather"
+  },
+  {
+    "name": "moon",
+    "category": "Weather"
+  },
+  {
+    "name": "snowflake",
+    "category": "Weather"
+  },
+  {
+    "name": "sun-haze",
+    "category": "Weather"
+  },
+  {
+    "name": "sun",
+    "category": "Weather"
+  },
+  {
+    "name": "thermometer-half",
+    "category": "Weather"
+  },
+  {
+    "name": "tint",
+    "category": "Weather"
+  },
+  {
+    "name": "tree-large",
+    "category": "Weather"
+  },
+  {
+    "name": "trees",
+    "category": "Weather"
+  },
+  {
+    "name": "umbrella",
+    "category": "Weather"
+  },
+  {
+    "name": "windsock",
+    "category": "Weather"
+  }
+]
