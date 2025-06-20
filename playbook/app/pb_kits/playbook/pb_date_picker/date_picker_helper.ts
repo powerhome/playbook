@@ -82,6 +82,20 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
   // ===========================================================
 
   const defaultDateGetter = () => {
+    let inputEl: HTMLInputElement | null = null
+  
+    if (typeof pickerId === 'string') {
+      inputEl = document.querySelector<HTMLInputElement>(pickerId)
+    } else if (pickerId instanceof HTMLElement) {
+      inputEl = pickerId as HTMLInputElement
+    } else if (pickerId && 'item' in pickerId && typeof pickerId.item === 'function') {
+      inputEl = pickerId.item(0) as HTMLInputElement | null
+    }
+
+    if (inputEl && inputEl.value.trim() === '') {
+      return null
+    }
+  
     if (
       defaultDate === '' ||
       defaultDate === null ||
