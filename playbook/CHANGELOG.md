@@ -1,3 +1,48 @@
+# 14.22.0
+##### June 20, 2025
+
+![release_image](https://github.com/user-attachments/assets/db119637-25e9-4157-9091-c5f7fdf034fc)
+
+[14.22.0](https://github.com/powerhome/playbook/tree/14.22.0) full list of changes:
+
+**Kit Enhancements:**
+
+- Advanced Table Kit: Selectable Rows Color Opacity [\#4779](https://github.com/powerhome/playbook/pull/4779) ([elisashapiro](https://github.com/elisashapiro))
+- Table Kit: Styling Issue For One Column Table [\#4766](https://github.com/powerhome/playbook/pull/4766) ([elisashapiro](https://github.com/elisashapiro))
+- Advanced Table Kit: Refactored Enhanced Element File for Better Load Time [\#4754](https://github.com/powerhome/playbook/pull/4754) ([nidaqg](https://github.com/nidaqg))
+- Tooltip Kit: Add Useclick Prop - React Only [\#4764](https://github.com/powerhome/playbook/pull/4764) ([skduncan](https://github.com/skduncan))
+- Advanced Table Kit: Pinned Rows to Always Pin Children [\#4747](https://github.com/powerhome/playbook/pull/4747) ([nidaqg](https://github.com/nidaqg))
+- Advanced Table Kit: Row Styling Prop [\#4735](https://github.com/powerhome/playbook/pull/4735) ([nidaqg](https://github.com/nidaqg))
+- Advanced Table: Continue Infinite Scroll - React [\#4734](https://github.com/powerhome/playbook/pull/4734) ([elisashapiro](https://github.com/elisashapiro))
+- Advanced Table Kit: Header and Cell Alignment Control [\#4701](https://github.com/powerhome/playbook/pull/4701) ([nidaqg](https://github.com/nidaqg))
+- Table Kit: Use Data-sticky-id's Instead Of Repeated Id's - Rails [\#4753](https://github.com/powerhome/playbook/pull/4753) ([kangaree](https://github.com/kangaree))
+
+**Deprecated:**
+
+- Highcharts: Remove Treemap from Playbook [\#4761](https://github.com/powerhome/playbook/pull/4761) ([elisashapiro](https://github.com/elisashapiro))
+
+
+**Fixed Bugs:**
+
+- Advanced Table Kit: Add Table Header Borders With Vertical Border and Multi-header [\#4744](https://github.com/powerhome/playbook/pull/4744) ([kangaree](https://github.com/kangaree))
+- Advanced Table Kit: Fix Fullscreen Docs [\#4721](https://github.com/powerhome/playbook/pull/4721) ([kangaree](https://github.com/kangaree))
+- Advanced Table Kit: Rounded Bottom Corners - Rails [\#4709](https://github.com/powerhome/playbook/pull/4709) ([kangaree](https://github.com/kangaree))
+
+**Improvements:**
+
+- Playbook Website: Build Icon Page [\#4760](https://github.com/powerhome/playbook/pull/4760) ([nickamantia](https://github.com/nickamantia))
+- Icons: Update Playbook Icons [\#4759](https://github.com/powerhome/playbook/pull/4759) ([kangaree](https://github.com/kangaree))
+- Dropdown Kit: Adding Icons and Radio Buttons Doc Examples [\#4758](https://github.com/powerhome/playbook/pull/4758) ([elisashapiro](https://github.com/elisashapiro))
+- Playbook Website: Homepage Isn't Displaying Correctly on Chrome [\#4736](https://github.com/powerhome/playbook/pull/4736) ([skduncan](https://github.com/skduncan))
+- Upgrade Vite to 6.3.5 and Terser to 5.39.0 [\#4743](https://github.com/powerhome/playbook/pull/4743) ([nidaqg](https://github.com/nidaqg))
+- Playbook Website: Fix Spelling Issues In Patterns [\#4746](https://github.com/powerhome/playbook/pull/4746) ([nidaqg](https://github.com/nidaqg))
+- Playbook Website: Disable Playground [\#4745](https://github.com/powerhome/playbook/pull/4745) ([terryfinn](https://github.com/terryfinn))
+- Dependency Update/upgrade: Rails 7.0.8.1 to 7.1 [\#4680](https://github.com/powerhome/playbook/pull/4680) ([skduncan](https://github.com/skduncan))
+- Update Changelog 14.21.2 [\#4719](https://github.com/powerhome/playbook/pull/4719) ([nidaqg](https://github.com/nidaqg))
+
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/v14.22.2...14.22.0)
+
 # 🔥 Advanced Table Advancements 🔥
 ##### June 03, 2025
 
