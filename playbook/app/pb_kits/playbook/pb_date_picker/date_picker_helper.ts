@@ -82,11 +82,15 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
   // ===========================================================
 
   const defaultDateGetter = () => {
-    if (defaultDate === '') {
+    if (
+      defaultDate === '' ||
+      defaultDate === null ||
+      defaultDate === undefined ||
+      (typeof defaultDate === 'string' && defaultDate.trim() === '')
+    ) {
       return null
-    } else {
-      return defaultDate
     }
+    return defaultDate
   }
 
   const disabledWeekDays = () => {
