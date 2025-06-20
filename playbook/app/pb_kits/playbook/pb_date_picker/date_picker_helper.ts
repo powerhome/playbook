@@ -82,32 +82,11 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
   // ===========================================================
 
   const defaultDateGetter = () => {
-    let inputEl: HTMLInputElement | null = null
-  
-    if (typeof pickerId === 'string') {
-      inputEl = document.querySelector<HTMLInputElement>(pickerId)
-    } else if (pickerId instanceof HTMLElement) {
-      inputEl = pickerId as HTMLInputElement
-    } else if (
-      (pickerId instanceof NodeList || pickerId instanceof HTMLCollection) &&
-      pickerId.length > 0
-    ) {
-      inputEl = pickerId[0] as HTMLInputElement | null
-    }
-  
-    if (inputEl && inputEl.value.trim() !== '') {
+    if (defaultDate === '') {
       return null
+    } else {
+      return defaultDate
     }
-  
-    if (
-      defaultDate === '' ||
-      defaultDate === null ||
-      defaultDate === undefined ||
-      (typeof defaultDate === 'string' && defaultDate.trim() === '')
-    ) {
-      return null
-    }
-    return defaultDate
   }
 
   const disabledWeekDays = () => {
@@ -296,7 +275,7 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
         picker.monthsDropdownContainer.value = picker.currentMonth
 
         /* Reset date picker to default value on form.reset() */
-        if (defaultDate){
+        if (defaultDate !== '' && defaultDate !== null && defaultDate !== undefined) {
           picker.setDate(defaultDate)
           yearChangeHook(picker)
         }
