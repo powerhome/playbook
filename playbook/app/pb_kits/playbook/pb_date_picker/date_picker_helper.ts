@@ -88,11 +88,14 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
       inputEl = document.querySelector<HTMLInputElement>(pickerId)
     } else if (pickerId instanceof HTMLElement) {
       inputEl = pickerId as HTMLInputElement
-    } else if (pickerId && 'item' in pickerId && typeof pickerId.item === 'function') {
-      inputEl = pickerId.item(0) as HTMLInputElement | null
+    } else if (
+      (pickerId instanceof NodeList || pickerId instanceof HTMLCollection) &&
+      pickerId.length > 0
+    ) {
+      inputEl = pickerId[0] as HTMLInputElement | null
     }
-
-    if (inputEl && inputEl.value.trim() === '') {
+  
+    if (inputEl && inputEl.value.trim() !== '') {
       return null
     }
   
