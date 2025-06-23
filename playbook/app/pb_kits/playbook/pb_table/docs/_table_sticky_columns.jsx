@@ -11,7 +11,7 @@ const TableStickyColumns = () => {
         >
             <thead>
                 <tr>
-                    <th data-sticky-id="a">{'Column 1'}</th>
+                    <th id="a">{'Column 1'}</th>
                     <th>{'Column 2'}</th>
                     <th>{'Column 3'}</th>
                     <th>{'Column 4'}</th>
@@ -25,12 +25,12 @@ const TableStickyColumns = () => {
                     <th>{'Column 12'}</th>
                     <th>{'Column 13'}</th>
                     <th>{'Column 14'}</th>
-                    <th data-sticky-id="b">{'Column 15'}</th>
+                    <th id="b">{'Column 15'}</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td data-sticky-id="a">{'Value 1'}</td>
+                    <td id="a">{'Value 1'}</td>
                     <td>{'Value 2'}</td>
                     <td>{'Value 3'}</td>
                     <td>{'Value 4'}</td>
@@ -44,10 +44,10 @@ const TableStickyColumns = () => {
                     <td>{'Value 12'}</td>
                     <td>{'Value 13'}</td>
                     <td>{'Value 14'}</td>
-                    <td data-sticky-id="b">{'Value 15'}</td>
+                    <td id="b">{'Value 15'}</td>
                 </tr>
                 <tr>
-                    <td data-sticky-id="a">{'Value 1'}</td>
+                    <td id="a">{'Value 1'}</td>
                     <td>{'Value 2'}</td>
                     <td>{'Value 3'}</td>
                     <td>{'Value 4'}</td>
@@ -61,10 +61,10 @@ const TableStickyColumns = () => {
                     <td>{'Value 12'}</td>
                     <td>{'Value 13'}</td>
                     <td>{'Value 14'}</td>
-                    <td data-sticky-id="b">{'Value 15'}</td>
+                    <td id="b">{'Value 15'}</td>
                 </tr>
                 <tr>
-                    <td data-sticky-id="a">{'Value 1'}</td>
+                    <td id="a">{'Value 1'}</td>
                     <td>{'Value 2'}</td>
                     <td>{'Value 3'}</td>
                     <td>{'Value 4'}</td>
@@ -78,7 +78,7 @@ const TableStickyColumns = () => {
                     <td>{'Value 12'}</td>
                     <td>{'Value 13'}</td>
                     <td>{'Value 14'}</td>
-                    <td data-sticky-id="b">{'Value 15'}</td>
+                    <td id="b">{'Value 15'}</td>
                 </tr>
             </tbody>
         </Table>
