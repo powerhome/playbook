@@ -53,7 +53,9 @@ export const SubRowHeaderRow = ({
         <div style={{ paddingLeft: `${row.depth * 1.25}em` }}>
           <Flex align="center" 
               columnGap="xs"
-              justifyContent={customSort && hasSubrowsToSort && hasSubrowsToSort.length > 1 && "between"}
+              // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+              //@ts-ignore
+              justifyContent={customSort && hasSubrowsToSort && hasSubrowsToSort.length > 1 ? "between" : undefined}
           >
             <Flex columnGap="xs">
               {enableToggleExpansion === "all" && canExpand ? (
