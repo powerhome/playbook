@@ -53,16 +53,19 @@ export const SubRowHeaderRow = ({
         <div style={{ paddingLeft: `${row.depth * 1.25}em` }}>
           <Flex align="center" 
               columnGap="xs"
+              justifyContent={customSort && hasSubrowsToSort && hasSubrowsToSort.length > 1 && "between"}
           >
-            {enableToggleExpansion === "all" && canExpand ? (
-              <ToggleIconButton onClick={onClick} 
-                  row={row} 
+            <Flex columnGap="xs">
+              {enableToggleExpansion === "all" && canExpand ? (
+                <ToggleIconButton onClick={onClick} 
+                    row={row} 
+                />
+              ) : null}
+              <Caption
+                  marginLeft={canExpand ? "none" : "xs"}
+                  text={subRowHeaders[row.depth - 1]}
               />
-            ) : null}
-            <Caption
-                marginLeft={canExpand ? "none" : "xs"}
-                text={subRowHeaders[row.depth - 1]}
-            />
+            </Flex>
             {customSort && hasSubrowsToSort && hasSubrowsToSort.length > 1 && (
               <button
                   aria-label="Sort this group"
