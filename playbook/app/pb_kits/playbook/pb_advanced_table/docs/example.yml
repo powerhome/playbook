@@ -23,44 +23,44 @@ examples:
   # - advanced_table_column_styling_column_headers_rails: Column Styling with Multiple Headers
 
   react:
-  # - advanced_table_default: Default (Required Props)
-  # - advanced_table_loading: Loading State
+  - advanced_table_default: Default (Required Props)
+  - advanced_table_loading: Loading State
   - advanced_table_sort: Enable Sorting
   - advanced_table_sort_control: Sort Control
   - advanced_table_custom_sort: Custom Sort
-  # - advanced_table_expanded_control: Expanded Control
-  # - advanced_table_expand_by_depth: Expand by Depth
+  - advanced_table_expanded_control: Expanded Control
+  - advanced_table_expand_by_depth: Expand by Depth
   - advanced_table_subrow_headers: SubRow Headers
-  # - advanced_table_collapsible_trail: Collapsible Trail
-  # - advanced_table_table_options: Table Options
-  # - advanced_table_table_props: Table Props
-  # - advanced_table_sticky_header: Sticky Header
-  # - advanced_table_table_props_sticky_header: Sticky Header for Responsive Table
-  # - advanced_table_sticky_columns: Sticky Columns
-  # - advanced_table_sticky_columns_and_header: Sticky Columns with Sticky Header
-  # - advanced_table_inline_row_loading: Inline Row Loading
-  # - advanced_table_responsive: Responsive Tables
-  # - advanced_table_custom_cell: Custom Components for Cells
-  # - advanced_table_pagination: Pagination
-  # - advanced_table_pagination_with_props: Pagination Props
-  # - advanced_table_column_headers: Multi-Header Columns
-  # - advanced_table_column_headers_multiple: Multi-Header Columns (Multiple Levels)
-  # - advanced_table_column_headers_custom_cell: Multi-Header Columns with Custom Cells
-  # - advanced_table_column_border_color: Column Group Border Color
-  # - advanced_table_no_subrows: Table with No Subrows or Expansion
-  # - advanced_table_selectable_rows: Selectable Rows
-  # - advanced_table_selectable_rows_no_subrows_react: Selectable Rows (No Subrows)
-  # - advanced_table_selectable_rows_actions: Selectable Rows (With Actions)
-  # - advanced_table_selectable_rows_header: Selectable Rows (No Actions Bar)
-  # - advanced_table_inline_editing: Inline Cell Editing
-  # - advanced_table_fullscreen: Fullscreen
-  # - advanced_table_column_visibility: Column Visibility Control
-  # - advanced_table_column_visibility_with_state: Column Visibility Control With State
-  # - advanced_table_column_visibility_custom: Column Visibility Control with Custom Dropdown
-  # - advanced_table_column_visibility_multi: Column Visibility Control with Multi-Header Columns
-  # - advanced_table_pinned_rows: Pinned Rows
-  # - advanced_table_scrollbar_none: Advanced Table Scrollbar None
-  # - advanced_table_row_styling: Row Styling
-  # - advanced_table_column_styling: Column Styling
-  # - advanced_table_column_styling_column_headers: Column Styling with Multiple Headers
-  # - advanced_table_infinite_scroll: Infinite Scroll
+  - advanced_table_collapsible_trail: Collapsible Trail
+  - advanced_table_table_options: Table Options
+  - advanced_table_table_props: Table Props
+  - advanced_table_sticky_header: Sticky Header
+  - advanced_table_table_props_sticky_header: Sticky Header for Responsive Table
+  - advanced_table_sticky_columns: Sticky Columns
+  - advanced_table_sticky_columns_and_header: Sticky Columns with Sticky Header
+  - advanced_table_inline_row_loading: Inline Row Loading
+  - advanced_table_responsive: Responsive Tables
+  - advanced_table_custom_cell: Custom Components for Cells
+  - advanced_table_pagination: Pagination
+  - advanced_table_pagination_with_props: Pagination Props
+  - advanced_table_column_headers: Multi-Header Columns
+  - advanced_table_column_headers_multiple: Multi-Header Columns (Multiple Levels)
+  - advanced_table_column_headers_custom_cell: Multi-Header Columns with Custom Cells
+  - advanced_table_column_border_color: Column Group Border Color
+  - advanced_table_no_subrows: Table with No Subrows or Expansion
+  - advanced_table_selectable_rows: Selectable Rows
+  - advanced_table_selectable_rows_no_subrows_react: Selectable Rows (No Subrows)
+  - advanced_table_selectable_rows_actions: Selectable Rows (With Actions)
+  - advanced_table_selectable_rows_header: Selectable Rows (No Actions Bar)
+  - advanced_table_inline_editing: Inline Cell Editing
+  - advanced_table_fullscreen: Fullscreen
+  - advanced_table_column_visibility: Column Visibility Control
+  - advanced_table_column_visibility_with_state: Column Visibility Control With State
+  - advanced_table_column_visibility_custom: Column Visibility Control with Custom Dropdown
+  - advanced_table_column_visibility_multi: Column Visibility Control with Multi-Header Columns
+  - advanced_table_pinned_rows: Pinned Rows
+  - advanced_table_scrollbar_none: Advanced Table Scrollbar None
+  - advanced_table_row_styling: Row Styling
+  - advanced_table_column_styling: Column Styling
+  - advanced_table_column_styling_column_headers: Column Styling with Multiple Headers
+  - advanced_table_infinite_scroll: Infinite Scroll
