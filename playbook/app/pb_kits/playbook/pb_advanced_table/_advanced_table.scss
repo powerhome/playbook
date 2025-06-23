@@ -189,6 +189,11 @@
         box-sizing: border-box !important;
       }
     }
+    // Fixes for tooltip picking up th styling from Table kit
+    .pb_tooltip_kit {
+      font-weight: unset;
+      text-transform: unset;
+    }
   }
 
   .pb_advanced_table_body {
