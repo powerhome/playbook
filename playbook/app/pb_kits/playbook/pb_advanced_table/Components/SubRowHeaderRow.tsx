@@ -33,7 +33,7 @@ export const SubRowHeaderRow = ({
   subRowHeaders,
   table,
 }: SubRowHeaderRowProps & GlobalProps) => {
-  const { inlineRowLoading, customSort } = useContext(AdvancedTableContext)
+  const { inlineRowLoading, customSort, onCustomSortClick } = useContext(AdvancedTableContext)
 
   const numberOfColumns = table.getAllFlatColumns().length
   const rowHasChildren = row.original.children ? true : false
@@ -66,15 +66,13 @@ export const SubRowHeaderRow = ({
             {customSort && hasSubrowsToSort && hasSubrowsToSort.length > 1 && (
               <button
                   aria-label="Sort this group"
-                  className="sort-button-icon"
-                  onClick={() => {
-                    console.log(row.getParentRow()?.subRows);
-                }}
+                  className="sort-button-icon gray-icon"
+                  onClick={() => { onCustomSortClick && onCustomSortClick(row.getParentRow()?.subRows)}}
               >
                 <Icon 
                     cursor="pointer" 
                     fixedWidth 
-                    icon="arrow-up-short-wide" 
+                    icon="sort" 
                 />
               </button>
             )}

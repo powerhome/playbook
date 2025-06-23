@@ -51,6 +51,7 @@ const subRowHeaders = ["Quarter", "Month", "Day"]
           columnDefinitions={columnDefinitions}
           customSort
           enableToggleExpansion="all"
+          onCustomSortClick={(subrows)=>{console.log("Custom sort clicked", subrows)}}
           tableData={MOCK_DATA}
           {...props}
       >

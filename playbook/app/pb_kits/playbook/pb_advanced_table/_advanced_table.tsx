@@ -68,6 +68,7 @@ type AdvancedTableProps = {
   tableProps?: GenericObject
   toggleExpansionIcon?: string | string[]
   onRowSelectionChange?: (arg: RowSelectionState) => void
+  onCustomSortClick?: (arg: GenericObject[]) => void
   virtualizedRows?: boolean
   allowFullScreen?: boolean
   fullScreenControl?: (controls: FullscreenControls) => void
@@ -97,6 +98,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
     maxHeight,
     onRowToggleClick,
     onToggleExpansionClick,
+    onCustomSortClick,
     pagination = false,
     paginationProps,
     pinnedRows,
@@ -339,6 +341,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
             isActionBarVisible={isActionBarVisible}
             isFullscreen={isFullscreen}
             loading={loading}
+            onCustomSortClick={onCustomSortClick}
             onExpandByDepthClick={onExpandByDepthClick}
             pinnedRows={pinnedRows}
             responsive={responsive}
