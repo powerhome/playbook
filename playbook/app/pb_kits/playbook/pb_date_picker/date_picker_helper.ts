@@ -83,18 +83,10 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
 
   const defaultDateGetter = () => {
     const inputElement = document.querySelector(`#${pickerId}`) as HTMLInputElement
-    const isTurboFrameLoad = inputElement?.closest('turbo-frame') !== null
     
-    if (isTurboFrameLoad && inputElement) {
-      const currentValue = inputElement.value.trim()
-      
-      if (currentValue === '') {
-        return null
-      }
-      
-      if (currentValue) {
-        return currentValue
-      }
+    if (inputElement && inputElement.hasAttribute('value')) {
+      const inputValue = inputElement.getAttribute('value') || ''
+      return inputValue.trim() === '' ? null : inputValue
     }
     
     if (defaultDate === '' || defaultDate === null || defaultDate === undefined) {
