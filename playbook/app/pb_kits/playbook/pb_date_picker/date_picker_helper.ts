@@ -82,20 +82,18 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
   // ===========================================================
 
   const defaultDateGetter = () => {
-    if (defaultDate === '') {
-      return null
-    } else {
-      return defaultDate
-    }
-  }
-
-  const maybeDefaultDate = () => {
-    const inputEl = document.querySelector(`#${pickerId}`) as HTMLInputElement
-    if (!inputEl?.value?.trim()) {
-      return defaultDateGetter()
-    }
-    return undefined
-  }
+    const input = typeof pickerId === 'string'
+      ? document.querySelector<HTMLInputElement>(`#${pickerId}`)
+      : pickerId as HTMLInputElement | null;
+  
+    if (!input) return defaultDate;
+  
+    const userInput = input.value?.trim() || '';
+  
+    if (userInput === '') return null;
+  
+    return defaultDate;
+  };
 
   const disabledWeekDays = () => {
     return (
@@ -214,7 +212,7 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
     closeOnSelect,
     disableMobile: true,
     dateFormat: getDateFormat(),
-    defaultDate: maybeDefaultDate(),
+    defaultDate: defaultDateGetter(),
     disable: disabledParser(),
     enableTime,
     locale: {
