@@ -2,9 +2,7 @@ import React from 'react'
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 
-import "../BarGraphStyles.scss";
-// Your path might look more like this
-//import "playbook-ui/dist/pb_bar_graph/BarGraphStyles.scss";
+import barGraphTheme from '../barGraphTheme';
 
 const chartData = [{
   name: 'Number of Installations',
@@ -12,43 +10,42 @@ const chartData = [{
 }]
 
 const chartOptions = {
-  chart: {
-    type: 'column',
-  },
-  series: chartData,
-  title: {
-    text: 'Solar Employment Growth by Sector, 2010-2016',
-  },
-  subtitle: {
-    text: 'Source: thesolarfoundation.com',
-  },
-  xAxis: {
-    categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
-  },
-  yAxis: {
-    min: 0,
     title: {
-      text: 'Number of Employees',
+      text: 'Solar Employment Growth by Sector, 2010-2016',
     },
-  },
-  legend: { enabled: true ,
-    events: {
-      itemClick: function () {
-        return false;
+    subtitle: {
+      text: 'Source: thesolarfoundation.com',
+    },
+    xAxis: {
+      categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
+    },
+    yAxis: {
+      title: {
+        text: 'Number of Employees',
+      },
+    },
+    legend: {
+      enabled: true,
+      events: {
+        itemClick: function () {
+          return false;
+        }
       }
-  }
-  },
-  credits: { enabled: false },
+    },
+  series: chartData
 }
 
-const BarGraphLegendNonClickable = () => (
+const BarGraphLegendNonClickable = () => {
+  const options = Highcharts.merge({}, barGraphTheme, chartOptions)
 
-  <div>
-    <HighchartsReact 
-        highcharts={Highcharts}
-        options={chartOptions}
-    />
-  </div>
-)
+  return (
+    <div>
+      <HighchartsReact
+          highcharts={Highcharts}
+          options={options}
+      />
+    </div>
+  )
+}
 
 export default BarGraphLegendNonClickable

@@ -82,6 +82,7 @@ const lineGraphTheme = {
     },
   },
   yAxis: {
+    min: 0,
     alternateGridColor: undefined as string | undefined,
     minorTickInterval: null as number | null,
     gridLineColor: colors.border_light,

@@ -1,12 +1,8 @@
 import React from 'react'
-
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 
-import "../BarGraphStyles.scss";
-// Your path might look more like this
-//import "playbook-ui/dist/pb_bar_graph/BarGraphStyles.scss";
-
+import barGraphTheme from '../barGraphTheme';
 
 const chartOptions = {
     chart: {
@@ -27,7 +23,6 @@ const chartOptions = {
         lineWidth: 0
     },
     yAxis: {
-        min: 0,
         title: {
             text: 'Population (millions)',
             align: 'high'
@@ -59,11 +54,13 @@ const chartOptions = {
     }]
 }
 
+const options = Highcharts.merge({}, barGraphTheme, chartOptions)
+
 const BarGraphHorizontal = () => (
   <div>
     <HighchartsReact
         highcharts={Highcharts}
-        options={chartOptions}
+        options={options}
     />
   </div>
 )

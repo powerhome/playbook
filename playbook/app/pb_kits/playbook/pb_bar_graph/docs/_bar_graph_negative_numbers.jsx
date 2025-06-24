@@ -3,9 +3,7 @@ import React from 'react'
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 
-import "../BarGraphStyles.scss";
-// Your path might look more like this
-//import "playbook-ui/dist/pb_bar_graph/BarGraphStyles.scss";
+import barGraphTheme from '../barGraphTheme';
 
 const chartData = [{
   name: 'Installation',
@@ -15,17 +13,14 @@ const chartData = [{
   name: 'Manufacturing',
   data: [1475, 200, 1000, 654, -656],
   threshold: 0
-}, 
+},
 {
   name: 'Sales & Distribution',
   data: [1270, 100, -1200, 554, 756],
   threshold: 0
 }]
 
-const columnOptions = {
-  chart: {
-    type: "column",
-  },
+const chartOptions = {
   series: chartData,
   title: {
     text: "Bar Graph with Negative Numbers",
@@ -38,17 +33,20 @@ const columnOptions = {
       text: "Number of Employees",
     },
   },
-  credits: { enabled: false },
 };
 
 
-const BarGraphStacked = () => (
-  <div>
-     <HighchartsReact
-         highcharts={Highcharts}
-         options={columnOptions}
-     />
-  </div>
-)
+const BarGraphStacked = () => {
+  const options = Highcharts.merge({}, barGraphTheme, chartOptions)
+
+  return(
+    <div>
+      <HighchartsReact
+          highcharts={Highcharts}
+          options={options}
+      />
+    </div>
+  )
+}
 
 export default BarGraphStacked

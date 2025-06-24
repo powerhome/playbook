@@ -2,11 +2,9 @@ import React from 'react'
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 
-import "../BarGraphStyles.scss";
-// Your path might look more like this
-//import "playbook-ui/dist/pb_bar_graph/BarGraphStyles.scss";
-
 import Title from "../../pb_title/_title"
+
+import barGraphTheme from '../barGraphTheme';
 
 const chartData = [{
   name: 'Installation',
@@ -26,9 +24,6 @@ const chartData = [{
 }]
 
 const alignChartOptions = {
-  chart: {
-    type: 'column',
-  },
   series: chartData,
   title: {
     text: 'Alignment of Legend',
@@ -40,7 +35,6 @@ const alignChartOptions = {
     categories: ['Jan'],
   },
   yAxis: {
-    min: 0,
     title: {
       text: 'Number of Employees',
     },
@@ -50,13 +44,9 @@ const alignChartOptions = {
     verticalAlign: 'top',
     align: 'right',
    },
-  credits: { enabled: false },
 }
 
 const layoutChartOptions = {
-  chart: {
-    type: 'column',
-  },
   series: chartData,
   title: {
     text: 'Layout of Legend',
@@ -65,7 +55,6 @@ const layoutChartOptions = {
     categories: ['Jan'],
   },
   yAxis: {
-    min: 0,
     title: {
       text: 'Number of Employees',
     },
@@ -74,13 +63,9 @@ const layoutChartOptions = {
     enabled: true,
     layout: 'vertical',
    },
-  credits: { enabled: false },
 }
 
 const offsetChartOptions = {
-  chart: {
-    type: 'column',
-  },
   series: chartData,
   title: {
     text: 'Offset of Legend',
@@ -89,7 +74,6 @@ const offsetChartOptions = {
     categories: ['Jan'],
   },
   yAxis: {
-    min: 0,
     title: {
       text: 'Number of Employees',
     },
@@ -100,10 +84,15 @@ const offsetChartOptions = {
     x: 100,
     y: 10,
   },
-  credits: { enabled: false },
 }
 
-const BarGraphLegendPosition = () => (
+const BarGraphLegendPosition = () => {
+  const alignOptions = Highcharts.merge({}, barGraphTheme, alignChartOptions)
+  const layoutOptions = Highcharts.merge({}, barGraphTheme, layoutChartOptions)
+  const offsetOptions = Highcharts.merge({}, barGraphTheme, offsetChartOptions)
+
+
+  return (
   <div>
     <Title
         paddingBottom="sm"
@@ -114,7 +103,7 @@ const BarGraphLegendPosition = () => (
     />
     <HighchartsReact 
         highcharts={Highcharts}
-        options={alignChartOptions}
+        options={alignOptions}
     />
 
     <Title
@@ -126,7 +115,7 @@ const BarGraphLegendPosition = () => (
     />
     <HighchartsReact 
         highcharts={Highcharts}
-        options={layoutChartOptions}
+        options={layoutOptions}
     />
 
     <Title
@@ -138,9 +127,10 @@ const BarGraphLegendPosition = () => (
     />
     <HighchartsReact 
         highcharts={Highcharts}
-        options={offsetChartOptions}
+        options={offsetOptions}
     />
   </div>
 )
+}
 
 export default BarGraphLegendPosition

@@ -1,12 +1,9 @@
 import React from 'react'
 import colors from '../../tokens/exports/_colors.module.scss'
-
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 
-import "../BarGraphStyles.scss";
-// Your path might look more like this
-//import "playbook-ui/dist/pb_bar_graph/BarGraphStyles.scss";
+import barGraphTheme from '../barGraphTheme';
 
 
 const chartData = [{
@@ -26,10 +23,7 @@ const chartData = [{
   data: [1111, 677, 3245, 500, 200],
 }]
 
-const columnOptions = {
-  chart: {
-    type: "column",
-  },
+const chartOptions = {
   series: chartData,
   title: {
     text: "Solar Employment Growth by Sector, 2010-2016",
@@ -41,23 +35,24 @@ const columnOptions = {
     categories: ["Jan", "Feb", "Mar", "Apr", "May"],
   },
   yAxis: {
-    min: 0,
     title: {
       text: "Number of Employees",
     },
   },
-  legend: { enabled: false },
-  credits: { enabled: false },
   colors: [colors.data_4, colors.data_5, colors.data_6, colors.data_7, colors.data_8],
 }
 
-const BarGraphColors = () => (
-  <div>
+const BarGraphColors = () => {
+  const options = Highcharts.merge({}, barGraphTheme, chartOptions)
+
+  return (
+    <div>
       <HighchartsReact
           highcharts={Highcharts}
-          options={columnOptions}
+          options={options}
       />
-  </div>
-)
+    </div>
+  )
+}
 
 export default BarGraphColors

@@ -2,9 +2,7 @@ import React from 'react'
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 
-import "../BarGraphStyles.scss";
-// Your path might look more like this
-//import "playbook-ui/dist/pb_bar_graph/BarGraphStyles.scss";
+import barGraphTheme from '../barGraphTheme';
 
 const chartData = [{
   name: 'Number of Installations',
@@ -13,7 +11,6 @@ const chartData = [{
 
 const pixleHeightChartOptions = {
   chart: {
-    type: "column",
     height: "300"
   },
   series: chartData,
@@ -27,18 +24,14 @@ const pixleHeightChartOptions = {
     categories: ["Jan", "Feb", "Mar", "Apr", "May"],
   },
   yAxis: {
-    min: 0,
     title: {
       text: "Number of Employees",
     },
   },
-  legend: { enabled: false },
-  credits: { enabled: false },
 };
 
 const percentageHeightChartOptions = {
   chart: {
-    type: "column",
     height: "50%"
   },
   series: chartData,
@@ -52,20 +45,21 @@ const percentageHeightChartOptions = {
     categories: ["Jan", "Feb", "Mar", "Apr", "May"],
   },
   yAxis: {
-    min: 0,
     title: {
       text: "Number of Employees",
     },
   },
-  legend: { enabled: false },
-  credits: { enabled: false },
 };
+
+const pixleOptions = Highcharts.merge({}, barGraphTheme, pixleHeightChartOptions)
+
+const percentageOptions = Highcharts.merge({}, barGraphTheme, percentageHeightChartOptions)
 
 const BarGraphHeight = () => (
   <div>
       <HighchartsReact
           highcharts={Highcharts}
-          options={pixleHeightChartOptions}
+          options={pixleOptions}
       />
 
     <br />
@@ -73,7 +67,7 @@ const BarGraphHeight = () => (
 
     <HighchartsReact
         highcharts={Highcharts}
-        options={percentageHeightChartOptions}
+        options={percentageOptions}
     />
   </div>
 )
