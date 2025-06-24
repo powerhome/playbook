@@ -89,6 +89,14 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
     }
   }
 
+  const maybeDefaultDate = () => {
+    const inputEl = document.querySelector(`#${pickerId}`) as HTMLInputElement
+    if (!inputEl?.value?.trim()) {
+      return defaultDateGetter()
+    }
+    return undefined
+  }
+
   const disabledWeekDays = () => {
     return (
       [
@@ -206,7 +214,7 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
     closeOnSelect,
     disableMobile: true,
     dateFormat: getDateFormat(),
-    defaultDate: defaultDateGetter(),
+    defaultDate: maybeDefaultDate(),
     disable: disabledParser(),
     enableTime,
     locale: {
@@ -275,7 +283,7 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
         picker.monthsDropdownContainer.value = picker.currentMonth
 
         /* Reset date picker to default value on form.reset() */
-        if (defaultDate !== '' && defaultDate !== null && defaultDate !== undefined) {
+        if (defaultDate) {
           picker.setDate(defaultDate)
           yearChangeHook(picker)
         }
