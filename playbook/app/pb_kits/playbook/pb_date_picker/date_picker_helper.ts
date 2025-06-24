@@ -81,19 +81,32 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
   // |                   Hook Definitions                      |
   // ===========================================================
 
+  const shouldPreserveCurrentValue = () => {
+    const inputElement = document.querySelector(`#${pickerId}`) as HTMLInputElement
+    
+    if (!inputElement || !inputElement.value) {
+      return false
+    }
+    
+    const isTurboFrameLoad = inputElement.closest('turbo-frame') !== null
+    
+    return isTurboFrameLoad
+  }
+  
   const defaultDateGetter = () => {
-    const input = typeof pickerId === 'string'
-      ? document.querySelector<HTMLInputElement>(`#${pickerId}`)
-      : pickerId as HTMLInputElement | null;
-  
-    if (!input) return defaultDate;
-  
-    const userInput = input.value?.trim() || '';
-  
-    if (userInput === '') return null;
-  
-    return defaultDate;
-  };
+    if (shouldPreserveCurrentValue()) {
+      const inputElement = document.querySelector(`#${pickerId}`) as HTMLInputElement
+      const currentValue = inputElement.value.trim()
+      
+      return currentValue || null
+    }
+    
+    if (defaultDate === '' || defaultDate === null || defaultDate === undefined) {
+      return null
+    } else {
+      return defaultDate
+    }
+  }
 
   const disabledWeekDays = () => {
     return (
