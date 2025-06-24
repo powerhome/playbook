@@ -81,24 +81,20 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
   // |                   Hook Definitions                      |
   // ===========================================================
 
-  const shouldPreserveCurrentValue = () => {
-    const inputElement = document.querySelector(`#${pickerId}`) as HTMLInputElement
-    
-    if (!inputElement || !inputElement.value) {
-      return false
-    }
-    
-    const isTurboFrameLoad = inputElement.closest('turbo-frame') !== null
-    
-    return isTurboFrameLoad
-  }
-  
   const defaultDateGetter = () => {
-    if (shouldPreserveCurrentValue()) {
-      const inputElement = document.querySelector(`#${pickerId}`) as HTMLInputElement
+    const inputElement = document.querySelector(`#${pickerId}`) as HTMLInputElement
+    const isTurboFrameLoad = inputElement?.closest('turbo-frame') !== null
+    
+    if (isTurboFrameLoad && inputElement) {
       const currentValue = inputElement.value.trim()
       
-      return currentValue || null
+      if (currentValue === '') {
+        return null
+      }
+      
+      if (currentValue) {
+        return currentValue
+      }
     }
     
     if (defaultDate === '' || defaultDate === null || defaultDate === undefined) {
