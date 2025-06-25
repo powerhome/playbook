@@ -3,17 +3,11 @@
   { id: "32", name: "New Jersey" },
   { id: "33", name: "Maryland" },
   { id: "34", name: "Connecticut" },
+
 ] %>
 
-<%= pb_rails("list", props: { enable_drag: true, items: initial_items, ordered: false, dark: false  }) do %>
+<%= pb_rails("list", props: { enable_drag: true, items: initial_items }) do %>
   <% initial_items.each do |item| %>
-    <%= pb_rails("list/item", props: { drag_id: item[:id], drag_handle: false }) do %>
-      <%= pb_rails("card", props: { highlight: { position: "side", color: "primary" }, padding: "xs" }) do %>
-        <%= pb_rails("flex", props: { orientation: "row", align: "center" }) do %>
-          <%= pb_rails("icon", props: { icon: "grip-dots-vertical", padding_right: "xs" }) %>
-          <%= item[:name] %>
-        <% end %>
-      <% end %>
-    <% end %>
-    <% end %>
+    <%= pb_rails("list/item", props:{drag_id: item[:id]}) do %><%= item[:name] %><% end %>
+  <% end %>
 <% end %>

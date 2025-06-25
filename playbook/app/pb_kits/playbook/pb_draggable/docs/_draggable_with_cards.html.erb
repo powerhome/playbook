@@ -3,10 +3,10 @@
   { id: "22", name: "Nancy White" },
   { id: "23", name: "Bill Green" },
 ] %>
-<%= pb_rails("list", props: {enable_drag: true, ordered: false, dark: false, borderless: false}) do %>
 
+<%= pb_rails("draggable", props: {initial_items: initial_items}) do %>
+  <%= pb_rails("draggable/draggable_container") do %>
     <% initial_items.each do |item| %>
-      <%= pb_rails("list/item") do %> 
         <%= pb_rails("card", props: {highlight: {position: "side", color:"primary"}, margin_bottom: "xs", padding: "xs", drag_id: item[:id], draggable_item: true }) do %>
           <%= pb_rails("flex", props:{align_items: "stretch", flex_direction:"column"}) do %>
             <%= pb_rails("flex", props:{gap: "xs"}) do %>
@@ -33,5 +33,4 @@
         <% end %>
     <% end %>
   <% end %>
-
 <% end %>
