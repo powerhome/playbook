@@ -24,7 +24,8 @@ type DatePickerConfig = {
   required: boolean,
   hideIcon?: boolean;
   inLine?: boolean,
-  onChange: (dateStr: string, selectedDates: Date[]) => void,
+  // Updated onChange type to include quickpickLabel parameter
+  onChange: (dateStr: string, selectedDates: Date[], quickpickLabel?: string | null) => void,
   selectionType?: "month" | "week" | "quickpick" | "",
   onClose: (dateStr: Date[] | string, selectedDates: Date[] | string) => void,
   showTimezone?: boolean,
@@ -127,6 +128,7 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
 
     return disabledArray
   }
+
   const calendarResizer = () => {
     const cal = document.querySelector(`#cal-${pickerId}.open`) as HTMLElement
     const parentInput = cal.parentElement
@@ -229,7 +231,12 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
     onChange: [(selectedDates, dateStr, fp) => {
       handleDatePickerChange(fp, selectedDates)
       yearChangeHook(fp)
-      onChange(dateStr, selectedDates)
+
+      // Get the quickpick label from the flatpickr instance if it exists
+      const quickpickLabel = (fp as any)._quickpickLabel || null;
+
+      // Call onChange with the additional quickpickLabel parameter
+      onChange(dateStr, selectedDates, quickpickLabel)
     }],
     onYearChange: [(_selectedDates, _dateStr, fp) => {
       yearChangeHook(fp)
@@ -323,7 +330,7 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
   }
 // === End of Automatic Sync Logic ===
 
-    
+
   // Adding dropdown icons to year and month select
   dropdown.insertAdjacentHTML('afterend', `<i class="year-dropdown-icon">${angleDown}</i>`)
   if (picker.monthElements[0].parentElement) {

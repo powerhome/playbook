@@ -11,6 +11,8 @@ type FpTypes = {
     append: (arg0: HTMLDivElement) => void;
   },
   loadedPlugins: string[],
+  // Add custom property to store quickpick label
+  _quickpickLabel?: string,
 };
 
 type pluginDataType = {
@@ -77,7 +79,6 @@ const quickPickPlugin = (thisRangesEndToday: boolean, customQuickPickDates: cust
       return [startDate, endDate];
     };
 
-
     type rangesType = {
       [key: string]: Date[]
     };
@@ -94,7 +95,6 @@ const quickPickPlugin = (thisRangesEndToday: boolean, customQuickPickDates: cust
       'Last quarter': [lastQuarterStartDate, lastQuarterEndDate],
       'Last year': [lastYearStartDate, lastYearEndDate]
     };
-
 
     if (customQuickPickDates && Object.keys(customQuickPickDates).length !== 0) {
       if (customQuickPickDates.dates.length && customQuickPickDates.override === false) {
@@ -123,17 +123,14 @@ const quickPickPlugin = (thisRangesEndToday: boolean, customQuickPickDates: cust
       }
     }
 
-
     // creating the ul element for the nav dropdown and giving it classnames
     const rangesNav = document.createElement('ul');
-
 
     // creating the pluginData object that will hold the properties of this plugin
     const pluginData: pluginDataType = {
       ranges: ranges,
       rangesNav: rangesNav,
       rangesButtons: [],
-
     };
 
     /**
@@ -143,7 +140,6 @@ const quickPickPlugin = (thisRangesEndToday: boolean, customQuickPickDates: cust
 
     // function for creating the range buttons in the nav
     const addRangeButton = (label: string) => {
-
       // creating new elements to mimick selectable card component
       const div2 = document.createElement('div');
       div2.className = "nav-item-link"
@@ -182,6 +178,11 @@ const quickPickPlugin = (thisRangesEndToday: boolean, customQuickPickDates: cust
         selectedDates[1].toDateString() === pluginData.ranges[activeLabel][1].toDateString()
     }
 
+    // Helper function to set quickpick label on flatpickr instance
+    const setQuickpickLabel = (label: string | null) => {
+      fp._quickpickLabel = label;
+    }
+
     return {
       // onReady is a hook from flatpickr that runs when calendar is in a ready state
       onReady(selectedDates: Array<Date>) {
@@ -196,9 +197,11 @@ const quickPickPlugin = (thisRangesEndToday: boolean, customQuickPickDates: cust
 
             if (!start) {
               fp.clear();
+              setQuickpickLabel(null);
             }
             else {
               activeLabel = label
+              setQuickpickLabel(label); // Store the label on the flatpickr instance
               fp.setDate([start, end], true);
               fp.close();
             }
@@ -212,6 +215,7 @@ const quickPickPlugin = (thisRangesEndToday: boolean, customQuickPickDates: cust
             }
           }
         }
+
         // conditional to check if there is a dropdown to add it to the calendar container and get it the classes it needs
         if (pluginData.rangesNav.children.length > 0) {
 
@@ -229,10 +233,12 @@ const quickPickPlugin = (thisRangesEndToday: boolean, customQuickPickDates: cust
 
         // set the default date range if there is one and select the active button
         if (defaultDateRange) {
+          setQuickpickLabel(activeLabel); // Set label for default date
           fp.setDate(defaultDateRange, false);
           selectActiveRangeButton(defaultDateRange);
         }
       },
+
       onValueUpdate(selectedDates: Array<Date>) {
         selectActiveRangeButton(selectedDates)
       },
@@ -246,12 +252,15 @@ const quickPickPlugin = (thisRangesEndToday: boolean, customQuickPickDates: cust
             current.classList.remove('active');
           }
           activeLabel = "";
+          setQuickpickLabel(null);
           return originalClear.apply(this, args);
         };
+
         // remove the active class from the button if the selected dates don't match the label
         if (!isLabelMatchingSelectedDates(selectedDates)) {
           pluginData.rangesButtons[activeLabel]?.classList.remove('active');
           activeLabel = ""
+          setQuickpickLabel(null);
         }
 
         // set the date to the first date in the array if the user types only one date

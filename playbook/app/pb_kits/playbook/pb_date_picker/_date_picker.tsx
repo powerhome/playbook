@@ -39,6 +39,9 @@ type DatePickerProps = {
   maxDate: string,
   minDate: string,
   name: string,
+  // Updated onChange type to include quickpickLabel parameter
+  onChange?: (dateStr: string, selectedDates: Date[], quickpickLabel?: string | null) => void,
+  onClose?: (dateStr: Date[] | string, selectedDates: Date[] | string) => void,
   pickerId?: string,
   placeholder?: string,
   positionElement?: HTMLElement | null,
@@ -89,7 +92,8 @@ const DatePicker = (props: DatePickerProps): React.ReactElement => {
     minDate,
     mode = 'single',
     name,
-    onChange = () => { void 0 },
+    // Default onChange function that accepts the quickpickLabel parameter
+    onChange = (dateStr: string, selectedDates: Date[], quickpickLabel?: string | null) => { void 0 },
     onClose,
     pickerId,
     placeholder = 'Select Date',
@@ -149,6 +153,7 @@ const DatePicker = (props: DatePickerProps): React.ReactElement => {
       required: false,
     }, scrollContainer)
   }, initializeOnce ? [] : undefined)
+
   const filteredProps = {...props}
   if (filteredProps.marginBottom === undefined) {
     filteredProps.marginBottom = "sm"
