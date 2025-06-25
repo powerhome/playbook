@@ -15,10 +15,7 @@ const pixelHeightChartOptions = {
   },
   series: chartData,
   title: {
-    text: "Solar Employment Growth by Sector, 2010-2016",
-  },
-  subtitle: {
-    text: "Source: thesolarfoundation.com",
+    text: "Fixed Height (300px)",
   },
   xAxis: {
     categories: ["Jan", "Feb", "Mar", "Apr", "May"],
@@ -36,10 +33,7 @@ const percentageHeightChartOptions = {
   },
   series: chartData,
   title: {
-    text: "Solar Employment Growth by Sector, 2010-2016",
-  },
-  subtitle: {
-    text: "Source: thesolarfoundation.com",
+    text: "Percentage Height (50%)",
   },
   xAxis: {
     categories: ["Jan", "Feb", "Mar", "Apr", "May"],

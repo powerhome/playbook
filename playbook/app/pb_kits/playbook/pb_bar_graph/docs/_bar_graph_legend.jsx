@@ -12,10 +12,7 @@ const chartData = [{
 const chartOptions = {
   series: chartData,
   title: {
-    text: 'Solar Employment Growth by Sector, 2010-2016',
-  },
-  subtitle: {
-    text: 'Source: thesolarfoundation.com',
+    text: 'Bar Graph with Legend',
   },
   xAxis: {
     categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
