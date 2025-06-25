@@ -51,7 +51,7 @@ const percentageHeightChartOptions = {
   },
 };
 
-const pixleOptions = Highcharts.merge({}, barGraphTheme, pixleHeightChartOptions)
+const pixelOptions = Highcharts.merge({}, barGraphTheme, pixelHeightChartOptions)
 
 const percentageOptions = Highcharts.merge({}, barGraphTheme, percentageHeightChartOptions)
 
