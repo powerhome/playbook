@@ -82,13 +82,6 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
   // ===========================================================
 
   const defaultDateGetter = () => {
-    const inputElement = document.querySelector(`#${pickerId}`) as HTMLInputElement
-    
-    if (inputElement && inputElement.hasAttribute('value')) {
-      const inputValue = inputElement.getAttribute('value') || ''
-      return inputValue.trim() === '' ? null : inputValue
-    }
-    
     if (defaultDate === '' || defaultDate === null || defaultDate === undefined) {
       return null
     } else {
@@ -240,6 +233,25 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
     }],
     onYearChange: [(_selectedDates, _dateStr, fp) => {
       yearChangeHook(fp)
+    }],
+    onReady: [(_positionCalendarselectedDates, dateStr, instance) => {
+      const inputElement = instance.input
+      
+      const isTurboFrame = inputElement.closest('turbo-frame') !== null
+      
+      if (isTurboFrame) {
+        const formFieldName = inputElement.getAttribute('name')
+        if (formFieldName) {
+          const formData = new FormData(inputElement.form)
+          const serverValue = formData.get(formFieldName) as string
+          
+          if (serverValue === '' || serverValue === null) {
+            instance.clear()
+          } else if (serverValue && serverValue !== dateStr) {
+            instance.setDate(serverValue, false)
+          }
+        }
+      }
     }],
     plugins: setPlugins(thisRangesEndToday, customQuickPickDates),
     position,
