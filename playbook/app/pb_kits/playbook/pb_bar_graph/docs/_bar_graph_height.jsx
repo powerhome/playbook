@@ -9,7 +9,7 @@ const chartData = [{
   data: [1475, 200, 3000, 654, 656],
 }]
 
-const pixleHeightChartOptions = {
+const pixelHeightChartOptions = {
   chart: {
     height: "300"
   },
