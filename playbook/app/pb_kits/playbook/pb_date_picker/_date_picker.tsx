@@ -93,7 +93,7 @@ const DatePicker = (props: DatePickerProps): React.ReactElement => {
     mode = 'single',
     name,
     // Default onChange function that accepts the quickpickLabel parameter
-    onChange = (dateStr: string, selectedDates: Date[], quickpickLabel?: string | null) => { void 0 },
+    onChange = (_dateStr: string, _selectedDates: Date[], _quickpickLabel?: string | null) => { void 0 },
     onClose,
     pickerId,
     placeholder = 'Select Date',
