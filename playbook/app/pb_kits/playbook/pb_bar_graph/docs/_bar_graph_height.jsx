@@ -59,7 +59,7 @@ const BarGraphHeight = () => (
   <div>
       <HighchartsReact
           highcharts={Highcharts}
-          options={pixleOptions}
+          options={pixelOptions}
       />
 
     <br />
