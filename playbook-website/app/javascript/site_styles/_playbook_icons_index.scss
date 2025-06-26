@@ -1,9 +1,58 @@
+@import "playbook-tokens/colors";
+@import "playbook-tokens/spacing";
+@import "playbook-tokens/screen_sizes";
+
 .playbook_icons_index{
     .content-wrapper {
         margin: 60px;
     }
   
-    .icon-list-container {
-        border-right: 1px solid #e4e8f0;
+    .icon-card {
+        .pb_icon_kit {
+          color: $text_lt_light;
+        }
+      }
+
+    .icon-grid {
+        .layout_body {
+            grid-column-gap: $space_lg !important;
+            grid-template-columns: repeat(4, 1fr) !important;
+        
+            @media screen and (max-width: $screen-lg-min) {
+                grid-template-columns: repeat(3, 1fr) !important;
+            }
+        
+            @media screen and (max-width: $screen-xs-min) {
+                grid-template-columns: repeat(2, 1fr) !important;
+                grid-column-gap: $space_sm !important;
+        
+                .icon-card {
+                    label {
+                        padding: $space_xs;
+                        margin: 0;
+                    }
+                }
+            }
+        
+            @media screen and (max-width: 350px) {
+                grid-template-columns: repeat(1, 1fr) !important;
+            }
+        }
+    }
+
+    .icon-categories-section-separator {
+        display: flex;
+      
+        @media screen and (max-width: $screen-lg-min) {
+          display: none;
+        }
+    }
+
+    .icon-categories-sidebar {
+        display: block;
+      
+        @media screen and (max-width: $screen-lg-min) {
+          display: none;
+        }
     }
 }
