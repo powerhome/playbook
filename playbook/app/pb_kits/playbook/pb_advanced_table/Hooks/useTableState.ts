@@ -1,4 +1,4 @@
-import { useState, useCallback, useMemo, useEffect } from 'react';
+import { useState, useCallback, useMemo, useEffect, useRef } from 'react';
 import {
   useReactTable,
   getCoreRowModel,
@@ -179,6 +179,20 @@ export function useTableState({
     ...paginationInitializer,
     ...tableOptions,
   });
+
+  // Store a reference to the current data to detect changes
+  const dataRef = useRef(tableData);
+  
+  // Clear pins when data changes (detected by reference change)
+  useEffect(() => {
+    if (loading) return;
+    
+    // If the data reference changed, clear pins
+    if (dataRef.current !== tableData) {
+      dataRef.current = tableData;
+      onRowPinningChange({ top: [] });
+    }
+  }, [tableData, loading, onRowPinningChange]);
 
   // Handle row pinning changes
   useEffect(() => {
