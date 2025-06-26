@@ -48,6 +48,7 @@ examples:
   - date_picker_quick_pick_custom: Custom Quick Pick Dates
   - date_picker_quick_pick_custom_override: Custom Quick Pick Dates (append to defaults)
   - date_picker_quick_pick_default_date: Range (Quick Pick w/ Default Date)
+  - date_picker_quick_pick_with_label: With Label
   - date_picker_range_pattern: Range with 2 Date Pickers and a Quick Pick
   - date_picker_format: Format
   - date_picker_disabled: Disabled Dates
