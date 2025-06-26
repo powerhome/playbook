@@ -36,6 +36,7 @@ type AdvancedTableProps = {
   columnDefinitions: GenericObject[]
   columnGroupBorderColor?: "text_lt_default" | "text_lt_light" | "text_lt_lighter" | "text_dk_default" | "text_dk_light" | "text_dk_lighter"
   columnVisibilityControl?: GenericObject
+  customSort?:boolean;
   dark?: boolean
   data?: { [key: string]: string }
   enableToggleExpansion?: "all" | "header" | "none"
@@ -67,6 +68,7 @@ type AdvancedTableProps = {
   tableProps?: GenericObject
   toggleExpansionIcon?: string | string[]
   onRowSelectionChange?: (arg: RowSelectionState) => void
+  onCustomSortClick?: (arg: GenericObject[]) => void
   virtualizedRows?: boolean
   allowFullScreen?: boolean
   fullScreenControl?: (controls: FullscreenControls) => void
@@ -81,6 +83,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
     columnDefinitions,
     columnGroupBorderColor,
     columnVisibilityControl,
+    customSort,
     dark = false,
     data = {},
     enableToggleExpansion = "header",
@@ -95,6 +98,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
     maxHeight,
     onRowToggleClick,
     onToggleExpansionClick,
+    onCustomSortClick,
     pagination = false,
     paginationProps,
     pinnedRows,
@@ -325,6 +329,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
             columnDefinitions={columnDefinitions}
             columnGroupBorderColor={columnGroupBorderColor}
             columnVisibilityControl={columnVisibilityControl}
+            customSort={customSort}
             enableToggleExpansion={enableToggleExpansion}
             enableVirtualization={virtualizedRows}
             expandByDepth={expandByDepth}
@@ -336,6 +341,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
             isActionBarVisible={isActionBarVisible}
             isFullscreen={isFullscreen}
             loading={loading}
+            onCustomSortClick={onCustomSortClick}
             onExpandByDepthClick={onExpandByDepthClick}
             pinnedRows={pinnedRows}
             responsive={responsive}
