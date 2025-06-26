@@ -9989,10 +9989,10 @@ react-transition-group@^4.3.0:
     loose-envify "^1.4.0"
     prop-types "^15.6.2"
 
-react-trix@0.10.1:
-  version "0.10.1"
-  resolved "https://npm.powerapp.cloud/react-trix/-/react-trix-0.10.1.tgz#3cfcf72c41ec9a245d607fb79bc47f3f55acf40f"
-  integrity sha512-fY1PZyMtNRtvqyG4gMxIDqI1gBR6nBTgvKUhZjd34OYpOo5RV7Ar/riYUaX6e1cvodyHYXOW40i6Dn3giV1ZAg==
+react-trix@0.10.2:
+  version "0.10.2"
+  resolved "https://npm.powerapp.cloud/react-trix/-/react-trix-0.10.2.tgz#ebe7f44d41087516ec59e5ce7af2ef2463120d03"
+  integrity sha512-bAALnBuoHBu3J3UfJWTvDXhmt1Tic1//w+vbBuSWuGO2gXzy+fyLBNBRiLKPrBcnOB5/t+rdXU8rLSBiz02R9w==
   dependencies:
     trix "^1.3.1"
 
