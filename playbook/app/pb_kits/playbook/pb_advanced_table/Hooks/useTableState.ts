@@ -66,7 +66,7 @@ export function useTableState({
   const setExpanded = expandedControl ? expandedControl.onChange : setLocalExpanded;
   const columnVisibility = (columnVisibilityControl && columnVisibilityControl.value) ? columnVisibilityControl.value : localColumnVisibility;
   const setColumnVisibility = (columnVisibilityControl && columnVisibilityControl.onChange) ? columnVisibilityControl.onChange : setLocalColumnVisibility;
-  const rowPinning = pinnedRows?.value ?? localRowPinning
+  const rowPinning = loading ? { top: [] } : (pinnedRows?.value ?? localRowPinning);
   const onRowPinningChange = pinnedRows?.onChange ?? setLocalRowPinning
 
   // Virtualized data handling (chunked loading)
@@ -181,7 +181,9 @@ export function useTableState({
   });
 
   // Handle row pinning changes
-    useEffect(() => {
+  useEffect(() => {
+    if (loading) return;
+    
     const topPins = pinnedRows?.value?.top ?? [];
     if (topPins.length === 0) {
       onRowPinningChange({ top: [] });
@@ -198,7 +200,7 @@ export function useTableState({
       }
     });
     onRowPinningChange({ top: allPinned });
-  }, [table, pinnedRows?.value?.top?.join(',')]);
+  }, [table, pinnedRows?.value?.top?.join(','), loading]);
 
   // Check if table has any sub-rows
   const hasAnySubRows = table.getRowModel().rows.some(row => row.subRows && row.subRows.length > 0);
