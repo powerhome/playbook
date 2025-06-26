@@ -188,16 +188,28 @@ export function useTableState({
   }, [tableData, dataChunk, virtualizedRows, loading]);
   
   const [prevDataHash, setPrevDataHash] = useState(dataHash);
-  
-  // Clear pins when data actually changes (by ID composition)
-  useEffect(() => {
-    if (loading) return;
+
+  // Synchronously clear pins when data changes to prevent table errors
+  if (!loading && dataHash !== prevDataHash) {
+    setPrevDataHash(dataHash);
     
-    if (dataHash !== prevDataHash) {
-      setPrevDataHash(dataHash);
-      onRowPinningChange({ top: [] });
+    const currentPins = pinnedRows?.value?.top ?? [];
+    if (currentPins.length > 0) {
+      try {
+        const currentData = virtualizedRows ? dataChunk : tableData;
+        const validPins = currentPins.filter(id => 
+          currentData.some(row => row.id === id)
+        );
+        
+        if (validPins.length !== currentPins.length) {
+          onRowPinningChange({ top: validPins });
+        }
+      } catch (error) {
+        console.warn('Error validating pins on data change, clearing pins:', error);
+        onRowPinningChange({ top: [] });
+      }
     }
-  }, [dataHash, prevDataHash, loading, onRowPinningChange]);
+  }
 
   // Handle row pinning changes
   useEffect(() => {
@@ -208,17 +220,48 @@ export function useTableState({
       onRowPinningChange({ top: [] });
       return;
     }
-    const rows = table.getRowModel().rows;
-    const collectAllDescendantIds = (subs: Row<GenericObject>[]): string[] =>
-      subs.flatMap(r => [r.id, ...collectAllDescendantIds(r.subRows)]);
-    const allPinned: string[] = [];
-    topPins.forEach(id => {
-      const parent = rows.find(r => r.id === id && r.depth === 0);
-      if (parent) {
-        allPinned.push(parent.id, ...collectAllDescendantIds(parent.subRows));
+
+    try {
+      const rows = table.getRowModel().rows;
+      
+      const validPinnedIds = topPins.filter(id => {
+        try {
+          return rows.some(row => row.id === id && row.depth === 0);
+        } catch (error) {
+          console.warn(`Pinned row with id ${id} not found in current dataset`);
+          return false;
+        }
+      });
+  
+      if (validPinnedIds.length === 0) {
+        onRowPinningChange({ top: [] });
+        return;
       }
-    });
-    onRowPinningChange({ top: allPinned });
+
+      const collectAllDescendantIds = (subs: Row<GenericObject>[]): string[] =>
+        subs.flatMap(r => [r.id, ...collectAllDescendantIds(r.subRows)]);
+
+      const allPinned: string[] = [];
+
+      validPinnedIds.forEach(id => {
+        const parent = rows.find(r => r.id === id && r.depth === 0);
+        if (parent) {
+          allPinned.push(parent.id, ...collectAllDescendantIds(parent.subRows));
+        }
+      });
+
+      const currentPins = pinnedRows?.value?.top ?? [];
+      const pinsChanged = allPinned.length !== currentPins.length || 
+                        !allPinned.every(id => currentPins.includes(id));
+ 
+      if (pinsChanged) {
+        onRowPinningChange({ top: allPinned });
+      }
+
+    } catch (error) {
+      console.error('Error in pinned rows logic:', error);
+      onRowPinningChange({ top: [] });
+    }
   }, [table, pinnedRows?.value?.top?.join(','), loading]);
 
   // Check if table has any sub-rows
