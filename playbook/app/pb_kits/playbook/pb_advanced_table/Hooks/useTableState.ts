@@ -87,7 +87,7 @@ export function useTableState({
       // Handle grouped columns
       if (column.columns && column.columns.length > 0) {
         return {
-          header: column.label || "",
+          header: column.header || column.label || "",
           columns: buildColumns(column.columns, false),
         };
       }
@@ -95,7 +95,7 @@ export function useTableState({
       // Define the base column structure
       const columnStructure = {
         ...columnHelper.accessor(column.accessor, {
-          header: column.label || "",
+          header: column.header ?? column.label ?? "",
         }),
       };
 

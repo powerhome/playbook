@@ -38,4 +38,5 @@ export { default as AdvancedTableRowStyling } from './_advanced_table_row_stylin
 export { default as AdvancedTableColumnStyling } from './_advanced_table_column_styling.jsx'
 export { default as AdvancedTableColumnStylingColumnHeaders } from './_advanced_table_column_styling_column_headers.jsx'
 export { default as AdvancedTableInfiniteScroll} from './_advanced_table_infinite_scroll.jsx'
+export {default as AdvancedTableWithCustomHeader} from './_advanced_table_with_custom_header.jsx'
 export { default as AdvancedTableCustomSort } from './_advanced_table_custom_sort.jsx'
