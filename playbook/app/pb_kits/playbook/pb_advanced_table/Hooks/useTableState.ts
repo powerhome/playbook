@@ -1,4 +1,4 @@
-import { useState, useCallback, useMemo, useEffect, useRef } from 'react';
+import { useState, useCallback, useMemo, useEffect } from 'react';
 import {
   useReactTable,
   getCoreRowModel,
@@ -180,19 +180,24 @@ export function useTableState({
     ...tableOptions,
   });
 
-  // Store a reference to the current data to detect changes
-  const dataRef = useRef(tableData);
+  // Create a stable hash of the data to detect changes
+  const dataHash = useMemo(() => {
+    if (loading) return '';
+    const currentData = virtualizedRows ? dataChunk : tableData;
+    return currentData.map(row => row.id).join(',');
+  }, [tableData, dataChunk, virtualizedRows, loading]);
   
-  // Clear pins when data changes (detected by reference change)
+  const [prevDataHash, setPrevDataHash] = useState(dataHash);
+  
+  // Clear pins when data actually changes (by ID composition)
   useEffect(() => {
     if (loading) return;
     
-    // If the data reference changed, clear pins
-    if (dataRef.current !== tableData) {
-      dataRef.current = tableData;
+    if (dataHash !== prevDataHash) {
+      setPrevDataHash(dataHash);
       onRowPinningChange({ top: [] });
     }
-  }, [tableData, loading, onRowPinningChange]);
+  }, [dataHash, prevDataHash, loading, onRowPinningChange]);
 
   // Handle row pinning changes
   useEffect(() => {
