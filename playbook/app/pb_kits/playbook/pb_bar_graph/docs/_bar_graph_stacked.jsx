@@ -35,6 +35,7 @@ const chartOptions = {
         borderWidth: 0,
     }
   },
+  legend: { enabled: true },
 };
 
 

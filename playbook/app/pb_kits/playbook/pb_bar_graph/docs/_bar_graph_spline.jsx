@@ -28,6 +28,7 @@ const chartOptions = {
       text: "Number of Employees",
     },
   },
+  legend: { enabled: true },
 };
 
 const BarGraphSpline = () => {

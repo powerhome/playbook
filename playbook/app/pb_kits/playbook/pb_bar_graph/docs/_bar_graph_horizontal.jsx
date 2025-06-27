@@ -24,11 +24,7 @@ const chartOptions = {
     },
     yAxis: {
         title: {
-            text: 'Population (millions)',
-            align: 'high'
-        },
-        labels: {
-            overflow: 'justify'
+            text: '',
         },
     },
     tooltip: {
@@ -51,7 +47,7 @@ const chartOptions = {
     }, {
         name: 'Year 2018',
         data: [1276, 1007, 4561, 746]
-    }]
+    }],
 }
 
 const options = Highcharts.merge({}, barGraphTheme, chartOptions)

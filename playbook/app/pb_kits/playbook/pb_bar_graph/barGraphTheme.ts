@@ -48,7 +48,14 @@ const barGraphTheme = {
         colors.data_7,
     ],
     credits: { enabled: false },
-    legend: { enabled: false },
+    legend: { 
+        enabled: false, 
+        itemStyle: {
+            color: colors.text_lt_light,
+            fill: colors.text_lt_light,
+            fontSize: typography.text_smaller,
+        },
+     },
     xAxis: {
         gridLineWidth: 0,
         lineColor: colors.border_light,
