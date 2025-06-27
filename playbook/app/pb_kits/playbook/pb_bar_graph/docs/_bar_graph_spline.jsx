@@ -1,6 +1,9 @@
 import React from 'react'
 
-import BarGraph from '../_bar_graph'
+import Highcharts from "highcharts";
+import HighchartsReact from "highcharts-react-official";
+
+import barGraphTheme from '../barGraphTheme';
 
 const chartData = [{
   name: 'Number of Installations',
@@ -12,19 +15,33 @@ const chartData = [{
   color: '#F9BB00',
 }]
 
-const BarGraphSpline = (props) => (
-  <div>
-    <BarGraph
-        axisTitle="Number of Employees"
-        chartData={chartData}
-        id="bar-spline"
-        legend
-        title="Bar Graph with Spline"
-        xAxisCategories={['Jan', 'Feb', 'Mar', 'Apr', 'May']}
-        yAxisMin={0}
-        {...props}
-    />
-  </div>
-)
+const chartOptions = {
+  series: chartData,
+  title: {
+    text: "Bar Graph with Spline",
+  },
+  xAxis: {
+    categories: ["Jan", "Feb", "Mar", "Apr", "May"],
+  },
+  yAxis: {
+    title: {
+      text: "Number of Employees",
+    },
+  },
+  legend: { enabled: true },
+};
+
+const BarGraphSpline = () => {
+  const options = Highcharts.merge({}, barGraphTheme, chartOptions)
+
+  return (
+    <div>
+      <HighchartsReact
+          highcharts={Highcharts}
+          options={options}
+      />
+    </div>
+  )
+}
 
 export default BarGraphSpline

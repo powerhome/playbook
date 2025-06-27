@@ -8,3 +8,4 @@ export { highchartsDarkTheme } from '../pb_kits/playbook/pb_dashboard/pbChartsDa
 export { default as gaugeTheme } from '../pb_kits/playbook/pb_gauge/gaugeTheme'
 export { default as circleChartTheme } from '../pb_kits/playbook/pb_circle_chart/circleChartTheme'
 export { default as lineGraphTheme } from '../pb_kits/playbook/pb_line_graph/lineGraphTheme'
+export { default as barGraphTheme } from '../pb_kits/playbook/pb_bar_graph/barGraphTheme'
