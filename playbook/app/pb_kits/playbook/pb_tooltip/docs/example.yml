@@ -9,6 +9,7 @@ examples:
   - tooltip_with_icon_circle: Icon Circle Tooltip
   - tooltip_delay_rails: Delay
   - tooltip_show_tooltip: Show Tooltip
+  - tooltip_click_open: Click to Open
 
   react:
   - tooltip_default_react: Default

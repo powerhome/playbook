@@ -19,58 +19,73 @@ export default class PbTooltip extends PbEnhancedElement {
     }
     
     this.triggerElements.forEach((trigger) => {
-      const method = this.triggerMethod
+      const method = this.effectiveTriggerMethod
       const interactionEnabled = this.tooltipInteraction
 
       if (method === 'click') {
-        trigger.addEventListener('click', () => {
-          this.showTooltip(trigger)
+        trigger.addEventListener('click', (e) => {
+          if (this.useClickToOpen) {
+            e.preventDefault()
+            if (this.isTooltipVisible()) {
+              this.hideTooltip()
+            } else {
+              this.showTooltip(trigger)
+            }
+          } else {
+            this.showTooltip(trigger)
+          }
         })
       } else {
-        trigger.addEventListener('mouseenter', () => {
-          clearSafeZoneListener(this)
-          clearTimeout(this.mouseleaveTimeout)
-          this.currentTrigger = trigger
-          const delayOpen = this.delayOpen ? parseInt(this.delayOpen) : TOOLTIP_TIMEOUT
-          this.mouseenterTimeout = setTimeout(() => {
-            this.showTooltip(trigger)
-            if (interactionEnabled) {
-              this.checkCloseTooltip(trigger)
-            }
-          }, delayOpen)
-        })
+        if (!this.useClickToOpen) {
+          trigger.addEventListener('mouseenter', () => {
+            clearSafeZoneListener(this)
+            clearTimeout(this.mouseleaveTimeout)
+            this.currentTrigger = trigger
+            const delayOpen = this.delayOpen ? parseInt(this.delayOpen) : TOOLTIP_TIMEOUT
+            this.mouseenterTimeout = setTimeout(() => {
+              this.showTooltip(trigger)
+              if (interactionEnabled) {
+                this.checkCloseTooltip(trigger)
+              }
+            }, delayOpen)
+          })
 
-        trigger.addEventListener('mouseleave', () => {
-          clearTimeout(this.mouseenterTimeout)
-          if (this.delayClose) {
-            const delayClose = parseInt(this.delayClose)
-            this.mouseleaveTimeout = setTimeout(() => {
+          trigger.addEventListener('mouseleave', () => {
+            clearTimeout(this.mouseenterTimeout)
+            if (this.delayClose) {
+              const delayClose = parseInt(this.delayClose)
+              this.mouseleaveTimeout = setTimeout(() => {
+                if (interactionEnabled) {
+                  this.attachSafeZoneListener()
+                } else {
+                  this.hideTooltip()
+                }
+              }, delayClose)
+            } else {
               if (interactionEnabled) {
                 this.attachSafeZoneListener()
               } else {
                 this.hideTooltip()
               }
-            }, delayClose)
-          } else {
-            if (interactionEnabled) {
-              this.attachSafeZoneListener()
-            } else {
-              this.hideTooltip()
             }
+          })
+
+          if (interactionEnabled) {
+            this.tooltip.addEventListener('mouseenter', () => {
+              clearSafeZoneListener(this)
+            })
+
+            this.tooltip.addEventListener('mouseleave', () => {
+              this.attachSafeZoneListener()
+            })
           }
-        })
-
-        if (interactionEnabled) {
-          this.tooltip.addEventListener('mouseenter', () => {
-            clearSafeZoneListener(this)
-          })
-
-          this.tooltip.addEventListener('mouseleave', () => {
-            this.attachSafeZoneListener()
-          })
         }
       }
     })
+  }
+
+  isTooltipVisible() {
+    return this.tooltip && this.tooltip.classList.contains('show')
   }
 
   attachSafeZoneListener() {
@@ -145,7 +160,7 @@ export default class PbTooltip extends PbEnhancedElement {
 
     this.tooltip.classList.add('show')
 
-    if (this.triggerMethod === 'click') {
+    if (this.effectiveTriggerMethod === 'click' && !this.useClickToOpen) {
       clearTimeout(this.autoHideTimeout)
       this.autoHideTimeout = setTimeout(() => {
         this.hideTooltip()
@@ -222,6 +237,14 @@ export default class PbTooltip extends PbEnhancedElement {
 
   get triggerMethod() {
     return this.element.dataset.pbTooltipTriggerMethod || 'hover'
+  }
+
+  get useClickToOpen() {
+    return this.element.dataset.pbTooltipUseClickToOpen === 'true'
+  }
+
+  get effectiveTriggerMethod() {
+    return this.useClickToOpen ? 'click' : this.triggerMethod
   }
 
   get tooltipInteraction() {

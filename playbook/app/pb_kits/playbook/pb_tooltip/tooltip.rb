@@ -21,6 +21,8 @@ module Playbook
       prop :trigger_method, type: Playbook::Props::Enum,
                             values: %w[hover click],
                             default: "hover"
+      prop :use_click_to_open, type: Playbook::Props::Boolean,
+                               default: false
       prop :width
 
       def classname
@@ -46,6 +48,10 @@ module Playbook
         out
       end
 
+      def effective_trigger_method
+        use_click_to_open ? "click" : (trigger_method || "hover")
+      end
+
       def data
         data = Hash(values[:data]).merge(
           pb_tooltip_kit: true,
@@ -54,8 +60,9 @@ module Playbook
           pb_tooltip_trigger_element_id: trigger_element_id,
           pb_tooltip_tooltip_id: tooltip_id,
           pb_tooltip_show_tooltip: true,
-          pb_tooltip_trigger_method: trigger_method,
-          pb_tooltip_interaction: interaction
+          pb_tooltip_trigger_method: effective_trigger_method,
+          pb_tooltip_interaction: interaction,
+          pb_tooltip_use_click_to_open: use_click_to_open
         )
         data = data.merge(pb_tooltip_delay_open: delay_open) if delay_open
         data = data.merge(pb_tooltip_delay_close: delay_close) if delay_close
