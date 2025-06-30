@@ -5,7 +5,7 @@
 @import "../tokens/typography";
 
 [class^=pb_badge_kit] {
-  $pb_badge_height: 18px;
+  $pb_badge_height_rounded: 16px;
 
   display: inline-flex;
   align-items: center;
@@ -30,7 +30,6 @@
   }
 
   &[class*=_rounded] {
-    $pb_badge_height_rounded: 14px;
     height: $pb_badge_height_rounded;
     min-height: $pb_badge_height_rounded;
     min-width: $pb_badge_height_rounded;
