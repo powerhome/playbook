@@ -1,30 +1,38 @@
 import React from 'react'
-
-import CircleChart from '../_circle_chart'
+import circleChartTheme from '../circleChartTheme'
+import Highcharts from "highcharts"
+import HighchartsReact from "highcharts-react-official"
 
 const data = [
   {
     name: 'Waiting for Calls',
-    value: 41,
+    y: 41,
   },
   {
     name: 'On Call',
-    value: 49,
+    y: 49,
   },
   {
     name: 'After Call',
-    value: 10,
+    y: 10,
   },
 ]
 
-const CircleChartDefault = (props) => (
-  <div>
-    <CircleChart
-        chartData={data}
-        id="circle-chart-default"
-        {...props}
-    />
-  </div>
-)
+const chartOptions = {
+  series: [{ data: data }],
+}
 
-export default CircleChartDefault
+const CircleChartDefault = () => {
+  const options = Highcharts.merge({}, circleChartTheme, chartOptions )
+
+  return (
+    <div>
+      <HighchartsReact
+          highcharts={Highcharts}
+          options={options}
+      />
+    </div>
+  );
+};
+
+export default CircleChartDefault;
