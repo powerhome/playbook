@@ -1,0 +1,1 @@
+To apply Playbook styles to your Highchart, import circleChartTheme.ts and merge it with your Highchart options. Then, pass the merged value to the options prop. Playbook’s styling will be applied automatically. See the examples in the documentation below.
