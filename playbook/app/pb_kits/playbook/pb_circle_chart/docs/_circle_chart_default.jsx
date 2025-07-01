@@ -23,7 +23,7 @@ const chartOptions = {
 }
 
 const CircleChartDefault = () => {
-  const options = Highcharts.merge({}, circleChartTheme, chartOptions )
+  const options = Highcharts.merge({}, circleChartTheme, chartOptions)
 
   return (
     <div>

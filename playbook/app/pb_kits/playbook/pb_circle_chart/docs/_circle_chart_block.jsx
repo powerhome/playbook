@@ -21,15 +21,12 @@ const dataWithABlock = [
 
 const CircleChartBlock = (props) => {
   const chartOptions = {
-    series: [{ 
+    series: [{
       data: dataWithABlock,
       innerSize: '100%',
       borderWidth: 20,
       borderColor: null,
     }],
-  }
-
-  const options = Highcharts.merge({}, circleChartTheme, chartOptions, {
     chart: {
       events: {
         render: function() {
@@ -50,7 +47,9 @@ const CircleChartBlock = (props) => {
         }
       }
     }
-  })
+  }
+
+  const options = Highcharts.merge({}, circleChartTheme, chartOptions)
 
   return (
     <div>
