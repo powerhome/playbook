@@ -3,8 +3,6 @@
 require "will_paginate"
 require "playbook/pagination_renderer"
 require "will_paginate/array"
-require "parser/current"
-require "erb"
 require "ostruct"
 
 class PagesController < ApplicationController
