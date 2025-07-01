@@ -107,7 +107,7 @@ RSpec.describe Playbook::PbAdvancedTable::TableHeader do
         instance = subject.new(column_definitions: simple_columns)
         rows = instance.header_rows
         expect(rows).to be_an(Array)
-        expect(rows.length).to be.positive?
+        expect(rows.length).to be_positive
         expect(rows.first.length).to eq 2
       end
     end

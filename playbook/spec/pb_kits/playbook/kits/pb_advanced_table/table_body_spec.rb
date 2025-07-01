@@ -191,7 +191,7 @@ RSpec.describe Playbook::PbAdvancedTable::TableBody do
       method = instance.method(:render_row_and_children)
       expect(method).to be_a(Method)
 
-      expect(method.arity).to be.negative?
+      expect(method.arity).to be_negative
     end
 
     it "handles simple row data structure" do
