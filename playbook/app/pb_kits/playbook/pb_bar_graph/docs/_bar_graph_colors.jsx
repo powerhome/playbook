@@ -3,7 +3,7 @@ import colors from '../../tokens/exports/_colors.module.scss'
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 
-import barGraphTheme from '../barGraphTheme';
+import { barGraphTheme } from "playbook-ui";
 
 
 const chartData = [{
