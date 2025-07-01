@@ -1,12 +1,12 @@
 import PbEnhancedElement from '../pb_enhanced_element'
-import { createPopper, Instance, Placement } from '@popperjs/core'
+import { computePosition, offset, flip, shift, autoUpdate, Placement } from '@floating-ui/dom'
 
 const POPOVER_OFFSET_Y = [0, 20]
 
 export default class PbPopover extends PbEnhancedElement {
-  popper: Instance
   _triggerElement: HTMLElement
   _tooltip: HTMLElement
+  cleanupAutoUpdate: () => void
   element: HTMLElement
   static get selector() {
     return '[data-pb-popover-kit]'
@@ -31,18 +31,15 @@ export default class PbPopover extends PbEnhancedElement {
     }
     this.moveTooltip()
 
-    this.popper = createPopper (this.triggerElement, this.tooltip, {
-      placement: this.position as Placement,
-      strategy: 'fixed',
-      modifiers: [
-        {
-          name: 'offset',
-          options: {
-            offset: this.offset,
-          },
-        },
-      ],
-    })
+    // Initial position
+    this.updatePosition()
+
+    // Update position (i.e., scroll or resize)
+    this.cleanupAutoUpdate = autoUpdate(
+      this.triggerElement,
+      this.tooltip,
+      () => this.updatePosition()
+    )
 
     this.triggerElement.addEventListener('click', (event: Event) => {
       event.preventDefault()
@@ -54,8 +51,29 @@ export default class PbPopover extends PbEnhancedElement {
 
       setTimeout(() => {
         this.toggleTooltip()
-        this.popper.update()
+        this.updatePosition()
       }, 0)
+    })
+  }
+
+  updatePosition() {
+    computePosition(this.triggerElement, this.tooltip, {
+      placement: this.position as Placement,
+      strategy: 'fixed',
+      middleware: [
+        offset(() => {
+          const [ crossAxis, mainAxis ] = this.offset
+          return { mainAxis, crossAxis }
+        }),
+        flip(),
+        shift(),
+      ],
+    }).then(({ x, y }) => {
+      Object.assign(this.tooltip.style, {
+        left: `${x}px`,
+        top: `${y}px`,
+        position: 'fixed',
+      })
     })
   }
 
