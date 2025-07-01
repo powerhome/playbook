@@ -38,40 +38,39 @@ const Truncate  = ({ example, tokensExample }: { lorem: lorem, example: string, 
         padding="xl"
     >
     <Card>
-  <Flex
-        maxWidth="md"
-        orientation="column"
-    >
-      <Caption
-          text="After first row"
-      />
-      <Body
-          marginBottom="md"
-          text={lorem}
-          truncate="1"
-      />
+      <Flex
+            maxWidth="md"
+            orientation="column"
+      >
+        <Caption
+            text="After first row"
+        />
+        <Body
+            marginBottom="md"
+            text={lorem}
+            truncate={1}
+        />
 
-      <Caption
-          text="After second row"
-      />
-      <Body
-          marginBottom="md"
-          text={lorem}
-          truncate="2"
-      />
+        <Caption
+            text="After second row"
+        />
+        <Body
+            marginBottom="md"
+            text={lorem}
+            truncate={2}
+        />
 
-      <Caption
-          text="After third row"
-      />
-      <Body
-          text={lorem}
-          truncate="3"
-      />
-    </Flex>  
+        <Caption
+            text="After third row"
+        />
+        <Body
+            text={lorem}
+            truncate={3}
+        />
+      </Flex>
     </Card>
     </Background>
   </React.Fragment>
 )
 
-export default Truncate 
-
+export default Truncate

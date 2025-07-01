@@ -20,7 +20,7 @@ const TitleTruncate = (props) => {
           marginBottom="md"
           size={4}
           text={lorem}
-          truncate="1"
+          truncate={1}
           {...props}
       />
 
@@ -32,7 +32,7 @@ const TitleTruncate = (props) => {
           marginBottom="md"
           size={4}
           text={lorem}
-          truncate="2"
+          truncate={2}
           {...props}
       />
 
@@ -43,7 +43,7 @@ const TitleTruncate = (props) => {
       <Title
           size={4}
           text={lorem}
-          truncate="3"
+          truncate={3}
           {...props}
       />
     </Flex>
