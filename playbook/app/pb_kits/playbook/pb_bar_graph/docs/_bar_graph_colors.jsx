@@ -1,9 +1,9 @@
 import React from 'react'
 import colors from '../../tokens/exports/_colors.module.scss'
+import barGraphTheme from '../barGraphTheme';
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 
-import { barGraphTheme } from "playbook-ui";
 
 
 const chartData = [{

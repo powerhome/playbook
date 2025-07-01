@@ -1,9 +1,8 @@
 import React from 'react'
-
+import barGraphTheme from '../barGraphTheme';
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 
-import { barGraphTheme } from "playbook-ui";
 
 const chartData = [{
   name: 'Number of Installations',

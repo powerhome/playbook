@@ -1,10 +1,10 @@
 import React from 'react'
+import barGraphTheme from '../barGraphTheme';
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 
 import Title from "../../pb_title/_title"
 
-import { barGraphTheme } from "playbook-ui";
 
 const chartData = [{
   name: 'Installation',
