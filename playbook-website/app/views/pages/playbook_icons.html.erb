@@ -4,7 +4,8 @@
     image_url: vite_asset_path("images/icon-banner.svg"),
     background_repeat: "no-repeat",
     background_size: "contain",
-    background_position: "center"
+    background_position: "center",
+    display: { xs: "none" }
   }) do %>
     <div style="height:250px"></div>
   <% end %>
@@ -16,6 +17,30 @@
         <%= pb_rails("body", props: {
           text: "Lorem ipsum dolor sit amet...",
         }) %>
+        <%= pb_rails("dropdown", props: {
+          options: @icon_categories,
+          selected_value: nil,
+          id: "icon-category-dropdown"
+        }) do %>
+          <%= pb_rails("dropdown/dropdown_trigger") do %>
+            <%= pb_rails("button", props: {
+              full_width: true,
+              icon: "sort",
+              icon_right: true,
+              id: "icon-category-trigger-button",
+              variant: "secondary",
+            }) do %>
+              <span id="icon-category-selected-label">Icon Categories</span>
+            <% end %>
+          <% end %>
+          <%= pb_rails("dropdown/dropdown_container", props: { max_width: "xs" }) do %>
+            <% @icon_categories.each do |option| %>
+              <%= pb_rails("dropdown/dropdown_option", props: { option: option }) do %>
+                <%= pb_rails("body", props: { text: option[:label], size: "sm" }) %>
+              <% end %>
+            <% end %>
+          <% end %>
+        <% end %>
         <% @icons_by_category.sort.each do |category, icons| %>
           <%= pb_rails("flex", props: { align_self: "stretch", gap: "sm", orientation: "column"}) do %>
             <%= pb_rails("caption", props: {
@@ -57,3 +82,48 @@
     <% end %>
   </div>
 </div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const labelEl = document.getElementById("icon-category-selected-label");
+
+    document.querySelectorAll("[data-dropdown-option-label]").forEach(option => {
+      option.addEventListener("click", () => {
+        const data = option.getAttribute("data-dropdown-option-label");
+
+        let parsed;
+        try {
+          parsed = JSON.parse(data);
+        } catch (e) {
+          return;
+        }
+
+        const value = parsed?.value;
+        const label = parsed?.label;
+
+        if (!value) return;
+
+        if (labelEl) labelEl.textContent = label;
+
+        history.replaceState(null, null, `#${value}`);
+
+        const target = document.getElementById(value);
+        if (target) {
+          setTimeout(() => {
+            target.scrollIntoView({ behavior: "smooth" });
+          }, 100);
+        }
+      });
+    });
+
+    const hash = window.location.hash?.substring(1);
+    if (hash) {
+      const target = document.getElementById(hash);
+      if (target) {
+        setTimeout(() => {
+          target.scrollIntoView({ behavior: "smooth" });
+        }, 200);
+      }
+    }
+  });
+</script>

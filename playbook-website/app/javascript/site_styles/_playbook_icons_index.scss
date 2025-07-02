@@ -4,7 +4,8 @@
 
 .playbook_icons_index{
     .content-wrapper {
-        margin: 60px;
+        padding: $space_md;
+        background-color: $white;
     }
   
     .icon-card {
@@ -52,6 +53,16 @@
         display: block;
       
         @media screen and (max-width: $screen-lg-min) {
+          display: none;
+        }
+    }
+    
+    [data-dropdown-custom-trigger], 
+    #icon-category-dropdown {
+        display: block;
+        width: 100%;
+        
+        @media screen and (min-width: $screen-lg-min) {
           display: none;
         }
     }
