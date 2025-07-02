@@ -20,7 +20,9 @@ const TOKENS = {
 const lorem = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis, minus. Nisi beatae voluptatum labore sequi. Nemo accusantium corrupti, reiciendis magnam tenetur perferendis esse pariatur voluptas eaque hic vel rem nihil quidem dolorum ex dolor, libero ullam placeat, sapiente eos. Cumque obcaecati dignissimos molestiae, minima quibusdam sint maxime libero accusantium animi quis quia maiores enim ipsum, esse, modi laudantium illum error!"
 const TruncateDescription = () => (
   <>
-    The truncate prop truncates overflowing text up to a maximum of five rows and adds an ellipsis at the end. This prop only works for the <a href="https://playbook.powerapp.cloud/kit_category/typography?type=react" target="_blank">Typography</a> kits (Title, Body, Caption, Detail)
+    The Truncate prop truncates overflowing text up to a maximum of five rows and adds an ellipsis at the end. This prop only works for the <a href="https://playbook.powerapp.cloud/kit_category/typography?type=react" target="_blank">Typography</a> kits (Title, Body, Caption, Detail).
+
+    For our Rails kits, the Truncate prop will only accept string values, while React kits can accept either string or integer values for the prop.
   </>
 )
 
@@ -48,7 +50,7 @@ const Truncate  = ({ example, tokensExample }: { lorem: lorem, example: string, 
         <Body
             marginBottom="md"
             text={lorem}
-            truncate={1}
+            truncate="1"
         />
 
         <Caption
@@ -57,7 +59,7 @@ const Truncate  = ({ example, tokensExample }: { lorem: lorem, example: string, 
         <Body
             marginBottom="md"
             text={lorem}
-            truncate={2}
+            truncate="2"
         />
 
         <Caption
@@ -65,7 +67,7 @@ const Truncate  = ({ example, tokensExample }: { lorem: lorem, example: string, 
         />
         <Body
             text={lorem}
-            truncate={3}
+            truncate="3"
         />
       </Flex>
     </Card>
