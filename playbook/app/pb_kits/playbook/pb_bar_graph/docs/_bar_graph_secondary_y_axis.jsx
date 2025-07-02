@@ -1,6 +1,11 @@
 import React from 'react'
+import barGraphTheme from '../barGraphTheme';
+import Highcharts from "highcharts"
+import HighchartsReact from "highcharts-react-official"
 
-import BarGraph from '../_bar_graph'
+
+import colors from '../../tokens/exports/_colors.module.scss'
+import typography from '../../tokens/exports/_typography.module.scss'
 
 const chartData = [{
   name: 'Number of Installations',
@@ -13,24 +18,69 @@ const chartData = [{
   yAxis: 1
 }]
 
-const axisTitles = [ {name: "Number of Installations"}, {name: "Percentage"}]
+const chartOptions = {
+  series: chartData,
+  title: {
+    text: "Bar Graph with Secondary Y-axis",
+  },
+  xAxis: {
+    categories: ["Jan", "Feb", "Mar", "Apr", "May"],
+  },
+  yAxis: [{
+    labels: {
+      style: {
+        fontFamily: typography.font_family_base,
+        color: colors.text_lt_lighter,
+        fontWeight: typography.bold,
+        fontSize: typography.text_smaller,
+      },
+    },
+    title: {
+      text: "Number of Employees",
+      style: {
+        fontFamily: typography.font_family_base,
+        color: colors.text_lt_lighter,
+        fontWeight: typography.bold,
+        fontSize: typography.text_smaller,
+      },
+    },
+  }, {
+    labels: {
+      style: {
+        fontFamily: typography.font_family_base,
+        color: colors.text_lt_lighter,
+        fontWeight: typography.bold,
+        fontSize: typography.text_smaller,
+      },
+    },
+    title: {
+      text: "Percentage",
+      style: {
+        fontFamily: typography.font_family_base,
+        color: colors.text_lt_lighter,
+        fontWeight: typography.bold,
+        fontSize: typography.text_smaller,
+      },
+    },
 
-const axisFormats = [{format: ""}, {format: "{value}%"}]
+    opposite: true,
+    min: 0,
+    max: 100
+  }],
+  legend: { enabled: true },
+}
 
-const BarGraphSecondaryYAxis= (props) => (
-  <div>
-    <BarGraph
-        axisFormat={axisFormats}
-        axisTitle={axisTitles}
-        chartData={chartData}
-        id="bar-spline"
-        legend
-        title="Bar Graph with Secondary Y-axis"
-        xAxisCategories={['Jan', 'Feb', 'Mar', 'Apr', 'May']}
-        yAxisMin={0}
-        {...props}
-    />
-  </div>
-)
+const BarGraphSecondaryYAxis = () => {
+  const options = Highcharts.merge({}, barGraphTheme, chartOptions)
+
+  return (
+    <div>
+      <HighchartsReact
+          highcharts={Highcharts}
+          options={options}
+      />
+    </div>
+  )
+}
 
 export default BarGraphSecondaryYAxis

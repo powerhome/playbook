@@ -1,6 +1,10 @@
 import React from 'react'
+import colors from '../../tokens/exports/_colors.module.scss'
+import barGraphTheme from '../barGraphTheme';
+import Highcharts from "highcharts";
+import HighchartsReact from "highcharts-react-official";
 
-import BarGraph from '../_bar_graph'
+
 
 const chartData = [{
   name: 'Installation',
@@ -19,19 +23,33 @@ const chartData = [{
   data: [1111, 677, 3245, 500, 200],
 }]
 
-const BarGraphColors = (props) => (
-  <div>
-    <BarGraph
-        axisTitle="Number of Employees"
-        chartData={chartData}
-        colors={['data-4', 'data-5', 'data-6', 'data-7', 'data-8']}
-        id="bar-colors"
-        title="Bar Graph with Custom Data Colors"
-        xAxisCategories={['Jan', 'Feb', 'Mar', 'Apr', 'May']}
-        yAxisMin={0}
-        {...props}
-    />
-  </div>
-)
+const chartOptions = {
+  series: chartData,
+  title: {
+    text: "Bar Graph with Custom Data Colors",
+  },
+  xAxis: {
+    categories: ["Jan", "Feb", "Mar", "Apr", "May"],
+  },
+  yAxis: {
+    title: {
+      text: "Number of Employees",
+    },
+  },
+  colors: [colors.data_4, colors.data_5, colors.data_6, colors.data_7, colors.data_8],
+}
+
+const BarGraphColors = () => {
+  const options = Highcharts.merge({}, barGraphTheme, chartOptions)
+
+  return (
+    <div>
+      <HighchartsReact
+          highcharts={Highcharts}
+          options={options}
+      />
+    </div>
+  )
+}
 
 export default BarGraphColors

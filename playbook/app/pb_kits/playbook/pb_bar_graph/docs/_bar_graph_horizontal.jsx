@@ -1,9 +1,10 @@
 import React from 'react'
+import barGraphTheme from '../barGraphTheme';
+import Highcharts from "highcharts";
+import HighchartsReact from "highcharts-react-official";
 
-import BarGraph from '../_bar_graph'
 
-
-const barGraphOptions = {
+const chartOptions = {
     chart: {
         type: 'bar'
     },
@@ -22,13 +23,8 @@ const barGraphOptions = {
         lineWidth: 0
     },
     yAxis: {
-        min: 0,
         title: {
-            text: 'Population (millions)',
-            align: 'high'
-        },
-        labels: {
-            overflow: 'justify'
+            text: '',
         },
     },
     tooltip: {
@@ -51,16 +47,16 @@ const barGraphOptions = {
     }, {
         name: 'Year 2018',
         data: [1276, 1007, 4561, 746]
-    }]
+    }],
 }
 
-const BarGraphHorizontal = (props) => (
+const options = Highcharts.merge({}, barGraphTheme, chartOptions)
+
+const BarGraphHorizontal = () => (
   <div>
-    <BarGraph
-        customOptions={barGraphOptions}
-        id="bar-horizontal"
-        yAxisMin={0}
-        {...props}
+    <HighchartsReact
+        highcharts={Highcharts}
+        options={options}
     />
   </div>
 )

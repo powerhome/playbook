@@ -1,39 +1,69 @@
 import React from 'react'
+import barGraphTheme from '../barGraphTheme';
+import Highcharts from "highcharts";
+import HighchartsReact from "highcharts-react-official";
 
-import BarGraph from '../_bar_graph'
 
 const chartData = [{
   name: 'Number of Installations',
   data: [1475, 200, 3000, 654, 656],
 }]
 
-const BarGraphDefault = (props) => (
+const pixelHeightChartOptions = {
+  chart: {
+    height: "300"
+  },
+  series: chartData,
+  title: {
+    text: "Fixed Height (300px)",
+  },
+  xAxis: {
+    categories: ["Jan", "Feb", "Mar", "Apr", "May"],
+  },
+  yAxis: {
+    title: {
+      text: "Number of Employees",
+    },
+  },
+};
+
+const percentageHeightChartOptions = {
+  chart: {
+    height: "50%"
+  },
+  series: chartData,
+  title: {
+    text: "Percentage Height (50%)",
+  },
+  xAxis: {
+    categories: ["Jan", "Feb", "Mar", "Apr", "May"],
+  },
+  yAxis: {
+    title: {
+      text: "Number of Employees",
+    },
+  },
+};
+
+const pixelOptions = Highcharts.merge({}, barGraphTheme, pixelHeightChartOptions)
+
+const percentageOptions = Highcharts.merge({}, barGraphTheme, percentageHeightChartOptions)
+
+const BarGraphHeight = () => (
   <div>
-    <BarGraph
-        axisTitle="Number of Employees"
-        chartData={chartData}
-        height="300"
-        id="bar-fixed-height"
-        title="Fixed Height (300px)"
-        xAxisCategories={['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']}
-        yAxisMin={0}
-        {...props}
-    />
+      <HighchartsReact
+          highcharts={Highcharts}
+          options={pixelOptions}
+      />
 
     <br />
     <br />
 
-    <BarGraph
-        axisTitle="Number of Employees"
-        chartData={chartData}
-        height="50%"
-        id="bar-percentage-height"
-        title="Percentage Height (50%)"
-        xAxisCategories={['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']}
-        yAxisMin={0}
-        {...props}
+    <HighchartsReact
+        highcharts={Highcharts}
+        options={percentageOptions}
     />
   </div>
 )
 
-export default BarGraphDefault
+export default BarGraphHeight
