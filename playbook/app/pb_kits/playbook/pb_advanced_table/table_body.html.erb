@@ -1,5 +1,5 @@
 <%= pb_content_tag(:tbody) do %>
         <% object.table_data.each do |row| %>
-          <%= render_row_and_children(row, object.column_definitions, 0, false) %>
+          <%= render_row_and_children(row, object.column_definitions, 0, false, row_styling) %>
         <% end %>
 <% end %>
