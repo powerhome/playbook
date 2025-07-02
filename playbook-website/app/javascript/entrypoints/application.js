@@ -21,7 +21,6 @@ import KitSearch from 'components/KitSearch'
 import SnippetToggle from 'components/SnippetToggle'
 import PbKitReact from 'components/PbKitReact'
 import PbKitFetch from 'components/PbKitFetch'
-import PbKitPlayground from 'components/PbKitPlayground'
 import AvailableProps from 'components/AvailableProps'
 import MainSidebar from 'components/MainSidebar'
 import HomepageHero from 'components/HomepageHero'
@@ -66,7 +65,6 @@ WebpackerReact.registerComponents({
   SnippetToggle,
   PbKitReact,
   PbKitFetch,
-  PbKitPlayground,
   MainSidebar,
   Website,
   HomepageHero,
