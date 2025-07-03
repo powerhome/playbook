@@ -1,47 +1,61 @@
 import React from 'react'
-
-import CircleChart from '../_circle_chart'
+import circleChartTheme from '../circleChartTheme'
+import Highcharts from "highcharts"
+import HighchartsReact from "highcharts-react-official"
 
 const dataWithLabels = [
   {
     name: 'Facebook',
-    value: 2498,
+    y: 2498,
   },
   {
     name: 'YouTube',
-    value: 2000,
+    y: 2000,
   },
   {
     name: 'WhatsApp',
-    value: 2000,
+    y: 2000,
   },
   {
     name: 'Facebook Messenger',
-    value: 1300,
+    y: 1300,
   },
   {
     name: 'WeChat',
-    value: 1165,
+    y: 1165,
   },
   {
     name: 'Instagram',
-    value: 1000,
+    y: 1000,
   },
   {
     name: 'Tik Tok',
-    value: 800,
+    y: 800,
   },
 ]
 
-const CircleChartWithLabels = (props) => (
-  <div>
-    <CircleChart
-        chartData={dataWithLabels}
-        dataLabels
-        id="with-labels-example"
-        {...props}
-    />
-  </div>
-)
+const CircleChartWithLabels = () => {
+  const chartOptions = {
+    series: [{ data: dataWithLabels }],
+    plotOptions: {
+      pie: {
+        dataLabels: {
+          enabled: true,
+        }
+      }
+    }
+  }
+
+  const options = Highcharts.merge({}, circleChartTheme, chartOptions)
+
+  return (
+    <div>
+      <HighchartsReact
+          highcharts={Highcharts}
+          options={options}
+      />
+    </div>
+  )
+}
 
 export default CircleChartWithLabels

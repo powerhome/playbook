@@ -1,122 +1,152 @@
 import React from 'react'
-
-import CircleChart from '../_circle_chart'
+import circleChartTheme from '../circleChartTheme'
+import Highcharts from "highcharts"
+import HighchartsReact from "highcharts-react-official"
 
 const dataFirst = [
   {
     name: 'Bugs',
-    value: 8,
+    y: 8,
   },
   {
     name: 'Chores',
-    value: 1,
+    y: 1,
   },
   {
     name: 'Stories',
-    value: 12,
+    y: 12,
   },
 ]
 
 const dataSecond = [
   {
     name: 'Queued',
-    value: 7,
+    y: 7,
   },
   {
     name: 'In Progress',
-    value: 6,
+    y: 6,
   },
   {
     name: 'Validation',
-    value: 3,
+    y: 3,
   },
   {
     name: 'Done',
-    value: 6,
+    y: 6,
   },
 ]
 
 const dataThird = [
   {
     name: '1 Point Tickets',
-    value: 2,
+    y: 2,
   },
   {
     name: '3 Point Tickets',
-    value: 5,
+    y: 5,
   },
   {
     name: '5 Point Tickets',
-    value: 6,
+    y: 6,
   },
   {
     name: '8 Point Tickets',
-    value: 3,
+    y: 3,
   },
   {
     name: '13 Point Tickets',
-    value: 1,
-  },
-]
-const dataFourth = [
-  {
-    name: 'Facebook',
-    value: 2498,
-  },
-  {
-    name: 'YouTube',
-    value: 2000,
-  },
-  {
-    name: 'WhatsApp',
-    value: 2000,
-  },
-  {
-    name: 'Facebook Messenger',
-    value: 1300,
-  },
-  {
-    name: 'WeChat',
-    value: 1165,
-  },
-  {
-    name: 'Instagram',
-    value: 1000,
-  },
-  {
-    name: 'Tik Tok',
-    value: 800,
+    y: 1,
   },
 ]
 
-const CircleChartInnerSizes = (props) => (
-  <div>
-    <CircleChart
-        chartData={dataFirst}
-        id="with-innersize-sm"
-        innerSize="sm"
-        {...props}
-    />
-    <CircleChart
-        chartData={dataSecond}
-        id="with-innersize-md"
-        innerSize="md"
-        {...props}
-    />
-    <CircleChart
-        chartData={dataThird}
-        id="with-innersize-lg"
-        innerSize="lg"
-        {...props}
-    />
-    <CircleChart
-        chartData={dataFourth}
-        className="poop"
-        id="with-innersize-none "
-        innerSize="none"
-        {...props}
-    />
-  </div>
-)
+const dataFourth = [
+  {
+    name: 'Facebook',
+    y: 2498,
+  },
+  {
+    name: 'YouTube',
+    y: 2000,
+  },
+  {
+    name: 'WhatsApp',
+    y: 2000,
+  },
+  {
+    name: 'Facebook Messenger',
+    y: 1300,
+  },
+  {
+    name: 'WeChat',
+    y: 1165,
+  },
+  {
+    name: 'Instagram',
+    y: 1000,
+  },
+  {
+    name: 'Tik Tok',
+    y: 800,
+  },
+]
+
+const CircleChartInnerSizes = () => {
+  const chartOptionsSmall = {
+    series: [{ 
+      data: dataFirst,
+      innerSize: '35%'
+    }],
+  }
+
+  const chartOptionsMedium = {
+    series: [{ 
+      data: dataSecond,
+      innerSize: '50%'
+    }],
+  }
+
+  const chartOptionsLarge = {
+    series: [{ 
+      data: dataThird,
+      innerSize: '85%'
+    }],
+  }
+
+  const chartOptionsNone = {
+    series: [{ 
+      data: dataFourth,
+      innerSize: '0%'
+    }],
+  }
+
+  const optionsSmall = Highcharts.merge({}, circleChartTheme, chartOptionsSmall)
+  const optionsMedium = Highcharts.merge({}, circleChartTheme, chartOptionsMedium)
+  const optionsLarge = Highcharts.merge({}, circleChartTheme, chartOptionsLarge)
+  const optionsNone = Highcharts.merge({}, circleChartTheme, chartOptionsNone)
+
+  return (
+    <div>
+      <HighchartsReact
+          highcharts={Highcharts}
+          options={optionsSmall}
+      />
+      <HighchartsReact
+          highcharts={Highcharts}
+          options={optionsMedium}
+      />
+      <HighchartsReact
+          highcharts={Highcharts}
+          options={optionsLarge}
+      />
+      <div className="poop">
+        <HighchartsReact
+            highcharts={Highcharts}
+            options={optionsNone}
+        />
+      </div>
+    </div>
+  )
+}
 
 export default CircleChartInnerSizes
