@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative "../../../../../app/pb_kits/playbook/pb_advanced_table/table_subrow_header"
+require_relative "../../../../app/pb_kits/playbook/pb_advanced_table/table_subrow_header"
 
 RSpec.describe Playbook::PbAdvancedTable::TableSubrowHeader do
   subject { Playbook::PbAdvancedTable::TableSubrowHeader }

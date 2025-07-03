@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative "../../../../../app/pb_kits/playbook/pb_advanced_table/table_body"
+require_relative "../../../../app/pb_kits/playbook/pb_advanced_table/table_body"
 
 RSpec.describe Playbook::PbAdvancedTable::TableBody do
   subject { Playbook::PbAdvancedTable::TableBody }
