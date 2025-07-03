@@ -66,4 +66,20 @@
           display: none;
         }
     }
+
+    .description-mobile {
+        display: none;
+        
+        @media screen and (max-width: 350px) {
+            display: block;
+        }
+    }
+      
+    .description-default {
+        display: block;
+        
+        @media screen and (max-width: 350px) {
+            display: none;
+        }
+    }
 }

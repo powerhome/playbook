@@ -13,10 +13,32 @@
   <div class="content-wrapper">
     <%= pb_rails("flex", props: { justify: "evenly", gap: "md" }) do %>
       <%= pb_rails("flex", props: { gap: "md", max_width: "lg", orientation: "column"}) do %>
-        <%= pb_rails("title", props: { text: "Icons", tag: "h1", size: 1 }) %>
-        <%= pb_rails("body", props: {
-          text: "Lorem ipsum dolor sit amet...",
-        }) %>
+        <%= pb_rails("title", props: { size: { xs: "3", sm: "2", md: "1", lg: "1", xl: "1" }, text: "Icons" }) %>
+        <%= pb_rails("flex", props: { classname: "description-default", orientation: "column" }) do %>
+          <%= pb_rails("body", props: {
+            padding_bottom: "sm",
+            text: "Icons are a core part of Playbook’s visual language. Our custom icon set is designed to support clear, consistent, and accessible interfaces. Use them to enhance navigation, reinforce meaning, and improve communication across all digital products."
+          }) %>
+          <%= pb_rails("link", props: {
+            href: "https://playbook.powerapp.cloud/kits/icon/react",
+            target: "child",
+            text: "To use them in your project, check out our Icon kit."
+          }) %>
+        <% end %>
+        <%= pb_rails("flex", props: { classname: "description-mobile", orientation: "column" }) do %>
+          <%= pb_rails("detail", props: {
+            color: "default",
+            padding_bottom: "xs",
+            text: "Icons are a core part of Playbook’s visual language. Our custom icon set is designed to support clear, consistent, and accessible interfaces. Use them to enhance navigation, reinforce meaning, and improve communication across all digital products."
+          }) %>
+          <%= pb_rails("detail") do %>
+            <%= pb_rails("link", props: {
+              href: "https://playbook.powerapp.cloud/kits/icon/react",
+              target: "child",
+              text: "To use them in your project, check out our Icon kit.",
+            }) %>
+          <% end %>
+        <% end %>
         <%= pb_rails("dropdown", props: {
           options: @icon_categories,
           selected_value: nil,
