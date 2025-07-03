@@ -1,0 +1,14 @@
+<%= pb_rails("button", props: { 
+  text: "Click to Open",
+  id: "click-tooltip-trigger-1",
+  variant: "primary"
+}) %>
+
+<%= pb_rails("tooltip", props: {
+  trigger_element_selector: "#click-tooltip-trigger-1",
+  tooltip_id: "click-tooltip-1",
+  position: "top",
+  use_click_to_open: true
+}) do %>
+  Tooltip opened by click! Click trigger again to close.
+<% end %>

@@ -1,6 +1,8 @@
 import React from 'react'
+import barGraphTheme from '../barGraphTheme';
+import Highcharts from "highcharts";
+import HighchartsReact from "highcharts-react-official";
 
-import BarGraph from '../_bar_graph'
 
 const chartData = [{
   name: 'Installation',
@@ -10,26 +12,41 @@ const chartData = [{
   name: 'Manufacturing',
   data: [1475, 200, 1000, 654, -656],
   threshold: 0
-}, 
+},
 {
   name: 'Sales & Distribution',
   data: [1270, 100, -1200, 554, 756],
   threshold: 0
 }]
 
+const chartOptions = {
+  series: chartData,
+  title: {
+    text: "Bar Graph with Negative Numbers",
+  },
+  xAxis: {
+    categories: ["Jan", "Feb", "Mar", "Apr", "May"],
+  },
+  yAxis: {
+    title: {
+      text: "Number of Employees",
+    },
+  },
+  legend: { enabled: true },
+};
 
-const BarGraphStacked = (props) => (
-  <div>
-    <BarGraph
-        axisTitle="Number of Employees"
-        chartData={chartData}
-        id="bar-default"
-        legend
-        title="Bar Graph with Negative Numbers"
-        xAxisCategories={['Jan', 'Feb', 'Mar', 'Apr', 'May']}
-        {...props}
-    />
-  </div>
-)
+
+const BarGraphStacked = () => {
+  const options = Highcharts.merge({}, barGraphTheme, chartOptions)
+
+  return(
+    <div>
+      <HighchartsReact
+          highcharts={Highcharts}
+          options={options}
+      />
+    </div>
+  )
+}
 
 export default BarGraphStacked

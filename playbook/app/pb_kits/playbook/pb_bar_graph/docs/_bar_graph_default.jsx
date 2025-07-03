@@ -1,6 +1,8 @@
 import React from 'react'
+import barGraphTheme from '../barGraphTheme';
+import Highcharts from "highcharts";
+import HighchartsReact from "highcharts-react-official";
 
-import BarGraph from '../_bar_graph'
 
 const chartData = [{
   name: 'Installation',
@@ -19,19 +21,35 @@ const chartData = [{
   data: [1111, 677, 3245, 500, 200],
 }]
 
-const BarGraphDefault = (props) => (
-  <div>
-    <BarGraph
-        axisTitle="Number of Employees"
-        chartData={chartData}
-        id="bar-default"
-        subTitle="Source: thesolarfoundation.com"
-        title="Solar Employment Growth by Sector, 2010-2016"
-        xAxisCategories={['Jan', 'Feb', 'Mar', 'Apr', 'May']}
-        yAxisMin={0}
-        {...props}
-    />
-  </div>
-)
+const chartOptions = {
+  series: chartData,
+  title: {
+    text: 'Solar Employment Growth by Sector, 2010-2016',
+  },
+  subtitle: {
+    text: 'Source: thesolarfoundation.com',
+  },
+  xAxis: {
+    categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
+  },
+  yAxis: {
+    title: {
+      text: 'Number of Employees',
+    },
+  },
+}
+
+const BarGraphDefault = () => {
+  const options = Highcharts.merge({}, barGraphTheme, chartOptions)
+
+  return (
+    <div>
+      <HighchartsReact
+          highcharts={Highcharts}
+          options={options}
+      />
+    </div>
+  )
+}
 
 export default BarGraphDefault

@@ -152,7 +152,6 @@ export const TopLevelNavItem = ({
         onClick={() => handleComponentsClick(key, i)}
         onIconRightClick={children && (() => handleComponentsIconClick(i))}
         paddingY="xxs"
-        target={name === "Playground" ? "_blank" : "_self"}
         text={name}
       >
         {children && (
