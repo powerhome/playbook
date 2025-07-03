@@ -1,0 +1,46 @@
+<% column_definitions = [
+    {
+      accessor: "year",
+      label: "Year",
+      cellAccessors: ["quarter", "month", "day"],
+    },
+    {
+      accessor: "newEnrollments",
+      label: "New Enrollments",
+    },
+    {
+      accessor: "scheduledMeetings",
+      label: "Scheduled Meetings",
+    },
+    {
+      accessor: "attendanceRate",
+      label: "Attendance Rate",
+    },
+    {
+      accessor: "completedClasses",
+      label: "Completed Classes",
+    },
+    {
+      accessor: "classCompletionRate",
+      label: "Class Completion Rate",
+    },
+    {
+      accessor: "graduatedStudents",
+      label: "Graduated Students",
+    }
+] %>
+
+<% row_styling = [
+  {
+    row_id: "1",
+    background_color: "#F9BB00",
+  },
+  {
+    row_id: "8",
+    background_color: "#0056CF",
+    font_color: "white",
+    expand_button_color: "white",
+  },
+] %>
+
+<%= pb_rails("advanced_table", props: { id: "row-styling", table_data: @table_data_with_id, column_definitions: column_definitions, row_styling: row_styling }) %>

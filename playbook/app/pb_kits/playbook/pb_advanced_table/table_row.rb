@@ -27,6 +27,8 @@ module Playbook
       prop :enable_toggle_expansion, type: Playbook::Props::Enum,
                                      values: %w[all header none],
                                      default: "header"
+      prop :row_styling, type: Playbook::Props::Array,
+                         default: []
 
       def data
         Hash(prop(:data)).merge(table_data_attributes)
