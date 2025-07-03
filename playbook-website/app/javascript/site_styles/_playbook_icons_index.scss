@@ -19,7 +19,7 @@
             grid-column-gap: $space_lg !important;
             grid-template-columns: repeat(4, 1fr) !important;
         
-            @media screen and (max-width: $screen-lg-min) {
+            @media screen and (max-width: 1072px) {
                 grid-template-columns: repeat(3, 1fr) !important;
             }
         
@@ -43,16 +43,16 @@
 
     .icon-categories-section-separator {
         display: flex;
-      
-        @media screen and (max-width: $screen-lg-min) {
+
+        @media screen and (max-width: 1072px) {
           display: none;
         }
     }
 
     .icon-categories-sidebar {
         display: block;
-      
-        @media screen and (max-width: $screen-lg-min) {
+
+        @media screen and (max-width: 1072px) {
           display: none;
         }
     }
@@ -61,8 +61,8 @@
     #icon-category-dropdown {
         display: block;
         width: 100%;
-        
-        @media screen and (min-width: $screen-lg-min) {
+
+        @media screen and (min-width: 1072px) {
           display: none;
         }
     }
