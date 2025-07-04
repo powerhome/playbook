@@ -66,7 +66,7 @@ export function useTableState({
   const setExpanded = expandedControl ? expandedControl.onChange : setLocalExpanded;
   const columnVisibility = (columnVisibilityControl && columnVisibilityControl.value) ? columnVisibilityControl.value : localColumnVisibility;
   const setColumnVisibility = (columnVisibilityControl && columnVisibilityControl.onChange) ? columnVisibilityControl.onChange : setLocalColumnVisibility;
-  const rowPinning = pinnedRows?.value ?? localRowPinning
+  const rowPinning = loading ? { top: [] } : (pinnedRows?.value ?? localRowPinning);
   const onRowPinningChange = pinnedRows?.onChange ?? setLocalRowPinning
 
   // Virtualized data handling (chunked loading)
@@ -180,25 +180,89 @@ export function useTableState({
     ...tableOptions,
   });
 
+  // Create a stable hash of the data to detect changes
+  const dataHash = useMemo(() => {
+    if (loading) return '';
+    const currentData = virtualizedRows ? dataChunk : tableData;
+    return currentData.map(row => row.id).join(',');
+  }, [tableData, dataChunk, virtualizedRows, loading]);
+  
+  const [prevDataHash, setPrevDataHash] = useState(dataHash);
+
+  // Synchronously clear pins when data changes to prevent table errors
+  if (!loading && dataHash !== prevDataHash) {
+    setPrevDataHash(dataHash);
+    
+    const currentPins = pinnedRows?.value?.top ?? [];
+    if (currentPins.length > 0) {
+      try {
+        const currentData = virtualizedRows ? dataChunk : tableData;
+        const validPins = currentPins.filter(id => 
+          currentData.some(row => row.id === id)
+        );
+        
+        if (validPins.length !== currentPins.length) {
+          onRowPinningChange({ top: validPins });
+        }
+      } catch (error) {
+        console.warn('Error validating pins on data change, clearing pins:', error);
+        onRowPinningChange({ top: [] });
+      }
+    }
+  }
+
   // Handle row pinning changes
-    useEffect(() => {
+  useEffect(() => {
+    if (loading) return;
+    
     const topPins = pinnedRows?.value?.top ?? [];
     if (topPins.length === 0) {
       onRowPinningChange({ top: [] });
       return;
     }
-    const rows = table.getRowModel().rows;
-    const collectAllDescendantIds = (subs: Row<GenericObject>[]): string[] =>
-      subs.flatMap(r => [r.id, ...collectAllDescendantIds(r.subRows)]);
-    const allPinned: string[] = [];
-    topPins.forEach(id => {
-      const parent = rows.find(r => r.id === id && r.depth === 0);
-      if (parent) {
-        allPinned.push(parent.id, ...collectAllDescendantIds(parent.subRows));
+
+    try {
+      const rows = table.getRowModel().rows;
+      
+      const validPinnedIds = topPins.filter(id => {
+        try {
+          return rows.some(row => row.id === id && row.depth === 0);
+        } catch (error) {
+          console.warn(`Pinned row with id ${id} not found in current dataset`);
+          return false;
+        }
+      });
+  
+      if (validPinnedIds.length === 0) {
+        onRowPinningChange({ top: [] });
+        return;
       }
-    });
-    onRowPinningChange({ top: allPinned });
-  }, [table, pinnedRows?.value?.top?.join(',')]);
+
+      const collectAllDescendantIds = (subs: Row<GenericObject>[]): string[] =>
+        subs.flatMap(r => [r.id, ...collectAllDescendantIds(r.subRows)]);
+
+      const allPinned: string[] = [];
+
+      validPinnedIds.forEach(id => {
+        const parent = rows.find(r => r.id === id && r.depth === 0);
+        if (parent) {
+          allPinned.push(parent.id, ...collectAllDescendantIds(parent.subRows));
+        }
+      });
+
+      const currentPins = pinnedRows?.value?.top ?? [];
+      const pinsChanged = allPinned.length !== currentPins.length || 
+                        !allPinned.every(id => currentPins.includes(id));
+ 
+      if (pinsChanged) {
+        onRowPinningChange({ top: allPinned });
+      }
+
+    } catch (error) {
+      console.error('Error in pinned rows logic:', error);
+      onRowPinningChange({ top: [] });
+    }
+  }, [table, pinnedRows?.value?.top?.join(','), loading]);
 
   // Check if table has any sub-rows
   const hasAnySubRows = table.getRowModel().rows.some(row => row.subRows && row.subRows.length > 0);
