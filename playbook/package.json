@@ -49,7 +49,7 @@
     "@babel/preset-env": "^7.12.1",
     "@babel/preset-react": "^7.12.5",
     "@babel/preset-typescript": "^7.15.0",
-    "@floating-ui/react": "^0.26.23",
+    "@floating-ui/react": "^0.27.13",
     "@rollup/pluginutils": "^5.1.0",
     "@tanstack/react-table": "8.20.5",
     "@tanstack/react-virtual": "^3.12.0",
