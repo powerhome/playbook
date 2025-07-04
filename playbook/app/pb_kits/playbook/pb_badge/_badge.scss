@@ -5,7 +5,7 @@
 @import "../tokens/typography";
 
 [class^=pb_badge_kit] {
-  $pb_badge_height_rounded: 16px;
+  $pb_badge_height: 18px;
 
   display: inline-flex;
   align-items: center;
@@ -13,6 +13,7 @@
   border-radius: $border_rad_light;
   padding: 0 $space_xs/2;
   border-width: 1px;
+  border-style: solid;
   border-color: $card_light;
   white-space: nowrap;
 
@@ -30,10 +31,10 @@
   }
 
   &[class*=_rounded] {
-    height: $pb_badge_height_rounded;
-    min-height: $pb_badge_height_rounded;
-    min-width: $pb_badge_height_rounded;
-    border-radius: $pb_badge_height_rounded / 2;
+    height: $pb_badge_height;
+    min-height: $pb_badge_height;
+    min-width: $pb_badge_height;
+    border-radius: $pb_badge_height / 2;
   }
 
   &[class*=_notification] {
