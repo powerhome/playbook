@@ -96,13 +96,13 @@
     <% kit_value = @kit_parent.presence || @kit %>
     <%= pb_rails("nav", props: { orientation: "horizontal" }) do %>
       <% if pb_doc_has_kit_type?(kit_value, "rails") %>
-        <%= pb_rails("nav/item", props: { text: "Rails", link: kit_show_rails_path(kit_value), active: action_name == 'kit_show_rails' }) %>
+        <%= pb_rails("nav/item", props: { text: "Rails", link: kit_show_rails_path(@kit), active: action_name == 'kit_show_rails' }) %>
       <% end %>
       <% if pb_doc_has_kit_type?(kit_value, "react") %>
-        <%= pb_rails("nav/item", props: { text: "React", link: kit_show_reacts_path(kit_value), active: action_name == 'kit_show_react' }) %>
+        <%= pb_rails("nav/item", props: { text: "React", link: kit_show_reacts_path(@kit), active: action_name == 'kit_show_react' }) %>
       <% end %>
       <% if pb_doc_has_kit_type?(kit_value, "swift") %>
-          <%= pb_rails("nav/item", props: { text: "Swift", link: kit_show_swift_path(kit_value), active: action_name == 'kit_show_swift' }) %>
+          <%= pb_rails("nav/item", props: { text: "Swift", link: kit_show_swift_path(@kit), active: action_name == 'kit_show_swift' }) %>
       <% end %>
     <% end %>
 
