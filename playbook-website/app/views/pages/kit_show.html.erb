@@ -4,10 +4,14 @@
       <%= react_component("DarkModeToggle", initMode: cookies[:dark_mode] )%>
     </div>
   <% end %>
+    <% kit_value = @kit_parent.presence || @kit %>
     <%= pb_rails("flex", props: { justify: "between", align_items: "start" }) do %>
     <%= pb_rails("flex/flex_item", props: { flex: "9"}) do %>
       <%= pb_rails("flex", props: { orientation: "column"}) do %>
-        <%= pb_rails("title", props: { text: pb_kit_title(@kit), tag: "h1", size: 1, margin_top: "xl" }) %>
+        <%= pb_rails("title", props: { text: pb_kit_title(kit_value), tag: "h1", size: 1, margin_top: "xl" }) %>
+        <% if @kit_parent.present? %>
+            <%= pb_rails("title", props: { text: pb_kit_title(@kit), size: 3, margin_top: "xs", bold: false }) %>
+        <% end %>
         <% if @kit_status === "beta" %>
           <%= pb_rails("card", props: {highlight: {position: "side", color:"primary", shadow:"deep"}, margin_y: "md", padding: "sm"}) do %>
             <%= pb_rails("flex", props:{ align: "center" }) do %>
@@ -93,7 +97,6 @@
 </div>
 <div class="kit-show-wrapper">
   <div class="pb--kit-type-nav">
-    <% kit_value = @kit_parent.presence || @kit %>
     <%= pb_rails("nav", props: { orientation: "horizontal" }) do %>
       <% if pb_doc_has_kit_type?(kit_value, "rails") %>
         <%= pb_rails("nav/item", props: { text: "Rails", link: kit_show_rails_path(@kit), active: action_name == 'kit_show_rails' }) %>
