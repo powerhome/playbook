@@ -123,4 +123,15 @@
     </div>
   <% end %>
 
+    <% if (action_name == "kit_show_rails") %>
+      <br>
+      <%= pb_rails("docs/kit_api", props: { kit: kit_value, dark: dark_mode? }) %>
+    <% elsif (action_name == "kit_show_react") %>
+      <div data-action="toggle" data-togglable="prop_example" class="pb--propsTable">
+        <%= pb_rails("title", props: { text: "Available Props", size: 3, margin_bottom: "sm", margin_top: "sm" }) %>
+        <%= react_component("AvailableProps",
+          availableProps: Playbook::PbDocs::KitExample.new(kit: kit_value, example_title: "Default", example_key: kit_value, type: "react").available_props )
+        %>
+      </div>
+    <% end %>
 </div>
