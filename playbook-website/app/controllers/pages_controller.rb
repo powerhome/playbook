@@ -258,6 +258,8 @@ private
       group_components.push(kit["components"].map do |component|
         {
           name: component["name"],
+          parent: component["parent"],
+          kit_section: component["kit_section"] || [],
           status: component["status"],
           icons_used: component["icons_used"],
           react_rendered: component["react_rendered"],
@@ -274,8 +276,8 @@ private
 
   def set_category
     @category = params[:category]
-    if categories.include?(@category) && helpers.category_has_kits?(category_kits: kit_categories, type: params[:type])
-      @category_kits = kit_categories
+    if categories.include?(@category) && helpers.category_has_kits?(category_kits: @category === "advanced_table" ? ["advanced_table"] : kit_categories, type: params[:type])
+      @category_kits = @category === "advanced_table" ? ["advanced_table"] : kit_categories
       @kits = params[:name]
     else
       redirect_to root_path, flash: { error: "That kit does not exist" }
@@ -297,6 +299,8 @@ private
 
     if matching_kit
       @kit = matching_kit[:name]
+      @kit_parent = matching_kit[:parent]
+      @kit_section = matching_kit[:kit_section]
       @kit_status = matching_kit[:status]
       @icons_used = matching_kit[:icons_used]
       @react_rendered = matching_kit[:react_rendered]

@@ -93,27 +93,27 @@
 </div>
 <div class="kit-show-wrapper">
   <div class="pb--kit-type-nav">
-
+    <% kit_value = @kit_parent.presence || @kit %>
     <%= pb_rails("nav", props: { orientation: "horizontal" }) do %>
-      <% if pb_doc_has_kit_type?(@kit, "rails") %>
-        <%= pb_rails("nav/item", props: { text: "Rails", link: kit_show_rails_path(@kit), active: action_name == 'kit_show_rails' }) %>
+      <% if pb_doc_has_kit_type?(kit_value, "rails") %>
+        <%= pb_rails("nav/item", props: { text: "Rails", link: kit_show_rails_path(kit_value), active: action_name == 'kit_show_rails' }) %>
       <% end %>
-      <% if pb_doc_has_kit_type?(@kit, "react") %>
-        <%= pb_rails("nav/item", props: { text: "React", link: kit_show_reacts_path(@kit), active: action_name == 'kit_show_react' }) %>
+      <% if pb_doc_has_kit_type?(kit_value, "react") %>
+        <%= pb_rails("nav/item", props: { text: "React", link: kit_show_reacts_path(kit_value), active: action_name == 'kit_show_react' }) %>
       <% end %>
-      <% if pb_doc_has_kit_type?(@kit, "swift") %>
-          <%= pb_rails("nav/item", props: { text: "Swift", link: kit_show_swift_path(@kit), active: action_name == 'kit_show_swift' }) %>
+      <% if pb_doc_has_kit_type?(kit_value, "swift") %>
+          <%= pb_rails("nav/item", props: { text: "Swift", link: kit_show_swift_path(kit_value), active: action_name == 'kit_show_swift' }) %>
       <% end %>
     <% end %>
 
     <%= pb_rails("section_separator") %>
   </div>
   <% if (action_name == "kit_show_rails") %>
-    <%= pb_kit(kit: @kit, dark_mode: dark_mode?) %>
+    <%= pb_kit(kit: kit_value, dark_mode: dark_mode?) %>
   <% elsif (action_name == "kit_show_react") %>
-    <%= pb_kit(kit: @kit, type: "react", dark_mode: dark_mode?) %>
+    <%= pb_kit(kit: kit_value, type: "react", dark_mode: dark_mode?, kit_section: @kit_section) %>
   <% elsif (action_name == "kit_show_swift") %>
-    <%= pb_kit(kit: @kit, type: "swift", dark_mode: dark_mode?, show_code: false) %>
+    <%= pb_kit(kit: kit_value, type: "swift", dark_mode: dark_mode?, show_code: false) %>
   <% end %>
 
   <% unless (action_name == "kit_show_swift") %>
@@ -123,15 +123,4 @@
     </div>
   <% end %>
 
-    <% if (action_name == "kit_show_rails") %>
-      <br>
-      <%= pb_rails("docs/kit_api", props: { kit: @kit, dark: dark_mode? }) %>
-    <% elsif (action_name == "kit_show_react") %>
-      <div data-action="toggle" data-togglable="prop_example" class="pb--propsTable">
-        <%= pb_rails("title", props: { text: "Available Props", size: 3, margin_bottom: "sm", margin_top: "sm" }) %>
-        <%= react_component("AvailableProps",
-          availableProps: Playbook::PbDocs::KitExample.new(kit: @kit, example_title: "Default", example_key: @kit, type: "react").available_props )
-        %>
-      </div>
-    <% end %>
 </div>

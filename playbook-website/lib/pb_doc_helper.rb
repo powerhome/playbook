@@ -6,9 +6,16 @@ module PlaybookWebsite
       title.remove("pb_").titleize.tr("_", " ")
     end
 
-    def pb_kit(kit: "", type: "rails", show_code: true, limit_examples: false, dark_mode: false, variants: [])
-      examples = pb_doc_kit_examples(kit, type)
+    def pb_kit(kit: "", type: "rails", show_code: true, limit_examples: false, dark_mode: false, variants: [], kit_section: [])
+      examples = pb_doc_kit_examples(kit, type) || []
       examples.select! { |elem| variants.any? { |variant| elem.key?(variant) } } unless variants.empty?
+      unless kit_section.empty?
+        examples.select! do |example|
+          example_title = example.values.first
+          kit_section.any? { |title| example_title.include?(title) }
+        end
+      end
+
       examples = examples.first(1) if limit_examples
       examples.map do |example|
         pb_rails "docs/kit_example", props: {
