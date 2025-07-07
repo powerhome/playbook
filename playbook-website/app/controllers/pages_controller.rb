@@ -148,9 +148,9 @@ class PagesController < ApplicationController
   def kit_show_rails
     @type = "rails"
     @users = Array.new(9) { Faker::Name.name }.paginate(page: params[:page], per_page: 2)
-    @table_data = advanced_table_mock_data if @kit == "advanced_table"
-    @table_data_with_id = advanced_table_mock_data_with_id if @kit == "advanced_table"
-    @table_data_no_subrows = advanced_table_mock_data_no_subrows if @kit == "advanced_table"
+    @table_data = advanced_table_mock_data if @kit == "advanced_table" || @kit_parent == "advanced_table"
+    @table_data_with_id = advanced_table_mock_data_with_id if @kit == "advanced_table" || @kit_parent == "advanced_table"
+    @table_data_no_subrows = advanced_table_mock_data_no_subrows if @kit == "advanced_table" || @kit_parent == "advanced_table"
     render "pages/kit_show"
   end
 

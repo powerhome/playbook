@@ -109,7 +109,7 @@
     <%= pb_rails("section_separator") %>
   </div>
   <% if (action_name == "kit_show_rails") %>
-    <%= pb_kit(kit: kit_value, dark_mode: dark_mode?) %>
+    <%= pb_kit(kit: kit_value, dark_mode: dark_mode?, kit_section: @kit_section) %>
   <% elsif (action_name == "kit_show_react") %>
     <%= pb_kit(kit: kit_value, type: "react", dark_mode: dark_mode?, kit_section: @kit_section) %>
   <% elsif (action_name == "kit_show_swift") %>
