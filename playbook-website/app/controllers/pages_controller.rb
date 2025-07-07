@@ -295,7 +295,15 @@ private
   end
 
   def set_kit
-    matching_kit = all_kits.find { |kit| kit[:name] == params[:name] }
+    matching_kit = if params[:section].present?
+                     all_kits.find do |kit|
+                       kit[:parent] == params[:name] && kit[:name] == params[:section]
+                     end
+                   else
+                     all_kits.find do |kit|
+                       kit[:name] == params[:name] || kit[:parent] == params[:name]
+                     end
+                   end
 
     if matching_kit
       @kit = matching_kit[:name]

@@ -80,8 +80,14 @@ export const KitsNavItem = ({
 
   const generateLink = (categoryKey, sublink, type) => {
     if (sublink) {
+      if (categoryKey === "advanced_table") {
+        // Special case for advanced_table
+        const link = `/kits/advanced_table/${sublink}/${kitsType(type)}`;
+        return currentURL === link ? "" : link;
+      } else {
       const link = `/kits/${sublink}/${kitsType(type)}`;
       return currentURL === link ? "" : link;
+      }
     } else {
       const link = `/kit_category/${categoryKey}?type=${kitsType(type)}`;
       return currentURL === link ? "" : link;

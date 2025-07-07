@@ -26,6 +26,12 @@ Rails.application.routes.draw do
   get "kits/:name/rails",           to: "pages#kit_show_rails",           as: "kit_show_rails"
   get "kits/:name/react",           to: "pages#kit_show_react",           as: "kit_show_reacts"
   get "kits/:name/swift",           to: "pages#kit_show_swift",           as: "kit_show_swift"
+
+  ## Kits with section
+  get "kits/:name/:section/react",  to: "pages#kit_show_react",  as: "kit_show_react_section"
+  get "kits/:name/:section/rails",  to: "pages#kit_show_rails",  as: "kit_show_rails_section"
+  get "kits/:name/:section/swift",  to: "pages#kit_show_swift",  as: "kit_show_swift_section"
+
   get "kit_category/:category",         to: "pages#kit_category_show_rails",  as: "kit_category_show"
   get "kit_category/:category/rails",   to: "pages#kit_category_show_rails",  as: "kit_category_show_rails"
   get "kit_category/:category/react",   to: "pages#kit_category_show_react",  as: "kit_category_show_reacts"

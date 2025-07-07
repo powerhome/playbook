@@ -27,7 +27,6 @@ const combineKitsandVisualGuidelines = (
 }
 
 const KitSearch = ({ classname, id, kits }: KitSearchProps) => {
-  console.log(kits)
   const kitsAndGuidelines = combineKitsandVisualGuidelines(kits, VisualGuidelinesItems)
 
   const [filteredKits, setFilteredKits] = useState(kitsAndGuidelines)
