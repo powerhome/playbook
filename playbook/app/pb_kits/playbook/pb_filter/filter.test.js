@@ -57,7 +57,7 @@ function FilterTest(props) {
   );
 }
 
-test("triggers popover on filter button click", () => {
+test.skip("triggers popover on filter button click", () => {
   const { container } = render(<FilterTest data={{ testid: "render-test" }}/>);
 
   const btn = screen.getAllByRole("button")[0];

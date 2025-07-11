@@ -4,7 +4,7 @@ import React from 'react'
 import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps'
-import Joyride, { TooltipRenderProps } from 'react-joyride'
+// import Joyride, { TooltipRenderProps } from 'react-joyride'
 import Button from '../pb_button/_button'
 import Flex from '../pb_flex/_flex'
 import SectionSeparator from '../pb_section_separator/_section_separator'
@@ -181,7 +181,7 @@ const Walkthrough = (props: WalkthroughProps): React.ReactElement => {
         className={classes}
         id={id}
     >
-      <Joyride
+      {/* <Joyride
           callback={callback}
           continuous={continuous}
           disableOverlay={disableOverlay}
@@ -193,7 +193,7 @@ const Walkthrough = (props: WalkthroughProps): React.ReactElement => {
           styles={styles}
           tooltipComponent={Tooltip}
           {...props}
-      />
+      /> */}
     </div>
 
   )

@@ -1,13 +1,13 @@
 /* eslint-disable react/no-multi-comp */
 import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
-import {
-  Popper,
-  Manager as PopperManager,
-  Modifier,
-  PopperProps,
-  Reference as PopperReference,
-} from "react-popper";
+// import {
+//   Popper,
+//   Manager as PopperManager,
+//   Modifier,
+//   PopperProps,
+//   Reference as PopperReference,
+// } from "react-popper";
 
 import {
   buildAriaProps,
@@ -31,10 +31,10 @@ type PbPopoverProps = {
   htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string;
   offset?: boolean;
-  reference: PopperReference & any;
+  reference: any;
   show?: boolean;
   shouldClosePopover?: (arg0: boolean) => void;
-} & ModifiedGlobalProps & Omit<PopperProps<any>, 'children'>
+} & ModifiedGlobalProps & Omit<any, 'children'>
 & { children?: React.ReactChild[] | React.ReactChild }
 
 // Prop enabled default modifiers here
@@ -56,7 +56,7 @@ const popoverModifiers = ({
   modifiers,
   offset,
 }: {
-  modifiers: Modifier<any> & any;
+  modifiers: any;
   offset: boolean;
 }) => {
   return offset ? modifiers.concat([POPOVER_MODIFIERS.offset]) : modifiers;
@@ -112,11 +112,7 @@ const Popover = (props: PbPopoverProps) => {
   );
 
   return (
-    <Popper
-        modifiers={popoverModifiers({ modifiers, offset })}
-        placement={placement}
-        referenceElement={referenceElement}
-    >
+    <>
       {({ placement, ref, style }) => {
         return (
           <div
@@ -147,7 +143,7 @@ const Popover = (props: PbPopoverProps) => {
           </div>
         );
       }}
-    </Popper>
+    </>
   );
 };
 
@@ -228,9 +224,9 @@ const PbReactPopover = (props: PbPopoverProps): React.ReactElement => {
   );
 
   return (
-    <PopperManager>
+    // <PopperManager>
       <>
-        {reference && !referenceElement && (
+        {/* {reference && !referenceElement && (
           <PopperReference>
             {({ ref }) => (
               <span
@@ -253,9 +249,9 @@ const PbReactPopover = (props: PbPopoverProps): React.ReactElement => {
             </>
           ) : (
             { popoverComponent }
-          ))}
+          ))} */}
       </>
-    </PopperManager>
+    // </PopperManager>
   );
 };
 
