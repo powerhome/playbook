@@ -37,7 +37,25 @@ WebpackerReact.registerComponents({
   PhoneNumberInput
 })
 
-ujs.setup(
-  () => WebpackerReact.mountComponents(),
-  () => WebpackerReact.unmountComponents()
-)
+//export mount/unmount functions for use if needed
+export const mountPlaybookReactKits = () => {
+  WebpackerReact.mountComponents()
+}
+
+export const unmountPlaybookReactKits = () => {
+  WebpackerReact.unmountComponents()
+}
+
+ujs.setup(mountPlaybookReactKits, unmountPlaybookReactKits)
+
+// Turbo support
+document.addEventListener('DOMContentLoaded', mountPlaybookReactKits)
+document.addEventListener('turbo:load', mountPlaybookReactKits)
+document.addEventListener('turbo:frame-load', mountPlaybookReactKits)
+
+// Turbolinks support
+if (typeof window.Turbolinks !== "undefined") {
+  document.addEventListener('turbolinks:load', mountPlaybookReactKits, { once: true })
+  document.addEventListener('turbolinks:render', mountPlaybookReactKits)
+  document.addEventListener('turbolinks:before-render', unmountPlaybookReactKits)
+}
