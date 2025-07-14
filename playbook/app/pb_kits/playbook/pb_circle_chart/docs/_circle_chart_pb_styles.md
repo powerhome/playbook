@@ -1,1 +1,0 @@
-You don't need to use the Circle Chart Kit to apply Playbook styles to your Highcharts circle chart. Just import circleChartTheme.ts and merge it with your chart options—Playbook’s styling will apply automatically.

@@ -14,7 +14,6 @@ examples:
 
   react:
   - circle_chart_default: Default Style
-  - circle_chart_pb_styles: Playbook Styles
   - circle_chart_live_data: Live Data
   - circle_chart_rounded: Rounded Corners
   - circle_chart_block: Accepts Any Block

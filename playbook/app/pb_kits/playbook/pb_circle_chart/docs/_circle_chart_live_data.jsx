@@ -1,42 +1,49 @@
 import React, { useState } from 'react'
-
-import CircleChart from '../_circle_chart'
+import circleChartTheme from '../circleChartTheme'
+import Highcharts from "highcharts"
+import HighchartsReact from "highcharts-react-official"
 import Button from '../../pb_button/_button'
 
 const CircleChartLiveData = (props) => {
   const [data, setData] = useState([
     {
       name: 'Waiting for Calls',
-      value: 41,
+      y: 41,
     },
     {
       name: 'On Call',
-      value: 49,
+      y: 49,
     },
     {
       name: 'After Call',
-      value: 10,
+      y: 10,
     },
   ])
 
   const data2 = [
     {
       name: 'Waiting for Calls',
-      value: 48,
+      y: 48,
     },
     {
       name: 'On Call',
-      value: 12,
+      y: 12,
     },
     {
       name: 'After Call',
-      value: 140,
+      y: 140,
     },
   ]
 
   const updateValue = () => {
     setData(data2)
   }
+
+  const chartOptions = {
+    series: [{ data: data }],
+  }
+
+  const options = Highcharts.merge({}, circleChartTheme, chartOptions)
 
   return (
     <div>
@@ -45,10 +52,9 @@ const CircleChartLiveData = (props) => {
           text="Update Value"
           {...props}
       />
-      <CircleChart
-          chartData={data}
-          id="circle-chart-live-data"
-          {...props}
+      <HighchartsReact
+          highcharts={Highcharts}
+          options={options}
       />
     </div>
   )

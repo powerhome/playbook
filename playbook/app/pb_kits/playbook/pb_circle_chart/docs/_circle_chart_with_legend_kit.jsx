@@ -1,32 +1,41 @@
 import React from 'react'
-
-import CircleChart from '../_circle_chart'
+import circleChartTheme from '../circleChartTheme'
+import Highcharts from "highcharts"
+import HighchartsReact from "highcharts-react-official"
 
 const dataWithLegend = [{
   name: 'Bugs',
-  value: 8,
-
+  y: 8,
 },
 {
   name: 'Chores',
-  value: 1,
-
+  y: 1,
 },
 {
   name: 'Stories',
-  value: 12,
-},
-]
+  y: 12,
+}]
 
-const CircleChartWithLegendKit = (props) => (
-  <div>
-    <CircleChart
-        chartData={dataWithLegend}
-        id="with-legend-example"
-        legend
-        {...props}
-    />
-  </div>
-)
+const CircleChartWithLegendKit = () => {
+  const chartOptions = {
+    series: [{ data: dataWithLegend }],
+    plotOptions: {
+      pie: {
+        showInLegend: true
+      }
+    }
+  }
+
+  const options = Highcharts.merge({}, circleChartTheme, chartOptions)
+
+  return (
+    <div>
+      <HighchartsReact
+          highcharts={Highcharts}
+          options={options}
+      />
+    </div>
+  )
+}
 
 export default CircleChartWithLegendKit
