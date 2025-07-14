@@ -331,8 +331,6 @@ export default class PbAdvancedTable extends PbEnhancedElement {
 
   showElement(elements) {
     elements.forEach((elem) => {
-      console.log(elem)
-      console.log(elem.dataset.advancedTableContent);
       elem.style.display = "table-row";
       elem.classList.add("is-visible");
       const childRowsAll = this.element

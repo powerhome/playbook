@@ -1,6 +1,6 @@
 examples:
   rails:
-  # - advanced_table_beta: Default (Required Props)
+  - advanced_table_beta: Default (Required Props)
   # - advanced_table_loading: Loading State
   # - advanced_table_beta_subrow_headers: SubRow Headers
   # - advanced_table_collapsible_trail_rails: Collapsible Trail
