@@ -19,6 +19,74 @@ react_only: &2
 swift_only:
 - swift
 kits:
+- category: advanced_table
+  description: The Advanced Table can be used to display complex, nested data in
+      a way that allows for expansion and/or sorting.
+  components:
+  - name: default
+    parent: advanced_table
+    kit_section: ["Default (Required Props)", "Table Options", "Table Props", "Table with No Subrows or Expansion" ]
+    platforms: *1
+    status: stable
+    icons_used: true
+    react_rendered: false
+    enhanced_element_used: true
+  - name: sorting
+    parent: advanced_table
+    kit_section: ["Enable Sorting", "Sort Control", "Custom Sort"]
+    platforms: *1
+    status: stable
+    icons_used: true
+    react_rendered: false
+    enhanced_element_used: true
+  - name: pagination_&_data_states
+    parent: advanced_table
+    kit_section: ["Pagination", "Pagination Props", "Loading State", "Inline Row Loading", "Infinite Scroll"]
+    platforms: *1
+    status: stable
+    icons_used: true
+    react_rendered: false
+    enhanced_element_used: true
+  - name: row_interaction
+    parent: advanced_table
+    kit_section: ["Expanded Control", "Expand by Depth", "SubRow Headers", "Pinned Rows", "Selectable Rows", "Selectable Rows (No Subrows)", "Selectable Rows (With Actions)", "Selectable Rows (No Actions Bar)"]
+    platforms: *1
+    status: stable
+    icons_used: true
+    react_rendered: false
+    enhanced_element_used: true
+  - name: column_configuration
+    parent: advanced_table
+    kit_section: ["Column Visibility Control", "Column Visibility Control With State", "Column Visibility Control with Custom Dropdown", "Column Visibility Control with Multi-Header Columns", "Multi-Header Columns", "Multi-Header Columns (Multiple Levels)", "Multi-Header Columns with Custom Cells"]
+    platforms: *1
+    status: stable
+    icons_used: true
+    react_rendered: false
+    enhanced_element_used: true
+  - name: cell_behavior
+    parent: advanced_table
+    kit_section: ["Custom Components for Cells", "Custom Header Cell", "Inline Cell Editing"]
+    platforms: *1
+    status: stable
+    icons_used: true
+    react_rendered: false
+    enhanced_element_used: true
+  - name: layout_&_positioning
+    parent: advanced_table
+    kit_section: ["Sticky Header", "Sticky Header for Responsive Table", "Sticky Columns", "Sticky Columns with Sticky Header", "Responsive Tables", "Fullscreen", "Advanced Table Scrollbar None"]
+    platforms: *1
+    status: stable
+    icons_used: true
+    react_rendered: false
+    enhanced_element_used: true
+  - name: styling
+    parent: advanced_table
+    kit_section: ["Collapsible Trail","Row Styling", "Column Styling", "Column Styling with Multiple Headers", "Column Group Border Color"]
+    platforms: *1
+    status: stable
+    icons_used: true
+    react_rendered: false
+    enhanced_element_used: true
 - category: alerts_and_dialogs
   description:
   components:
@@ -116,14 +184,6 @@ kits:
       the ability to sort, filter, and paginate data.
     status: stable
     icons_used: false
-    react_rendered: false
-    enhanced_element_used: true
-  - name: advanced_table
-    platforms: *1
-    description: The Advanced Table can be used to display complex, nested data in
-      a way that allows for expansion and/or sorting.
-    status: stable
-    icons_used: true
     react_rendered: false
     enhanced_element_used: true
   - name: list

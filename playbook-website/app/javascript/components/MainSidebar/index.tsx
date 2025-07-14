@@ -45,6 +45,7 @@ const MainSidebar = ({
   kits.map((obj: {[key: string]: string[]}) => {
   
     const key = Object.keys(obj)[0];
+    if (key === "advanced_table") return
     const orderedArray = obj[key].sort((a, b) => a.localeCompare(b));
     return { [key]: orderedArray };
   });
