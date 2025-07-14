@@ -10,7 +10,12 @@ class PlaybookIconsController < ApplicationController
     @icons_by_category = icon_data.group_by { |icon| icon["category"] }
 
     @icon_categories = @icons_by_category.keys.sort.map do |cat|
-      { text: cat, link: "##{cat.parameterize}" }
+      {
+        text: cat,
+        link: "##{cat.parameterize}",
+        value: cat.parameterize,
+        label: cat,
+      }
     end
 
     render template: "pages/playbook_icons"
