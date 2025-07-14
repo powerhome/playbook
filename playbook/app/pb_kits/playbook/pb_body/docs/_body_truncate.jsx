@@ -19,7 +19,7 @@ const BodyTruncate = (props) => {
       <Body
           marginBottom="md"
           text={lorem}
-          truncate="1"
+          truncate={1}
           {...props}
       />
 
@@ -30,7 +30,7 @@ const BodyTruncate = (props) => {
       <Body
           marginBottom="md"
           text={lorem}
-          truncate="2"
+          truncate={2}
           {...props}
       />
 
@@ -40,7 +40,7 @@ const BodyTruncate = (props) => {
       />
       <Body
           text={lorem}
-          truncate="3"
+          truncate={3}
           {...props}
       />
     </Flex>
