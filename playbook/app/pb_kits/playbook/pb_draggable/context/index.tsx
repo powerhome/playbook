@@ -3,7 +3,7 @@ import { InitialStateType, ActionType, DraggableProviderType } from "./types";
 
 const initialState: InitialStateType = {
   items: [],
-  dragData: { id: "", initialGroup: "" },
+  dragData: { id: "", initialGroup: "", originId: "" },
   isDragging: "",
   activeContainer: ""
 };
@@ -60,7 +60,8 @@ export const DraggableProvider = ({
   onDragEnd,
   onDrop,
   onDragOver,
-  dropZone = { type: 'ghost', color: 'neutral', direction: 'vertical' }
+  dropZone = { type: 'ghost', color: 'neutral', direction: 'vertical' },
+  providerId = 'default', // fallback provided for backward compatibility, so this does not become a required prop
 }: DraggableProviderType) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
@@ -93,15 +94,17 @@ export const DraggableProvider = ({
   }, [state.items]);
 
   const handleDragStart = (id: string, container: string) => {
-    dispatch({ type: 'SET_DRAG_DATA', payload: { id: id, initialGroup: container } });
+    dispatch({ type: 'SET_DRAG_DATA', payload: { id: id, initialGroup: container, originId: providerId } });
     dispatch({ type: 'SET_IS_DRAGGING', payload: id });
     if (onDragStart) onDragStart(id, container);
   };
 
   const handleDragEnter = (id: string, container: string) => {
+    if (state.dragData.originId !== providerId) return; // Ignore drag events from other providers
+
     if (state.dragData.id !== id) {
       dispatch({ type: 'REORDER_ITEMS', payload: { dragId: state.dragData.id, targetId: id } });
-      dispatch({ type: 'SET_DRAG_DATA', payload: { id: state.dragData.id, initialGroup: container } });
+      dispatch({ type: 'SET_DRAG_DATA', payload: { id: state.dragData.id, initialGroup: container, originId: providerId } });
     }
     if (onDragEnter) onDragEnter(id, container);
   };
@@ -109,6 +112,7 @@ export const DraggableProvider = ({
   const handleDragEnd = () => {
     dispatch({ type: 'SET_IS_DRAGGING', payload: "" });
     dispatch({ type: 'SET_ACTIVE_CONTAINER', payload: "" });
+    dispatch({ type: 'SET_DRAG_DATA', payload: { id: "", initialGroup: "", originId: "" } });
     if (onDragEnd) onDragEnd();
   };
 
@@ -117,6 +121,8 @@ export const DraggableProvider = ({
   };
 
   const handleDrop = (container: string) => {
+    if (state.dragData.originId !== providerId) return; // Ignore drop events from other providers
+
     dispatch({ type: 'SET_IS_DRAGGING', payload: "" });
     dispatch({ type: 'SET_ACTIVE_CONTAINER', payload: "" });
     changeCategory(state.dragData.id, container);
@@ -124,6 +130,8 @@ export const DraggableProvider = ({
   };
 
   const handleDragOver = (e: Event, container: string) => {
+     if (state.dragData.originId !== providerId) return; // Ignore drag over events from other providers
+
     e.preventDefault();
     dispatch({ type: 'SET_ACTIVE_CONTAINER', payload: container });
     if (onDragOver) onDragOver(e, container);
