@@ -41,12 +41,16 @@ const GaugeLiveData = (props) => {
     }
   }
 
-  const options = {
-    ...gaugeTheme,
-    series: [{
-      data: [{ name: name, y: value }]
-    }]
-  }
+  const options = Highcharts.merge({}, gaugeTheme,
+    {
+      title: {
+        text: name,
+      },
+      series: [{
+        data: [{ name: name, y: value }]
+      }]
+    }
+  )
 
   return (
     <div>
