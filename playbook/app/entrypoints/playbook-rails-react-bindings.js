@@ -59,3 +59,9 @@ if (typeof window.Turbolinks !== "undefined") {
   document.addEventListener('turbolinks:render', mountPlaybookReactKits)
   document.addEventListener('turbolinks:before-render', unmountPlaybookReactKits)
 }
+
+const observer = new MutationObserver(() => {
+  mountPlaybookReactKits()
+})
+
+observer.observe(document.body, { childList: true, subtree: true })
