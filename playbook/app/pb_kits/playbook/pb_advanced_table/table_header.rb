@@ -82,19 +82,19 @@ module Playbook
       end
 
       # Check if a header cell has a custom renderer
-      def has_custom_header_renderer?(cell)
+      def has_header_renderer?(cell)
         return false unless cell[:accessor].present?
 
         original_def = find_original_column_def(cell[:accessor])
-        original_def && original_def[:custom_header_renderer].present?
+        original_def && original_def[:header].present?
       end
 
       # Render custom header content
-      def render_custom_header(cell)
-        return cell[:label] unless has_custom_header_renderer?(cell)
+      def render_header(cell)
+        return cell[:label] unless has_header_renderer?(cell)
 
         original_def = find_original_column_def(cell[:accessor])
-        custom_renderer = original_def[:custom_header_renderer]
+        custom_renderer = original_def[:header]
 
         # Call the custom renderer with the cell data and label
         custom_renderer.call(cell, cell[:label])
