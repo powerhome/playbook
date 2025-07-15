@@ -148,9 +148,9 @@ class PagesController < ApplicationController
   def kit_show_rails
     @type = "rails"
     @users = Array.new(9) { Faker::Name.name }.paginate(page: params[:page], per_page: 2)
-    @table_data = advanced_table_mock_data if @kit == "advanced_table"
-    @table_data_with_id = advanced_table_mock_data_with_id if @kit == "advanced_table"
-    @table_data_no_subrows = advanced_table_mock_data_no_subrows if @kit == "advanced_table"
+    @table_data = advanced_table_mock_data if @kit == "advanced_table" || @kit_parent == "advanced_table"
+    @table_data_with_id = advanced_table_mock_data_with_id if @kit == "advanced_table" || @kit_parent == "advanced_table"
+    @table_data_no_subrows = advanced_table_mock_data_no_subrows if @kit == "advanced_table" || @kit_parent == "advanced_table"
     render "pages/kit_show"
   end
 
@@ -258,6 +258,8 @@ private
       group_components.push(kit["components"].map do |component|
         {
           name: component["name"],
+          parent: component["parent"],
+          kit_section: component["kit_section"] || [],
           status: component["status"],
           icons_used: component["icons_used"],
           react_rendered: component["react_rendered"],
@@ -274,8 +276,8 @@ private
 
   def set_category
     @category = params[:category]
-    if categories.include?(@category) && helpers.category_has_kits?(category_kits: kit_categories, type: params[:type])
-      @category_kits = kit_categories
+    if categories.include?(@category) && helpers.category_has_kits?(category_kits: @category === "advanced_table" ? ["advanced_table"] : kit_categories, type: params[:type])
+      @category_kits = @category === "advanced_table" ? ["advanced_table"] : kit_categories
       @kits = params[:name]
     else
       redirect_to root_path, flash: { error: "That kit does not exist" }
@@ -293,10 +295,20 @@ private
   end
 
   def set_kit
-    matching_kit = all_kits.find { |kit| kit[:name] == params[:name] }
+    matching_kit = if params[:section].present?
+                     all_kits.find do |kit|
+                       kit[:parent] == params[:name] && kit[:name] == params[:section]
+                     end
+                   else
+                     all_kits.find do |kit|
+                       kit[:name] == params[:name] || kit[:parent] == params[:name]
+                     end
+                   end
 
     if matching_kit
       @kit = matching_kit[:name]
+      @kit_parent = matching_kit[:parent]
+      @kit_section = matching_kit[:kit_section]
       @kit_status = matching_kit[:status]
       @icons_used = matching_kit[:icons_used]
       @react_rendered = matching_kit[:react_rendered]

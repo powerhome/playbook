@@ -68,7 +68,7 @@ const containOnlyNumbers = (value: string) => {
   return /^[()+\-\ .\d]*$/g.test(value)
 }
 
-const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.MutableRefObject<unknown>) => {
+const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.Ref<unknown>) => {
   const {
     aria = {},
     className,
@@ -106,15 +106,16 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.MutableRefOb
     className
   )
 
-  const inputRef = useRef<HTMLInputElement>()
+  const inputRef = useRef<HTMLInputElement | null>(null)
   const itiRef = useRef<any>(null);
   const [inputValue, setInputValue] = useState(value)
   const [error, setError] = useState(props.error)
   const [dropDownIsOpen, setDropDownIsOpen] = useState(false)
   const [selectedData, setSelectedData] = useState()
+  const [hasTyped, setHasTyped] = useState(false)
 
   useEffect(() => {
-    if (error?.length > 0) {
+    if ((error ?? '').length > 0) {
       onValidate(false)
     } else {
       onValidate(true)
@@ -131,6 +132,7 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.MutableRefOb
       clearField() {
         setInputValue("")
         setError("")
+        setHasTyped(false)
       },
       inputNode() {
         return inputRef.current
@@ -201,6 +203,8 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.MutableRefOb
   }
 
   const validateErrors = () => {
+    if (!hasTyped && !error) return
+
     if (itiRef.current) isValid(itiRef.current.isValidNumber())
     if (validateOnlyNumbers(itiRef.current)) return
     if (validateTooLongNumber(itiRef.current)) return
@@ -214,6 +218,7 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.MutableRefOb
   }
 
   const handleOnChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
+    if (!hasTyped) setHasTyped(true)
     setInputValue(evt.target.value)
     let phoneNumberData
     if (formatAsYouType) {
@@ -259,16 +264,17 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.MutableRefOb
 
     itiRef.current = telInputInit;
 
-    inputRef.current.addEventListener("countrychange", (evt: Event) => {
-      const phoneNumberData = getCurrentSelectedData(telInputInit, (evt.target as HTMLInputElement).value)
-      setSelectedData(phoneNumberData)
-      onChange(phoneNumberData)
-      validateErrors()
-    })
+    if (inputRef.current) {
+      inputRef.current.addEventListener("countrychange", (evt: Event) => {
+        const phoneNumberData = getCurrentSelectedData(telInputInit, (evt.target as HTMLInputElement).value)
+        setSelectedData(phoneNumberData)
+        onChange(phoneNumberData)
+        validateErrors()
+      })
 
-    inputRef.current.addEventListener("open:countrydropdown", () => setDropDownIsOpen(true))
-    inputRef.current.addEventListener("close:countrydropdown", () => setDropDownIsOpen(false))
-
+      inputRef.current.addEventListener("open:countrydropdown", () => setDropDownIsOpen(true))
+      inputRef.current.addEventListener("close:countrydropdown", () => setDropDownIsOpen(false))
+    }
     if (formatAsYouType) {
       inputRef.current?.addEventListener("input", (evt) => {
         handleOnChange(evt as unknown as React.ChangeEvent<HTMLInputElement>);
@@ -303,12 +309,16 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.MutableRefOb
         {...htmlProps}
     >
       <TextInput
-          ref={
-            inputNode => {
-              ref ? ref.current = inputNode : null
-              inputRef.current = inputNode
+          ref={inputNode => {
+            if (ref) {
+              if (typeof ref === 'function') {
+                ref(inputNode)
+              } else {
+                (ref as React.MutableRefObject<HTMLInputElement | null>).current = inputNode
+              }
             }
-          }
+            inputRef.current = inputNode
+          }}
           {...textInputProps}
       />
     </div>

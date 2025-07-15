@@ -6,14 +6,16 @@ export interface ItemType {
 
 export interface InitialStateType {
   items: ItemType[];
-  dragData: { id: string; initialGroup: string };
+  dragData: { id: string; initialGroup: string, originId?: string };
   isDragging: string;
   activeContainer: string;
 }
 
 export type ActionType =
   | { type: 'SET_ITEMS'; payload: ItemType[] }
-  | { type: 'SET_DRAG_DATA'; payload: { id: string; initialGroup: string } }
+  | { type: 'SET_DRAG_DATA'; payload: {
+    originId: string; id: string; initialGroup: string 
+} }
   | { type: 'SET_IS_DRAGGING'; payload: string }
   | { type: 'SET_ACTIVE_CONTAINER'; payload: string }
   | { type: 'CHANGE_CATEGORY'; payload: { itemId: string; container: string } }
@@ -35,4 +37,5 @@ export type ActionType =
     onDrop?: (container: string) => void;
     onDragOver?: (e: Event, container: string) => void;
     dropZone?: DropZoneConfig | string; // Can accept string for backward compatibility
+    providerId?: string;
   }
