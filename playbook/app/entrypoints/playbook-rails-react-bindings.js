@@ -1,7 +1,7 @@
-// React-Rendered Rails Kit Exports =====
+import React from 'react';
+import ReactDOM from 'react-dom';
 
-import WebpackerReact from 'webpacker-react'
-import ujs from 'webpacker-react/ujs'
+// React-Rendered Rails Kit Exports =====
 
 import BarGraph from 'kits/pb_bar_graph/_bar_graph'
 import CircleChart from 'kits/pb_circle_chart/_circle_chart'
@@ -19,7 +19,8 @@ import RichTextEditor from 'kits/pb_rich_text_editor/_rich_text_editor'
 import Typeahead from 'kits/pb_typeahead/_typeahead'
 import PhoneNumberInput from 'kits/pb_phone_number_input/_phone_number_input'
 
-WebpackerReact.registerComponents({
+// ===== Component Registry =====
+const playbookComponents = {
   BarGraph,
   CircleChart,
   Dialog,
@@ -35,9 +36,52 @@ WebpackerReact.registerComponents({
   Typeahead,
   Gauge,
   PhoneNumberInput
+}
+
+// ===== Manual Mounting =====
+export const mountPlaybookReactKits = () => {
+  const nodes = document.querySelectorAll('[data-react-class]')
+
+  nodes.forEach((node) => {
+    const componentName = node.getAttribute('data-react-class')
+    const rawProps = node.getAttribute('data-react-props')
+    const Component = playbookComponents[componentName]
+
+    if (Component && !node._playbookMounted) {
+      const props = rawProps ? JSON.parse(rawProps) : {}
+
+      ReactDOM.render(<Component {...props} />, node)
+      node._playbookMounted = true
+    }
+  })
+}
+
+// ===== Manual Unmounting =====
+export const unmountPlaybookReactKits = () => {
+  const nodes = document.querySelectorAll('[data-react-class]')
+
+  nodes.forEach((node) => {
+    if (node._playbookMounted) {
+      ReactDOM.unmountComponentAtNode(node)
+      node._playbookMounted = false
+    }
+  })
+}
+
+// ===== Mount on Turbo events =====
+document.addEventListener('turbo:load', mountPlaybookReactKits)
+document.addEventListener('turbo:frame-load', mountPlaybookReactKits)
+
+// ===== Mount on Turbolinks events =====
+if (typeof window.Turbolinks !== "undefined") {
+  document.addEventListener('turbolinks:load', mountPlaybookReactKits, { once: true })
+  document.addEventListener('turbolinks:render', mountPlaybookReactKits)
+  document.addEventListener('turbolinks:before-render', unmountPlaybookReactKits)
+}
+
+// ===== MutationObserver for dynamic content =====
+const observer = new MutationObserver(() => {
+  mountPlaybookReactKits()
 })
 
-ujs.setup(
-  () => WebpackerReact.mountComponents(),
-  () => WebpackerReact.unmountComponents()
-)
+observer.observe(document.body, { childList: true, subtree: true })
