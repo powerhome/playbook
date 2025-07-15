@@ -1,19 +1,36 @@
 import React from 'react'
-import Gauge from '../../pb_gauge/_gauge'
+import gaugeTheme from '../gaugeTheme'
+import Highcharts from "highcharts"
+import HighchartsReact from "highcharts-react-official"
+import HighchartsMore from "highcharts/highcharts-more"
+import SolidGauge from "highcharts/modules/solid-gauge"
 
-const data = [
-  { name: 'Participants', value: 84 },
-]
+HighchartsMore(Highcharts);
+SolidGauge(Highcharts);
 
-const GaugeDisableAnimation = (props) => (
-  <div>
-    <Gauge
-        chartData={data}
-        disableAnimation
-        id="gauge-disable-animation"
-        {...props}
-    />
-  </div>
-)
+const data = [{ name: "Participants", y: 84 }]
 
-export default GaugeDisableAnimation
+const baseOptions = {
+  series: [{ data: data }],
+  plotOptions: {
+    series: {
+      animation: false,
+    },
+  },
+};
+
+const GaugeDisableAnimation = () => {
+  const options = Highcharts.merge({}, gaugeTheme, baseOptions);
+
+  return (
+    <div>
+      <HighchartsReact
+          disableAnimation
+          highcharts={Highcharts}
+          options={options}
+      />
+    </div>
+  );
+};
+
+export default GaugeDisableAnimation;
