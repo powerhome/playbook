@@ -1,6 +1,8 @@
 import React from 'react'
-
-import LineGraph from '../_line_graph'
+import lineGraphTheme from '../lineGraphTheme'
+import Highcharts from "highcharts"
+import HighchartsReact from "highcharts-react-official"
+import colors from '../../tokens/exports/_colors.module.scss'
 
 const data = [{
   name: 'Installation',
@@ -19,19 +21,36 @@ const data = [{
   data: [null, null, null, 3112, 4989, 5816, 15274, 18111],
 }]
 
-const LineGraphColors = (props) => (
-  <div>
-    <LineGraph
-        axisTitle="Number of Employees"
-        chartData={data}
-        colors={['data-4', 'data-5', 'data-6', 'data-7', 'data-8']}
-        id="line-colors"
-        title="Line Graph with Custom Data Colors"
-        xAxisCategories={['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']}
-        yAxisMin={0}
-        {...props}
-    />
-  </div>
-)
+const categories = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+
+const LineGraphColors = () => {
+  const chartOptions = {
+    title: {
+      text: 'Line Graph with Custom Data Colors',
+    },
+    xAxis: {
+      categories: categories,
+    },
+    yAxis: {
+      min: 0,
+      title: {
+        text: 'Number of Employees',
+      },
+    },
+    series: data,
+    colors: [colors.data_4, colors.data_5, "#144075", colors.data_7, colors.data_8]
+  }
+
+  const options = Highcharts.merge({}, lineGraphTheme, chartOptions)
+
+  return (
+    <div>
+      <HighchartsReact
+          highcharts={Highcharts}
+          options={options}
+      />
+    </div>
+  )
+}
 
 export default LineGraphColors

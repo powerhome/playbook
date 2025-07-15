@@ -1,3 +1,1 @@
-Line graphs are used to show changes in data over time. The default height of line graph is 400px and can be changed. The default height is in pixel units, but can also use percentage string (percentage would be that of the width. For example, `height:"50%"` would mean that the height is 50% of the width). This allows for preserving the aspect ratio across responsive sizes. 
-
-For more information, see: <a href="https://api.highcharts.com/highcharts/chart.height" target="_blank"> highcharts/chart.height</a>.
+**Important Note for the React Kit**: In order to leverage this kit, you must install `highcharts` and `highcharts-react-official` into your project as shown below. To then apply Playbook styles to your Highchart, import lineGraphTheme.ts from playbook-ui and merge it with your Highchart options. Then, pass the merged value to the options prop. Playbook’s styling will be applied automatically. See the examples in the documentation below.
