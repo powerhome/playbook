@@ -37,7 +37,19 @@ WebpackerReact.registerComponents({
   PhoneNumberInput
 })
 
-ujs.setup(
-  () => WebpackerReact.mountComponents(),
-  () => WebpackerReact.unmountComponents()
-)
+//export mount/unmount functions for use if needed
+export const mountPlaybookReactKits = () => {
+  WebpackerReact.mountComponents()
+}
+
+export const unmountPlaybookReactKits = () => {
+  WebpackerReact.unmountComponents()
+}
+
+ujs.setup(mountPlaybookReactKits, unmountPlaybookReactKits)
+
+const observer = new MutationObserver(() => {
+  mountPlaybookReactKits()
+})
+
+observer.observe(document.body, { childList: true, subtree: true })
