@@ -47,3 +47,23 @@
     }
   }
 }
+
+.pb-gauge-suffix {
+  fill: $text_lt_light;
+  stroke: none;
+  font: $regular $font_larger $font_family_base;
+
+  &[class*=dark] {
+    fill: $text_dk_light;
+  }
+}
+
+.pb-gauge-prefix {
+  fill: $text_lt_light;
+  stroke: none;
+  font: $regular $font_base $font_family_base;
+
+  &[class*=dark] {
+    fill: $text_dk_light;
+  }
+}
