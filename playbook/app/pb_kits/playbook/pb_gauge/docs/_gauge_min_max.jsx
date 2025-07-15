@@ -4,6 +4,8 @@ import Highcharts from "highcharts"
 import HighchartsReact from "highcharts-react-official"
 import HighchartsMore from "highcharts/highcharts-more"
 import SolidGauge from "highcharts/modules/solid-gauge"
+import colors from '../../tokens/exports/_colors.module.scss'
+import typography from '../../tokens/exports/_typography.module.scss'
 
 HighchartsMore(Highcharts);
 SolidGauge(Highcharts);
@@ -25,6 +27,11 @@ const baseOptions = {
     labels: {
       y: 26,
       enabled: true,
+      style: {
+        color: colors.neutral,
+        fontFamily: typography.font_family_base,
+        fontWeight: typography.bold,
+      }
     },
   },
   series: [{ data: data }],
