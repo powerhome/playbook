@@ -2,7 +2,14 @@ import React from 'react'
 
 import Flex from '../../pb_flex/_flex'
 import FlexItem from '../../pb_flex/_flex_item'
-import Gauge from '../../pb_gauge/_gauge'
+import gaugeTheme from '../gaugeTheme'
+import Highcharts from "highcharts"
+import HighchartsReact from "highcharts-react-official"
+import HighchartsMore from "highcharts/highcharts-more"
+import SolidGauge from "highcharts/modules/solid-gauge"
+
+HighchartsMore(Highcharts);
+SolidGauge(Highcharts);
 
 const GaugeSizing = (props) => (
   <div>
@@ -17,10 +24,11 @@ const GaugeSizing = (props) => (
           shrink
           {...props}
       >
-        <Gauge
-            chartData={[ { name: 'Point 1', value: 100 } ]}
-            id="gauge-sizing4"
-            {...props}
+        <HighchartsReact
+            highcharts={Highcharts}
+            options={Highcharts.merge({}, gaugeTheme, {
+              series: [{ data: [{ name: "Point 1", y: 100 }] }],
+            })}
         />
       </FlexItem>
       <FlexItem
@@ -29,10 +37,11 @@ const GaugeSizing = (props) => (
           shrink
           {...props}
       >
-        <Gauge
-            chartData={[ { name: 'Point 2', value: 75 } ]}
-            id="gauge-sizing3"
-            {...props}
+        <HighchartsReact
+            highcharts={Highcharts}
+            options={Highcharts.merge({}, gaugeTheme, {
+              series: [{ data: [{ name: "Point 2", y: 75 }] }],
+            })}
         />
       </FlexItem>
       <FlexItem
@@ -41,10 +50,11 @@ const GaugeSizing = (props) => (
           shrink
           {...props}
       >
-        <Gauge
-            chartData={[ { name: 'Point 3', value: 50 } ]}
-            id="gauge-sizing2"
-            {...props}
+        <HighchartsReact
+            highcharts={Highcharts}
+            options={Highcharts.merge({}, gaugeTheme, {
+              series: [{ data: [{ name: "Point 3", y: 50 }] }],
+            })}
         />
       </FlexItem>
       <FlexItem
@@ -53,11 +63,14 @@ const GaugeSizing = (props) => (
           shrink
           {...props}
       >
-        <Gauge
-            chartData={[ { name: 'Point 4', value: 25 } ]}
-            height="100%"
-            id="gauge-sizing1"
-            {...props}
+        <HighchartsReact
+            highcharts={Highcharts}
+            options={Highcharts.merge({}, gaugeTheme, {
+              chart: {
+                height: "100%",
+              },
+              series: [{ data: [{ name: "Point 4", y: 25 }] }],
+            })}
         />
       </FlexItem>
     </Flex>

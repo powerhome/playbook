@@ -1,25 +1,60 @@
 import React from 'react'
-import Gauge from '../../pb_gauge/_gauge'
+import gaugeTheme from '../gaugeTheme'
+import Highcharts from "highcharts"
+import HighchartsReact from "highcharts-react-official"
+import HighchartsMore from "highcharts/highcharts-more"
+import SolidGauge from "highcharts/modules/solid-gauge"
 
-const GaugeHeight = (props) => (
-  <div>
-    <Gauge
-        chartData={[ { name: 'Pixels', value: 400 } ]}
-        height="400"
-        id="gauge-height-px"
-        suffix="px"
-        title="Fixed Height in Pixels"
-        {...props}
-    />
-    <Gauge
-        chartData={[ { name: 'Percentage', value: 45 } ]}
-        height="45%"
-        id="gauge-height-percent"
-        suffix="%"
-        title="Height as Percentage of Width"
-        {...props}
-    />
-  </div>
-)
+HighchartsMore(Highcharts);
+SolidGauge(Highcharts);
 
-export default GaugeHeight
+const GaugeHeight = () => {
+  return (
+    <div>
+      <HighchartsReact
+          highcharts={Highcharts}
+          options={Highcharts.merge({}, gaugeTheme, {
+            title: {
+              text: "Fixed Height in Pixels",
+            },
+            chart: {
+              height: "400",
+            },
+            series: [{ data: [{ name: "Pixels", y: 400 }] }],
+            plotOptions: {
+              solidgauge: {
+                dataLabels: {
+                  format:
+                    `<span class="fix">{y:,f}</span>` +
+                    `<span class="pb-gauge-suffix">px</span>`,
+                },
+              },
+            },
+          })}
+      />
+      <HighchartsReact
+          highcharts={Highcharts}
+          options={Highcharts.merge({}, gaugeTheme, {
+            title: {
+              text: "Height as Percentage of Width",
+            },
+            chart: {
+              height: "45%",
+            },
+            series: [{ data: [{ name: "Percentage", y: 45 }] }],
+            plotOptions: {
+              solidgauge: {
+                dataLabels: {
+                  format:
+                    `<span class="fix">{y:,f}</span>` +
+                    `<span class="pb-gauge-suffix">%</span>`,
+                },
+              },
+            },
+          })}
+      />
+    </div>
+  );
+};
+
+export default GaugeHeight;
