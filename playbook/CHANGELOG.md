@@ -1,8 +1,12 @@
-# 14.23.0
+# 🧰 Your Icon Toolbox Just Got Bigger!
 
 ##### July 15, 2025
 
 <img width="889" height="477" alt="release_image" src="https://github.com/user-attachments/assets/9464c495-ae6d-4f3e-9441-c45dd927bcff" />
+
+The new Playbook Icons page is officially live! 🎉 You can now explore all icons shipped directly from our internal playbook-icons repo — fully integrated and ready to use. The Icon kit supports both our custom icons and FontAwesome icons out of the box for full backward compatibility! Head over to the [new Icons page](https://playbook.powerapp.cloud/playbook_icons) to check them all out!
+
+[14.23.0](https://github.com/powerhome/playbook/tree/14.23.0) full list of changes:
 
 **Kit Enhancements:**
 
