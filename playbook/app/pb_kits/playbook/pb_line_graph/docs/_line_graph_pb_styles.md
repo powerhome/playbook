@@ -1,1 +1,0 @@
-You don't need to use the Line Graph Kit to apply Playbook styles to your Highcharts line graph. Just import lineGraphTheme.ts and merge it with your graph options—Playbook’s styling will apply automatically.

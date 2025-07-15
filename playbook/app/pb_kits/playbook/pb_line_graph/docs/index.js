@@ -4,4 +4,3 @@ export { default as LineGraphLegendPosition } from './_line_graph_legend_positio
 export { default as LineGraphLegendNonclickable } from './_line_graph_legend_nonclickable.jsx'
 export { default as LineGraphHeight } from './_line_graph_height.jsx'
 export { default as LineGraphColors } from './_line_graph_colors.jsx'
-export { default as LineGraphPbStyles } from './_line_graph_pb_styles.jsx'

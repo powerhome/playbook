@@ -88,6 +88,7 @@ const lineGraphTheme = {
     minorGridLineColor: colors.border_light,
     lineWidth: 0,
     tickWidth: 0,
+    tickPixelInterval: 50,
     labels: {
       style: {
         fontFamily: typography.font_family_base,
