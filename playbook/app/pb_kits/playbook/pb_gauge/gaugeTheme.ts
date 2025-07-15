@@ -2,7 +2,13 @@ import colors from '../tokens/exports/_colors.module.scss'
 import typography from '../tokens/exports/_typography.module.scss'
 
 const gaugeTheme = {
-  title: { text: "" },
+  title: { 
+    text: "",
+    style: {
+      fontFamily: typography.font_family_base,
+      fontSize: typography.text_larger,
+    },
+  },
   chart: {
     type: "solidgauge",
     events: {
