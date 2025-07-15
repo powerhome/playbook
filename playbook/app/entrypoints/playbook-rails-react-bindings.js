@@ -37,7 +37,79 @@ WebpackerReact.registerComponents({
   PhoneNumberInput
 })
 
-ujs.setup(
-  () => WebpackerReact.mountComponents(),
-  () => WebpackerReact.unmountComponents()
-)
+// Registering components for observer to limit its scope
+const registeredKits = [
+  'BarGraph',
+  'CircleChart',
+  'Dialog',
+  'DialogBody',
+  'DialogFooter',
+  'DialogHeader',
+  'DistributionBar',
+  'MultiLevelSelect',
+  'Legend',
+  'LineGraph',
+  'Passphrase',
+  'RichTextEditor',
+  'Typeahead',
+  'Gauge',
+  'PhoneNumberInput',
+]
+
+
+//export mount/unmount functions for use if needed
+export const mountPlaybookReactKits = () => {
+  WebpackerReact.mountComponents()
+}
+
+export const unmountPlaybookReactKits = () => {
+  WebpackerReact.unmountComponents()
+}
+
+ujs.setup(mountPlaybookReactKits, unmountPlaybookReactKits)
+
+// Turbo support
+document.addEventListener('DOMContentLoaded', mountPlaybookReactKits)
+document.addEventListener('turbo:load', mountPlaybookReactKits)
+document.addEventListener('turbo:frame-load', mountPlaybookReactKits)
+
+// Turbolinks support
+if (typeof window.Turbolinks !== "undefined") {
+  document.addEventListener('turbolinks:load', mountPlaybookReactKits, { once: true })
+  document.addEventListener('turbolinks:render', mountPlaybookReactKits)
+  document.addEventListener('turbolinks:before-render', unmountPlaybookReactKits)
+}
+
+const observer = new MutationObserver((mutations) => {
+  let shouldMount = false
+
+  for (const mutation of mutations) {
+    mutation.addedNodes.forEach((node) => {
+      if (!(node instanceof HTMLElement)) return
+
+      const dataReactClass = node.dataset?.reactClass
+      if (registeredKits.includes(dataReactClass)) {
+        shouldMount = true
+      }
+
+      const matches = node.querySelectorAll?.('[data-react-class]')
+      matches?.forEach((el) => {
+        const kit = el.getAttribute('data-react-class')
+        if (registeredKits.includes(kit)) {
+          shouldMount = true
+        }
+      })
+    })
+
+    if (shouldMount) {
+      // Debounce to prevent flood of remounts
+      clearTimeout(observer._debounce)
+      observer._debounce = setTimeout(() => {
+        mountPlaybookReactKits()
+      }, 50)
+      break
+    }
+  }
+})
+
+observer.observe(document.body, { childList: true, subtree: true })
