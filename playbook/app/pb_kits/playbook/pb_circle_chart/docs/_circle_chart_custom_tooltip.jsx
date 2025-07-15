@@ -1,31 +1,43 @@
 import React from 'react'
-
-import CircleChart from '../_circle_chart'
+import circleChartTheme from '../circleChartTheme'
+import Highcharts from "highcharts"
+import HighchartsReact from "highcharts-react-official"
 
 const data = [
   {
     name: 'Waiting for Calls',
-    value: 41,
+    y: 41,
   },
   {
     name: 'On Call',
-    value: 49,
+    y: 49,
   },
   {
     name: 'After Call',
-    value: 10,
+    y: 10,
   },
 ]
 
-const CircleChartCustomTooltip = (props) => (
-  <div>
-    <CircleChart
-        chartData={data}
-        id="circle-chart-default"
-        tooltipHtml= '<p>Custom tooltip for {point.name} <br/>with value: {point.y}</p>'
-        {...props}
-    />
-  </div>
-)
+const CircleChartCustomTooltip = () => {
+  const chartOptions = {
+    series: [{ data: data }],
+    tooltip: {
+      headerFormat: null,
+      pointFormat: '<p>Custom tooltip for {point.name} <br/>with value: {point.y}</p>',
+      useHTML: true,
+    },
+  }
+
+  const options = Highcharts.merge({}, circleChartTheme, chartOptions)
+
+  return (
+    <div>
+      <HighchartsReact
+          highcharts={Highcharts}
+          options={options}
+      />
+    </div>
+  )
+}
 
 export default CircleChartCustomTooltip

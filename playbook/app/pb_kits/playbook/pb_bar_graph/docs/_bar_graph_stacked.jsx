@@ -1,6 +1,8 @@
 import React from 'react'
+import barGraphTheme from '../barGraphTheme';
+import Highcharts from "highcharts";
+import HighchartsReact from "highcharts-react-official";
 
-import BarGraph from '../_bar_graph'
 
 const chartData = [{
   name: 'Installation',
@@ -14,21 +16,40 @@ const chartData = [{
   data: [975, 1600, 1500, 924, 500],
 }]
 
+const chartOptions = {
+  series: chartData,
+  title: {
+    text: "Bar Graph with Stacked Columns",
+  },
+  xAxis: {
+    categories: ["Jan", "Feb", "Mar", "Apr", "May"],
+  },
+  yAxis: {
+    title: {
+      text: "Number of Employees",
+    },
+  },
+  plotOptions: {
+    column: {
+        stacking: 'normal',
+        borderWidth: 0,
+    }
+  },
+  legend: { enabled: true },
+};
 
-const BarGraphStacked = (props) => (
-  <div>
-    <BarGraph
-        axisTitle="Number Of Employees"
-        chartData={chartData}
-        id="bar-default"
-        legend
-        stacking="normal"
-        title="Bar Graph with Stacked Columns"
-        xAxisCategories={['Jan', 'Feb', 'Mar', 'Apr', 'May']}
-        yAxisMin={0}
-        {...props}
-    />
-  </div>
-)
+
+const BarGraphStacked = () => {
+  const options = Highcharts.merge({}, barGraphTheme, chartOptions)
+
+  return (
+    <div>
+      <HighchartsReact
+          highcharts={Highcharts}
+          options={options}
+      />
+    </div>
+  )
+}
 
 export default BarGraphStacked

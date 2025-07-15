@@ -5,38 +5,18 @@ class PlaybookIconsController < ApplicationController
 
   def index
     @show_sidebar = true
-    @icon_categories = [
-      { text: "Alert", link: "#alert" },
-      { text: "Animals", link: "#animals" },
-      { text: "Arrows", link: "#arrows" },
-      { text: "Awards", link: "#awards" },
-      { text: "Buildings", link: "#buildings" },
-      { text: "Business", link: "#business" },
-      { text: "Checks", link: "#checks" },
-      { text: "Clothing", link: "#clothing" },
-      { text: "Communication", link: "#communication" },
-      { text: "Data Visualization", link: "#data-visualization" },
-      { text: "Education", link: "#education" },
-      { text: "Files", link: "#files" },
-      { text: "Flags", link: "#flags" },
-      { text: "Hands", link: "#hands" },
-      { text: "Health", link: "#health" },
-      { text: "Interface Core", link: "#interface-core" },
-      { text: "Location", link: "#location" },
-      { text: "Media", link: "#media" },
-      { text: "People", link: "#people" },
-      { text: "Power Products", link: "#power-products" },
-      { text: "Power Tooling", link: "#power-tooling" },
-      { text: "Powergon", link: "#powergon" },
-      { text: "Sales", link: "#sales" },
-      { text: "Security", link: "#security" },
-      { text: "Technology", link: "#technology" },
-      { text: "Text", link: "#text" },
-      { text: "Time", link: "#time" },
-      { text: "Tools", link: "#tools" },
-      { text: "Vehicles", link: "#vehicles" },
-      { text: "Weather", link: "#weather" },
-    ]
+
+    icon_data = JSON.parse(File.read(Rails.root.join("app/assets/icons.json")))
+    @icons_by_category = icon_data.group_by { |icon| icon["category"] }
+
+    @icon_categories = @icons_by_category.keys.sort.map do |cat|
+      {
+        text: cat,
+        link: "##{cat.parameterize}",
+        value: cat.parameterize,
+        label: cat,
+      }
+    end
 
     render template: "pages/playbook_icons"
   end

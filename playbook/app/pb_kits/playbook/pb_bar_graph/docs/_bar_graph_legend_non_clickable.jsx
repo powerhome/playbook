@@ -1,25 +1,48 @@
 import React from 'react'
-import BarGraph from "../../pb_bar_graph/_bar_graph"
+import barGraphTheme from '../barGraphTheme';
+import Highcharts from "highcharts";
+import HighchartsReact from "highcharts-react-official";
+
 
 const chartData = [{
   name: 'Number of Installations',
   data: [1475, 200, 3000, 654, 656],
 }]
 
-const BarGraphLegendNonClickable = (props) => (
-  <div>
-    <BarGraph
-        axisTitle="Number of Employees"
-        chartData={chartData}
-        id="bar-test-3"
-        legend
-        title="Bar Graph with Legend Non Clickable"
-        toggleLegendClick={false}
-        xAxisCategories={['Jan', 'Feb', 'Mar', 'Apr', 'May']}
-        yAxisMin={0}
-        {...props}
-    />
-  </div>
-)
+const chartOptions = {
+    title: {
+      text: 'Bar Graph with Legend Non Clickable',
+    },
+    xAxis: {
+      categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
+    },
+    yAxis: {
+      title: {
+        text: 'Number of Employees',
+      },
+    },
+    legend: {
+      enabled: true,
+      events: {
+        itemClick: function () {
+          return false;
+        }
+      }
+    },
+  series: chartData
+}
+
+const BarGraphLegendNonClickable = () => {
+  const options = Highcharts.merge({}, barGraphTheme, chartOptions)
+
+  return (
+    <div>
+      <HighchartsReact
+          highcharts={Highcharts}
+          options={options}
+      />
+    </div>
+  )
+}
 
 export default BarGraphLegendNonClickable

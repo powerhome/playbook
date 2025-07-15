@@ -3,8 +3,6 @@
 require "will_paginate"
 require "playbook/pagination_renderer"
 require "will_paginate/array"
-require "parser/current"
-require "erb"
 require "ostruct"
 
 class PagesController < ApplicationController
@@ -150,9 +148,9 @@ class PagesController < ApplicationController
   def kit_show_rails
     @type = "rails"
     @users = Array.new(9) { Faker::Name.name }.paginate(page: params[:page], per_page: 2)
-    @table_data = advanced_table_mock_data if @kit == "advanced_table"
-    @table_data_with_id = advanced_table_mock_data_with_id if @kit == "advanced_table"
-    @table_data_no_subrows = advanced_table_mock_data_no_subrows if @kit == "advanced_table"
+    @table_data = advanced_table_mock_data if @kit == "advanced_table" || @kit_parent == "advanced_table"
+    @table_data_with_id = advanced_table_mock_data_with_id if @kit == "advanced_table" || @kit_parent == "advanced_table"
+    @table_data_no_subrows = advanced_table_mock_data_no_subrows if @kit == "advanced_table" || @kit_parent == "advanced_table"
     render "pages/kit_show"
   end
 
@@ -182,117 +180,6 @@ class PagesController < ApplicationController
 
   def kit_variants_collection_show_react
     handle_kit_variants_collection("react")
-  end
-
-  def kit_playground_rails
-    @kit = "avatar"
-    @examples = pb_doc_kit_examples(@kit, "rails")
-    @raw_example = view_context.pb_rails("docs/kit_example", props: {
-                                           kit: @kit,
-                                           example_title: @examples.first.values.first,
-                                           example_key: @examples.first.keys.first,
-                                           type: "rails",
-                                           dark: false,
-                                           code_only: true,
-                                         })
-    render "pages/rails_in_react_playground", layout: "layouts/fullscreen"
-  end
-
-  def parse_erb(code)
-    parsed = code.scan(/<%=?\s*(.*?)\s*%>/m).flatten.join("\n")
-    Parser::CurrentRuby.parse(parsed)
-  end
-
-  def detect_ruby_methods(root_node)
-    stack = [root_node] # Initialize the stack with the root node
-    methods = []
-    until stack.empty?
-      node = stack.pop # Get the current node from the stack
-
-      next unless node.is_a?(Parser::AST::Node)
-
-      # Check if the current node is a `:send` node and has `:system` as the method name
-      methods.push(node.children[1]) if node.type == :send
-      # Push all child nodes onto the stack
-      stack.concat(node.children)
-    end
-    methods
-  end
-
-  def white_list
-    %i[<< to_s pb_rails +@ freeze]
-  end
-
-  # Define methods outside of the main method
-  def add_xstr_node(node, xstr_nodes)
-    xstr_nodes << node if node.type == :xstr
-  end
-
-  def add_gvar_node(node, gvar_nodes)
-    gvar_nodes << node if node.type == :gvar
-  end
-
-  def traverse_node_gvar(node, xstr_nodes)
-    case node
-    when Parser::AST::Node
-      add_gvar_node(node, xstr_nodes)
-      # Recur for each child node
-      node.children.each do |child|
-        traverse_node_gvar(child, xstr_nodes)
-      end
-    end
-  end
-
-  def detect_gvar_nodes(ast_node)
-    gvar_nodes = []
-    # Start traversing from the root node
-    traverse_node_gvar(ast_node, gvar_nodes)
-    gvar_nodes
-  end
-
-  def traverse_node(node, xstr_nodes)
-    case node
-    when Parser::AST::Node
-      add_xstr_node(node, xstr_nodes)
-      # Recur for each child node
-      node.children.each do |child|
-        traverse_node(child, xstr_nodes)
-      end
-    end
-  end
-
-  def detect_xstr_nodes(ast_node)
-    xstr_nodes = []
-    # Start traversing from the root node
-    traverse_node(ast_node, xstr_nodes)
-    xstr_nodes
-  end
-
-  def is_erb_safe?(code)
-    node = parse_erb(code)
-    detect_gvar_nodes(parse_erb(erb_code_params)).empty? &&
-      detect_ruby_methods(node) - white_list == [] &&
-      detect_xstr_nodes(parse_erb(erb_code_params)).empty?
-  end
-
-  def unsafe_code
-    detect_ruby_methods(parse_erb(erb_code_params)).uniq - white_list
-  end
-
-  def playground_response
-    if is_erb_safe?(erb_code_params)
-      erb_code_params
-    elsif unsafe_code.any?
-      "The code provided can't be run please remove these methods: #{unsafe_code.join(', ')}"
-    else
-      "The code provided can't be run. Only use pb_rails."
-    end
-  end
-
-  def rails_pg_render
-    render inline: playground_response
-  rescue => e
-    render json: { error: e }, status: 400
   end
 
   def rails_in_react
@@ -371,6 +258,8 @@ private
       group_components.push(kit["components"].map do |component|
         {
           name: component["name"],
+          parent: component["parent"],
+          kit_section: component["kit_section"] || [],
           status: component["status"],
           icons_used: component["icons_used"],
           react_rendered: component["react_rendered"],
@@ -387,8 +276,8 @@ private
 
   def set_category
     @category = params[:category]
-    if categories.include?(@category) && helpers.category_has_kits?(category_kits: kit_categories, type: params[:type])
-      @category_kits = kit_categories
+    if categories.include?(@category) && helpers.category_has_kits?(category_kits: @category === "advanced_table" ? ["advanced_table"] : kit_categories, type: params[:type])
+      @category_kits = @category === "advanced_table" ? ["advanced_table"] : kit_categories
       @kits = params[:name]
     else
       redirect_to root_path, flash: { error: "That kit does not exist" }
@@ -406,10 +295,20 @@ private
   end
 
   def set_kit
-    matching_kit = all_kits.find { |kit| kit[:name] == params[:name] }
+    matching_kit = if params[:section].present?
+                     all_kits.find do |kit|
+                       kit[:parent] == params[:name] && kit[:name] == params[:section]
+                     end
+                   else
+                     all_kits.find do |kit|
+                       kit[:name] == params[:name] || kit[:parent] == params[:name]
+                     end
+                   end
 
     if matching_kit
       @kit = matching_kit[:name]
+      @kit_parent = matching_kit[:parent]
+      @kit_section = matching_kit[:kit_section]
       @kit_status = matching_kit[:status]
       @icons_used = matching_kit[:icons_used]
       @react_rendered = matching_kit[:react_rendered]

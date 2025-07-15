@@ -4,40 +4,99 @@
     image_url: vite_asset_path("images/icon-banner.svg"),
     background_repeat: "no-repeat",
     background_size: "contain",
-    background_position: "center"
+    background_position: "center",
+    display: { xs: "none" }
   }) do %>
     <div style="height:250px"></div>
   <% end %>
 
   <div class="content-wrapper">
-    <%= pb_rails("flex", props: { orientation: "row" }) do %>
-      <%= pb_rails("flex/flex_item", props: { classname:"icon-list-container", flex: "4" }) do %>
-        <%= pb_rails("title", props: { text: "Icons", tag: "h1", size: 1, padding_bottom: "xl" }) %>
-        <%= pb_rails("title", props: {
-          text: "Lorem ipsum dolor sit amet...",
-          tag: "h4",
-          size: 4,
-          bold: false
-        }) %>
-
-        <% @icon_categories.each do |category| %>
-          <%= pb_rails("caption", props: { 
-            text: category[:text], 
-            size: "lg", 
-            id: category[:link].gsub('#', ''),
-            padding_y: "lg"
+    <%= pb_rails("flex", props: { justify: "evenly", gap: "md" }) do %>
+      <%= pb_rails("flex", props: { gap: "md", max_width: "lg", orientation: "column"}) do %>
+        <%= pb_rails("title", props: { size: { xs: "3", sm: "2", md: "1", lg: "1", xl: "1" }, text: "Icons" }) %>
+        <%= pb_rails("flex", props: { classname: "description-default", orientation: "column" }) do %>
+          <%= pb_rails("body", props: {
+            padding_bottom: "sm",
+            text: "Icons are a core part of Playbook’s visual language. Our custom icon set is designed to support clear, consistent, and accessible interfaces. Use them to enhance navigation, reinforce meaning, and improve communication across all digital products."
           }) %>
-     
+          <%= pb_rails("link", props: {
+            href: "https://playbook.powerapp.cloud/kits/icon/react",
+            target: "child",
+            text: "To use them in your project, check out our Icon kit."
+          }) %>
+        <% end %>
+        <%= pb_rails("flex", props: { classname: "description-mobile", orientation: "column" }) do %>
+          <%= pb_rails("detail", props: {
+            color: "default",
+            padding_bottom: "xs",
+            text: "Icons are a core part of Playbook’s visual language. Our custom icon set is designed to support clear, consistent, and accessible interfaces. Use them to enhance navigation, reinforce meaning, and improve communication across all digital products."
+          }) %>
+          <%= pb_rails("detail") do %>
+            <%= pb_rails("link", props: {
+              href: "https://playbook.powerapp.cloud/kits/icon/react",
+              target: "child",
+              text: "To use them in your project, check out our Icon kit.",
+            }) %>
+          <% end %>
+        <% end %>
+        <%= pb_rails("dropdown", props: {
+          options: @icon_categories,
+          selected_value: nil,
+          id: "icon-category-dropdown"
+        }) do %>
+          <%= pb_rails("dropdown/dropdown_trigger") do %>
+            <%= pb_rails("button", props: {
+              full_width: true,
+              icon: "sort",
+              icon_right: true,
+              id: "icon-category-trigger-button",
+              variant: "secondary",
+            }) do %>
+              <span id="icon-category-selected-label">Icon Categories</span>
+            <% end %>
+          <% end %>
+          <%= pb_rails("dropdown/dropdown_container", props: { max_width: "xs" }) do %>
+            <% @icon_categories.each do |option| %>
+              <%= pb_rails("dropdown/dropdown_option", props: { option: option }) do %>
+                <%= pb_rails("body", props: { text: option[:label], size: "sm" }) %>
+              <% end %>
+            <% end %>
+          <% end %>
+        <% end %>
+        <% @icons_by_category.sort.each do |category, icons| %>
+          <%= pb_rails("flex", props: { align_self: "stretch", gap: "sm", orientation: "column"}) do %>
+            <%= pb_rails("caption", props: {
+              id: category.parameterize,
+              size: "lg",
+              text: category
+            }) %>
+            <%= pb_rails("layout", props: {
+              align_self: "stretch",
+              classname: "icon-grid",
+              layout: "collection"
+            }) do %>
+              <%= pb_rails("layout/body") do %>
+                <% icons.sort_by { |i| i["name"] }.each do |icon| %>
+                  <%= pb_rails("selectable_card_icon", props: {
+                    classname: "icon-card",
+                    icon: icon["name"],
+                    title_text: icon["name"]
+                  }) %>
+                <% end %>
+              <% end %>
+            <% end %>
+          <% end %>
         <% end %>
       <% end %>
 
-      <%= pb_rails("flex/flex_item", props: { flex: "1", padding_left: "md" }) do %>
+      <%= pb_rails("section_separator", props: { align_self: "stretch", classname: "icon-categories-section-separator", orientation: "vertical" }) %>
+      <%= pb_rails("flex/flex_item", props: { flex: "1", classname: "icon-categories-sidebar" }) do %>
         <%= pb_rails("caption", props: { text: "Icon Categories" }) %>
         <%= pb_rails("nav", props: { variant: "subtle" }) do %>
           <% @icon_categories.each do |category| %>
-            <%= pb_rails("nav/item", props: { 
-              text: category[:text], 
-              link: category[:link] 
+            <%= pb_rails("nav/item", props: {
+              text: category[:text],
+              link: category[:link]
             }) %>
           <% end %>
         <% end %>
@@ -45,3 +104,48 @@
     <% end %>
   </div>
 </div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const labelEl = document.getElementById("icon-category-selected-label");
+
+    document.querySelectorAll("[data-dropdown-option-label]").forEach(option => {
+      option.addEventListener("click", () => {
+        const data = option.getAttribute("data-dropdown-option-label");
+
+        let parsed;
+        try {
+          parsed = JSON.parse(data);
+        } catch (e) {
+          return;
+        }
+
+        const value = parsed?.value;
+        const label = parsed?.label;
+
+        if (!value) return;
+
+        if (labelEl) labelEl.textContent = label;
+
+        history.replaceState(null, null, `#${value}`);
+
+        const target = document.getElementById(value);
+        if (target) {
+          setTimeout(() => {
+            target.scrollIntoView({ behavior: "smooth" });
+          }, 100);
+        }
+      });
+    });
+
+    const hash = window.location.hash?.substring(1);
+    if (hash) {
+      const target = document.getElementById(hash);
+      if (target) {
+        setTimeout(() => {
+          target.scrollIntoView({ behavior: "smooth" });
+        }, 200);
+      }
+    }
+  });
+</script>

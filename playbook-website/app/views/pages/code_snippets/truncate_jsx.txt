@@ -1,18 +1,16 @@
-  const lorem = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis, minus. Nisi beatae voluptatum labore sequi. Nemo accusantium corrupti, reiciendis magnam tenetur perferendis esse pariatur voluptas eaque hic vel rem nihil quidem dolorum ex dolor, libero ullam placeat, sapiente eos. Cumque obcaecati dignissimos molestiae, minima quibusdam sint maxime libero accusantium animi quis quia maiores enim ipsum, esse, modi laudantium illum error!"
-
   <Body
     marginBottom="md"
-    text={lorem}
-    truncate="1"
+    text="Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis, minus. Nisi beatae voluptatum labore sequi. Nemo accusantium corrupti, reiciendis magnam tenetur perferendis esse pariatur voluptas eaque hic vel rem nihil quidem dolorum ex dolor, libero ullam placeat, sapiente eos. Cumque obcaecati dignissimos molestiae, minima quibusdam sint maxime libero accusantium animi quis quia maiores enim ipsum, esse, modi laudantium illum error!"
+    truncate={1}
   />
 
   <Body
     marginBottom="md"
-    text={lorem}
-    truncate="2"
+    text="Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis, minus. Nisi beatae voluptatum labore sequi. Nemo accusantium corrupti, reiciendis magnam tenetur perferendis esse pariatur voluptas eaque hic vel rem nihil quidem dolorum ex dolor, libero ullam placeat, sapiente eos. Cumque obcaecati dignissimos molestiae, minima quibusdam sint maxime libero accusantium animi quis quia maiores enim ipsum, esse, modi laudantium illum error!"
+    truncate={2}
   />
 
   <Body
-    text={lorem}
-    truncate="3"
+    text="Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis, minus. Nisi beatae voluptatum labore sequi. Nemo accusantium corrupti, reiciendis magnam tenetur perferendis esse pariatur voluptas eaque hic vel rem nihil quidem dolorum ex dolor, libero ullam placeat, sapiente eos. Cumque obcaecati dignissimos molestiae, minima quibusdam sint maxime libero accusantium animi quis quia maiores enim ipsum, esse, modi laudantium illum error!"
+    truncate={3}
   />

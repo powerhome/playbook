@@ -1,31 +1,44 @@
 import React from 'react'
-
-import CircleChart from '../_circle_chart'
+import circleChartTheme from '../circleChartTheme'
+import Highcharts from "highcharts"
+import HighchartsReact from "highcharts-react-official"
+import colors from '../../tokens/exports/_colors.module.scss'
 
 const dataWithColors = [
   {
     name: 'Waiting for Calls',
-    value: 41,
+    y: 41,
   },
   {
     name: 'On Call',
-    value: 49,
+    y: 49,
   },
   {
     name: 'After Call',
-    value: 10,
+    y: 10,
   },
 ]
 
-const CircleChartColors = (props) => (
-  <div>
-    <CircleChart
-        chartData={dataWithColors}
-        colors={['data-6', 'data-4', 'data-2']}
-        id="colors-example"
-        {...props}
-    />
-  </div>
-)
+const CircleChartColors = () => {
+  const chartOptions = {
+    series: [{ data: dataWithColors }],
+    plotOptions: {
+      pie: {
+        colors: ["#144075", colors.data_4, colors.data_2]
+      }
+    }
+  }
+
+  const options = Highcharts.merge({}, circleChartTheme, chartOptions)
+
+  return (
+    <div>
+      <HighchartsReact
+          highcharts={Highcharts}
+          options={options}
+      />
+    </div>
+  )
+}
 
 export default CircleChartColors

@@ -138,9 +138,11 @@ module ApplicationHelper
     {
       label: kit.to_s.titleize,
       value: if @type == "react" || @type.nil?
-               "/kits/#{kit}/react"
+               "/#{kit == 'advanced_table' ? 'kit_category' : 'kits'}/#{kit}#{kit == 'advanced_table' ? '?type=react' : '/react'}"
+             elsif @type == "swift"
+               "/#{kit == 'advanced_table' ? 'kit_category' : 'kits'}/#{kit}/swift"
              else
-               @type == "swift" ? "/kits/#{kit}/swift" : "/kits/#{kit}"
+               "/#{kit == 'advanced_table' ? 'kit_category' : 'kits'}/#{kit}#{kit == 'advanced_table' && '?type=rails'}"
              end,
     }
   end
@@ -150,8 +152,8 @@ module ApplicationHelper
 
     MENU["kits"].each do |kit|
       kit_category = kit["category"]
-      # Modify this line to include both name and status in the components array
-      components = kit["components"].map { |c| { name: c["name"], status: c["status"] } }
+      # Modify this line to include name, status and parent in the components array
+      components = kit["components"].map { |c| { name: c["name"], status: c["status"], parent: c["parent"] } }
 
       all_kits << { kit_category => components }
     end
@@ -167,13 +169,15 @@ module ApplicationHelper
       if kit.is_a? Hash
         _kit_category, components = kit.first
         components.each do |component|
-          all_kits.push(component[:name]) if component[:status] != "beta"
+          name_or_parent = component[:parent].presence || component[:name]
+          all_kits.push(name_or_parent) if component[:status] != "beta"
         end
       else
         all_kits.push(kit)
       end
     end
 
+    all_kits.uniq!
     all_kits.sort!
 
     all_kits.each do |sorted_kit|

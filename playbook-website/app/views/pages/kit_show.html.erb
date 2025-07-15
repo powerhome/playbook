@@ -4,10 +4,14 @@
       <%= react_component("DarkModeToggle", initMode: cookies[:dark_mode] )%>
     </div>
   <% end %>
+    <% kit_value = @kit_parent.presence || @kit %>
     <%= pb_rails("flex", props: { justify: "between", align_items: "start" }) do %>
     <%= pb_rails("flex/flex_item", props: { flex: "9"}) do %>
       <%= pb_rails("flex", props: { orientation: "column"}) do %>
-        <%= pb_rails("title", props: { text: pb_kit_title(@kit), tag: "h1", size: 1, margin_top: "xl" }) %>
+        <%= pb_rails("title", props: { text: pb_kit_title(kit_value), tag: "h1", size: 1, margin_top: "xl" }) %>
+        <% if @kit_parent.present? %>
+            <%= pb_rails("title", props: { text: pb_kit_title(@kit), size: 3, margin_top: "xs", bold: false }) %>
+        <% end %>
         <% if @kit_status === "beta" %>
           <%= pb_rails("card", props: {highlight: {position: "side", color:"primary", shadow:"deep"}, margin_y: "md", padding: "sm"}) do %>
             <%= pb_rails("flex", props:{ align: "center" }) do %>
@@ -93,15 +97,14 @@
 </div>
 <div class="kit-show-wrapper">
   <div class="pb--kit-type-nav">
-
     <%= pb_rails("nav", props: { orientation: "horizontal" }) do %>
-      <% if pb_doc_has_kit_type?(@kit, "rails") %>
+      <% if pb_doc_has_kit_type?(kit_value, "rails") %>
         <%= pb_rails("nav/item", props: { text: "Rails", link: kit_show_rails_path(@kit), active: action_name == 'kit_show_rails' }) %>
       <% end %>
-      <% if pb_doc_has_kit_type?(@kit, "react") %>
+      <% if pb_doc_has_kit_type?(kit_value, "react") %>
         <%= pb_rails("nav/item", props: { text: "React", link: kit_show_reacts_path(@kit), active: action_name == 'kit_show_react' }) %>
       <% end %>
-      <% if pb_doc_has_kit_type?(@kit, "swift") %>
+      <% if pb_doc_has_kit_type?(kit_value, "swift") %>
           <%= pb_rails("nav/item", props: { text: "Swift", link: kit_show_swift_path(@kit), active: action_name == 'kit_show_swift' }) %>
       <% end %>
     <% end %>
@@ -109,11 +112,11 @@
     <%= pb_rails("section_separator") %>
   </div>
   <% if (action_name == "kit_show_rails") %>
-    <%= pb_kit(kit: @kit, dark_mode: dark_mode?) %>
+    <%= pb_kit(kit: kit_value, dark_mode: dark_mode?, kit_section: @kit_section) %>
   <% elsif (action_name == "kit_show_react") %>
-    <%= pb_kit(kit: @kit, type: "react", dark_mode: dark_mode?) %>
+    <%= pb_kit(kit: kit_value, type: "react", dark_mode: dark_mode?, kit_section: @kit_section) %>
   <% elsif (action_name == "kit_show_swift") %>
-    <%= pb_kit(kit: @kit, type: "swift", dark_mode: dark_mode?, show_code: false) %>
+    <%= pb_kit(kit: kit_value, type: "swift", dark_mode: dark_mode?, show_code: false) %>
   <% end %>
 
   <% unless (action_name == "kit_show_swift") %>
@@ -125,12 +128,12 @@
 
     <% if (action_name == "kit_show_rails") %>
       <br>
-      <%= pb_rails("docs/kit_api", props: { kit: @kit, dark: dark_mode? }) %>
+      <%= pb_rails("docs/kit_api", props: { kit: kit_value, dark: dark_mode? }) %>
     <% elsif (action_name == "kit_show_react") %>
       <div data-action="toggle" data-togglable="prop_example" class="pb--propsTable">
         <%= pb_rails("title", props: { text: "Available Props", size: 3, margin_bottom: "sm", margin_top: "sm" }) %>
         <%= react_component("AvailableProps",
-          availableProps: Playbook::PbDocs::KitExample.new(kit: @kit, example_title: "Default", example_key: @kit, type: "react").available_props )
+          availableProps: Playbook::PbDocs::KitExample.new(kit: kit_value, example_title: "Default", example_key: kit_value, type: "react").available_props )
         %>
       </div>
     <% end %>
