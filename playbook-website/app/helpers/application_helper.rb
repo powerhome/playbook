@@ -142,7 +142,7 @@ module ApplicationHelper
              elsif @type == "swift"
                "/#{kit == 'advanced_table' ? 'kit_category' : 'kits'}/#{kit}/swift"
              else
-               "/#{kit == 'advanced_table' ? 'kit_category' : 'kits'}/#{kit}#{kit == 'advanced_table' && '?type=rails'}"
+               "/#{kit == 'advanced_table' ? 'kit_category' : 'kits'}/#{kit}#{kit == 'advanced_table' ? '?type=rails' : ''}"
              end,
     }
   end
