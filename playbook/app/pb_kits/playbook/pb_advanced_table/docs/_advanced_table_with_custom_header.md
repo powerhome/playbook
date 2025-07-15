@@ -1,1 +1,1 @@
-The optional `header` key/value pair can be used within `columnDefinitions` to render a custom header. This example shows an Icon and Tooltip being used but other kits can be used as well. 
+The optional `header` key/value pair can be used within `columnDefinitions` to render a custom header. This example shows an Icon and Tooltip being used but other kits can be used as well.

@@ -76,6 +76,30 @@ module Playbook
         end
       end
 
+      # Get original column definition for custom rendering
+      def find_original_column_def(accessor)
+        find_column_def_by_accessor(column_definitions, accessor)
+      end
+
+      # Check if a header cell has a custom renderer
+      def has_custom_header_renderer?(cell)
+        return false unless cell[:accessor].present?
+
+        original_def = find_original_column_def(cell[:accessor])
+        original_def && original_def[:custom_header_renderer].present?
+      end
+
+      # Render custom header content
+      def render_custom_header(cell)
+        return cell[:label] unless has_custom_header_renderer?(cell)
+
+        original_def = find_original_column_def(cell[:accessor])
+        custom_renderer = original_def[:custom_header_renderer]
+
+        # Call the custom renderer with the cell data and label
+        custom_renderer.call(cell, cell[:label])
+      end
+
     private
 
       def compute_max_depth(columns)
@@ -147,6 +171,18 @@ module Playbook
           wrapped = { label: "", columns: [wrapped] }
         end
         wrapped
+      end
+
+      def find_column_def_by_accessor(defs, target_accessor)
+        defs.each do |col|
+          return col if col[:accessor] == target_accessor
+
+          if col[:columns].is_a?(Array)
+            found = find_column_def_by_accessor(col[:columns], target_accessor)
+            return found if found
+          end
+        end
+        nil
       end
     end
   end
