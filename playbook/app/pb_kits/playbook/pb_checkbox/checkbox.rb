@@ -6,6 +6,8 @@ module Playbook
       prop :error, type: Playbook::Props::Boolean, default: false
       prop :checked, type: Playbook::Props::Boolean, default: false
       prop :indeterminate_main, type: Playbook::Props::Boolean, default: false
+      prop :indeterminate_main_labels, type: Playbook::Props::Array,
+                                       default: []
       prop :indeterminate_parent
       prop :text
       prop :value
@@ -49,10 +51,19 @@ module Playbook
       end
 
       def data
-        Hash(prop(:data)).merge(
+        base_data = Hash(prop(:data)).merge(
           pb_checkbox_indeterminate_main: indeterminate_main,
           pb_checkbox_indeterminate_parent: indeterminate_parent
         )
+
+        if indeterminate_main && indeterminate_main_labels.size == 2
+          base_data.merge!(
+            pb_checkbox_indeterminate_main_label_check: indeterminate_main_labels[0],
+            pb_checkbox_indeterminate_main_label_uncheck: indeterminate_main_labels[1]
+          )
+        end
+
+        base_data
       end
 
     private
