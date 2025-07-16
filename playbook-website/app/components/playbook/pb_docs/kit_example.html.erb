@@ -76,19 +76,19 @@
         fadeAwayDiv.classList.add('hide')
       }, 3001)
     })
+  }
 
-    var fullscreenOpenButton = document.getElementById('<%= "fullscreen-open-#{example_key}" %>')	
-    if (fullscreenOpenButton) {	
-      fullscreenOpenButton.addEventListener('click', function() {	
-        document.getElementById('<%= "pb--doc-#{example_key}" %>').requestFullscreen()	
-      })	
-    }	
-  
-    var fullscreenCloseButton = document.getElementById('<%= "fullscreen-close-#{example_key}" %>')	
-    if (fullscreenCloseButton) {	
-      fullscreenCloseButton.addEventListener('click', function() {	
-        document.exitFullscreen()	
-      })	
-    }
+  var fullscreenOpenButton = document.getElementById('<%= "fullscreen-open-#{example_key}" %>')
+  if (fullscreenOpenButton) {
+    fullscreenOpenButton.addEventListener('click', function() {
+      document.getElementById('<%= "pb--doc-#{example_key}" %>').requestFullscreen()
+    })
+  }
+
+  var fullscreenCloseButton = document.getElementById('<%= "fullscreen-close-#{example_key}" %>')
+  if (fullscreenCloseButton) {
+    fullscreenCloseButton.addEventListener('click', function() {
+      document.exitFullscreen()
+    })
   }
 </script>
