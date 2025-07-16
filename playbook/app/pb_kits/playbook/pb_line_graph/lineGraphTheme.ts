@@ -50,7 +50,21 @@ const lineGraphTheme = {
     },
   },
   credits: { enabled: false },
-  legend: { enabled: false },
+  legend: { 
+    enabled: false,
+    itemStyle: {
+      fontFamily: typography.font_family_base,
+      color: colors.text_lt_light,
+      fontWeight: typography.regular,
+      fontSize: typography.text_smaller,
+    },
+    itemHoverStyle: {
+      color: colors.text_lt_default,
+    },
+    itemHiddenStyle: {
+      color: colors.text_lt_lighter,
+    },
+  },
   colors: [
     colors.data_1,
     colors.data_2,
