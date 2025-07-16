@@ -40,3 +40,4 @@ export { default as AdvancedTableColumnStylingColumnHeaders } from './_advanced_
 export { default as AdvancedTableInfiniteScroll} from './_advanced_table_infinite_scroll.jsx'
 export {default as AdvancedTableWithCustomHeader} from './_advanced_table_with_custom_header.jsx'
 export { default as AdvancedTableCustomSort } from './_advanced_table_custom_sort.jsx'
+export { default as AdvancedTableWithCustomHeaderMultiHeader } from './_advanced_table_with_custom_header_multi_header.jsx'
