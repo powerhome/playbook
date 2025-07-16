@@ -1,5 +1,4 @@
 export { default as GaugeDefault } from './_gauge_default.jsx'
-export { default as GaugePbStyles } from './_gauge_pb_styles.jsx'
 export { default as GaugeDisableAnimation } from './_gauge_disable_animation.jsx'
 export { default as GaugeFullCircle } from './_gauge_full_circle.jsx'
 export { default as GaugeHeight } from './_gauge_height.jsx'

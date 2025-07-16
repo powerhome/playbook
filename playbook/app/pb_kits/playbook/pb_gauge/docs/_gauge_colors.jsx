@@ -1,19 +1,36 @@
 import React from 'react'
-import Gauge from '../../pb_gauge/_gauge'
+import gaugeTheme from '../gaugeTheme'
+import Highcharts from "highcharts"
+import HighchartsReact from "highcharts-react-official"
+import HighchartsMore from "highcharts/highcharts-more"
+import SolidGauge from "highcharts/modules/solid-gauge"
+import colors from '../../tokens/exports/_colors.module.scss'
 
-const data = [
-  { name: 'Name', value: 67 },
-]
+HighchartsMore(Highcharts);
+SolidGauge(Highcharts);
 
-const GaugeColors = (props) => (
-  <div>
-    <Gauge
-        chartData={data}
-        id="gauge-colors"
-        {...props}
-        colors={['data-7']}
-    />
-  </div>
-)
+const data = [{ name: "Name", y: 67 }]
 
-export default GaugeColors
+const baseOptions = {
+  series: [{ data: data }],
+  plotOptions: {
+    solidgauge: {
+      borderColor: colors.data_7,
+    }
+  },
+};
+
+const GaugeColors = () => {
+  const options = Highcharts.merge({}, gaugeTheme, baseOptions);
+
+  return (
+    <div>
+      <HighchartsReact
+          highcharts={Highcharts}
+          options={options}
+      />
+    </div>
+  );
+};
+
+export default GaugeColors;

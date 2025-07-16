@@ -2,14 +2,44 @@ import React from "react";
 
 import Flex from '../../pb_flex/_flex'
 import FlexItem from '../../pb_flex/_flex_item'
-import Gauge from '../../pb_gauge/_gauge'
 import Card from '../../pb_card/_card'
 import Caption from '../../pb_caption/_caption'
 import Body from '../../pb_body/_body'
 import SectionSeparator from '../../pb_section_separator/_section_separator'
 import Title from '../../pb_title/_title'
+import gaugeTheme from '../gaugeTheme'
+import Highcharts from "highcharts"
+import HighchartsReact from "highcharts-react-official"
+import HighchartsMore from "highcharts/highcharts-more"
+import SolidGauge from "highcharts/modules/solid-gauge"
+import colors from '../../tokens/exports/_colors.module.scss'
+import typography from '../../tokens/exports/_typography.module.scss'
 
-const data = [{ name: "Name", value: 10 }];
+HighchartsMore(Highcharts);
+SolidGauge(Highcharts);
+
+const data = [{ name: "Name", y: 10 }];
+
+const baseOptions = {
+  series: [{ data: data }],
+  chart: {
+    height: "150",
+  },
+  plotOptions: {
+    series: {
+      animation: false,
+    },
+    solidgauge: {
+      dataLabels: {
+        format:
+          `<span class="fix">{y:,f}</span>` +
+          `<span style="fill: ${colors.text_lt_light}; font-size: ${typography.text_larger};">%</span>`,
+      },
+    },
+  },
+};
+
+const options = Highcharts.merge({}, gaugeTheme, baseOptions);
 
 const GaugeComplex = (props) => (
   <Flex
@@ -100,13 +130,9 @@ const GaugeComplex = (props) => (
                   shrink
                   {...props}
               >
-                <Gauge
-                    chartData={data}
-                    disableAnimation
-                    height="150"
-                    id="gauge-complex"
-                    suffix="%"
-                    {...props}
+                <HighchartsReact
+                    highcharts={Highcharts}
+                    options={options}
                 />
                </FlexItem>
             </Flex>

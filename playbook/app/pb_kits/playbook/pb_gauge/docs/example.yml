@@ -15,7 +15,6 @@ examples:
 
   react:
   - gauge_default: Default
-  - gauge_pb_styles: Playbook Styles
   - gauge_disable_animation: Disable Animation
   - gauge_title: Title
   - gauge_units: Units

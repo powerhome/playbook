@@ -1,21 +1,38 @@
 import React from 'react'
-import Gauge from '../../pb_gauge/_gauge'
+import gaugeTheme from '../gaugeTheme'
+import Highcharts from "highcharts"
+import HighchartsReact from "highcharts-react-official"
+import HighchartsMore from "highcharts/highcharts-more"
+import SolidGauge from "highcharts/modules/solid-gauge"
 
-const data = [
-  { name: 'Score', value: 780 },
-]
+HighchartsMore(Highcharts);
+SolidGauge(Highcharts);
 
-const GaugeTitle = (props) => (
-  <div>
-    <Gauge
-        chartData={data}
-        id="gauge-title"
-        max={850}
-        min={300}
-        title="Credit Score"
-        {...props}
-    />
-  </div>
-)
+const data = [{ name: "Score", y: 780 }]
 
-export default GaugeTitle
+const baseOptions = {
+  title: {
+    text: "Credit Score",
+  },
+  yAxis: {
+    min: 300,
+    max: 850,
+  },
+  series: [{ data: data }],
+};
+
+const GaugeTitle = () => {
+  const options = Highcharts.merge({}, gaugeTheme, baseOptions);
+
+  return (
+    <div>
+      <HighchartsReact
+          highcharts={Highcharts}
+          id="gauge-title"
+          options={options}
+      />
+    </div>
+  );
+};
+
+export default GaugeTitle;
