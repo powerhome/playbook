@@ -5,10 +5,6 @@ import ujs from 'webpacker-react/ujs'
 
 import BarGraph from 'kits/pb_bar_graph/_bar_graph'
 import CircleChart from 'kits/pb_circle_chart/_circle_chart'
-import Dialog from 'kits/pb_dialog/_dialog'
-import DialogBody from 'kits/pb_dialog/child_kits/_dialog_body'
-import DialogFooter from 'kits/pb_dialog/child_kits/_dialog_footer'
-import DialogHeader from 'kits/pb_dialog/child_kits/_dialog_header'
 import DistributionBar from 'kits/pb_distribution_bar/_distribution_bar'
 import Gauge from 'kits/pb_gauge/_gauge'
 import Legend from 'kits/pb_legend/_legend'
@@ -22,10 +18,6 @@ import PhoneNumberInput from 'kits/pb_phone_number_input/_phone_number_input'
 WebpackerReact.registerComponents({
   BarGraph,
   CircleChart,
-  Dialog,
-  DialogBody,
-  DialogFooter,
-  DialogHeader,
   DistributionBar,
   MultiLevelSelect,
   Legend,
