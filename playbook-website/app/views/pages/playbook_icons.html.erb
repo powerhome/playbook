@@ -11,77 +11,79 @@
   <% end %>
 
   <div class="content-wrapper">
-    <%= pb_rails("flex", props: { justify: "evenly", gap: "md" }) do %>
-      <%= pb_rails("flex", props: { gap: "md", max_width: "lg", orientation: "column"}) do %>
-        <%= pb_rails("title", props: { size: { xs: "3", sm: "2", md: "1", lg: "1", xl: "1" }, text: "Icons" }) %>
-        <%= pb_rails("flex", props: { classname: "description-default", orientation: "column" }) do %>
-          <%= pb_rails("body", props: {
-            padding_bottom: "sm",
-            text: "Icons are a core part of Playbook’s visual language. Our custom icon set is designed to support clear, consistent, and accessible interfaces. Use them to enhance navigation, reinforce meaning, and improve communication across all digital products."
-          }) %>
-          <%= pb_rails("link", props: {
-            href: "https://playbook.powerapp.cloud/kits/icon/react",
-            target: "child",
-            text: "To use them in your project, check out our Icon kit."
-          }) %>
-        <% end %>
-        <%= pb_rails("flex", props: { classname: "description-mobile", orientation: "column" }) do %>
-          <%= pb_rails("detail", props: {
-            color: "default",
-            padding_bottom: "xs",
-            text: "Icons are a core part of Playbook’s visual language. Our custom icon set is designed to support clear, consistent, and accessible interfaces. Use them to enhance navigation, reinforce meaning, and improve communication across all digital products."
-          }) %>
-          <%= pb_rails("detail") do %>
+    <%= pb_rails("flex", props: { gap: "md", justify: "evenly" }) do %>
+      <%= pb_rails("flex", props: { justify: "center", flex: "1" }) do %>
+        <%= pb_rails("flex", props: { gap: "md", max_width: "lg", orientation: "column"}) do %>
+          <%= pb_rails("title", props: { size: { xs: "3", sm: "2", md: "1", lg: "1", xl: "1" }, text: "Icons" }) %>
+          <%= pb_rails("flex", props: { classname: "description-default", orientation: "column" }) do %>
+            <%= pb_rails("body", props: {
+              padding_bottom: "sm",
+              text: "Icons are a core part of Playbook’s visual language. Our custom icon set is designed to support clear, consistent, and accessible interfaces. Use them to enhance navigation, reinforce meaning, and improve communication across all digital products."
+            }) %>
             <%= pb_rails("link", props: {
               href: "https://playbook.powerapp.cloud/kits/icon/react",
               target: "child",
-              text: "To use them in your project, check out our Icon kit.",
+              text: "To use them in your project, check out our Icon kit."
             }) %>
           <% end %>
-        <% end %>
-        <%= pb_rails("dropdown", props: {
-          options: @icon_categories,
-          selected_value: nil,
-          id: "icon-category-dropdown"
-        }) do %>
-          <%= pb_rails("dropdown/dropdown_trigger") do %>
-            <%= pb_rails("button", props: {
-              full_width: true,
-              icon: "sort",
-              icon_right: true,
-              id: "icon-category-trigger-button",
-              variant: "secondary",
-            }) do %>
-              <span id="icon-category-selected-label">Icon Categories</span>
+          <%= pb_rails("flex", props: { classname: "description-mobile", orientation: "column" }) do %>
+            <%= pb_rails("detail", props: {
+              color: "default",
+              padding_bottom: "xs",
+              text: "Icons are a core part of Playbook’s visual language. Our custom icon set is designed to support clear, consistent, and accessible interfaces. Use them to enhance navigation, reinforce meaning, and improve communication across all digital products."
+            }) %>
+            <%= pb_rails("detail") do %>
+              <%= pb_rails("link", props: {
+                href: "https://playbook.powerapp.cloud/kits/icon/react",
+                target: "child",
+                text: "To use them in your project, check out our Icon kit.",
+              }) %>
             <% end %>
           <% end %>
-          <%= pb_rails("dropdown/dropdown_container", props: { max_width: "xs" }) do %>
-            <% @icon_categories.each do |option| %>
-              <%= pb_rails("dropdown/dropdown_option", props: { option: option }) do %>
-                <%= pb_rails("body", props: { text: option[:label], size: "sm" }) %>
+          <%= pb_rails("dropdown", props: {
+            options: @icon_categories,
+            selected_value: nil,
+            id: "icon-category-dropdown"
+          }) do %>
+            <%= pb_rails("dropdown/dropdown_trigger") do %>
+              <%= pb_rails("button", props: {
+                full_width: true,
+                icon: "sort",
+                icon_right: true,
+                id: "icon-category-trigger-button",
+                variant: "secondary",
+              }) do %>
+                <span id="icon-category-selected-label">Icon Categories</span>
+              <% end %>
+            <% end %>
+            <%= pb_rails("dropdown/dropdown_container", props: { max_width: "xs" }) do %>
+              <% @icon_categories.each do |option| %>
+                <%= pb_rails("dropdown/dropdown_option", props: { option: option }) do %>
+                  <%= pb_rails("body", props: { text: option[:label], size: "sm" }) %>
+                <% end %>
               <% end %>
             <% end %>
           <% end %>
-        <% end %>
-        <% @icons_by_category.sort.each do |category, icons| %>
-          <%= pb_rails("flex", props: { align_self: "stretch", gap: "sm", orientation: "column"}) do %>
-            <%= pb_rails("caption", props: {
-              id: category.parameterize,
-              size: "lg",
-              text: category
-            }) %>
-            <%= pb_rails("layout", props: {
-              align_self: "stretch",
-              classname: "icon-grid",
-              layout: "collection"
-            }) do %>
-              <%= pb_rails("layout/body") do %>
-                <% icons.sort_by { |i| i["name"] }.each do |icon| %>
-                  <%= pb_rails("selectable_card_icon", props: {
-                    classname: "icon-card",
-                    icon: icon["name"],
-                    title_text: icon["name"]
-                  }) %>
+          <% @icons_by_category.sort.each do |category, icons| %>
+            <%= pb_rails("flex", props: { align_self: "stretch", gap: "sm", orientation: "column"}) do %>
+              <%= pb_rails("caption", props: {
+                id: category.parameterize,
+                size: "lg",
+                text: category
+              }) %>
+              <%= pb_rails("layout", props: {
+                align_self: "stretch",
+                classname: "icon-grid",
+                layout: "collection"
+              }) do %>
+                <%= pb_rails("layout/body") do %>
+                  <% icons.sort_by { |i| i["name"] }.each do |icon| %>
+                    <%= pb_rails("selectable_card_icon", props: {
+                      classname: "icon-card",
+                      icon: icon["name"],
+                      title_text: icon["name"]
+                    }) %>
+                  <% end %>
                 <% end %>
               <% end %>
             <% end %>
@@ -90,7 +92,7 @@
       <% end %>
 
       <%= pb_rails("section_separator", props: { align_self: "stretch", classname: "icon-categories-section-separator", orientation: "vertical" }) %>
-      <%= pb_rails("flex/flex_item", props: { flex: "1", classname: "icon-categories-sidebar" }) do %>
+      <%= pb_rails("flex/flex_item", props: { flex: "none", classname: "icon-categories-sidebar" }) do %>
         <%= pb_rails("caption", props: { text: "Icon Categories" }) %>
         <%= pb_rails("nav", props: { variant: "subtle" }) do %>
           <% @icon_categories.each do |category| %>
