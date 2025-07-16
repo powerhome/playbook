@@ -10,6 +10,7 @@ examples:
   - phone_number_input_clear_field: Clearing the Input Field
   - phone_number_input_access_input_element: Accessing the Input Element
   - phone_number_input_format: Format as You Type
+  - phone_number_input_strict_mode: Strict Mode
   - phone_number_input_country_search: Country Search
 
   rails:
@@ -20,5 +21,6 @@ examples:
   - phone_number_input_exclude_countries: Exclude Countries
   - phone_number_input_validation: Form Validation
   - phone_number_input_format: Format as You Type
+  - phone_number_input_strict_mode: Strict Mode
   - phone_number_input_hidden_inputs: Hidden Inputs
   - phone_number_input_country_search: Country Search

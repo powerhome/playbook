@@ -15,6 +15,7 @@ RSpec.describe Playbook::PbPhoneNumberInput do
   it { is_expected.to define_prop(:error).with_default("") }
   it { is_expected.to define_prop(:value).with_default("") }
   it { is_expected.to define_boolean_prop(:format_as_you_type).with_default(false) }
+  it { is_expected.to define_boolean_prop(:strict_mode).with_default(false) }
   it { is_expected.to define_boolean_prop(:country_search).with_default(false) }
 
   describe "#classname" do

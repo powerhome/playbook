@@ -38,6 +38,7 @@ type PhoneNumberInputProps = {
   required?: boolean,
   value?: string,
   formatAsYouType?: boolean,
+  strictMode?: boolean,
   countrySearch?: boolean,
 }
 
@@ -94,6 +95,7 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.Ref<unknown>
     preferredCountries = [],
     value = "",
     formatAsYouType = false,
+    strictMode = false,
     countrySearch = false,
   } = props
 
@@ -256,6 +258,7 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.Ref<unknown>
       countrySearch: countrySearch,
       fixDropdownWidth: false,
       formatAsYouType: formatAsYouType,
+      strictMode: strictMode,
       hiddenInput: hiddenInputs ? () => ({
         phone: `${name}_full`,
         country: `${name}_country_code`,
