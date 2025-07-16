@@ -1,3 +1,47 @@
+# 🧰 Your Icon Toolbox Just Got Bigger!
+
+##### July 15, 2025
+
+<img width="889" height="477" alt="release_image" src="https://github.com/user-attachments/assets/9464c495-ae6d-4f3e-9441-c45dd927bcff" />
+
+The new Playbook Icons page is officially live! 🎉 You can now explore all icons shipped directly from our internal playbook-icons repo — fully integrated and ready to use. The Icon kit supports both our custom icons and FontAwesome icons out of the box for full backward compatibility! Head over to the [new Icons page](https://playbook.powerapp.cloud/playbook_icons) to check them all out!
+
+[14.23.0](https://github.com/powerhome/playbook/tree/14.23.0) full list of changes:
+
+**Kit Enhancements:**
+
+- Phone Number Input Kit: Validation to Trigger Only on Typing [\#4857](https://github.com/powerhome/playbook/pull/4857) ([elisashapiro](https://github.com/elisashapiro))
+- Tooltip Kit: Add Use\_click\_to\_open Prop - Rails Only [\#4814](https://github.com/powerhome/playbook/pull/4814) ([elisashapiro](https://github.com/elisashapiro))
+- Advanced Table: Custom Header - React [\#4790](https://github.com/powerhome/playbook/pull/4790) ([nidaqg](https://github.com/nidaqg))
+- Advanced Table: Custom Sort - React [\#4767](https://github.com/powerhome/playbook/pull/4767) ([nidaqg](https://github.com/nidaqg))
+- Typeahead Kit: `preserve_search_input` - Rails [\#4791](https://github.com/powerhome/playbook/pull/4791) ([kangaree](https://github.com/kangaree))
+- Table Kit: Sticky\_left\_column and Sticky\_right\_column Depends on Id Attribute - React Only [\#4804](https://github.com/powerhome/playbook/pull/4804) ([skduncan](https://github.com/skduncan))
+
+**Fixed Bugs:**
+
+- Global Props: Truncate - Type Expects Numbers - Docs Show Strings [\#4833](https://github.com/powerhome/playbook/pull/4833) ([skduncan](https://github.com/skduncan))
+- Draggable Kit: Dragging Between Drag Containers to Not Break Page [\#4821](https://github.com/powerhome/playbook/pull/4821) ([nidaqg](https://github.com/nidaqg))
+- Badge Kit: Fixes for Bluriness on Some Monitors \(not Display or Browser Issue\) [\#4807](https://github.com/powerhome/playbook/pull/4807) ([skduncan](https://github.com/skduncan))
+- Icons: Fixes for Bluriness on Some Monitors \(not Display or Browser Issue\) [\#4787](https://github.com/powerhome/playbook/pull/4787) ([skduncan](https://github.com/skduncan))
+
+**Improvements:**
+
+- Pb Website: Advanced Table As Own Menu Item In Sidebar [\#4850](https://github.com/powerhome/playbook/pull/4850) ([nidaqg](https://github.com/nidaqg))
+- Bar Graph and Circle Chart: Additions to Description.md [\#4843](https://github.com/powerhome/playbook/pull/4843) ([nidaqg](https://github.com/nidaqg))
+- Playbook Website: Icon Page Responsiveness [\#4842](https://github.com/powerhome/playbook/pull/4842) ([elisashapiro](https://github.com/elisashapiro))
+- Advanced Table Kit: Add Spec Test to Rails Kit [\#4830](https://github.com/powerhome/playbook/pull/4830) ([skduncan](https://github.com/skduncan))
+- Highcharts - Circle Chart: Update All Doc Examples With Imported Styles - React Only [\#4822](https://github.com/powerhome/playbook/pull/4822) ([elisashapiro](https://github.com/elisashapiro))
+- Dependency Update/upgrade - @actions/github [\#4827](https://github.com/powerhome/playbook/pull/4827) ([elisashapiro](https://github.com/elisashapiro))
+- Remove Playbook Playground [\#4826](https://github.com/powerhome/playbook/pull/4826) ([kangaree](https://github.com/kangaree))
+- Highcharts - Bar Graph: Update All Doc Examples With Imported Styles - React Only [\#4780](https://github.com/powerhome/playbook/pull/4780) ([nickamantia](https://github.com/nickamantia))
+- Playbook Website: Add Icons to New Icon Page Dynamically [\#4778](https://github.com/powerhome/playbook/pull/4778) ([elisashapiro](https://github.com/elisashapiro))
+- Advanced Table: Add Rails Header Alignment Docs Examples [\#4786](https://github.com/powerhome/playbook/pull/4786) ([elisashapiro](https://github.com/elisashapiro))
+
+
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/v14.23.0-rc.3...14.23.0)
+
+
 # ⚒️ Click-to-Open Tooltips & Core Dependency Updates! 🤖
 ##### June 20, 2025
 
