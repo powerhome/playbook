@@ -139,20 +139,4 @@
       }
     }
   }
-
-  .hide_not_fullscreen {
-    display: none !important;
-  }
-
-  &:fullscreen {
-    overflow: auto;
-
-    .hide_not_fullscreen {
-      display: block !important;
-    }
-
-    .hide_fullscreen {
-      display: none !important;
-    }
-  }
 }

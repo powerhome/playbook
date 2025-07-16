@@ -1,6 +1,6 @@
 <% example_html = ERB.new(example).result %>
 
-<%= pb_rails("card", props: { classname: "pb--doc", padding: "none", dark: dark, id: "pb--doc-#{example_key}" }) do %>
+<%= pb_rails("card", props: { classname: "pb--doc", padding: "none", dark: dark }) do %>
   <% unless (type == "swift") %>
     <div class="pb--kit-example">
       <%= pb_rails("caption", props: { text: example_title, dark: dark }) %>
@@ -21,19 +21,13 @@
     <div id="code-wrapper">
       <div class="pb--codeControls">
         <ul>
-          <% if full_screen %>
-            <li>
-              <%= pb_rails("button", props: { id: "fullscreen-open-#{example_key}", icon: "expand", text: "Fullscreen", classname: "hide_fullscreen#{' dark' if dark}", variant: "link", size: "sm" }) %>
-              <%= pb_rails("button", props: { id: "fullscreen-close-#{example_key}", icon: "arrow-down-left-and-arrow-up-right-to-center", text: "Fullscreen", classname: "hide_not_fullscreen#{' dark' if dark}", variant: "link", size: "sm" }) %>
-            </li>
-          <% end %>
           <% hide_button = type == "rails" ? 'flex' : 'none' %>
             <li>
-            <%= pb_rails("button", props: { id:"copy-html-#{example_key}", icon: "copy", text: "Copy HTML", classname: "hide_fullscreen#{' dark' if dark}", variant: "link", size: "sm", display: hide_button }) %>
+            <%= pb_rails("button", props: { id:"copy-html-#{example_key}", icon: "copy", text: "Copy HTML", classname: dark ? "dark" : "", variant: "link", size: "sm", display: hide_button }) %>
             </li>
           <li>
-            <%= pb_rails("button", props: { icon: "code", id:"toggle-open-opened", classname: "hide_fullscreen#{' dark' if dark}", text: "Close Code", variant: "link", size: "sm", display: "none" }) %>
-            <%= pb_rails("button", props: { icon: "code", id:"toggle-open-closed", classname: "hide_fullscreen#{' dark' if dark}", text: "Show Code", variant: "link", size: "sm" }) %>
+            <%= pb_rails("button", props: { icon: "code", id:"toggle-open-opened", classname: dark ? "dark" : "", text: "Close Code", variant: "link", size: "sm", display: "none" }) %>
+            <%= pb_rails("button", props: { icon: "code", id:"toggle-open-closed", classname: dark ? "dark" : "", text: "Show Code", variant: "link", size: "sm" }) %>
           </li>
         </ul>
       </div>
@@ -81,20 +75,6 @@
       setTimeout(function() {
         fadeAwayDiv.classList.add('hide')
       }, 3001)
-    })
-  }
-
-  var fullscreenOpenButton = document.getElementById('<%= "fullscreen-open-#{example_key}" %>')
-  if (fullscreenOpenButton) {
-    fullscreenOpenButton.addEventListener('click', function() {
-      document.getElementById('<%= "pb--doc-#{example_key}" %>').requestFullscreen()
-    })
-  }
-
-  var fullscreenCloseButton = document.getElementById('<%= "fullscreen-close-#{example_key}" %>')
-  if (fullscreenCloseButton) {
-    fullscreenCloseButton.addEventListener('click', function() {
-      document.exitFullscreen()
     })
   }
 </script>
