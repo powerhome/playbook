@@ -50,7 +50,7 @@ export const mountPlaybookReactKits = () => {
     if (Component && !node._playbookMounted) {
       const props = rawProps ? JSON.parse(rawProps) : {}
 
-      ReactDOM.render(<Component {...props} />, node)
+      ReactDOM.render(React.createElement(Component, props), node)
       node._playbookMounted = true
     }
   })
@@ -66,17 +66,6 @@ export const unmountPlaybookReactKits = () => {
       node._playbookMounted = false
     }
   })
-}
-
-// ===== Mount on Turbo events =====
-document.addEventListener('turbo:load', mountPlaybookReactKits)
-document.addEventListener('turbo:frame-load', mountPlaybookReactKits)
-
-// ===== Mount on Turbolinks events =====
-if (typeof window.Turbolinks !== "undefined") {
-  document.addEventListener('turbolinks:load', mountPlaybookReactKits, { once: true })
-  document.addEventListener('turbolinks:render', mountPlaybookReactKits)
-  document.addEventListener('turbolinks:before-render', unmountPlaybookReactKits)
 }
 
 // ===== MutationObserver for dynamic content =====
