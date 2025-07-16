@@ -83,7 +83,7 @@
     "react-joyride": "^2.8.2",
     "react-modal": "^3.16.1",
     "react-popper": "^2.3.0",
-    "react-select": "5.8.0",
+    "react-select": "5.10.2",
     "react-trix": "0.10.1",
     "react-zoom-pan-pinch": "3.6.0",
     "rollup-plugin-copy": "^3.5.0",
