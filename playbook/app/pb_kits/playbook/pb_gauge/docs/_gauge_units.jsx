@@ -4,6 +4,8 @@ import Highcharts from "highcharts"
 import HighchartsReact from "highcharts-react-official"
 import HighchartsMore from "highcharts/highcharts-more"
 import SolidGauge from "highcharts/modules/solid-gauge"
+import colors from '../../tokens/exports/_colors.module.scss'
+import typography from '../../tokens/exports/_typography.module.scss'
 
 HighchartsMore(Highcharts);
 SolidGauge(Highcharts);
@@ -25,7 +27,7 @@ const baseOptions1 = {
       dataLabels: {
         format:
           `<span class="fix">{y:,f}</span>` +
-          `<span class="pb-gauge-suffix">GB</span>`,
+          `<span style="fill: ${colors.text_lt_light}; font-size: ${typography.text_larger};">GB</span>`,
       },
     },
   },
@@ -39,9 +41,9 @@ const baseOptions2 = {
     solidgauge: {
       dataLabels: {
         format:
-          `<span class="pb-gauge-prefix" y="28">$</span>` +
+          `<span y="28" style="fill: ${colors.text_lt_light}; font-size: ${typography.text_base};">$</span>` +
           `<span class="fix" y="38">{y:,f}</span>` +
-          `<span class="pb-gauge-suffix">k</span>`,
+          `<span style="fill: ${colors.text_lt_light}; font-size: ${typography.text_larger};">k</span>`,
       },
     },
   },

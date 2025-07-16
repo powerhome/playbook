@@ -4,6 +4,8 @@ import Highcharts from "highcharts"
 import HighchartsReact from "highcharts-react-official"
 import HighchartsMore from "highcharts/highcharts-more"
 import SolidGauge from "highcharts/modules/solid-gauge"
+import colors from '../../tokens/exports/_colors.module.scss'
+import typography from '../../tokens/exports/_typography.module.scss'
 
 HighchartsMore(Highcharts);
 SolidGauge(Highcharts);
@@ -26,7 +28,7 @@ const GaugeHeight = () => {
                 dataLabels: {
                   format:
                     `<span class="fix">{y:,f}</span>` +
-                    `<span class="pb-gauge-suffix">px</span>`,
+                    `<span style="fill: ${colors.text_lt_light}; font-size: ${typography.text_larger};">px</span>`,
                 },
               },
             },
@@ -47,7 +49,7 @@ const GaugeHeight = () => {
                 dataLabels: {
                   format:
                     `<span class="fix">{y:,f}</span>` +
-                    `<span class="pb-gauge-suffix">%</span>`,
+                    `<span style="fill: ${colors.text_lt_light}; font-size: ${typography.text_larger};">%</span>`,
                 },
               },
             },
