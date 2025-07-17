@@ -23,6 +23,8 @@ module Playbook
                         default: "scroll"
       prop :selectable_rows, type: Playbook::Props::Boolean,
                              default: false
+      prop :row_styling, type: Playbook::Props::Array,
+                         default: []
 
       def flatten_columns(columns)
         columns.flat_map do |col|
@@ -66,7 +68,7 @@ module Playbook
                                   end
 
         # Additional class and data attributes needed for toggle logic
-        output << pb_rails("advanced_table/table_row", props: { id: id, row: row, column_definitions: leaf_columns, depth: current_depth, collapsible_trail: collapsible_trail, classname: additional_classes, table_data_attributes: current_data_attributes, responsive: responsive, loading: loading, selectable_rows: selectable_rows, row_id: row[:id], enable_toggle_expansion: enable_toggle_expansion })
+        output << pb_rails("advanced_table/table_row", props: { id: id, row: row, column_definitions: leaf_columns, depth: current_depth, collapsible_trail: collapsible_trail, classname: additional_classes, table_data_attributes: current_data_attributes, responsive: responsive, loading: loading, selectable_rows: selectable_rows, row_id: row[:id], enable_toggle_expansion: enable_toggle_expansion, row_styling: row_styling })
 
         if row[:children].present?
           row[:children].each do |child_row|
