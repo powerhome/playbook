@@ -1,0 +1,51 @@
+<%
+  column_definitions = [
+    {
+      accessor: "year",
+      label: "Year",
+      cellAccessors: ["quarter", "month", "day"],
+    },
+    {
+      accessor: "newEnrollments",
+      label: "New Enrollments",
+      header: ->(cell, label) {
+        capture do
+          pb_rails("flex", props: { align_items: "center", justify_content: "center" }) do
+            pb_rails("caption", props: { margin_right: "xs", text: "New Enrollments" }) +
+            pb_rails("icon", props: { id: "tooltip-interact", icon: "info", size: "xs" }) +
+            pb_rails("tooltip", props: {
+              trigger_element_id: "tooltip-interact",
+              tooltip_id: "example-custom-tooltip",
+              position: "top",
+              z_index: "10"
+            }) do
+              "Whoa. I'm a Tooltip"
+            end
+          end
+        end
+      }
+    },
+    {
+      accessor: "scheduledMeetings",
+      label: "Scheduled Meetings",
+    },
+    {
+      accessor: "attendanceRate",
+      label: "Attendance Rate",
+    },
+    {
+      accessor: "completedClasses",
+      label: "Completed Classes",
+    },
+    {
+      accessor: "classCompletionRate",
+      label: "Class Completion Rate",
+    },
+    {
+      accessor: "graduatedStudents",
+      label: "Graduated Students",
+    }
+  ]
+%>
+
+<%= pb_rails("advanced_table", props: { id: "custom_header_table", table_data: @table_data, column_definitions: column_definitions }) %>

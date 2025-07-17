@@ -10,6 +10,7 @@ examples:
   - advanced_table_beta_sort: Enable Sorting
   - advanced_table_responsive: Responsive Tables
   - advanced_table_custom_cell_rails: Custom Components for Cells
+  - advanced_table_with_custom_header_rails: Custom Header Cell
   - advanced_table_column_headers: Multi-Header Columns
   - advanced_table_column_headers_multiple: Multi-Header Columns (Multiple Levels)
   - advanced_table_no_subrows: Table with No Subrows or Expansion
