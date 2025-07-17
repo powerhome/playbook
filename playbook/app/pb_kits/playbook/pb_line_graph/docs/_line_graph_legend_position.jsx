@@ -1,5 +1,7 @@
 import React from 'react'
-import LineGraph from '../../pb_line_graph/_line_graph'
+import lineGraphTheme from '../lineGraphTheme'
+import Highcharts from "highcharts"
+import HighchartsReact from "highcharts-react-official"
 import Title from '../../pb_title/_title'
 
 const data = [{
@@ -19,66 +21,109 @@ const data = [{
   data: [12908, 5948, 8105, 11248, 8989, 11816, 18274, 18111],
 }]
 
-const LineGraphLegendPosition = (props) => (
-  <div>
-    <Title
-        paddingBottom="sm"
-        paddingTop="sm"
-        size={4}
-        tag="h4"
-        text="align | verticalAlign"
-    />
-    <LineGraph
-        align='right'
-        axisTitle="Number of Employees"
-        chartData={data}
-        id="legend-position-line"
-        legend
-        title="Alignment of Legend"
-        verticalAlign="top"
-        xAxisCategories={['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug']}
-        yAxisMin={0}
-        {...props}
-    />
-    <Title
-        paddingBottom="sm"
-        paddingTop="sm"
-        size={4}
-        tag="h4"
-        text="layout"
-    />
-    <LineGraph
-        axisTitle="Number of Employees"
-        chartData={data}
-        id="legend-position-line-1"
-        layout="vertical"
-        legend
-        title="Layout of Legend"
-        xAxisCategories={['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug']}
-        yAxisMin={0}
-        {...props}
-    />
-    <Title
-        paddingBottom="sm"
-        paddingTop="sm"
-        size={4}
-        tag="h4"
-        text="x | y"
-    />
-    <LineGraph
-        axisTitle="Number of Employees"
-        chartData={data}
-        id="legend-position-line-2"
-        layout="vertical"
-        legend
-        title="Offset of Legend"
-        x={100}
-        xAxisCategories={['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug']}
-        y={10}
-        yAxisMin={0}
-        {...props}
-    />
-  </div>
-)
+const categories = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug']
+
+const LineGraphLegendPosition = (props) => {
+  const chartOptionsFirst = {
+    title: { text: "Alignment of Legend" },
+    series: data,
+    xAxis: {
+      categories: categories,
+    },
+    yAxis: {
+      min: 0,
+      title: {
+        text: "Number of Employees",
+      },
+    },
+    legend: {
+      enabled: true,
+      align: 'right',
+      verticalAlign: 'top'
+    },
+  }
+
+  const chartOptionsSecond = {
+    title: { text: "Layout of Legend" },
+    series: data,
+    xAxis: {
+      categories: categories,
+    },
+    yAxis: {
+      min: 0,
+      title: {
+        text: "Number of Employees",
+      },
+    },
+    legend: {
+      enabled: true,
+      layout: 'vertical'
+    },
+  }
+
+  const chartOptionsThird = {
+    title: { text: "Offset of Legend" },
+    series: data,
+    xAxis: {
+      categories: categories,
+    },
+    yAxis: {
+      min: 0,
+      title: {
+        text: "Number of Employees",
+      },
+    },
+    legend: {
+      enabled: true,
+      layout: 'vertical',
+      x: 100,
+      y: 10
+    },
+  }
+
+  const optionsFirst = Highcharts.merge({}, lineGraphTheme, chartOptionsFirst)
+  const optionsSecond = Highcharts.merge({}, lineGraphTheme, chartOptionsSecond)
+  const optionsThird = Highcharts.merge({}, lineGraphTheme, chartOptionsThird)
+
+  return (
+    <div>
+      <Title
+          paddingY="sm"
+          size={4}
+          tag="h4"
+          text="align | verticalAlign"
+          {...props}
+      />
+      <HighchartsReact
+          highcharts={Highcharts}
+          options={optionsFirst}
+      />
+      
+      <Title
+          paddingY="sm"
+          size={4}
+          tag="h4"
+          text="layout"
+          {...props}
+      />
+      <HighchartsReact
+          highcharts={Highcharts}
+          options={optionsSecond}
+      />
+      
+      <Title
+          paddingY="sm"
+          size={4}
+          tag="h4"
+          text="x | y"
+          {...props}
+      />
+      <HighchartsReact
+          highcharts={Highcharts}
+          options={optionsThird}
+      />
+    </div>
+  )
+}
 
 export default LineGraphLegendPosition
