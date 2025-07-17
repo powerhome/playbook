@@ -101,7 +101,6 @@ export const TableHeaderCell = ({
     if (!header) return false;
   
     if (header.colSpan > 1 && header.column.parent !== undefined) return true;
-  
     const parent = header.column.parent;
   
     if (!parent) {

@@ -65,7 +65,7 @@ kits:
     enhanced_element_used: true
   - name: cell_behavior
     parent: advanced_table
-    kit_section: ["Custom Components for Cells", "Custom Header Cell", "Custom Header Cell with Multi-Header Columns", "Inline Cell Editing"]
+    kit_section: ["Custom Components for Cells", "Custom Header Cell", "Custom Header with Multiple Headers", "Inline Cell Editing"]
     platforms: *1
     status: stable
     icons_used: true

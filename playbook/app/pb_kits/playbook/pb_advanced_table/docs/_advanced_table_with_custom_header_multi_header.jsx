@@ -8,82 +8,90 @@ import MOCK_DATA from "./advanced_table_mock_data.json"
 
 const AdvancedTableWithCustomHeaderMultiHeader = (props) => {
 
-  const columnDefinitions = [
-        {
-          accessor: "year",
-          label: "Year",
-          id: "year",
-          cellAccessors: ["quarter", "month", "day"],
-        },
-        {
-          label: "Enrollment Data",
-          id: "enrollmentData",
-          header: () => (
-          <Flex alignItems="center" 
-              justifyContent="center"
+const columnDefinitions = [
+    {
+      accessor: "year",
+      label: "Year",
+      id: "year",
+      cellAccessors: ["quarter", "month", "day"],
+    },
+    {
+      label: "Enrollment Data",
+      id: "enrollmentData",
+      header: () => (
+        <Flex alignItems="center" 
+            justifyContent="center"
+        >
+          <Caption marginRight="xs">New Enrollments</Caption>
+          <Tooltip placement="top" 
+              text="Whoa. I'm a Tooltip" 
+              zIndex={10}
           >
-            <Caption marginRight="xs">Enrollment Data</Caption>
-            <Tooltip placement="top" 
-                text="Whoa. I'm a Tooltip" 
-                zIndex={10}
-            >
-              <Icon cursor="pointer" 
-                  icon="info"
-                  size="xs" 
-              />
-            </Tooltip>
-          </Flex>
-        ),
+            <Icon cursor="pointer" 
+                icon="info"
+                size="xs" 
+            />
+          </Tooltip>
+        </Flex>
+      ),
+      columns: [
+        {
+          label: "Enrollment Stats",
+          id: "enrollmentStats",
           columns: [
             {
-              label: "Enrollment Stats",
-              id: "enrollmentStats",
-              columns: [
-                {
-                  accessor: "newEnrollments",
-                  label: "New Enrollments",
-                  id: "newEnrollments",
-                  header: () => (<div>Testings</div>),
-                },
-
-              ],
+              accessor: "newEnrollments",
+              id: "newEnrollments",
+              label: "New Enrollments",
+            },
+            {
+              accessor: "scheduledMeetings",
+              id: "scheduledMeetings",
+              label: "Scheduled Meetings",
+            },
+          ],
+        },
+      ],
+    },
+    {
+      label: "Performance Data",
+      id: "performanceData",
+      columns: [
+        {
+          label: "Completion Metrics",
+          id: "completionMetrics",
+          columns: [
+            {
+              accessor: "completedClasses",
+              label: "Completed Classes",
+              id: "completedClasses",
+            },
+            {
+              accessor: "classCompletionRate",
+              label: "Class Completion Rate",
+              id: "classCompletionRate",
             },
           ],
         },
         {
-          label: "Performance Data",
-          id: "performanceData",
+          label: "Attendance",
+          id: "attendance",
           columns: [
             {
-              label: "Completion Metrics",
-              id: "completionMetrics",
-              columns: [
-                {
-                  accessor: "completedClasses",
-                  label: "Completed Classes",
-                  id: "completedClasses",
-                },
-                {
-                  accessor: "classCompletionRate",
-                  label: "Class Completion Rate",
-                  id: "classCompletionRate",
-                },
-              ],
+              accessor: "attendanceRate",
+              label: "Attendance Rate",
+              id: "attendanceRate",
             },
             {
-              label: "Attendance",
-              id: "attendance",
-              columns: [
-                {
-                  accessor: "attendanceRate",
-                  label: "Attendance Rate",
-                  id: "attendanceRate",
-                },
-              ],
+              accessor: "scheduledMeetings",
+              label: "Scheduled Meetings",
+              id: "scheduledMeetings",
             },
           ],
         },
-      ];
+      ],
+    },
+  ];
 
   return (
     <div>
