@@ -22,7 +22,7 @@ const columnDefinitions = [
         <Flex alignItems="center" 
             justifyContent="center"
         >
-          <Caption marginRight="xs">New Enrollments</Caption>
+          <Caption marginRight="xs">Enrollments Data</Caption>
           <Tooltip placement="top" 
               text="Whoa. I'm a Tooltip" 
               zIndex={10}
