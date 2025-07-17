@@ -25,6 +25,8 @@ module Playbook
                    default: ""
       prop :format_as_you_type, type: Playbook::Props::Boolean,
                                 default: false
+      prop :strict_mode, type: Playbook::Props::Boolean,
+                         default: false
       prop :hidden_inputs, type: Playbook::Props::Boolean,
                            default: false
       prop :country_search, type: Playbook::Props::Boolean,
@@ -41,6 +43,7 @@ module Playbook
           disabled: disabled,
           error: error,
           formatAsYouType: format_as_you_type,
+          strictMode: strict_mode,
           hiddenInputs: hidden_inputs,
           initialCountry: initial_country,
           label: label,
