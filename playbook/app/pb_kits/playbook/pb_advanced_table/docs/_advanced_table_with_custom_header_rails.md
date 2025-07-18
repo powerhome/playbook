@@ -1,0 +1,1 @@
+The optional `header` item can be used within `column_definitions` to render a custom header. This example shows an Icon and Tooltip being used but other kits can be used as well.

@@ -10,6 +10,7 @@ examples:
   - advanced_table_beta_sort: Enable Sorting
   - advanced_table_responsive: Responsive Tables
   - advanced_table_custom_cell_rails: Custom Components for Cells
+  - advanced_table_with_custom_header_rails: Custom Header Cell
   - advanced_table_column_headers: Multi-Header Columns
   - advanced_table_column_headers_multiple: Multi-Header Columns (Multiple Levels)
   - advanced_table_no_subrows: Table with No Subrows or Expansion
@@ -18,6 +19,7 @@ examples:
   - advanced_table_selectable_rows_actions_rails: Selectable Rows (With Actions)
   - advanced_table_selectable_rows_header_rails: Selectable Rows (No Actions Bar)
   - advanced_table_scrollbar_none: Advanced Table Scrollbar None
+  - advanced_table_row_styling: Row Styling
   - advanced_table_column_styling_rails: Column Styling
   - advanced_table_column_styling_column_headers_rails: Column Styling with Multiple Headers
   - advanced_table_column_border_color_rails: Column Group Border Color

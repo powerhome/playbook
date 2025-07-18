@@ -1,3 +1,10 @@
+<% 
+  row_style = object.row_styling.find { |style| style[:row_id].to_s == object.row_id.to_s } 
+  button_color = row_style&.[](:expand_button_color)
+  bg_color = row_style&.[](:background_color)
+  font_color = row_style&.[](:font_color)
+%>
+
 <%= pb_content_tag(:tr) do %>
     <% has_separate_checkbox = object.selectable_rows && object.enable_toggle_expansion == "none" %>
     <% if has_separate_checkbox %>
@@ -5,7 +12,7 @@
     <% end %>
     <% object.column_definitions.each_with_index do |column, index| %>
         <% next unless column[:accessor].present? %>
-        <%= pb_rails("table/table_cell", props: { classname:object.td_classname(column, index)}) do %>
+        <%= pb_rails("table/table_cell", props: {  html_options: { style: { "background-color": bg_color, color: font_color } }, classname:object.td_classname(column, index)}) do %>
             <%= pb_rails("flex", props:{ align: "center", justify: object.justify_for(column, index), classname: object.loading ? "loading-cell" : "" }) do %>
                 <% if collapsible_trail && index.zero? %>
                     <% (1..depth).each do |i| %>
@@ -28,7 +35,9 @@
                                 <button
                                     id="<%= "#{object.id}_#{object.row.object_id}" %>"
                                     class="gray-icon expand-toggle-icon"
-                                    data-advanced-table="true">
+                                    data-advanced-table="true"
+                                    style="color: <%= button_color %>"
+                                >
                                     <%= pb_rails("icon", props: { id: "advanced-table_open_icon", icon: "circle-play", cursor: "pointer" }) %>
                                     <%= pb_rails("icon", props: { id: "advanced-table_close_icon", icon: "circle-play-down", cursor: "pointer" }) %>
                                 </button>

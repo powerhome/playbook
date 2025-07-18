@@ -1,7 +1,7 @@
 ##### Prop
 
 `align` **Type**: String | **Values**: left | center | right (defaults to center)
-`verticalAlign` **Type**: String | **Values**: top | middle | bottom (defaults middle)
+`verticalAlign` **Type**: String | **Values**: top | middle | bottom (defaults to bottom)
 `layout` **Type**: String | **Values**: horizontal | vertical | proximate (defaults to horizontal)
 `x` **Type**: Number (defaults to 0)
 `y` **Type**: Number (defaults to 0)

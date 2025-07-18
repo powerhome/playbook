@@ -1,6 +1,7 @@
 import React from 'react'
-
-import LineGraph from '../_line_graph'
+import lineGraphTheme from '../lineGraphTheme'
+import Highcharts from "highcharts"
+import HighchartsReact from "highcharts-react-official"
 
 const data = [{
   name: 'Installation',
@@ -19,19 +20,33 @@ const data = [{
   data: [12908, 5948, 8105, 11248, 8989, 11816, 18274, 18111],
 }]
 
-const LineGraphDefault = (props) => (
-  <div>
-    <LineGraph
-        axisTitle="Number of Employees"
-        chartData={data}
-        id="line-default"
-        subTitle="Source: thesolarfoundation.com"
-        title="Solar Employment Growth by Sector, 2010-2016"
-        xAxisCategories={['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']}
-        yAxisMin={0}
-        {...props}
-    />
-  </div>
-)
+const categories = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+
+const chartOptions = {
+  series: data,
+  title: { text: "Solar Employment Growth by Sector, 2010-2016" },
+  subtitle: { text: "Source: thesolarfoundation.com" },
+  xAxis: {
+    categories: categories,
+  },
+  yAxis: {
+    title: {
+      text: "Number of Employees",
+    },
+  },
+}
+
+const LineGraphDefault = () => {
+  const options = Highcharts.merge({}, lineGraphTheme, chartOptions)
+
+  return(
+    <div>
+      <HighchartsReact
+          highcharts={Highcharts}
+          options={options}
+      />
+    </div>
+  )
+}
 
 export default LineGraphDefault

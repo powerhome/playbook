@@ -26,7 +26,11 @@
                 <% end %>
               <% end %>
             <% end %>
-            <%= cell[:label] %>
+            <% if object.has_header_renderer?(cell) %>
+              <%= raw(object.render_header(cell)) %>
+            <% else %>
+              <%= cell[:label] %>
+            <% end %>
           <% end %>
         <% end %>
       <% end %>

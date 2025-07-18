@@ -31,6 +31,8 @@ module Playbook
                      default: []
       prop :scroll_bar_none, type: Playbook::Props::Boolean,
                              default: false
+      prop :row_styling, type: Playbook::Props::Array,
+                         default: []
 
       def classname
         additional_classes = [
