@@ -33,7 +33,12 @@ module Playbook
                              default: false
 
       def classname
-        additional_classes = [responsive_classname, max_height_classname, hide_scroll_bar_class]
+        additional_classes = [
+          responsive_classname,
+          max_height_classname,
+          hide_scroll_bar_class,
+          hidden_action_bar_class,
+        ]
         additional_classes << "column-group-border-#{column_group_border_color}" if column_group_border_color != "none"
         generate_classname("pb_advanced_table", *additional_classes, separator: " ")
       end
@@ -48,6 +53,11 @@ module Playbook
 
       def hide_scroll_bar_class
         scroll_bar_none ? "advanced-table-hide-scrollbar " : ""
+      end
+
+      def hidden_action_bar_class
+        # Add hidden-action-bar class when action bar functionality is enabled but not currently visible
+        selectable_rows && !is_action_bar_visible ? "hidden-action-bar" : ""
       end
 
       def selected_rows
