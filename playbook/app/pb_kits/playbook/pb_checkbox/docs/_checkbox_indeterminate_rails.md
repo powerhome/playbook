@@ -1,1 +1,2 @@
 If you want to use indeterminate, "check/uncheck all" checkboxes, add `indeterminate_main: true` and an `id` to the main checkbox. Then, add an `indeterminate_parent` prop with the main checkbox's `id` to the children checkboxes.
+If you want to customize the main checkbox labels, set an array `indeterminate_main_labels` with "Check All" and "Uncheck All" labels.

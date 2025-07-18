@@ -23,7 +23,9 @@ export default class PbCheckbox extends PbEnhancedElement {
       mainCheckbox.checked = checkedCount > 0;
 
       // Determine the main checkbox label based on the number of checked checkboxes
-      const text = checkedCount === 0 ? 'Check All' : 'Uncheck All';
+      const checkAllLabel = mainCheckboxWrapper.dataset.pbCheckboxIndeterminateMainLabelCheck ?? 'Check All'
+      const uncheckAllLabel = mainCheckboxWrapper.dataset.pbCheckboxIndeterminateMainLabelUncheck ?? 'Uncheck All'
+      const text = checkedCount === 0 ? checkAllLabel : uncheckAllLabel;
 
       // Determine the icon class to add and remove based on the number of checked checkboxes
       const iconClassToAdd = checkedCount === 0 ? 'pb_checkbox_checkmark' : 'pb_checkbox_indeterminate';

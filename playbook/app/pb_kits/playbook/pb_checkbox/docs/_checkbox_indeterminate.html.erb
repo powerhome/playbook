@@ -9,10 +9,10 @@
     <tr>
       <th>
         <%= pb_rails("checkbox", props: {
-          text: "Uncheck All",
           value: "checkbox-value",
           name: "main-checkbox",
           indeterminate_main: true,
+          indeterminate_main_labels: ["Check All Ice Cream", "Uncheck All Ice Cream"],
           id: "indeterminate-checkbox"
         }) %>
       </th>
