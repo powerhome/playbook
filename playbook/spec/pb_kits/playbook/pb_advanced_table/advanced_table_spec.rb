@@ -115,7 +115,7 @@ RSpec.describe Playbook::PbAdvancedTable::AdvancedTable do
 
   describe "#hide_scroll_bar_class" do
     it "returns correct scroll bar class" do
-      expect(subject.new(scroll_bar_none: true).hide_scroll_bar_class).to eq "advanced-table-hide-scrollbar "
+      expect(subject.new(scroll_bar_none: true).hide_scroll_bar_class).to eq "advanced-table-hide-scrollbar"
       expect(subject.new(scroll_bar_none: false).hide_scroll_bar_class).to eq ""
     end
   end
