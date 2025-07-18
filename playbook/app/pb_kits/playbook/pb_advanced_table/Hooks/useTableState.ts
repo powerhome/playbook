@@ -83,11 +83,11 @@ export function useTableState({
   const buildColumns = useCallback((columnDefinitions: GenericObject[], isRoot = true): any[] => {
     return columnDefinitions?.map((column, index) => {
       const isFirstColumn = isRoot && index === 0;
-
       // Handle grouped columns
       if (column.columns && column.columns.length > 0) {
         return {
-          header: column.header || column.label || "",
+          header: column.header ?? column.label ?? "",
+          id: column.id ?? column.label ?? `group-${index}`,
           columns: buildColumns(column.columns, false),
         };
       }
