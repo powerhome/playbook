@@ -112,7 +112,7 @@ const TableActionBar: React.FC<TableActionBarProps> = ({
             paddingBottom="xs"
             text={node.label}
         />
-        <Flex flexDirection="column" 
+        <Flex flexDirection="column"
             paddingLeft="lg"
         >
           {node?.children?.map((child) =>
@@ -141,8 +141,8 @@ const TableActionBar: React.FC<TableActionBarProps> = ({
     setShowPopover(!shouldClose)
 
   const popoverReference = (
-    <Tooltip 
-        placement="top" 
+    <Tooltip
+        placement="top"
         text="Column Configuration"
     >
       <div onClick={togglePopover}>
@@ -170,8 +170,8 @@ const TableActionBar: React.FC<TableActionBarProps> = ({
       >
         {type === "row-selection" ? (
           <>
-            <Caption color="light" 
-                paddingLeft="xs" 
+            <Caption color="light"
+                paddingLeft="xs"
                 size="xs"
             >
               {selectedCount} Selected
@@ -188,15 +188,15 @@ const TableActionBar: React.FC<TableActionBarProps> = ({
               zIndex={3}
           >
             <>
-              <Caption 
-                  paddingY="sm" 
+              <Caption
+                  paddingY="sm"
                   text="Columns Config"
-                  textAlign="center" 
+                  textAlign="center"
               />
               <SectionSeparator paddingBottom="xs" />
               {tree.map((node: VisibilityNode) => (
-                <Flex cursor="pointer" 
-                    flexDirection="column" 
+                <Flex cursor="pointer"
+                    flexDirection="column"
                     key={node.id}
                     paddingX="xs"
                 >

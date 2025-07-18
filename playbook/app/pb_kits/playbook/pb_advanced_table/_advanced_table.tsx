@@ -218,10 +218,10 @@ const AdvancedTable = (props: AdvancedTableProps) => {
     )
 
     return (
-      <Card 
+      <Card
           borderNone
           borderRadius="none"
-          className="advanced-table-fullscreen-header" 
+          className="advanced-table-fullscreen-header"
           {...props}
       >
           <Flex justify="end">
@@ -250,6 +250,10 @@ const AdvancedTable = (props: AdvancedTableProps) => {
   const ariaProps = buildAriaProps(aria);
   const dataProps = buildDataProps(data);
   const htmlProps = buildHtmlProps(htmlOptions);
+
+  // Visibility flag for action bar
+  const isActionBarVisible = (selectableRows && showActionsBar && selectedRowsLength > 0) || columnVisibilityControl;
+
   const classes = classnames(
     buildCss("pb_advanced_table"),
     `advanced-table-responsive-${responsive}`,
@@ -257,6 +261,8 @@ const AdvancedTable = (props: AdvancedTableProps) => {
     {
       'advanced-table-fullscreen': isFullscreen,
       'advanced-table-allow-fullscreen': allowFullScreen,
+      // Add the hidden-action-bar class when action bar functionality exists but is not visible
+      'hidden-action-bar': (selectableRows || columnVisibilityControl) && !isActionBarVisible,
     },
     {'advanced-table-sticky-left-columns': stickyLeftColumn && stickyLeftColumn.length > 0},
     columnGroupBorderColor ? `column-group-border-${columnGroupBorderColor}` : '',
@@ -269,9 +275,6 @@ const AdvancedTable = (props: AdvancedTableProps) => {
   const tableWrapperStyle = virtualizedRows
     ? getVirtualizedContainerStyles(maxHeight)
     : {};
-
-  // Visibility flag for action bar
-  const isActionBarVisible = (selectableRows && showActionsBar && selectedRowsLength > 0) || columnVisibilityControl;
 
   // The actual Main <Table /> element
   const tableElement = (
@@ -288,7 +291,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
       ) : (
         <>
           <TableHeader />
-          <TableBody   
+          <TableBody
               isFetching={isFetching}
           />
         </>

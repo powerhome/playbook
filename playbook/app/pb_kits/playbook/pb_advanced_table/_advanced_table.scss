@@ -124,13 +124,65 @@
       -ms-overflow-style: none !important;
       scrollbar-width: none !important;
   }
-  
+
+  // When action bar is hidden, ensure proper border radius for header corners
+  &.hidden-action-bar {
+    .pb_advanced_table_header {
+      > tr:first-child {
+        th:first-child {
+          border-top-left-radius: 4px !important;
+        }
+        th:last-child {
+          border-top-right-radius: 4px !important;
+        }
+      }
+    }
+
+    // Also handle the case when there are multiple header rows
+    .pb_advanced_table_header {
+      > tr:first-child {
+        th:first-child,
+        .table-header-cells:first-child,
+        .table-header-cells-custom:first-child {
+          border-top-left-radius: 4px !important;
+        }
+        th:last-child,
+        .table-header-cells:last-child,
+        .table-header-cells-custom:last-child {
+          border-top-right-radius: 4px !important;
+        }
+      }
+    }
+  }
+
+  // When action bar is shown, remove border radius from header
+  .row-selection-actions-card.is-visible ~ * .pb_advanced_table_header,
+  .row-selection-actions-card.show-action-card ~ * .pb_advanced_table_header {
+    > tr:first-child {
+      th:first-child,
+      th:last-child,
+      .table-header-cells:first-child,
+      .table-header-cells:last-child,
+      .table-header-cells-custom:first-child,
+      .table-header-cells-custom:last-child {
+        border-top-left-radius: 0 !important;
+        border-top-right-radius: 0 !important;
+      }
+    }
+  }
+
 
   .row-selection-actions-card {
     border-bottom-right-radius: 0px !important;
     border-bottom-left-radius: 0px !important;
     border-bottom-color: transparent;
     transition: height 300ms ease;
+
+    &.is-visible,
+    &.show-action-card {
+      border-top-left-radius: 4px !important;
+      border-top-right-radius: 4px !important;
+    }
   }
   .table-header-cells:first-child {
     min-width: 180px;
