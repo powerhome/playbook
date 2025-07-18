@@ -48,9 +48,6 @@
     
         <%= pb_rails("flex/flex_item") do %>
           <%= pb_rails("title", props: { dark: true, tag: "h4", text: "Connect", size: 4, margin_bottom: "md" }) %>
-          <a href="https://dribbble.com/powerhrg">
-            <%= pb_rails("body", props: { text: "Dribbble", dark: true, color: "light", margin_bottom: "md", hover: {color: "text_dk_default"} }) %>
-          </a>
           <a href="https://github.com/powerhome/playbook">
             <%= pb_rails("body", props: { text: "Github", dark: true, color: "light", margin_bottom: "md", hover: {color: "text_dk_default"} }) %>
           </a>
@@ -62,7 +59,7 @@
     <% end %>
 
     <div class="copyright-tag">
-      <%= pb_rails("caption", props: { text: "© 2023-24, ALL RIGHTS RESERVED", color: "lighter", dark: true }) %>
+      <%= pb_rails("caption", props: { text: "© #{Date.current.year}-#{(Date.current.year + 1).to_s.last(2)}, ALL RIGHTS RESERVED", color: "lighter", dark: true }) %>
     </div>
   </div>
 </div>

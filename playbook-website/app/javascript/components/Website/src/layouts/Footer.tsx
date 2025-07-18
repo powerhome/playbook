@@ -114,15 +114,6 @@ const Footer = () => {
             </FlexItem>
             <FlexItem>
               <Title dark tag='h4' text='Connect' size={4} marginBottom='md' />
-              <a href='https://dribbble.com/powerhrg'>
-                <Body
-                  text='Dribbble'
-                  dark
-                  color='light'
-                  marginBottom='md'
-                  hover={{ color: "text_dk_default" }}
-                />
-              </a>
               <a href='https://github.com/powerhome/playbook'>
                 <Body
                   text='Github'
@@ -145,7 +136,7 @@ const Footer = () => {
           </Flex>
         </Flex>
         <div className='copyright-tag'>
-          <Caption text='© 2023-24, ALL RIGHTS RESERVED' color='lighter' dark />
+          <Caption text={`© ${new Date().getFullYear()}-${(new Date().getFullYear() + 1).toString().slice(-2)}, ALL RIGHTS RESERVED`} color='lighter' dark />
         </div>
       </div>
     </div>
