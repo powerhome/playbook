@@ -52,7 +52,7 @@ module Playbook
       end
 
       def hide_scroll_bar_class
-        scroll_bar_none ? "advanced-table-hide-scrollbar " : ""
+        scroll_bar_none ? "advanced-table-hide-scrollbar" : ""
       end
 
       def hidden_action_bar_class
