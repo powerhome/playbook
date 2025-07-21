@@ -20,7 +20,7 @@ interface CustomCellProps {
   customRenderer?: (row: Row<GenericObject>, value: string | undefined) => React.ReactNode
   selectableRows?: boolean
   customStyle?: GenericObject
-}
+} 
 
 export const CustomCell = ({
   getValue,
@@ -35,7 +35,7 @@ export const CustomCell = ({
 
   const handleOnExpand = (row: Row<GenericObject>) => {
     onRowToggleClick && onRowToggleClick(row);
-
+    
     if (!expandedControl) {
       setExpanded({ ...expanded, [row.id]: !row.getIsExpanded() });
     }
@@ -46,8 +46,8 @@ export const CustomCell = ({
 
   return (
     <div style={{ paddingLeft: `${row.depth * 1.25}em`}}>
-      <Flex
-          alignItems="center"
+      <Flex 
+          alignItems="center" 
           columnGap="xs"
           justify="start"
           orientation="row"
@@ -71,11 +71,12 @@ export const CustomCell = ({
           >
             {row.getIsExpanded() ? (
               <Icon cursor="pointer"
-                  icon="circle-play-down"
+                  icon="circle-play"
+                  rotation={90}
               />
             ) : (
               <Icon cursor="pointer"
-                  icon="circle-play"
+                  icon="circle-play"    
                />
             )}
           </button>
