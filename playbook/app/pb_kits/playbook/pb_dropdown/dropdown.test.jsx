@@ -370,3 +370,27 @@ test("defaultValue works with multiSelect", () => {
     const firstOpt = options[0].label
     expect(option2[0]).not.toHaveTextContent(firstOpt)
   })
+
+test("applies activeStyle backgroundColor and fontColor when selected", () => {
+    render(
+      <Dropdown
+          activeStyle={{
+            backgroundColor: "bg_light",
+            fontColor: "primary",
+          }}
+          data={{ testid: testId }}
+          options={options}
+      />
+    )
+  
+    const kit = screen.getByTestId(testId)
+    const option = kit.querySelectorAll(".pb_dropdown_option_list")[1]
+  
+    fireEvent.click(option)
+  
+    const selected = kit.querySelector(".pb_dropdown_option_selected")
+
+    expect(selected).toBeInTheDocument()
+    expect(selected).toHaveClass("bg-bg_light")
+    expect(selected).toHaveClass("font-primary")
+  })

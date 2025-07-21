@@ -8,6 +8,7 @@
 @import "../pb_textarea/textarea_mixin";
 
 @import "./scss_partials/dropdown_animation";
+@import "dropdown_mixin";
 
 [class*="pb_dropdown"] {
   .dropdown_wrapper {
@@ -99,8 +100,21 @@
             color: $white !important;
           }
           &:hover {
-            background-color: $product_1_background !important;
+            background-color: $product_1_background;
           }
+ 
+          // activeStyle font color map
+          @each $name, $color in $font-colors {
+            &.font-#{$name} {
+              @include apply-font-color($color);
+            }
+          }
+          // activeStyle background color map (no difference between selected and selected+hover custom colors)
+          @each $name, $bg in $background-colors {
+            &.bg-#{$name} {
+              background-color: $bg;
+            }
+          }     
         }
       }
 
