@@ -18,6 +18,7 @@ const DropdownCustomRadioOptions = (props) => {
   return (
   <div>
       <Dropdown
+          activeStyle={{ backgroundColor: "bg_light", fontColor: "text_lt_default" }}
           label="Select Item"
           onSelect={(selectedItem) => setSelectedValue(selectedItem?.value)}
           options={options}
