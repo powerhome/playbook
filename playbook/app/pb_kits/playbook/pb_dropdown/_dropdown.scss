@@ -99,6 +99,7 @@
           [class^="pb_title_kit"], a {
             color: $white !important;
           }
+          border-bottom: 1px solid $border_light;
           &:hover {
             background-color: $product_1_background;
           }
@@ -281,6 +282,7 @@
         }
         &[class*="selected"] {
           background-color: $primary;
+          border-bottom: rgba($white, 0.15);
         }
       }
     }
