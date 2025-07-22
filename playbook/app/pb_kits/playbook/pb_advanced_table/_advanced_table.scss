@@ -541,6 +541,101 @@
     }
   }
 
+  // Ensure vertical borders work with non-container tables
+  .pb_table:not(.table-card) {
+    &.vertical-border {
+      // Sticky header with vertical borders
+      &.sticky-header {
+        thead th:not(:last-child) {
+          border-right: 1px solid $border_light !important;
+        }
+      }
+
+      // Regular table cells with vertical borders
+      td:not(:last-child),
+      th:not(:last-child),
+      .pb_table_td:not(:last-child),
+      .pb_table_th:not(:last-child) {
+        border-right: 1px solid $border_light !important;
+      }
+    }
+  }
+
+  // Pinned rows should maintain vertical borders regardless of container prop
+  .pinned-row {
+    position: sticky !important;
+    z-index: 2 !important;
+
+    &.pb_table_tr,
+    tr {
+      // Apply right border to ALL cells including last one when verticalBorder is true
+      td,
+      .pb_table_td {
+        border-right: 1px solid var(--column-border-color, $border_light) !important;
+      }
+    }
+  }
+
+  // Specific fixes for vertical borders with sticky elements
+  .pb_table.vertical-border {
+
+    // Sticky header - apply borders to ALL cells including last
+    &.sticky-header {
+      thead th {
+        border-right: 1px solid $border_light !important;
+        border-left: none !important;
+        border-top: none !important;
+      }
+    }
+
+    // Regular pinned rows
+    .pinned-row {
+      td,
+      .pb_table_td {
+        border-right: 1px solid var(--column-border-color, $border_light) !important;
+        // Ensure no unwanted borders
+        border-left: none !important;
+        border-top: none !important;
+      }
+    }
+
+    // Ensure non-container tables don't get unwanted borders
+    &:not(.table-card) {
+      thead th,
+      td,
+      .pb_table_td {
+        border-left: none !important;
+        border-top: none !important;
+      }
+    }
+  }
+
+  // Firefox-specific
+  @-moz-document url-prefix() {
+    .pb_table.vertical-border {
+
+      &.sticky-header {
+        thead th {
+          border: none !important;
+          // Use box-shadow for both right border AND bottom border
+          box-shadow:
+            inset -1px 0 0 0 $border_light,     // Right border
+            inset 0 -1px 0 0 $border_light !important;  // Bottom border
+        }
+      }
+
+      .pinned-row {
+        td,
+        .pb_table_td {
+          border-right: none !important;
+          border-left: none !important;
+          border-top: none !important;
+          box-shadow: inset -1px 0 0 0 var(--column-border-color, $border_light) !important;
+        }
+      }
+    }
+  }
+
   @include chrome_styles($border-color);
 
   tr:hover {
@@ -718,6 +813,81 @@
     .pb_table_td:first-child,
     .checkbox-cell.checkbox-cell-header:first-child {
       box-shadow: 1px 0px 0px 0px var(--column-border-color) !important;
+    }
+
+    // Dark mode adjustments for non-container tables
+    .pb_table:not(.table-card) {
+      &.vertical-border {
+        &.sticky-header {
+          thead th:not(:last-child) {
+            border-right: 1px solid $border_dark !important;
+          }
+        }
+
+        td:not(:last-child),
+        th:not(:last-child),
+        .pb_table_td:not(:last-child),
+        .pb_table_th:not(:last-child) {
+          border-right: 1px solid $border_dark !important;
+        }
+      }
+    }
+
+    // Dark mode pinned rows
+    .pinned-row {
+      &.pb_table_tr,
+      tr {
+        td,
+        .pb_table_td {
+          border-right: 1px solid var(--column-border-color, $border_dark) !important;
+        }
+      }
+    }
+
+    // Dark mode browser-specific fixes
+    .pb_table.vertical-border {
+      &.sticky-header {
+        thead th {
+          border-right: 1px solid $border_dark !important;
+          border-left: none !important;
+          border-top: none !important;
+        }
+      }
+
+      .pinned-row {
+        td,
+        .pb_table_td {
+          border-right: 1px solid var(--column-border-color, $border_dark) !important;
+          border-left: none !important;
+          border-top: none !important;
+        }
+      }
+    }
+
+    // Dark mode Firefox
+    @-moz-document url-prefix() {
+      .pb_table.vertical-border {
+
+        &.sticky-header {
+          thead th {
+            border: none !important;
+            // Use box-shadow for both right border AND bottom border
+            box-shadow:
+              inset -1px 0 0 0 $border_dark,     // Right border
+              inset 0 -1px 0 0 $border_dark !important;  // Bottom border
+          }
+        }
+
+        .pinned-row {
+          td,
+          .pb_table_td {
+            border-right: none !important;
+            border-left: none !important;
+            border-top: none !important;
+            box-shadow: inset -1px 0 0 0 var(--column-border-color, $border_dark) !important;
+          }
+        }
+      }
     }
 
     // Apply border colors in dark mode
