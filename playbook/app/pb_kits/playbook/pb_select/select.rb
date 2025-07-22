@@ -24,7 +24,9 @@ module Playbook
       prop :validation_message, type: Playbook::Props::String, default: ""
 
       def classnames
-        classname + inline_class + compact_class + show_arrow_class
+        ([classname] + [inline_class, compact_class, show_arrow_class])
+          .reject(&:empty?)
+          .join(" ")
       end
 
       def all_attributes
@@ -44,7 +46,7 @@ module Playbook
       end
 
       def inline_class
-        inline ? " inline " : " "
+        inline ? "inline" : ""
       end
 
       def compact_class
