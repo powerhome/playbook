@@ -541,7 +541,7 @@
     }
   }
 
-  // Ensure vertical borders work with non-container tables
+  // NEW: Ensure vertical borders work with non-container tables
   .pb_table:not(.table-card) {
     &.vertical-border {
       // Sticky header with vertical borders
@@ -561,11 +561,11 @@
     }
   }
 
-  // Pinned rows should maintain vertical borders regardless of container prop
+  // NEW: Pinned rows should maintain vertical borders regardless of container prop
   .pinned-row {
     position: sticky !important;
     z-index: 2 !important;
-
+    
     &.pb_table_tr,
     tr {
       // Apply right border to ALL cells including last one when verticalBorder is true
@@ -578,19 +578,20 @@
 
   // Specific fixes for vertical borders with sticky elements
   .pb_table.vertical-border {
-
+    
     // Sticky header - apply borders to ALL cells including last
     &.sticky-header {
       thead th {
         border-right: 1px solid $border_light !important;
+        // Ensure no unwanted borders
         border-left: none !important;
         border-top: none !important;
       }
     }
 
-    // Regular pinned rows
+    // Regular pinned rows - apply borders to ALL cells including last
     .pinned-row {
-      td,
+      td, 
       .pb_table_td {
         border-right: 1px solid var(--column-border-color, $border_light) !important;
         // Ensure no unwanted borders
@@ -610,28 +611,47 @@
     }
   }
 
-  // Firefox-specific
+  // Firefox-specific fixes - use outline for better rendering
   @-moz-document url-prefix() {
     .pb_table.vertical-border {
-
+      
       &.sticky-header {
         thead th {
+          // Reset all borders
           border: none !important;
           // Use box-shadow for both right border AND bottom border
-          box-shadow:
+          box-shadow: 
             inset -1px 0 0 0 $border_light,     // Right border
             inset 0 -1px 0 0 $border_light !important;  // Bottom border
         }
       }
-
+      
       .pinned-row {
-        td,
+        td, 
         .pb_table_td {
+          // Reset all borders
+          border: none !important;
+          // Use box-shadow for right border on ALL cells including last
+          box-shadow: inset -1px 0 0 0 var(--column-border-color, $border_light) !important;
+        }
+      }
+
+      // Override regular table cells to use consistent border method
+      &:not(.table-card) {
+        td:not(.pinned-row td),
+        .pb_table_td:not(.pinned-row .pb_table_td) {
+          // Remove conflicting borders and use box-shadow instead
           border-right: none !important;
           border-left: none !important;
           border-top: none !important;
-          box-shadow: inset -1px 0 0 0 var(--column-border-color, $border_light) !important;
+          // Apply consistent right border using box-shadow
+          box-shadow: inset -1px 0 0 0 $border_light !important;
         }
+      }
+
+      // Override the original left border shadow from main CSS, but keep other shadows
+      .pb_table_td:nth-child(2) {
+        box-shadow: none !important;
       }
     }
   }
@@ -815,7 +835,7 @@
       box-shadow: 1px 0px 0px 0px var(--column-border-color) !important;
     }
 
-    // Dark mode adjustments for non-container tables
+    // NEW: Dark mode adjustments for non-container tables
     .pb_table:not(.table-card) {
       &.vertical-border {
         &.sticky-header {
@@ -833,10 +853,11 @@
       }
     }
 
-    // Dark mode pinned rows
+    // NEW: Dark mode pinned rows
     .pinned-row {
       &.pb_table_tr,
       tr {
+        // Apply right border to ALL cells including last one in dark mode
         td,
         .pb_table_td {
           border-right: 1px solid var(--column-border-color, $border_dark) !important;
@@ -855,7 +876,7 @@
       }
 
       .pinned-row {
-        td,
+        td, 
         .pb_table_td {
           border-right: 1px solid var(--column-border-color, $border_dark) !important;
           border-left: none !important;
@@ -864,28 +885,47 @@
       }
     }
 
-    // Dark mode Firefox
+    // Dark mode Firefox fixes
     @-moz-document url-prefix() {
       .pb_table.vertical-border {
-
+        
         &.sticky-header {
           thead th {
+            // Reset all borders
             border: none !important;
             // Use box-shadow for both right border AND bottom border
-            box-shadow:
+            box-shadow: 
               inset -1px 0 0 0 $border_dark,     // Right border
               inset 0 -1px 0 0 $border_dark !important;  // Bottom border
           }
         }
-
+        
         .pinned-row {
-          td,
+          td, 
           .pb_table_td {
+            // Reset all borders
+            border: none !important;
+            // Use box-shadow for right border on ALL cells including last
+            box-shadow: inset -1px 0 0 0 var(--column-border-color, $border_dark) !important;
+          }
+        }
+
+        // Override regular table cells to use consistent border method in dark mode
+        &:not(.table-card) {
+          td:not(.pinned-row td),
+          .pb_table_td:not(.pinned-row .pb_table_td) {
+            // Remove conflicting borders and use box-shadow instead
             border-right: none !important;
             border-left: none !important;
             border-top: none !important;
-            box-shadow: inset -1px 0 0 0 var(--column-border-color, $border_dark) !important;
+            // Apply consistent right border using box-shadow
+            box-shadow: inset -1px 0 0 0 $border_dark !important;
           }
+        }
+
+        // Override the original left border shadow from main CSS, but keep other shadows
+        .pb_table_td:nth-child(2) {
+          box-shadow: none !important;
         }
       }
     }
