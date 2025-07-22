@@ -1,1 +1,3 @@
 The `range` prop determines how many pages to display in the Pagination component. Regardless of this value, the first two and last two pages are always visible to facilitate navigation to the beginning and end of the pagination. If these always-visible pages fall within the specified range, they are included in the display. If they fall outside the range, the pagination will show additional pages up to the number defined by the `range` prop.
+
+Note: If the `total` pages prop is 0 or 1, the Pagination component will not be displayed, as there aren't multiple pages to navigate.

@@ -134,6 +134,10 @@ const Pagination = ( props: PaginationProps) => {
     className
   )
 
+  if (total <= 1) {
+    return null;
+  }
+
   return (
     <div 
         {...ariaProps}
