@@ -116,6 +116,5 @@ export { default as Tooltip } from '../pb_kits/playbook/pb_tooltip/_tooltip'
 export { default as Typeahead } from '../pb_kits/playbook/pb_typeahead/_typeahead'
 export { default as User } from '../pb_kits/playbook/pb_user/_user'
 export { default as UserBadge } from '../pb_kits/playbook/pb_user_badge/_user_badge'
-export { default as Walkthrough } from '../pb_kits/playbook/pb_walkthrough/_walkthrough'
 export { default as WeekdayStacked } from '../pb_kits/playbook/pb_weekday_stacked/_weekday_stacked'
 // ^^^ React Component JSX Imports from the React Kits ^^^
