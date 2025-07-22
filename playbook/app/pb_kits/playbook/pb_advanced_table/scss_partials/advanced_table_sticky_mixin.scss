@@ -79,8 +79,14 @@
     left: 0;
     border-radius: unset;
     z-index: 5;
-  }
 
+    // Add proper border radius when action bar is visible
+    &.is-visible,
+    &.show-action-card {
+      border-top-left-radius: 4px !important;
+      border-top-right-radius: 4px !important;
+    }
+  }
   .checkbox-cell {
     display: table-cell !important;
   }
