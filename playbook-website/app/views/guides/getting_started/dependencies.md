@@ -57,7 +57,6 @@ These kits use dependencies that are bundled with them; no additional installati
 | **Rich Text Editor**<br>(Trix Editor) | [Rich Text Editor](https://playbook.powerapp.cloud/kits/rich_text_editor/react) | [trix](https://www.npmjs.com/package/trix),<br>[react-trix](https://www.npmjs.com/package/react-trix) | trix,<br>react-trix                     |
 | **Tooltip**            | [Tooltip](https://playbook.powerapp.cloud/kits/tooltip/react)               | [@floating-ui/react](https://www.npmjs.com/package/@floating-ui/react)                            | @floating-ui/react                      |
 | **Typeahead**          | [Typeahead](https://playbook.powerapp.cloud/kits/typeahead/react)           | [react-select](https://www.npmjs.com/package/react-select)| react-select
-| **Walkthrough**        | [Walkthrough](https://playbook.powerapp.cloud/kits/walkthrough/react)       | [react-joyride](https://www.npmjs.com/package/react-joyride)                                      | react-joyride                           |
 
 ## Notes
 **Rich Text Editor**: This kit supports two different editors:
