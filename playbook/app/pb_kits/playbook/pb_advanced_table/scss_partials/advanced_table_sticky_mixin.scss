@@ -31,9 +31,8 @@
     border-radius: 0 0 0 0;
   }
 
+  // Only apply sticky positioning to specific elements
   .table-header-cells:first-child,
-  td:first-child,
-  .pb_table_td:first-child,
   .checkbox-cell.checkbox-cell-header:first-child,
   .table-header-cells.sticky-left,
   [class*="pinned-left"] {
@@ -44,11 +43,21 @@
     z-index: 2;
   }
 
+  // Only apply to pinned rows
+  .pinned-row {
+    td:first-child,
+    .pb_table_td:first-child {
+      background-color: $bg-main;
+      box-shadow: $shadow_deep !important;
+      position: sticky !important;
+      left: 0;
+      z-index: 3; // Higher z-index for pinned rows
+    }
+  }
+
   // For tables with verticalBorder, ensure sticky elements maintain their borders
   [class^="pb_table"].vertical-border {
     .table-header-cells:first-child,
-    td:first-child,
-    .pb_table_td:first-child,
     .checkbox-cell.checkbox-cell-header:first-child,
     .table-header-cells.sticky-left {
       // Maintain right border for vertical border styling when sticky
@@ -74,35 +83,47 @@
   }
 
   .bg-silver {
-    td:first-child,
+    .table-header-cells:first-child,
+    .pinned-row td:first-child,
+    .pinned-row .pb_table_td:first-child,
     .sticky-left {
       background-color: $bg-secondary;
     }
   }
 
   .bg-row-selection {
-    td:first-child,
+    .table-header-cells:first-child,
+    .pinned-row td:first-child,
+    .pinned-row .pb_table_td:first-child,
     .sticky-left {
       background-color: $highlight;
     }
   }
 
   .bg-white {
-    td:first-child,
+    .table-header-cells:first-child,
+    .pinned-row td:first-child,
+    .pinned-row .pb_table_td:first-child,
     .sticky-left {
       background-color: $bg-main;
     }
   }
 
   .virtualized-table-row {
-    &.bg-silver td:first-child {
-      background-color: $bg-secondary;
+    &.bg-silver {
+      &.pinned-row td:first-child {
+        background-color: $bg-secondary;
+      }
     }
-    &.bg-white td:first-child {
-      background-color: $bg-main;
+    &.bg-white {
+      &.pinned-row td:first-child {
+        background-color: $bg-main;
+      }
     }
-    &.bg-row-selection td:first-child {
-      background-color: $highlight;
+    &.bg-row-selection {
+      &.pinned-row td:first-child {
+        background-color: $highlight;
+      }
     }
   }
 
@@ -134,14 +155,17 @@
 
   &.dark {
     .bg-row-selection {
-      td:first-child,
+      .pinned-row td:first-child,
+      .pinned-row .pb_table_td:first-child,
       .sticky-left {
         background-color: $highlight-dark;
       }
     }
     .virtualized-table-row {
-      &.bg-row-selection td:first-child {
-        background-color: $highlight-dark;
+      &.bg-row-selection {
+        &.pinned-row td:first-child {
+          background-color: $highlight-dark;
+        }
       }
     }
   }
