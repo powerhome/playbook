@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   get "changelog/figma",          to: "pages#changelog_figma"
   get "drawer_page", to: "pages#drawer_page"
   get "changelog", to: redirect("changelog/web")
+  get "global_props", to: "pages#global_props"
 
   get "changelog/*path", to: redirect("changelog/web")
 

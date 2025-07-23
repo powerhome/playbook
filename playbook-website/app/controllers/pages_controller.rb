@@ -9,11 +9,11 @@ class PagesController < ApplicationController
   include ::ViteRails::TagHelpers
   rescue_from ActionView::MissingTemplate, :with => :page_not_found
 
-  before_action :set_js, only: %i[visual_guidelines]
+  before_action :set_js, only: %i[visual_guidelines global_props]
   before_action :set_kit, only: %i[kit_show_rails kit_show_react kit_show_swift]
   before_action :ensure_kit_type_exists, only: %i[kit_show_rails kit_show_react kit_show_swift]
   before_action :set_category, only: %i[kit_category_show_rails kit_category_show_react kit_category_show_swift]
-  before_action :delete_dark_mode_cookie, only: %i[home getting_started visual_guidelines]
+  before_action :delete_dark_mode_cookie, only: %i[home getting_started visual_guidelines global_props]
   before_action :set_show_sidebar, only: %i[kits kit_category_show_rails kit_category_show_react kit_category_show_swift kit_show_react kit_show_rails kit_show_swift rails_in_react kit_show_demo visual_guidelines home]
 
   def application_beta
@@ -85,6 +85,12 @@ class PagesController < ApplicationController
   end
 
   def changelog; end
+
+  def global_props
+    @page_title = "Global Props"
+    @show_sidebar = true
+    render layout: "global_props_page"
+  end
 
   def drawer_page
     render "pages/drawer_page", layout: "layouts/fullscreen"
@@ -271,7 +277,7 @@ private
   end
 
   def set_js
-    @application_js.concat ["visual_guidelines"]
+    @application_js.concat %w[visual_guidelines global_props]
   end
 
   def set_category
