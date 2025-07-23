@@ -1,0 +1,36 @@
+@import "../tokens/colors";
+
+// activeStyle fontColor sass map to go through text colors + set of custom colors
+$custom-font-colors: (
+  primary: $primary
+);
+
+$merged-font-colors: map-merge($text_colors, $custom-font-colors);
+
+$font-colors: ();
+
+@each $key, $val in $merged-font-colors {
+  $font-colors: map-merge($font-colors, ($key: $val));
+}
+
+@mixin apply-font-color($color) {
+  color: $color;
+
+  [class^="pb_body"],
+  [class^="pb_title_kit"],
+  a {
+    color: $color !important;
+  }
+}
+
+// activeStyle backgroundColor map (set of custom colors)
+$custom-background-colors: (
+  "bg_light": $bg_light,
+  "white": $white,
+);
+
+$background-colors: ();
+
+@each $key, $val in $custom-background-colors {
+  $background-colors: map-merge($background-colors, ($key: $val));
+}
