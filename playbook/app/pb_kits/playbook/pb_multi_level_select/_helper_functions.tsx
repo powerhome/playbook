@@ -143,7 +143,8 @@ export const recursiveCheckParent = (
 
 export const getExpandedItems = (
   treeData: { [key: string]: string }[],
-  selectedIds: string[]
+  selectedIds: string[],
+  showCheckedChildren
 ): any[] => {
   const expandedItems: any[] = [];
 
@@ -152,19 +153,27 @@ export const getExpandedItems = (
       const item = items[i];
       const itemAncestors = [...ancestors, item];
 
+      // If "expanded: true", expand items
       if (item.expanded) {
         expandedItems.push(item.id);
       }
-      if (selectedIds && selectedIds.length && selectedIds.includes(item.id)) {
-        expandedItems.push(...itemAncestors.map((ancestor) => ancestor.id));
-      }
-      if (Array.isArray(item.children)) {
-        const hasCheckedChildren = item.children.some(
-          (child: { [key: string]: string }) => child.checked
-        );
-        if (hasCheckedChildren) {
+
+      // Only expand based on selected items if showCheckedChildren is true
+      if (showCheckedChildren) {
+        if (selectedIds && selectedIds.length && selectedIds.includes(item.id)) {
           expandedItems.push(...itemAncestors.map((ancestor) => ancestor.id));
         }
+        if (Array.isArray(item.children)) {
+          const hasCheckedChildren = item.children.some(
+            (child: { [key: string]: string }) => child.checked
+          );
+          if (hasCheckedChildren) {
+            expandedItems.push(...itemAncestors.map((ancestor) => ancestor.id));
+          }
+        }
+      }
+
+      if (Array.isArray(item.children)) {
         traverse(item.children, itemAncestors);
       }
     }
