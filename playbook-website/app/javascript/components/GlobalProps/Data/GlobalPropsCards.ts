@@ -1,0 +1,128 @@
+export const GlobalPropsCards = [
+  {
+    title: "Cursor",
+    description:
+      "Sets the cursor style on hover, providing visual feedback for interactive elements.",
+    icon: "arrow-pointer",
+    link: "/global_props/cursor",
+  },
+  {
+    title: "Dark",
+    description:
+      "Applies a dark theme to elements, adjusting colors and contrast for a darker UI.",
+    icon: "moon",
+    link: "/global_props/dark",
+  },
+  {
+    title: "Display",
+    description:
+      "Manages element display type, toggling visibility and layout between block, inline, or none.",
+    icon: "eye",
+    link: "/global_props/display",
+  },
+  {
+    title: "Flex Box",
+    description:
+      "Implements flexible layouts, aligning and distributing space among items in a container.",
+    icon: "objects-column",
+    link: "/global_props/flex_box",
+  },
+  {
+    title: "Hover",
+    description:
+      "Changes element appearance on hover, allowing background, shadows, and scale adjustments.",
+    icon: "helicopter-symbol",
+    link: "/global_props/hover",
+  },
+  {
+    title: "HTML Options",
+    description:
+      "Customizes HTML attributes like id, class, and data attributes for better element control.",
+    icon: "code",
+    link: "/global_props/html_options",
+  },
+  {
+    title: "Line Height",
+    description:
+      "Adjusts the vertical spacing between lines of text, with options like “tight,” “normal,” or “loose.”",
+    icon: "line-height",
+    link: "/global_props/line_height",
+  },
+  {
+    title: "Margin",
+    description:
+      "Sets the outer spacing of elements, controlling distance between them and surrounding content.",
+    icon: "border-outer",
+    link: "/global_props/margin",
+  },
+  {
+    title: "Max Width",
+    description:
+      "Restricts the maximum width of an element, ensuring responsive and consistent layouts.",
+    icon: "arrows-left-right-to-line",
+    link: "/global_props/max_width",
+  },
+  {
+    title: "Min Width",
+    description:
+      "Defines the smallest width an element can have, maintaining layout consistency and flexibility.",
+    icon: "arrows-from-line",
+    link: "/global_props/min_width",
+  },
+  {
+    title: "Number Spacing",
+    description:
+      "Adjusts space between numerical characters for better readability and visual alignment.",
+    icon: "fa-solid fa-align-justify",
+    link: "/global_props/number_spacing",
+  },
+  {
+    title: "Overflow",
+    description:
+      "Controls content overflow, determining whether hidden, scroll, or visible within boundaries.",
+    icon: "arrow-down-up-across-line",
+    link: "/global_props/overflow",
+  },
+  {
+    title: "Padding",
+    description:
+      "Defines the inner spacing of an element, adjusting space between content and its border.",
+    icon: "border-inner",
+    link: "/global_props/padding",
+  },
+  {
+    title: "Position",
+    description:
+      "Sets element positioning relative to its parent or the viewport, including fixed and absolute.",
+    icon: "up-down-left-right",
+    link: "/global_props/position",
+  },
+  {
+    title: "Text Align",
+    description:
+      "Aligns text horizontally within a block, supporting left, right, center, or justified alignment.",
+    icon: "align-left",
+    link: "/global_props/text_align",
+  },
+  {
+    title: "Truncate",
+    description:
+      "Shortens text to fit within a container, adding ellipsis to indicate truncated content.",
+    icon: "ellipsis",
+    link: "/global_props/truncate",
+  },
+  {
+    title: "Vertical Align",
+    description:
+      "Easily adjusts vertical alignment for elements like inline text where Flex Box support is limited.",
+    icon: "objects-align-top",
+    link: "/global_props/vertical_align",
+  },
+  {
+    title: "Z-Index",
+    description:
+      "Adjusts stacking order of elements, controlling which elements appear on top or below others.",
+    icon: "bring-front",
+    link: "/global_props/z_index",
+  },
+];

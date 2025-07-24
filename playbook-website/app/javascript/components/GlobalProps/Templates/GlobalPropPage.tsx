@@ -6,7 +6,6 @@ import {
   BreadCrumbItem,
   Detail,
   Body,
-  FlexItem,
 } from "playbook-ui";
 import CardHeader from "./Partials/CardHeader";
 import VisualGuide from "./Partials/VisualGuide";
