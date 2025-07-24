@@ -42,7 +42,7 @@ const GlobalProps = () => {
           <Layout.Body>
             {GlobalPropsCards.map(({ title, description, link, icon }) => {
               return (
-                <Link key={title} to={link}>
+                <Link key={title} href={link}>
                   <Card padding="none" hover={{ shadow: "deep" }} flex={1}>
                     <Background backgroundColor="light">
                       <Flex justify="center" padding="xl">
