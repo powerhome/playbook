@@ -4,3 +4,5 @@ Our Pagination kit depends on the <a href="https://github.com/mislav/will_pagina
 Once you have perfomed the paginated query in your controller file you can use our kit (see code example below) instead of `<%= will_paginate @users %>` in your view file.
 
 You need to add: <code>require "playbook/pagination_renderer"</code> in your apps controller file.
+
+Note: If the total page count is 0 or 1, the Pagination kit will not be displayed as there aren't multiple pages to navigate.
