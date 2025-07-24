@@ -44,7 +44,7 @@ const AdvancedTableRowPinning = (props) => {
           maxHeight="xs"
           pinnedRows={{value: pinnedRows, onChange: setPinnedRows}}
           tableData={MOCK_DATA}
-          tableProps={{sticky: true}}
+          tableProps={{sticky: true, verticalBorder: true, container: false}}
           {...props}
       >
         <AdvancedTable.Header enableSorting />
