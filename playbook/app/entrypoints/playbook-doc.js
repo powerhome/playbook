@@ -110,7 +110,6 @@ import * as Tooltip from 'kits/pb_tooltip/docs'
 import * as Typeahead from 'kits/pb_typeahead/docs'
 import * as User from 'kits/pb_user/docs'
 import * as UserBadge from 'kits/pb_user_badge/docs'
-import * as Walkthrough from 'kits/pb_walkthrough/docs'
 import * as WeekdayStacked from 'kits/pb_weekday_stacked/docs'
 
 WebpackerReact.registerComponents({
@@ -220,6 +219,5 @@ WebpackerReact.registerComponents({
   ...Typeahead,
   ...User,
   ...UserBadge,
-  ...Walkthrough,
   ...WeekdayStacked,
 })
