@@ -1,7 +1,12 @@
 import React from "react";
+import HtmlOptions from "./Examples/HtmlOptions";
 
 const GlobalProps = () => {
-  return <div>Global Props Page</div>;
+  return (
+    <>
+      <HtmlOptions />
+    </>
+  )
 };
 
 export default GlobalProps;
