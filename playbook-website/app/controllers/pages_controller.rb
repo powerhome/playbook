@@ -93,6 +93,10 @@ class PagesController < ApplicationController
   end
 
   def global_props_show
+    name = params[:name]
+
+    redirect_to root_path and return unless GLOBAL_PROPS_AND_TOKENS["global_props"]&.include?(name)
+
     @page_title = "Global Props Example"
     @show_sidebar = true
     render layout: "global_props_page"
@@ -105,6 +109,10 @@ class PagesController < ApplicationController
   end
 
   def tokens_show
+    name = params[:name]
+
+    redirect_to root_path and return unless GLOBAL_PROPS_AND_TOKENS["tokens"]&.include?(name)
+
     @page_title = "Tokens Example"
     @show_sidebar = true
     render layout: "global_props_page"

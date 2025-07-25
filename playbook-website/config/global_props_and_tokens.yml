@@ -1,0 +1,6 @@
+global_props:
+  - html_options
+  - margin
+
+tokens:
+  - display
