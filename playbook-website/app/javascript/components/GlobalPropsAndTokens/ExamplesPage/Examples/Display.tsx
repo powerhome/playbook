@@ -19,7 +19,7 @@ const Display = () => {
               "inline",
               <ExampleCodeCard
                 id="display-inline"
-                text="display: $display_inline;}"
+                text="display: $display_inline;"
               />,
             ],
             [
@@ -27,7 +27,7 @@ const Display = () => {
               "block",
               <ExampleCodeCard
                 id="display-block"
-                text="display: $display_block;}"
+                text="display: $display_block;"
               />,
             ],
             [
@@ -35,7 +35,7 @@ const Display = () => {
               "inline-block",
               <ExampleCodeCard
                 id="display-inline-block"
-                text="display: $display_inline_block;}"
+                text="display: $display_inline_block;"
               />,
             ],
             [
@@ -43,7 +43,7 @@ const Display = () => {
               "flex",
               <ExampleCodeCard
                 id="display-flex"
-                text="display: $display_flex;}"
+                text="display: $display_flex;"
               />,
             ],
             [
@@ -51,7 +51,7 @@ const Display = () => {
               "none",
               <ExampleCodeCard
                 id="display-none"
-                text="display: $display_none;}"
+                text="display: $display_none;"
               />,
             ],
             [
@@ -59,7 +59,7 @@ const Display = () => {
               "inline-flex",
               <ExampleCodeCard
                 id="display-inline-flex"
-                text="display: $display_inline_flex;}"
+                text="display: $display_inline_flex;"
               />,
             ],
             [
@@ -67,7 +67,7 @@ const Display = () => {
               "grid",
               <ExampleCodeCard
                 id="display-grid"
-                text="display: $display_grid;}"
+                text="display: $display_grid;"
               />,
             ],
           ]}

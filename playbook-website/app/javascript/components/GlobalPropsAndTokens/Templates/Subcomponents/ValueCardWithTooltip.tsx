@@ -9,7 +9,7 @@ const ValueCardWithTooltip = ({ text, tooltipText }: ValueCardTypes) => {
   return (
     <>
       {tooltipText ? (
-        <Tooltip placement="top" text={tooltipText}>
+        <Tooltip placement="top" text={tooltipText} zIndex={10}>
           <Card
             borderRadius="sm"
             background="light"
