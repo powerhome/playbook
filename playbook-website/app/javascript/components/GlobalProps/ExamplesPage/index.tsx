@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Background } from "playbook-ui";
 import HtmlOptions from "./Examples/HtmlOptions";
 import Margin from "./Examples/Margin";
@@ -18,21 +18,7 @@ const GlobalPropsExamples = () => {
   const key = getGlobalPropsExample(window.location.pathname);
   type ComponentKey = keyof typeof COMPONENT_MAP;
 
-  const isValidKey =
-    key &&
-    (Object.keys(COMPONENT_MAP) as ComponentKey[]).includes(
-      key as ComponentKey
-    );
-  const ExampleComponent = isValidKey
-    ? COMPONENT_MAP[key as ComponentKey]
-    : null;
-
-  // Redirect to the global props page if the url is invalid
-  useEffect(() => {
-    if (key && !isValidKey) {
-      window.location.replace("/global_props");
-    }
-  }, [key, isValidKey]);
+  const ExampleComponent = COMPONENT_MAP[key as ComponentKey] || null;
 
   return (
     <Background backgroundColor="white">

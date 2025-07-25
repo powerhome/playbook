@@ -9,7 +9,7 @@ class PagesController < ApplicationController
   include ::ViteRails::TagHelpers
   rescue_from ActionView::MissingTemplate, :with => :page_not_found
 
-  before_action :set_js, only: %i[visual_guidelines global_props]
+  before_action :set_js, only: %i[visual_guidelines]
   before_action :set_kit, only: %i[kit_show_rails kit_show_react kit_show_swift]
   before_action :ensure_kit_type_exists, only: %i[kit_show_rails kit_show_react kit_show_swift]
   before_action :set_category, only: %i[kit_category_show_rails kit_category_show_react kit_category_show_swift]
@@ -283,7 +283,7 @@ private
   end
 
   def set_js
-    @application_js.concat %w[visual_guidelines global_props]
+    @application_js.concat %w[visual_guidelines]
   end
 
   def set_category
