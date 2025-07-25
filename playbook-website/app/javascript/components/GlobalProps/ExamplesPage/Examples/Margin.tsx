@@ -1,9 +1,13 @@
 import React from "react";
+import { Image, Flex } from "playbook-ui";
+
 import GlobalPropPage from "../../Templates/GlobalPropPage";
 import PropsExamplesTable from "../../Templates/Subcomponents/PropsExamplesTable";
 import ExampleCodeCard from "../../Templates/Subcomponents/ExampleCodeCard";
 import HeaderWithIcon from "../../Templates/Subcomponents/HeaderWithIcon";
-import { Image, Flex, FlexItem } from "playbook-ui";
+import ValueCardWithTooltip from "../../Templates/Subcomponents/ValueCardWithTooltip";
+
+import { SpacingValues } from "../../Data/SpacingValues";
 
 const Margin = () => {
   const VisualGuideCard = () => {
@@ -38,12 +42,11 @@ const Margin = () => {
     );
   };
 
-  const SpacingTypes = ["xxs", "xs", "sm", "md", "lg", "xl", "none", "auto", "initial", "inherit"];
   const TypesCards = () => {
     return (
       <Flex gap="xs" wrap>
-        {SpacingTypes.map((type) => (
-          <ExampleCodeCard key={type} text={type} copyIcon={false} />
+        {SpacingValues.map((spacing) => (
+          <ValueCardWithTooltip key={spacing.name} text={spacing.name} tooltipText={spacing.value} />
         ))}
       </Flex>
     );

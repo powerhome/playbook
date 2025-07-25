@@ -9,7 +9,7 @@ type PropsExamplesTableTypes = {
 const PropsExamplesTable = ({ headers, rows }: PropsExamplesTableTypes) => {
   return (
     <Flex width="100%" justifyContent="center">
-      <Table size="sm">
+      <Table disableHover size="sm">
         <Table.Head>
           <Table.Row>
             {headers.map((header, i) => (
@@ -21,7 +21,9 @@ const PropsExamplesTable = ({ headers, rows }: PropsExamplesTableTypes) => {
           {rows.map((row, i) => (
             <Table.Row key={i}>
               {row.map((cell, j) => (
-                <Table.Cell key={j}>{j === 0 ? <Title size={4}>{cell}</Title> : cell}</Table.Cell>
+                <Table.Cell key={j}>
+                  {j === 0 ? <Title size={4}>{cell}</Title> : cell}
+                </Table.Cell>
               ))}
             </Table.Row>
           ))}

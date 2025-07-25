@@ -6,7 +6,11 @@ type ExampleCodeCardTypes = {
   text?: string;
   copyIcon?: boolean;
 };
-const ExampleCodeCard = ({ text, id, copyIcon = true }: ExampleCodeCardTypes) => {
+const ExampleCodeCard = ({
+  text,
+  id,
+  copyIcon = true,
+}: ExampleCodeCardTypes) => {
   // eslint-disable-next-line no-unused-vars
   const [copied, copyToClipboard] = usePBCopy({ from: id });
   const [showTooltip, setShowTooltip] = useState(false);
@@ -34,31 +38,20 @@ const ExampleCodeCard = ({ text, id, copyIcon = true }: ExampleCodeCardTypes) =>
       gap="xxs"
       htmlOptions={{ onClick: () => copyIcon && handleCopy() }}
     >
-      <Card
-        borderRadius="sm"
-        background="light"
-        padding="xxs"
-        borderNone
-        className="value-card"
-      >
-        <Body id={id} >
-          {text}
-        </Body>
+      <Card borderRadius="sm" background="light" padding="xxs" borderNone>
+        <Body id={id}>{text}</Body>
       </Card>
-      {
-        copyIcon && (
-<Tooltip
-        delay={{ close: 1000 }}
-        forceOpenTooltip={showTooltip}
-        placement="top"
-        showTooltip={false}
-        text="Copied!"
-      >
-        <Icon icon="clipboard" color="light" />
-      </Tooltip>
-        )
-      }
-      
+      {copyIcon && (
+        <Tooltip
+          delay={{ close: 1000 }}
+          forceOpenTooltip={showTooltip}
+          placement="top"
+          showTooltip={false}
+          text="Copied!"
+        >
+          <Icon icon="clipboard" color="light" />
+        </Tooltip>
+      )}
     </Flex>
   );
 };
