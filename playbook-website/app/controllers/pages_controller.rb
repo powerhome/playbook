@@ -13,7 +13,7 @@ class PagesController < ApplicationController
   before_action :set_kit, only: %i[kit_show_rails kit_show_react kit_show_swift]
   before_action :ensure_kit_type_exists, only: %i[kit_show_rails kit_show_react kit_show_swift]
   before_action :set_category, only: %i[kit_category_show_rails kit_category_show_react kit_category_show_swift]
-  before_action :delete_dark_mode_cookie, only: %i[home getting_started visual_guidelines]
+  before_action :delete_dark_mode_cookie, only: %i[home getting_started visual_guidelines global_props global_props_show tokens tokens_show]
   before_action :set_show_sidebar, only: %i[kits kit_category_show_rails kit_category_show_react kit_category_show_swift kit_show_react kit_show_rails kit_show_swift rails_in_react kit_show_demo visual_guidelines home]
 
   def application_beta
@@ -85,6 +85,38 @@ class PagesController < ApplicationController
   end
 
   def changelog; end
+
+  def global_props
+    @page_title = "Global Props"
+    @show_sidebar = true
+    render layout: "global_props_page"
+  end
+
+  def global_props_show
+    name = params[:name]
+
+    redirect_to root_path and return unless GLOBAL_PROPS_AND_TOKENS["global_props"]&.include?(name)
+
+    @page_title = "Global Props Example"
+    @show_sidebar = true
+    render layout: "global_props_page"
+  end
+
+  def tokens
+    @page_title = "Tokens"
+    @show_sidebar = true
+    render layout: "global_props_page"
+  end
+
+  def tokens_show
+    name = params[:name]
+
+    redirect_to root_path and return unless GLOBAL_PROPS_AND_TOKENS["tokens"]&.include?(name)
+
+    @page_title = "Tokens Example"
+    @show_sidebar = true
+    render layout: "global_props_page"
+  end
 
   def drawer_page
     render "pages/drawer_page", layout: "layouts/fullscreen"
