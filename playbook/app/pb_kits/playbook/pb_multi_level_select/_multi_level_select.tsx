@@ -47,6 +47,7 @@ type MultiLevelSelectProps = {
   name?: string
   required?: boolean
   returnAllSelected?: boolean
+  showCheckedChildren?: boolean
   treeData?: { [key: string]: string; }[] | any
   onChange?: (event: { target: { name?: string; value: any } }) => void
   onSelect?: (prop: { [key: string]: any }) => void
@@ -71,6 +72,7 @@ const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>((pr
     label,
     required = false,
     returnAllSelected = false,
+    showCheckedChildren = true,
     treeData,
     onChange = () => null,
     onSelect = () => null,
@@ -104,7 +106,7 @@ const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>((pr
   // State for default return
   const [defaultReturn, setDefaultReturn] = useState([]);
   // Get expanded items from treeData
-  const initialExpandedItems = getExpandedItems(treeData, selectedIds);
+  const initialExpandedItems = getExpandedItems(treeData, selectedIds, showCheckedChildren);
   // Initialize state with expanded items
   const [expanded, setExpanded] = useState(initialExpandedItems);
 
