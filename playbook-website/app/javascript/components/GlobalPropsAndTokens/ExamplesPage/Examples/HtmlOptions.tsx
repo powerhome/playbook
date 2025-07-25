@@ -1,5 +1,5 @@
 import React from "react";
-import GlobalPropPage from "../../Templates/GlobalPropPage";
+import ShowPage from "../../Templates/ShowPage";
 import PropsExamplesTable from "../../Templates/Subcomponents/PropsExamplesTable";
 import ExampleCodeCard from "../../Templates/Subcomponents/ExampleCodeCard";
 import { Card, Flex, Body } from "playbook-ui";
@@ -35,7 +35,7 @@ const HtmlOptions = () => {
 
   return (
     <>
-      <GlobalPropPage
+      <ShowPage
         title="HTML Options"
         description="The HTML Options prop allows for native HTML attributes and inline styles to be applied to the root element of a component. This helps create small, flexible customizations without modifying or extending the component's core API. It's especially useful when you need to apply minor visual overrides, add accessibility attributes, or adding native HTML attributes like custom identifiers."
         descriptionSecondary="While powerful, this prop should be used with care. It is not meant to replace design tokens, standard component variants, or layout tools. Instead, think of it as a surgical way to add precision control where needed to keep more consistency with implementing Playbook."
@@ -79,7 +79,7 @@ const HtmlOptions = () => {
             ],
           ]}
         />
-      </GlobalPropPage>
+      </ShowPage>
     </>
   );
 };

@@ -1,7 +1,7 @@
 import React from "react";
 import { Image, Flex, Caption } from "playbook-ui";
 
-import GlobalPropPage from "../../Templates/GlobalPropPage";
+import ShowPage from "../../Templates/ShowPage";
 import PropsExamplesTable from "../../Templates/Subcomponents/PropsExamplesTable";
 import ResponsivenessSection from "../../Templates/Subcomponents/ResponsivenessSection";
 import ExampleCodeCard from "../../Templates/Subcomponents/ExampleCodeCard";
@@ -79,7 +79,7 @@ const Margin = () => {
   };
   return (
     <>
-      <GlobalPropPage
+      <ShowPage
         title="Margin"
         description={
           <>
@@ -222,7 +222,7 @@ const Margin = () => {
             ]}
           />
         </ResponsivenessSection>
-      </GlobalPropPage>
+      </ShowPage>
     </>
   );
 };

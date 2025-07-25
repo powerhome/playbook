@@ -12,6 +12,8 @@ Rails.application.routes.draw do
   get "changelog", to: redirect("changelog/web")
   get "global_props", to: "pages#global_props"
   get "global_props/:name", to: "pages#global_props_show", as: "global_props_show"
+  get "tokens", to: "pages#tokens"
+  get "tokens/:name", to: "pages#tokens_show", as: "tokens_show"
 
   get "changelog/*path", to: redirect("changelog/web")
 

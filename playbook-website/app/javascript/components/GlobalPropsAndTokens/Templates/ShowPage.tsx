@@ -10,21 +10,23 @@ import {
 import CardHeader from "./Partials/CardHeader";
 import VisualGuide from "./Partials/VisualGuide";
 
-type GlobalPropsTypes = {
+type ShowPageTypes = {
   title: string;
   description?: string | ReactNode;
   descriptionSecondary?: string | ReactNode;
   VisualGuideCard?: ReactNode | ReactNode[];
   children?: ReactNode | ReactNode[];
+  pageType?: "tokens" | "global_props";
 };
 
-const GlobalPropPage = ({
+const ShowPage = ({
   title,
   description,
   descriptionSecondary,
   VisualGuideCard,
   children,
-}: GlobalPropsTypes) => {
+  pageType = "global_props",
+}: ShowPageTypes) => {
   return (
     <Flex justifyContent="center">
       <Flex
@@ -35,22 +37,22 @@ const GlobalPropPage = ({
         gap="md"
       >
         <BreadCrumbs>
-          <BreadCrumbItem href="/global_props">
-            <Detail color="link">Global Props</Detail>
+          <BreadCrumbItem href={`/${pageType}`}>
+            <Detail color="link">{pageType === "tokens" ? "Tokens" : "Global Props"}</Detail>
           </BreadCrumbItem>
           <BreadCrumbItem href="#">
             <Detail color="default">{title}</Detail>
           </BreadCrumbItem>
         </BreadCrumbs>
         <Title size={1}>{title}</Title>
-        <CardHeader />
+        {pageType === "global_props" && <CardHeader />}
         {description && <Body>{description}</Body>}
         {descriptionSecondary && <Body>{descriptionSecondary}</Body>}
-        <VisualGuide>{VisualGuideCard}</VisualGuide>
+        {VisualGuideCard && <VisualGuide>{VisualGuideCard}</VisualGuide>}
         {children}
       </Flex>
     </Flex>
   );
 };
 
-export default GlobalPropPage;
+export default ShowPage;
