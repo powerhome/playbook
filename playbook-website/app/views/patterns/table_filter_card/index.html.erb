@@ -1,0 +1,111 @@
+<%= pb_rails("title", props: { 
+    text: "Title Goes Here", 
+    tag: "h1", 
+    size: 3, 
+    padding_y: "md",
+    padding_left: { xs: "sm", sm: "sm", md: "xl", lg: "xl", xl: "xl", default: "xl"}
+}) %>
+
+
+<%= pb_rails("card", props: { padding: "none", margin_x: { xs: "sm", sm: "sm", md: "xl", lg: "xl", xl: "xl", default: "xl"} }) do %>
+    <%= pb_rails("flex", props: { align: "stretch", flex_direction: "column", gap: "none" }) do %>
+        <%=
+            pb_rails("filter", props: {
+                background: false,
+                max_height: "50vh",
+                min_width: "xs",
+                popover_props: {
+                    width: "350px",
+                },
+                id: "def2",
+                sort_menu: [
+                    { item: "Start Date", link: "?q[sorts]=started_on+asc", active: true, direction: "asc" },
+                    { item: "First Name", link: "?q[sorts]=name+asc", active: false },
+                    { item: "Title", link: "?q[sorts]=title+asc", active: false },
+                    { item: "Department", link: "?q[sorts]=department+asc", active: false },
+                    { item: "Branch", link: "?q[sorts]=branch+asc", active: false },
+                    { item: "Territory ID", link: "?q[sorts]=territory_id+asc", active: false },
+                ],
+                template: "default",
+                results: 50,
+            }) do
+        %>
+            <%= pb_rails("text_input", props: { label: "Territory ID" }) %>
+            <%= pb_rails("text_input", props: { label: "First Name" }) %>
+            
+            <%= pb_rails("typeahead", props: {
+                label: "Title",
+                options: [
+                    {key: "senior-ux-engineer", label: "Senior UX Engineer", value: "senior-ux-engineer"},
+                    {key: "ux-engineer", label: "UX Engineer", value: "ux-engineer"},
+                    {key: "ux-designer", label: "UX Designer", value: "ux-designer"}
+                ]
+            }) %>
+            
+            <%= pb_rails("select", props: {
+                blank_selection: "All Departments",
+                label: "Department",
+                options: [
+                    {value: "Business Technology", label: "Business Technology", key: "business-technology"},
+                    {value: "Customer Development", label: "Customer Development", key: "customer-development"},
+                    {value: "Talent Acquisition", label: "Talent Acquisition", key: "talent-acquisition"}
+                ]
+            }) %>
+            
+            <%= pb_rails("dropdown", props: {
+                label: "Branch",
+                options: [
+                    {key: "Philadelphia", label: "Philadelphia", value: "philadelphia"},
+                    {key: "New York", label: "New York", value: "new-york"},
+                    {key: "Austin", label: "Austin", value: "austin"}
+                ]
+            }) %>
+            
+            <%= pb_rails("date_picker", props: {
+                label: "Start Date",
+                padding_y: "sm",
+                picker_id: "startedOn"
+            }) %>
+            
+            <%= pb_rails("flex", props: { spacing: "between" }) do %>
+                <%= pb_rails("button", props: {
+                    text: "Filter",
+                }) %>
+                <%= pb_rails("button", props: {
+                    text: "Defaults",
+                    variant: "secondary"
+                }) %>
+            <% end %>
+        <% end %>
+        <%= pb_rails("section_separator") %>
+        <%= pb_rails("pagination", props: { model: @users, view: self, padding_y: "xs", margin_left: "lg" }) %>
+        <%= pb_rails("section_separator") %>
+        <%= pb_rails("table", props: { collapse: "md", container: false, size: "sm" }) do %>
+            <%= pb_rails("table/table_head") do %>
+                <%= pb_rails("table/table_row") do %>
+                    <%= pb_rails("table/table_header", props: { text: "Territory ID" }) %>
+                    <%= pb_rails("table/table_header", props: { text: "Name" }) %>
+                    <%= pb_rails("table/table_header", props: { text: "Title" }) %>
+                    <%= pb_rails("table/table_header", props: { text: "Department" }) %>
+                    <%= pb_rails("table/table_header", props: { text: "Status", text_align: { xs: "left", sm: "left", md: "left", lg: "center", xl: "center", default: "center" } }) %>
+                    <%= pb_rails("table/table_header", props: { text: "Date", text_align: "right" }) %>
+                <% end %>
+            <% end %>
+            <%= pb_rails("table/table_body") do %>
+                <% @users.each do |user| %>
+                    <%= pb_rails("table/table_row") do %>
+                        <%= pb_rails("table/table_cell", props: {margin_x: {xs: "sm"}, number_spacing: "tabular", text: user.id.to_s}) %>
+                        <%= pb_rails("table/table_cell", props: {margin_x: {xs: "sm"}, text: user.name}) %>
+                        <%= pb_rails("table/table_cell", props: {margin_x: {xs: "sm"}, text: user.title}) %>
+                        <%= pb_rails("table/table_cell", props: {margin_x: {xs: "sm"}, text: user.department}) %>
+                        <%= pb_rails("table/table_cell", props: {margin_x: {xs: "sm"}, text: user.branch}) %>
+                        <%= pb_rails("table/table_cell", props: {margin_x: {xs: "sm"}}) do %>
+                            <%= pb_rails("date", props: {alignment: "right", date: user.start_date.to_s}) %>
+                        <% end %>
+                    <% end %>
+                <% end %>
+            <% end %>
+        <% end %>
+        <%= pb_rails("pagination", props: { model: @users, view: self, padding_y: "xs", margin_left: "lg" }) %>
+    <% end %>
+<% end %>
