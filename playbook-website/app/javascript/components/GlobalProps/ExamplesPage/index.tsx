@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { Background } from "playbook-ui";
 import HtmlOptions from "./Examples/HtmlOptions";
 import Margin from "./Examples/Margin";
 
@@ -33,7 +34,11 @@ const GlobalPropsExamples = () => {
     }
   }, [key, isValidKey]);
 
-  return <div>{ExampleComponent ? <ExampleComponent /> : null}</div>;
+  return (
+    <Background backgroundColor="white">
+      {ExampleComponent ? <ExampleComponent /> : null}
+    </Background>
+  );
 };
 
 export default GlobalPropsExamples;

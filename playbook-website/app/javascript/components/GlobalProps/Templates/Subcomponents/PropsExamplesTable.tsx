@@ -4,9 +4,10 @@ import { Table, Flex, Title } from "playbook-ui";
 type PropsExamplesTableTypes = {
   headers: any[];
   rows: any[][];
+  firstColumnBold?: boolean;
 };
 
-const PropsExamplesTable = ({ headers, rows }: PropsExamplesTableTypes) => {
+const PropsExamplesTable = ({ headers, rows, firstColumnBold= true }: PropsExamplesTableTypes) => {
   return (
     <Flex width="100%" justifyContent="center">
       <Table disableHover size="sm">
@@ -22,7 +23,7 @@ const PropsExamplesTable = ({ headers, rows }: PropsExamplesTableTypes) => {
             <Table.Row key={i}>
               {row.map((cell, j) => (
                 <Table.Cell key={j}>
-                  {j === 0 ? <Title size={4}>{cell}</Title> : cell}
+                  {j === 0 && firstColumnBold ? <Title size={4}>{cell}</Title> : cell}
                 </Table.Cell>
               ))}
             </Table.Row>

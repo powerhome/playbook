@@ -1,8 +1,9 @@
 import React from "react";
-import { Image, Flex } from "playbook-ui";
+import { Image, Flex, Caption } from "playbook-ui";
 
 import GlobalPropPage from "../../Templates/GlobalPropPage";
 import PropsExamplesTable from "../../Templates/Subcomponents/PropsExamplesTable";
+import ResponsivenessSection from "../../Templates/Subcomponents/ResponsivenessSection";
 import ExampleCodeCard from "../../Templates/Subcomponents/ExampleCodeCard";
 import HeaderWithIcon from "../../Templates/Subcomponents/HeaderWithIcon";
 import ValueCardWithTooltip from "../../Templates/Subcomponents/ValueCardWithTooltip";
@@ -46,12 +47,36 @@ const Margin = () => {
     return (
       <Flex gap="xs" wrap>
         {SpacingValues.map((spacing) => (
-          <ValueCardWithTooltip key={spacing.name} text={spacing.name} tooltipText={spacing.value} />
+          <ValueCardWithTooltip
+            key={spacing.name}
+            text={spacing.name}
+            tooltipText={spacing.value}
+          />
         ))}
       </Flex>
     );
   };
 
+  const ResponsiveExamples = () => {
+    return (
+      <>
+        <Flex alignItems="center" gap="sm">
+          <Caption text="Rails" />
+          <ExampleCodeCard
+            id="responsive-rails"
+            text="margin_bottom: { xs: 'xxs', sm: 'xs', md: 'sm', lg: 'md', xl: 'lg', default: 'xl' }"
+          />
+        </Flex>
+        <Flex alignItems="center" gap="sm">
+          <Caption text="React" />
+          <ExampleCodeCard
+            id="responsive-react"
+            text="marginBottom= {{ xs: 'xxs', sm: 'xs', md: 'sm', lg: 'md', xl: 'lg', default: 'xl' }}"
+          />
+        </Flex>
+      </>
+    );
+  };
   return (
     <>
       <GlobalPropPage
@@ -91,19 +116,31 @@ const Margin = () => {
               <ExampleCodeCard id="margin-rails" text="margin: 'sm'" />,
               <ExampleCodeCard id="margin-react" text="margin= 'sm'" />,
             ],
-                        [
+            [
               "Margin Left",
               <ExampleCodeCard text="union" copyIcon={false} />,
               <TypesCards />,
-              <ExampleCodeCard id="margin-left-rails" text="margin_left: 'sm'" />,
-              <ExampleCodeCard id="margin-left-react" text="marginLeft= 'sm'" />,
+              <ExampleCodeCard
+                id="margin-left-rails"
+                text="margin_left: 'sm'"
+              />,
+              <ExampleCodeCard
+                id="margin-left-react"
+                text="marginLeft= 'sm'"
+              />,
             ],
             [
               "Margin Right",
               <ExampleCodeCard text="union" copyIcon={false} />,
               <TypesCards />,
-              <ExampleCodeCard id="margin-right-rails" text="margin_right: 'sm'" />,
-              <ExampleCodeCard id="margin-right-react" text="marginRight= 'sm'" />,
+              <ExampleCodeCard
+                id="margin-right-rails"
+                text="margin_right: 'sm'"
+              />,
+              <ExampleCodeCard
+                id="margin-right-react"
+                text="marginRight= 'sm'"
+              />,
             ],
             [
               "Margin Top",
@@ -116,8 +153,14 @@ const Margin = () => {
               "Margin Bottom",
               <ExampleCodeCard text="union" copyIcon={false} />,
               <TypesCards />,
-              <ExampleCodeCard id="margin-bottom-rails" text="margin_bottom: 'sm'" />,
-              <ExampleCodeCard id="margin-bottom-react" text="marginBottom= 'sm'" />,
+              <ExampleCodeCard
+                id="margin-bottom-rails"
+                text="margin_bottom: 'sm'"
+              />,
+              <ExampleCodeCard
+                id="margin-bottom-react"
+                text="marginBottom= 'sm'"
+              />,
             ],
             [
               "Margin X",
@@ -133,9 +176,52 @@ const Margin = () => {
               <ExampleCodeCard id="margin-y-rails" text="margin_y: 'sm'" />,
               <ExampleCodeCard id="margin-y-react" text="marginY= 'sm'" />,
             ],
-
           ]}
         />
+        <ResponsivenessSection
+          exampleSection={<ResponsiveExamples />}
+        >
+          <PropsExamplesTable
+            firstColumnBold={false}
+            headers={[
+              "Breakpoints",
+              "Value",
+              "Description",
+            ]}
+            rows={[
+              [
+                "xs",
+                "max-width: 575px",
+                "Extra small screens"
+              ],
+              [
+                "sm",
+                "min-width: 576px, max-width: 767px",
+                "Small screens"
+              ],
+              [
+                "md",
+                "min-width: 768px, max-width: 991px",
+                "Medium screens"
+              ],
+              [
+                "lg",
+                "min-width: 992px, max-width: 1199px",
+                "Large screens"
+              ],
+              [
+                "xl",
+                "min-width: 1200px",
+                "Extra large screens"
+              ],
+              [
+                "default",
+                "All sizes",
+                "Default is used as a final fallback and is not tied to a specific screen size."
+              ]
+            ]}
+          />
+        </ResponsivenessSection>
       </GlobalPropPage>
     </>
   );
