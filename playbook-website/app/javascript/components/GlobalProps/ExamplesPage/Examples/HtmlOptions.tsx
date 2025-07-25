@@ -2,37 +2,33 @@ import React from "react";
 import GlobalPropPage from "../../Templates/GlobalPropPage";
 import PropsExamplesTable from "../../Templates/Subcomponents/PropsExamplesTable";
 import ExampleCodeCard from "../../Templates/Subcomponents/ExampleCodeCard";
-import { Image, Flex } from "playbook-ui";
+import { Card, Flex, Body } from "playbook-ui";
 
 const HtmlOptions = () => {
   const VisualGuideCard = () => {
     return (
-      <Flex width="100%" justify="between" wrap>
-        <Image
-          alt="picture of a misty forest"
-          size="lg"
-          url="https://unsplash.it/500/400/?image=634"
-        />
-        <Image
-          alt="picture of a misty forest"
-          size="lg"
-          url="https://unsplash.it/500/400/?image=634"
-        />
-        <Image
-          alt="picture of a misty forest"
-          size="lg"
-          url="https://unsplash.it/500/400/?image=634"
-        />
-        <Image
-          alt="picture of a misty forest"
-          size="lg"
-          url="https://unsplash.it/500/400/?image=634"
-        />
-        <Image
-          alt="picture of a misty forest"
-          size="lg"
-          url="https://unsplash.it/500/400/?image=634"
-        />
+      <Flex width="100%" gap="sm" flexDirection="column">
+        <Card
+          padding="md"
+          dark
+          background="product_1_background"
+          borderNone
+          htmlOptions={{
+            title: "I'm the tooltip for title",
+            style: { width: "fit-content", background: "#0056CF" },
+          }}
+        >
+          {"Hover me for ‘title’ HTML attribute tooltip."}
+        </Card>
+        <Body paddingLeft="md">
+          {`htmlOptions={{`}
+          <br />
+          &nbsp;&nbsp;&nbsp;&nbsp;{`title: "I'm the tooltip for title",`}
+          <br />
+          &nbsp;&nbsp;&nbsp;&nbsp;{`style: { width: 'fit-content', background: '#0056CF' }`}
+          <br />
+          {`}}`}
+        </Body>
       </Flex>
     );
   };
