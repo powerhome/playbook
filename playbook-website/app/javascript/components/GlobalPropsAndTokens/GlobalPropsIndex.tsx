@@ -9,7 +9,6 @@ import {
   Body,
   Link,
   IconCircle,
-  Image,
 } from "playbook-ui";
 import HeaderImage from "../../images/getting-started.svg";
 import { GlobalPropsCards } from "./Data/GlobalPropsCards";
