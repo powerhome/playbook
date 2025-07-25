@@ -1,13 +1,14 @@
 import React from "react";
 import GlobalPropPage from "../../Templates/GlobalPropPage";
 import PropsExamplesTable from "../../Templates/Subcomponents/PropsExamplesTable";
-import ExampleCodeCard from "../../Templates/Partials/ExampleCodeCard";
-import { Image, Flex } from "playbook-ui";
+import ExampleCodeCard from "../../Templates/Subcomponents/ExampleCodeCard";
+import HeaderWithIcon from "../../Templates/Subcomponents/HeaderWithIcon";
+import { Image, Flex, FlexItem } from "playbook-ui";
 
 const Margin = () => {
   const VisualGuideCard = () => {
     return (
-      <Flex gap="sm" wrap>
+      <Flex width="100%" justify="between" wrap>
         <Image
           alt="picture of a misty forest"
           size="lg"
@@ -37,62 +38,99 @@ const Margin = () => {
     );
   };
 
-  // const HeaderWithIcon = () => {
-  //   return (
-  //     <>
-  //      <Tooltip
-  //         placement='top'
-  //         text="Hover over the Values to see their specific value."
-  //         zIndex={10}
-  //     ><Icon name="circle-info" /></Tooltip>
-  //       <Caption>HTML Options</Caption>
-  //     </>
-  //   );
-  // };
+  const SpacingTypes = ["xxs", "xs", "sm", "md", "lg", "xl", "none", "auto", "initial", "inherit"];
+  const TypesCards = () => {
+    return (
+      <Flex gap="xs" wrap>
+        {SpacingTypes.map((type) => (
+          <ExampleCodeCard key={type} text={type} copyIcon={false} />
+        ))}
+      </Flex>
+    );
+  };
 
   return (
     <>
       <GlobalPropPage
         title="Margin"
-        description="The Margin prop allows for native HTML attributes and inline styles to be applied to the root element of a component. This helps create small, flexible customizations without modifying or extending the component's core API. It's especially useful when you need to apply minor visual overrides, add accessibility attributes, or adding native HTML attributes like custom identifiers."
+        description={
+          <>
+            The Margin prop adds space outside of a component’s outer edge,
+            creating spacing between it and neighboring elements. While useful
+            for helping to create layout spacing, margin should be used
+            selectively. Overlapping margins, collapsing behavior, and
+            inconsistent stacking can introduce unintended visual issues,
+            particularly for responsive or nested layouts. For more information
+            on Margin prop controls, refer to the{" "}
+            <a
+              href="https://developer.mozilla.org/en-US/docs/Web/CSS/margin"
+              target="_blank"
+            >
+              MDN document found here.
+            </a>
+          </>
+        }
         VisualGuideCard={VisualGuideCard()}
       >
         <PropsExamplesTable
-          headers={["Example", "Rails Example", "React Example"]}
+          headers={[
+            "Margin",
+            "Type",
+            <HeaderWithIcon />,
+            "Rails Example",
+            "React Example",
+          ]}
           rows={[
             [
-              "Title HTML attribute",
-              <ExampleCodeCard
-                id="html-attribute-rails"
-                text="html_options:{ title: 'I’m the tooltip for title' }"
-              />,
-              <ExampleCodeCard
-                id="html-attribute-react"
-                text="htmlOptions= {{ style: { width: '123px' } }}"
-              />,
+              "Margin",
+              <ExampleCodeCard text="union" copyIcon={false} />,
+              <TypesCards />,
+              <ExampleCodeCard id="margin-rails" text="margin: 'sm'" />,
+              <ExampleCodeCard id="margin-react" text="margin= 'sm'" />,
+            ],
+                        [
+              "Margin Left",
+              <ExampleCodeCard text="union" copyIcon={false} />,
+              <TypesCards />,
+              <ExampleCodeCard id="margin-left-rails" text="margin_left: 'sm'" />,
+              <ExampleCodeCard id="margin-left-react" text="marginLeft= 'sm'" />,
             ],
             [
-              "Width Style",
-              <ExampleCodeCard
-                id="width-style-rails"
-                text="html_options:{ style: { width: '123px' } }"
-              />,
-              <ExampleCodeCard
-                id="width-style-react"
-                text="htmlOptions= {{ style: { width: '123px' } }}"
-              />,
+              "Margin Right",
+              <ExampleCodeCard text="union" copyIcon={false} />,
+              <TypesCards />,
+              <ExampleCodeCard id="margin-right-rails" text="margin_right: 'sm'" />,
+              <ExampleCodeCard id="margin-right-react" text="marginRight= 'sm'" />,
             ],
             [
-              "ID and Color Style",
-              <ExampleCodeCard
-                id="id-color-rails"
-                text="html_options:{ id: 'text', style: { color: 'blue' } }"
-              />,
-              <ExampleCodeCard
-                id="id-color-react"
-                text="htmlOptions= {{ id: 'text', style: { color: 'blue' } }}"
-              />,
+              "Margin Top",
+              <ExampleCodeCard text="union" copyIcon={false} />,
+              <TypesCards />,
+              <ExampleCodeCard id="margin-top-rails" text="margin_top: 'sm'" />,
+              <ExampleCodeCard id="margin-top-react" text="marginTop= 'sm'" />,
             ],
+            [
+              "Margin Bottom",
+              <ExampleCodeCard text="union" copyIcon={false} />,
+              <TypesCards />,
+              <ExampleCodeCard id="margin-bottom-rails" text="margin_bottom: 'sm'" />,
+              <ExampleCodeCard id="margin-bottom-react" text="marginBottom= 'sm'" />,
+            ],
+            [
+              "Margin X",
+              <ExampleCodeCard text="union" copyIcon={false} />,
+              <TypesCards />,
+              <ExampleCodeCard id="margin-x-rails" text="margin_x: 'sm'" />,
+              <ExampleCodeCard id="margin-x-react" text="marginX= 'sm'" />,
+            ],
+            [
+              "Margin Y",
+              <ExampleCodeCard text="union" copyIcon={false} />,
+              <TypesCards />,
+              <ExampleCodeCard id="margin-y-rails" text="margin_y: 'sm'" />,
+              <ExampleCodeCard id="margin-y-react" text="marginY= 'sm'" />,
+            ],
+
           ]}
         />
       </GlobalPropPage>

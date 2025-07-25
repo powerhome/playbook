@@ -1,13 +1,13 @@
 import React from "react";
 import GlobalPropPage from "../../Templates/GlobalPropPage";
 import PropsExamplesTable from "../../Templates/Subcomponents/PropsExamplesTable";
-import ExampleCodeCard from "../../Templates/Partials/ExampleCodeCard";
+import ExampleCodeCard from "../../Templates/Subcomponents/ExampleCodeCard";
 import { Image, Flex } from "playbook-ui";
 
 const HtmlOptions = () => {
   const VisualGuideCard = () => {
     return (
-      <Flex gap="sm" wrap>
+      <Flex width="100%" justify="between" wrap>
         <Image
           alt="picture of a misty forest"
           size="lg"

@@ -12,8 +12,8 @@ import VisualGuide from "./Partials/VisualGuide";
 
 type GlobalPropsTypes = {
   title: string;
-  description?: string;
-  descriptionSecondary?: string;
+  description?: string | ReactNode;
+  descriptionSecondary?: string | ReactNode;
   VisualGuideCard?: ReactNode | ReactNode[];
   children?: ReactNode | ReactNode[];
 };
@@ -30,7 +30,7 @@ const GlobalPropPage = ({
       <Flex
         maxWidth="lg"
         paddingY="xl"
-        paddingX="md"
+        paddingX={{ xl: "none", default: "md" }}
         flexDirection="column"
         gap="md"
       >

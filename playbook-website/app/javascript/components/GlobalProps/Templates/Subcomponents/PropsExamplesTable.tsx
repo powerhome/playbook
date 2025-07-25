@@ -1,5 +1,5 @@
 import React from "react";
-import { Table, Flex } from "playbook-ui";
+import { Table, Flex, Title } from "playbook-ui";
 
 type PropsExamplesTableTypes = {
   headers: any[];
@@ -21,7 +21,7 @@ const PropsExamplesTable = ({ headers, rows }: PropsExamplesTableTypes) => {
           {rows.map((row, i) => (
             <Table.Row key={i}>
               {row.map((cell, j) => (
-                <Table.Cell key={j}>{cell}</Table.Cell>
+                <Table.Cell key={j}>{j === 0 ? <Title size={4}>{cell}</Title> : cell}</Table.Cell>
               ))}
             </Table.Row>
           ))}
