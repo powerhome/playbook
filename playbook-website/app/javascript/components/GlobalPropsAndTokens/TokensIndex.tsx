@@ -9,7 +9,6 @@ import {
   Body,
   Link,
   IconCircle,
-  Image,
 } from "playbook-ui";
 import HeaderImage from "../../images/getting-started.svg";
 import { TokenCards } from "./Data/TokenCards";
@@ -23,13 +22,16 @@ const Tokens = () => {
       justifyContent="center"
       alignItems="center"
     >
-      <Flex width="100%" display={{ xs: "none", sm: "none", md: "none" }}>
-        <Image
-          alt="Header image for Tokens"
-          width="100%"
-          url={HeaderImage}
-        />
-      </Flex>
+      <Background
+        imageUrl={HeaderImage}
+        width="100%"
+        display={{ xs: "none", sm: "none", md: "none" }}
+        height="250px"
+        backgroundColor="dark"
+        backgroundSize="contain"
+        backgroundPosition="center"
+        backgroundRepeat="no-repeat"
+      />
       <Background
         paddingX="sm"
         paddingY="md"
