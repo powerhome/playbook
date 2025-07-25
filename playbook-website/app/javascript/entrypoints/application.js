@@ -25,6 +25,7 @@ import AvailableProps from 'components/AvailableProps'
 import MainSidebar from 'components/MainSidebar'
 import HomepageHero from 'components/HomepageHero'
 import GlobalProps from 'components/GlobalProps'
+import GlobalPropsExample from 'components/GlobalProps/ExamplesPage'
 import AnchorJS from 'anchor-js'
 import { Website } from 'components/app'
 import { Turbo } from "@hotwired/turbo-rails"
@@ -69,5 +70,6 @@ WebpackerReact.registerComponents({
   MainSidebar,
   Website,
   GlobalProps,
+  GlobalPropsExample,
   HomepageHero,
 })

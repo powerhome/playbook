@@ -92,6 +92,12 @@ class PagesController < ApplicationController
     render layout: "global_props_page"
   end
 
+  def global_props_show
+    @page_title = "Global Props Example"
+    @show_sidebar = true
+    render layout: "global_props_page"
+  end
+
   def drawer_page
     render "pages/drawer_page", layout: "layouts/fullscreen"
   end
