@@ -2,7 +2,6 @@ import PbEnhancedElement from "../pb_enhanced_element";
 import { updateSelectionActionBar } from "./advanced_table_action_bar";
 
 const FLAT_SELECTOR = "[data-flat-advanced-table-select='true']";
-const SELECT_ALL_SELECTOR = "#select-all-rows input[type='checkbox']";
 
 export default class PbFlatAdvancedTable extends PbEnhancedElement {
   static get selector() {
@@ -37,9 +36,12 @@ export default class PbFlatAdvancedTable extends PbEnhancedElement {
       }
     };
 
+    const selectAllId = this.element.getAttribute('data-pb-checkbox-indeterminate-parent')
+    const selectAllSelector = `#${selectAllId} input[type='checkbox']`
+
     table.addEventListener("change", (e) => {
       const rowCb = e.target.closest(FLAT_SELECTOR + " input[type='checkbox']");
-      const allCb = e.target.closest(SELECT_ALL_SELECTOR);
+      const allCb = e.target.closest(selectAllSelector);
       if (!rowCb && !allCb) return;
 
       if (rowCb) {
@@ -50,15 +52,6 @@ export default class PbFlatAdvancedTable extends PbEnhancedElement {
         const tr = rowCb.closest("tr");
         tr?.classList.toggle("bg-row-selection", rowCb.checked);
         tr?.classList.toggle("bg-white", !rowCb.checked);
-
-        // Sync header checkbox
-        const header = table.querySelector(SELECT_ALL_SELECTOR);
-        if (header) {
-          const all = Array.from(
-            table.querySelectorAll(FLAT_SELECTOR + " input[type='checkbox']")
-          ).every((cb) => cb.checked);
-          header.checked = all;
-        }
       }
 
       if (allCb) {
