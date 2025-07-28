@@ -33,7 +33,7 @@ const Tokens = () => {
         backgroundRepeat="no-repeat"
       />
       <Background
-        paddingX="sm"
+        paddingX={{ xs: "sm", sm: "sm", md:"sm", lg: "sm", default:"none" }}
         paddingY="md"
         backgroundColor="white"
         maxWidth="lg"
@@ -61,7 +61,7 @@ const Tokens = () => {
 
                     <Body
                       text={description}
-                      truncate="4"
+                      truncate="3"
                       color="light"
                       marginX="sm"
                       marginBottom="sm"

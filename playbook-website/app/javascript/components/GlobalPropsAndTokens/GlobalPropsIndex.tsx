@@ -33,7 +33,7 @@ const GlobalProps = () => {
         backgroundRepeat="no-repeat"
       />
       <Background
-        paddingX="sm"
+        paddingX={{ xs: "sm", sm: "sm", md:"sm", lg: "sm", default:"none" }}
         paddingY="md"
         backgroundColor="white"
         maxWidth="lg"
