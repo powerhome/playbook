@@ -29,5 +29,10 @@
       label: "Graduated Students",
     }
 ] %>
+<%= pb_rails("card", props: { margin_bottom: "md" })  do %>
+  <%= pb_rails("advanced_table", props: { id: "table_props_table", table_data: @table_data, column_definitions: column_definitions, table_props: { container: false }}) %>
+<% end %>
 
-<%= pb_rails("advanced_table", props: { id: "table_props_table", table_data: @table_data, column_definitions: column_definitions, table_props: { vertical_border: true, container: false }}) %>
+<%= pb_rails("card", props: { })  do %>
+  <%= pb_rails("advanced_table", props: { id: "table_props_table", padding: "none", table_data: @table_data, column_definitions: column_definitions, table_props: { container: false }}) %>
+<% end %>

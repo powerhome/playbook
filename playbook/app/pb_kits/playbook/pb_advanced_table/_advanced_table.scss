@@ -968,3 +968,19 @@
 .pb-advanced-table-popover-option:hover {
   background-color: $bg_light;
 }
+// Container false with Card wrapper Reacr
+[class^=pb_card_kit] > .pb_advanced_table .pb_advanced_table_body .last-cell,
+[class^=pb_card_kit] > .pb_advanced_table .pb_advanced_table_header .last-header-cell {
+    border-right: none !important;
+}
+
+[class^=pb_card_kit] > .pb_advanced_table .pb_advanced_table_body tr:last-child td{
+    border-right: none !important;
+}
+
+// Container false with Card wrapper React
+[class^=pb_card_kit] > .pb_advanced_table tr:last-child {
+  td {
+    border-bottom: none !important; 
+  }
+}
