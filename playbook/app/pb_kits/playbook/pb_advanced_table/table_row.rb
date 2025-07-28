@@ -59,6 +59,7 @@ module Playbook
                    }) do
             pb_rails("checkbox", props: {
                        id: "select-row-#{row_id || row.object_id}",
+                       indeterminate_parent: "#{id ? "#{id}-" : ''}select-all-rows",
                        name: "select-row-#{row_id || row.object_id}",
                        data: {
                          row_id: row_id || row.object_id.to_s,
@@ -74,6 +75,7 @@ module Playbook
         if selectable_rows
           pb_rails("checkbox", props: {
                      id: "select-row-#{row_id || row.object_id}",
+                     indeterminate_parent: "#{id ? "#{id}-" : ''}select-all-rows",
                      name: "select-row-#{row_id || row.object_id}",
                      data: {
                        row_id: row_id || row.object_id.to_s,
