@@ -7,6 +7,9 @@ import timeSelectPlugin from './plugins/timeSelect'
 import quickPickPlugin from './plugins/quickPick'
 import { getAllIcons } from '../utilities/icons/allicons';
 
+declare global { interface Window { __pbSeenOnce?: Set<string> } }
+window.__pbSeenOnce ||= new Set<string>() 
+
 const angleDown = getAllIcons().angleDown.string
 
 const getPositionElement = (element: string | Element) => {
@@ -82,11 +85,24 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
   // ===========================================================
 
   const defaultDateGetter = () => {
-    if (defaultDate === '') {
-      return null
-    } else {
-      return defaultDate
-    }
+  const pickerInput = document.querySelector<HTMLElement & { [x: string]: any }>(`#${pickerId}`)._flatpickr
+
+  const inTurboFrame = pickerInput?.closest('turbo-frame') !== null
+  const fieldValue   = (pickerInput?.value ?? '').trim()
+  const seenBefore   = window.__pbSeenOnce.has(pickerId as string)
+
+  if (!inTurboFrame) {
+    return defaultDate === '' ? null : defaultDate
+  }
+
+   if (fieldValue) return fieldValue
+
+  // User submitted empty value, keep empty
+  if (seenBefore) return null
+
+  // Show default date on first render
+  window.__pbSeenOnce.add(pickerId as string)
+  return defaultDate === '' ? null : defaultDate
   }
 
   const disabledWeekDays = () => {
