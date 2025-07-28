@@ -24,6 +24,10 @@ import PbKitFetch from 'components/PbKitFetch'
 import AvailableProps from 'components/AvailableProps'
 import MainSidebar from 'components/MainSidebar'
 import HomepageHero from 'components/HomepageHero'
+import GlobalProps from 'components/GlobalPropsAndTokens/GlobalPropsIndex'
+import GlobalPropsExample from 'components/GlobalPropsAndTokens/ExamplesPage/GlobalPropsExamplesIndex'
+import Tokens from 'components/GlobalPropsAndTokens/TokensIndex'
+import TokensExamples from 'components/GlobalPropsAndTokens/ExamplesPage/TokensExamplesIndex'
 import AnchorJS from 'anchor-js'
 import { Website } from 'components/app'
 import { Turbo } from "@hotwired/turbo-rails"
@@ -67,5 +71,9 @@ WebpackerReact.registerComponents({
   PbKitFetch,
   MainSidebar,
   Website,
+  GlobalProps,
+  GlobalPropsExample,
   HomepageHero,
+  Tokens,
+  TokensExamples,
 })

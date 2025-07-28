@@ -2,6 +2,7 @@
 
 MENU = Rails.cache.fetch("menu_yml") { YAML.load_file(Rails.root.join("config/menu.yml")) }
 PATTERNS = Rails.cache.fetch("patterns_yml") { YAML.load_file(Rails.root.join("config/patterns.yml")) }
+GLOBAL_PROPS_AND_TOKENS = Rails.cache.fetch("global_props_and_tokens_yml") { YAML.load_file(Rails.root.join("config/global_props_and_tokens.yml")) }
 
 require "markdown_helper"
 search_path = File.join(Rails.root, "/app/views/guides")
