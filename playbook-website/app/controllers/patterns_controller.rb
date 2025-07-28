@@ -1,10 +1,5 @@
 # frozen_string_literal: true
 
-require "will_paginate"
-require "playbook/pagination_renderer"
-require "will_paginate/array"
-require "ostruct"
-
 class PatternsController < ApplicationController
   before_action :set_js
   before_action :set_pattern, only: :show
@@ -18,18 +13,20 @@ class PatternsController < ApplicationController
   def show
     @show_sidebar = true
 
-    # Required for table_filter_card pattern's pagination bars to appear
+    # Users array for Rails table_filter_card pattern
     if params[:name] == "table_filter_card"
-      @users = Array.new(50) do |i|
-        OpenStruct.new(
-          id: i + 1,
-          name: %w[Ashlee Nick Nida Justin Edward Elisa Gary Sam Aaron George][i % 10],
-          title: %w[Nitro Producteer UX Engineer II Senior UX Engineer Director of User Experience Engineering UX Designer UX Engineer UX Engineer Associate Nitro Quality Ninja UX Engineer][i % 10],
-          department: "Business Technology",
-          branch: "Philadelphia",
-          start_date: Date.new(2025, 1, 1) + i.days
-        )
-      end.paginate(page: params[:page], per_page: 10)
+      @users = [
+        { id: 1, name: "Ashlee", title: "Nitro Producteer", department: "Business Technology", branch: "Philadelphia", start_date: Date.new(2025, 1, 1) },
+        { id: 2, name: "Nick", title: "UX Engineer II", department: "Business Technology", branch: "Philadelphia", start_date: Date.new(2025, 1, 2) },
+        { id: 3, name: "Nida", title: "Senior UX Engineer", department: "Business Technology", branch: "Philadelphia", start_date: Date.new(2025, 1, 3) },
+        { id: 4, name: "Justin", title: "Director of User Experience Engineering", department: "Business Technology", branch: "Philadelphia", start_date: Date.new(2025, 1, 4) },
+        { id: 5, name: "Edward", title: "UX Designer", department: "Business Technology", branch: "Philadelphia", start_date: Date.new(2025, 1, 5) },
+        { id: 6, name: "Elisa", title: "UX Engineer", department: "Business Technology", branch: "Philadelphia", start_date: Date.new(2025, 1, 6) },
+        { id: 7, name: "Gary", title: "UX Engineer", department: "Business Technology", branch: "Philadelphia", start_date: Date.new(2025, 1, 7) },
+        { id: 8, name: "Sam", title: "UX Engineer", department: "Business Technology", branch: "Philadelphia", start_date: Date.new(2025, 1, 8) },
+        { id: 9, name: "Aaron", title: "Associate Nitro Quality Ninja", department: "Business Technology", branch: "Philadelphia", start_date: Date.new(2025, 1, 9) },
+        { id: 10, name: "George", title: "UX Engineer", department: "Business Technology", branch: "Philadelphia", start_date: Date.new(2025, 1, 10) },
+      ]
     end
   end
 

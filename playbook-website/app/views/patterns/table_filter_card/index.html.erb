@@ -6,7 +6,6 @@
     padding_left: { xs: "sm", sm: "sm", md: "xl", lg: "xl", xl: "xl", default: "xl"}
 }) %>
 
-
 <%= pb_rails("card", props: { padding: "none", margin_x: { xs: "sm", sm: "sm", md: "xl", lg: "xl", xl: "xl", default: "xl"} }) do %>
     <%= pb_rails("flex", props: { align: "stretch", flex_direction: "column", gap: "none" }) do %>
         <%=
@@ -78,8 +77,6 @@
             <% end %>
         <% end %>
         <%= pb_rails("section_separator") %>
-        <%= pb_rails("pagination", props: { model: @users, view: self, padding_y: "xs", margin_left: "lg" }) %>
-        <%= pb_rails("section_separator") %>
         <%= pb_rails("table", props: { collapse: "md", container: false, size: "sm" }) do %>
             <%= pb_rails("table/table_head") do %>
                 <%= pb_rails("table/table_row") do %>
@@ -87,25 +84,24 @@
                     <%= pb_rails("table/table_header", props: { text: "Name" }) %>
                     <%= pb_rails("table/table_header", props: { text: "Title" }) %>
                     <%= pb_rails("table/table_header", props: { text: "Department" }) %>
-                    <%= pb_rails("table/table_header", props: { text: "Status", text_align: { xs: "left", sm: "left", md: "left", lg: "center", xl: "center", default: "center" } }) %>
+                    <%= pb_rails("table/table_header", props: { text: "Branch" }) %>
                     <%= pb_rails("table/table_header", props: { text: "Date", text_align: "right" }) %>
                 <% end %>
             <% end %>
             <%= pb_rails("table/table_body") do %>
                 <% @users.each do |user| %>
                     <%= pb_rails("table/table_row") do %>
-                        <%= pb_rails("table/table_cell", props: {margin_x: {xs: "sm"}, number_spacing: "tabular", text: user.id.to_s}) %>
-                        <%= pb_rails("table/table_cell", props: {margin_x: {xs: "sm"}, text: user.name}) %>
-                        <%= pb_rails("table/table_cell", props: {margin_x: {xs: "sm"}, text: user.title}) %>
-                        <%= pb_rails("table/table_cell", props: {margin_x: {xs: "sm"}, text: user.department}) %>
-                        <%= pb_rails("table/table_cell", props: {margin_x: {xs: "sm"}, text: user.branch}) %>
+                        <%= pb_rails("table/table_cell", props: {margin_x: {xs: "sm"}, number_spacing: "tabular", text: user[:id].to_s}) %>
+                        <%= pb_rails("table/table_cell", props: {margin_x: {xs: "sm"}, text: user[:name]}) %>
+                        <%= pb_rails("table/table_cell", props: {margin_x: {xs: "sm"}, text: user[:title]}) %>
+                        <%= pb_rails("table/table_cell", props: {margin_x: {xs: "sm"}, text: user[:department]}) %>
+                        <%= pb_rails("table/table_cell", props: {margin_x: {xs: "sm"}, text: user[:branch]}) %>
                         <%= pb_rails("table/table_cell", props: {margin_x: {xs: "sm"}}) do %>
-                            <%= pb_rails("date", props: {alignment: "right", date: user.start_date.to_s}) %>
+                            <%= pb_rails("date", props: {alignment: "right", date: user[:start_date].to_s}) %>
                         <% end %>
                     <% end %>
                 <% end %>
             <% end %>
         <% end %>
-        <%= pb_rails("pagination", props: { model: @users, view: self, padding_y: "xs", margin_left: "lg" }) %>
     <% end %>
 <% end %>
