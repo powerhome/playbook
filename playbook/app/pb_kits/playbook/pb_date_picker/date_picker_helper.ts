@@ -85,11 +85,12 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
   // ===========================================================
 
   const defaultDateGetter = () => {
-  const pickerInput = document.querySelector<HTMLElement & { [x: string]: any }>(`#${pickerId}`)._flatpickr
+  const pickerInput = document.querySelector<HTMLElement & { [x: string]: any }>(`#${pickerId}`)
 
   const inTurboFrame = pickerInput?.closest('turbo-frame') !== null
   const fieldValue   = (pickerInput?.value ?? '').trim()
   const seenBefore   = window.__pbSeenOnce.has(pickerId as string)
+  console.log('defaultDateGetter',  { fieldValue, seenBefore, inTurboFrame, pickerInput } )
 
   if (!inTurboFrame) {
     return defaultDate === '' ? null : defaultDate
