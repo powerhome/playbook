@@ -29,6 +29,10 @@ module Playbook
                                      default: "header"
       prop :row_styling, type: Playbook::Props::Array,
                          default: []
+      prop :last_row, type: Playbook::Props::Boolean,
+                      default: false
+      prop :immediate_parent_row_id, type: Playbook::Props::String,
+                                     default: ""
 
       def data
         Hash(prop(:data)).merge(table_data_attributes)
@@ -73,9 +77,19 @@ module Playbook
       # Selectable Rows w/ Subrows - checkboxes part of toggleable first cell
       def render_row_checkbox
         if selectable_rows
+          indeterminate_parent =
+            if depth.zero?
+              prefix = id ? "#{id}-" : ""
+              "#{prefix}select-all-rows"
+            else
+              "select-row-#{immediate_parent_row_id}"
+            end
+
           pb_rails("checkbox", props: {
                      id: "select-row-#{row_id || row.object_id}",
-                     indeterminate_parent: "#{id ? "#{id}-" : ''}select-all-rows",
+                     indeterminate_main: !last_row,
+                     indeterminate_main_labels: ["", ""],
+                     indeterminate_parent: indeterminate_parent,
                      name: "select-row-#{row_id || row.object_id}",
                      data: {
                        row_id: row_id || row.object_id.to_s,
