@@ -7,8 +7,8 @@ import timeSelectPlugin from './plugins/timeSelect'
 import quickPickPlugin from './plugins/quickPick'
 import { getAllIcons } from '../utilities/icons/allicons';
 
-declare global { interface Window { __pbSeenOnce?: Set<string> } }
-window.__pbSeenOnce ||= new Set<string>() 
+declare global { interface Window { __pbDateState?: Record<string, { submitted: string }> } }
+window.__pbDateState ||= {};
 
 const angleDown = getAllIcons().angleDown.string
 
@@ -88,22 +88,26 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
   const pickerInput = document.querySelector<HTMLElement & { [x: string]: any }>(`#${pickerId}`)
 
   const inTurboFrame = pickerInput?.closest('turbo-frame') !== null
-  const fieldValue   = (pickerInput?.value ?? '').trim()
-  const seenBefore   = window.__pbSeenOnce.has(pickerId as string)
-  console.log('defaultDateGetter',  { fieldValue, seenBefore, inTurboFrame, pickerInput } )
+
+if (inTurboFrame && pickerInput?.form && !pickerInput.form.dataset.pbDateSubmitBound) {
+  pickerInput.form.dataset.pbDateSubmitBound = '1';
+  pickerInput.form.addEventListener('submit', () => {
+    document.querySelectorAll<HTMLInputElement>('.flatpickr-input').forEach(el => {
+      if (el.id) window.__pbDateState![el.id] = { submitted: (el.value ?? '').trim() };
+    });
+  }, { capture: true });
+}
 
   if (!inTurboFrame) {
     return defaultDate === '' ? null : defaultDate
   }
+  const last = window.__pbDateState![pickerId as string]?.submitted;
+  console.log('defaultDateGetter', { last, defaultDate, pickerId, inTurboFrame });
+  // if we have a last submitted value, use it ('' goes to null to keep blank)
+  if (last !== undefined) return last === '' ? null : last;
 
-   if (fieldValue) return fieldValue
+  return defaultDate === '' ? null : defaultDate;
 
-  // User submitted empty value, keep empty
-  if (seenBefore) return null
-
-  // Show default date on first render
-  window.__pbSeenOnce.add(pickerId as string)
-  return defaultDate === '' ? null : defaultDate
   }
 
   const disabledWeekDays = () => {
