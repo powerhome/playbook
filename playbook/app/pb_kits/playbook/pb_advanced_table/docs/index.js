@@ -42,3 +42,4 @@ export {default as AdvancedTableWithCustomHeader} from './_advanced_table_with_c
 export { default as AdvancedTableCustomSort } from './_advanced_table_custom_sort.jsx'
 export { default as AdvancedTableWithCustomHeaderMultiHeader } from './_advanced_table_with_custom_header_multi_header.jsx'
 export { default as AdvancedTableSortPerColumn } from './_advanced_table_sort_per_column.jsx'
+export { default as AdvancedTableSortPerColumnForMultiColumn } from './_advanced_table_sort_per_column_for_multi_column.jsx'

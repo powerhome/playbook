@@ -30,6 +30,7 @@ examples:
   - advanced_table_sort: Enable Sorting
   - advanced_table_sort_control: Sort Control
   - advanced_table_sort_per_column: Enable Sort By Column
+  - advanced_table_sort_per_column_for_multi_column: Enable Sort By Column (Multi-Column)
   - advanced_table_custom_sort: Custom Sort
   - advanced_table_expanded_control: Expanded Control
   - advanced_table_expand_by_depth: Expand by Depth
