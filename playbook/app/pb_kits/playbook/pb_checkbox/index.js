@@ -169,11 +169,19 @@ export default class PbCheckbox extends PbEnhancedElement {
       
       if (state.indeterminate) {
         // If indeterminate, uncheck all descendants and the parent
-        allDescendantCheckboxes.forEach(cb => cb.checked = false);
+        allDescendantCheckboxes.forEach(cb => {
+          cb.checked = false;
+          // Dispatch custom event for programmatic changes- change styles in advanced table
+          cb.dispatchEvent(new Event('checkbox-programmatic-change', { bubbles: true }));
+        });
         this.checked = false;
       } else {
         // Otherwise, set all descendants to the same state as this checkbox
-        allDescendantCheckboxes.forEach(cb => cb.checked = this.checked);
+        allDescendantCheckboxes.forEach(cb => {
+          cb.checked = this.checked;
+          // Dispatch custom event for programmatic changes- change styles in advanced table
+          cb.dispatchEvent(new Event('checkbox-programmatic-change', { bubbles: true }));
+        });
       }
       
       // Update this checkbox first, then parents after a delay

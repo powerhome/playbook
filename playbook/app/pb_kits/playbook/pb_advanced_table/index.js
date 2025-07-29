@@ -160,6 +160,32 @@ export default class PbAdvancedTable extends PbEnhancedElement {
       }
     });
 
+    // If a parent checkbox changed a checkbox, update styling
+    // Listen for programmatic checkbox changes from parent-child relationships
+    table.addEventListener("checkbox-programmatic-change", (event) => {
+      const checkbox = event.target;
+      if (!checkbox || checkbox.type !== 'checkbox') return;
+
+      // Individual row checkbox logic
+      const rowLabel = checkbox.closest("label[data-row-id]");
+      if (rowLabel) {
+        this.handleCheckboxClick({ currentTarget: checkbox });
+        this.updateTableSelectedRowsAttribute();
+
+        // Sync header select-all state
+        const selectAllInput = table.querySelector(
+          '#select-all-rows input[type="checkbox"]'
+        );
+        if (selectAllInput) {
+          selectAllInput.checked = Array.from(
+            table.querySelectorAll('label[data-row-id] input[type="checkbox"]')
+          ).every((cb) => cb.checked);
+        }
+      }
+    });
+
+
+
     // Delegate expand/collapse toggles
     table.addEventListener("click", (event) => {
       const toggleBtn = event.target.closest("[data-advanced-table]");
