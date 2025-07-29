@@ -968,13 +968,11 @@
 .pb-advanced-table-popover-option:hover {
   background-color: $bg_light;
 }
-// Container false with Card wrapper Reacr
+// Container false with Card wrapper React
 [class^=pb_card_kit] > .pb_advanced_table .pb_advanced_table_body .last-cell,
-[class^=pb_card_kit] > .pb_advanced_table .pb_advanced_table_header .last-header-cell {
-    border-right: none !important;
-}
-
-[class^=pb_card_kit] > .pb_advanced_table .pb_advanced_table_body tr:last-child td{
+[class^=pb_card_kit] > .pb_advanced_table .pb_advanced_table_header .last-header-cell,
+[class^=pb_card_kit] > .pb_advanced_table .pb_advanced_table_body tr td:last-child,
+[class^=pb_card_kit] > .pb_advanced_table .pb_advanced_table_header tr th:last-child {
     border-right: none !important;
 }
 
@@ -984,3 +982,11 @@
     border-bottom: none !important; 
   }
 }
+
+
+[class^=pb_card_kit] > .pb_advanced_table .last-row-cell  {
+
+    td {
+      border-bottom: none !important; 
+    }
+  }
