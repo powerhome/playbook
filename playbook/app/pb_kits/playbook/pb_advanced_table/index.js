@@ -42,9 +42,27 @@ export default class PbAdvancedTable extends PbEnhancedElement {
   // Recalculate selected count based on all checked checkboxes
   recalculateSelectedCount() {
     const table = this.element.closest("table");
-    const allCheckboxes = table.querySelectorAll(
+    
+    // Get all checkboxes that could be part of the selection
+    // This includes row checkboxes and any parent checkboxes that might be programmatically checked
+    const rowCheckboxes = table.querySelectorAll(
       'label[data-row-id] input[type="checkbox"]'
     );
+    
+    // Also get any checkboxes that might be parent checkboxes (those with data-pb-checkbox-indeterminate-main)
+    // But exclude the select-all checkbox itself from the count
+    const parentCheckboxes = table.querySelectorAll(
+      '[data-pb-checkbox-indeterminate-main="true"] input[type="checkbox"]'
+    );
+    
+    // Filter out the select-all checkbox from parent checkboxes
+    const selectAllCheckbox = table.querySelector('#select-all-rows input[type="checkbox"]');
+    const filteredParentCheckboxes = Array.from(parentCheckboxes).filter(checkbox => 
+      checkbox !== selectAllCheckbox && !checkbox.id.includes('select-all-rows')
+    );
+    
+    // Combine all checkboxes and remove duplicates
+    const allCheckboxes = new Set([...rowCheckboxes, ...filteredParentCheckboxes]);
     
     // Clear the selectedRows Set and rebuild it from checked checkboxes
     PbAdvancedTable.selectedRows.clear();
@@ -55,17 +73,23 @@ export default class PbAdvancedTable extends PbEnhancedElement {
       
       if (isChecked) {
         PbAdvancedTable.selectedRows.add(checkbox.id);
-        rowEl.classList.add("bg-row-selection");
-        rowEl.classList.remove("bg-white", "bg-silver");
+        // Only apply styling if the checkbox is inside a table row
+        if (rowEl) {
+          rowEl.classList.add("bg-row-selection");
+          rowEl.classList.remove("bg-white", "bg-silver");
+        }
       } else {
-        rowEl.classList.remove("bg-row-selection");
-        
-        if (this.isRowExpanded(rowEl)) {
-          rowEl.classList.remove("bg-silver");
-          rowEl.classList.add("bg-white");
-        } else {
-          rowEl.classList.remove("bg-white");
-          rowEl.classList.add("bg-silver");
+        // Only apply styling if the checkbox is inside a table row
+        if (rowEl) {
+          rowEl.classList.remove("bg-row-selection");
+          
+          if (this.isRowExpanded(rowEl)) {
+            rowEl.classList.remove("bg-silver");
+            rowEl.classList.add("bg-white");
+          } else {
+            rowEl.classList.remove("bg-white");
+            rowEl.classList.add("bg-silver");
+          }
         }
       }
     });
@@ -74,11 +98,8 @@ export default class PbAdvancedTable extends PbEnhancedElement {
     updateSelectionActionBar(table.closest(".pb_advanced_table"), PbAdvancedTable.selectedRows.size);
     
     // Sync header select-all state
-    const selectAllInput = table.querySelector(
-      '#select-all-rows input[type="checkbox"]'
-    );
-    if (selectAllInput) {
-      selectAllInput.checked = Array.from(allCheckboxes).every((cb) => cb.checked);
+    if (selectAllCheckbox) {
+      selectAllCheckbox.checked = Array.from(rowCheckboxes).every((cb) => cb.checked);
     }
   }
 
@@ -210,14 +231,25 @@ export default class PbAdvancedTable extends PbEnhancedElement {
       const rowLabel = checkbox.closest("label[data-row-id]");
       if (rowLabel) {
         this.handleCheckboxClick({ currentTarget: checkbox });
-        
-        // Recalculate the count to ensure all programmatically changed checkboxes are included
-        setTimeout(() => {
-          this.recalculateSelectedCount();
-        }, 0);
       }
+      
+      // Recalculate the count to ensure all programmatically changed checkboxes are included
+      setTimeout(() => {
+        this.recalculateSelectedCount();
+      }, 10); // Slightly longer delay to ensure all changes are processed
     });
 
+
+    // Also listen for all checkbox changes to ensure we catch everything
+    table.addEventListener("change", (event) => {
+      const checkbox = event.target;
+      if (checkbox && checkbox.type === 'checkbox') {
+        // Force recalculation after a short delay to ensure all changes are processed
+        setTimeout(() => {
+          this.recalculateSelectedCount();
+        }, 50);
+      }
+    });
 
     // Delegate expand/collapse toggles
     table.addEventListener("click", (event) => {
