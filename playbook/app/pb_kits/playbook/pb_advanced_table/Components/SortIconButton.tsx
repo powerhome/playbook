@@ -25,6 +25,7 @@ const downIcon = getAllIcons()["arrowDownShortWide"].icon as unknown as { [key: 
       {header.column.getIsSorted() === "desc" ? (
         <div className="sort-button-icon" 
             key={firstIcon}
+            style={{ paddingLeft: `${header?.index === 0 ? "2px" : "4px"}` }}
         >
         { firstIcon === "arrow-up-short-wide" ? (
           <Icon 
@@ -37,6 +38,7 @@ const downIcon = getAllIcons()["arrowDownShortWide"].icon as unknown as { [key: 
       ) : (
         <div className="sort-button-icon" 
             key={secondIcon}
+            style={{ paddingLeft: "4px" }}
         >
         { secondIcon === "arrow-down-short-wide" ? (
           <Icon 

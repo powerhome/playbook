@@ -69,7 +69,7 @@ const columnDefinitions = [
           tableData={MOCK_DATA}
           {...props}
       >
-        <AdvancedTable.Header />
+        <AdvancedTable.Header enableSorting />
         <AdvancedTable.Body />
       </AdvancedTable>
     </div>
