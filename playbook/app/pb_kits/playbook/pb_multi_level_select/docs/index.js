@@ -14,4 +14,3 @@ export { default as MultiLevelSelectDisabledOptionsParent } from './_multi_level
 export { default as MultiLevelSelectDisabledOptionsParentDefault } from './_multi_level_select_disabled_options_parent_default.jsx'
 export { default as MultiLevelSelectDisabledOptionsDefault } from './_multi_level_select_disabled_options_default.jsx'
 export { default as MultiLevelSelectLabel } from './_multi_level_select_label.jsx'
-export { default as MultiLevelSelectShowCheckedChildren } from './_multi_level_select_show_checked_children.jsx'
