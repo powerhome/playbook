@@ -968,7 +968,7 @@
 .pb-advanced-table-popover-option:hover {
   background-color: $bg_light;
 }
-// Container false with Card wrapper React
+// Removes borders when Wrapped inside the Card Kit
 [class^=pb_card_kit] > .pb_advanced_table .pb_advanced_table_body .last-cell,
 [class^=pb_card_kit] > .pb_advanced_table .pb_advanced_table_header .last-header-cell,
 [class^=pb_card_kit] > .pb_advanced_table .pb_advanced_table_body tr td:last-child,
@@ -976,17 +976,10 @@
     border-right: none !important;
 }
 
-// Container false with Card wrapper React
-[class^=pb_card_kit] > .pb_advanced_table tr:last-child {
+//  Removes borders when Wrapped inside the Card Kit
+[class^=pb_card_kit] > .pb_advanced_table tr:last-child, 
+[class^=pb_card_kit] > .pb_advanced_table .last-row-cell {
   td {
     border-bottom: none !important; 
   }
 }
-
-
-[class^=pb_card_kit] > .pb_advanced_table .last-row-cell  {
-
-    td {
-      border-bottom: none !important; 
-    }
-  }
