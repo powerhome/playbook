@@ -11,7 +11,7 @@ export default class PbAdvancedTable extends PbEnhancedElement {
   }
 
   static expandedRows = new Set();
-  // static selectedRows = new Set();
+  static selectedRows = new Set();
   static isCollapsing = false;
 
   constructor(...args) {
@@ -32,12 +32,12 @@ export default class PbAdvancedTable extends PbEnhancedElement {
     return this.childRowsMap.get(parentId);
   }
 
-  // updateTableSelectedRowsAttribute() {
-  //   const mainTable = this.element.closest(".pb_advanced_table");
-  //   mainTable.dataset.selectedRows = JSON.stringify(
-  //     Array.from(PbAdvancedTable.selectedRows)
-  //   );
-  // }
+  updateTableSelectedRowsAttribute() {
+    const mainTable = this.element.closest(".pb_advanced_table");
+    mainTable.dataset.selectedRows = JSON.stringify(
+      Array.from(PbAdvancedTable.selectedRows)
+    );
+  }
 
   // Check if the row is expanded or collapsed
   // This is used to determine the background color of the row
@@ -47,162 +47,50 @@ export default class PbAdvancedTable extends PbEnhancedElement {
     return closeIcon?.style.display === "none" || !closeIcon;
   }
 
-  // updateParentCheckboxes(checkbox) {
-  //   const rowEl = checkbox.closest("tr");
-  //   if (!rowEl) return;
+  handleCheckboxClick(event) {
+    const checkbox = event.currentTarget;
+    const rowId = checkbox.id;
+    const isChecked = checkbox.checked;
+    const rowEl = checkbox.closest("tr");
 
-  //   const table = rowEl.closest("table");
-  //   if (!table) return;
+    if (isChecked) {
+      PbAdvancedTable.selectedRows.add(rowId);
+      rowEl.classList.add("bg-row-selection");
+      rowEl.classList.remove("bg-white", "bg-silver");
+    } else {
+      PbAdvancedTable.selectedRows.delete(rowId);
+    }
+    // Update background color on row
+    if (!isChecked) {
+      rowEl.classList.remove("bg-row-selection");
 
-  //   const contentTrail = rowEl.dataset.advancedTableContent;
-  //   if (!contentTrail) return;
+      if (this.isRowExpanded(rowEl)) {
+        rowEl.classList.remove("bg-silver");
+        rowEl.classList.add("bg-white");
+      } else {
+        rowEl.classList.remove("bg-white");
+        rowEl.classList.add("bg-silver");
+      }
+    }
 
-  //   const ancestorIds = contentTrail.split("-").slice(0, -1);
+    this.updateTableSelectedRowsAttribute();
 
-  //   ancestorIds.reverse();
-  //   ancestorIds.forEach((ancestorId) => {
-  //     const parentRowSelector = `[data-advanced-table-content$="${ancestorId}"]`;
-  //     const parentRow = table.querySelector(parentRowSelector);
-  //     if (!parentRow) return;
+    const table = checkbox.closest("table");
+    const selectAllCheckbox = table.querySelector("#select-all-rows");
 
-  //     const parentLabel = parentRow.querySelector("label[data-row-id]");
-  //     if (!parentLabel) return;
+    if (selectAllCheckbox) {
+      const allCheckboxes = table.querySelectorAll(
+        "label[data-row-id] input[type='checkbox']"
+      );
+      const allChecked = Array.from(allCheckboxes).every((cb) => cb.checked);
 
-  //     const parentCheckbox = parentLabel.querySelector(
-  //       "input[type='checkbox']"
-  //     );
-  //     if (!parentCheckbox) return;
-
-  //     // Find all immediate children of parent linked to ancestor Id, filter our subrow headers
-  //     const children = Array.from(
-  //       table.querySelectorAll(`tr[data-row-parent$="_${ancestorId}"]`)
-  //     ).filter((child) => {
-  //       const content = child.dataset.advancedTableContent;
-  //       return !(content && content.endsWith("sr"));
-  //     });
-
-  //     const allChildrenChecked = Array.from(children).every((child) => {
-  //       const childLabel = child.querySelector("label[data-row-id]");
-  //       if (!childLabel) return false;
-  //       const childCheckbox = childLabel.querySelector(
-  //         "input[type='checkbox']"
-  //       );
-  //       if (!childCheckbox) return false;
-  //       return childCheckbox.checked;
-  //     });
-
-  //     // Update parent checkbox
-  //     parentCheckbox.checked = allChildrenChecked;
-
-  //     const parentCheckboxId = parentCheckbox.id;
-  //     if (allChildrenChecked) {
-  //       PbAdvancedTable.selectedRows.add(parentCheckboxId);
-  //       parentRow.classList.add("bg-row-selection");
-  //       parentRow.classList.remove("bg-white", "bg-silver");
-  //     } else {
-  //       PbAdvancedTable.selectedRows.delete(parentCheckboxId);
-  //     }
-  //     if (!allChildrenChecked) {
-  //       parentRow.classList.remove("bg-row-selection");
-
-  //       if (this.isRowExpanded(parentRow)) {
-  //         parentRow.classList.remove("bg-silver");
-  //         parentRow.classList.add("bg-white");
-  //       } else {
-  //         parentRow.classList.remove("bg-white");
-  //         parentRow.classList.add("bg-silver");
-  //       }
-  //     }
-  //   });
-  // }
-
-  // handleCheckboxClick(event) {
-  //   const checkbox = event.currentTarget;
-  //   const rowId = checkbox.id;
-  //   const isChecked = checkbox.checked;
-  //   const rowEl = checkbox.closest("tr");
-
-  //   if (isChecked) {
-  //     PbAdvancedTable.selectedRows.add(rowId);
-  //     rowEl.classList.add("bg-row-selection");
-  //     rowEl.classList.remove("bg-white", "bg-silver");
-  //   } else {
-  //     PbAdvancedTable.selectedRows.delete(rowId);
-  //   }
-  //   // Update background color on row
-  //   if (!isChecked) {
-  //     rowEl.classList.remove("bg-row-selection");
-
-  //     if (this.isRowExpanded(rowEl)) {
-  //       rowEl.classList.remove("bg-silver");
-  //       rowEl.classList.add("bg-white");
-  //     } else {
-  //       rowEl.classList.remove("bg-white");
-  //       rowEl.classList.add("bg-silver");
-  //     }
-  //   }
-  //   if (rowEl) {
-  //     const table = rowEl.closest("table");
-  //     const rowContent = rowEl.dataset.advancedTableContent;
-
-  //     if (rowContent) {
-  //       const childRows = table.querySelectorAll(
-  //         `[data-advanced-table-content^="${rowContent}-"]`
-  //       );
-
-  //       childRows.forEach((childRow) => {
-  //         const label = childRow.querySelector("label[data-row-id]");
-  //         if (!label) return;
-
-  //         const childCheckbox = label.querySelector("input[type='checkbox']");
-  //         if (!childCheckbox) return;
-
-  //         childCheckbox.checked = isChecked;
-
-  //         const childRowId = childCheckbox.id;
-  //         const childRowEl = childCheckbox.closest("tr");
-  //         if (isChecked) {
-  //           PbAdvancedTable.selectedRows.add(childRowId);
-  //           childRowEl?.classList.add("bg-row-selection");
-  //           childRowEl?.classList.remove("bg-white", "bg-silver");
-  //         } else {
-  //           PbAdvancedTable.selectedRows.delete(childRowId);
-  //         }
-  //         if (!isChecked) {
-  //           childRowEl?.classList.remove("bg-row-selection");
-
-  //           if (this.isRowExpanded(childRowEl)) {
-  //             childRowEl?.classList.remove("bg-silver");
-  //             childRowEl?.classList.add("bg-white");
-  //           } else {
-  //             childRowEl?.classList.remove("bg-white");
-  //             childRowEl?.classList.add("bg-silver");
-  //           }
-  //         }
-  //       });
-  //     }
-  //   }
-
-  //   this.updateParentCheckboxes(checkbox);
-
-  //   this.updateTableSelectedRowsAttribute();
-
-  //   const table = checkbox.closest("table");
-  //   const selectAllCheckbox = table.querySelector("#select-all-rows");
-
-  //   if (selectAllCheckbox) {
-  //     const allCheckboxes = table.querySelectorAll(
-  //       "label[data-row-id] input[type='checkbox']"
-  //     );
-  //     const allChecked = Array.from(allCheckboxes).every((cb) => cb.checked);
-
-  //     const selectAllInput = selectAllCheckbox.querySelector(
-  //       'input[type="checkbox"]'
-  //     );
-  //     selectAllInput.checked = allChecked;
-  //   }
-  //   updateSelectionActionBar(table.closest(".pb_advanced_table"), PbAdvancedTable.selectedRows.size);
-  // }
+      const selectAllInput = selectAllCheckbox.querySelector(
+        'input[type="checkbox"]'
+      );
+      selectAllInput.checked = allChecked;
+    }
+    updateSelectionActionBar(table.closest(".pb_advanced_table"), PbAdvancedTable.selectedRows.size);
+  }
 
   get target() {
     return this.childRowsFor(this.element.id) || [];
@@ -233,44 +121,44 @@ export default class PbAdvancedTable extends PbEnhancedElement {
     table.dataset.pbAdvancedTableInitialized = "true";
 
     // Delegate checkbox changes
-    // table.addEventListener("change", (event) => {
-    //   const checkbox = event.target.closest('input[type="checkbox"]');
-    //   if (!checkbox) return;
+    table.addEventListener("change", (event) => {
+      const checkbox = event.target.closest('input[type="checkbox"]');
+      if (!checkbox) return;
 
-    //   // Header "select-all" logic
-    //   if (checkbox.closest("#select-all-rows")) {
-    //     const checkAll = checkbox.checked;
-    //     const rowCheckboxes = table.querySelectorAll(
-    //       'label[data-row-id] input[type="checkbox"]'
-    //     );
-    //     rowCheckboxes.forEach((cb) => {
-    //       if (cb.checked !== checkAll) {
-    //         cb.checked = checkAll;
-    //         this.handleCheckboxClick({ currentTarget: cb });
-    //       }
-    //     });
-    //     this.updateTableSelectedRowsAttribute();
-    //     updateSelectionActionBar(table.closest(".pb_advanced_table"), PbAdvancedTable.selectedRows.size);
-    //     return;
-    //   }
+      // Header "select-all" logic
+      if (checkbox.closest("#select-all-rows")) {
+        const checkAll = checkbox.checked;
+        const rowCheckboxes = table.querySelectorAll(
+          'label[data-row-id] input[type="checkbox"]'
+        );
+        rowCheckboxes.forEach((cb) => {
+          if (cb.checked !== checkAll) {
+            cb.checked = checkAll;
+            this.handleCheckboxClick({ currentTarget: cb });
+          }
+        });
+        this.updateTableSelectedRowsAttribute();
+        updateSelectionActionBar(table.closest(".pb_advanced_table"), PbAdvancedTable.selectedRows.size);
+        return;
+      }
 
-    //   // Individual row checkbox logic
-    //   const rowLabel = checkbox.closest("label[data-row-id]");
-    //   if (rowLabel) {
-    //     this.handleCheckboxClick({ currentTarget: checkbox });
-    //     this.updateTableSelectedRowsAttribute();
+      // Individual row checkbox logic
+      const rowLabel = checkbox.closest("label[data-row-id]");
+      if (rowLabel) {
+        this.handleCheckboxClick({ currentTarget: checkbox });
+        this.updateTableSelectedRowsAttribute();
 
-    //     // Sync header select-all state
-    //     const selectAllInput = table.querySelector(
-    //       '#select-all-rows input[type="checkbox"]'
-    //     );
-    //     if (selectAllInput) {
-    //       selectAllInput.checked = Array.from(
-    //         table.querySelectorAll('label[data-row-id] input[type="checkbox"]')
-    //       ).every((cb) => cb.checked);
-    //     }
-    //   }
-    // });
+        // Sync header select-all state
+        const selectAllInput = table.querySelector(
+          '#select-all-rows input[type="checkbox"]'
+        );
+        if (selectAllInput) {
+          selectAllInput.checked = Array.from(
+            table.querySelectorAll('label[data-row-id] input[type="checkbox"]')
+          ).every((cb) => cb.checked);
+        }
+      }
+    });
 
     // Delegate expand/collapse toggles
     table.addEventListener("click", (event) => {
