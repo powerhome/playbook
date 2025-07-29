@@ -58,13 +58,14 @@ module Playbook
       # Selectable Rows No Subrows - checkboxes in their own first cell
       def render_checkbox_cell
         if selectable_rows
+          prefix = id ? "#{id}-" : ""
           pb_rails("table/table_cell", props: {
                      classname: "checkbox-cell",
                    }) do
             pb_rails("checkbox", props: {
-                       id: "select-row-#{row_id || row.object_id}",
+                       id: "#{prefix}select-row-#{row_id || row.object_id}",
                        indeterminate_parent: "#{id ? "#{id}-" : ''}select-all-rows",
-                       name: "select-row-#{row_id || row.object_id}",
+                       name: "#{prefix}select-row-#{row_id || row.object_id}",
                        data: {
                          row_id: row_id || row.object_id.to_s,
                          flat_advanced_table_select: true,
@@ -77,20 +78,20 @@ module Playbook
       # Selectable Rows w/ Subrows - checkboxes part of toggleable first cell
       def render_row_checkbox
         if selectable_rows
+          prefix = id ? "#{id}-" : ""
           indeterminate_parent =
             if depth.zero?
-              prefix = id ? "#{id}-" : ""
               "#{prefix}select-all-rows"
             else
-              "select-row-#{immediate_parent_row_id}"
+              "#{prefix}select-row-#{immediate_parent_row_id}"
             end
 
           pb_rails("checkbox", props: {
-                     id: "select-row-#{row_id || row.object_id}",
+                     id: "#{prefix}select-row-#{row_id || row.object_id}",
                      indeterminate_main: !last_row,
                      indeterminate_main_labels: ["", ""],
                      indeterminate_parent: indeterminate_parent,
-                     name: "select-row-#{row_id || row.object_id}",
+                     name: "#{prefix}select-row-#{row_id || row.object_id}",
                      data: {
                        row_id: row_id || row.object_id.to_s,
                      },
