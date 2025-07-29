@@ -153,11 +153,7 @@ export default class PbCheckbox extends PbEnhancedElement {
       });
     };
 
-    // Store this instance on the wrapper for parent access
-    mainCheckboxWrapper.pbCheckboxInstance = {
-      updateMainCheckbox,
-      updateParentCheckboxes
-    };
+
 
     // Initialize checkbox state
     updateMainCheckbox();
@@ -189,6 +185,9 @@ export default class PbCheckbox extends PbEnhancedElement {
       setTimeout(() => {
         updateParentCheckboxes();
       }, 0);
+      
+      // Also trigger updates on all main checkboxes to ensure proper state propagation
+      triggerAllMainCheckboxUpdates();
     });
 
     // Handle child checkbox changes
@@ -211,6 +210,37 @@ export default class PbCheckbox extends PbEnhancedElement {
         cb.addEventListener('change', updateMainCheckbox);
       }
     });
+    
+    // Also trigger updates on all main checkboxes when any checkbox changes
+    let updateTimeout = null;
+    const triggerAllMainCheckboxUpdates = () => {
+      // Debounce the updates to prevent excessive calls
+      if (updateTimeout) {
+        clearTimeout(updateTimeout);
+      }
+      updateTimeout = setTimeout(() => {
+        const mainCheckboxes = document.querySelectorAll('[data-pb-checkbox-indeterminate-main="true"]');
+        mainCheckboxes.forEach(mainCb => {
+          const mainInstance = mainCb.pbCheckboxInstance;
+          if (mainInstance && mainInstance.updateMainCheckbox) {
+            mainInstance.updateMainCheckbox();
+          }
+        });
+      }, 10); // Small delay to batch updates
+    };
+    
+    // Store the original updateMainCheckbox function and create a new one that also triggers updates
+    const originalUpdateMainCheckbox = updateMainCheckbox;
+    const enhancedUpdateMainCheckbox = () => {
+      originalUpdateMainCheckbox();
+      triggerAllMainCheckboxUpdates();
+    };
+    
+    // Replace the updateMainCheckbox function
+    mainCheckboxWrapper.pbCheckboxInstance = {
+      updateMainCheckbox: enhancedUpdateMainCheckbox,
+      updateParentCheckboxes
+    };
 
     // Setup updates for non-main checkboxes with children
     setupNonMainCheckboxUpdates();
