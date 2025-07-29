@@ -1,3 +1,3 @@
-If you wish to control the auto-expansion of nodes with descendants in your multi-level select, you can utilize `showCheckedChildren/show_checked_children`. This prop (set to 'true' by default) controls whether items will be expanded when opening the select, regardless of if there are any items currently selected.
+If you wish to control the auto-expansion of nodes with selected descendants in your multi-level select, you can utilize `showCheckedChildren/show_checked_children`. This prop (set to 'true' by default) controls whether items will be expanded on first render. When set to true, a node with selected descendants will automatically render as expanded so the selected nodes are visible. If you do NOT wish for this to be the case, you can set this prop to false.
 
 The prop will still honor any `expanded` attribute set up within your tree data.
