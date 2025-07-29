@@ -18,6 +18,7 @@ interface UseTableStateProps {
   columnDefinitions: GenericObject[];
   expandedControl?: GenericObject;
   sortControl?: GenericObject;
+  firstColumnSort?: boolean;
   onRowToggleClick?: (arg: Row<GenericObject>) => void;
   selectableRows?: boolean;
   initialLoadingRowsCount?: number;
@@ -40,6 +41,7 @@ export function useTableState({
   columnDefinitions,
   expandedControl,
   sortControl,
+  firstColumnSort,
   onRowToggleClick,
   selectableRows,
   initialLoadingRowsCount = 10,
@@ -91,11 +93,11 @@ export function useTableState({
           columns: buildColumns(column.columns, false),
         };
       }
-
       // Define the base column structure
       const columnStructure = {
         ...columnHelper.accessor(column.accessor, {
           header: column.header ?? column.label ?? "",
+          enableSorting: (isFirstColumn && firstColumnSort) || column.enableSort === true,
         }),
       };
 

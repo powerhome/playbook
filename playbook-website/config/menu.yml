@@ -33,7 +33,7 @@ kits:
     enhanced_element_used: true
   - name: sorting
     parent: advanced_table
-    kit_section: ["Enable Sorting", "Sort Control", "Custom Sort"]
+    kit_section: ["Enable Sorting", "Sort Control", "Enable Sort By Column", "Custom Sort"]
     platforms: *1
     status: stable
     icons_used: true

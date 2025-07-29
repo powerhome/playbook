@@ -53,6 +53,8 @@ export const TableHeaderCell = ({
     onExpandByDepthClick,
     toggleExpansionIcon,
     sortControl,
+    firstColumnSort,
+    setFirstColumnSort,
     responsive,
     selectableRows,
     hasAnySubRows,
@@ -63,6 +65,7 @@ export const TableHeaderCell = ({
   } = useContext(AdvancedTableContext);
 
   type justifyTypes = "none" | "center" | "start" | "end" | "between" | "around" | "evenly"
+  
   
   const toggleSortButton = (event: React.SyntheticEvent) => {
     if (sortControl) {
@@ -110,7 +113,9 @@ export const TableHeaderCell = ({
     const visibleSiblings = parent.columns.filter(columnHasVisibleLeaf);
     return visibleSiblings.at(-1) === header.column;
   })();
- 
+
+enableSorting ? setFirstColumnSort(true) : setFirstColumnSort(false)
+
 const cellClassName = classnames(
   "table-header-cells",
   `${showActionsBar && isActionBarVisible && "header-cells-with-actions"}`,
@@ -256,12 +261,9 @@ const isToggleExpansionEnabled =
             )}
 
           <Flex
-              className={`${header?.index === 0 &&
-                enableSorting &&
-                "header-sort-button pb_th_link"}`}
-              cursor={header?.index === 0 && enableSorting ? "pointer" : "default"}
-              {...(header?.index === 0 &&
-                enableSorting && {
+              className={`${header?.index === 0 && enableSorting && "header-sort-button pb_th_link"} ${header?.column.getCanSort() && "header-sort-secondary-columns"}`}
+              cursor={(header?.column.getCanSort() || (header?.index === 0 && enableSorting) ? "pointer" : "default")}
+              {...((header?.column.getCanSort() || (header?.index === 0 && enableSorting)) && {
                   htmlOptions: {
                     onClick: (event: React.MouseEvent) => toggleSortButton(event),
                     onKeyDown: (event: React.KeyboardEvent) => {
@@ -279,9 +281,7 @@ const isToggleExpansionEnabled =
               {flexRender(header?.column.columnDef.header, header?.getContext())}
             </div>
 
-            {header?.index === 0 &&
-              header.column.getCanSort() &&
-              enableSorting &&
+            {header?.column.getCanSort() &&
               (loading ? (
                 <div className="loading-toggle-icon" />
               ) : (
