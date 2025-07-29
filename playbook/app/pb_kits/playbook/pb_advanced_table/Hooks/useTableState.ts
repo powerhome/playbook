@@ -16,6 +16,7 @@ import { createCellFunction } from "../Utilities/CellRendererUtils";
 interface UseTableStateProps {
   tableData: GenericObject[];
   columnDefinitions: GenericObject[];
+  enableSortingRemoval?: boolean;
   expandedControl?: GenericObject;
   sortControl?: GenericObject;
   firstColumnSort?: boolean;
@@ -39,6 +40,7 @@ interface UseTableStateProps {
 export function useTableState({
   tableData,
   columnDefinitions,
+  enableSortingRemoval,
   expandedControl,
   sortControl,
   onRowToggleClick,
@@ -167,7 +169,7 @@ export function useTableState({
     getCoreRowModel: getCoreRowModel(),
     getExpandedRowModel: getExpandedRowModel(),
     getSortedRowModel: getSortedRowModel(),
-    enableSortingRemoval: false,
+    enableSortingRemoval: enableSortingRemoval,
     sortDescFirst: true,
     onRowSelectionChange: setRowSelection,
     onRowPinningChange,

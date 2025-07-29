@@ -50,11 +50,10 @@ export const TableHeaderCell = ({
     expanded,
     setExpanded,
     expandByDepth,
+    enableSortingRemoval,
     onExpandByDepthClick,
     toggleExpansionIcon,
     sortControl,
-    firstColumnSort,
-    setFirstColumnSort,
     responsive,
     selectableRows,
     hasAnySubRows,
@@ -284,7 +283,9 @@ const isToggleExpansionEnabled =
               (loading ? (
                 <div className="loading-toggle-icon" />
               ) : (
-                <SortIconButton header={header} 
+                <SortIconButton 
+                    enableSortingRemoval={enableSortingRemoval}
+                    header={header} 
                     sortIcon={sortIcon} 
                 />
               ))}

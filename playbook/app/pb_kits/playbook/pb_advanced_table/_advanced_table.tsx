@@ -40,6 +40,7 @@ type AdvancedTableProps = {
   dark?: boolean
   data?: { [key: string]: string }
   enableToggleExpansion?: "all" | "header" | "none"
+  enableSortingRemoval?: boolean
   expandedControl?: GenericObject
   expandByDepth?: { [key: string]: string | number }
   onExpandByDepthClick?: (arg: number, arg1: any) => void
@@ -87,6 +88,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
     dark = false,
     data = {},
     enableToggleExpansion = "header",
+    enableSortingRemoval = false,
     expandedControl,
     expandByDepth,
     onExpandByDepthClick,
@@ -136,6 +138,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
   } = useTableState({
     tableData,
     columnDefinitions,
+    enableSortingRemoval,
     expandedControl,
     sortControl,
     onRowToggleClick,
@@ -332,6 +335,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
             columnGroupBorderColor={columnGroupBorderColor}
             columnVisibilityControl={columnVisibilityControl}
             customSort={customSort}
+            enableSortingRemoval={enableSortingRemoval}
             enableToggleExpansion={enableToggleExpansion}
             enableVirtualization={virtualizedRows}
             expandByDepth={expandByDepth}

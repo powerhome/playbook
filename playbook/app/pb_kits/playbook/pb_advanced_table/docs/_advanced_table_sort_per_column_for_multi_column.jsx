@@ -66,6 +66,7 @@ const columnDefinitions = [
     <div>
       <AdvancedTable
           columnDefinitions={columnDefinitions}
+          enableSortingRemoval
           tableData={MOCK_DATA}
           {...props}
       >
