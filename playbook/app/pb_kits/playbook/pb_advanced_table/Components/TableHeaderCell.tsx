@@ -114,7 +114,6 @@ export const TableHeaderCell = ({
     return visibleSiblings.at(-1) === header.column;
   })();
 
-enableSorting ? setFirstColumnSort(true) : setFirstColumnSort(false)
 
 const cellClassName = classnames(
   "table-header-cells",
@@ -261,9 +260,9 @@ const isToggleExpansionEnabled =
             )}
 
           <Flex
-              className={`${header?.index === 0 && enableSorting && "header-sort-button pb_th_link"} ${header?.column.getCanSort() && "header-sort-secondary-columns"}`}
-              cursor={(header?.column.getCanSort() || (header?.index === 0 && enableSorting) ? "pointer" : "default")}
-              {...((header?.column.getCanSort() || (header?.index === 0 && enableSorting)) && {
+              className={`${header?.index === 0 && enableSorting && "header-sort-button pb_th_link"} ${header?.index !== 0 && header?.column.getCanSort() && "header-sort-secondary-columns"}`}
+              cursor={((header?.index !== 0 && header?.column.getCanSort()) || (header?.index === 0 && enableSorting) ? "pointer" : "default")}
+              {...(((header?.index !== 0 && header?.column.getCanSort()) || (header?.index === 0 && enableSorting)) && {
                   htmlOptions: {
                     onClick: (event: React.MouseEvent) => toggleSortButton(event),
                     onKeyDown: (event: React.KeyboardEvent) => {
@@ -281,7 +280,7 @@ const isToggleExpansionEnabled =
               {flexRender(header?.column.columnDef.header, header?.getContext())}
             </div>
 
-            {header?.column.getCanSort() &&
+            {((header?.index !== 0 && header?.column.getCanSort()) || (header?.index === 0 && enableSorting)) &&
               (loading ? (
                 <div className="loading-toggle-icon" />
               ) : (

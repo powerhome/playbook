@@ -41,7 +41,6 @@ export function useTableState({
   columnDefinitions,
   expandedControl,
   sortControl,
-  firstColumnSort,
   onRowToggleClick,
   selectableRows,
   initialLoadingRowsCount = 10,
@@ -97,7 +96,7 @@ export function useTableState({
       const columnStructure = {
         ...columnHelper.accessor(column.accessor, {
           header: column.header ?? column.label ?? "",
-          enableSorting: (isFirstColumn && firstColumnSort) || column.enableSort === true,
+          enableSorting: isFirstColumn || column.enableSort === true,
         }),
       };
 

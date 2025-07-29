@@ -122,9 +122,6 @@ const AdvancedTable = (props: AdvancedTableProps) => {
   // Component refs
   const tableWrapperRef = useRef<HTMLDivElement>(null);
 
-  // State to pass to useTableState to mantain backwards compatibility with original sort logic
-  const [firstColumnSort, setFirstColumnSort] = useState(false);
-
   const {
     table,
     expanded,
@@ -140,7 +137,6 @@ const AdvancedTable = (props: AdvancedTableProps) => {
     tableData,
     columnDefinitions,
     expandedControl,
-    firstColumnSort,
     sortControl,
     onRowToggleClick,
     selectableRows,
@@ -341,7 +337,6 @@ const AdvancedTable = (props: AdvancedTableProps) => {
             expandByDepth={expandByDepth}
             expanded={expanded}
             expandedControl={expandedControl}
-            firstColumnSort={firstColumnSort}
             handleExpandOrCollapse={handleExpandOrCollapse}
             hasAnySubRows={hasAnySubRows}
             inlineRowLoading={inlineRowLoading}
@@ -355,7 +350,6 @@ const AdvancedTable = (props: AdvancedTableProps) => {
             rowStyling={rowStyling}
             selectableRows={selectableRows}
             setExpanded={setExpanded}
-            setFirstColumnSort={setFirstColumnSort}
             showActionsBar={showActionsBar}
             sortControl={sortControl}
             stickyLeftColumn={stickyLeftColumn}
