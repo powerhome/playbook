@@ -124,13 +124,65 @@
       -ms-overflow-style: none !important;
       scrollbar-width: none !important;
   }
-  
+
+  // When action bar is hidden, ensure proper border radius for header corners
+  &.hidden-action-bar {
+    .pb_advanced_table_header {
+      > tr:first-child {
+        th:first-child {
+          border-top-left-radius: 4px !important;
+        }
+        th:last-child {
+          border-top-right-radius: 4px !important;
+        }
+      }
+    }
+
+    // Also handle the case when there are multiple header rows
+    .pb_advanced_table_header {
+      > tr:first-child {
+        th:first-child,
+        .table-header-cells:first-child,
+        .table-header-cells-custom:first-child {
+          border-top-left-radius: 4px !important;
+        }
+        th:last-child,
+        .table-header-cells:last-child,
+        .table-header-cells-custom:last-child {
+          border-top-right-radius: 4px !important;
+        }
+      }
+    }
+  }
+
+  // When action bar is shown, remove border radius from header
+  .row-selection-actions-card.is-visible ~ * .pb_advanced_table_header,
+  .row-selection-actions-card.show-action-card ~ * .pb_advanced_table_header {
+    > tr:first-child {
+      th:first-child,
+      th:last-child,
+      .table-header-cells:first-child,
+      .table-header-cells:last-child,
+      .table-header-cells-custom:first-child,
+      .table-header-cells-custom:last-child {
+        border-top-left-radius: 0 !important;
+        border-top-right-radius: 0 !important;
+      }
+    }
+  }
+
 
   .row-selection-actions-card {
     border-bottom-right-radius: 0px !important;
     border-bottom-left-radius: 0px !important;
     border-bottom-color: transparent;
     transition: height 300ms ease;
+
+    &.is-visible,
+    &.show-action-card {
+      border-top-left-radius: 4px !important;
+      border-top-right-radius: 4px !important;
+    }
   }
   .table-header-cells:first-child {
     min-width: 180px;
@@ -541,115 +593,6 @@
     }
   }
 
-  // Ensure vertical borders work with non-container tables
-  .pb_table:not(.table-card) {
-    &.vertical-border {
-      // Sticky header with vertical borders
-      &.sticky-header {
-        thead th:not(:last-child) {
-          border-right: 1px solid $border_light !important;
-        }
-      }
-
-      // Regular table cells with vertical borders
-      td:not(:last-child),
-      th:not(:last-child),
-      .pb_table_td:not(:last-child),
-      .pb_table_th:not(:last-child) {
-        border-right: 1px solid $border_light !important;
-      }
-    }
-  }
-
-  // Pinned rows should maintain vertical borders regardless of container prop
-  .pinned-row {
-    position: sticky !important;
-    z-index: 2 !important;
-
-    &.pb_table_tr,
-    tr {
-      // Apply right border to ALL cells including last one when verticalBorder is true
-      td,
-      .pb_table_td {
-        border-right: 1px solid var(--column-border-color, $border_light) !important;
-      }
-    }
-  }
-
-  // Specific fixes for vertical borders with sticky elements
-  .pb_table.vertical-border {
-
-    &.sticky-header {
-      thead th {
-        border-right: 1px solid $border_light !important;
-        border-left: none !important;
-        border-top: none !important;
-      }
-    }
-
-    .pinned-row {
-      td,
-      .pb_table_td {
-        border-right: 1px solid var(--column-border-color, $border_light) !important;
-        border-left: none !important;
-        border-top: none !important;
-      }
-    }
-
-    // Ensure non-container tables don't get unwanted borders
-    &:not(.table-card) {
-      thead th,
-      td,
-      .pb_table_td {
-        border-left: none !important;
-        border-top: none !important;
-      }
-    }
-  }
-
-  // Firefox-specific
-  @-moz-document url-prefix() {
-    .pb_table.vertical-border {
-
-      &.sticky-header {
-        thead th {
-          border: none !important;
-          // Use box-shadow for both right border AND bottom border
-          box-shadow:
-            inset -1px 0 0 0 $border_light,     // Right border
-            inset 0 -1px 0 0 $border_light !important;  // Bottom border
-        }
-      }
-
-      .pinned-row {
-        td,
-        .pb_table_td {
-          border: none !important;
-          // Use box-shadow for right border on ALL cells including last
-          box-shadow: inset -1px 0 0 0 var(--column-border-color, $border_light) !important;
-        }
-      }
-
-      // Override regular table cells to use consistent border method
-      &:not(.table-card) {
-        td:not(.pinned-row td),
-        .pb_table_td:not(.pinned-row .pb_table_td) {
-          // Remove conflicting borders and use box-shadow instead
-          border-right: none !important;
-          border-left: none !important;
-          border-top: none !important;
-          // Apply consistent right border using box-shadow
-          box-shadow: inset -1px 0 0 0 $border_light !important;
-        }
-      }
-
-      // Override the original left border shadow from main style, but keep other shadows
-      .pb_table_td:nth-child(2) {
-        box-shadow: none !important;
-      }
-    }
-  }
-
   @include chrome_styles($border-color);
 
   tr:hover {
@@ -829,102 +772,11 @@
       box-shadow: 1px 0px 0px 0px var(--column-border-color) !important;
     }
 
-    // Dark mode adjustments for non-container tables
-    .pb_table:not(.table-card) {
-      &.vertical-border {
-        &.sticky-header {
-          thead th:not(:last-child) {
-            border-right: 1px solid $border_dark !important;
-          }
-        }
-
-        td:not(:last-child),
-        th:not(:last-child),
-        .pb_table_td:not(:last-child),
-        .pb_table_th:not(:last-child) {
-          border-right: 1px solid $border_dark !important;
-        }
-      }
-    }
-
-    // Dark mode pinned rows
-    .pinned-row {
-      &.pb_table_tr,
-      tr {
-        // Apply right border to ALL cells including last one in dark mode
-        td,
-        .pb_table_td {
-          border-right: 1px solid var(--column-border-color, $border_dark) !important;
-        }
-      }
-    }
-
-    // Dark mode browser-specific fixes
-    .pb_table.vertical-border {
-      &.sticky-header {
-        thead th {
-          border-right: 1px solid $border_dark !important;
-          border-left: none !important;
-          border-top: none !important;
-        }
-      }
-
-      .pinned-row {
-        td,
-        .pb_table_td {
-          border-right: 1px solid var(--column-border-color, $border_dark) !important;
-          border-left: none !important;
-          border-top: none !important;
-        }
-      }
-    }
-
-    // Dark mode Firefox
-    @-moz-document url-prefix() {
-      .pb_table.vertical-border {
-
-        &.sticky-header {
-          thead th {
-            border: none !important;
-            // Use box-shadow for both right border AND bottom border
-            box-shadow:
-              inset -1px 0 0 0 $border_dark,     // Right border
-              inset 0 -1px 0 0 $border_dark !important;  // Bottom border
-          }
-        }
-
-        .pinned-row {
-          td,
-          .pb_table_td {
-            border: none !important;
-            // Use box-shadow for right border on ALL cells including last
-            box-shadow: inset -1px 0 0 0 var(--column-border-color, $border_dark) !important;
-          }
-        }
-
-        // Override regular table cells to use consistent border method in dark mode
-        &:not(.table-card) {
-          td:not(.pinned-row td),
-          .pb_table_td:not(.pinned-row .pb_table_td) {
-            // Remove conflicting borders and use box-shadow instead
-            border-right: none !important;
-            border-left: none !important;
-            border-top: none !important;
-            // Apply consistent right border using box-shadow
-            box-shadow: inset -1px 0 0 0 $border_dark !important;
-          }
-        }
-
-        // Override the original left border shadow from main CSS, but keep other shadows
-        .pb_table_td:nth-child(2) {
-          box-shadow: none !important;
-        }
-      }
-    }
-
     // Apply border colors in dark mode
     &[class*="column-group-border-"] {
+      // For top-level column groups (ENROLLMENT DATA, PERFORMANCE DATA)
       .pb_advanced_table_header {
+        // The main column group headers - NOT the last column
         > tr:first-child {
           th[colspan]:not([colspan="1"]):not(:last-child) {
             border-right: 1px solid var(--column-border-color) !important;

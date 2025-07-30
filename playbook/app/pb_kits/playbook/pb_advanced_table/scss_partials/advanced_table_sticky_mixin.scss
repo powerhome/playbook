@@ -8,31 +8,27 @@
   border-radius: 4px;
   box-shadow: 1px 0 0 0px $border-color, -1px 0 0 0px $border-color;
   display: block;
-
-  // Handle both table-card and non-table-card cases
   [class^="pb_table"].table-sm.table-card thead tr th:first-child,
-  [class^="pb_table"].table-sm:not(.no-hover).table-card tbody tr td:first-child,
-  [class^="pb_table"].table-sm:not(.table-card) thead tr th:first-child,
-  [class^="pb_table"].table-sm:not(.no-hover):not(.table-card) tbody tr td:first-child {
+  [class^="pb_table"].table-sm:not(.no-hover).table-card
+    tbody
+    tr
+    td:first-child {
     border-left-width: 0px !important;
   }
-
   [class^="pb_table"].table-sm.table-card thead tr th:last-child,
-  [class^="pb_table"].table-sm:not(.no-hover).table-card tbody tr td:last-child,
-  [class^="pb_table"].table-sm:not(.table-card) thead tr th:last-child,
-  [class^="pb_table"].table-sm:not(.no-hover):not(.table-card) tbody tr td:last-child {
+  [class^="pb_table"].table-sm:not(.no-hover).table-card
+    tbody
+    tr
+    td:last-child {
     border-right-width: 0px;
   }
-
   [class^="pb_table"].table-sm.table-card tbody tr:last-child td:first-child,
-  [class^="pb_table"].table-sm.table-card tbody tr:last-child td:last-child,
-  [class^="pb_table"].table-sm:not(.table-card) tbody tr:last-child td:first-child,
-  [class^="pb_table"].table-sm:not(.table-card) tbody tr:last-child td:last-child {
+  [class^="pb_table"].table-sm.table-card tbody tr:last-child td:last-child {
     border-radius: 0 0 0 0;
   }
-
-  // Only apply sticky positioning to specific elements
   .table-header-cells:first-child,
+  td:first-child,
+  .pb_table_td:first-child,
   .checkbox-cell.checkbox-cell-header:first-child,
   .table-header-cells.sticky-left,
   [class*="pinned-left"] {
@@ -43,87 +39,35 @@
     z-index: 2;
   }
 
-  // Only apply to pinned rows
-  .pinned-row {
-    td:first-child,
-    .pb_table_td:first-child {
-      background-color: $bg-main;
-      box-shadow: $shadow_deep !important;
-      position: sticky !important;
-      left: 0;
-      z-index: 3; // Higher z-index for pinned rows
-    }
-  }
-
-  // For tables with verticalBorder, ensure sticky elements maintain their borders
-  [class^="pb_table"].vertical-border {
-    .table-header-cells:first-child,
-    .checkbox-cell.checkbox-cell-header:first-child,
-    .table-header-cells.sticky-left {
-      // Maintain right border for vertical border styling when sticky
-      &:not(:last-child) {
-        border-right: 1px solid $border-color !important;
-      }
-    }
-
-    // Ensure pinned rows maintain vertical borders
-    .pinned-row {
-      td:not(:last-child),
-      .pb_table_td:not(:last-child) {
-        border-right: 1px solid $border-color !important;
-      }
-    }
-
-    // Handle sticky header with vertical borders
-    &.sticky-header thead th {
-      &:not(:last-child) {
-        border-right: 1px solid $border-color !important;
-      }
-    }
-  }
-
   .bg-silver {
-    .table-header-cells:first-child,
-    .pinned-row td:first-child,
-    .pinned-row .pb_table_td:first-child,
+    td:first-child,
     .sticky-left {
       background-color: $bg-secondary;
     }
   }
-
   .bg-row-selection {
-    .table-header-cells:first-child,
-    .pinned-row td:first-child,
-    .pinned-row .pb_table_td:first-child,
+    td:first-child,
     .sticky-left {
       background-color: $highlight;
     }
   }
 
   .bg-white {
-    .table-header-cells:first-child,
-    .pinned-row td:first-child,
-    .pinned-row .pb_table_td:first-child,
+    td:first-child,
     .sticky-left {
       background-color: $bg-main;
     }
   }
 
   .virtualized-table-row {
-    &.bg-silver {
-      &.pinned-row td:first-child {
-        background-color: $bg-secondary;
-      }
+    &.bg-silver td:first-child {
+      background-color: $bg-secondary;
     }
-    &.bg-white {
-      &.pinned-row td:first-child {
-        background-color: $bg-main;
-      }
+    &.bg-white td:first-child {
+      background-color: $bg-main;
     }
-    &.bg-row-selection {
-      &.pinned-row td:first-child {
-        background-color: $highlight;
-      }
+    &.bg-row-selection td:first-child {
+      background-color: $highlight;
     }
   }
 
@@ -135,8 +79,14 @@
     left: 0;
     border-radius: unset;
     z-index: 5;
-  }
 
+    // Add proper border radius when action bar is visible
+    &.is-visible,
+    &.show-action-card {
+      border-top-left-radius: 4px !important;
+      border-top-right-radius: 4px !important;
+    }
+  }
   .checkbox-cell {
     display: table-cell !important;
   }
@@ -155,17 +105,14 @@
 
   &.dark {
     .bg-row-selection {
-      .pinned-row td:first-child,
-      .pinned-row .pb_table_td:first-child,
+      td:first-child,
       .sticky-left {
         background-color: $highlight-dark;
       }
     }
     .virtualized-table-row {
-      &.bg-row-selection {
-        &.pinned-row td:first-child {
-          background-color: $highlight-dark;
-        }
+      &.bg-row-selection td:first-child {
+        background-color: $highlight-dark;
       }
     }
   }
