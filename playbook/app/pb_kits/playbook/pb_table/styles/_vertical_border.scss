@@ -20,14 +20,14 @@
     @-moz-document url-prefix() {
       // Target sticky headers
       &.sticky-header {
-        th {
+        th:not(:last-child) {
           border-right: none !important;
           box-shadow: 1px 0 0 0 $border_light !important;
         }
 
         .pb_advanced_table_body {
           .pinned-row {
-            td:not(:first-child) {
+            td:not(:first-child):not(:last-child) {
               border-right: none !important;
               box-shadow: 1px 0 0 0 $border_light !important;
             }

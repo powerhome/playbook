@@ -962,6 +962,76 @@
       }
     }
   }
+
+  // Firefox-specific fix for last-header-cell and last-cell vertical borders
+  @-moz-document url-prefix() {
+    .pb_advanced_table_header {
+      .last-header-cell {
+        border-right: none !important;
+        box-shadow: 1px 0 0 0 $border_light !important;
+      }
+    }
+
+    .pb_advanced_table_body {
+      .last-cell {
+        border-right: none !important;
+        box-shadow: 1px 0 0 0 $border_light !important;
+      }
+    }
+
+    // Handle the custom column border colors for last cells in Firefox
+    &[class*="column-group-border-"] {
+      .pb_advanced_table_header {
+        .last-header-cell{
+          border-right: none !important;
+          box-shadow: 1px 0 0 0 var(--column-border-color) !important;
+        }
+      }
+
+      .pb_advanced_table_body {
+        .last-cell,
+        tr.virtualized-table-row .last-cell {
+          border-right: none !important;
+          box-shadow: 1px 0 0 0 var(--column-border-color) !important;
+        }
+      }
+    }
+
+    // Dark mode Firefox fixes
+    &.dark {
+      .pb_advanced_table_header {
+        .last-header-cell {
+          border-right: none !important;
+          box-shadow: 1px 0 0 0 $border_dark !important;
+        }
+      }
+
+      .pb_advanced_table_body {
+        .last-cell {
+          border-right: none !important;
+          box-shadow: 1px 0 0 0 $border_dark !important;
+        }
+      }
+
+      // Handle the custom column border colors for last cells in dark mode Firefox
+      &[class*="column-group-border-"] {
+        .pb_advanced_table_header {
+          .last-header-cell {
+            border-right: none !important;
+            box-shadow: 1px 0 0 0 var(--column-border-color) !important;
+          }
+        }
+
+        .pb_advanced_table_body {
+          .last-cell,
+          tr.virtualized-table-row .last-cell {
+            border-right: none !important;
+            box-shadow: 1px 0 0 0 var(--column-border-color) !important;
+          }
+        }
+      }
+    }
+  }
 }
 
 // Outside of the pb_advanced_table class for popover
