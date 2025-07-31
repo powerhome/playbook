@@ -39,6 +39,10 @@ type DropdownProps = {
     options: GenericObject;
     separators?: boolean;
     variant?: "default" | "subtle";
+    activeStyle?: {
+      backgroundColor?: string;
+      fontColor?: string;
+    };
 };
 
 interface DropdownComponent
@@ -69,6 +73,7 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
         options,
         separators = true,
         variant = "default",
+        activeStyle,
     } = props;
 
     const ariaProps = buildAriaProps(aria);
@@ -251,6 +256,7 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
         >
             <DropdownContext.Provider
                 value={{
+                    activeStyle,
                     autocomplete,
                     dropdownContainerRef,
                     filteredOptions,

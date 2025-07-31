@@ -818,13 +818,6 @@ kits:
     icons_used: true
     react_rendered: false
     enhanced_element_used: false
-  - name: walkthrough
-    platforms: *1
-    description:
-    status: stable
-    icons_used: false
-    react_rendered: false
-    enhanced_element_used: false
   - name: timeline
     platforms: *1
     description: The timeline kit can use two different line styles in the same timeline

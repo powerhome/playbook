@@ -1,6 +1,0 @@
-export { default as WalkthroughDefault } from './_walkthrough_default.jsx'
-export { default as WalkthroughContinuous } from './_walkthrough_continuous.jsx'
-export { default as WalkthroughNoBeacon } from './_walkthrough_no_beacon.jsx'
-export { default as WalkthroughMultiBeacon } from './_walkthrough_multi_beacon.jsx'
-export { default as WalkthroughNoOverlay } from './_walkthrough_no_overlay.jsx'
-export { default as WalkthroughStyled } from './_walkthrough_styled.jsx'

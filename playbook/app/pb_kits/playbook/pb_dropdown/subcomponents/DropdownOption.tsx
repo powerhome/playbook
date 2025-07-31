@@ -41,6 +41,7 @@ const DropdownOption = (props: DropdownOptionProps) => {
   } = props;
 
   const {
+    activeStyle,
     filteredOptions,
     filterItem,
     focusedOptionIndex,
@@ -59,7 +60,6 @@ const DropdownOption = (props: DropdownOptionProps) => {
    ? selected.some((item) => item.label === option?.label)
    : (selected as GenericObject)?.label === option?.label;
 
-  
   if (!isItemMatchingFilter(option) || (multiSelect && isSelected)) {
     return null;
   }
@@ -70,6 +70,14 @@ const DropdownOption = (props: DropdownOptionProps) => {
 
   const selectedClass = isSelected ? "selected" : "list";
 
+
+  const bgTokenClass = activeStyle?.backgroundColor
+      ? `bg-${activeStyle.backgroundColor}`
+      : "";
+  const fontTokenClass = activeStyle?.fontColor
+    ? `font-${activeStyle.fontColor}`
+    : "";
+
   const ariaProps = buildAriaProps(aria);
   const dataProps = buildDataProps(data);
   const htmlProps = buildHtmlProps(htmlOptions);
@@ -79,6 +87,8 @@ const DropdownOption = (props: DropdownOptionProps) => {
       selectedClass,
       focusedClass,
     ),
+    bgTokenClass, 
+    fontTokenClass,
     globalProps(props),
     className
   );

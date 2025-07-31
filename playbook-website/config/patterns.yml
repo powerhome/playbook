@@ -10,3 +10,8 @@ Patterns:
     tags:
       - User
     link: "custom_user_display"
+  - name: "Table Filter Card"
+    description: "A responsive table with filter inside a card is a common configuration for organizing data. This pattern takes care of the set up so you can focus on implementation. Please note that these examples are not fully functional."
+    tags:
+      - Table, Filter
+    link: "table_filter_card"

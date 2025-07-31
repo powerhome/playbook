@@ -36,8 +36,8 @@ RSpec.describe Playbook::PbAdvancedTable::AdvancedTable do
 
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
-      expect(subject.new({}).classname).to eq "pb_advanced_table advanced-table-responsive-scroll advanced-table-max-height-auto  max_height_auto"
-      expect(subject.new(classname: "additional_class").classname).to eq "pb_advanced_table advanced-table-responsive-scroll advanced-table-max-height-auto  additional_class max_height_auto"
+      expect(subject.new({}).classname).to eq "pb_advanced_table advanced-table-responsive-scroll advanced-table-max-height-auto   max_height_auto"
+      expect(subject.new(classname: "additional_class").classname).to eq "pb_advanced_table advanced-table-responsive-scroll advanced-table-max-height-auto   additional_class max_height_auto"
     end
 
     context "responsive prop" do
@@ -115,7 +115,7 @@ RSpec.describe Playbook::PbAdvancedTable::AdvancedTable do
 
   describe "#hide_scroll_bar_class" do
     it "returns correct scroll bar class" do
-      expect(subject.new(scroll_bar_none: true).hide_scroll_bar_class).to eq "advanced-table-hide-scrollbar "
+      expect(subject.new(scroll_bar_none: true).hide_scroll_bar_class).to eq "advanced-table-hide-scrollbar"
       expect(subject.new(scroll_bar_none: false).hide_scroll_bar_class).to eq ""
     end
   end
