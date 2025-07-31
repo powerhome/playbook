@@ -1,6 +1,5 @@
 import React from "react"
 import AdvancedTable from '../../pb_advanced_table/_advanced_table'
-import { Card } from "playbook-ui"
 import MOCK_DATA from "./advanced_table_mock_data.json"
 
 const AdvancedTableTableProps = (props) => {
@@ -43,26 +42,12 @@ const AdvancedTableTableProps = (props) => {
 
   return (
     <div>
-      <Card padding="md">
-        <AdvancedTable
-            columnDefinitions={columnDefinitions}
-            tableData={MOCK_DATA}
-            tableProps={tableProps}
-            {...props}
-            />
-      </Card>
-
-      <Card 
-          marginTop="md"
-          padding="none" 
-      >
-        <AdvancedTable
-            columnDefinitions={columnDefinitions}
-            tableData={MOCK_DATA}
-            tableProps={tableProps}
-            {...props}
-        />
-      </Card>
+      <AdvancedTable
+          columnDefinitions={columnDefinitions}
+          tableData={MOCK_DATA}
+          tableProps={tableProps}
+          {...props}
+      />
     </div>
   )
 }
