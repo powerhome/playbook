@@ -57,7 +57,7 @@ kits:
     enhanced_element_used: true
   - name: column_configuration
     parent: advanced_table
-    kit_section: ["Column Visibility Control", "Column Visibility Control With State", "Column Visibility Control with Custom Dropdown", "Column Visibility Control with Multi-Header Columns", "Multi-Header Columns", "Multi-Header Columns (Multiple Levels)", "Multi-Header Columns with Custom Cells"]
+    kit_section: ["Column Visibility Control", "Column Visibility Control With State", "Column Visibility Control with Custom Dropdown", "Column Visibility Control with Multi-Header Columns", "Multi-Header Columns", "Multi-Header Columns (Multiple Levels)", "Multi-Header Columns with Custom Cells", "Multi-Header Columns with Vertical Borders"]
     platforms: *1
     status: stable
     icons_used: true

@@ -1,0 +1,58 @@
+<% column_definitions = [
+  {
+    accessor: "year",
+    label: "Year",
+    cellAccessors: ["quarter", "month", "day"],
+  },
+  {
+    label: "Enrollment Data",
+    columns: [
+      {
+        label: "Enrollment Stats",
+        columns: [
+          {
+            accessor: "newEnrollments",
+            label: "New Enrollments",
+          },
+          {
+            accessor: "scheduledMeetings",
+            label: "Scheduled Meetings",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    label: "Performance Data",
+    columns: [
+      {
+        label: "Completion Metrics",
+        columns: [
+          {
+            accessor: "completedClasses",
+            label: "Completed Classes",
+          },
+          {
+            accessor: "classCompletionRate",
+            label: "Class Completion Rate",
+          },
+        ],
+      },
+      {
+        label: "Attendance",
+        columns: [
+          {
+            accessor: "attendanceRate",
+            label: "Attendance Rate",
+          },
+          {
+            accessor: "scheduledMeetings",
+            label: "Scheduled Meetings",
+          },
+        ],
+      },
+    ],
+  },
+] %>
+
+<%= pb_rails("advanced_table", props: { id: "table_multi_headers_vertical_borders", table_data: @table_data, column_definitions: column_definitions, table_props: { vertical_border: true } }) %>
