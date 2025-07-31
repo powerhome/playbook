@@ -422,6 +422,15 @@
     padding: 2px;
   }
 
+  .header-sort-secondary-columns {
+    color: $primary !important;
+
+    &:hover {
+      background-color: rgba($primary, 0.03);
+      border-radius: $border_radius_md;
+    }
+  }
+
   .toggle-all-icon {
     @extend .button-icon;
     @extend %primary-color-pseudo;

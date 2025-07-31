@@ -28,7 +28,7 @@ export const TableHeader = ({
   dark = false,
   enableSorting = false,
   id,
-  sortIcon = ["arrow-up-short-wide", "arrow-down-short-wide"],
+  sortIcon = ["arrow-up-wide-short", "arrow-down-short-wide"],
   ...props
 }: TableHeaderProps) => {
   const {

@@ -16,8 +16,10 @@ import { createCellFunction } from "../Utilities/CellRendererUtils";
 interface UseTableStateProps {
   tableData: GenericObject[];
   columnDefinitions: GenericObject[];
+  enableSortingRemoval?: boolean;
   expandedControl?: GenericObject;
   sortControl?: GenericObject;
+  firstColumnSort?: boolean;
   onRowToggleClick?: (arg: Row<GenericObject>) => void;
   selectableRows?: boolean;
   initialLoadingRowsCount?: number;
@@ -38,6 +40,7 @@ interface UseTableStateProps {
 export function useTableState({
   tableData,
   columnDefinitions,
+  enableSortingRemoval,
   expandedControl,
   sortControl,
   onRowToggleClick,
@@ -91,11 +94,11 @@ export function useTableState({
           columns: buildColumns(column.columns, false),
         };
       }
-
       // Define the base column structure
       const columnStructure = {
         ...columnHelper.accessor(column.accessor, {
           header: column.header ?? column.label ?? "",
+          enableSorting: isFirstColumn || column.enableSort === true,
         }),
       };
 
@@ -166,7 +169,7 @@ export function useTableState({
     getCoreRowModel: getCoreRowModel(),
     getExpandedRowModel: getExpandedRowModel(),
     getSortedRowModel: getSortedRowModel(),
-    enableSortingRemoval: false,
+    enableSortingRemoval: enableSortingRemoval,
     sortDescFirst: true,
     onRowSelectionChange: setRowSelection,
     onRowPinningChange,

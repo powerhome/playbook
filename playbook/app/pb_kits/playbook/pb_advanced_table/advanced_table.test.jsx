@@ -124,6 +124,23 @@ const columnDefinitions = [
   },
 ]
 
+const columnDefinitionsSort = [
+  {
+    accessor: "year",
+    label: "Year",
+    cellAccessors: ["quarter", "month", "day"],
+  },
+  {
+    accessor: "newEnrollments",
+    label: "New Enrollments",
+    enableSort: true,
+  },
+  {
+    accessor: "scheduledMeetings",
+    label: "Scheduled Meetings",
+  },
+];
+
 const columnDefinitionsCustomRenderer = [
   {
     accessor: "year",
@@ -676,3 +693,20 @@ test("rowStyling prop works as expected", () => {
   const row1 = tableBody.querySelector('tr:nth-child(1)') 
   expect(row1).toHaveStyle({backgroundColor: colors.white, color: colors.black})
 })
+
+test("Sort icon renders with enableSort on individual columns", () => {
+  render(
+    <AdvancedTable
+        columnDefinitions={columnDefinitionsSort}
+        data={{ testid: testId }}
+        tableData={MOCK_DATA}
+    />
+  );
+
+  const kit = screen.getByTestId(testId);
+  const sortIcon = kit.querySelector(".sort-button-icon");
+  expect(sortIcon).toBeInTheDocument();
+  const sortButton = kit.querySelector(".header-sort-secondary-columns");
+  expect(sortButton).toBeInTheDocument();
+});
+

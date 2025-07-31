@@ -1,0 +1,1 @@
+Sorting on columns can also be applied to columns when using the multi-header variant, however in this case sorting can only be set on leaf columns NOT on parent columns. 
