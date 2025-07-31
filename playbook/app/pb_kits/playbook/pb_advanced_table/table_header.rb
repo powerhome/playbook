@@ -3,6 +3,8 @@
 module Playbook
   module PbAdvancedTable
     class TableHeader < Playbook::KitBase
+      prop :id, type: Playbook::Props::String,
+                default: ""
       prop :column_definitions, type: Playbook::Props::Array,
                                 default: []
       prop :enable_toggle_expansion, type: Playbook::Props::Enum,
@@ -56,8 +58,10 @@ module Playbook
                      classname: additional_classes.join(" "),
                    }) do
             pb_rails("checkbox", props: {
-                       id: "select-all-rows",
-                       name: "select-all-rows",
+                       id: "#{id ? "#{id}-" : ''}select-all-rows",
+                       indeterminate_main: true,
+                       indeterminate_main_labels: ["", ""],
+                       name: "#{id ? "#{id}-" : ''}select-all-rows",
                      })
           end
         end
@@ -67,8 +71,10 @@ module Playbook
       def render_select_all_checkbox
         if selectable_rows
           pb_rails("checkbox", props: {
-                     id: "select-all-rows",
-                     name: "select-all-rows",
+                     id: "#{id ? "#{id}-" : ''}select-all-rows",
+                     indeterminate_main: true,
+                     indeterminate_main_labels: ["", ""],
+                     name: "#{id ? "#{id}-" : ''}select-all-rows",
                      data: {
                        action: "click->pb-advanced-table#toggleAllRowSelection",
                      },

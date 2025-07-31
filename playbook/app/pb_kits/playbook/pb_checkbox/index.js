@@ -10,49 +10,239 @@ export default class PbCheckbox extends PbEnhancedElement {
   connect() {
     const mainCheckboxWrapper = this.element;
     const mainCheckbox = mainCheckboxWrapper.querySelector('input')
-    const childCheckboxes = document.querySelectorAll(`[data-pb-checkbox-indeterminate-parent="${this.element.id}"] input[type="checkbox"]`);
+    const directChildCheckboxes = document.querySelectorAll(`[data-pb-checkbox-indeterminate-parent="${this.element.id}"] input[type="checkbox"]`);
 
-    const updateMainCheckbox = () => {
-      // Count the number of checked child checkboxes
-      const checkedCount = Array.from(childCheckboxes).filter(cb => cb.checked).length;
-      // Determine if the main checkbox should be in an indeterminate state
-      const indeterminate = checkedCount > 0 && checkedCount < childCheckboxes.length;
+    // Helper function to get all descendant checkboxes
+    const getAllDescendantCheckboxes = () => {
+      const descendants = [];
+      const queue = [...directChildCheckboxes];
       
-      // Set the main checkbox states
-      mainCheckbox.indeterminate = indeterminate;
-      mainCheckbox.checked = checkedCount > 0;
-
-      // Determine the main checkbox label based on the number of checked checkboxes
-      const checkAllLabel = mainCheckboxWrapper.dataset.pbCheckboxIndeterminateMainLabelCheck ?? 'Check All'
-      const uncheckAllLabel = mainCheckboxWrapper.dataset.pbCheckboxIndeterminateMainLabelUncheck ?? 'Uncheck All'
-      const text = checkedCount === 0 ? checkAllLabel : uncheckAllLabel;
-
-      // Determine the icon class to add and remove based on the number of checked checkboxes
-      const iconClassToAdd = checkedCount === 0 ? 'pb_checkbox_checkmark' : 'pb_checkbox_indeterminate';
-      const iconClassToRemove = checkedCount === 0 ? 'pb_checkbox_indeterminate' : 'pb_checkbox_checkmark';
-
-      // Update main checkbox label
-      mainCheckboxWrapper.getElementsByClassName('pb_body_kit')[0].textContent = text;
+      // Breadth-first search to find all nested descendants
+      while (queue.length > 0) {
+        const checkbox = queue.shift();
+        descendants.push(checkbox);
+        
+        // Find children of this checkbox
+        const checkboxWrapper = checkbox.closest('[data-pb-checkbox-indeterminate-main="true"]');
+        if (checkboxWrapper) {
+          const childCheckboxes = document.querySelectorAll(`[data-pb-checkbox-indeterminate-parent="${checkboxWrapper.id}"] input[type="checkbox"]`);
+          queue.push(...childCheckboxes);
+        }
+      }
       
-      // Add and remove the icon class to the main checkbox wrapper
-      mainCheckboxWrapper.querySelector('[data-pb-checkbox-icon-span]').classList.add(iconClassToAdd);
-      mainCheckboxWrapper.querySelector('[data-pb-checkbox-icon-span]').classList.remove(iconClassToRemove);
+      // Also include any non-"main" checkboxes that have this as a parent
+      const nonMainChildCheckboxes = document.querySelectorAll(`[data-pb-checkbox-indeterminate-parent="${this.element.id}"] input[type="checkbox"]`);
+      nonMainChildCheckboxes.forEach(cb => {
+        if (!descendants.includes(cb)) {
+          descendants.push(cb);
+        }
+      });
       
-      // Toggle the visibility of the checkbox icon based on the indeterminate state
-      mainCheckboxWrapper.getElementsByClassName("indeterminate_icon")[0].classList.toggle('hidden', !indeterminate);
-      mainCheckboxWrapper.getElementsByClassName("check_icon")[0].classList.toggle('hidden', indeterminate);
+      return descendants;
     };
 
-    // Set indeterminate icon on main checkbox if initial children checkboxes are checked
+    // Helper function to determine checkbox state
+    const getCheckboxState = (checkboxes) => {
+      const checkedCount = checkboxes.filter(cb => cb.checked).length;
+      const totalCount = checkboxes.length;
+      
+      return {
+        allChecked: checkedCount === totalCount,
+        noneChecked: checkedCount === 0,
+        indeterminate: !(checkedCount === totalCount || checkedCount === 0),
+        checkedCount,
+        totalCount
+      };
+    };
+
+    // Helper function to update checkbox visual state
+    const updateCheckboxVisualState = (checkbox, isIndeterminate, isChecked) => {
+      checkbox.indeterminate = isIndeterminate;
+      checkbox.checked = isChecked;
+    };
+
+    // Helper function to update checkbox label and icons
+    const updateCheckboxLabelAndIcons = (wrapper, isIndeterminate, checkedCount) => {
+      const checkAllLabel = wrapper.dataset.pbCheckboxIndeterminateMainLabelCheck ?? 'Check All';
+      const uncheckAllLabel = wrapper.dataset.pbCheckboxIndeterminateMainLabelUncheck ?? 'Uncheck All';
+      const text = checkedCount === 0 ? checkAllLabel : uncheckAllLabel;
+
+      // Update label
+      const bodyKitElement = wrapper.getElementsByClassName('pb_body_kit')[0];
+      if (bodyKitElement) {
+        bodyKitElement.textContent = text;
+      }
+      
+      // Update icons
+      const iconSpan = wrapper.querySelector('[data-pb-checkbox-icon-span]');
+      if (iconSpan) {
+        const iconClassToAdd = isIndeterminate ? 'pb_checkbox_indeterminate' : 'pb_checkbox_checkmark';
+        const iconClassToRemove = isIndeterminate ? 'pb_checkbox_checkmark' : 'pb_checkbox_indeterminate';
+        iconSpan.classList.add(iconClassToAdd);
+        iconSpan.classList.remove(iconClassToRemove);
+      }
+      
+      // Toggle icon visibility
+      const indeterminateIcon = wrapper.getElementsByClassName("indeterminate_icon")[0];
+      const checkIcon = wrapper.getElementsByClassName("check_icon")[0];
+      
+      if (indeterminateIcon) {
+        indeterminateIcon.classList.toggle('hidden', !isIndeterminate);
+      }
+      if (checkIcon) {
+        checkIcon.classList.toggle('hidden', isIndeterminate);
+      }
+    };
+
+    // Main function to update this checkbox's state
+    const updateMainCheckbox = () => {
+      const allDescendantCheckboxes = getAllDescendantCheckboxes();
+      const state = getCheckboxState(allDescendantCheckboxes);
+      
+      updateCheckboxVisualState(mainCheckbox, state.indeterminate, state.allChecked);
+      updateCheckboxLabelAndIcons(mainCheckboxWrapper, state.indeterminate, state.checkedCount);
+    };
+
+    // Function to update parent checkboxes recursively
+    const updateParentCheckboxes = () => {
+      const parentId = mainCheckboxWrapper.dataset.pbCheckboxIndeterminateParent;
+      if (parentId) {
+        const parentCheckbox = document.getElementById(parentId);
+        if (parentCheckbox) {
+          const parentWrapper = parentCheckbox.closest('[data-pb-checkbox-indeterminate-main="true"]');
+          if (parentWrapper) {
+            const parentInstance = parentWrapper.pbCheckboxInstance;
+            if (parentInstance && parentInstance.updateMainCheckbox) {
+              parentInstance.updateMainCheckbox();
+              parentInstance.updateParentCheckboxes();
+            }
+          }
+        }
+      }
+    };
+
+    // Function to update non-main checkboxes when their children change
+    const setupNonMainCheckboxUpdates = () => {
+      const allCheckboxesWithChildren = document.querySelectorAll('input[type="checkbox"]');
+      allCheckboxesWithChildren.forEach(cb => {
+        const checkboxWrapper = cb.closest('[data-pb-checkbox-indeterminate-main="true"]');
+        if (checkboxWrapper && checkboxWrapper !== mainCheckboxWrapper) {
+          return; // Skip different "main" checkboxes
+        }
+        
+        const childCheckboxes = document.querySelectorAll(`[data-pb-checkbox-indeterminate-parent="${cb.id}"] input[type="checkbox"]`);
+        if (childCheckboxes.length > 0) {
+          childCheckboxes.forEach(childCb => {
+            childCb.addEventListener('change', () => {
+              const state = getCheckboxState(Array.from(childCheckboxes));
+              updateCheckboxVisualState(cb, state.indeterminate, state.allChecked);
+              
+              // Trigger updates on all main checkboxes that might be affected
+              const mainCheckboxes = document.querySelectorAll('[data-pb-checkbox-indeterminate-main="true"]');
+              mainCheckboxes.forEach(mainCb => {
+                const mainInstance = mainCb.pbCheckboxInstance;
+                if (mainInstance && mainInstance.updateMainCheckbox) {
+                  setTimeout(() => {
+                    mainInstance.updateMainCheckbox();
+                  }, 0);
+                }
+              });
+            });
+          });
+        }
+      });
+    };
+
+
+
+    // Initialize checkbox state
     updateMainCheckbox();
 
-    this.element.querySelector('input').addEventListener('change', function() {
-      childCheckboxes.forEach(cb => cb.checked = this.checked);
+    // Handle main checkbox change - propagate to all descendants
+    mainCheckbox.addEventListener('change', function() {
+      const allDescendantCheckboxes = getAllDescendantCheckboxes();
+      const state = getCheckboxState(allDescendantCheckboxes);
+      
+      if (state.indeterminate) {
+        // If indeterminate, uncheck all descendants and the parent
+        allDescendantCheckboxes.forEach(cb => {
+          cb.checked = false;
+          // Dispatch custom event for programmatic changes- change styles in advanced table
+          cb.dispatchEvent(new Event('checkbox-programmatic-change', { bubbles: true }));
+        });
+        this.checked = false;
+      } else {
+        // Otherwise, set all descendants to the same state as this checkbox
+        allDescendantCheckboxes.forEach(cb => {
+          cb.checked = this.checked;
+          // Dispatch custom event for programmatic changes- change styles in advanced table
+          cb.dispatchEvent(new Event('checkbox-programmatic-change', { bubbles: true }));
+        });
+      }
+      
+      // Update this checkbox first, then parents after a delay
       updateMainCheckbox();
+      setTimeout(() => {
+        updateParentCheckboxes();
+      }, 0);
+      
+      // Also trigger updates on all main checkboxes to ensure proper state propagation
+      triggerAllMainCheckboxUpdates();
     });
 
-    childCheckboxes.forEach(cb => {
+    // Handle child checkbox changes
+    directChildCheckboxes.forEach(cb => {
       cb.addEventListener('change', updateMainCheckbox);
     });
+
+    // Handle deeper descendant changes
+    const allDescendantCheckboxes = getAllDescendantCheckboxes();
+    allDescendantCheckboxes.forEach(cb => {
+      if (!Array.from(directChildCheckboxes).includes(cb)) {
+        cb.addEventListener('change', updateMainCheckbox);
+      }
+    });
+
+    // Handle non-main child checkboxes
+    const allChildCheckboxes = document.querySelectorAll(`[data-pb-checkbox-indeterminate-parent="${this.element.id}"] input[type="checkbox"]`);
+    allChildCheckboxes.forEach(cb => {
+      if (!allDescendantCheckboxes.includes(cb)) {
+        cb.addEventListener('change', updateMainCheckbox);
+      }
+    });
+    
+    // Also trigger updates on all main checkboxes when any checkbox changes
+    let updateTimeout = null;
+    const triggerAllMainCheckboxUpdates = () => {
+      // Debounce the updates to prevent excessive calls
+      if (updateTimeout) {
+        clearTimeout(updateTimeout);
+      }
+      updateTimeout = setTimeout(() => {
+        const mainCheckboxes = document.querySelectorAll('[data-pb-checkbox-indeterminate-main="true"]');
+        mainCheckboxes.forEach(mainCb => {
+          const mainInstance = mainCb.pbCheckboxInstance;
+          if (mainInstance && mainInstance.updateMainCheckbox) {
+            mainInstance.updateMainCheckbox();
+          }
+        });
+      }, 10); // Small delay to batch updates
+    };
+    
+    // Store the original updateMainCheckbox function and create a new one that also triggers updates
+    const originalUpdateMainCheckbox = updateMainCheckbox;
+    const enhancedUpdateMainCheckbox = () => {
+      originalUpdateMainCheckbox();
+      triggerAllMainCheckboxUpdates();
+    };
+    
+    // Replace the updateMainCheckbox function
+    mainCheckboxWrapper.pbCheckboxInstance = {
+      updateMainCheckbox: enhancedUpdateMainCheckbox,
+      updateParentCheckboxes
+    };
+
+    // Setup updates for non-main checkboxes with children
+    setupNonMainCheckboxUpdates();
   }
 }

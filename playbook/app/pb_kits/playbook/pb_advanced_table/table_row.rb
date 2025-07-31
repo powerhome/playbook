@@ -29,6 +29,10 @@ module Playbook
                                      default: "header"
       prop :row_styling, type: Playbook::Props::Array,
                          default: []
+      prop :last_row, type: Playbook::Props::Boolean,
+                      default: false
+      prop :immediate_parent_row_id, type: Playbook::Props::String,
+                                     default: ""
 
       def data
         Hash(prop(:data)).merge(table_data_attributes)
@@ -54,12 +58,14 @@ module Playbook
       # Selectable Rows No Subrows - checkboxes in their own first cell
       def render_checkbox_cell
         if selectable_rows
+          prefix = id ? "#{id}-" : ""
           pb_rails("table/table_cell", props: {
                      classname: "checkbox-cell",
                    }) do
             pb_rails("checkbox", props: {
-                       id: "select-row-#{row_id || row.object_id}",
-                       name: "select-row-#{row_id || row.object_id}",
+                       id: "#{prefix}select-row-#{row_id || row.object_id}",
+                       indeterminate_parent: "#{id ? "#{id}-" : ''}select-all-rows",
+                       name: "#{prefix}select-row-#{row_id || row.object_id}",
                        data: {
                          row_id: row_id || row.object_id.to_s,
                          flat_advanced_table_select: true,
@@ -72,9 +78,20 @@ module Playbook
       # Selectable Rows w/ Subrows - checkboxes part of toggleable first cell
       def render_row_checkbox
         if selectable_rows
+          prefix = id ? "#{id}-" : ""
+          indeterminate_parent =
+            if depth.zero?
+              "#{prefix}select-all-rows"
+            else
+              "#{prefix}select-row-#{immediate_parent_row_id}"
+            end
+
           pb_rails("checkbox", props: {
-                     id: "select-row-#{row_id || row.object_id}",
-                     name: "select-row-#{row_id || row.object_id}",
+                     id: "#{prefix}select-row-#{row_id || row.object_id}",
+                     indeterminate_main: !last_row,
+                     indeterminate_main_labels: ["", ""],
+                     indeterminate_parent: indeterminate_parent,
+                     name: "#{prefix}select-row-#{row_id || row.object_id}",
                      data: {
                        row_id: row_id || row.object_id.to_s,
                      },

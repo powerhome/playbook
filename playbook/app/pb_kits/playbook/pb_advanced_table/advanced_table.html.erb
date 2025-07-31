@@ -11,7 +11,7 @@
     <% if content.present? %>
       <% content.presence %>
     <% else %>
-      <%= pb_rails("advanced_table/table_header", props: { column_definitions: object.column_definitions, enable_toggle_expansion: object.enable_toggle_expansion, responsive: object.responsive, loading: object.loading, selectable_rows: object.selectable_rows, show_actions_bar: object.show_actions_bar }) %>
+      <%= pb_rails("advanced_table/table_header", props: { id: object.id, column_definitions: object.column_definitions, enable_toggle_expansion: object.enable_toggle_expansion, responsive: object.responsive, loading: object.loading, selectable_rows: object.selectable_rows, show_actions_bar: object.show_actions_bar }) %>
       <%= pb_rails("advanced_table/table_body", props: { id: object.id, table_data: object.table_data, column_definitions: object.column_definitions, responsive: object.responsive, loading: object.loading, selectable_rows: object.selectable_rows, enable_toggle_expansion: object.enable_toggle_expansion, row_styling: object.row_styling }) %>
     <% end %>
   <% end %>
