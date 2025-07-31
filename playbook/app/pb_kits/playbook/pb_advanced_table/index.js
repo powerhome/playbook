@@ -293,12 +293,16 @@ export default class PbAdvancedTable extends PbEnhancedElement {
         "tr.is-visible, tr:not(.toggle-content)"
       );
 
-      visibleRows.forEach((row) => row.classList.remove("last-visible-row"));
+      visibleRows.forEach((row) => {
+        row.classList.remove("last-visible-row");
+        row.classList.remove("last-row-cell");
+      });
 
       const lastVisibleRow = visibleRows[visibleRows.length - 1];
 
       if (lastVisibleRow) {
         lastVisibleRow.classList.add("last-visible-row");
+        lastVisibleRow.classList.add("last-row-cell");
       }
     }
   }

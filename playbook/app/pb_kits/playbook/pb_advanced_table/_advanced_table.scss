@@ -977,3 +977,18 @@
 .pb-advanced-table-popover-option:hover {
   background-color: $bg_light;
 }
+// Removes borders when Wrapped inside the Card Kit
+[class^=pb_card_kit] > .pb_advanced_table .pb_advanced_table_body .last-cell,
+[class^=pb_card_kit] > .pb_advanced_table .pb_advanced_table_header .last-header-cell,
+[class^=pb_card_kit] > .pb_advanced_table .pb_advanced_table_body tr td:last-child,
+[class^=pb_card_kit] > .pb_advanced_table .pb_advanced_table_header tr th:last-child {
+    border-right: none !important;
+}
+
+//  Removes borders when Wrapped inside the Card Kit
+[class^=pb_card_kit] > .pb_advanced_table tr:last-child, 
+[class^=pb_card_kit] > .pb_advanced_table .last-row-cell {
+  td {
+    border-bottom: none !important; 
+  }
+}
