@@ -32,6 +32,8 @@ module Playbook
                    default: ""
       prop :label, type: Playbook::Props::String,
                    default: ""
+      prop :show_checked_children, type: Playbook::Props::Boolean,
+                                   default: true
 
       def classname
         generate_classname("pb_multi_level_select")
@@ -54,6 +56,7 @@ module Playbook
           variant: variant,
           pillColor: pill_color,
           wrapped: wrapped,
+          showCheckedChildren: show_checked_children,
         }
       end
     end
