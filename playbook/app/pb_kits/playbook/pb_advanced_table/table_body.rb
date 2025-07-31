@@ -84,7 +84,7 @@ module Playbook
               advanced_table_content: data_content,
             }
 
-            output << render_row_and_children(child_row, column_definitions, current_depth + 1, is_first_child, new_ancestor_ids, top_parent_id, additional_classes: "toggle-content", table_data_attributes: child_data_attributes, immediate_parent_row_id: row.id)
+            output << render_row_and_children(child_row, column_definitions, current_depth + 1, is_first_child, new_ancestor_ids, top_parent_id, additional_classes: "toggle-content", table_data_attributes: child_data_attributes, immediate_parent_row_id: row[:id])
           end
         end
 
