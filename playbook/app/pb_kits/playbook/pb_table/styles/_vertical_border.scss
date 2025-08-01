@@ -7,11 +7,59 @@
     thead tr:not(:first-child) th {
       border-right: 1px solid $border_light !important;
     }
-    
+
     @media screen and (min-width: $screen-xs-min) {
       tr:hover, .pb_table_tr:hover {
         td:last-child, .pb_table_td:last-child {
           border-right-color: darken($border_light, 10%) !important;
+        }
+      }
+    }
+
+    // Firefox-specific fix for sticky elements
+    @-moz-document url-prefix() {
+      // Target sticky headers
+      &.sticky-header {
+        th:not(:last-child) {
+          border-right: none !important;
+          box-shadow: 1px 0 0 0 $border_light !important;
+        }
+
+        .pb_advanced_table_body {
+          .pinned-row {
+            td:not(:first-child):not(:last-child) {
+              border-right: none !important;
+              box-shadow: 1px 0 0 0 $border_light !important;
+            }
+          }
+        }
+      }
+
+      // Target sticky left columns
+      &.sticky-left-column {
+        td[style="left"], th[style="left"] {
+          border-right: none !important;
+          box-shadow: 1px 0 0 0 $border_light !important;
+        }
+      }
+
+      // Target sticky right columns
+      &.sticky-right-column {
+        td[style="right"], th[style="right"] {
+          border-right: none !important;
+          box-shadow: 1px 0 0 0 $border_light !important;
+        }
+      }
+
+      // Handle hover states in Firefox
+      @media screen and (min-width: $screen-xs-min) {
+        tr:hover, .pb_table_tr:hover {
+          td:last-child, .pb_table_td:last-child {
+            &[style="left"], &[style="right"] {
+              border-right: none !important;
+              box-shadow: 1px 0 0 0 darken($border_light, 10%) !important;
+            }
+          }
         }
       }
     }
