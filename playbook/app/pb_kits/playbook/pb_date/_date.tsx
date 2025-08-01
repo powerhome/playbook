@@ -19,6 +19,7 @@ type PbDateProps = {
   htmlOptions?: { [key: string]: string | number | boolean | (() => void) };
   id?: string;
   showDayOfWeek?: boolean;
+  showCurrentYear?: boolean;
   showIcon?: boolean;
   size?: "sm" | "md" | "lg";
   unstyled?: boolean;
@@ -35,6 +36,7 @@ const PbDate = (props: PbDateProps): React.ReactElement => {
     htmlOptions = {},
     id,
     showDayOfWeek = false,
+    showCurrentYear = false,
     showIcon = false,
     size = "md",
     unstyled = false,
@@ -90,7 +92,7 @@ const PbDate = (props: PbDateProps): React.ReactElement => {
                 {month} {day}
               </span>
 
-              {currentYear != year && <span>{`, ${year}`}</span>}
+              {(currentYear !== year || showCurrentYear) && <span>{`, ${year}`}</span>}
             </span>
           </>
         : size == "md" || size == "lg"
@@ -124,7 +126,7 @@ const PbDate = (props: PbDateProps): React.ReactElement => {
               <span>
                 {month} {day}
               </span>
-              {currentYear != year && <span>{`, ${year}`}</span>}
+              {(currentYear !== year || showCurrentYear) && <span>{`, ${year}`}</span>}
             </Title>
             )
           : (
@@ -158,7 +160,7 @@ const PbDate = (props: PbDateProps): React.ReactElement => {
                 <Caption dark={dark}
                     tag="span">
                   {month} {day}
-                  {currentYear != year && <>{`, ${year}`}</>}
+                  {(currentYear !== year || showCurrentYear) && <>{`, ${year}`}</>}
                 </Caption>
               </>
             )}

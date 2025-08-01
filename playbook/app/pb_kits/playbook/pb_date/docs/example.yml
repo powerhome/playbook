@@ -11,6 +11,7 @@ examples:
   - date_default: Default
   - date_variants: Variants
   - date_alignment: Alignment
+  - date_with_show_current_year: Show Current Year
   - date_unstyled: Unstyled
 
   swift:
