@@ -13,8 +13,8 @@
     <% end %>
 
     <!-- month day, year -->
-    <%# if not current year %>
-    <% if object.year.to_s == DateTime.now.year.to_s %>
+    <%# if not current year or show_current_year is false %>
+    <% if object.year.to_s == DateTime.now.year.to_s && !object.show_current_year %>
       <span><%= "#{object.month} #{object.day}" %></span>
     <%# if is current year %>
     <% else %>
@@ -44,8 +44,8 @@
 
     <!-- month day, year -->
 
-    <%# if not current year %>
-    <% if object.year.to_s == DateTime.now.year.to_s %>
+    <%# if not current year or show_current_year is false %>
+    <% if object.year.to_s == DateTime.now.year.to_s  && !object.show_current_year  %>
       <%= pb_rails("title", props: { tag: "div", text: "#{object.month} #{object.day}", size: 4 }) %>
     <%# if is current year %>
     <% else %>
@@ -74,8 +74,8 @@
 
     <!-- month day, year -->
 
-    <%# if not current year %>
-    <% if object.year.to_s == DateTime.now.year.to_s %>
+    <%# if not current year or show_current_year is false %>
+    <% if object.year.to_s == DateTime.now.year.to_s  && !object.show_current_year %>
       <%= pb_rails("caption", props: { tag: "span", text: "#{object.month} #{object.day}" }) %>
     <%# if is current year %>
     <% else %>
