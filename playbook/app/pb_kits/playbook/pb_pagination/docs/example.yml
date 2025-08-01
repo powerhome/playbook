@@ -6,3 +6,4 @@ examples:
   react:
   - pagination_default: Default
   - pagination_page_change: Page Change
+  - pagination_external_control: External Control

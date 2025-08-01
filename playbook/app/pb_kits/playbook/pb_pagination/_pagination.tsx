@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import classnames from 'classnames'
 import { GlobalProps, globalProps } from '../utilities/globalProps'
 import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
@@ -123,6 +123,13 @@ const Pagination = ( props: PaginationProps) => {
     
     return buttons;
   };
+
+  // Sync internal state with external current prop
+  useEffect(() => {
+    if (current >= 1 && current <= total) {
+      setCurrentPage(current);
+    }
+  }, [current, total]);
   
 
   const ariaProps = buildAriaProps(aria)
