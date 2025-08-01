@@ -1,8 +1,11 @@
-# 14.24.0
+# 🔪🐞 New Tricks, Same Kits 
 
 ##### August 01, 2025
 
 <img width="889" height="477" alt="release_image" src="https://github.com/user-attachments/assets/623ae448-f555-4b70-98b2-88687d6b53d6" />
+
+
+Smarter defaults, cleaner visuals, fewer bugs and of course multiple enhancements to our favorite kit: the Advanced Table! And the Walkthrough Kit? Peace out 👋🏼
 
 [14.24.0](https://github.com/powerhome/playbook/tree/14.24.0) full list of changes:
 
