@@ -43,7 +43,7 @@ module Playbook
       end
 
       def td_classname(column, index)
-        classes = %w[id-cell chrome-styles]
+        classes = %w[id-cell]
         classes << "last-cell" if column[:is_last_in_group]
         classes << "pinned-left" if index.zero? && is_pinned_left && responsive == "scroll"
         classes.join(" ")

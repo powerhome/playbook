@@ -66,13 +66,13 @@ RSpec.describe Playbook::PbAdvancedTable::TableRow do
       let(:instance) { subject.new(row: {}, depth: 0) }
 
       it "returns basic td classes" do
-        expect(instance.td_classname(basic_column, 0)).to eq "id-cell chrome-styles"
-        expect(instance.td_classname(basic_column, 1)).to eq "id-cell chrome-styles"
+        expect(instance.td_classname(basic_column, 0)).to eq "id-cell"
+        expect(instance.td_classname(basic_column, 1)).to eq "id-cell"
       end
 
       it "includes last-cell for last in group" do
-        expect(instance.td_classname(last_column, 0)).to eq "id-cell chrome-styles last-cell"
-        expect(instance.td_classname(last_column, 1)).to eq "id-cell chrome-styles last-cell"
+        expect(instance.td_classname(last_column, 0)).to eq "id-cell last-cell"
+        expect(instance.td_classname(last_column, 1)).to eq "id-cell last-cell"
       end
     end
 
@@ -80,16 +80,16 @@ RSpec.describe Playbook::PbAdvancedTable::TableRow do
       let(:instance) { subject.new(row: {}, depth: 0, responsive: "scroll", is_pinned_left: true) }
 
       it "includes pinned-left for first column" do
-        expect(instance.td_classname(basic_column, 0)).to eq "id-cell chrome-styles pinned-left"
+        expect(instance.td_classname(basic_column, 0)).to eq "id-cell pinned-left"
       end
 
       it "does not include pinned-left for other columns" do
-        expect(instance.td_classname(basic_column, 1)).to eq "id-cell chrome-styles"
-        expect(instance.td_classname(basic_column, 2)).to eq "id-cell chrome-styles"
+        expect(instance.td_classname(basic_column, 1)).to eq "id-cell"
+        expect(instance.td_classname(basic_column, 2)).to eq "id-cell"
       end
 
       it "combines pinned-left with last-cell" do
-        expect(instance.td_classname(last_column, 0)).to eq "id-cell chrome-styles last-cell pinned-left"
+        expect(instance.td_classname(last_column, 0)).to eq "id-cell last-cell pinned-left"
       end
     end
 
@@ -97,8 +97,8 @@ RSpec.describe Playbook::PbAdvancedTable::TableRow do
       let(:instance) { subject.new(row: {}, depth: 0, responsive: "none", is_pinned_left: false) }
 
       it "does not include pinned-left for any column" do
-        expect(instance.td_classname(basic_column, 0)).to eq "id-cell chrome-styles"
-        expect(instance.td_classname(basic_column, 1)).to eq "id-cell chrome-styles"
+        expect(instance.td_classname(basic_column, 0)).to eq "id-cell"
+        expect(instance.td_classname(basic_column, 1)).to eq "id-cell"
       end
     end
   end

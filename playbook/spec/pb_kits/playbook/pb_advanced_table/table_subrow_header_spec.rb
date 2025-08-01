@@ -59,9 +59,9 @@ RSpec.describe Playbook::PbAdvancedTable::TableSubrowHeader do
       let(:instance) { subject.new(row: {}, depth: 0, responsive: "none") }
 
       it "returns basic td classes" do
-        expect(instance.td_classname(0)).to eq "id-cell chrome-styles"
-        expect(instance.td_classname(1)).to eq "id-cell chrome-styles"
-        expect(instance.td_classname(2)).to eq "id-cell chrome-styles"
+        expect(instance.td_classname(0)).to eq "id-cell"
+        expect(instance.td_classname(1)).to eq "id-cell"
+        expect(instance.td_classname(2)).to eq "id-cell"
       end
     end
 
@@ -69,13 +69,13 @@ RSpec.describe Playbook::PbAdvancedTable::TableSubrowHeader do
       let(:instance) { subject.new(row: {}, depth: 0, responsive: "scroll") }
 
       it "includes pinned-left for first column" do
-        expect(instance.td_classname(0)).to eq "id-cell chrome-styles pinned-left"
+        expect(instance.td_classname(0)).to eq "id-cell pinned-left"
       end
 
       it "does not include pinned-left for other columns" do
-        expect(instance.td_classname(1)).to eq "id-cell chrome-styles"
-        expect(instance.td_classname(2)).to eq "id-cell chrome-styles"
-        expect(instance.td_classname(5)).to eq "id-cell chrome-styles"
+        expect(instance.td_classname(1)).to eq "id-cell"
+        expect(instance.td_classname(2)).to eq "id-cell"
+        expect(instance.td_classname(5)).to eq "id-cell"
       end
     end
 
@@ -83,8 +83,8 @@ RSpec.describe Playbook::PbAdvancedTable::TableSubrowHeader do
       let(:instance) { subject.new(row: {}, depth: 1, responsive: "none") }
 
       it "does not include pinned-left for any column" do
-        expect(instance.td_classname(0)).to eq "id-cell chrome-styles"
-        expect(instance.td_classname(1)).to eq "id-cell chrome-styles"
+        expect(instance.td_classname(0)).to eq "id-cell"
+        expect(instance.td_classname(1)).to eq "id-cell"
       end
     end
   end
