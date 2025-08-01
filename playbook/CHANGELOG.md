@@ -1,3 +1,51 @@
+# 14.24.0
+
+##### August 01, 2025
+
+<img width="889" height="477" alt="release_image" src="https://github.com/user-attachments/assets/623ae448-f555-4b70-98b2-88687d6b53d6" />
+
+[14.24.0](https://github.com/powerhome/playbook/tree/14.24.0) full list of changes:
+
+**Kit Enhancements:**
+
+- Advanced Table: Sort Available on All Columns [\#4945](https://github.com/powerhome/playbook/pull/4945) ([nidaqg](https://github.com/nidaqg))
+- Advanced Table & Checkbox Kits: Selectable Rows With Indeterminate Checkboxes - Rails [\#4944](https://github.com/powerhome/playbook/pull/4944) ([kangaree](https://github.com/kangaree))
+- Multi Level Select Kit: Add Prop to Enable Expandable Fields to Be Initially Render Unexpanded - Rails & React [\#4929](https://github.com/powerhome/playbook/pull/4929) ([skduncan](https://github.com/skduncan))
+- Pagination Kit: Show Only With Multiple Pages - React [\#4918](https://github.com/powerhome/playbook/pull/4918) ([kangaree](https://github.com/kangaree))
+- Dropdown Kit: Customize Dropdown Menu Options - React [\#4912](https://github.com/powerhome/playbook/pull/4912) ([elisashapiro](https://github.com/elisashapiro))
+- Checkbox Kit: Custom Indeterminate Main Checkbox Labels - Rails [\#4895](https://github.com/powerhome/playbook/pull/4895) ([kangaree](https://github.com/kangaree))
+- Phone Number Kit: Strictmode Prop Accept Numbers and Max Length [\#4894](https://github.com/powerhome/playbook/pull/4894) ([kangaree](https://github.com/kangaree))
+- Advanced Table: Custom Header - Rails Only [\#4878](https://github.com/powerhome/playbook/pull/4878) ([skduncan](https://github.com/skduncan))
+
+**Fixed Bugs:**
+
+- Advanced Table Kit: Fix Double Border Issue When Table With Container: False Is Rendered Inside a Card [\#4938](https://github.com/powerhome/playbook/pull/4938) ([nickamantia](https://github.com/nickamantia))
+- Select Kit: Classnames Spaces Fix - Rails [\#4917](https://github.com/powerhome/playbook/pull/4917) ([kangaree](https://github.com/kangaree))
+- Advanced Table: Selectable Row/action Bar Examples Border Bug Rails and React [\#4903](https://github.com/powerhome/playbook/pull/4903) ([skduncan](https://github.com/skduncan))
+- Revert "icons: Appears Blurry on Some Monitors…" [\#4916](https://github.com/powerhome/playbook/pull/4916) ([kangaree](https://github.com/kangaree))
+- Advanced Table: Support Custom Headers With Multi-header Columns [\#4896](https://github.com/powerhome/playbook/pull/4896) ([nidaqg](https://github.com/nidaqg))
+- Playbook Website: Search Bug After Advanced Table Restructuring [\#4881](https://github.com/powerhome/playbook/pull/4881) ([elisashapiro](https://github.com/elisashapiro))
+
+**Improvements:**
+
+- Playbook Website: Scaffold New Global Props And Tokens Pages [\#4925](https://github.com/powerhome/playbook/pull/4925) ([nidaqg](https://github.com/nidaqg))
+- Webpackerreact Config for Playbook Kits to Come from Playbook [\#4886](https://github.com/powerhome/playbook/pull/4886) ([nidaqg](https://github.com/nidaqg))
+- Patterns: Filter + Sectionseparator + Table Inside Card/flex [\#4936](https://github.com/powerhome/playbook/pull/4936) ([elisashapiro](https://github.com/elisashapiro))
+- Playbook Website: Remove Dribble Link from Homepage [\#4902](https://github.com/powerhome/playbook/pull/4902) ([elisashapiro](https://github.com/elisashapiro))
+- Advanced Table: Remove Fullscreen Docs [\#4893](https://github.com/powerhome/playbook/pull/4893) ([nickamantia](https://github.com/nickamantia))
+- Highcharts - Line Graph: Update All Doc Examples With Imported Styles - React Only [\#4892](https://github.com/powerhome/playbook/pull/4892) ([elisashapiro](https://github.com/elisashapiro))
+- Update Changelog.md14.23.0 [\#4885](https://github.com/powerhome/playbook/pull/4885) ([nidaqg](https://github.com/nidaqg))
+- Gauge Kit: Update Docs and Use Playbook Highcharts Theme Instead Of Kit - React [\#4883](https://github.com/powerhome/playbook/pull/4883) ([kangaree](https://github.com/kangaree))
+- Dialog Kit: Remove Dialog Kit from React Bindings File [\#4864](https://github.com/powerhome/playbook/pull/4864) ([nidaqg](https://github.com/nidaqg))
+
+**Deprecated:**
+
+- Walkthrough Kit: Deprecate Kit In Playbook [\#4924](https://github.com/powerhome/playbook/pull/4924) ([elisashapiro](https://github.com/elisashapiro))
+
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/14.23.0...v14.24.0)
+
+
 # 🧰 Your Icon Toolbox Just Got Bigger!
 
 ##### July 15, 2025
