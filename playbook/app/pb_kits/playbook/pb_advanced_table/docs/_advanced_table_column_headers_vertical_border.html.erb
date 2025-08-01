@@ -8,17 +8,12 @@
     label: "Enrollment Data",
     columns: [
       {
-        label: "Enrollment Stats",
-        columns: [
-          {
-            accessor: "newEnrollments",
-            label: "New Enrollments",
-          },
-          {
-            accessor: "scheduledMeetings",
-            label: "Scheduled Meetings",
-          },
-        ],
+        accessor: "newEnrollments",
+        label: "New Enrollments",
+      },
+      {
+        accessor: "scheduledMeetings",
+        label: "Scheduled Meetings",
       },
     ],
   },
@@ -26,30 +21,20 @@
     label: "Performance Data",
     columns: [
       {
-        label: "Completion Metrics",
-        columns: [
-          {
-            accessor: "completedClasses",
-            label: "Completed Classes",
-          },
-          {
-            accessor: "classCompletionRate",
-            label: "Class Completion Rate",
-          },
-        ],
+        accessor: "attendanceRate",
+        label: "Attendance Rate",
       },
       {
-        label: "Attendance",
-        columns: [
-          {
-            accessor: "attendanceRate",
-            label: "Attendance Rate",
-          },
-          {
-            accessor: "scheduledMeetings",
-            label: "Scheduled Meetings",
-          },
-        ],
+        accessor: "completedClasses",
+        label: "Completed Classes",
+      },
+      {
+        accessor: "classCompletionRate",
+        label: "Class Completion Rate",
+      },
+      {
+        accessor: "graduatedStudents",
+        label: "Graduated Students",
       },
     ],
   },
