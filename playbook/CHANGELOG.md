@@ -8,7 +8,7 @@
 
 **Kit Enhancements:**
 
-- Advanced Table: Sort Available on All Columns [\#4945](https://github.com/powerhome/playbook/pull/4945) ([nidaqg](https://github.com/nidaqg))
+- Advanced Table: Sort Available on All Columns - React [\#4945](https://github.com/powerhome/playbook/pull/4945) ([nidaqg](https://github.com/nidaqg))
 - Advanced Table & Checkbox Kits: Selectable Rows With Indeterminate Checkboxes - Rails [\#4944](https://github.com/powerhome/playbook/pull/4944) ([kangaree](https://github.com/kangaree))
 - Multi Level Select Kit: Add Prop to Enable Expandable Fields to Be Initially Render Unexpanded - Rails & React [\#4929](https://github.com/powerhome/playbook/pull/4929) ([skduncan](https://github.com/skduncan))
 - Pagination Kit: Show Only With Multiple Pages - React [\#4918](https://github.com/powerhome/playbook/pull/4918) ([kangaree](https://github.com/kangaree))
@@ -23,7 +23,7 @@
 - Select Kit: Classnames Spaces Fix - Rails [\#4917](https://github.com/powerhome/playbook/pull/4917) ([kangaree](https://github.com/kangaree))
 - Advanced Table: Selectable Row/action Bar Examples Border Bug Rails and React [\#4903](https://github.com/powerhome/playbook/pull/4903) ([skduncan](https://github.com/skduncan))
 - Revert "icons: Appears Blurry on Some Monitors…" [\#4916](https://github.com/powerhome/playbook/pull/4916) ([kangaree](https://github.com/kangaree))
-- Advanced Table: Support Custom Headers With Multi-header Columns [\#4896](https://github.com/powerhome/playbook/pull/4896) ([nidaqg](https://github.com/nidaqg))
+- Advanced Table: Support Custom Headers With Multi-header Columns - React [\#4896](https://github.com/powerhome/playbook/pull/4896) ([nidaqg](https://github.com/nidaqg))
 - Playbook Website: Search Bug After Advanced Table Restructuring [\#4881](https://github.com/powerhome/playbook/pull/4881) ([elisashapiro](https://github.com/elisashapiro))
 
 **Improvements:**
@@ -34,7 +34,6 @@
 - Playbook Website: Remove Dribble Link from Homepage [\#4902](https://github.com/powerhome/playbook/pull/4902) ([elisashapiro](https://github.com/elisashapiro))
 - Advanced Table: Remove Fullscreen Docs [\#4893](https://github.com/powerhome/playbook/pull/4893) ([nickamantia](https://github.com/nickamantia))
 - Highcharts - Line Graph: Update All Doc Examples With Imported Styles - React Only [\#4892](https://github.com/powerhome/playbook/pull/4892) ([elisashapiro](https://github.com/elisashapiro))
-- Update Changelog.md14.23.0 [\#4885](https://github.com/powerhome/playbook/pull/4885) ([nidaqg](https://github.com/nidaqg))
 - Gauge Kit: Update Docs and Use Playbook Highcharts Theme Instead Of Kit - React [\#4883](https://github.com/powerhome/playbook/pull/4883) ([kangaree](https://github.com/kangaree))
 - Dialog Kit: Remove Dialog Kit from React Bindings File [\#4864](https://github.com/powerhome/playbook/pull/4864) ([nidaqg](https://github.com/nidaqg))
 
