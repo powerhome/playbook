@@ -58,7 +58,7 @@ const TableCellRenderer = ({
         // Find the “owning” colDefinition by accessor. Needed for multi column logic
         const colDef = findColumnDefByAccessor(columnDefinitions ?? [], column.id)
         const cellAlignment = colDef?.columnStyling?.cellAlignment ?? "right"
-
+        const paddingClass = `p_${colDef?.columnStyling?.cellPadding ?? customRowStyle?.cellPadding}`;
         return (
           <td
               align={cellAlignment}
@@ -68,8 +68,7 @@ const TableCellRenderer = ({
                 isPinnedLeft && 'pinned-left',
                 stickyLeftColumn && stickyLeftColumn.length > 0 && isPinnedLeft && 'sticky-left',
                 isLastCell && 'last-cell',
-                colDef?.columnStyling?.cellPadding && `p_${colDef?.columnStyling?.cellPadding}`,
-                customRowStyle?.cellPadding && `p_${customRowStyle?.cellPadding}`
+                paddingClass
               )}
               key={`${cell.id}-data`}
               style={{
@@ -179,7 +178,6 @@ export const RegularTableView = ({
         const rowColor = row.getIsSelected() ? "bg-row-selection" : rowBackground ? "bg-silver" : "bg-white";
         const isFirstRegularRow = rowIndex === 0 && !row.getIsPinned();
         const customRowStyle = rowStyling?.length > 0 && rowStyling?.find((s: GenericObject) => s?.rowId === row.id);
-        const customPadding = customRowStyle?.cellPadding && `p_${customRowStyle?.cellPadding}`
 
         return (
           <React.Fragment key={`${row.index}-${row.id}-${row.depth}-row`}>
