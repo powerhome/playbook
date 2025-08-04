@@ -58,7 +58,9 @@ const TableCellRenderer = ({
         // Find the “owning” colDefinition by accessor. Needed for multi column logic
         const colDef = findColumnDefByAccessor(columnDefinitions ?? [], column.id)
         const cellAlignment = colDef?.columnStyling?.cellAlignment ?? "right"
-        const paddingClass = `p_${colDef?.columnStyling?.cellPadding ?? customRowStyle?.cellPadding}`;
+        const paddingValue = colDef?.columnStyling?.cellPadding ?? customRowStyle?.cellPadding
+        const paddingClass = paddingValue ? `p_${paddingValue}` : undefined
+        
         return (
           <td
               align={cellAlignment}
