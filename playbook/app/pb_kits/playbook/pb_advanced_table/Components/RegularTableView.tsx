@@ -68,6 +68,7 @@ const TableCellRenderer = ({
                 isPinnedLeft && 'pinned-left',
                 stickyLeftColumn && stickyLeftColumn.length > 0 && isPinnedLeft && 'sticky-left',
                 isLastCell && 'last-cell',
+                colDef?.columnStyling?.cellPadding && `p_${colDef?.columnStyling?.cellPadding}`
               )}
               key={`${cell.id}-data`}
               style={{

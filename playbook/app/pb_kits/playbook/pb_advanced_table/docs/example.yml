@@ -68,6 +68,7 @@ examples:
   - advanced_table_row_styling: Row Styling
   - advanced_table_column_styling: Column Styling
   - advanced_table_column_styling_column_headers: Column Styling with Multiple Headers
+  - advanced_table_padding_control: Padding Control using Column Styling
   - advanced_table_column_border_color: Column Group Border Color
   - advanced_table_fullscreen: Fullscreen
   - advanced_table_infinite_scroll: Infinite Scroll

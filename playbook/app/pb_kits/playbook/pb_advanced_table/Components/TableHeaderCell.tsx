@@ -113,7 +113,6 @@ export const TableHeaderCell = ({
     return visibleSiblings.at(-1) === header.column;
   })();
 
-
 const cellClassName = classnames(
   "table-header-cells",
   `${showActionsBar && isActionBarVisible && "header-cells-with-actions"}`,
@@ -122,7 +121,7 @@ const cellClassName = classnames(
   { "pinned-left": responsive === "scroll" && isPinnedLeft },
    isLastHeaderCell ? "last-header-cell" : "",
   stickyLeftColumn && stickyLeftColumn.length > 0 && isPinnedLeft ? 'sticky-left' : "",
-
+  colDef?.columnStyling?.headerPadding && `p_${colDef?.columnStyling?.headerPadding}`
 ); 
 
 const cellId = `${loading ? 
