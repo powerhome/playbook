@@ -651,6 +651,36 @@ test("columnStyling.cellAlignment sets each <td> align attribute as expected", (
   expect(firstEnrollmentCell).toHaveAttribute("align", "left");
 });
 
+test("columnStyling.cellPadding sets cell padding", () => {
+  const styledColumnDefs = [
+    {
+      accessor: "year",
+      label: "Year",
+      cellAccessors: ["quarter", "month", "day"],
+    },
+    {
+      accessor: "newEnrollments",
+      label: "New Enrollments",
+      columnStyling: { cellPadding: "none" },
+    },
+    {
+      accessor: "scheduledMeetings",
+      label: "Scheduled Meetings",
+    },
+  ];
+
+  render(
+    <AdvancedTable
+        columnDefinitions={styledColumnDefs}
+        data={{ testid: testId }}
+        tableData={MOCK_DATA}
+    />
+  );
+
+  const firstEnrollmentCell = screen.getAllByText("20")[0].closest("td");
+  expect(firstEnrollmentCell).toHaveClass('p_none')
+});
+
 test("renders virtualized table rows and header", () => {
   render(
     <AdvancedTable
@@ -692,6 +722,32 @@ test("rowStyling prop works as expected", () => {
   const tableBody = kit.querySelector('tbody')
   const row1 = tableBody.querySelector('tr:nth-child(1)') 
   expect(row1).toHaveStyle({backgroundColor: colors.white, color: colors.black})
+})
+
+test("rowStyling prop to allow padding control", () => {
+  const rowStyling = [
+  {
+    rowId: "1",
+    cellPadding: "lg"
+  },
+];
+
+  render(
+    <AdvancedTable
+        columnDefinitions={columnDefinitions}
+        data={{ testid: testId }}
+        rowStyling={rowStyling}
+        tableData={MOCK_DATA_WITH_ID}
+    />
+  )
+
+  const kit = screen.getByTestId(testId)
+  const tableBody = kit.querySelector('tbody')
+  const row1 = tableBody.querySelector('tr:nth-child(1)') 
+   const cells = row1.querySelectorAll("td");
+  cells.forEach((cell) => {
+    expect(cell.classList.contains("p_lg")).toBe(true);
+  });
 })
 
 test("Sort icon renders with enableSort on individual columns", () => {
