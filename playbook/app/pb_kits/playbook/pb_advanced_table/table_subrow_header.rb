@@ -29,7 +29,7 @@ module Playbook
       end
 
       def td_classname(index)
-        classes = %w[id-cell chrome-styles]
+        classes = %w[id-cell]
         classes << "pinned-left" if index.zero? && responsive == "scroll"
         classes.join(" ")
       end
