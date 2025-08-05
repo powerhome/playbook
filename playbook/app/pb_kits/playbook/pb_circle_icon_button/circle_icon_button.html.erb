@@ -1,5 +1,14 @@
 <%= pb_content_tag do %>
-  <%= pb_rails("button", props: {type: object.type, loading: object.loading, link: object.link, new_window:object.new_window, variant: object.variant, target: object.target, disabled: object.disabled, dark: object.dark, data: object.data}) do %>
+  <%= pb_rails("button", props: {
+    type: object.type, 
+    loading: object.loading, 
+    link: object.link, 
+    new_window: object.new_window, 
+    variant: object.variant, 
+    target: object.target, 
+    disabled: object.disabled, 
+    dark: object.dark
+  }.merge(object.input_options)) do %>
     <%= pb_rails("icon", props: {icon: object.icon, fixed_width: true, dark: object.dark}) %>
   <% end %>
 <% end %>
