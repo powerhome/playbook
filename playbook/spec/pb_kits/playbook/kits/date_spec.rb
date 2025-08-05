@@ -25,6 +25,10 @@ RSpec.describe Playbook::PbDate::Date do
       .with_default(false)
   }
   it { is_expected.to define_prop(:timezone) }
+  it {
+    is_expected.to define_boolean_prop(:show_current_year)
+      .with_default(false)
+  }
 
   describe "#day_of_week" do
     it "displays the date" do
