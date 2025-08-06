@@ -1,0 +1,3 @@
+The Pagination component supports external control of the current page. This allows for programmatically reseting or changing the current page when filters or other criteria change, without needing to unmount and remount the component.
+
+In this example, changing the "Total Items" or "Items per Page" dropdowns will automatically reset the pagination to page 1, demonstrating how external control works. The pagination component will update its internal state to reflect the new `current` prop value.
