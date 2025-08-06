@@ -1,0 +1,1 @@
+`rowStyling` can also be used to control padding on all cells in a given row via the use of the `cellPadding` key/value pair as shown here. `cellPadding` lets you use 'xxs', 'xs', 'sm', 'md', 'lg', 'xl' and 'none'.
