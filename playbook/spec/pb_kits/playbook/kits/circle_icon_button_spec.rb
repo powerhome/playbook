@@ -21,6 +21,8 @@ RSpec.describe Playbook::PbCircleIconButton::CircleIconButton do
       .with_default("default")
       .with_values("default", "sm")
   }
+  it { is_expected.to define_hash_prop(:input_options).with_default({}) }
+
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
       icon = "user"
