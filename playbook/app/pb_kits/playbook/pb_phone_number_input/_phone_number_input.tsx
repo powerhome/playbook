@@ -197,7 +197,7 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.Ref<unknown>
   }
 
   const validateMissingAreaCode = (itiInit: any) => {
-    if (!required || !itiInit) return
+    if (!itiInit) return
     if (itiInit.getValidationError() === ValidationError.MissingAreaCode) {
       showFormattedError('missing area code')
       return true
