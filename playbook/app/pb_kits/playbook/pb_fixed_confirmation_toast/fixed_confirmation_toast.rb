@@ -56,7 +56,7 @@ module Playbook
       end
 
       def icon_class
-        icon.present? ? " custom_icon" : ""
+        icon.present? && icon != "none" ? " custom_icon" : ""
       end
 
       def classname

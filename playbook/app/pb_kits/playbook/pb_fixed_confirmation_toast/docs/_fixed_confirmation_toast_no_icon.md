@@ -1,0 +1,1 @@
+Setting `icon` prop to "none" will render the fixed confirmation toast without the left side icon. 
