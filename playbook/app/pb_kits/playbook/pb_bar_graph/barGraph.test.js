@@ -20,9 +20,8 @@ const testId = 'bargraph1';
 test('bargraph uses exact classname', () => {
   render(
     <BarGraph
-        className='super_important_class'
+        containerProps={{ className: 'super_important_class' }}
         data={{ testid: testId }}
-        id='bar-default'
     />
   );
  
