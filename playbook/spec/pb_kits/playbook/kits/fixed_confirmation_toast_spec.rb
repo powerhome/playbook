@@ -79,6 +79,7 @@ RSpec.describe Playbook::PbFixedConfirmationToast::FixedConfirmationToast do
       expect(subject.new(text: text, status: "neutral", vertical: "top").classname).to eq "pb_fixed_confirmation_toast_kit_neutral"
       expect(subject.new(text: text, status: "neutral", vertical: "top", horizontal: "center").classname).to eq "pb_fixed_confirmation_toast_kit_neutral positioned_toast top center"
       expect(subject.new(text: text, status: "tip", icon: "arrow-down").classname).to eq "pb_fixed_confirmation_toast_kit_tip custom_icon"
+      expect(subject.new(text: text, icon: "none").classname).to eq "pb_fixed_confirmation_toast_kit_neutral"
       expect(subject.new(text: text, status: "tip", auto_close: 3000).classname).to eq "pb_fixed_confirmation_toast_kit_tip auto_close_3000"
     end
   end

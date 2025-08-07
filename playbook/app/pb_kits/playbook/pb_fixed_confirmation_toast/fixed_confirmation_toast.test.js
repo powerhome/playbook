@@ -56,6 +56,12 @@ test('renders custom icon when provided', () => {
     expect(container.querySelector('.custom_icon')).toBeInTheDocument();
 });
 
+test("renders no icon when icon prop is 'none'", () => {
+    const { container } = render(<FixedConfirmationToast icon="none" />);
+    expect(container.querySelector('.pb_icon')).not.toBeInTheDocument();
+    expect(container.querySelector('.custom_icon')).not.toBeInTheDocument();
+});
+
 test('renders correctly with multiLine prop', () => {
     const { container } = render(<FixedConfirmationToast multiLine />);
     expect(container.querySelector('._multi_line')).toBeInTheDocument();
