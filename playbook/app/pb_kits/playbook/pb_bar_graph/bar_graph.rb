@@ -3,91 +3,25 @@
 module Playbook
   module PbBarGraph
     class BarGraph < Playbook::KitBase
-      prop :align, type: Playbook::Props::Enum,
-                   values: %w[left right center],
-                   default: "center"
-      prop :axis_title
-      prop :axis_format
-      prop :chart_data, type: Playbook::Props::Array,
-                        default: []
-      prop :custom_options, default: {}
-      prop :orientation, type: Playbook::Props::Enum,
-                         values: %w[vertical horizontal],
-                         default: "vertical"
-      prop :point_start, type: Playbook::Props::Numeric
-      prop :stacking
-      prop :subtitle
-      prop :title
-      prop :x_axis_categories, type: Playbook::Props::Array,
-                               default: []
-      prop :y_axis_min, type: Playbook::Props::Numeric
-      prop :y_axis_max, type: Playbook::Props::Numeric
-      prop :legend, type: Playbook::Props::Boolean,
-                    default: false
-      prop :toggle_legend_click, type: Playbook::Props::Boolean,
-                                 default: true
-      prop :height
-      prop :colors, type: Playbook::Props::Array,
-                    default: []
-      prop :layout, type: Playbook::Props::Enum,
-                    values: %w[horizontal vertical proximate],
-                    default: "horizontal"
-      prop :vertical_align, type: Playbook::Props::Enum,
-                            values: %w[top middle bottom],
-                            default: "bottom"
-      prop :x, type: Playbook::Props::Numeric
-      prop :y, type: Playbook::Props::Numeric
+      prop :options, default: {}
+      prop :container_props, default: {}
 
-      def chart_type
-        orientation == "horizontal" ? "bar" : "column"
+      def chart_options
+        options
       end
 
-      def standard_options
+      def react_props
         {
-          align: align,
-          id: id,
-          className: classname,
-          chartData: chart_data,
-          dark: dark ? "dark" : "",
-          type: chart_type,
-          title: title,
-          stacking: stacking,
-          subTitle: subtitle,
-          axisTitle: axis_title,
-          axisFormat: axis_format,
-          pointStart: point_start,
-          xAxisCategories: x_axis_categories,
-          yAxisMin: y_axis_min,
-          yAxisMax: y_axis_max,
-          legend: legend,
-          toggleLegendClick: toggle_legend_click,
-          height: height,
-          colors: colors,
-          layout: layout,
-          verticalAlign: vertical_align,
-          x: x,
-          y: y,
+          options: options,
+          containerProps: container_props_hash,
         }
       end
 
-      def chart_options
-        standard_options.deep_merge(custom_options)
-      end
-
-      def vertical_align_props
-        if vertical_align
-          if object.vertical_align
-            original_result = super
-            class_to_remove = "vertical_align_#{object.vertical_align}"
-
-            modified_result = original_result.gsub(class_to_remove, "").strip
-            modified_result.empty? ? nil : modified_result
-          else
-            super
-          end
-        else
-          super
-        end
+      def container_props_hash
+        container_props.merge({
+                                id: id,
+                                className: classname,
+                              }).compact
       end
 
       def classname

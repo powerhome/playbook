@@ -39,8 +39,6 @@
     "@popperjs/core": "^2.11.8",
     "classnames": "2.5.1",
     "flatpickr": "^4.6.13",
-    "highcharts": "^11.4.8",
-    "highcharts-react-official": "^3.2.1",
     "intl-tel-input": "^24.7.0"
   },
   "devDependencies": {
@@ -101,7 +99,9 @@
     "react-is": "^17.0.2",
     "react-trix": "0.10.1",
     "trix": "1.3.5",
-    "webpacker-react": "^0.3.2"
+    "webpacker-react": "^0.3.2",
+    "highcharts": "^11.4.8",
+    "highcharts-react-official": "^3.2.1"
   },
   "resolutions": {
     "react": "^17.0.2",
