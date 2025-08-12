@@ -1,7 +1,6 @@
 import React, { useState } from "react"
 import AdvancedTable from '../_advanced_table'
 import MOCK_DATA from "./advanced_table_mock_data_with_id.json"
-import { colors } from "playbook-ui"
 
 const AdvancedTableRowPinning = (props) => {
   const columnDefinitions = [
@@ -36,15 +35,6 @@ const AdvancedTableRowPinning = (props) => {
     },
   ]
 
-  const rowStyling = [
-    {
-      rowId: "8",
-      backgroundColor: colors.category_1,
-      fontColor: colors.white,
-      expandButtonColor: colors.white,
-    },
-  ];
-
   const [pinnedRows, setPinnedRows] = useState({top: ["8"]})
 
   return (
@@ -53,7 +43,6 @@ const AdvancedTableRowPinning = (props) => {
           columnDefinitions={columnDefinitions}
           maxHeight="xs"
           pinnedRows={{value: pinnedRows, onChange: setPinnedRows}}
-          rowStyling={rowStyling}
           tableData={MOCK_DATA}
           tableProps={{sticky: true}}
           {...props}
