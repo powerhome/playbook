@@ -155,6 +155,7 @@ export const RegularTableView = ({
             collapsibleTrail={collapsibleTrail}
             columnDefinitions={columnDefinitions}
             columnPinning={columnPinning}
+            customRowStyle={customRowStyle}
             loading={loading}
             row={row}
             stickyLeftColumn={stickyLeftColumn}
