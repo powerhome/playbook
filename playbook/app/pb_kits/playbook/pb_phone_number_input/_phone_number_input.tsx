@@ -197,12 +197,21 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.Ref<unknown>
   }
 
   const validateMissingAreaCode = (itiInit: any) => {
-    if (!required || !itiInit) return
+    if (!itiInit) return
     if (itiInit.getValidationError() === ValidationError.MissingAreaCode) {
       showFormattedError('missing area code')
       return true
     }
   }
+
+  const validateRepeatCountryCode = (itiInit: any) => {
+    if (!itiInit) return
+    const countryDialCode = itiInit.getSelectedCountryData().dialCode;
+    if (unformatNumber(inputValue).startsWith(countryDialCode)) {
+      return showFormattedError('repeat country code')
+    }
+  }
+
 
   const validateErrors = () => {
     if (!hasTyped && !error) return
@@ -213,6 +222,7 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.Ref<unknown>
     if (validateTooShortNumber(itiRef.current)) return
     if (validateUnhandledError(itiRef.current)) return
     if (validateMissingAreaCode(itiRef.current)) return
+    if (validateRepeatCountryCode(itiRef.current)) return
   }
 
   const getCurrentSelectedData = (itiInit: any, inputValue: string) => {
