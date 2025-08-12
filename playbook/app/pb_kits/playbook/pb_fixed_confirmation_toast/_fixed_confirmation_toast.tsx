@@ -52,7 +52,7 @@ const FixedConfirmationToast = (props: FixedConfirmationToastProps): React.React
   } = props;
 
   const returnedIcon = icon || iconMap[status]
-  const iconClass = icon ? "custom_icon" : ""
+  const iconClass = icon && icon !== "none" ? "custom_icon" : ""
 
   const css = classnames(
     `pb_fixed_confirmation_toast_kit_${status}`,
@@ -92,7 +92,7 @@ const FixedConfirmationToast = (props: FixedConfirmationToastProps): React.React
             onClick={handleClick}
             {...htmlProps}
         >
-          {returnedIcon && (
+          {returnedIcon && icon !== "none" && (
             <Icon
                 className="pb_icon"
                 fixedWidth

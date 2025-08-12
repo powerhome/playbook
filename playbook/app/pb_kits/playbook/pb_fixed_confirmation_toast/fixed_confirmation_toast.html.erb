@@ -1,6 +1,7 @@
 <%= pb_content_tag do %>
+    <% if object.icon_value && object.icon_value != "none" %>
     <%= pb_rails("icon", props: { icon: object.icon_value, classname: "pb_icon", fixed_width: true }) %>
-
+    <% end %>
     <% if content %>
         <%= content %>
     <% elsif object.show_text? %>
