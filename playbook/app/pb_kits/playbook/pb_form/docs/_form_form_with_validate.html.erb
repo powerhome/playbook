@@ -88,7 +88,6 @@
 }] %>
 
 <%= pb_form_with(scope: :example, method: :get, url: "", validate: true) do |form| %>
-  <%= form.dropdown_field :example_dropdown_validation_multi, props: {id:"hi", label: true, options: example_dropdown_options, multi_select: true, required: true, autocomplete: true } %>
   <%= form.typeahead :example_typeahead_validation, props: { data: { typeahead_example2: true, user: {} }, label: true, placeholder: "Search for a user", required: true, validation: { message: "Please select a user." } } %>
   <%= form.text_field :example_text_field_validation, props: { label: true, required: true } %>
   <%= form.phone_number_field :example_phone_number_field_validation, props: { label: "Example phone field", hidden_inputs: true } %>
@@ -107,9 +106,6 @@
   <%= form.star_rating_field :example_star_rating_validation, props: { variant: "interactive", label: true, required: true } %>
   <%= form.time_zone_select_field :example_time_zone_select, ActiveSupport::TimeZone.us_zones, { default: "Eastern Time (US & Canada)" }, props: { label: true, blank_selection: "Select a Time Zone...", required: true } %>
   <%= form.multi_level_select :example_multi_level_select, props: { id: "multi-level-select-form", tree_data: treeData, margin_bottom: "sm", required: true, label: "Example Multi Level Select field" } %>
-
-  
-
 
   <%= form.actions do |action| %>
     <%= action.submit %>
