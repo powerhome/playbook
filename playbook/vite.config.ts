@@ -10,6 +10,9 @@ import { env } from 'process';
 const isProduction = env.NODE_ENV === 'production'
 
 export default defineConfig({
+  optimizeDeps: {
+    exclude: ['tiptap/react'],
+  },
   build: {
     minify: isProduction ? 'terser' : false,
     terserOptions: {
@@ -56,6 +59,7 @@ export default defineConfig({
         'trix',
         'react-trix',
         'webpacker-react',
+        'tiptap/react',
       ],
     },
   },
