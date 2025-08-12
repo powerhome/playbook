@@ -5,6 +5,7 @@ examples:
   - circle_icon_button_link: Link
   - circle_icon_button_loading: Loading
   - circle_icon_button_size: Size
+  - circle_icon_button_input_options: Input Options
   
   react:
   - circle_icon_button_default: Default

@@ -1,0 +1,24 @@
+<%= pb_rails("circle_icon_button", props: {
+  icon: "plus",
+  input_options: {
+    data: { "test-id": "add-button", remote: true },
+  }
+}) %>
+<br/>
+<%= pb_rails("circle_icon_button", props: {
+  icon: "pen",
+  variant: "secondary",
+  input_options: {
+    data: { "test-id": "edit-button" },
+    classname: "custom-secondary-button-class"
+  }
+}) %>
+<br/>
+<%= pb_rails("circle_icon_button", props: {
+  icon: "user",
+  variant: "link",
+  input_options: {
+    data: { "test-id": "user-button" },
+    id: "user-button-id"
+  }
+}) %>

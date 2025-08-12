@@ -21,6 +21,8 @@ module Playbook
       prop :size, type: Playbook::Props::Enum,
                   values: %w[default sm],
                   default: "default"
+      prop :input_options, type: Playbook::Props::HashProp,
+                           default: {}
 
       def classname
         generate_classname("pb_circle_icon_button_kit") + size_class
