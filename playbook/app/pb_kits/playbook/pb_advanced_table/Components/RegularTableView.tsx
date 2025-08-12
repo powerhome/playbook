@@ -134,13 +134,15 @@ export const RegularTableView = ({
   const columnDefinitions = table.options.meta?.columnDefinitions || [];
   // Row pinning
   function PinnedRow({ row }: { row: Row<any> }) {
+    const customRowStyle = rowStyling?.length > 0 && rowStyling?.find((s: GenericObject) => s?.rowId === row.id);
     return (
       <tr
           className={classnames(
             `pinned-row`,
           )}
           style={{
-            backgroundColor: 'white',
+            backgroundColor: customRowStyle?.backgroundColor ? customRowStyle?.backgroundColor : 'white',
+            color: customRowStyle?.fontColor,
             position: 'sticky',
             top:   
               row.getIsPinned() === 'top'
