@@ -115,17 +115,17 @@ const DatePicker = (props: DatePickerProps): React.ReactElement => {
   const inputAriaProps = buildAriaProps(inputAria)
   const inputDataProps = buildDataProps(inputData)
 
-  // Convert cursor prop to CSS-compatible format to apply to <input below>
+  // Convert cursor prop to CSS-style format to apply to input tag below
   const getCursorStyle = (cursor?: string): string => {
     // If input is disabled, always use 'not-allowed'
     if (disableInput) return 'not-allowed'
 
-    // If cursor prop is provided, convert it to CSS format
+    // If cursor prop is provided, convert it to styling format
     if (cursor) {
       return camelToSnakeCase(cursor).replace(/_/g, '-')
     }
 
-    // Default cursor is 'pointer'
+    // Default to 'pointer'
     return 'pointer'
   }
 
