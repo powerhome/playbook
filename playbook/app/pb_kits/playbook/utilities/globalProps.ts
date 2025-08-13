@@ -377,9 +377,11 @@ const PROP_CATEGORIES: {[key:string]: (props: {[key: string]: any}) => string} =
     return css.trimEnd()
   },
   gapProps: ({ gap }: Gap) => {
-    let css = ''
-    css += gap ? `gap_${gap} ` : ''
-    return css.trimEnd()
+    if (typeof gap === 'object') {
+      return getResponsivePropClasses(gap, 'gap')
+    } else {
+      return gap ? `gap_${gap}` : ''
+    }
   },
   minHeightProps: ({ minHeight }: MinHeight) => {
     const heightValues = ["auto", "xs", "sm", "md", "lg", "xl", "xxl", "xxxl"]

@@ -164,7 +164,13 @@ module Playbook
 
       selected_gap_props.map do |k|
         gap_value = send(k)
-        "gap_#{gap_value}" if gap_values.include? gap_value
+        if gap_value.is_a?(Hash)
+          gap_value.map do |media_size, gap_spacing_value|
+            "gap_#{media_size}_#{gap_spacing_value.underscore}" if gap_values.include?(gap_spacing_value.to_s)
+          end
+        elsif gap_values.include?(gap_value.to_s)
+          "gap_#{gap_value.underscore}"
+        end
       end.compact.join(" ")
     end
   end
