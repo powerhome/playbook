@@ -148,7 +148,7 @@ const DatePicker = (props: DatePickerProps): React.ReactElement => {
       syncEndWith,
       required: false,
     }, scrollContainer)
-  }, initializeOnce ? [] : undefined)
+  },[])
   const filteredProps = {...props}
   if (filteredProps.marginBottom === undefined) {
     filteredProps.marginBottom = "sm"
