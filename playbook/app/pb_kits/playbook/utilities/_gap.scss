@@ -11,3 +11,7 @@ $gap_values: (
 );
 
 @include global_props_responsive_css($gap_values, 'gap', 'gap');
+
+@include global_props_responsive_css($gap_values, 'column_gap', 'column-gap');
+
+@include global_props_responsive_css($gap_values, 'row_gap', 'row-gap');

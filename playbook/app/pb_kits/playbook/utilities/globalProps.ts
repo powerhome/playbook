@@ -112,6 +112,14 @@ type Gap = {
   gap?: string,
 }
 
+type ColumnGap = {
+  columnGap?: string,
+}
+
+type RowGap = {
+  rowGap?: string,
+}
+
 type NumberSpacing = {
   numberSpacing?: "tabular",
 }
@@ -200,7 +208,7 @@ type MinHeight = {
 export type GlobalProps = AlignContent & AlignItems & AlignSelf &
   BorderRadius & Cursor & Dark & Display & DisplaySizes & Flex & FlexDirection &
   FlexGrow & FlexShrink & FlexWrap & JustifyContent & JustifySelf &
-  LineHeight & Margin & Width & MinWidth & MaxWidth & Gap & NumberSpacing & Order & Overflow & Padding &
+  LineHeight & Margin & Width & MinWidth & MaxWidth & Gap & ColumnGap & RowGap & NumberSpacing & Order & Overflow & Padding &
   Position & Shadow & TextAlign & Truncate & VerticalAlign & ZIndex & { hover?: string } & Top & Right & Bottom & Left & Height & MaxHeight & MinHeight;
 
 const getResponsivePropClasses = (prop: {[key: string]: string}, classPrefix: string) => {
@@ -381,6 +389,20 @@ const PROP_CATEGORIES: {[key:string]: (props: {[key: string]: any}) => string} =
       return getResponsivePropClasses(gap, 'gap')
     } else {
       return gap ? `gap_${gap}` : ''
+    }
+  },
+  columnGapProps: ({ columnGap }: ColumnGap) => {
+    if (typeof columnGap === 'object') {
+      return getResponsivePropClasses(columnGap, 'column_gap')
+    } else {
+      return columnGap ? `column_gap_${columnGap}` : ''
+    }
+  },
+  rowGapProps: ({ rowGap }: RowGap) => {
+    if (typeof rowGap === 'object') {
+      return getResponsivePropClasses(rowGap, 'row_gap')
+    } else {
+      return rowGap ? `row_gap_${rowGap}` : ''
     }
   },
   minHeightProps: ({ minHeight }: MinHeight) => {

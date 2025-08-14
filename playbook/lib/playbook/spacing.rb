@@ -4,6 +4,8 @@ module Playbook
   module Spacing
     def self.included(base)
       base.prop :gap
+      base.prop :column_gap
+      base.prop :row_gap
       base.prop :margin
       base.prop :margin_bottom
       base.prop :margin_left
@@ -60,6 +62,18 @@ module Playbook
     def gap_options
       {
         gap: "gap",
+      }
+    end
+
+    def column_gap_options
+      {
+        column_gap: "column_gap",
+      }
+    end
+
+    def row_gap_options
+      {
+        row_gap: "row_gap",
       }
     end
 
@@ -170,6 +184,38 @@ module Playbook
           end
         elsif gap_values.include?(gap_value.to_s)
           "gap_#{gap_value.underscore}"
+        end
+      end.compact.join(" ")
+    end
+
+    def column_gap_props
+      selected_column_gap_props = column_gap_options.keys.select { |sk| try(sk) }
+      return nil unless selected_column_gap_props.present?
+
+      selected_column_gap_props.map do |k|
+        column_gap_value = send(k)
+        if column_gap_value.is_a?(Hash)
+          column_gap_value.map do |media_size, column_gap_spacing_value|
+            "column_gap_#{media_size}_#{column_gap_spacing_value.underscore}" if gap_values.include?(column_gap_spacing_value.to_s)
+          end
+        elsif gap_values.include?(column_gap_value.to_s)
+          "column_gap_#{column_gap_value.underscore}"
+        end
+      end.compact.join(" ")
+    end
+
+    def row_gap_props
+      selected_row_gap_props = row_gap_options.keys.select { |sk| try(sk) }
+      return nil unless selected_row_gap_props.present?
+
+      selected_row_gap_props.map do |k|
+        row_gap_value = send(k)
+        if row_gap_value.is_a?(Hash)
+          row_gap_value.map do |media_size, row_gap_spacing_value|
+            "row_gap_#{media_size}_#{row_gap_spacing_value.underscore}" if gap_values.include?(row_gap_spacing_value.to_s)
+          end
+        elsif gap_values.include?(row_gap_value.to_s)
+          "row_gap_#{row_gap_value.underscore}"
         end
       end.compact.join(" ")
     end
