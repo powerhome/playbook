@@ -69,16 +69,7 @@
   <%= javascript_tag do %>
     (function() {
       const loadDatePicker = () => {
-        datePickerHelper(<%= object.date_picker_config %>, "<%= object.scroll_container %>")
-
-        if (<%= object.selection_type == "quickpick" %>) {
-          document.getElementById("<%= object.picker_id %>").addEventListener("change", ({ target }) => {
-            const startDate = document.getElementById("<%= object.start_date_id %>")
-            const endDate = document.getElementById("<%= object.end_date_id %>")
-            const splittedValue = target.value.split(" to ")
-            startDate.value = splittedValue[0]
-            endDate.value = splittedValue[1] ? splittedValue[1] : splittedValue[0]
-          })
+            console.log("Hi, I'm the Rails Date Picker 'loadDatePicker' function")
         }
       }
 
