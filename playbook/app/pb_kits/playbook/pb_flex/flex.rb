@@ -127,7 +127,7 @@ module Playbook
       end
 
       def gap_class
-        if gap == "none" || gap.nil?
+        if gap == "none" || gap.nil? || gap.is_a?(Hash)
           nil
         else
           "gap_#{gap}"
@@ -135,7 +135,7 @@ module Playbook
       end
 
       def row_gap_class
-        if row_gap == "none" || row_gap.nil?
+        if row_gap == "none" || row_gap.nil? || row_gap.is_a?(Hash)
           nil
         else
           "rowGap_#{row_gap}"
@@ -143,7 +143,7 @@ module Playbook
       end
 
       def column_gap_class
-        if column_gap == "none" || column_gap.nil?
+        if column_gap == "none" || column_gap.nil? || column_gap.is_a?(Hash)
           nil
         else
           "columnGap_#{column_gap}"
