@@ -77,11 +77,26 @@ module Playbook
           name: mask.present? ? "" : name,
           pattern: validation_pattern || mask_pattern,
           placeholder: placeholder,
+          style: "cursor: #{cursor_style}",
           required: required,
           type: type,
           value: value,
           mask: mask,
         }.merge(input_options)
+      end
+
+      def cursor_style
+        # If input is disabled, always use 'not-allowed'
+        return "not-allowed" if disabled
+
+        # If cursor prop is provided, convert it to kebab-case
+        if cursor.present?
+          # Convert camelCase (ex. notAllowed) to kebab-case (ex. not-allowed)
+          cursor.to_s.gsub(/([a-z\d])([A-Z])/, '\1-\2').downcase
+        else
+          # Default to 'pointer'
+          "pointer"
+        end
       end
 
       def validation_message
