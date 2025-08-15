@@ -115,39 +115,7 @@ const DatePicker = (props: DatePickerProps): React.ReactElement => {
   const inputDataProps = buildDataProps(inputData)
 
   useEffect(() => {
-    datePickerHelper({
-      allowInput,
-      customQuickPickDates,
-      defaultDate,
-      disableDate,
-      disableRange,
-      disableWeekdays,
-      enableTime,
-      format,
-      hideIcon,
-      inLine,
-      maxDate,
-      minDate,
-      mode,
-      onChange,
-      onClose,
-      pickerId,
-      plugins,
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
-      position,
-      positionElement,
-      selectionType,
-      showTimezone,
-      staticPosition,
-      thisRangesEndToday,
-      yearRange,
-      controlsStartId,
-      controlsEndId,
-      syncStartWith,
-      syncEndWith,
-      required: false,
-    }, scrollContainer)
+    console.log("Hi, I'm the React Date Picker useEffect")
   }, initializeOnce ? [] : undefined)
   const filteredProps = {...props}
   if (filteredProps.marginBottom === undefined) {
