@@ -242,4 +242,8 @@ svg {
       animation: fa-spin 1s infinite linear;
     }
   }
+
+  &.dark {
+    color: white;
+  }
 }
