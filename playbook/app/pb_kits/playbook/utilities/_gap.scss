@@ -1,29 +1,17 @@
 @import "spacing";
 
-.gap_none {
-  gap: 0;
-}
+$gap_values: (
+  none: 0,
+  xxs: $space_xxs,
+  xs: $space_xs,
+  sm: $space_sm,
+  md: $space_md,
+  lg: $space_lg,
+  xl: $space_xl,
+);
 
-.gap_xxs {
-  gap: $space_xxs;
-}
+@include global_props_responsive_css($gap_values, 'gap', 'gap');
 
-.gap_xs {
-  gap: $space_xs;
-}
+@include global_props_responsive_css($gap_values, 'column_gap', 'column-gap');
 
-.gap_sm {
-  gap: $space_sm;
-}
-
-.gap_md {
-  gap: $space_md;
-}
-
-.gap_lg {
-  gap: $space_lg;
-}
-
-.gap_xl {
-  gap: $space_xl;
-}
+@include global_props_responsive_css($gap_values, 'row_gap', 'row-gap');

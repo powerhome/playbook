@@ -1,6 +1,7 @@
 import React from 'react'
 import Flex from '../../pb_flex/_flex'
 import FlexItem from '../../pb_flex/_flex_item'
+import Title from '../../pb_title/_title'
 
 const FlexGap = (props) => {
   const count = () => {
@@ -13,6 +14,8 @@ const FlexGap = (props) => {
 
   return (
     <>
+      <Title size={4}>Gap</Title>
+      <br />
       <div className="flex-doc-example">
         <Flex
             gap="xxs"
@@ -27,8 +30,10 @@ const FlexGap = (props) => {
         </Flex>
       </div>
 
-      <br />
+      <br /><br />
 
+      <Title size={4}>Column Gap</Title>
+      <br />
       <div className="flex-doc-example">
         <Flex
             columnGap="lg"
@@ -48,6 +53,9 @@ const FlexGap = (props) => {
           </FlexItem>
         </Flex>
       </div>
+      <br /><br />
+
+      <Title size={4}>Row Gap</Title>
       <br />
       <div className="flex-doc-example">
         <Flex
@@ -67,6 +75,23 @@ const FlexGap = (props) => {
           <FlexItem>
             {'4'}
           </FlexItem>
+        </Flex>
+      </div>
+
+      <br /><br />
+      <Title size={4}>Responsive</Title>
+      <br />
+      <div className="flex-doc-example">
+        <Flex
+            gap={{ xs: "none", sm: "sm", md: "md", lg: "lg", xl: "xl" }}
+            wrap
+            {...props}
+        >
+          {count().map((v, key) => (
+            <FlexItem key={key}>
+              {v}
+            </FlexItem>
+            ))}
         </Flex>
       </div>
     </>
