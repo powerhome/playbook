@@ -26,9 +26,6 @@ window.datePickerHelper = datePickerHelper
 import dialogHelper from 'kits/pb_dialog/dialogHelper'
 window.dialogHelper = dialogHelper
 
-// Lazy image loading
-import 'lazysizes'
-
 import PbCollapsible from 'kits/pb_collapsible'
 PbCollapsible.start()
 
