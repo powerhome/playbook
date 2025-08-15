@@ -58,7 +58,6 @@ export default defineConfig({
         'react-is',
         'trix',
         'react-trix',
-        'webpacker-react',
         'tiptap/react',
       ],
     },
@@ -98,7 +97,7 @@ export default defineConfig({
     cssUrl(),
   ],
   resolve: {
-    dedupe: ['playbook'],
+    dedupe: ['playbook', 'react', 'react-dom'],
     alias: {
       'kits': resolve(__dirname, 'app/pb_kits/playbook'),
       'tokens': resolve(__dirname, 'app/pb_kits/playbook/tokens'),

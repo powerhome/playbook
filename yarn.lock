@@ -11619,11 +11619,6 @@ webidl-conversions@^6.1.0:
   resolved "https://npm.powerapp.cloud/webidl-conversions/-/webidl-conversions-6.1.0.tgz#9111b4d7ea80acd40f5270d666621afa78b69514"
   integrity sha512-qBIvFLGiBpLjfwmYAaHPXsn+ho5xZnGvyGvsarywGNc8VyQJUMHJ8OBKGGrPER0okBeMDaan4mNBlgBROxuI8w==
 
-webpacker-react@^0.3.2:
-  version "0.3.2"
-  resolved "https://npm.powerapp.cloud/webpacker-react/-/webpacker-react-0.3.2.tgz#18c417a3fd51978d0ca98b62a47454d800754e09"
-  integrity sha512-DDteGIfHbHJTV3A+h//AANq4YXZ6C29Va5VWF65lXenCtzekR4G+XWblc2dzeXT/oP2SZNyfVN92BgjJyZyPwA==
-
 wgs84@0.0.0:
   version "0.0.0"
   resolved "https://npm.powerapp.cloud/wgs84/-/wgs84-0.0.0.tgz#34fdc555917b6e57cf2a282ed043710c049cdc76"

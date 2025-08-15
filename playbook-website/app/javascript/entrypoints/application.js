@@ -1,6 +1,7 @@
 /* eslint no-console:0 */
 
-import WebpackerReact from 'webpacker-react'
+import ComponentRegistry from '../utils/componentRegistry'
+import { mountComponents } from '../utils/mountComponents'
 
 import zxcvbn from 'zxcvbn'
 window.zxcvbn = zxcvbn
@@ -62,7 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
   propsTableAnchors.add('.pb--propsTable > .pb_title_kit_3')
 })
 
-WebpackerReact.registerComponents({
+ComponentRegistry.registerComponents({
   AvailableProps,
   DarkModeToggle,
   KitSearch,

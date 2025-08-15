@@ -14,8 +14,7 @@
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@babel/preset-react": "^7.24.1",
     "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
-    "webpack-dev-server": "^3",
-    "webpacker-react": "^0.3.2"
+    "webpack-dev-server": "^3"
   },
   "license": "ISC",
   "scripts": {
