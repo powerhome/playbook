@@ -1,9 +1,10 @@
-# 14.25.0
+# 📅 Date Kit: Show the Year, Every Year
 
 ##### August 15, 2025
 
 <img width="889" height="477" alt="release_image" src="https://github.com/user-attachments/assets/e96ebfd4-3e53-4b5c-90f6-26705f9376ea" />
 
+You asked and we delivered. The Date kit now includes a showCurrentYear prop that gives you full control over how dates are displayed. Previously, the year would be hidden if it matched the current year, but now you can choose to always show it, even when it's 2025!
 
 [14.25.0](https://github.com/powerhome/playbook/tree/14.25.0) full list of changes:
 
@@ -19,7 +20,7 @@
 
 - Dropdown Kit: Fixes for Multi Select Validation Not Working In Form Context [\#4994](https://github.com/powerhome/playbook/pull/4994) ([nickamantia](https://github.com/nickamantia))
 - Advanced Table Kit: Pinned Row With Rowstyling - React [\#4993](https://github.com/powerhome/playbook/pull/4993) ([kangaree](https://github.com/kangaree))
-- Circleiconbutton: New Inputoptions Prop -rails [\#4971](https://github.com/powerhome/playbook/pull/4971) ([elisashapiro](https://github.com/elisashapiro))
+- Circle Icon Button Kit: New inputOptions Prop -Rails [\#4971](https://github.com/powerhome/playbook/pull/4971) ([elisashapiro](https://github.com/elisashapiro))
 - Advanced Table: Fix Conflict Between Sticky Header, Pinned Top Row, and Verticalborder [\#4919](https://github.com/powerhome/playbook/pull/4919) ([skduncan](https://github.com/skduncan))
 
 **Improvements:**
