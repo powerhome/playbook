@@ -284,6 +284,9 @@ export default class PbDropdown extends PbEnhancedElement {
           this.adjustDropdownHeight();
         }
       });
+      this.element.querySelector(DROPDOWN_INPUT).value = Array.from(this.selectedOptions)
+        .map((opt) => JSON.parse(opt).id)
+        .join(",");
     } else {
       options.forEach((option) => {
         option.classList.remove("pb_dropdown_option_selected");
