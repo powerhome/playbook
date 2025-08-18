@@ -1,3 +1,39 @@
+# 📅 Date Kit: Show the Year, Every Year
+
+##### August 15, 2025
+
+<img width="889" height="477" alt="release_image" src="https://github.com/user-attachments/assets/e96ebfd4-3e53-4b5c-90f6-26705f9376ea" />
+
+You asked and we delivered. The Date kit now includes a showCurrentYear prop that gives you full control over how dates are displayed. Previously, the year would be hidden if it matched the current year, but now you can choose to always show it, even when it's 2025!
+
+[14.25.0](https://github.com/powerhome/playbook/tree/14.25.0) full list of changes:
+
+**Kit Enhancements:**
+
+- Fixed Confirmation Toast: Option to Render Toast Without Icon [\#4984](https://github.com/powerhome/playbook/pull/4984) ([nidaqg](https://github.com/nidaqg))
+- Phone Number Kit: Validate Missing Area Code and Repeat Country Code [\#4981](https://github.com/powerhome/playbook/pull/4981) ([kangaree](https://github.com/kangaree))
+- Advanced Table: Padding Control Via Columnstyling or Rowstyling [\#4961](https://github.com/powerhome/playbook/pull/4961) ([nidaqg](https://github.com/nidaqg))
+- Pagination Kit: Sync Pagination's Internal State With the External Current Prop - React [\#4960](https://github.com/powerhome/playbook/pull/4960) ([elisashapiro](https://github.com/elisashapiro))
+- Date Kit: Add Ability to Show Current Year [\#4956](https://github.com/powerhome/playbook/pull/4956) ([nidaqg](https://github.com/nidaqg))
+
+**Fixed Bugs:**
+
+- Dropdown Kit: Fixes for Multi Select Validation Not Working In Form Context [\#4994](https://github.com/powerhome/playbook/pull/4994) ([nickamantia](https://github.com/nickamantia))
+- Advanced Table Kit: Pinned Row With Rowstyling - React [\#4993](https://github.com/powerhome/playbook/pull/4993) ([kangaree](https://github.com/kangaree))
+- Circle Icon Button Kit: New inputOptions Prop -Rails [\#4971](https://github.com/powerhome/playbook/pull/4971) ([elisashapiro](https://github.com/elisashapiro))
+- Advanced Table: Fix Conflict Between Sticky Header, Pinned Top Row, and Verticalborder [\#4919](https://github.com/powerhome/playbook/pull/4919) ([skduncan](https://github.com/skduncan))
+
+**Improvements:**
+
+- Remove Fontawesome Free from Playbook [\#4992](https://github.com/powerhome/playbook/pull/4992) ([nidaqg](https://github.com/nidaqg))
+- Update Playbook Icons [\#4991](https://github.com/powerhome/playbook/pull/4991) ([elisashapiro](https://github.com/elisashapiro))
+- Add @tiptap/react to External Dependencies In Vite.config.ts [\#4990](https://github.com/powerhome/playbook/pull/4990) ([elisashapiro](https://github.com/elisashapiro))
+- Advanced Table Kit: Multi-header Columns With Vertical Borders Doc & Fix Rails Styles [\#4949](https://github.com/powerhome/playbook/pull/4949) ([kangaree](https://github.com/kangaree))
+
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/v14.25.0-rc.3...14.25.0)
+
+
 # 🔪🐞 New Tricks, Same Kits 
 
 ##### August 01, 2025
