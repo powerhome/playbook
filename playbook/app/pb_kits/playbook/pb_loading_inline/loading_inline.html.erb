@@ -1,6 +1,11 @@
 <%= pb_content_tag do %>
 
   <%= pb_rails("body", props: { color: "light", dark: object.dark }) do %>
-    <%= pb_rails("icon", props: { aria: { label: "loading icon" }, fixed_width: true, icon: "spinner", pulse: true }) %> <%= object.text %>
+    <% icon_name = if object.variant == "dotted"
+      "spinner"
+    elsif object.variant == "solid"
+      "spinner-third"
+    end %>
+    <%= pb_rails("icon", props: { aria: { label: "loading icon" }, fixed_width: true, icon: icon_name, pulse: true }) %> <%= object.text %>
   <% end %>
 <% end %>
