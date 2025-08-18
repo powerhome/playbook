@@ -15,6 +15,14 @@ module Playbook
       def classname
         generate_classname("pb_loading_inline_kit", align)
       end
+
+      def spinner_icon
+        if variant == "dotted"
+          "spinner"
+        elsif variant == "solid"
+          "spinner-third"
+        end
+      end
     end
   end
 end
