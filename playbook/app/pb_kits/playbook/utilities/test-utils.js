@@ -2,7 +2,9 @@
 
 import React from 'react'
 import { render, screen } from '@testing-library/react'
-import '@testing-library/jest-dom/extend-expect'
+import {act } from 'react-dom/test-utils'
+import userEvent from '@testing-library/user-event'
+import '@testing-library/jest-dom'
 
 // Accessbility
 import { axe, toHaveNoViolations } from 'jest-axe'
@@ -26,6 +28,8 @@ const customRender = (ui, options) =>
 
 export * from '@testing-library/react'
 export { customRender as render }
+export { userEvent }
+export { act }
 
 export const SCREEN_SIZES = ["xs", "sm", "md", "lg", "xl"]
 
