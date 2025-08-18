@@ -14,7 +14,7 @@ export default defineConfig({
     exclude: ['tiptap/react'],
   },
   build: {
-    minify: isProduction ? 'terser' : false,
+    minify: false,
     terserOptions: {
       mangle: false,
       compress: false,
