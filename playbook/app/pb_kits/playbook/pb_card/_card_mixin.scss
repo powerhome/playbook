@@ -52,19 +52,19 @@ $pb_card_header_colors: map-merge(map-merge(map-merge($product_colors, $addition
   background-color: $white;
 
   @each $name, $color in $background_colors {
-    &[class*=background_#{$name}] {
+    &[class*="_background_#{$name}"] {
       background-color: $color;
     }
   };
 
   @each $name, $shadow in $box_shadows {
-    &[class^=_#{$name}] {
+    &[class*="_#{$name}"] {
       box-shadow: $shadow;
     }
   }
 
   @each $name, $radius in $border_radius {
-    &[class*=_#{$name}] {
+    &[class*="_border_radius_#{$name}"] {
       border-radius: $radius;
     }
   }
