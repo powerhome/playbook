@@ -20,21 +20,9 @@ RSpec.describe Playbook::PbFlex::Flex do
       .with_default("none")
       .with_values("start", "center", "end", "stretch", "none", "baseline")
   }
-  it {
-    is_expected.to define_enum_prop(:gap)
-      .with_default("none")
-      .with_values("xxs", "xs", "sm", "md", "lg", "xl", "none")
-  }
-  it {
-    is_expected.to define_enum_prop(:row_gap)
-      .with_default("none")
-      .with_values("xxs", "xs", "sm", "md", "lg", "xl", "none")
-  }
-  it {
-    is_expected.to define_enum_prop(:column_gap)
-      .with_default("none")
-      .with_values("xxs", "xs", "sm", "md", "lg", "xl", "none")
-  }
+  it { is_expected.to define_prop(:gap) }
+  it { is_expected.to define_prop(:row_gap) }
+  it { is_expected.to define_prop(:column_gap) }
   it { is_expected.to define_boolean_prop(:inline).with_default(false) }
   it {
     is_expected.to define_enum_prop(:orientation)
@@ -68,6 +56,9 @@ RSpec.describe Playbook::PbFlex::Flex do
       expect(subject.new(gap: "xs").classname).to include "pb_flex_kit_orientation_row_justify_content_left_align_items_top_spacing_none_gap_xs"
       expect(subject.new(row_gap: "xs").classname).to include "pb_flex_kit_orientation_row_justify_content_left_align_items_top_spacing_none_rowGap_xs"
       expect(subject.new(column_gap: "xs").classname).to include "pb_flex_kit_orientation_row_justify_content_left_align_items_top_spacing_none_columnGap_xs"
+      expect(subject.new(gap: { xs: "none", sm: "sm", md: "md", lg: "lg", xl: "xl" }).classname).to include "pb_flex_kit_orientation_row_justify_content_left_align_items_top_spacing_none gap_xs_none gap_sm_sm gap_md_md gap_lg_lg gap_xl_xl"
+      expect(subject.new(row_gap: { xs: "none", sm: "sm", md: "md", lg: "lg", xl: "xl" }).classname).to include "pb_flex_kit_orientation_row_justify_content_left_align_items_top_spacing_none row_gap_xs_none row_gap_sm_sm row_gap_md_md row_gap_lg_lg row_gap_xl_xl"
+      expect(subject.new(column_gap: { xs: "none", sm: "sm", md: "md", lg: "lg", xl: "xl" }).classname).to include "pb_flex_kit_orientation_row_justify_content_left_align_items_top_spacing_none column_gap_xs_none column_gap_sm_sm column_gap_md_md column_gap_lg_lg column_gap_xl_xl"
       expect(subject.new(vertical: "baseline").classname).to include "pb_flex_kit_orientation_row_justify_content_left_align_items_baseline_spacing_none"
       expect(subject.new(classname: "additional_class").classname).to include "pb_flex_kit_orientation_row_justify_content_left_align_items_top_spacing_none additional_class"
     end
