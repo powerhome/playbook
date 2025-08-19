@@ -3,7 +3,16 @@
 @import "../tokens/positioning";
 $transition: $transition_cubic;
 
-.pb_checkbox_kit {
+.pb_checkbox_kit,
+.pb_checkbox_kit_on,
+.pb_checkbox_kit_off,
+.pb_checkbox_kit_checked,
+.pb_checkbox_kit_error,
+.pb_checkbox_kit_indeterminate,
+.pb_checkbox_kit_checked_error,
+.pb_checkbox_kit_checked_indeterminate,
+.pb_checkbox_kit_error_indeterminate,
+.pb_checkbox_kit_checked_error_indeterminate {
   cursor: pointer;
   display: inline-flex;
   vertical-align: middle;
