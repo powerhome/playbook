@@ -9,7 +9,7 @@ type FlexItemPropTypes = {
   htmlOptions?: { [key: string]: string | number | boolean | (() => void) },
   shrink?: boolean,
   className?: string,
-  flex?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 'none',
+  flex?: string | number,
   order?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 'first' | 'none',
   alignSelf?: "start" | "end" | "center" | "stretch" | null,
   displayFlex?: boolean
