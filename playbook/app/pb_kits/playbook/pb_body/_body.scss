@@ -1,23 +1,10 @@
 @import "./body_mixins";
 @import "../tokens/titles";
 
+// Base body styles for all variants
 [class^="pb_body_kit"] {
   @include pb_body($text_lt_default);
-  @each $color_name, $color_value in $pb_body_colors {
-    &[class*=_#{"" + $color_name}] {
-      @include pb_body($color_value);
-    }
-    @each $status_name, $status_value in $pb_body_status {
-      &[class*="_default_#{$status_name}"] {
-        @include pb_body($status_value);
-      }
-    }
-  }
-  @each $dark_color_name, $dark_color_value in $pb_dark_body_colors {
-    &[class*="_#{$dark_color_name}"][class*="dark"] {
-      @include pb_body($dark_color_value);
-    }
-  }
+  
   b,
   strong {
     font-weight: $bold;
@@ -39,27 +26,48 @@
     font-size: $font_smaller;
     letter-spacing: $lspace_loose;
   }
+}
 
+// Color variants
+@each $color_name, $color_value in $pb_body_colors {
+  [class^="pb_body_kit"][class*="_#{$color_name}"] {
+    @include pb_body($color_value);
+  }
+  
+  // Default status combinations
   @each $status_name, $status_value in $pb_body_status {
-    &[class*="#{$status_name}"] {
+    [class^="pb_body_kit"][class*="_default_#{$status_name}"] {
       @include pb_body($status_value);
     }
   }
+}
 
-  &[class*="dark"] {
-    a {
-      color: $active_dark;
+// Status variants
+@each $status_name, $status_value in $pb_body_status {
+  [class^="pb_body_kit"][class*="_#{$status_name}"] {
+    @include pb_body($status_value);
+  }
+}
+
+// Dark theme
+[class^="pb_body_kit"][class*="_dark"] {
+  @include pb_body_dark();
+  
+  a {
+    color: $active_dark;
+  }
+  
+  // Dark color variants
+  @each $dark_color_name, $dark_color_value in $pb_dark_body_colors {
+    &[class*="_#{$dark_color_name}"] {
+      @include pb_body($dark_color_value);
     }
-    @include pb_body_dark();
-    @each $dark_color_name, $dark_color_value in $pb_dark_body_colors {
-      &[class*="_#{$dark_color_name}"][class*="dark"] {
-        @include pb_body($dark_color_value);
-      }
-    }
-    @each $status_name, $status_value in $pb_dark_body_status {
-      &[class*="_#{$status_name}"] {
-        @include pb_body($status_value);
-      }
+  }
+  
+  // Dark status variants
+  @each $status_name, $status_value in $pb_dark_body_status {
+    &[class*="_#{$status_name}"] {
+      @include pb_body($status_value);
     }
   }
 }
