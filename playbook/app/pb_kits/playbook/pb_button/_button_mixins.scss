@@ -52,7 +52,7 @@ $pb_button_border_width: 0px;
 
   @include focus;
 
-  &.dark {
+  &[class*=dark] {
     @include focus-dark
   }
 
