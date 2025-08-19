@@ -9,7 +9,7 @@
     display: inline;
   }
 
-  [class*=show-below-] {
+  .show-below- {
     display: none;
   }
   @each $breakpoint_name, $breakpoint in $breakpoints {

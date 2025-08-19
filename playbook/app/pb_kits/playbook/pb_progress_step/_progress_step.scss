@@ -6,10 +6,10 @@
 
 
 
-[class^=pb_progress_step_kit]{
+.pb_progress_step_kit{
     list-style:none;
     display: flex;
-  [class*=pb_progress_step_item] {
+  .pb_progress_step_item {
     display:flex;
     flex-direction:column;
     position: relative;
@@ -46,13 +46,13 @@
         display:none;
     }
 
-    &[class*=_inactive]{
+    &._inactive{
         .circle{
             background-color: $border_light;
             color: $border_light;
         }
     }
-    &[class*=_active]{
+    &._active{
         .circle{
             background-color: $white;
             border: solid 2px $primary;
@@ -62,7 +62,7 @@
             background-color: $primary;
         }
     }
-    &[class*=_complete]{
+    &._complete{
         .circle{
             background-color: $primary;
             color:$white;
@@ -73,14 +73,14 @@
     }
   }
 // Start of Horizontal
-  &[class*=horizontal]{
+  &.horizontal{
     flex-direction: row;
-    [class*=pb_progress_step_item]{
+    .pb_progress_step_item{
         align-items: flex-end;
         &::before{
             width: calc(100% + .04em);
         }
-        [class*=box]{
+        .box{
            display: flex;
            flex-direction: column;
            align-items: center;
@@ -107,12 +107,12 @@
         }
     }
     // Start of Tracker
-    &[class*=tracker] {
+    &.tracker {
         background-color: $border_light;
         border-radius: 1rem;
         height:24px;
         align-items: center;
-        [class*=box]{
+        .box{
             .circle{
                 box-shadow: none;
                 height: 24px;
@@ -124,7 +124,7 @@
                 position: absolute;  
             }
         }
-        li[class*=pb_progress_step_item]{
+        li.pb_progress_step_item{
             &::before{
                 background-color: $border_light;
                 height: 24px;
@@ -147,7 +147,7 @@
                 }
             }
         }
-        li[class*=_active]{
+        li._active{
             .circle{
                 height: 24px;
                 width: 24px;
@@ -161,7 +161,7 @@
                 background-color: $primary;
             }
         }
-        li[class*=_inactive]{
+        li._inactive{
             &::before {
                 display: none;
                 background-color: $border_light;
@@ -172,7 +172,7 @@
             }
             
         }
-        li[class*=_complete]{
+        li._complete{
             &::before {
                 background-color: $primary;
             }
@@ -180,38 +180,38 @@
                 background-color: darken($primary,25%);
             }
         }
-        li[class*=_hidden]{
+        li._hidden{
             &::before, .circle {
                 display: none;
             }
         }
-        li[class*=_hidden] ~ li[class*=_active],
-        li[class*=_hidden] ~ li[class*=_complete] {
+        li._hidden ~ li._active,
+        li._hidden ~ li._complete {
             &::before {
                 width: calc(200% + 1.5em);
             }
         }
-        &[class*=dark]{
+        &.dark{
             background-color: tint($bg_dark,20%);
-            [class*=_inactive]{
+            ._inactive{
                 .circle{
                     border-color: tint($bg_dark,20%);
                 }
             }
         }
-        &[class*=info]{
-            li[class*=inactive] .circle{
+        &.info{
+            li.inactive .circle{
                 border-color: $border_light;
             }
-            .box .circle , li[class*=_active] .circle{
+            .box .circle , li._active .circle{
                 border-color: $teal;
             }
-            li[class*=_complete],li[class*=_active]{
+            li._complete,li._active{
                 &::before {
                     background-color: $teal;
                 }
             }
-            li[class*=_complete] .circle{
+            li._complete .circle{
                 background-color: darken($teal,25%);
             }
         }
@@ -222,10 +222,10 @@
 // End of Horizontal
 
 // Start of Vertical
-  &[class*=vertical]{
+  &.vertical{
     flex-direction: column; 
-    [class*=pb_progress_step_item]{
-        [class*=box]{
+    .pb_progress_step_item{
+        .box{
         display:flex;
         flex-direction: row;
         align-items: flex-start;
@@ -252,10 +252,10 @@
     }
   }
 //End of Vertical
-  &[class*=icon]{
-    [class*=progress_step_item][class*=_complete],
-    [class*=progress_step_item][class*=_active] {
-        [class*=box] .circle svg {
+  &.icon{
+    .progress_step_item._complete,
+    .progress_step_item._active {
+        .box .circle svg {
             opacity: 1;
             
         }
@@ -263,8 +263,8 @@
     }
 
 
-  &[class*=dark] {
-    [class*=progress_step_item]{
+  &.dark {
+    .progress_step_item{
         &::before{
             background-color: tint($bg_dark,20%);
         }
@@ -272,7 +272,7 @@
     .circle{
         box-shadow: 0 0 0 2px tint($bg_dark,10%);
     }
-    [class*=active]{
+    .active{
         .circle{
             background-color: tint($bg_dark,10%);
         }
@@ -280,12 +280,12 @@
             background-color: $primary;
         }
     }
-    [class*=inactive]{
+    .inactive{
         .circle, &::before{
            background-color: tint($bg_dark,20%);
         }
     }
-    [class*=complete]{
+    .complete{
         .circle, &::before{
            background-color: $primary;
         }

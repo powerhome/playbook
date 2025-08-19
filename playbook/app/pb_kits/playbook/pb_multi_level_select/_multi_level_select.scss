@@ -16,7 +16,7 @@
       border-color: $error;
     }
   }
-  [class*=pb_body_kit_negative] {
+  .pb_body_kit_negative {
     margin-top: $space_xxs;
   }
 }
@@ -110,7 +110,7 @@
           border-color: $error_dark;
         }
       }
-      [class*=pb_body_kit_negative] {
+      .pb_body_kit_negative {
         color: $error_dark;
       }
     }

@@ -2,7 +2,7 @@
 @import "../../tokens/spacing";
 @import "../../tokens/colors";
 
-[class^=pb_date_picker_kit] {
+.pb_date_picker_kit {
   .pb_time_selection {
     color: inherit;
     text-align: left;
@@ -27,10 +27,10 @@
         }
       }
     }
-    [class^=pb_caption_kit_md], [class^=pb_caption_kit_xs] {
+    .pb_caption_kit_md, .pb_caption_kit_xs {
       line-height: $text_larger;
     }
-    [class^=pb_caption_kit_xs] {
+    .pb_caption_kit_xs {
       clear: both;
       display: block;
     }
@@ -41,7 +41,7 @@
       }
     }
     .meridiem {
-      [class^=pb_form_group_kit] {
+      .pb_form_group_kit {
         margin-left: $space_sm;
       }
 
@@ -52,7 +52,7 @@
         background: transparent;
       }
 
-      [class^=pb_selectable_card_kit] > label {
+      .pb_selectable_card_kit > label {
         padding: 0;
         margin: 0;
         width: 60px;

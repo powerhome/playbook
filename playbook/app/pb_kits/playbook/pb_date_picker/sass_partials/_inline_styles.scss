@@ -6,7 +6,7 @@
       Default - display grey caret icon
       Hover - display blue caret icon
   */
-[class^=pb_date_picker_kit] {
+.pb_date_picker_kit {
   /*Default - No value in date picker*/
   &.inline-date-picker {
     [class^="pb_text_input_kit"] .text_input_wrapper .flatpickr-wrapper input::placeholder,
@@ -95,7 +95,7 @@
 /*
   DARK MODE
 */
-[class^=pb_date_picker_kit].dark {
+.pb_date_picker_kit.dark {
   &.inline-date-picker {
     &:not(:hover) {
       .date-picker-inline-angle-down.cal_icon_wrapper {

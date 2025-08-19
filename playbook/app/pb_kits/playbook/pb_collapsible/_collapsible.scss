@@ -1,7 +1,7 @@
 @import "tokens/colors";
 @import "tokens/spacing";
 
-[class^=pb_collapsible_kit] {
+.pb_collapsible_kit {
   padding: $space_md;
 
   .toggle-content {
@@ -28,10 +28,10 @@
   }
 }
 
-[class^=pb_collapsible_main_kit] {
+.pb_collapsible_main_kit {
   padding: $space_md;
 }
 
-[class^=pb_collapsible_content_kit] {
+.pb_collapsible_content_kit {
   padding: $space_md;
 }

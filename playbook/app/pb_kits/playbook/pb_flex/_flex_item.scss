@@ -1,36 +1,36 @@
-[class^=pb_flex_item_kit] {
-  &[class*=_fixed_size] {
+.pb_flex_item_kit {
+  &._fixed_size {
     flex-grow: 0;
     flex-shrink: 0;
   }
 
-  &[class*=_grow] {
+  &._grow {
     flex-grow: 1;
   }
 
-  &[class*=_shrink] {
+  &._shrink {
     flex-shrink: 1;
   }
 
   // Display Flex - Rails & React
-  &[class*=display_flex] {
+  &.display_flex {
     display: flex;
   }
 
   // Alignment: Align Self - Rails & React
-  &[class*=align_self_start] {
+  &.align_self_start {
     align-self: flex-start;
   }
   
-  &[class*=align_self_end] {
+  &.align_self_end {
     align-self: flex-end;
   }
   
-  &[class*=align_self_center] {
+  &.align_self_center {
     align-self: center;
   }
   
-  &[class*=align_self_stretch] {
+  &.align_self_stretch {
     align-self: stretch;
   }
 
@@ -40,7 +40,7 @@
       order: $i;
     }
   }
-  &[class*=order_first]{
+  &.order_first{
     order: -1;
   }
 

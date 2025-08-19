@@ -1,6 +1,6 @@
 @import "../tokens/transition";
 
-[class^=pb_selectable_icon] {
+.pb_selectable_icon {
 
 	text-align: center;
 	cursor: pointer;
@@ -27,7 +27,7 @@
 		transition: color $transition_short ease;
 	}
 
-	&[class*=_disabled] {
+	&._disabled {
 		opacity: $opacity_6;
 		cursor: not-allowed;
 		* {

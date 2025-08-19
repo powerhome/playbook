@@ -4,16 +4,16 @@
 @import "../pb_body/body";
 @import "../pb_caption/caption";
 
-[class^=pb_time_kit] {
-  &[class*=_center]  {
+.pb_time_kit {
+  &._center  {
     text-align: center;
   }
 
-  &[class*=_right]  {
+  &._right  {
     text-align: right;
   }
 
-  [class^=pb_time_timezone] {
+  .pb_time_timezone {
     color: $text_lt_light;
     font-weight: $bold;
 
@@ -22,7 +22,7 @@
     }
   }
 
-  &[class*=dark] {
+  &.dark {
     & * {
       @include caption_dark;
     }

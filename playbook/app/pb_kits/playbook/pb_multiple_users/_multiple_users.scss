@@ -8,7 +8,7 @@ $pb_multiple_users_border_size: 1px;
 $pb_multiple_users_size: map-get($avatar-sizes, "xs");
 $pb_multiple_users_size_xxs: map-get($avatar-sizes, "xxs");
 
-[class^=pb_multiple_users_kit] {
+.pb_multiple_users_kit {
   display: inline-flex;
 
   .multiple_users_badge_xs,
@@ -60,7 +60,7 @@ $pb_multiple_users_size_xxs: map-get($avatar-sizes, "xxs");
     }
   }
 
-  &[class*=_reverse] {
+  &._reverse {
     flex-direction: row-reverse;
 
     .pb_multiple_users_item {

@@ -1,9 +1,9 @@
-[class^=pb_selectable_card_icon_kit] {
+.pb_selectable_card_icon_kit {
 
 	text-align: center;
 	user-select: none;
 
-  .buffer > [class*=pb_selectable_icon_kit]::before {
+  .buffer > .pb_selectable_icon_kit::before {
     content: '';
     position: absolute;
     width: 100%;
@@ -12,7 +12,7 @@
     left: 0;
   }
 
-  .buffer > [class*=pb_selectable_icon_kit] {
+  .buffer > .pb_selectable_icon_kit {
     @media (hover:hover) {
       &:hover * {
             transition: transform $transition_short ease;
@@ -42,7 +42,7 @@
       }
     }
 
-    &[class*=_disabled] {
+    &._disabled {
       opacity: $opacity_6;
       cursor: not-allowed;
 
@@ -79,15 +79,15 @@
     }
   }
 
-  [class^=pb_selectable_icon_kit] {
+  .pb_selectable_icon_kit {
     margin-bottom: 0px;
   }
 
-  [class^=pb_body_kit_light] {
+  .pb_body_kit_light {
     margin-top: $space_xs;
   }
 
-  [class^=pb_selectable_card_kit] {
+  .pb_selectable_card_kit {
     margin-bottom: 0px !important;
   }
 }

@@ -3,50 +3,50 @@
 @import "../tokens/spacing";
 @import "../pb_icon_circle/icon_circle";
 
-[class^=pb_icon_stat_value_kit]{
+.pb_icon_stat_value_kit{
   display: flex;
   align-items: baseline;
 
-  &[class*=_vertical]  {
+  &._vertical  {
     flex-direction: column;
 
-    &[class*=_center]  {
+    &._center  {
       align-items: center;
 
-      [class^=pb_title],
-      [class^=pb_body],
-      [class^=pb_caption] {
+      .pb_title,
+      .pb_body,
+      .pb_caption {
         text-align: center;
       }
     }
 
-    &[class*=_right]  {
+    &._right  {
       align-items: flex-end;
 
-      [class^=pb_title],
-      [class^=pb_body],
-      [class^=pb_caption] {
+      .pb_title,
+      .pb_body,
+      .pb_caption {
         text-align: right;
       }
     }
 
-    [class^=pb_icon_circle] {
+    .pb_icon_circle {
       margin-bottom: $space-xs;
     }
   }
 
-  &[class*=_horizontal]  {
+  &._horizontal  {
     align-items: center;
 
-    &[class*=_center]  {
+    &._center  {
       justify-content: center;
     }
 
-    &[class*=_right]  {
+    &._right  {
       justify-content: flex-end;
     }
 
-    [class^=pb_icon_circle] {
+    .pb_icon_circle {
       margin-right: $space-sm;
     }
   }

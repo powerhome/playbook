@@ -3,10 +3,10 @@
 @import "../tokens/spacing";
 @import "../tokens/titles";
 
-[class^=pb_textarea_kit] {
+.pb_textarea_kit {
   margin-bottom: $space_sm;
 
-  [class^=pb_caption_kit] {
+  .pb_caption_kit {
     margin-bottom: $space_xs;
     display: block;
   }
@@ -59,7 +59,7 @@
   }
 
   &.error {
-    [class*=pb_body_kit] {
+    .pb_body_kit {
       margin-top: $space_xs / 2;
     }
     textarea {

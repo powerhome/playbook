@@ -3,7 +3,7 @@
 @import "../tokens/typography";
 @import "../tokens/border_radius";
 
-[class^=pb_link_kit]{
+.pb_link_kit{
   @include pb_link($primary);
   &:hover {
     color: $text_lt_default;
@@ -40,7 +40,7 @@
   }
 
   @each $dark_color_name, $dark_color_value in $pb_dark_link_colors{
-    &[class*=_#{$dark_color_name}][class*=dark]{
+    &[class*=_#{$dark_color_name}].dark{
       @include pb_link($dark_color_value);
       
       &:hover {
@@ -53,11 +53,11 @@
     }
   }
 
-  &[class*=_underline] {
+  &._underline {
     text-decoration: underline;
   }
 
-  &[class*=_disabled] {
+  &._disabled {
     pointer-events: none;
     cursor: default;
     color: $text_lt_lighter;

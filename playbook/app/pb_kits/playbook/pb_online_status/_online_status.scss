@@ -20,7 +20,7 @@ $pb_online_status_statuses: (
   primary: $primary,
 );
 
-[class^=pb_online_status_kit] {
+.pb_online_status_kit {
   box-sizing: content-box;
   width: $pb_online_status_size;
   height: $pb_online_status_size;
@@ -51,7 +51,7 @@ $pb_online_status_statuses: (
     }
   }
 
-  &[class*=_no_border] {
+  &._no_border {
     border-width: 0;
     border-style: none;
   }

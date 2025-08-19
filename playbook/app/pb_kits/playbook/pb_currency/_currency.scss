@@ -1,95 +1,95 @@
-[class^=pb_currency_kit] {
-  &[class*=_center]  {
-    & > [class^=pb_caption],
-    & > [class^=pb_title],
-    & > [class^=pb_body] {
+.pb_currency_kit {
+  &._center  {
+    & > .pb_caption,
+    & > .pb_title,
+    & > .pb_body {
       text-align: center;
     }
-    & > [class*=pb_currency_wrapper] {
+    & > .pb_currency_wrapper {
       justify-content: center;
     }
   }
 
-  &[class*=_right] {
-    & > [class^=pb_caption],
-    & > [class^=pb_title],
-    & > [class^=pb_body] {
+  &._right {
+    & > .pb_caption,
+    & > .pb_title,
+    & > .pb_body {
       text-align: right;
     }
-    & > [class*=pb_currency_wrapper] {
+    & > .pb_currency_wrapper {
       justify-content: flex-end;
     }
   }
 
-  [class^=pb_currency_wrapper] {
+  .pb_currency_wrapper {
     display: flex;
     align-items: baseline;
 
-    &[class*=_deemphasized] {
-      [class^=pb_body_kit], [class^=pb_body_kit] {
-        &:not([class*=dark]) {
+    &._deemphasized {
+      .pb_body_kit, .pb_body_kit {
+        &:not(.dark) {
           color: $text_lt_default;
         }
       }
 
-      [class^=pb_body_kit][class*=_light] {
+      .pb_body_kit._light {
         font-weight: $regular;
       }
 
-      [class^=pb_title_kit] {
+      .pb_title_kit {
         font-weight: $lighter;
       }
     }
 
-    &[class*=_light] {
-      [class^=pb_body_kit], [class^=pb_title_kit] {
+    &._light {
+      .pb_body_kit, .pb_title_kit {
         color: $text_lt_light;
         font-weight: $regular;
       }
 
-      [class^=pb_title_kit].dark {
+      .pb_title_kit.dark {
         color: $text_dk_light;
       }
     }
 
-    &[class*=_bold] {
-      [class^=pb_body_kit], [class^=_light]{
+    &._bold {
+      .pb_body_kit, ._light{
         color: $text_lt_default;
         font-weight: $bolder;
       }
     }
 
-    & > [class*=dollar_sign] {
+    & > .dollar_sign {
       display: flex;
       align-self: flex-start;
     }
-    & > [class*=unit] {
+    & > .unit {
       display: flex;
       align-items: flex-end;
     }
   }
 
-  &[class*=_sm] {
-    [class^=pb_currency_wrapper][class*=_deemphasized] {
-      [class^=pb_title_kit] {
+  &._sm {
+    .pb_currency_wrapper._deemphasized {
+      .pb_title_kit {
         font-weight: $regular;
       }
     }
   }
 
-  &[class*=_lg] [class^=pb_currency_wrapper] [class*=pb_currency_value] {
+  &._lg .pb_currency_wrapper .pb_currency_value {
     line-height: .9;
     padding-left: $space_xs - 7px;
     padding-right: $space_xs - 7px;
   }
 
-  &[class*=_md] [class^=pb_currency_wrapper] [class*=pb_currency_value] {
+  &._md .pb_currency_wrapper .pb_currency_value {
     line-height: 1.2;
     padding-left: $space_xs - 7px;
     padding-right: $space_xs - 7px;
   }
 
-  &[class*=_sm] [class^=pb_currency_wrapper] [class*=pb_currency_value] {
+  &._sm .pb_currency_wrapper .pb_currency_value {
     line-height: 1.4;
     padding-left: $space_xs - 7px;
     padding-right: $space_xs - 7px;

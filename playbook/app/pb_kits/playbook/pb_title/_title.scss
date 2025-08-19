@@ -3,60 +3,60 @@
 @import "../tokens/screen_sizes";
 @import './title_mixin';
 
-[class^=pb_title_kit] {
-  &[class*=_1] {
+.pb_title_kit {
+  &._1 {
     @include pb_title_1;
     @include title_colors;
     @include pb_title_bold;
   }
 
-  &[class*=_2] {
+  &._2 {
     @include pb_title_2;
     @include title_colors;
     @include pb_title_bold;
   }
 
-  &[class*=_3] {
+  &._3 {
     @include pb_title_3;
     @include title_colors;
     @include pb_title_bold;
   }
 
-  &[class*=_4] {
+  &._4 {
     @include pb_title_4;
     @include title_colors;
   }
 
-  &[class*=_thin] {
+  &._thin {
     @include pb_title_thin;
   }
 
-  &[class*=_display] {
+  &._display {
     font-size: clamp(24px, calc(1.25vw + 5.3vw), 128px);
   }
 
-  &[class*=_dynamic] {
-    &[class*=_xs] {
+  &._dynamic {
+    &._xs {
       font-size: min(2vw, 80vw / 16); 
     }
   
-    &[class*=_sm] {
+    &._sm {
       font-size: min(2.5vw, 96vw / 16); 
     }
   
-    &[class*=_md] {
+    &._md {
       font-size: min(4vw, 160vw / 16);
     }
   
-    &[class*=_lg] {
+    &._lg {
       font-size: min(5vw, 192vw / 16);
     }
   
-    &[class*=_xl] {
+    &._xl {
       font-size: min(6vw, 224vw / 16);
     }
   
-    &[class*=_xxl] {
+    &._xxl {
       font-size: min(8vw, 256vw / 16);
     }
   }

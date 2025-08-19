@@ -5,7 +5,7 @@ $color_checkbox_default: $border_light;
 $color_disabled: darken($border_light, 20%);
 $transition: .2s ease-in-out;
 
-[class^=pb_toggle_kit] {
+.pb_toggle_kit {
   position: relative;
   $width: 44px;
   $height: $width / 2;

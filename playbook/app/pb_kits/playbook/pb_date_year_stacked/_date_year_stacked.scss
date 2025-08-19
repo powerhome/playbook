@@ -1,16 +1,16 @@
-[class^=pb_date_year_stacked] {
-  &[class*=_left] {
-    & > [class^=pb_title], & > [class^=pb_body] {
+.pb_date_year_stacked {
+  &._left {
+    & > .pb_title, & > .pb_body {
       text-align: left;
     }
   }
-  &[class*=_center] {
-    & > [class^=pb_title], & > [class^=pb_body] {
+  &._center {
+    & > .pb_title, & > .pb_body {
       text-align: center;
     }
   }
-  &[class*=_right]  {
-    & > [class^=pb_title], & > [class^=pb_body] {
+  &._right  {
+    & > .pb_title, & > .pb_body {
       text-align: right;
     }
   }

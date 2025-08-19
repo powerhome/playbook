@@ -10,36 +10,36 @@
   margin-right: $space_xs;
 }
 
-[class^=pb_progress_pills_kit] {
-  [class*=progress_pills] {
+.pb_progress_pills_kit {
+  .progress_pills {
     display: flex;
   }
 
-  [class*=progress_pills_status] {
+  .progress_pills_status {
     display: flex;
     align-items: center;
     margin-bottom: $space_xs;
 
-    [class*=title] {
+    .title {
       margin-right: $space_xs;
     }
   }
 
-  [class*=pb_progress_pill] {
+  .pb_progress_pill {
     @include pb_progress_pill;
 
     &.full_width_pill {
       max-width: none;
     }
 
-    &[class*=_inactive] {
+    &._inactive {
       background-color: $border_light;
       &.dark {
       background-color: $border_dark;
       }
     }
 
-    &[class*=_active] {
+    &._active {
       background-color: $primary_action;
     }
   }

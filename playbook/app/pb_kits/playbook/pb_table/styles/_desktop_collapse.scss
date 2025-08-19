@@ -3,7 +3,7 @@
 @import "../../pb_caption/caption_mixin";
 
 @media only screen and (max-width: $screen-xl-min) {
-  [class^=pb_table] {
+  .pb_table {
     &.table-sm.table-collapse-lg,
     &.table-md.table-collapse-lg,
     &.table-lg.table-collapse-lg {

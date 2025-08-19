@@ -1,23 +1,23 @@
 @import "card_mixin";
 @import "../utilities/colors";
 
-[class^=pb_card_kit] {
+.pb_card_kit {
   @include pb_card;
   padding: $space_md;
 
-  &[class*=_selected] {
+  &._selected {
     @include pb_card_selected;
   }
 
   &.dark {
     @include pb_card_dark;
 
-    &[class*=_selected] {
+    &._selected {
       @include pb_card_selected_dark;
     }
   }
 
-  &[class*=_border_none] {
+  &._border_none {
     border-width: 0px;
   }
 
@@ -29,7 +29,7 @@
     @return str-slice($string, -$suffix-length) == $suffix;
   }
 
-  [class^=pb_card_header_kit] {
+  .pb_card_header_kit {
     flex-grow: 0;
     flex-shrink: 0;
     flex-basis: auto;
@@ -66,12 +66,12 @@
         }
       }
     }
-    &[class*=_white] {
+    &._white {
       border-bottom: 1px solid $border_light;
     }
   }
 
-  [class^=pb_card_body_kit] {
+  .pb_card_body_kit {
     flex-grow: 0;
     flex-shrink: 0;
     flex-basis: auto;
@@ -80,11 +80,11 @@
     padding: $space_md;
   }
 
-  &[class*=_highlight] {
+  &._highlight {
     overflow: hidden;
   }
 
-  &[class*=_highlight_top] {
+  &._highlight_top {
     @each $color_name, $color_value in $pb_card_highlight_colors {
       &[class*=_highlight_#{$color_name}]::before {
         @include pb_card_highlight(100%, $pb_card_highlight_size, $color_value);
@@ -92,7 +92,7 @@
     }
   }
 
-  &[class*=_highlight_side] {
+  &._highlight_side {
     @each $color_name, $color_value in $pb_card_highlight_colors {
       &[class*=_highlight_#{$color_name}]::before {
         @include pb_card_highlight($pb_card_highlight_size, 100%, $color_value);

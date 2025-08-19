@@ -2,7 +2,7 @@
 @import "../tokens/titles";
 @import "../tokens/typography";
 
-[class^=pb_detail_kit]{
+.pb_detail_kit{
   @include pb_detail;
 
   @each $color_name, $color_value in $pb_detail_colors {
@@ -12,7 +12,7 @@
   }
 
   @each $dark_color_name, $dark_color_value in $pb_dark_detail_colors{
-    &[class*=color_#{$dark_color_name}][class*=dark]{
+    &[class*=color_#{$dark_color_name}].dark{
       @include pb_detail($dark_color_value)
     }
   }

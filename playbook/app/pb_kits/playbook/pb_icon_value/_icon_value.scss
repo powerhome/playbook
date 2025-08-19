@@ -3,17 +3,17 @@
 @import "../pb_icon/icon";
 @import "../pb_body/body";
 
-[class^=pb_icon_value_kit] {
+.pb_icon_value_kit {
   display: flex;
   align-items: center;
 
-  [class^=pb_body_kit] {
+  .pb_body_kit {
     font-size: $font-small !important;
     display: inline-flex;
     justify-content: flex-start;
     align-items: center;
 
-    [class*=pb_icon_kit] {
+    .pb_icon_kit {
       font-size: $font-large !important;
       margin-right: $space-xs !important;
       flex-shrink: 0;
@@ -23,13 +23,13 @@
     }
   }
 
-  &[class*=_left] {
+  &._left {
     justify-content: flex-start;
   }
-  &[class*=_center] {
+  &._center {
     justify-content: center;
   }
-  &[class*=_right] {
+  &._right {
     justify-content: flex-end;
   }
 }

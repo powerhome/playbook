@@ -3,32 +3,32 @@
 @import "../tokens/colors";
 
 
-[class^=pb_date_stacked_kit]{
-  &[class*=_center]  {
-    & > * [class^=pb_title_kit],
-    & > * [class^=pb_caption_kit],
-    & > [class^=pb_date_stacked_year_kit] {
+.pb_date_stacked_kit{
+  &._center  {
+    & > * .pb_title_kit,
+    & > * .pb_caption_kit,
+    & > .pb_date_stacked_year_kit {
       text-align: center;
     }
   }
-  &[class*=_right]  {
-    & > * [class^=pb_title_kit],
-    & > * [class^=pb_caption_kit],
-    & > [class^=pb_date_stacked_year] {
+  &._right  {
+    & > * .pb_title_kit,
+    & > * .pb_caption_kit,
+    & > .pb_date_stacked_year {
       text-align: right;
     }
   }
-  &[class*=_reverse] {
+  &._reverse {
     .pb_date_stacked_day_month {
       display: flex;
       flex-direction: column-reverse;
     }
   }
-  &[class*=_dark] {
-    & > * [class^=pb_title_kit] {
+  &._dark {
+    & > * .pb_title_kit {
       color: $text_dk_default;
     }
-    & > * [class^=pb_caption_kit] {
+    & > * .pb_caption_kit {
       color: $text_dk_light;
     }
   }

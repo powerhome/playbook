@@ -4,9 +4,9 @@
 @import "../tokens/spacing";
 @import "../tokens/typography";
 
-[class^=pb_badge_kit] {
-  $pb_badge_height_rounded: 16px;
+$pb_badge_height_rounded: 16px;
 
+.pb_badge_kit {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -21,43 +21,41 @@
     font-size: $font_smaller - 1;
     font-weight: $bolder;
   }
+}
 
-  @each $color_name, $color_value in $status_colors {
-    &[class*=_#{$color_name}]  {
-      background: rgba($color_value, $opacity_1);
-      color: map-get($status_color_text, $color_name);
-    }
+@each $color_name, $color_value in $status_colors {
+  .pb_badge_kit_#{$color_name} {
+    background: rgba($color_value, $opacity_1);
+    color: map-get($status_color_text, $color_name);
   }
 
-  &[class*=_rounded] {
-    height: $pb_badge_height_rounded;
-    min-height: $pb_badge_height_rounded;
-    min-width: $pb_badge_height_rounded;
-    border-radius: $pb_badge_height_rounded / 2;
+  .pb_badge_kit_#{$color_name}.dark {
+    background: rgba(mix($bg_dark, $color_value, 10%), $opacity_2);
+    color: map-get($status_color_text_dark, $color_name);
   }
+}
 
-  &[class*=_notification] {
-    background: $primary;
-    color: $white;
-  }
+.pb_badge_kit_rounded {
+  height: $pb_badge_height_rounded;
+  min-height: $pb_badge_height_rounded;
+  min-width: $pb_badge_height_rounded;
+  border-radius: $pb_badge_height_rounded / 2;
+}
 
-  &[class*=_notification_error] {
-    background: $error;
-  }
+.pb_badge_kit_notification {
+  background: $primary;
+  color: $white;
+}
 
-  &.dark {
-    border-width: 0;
+.pb_badge_kit_notification_error {
+  background: $error;
+}
 
-    @each $color_name, $color_value in $status_colors {
-      &[class*=_#{$color_name}]  {
-        background: rgba(mix($bg_dark, $color_value, 10%), $opacity_2);
-        color: map-get($status_color_text_dark, $color_name);
-      }
-    }
+.pb_badge_kit_notification_error.dark {
+  background: $error_dark;
+  color: $white;
+}
 
-    &[class*=_notification_error]  {
-      background: $error_dark;
-      color: $white;
-    }
-  }
+.pb_badge_kit.dark {
+  border-width: 0;
 }

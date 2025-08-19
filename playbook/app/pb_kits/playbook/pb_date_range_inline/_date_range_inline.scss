@@ -1,33 +1,33 @@
-[class^=pb_date_range_inline_kit] {
-  &[class*=_center]  {
-    & > [class^=pb_caption],
-    & > [class^=pb_body] {
+.pb_date_range_inline_kit {
+  &._center  {
+    & > .pb_caption,
+    & > .pb_body {
       text-align: center;
     }
-    & > [class*=pb_date_range_inline_wrapper] {
+    & > .pb_date_range_inline_wrapper {
       justify-content: center;
     }
   }
-  &[class*=_right] {
-    & > [class^=pb_caption],
-    & > [class^=pb_body] {
+  &._right {
+    & > .pb_caption,
+    & > .pb_body {
       text-align: right;
     }
-    & > [class*=pb_date_range_inline_wrapper] {
+    & > .pb_date_range_inline_wrapper {
       justify-content: flex-end;
     }
   }
-  [class^=pb_date_range_inline_wrapper] {
+  .pb_date_range_inline_wrapper {
     display: flex;
     align-items: center;
-    [class*=pb_date_range_inline_arrow] {
+    .pb_date_range_inline_arrow {
       margin-left: $space_xs/2;
       margin-right: $space_xs/2;
     }
-    [class*=pb_date_range_inline_timezone] {
+    .pb_date_range_inline_timezone {
       margin-left: $space_xs/2;
     }
-    [class*=pb_date_range_inline_icon] {
+    .pb_date_range_inline_icon {
       margin-right: $space_xs/2;
     }
   }

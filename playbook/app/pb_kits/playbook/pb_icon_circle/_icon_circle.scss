@@ -14,7 +14,7 @@ $pb_icon_circle_sizes: (
   "xl":   100px,
 );
 
-[class^=pb_icon_circle_kit] {
+.pb_icon_circle_kit {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -29,7 +29,7 @@ $pb_icon_circle_sizes: (
 
   i,
   svg {
-    &[class^=pb_icon_kit] {
+    &.pb_icon_kit {
       width: 100%;
       height: 100%;
       display: block;

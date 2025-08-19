@@ -3,7 +3,7 @@
 @import "../../pb_caption/caption_mixin";
 
 @media only screen and (max-width: $screen-xs-max) {
-  [class^=pb_table]:not(.table-responsive-scroll) {
+  .pb_table:not(.table-responsive-scroll) {
     &.table-sm.table-collapse-sm,
     &.table-md.table-collapse-sm,
     &.table-lg.table-collapse-sm {

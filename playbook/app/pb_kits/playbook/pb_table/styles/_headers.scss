@@ -1,6 +1,6 @@
 @import "../../pb_caption/caption_mixin";
 
-[class^=pb_table] {
+.pb_table {
   &.table-sm,
   &.table-md,
   &.table-lg {

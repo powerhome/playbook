@@ -2,12 +2,12 @@
 @import "../pb_caption/caption";
 @import "../tokens/colors";
 
-[class^=pb_time_stacked_kit] {
- &[class*=_center]  {
+.pb_time_stacked_kit {
+ &._center  {
    text-align: center;
  }
 
- &[class*=_right]  {
+ &._right  {
    text-align: right;
  }
 

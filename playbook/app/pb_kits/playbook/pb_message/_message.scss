@@ -7,20 +7,20 @@
 $mention_bg_color_yellow: rgba(249, 187, 0, 0.2);
 $mention_bg_color_blue: #e5eefa;
 
-[class^=pb_message_kit] {
+.pb_message_kit {
   @include pb_message;
 
-  [class^=pb_message_mention] {
+  .pb_message_mention {
     border-radius: $space_xxs;
     color: $primary;
     display: inline;
     padding: $space_xxs;
     
-    &[class*=_user] {
+    &._user {
       background-color: $mention_bg_color_blue;
     }
     
-    &[class*=_self] {
+    &._self {
       background-color: $mention_bg_color_yellow;
     }
   }

@@ -13,7 +13,7 @@ $confirmation_toast_colors: (
   tip:          transparent,
 );
 
-[class^=pb_fixed_confirmation_toast_kit] {
+.pb_fixed_confirmation_toast_kit {
   display: inline-flex;
   justify-content: center;
   align-items: center;
@@ -82,7 +82,7 @@ $confirmation_toast_colors: (
         color: $white;
       }
 
-      &[class*=_multi_line] .pb_fixed_confirmation_toast_text {
+      &._multi_line .pb_fixed_confirmation_toast_text {
         color: $white;
         overflow: hidden;
         display: -webkit-box;

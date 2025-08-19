@@ -11,7 +11,7 @@ $pb_button_sizes: (
   "lg":   ($font_large - 2px),
 );
 
-[class*=pb_button_kit]{
+.pb_button_kit{
   @include pb_button;
   // Size =================
   @each $name, $size in $pb_button_sizes {
@@ -25,16 +25,16 @@ $pb_button_sizes: (
   }
 
   // Variants =================
-  &[class*=_primary]  {
+  &._primary  {
     @include pb_button_primary;
   }
-  &[class*=_secondary]  {
+  &._secondary  {
     @include pb_button_secondary;
   }
-  &[class*=_link]  {
+  &._link  {
     @include pb_button_link;
   }
-  &[class*=_reaction] {
+  &._reaction {
     background-color: $card_light;
     min-width: 40px;
     border-radius: $border_radius_rounded;
@@ -64,37 +64,37 @@ $pb_button_sizes: (
   }
 
   // Block ====================
-  &[class*=_block]  {
+  &._block  {
     @include pb_button_block;
   }
 
   // Loading ==================
-  &[class*=_loading]  {
+  &._loading  {
     @include pb_button_loading(true);
   }
 
   // Danger ===================
-  &[class*=_danger] {
+  &._danger {
     @include pb_button_danger;
   }
 
   // Disabled =================
-  &[class*=_disabled]  {
+  &._disabled  {
     @include pb_button_disabled;
   }
 
   // Dark Variants =============
   &.dark  {
-    &[class*=_primary]  {
+    &._primary  {
       @include pb_button_primary_dark;
     }
-    &[class*=_secondary]  {
+    &._secondary  {
       @include pb_button_secondary_dark;
     }
-    &[class*=_link]  {
+    &._link  {
       @include pb_button_link_dark;
     }
-    &[class*=_disabled]  {
+    &._disabled  {
       @include pb_button_disabled_dark;
     }
   }

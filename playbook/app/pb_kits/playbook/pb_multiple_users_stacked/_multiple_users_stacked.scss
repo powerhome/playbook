@@ -89,7 +89,7 @@ $positions: (
   }
 }
 
-[class^=pb_multiple_users_stacked_kit] {
+.pb_multiple_users_stacked_kit {
   $container_size: map-get($avatar-sizes, "xs");
   $bubble_container_size: map-get($avatar-sizes, "sm");
   $overlap: -15px;
@@ -103,7 +103,7 @@ $positions: (
   position: relative;
   flex-shrink: 0;
   flex-grow: 0;
-  [class^=pb_avatar_kit].pb_multiple_users_stacked_item {
+  .pb_avatar_kit.pb_multiple_users_stacked_item {
     @include avatar-size($stacked_size);
     &.dark {
       .avatar_wrapper {
@@ -117,10 +117,10 @@ $positions: (
       }
     }
   }
-  &[class*=_single] .pb_multiple_users_stacked_item {
+  &._single .pb_multiple_users_stacked_item {
     @include avatar-size(28px);
   }
-  [class^=pb_avatar_kit].second_item, [class^=pb_badge_kit].second_item {
+  .pb_avatar_kit.second_item, .pb_badge_kit.second_item {
     @include position((bottom: 0, right: 0));
     z-index: 2;
     background: tint($primary, 90%);
@@ -143,7 +143,7 @@ $positions: (
 
   // Iterate over each size to adjust the bubble container only when class contains "_bubble_"
   @each $size_name, $size_value in $avatar-sizes {
-      &[class*=_bubble_][class*=_size_#{$size_name}] {
+      &._bubble_[class*=_size_#{$size_name}] {
         // Set bubble container size based on the class
         $bubble_container_size: $size_value;
         $container_size: $size_value;
@@ -161,7 +161,7 @@ $positions: (
           background-color: $card_dark;
         }
   
-        [class^=pb_avatar_kit].pb_multiple_users_stacked_item {
+        .pb_avatar_kit.pb_multiple_users_stacked_item {
           @include avatar-size($bubble_container_size * 0.45); // Adjust the size of stacked avatars
   
           &.dark {
@@ -175,7 +175,7 @@ $positions: (
           }
         }
   
-        [class^=pb_avatar_kit] {
+        .pb_avatar_kit {
           // First Item
           &.first_item {
             @include position(map-get(map-get($positions, 'first-item-double'), $size_name));
@@ -235,8 +235,8 @@ $positions: (
           }
         }
         
-        &[class*=_single_bubble] {
-          [class^=pb_avatar_kit].first_item {
+        &._single_bubble {
+          .pb_avatar_kit.first_item {
             @include position((top: 0, left: 0));
             @include avatar-size($bubble_container_size);
           }

@@ -1,6 +1,6 @@
 @import "../../tokens/spacing";
 
-[class^=pb_table] {
+.pb_table {
   @each $name, $value in $spaces {
     &.outer_padding_#{$name} {
       td:first-child,

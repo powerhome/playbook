@@ -1,7 +1,7 @@
 @import "../tokens/colors";
 @import "caption_mixin";
 
-[class^="pb_caption_kit"] {
+.pb_caption_kit{
   @include caption;
   &[class*="_link"] {
     color: $primary;

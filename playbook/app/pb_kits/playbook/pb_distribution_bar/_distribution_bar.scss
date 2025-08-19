@@ -1,6 +1,6 @@
 @import "../tokens/colors";
 
-[class^=pb_distribution_bar] {
+.pb_distribution_bar {
   $bar_colors: map-merge($data_colors, $status_colors);
   $small_bar: 8px;
   $large_bar: 36px;
@@ -27,10 +27,10 @@
       border-bottom-right-radius: $large_bar;
     }
   }
-  &[class*=_sm] {
+  &._sm {
     height: $small_bar;
   }
-  &[class*=_lg] {
+  &._lg {
     height: $large_bar;
   }
 }

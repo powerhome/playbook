@@ -1,13 +1,13 @@
 @import "../tokens/spacing";
 @import "./error_state_mixin";
 
-[class^=pb_form_group_kit] {
+.pb_form_group_kit {
   display: inline-flex;
   flex-direction: row;
   align-items: flex-end;
   justify-content: flex-start;
 
-  &[class*=_full] {
+  &._full {
     display: flex;
     justify-content: space-between;
     & > div {
@@ -21,18 +21,18 @@
 @include error-state-left-side-select-kit;
 @include error-state-right-side-select-kit;
 
-  & [class^=pb_text_input_kit] .text_input_wrapper,
-  & [class^=pb_date_picker_kit] .input_wrapper,
-  & [class^=pb_select] {
+  & .pb_text_input_kit .text_input_wrapper,
+  & .pb_date_picker_kit .input_wrapper,
+  & .pb_select {
     margin-bottom: 0;
   }
 
-  [class^=pb_text_input_kit].dark .text_input_wrapper {
+  .pb_text_input_kit.dark .text_input_wrapper {
     margin-bottom: 0
   }
 
-  & > [class^=pb_text_input_kit]:not(:last-child) {
-    .text_input_wrapper input, [class^=pb_text_input_kit] .text_input_wrapper .text_input {
+  & > .pb_text_input_kit:not(:last-child) {
+    .text_input_wrapper input, .pb_text_input_kit .text_input_wrapper .text_input {
       border-bottom-right-radius: 0;
       border-top-right-radius: 0;
       border-right-width: 0;
@@ -42,7 +42,7 @@
         outline-offset: -1px;
       }
     }
-    .text_input_wrapper_add_on .add-on-right [class^=pb_card_kit] {
+    .text_input_wrapper_add_on .add-on-right .pb_card_kit {
       border-bottom-right-radius: 0;
       border-top-right-radius: 0;
       border-right-width: 0;
@@ -55,25 +55,25 @@
     }
   }
 
-  & > [class^=pb_text_input_kit]:not(:first-child) {
-    .text_input_wrapper input, [class^=pb_text_input_kit] .text_input_wrapper .text_input {
+  & > .pb_text_input_kit:not(:first-child) {
+    .text_input_wrapper input, .pb_text_input_kit .text_input_wrapper .text_input {
       border-bottom-left-radius: 0;
       border-top-left-radius: 0;
     }
-    .text_input_wrapper_add_on .add-on-left [class^=pb_card_kit] {
+    .text_input_wrapper_add_on .add-on-left .pb_card_kit {
       border-bottom-left-radius: 0;
       border-top-left-radius: 0;
     }
   }
 
-  & > [class^=pb_button_kit]:not(:last-child) {
+  & > .pb_button_kit:not(:last-child) {
     border-bottom-right-radius: 0;
     border-top-right-radius: 0;
     min-height: 45px;
     margin-bottom: 16px;
   }
 
-  & > [class^=pb_button_kit]:not(:first-child) {
+  & > .pb_button_kit:not(:first-child) {
     border-bottom-left-radius: 0;
     border-top-left-radius: 0;
     border-left-width: 0;
@@ -81,72 +81,72 @@
     margin-bottom: 16px;
   }
 
-  & > [class^=pb_phone_number_input]:not(:last-child) {
-    .text_input_wrapper input, [class^=pb_text_input_kit] .text_input_wrapper .text_input {
+  & > .pb_phone_number_input:not(:last-child) {
+    .text_input_wrapper input, .pb_text_input_kit .text_input_wrapper .text_input {
       border-bottom-right-radius: 0;
       border-top-right-radius: 0;
       border-right-color: transparent;
     }
-    [class^=pb_text_input_kit] .text_input_wrapper input:focus,
-    [class^=pb_text_input_kit] .text_input_wrapper .text_input:focus {
+    .pb_text_input_kit .text_input_wrapper input:focus,
+    .pb_text_input_kit .text_input_wrapper .text_input:focus {
       border-right-color: $primary;
     } 
-    [class^=pb_text_input_kit].error .text_input_wrapper input,
-    [class^=pb_text_input_kit].error .text_input_wrapper .text_input {
+    .pb_text_input_kit.error .text_input_wrapper input,
+    .pb_text_input_kit.error .text_input_wrapper .text_input {
       border-right-color: $error;
     }   
   }
 
-  & > [class^=pb_phone_number_input]:not(:first-child), [class^=pb_passphrase]:not(:first-child) {
-    .text_input_wrapper input, [class^=pb_text_input_kit] .text_input_wrapper .text_input {
+  & > .pb_phone_number_input:not(:first-child), .pb_passphrase:not(:first-child) {
+    .text_input_wrapper input, .pb_text_input_kit .text_input_wrapper .text_input {
       border-bottom-left-radius: 0;
       border-top-left-radius: 0;
     }
   }
 
-  & > div:not(:first-child) > [class^=pb_phone_number_input] {
+  & > div:not(:first-child) > .pb_phone_number_input {
     .text_input {
       border-bottom-left-radius: 0;
       border-top-left-radius: 0;
     }
   }
 
-  & > div:not(:last-child) > [class^=pb_phone_number_input] {
+  & > div:not(:last-child) > .pb_phone_number_input {
     .text_input {
       border-bottom-right-radius: 0;
       border-top-right-radius: 0;
       border-right-color: transparent;
     }
-    [class^=pb_text_input_kit] .text_input_wrapper input:focus,
-    [class^=pb_text_input_kit] .text_input_wrapper .text_input:focus {
+    .pb_text_input_kit .text_input_wrapper input:focus,
+    .pb_text_input_kit .text_input_wrapper .text_input:focus {
       border-right-color: $primary;
     } 
-    [class^=pb_text_input_kit].error .text_input_wrapper input,
-    [class^=pb_text_input_kit].error .text_input_wrapper .text_input {
+    .pb_text_input_kit.error .text_input_wrapper input,
+    .pb_text_input_kit.error .text_input_wrapper .text_input {
       border-right-color: $error;
     }  
   }
 
-  &[class*=rails] > [class^=pb_date_picker_kit] {
+  &.rails > .pb_date_picker_kit {
     margin-bottom: 0px;
   }
 
-  & > [class^=pb_date_picker_kit]:not(:last-child) {
-    .input_wrapper input, [class^=pb_text_input_kit] .date_picker_input_wrapper .flatpickr-wrapper {
+  & > .pb_date_picker_kit:not(:last-child) {
+    .input_wrapper input, .pb_text_input_kit .date_picker_input_wrapper .flatpickr-wrapper {
       border-bottom-right-radius: 0;
       border-top-right-radius: 0;
       border-right-width: 0;
     }
   }
 
-  & > [class^=pb_date_picker_kit]:not(:first-child) {
-    .input_wrapper input, [class^=pb_text_input_kit] .date_picker_input_wrapper .flatpickr-wrapper {
+  & > .pb_date_picker_kit:not(:first-child) {
+    .input_wrapper input, .pb_text_input_kit .date_picker_input_wrapper .flatpickr-wrapper {
       border-bottom-left-radius: 0;
       border-top-left-radius: 0;
     }
   }
 
-  & > [class^=pb_select]:not(:last-child) {
+  & > .pb_select:not(:last-child) {
     margin-bottom: 0px;
     .pb_select_kit_wrapper select {
       border-bottom-right-radius: 0;
@@ -159,7 +159,7 @@
     }
   }
 
-  & > [class^=pb_select]:not(:first-child) {
+  & > .pb_select:not(:first-child) {
     margin-bottom: 0px;
     .pb_select_kit_wrapper select {
       border-bottom-left-radius: 0;
@@ -167,34 +167,34 @@
     }
   }
 
-  & > [class^=pb_selectable_card_kit]:not(:last-child) label {
+  & > .pb_selectable_card_kit:not(:last-child) label {
     border-bottom-right-radius: 0;
     border-top-right-radius: 0;
     border-right-color: transparent;
   }
-  & > [class^=pb_selectable_card_kit] input[type="checkbox"]:not(:checked) ~ label, [class^=pb_selectable_card_kit] input[type="radio"]:not(:checked) ~ label {
+  & > .pb_selectable_card_kit input[type="checkbox"]:not(:checked) ~ label, .pb_selectable_card_kit input[type="radio"]:not(:checked) ~ label {
     &:hover {
       border-right-color: $slate;
     }
   }
 
-  & > [class^=pb_selectable_card_kit]:not(:first-child) label {
+  & > .pb_selectable_card_kit:not(:first-child) label {
     border-bottom-left-radius: 0;
     border-top-left-radius: 0;
   }
 
-  & > [class^=pb_selectable_card_icon_kit]:not(:last-child) [class^=pb_selectable_card_kit] label {
+  & > .pb_selectable_card_icon_kit:not(:last-child) .pb_selectable_card_kit label {
       border-bottom-right-radius: 0;
       border-top-right-radius: 0;
   }
 
-  & > [class^=pb_selectable_card_icon_kit]:not(:first-child) [class^=pb_selectable_card_kit] label {
+  & > .pb_selectable_card_icon_kit:not(:first-child) .pb_selectable_card_kit label {
     border-bottom-left-radius: 0;
     border-top-left-radius: 0;
   }
 
-  & > [class^=pb_selectable_card_icon_kit]:not(:last-child) {
-    [class^=pb_selectable_card_kit] input[type="checkbox"]:not(:checked) ~ label, [class^=pb_selectable_card_kit] input[type="radio"]:not(:checked)~ label {
+  & > .pb_selectable_card_icon_kit:not(:last-child) {
+    .pb_selectable_card_kit input[type="checkbox"]:not(:checked) ~ label, .pb_selectable_card_kit input[type="radio"]:not(:checked)~ label {
       border-right-color: transparent;
       &:hover {
         border-right-color: $slate;
@@ -202,12 +202,12 @@
     }
   }
 
-  & > [class^=pb_typeahead_kit] {
+  & > .pb_typeahead_kit {
     min-width: 200px;
   }
 
-  & > [class^=pb_typeahead_kit]:not(:last-child) {
-    [class^=pb_text_input_kit] .text_input_wrapper input, [class^=pb_text_input_kit] .text_input_wrapper .text_input {
+  & > .pb_typeahead_kit:not(:last-child) {
+    .pb_text_input_kit .text_input_wrapper input, .pb_text_input_kit .text_input_wrapper .text_input {
       border-bottom-right-radius: 0;
       border-top-right-radius: 0;
       border-right-width: 0;
@@ -215,8 +215,8 @@
     }
   }
 
-  & > [class^=pb_typeahead_kit]:not(:first-child) {
-    [class^=pb_text_input_kit] .text_input_wrapper input, [class^=pb_text_input_kit] .text_input_wrapper .text_input {
+  & > .pb_typeahead_kit:not(:first-child) {
+    .pb_text_input_kit .text_input_wrapper input, .pb_text_input_kit .text_input_wrapper .text_input {
       border-bottom-left-radius: 0;
       border-top-left-radius: 0;
     }

@@ -2,7 +2,7 @@
 
 $table-dark-card-bg: $card_dark;
 
-[class^=pb_table] {
+.pb_table {
   &.table-sm,
   &.table-md,
   &.table-lg {
@@ -46,7 +46,7 @@ $table-dark-card-bg: $card_dark;
 }
 
 @media only screen and (max-width: $screen-xs-max) {
-  [class^=pb_table] {
+  .pb_table {
     &.table-sm,
     &.table-md,
     &.table-lg {

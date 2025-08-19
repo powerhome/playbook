@@ -1,19 +1,19 @@
 @import "../pb_body/body";
 @import "../pb_icon/icon";
 
-[class^=pb_loading_inline_kit] {
+.pb_loading_inline_kit {
   display: flex;
   align-items: baseline;
 
-  &[class*=_center] {
+  &._center {
     justify-content: center;
   }
 
-  &[class*=_left] {
+  &._left {
     justify-content: flex-start;
   }
 
-  &[class*=_right] {
+  &._right {
     justify-content: flex-end;
   }
 }

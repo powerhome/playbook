@@ -18,7 +18,7 @@ $section_colors_dark: (
   card:         tint($bg_dark,10),
 );
 
-[class^=pb_section_separator_kit] {
+.pb_section_separator_kit {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -48,16 +48,16 @@ $section_colors_dark: (
         background: $color_value;
       }
 
-      &[class*=_vertical] {
+      &._vertical {
         &::after {
           background: $color_value;
         }
       }
-      &[class*=_dashed] {
+      &._dashed {
         &::before, &::after {
           border: 1px dashed $color_value;
         }
-        &[class*=_vertical] {
+        &._vertical {
           &::after {
             border: 1px dashed $color_value;
             background: none;
@@ -67,10 +67,10 @@ $section_colors_dark: (
     }
   }
 
-  &[class*=_horizontal] {
+  &._horizontal {
     justify-content: center;
   }
-  &[class*=_vertical] {
+  &._vertical {
     margin-left: $space_xs;
     margin-right: $space_xs;
     &::before {
@@ -81,7 +81,7 @@ $section_colors_dark: (
     }
   }
 
-  &[class*=_dashed] {
+  &._dashed {
     &::before, &::after {
       @include section_separator_dashed(false);
     }
@@ -96,19 +96,19 @@ $section_colors_dark: (
           background: $color_value;
         }
 
-        &[class*=_vertical] {
+        &._vertical {
           &::after {
             @include section_separator_vertical(false);
             background: $color_value;
           }
         }
 
-        &[class*=_dashed] {
+        &._dashed {
           &::before, &::after {
             border: 1px dashed $color_value;
             background: none;
           }
-          &[class*=_vertical] {
+          &._vertical {
             &::after {
               border: 1px dashed $color_value;
               background: none;
@@ -123,12 +123,12 @@ $section_colors_dark: (
     &::after {
       @include section_separator_horizontal(true);
     }
-    &[class*=_vertical] {
+    &._vertical {
       &::after {
         @include section_separator_vertical(true);
       }
     }
-    &[class*=_dashed] {
+    &._dashed {
       &::before, &::after {
         @include section_separator_dashed(true);
       }

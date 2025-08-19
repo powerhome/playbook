@@ -10,7 +10,7 @@ $pb_form_pill_height: 27px;
 $form_pill_colors: map-merge($status_color_text, map-merge($data_colors, $product_colors));
 
 
-[class^=pb_form_pill_kit] {
+.pb_form_pill_kit {
   display: inline-flex;
   justify-content: center;
   align-items: center;
@@ -27,7 +27,7 @@ $form_pill_colors: map-merge($status_color_text, map-merge($data_colors, $produc
     font-size: 17px;
   }
 
-  &[class*=wrapped] {
+  &.wrapped {
     height: max-content;
     padding-top: $space-xxs;
     padding-bottom: $space-xxs;
@@ -175,7 +175,7 @@ $form_pill_colors: map-merge($status_color_text, map-merge($data_colors, $produc
       font-size: 15px;
       border-radius: 50%;
     }
-    [class^=pb_avatar_kit] .avatar_wrapper {
+    .pb_avatar_kit .avatar_wrapper {
       flex-basis: 14px;
       height: 14px;
       margin-top: 3px;
@@ -435,11 +435,11 @@ $form_pill_colors: map-merge($status_color_text, map-merge($data_colors, $produc
     }
   }
 
-  &[class*=lowercase] {
+  &.lowercase {
     text-transform: lowercase;
   }
 
-  &[class*=none] {
+  &.none {
     text-transform: none;
   }
 }

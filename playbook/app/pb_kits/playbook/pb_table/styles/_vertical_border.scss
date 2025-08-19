@@ -1,4 +1,4 @@
-[class^=pb_table] {
+.pb_table {
   &.vertical-border {
     td, th, .pb_table_td, .pb_table_th {
       border-right: 1px solid $border_light !important;

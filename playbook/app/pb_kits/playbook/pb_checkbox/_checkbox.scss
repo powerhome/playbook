@@ -3,7 +3,7 @@
 @import "../tokens/positioning";
 $transition: $transition_cubic;
 
-[class^=pb_checkbox_kit] {
+.pb_checkbox_kit {
   cursor: pointer;
   display: inline-flex;
   vertical-align: middle;

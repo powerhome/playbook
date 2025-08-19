@@ -9,7 +9,7 @@
 
 @mixin error-state-center-selectors {
   &:has(.pb_select_kit_label):has(.pb_select_kit_wrapper.error):has(.pb_phone_number_input),
-  &:has(.pb_text_input_kit.error):has(.pb_text_input_kit_label):has([class^=pb_button_kit]) {
+  &:has(.pb_text_input_kit.error):has(.pb_text_input_kit_label):has(.pb_button_kit) {
     align-items: center;
   }
 }

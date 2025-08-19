@@ -4,7 +4,7 @@ $badge-sizes: (
   "lg":   36px
 );
 
-[class^=pb_user_badge_kit] {
+.pb_user_badge_kit {
   .pb_user_badge_wrapper {
     svg,
     img {

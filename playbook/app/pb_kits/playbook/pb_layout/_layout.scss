@@ -14,9 +14,9 @@ $bracket-connector-width: 45px;
 $bracket-border-width: 4px;
 
 
-[class^=pb_layout_kit] {
+.pb_layout_kit {
 
-  &[class*=_collection]{
+  &._collection{
     div.layout_body{
       display: grid;
       grid-auto-rows: max-content;
@@ -33,7 +33,7 @@ $bracket-border-width: 4px;
     }
   }
 
-  &[class*=_masonry] {
+  &._masonry {
     div.layout_body {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
@@ -65,7 +65,7 @@ $bracket-border-width: 4px;
     }
   }
 
-  &[class*=_collection_detail]{
+  &._collection_detail{
       display: grid;
       width: 100%;
       height: 100%;
@@ -98,7 +98,7 @@ $bracket-border-width: 4px;
 
   }
 
-  &[class*=_kanban]{
+  &._kanban{
     display: flex;
     overflow-x: auto;
 
@@ -127,7 +127,7 @@ $bracket-border-width: 4px;
     }
   }
 
-  &[class*=_content]{
+  &._content{
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     grid-template-rows: .5fr repeat(3, 1fr) .5fr;
@@ -157,7 +157,7 @@ $bracket-border-width: 4px;
   }
 
   // For future release as of 6/18/2020
-  &[class*=_kanban_responsive] {
+  &._kanban_responsive {
     display: grid;
     grid-auto-flow: column;
     grid-auto-columns: minmax(0, 1fr);
@@ -170,7 +170,7 @@ $bracket-border-width: 4px;
     }
   }
 
-  &[class*=_bracket]{
+  &._bracket{
     display: flex;
     overflow-x: scroll;
 
@@ -296,7 +296,7 @@ $bracket-border-width: 4px;
     }
   }
 
-  &[class*=_sidebar]{
+  &._sidebar{
     $layout_sizes: (
       "xs":   64px,
       "sm":   200px,
@@ -316,12 +316,12 @@ $bracket-border-width: 4px;
     );
 
     // Sections
-    &[class*=_section] {
+    &._section {
       padding: $space_sm $space_xl;
-      &[class*=_border] {
+      &._border {
         padding: $space_sm $space_xl;
         border-bottom: 1px solid $border_light;
-        &[class*=_margin] {
+        &._margin {
           margin: $space_sm $space_xl;
           border-bottom: 1px solid $border_light;
         }

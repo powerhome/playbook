@@ -1,21 +1,21 @@
 @mixin bold {
   @include subtle;
 
-  [class*=pb_nav_list_kit_item][class*=pb_nav_list_item]{
-    &[class*=_link] {
-      &[class*=_active] {
+  .pb_nav_list_kit_item.pb_nav_list_item{
+    &._link {
+      &._active {
         background-color: $primary;
         color: $white;
         box-shadow: $shadow_deep;
         @media (hover:hover) {
           &:hover {
             background-color: darken($primary, 4%);
-            [class*=_text],[class*=_icon] {
+            ._text,._icon {
               color: $white;
             }
           }
         }
-        [class*=_text],[class*=_icon] {
+        ._text,._icon {
           font-weight: $bolder;
         }
       }
@@ -23,9 +23,9 @@
   }
 
   .dark & {
-    [class*=pb_nav_list_kit_item][class*=pb_nav_list_item] {
-      &[class*=_link] {
-        &[class*=_active] {
+    .pb_nav_list_kit_item.pb_nav_list_item {
+      &._link {
+        &._active {
           box-shadow: 0 2px 10px 0 $shadow_dark;
         }
       }

@@ -2,18 +2,18 @@
 @import "../tokens/colors";
 @import "../tokens/opacity";
 
-[class^=pb_button_toolbar]{
+.pb_button_toolbar{
 
   // Vertical =============
 
-  &[class*=_vertical] {
-    &[class*=_primary].dark {
-      & > [class^=pb_button]:not(:first-child)::before {
+  &._vertical {
+    &._primary.dark {
+      & > .pb_button:not(:first-child)::before {
         @include toolbar_border(true, $primary_dark)
       }
     }
-    &[class*=_secondary].dark {
-      & > [class^=pb_button]:not(:first-child)::before {
+    &._secondary.dark {
+      & > .pb_button:not(:first-child)::before {
         @include toolbar_border(true, $secondary_dark)
       }
     }
@@ -21,32 +21,32 @@
 
   // Horizontal =============
 
-  &[class*=_horizontal] {
-    &[class*=_primary].dark {
-      & > [class^=pb_button]:not(:first-child)::before {
+  &._horizontal {
+    &._primary.dark {
+      & > .pb_button:not(:first-child)::before {
         @include toolbar_border(false, $primary_dark)
       }
     }
-    &[class*=_secondary].dark {
-      & > [class^=pb_button]:not(:first-child)::before {
+    &._secondary.dark {
+      & > .pb_button:not(:first-child)::before {
         @include toolbar_border(false, $secondary_dark)
       }
     }
   }
-  & > [class^=pb_button]:not(:first-child):hover::before,
-  [class^=pb_button]:hover + [class^=pb_button]::before {
+  & > .pb_button:not(:first-child):hover::before,
+  .pb_button:hover + .pb_button::before {
     opacity: 0
   }
 
   // Hover =============
 
-  [class^=pb_button].dark  {
+  .pb_button.dark  {
     @media (hover:hover) {
       &:hover {
         background-color:darken($royal, 20%);
       }
     }
-    &[class*=secondary] {
+    &.secondary {
       @media (hover:hover) {
         &:hover {
           background-color:rgba($primary_action, $opacity_3)

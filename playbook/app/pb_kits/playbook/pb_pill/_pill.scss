@@ -5,7 +5,7 @@
 
 $pb_pill_height: 22px;
 
-[class^=pb_pill_kit] {
+.pb_pill_kit {
   display: inline-flex;
   justify-content: center;
   align-items: center;
@@ -14,11 +14,11 @@ $pb_pill_height: 22px;
   border-radius: $pb_pill_height/2;
   white-space: nowrap;
 
-  &[class*=lowercase] {
+  &.lowercase {
     text-transform: lowercase;
   }
 
-  &[class*=none] {
+  &.none {
     text-transform: none;
   }
 

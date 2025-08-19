@@ -1,7 +1,7 @@
 @import "../pb_title/title";
 @import "../pb_body/body";
 
-[class^=pb_title_count_kit] {
+.pb_title_count_kit {
   display: flex;
   justify-content: flex-start;
   align-items: baseline;
@@ -10,11 +10,11 @@
     padding-right: $space-xs;
   }
 
-  &[class*=_center] {
+  &._center {
     justify-content: center;
   }
 
-  &[class*=_right] {
+  &._right {
     justify-content: flex-end;
   }
 }

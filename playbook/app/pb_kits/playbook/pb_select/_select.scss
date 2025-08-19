@@ -4,7 +4,7 @@
 @import "../tokens/colors";
 @import "../tokens/spacing";
 
-[class^=pb_select] {
+.pb_select {
   select {
     @include pb_textarea_light;
     @include pb_body_light;
@@ -80,7 +80,7 @@
     position: relative;
     display: block;
     &.error {
-      [class*=pb_body_kit] {
+      .pb_body_kit {
         margin-top: $space_xs / 2;
       }
       > select:first-child {
@@ -157,7 +157,7 @@
   }
 }
 
-[class^=pb_select].dark {
+.pb_select.dark {
   select {
     @include pb_textarea_dark;
     @include pb_body_light_dark;

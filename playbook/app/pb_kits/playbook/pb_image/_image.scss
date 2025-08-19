@@ -9,7 +9,7 @@ $image-sizes: (
   "xl": 140px,
 );
 
-[class^=pb_image_kit] {
+.pb_image_kit {
   position: relative;
   object-fit: cover;
 

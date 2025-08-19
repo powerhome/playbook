@@ -1,20 +1,20 @@
 @import "../tokens/colors";
 @import "../tokens/spacing";
 
-[class^=pb_selectable_list]{
+.pb_selectable_list{
   margin-bottom: 0px;
-  [class^=pb_item_kit] {
+  .pb_item_kit {
     &:hover {
       background-color: $bg_light;
     }
-    &[class*=checked_item] {
+    &.checked_item {
       background-color: $active_light;
     }
   }
-  [class^=pb_radio_kit] {
+  .pb_radio_kit {
     margin-left: $space_xs;
   }
-  [class^=pb_checkbox_kit] {
+  .pb_checkbox_kit {
     margin-left: $space_xs;
   }
 }

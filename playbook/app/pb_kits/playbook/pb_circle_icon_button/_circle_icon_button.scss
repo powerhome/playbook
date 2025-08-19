@@ -37,25 +37,25 @@ $pb_button_styles: (
   }
 }
 
-[class^=pb_circle_icon_button_kit] {
+.pb_circle_icon_button_kit {
   @each $style in $pb_button_styles {
-    [class^=pb_button_kit][class*=_#{$style}] {
+    .pb_button_kit[class*=_#{$style}] {
       @include pb_circle_icon_button;
     }
   }
   :first-child {
-    &[class*=_link]  {
+    &._link  {
       @include pb_circle_icon_button_active;
     }
     &.dark  {
-      &[class*=_link]  {
+      &._link  {
         @include pb_circle_icon_button_active_dark;
       }
     }
   }
   &.size_small {
     @each $style in $pb_button_styles {
-      [class^=pb_button_kit][class*=_#{$style}] {
+      .pb_button_kit[class*=_#{$style}] {
         width: 20px;
         height: 20px;
         min-height: 20px;

@@ -3,7 +3,7 @@
 @import "../pb_stat_change/stat_change";
 @import "../pb_body/body";
 
-[class^=pb_dashboard_value_kit]{
+.pb_dashboard_value_kit{
   @each $align_name, $align_value in $pb_dashboard_value_align {
     &[class*=_#{$align_name}]  {
       @include pb_dashboard_value($align_value);
