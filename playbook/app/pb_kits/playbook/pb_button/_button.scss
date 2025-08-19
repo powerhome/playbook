@@ -11,364 +11,99 @@ $pb_button_sizes: (
   "lg":   ($font_large - 2px),
 );
 
-// Base button classes - all possible concatenated combinations
-.pb_button_kit_primary_inline_enabled,
-.pb_button_kit_primary_inline_disabled,
-.pb_button_kit_primary_inline_enabled_loading,
-.pb_button_kit_primary_inline_disabled_loading,
-.pb_button_kit_primary_inline_block_enabled,
-.pb_button_kit_primary_inline_block_disabled,
-.pb_button_kit_primary_inline_block_enabled_loading,
-.pb_button_kit_primary_inline_block_disabled_loading,
-.pb_button_kit_primary_block_enabled,
-.pb_button_kit_primary_block_disabled,
-.pb_button_kit_primary_block_enabled_loading,
-.pb_button_kit_primary_block_disabled_loading,
-.pb_button_kit_secondary_inline_enabled,
-.pb_button_kit_secondary_inline_disabled,
-.pb_button_kit_secondary_inline_enabled_loading,
-.pb_button_kit_secondary_inline_disabled_loading,
-.pb_button_kit_secondary_inline_block_enabled,
-.pb_button_kit_secondary_inline_block_disabled,
-.pb_button_kit_secondary_inline_block_enabled_loading,
-.pb_button_kit_secondary_inline_block_disabled_loading,
-.pb_button_kit_secondary_block_enabled,
-.pb_button_kit_secondary_block_disabled,
-.pb_button_kit_secondary_block_enabled_loading,
-.pb_button_kit_secondary_block_disabled_loading,
-.pb_button_kit_link_inline_enabled,
-.pb_button_kit_link_inline_disabled,
-.pb_button_kit_link_inline_enabled_loading,
-.pb_button_kit_link_inline_disabled_loading,
-.pb_button_kit_link_inline_block_enabled,
-.pb_button_kit_link_inline_block_disabled,
-.pb_button_kit_link_inline_block_enabled_loading,
-.pb_button_kit_link_inline_block_disabled_loading,
-.pb_button_kit_link_block_enabled,
-.pb_button_kit_link_block_disabled,
-.pb_button_kit_link_block_enabled_loading,
-.pb_button_kit_link_block_disabled_loading,
-.pb_button_kit_danger_inline_enabled,
-.pb_button_kit_danger_inline_disabled,
-.pb_button_kit_danger_inline_enabled_loading,
-.pb_button_kit_danger_inline_disabled_loading,
-.pb_button_kit_danger_inline_block_enabled,
-.pb_button_kit_danger_inline_block_disabled,
-.pb_button_kit_danger_inline_block_enabled_loading,
-.pb_button_kit_danger_inline_block_disabled_loading,
-.pb_button_kit_danger_block_enabled,
-.pb_button_kit_danger_block_disabled,
-.pb_button_kit_danger_block_enabled_loading,
-.pb_button_kit_danger_block_disabled_loading,
-.pb_button_kit_reaction_inline_enabled,
-.pb_button_kit_reaction_inline_disabled,
-.pb_button_kit_reaction_inline_enabled_loading,
-.pb_button_kit_reaction_inline_disabled_loading,
-.pb_button_kit_reaction_inline_block_enabled,
-.pb_button_kit_reaction_inline_block_disabled,
-.pb_button_kit_reaction_inline_block_enabled_loading,
-.pb_button_kit_reaction_inline_block_disabled_loading,
-.pb_button_kit_reaction_block_enabled,
-.pb_button_kit_reaction_block_disabled,
-.pb_button_kit_reaction_block_enabled_loading,
-.pb_button_kit_reaction_block_disabled_loading {
+// Base button class
+.pb_button_kit {
   @include pb_button;
-}
-
-@each $name, $size in $pb_button_sizes {
-  .size_#{$name} {
-    font-size: $size;
-    padding: $size / 2 $size * 2.42;
-    @if $name == "sm" {
-      min-height: 0;
+  
+  // Size variants
+  @each $name, $size in $pb_button_sizes {
+    &.pb_button_size_#{$name} {
+      font-size: $size;
+      padding: $size / 2 $size * 2.42;
+      @if $name == "sm" {
+        min-height: 0;
+      }
     }
   }
-}
 
-// Primary variant
-.pb_button_kit_primary_inline_enabled,
-.pb_button_kit_primary_inline_disabled,
-.pb_button_kit_primary_inline_enabled_loading,
-.pb_button_kit_primary_inline_disabled_loading,
-.pb_button_kit_primary_inline_block_enabled,
-.pb_button_kit_primary_inline_block_disabled,
-.pb_button_kit_primary_inline_block_enabled_loading,
-.pb_button_kit_primary_inline_block_disabled_loading,
-.pb_button_kit_primary_block_enabled,
-.pb_button_kit_primary_block_disabled,
-.pb_button_kit_primary_block_enabled_loading,
-.pb_button_kit_primary_block_disabled_loading {
-  @include pb_button_primary;
-}
-
-// Secondary variant
-.pb_button_kit_secondary_inline_enabled,
-.pb_button_kit_secondary_inline_disabled,
-.pb_button_kit_secondary_inline_enabled_loading,
-.pb_button_kit_secondary_inline_disabled_loading,
-.pb_button_kit_secondary_inline_block_enabled,
-.pb_button_kit_secondary_inline_block_disabled,
-.pb_button_kit_secondary_inline_block_enabled_loading,
-.pb_button_kit_secondary_inline_block_disabled_loading,
-.pb_button_kit_secondary_block_enabled,
-.pb_button_kit_secondary_block_disabled,
-.pb_button_kit_secondary_block_enabled_loading,
-.pb_button_kit_secondary_block_disabled_loading {
-  @include pb_button_secondary;
-}
-
-// Link variant
-.pb_button_kit_link_inline_enabled,
-.pb_button_kit_link_inline_disabled,
-.pb_button_kit_link_inline_enabled_loading,
-.pb_button_kit_link_inline_disabled_loading,
-.pb_button_kit_link_inline_block_enabled,
-.pb_button_kit_link_inline_block_disabled,
-.pb_button_kit_link_inline_block_enabled_loading,
-.pb_button_kit_link_inline_block_disabled_loading,
-.pb_button_kit_link_block_enabled,
-.pb_button_kit_link_block_disabled,
-.pb_button_kit_link_block_enabled_loading,
-.pb_button_kit_link_block_disabled_loading {
-  @include pb_button_link;
-}
-
-// Reaction variant
-.pb_button_kit_reaction_inline_enabled,
-.pb_button_kit_reaction_inline_disabled,
-.pb_button_kit_reaction_inline_enabled_loading,
-.pb_button_kit_reaction_inline_disabled_loading,
-.pb_button_kit_reaction_inline_block_enabled,
-.pb_button_kit_reaction_inline_block_disabled,
-.pb_button_kit_reaction_inline_block_enabled_loading,
-.pb_button_kit_reaction_inline_block_disabled_loading,
-.pb_button_kit_reaction_block_enabled,
-.pb_button_kit_reaction_block_disabled,
-.pb_button_kit_reaction_block_enabled_loading,
-.pb_button_kit_reaction_block_disabled_loading {
-  background-color: $card_light;
-  min-width: 40px;
-  border-radius: $border_radius_rounded;
-  border: 1px solid $border_light;
-  color: $text_lt_light;
-  padding: ($space_xxs - 3) $space_xs;
-  min-height: $space_md + 4;
-
-  .pb_icon_kit_emoji, .pb_icon_kit {
-    font-size: $font_small;
+  // Variant styles
+  &.pb_button_primary {
+    @include pb_button_primary;
   }
-  &:hover {
-    background-color: $bg_light;
+  
+  &.pb_button_secondary {
+    @include pb_button_secondary;
   }
-  &.active {
-    border-color:transparent;
-    box-shadow: 0px 0px 0 2px $primary_action;
+  
+  &.pb_button_link {
+    @include pb_button_link;
+  }
+  
+  &.pb_button_danger {
+    @include pb_button_danger;
+  }
+  
+  &.pb_button_reaction {
+    background-color: $card_light;
+    min-width: 40px;
+    border-radius: $border_radius_rounded;
+    border: 1px solid $border_light;
+    color: $text_lt_light;
+    padding: ($space_xxs - 3) $space_xs;
+    min-height: $space_md + 4;
+
+    .pb_icon_kit_emoji, .pb_icon_kit {
+      font-size: $font_small;
+    }
     &:hover {
-      background-color: rgba($primary, 0.03);
+      background-color: $bg_light;
+    }
+    &.pb_button_active {
+      border-color:transparent;
+      box-shadow: 0px 0px 0 2px $primary_action;
+      &:hover {
+        background-color: rgba($primary, 0.03);
+      }
+    }
+    
+    &.pb_button_reaction_default {
+      padding: ($space_xxs + 1) ($space_sm - 4);
+      color: $text_lt_lighter;
     }
   }
-}
 
-// reaction_default is a space-separated class
-.reaction_default {
-  padding: ($space_xxs + 1) ($space_sm - 4);
-  color: $text_lt_lighter;
-}
+  // Block (full width) style
+  &.pb_button_block {
+    @include pb_button_block;
+    width: 100% !important;
+  }
 
-// Block variants - these override the base width: fit-content
-.pb_button_kit_primary_inline_block_enabled,
-.pb_button_kit_primary_inline_block_disabled,
-.pb_button_kit_primary_inline_block_enabled_loading,
-.pb_button_kit_primary_inline_block_disabled_loading,
-.pb_button_kit_primary_block_enabled,
-.pb_button_kit_primary_block_disabled,
-.pb_button_kit_primary_block_enabled_loading,
-.pb_button_kit_primary_block_disabled_loading,
-.pb_button_kit_secondary_inline_block_enabled,
-.pb_button_kit_secondary_inline_block_disabled,
-.pb_button_kit_secondary_inline_block_enabled_loading,
-.pb_button_kit_secondary_inline_block_disabled_loading,
-.pb_button_kit_secondary_block_enabled,
-.pb_button_kit_secondary_block_disabled,
-.pb_button_kit_secondary_block_enabled_loading,
-.pb_button_kit_secondary_block_disabled_loading,
-.pb_button_kit_link_inline_block_enabled,
-.pb_button_kit_link_inline_block_disabled,
-.pb_button_kit_link_inline_block_enabled_loading,
-.pb_button_kit_link_inline_block_disabled_loading,
-.pb_button_kit_link_block_enabled,
-.pb_button_kit_link_block_disabled,
-.pb_button_kit_link_block_enabled_loading,
-.pb_button_kit_link_block_disabled_loading,
-.pb_button_kit_danger_inline_block_enabled,
-.pb_button_kit_danger_inline_block_disabled,
-.pb_button_kit_danger_inline_block_enabled_loading,
-.pb_button_kit_danger_inline_block_disabled_loading,
-.pb_button_kit_danger_block_enabled,
-.pb_button_kit_danger_block_disabled,
-.pb_button_kit_danger_block_enabled_loading,
-.pb_button_kit_danger_block_disabled_loading,
-.pb_button_kit_reaction_inline_block_enabled,
-.pb_button_kit_reaction_inline_block_disabled,
-.pb_button_kit_reaction_inline_block_enabled_loading,
-.pb_button_kit_reaction_inline_block_disabled_loading,
-.pb_button_kit_reaction_block_enabled,
-.pb_button_kit_reaction_block_disabled,
-.pb_button_kit_reaction_block_enabled_loading,
-.pb_button_kit_reaction_block_disabled_loading {
-  @include pb_button_block;
-  width: 100% !important; // Override the base width: fit-content
-}
+  // Loading state
+  &.pb_button_loading {
+    @include pb_button_loading(true);
+  }
 
-// Loading variants
-.pb_button_kit_primary_inline_enabled_loading,
-.pb_button_kit_primary_inline_disabled_loading,
-.pb_button_kit_primary_inline_block_enabled_loading,
-.pb_button_kit_primary_inline_block_disabled_loading,
-.pb_button_kit_primary_block_enabled_loading,
-.pb_button_kit_primary_block_disabled_loading,
-.pb_button_kit_secondary_inline_enabled_loading,
-.pb_button_kit_secondary_inline_disabled_loading,
-.pb_button_kit_secondary_inline_block_enabled_loading,
-.pb_button_kit_secondary_inline_block_disabled_loading,
-.pb_button_kit_secondary_block_enabled_loading,
-.pb_button_kit_secondary_block_disabled_loading,
-.pb_button_kit_link_inline_enabled_loading,
-.pb_button_kit_link_inline_disabled_loading,
-.pb_button_kit_link_inline_block_enabled_loading,
-.pb_button_kit_link_inline_block_disabled_loading,
-.pb_button_kit_link_block_enabled_loading,
-.pb_button_kit_link_block_disabled_loading,
-.pb_button_kit_danger_inline_enabled_loading,
-.pb_button_kit_danger_inline_disabled_loading,
-.pb_button_kit_danger_inline_block_enabled_loading,
-.pb_button_kit_danger_inline_block_disabled_loading,
-.pb_button_kit_danger_block_enabled_loading,
-.pb_button_kit_danger_block_disabled_loading,
-.pb_button_kit_reaction_inline_enabled_loading,
-.pb_button_kit_reaction_inline_disabled_loading,
-.pb_button_kit_reaction_inline_block_enabled_loading,
-.pb_button_kit_reaction_inline_block_disabled_loading,
-.pb_button_kit_reaction_block_enabled_loading,
-.pb_button_kit_reaction_block_disabled_loading {
-  @include pb_button_loading(true);
-}
+  // Disabled state
+  &.pb_button_disabled {
+    @include pb_button_disabled;
+  }
 
-// Danger variant
-.pb_button_kit_danger_inline_enabled,
-.pb_button_kit_danger_inline_disabled,
-.pb_button_kit_danger_inline_enabled_loading,
-.pb_button_kit_danger_inline_disabled_loading,
-.pb_button_kit_danger_inline_block_enabled,
-.pb_button_kit_danger_inline_block_disabled,
-.pb_button_kit_danger_inline_block_enabled_loading,
-.pb_button_kit_danger_inline_block_disabled_loading,
-.pb_button_kit_danger_block_enabled,
-.pb_button_kit_danger_block_disabled,
-.pb_button_kit_danger_block_enabled_loading,
-.pb_button_kit_danger_block_disabled_loading {
-  @include pb_button_danger;
-}
-
-// Disabled variants
-.pb_button_kit_primary_inline_disabled,
-.pb_button_kit_primary_inline_disabled_loading,
-.pb_button_kit_primary_inline_block_disabled,
-.pb_button_kit_primary_inline_block_disabled_loading,
-.pb_button_kit_primary_block_disabled,
-.pb_button_kit_primary_block_disabled_loading,
-.pb_button_kit_secondary_inline_disabled,
-.pb_button_kit_secondary_inline_disabled_loading,
-.pb_button_kit_secondary_inline_block_disabled,
-.pb_button_kit_secondary_inline_block_disabled_loading,
-.pb_button_kit_secondary_block_disabled,
-.pb_button_kit_secondary_block_disabled_loading,
-.pb_button_kit_link_inline_disabled,
-.pb_button_kit_link_inline_disabled_loading,
-.pb_button_kit_link_inline_block_disabled,
-.pb_button_kit_link_inline_block_disabled_loading,
-.pb_button_kit_link_block_disabled,
-.pb_button_kit_link_block_disabled_loading,
-.pb_button_kit_danger_inline_disabled,
-.pb_button_kit_danger_inline_disabled_loading,
-.pb_button_kit_danger_inline_block_disabled,
-.pb_button_kit_danger_inline_block_disabled_loading,
-.pb_button_kit_danger_block_disabled,
-.pb_button_kit_danger_block_disabled_loading,
-.pb_button_kit_reaction_inline_disabled,
-.pb_button_kit_reaction_inline_disabled_loading,
-.pb_button_kit_reaction_inline_block_disabled,
-.pb_button_kit_reaction_inline_block_disabled_loading,
-.pb_button_kit_reaction_block_disabled,
-.pb_button_kit_reaction_block_disabled_loading {
-  @include pb_button_disabled;
-}
-
-// Dark theme variants
-.pb_button_kit_primary_inline_enabled.dark,
-.pb_button_kit_primary_inline_disabled.dark,
-.pb_button_kit_primary_inline_enabled_loading.dark,
-.pb_button_kit_primary_inline_disabled_loading.dark,
-.pb_button_kit_primary_inline_block_enabled.dark,
-.pb_button_kit_primary_inline_block_disabled.dark,
-.pb_button_kit_primary_inline_block_enabled_loading.dark,
-.pb_button_kit_primary_inline_block_disabled_loading.dark,
-.pb_button_kit_primary_block_enabled.dark,
-.pb_button_kit_primary_block_disabled.dark,
-.pb_button_kit_primary_block_enabled_loading.dark,
-.pb_button_kit_primary_block_disabled_loading.dark {
-  @include pb_button_primary_dark;
-}
-
-.pb_button_kit_secondary_inline_enabled.dark,
-.pb_button_kit_secondary_inline_disabled.dark,
-.pb_button_kit_secondary_inline_enabled_loading.dark,
-.pb_button_kit_secondary_inline_disabled_loading.dark,
-.pb_button_kit_secondary_inline_block_enabled.dark,
-.pb_button_kit_secondary_inline_block_disabled.dark,
-.pb_button_kit_secondary_inline_block_enabled_loading.dark,
-.pb_button_kit_secondary_inline_block_disabled_loading.dark,
-.pb_button_kit_secondary_block_enabled.dark,
-.pb_button_kit_secondary_block_disabled.dark,
-.pb_button_kit_secondary_block_enabled_loading.dark,
-.pb_button_kit_secondary_block_disabled_loading.dark {
-  @include pb_button_secondary_dark;
-}
-
-.pb_button_kit_link_inline_enabled.dark,
-.pb_button_kit_link_inline_disabled.dark,
-.pb_button_kit_link_inline_enabled_loading.dark,
-.pb_button_kit_link_inline_disabled_loading.dark,
-.pb_button_kit_link_inline_block_enabled.dark,
-.pb_button_kit_link_inline_block_disabled.dark,
-.pb_button_kit_link_inline_block_enabled_loading.dark,
-.pb_button_kit_link_inline_block_disabled_loading.dark,
-.pb_button_kit_link_block_enabled.dark,
-.pb_button_kit_link_block_disabled.dark,
-.pb_button_kit_link_block_enabled_loading.dark,
-.pb_button_kit_link_block_disabled_loading.dark {
-  @include pb_button_link_dark;
-}
-
-.pb_button_kit_primary_inline_disabled.dark,
-.pb_button_kit_primary_inline_disabled_loading.dark,
-.pb_button_kit_primary_block_disabled.dark,
-.pb_button_kit_primary_block_disabled_loading.dark,
-.pb_button_kit_secondary_inline_disabled.dark,
-.pb_button_kit_secondary_inline_disabled_loading.dark,
-.pb_button_kit_secondary_block_disabled.dark,
-.pb_button_kit_secondary_block_disabled_loading.dark,
-.pb_button_kit_link_inline_disabled.dark,
-.pb_button_kit_link_inline_disabled_loading.dark,
-.pb_button_kit_link_block_disabled.dark,
-.pb_button_kit_link_block_disabled_loading.dark,
-.pb_button_kit_danger_inline_disabled.dark,
-.pb_button_kit_danger_inline_disabled_loading.dark,
-.pb_button_kit_danger_block_disabled.dark,
-.pb_button_kit_danger_block_disabled_loading.dark,
-.pb_button_kit_reaction_inline_disabled.dark,
-.pb_button_kit_reaction_inline_disabled_loading.dark,
-.pb_button_kit_reaction_block_disabled.dark,
-.pb_button_kit_reaction_block_disabled_loading.dark {
-  @include pb_button_disabled_dark;
+  // Dark theme variants
+  &.dark {
+    &.pb_button_primary {
+      @include pb_button_primary_dark;
+    }
+    
+    &.pb_button_secondary {
+      @include pb_button_secondary_dark;
+    }
+    
+    &.pb_button_link {
+      @include pb_button_link_dark;
+    }
+    
+    &.pb_button_disabled {
+      @include pb_button_disabled_dark;
+    }
+  }
 }
