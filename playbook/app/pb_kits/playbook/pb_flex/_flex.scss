@@ -16,114 +16,133 @@ $gapTypes: (
   rowGap: row-gap
 );
 
+// Base flex kit
 .pb_flex_kit {
   display: flex;
   flex-wrap: nowrap;
+}
 
-  &.pb_flex_kit_inline {
-    display: inline-flex;
-  }
+// Inline variant
+.pb_flex_kit_inline {
+  display: inline-flex;
+}
 
-  &.pb_flex_kit_wrap {
-    flex-wrap: wrap;
-  }
+// Wrap variant
+.pb_flex_kit_wrap {
+  flex-wrap: wrap;
+}
 
-  &.pb_flex_kit_orientation_row {
-    flex-direction: row;
-    &.pb_flex_kit_reverse {
-      flex-direction: row-reverse;
-    }
-  }
+// Orientation
+.pb_flex_kit_orientation_row {
+  flex-direction: row;
+}
 
-  &.pb_flex_kit_orientation_column {
-    flex-direction: column;
-    &.pb_flex_kit_reverse {
-      flex-direction: column-reverse;
-    }
-  }
+.pb_flex_kit_orientation_column {
+  flex-direction: column;
+}
 
-  &.pb_flex_kit_justify_content_left,
-  &.pb_flex_kit_justify_content_top,
-  &.pb_flex_kit_justify_content_start {
-    justify-content: flex-start;
-    &.pb_flex_kit_reverse {
-      justify-content: flex-end;
-    }
-  }
+// Reverse (works with orientation)
+.pb_flex_kit_orientation_row.pb_flex_kit_reverse {
+  flex-direction: row-reverse;
+}
 
-  &.pb_flex_kit_justify_content_right,
-  &.pb_flex_kit_justify_content_bottom,
-  &.pb_flex_kit_justify_content_end {
-    justify-content: flex-end;
-    &.pb_flex_kit_reverse {
-      justify-content: flex-start;
-    }
-  }
+.pb_flex_kit_orientation_column.pb_flex_kit_reverse {
+  flex-direction: column-reverse;
+}
 
-  &.pb_flex_kit_justify_content_center {
-    justify-content: center;
-  }
+// Justify Content
+.pb_flex_kit_justify_content_left,
+.pb_flex_kit_justify_content_top,
+.pb_flex_kit_justify_content_start {
+  justify-content: flex-start;
+}
 
-  &.pb_flex_kit_align_items_left,
-  &.pb_flex_kit_align_items_top,
-  &.pb_flex_kit_align_items_start {
-    align-items: flex-start;
-  }
+.pb_flex_kit_justify_content_right,
+.pb_flex_kit_justify_content_bottom,
+.pb_flex_kit_justify_content_end {
+  justify-content: flex-end;
+}
 
-  &.pb_flex_kit_align_items_right,
-  &.pb_flex_kit_align_items_bottom,
-  &.pb_flex_kit_align_items_end {
-    align-items: flex-end;
-  }
+.pb_flex_kit_justify_content_center {
+  justify-content: center;
+}
 
-  &.pb_flex_kit_align_items_center {
-    align-items: center;
-  }
+// Justify Content with Reverse
+.pb_flex_kit_justify_content_left.pb_flex_kit_reverse,
+.pb_flex_kit_justify_content_top.pb_flex_kit_reverse,
+.pb_flex_kit_justify_content_start.pb_flex_kit_reverse {
+  justify-content: flex-end;
+}
 
-  &.pb_flex_kit_align_items_stretch {
-    align-items: stretch;
-  }
+.pb_flex_kit_justify_content_right.pb_flex_kit_reverse,
+.pb_flex_kit_justify_content_bottom.pb_flex_kit_reverse,
+.pb_flex_kit_justify_content_end.pb_flex_kit_reverse {
+  justify-content: flex-start;
+}
 
-  &.pb_flex_kit_align_items_baseline {
-    align-items: baseline;
-  }
+// Align Items
+.pb_flex_kit_align_items_left,
+.pb_flex_kit_align_items_top,
+.pb_flex_kit_align_items_start {
+  align-items: flex-start;
+}
 
-  &.pb_flex_kit_align_self_start {
-    align-self: flex-start;
-  }
+.pb_flex_kit_align_items_right,
+.pb_flex_kit_align_items_bottom,
+.pb_flex_kit_align_items_end {
+  align-items: flex-end;
+}
 
-  &.pb_flex_kit_align_self_end {
-    align-self: flex-end;
-  }
+.pb_flex_kit_align_items_center {
+  align-items: center;
+}
 
-  &.pb_flex_kit_align_self_center {
-    align-self: center;
-  }
+.pb_flex_kit_align_items_stretch {
+  align-items: stretch;
+}
 
-  &.pb_flex_kit_align_self_stretch {
-    align-self: stretch;
-  }
+.pb_flex_kit_align_items_baseline {
+  align-items: baseline;
+}
 
-  &.pb_flex_kit_spacing_around,
-  &.pb_flex_kit_justify_content_around {
-    justify-content: space-around;
-  }
+// Align Self
+.pb_flex_kit_align_self_start {
+  align-self: flex-start;
+}
 
-  &.pb_flex_kit_spacing_between,
-  &.pb_flex_kit_justify_content_between {
-    justify-content: space-between;
-  }
+.pb_flex_kit_align_self_end {
+  align-self: flex-end;
+}
 
-  &.pb_flex_kit_spacing_evenly,
-  &.pb_flex_kit_justify_content_evenly {
-    justify-content: space-evenly;
-  }
+.pb_flex_kit_align_self_center {
+  align-self: center;
+}
 
-  @each $gapType, $gapValue in $gapTypes {
-    @each $sizeName, $sizeValue in $gapSpaces {
-      &.pb_flex_kit_#{$gapType}_#{$sizeName} {
-        #{$gapValue}: $sizeValue;
-      }
+.pb_flex_kit_align_self_stretch {
+  align-self: stretch;
+}
+
+// Spacing
+.pb_flex_kit_spacing_around,
+.pb_flex_kit_justify_content_around {
+  justify-content: space-around;
+}
+
+.pb_flex_kit_spacing_between,
+.pb_flex_kit_justify_content_between {
+  justify-content: space-between;
+}
+
+.pb_flex_kit_spacing_evenly,
+.pb_flex_kit_justify_content_evenly {
+  justify-content: space-evenly;
+}
+
+// Gap utility classes
+@each $gapType, $gapValue in $gapTypes {
+  @each $sizeName, $sizeValue in $gapSpaces {
+    .pb_flex_kit_#{$gapType}_#{$sizeName} {
+      #{$gapValue}: $sizeValue;
     }
   }
 }

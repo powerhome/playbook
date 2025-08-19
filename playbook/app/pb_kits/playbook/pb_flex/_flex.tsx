@@ -47,18 +47,18 @@ const Flex = (props: FlexProps): React.ReactElement => {
   } = props
 
   const orientationClass =
-    orientation !== undefined ? `orientation_${orientation}` : ''
+    orientation !== undefined ? `pb_flex_kit_orientation_${orientation}` : ''
   const justifyClass =
-    justify !== 'none' ? `justify_content_${justify}` : `justify_content_${horizontal}`
-  const alignClass = align !== 'none' ? `align_items_${align}` : `align_items_${vertical}`
-  const inlineClass = inline === true ? 'inline' : ''
-  const spacingClass = spacing !== undefined ? `spacing_${spacing}` : ''
-  const gapClass = gap !== 'none' ? `gap_${gap}` : ''
-  const rowGapClass = rowGap !== 'none' ? `rowGap_${rowGap}` : ''
-  const columnGapClass = columnGap !== 'none' ? `columnGap_${columnGap}` : ''
-  const wrapClass = wrap === true ? 'wrap' : ''
-  const reverseClass = reverse === true ? 'reverse' : ''
-  const alignSelfClass = alignSelf !== 'none' ? `align_self_${alignSelf}` : ''
+    justify !== 'none' ? `pb_flex_kit_justify_content_${justify}` : `pb_flex_kit_justify_content_${horizontal}`
+  const alignClass = align !== 'none' ? `pb_flex_kit_align_items_${align}` : `pb_flex_kit_align_items_${vertical}`
+  const inlineClass = inline === true ? 'pb_flex_kit_inline' : ''
+  const spacingClass = spacing !== undefined ? `pb_flex_kit_spacing_${spacing}` : ''
+  const gapClass = gap !== 'none' ? `pb_flex_kit_gap_${gap}` : ''
+  const rowGapClass = rowGap !== 'none' ? `pb_flex_kit_rowGap_${rowGap}` : ''
+  const columnGapClass = columnGap !== 'none' ? `pb_flex_kit_columnGap_${columnGap}` : ''
+  const wrapClass = wrap === true ? 'pb_flex_kit_wrap' : ''
+  const reverseClass = reverse === true ? 'pb_flex_kit_reverse' : ''
+  const alignSelfClass = alignSelf !== 'none' ? `pb_flex_kit_align_self_${alignSelf}` : ''
   const dataProps = buildDataProps(data)
   const htmlProps = buildHtmlProps(htmlOptions)
   const dynamicInlineProps = globalInlineProps(props)
@@ -67,20 +67,18 @@ const Flex = (props: FlexProps): React.ReactElement => {
   return (
     <div
         className={classnames(
-        buildCss(
-          'pb_flex_kit',
-          orientationClass,
-          justifyClass,
-          alignClass,
-          inlineClass,
-          reverseClass,
-          wrapClass,
-          spacingClass,
-          gapClass,
-          rowGapClass,
-          columnGapClass,
-          alignSelfClass
-        ),
+        'pb_flex_kit',
+        orientationClass,
+        justifyClass,
+        alignClass,
+        inlineClass,
+        reverseClass,
+        wrapClass,
+        spacingClass,
+        gapClass,
+        rowGapClass,
+        columnGapClass,
+        alignSelfClass,
         globalProps(props),
         className
       )}

@@ -56,31 +56,71 @@ module Playbook
                   default: false
 
       def classname
-        generate_classname("pb_flex_kit",
-                           orientation_class,
-                           justify_class,
-                           align_class,
-                           inline_class,
-                           reverse_class,
-                           wrap_class,
-                           spacing_class,
-                           gap_class,
-                           row_gap_class,
-                           column_gap_class,
-                           align_self_class)
+        [
+          "pb_flex_kit",
+          orientation_class,
+          justify_class,
+          align_class,
+          inline_class,
+          reverse_class,
+          wrap_class,
+          spacing_class,
+          gap_class,
+          row_gap_class,
+          column_gap_class,
+          align_self_class,
+          prop(:classname),
+          spacing_props,
+          dark_props,
+          width_props,
+          min_width_props,
+          max_width_props,
+          gap_props,
+          z_index_props,
+          number_spacing_props,
+          shadow_props,
+          line_height_props,
+          display_props,
+          cursor_props,
+          flex_direction_props,
+          flex_wrap_props,
+          justify_content_props,
+          justify_self_props,
+          align_items_props,
+          align_content_props,
+          align_self_props,
+          flex_props,
+          flex_grow_props,
+          flex_shrink_props,
+          order_props,
+          position_props,
+          hover_props,
+          border_radius_props,
+          text_align_props,
+          overflow_props,
+          truncate_props,
+          left_props,
+          top_props,
+          right_props,
+          bottom_props,
+          vertical_align_props,
+          height_props,
+          min_height_props,
+          max_height_props,
+        ].compact.flatten.join(" ")
       end
 
     private
 
       def orientation_class
-        "orientation_#{orientation}"
+        "pb_flex_kit_orientation_#{orientation}"
       end
 
       def horizontal_class
         if orientation == "row"
-          "justify_content_#{horizontal}"
+          "pb_flex_kit_justify_content_#{horizontal}"
         elsif align == "none"
-          "align_items_#{horizontal}"
+          "pb_flex_kit_align_items_#{horizontal}"
         end
       end
 
@@ -88,27 +128,27 @@ module Playbook
         if justify == "none"
           horizontal_class
         else
-          "justify_content_#{justify}"
+          "pb_flex_kit_justify_content_#{justify}"
         end
       end
 
       def inline_class
-        inline ? "inline" : nil
+        inline ? "pb_flex_kit_inline" : nil
       end
 
       def spacing_class
-        "spacing_#{spacing}"
+        spacing != "none" ? "pb_flex_kit_spacing_#{spacing}" : nil
       end
 
       def reverse_class
-        reverse ? "reverse" : nil
+        reverse ? "pb_flex_kit_reverse" : nil
       end
 
       def vertical_class
         if orientation == "row"
-          "align_items_#{vertical}"
+          "pb_flex_kit_align_items_#{vertical}"
         elsif justify == "none"
-          "justify_content_#{vertical}"
+          "pb_flex_kit_justify_content_#{vertical}"
         end
       end
 
@@ -116,7 +156,7 @@ module Playbook
         if align == "none"
           vertical_class
         else
-          "align_items_#{align}"
+          "pb_flex_kit_align_items_#{align}"
         end
       end
 
@@ -124,19 +164,19 @@ module Playbook
         if align_self == "none"
           nil
         else
-          "align_self_#{align_self}"
+          "pb_flex_kit_align_self_#{align_self}"
         end
       end
 
       def wrap_class
-        wrap ? "wrap" : nil
+        wrap ? "pb_flex_kit_wrap" : nil
       end
 
       def gap_class
         if gap == "none"
           nil
         else
-          "gap_#{gap}"
+          "pb_flex_kit_gap_#{gap}"
         end
       end
 
@@ -144,7 +184,7 @@ module Playbook
         if row_gap == "none"
           nil
         else
-          "rowGap_#{row_gap}"
+          "pb_flex_kit_rowGap_#{row_gap}"
         end
       end
 
@@ -152,7 +192,7 @@ module Playbook
         if column_gap == "none"
           nil
         else
-          "columnGap_#{column_gap}"
+          "pb_flex_kit_columnGap_#{column_gap}"
         end
       end
     end

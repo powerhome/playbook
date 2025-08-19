@@ -9,7 +9,8 @@ type FlexItemPropTypes = {
   htmlOptions?: { [key: string]: string | number | boolean | (() => void) },
   shrink?: boolean,
   className?: string,
-  order?: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 'first' | 'none',
+  flex?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 'none',
+  order?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 'first' | 'none',
   alignSelf?: "start" | "end" | "center" | "stretch" | null,
   displayFlex?: boolean
 } & GlobalProps
@@ -27,14 +28,14 @@ const FlexItem = (props: FlexItemPropTypes): React.ReactElement => {
     alignSelf,
     displayFlex
   } = props
-  const growClass = grow === true ? 'grow' : ''
-  const displayFlexClass = displayFlex === true ? `display_flex_${displayFlex}` : ''
-  const flexClass = flex !== 'none' ? `flex_${flex}` : ''
-  const shrinkClass = shrink === true ? 'shrink' : ''
-  const alignSelfClass = alignSelf ? `align_self_${alignSelf}` : ''
+  const growClass = grow === true ? 'pb_flex_item_kit_grow' : ''
+  const displayFlexClass = displayFlex === true ? 'pb_flex_item_kit_display_flex' : ''
+  const flexClass = flex !== 'none' ? `pb_flex_item_kit_flex_${flex}` : ''
+  const shrinkClass = shrink === true ? 'pb_flex_item_kit_shrink' : ''
+  const alignSelfClass = alignSelf ? `pb_flex_item_kit_align_self_${alignSelf}` : ''
   const fixedStyle =
     fixedSize !== undefined ? { flexBasis: `${fixedSize}` } : null
-  const orderClass = order !== 'none' ? `order_${order}` : null
+  const orderClass = order !== 'none' ? `pb_flex_item_kit_order_${order}` : ''
   const dynamicInlineProps = globalInlineProps(props)
   const combinedStyles = {
     ...fixedStyle,
@@ -47,7 +48,17 @@ const FlexItem = (props: FlexItemPropTypes): React.ReactElement => {
   return (
     <div
         {...htmlProps}
-        className={classnames(buildCss('pb_flex_item_kit', growClass, shrinkClass, flexClass, displayFlexClass), orderClass, alignSelfClass, globalProps(props), className)}
+        className={classnames(
+          'pb_flex_item_kit',
+          growClass,
+          shrinkClass,
+          flexClass,
+          displayFlexClass,
+          orderClass,
+          alignSelfClass,
+          globalProps(props),
+          className
+        )}
         style={combinedStyles}
     >
       {children}
