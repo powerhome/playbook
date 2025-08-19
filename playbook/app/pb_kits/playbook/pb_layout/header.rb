@@ -8,7 +8,7 @@ module Playbook
                  default: "div"
 
       def classname
-        generate_classname("layout_header")
+        "layout_header"
       end
     end
   end

@@ -25,37 +25,28 @@ module Playbook
       def classname
         case layout
         when "collection"
-          generate_classname("pb_layout_kit", layout)
+          "pb_layout_kit_collection"
         when "kanban"
-          generate_classname("pb_layout_kit", layout, responsive_class)
+          classes = ["pb_layout_kit_kanban"]
+          classes << "pb_layout_kit_kanban_responsive" if responsive
+          classes.join(" ")
         when "collection_detail"
-          generate_classname("pb_layout_kit", layout)
+          "pb_layout_kit_collection_detail"
         when "content"
-          generate_classname("pb_layout_kit", layout)
+          "pb_layout_kit_content"
         when "masonry"
-          generate_classname("pb_layout_kit", layout)
+          "pb_layout_kit_masonry"
         else
-          first_class = generate_classname("pb_layout_kit_sidebar", "size_#{size}", position, variant, transparent_class)
-          [first_class, full_class, collapse_class].reject(&:empty?).join(" ")
+          # Sidebar layout
+          classes = [
+            "pb_layout_kit_sidebar",
+            "pb_layout_kit_sidebar_size_#{size}_#{position}_#{variant}",
+          ]
+          classes << "pb_layout_kit_sidebar_transparent" if transparent
+          classes << "pb_layout_kit_sidebar_full" if full
+          classes << "layout_#{position}_collapse_#{collapse}"
+          classes.join(" ")
         end
-      end
-
-    private
-
-      def responsive_class
-        responsive ? "responsive" : ""
-      end
-
-      def full_class
-        full ? "full" : ""
-      end
-
-      def transparent_class
-        transparent ? "transparent" : nil
-      end
-
-      def collapse_class
-        "layout_#{position}_collapse_#{collapse}"
       end
     end
   end

@@ -13,362 +13,387 @@ $card-border-radius: $border_rad_lightest;
 $bracket-connector-width: 45px;
 $bracket-border-width: 4px;
 
+// Collection layout
+.pb_layout_kit_collection {
+  div.layout_body {
+    display: grid;
+    grid-auto-rows: max-content;
+    grid-column-gap: $space_sm;
+    grid-row-gap: $space_sm;
+    grid-template-columns: repeat(4, 1fr);
 
-.pb_layout_kit {
+    @media screen and (max-width: $screen-md-min) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    @media screen and (max-width: $screen-xs-min) {
+      grid-template-columns: repeat(1, 1fr);
+    }
+  }
+}
 
-  &._collection{
-    div.layout_body{
-      display: grid;
-      grid-auto-rows: max-content;
-      grid-column-gap: $space_sm;
-      grid-row-gap: $space_sm;
-      grid-template-columns: repeat(4, 1fr);
+// Masonry layout
+.pb_layout_kit_masonry {
+  div.layout_body {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    grid-gap: 10px;
+    grid-auto-rows: minmax(180px, auto);
+    grid-auto-flow: dense;
+    padding: 10px;
 
-      @media screen and (max-width: $screen-md-min) {
-        grid-template-columns: repeat(2, 1fr);
-      }
-      @media screen and (max-width: $screen-xs-min) {
-        grid-template-columns: repeat(1, 1fr);
+    .size_md {
+      grid-column-end: span 2;
+      grid-row-end: span 2;
+    }
+
+    .size_lg {
+      grid-column-end: span 3;
+      grid-row-end: span 4;
+    }
+
+    @media screen and (max-width: $screen-lg-min) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    div.layout_item, * {
+      display: flex;
+      img {
+        max-width: 100%;
       }
     }
   }
+}
 
-  &._masonry {
-    div.layout_body {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-      grid-gap: 10px;
-      grid-auto-rows: minmax(180px, auto);
-      grid-auto-flow: dense;
-      padding: 10px;
+// Layout item size classes
+.layout_item_size_sm {
+  // Default size, inherits grid behavior
+}
 
-      .size_md {
-        grid-column-end: span 2;
-        grid-row-end: span 2;
-      }
+.layout_item_size_md {
+  grid-column-end: span 2;
+  grid-row-end: span 2;
+}
 
-      .size_lg {
-        grid-column-end: span 3;
-        grid-row-end: span 4;
-      }
+.layout_item_size_lg {
+  grid-column-end: span 3;
+  grid-row-end: span 4;
+}
 
-      @media screen and (max-width: $screen-lg-min) {
-        grid-template-columns: repeat(3, 1fr);
-      }
-
-      div.layout_item, * {
-        display: flex;
-        img {
-          max-width: 100%;
-        }
-      }
+// Collection detail layout
+.pb_layout_kit_collection_detail {
+  display: grid;
+  width: 100%;
+  height: 100%;
+  padding: $space_lg;
+  grid-template-areas:
+  "side-bar collection";
+  grid-template-columns: .25fr 1fr;
+  grid-column-gap: $space_sm;
+  
+  div.layout_body {
+    @media screen and (min-width: $screen-md-min) {
+      margin-left: $space_md;
+    }
+    @media screen and (max-width: $screen-lg-min) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    @media screen and (max-width: $screen-md-min) {
+      grid-template-columns: repeat(2, 1fr) !important;
+    }
+    @media screen and (max-width: $screen-xs-min) {
+      grid-template-columns: repeat(1, 1fr) !important;
     }
   }
 
-  &._collection_detail{
-      display: grid;
-      width: 100%;
+  @media screen and (max-width: $screen-md-min) {
+    grid-template-areas: "side-bar"
+    "collection";
+    grid-template-columns: 1fr;
+    grid-row-gap: $space_sm;
+  }
+}
+
+// Kanban layout
+.pb_layout_kit_kanban {
+  display: flex;
+  overflow-x: auto;
+
+  > * {
+    flex: 0 0 auto;
+    margin-left: $gap;
+  }
+  
+  &::after {
+    content: '';
+    flex: 0 0 $gap;
+  }
+
+  div.layout_body {
+    width: $list-width;
+    height: 100vh;
+    list-style: none;
+    margin: 0;
+    overflow-y: auto;
+
+    & > * {
+      margin: $space_xs $space_xs $space_xs;
+      &:not(:last-child) {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+
+// Content layout
+.pb_layout_kit_content {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: .5fr repeat(3, 1fr) .5fr;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  grid-template-areas:
+  "h h h h h"
+  "s b b b b"
+  "s b b b b"
+  "s b b b b"
+  "s f f f f";
+  
+  div.layout_header {
+    grid-area: h;
+    padding-bottom: $space_sm;
+  }
+  
+  div.layout_sidebar {
+    grid-area: s;
+    padding-right: $space_sm;
+  }
+  
+  div.layout_body {
+    grid-area: b;
+  }
+  
+  div.layout_footer {
+    grid-area: f;
+    padding-top: $space_sm;
+  }
+}
+
+// For future release as of 6/18/2020
+.pb_layout_kit_kanban_responsive {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(0, 1fr);
+  
+  &::after {
+    flex: none;
+    content: none;
+  }
+  
+  div.layout_body {
+    width: 100%;
+  }
+}
+
+// Bracket layout
+.pb_layout_kit_bracket {
+  display: flex;
+  overflow-x: scroll;
+
+  div.layout_round {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    flex-grow: 1;
+  }
+
+  .connector_container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+  }
+  
+  .right_connector {
+    border-top: $bracket-border-width solid $border_light;
+    width: $bracket-connector-width;
+    margin-left: $bracket-connector-width;
+  }
+
+  .layout_round .layout_game {
+    position: relative;
+  }
+
+  .half_box {
+    content: '';
+    position: absolute;
+    top: calc(50% - $bracket-border-width / 2);
+    height: calc(100% + $bracket-border-width);
+    width: $bracket-connector-width;
+    right: -$bracket-connector-width;
+    border-top-right-radius: $border_radius_lg;
+    border-bottom-right-radius: $border_radius_lg;
+    border-top: $bracket-border-width solid $border_light;
+    border-bottom: $bracket-border-width solid $border_light;
+    border-right: $bracket-border-width solid $border_light;
+  }
+
+  .polygon_node {
+    position: absolute;
+    top: calc(50% - 5px);
+    right: -10px;
+
+    width: 0;
+    height: 0;
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+    border-left: 10px solid $border_light;
+  }
+
+  .layout_round_label {
+    display: none;
+  }
+
+  .layout_participant,
+  .layout_participant_winner,
+  .layout_participant_self,
+  .layout_participant_winner_self,
+  .layout_participant_winner_self_last {
+    height: 60px;
+  }
+
+  .layout_tbd {
+    height: 140px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .layout_participant_winner,
+  .layout_participant_self,
+  .layout_participant_winner_self,
+  .layout_participant_winner_self_last {
+    position: relative;
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      width: 4px;
       height: 100%;
-      padding: $space_lg;
-      grid-template-areas:
-      "side-bar collection";
-      grid-template-columns: .25fr 1fr;
-      grid-column-gap: $space_sm;
-      div.layout_body{
-        @media screen and (min-width: $screen-md-min) {
-        margin-left: $space_md;
-        }
-        @media screen and (max-width: $screen-lg-min) {
-          grid-template-columns: repeat(3, 1fr);
-        }
-        @media screen and (max-width: $screen-md-min) {
-          grid-template-columns: repeat(2, 1fr) !important;
-        }
-         @media screen and (max-width: $screen-xs-min) {
-          grid-template-columns: repeat(1, 1fr) !important;
-        }
-      }
-
-      @media screen and (max-width: $screen-md-min) {
-        grid-template-areas: "side-bar"
-        "collection";
-        grid-template-columns: 1fr;
-        grid-row-gap: $space_sm;
-      }
-
-  }
-
-  &._kanban{
-    display: flex;
-    overflow-x: auto;
-
-    > * {
-      flex: 0 0 auto;
-      margin-left: $gap;
-    }
-    &::after {
-      content: '';
-      flex: 0 0 $gap;
-    }
-
-    div.layout_body{
-      width: $list-width;
-      height: 100vh;
-      list-style: none;
-      margin: 0;
-      overflow-y: auto;
-
-      & > * {
-        margin: $space_xs $space_xs $space_xs;
-        &:not(:last-child) {
-          margin-bottom: 0;
-        }
-      }
     }
   }
 
-  &._content{
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    grid-template-rows: .5fr repeat(3, 1fr) .5fr;
-    grid-column-gap: 0px;
-    grid-row-gap: 0px;
-    grid-template-areas:
-    "h h h h h"
-    "s b b b b"
-    "s b b b b"
-    "s b b b b"
-    "s f f f f";
-    div.layout_header{
-      grid-area: h;
-      padding-bottom: $space_sm;
-    }
-    div.layout_sidebar{
-      grid-area: s;
-      padding-right: $space_sm;
-    }
-    div.layout_body{
-      grid-area: b;
-    }
-    div.layout_footer{
-      grid-area: f;
-      padding-top: $space_sm;
+  .layout_participant_winner::after {
+    right: 0;
+    background: $product_6_highlight;
+  }
+
+  .layout_participant_self::after {
+    left: 0;
+    background: $category_1;
+  }
+
+  .layout_participant_winner_self::after {
+    right: 0;
+    background: $product_6_highlight;
+  }
+
+  .layout_participant_winner_self_last::after {
+    left: 0;
+    background: $category_1;
+  }
+
+  .game_separator {
+    &::before, &::after {
+      height: 2px;
     }
   }
 
-  // For future release as of 6/18/2020
-  &._kanban_responsive {
-    display: grid;
-    grid-auto-flow: column;
-    grid-auto-columns: minmax(0, 1fr);
-    &::after {
-      flex: none;
-      content: none;
-    }
-    div.layout_body{
-      width: 100%;
-    }
-  }
-
-  &._bracket{
-    display: flex;
-    overflow-x: scroll;
-
-    div.layout_round {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-around;
-      flex-grow: 1;
-    }
-
-    .connector_container {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-around;
-    }
-    .right_connector {
-      border-top: $bracket-border-width solid $border_light;
-      width: $bracket-connector-width;
-      margin-left: $bracket-connector-width;
-    }
-
-    .layout_round .layout_game {
-      position: relative;
-    }
-
-    .half_box {
-      content: '';
-      position: absolute;
-      top: calc(50% - $bracket-border-width / 2);
-      height: calc(100% + $bracket-border-width);
-      width: $bracket-connector-width;
-      right: -$bracket-connector-width;
-      border-top-right-radius: $border_radius_lg;
-      border-bottom-right-radius: $border_radius_lg;
-      border-top: $bracket-border-width solid $border_light;
-      border-bottom: $bracket-border-width solid $border_light;
-      border-right: $bracket-border-width solid $border_light;
-    }
-
-    .polygon_node {
-      position: absolute;
-      top: calc(50% - 5px);
-      right: -10px;
-
-      width: 0;
-      height: 0;
-      border-top: 5px solid transparent;
-      border-bottom: 5px solid transparent;
-      border-left: 10px solid $border_light;
-    }
-
+  @media (max-width: $screen-md-max) {
+    flex-direction: column;
+    
     .layout_round_label {
-      display: none;
+      display: block;
     }
-
-    .layout_participant,
-    .layout_participant_winner,
-    .layout_participant_self,
-    .layout_participant_winner_self,
-    .layout_participant_winner_self_last {
-      height: 60px;
+    
+    .layout_round .layout_game::after,
+    .connector_container,
+    .half_box,
+    .polygon_node {
+      display: none !important;
     }
+  }
+}
 
-    .layout_tbd {
-      height: 140px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
+// Sidebar layout base variables
+$layout_sizes: (
+  "xs":   64px,
+  "sm":   200px,
+  "md":   250px,
+  "lg":   300px,
+  "xl":   365px,
+);
+$positions: (
+  "left",
+  "right",
+);
+$colors: (
+  "light",
+  "dark",
+  "gradient",
+  "transparent",
+);
 
-    .layout_participant_winner,
-    .layout_participant_self,
-    .layout_participant_winner_self,
-    .layout_participant_winner_self_last {
-      position: relative;
+// Sidebar sections
+.pb_layout_kit_sidebar_section {
+  padding: $space_sm $space_xl;
+}
 
-      &::after {
-        content: "";
-        position: absolute;
-        top: 0;
-        width: 4px;
-        height: 100%;
-      }
-    }
+.pb_layout_kit_sidebar_section_border {
+  padding: $space_sm $space_xl;
+  border-bottom: 1px solid $border_light;
+}
 
-    .layout_participant_winner::after {
-      right: 0;
-      background: $product_6_highlight;
-    }
+.pb_layout_kit_sidebar_section_border_margin {
+  margin: $space_sm $space_xl;
+  border-bottom: 1px solid $border_light;
+}
 
-    .layout_participant_self::after {
-      left: 0;
-      background: $category_1;
-    }
-
-    .layout_participant_winner_self::after {
-      right: 0;
-      background: $product_6_highlight;
-    }
-
-    .layout_participant_winner_self_last::after {
-      left: 0;
-      background: $category_1;
-    }
-
-    .game_separator {
-      &::before, &::after {
-        height: 2px;
-      }
-    }
-
-    @media (max-width: $screen-md-max) {
-      flex-direction: column;
-      .layout_round_label {
-        display: block;
-      }
-      .layout_round .layout_game::after,
-      .connector_container,
-      .half_box,
-      .polygon_node {
-        display: none !important;
+// Generate all sidebar size/position/color combinations
+@each $name, $size in $layout_sizes {
+  @each $position in $positions {
+    @each $color in $colors {
+      .pb_layout_kit_sidebar_size_#{$name}_#{$position}_#{$color} {
+        @include layout_settings($size, $position, $color, "pb_layout_kit_sidebar_size_#{$name}_#{$position}_#{$color}");
       }
     }
   }
+}
 
-  &._sidebar{
-    $layout_sizes: (
-      "xs":   64px,
-      "sm":   200px,
-      "md":   250px,
-      "lg":   300px,
-      "xl":   365px,
-    );
-    $positions: (
-      "left",
-      "right",
-    );
-    $colors: (
-      "light",
-      "dark",
-      "gradient",
-      "transparent",
-    );
-
-    // Sections
-    &._section {
-      padding: $space_sm $space_xl;
-      &._border {
-        padding: $space_sm $space_xl;
-        border-bottom: 1px solid $border_light;
-        &._margin {
-          margin: $space_sm $space_xl;
-          border-bottom: 1px solid $border_light;
+// Collapse Settings for each position and breakpoint
+@each $position in $positions {
+  @each $breakpoint_name, $breakpoint in $breakpoints {
+    .pb_layout_kit_sidebar_#{$position}_collapse_#{$breakpoint_name} {
+      @include break_at($breakpoint) {
+        @if $position == 'left' {
+          grid-template-areas: "layout_collapsed_#{$breakpoint_name}_sidebar" "layout_collapsed_#{$breakpoint_name}_body";
+          grid-template-rows: auto 1fr;
+        } @else {
+          grid-template-areas: "layout_collapsed_#{$breakpoint_name}_body" "layout_collapsed_#{$breakpoint_name}_sidebar";
+          grid-template-rows: 1fr auto;
         }
-      }
-    }
-
-    // sidebar and Body
-    @each $name, $size in $layout_sizes {
-      &[class*=_size_#{$name}] {
-        @each $position in $positions {
-          &[class*=_#{$position}] {
-            @each $color in $colors {
-              &[class*=_#{$color}] {
-                @include layout_settings($size, $position, $color, "#{&}");
-              }
-            }
-          }
+        grid-template-columns: 1fr !important;
+        
+        &.full {
+          min-height: auto !important;
         }
-      }
-    }
-
-
-    // Collapse Settings
-    @each $position in $positions {
-      @each $breakpoint_name, $breakpoint in $breakpoints {
-        &[class*=_#{$position}_collapse_#{$breakpoint_name}] {
-          @include break_at($breakpoint) {
-            @if $position == 'left' {
-              grid-template-areas: "layout_collapsed_#{$breakpoint_name}_sidebar" "layout_collapsed_#{$breakpoint_name}_body";
-              grid-template-rows: auto 1fr;
-
-            } @else {
-              grid-template-areas: "layout_collapsed_#{$breakpoint_name}_body" "layout_collapsed_#{$breakpoint_name}_sidebar";
-              grid-template-rows: 1fr auto;
-            }
-            grid-template-columns: 1fr !important;
-            &.full {
-              min-height: auto !important;
-            }
-            .layout_sidebar {
-              grid-area: "layout_collapsed_#{$breakpoint_name}_sidebar";
-              border-width: 0 0 1px 0;
-            }
-            .layout_body {
-              grid-area: "layout_collapsed_#{$breakpoint_name}_body";
-            }
-          }
+        
+        .layout_sidebar {
+          grid-area: "layout_collapsed_#{$breakpoint_name}_sidebar";
+          border-width: 0 0 1px 0;
+        }
+        
+        .layout_body {
+          grid-area: "layout_collapsed_#{$breakpoint_name}_body";
         }
       }
     }
