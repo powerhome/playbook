@@ -1,22 +1,8 @@
-.pb_date_range_inline_kit {
-  &._center  {
-    & > .pb_caption,
-    & > .pb_body {
-      text-align: center;
-    }
-    & > .pb_date_range_inline_wrapper {
-      justify-content: center;
-    }
-  }
-  &._right {
-    & > .pb_caption,
-    & > .pb_body {
-      text-align: right;
-    }
-    & > .pb_date_range_inline_wrapper {
-      justify-content: flex-end;
-    }
-  }
+.pb_date_range_inline_kit,
+.pb_date_range_inline_kit_left,
+.pb_date_range_inline_kit_center,
+.pb_date_range_inline_kit_right,
+.pb_date_range_inline_kit_vertical {
   .pb_date_range_inline_wrapper {
     display: flex;
     align-items: center;
@@ -30,5 +16,25 @@
     .pb_date_range_inline_icon {
       margin-right: $space_xs/2;
     }
+  }
+}
+
+.pb_date_range_inline_kit_center {
+  & > .pb_caption_kit,
+  & > .pb_body_kit {
+    text-align: center;
+  }
+  & > .pb_date_range_inline_wrapper {
+    justify-content: center;
+  }
+}
+
+.pb_date_range_inline_kit_right {
+  & > .pb_caption_kit,
+  & > .pb_body_kit {
+    text-align: right;
+  }
+  & > .pb_date_range_inline_wrapper {
+    justify-content: flex-end;
   }
 }
