@@ -24,17 +24,11 @@ module Playbook
                      default: "none",
                      deprecated: true
 
-      prop :gap, type: Playbook::Props::Enum,
-                 values: %w[xxs xs sm md lg xl none],
-                 default: "none"
+      prop :gap
 
-      prop :row_gap, type: Playbook::Props::Enum,
-                     values: %w[xxs xs sm md lg xl none],
-                     default: "none"
+      prop :row_gap
 
-      prop :column_gap, type: Playbook::Props::Enum,
-                        values: %w[xxs xs sm md lg xl none],
-                        default: "none"
+      prop :column_gap
 
       prop :reverse, type: Playbook::Props::Boolean,
                      default: false
@@ -173,7 +167,7 @@ module Playbook
       end
 
       def gap_class
-        if gap == "none"
+        if gap == "none" || gap.nil? || gap.is_a?(Hash)
           nil
         else
           "pb_flex_kit_gap_#{gap}"
@@ -181,7 +175,7 @@ module Playbook
       end
 
       def row_gap_class
-        if row_gap == "none"
+        if row_gap == "none" || row_gap.nil? || row_gap.is_a?(Hash)
           nil
         else
           "pb_flex_kit_rowGap_#{row_gap}"
@@ -189,7 +183,7 @@ module Playbook
       end
 
       def column_gap_class
-        if column_gap == "none"
+        if column_gap == "none" || column_gap.nil? || column_gap.is_a?(Hash)
           nil
         else
           "pb_flex_kit_columnGap_#{column_gap}"

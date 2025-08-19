@@ -20,21 +20,9 @@ RSpec.describe Playbook::PbFlex::Flex do
       .with_default("none")
       .with_values("start", "center", "end", "stretch", "none", "baseline")
   }
-  it {
-    is_expected.to define_enum_prop(:gap)
-      .with_default("none")
-      .with_values("xxs", "xs", "sm", "md", "lg", "xl", "none")
-  }
-  it {
-    is_expected.to define_enum_prop(:row_gap)
-      .with_default("none")
-      .with_values("xxs", "xs", "sm", "md", "lg", "xl", "none")
-  }
-  it {
-    is_expected.to define_enum_prop(:column_gap)
-      .with_default("none")
-      .with_values("xxs", "xs", "sm", "md", "lg", "xl", "none")
-  }
+  it { is_expected.to define_prop(:gap) }
+  it { is_expected.to define_prop(:row_gap) }
+  it { is_expected.to define_prop(:column_gap) }
   it { is_expected.to define_boolean_prop(:inline).with_default(false) }
   it {
     is_expected.to define_enum_prop(:orientation)
