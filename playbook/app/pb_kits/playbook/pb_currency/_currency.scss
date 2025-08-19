@@ -1,38 +1,65 @@
-.pb_currency_kit {
-  &._center  {
-    & > .pb_caption,
-    & > .pb_title,
-    & > .pb_body {
+.pb_currency_kit,
+.pb_currency_kit_left_sm,
+.pb_currency_kit_left_md,
+.pb_currency_kit_left_lg,
+.pb_currency_kit_center_sm,
+.pb_currency_kit_center_md,
+.pb_currency_kit_center_lg,
+.pb_currency_kit_right_sm,
+.pb_currency_kit_right_md,
+.pb_currency_kit_right_lg {
+  
+  // Center alignment styles
+  &.pb_currency_kit_center_sm,
+  &.pb_currency_kit_center_md,
+  &.pb_currency_kit_center_lg {
+    text-align: center;
+    & > .pb_caption_kit,
+    & > .pb_title_kit,
+    & > .pb_body_kit {
       text-align: center;
     }
-    & > .pb_currency_wrapper {
+    & > .pb_currency_wrapper,
+    & > .pb_currency_wrapper_deemphasized,
+    & > .pb_currency_wrapper_light,
+    & > .pb_currency_wrapper_bold {
       justify-content: center;
     }
   }
 
-  &._right {
-    & > .pb_caption,
-    & > .pb_title,
-    & > .pb_body {
+  // Right alignment styles
+  &.pb_currency_kit_right_sm,
+  &.pb_currency_kit_right_md,
+  &.pb_currency_kit_right_lg {
+    text-align: right;
+    & > .pb_caption_kit,
+    & > .pb_title_kit,
+    & > .pb_body_kit {
       text-align: right;
     }
-    & > .pb_currency_wrapper {
+    & > .pb_currency_wrapper,
+    & > .pb_currency_wrapper_deemphasized,
+    & > .pb_currency_wrapper_light,
+    & > .pb_currency_wrapper_bold {
       justify-content: flex-end;
     }
   }
 
-  .pb_currency_wrapper {
+  .pb_currency_wrapper,
+  .pb_currency_wrapper_deemphasized,
+  .pb_currency_wrapper_light,
+  .pb_currency_wrapper_bold {
     display: flex;
     align-items: baseline;
 
-    &._deemphasized {
-      .pb_body_kit, .pb_body_kit {
+    &.pb_currency_wrapper_deemphasized {
+      .pb_body_kit {
         &:not(.dark) {
           color: $text_lt_default;
         }
       }
 
-      .pb_body_kit._light {
+      .pb_body_kit.pb_body_light {
         font-weight: $regular;
       }
 
@@ -41,8 +68,9 @@
       }
     }
 
-    &._light {
-      .pb_body_kit, .pb_title_kit {
+    &.pb_currency_wrapper_light {
+      .pb_body_kit, 
+      .pb_title_kit {
         color: $text_lt_light;
         font-weight: $regular;
       }
@@ -52,9 +80,14 @@
       }
     }
 
-    &._bold {
-      .pb_body_kit, ._light{
+    &.pb_currency_wrapper_bold {
+      .pb_body_kit,
+      .pb_body_light {
         color: $text_lt_default;
+        font-weight: $bolder;
+      }
+      
+      .pb_title_kit {
         font-weight: $bolder;
       }
     }
@@ -69,29 +102,81 @@
     }
   }
 
-  &._sm {
-    .pb_currency_wrapper._deemphasized {
+  // Small size specific styles
+  &.pb_currency_kit_sm,
+  &.pb_currency_kit_left_sm,
+  &.pb_currency_kit_center_sm,
+  &.pb_currency_kit_right_sm {
+    .pb_currency_wrapper_deemphasized {
       .pb_title_kit {
         font-weight: $regular;
       }
     }
+    
+    .pb_currency_wrapper,
+    .pb_currency_wrapper_deemphasized,
+    .pb_currency_wrapper_light,
+    .pb_currency_wrapper_bold {
+      .pb_currency_value {
+        line-height: 1.4;
+        padding-left: $space_xs - 7px;
+        padding-right: $space_xs - 7px;
+      }
+    }
   }
 
-  &._lg .pb_currency_wrapper .pb_currency_value {
-    line-height: .9;
-    padding-left: $space_xs - 7px;
-    padding-right: $space_xs - 7px;
+  // Medium size specific styles
+  &.pb_currency_kit_md,
+  &.pb_currency_kit_left_md,
+  &.pb_currency_kit_center_md,
+  &.pb_currency_kit_right_md {
+    .pb_currency_wrapper,
+    .pb_currency_wrapper_deemphasized,
+    .pb_currency_wrapper_light,
+    .pb_currency_wrapper_bold {
+      .pb_currency_value {
+        line-height: 1.2;
+        padding-left: $space_xs - 7px;
+        padding-right: $space_xs - 7px;
+      }
+    }
   }
 
-  &._md .pb_currency_wrapper .pb_currency_value {
-    line-height: 1.2;
-    padding-left: $space_xs - 7px;
-    padding-right: $space_xs - 7px;
+  // Large size specific styles
+  &.pb_currency_kit_lg,
+  &.pb_currency_kit_left_lg,
+  &.pb_currency_kit_center_lg,
+  &.pb_currency_kit_right_lg {
+    .pb_currency_wrapper,
+    .pb_currency_wrapper_deemphasized,
+    .pb_currency_wrapper_light,
+    .pb_currency_wrapper_bold {
+      .pb_currency_value {
+        line-height: .9;
+        padding-left: $space_xs - 7px;
+        padding-right: $space_xs - 7px;
+      }
+    }
   }
+}
 
-  &._sm .pb_currency_wrapper .pb_currency_value {
-    line-height: 1.4;
-    padding-left: $space_xs - 7px;
-    padding-right: $space_xs - 7px;
+// Bold variant - apply bold styling to all caption labels in currency components with bold wrappers
+.pb_currency_kit .pb_caption_kit {
+  &:has(~ .pb_currency_wrapper_bold) {
+    font-weight: $bolder;
+  }
+}
+
+.pb_currency_kit_left_sm .pb_caption_kit,
+.pb_currency_kit_left_md .pb_caption_kit,
+.pb_currency_kit_left_lg .pb_caption_kit,
+.pb_currency_kit_center_sm .pb_caption_kit,
+.pb_currency_kit_center_md .pb_caption_kit,
+.pb_currency_kit_center_lg .pb_caption_kit,
+.pb_currency_kit_right_sm .pb_caption_kit,
+.pb_currency_kit_right_md .pb_caption_kit,
+.pb_currency_kit_right_lg .pb_caption_kit {
+  &:has(~ .pb_currency_wrapper_bold) {
+    font-weight: $bolder;
   }
 }
