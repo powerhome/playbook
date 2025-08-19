@@ -5,92 +5,101 @@
 @import "../tokens/colors";
 @import "../tokens/opacity";
 
-.pb_button_toolbar{
-
-  // Horizontal =============
-
-  &._horizontal {
-    display: inline-flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: flex-start;
-    & > .pb_button  {
-      &:not(:last-child){
-        border-bottom-right-radius: 0;
-        border-top-right-radius: 0;
-        border-right-width: 0;
-      }
-      &:not(:first-child){
-        border-bottom-left-radius: 0;
-        border-top-left-radius: 0;
-        border-left-width: 0;
-      }
-    }
-    &._primary {
-      & > .pb_button:not(:first-child)::before {
-        @include toolbar_border(false, $primary_border)
-      }  
-    }
-    &._secondary {
-      & > .pb_button:not(:first-child)::before {
-        @include toolbar_border(false, $secondary_border)
-      }
-    }
-    & > .pb_button:not(:first-child):hover::before,
-      .pb_button:hover + .pb_button::before {
-        opacity: 0
-      }
-  }
-
-  // Vertical =============
-
-  &._vertical {
-    display: inline-flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
-    & > .pb_button  {
-      display: block;
-      flex-grow: 1;
-      flex-shrink: 1;
-      flex-basis: auto;
-      width: 100%;
-      &:not(:last-child){
-        border-bottom-right-radius: 0;
-        border-bottom-left-radius: 0;
-        border-bottom-width: 0;
-      }
-      &:not(:first-child){
-        border-top-right-radius: 0;
-        border-top-left-radius: 0;
-        border-top-width: 0;
-      }
-    }
-    &._primary {
-      & > .pb_button:not(:first-child)::before {
-        @include toolbar_border(true, $primary_border)
-      }
-    }
-    &._secondary {
-      & > .pb_button:not(:first-child)::before {
-        @include toolbar_border(true, $secondary_border)
-      }
-    }
-    & > .pb_button:not(:first-child):hover::before,
-    .pb_button:hover + .pb_button::before {
-      opacity: 0
-    }
-  }
-
-  // Hover =============
+// Horizontal toolbars
+.pb_button_toolbar_kit_horizontal_primary,
+.pb_button_toolbar_kit_horizontal_secondary {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
   
-  & > .pb_button  {
+  & > .pb_button_kit {
+    &:not(:last-child){
+      border-bottom-right-radius: 0;
+      border-top-right-radius: 0;
+      border-right-width: 0;
+    }
+    &:not(:first-child){
+      border-bottom-left-radius: 0;
+      border-top-left-radius: 0;
+      border-left-width: 0;
+    }
+  }
+  
+  & > .pb_button_kit:not(:first-child):hover::before,
+  .pb_button_kit:hover + .pb_button_kit::before {
+    opacity: 0
+  }
+}
+
+.pb_button_toolbar_kit_horizontal_primary {
+  & > .pb_button_kit:not(:first-child)::before {
+    @include toolbar_border(false, $primary_border)
+  }  
+}
+
+.pb_button_toolbar_kit_horizontal_secondary {
+  & > .pb_button_kit:not(:first-child)::before {
+    @include toolbar_border(false, $secondary_border)
+  }
+}
+
+// Vertical toolbars
+.pb_button_toolbar_kit_vertical_primary,
+.pb_button_toolbar_kit_vertical_secondary {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  
+  & > .pb_button_kit {
+    display: block;
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: auto;
+    width: 100%;
+    &:not(:last-child){
+      border-bottom-right-radius: 0;
+      border-bottom-left-radius: 0;
+      border-bottom-width: 0;
+    }
+    &:not(:first-child){
+      border-top-right-radius: 0;
+      border-top-left-radius: 0;
+      border-top-width: 0;
+    }
+  }
+  
+  & > .pb_button_kit:not(:first-child):hover::before,
+  .pb_button_kit:hover + .pb_button_kit::before {
+    opacity: 0
+  }
+}
+
+.pb_button_toolbar_kit_vertical_primary {
+  & > .pb_button_kit:not(:first-child)::before {
+    @include toolbar_border(true, $primary_border)
+  }
+}
+
+.pb_button_toolbar_kit_vertical_secondary {
+  & > .pb_button_kit:not(:first-child)::before {
+    @include toolbar_border(true, $secondary_border)
+  }
+}
+
+// Button hover styles for all toolbars
+.pb_button_toolbar_kit_horizontal_primary,
+.pb_button_toolbar_kit_horizontal_secondary,
+.pb_button_toolbar_kit_vertical_primary,
+.pb_button_toolbar_kit_vertical_secondary {
+  & > .pb_button_kit {
     @media (hover:hover) {
       &:hover {
         background-color:darken($royal, 20%);
       }
     }
-    &.secondary {
+    &.pb_button_secondary {
       @media (hover:hover) {
         &:hover {
           background-color:rgba($primary_action, $opacity_3)
