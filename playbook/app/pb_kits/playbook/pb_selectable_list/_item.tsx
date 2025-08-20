@@ -82,6 +82,7 @@ const SelectableListItem = ({
             <Checkbox
                 checked={checkedState}
                 id={id}
+                marginLeft="xs"
                 name={name}
                 onChange={handleChecked}
                 // eslint suppressor, text is needed to display on screen
@@ -101,6 +102,7 @@ const SelectableListItem = ({
                 defaultChecked={defaultChecked}
                 id={id}
                 label={label}
+                marginLeft="xs"
                 name={name}
                 onChange={onChange}
                 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
