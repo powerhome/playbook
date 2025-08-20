@@ -41,7 +41,6 @@
       </div>
     <% end %>
 
-    <!-- Inline -->
     <% if object.hide_icon && object.inline %>
       <!-- Plus Icon -->
       <div
@@ -69,29 +68,81 @@
 
   <%= javascript_tag do %>
     (function() {
+      // Add CSS for flipping the calendar
+      const addFlipStyle = () => {
+        if (document.getElementById('flatpickr-flip-style')) return;
+        const style = document.createElement('style');
+        style.id = 'flatpickr-flip-style';
+        style.textContent = `
+          .flatpickr-calendar.open.openTop {
+            top: auto !important;
+            bottom: calc(100% + 2px) !important;
+          }
+          .flatpickr-calendar.open.openTop::before {
+            transform: rotate(180deg) !important;
+            top: auto !important;
+            bottom: -6px !important;
+          }
+        `;
+        document.head.appendChild(style);
+      };
+
+      // Apply flip logic when calendar opens
+      const applyFlipOnOpen = (input) => {
+        const fp = input._flatpickr;
+        if (!fp || fp.__flipHookAdded) return;
+        fp.__flipHookAdded = true;
+
+        fp.config.onOpen.push(() => {
+          const wrapper = input.closest('.flatpickr-wrapper') || input;
+          const { bottom } = wrapper.getBoundingClientRect();
+          const spaceBelow = window.innerHeight - bottom;
+          const cal = fp.calendarContainer;
+          const calHeight = cal.getBoundingClientRect().height;
+
+          if (spaceBelow < calHeight) {
+            cal.classList.add('openTop');
+          } else {
+            cal.classList.remove('openTop');
+          }
+        });
+      };
+
+      // Clear Flatpickr input on error
+      const clearErrorInput = () => {
+        const input = document.getElementById("<%= object.picker_id %>");
+        if (input && input.closest('.error') && input._flatpickr) {
+          input._flatpickr.clear();
+        }
+      };
+
+      // Initialize date picker and apply logic
       const loadDatePicker = () => {
-        datePickerHelper(<%= object.date_picker_config %>, "<%= object.scroll_container %>")
+        addFlipStyle();
+        datePickerHelper(<%= object.date_picker_config %>, "<%= object.scroll_container %>");
+
+        const input = document.getElementById("<%= object.picker_id %>");
+        if (input) {
+          applyFlipOnOpen(input);
+          clearErrorInput();
+        }
 
         if (<%= object.selection_type == "quickpick" %>) {
-          document.getElementById("<%= object.picker_id %>").addEventListener("change", ({ target }) => {
-            const startDate = document.getElementById("<%= object.start_date_id %>")
-            const endDate = document.getElementById("<%= object.end_date_id %>")
-            const splittedValue = target.value.split(" to ")
-            startDate.value = splittedValue[0]
-            endDate.value = splittedValue[1] ? splittedValue[1] : splittedValue[0]
-          })
+          input.addEventListener("change", ({ target }) => {
+            const startDate = document.getElementById("<%= object.start_date_id %>");
+            const endDate = document.getElementById("<%= object.end_date_id %>");
+            const splittedValue = target.value.split(" to ");
+            startDate.value = splittedValue[0];
+            endDate.value = splittedValue[1] ? splittedValue[1] : splittedValue[0];
+          });
         }
-      }
+      };
 
-      window.addEventListener("DOMContentLoaded", () => {
-        loadDatePicker()
-      })
-
-      if (<%= !object.custom_event_type.empty? %>) {
-        window.addEventListener("<%= object.custom_event_type %>", () => {
-          loadDatePicker()
-        })
-      }
-    })()
+      // Event listeners
+      window.addEventListener("DOMContentLoaded", loadDatePicker);
+      <% if !object.custom_event_type.empty? %>
+        window.addEventListener("<%= object.custom_event_type %>", loadDatePicker);
+      <% end %>
+    })();
   <% end %>
 <% end %>
