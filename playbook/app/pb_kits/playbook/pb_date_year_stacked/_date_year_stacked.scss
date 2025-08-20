@@ -1,17 +1,20 @@
-.pb_date_year_stacked {
-  &._left {
-    & > .pb_title, & > .pb_body {
-      text-align: left;
-    }
+.pb_date_year_stacked_left {
+  & > .pb_title_kit, 
+  & > .pb_body_kit_light {
+    text-align: left !important;
   }
-  &._center {
-    & > .pb_title, & > .pb_body {
-      text-align: center;
-    }
+}
+
+.pb_date_year_stacked_center {
+  & > .pb_title_kit, 
+  & > .pb_body_kit_light {
+    text-align: center !important;
   }
-  &._right  {
-    & > .pb_title, & > .pb_body {
-      text-align: right;
-    }
+}
+
+.pb_date_year_stacked_right {
+  & > .pb_title_kit, 
+  & > .pb_body_kit_light {
+    text-align: right !important;
   }
 }

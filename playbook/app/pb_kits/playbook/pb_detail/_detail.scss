@@ -2,29 +2,16 @@
 @import "../tokens/titles";
 @import "../tokens/typography";
 
-.pb_detail_kit{
+.pb_detail_kit,
+.pb_detail_kit_color_light,
+.pb_detail_kit_color_default,
+.pb_detail_kit_color_lighter,
+.pb_detail_kit_color_link,
+.pb_detail_kit_color_error,
+.pb_detail_kit_color_success {
   @include pb_detail;
 
-  @each $color_name, $color_value in $pb_detail_colors {
-    &[class*=color_#{$color_name}] {
-      @include pb_detail($color_value);
-    }
-  }
-
-  @each $dark_color_name, $dark_color_value in $pb_dark_detail_colors{
-    &[class*=color_#{$dark_color_name}].dark{
-      @include pb_detail($dark_color_value)
-    }
-  }
-
-  // Styles
-  &.bold,
-  &.bold.dark,
-  b,
-  strong {
-    font-weight: $bold;
-  }
-
+  // Base styles
   a {
     color: $primary;
     &:hover {
@@ -40,5 +27,83 @@
   small {
     font-size: $font_smaller;
     letter-spacing: $lspace_loose;
+  }
+}
+
+// Color variations - Light Mode
+.pb_detail_kit_color_light {
+  @include pb_detail($text_lt_light);
+}
+
+.pb_detail_kit_color_default {
+  @include pb_detail($text_lt_default);
+}
+
+.pb_detail_kit_color_lighter {
+  @include pb_detail($text_lt_lighter);
+}
+
+.pb_detail_kit_color_link {
+  @include pb_detail($primary);
+}
+
+.pb_detail_kit_color_error {
+  @include pb_detail($error);
+}
+
+.pb_detail_kit_color_success {
+  @include pb_detail($text_lt_success_sm);
+}
+
+// Color variations - Dark Mode
+.pb_detail_kit.dark.pb_detail_kit_color_light,
+.pb_detail_kit_color_light.dark {
+  @include pb_detail($text_dk_light);
+}
+
+.pb_detail_kit.dark.pb_detail_kit_color_default,
+.pb_detail_kit_color_default.dark {
+  @include pb_detail($text_dk_default);
+}
+
+.pb_detail_kit.dark.pb_detail_kit_color_lighter,
+.pb_detail_kit_color_lighter.dark {
+  @include pb_detail($text_dk_lighter);
+}
+
+.pb_detail_kit.dark.pb_detail_kit_color_link,
+.pb_detail_kit_color_link.dark {
+  @include pb_detail($active_dark);
+}
+
+.pb_detail_kit.dark.pb_detail_kit_color_error,
+.pb_detail_kit_color_error.dark {
+  @include pb_detail($error_dark);
+}
+
+.pb_detail_kit.dark.pb_detail_kit_color_success,
+.pb_detail_kit_color_success.dark {
+  @include pb_detail($text_dk_success_sm);
+}
+
+// Bold styles
+.pb_detail_kit.bold,
+.pb_detail_kit_color_light.bold,
+.pb_detail_kit_color_default.bold,
+.pb_detail_kit_color_lighter.bold,
+.pb_detail_kit_color_link.bold,
+.pb_detail_kit_color_error.bold,
+.pb_detail_kit_color_success.bold,
+.pb_detail_kit.bold.dark,
+.pb_detail_kit_color_light.bold.dark,
+.pb_detail_kit_color_default.bold.dark,
+.pb_detail_kit_color_lighter.bold.dark,
+.pb_detail_kit_color_link.bold.dark,
+.pb_detail_kit_color_error.bold.dark,
+.pb_detail_kit_color_success.bold.dark {
+  font-weight: $bold;
+  
+  b, strong {
+    font-weight: $bold;
   }
 }
