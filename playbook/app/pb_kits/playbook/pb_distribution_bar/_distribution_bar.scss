@@ -1,6 +1,7 @@
 @import "../tokens/colors";
 
-.pb_distribution_bar {
+.pb_distribution_bar_lg,
+.pb_distribution_bar_sm {
   $bar_colors: map-merge($data_colors, $status_colors);
   $small_bar: 8px;
   $large_bar: 36px;
@@ -27,10 +28,12 @@
       border-bottom-right-radius: $large_bar;
     }
   }
-  &._sm {
-    height: $small_bar;
-  }
-  &._lg {
-    height: $large_bar;
-  }
+}
+
+.pb_distribution_bar_sm {
+  height: 8px;
+}
+
+.pb_distribution_bar_lg {
+  height: 36px;
 }
