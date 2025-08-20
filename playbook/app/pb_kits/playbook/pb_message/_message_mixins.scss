@@ -1,19 +1,18 @@
 @import "../tokens/spacing";
 
-@mixin pb_message {
+@mixin pb_message($with_avatar: false) {
   display: flex;
   justify-content: flex-start;
 
   .content_wrapper {
     width: 100%;
     font-size: $font_base - 1;
-
-    .pull-left {
+    @if $with_avatar {
       margin-left: $space-xs;
     }
 
-    .pb_flex_ {
-      width: 100%;
+    .pull-left {
+      margin-left: $space-xs;
     }
 
     .message_text {
@@ -22,12 +21,6 @@
 
     .message_title {
       font-size: $font_small;
-    }
-  }
-
-  &._avatar {
-    .content_wrapper {
-      margin-left: $space-xs;
     }
   }
 
