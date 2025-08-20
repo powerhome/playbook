@@ -13,7 +13,14 @@ $confirmation_toast_colors: (
   tip:          transparent,
 );
 
-.pb_fixed_confirmation_toast_kit {
+.pb_fixed_confirmation_toast_kit_success,
+.pb_fixed_confirmation_toast_kit_success_multi_line,
+.pb_fixed_confirmation_toast_kit_error,
+.pb_fixed_confirmation_toast_kit_error_multi_line,
+.pb_fixed_confirmation_toast_kit_neutral,
+.pb_fixed_confirmation_toast_kit_neutral_multi_line,
+.pb_fixed_confirmation_toast_kit_tip,
+.pb_fixed_confirmation_toast_kit_tip_multi_line {
   display: inline-flex;
   justify-content: center;
   align-items: center;
@@ -63,34 +70,63 @@ $confirmation_toast_colors: (
       right: $space_md;
     }
   }
+}
 
-  @each $color_name, $color_value in $confirmation_toast_colors {
-    &[class*=_#{$color_name}]  {
-      background: $color_value;
-      @if $color_name == "tip" {
-        @include gradient;
-      }
+.pb_fixed_confirmation_toast_kit_neutral,
+.pb_fixed_confirmation_toast_kit_neutral_multi_line {
+  background: $text_lt_light;
 
-      .pb_fixed_confirmation_toast_text {
-        color: $white;
-        margin: 0 $space_md 0 $space_md;
-        text-align: center;
-        white-space: pre;
-      }
+  .pb_icon {
+    color: $white !important;
+  }
+}
 
-      .pb_icon {
-        color: $white;
-      }
+.pb_fixed_confirmation_toast_text {
+    color: $white !important;
+    margin: 0 $space_md 0 $space_md !important;
+    text-align: center;
+    white-space: pre;
+  }
 
-      &._multi_line .pb_fixed_confirmation_toast_text {
-        color: $white;
-        overflow: hidden;
-        display: -webkit-box;
-        -webkit-line-clamp: 3;
-        -webkit-box-orient: vertical;
-        white-space: normal;
-        text-align: left;
-      }
-    }
+.pb_fixed_confirmation_toast_kit_success,
+.pb_fixed_confirmation_toast_kit_success_multi_line {
+  background: $success;
+  .pb_icon {
+    color: $white !important;
+  }
+}
+
+.pb_fixed_confirmation_toast_kit_error,
+.pb_fixed_confirmation_toast_kit_error_multi_line {
+  background: $error;
+
+
+  .pb_icon {
+    color: $white !important;
+  }
+}
+
+.pb_fixed_confirmation_toast_kit_tip,
+.pb_fixed_confirmation_toast_kit_tip_multi_line {
+  background: transparent;
+    .pb_icon {
+    color: $white !important;
+  }
+  @include gradient;
+}
+
+.pb_fixed_confirmation_toast_kit_success_multi_line,
+.pb_fixed_confirmation_toast_kit_error_multi_line,
+.pb_fixed_confirmation_toast_kit_neutral_multi_line,
+.pb_fixed_confirmation_toast_kit_tip_multi_line {
+  .pb_fixed_confirmation_toast_text {
+    color: $white !important;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+    white-space: normal;
+    text-align: left;
   }
 }
