@@ -138,7 +138,7 @@ $overlay_colors: (
 
     @each $key, $value in $opacity {
       &.#{$key} {
-        .overlay {
+        [class^=overlay] {
           opacity: $value;
         }
       }
