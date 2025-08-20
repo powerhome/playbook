@@ -9,26 +9,76 @@
   background: $color;
 }
 
-@mixin indicator-colors($colors-list) {
-  @each $name, $color in $colors-list {
-    &[class*=#{$name}] {
-      .pb_legend_indicator_circle {
-        @include pb_button($color);
-      }
+// Base class for custom colors (no color suffix)
+.pb_legend_kit {
+  .pb_legend_indicator_circle_custom {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 5px;
+  }
+}
+
+// Data colors
+@each $name, $color in $data_colors {
+  .pb_legend_kit_#{$name} {
+    .pb_legend_indicator_circle {
+      @include pb_button($color);
+    }
+    
+    .pb_legend_indicator_circle_custom {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      border-radius: 5px;
     }
   }
 }
 
-.pb_legend_kit {
-  @include indicator-colors($data_colors);
-  @include indicator-colors($status_colors);
-  @include indicator-colors($product_colors);
-  @include indicator-colors($category_colors);
+// Status colors
+@each $name, $color in $status_colors {
+  .pb_legend_kit_#{$name} {
+    .pb_legend_indicator_circle {
+      @include pb_button($color);
+    }
+    
+    .pb_legend_indicator_circle_custom {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      border-radius: 5px;
+    }
+  }
+}
 
-  .pb_legend_indicator_circle_custom {
-  display: inline-block;
-  width: 10px;
-  height: 10px;
-  border-radius: 5px;
+// Product colors
+@each $name, $color in $product_colors {
+  .pb_legend_kit_#{$name} {
+    .pb_legend_indicator_circle {
+      @include pb_button($color);
+    }
+    
+    .pb_legend_indicator_circle_custom {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      border-radius: 5px;
+    }
+  }
+}
+
+// Category colors
+@each $name, $color in $category_colors {
+  .pb_legend_kit_#{$name} {
+    .pb_legend_indicator_circle {
+      @include pb_button($color);
+    }
+    
+    .pb_legend_indicator_circle_custom {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      border-radius: 5px;
+    }
   }
 }
