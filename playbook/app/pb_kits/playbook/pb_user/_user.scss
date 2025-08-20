@@ -3,51 +3,51 @@
 @import "../pb_avatar/avatar";
 @import "../tokens/spacing";
 
-.pb_user_kit{
+[class^=pb_user_kit]{
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
   flex-direction: row;
 
   // Orientation =============
-  &._vertical  {
+  &[class*=_vertical]  {
     flex-direction: column;
 
-    &._center  {
+    &[class*=_center]  {
       align-items: center;
 
-      .pb_title,
-      .pb_body {
+      [class^=pb_title],
+      [class^=pb_body] {
         text-align: center;
       }
     }
 
-    &._right  {
+    &[class*=_right]  {
       align-items: flex-end;
 
-      .pb_title,
-      .pb_body {
+      [class^=pb_title],
+      [class^=pb_body] {
         text-align: right;
       }
     }
 
-    .pb_avatar {
+    [class^=pb_avatar] {
       margin-bottom: $space-xs;
     }
   }
 
-  &._horizontal  {
+  &[class*=_horizontal]  {
     align-items: center;
 
-    &._center  {
+    &[class*=_center]  {
       justify-content: center;
     }
 
-    &._right  {
+    &[class*=_right]  {
       justify-content: flex-end;
     }
 
-    .pb_avatar {
+    [class^=pb_avatar] {
       margin-right: $space-sm;
     }
   }

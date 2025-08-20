@@ -104,7 +104,7 @@ $tooltip_shadow: rgba(60, 106, 172, 0.18);
   }
 
   &.dark,
-  &._dark{
+  &[class*=_dark]{
     ~.tooltip_tooltip,
     .tooltip_tooltip {
       //react

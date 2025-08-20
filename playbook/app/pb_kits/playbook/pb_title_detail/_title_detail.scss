@@ -1,16 +1,16 @@
 @import "../pb_title/title";
 @import "../pb_body/body";
 
-.pb_title_detail_kit{
-  &._center  {
-    & > .pb_title,
-    & > .pb_body {
+[class^=pb_title_detail_kit]{
+  &[class*=_center]  {
+    & > [class^=pb_title],
+    & > [class^=pb_body] {
       text-align: center;
     }
   }
-  &._right  {
-    & > .pb_title,
-    & > .pb_body {
+  &[class*=_right]  {
+    & > [class^=pb_title],
+    & > [class^=pb_body] {
       text-align: right;
     }
   }

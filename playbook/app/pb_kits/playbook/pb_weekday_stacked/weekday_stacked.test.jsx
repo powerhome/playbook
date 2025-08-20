@@ -48,7 +48,7 @@ describe("WeekdayStacked Kit", () => {
     );
 
     const kit = screen.getByTestId(testId);
-    const text = kit.querySelector(".pb_title_kit.pb_title_4");
+    const text = kit.querySelector(".pb_title_kit_size_4");
     expect(text.textContent).toEqual("1/1") 
   });
 
@@ -86,7 +86,7 @@ describe("WeekdayStacked Kit", () => {
     );
       
     const kit = screen.getByTestId(testId);
-    const text = kit.querySelector(".pb_title_kit.pb_title_4");
+    const text = kit.querySelector(".pb_title_kit_size_4");
     expect(text.textContent).toEqual("1") 
   });
 
@@ -99,7 +99,7 @@ describe("WeekdayStacked Kit", () => {
     );
       
     const kit = screen.getByTestId(testId);
-    const text = kit.querySelector(".pb_title_kit.pb_title_4");
+    const text = kit.querySelector(".pb_title_kit_size_4");
     expect(text.textContent).toEqual("Jan 1") 
   });
 });
