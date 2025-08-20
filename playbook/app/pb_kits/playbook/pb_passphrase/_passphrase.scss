@@ -9,7 +9,11 @@
     display: inline;
   }
 
-  .show-below- {
+  .show-below-xs,
+  .show-below-sm,
+  .show-below-md,
+  .show-below-lg,
+  .show-below-xl {
     display: none;
   }
   @each $breakpoint_name, $breakpoint in $breakpoints {
@@ -74,4 +78,3 @@
     }
   }
 }
-

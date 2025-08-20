@@ -80,7 +80,7 @@
     position: relative;
     display: block;
     &.error {
-      .pb_body_kit {
+      > .pb_body_kit_negative {
         margin-top: $space_xs / 2;
       }
       > select:first-child {
