@@ -1,4 +1,8 @@
-.pb_selectable_card_icon_kit {
+.pb_selectable_card_icon_kit,
+.pb_selectable_card_icon_kit_checked_disabled,
+.pb_selectable_card_icon_kit_checked_enabled,
+.pb_selectable_card_icon_kit_disabled,
+.pb_selectable_card_icon_kit_enabled {
 
 	text-align: center;
 	user-select: none;
@@ -42,7 +46,8 @@
       }
     }
 
-    &._disabled {
+    &.pb_selectable_card_icon_kit_disabled,
+    &.pb_selectable_card_icon_kit_checked_disabled {
       opacity: $opacity_6;
       cursor: not-allowed;
 
@@ -87,7 +92,11 @@
     margin-top: $space_xs;
   }
 
-  .pb_selectable_card_kit {
+  .pb_selectable_card_kit,
+  .pb_selectable_card_kit_checked_disabled,
+  .pb_selectable_card_kit_checked_enabled,
+  .pb_selectable_card_kit_disabled,
+  .pb_selectable_card_kit_enabled {
     margin-bottom: 0px !important;
   }
 }
