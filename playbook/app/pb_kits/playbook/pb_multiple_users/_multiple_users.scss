@@ -8,7 +8,8 @@ $pb_multiple_users_border_size: 1px;
 $pb_multiple_users_size: map-get($avatar-sizes, "xs");
 $pb_multiple_users_size_xxs: map-get($avatar-sizes, "xxs");
 
-.pb_multiple_users_kit {
+.pb_multiple_users_kit,
+.pb_multiple_users_kit_reverse {
   display: inline-flex;
 
   .multiple_users_badge_xs,
@@ -53,23 +54,23 @@ $pb_multiple_users_size_xxs: map-get($avatar-sizes, "xxs");
       border: $pb_multiple_users_border_size solid $white;
     }
 
-    @each $item in [1, 2, 3, 4, 5] {
-      &:nth-child(#{$item}) {
-        z-index: #{$item - 1};
-      }
-    }
+    &:nth-child(1) { z-index: 0; }
+    &:nth-child(2) { z-index: 1; }
+    &:nth-child(3) { z-index: 2; }
+    &:nth-child(4) { z-index: 3; }
+    &:nth-child(5) { z-index: 4; }
   }
+}
 
-  &._reverse {
-    flex-direction: row-reverse;
+.pb_multiple_users_kit_reverse {
+  flex-direction: row-reverse;
 
-    .pb_multiple_users_item {
-      margin-left: 0;
-      margin-right: $pb_multiple_users_overlap;
+  .pb_multiple_users_item {
+    margin-left: 0;
+    margin-right: $pb_multiple_users_overlap;
 
-      &:first-of-type {
-        margin-right: 0;
-      }
+    &:first-of-type {
+      margin-right: 0;
     }
   }
 }
