@@ -28,7 +28,11 @@ $pb_selectable_paddings: (
   py: ("padding-top", "padding-bottom")
 );
 
-.pb_selectable_card_kit {
+.pb_selectable_card_kit,
+.pb_selectable_card_kit_checked_disabled,
+.pb_selectable_card_kit_checked_enabled,
+.pb_selectable_card_kit_disabled,
+.pb_selectable_card_kit_enabled {
   display: block;
   margin-bottom: 0;
 
