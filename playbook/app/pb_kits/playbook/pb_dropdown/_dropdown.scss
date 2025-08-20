@@ -141,7 +141,7 @@
     }
 
     &.error {
-      .pb_body_kit {
+      [class*=pb_body_kit] {
         margin-top: $space_xs / 2;
       }
 
