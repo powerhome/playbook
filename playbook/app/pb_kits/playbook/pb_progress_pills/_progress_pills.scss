@@ -20,27 +20,29 @@
     align-items: center;
     margin-bottom: $space_xs;
 
-    .title {
+    .pb_title_kit {
       margin-right: $space_xs;
     }
   }
 
-  .pb_progress_pill {
+  .pb_progress_pill_active,
+  .pb_progress_pill_inactive {
     @include pb_progress_pill;
 
     &.full_width_pill {
       max-width: none;
     }
+  }
 
-    &._inactive {
-      background-color: $border_light;
-      &.dark {
+  .pb_progress_pill_inactive {
+    background-color: $border_light;
+    
+    &.dark {
       background-color: $border_dark;
-      }
     }
+  }
 
-    &._active {
-      background-color: $primary_action;
-    }
+  .pb_progress_pill_active {
+    background-color: $primary_action;
   }
 }
