@@ -3,7 +3,7 @@
 $transition-speed: 0.2s;
 $border_hover_color_dark: lighten($border_dark, 5%);
 
-.pb_table {
+[class^=pb_table] {
   &.table-sm,
   &.table-md,
   &.table-lg {

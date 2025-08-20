@@ -1,14 +1,14 @@
 @import "../tokens/spacing";
 
-.pb_source {
+.pb_source_kit {
   .pb__source_layout {
     display: flex;
     justify-content: flex-start;
     align-items: flex-start;
   }
 
-  .pb_icon_circle,
-  .pb_avatar {
+  .pb_icon_circle_kit,
+  .pb_avatar_kit {
     margin-right: $space-sm;
   }
 
@@ -21,7 +21,7 @@
       justify-content: flex-start;
       align-items: baseline;
 
-      .pb_body {
+      .pb_body_kit {
         margin-right: $space-xs;
       }
     }

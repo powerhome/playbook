@@ -1,4 +1,4 @@
-.pb_table:not(:has(colgroup)) {
+[class^=pb_table]:not(:has(colgroup)) {
   &.striped {
     tbody, .pb_table_tbody {
       tr:nth-child(odd):not(.pb_background_kit), .pb_table_tr:nth-child(odd):not(.pb_background_kit) {

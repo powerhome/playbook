@@ -1,6 +1,6 @@
 @import "../../tokens/colors";
 
-.pb_table {
+[class^=pb_table] {
   display: table;
 
   @each $name, $value in $cell-pad-list {

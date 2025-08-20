@@ -9,9 +9,9 @@ $text_align_values: (
   match-parent: match-parent,
 );
 
-.pb_table {
+[class^=pb_table] {
   thead, .pb_table_thead {
-    .pb_table_header_kit {
+    [class^=pb_table_header_kit] {
       @each $align_name, $align_value in $text_align_values {
         &[class*=_align_#{$align_name}] {
           text-align: $align_value;
@@ -31,9 +31,9 @@ $text_align_values: (
   padding: $space_xxs;
 }
 
-.pb_table {
+[class^=pb_table] {
   thead, .pb_table_thead {
-    .pb_th_active {
+    [class^=pb_th_active] {
       color: $primary !important;
     }
   }
