@@ -84,6 +84,7 @@ module Playbook
         class_names << "pb_button_active" if variant === "reaction" && highlight
 
         class_names.join(" ")
+        generate_classname(class_names.compact.join(" "), separator: " ")
       end
 
     private

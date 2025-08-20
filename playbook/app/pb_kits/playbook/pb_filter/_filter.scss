@@ -6,7 +6,7 @@
     padding: 0 $space_sm !important;
   }
 
-  .pb_button_kit._link {
+  .pb_button_kit.pb_button_link {
     flex-shrink:0;
     padding: 0 $space_xs !important;
     [id^="sort"] {
@@ -14,7 +14,7 @@
     }
   }
 
-  .pb_card_body_kit._md {
+  .pb_card_body_kit_md {
     padding: 0 !important;
   }
 }
