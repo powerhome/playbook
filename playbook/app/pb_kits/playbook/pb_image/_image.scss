@@ -9,50 +9,55 @@ $image-sizes: (
   "xl": 140px,
 );
 
-.pb_image_kit {
+.pb_image_kit,
+.pb_image_kit_size_xs,
+.pb_image_kit_size_sm,
+.pb_image_kit_size_md,
+.pb_image_kit_size_lg,
+.pb_image_kit_size_xl {
   position: relative;
   object-fit: cover;
 
-  @each $name, $size in $image-sizes {
-    &[class*=size_#{$name}] {
-      width: $size;
-      height: $size;
-      object-fit: cover;
-      position: relative;
-      flex-shrink: 0;
-      flex-grow: 0;
-      flex-basis: $size;
-    }
+  &.rounded {
+    border-radius: $border-rad-heaviest;
+  }
 
-    &[class*= rounded] {
-      border-radius: $border-rad-heaviest;
+  &.fade {
+    opacity: 0;
+    &.lazyloaded {
+      opacity: 1;
+      transition: opacity 300ms ease-in;
     }
+  }
 
-    &.fade {
-      opacity: 0;
-      &.lazyloaded {
-        opacity: 1;
-        transition: opacity 300ms ease-in;
-      }
+  &.blur {
+    filter: blur(5px);
+    &.lazyloaded {
+      -webkit-filter: blur(0);
+      filter: blur(0);
+      transition: filter 300ms ease-in;
     }
+  }
 
-    &.blur {
-      filter: blur(5px);
-      &.lazyloaded {
-        -webkit-filter: blur(0);
-        filter: blur(0);
-        transition: filter 300ms ease-in;
-      }
+  &.scale {
+    opacity: 0;
+    transform: scale(0.9);
+    &.lazyloaded {
+      opacity: 1;
+      transform: scale(1);
+      transition: 700ms ease-in;
     }
+  }
+}
 
-    &.scale {
-      opacity: 0;
-      transform: scale(0.9);
-      &.lazyloaded {
-        opacity: 1;
-        transform: scale(1);
-        transition: 700ms ease-in;
-      }
-    }
+@each $name, $size in $image-sizes {
+  .pb_image_kit_size_#{$name} {
+    width: $size;
+    height: $size;
+    object-fit: cover;
+    position: relative;
+    flex-shrink: 0;
+    flex-grow: 0;
+    flex-basis: $size;
   }
 }
