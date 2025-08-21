@@ -52,8 +52,8 @@ $image-sizes: (
 
 @each $name, $size in $image-sizes {
   .pb_image_kit_size_#{$name} {
-    width: $size;
-    height: $size;
+    width: $size !important;
+    height: $size !important;
     object-fit: cover;
     position: relative;
     flex-shrink: 0;
