@@ -8,7 +8,7 @@ module Playbook
                  default: "div"
 
       def classname
-        "layout_body"
+        generate_classname("layout_body")
       end
     end
   end

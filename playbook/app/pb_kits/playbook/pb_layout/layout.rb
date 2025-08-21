@@ -25,17 +25,17 @@ module Playbook
       def classname
         case layout
         when "collection"
-          "pb_layout_kit_collection"
+          generate_classname("pb_layout_kit_collection")
         when "kanban"
           classes = ["pb_layout_kit_kanban"]
           classes << "pb_layout_kit_kanban_responsive" if responsive
-          classes.join(" ")
+          generate_classname(classes.join(" "))
         when "collection_detail"
-          "pb_layout_kit_collection_detail"
+          generate_classname("pb_layout_kit_collection_detail")
         when "content"
-          "pb_layout_kit_content"
+          generate_classname("pb_layout_kit_content")
         when "masonry"
-          "pb_layout_kit_masonry"
+          generate_classname("pb_layout_kit_masonry")
         else
           # Sidebar layout
           classes = [
@@ -45,7 +45,7 @@ module Playbook
           classes << "pb_layout_kit_sidebar_transparent" if transparent
           classes << "pb_layout_kit_sidebar_full" if full
           classes << "layout_#{position}_collapse_#{collapse}"
-          classes.join(" ")
+          generate_classname(classes.join(" "))
         end
       end
     end

@@ -8,7 +8,7 @@ module Playbook
                   default: "sm"
 
       def classname
-        "layout_item layout_item_size_#{size}"
+        generate_classname("layout_item") + " layout_item_size_#{size}"
       end
     end
   end

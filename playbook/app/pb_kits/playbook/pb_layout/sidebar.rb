@@ -4,7 +4,7 @@ module Playbook
   module PbLayout
     class Sidebar < Playbook::KitBase
       def classname
-        "layout_sidebar"
+        generate_classname("layout_sidebar")
       end
     end
   end

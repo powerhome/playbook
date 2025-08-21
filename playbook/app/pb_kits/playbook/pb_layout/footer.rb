@@ -8,7 +8,7 @@ module Playbook
                  default: "div"
 
       def classname
-        "layout_footer"
+        generate_classname("layout_footer")
       end
     end
   end
