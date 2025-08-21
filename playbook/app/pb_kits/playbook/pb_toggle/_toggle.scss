@@ -46,7 +46,16 @@ $transition: .2s ease-in-out;
     }
 
     input {
-      display: none;
+      position: absolute;
+      opacity: 0;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+
+      &:focus + .pb_toggle_control {
+        box-shadow: 0px 0px 0px 2px $white, 0px 0px 0px 4px $primary;
+        outline: none;
+      }
 
       &:disabled + .pb_toggle_control {
         cursor: not-allowed;
@@ -61,7 +70,11 @@ $transition: .2s ease-in-out;
     }
 
     input:checked {
-      display: none;
+      position: absolute;
+      opacity: 0;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
 
       &:checked + .pb_toggle_control {
         border: $border_success;
@@ -71,6 +84,11 @@ $transition: .2s ease-in-out;
           left: $width / 2 + 2px;
           background-color: $white;
         }
+      }
+
+      &:checked:focus + .pb_toggle_control {
+        box-shadow: 0px 0px 0px 2px $white, 0px 0px 0px 4px $primary;
+        outline: none;
       }
 
       &:disabled + .pb_toggle_control {

@@ -6,11 +6,12 @@ const ToggleDefault = () => {
     <>
       <Toggle
           checked
+          tabIndex={0}
       />
 
       <br />
 
-      <Toggle />
+      <Toggle tabIndex={0} />
     </>
   )
 }

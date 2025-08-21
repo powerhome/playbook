@@ -23,6 +23,7 @@ type Props = {
   name?: string,
   onChange?: InputCallback<HTMLInputElement>,
   size?: "sm" | "md",
+  tabIndex?: number,
   value?: string,
 } & GlobalProps
 
@@ -40,6 +41,7 @@ const Toggle = ({
   // Function body here
   },
   size = 'sm',
+  tabIndex,
   value,
   ...props
 }: Props): React.ReactElement => {
@@ -73,6 +75,7 @@ const Toggle = ({
               disabled={disabled}
               name={name}
               onChange={onChange}
+              tabIndex={tabIndex}
               type="checkbox"
               value={value}
           />
