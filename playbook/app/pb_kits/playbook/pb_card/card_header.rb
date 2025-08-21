@@ -9,13 +9,17 @@ module Playbook
                                   default: false
 
       def classname
-        generate_classname("pb_card_header_kit", header_color, color_striped_classname)
+        generate_classname("pb_card_header_kit", header_color_classname, color_striped_classname, separator: " ")
       end
 
     private
 
       def color_striped_classname
-        header_color_striped ? "striped" : nil
+        header_color_striped ? "pb_card_header_kit_#{header_color}_striped" : nil
+      end
+
+      def header_color_classname
+        header_color ? "pb_card_header_kit_#{header_color}" : nil
       end
     end
   end
