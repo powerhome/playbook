@@ -24,7 +24,7 @@
     "@babel/preset-typescript": "^7.24.7",
     "@hotwired/turbo-rails": "^7.3.0",
     "@originjs/vite-plugin-commonjs": "^1.0.3",
-    "@tiptap/extension-document": "^2.11.7",
+    "@tiptap/extension-document": "^3.2.1",
     "@tiptap/extension-highlight": "^2.11.7",
     "@tiptap/extension-horizontal-rule": "^2.11.7",
     "@tiptap/extension-link": "^2.11.7",
