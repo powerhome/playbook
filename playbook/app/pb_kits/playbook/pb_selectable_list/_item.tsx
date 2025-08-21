@@ -99,10 +99,10 @@ const SelectableListItem = ({
         {variant == "radio" && (
           <>
             <Radio
+                className="ml_xs"
                 defaultChecked={defaultChecked}
                 id={id}
                 label={label}
-                marginLeft="xs"
                 name={name}
                 onChange={onChange}
                 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
