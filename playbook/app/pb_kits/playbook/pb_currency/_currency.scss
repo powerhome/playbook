@@ -14,7 +14,7 @@
   &.pb_currency_kit_center_md,
   &.pb_currency_kit_center_lg {
     text-align: center;
-    & > .pb_caption_kit,
+    & > .pb_caption_kit,font-weight
     & > .pb_title_kit,
     & > .pb_body_kit {
       text-align: center;
@@ -82,7 +82,7 @@
 
     &.pb_currency_wrapper_bold {
       .pb_body_kit,
-      .pb_body_light {
+      .pb_body_kit_light {
         color: $text_lt_default;
         font-weight: $bolder;
       }
