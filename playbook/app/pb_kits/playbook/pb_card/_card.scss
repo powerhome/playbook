@@ -1,5 +1,6 @@
 @import "card_mixin";
 @import "../utilities/colors";
+@import "../tokens/border_radius";
 
 .pb_card_kit {
   @include pb_card;
@@ -70,22 +71,22 @@
   
   // Inherit border radius from parent card
   .pb_card_kit_border_radius_xs & {
-    border-radius: $border_rad_xs $border_rad_xs 0px 0px;
+    border-radius: $border_radius_xs $border_radius_xs 0px 0px;
   }
   .pb_card_kit_border_radius_sm & {
-    border-radius: $border_rad_sm $border_rad_sm 0px 0px;
+    border-radius: $border_radius_sm $border_radius_sm 0px 0px;
   }
   .pb_card_kit_border_radius_md & {
-    border-radius: $border_rad_light $border_rad_light 0px 0px;
+    border-radius: $border_radius_md $border_radius_md 0px 0px;
   }
   .pb_card_kit_border_radius_lg & {
-    border-radius: $border_rad_heavy $border_rad_heavy 0px 0px;
+    border-radius: $border_radius_lg $border_radius_lg 0px 0px;
   }
   .pb_card_kit_border_radius_xl & {
-    border-radius: $border_rad_xl $border_rad_xl 0px 0px;
+    border-radius: $border_radius_xl $border_radius_xl 0px 0px;
   }
   .pb_card_kit_border_radius_rounded & {
-    border-radius: $border_rad_rounded $border_rad_rounded 0px 0px;
+    border-radius: $border_radius_rounded $border_radius_rounded 0px 0px;
   }
   .pb_card_kit_border_radius_none & {
     border-radius: 0px;
