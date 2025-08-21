@@ -7,6 +7,7 @@
 .pb_title_kit {
   // Base title styles - default to title 3 styling
   @include pb_title_3;
+  @include pb_title_bold;
   
   // Size-based styles (these will override the base)
   &.pb_title_1 {
