@@ -52,16 +52,13 @@ RSpec.describe Playbook::PbDateStacked::DateStacked do
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
       date = Date.today
-      align = "left"
-      size = "sm"
-      bold = false
 
-      expect(subject.new(date: date).classname).to eq "pb_date_stacked_kit_left_sm_false"
-      expect(subject.new(date: date, size: size).classname).to eq "pb_date_stacked_kit_left_#{size}_false"
-      expect(subject.new(date: date, align: align).classname).to eq "pb_date_stacked_kit_#{align}_sm_false"
-      expect(subject.new(date: date, bold: bold).classname).to eq "pb_date_stacked_kit_left_sm_#{bold}"
-      expect(subject.new(date: date, reverse: true).classname).to include "_reverse"
-      expect(subject.new(date: date, dark: true).classname).to include "_dark"
+      expect(subject.new(date: date).classname).to eq "pb_date_stacked_kit_left_sm"
+      expect(subject.new(date: date, size: "md").classname).to eq "pb_date_stacked_kit_left_md"
+      expect(subject.new(date: date, align: "center").classname).to eq "pb_date_stacked_kit_center_sm"
+      expect(subject.new(date: date, reverse: true).classname).to eq "pb_date_stacked_kit_left_sm_reverse"
+      expect(subject.new(date: date, dark: true).classname).to eq "pb_date_stacked_kit_left_sm_dark dark"
+      expect(subject.new(date: date, dark: true, reverse: true).classname).to eq "pb_date_stacked_kit_left_sm_reverse_dark dark"
     end
   end
 end

@@ -38,6 +38,7 @@
   // Display sizes
   &.pb_title_display {
     font-size: clamp(24px, calc(1.25vw + 5.3vw), 128px);
+    font-weight: $bold;
   }
 
   // Dynamic sizes
