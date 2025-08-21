@@ -24,24 +24,24 @@ const SelectableListCheckbox = () => {
     )
 }
 
-// const SelectableListRadio = () => {
-//     return (
-//         <SelectableList
-//             data={{ testid: testId }}
-//             variant="radio">
-//         <SelectableList.Item
-//             label="Small"
-//             name="radio"
-//             value="1"
-//         />
-//         <SelectableList.Item
-//             label="Medium"
-//             name="radio"
-//             value="2"
-//         />
-//       </SelectableList>
-//     )
-// }
+const SelectableListRadio = () => {
+    return (
+        <SelectableList
+            data={{ testid: testId }}
+            variant="radio">
+        <SelectableList.Item
+            label="Small"
+            name="radio"
+            value="1"
+        />
+        <SelectableList.Item
+            label="Medium"
+            name="radio"
+            value="2"
+        />
+      </SelectableList>
+    )
+}
 
 
 test("classname renders as expected", () => {
@@ -58,10 +58,10 @@ test("renders variant checkbox", () => {
     expect(checkbox).toBeInTheDocument()
 })
 
-// test("renders variant radio", () => {
-//     render(<SelectableListRadio />)
-//     const kit = screen.getByTestId("selectable-list-test")
-//     const radio = kit.querySelector("input[type='radio']")
-//     expect(radio).toBeInTheDocument()
+test("renders variant radio", () => {
+    render(<SelectableListRadio />)
+    const kit = screen.getByTestId("selectable-list-test")
+    const radio = kit.querySelector("input[type='radio']")
+    expect(radio).toBeInTheDocument()
 
-// })
+})
