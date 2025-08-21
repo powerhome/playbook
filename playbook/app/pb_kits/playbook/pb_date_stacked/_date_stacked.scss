@@ -12,7 +12,7 @@
 .pb_date_stacked_kit_center_sm_dark_reverse,
 .pb_date_stacked_kit_center_md_dark_reverse {
   & > * .pb_title_kit,
-  & > * .pb_caption_kit,
+  & > * .pb_caption_kit_md,
   & > .pb_date_stacked_year_kit {
     text-align: center;
   }
@@ -28,7 +28,7 @@
 .pb_date_stacked_kit_right_sm_dark_reverse,
 .pb_date_stacked_kit_right_md_dark_reverse {
   & > * .pb_title_kit,
-  & > * .pb_caption_kit,
+  & > * .pb_caption_kit_md,
   & > .pb_date_stacked_year {
     text-align: right;
   }
