@@ -68,7 +68,7 @@ class PagesController < ApplicationController
       paginate_changelog(data)
     end
 
-    @releases = @releases.paginate(page: params[:page], per_page: 5)
+    @releases = @releases.paginate(page: params[:page], per_page: 10)
 
     render layout: "changelog"
   end
