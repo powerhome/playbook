@@ -35,7 +35,6 @@ type FixedConfirmationToastProps = {
 
 const FixedConfirmationToast = (props: FixedConfirmationToastProps): React.ReactElement => {
   const [showToast, toggleToast] = useState(true);
-  const [hydrated, setHydrated] = useState(false);
 
   const {
     autoClose = 0,
@@ -86,17 +85,12 @@ const FixedConfirmationToast = (props: FixedConfirmationToastProps): React.React
     onClose();
   };
 
-  // prevents Screen Reader from announcing all examples on page load, just dynamic on open
-  useEffect(() => {
-    setHydrated(true);
-  }, []);
-
   return (
     <>
       {showToast && (
         <div
-            aria-atomic={hydrated && open ? "true" : undefined}
-            aria-live={hydrated && open ? "polite" : undefined} 
+            aria-atomic="true"
+            aria-live="polite"
             className={css}
             onClick={handleClick}
             onKeyDown={(e) => {
