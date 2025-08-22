@@ -1,4 +1,4 @@
-<%= pb_content_tag(:div, "aria-atomic": "true", "aria-live": "polite", role: "status", tabindex: 0) do %>
+<%= pb_content_tag(:div, "aria-atomic": "true", "aria-live": "polite", role: "status", tabindex: 0, onkeydown: "if(event.key==='Enter'||event.key===' '){ this.remove(); }" ) do %>
     <% if object.icon_value && object.icon_value != "none" %>
     <%= pb_rails("icon", props: { icon: object.icon_value, classname: "pb_icon", fixed_width: true, aria: { "aria-label": "#{object.icon_value} icon" } }) %>
     <% end %>
