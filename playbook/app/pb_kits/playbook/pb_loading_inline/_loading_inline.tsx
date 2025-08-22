@@ -56,7 +56,7 @@ const LoadingInline = (props: LoadingInlineProps) => {
         <Icon
             aria={{ label: 'loading icon' }}
             fixedWidth
-            icon={variant === 'dotted' ? 'spinner' : variant === 'solid' ? 'spinner-third' : undefined}
+            icon={variant === 'dotted' ? 'spinner' : variant === 'solid' ? 'spinner-solid' : undefined}
             pulse
         />
         {text}

@@ -20,7 +20,7 @@ module Playbook
         if variant == "dotted"
           "spinner"
         elsif variant == "solid"
-          "spinner-third"
+          "spinner-solid"
         end
       end
     end
