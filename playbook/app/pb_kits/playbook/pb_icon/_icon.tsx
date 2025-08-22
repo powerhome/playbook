@@ -20,7 +20,7 @@ export type IconSizes = "lg"
 | ""
 
 type IconProps = {
-  aria?: {[key: string]: string},
+  aria?: { [key: string]: string | boolean }
   border?: string,
   className?: string,
   color?: string,
@@ -211,7 +211,15 @@ const Icon = (props: IconProps) => {
   )
 
   aria.label ? null : aria.label = `${icon} icon`
-  const ariaProps: {[key: string]: any} = buildAriaProps(aria)
+
+  const normalizedAria: { [key: string]: string } = Object.fromEntries(
+    Object.entries(aria).map(([key, value]) => [
+      key,
+      typeof value === "boolean" ? String(value) : value,
+    ])
+  )
+  
+  const ariaProps = buildAriaProps(normalizedAria)
   const dataProps: {[key: string]: any} = buildDataProps(data)
   const htmlProps = buildHtmlProps(htmlOptions)
 
