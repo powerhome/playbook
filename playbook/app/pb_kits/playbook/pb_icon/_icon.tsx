@@ -222,6 +222,7 @@ const Icon = (props: IconProps) => {
         <>
           {
             React.cloneElement(iconElement || customIcon, {
+              ...ariaProps,
               ...dataProps,
               ...htmlProps,
               className: classes,
@@ -237,6 +238,7 @@ const Icon = (props: IconProps) => {
       return (
         <>
           <span
+              {...ariaProps}
               {...dataProps}
               {...htmlProps}
               className={classesEmoji}
@@ -250,6 +252,7 @@ const Icon = (props: IconProps) => {
       return (
         <>
           <i
+              {...ariaProps}
               {...dataProps}
               {...htmlProps}
               className={classes}
