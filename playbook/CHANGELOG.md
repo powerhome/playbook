@@ -2,7 +2,7 @@
 
 ##### August 15, 2025
 
-<img width="889" height="477" alt="release_image" src="https://github.com/user-attachments/assets/e96ebfd4-3e53-4b5c-90f6-26705f9376ea" />
+<img alt="release_image" src="https://github.com/user-attachments/assets/e96ebfd4-3e53-4b5c-90f6-26705f9376ea" />
 
 You asked and we delivered. The Date kit now includes a showCurrentYear prop that gives you full control over how dates are displayed. Previously, the year would be hidden if it matched the current year, but now you can choose to always show it, even when it's 2025!
 
@@ -38,7 +38,7 @@ You asked and we delivered. The Date kit now includes a showCurrentYear prop tha
 
 ##### August 01, 2025
 
-<img width="889" height="477" alt="release_image" src="https://github.com/user-attachments/assets/623ae448-f555-4b70-98b2-88687d6b53d6" />
+<img alt="release_image" src="https://github.com/user-attachments/assets/623ae448-f555-4b70-98b2-88687d6b53d6" />
 
 
 Smarter defaults, cleaner visuals, fewer bugs and of course multiple enhancements to our favorite kit: the Advanced Table! And the Walkthrough Kit? Peace out 👋🏼
@@ -88,7 +88,7 @@ Smarter defaults, cleaner visuals, fewer bugs and of course multiple enhancement
 
 ##### July 15, 2025
 
-<img width="889" height="477" alt="release_image" src="https://github.com/user-attachments/assets/9464c495-ae6d-4f3e-9441-c45dd927bcff" />
+<img alt="release_image" src="https://github.com/user-attachments/assets/9464c495-ae6d-4f3e-9441-c45dd927bcff" />
 
 The new Playbook Icons page is officially live! 🎉 You can now explore all icons shipped directly from our internal playbook-icons repo — fully integrated and ready to use. The Icon kit supports both our custom icons and FontAwesome icons out of the box for full backward compatibility! Head over to the [new Icons page](https://playbook.powerapp.cloud/playbook_icons) to check them all out!
 
