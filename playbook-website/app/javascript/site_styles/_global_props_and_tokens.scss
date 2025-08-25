@@ -1,6 +1,7 @@
 @import "playbook-tokens/colors";
 
-.global_props_page {
+.global_props_page,
+.tokens_show_page {
   .value_card_with_tooltip {
     border-top-right-radius: 0;
 
@@ -15,5 +16,9 @@
       border-width: 0 5px 5px 0;
       border-color: transparent $primary transparent transparent;
     }
+  }
+  
+  [class^=pb_tooltip_kit].image ~ .tooltip_tooltip.visible {
+    padding: $space_sm !important;
   }
 }

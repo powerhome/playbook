@@ -1,6 +1,8 @@
 import ShowPage from "../../Templates/ShowPage";
 import PropsExamplesTable from "../../Templates/Subcomponents/PropsExamplesTable";
 import ExampleCodeCard from "../../Templates/Subcomponents/ExampleCodeCard";
+import ValueCardWithTooltip from "../../Templates/Subcomponents/ValueCardWithTooltip";
+import { easeInOutBack, easeInOutCirc } from "./AnimationImages"
 
 const Animation = () => {
   return (
@@ -170,12 +172,32 @@ const Animation = () => {
             ],
             [
               "$easeInOutCirc",
-              "cubic-bezier(0.785, 0.135, 0.150, 0.860)",
+              <ValueCardWithTooltip
+                isImage
+                key="cubic-bezier(0.785, 0.135, 0.150, 0.860)"
+                text="cubic-bezier(0.785, 0.135, 0.150, 0.860)"
+                tooltipText={
+                  <img
+                    src={easeInOutCirc}
+                    alt="easeInOutCirc"
+                  />
+                }
+              />,
               <ExampleCodeCard id="easeInOutCirc" text="transition: $easeInOutCirc;" />,
             ],
             [
               "$easeInOutBack",
-              "cubic-bezier(0.680, -0.550, 0.265, 1.550)",
+              <ValueCardWithTooltip
+                isImage
+                key="cubic-bezier(0.680, -0.550, 0.265, 1.550)"
+                text="cubic-bezier(0.680, -0.550, 0.265, 1.550)"
+                tooltipText={
+                  <img
+                    src={easeInOutBack}
+                    alt="easeInOutBack"
+                  />
+                }
+              />,
               <ExampleCodeCard id="easeInOutBack" text="transition: $easeInOutBack;" />,
             ],
           ]}
