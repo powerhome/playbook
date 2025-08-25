@@ -2,38 +2,7 @@ import ShowPage from "../../Templates/ShowPage";
 import PropsExamplesTable from "../../Templates/Subcomponents/PropsExamplesTable";
 import ExampleCodeCard from "../../Templates/Subcomponents/ExampleCodeCard";
 import ValueCardWithTooltip from "../../Templates/Subcomponents/ValueCardWithTooltip";
-import {
-  bezier,
-  ease,
-  easeIn,
-  easeInBack,
-  easeInCirc,
-  easeInCubic,
-  easeInExpo,
-  easeInOut,
-  easeInOutBack,
-  easeInOutCirc,
-  easeInOutCubic,
-  easeInOutExpo,
-  easeInOutQuad,
-  easeInOutQuart,
-  easeInOutQuint,
-  easeInOutSine,
-  easeInQuad,
-  easeInQuart,
-  easeInQuint,
-  easeInSine,
-  easeOut,
-  easeOutBack,
-  easeOutCirc,
-  easeOutCubic,
-  easeOutExpo,
-  easeOutQuad,
-  easeOutQuart,
-  easeOutQuint,
-  easeOutSine,
-  linear,
-} from './AnimationImages';
+import * as AnimationImages from './AnimationImages'
 
 const Animation = () => {
   return (
@@ -54,7 +23,7 @@ const Animation = () => {
                 text="cubic-bezier(0.64, 0.00, 0.35, 1)"
                 tooltipText={
                   <img
-                    src={bezier}
+                    src={AnimationImages.bezier}
                     alt="bezier"
                   />
                 }
@@ -69,7 +38,7 @@ const Animation = () => {
                 text="cubic-bezier(0.250, 0.250, 0.75, 0.750)"
                 tooltipText={
                   <img
-                    src={linear}
+                    src={AnimationImages.linear}
                     alt="linear"
                   />
                 }
@@ -84,7 +53,7 @@ const Animation = () => {
                 text="cubic-bezier(0.250, 0.100, 0.250, 1.000)"
                 tooltipText={
                   <img
-                    src={ease}
+                    src={AnimationImages.ease}
                     alt="ease"
                   />
                 }
@@ -99,7 +68,7 @@ const Animation = () => {
                 text="cubic-bezier(0.420, 0.00, 1.00, 1.00)"
                 tooltipText={
                   <img
-                    src={easeIn}
+                    src={AnimationImages.easeIn}
                     alt="easeIn"
                   />
                 }
@@ -114,7 +83,7 @@ const Animation = () => {
                 text="cubic-bezier(0.000, 0.000, 0.580, 1.000)"
                 tooltipText={
                   <img
-                    src={easeOut}
+                    src={AnimationImages.easeOut}
                     alt="easeOut"
                   />
                 }
@@ -129,7 +98,7 @@ const Animation = () => {
                 text="cubic-bezier(0.420, 0.000, 0.580, 1.000)"
                 tooltipText={
                   <img
-                    src={easeInOut}
+                    src={AnimationImages.easeInOut}
                     alt="easeInOut"
                   />
                 }
@@ -149,7 +118,7 @@ const Animation = () => {
                 text="cubic-bezier(0.550, 0.085, 0.680, 0.530)"
                 tooltipText={
                   <img
-                    src={easeInQuad}
+                    src={AnimationImages.easeInQuad}
                     alt="easeInQuad"
                   />
                 }
@@ -164,7 +133,7 @@ const Animation = () => {
                 text="cubic-bezier(0.550, 0.055, 0.675, 0.190)"
                 tooltipText={
                   <img
-                    src={easeInCubic}
+                    src={AnimationImages.easeInCubic}
                     alt="easeInCubic"
                   />
                 }
@@ -179,7 +148,7 @@ const Animation = () => {
                 text="cubic-bezier(0.895, 0.030, 0.685, 0.220)"
                 tooltipText={
                   <img
-                    src={easeInQuart}
+                    src={AnimationImages.easeInQuart}
                     alt="easeInQuart"
                   />
                 }
@@ -194,7 +163,7 @@ const Animation = () => {
                 text="cubic-bezier(0.755, 0.050, 0.855, 0.060)"
                 tooltipText={
                   <img
-                    src={easeInQuint}
+                    src={AnimationImages.easeInQuint}
                     alt="easeInQuint"
                   />
                 }
@@ -209,7 +178,7 @@ const Animation = () => {
                 text="cubic-bezier(0.470, 0.000, 0.745, 0.715)"
                 tooltipText={
                   <img
-                    src={easeInSine}
+                    src={AnimationImages.easeInSine}
                     alt="easeInSine"
                   />
                 }
@@ -224,7 +193,7 @@ const Animation = () => {
                 text="cubic-bezier(0.950, 0.050, 0.795, 0.035)"
                 tooltipText={
                   <img
-                    src={easeInExpo}
+                    src={AnimationImages.easeInExpo}
                     alt="easeInExpo"
                   />
                 }
@@ -239,7 +208,7 @@ const Animation = () => {
                 text="cubic-bezier(0.600, 0.040, 0.980, 0.335)"
                 tooltipText={
                   <img
-                    src={easeInCirc}
+                    src={AnimationImages.easeInCirc}
                     alt="easeInCirc"
                   />
                 }
@@ -254,7 +223,7 @@ const Animation = () => {
                 text="cubic-bezier(0.600, -0.280, 0.735, 0.045)"
                 tooltipText={
                   <img
-                    src={easeInBack}
+                    src={AnimationImages.easeInBack}
                     alt="easeInBack"
                   />
                 }
@@ -274,7 +243,7 @@ const Animation = () => {
                 text="cubic-bezier(0.250, 0.460, 0.450, 0.940)"
                 tooltipText={
                   <img
-                    src={easeOutQuad}
+                    src={AnimationImages.easeOutQuad}
                     alt="easeOutQuad"
                   />
                 }
@@ -289,7 +258,7 @@ const Animation = () => {
                 text="cubic-bezier(0.215, 0.610, 0.355, 1.000)"
                 tooltipText={
                   <img
-                    src={easeOutCubic}
+                    src={AnimationImages.easeOutCubic}
                     alt="easeOutCubic"
                   />
                 }
@@ -304,7 +273,7 @@ const Animation = () => {
                 text="cubic-bezier(0.165, 0.840, 0.440, 1.000)"
                 tooltipText={
                   <img
-                    src={easeOutQuart}
+                    src={AnimationImages.easeOutQuart}
                     alt="easeOutQuart"
                   />
                 }
@@ -319,7 +288,7 @@ const Animation = () => {
                 text="cubic-bezier(0.230, 1.000, 0.320, 1.000)"
                 tooltipText={
                   <img
-                    src={easeOutQuint}
+                    src={AnimationImages.easeOutQuint}
                     alt="easeOutQuint"
                   />
                 }
@@ -334,7 +303,7 @@ const Animation = () => {
                 text="cubic-bezier(0.390, 0.575, 0.565, 1.000)"
                 tooltipText={
                   <img
-                    src={easeOutSine}
+                    src={AnimationImages.easeOutSine}
                     alt="easeOutSine"
                   />
                 }
@@ -349,7 +318,7 @@ const Animation = () => {
                 text="cubic-bezier(0.190, 1.000, 0.220, 1.000)"
                 tooltipText={
                   <img
-                    src={easeOutExpo}
+                    src={AnimationImages.easeOutExpo}
                     alt="easeOutExpo"
                   />
                 }
@@ -364,7 +333,7 @@ const Animation = () => {
                 text="cubic-bezier(0.075, 0.820, 0.165, 1.000)"
                 tooltipText={
                   <img
-                    src={easeOutCirc}
+                    src={AnimationImages.easeOutCirc}
                     alt="easeOutCirc"
                   />
                 }
@@ -379,7 +348,7 @@ const Animation = () => {
                 text="cubic-bezier(0.175, 0.885, 0.320, 1.275)"
                 tooltipText={
                   <img
-                    src={easeOutBack}
+                    src={AnimationImages.easeOutBack}
                     alt="easeOutBack"
                   />
                 }
@@ -399,7 +368,7 @@ const Animation = () => {
                 text="cubic-bezier(0.455, 0.030, 0.515, 0.955)"
                 tooltipText={
                   <img
-                    src={easeInOutQuad}
+                    src={AnimationImages.easeInOutQuad}
                     alt="easeInOutQuad"
                   />
                 }
@@ -414,7 +383,7 @@ const Animation = () => {
                 text="cubic-bezier(0.645, 0.045, 0.355, 1.000)"
                 tooltipText={
                   <img
-                    src={easeInOutCubic}
+                    src={AnimationImages.easeInOutCubic}
                     alt="easeInOutCubic"
                   />
                 }
@@ -429,7 +398,7 @@ const Animation = () => {
                 text="cubic-bezier(0.770, 0.000, 0.175, 1.000)"
                 tooltipText={
                   <img
-                    src={easeInOutQuart}
+                    src={AnimationImages.easeInOutQuart}
                     alt="easeInOutQuart"
                   />
                 }
@@ -444,7 +413,7 @@ const Animation = () => {
                 text="cubic-bezier(0.860, 0.000, 0.070, 1.000)"
                 tooltipText={
                   <img
-                    src={easeInOutQuint}
+                    src={AnimationImages.easeInOutQuint}
                     alt="easeInOutQuint"
                   />
                 }
@@ -459,7 +428,7 @@ const Animation = () => {
                 text="cubic-bezier(0.445, 0.050, 0.550, 0.950)"
                 tooltipText={
                   <img
-                    src={easeInOutSine}
+                    src={AnimationImages.easeInOutSine}
                     alt="easeInOutSine"
                   />
                 }
@@ -474,7 +443,7 @@ const Animation = () => {
                 text="cubic-bezier(1.000, 0.000, 0.000, 1.000)"
                 tooltipText={
                   <img
-                    src={easeInOutExpo}
+                    src={AnimationImages.easeInOutExpo}
                     alt="easeInOutExpo"
                   />
                 }
@@ -489,7 +458,7 @@ const Animation = () => {
                 text="cubic-bezier(0.785, 0.135, 0.150, 0.860)"
                 tooltipText={
                   <img
-                    src={easeInOutCirc}
+                    src={AnimationImages.easeInOutCirc}
                     alt="easeInOutCirc"
                   />
                 }
@@ -504,7 +473,7 @@ const Animation = () => {
                 text="cubic-bezier(0.680, -0.550, 0.265, 1.550)"
                 tooltipText={
                   <img
-                    src={easeInOutBack}
+                    src={AnimationImages.easeInOutBack}
                     alt="easeInOutBack"
                   />
                 }
