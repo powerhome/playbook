@@ -138,10 +138,14 @@ const TextInput = (props: TextInputProps, ref: React.LegacyRef<HTMLInputElement>
     formattedValue = value
   }
 
+  const errorId = error ? `${id}-error` : undefined
+
   const textInput = (
     childInput ? React.cloneElement(children, { className: "text_input" }) :
     (<input
         {...domSafeProps(props)}
+        aria-describedby={errorId}
+        aria-invalid={!!error}
         className="text_input"
         disabled={disabled}
         id={id}
@@ -199,16 +203,20 @@ const TextInput = (props: TextInputProps, ref: React.LegacyRef<HTMLInputElement>
         {...htmlProps}
         className={css}
     >
-      {label &&
-        <Caption
-            className="pb_text_input_kit_label"
-            text={label}
-        />
-      }
+      {label && (
+        <label htmlFor={id}>
+          <Caption className="pb_text_input_kit_label" 
+              text={label} 
+          />
+        </label>
+      )}
       <div className={`${addOnCss} text_input_wrapper`}>
         {render}
 
         {error && <Body
+            aria={{ atomic: "true", live: "polite" }}
+            htmlOptions={{ role: "alert" }}
+            id={errorId}
             status="negative"
             text={error}
             variant={null}
