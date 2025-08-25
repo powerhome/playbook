@@ -13,6 +13,8 @@ $transition: .2s ease-in-out;
   $border_default: 3px solid $color_checkbox_default;
 
   .pb_toggle_wrapper {
+    position: relative;
+
     .pb_toggle_control {
       cursor: pointer;
       transition: $transition;
@@ -23,6 +25,7 @@ $transition: .2s ease-in-out;
       border: $border_default;
       position: relative;
       box-sizing: content-box;
+      pointer-events: none;
 
       &:after {
         transition: $transition;
@@ -47,12 +50,17 @@ $transition: .2s ease-in-out;
 
     input {
       position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      padding: 0;
       opacity: 0;
-      width: 1px;
-      height: 1px;
-      overflow: hidden;
+      z-index: 2;
 
-      &:focus + .pb_toggle_control {
+      &:focus + .pb_toggle_control,
+      &:focus-visible + .pb_toggle_control {
         box-shadow: 0px 0px 0px 2px $white, 0px 0px 0px 4px $primary;
         outline: none;
       }
@@ -70,12 +78,6 @@ $transition: .2s ease-in-out;
     }
 
     input:checked {
-      position: absolute;
-      opacity: 0;
-      width: 1px;
-      height: 1px;
-      overflow: hidden;
-
       &:checked + .pb_toggle_control {
         border: $border_success;
         background-color: $color_checkbox_success;
@@ -86,7 +88,8 @@ $transition: .2s ease-in-out;
         }
       }
 
-      &:checked:focus + .pb_toggle_control {
+      &:focus + .pb_toggle_control,
+      &:focus-visible + .pb_toggle_control {
         box-shadow: 0px 0px 0px 2px $white, 0px 0px 0px 4px $primary;
         outline: none;
       }
