@@ -58,11 +58,18 @@ class PagesController < ApplicationController
   end
 
   def changelog_web
-    @data = Playbook::Engine.root.join("CHANGELOG.md").read
     @page_title = "What's New"
     @page = "changelog_web"
     @show_sidebar = true
     @link_extension = "https://github.com/powerhome/playbook/blob/master/playbook/CHANGELOG.md"
+
+    @releases = Rails.cache.fetch("changelog_releases") do
+      data = Playbook::Engine.root.join("CHANGELOG.md").read
+      paginate_changelog(data)
+    end
+
+    @releases = @releases.paginate(page: params[:page], per_page: 10)
+
     render layout: "changelog"
   end
 
@@ -416,6 +423,37 @@ private
         image: image,
         description: description,
         link: link,
+      }
+    end
+
+    releases
+  end
+
+  def paginate_changelog(changelog)
+    return [] unless changelog.is_a?(String) && changelog.present?
+
+    releases = []
+    lines = changelog.lines
+    current_section = []
+    current_title = nil
+
+    lines.each do |line|
+      if line.start_with?("# ") && line.strip.length > 2
+        if current_title && current_section.any?
+          releases << {
+            content: current_section.join,
+          }
+        end
+        current_title = line.strip[2..]
+        current_section = [line]
+      else
+        current_section << line
+      end
+    end
+
+    if current_title && current_section.any?
+      releases << {
+        content: current_section.join,
       }
     end
 
