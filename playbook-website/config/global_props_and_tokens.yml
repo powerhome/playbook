@@ -3,4 +3,6 @@ global_props:
   - margin
 
 tokens:
+  - animation
   - display
+  - vertical_align
