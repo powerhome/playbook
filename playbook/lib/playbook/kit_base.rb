@@ -122,7 +122,7 @@ module Playbook
       html_options.each do |key, value|
         if key == :style && value.is_a?(Hash)
           # Convert style hash to CSS string
-          merged[:style] = value.map { |k, v| "#{k.to_s.gsub('_', '-')}: #{v}" }.join("; ")
+          merged[:style] = value.map { |k, v| "#{k.to_s.tr('_', '-')}: #{v}" }.join("; ")
         else
           merged[key] = value
         end
@@ -134,6 +134,24 @@ module Playbook
       end
 
       merged.deep_merge(data_attributes)
+    end
+
+    # Custom react_component helper to replace Webpacker React
+    def react_component(component_name, props = {}, html_options = {})
+      # Convert props to JSON for the data attribute
+      props_json = props.to_json
+
+      # Build the HTML attributes
+      html_attrs = {
+        "data-react-component" => component_name,
+        "data-react-props" => props_json,
+      }
+
+      # Merge with any additional HTML options
+      html_attrs.merge!(html_options)
+
+      # Return the div element
+      content_tag(:div, "", html_attrs)
     end
 
     def global_inline_props
@@ -172,7 +190,7 @@ module Playbook
     end
 
     def dynamic_inline_props
-      styles = global_inline_props.map { |key, value| "#{key.to_s.gsub('_', '-')}: #{value}" if inline_validator(key, value) }.compact
+      styles = global_inline_props.map { |key, value| "#{key.to_s.tr('_', '-')}: #{value}" if inline_validator(key, value) }.compact
       styles.join("; ").presence
     end
 
