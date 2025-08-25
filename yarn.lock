@@ -3486,6 +3486,11 @@
   resolved "https://npm.powerapp.cloud/@tiptap/extension-paragraph/-/extension-paragraph-2.11.7.tgz#de7fba01ebd35bddf4d6225fff708eb223276bc5"
   integrity sha512-Pl3B4q6DJqTvvAdraqZaNP9Hh0UWEHL5nNdxhaRNuhKaUo7lq8wbDSIxIW3lvV0lyCs0NfyunkUvSm1CXb6d4Q==
 
+"@tiptap/extension-paragraph@^3.3.0":
+  version "3.3.0"
+  resolved "https://npm.powerapp.cloud/@tiptap/extension-paragraph/-/extension-paragraph-3.3.0.tgz#9898e880e06df5e7a4bf1a47c27579c17a977717"
+  integrity sha512-5Ju3RlvlJwiIiOjA/D2Dzq/pCmx9vA/2vTB8KDyj+mkvOlq2Cp9QT7bYdw3i99IHfVF7fCYzoPoKclDfOyM7Mg==
+
 "@tiptap/extension-strike@^2.11.7":
   version "2.11.7"
   resolved "https://npm.powerapp.cloud/@tiptap/extension-strike/-/extension-strike-2.11.7.tgz#311b55f06bb3d1f93c02b809844cc8d27d110422"
@@ -7016,10 +7021,15 @@ ignore@^4.0.3, ignore@^4.0.6:
   resolved "https://npm.powerapp.cloud/ignore/-/ignore-4.0.6.tgz#750e3db5862087b4737ebac8207ffd1ef27b25fc"
   integrity sha512-cyFDKrqc/YdcWFniJhzI42+AzS+gNwmUzOSFcRCQYwySuBBBy/KjuxWLZ/FHEH6Moq1NizMOBWyTcv8O4OZIMg==
 
-ignore@^5.1.1, ignore@^5.1.8:
+ignore@^5.1.1:
   version "5.3.1"
   resolved "https://registry.yarnpkg.com/ignore/-/ignore-5.3.1.tgz#5073e554cd42c5b33b394375f538b8593e34d4ef"
   integrity sha512-5Fytz/IraMjqpwfd34ke28PTVMjZjJG2MPn5t7OE4eUCUNf8BAa7b5WUS9/Qvr6mwOQS7Mk6vdsMno5he+T8Xw==
+
+ignore@^5.1.8:
+  version "5.3.2"
+  resolved "https://npm.powerapp.cloud/ignore/-/ignore-5.3.2.tgz#3cd40e729f3643fd87cb04e50bf0eb722bc596f5"
+  integrity sha512-hsBTNUqQTDwkWtcdYI2i06Y/nUBEsNEDJKjWdigLvegy8kDuJAS8uRlpkkcQpyEXL0Z/pjDy5HBmMjRCJ2gq+g==
 
 ignore@^5.2.0:
   version "5.2.4"
