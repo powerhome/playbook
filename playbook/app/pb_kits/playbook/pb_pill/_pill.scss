@@ -5,30 +5,32 @@
 
 $pb_pill_height: 22px;
 
-[class^=pb_pill_kit] {
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  padding: 0 $space-sm/1.8;
-  height: $pb_pill_height;
-  border-radius: $pb_pill_height/2;
-  white-space: nowrap;
+// Base styles for all pill variations
+@each $color_name, $color_value in $status_color_text {
+  .pb_pill_kit_#{$color_name}_lowercase,
+  .pb_pill_kit_#{$color_name}_none {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 $space-sm/1.8;
+    height: $pb_pill_height;
+    border-radius: $pb_pill_height/2;
+    white-space: nowrap;
+    background: rgba($color_value, $opacity-1);
 
-  &[class*=lowercase] {
+    .pb_pill_text {
+      color: $color_value !important;
+    }
+  }
+}
+
+// Text transform specific styles
+@each $color_name, $color_value in $status_color_text {
+  .pb_pill_kit_#{$color_name}_lowercase {
     text-transform: lowercase;
   }
 
-  &[class*=none] {
+  .pb_pill_kit_#{$color_name}_none {
     text-transform: none;
-  }
-
-  @each $color_name, $color_value in $status_color_text {
-    &[class*=_#{$color_name}]  {
-        background: rgba($color_value, $opacity-1);
-
-      .pb_pill_text {
-        color: $color_value !important;
-      }
-    }
   }
 }

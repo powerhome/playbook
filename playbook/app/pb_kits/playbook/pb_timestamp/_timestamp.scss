@@ -1,16 +1,22 @@
 @import "timestamp-mixins";
 @import "../tokens/colors";
 
-[class^=pb_timestamp_kit]{
+.pb_timestamp_kit_left,
+.pb_timestamp_kit_center,
+.pb_timestamp_kit_right {
   @include pb_timestamp;
+}
 
-  &[class*=_center]  {
-    text-align: center;
-  }
-  &[class*=_right]  {
-    text-align: right;
-  }
-  &[class*=_dark] {
-    color: $text_dk_default;
-  }
+.pb_timestamp_kit_center {
+  text-align: center;
+}
+
+.pb_timestamp_kit_right {
+  text-align: right;
+}
+
+.pb_timestamp_kit_left.dark,
+.pb_timestamp_kit_center.dark,
+.pb_timestamp_kit_right.dark {
+  color: $text_dk_default;
 }

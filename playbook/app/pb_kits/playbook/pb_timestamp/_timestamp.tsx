@@ -49,10 +49,7 @@ const Timestamp = (props: TimestampProps): React.ReactElement => {
   const dataProps = buildDataProps(data)
   const htmlProps = buildHtmlProps(htmlOptions)
   const classes = classnames(
-    buildCss('pb_timestamp_kit', align, {
-      dark: dark,
-      variant: variant,
-    }),
+    buildCss('pb_timestamp_kit', align),
     globalProps(props),
     className
   )

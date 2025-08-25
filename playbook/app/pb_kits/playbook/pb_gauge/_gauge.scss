@@ -1,12 +1,12 @@
 @import "../tokens/colors";
 
-[class^=pb_gauge_kit] {
+.pb_gauge_kit {
 
   .fix {
     fill: $text_lt_default;
     stroke: none;
 
-    &[class*=dark] {
+    &.dark {
       fill: $text_dk_default;
     }
   }
@@ -16,7 +16,7 @@
     stroke: none;
     font: $regular $font_larger $font_family_base;
 
-    &[class*=dark] {
+    &.dark {
       fill: $text_dk_light;
     }
   }
@@ -25,7 +25,7 @@
     stroke: none;
     font: $regular $font_base $font_family_base;
 
-    &[class*=dark] {
+    &.dark {
       fill: $text_dk_light;
     }
   }
@@ -38,7 +38,7 @@
     stroke-linejoin: round;
   }
 
-  &[class*=dark] {
+  &.dark {
     color: $text_dk_default;
 
     .pb_title_kit_size_1,

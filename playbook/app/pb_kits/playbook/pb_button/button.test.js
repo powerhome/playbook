@@ -22,7 +22,7 @@ test('passes type, text, and value props to button', () => {
     const kit = screen.getByTestId('primary-test')
     const content = screen.getByText(text)
 
-    expect(kit).toHaveClass('pb_button_kit_primary_inline_enabled')
+    expect(kit).toHaveClass('pb_button_kit pb_button_primary pb_button_inline pb_button_enabled')
     expect(kit).toHaveAttribute('type', htmlType)
     expect(kit).toHaveAttribute('value', value)
     expect(content).toHaveTextContent(text)
@@ -54,7 +54,7 @@ test('button with secondary variant', () => {
 
     const kit = screen.getByTestId('variant-test')
 
-    expect(kit).toHaveClass('pb_button_kit_secondary_inline_enabled')
+    expect(kit).toHaveClass('pb_button_kit pb_button_secondary pb_button_inline pb_button_enabled')
     expect(kit).toHaveAttribute('type', 'button')
 })
 
@@ -98,7 +98,7 @@ test('size prop', () => {
 
     const kit = screen.getByTestId('size-test')
 
-    expect(kit).toHaveClass('pb_button_kit_primary_inline_enabled size_sm')
+    expect(kit).toHaveClass('pb_button_kit pb_button_primary pb_button_inline pb_button_enabled pb_button_size_sm')
 })
 
 test('should render target prop', () => {

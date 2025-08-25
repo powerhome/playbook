@@ -40,7 +40,7 @@ module Playbook
       SECS_PER_CENT = 100 * SECS_PER_YEAR # 3,153,600,000 seconds
 
       def classname
-        generate_classname("pb_timestamp_kit", variant_class, align)
+        generate_classname("pb_timestamp_kit", align)
       end
 
       def timestamp_text

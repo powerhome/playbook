@@ -1,11 +1,11 @@
-[class^='pb_weekday_stacked'] {
-  &[class*='_left'] {
-    text-align: left;
-  }
-  &[class*='_center'] {
-    text-align: center;
-  }
-  &[class*='_right'] {
-    text-align: right;
-  }
+.pb_weekday_stacked_kit_left {
+  text-align: left;
+}
+
+.pb_weekday_stacked_kit_center {
+  text-align: center;
+}
+
+.pb_weekday_stacked_kit_right {
+  text-align: right;
 }

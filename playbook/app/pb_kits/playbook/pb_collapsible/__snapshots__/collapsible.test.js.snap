@@ -11,7 +11,7 @@ exports[`html structure is correct 1`] = `
     >
       <div>
         <div
-          class="pb_flex_kit_orientation_row_justify_content_left_align_items_center_spacing_between"
+          class="pb_flex_kit pb_flex_kit_orientation_row pb_flex_kit_justify_content_left pb_flex_kit_align_items_center pb_flex_kit_spacing_between"
         >
           <div
             class="pb_flex_item_kit"

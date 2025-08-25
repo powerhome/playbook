@@ -38,14 +38,14 @@ function HomeAdressStreetTest(props) {
 
   test("emphasize street by not setting a prop", () => {
     const { container } = render(<HomeAdressStreetTest />);
-    expect(container.getElementsByClassName("pb_title_kit_size_4 pb_home_address_street_address")[0]).toHaveTextContent(address);
+    expect(container.querySelector(".pb_title_kit.pb_title_4.pb_home_address_street_address")).toHaveTextContent(address);
 
     cleanup()
   });
 
   test("emphasize city", () => {
     const { container } = render(<HomeAdressStreetTest emphasis="city" />);
-    expect(container.getElementsByClassName("pb_title_kit_size_4 pb_home_address_street_address")[0]).toHaveTextContent(city);
+    expect(container.querySelector(".pb_title_kit.pb_title_4.pb_home_address_street_address")).toHaveTextContent(city);
 
     cleanup()
   });

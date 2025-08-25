@@ -54,7 +54,7 @@ $overlay_colors: (
   }
 }
 
-[class^=pb_overlay] {
+.pb_overlay {
   position: relative;
   @each $color_name, $color in $overlay_colors {
     .overlay_#{$color_name} {

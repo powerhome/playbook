@@ -1,6 +1,6 @@
 @import "../../pb_textarea/textarea_mixin";
 
-[class^=pb_date_picker_kit] {
+.pb_date_picker_kit {
 
   .pb_date_picker_kit_label {
     margin-bottom: $space_xs;
@@ -40,7 +40,7 @@
 
   &.error {
     .date_picker_input_wrapper {
-      [class*=pb_body_kit] {
+      .pb_body_kit {
         margin-top: $space_xs / 2;
       }
 

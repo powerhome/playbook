@@ -1,6 +1,11 @@
 @import "../tokens/transition";
 
-[class^=pb_selectable_icon] {
+.pb_selectable_icon_kit,
+.pb_selectable_icon_kit_checked,
+.pb_selectable_icon_kit_enabled,
+.pb_selectable_icon_kit_disabled,
+.pb_selectable_icon_kit_checked_enabled,
+.pb_selectable_icon_kit_checked_disabled {
 
 	text-align: center;
 	cursor: pointer;
@@ -27,14 +32,6 @@
 		transition: color $transition_short ease;
 	}
 
-	&[class*=_disabled] {
-		opacity: $opacity_6;
-		cursor: not-allowed;
-		* {
-			cursor: not-allowed;
-		}
-	}
-	
 	input[type="checkbox"],
 	input[type="radio"] {
 		-webkit-appearance: none;
@@ -54,33 +51,46 @@
 
 		}
 	}
+}
 
+.pb_selectable_icon_kit_disabled,
+.pb_selectable_icon_kit_checked_disabled {
+	opacity: $opacity_6;
+	cursor: not-allowed;
+	* {
+		cursor: not-allowed;
+	}
+}
 
-	&.dark {
-		input[type="checkbox"],
-		input[type="radio"] {
-			-webkit-appearance: none;
-			-moz-appearance: none;
-			display: none;
-			appearance: none;
+.pb_selectable_icon_kit.dark,
+.pb_selectable_icon_kit_checked.dark,
+.pb_selectable_icon_kit_enabled.dark,
+.pb_selectable_icon_kit_disabled.dark,
+.pb_selectable_icon_kit_checked_enabled.dark,
+.pb_selectable_icon_kit_checked_disabled.dark {
+	input[type="checkbox"],
+	input[type="radio"] {
+		-webkit-appearance: none;
+		-moz-appearance: none;
+		display: none;
+		appearance: none;
+		transition: color $transition_short ease;
+		
+		&:checked ~ label * {
 			transition: color $transition_short ease;
+			color: $active_dark !important;
+		}
 			
-			&:checked ~ label * {
-				transition: color $transition_short ease;
-				color: $active_dark !important;
-			}
-				
-			&:not(:checked) ~ label {
-				transition: color $transition_short ease;
-				color: $text_dk_lighter;
+		&:not(:checked) ~ label {
+			transition: color $transition_short ease;
+			color: $text_dk_lighter;
 
-				h4 {
-					transition: color $transition_short ease;
-					color: $text_dk_default;
-				}
+			h4 {
+				transition: color $transition_short ease;
+				color: $text_dk_default;
 			}
 		}
- 	}
+	}
 }
 
 

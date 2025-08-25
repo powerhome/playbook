@@ -21,36 +21,46 @@ module Playbook
                           default: nil
 
       def classname
+        title_classes = ["pb_title_kit"]
+
         if is_size_responsive
-          generate_classname("pb_title_kit", variant, color, is_bold) + generate_responsive_size_classname
+          title_classes << "pb_title_#{variant}" if variant.present?
+          title_classes << "pb_title_#{color}" if color.present?
+          title_classes << "pb_title_#{is_bold}" if is_bold.present?
+          title_classes += generate_responsive_size_classes
         else
-          generate_classname("pb_title_kit", size, variant, color, is_bold) + generate_display_size
+          title_classes << "pb_title_#{size}" if size.present?
+          title_classes << "pb_title_#{variant}" if variant.present?
+          title_classes << "pb_title_#{color}" if color.present?
+          title_classes << "pb_title_#{is_bold}" if is_bold.present?
+          title_classes += generate_display_size_classes
         end
+
+        generate_classname(title_classes.compact.join(" "), separator: " ")
       end
 
       def is_bold
         bold ? nil : "thin"
       end
 
-      def generate_display_size
-        return "" if display_size.nil?
+      def generate_display_size_classes
+        return [] if display_size.nil?
 
-        " pb_title_kit_dynamic_#{display_size}"
+        ["pb_title_dynamic_#{display_size}"]
       end
 
       def is_size_responsive
         try(:size).is_a?(::Hash)
       end
 
-      def generate_responsive_size_classname
-        css = ""
+      def generate_responsive_size_classes
+        classes = []
         if is_size_responsive
           size.each do |key, value|
-            css += " pb_title_kit_#{key}_#{value}"
+            classes << "pb_title_#{key}_#{value}"
           end
         end
-
-        css unless css.blank?
+        classes
       end
     end
   end

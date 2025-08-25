@@ -35,7 +35,6 @@ const SelectableListRadio = () => {
             value="1"
         />
         <SelectableList.Item
-            defaultChecked
             label="Medium"
             name="radio"
             value="2"
@@ -62,7 +61,7 @@ test("renders variant checkbox", () => {
 test("renders variant radio", () => {
     render(<SelectableListRadio />)
     const kit = screen.getByTestId("selectable-list-test")
-    const checkbox = kit.querySelector(".pb_radio_kit")
-    expect(checkbox).toBeInTheDocument()
+    const radio = kit.querySelector("input[type='radio']")
+    expect(radio).toBeInTheDocument()
 
 })

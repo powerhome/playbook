@@ -19,7 +19,6 @@ const RadioReactHook = () => {
           paddingRight="lg"
         >
         <Radio
-            alignment="left"
             label="Small"
             marginBottom='sm'
             name="size"
@@ -28,7 +27,6 @@ const RadioReactHook = () => {
         />
         <br />
         <Radio
-            alignment="left"
             label="Medium"
             marginBottom='sm'
             name="size"
@@ -37,7 +35,6 @@ const RadioReactHook = () => {
         />
         <br />
         <Radio
-            alignment="left"
             label="Large"
             marginBottom='sm'
             name="size"

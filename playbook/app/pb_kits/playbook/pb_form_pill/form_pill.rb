@@ -20,7 +20,14 @@ module Playbook
                      default: false
 
       def classname
-        generate_classname("pb_form_pill_kit", color, icon_class, name, text, text_transform, wrapped_class)
+        classes = []
+        classes << (icon ? "pb_form_pill_kit_icon" : "pb_form_pill_kit")
+        classes << "pb_form_pill_wrapped" if wrapped
+        classes << "pb_form_pill_small" if size == "small"
+        classes << "pb_form_pill_#{color}"
+        classes << "pb_form_pill_#{text_transform}"
+        classes.join(" ")
+        generate_classname(classes.join(" "), separator: " ")
       end
 
       def display_text
@@ -32,7 +39,7 @@ module Playbook
       end
 
       def icon_class
-        icon ? "icon" : nil
+        icon ? "icon" : ""
       end
 
       def close_icon_size

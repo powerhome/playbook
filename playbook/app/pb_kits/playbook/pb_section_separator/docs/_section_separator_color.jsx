@@ -5,7 +5,9 @@ import Detail from '../../pb_detail/_detail'
 import Icon from '../../pb_icon/_icon'
 
 const children = (
-  <Flex padding="xs">
+  <Flex alignItems="center"
+      padding="xs"
+  >
     <Icon color="primary"
         icon="arrow-down"
     />

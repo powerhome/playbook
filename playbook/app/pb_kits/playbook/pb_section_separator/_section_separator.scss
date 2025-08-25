@@ -18,7 +18,7 @@ $section_colors_dark: (
   card:         tint($bg_dark,10),
 );
 
-[class^=pb_section_separator_kit] {
+.pb_section_separator_kit {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -26,7 +26,7 @@ $section_colors_dark: (
   span {
     padding: 0;
     display: flex;
-    [class*="pb_caption_kit"] {
+    .pb_caption_kit_md {
       padding: 0 $space_xs;
     }
   }
@@ -42,95 +42,106 @@ $section_colors_dark: (
     flex: 1;
     @include section_separator_horizontal;
   }
-  @each $color_name, $color_value in $section_selector_colors {
-    &[class*="color_#{$color_name}"] {
-      &::before, &::after {
+}
+
+// Horizontal orientation (default)
+.pb_section_separator_horizontal {
+  justify-content: center;
+}
+
+// Vertical orientation
+.pb_section_separator_vertical {
+  margin-left: $space_xs;
+  margin-right: $space_xs;
+  &::before {
+    display: none;
+  }
+  &::after {
+    @include section_separator_vertical(false);
+  }
+}
+
+// Dashed line style
+.pb_section_separator_dashed {
+  &::before, &::after {
+    @include section_separator_dashed(false);
+  }
+}
+
+// Color variations
+@each $color_name, $color_value in $section_selector_colors {
+  .pb_section_separator_color_#{$color_name} {
+    &::before, &::after {
+      background: $color_value;
+    }
+
+    &.pb_section_separator_vertical {
+      &::after {
         background: $color_value;
       }
-
-      &[class*=_vertical] {
-        &::after {
-          background: $color_value;
-        }
-      }
-      &[class*=_dashed] {
-        &::before, &::after {
-          border: 1px dashed $color_value;
-        }
-        &[class*=_vertical] {
-          &::after {
-            border: 1px dashed $color_value;
-            background: none;
-          }
-        }
-      }
     }
-  }
-
-  &[class*=_horizontal] {
-    justify-content: center;
-  }
-  &[class*=_vertical] {
-    margin-left: $space_xs;
-    margin-right: $space_xs;
-    &::before {
-      display: none;
-    }
-    &::after {
-      @include section_separator_vertical(false);
-    }
-  }
-
-  &[class*=_dashed] {
-    &::before, &::after {
-      @include section_separator_dashed(false);
-    }
-  }
-
-  // Dark =========================
-
-  &.dark {
-    @each $color_name, $color_value in $section_selector_colors {
-      &[class*="color_#{$color_name}"] {
-        &::before, &::after {
-          background: $color_value;
-        }
-
-        &[class*=_vertical] {
-          &::after {
-            @include section_separator_vertical(false);
-            background: $color_value;
-          }
-        }
-
-        &[class*=_dashed] {
-          &::before, &::after {
-            border: 1px dashed $color_value;
-            background: none;
-          }
-          &[class*=_vertical] {
-            &::after {
-              border: 1px dashed $color_value;
-              background: none;
-            }
-          }
-        }
-      }
-    }
-    &::before {
-      @include section_separator_horizontal(true);
-    }
-    &::after {
-      @include section_separator_horizontal(true);
-    }
-    &[class*=_vertical] {
-      &::after {
-        @include section_separator_vertical(true);
-      }
-    }
-    &[class*=_dashed] {
+    
+    &.pb_section_separator_dashed {
       &::before, &::after {
-        @include section_separator_dashed(true);
+        border: 1px dashed $color_value;
+        background: none;
+      }
+      &.pb_section_separator_vertical {
+        &::after {
+          border: 1px dashed $color_value;
+          background: none;
+        }
+      }
+    }
+  }
+}
+
+// Dark mode styles
+.pb_section_separator_kit.dark {
+  &::before {
+    @include section_separator_horizontal(true);
+  }
+  &::after {
+    @include section_separator_horizontal(true);
+  }
+  
+  &.pb_section_separator_vertical {
+    &::after {
+      @include section_separator_vertical(true);
+    }
+  }
+  
+  &.pb_section_separator_dashed {
+    &::before, &::after {
+      @include section_separator_dashed(true);
+    }
+  }
+}
+
+// Dark mode color variations
+@each $color_name, $color_value in $section_selector_colors {
+  .pb_section_separator_kit.dark.pb_section_separator_color_#{$color_name} {
+    &::before, &::after {
+      background: $color_value;
+    }
+
+    &.pb_section_separator_vertical {
+      &::after {
+        @include section_separator_vertical(false);
+        background: $color_value;
+      }
+    }
+
+    &.pb_section_separator_dashed {
+      &::before, &::after {
+        border: 1px dashed $color_value;
+        background: none;
+      }
+      &.pb_section_separator_vertical {
+        &::after {
+          border: 1px dashed $color_value;
+          background: none;
+        }
       }
     }
   }

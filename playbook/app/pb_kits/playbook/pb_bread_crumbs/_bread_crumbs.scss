@@ -3,7 +3,7 @@
 @import "../tokens/spacing";
 @import "../tokens/typography";
 
-[class^=pb_bread_crumbs_kit] {
+.pb_bread_crumbs_kit {
   $pb_badge_height: 18px;
 
   display: inline-flex;
@@ -14,35 +14,22 @@
   svg {
    margin-right: 8px;
   }
-    .pb_bread_crumb_item {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-
-    }
-    .pb_bread_crumb_item_kit {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-    }
-    .pb_bread_crumb_item_kit:not(:last-child):after {
-      content: '/';
-      padding-left: 8px;
-      padding-right: 8px;
-    }
-
-  @each $color_name, $color_value in $status_colors {
-    &[class*=_#{$color_name}]  {
-      background: rgba($color_value, $opacity_1);
-      color: map-get($status_color_text, $color_name);
-    }
+  
+  .pb_bread_crumb_item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
   }
-
-  &.dark {
-    @each $color_name, $color_value in $status_colors {
-      &[class*=_#{$color_name}]  {
-        background: rgba(mix($bg_dark, $color_value, 10%), $opacity_2);
-      }
-    }
+  
+  .pb_bread_crumb_item_kit {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+  
+  .pb_bread_crumb_item_kit:not(:last-child):after {
+    content: '/';
+    padding-left: 8px;
+    padding-right: 8px;
   }
 }

@@ -13,7 +13,7 @@ RSpec.describe Playbook::PbIconCircle::IconCircle do
   }
   it {
     is_expected.to define_enum_prop(:variant)
-      .with_default("lighter")
+      .with_default("default")
       .with_values("default", "royal", "blue", "orange", "purple", "teal", "red", "yellow", "green", "orange", "lighter")
   }
 
@@ -21,10 +21,10 @@ RSpec.describe Playbook::PbIconCircle::IconCircle do
     it "returns namespaced class name", :aggregate_failures do
       icon = "user"
       expect(subject.new(icon: icon, variant: "royal").classname).to eq "pb_icon_circle_kit_size_md_royal"
-      expect(subject.new(icon: icon, size: "sm").classname).to eq "pb_icon_circle_kit_size_sm_lighter"
-      expect(subject.new(icon: icon, size: "sm", dark: true).classname).to eq "pb_icon_circle_kit_size_sm_lighter dark"
+      expect(subject.new(icon: icon, size: "sm").classname).to eq "pb_icon_circle_kit_size_sm_default"
+      expect(subject.new(icon: icon, size: "sm", dark: true).classname).to eq "pb_icon_circle_kit_size_sm_default dark"
       expect(subject.new(icon: icon, variant: "purple", size: "lg").classname).to eq "pb_icon_circle_kit_size_lg_purple"
-      expect(subject.new(icon: icon, classname: "additional_class").classname).to eq "pb_icon_circle_kit_size_md_lighter additional_class"
+      expect(subject.new(icon: icon, classname: "additional_class").classname).to eq "pb_icon_circle_kit_size_md_default additional_class"
     end
 
     it "raises an error when not given an icon" do

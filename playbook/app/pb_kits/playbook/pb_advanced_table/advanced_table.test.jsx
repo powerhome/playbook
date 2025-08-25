@@ -443,7 +443,7 @@ test("sort button exists and sorts column data", () => {
 
   const kit = screen.getByTestId(testId)
 
-  const sortButton= kit.querySelector(".pb_flex_kit_orientation_row_justify_content_between_align_items_top_spacing_none.pl_xxs.cursor_pointer.header-sort-button.pb_th_link")
+  const sortButton= kit.querySelector(".pb_flex_kit.pb_flex_kit_orientation_row.pb_flex_kit_justify_content_between.pb_flex_kit_align_items_top.pb_flex_kit_spacing_none.pl_xxs.cursor_pointer.header-sort-button.pb_th_link.false")
   expect(sortButton).toBeInTheDocument()
 
   const row1 = kit.getElementsByTagName('tr')[1]

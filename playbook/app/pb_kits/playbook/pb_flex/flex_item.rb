@@ -17,7 +17,7 @@ module Playbook
                           default: false
 
       def classname
-        generate_classname("pb_flex_item_kit", fixed_size_class, grow_class, shrink_class, display_flex_class) + align_self_class
+        generate_classname("pb_flex_item_kit", fixed_size_class, grow_class, shrink_class, display_flex_class, align_self_class, separator: " ")
       end
 
       def inline_styles
@@ -32,23 +32,23 @@ module Playbook
     private
 
       def align_self_class
-        align_self ? "align_self_#{align_self}" : ""
+        align_self ? "pb_flex_item_kit_align_self_#{align_self}" : nil
       end
 
       def display_flex_class
-        display_flex ? "display_flex" : nil
+        display_flex ? "pb_flex_item_kit_display_flex" : nil
       end
 
       def fixed_size_class
-        fixed_size.present? ? "fixed_size" : nil
+        fixed_size.present? ? "pb_flex_item_kit_fixed_size" : nil
       end
 
       def grow_class
-        grow ? "grow" : nil
+        grow ? "pb_flex_item_kit_grow" : nil
       end
 
       def shrink_class
-        shrink ? "shrink" : nil
+        shrink ? "pb_flex_item_kit_shrink" : nil
       end
     end
   end

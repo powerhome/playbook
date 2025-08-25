@@ -74,7 +74,7 @@ describe("DateRangeStacked Kit", () => {
         )
 
         const kit = screen.getByTestId(testId)
-        const text = kit.querySelector('.pb_date_year_stacked_right>.pb_title_kit_size_4')
+        const text = kit.querySelector('.pb_date_year_stacked_right>.pb_title_kit.pb_title_4')
         expect(text.textContent).toEqual("18 JUN")
     })
 
@@ -104,7 +104,7 @@ describe("DateRangeStacked Kit", () => {
         )
 
         const kit = screen.getByTestId(testId)
-        const text = kit.querySelector('.pb_date_year_stacked_left>.pb_title_kit_size_4')
+        const text = kit.querySelector('.pb_date_year_stacked_left>.pb_title_kit.pb_title_4')
         expect(text.textContent).toEqual("20 MAR")
     })
 

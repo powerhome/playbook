@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative "../../../../app/pb_kits/playbook/pb_layout/layout.rb"
+require_relative "../../../../app/pb_kits/playbook/pb_layout/layout"
 
 RSpec.describe Playbook::PbLayout::Layout do
   subject { Playbook::PbLayout::Layout }
@@ -35,13 +35,13 @@ RSpec.describe Playbook::PbLayout::Layout do
 
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
-      expect(subject.new({}).classname).to eq "pb_layout_kit_sidebar_size_md_left_light layout_left_collapse_xs"
-      expect(subject.new(full: true).classname).to eq "pb_layout_kit_sidebar_size_md_left_light full layout_left_collapse_xs"
+      expect(subject.new({}).classname).to eq "pb_layout_kit_sidebar pb_layout_kit_sidebar_size_md_left_light layout_left_collapse_xs"
+      expect(subject.new(full: true).classname).to eq "pb_layout_kit_sidebar pb_layout_kit_sidebar_size_md_left_light pb_layout_kit_sidebar_full layout_left_collapse_xs"
       expect(subject.new(layout: "collection").classname).to eq "pb_layout_kit_collection"
       expect(subject.new(layout: "collection_detail").classname).to eq "pb_layout_kit_collection_detail"
       expect(subject.new(layout: "content").classname).to eq "pb_layout_kit_content"
-      expect(subject.new(variant: "dark", transparent: true, full: true).classname).to eq "pb_layout_kit_sidebar_size_md_left_dark_transparent full layout_left_collapse_xs"
-      expect(subject.new(variant: "dark", position: "right", size: "sm").classname).to eq "pb_layout_kit_sidebar_size_sm_right_dark layout_right_collapse_xs"
+      expect(subject.new(variant: "dark", transparent: true, full: true).classname).to eq "pb_layout_kit_sidebar pb_layout_kit_sidebar_size_md_left_dark pb_layout_kit_sidebar_transparent pb_layout_kit_sidebar_full layout_left_collapse_xs"
+      expect(subject.new(variant: "dark", position: "right", size: "sm").classname).to eq "pb_layout_kit_sidebar pb_layout_kit_sidebar_size_sm_right_dark layout_right_collapse_xs"
     end
   end
 end
