@@ -3652,10 +3652,10 @@
   resolved "https://registry.yarnpkg.com/@types/estree/-/estree-1.0.5.tgz#a6ce3e556e00fd9895dd872dd172ad0d4bd687f4"
   integrity sha512-/kYRxGDLWzHOB7q+wtSUQlFrtcdUccpfy+X+9iMBpHK8QLLhx2wIPYuS5DYtR9Wa/YlZAbIovy7qVdB1Aq6Lyw==
 
-"@types/flatpickr@3.1.2":
-  version "3.1.2"
-  resolved "https://npm.powerapp.cloud/@types/flatpickr/-/flatpickr-3.1.2.tgz#767e04fea776ddb399007028bed1a885e26d6d52"
-  integrity sha512-vCEuLqfSlpPhLDOvxyYMIlX20Dwn3XSEeYf9rXfcldDQdLVrtxDdIzE82xhlEFVeHpERujCCQIqETNEUrGsVtA==
+"@types/flatpickr@3.1.4":
+  version "3.1.4"
+  resolved "https://npm.powerapp.cloud/@types/flatpickr/-/flatpickr-3.1.4.tgz#f4d87faa0d37e5faaa9fe1a663b6367317916d5d"
+  integrity sha512-czk8lydTB2qzWBqI6gproY594pg+iEfpHQyrvnyMnMKxvD+2qbrs1g2F8KiWZK173jQMw2C7O9lFjiKeBNub+A==
   dependencies:
     flatpickr "*"
 
