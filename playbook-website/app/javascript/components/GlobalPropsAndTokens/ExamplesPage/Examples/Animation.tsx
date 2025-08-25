@@ -2,7 +2,38 @@ import ShowPage from "../../Templates/ShowPage";
 import PropsExamplesTable from "../../Templates/Subcomponents/PropsExamplesTable";
 import ExampleCodeCard from "../../Templates/Subcomponents/ExampleCodeCard";
 import ValueCardWithTooltip from "../../Templates/Subcomponents/ValueCardWithTooltip";
-import { easeInOutBack, easeInOutCirc } from "./AnimationImages"
+import {
+  bezier,
+  ease,
+  easeIn,
+  easeInBack,
+  easeInCirc,
+  easeInCubic,
+  easeInExpo,
+  easeInOut,
+  easeInOutBack,
+  easeInOutCirc,
+  easeInOutCubic,
+  easeInOutExpo,
+  easeInOutQuad,
+  easeInOutQuart,
+  easeInOutQuint,
+  easeInOutSine,
+  easeInQuad,
+  easeInQuart,
+  easeInQuint,
+  easeInSine,
+  easeOut,
+  easeOutBack,
+  easeOutCirc,
+  easeOutCubic,
+  easeOutExpo,
+  easeOutQuad,
+  easeOutQuart,
+  easeOutQuint,
+  easeOutSine,
+  linear,
+} from './AnimationImages';
 
 const Animation = () => {
   return (
@@ -17,32 +48,92 @@ const Animation = () => {
           rows={[
             [
               "$bezier",
-              "cubic-bezier(0.64, 0.00, 0.35, 1)",
+              <ValueCardWithTooltip
+                isImage
+                key="cubic-bezier(0.64, 0.00, 0.35, 1)"
+                text="cubic-bezier(0.64, 0.00, 0.35, 1)"
+                tooltipText={
+                  <img
+                    src={bezier}
+                    alt="bezier"
+                  />
+                }
+              />,
               <ExampleCodeCard id="bezier" text="transition: $bezier;" />,
             ],
             [
               "$linear",
-              "cubic-bezier(0.250, 0.250, 0.75, 0.750)",
+              <ValueCardWithTooltip
+                isImage
+                key="cubic-bezier(0.250, 0.250, 0.75, 0.750)"
+                text="cubic-bezier(0.250, 0.250, 0.75, 0.750)"
+                tooltipText={
+                  <img
+                    src={linear}
+                    alt="linear"
+                  />
+                }
+              />,
               <ExampleCodeCard id="linear" text="transition: $linear;" />,
             ],
             [
               "$ease",
-              "cubic-bezier(0.250, 0.100, 0.250, 1.000)",
+              <ValueCardWithTooltip
+                isImage
+                key="cubic-bezier(0.250, 0.100, 0.250, 1.000)"
+                text="cubic-bezier(0.250, 0.100, 0.250, 1.000)"
+                tooltipText={
+                  <img
+                    src={ease}
+                    alt="ease"
+                  />
+                }
+              />,
               <ExampleCodeCard id="ease" text="transition: $ease;" />,
             ],
             [
               "$easeIn",
-              "cubic-bezier(0.420, 0.00, 1.00, 1.00)",
+              <ValueCardWithTooltip
+                isImage
+                key="cubic-bezier(0.420, 0.00, 1.00, 1.00)"
+                text="cubic-bezier(0.420, 0.00, 1.00, 1.00)"
+                tooltipText={
+                  <img
+                    src={easeIn}
+                    alt="easeIn"
+                  />
+                }
+              />,
               <ExampleCodeCard id="easeIn" text="transition: $easeIn;" />,
             ],
             [
               "$easeOut",
-              "cubic-bezier(0.000, 0.000, 0.580, 1.000)",
+              <ValueCardWithTooltip
+                isImage
+                key="cubic-bezier(0.000, 0.000, 0.580, 1.000)"
+                text="cubic-bezier(0.000, 0.000, 0.580, 1.000)"
+                tooltipText={
+                  <img
+                    src={easeOut}
+                    alt="easeOut"
+                  />
+                }
+              />,
               <ExampleCodeCard id="easeOut" text="transition: $easeOut;" />,
             ],
             [
               "$easeInOut",
-              "cubic-bezier(0.420, 0.000, 0.580, 1.000)",
+              <ValueCardWithTooltip
+                isImage
+                key="cubic-bezier(0.420, 0.000, 0.580, 1.000)"
+                text="cubic-bezier(0.420, 0.000, 0.580, 1.000)"
+                tooltipText={
+                  <img
+                    src={easeInOut}
+                    alt="easeInOut"
+                  />
+                }
+              />,
               <ExampleCodeCard id="easeInOut" text="transition: $easeInOut;" />,
             ],
           ]}
@@ -52,44 +143,124 @@ const Animation = () => {
           rows={[
             [
               "$easeInQuad",
-              "cubic-bezier(0.550, 0.085, 0.680, 0.530)",
+              <ValueCardWithTooltip
+                isImage
+                key="cubic-bezier(0.550, 0.085, 0.680, 0.530)"
+                text="cubic-bezier(0.550, 0.085, 0.680, 0.530)"
+                tooltipText={
+                  <img
+                    src={easeInQuad}
+                    alt="easeInQuad"
+                  />
+                }
+              />,
               <ExampleCodeCard id="easeInQuad" text="transition: $easeInQuad;" />,
             ],
             [
               "$easeInCubic",
-              "cubic-bezier(0.550, 0.055, 0.675, 0.190)",
+              <ValueCardWithTooltip
+                isImage
+                key="cubic-bezier(0.550, 0.055, 0.675, 0.190)"
+                text="cubic-bezier(0.550, 0.055, 0.675, 0.190)"
+                tooltipText={
+                  <img
+                    src={easeInCubic}
+                    alt="easeInCubic"
+                  />
+                }
+              />,
               <ExampleCodeCard id="easeInCubic" text="transition: $easeInCubic;" />,
             ],
             [
               "$easeInQuart",
-              "cubic-bezier(0.895, 0.030, 0.685, 0.220)",
+              <ValueCardWithTooltip
+                isImage
+                key="cubic-bezier(0.895, 0.030, 0.685, 0.220)"
+                text="cubic-bezier(0.895, 0.030, 0.685, 0.220)"
+                tooltipText={
+                  <img
+                    src={easeInQuart}
+                    alt="easeInQuart"
+                  />
+                }
+              />,
               <ExampleCodeCard id="easeInQuart" text="transition: $easeInQuart;" />,
             ],
             [
               "$easeInQuint",
-              "cubic-bezier(0.755, 0.050, 0.855, 0.060)",
+              <ValueCardWithTooltip
+                isImage
+                key="cubic-bezier(0.755, 0.050, 0.855, 0.060)"
+                text="cubic-bezier(0.755, 0.050, 0.855, 0.060)"
+                tooltipText={
+                  <img
+                    src={easeInQuint}
+                    alt="easeInQuint"
+                  />
+                }
+              />,
               <ExampleCodeCard id="easeInQuint" text="transition: $easeInQuint;" />,
             ],
             [
               "$easeInSine",
-              "cubic-bezier(0.470, 0.000, 0.745, 0.715)",
+              <ValueCardWithTooltip
+                isImage
+                key="cubic-bezier(0.470, 0.000, 0.745, 0.715)"
+                text="cubic-bezier(0.470, 0.000, 0.745, 0.715)"
+                tooltipText={
+                  <img
+                    src={easeInSine}
+                    alt="easeInSine"
+                  />
+                }
+              />,
               <ExampleCodeCard id="easeInSine" text="transition: $easeInSine;" />,
             ],
             [
               "$easeInExpo",
-              "cubic-bezier(0.950, 0.050, 0.795, 0.035)",
+              <ValueCardWithTooltip
+                isImage
+                key="cubic-bezier(0.950, 0.050, 0.795, 0.035)"
+                text="cubic-bezier(0.950, 0.050, 0.795, 0.035)"
+                tooltipText={
+                  <img
+                    src={easeInExpo}
+                    alt="easeInExpo"
+                  />
+                }
+              />,
               <ExampleCodeCard id="easeInExpo" text="transition: $easeInExpo;" />,
             ],
             [
               "$easeInCirc",
-              "cubic-bezier(0.600, 0.040, 0.980, 0.335)",
+              <ValueCardWithTooltip
+                isImage
+                key="cubic-bezier(0.600, 0.040, 0.980, 0.335)"
+                text="cubic-bezier(0.600, 0.040, 0.980, 0.335)"
+                tooltipText={
+                  <img
+                    src={easeInCirc}
+                    alt="easeInCirc"
+                  />
+                }
+              />,
               <ExampleCodeCard id="easeInCirc" text="transition: $easeInCirc;" />,
             ],
             [
               "$easeInBack",
-              "cubic-bezier(0.600, -0.280, 0.735, 0.045)",
+              <ValueCardWithTooltip
+                isImage
+                key="cubic-bezier(0.600, -0.280, 0.735, 0.045)"
+                text="cubic-bezier(0.600, -0.280, 0.735, 0.045)"
+                tooltipText={
+                  <img
+                    src={easeInBack}
+                    alt="easeInBack"
+                  />
+                }
+              />,
               <ExampleCodeCard id="easeInBack" text="transition: $easeInBack;" />,
-            ],
+            ]
           ]}
         />
         <PropsExamplesTable
@@ -97,42 +268,122 @@ const Animation = () => {
           rows={[
             [
               "$easeOutQuad",
-              "cubic-bezier(0.250, 0.460, 0.450, 0.940)",
+              <ValueCardWithTooltip
+                isImage
+                key="cubic-bezier(0.250, 0.460, 0.450, 0.940)"
+                text="cubic-bezier(0.250, 0.460, 0.450, 0.940)"
+                tooltipText={
+                  <img
+                    src={easeOutQuad}
+                    alt="easeOutQuad"
+                  />
+                }
+              />,
               <ExampleCodeCard id="easeOutQuad" text="transition: $easeOutQuad;" />,
             ],
             [
               "$easeOutCubic",
-              "cubic-bezier(0.215, 0.610, 0.355, 1.000)",
+              <ValueCardWithTooltip
+                isImage
+                key="cubic-bezier(0.215, 0.610, 0.355, 1.000)"
+                text="cubic-bezier(0.215, 0.610, 0.355, 1.000)"
+                tooltipText={
+                  <img
+                    src={easeOutCubic}
+                    alt="easeOutCubic"
+                  />
+                }
+              />,
               <ExampleCodeCard id="easeOutCubic" text="transition: $easeOutCubic;" />,
             ],
             [
               "$easeOutQuart",
-              "cubic-bezier(0.165, 0.840, 0.440, 1.000)",
+              <ValueCardWithTooltip
+                isImage
+                key="cubic-bezier(0.165, 0.840, 0.440, 1.000)"
+                text="cubic-bezier(0.165, 0.840, 0.440, 1.000)"
+                tooltipText={
+                  <img
+                    src={easeOutQuart}
+                    alt="easeOutQuart"
+                  />
+                }
+              />,
               <ExampleCodeCard id="easeOutQuart" text="transition: $easeOutQuart;" />,
             ],
             [
               "$easeOutQuint",
-              "cubic-bezier(0.230, 1.000, 0.320, 1.000)",
+              <ValueCardWithTooltip
+                isImage
+                key="cubic-bezier(0.230, 1.000, 0.320, 1.000)"
+                text="cubic-bezier(0.230, 1.000, 0.320, 1.000)"
+                tooltipText={
+                  <img
+                    src={easeOutQuint}
+                    alt="easeOutQuint"
+                  />
+                }
+              />,
               <ExampleCodeCard id="easeOutQuint" text="transition: $easeOutQuint;" />,
             ],
             [
               "$easeOutSine",
-              "cubic-bezier(0.390, 0.575, 0.565, 1.000)",
+              <ValueCardWithTooltip
+                isImage
+                key="cubic-bezier(0.390, 0.575, 0.565, 1.000)"
+                text="cubic-bezier(0.390, 0.575, 0.565, 1.000)"
+                tooltipText={
+                  <img
+                    src={easeOutSine}
+                    alt="easeOutSine"
+                  />
+                }
+              />,
               <ExampleCodeCard id="easeOutSine" text="transition: $easeOutSine;" />,
             ],
             [
               "$easeOutExpo",
-              "cubic-bezier(0.190, 1.000, 0.220, 1.000)",
+              <ValueCardWithTooltip
+                isImage
+                key="cubic-bezier(0.190, 1.000, 0.220, 1.000)"
+                text="cubic-bezier(0.190, 1.000, 0.220, 1.000)"
+                tooltipText={
+                  <img
+                    src={easeOutExpo}
+                    alt="easeOutExpo"
+                  />
+                }
+              />,
               <ExampleCodeCard id="easeOutExpo" text="transition: $easeOutExpo;" />,
             ],
             [
               "$easeOutCirc",
-              "cubic-bezier(0.075, 0.820, 0.165, 1.000)",
+              <ValueCardWithTooltip
+                isImage
+                key="cubic-bezier(0.075, 0.820, 0.165, 1.000)"
+                text="cubic-bezier(0.075, 0.820, 0.165, 1.000)"
+                tooltipText={
+                  <img
+                    src={easeOutCirc}
+                    alt="easeOutCirc"
+                  />
+                }
+              />,
               <ExampleCodeCard id="easeOutCirc" text="transition: $easeOutCirc;" />,
             ],
             [
               "$easeOutBack",
-              "cubic-bezier(0.175, 0.885, 0.320, 1.275)",
+              <ValueCardWithTooltip
+                isImage
+                key="cubic-bezier(0.175, 0.885, 0.320, 1.275)"
+                text="cubic-bezier(0.175, 0.885, 0.320, 1.275)"
+                tooltipText={
+                  <img
+                    src={easeOutBack}
+                    alt="easeOutBack"
+                  />
+                }
+              />,
               <ExampleCodeCard id="easeOutBack" text="transition: $easeOutBack;" />,
             ],
           ]}
@@ -142,32 +393,92 @@ const Animation = () => {
           rows={[
             [
               "$easeInOutQuad",
-              "cubic-bezier(0.455, 0.030, 0.515, 0.955)",
+              <ValueCardWithTooltip
+                isImage
+                key="cubic-bezier(0.455, 0.030, 0.515, 0.955)"
+                text="cubic-bezier(0.455, 0.030, 0.515, 0.955)"
+                tooltipText={
+                  <img
+                    src={easeInOutQuad}
+                    alt="easeInOutQuad"
+                  />
+                }
+              />,
               <ExampleCodeCard id="easeInOutQuad" text="transition: $easeInOutQuad;" />,
             ],
             [
               "$easeInOutCubic",
-              "cubic-bezier(0.645, 0.045, 0.355, 1.000)",
+              <ValueCardWithTooltip
+                isImage
+                key="cubic-bezier(0.645, 0.045, 0.355, 1.000)"
+                text="cubic-bezier(0.645, 0.045, 0.355, 1.000)"
+                tooltipText={
+                  <img
+                    src={easeInOutCubic}
+                    alt="easeInOutCubic"
+                  />
+                }
+              />,
               <ExampleCodeCard id="easeInOutCubic" text="transition: $easeInOutCubic;" />,
             ],
             [
               "$easeInOutQuart",
-              "cubic-bezier(0.770, 0.000, 0.175, 1.000)",
+              <ValueCardWithTooltip
+                isImage
+                key="cubic-bezier(0.770, 0.000, 0.175, 1.000)"
+                text="cubic-bezier(0.770, 0.000, 0.175, 1.000)"
+                tooltipText={
+                  <img
+                    src={easeInOutQuart}
+                    alt="easeInOutQuart"
+                  />
+                }
+              />,
               <ExampleCodeCard id="easeInOutQuart" text="transition: $easeInOutQuart;" />,
             ],
             [
               "$easeInOutQuint",
-              "cubic-bezier(0.860, 0.000, 0.070, 1.000)",
+              <ValueCardWithTooltip
+                isImage
+                key="cubic-bezier(0.860, 0.000, 0.070, 1.000)"
+                text="cubic-bezier(0.860, 0.000, 0.070, 1.000)"
+                tooltipText={
+                  <img
+                    src={easeInOutQuint}
+                    alt="easeInOutQuint"
+                  />
+                }
+              />,
               <ExampleCodeCard id="easeInOutQuint" text="transition: $easeInOutQuint;" />,
             ],
             [
               "$easeInOutSine",
-              "cubic-bezier(0.445, 0.050, 0.550, 0.950)",
+              <ValueCardWithTooltip
+                isImage
+                key="cubic-bezier(0.445, 0.050, 0.550, 0.950)"
+                text="cubic-bezier(0.445, 0.050, 0.550, 0.950)"
+                tooltipText={
+                  <img
+                    src={easeInOutSine}
+                    alt="easeInOutSine"
+                  />
+                }
+              />,
               <ExampleCodeCard id="easeInOutSine" text="transition: $easeInOutSine;" />,
             ],
             [
               "$easeInOutExpo",
-              "cubic-bezier(1.000, 0.000, 0.000, 1.000)",
+              <ValueCardWithTooltip
+                isImage
+                key="cubic-bezier(1.000, 0.000, 0.000, 1.000)"
+                text="cubic-bezier(1.000, 0.000, 0.000, 1.000)"
+                tooltipText={
+                  <img
+                    src={easeInOutExpo}
+                    alt="easeInOutExpo"
+                  />
+                }
+              />,
               <ExampleCodeCard id="easeInOutExpo" text="transition: $easeInOutExpo;" />,
             ],
             [
