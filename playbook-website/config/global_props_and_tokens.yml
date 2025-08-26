@@ -3,6 +3,7 @@ global_props:
   - margin
   - cursor
   - hover
+  - dark
 
 tokens:
   - animation
