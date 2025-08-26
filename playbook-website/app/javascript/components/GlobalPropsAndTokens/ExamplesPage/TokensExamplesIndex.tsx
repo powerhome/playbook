@@ -1,9 +1,13 @@
-import React from "react";
 import { Background } from "playbook-ui";
 import Display from "./Examples/Display";
+import Animation from "./Examples/Animation";
+import VerticalAlign from "./Examples/VerticalAlign";
+
 
 const COMPONENT_MAP = {
+  animation: Animation,
   display: Display,
+  vertical_align: VerticalAlign,
 };
 
 const TokensExamples = () => {

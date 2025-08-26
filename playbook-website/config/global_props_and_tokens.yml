@@ -4,4 +4,6 @@ global_props:
   - cursor
 
 tokens:
+  - animation
   - display
+  - vertical_align
