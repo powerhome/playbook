@@ -4,17 +4,16 @@ import { LoadingInline } from 'playbook-ui'
 const LoadingInlineVariant = (props) => {
   return (
     <div>
-
-  
       <LoadingInline 
-          text="Dotted Loading" 
+          text=" Dotted Spinner" 
           variant="dotted" 
           {...props}
       />
+
       <br />
-      
+  
       <LoadingInline
-          text="Solid Loading"
+          text=" Solid Spinner"
           variant="solid"
           {...props}
       />
