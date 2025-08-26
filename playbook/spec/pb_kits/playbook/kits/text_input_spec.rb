@@ -6,6 +6,7 @@ require_relative "../../../../app/pb_kits/playbook/pb_text_input/text_input"
 RSpec.describe Playbook::PbTextInput::TextInput do
   subject { Playbook::PbTextInput::TextInput }
 
+  it { is_expected.to define_prop(:autocomplete) }
   it { is_expected.to define_prop(:disabled) }
   it { is_expected.to define_prop(:dark).with_default(false) }
   it { is_expected.to define_prop(:error) }
@@ -48,6 +49,36 @@ RSpec.describe Playbook::PbTextInput::TextInput do
       it "does not set data-pb-input-mask" do
         text_input = subject.new(mask: nil)
         expect(text_input.input_tag).not_to include("data-pb-input-mask")
+      end
+    end
+  end
+
+  describe "#autocomplete" do
+    context "when autocomplete is false" do
+      it "renders input with autocomplete='off'" do
+        text_input = subject.new(autocomplete: false)
+        expect(text_input.input_tag).to include('autocomplete="off"')
+      end
+    end
+
+    context "when autocomplete is a string" do
+      it "renders input with autocomplete set to that string" do
+        text_input = subject.new(autocomplete: "email")
+        expect(text_input.input_tag).to include('autocomplete="email"')
+      end
+    end
+
+    context "when autocomplete is true" do
+      it "does not render an autocomplete attribute" do
+        text_input = subject.new(autocomplete: true)
+        expect(text_input.input_tag).not_to include("autocomplete=")
+      end
+    end
+
+    context "when autocomplete is not provided" do
+      it "does not render an autocomplete attribute" do
+        text_input = subject.new({})
+        expect(text_input.input_tag).not_to include("autocomplete=")
       end
     end
   end
