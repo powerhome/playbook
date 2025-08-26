@@ -36,7 +36,7 @@ type TextInputProps = {
     alignment?: "right" | "left",
     border?: boolean,
   },
-  autoComplete: boolean | string,
+  autoComplete?: boolean | string,
 } & GlobalProps
 
 const TextInput = (props: TextInputProps, ref: React.LegacyRef<HTMLInputElement>) => {
