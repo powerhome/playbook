@@ -22,7 +22,8 @@ module Playbook
       end
 
       def input
-        check_box_tag(name, value, checked, input_options.merge(disabled: disabled))
+        input_id = id.present? ? "#{id}-input" : "pb_toggle_#{SecureRandom.hex(4)}"
+        check_box_tag(name, value, checked, input_options.merge(disabled: disabled, id: input_id))
       end
 
     private

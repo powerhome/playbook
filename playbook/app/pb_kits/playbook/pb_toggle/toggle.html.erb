@@ -1,5 +1,5 @@
 <%= pb_content_tag do %>
-  <label class="pb_toggle_wrapper">
+  <label class="pb_toggle_wrapper" for="<%= object.id %>-input">
     <%= content.presence || object.input %>
     <div class="pb_toggle_control"></div>
   </label>

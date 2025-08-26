@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useState } from 'react'
 import classnames from 'classnames'
 import type { InputCallback } from '../types'
+import { uniqueId } from '../utilities/object'
 
 import {
   buildAriaProps,
@@ -57,6 +58,9 @@ const Toggle = ({
       }
     ))
 
+const [autoId] = useState(() => uniqueId('toggle-'))
+const inputId = id ? `${id}-input` : `${autoId}-input`
+
   return (
     <div
         {...ariaProps}
@@ -65,7 +69,9 @@ const Toggle = ({
         className={classnames(css, globalProps(props), className)}
         id={id}
     >
-      <label className="pb_toggle_wrapper">
+      <label className="pb_toggle_wrapper" 
+          htmlFor={inputId}
+      >
         {children && children}
 
         {!children &&
@@ -73,6 +79,7 @@ const Toggle = ({
               {...props}
               defaultChecked={checked}
               disabled={disabled}
+              id={inputId}
               name={name}
               onChange={onChange}
               tabIndex={tabIndex}
