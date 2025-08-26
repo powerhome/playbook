@@ -6,7 +6,7 @@ require_relative "../../../../app/pb_kits/playbook/pb_text_input/text_input"
 RSpec.describe Playbook::PbTextInput::TextInput do
   subject { Playbook::PbTextInput::TextInput }
 
-  it { is_expected.to define_prop(:autocomplete) }
+  it { is_expected.to define_prop(:autocomplete).with_default(true) }
   it { is_expected.to define_prop(:disabled) }
   it { is_expected.to define_prop(:dark).with_default(false) }
   it { is_expected.to define_prop(:error) }
