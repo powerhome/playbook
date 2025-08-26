@@ -2,6 +2,7 @@ global_props:
   - html_options
   - margin
   - cursor
+  - hover
 
 tokens:
   - animation

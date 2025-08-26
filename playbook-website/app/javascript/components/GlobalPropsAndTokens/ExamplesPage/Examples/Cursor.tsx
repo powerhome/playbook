@@ -1,4 +1,3 @@
-import React from "react";
 import { Flex, Image } from "playbook-ui";
 import ShowPage from "../../Templates/ShowPage";
 import PropsExamplesTable from "../../Templates/Subcomponents/PropsExamplesTable";

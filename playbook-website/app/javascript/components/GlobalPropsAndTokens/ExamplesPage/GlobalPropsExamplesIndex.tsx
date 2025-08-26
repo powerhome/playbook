@@ -3,11 +3,13 @@ import { Background } from "playbook-ui";
 import HtmlOptions from "./Examples/HtmlOptions";
 import Margin from "./Examples/Margin";
 import Cursor from "./Examples/Cursor";
+import Hover from "./Examples/Hover";
 
 const COMPONENT_MAP = {
   html_options: HtmlOptions,
   margin: Margin,
   cursor: Cursor,
+  hover: Hover,
 };
 
 const GlobalPropsExamples = () => {
