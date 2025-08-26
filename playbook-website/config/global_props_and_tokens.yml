@@ -1,6 +1,7 @@
 global_props:
   - html_options
   - margin
+  - cursor
 
 tokens:
   - display

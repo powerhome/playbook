@@ -2,10 +2,12 @@ import React from "react";
 import { Background } from "playbook-ui";
 import HtmlOptions from "./Examples/HtmlOptions";
 import Margin from "./Examples/Margin";
+import Cursor from "./Examples/Cursor";
 
 const COMPONENT_MAP = {
   html_options: HtmlOptions,
   margin: Margin,
+  cursor: Cursor,
 };
 
 const GlobalPropsExamples = () => {
