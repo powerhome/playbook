@@ -85,7 +85,7 @@
     "react-trix": "0.10.1",
     "react-zoom-pan-pinch": "3.6.0",
     "rollup-plugin-copy": "^3.5.0",
-    "sass": "^1.77.8",
+    "sass": "^1.91.0",
     "terser": "^5.39.0",
     "ts-jest": "26.5.6",
     "typescript": "4.3.5",
