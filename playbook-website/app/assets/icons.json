@@ -1115,6 +1115,10 @@
     "name": "spinner",
     "category": "Interface Core"
   },
+   {
+    "name": "spinner-solid",
+    "category": "Interface Core"
+  },
   {
     "name": "square-plus",
     "category": "Interface Core"
