@@ -140,7 +140,9 @@ const { filteredPadding, filteredMargin } = filterItemSpacing(itemSpacing);
   delete filteredProps?.marginLeft;
 
 
-  const Tag = link ? "a" : "div";
+  // const Tag = link ? "a" : "div";
+  const isLink = !!link
+  const Tag = isLink ? "a" : "div"
   const activeClass = active === true ? "active" : "";
   const highlightedBorderClass = active === true && highlighted_border === false ? "highlighted_border_none" : "";
   const collapsibleTrailClass = collapsible && collapsibleTrail ? "collapsible_trail" : "";
@@ -200,6 +202,13 @@ const { filteredPadding, filteredMargin } = filterItemSpacing(itemSpacing);
 
   const collapsibleClasses = buildCss("collapsible_nav_wrapper", activeClass, highlightedBorderClass, collapsibleTrailClass)
 
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (!isLink && (e.key === "Enter" || e.key === " ")) {
+      e.preventDefault()
+      onClick?.()
+    }
+  }
+
   return (
     <>
       {collapsible ? (
@@ -222,15 +231,20 @@ const { filteredPadding, filteredMargin } = filterItemSpacing(itemSpacing);
                   {...dataProps}
                   {...htmlProps}
                   className={classes}
-                  href={link}
+                  // href={link}
+                  href={isLink ? link : undefined}
                   id={id}
-                  target={target}
+                  role={!isLink ? "button" : undefined}
+                  tabIndex={!isLink ? 0 : undefined}
+                  // target={target}
+                  target={isLink ? target : undefined}
               >
                 {imageUrl && (
                   <div
                       className="pb_nav_list_item_icon_section_collapsible"
                       key={imageUrl}
                       onClick={(e) => handleIconClick(e)}
+                      onKeyDown={!isLink ? handleKeyDown : undefined}
                   >
                     <Image className="pb_nav_img_wrapper"
                         url={imageUrl}
@@ -265,10 +279,14 @@ const { filteredPadding, filteredMargin } = filterItemSpacing(itemSpacing);
             {...dataProps}
             {...htmlProps}
             className={classes}
-            href={link}
+            // href={link}
+            href={isLink ? link : undefined}
             id={id}
             onClick={onClick}
-            target={target}
+            onKeyDown={!isLink ? handleKeyDown : undefined}
+            role={!isLink ? "button" : undefined}
+            tabIndex={!isLink ? 0 : undefined}
+            target={isLink ? target : undefined}
         >
           {imageUrl && (
             <div className="pb_nav_list_item_icon_section"
