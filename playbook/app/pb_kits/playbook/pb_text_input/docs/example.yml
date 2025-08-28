@@ -9,6 +9,8 @@ examples:
   - text_input_no_label: No Label
   - text_input_options: Input Options
   - text_input_mask: Mask
+  - text_input_autocomplete: Autocomplete
+  
   react:
   - text_input_default: Default
   - text_input_error: With Error
@@ -19,6 +21,7 @@ examples:
   - text_input_no_label: No Label
   - text_input_mask: Mask
   - text_input_sanitize: Sanitized Masked Input
+  - text_input_autocomplete: Autocomplete
 
 
   swift:
