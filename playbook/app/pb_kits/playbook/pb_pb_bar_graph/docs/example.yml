@@ -1,0 +1,29 @@
+examples:
+
+  rails:
+  - pb_bar_graph_default: Default
+  - pb_bar_graph_legend: Legend
+  - pb_bar_graph_legend_position: Legend Position
+  - pb_bar_graph_legend_non_clickable: Legend Non Clickable
+  - pb_bar_graph_height: Height
+  - pb_bar_graph_spline: Spline
+  - pb_bar_graph_colors: Color Overrides
+  - pb_bar_graph_custom_rails: Custom Overrides
+  - pb_bar_graph_stacked: Stacked
+  - pb_bar_graph_negative_numbers: Negative Numbers
+  - pb_bar_graph_secondary_y_axis: Secondary Y-Axis
+  - pb_bar_graph_horizontal: Horizontal Bar Graph
+
+
+  react:
+  - pb_bar_graph_default: Default
+  - pb_bar_graph_legend: Legend
+  - pb_bar_graph_legend_position: Legend Position
+  - pb_bar_graph_legend_non_clickable: Legend Non Clickable
+  - pb_bar_graph_height: Height
+  - pb_bar_graph_spline: Spline
+  - pb_bar_graph_colors: Color Overrides
+  - pb_bar_graph_stacked: Stacked
+  - pb_bar_graph_negative_numbers: Negative Numbers
+  - pb_bar_graph_secondary_y_axis: Secondary Y-Axis
+  - pb_bar_graph_horizontal: Horizontal Bar Graph

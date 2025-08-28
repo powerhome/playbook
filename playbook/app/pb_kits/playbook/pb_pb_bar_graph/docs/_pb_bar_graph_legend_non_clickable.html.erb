@@ -1,0 +1,31 @@
+<% data = [{
+    name: 'I DONT THINK THIS CAN BE DONE IN RAILS BUT IDK YET',
+    data: [1475,200,3000,654,656]
+}] %>
+
+<% chart_options = {
+  series: data,
+  title: {
+    text: 'Solar Employment Growth by Sector, 2010-2016',
+  },
+  subtitle: {
+    text: 'Source: thesolarfoundation.com',
+  },
+  xAxis: {
+    categories: ['Jan'],
+  },
+  yAxis: {
+    title: {
+      text: 'Number of Employees',
+    },
+  },
+  legend: {
+    enabled: true,
+    events: {
+      itemClick: "function () { return false; }" 
+    }
+  },
+}
+%>
+
+<%= pb_rails("pb_bar_graph", props: {options: chart_options}) %>
