@@ -1,5 +1,5 @@
 import { NavLink, useLoaderData, useParams } from "react-router-dom"
-import { Body, Flex, Icon, Title } from "playbook-ui"
+import { Body, Flex, Title } from "playbook-ui"
 
 import { Hero } from "../../components/Hero"
 import { PageContainer } from "../../components/PageContainer"
@@ -7,10 +7,10 @@ import { linkFormat } from "../../../../../utilities/website_sidebar_helper"
 
 const KitShow = () => {
   const { name, platform } = useParams()
-  const { kits } = useLoaderData()
+  const { kits } = useLoaderData() as { kits: Array<{ category: string; components: Array<{ name: string }> }> }
 
   // Find which category this kit belongs to
-  const kitCategory = kits?.find(category => 
+  const kitCategory = kits?.find((category: { components: any[] }) => 
     category.components?.some(component => component.name === name)
   )
 
@@ -24,20 +24,20 @@ const KitShow = () => {
       <PageContainer>
         <Flex align="center" className="category-breadcrumb" marginBottom="md">
           <NavLink to="/beta/kits">
-            <Body className="previous-route" color="light">Components</Body>
+            <Body className="previous-route" color="link"><b>Components</b></Body>
           </NavLink>
-          <Icon className="category-breadcrumb-icon" icon="angle-right" />
+          <Body marginX="xxs" text="/" />
           {kitCategory && (
             <>
               <NavLink to={`/beta/kit_category/${kitCategory.category}`}>
-                <Body className="previous-route" color="light">
-                  {linkFormat(kitCategory.category)}
+                <Body className="previous-route" color="link">
+                  <b>{linkFormat(kitCategory.category)}</b>
                 </Body>
               </NavLink>
-              <Icon className="category-breadcrumb-icon" icon="angle-right" />
+              <Body marginX="xxs" text="/" />
             </>
           )}
-          <Body text={linkFormat(name)} />
+          <Body><b>{linkFormat(name)}</b></Body>
         </Flex>
 
         <Title 

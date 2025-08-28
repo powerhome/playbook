@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import { useState } from "react"
 import { NavLink, Outlet, useLoaderData, useOutlet } from "react-router-dom"
 import { Body, Flex } from 'playbook-ui'
 
@@ -10,6 +10,10 @@ import { PageContainer } from "../components/PageContainer"
 import { CategoryTitle } from "../components/CategoryTitle"
 
 export type Kit = {
+  id?: any
+  title?: any
+  status?: string
+  name?: string
   category: string;
   components: {
     name: string;
