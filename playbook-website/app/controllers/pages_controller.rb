@@ -34,7 +34,26 @@ class PagesController < ApplicationController
 
     respond_to do |format|
       format.html { render layout: "application_beta", inline: "" }
-      format.json { render json: { kits: @kits, dark: @dark, type: @type, examples: examples, kit: @kit, params: @params, css: @css } }
+      format.json do
+        render json: {
+          kits: @kits,
+          dark: @dark,
+          type: @type,
+          examples: examples,
+          kit: @kit,
+          params: @params,
+          category: @category,
+          css: @css,
+          kits_with_status: helpers.aggregate_kits_with_status,
+          PBversion: Playbook::VERSION,
+          search_list: helpers.search_list,
+          patterns: PATTERNS,
+          getting_started: DOCS[:getting_started],
+          design_guidelines: DOCS[:design_guidelines],
+          icons: DOCS[:icons],
+          whats_new: DOCS[:whats_new],
+        }
+      end
     end
   end
 
