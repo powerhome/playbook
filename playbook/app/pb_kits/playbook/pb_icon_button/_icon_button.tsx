@@ -51,6 +51,7 @@ const IconButton = (props: IconButtonProps) => {
         id={id}
     >
       <Button
+          aria={aria}
           borderRadius="xs"
           htmlType={htmlType}
           link={link}
