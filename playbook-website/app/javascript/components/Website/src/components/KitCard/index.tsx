@@ -1,4 +1,4 @@
-import React from "react";
+import { Link } from "react-router-dom";
 import { Body, Card, Flex, Icon, Title } from "playbook-ui";
 
 import { linkFormat } from "../../../../../utilities/website_sidebar_helper";
@@ -26,7 +26,7 @@ export const KitCard = ({ description, name, platform }: KitCardProps) => {
       paddingBottom={{ xs: "xxs", default: "md" }}
       borderRadius="lg"
     >
-      <a href={`/kits/${name}/${platform}`}>
+      <Link to={`/beta/kits/${name}/${platform}`}>
         <Flex align="center" className="kit-card-header" justify="between">
           <Title
             text={linkFormat(name)}
@@ -52,7 +52,7 @@ export const KitCard = ({ description, name, platform }: KitCardProps) => {
           truncate="2"
           text={description}
         />
-      </a>
+      </Link>
     </Card>
   );
 };
