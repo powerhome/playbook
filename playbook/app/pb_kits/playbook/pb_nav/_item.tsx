@@ -140,7 +140,6 @@ const { filteredPadding, filteredMargin } = filterItemSpacing(itemSpacing);
   delete filteredProps?.marginLeft;
 
 
-  // const Tag = link ? "a" : "div";
   const isLink = !!link
   const Tag = isLink ? "a" : "div"
   const activeClass = active === true ? "active" : "";
@@ -231,12 +230,10 @@ const { filteredPadding, filteredMargin } = filterItemSpacing(itemSpacing);
                   {...dataProps}
                   {...htmlProps}
                   className={classes}
-                  // href={link}
                   href={isLink ? link : undefined}
                   id={id}
                   role={!isLink ? "button" : undefined}
                   tabIndex={!isLink ? 0 : undefined}
-                  // target={target}
                   target={isLink ? target : undefined}
               >
                 {imageUrl && (
@@ -279,7 +276,6 @@ const { filteredPadding, filteredMargin } = filterItemSpacing(itemSpacing);
             {...dataProps}
             {...htmlProps}
             className={classes}
-            // href={link}
             href={isLink ? link : undefined}
             id={id}
             onClick={onClick}
