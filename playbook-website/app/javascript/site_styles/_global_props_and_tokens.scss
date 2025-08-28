@@ -22,4 +22,9 @@
   [class^=pb_tooltip_kit].image ~ .tooltip_tooltip.visible {
     padding: $space_sm !important;
   }
+
+  .visual_guide_card_hover {
+    width: 135px;
+    height: 135px;
+  }
 }
