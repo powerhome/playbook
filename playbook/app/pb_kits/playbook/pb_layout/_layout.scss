@@ -378,7 +378,7 @@ $colors: (
 // Collapse Settings for each position and breakpoint
 @each $position in $positions {
   @each $breakpoint_name, $breakpoint in $breakpoints {
-    .pb_layout_kit_sidebar_#{$position}_collapse_#{$breakpoint_name} {
+    .layout_#{$position}_collapse_#{$breakpoint_name} {
       @include break_at($breakpoint) {
         @if $position == 'left' {
           grid-template-areas: "layout_collapsed_#{$breakpoint_name}_sidebar" "layout_collapsed_#{$breakpoint_name}_body";
