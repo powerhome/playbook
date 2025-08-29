@@ -36,6 +36,7 @@ function App() {
           design_guidelines={design_guidelines || []}
           icons={icons || []}
           whats_new={whats_new || []}
+          beta={true}
         />
       </Layout.Side>
       {kits.length > 0 && <LayoutRight dark={dark} />}
