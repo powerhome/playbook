@@ -39,6 +39,11 @@ const router = createBrowserRouter(
           path="kits/:name/:platform"
       />
       <Route
+          element={<KitShow />}
+          loader={ComponentShowLoader}
+          path="kits/advanced_table/:name/:platform"
+      />
+      <Route
           element={<CategoryShow />}
           loader={CategoryLoader}
           path="kit_category/:category"

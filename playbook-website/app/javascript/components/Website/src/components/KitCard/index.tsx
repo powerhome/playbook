@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 import { Body, Card, Flex, Icon, Title } from "playbook-ui";
 
 import { linkFormat } from "../../../../../utilities/website_sidebar_helper";
@@ -12,6 +12,21 @@ type KitCardProps = {
 };
 
 export const KitCard = ({ description, name, platform }: KitCardProps) => {
+
+    const { kits } = useLoaderData() as { kits: Array<{ category: string; components: Array<{ name: string }> }> }
+  
+    // Find which category this kit belongs to
+    const kitCategory = kits?.find((category: { components: any[] }) => 
+      category.components?.some(component => component.name === name)
+    )
+
+    const generateLink = ({ componentName, platform, category }:any) => {
+      if (category && category.startsWith('advanced_table')) {
+        return `/beta/kits/advanced_table/${componentName}/${platform}`;
+      }
+      return `/beta/kits/${componentName}/${platform}`;
+    };
+
   return (
     <Card
       className="kit-card"
@@ -26,7 +41,7 @@ export const KitCard = ({ description, name, platform }: KitCardProps) => {
       paddingBottom={{ xs: "xxs", default: "md" }}
       borderRadius="lg"
     >
-      <Link to={`/beta/kits/${name}/${platform}`}>
+      <Link to={generateLink({ componentName: name, platform, category: kitCategory?.category })}>
         <Flex align="center" className="kit-card-header" justify="between">
           <Title
             text={linkFormat(name)}
