@@ -3161,10 +3161,10 @@
   resolved "https://npm.powerapp.cloud/@powerhome/playbook-icons-react/-/30ee3e9d71fb277ad60e73623bcac89254eacd41#30ee3e9d71fb277ad60e73623bcac89254eacd41"
   integrity sha512-p9qpHln94xWZsab9onOUUiP6simre5wPdm2ipsroDNRXmfcSUwuSpEwUJBBz7G/ceBVgVFYWrguf5p0cmTzzxQ==
 
-"@powerhome/playbook-icons@0.0.1-alpha.40":
-  version "0.0.1-alpha.40"
-  resolved "https://npm.powerapp.cloud/@powerhome/playbook-icons/-/de910f5f223a55027212a4911b0e5681f3ef4d6e#de910f5f223a55027212a4911b0e5681f3ef4d6e"
-  integrity sha512-5OC8VuVPBNzKgVkb12kYnm6ZcL1n5ogLJYFX6d+GHLO45l7LvvluCo/PG2QDgcFIC+Sff/DIGDT8fPpd7XFfOQ==
+"@powerhome/playbook-icons@0.0.1-alpha.44":
+  version "0.0.1-alpha.44"
+  resolved "https://npm.powerapp.cloud/@powerhome/playbook-icons/-/90e580b0ff045918699420159d9846b6341b1dcc#90e580b0ff045918699420159d9846b6341b1dcc"
+  integrity sha512-CSzlChexsrzG/sNzygiz+qjQbKprUEhXDltRT9op43mKRhg9C2mUhpgOKX91f92qKQydgFaf19/mhUMsCNEx/A==
 
 "@powerhome/power-fonts@0.0.1":
   version "0.0.1"
@@ -7016,10 +7016,15 @@ ignore@^4.0.3, ignore@^4.0.6:
   resolved "https://npm.powerapp.cloud/ignore/-/ignore-4.0.6.tgz#750e3db5862087b4737ebac8207ffd1ef27b25fc"
   integrity sha512-cyFDKrqc/YdcWFniJhzI42+AzS+gNwmUzOSFcRCQYwySuBBBy/KjuxWLZ/FHEH6Moq1NizMOBWyTcv8O4OZIMg==
 
-ignore@^5.1.1, ignore@^5.1.8:
+ignore@^5.1.1:
   version "5.3.1"
   resolved "https://registry.yarnpkg.com/ignore/-/ignore-5.3.1.tgz#5073e554cd42c5b33b394375f538b8593e34d4ef"
   integrity sha512-5Fytz/IraMjqpwfd34ke28PTVMjZjJG2MPn5t7OE4eUCUNf8BAa7b5WUS9/Qvr6mwOQS7Mk6vdsMno5he+T8Xw==
+
+ignore@^5.1.8:
+  version "5.3.2"
+  resolved "https://npm.powerapp.cloud/ignore/-/ignore-5.3.2.tgz#3cd40e729f3643fd87cb04e50bf0eb722bc596f5"
+  integrity sha512-hsBTNUqQTDwkWtcdYI2i06Y/nUBEsNEDJKjWdigLvegy8kDuJAS8uRlpkkcQpyEXL0Z/pjDy5HBmMjRCJ2gq+g==
 
 ignore@^5.2.0:
   version "5.2.4"
