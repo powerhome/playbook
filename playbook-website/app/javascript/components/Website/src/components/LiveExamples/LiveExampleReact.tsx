@@ -65,7 +65,7 @@ if (typeof render === 'function') { render(<React.Fragment />) }
 // on-demand loader for third party libs
 type ThirdPartyScope = Record<string, any>
 
-async function loadHighchartsForSnippet(raw: string): Promise<ThirdPartyScope> {
+async function loadThirdPartyLibs(raw: string): Promise<ThirdPartyScope> {
   const defaults = parseDefaultImports(raw)
   const sources = defaults.map((d) => d.source)
 
@@ -90,11 +90,7 @@ async function loadHighchartsForSnippet(raw: string): Promise<ThirdPartyScope> {
   // Only load/init the modules the snippet actually imported
   const moduleSpecs = [
     { pattern: /^highcharts\/highcharts-more$/, loader: () => import("highcharts/highcharts-more") },
-    { pattern: /^highcharts\/modules\/solid-gauge$/, loader: () => import("highcharts/modules/solid-gauge") },
-    { pattern: /^highcharts\/modules\/exporting$/, loader: () => import("highcharts/modules/exporting") },
-    { pattern: /^highcharts\/modules\/export-data$/, loader: () => import("highcharts/modules/export-data") },
-    { pattern: /^highcharts\/modules\/accessibility$/, loader: () => import("highcharts/modules/accessibility") },
-    { pattern: /^highcharts\/modules\/drilldown$/, loader: () => import("highcharts/modules/drilldown") },
+    { pattern: /^highcharts\/modules\/solid-gauge$/, loader: () => import("highcharts/modules/solid-gauge") }
   ]
 
   await Promise.all(
@@ -165,7 +161,7 @@ const LiveExample: React.FC<LiveExampleProps> = ({ code, exampleProps = {} }) =>
     }
     setLibsReady(false)
     ;(async () => {
-      const hcScope = await loadHighchartsForSnippet(code)
+      const hcScope = await loadThirdPartyLibs(code)
       if (!cancelled) {
         setThirdParty(hcScope)
         setLibsKey(Object.keys(hcScope).sort().join("|"))
