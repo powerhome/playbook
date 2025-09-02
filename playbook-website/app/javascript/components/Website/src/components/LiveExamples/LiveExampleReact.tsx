@@ -1,7 +1,8 @@
 import React, { useEffect, useMemo, useState } from "react"
 import { LoadingInline } from "playbook-ui"
 import { LiveProvider, LivePreview, LiveError } from "react-live"
-
+// All third party loaders should live in separate files and get imported here
+import { highchartsLoader, maplibreLoader, tiptapLoader, ThirdPartyLoader, ThirdPartyScope } from "./ThirdPartyLoaders"
 // Pull in all Playbook React exports so we don't have to specify individual imports
 import * as PB from "playbook-ui" 
 
@@ -18,8 +19,7 @@ type LiveExampleProps = {
   exampleProps?: Record<string, unknown>
 }
 
-// imports helpers
-
+// imports helper
 type DefaultImport = { local: string; source: string }
 
 function extractImportSources(raw: string) {
@@ -62,109 +62,18 @@ if (typeof render === 'function') { render(<React.Fragment />) }
   return code
 }
 
-// on-demand loader for third party libs (plug in more third party libs here if needed)
-type ThirdPartyScope = Record<string, any>
-type ThirdPartyLoader = {
-  id: string
-  detect: (raw: string, defaults: DefaultImport[], sources: string[]) => boolean
-  load: (raw: string, defaults: DefaultImport[], sources: string[]) => Promise<ThirdPartyScope>
-}
-
-// HIGHCHARTS loader start --------------------------
-const highchartsLoader: ThirdPartyLoader = {
-  id: "highcharts",
-  detect: (_raw, _defaults, sources) =>
-    sources.some((s) => s === "highcharts" || s.startsWith("highcharts/")) ||
-    sources.includes("highcharts-react-official"),
-  load: async (raw, defaults, sources) => {
-    const scope: ThirdPartyScope = {}
-
-    // Base
-    const hcMod: any = await import("highcharts")
-    const Highcharts = hcMod.default || hcMod
-    scope.Highcharts = Highcharts
-
-    // Respect alias (e.g., import HC from "highcharts")
-    const hcAlias = defaults.find((d) => d.source === "highcharts")?.local
-    if (hcAlias && hcAlias !== "Highcharts") scope[hcAlias] = Highcharts
-
-    // Modules actually imported in the snippet
-    const moduleSpecs = [
-      { pattern: /^highcharts\/highcharts-more$/, loader: () => import("highcharts/highcharts-more") },
-      { pattern: /^highcharts\/modules\/solid-gauge$/, loader: () => import("highcharts/modules/solid-gauge") }
-    ]
-
-    await Promise.all(
-      defaults
-        .filter((d) => moduleSpecs.some((ms) => ms.pattern.test(d.source)))
-        .map(async (d) => {
-          const spec = moduleSpecs.find((ms) => ms.pattern.test(d.source))!
-          const m: any = await spec.loader()
-          const init = m.default || m
-          if (typeof init === "function") {
-            try {
-              init(Highcharts) 
-            } catch {
-            }
-            // expose the initializer under its local name so lines like `HighchartsMore(Highcharts)` still work
-            scope[d.local] = init
-          }
-        }),
-    )
-
-    // React wrapper (alias safe)
-    if (sources.includes("highcharts-react-official")) {
-      const r: any = await import("highcharts-react-official")
-      const HighchartsReact = r.default || r
-      scope.HighchartsReact = HighchartsReact
-      const alias = defaults.find((d) => d.source === "highcharts-react-official")?.local
-      if (alias && alias !== "HighchartsReact") scope[alias] = HighchartsReact
-    }
-
-    return scope
-  },
-}
-// HIGHCHARTS loader end --------------------------
-
-// MAPLIBRE loader start --------------------------
-function ensureMapLibreCSS() {
-  if (typeof document === "undefined") return
-  if (document.querySelector('link[data-maplibre-css="1"]')) return
-  const link = document.createElement("link")
-  link.rel = "stylesheet"
-  link.href = "https://unpkg.com/maplibre-gl@3.6.2/dist/maplibre-gl.css"
-  link.setAttribute("data-maplibre-css", "1")
-  document.head.appendChild(link)
-}
-
-const maplibreLoader: ThirdPartyLoader = {
-  id: "maplibre-gl",
-  detect: (_raw, _defaults, sources) => sources.includes("maplibre-gl"),
-  load: async (_raw, defaults) => {
-    const mod: any = await import("maplibre-gl")
-    const maplibregl = mod.default || mod
-    ensureMapLibreCSS() // remove this if you bundle the CSS elsewhere
-
-    const alias = defaults.find((d) => d.source === "maplibre-gl")?.local
-    const scope: ThirdPartyScope = { maplibregl }
-    if (alias && alias !== "maplibregl") scope[alias] = maplibregl
-    return scope
-  },
-}
-
-// MAPLIBRE loader end -------------------------
-
 /**
  * NOTE:
- * Add Any loaders needed to docs here. follow pattern from highcharts _ maplibre loaders above
+ * Add any loaders needed to docs in the ThirdPartyLoaders folder and import them up top
  * Basically, if a doc example has an import for a third party lib, it needs to be loaded here
- * After creating loader, add to the LIB_LOADERS array
+ * After creating loader file and importing above, add to the LIB_LOADERS array below
  */
 
 // Lib loaders array
 const LIB_LOADERS: ThirdPartyLoader[] = [
   highchartsLoader,
   maplibreLoader,
+  tiptapLoader,
 ]
 
 async function loadThirdPartyLibs(raw: string): Promise<ThirdPartyScope> {
