@@ -1,15 +1,12 @@
-<% data = [{
+<% chart_data = [{
     name: 'I DONT THINK THIS CAN BE DONE IN RAILS BUT IDK YET',
     data: [1475,200,3000,654,656]
 }] %>
 
 <% chart_options = {
-  series: data,
+  series: chart_data,
   title: {
-    text: 'Solar Employment Growth by Sector, 2010-2016',
-  },
-  subtitle: {
-    text: 'Source: thesolarfoundation.com',
+    text: 'Number of Employees',
   },
   xAxis: {
     categories: ['Jan'],

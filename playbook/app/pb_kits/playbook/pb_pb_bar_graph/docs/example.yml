@@ -8,7 +8,6 @@ examples:
   - pb_bar_graph_height: Height
   - pb_bar_graph_spline: Spline
   - pb_bar_graph_colors: Color Overrides
-  - pb_bar_graph_custom_rails: Custom Overrides
   - pb_bar_graph_stacked: Stacked
   - pb_bar_graph_negative_numbers: Negative Numbers
   - pb_bar_graph_secondary_y_axis: Secondary Y-Axis

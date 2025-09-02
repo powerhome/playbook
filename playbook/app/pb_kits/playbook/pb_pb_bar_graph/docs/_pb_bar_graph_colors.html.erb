@@ -1,4 +1,4 @@
-<% data = [{
+<% chart_data = [{
     name: 'Installation',
     data: [1475,200,3000,654,656]
 }, {
@@ -16,7 +16,7 @@
 }] %>
 
 <% chart_options = {
-  series: data,
+  series: chart_data,
   title: {
     text: "Bar Graph with Custom Data Colors",
   },
@@ -28,7 +28,7 @@
       text: "Number of Employees",
     },
   },
-  colors: ['data_4', 'data_5', 'data_6', 'data_7', 'data_8'],
+  colors: ['#1CA05C', '#FD804C', '#144075', '#00C4D7', '#DA0014'],
 }
 %>
 

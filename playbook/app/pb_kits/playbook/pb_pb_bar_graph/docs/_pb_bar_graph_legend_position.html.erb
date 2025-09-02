@@ -1,4 +1,4 @@
-<% data = [{
+<% chart_data = [{
     name: 'Installation',
     data: [1475]
 }, {
@@ -16,12 +16,9 @@
 }] %>
 
 <% chart_options_right = {
-  series: data,
+  series: chart_data,
   title: {
-    text: 'Solar Employment Growth by Sector, 2010-2016',
-  },
-  subtitle: {
-    text: 'Source: thesolarfoundation.com',
+    text: 'Alignment of Legend',
   },
   xAxis: {
     categories: ['Jan'],
@@ -46,12 +43,9 @@
 
 
 <% chart_options_center = {
-  series: data,
+  series: chart_data,
   title: {
-    text: 'Solar Employment Growth by Sector, 2010-2016',
-  },
-  subtitle: {
-    text: 'Source: thesolarfoundation.com',
+    text: 'Layout of Legend',
   },
   xAxis: {
     categories: ['Jan'],
@@ -76,12 +70,9 @@
 <%= pb_rails("pb_bar_graph", props: {options: chart_options_center}) %>
 
 <% chart_options_left = {
-  series: data,
+  series: chart_data,
   title: {
-    text: 'Solar Employment Growth by Sector, 2010-2016',
-  },
-  subtitle: {
-    text: 'Source: thesolarfoundation.com',
+    text: 'Offset of Legend',
   },
   xAxis: {
     categories: ['Jan'],

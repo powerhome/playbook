@@ -1,4 +1,4 @@
-<% data = [{
+<% chart_data = [{
     name: 'Number of Installations',
     data: [1475,200,3000,654,656]
 }, {
@@ -9,18 +9,60 @@
     yAxis: 1
 }] %>
 
-<% axis_titles = [{name: "Number of Installations"}, {name: "Percentage"}] %>
 
-<% axis_formats = [{format: ""}, {format: "{value}%"}] %>
+<% chart_options = {
+series: chart_data,
+  title: {
+    text: "Bar Graph with Secondary Y-axis",
+  },
+  xAxis: {
+    categories: ["Jan", "Feb", "Mar", "Apr", "May"],
+  },
+  yAxis: [{
+  format: "{value}%",
+    labels: {
+      style: {
+        fontFamily: "Power Centra",
+        color: "#C1CDD6",
+        fontWeight: "bold",
+        fontSize: "12px",
+      },
+    },
+    title: {
+      text: "Number of Employees",
+      style: {
+             fontFamily: "Power Centra",
+        color: "#C1CDD6",
+        fontWeight: "bold",
+        fontSize: "12px",
+      },
+    },
+  }, {
+    labels: {
+      style: {
+            fontFamily: "Power Centra",
+            color: "#C1CDD6",
+            fontWeight: "bold",
+            fontSize: "12px",
+      },
+    },
+    title: {
+      text: "Percentage",
+      style: {
+        fontFamily: "Power Centra",
+        color: "#C1CDD6",
+        fontWeight: "bold",
+        fontSize: "12px",
+      },
+    },
 
-<%= pb_rails("pb_bar_graph", props: {
-    axis_format: axis_formats,
-    axis_title: axis_titles,
-    chart_data: data,
-    id: "bar-spline",
-    y_axis_min: 0,
-    x_axis_categories:['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
-    subtitle: 'Source: thesolarfoundation.com',
-    title: 'Bar Graph with Secondary Y-axis',
-    legend: true,
-}) %>
+    opposite: true,
+    min: 0,
+    max: 100
+  }],
+  legend: { enabled: true },
+}
+%>
+
+<%= pb_rails("pb_bar_graph", props: {options: chart_options}) %>
+
