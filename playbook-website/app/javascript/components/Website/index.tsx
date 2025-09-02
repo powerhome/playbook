@@ -3,7 +3,7 @@ import MainSidebar from "../MainSidebar";
 import LayoutRight from "./src/layouts/LayoutRight";
 import { useLoaderData } from "react-router-dom";
 
-function App() {
+function Website() {
   const { 
     kits, 
     dark, 
@@ -21,7 +21,7 @@ function App() {
   }: any = useLoaderData();
 
   return (
-    <Layout className="pb--page--content">
+    <Layout className="pb--page--content pb--website--new" dark={dark}>
       <Layout.Side className="pb--page--sideNav">
         <MainSidebar
           dark={dark}
@@ -44,4 +44,4 @@ function App() {
   );
 }
 
-export default App;
+export default Website;

@@ -1,5 +1,5 @@
 import { NavLink, useLoaderData, useParams } from "react-router-dom"
-import { Body, Flex, Title, Card, Button, SectionSeparator } from "playbook-ui"
+import { Body, Flex, Title, Card, Button, Caption } from "playbook-ui"
 import { useState } from "react"
 
 import { Hero } from "../../components/Hero"
@@ -38,7 +38,7 @@ const KitShow = () => {
       console.error('Failed to copy code:', err)
     }
   }
-
+console.log('Examples:', examples)
   return (
     <>
       <Hero 
@@ -71,33 +71,26 @@ const KitShow = () => {
           marginBottom="md"
         />
 
-        {/* Render Examples vis react-live */}
+        {/* Render Examples via react-live */}
         {examples && examples.length > 0 ? (
-          <div>
+          <>
             {examples.map((example: any) => (
               <Card 
                 key={example.example_key} 
                 marginBottom="lg"
                 padding="none"
               >
-                <div style={{ padding: '16px' }}>
-                  <Title 
+                  <Caption 
                     text={example.title}
-                    size={4}
-                    marginBottom="sm"
+                    margin="md"
                   />
-                </div>
-                  <SectionSeparator />
                   <LiveExample
                     code={example.source}
                   />
 
                 {/* Code Section, needs design, just rendering for now */}
-                <SectionSeparator />
-                <div style={{ padding: '16px 16px 0 16px' }}>
-                  <Flex justify="between" align="center" marginBottom="sm">
-                    <Body text="Code Example" />
-                    <Flex>
+                <>
+                  <Flex justify="end" align="center" marginBottom="sm">
                       <Button
                         text={copyState[example.example_key] ? "Copied!" : "Copy Code"}
                         variant="link"
@@ -113,27 +106,19 @@ const KitShow = () => {
                         icon="code"
                         onClick={() => toggleCode(example.example_key)}
                       />
-                    </Flex>
                   </Flex>
                   
                   {visibleCode[example.example_key] && (
-                    <div style={{ marginBottom: '16px' }}>
-                      <pre style={{ 
-                        background: '#f5f5f5', 
-                        padding: '16px', 
-                        borderRadius: '4px',
-                        overflow: 'auto',
-                        fontSize: '14px',
-                        lineHeight: '1.4'
-                      }}>
+                    <Card borderNone width="100%">
+                      <pre className="highlight">
                         <code>{example.source}</code>
                       </pre>
-                    </div>
+                    </Card>
                   )}
-                </div>
+                </>
               </Card>
             ))}
-          </div>
+          </>
         ) : (
           <Card padding="md">
             <Body text={`No examples found for ${name} component.`} />

@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from "react"
-import { LoadingInline } from "playbook-ui"
+import { LoadingInline, Card, colors } from "playbook-ui"
 import { LiveProvider, LivePreview, LiveError } from "react-live"
 // All third party loaders should live in separate files and get imported here
 import { highchartsLoader, maplibreLoader, tiptapLoader, ThirdPartyLoader, ThirdPartyScope } from "./ThirdPartyLoaders"
@@ -156,12 +156,12 @@ const LiveExample: React.FC<LiveExampleProps> = ({ code, exampleProps = {} }) =>
 
   return (
     <LiveProvider key={libsKey} code={prepared} scope={scope} noInline>
-      <div style={{ padding: 16 }}>
+      <Card borderNone padding="md">
         <LivePreview />
-      </div>
-      <div style={{ padding: "0 16px 16px 16px", color: "#b00020", fontSize: 12 }}>
+      </Card>
+      <Card borderNone padding="md" htmlOptions={{ style:{color: colors.error }}}>
         <LiveError />
-      </div>
+      </Card>
     </LiveProvider>
   )
 }
