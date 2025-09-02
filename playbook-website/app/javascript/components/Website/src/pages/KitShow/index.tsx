@@ -5,6 +5,7 @@ import { useState } from "react"
 import { Hero } from "../../components/Hero"
 import { PageContainer } from "../../components/PageContainer"
 import { linkFormat } from "../../../../../utilities/website_sidebar_helper"
+import LiveExample from "../../components/LiveExamples/LiveExampleReact"
 
 const KitShow = () => {
   const { name, platform } = useParams()
@@ -71,7 +72,7 @@ console.log(examples)
           marginBottom="md"
         />
 
-        {/* Render Examples */}
+        {/* Render Examples vis react-live */}
         {examples && examples.length > 0 ? (
           <div>
             {examples.map((example: any) => (
@@ -87,6 +88,10 @@ console.log(examples)
                     marginBottom="sm"
                   />
                 </div>
+                  <SectionSeparator />
+                  <LiveExample
+                    code={example.source}
+                  />
 
                 {/* Code Section, needs design, just rendering for now */}
                 <SectionSeparator />
