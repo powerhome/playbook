@@ -115,21 +115,25 @@ async function loadHighchartsForSnippet(raw: string): Promise<ThirdPartyScope> {
         }
       }),
   )
-  // React wrapper (only if present)
-  let HighchartsReact: any
+
+  // React wrapper (support alias if used)
   if (
     sources.includes("highcharts-react-official") ||
     /from\s+['"]highcharts-react-official['"]/.test(raw) ||
     /HighchartsReact/.test(raw)
   ) {
     const r: any = await import("highcharts-react-official")
-    HighchartsReact = r.default || r
+    const HighchartsReact = r.default || r
+    scope.HighchartsReact = HighchartsReact
+
+    const hcrAlias = defaults.find((d) => d.source === "highcharts-react-official")?.local
+    if (hcrAlias && hcrAlias !== "HighchartsReact") scope[hcrAlias] = HighchartsReact
   }
 
-  return HighchartsReact ? { Highcharts, HighchartsReact } : { Highcharts }
+  return scope
 }
 
-/* ---------- main component ---------- */
+// main component
 
 const LiveExample: React.FC<LiveExampleProps> = ({ code, exampleProps = {} }) => {
   const prepared = useMemo(() => prepareCode(code), [code])
@@ -137,29 +141,45 @@ const LiveExample: React.FC<LiveExampleProps> = ({ code, exampleProps = {} }) =>
   // prevent Date kit from shadowing the global Date constructor. Do FormattedDate like we do in the docs
   const { Date: FormattedDate, ...PBrest } = PB as any
 
-  // lazily load any third-party libs (Highcharts, etc.)
+  // Figure out if this snippet needs Highcharts and gate rendering until ready
+  const needsHighcharts = useMemo(() => {
+    const { sources } = extractImportSources(code)
+    return (
+      sources.some((s) => s === "highcharts" || s.startsWith("highcharts/")) ||
+      sources.includes("highcharts-react-official") ||
+      /HighchartsReact/.test(code)
+    )
+  }, [code])
+
   const [thirdParty, setThirdParty] = useState<ThirdPartyScope>({})
   const [libsKey, setLibsKey] = useState("")
+  const [libsReady, setLibsReady] = useState(!needsHighcharts)
 
   useEffect(() => {
     let cancelled = false
+    if (!needsHighcharts) {
+      setThirdParty({})
+      setLibsKey("")
+      setLibsReady(true)
+      return
+    }
+    setLibsReady(false)
     ;(async () => {
       const hcScope = await loadHighchartsForSnippet(code)
       if (!cancelled) {
-        const merged = { ...hcScope }
-        setThirdParty(merged)
-        // Must remount LiveProvider after libs arrive so the preview re-evaluates
-        setLibsKey(Object.keys(merged).sort().join("|"))
+        setThirdParty(hcScope)
+        setLibsKey(Object.keys(hcScope).sort().join("|"))
+        setLibsReady(true)
       }
     })()
     return () => {
       cancelled = true
     }
-  }, [code])
+  }, [code, needsHighcharts])
 
   const scope = useMemo(
     () => ({
-      // React & hooks so snippets importing named hooks still work after we strip imports
+      // React & hooks so snippets keep working after we strip imports
       React,
       useState: React.useState,
       useEffect: React.useEffect,
@@ -168,13 +188,25 @@ const LiveExample: React.FC<LiveExampleProps> = ({ code, exampleProps = {} }) =>
       useCallback: React.useCallback,
       useLayoutEffect: React.useLayoutEffect,
       Fragment: React.Fragment,
+      // All Playbook components (except Date which is below this as FormattedDate)
       ...PBrest,
       FormattedDate,
+      // Third-party libs (Highcharts, HighchartsReact, and any module initializers)
       ...thirdParty,
+      // Passthrough props for examples that spread {...props}
       exampleProps,
     }),
     [thirdParty, exampleProps, PBrest, FormattedDate],
   )
+
+  // don't run the code snippet until third party libs are ready, so it won't crash on first render
+  if (!libsReady) {
+    return (
+      <div style={{ padding: 16 }}>
+        <div style={{ fontSize: 12, opacity: 0.7 }}>Loading chart example…</div>
+      </div>
+    )
+  }
 
   return (
     <LiveProvider key={libsKey} code={prepared} scope={scope} noInline>
