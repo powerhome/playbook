@@ -39,7 +39,6 @@ const KitShow = () => {
     }
   }
 
-console.log(examples)
   return (
     <>
       <Hero 
