@@ -1,6 +1,7 @@
 import { NavLink, useLoaderData, useParams } from "react-router-dom"
 import { Body, Flex, Title, Card, Button, Caption } from "playbook-ui"
 import { useState } from "react"
+import ReactMarkdown from 'react-markdown'
 
 import { Hero } from "../../components/Hero"
 import { PageContainer } from "../../components/PageContainer"
@@ -90,9 +91,10 @@ const KitShow = () => {
                   {
                     example.description && example.description !== "" && (
                       <Body
-                        text={example.description}
                         margin="md"
-                      />
+                      >
+                        <ReactMarkdown>{example.description}</ReactMarkdown>
+                        </Body>
                     )
                   }
                 {/* Code Section, needs design, just rendering for now */}
