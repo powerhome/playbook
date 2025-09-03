@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative "../../../../app/pb_kits/playbook/pb_PbBarGraph/PbBarGraph"
+require_relative "../../../../app/pb_kits/playbook/pb_pb_bar_graph/pb_bar_graph"
 
 RSpec.describe Playbook::PbPbBarGraph::PbBarGraph do
   subject { Playbook::PbPbBarGraph::PbBarGraph }
