@@ -56,9 +56,9 @@ const Flex = (props: FlexProps): React.ReactElement => {
   const alignClass = align !== 'none' ? `align_items_${align}` : `align_items_${vertical}`
   const inlineClass = inline === true ? 'inline' : ''
   const spacingClass = spacing !== undefined ? `spacing_${spacing}` : ''
-  const gapClass = (gap !== 'none' && typeof gap === 'object') ? `gap_${gap}` : ''
-  const rowGapClass = (rowGap !== 'none' && typeof rowGap === 'object') ? `rowGap_${rowGap}` : ''
-  const columnGapClass = (columnGap !== 'none' && typeof columnGap === 'object') ? `columnGap_${columnGap}` : ''
+  const gapClass = (gap !== 'none' && typeof gap !== 'object') ? `gap_${gap}` : ''
+  const rowGapClass = (rowGap !== 'none' && typeof rowGap !== 'object') ? `rowGap_${rowGap}` : ''
+  const columnGapClass = (columnGap !== 'none' && typeof columnGap !== 'object') ? `columnGap_${columnGap}` : ''
   const wrapClass = wrap === true ? 'wrap' : ''
   const reverseClass = reverse === true ? 'reverse' : ''
   const alignSelfClass = alignSelf !== 'none' ? `align_self_${alignSelf}` : ''
