@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen } from '../utilities/test-utils';
-import PbBarGraph from './_pb_bar_graph';
+import BarGraph from './_bar_graph';
 
 beforeEach(() => {
   // Silences error logs within the test suite.
@@ -19,7 +19,7 @@ const testId = 'bargraph1';
 
 test('bargraph uses exact classname', () => {
   render(
-    <PbBarGraph
+    <BarGraph
         className='super_important_class'
         data={{ testid: testId }}
         id='bar-default'
