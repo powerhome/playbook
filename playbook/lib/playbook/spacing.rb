@@ -67,13 +67,13 @@ module Playbook
 
     def column_gap_options
       {
-        column_gap: "column_gap",
+        column_gap: "columnGap",
       }
     end
 
     def row_gap_options
       {
-        row_gap: "row_gap",
+        row_gap: "rowGap",
       }
     end
 
@@ -196,10 +196,10 @@ module Playbook
         column_gap_value = send(k)
         if column_gap_value.is_a?(Hash)
           column_gap_value.map do |media_size, column_gap_spacing_value|
-            "column_gap_#{media_size}_#{column_gap_spacing_value.underscore}" if gap_values.include?(column_gap_spacing_value.to_s)
+            "columnGap_#{media_size}_#{column_gap_spacing_value.underscore}" if gap_values.include?(column_gap_spacing_value.to_s)
           end
         elsif gap_values.include?(column_gap_value.to_s)
-          "column_gap_#{column_gap_value.underscore}"
+          "columnGap_#{column_gap_value.underscore}"
         end
       end.compact.join(" ")
     end
@@ -212,10 +212,10 @@ module Playbook
         row_gap_value = send(k)
         if row_gap_value.is_a?(Hash)
           row_gap_value.map do |media_size, row_gap_spacing_value|
-            "row_gap_#{media_size}_#{row_gap_spacing_value.underscore}" if gap_values.include?(row_gap_spacing_value.to_s)
+            "rowGap_#{media_size}_#{row_gap_spacing_value.underscore}" if gap_values.include?(row_gap_spacing_value.to_s)
           end
         elsif gap_values.include?(row_gap_value.to_s)
-          "row_gap_#{row_gap_value.underscore}"
+          "rowGap_#{row_gap_value.underscore}"
         end
       end.compact.join(" ")
     end

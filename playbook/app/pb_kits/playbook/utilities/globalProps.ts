@@ -393,16 +393,16 @@ const PROP_CATEGORIES: {[key:string]: (props: {[key: string]: any}) => string} =
   },
   columnGapProps: ({ columnGap }: ColumnGap) => {
     if (typeof columnGap === 'object') {
-      return getResponsivePropClasses(columnGap, 'column_gap')
+      return getResponsivePropClasses(columnGap, 'columnGap')
     } else {
-      return columnGap ? `column_gap_${columnGap}` : ''
+      return columnGap ? `columnGap_${columnGap}` : ''
     }
   },
   rowGapProps: ({ rowGap }: RowGap) => {
     if (typeof rowGap === 'object') {
-      return getResponsivePropClasses(rowGap, 'row_gap')
+      return getResponsivePropClasses(rowGap, 'rowGap')
     } else {
-      return rowGap ? `row_gap_${rowGap}` : ''
+      return rowGap ? `rowGap_${rowGap}` : ''
     }
   },
   minHeightProps: ({ minHeight }: MinHeight) => {
