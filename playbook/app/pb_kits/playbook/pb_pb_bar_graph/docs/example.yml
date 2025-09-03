@@ -4,7 +4,6 @@ examples:
   - pb_bar_graph_default: Default
   - pb_bar_graph_legend: Legend
   - pb_bar_graph_legend_position: Legend Position
-  - pb_bar_graph_legend_non_clickable: Legend Non Clickable
   - pb_bar_graph_height: Height
   - pb_bar_graph_spline: Spline
   - pb_bar_graph_colors: Color Overrides
