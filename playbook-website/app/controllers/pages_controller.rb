@@ -29,7 +29,13 @@ class PagesController < ApplicationController
     examples = @examples.map do |example|
       example_key = example.keys.first.to_s
       source_code = get_source(example_key)
-      { example_key: example_key, title: example.values.first, source: source_code }
+      description = get_description(example_key)
+      {
+        example_key: example_key,
+        title: example.values.first,
+        source: source_code,
+        description: description,
+      }
     end
 
     respond_to do |format|
@@ -286,7 +292,11 @@ class PagesController < ApplicationController
     read_kit_file("_#{example}.jsx")
   end
 
-  helper_method :get_source
+  def get_description(example)
+    read_kit_file("_#{example}.md")
+  end
+
+  helper_method :get_source, :get_description
 
 private
 

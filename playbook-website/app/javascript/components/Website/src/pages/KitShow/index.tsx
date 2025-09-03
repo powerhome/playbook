@@ -38,7 +38,7 @@ const KitShow = () => {
       console.error('Failed to copy code:', err)
     }
   }
-console.log('Examples:', examples)
+
   return (
     <>
       <Hero 
@@ -87,7 +87,14 @@ console.log('Examples:', examples)
                   <LiveExample
                     code={example.source}
                   />
-
+                  {
+                    example.description && example.description !== "" && (
+                      <Body
+                        text={example.description}
+                        margin="md"
+                      />
+                    )
+                  }
                 {/* Code Section, needs design, just rendering for now */}
                 <>
                   <Flex justify="end" align="center" marginBottom="sm">
