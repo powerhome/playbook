@@ -6,10 +6,6 @@ module Playbook
       prop :options, default: {}
       prop :container_props, default: {}
 
-      def chart_options
-        options
-      end
-
       def react_props
         {
           options: options,

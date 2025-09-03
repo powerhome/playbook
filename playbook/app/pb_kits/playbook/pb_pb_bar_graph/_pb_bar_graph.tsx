@@ -1,23 +1,35 @@
 import React, { useMemo } from "react"
-import { buildDataProps } from "../utilities/props";
+import { globalProps } from "../utilities/globalProps";
+import { buildAriaProps, buildDataProps, buildHtmlProps } from "../utilities/props";
 import Highcharts from "highcharts"
 import HighchartsReact from "highcharts-react-official"
 
 import pbBarGraphTheme from "./pbBarGraphTheme"
 
+import classnames from "classnames";
+
 type PbBarGraphProps = {
+  
   options: Record<string, unknown>
-  containerProps?: React.HTMLProps<HTMLDivElement>
-  data?: Record<string, unknown>
+  className?: string
+  aria?: { [key: string]: string };
+  data?: { [key: string]: string };
+  id: string;
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)};
 }
 
 const PbBarGraph = ({
+  aria = {},
+  data = {},
+  id,
+  htmlOptions = {},
   options,
-  containerProps = {},
-  data = {}
+  className = "pb_pb_bar_graph",
 }: PbBarGraphProps): React.ReactElement => {
 
+  const ariaProps = buildAriaProps(aria);
   const dataProps = buildDataProps(data)
+  const htmlProps = buildHtmlProps(htmlOptions);
 
   const mergedOptions = useMemo(() => {
     if (!options || typeof options !== "object") {
@@ -33,7 +45,13 @@ const PbBarGraph = ({
   
     <div>
       <HighchartsReact
-          containerProps={{ ...containerProps, ...dataProps }}
+          containerProps={{
+                  className: classnames(globalProps, className),
+                  id: id,
+                  ...ariaProps,
+                  ...dataProps,
+                  ...htmlProps
+                }}
           highcharts={Highcharts}
           options={mergedOptions}
       />

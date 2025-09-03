@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen } from '../utilities/test-utils';
-import BarGraph from './_bar_graph';
+import BarGraph from './_pb_bar_graph';
 
 beforeEach(() => {
   // Silences error logs within the test suite.

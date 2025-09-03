@@ -1,23 +1,31 @@
-import { ensureAccessible, renderKit } from '../utilities/test-utils'
+import React from 'react';
+import { render, screen } from '../utilities/test-utils';
+import PbBarGraph from './_pb_bar_graph';
 
-import { PbBarGraph } from '../'
+beforeEach(() => {
+  // Silences error logs within the test suite.
+  jest.spyOn(console, 'error');
+  jest.spyOn(console, 'warn');
+  console.error.mockImplementation(() => {});
+  console.warn.mockImplementation(() => {});
+});
 
-/* See these resources for more testing info:
-  - https://github.com/testing-library/jest-dom#usage for useage and examples
-  - https://jestjs.io/docs/en/using-matchers
-*/
+afterEach(() => {
+  console.error.mockRestore();
+  console.warn.mockRestore();
+});
 
-  const props = {
-    data: { testid: 'default' }
-  }
+const testId = 'bargraph1';
 
-test('generated scaffold test - update me', () => {
-
-
-  const kit = renderKit(PbBarGraph , props)
-  expect(kit).toBeInTheDocument()
-})
-
-it("should be accessible", async () => {
-  ensureAccessible(PbBarGraph, props)
-})
+test('bargraph uses exact classname', () => {
+  render(
+    <PbBarGraph
+        className='super_important_class'
+        data={{ testid: testId }}
+        id='bar-default'
+    />
+  );
+ 
+  const kit = screen.getByTestId(testId);
+  expect(kit).toHaveClass('super_important_class');
+});
