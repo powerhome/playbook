@@ -73,7 +73,7 @@ const Dialog = (props: DialogProps): React.ReactElement => {
   const ariaProps = buildAriaProps(aria);
    const dataProps = buildDataProps(data)
    const htmlProps = buildHtmlProps(htmlOptions);
-  const dialogClassNames = {
+  const classes = {
     base: classnames("pb_dialog", buildCss("pb_dialog", size, placement), globalProps(props), className),
     afterOpen: "pb_dialog_after_open",
     beforeClose: "pb_dialog_before_close",
@@ -93,7 +93,7 @@ const Dialog = (props: DialogProps): React.ReactElement => {
 
   const dynamicInlineProps = globalInlineProps(props); 
 
-  const classes = classnames(
+  const wrapperClasses = classnames(
     buildCss("pb_dialog_wrapper"),
   );
 
@@ -171,11 +171,11 @@ const Dialog = (props: DialogProps): React.ReactElement => {
           {...ariaProps} 
           {...dataProps}
           {...htmlProps} 
-          className={classes}
+          className={wrapperClasses}
       >
         <Modal
             ariaHideApp={false}
-            className={dialogClassNames}
+            className={classes}
             closeTimeoutMS={200}
             contentLabel="Minimal Modal Example"
             id={id}
