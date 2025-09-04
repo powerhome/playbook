@@ -2,12 +2,18 @@ import { Background } from "playbook-ui";
 import Display from "./Examples/Display";
 import Animation from "./Examples/Animation";
 import VerticalAlign from "./Examples/VerticalAlign";
+import Opacity from "./Examples/Opacity";
+import ScreenSizes from "./Examples/ScreenSizes";
+import TextAlign from "./Examples/TextAlign";
 
 
 const COMPONENT_MAP = {
   animation: Animation,
   display: Display,
   vertical_align: VerticalAlign,
+  opacity: Opacity,
+  screen_sizes: ScreenSizes,
+  text_align: TextAlign,
 };
 
 const TokensExamples = () => {

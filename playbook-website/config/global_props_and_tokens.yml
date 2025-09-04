@@ -9,3 +9,6 @@ tokens:
   - animation
   - display
   - vertical_align
+  - opacity
+  - screen_sizes
+  - text_align
