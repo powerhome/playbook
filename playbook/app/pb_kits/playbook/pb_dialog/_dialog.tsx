@@ -74,7 +74,7 @@ const Dialog = (props: DialogProps): React.ReactElement => {
    const dataProps = buildDataProps(data)
    const htmlProps = buildHtmlProps(htmlOptions);
   const dialogClassNames = {
-    base: classnames("pb_dialog", buildCss("pb_dialog", size, placement)),
+    base: classnames("pb_dialog", buildCss("pb_dialog", size, placement), globalProps(props), className),
     afterOpen: "pb_dialog_after_open",
     beforeClose: "pb_dialog_before_close",
   };
@@ -95,8 +95,6 @@ const Dialog = (props: DialogProps): React.ReactElement => {
 
   const classes = classnames(
     buildCss("pb_dialog_wrapper"),
-    globalProps(props),
-    className
   );
 
   const [triggerOpened, setTriggerOpened] = useState(false),
