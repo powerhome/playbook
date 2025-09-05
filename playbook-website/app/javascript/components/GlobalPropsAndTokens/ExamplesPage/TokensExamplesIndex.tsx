@@ -1,6 +1,9 @@
 import { Background } from "playbook-ui";
 import Display from "./Examples/Display";
 import Animation from "./Examples/Animation";
+import BorderRadius from "./Examples/BorderRadius";
+import LineHeight from "./Examples/LineHeight";
+import Overflow from "./Examples/Overflow";
 import VerticalAlign from "./Examples/VerticalAlign";
 import Opacity from "./Examples/Opacity";
 import ScreenSizes from "./Examples/ScreenSizes";
@@ -9,7 +12,10 @@ import TextAlign from "./Examples/TextAlign";
 
 const COMPONENT_MAP = {
   animation: Animation,
+  border_radius: BorderRadius,
   display: Display,
+  line_height: LineHeight,
+  overflow: Overflow,
   vertical_align: VerticalAlign,
   opacity: Opacity,
   screen_sizes: ScreenSizes,

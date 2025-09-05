@@ -7,8 +7,11 @@ global_props:
 
 tokens:
   - animation
+  - border_radius
   - display
-  - vertical_align
   - opacity
   - screen_sizes
   - text_align
+  - line_height
+  - overflow
+  - vertical_align
