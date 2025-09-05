@@ -8,7 +8,7 @@ const Position = () => {
       <ShowPage
         pageType="tokens"
         title="Position"
-        description="Position tokens control how an element is placed within its parent or the viewport. Most values align with CSS position properties: $offscreen is a custom utility for visually hiding elements."
+        description="Position tokens control how an element is placed within its parent or the viewport. Most values align with CSS position properties; $offscreen is a custom utility for visually hiding elements."
       >
         <PropsExamplesTable
           headers={["Token", "Value", "SASS Example"]}
