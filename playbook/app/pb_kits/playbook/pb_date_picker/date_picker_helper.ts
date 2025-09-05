@@ -89,6 +89,16 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
     }
   }
 
+  // Helper function to get min/max dates based on yearRange
+  const getMinMaxDates = () => {
+    const [minYear, maxYear] = yearRange
+
+    const setMinDate = minDate || `01/01/${minYear}`
+    const setMaxDate = maxDate || `12/31/${maxYear}`
+
+    return { setMinDate, setMaxDate }
+  }
+
   const disabledWeekDays = () => {
     return (
       [
@@ -201,6 +211,8 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
   // |             Flatpickr initializer w/ config             |
   // ===========================================================
 
+  const { setMinDate, setMaxDate } = getMinMaxDates()
+
   flatpickr(`#${pickerId}`, {
     allowInput,
     closeOnSelect,
@@ -212,8 +224,8 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
     locale: {
       rangeSeparator: ' to '
     },
-    maxDate,
-    minDate,
+    maxDate: setMaxDate,
+    minDate: setMinDate,
     mode,
     nextArrow: '<i class="far fa-angle-right"></i>',
     onOpen: [() => {
@@ -323,7 +335,7 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
   }
 // === End of Automatic Sync Logic ===
 
-    
+
   // Adding dropdown icons to year and month select
   dropdown.insertAdjacentHTML('afterend', `<i class="year-dropdown-icon">${angleDown}</i>`)
   if (picker.monthElements[0].parentElement) {
