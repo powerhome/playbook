@@ -1,0 +1,1 @@
+Set this prop to `false` or `"off"` to remove autocomplete from text inputs. You can also set it to a string, but browsers will often defer to other attributes like `name`. 

@@ -306,3 +306,41 @@ test('returns masked CVV value', () => {
 
   expect(input.value).toBe('')
 })
+
+test('adds autocomplete string attribute', () => {
+  render(
+    <TextInput
+        autoComplete="family-name"
+        data={{ testid: testId }}
+    />
+  )
+
+  const kit = screen.getByTestId(testId)
+  const input = within(kit).getByRole('textbox')
+  expect(input).toHaveAttribute("autocomplete", "family-name")
+})
+
+test('adds autocomplete "off" attribute', () => {
+  render(
+    <TextInput
+        autoComplete={false}
+        data={{ testid: testId }}
+    />
+  )
+
+  const kit = screen.getByTestId(testId)
+  const input = within(kit).getByRole('textbox')
+  expect(input).toHaveAttribute("autocomplete", "off")
+})
+
+test('does not add autocomplete attribute otherwise', () => {
+  render(
+    <TextInput
+        data={{ testid: testId }}
+    />
+  )
+
+  const kit = screen.getByTestId(testId)
+  const input = within(kit).getByRole('textbox')
+  expect(input).not.toHaveAttribute("autocomplete")
+})
