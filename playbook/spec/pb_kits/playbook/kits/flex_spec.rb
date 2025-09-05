@@ -57,8 +57,8 @@ RSpec.describe Playbook::PbFlex::Flex do
       expect(subject.new(row_gap: "xs").classname).to include "pb_flex_kit_orientation_row_justify_content_left_align_items_top_spacing_none_rowGap_xs"
       expect(subject.new(column_gap: "xs").classname).to include "pb_flex_kit_orientation_row_justify_content_left_align_items_top_spacing_none_columnGap_xs"
       expect(subject.new(gap: { xs: "none", sm: "sm", md: "md", lg: "lg", xl: "xl" }).classname).to include "pb_flex_kit_orientation_row_justify_content_left_align_items_top_spacing_none gap_xs_none gap_sm_sm gap_md_md gap_lg_lg gap_xl_xl"
-      expect(subject.new(row_gap: { xs: "none", sm: "sm", md: "md", lg: "lg", xl: "xl" }).classname).to include "pb_flex_kit_orientation_row_justify_content_left_align_items_top_spacing_none row_gap_xs_none row_gap_sm_sm row_gap_md_md row_gap_lg_lg row_gap_xl_xl"
-      expect(subject.new(column_gap: { xs: "none", sm: "sm", md: "md", lg: "lg", xl: "xl" }).classname).to include "pb_flex_kit_orientation_row_justify_content_left_align_items_top_spacing_none column_gap_xs_none column_gap_sm_sm column_gap_md_md column_gap_lg_lg column_gap_xl_xl"
+      expect(subject.new(row_gap: { xs: "none", sm: "sm", md: "md", lg: "lg", xl: "xl" }).classname).to include "pb_flex_kit_orientation_row_justify_content_left_align_items_top_spacing_none rowGap_xs_none rowGap_sm_sm rowGap_md_md rowGap_lg_lg rowGap_xl_xl"
+      expect(subject.new(column_gap: { xs: "none", sm: "sm", md: "md", lg: "lg", xl: "xl" }).classname).to include "pb_flex_kit_orientation_row_justify_content_left_align_items_top_spacing_none columnGap_xs_none columnGap_sm_sm columnGap_md_md columnGap_lg_lg columnGap_xl_xl"
       expect(subject.new(vertical: "baseline").classname).to include "pb_flex_kit_orientation_row_justify_content_left_align_items_baseline_spacing_none"
       expect(subject.new(classname: "additional_class").classname).to include "pb_flex_kit_orientation_row_justify_content_left_align_items_top_spacing_none additional_class"
     end
