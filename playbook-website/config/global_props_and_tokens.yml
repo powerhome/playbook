@@ -8,4 +8,7 @@ global_props:
 tokens:
   - animation
   - display
+  - positioning
+  - scale
   - vertical_align
+  - z_index

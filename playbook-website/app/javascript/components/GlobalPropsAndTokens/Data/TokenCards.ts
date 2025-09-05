@@ -118,4 +118,11 @@ export const TokenCards = [
     icon: "objects-align-top",
     link: "/tokens/vertical_align",
   },
+  {
+    title: "Z-Index",
+    description:
+      "Adjusts stacking order of elements, controlling which elements appear on top or below others.",
+    icon: "bring-front",
+    link: "/tokens/z_index",
+  },
 ];

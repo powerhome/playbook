@@ -1,13 +1,19 @@
 import { Background } from "playbook-ui";
 import Display from "./Examples/Display";
 import Animation from "./Examples/Animation";
+import Position from "./Examples/Position";
+import Scale from "./Examples/Scale";
 import VerticalAlign from "./Examples/VerticalAlign";
+import ZIndex from "./Examples/Z-Index";
 
 
 const COMPONENT_MAP = {
   animation: Animation,
   display: Display,
+  positioning: Position,
+  scale: Scale,
   vertical_align: VerticalAlign,
+  z_index: ZIndex,
 };
 
 const TokensExamples = () => {
