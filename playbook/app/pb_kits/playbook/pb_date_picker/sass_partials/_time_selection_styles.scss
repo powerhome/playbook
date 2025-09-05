@@ -52,7 +52,8 @@
         background: transparent;
       }
 
-      .pb_selectable_card_kit > label {
+      .pb_selectable_card_kit_enabled > label,
+      .pb_selectable_card_kit_checked_enabled > label {
         padding: 0;
         margin: 0;
         width: 60px;
