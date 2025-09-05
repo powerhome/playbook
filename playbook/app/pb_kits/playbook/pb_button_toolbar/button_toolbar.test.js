@@ -20,7 +20,7 @@ test('default test', () => {
 
   expect(kit).toHaveClass('pb_button_toolbar_kit_horizontal_primary')
   expect(kit).toContainElement(child)
-  expect(child).toHaveClass('pb_button_kit_primary_inline_enabled')
+  expect(child).toHaveClass('pb_button_kit pb_button_primary pb_button_inline pb_button_enabled')
 })
 
 test('variant and orientation props', () => {
@@ -42,5 +42,5 @@ test('variant and orientation props', () => {
   const child = screen.getByTestId('child-button')
 
   expect(kit).toHaveClass('pb_button_toolbar_kit_vertical_secondary')
-  expect(child).toHaveClass('pb_button_kit_secondary_inline_enabled')
+  expect(child).toHaveClass('pb_button_kit pb_button_secondary pb_button_inline pb_button_enabled')
 })

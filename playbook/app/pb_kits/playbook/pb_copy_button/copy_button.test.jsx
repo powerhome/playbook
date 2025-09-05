@@ -52,7 +52,7 @@ test('passes text and tooltip props to button', () => {
   expect(content).toHaveTextContent("text")
 
   const kit = screen.getByTestId('text-test')
-  const button = kit.querySelector('.pb_button_kit_primary_inline_enabled')
+  const button = kit.querySelector('.pb_button_kit.pb_button_primary.pb_button_inline.pb_button_enabled')
   expect(button).toBeInTheDocument()
 
   fireEvent.click(button)

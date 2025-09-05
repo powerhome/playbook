@@ -55,8 +55,7 @@ const FixedConfirmationToast = (props: FixedConfirmationToastProps): React.React
   const iconClass = icon && icon !== "none" ? "custom_icon" : ""
 
   const css = classnames(
-    `pb_fixed_confirmation_toast_kit_${status}`,
-    { _multi_line: multiLine },
+    `pb_fixed_confirmation_toast_kit_${status}${multiLine ? '_multi_line' : ''}`,
     { [`positioned_toast ${vertical} ${horizontal}`]: vertical && horizontal },
     `${iconClass}`,
     globalProps(props),

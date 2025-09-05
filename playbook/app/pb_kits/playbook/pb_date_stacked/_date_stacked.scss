@@ -2,34 +2,74 @@
 @import "../pb_caption/caption";
 @import "../tokens/colors";
 
+// Center alignment
+.pb_date_stacked_kit_center_sm,
+.pb_date_stacked_kit_center_md,
+.pb_date_stacked_kit_center_sm_dark,
+.pb_date_stacked_kit_center_md_dark,
+.pb_date_stacked_kit_center_sm_reverse,
+.pb_date_stacked_kit_center_md_reverse,
+.pb_date_stacked_kit_center_sm_dark_reverse,
+.pb_date_stacked_kit_center_md_dark_reverse {
+  & > * .pb_title_kit,
+  & > * .pb_caption_kit_md,
+  & > .pb_date_stacked_year_kit {
+    text-align: center;
+  }
+}
 
-[class^=pb_date_stacked_kit]{
-  &[class*=_center]  {
-    & > * [class^=pb_title_kit],
-    & > * [class^=pb_caption_kit],
-    & > [class^=pb_date_stacked_year_kit] {
-      text-align: center;
-    }
+// Right alignment
+.pb_date_stacked_kit_right_sm,
+.pb_date_stacked_kit_right_md,
+.pb_date_stacked_kit_right_sm_dark,
+.pb_date_stacked_kit_right_md_dark,
+.pb_date_stacked_kit_right_sm_reverse,
+.pb_date_stacked_kit_right_md_reverse,
+.pb_date_stacked_kit_right_sm_dark_reverse,
+.pb_date_stacked_kit_right_md_dark_reverse {
+  & > * .pb_title_kit,
+  & > * .pb_caption_kit_md,
+  & > .pb_date_stacked_year {
+    text-align: right;
   }
-  &[class*=_right]  {
-    & > * [class^=pb_title_kit],
-    & > * [class^=pb_caption_kit],
-    & > [class^=pb_date_stacked_year] {
-      text-align: right;
-    }
+}
+
+// Reverse layout
+.pb_date_stacked_kit_left_sm_reverse,
+.pb_date_stacked_kit_left_md_reverse,
+.pb_date_stacked_kit_center_sm_reverse,
+.pb_date_stacked_kit_center_md_reverse,
+.pb_date_stacked_kit_right_sm_reverse,
+.pb_date_stacked_kit_right_md_reverse,
+.pb_date_stacked_kit_left_sm_dark_reverse,
+.pb_date_stacked_kit_left_md_dark_reverse,
+.pb_date_stacked_kit_center_sm_dark_reverse,
+.pb_date_stacked_kit_center_md_dark_reverse,
+.pb_date_stacked_kit_right_sm_dark_reverse,
+.pb_date_stacked_kit_right_md_dark_reverse {
+  .pb_date_stacked_day_month {
+    display: flex;
+    flex-direction: column-reverse;
   }
-  &[class*=_reverse] {
-    .pb_date_stacked_day_month {
-      display: flex;
-      flex-direction: column-reverse;
-    }
+}
+
+// Dark mode
+.pb_date_stacked_kit_left_sm_dark,
+.pb_date_stacked_kit_left_md_dark,
+.pb_date_stacked_kit_center_sm_dark,
+.pb_date_stacked_kit_center_md_dark,
+.pb_date_stacked_kit_right_sm_dark,
+.pb_date_stacked_kit_right_md_dark,
+.pb_date_stacked_kit_left_sm_dark_reverse,
+.pb_date_stacked_kit_left_md_dark_reverse,
+.pb_date_stacked_kit_center_sm_dark_reverse,
+.pb_date_stacked_kit_center_md_dark_reverse,
+.pb_date_stacked_kit_right_sm_dark_reverse,
+.pb_date_stacked_kit_right_md_dark_reverse {
+  & > * .pb_title_kit {
+    color: $text_dk_default;
   }
-  &[class*=_dark] {
-    & > * [class^=pb_title_kit] {
-      color: $text_dk_default;
-    }
-    & > * [class^=pb_caption_kit] {
-      color: $text_dk_light;
-    }
+  & > * .pb_caption_kit {
+    color: $text_dk_light;
   }
 }

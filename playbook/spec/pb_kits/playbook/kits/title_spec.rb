@@ -29,16 +29,16 @@ RSpec.describe Playbook::PbTitle::Title do
 
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
-      expect(subject.new({}).classname).to eq "pb_title_kit_3"
+      expect(subject.new({}).classname).to eq "pb_title_kit pb_title_3"
 
-      expect(subject.new(classname: "additional_class").classname).to eq "pb_title_kit_3 additional_class"
-      expect(subject.new(dark: true).classname).to eq "pb_title_kit_3 dark"
-      expect(subject.new(size: nil).classname).to eq "pb_title_kit_3"
-      expect(subject.new(size: 4).classname).to eq "pb_title_kit_4"
-      expect(subject.new(tag: "h3").classname).to eq "pb_title_kit_3"
-      expect(subject.new(size: 4, color: "link").classname).to eq "pb_title_kit_4_link"
-      expect(subject.new(bold: false).classname).to eq "pb_title_kit_3_thin"
-      expect(subject.new(size: { xs: 3, sm: 2, md: 1 }).classname).to eq "pb_title_kit pb_title_kit_xs_3 pb_title_kit_sm_2 pb_title_kit_md_1"
+      expect(subject.new(classname: "additional_class").classname).to eq "pb_title_kit pb_title_3 additional_class"
+      expect(subject.new(dark: true).classname).to eq "pb_title_kit pb_title_3 dark"
+      expect(subject.new(size: nil).classname).to eq "pb_title_kit pb_title_3"
+      expect(subject.new(size: 4).classname).to eq "pb_title_kit pb_title_4"
+      expect(subject.new(tag: "h3").classname).to eq "pb_title_kit pb_title_3"
+      expect(subject.new(size: 4, color: "link").classname).to eq "pb_title_kit pb_title_4 pb_title_link"
+      expect(subject.new(bold: false).classname).to eq "pb_title_kit pb_title_3 pb_title_thin"
+      expect(subject.new(size: { xs: 3, sm: 2, md: 1 }).classname).to eq "pb_title_kit pb_title_xs_3 pb_title_sm_2 pb_title_md_1"
     end
   end
 

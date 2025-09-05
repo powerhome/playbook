@@ -14,11 +14,12 @@ module Playbook
       prop :no_border, type: Playbook::Props::Boolean, default: false
 
       def classname
-        generate_classname("pb_online_status_kit", status, is_no_border, "size", size)
-      end
+        class_names = ["pb_online_status_kit"]
+        class_names << "pb_online_status_no_border" if no_border
+        class_names << "pb_online_status_size_#{size}" if size
+        class_names << "pb_online_status_#{status}" if status
 
-      def is_no_border
-        no_border ? "no_border" : nil
+        generate_classname(class_names.compact.join(" "), separator: " ")
       end
     end
   end

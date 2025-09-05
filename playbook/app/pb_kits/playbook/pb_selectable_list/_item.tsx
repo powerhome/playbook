@@ -82,6 +82,7 @@ const SelectableListItem = ({
             <Checkbox
                 checked={checkedState}
                 id={id}
+                marginLeft="xs"
                 name={name}
                 onChange={handleChecked}
                 // eslint suppressor, text is needed to display on screen
@@ -98,6 +99,7 @@ const SelectableListItem = ({
         {variant == "radio" && (
           <>
             <Radio
+                className="ml_xs"
                 defaultChecked={defaultChecked}
                 id={id}
                 label={label}

@@ -4,7 +4,7 @@
 @import "../tokens/border_radius";
 @import "./_pb_map_button_mixin.scss";
 
-[class*="pb_map"] {
+.pb_map {
   .pb_map-custom-button {
     @include pb_map_button;
     position: relative;

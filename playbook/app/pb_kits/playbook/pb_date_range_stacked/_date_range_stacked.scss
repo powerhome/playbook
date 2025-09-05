@@ -1,6 +1,6 @@
 @import "../tokens/spacing";
 
-[class^=pb_date_range_stacked] {
+.pb_date_range_stacked {
   .pb_date_range_stacked_arrow {
     margin: 0 ($space_sm - 3) 0;
   }

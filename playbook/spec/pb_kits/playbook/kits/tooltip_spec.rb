@@ -16,7 +16,7 @@ RSpec.describe Playbook::PbTooltip::Tooltip do
 
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
-      expect(subject.new(dark: true).classname).to eq "pb_tooltip_kit_dark dark"
+      expect(subject.new(dark: true).classname).to eq "pb_tooltip_kit dark"
       expect(subject.new(classname: "additional_class").classname).to eq "pb_tooltip_kit additional_class"
     end
   end

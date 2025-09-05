@@ -28,15 +28,15 @@ RSpec.describe Playbook::PbSectionSeparator::SectionSeparator do
 
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
-      expect(subject.new({}).classname).to eq "pb_section_separator_kit_card_horizontal"
-      expect(subject.new(classname: "additional_class").classname).to eq "pb_section_separator_kit_card_horizontal additional_class"
-      expect(subject.new(variant: "background", classname: "additional_class", dark: true).classname).to eq "pb_section_separator_kit_background_horizontal additional_class dark"
-      expect(subject.new(orientation: "vertical", classname: "additional_class", dark: true).classname).to eq "pb_section_separator_kit_card_vertical additional_class dark"
-      expect(subject.new(classname: "additional_class", dark: true).classname).to eq "pb_section_separator_kit_card_horizontal additional_class dark"
-      expect(subject.new(line_style: "dashed").classname).to eq "pb_section_separator_kit_card_horizontal_dashed"
-      expect(subject.new(color: "primary").classname).to eq "pb_section_separator_kit_card_horizontal_color_primary"
-      expect(subject.new(color: "primary", orientation: "vertical", dark: true).classname).to eq "pb_section_separator_kit_card_vertical_color_primary dark"
-      expect(subject.new(color: "default", line_style: "dashed").classname).to eq "pb_section_separator_kit_card_horizontal_dashed"
+      expect(subject.new({}).classname).to eq "pb_section_separator_kit pb_section_separator_card pb_section_separator_horizontal pb_section_separator_solid pb_section_separator_color_default"
+      expect(subject.new(classname: "additional_class").classname).to eq "pb_section_separator_kit pb_section_separator_card pb_section_separator_horizontal pb_section_separator_solid pb_section_separator_color_default additional_class"
+      expect(subject.new(variant: "background", classname: "additional_class", dark: true).classname).to eq "pb_section_separator_kit pb_section_separator_background pb_section_separator_horizontal pb_section_separator_solid pb_section_separator_color_default additional_class dark"
+      expect(subject.new(orientation: "vertical", classname: "additional_class", dark: true).classname).to eq "pb_section_separator_kit pb_section_separator_card pb_section_separator_vertical pb_section_separator_solid pb_section_separator_color_default additional_class dark"
+      expect(subject.new(classname: "additional_class", dark: true).classname).to eq "pb_section_separator_kit pb_section_separator_card pb_section_separator_horizontal pb_section_separator_solid pb_section_separator_color_default additional_class dark"
+      expect(subject.new(line_style: "dashed").classname).to eq "pb_section_separator_kit pb_section_separator_card pb_section_separator_horizontal pb_section_separator_dashed pb_section_separator_color_default"
+      expect(subject.new(color: "primary").classname).to eq "pb_section_separator_kit pb_section_separator_card pb_section_separator_horizontal pb_section_separator_solid pb_section_separator_color_primary"
+      expect(subject.new(color: "primary", orientation: "vertical", dark: true).classname).to eq "pb_section_separator_kit pb_section_separator_card pb_section_separator_vertical pb_section_separator_solid pb_section_separator_color_primary dark"
+      expect(subject.new(color: "default", line_style: "dashed").classname).to eq "pb_section_separator_kit pb_section_separator_card pb_section_separator_horizontal pb_section_separator_dashed pb_section_separator_color_default"
     end
   end
 end

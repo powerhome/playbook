@@ -38,7 +38,7 @@ test('bold prop applies correct styling when false', () => {
   const titleElement = screen.getByText("Anna Black")
   expect(titleElement).toBeInTheDocument()
 
-  expect(titleElement).toHaveClass('pb_title_kit_size_4_thin')
+  expect(titleElement).toHaveClass('pb_title_kit pb_title_4 pb_title_thin')
 })
 
 test('align prop adds desired class', () => {

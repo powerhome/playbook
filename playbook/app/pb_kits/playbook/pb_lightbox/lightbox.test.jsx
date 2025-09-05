@@ -113,7 +113,7 @@ test('Closes on close button', async () => {
   )
 
   const kit = screen.getByTestId(testId)
-  const closeIcon = kit.getElementsByClassName('pb_button_kit_link_inline_enabled')[0]
+  const closeIcon = kit.querySelector('.pb_button_kit.pb_button_link.pb_button_inline.pb_button_enabled')
 
   fireEvent(
     closeIcon,

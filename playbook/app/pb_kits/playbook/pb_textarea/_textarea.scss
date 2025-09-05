@@ -3,11 +3,11 @@
 @import "../tokens/spacing";
 @import "../tokens/titles";
 
-[class^=pb_textarea_kit] {
+.pb_textarea_kit {
   margin-bottom: $space_sm;
 
-  [class^=pb_caption_kit] {
-    margin-bottom: $space_xs;
+  .pb_caption_kit_md {
+    margin-bottom: $space_xs !important;
     display: block;
   }
   textarea::placeholder,
@@ -59,8 +59,8 @@
   }
 
   &.error {
-    [class*=pb_body_kit] {
-      margin-top: $space_xs / 2;
+    .pb_body_kit_negative {
+      margin-top: $space_xs / 2 !important;
     }
     textarea {
       border-color: $error;

@@ -11,11 +11,13 @@ $pb_button_sizes: (
   "lg":   ($font_large - 2px),
 );
 
-[class*=pb_button_kit]{
+// Base button class
+.pb_button_kit {
   @include pb_button;
-  // Size =================
+  
+  // Size variants
   @each $name, $size in $pb_button_sizes {
-    &[class*=size_#{$name}] {
+    &.pb_button_size_#{$name} {
       font-size: $size;
       padding: $size / 2 $size * 2.42;
       @if $name == "sm" {
@@ -24,17 +26,24 @@ $pb_button_sizes: (
     }
   }
 
-  // Variants =================
-  &[class*=_primary]  {
+  // Variant styles
+  &.pb_button_primary {
     @include pb_button_primary;
   }
-  &[class*=_secondary]  {
+  
+  &.pb_button_secondary {
     @include pb_button_secondary;
   }
-  &[class*=_link]  {
+  
+  &.pb_button_link {
     @include pb_button_link;
   }
-  &[class*=_reaction] {
+  
+  &.pb_button_danger {
+    @include pb_button_danger;
+  }
+  
+  &.pb_button_reaction {
     background-color: $card_light;
     min-width: 40px;
     border-radius: $border_radius_rounded;
@@ -49,52 +58,51 @@ $pb_button_sizes: (
     &:hover {
       background-color: $bg_light;
     }
-    &.active {
+    &.pb_button_active {
       border-color:transparent;
       box-shadow: 0px 0px 0 2px $primary_action;
       &:hover {
         background-color: rgba($primary, 0.03);
       }
     }
+    
+    &.pb_button_reaction_default {
+      padding: ($space_xxs + 1) ($space_sm - 4);
+      color: $text_lt_lighter;
+    }
   }
 
-  &.reaction_default {
-    padding: ($space_xxs + 1) ($space_sm - 4);
-    color: $text_lt_lighter;
-  }
-
-  // Block ====================
-  &[class*=_block]  {
+  // Block (full width) style
+  &.pb_button_block {
     @include pb_button_block;
+    width: 100% !important;
   }
 
-  // Loading ==================
-  &[class*=_loading]  {
+  // Loading state
+  &.pb_button_loading {
     @include pb_button_loading(true);
   }
 
-  // Danger ===================
-  &[class*=_danger] {
-    @include pb_button_danger;
-  }
-
-  // Disabled =================
-  &[class*=_disabled]  {
+  // Disabled state
+  &.pb_button_disabled {
     @include pb_button_disabled;
   }
 
-  // Dark Variants =============
-  &.dark  {
-    &[class*=_primary]  {
+  // Dark theme variants
+  &.dark {
+    &.pb_button_primary {
       @include pb_button_primary_dark;
     }
-    &[class*=_secondary]  {
+    
+    &.pb_button_secondary {
       @include pb_button_secondary_dark;
     }
-    &[class*=_link]  {
+    
+    &.pb_button_link {
       @include pb_button_link_dark;
     }
-    &[class*=_disabled]  {
+    
+    &.pb_button_disabled {
       @include pb_button_disabled_dark;
     }
   }

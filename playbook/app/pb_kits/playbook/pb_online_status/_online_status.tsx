@@ -33,7 +33,7 @@ const OnlineStatus = (props: OnlineStatusProps) => {
   const dataProps = buildDataProps(data)
   const htmlProps = buildHtmlProps(htmlOptions)
   const getBorder = noBorder ? 'no_border' : ''
-  const classes = classnames(buildCss('pb_online_status_kit', status, getBorder, "size", size), globalProps(props), className)
+  const classes = classnames(buildCss('pb_online_status_kit', getBorder ), `${size && "pb_online_status_size_" + size}`,  `pb_online_status_${status && status}`,globalProps(props), className)
 
   return (
     <div

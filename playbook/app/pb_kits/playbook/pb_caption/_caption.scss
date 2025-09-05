@@ -1,32 +1,115 @@
 @import "../tokens/colors";
 @import "caption_mixin";
 
-[class^="pb_caption_kit"] {
+// Base caption classes - all size combinations
+.pb_caption_kit,
+.pb_caption_kit_xs,
+.pb_caption_kit_sm, 
+.pb_caption_kit_md,
+.pb_caption_kit_base,
+.pb_caption_kit_lg,
+.pb_caption_kit_xl {
   @include caption;
-  &[class*="_link"] {
-    color: $primary;
-  }
+}
 
-  &[class^="pb_caption_kit_lg"] {
+// Apply caption mixin to all size+color combinations too
+@each $color_name, $color_value in $pb_caption_colors {
+  .pb_caption_kit_xs_#{$color_name},
+  .pb_caption_kit_sm_#{$color_name},
+  .pb_caption_kit_md_#{$color_name},
+  .pb_caption_kit_base_#{$color_name},
+  .pb_caption_kit_lg_#{$color_name},
+  .pb_caption_kit_xl_#{$color_name} {
+    @include caption;
+  }
+}
+
+// Apply caption mixin to link variants too
+.pb_caption_kit_xs_link,
+.pb_caption_kit_sm_link,
+.pb_caption_kit_md_link,
+.pb_caption_kit_base_link,
+.pb_caption_kit_lg_link,
+.pb_caption_kit_xl_link {
+  @include caption;
+}
+
+// Size-specific styles
+.pb_caption_kit_lg,
+.pb_caption_kit_lg_default,
+.pb_caption_kit_lg_light,
+.pb_caption_kit_lg_lighter,
+.pb_caption_kit_lg_success,
+.pb_caption_kit_lg_error,
+.pb_caption_kit_lg_link {
+  @include caption_lg;
+}
+
+// Apply lg mixin to all lg color combinations
+@each $color_name, $color_value in $pb_caption_colors {
+  .pb_caption_kit_lg_#{$color_name} {
     @include caption_lg;
   }
+}
 
-  &[class^="pb_caption_kit_xs"] {
+.pb_caption_kit_xs,
+.pb_caption_kit_xs_default,
+.pb_caption_kit_xs_light,
+.pb_caption_kit_xs_lighter,
+.pb_caption_kit_xs_success,
+.pb_caption_kit_xs_error,
+.pb_caption_kit_xs_link {
+  @include caption_xs;
+}
+
+// Apply xs mixin to all xs color combinations
+@each $color_name, $color_value in $pb_caption_colors {
+  .pb_caption_kit_xs_#{$color_name} {
     @include caption_xs;
   }
-  
-  &[class*="link"] {
-    color: $primary;
+}
+
+// Color variants - generate all size/color combinations
+@each $color_name, $color_value in $pb_caption_colors {
+  .pb_caption_kit_xs_#{$color_name},
+  .pb_caption_kit_sm_#{$color_name},
+  .pb_caption_kit_md_#{$color_name},
+  .pb_caption_kit_base_#{$color_name},
+  .pb_caption_kit_lg_#{$color_name},
+  .pb_caption_kit_xl_#{$color_name} {
+    color: $color_value;
   }
+}
 
-  @include pb_caption_kit_colors;
+// Link variant (deprecated but still supported)
+.pb_caption_kit_xs_link,
+.pb_caption_kit_sm_link,
+.pb_caption_kit_md_link,
+.pb_caption_kit_base_link,
+.pb_caption_kit_lg_link,
+.pb_caption_kit_xl_link {
+  color: $primary;
+}
 
-  &.dark {
-    @include caption_dark;
-    @each $name, $color in $pb_dark_caption_colors {
-      &[class*="_#{$name}"] {
-        color: $color;
-      }
-    }
+// Dark theme variants
+.pb_caption_kit.dark,
+.pb_caption_kit_xs.dark,
+.pb_caption_kit_sm.dark,
+.pb_caption_kit_md.dark,
+.pb_caption_kit_base.dark,
+.pb_caption_kit_lg.dark,
+.pb_caption_kit_xl.dark {
+  @include caption_dark;
+}
+
+// Dark theme color variants
+@each $color_name, $color_value in $pb_dark_caption_colors {
+  .pb_caption_kit_xs_#{$color_name}.dark,
+  .pb_caption_kit_sm_#{$color_name}.dark,
+  .pb_caption_kit_md_#{$color_name}.dark,
+  .pb_caption_kit_base_#{$color_name}.dark,
+  .pb_caption_kit_lg_#{$color_name}.dark,
+  .pb_caption_kit_xl_#{$color_name}.dark {
+    color: $color_value;
   }
 }

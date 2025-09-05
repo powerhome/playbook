@@ -20,7 +20,13 @@ module Playbook
                         default: "solid"
 
       def classname
-        generate_classname("pb_section_separator_kit", variant, orientation, line_style == "dashed" ? "dashed" : nil, color != "default" ? "color_#{color}" : nil)
+        class_names = ["pb_section_separator_kit"]
+        class_names << "pb_section_separator_#{variant}"
+        class_names << "pb_section_separator_#{orientation}"
+        class_names << "pb_section_separator_#{line_style}"
+        class_names << "pb_section_separator_color_#{color}"
+
+        generate_classname(class_names.join(" "), separator: " ")
       end
 
     private

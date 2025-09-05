@@ -7,21 +7,26 @@
 $mention_bg_color_yellow: rgba(249, 187, 0, 0.2);
 $mention_bg_color_blue: #e5eefa;
 
-[class^=pb_message_kit] {
-  @include pb_message;
+.pb_message_kit {
+  @include pb_message(false);
+}
 
-  [class^=pb_message_mention] {
-    border-radius: $space_xxs;
-    color: $primary;
-    display: inline;
-    padding: $space_xxs;
-    
-    &[class*=_user] {
-      background-color: $mention_bg_color_blue;
-    }
-    
-    &[class*=_self] {
-      background-color: $mention_bg_color_yellow;
-    }
-  }
+.pb_message_kit_avatar {
+  @include pb_message(true);
+}
+
+.pb_message_mention_user,
+.pb_message_mention_self {
+  border-radius: $space_xxs;
+  color: $primary;
+  display: inline;
+  padding: $space_xxs;
+}
+
+.pb_message_mention_user {
+  background-color: $mention_bg_color_blue;
+}
+
+.pb_message_mention_self {
+  background-color: $mention_bg_color_yellow;
 }

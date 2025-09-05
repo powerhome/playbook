@@ -278,7 +278,7 @@ test("MultiSelect prop to allow multiple selections + add correct Form Pills", (
   const option = Array.from(kit.querySelectorAll(".pb_dropdown_option_list"));
   fireEvent.click(option[0]); // Select first option
   fireEvent.click(option[1]); // Select second option
-  const formPills = kit.querySelectorAll(".pb_form_pill_kit_primary");
+  const formPills = kit.querySelectorAll(".pb_form_pill_kit.pb_form_pill_primary");
   expect(formPills.length).toBe(2);
   expect(formPills[0]).toHaveTextContent("United States");
   expect(formPills[1]).toHaveTextContent("Canada");
@@ -314,7 +314,7 @@ test("renders form pills inside trigger", () => {
   const kit = screen.getByTestId(testId)
   const option = kit.querySelector('.pb_dropdown_option_list')
   fireEvent.click(option)
-  const formPill = kit.querySelector(".pb_form_pill_kit_primary")
+  const formPill = kit.querySelector(".pb_form_pill_kit.pb_form_pill_primary")
   expect(formPill).toBeInTheDocument()
   })
 
@@ -333,7 +333,7 @@ test("multiSelect and autocomplete to work together", () => {
   expect(input).toBeInTheDocument()
     const option = kit.querySelector('.pb_dropdown_option_list')
   fireEvent.click(option)
-  const formPill = kit.querySelector(".pb_form_pill_kit_primary")
+  const formPill = kit.querySelector(".pb_form_pill_kit.pb_form_pill_primary")
   expect(formPill).toBeInTheDocument()
 })
 
@@ -350,9 +350,9 @@ test("renders form pills with size and color", () => {
   const kit = screen.getByTestId(testId)
   const option = kit.querySelector('.pb_dropdown_option_list')
   fireEvent.click(option)
-  const formPill = kit.querySelector(".pb_form_pill_kit_neutral")
+  const formPill = kit.querySelector(".pb_form_pill_kit.pb_form_pill_neutral")
   expect(formPill).toBeInTheDocument()
-  expect(formPill).toHaveClass("small")
+  expect(formPill).toHaveClass("pb_form_pill_small")
   })
 
 test("defaultValue works with multiSelect", () => {
@@ -365,7 +365,7 @@ test("defaultValue works with multiSelect", () => {
       />
     )
     const kit = screen.getByTestId(testId)
-    expect(kit.querySelectorAll(".pb_form_pill_kit_primary")).toHaveLength(2)
+    expect(kit.querySelectorAll(".pb_form_pill_kit.pb_form_pill_primary")).toHaveLength(2)
     const option2 = Array.from(kit.querySelectorAll(".pb_dropdown_option_list"));
     const firstOpt = options[0].label
     expect(option2[0]).not.toHaveTextContent(firstOpt)

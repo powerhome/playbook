@@ -4,7 +4,15 @@
 @import "../tokens/spacing";
 @import "../tokens/typography";
 
-[class^=pb_badge_kit] {
+// Base badge class and all variants
+.pb_badge_kit,
+.pb_badge_kit_rounded,
+.pb_badge_kit_notification,
+.pb_badge_kit_notification_rounded,
+.pb_badge_kit_notification_error,
+.pb_badge_kit_notification_error_rounded,
+.pb_badge_kit_success_sm,
+.pb_badge_kit_success_sm_rounded {
   $pb_badge_height_rounded: 16px;
 
   display: inline-flex;
@@ -21,43 +29,141 @@
     font-size: $font_smaller - 1;
     font-weight: $bolder;
   }
+}
 
-  @each $color_name, $color_value in $status_colors {
-    &[class*=_#{$color_name}]  {
-      background: rgba($color_value, $opacity_1);
-      color: map-get($status_color_text, $color_name);
+// Add base styles to all status color variants too
+@each $color_name, $color_value in $status_colors {
+  .pb_badge_kit_#{$color_name},
+  .pb_badge_kit_#{$color_name}_rounded {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: $border_rad_light;
+    padding: 0 $space_xs/2;
+    border-width: 1px;
+    border-color: $card_light;
+    white-space: nowrap;
+
+    span {
+      display: inline-block;
+      font-size: $font_smaller - 1;
+      font-weight: $bolder;
     }
   }
+}
 
-  &[class*=_rounded] {
-    height: $pb_badge_height_rounded;
-    min-height: $pb_badge_height_rounded;
-    min-width: $pb_badge_height_rounded;
-    border-radius: $pb_badge_height_rounded / 2;
+// Generate all status color variants (with and without rounded)
+@each $color_name, $color_value in $status_colors {
+  .pb_badge_kit_#{$color_name} {
+    background: rgba($color_value, $opacity_1);
+    color: map-get($status_color_text, $color_name);
   }
-
-  &[class*=_notification] {
-    background: $primary;
-    color: $white;
+  
+  .pb_badge_kit_#{$color_name}_rounded {
+    background: rgba($color_value, $opacity_1);
+    color: map-get($status_color_text, $color_name);
+    height: 16px !important;
+    min-height: 16px !important;
+    min-width: 16px !important;
+    border-radius: 8px !important;
   }
+}
 
-  &[class*=_notification_error] {
-    background: $error;
-  }
+// Special success_sm variant (since component maps "success" to "success_sm")
+.pb_badge_kit_success_sm {
+  background: rgba(map-get($status_colors, "success"), $opacity_1);
+  color: map-get($status_color_text, "success");
+}
 
-  &.dark {
+.pb_badge_kit_success_sm_rounded {
+  background: rgba(map-get($status_colors, "success"), $opacity_1);
+  color: map-get($status_color_text, "success");
+  height: 16px !important;
+  min-height: 16px !important;
+  min-width: 16px !important;
+  border-radius: 8px !important;
+}
+
+// Rounded variant (base)
+.pb_badge_kit_rounded {
+  height: 16px !important;
+  min-height: 16px !important;
+  min-width: 16px !important;
+  border-radius: 8px !important;
+}
+
+// Notification variants
+.pb_badge_kit_notification {
+  background: $primary;
+  color: $white;
+}
+
+.pb_badge_kit_notification_rounded {
+  background: $primary;
+  color: $white;
+  height: 16px !important;
+  min-height: 16px !important;
+  min-width: 16px !important;
+  border-radius: 8px !important;
+}
+
+.pb_badge_kit_notification_error {
+  background: $error;
+  color: $white;
+}
+
+.pb_badge_kit_notification_error_rounded {
+  background: $error;
+  color: $white;
+  height: 16px !important;
+  min-height: 16px !important;
+  min-width: 16px !important;
+  border-radius: 8px !important;
+}
+
+// Dark theme variants
+@each $color_name, $color_value in $status_colors {
+  .pb_badge_kit_#{$color_name}.dark {
     border-width: 0;
-
-    @each $color_name, $color_value in $status_colors {
-      &[class*=_#{$color_name}]  {
-        background: rgba(mix($bg_dark, $color_value, 10%), $opacity_2);
-        color: map-get($status_color_text_dark, $color_name);
-      }
-    }
-
-    &[class*=_notification_error]  {
-      background: $error_dark;
-      color: $white;
-    }
+    background: rgba(mix($bg_dark, $color_value, 10%), $opacity_2);
+    color: map-get($status_color_text_dark, $color_name);
   }
+  
+  .pb_badge_kit_#{$color_name}_rounded.dark {
+    border-width: 0;
+    background: rgba(mix($bg_dark, $color_value, 10%), $opacity_2);
+    color: map-get($status_color_text_dark, $color_name);
+  }
+}
+
+.pb_badge_kit_success_sm.dark {
+  border-width: 0;
+  background: rgba(mix($bg_dark, map-get($status_colors, "success"), 10%), $opacity_2);
+  color: map-get($status_color_text_dark, "success");
+}
+
+.pb_badge_kit_success_sm_rounded.dark {
+  border-width: 0;
+  background: rgba(mix($bg_dark, map-get($status_colors, "success"), 10%), $opacity_2);
+  color: map-get($status_color_text_dark, "success");
+}
+
+.pb_badge_kit_notification.dark {
+  border-width: 0;
+}
+
+.pb_badge_kit_notification_rounded.dark {
+  border-width: 0;
+}
+
+.pb_badge_kit_notification_error.dark {
+  border-width: 0;
+  background: $error_dark;
+  color: $white;
+}
+
+.pb_badge_kit_notification_error_rounded.dark {
+  border-width: 0;
+  background: $error_dark;
+  color: $white;
 }
