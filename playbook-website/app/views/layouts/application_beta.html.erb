@@ -8,18 +8,8 @@
   <body class="<%= @body_class %> <%= controller_name %> <%= action_name%>">
     <%= render 'layouts/mobile_nav'%>
     <div class="pb--page--dark-mode-toggle-mobile">
-      <%= react_component("DarkModeToggle", initMode: cookies[:dark_mode] )%>
     </div>
-    <%= pb_rails("layout", props: {
-      classname: "pb--page--content",
-      variant: dark_mode? ? 'dark' : 'light'
-    }) do %>
-      <%= render 'layouts/mobile_hamburger' %>
-      <%= pb_rails("layout/sidebar", props: { classname: "pb--page--sideNav"}) do%>
-        <%= render 'layouts/sidebar' %>
-      <% end %>
       <%= react_component("Website") %>
-    <% end %>
   </body>
   <%= yield :pb_js if @type != 'react' %>
   <%= render 'layouts/ga'%>
