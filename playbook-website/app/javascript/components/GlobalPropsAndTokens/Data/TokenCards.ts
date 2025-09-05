@@ -49,11 +49,11 @@ export const TokenCards = [
     link: "/tokens/overflow",
   },
   {
-    title: "Positioning",
+    title: "Position",
     description:
       "Set values for element placement, including static, relative, absolute, or fixed.",
     icon: "arrows-up-down-left-right",
-    link: "/tokens/positioning",
+    link: "/tokens/position",
   },
   {
     title: "Scale",

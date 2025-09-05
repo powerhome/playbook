@@ -10,7 +10,7 @@ import ZIndex from "./Examples/Z-Index";
 const COMPONENT_MAP = {
   animation: Animation,
   display: Display,
-  positioning: Position,
+  position: Position,
   scale: Scale,
   vertical_align: VerticalAlign,
   z_index: ZIndex,
