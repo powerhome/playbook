@@ -5,6 +5,9 @@ import BorderRadius from "./Examples/BorderRadius";
 import LineHeight from "./Examples/LineHeight";
 import Overflow from "./Examples/Overflow";
 import VerticalAlign from "./Examples/VerticalAlign";
+import Opacity from "./Examples/Opacity";
+import ScreenSizes from "./Examples/ScreenSizes";
+import TextAlign from "./Examples/TextAlign";
 
 
 const COMPONENT_MAP = {
@@ -14,6 +17,9 @@ const COMPONENT_MAP = {
   line_height: LineHeight,
   overflow: Overflow,
   vertical_align: VerticalAlign,
+  opacity: Opacity,
+  screen_sizes: ScreenSizes,
+  text_align: TextAlign,
 };
 
 const TokensExamples = () => {

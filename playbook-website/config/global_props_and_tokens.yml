@@ -9,6 +9,9 @@ tokens:
   - animation
   - border_radius
   - display
+  - opacity
+  - screen_sizes
+  - text_align
   - line_height
   - overflow
   - vertical_align
