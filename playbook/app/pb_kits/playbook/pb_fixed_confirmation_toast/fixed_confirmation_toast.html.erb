@@ -1,6 +1,6 @@
-<%= pb_content_tag do %>
+<%= pb_content_tag(:div, "aria-atomic": "true", "aria-live": "polite", role: "status", tabindex: 0, onkeydown: "if(event.key==='Enter'||event.key===' '){ this.remove(); }" ) do %>
     <% if object.icon_value && object.icon_value != "none" %>
-    <%= pb_rails("icon", props: { icon: object.icon_value, classname: "pb_icon", fixed_width: true }) %>
+    <%= pb_rails("icon", props: { icon: object.icon_value, classname: "pb_icon", fixed_width: true, aria: { "aria-label": "#{object.icon_value} icon" } }) %>
     <% end %>
     <% if content %>
         <%= content %>
@@ -8,5 +8,5 @@
         <%= pb_rails("title", props: { text: object.text, size: 4, flex: "1", classname: "pb_fixed_confirmation_toast_text" }) %>
     <% end %>
 
-    <%= pb_rails("icon", props: { icon: "times", classname: "pb_icon", cursor: "pointer", fixed_width: true }) if object.closeable %>
+    <%= pb_rails("icon", props: { icon: "times", classname: "pb_icon", cursor: "pointer", fixed_width: true, aria: { "aria-label": "Close Toast" } }) if object.closeable %>
 <% end %>
