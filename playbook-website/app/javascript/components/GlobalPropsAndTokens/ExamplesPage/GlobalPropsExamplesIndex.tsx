@@ -5,6 +5,8 @@ import Margin from "./Examples/Margin";
 import Cursor from "./Examples/Cursor";
 import Hover from "./Examples/Hover";
 import Dark from "./Examples/Dark";
+import LineHeight from "./Examples/LineHeight";
+import Display from "./Examples/Display";
 
 const COMPONENT_MAP = {
   html_options: HtmlOptions,
@@ -12,6 +14,8 @@ const COMPONENT_MAP = {
   cursor: Cursor,
   hover: Hover,
   dark: Dark,
+  line_height: LineHeight,
+  display: Display,
 };
 
 const GlobalPropsExamples = () => {
