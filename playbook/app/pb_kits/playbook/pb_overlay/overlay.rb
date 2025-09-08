@@ -112,11 +112,8 @@ module Playbook
 
       def data_attributes
         data ||= {}
-        # rubocop:disable Performance/RedundantMerge
         data.merge!("data-pb-overlay" => true)
         data.merge!("data-overlay-dynamic" => true) if dynamic
-        # rubocop:enable Performance/RedundantMerge
-
         data
       end
 
