@@ -36,7 +36,7 @@ describe("Timestamp Kit", () => {
     );
 
     const kit = screen.getByTestId(testId);
-    expect(kit).toHaveClass("pb_timestamp_kit_left_variant");
+    expect(kit).toHaveClass("pb_timestamp_kit_left");
   });
 
   test("renders Timestamp time", () => {
@@ -79,7 +79,7 @@ describe("Timestamp Kit", () => {
     );
 
     const kit = screen.getByTestId(testId);
-    expect(kit).toHaveClass("pb_timestamp_kit_center_variant");
+    expect(kit).toHaveClass("pb_timestamp_kit_center");
   });
 
   test("renders Timestamp timezone", () => {

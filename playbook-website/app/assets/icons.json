@@ -172,6 +172,10 @@
     "category": "Arrows"
   },
   {
+    "name": "arrows-left-right-through-line",
+    "category": "Arrows"
+  },
+  {
     "name": "arrows-left-right-to-line",
     "category": "Arrows"
   },
@@ -185,6 +189,14 @@
   },
   {
     "name": "arrows-up-down-left-right",
+    "category": "Arrows"
+  },
+  {
+    "name": "arrows-up-down-through-line",
+    "category": "Arrows"
+  },
+  {
+    "name": "arrows-up-down-to-line",
     "category": "Arrows"
   },
   {
@@ -976,6 +988,10 @@
     "category": "Interface Core"
   },
   {
+    "name": "corner",
+    "category": "Interface Core"
+  },
+  {
     "name": "crop",
     "category": "Interface Core"
   },
@@ -1028,6 +1044,10 @@
     "category": "Interface Core"
   },
   {
+    "name": "gap",
+    "category": "Interface Core"
+  },
+  {
     "name": "grid-2",
     "category": "Interface Core"
   },
@@ -1040,7 +1060,15 @@
     "category": "Interface Core"
   },
   {
+    "name": "layer-group",
+    "category": "Interface Core"
+  },
+  {
     "name": "layer-plus",
+    "category": "Interface Core"
+  },
+  {
+    "name": "letter-spacing",
     "category": "Interface Core"
   },
   {
@@ -1061,6 +1089,14 @@
   },
   {
     "name": "object-exclude",
+    "category": "Interface Core"
+  },
+  {
+    "name": "objects-align-center-vertical",
+    "category": "Interface Core"
+  },
+  {
+    "name": "objects-align-left",
     "category": "Interface Core"
   },
   {
@@ -1092,6 +1128,10 @@
     "category": "Interface Core"
   },
   {
+    "name": "rectangle-wide",
+    "category": "Interface Core"
+  },
+  {
     "name": "refresh",
     "category": "Interface Core"
   },
@@ -1104,7 +1144,15 @@
     "category": "Interface Core"
   },
   {
+    "name": "shadow",
+    "category": "Interface Core"
+  },
+  {
     "name": "sliders-h",
+    "category": "Interface Core"
+  },
+  {
+    "name": "spinner-solid",
     "category": "Interface Core"
   },
   {
@@ -1521,6 +1569,10 @@
   },
   {
     "name": "nitro-n",
+    "category": "Power Tooling"
+  },
+  {
+    "name": "playbook",
     "category": "Power Tooling"
   },
   {

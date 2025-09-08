@@ -45,10 +45,3 @@ $pb_dark_caption_colors: (
 @mixin caption_dark {
   color: $text_dk_light;
 }
-@mixin pb_caption_kit_colors {
-  @each $name, $color in $pb_caption_colors {
-    &[class*="#{$name}"] {
-      color: $color
-    }
-  }
-}

@@ -2,7 +2,7 @@
 @import "../tokens/titles";
 @import "../tokens/colors";
 
-[class^="pb_text_input_kit"] {
+.pb_text_input_kit {
   .pb_text_input_kit_label {
     margin-bottom: $space_xs;
     display: block;
@@ -76,7 +76,7 @@
         .text_input {
           border-color: $error_dark;
         }
-        [class*=pb_body_kit_negative] {
+        .pb_body_kit_negative {
           color: $error_dark;
         }
       }
@@ -100,7 +100,7 @@
   }
   &.error {
     .text_input_wrapper {
-      [class*="pb_body_kit"] {
+      .pb_body_kit_negative {
         margin-top: $space_xs / 2;
       }
       // The `:not` here prevents error styling from affecting the country search input in the Phone Number Input Kit.
@@ -174,9 +174,9 @@
   }
 
   .text_input_wrapper_add_on {
-    & > [class^="pb_text_input_kit"]:not(:last-child) {
+    & > .pb_text_input_kit:not(:last-child) {
       .text_input_wrapper_add_on input,
-      [class^="pb_text_input_kit"] .text_input_wrapper_add_on .text_input {
+      .pb_text_input_kit .text_input_wrapper_add_on .text_input {
         border-bottom-right-radius: 0;
         border-top-right-radius: 0;
         border-right-width: 0;

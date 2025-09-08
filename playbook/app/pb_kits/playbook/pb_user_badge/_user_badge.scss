@@ -4,7 +4,10 @@ $badge-sizes: (
   "lg":   36px
 );
 
-[class^=pb_user_badge_kit] {
+.pb_user_badge_kit,
+.pb_user_badge_kit_sm,
+.pb_user_badge_kit_md,
+.pb_user_badge_kit_lg {
   .pb_user_badge_wrapper {
     svg,
     img {
@@ -12,13 +15,25 @@ $badge-sizes: (
       height: 100%;
     }
   }
+}
 
-  @each $name, $size in $badge-sizes {
-    &[class*=_#{$name}] {
-      .pb_user_badge_wrapper {
-        width: $size;
-        height: $size;
-      }
-    }
+.pb_user_badge_kit_sm {
+  .pb_user_badge_wrapper {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+.pb_user_badge_kit_md {
+  .pb_user_badge_wrapper {
+    width: 26px;
+    height: 26px;
+  }
+}
+
+.pb_user_badge_kit_lg {
+  .pb_user_badge_wrapper {
+    width: 36px;
+    height: 36px;
   }
 }

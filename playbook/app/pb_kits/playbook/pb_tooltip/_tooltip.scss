@@ -22,7 +22,7 @@ $tooltip_shadow: rgba(60, 106, 172, 0.18);
   }
 }
 
-[class^="pb_tooltip_kit"] {
+.pb_tooltip_kit {
   ~ .tooltip_tooltip,
   .tooltip_tooltip {
     display: block;
@@ -103,8 +103,7 @@ $tooltip_shadow: rgba(60, 106, 172, 0.18);
     }
   }
 
-  &.dark,
-  &[class*=_dark]{
+  &.dark {
     ~.tooltip_tooltip,
     .tooltip_tooltip {
       //react
@@ -136,7 +135,7 @@ $tooltip_shadow: rgba(60, 106, 172, 0.18);
 }
 
 // Right
-[class^="pb_tooltip_kit"] .tooltip_tooltip {
+.pb_tooltip_kit .tooltip_tooltip {
   $arrow_vertical_offset: calc(50% - #{$space_xs * 1.2});
 
   &[data-popper-placement="right"] {
