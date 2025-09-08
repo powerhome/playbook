@@ -5,7 +5,10 @@ $color_checkbox_default: $border_light;
 $color_disabled: darken($border_light, 20%);
 $transition: .2s ease-in-out;
 
-[class^=pb_toggle_kit] {
+.pb_toggle_kit_sm_on,
+.pb_toggle_kit_sm_off,
+.pb_toggle_kit_md_on,
+.pb_toggle_kit_md_off {
   position: relative;
   $width: 44px;
   $height: $width / 2;

@@ -16,7 +16,7 @@ module Playbook
       prop :timezone, default: false
 
       def classname
-        generate_classname("pb_time_range_inline_kit", dark_class, alignment)
+        generate_classname("pb_time_range_inline_kit", alignment)
       end
 
       def format_start_time_string

@@ -3,7 +3,8 @@
 @import "../tokens/typography";
 @import "../tokens/border_radius";
 
-[class^=pb_link_kit]{
+// Base styles
+.pb_link_kit {
   @include pb_link($primary);
   &:hover {
     color: $text_lt_default;
@@ -25,42 +26,135 @@
       color: $text_dk_default;
     }
   }
-  @each $color_name, $color_value in $pb_link_colors {
-    &[class*=_#{"" + $color_name}] {
-      @include pb_link($color_value);
+}
 
+// Color variants
+@each $color_name, $color_value in $pb_link_colors {
+  @if $color_name != "default" {
+    .pb_link_kit_#{$color_name} {
+      @include pb_link($color_value);
       &:hover {
         color: map-get($pb_link_hover_colors, $color_name);
       }
-
       &:visited {
         color: darken($primary_action, 10%);
       }
+      &:focus {
+        outline: none;
+      }
+      &:focus-visible {
+        border-radius: $border_rad_light;
+        outline: 1px solid $primary;
+        outline-offset: 2px;
+      }
     }
   }
+}
 
-  @each $dark_color_name, $dark_color_value in $pb_dark_link_colors{
-    &[class*=_#{$dark_color_name}][class*=dark]{
-      @include pb_link($dark_color_value);
-      
+// Dark mode color variants
+@each $dark_color_name, $dark_color_value in $pb_dark_link_colors {
+  .pb_link_kit_#{$dark_color_name}.dark {
+    @include pb_link($dark_color_value);
+    &:hover {
+      color: map-get($pb_dark_link_hover_colors, $dark_color_name);
+    }
+    &:visited {
+      color: darken($primary_action, 10%);
+    }
+  }
+}
+
+// Underline modifier
+.pb_link_kit_underline,
+.pb_link_kit_body_underline,
+.pb_link_kit_muted_underline,
+.pb_link_kit_destructive_underline,
+.pb_link_kit_underline_disabled,
+.pb_link_kit_body_underline_disabled,
+.pb_link_kit_muted_underline_disabled,
+.pb_link_kit_destructive_underline_disabled {
+  text-decoration: underline;
+}
+
+// Disabled modifier
+.pb_link_kit_disabled,
+.pb_link_kit_body_disabled,
+.pb_link_kit_muted_disabled,
+.pb_link_kit_destructive_disabled,
+.pb_link_kit_underline_disabled,
+.pb_link_kit_body_underline_disabled,
+.pb_link_kit_muted_underline_disabled,
+.pb_link_kit_destructive_underline_disabled {
+  pointer-events: none;
+  cursor: default;
+  color: $text_lt_lighter;
+}
+
+// Color + underline combinations
+@each $color_name, $color_value in $pb_link_colors {
+  @if $color_name != "default" {
+    .pb_link_kit_#{$color_name}_underline {
+      @include pb_link($color_value);
       &:hover {
-        color: map-get($pb_dark_link_hover_colors, $dark_color_name);
+        color: map-get($pb_link_hover_colors, $color_name);
       }
-
       &:visited {
         color: darken($primary_action, 10%);
       }
+      &:focus {
+        outline: none;
+      }
+      &:focus-visible {
+        border-radius: $border_rad_light;
+        outline: 1px solid $primary;
+        outline-offset: 2px;
+      }
     }
   }
+}
 
-  &[class*=_underline] {
-    text-decoration: underline;
+// Color + disabled combinations
+@each $color_name, $color_value in $pb_link_colors {
+  @if $color_name != "default" {
+    .pb_link_kit_#{$color_name}_disabled {
+      @include pb_link($color_value);
+      &:hover {
+        color: map-get($pb_link_hover_colors, $color_name);
+      }
+      &:visited {
+        color: darken($primary_action, 10%);
+      }
+      &:focus {
+        outline: none;
+      }
+      &:focus-visible {
+        border-radius: $border_rad_light;
+        outline: 1px solid $primary;
+        outline-offset: 2px;
+      }
+    }
   }
+}
 
-  &[class*=_disabled] {
-    pointer-events: none;
-    cursor: default;
-    color: $text_lt_lighter;
+// Color + underline + disabled combinations
+@each $color_name, $color_value in $pb_link_colors {
+  @if $color_name != "default" {
+    .pb_link_kit_#{$color_name}_underline_disabled {
+      @include pb_link($color_value);
+      &:hover {
+        color: map-get($pb_link_hover_colors, $color_name);
+      }
+      &:visited {
+        color: darken($primary_action, 10%);
+      }
+      &:focus {
+        outline: none;
+      }
+      &:focus-visible {
+        border-radius: $border_rad_light;
+        outline: 1px solid $primary;
+        outline-offset: 2px;
+      }
+    }
   }
-
 }

@@ -1,19 +1,12 @@
-[class^=pb_date_time] {
-  [class*=pb_date_kit] > div:last-child {
+.pb_date_time,
+.pb_date_time_sm,
+.pb_date_time_md {
+  .pb_date_kit > div:last-child {
     margin-right: 0 !important;
   }
-  &[class*=_center] {
-    display: flex;
-    justify-content: center;
-    text-align: center;
-  }
-  &[class*=_right]  {
-    display: flex;
-    justify-content: flex-end;
-    text-align: right;
-  }
-  &[class*=dark] {
-    [class^=pb_title_kit] {
+
+  &.dark {
+    .pb_title_kit {
         color: $text_dk_default !important;
     }
     & * {
