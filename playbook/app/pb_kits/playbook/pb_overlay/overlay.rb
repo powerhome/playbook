@@ -14,7 +14,7 @@ module Playbook
                              default: false
 
       def classname
-        generate_classname("pb_overlay", hide_scroll_bar_class)
+        generate_classname("pb_overlay", hide_scroll_bar_class, separator: " ")
       end
 
       def position
@@ -112,8 +112,11 @@ module Playbook
 
       def data_attributes
         data ||= {}
+        # rubocop:disable Performance/RedundantMerge
         data.merge!("data-pb-overlay" => true)
         data.merge!("data-overlay-dynamic" => true) if dynamic
+        # rubocop:enable Performance/RedundantMerge
+
         data
       end
 

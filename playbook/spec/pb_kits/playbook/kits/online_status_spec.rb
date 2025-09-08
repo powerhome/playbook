@@ -19,13 +19,13 @@ RSpec.describe Playbook::PbOnlineStatus::OnlineStatus do
 
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
-      expect(subject.new({}).classname).to eq "pb_online_status_kit_offline_size_sm"
-      expect(subject.new(dark: true).classname).to eq "pb_online_status_kit_offline_size_sm dark"
-      expect(subject.new(status: "online").classname).to eq "pb_online_status_kit_online_size_sm"
-      expect(subject.new(size: "lg").classname).to eq "pb_online_status_kit_offline_size_lg"
-      expect(subject.new(no_border: true).classname).to eq "pb_online_status_kit_offline_no_border_size_sm"
-      expect(subject.new(classname: "additional_class").classname).to eq "pb_online_status_kit_offline_size_sm additional_class"
-      expect(subject.new(status: "online", size: "lg", no_border: true, classname: "additional_class", dark: true).classname).to eq "pb_online_status_kit_online_no_border_size_lg additional_class dark"
+      expect(subject.new({}).classname).to eq "pb_online_status_kit pb_online_status_size_sm pb_online_status_offline"
+      expect(subject.new(dark: true).classname).to eq "pb_online_status_kit pb_online_status_size_sm pb_online_status_offline dark"
+      expect(subject.new(status: "online").classname).to eq "pb_online_status_kit pb_online_status_size_sm pb_online_status_online"
+      expect(subject.new(size: "lg").classname).to eq "pb_online_status_kit pb_online_status_size_lg pb_online_status_offline"
+      expect(subject.new(no_border: true).classname).to eq "pb_online_status_kit pb_online_status_no_border pb_online_status_size_sm pb_online_status_offline"
+      expect(subject.new(classname: "additional_class").classname).to eq "pb_online_status_kit pb_online_status_size_sm pb_online_status_offline additional_class"
+      expect(subject.new(status: "online", size: "lg", no_border: true, classname: "additional_class", dark: true).classname).to eq "pb_online_status_kit pb_online_status_no_border pb_online_status_size_lg pb_online_status_online additional_class dark"
     end
   end
 end

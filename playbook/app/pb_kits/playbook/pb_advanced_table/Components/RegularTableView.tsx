@@ -180,7 +180,7 @@ export const RegularTableView = ({
         const numberOfColumns = table.getAllFlatColumns().length;
         const isDataLoading = isExpandable && (inlineRowLoading && rowHasNoChildren) && (row.depth < columnDefinitions[0]?.cellAccessors?.length);
         const rowBackground = isExpandable && ((!inlineRowLoading && row.getCanExpand()) || (inlineRowLoading && rowHasNoChildren));
-        const rowColor = row.getIsSelected() ? "bg-row-selection" : rowBackground ? "bg-silver" : "bg-white";
+        const rowColor = row.getIsSelected() ? "bg-row-selection" : rowBackground ? "bg-" : "-white";
         const isFirstRegularRow = rowIndex === 0 && !row.getIsPinned();
         const customRowStyle = rowStyling?.length > 0 && rowStyling?.find((s: GenericObject) => s?.rowId === row.id);
 
