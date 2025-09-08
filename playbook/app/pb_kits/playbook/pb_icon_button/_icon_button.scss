@@ -15,7 +15,7 @@ $icon_colors: (
   height: fit-content;
 
   &:hover {
-    [class*="pb_button_kit"] {
+    .pb_button_kit {
       background-color: $bg_light;
     }
     .icon_button_icon {
@@ -24,7 +24,7 @@ $icon_colors: (
   }
 
   &:active {
-    [class*="pb_button_kit"] {
+    .pb_button_kit {
       background-color: $bg_light;
     }
     .icon_button_icon {
@@ -33,7 +33,7 @@ $icon_colors: (
   }
 
   &:hover:active {
-    [class*="pb_button_kit"] {
+    .pb_button_kit {
       background-color: $bg_light;
     }
     .icon_button_icon {
@@ -46,7 +46,7 @@ $icon_colors: (
     border-radius: 8px;
   }
 
-  [class*="pb_button_kit"] {
+  .pb_button_kit {
     min-height: 0;
     background: none;
     position: relative;

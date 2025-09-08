@@ -36,6 +36,6 @@ RSpec.describe Playbook::PbForm::Form, type: :kit do
       form.actions(&:submit)
     end
 
-    expect(rendered).to have_tag("form > ol.pb-form-actions > li > button.pb_button_kit_primary_inline_enabled[type=submit]")
+    expect(rendered).to have_tag("form > ol.pb-form-actions > li > button.pb_button_kit.pb_button_primary.pb_button_inline.pb_button_enabled[type=submit]")
   end
 end

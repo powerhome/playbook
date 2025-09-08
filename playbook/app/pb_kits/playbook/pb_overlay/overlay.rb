@@ -14,7 +14,7 @@ module Playbook
                              default: false
 
       def classname
-        generate_classname("pb_overlay", hide_scroll_bar_class)
+        generate_classname("pb_overlay", hide_scroll_bar_class, separator: " ")
       end
 
       def position

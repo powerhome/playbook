@@ -1,5 +1,5 @@
-[class^='pb_file_upload_kit'] {
-  [class^='pb_card_kit'] {
+.pb_file_upload_kit {
+  .pb_card_kit_deselected_border_radius_md {
     border: 1px #ccc dashed;
     text-align: center;
   }
@@ -9,22 +9,33 @@
     border: none;
     width: 0;
   }
-  &.error {
-    [class^='pb_card_kit'] {
+  &.error,
+  &.pb_file_upload_kit_error {
+    .pb_card_kit_deselected_border_radius_md {
       border-color: $error;
     }
-    [class^='pb_body_kit'][status="negative"] {
+    .pb_body_kit_negative {
       margin-top: $space_xs;
     }
   }
 }
 
-.dark [class*='pb_file_upload_kit'] {
-  [class*='pb_card_kit'] {
+.pb_file_upload_kit_error {
+  ::file-selector-button {
+    visibility: hidden;
+    padding: 0;
+    border: none;
+    width: 0;
+  }
+}
+
+.dark .pb_file_upload_kit {
+  .pb_card_kit_deselected_border_radius_md {
     border: 1px $text_dk_lighter dashed;
   }
-  &.error {
-    [class^='pb_card_kit'] {
+  &.error,
+  &.pb_file_upload_kit_error {
+    .pb_card_kit_deselected_border_radius_md {
       border-color: $error_dark;
     }
   }

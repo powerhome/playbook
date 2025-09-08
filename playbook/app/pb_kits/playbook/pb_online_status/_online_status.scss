@@ -20,7 +20,8 @@ $pb_online_status_statuses: (
   primary: $primary,
 );
 
-[class^=pb_online_status_kit] {
+.pb_online_status_kit,
+.pb_online_status_kit_no_border {
   box-sizing: content-box;
   width: $pb_online_status_size;
   height: $pb_online_status_size;
@@ -36,23 +37,26 @@ $pb_online_status_statuses: (
   &.dark {
     border-color: $bg_dark;
   }
+}
 
-  @each $status_name, $status_value in $pb_online_status_statuses {
-    &[class*=_#{$status_name}] {
-      background: $status_value;
-    }
+// Status colors
+@each $status_name, $status_value in $pb_online_status_statuses {
+  .pb_online_status_#{$status_name} {
+    background: $status_value;
   }
+}
 
-  @each $size, $value in $pb_online_status_sizes {
-    &[class*=_size_#{$size}] {
-      width: $value;
-      height: $value;
-      flex-basis: $value;
-    }
+// Sizes
+@each $size, $value in $pb_online_status_sizes {
+  .pb_online_status_size_#{$size} {
+    width: $value;
+    height: $value;
+    flex-basis: $value;
   }
+}
 
-  &[class*=_no_border] {
-    border-width: 0;
-    border-style: none;
-  }
+// No border
+.pb_online_status_kit_no_border {
+  border-width: 0;
+  border-style: none;
 }

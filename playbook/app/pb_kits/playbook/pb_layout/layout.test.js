@@ -68,11 +68,11 @@ test("render all layout variants", () => {
     },
     {
       layout: "collection_detail",
-      expected: "pb_layout_kit_collection_detail_size_md_left_light",
+      expected: "pb_layout_kit_collection_detail",
     },
     {
       layout: "content",
-      expected: "pb_layout_kit_content_size_md_left_light",
+      expected: "pb_layout_kit_content",
     },
     {
       layout: "kanban",
@@ -80,7 +80,7 @@ test("render all layout variants", () => {
     },
     {
       layout: "masonry",
-      expected: "pb_layout_kit_masonry_size_md_left_light",
+      expected: "pb_layout_kit_masonry",
     },
     {
       layout: "bracket",

@@ -1,18 +1,30 @@
 @import "playbook-tokens/colors";
+@import "playbook-tokens/spacing";
 
-.global_props_page {
-   .value_card_with_tooltip {
+.global_props_page,
+.tokens_show_page {
+  .value_card_with_tooltip {
     border-top-right-radius: 0;
+
     &::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 0;
-    height: 0;
-    border-style: solid;
-    border-width: 0 5px 5px 0; 
-    border-color: transparent $primary transparent transparent;
+      content: "";
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 0 5px 5px 0;
+      border-color: transparent $primary transparent transparent;
+    }
   }
-   } 
+  
+  [class^=pb_tooltip_kit].image ~ .tooltip_tooltip.visible {
+    padding: $space_sm !important;
+  }
+
+  .visual_guide_card_hover {
+    width: 135px;
+    height: 135px;
+  }
 }

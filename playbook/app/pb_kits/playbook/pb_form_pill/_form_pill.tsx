@@ -48,7 +48,7 @@ const FormPill = (props: FormPillProps): React.ReactElement => {
     icon = "",
   } = props
 
-  const iconClass = icon ? "_icon" : ""
+  const iconClass = icon ? "icon" : ""
   const closeIconSize = size === "small" ? "xs" : "sm"
   const wrappedClass = wrapped ? "wrapped" : ""
 
@@ -56,12 +56,13 @@ const FormPill = (props: FormPillProps): React.ReactElement => {
   delete filteredProps.truncate
 
   const css = classnames(
-    `pb_form_pill_kit_${color}${iconClass}`,
-    globalProps(filteredProps),
-    wrappedClass,
-    className,
-    size === 'small' ? 'small' : null,
-    textTransform,
+    icon ? 'pb_form_pill_kit_icon' : 'pb_form_pill_kit',
+    wrapped ? 'pb_form_pill_wrapped' : null,
+    size === 'small' ? 'pb_form_pill_small' : null,
+    `pb_form_pill_${color}`,
+    `pb_form_pill_${textTransform}`,
+     globalProps(filteredProps),
+     className,
   )
 
   const dataProps = buildDataProps(data)
