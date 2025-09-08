@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { NavItem, useCollapsible } from "playbook-ui";
+import { useNavigate } from "react-router-dom";
 import { KitsNavItem, kitsType } from "./NavComponents/KitsNavComponent";
 import { SideBarNavItems } from "./MenuData/SidebarNavItems";
 import { OtherNavItems } from "./NavComponents/OtherNavComponent";
@@ -20,24 +21,32 @@ export const TopLevelNavItem = ({
   design_guidelines,
   whats_new,
   icons,
+  beta = false,
 }) => {
+  const navigate = beta ? useNavigate() : null;
   //hook into collapsible logic for top level item
   const topLevelCollapsibles = SideBarNavItems.map(() => useCollapsible());
 
   //logic to make it so no navigation if already on that page(prevent unneeded rerenders)
   const TopLevelLink = (link) => {
     if (link === "/kits") {
-      return currentURL ===
-        `/kits${kitsType(type) ? `?type=${kitsType(type)}` : ""}`
-        ? ""
-        : `/kits${kitsType(type) ? `?type=${kitsType(type)}` : ""}`;
+      const kitsLink = beta ? "/beta/kits" : `/kits${kitsType(type) ? `?type=${kitsType(type)}` : ""}`;
+      return currentURL === kitsLink ? "" : kitsLink;
     } else {
-      return currentURL === link ? "" : link;
+      const finalLink = beta && !link.startsWith("/beta") ? `/beta${link}` : link;
+      return currentURL === finalLink ? "" : finalLink;
     }
   };
 
   //set up toggling for top level item
   const handleComponentsClick = (item, index) => {
+    if (beta) {
+      const linkPath = TopLevelLink(SideBarNavItems[index].link);
+      if (linkPath && navigate) {
+        navigate(linkPath);
+      }
+    }
+    
     topLevelCollapsibles.forEach(([, , setCollapsed], idx) => {
       setIsActive(() => {
         const newIsActive = {};
@@ -147,7 +156,7 @@ export const TopLevelNavItem = ({
         iconLeft={leftIcon}
         iconRight={children && ["plus", "minus"]}
         key={key}
-        link={TopLevelLink(link)}
+        {...(!beta && { link: TopLevelLink(link) })}
         marginY="none"
         onClick={() => handleComponentsClick(key, i)}
         onIconRightClick={children && (() => handleComponentsIconClick(i))}
@@ -172,6 +181,7 @@ export const TopLevelNavItem = ({
                     setIsActive={setIsActive}
                     updateTopLevelNav={updateTopLevelNav}
                     parentIndex={i}
+                    beta={beta}
                   />
                 ))}
               </>
@@ -188,7 +198,7 @@ export const TopLevelNavItem = ({
                 getting_started={getting_started}
                 design_guidelines={design_guidelines}
                 whats_new={whats_new}
-                icons={icons}
+                beta={beta}
               />
             )}
           </>

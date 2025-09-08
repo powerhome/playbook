@@ -60,7 +60,7 @@ const Radio = forwardRef<HTMLInputElement, RadioProps>(({
   const htmlProps = buildHtmlProps(htmlOptions)
 
   const classes = classnames(
-    buildCss('pb_radio_kit', alignment),
+    buildCss('pb_radio_kit', `${alignment === 'vertical' ? 'vertical' : ''}`),
     dark ? 'dark' : null,
     error ? 'error' : null,
     globalProps(props),

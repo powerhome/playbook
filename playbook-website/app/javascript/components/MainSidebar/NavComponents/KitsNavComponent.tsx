@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { NavItem } from "playbook-ui";
+import { useNavigate } from "react-router-dom";
 import { linkFormat } from "../../../utilities/website_sidebar_helper";
-
-const currentURL = window.location.pathname + window.location.search;
 
 export const kitsType = (type) => {
   if (type === null || type === undefined) {
@@ -23,11 +22,20 @@ export const KitsNavItem = ({
   isActive,
   setIsActive,
   updateTopLevelNav,
-  parentIndex
+  parentIndex,
+  beta = false,
 }) => {
+  const navigate = beta ? useNavigate() : null;
   const [collapsed] = collapsibles[kitIndex];
   //set up custom toggling
   const handleMainClick = (index, categoryKey) => {
+    if (beta) {
+      const linkPath = generateLink(categoryKey, null, type);
+      if (linkPath && navigate) {
+        navigate(linkPath);
+      }
+    }
+    
     collapsibles.forEach(([, , setCollapsed], idx) => {
       setIsActive(() => {
         const newIsActive = {};
@@ -59,6 +67,13 @@ export const KitsNavItem = ({
 
   //click on nested items
   const handleSubItemClick = (subLinkIndex, sublink, Index) => {
+    if (beta) {
+      const linkPath = generateLink(Object.keys(link)[0], sublink, type);
+      if (navigate) {
+        navigate(linkPath);
+      }
+    }
+    
     setIsActive(() => {
       const newIsActive = {};
       newIsActive[`${sublink}-${subLinkIndex}`] = true;
@@ -69,28 +84,52 @@ export const KitsNavItem = ({
   };
 
   //click on non-collapsible navitem click
-  const handleNonCollapseLinkClick = (link) => {
+  const handleNonCollapseLinkClick = (linkName) => {
+    if (beta) {
+      const linkPath = generateLink(null, linkName, type);
+      if (navigate) {
+        navigate(linkPath);
+      }
+    }
+    
     setIsActive(() => {
       const newIsActive = {};
-      newIsActive[link] = true;
+      newIsActive[linkName] = true;
       return newIsActive;
     });
     updateTopLevelNav(parentIndex);
   };
 
   const generateLink = (categoryKey, sublink, type) => {
+    const basePrefix = beta ? "/beta" : "";
+    
     if (sublink) {
       if (categoryKey === "advanced_table") {
         // Special case for advanced_table
-        const link = `/kits/advanced_table/${sublink}/${kitsType(type)}`;
-        return currentURL === link ? "" : link;
+        const link = `${basePrefix}/kits/advanced_table/${sublink}/${kitsType(type)}`;
+        if (beta) {
+          return link;
+        } else {
+          const currentURL = window.location.pathname + window.location.search;
+          return currentURL === link ? "" : link;
+        }
       } else {
-      const link = `/kits/${sublink}/${kitsType(type)}`;
-      return currentURL === link ? "" : link;
+        const link = `${basePrefix}/kits/${sublink}/${kitsType(type)}`;
+        if (beta) {
+          return link;
+        } else {
+          const currentURL = window.location.pathname + window.location.search;
+          return currentURL === link ? "" : link;
+        }
       }
     } else {
-      const link = `/kit_category/${categoryKey}?type=${kitsType(type)}`;
-      return currentURL === link ? "" : link;
+      const link = `${basePrefix}/kit_category/${categoryKey}?type=${kitsType(type)}`;
+      if (beta) {
+        return link;
+      } else {
+        const currentURL = window.location.pathname + window.location.search;
+        return currentURL === link ? "" : link;
+      }
     }
   };
 
@@ -157,7 +196,7 @@ export const KitsNavItem = ({
         fontSize="small"
         iconRight={["plus", "minus"]}
         key={`${categoryKey}-${kitIndex}`}
-        link={generateLink(categoryKey, null, type)}
+        {...(!beta && { link: generateLink(categoryKey, null, type) })}
         marginBottom="none"
         marginTop="xxs"
         onClick={() => handleMainClick(kitIndex, categoryKey)}
@@ -172,7 +211,7 @@ export const KitsNavItem = ({
             dark={dark}
             fontSize="small"
             key={`${sublink}-${j}`}
-            link={generateLink(categoryKey, sublink, type)}
+            {...(!beta && { link: generateLink(categoryKey, sublink, type) })}
             marginY="none"
             onClick={() => handleSubItemClick(j, sublink, kitIndex)}
             paddingY="xxs"
@@ -195,7 +234,7 @@ export const KitsNavItem = ({
         dark={dark}
         fontSize="small"
         key={`${link}-${kitIndex}`}
-        link={generateLink(null, link, type)}
+        {...(!beta && { link: generateLink(null, link, type) })}
         marginBottom="none"
         marginTop="xxs"
         onClick={() => handleNonCollapseLinkClick(link)}

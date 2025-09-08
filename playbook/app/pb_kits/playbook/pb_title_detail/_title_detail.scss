@@ -1,17 +1,16 @@
 @import "../pb_title/title";
 @import "../pb_body/body";
 
-[class^=pb_title_detail_kit]{
-  &[class*=_center]  {
-    & > [class^=pb_title],
-    & > [class^=pb_body] {
-      text-align: center;
-    }
+.pb_title_detail_kit_center {
+  & > .pb_title_kit,
+  & > .pb_body_kit_light {
+    text-align: center;
   }
-  &[class*=_right]  {
-    & > [class^=pb_title],
-    & > [class^=pb_body] {
-      text-align: right;
-    }
+}
+
+.pb_title_detail_kit_right {
+  & > .pb_title_kit,
+  & > .pb_body_kit_light {
+    text-align: right !important;
   }
 }

@@ -1,13 +1,31 @@
 import { Background } from "playbook-ui";
 import Display from "./Examples/Display";
 import Animation from "./Examples/Animation";
+import BorderRadius from "./Examples/BorderRadius";
+import LineHeight from "./Examples/LineHeight";
+import Opacity from "./Examples/Opacity";
+import Overflow from "./Examples/Overflow";
+import Position from "./Examples/Position";
+import Scale from "./Examples/Scale";
+import ScreenSizes from "./Examples/ScreenSizes";
+import TextAlign from "./Examples/TextAlign";
 import VerticalAlign from "./Examples/VerticalAlign";
+import ZIndex from "./Examples/Z-Index";
 
 
 const COMPONENT_MAP = {
   animation: Animation,
+  border_radius: BorderRadius,
   display: Display,
+  line_height: LineHeight,
+  opacity: Opacity,
+  overflow: Overflow,
+  position: Position,
+  scale: Scale,
+  screen_sizes: ScreenSizes,
+  text_align: TextAlign,
   vertical_align: VerticalAlign,
+  z_index: ZIndex,
 };
 
 const TokensExamples = () => {

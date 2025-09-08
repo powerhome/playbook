@@ -12,88 +12,83 @@ $avatar-sizes: (
   "xl":   100px,
 );
 
-[class^=pb_avatar_kit] {
-  position: relative;
+@each $name, $size in $avatar-sizes {
+  .pb_avatar_kit_size_#{$name},
+  .pb_avatar_kit_size_#{$name}_thumb {
+    width: $size;
+    height: $size;
+    object-fit: cover;
+    position: relative;
+    flex-shrink: 0;
+    flex-grow: 0;
+    flex-basis: $size;
 
-  @each $name, $size in $avatar-sizes {
-    &[class*=_size_#{$name}],
-    &[class*=_size_#{$name}_thumb] {
+    > .pb_flex_kit {
+      .pb_card_kit {
+        padding: 2px;
+      }
+      .pb_card_kit.overlay_bottom_center,
+      .pb_card_kit.overlay_top_center {
+        left: 50%;
+        transform: translateX(-50%);
+      }
+      .pb_card_kit.overlay_left_center,
+      .pb_card_kit.overlay_right_center {
+        top: 50%;
+        transform: translateY(-50%);
+      }
+    }
+
+    .avatar_wrapper {
       width: $size;
       height: $size;
       object-fit: cover;
+      border-radius: $border-rad-mega;
+      background: $slate;
+      overflow: hidden;
       position: relative;
       flex-shrink: 0;
       flex-grow: 0;
       flex-basis: $size;
 
-      & > [class^=pb_flex_kit] {
-        [class^=pb_card_kit] {
-          padding: 2px;
-        }
-        [class^=pb_card_kit].overlay_bottom_center,
-        [class^=pb_card_kit].overlay_top_center {
-          left: 50%;
-          transform: translateX(-50%);
-        }
-
-        [class^=pb_card_kit].overlay_left_center,
-        [class^=pb_card_kit].overlay_right_center {
-          top: 50%;
-          transform: translateY(-50%);
-        }
+      .dark & {
+        background: $text_dk_light;
       }
 
-      .avatar_wrapper {
-        width: $size;
-        height: $size;
-        object-fit: cover;
-        border-radius: $border-rad-mega;
-        background: $slate;
-        overflow: hidden;
+      &::before {
+        content: attr(data-initials);
+        width: 100%;
+        height: 100%;
+        display: block;
+        color: $white;
+        text-align: center;
+        font-size: $size * 0.38;
+        line-height: $size;
+        text-transform: uppercase;
         position: relative;
-        flex-shrink: 0;
-        flex-grow: 0;
-        flex-basis: $size;
+      }
 
-        .dark & {
-          background: $text_dk_light;
-        }
+      img {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        border-radius: $border-rad-mega;
+        object-fit: cover;
+        display: block;
+      }
 
-        &::before {
-          content: attr(data-initials);
-          width: 100%;
-          height: 100%;
-          display: block;
-          color: $white;
-          text-align: center;
-          font-size: $size * 0.38;
-          line-height: $size;
-          text-transform: uppercase;
-          position: relative;
-        }
-
-        img {
-          width: 100%;
-          height: 100%;
-          position: absolute;
-          top: 0;
-          left: 0;
-          border-radius: $border-rad-mega;
-          object-fit: cover;
-          display: block;
-        }
-
-        .grayscale {
-          filter: grayscale(1);
-        }
+      .grayscale {
+        filter: grayscale(1);
       }
     }
   }
+}
 
-  &.dark {
-    [class^=pb_card_kit] {
-      position: absolute;
-      padding: 2px;
-    }
+.pb_avatar_kit_dark {
+  .pb_card_kit {
+    position: absolute;
+    padding: 2px;
   }
 }
