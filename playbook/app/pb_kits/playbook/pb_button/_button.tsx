@@ -53,18 +53,18 @@ const buttonClassName = (props: ButtonPropTypes) => {
     size = null,
   } = props
 
-  let className = 'pb_button_kit'
+  const classNames = ['pb_button_kit']
 
-  className += `${variant !== null ? `_${variant}` : ''}`
-  className += `${type !== null ? `_${type}` : ''}`
-  className += `${fullWidth ? '_block' : ''}`
-  className += disabled ? '_disabled' : '_enabled'
-  className += loading ? '_loading' : ''
-  className += `${size !== null ? ` size_${size}` : ''}`
-  className += `${variant === 'reaction' && !isValidEmoji(icon) ? ` reaction_default` : ''}`
-  className += `${variant === 'reaction' && highlight ? ` active` : ''}`
+  if (variant) classNames.push(`pb_button_${variant}`)
+  if (type) classNames.push(`pb_button_${type}`)
+  if (fullWidth) classNames.push('pb_button_block')
+  classNames.push(disabled ? 'pb_button_disabled' : 'pb_button_enabled')
+  if (loading) classNames.push('pb_button_loading')
+  if (size) classNames.push(`pb_button_size_${size}`)
+  if (variant === 'reaction' && icon && !isValidEmoji(icon)) classNames.push('pb_button_reaction_default')
+  if (variant === 'reaction' && highlight) classNames.push('pb_button_active')
 
-  return className
+  return classNames.join(' ')
 }
 const spinnerIcon = getAllIcons()["spinner"]
 

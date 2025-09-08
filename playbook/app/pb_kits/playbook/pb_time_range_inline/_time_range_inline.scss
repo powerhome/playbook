@@ -1,35 +1,56 @@
 
-[class^=pb_time_range_inline_kit] {
-  &[class*=_center]  {
-    & > [class^=pb_caption],
-    & > [class^=pb_body] {
-      text-align: center;
-    }
-    & > [class*=pb_time_range_inline_wrapper] {
-      justify-content: center;
-    }
-  }
-  &[class*=_right] {
-    & > [class^=pb_caption],
-    & > [class^=pb_body] {
-      text-align: right;
-    }
-    & > [class*=pb_time_range_inline_wrapper] {
-      justify-content: flex-end;
-    }
-  }
-  [class^=pb_time_range_inline_wrapper] {
+@import "../tokens/spacing";
+
+// Base time range inline classes
+.pb_time_range_inline_kit_left,
+.pb_time_range_inline_kit_center,
+.pb_time_range_inline_kit_right,
+.pb_time_range_inline_kit_vertical {
+  .pb_time_range_inline_wrapper {
     display: flex;
     align-items: center;
-    [class*=pb_time_range_inline_arrow] {
+    .pb_time_range_inline_arrow {
       margin-left: $space_xs/2;
       margin-right: $space_xs/2;
     }
-    [class*=pb_time_range_inline_timezone] {
+    .pb_time_range_inline_timezone {
       margin-left: $space_xs/2;
     }
-    [class*=pb_time_range_inline_icon] {
+    .pb_time_range_inline_icon {
       margin-right: $space_xs/2;
     }
+  }
+}
+
+// Center alignment
+.pb_time_range_inline_kit_center {
+  & > .pb_caption_kit,
+  & > .pb_body_kit {
+    text-align: center;
+  }
+  & > .pb_time_range_inline_wrapper {
+    justify-content: center;
+  }
+}
+
+// Right alignment
+.pb_time_range_inline_kit_right {
+  & > .pb_caption_kit,
+  & > .pb_body_kit {
+    text-align: right;
+  }
+  & > .pb_time_range_inline_wrapper {
+    justify-content: flex-end;
+  }
+}
+
+// Vertical alignment
+.pb_time_range_inline_kit_vertical {
+  & > .pb_caption_kit,
+  & > .pb_body_kit {
+    text-align: center;
+  }
+  & > .pb_time_range_inline_wrapper {
+    justify-content: center;
   }
 }

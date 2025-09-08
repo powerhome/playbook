@@ -4,7 +4,12 @@
 @import "../pb_body/body";
 @import "../tokens/transition";
 
-[class^="pb_radio_kit"] {
+.pb_radio_kit,
+.pb_radio_kit.error,
+.pb_radio_kit.vertical,
+.pb_radio_kit.error.vertical,
+.pb_radio_kit_vertical,
+.pb_radio_kit_vertical.error {
   display: inline-flex;
   cursor: pointer;
 
@@ -59,71 +64,85 @@
       border: 6px solid $neutral;
     }
   }
+}
 
-  &[class*="vertical"] {
-    flex-direction: column;
-    align-items: center;
-    .pb_radio_button {
-      margin-right: 0px;
-      margin-bottom: $space_xs;
-    }
+.pb_radio_kit.vertical,
+.pb_radio_kit.error.vertical,
+.pb_radio_kit_vertical,
+.pb_radio_kit_vertical.error {
+  flex-direction: column;
+  align-items: center;
+  .pb_radio_button {
+    margin-right: 0px;
+    margin-bottom: $space_xs;
   }
+}
 
-  &.dark {
-    .pb_radio_button {
-      border-color: $border_dark;
+.pb_radio_kit.dark,
+.pb_radio_kit.dark.error,
+.pb_radio_kit.dark.vertical,
+.pb_radio_kit.dark.error.vertical,
+.pb_radio_kit_vertical.dark,
+.pb_radio_kit_vertical.dark.error {
+  .pb_radio_button {
+    border-color: $border_dark;
+  }
+  input {
+    &:focus-visible {
+      & ~ .pb_radio_button {
+        box-shadow: 0px 0px 0px 2px $bg_dark_card, 0px 0px 0px 4px $primary;
+      }
     }
-    input {
-      &:focus-visible {
-        & ~ .pb_radio_button {
-          box-shadow: 0px 0px 0px 2px $bg_dark_card, 0px 0px 0px 4px $primary;
-        }
+    &:checked {
+      & ~ .pb_radio_button {
+        border: 6px solid $active_dark;
       }
-      &:checked {
-        & ~ .pb_radio_button {
-          border: 6px solid $active_dark;
-        }
-      }
+    }
 
-      &:disabled + .pb_radio_button {
+    &:disabled + .pb_radio_button {
+      cursor: not-allowed;
+      background-color: mix($charcoal, $white, 80%);
+      border: 2px solid $border_dark;
+
+      & ~ .pb_body_kit {
         cursor: not-allowed;
+        color: $text_dk_light;
+      }
+    }
+
+    &:disabled:checked {
+      & ~ .pb_radio_button {
         background-color: mix($charcoal, $white, 80%);
-        border: 2px solid $border_dark;
-
-        & ~ .pb_body_kit {
-          cursor: not-allowed;
-          color: $text_dk_light;
-        }
-      }
-
-      &:disabled:checked {
-        & ~ .pb_radio_button {
-          background-color: mix($charcoal, $white, 80%);
-          border: 6px solid $border_dark;
-        }
-      }
-    }
-
-    @media (hover: hover) {
-      &:hover {
-        .pb_radio_button {
-          background-color: rgba($white, 0.1);
-          border-color: $border_dark;
-        }
-      }
-    }
-    &.error {
-      > .pb_radio_button {
-        border-color: $error_dark;
-      }
-      > .pb_body_kit_negative {
-        color: $error_dark;
+        border: 6px solid $border_dark;
       }
     }
   }
-  &.error {
-    > .pb_radio_button {
-      border-color: $error;
+
+  @media (hover: hover) {
+    &:hover {
+      .pb_radio_button {
+        background-color: rgba($white, 0.1);
+        border-color: $border_dark;
+      }
     }
+  }
+}
+
+.pb_radio_kit.dark.error,
+.pb_radio_kit.dark.error.vertical,
+.pb_radio_kit_vertical.dark.error {
+  > .pb_radio_button {
+    border-color: $error_dark;
+  }
+  > .pb_body_kit_negative {
+    color: $error_dark;
+  }
+}
+
+.pb_radio_kit.error,
+.pb_radio_kit.error.vertical,
+.pb_radio_kit_vertical.error {
+  > .pb_radio_button {
+    border-color: $error;
   }
 }

@@ -74,8 +74,17 @@ module Playbook
       end
 
       def classname
-        button_class = generate_classname("pb_button_kit", variant, full_width_class, disabled_class, loading_class)
-        button_class + size_class + default_reaction_class + highlight_active
+        class_names = ["pb_button_kit"]
+        class_names << "pb_button_#{variant}" if variant
+        class_names << "pb_button_#{full_width_class}"
+        class_names << "pb_button_#{disabled_class}"
+        class_names << "pb_button_loading" if loading
+        class_names << "pb_button_size_#{size}" if size
+        class_names << "pb_button_reaction_default" if variant === "reaction" && icon && !valid_emoji(icon)
+        class_names << "pb_button_active" if variant === "reaction" && highlight
+
+        class_names.join(" ")
+        generate_classname(class_names.compact.join(" "), separator: " ")
       end
 
     private
@@ -86,22 +95,6 @@ module Playbook
 
       def full_width_class
         full_width ? "block" : "inline"
-      end
-
-      def loading_class
-        loading ? "loading" : nil
-      end
-
-      def size_class
-        size ? " size_#{size}" : ""
-      end
-
-      def default_reaction_class
-        variant === "reaction" && !object.valid_emoji(object.icon) ? " reaction_default" : ""
-      end
-
-      def highlight_active
-        variant === "reaction" && object.highlight ? " active" : ""
       end
 
       def spinner_path
