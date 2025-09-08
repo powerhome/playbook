@@ -21,13 +21,27 @@
         let currentClass = okayLoadingButton.className;
         let cancelClass = cancelButton ? cancelButton.className : "";
 
+        okayLoadingButton.disabled = true;
+        okayLoadingButton.classList.add("pb_button_loading");
+        okayLoadingButton.classList.remove("pb_button_enabled");
+        okayLoadingButton.classList.add("pb_button_disabled");
+
+        if (cancelButton) {
+            cancelButton.disabled = true;
+            cancelButton.classList.remove("pb_button_enabled");
+            cancelButton.classList.add("pb_button_disabled");
+        }
+
         setTimeout(function() {
             okayLoadingButton.disabled = false;
-            okayLoadingButton.className = currentClass.replace("_disabled_loading", "_enabled");
+            okayLoadingButton.classList.remove("pb_button_loading");
+            okayLoadingButton.classList.remove("pb_button_disabled");
+            okayLoadingButton.classList.add("pb_button_enabled");
 
             if (cancelButton) {
             cancelButton.disabled = false;
-            cancelButton.className = cancelClass.replace("_disabled", "_enabled");
+            cancelButton.classList.remove("pb_button_disabled");
+            cancelButton.classList.add("pb_button_enabled");
             }
         }, 5000);
 

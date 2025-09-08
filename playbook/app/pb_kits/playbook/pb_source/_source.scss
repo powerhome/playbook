@@ -1,27 +1,27 @@
 @import "../tokens/spacing";
 
-[class^=pb_source] {
-  [class^=pb__source_layout] {
+.pb_source_kit {
+  .pb__source_layout {
     display: flex;
     justify-content: flex-start;
     align-items: flex-start;
   }
 
-  [class^=pb_icon_circle],
-  [class^=pb_avatar] {
+  .pb_icon_circle_kit_size_sm_default,
+  .pb_avatar_kit_size_sm {
     margin-right: $space-sm;
   }
 
-  [class^=pb__source_content] {
+  .pb__source_content {
     display: block;
     flex-grow: 1;
 
-    [class^=pb__source_value] {
+    .pb__source_value {
       display: flex;
       justify-content: flex-start;
       align-items: baseline;
 
-      [class^=pb_body] {
+      .pb_body_kit {
         margin-right: $space-xs;
       }
     }

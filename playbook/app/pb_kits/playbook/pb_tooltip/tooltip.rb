@@ -26,7 +26,7 @@ module Playbook
       prop :width
 
       def classname
-        generate_classname("pb_tooltip_kit", dark_class)
+        generate_classname("pb_tooltip_kit")
       end
 
       def remove_height_properties(combined_html_options_style)

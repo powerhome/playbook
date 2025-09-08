@@ -1,20 +1,31 @@
 @import "../pb_title/title";
 @import "../pb_body/body";
 
-[class^=pb_title_count_kit] {
+.pb_title_count_kit_left_lg,
+.pb_title_count_kit_left_sm,
+.pb_title_count_kit_center_lg,
+.pb_title_count_kit_center_sm,
+.pb_title_count_kit_right_lg,
+.pb_title_count_kit_right_sm {
   display: flex;
-  justify-content: flex-start;
   align-items: baseline;
 
   & > .pb_title_count_text {
     padding-right: $space-xs;
   }
+}
 
-  &[class*=_center] {
-    justify-content: center;
-  }
+.pb_title_count_kit_left_lg,
+.pb_title_count_kit_left_sm {
+  justify-content: flex-start;
+}
 
-  &[class*=_right] {
-    justify-content: flex-end;
-  }
+.pb_title_count_kit_center_lg,
+.pb_title_count_kit_center_sm {
+  justify-content: center;
+}
+
+.pb_title_count_kit_right_lg,
+.pb_title_count_kit_right_sm {
+  justify-content: flex-end;
 }

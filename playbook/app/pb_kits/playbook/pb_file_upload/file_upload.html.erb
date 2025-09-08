@@ -2,7 +2,7 @@
       <%= pb_rails("form_group", props: {cursor: "pointer", full_width: object.full_width}) do %>
         <label
           for="upload-<%= object.id %>"
-          class="pb_button_kit_secondary_inline_enabled <%= 'dark' if object.dark %>"
+          class="pb_button_kit pb_button_secondary pb_button_inline pb_button_enabled <%= 'dark' if object.dark %>"
         >
           <%= "#{object.label}" %>
         </label>

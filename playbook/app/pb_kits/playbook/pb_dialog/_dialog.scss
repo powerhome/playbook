@@ -99,7 +99,25 @@
 }
 
 // Dialog Styles
-.pb_dialog {
+.pb_dialog,
+.pb_dialog_sm_left,
+.pb_dialog_sm_center,
+.pb_dialog_sm_right,
+.pb_dialog_md_left,
+.pb_dialog_md_center,
+.pb_dialog_md_right,
+.pb_dialog_lg_left,
+.pb_dialog_lg_center,
+.pb_dialog_lg_right,
+.pb_dialog_xl_left,
+.pb_dialog_xl_center,
+.pb_dialog_xl_right,
+.pb_dialog_status_size_left,
+.pb_dialog_status_size_center,
+.pb_dialog_status_size_right,
+.pb_dialog_content_left,
+.pb_dialog_content_center,
+.pb_dialog_content_right {
 
   // Local Variables
   $gutter: $space_lg;
@@ -136,144 +154,250 @@
   animation-duration: $animation-duration;
   outline: none;
   animation-timing-function: $easeInOutQuint;
+}
 
-  &[class*="_left"] {
-    animation-name: modalFadeInLeft;
-    &[class*="_before_close"] {
-      animation-name: modalFadeOutLeft;
-      animation-duration: $animation-duration;
-      opacity: $opacity_hidden;
-    }
+// Left placement animations
+.pb_dialog_sm_left,
+.pb_dialog_md_left,
+.pb_dialog_lg_left,
+.pb_dialog_xl_left,
+.pb_dialog_status_size_left,
+.pb_dialog_content_left {
+  animation-name: modalFadeInLeft;
+  &.pb_dialog_before_close {
+    animation-name: modalFadeOutLeft;
+    animation-duration: .2s;
+    opacity: 0;
   }
+}
 
-  &[class*="_right"] {
-    animation-name: modalFadeInRight;
-    &[class*="_before_close"] {
-      animation-name: modalFadeOutRight;
-      animation-duration: $animation-duration;
-      opacity: $opacity_hidden;
-    }
+// Right placement animations
+.pb_dialog_sm_right,
+.pb_dialog_md_right,
+.pb_dialog_lg_right,
+.pb_dialog_xl_right,
+.pb_dialog_status_size_right,
+.pb_dialog_content_right {
+  animation-name: modalFadeInRight;
+  &.pb_dialog_before_close {
+    animation-name: modalFadeOutRight;
+    animation-duration: .2s;
+    opacity: 0;
   }
+}
 
-  &[class*="_status_size"] {
-    width: $status_size;
+// Size variations
+.pb_dialog_status_size_left,
+.pb_dialog_status_size_center,
+.pb_dialog_status_size_right {
+  width: 375px;
+}
+
+.pb_dialog_sm_left,
+.pb_dialog_sm_center,
+.pb_dialog_sm_right {
+  width: 300px;
+}
+
+.pb_dialog_md_left,
+.pb_dialog_md_center,
+.pb_dialog_md_right {
+  width: 500px;
+}
+
+.pb_dialog_lg_left,
+.pb_dialog_lg_center,
+.pb_dialog_lg_right {
+  width: 800px;
+}
+
+// Dialog state classes
+.pb_dialog_body_open {
+  overflow: hidden;
+}
+
+.pb_dialog_after_open {
+  opacity: 1;
+}
+
+.pb_dialog_before_close {
+  animation-name: modalFadeOut;
+  animation-duration: .2s;
+  opacity: 0;
+}
+
+.pb_dialog_close_icon {
+  cursor: pointer;
+  font-size: $font_base;
+  line-height: $lh_normal;
+}
+
+.pb_dialog_overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba($bg_dark, $opacity_4);
+  z-index: 100;
+  animation-name: overlayFade;
+  animation-duration: .2s;
+
+  &.pb_dialog_overlay_after_open {
+    opacity: 1;
   }
-
-  &[class*="_sm"] {
-    width: $small;
+  &.pb_dialog_overlay_before_close {
+    animation-name: overlayFadeOut;
+    animation-duration: .2s;
+    opacity: 0;
   }
-
-  &[class*="_md"] {
-    width: $medium;
-  }
-
-  &[class*="_lg"] {
-    width: $large;
-  }
-
-  &_body_open {
-    overflow: hidden;
-  }
-
-  &_after_open {
-    opacity: $opacity_visible;
-  }
-
-  &[class*="_before_close"] {
-    animation-name: modalFadeOut;
-    animation-duration: $animation-duration;
-    opacity: $opacity_hidden;
-  }
-
-  &_close_icon {
-    cursor: pointer;
-    font-size: $font_base;
-    line-height: $lh_normal;
-  }
-
-  &_overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: rgba($bg_dark, $opacity_4);
-    z-index: $z-index;
-    animation-name: overlayFade;
-    animation-duration: $animation-duration;
-
-    &_after_open {
-      opacity: $opacity_visible;
-    }
-    &_before_close {
-      animation-name: overlayFadeOut;
-      animation-duration: $animation-duration;
-      opacity: $opacity_hidden;
-    }
-    &[class*="full_height"] {
-      &[class*="_left"]{
-        justify-content: flex-start;
+  &.full_height_left {
+    justify-content: flex-start;
+    
+    .pb_dialog {
+      border-radius: 0;
+      height: 100%;
+      max-height: 100%;
+      max-width: none;
+      // This empty div only has height when dialog is full height
+      // Fix for dialog body content disappearing behind sticky footer
+      .dialog-pseudo-footer {
+        height: $space_xl * 2;
       }
-
-      &[class*="_center"]{
-        justify-content: center;
+      .dialog_footer {
+        position: fixed;
+        bottom: 0;
+        background-color: $white;
+        max-width: 100%;
       }
-
-      &[class*="_right"]{
-        justify-content: flex-end;
-      }
-
-      .pb_dialog {
-        border-radius: 0;
-        height: 100%;
-        max-height: 100%;
-        max-width: none;
-        // This empty div only has height when dialog is full height
-        // Fix for dialog body content disappearing behind sticky footer
-        .dialog-pseudo-footer {
-          height: $space_xl * 2;
-        }
+      &.pb_dialog_sm_left,
+      &.pb_dialog_sm_center,
+      &.pb_dialog_sm_right {
+        width: 500px;
         .dialog_footer {
-          position: fixed;
-          bottom: 0;
-          background-color: $white;
-          max-width: 100%;
+          width: 500px;
         }
-        &[class*="_sm"] {
-          width: $medium;
-          .dialog_footer {
-            width: $medium;
-          }
+      }
+      &.pb_dialog_md_left,
+      &.pb_dialog_md_center,
+      &.pb_dialog_md_right {
+        width: 800px;
+        .dialog_footer {
+          width: 800px;
         }
-        &[class*="_md"] {
-          width: $large;
-          .dialog_footer {
-            width: $large;
-          }
+      }
+      &.pb_dialog_lg_left,
+      &.pb_dialog_lg_center,
+      &.pb_dialog_lg_right {
+        width: 1150px;
+        .dialog_footer {
+          width: 1150px;
         }
-        &[class*="_lg"] {
-          width: $xlarge;
-          .dialog_footer {
-            width: $xlarge;
-          }
+      }
+    }
+  }
+
+  &.full_height_center {
+    justify-content: center;
+    
+    .pb_dialog {
+      border-radius: 0;
+      height: 100%;
+      max-height: 100%;
+      max-width: none;
+      .dialog-pseudo-footer {
+        height: $space_xl * 2;
+      }
+      .dialog_footer {
+        position: fixed;
+        bottom: 0;
+        background-color: $white;
+        max-width: 100%;
+      }
+      &.pb_dialog_sm_left,
+      &.pb_dialog_sm_center,
+      &.pb_dialog_sm_right {
+        width: 500px;
+        .dialog_footer {
+          width: 500px;
+        }
+      }
+      &.pb_dialog_md_left,
+      &.pb_dialog_md_center,
+      &.pb_dialog_md_right {
+        width: 800px;
+        .dialog_footer {
+          width: 800px;
+        }
+      }
+      &.pb_dialog_lg_left,
+      &.pb_dialog_lg_center,
+      &.pb_dialog_lg_right {
+        width: 1150px;
+        .dialog_footer {
+          width: 1150px;
+        }
+      }
+    }
+  }
+
+  &.full_height_right {
+    justify-content: flex-end;
+    
+    .pb_dialog {
+      border-radius: 0;
+      height: 100%;
+      max-height: 100%;
+      max-width: none;
+      .dialog-pseudo-footer {
+        height: $space_xl * 2;
+      }
+      .dialog_footer {
+        position: fixed;
+        bottom: 0;
+        background-color: $white;
+        max-width: 100%;
+      }
+      &.pb_dialog_sm_left,
+      &.pb_dialog_sm_center,
+      &.pb_dialog_sm_right {
+        width: 500px;
+        .dialog_footer {
+          width: 500px;
+        }
+      }
+      &.pb_dialog_md_left,
+      &.pb_dialog_md_center,
+      &.pb_dialog_md_right {
+        width: 800px;
+        .dialog_footer {
+          width: 800px;
+        }
+      }
+      &.pb_dialog_lg_left,
+      &.pb_dialog_lg_center,
+      &.pb_dialog_lg_right {
+        width: 1150px;
+        .dialog_footer {
+          width: 1150px;
         }
       }
     }
   }
 }
 
-[class*="dialog_body"] {
+.dialog_body {
   padding: $space_sm;
 }
 
-[class*="dialog_header"] {
+.dialog_header {
   padding: $space_sm;
 }
 
-[class*="dialog_footer"] {
+.dialog_footer {
   padding: $space_sm;
 }
 
@@ -288,25 +412,12 @@
     text-align: center;
   }
 
-  &[class*="full_height"] {
-    &[class*="_left"]{
-      .pb_dialog_rails {
-        margin: unset !important;
-        margin-right: auto !important;
-      }
+  &.full_height_left {
+    .pb_dialog_rails {
+      margin: unset !important;
+      margin-right: auto !important;
     }
-
-    &[class*="_center"]{
-      justify-content: center;
-    }
-
-    &[class*="_right"]{
-      .pb_dialog_rails {
-        margin: unset !important;
-        margin-left: auto !important;
-      }
-    }
-
+    
     .pb_dialog {
       border-radius: 0;
       height: 100% !important;
@@ -323,19 +434,116 @@
         background-color: $white;
         max-width: 100%;
       }
-      &[class*="_sm"] {
+      &.pb_dialog_sm_left,
+      &.pb_dialog_sm_center,
+      &.pb_dialog_sm_right {
         width: $medium;
         .dialog_footer {
           width: $medium;
         }
       }
-      &[class*="_md"] {
+      &.pb_dialog_md_left,
+      &.pb_dialog_md_center,
+      &.pb_dialog_md_right {
         width: $large;
         .dialog_footer {
           width: $large;
         }
       }
-      &[class*="_lg"] {
+      &.pb_dialog_lg_left,
+      &.pb_dialog_lg_center,
+      &.pb_dialog_lg_right {
+        width: $xlarge;
+        .dialog_footer {
+          width: $xlarge;
+        }
+      }
+    }
+  }
+
+  &.full_height_center {
+    justify-content: center;
+    
+    .pb_dialog {
+      border-radius: 0;
+      height: 100% !important;
+      max-height: 100% !important;
+      max-width: 100%;
+      .dialog-pseudo-footer {
+        height: $space_xl * 2;
+      }
+      .dialog_footer {
+        position:fixed;
+        bottom: 0;
+        background-color: $white;
+        max-width: 100%;
+      }
+      &.pb_dialog_sm_left,
+      &.pb_dialog_sm_center,
+      &.pb_dialog_sm_right {
+        width: $medium;
+        .dialog_footer {
+          width: $medium;
+        }
+      }
+      &.pb_dialog_md_left,
+      &.pb_dialog_md_center,
+      &.pb_dialog_md_right {
+        width: $large;
+        .dialog_footer {
+          width: $large;
+        }
+      }
+      &.pb_dialog_lg_left,
+      &.pb_dialog_lg_center,
+      &.pb_dialog_lg_right {
+        width: $xlarge;
+        .dialog_footer {
+          width: $xlarge;
+        }
+      }
+    }
+  }
+
+  &.full_height_right {
+    .pb_dialog_rails {
+      margin: unset !important;
+      margin-left: auto !important;
+    }
+    
+    .pb_dialog {
+      border-radius: 0;
+      height: 100% !important;
+      max-height: 100% !important;
+      max-width: 100%;
+      .dialog-pseudo-footer {
+        height: $space_xl * 2;
+      }
+      .dialog_footer {
+        position:fixed;
+        bottom: 0;
+        background-color: $white;
+        max-width: 100%;
+      }
+      &.pb_dialog_sm_left,
+      &.pb_dialog_sm_center,
+      &.pb_dialog_sm_right {
+        width: $medium;
+        .dialog_footer {
+          width: $medium;
+        }
+      }
+      &.pb_dialog_md_left,
+      &.pb_dialog_md_center,
+      &.pb_dialog_md_right {
+        width: $large;
+        .dialog_footer {
+          width: $large;
+        }
+      }
+      &.pb_dialog_lg_left,
+      &.pb_dialog_lg_center,
+      &.pb_dialog_lg_right {
         width: $xlarge;
         .dialog_footer {
           width: $xlarge;
@@ -375,4 +583,3 @@
     cursor: pointer;
   }
 }
-

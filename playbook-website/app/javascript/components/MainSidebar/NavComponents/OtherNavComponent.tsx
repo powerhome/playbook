@@ -1,5 +1,6 @@
 import React from "react";
 import { NavItem } from "playbook-ui";
+import { useNavigate } from "react-router-dom";
 import { VisualGuidelinesItems } from "../MenuData/GuidelinesNavItems";
 
 export const OtherNavItems = ({
@@ -14,33 +15,43 @@ export const OtherNavItems = ({
   getting_started,
   design_guidelines,
   whats_new,
+  beta = false,
 }) => {
+
+  const navigate = beta ? useNavigate() : null;
+  
+  const createLink = (path) => {
+    if (beta && !path.startsWith("/beta")) {
+      return `/beta${path}`;
+    }
+    return path;
+  };
 
   const patternsMenu = patterns?.Patterns?.map((item) => ({
     name: item.name,
-    link: `/patterns/${item.link}`,
+    link: createLink(`/patterns/${item.link}`),
   }))
 
   let menuItems: { [key: string]: string }[] | string[] = []
 
   const guidesNavItems = getting_started["pages"].map(guide => ({
     name: guide.title,
-    link: `/${guide.url}`
+    link: createLink(`/${guide.url}`)
   }))
 
   const designGuidesNavItems = design_guidelines["pages"].map(guide => ({
     name: guide.title,
-    link: `/${guide.url}`
+    link: createLink(`/${guide.url}`)
   }))
 
   const whatsNewNavItems = whats_new["pages"].map(guide => ({
     name: guide.title,
-    link: `/${guide.url}`
+    link: createLink(`/${guide.url}`)
   }))
 
   const tokensAndGuidelinesMenu = VisualGuidelinesItems.map(guide => ({
     name: guide.label,
-    link: guide.value
+    link: createLink(guide.value)
   }))
 
   //conditionally render navitems depending on name
@@ -57,6 +68,12 @@ export const OtherNavItems = ({
   }
 
   const handleItemClick = (link, i) => {
+    if (beta) {
+      if (navigate) {
+        navigate(link.link);
+      }
+    }
+    
     const key = `${link.link}-${i}`
     setIsActive(() => {
       const newIsActive = {}
@@ -93,7 +110,7 @@ export const OtherNavItems = ({
           dark={dark}
           fontSize="small"
           key={`${link.link}-${i}`}
-          link={link.link}
+          {...(!beta && { link: link.link })}
           marginBottom="none"
           marginTop="xxs"
           onClick={() => handleItemClick(link, i)}
