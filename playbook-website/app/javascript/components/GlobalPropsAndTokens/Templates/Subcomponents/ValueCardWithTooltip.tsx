@@ -1,15 +1,16 @@
-import React, { useEffect, useState } from "react";
+import { ReactNode } from "react";
 import { Card, Body, Tooltip } from "playbook-ui";
 
 type ValueCardTypes = {
+  isImage?: boolean;
   text?: string;
-  tooltipText?: string;
+  tooltipText?: string | ReactNode;
 };
-const ValueCardWithTooltip = ({ text, tooltipText }: ValueCardTypes) => {
+const ValueCardWithTooltip = ({ text, tooltipText, isImage }: ValueCardTypes) => {
   return (
     <>
       {tooltipText ? (
-        <Tooltip placement="top" text={tooltipText} zIndex={10}>
+        <Tooltip className={isImage ? "image" : ""} dark={isImage} placement="top" text={tooltipText} zIndex={10}>
           <Card
             borderRadius="sm"
             background="light"

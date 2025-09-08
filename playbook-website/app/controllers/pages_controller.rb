@@ -29,12 +29,37 @@ class PagesController < ApplicationController
     examples = @examples.map do |example|
       example_key = example.keys.first.to_s
       source_code = get_source(example_key)
-      { example_key: example_key, title: example.values.first, source: source_code }
+      description = get_description(example_key)
+      {
+        example_key: example_key,
+        title: example.values.first,
+        source: source_code,
+        description: description,
+      }
     end
 
     respond_to do |format|
       format.html { render layout: "application_beta", inline: "" }
-      format.json { render json: { kits: @kits, dark: @dark, type: @type, examples: examples, kit: @kit, params: @params, css: @css } }
+      format.json do
+        render json: {
+          kits: @kits,
+          dark: @dark,
+          type: @type,
+          examples: examples,
+          kit: @kit,
+          params: @params,
+          category: @category,
+          css: @css,
+          kits_with_status: helpers.aggregate_kits_with_status,
+          PBversion: Playbook::VERSION,
+          search_list: helpers.search_list,
+          patterns: PATTERNS,
+          getting_started: DOCS[:getting_started],
+          design_guidelines: DOCS[:design_guidelines],
+          icons: DOCS[:icons],
+          whats_new: DOCS[:whats_new],
+        }
+      end
     end
   end
 
@@ -58,11 +83,18 @@ class PagesController < ApplicationController
   end
 
   def changelog_web
-    @data = Playbook::Engine.root.join("CHANGELOG.md").read
     @page_title = "What's New"
     @page = "changelog_web"
     @show_sidebar = true
     @link_extension = "https://github.com/powerhome/playbook/blob/master/playbook/CHANGELOG.md"
+
+    @releases = Rails.cache.fetch("changelog_releases") do
+      data = Playbook::Engine.root.join("CHANGELOG.md").read
+      paginate_changelog(data)
+    end
+
+    @releases = @releases.paginate(page: params[:page], per_page: 10)
+
     render layout: "changelog"
   end
 
@@ -116,10 +148,6 @@ class PagesController < ApplicationController
     @page_title = "Tokens Example"
     @show_sidebar = true
     render layout: "global_props_page"
-  end
-
-  def drawer_page
-    render "pages/drawer_page", layout: "layouts/fullscreen"
   end
 
   def icons
@@ -260,7 +288,11 @@ class PagesController < ApplicationController
     read_kit_file("_#{example}.jsx")
   end
 
-  helper_method :get_source
+  def get_description(example)
+    read_kit_file("_#{example}.md")
+  end
+
+  helper_method :get_source, :get_description
 
 private
 
@@ -416,6 +448,37 @@ private
         image: image,
         description: description,
         link: link,
+      }
+    end
+
+    releases
+  end
+
+  def paginate_changelog(changelog)
+    return [] unless changelog.is_a?(String) && changelog.present?
+
+    releases = []
+    lines = changelog.lines
+    current_section = []
+    current_title = nil
+
+    lines.each do |line|
+      if line.start_with?("# ") && line.strip.length > 2
+        if current_title && current_section.any?
+          releases << {
+            content: current_section.join,
+          }
+        end
+        current_title = line.strip[2..]
+        current_section = [line]
+      else
+        current_section << line
+      end
+    end
+
+    if current_title && current_section.any?
+      releases << {
+        content: current_section.join,
       }
     end
 

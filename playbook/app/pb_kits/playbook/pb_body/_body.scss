@@ -1,23 +1,37 @@
 @import "./body_mixins";
 @import "../tokens/titles";
 
-[class^="pb_body_kit"] {
+// Base body styles for all variants
+.pb_body_kit,
+.pb_body_kit_default,
+.pb_body_kit_light,
+.pb_body_kit_lighter,
+.pb_body_kit_link,
+.pb_body_kit_success,
+.pb_body_kit_error,
+.pb_body_kit_neutral,
+.pb_body_kit_positive,
+.pb_body_kit_negative,
+.pb_body_kit_default_neutral,
+.pb_body_kit_default_positive,
+.pb_body_kit_default_negative,
+.pb_body_kit_light_neutral,
+.pb_body_kit_light_positive,
+.pb_body_kit_light_negative,
+.pb_body_kit_lighter_neutral,
+.pb_body_kit_lighter_positive,
+.pb_body_kit_lighter_negative,
+.pb_body_kit_link_neutral,
+.pb_body_kit_link_positive,
+.pb_body_kit_link_negative,
+.pb_body_kit_success_neutral,
+.pb_body_kit_success_positive,
+.pb_body_kit_success_negative,
+.pb_body_kit_error_neutral,
+.pb_body_kit_error_positive,
+.pb_body_kit_error_negative {
   @include pb_body($text_lt_default);
-  @each $color_name, $color_value in $pb_body_colors {
-    &[class*=_#{"" + $color_name}] {
-      @include pb_body($color_value);
-    }
-    @each $status_name, $status_value in $pb_body_status {
-      &[class*="_default_#{$status_name}"] {
-        @include pb_body($status_value);
-      }
-    }
-  }
-  @each $dark_color_name, $dark_color_value in $pb_dark_body_colors {
-    &[class*="_#{$dark_color_name}"][class*="dark"] {
-      @include pb_body($dark_color_value);
-    }
-  }
+  
   b,
   strong {
     font-weight: $bold;
@@ -39,27 +53,86 @@
     font-size: $font_smaller;
     letter-spacing: $lspace_loose;
   }
+}
 
-  @each $status_name, $status_value in $pb_body_status {
-    &[class*="#{$status_name}"] {
-      @include pb_body($status_value);
-    }
+// Color variants
+@each $color_name, $color_value in $pb_body_colors {
+  .pb_body_kit_#{$color_name},
+  .pb_body_kit_#{$color_name}_neutral,
+  .pb_body_kit_#{$color_name}_positive,
+  .pb_body_kit_#{$color_name}_negative {
+    @include pb_body($color_value);
   }
+}
 
-  &[class*="dark"] {
-    a {
-      color: $active_dark;
-    }
-    @include pb_body_dark();
-    @each $dark_color_name, $dark_color_value in $pb_dark_body_colors {
-      &[class*="_#{$dark_color_name}"][class*="dark"] {
-        @include pb_body($dark_color_value);
-      }
-    }
-    @each $status_name, $status_value in $pb_dark_body_status {
-      &[class*="_#{$status_name}"] {
-        @include pb_body($status_value);
-      }
-    }
+// Status variants
+@each $status_name, $status_value in $pb_body_status {
+  .pb_body_kit_#{$status_name},
+  .pb_body_kit_default_#{$status_name},
+  .pb_body_kit_light_#{$status_name},
+  .pb_body_kit_lighter_#{$status_name},
+  .pb_body_kit_link_#{$status_name},
+  .pb_body_kit_success_#{$status_name},
+  .pb_body_kit_error_#{$status_name} {
+    @include pb_body($status_value);
+  }
+}
+
+// Dark theme base
+.pb_body_kit.dark,
+.pb_body_kit_default.dark,
+.pb_body_kit_light.dark,
+.pb_body_kit_lighter.dark,
+.pb_body_kit_link.dark,
+.pb_body_kit_success.dark,
+.pb_body_kit_error.dark,
+.pb_body_kit_neutral.dark,
+.pb_body_kit_positive.dark,
+.pb_body_kit_negative.dark,
+.pb_body_kit_default_neutral.dark,
+.pb_body_kit_default_positive.dark,
+.pb_body_kit_default_negative.dark,
+.pb_body_kit_light_neutral.dark,
+.pb_body_kit_light_positive.dark,
+.pb_body_kit_light_negative.dark,
+.pb_body_kit_lighter_neutral.dark,
+.pb_body_kit_lighter_positive.dark,
+.pb_body_kit_lighter_negative.dark,
+.pb_body_kit_link_neutral.dark,
+.pb_body_kit_link_positive.dark,
+.pb_body_kit_link_negative.dark,
+.pb_body_kit_success_neutral.dark,
+.pb_body_kit_success_positive.dark,
+.pb_body_kit_success_negative.dark,
+.pb_body_kit_error_neutral.dark,
+.pb_body_kit_error_positive.dark,
+.pb_body_kit_error_negative.dark {
+  @include pb_body_dark();
+  
+  a {
+    color: $active_dark;
+  }
+}
+
+// Dark color variants
+@each $dark_color_name, $dark_color_value in $pb_dark_body_colors {
+  .pb_body_kit_#{$dark_color_name}.dark,
+  .pb_body_kit_#{$dark_color_name}_neutral.dark,
+  .pb_body_kit_#{$dark_color_name}_positive.dark,
+  .pb_body_kit_#{$dark_color_name}_negative.dark {
+    @include pb_body($dark_color_value);
+  }
+}
+
+// Dark status variants
+@each $status_name, $status_value in $pb_dark_body_status {
+  .pb_body_kit_#{$status_name}.dark,
+  .pb_body_kit_default_#{$status_name}.dark,
+  .pb_body_kit_light_#{$status_name}.dark,
+  .pb_body_kit_lighter_#{$status_name}.dark,
+  .pb_body_kit_link_#{$status_name}.dark,
+  .pb_body_kit_success_#{$status_name}.dark,
+  .pb_body_kit_error_#{$status_name}.dark {
+    @include pb_body($status_value);
   }
 }

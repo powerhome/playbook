@@ -16,7 +16,9 @@ const PROPS = {
   flexGrow: ['0', '1'],
   flexShrink: ['0', '1'],
   order: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', 'none'],
-  gap: ['none', 'xxs', 'xs', 'sm', 'md', 'lg', 'xl']
+  gap: ['none', 'xxs', 'xs', 'sm', 'md', 'lg', 'xl'],
+  columnGap: ['none', 'xxs', 'xs', 'sm', 'md', 'lg', 'xl'],
+  rowGap: ['none', 'xxs', 'xs', 'sm', 'md', 'lg', 'xl'],
 }
 const TABLE_HEADERS = ['Props', 'Screen Sizes', 'Values']
 

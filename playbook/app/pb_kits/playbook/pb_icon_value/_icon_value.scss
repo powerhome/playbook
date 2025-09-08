@@ -3,33 +3,34 @@
 @import "../pb_icon/icon";
 @import "../pb_body/body";
 
-[class^=pb_icon_value_kit] {
+.pb_icon_value_kit_left,
+.pb_icon_value_kit_center,
+.pb_icon_value_kit_right {
   display: flex;
   align-items: center;
 
-  [class^=pb_body_kit] {
+  .pb_body_kit_light {
     font-size: $font-small !important;
     display: inline-flex;
     justify-content: flex-start;
     align-items: center;
 
-    [class*=pb_icon_kit] {
+    svg {
       font-size: $font-large !important;
       margin-right: $space-xs !important;
       flex-shrink: 0;
     }
-    &.dark {
-      
-    }
   }
+}
 
-  &[class*=_left] {
-    justify-content: flex-start;
-  }
-  &[class*=_center] {
-    justify-content: center;
-  }
-  &[class*=_right] {
-    justify-content: flex-end;
-  }
+.pb_icon_value_kit_left {
+  justify-content: flex-start;
+}
+
+.pb_icon_value_kit_center {
+  justify-content: center;
+}
+
+.pb_icon_value_kit_right {
+  justify-content: flex-end;
 }

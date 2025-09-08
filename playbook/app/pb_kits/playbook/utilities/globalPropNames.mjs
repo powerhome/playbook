@@ -27,6 +27,8 @@ export default [
   "overflow",
   "order",
   "numberSpacing",
+  "rowGap",
+  "columnGap",
   "gap",
   "maxWidth",
   "minWidth",

@@ -18,7 +18,7 @@ $merge_kits6: map-merge($merge_kits5, $data_colors);
 $merge_kits7: map-merge($merge_kits6, $border_colors);
 $background_colors: map-merge($additional_colors, $merge_kits7);
 
-[class^=pb_background_kit] {
+.pb_background_kit {
   max-width: 100%;
   max-height: 100%;
   background-size: cover;
@@ -27,7 +27,7 @@ $background_colors: map-merge($additional_colors, $merge_kits7);
     &.pb_background_color_#{$name} {
       background: $color;
     }
-  };
+  }
 
   &.fade {
     opacity: 0;
@@ -56,7 +56,7 @@ $background_colors: map-merge($additional_colors, $merge_kits7);
     }
   }
 
-  &[class*=imageoverlay] {
+  &.imageoverlay {
     position: relative;
 
     &:before {

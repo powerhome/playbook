@@ -4,58 +4,133 @@
 
 $pb_progress_simple_height: 4px;
 
-[class^=pb_progress_simple_wrapper] {
+// Base wrapper styles
+.pb_progress_simple_wrapper_left,
+.pb_progress_simple_wrapper_center,
+.pb_progress_simple_wrapper_right {
   display: flex;
   justify-content: flex-start;
   align-items: center;
-
-  &[class*=_center] {
-    justify-content: center;
-  }
-
-  &[class*=_right] {
-    justify-content: flex-end;
-  }
 }
 
-[class^=pb_progress_simple_kit] {
+.pb_progress_simple_wrapper_center {
+  justify-content: center;
+}
+
+.pb_progress_simple_wrapper_right {
+  justify-content: flex-end;
+}
+
+// Base kit styles - all possible combinations
+.pb_progress_simple_kit,
+.pb_progress_simple_kit_muted,
+.pb_progress_simple_kit_positive,
+.pb_progress_simple_kit_negative,
+.pb_progress_simple_kit_warning,
+.pb_progress_simple_kit_left,
+.pb_progress_simple_kit_center,
+.pb_progress_simple_kit_right,
+.pb_progress_simple_kit_muted_left,
+.pb_progress_simple_kit_muted_center,
+.pb_progress_simple_kit_muted_right,
+.pb_progress_simple_kit_positive_left,
+.pb_progress_simple_kit_positive_center,
+.pb_progress_simple_kit_positive_right,
+.pb_progress_simple_kit_negative_left,
+.pb_progress_simple_kit_negative_center,
+.pb_progress_simple_kit_negative_right,
+.pb_progress_simple_kit_warning_left,
+.pb_progress_simple_kit_warning_center,
+.pb_progress_simple_kit_warning_right,
+.pb_progress_simple_kit_muted_positive_left,
+.pb_progress_simple_kit_muted_positive_center,
+.pb_progress_simple_kit_muted_positive_right,
+.pb_progress_simple_kit_muted_negative_left,
+.pb_progress_simple_kit_muted_negative_center,
+.pb_progress_simple_kit_muted_negative_right,
+.pb_progress_simple_kit_muted_warning_left,
+.pb_progress_simple_kit_muted_warning_center,
+.pb_progress_simple_kit_muted_warning_right {
   width: 100%;
   height: $pb_progress_simple_height;
   border-radius: $pb_progress_simple_height/2;
   background: rgba($primary, $opacity-1);
-    &[class*=_positive] {
-      .progress_simple_value {
-        background: $success;
-      }
-    }
-    &[class*=_negative] {
-      .progress_simple_value {
-        background: $error;
-      }
-    }
-    &[class*=_warning] {
-      .progress_simple_value {
-        background: $warning;
-      }
-    }
 
-  [class^=progress_simple_value] {
+  .progress_simple_value {
     width: 0%;
     height: 100%;
     border-radius: $pb_progress_simple_height/2;
     background: $primary;
   }
+}
 
-  &[class*=_muted] {
-    background: rgba($slate, $opacity-2);
-
-    .progress_simple_value {
-      background: $slate;
-    }
+// Variant styles
+.pb_progress_simple_kit_positive,
+.pb_progress_simple_kit_positive_left,
+.pb_progress_simple_kit_positive_center,
+.pb_progress_simple_kit_positive_right,
+.pb_progress_simple_kit_muted_positive_left,
+.pb_progress_simple_kit_muted_positive_center,
+.pb_progress_simple_kit_muted_positive_right {
+  .progress_simple_value {
+    background: $success;
   }
+}
 
-  &[class*=_right] {
-    display: flex;
-    align-self: flex-end;
+.pb_progress_simple_kit_negative,
+.pb_progress_simple_kit_negative_left,
+.pb_progress_simple_kit_negative_center,
+.pb_progress_simple_kit_negative_right,
+.pb_progress_simple_kit_muted_negative_left,
+.pb_progress_simple_kit_muted_negative_center,
+.pb_progress_simple_kit_muted_negative_right {
+  .progress_simple_value {
+    background: $error;
   }
+}
+
+.pb_progress_simple_kit_warning,
+.pb_progress_simple_kit_warning_left,
+.pb_progress_simple_kit_warning_center,
+.pb_progress_simple_kit_warning_right,
+.pb_progress_simple_kit_muted_warning_left,
+.pb_progress_simple_kit_muted_warning_center,
+.pb_progress_simple_kit_muted_warning_right {
+  .progress_simple_value {
+    background: $warning;
+  }
+}
+
+// Muted styles
+.pb_progress_simple_kit_muted,
+.pb_progress_simple_kit_muted_left,
+.pb_progress_simple_kit_muted_center,
+.pb_progress_simple_kit_muted_right,
+.pb_progress_simple_kit_muted_positive_left,
+.pb_progress_simple_kit_muted_positive_center,
+.pb_progress_simple_kit_muted_positive_right,
+.pb_progress_simple_kit_muted_negative_left,
+.pb_progress_simple_kit_muted_negative_center,
+.pb_progress_simple_kit_muted_negative_right,
+.pb_progress_simple_kit_muted_warning_left,
+.pb_progress_simple_kit_muted_warning_center,
+.pb_progress_simple_kit_muted_warning_right {
+  background: rgba($slate, $opacity-2);
+
+  .progress_simple_value {
+    background: $slate;
+  }
+}
+
+// Right alignment
+.pb_progress_simple_kit_right,
+.pb_progress_simple_kit_muted_right,
+.pb_progress_simple_kit_positive_right,
+.pb_progress_simple_kit_negative_right,
+.pb_progress_simple_kit_warning_right,
+.pb_progress_simple_kit_muted_positive_right,
+.pb_progress_simple_kit_muted_negative_right,
+.pb_progress_simple_kit_muted_warning_right {
+  display: flex;
+  align-self: flex-end;
 }

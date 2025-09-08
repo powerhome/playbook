@@ -123,12 +123,6 @@ kits:
     icons_used: false
     react_rendered: false
     enhanced_element_used: true
-  - name: drawer
-    platforms: *1
-    status: beta
-    icons_used: false
-    react_rendered: false
-    enhanced_element_used: false
 - category: buttons
   description: Buttons are used primarily for actions, such as “Save” and “Cancel”.
     Link Buttons are used for less important or less commonly used actions, such as

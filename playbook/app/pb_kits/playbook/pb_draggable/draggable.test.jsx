@@ -235,7 +235,7 @@ test("generated dragHandle with Card", () => {
   render(<DraggableKitWithCard />);
   const kit = screen.getByTestId(testId);
 
-  const card = kit.querySelector(".pb_card_kit_deselected_border_radius_md");
+  const card = kit.querySelector(".pb_card_kit");
   expect(card).toBeInTheDocument();
   const dragHandle = card.querySelector(".pb_custom_icon");
   expect(dragHandle).toBeInTheDocument();

@@ -10,7 +10,7 @@ import Caption from "../pb_caption/_caption";
 import Icon from "../pb_icon/_icon";
 
 type DateRangeInlineProps = {
-  align?: "left" | "center" | "vertical";
+  align?: "left" | "center" | "right";
   className?: string;
   dark?: boolean;
   data?: string;

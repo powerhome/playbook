@@ -65,7 +65,7 @@ describe("Star Rating Kit", () => {
     const stars = highlight.querySelectorAll(".pb_star_lg")
     const count = stars.length
 
-    expect(title.className).toBe("pb_title_kit_size_2_light_thin pr_sm pb_star_rating_number_lg")
+    expect(title.className).toBe("pb_title_kit pb_title_2 pb_title_light pb_title_thin pr_sm pb_star_rating_number_lg")
     expect(count).toBe(5)
   })
 })

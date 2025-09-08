@@ -1,4 +1,4 @@
-import React, { ReactElement } from "react";
+import { ReactElement } from "react";
 import { Flex } from "playbook-ui";
 
 type PageContainerProps = {
@@ -13,6 +13,7 @@ export const PageContainer = ({ children }: PageContainerProps) => {
       marginX="auto"
       orientation="column"
       paddingX="sm"
+      paddingBottom="lg"
     >
       {children}
     </Flex>
