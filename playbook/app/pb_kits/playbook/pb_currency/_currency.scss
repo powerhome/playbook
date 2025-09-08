@@ -1,97 +1,182 @@
-[class^=pb_currency_kit] {
-  &[class*=_center]  {
-    & > [class^=pb_caption],
-    & > [class^=pb_title],
-    & > [class^=pb_body] {
+.pb_currency_kit,
+.pb_currency_kit_left_sm,
+.pb_currency_kit_left_md,
+.pb_currency_kit_left_lg,
+.pb_currency_kit_center_sm,
+.pb_currency_kit_center_md,
+.pb_currency_kit_center_lg,
+.pb_currency_kit_right_sm,
+.pb_currency_kit_right_md,
+.pb_currency_kit_right_lg {
+  
+  // Center alignment styles
+  &.pb_currency_kit_center_sm,
+  &.pb_currency_kit_center_md,
+  &.pb_currency_kit_center_lg {
+    text-align: center;
+    & > .pb_caption_kit,font-weight
+    & > .pb_title_kit,
+    & > .pb_body_kit {
       text-align: center;
     }
-    & > [class*=pb_currency_wrapper] {
+    & > .pb_currency_wrapper,
+    & > .pb_currency_wrapper_deemphasized,
+    & > .pb_currency_wrapper_light,
+    & > .pb_currency_wrapper_bold {
       justify-content: center;
     }
   }
 
-  &[class*=_right] {
-    & > [class^=pb_caption],
-    & > [class^=pb_title],
-    & > [class^=pb_body] {
+  // Right alignment styles
+  &.pb_currency_kit_right_sm,
+  &.pb_currency_kit_right_md,
+  &.pb_currency_kit_right_lg {
+    text-align: right;
+    & > .pb_caption_kit,
+    & > .pb_title_kit,
+    & > .pb_body_kit {
       text-align: right;
     }
-    & > [class*=pb_currency_wrapper] {
+    & > .pb_currency_wrapper,
+    & > .pb_currency_wrapper_deemphasized,
+    & > .pb_currency_wrapper_light,
+    & > .pb_currency_wrapper_bold {
       justify-content: flex-end;
     }
   }
 
-  [class^=pb_currency_wrapper] {
+  .pb_currency_wrapper,
+  .pb_currency_wrapper_deemphasized,
+  .pb_currency_wrapper_light,
+  .pb_currency_wrapper_bold {
     display: flex;
     align-items: baseline;
 
-    &[class*=_deemphasized] {
-      [class^=pb_body_kit], [class^=pb_body_kit] {
-        &:not([class*=dark]) {
+    &.pb_currency_wrapper_deemphasized {
+      .pb_body_kit {
+        &:not(.dark) {
           color: $text_lt_default;
         }
       }
 
-      [class^=pb_body_kit][class*=_light] {
+      .pb_body_kit.pb_body_light {
         font-weight: $regular;
       }
 
-      [class^=pb_title_kit] {
+      .pb_title_kit {
         font-weight: $lighter;
       }
     }
 
-    &[class*=_light] {
-      [class^=pb_body_kit], [class^=pb_title_kit] {
+    &.pb_currency_wrapper_light {
+      .pb_body_kit, 
+      .pb_title_kit {
         color: $text_lt_light;
         font-weight: $regular;
       }
 
-      [class^=pb_title_kit].dark {
+      .pb_title_kit.dark {
         color: $text_dk_light;
       }
     }
 
-    &[class*=_bold] {
-      [class^=pb_body_kit], [class^=_light]{
+    &.pb_currency_wrapper_bold {
+      .pb_body_kit,
+      .pb_body_kit_light {
         color: $text_lt_default;
+        font-weight: $bolder;
+      }
+      
+      .pb_title_kit {
         font-weight: $bolder;
       }
     }
 
-    & > [class*=dollar_sign] {
+    & > .dollar_sign {
       display: flex;
       align-self: flex-start;
     }
-    & > [class*=unit] {
+    & > .unit {
       display: flex;
       align-items: flex-end;
     }
   }
 
-  &[class*=_sm] {
-    [class^=pb_currency_wrapper][class*=_deemphasized] {
-      [class^=pb_title_kit] {
+  // Small size specific styles
+  &.pb_currency_kit_sm,
+  &.pb_currency_kit_left_sm,
+  &.pb_currency_kit_center_sm,
+  &.pb_currency_kit_right_sm {
+    .pb_currency_wrapper_deemphasized {
+      .pb_title_kit {
         font-weight: $regular;
+      }
+    }
+    
+    .pb_currency_wrapper,
+    .pb_currency_wrapper_deemphasized,
+    .pb_currency_wrapper_light,
+    .pb_currency_wrapper_bold {
+      .pb_currency_value {
+        line-height: 1.4;
+        padding-left: $space_xs - 7px;
+        padding-right: $space_xs - 7px;
       }
     }
   }
 
-  &[class*=_lg] [class^=pb_currency_wrapper] [class*=pb_currency_value] {
-    line-height: .9;
-    padding-left: $space_xs - 7px;
-    padding-right: $space_xs - 7px;
+  // Medium size specific styles
+  &.pb_currency_kit_md,
+  &.pb_currency_kit_left_md,
+  &.pb_currency_kit_center_md,
+  &.pb_currency_kit_right_md {
+    .pb_currency_wrapper,
+    .pb_currency_wrapper_deemphasized,
+    .pb_currency_wrapper_light,
+    .pb_currency_wrapper_bold {
+      .pb_currency_value {
+        line-height: 1.2;
+        padding-left: $space_xs - 7px;
+        padding-right: $space_xs - 7px;
+      }
+    }
   }
 
-  &[class*=_md] [class^=pb_currency_wrapper] [class*=pb_currency_value] {
-    line-height: 1.2;
-    padding-left: $space_xs - 7px;
-    padding-right: $space_xs - 7px;
+  // Large size specific styles
+  &.pb_currency_kit_lg,
+  &.pb_currency_kit_left_lg,
+  &.pb_currency_kit_center_lg,
+  &.pb_currency_kit_right_lg {
+    .pb_currency_wrapper,
+    .pb_currency_wrapper_deemphasized,
+    .pb_currency_wrapper_light,
+    .pb_currency_wrapper_bold {
+      .pb_currency_value {
+        line-height: .9;
+        padding-left: $space_xs - 7px;
+        padding-right: $space_xs - 7px;
+      }
+    }
   }
+}
 
-  &[class*=_sm] [class^=pb_currency_wrapper] [class*=pb_currency_value] {
-    line-height: 1.4;
-    padding-left: $space_xs - 7px;
-    padding-right: $space_xs - 7px;
+// Bold variant - apply bold styling to all caption labels in currency components with bold wrappers
+.pb_currency_kit .pb_caption_kit {
+  &:has(~ .pb_currency_wrapper_bold) {
+    font-weight: $bolder;
+  }
+}
+
+.pb_currency_kit_left_sm .pb_caption_kit,
+.pb_currency_kit_left_md .pb_caption_kit,
+.pb_currency_kit_left_lg .pb_caption_kit,
+.pb_currency_kit_center_sm .pb_caption_kit,
+.pb_currency_kit_center_md .pb_caption_kit,
+.pb_currency_kit_center_lg .pb_caption_kit,
+.pb_currency_kit_right_sm .pb_caption_kit,
+.pb_currency_kit_right_md .pb_caption_kit,
+.pb_currency_kit_right_lg .pb_caption_kit {
+  &:has(~ .pb_currency_wrapper_bold) {
+    font-weight: $bolder;
   }
 }

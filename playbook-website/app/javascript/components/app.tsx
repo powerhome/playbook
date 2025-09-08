@@ -1,4 +1,3 @@
-import React from 'react'
 import {
   createBrowserRouter,
   createRoutesFromElements,
@@ -10,6 +9,7 @@ import {
 import App from './Website'
 import ComponentList from './Website/src/pages/ComponentList'
 import CategoryShow from './Website/src/pages/CategoryShow'
+import KitShow from './Website/src/pages/KitShow'
 import IconList from './Website/src/pages/IconList'
 import Error from './Error'
 import { CategoryLoader, ComponentsLoader, ComponentShowLoader, } from './Website/src/hooks/loaders'
@@ -33,6 +33,16 @@ const router = createBrowserRouter(
             path=":name"
         />
       </Route>
+      <Route
+          element={<KitShow />}
+          loader={ComponentShowLoader}
+          path="kits/:name/:platform"
+      />
+      <Route
+          element={<KitShow />}
+          loader={ComponentShowLoader}
+          path="kits/advanced_table/:name/:platform"
+      />
       <Route
           element={<CategoryShow />}
           loader={CategoryLoader}

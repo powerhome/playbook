@@ -39,7 +39,7 @@ test('prefixText prop renders', () => {
   )
 
   const kit = screen.getByTestId('primary-test')
-  const prefix = kit.querySelector(".pb_title_kit_size_4")
+  const prefix = kit.querySelector(".pb_title_kit.pb_title_4")
   expect(prefix).toBeInTheDocument()
 })
 

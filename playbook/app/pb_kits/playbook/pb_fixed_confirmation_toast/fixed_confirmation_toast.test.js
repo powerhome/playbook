@@ -64,7 +64,7 @@ test("renders no icon when icon prop is 'none'", () => {
 
 test('renders correctly with multiLine prop', () => {
     const { container } = render(<FixedConfirmationToast multiLine />);
-    expect(container.querySelector('._multi_line')).toBeInTheDocument();
+    expect(container.querySelector('.pb_fixed_confirmation_toast_kit_neutral_multi_line')).toBeInTheDocument();
 });
 
 test('renders position when provided', () => {

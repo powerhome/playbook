@@ -1,107 +1,144 @@
 @import "card_mixin";
 @import "../utilities/colors";
+@import "../tokens/border_radius";
 
-[class^=pb_card_kit] {
+.pb_card_kit {
   @include pb_card;
   padding: $space_md;
-
-  &[class*=_selected] {
-    @include pb_card_selected;
-  }
-
-  &.dark {
-    @include pb_card_dark;
-
-    &[class*=_selected] {
-      @include pb_card_selected_dark;
-    }
-  }
-
-  &[class*=_border_none] {
-    border-width: 0px;
-  }
-
-  @function ends-with($string, $suffix) {
-    $suffix-length: str-length($suffix);
-    @if $suffix-length == 0 {
-      @return true;
-    }
-    @return str-slice($string, -$suffix-length) == $suffix;
-  }
-
-  [class^=pb_card_header_kit] {
-    flex-grow: 0;
-    flex-shrink: 0;
-    flex-basis: auto;
-    min-height: 1px;
-    padding: $space_sm;
-    border: 0;
-    border-radius: $pb_card_header_border_radius $pb_card_header_border_radius 0px 0px;
-    @each $color_name, $color_value in $pb_card_header_colors {
-      @if not ends-with($color_name, '_subtle') {
-        &[class*="_#{$color_name}"] {
-          @include pb_card_header_color($color_value);
-          color: lightenText($color_value);
-        }
-      }
-    }
-    @each $color_name, $color_value in $pb_card_header_colors {
-      @if ends-with($color_name, '_subtle') {
-        &[class*="_#{$color_name}"] {
-          @include pb_card_header_color($color_value);
-          color: lightenText($color_value);
-        }
-      }
-    }
-    @each $color_name, $color_value in $pb_card_header_colors {
-      &[class*=_#{$color_name}_striped] {
-        @if ((type-of($color_value) == color)) {
-          background: repeating-linear-gradient(
-            45deg,
-            $color_value,
-            $color_value 10px,
-            lighten( $color_value, 5% ) 10px,
-            lighten( $color_value, 5% ) 20px
-          );
-        }
-      }
-    }
-    &[class*=_white] {
-      border-bottom: 1px solid $border_light;
-    }
-  }
-
-  [class^=pb_card_body_kit] {
-    flex-grow: 0;
-    flex-shrink: 0;
-    flex-basis: auto;
-    min-height: 1px;
-    border: 0;
-    padding: $space_md;
-  }
-
-  &[class*=_highlight] {
-    overflow: hidden;
-  }
-
-  &[class*=_highlight_top] {
-    @each $color_name, $color_value in $pb_card_highlight_colors {
-      &[class*=_highlight_#{$color_name}]::before {
-        @include pb_card_highlight(100%, $pb_card_highlight_size, $color_value);
-      }
-    }
-  }
-
-  &[class*=_highlight_side] {
-    @each $color_name, $color_value in $pb_card_highlight_colors {
-      &[class*=_highlight_#{$color_name}]::before {
-        @include pb_card_highlight($pb_card_highlight_size, 100%, $color_value);
-      }
-    }
-  }
 
   .card_draggable_handle {
     align-self: center;
     color: $text_lt_light;
   }
+}
+
+// Selected state
+.pb_card_kit_selected {
+  @include pb_card_selected;
+}
+
+// Dark mode
+.pb_card_kit.dark {
+  @include pb_card_dark;
+  
+  &.pb_card_kit_selected {
+    @include pb_card_selected_dark;
+  }
+}
+
+// Border styles
+.pb_card_kit_border_none {
+  border-width: 0px;
+}
+
+// Highlight styles
+.pb_card_kit_highlight_top,
+.pb_card_kit_highlight_side {
+  overflow: hidden;
+}
+
+@function ends-with($string, $suffix) {
+  $suffix-length: str-length($suffix);
+  @if $suffix-length == 0 {
+    @return true;
+  }
+  @return str-slice($string, -$suffix-length) == $suffix;
+}
+
+// Highlight top variants
+@each $color_name, $color_value in $pb_card_highlight_colors {
+  .pb_card_kit_highlight_top.pb_card_kit_highlight_#{$color_name}::before {
+    @include pb_card_highlight(100%, $pb_card_highlight_size, $color_value);
+  }
+}
+
+// Highlight side variants  
+@each $color_name, $color_value in $pb_card_highlight_colors {
+  .pb_card_kit_highlight_side.pb_card_kit_highlight_#{$color_name}::before {
+    @include pb_card_highlight($pb_card_highlight_size, 100%, $color_value);
+  }
+}
+
+// Card Header
+.pb_card_header_kit {
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: auto;
+  min-height: 1px;
+  padding: $space_sm;
+  border: 0;
+  border-radius: $pb_card_header_border_radius $pb_card_header_border_radius 0px 0px;
+  
+  // Inherit border radius from parent card
+  .pb_card_kit_border_radius_xs & {
+    border-radius: $border_radius_xs $border_radius_xs 0px 0px;
+  }
+  .pb_card_kit_border_radius_sm & {
+    border-radius: $border_radius_sm $border_radius_sm 0px 0px;
+  }
+  .pb_card_kit_border_radius_md & {
+    border-radius: $border_radius_md $border_radius_md 0px 0px;
+  }
+  .pb_card_kit_border_radius_lg & {
+    border-radius: $border_radius_lg $border_radius_lg 0px 0px;
+  }
+  .pb_card_kit_border_radius_xl & {
+    border-radius: $border_radius_xl $border_radius_xl 0px 0px;
+  }
+  .pb_card_kit_border_radius_rounded & {
+    border-radius: $border_radius_rounded $border_radius_rounded 0px 0px;
+  }
+  .pb_card_kit_border_radius_none & {
+    border-radius: 0px;
+  }
+}
+
+// Header colors (non-subtle)
+@each $color_name, $color_value in $pb_card_header_colors {
+  @if not ends-with($color_name, '_subtle') {
+    .pb_card_header_kit_#{$color_name} {
+      @include pb_card_header_color($color_value);
+      color: lightenText($color_value);
+    }
+  }
+}
+
+// Header colors (subtle)
+@each $color_name, $color_value in $pb_card_header_colors {
+  @if ends-with($color_name, '_subtle') {
+    .pb_card_header_kit_#{$color_name} {
+      @include pb_card_header_color($color_value);
+      color: lightenText($color_value);
+    }
+  }
+}
+
+// Header striped patterns
+@each $color_name, $color_value in $pb_card_header_colors {
+  .pb_card_header_kit_#{$color_name}_striped {
+    @if ((type-of($color_value) == color)) {
+      background: repeating-linear-gradient(
+        45deg,
+        $color_value,
+        $color_value 10px,
+        lighten( $color_value, 5% ) 10px,
+        lighten( $color_value, 5% ) 20px
+      );
+    }
+  }
+}
+
+// White header special case
+.pb_card_header_kit_white {
+  border-bottom: 1px solid $border_light;
+}
+
+// Card Body
+.pb_card_body_kit {
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: auto;
+  min-height: 1px;
+  border: 0;
+  padding: $space_md;
 }

@@ -9,7 +9,7 @@
       }) %>
     <% end %>
     <div class="content_wrapper">
-      <%= pb_rails("flex", props: { orientation: "row", justify: object.align_timestamp == "left" ? "none" : "between" }) do %>
+      <%= pb_rails("flex", props: { orientation: "row", justify: object.align_timestamp == "left" ? "none" : "between", width:"100%" }) do %>
         <% if object.label.present? %>
           <%= pb_rails("title", props: {
             size: 4,
