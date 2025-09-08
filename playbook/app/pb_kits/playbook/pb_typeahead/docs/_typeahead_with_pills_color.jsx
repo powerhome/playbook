@@ -13,7 +13,7 @@ const TypeaheadWithPills = (props) => {
     <>
       <Typeahead
           isMulti
-          label="Colors"
+          label="Products"
           options={options}
           pillColor="neutral"
           placeholder=""

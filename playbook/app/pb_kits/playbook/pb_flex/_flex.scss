@@ -14,129 +14,135 @@ $gapTypes: (
   gap: gap,
   columnGap: column-gap,
   rowGap: row-gap
-  );
+);
 
-[class^=pb_flex_kit] {
+// Base flex kit
+.pb_flex_kit {
   display: flex;
   flex-wrap: nowrap;
+}
 
-  // Inline
-  &[class*=_inline] {
-    display: inline-flex;
-  }
+// Inline variant
+.pb_flex_kit_inline {
+  display: inline-flex;
+}
 
-  // Wrap
-  &[class*=_wrap] {
-    flex-wrap: wrap;
-  }
+// Wrap variant
+.pb_flex_kit_wrap {
+  flex-wrap: wrap;
+}
 
-  // Orientation
-  &[class*=_orientation_row] {
-    flex-direction: row;
+// Orientation
+.pb_flex_kit_orientation_row {
+  flex-direction: row;
+}
 
-    &[class*=_reverse] {
-      flex-direction: row-reverse;
+.pb_flex_kit_orientation_column {
+  flex-direction: column;
+}
+
+// Reverse (works with orientation)
+.pb_flex_kit_orientation_row.pb_flex_kit_reverse {
+  flex-direction: row-reverse;
+}
+
+.pb_flex_kit_orientation_column.pb_flex_kit_reverse {
+  flex-direction: column-reverse;
+}
+
+// Justify Content
+.pb_flex_kit_justify_content_left,
+.pb_flex_kit_justify_content_top,
+.pb_flex_kit_justify_content_start {
+  justify-content: flex-start;
+}
+
+.pb_flex_kit_justify_content_right,
+.pb_flex_kit_justify_content_bottom,
+.pb_flex_kit_justify_content_end {
+  justify-content: flex-end;
+}
+
+.pb_flex_kit_justify_content_center {
+  justify-content: center;
+}
+
+// Justify Content with Reverse
+.pb_flex_kit_justify_content_left.pb_flex_kit_reverse,
+.pb_flex_kit_justify_content_top.pb_flex_kit_reverse,
+.pb_flex_kit_justify_content_start.pb_flex_kit_reverse {
+  justify-content: flex-end;
+}
+
+.pb_flex_kit_justify_content_right.pb_flex_kit_reverse,
+.pb_flex_kit_justify_content_bottom.pb_flex_kit_reverse,
+.pb_flex_kit_justify_content_end.pb_flex_kit_reverse {
+  justify-content: flex-start;
+}
+
+// Align Items
+.pb_flex_kit_align_items_left,
+.pb_flex_kit_align_items_top,
+.pb_flex_kit_align_items_start {
+  align-items: flex-start;
+}
+
+.pb_flex_kit_align_items_right,
+.pb_flex_kit_align_items_bottom,
+.pb_flex_kit_align_items_end {
+  align-items: flex-end;
+}
+
+.pb_flex_kit_align_items_center {
+  align-items: center;
+}
+
+.pb_flex_kit_align_items_stretch {
+  align-items: stretch;
+}
+
+.pb_flex_kit_align_items_baseline {
+  align-items: baseline;
+}
+
+// Align Self
+.pb_flex_kit_align_self_start {
+  align-self: flex-start;
+}
+
+.pb_flex_kit_align_self_end {
+  align-self: flex-end;
+}
+
+.pb_flex_kit_align_self_center {
+  align-self: center;
+}
+
+.pb_flex_kit_align_self_stretch {
+  align-self: stretch;
+}
+
+// Spacing
+.pb_flex_kit_spacing_around,
+.pb_flex_kit_justify_content_around {
+  justify-content: space-around;
+}
+
+.pb_flex_kit_spacing_between,
+.pb_flex_kit_justify_content_between {
+  justify-content: space-between;
+}
+
+.pb_flex_kit_spacing_evenly,
+.pb_flex_kit_justify_content_evenly {
+  justify-content: space-evenly;
+}
+
+// Gap utility classes
+@each $gapType, $gapValue in $gapTypes {
+  @each $sizeName, $sizeValue in $gapSpaces {
+    .pb_flex_kit_#{$gapType}_#{$sizeName} {
+      #{$gapValue}: $sizeValue;
     }
   }
-
-  &[class*=_orientation_column] {
-    flex-direction: column;
-
-    &[class*=_reverse] {
-      flex-direction: column-reverse;
-    }
-  }
-
-  // Alignment: Justify Content
-  &[class*=justify_content_left],
-  &[class*=justify_content_top],
-  &[class*=justify_content_start] {
-    justify-content: flex-start;
-    &[class*=_reverse] {
-      justify-content: flex-end;
-    }
-  }
-
-  &[class*=justify_content_right],
-  &[class*=justify_content_bottom],
-  &[class*=justify_content_end] {
-    justify-content: flex-end;
-     &[class*=_reverse] {
-      justify-content: flex-start;
-    }
-  }
-
-  &[class*=justify_content_center] {
-    justify-content: center;
-  }
-
-
-  // Alignment: Align Items
-  &[class*=align_items_left],
-  &[class*=align_items_top],
-  &[class*=align_items_start] {
-    align-items: flex-start;
-  }
-
-  &[class*=align_items_right],
-  &[class*=align_items_bottom],
-  &[class*=align_items_end] {
-    align-items: flex-end;
-  }
-
-  &[class*=align_items_center] {
-    align-items: center;
-  }
-
-  &[class*=align_items_stretch] {
-    align-items: stretch;
-  }
-
-  &[class*=align_items_baseline] {
-    align-items: baseline;
-  }
-
-  // Alignment: Align Self - Rails & React
-  &[class*=align_self_start] {
-    align-self: flex-start;
-  }
-  
-  &[class*=align_self_end] {
-    align-self: flex-end;
-  }
-  
-  &[class*=align_self_center] {
-    align-self: center;
-  }
-  
-  &[class*=align_self_stretch] {
-    align-self: stretch;
-  }
-
-  // Spacing
-  &[class*=spacing_around],
-  &[class*=justify_content_around] {
-    justify-content: space-around;
-  }
-
-  &[class*=spacing_between],
-  &[class*=justify_content_between] {
-    justify-content: space-between;
-  }
-
-  &[class*=spacing_evenly],
-  &[class*=justify_content_evenly] {
-    justify-content: space-evenly;
-  }
-
-  //Gap
-  @each $gapType, $gapValue in $gapTypes{
-    @each $sizeName, $sizeValue in $gapSpaces {
-      &[class*=_#{$gapType}_#{$sizeName}]{
-        #{$gapValue}: $sizeValue;
-      }
-    }
-  }
-
-
 }

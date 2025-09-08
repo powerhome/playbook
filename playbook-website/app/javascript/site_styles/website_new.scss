@@ -1,0 +1,12 @@
+@import "playbook-tokens/colors";
+
+.pb--website--new {
+  pre.highlight {
+    padding: 44px 24px;
+    margin: 0;
+  }
+  .highlight {
+    background: $bg_dark;
+    color: $white;
+  }
+}

@@ -1,19 +1,21 @@
 @import "../pb_body/body";
 @import "../pb_icon/icon";
 
-[class^=pb_loading_inline_kit] {
+.pb_loading_inline_kit_left,
+.pb_loading_inline_kit_center,
+.pb_loading_inline_kit_right {
   display: flex;
   align-items: baseline;
+}
 
-  &[class*=_center] {
-    justify-content: center;
-  }
+.pb_loading_inline_kit_center {
+  justify-content: center;
+}
 
-  &[class*=_left] {
-    justify-content: flex-start;
-  }
+.pb_loading_inline_kit_left {
+  justify-content: flex-start;
+}
 
-  &[class*=_right] {
-    justify-content: flex-end;
-  }
+.pb_loading_inline_kit_right {
+  justify-content: flex-end;
 }

@@ -6,11 +6,11 @@
       Default - display grey caret icon
       Hover - display blue caret icon
   */
-[class^=pb_date_picker_kit] {
+.pb_date_picker_kit {
   /*Default - No value in date picker*/
   &.inline-date-picker {
-    [class^="pb_text_input_kit"] .text_input_wrapper .flatpickr-wrapper input::placeholder,
-    [class^="pb_text_input_kit"] .text_input_wrapper .flatpickr-wrapper .text_input .placeholder {
+    .pb_text_input_kit .text_input_wrapper .flatpickr-wrapper input::placeholder,
+    .pb_text_input_kit .text_input_wrapper .flatpickr-wrapper .text_input .placeholder {
       opacity: 1;
     }
     &:not(:hover) {
@@ -27,10 +27,10 @@
       }
     }
     &:hover {
-      [class^="pb_text_input_kit"] .text_input_wrapper input,
-      [class^="pb_text_input_kit"] .text_input_wrapper .text_input,
-      [class^="pb_text_input_kit"] .text_input_wrapper .flatpickr-wrapper input::placeholder,
-      [class^="pb_text_input_kit"] .text_input_wrapper .flatpickr-wrapper .text_input .placeholder {
+      .pb_text_input_kit .text_input_wrapper input,
+      .pb_text_input_kit .text_input_wrapper .text_input,
+      .pb_text_input_kit .text_input_wrapper .flatpickr-wrapper input::placeholder,
+      .pb_text_input_kit .text_input_wrapper .flatpickr-wrapper .text_input .placeholder {
         color: $primary;
       }
       .date-picker-inline-angle-down.cal_icon_wrapper {
@@ -95,7 +95,7 @@
 /*
   DARK MODE
 */
-[class^=pb_date_picker_kit].dark {
+.pb_date_picker_kit.dark {
   &.inline-date-picker {
     &:not(:hover) {
       .date-picker-inline-angle-down.cal_icon_wrapper {
@@ -111,10 +111,10 @@
       }
     }
     &:hover {
-      [class^="pb_text_input_kit"] .text_input_wrapper input,
-      [class^="pb_text_input_kit"] .text_input_wrapper .text_input,
-      [class^="pb_text_input_kit"] .text_input_wrapper .flatpickr-wrapper input::placeholder,
-      [class^="pb_text_input_kit"] .text_input_wrapper .flatpickr-wrapper .text_input .placeholder {
+      .pb_text_input_kit .text_input_wrapper input,
+      .pb_text_input_kit .text_input_wrapper .text_input,
+      .pb_text_input_kit .text_input_wrapper .flatpickr-wrapper input::placeholder,
+      .pb_text_input_kit .text_input_wrapper .flatpickr-wrapper .text_input .placeholder {
         color: $white;
       }
       .date-picker-inline-angle-down.cal_icon_wrapper {

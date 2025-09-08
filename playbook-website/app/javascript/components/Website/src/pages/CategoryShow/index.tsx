@@ -1,6 +1,6 @@
-import React, { useState } from "react"
+import { useState } from "react"
 import { NavLink, useLoaderData } from "react-router-dom"
-import { Body, Flex, Icon } from "playbook-ui"
+import { Body, Flex } from "playbook-ui"
 
 import { KitCard } from "../../components/KitCard"
 import { KitFilter } from "../../components/KitFilter"
@@ -12,8 +12,14 @@ import { Kit } from "../ComponentList"
 
 import "./styles.scss"
 
+type LoaderData = {
+  components: Kit[],
+  category: string,
+  description: string
+}
+
 export default function CategoryShow() {
-  const { components, category, description } = useLoaderData()
+  const { components, category, description } = useLoaderData() as LoaderData
   const [kitsToShow, setKitsToShow] = useState(components)
   const [platform, setPlatform] = useState('react')
 
@@ -36,10 +42,10 @@ export default function CategoryShow() {
       <PageContainer>
         <Flex align="center" className="category-breadcrumb">
           <NavLink to="/beta/kits">
-            <Body className="previous-route" color="light">Components</Body>
+            <Body className="previous-route" color="link"><b>Components</b></Body>
           </NavLink>
-          <Icon className="category-breadcrumb-icon" icon="angle-right" />
-          <Body text={linkFormat(category)} />
+          <Body marginX="xxs" text="/" />
+          <Body><b>{linkFormat(category)}</b></Body>
         </Flex>
 
         {!kitsToShow.length && (
