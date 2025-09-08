@@ -29,13 +29,14 @@ module Playbook
                                   default: nil
 
       def classname
-        generate_classname("pb_card_kit",
-                           selected_class,
-                           border_class,
-                           border_radius_class,
-                           background_class,
-                           highlight_position_class,
-                           highlight_color_class)
+        classes = ["pb_card_kit"]
+        classes << "pb_card_kit_selected" if selected
+        classes << "pb_card_kit_border_none" if border_none
+        classes << "pb_card_kit_border_radius_#{border_radius}" if border_radius != "md"
+        classes << "pb_card_kit_background_#{background}" if background != "none"
+        classes << "pb_card_kit_highlight_#{highlight[:position]}" if highlight[:position].present?
+        classes << "pb_card_kit_highlight_#{highlight[:color]}" if highlight[:color].present?
+        generate_classname(classes.compact.join(" "))
       end
 
     private

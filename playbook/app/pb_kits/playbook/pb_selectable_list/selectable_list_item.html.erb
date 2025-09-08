@@ -12,12 +12,12 @@
     </span>
   <% end %>
   <% if object.variant == "radio"%>
-    <%= pb_rails("radio", props: { text: object.text, checked: object.checked, input_options: object.input_options } ) %>
+    <%= pb_rails("radio", props: { margin_left:"xs", text: object.text, checked: object.checked, input_options: object.input_options } ) %>
     <% if content.present? %>
       <%= content %>
     <% end %>
   <% else %>
-    <%= pb_rails("checkbox", props: { text: object.text, checked: object.checked, input_options: object.input_options } ) %>
+    <%= pb_rails("checkbox", props: { margin_left:"xs", text: object.text, checked: object.checked, input_options: object.input_options } ) %>
     <% if content.present? %>
       <%= content %>
     <% end %>

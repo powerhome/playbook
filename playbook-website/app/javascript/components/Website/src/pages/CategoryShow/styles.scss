@@ -1,9 +1,6 @@
 @import "playbook-tokens/colors";
 
 .category-breadcrumb {
-  &-icon {
-    color: $text_lt_light;
-  }
   .previous-route {
     &:hover {
       color: $text_lt_default;

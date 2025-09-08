@@ -20,7 +20,7 @@ $pb_dark_title_colors: (
 
 @mixin title_colors {
   @each $name, $color in $pb_title_colors {
-    &[class*=_#{$name}] {
+    &.pb_title_#{$name} {
       color: $color
     }
   }

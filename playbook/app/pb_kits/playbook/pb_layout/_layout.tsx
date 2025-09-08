@@ -22,7 +22,7 @@ type LayoutPropTypes = {
   size?: "xs" | "sm" | "md" | "base" | "lg" | "xl",
   variant?: "light" | "dark" | "gradient",
   transparent?: boolean,
-  layout?: "sidebar" | "collection" | "kanban" | "content" | "masonry" | "bracket",
+  layout?: "sidebar" | "collection" | "collection_detail" | "kanban" | "content" | "masonry" | "bracket",
 } & GlobalProps
 
 type LayoutSideProps = {
@@ -81,11 +81,10 @@ const Body = (props: LayoutBodyProps) => {
 // Item component
 const Item = (props: LayoutItemProps) => {
   const { children, className, size = 'sm' } = props
-  const sizeClass = `size_${size}`
   const dynamicInlineProps = globalInlineProps(props)
   return (
     <div
-        className={classnames('layout_item', sizeClass, globalProps(props), className)}
+        className={classnames('layout_item', `layout_item_size_${size}`, globalProps(props), className)}
         style={dynamicInlineProps}
     >
       {children}
@@ -144,20 +143,24 @@ const Layout = (props: LayoutPropTypes) => {
   const htmlProps = buildHtmlProps(htmlOptions)
 
   const layoutCss =
-    (layout == 'collection' || layout == 'bracket')
+    (layout == 'collection' || layout == 'bracket' || layout == 'collection_detail' || layout == 'content' || layout == 'masonry')
       ? `pb_layout_kit_${layout}`
       : layout == 'kanban'
         ? `pb_layout_kit_${layout}${responsiveClass}`
-        : buildCss(`pb_layout_kit_${layout}`, `size_${size}`, position, variant, {
-          dark: dark,
-          transparent: transparent,
-          full: full,
-        })
+        : classnames(
+            'pb_layout_kit_sidebar',
+            `pb_layout_kit_sidebar_size_${size}_${position}_${variant}`,
+            {
+              'pb_layout_kit_sidebar_dark': dark,
+              'pb_layout_kit_sidebar_transparent': transparent,
+              'pb_layout_kit_sidebar_full': full,
+            }
+          )
 
   const layoutCollapseCss =
-    (layout == 'collection' || layout == 'kanban' || layout == 'bracket')
+    (layout == 'collection' || layout == 'collection_detail' || layout == 'content' || layout == 'masonry' || layout == 'kanban' || layout == 'bracket')
       ? ''
-      : buildCss('layout', position, 'collapse', collapse)
+      : `layout_${position}_collapse_${collapse}`
 
   const layoutChildren = React.Children.toArray(children)
 
