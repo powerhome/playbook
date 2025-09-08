@@ -1,6 +1,20 @@
 global_props:
   - html_options
   - margin
+  - cursor
+  - hover
+  - dark
 
 tokens:
+  - animation
+  - border_radius
   - display
+  - line_height
+  - opacity
+  - overflow
+  - position
+  - scale
+  - screen_sizes
+  - text_align
+  - vertical_align
+  - z_index

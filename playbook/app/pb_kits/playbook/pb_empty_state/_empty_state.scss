@@ -37,9 +37,9 @@
   }
 
   &.dark {
-    [class*="pb_title_kit"],
-    [class*="pb_body_kit"],
-    [class*="pb_detail_kit"],
-    [class*="pb_button_kit_link"]:hover { color: $white; }
+    .pb_title_kit,
+    .pb_body_kit,
+    .pb_detail_kit,
+    .pb_button_kit_link:hover { color: $white; }
   }
 }
