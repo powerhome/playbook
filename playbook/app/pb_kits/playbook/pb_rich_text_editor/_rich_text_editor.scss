@@ -10,7 +10,7 @@
 @import "./trix_styles";
 @import "./tiptap_styles";
 
-[class^=pb_rich_text_editor_kit] {
+.pb_rich_text_editor_kit {
   // Disables File Attatchment Button in Toolbar
   trix-toolbar [data-trix-button-group="file-tools"] {
     display: none;
@@ -126,7 +126,7 @@
   }
   // Trix doesn't provide customization to their icons.
   // https://github.com/basecamp/trix/issues/464#issuecomment-564683997
-  &[class*=dark] {
+  &.dark {
     // Dark SVG Icon Styles
     .trix-button--icon-bold::before {
       background-image: url("data:image/svg+xml,%3Csvg width='11px' height='14px' viewBox='0 0 11 14' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'%3E%3Cg id='Symbols' stroke='none' stroke-width='1' fill='none' fill-rule='evenodd' fill-opacity='0.6'%3E%3Cg id='Rich-Text/Dark/Field-Only/Empty' transform='translate(-19.000000, -17.000000)' fill='%23FFFFFF' fill-rule='nonzero'%3E%3Cg id='Styling1' transform='translate(7.000000, 7.000000)'%3E%3Cpath d='M20.6,16.79 C21.565,16.115 22.25,15.025 22.25,14 C22.25,11.745 20.505,10 18.25,10 L12,10 L12,24 L19.04,24 C21.135,24 22.75,22.3 22.75,20.21 C22.75,18.69 21.885,17.395 20.6,16.79 Z M15,12.5 L18,12.5 C18.83,12.5 19.5,13.17 19.5,14 C19.5,14.83 18.83,15.5 18,15.5 L15,15.5 L15,12.5 L15,12.5 Z M18.5,21.5 L15,21.5 L15,18.5 L18.5,18.5 C19.33,18.5 20,19.17 20,20 C20,20.83 19.33,21.5 18.5,21.5 Z' id='Shape'%3E%3C/path%3E%3C/g%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
@@ -291,14 +291,14 @@
         background-color: $focus_input_light;
       }
     }
-    &[class*=dark]:hover {
+    &.dark:hover {
       .trix-button-row,
       trix-editor {
         background-color: rgba($white, 0.1);
         border-color: rgba($white, 0.15);
       }
     }
-    &[class*=dark]:focus-within {
+    &.dark:focus-within {
       .trix-button-row,
       trix-editor {
         background-color: rgba($white, 0.03);
