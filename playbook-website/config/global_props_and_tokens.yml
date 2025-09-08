@@ -4,6 +4,8 @@ global_props:
   - cursor
   - hover
   - dark
+  - line_height
+  - display
 
 tokens:
   - animation
