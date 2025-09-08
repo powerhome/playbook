@@ -5,7 +5,7 @@ import { get } from '../utilities/object'
 
 import classnames from 'classnames'
 
-import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
+import { buildAriaProps, buildDataProps, buildHtmlProps } from '../utilities/props'
 import { GlobalProps, globalProps, globalInlineProps } from '../utilities/globalProps'
 import type { ProductColors, CategoryColors, BackgroundColors, StatusColors } from '../types/colors'
 
@@ -54,7 +54,14 @@ type CardBodyProps = {
 // Header component
 const Header = (props: CardHeaderProps) => {
   const { children, className, headerColor = 'category_1', headerColorStriped = false } = props
-  const headerCSS = buildCss('pb_card_header_kit', `${headerColor}`, headerColorStriped ? 'striped' : '')
+  const headerColorCSS = `pb_card_header_kit_${headerColor}`
+  const headerStripedCSS = headerColorStriped ? `pb_card_header_kit_${headerColor}_striped` : ''
+  
+  const headerCSS = classnames(
+    'pb_card_header_kit',
+    headerColorCSS,
+    headerStripedCSS
+  )
 
   const headerSpacing = globalProps(props)
 
@@ -69,11 +76,10 @@ const Header = (props: CardHeaderProps) => {
 // Body component
 const Body = (props: CardBodyProps) => {
   const { children, className } = props
-  const bodyCSS = buildCss('pb_card_body_kit')
   const bodySpacing = globalProps(props)
 
   return (
-    <div className={classnames(bodyCSS, bodySpacing, className)}>
+    <div className={classnames('pb_card_body_kit', bodySpacing, className)}>
       {children}
     </div>
   )
@@ -96,13 +102,22 @@ const Card = (props: CardPropTypes): React.ReactElement => {
     selected = false,
     tag = 'div',
   } = props
-  const borderCSS = borderNone == true ? 'border_none' : ''
-  const selectedCSS = selected == true ? 'selected' : 'deselected'
-  const backgroundCSS = background == 'none' ? '' : `background_${background}`
-  const cardCss = buildCss('pb_card_kit', selectedCSS, borderCSS, `border_radius_${borderRadius}`, backgroundCSS, {
-    [`highlight_${highlight.position}`]: highlight.position,
-    [`highlight_${highlight.color}`]: highlight.color,
-  })
+  const borderCSS = borderNone == true ? 'pb_card_kit_border_none' : ''
+  const selectedCSS = selected == true ? 'pb_card_kit_selected' : ''
+  const backgroundCSS = background == 'none' ? '' : `pb_card_kit_background_${background}`
+  const borderRadiusCSS = borderRadius !== 'md' ? `pb_card_kit_border_radius_${borderRadius}` : ''
+  const highlightPositionCSS = highlight.position ? `pb_card_kit_highlight_${highlight.position}` : ''
+  const highlightColorCSS = highlight.color ? `pb_card_kit_highlight_${highlight.color}` : ''
+  
+  const cardCss = classnames(
+    'pb_card_kit', // Base class
+    selectedCSS,
+    borderCSS,
+    borderRadiusCSS,
+    backgroundCSS,
+    highlightPositionCSS,
+    highlightColorCSS
+  )
   const ariaProps: {[key: string]: string} = buildAriaProps(aria)
   const dataProps: {[key: string]: string} = buildDataProps(data)
   const htmlProps = buildHtmlProps(htmlOptions);

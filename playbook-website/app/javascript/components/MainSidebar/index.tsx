@@ -18,6 +18,7 @@ const MainSidebar = ({
   design_guidelines,
   whats_new,
   icons,
+  beta = false,
 }: any) => {
   //active state for navItems(will be redundant once routing moved to react router)
   const [isActive, setIsActive] = useState({});
@@ -92,6 +93,7 @@ const MainSidebar = ({
           design_guidelines={design_guidelines}
           whats_new={whats_new}
           icons={icons}
+          beta={beta}
         />
       </Nav>
     </>

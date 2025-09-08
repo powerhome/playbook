@@ -8,7 +8,6 @@ Rails.application.routes.draw do
   get "changelog/web",            to: "pages#changelog_web"
   get "changelog/swift",          to: "pages#changelog_swift"
   get "changelog/figma",          to: "pages#changelog_figma"
-  get "drawer_page", to: "pages#drawer_page"
   get "changelog", to: redirect("changelog/web")
   get "global_props", to: "pages#global_props"
   get "global_props/:name", to: "pages#global_props_show", as: "global_props_show"
@@ -22,6 +21,9 @@ Rails.application.routes.draw do
   ## Beta View
   get "beta/kits", to: "pages#application_beta"
   get "beta/kits/:name", to: "pages#application_beta"
+  get "beta/kits/advanced_table/:name/:platform", to: "pages#application_beta"
+  get "beta/kits/:name/:platform", to: "pages#application_beta"
+  get "beta/kit_category/:category", to: "pages#application_beta"
   get "beta/icons", to: "pages#application_beta"
 
   # Legacy View
