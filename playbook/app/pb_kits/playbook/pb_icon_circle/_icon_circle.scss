@@ -14,55 +14,56 @@ $pb_icon_circle_sizes: (
   "xl":   100px,
 );
 
-[class^=pb_icon_circle_kit] {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  object-fit: cover;
-  overflow: hidden;
-  position: relative;
-// font-family set to sans-serif ONLY for emojis.
-//Needed to fix misalignment issue caused by Proxima font
-  .icon_circle_emoji {
-    font-family: monospace;
-  }
-
-  i,
-  svg {
-    &[class^=pb_icon_kit] {
-      width: 100%;
-      height: 100%;
-      display: block;
-      text-align: center;
-      text-transform: uppercase;
+// All icon circle variations with complete styling
+@each $size_name, $size_value in $pb_icon_circle_sizes {
+  @each $color_name, $color_value in $colors {
+    .pb_icon_circle_kit_size_#{$size_name}_#{$color_name} {
+      // Base styles
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      object-fit: cover;
+      overflow: hidden;
       position: relative;
-      z-index: 0;
-    }
-  }
-
-  @each $name, $size in $pb_icon_circle_sizes {
-    &[class*=_size_#{$name}] {
-      width: $size;
-      height: $size;
-      border-radius: $size/2;
+      
+      // Size-specific styles
+      width: $size_value;
+      height: $size_value;
+      border-radius: $size_value/2;
       background: $silver;
       color: $text_lt_light;
-      font-size: if($name == "xxs", $size - 6px, $size * 0.38);
-      line-height: $size;
+      font-size: if($size_name == "xxs", $size_value - 6px, $size_value * 0.38);
+      line-height: $size_value;
       flex-shrink: 0;
       flex-grow: 0;
-      flex-basis: $size;
-    }
-  }
-
-  @each $color_name, $color_value in $colors {
-    &[class*=_#{"" + $color_name}] {
+      flex-basis: $size_value;
+      
+      // Color/variant-specific styles
       color: $color_value;
       background: rgba(mix($bg_dark, $color_value, 10%), $opacity_1);
+      
+      // font-family set to sans-serif ONLY for emojis.
+      // Needed to fix misalignment issue caused by Proxima font
+      .icon_circle_emoji {
+        font-family: monospace;
+      }
+
+      i,
+      svg {
+        &[class^=pb_icon_kit] {
+          width: 100%;
+          height: 100%;
+          display: block;
+          text-align: center;
+          text-transform: uppercase;
+          position: relative;
+          z-index: 0;
+        }
+      }
+      
       &.dark {
         background: rgba(mix($bg_dark, $color_value, 10%), $opacity_2);
       }
     }
   }
 }
-

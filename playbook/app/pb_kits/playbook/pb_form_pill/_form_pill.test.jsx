@@ -13,7 +13,7 @@ test('should render classname', () => {
     )
 
     const kit = screen.getByTestId(testId)
-    expect(kit).toHaveClass('pb_form_pill_kit_primary none')
+    expect(kit).toHaveClass('pb_form_pill_kit pb_form_pill_primary pb_form_pill_none')
 });
 
 test('displays text content', () => {
@@ -37,7 +37,7 @@ test('displays color variant', () => {
         />
     )
     const kit = screen.getByTestId(testId)
-    expect(kit).toHaveClass(`pb_form_pill_kit_neutral none`)
+    expect(kit).toHaveClass(`pb_form_pill_kit pb_form_pill_neutral pb_form_pill_none`)
 });
 
 test('displays size variant', () => {
@@ -49,7 +49,7 @@ test('displays size variant', () => {
         />
     )
     const kit = screen.getByTestId('formpill')
-    expect(kit).toHaveClass(`pb_form_pill_kit_primary small none`)
+    expect(kit).toHaveClass(`pb_form_pill_kit pb_form_pill_small pb_form_pill_primary pb_form_pill_none`)
 });
 
 test('displays icon', () => {
@@ -60,5 +60,5 @@ test('displays icon', () => {
         />
     )
     const kit = screen.getByTestId('formpill')
-    expect(kit).toHaveClass(`pb_form_pill_kit_primary_icon none`)
+    expect(kit).toHaveClass(`pb_form_pill_kit_icon pb_form_pill_primary pb_form_pill_none`)
 });

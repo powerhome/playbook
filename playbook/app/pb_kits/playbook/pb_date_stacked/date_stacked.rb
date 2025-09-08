@@ -18,7 +18,7 @@ module Playbook
                   default: false
 
       def classname
-        generate_classname("pb_date_stacked_kit", align, size, bold, reverse_class, dark_class)
+        generate_classname("pb_date_stacked_kit", align, size, reverse_class, dark_class)
       end
 
       def title_size

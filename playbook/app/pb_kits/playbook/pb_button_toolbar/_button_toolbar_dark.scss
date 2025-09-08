@@ -2,51 +2,50 @@
 @import "../tokens/colors";
 @import "../tokens/opacity";
 
-[class^=pb_button_toolbar]{
-
-  // Vertical =============
-
-  &[class*=_vertical] {
-    &[class*=_primary].dark {
-      & > [class^=pb_button]:not(:first-child)::before {
-        @include toolbar_border(true, $primary_dark)
-      }
-    }
-    &[class*=_secondary].dark {
-      & > [class^=pb_button]:not(:first-child)::before {
-        @include toolbar_border(true, $secondary_dark)
-      }
-    }
+// Dark theme - Vertical toolbars
+.pb_button_toolbar_kit_vertical_primary.dark {
+  & > .pb_button_kit:not(:first-child)::before {
+    @include toolbar_border(true, $primary_dark)
   }
+}
 
-  // Horizontal =============
-
-  &[class*=_horizontal] {
-    &[class*=_primary].dark {
-      & > [class^=pb_button]:not(:first-child)::before {
-        @include toolbar_border(false, $primary_dark)
-      }
-    }
-    &[class*=_secondary].dark {
-      & > [class^=pb_button]:not(:first-child)::before {
-        @include toolbar_border(false, $secondary_dark)
-      }
-    }
+.pb_button_toolbar_kit_vertical_secondary.dark {
+  & > .pb_button_kit:not(:first-child)::before {
+    @include toolbar_border(true, $secondary_dark)
   }
-  & > [class^=pb_button]:not(:first-child):hover::before,
-  [class^=pb_button]:hover + [class^=pb_button]::before {
+}
+
+// Dark theme - Horizontal toolbars  
+.pb_button_toolbar_kit_horizontal_primary.dark {
+  & > .pb_button_kit:not(:first-child)::before {
+    @include toolbar_border(false, $primary_dark)
+  }
+}
+
+.pb_button_toolbar_kit_horizontal_secondary.dark {
+  & > .pb_button_kit:not(:first-child)::before {
+    @include toolbar_border(false, $secondary_dark)
+  }
+}
+
+// Dark theme hover effects
+.pb_button_toolbar_kit_horizontal_primary.dark,
+.pb_button_toolbar_kit_horizontal_secondary.dark,
+.pb_button_toolbar_kit_vertical_primary.dark,
+.pb_button_toolbar_kit_vertical_secondary.dark {
+  & > .pb_button_kit:not(:first-child):hover::before,
+  .pb_button_kit:hover + .pb_button_kit::before {
     opacity: 0
   }
 
-  // Hover =============
-
-  [class^=pb_button].dark  {
+  // Dark button hover styles
+  .pb_button_kit.dark {
     @media (hover:hover) {
       &:hover {
         background-color:darken($royal, 20%);
       }
     }
-    &[class*=secondary] {
+    &.pb_button_secondary {
       @media (hover:hover) {
         &:hover {
           background-color:rgba($primary_action, $opacity_3)

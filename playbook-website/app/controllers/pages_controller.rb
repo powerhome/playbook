@@ -150,10 +150,6 @@ class PagesController < ApplicationController
     render layout: "global_props_page"
   end
 
-  def drawer_page
-    render "pages/drawer_page", layout: "layouts/fullscreen"
-  end
-
   def icons
     @data = Playbook::Engine.root.join("../playbook-website/app/views/guides/getting_started/icons.md").read
     @page_title = "Icon Integration"
