@@ -71,7 +71,7 @@ describe("LabelValue Kit", () => {
             />
         )
         const kit = screen.getByTestId(testId)
-        const text = kit.querySelector(".pb_title_kit_size_4")
+        const text = kit.querySelector(".pb_title_kit.pb_title_4")
         expect(text.textContent).toEqual("JD Installations LLC")
     })
 
@@ -103,7 +103,7 @@ describe("LabelValue Kit", () => {
             />
         )
         const kit = screen.getByTestId(testId)
-        const activeProp = kit.querySelector(".pb_title_kit_size_4_link")
+        const activeProp = kit.querySelector(".pb_title_kit.pb_title_4.pb_title_link")
         expect(activeProp).toBeInTheDocument()
     })
 })

@@ -12,7 +12,7 @@ test('returns namespaced class name', () => {
     )
 
     const kit = screen.getByTestId('primary-test')
-    expect(kit).toHaveClass('pb_title_kit_size_3')
+    expect(kit).toHaveClass('pb_title_kit pb_title_3')
 })
 
 test('with thin font weight', () => {
@@ -25,7 +25,7 @@ test('with thin font weight', () => {
     )
 
     const kit = screen.getByTestId('primary-test')
-    expect(kit).toHaveClass('pb_title_kit_size_3_thin')
+    expect(kit).toHaveClass('pb_title_kit pb_title_3 pb_title_thin')
 })
 
 test('with colors', () => {
@@ -38,7 +38,7 @@ test('with colors', () => {
     )
 
     const kit = screen.getByTestId('primary-test')
-    expect(kit).toHaveClass('pb_title_kit_size_3_success')
+    expect(kit).toHaveClass('pb_title_kit pb_title_3 pb_title_success')
 })
 
 test('with responsive title', () => {
@@ -51,5 +51,5 @@ test('with responsive title', () => {
     )
 
     const kit = screen.getByTestId('primary-test')
-    expect(kit).toHaveClass('pb_title_kit pb_title_kit_xs_3 pb_title_kit_sm_2 pb_title_kit_md_1')
+    expect(kit).toHaveClass('pb_title_kit pb_title_xs_3 pb_title_sm_2 pb_title_md_1')
 })

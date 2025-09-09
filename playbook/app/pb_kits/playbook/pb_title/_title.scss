@@ -1,73 +1,78 @@
 @import "../tokens/titles";
 @import "../tokens/colors";
+@import "../tokens/typography";
 @import "../tokens/screen_sizes";
 @import './title_mixin';
 
-[class^=pb_title_kit] {
-  &[class*=_1] {
+.pb_title_kit {
+  // Base title styles - default to title 3 styling
+  @include pb_title_3;
+  @include pb_title_bold;
+  
+  // Size-based styles (these will override the base)
+  &.pb_title_1 {
     @include pb_title_1;
-    @include title_colors;
     @include pb_title_bold;
   }
 
-  &[class*=_2] {
+  &.pb_title_2 {
     @include pb_title_2;
-    @include title_colors;
     @include pb_title_bold;
   }
 
-  &[class*=_3] {
+  &.pb_title_3 {
     @include pb_title_3;
-    @include title_colors;
     @include pb_title_bold;
   }
 
-  &[class*=_4] {
+  &.pb_title_4 {
     @include pb_title_4;
-    @include title_colors;
   }
 
-  &[class*=_thin] {
+  &.pb_title_thin {
     @include pb_title_thin;
   }
 
-  &[class*=_display] {
+  // Color classes
+  @include title_colors;
+
+  // Display sizes
+  &.pb_title_display {
     font-size: clamp(24px, calc(1.25vw + 5.3vw), 128px);
+    font-weight: $bold;
   }
 
-  &[class*=_dynamic] {
-    &[class*=_xs] {
-      font-size: min(2vw, 80vw / 16); 
-    }
-  
-    &[class*=_sm] {
-      font-size: min(2.5vw, 96vw / 16); 
-    }
-  
-    &[class*=_md] {
-      font-size: min(4vw, 160vw / 16);
-    }
-  
-    &[class*=_lg] {
-      font-size: min(5vw, 192vw / 16);
-    }
-  
-    &[class*=_xl] {
-      font-size: min(6vw, 224vw / 16);
-    }
-  
-    &[class*=_xxl] {
-      font-size: min(8vw, 256vw / 16);
-    }
+  // Dynamic sizes
+  &.pb_title_dynamic_xs {
+    font-size: min(2vw, 80vw / 16); 
   }
-  
 
+  &.pb_title_dynamic_sm {
+    font-size: min(2.5vw, 96vw / 16); 
+  }
 
+  &.pb_title_dynamic_md {
+    font-size: min(4vw, 160vw / 16);
+  }
+
+  &.pb_title_dynamic_lg {
+    font-size: min(5vw, 192vw / 16);
+  }
+
+  &.pb_title_dynamic_xl {
+    font-size: min(6vw, 224vw / 16);
+  }
+
+  &.pb_title_dynamic_xxl {
+    font-size: min(8vw, 256vw / 16);
+  }
+
+  // Responsive breakpoint classes
   @each $size, $size_value in $breakpoints_grid {
     @for $title_size_value from 1 through 4 {
       $min_size: map-get($size_value, "min");
       $max_size: map-get($size_value, "max");
-      &[class*=_#{$size}_#{$title_size_value}] {
+      &.pb_title_#{$size}_#{$title_size_value} {
         @include break_on($min_size, $max_size) {
           @if $title_size_value == 1 { @include pb_title_1; }
           @else if $title_size_value == 2 { @include pb_title_2; }
@@ -83,7 +88,7 @@
   &.dark {
     @include title_dark;
     @each $name, $color in $pb_dark_title_colors {
-      &[class*="_#{$name}"] {
+      &.pb_title_#{$name} {
         color: $color;
       }
     }
