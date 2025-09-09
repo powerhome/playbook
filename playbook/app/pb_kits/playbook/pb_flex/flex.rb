@@ -24,17 +24,11 @@ module Playbook
                      default: "none",
                      deprecated: true
 
-      prop :gap, type: Playbook::Props::Enum,
-                 values: %w[xxs xs sm md lg xl none],
-                 default: "none"
+      prop :gap
 
-      prop :row_gap, type: Playbook::Props::Enum,
-                     values: %w[xxs xs sm md lg xl none],
-                     default: "none"
+      prop :row_gap
 
-      prop :column_gap, type: Playbook::Props::Enum,
-                        values: %w[xxs xs sm md lg xl none],
-                        default: "none"
+      prop :column_gap
 
       prop :reverse, type: Playbook::Props::Boolean,
                      default: false
@@ -67,20 +61,20 @@ module Playbook
                            gap_class,
                            row_gap_class,
                            column_gap_class,
-                           align_self_class)
+                           align_self_class, separator: " ")
       end
 
     private
 
       def orientation_class
-        "orientation_#{orientation}"
+        "pb_flex_kit_orientation_#{orientation}"
       end
 
       def horizontal_class
         if orientation == "row"
-          "justify_content_#{horizontal}"
+          "pb_flex_kit_justify_content_#{horizontal}"
         elsif align == "none"
-          "align_items_#{horizontal}"
+          "pb_flex_kit_align_items_#{horizontal}"
         end
       end
 
@@ -88,27 +82,27 @@ module Playbook
         if justify == "none"
           horizontal_class
         else
-          "justify_content_#{justify}"
+          "pb_flex_kit_justify_content_#{justify}"
         end
       end
 
       def inline_class
-        inline ? "inline" : nil
+        inline ? "pb_flex_kit_inline" : nil
       end
 
       def spacing_class
-        "spacing_#{spacing}"
+        spacing != "none" ? "pb_flex_kit_spacing_#{spacing}" : nil
       end
 
       def reverse_class
-        reverse ? "reverse" : nil
+        reverse ? "pb_flex_kit_reverse" : nil
       end
 
       def vertical_class
         if orientation == "row"
-          "align_items_#{vertical}"
+          "pb_flex_kit_align_items_#{vertical}"
         elsif justify == "none"
-          "justify_content_#{vertical}"
+          "pb_flex_kit_justify_content_#{vertical}"
         end
       end
 
@@ -116,7 +110,7 @@ module Playbook
         if align == "none"
           vertical_class
         else
-          "align_items_#{align}"
+          "pb_flex_kit_align_items_#{align}"
         end
       end
 
@@ -124,35 +118,35 @@ module Playbook
         if align_self == "none"
           nil
         else
-          "align_self_#{align_self}"
+          "pb_flex_kit_align_self_#{align_self}"
         end
       end
 
       def wrap_class
-        wrap ? "wrap" : nil
+        wrap ? "pb_flex_kit_wrap" : nil
       end
 
       def gap_class
-        if gap == "none"
+        if gap == "none" || gap.nil? || gap.is_a?(Hash)
           nil
         else
-          "gap_#{gap}"
+          "pb_flex_kit_gap_#{gap}"
         end
       end
 
       def row_gap_class
-        if row_gap == "none"
+        if row_gap == "none" || row_gap.nil? || row_gap.is_a?(Hash)
           nil
         else
-          "rowGap_#{row_gap}"
+          "pb_flex_kit_rowGap_#{row_gap}"
         end
       end
 
       def column_gap_class
-        if column_gap == "none"
+        if column_gap == "none" || column_gap.nil? || column_gap.is_a?(Hash)
           nil
         else
-          "columnGap_#{column_gap}"
+          "pb_flex_kit_columnGap_#{column_gap}"
         end
       end
     end

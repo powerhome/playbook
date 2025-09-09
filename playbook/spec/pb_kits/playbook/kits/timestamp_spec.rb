@@ -47,11 +47,10 @@ RSpec.describe Playbook::PbTimestamp::Timestamp do
       align = "left"
 
       expect(subject.new(timestamp: timestamp).classname).to eq "pb_timestamp_kit_#{align}"
-      expect(subject.new(variant: "updated", timestamp: timestamp).classname).to eq "pb_timestamp_kit_updated_#{align}"
-      expect(subject.new(variant: "updated", dark: true, timestamp: timestamp).classname).to eq "pb_timestamp_kit_updated_left dark"
-      expect(subject.new(variant: "elapsed", timestamp: timestamp).classname).to eq "pb_timestamp_kit_elapsed_#{align}"
-      expect(subject.new(variant: "elapsed", dark: true, timestamp: timestamp).classname).to eq "pb_timestamp_kit_elapsed_#{align} dark"
-      expect(subject.new(timestamp: timestamp, classname: "additional_class").classname).to eq "pb_timestamp_kit_left additional_class"
+      expect(subject.new(variant: "updated", timestamp: timestamp).classname).to eq "pb_timestamp_kit_#{align}"
+      expect(subject.new(variant: "elapsed", timestamp: timestamp).classname).to eq "pb_timestamp_kit_#{align}"
+      expect(subject.new(align: "center", timestamp: timestamp).classname).to eq "pb_timestamp_kit_center"
+      expect(subject.new(align: "right", timestamp: timestamp).classname).to eq "pb_timestamp_kit_right"
     end
   end
 

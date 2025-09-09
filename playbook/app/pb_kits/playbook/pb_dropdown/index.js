@@ -284,6 +284,9 @@ export default class PbDropdown extends PbEnhancedElement {
           this.adjustDropdownHeight();
         }
       });
+      this.element.querySelector(DROPDOWN_INPUT).value = Array.from(this.selectedOptions)
+        .map((opt) => JSON.parse(opt).id)
+        .join(",");
     } else {
       options.forEach((option) => {
         option.classList.remove("pb_dropdown_option_selected");
@@ -504,14 +507,14 @@ export default class PbDropdown extends PbEnhancedElement {
       // Create a form pill for each selected option
       const pill = document.createElement("div");
       const color = this.formPillProps.color || "primary";
-      pill.classList.add(`pb_form_pill_kit_${color}`, "mr_xs");
+      pill.classList.add("pb_form_pill_kit", `pb_form_pill_${color}`, "pb_form_pill_none", "mr_xs");
       if (this.formPillProps.size === "small") {
-        pill.classList.add("small");
+        pill.classList.add("pb_form_pill_small");
       }
       pill.tabIndex = 0;
       pill.dataset.pillId = JSON.parse(option).id;
       const innerDiv = document.createElement("h3");
-      innerDiv.className = "pb_title_kit_size_4 pb_form_pill_text";
+      innerDiv.className = "pb_title_kit pb_title_4 pb_form_pill_text";
       innerDiv.textContent = JSON.parse(option).label;
       pill.appendChild(innerDiv);
 

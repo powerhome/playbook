@@ -26,7 +26,7 @@ test('passes loading prop to button', () => {
   )
 
   const kit = screen.getByTestId('loading-test')
-  const button = kit.querySelector('.pb_button_kit_primary_inline_enabled_loading')
+  const button = kit.querySelector('.pb_button_kit.pb_button_primary.pb_button_inline.pb_button_enabled.pb_button_loading')
   
   expect(button).toBeInTheDocument()
 })

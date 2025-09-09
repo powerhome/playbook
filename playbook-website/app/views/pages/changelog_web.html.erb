@@ -1,3 +1,7 @@
 <div class="changelog-container">
-    <%= render_markdown(@data) %>
+    <% @releases.each do |release| %>
+        <%= render_markdown(release[:content]) %>
+    <% end %>
+
+    <%= pb_rails("pagination", props: { model: @releases, view: self, margin_top: "sm" }) %>
 </div>

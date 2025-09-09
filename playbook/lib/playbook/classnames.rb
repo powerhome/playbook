@@ -17,6 +17,8 @@ module Playbook
         min_width_props,
         max_width_props,
         gap_props,
+        column_gap_props,
+        row_gap_props,
         z_index_props,
         number_spacing_props,
         shadow_props,

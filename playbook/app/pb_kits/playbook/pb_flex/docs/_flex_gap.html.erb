@@ -1,4 +1,4 @@
-<%= pb_rails("title", props: {size: 4, text: "Row"}) %>
+<%= pb_rails("title", props: {size: 4, text: "Gap"}) %>
 <br/>
 <div class="flex-doc-example">
   <%= pb_rails("flex", props:{ gap: "xxs", wrap:true}) do %>
@@ -29,5 +29,16 @@
    <%= pb_rails("flex/flex_item") do %>2<% end %>
    <%= pb_rails("flex/flex_item") do %>3<% end %>
    <%= pb_rails("flex/flex_item") do %>4<% end %>
+  <% end %>
+</div>
+
+<br/><br/>
+<%= pb_rails("title", props: {size: 4, text: "Responsive"}) %>
+<br/>
+<div class="flex-doc-example">
+  <%= pb_rails("flex", props: { gap: { xs: "none", sm: "sm", md: "md", lg: "lg", xl: "xl" }, wrap: true }) do %>
+   <% 40.times do |i| %>
+    <%= pb_rails("flex/flex_item") do %> <%=i%> <% end %>
+   <% end %>
   <% end %>
 </div>

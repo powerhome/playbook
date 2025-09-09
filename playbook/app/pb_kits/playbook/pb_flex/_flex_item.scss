@@ -1,52 +1,147 @@
-[class^=pb_flex_item_kit] {
-  &[class*=_fixed_size] {
-    flex-grow: 0;
-    flex-shrink: 0;
-  }
+// Fixed size
+.pb_flex_item_kit_fixed_size {
+  flex-grow: 0;
+  flex-shrink: 0;
+}
 
-  &[class*=_grow] {
-    flex-grow: 1;
-  }
+// Grow
+.pb_flex_item_kit_grow {
+  flex-grow: 1;
+}
 
-  &[class*=_shrink] {
-    flex-shrink: 1;
-  }
+// Shrink
+.pb_flex_item_kit_shrink {
+  flex-shrink: 1;
+}
 
-  // Display Flex - Rails & React
-  &[class*=display_flex] {
-    display: flex;
-  }
+// Display Flex
+.pb_flex_item_kit_display_flex {
+  display: flex;
+}
 
-  // Alignment: Align Self - Rails & React
-  &[class*=align_self_start] {
-    align-self: flex-start;
-  }
-  
-  &[class*=align_self_end] {
-    align-self: flex-end;
-  }
-  
-  &[class*=align_self_center] {
-    align-self: center;
-  }
-  
-  &[class*=align_self_stretch] {
-    align-self: stretch;
-  }
+// Align Self
+.pb_flex_item_kit_align_self_start {
+  align-self: flex-start;
+}
 
-  //Order Items
-  @for $i from 0 through 12 {
-    &[class*=order_#{$i}]{
-      order: $i;
-    }
-  }
-  &[class*=order_first]{
-    order: -1;
-  }
+.pb_flex_item_kit_align_self_end {
+  align-self: flex-end;
+}
 
-  @for $i from 0 through 12 {
-    &[class*=_flex_#{$i}]{
-      flex: $i;
-    }
-  }
+.pb_flex_item_kit_align_self_center {
+  align-self: center;
+}
+
+.pb_flex_item_kit_align_self_stretch {
+  align-self: stretch;
+}
+
+// Order classes
+.pb_flex_item_kit_order_0 {
+  order: 0;
+}
+
+.pb_flex_item_kit_order_1 {
+  order: 1;
+}
+
+.pb_flex_item_kit_order_2 {
+  order: 2;
+}
+
+.pb_flex_item_kit_order_3 {
+  order: 3;
+}
+
+.pb_flex_item_kit_order_4 {
+  order: 4;
+}
+
+.pb_flex_item_kit_order_5 {
+  order: 5;
+}
+
+.pb_flex_item_kit_order_6 {
+  order: 6;
+}
+
+.pb_flex_item_kit_order_7 {
+  order: 7;
+}
+
+.pb_flex_item_kit_order_8 {
+  order: 8;
+}
+
+.pb_flex_item_kit_order_9 {
+  order: 9;
+}
+
+.pb_flex_item_kit_order_10 {
+  order: 10;
+}
+
+.pb_flex_item_kit_order_11 {
+  order: 11;
+}
+
+.pb_flex_item_kit_order_12 {
+  order: 12;
+}
+
+.pb_flex_item_kit_order_first {
+  order: -1;
+}
+
+// Flex values
+.pb_flex_item_kit_flex_0 {
+  flex: 0;
+}
+
+.pb_flex_item_kit_flex_1 {
+  flex: 1;
+}
+
+.pb_flex_item_kit_flex_2 {
+  flex: 2;
+}
+
+.pb_flex_item_kit_flex_3 {
+  flex: 3;
+}
+
+.pb_flex_item_kit_flex_4 {
+  flex: 4;
+}
+
+.pb_flex_item_kit_flex_5 {
+  flex: 5;
+}
+
+.pb_flex_item_kit_flex_6 {
+  flex: 6;
+}
+
+.pb_flex_item_kit_flex_7 {
+  flex: 7;
+}
+
+.pb_flex_item_kit_flex_8 {
+  flex: 8;
+}
+
+.pb_flex_item_kit_flex_9 {
+  flex: 9;
+}
+
+.pb_flex_item_kit_flex_10 {
+  flex: 10;
+}
+
+.pb_flex_item_kit_flex_11 {
+  flex: 11;
+}
+
+.pb_flex_item_kit_flex_12 {
+  flex: 12;
 }

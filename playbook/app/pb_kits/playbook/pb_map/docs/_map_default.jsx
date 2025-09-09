@@ -26,7 +26,7 @@ const MapDefault = (props) => {
         new maplibregl.Marker({
           color: mapTheme.marker,
         }).setLngLat(defaultPosition)
-        .setPopup(new maplibregl.Popup({closeButton: false}).setHTML(`<h4 class="pb_title_kit_size_4">Hello World!</h4>`)) // add popup
+        .setPopup(new maplibregl.Popup({closeButton: false}).setHTML(`<h4 class="pb_title_kit pb_title_4">Hello World!</h4>`)) // add popup
         .addTo(map);
 
         // disable map zoom when using scroll

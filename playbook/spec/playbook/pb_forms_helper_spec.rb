@@ -16,7 +16,7 @@ RSpec.describe Playbook::PbFormsHelper, type: :helper do
 
   it { is_expected.to have_tag("form[action='http://example.org']") }
   it { is_expected.to have_tag("form > .pb_text_input_kit input[name='example[name]'][type=text]") }
-  it { is_expected.to have_tag("form > ol.pb-form-actions > li > button.pb_button_kit_primary_inline_enabled[type=submit]") }
+  it { is_expected.to have_tag("form > ol.pb-form-actions > li > button.pb_button_kit.pb_button_primary.pb_button_inline.pb_button_enabled[type=submit]") }
 
   context "with validations" do
     subject { helper.pb_form_with(url: "http://example.org", scope: :example, validate: true, &form_body) }

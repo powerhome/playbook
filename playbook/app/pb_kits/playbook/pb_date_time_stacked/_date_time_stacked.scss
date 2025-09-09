@@ -1,18 +1,18 @@
-[class^=pb_date_time_stacked] {
+.pb_date_time_stacked_kit {
 
-  [class^=padding_month] {
+  .padding_month {
     padding-bottom: $space_xs + 2px !important;
     }
 
-  [class^=padding_day] {
+  .padding_day {
     padding-bottom: $space_xs + 2px !important;
   }
 
-  &[class*=_dark] {
-    & > * [class^=pb_title_kit] {
+  &.dark {
+    & > * .pb_title_kit {
       color: $text_dk_default;
     }
-    & > * [class^=pb_caption_kit] {
+    & > * .pb_caption_kit {
       color: $text_dk_light;
     }
   }
@@ -22,4 +22,3 @@
   padding-right: $space_xs / 2;
   padding-left: $space_xs / 2;
 }
-
