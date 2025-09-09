@@ -10,11 +10,11 @@ import MinWidth from "./Examples/MinWidth";
 import Width from "./Examples/Width";
 
 const COMPONENT_MAP = {
+  cursor: Cursor,
+  dark: Dark,
+  hover: Hover,
   html_options: HtmlOptions,
   margin: Margin,
-  cursor: Cursor,
-  hover: Hover,
-  dark: Dark,
   max_width: MaxWidth,
   min_width: MinWidth,
   width: Width,
