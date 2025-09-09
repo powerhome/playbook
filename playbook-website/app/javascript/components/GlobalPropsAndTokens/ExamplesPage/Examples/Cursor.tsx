@@ -1,7 +1,7 @@
 import { Flex, Image } from "playbook-ui";
-import ShowPage from "../Templates/ShowPage";
-import PropsExamplesTable from "../Templates/Subcomponents/PropsExamplesTable";
-import ExampleCodeCard from "../Templates/Subcomponents/ExampleCodeCard";
+import ShowPage from "../../Templates/ShowPage";
+import PropsExamplesTable from "../../Templates/Subcomponents/PropsExamplesTable";
+import ExampleCodeCard from "../../Templates/Subcomponents/ExampleCodeCard";
 
 const Cursor = () => {
   const VisualGuideCard = () => {

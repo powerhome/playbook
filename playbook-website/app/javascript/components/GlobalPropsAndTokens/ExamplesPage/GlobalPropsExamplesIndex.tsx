@@ -2,7 +2,7 @@ import React from "react";
 import { Background } from "playbook-ui";
 import HtmlOptions from "./Examples/HtmlOptions";
 import Margin from "./Examples/Margin";
-import Cursor from "./Cursor";
+import Cursor from "./Examples/Cursor";
 import Hover from "./Examples/Hover";
 import Dark from "./Examples/Dark";
 import MaxWidth from "./Examples/MaxWidth";
