@@ -2,9 +2,12 @@ import React from "react";
 import { Background } from "playbook-ui";
 import HtmlOptions from "./Examples/HtmlOptions";
 import Margin from "./Examples/Margin";
-import Cursor from "./Examples/Cursor";
+import Cursor from "./Cursor";
 import Hover from "./Examples/Hover";
 import Dark from "./Examples/Dark";
+import MaxWidth from "./Examples/MaxWidth";
+import MinWidth from "./Examples/MinWidth";
+import Width from "./Examples/Width";
 
 const COMPONENT_MAP = {
   html_options: HtmlOptions,
@@ -12,6 +15,9 @@ const COMPONENT_MAP = {
   cursor: Cursor,
   hover: Hover,
   dark: Dark,
+  max_width: MaxWidth,
+  min_width: MinWidth,
+  width: Width,
 };
 
 const GlobalPropsExamples = () => {
