@@ -84,6 +84,7 @@ const Message = (props: MessageProps) => {
         <Flex
             justify={alignTimestamp === 'left' ? 'none' : 'between'}
             orientation="row"
+            width="100%"
         >
           {label &&
             <Title

@@ -49,11 +49,11 @@ export const TokenCards = [
     link: "/tokens/overflow",
   },
   {
-    title: "Positioning",
+    title: "Position",
     description:
       "Set values for element placement, including static, relative, absolute, or fixed.",
     icon: "arrows-up-down-left-right",
-    link: "/tokens/positioning",
+    link: "/tokens/position",
   },
   {
     title: "Scale",
@@ -117,5 +117,12 @@ export const TokenCards = [
       "Standard values for vertical alignment within containers, like top, middle, or bottom.",
     icon: "objects-align-top",
     link: "/tokens/vertical_align",
+  },
+  {
+    title: "Z-Index",
+    description:
+      "Adjusts stacking order of elements, controlling which elements appear on top or below others.",
+    icon: "bring-front",
+    link: "/tokens/z_index",
   },
 ];

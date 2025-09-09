@@ -29,12 +29,37 @@ class PagesController < ApplicationController
     examples = @examples.map do |example|
       example_key = example.keys.first.to_s
       source_code = get_source(example_key)
-      { example_key: example_key, title: example.values.first, source: source_code }
+      description = get_description(example_key)
+      {
+        example_key: example_key,
+        title: example.values.first,
+        source: source_code,
+        description: description,
+      }
     end
 
     respond_to do |format|
       format.html { render layout: "application_beta", inline: "" }
-      format.json { render json: { kits: @kits, dark: @dark, type: @type, examples: examples, kit: @kit, params: @params, css: @css } }
+      format.json do
+        render json: {
+          kits: @kits,
+          dark: @dark,
+          type: @type,
+          examples: examples,
+          kit: @kit,
+          params: @params,
+          category: @category,
+          css: @css,
+          kits_with_status: helpers.aggregate_kits_with_status,
+          PBversion: Playbook::VERSION,
+          search_list: helpers.search_list,
+          patterns: PATTERNS,
+          getting_started: DOCS[:getting_started],
+          design_guidelines: DOCS[:design_guidelines],
+          icons: DOCS[:icons],
+          whats_new: DOCS[:whats_new],
+        }
+      end
     end
   end
 
@@ -123,10 +148,6 @@ class PagesController < ApplicationController
     @page_title = "Tokens Example"
     @show_sidebar = true
     render layout: "global_props_page"
-  end
-
-  def drawer_page
-    render "pages/drawer_page", layout: "layouts/fullscreen"
   end
 
   def icons
@@ -267,7 +288,11 @@ class PagesController < ApplicationController
     read_kit_file("_#{example}.jsx")
   end
 
-  helper_method :get_source
+  def get_description(example)
+    read_kit_file("_#{example}.md")
+  end
+
+  helper_method :get_source, :get_description
 
 private
 
