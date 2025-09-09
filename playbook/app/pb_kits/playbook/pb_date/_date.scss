@@ -1,7 +1,10 @@
 @import "../pb_icon/icon";
 @import "../pb_title/title";
 
-[class^=pb_date_kit] {
+.pb_date_kit,
+.pb_date_kit_left,
+.pb_date_kit_center,
+.pb_date_kit_right {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -9,27 +12,22 @@
         margin-right: 4px !important;
     }
 
-    &[class*=_center] {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: center;
-        margin-right: 4px !important;
-    }
-
-    &[class*=_right] {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: flex-end;
-        margin-left: 4px !important;
-    }
     &.dark {
-        [class^=pb_title_kit] {
+        .pb_title_kit {
             color: $text_dk_default !important;
         }
-        [class^=pb_body_kit], [class^=pb_caption_kit] {
+        .pb_body_kit, .pb_caption_kit {
             color: $text_dk_light !important;
         }
     }
+}
+
+.pb_date_kit_center {
+    justify-content: center;
+    margin-right: 4px !important;
+}
+
+.pb_date_kit_right {
+    justify-content: flex-end;
+    margin-left: 4px !important;
 }

@@ -43,32 +43,41 @@ const Title = (props: TitleProps): React.ReactElement => {
   const ariaProps: {[key: string]: string | number} = buildAriaProps(aria)
   const dataProps: {[key: string]: string | number} = buildDataProps(data)
   const htmlProps = buildHtmlProps(htmlOptions)
-  const getBold = bold ? '' : 'thin'
   const isSizeNumberOrString = typeof size === "number" || typeof size === "string"
 
   const buildResponsiveSizeCss = () => {
-    let css = ''
+    const classes: string[] = []
 
     if (!isSizeNumberOrString) {
       Object.entries(size).forEach((sizeObj) => {
-        css += `pb_title_kit_${sizeObj[0]}_${sizeObj[1]} `
+        classes.push(`pb_title_${sizeObj[0]}_${sizeObj[1]}`)
       })
     }
 
-    return css.trim()
+    return classes
   }
 
   const buildDisplaySize = () => {
     if (displaySize) {
-      return `pb_title_kit_dynamic_${displaySize}`
+      return [`pb_title_dynamic_${displaySize}`]
     }
+    return []
   }
 
+  const titleClasses = ['pb_title_kit']
+  
+  if (isSizeNumberOrString) {
+    titleClasses.push(`pb_title_${size}`)
+  }
+  if (variant) titleClasses.push(`pb_title_${variant}`)
+  if (color) titleClasses.push(`pb_title_${color}`)
+  if (!bold) titleClasses.push('pb_title_thin')
+  titleClasses.push(...buildDisplaySize())
+  titleClasses.push(...buildResponsiveSizeCss())
+
   const classes = classnames(
-    buildCss('pb_title_kit', isSizeNumberOrString ? `size_${size}` : "", variant, color, getBold),
+    titleClasses.join(' '),
     globalProps(props),
-    buildDisplaySize(),
-    buildResponsiveSizeCss(),
     className
   )
   const Tag: React.ReactElement | any = `${tag}`

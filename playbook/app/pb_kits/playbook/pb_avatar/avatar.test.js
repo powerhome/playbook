@@ -103,7 +103,7 @@ test('renders with online status', () => {
   );
 
   const onlineStatusAvatar = screen.getByTestId(testId);
-  const onlineStatus = onlineStatusAvatar.querySelector('.pb_online_status_kit_online_size_md')
+  const onlineStatus = onlineStatusAvatar.querySelector('.pb_online_status_kit')
   expect(onlineStatus).toBeInTheDocument();
 });
 
