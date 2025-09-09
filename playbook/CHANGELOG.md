@@ -1,3 +1,42 @@
+# 🚀 Playbook 15.0.0 is Live!
+
+##### September 08, 2025
+
+<img width="889" height="477" alt="release_image" src="https://github.com/user-attachments/assets/3879cb8a-8138-4cbd-b4bc-b54edb9fc9d9" />
+
+This major release focuses on SCSS improvements, delivering a large-scale refactor to remove costly selectors and significantly boost performance—especially in Safari. Functionality remains unchanged, but styles are cleaner, faster, and easier to maintain. 
+
+**Breaking:**
+
+- Refactor Playbook Scss to Remove Expensive Rules and Selectors [\#5029](https://github.com/powerhome/playbook/pull/5029) ([nidaqg](https://github.com/nidaqg))
+
+**Kit Enhancements:**
+
+- Flex Kit and Global Props: Responsive Gap and Column/Row Gap Props ([\#5013](https://github.com/powerhome/playbook/pull/5013)) ([@kangaree](https://github.com/kangaree))
+
+**Fixed Bugs:**
+
+- Date Picker: Cursor Global Prop to Work as Expected ([\#5006](https://github.com/powerhome/playbook/pull/5006))([@skduncan](https://github.com/skduncan))
+- Icon: Dark Prop to Work With Icon Kit ([\#5020](https://github.com/powerhome/playbook/pull/5020)) ([@skduncan](https://github.com/skduncan))
+
+**Improvements:**
+
+- Playbook Website: Create Z-index, Position and Scale Token Pages [\#5126](https://github.com/powerhome/playbook/pull/5126) ([skduncan](https://github.com/skduncan))
+- Playbook Website: Create Text Align, Opacity and Screen Sizes Token Pages [\#5123](https://github.com/powerhome/playbook/pull/5123) ([kangaree](https://github.com/kangaree))
+- Playbook Website: Create Border Radius, Overflow and Line Height Token Pages [\#5120](https://github.com/powerhome/playbook/pull/5120) ([skduncan](https://github.com/skduncan))
+- Typeahead Kit: Fix Clear All Docs - Rails [\#5114](https://github.com/powerhome/playbook/pull/5114) ([kangaree](https://github.com/kangaree))
+- Playbook Website: Add Missing Icons [\#5104](https://github.com/powerhome/playbook/pull/5104) ([kangaree](https://github.com/kangaree))
+- Playbook Website: Set Up Scaffold for React Views [\#5100](https://github.com/powerhome/playbook/pull/5100) ([nidaqg](https://github.com/nidaqg))
+- Playbook Website: Cursor, Hover and Dark Global Props Pages [\#5072](https://github.com/powerhome/playbook/pull/5072) ([nidaqg](https://github.com/nidaqg))
+- Playbook Website: Create Animation and Vertical Align Token Pages [\#5062](https://github.com/powerhome/playbook/pull/5062) ([kangaree](https://github.com/kangaree))
+- Playbook Website: Paginate Changelog for Performance [\#5059](https://github.com/powerhome/playbook/pull/5059) ([kangaree](https://github.com/kangaree))
+- Date Kit: Add Jest Test Coverage - React [\#5045](https://github.com/powerhome/playbook/pull/5045) ([skduncan](https://github.com/skduncan))
+- Pbswift Toast and User Doc Update [\#5003](https://github.com/powerhome/playbook/pull/5003) ([rachelradford21 ](https://github.com/rachelradford21))
+
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/v14.26.0-rc.0...15.0.0)
+
+
 # 📅 Date Kit: Show the Year, Every Year
 
 ##### August 15, 2025
