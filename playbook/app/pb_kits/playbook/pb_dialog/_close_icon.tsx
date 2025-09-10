@@ -12,10 +12,14 @@ export const CloseIcon = (props: CloseIconProps): React.ReactElement => {
   const timesIcon = getAllIcons()["times"]
   return (
     <div
+        aria-label="Close Dialog"
         className="pb_dialog_close_icon"
-        onClick={onClose}
+        onClick={onClose}          
+        role="button"    
+        tabIndex={0}
     >
       <Icon
+          aria={{ "hidden": true }} 
           className="svg-inline--fa"
           customIcon={timesIcon.icon as unknown as { [key: string]: SVGElement }}
           fixedWidth
