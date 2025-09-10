@@ -89,12 +89,44 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
     }
   }
 
+  // Helper function to get min/max years based on yearRange. If minDate/maxDate provided, grab year from those values
+  const getMinMaxYears = () => {
+    const [minYear, maxYear] = yearRange;
+
+    const extractYear = (dateOption: typeof minDate | typeof maxDate): number | null => {
+      if (!dateOption) return null;
+
+      // If it's already a number, assume it's a year
+      if (typeof dateOption === 'number') {
+        return dateOption;
+      }
+
+      // If it's a string, extract year with regex
+      if (typeof dateOption === 'string') {
+        const match = dateOption.match(/\b(19|20)\d{2}\b/);
+        return match ? parseInt(match[0], 10) : null;
+      }
+
+      // If it's a Date object, get the year directly
+      if (dateOption instanceof Date) {
+        return dateOption.getFullYear();
+      }
+
+      return null;
+    };
+
+    const setMinYear = minDate ? (extractYear(minDate) ?? minYear) : minYear;
+    const setMaxYear = maxDate ? (extractYear(maxDate) ?? maxYear) : maxYear;
+
+    return { setMinYear, setMaxYear };
+  };
+
+  const { setMinYear, setMaxYear } = getMinMaxYears()
+
   // Helper function to get min/max dates based on yearRange
   const getMinMaxDates = () => {
-    const [minYear, maxYear] = yearRange
-
-    const setMinDate = minDate || `01/01/${minYear}`
-    const setMaxDate = maxDate || `12/31/${maxYear}`
+    const setMinDate = minDate || `01/01/${setMinYear}`
+    const setMaxDate = maxDate || `12/31/${setMaxYear}`
 
     return { setMinDate, setMaxDate }
   }
@@ -262,7 +294,7 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
 
   // create html option tags for desired years
   let years = ''
-  for (let year = yearRange[1]; year >= yearRange[0]; year--) {
+  for (let year = setMaxYear; year >= setMinYear; year--) {
     years += `<option value="${year}">${year}</option>`
   }
 
