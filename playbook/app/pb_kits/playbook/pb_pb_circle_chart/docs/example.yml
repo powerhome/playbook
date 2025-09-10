@@ -1,0 +1,10 @@
+examples:
+  
+  rails:
+  - pb_circle_chart_default: Default
+  
+  
+  react:
+  - pb_circle_chart_default: Default
+  
+  
