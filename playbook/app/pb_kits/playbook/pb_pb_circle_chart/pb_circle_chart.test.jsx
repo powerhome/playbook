@@ -1,7 +1,7 @@
 import React from 'react'
 import { render, screen } from '../utilities/test-utils'
 
-import { PbCircleChart } from '../'
+import { PbCircleChart } from 'playbook-ui'
 
 
 test('generated scaffold test - update me', () => {
