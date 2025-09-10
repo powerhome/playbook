@@ -3,9 +3,11 @@ examples:
   rails:
   - loading_inline_default: Default
   - loading_inline_custom: Custom Text
+  - loading_inline_variant: Variant
 
   
   
   react:
   - loading_inline_default: Default
   - loading_inline_custom: Custom Text
+  - loading_inline_variant: Variant
