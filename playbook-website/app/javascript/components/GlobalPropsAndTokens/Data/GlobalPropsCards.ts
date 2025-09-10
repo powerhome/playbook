@@ -119,6 +119,13 @@ export const GlobalPropsCards = [
     link: "/global_props/vertical_align",
   },
   {
+    title: "Width",
+    description:
+      "Sets fixed or responsive width values for consistent horizontal sizing.",
+    icon: "rectangle-wide",
+    link: "/global_props/width",
+  },
+  {
     title: "Z-Index",
     description:
       "Adjusts stacking order of elements, controlling which elements appear on top or below others.",
