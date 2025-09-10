@@ -179,7 +179,7 @@ const Dialog = (props: DialogProps): React.ReactElement => {
             ariaHideApp={false}
             className={dialogClassNames}
             closeTimeoutMS={200}
-            contentLabel="Minimal Modal Example"
+            contentLabel="Dialog"
             id={id}
             isOpen={modalIsOpened}
             onRequestClose={onClose}

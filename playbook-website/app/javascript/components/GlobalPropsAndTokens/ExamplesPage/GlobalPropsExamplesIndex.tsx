@@ -7,15 +7,21 @@ import Hover from "./Examples/Hover";
 import Dark from "./Examples/Dark";
 import LineHeight from "./Examples/LineHeight";
 import Display from "./Examples/Display";
+import MaxWidth from "./Examples/MaxWidth";
+import MinWidth from "./Examples/MinWidth";
+import Width from "./Examples/Width";
 
 const COMPONENT_MAP = {
+  cursor: Cursor,
+  dark: Dark,
+  hover: Hover,
   html_options: HtmlOptions,
   margin: Margin,
-  cursor: Cursor,
-  hover: Hover,
-  dark: Dark,
   line_height: LineHeight,
   display: Display,
+  max_width: MaxWidth,
+  min_width: MinWidth,
+  width: Width,
 };
 
 const GlobalPropsExamples = () => {

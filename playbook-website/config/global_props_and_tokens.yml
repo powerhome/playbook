@@ -1,11 +1,15 @@
 global_props:
+  - cursor
+  - dark
+  - hover
   - html_options
   - margin
-  - cursor
-  - hover
-  - dark
   - line_height
   - display
+  - max_width
+  - min_width
+  - width
+
 
 tokens:
   - animation
