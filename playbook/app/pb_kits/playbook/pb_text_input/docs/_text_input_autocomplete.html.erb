@@ -1,0 +1,41 @@
+<%= pb_rails("text_input", props: {
+  autocomplete: false,
+  label: "autocomplete='off'",
+  name: "firstName",
+  placeholder: "Enter first name",
+}) %>
+
+<%= pb_rails("text_input", props: {
+  label: "no autocomplete attribute (let browser decide- basically 'on')",
+  name: "lastName",
+  placeholder: "Enter last name"
+}) %>
+
+<%= pb_rails("text_input", props: {
+    autocomplete: true,
+    label: "autocomplete='on'",
+    name: "phone",
+    type: "phone",
+    placeholder: "Enter phone number"
+}) %>
+
+<%= pb_rails("body", props: { margin_bottom: "sm" }) do %>
+  The following have the same autocomplete attributes (email), but have
+  different name attributes (email and emailAlt). Many browsers will
+  open autocomplete based on name attributes instead of autocomplete:
+<% end %>
+
+<%= pb_rails("text_input", props: {
+    autocomplete: "email",
+    label: "autocomplete='email' name='email'",
+    name: "email",
+    placeholder: "Enter email address"
+}) %>
+
+<%= pb_rails("text_input", props: {
+    autocomplete: "email",
+    label: "autocomplete='email' name='emailAlt'",
+    name: "emailAlt",
+    type: "email",
+    placeholder: "Enter email address"
+}) %>
