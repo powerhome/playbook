@@ -6,3 +6,6 @@ export { default as PbCircleChartColorOverrides } from './_pb_circle_chart_color
 export { default as PbCircleChartDataWithLabels } from './_pb_circle_chart_data_with_labels.jsx'
 export { default as PbCircleChartDataWithLegend } from './_pb_circle_chart_data_with_legend.jsx'
 export { default as PbCircleChartDataLegendPosition } from './_pb_circle_chart_data_legend_position.jsx'
+export { default as PbCircleChartWithTitle } from './_pb_circle_chart_with_title.jsx'
+export { default as PbCircleChartInnerSizes } from './_pb_circle_chart_inner_sizes.jsx'
+export { default as PbCircleChartCustomTooltip } from './_pb_circle_chart_custom_tooltip.jsx'
