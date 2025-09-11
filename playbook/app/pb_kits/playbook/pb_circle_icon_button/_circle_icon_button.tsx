@@ -65,6 +65,7 @@ const CircleIconButton = (props: CircleIconButtonProps): React.ReactElement => {
         id={id}
     >
       <Button
+          aria={aria}
           dark={dark}
           disabled={disabled}
           htmlType={type}
@@ -78,6 +79,7 @@ const CircleIconButton = (props: CircleIconButtonProps): React.ReactElement => {
       >
         <Icon
             fixedWidth
+            htmlOptions={{'aria-hidden': true}}
             icon={icon}
         />
       </Button>
