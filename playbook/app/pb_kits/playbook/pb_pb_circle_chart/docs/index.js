@@ -1,2 +1,8 @@
 export { default as PbCircleChartDefault } from './_pb_circle_chart_default.jsx'
 export { default as PbCircleChartLiveData } from './_pb_circle_chart_live_data.jsx'
+export { default as PbCircleChartRounded } from './_pb_circle_chart_rounded.jsx'
+export { default as PbCircleChartBlockContent } from './_pb_circle_chart_block_content.jsx'
+export { default as PbCircleChartColorOverrides } from './_pb_circle_chart_color_overrides.jsx'
+export { default as PbCircleChartDataWithLabels } from './_pb_circle_chart_data_with_labels.jsx'
+export { default as PbCircleChartDataWithLegend } from './_pb_circle_chart_data_with_legend.jsx'
+export { default as PbCircleChartDataLegendPosition } from './_pb_circle_chart_data_legend_position.jsx'

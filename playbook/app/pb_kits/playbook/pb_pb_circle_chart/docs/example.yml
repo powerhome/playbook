@@ -7,5 +7,11 @@ examples:
   react:
   - pb_circle_chart_default: Default
   - pb_circle_chart_live_data: Live Data
+  - pb_circle_chart_rounded: Rounded Corners
+  - pb_circle_chart_block_content: Accepts Any Block
+  - pb_circle_chart_color_overrides: Color Overrides
+  - pb_circle_chart_data_with_labels: Data with Labels
+  - pb_circle_chart_data_with_legend: Data with Legend
+  - pb_circle_chart_data_legend_position: Legend Position
   
   
