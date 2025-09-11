@@ -2,10 +2,12 @@
 
 require_relative "../../../../app/pb_kits/playbook/pb_pb_circle_chart/pb_circle_chart"
 
-RSpec.describe Playbook::PbPb_circle_chart::Pb_circle_chart do
-  subject { Playbook::PbPb_circle_chart::Pb_circle_chart }
+RSpec.describe Playbook::PbPbCircleChart::PbCircleChart do
+  subject { Playbook::PbPbCircleChart::PbCircleChart }
 
-  it { is_expected.to define_partial }
-
-  # Do not leave this file blank. Use other spec files for example tests.
+  describe "#classname" do
+    it "returns namespaced class name", :aggregate_failures do
+      expect(subject.new({}).classname).to eq "pb_pb_circle_chart"
+    end
+  end
 end
