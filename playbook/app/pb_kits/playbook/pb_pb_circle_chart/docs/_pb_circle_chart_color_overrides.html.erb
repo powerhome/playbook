@@ -14,11 +14,12 @@
       ] %>
 
 <% chart_options = {
-    series: [{
-      data: data,
-      innerSize: '100%',
-      borderWidth: '20',
-    }],
+    series: [{ data: data }],
+    plotOptions: {
+      pie: {
+        colors: ["#144075", "#1CA05C", "#F9BB00"],
+      },
+    },
   } %>
 
 <%= pb_rails("pb_circle_chart", props: { options: chart_options }) %>

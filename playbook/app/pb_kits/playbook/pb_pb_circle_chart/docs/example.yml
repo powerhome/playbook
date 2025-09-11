@@ -2,7 +2,10 @@ examples:
   
   rails:
   - pb_circle_chart_default: Default
-  
+  - pb_circle_chart_rounded: Rounded Corners
+  - pb_circle_chart_block_content: Accepts Any Block
+  - pb_circle_chart_color_overrides: Color Overrides
+
   
   react:
   - pb_circle_chart_default: Default
