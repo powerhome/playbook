@@ -1,0 +1,100 @@
+<% chart_data = [{
+    name: 'Installation',
+    data: [1475]
+}, {
+    name: 'Manufacturing',
+    data: [4434]
+}, {
+    name: 'Sales & Distribution',
+    data: [3387]
+}, {
+    name: 'Project Development',
+    data: [3227]
+}, {
+    name: 'Other',
+    data: [1111]
+}] %>
+
+<% chart_options_right = {
+  series: chart_data,
+  title: {
+    text: 'Alignment of Legend',
+  },
+  xAxis: {
+    categories: ['Jan'],
+  },
+  yAxis: {
+    title: {
+      text: 'Number of Employees',
+    },
+  },
+  legend: {
+    enabled: true,
+    align: 'right',
+    verticalAlign: 'top',
+  },
+}
+%>
+
+<%= pb_rails("title", props: {size: 4, text: "align | vertical_align", padding_top: "sm", padding_bottom: "sm"})%>
+
+
+<%= pb_rails("pb_bar_graph", props: {options: chart_options_right}) %>
+
+
+<% chart_options_center = {
+  series: chart_data,
+  title: {
+    text: 'Layout of Legend',
+  },
+  xAxis: {
+    categories: ['Jan'],
+  },
+  yAxis: {
+    title: {
+      text: 'Number of Employees',
+    },
+  },
+  legend: {
+    enabled: true,
+    align: 'center',
+    verticalAlign: 'bottom',
+    layout: 'vertical',
+
+  },
+}
+%>
+
+<%= pb_rails("title", props: {size: 4, text: "layout", padding_top: "sm", padding_bottom: "sm"})%>
+
+<%= pb_rails("pb_bar_graph", props: {options: chart_options_center}) %>
+
+<% chart_options_left = {
+  series: chart_data,
+  title: {
+    text: 'Offset of Legend',
+  },
+  xAxis: {
+    categories: ['Jan'],
+  },
+  yAxis: {
+    title: {
+      text: 'Number of Employees',
+    },
+  },
+  legend: {
+    enabled: true,
+    align: 'center',
+    verticalAlign: 'bottom',
+    layout: 'vertical',
+    x: 100,
+    y: 10,
+
+  },
+}
+%>
+
+<%= pb_rails("title", props: {size: 4, text: "x | y", padding_top: "sm", padding_bottom: "sm"})%>
+
+
+<%= pb_rails("pb_bar_graph", props: {options: chart_options_left}) %>
