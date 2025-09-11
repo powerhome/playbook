@@ -6,5 +6,6 @@ examples:
   
   react:
   - pb_circle_chart_default: Default
+  - pb_circle_chart_live_data: Live Data
   
   
