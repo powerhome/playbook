@@ -12,6 +12,19 @@ module Playbook
             options[:skip_default_ids] = false unless options.key?(:skip_default_ids)
             options[:required] = true if props[:required]
             options[:placeholder] = props[:placeholder] || ""
+            options[:type] = props[:type] if props.key?(:type)
+            options[:value] = props[:value] if props.key?(:value)
+            options[:disabled] = true if props.key?(:disabled)
+            if props.key?(:disabled)
+              cursor_style = props[:disabled] ? "not-allowed" : "pointer"
+              existing_style = options[:style] || ""
+
+              options[:style] =
+                existing_style.empty? ? "cursor: #{cursor_style}" : "#{existing_style}; cursor: #{cursor_style}"
+            end
+            if props.key?(:autocomplete)
+              options[:autocomplete] = props[:autocomplete] == true ? nil : (props[:autocomplete].presence || "off")
+            end
 
             if props.key?(:validation)
               validation = props[:validation]
