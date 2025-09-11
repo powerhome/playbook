@@ -1,1 +1,22 @@
-<%= pb_rails("pb_circle_chart") %>
+<% chart_options = {
+  series: [
+    {
+      data: [
+        {
+          name: "Waiting for Calls",
+          y: 41,
+        },
+        {
+          name: "On Call",
+          y: 49,
+        },
+        {
+          name: "After Call",
+          y: 10,
+        },
+      ],
+    },
+  ],
+} %>
+
+<%= pb_rails("pb_circle_chart", props: { options: chart_options }) %>
