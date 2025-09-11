@@ -17,6 +17,7 @@ const contactTypeMap: { [key: string]: string } = {
   'work': 'phone-office',
   'work-cell': 'phone-laptop',
   'wrong-phone': 'phone-slash',
+  'international': 'globe',
 }
 
 const envelopeIcon = getAllIcons()["envelope"].icon as unknown as { [key: string]: SVGElement }
@@ -24,6 +25,10 @@ const envelopeIcon = getAllIcons()["envelope"].icon as unknown as { [key: string
 const formatContact = (contactString: string, contactType: string) => {
   if (contactType === 'email') return contactString
 
+  // International phone numbers are unformatted
+  if (contactType === 'international') return contactString
+  
+  // Format US numbers
   const cleaned = contactString.replace(/\D/g, '')
   const phoneNumber = cleaned.match(/^(1|)?(\d{3})(\d{3})(\d{4})$/)
 

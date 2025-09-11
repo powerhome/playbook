@@ -33,6 +33,12 @@ const ContactDefault = (props) => {
           contactValue="1234"
           {...props}
       />
+      <Contact
+          contactDetail="International"
+          contactType="international"
+          contactValue="+44 7700 900461"
+          {...props}
+      />
     </div>
   )
 }
