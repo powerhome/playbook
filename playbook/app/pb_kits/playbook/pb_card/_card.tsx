@@ -26,7 +26,7 @@ type CardPropTypes = {
   dragHandle?: boolean,
   htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   highlight?: {
-    position?: "side" | "top",
+    position?: "side" | "right_side" | "top",
     color?: string,
   },
   id?: string,
@@ -56,7 +56,7 @@ const Header = (props: CardHeaderProps) => {
   const { children, className, headerColor = 'category_1', headerColorStriped = false } = props
   const headerColorCSS = `pb_card_header_kit_${headerColor}`
   const headerStripedCSS = headerColorStriped ? `pb_card_header_kit_${headerColor}_striped` : ''
-  
+
   const headerCSS = classnames(
     'pb_card_header_kit',
     headerColorCSS,
@@ -108,7 +108,7 @@ const Card = (props: CardPropTypes): React.ReactElement => {
   const borderRadiusCSS = borderRadius !== 'md' ? `pb_card_kit_border_radius_${borderRadius}` : ''
   const highlightPositionCSS = highlight.position ? `pb_card_kit_highlight_${highlight.position}` : ''
   const highlightColorCSS = highlight.color ? `pb_card_kit_highlight_${highlight.color}` : ''
-  
+
   const cardCss = classnames(
     'pb_card_kit', // Base class
     selectedCSS,

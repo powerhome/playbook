@@ -23,6 +23,14 @@ const CardHighlight = (props) => {
 
       <Card
           {...props}
+          highlight={{ position: 'right_side', color: 'product_5_highlight' }}
+          marginBottom="sm"
+      >
+        {'Right Side Position & Product 5 Highlight Color'}
+      </Card>
+
+      <Card
+          {...props}
           highlight={{ position: 'side', color: 'category_2' }}
       >
         {'Side Position & Category 2 Color'}
