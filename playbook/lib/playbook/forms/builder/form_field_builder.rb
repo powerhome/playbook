@@ -23,7 +23,7 @@ module Playbook
             options[:placeholder] = props[:placeholder] || ""
             options[:type] = props[:type] if props.key?(:type)
             options[:value] = props[:value] if props.key?(:value)
-            options[:disabled] = true if props.key?(:disabled)
+            options[:disabled] = true if props.key?(:disabled) && props[:disabled]
             if props.key?(:disabled)
               cursor_style = props[:disabled] ? "not-allowed" : "pointer"
               existing_style = options[:style] || ""
