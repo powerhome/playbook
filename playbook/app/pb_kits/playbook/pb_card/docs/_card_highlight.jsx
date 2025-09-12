@@ -26,7 +26,7 @@ const CardHighlight = (props) => {
           highlight={{ position: 'right_side', color: 'product_5_highlight' }}
           marginBottom="sm"
       >
-        {'Side Position & Product 5 Highlight Color'}
+        {'Right Side Position & Product 5 Highlight Color'}
       </Card>
 
       <Card
