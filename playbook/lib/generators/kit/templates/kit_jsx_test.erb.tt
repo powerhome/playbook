@@ -13,6 +13,6 @@ test('generated scaffold test - update me', () => {
     data: { testid: 'default' }
   }
 
-  render(<<%= @kit_name_pascal %> , props />)
+  render(<<%= @kit_name_pascal %> {...props} />)
     expect(screen.getByTestId('default')).toBeInTheDocument()
 })
