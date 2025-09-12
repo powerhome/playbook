@@ -238,7 +238,7 @@ kits:
     platforms: web
     status: beta
     icons_used: false
-    react_rendered: false
+    react_rendered: true
     enhanced_element_used: false
   - name: line_graph
     platforms: *1
