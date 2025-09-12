@@ -88,7 +88,7 @@ class KitGenerator < Rails::Generators::NamedBase
       unless platforms == "swift_only"
         template "kit_scss.erb", "#{full_kit_directory}/_#{@kit_name_underscore}.scss"
         open("app/entrypoints/playbook.scss", "a") do |f|
-          f.puts "\n@" + "import " + "\'" + "pb_#{@kit_name_underscore}/#{@kit_name_underscore}" + "\';"
+          f.puts "\n@" + "import " + "\'" + "kits/pb_#{@kit_name_underscore}/#{@kit_name_underscore}" + "\';"
         end
         scss_file = "app/entrypoints/playbook.scss"
 
@@ -124,14 +124,14 @@ class KitGenerator < Rails::Generators::NamedBase
 
         react_imports_page(
           path: REACT_EXAMPLES_PATH.to_s,
-          import_statement: "import * as #{@kit_name_pascal} from 'pb_#{@kit_name_underscore}/docs'\n",
+          import_statement: "import * as #{@kit_name_pascal} from 'kits/pb_#{@kit_name_underscore}/docs'\n",
           webpack_statement: "  ...#{@kit_name_pascal},\n",
           import_area_indicator: "// KIT EXAMPLES\n"
         )
 
         react_export_page(
           path: REACT_INDEX_PATH.to_s,
-          export_statement: "export { default as #{@kit_name_pascal}} from './pb_#{@kit_name_underscore}/_#{@kit_name_underscore}'\n",
+          export_statement: "export { default as #{@kit_name_pascal}} from '../pb_kits/playbook/pb_#{@kit_name_underscore}/_#{@kit_name_underscore}'\n",
           start_comment: "// vvv React Component JSX Imports from the React Kits vvv\n",
           end_comment: "// ^^^ React Component JSX Imports from the React Kits ^^^\n"
         )
