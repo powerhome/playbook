@@ -1,6 +1,7 @@
-import { ensureAccessible, renderKit } from '../utilities/test-utils'
+import React from 'react'
+import { render, screen } from '../utilities/test-utils'
 
-import { <%= @kit_name_pascal %> } from '../'
+import { <%= @kit_name_pascal %> } from 'playbook-ui'
 
 /* See these resources for more testing info:
   - https://github.com/testing-library/jest-dom#usage for useage and examples
@@ -12,10 +13,6 @@ test('generated scaffold test - update me', () => {
     data: { testid: 'default' }
   }
 
-  const kit = renderKit(<%= @kit_name_pascal %> , props)
-  expect(kit).toBeInTheDocument()
-})
-
-it("should be accessible", async () => {
-  ensureAccessible(<%= @kit_name_pascal %>, props)
+  render(<<%= @kit_name_pascal %> , props />)
+    expect(screen.getByTestId('default')).toBeInTheDocument()
 })
