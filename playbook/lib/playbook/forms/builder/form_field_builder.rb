@@ -4,6 +4,15 @@ module Playbook
   module Forms
     class Builder
       class FormFieldBuilder < Module
+        MASK_PATTERNS = {
+          "currency" => '^\$\d{1,3}(?:,\d{3})*(?:\.\d{2})?$',
+          "zip_code" => '\d{5}',
+          "postal_code" => '\d{5}-\d{4}',
+          "ssn" => '\d{3}-\d{2}-\d{4}',
+          "credit_card" => '\d{4} \d{4} \d{4} \d{4}',
+          "cvv" => '\d{3,4}',
+        }.freeze
+
         def initialize(method_name, kit_name:)
           define_method method_name do |name, props: {}, **options, &block|
             props[:label] = @template.label(@object_name, name) if props[:label] == true
@@ -24,6 +33,11 @@ module Playbook
             end
             if props.key?(:autocomplete)
               options[:autocomplete] = props[:autocomplete] == true ? nil : (props[:autocomplete].presence || "off")
+            end
+            if props.key?(:mask)
+              options[:mask] = props[:mask]
+              options[:data] = (options[:data] || {}).merge(pb_input_mask: true)
+              options[:pattern] = MASK_PATTERNS[props[:mask]]
             end
 
             if props.key?(:validation)
