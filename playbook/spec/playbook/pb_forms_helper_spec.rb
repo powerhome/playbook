@@ -271,6 +271,27 @@ RSpec.describe Playbook::PbFormsHelper, type: :helper do
     end
   end
 
+  context "with mask and validation props combined" do
+    let(:form_body_with_mask_and_validation) do
+      ->(builder) do
+        concat builder.text_field :masked_with_validation, props: {
+          label: true,
+          mask: "currency",
+          validation: { message: "Please enter a valid currency amount" },
+        }
+      end
+    end
+
+    subject { helper.pb_form_with(url: "http://example.org", scope: :example, validate: false, &form_body_with_mask_and_validation) }
+
+    it "preserves both mask and validation data attributes" do
+      expect(subject).to have_tag("input[mask='currency']")
+      expect(subject).to have_tag("input[data-pb-input-mask='true']")
+      expect(subject).to have_tag("input[data-message='Please enter a valid currency amount']")
+      expect(subject).to have_tag("input[pattern]")
+    end
+  end
+
   context "with multiple props combined" do
     let(:form_body_with_multiple) do
       ->(builder) do

@@ -34,7 +34,7 @@ module Playbook
             if props.key?(:autocomplete)
               options[:autocomplete] = props[:autocomplete] == true ? nil : (props[:autocomplete].presence || "off")
             end
-            if props.key?(:mask)
+            if props.key?(:mask) && props[:mask].present?
               options[:mask] = props[:mask]
               options[:data] = (options[:data] || {}).merge(pb_input_mask: true)
               options[:pattern] = MASK_PATTERNS[props[:mask]]
@@ -43,7 +43,7 @@ module Playbook
             if props.key?(:validation)
               validation = props[:validation]
               options[:pattern] = validation[:pattern] if validation[:pattern].present?
-              options[:data] = { message: validation[:message] } if validation[:message].present?
+              options[:data] = (options[:data] || {}).merge(message: validation[:message]) if validation[:message].present?
             end
 
             input = super(name, **options, &block)
