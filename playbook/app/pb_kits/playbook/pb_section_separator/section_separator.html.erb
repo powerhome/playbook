@@ -7,7 +7,10 @@
         <% end %>
     <% end %>
     <% if object.orientation === 'vertical' %>
-        <%= pb_rails("flex", props: { orientation: "column"}) do %>
+        <% if content %>
+            <%= content %>
+        <% elsif object.text %>
+            <span><%= pb_rails("caption", props: { text: object.text }) %></span>
         <% end %>
     <%end%>
 <% end %>
