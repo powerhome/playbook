@@ -1,0 +1,27 @@
+
+<% data = [
+{
+    name: 'Waiting for Calls',
+    y: 41,
+  },
+  {
+    name: 'On Call',
+    y: 49,
+  },
+  {
+    name: 'After Call',
+    y: 10,
+  },
+] %>
+
+<% chart_options = {
+  series: [{ data: data }],
+  tooltip: {
+      headerFormat: nil,
+      pointFormat: '<p>Custom tooltip for {point.name} <br/>with value: {point.y}</p>',
+      useHTML: true,
+    },
+  } %>
+
+
+<%= pb_rails("pb_circle_chart", props: { options: chart_options }) %>

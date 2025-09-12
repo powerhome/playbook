@@ -1,0 +1,24 @@
+<% data = [
+{
+  name: 'Bugs',
+  y: 8,
+},
+{
+  name: 'Chores',
+  y: 1,
+},
+{
+  name: 'Stories',
+  y: 12,
+}] %>
+
+<% chart_options = {
+  series: [{ data: data }],
+  plotOptions: {
+    pie: {
+    showInLegend: true,
+    },
+  },
+  } %>
+
+<%= pb_rails("pb_circle_chart", props: { options: chart_options }) %>

@@ -1,0 +1,118 @@
+<% data_first = [
+  {
+    name: 'Bugs',
+    y: 8,
+  },
+  {
+    name: 'Chores',
+    y: 1,
+  },
+  {
+    name: 'Stories',
+    y: 12,
+  },
+] %>
+
+<% data_second = [
+  {
+    name: 'Queued',
+    y: 7,
+  },
+  {
+    name: 'In Progress',
+    y: 6,
+  },
+  {
+    name: 'Validation',
+    y: 3,
+  },
+  {
+    name: 'Done',
+    y: 6,
+  },
+] %>
+
+<% data_third = [
+  {
+    name: '1 Point Tickets',
+    y: 2,
+  },
+  {
+    name: '3 Point Tickets',
+    y: 5,
+  },
+  {
+    name: '5 Point Tickets',
+    y: 6,
+  },
+  {
+    name: '8 Point Tickets',
+    y: 3,
+  },
+  {
+    name: '13 Point Tickets',
+    y: 1,
+  },
+] %>
+
+<% data_fourth = [
+  {
+    name: 'Facebook',
+    y: 2498,
+  },
+  {
+    name: 'YouTube',
+    y: 2000,
+  },
+  {
+    name: 'WhatsApp',
+    y: 2000,
+  },
+  {
+    name: 'Facebook Messenger',
+    y: 1300,
+  },
+  {
+    name: 'WeChat',
+    y: 1165,
+  },
+  {
+    name: 'Instagram',
+    y: 1000,
+  },
+  {
+    name: 'Tik Tok',
+    y: 800,
+  },
+] %>
+
+<% chart_options_small = {
+ series: [{ 
+      data: data_first,
+      innerSize: '35%'
+    }],  } %>
+  
+<% chart_options_md = {
+ series: [{ 
+      data: data_second,
+      innerSize: '50%'
+    }],  } %>
+
+<% chart_options_lg = {
+ series: [{ 
+      data: data_third,
+      innerSize: '85%'
+    }],  } %>
+
+<% chart_options_xl = {
+ series: [{ 
+      data: data_fourth,
+      innerSize: '0%'
+    }],  } %>
+
+
+
+<%= pb_rails("pb_circle_chart", props: { options: chart_options_small }) %>
+<%= pb_rails("pb_circle_chart", props: { options: chart_options_md }) %>
+<%= pb_rails("pb_circle_chart", props: { options: chart_options_lg }) %>
+<%= pb_rails("pb_circle_chart", props: { options: chart_options_xl }) %>

@@ -1,0 +1,93 @@
+<% data_first = [{
+  name: 'Bugs',
+  y: 8,
+},
+{
+  name: 'Chores',
+  y: 1,
+},
+{
+  name: 'Stories',
+  y: 12,
+}] %>
+
+<% data_second = [{
+  name: 'Bugs',
+  y: 8,
+},
+{
+  name: 'Chores',
+  y: 1,
+},
+{
+  name: 'Stories',
+  y: 12,
+}] %>
+
+<% data_third = [{
+    name: 'Queued',
+    y: 7,
+  },
+  {
+    name: 'In Progress',
+    y: 6,
+  },
+  {
+    name: 'Validation',
+    y: 3,
+  },
+  {
+    name: 'Done',
+    y: 6,
+  },
+] %>
+
+
+<% chart_options_first = {
+    title: { text: "Alignment of Legend" },
+    series: [{ data: data_first }],
+    legend: {
+      align: 'right',
+      verticalAlign: 'top'
+    },
+    plotOptions: {
+      pie: {
+        showInLegend: true
+      }
+    }
+  } %>
+
+  <% chart_options_second = {
+  title: { text: "Layout of Legend" },
+    series: [{ data: data_second }],
+    legend: {
+      layout: 'vertical'
+    },
+    plotOptions: {
+      pie: {
+        showInLegend: true
+      }
+    }
+  } %>
+
+  <% chart_options_third = {
+   title: { text: "Offset of Legend" },
+    series: [{ data: data_third }],
+    legend: {
+      layout: 'vertical',
+      x: 100,
+      y: 10
+    },
+    plotOptions: {
+      pie: {
+        showInLegend: true
+      }
+    }
+  } %>
+
+<%= pb_rails("title", props: { size: 4, text: "align | verticalAlign", padding_y:"sm" }) %>
+<%= pb_rails("pb_circle_chart", props: { options: chart_options_first }) %>
+<%= pb_rails("title", props: { size: 4, text: "layout", padding_y:"sm" }) %>
+<%= pb_rails("pb_circle_chart", props: { options: chart_options_second }) %>
+<%= pb_rails("title", props: { size: 4, text: "x | y", padding_y:"sm" }) %>
+<%= pb_rails("pb_circle_chart", props: { options: chart_options_third }) %>

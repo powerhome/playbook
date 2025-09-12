@@ -14,6 +14,7 @@ import Passphrase from 'kits/pb_passphrase/_passphrase'
 import RichTextEditor from 'kits/pb_rich_text_editor/_rich_text_editor'
 import Typeahead from 'kits/pb_typeahead/_typeahead'
 import PhoneNumberInput from 'kits/pb_phone_number_input/_phone_number_input'
+import PbCircleChart from 'kits/pb_pb_circle_chart/_pb_circle_chart'
 
 WebpackerReact.registerComponents({
   BarGraph,
@@ -26,6 +27,7 @@ WebpackerReact.registerComponents({
   RichTextEditor,
   Typeahead,
   Gauge,
+  PbCircleChart,
   PhoneNumberInput
 })
 
