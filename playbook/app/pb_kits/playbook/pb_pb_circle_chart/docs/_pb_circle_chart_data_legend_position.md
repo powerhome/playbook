@@ -1,4 +1,4 @@
-##### Prop
+Layout options from Highcharts:
 
 `align` **Type**: String | **Values**: left | center | right (defaults to center)
 `verticalAlign` **Type**: String | **Values**: top | middle | bottom (defaults to bottom)
