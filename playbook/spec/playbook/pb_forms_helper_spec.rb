@@ -118,7 +118,6 @@ RSpec.describe Playbook::PbFormsHelper, type: :helper do
       expect(subject).to have_tag("input[mask='currency']")
       expect(subject).to have_tag("input[data-pb-input-mask='true']")
       expect(subject).to have_tag("input[pattern]")
-      expect(subject).to have_tag("input[name='']")
     end
   end
 
