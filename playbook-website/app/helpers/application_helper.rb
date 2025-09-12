@@ -8,6 +8,7 @@ module ApplicationHelper
   include ::Playbook::PbKitHelper
   include ::PlaybookWebsite::Markdown::Helper
   include ::PlaybookWebsite::PbDocHelper
+  include ::ReactHelper
 
   def pb_category_kits(category_kits: [], type: "rails")
     display_kits = []
