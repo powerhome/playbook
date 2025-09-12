@@ -1,1 +1,24 @@
-<%= pb_rails("date_picker", props: { picker_id: "date-picker-default"}) %>
+<%= pb_rails("flex") do %>
+  <%= pb_rails("date_picker", props: { picker_id: "date-picker-default"}) %>
+
+  <!-- see how it behaves for raw html date picker -->
+
+<form style="margin-top:100px;" action="/action_page.php">
+  <label for="birthday" style="padding-top:100px;">Birthday:</label>
+  <input type="date" id="birthday" name="birthday">
+  <input type="submit" value="Submit">
+</form>
+
+<form style="margin-top:100px;" action="/action_page.php">
+  <label for="birthday" style="margin-top:100px;">Birthday:</label>
+  <input type="date" id="birthday" name="birthday">
+  <input type="submit" value="Submit">
+</form>
+<form style="margin-top:100px;" action="/action_page.php">
+  <label for="birthday" style="padding-top:100px;">Birthday:</label>
+  <input type="date" id="birthday" name="birthday">
+  <input type="submit" value="Submit">
+</form>
+<p><strong>Note:</strong> type="date" is not supported in Internet Explorer 11.</p>
+
+<% end %>
