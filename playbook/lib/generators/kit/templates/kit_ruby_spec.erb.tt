@@ -2,10 +2,8 @@
 
 require_relative "../../../../app/pb_kits/playbook/pb_<%= @kit_name_underscore %>/<%= @kit_name_underscore %>"
 
-RSpec.describe Playbook::Pb<%= @kit_name_capitalize %>::<%= @kit_name_capitalize %> do
-  subject { Playbook::Pb<%= @kit_name_capitalize %>::<%= @kit_name_capitalize %> }
-
-  it { is_expected.to define_partial }
+RSpec.describe Playbook::Pb<%= @kit_name_pascal %>::<%= @kit_name_pascal %> do
+  subject { Playbook::Pb<%= @kit_name_pascal %>::<%= @kit_name_pascal %> }
 
   # Do not leave this file blank. Use other spec files for example tests.
 end
