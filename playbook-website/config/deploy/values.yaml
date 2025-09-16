@@ -18,5 +18,5 @@ database:
       grant: 'SELECT'
   allprivs_user: migrator
   application_user: webapp
-  storageClass: block
+  storageClass: staging-performance
   volumeSize: 1Gi
