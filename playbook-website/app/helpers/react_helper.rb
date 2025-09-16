@@ -8,8 +8,8 @@ module ReactHelper
 
     # Build the HTML attributes
     html_attrs = {
-      "data-react-component" => component_name,
-      "data-react-props" => props_json,
+      "data-pb-react-component" => component_name,
+      "data-pb-react-props" => props_json,
     }
 
     # Merge with any additional HTML options

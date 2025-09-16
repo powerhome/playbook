@@ -5,6 +5,9 @@ import ComponentRegistry from './componentRegistry'
 function mountComponents() {
   ComponentRegistry.mountComponents()
 }
+function unmountComponents() {
+  ComponentRegistry.unmountComponents()
+}
 
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', mountComponents)
@@ -15,9 +18,10 @@ if (document.readyState === 'loading') {
 // Also mount components when Turbo navigates
 document.addEventListener('turbo:load', mountComponents)
 document.addEventListener('turbo:render', mountComponents)
+document.addEventListener('turbo:before-render', unmountComponents, { capture: true })
 
 // For non-Turbo pages, also listen to page:load (if using Turbolinks)
 document.addEventListener('page:load', mountComponents)
 
 // Export for manual mounting if needed
-export { mountComponents }
+export { mountComponents, unmountComponents }
