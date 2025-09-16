@@ -104,7 +104,7 @@ export const VirtualizedTableView = ({
     // Create debounced version of the width measurement function
     const handleResize = debounce(() => {
       setColumnWidths(getHeaderCellWidths());
-    }, 100);
+    }, 0);
 
     // Add the event listener
     window.addEventListener('resize', handleResize);
