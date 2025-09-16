@@ -7,6 +7,7 @@ import { GenericObject } from "../../types"
 
 import { isChrome } from "../Utilities/BrowserCheck"
 import { getVirtualizedRowStyle } from "../Utilities/TableContainerStyles"
+import { getRowColorClass } from "../Utilities/RowUtils"
 
 import LoadingInline from "../../pb_loading_inline/_loading_inline"
 import Checkbox from "../../pb_checkbox/_checkbox"
@@ -45,10 +46,10 @@ export const VirtualizedTableView = ({
 
   const columnPinning = table.getState().columnPinning || { left: [] };
   const sortingState = JSON.stringify(table.getState().sorting || []);
-  
+
   // Store column widths extracted from header
   const [columnWidths, setColumnWidths] = useState<{[key: string]: string}>({});
-  
+
   // Function to get header cell widths
   const getHeaderCellWidths = () => {
     const widths: {[key: string]: string} = {};
@@ -103,7 +104,7 @@ export const VirtualizedTableView = ({
     // Create debounced version of the width measurement function
     const handleResize = debounce(() => {
       setColumnWidths(getHeaderCellWidths());
-    }, 0);
+    }, 100);
 
     // Add the event listener
     window.addEventListener('resize', handleResize);
@@ -136,7 +137,7 @@ export const VirtualizedTableView = ({
       </tr>
     );
   }
-  
+
   // Establish # of Parent Rows (so that Footer count does not include every single row)
   const topLevelRowCount = table.getRowModel().flatRows.filter((row: Row<GenericObject>) => row.depth === 0).length;
 
@@ -172,10 +173,9 @@ export const VirtualizedTableView = ({
 
         if (item.type === 'row') {
           const row = item.row;
-          const isExpandable = row.getIsExpanded();
-          const rowHasNoChildren = row.original?.children && !row.original.children.length;
-          const rowBackground = isExpandable && ((!inlineRowLoading && row.getCanExpand()) || (inlineRowLoading && rowHasNoChildren));
-          const rowColor = row.getIsSelected() ? "bg-row-selection" : rowBackground ? "bg-silver" : "bg-white";
+
+          // Use the utility function to get consistent row color
+          const rowColor = getRowColorClass(row, inlineRowLoading || false);
 
           return (
             <tr
