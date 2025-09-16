@@ -249,10 +249,8 @@
   }
 
   .pb_advanced_table_body {
-    tr {
-      .last-cell:not(:last-of-type) {
-        border-right: 1px solid $border_light !important;
-      }
+    .last-cell {
+      border-right: 1px solid $border_light !important;
     }
     tr td:first-child {
       padding-left: 8px !important;
