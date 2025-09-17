@@ -93,8 +93,6 @@ const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>((pr
     className
   );
 
-  const inputId = id ? `${id}_multiselect_input` : `${Math.random().toString(36).slice(2)}_multiselect_input`;
-
   const dropdownRef = useRef(null);
 
   // State for whether dropdown is open or closed
@@ -328,11 +326,14 @@ const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>((pr
 
   // Handle click on input wrapper(entire div with pills, typeahead, etc) so it doesn't close when input or form pill is clicked
   const handleInputWrapperClick = (e: any) => {
-  console.log("test", inputId, e.target.id)
-  if (disabled) return
-  // ignore clicks that originated from the input or pills
-  if (e.target.id === inputId || e.target.classList?.contains('pb_form_pill_tag')) return
-  setIsDropdownClosed(false)
+    if (
+      e.target.id === "multiselect_input" ||
+      e.target.classList.contains("pb_form_pill_tag") ||
+      disabled
+    ) {
+      return;
+    }
+    setIsDropdownClosed(!isDropdownClosed);
   };
 
   // Main function to handle any click inside dropdown
@@ -441,10 +442,6 @@ const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>((pr
     }
   };
 
-const handleChevronClick = (e: React.MouseEvent) => {
-  e.stopPropagation()
-  setIsDropdownClosed(prev => !prev)
-}
 
   return (
     <div
@@ -558,13 +555,13 @@ const handleChevronClick = (e: React.MouseEvent) => {
 
             <input
                 disabled={disabled}
-                id={inputId}
+                id="multiselect_input"
                 onChange={(e) => {
                   variant === "single"
                     ? handleRadioInputChange(e.target.value)
                     : setFilterItem(e.target.value);
                 }}
-                onClick={(e) => { e.stopPropagation(); setIsDropdownClosed(false) }}
+                onClick={() => setIsDropdownClosed(false)}
                 placeholder={
                   inputDisplay === "none" && itemsSelectedLength()
                     ? `${itemsSelectedLength()} ${
@@ -579,8 +576,7 @@ const handleChevronClick = (e: React.MouseEvent) => {
 
           {isDropdownClosed ? (
             <div id={arrowDownElementId}
-                key="chevron-down"
-                onClick={handleChevronClick}>
+                key="chevron-down">
               <Icon
                   icon="chevron-down"
                   id={arrowDownElementId}
@@ -589,8 +585,7 @@ const handleChevronClick = (e: React.MouseEvent) => {
             </div>
           ) : (
             <div id={arrowUpElementId}
-                key="chevron-up"
-                onClick={handleChevronClick}>
+                key="chevron-up">
               <Icon
                   icon="chevron-up"
                   id={arrowUpElementId}

@@ -12,129 +12,94 @@ export default class PbMultiLevelSelect extends PbEnhancedElement {
   }
 
   connect() {
-    this.justBlurred = false;
     this.addEventListeners();
     this.observeHiddenInputs();
     this.observeRogueErrorInsideInnerContainer();
-    // @ts-ignore
-    console.log("[MLS ENHANCER] connect", this.element);
-  }
-
-  disconnect() {
-    if (this.inputElement && this.onInvalid) {
-      this.inputElement.removeEventListener("invalid", this.onInvalid);
-    }
-    if (this.inputElement && this.onBlur) {
-      this.inputElement.removeEventListener("blur", this.onBlur);
-    }
-    if (this.mutationObserver) {
-      this.mutationObserver.disconnect();
-    }
-    if (this.rogueErrorObserver) {
-      this.rogueErrorObserver.disconnect();
-    }
-    // @ts-ignore
-    console.log("[MLS ENHANCER] disconnect", this.element);
   }
 
   addEventListeners() {
     const inputElement = this.element.querySelector("input");
-    if (!inputElement) {
-      // @ts-ignore
-      console.log("[MLS ENHANCER] no input found");
-      return;
-    }
 
-    this.inputElement = inputElement;
-
-    this.onInvalid = () => {
-      // @ts-ignore
-      console.log("[MLS ENHANCER] input invalid");
+    inputElement.addEventListener("invalid", () => {
       this.handleErrorLabel(300);
-    };
-
-    this.onBlur = () => {
+    });
+    inputElement.addEventListener("blur", () => {
       this.justBlurred = true;
-      // @ts-ignore
-      console.log("[MLS ENHANCER] input blur");
+
       setTimeout(() => {
         this.justBlurred = false;
       }, 300);
-    };
-
-    inputElement.addEventListener("invalid", this.onInvalid);
-    inputElement.addEventListener("blur", this.onBlur);
-    // @ts-ignore
-    console.log("[MLS ENHANCER] listeners attached");
+    });
   }
 
   handleErrorLabel(delay) {
     setTimeout(() => {
       const errorLabelElement = this.target;
       const wrapper = this.element.querySelector(".wrapper");
-      // @ts-ignore
-      console.log("[MLS ENHANCER] handleErrorLabel", {
-        hasErrorLabel: !!errorLabelElement,
-        hasWrapper: !!wrapper,
-      });
+
+      if (errorLabelElement) {
+        errorLabelElement.remove();
+        if (wrapper) {
+          if (wrapper.querySelector(".pb_body_kit_negative")) {
+            wrapper.querySelector(".pb_body_kit_negative").remove();
+          }
+          wrapper.appendChild(errorLabelElement);
+        }
+        this.element.classList.add("error");
+      } else {
+        this.handleErrorLabel(100);
+      }
     }, delay);
   }
 
   observeHiddenInputs() {
     const container = this.element.querySelector(".input_inner_container");
-    if (!container) {
-      // @ts-ignore
-      console.log("[MLS ENHANCER] no .input_inner_container found");
-      return;
-    }
+    if (!container) return;
 
-    this.mutationObserver = new MutationObserver((mutations) => {
-      // @ts-ignore
-      console.log("[MLS ENHANCER] hidden inputs observer mutations", mutations.length);
+    this.mutationObserver = new MutationObserver(() => {
       const hiddenInputs = container.querySelectorAll('input[type="hidden"]');
-      // @ts-ignore
-      console.log("[MLS ENHANCER] hidden inputs count", hiddenInputs.length);
       if (hiddenInputs.length > 0) {
-        this.clearError({});
+        // At least one hidden input exists, so clear the error
+        this.clearError();
       }
     });
 
-    this.mutationObserver.observe(container, { childList: true });
-    // @ts-ignore
-    console.log("[MLS ENHANCER] hidden inputs observer attached");
+    this.mutationObserver.observe(container, {
+      childList: true,
+    });
   }
 
   observeRogueErrorInsideInnerContainer() {
     const container = this.element.querySelector(".input_inner_container");
-    if (!container) {
-      // @ts-ignore
-      console.log("[MLS ENHANCER] no .input_inner_container for rogue observer");
-      return;
-    }
 
     this.rogueErrorObserver = new MutationObserver((mutations) => {
-      // @ts-ignore
-      console.log("[MLS ENHANCER] rogue error observer mutations", mutations.length, "justBlurred:", this.justBlurred);
       for (const mutation of mutations) {
         for (const node of mutation.addedNodes) {
           if (
             node.nodeType === Node.ELEMENT_NODE &&
             node.classList.contains("pb_body_kit_negative")
           ) {
-            // @ts-ignore
-            console.log("[MLS ENHANCER] pb_body_kit_negative added inside inner container", node);
+            if (this.justBlurred) {
+              node.remove();
+            }
           }
         }
       }
     });
 
-    this.rogueErrorObserver.observe(container, { childList: true, subtree: true });
-    // @ts-ignore
-    console.log("[MLS ENHANCER] rogue error observer attached");
+    this.rogueErrorObserver.observe(container, {
+      childList: true,
+      subtree: true,
+    });
   }
 
   clearError(e) {
-    // @ts-ignore
-    console.log("[MLS ENHANCER] clearError called", e);
+    const errorLabelElement = this.target;
+
+    if (errorLabelElement) {
+      errorLabelElement.remove();
+      this.element.classList.remove("error");
+      this.element.querySelector("input").value = e.detail.value;
+    }
   }
 }
