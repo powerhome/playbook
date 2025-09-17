@@ -139,7 +139,9 @@ export const RegularTableView = ({
 
   const columnPinning = table.getState().columnPinning || { left: [] };
   const columnDefinitions = table.options.meta?.columnDefinitions || [];
-  const isMultiHeaderColumn = columnDefinitions.some(obj => "columns" in obj);
+  const isMultiHeaderColumn = columnDefinitions.some(
+    (obj: Record<string, unknown>) => "columns" in obj
+  );
 
   // Row pinning
   function PinnedRow({ row }: { row: Row<any> }) {
