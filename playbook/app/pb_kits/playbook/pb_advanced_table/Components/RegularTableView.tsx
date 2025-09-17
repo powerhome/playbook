@@ -29,6 +29,7 @@ const TableCellRenderer = ({
   columnPinning,
   customRowStyle,
   columnDefinitions,
+  isMultiHeaderColumn = false,
 }: {
   row: Row<GenericObject>
   collapsibleTrail?: boolean
@@ -37,12 +38,18 @@ const TableCellRenderer = ({
   columnPinning: { left: string[] }
   customRowStyle?: GenericObject
   columnDefinitions?: {[key:string]:any}[]
+  isMultiHeaderColumn?: boolean
 }) => {
   return (
     <>
       {row.getVisibleCells().map((cell: Cell<GenericObject, unknown>, i: number) => {
         const isPinnedLeft = columnPinning.left.includes(cell.column.id);
+        // Add a border to the right of each group of columns for multi-header column tables
         const isLastCell = (() => {
+          if (!isMultiHeaderColumn) {
+            return false;
+          }
+
           const parent = cell.column.parent;
           if (!parent) {
             const last = row.getVisibleCells().at(-1);
@@ -132,6 +139,8 @@ export const RegularTableView = ({
 
   const columnPinning = table.getState().columnPinning || { left: [] };
   const columnDefinitions = table.options.meta?.columnDefinitions || [];
+  const isMultiHeaderColumn = columnDefinitions.some(obj => "columns" in obj);
+
   // Row pinning
   function PinnedRow({ row }: { row: Row<any> }) {
     const customRowStyle = rowStyling?.length > 0 && rowStyling?.find((s: GenericObject) => s?.rowId === row.id);
@@ -156,6 +165,7 @@ export const RegularTableView = ({
             columnDefinitions={columnDefinitions}
             columnPinning={columnPinning}
             customRowStyle={customRowStyle}
+            isMultiHeaderColumn={isMultiHeaderColumn}
             loading={loading}
             row={row}
             stickyLeftColumn={stickyLeftColumn}
@@ -220,6 +230,7 @@ export const RegularTableView = ({
                   columnDefinitions={columnDefinitions}
                   columnPinning={columnPinning}
                   customRowStyle={customRowStyle}
+                  isMultiHeaderColumn={isMultiHeaderColumn}
                   loading={loading}
                   row={row}
                   stickyLeftColumn={stickyLeftColumn}
