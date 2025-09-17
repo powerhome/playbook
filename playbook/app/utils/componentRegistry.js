@@ -6,112 +6,120 @@ import ReactDOM from 'react-dom'
 
 class ComponentRegistry {
   constructor() {
-    this.components = new Map();
-    this.mountedComponents = new Set();
+    this.components = new Map()
+    this.mountedComponents = new Set()
   }
 
-  // Register a component with a name
   register(name, component) {
-    this.components.set(name, component);
-
-    // Also register with kebab-case for Rails compatibility
-    const kebabName = this.toKebabCase(name);
-    if (kebabName !== name) {
-      this.components.set(kebabName, component);
-    }
+    this.components.set(name, component)
+    const kebab = this.toKebabCase(name)
+    if (kebab !== name) this.components.set(kebab, component)
   }
 
-  // Register multiple components at once
   registerComponents(components) {
-    Object.entries(components).forEach(([name, component]) => {
-      this.register(name, component);
-    });
+    Object.entries(components).forEach(([name, comp]) => this.register(name, comp))
   }
 
-  // Get a component by name
   get(name) {
-    return this.components.get(name);
+    return this.components.get(name)
   }
 
-  // Mount all components on the page (namespaced to Playbook)
+  // Mount all PB components on the page (skip turbo-permanent regions)
   mountComponents() {
-    document.querySelectorAll('[data-pb-react-component]').forEach(element => {
-      const componentName = element.getAttribute('data-pb-react-component');
-      const component = this.get(componentName);
+    const nodes = document.querySelectorAll(
+      '[data-pb-react-component]:not([data-turbo-permanent] [data-pb-react-component])'
+    )
 
-      if (component && !this.mountedComponents.has(element)) {
-        this.mountComponent(element, component);
-      }
-    });
+    nodes.forEach((el) => {
+      if (this.mountedComponents.has(el)) return
+
+      const name = el.getAttribute('data-pb-react-component')
+      if (!name) return
+
+      const Comp = this.get(name)
+      if (!Comp) return
+
+      this.mountComponent(el, Comp)
+    })
   }
 
-  // Mount a specific component
-  mountComponent(element, component) {
-    if (this.mountedComponents.has(element)) {
-      return;
-    }
-
+  // Mount a specific element
+  mountComponent(el, Comp) {
+    if (this.mountedComponents.has(el)) return
     try {
-      const props = this.extractProps(element);
-      ReactDOM.render(React.createElement(component, props), element);
-      this.mountedComponents.add(element);
-    } catch (error) {
+      const props = this.extractProps(el)
+      ReactDOM.render(React.createElement(Comp, props), el)
+      this.mountedComponents.add(el)
+    } catch (err) {
       // eslint-disable-next-line no-console
-      console.error('Failed to mount component:', error);
+      console.error('[PB] Failed to mount component:', err)
     }
   }
 
-  // Unmount all components (skip if element already detached)
+  // Unmount everything we mounted
   unmountComponents() {
-    this.mountedComponents.forEach(element => {
-      if (!element.isConnected) return;
+    this.mountedComponents.forEach((el) => {
+      if (!el.isConnected) return
       try {
-        ReactDOM.unmountComponentAtNode(element);
+        ReactDOM.unmountComponentAtNode(el)
       } catch (_) {
-        // Ignore unmount errors
+        /* ignore */
       }
-    });
-    this.mountedComponents.clear();
+    })
+    this.mountedComponents.clear()
   }
 
-  // Extract props from data attributes (namespaced)
-  extractProps(element) {
-    const props = {};
 
-    const propsData = element.getAttribute('data-pb-react-props');
-    if (propsData) {
+  unmountWithin(rootEl) {
+    if (!rootEl) return
+    const toUnmount = []
+    this.mountedComponents.forEach((el) => {
+      if (rootEl.contains(el)) toUnmount.push(el)
+    })
+    toUnmount.forEach((el) => {
       try {
-        Object.assign(props, JSON.parse(propsData));
+        if (el.isConnected) ReactDOM.unmountComponentAtNode(el)
+      } catch (_) {
+        /* ignore */
+      }
+      this.mountedComponents.delete(el)
+    })
+  }
+
+  // Read props from data-pb-* attributes (JSON blob wins; individual attrs don’t override)
+  extractProps(el) {
+    const props = {}
+
+    const blob = el.getAttribute('data-pb-react-props')
+    if (blob) {
+      try {
+        Object.assign(props, JSON.parse(blob))
       } catch (e) {
         // eslint-disable-next-line no-console
-        console.warn('Failed to parse data-pb-react-props JSON:', e);
+        console.warn('[PB] Failed to parse data-pb-react-props JSON:', e)
       }
     }
 
-    // 2) Extract individual data-pb-* attributes (ignore control attrs)
-    Array.from(element.attributes).forEach(attr => {
-      const name = attr.name;
-      if (!name.startsWith('data-pb-')) return;
-      if (name === 'data-pb-react-component' || name === 'data-pb-react-props') return;
+    Array.from(el.attributes).forEach((attr) => {
+      const name = attr.name
+      if (!name.startsWith('data-pb-')) return
+      if (name === 'data-pb-react-component' || name === 'data-pb-react-props') return
+      const key = name.replace('data-pb-', '')
+      if (props[key] === undefined) props[key] = attr.value
+    })
 
-      const key = name.replace('data-pb-', '');
-      props[key] = attr.value;
-    });
-
-    return props;
+    return props
   }
 
-  // Convert PascalCase to kebab-case
   toKebabCase(str) {
     return str
       .replace(/([a-z])([A-Z])/g, '$1-$2')
       .replace(/([a-zA-Z])([0-9])/g, '$1-$2')
       .replace(/([0-9])([a-zA-Z])/g, '$1-$2')
-      .toLowerCase();
+      .toLowerCase()
   }
 }
 
-// Create global instance
 window.ComponentRegistry = window.ComponentRegistry || new ComponentRegistry();
 
 export default window.ComponentRegistry;

@@ -15,13 +15,22 @@ if (document.readyState === 'loading') {
   mountComponents()
 }
 
-// Also mount components when Turbo navigates
 document.addEventListener('turbo:load', mountComponents)
 document.addEventListener('turbo:render', mountComponents)
-document.addEventListener('turbo:before-render', unmountComponents, { capture: true })
 
-// For non-Turbo pages, also listen to page:load (if using Turbolinks)
+document.addEventListener('turbo:before-cache', unmountComponents)
+
+document.addEventListener(
+  'turbo:before-frame-render',
+  (e) => {
+    if (ComponentRegistry.unmountWithin) {
+      ComponentRegistry.unmountWithin(e.target)
+    }
+  },
+  { capture: true }
+)
+document.addEventListener('turbo:frame-render', mountComponents)
+
 document.addEventListener('page:load', mountComponents)
 
-// Export for manual mounting if needed
 export { mountComponents, unmountComponents }

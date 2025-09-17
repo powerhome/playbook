@@ -328,6 +328,7 @@ const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>((pr
 
   // Handle click on input wrapper(entire div with pills, typeahead, etc) so it doesn't close when input or form pill is clicked
   const handleInputWrapperClick = (e: any) => {
+  console.log("test", inputId, e.target.id)
   if (disabled) return
   // ignore clicks that originated from the input or pills
   if (e.target.id === inputId || e.target.classList?.contains('pb_form_pill_tag')) return
