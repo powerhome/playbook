@@ -91,6 +91,7 @@
 <%= pb_form_with(scope: :example, url: "", method: :get) do |form| %>
   <%= form.typeahead :example_typeahead, props: { data: { typeahead_example1: true, user: {} }, label: true, placeholder: "Search for a user" } %>
   <%= form.text_field :example_text_field, props: { label: true } %>
+  <%= form.text_field :example_text_field_2, props: { label: "Text Field Custom Label" } %>
   <%= form.phone_number_field :example_phone_number_field, props: { label: "Example phone field", hidden_inputs: true } %>
   <%= form.email_field :example_email_field, props: { label: true } %>
   <%= form.number_field :example_number_field, props: { label: true } %>

@@ -1,0 +1,1 @@
+Custom data colors allow for color customization to match the needs of business requirements. To accomplish this, you can use hex values.
