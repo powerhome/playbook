@@ -12,24 +12,46 @@ export default class PbMultiLevelSelect extends PbEnhancedElement {
   }
 
   connect() {
+    this.justBlurred = false;
     this.addEventListeners();
     this.observeHiddenInputs();
     this.observeRogueErrorInsideInnerContainer();
   }
 
+  disconnect() {
+    if (this.inputElement && this.onInvalid) {
+      this.inputElement.removeEventListener("invalid", this.onInvalid);
+    }
+    if (this.inputElement && this.onBlur) {
+      this.inputElement.removeEventListener("blur", this.onBlur);
+    }
+    if (this.mutationObserver) {
+      this.mutationObserver.disconnect();
+    }
+    if (this.rogueErrorObserver) {
+      this.rogueErrorObserver.disconnect();
+    }
+  }
+
   addEventListeners() {
     const inputElement = this.element.querySelector("input");
+    if (!inputElement) return;
 
-    inputElement.addEventListener("invalid", () => {
+    this.inputElement = inputElement;
+
+    this.onInvalid = () => {
       this.handleErrorLabel(300);
-    });
-    inputElement.addEventListener("blur", () => {
-      this.justBlurred = true;
+    };
 
+    this.onBlur = () => {
+      this.justBlurred = true;
       setTimeout(() => {
         this.justBlurred = false;
       }, 300);
-    });
+    };
+
+    inputElement.addEventListener("invalid", this.onInvalid);
+    inputElement.addEventListener("blur", this.onBlur);
   }
 
   handleErrorLabel(delay) {
@@ -37,15 +59,13 @@ export default class PbMultiLevelSelect extends PbEnhancedElement {
       const errorLabelElement = this.target;
       const wrapper = this.element.querySelector(".wrapper");
 
-      if (errorLabelElement) {
-        errorLabelElement.remove();
-        if (wrapper) {
-          if (wrapper.querySelector(".pb_body_kit_negative")) {
-            wrapper.querySelector(".pb_body_kit_negative").remove();
-          }
-          wrapper.appendChild(errorLabelElement);
-        }
+      if (errorLabelElement && wrapper) {
         this.element.classList.add("error");
+        if (!wrapper.querySelector("[data-pb-error-clone]")) {
+          const clone = errorLabelElement.cloneNode(true);
+          clone.setAttribute("data-pb-error-clone", "true");
+          wrapper.appendChild(clone);
+        }
       } else {
         this.handleErrorLabel(100);
       }
@@ -59,7 +79,6 @@ export default class PbMultiLevelSelect extends PbEnhancedElement {
     this.mutationObserver = new MutationObserver(() => {
       const hiddenInputs = container.querySelectorAll('input[type="hidden"]');
       if (hiddenInputs.length > 0) {
-        // At least one hidden input exists, so clear the error
         this.clearError();
       }
     });
@@ -71,6 +90,7 @@ export default class PbMultiLevelSelect extends PbEnhancedElement {
 
   observeRogueErrorInsideInnerContainer() {
     const container = this.element.querySelector(".input_inner_container");
+    if (!container) return;
 
     this.rogueErrorObserver = new MutationObserver((mutations) => {
       for (const mutation of mutations) {
@@ -79,7 +99,7 @@ export default class PbMultiLevelSelect extends PbEnhancedElement {
             node.nodeType === Node.ELEMENT_NODE &&
             node.classList.contains("pb_body_kit_negative")
           ) {
-            if (this.justBlurred) {
+            if (this.justBlurred && node.hasAttribute("data-pb-error-clone")) {
               node.remove();
             }
           }
@@ -94,12 +114,17 @@ export default class PbMultiLevelSelect extends PbEnhancedElement {
   }
 
   clearError(e) {
-    const errorLabelElement = this.target;
+    const wrapper = this.element.querySelector(".wrapper");
+    if (wrapper) {
+      wrapper.querySelectorAll("[data-pb-error-clone]").forEach((n) => n.remove());
+    }
+    this.element.classList.remove("error");
 
-    if (errorLabelElement) {
-      errorLabelElement.remove();
-      this.element.classList.remove("error");
-      this.element.querySelector("input").value = e.detail.value;
+    const input = this.element.querySelector("input");
+    const newVal = e && e.detail ? e.detail.value : undefined;
+    if (input && newVal != null) {
+      input.value = newVal;
+      input.dispatchEvent(new Event("input", { bubbles: true }));
     }
   }
 }
