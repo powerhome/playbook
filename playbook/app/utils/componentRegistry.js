@@ -1,6 +1,8 @@
 // This is a custom component registry to replace Webpacker React
 // NOTE: When we go to React 18, we will need to update this to use createRoot instead of render.
 // Namespaced to Playbook's data-pb-react-* attributes to avoid conflicts with other React usage on the page.
+// Sister file exists in playbook-website. Any changes here should be reflected there.
+
 import React from 'react'
 import ReactDOM from 'react-dom'
 
@@ -25,7 +27,7 @@ class ComponentRegistry {
     return this.components.get(name)
   }
 
-  // Mount all PB components on the page (skip turbo-permanent regions)
+  // Mount all PB components on the page
 mountComponents(root = document) {
     const nodes = root.querySelectorAll('[data-pb-react-component]')
     nodes.forEach((el) => {

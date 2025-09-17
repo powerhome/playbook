@@ -1,4 +1,6 @@
 // This is a component mounting script to replace Webpacker React mounting
+// This covers turbo page loads, frame loads, and DOM changes
+// Sister file exists in playbook-website. Any changes here should be reflected there.
 import ComponentRegistry from './componentRegistry'
 
 function mountComponents(root) {
@@ -15,14 +17,11 @@ if (document.readyState === 'loading') {
   mountComponents()
 }
 
-// Page-level mounts
 document.addEventListener('turbo:load', () => mountComponents())
 document.addEventListener('turbo:render', () => mountComponents())
 
-// Only unmount page-wide on actual nav cache
 document.addEventListener('turbo:before-cache', unmountComponents)
 
-// Frame-level: unmount/mount just the affected frame
 document.addEventListener(
   'turbo:before-frame-render',
   (e) => {
@@ -34,7 +33,6 @@ document.addEventListener('turbo:frame-render', (e) => {
   mountComponents(e.target)
 })
 
-// Fallback for older Turbo where frame-load fires
 document.addEventListener('turbo:frame-load', (e) => {
   mountComponents(e.target)
 })
