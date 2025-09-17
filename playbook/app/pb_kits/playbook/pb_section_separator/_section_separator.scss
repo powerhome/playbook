@@ -53,10 +53,13 @@ $section_colors_dark: (
 .pb_section_separator_vertical {
   margin-left: $space_xs;
   margin-right: $space_xs;
+  flex-direction: column;
   &::before {
-    display: none;
+    flex: 1;
+    @include section_separator_vertical(false);
   }
   &::after {
+    flex: 1;
     @include section_separator_vertical(false);
   }
 }
@@ -87,7 +90,7 @@ $section_colors_dark: (
         background: none;
       }
       &.pb_section_separator_vertical {
-        &::after {
+        &::before, &::after {
           border: 1px dashed $color_value;
           background: none;
         }
@@ -106,7 +109,7 @@ $section_colors_dark: (
   }
   
   &.pb_section_separator_vertical {
-    &::after {
+    &::before, &::after {
       @include section_separator_vertical(true);
     }
   }
@@ -114,6 +117,11 @@ $section_colors_dark: (
   &.pb_section_separator_dashed {
     &::before, &::after {
       @include section_separator_dashed(true);
+    }
+    &.pb_section_separator_vertical {
+      &::before, &::after {
+        @include section_separator_dashed(true);
+      }
     }
   }
 }
@@ -126,7 +134,7 @@ $section_colors_dark: (
     }
 
     &.pb_section_separator_vertical {
-      &::after {
+      &::before, &::after {
         @include section_separator_vertical(false);
         background: $color_value;
       }
@@ -138,7 +146,7 @@ $section_colors_dark: (
         background: none;
       }
       &.pb_section_separator_vertical {
-        &::after {
+        &::before, &::after {
           border: 1px dashed $color_value;
           background: none;
         }

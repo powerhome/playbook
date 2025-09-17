@@ -12,3 +12,26 @@
         }) %>
     <% end %>
 <% end %>
+
+<%= pb_rails("flex", props: { classname: "flex-container", margin_top: "lg", vertical: "stretch" }) do %>
+    <%= pb_rails("body", props: { classname: "flex-item" }) do %>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua
+    <% end %>
+    <%= pb_rails("section_separator", props: { orientation: "vertical" }) do %>
+        <%= pb_rails("card", props: {
+            border_radius: "rounded",
+            justify_content: "center",
+            padding: "none"
+        })  do %>
+            <%= pb_rails("caption", props: {
+                text: "TODAY",
+                size: "xs",
+                padding_left: "xs",
+                padding_right: "xs" 
+            }) %>
+        <% end %>
+    <% end %>
+    <%= pb_rails("body", props: { classname: "flex-item" }) do %>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua
+    <% end %>
+<% end %>
