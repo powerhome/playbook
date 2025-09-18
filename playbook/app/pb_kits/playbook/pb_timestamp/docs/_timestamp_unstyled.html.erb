@@ -2,8 +2,6 @@
 
 <%= pb_rails("timestamp", props: {
   timestamp: DateTime.now,
-  show_date: true,
-  align: "left",
   unstyled: true,
 }) %>
 
@@ -14,8 +12,6 @@
 <%= pb_rails("title", props: { size: 1 }) do %>
   <%= pb_rails("timestamp", props: {
     timestamp: DateTime.now,
-    show_date: true,
-    align: "left",
     unstyled: true,
   }) %>
 <% end %>

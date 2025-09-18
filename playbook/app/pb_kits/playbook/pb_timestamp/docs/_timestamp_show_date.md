@@ -1,0 +1,1 @@
+The `showDate`/`show_date` prop is set to true by default but can be set to false to hide the date.

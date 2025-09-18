@@ -25,7 +25,6 @@ const TimestampAlign = (props) => {
 
       <Timestamp
           align="left"
-          showDate
           timestamp={todaysDate}
           {...props}
       />
@@ -34,7 +33,6 @@ const TimestampAlign = (props) => {
 
       <Timestamp
           align="left"
-          showDate
           timestamp={futureDate}
           {...props}
       />
@@ -43,7 +41,6 @@ const TimestampAlign = (props) => {
 
       <Timestamp
           align="left"
-          showDate
           timestamp={pastDate}
           {...props}
       />
@@ -62,7 +59,6 @@ const TimestampAlign = (props) => {
 
       <Timestamp
           align="center"
-          showDate
           timestamp={todaysDate}
           {...props}
       />
@@ -71,7 +67,6 @@ const TimestampAlign = (props) => {
 
       <Timestamp
           align="center"
-          showDate
           timestamp={futureDate}
           {...props}
       />
@@ -80,7 +75,6 @@ const TimestampAlign = (props) => {
 
       <Timestamp
           align="center"
-          showDate
           timestamp={pastDate}
           {...props}
       />
@@ -99,7 +93,6 @@ const TimestampAlign = (props) => {
 
       <Timestamp
           align="right"
-          showDate
           timestamp={todaysDate}
           {...props}
       />
@@ -108,7 +101,6 @@ const TimestampAlign = (props) => {
 
       <Timestamp
           align="right"
-          showDate
           timestamp={futureDate}
           {...props}
       />
@@ -117,7 +109,6 @@ const TimestampAlign = (props) => {
 
       <Timestamp
           align="right"
-          showDate
           timestamp={pastDate}
           {...props}
       />

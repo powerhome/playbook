@@ -1,0 +1,18 @@
+<%= pb_rails("timestamp", props: {
+  timestamp: DateTime.now,
+  show_time: false,
+}) %>
+
+<br>
+
+<%= pb_rails("timestamp", props: {
+  timestamp: DateTime.now + 4.years,
+  show_time: false,
+}) %>
+
+<br>
+
+<%= pb_rails("timestamp", props: {
+  timestamp: DateTime.now - 1.year,
+  show_time: false
+}) %>

@@ -1,0 +1,1 @@
+The `updated` variant can also be used in conjunction with the `showTime`/`show_time` prop. This prop is set to true by default but can be set to false to hide the time. This can also be used in conjunction with `showCurrentYear`/`show_current_year` to show the year even if it is the current year.

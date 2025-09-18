@@ -23,7 +23,6 @@ const TimestampElapsed = (props) => {
       <br />
 
       <Timestamp
-          showUser={false}
           timestamp={customDate}
           variant="elapsed"
           {...props}
@@ -33,7 +32,6 @@ const TimestampElapsed = (props) => {
 
       <Timestamp
           hideUpdated
-          showUser={false}
           timestamp={customDate}
           variant="elapsed"
           {...props}

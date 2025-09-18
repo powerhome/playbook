@@ -102,7 +102,6 @@ describe("Timestamp Kit", () => {
     render(
       <Timestamp
           data={{ testid: testId }}
-          showDate={false}
           showUser
           text="Maricris Nonato"
           timestamp={new Date()}
@@ -112,7 +111,7 @@ describe("Timestamp Kit", () => {
     const kit = screen.getByTestId(testId);
     const text = kit.querySelector(".pb_caption_kit_xs");
     expect(text.textContent).toEqual(
-      "Last updated  by Maricris Nonato on Jan 1 at 12:00a"
+      "Last updated by Maricris Nonato on Jan 1 at 12:00a"
     );
   });
 
@@ -120,14 +119,13 @@ describe("Timestamp Kit", () => {
     render(
       <Timestamp
           data={{ testid: testId }}
-          showDate={false}
           timestamp={new Date()}
           variant="updated"
       />
     );
     const kit = screen.getByTestId(testId);
     const text = kit.querySelector(".pb_caption_kit_xs");
-    expect(text.textContent).toEqual("Last updated  on Jan 1 at 12:00a");
+    expect(text.textContent).toEqual("Last updated on Jan 1 at 12:00a");
   });
 
   test("renders Timestamp elapsed variant with user", () => {
@@ -162,3 +160,70 @@ describe("Timestamp Kit", () => {
     expect(text.textContent).toEqual("  a few seconds ago");
   });
 });
+
+  test("default variant: time only when showDate=false", () => {
+    render(
+      <Timestamp
+          data={{ testid: testId }}
+          showDate={false}
+          showTime
+          timestamp={new Date()}
+      />
+    )
+    const text = screen.getByTestId(testId).querySelector(".pb_caption_kit_xs")
+    expect(text?.textContent).toEqual("12:00a")
+  })
+
+  test("default variant: date only when showTime=false (no year for current year)", () => {
+    render(
+      <Timestamp
+          data={{ testid: testId }}
+          showTime={false}
+          timestamp={new Date()}
+      />
+    )
+    const text = screen.getByTestId(testId).querySelector(".pb_caption_kit_xs")
+    expect(text?.textContent).toEqual("Jan 1")
+  })
+
+  test("default variant: date only with showCurrentYear=true forces year", () => {
+    render(
+      <Timestamp
+          data={{ testid: testId }}
+          showCurrentYear
+          showTime={false}
+          timestamp={new Date()}
+      />
+    )
+    const text = screen.getByTestId(testId).querySelector(".pb_caption_kit_xs")
+    expect(text?.textContent).toEqual("Jan 1, 2020")
+  })
+
+  test('updated variant: "by user" + date only when showDate=true and showTime=false', () => {
+    render(
+      <Timestamp
+          data={{ testid: testId }}
+          showTime={false}
+          showUser
+          text="Maricris Nonato"
+          timestamp={new Date()}
+          variant="updated"
+      />
+    )
+    const text = screen.getByTestId(testId).querySelector(".pb_caption_kit_xs")
+    expect(text?.textContent).toEqual("Last updated by Maricris Nonato on Jan 1")
+  })
+
+  test('updated variant: "at time" only when showDate=false and showTime=true', () => {
+    render(
+      <Timestamp
+          data={{ testid: testId }}
+          showDate={false}
+          timestamp={new Date()}
+          variant="updated"
+      />
+    )
+    const text = screen.getByTestId(testId).querySelector(".pb_caption_kit_xs")
+    expect(text?.textContent).toEqual("Last updated at 12:00a")
+  })
+

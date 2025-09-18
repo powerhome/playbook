@@ -1,0 +1,1 @@
+The `updated` variant can also be used in conjunction with the `showCurrentYear`/`show_current_year` prop to show the year even if it is the current year. 
