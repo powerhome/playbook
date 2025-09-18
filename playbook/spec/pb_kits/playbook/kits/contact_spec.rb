@@ -26,6 +26,7 @@ RSpec.describe Playbook::PbContact::Contact do
       expect(subject.new(contact_type: "wrong-phone").contact_icon).to eq "phone-slash"
       expect(subject.new(contact_type: "intentionally-wrong-type").contact_icon).to eq "phone"
       expect(subject.new(contact_type: "extension").contact_icon).to eq "phone-plus"
+      expect(subject.new(contact_type: "international").contact_icon).to eq "globe"
       expect(subject.new(contact_type: "").contact_icon).to eq "phone"
     end
   end
