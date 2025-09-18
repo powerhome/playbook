@@ -14,6 +14,8 @@ module Playbook
                     default: "left"
       prop :hide_updated, type: Playbook::Props::Boolean,
                           default: false
+      prop :show_current_year, type: Playbook::Props::Boolean,
+                               default: false
       prop :show_date, type: Playbook::Props::Boolean,
                        default: true
       prop :show_time, type: Playbook::Props::Boolean,
@@ -67,7 +69,7 @@ module Playbook
     private
 
       def format_year_string
-        pb_date_time.to_year != DateTime.now.year.to_s ? ", #{pb_date_time.to_year}" : ""
+        pb_date_time.to_year != DateTime.now.year.to_s || show_current_year ? ", #{pb_date_time.to_year}" : ""
       end
 
       def format_time_string

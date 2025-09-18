@@ -4,8 +4,9 @@ examples:
   - timestamp_default: Default
   - timestamp_show_date: Hide Date
   - timestamp_show_time: Hide Time
+  - timestamp_show_current_year: Show Current Year
+  - timestamp_timezones: Show Timezones
   - timestamp_align: Alignments
-  - timestamp_timezones: Timezones
   - timestamp_updated: Last Updated by
   - timestamp_elapsed: Time Ago
   - timestamp_unstyled: Unstyled
@@ -14,8 +15,9 @@ examples:
   - timestamp_default: Default
   - timestamp_show_date: Hide Date
   - timestamp_show_time: Hide Time
+  - timestamp_show_current_year: Show Current Year
+  - timestamp_timezones: Show Timezones
   - timestamp_align: Alignments
-  - timestamp_timezones: Timezones
   - timestamp_updated: Last Updated by
   - timestamp_elapsed: Time Ago
   - timestamp_unstyled: Unstyled

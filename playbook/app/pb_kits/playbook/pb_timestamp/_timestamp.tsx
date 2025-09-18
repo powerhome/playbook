@@ -18,6 +18,7 @@ type TimestampProps = {
   timezone: string,
   htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
+  showCurrentYear?: boolean,
   showDate?: boolean,
   showUser?: boolean,
   hideUpdated?: boolean,
@@ -38,6 +39,7 @@ const Timestamp = (props: TimestampProps): React.ReactElement => {
     text,
     timezone,
     timestamp,
+    showCurrentYear = false,
     showDate = true,
     showUser = false,
     hideUpdated = false,
@@ -74,7 +76,7 @@ const Timestamp = (props: TimestampProps): React.ReactElement => {
 
   const baseDateDisplay = () => {
   let display = `${DateTime.toMonth(timestamp, timezone)} ${DateTime.toDay(timestamp, timezone)}`
-  if (DateTime.toYear(timestamp, timezone).toString() !== currentYear) {
+  if (DateTime.toYear(timestamp, timezone).toString() !== currentYear || showCurrentYear) {
     display = `${display}, ${DateTime.toYear(timestamp, timezone)}`
   }
   return display

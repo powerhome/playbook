@@ -15,7 +15,6 @@ const TimestampTimezones = (props) => {
   return (
     <div>
       <Timestamp
-          align="left"
           showDate={false}
           showTimezone
           timestamp={todaysDate}
@@ -26,8 +25,6 @@ const TimestampTimezones = (props) => {
       <br />
 
       <Timestamp
-          align="left"
-          showDate
           showTimezone
           timestamp={todaysDate}
           timezone="America/New_York"
@@ -37,8 +34,6 @@ const TimestampTimezones = (props) => {
       <br />
 
       <Timestamp
-          align="left"
-          showDate
           showTimezone
           timestamp={futureDate}
           timezone="America/New_York"
@@ -48,8 +43,6 @@ const TimestampTimezones = (props) => {
       <br />
 
       <Timestamp
-          align="left"
-          showDate
           showTimezone
           timestamp={pastDate}
           timezone="America/New_York"
@@ -59,7 +52,6 @@ const TimestampTimezones = (props) => {
       <br />
 
       <Timestamp
-          align="left"
           showDate={false}
           showTimezone
           timestamp={todaysDate}
@@ -70,8 +62,6 @@ const TimestampTimezones = (props) => {
       <br />
 
       <Timestamp
-          align="left"
-          showDate
           showTimezone
           timestamp={todaysDate}
           timezone="Asia/Hong_Kong"
@@ -81,8 +71,6 @@ const TimestampTimezones = (props) => {
       <br />
 
       <Timestamp
-          align="left"
-          showDate
           showTimezone
           timestamp={futureDate}
           timezone="Asia/Hong_Kong"
@@ -92,8 +80,6 @@ const TimestampTimezones = (props) => {
       <br />
 
       <Timestamp
-          align="left"
-          showDate
           showTimezone
           timestamp={pastDate}
           timezone="Asia/Hong_Kong"
