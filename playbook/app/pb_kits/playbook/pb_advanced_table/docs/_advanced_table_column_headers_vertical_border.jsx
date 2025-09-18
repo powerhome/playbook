@@ -47,7 +47,6 @@ const AdvancedTableColumnHeadersVerticalBorder = (props) => {
   ];
 
   const tableProps = {
-    container: false,
     verticalBorder: true
   }
 // Adjusted for testing purposes. Will revert prior to commit.

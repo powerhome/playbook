@@ -1048,7 +1048,7 @@
   }
 
   // Support column group border colors
-  &.pb_advanced_table[class*="column-group-border-"] .pb_table.vertical-border {
+  &.pb_advanced_table[class*="column-group-border-"] {
     .pb_advanced_table_body .last-cell:not(:last-child),
     .pb_advanced_table_header .last-header-cell:not(:last-child) {
       border-right: 1px solid var(--column-border-color) !important;
