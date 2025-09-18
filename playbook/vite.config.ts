@@ -58,7 +58,6 @@ export default defineConfig({
         'react-is',
         'trix',
         'react-trix',
-        'webpacker-react',
         'tiptap/react',
       ],
     },

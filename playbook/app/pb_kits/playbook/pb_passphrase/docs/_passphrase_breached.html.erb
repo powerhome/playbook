@@ -4,8 +4,8 @@
 
 <%= pb_rails("caption", props: { size: 'xs', text: "hello", id: "caption_breached" }) %>
 
-<%= javascript_tag do %>
-    window.addEventListener("DOMContentLoaded", () => {
+<script>
+    window.addEventListener("load", () => {
 
     // variables for the kits you are targeting 
     const passphrase = document.querySelector(".passphrase_breached").querySelector("input")
@@ -142,4 +142,4 @@
     });
 
   })
-<% end %>
+</script>

@@ -10,8 +10,8 @@
 <%= pb_rails("caption", props: { size: 'xs', text: "hello", id: "caption_common" }) %>
 
 
-<%= javascript_tag do %>
-    window.addEventListener("DOMContentLoaded", () => {
+<script>
+    window.addEventListener("load", () => {
 
     const commonText = document.querySelector("#body_common")
 
@@ -133,4 +133,4 @@
     });
 
   })
-<% end %>
+</script>
