@@ -2,6 +2,8 @@ examples:
 
   rails:
   - timestamp_default: Default
+  - timestamp_show_date: Hide Date
+  - timestamp_show_time: Hide Time
   - timestamp_align: Alignments
   - timestamp_timezones: Timezones
   - timestamp_updated: Last Updated by
@@ -10,6 +12,8 @@ examples:
 
   react:
   - timestamp_default: Default
+  - timestamp_show_date: Hide Date
+  - timestamp_show_time: Hide Time
   - timestamp_align: Alignments
   - timestamp_timezones: Timezones
   - timestamp_updated: Last Updated by

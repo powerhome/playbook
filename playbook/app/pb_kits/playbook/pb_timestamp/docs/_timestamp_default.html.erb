@@ -1,29 +1,15 @@
 <%= pb_rails("timestamp", props: {
-  timestamp: DateTime.now,
-  show_date: false,
-  align: "left"
+  timestamp: DateTime.now
 }) %>
 
 <br>
 
 <%= pb_rails("timestamp", props: {
-  timestamp: DateTime.now,
-  show_date: true,
-  align: "left"
+  timestamp: DateTime.now + 4.years
 }) %>
 
 <br>
 
 <%= pb_rails("timestamp", props: {
-  timestamp: DateTime.now + 4.years,
-  show_date: true,
-  align: "left"
-}) %>
-
-<br>
-
-<%= pb_rails("timestamp", props: {
-  timestamp: DateTime.now - 1.year,
-  show_date: true,
-  align: "left"
+  timestamp: DateTime.now - 1.year
 }) %>

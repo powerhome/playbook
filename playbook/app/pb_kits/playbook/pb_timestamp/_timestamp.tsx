@@ -21,6 +21,7 @@ type TimestampProps = {
   showDate?: boolean,
   showUser?: boolean,
   hideUpdated?: boolean,
+  showTime?: boolean,
   showTimezone?: boolean,
   unstyled?: boolean,
   variant?: "default" | "elapsed" | "updated"
@@ -40,6 +41,7 @@ const Timestamp = (props: TimestampProps): React.ReactElement => {
     showDate = true,
     showUser = false,
     hideUpdated = false,
+    showTime = true,
     showTimezone = false,
     unstyled = false,
     variant = 'default',
@@ -70,12 +72,17 @@ const Timestamp = (props: TimestampProps): React.ReactElement => {
     return timeDisplay
   }
 
+  const baseDateDisplay = () => {
+  let display = `${DateTime.toMonth(timestamp, timezone)} ${DateTime.toDay(timestamp, timezone)}`
+  if (DateTime.toYear(timestamp, timezone).toString() !== currentYear) {
+    display = `${display}, ${DateTime.toYear(timestamp, timezone)}`
+  }
+  return display
+}
+
   const fullDateDisplay = () => {
-    let fullDisplay = `${DateTime.toMonth(timestamp, timezone)} ${DateTime.toDay(timestamp, timezone)}`
-    if (DateTime.toYear(timestamp, timezone).toString() !== currentYear) {
-      fullDisplay = `${fullDisplay}, ${DateTime.toYear(timestamp, timezone)}`
-    }
-    return `${fullDisplay} ${' \u00b7 '} ${fullTimeDisplay()}`
+    const fullDisplay = baseDateDisplay()
+    return showTime ? `${fullDisplay} ${' \u00b7 '} ${fullTimeDisplay()}` : fullDisplay
   }
 
   const formatUpdatedString = () => {
@@ -93,7 +100,10 @@ const Timestamp = (props: TimestampProps): React.ReactElement => {
     case 'elapsed':
       return formatElapsedString()
     default:
-      return showDate ? timestamp ? fullDateDisplay() : text : fullTimeDisplay()
+      if (showDate && showTime) return timestamp ? fullDateDisplay() : text
+      if (showDate && !showTime) return baseDateDisplay()
+      if (!showDate && showTime) return fullTimeDisplay()
+      return text
     }
   }
 

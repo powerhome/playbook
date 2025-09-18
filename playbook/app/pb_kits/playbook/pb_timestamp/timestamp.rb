@@ -16,6 +16,8 @@ module Playbook
                           default: false
       prop :show_date, type: Playbook::Props::Boolean,
                        default: true
+      prop :show_time, type: Playbook::Props::Boolean,
+                       default: true
       prop :show_timezone, type: Playbook::Props::Boolean,
                            default: false
       prop :show_user, type: Playbook::Props::Boolean,
@@ -50,7 +52,15 @@ module Playbook
         when "elapsed"
           format_elapsed_string
         else
-          show_date ? datetime_or_text : format_time_string
+          if show_date && show_time
+            datetime_or_text
+          elsif show_date && !show_time
+            timestamp ? format_date_string : text
+          elsif !show_date && show_time
+            format_time_string
+          else
+            text
+          end
         end
       end
 
@@ -73,7 +83,11 @@ module Playbook
       end
 
       def format_datetime_string
-        "#{format_date_string} &middot; #{format_time_string}".html_safe
+        if show_time
+          "#{format_date_string} &middot; #{format_time_string}".html_safe
+        else
+          format_date_string
+        end
       end
 
       def format_updated_string

@@ -1,0 +1,1 @@
+By default, the timestamp kit will display the date and time as shown here. If the date is NOT within the current year, the year will also be shown while dates in the current year will not show the year. 
