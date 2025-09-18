@@ -13,8 +13,8 @@
 <script>
   document.addEventListener('DOMContentLoaded', () => {
     function handleButtonClick() {
-      const editorContainer = [...document.querySelectorAll('[data-react-props]')]
-        .find(element => element.getAttribute('data-react-props')?.includes('"id":"content-preview-editor"'))
+      const editorContainer = [...document.querySelectorAll('[data-pb-react-props]')]
+        .find(element => element.getAttribute('data-pb-react-props')?.includes('"id":"content-preview-editor"'))
 
       const editorElement = editorContainer?.querySelector('trix-editor')
       const inputId = editorElement?.getAttribute('input')

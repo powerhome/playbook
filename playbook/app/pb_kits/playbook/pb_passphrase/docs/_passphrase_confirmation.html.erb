@@ -4,8 +4,8 @@
 
 <div id="match"> </div>
 
-<%= javascript_tag do %>
-    window.addEventListener("DOMContentLoaded", () => {   
+<script>
+    window.addEventListener("load", () => {   
 
       const useState = (defaultValue) => {
           let value = defaultValue;
@@ -48,4 +48,4 @@
 
       }
     })
-<% end %>
+</script>
