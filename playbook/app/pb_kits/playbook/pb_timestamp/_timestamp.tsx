@@ -59,7 +59,6 @@ const Timestamp = (props: TimestampProps): React.ReactElement => {
   )
 
   const currentYear = new Date().getFullYear().toString()
-  const dateDisplay = `${DateTime.toMonth(timestamp, timezone)} ${DateTime.toDay(timestamp, timezone)}`
   const shouldShowUser = showUser == true && text.length > 0
   const shouldShowTimezone = showTimezone == true && timezone.length > 0
   const updatedText = hideUpdated ? "" : "Last updated"
@@ -90,8 +89,8 @@ const Timestamp = (props: TimestampProps): React.ReactElement => {
   const formatUpdatedString = () => {
     const finalUpdatedString = []
     if (shouldShowUser) finalUpdatedString.push(`by ${text}`)
-    if (showDate && !showTime) finalUpdatedString.push(`${baseDateDisplay()}`)
-    if (showDate && showTime) finalUpdatedString.push(`${baseDateDisplay()} at ${timeDisplay}`)
+    if (showDate && !showTime) finalUpdatedString.push(`on ${baseDateDisplay()}`)
+    if (showDate && showTime) finalUpdatedString.push(`on ${baseDateDisplay()} at ${timeDisplay}`)
     if (showTime && !showDate) finalUpdatedString.push(`at ${timeDisplay}`)
     return `Last updated ${finalUpdatedString.join(' ')}`
   }
