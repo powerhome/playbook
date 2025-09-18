@@ -88,7 +88,12 @@ const Timestamp = (props: TimestampProps): React.ReactElement => {
   }
 
   const formatUpdatedString = () => {
-    return `Last updated ${userDisplay} on ${dateDisplay} at ${timeDisplay}`
+    const finalUpdatedString = []
+    if (shouldShowUser) finalUpdatedString.push(`by ${text}`)
+    if (showDate && !showTime) finalUpdatedString.push(`${baseDateDisplay()}`)
+    if (showDate && showTime) finalUpdatedString.push(`${baseDateDisplay()} at ${timeDisplay}`)
+    if (showTime && !showDate) finalUpdatedString.push(`at ${timeDisplay}`)
+    return `Last updated ${finalUpdatedString.join(' ')}`
   }
 
   const formatElapsedString = () => {
