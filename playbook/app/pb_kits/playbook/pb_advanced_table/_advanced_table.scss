@@ -1042,23 +1042,21 @@
     &.dark {
       .pb_advanced_table_body .last-cell:not(:last-child),
       .pb_advanced_table_header .last-header-cell:not(:last-child) {
-        box-shadow: none !important;
         border-right: 1px solid $border_dark !important;
       }
     }
+  }
 
-    // Support border colors
-    &.pb_advanced_table[class*="column-group-border-"] {
-      .pb_advanced_table_body .last-cell:not(:last-child),
-      .pb_advanced_table_header .last-header-cell:not(:last-child) {
-        box-shadow: none !important;
-        border-right: 1px solid var(--column-border-color) !important;
-      }
+  // Support column group border colors
+  &.pb_advanced_table[class*="column-group-border-"] .pb_table.vertical-border {
+    .pb_advanced_table_body .last-cell:not(:last-child),
+    .pb_advanced_table_header .last-header-cell:not(:last-child) {
+      border-right: 1px solid var(--column-border-color) !important;
     }
   }
 }
 
-//  Removes borders when Wrapped inside the Card Kit
+// Removes bottom borders when wrapped inside the Card Kit (keep existing behavior)
 .pb_card_kit > .pb_advanced_table tr:last-child,
 .pb_card_kit > .pb_advanced_table .last-row-cell {
   td {
