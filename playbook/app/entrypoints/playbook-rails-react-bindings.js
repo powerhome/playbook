@@ -14,6 +14,8 @@ import Passphrase from 'kits/pb_passphrase/_passphrase'
 import RichTextEditor from 'kits/pb_rich_text_editor/_rich_text_editor'
 import Typeahead from 'kits/pb_typeahead/_typeahead'
 import PhoneNumberInput from 'kits/pb_phone_number_input/_phone_number_input'
+import PbBarGraph from 'kits/pb_pb_bar_graph/_pb_bar_graph'
+import PbCircleChart from 'kits/pb_pb_circle_chart/_pb_circle_chart'
 
 ComponentRegistry.registerComponents({
   BarGraph,
@@ -26,7 +28,9 @@ ComponentRegistry.registerComponents({
   RichTextEditor,
   Typeahead,
   Gauge,
-  PhoneNumberInput
+  PhoneNumberInput,
+  PbBarGraph,
+  PbCircleChart,
 })
 
 //export mount/unmount functions for use if needed
