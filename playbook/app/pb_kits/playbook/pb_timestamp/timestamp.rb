@@ -96,9 +96,9 @@ module Playbook
         final_updated_string = []
         final_updated_string << "by #{text}" if show_user && text.present?
         if show_date && !show_time
-          final_updated_string << format_date_string
+          final_updated_string << "on #{format_date_string}"
         elsif show_date && show_time
-          final_updated_string << "#{format_date_string} at #{format_time_string}"
+          final_updated_string << "on #{format_date_string} at #{format_time_string}"
         elsif show_time && !show_date
           final_updated_string << "at #{format_time_string}"
         end
