@@ -20,7 +20,7 @@
 // Dark mode
 .pb_card_kit.dark {
   @include pb_card_dark;
-  
+
   &.pb_card_kit_selected {
     @include pb_card_selected_dark;
   }
@@ -33,7 +33,8 @@
 
 // Highlight styles
 .pb_card_kit_highlight_top,
-.pb_card_kit_highlight_side {
+.pb_card_kit_highlight_side,
+.pb_card_kit_highlight_right_side {
   overflow: hidden;
 }
 
@@ -52,10 +53,17 @@
   }
 }
 
-// Highlight side variants  
+// Highlight side variants
 @each $color_name, $color_value in $pb_card_highlight_colors {
   .pb_card_kit_highlight_side.pb_card_kit_highlight_#{$color_name}::before {
     @include pb_card_highlight($pb_card_highlight_size, 100%, $color_value);
+  }
+}
+
+// Highlight side right variants
+@each $color_name, $color_value in $pb_card_highlight_colors {
+  .pb_card_kit_highlight_right_side.pb_card_kit_highlight_#{$color_name}::before {
+    @include pb_card_right_highlight($pb_card_highlight_size, 100%, $color_value);
   }
 }
 
@@ -68,7 +76,7 @@
   padding: $space_sm;
   border: 0;
   border-radius: $pb_card_header_border_radius $pb_card_header_border_radius 0px 0px;
-  
+
   // Inherit border radius from parent card
   .pb_card_kit_border_radius_xs & {
     border-radius: $border_radius_xs $border_radius_xs 0px 0px;
