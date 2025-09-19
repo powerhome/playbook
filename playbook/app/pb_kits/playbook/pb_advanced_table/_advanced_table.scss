@@ -703,6 +703,14 @@
           }
         }
       }
+
+      .pb_advanced_table_header {
+        > tr {
+          .last-header-cell:last-of-type {
+            border-right-width: 0 !important;
+          }
+        }
+      }
     }
   }
 
