@@ -3208,105 +3208,110 @@
     estree-walker "^2.0.2"
     picomatch "^2.3.1"
 
-"@rollup/rollup-android-arm-eabi@4.42.0":
-  version "4.42.0"
-  resolved "https://npm.powerapp.cloud/@rollup/rollup-android-arm-eabi/-/rollup-android-arm-eabi-4.42.0.tgz#8baae15a6a27f18b7c5be420e00ab08c7d3dd6f4"
-  integrity sha512-gldmAyS9hpj+H6LpRNlcjQWbuKUtb94lodB9uCz71Jm+7BxK1VIOo7y62tZZwxhA7j1ylv/yQz080L5WkS+LoQ==
+"@rollup/rollup-android-arm-eabi@4.51.0":
+  version "4.51.0"
+  resolved "https://npm.powerapp.cloud/@rollup/rollup-android-arm-eabi/-/rollup-android-arm-eabi-4.51.0.tgz#89eb466cb3ad10a9e4397ac7d4189ff47357d188"
+  integrity sha512-VyfldO8T/C5vAXBGIobrAnUE+VJNVLw5z9h4NgSDq/AJZWt/fXqdW+0PJbk+M74xz7yMDRiHtlsuDV7ew6K20w==
 
-"@rollup/rollup-android-arm64@4.42.0":
-  version "4.42.0"
-  resolved "https://npm.powerapp.cloud/@rollup/rollup-android-arm64/-/rollup-android-arm64-4.42.0.tgz#6798394241d1b26f8b44d2bbd8de9c12eb9dd6e6"
-  integrity sha512-bpRipfTgmGFdCZDFLRvIkSNO1/3RGS74aWkJJTFJBH7h3MRV4UijkaEUeOMbi9wxtxYmtAbVcnMtHTPBhLEkaw==
+"@rollup/rollup-android-arm64@4.51.0":
+  version "4.51.0"
+  resolved "https://npm.powerapp.cloud/@rollup/rollup-android-arm64/-/rollup-android-arm64-4.51.0.tgz#4a588d29e02ae0c4cd493cccc75ec9e7618c8beb"
+  integrity sha512-Z3ujzDZgsEVSokgIhmOAReh9SGT2qloJJX2Xo1Q3nPU1EhCXrV0PbpR3r7DWRgozqnjrPZQkLe5cgBPIYp70Vg==
 
-"@rollup/rollup-darwin-arm64@4.42.0":
-  version "4.42.0"
-  resolved "https://npm.powerapp.cloud/@rollup/rollup-darwin-arm64/-/rollup-darwin-arm64-4.42.0.tgz#8642482ac2d21e7747a79b1cc3293d5711fefea3"
-  integrity sha512-JxHtA081izPBVCHLKnl6GEA0w3920mlJPLh89NojpU2GsBSB6ypu4erFg/Wx1qbpUbepn0jY4dVWMGZM8gplgA==
+"@rollup/rollup-darwin-arm64@4.51.0":
+  version "4.51.0"
+  resolved "https://npm.powerapp.cloud/@rollup/rollup-darwin-arm64/-/rollup-darwin-arm64-4.51.0.tgz#9a18a112a5308fde27935eee91676e83d3fa7a7f"
+  integrity sha512-T3gskHgArUdR6TCN69li5VELVAZK+iQ4iwMoSMNYixoj+56EC9lTj35rcxhXzIJt40YfBkvDy3GS+t5zh7zM6g==
 
-"@rollup/rollup-darwin-x64@4.42.0":
-  version "4.42.0"
-  resolved "https://npm.powerapp.cloud/@rollup/rollup-darwin-x64/-/rollup-darwin-x64-4.42.0.tgz#e15568b2fea4fdc526e86424150df9ec511fbaaf"
-  integrity sha512-rv5UZaWVIJTDMyQ3dCEK+m0SAn6G7H3PRc2AZmExvbDvtaDc+qXkei0knQWcI3+c9tEs7iL/4I4pTQoPbNL2SA==
+"@rollup/rollup-darwin-x64@4.51.0":
+  version "4.51.0"
+  resolved "https://npm.powerapp.cloud/@rollup/rollup-darwin-x64/-/rollup-darwin-x64-4.51.0.tgz#3b505f11239a5ae1700286399e0686380015234a"
+  integrity sha512-Hh7n/fh0g5UjH6ATDF56Qdf5bzdLZKIbhp5KftjMYG546Ocjeyg15dxphCpH1FFY2PJ2G6MiOVL4jMq5VLTyrQ==
 
-"@rollup/rollup-freebsd-arm64@4.42.0":
-  version "4.42.0"
-  resolved "https://npm.powerapp.cloud/@rollup/rollup-freebsd-arm64/-/rollup-freebsd-arm64-4.42.0.tgz#0ebdb3b470ccf6acf0eacae8177f34e27477559f"
-  integrity sha512-fJcN4uSGPWdpVmvLuMtALUFwCHgb2XiQjuECkHT3lWLZhSQ3MBQ9pq+WoWeJq2PrNxr9rPM1Qx+IjyGj8/c6zQ==
+"@rollup/rollup-freebsd-arm64@4.51.0":
+  version "4.51.0"
+  resolved "https://npm.powerapp.cloud/@rollup/rollup-freebsd-arm64/-/rollup-freebsd-arm64-4.51.0.tgz#64b9cdc97b2220f3226e1d6231366d5151d14b0c"
+  integrity sha512-0EddADb6FBvfqYoxwVom3hAbAvpSVUbZqmR1wmjk0MSZ06hn/UxxGHKRqEQDMkts7XiZjejVB+TLF28cDTU+gA==
 
-"@rollup/rollup-freebsd-x64@4.42.0":
-  version "4.42.0"
-  resolved "https://npm.powerapp.cloud/@rollup/rollup-freebsd-x64/-/rollup-freebsd-x64-4.42.0.tgz#675808bf4fe7c7fc454326510ab3be0857626d41"
-  integrity sha512-CziHfyzpp8hJpCVE/ZdTizw58gr+m7Y2Xq5VOuCSrZR++th2xWAz4Nqk52MoIIrV3JHtVBhbBsJcAxs6NammOQ==
+"@rollup/rollup-freebsd-x64@4.51.0":
+  version "4.51.0"
+  resolved "https://npm.powerapp.cloud/@rollup/rollup-freebsd-x64/-/rollup-freebsd-x64-4.51.0.tgz#bcffabeb888e15c29137254c248562e291ad4c8f"
+  integrity sha512-MpqaEDLo3JuVPF+wWV4mK7V8akL76WCz8ndfz1aVB7RhvXFO3k7yT7eu8OEuog4VTSyNu5ibvN9n6lgjq/qLEQ==
 
-"@rollup/rollup-linux-arm-gnueabihf@4.42.0":
-  version "4.42.0"
-  resolved "https://npm.powerapp.cloud/@rollup/rollup-linux-arm-gnueabihf/-/rollup-linux-arm-gnueabihf-4.42.0.tgz#05e881cc69f59415fe8c1af13554c60c7c49d114"
-  integrity sha512-UsQD5fyLWm2Fe5CDM7VPYAo+UC7+2Px4Y+N3AcPh/LdZu23YcuGPegQly++XEVaC8XUTFVPscl5y5Cl1twEI4A==
+"@rollup/rollup-linux-arm-gnueabihf@4.51.0":
+  version "4.51.0"
+  resolved "https://npm.powerapp.cloud/@rollup/rollup-linux-arm-gnueabihf/-/rollup-linux-arm-gnueabihf-4.51.0.tgz#d827fcdd4f2a5c02298027d0b909ab2c3f860a39"
+  integrity sha512-WEWAGFNFFpvSWAIT3MYvxTkYHv/cJl9yWKpjhheg7ONfB0hetZt/uwBnM3GZqSHrk5bXCDYTFXg3jQyk/j7eXQ==
 
-"@rollup/rollup-linux-arm-musleabihf@4.42.0":
-  version "4.42.0"
-  resolved "https://npm.powerapp.cloud/@rollup/rollup-linux-arm-musleabihf/-/rollup-linux-arm-musleabihf-4.42.0.tgz#eb990bf7c3c37749c3d5afed34e6adec1c927963"
-  integrity sha512-/i8NIrlgc/+4n1lnoWl1zgH7Uo0XK5xK3EDqVTf38KvyYgCU/Rm04+o1VvvzJZnVS5/cWSd07owkzcVasgfIkQ==
+"@rollup/rollup-linux-arm-musleabihf@4.51.0":
+  version "4.51.0"
+  resolved "https://npm.powerapp.cloud/@rollup/rollup-linux-arm-musleabihf/-/rollup-linux-arm-musleabihf-4.51.0.tgz#c46f752974c3eeea3aa5eba63ac82771b3a1e5d1"
+  integrity sha512-9bxtxj8QoAp++LOq5PGDGkEEOpCDk9rOEHUcXadnijedDH8IXrBt6PnBa4Y6NblvGWdoxvXZYghZLaliTCmAng==
 
-"@rollup/rollup-linux-arm64-gnu@4.42.0":
-  version "4.42.0"
-  resolved "https://npm.powerapp.cloud/@rollup/rollup-linux-arm64-gnu/-/rollup-linux-arm64-gnu-4.42.0.tgz#3deeacff589e7f370aca5cef29d68d4c8fa0033c"
-  integrity sha512-eoujJFOvoIBjZEi9hJnXAbWg+Vo1Ov8n/0IKZZcPZ7JhBzxh2A+2NFyeMZIRkY9iwBvSjloKgcvnjTbGKHE44Q==
+"@rollup/rollup-linux-arm64-gnu@4.51.0":
+  version "4.51.0"
+  resolved "https://npm.powerapp.cloud/@rollup/rollup-linux-arm64-gnu/-/rollup-linux-arm64-gnu-4.51.0.tgz#c296e7e45f9adeee1ad7869971fe90b8e597e0f6"
+  integrity sha512-DdqA+fARqIsfqDYkKo2nrWMp0kvu/wPJ2G8lZ4DjYhn+8QhrjVuzmsh7tTkhULwjvHTN59nWVzAixmOi6rqjNA==
 
-"@rollup/rollup-linux-arm64-musl@4.42.0":
-  version "4.42.0"
-  resolved "https://npm.powerapp.cloud/@rollup/rollup-linux-arm64-musl/-/rollup-linux-arm64-musl-4.42.0.tgz#6db81ab065ef278faf83d875c77ff9cdd51abcfd"
-  integrity sha512-/3NrcOWFSR7RQUQIuZQChLND36aTU9IYE4j+TB40VU78S+RA0IiqHR30oSh6P1S9f9/wVOenHQnacs/Byb824g==
+"@rollup/rollup-linux-arm64-musl@4.51.0":
+  version "4.51.0"
+  resolved "https://npm.powerapp.cloud/@rollup/rollup-linux-arm64-musl/-/rollup-linux-arm64-musl-4.51.0.tgz#275c229d4796da77692016830a691195a59557d1"
+  integrity sha512-2XVRNzcUJE1UJua8P4a1GXS5jafFWE+pQ6zhUbZzptOu/70p1F6+0FTi6aGPd6jNtnJqGMjtBCXancC2dhYlWw==
 
-"@rollup/rollup-linux-loongarch64-gnu@4.42.0":
-  version "4.42.0"
-  resolved "https://npm.powerapp.cloud/@rollup/rollup-linux-loongarch64-gnu/-/rollup-linux-loongarch64-gnu-4.42.0.tgz#90d35336ad4cbf318648e41b0e7ce3920c28ebc9"
-  integrity sha512-O8AplvIeavK5ABmZlKBq9/STdZlnQo7Sle0LLhVA7QT+CiGpNVe197/t8Aph9bhJqbDVGCHpY2i7QyfEDDStDg==
+"@rollup/rollup-linux-loong64-gnu@4.51.0":
+  version "4.51.0"
+  resolved "https://npm.powerapp.cloud/@rollup/rollup-linux-loong64-gnu/-/rollup-linux-loong64-gnu-4.51.0.tgz#11c06e6c2c6335fc121fa29c40d7288ec344210e"
+  integrity sha512-R8QhY0kLIPCAVXWi2yftDSpn7Jtejey/WhMoBESSfwGec5SKdFVupjxFlKoQ7clVRuaDpiQf7wNx3EBZf4Ey6g==
 
-"@rollup/rollup-linux-powerpc64le-gnu@4.42.0":
-  version "4.42.0"
-  resolved "https://npm.powerapp.cloud/@rollup/rollup-linux-powerpc64le-gnu/-/rollup-linux-powerpc64le-gnu-4.42.0.tgz#6d21a0f18262648ec181fc9326b8f0ac02aa744d"
-  integrity sha512-6Qb66tbKVN7VyQrekhEzbHRxXXFFD8QKiFAwX5v9Xt6FiJ3BnCVBuyBxa2fkFGqxOCSGGYNejxd8ht+q5SnmtA==
+"@rollup/rollup-linux-ppc64-gnu@4.51.0":
+  version "4.51.0"
+  resolved "https://npm.powerapp.cloud/@rollup/rollup-linux-ppc64-gnu/-/rollup-linux-ppc64-gnu-4.51.0.tgz#48fb4e036ebe652c2483efbf49a1ba8e78354b80"
+  integrity sha512-I498RPfxx9cMv1KTHQ9tg2Ku1utuQm+T5B+Xro+WNu3FzAFSKp4awKfgMoZwjoPgNbaFGINaOM25cQW6WuBhiQ==
 
-"@rollup/rollup-linux-riscv64-gnu@4.42.0":
-  version "4.42.0"
-  resolved "https://npm.powerapp.cloud/@rollup/rollup-linux-riscv64-gnu/-/rollup-linux-riscv64-gnu-4.42.0.tgz#e46e2d1125957694bfb5222ecd63dd6c9bd69682"
-  integrity sha512-KQETDSEBamQFvg/d8jajtRwLNBlGc3aKpaGiP/LvEbnmVUKlFta1vqJqTrvPtsYsfbE/DLg5CC9zyXRX3fnBiA==
+"@rollup/rollup-linux-riscv64-gnu@4.51.0":
+  version "4.51.0"
+  resolved "https://npm.powerapp.cloud/@rollup/rollup-linux-riscv64-gnu/-/rollup-linux-riscv64-gnu-4.51.0.tgz#c833eac220814142d3286fae744efc34dc1ee862"
+  integrity sha512-o8COudsb8lvtdm9ixg9aKjfX5aeoc2x9KGE7WjtrmQFquoCRZ9jtzGlonujE4WhvXFepTraWzT4RcwyDDeHXjA==
 
-"@rollup/rollup-linux-riscv64-musl@4.42.0":
-  version "4.42.0"
-  resolved "https://npm.powerapp.cloud/@rollup/rollup-linux-riscv64-musl/-/rollup-linux-riscv64-musl-4.42.0.tgz#478a23f0fa0d832a0a6fa858a9f3d2eb201d44de"
-  integrity sha512-qMvnyjcU37sCo/tuC+JqeDKSuukGAd+pVlRl/oyDbkvPJ3awk6G6ua7tyum02O3lI+fio+eM5wsVd66X0jQtxw==
+"@rollup/rollup-linux-riscv64-musl@4.51.0":
+  version "4.51.0"
+  resolved "https://npm.powerapp.cloud/@rollup/rollup-linux-riscv64-musl/-/rollup-linux-riscv64-musl-4.51.0.tgz#73b9ff6d6f0425178c6c746e538dda63caf2d31a"
+  integrity sha512-0shJPgSXMdYzOQzpM5BJN2euXY1f8uV8mS6AnrbMcH2KrkNsbpMxWB1wp8UEdiJ1NtyBkCk3U/HfX5mEONBq6w==
 
-"@rollup/rollup-linux-s390x-gnu@4.42.0":
-  version "4.42.0"
-  resolved "https://npm.powerapp.cloud/@rollup/rollup-linux-s390x-gnu/-/rollup-linux-s390x-gnu-4.42.0.tgz#4261c714cd750e3fb685a330dfca7bb8f5711469"
-  integrity sha512-I2Y1ZUgTgU2RLddUHXTIgyrdOwljjkmcZ/VilvaEumtS3Fkuhbw4p4hgHc39Ypwvo2o7sBFNl2MquNvGCa55Iw==
+"@rollup/rollup-linux-s390x-gnu@4.51.0":
+  version "4.51.0"
+  resolved "https://npm.powerapp.cloud/@rollup/rollup-linux-s390x-gnu/-/rollup-linux-s390x-gnu-4.51.0.tgz#1644193185bb626c7fca3430df55473ffac56699"
+  integrity sha512-L7pV+ny7865jamSCQwyozBYjFRUKaTsPqDz7ClOtJCDu4paf2uAa0mrcHwSt4XxZP2ogFZS9uuitH3NXdeBEJA==
 
-"@rollup/rollup-linux-x64-gnu@4.42.0":
-  version "4.42.0"
-  resolved "https://npm.powerapp.cloud/@rollup/rollup-linux-x64-gnu/-/rollup-linux-x64-gnu-4.42.0.tgz#45aa751bdf05ac696da417a37fdfd13f607e1fab"
-  integrity sha512-Gfm6cV6mj3hCUY8TqWa63DB8Mx3NADoFwiJrMpoZ1uESbK8FQV3LXkhfry+8bOniq9pqY1OdsjFWNsSbfjPugw==
+"@rollup/rollup-linux-x64-gnu@4.51.0":
+  version "4.51.0"
+  resolved "https://npm.powerapp.cloud/@rollup/rollup-linux-x64-gnu/-/rollup-linux-x64-gnu-4.51.0.tgz#71f549f993361a6bf91910b0f63663ff0532ebf2"
+  integrity sha512-4YHhP+Rv3T3+H3TPbUvWOw5tuSwhrVhkHHZhk4hC9VXeAOKR26/IsUAT4FsB4mT+kfIdxxb1BezQDEg/voPO8A==
 
-"@rollup/rollup-linux-x64-musl@4.42.0":
-  version "4.42.0"
-  resolved "https://npm.powerapp.cloud/@rollup/rollup-linux-x64-musl/-/rollup-linux-x64-musl-4.42.0.tgz#9a0f8691dede53d1720ebb2aeef72e483cf69220"
-  integrity sha512-g86PF8YZ9GRqkdi0VoGlcDUb4rYtQKyTD1IVtxxN4Hpe7YqLBShA7oHMKU6oKTCi3uxwW4VkIGnOaH/El8de3w==
+"@rollup/rollup-linux-x64-musl@4.51.0":
+  version "4.51.0"
+  resolved "https://npm.powerapp.cloud/@rollup/rollup-linux-x64-musl/-/rollup-linux-x64-musl-4.51.0.tgz#4ff05f0d66a9553983eeaa51d4edd1a4364d1c2a"
+  integrity sha512-P7U7U03+E5w7WgJtvSseNLOX1UhknVPmEaqgUENFWfNxNBa1OhExT6qYGmyF8gepcxWSaSfJsAV5UwhWrYefdQ==
 
-"@rollup/rollup-win32-arm64-msvc@4.42.0":
-  version "4.42.0"
-  resolved "https://npm.powerapp.cloud/@rollup/rollup-win32-arm64-msvc/-/rollup-win32-arm64-msvc-4.42.0.tgz#395ad8b6b6372a3888d2e96bf6c45392be815f4d"
-  integrity sha512-+axkdyDGSp6hjyzQ5m1pgcvQScfHnMCcsXkx8pTgy/6qBmWVhtRVlgxjWwDp67wEXXUr0x+vD6tp5W4x6V7u1A==
+"@rollup/rollup-openharmony-arm64@4.51.0":
+  version "4.51.0"
+  resolved "https://npm.powerapp.cloud/@rollup/rollup-openharmony-arm64/-/rollup-openharmony-arm64-4.51.0.tgz#570bfee2a98b9efbf3c8e029c9071df47694db0b"
+  integrity sha512-FuD8g3u9W6RPwdO1R45hZFORwa1g9YXEMesAKP/sOi7mDqxjbni8S3zAXJiDcRfGfGBqpRYVuH54Gu3FTuSoEw==
 
-"@rollup/rollup-win32-ia32-msvc@4.42.0":
-  version "4.42.0"
-  resolved "https://npm.powerapp.cloud/@rollup/rollup-win32-ia32-msvc/-/rollup-win32-ia32-msvc-4.42.0.tgz#0d80305a14fff372ea5e90cd35c63c6b8efbd143"
-  integrity sha512-F+5J9pelstXKwRSDq92J0TEBXn2nfUrQGg+HK1+Tk7VOL09e0gBqUHugZv7SW4MGrYj41oNCUe3IKCDGVlis2g==
+"@rollup/rollup-win32-arm64-msvc@4.51.0":
+  version "4.51.0"
+  resolved "https://npm.powerapp.cloud/@rollup/rollup-win32-arm64-msvc/-/rollup-win32-arm64-msvc-4.51.0.tgz#f1dad1cf8b89c70e358dfd4cd90f04cb6eac133f"
+  integrity sha512-zST+FdMCX3QAYfmZX3dp/Fy8qLUetfE17QN5ZmmFGPrhl86qvRr+E9u2bk7fzkIXsfQR30Z7ZRS7WMryPPn4rQ==
 
-"@rollup/rollup-win32-x64-msvc@4.42.0":
-  version "4.42.0"
-  resolved "https://npm.powerapp.cloud/@rollup/rollup-win32-x64-msvc/-/rollup-win32-x64-msvc-4.42.0.tgz#516c6770ba15fe6aef369d217a9747492c01e8b7"
-  integrity sha512-LpHiJRwkaVz/LqjHjK8LCi8osq7elmpwujwbXKNW88bM8eeGxavJIKKjkjpMHAh/2xfnrt1ZSnhTv41WYUHYmA==
+"@rollup/rollup-win32-ia32-msvc@4.51.0":
+  version "4.51.0"
+  resolved "https://npm.powerapp.cloud/@rollup/rollup-win32-ia32-msvc/-/rollup-win32-ia32-msvc-4.51.0.tgz#23a014c4bba5d2db84cec12228293184c60b4a0f"
+  integrity sha512-U+qhoCVAZmTHCmUKxdQxw1jwAFNFXmOpMME7Npt5GTb1W/7itfgAgNluVOvyeuSeqW+dEQLFuNZF3YZPO8XkMg==
+
+"@rollup/rollup-win32-x64-msvc@4.51.0":
+  version "4.51.0"
+  resolved "https://npm.powerapp.cloud/@rollup/rollup-win32-x64-msvc/-/rollup-win32-x64-msvc-4.51.0.tgz#7e03dfba1fa11dbdcba9e1807b0d1bbf98d693a1"
+  integrity sha512-z6UpFzMhXSD8NNUfCi2HO+pbpSzSWIIPgb1TZsEZjmZYtk6RUIC63JYjlFBwbBZS3jt3f1q6IGfkj3g+GnBt2Q==
 
 "@sinclair/typebox@^0.24.1":
   version "0.24.51"
@@ -3669,10 +3674,10 @@
   resolved "https://npm.powerapp.cloud/@types/estree/-/estree-1.0.0.tgz#5fb2e536c1ae9bf35366eed879e827fa59ca41c2"
   integrity sha512-WulqXMDUTYAXCjZnk6JtIHPigp55cVtDgDrO2gHRwhyJto21+1zbVCtOYB2L1F9w4qCQ0rOGWBnBe0FNTiEJIQ==
 
-"@types/estree@1.0.7":
-  version "1.0.7"
-  resolved "https://npm.powerapp.cloud/@types/estree/-/estree-1.0.7.tgz#4158d3105276773d5b7695cd4834b1722e4f37a8"
-  integrity sha512-w28IoSUCJpidD/TGviZwwMJckNESJZXFu7NBZ5YJ4mEUnNraUn9Pm8HSZm/jDF1pDWYKspWE7oVphigUPRakIQ==
+"@types/estree@1.0.8":
+  version "1.0.8"
+  resolved "https://npm.powerapp.cloud/@types/estree/-/estree-1.0.8.tgz#958b91c991b1867ced318bedea0e215ee050726e"
+  integrity sha512-dWHzHa2WqEXI/O1E9OjrocMTKJl2mSrEolh1Iomrv6U+JuNwaHXsXx9bLu5gG7BUWFIN0skIQJQ/L1rIex4X6w==
 
 "@types/estree@^1.0.0":
   version "1.0.5"
@@ -6515,10 +6520,10 @@ fb-watchman@^2.0.0:
   dependencies:
     bser "2.1.1"
 
-fdir@^6.4.4:
-  version "6.4.6"
-  resolved "https://npm.powerapp.cloud/fdir/-/fdir-6.4.6.tgz#2b268c0232697063111bbf3f64810a2a741ba281"
-  integrity sha512-hiFoqpyZcfNm1yc4u8oWCf9A2c4D3QjCrks3zmoVKVxpQRzmPNar1hUJcBG2RQHvEVGDN+Jm81ZheVLAQMK6+w==
+fdir@^6.5.0:
+  version "6.5.0"
+  resolved "https://npm.powerapp.cloud/fdir/-/fdir-6.5.0.tgz#ed2ab967a331ade62f18d077dae192684d50d350"
+  integrity sha512-tIbYtZbucOs0BRGqPJkshJUYdL+SDH7dVM8gjy+ERp3WAUjLEFJE+02kanyHtwjWOnwrKYBiwAmM0p4kLJAnXg==
 
 figures@^3.0.0:
   version "3.2.0"
@@ -9722,10 +9727,10 @@ picomatch@^2.0.4, picomatch@^2.2.1, picomatch@^2.2.3, picomatch@^2.3.1:
   resolved "https://npm.powerapp.cloud/picomatch/-/picomatch-2.3.1.tgz#3ba3833733646d9d3e4995946c1365a67fb07a42"
   integrity sha512-JU3teHTNjmE2VCGFzuY8EXzCDVwEqB2a8fsIvwaStHhAWJEeVd1o1QD80CU6+ZdEXXSLbSsuLwJjkCBWqRQUVA==
 
-picomatch@^4.0.2:
-  version "4.0.2"
-  resolved "https://npm.powerapp.cloud/picomatch/-/picomatch-4.0.2.tgz#77c742931e8f3b8820946c76cd0c1f13730d1dab"
-  integrity sha512-M7BAV6Rlcy5u+m6oPhAPFgJTzAioX/6B0DxyvDlo9l8+T3nLKbrczg2WLUyzd45L8RqfUMyGPzekbMvX2Ldkwg==
+picomatch@^4.0.3:
+  version "4.0.3"
+  resolved "https://npm.powerapp.cloud/picomatch/-/picomatch-4.0.3.tgz#796c76136d1eead715db1e7bad785dedd695a042"
+  integrity sha512-5gTmgEY/sqK6gFXLIsQNH19lWb4ebPDLA4SdLP7dsWkIXHWlG66oPuVvXSGFPppYZz8ZDZq0dYYrbHfBCVUb1Q==
 
 pify@^2.3.0:
   version "2.3.0"
@@ -10031,10 +10036,10 @@ postcss-value-parser@^4.0.0, postcss-value-parser@^4.2.0:
   resolved "https://npm.powerapp.cloud/postcss-value-parser/-/postcss-value-parser-4.2.0.tgz#723c09920836ba6d3e5af019f92bc0971c02e514"
   integrity sha512-1NNCs6uurfkVbeXG4S8JFT9t19m45ICnif8zWLd5oPSZ50QnwMfK+H3jv408d4jw/7Bttv5axS5IiHoLaVNHeQ==
 
-postcss@^8.5.3:
-  version "8.5.4"
-  resolved "https://npm.powerapp.cloud/postcss/-/postcss-8.5.4.tgz#d61014ac00e11d5f58458ed7247d899bd65f99c0"
-  integrity sha512-QSa9EBe+uwlGTFmHsPKokv3B/oEMQZxfqW0QqNCyhpa6mB1afzulwn8hihglqAb2pOw+BJgNlmXQ8la2VeHB7w==
+postcss@^8.5.6:
+  version "8.5.6"
+  resolved "https://npm.powerapp.cloud/postcss/-/postcss-8.5.6.tgz#2825006615a619b4f62a9e7426cc120b349a8f3c"
+  integrity sha512-3Ybi1tAuwAP9s0r1UQ2J4n5Y0G05bJkpUIO0/bI9MhwmD70S5aTWbXGBwxHrelT+XM1k6dM0pk+SwNkpTRN7Pg==
   dependencies:
     nanoid "^3.3.11"
     picocolors "^1.1.1"
@@ -10903,33 +10908,34 @@ rollup-plugin-visualizer@^5.11.0:
     source-map "^0.7.4"
     yargs "^17.5.1"
 
-rollup@^4.34.9:
-  version "4.42.0"
-  resolved "https://npm.powerapp.cloud/rollup/-/rollup-4.42.0.tgz#57990f059e96bbccccefd5a41d8d5aff15ac1cb8"
-  integrity sha512-LW+Vse3BJPyGJGAJt1j8pWDKPd73QM8cRXYK1IxOBgL2AGLu7Xd2YOW0M2sLUBCkF5MshXXtMApyEAEzMVMsnw==
+rollup@^4.43.0:
+  version "4.51.0"
+  resolved "https://npm.powerapp.cloud/rollup/-/rollup-4.51.0.tgz#4334164dbd16883ce03a2cfdd5b72aea5a4864ef"
+  integrity sha512-7cR0XWrdp/UAj2HMY/Y4QQEUjidn3l2AY1wSeZoFjMbD8aOMPoV9wgTFYbrJpPzzvejDEini1h3CiUP8wLzxQA==
   dependencies:
-    "@types/estree" "1.0.7"
+    "@types/estree" "1.0.8"
   optionalDependencies:
-    "@rollup/rollup-android-arm-eabi" "4.42.0"
-    "@rollup/rollup-android-arm64" "4.42.0"
-    "@rollup/rollup-darwin-arm64" "4.42.0"
-    "@rollup/rollup-darwin-x64" "4.42.0"
-    "@rollup/rollup-freebsd-arm64" "4.42.0"
-    "@rollup/rollup-freebsd-x64" "4.42.0"
-    "@rollup/rollup-linux-arm-gnueabihf" "4.42.0"
-    "@rollup/rollup-linux-arm-musleabihf" "4.42.0"
-    "@rollup/rollup-linux-arm64-gnu" "4.42.0"
-    "@rollup/rollup-linux-arm64-musl" "4.42.0"
-    "@rollup/rollup-linux-loongarch64-gnu" "4.42.0"
-    "@rollup/rollup-linux-powerpc64le-gnu" "4.42.0"
-    "@rollup/rollup-linux-riscv64-gnu" "4.42.0"
-    "@rollup/rollup-linux-riscv64-musl" "4.42.0"
-    "@rollup/rollup-linux-s390x-gnu" "4.42.0"
-    "@rollup/rollup-linux-x64-gnu" "4.42.0"
-    "@rollup/rollup-linux-x64-musl" "4.42.0"
-    "@rollup/rollup-win32-arm64-msvc" "4.42.0"
-    "@rollup/rollup-win32-ia32-msvc" "4.42.0"
-    "@rollup/rollup-win32-x64-msvc" "4.42.0"
+    "@rollup/rollup-android-arm-eabi" "4.51.0"
+    "@rollup/rollup-android-arm64" "4.51.0"
+    "@rollup/rollup-darwin-arm64" "4.51.0"
+    "@rollup/rollup-darwin-x64" "4.51.0"
+    "@rollup/rollup-freebsd-arm64" "4.51.0"
+    "@rollup/rollup-freebsd-x64" "4.51.0"
+    "@rollup/rollup-linux-arm-gnueabihf" "4.51.0"
+    "@rollup/rollup-linux-arm-musleabihf" "4.51.0"
+    "@rollup/rollup-linux-arm64-gnu" "4.51.0"
+    "@rollup/rollup-linux-arm64-musl" "4.51.0"
+    "@rollup/rollup-linux-loong64-gnu" "4.51.0"
+    "@rollup/rollup-linux-ppc64-gnu" "4.51.0"
+    "@rollup/rollup-linux-riscv64-gnu" "4.51.0"
+    "@rollup/rollup-linux-riscv64-musl" "4.51.0"
+    "@rollup/rollup-linux-s390x-gnu" "4.51.0"
+    "@rollup/rollup-linux-x64-gnu" "4.51.0"
+    "@rollup/rollup-linux-x64-musl" "4.51.0"
+    "@rollup/rollup-openharmony-arm64" "4.51.0"
+    "@rollup/rollup-win32-arm64-msvc" "4.51.0"
+    "@rollup/rollup-win32-ia32-msvc" "4.51.0"
+    "@rollup/rollup-win32-x64-msvc" "4.51.0"
     fsevents "~2.3.2"
 
 rope-sequence@^1.3.0:
@@ -11757,13 +11763,13 @@ through@^2.3.6, through@^2.3.8:
   resolved "https://npm.powerapp.cloud/through/-/through-2.3.8.tgz#0dd4c9ffaabc357960b1b724115d7e0e86a2e1f5"
   integrity sha512-w89qg7PI8wAdvX60bMDP+bFoD5Dvhm9oLheFp5O4a2QF0cSBGsBX4qZmadPMvVqlLJBBci+WqGGOAPvcDeNSVg==
 
-tinyglobby@^0.2.13:
-  version "0.2.14"
-  resolved "https://npm.powerapp.cloud/tinyglobby/-/tinyglobby-0.2.14.tgz#5280b0cf3f972b050e74ae88406c0a6a58f4079d"
-  integrity sha512-tX5e7OM1HnYr2+a2C/4V0htOcSQcoSTH9KgJnVvNm5zm/cyEWKJ7j7YutsH9CxMdtOkkLFy2AHrMci9IM8IPZQ==
+tinyglobby@^0.2.15:
+  version "0.2.15"
+  resolved "https://npm.powerapp.cloud/tinyglobby/-/tinyglobby-0.2.15.tgz#e228dd1e638cea993d2fdb4fcd2d4602a79951c2"
+  integrity sha512-j2Zq4NyQYG5XMST4cbs02Ak8iJUdxRM0XI5QyxXuZOzKOINmWurp3smXu3y5wDcJrptwpSjgXHzIQxR0omXljQ==
   dependencies:
-    fdir "^6.4.4"
-    picomatch "^4.0.2"
+    fdir "^6.5.0"
+    picomatch "^4.0.3"
 
 tinyqueue@^2.0.3:
   version "2.0.3"
@@ -12311,17 +12317,17 @@ vite-plugin-ruby@^5.0.0:
     debug "^4.3.4"
     fast-glob "^3.3.2"
 
-vite@6.3.5:
-  version "6.3.5"
-  resolved "https://npm.powerapp.cloud/vite/-/vite-6.3.5.tgz#fec73879013c9c0128c8d284504c6d19410d12a3"
-  integrity sha512-cZn6NDFE7wdTpINgs++ZJ4N49W2vRp8LCKrn3Ob1kYNtOo21vfDoaV5GzBfLU4MovSAB8uNRm4jgzVQZ+mBzPQ==
+vite@7.1.6:
+  version "7.1.6"
+  resolved "https://npm.powerapp.cloud/vite/-/vite-7.1.6.tgz#336806d29983135677f498a05efb0fd46c5eef2d"
+  integrity sha512-SRYIB8t/isTwNn8vMB3MR6E+EQZM/WG1aKmmIUCfDXfVvKfc20ZpamngWHKzAmmu9ppsgxsg4b2I7c90JZudIQ==
   dependencies:
     esbuild "^0.25.0"
-    fdir "^6.4.4"
-    picomatch "^4.0.2"
-    postcss "^8.5.3"
-    rollup "^4.34.9"
-    tinyglobby "^0.2.13"
+    fdir "^6.5.0"
+    picomatch "^4.0.3"
+    postcss "^8.5.6"
+    rollup "^4.43.0"
+    tinyglobby "^0.2.15"
   optionalDependencies:
     fsevents "~2.3.3"
 
