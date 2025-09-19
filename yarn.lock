@@ -7325,10 +7325,10 @@ internal-slot@^1.0.5:
     hasown "^2.0.0"
     side-channel "^1.0.4"
 
-intl-tel-input@^24.7.0:
-  version "24.7.0"
-  resolved "https://npm.powerapp.cloud/intl-tel-input/-/intl-tel-input-24.7.0.tgz#8975df176659f8a3a16b97759add1ca24486e480"
-  integrity sha512-OjkhKen4SJUI2kN9OHpb8ReNN619sB9gECPq51dn3zKEWvif3mnSjmrtWhm8ABIb7Ijs+AAYSS5sI33Sb4YqvQ==
+intl-tel-input@^25.10.10:
+  version "25.10.10"
+  resolved "https://npm.powerapp.cloud/intl-tel-input/-/intl-tel-input-25.10.10.tgz#350752ab67ce5a4b939fb9d26188c47b34cbe550"
+  integrity sha512-G6YMX/WmQ0rXSvfZMlw7UOk0B+roRfAKZH7WwR4hfhTm5zzy66RFwxIpCiwTXklj8kqVsbL51a28TJ7mTXe4hA==
 
 is-accessor-descriptor@^0.1.6:
   version "0.1.6"
