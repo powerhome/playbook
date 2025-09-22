@@ -3,7 +3,9 @@
       <%= pb_rails("collapsible/collapsible_main", props: { name: "default-collapsible-nav", icon: object.collapsible_icons, size: "xs", dark: object.dark, classname:object.margin_classes }) do %>
         <%= pb_content_tag( object.tag,
             href: object.link && object.link,
-            target: object.link && object.target
+            target: object.link && object.target,
+            onkeydown: !object.link ? "if(event.key==='Enter'||event.key===' '){event.preventDefault(); this.click();}" : nil,
+            tabindex: object.link ? nil : 0,
           ) do %>
           <% if object.image_url %>
             <%= pb_rails("image", props: { url: object.image_url, classname: "pb_nav_img_wrapper_collapsible" }) %>
@@ -23,7 +25,9 @@
   <% else %>
     <%= pb_content_tag( object.tag,
         href: object.link && object.link,
-        target: object.link && object.target
+        target: object.link && object.target,
+        onkeydown: !object.link ? "if(event.key==='Enter'||event.key===' '){event.preventDefault(); this.click();}" : nil,
+        tabindex: object.link ? nil : 0,
       ) do %>
       <% if object.image_url %>
         <%= pb_rails("image", props: { url: object.image_url, classname: "pb_nav_img_wrapper" }) %>
