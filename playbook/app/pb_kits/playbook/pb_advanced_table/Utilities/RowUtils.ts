@@ -10,9 +10,14 @@ export const getRowColorClass = (
 ): string => {
   const isExpandable = row.getIsExpanded();
   const rowHasNoChildren = row.original?.children && !row.original.children.length ? true : false;
-  const rowBackground = isExpandable && ((!inlineRowLoading && row.getCanExpand()) || (inlineRowLoading && rowHasNoChildren));
 
-  return row.getIsSelected() ? "bg-row-selection" : rowBackground ? "bg-silver" : "bg-white";
+  // Check if row can expand or is currently expanded
+  const shouldShowExpandedBackground = isExpandable && (
+    (!inlineRowLoading && row.getCanExpand()) ||
+    (inlineRowLoading && (rowHasNoChildren || row.getCanExpand()))
+  );
+
+  return row.getIsSelected() ? "bg-row-selection" : shouldShowExpandedBackground ? "bg-silver" : "bg-white";
 }
 
 /**

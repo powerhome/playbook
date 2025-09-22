@@ -1,0 +1,16 @@
+<%= pb_rails("timestamp", props: {
+  timestamp: DateTime.now,
+  variant: "updated",
+  show_user: true,
+  show_current_year: true,
+  text: "Maricris Nonato"
+}) %>
+
+<br>
+
+<%= pb_rails("timestamp", props: {
+  timestamp: DateTime.now,
+  variant: "updated",
+  show_user: false,
+  show_current_year: true
+}) %>
