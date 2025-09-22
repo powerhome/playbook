@@ -1,9 +1,10 @@
 import React from "react";
-import { Flex, Card, Body, img } from "playbook-ui";
+import { Flex, Card, Body } from "playbook-ui";
 import ShowPage from "../../Templates/ShowPage";
 import PropsExamplesTable from "../../Templates/Subcomponents/PropsExamplesTable";
 import ExampleCodeCard from "../../Templates/Subcomponents/ExampleCodeCard";
 import * as DisplayImages from './DisplayImages'
+
 const Display = () => {
 
   console.log(DisplayImages)
