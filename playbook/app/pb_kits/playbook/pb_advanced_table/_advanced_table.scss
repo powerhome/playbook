@@ -981,6 +981,40 @@
       }
     }
   }
+
+  // Firefox-specific fix for last-header-cell and last-cell vertical borders
+  @-moz-document url-prefix() {
+    .pb_advanced_table_header {
+      .last-header-cell {
+        border-right: none !important;
+        box-shadow: 1px 0 0 0 $border_light !important;
+      }
+    }
+
+    .pb_advanced_table_body {
+      .last-cell {
+        border-right: none !important;
+        box-shadow: 1px 0 0 0 $border_light !important;
+      }
+    }
+
+    // Dark mode Firefox fixes
+    &.dark {
+      .pb_advanced_table_header {
+        .last-header-cell {
+          border-right: none !important;
+          box-shadow: 1px 0 0 0 $border_dark !important;
+        }
+      }
+
+      .pb_advanced_table_body {
+        .last-cell {
+          border-right: none !important;
+          box-shadow: 1px 0 0 0 $border_dark !important;
+        }
+      }
+    }
+  }
 }
 
 // Outside of the pb_advanced_table class for popover
