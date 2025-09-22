@@ -7,7 +7,6 @@ import * as DisplayImages from './DisplayImages'
 
 const Display = () => {
 
-  console.log(DisplayImages)
 
   type DisplayKey = keyof typeof DisplayImages;
 
