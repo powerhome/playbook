@@ -1,0 +1,1 @@
+The `updated` variant can also be used in conjunction with the `showDate`/`show_date` prop. This prop is set to true by default but can be set to false to hide the date.

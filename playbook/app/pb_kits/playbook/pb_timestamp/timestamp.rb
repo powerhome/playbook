@@ -14,7 +14,11 @@ module Playbook
                     default: "left"
       prop :hide_updated, type: Playbook::Props::Boolean,
                           default: false
+      prop :show_current_year, type: Playbook::Props::Boolean,
+                               default: false
       prop :show_date, type: Playbook::Props::Boolean,
+                       default: true
+      prop :show_time, type: Playbook::Props::Boolean,
                        default: true
       prop :show_timezone, type: Playbook::Props::Boolean,
                            default: false
@@ -50,14 +54,22 @@ module Playbook
         when "elapsed"
           format_elapsed_string
         else
-          show_date ? datetime_or_text : format_time_string
+          if show_date && show_time
+            datetime_or_text
+          elsif show_date && !show_time
+            timestamp ? format_date_string : text
+          elsif !show_date && show_time
+            format_time_string
+          else
+            text
+          end
         end
       end
 
     private
 
       def format_year_string
-        pb_date_time.to_year != DateTime.now.year.to_s ? ", #{pb_date_time.to_year}" : ""
+        pb_date_time.to_year != DateTime.now.year.to_s || show_current_year ? ", #{pb_date_time.to_year}" : ""
       end
 
       def format_time_string
@@ -73,14 +85,24 @@ module Playbook
       end
 
       def format_datetime_string
-        "#{format_date_string} &middot; #{format_time_string}".html_safe
+        if show_time
+          "#{format_date_string} &middot; #{format_time_string}".html_safe
+        else
+          format_date_string
+        end
       end
 
       def format_updated_string
-        user_string = show_user ? " by #{text}" : ""
-        datetime_string = " on #{format_date_string} at #{format_time_string}"
-
-        "Last updated#{user_string}#{datetime_string}"
+        final_updated_string = []
+        final_updated_string << "by #{text}" if show_user && text.present?
+        if show_date && !show_time
+          final_updated_string << "on #{format_date_string}"
+        elsif show_date && show_time
+          final_updated_string << "on #{format_date_string} at #{format_time_string}"
+        elsif show_time && !show_date
+          final_updated_string << "at #{format_time_string}"
+        end
+        "Last updated #{final_updated_string.join(' ')}"
       end
 
       def format_elapsed_string
