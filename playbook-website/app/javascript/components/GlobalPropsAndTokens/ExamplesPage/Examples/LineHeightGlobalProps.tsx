@@ -53,7 +53,6 @@ const LineHeightGlobalProps = () => {
   return (
     <>
       <ShowPage
-        pageType="tokens"
         title="Line Height"
         description="Line-Height tokens set the vertical spacing between lines of text. These values help maintain visual rhythm and improve text readability across different font sizes and components."
         VisualGuideCard={LineHeightCard()}

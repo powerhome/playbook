@@ -67,7 +67,7 @@ const sizes = {
   return (
     <>
     <ShowPage
-      pageType="tokens"
+      pageType="global_props"
       title="Display"
       description="Display tokens define how an element is rendered within the layout. Values align with standard CSS display properties and offer consistent layout behavior across components."
       VisualGuideCard={DisplayCard()}
