@@ -20,3 +20,4 @@ export { default as NavWithFontControl } from "./_nav_with_font_control.jsx"
 export { default as NavWithSpacingControl } from "./_nav_with_spacing_control.jsx"
 export { default as CollapsibleNavItemSpacing } from "./_collapsible_nav_item_spacing.jsx"
 export { default as CollapsibleNavNoIcon } from "./_collapsible_nav_no_icon.jsx"
+export { default as HorizontalNavExtendedUnderline } from './_horizontal_nav_extended_Underline.jsx'

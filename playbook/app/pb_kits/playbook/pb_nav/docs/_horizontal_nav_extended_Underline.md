@@ -1,0 +1,1 @@
+The optional `extendedUnderline` prop can be used with the horizontal orientation if the nav to extend the underline to take up the full width of the container. 

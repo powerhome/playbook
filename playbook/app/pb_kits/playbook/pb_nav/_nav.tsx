@@ -14,6 +14,7 @@ type NavProps = {
   className?: string | string[],
   data?: Record<string, unknown>,
   dark?: boolean,
+  extendedUnderline?: boolean,
   highlight?: boolean,
   htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
@@ -33,6 +34,7 @@ const Nav = (props: NavProps): React.ReactElement => {
     className,
     data = {},
     dark = false,
+    extendedUnderline = false,
     highlight = true,
     htmlOptions = {},
     id,
@@ -52,6 +54,9 @@ const Nav = (props: NavProps): React.ReactElement => {
       highlight: highlight,
       borderless: borderless,
     }),
+    // extended underline is only applicable for horizontal normal nav, should not 
+    // affect other variants or orientations
+    variant === 'normal' && orientation === 'horizontal' && extendedUnderline && 'pb_nav_extended_underline',
     globalProps(props),
     className
   )
