@@ -117,3 +117,19 @@ test('should change variant', () => {
     const kit = screen.getByTestId(navTestId)
     expect(kit).toHaveClass('pb_nav_list_subtle_vertical_highlight')
 })
+
+test('extendedUnderline should work as expected', () => {
+    render(
+        <NavDefault extendedUnderline 
+            orientation="horizontal" 
+        />
+    )
+    const kit = screen.getByTestId(navTestId)
+    expect(kit).toHaveClass('pb_nav_extended_underline')
+})
+
+test('extendedUnderline should not be applied when orientation is vertical', () => {
+    render(<NavDefault extendedUnderline />)
+    const kit = screen.getByTestId(navTestId)
+    expect(kit).not.toHaveClass('pb_nav_extended_underline')
+})

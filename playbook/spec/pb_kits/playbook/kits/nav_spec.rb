@@ -20,6 +20,10 @@ RSpec.describe Playbook::PbNav::Nav do
       .with_values("normal", "subtle", "bold")
       .with_default("normal")
   }
+  it {
+    is_expected.to define_prop(:extended_underline)
+      .with_default(false)
+  }
 
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
@@ -28,6 +32,8 @@ RSpec.describe Playbook::PbNav::Nav do
       expect(subject.new(orientation: "vertical").classname).to eq "pb_nav_list_normal_vertical_highlight"
       expect(subject.new(variant: "subtle").classname).to eq "pb_nav_list_subtle_vertical_highlight"
       expect(subject.new(variant: "bold").classname).to eq "pb_nav_list_bold_vertical_highlight"
+      expect(subject.new(extended_underline: true, orientation: "horizontal").classname).to include("pb_nav_extended_underline")
+      expect(subject.new(extended_underline: true, orientation: "vertical").classname).not_to include("pb_nav_extended_underline")
     end
   end
 end
