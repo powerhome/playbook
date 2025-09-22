@@ -47,7 +47,7 @@ const AdvancedTableColumnHeadersVerticalBorder = (props) => {
   ];
 
   const tableProps = {
-    verticalBorder: true
+    sticky: true,
   }
 // Adjusted for testing purposes. Will revert prior to commit.
   return (
@@ -55,7 +55,6 @@ const AdvancedTableColumnHeadersVerticalBorder = (props) => {
       <Card>
         <AdvancedTable
             columnDefinitions={columnDefinitions}
-            columnGroupBorderColor="text_lt_default"
             tableData={MOCK_DATA}
             tableProps={tableProps}
             {...props}

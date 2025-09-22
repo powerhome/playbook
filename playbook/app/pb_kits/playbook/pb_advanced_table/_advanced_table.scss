@@ -1021,15 +1021,6 @@
     border-right: none !important;
   }
 
-  // Without vertical border, remove all last-cell borders
-  .pb_table:not(.vertical-border) {
-    .pb_advanced_table_body .last-cell,
-    .pb_advanced_table_header .last-header-cell {
-      box-shadow: none !important;
-      border-right: none !important;
-    }
-  }
-
   // For tables WITH vertical borders, only remove border from actual last column
   .pb_table.vertical-border {
     .pb_advanced_table_body .last-cell:not(:last-child),
