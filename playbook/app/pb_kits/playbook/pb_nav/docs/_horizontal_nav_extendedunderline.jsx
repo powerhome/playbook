@@ -3,7 +3,7 @@ import React from 'react'
 import Nav from '../_nav'
 import NavItem from '../_item'
 
-const HorizontalNavExtendedUnderline = (props) => {
+const HorizontalNavExtendedunderline = (props) => {
   return (
     <Nav
         extendedUnderline
@@ -36,4 +36,4 @@ const HorizontalNavExtendedUnderline = (props) => {
   )
 }
 
-export default HorizontalNavExtendedUnderline
+export default HorizontalNavExtendedunderline

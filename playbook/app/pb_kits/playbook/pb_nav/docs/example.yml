@@ -17,7 +17,7 @@ examples:
   - horizontal_nav: Horizontal Nav
   - subtle_horizontal_nav: Subtle Horizontal Nav
   - bold_horizontal_nav: Bold Horizontal Nav
-  - horizontal_nav_extended_underline: Horizontal Nav With Extended Underline
+  - horizontal_nav_extendedunderline: Horizontal Nav With Extended Underline
   - block_nav: Block
   - block_no_title_nav: Without Title
   - new_tab: Open in a New Tab
@@ -43,7 +43,7 @@ examples:
   - horizontal_nav: Horizontal Nav
   - subtle_horizontal_nav: Subtle Horizontal Nav
   - bold_horizontal_nav: Bold Horizontal Nav
-  - horizontal_nav_extended_underline: Horizontal Nav With Extended Underline
+  - horizontal_nav_extendedunderline: Horizontal Nav With Extended Underline
   - block_nav: Block
   - block_no_title_nav: Without Title
   - new_tab: Open in a New Tab
