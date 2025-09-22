@@ -1,0 +1,68 @@
+<% chart_data = [{
+    name: 'Number of Installations',
+    data: [1475,200,3000,654,656]
+}, {
+    type: 'spline',
+    name: 'Percentage',
+    data: [48, 70, 25, 55, 72],
+    color: '#F9BB00',
+    yAxis: 1
+}] %>
+
+
+<% chart_options = {
+series: chart_data,
+  title: {
+    text: "Bar Graph with Secondary Y-axis",
+  },
+  xAxis: {
+    categories: ["Jan", "Feb", "Mar", "Apr", "May"],
+  },
+  yAxis: [{
+  format: "{value}%",
+    labels: {
+      style: {
+        fontFamily: "Power Centra",
+        color: "#C1CDD6",
+        fontWeight: "bold",
+        fontSize: "12px",
+      },
+    },
+    title: {
+      text: "Number of Employees",
+      style: {
+             fontFamily: "Power Centra",
+        color: "#C1CDD6",
+        fontWeight: "bold",
+        fontSize: "12px",
+      },
+    },
+  }, {
+    labels: {
+      style: {
+            fontFamily: "Power Centra",
+            color: "#C1CDD6",
+            fontWeight: "bold",
+            fontSize: "12px",
+      },
+    },
+    title: {
+      text: "Percentage",
+      style: {
+        fontFamily: "Power Centra",
+        color: "#C1CDD6",
+        fontWeight: "bold",
+        fontSize: "12px",
+      },
+    },
+
+    opposite: true,
+    min: 0,
+    max: 100
+  }],
+  legend: { enabled: true },
+}
+%>
+
+<%= pb_rails("pb_bar_graph", props: {options: chart_options}) %>
+

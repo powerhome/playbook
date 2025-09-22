@@ -227,10 +227,24 @@ kits:
     icons_used: false
     react_rendered: true
     enhanced_element_used: false
+  - name: pb_bar_graph
+    description: Bar graphs are used to compare data. Bar graphs are not typically
+      used to show percentages.
+    platforms: *1
+    status: beta
+    icons_used: false
+    react_rendered: true
+    enhanced_element_used: false
   - name: circle_chart
     platforms: *1
     description:
     status: stable
+    icons_used: false
+    react_rendered: true
+    enhanced_element_used: false
+  - name: pb_circle_chart
+    platforms: web
+    status: beta
     icons_used: false
     react_rendered: true
     enhanced_element_used: false
