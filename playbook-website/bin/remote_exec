@@ -8,7 +8,7 @@
 #  appropriate version of kubectl to apply the "pod".
 #
 # Usage:
-#   app bin/container/remote_exec --namespace=playbook-pr12345 --cluster=app-beta-gm bash -l
+#   app bin/container/remote_exec --namespace=playbook-pr12345 --cluster=wc-beta-gm bash -l
 #
 
 set -Eeuo pipefail
@@ -32,8 +32,8 @@ Required:
 -c, --cluster          Required -The Kubernetes cluster in which a pod is
                        desired.
                        Examples:
-                         -c app-beta-qa
-                         --cluster app-beta-qa
+                         -c wc-beta-qa
+                         --cluster wc-beta-qa
 
 -n, --namespace        Required - The Kubernetes namespace in which a pod is
                        desired.
@@ -72,8 +72,8 @@ Optional:
 
 Example:
 
-  app bin/container/remote_exec --namespace=nitro-web-pr12345 --cluster=app-beta-gm bash -l
-  app bin/container/remote_exec --namespace=playbook-pr12345 --cluster=app-beta-gm bash -l
+  app bin/container/remote_exec --namespace=nitro-web-pr12345 --cluster=wc-beta-gm bash -l
+  app bin/container/remote_exec --namespace=playbook-pr12345 --cluster=wc-beta-gm bash -l
   playbook-website/bin/deployer bash -lc "playbook-website/bin/remote_exec --time-to-live $(time-to-live) --cluster $(review_cluster) --namespace nitro-web-pr$(pr) bundle exec rails console"
 
 

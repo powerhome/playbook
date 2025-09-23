@@ -5,7 +5,7 @@ mode=${2:-"long"}
 clusters=("hq" "gm" "px")
 
 function find_cluster_for_review_stack() {
-    found=$(kubectl --ignore-not-found=true --context app-beta-${1} get namespace playbook-${pr_number})
+    found=$(kubectl --ignore-not-found=true --context wc-beta-${1} get namespace playbook-${pr_number})
 
     if [[ -n $found ]];
     then
@@ -13,7 +13,7 @@ function find_cluster_for_review_stack() {
         then
             echo $1
         else
-            echo "app-beta-${1}"
+            echo "wc-beta-${1}"
         fi
         exit 0
     fi
