@@ -1028,6 +1028,14 @@
       box-shadow: none !important;
     }
   }
+  // Firefox fix
+  @-moz-document url-prefix() {
+    .pb_advanced_table_header {
+      .last-header-cell {
+        box-shadow: 1px 0 0 0 $border_light !important;
+      }
+    }
+  }
 
   // For tables WITH vertical borders, only remove border from actual last column
   .pb_table.vertical-border {
