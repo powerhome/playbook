@@ -28,6 +28,21 @@ const ContactDefault = (props) => {
           contactValue="3245627482"
           {...props}
       />
+      <Contact
+          contactType="wrong-phone"
+          contactValue="2124396666"
+          {...props}
+      />
+      <Contact
+          contactType='extension'
+          contactValue="1234"
+          {...props}
+      />
+      <Contact
+          contactType="international"
+          contactValue="+44 7700 900461"
+          {...props}
+      />
     </div>
   )
 }
