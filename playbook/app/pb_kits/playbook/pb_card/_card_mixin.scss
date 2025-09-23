@@ -87,6 +87,16 @@ $pb_card_header_colors: map-merge(map-merge(map-merge($product_colors, $addition
   background: $background;
 }
 
+@mixin pb_card_right_highlight($width, $height, $background){
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: $width;
+  height: $height;
+  background: $background;
+}
+
 @mixin pb_card_header_color($header_color) {
   background: $header_color;
 }

@@ -210,10 +210,12 @@ const DatePicker = (props: DatePickerProps): React.ReactElement => {
           className="input_wrapper"
       >
 
-        <Caption
-            className="pb_date_picker_kit_label"
-            text={hideLabel ? null : label}
-        />
+        {!hideLabel && (
+          <Caption
+              className="pb_date_picker_kit_label"
+              text={label}
+          />
+        )}
           <>
             <div className="date_picker_input_wrapper">
               <input

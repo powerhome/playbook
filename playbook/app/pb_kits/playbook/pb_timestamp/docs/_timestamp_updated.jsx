@@ -17,7 +17,6 @@ const TimestampUpdated = (props) => {
       <br />
 
       <Timestamp
-          showUser={false}
           timestamp={todaysDate}
           variant="updated"
           {...props}

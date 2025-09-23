@@ -10,8 +10,6 @@ const TimestampUnstyled = (props) => {
           text="Basic unstyled example"
       />
       <Timestamp
-          align="left"
-          showDate
           timestamp={new Date()}
           unstyled
           {...props}
@@ -24,8 +22,6 @@ const TimestampUnstyled = (props) => {
       />
       <Title size={1}>
         <Timestamp
-            align="left"
-            showDate
             timestamp={new Date()}
             unstyled
             {...props}
