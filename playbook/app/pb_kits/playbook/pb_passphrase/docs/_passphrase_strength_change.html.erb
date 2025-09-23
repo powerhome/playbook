@@ -7,8 +7,8 @@
 <%= pb_rails("text_input", props: { label: "Passphrase Strength", value: "0", disabled: true, id: "calc_strength_change" }) %>
 
 
-<%= javascript_tag do %>
-    window.addEventListener("DOMContentLoaded", () => {
+<script>
+    window.addEventListener("load", () => {
 
     // variables for the kits you are targeting 
     const passphrase = document.querySelector(".passphrase_change").querySelector("input")
@@ -120,4 +120,4 @@
     });
 
   })
-<% end %>
+</script>
