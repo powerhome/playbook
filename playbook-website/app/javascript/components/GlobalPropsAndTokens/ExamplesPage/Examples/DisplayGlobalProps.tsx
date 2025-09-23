@@ -15,10 +15,11 @@ const DisplayGlobalProps = () => {
       <>
         <Flex orientation="column" alignItems="center" gap="xs">
           <Card
-            className="visual_guide_card_line_height"
+            className="visual_guide_card_display"
             display="flex"
             alignItems="center"
             justifyContent="center"
+            padding="xs"
           >
             <img
               alt={`Display example of ${display}`}
@@ -61,7 +62,7 @@ const sizes = {
     md: { label: "md", minWidth: "768px", maxWidth: "991px", descrption: "Medium screens" },
     lg: { label: "lg", minWidth: "992px", maxWidth: "1199px", descrption: "Large screens" },
     xl: { label: "xl", minWidth: "1200px", maxWidth: "", descrption: "Extra large screens" },
-    default: { label: "default" , minWidth: "", maxWidth: "", descrption: "Default is used as the final fallback and is not tied to a specific screen szie." },
+    default: { label: "default" , minWidth: "", maxWidth: "", descrption: "Default is used as the final fallback and is not tied to a specific screen size." },
 };
 
   return (
@@ -82,8 +83,8 @@ const sizes = {
         rows={
           values.map((value) => [
             value,
-            "string",
-            value,
+            <ExampleCodeCard text="string" copyIcon={false} />,
+            <ExampleCodeCard text={value} copyIcon={false} />,
             <ExampleCodeCard text={`display:"${value}"`} />,
             <ExampleCodeCard text={`display="${value}"`} />
           ])

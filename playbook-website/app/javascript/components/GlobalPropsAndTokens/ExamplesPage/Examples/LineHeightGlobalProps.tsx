@@ -14,7 +14,8 @@ const LineHeightGlobalProps = () => {
               className="visual_guide_card_line_height"
               display="flex"
               alignItems="center"
-              justifyContent="center"    
+              justifyContent="center"   
+              padding="xs" 
             >
               <Body text={text} lineHeight={lineHeight} />
             </Card>
@@ -68,8 +69,8 @@ const LineHeightGlobalProps = () => {
             rows={
               values.map((value) => [
                 value,
-                "string",
-                value,
+                <ExampleCodeCard text="string" copyIcon={false} />,
+                <ExampleCodeCard text={value} copyIcon={false} />,
                 <ExampleCodeCard text={`display:"${value}"`} />,
                 <ExampleCodeCard text={`display="${value}"`} />
               ])
