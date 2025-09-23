@@ -3,10 +3,11 @@ import Timestamp from '../_timestamp'
 
 const todaysDate = new Date()
 
-const TimestampUpdated = (props) => {
+const TimestampUpdatedShowTime = (props) => {
   return (
     <div>
       <Timestamp
+          showTime={false}
           showUser
           text="Maricris Nonato"
           timestamp={todaysDate}
@@ -17,12 +18,24 @@ const TimestampUpdated = (props) => {
       <br />
 
       <Timestamp
+          showTime={false}
           timestamp={todaysDate}
           variant="updated"
           {...props}
       />
+
+       <br />
+
+      <Timestamp
+          showCurrentYear
+          showTime={false}
+          timestamp={todaysDate}
+          variant="updated"
+          {...props}
+      />
+
     </div>
   )
 }
 
-export default TimestampUpdated
+export default TimestampUpdatedShowTime

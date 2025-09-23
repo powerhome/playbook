@@ -29,6 +29,8 @@ module Playbook
           "phone-slash"
         when "extension"
           "phone-plus"
+        when "international"
+          "globe"
         else # "unknown" || "other"
           "phone"
         end
@@ -38,6 +40,8 @@ module Playbook
         if contact_type == "email"
           contact_value
         elsif contact_type == "extension" && contact_value.match(/^\d{4}$/)
+          contact_value
+        elsif contact_type == "international"
           contact_value
         else
           number_to_phone(formatted_value, area_code: true)

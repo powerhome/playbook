@@ -11,17 +11,20 @@ const minutes = new Date().getMinutes()
 const futureDate = new Date(futureYear, month, date, hours, minutes)
 const pastDate = new Date(pastYear, month, date, hours, minutes)
 
-const TimestampDefault = (props) => {
+const TimestampShowTime = (props) => {
   return (
     <div>
       <Timestamp
+          align="left"
+          showTime={false}
           timestamp={todaysDate}
           {...props}
       />
-
       <br />
 
       <Timestamp
+          align="left"
+          showTime={false}
           timestamp={futureDate}
           {...props}
       />
@@ -29,6 +32,8 @@ const TimestampDefault = (props) => {
       <br />
 
       <Timestamp
+          align="left"
+          showTime={false}
           timestamp={pastDate}
           {...props}
       />
@@ -36,4 +41,4 @@ const TimestampDefault = (props) => {
   )
 }
 
-export default TimestampDefault
+export default TimestampShowTime

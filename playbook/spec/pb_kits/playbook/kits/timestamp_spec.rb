@@ -33,6 +33,14 @@ RSpec.describe Playbook::PbTimestamp::Timestamp do
     is_expected.to define_prop(:show_user)
       .of_type(Playbook::Props::Boolean)
   }
+  it {
+    is_expected.to define_prop(:show_time)
+      .of_type(Playbook::Props::Boolean)
+  }
+  it {
+    is_expected.to define_prop(:show_current_year)
+      .of_type(Playbook::Props::Boolean)
+  }
   it { is_expected.to define_string_prop(:text) }
   it { is_expected.to define_string_prop(:timezone) }
   it { is_expected.to define_prop(:timestamp) }

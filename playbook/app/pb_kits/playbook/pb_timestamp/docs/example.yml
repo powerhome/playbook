@@ -2,18 +2,30 @@ examples:
 
   rails:
   - timestamp_default: Default
+  - timestamp_show_date: Hide Date
+  - timestamp_show_time: Hide Time
+  - timestamp_show_current_year: Show Current Year
+  - timestamp_timezones: Show Timezones
   - timestamp_align: Alignments
-  - timestamp_timezones: Timezones
-  - timestamp_updated: Last Updated by
-  - timestamp_elapsed: Time Ago
+  - timestamp_elapsed: Time Ago (Elapsed Variant)
+  - timestamp_updated: Last Updated by (Updated Variant)
+  - timestamp_updated_show_current_year: Last Updated by (Updated Variant) - Show Current Year
+  - timestamp_updated_show_date: Last Updated by (Updated Variant) - Hide Date
+  - timestamp_updated_show_time: Last Updated by (Updated Variant) - Hide Time
   - timestamp_unstyled: Unstyled
 
   react:
   - timestamp_default: Default
+  - timestamp_show_date: Hide Date
+  - timestamp_show_time: Hide Time
+  - timestamp_show_current_year: Show Current Year
+  - timestamp_timezones: Show Timezones
   - timestamp_align: Alignments
-  - timestamp_timezones: Timezones
-  - timestamp_updated: Last Updated by
-  - timestamp_elapsed: Time Ago
+  - timestamp_elapsed: Time Ago (Elapsed Variant)
+  - timestamp_updated: Last Updated by (Updated Variant)
+  - timestamp_updated_show_current_year: Last Updated by (Updated Variant) - Show Current Year
+  - timestamp_updated_show_date: Last Updated by (Updated Variant) - Hide Date
+  - timestamp_updated_show_time: Last Updated by (Updated Variant) - Hide Time
   - timestamp_unstyled: Unstyled
 
   swift:

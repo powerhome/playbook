@@ -1,0 +1,1 @@
+The `align` prop can be used to set alignment. This prop is set to 'left' by default. 
