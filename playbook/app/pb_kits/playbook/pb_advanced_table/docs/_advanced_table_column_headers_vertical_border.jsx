@@ -1,5 +1,4 @@
 import React from "react"
-import Card from "../../pb_card/_card"
 import AdvancedTable from '../../pb_advanced_table/_advanced_table'
 import MOCK_DATA from "./advanced_table_mock_data.json"
 
@@ -47,19 +46,17 @@ const AdvancedTableColumnHeadersVerticalBorder = (props) => {
   ];
 
   const tableProps = {
-    sticky: true,
+    verticalBorder: true,
   }
-// Adjusted for testing purposes. Will revert prior to commit.
+
   return (
     <>
-      <Card>
-        <AdvancedTable
-            columnDefinitions={columnDefinitions}
-            tableData={MOCK_DATA}
-            tableProps={tableProps}
-            {...props}
-        />
-      </Card>
+      <AdvancedTable
+          columnDefinitions={columnDefinitions}
+          tableData={MOCK_DATA}
+          tableProps={tableProps}
+          {...props}
+      />
     </>
   )
 }
