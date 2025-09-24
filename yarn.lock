@@ -3169,15 +3169,15 @@
   resolved "https://npm.powerapp.cloud/@powerhome/eslint-config/-/eslint-config-0.1.0.tgz#f1e1151481f51421186ba8caad99fadb24b1fe51"
   integrity sha512-8e5DRgnKPbJ+ofAtqjUPZTxcgHg/TVf52WeNqAGBUXSS4QWHemL6fj1n/YHfAIvx3aMUhFwrw2lUNofUocgK3A==
 
-"@powerhome/playbook-icons-react@0.0.1-alpha.44":
-  version "0.0.1-alpha.44"
-  resolved "https://npm.powerapp.cloud/@powerhome/playbook-icons-react/-/f89c992855d62144492f5f0c3f90b8062f4cec31#f89c992855d62144492f5f0c3f90b8062f4cec31"
-  integrity sha512-SQPQuKFHe0PvYhI9o3jWhP5zWZU0YxoR4hj1mOSKYoWoNwWkNCko9wr24z2ps23qc3w/KZbhgwdmr86ao9UN0g==
+"@powerhome/playbook-icons-react@1.0.1":
+  version "1.0.1"
+  resolved "https://npm.powerapp.cloud/@powerhome/playbook-icons-react/-/efb3907ba5df93c5af387d8bbb4d4d965a382fa3#efb3907ba5df93c5af387d8bbb4d4d965a382fa3"
+  integrity sha512-zQi/4Q2SPfW0rgFYXgn7LoAZbmo1ogvrL9J4tli/qwUr8xvpIY0Guyw5BU2gNv1OMiI7CrAVOm64vnswMKe/qw==
 
-"@powerhome/playbook-icons@0.0.1-alpha.44":
-  version "0.0.1-alpha.44"
-  resolved "https://npm.powerapp.cloud/@powerhome/playbook-icons/-/90e580b0ff045918699420159d9846b6341b1dcc#90e580b0ff045918699420159d9846b6341b1dcc"
-  integrity sha512-CSzlChexsrzG/sNzygiz+qjQbKprUEhXDltRT9op43mKRhg9C2mUhpgOKX91f92qKQydgFaf19/mhUMsCNEx/A==
+"@powerhome/playbook-icons@1.0.1":
+  version "1.0.1"
+  resolved "https://npm.powerapp.cloud/@powerhome/playbook-icons/-/b216cac1375fa3354c45c1bb0c901473529299ce#b216cac1375fa3354c45c1bb0c901473529299ce"
+  integrity sha512-gSxwrnMaAJ3P//gxEdukVzLqdGqLss8VdnG/jB/sbdm7c0LYMTEbzNv+7SYIzQYgOlJcctCq6pHKIxbcD6ItjA==
 
 "@powerhome/power-fonts@0.0.1":
   version "0.0.1"

@@ -584,6 +584,10 @@
     "category": "Communication"
   },
   {
+    "name": "envelope-slash",
+    "category": "Communication"
+  },
+  {
     "name": "envelope",
     "category": "Communication"
   },
@@ -1161,10 +1165,6 @@
   },
   {
     "name": "spinner",
-    "category": "Interface Core"
-  },
-   {
-    "name": "spinner-solid",
     "category": "Interface Core"
   },
   {
