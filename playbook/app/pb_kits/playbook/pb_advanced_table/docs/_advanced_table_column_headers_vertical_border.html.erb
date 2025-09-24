@@ -39,7 +39,5 @@
     ],
   },
 ] %>
-<%# Adjusting for test purposes. Will revert prior to commit. %>
-<%= pb_rails("card", props: {})  do %>
-  <%= pb_rails("advanced_table", props: { id: "table_multi_headers_vertical_borders", table_data: @table_data, column_definitions: column_definitions, table_props: { container: false, vertical_border: true } }) %>
-<% end %>
+
+<%= pb_rails("advanced_table", props: { id: "table_multi_headers_vertical_borders", table_data: @table_data, column_definitions: column_definitions, table_props: { vertical_border: true } }) %>
