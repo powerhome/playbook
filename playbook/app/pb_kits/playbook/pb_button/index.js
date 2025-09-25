@@ -9,6 +9,7 @@ export default class PbButton extends PbEnhancedElement {
 
   connect() {
     this._attrManaged = this._attributesPresent()
+    this.element._pbButton = this 
 
     this._onClick = (e) => {
       if (this.isDisabled()) {
@@ -33,6 +34,7 @@ export default class PbButton extends PbEnhancedElement {
   disconnect() {
     this.element.removeEventListener("click", this._onClick, true)
     this._observer?.disconnect()
+    delete this.element._pbButton
   }
 
   disable() { this.setDisabled(true) }

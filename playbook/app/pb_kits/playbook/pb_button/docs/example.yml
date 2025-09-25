@@ -12,6 +12,7 @@ examples:
   - button_size: Button Size
   - button_form: Button Form Attribute
   - button_managed_disabled: Button Toggle Disabled State
+  - button_managed_disabled_helper: Button Toggle Disabled State Helper
   
   react:
   - button_default: Button Variants
