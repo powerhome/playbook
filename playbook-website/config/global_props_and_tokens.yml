@@ -4,6 +4,8 @@ global_props:
   - hover
   - html_options
   - margin
+  - line_height
+  - display
   - max_width
   - min_width
   - width
