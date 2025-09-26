@@ -128,6 +128,10 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.Ref<unknown>
         wrapperRef.current.classList.remove('pb_phone_number_validation_error')
         wrapperRef.current.removeAttribute('data-pb-phone-validation-error')
       }
+    } else if (wrapperRef.current && !required) {
+      // Always clear validation state if field is not required
+      wrapperRef.current.classList.remove('pb_phone_number_validation_error')
+      wrapperRef.current.removeAttribute('data-pb-phone-validation-error')
     }
   }
 
@@ -187,6 +191,13 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.Ref<unknown>
 
   const validateTooShortNumber = (itiInit: any) => {
     if (!itiInit) return
+    
+    // If field is empty, don't show "too short" error
+    if (!inputValue || inputValue.trim() === '') {
+      setError('')
+      return false
+    }
+    
     if (itiInit.getValidationError() === ValidationError.TooShort) {
       return showFormattedError('too short')
     } else {
@@ -245,10 +256,17 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.Ref<unknown>
   }
 
   const validateErrors = () => {
-    if (!hasTyped && !error) return
+    // If field is empty, only show required field error if applicable
+    if (!inputValue || inputValue.trim() === '') {
+      if (validateRequiredField()) return
+      // Clear any existing errors if field is empty and not required
+      if (!required) {
+        setError('')
+      }
+      return
+    }
 
-    // First check if required field is empty
-    if (validateRequiredField()) return
+    if (!hasTyped && !error) return
 
     if (itiRef.current) isValid(itiRef.current.isValidNumber())
     if (validateOnlyNumbers(itiRef.current)) return
