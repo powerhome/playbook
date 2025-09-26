@@ -128,10 +128,6 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.Ref<unknown>
         wrapperRef.current.classList.remove('pb_phone_number_validation_error')
         wrapperRef.current.removeAttribute('data-pb-phone-validation-error')
       }
-    } else if (wrapperRef.current && !required) {
-      // Always clear validation state if field is not required
-      wrapperRef.current.classList.remove('pb_phone_number_validation_error')
-      wrapperRef.current.removeAttribute('data-pb-phone-validation-error')
     }
   }
 
