@@ -79,5 +79,81 @@ RSpec.describe Playbook::PbButton::Button do
       expect(subject.new(size: "sm").classname).to eq "pb_button_kit pb_button_primary pb_button_inline pb_button_enabled pb_button_size_sm"
       expect(subject.new(size: "lg").classname).to eq "pb_button_kit pb_button_primary pb_button_inline pb_button_enabled pb_button_size_lg"
     end
+
+    context "when managing enabled/disabled states" do
+      it "correctly toggles between enabled and disabled classes", :aggregate_failures do
+        enabled_button = subject.new(disabled: false)
+        disabled_button = subject.new(disabled: true)
+
+        expect(enabled_button.classname).to include("pb_button_enabled")
+        expect(enabled_button.classname).to_not include("pb_button_disabled")
+
+        expect(disabled_button.classname).to include("pb_button_disabled")
+        expect(disabled_button.classname).to_not include("pb_button_enabled")
+      end
+
+      it "applies disabled state correctly for different variants", :aggregate_failures do
+        %w[primary secondary link danger reaction].each do |variant|
+          enabled_button = subject.new(variant: variant, disabled: false)
+          disabled_button = subject.new(variant: variant, disabled: true)
+
+          expect(enabled_button.classname).to include("pb_button_enabled")
+          expect(disabled_button.classname).to include("pb_button_disabled")
+        end
+      end
+
+      it "maintains disabled state with other modifiers", :aggregate_failures do
+        button_props = {
+          disabled: true,
+          full_width: true,
+          size: "lg",
+          variant: "secondary",
+        }
+        button = subject.new(button_props)
+
+        expect(button.classname).to include("pb_button_disabled")
+        expect(button.classname).to include("pb_button_block")
+        expect(button.classname).to include("pb_button_size_lg")
+        expect(button.classname).to include("pb_button_secondary")
+      end
+    end
+  end
+
+  describe "#options for managed buttons" do
+    context "when button supports JavaScript management" do
+      it "properly handles disabled attribute for button tags", :aggregate_failures do
+        disabled_button = subject.new(disabled: true)
+        enabled_button = subject.new(disabled: false)
+
+        expect(disabled_button.options).to include(disabled: true)
+        expect(enabled_button.options).to_not include(disabled: true)
+      end
+
+      it "supports data attributes for managed functionality" do
+        button_with_data = subject.new({})
+        expect { button_with_data.options }.to_not raise_error
+      end
+    end
+  end
+
+  describe "disabled state behavior for different tag types" do
+    context "when using button tag" do
+      it "uses disabled attribute for button elements", :aggregate_failures do
+        button = subject.new(disabled: true, link: nil)
+
+        expect(button.tag).to eq "button"
+        expect(button.options).to include(disabled: true)
+      end
+    end
+
+    context "when using a tag" do
+      it "prevents link functionality when disabled", :aggregate_failures do
+        disabled_link_button = subject.new(disabled: true, link: "http://example.com")
+        enabled_link_button = subject.new(disabled: false, link: "http://example.com")
+
+        expect(disabled_link_button.tag).to eq "button"
+        expect(enabled_link_button.tag).to eq "a"
+      end
+    end
   end
 end

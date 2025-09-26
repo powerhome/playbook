@@ -79,6 +79,9 @@ PbMultiLevelSelect.start()
 import PbCheckbox from 'kits/pb_checkbox'
 PbCheckbox.start()
 
+import PbButton from 'kits/pb_button'
+PbButton.start()
+
 import 'flatpickr'
 
 // React-Rendered Rails Kits =====
