@@ -1,7 +1,11 @@
-# 15.1.0
+# 🪦RIP Webpacker💀
 
 ##### September 26, 2025
 <img width="889" height="477" alt="release_image" src="https://github.com/user-attachments/assets/cb9664e0-5334-4883-bcb7-f30e9eb6b289" />
+
+Playbook has officially removed webpacker-react and react-rails! React-rendered Rails kits now run on vite_rails plus custom rendering logic. Nothing changes in how you use kits in Nitro but under the hood, Webpacker is gone for good!👋🏼
+
+[15.1.0](https://github.com/powerhome/playbook/tree/15.1.0) full list of changes:
 
 **Kit Enhancements:**
 
