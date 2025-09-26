@@ -2,12 +2,13 @@ import PbEnhancedElement from '../pb_enhanced_element'
 import { debounce } from '../utilities/object'
 
 // Kit selectors
-const KIT_SELECTOR             = '[class^="pb_"][class*="_kit"]'
-const ERROR_MESSAGE_SELECTOR   = '.pb_body_kit_negative'
+const KIT_SELECTOR                           = '[class^="pb_"][class*="_kit"]'
+const ERROR_MESSAGE_SELECTOR                 = '.pb_body_kit_negative'
 
 // Validation selectors
-const FORM_SELECTOR            = 'form[data-pb-form-validation="true"]'
-const REQUIRED_FIELDS_SELECTOR = 'input[required],textarea[required],select[required]'
+const FORM_SELECTOR                          = 'form[data-pb-form-validation="true"]'
+const REQUIRED_FIELDS_SELECTOR               = 'input[required],textarea[required],select[required]'
+const PHONE_NUMBER_VALIDATION_ERROR_SELECTOR = '[data-pb-phone-validation-error="true"]'
 
 const FIELD_EVENTS = [
   'change',
@@ -27,6 +28,14 @@ class PbFormValidation extends PbEnhancedElement {
           this.validateFormField(event)
         }, 250), false)
       })
+    })
+
+    // Add event listener to check for phone number validation errors
+    this.element.addEventListener('submit', (event) => {
+      if (this.hasPhoneNumberValidationErrors()) {
+        event.preventDefault()
+        return false
+      }
     })
   }
 
@@ -66,6 +75,12 @@ class PbFormValidation extends PbEnhancedElement {
     parentElement.closest(KIT_SELECTOR).classList.remove('error')
     const errorMessageContainer = parentElement.querySelector(ERROR_MESSAGE_SELECTOR)
     if (errorMessageContainer) errorMessageContainer.remove()
+  }
+
+  // Check if there are phone number input errors
+  hasPhoneNumberValidationErrors() {
+    const phoneNumberErrors = this.element.querySelectorAll(PHONE_NUMBER_VALIDATION_ERROR_SELECTOR)
+    return phoneNumberErrors.length > 0
   }
 
   get errorMessageContainer() {

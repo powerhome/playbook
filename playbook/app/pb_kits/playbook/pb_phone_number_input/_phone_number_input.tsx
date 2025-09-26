@@ -110,18 +110,41 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.Ref<unknown>
 
   const inputRef = useRef<HTMLInputElement | null>(null)
   const itiRef = useRef<any>(null);
+  const wrapperRef = useRef<HTMLDivElement | null>(null); // Add wrapper ref
   const [inputValue, setInputValue] = useState(value)
   const [error, setError] = useState(props.error)
   const [dropDownIsOpen, setDropDownIsOpen] = useState(false)
   const [selectedData, setSelectedData] = useState()
   const [hasTyped, setHasTyped] = useState(false)
 
+  // Function to update validation state on the wrapper element
+  // Only applies when input is required
+  const updateValidationState = (hasError: boolean) => {
+    if (wrapperRef.current && required) {
+      if (hasError) {
+        wrapperRef.current.classList.add('pb_phone_number_validation_error')
+        wrapperRef.current.setAttribute('data-pb-phone-validation-error', 'true')
+      } else {
+        wrapperRef.current.classList.remove('pb_phone_number_validation_error')
+        wrapperRef.current.removeAttribute('data-pb-phone-validation-error')
+      }
+    } else if (wrapperRef.current && !required) {
+      // Always clear validation state if field is not required
+      wrapperRef.current.classList.remove('pb_phone_number_validation_error')
+      wrapperRef.current.removeAttribute('data-pb-phone-validation-error')
+    }
+  }
+
   useEffect(() => {
-    if ((error ?? '').length > 0) {
+    const hasError = (error ?? '').length > 0
+    if (hasError) {
       onValidate(false)
     } else {
       onValidate(true)
     }
+
+    // Update validation state whenever error changes
+    updateValidationState(hasError)
   }, [error, onValidate])
 
   /*
@@ -135,6 +158,10 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.Ref<unknown>
         setInputValue("")
         setError("")
         setHasTyped(false)
+        // Only clear validation state if field was required
+        if (required) {
+          updateValidationState(false)
+        }
       },
       inputNode() {
         return inputRef.current
@@ -212,9 +239,20 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.Ref<unknown>
     }
   }
 
+  // Validation for required empty fields
+  const validateRequiredField = () => {
+    if (required && (!inputValue || inputValue.trim() === '')) {
+      setError('Missing phone number')
+      return true
+    }
+    return false
+  }
 
   const validateErrors = () => {
     if (!hasTyped && !error) return
+
+    // First check if required field is empty
+    if (validateRequiredField()) return
 
     if (itiRef.current) isValid(itiRef.current.isValidNumber())
     if (validateOnlyNumbers(itiRef.current)) return
@@ -310,7 +348,10 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.Ref<unknown>
     value: inputValue
   }
 
-  let wrapperProps: Record<string, unknown> = { className: classes }
+  let wrapperProps: Record<string, unknown> = {
+    className: classes,
+    ref: wrapperRef // Add ref to wrapper
+  }
 
   if (!isEmpty(aria)) textInputProps = {...textInputProps, ...ariaProps}
   if (!isEmpty(data)) wrapperProps = {...wrapperProps, ...dataProps}
