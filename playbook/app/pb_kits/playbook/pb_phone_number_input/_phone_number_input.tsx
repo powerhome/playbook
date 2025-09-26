@@ -110,18 +110,35 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.Ref<unknown>
 
   const inputRef = useRef<HTMLInputElement | null>(null)
   const itiRef = useRef<any>(null);
+  const wrapperRef = useRef<HTMLDivElement | null>(null); // Add wrapper ref
   const [inputValue, setInputValue] = useState(value)
   const [error, setError] = useState(props.error)
   const [dropDownIsOpen, setDropDownIsOpen] = useState(false)
   const [selectedData, setSelectedData] = useState()
   const [hasTyped, setHasTyped] = useState(false)
 
+  // Function to update validation state on the wrapper element
+  // Only applies when input is required
+  const updateValidationState = (hasError: boolean) => {
+    if (wrapperRef.current && required) {
+      if (hasError) {
+        wrapperRef.current.setAttribute('data-pb-phone-validation-error', 'true')
+      } else {
+        wrapperRef.current.removeAttribute('data-pb-phone-validation-error')
+      }
+    }
+  }
+
   useEffect(() => {
-    if ((error ?? '').length > 0) {
+    const hasError = (error ?? '').length > 0
+    if (hasError) {
       onValidate(false)
     } else {
       onValidate(true)
     }
+
+    // Update validation state whenever error changes
+    updateValidationState(hasError)
   }, [error, onValidate])
 
   /*
@@ -135,6 +152,10 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.Ref<unknown>
         setInputValue("")
         setError("")
         setHasTyped(false)
+        // Only clear validation state if field was required
+        if (required) {
+          updateValidationState(false)
+        }
       },
       inputNode() {
         return inputRef.current
@@ -164,6 +185,13 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.Ref<unknown>
 
   const validateTooShortNumber = (itiInit: any) => {
     if (!itiInit) return
+
+    // If field is empty, don't show "too short" error
+    if (!inputValue || inputValue.trim() === '') {
+      setError('')
+      return false
+    }
+
     if (itiInit.getValidationError() === ValidationError.TooShort) {
       return showFormattedError('too short')
     } else {
@@ -212,8 +240,26 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.Ref<unknown>
     }
   }
 
+  // Validation for required empty fields
+  const validateRequiredField = () => {
+    if (required && (!inputValue || inputValue.trim() === '')) {
+      setError('Missing phone number')
+      return true
+    }
+    return false
+  }
 
   const validateErrors = () => {
+    // If field is empty, only show required field error if applicable
+    if (!inputValue || inputValue.trim() === '') {
+      if (validateRequiredField()) return
+      // Clear any existing errors if field is empty and not required
+      if (!required) {
+        setError('')
+      }
+      return
+    }
+
     if (!hasTyped && !error) return
 
     if (itiRef.current) isValid(itiRef.current.isValidNumber())
@@ -310,7 +356,10 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.Ref<unknown>
     value: inputValue
   }
 
-  let wrapperProps: Record<string, unknown> = { className: classes }
+  let wrapperProps: Record<string, unknown> = {
+    className: classes,
+    ref: wrapperRef // Add ref to wrapper
+  }
 
   if (!isEmpty(aria)) textInputProps = {...textInputProps, ...ariaProps}
   if (!isEmpty(data)) wrapperProps = {...wrapperProps, ...dataProps}
