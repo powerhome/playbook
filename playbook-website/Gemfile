@@ -9,19 +9,19 @@ gem "playbook_ui", path: "../playbook"
 
 gem "mysql2", "0.5.6"
 gem "rails", "~> 7.1.5.1"
-gem "turbo-rails", "~> 1.4.0"
+gem "turbo-rails", "1.4.0"
 gem "puma", "~> 6.4.2"
 gem "vite_rails"
 # Make Compatible with Ruby 3.1.0 Upgrade
-gem "psych", "< 4"
-gem "bootsnap", ">= 1.1.0", require: false
+gem "psych", "3.3.4"
+gem "bootsnap", "1.18.4", require: false
 
 # livenessProbe and readinessProbe. See: https://github.com/powerhome/playbook/blob/master/playbook/config/deploy/templates/deployment.yaml.erb
 gem "health_check"
 
-gem "redcarpet", "~> 3.6"
-gem 'front_matter_parser', "~> 1.0.1"
-gem "rouge", "~> 3.15"
+gem "redcarpet", "3.6.0"
+gem 'front_matter_parser', "1.0.1"
+gem "rouge", "3.30.0"
 gem "faker"
 gem "will_paginate"
 gem "sentry-ruby"
