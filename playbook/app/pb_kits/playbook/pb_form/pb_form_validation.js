@@ -4,7 +4,7 @@ import { debounce } from '../utilities/object'
 // Kit selectors
 const KIT_SELECTOR                           = '[class^="pb_"][class*="_kit"]'
 const ERROR_MESSAGE_SELECTOR                 = '.pb_body_kit_negative'
-const PHONE_NUMBER_INPUT_SELECTOR            = '.pb_phone_number_input_kit'
+const PHONE_NUMBER_INPUT_SELECTOR            = '.pb_phone_number_input'
 
 // Validation selectors
 const FORM_SELECTOR                          = 'form[data-pb-form-validation="true"]'
@@ -58,7 +58,9 @@ class PbFormValidation extends PbEnhancedElement {
     const kitElement = parentElement.closest(KIT_SELECTOR)
 
     // Skip error message container for Phone Number Input as it handles its own errors
-    if (kitElement && kitElement.matches(PHONE_NUMBER_INPUT_SELECTOR)) {
+    // as the closest kitElement is "pb_text_input_kit mb_sm" for Phone Number Input,
+    // we target the parent element of kitElement to check
+    if (kitElement && kitElement.parentElement.matches(PHONE_NUMBER_INPUT_SELECTOR)) {
       return
     }
 

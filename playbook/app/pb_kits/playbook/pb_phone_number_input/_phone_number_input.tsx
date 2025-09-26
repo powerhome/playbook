@@ -122,15 +122,12 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.Ref<unknown>
   const updateValidationState = (hasError: boolean) => {
     if (wrapperRef.current && required) {
       if (hasError) {
-        wrapperRef.current.classList.add('pb_phone_number_validation_error')
         wrapperRef.current.setAttribute('data-pb-phone-validation-error', 'true')
       } else {
-        wrapperRef.current.classList.remove('pb_phone_number_validation_error')
         wrapperRef.current.removeAttribute('data-pb-phone-validation-error')
       }
     } else if (wrapperRef.current && !required) {
       // Always clear validation state if field is not required
-      wrapperRef.current.classList.remove('pb_phone_number_validation_error')
       wrapperRef.current.removeAttribute('data-pb-phone-validation-error')
     }
   }
@@ -191,13 +188,13 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.Ref<unknown>
 
   const validateTooShortNumber = (itiInit: any) => {
     if (!itiInit) return
-    
+
     // If field is empty, don't show "too short" error
     if (!inputValue || inputValue.trim() === '') {
       setError('')
       return false
     }
-    
+
     if (itiInit.getValidationError() === ValidationError.TooShort) {
       return showFormattedError('too short')
     } else {
