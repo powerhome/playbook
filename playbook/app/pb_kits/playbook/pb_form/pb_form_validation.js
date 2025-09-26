@@ -4,6 +4,7 @@ import { debounce } from '../utilities/object'
 // Kit selectors
 const KIT_SELECTOR                           = '[class^="pb_"][class*="_kit"]'
 const ERROR_MESSAGE_SELECTOR                 = '.pb_body_kit_negative'
+const PHONE_NUMBER_INPUT_SELECTOR            = '.pb_phone_number_input_kit'
 
 // Validation selectors
 const FORM_SELECTOR                          = 'form[data-pb-form-validation="true"]'
@@ -54,10 +55,16 @@ class PbFormValidation extends PbEnhancedElement {
 
   showValidationMessage(target) {
     const { parentElement } = target
+    const kitElement = parentElement.closest(KIT_SELECTOR)
+
+    // Skip error message container for Phone Number Input as it handles its own errors
+    if (kitElement && kitElement.matches(PHONE_NUMBER_INPUT_SELECTOR)) {
+      return
+    }
 
     // ensure clean error message state
     this.clearError(target)
-    parentElement.closest(KIT_SELECTOR).classList.add('error')
+    kitElement.classList.add('error')
 
     // set the error message element
     const errorMessageContainer = this.errorMessageContainer
@@ -72,9 +79,17 @@ class PbFormValidation extends PbEnhancedElement {
 
   clearError(target) {
     const { parentElement } = target
-    parentElement.closest(KIT_SELECTOR).classList.remove('error')
-    const errorMessageContainer = parentElement.querySelector(ERROR_MESSAGE_SELECTOR)
-    if (errorMessageContainer) errorMessageContainer.remove()
+    const kitElement = parentElement.closest(KIT_SELECTOR)
+
+    if (kitElement) {
+      kitElement.classList.remove('error')
+
+      // Only remove error message container for non-Phone Number Input kits
+      if (!kitElement.matches(PHONE_NUMBER_INPUT_SELECTOR)) {
+        const errorMessageContainer = parentElement.querySelector(ERROR_MESSAGE_SELECTOR)
+        if (errorMessageContainer) errorMessageContainer.remove()
+      }
+    }
   }
 
   // Check if there are phone number input errors
