@@ -1,17 +1,20 @@
-  <%= pb_rails("button", props: { text: "Disable Button", variant: "link", id: "toggle-disabled-demo-with-helper" }) %>
-  <%= pb_rails("button", props: { text: "Enable Button", variant: "link", id: "toggle-enabled-demo-with-helper" }) %>
+  <%= pb_rails("body", props: { text: "Click to disable the Button below", id: "toggle-disabled-demo-with-helper", cursor: "pointer", color:"link", margin_bottom:"sm" }) %>
+  <%= pb_rails("body", props: { text: "Click to enable the Button below", id: "toggle-enabled-demo-with-helper", cursor: "pointer", color:"link", margin_bottom:"sm" }) %>
 <br/>
+<%= pb_rails("card", props:{display:"flex", flex_direction:"row", justify_content:"center"}) do %>
 <%= pb_rails("button", props: { text: "Watch me Change!", id: "managed_button_with_helper", data:{pb_button_managed: true} }) %>
+<% end %>
 
 <script>
   document.addEventListener('DOMContentLoaded', function () {
-    const demoBtn = document.querySelector('#managed_button_with_helper')
-
     const disable = document.querySelector('#toggle-disabled-demo-with-helper')
     const enable = document.querySelector('#toggle-enabled-demo-with-helper')
 
-    disable.addEventListener('click', (e) => {demoBtn._pbButton.disable()});
+    // Find the Button you want to 'manage'
+    const demoBtn = document.querySelector('#managed_button_with_helper')
 
+    // Use the pbButton object created by the kit to call the enable/disable methods
+    disable.addEventListener('click', (e) => {demoBtn._pbButton.disable()});
     enable.addEventListener('click', (e) => {demoBtn._pbButton.enable()});
 
   });

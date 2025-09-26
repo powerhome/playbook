@@ -1,28 +1,30 @@
-<br/>
-  <%= pb_rails("button", props: { text: "Disable Buttons", variant: "link", id: "toggle-disabled-demo" }) %>
-  <%= pb_rails("button", props: { text: "Enable Buttons", variant: "link", id: "toggle-enabled-demo" }) %>
-<br/>
-<%= pb_rails("button", props: { text: "I am a Normal Button", id: "normal_managed_button", data:{pb_button_managed: true}, margin_bottom: "lg" }) %>
-<br/>
-<%= pb_rails("button", props: { text: "I am an <a> Button", id: "a_tag_managed_button", tag:"a", data:{pb_button_managed: true}, link: "http://google.com", margin_right: "lg" }) %>
+  <%= pb_rails("body", props: { text: "Click to disable the Buttons below", id: "toggle-disabled-demo", cursor: "pointer", color:"link", margin_bottom:"sm" }) %>
+  <%= pb_rails("body", props: { text: "Click to enable the Buttons below", id: "toggle-enabled-demo", cursor: "pointer", color:"link", margin_bottom:"sm" }) %>
 
+<%= pb_rails("card", props:{display:"flex", flex_direction:"row", justify_content:"center"}) do %>
+<%= pb_rails("button", props: { text: "I am a Button", id: "normal_managed_button", data:{pb_button_managed: true}, margin_right: "lg" }) %>
+<%= pb_rails("button", props: { text: "I am an <a> Button", id: "a_tag_managed_button", tag:"a", data:{pb_button_managed: true}, link: "http://google.com"}) %>
+<% end %>
 <script>
   document.addEventListener('DOMContentLoaded', function () {
     const disableTrigger = document.querySelector('#toggle-disabled-demo')
     const enableTrigger = document.querySelector('#toggle-enabled-demo')
 
-    // Managed Buttons
+    // Find the Buttons you want to 'manage'
     const btn = document.querySelector('#normal_managed_button');
     const link = document.querySelector('#a_tag_managed_button');
 
     disableTrigger.addEventListener('click', (e) => {
-        // Disable both default button and a tag button
+        // Disable default button
         btn.setAttribute('disabled', true)
+        // Disable a tag button
         link.setAttribute('aria-disabled', 'true')
     });
+
     enableTrigger.addEventListener('click', (e) => {
-        // Enable both default button and a tag button
+        // Enable default button
         btn.removeAttribute('disabled')
+        // Enable a tag button
         link.removeAttribute('aria-disabled')
     });
   });
