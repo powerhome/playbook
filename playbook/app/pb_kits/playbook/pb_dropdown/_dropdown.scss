@@ -10,9 +10,15 @@
 @import "./scss_partials/dropdown_animation";
 @import "dropdown_mixin";
 
-[class*="pb_dropdown"] {
+.pb_dropdown_default,
+.pb_dropdown_subtle,
+.pb_dropdown_default_separators_hidden,
+.pb_dropdown_subtle_separators_hidden {
   .dropdown_wrapper {
-    [class*="dropdown_trigger_wrapper"] {
+    .dropdown_trigger_wrapper,
+    .dropdown_trigger_wrapper_focus,
+    .dropdown_trigger_wrapper_focus_select_only,
+    .dropdown_trigger_wrapper_select_only {
       @include pb_body;
       border: 1px solid $border_light;
       background-color: $white;
@@ -48,11 +54,11 @@
         transition: box-shadow 0.15s ease-in-out;
       }
 
-      &[class*="_select_only"] {
+      &.dropdown_trigger_wrapper_select_only {
         box-shadow: inset 0 -11px 20px rgba($primary, 0.05);
       }
 
-      &[class*="_focus"] {
+      &.dropdown_trigger_wrapper_focus {
         box-shadow: 0px 0px 0 1px $primary !important;
         transition: box-shadow 0.1s ease-in-out;
       }
@@ -69,7 +75,12 @@
       z-index: $z_1;
       width: 100%;
 
-      [class*="pb_dropdown_option"] {
+      .pb_dropdown_option,
+      .pb_dropdown_option_list,
+      .pb_dropdown_option_selected,
+      .pb_dropdown_option_focused,
+      .pb_dropdown_option_list_focused,
+      .pb_dropdown_option_selected_focused {
         padding-left: $space_sm;
         padding-right: $space_sm;
         padding-top: $space_xs;
@@ -79,11 +90,14 @@
           background-color: $bg_light;
         }
 
-        &[class*="_focused"] {
+        &.pb_dropdown_option_focused,
+        &.pb_dropdown_option_list_focused,
+        &.pb_dropdown_option_selected_focused {
           background-color: $bg_light;
         }
 
-        &[class*="_list"] {
+        &.pb_dropdown_option_list,
+        &.pb_dropdown_option_list_focused {
           border-bottom: 1px solid $border_light;
 
           &:hover, &:focus {
@@ -92,7 +106,8 @@
             }
           }
         }
-        &[class*="selected"] {
+        &.pb_dropdown_option_selected,
+        &.pb_dropdown_option_selected_focused {
           background-color: $primary;
           color: $white;
           [class^="pb_body"],
@@ -141,41 +156,66 @@
     }
 
     &.error {
-      [class*=pb_body_kit] {
+      .pb_body_kit_negative {
         margin-top: $space_xs / 2;
       }
 
-      [class*="dropdown_trigger_wrapper"] {
+      .dropdown_trigger_wrapper,
+      .dropdown_trigger_wrapper_focus,
+      .dropdown_trigger_wrapper_focus_select_only,
+      .dropdown_trigger_wrapper_select_only {
         border-color: $error;
         box-shadow: none !important;
       }
     }
   }
 
-  &[class*="separators_hidden"] {
+  &.pb_dropdown_default_separators_hidden,
+  &.pb_dropdown_subtle_separators_hidden {
     .dropdown_wrapper {
       .pb_dropdown_container {
 
-        [class*="pb_dropdown_option"] {
+        .pb_dropdown_option,
+        .pb_dropdown_option_list,
+        .pb_dropdown_option_selected,
+        .pb_dropdown_option_focused,
+        .pb_dropdown_option_list_focused,
+        .pb_dropdown_option_selected_focused {
           border: none;
         }
       }
     }
   }
 
-  &[class*="subtle"] {
+  &.pb_dropdown_subtle,
+  &.pb_dropdown_subtle_separators_hidden {
     .dropdown_wrapper {
       .pb_dropdown_container {
         
-        [class*="pb_dropdown_option"]:first-child {
+        .pb_dropdown_option:first-child,
+        .pb_dropdown_option_list:first-child,
+        .pb_dropdown_option_selected:first-child,
+        .pb_dropdown_option_focused:first-child,
+        .pb_dropdown_option_list_focused:first-child,
+        .pb_dropdown_option_selected_focused:first-child {
           margin-top: $space_xs;
         }
 
-        [class*="pb_dropdown_option"]:last-child {
+        .pb_dropdown_option:last-child,
+        .pb_dropdown_option_list:last-child,
+        .pb_dropdown_option_selected:last-child,
+        .pb_dropdown_option_focused:last-child,
+        .pb_dropdown_option_list_focused:last-child,
+        .pb_dropdown_option_selected_focused:last-child {
           margin-bottom: $space_xs;
         }
 
-        [class*="pb_dropdown_option"] {
+        .pb_dropdown_option,
+        .pb_dropdown_option_list,
+        .pb_dropdown_option_selected,
+        .pb_dropdown_option_focused,
+        .pb_dropdown_option_list_focused,
+        .pb_dropdown_option_selected_focused {
           margin: $space_xs;
           padding: $space_xs;
           border-radius: $border_radius_md;
@@ -193,24 +233,44 @@
           }
         }
         
-        [class*="pb_dropdown_option"]:last-child::after {
+        .pb_dropdown_option:last-child::after,
+        .pb_dropdown_option_list:last-child::after,
+        .pb_dropdown_option_selected:last-child::after,
+        .pb_dropdown_option_focused:last-child::after,
+        .pb_dropdown_option_list_focused:last-child::after,
+        .pb_dropdown_option_selected_focused:last-child::after {
           display: none; 
         }
       }
     }
   
-    &[class*="separators_hidden"] {
+    &.pb_dropdown_subtle_separators_hidden {
       .dropdown_wrapper {
         .pb_dropdown_container {
-          [class*="pb_dropdown_option"]:first-child {
+          .pb_dropdown_option:first-child,
+          .pb_dropdown_option_list:first-child,
+          .pb_dropdown_option_selected:first-child,
+          .pb_dropdown_option_focused:first-child,
+          .pb_dropdown_option_list_focused:first-child,
+          .pb_dropdown_option_selected_focused:first-child {
             margin-top: $space_xs;
           }
   
-          [class*="pb_dropdown_option"]:last-child {
+          .pb_dropdown_option:last-child,
+          .pb_dropdown_option_list:last-child,
+          .pb_dropdown_option_selected:last-child,
+          .pb_dropdown_option_focused:last-child,
+          .pb_dropdown_option_list_focused:last-child,
+          .pb_dropdown_option_selected_focused:last-child {
             margin-bottom: $space_xs;
           }
 
-          [class*="pb_dropdown_option"] {
+          .pb_dropdown_option,
+          .pb_dropdown_option_list,
+          .pb_dropdown_option_selected,
+          .pb_dropdown_option_focused,
+          .pb_dropdown_option_list_focused,
+          .pb_dropdown_option_selected_focused {
             padding: $space_xxs $space_xs;
             margin: $space_xxs $space_xs;
      
@@ -218,7 +278,8 @@
               height: 0px;
             }
 
-            &[class*="selected"] {
+            &.pb_dropdown_option_selected,
+            &.pb_dropdown_option_selected_focused {
               border-bottom: none;
             }
           }
@@ -229,7 +290,10 @@
 
   &.dark {
     .dropdown_wrapper {
-      [class*="dropdown_trigger_wrapper"] {
+      .dropdown_trigger_wrapper,
+      .dropdown_trigger_wrapper_focus,
+      .dropdown_trigger_wrapper_focus_select_only,
+      .dropdown_trigger_wrapper_select_only {
         @include pb_body_light_dark;
         background-color: rgba($white, 0.1) !important;
         background: none;
@@ -244,7 +308,7 @@
         [class^="pb_body"] {
           color: $white;
         }
-        &[class*="_select_only"] {
+        &.dropdown_trigger_wrapper_select_only {
           box-shadow: inset 0 -11px 20px rgba($white, 0.05);
         }
         .dropdown_input {
@@ -254,7 +318,10 @@
       }
 
       &.error {
-        [class*="dropdown_trigger_wrapper"] {
+        .dropdown_trigger_wrapper,
+        .dropdown_trigger_wrapper_focus,
+        .dropdown_trigger_wrapper_focus_select_only,
+        .dropdown_trigger_wrapper_select_only {
           border-color: $error_dark;
         }
       }
@@ -268,19 +335,28 @@
         color: $white !important;
       }
 
-      [class*="pb_dropdown_option"] {
+      .pb_dropdown_option,
+      .pb_dropdown_option_list,
+      .pb_dropdown_option_selected,
+      .pb_dropdown_option_focused,
+      .pb_dropdown_option_list_focused,
+      .pb_dropdown_option_selected_focused {
         &:hover {
           background-color: $hover_dark;
         }
 
-        &[class*="_focused"] {
+        &.pb_dropdown_option_focused,
+        &.pb_dropdown_option_list_focused,
+        &.pb_dropdown_option_selected_focused {
           background-color: $hover_dark;
         }
 
-        &[class*="_list"] {
+        &.pb_dropdown_option_list,
+        &.pb_dropdown_option_list_focused {
           border-color: rgba($white, 0.15);
         }
-        &[class*="selected"] {
+        &.pb_dropdown_option_selected,
+        &.pb_dropdown_option_selected_focused {
           background-color: $primary;
           border-bottom: rgba($white, 0.15);
         }
