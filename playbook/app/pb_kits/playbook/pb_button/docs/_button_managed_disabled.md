@@ -1,4 +1,4 @@
-If needing to toggle the disabled state of the Button dynmically, you can now do so in rails using the `pb-button-managed` data attribute. 
+If needing to toggle the disabled state of the Button dynamically (for example, within a Turbo or Stimulus context), you can now do so in rails using the `pb-button-managed` data attribute. 
 
 1) Add the following data attribute to your button kit: `data:{ pb-button-managed: true }`
 

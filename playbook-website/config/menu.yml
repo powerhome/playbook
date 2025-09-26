@@ -134,7 +134,7 @@ kits:
     status: stable
     icons_used: true
     react_rendered: false
-    enhanced_element_used: false
+    enhanced_element_used: true
   - name: button_toolbar
     platforms: *1
     description: This kit should primarily hold the most commonly used buttons.
