@@ -45,98 +45,104 @@ $gap_lg: $height_from_top + $space_lg;
 
 .pb_timeline_kit_horizontal,
 .pb_timeline_kit_horizontal_with_date {
-  @include flex_wrapper(row);
-  width: 100%;
-  > div {
-    &:last-child {
-      flex-basis: auto !important;
-      .pb_timeline_item_step {
-        .pb_timeline_item_connector {
-          opacity: 0;
+    @include flex_wrapper(row);
+    width: 100%;
+
+    >div {
+        &:last-child {
+            flex-basis: auto !important;
+
+            .pb_timeline_item_step {
+                .pb_timeline_item_connector {
+                    opacity: 0;
+                }
+            }
+
+            .pb_timeline_item_right_block {
+                display: block;
+                width: 100%;
+                overflow: hidden;
+                white-space: nowrap;
+            }
         }
-      }
-      .pb_timeline_item_right_block {
-        display: block;
-        width: 100%;
-        overflow: hidden;
-        white-space: nowrap;
-      }
     }
-  }
-  .pb_timeline_item_kit_solid {
-    flex-basis: 100%;
-    .pb_timeline_item_step {
-      @include flex_wrapper(row);
-      align-items: center;
-      margin-top: $space_xs;
-      margin-bottom: $space_xs;
-      .pb_timeline_item_connector {
-        @include pb_timeline_line_solid(
-          $connector_width,
-          $connector_width,
-          0 $icon_margin 0 $icon_margin
-        );
-      }
+
+    .pb_timeline_item_kit_solid {
+        flex-basis: 100%;
+
+        .pb_timeline_item_step {
+            @include flex_wrapper(row);
+            align-items: center;
+            margin-top: $space_xs;
+            margin-bottom: $space_xs;
+
+            .pb_timeline_item_connector {
+                @include pb_timeline_line_solid($connector_width,
+                    $connector_width,
+                    0 $icon_margin 0 $icon_margin );
+            }
+        }
     }
-  }
-  .pb_timeline_item_kit_dotted {
-    flex-basis: 100%;
-    .pb_timeline_item_step {
-      @include flex_wrapper(row);
-      align-items: center;
-      margin-top: $space_xs;
-      margin-bottom: $space_xs;
-      .pb_timeline_item_connector {
-        @include pb_timeline_line_dotted_horizontal(
-          $connector_width,
-          $connector_width,
-          0 $icon_margin 0 $icon_margin
-        );
-      }
+
+    .pb_timeline_item_kit_dotted {
+        flex-basis: 100%;
+
+        .pb_timeline_item_step {
+            @include flex_wrapper(row);
+            align-items: center;
+            margin-top: $space_xs;
+            margin-bottom: $space_xs;
+
+            .pb_timeline_item_connector {
+                @include pb_timeline_line_dotted_horizontal($connector_width,
+                    $connector_width,
+                    0 $icon_margin 0 $icon_margin );
+            }
+        }
     }
-  }
 }
 
 .pb_timeline_kit_horizontal_with_date {
-  .pb_timeline_item_kit_solid {
-    .pb_timeline_item_left_block {
-      display: flex;
-      height: 55px;
+    .pb_timeline_item_kit_solid {
+        .pb_timeline_item_left_block {
+            display: flex;
+            height: 55px;
 
-      .pb_date_stacked_kit_center_sm {
-        .pb_date_stacked_day_month {
-          .pb_caption_kit_md {
-            text-align: left;
-          }
+            .pb_date_stacked_kit_center_sm {
+                .pb_date_stacked_day_month {
+                    .pb_caption_kit_md {
+                        text-align: left;
+                    }
+                }
+            }
         }
-      }
     }
-  }
 
-  .pb_timeline_item_kit_dotted {
-    .pb_timeline_item_left_block {
-      height: 55px;
-      .pb_date_stacked_kit_center_sm {
-        .pb_date_stacked_day_month {
-          .pb_caption_kit_md {
-            text-align: left;
-          }
+    .pb_timeline_item_kit_dotted {
+        .pb_timeline_item_left_block {
+            height: 55px;
+
+            .pb_date_stacked_kit_center_sm {
+                .pb_date_stacked_day_month {
+                    .pb_caption_kit_md {
+                        text-align: left;
+                    }
+                }
+            }
         }
-      }
+
+        .pb_timeline_item_step {
+            @include flex_wrapper(row);
+            margin-top: $space_xs;
+            margin-bottom: $space_xs;
+
+            .pb_timeline_item_connector {
+                @include pb_timeline_line_dotted_horizontal($connector_width,
+                    $connector_width,
+                    0 $icon_margin 0 $icon_margin );
+            }
+        }
     }
-    .pb_timeline_item_step {
-      @include flex_wrapper(row);
-      margin-top: $space_xs;
-      margin-bottom: $space_xs;
-      .pb_timeline_item_connector {
-        @include pb_timeline_line_dotted_horizontal(
-          $connector_width,
-          $connector_width,
-          0 $icon_margin 0 $icon_margin
-        );
-      }
-    }
-  }
 }
 
 .pb_timeline_kit_vertical,
@@ -149,184 +155,204 @@ $gap_lg: $height_from_top + $space_lg;
 .pb_timeline_kit_vertical_with_date_gap_sm,
 .pb_timeline_kit_vertical_with_date_gap_md,
 .pb_timeline_kit_vertical_with_date_gap_lg {
-  @include flex_wrapper(column);
-  align-items: flex-start;
-  align-self: auto;
-  > div:last-child {
-    .pb_timeline_item_step {
-      .pb_timeline_item_connector {
-        opacity: 0;
-      }
-    }
-  }
-
-
-  [class*="pb_timeline_item_kit"] {
-    @include flex_wrapper(row);
-    &[class*="_solid"] {
-      flex-basis: 100%;
-      .pb_timeline_item_step {
-        @include flex_wrapper(column);
-        align-items: center;
-        align-content: flex-start;
-        margin-right: $space_sm;
-        margin-left: $space_sm;
-        .pb_timeline_item_connector {
-          @include pb_timeline_line_solid(
-            $connector_width,
-            $connector_width,
-            $icon_margin 0 $icon_margin 0
-          );
-        }
-      }
-      [class="pb_timeline_item_left_block"] {
-        margin-bottom: $space_lg;
-        width: 0px;
-      }
-      .pb_timeline_item_right_block {
-        @include flex_wrapper(column);
-        margin-bottom: $space_lg;
-      }
-    }
-
-
-    
-    &[class*="_dotted"] {
-      flex-basis: 100%;
-      .pb_timeline_item_step {
-        @include flex_wrapper(column);
-        align-items: center;
-        margin-right: $space_sm;
-        margin-left: $space_sm;
-        .pb_timeline_item_connector {
-          @include pb_timeline_line_dotted_vertical(
-            $connector_width,
-            $connector_width,
-            $icon_margin 0 $icon_margin 0
-          );
-        }
-      }
-      [class="pb_timeline_item_left_block"] {
-        margin-bottom: $space_lg;
-        width: 0px;
-      }
-      .pb_timeline_item_right_block {
-        @include flex_wrapper(column);
-        margin-bottom: $space_lg;
-      }
-    }
-  }
-  &[class*="_with_date"] {
     @include flex_wrapper(column);
     align-items: flex-start;
     align-self: auto;
-    > div:last-child {
-      .pb_timeline_item_step {
-        .pb_timeline_item_connector {
-          opacity: 0;
+
+    >div:last-child {
+        .pb_timeline_item_step {
+            .pb_timeline_item_connector {
+                opacity: 0;
+            }
         }
-      }
     }
+
+
     [class*="pb_timeline_item_kit"] {
-      @include flex_wrapper(row);
-      &[class*="_solid"] {
-        flex-basis: 100%;
-        .pb_timeline_item_step {
-          @include flex_wrapper(column);
-          align-items: center;
-          align-content: flex-start;
-          margin-right: $space_sm;
-          margin-left: $space_sm;
-          .pb_timeline_item_connector {
-            @include pb_timeline_line_solid(
-              $connector_width,
-              $connector_width,
-              $icon_margin 0 $icon_margin 0
-            );
-          }
+        @include flex_wrapper(row);
+
+        &[class*="_solid"] {
+            flex-basis: 100%;
+
+            .pb_timeline_item_step {
+                @include flex_wrapper(column);
+                align-items: center;
+                align-content: flex-start;
+                margin-right: $space_sm;
+                margin-left: $space_sm;
+
+                .pb_timeline_item_connector {
+                    @include pb_timeline_line_solid($connector_width,
+                        $connector_width,
+                        $icon_margin 0 $icon_margin 0);
+                }
+            }
+
+            [class="pb_timeline_item_left_block"] {
+                margin-bottom: $space_lg;
+                width: 0px;
+            }
+
+            .pb_timeline_item_right_block {
+                @include flex_wrapper(column);
+                margin-bottom: $space_lg;
+            }
         }
-        [class="pb_timeline_item_left_block"] {
-          margin-bottom: $space_lg;
-          min-width: $space_lg;
+
+
+
+        &[class*="_dotted"] {
+            flex-basis: 100%;
+
+            .pb_timeline_item_step {
+                @include flex_wrapper(column);
+                align-items: center;
+                margin-right: $space_sm;
+                margin-left: $space_sm;
+
+                .pb_timeline_item_connector {
+                    @include pb_timeline_line_dotted_vertical($connector_width,
+                        $connector_width,
+                        $icon_margin 0 $icon_margin 0);
+                }
+            }
+
+            [class="pb_timeline_item_left_block"] {
+                margin-bottom: $space_lg;
+                width: 0px;
+            }
+
+            .pb_timeline_item_right_block {
+                @include flex_wrapper(column);
+                margin-bottom: $space_lg;
+            }
         }
-        .pb_timeline_item_right_block {
-          @include flex_wrapper(column);
-          margin-bottom: $space_lg;
-        }
-      }
-      &[class*="_dotted"] {
-        flex-basis: 100%;
-        .pb_timeline_item_step {
-          @include flex_wrapper(column);
-          align-items: center;
-          margin-right: $space_sm;
-          margin-left: $space_sm;
-          .pb_timeline_item_connector {
-            @include pb_timeline_line_dotted_vertical(
-              $connector_width,
-              $connector_width,
-              $icon_margin 0 $icon_margin 0
-            );
-          }
-        }
-        .pb_timeline_item_left_block {
-          margin-bottom: $space_lg;
-          min-width: $space_lg;
-        }
-        .pb_timeline_item_right_block {
-          @include flex_wrapper(column);
-          margin-bottom: $space_lg;
-        }
-      }
     }
-  }
+
+    &[class*="_with_date"] {
+        @include flex_wrapper(column);
+        align-items: flex-start;
+        align-self: auto;
+
+        >div:last-child {
+            .pb_timeline_item_step {
+                .pb_timeline_item_connector {
+                    opacity: 0;
+                }
+            }
+        }
+
+        [class*="pb_timeline_item_kit"] {
+            @include flex_wrapper(row);
+
+            &[class*="_solid"] {
+                flex-basis: 100%;
+
+                .pb_timeline_item_step {
+                    @include flex_wrapper(column);
+                    align-items: center;
+                    align-content: flex-start;
+                    margin-right: $space_sm;
+                    margin-left: $space_sm;
+
+                    .pb_timeline_item_connector {
+                        @include pb_timeline_line_solid($connector_width,
+                            $connector_width,
+                            $icon_margin 0 $icon_margin 0);
+                    }
+                }
+
+                [class="pb_timeline_item_left_block"] {
+                    margin-bottom: $space_lg;
+                    min-width: $space_lg;
+                }
+
+                .pb_timeline_item_right_block {
+                    @include flex_wrapper(column);
+                    margin-bottom: $space_lg;
+                }
+            }
+
+            &[class*="_dotted"] {
+                flex-basis: 100%;
+
+                .pb_timeline_item_step {
+                    @include flex_wrapper(column);
+                    align-items: center;
+                    margin-right: $space_sm;
+                    margin-left: $space_sm;
+
+                    .pb_timeline_item_connector {
+                        @include pb_timeline_line_dotted_vertical($connector_width,
+                            $connector_width,
+                            $icon_margin 0 $icon_margin 0);
+                    }
+                }
+
+                .pb_timeline_item_left_block {
+                    margin-bottom: $space_lg;
+                    min-width: $space_lg;
+                }
+
+                .pb_timeline_item_right_block {
+                    @include flex_wrapper(column);
+                    margin-bottom: $space_lg;
+                }
+            }
+        }
+    }
 }
 
 
 
 .pb_timeline_kit_vertical_gap_xs,
 .pb_timeline_kit_vertical_with_date_gap_xs {
-  .pb_timeline_item_kit_solid,
-  .pb_timeline_item_kit_dotted {
-    .pb_timeline_item_step {
-      .pb_timeline_item_connector {
-        height: $gap_xs !important;
-      }
+
+    .pb_timeline_item_kit_solid,
+    .pb_timeline_item_kit_dotted {
+        .pb_timeline_item_step {
+            .pb_timeline_item_connector {
+                height: $gap_xs !important;
+            }
+        }
     }
-  }
 }
 
 .pb_timeline_kit_vertical_gap_sm,
 .pb_timeline_kit_vertical__with_date_gap_sm {
-  .pb_timeline_item_kit_solid,
-  .pb_timeline_item_kit_dotted {
-    .pb_timeline_item_step {
-      .pb_timeline_item_connector {
-        height: $gap_sm !important;
-      }
+
+    .pb_timeline_item_kit_solid,
+    .pb_timeline_item_kit_dotted {
+        .pb_timeline_item_step {
+            .pb_timeline_item_connector {
+                height: $gap_sm !important;
+            }
+        }
     }
-  }
 }
 
 .pb_timeline_kit_vertical_gap_md,
 .pb_timeline_kit_vertical_with_date_gap_md {
-  .pb_timeline_item_kit_solid,
-  .pb_timeline_item_kit_dotted {
-    .pb_timeline_item_step {
-      .pb_timeline_item_connector {
-        height: $gap_md !important;
-      }
+
+    .pb_timeline_item_kit_solid,
+    .pb_timeline_item_kit_dotted {
+        .pb_timeline_item_step {
+            .pb_timeline_item_connector {
+                height: $gap_md !important;
+            }
+        }
     }
-  }
 }
+
 .pb_timeline_kit_vertical_gap_lg,
 .pb_timeline_kit_vertical_with_date_gap_lg {
-  .pb_timeline_item_kit_solid,
-  .pb_timeline_item_kit_dotted {
-    .pb_timeline_item_step {
-      .pb_timeline_item_connector {
-        height: $gap_lg !important;
-      }
+
+    .pb_timeline_item_kit_solid,
+    .pb_timeline_item_kit_dotted {
+        .pb_timeline_item_step {
+            .pb_timeline_item_connector {
+                height: $gap_lg !important;
+            }
+        }
     }
-  }
 }
