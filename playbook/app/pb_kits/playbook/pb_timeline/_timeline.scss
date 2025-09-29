@@ -226,7 +226,11 @@ $gap_lg: $height_from_top + $space_lg;
         }
     }
 
-    &[class*="_with_date"] {
+    &.pb_timeline_kit_vertical_with_date,
+    &.pb_timeline_kit_vertical_with_date_gap_xs,
+    &.pb_timeline_kit_vertical_with_date_gap_sm,
+    &.pb_timeline_kit_vertical_with_date_gap_md,
+    &.pb_timeline_kit_vertical_with_date_gap_lg {
         @include flex_wrapper(column);
         align-items: flex-start;
         align-self: auto;
