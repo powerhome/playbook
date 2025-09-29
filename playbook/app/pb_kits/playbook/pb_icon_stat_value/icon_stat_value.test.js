@@ -18,7 +18,7 @@ describe("IconStatValue Kit", () => {
         )
 
         const kit = screen.getByTestId(testId)
-        expect(kit).toHaveClass("pb_icon_stat_value_kit_horizontal_sm_lighter")
+        expect(kit).toHaveClass("pb_icon_stat_value_kit_horizontal")
     })
 
     test("renders icon", () => {
@@ -99,9 +99,10 @@ describe("IconStatValue Kit", () => {
                     value={64.18}
           />
             )
-    
+            const size = sizeProp === "sm" ? "3" : sizeProp === "md" ? "2" : "1"
             const kit = screen.getByTestId(testId)
-            expect(kit).toHaveClass(`pb_icon_stat_value_kit_horizontal_${sizeProp}_lighter`)
+            const title = kit.querySelector(".pb_title_kit")
+            expect(title).toHaveClass(`pb_title_${size}`)
 
             cleanup()
         })
@@ -128,9 +129,10 @@ describe("IconStatValue Kit", () => {
                     variant={colorProp}
           />
             )
-    
+
             const kit = screen.getByTestId(testId)
-            expect(kit).toHaveClass(`pb_icon_stat_value_kit_horizontal_sm_${colorProp}`)
+            const iconCircle = kit.querySelector(`.pb_icon_circle_kit_size_sm_${colorProp}`)
+            expect(iconCircle).toBeInTheDocument()
 
             cleanup()
         }) 
@@ -149,7 +151,7 @@ describe("IconStatValue Kit", () => {
             )
     
             const kit = screen.getByTestId(testId)
-            expect(kit).toHaveClass("pb_icon_stat_value_kit_vertical_sm_lighter")
+            expect(kit).toHaveClass("pb_icon_stat_value_kit_vertical")
     })
 
 })

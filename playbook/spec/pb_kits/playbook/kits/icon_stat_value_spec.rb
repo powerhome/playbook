@@ -20,9 +20,44 @@ RSpec.describe Playbook::PbIconStatValue::IconStatValue do
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
       icon = "rocket"
-      expect(subject.new(icon: icon).classname).to eq "pb_icon_stat_value_kit_horizontal_sm_lighter"
-      expect(subject.new(icon: icon, orientation: "vertical", size: "lg", variant: "royal").classname).to eq "pb_icon_stat_value_kit_vertical_lg_royal"
-      expect(subject.new(icon: icon, variant: "purple", size: "lg").classname).to eq "pb_icon_stat_value_kit_horizontal_lg_purple"
+      expect(subject.new(icon: icon).classname).to eq "pb_icon_stat_value_kit_horizontal"
+      expect(subject.new(icon: icon, orientation: "vertical", size: "lg", variant: "royal").classname).to eq "pb_icon_stat_value_kit_vertical"
+    end
+  end
+
+  describe "size prop rendering" do
+    it "renders different title sizes based on size prop" do
+      icon = "lightbulb-on"
+
+      expect(subject.new(icon: icon, size: "sm").title_size).to eq 3
+      expect(subject.new(icon: icon, size: "md").title_size).to eq 2
+      expect(subject.new(icon: icon, size: "lg").title_size).to eq 1
+    end
+  end
+
+  describe "variant prop rendering" do
+    it "passes correct variant to icon_circle component" do
+      icon = "lightbulb-on"
+      variants = %w[default royal blue purple teal red yellow green orange lighter]
+
+      variants.each do |variant|
+        component = subject.new(icon: icon, variant: variant)
+        expect(component.variant).to eq variant
+        expect(component.icon).to eq icon
+        expect(component.size).to eq "sm"
+      end
+    end
+
+    it "passes correct variant with different sizes" do
+      icon = "lightbulb-on"
+      variant = "royal"
+      sizes = %w[sm md lg]
+
+      sizes.each do |size|
+        component = subject.new(icon: icon, variant: variant, size: size)
+        expect(component.variant).to eq variant
+        expect(component.size).to eq size
+      end
     end
   end
 end

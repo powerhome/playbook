@@ -25,7 +25,7 @@ module Playbook
       prop :value
 
       def classname
-        generate_classname("pb_icon_stat_value_kit", orientation, size, variant)
+        generate_classname("pb_icon_stat_value_kit", orientation)
       end
 
       def value_string
