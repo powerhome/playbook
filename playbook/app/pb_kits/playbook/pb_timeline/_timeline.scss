@@ -43,6 +43,59 @@ $gap_lg: $height_from_top + $space_lg;
     flex-direction: $flex_direction;
 }
 
+@mixin timeline_item_step_base($direction: row, $align: center, $margin_v: $space_xs, $margin_h: 0) {
+    @include flex_wrapper($direction);
+    align-items: $align;
+    
+    @if $direction == row {
+        margin-top: $margin_v;
+        margin-bottom: $margin_v;
+    } @else {
+        margin-right: $margin_h;
+        margin-left: $margin_h;
+    }
+}
+
+@mixin timeline_gap_height($height) {
+    .pb_timeline_item_kit_solid,
+    .pb_timeline_item_kit_dotted {
+        .pb_timeline_item_step {
+            .pb_timeline_item_connector {
+                height: $height !important;
+            }
+        }
+    }
+}
+
+@mixin timeline_left_block($margin_bottom: $space_lg, $width: auto, $min_width: auto, $height: auto, $display: block) {
+    .pb_timeline_item_left_block {
+        margin-bottom: $margin_bottom;
+        
+        @if $width != auto {
+            width: $width;
+        }
+        
+        @if $min_width != auto {
+            min-width: $min_width;
+        }
+        
+        @if $height != auto {
+            height: $height;
+        }
+        
+        @if $display != block {
+            display: $display;
+        }
+    }
+}
+
+@mixin timeline_right_block($margin_bottom: $space_lg) {
+    .pb_timeline_item_right_block {
+        @include flex_wrapper(column);
+        margin-bottom: $margin_bottom;
+    }
+}
+
 .pb_timeline_kit_horizontal,
 .pb_timeline_kit_horizontal_with_date {
     @include flex_wrapper(row);
@@ -71,10 +124,7 @@ $gap_lg: $height_from_top + $space_lg;
         flex-basis: 100%;
 
         .pb_timeline_item_step {
-            @include flex_wrapper(row);
-            align-items: center;
-            margin-top: $space_xs;
-            margin-bottom: $space_xs;
+            @include timeline_item_step_base(row, center, $space_xs);
 
             .pb_timeline_item_connector {
                 @include pb_timeline_line_solid($connector_width,
@@ -88,10 +138,7 @@ $gap_lg: $height_from_top + $space_lg;
         flex-basis: 100%;
 
         .pb_timeline_item_step {
-            @include flex_wrapper(row);
-            align-items: center;
-            margin-top: $space_xs;
-            margin-bottom: $space_xs;
+            @include timeline_item_step_base(row, center, $space_xs);
 
             .pb_timeline_item_connector {
                 @include pb_timeline_line_dotted_horizontal($connector_width,
@@ -104,10 +151,9 @@ $gap_lg: $height_from_top + $space_lg;
 
 .pb_timeline_kit_horizontal_with_date {
     .pb_timeline_item_kit_solid {
-        .pb_timeline_item_left_block {
-            display: flex;
-            height: 55px;
+        @include timeline_left_block(auto, auto, auto, 55px, flex);
 
+        .pb_timeline_item_left_block {
             .pb_date_stacked_kit_center_sm {
                 .pb_date_stacked_day_month {
                     .pb_caption_kit_md {
@@ -119,9 +165,9 @@ $gap_lg: $height_from_top + $space_lg;
     }
 
     .pb_timeline_item_kit_dotted {
-        .pb_timeline_item_left_block {
-            height: 55px;
+        @include timeline_left_block(auto, auto, auto, 55px);
 
+        .pb_timeline_item_left_block {
             .pb_date_stacked_kit_center_sm {
                 .pb_date_stacked_day_month {
                     .pb_caption_kit_md {
@@ -132,9 +178,7 @@ $gap_lg: $height_from_top + $space_lg;
         }
 
         .pb_timeline_item_step {
-            @include flex_wrapper(row);
-            margin-top: $space_xs;
-            margin-bottom: $space_xs;
+            @include timeline_item_step_base(row, center, $space_xs);
 
             .pb_timeline_item_connector {
                 @include pb_timeline_line_dotted_horizontal($connector_width,
@@ -173,11 +217,8 @@ $gap_lg: $height_from_top + $space_lg;
         flex-basis: 100%;
 
         .pb_timeline_item_step {
-            @include flex_wrapper(column);
-            align-items: center;
+            @include timeline_item_step_base(column, center, 0, $space_sm);
             align-content: flex-start;
-            margin-right: $space_sm;
-            margin-left: $space_sm;
 
             .pb_timeline_item_connector {
                 @include pb_timeline_line_solid($connector_width,
@@ -186,15 +227,8 @@ $gap_lg: $height_from_top + $space_lg;
             }
         }
 
-        .pb_timeline_item_left_block {
-            margin-bottom: $space_lg;
-            width: 0px;
-        }
-
-        .pb_timeline_item_right_block {
-            @include flex_wrapper(column);
-            margin-bottom: $space_lg;
-        }
+        @include timeline_left_block($space_lg, 0px);
+        @include timeline_right_block($space_lg);
     }
 
 
@@ -203,10 +237,7 @@ $gap_lg: $height_from_top + $space_lg;
         flex-basis: 100%;
 
         .pb_timeline_item_step {
-            @include flex_wrapper(column);
-            align-items: center;
-            margin-right: $space_sm;
-            margin-left: $space_sm;
+            @include timeline_item_step_base(column, center, 0, $space_sm);
 
             .pb_timeline_item_connector {
                 @include pb_timeline_line_dotted_vertical($connector_width,
@@ -215,15 +246,8 @@ $gap_lg: $height_from_top + $space_lg;
             }
         }
 
-        .pb_timeline_item_left_block {
-            margin-bottom: $space_lg;
-            width: 0px;
-        }
-
-        .pb_timeline_item_right_block {
-            @include flex_wrapper(column);
-            margin-bottom: $space_lg;
-        }
+        @include timeline_left_block($space_lg, 0px);
+        @include timeline_right_block($space_lg);
     }
 
     &.pb_timeline_kit_vertical_with_date,
@@ -249,11 +273,8 @@ $gap_lg: $height_from_top + $space_lg;
             flex-basis: 100%;
 
             .pb_timeline_item_step {
-                @include flex_wrapper(column);
-                align-items: center;
+                @include timeline_item_step_base(column, center, 0, $space_sm);
                 align-content: flex-start;
-                margin-right: $space_sm;
-                margin-left: $space_sm;
 
                 .pb_timeline_item_connector {
                     @include pb_timeline_line_solid($connector_width,
@@ -262,25 +283,15 @@ $gap_lg: $height_from_top + $space_lg;
                 }
             }
 
-            .pb_timeline_item_left_block {
-                margin-bottom: $space_lg;
-                min-width: $space_lg;
-            }
-
-            .pb_timeline_item_right_block {
-                @include flex_wrapper(column);
-                margin-bottom: $space_lg;
-            }
+            @include timeline_left_block($space_lg, auto, $space_lg);
+            @include timeline_right_block($space_lg);
         }
 
         .pb_timeline_item_kit_dotted {
             flex-basis: 100%;
 
             .pb_timeline_item_step {
-                @include flex_wrapper(column);
-                align-items: center;
-                margin-right: $space_sm;
-                margin-left: $space_sm;
+                @include timeline_item_step_base(column, center, 0, $space_sm);
 
                 .pb_timeline_item_connector {
                     @include pb_timeline_line_dotted_vertical($connector_width,
@@ -289,15 +300,8 @@ $gap_lg: $height_from_top + $space_lg;
                 }
             }
 
-            .pb_timeline_item_left_block {
-                margin-bottom: $space_lg;
-                min-width: $space_lg;
-            }
-
-            .pb_timeline_item_right_block {
-                @include flex_wrapper(column);
-                margin-bottom: $space_lg;
-            }
+            @include timeline_left_block($space_lg, auto, $space_lg);
+            @include timeline_right_block($space_lg);
         }
     }
 }
@@ -306,52 +310,20 @@ $gap_lg: $height_from_top + $space_lg;
 
 .pb_timeline_kit_vertical_gap_xs,
 .pb_timeline_kit_vertical_with_date_gap_xs {
-
-    .pb_timeline_item_kit_solid,
-    .pb_timeline_item_kit_dotted {
-        .pb_timeline_item_step {
-            .pb_timeline_item_connector {
-                height: $gap_xs !important;
-            }
-        }
-    }
+    @include timeline_gap_height($gap_xs);
 }
 
 .pb_timeline_kit_vertical_gap_sm,
 .pb_timeline_kit_vertical__with_date_gap_sm {
-
-    .pb_timeline_item_kit_solid,
-    .pb_timeline_item_kit_dotted {
-        .pb_timeline_item_step {
-            .pb_timeline_item_connector {
-                height: $gap_sm !important;
-            }
-        }
-    }
+    @include timeline_gap_height($gap_sm);
 }
 
 .pb_timeline_kit_vertical_gap_md,
 .pb_timeline_kit_vertical_with_date_gap_md {
-
-    .pb_timeline_item_kit_solid,
-    .pb_timeline_item_kit_dotted {
-        .pb_timeline_item_step {
-            .pb_timeline_item_connector {
-                height: $gap_md !important;
-            }
-        }
-    }
+    @include timeline_gap_height($gap_md);
 }
 
 .pb_timeline_kit_vertical_gap_lg,
 .pb_timeline_kit_vertical_with_date_gap_lg {
-
-    .pb_timeline_item_kit_solid,
-    .pb_timeline_item_kit_dotted {
-        .pb_timeline_item_step {
-            .pb_timeline_item_connector {
-                height: $gap_lg !important;
-            }
-        }
-    }
+    @include timeline_gap_height($gap_lg);
 }
