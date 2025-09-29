@@ -9,8 +9,8 @@ module Playbook
                   values: %w[sm md lg],
                   default: "sm"
       prop :variant, type: Playbook::Props::Enum,
-                     values: %w[default royal blue purple teal red yellow green orange lighter],
-                     default: "lighter"
+                     values: %w[default royal blue purple teal red yellow green orange],
+                     default: "default"
 
       prop :orientation, type: Playbook::Props::Enum,
                          values: %w[vertical horizontal],

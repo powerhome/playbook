@@ -116,8 +116,7 @@ describe("IconStatValue Kit", () => {
         "teal",
         "red",
         "yellow",
-        "green",
-        "lighter"].forEach(
+        "green"].forEach(
             (colorProp) => {
             render(
                 <IconStatValue

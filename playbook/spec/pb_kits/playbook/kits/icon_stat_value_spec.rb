@@ -13,8 +13,8 @@ RSpec.describe Playbook::PbIconStatValue::IconStatValue do
   }
   it {
     is_expected.to define_enum_prop(:variant)
-      .with_default("lighter")
-      .with_values("default", "royal", "blue", "purple", "teal", "red", "yellow", "green", "orange", "lighter")
+      .with_default("default")
+      .with_values("default", "royal", "blue", "purple", "teal", "red", "yellow", "green", "orange")
   }
 
   describe "#classname" do
@@ -38,7 +38,7 @@ RSpec.describe Playbook::PbIconStatValue::IconStatValue do
   describe "variant prop rendering" do
     it "passes correct variant to icon_circle component" do
       icon = "lightbulb-on"
-      variants = %w[default royal blue purple teal red yellow green orange lighter]
+      variants = %w[default royal blue purple teal red yellow green orange]
 
       variants.each do |variant|
         component = subject.new(icon: icon, variant: variant)
