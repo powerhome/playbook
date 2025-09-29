@@ -2,7 +2,7 @@ import React from 'react'
 import classnames from 'classnames'
 
 import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
-import { globalProps } from '../utilities/globalProps'
+import { globalProps, GlobalProps } from '../utilities/globalProps'
 
 import Body from '../pb_body/_body'
 import Caption from '../pb_caption/_caption'
@@ -34,7 +34,7 @@ type IconStatValueProps = {
     | "orange"
     | "green"
     | "lighter",
-}
+} & GlobalProps
 
 const IconStatValue = (props: IconStatValueProps): React.ReactElement => {
   const {
@@ -101,6 +101,8 @@ const IconStatValue = (props: IconStatValueProps): React.ReactElement => {
       <IconCircle
           dark={dark}
           icon={icon}
+          marginBottom={orientation == 'vertical' ? 'xs' : undefined}
+          marginRight={orientation == 'horizontal' ? 'sm' : undefined}
           size={size}
           variant={variant}
       />

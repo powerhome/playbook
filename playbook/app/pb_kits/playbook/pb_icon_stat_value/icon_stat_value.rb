@@ -41,6 +41,14 @@ module Playbook
           3
         end
       end
+
+      def icon_margin_right
+        orientation === "horizontal" && "sm"
+      end
+
+      def icon_margin_bottom
+        orientation === "vertical" && "xs"
+      end
     end
   end
 end
