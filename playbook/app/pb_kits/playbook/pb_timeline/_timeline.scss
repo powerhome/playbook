@@ -168,64 +168,61 @@ $gap_lg: $height_from_top + $space_lg;
     }
 
 
-    [class*="pb_timeline_item_kit"] {
+    .pb_timeline_item_kit_solid {
         @include flex_wrapper(row);
+        flex-basis: 100%;
 
-        &[class*="_solid"] {
-            flex-basis: 100%;
+        .pb_timeline_item_step {
+            @include flex_wrapper(column);
+            align-items: center;
+            align-content: flex-start;
+            margin-right: $space_sm;
+            margin-left: $space_sm;
 
-            .pb_timeline_item_step {
-                @include flex_wrapper(column);
-                align-items: center;
-                align-content: flex-start;
-                margin-right: $space_sm;
-                margin-left: $space_sm;
-
-                .pb_timeline_item_connector {
-                    @include pb_timeline_line_solid($connector_width,
-                        $connector_width,
-                        $icon_margin 0 $icon_margin 0);
-                }
-            }
-
-            [class="pb_timeline_item_left_block"] {
-                margin-bottom: $space_lg;
-                width: 0px;
-            }
-
-            .pb_timeline_item_right_block {
-                @include flex_wrapper(column);
-                margin-bottom: $space_lg;
+            .pb_timeline_item_connector {
+                @include pb_timeline_line_solid($connector_width,
+                    $connector_width,
+                    $icon_margin 0 $icon_margin 0);
             }
         }
 
+        .pb_timeline_item_left_block {
+            margin-bottom: $space_lg;
+            width: 0px;
+        }
+
+        .pb_timeline_item_right_block {
+            @include flex_wrapper(column);
+            margin-bottom: $space_lg;
+        }
+    }
 
 
-        &[class*="_dotted"] {
-            flex-basis: 100%;
+    .pb_timeline_item_kit_dotted {
+        @include flex_wrapper(row);
+        flex-basis: 100%;
 
-            .pb_timeline_item_step {
-                @include flex_wrapper(column);
-                align-items: center;
-                margin-right: $space_sm;
-                margin-left: $space_sm;
+        .pb_timeline_item_step {
+            @include flex_wrapper(column);
+            align-items: center;
+            margin-right: $space_sm;
+            margin-left: $space_sm;
 
-                .pb_timeline_item_connector {
-                    @include pb_timeline_line_dotted_vertical($connector_width,
-                        $connector_width,
-                        $icon_margin 0 $icon_margin 0);
-                }
+            .pb_timeline_item_connector {
+                @include pb_timeline_line_dotted_vertical($connector_width,
+                    $connector_width,
+                    $icon_margin 0 $icon_margin 0);
             }
+        }
 
-            [class="pb_timeline_item_left_block"] {
-                margin-bottom: $space_lg;
-                width: 0px;
-            }
+        .pb_timeline_item_left_block {
+            margin-bottom: $space_lg;
+            width: 0px;
+        }
 
-            .pb_timeline_item_right_block {
-                @include flex_wrapper(column);
-                margin-bottom: $space_lg;
-            }
+        .pb_timeline_item_right_block {
+            @include flex_wrapper(column);
+            margin-bottom: $space_lg;
         }
     }
 
@@ -242,62 +239,60 @@ $gap_lg: $height_from_top + $space_lg;
             }
         }
 
-        [class*="pb_timeline_item_kit"] {
+        .pb_timeline_item_kit_solid {
             @include flex_wrapper(row);
 
-            &[class*="_solid"] {
-                flex-basis: 100%;
+            flex-basis: 100%;
 
-                .pb_timeline_item_step {
-                    @include flex_wrapper(column);
-                    align-items: center;
-                    align-content: flex-start;
-                    margin-right: $space_sm;
-                    margin-left: $space_sm;
+            .pb_timeline_item_step {
+                @include flex_wrapper(column);
+                align-items: center;
+                align-content: flex-start;
+                margin-right: $space_sm;
+                margin-left: $space_sm;
 
-                    .pb_timeline_item_connector {
-                        @include pb_timeline_line_solid($connector_width,
-                            $connector_width,
-                            $icon_margin 0 $icon_margin 0);
-                    }
-                }
-
-                [class="pb_timeline_item_left_block"] {
-                    margin-bottom: $space_lg;
-                    min-width: $space_lg;
-                }
-
-                .pb_timeline_item_right_block {
-                    @include flex_wrapper(column);
-                    margin-bottom: $space_lg;
+                .pb_timeline_item_connector {
+                    @include pb_timeline_line_solid($connector_width,
+                        $connector_width,
+                        $icon_margin 0 $icon_margin 0);
                 }
             }
 
-            &[class*="_dotted"] {
-                flex-basis: 100%;
+            .pb_timeline_item_left_block {
+                margin-bottom: $space_lg;
+                min-width: $space_lg;
+            }
 
-                .pb_timeline_item_step {
-                    @include flex_wrapper(column);
-                    align-items: center;
-                    margin-right: $space_sm;
-                    margin-left: $space_sm;
+            .pb_timeline_item_right_block {
+                @include flex_wrapper(column);
+                margin-bottom: $space_lg;
+            }
+        }
 
-                    .pb_timeline_item_connector {
-                        @include pb_timeline_line_dotted_vertical($connector_width,
-                            $connector_width,
-                            $icon_margin 0 $icon_margin 0);
-                    }
+        .pb_timeline_item_kit_dotted {
+            flex-basis: 100%;
+
+            .pb_timeline_item_step {
+                @include flex_wrapper(column);
+                align-items: center;
+                margin-right: $space_sm;
+                margin-left: $space_sm;
+
+                .pb_timeline_item_connector {
+                    @include pb_timeline_line_dotted_vertical($connector_width,
+                        $connector_width,
+                        $icon_margin 0 $icon_margin 0);
                 }
+            }
 
-                .pb_timeline_item_left_block {
-                    margin-bottom: $space_lg;
-                    min-width: $space_lg;
-                }
+            .pb_timeline_item_left_block {
+                margin-bottom: $space_lg;
+                min-width: $space_lg;
+            }
 
-                .pb_timeline_item_right_block {
-                    @include flex_wrapper(column);
-                    margin-bottom: $space_lg;
-                }
+            .pb_timeline_item_right_block {
+                @include flex_wrapper(column);
+                margin-bottom: $space_lg;
             }
         }
     }
