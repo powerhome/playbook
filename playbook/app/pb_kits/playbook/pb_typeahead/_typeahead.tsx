@@ -96,6 +96,8 @@ const Typeahead = forwardRef<HTMLInputElement, TypeaheadProps>(({
   onChange,
   optionsByContext = {},
   searchContextSelector,
+  required = false,
+  validation,
   clearOnContextChange = false,
   preserveSearchInput = false, // Default to false to maintain backward compatibility
   ...props
@@ -139,7 +141,7 @@ const Typeahead = forwardRef<HTMLInputElement, TypeaheadProps>(({
 
   const selectProps = {
     cacheOptions: true,
-    required: props.required,
+    required,
     components: {
       Control,
       ClearIndicator,
@@ -299,12 +301,11 @@ const Typeahead = forwardRef<HTMLInputElement, TypeaheadProps>(({
 
   const inlineClass = selectProps.inline ? 'inline' : null
 
-  const shouldShowValidationError = props.required && 
+  const shouldShowValidationError = required && 
                                    formSubmitted
-  
-  const errorDisplay = error || (shouldShowValidationError ? props.validation?.message || "Please fill out this field." : "")
 
-  
+  const errorDisplay = error || (shouldShowValidationError ? validation?.message || "Please fill out this field." : "")
+
   return (
     <div
         {...dataProps}
