@@ -15,8 +15,6 @@ const TimestampDefault = (props) => {
   return (
     <div>
       <Timestamp
-          align="left"
-          showDate={false}
           timestamp={todaysDate}
           {...props}
       />
@@ -24,17 +22,6 @@ const TimestampDefault = (props) => {
       <br />
 
       <Timestamp
-          align="left"
-          showDate
-          timestamp={todaysDate}
-          {...props}
-      />
-
-      <br />
-
-      <Timestamp
-          align="left"
-          showDate
           timestamp={futureDate}
           {...props}
       />
@@ -42,8 +29,6 @@ const TimestampDefault = (props) => {
       <br />
 
       <Timestamp
-          align="left"
-          showDate
           timestamp={pastDate}
           {...props}
       />

@@ -110,12 +110,20 @@ module Playbook
         svg["class"] = %w[pb_custom_icon svg-inline--fa].concat([object.custom_icon_classname]).join(" ")
         svg["id"] = object.id
         svg["data"] = object.data
-        svg["aria"] = object.aria
         svg["height"] = "auto"
         svg["width"] = "auto"
         svg["tabindex"] = object.tabindex
         fill_color = object.color || "currentColor"
         doc.at_css("path")["fill"] = fill_color
+
+        if object.aria.present?
+          object.aria.each do |key, value|
+            k = key.to_s
+            attr = k.start_with?("aria-") ? k : "aria-#{k.tr('_', '-')}"
+            svg[attr] = value
+          end
+        end
+
         raw doc
       rescue OpenURI::HTTPError, StandardError
         # Handle any exceptions and return an empty string

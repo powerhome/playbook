@@ -249,8 +249,10 @@
   }
 
   .pb_advanced_table_body {
-    .last-cell {
-      border-right: 1px solid $border_light !important;
+    tr {
+      .last-cell:not(:last-of-type) {
+        border-right: 1px solid $border_light !important;
+      }
     }
     tr td:first-child {
       padding-left: 8px !important;
@@ -701,6 +703,14 @@
           }
         }
       }
+
+      .pb_advanced_table_header {
+        > tr {
+          .last-header-cell:last-of-type {
+            border-right-width: 0 !important;
+          }
+        }
+      }
     }
   }
 
@@ -975,14 +985,14 @@
   // Firefox-specific fix for last-header-cell and last-cell vertical borders
   @-moz-document url-prefix() {
     .pb_advanced_table_header {
-      .last-header-cell {
+      .last-header-cell:not(:last-child) {
         border-right: none !important;
         box-shadow: 1px 0 0 0 $border_light !important;
       }
     }
 
     .pb_advanced_table_body {
-      .last-cell {
+      .last-cell:not(:last-child) {
         border-right: none !important;
         box-shadow: 1px 0 0 0 $border_light !important;
       }
@@ -991,14 +1001,14 @@
     // Dark mode Firefox fixes
     &.dark {
       .pb_advanced_table_header {
-        .last-header-cell {
+        .last-header-cell:not(:last-child) {
           border-right: none !important;
           box-shadow: 1px 0 0 0 $border_dark !important;
         }
       }
 
       .pb_advanced_table_body {
-        .last-cell {
+        .last-cell:not(:last-child) {
           border-right: none !important;
           box-shadow: 1px 0 0 0 $border_dark !important;
         }
@@ -1011,18 +1021,62 @@
 .pb-advanced-table-popover-option:hover {
   background-color: $bg_light;
 }
+
 // Removes borders when Wrapped inside the Card Kit
-.pb_card_kit > .pb_advanced_table .pb_advanced_table_body .last-cell,
-.pb_card_kit > .pb_advanced_table .pb_advanced_table_header .last-header-cell,
-.pb_card_kit > .pb_advanced_table .pb_advanced_table_body tr td:last-child,
-.pb_card_kit > .pb_advanced_table .pb_advanced_table_header tr th:last-child {
+.pb_card_kit > .pb_advanced_table {
+  // Remove right border only from the actual last column
+  .pb_advanced_table_body tr td:last-child,
+  .pb_advanced_table_header tr th:last-child {
+    box-shadow: none !important; // prevents double up of borders on Firefox when in Card Kit
     border-right: none !important;
+  }
+
+  // Without vertical border, remove all last-cell borders
+  // Specifically for header to prevent thicker borders in firefox.
+  .pb_table:not(.vertical-border) {
+    .pb_advanced_table_header .last-header-cell {
+      box-shadow: none !important;
+    }
+  }
+  // Firefox fix
+  @-moz-document url-prefix() {
+    .pb_advanced_table_header {
+      .last-header-cell {
+        box-shadow: 1px 0 0 0 $border_light !important;
+      }
+    }
+  }
+
+  // For tables WITH vertical borders, only remove border from actual last column
+  .pb_table.vertical-border {
+    .pb_advanced_table_body .last-cell:not(:last-child),
+    .pb_advanced_table_header .last-header-cell:not(:last-child) {
+      box-shadow: none !important;
+      border-right: 1px solid $border_light !important;
+    }
+
+    // Dark mode
+    &.dark {
+      .pb_advanced_table_body .last-cell:not(:last-child),
+      .pb_advanced_table_header .last-header-cell:not(:last-child) {
+        border-right: 1px solid $border_dark !important;
+      }
+    }
+  }
+
+  // Support column group border colors
+  &.pb_advanced_table[class*="column-group-border-"] {
+    .pb_advanced_table_body .last-cell:not(:last-child),
+    .pb_advanced_table_header .last-header-cell:not(:last-child) {
+      border-right: 1px solid var(--column-border-color) !important;
+    }
+  }
 }
 
-//  Removes borders when Wrapped inside the Card Kit
-.pb_card_kit > .pb_advanced_table tr:last-child, 
+// Removes bottom borders when wrapped inside the Card Kit (keep existing behavior)
+.pb_card_kit > .pb_advanced_table tr:last-child,
 .pb_card_kit > .pb_advanced_table .last-row-cell {
   td {
-    border-bottom: none !important; 
+    border-bottom: none !important;
   }
 }

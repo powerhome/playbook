@@ -15,8 +15,7 @@ module Playbook
         "cvv" => '\d{3,4}',
       }.freeze
 
-      prop :autocomplete, type: Playbook::Props::Boolean,
-                          default: true
+      prop :autocomplete, default: true
       prop :disabled, type: Playbook::Props::Boolean,
                       default: false
       prop :error
@@ -75,7 +74,7 @@ module Playbook
         {
           'aria-describedby': error.present? ? error_id : nil,
           'aria-invalid': error.present?,
-          autocomplete: autocomplete ? nil : "off",
+          autocomplete: autocomplete == true ? nil : (autocomplete.presence || "off"),
           class: "text_input #{input_options.dig(:classname) || ''}",
           data: validation_data,
           disabled: disabled,

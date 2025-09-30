@@ -1,6 +1,6 @@
 {
   "name": "playbook-ui",
-  "version": "15.0.0",
+  "version": "15.1.0",
   "description": "Nitro's Design System",
   "main": "./dist/playbook.js",
   "types": "./dist/types/index.d.ts",
@@ -91,16 +91,14 @@
     "typescript": "4.3.5",
     "vite": "6.3.5",
     "vite-bundle-visualizer": "^1.2.1",
-    "vite-plugin-ruby": "^5.0.0",
-    "webpacker-react": "^0.3.2"
+    "vite-plugin-ruby": "^5.0.0"
   },
   "peerDependencies": {
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-is": "^17.0.2",
     "react-trix": "0.10.1",
-    "trix": "1.3.5",
-    "webpacker-react": "^0.3.2"
+    "trix": "1.3.5"
   },
   "resolutions": {
     "react": "^17.0.2",

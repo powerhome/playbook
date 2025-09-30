@@ -1,7 +1,7 @@
 // React-Rendered Rails Kit Exports =====
 
-import WebpackerReact from 'webpacker-react'
-import ujs from 'webpacker-react/ujs'
+import ComponentRegistry from '../utils/componentRegistry'
+import '../utils/mountComponent'
 
 import BarGraph from 'kits/pb_bar_graph/_bar_graph'
 import CircleChart from 'kits/pb_circle_chart/_circle_chart'
@@ -14,8 +14,10 @@ import Passphrase from 'kits/pb_passphrase/_passphrase'
 import RichTextEditor from 'kits/pb_rich_text_editor/_rich_text_editor'
 import Typeahead from 'kits/pb_typeahead/_typeahead'
 import PhoneNumberInput from 'kits/pb_phone_number_input/_phone_number_input'
+import PbBarGraph from 'kits/pb_pb_bar_graph/_pb_bar_graph'
+import PbCircleChart from 'kits/pb_pb_circle_chart/_pb_circle_chart'
 
-WebpackerReact.registerComponents({
+ComponentRegistry.registerComponents({
   BarGraph,
   CircleChart,
   DistributionBar,
@@ -26,19 +28,19 @@ WebpackerReact.registerComponents({
   RichTextEditor,
   Typeahead,
   Gauge,
-  PhoneNumberInput
+  PhoneNumberInput,
+  PbBarGraph,
+  PbCircleChart,
 })
 
 //export mount/unmount functions for use if needed
 export const mountPlaybookReactKits = () => {
-  WebpackerReact.mountComponents()
+  ComponentRegistry.mountComponents()
 }
 
 export const unmountPlaybookReactKits = () => {
-  WebpackerReact.unmountComponents()
+  ComponentRegistry.unmountComponents()
 }
-
-ujs.setup(mountPlaybookReactKits, unmountPlaybookReactKits)
 
 const observer = new MutationObserver(() => {
   mountPlaybookReactKits()

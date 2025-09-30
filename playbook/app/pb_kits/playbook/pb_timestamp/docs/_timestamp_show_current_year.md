@@ -1,0 +1,1 @@
+Use the `showCurrentYear`/`show_current_year` prop to show the year even if it is the current year. This is set to false by default.

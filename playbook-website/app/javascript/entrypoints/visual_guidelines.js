@@ -1,7 +1,8 @@
-import WebpackerReact from 'webpacker-react'
+import '../utilities/mountComponent'
+import ComponentRegistry from '../utilities/componentRegistry'
 
 import VisualGuidelines from 'components/VisualGuidelines'
 
-WebpackerReact.registerComponents({
+ComponentRegistry.registerComponents({
   VisualGuidelines,
 })

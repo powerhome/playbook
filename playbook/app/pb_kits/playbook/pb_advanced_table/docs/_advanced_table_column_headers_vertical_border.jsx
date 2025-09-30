@@ -44,9 +44,9 @@ const AdvancedTableColumnHeadersVerticalBorder = (props) => {
       ],
     },
   ];
-  
+
   const tableProps = {
-    verticalBorder: true
+    verticalBorder: true,
   }
 
   return (

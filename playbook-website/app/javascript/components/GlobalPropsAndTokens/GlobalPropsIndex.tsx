@@ -45,7 +45,7 @@ const GlobalProps = () => {
             {GlobalPropsCards.map(({ title, description, link, icon }) => {
               return (
                 <Link key={title} href={link}>
-                  <Card padding="none" hover={{ shadow: "deep" }} flex={1}>
+                  <Card padding="none" hover={{ shadow: "deep" }} flex={1} minHeight="300px">
                     <Background backgroundColor="light">
                       <Flex justify="center" padding="xl">
                         <IconCircle icon={icon} variant="royal" />

@@ -36,6 +36,7 @@ type TextInputProps = {
     alignment?: "right" | "left",
     border?: boolean,
   },
+  autoComplete?: boolean | string,
 } & GlobalProps
 
 const TextInput = (props: TextInputProps, ref: React.LegacyRef<HTMLInputElement>) => {
@@ -59,6 +60,7 @@ const TextInput = (props: TextInputProps, ref: React.LegacyRef<HTMLInputElement>
     type = 'text',
     value = '',
     children = null,
+    autoComplete = true,
   } = props
 
   const ariaProps = buildAriaProps(aria)
@@ -146,6 +148,7 @@ const TextInput = (props: TextInputProps, ref: React.LegacyRef<HTMLInputElement>
         {...domSafeProps(props)}
         aria-describedby={errorId}
         aria-invalid={!!error}
+        autoComplete={typeof autoComplete === "string" ? autoComplete : ( autoComplete ? undefined : "off" )}
         className="text_input"
         disabled={disabled}
         id={id}

@@ -5,6 +5,7 @@ import { flexRender, Row, Cell } from "@tanstack/react-table"
 import { GenericObject } from "../../types"
 import { isChrome } from "../Utilities/BrowserCheck"
 import { findColumnDefByAccessor } from "../Utilities/ColumnStylingHelper"
+import { getRowColorClass, shouldShowLoadingIndicator } from "../Utilities/RowUtils"
 
 import LoadingInline from "../../pb_loading_inline/_loading_inline"
 import Checkbox from "../../pb_checkbox/_checkbox"
@@ -29,6 +30,7 @@ const TableCellRenderer = ({
   columnPinning,
   customRowStyle,
   columnDefinitions,
+  isMultiHeaderColumn = false,
 }: {
   row: Row<GenericObject>
   collapsibleTrail?: boolean
@@ -37,12 +39,18 @@ const TableCellRenderer = ({
   columnPinning: { left: string[] }
   customRowStyle?: GenericObject
   columnDefinitions?: {[key:string]:any}[]
+  isMultiHeaderColumn?: boolean
 }) => {
   return (
     <>
       {row.getVisibleCells().map((cell: Cell<GenericObject, unknown>, i: number) => {
         const isPinnedLeft = columnPinning.left.includes(cell.column.id);
+        // Add a border to the right of each group of columns for multi-header column tables
         const isLastCell = (() => {
+          if (!isMultiHeaderColumn) {
+            return false;
+          }
+
           const parent = cell.column.parent;
           if (!parent) {
             const last = row.getVisibleCells().at(-1);
@@ -60,7 +68,7 @@ const TableCellRenderer = ({
         const cellAlignment = colDef?.columnStyling?.cellAlignment ?? "right"
         const paddingValue = colDef?.columnStyling?.cellPadding ?? customRowStyle?.cellPadding
         const paddingClass = paddingValue ? `p_${paddingValue}` : undefined
-        
+
         return (
           <td
               align={cellAlignment}
@@ -132,6 +140,10 @@ export const RegularTableView = ({
 
   const columnPinning = table.getState().columnPinning || { left: [] };
   const columnDefinitions = table.options.meta?.columnDefinitions || [];
+  const isMultiHeaderColumn = columnDefinitions.some(
+    (obj: Record<string, unknown>) => "columns" in obj
+  );
+
   // Row pinning
   function PinnedRow({ row }: { row: Row<any> }) {
     const customRowStyle = rowStyling?.length > 0 && rowStyling?.find((s: GenericObject) => s?.rowId === row.id);
@@ -144,7 +156,7 @@ export const RegularTableView = ({
             backgroundColor: customRowStyle?.backgroundColor ? customRowStyle?.backgroundColor : 'white',
             color: customRowStyle?.fontColor,
             position: 'sticky',
-            top:   
+            top:
               row.getIsPinned() === 'top'
                   ? `${row.getPinnedIndex() * rowHeight + headerHeight}px`
                   : undefined,
@@ -156,6 +168,7 @@ export const RegularTableView = ({
             columnDefinitions={columnDefinitions}
             columnPinning={columnPinning}
             customRowStyle={customRowStyle}
+            isMultiHeaderColumn={isMultiHeaderColumn}
             loading={loading}
             row={row}
             stickyLeftColumn={stickyLeftColumn}
@@ -169,20 +182,19 @@ export const RegularTableView = ({
   return (
     <>
       {pinnedRows && table.getTopRows().map((row: Row<GenericObject>) => (
-        <PinnedRow key={row.id} 
-            row={row} 
+        <PinnedRow key={row.id}
+            row={row}
         />
       ))}
       {totalRows.map((row: Row<GenericObject>, rowIndex: number) => {
-        const isExpandable = row.getIsExpanded();
         const isFirstChildofSubrow = row.depth > 0 && row.index === 0;
-        const rowHasNoChildren = row.original?.children && !row.original.children.length ? true : false;
         const numberOfColumns = table.getAllFlatColumns().length;
-        const isDataLoading = isExpandable && (inlineRowLoading && rowHasNoChildren) && (row.depth < columnDefinitions[0]?.cellAccessors?.length);
-        const rowBackground = isExpandable && ((!inlineRowLoading && row.getCanExpand()) || (inlineRowLoading && rowHasNoChildren));
-        const rowColor = row.getIsSelected() ? "bg-row-selection" : rowBackground ? "bg-silver" : "bg-white";
         const isFirstRegularRow = rowIndex === 0 && !row.getIsPinned();
         const customRowStyle = rowStyling?.length > 0 && rowStyling?.find((s: GenericObject) => s?.rowId === row.id);
+
+        // Use functions from RowUtils for consistent cell coloring
+        const rowColor = getRowColorClass(row, inlineRowLoading || false);
+        const isDataLoading = shouldShowLoadingIndicator(row, inlineRowLoading || false, columnDefinitions[0]?.cellAccessors?.length || 0);
 
         return (
           <React.Fragment key={`${row.index}-${row.id}-${row.depth}-row`}>
@@ -220,6 +232,7 @@ export const RegularTableView = ({
                   columnDefinitions={columnDefinitions}
                   columnPinning={columnPinning}
                   customRowStyle={customRowStyle}
+                  isMultiHeaderColumn={isMultiHeaderColumn}
                   loading={loading}
                   row={row}
                   stickyLeftColumn={stickyLeftColumn}
@@ -228,7 +241,7 @@ export const RegularTableView = ({
 
             {/* Display LoadingInline if Row Data is querying and there are no children already */}
             {isDataLoading && (
-              <tr key={`${row.id}-row`}>
+              <tr key={`${row.id}-loading-row`}>
                 <td colSpan={numberOfColumns}
                     style={{ paddingLeft: `${row.depth === 0 ? 0.5 : (row.depth * 2)}em` }}
                 >

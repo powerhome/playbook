@@ -67,6 +67,12 @@ test('returns correct icon', () => {
           data={{ testid: 'test-extension' }}
       />
       <Contact
+          contactDetail="International"
+          contactType="international"
+          contactValue="+44 20 7946 0958"
+          data={{ testid: 'test-international' }}
+      />
+      <Contact
           contactDetail=""
           contactType=""
           contactValue="3245627482"
@@ -83,10 +89,11 @@ test('returns correct icon', () => {
   expect(screen.getByTestId('test-wrong-phone').querySelector('.pb_custom_icon')).toBeInTheDocument()
   expect(screen.getByTestId('test-wrong-type').querySelector('.pb_custom_icon')).toBeInTheDocument()
   expect(screen.getByTestId('test-extension').querySelector('.pb_custom_icon')).toBeInTheDocument()
+  expect(screen.getByTestId('test-international').querySelector('.pb_custom_icon')).toBeInTheDocument()
   expect(screen.getByTestId('test-empty').querySelector('.pb_custom_icon')).toBeInTheDocument()
 })
 
-test("not compliant values return null in phone related contact types", () => {
+test("not compliant values return null in US phone related contact types", () => {
   const notCompliantValues = [
     "349-185-998223",
     "349-1858",
@@ -128,4 +135,17 @@ test("not compliant values return null in phone related contact types", () => {
       "null"
     )
   })
+})
+
+test('international contact type preserves original format', () => {
+  render(
+    <Contact
+        contactType="international"
+        contactValue="+44 20 7946 0958"
+        data={{ testid: 'test-international-format' }}
+    />
+  )
+
+  const kit = screen.getByTestId('test-international-format')
+  expect(kit).toHaveTextContent('+44 20 7946 0958')
 })

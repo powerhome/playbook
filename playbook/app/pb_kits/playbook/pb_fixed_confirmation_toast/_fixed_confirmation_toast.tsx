@@ -35,6 +35,7 @@ type FixedConfirmationToastProps = {
 
 const FixedConfirmationToast = (props: FixedConfirmationToastProps): React.ReactElement => {
   const [showToast, toggleToast] = useState(true);
+
   const {
     autoClose = 0,
     children,
@@ -87,8 +88,15 @@ const FixedConfirmationToast = (props: FixedConfirmationToastProps): React.React
     <>
       {showToast && (
         <div
+            aria-atomic="true"
+            aria-live="polite"
             className={css}
             onClick={handleClick}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" || e.key === " ") handleClick();
+            }}
+            role="status"
+            tabIndex={0}
             {...htmlProps}
         >
           {returnedIcon && icon !== "none" && (
@@ -111,6 +119,7 @@ const FixedConfirmationToast = (props: FixedConfirmationToastProps): React.React
 
           {closeable && (
             <Icon
+                aria={{ "label": "Close Toast" }}
                 className="pb_icon"
                 cursor="pointer"
                 fixedWidth={false}

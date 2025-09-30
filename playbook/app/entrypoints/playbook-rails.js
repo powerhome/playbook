@@ -16,12 +16,6 @@ window.formHelper = formHelper
 import datePickerHelper from 'kits/pb_date_picker/date_picker_helper'
 window.datePickerHelper = datePickerHelper
 
-// Dialog
-// Three places in Nitro depend on this function inside the window scope.
-// We will keep this code until we remove this dependency from Nitro.
-import dialogHelper from 'kits/pb_dialog/dialogHelper'
-window.dialogHelper = dialogHelper
-
 // Lazy image loading
 import 'lazysizes'
 

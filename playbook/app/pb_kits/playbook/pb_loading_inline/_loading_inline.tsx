@@ -16,6 +16,7 @@ type LoadingInlineProps = {
   htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
   text?: string,
+  variant?: "dotted" | "solid" ,
 }
 
 const LoadingInline = (props: LoadingInlineProps) => {
@@ -28,6 +29,7 @@ const LoadingInline = (props: LoadingInlineProps) => {
     htmlOptions = {},
     id,
     text = ' Loading',
+    variant = 'dotted',
   } = props
 
   const ariaProps = buildAriaProps(aria)
@@ -54,7 +56,7 @@ const LoadingInline = (props: LoadingInlineProps) => {
         <Icon
             aria={{ label: 'loading icon' }}
             fixedWidth
-            icon="spinner"
+            icon={variant === 'dotted' ? 'spinner' : variant === 'solid' ? 'circle-notch' : undefined}
             pulse
         />
         {text}
