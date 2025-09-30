@@ -35,6 +35,13 @@ export const TokenCards = [
     link: "/tokens/line_height",
   },
   {
+    title: "Letter Spacing",
+    description:
+      "Controls the spacing between characters in text for fine-tuning typographic tone.",
+    icon: "text-spacing",
+    link: "/tokens/letter_spacing",
+  },
+  {
     title: "Opacity",
     description:
       "Defined transparency levels, ranging from 0% (invisible) to 100% (fully visible).",

@@ -11,19 +11,25 @@ import ScreenSizes from "./Examples/ScreenSizes";
 import TextAlign from "./Examples/TextAlign";
 import VerticalAlign from "./Examples/VerticalAlign";
 import ZIndex from "./Examples/Z-Index";
+import LetterSpacing from "./Examples/LetterSpacing";
+import Shadows from "./Examples/Shadows";
+import Titles from "./Examples/titles";
 
 
 const COMPONENT_MAP = {
   animation: Animation,
   border_radius: BorderRadius,
   display: Display,
+  letter_spacing: LetterSpacing,
   line_height: LineHeight,
   opacity: Opacity,
   overflow: Overflow,
   position: Position,
   scale: Scale,
   screen_sizes: ScreenSizes,
+  shadows: Shadows,
   text_align: TextAlign,
+  titles: Titles,
   vertical_align: VerticalAlign,
   z_index: ZIndex,
 };
