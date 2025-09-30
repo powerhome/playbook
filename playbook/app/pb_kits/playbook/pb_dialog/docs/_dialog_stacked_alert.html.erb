@@ -3,12 +3,12 @@
 <%= pb_rails("button", props: { text: "Delete Status", data: {"open-dialog": "dialog-stacked-delete"}, margin_right: "md" }) %>
 
 
-<%= pb_rails("dialog", props: { 
-    id:"dialog-stacked-default", 
+<%= pb_rails("dialog", props: {
+    id:"dialog-stacked-default",
     status: "default",
-    size: "sm", 
-    title: "Are you sure?", 
-    text: "Text explaining why there is an alert", 
+    size: "sm",
+    title: "Are you sure?",
+    text: "Text explaining why there is an alert",
 }) do %>
     <%= pb_rails("dialog/dialog_footer") do %>
         <%= pb_rails("flex", props: { orientation: "column", padding_x:"md", padding: "sm" }) do %>
@@ -18,12 +18,12 @@
     <% end %>
 <% end %>
 
-<%= pb_rails("dialog", props: { 
-    id:"dialog-stacked-caution", 
+<%= pb_rails("dialog", props: {
+    id:"dialog-stacked-caution",
     status: "caution",
-    size: "sm", 
-    title: "Are you sure?", 
-    text: "This is the action you will be taking", 
+    size: "sm",
+    title: "Are you sure?",
+    text: "This is the action you will be taking",
 }) do %>
     <%= pb_rails("dialog/dialog_footer") do %>
         <%= pb_rails("flex", props: { orientation: "column", padding_x:"md", padding: "sm" }) do %>
@@ -33,16 +33,16 @@
     <% end %>
 <% end %>
 
-<%= pb_rails("dialog", props: { 
-    id:"dialog-stacked-delete", 
+<%= pb_rails("dialog", props: {
+    id:"dialog-stacked-delete",
     status: "delete",
-    size: "sm", 
-    title: "Delete", 
-    text: "You are about to delete ...", 
+    size: "sm",
+    title: "Delete",
+    text: "You are about to delete ...",
 }) do %>
     <%= pb_rails("dialog/dialog_footer") do %>
         <%= pb_rails("flex", props: { orientation: "column", padding_x:"md", padding: "sm" }) do %>
-            <%= pb_rails("button", props: { text: "Yes, Action", full_width: true }) %>
+            <%= pb_rails("button", props: { text: "Yes, Action", variant: "danger", full_width: true }) %>
             <%= pb_rails("button", props: { text: "No, Cancel", variant: "secondary", full_width: true, margin_top: "sm", data: {"close-dialog": "dialog-stacked-delete" } }) %>
         <% end %>
     <% end %>
