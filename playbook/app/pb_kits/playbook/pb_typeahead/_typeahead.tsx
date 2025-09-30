@@ -53,6 +53,8 @@ type TypeaheadProps = {
   pillColor?: "primary" | "neutral" | "success" | "warning" | "error" | "info" | "data_1" | "data_2" | "data_3" | "data_4" | "data_5" | "data_6" | "data_7" | "data_8" | "windows" | "siding" | "roofing" | "doors" | "gutters" | "solar" | "insulation" | "accessories",
   onChange?: any,
   optionsByContext?: Record<string, Array<{ label: string; value?: string }>>
+  required?: boolean,
+  validation?: { message: string },
   searchContextSelector?: string,
   clearOnContextChange?: boolean,
   preserveSearchInput?: boolean,
@@ -100,6 +102,8 @@ const Typeahead = forwardRef<HTMLInputElement, TypeaheadProps>(({
 }: TypeaheadProps) => {
   // State to manage the input value when preserveSearchInput is true
   const [inputValue, setInputValue] = useState("")
+  // State to track if form has been submitted to control validation display for react rendered rails kit
+  const [formSubmitted, setFormSubmitted] = useState(false)
 
   // If preserveSearchInput is true, we need to control the input value
   const handleInputChange = preserveSearchInput
@@ -135,6 +139,7 @@ const Typeahead = forwardRef<HTMLInputElement, TypeaheadProps>(({
 
   const selectProps = {
     cacheOptions: true,
+    required: props.required,
     components: {
       Control,
       ClearIndicator,
@@ -169,6 +174,27 @@ const Typeahead = forwardRef<HTMLInputElement, TypeaheadProps>(({
   }
 
   const [contextValue, setContextValue] = useState("")
+
+  // Add listener for form validation to track when validation should be shown (needed for react rendered rails kit)
+  useEffect(() => {
+    const handleInvalid = (event: Event) => {
+      const target = event.target as HTMLInputElement
+      const typeaheadContainer = target.closest('[data-pb-react-component="Typeahead"]')
+
+      if (typeaheadContainer) {
+        // Check if this invalid event is specifically for our typeahead by comparing names so we do not have to require ids
+        const invalidInputName = target.name || target.getAttribute('name')
+        if (invalidInputName === name) {
+          setFormSubmitted(true)
+        }
+      }
+    }
+    document.addEventListener('invalid', handleInvalid, true)
+    
+    return () => {
+      document.removeEventListener('invalid', handleInvalid, true)
+    }
+  }, [name])
 
   // Add listener for clearing
   useEffect(() => {
@@ -230,6 +256,11 @@ const Typeahead = forwardRef<HTMLInputElement, TypeaheadProps>(({
       }
     }
 
+    // Reset form submitted state when a selection is made (this is all for react rendered rails kit)
+    if (action === 'select-option') {
+      setFormSubmitted(false)
+    }
+
     // If a value is selected and we're preserving input on blur, clear the input
     if (action === 'select-option' && preserveSearchInput) {
       setInputValue('')
@@ -268,6 +299,13 @@ const Typeahead = forwardRef<HTMLInputElement, TypeaheadProps>(({
 
   const inlineClass = selectProps.inline ? 'inline' : null
 
+  const shouldShowValidationError = props.validation && 
+                                   props.required && 
+                                   formSubmitted
+  
+  const errorDisplay = error || (shouldShowValidationError ? props.validation?.message || "" : "")
+
+  
   return (
     <div
         {...dataProps}
@@ -276,7 +314,7 @@ const Typeahead = forwardRef<HTMLInputElement, TypeaheadProps>(({
     >
       <Tag
           classNamePrefix="typeahead-kit-select"
-          error={error}
+          error={errorDisplay}
           isDisabled={disabled}
           onChange={handleOnChange}
           {...selectProps}
