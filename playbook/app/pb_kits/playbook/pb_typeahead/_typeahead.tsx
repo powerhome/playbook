@@ -299,11 +299,10 @@ const Typeahead = forwardRef<HTMLInputElement, TypeaheadProps>(({
 
   const inlineClass = selectProps.inline ? 'inline' : null
 
-  const shouldShowValidationError = props.validation && 
-                                   props.required && 
+  const shouldShowValidationError = props.required && 
                                    formSubmitted
   
-  const errorDisplay = error || (shouldShowValidationError ? props.validation?.message || "" : "")
+  const errorDisplay = error || (shouldShowValidationError ? props.validation?.message || "Please fill out this field." : "")
 
   
   return (
