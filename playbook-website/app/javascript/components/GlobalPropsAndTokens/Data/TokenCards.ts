@@ -38,7 +38,7 @@ export const TokenCards = [
     title: "Letter Spacing",
     description:
       "Controls the spacing between characters in text for fine-tuning typographic tone.",
-    icon: "text-spacing",
+    icon: "letter-spacing",
     link: "/tokens/letter_spacing",
   },
   {
