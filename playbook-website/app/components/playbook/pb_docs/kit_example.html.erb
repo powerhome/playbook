@@ -1,11 +1,11 @@
-<% example_html = ERB.new(example).result %>
+<% example_html = example %>
 
 <%= pb_rails("card", props: { classname: "pb--doc", padding: "none", dark: dark, id: "pb--doc-#{example_key}" }) do %>
   <% unless (type == "swift") %>
     <div class="pb--kit-example">
       <%= pb_rails("caption", props: { text: example_title, dark: dark }) %>
       <br />
-      <%= example %>
+      <%= raw example_html %>
       <br>
     </div>
   <% else %>
