@@ -113,7 +113,7 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.Ref<unknown>
   const wrapperRef = useRef<HTMLDivElement | null>(null);
   const textInputKitRef = useRef<HTMLDivElement | null>(null);
   const [inputValue, setInputValue] = useState(value)
-  const [internalError, setInternalError] = useState("")
+  const [error, setError] = useState("")
   const [dropDownIsOpen, setDropDownIsOpen] = useState(false)
   const [selectedData, setSelectedData] = useState()
   const [hasTyped, setHasTyped] = useState(false)
@@ -133,11 +133,11 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.Ref<unknown>
 
   // Determine which error to display
   // Show internal errors on blur (hasTyped) or on form submission (formSubmitted)
-  const shouldShowInternalError = (hasTyped || formSubmitted) && required && internalError
-  const displayError = props.error || (shouldShowInternalError ? internalError : "")
+  const shouldShowInternalError = (hasTyped || formSubmitted) && required && error
+  const displayError = props.error || (shouldShowInternalError ? error : "")
 
   useEffect(() => {
-    const hasError = internalError.length > 0
+    const hasError = error.length > 0
     if (hasError) {
       onValidate(false)
     } else {
@@ -146,7 +146,7 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.Ref<unknown>
 
     // Update validation state whenever error changes
     updateValidationState(hasError)
-  }, [internalError, onValidate])
+  }, [error, onValidate])
 
   const unformatNumber = (formattedNumber: any) => {
     return formattedNumber.replace(/\D/g, "")
@@ -155,7 +155,7 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.Ref<unknown>
   const showFormattedError = (reason = '') => {
     const countryName = itiRef.current.getSelectedCountryData().name
     const reasonText = reason.length > 0 ? ` (${reason})` : ''
-    setInternalError(`Invalid ${countryName} phone number${reasonText}`)
+    setError(`Invalid ${countryName} phone number${reasonText}`)
     return true
   }
 
@@ -164,7 +164,7 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.Ref<unknown>
     if (itiInit.getValidationError() === ValidationError.TooLong) {
       return showFormattedError('too long')
     } else {
-      setInternalError('')
+      setError('')
     }
   }
 
@@ -173,7 +173,7 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.Ref<unknown>
 
     // If field is empty, don't show "too short" error
     if (!inputValue || inputValue.trim() === '') {
-      setInternalError('')
+      setError('')
       return false
     }
 
@@ -183,7 +183,7 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.Ref<unknown>
       if (inputValue.length === 1) {
         return showFormattedError('too short')
       } else {
-        setInternalError('')
+        setError('')
       }
     }
   }
@@ -201,7 +201,7 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.Ref<unknown>
       if (inputValue.length === 1) {
         return showFormattedError('too short')
       } else if (inputValue.length === 0) {
-        setInternalError('Missing phone number')
+        setError('Missing phone number')
         return true
       } else {
         return showFormattedError()
@@ -228,7 +228,7 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.Ref<unknown>
   // Validation for required empty fields
   const validateRequiredField = () => {
     if (required && (!inputValue || inputValue.trim() === '')) {
-      setInternalError('Missing phone number')
+      setError('Missing phone number')
       return true
     }
     return false
@@ -240,7 +240,7 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.Ref<unknown>
       if (validateRequiredField()) return
       // Clear any existing errors if field is empty and not required
       if (!required) {
-        setInternalError('')
+        setError('')
       }
       return
     }
@@ -287,7 +287,7 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.Ref<unknown>
     return {
       clearField() {
         setInputValue("")
-        setInternalError("")
+        setError("")
         setHasTyped(false)
         setFormSubmitted(false)
         // Only clear validation state if field was required
