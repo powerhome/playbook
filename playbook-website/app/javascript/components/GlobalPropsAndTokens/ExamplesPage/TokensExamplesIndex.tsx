@@ -13,7 +13,7 @@ import VerticalAlign from "./Examples/VerticalAlign";
 import ZIndex from "./Examples/Z-Index";
 import LetterSpacing from "./Examples/LetterSpacing";
 import Shadows from "./Examples/Shadows";
-import Titles from "./Examples/titles";
+import Titles from "./Examples/Titles";
 
 
 const COMPONENT_MAP = {
