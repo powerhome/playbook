@@ -97,8 +97,9 @@
 }] %>
 
 <%= pb_form_with(scope: :example, method: :get, url: "", validate: true) do |form| %>
-  <%= form.typeahead :example_typeahead_validation, props: { options: example_typeahead_options, pills: true, label: "Example Typeahead", placeholder: "Search for a user", required: true, validation: { message: "Please select a color." } } %>
-  <%= form.typeahead :example_typeahead_validation_2, props: { options: example_typeahead_options, pills: true, label: "Example Typeahead 2", placeholder: "Search for a user", required: true } %>
+  <%= form.typeahead :example_typeahead_validation_rails, props: { data: { typeahead_example2: true, user: {} }, label: true, placeholder: "Search for a user", required: true, validation: { message: "Please select a user." } } %>  
+  <%= form.typeahead :example_typeahead_validation, props: { options: example_typeahead_options, pills: true, label: "Example Typeahead (React Rendered)", placeholder: "Search for a user", required: true, validation: { message: "Please select a color." } } %>
+  <%= form.typeahead :example_typeahead_validation_2, props: { options: example_typeahead_options, pills: true, label: "Example Typeahead 2 (React Rendered)", placeholder: "Search for a user", required: true } %>
   <%= form.text_field :example_text_field_validation, props: { label: true, required: true } %>
   <%= form.phone_number_field :example_phone_number_field_validation, props: { label: "Example phone field", hidden_inputs: true } %>
   <%= form.email_field :example_email_field_validation, props: { label: true, required: true } %>
