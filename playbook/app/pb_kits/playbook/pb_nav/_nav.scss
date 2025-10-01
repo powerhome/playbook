@@ -48,3 +48,30 @@
     &:hover { cursor: pointer; }
   }
 }
+
+.pb_nav_extended_underline {
+  position: relative;
+  
+  // Add full-width border using pseudo-element so as not to break the active item border
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background-color: $border_light;
+    z-index: 1;
+  }
+
+  .pb_nav_list_kit_item_active.pb_nav_list_item_link {
+      position: relative;
+      z-index: 2;
+  }
+
+  &.dark {
+    &::after {
+      background-color: rgba($white, $opacity_3);
+    }
+  }
+}

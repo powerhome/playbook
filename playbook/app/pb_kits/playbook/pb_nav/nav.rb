@@ -14,9 +14,10 @@ module Playbook
       prop :highlight, type: Playbook::Props::Boolean, default: true
       prop :borderless, type: Playbook::Props::Boolean, default: false
       prop :tabbing, type: Playbook::Props::Boolean, default: false
+      prop :extended_underline, type: Playbook::Props::Boolean, default: false
 
       def classname
-        generate_classname("pb_nav_list", variant, orientation, highlight_class, borderless_class)
+        generate_classname("pb_nav_list", variant, orientation, highlight_class, borderless_class) + extended_underline_class
       end
 
       def data
@@ -33,6 +34,10 @@ module Playbook
 
       def borderless_class
         borderless ? "borderless" : nil
+      end
+
+      def extended_underline_class
+        variant === "normal" && orientation === "horizontal" && extended_underline ? " pb_nav_extended_underline" : ""
       end
     end
   end

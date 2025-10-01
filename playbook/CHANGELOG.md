@@ -1,3 +1,44 @@
+# 🪦RIP Webpacker💀
+
+##### September 26, 2025
+<img width="889" height="477" alt="release_image" src="https://github.com/user-attachments/assets/cb9664e0-5334-4883-bcb7-f30e9eb6b289" />
+
+Playbook has officially removed webpacker-react and react-rails! React-rendered Rails kits now run on vite_rails plus custom rendering logic. Nothing changes in how you use kits in Nitro but under the hood, Webpacker is gone for good!👋🏼
+
+[15.1.0](https://github.com/powerhome/playbook/tree/15.1.0) full list of changes:
+
+**Kit Enhancements:**
+
+- Nav Kit: Extendedunderline Prop for Horizontal Nav [\#5210](https://github.com/powerhome/playbook/pull/5210) ([nidaqg](https://github.com/nidaqg))
+- Timestamp Kit: Showdate, Showtime and Showcurrentyear Props - React and Rails [\#5195](https://github.com/powerhome/playbook/pull/5195) ([nidaqg](https://github.com/nidaqg))
+- Section Separator Kit: Vertical Variant Accepts Children [\#5175](https://github.com/powerhome/playbook/pull/5175) ([elisashapiro](https://github.com/elisashapiro))
+- Contact Kit - International Phone Number Compatibility [\#5132](https://github.com/powerhome/playbook/pull/5132) ([elisashapiro](https://github.com/elisashapiro))
+- Form Kit: Text Field \(i.e., Text Input Kit\) Attribute Props - Rails [\#5167](https://github.com/powerhome/playbook/pull/5167) ([kangaree](https://github.com/kangaree))
+- Card Kit: Add Right Side Highlight [\#5166](https://github.com/powerhome/playbook/pull/5166) ([skduncan](https://github.com/skduncan))
+
+**Improvements:**
+
+- Playbook Icons: Update Icons [\#5223](https://github.com/powerhome/playbook/pull/5223) ([elisashapiro](https://github.com/elisashapiro))
+- Global Props: Create Display and Line Height Pages [\#5144](https://github.com/powerhome/playbook/pull/5144) ([nickamantia](https://github.com/nickamantia))
+- Dependency: Remove Webpacker from Playbook, Replace With Custom Logic [\#5169](https://github.com/powerhome/playbook/pull/5169) ([nidaqg](https://github.com/nidaqg))
+- Playbook Website: Migrate to Pac-v2 Clusters [\#5153](https://github.com/powerhome/playbook/pull/5153) ([dgmorales](https://github.com/dgmorales))
+- Fix Kit Generator [\#5168](https://github.com/powerhome/playbook/pull/5168) ([nidaqg](https://github.com/nidaqg))
+- Global Props: Create Width, Min Width and Max Width Pages [\#5152](https://github.com/powerhome/playbook/pull/5152) ([skduncan](https://github.com/skduncan))
+
+
+**Fixed Bugs:**
+
+- Advanced Table Kit: Fix Table Body Right Side Double Borders [\#5183](https://github.com/powerhome/playbook/pull/5183) ([kangaree](https://github.com/kangaree))
+- Advanced Table Kit: Row Highlight Not Displaying - React Only [\#5184](https://github.com/powerhome/playbook/pull/5184) ([skduncan](https://github.com/skduncan))
+- Advanced Table: First Column Border Not Rendering In Safari and Chrome [\#5170](https://github.com/powerhome/playbook/pull/5170) ([skduncan](https://github.com/skduncan))
+
+
+**New Kits:**
+
+- Pb Circle Chart: Scaffold New Circle Chart Beta Kit [\#5161](https://github.com/powerhome/playbook/pull/5161) ([nidaqg](https://github.com/nidaqg))
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/v15.1.0-rc.7...15.1.0)
+
 # 🚀 Playbook 15.0.0 is Live!
 
 ##### September 08, 2025
