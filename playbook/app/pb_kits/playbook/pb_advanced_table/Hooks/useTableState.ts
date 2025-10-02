@@ -146,8 +146,6 @@ export function useTableState({
 
   // Pagination configuration
   const paginationInitializer = useMemo(() => {
-    if (!pagination) return {};
-
     return {
       getPaginationRowModel: getPaginationRowModel(),
       paginateExpandedRows: false,
