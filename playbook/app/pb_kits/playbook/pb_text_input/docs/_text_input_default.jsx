@@ -38,6 +38,7 @@ const TextInputDefault = (props) => {
           {...props}
       />
       <TextInput
+          id="last-name"
           label="Last Name"
           name="lastName"
           onChange={handleOnChangeFormField}
@@ -46,6 +47,7 @@ const TextInputDefault = (props) => {
           {...props}
       />
       <TextInput
+          id="phone"
           label="Phone Number"
           name="phone"
           onChange={handleOnChangeFormField}
@@ -55,6 +57,7 @@ const TextInputDefault = (props) => {
           {...props}
       />
       <TextInput
+          id="email"
           label="Email Address"
           name="email"
           onChange={handleOnChangeFormField}
@@ -64,6 +67,7 @@ const TextInputDefault = (props) => {
           {...props}
       />
       <TextInput
+          id="zip"
           label="Zip Code"
           name="zip"
           onChange={handleOnChangeFormField}
@@ -84,6 +88,7 @@ const TextInputDefault = (props) => {
       <br />
 
       <TextInput
+          id="first-name"
           label="First Name"
           onChange={handleOnChangeFirstName}
           placeholder="Enter first name"

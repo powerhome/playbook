@@ -19,6 +19,10 @@
     @import "./sass_partials/calendar_input_icon";
   }
 
+  label {
+    display: block !important;
+  }
+
   &:focus,
   :focus-within {
     div.cal_icon_wrapper,
