@@ -317,6 +317,27 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.Ref<unknown>
           return true
         }
 
+        // Check for repeat country code first
+        const countryDialCode = itiRef.current.getSelectedCountryData().dialCode;
+        if (unformatNumber(inputValue).startsWith(countryDialCode)) {
+          const countryName = itiRef.current.getSelectedCountryData().name
+          const errorMessage = `Invalid ${countryName} phone number (repeat country code)`
+          setError(errorMessage)
+          setFormSubmitted(true)
+          setHasTyped(true)
+          return errorMessage
+        }
+
+        // Check if it only contains valid characters
+        if (!containOnlyNumbers(inputValue)) {
+          const countryName = itiRef.current.getSelectedCountryData().name
+          const errorMessage = `Invalid ${countryName} phone number (enter numbers only)`
+          setError(errorMessage)
+          setFormSubmitted(true)
+          setHasTyped(true)
+          return errorMessage
+        }
+
         // Check if valid number
         if (!itiRef.current.isValidNumber()) {
           const countryName = itiRef.current.getSelectedCountryData().name
@@ -329,8 +350,6 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.Ref<unknown>
             errorMessage = `Invalid ${countryName} phone number (too long)`
           } else if (validationError === ValidationError.MissingAreaCode) {
             errorMessage = `Invalid ${countryName} phone number (missing area code)`
-          } else if (!containOnlyNumbers(inputValue)) {
-            errorMessage = `Invalid ${countryName} phone number (enter numbers only)`
           } else {
             errorMessage = `Invalid ${countryName} phone number`
           }
