@@ -111,7 +111,6 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.Ref<unknown>
   const inputRef = useRef<HTMLInputElement | null>(null)
   const itiRef = useRef<any>(null);
   const wrapperRef = useRef<HTMLDivElement | null>(null);
-  const textInputKitRef = useRef<HTMLDivElement | null>(null);
   const [inputValue, setInputValue] = useState(value)
   const [error, setError] = useState("")
   const [dropDownIsOpen, setDropDownIsOpen] = useState(false)
@@ -297,6 +296,43 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.Ref<unknown>
       },
       inputNode() {
         return inputRef.current
+      },
+      // Expose validation method for React Hook Form
+      validate() {
+        // Run validation and return error message or true
+        const isEmpty = !inputValue || inputValue.trim() === ''
+
+        if (required && isEmpty) {
+          return 'Missing phone number'
+        }
+
+        if (isEmpty) {
+          return true
+        }
+
+        if (!itiRef.current) {
+          return true
+        }
+
+        // Check if valid number
+        if (!itiRef.current.isValidNumber()) {
+          const countryName = itiRef.current.getSelectedCountryData().name
+          const validationError = itiRef.current.getValidationError()
+
+          if (validationError === ValidationError.TooShort) {
+            return `Invalid ${countryName} phone number (too short)`
+          } else if (validationError === ValidationError.TooLong) {
+            return `Invalid ${countryName} phone number (too long)`
+          } else if (validationError === ValidationError.MissingAreaCode) {
+            return `Invalid ${countryName} phone number (missing area code)`
+          } else if (!containOnlyNumbers(inputValue)) {
+            return `Invalid ${countryName} phone number (enter numbers only)`
+          } else {
+            return `Invalid ${countryName} phone number`
+          }
+        }
+
+        return true
       }
     }
   })
@@ -322,8 +358,28 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.Ref<unknown>
       phoneNumberData = getCurrentSelectedData(itiRef.current, evt.target.value)
     }
     setSelectedData(phoneNumberData)
-    onChange(phoneNumberData)
+
+    // Check if this is React Hook Form by checking if onChange expects target format
+    const isReactHookForm = onChange.toString().includes("target")
+    if (isReactHookForm) {
+      // For React Hook Form, pass the event with modified target value
+      onChange({
+        ...evt,
+        target: {
+          ...evt.target,
+          name,
+          value: phoneNumberData
+        }
+      } as any)
+    } else {
+      onChange(phoneNumberData)
+    }
+
     isValid(itiRef.current.isValidNumber())
+
+    // Trigger validation after onChange for React Hook Form
+    // This ensures validation state is up-to-date
+    setTimeout(() => validateErrors(), 0)
   }
 
   // Separating Concerns as React Docs Recommend
