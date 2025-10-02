@@ -75,16 +75,6 @@
       margin-top: 0;
     }
 
-    h4,
-    h5,
-    h6,
-    ul,
-    ol,
-    blockquote,
-    p {
-      margin: 1rem 0 0 0;
-    }
-
     code {
       @include preview_tiptap_code;
     }
