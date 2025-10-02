@@ -19,7 +19,7 @@
     "@typescript-eslint/parser": "4.33.0",
     "babel-eslint": "10.1.0",
     "eslint": "7.1.0",
-    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-hooks": "^6.1.0",
     "eslint-plugin-jsx-control-statements": "2.2.1",
     "foreman": "3.0.1",
     "husky": "6.0.0",
