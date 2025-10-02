@@ -303,10 +303,13 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.Ref<unknown>
         const isEmpty = !inputValue || inputValue.trim() === ''
 
         if (required && isEmpty) {
+          setError('Missing phone number')
+          setFormSubmitted(true)
           return 'Missing phone number'
         }
 
         if (isEmpty) {
+          setError('')
           return true
         }
 
@@ -318,20 +321,30 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.Ref<unknown>
         if (!itiRef.current.isValidNumber()) {
           const countryName = itiRef.current.getSelectedCountryData().name
           const validationError = itiRef.current.getValidationError()
+          let errorMessage = ''
 
           if (validationError === ValidationError.TooShort) {
-            return `Invalid ${countryName} phone number (too short)`
+            errorMessage = `Invalid ${countryName} phone number (too short)`
           } else if (validationError === ValidationError.TooLong) {
-            return `Invalid ${countryName} phone number (too long)`
+            errorMessage = `Invalid ${countryName} phone number (too long)`
           } else if (validationError === ValidationError.MissingAreaCode) {
-            return `Invalid ${countryName} phone number (missing area code)`
+            errorMessage = `Invalid ${countryName} phone number (missing area code)`
           } else if (!containOnlyNumbers(inputValue)) {
-            return `Invalid ${countryName} phone number (enter numbers only)`
+            errorMessage = `Invalid ${countryName} phone number (enter numbers only)`
           } else {
-            return `Invalid ${countryName} phone number`
+            errorMessage = `Invalid ${countryName} phone number`
           }
+
+          // Set the error state so the validation attribute gets added
+          setError(errorMessage)
+          setFormSubmitted(true)
+          setHasTyped(true)
+
+          return errorMessage
         }
 
+        // Clear error if valid
+        setError('')
         return true
       }
     }
