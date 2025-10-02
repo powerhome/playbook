@@ -16,11 +16,14 @@ tokens:
   - border_radius
   - display
   - line_height
+  - letter_spacing
   - opacity
   - overflow
   - position
   - scale
   - screen_sizes
+  - shadows
   - text_align
+  - titles
   - vertical_align
   - z_index
