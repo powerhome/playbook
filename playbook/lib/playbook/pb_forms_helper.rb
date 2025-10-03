@@ -43,7 +43,7 @@ module Playbook
 
       capture do
         concat form_with(**options, &block)
-        concat javascript_tag(<<~JS))
+        concat javascript_tag(<<~JS)
           window.addEventListener("DOMContentLoaded", function() { PbFormValidation.start() })
           window.addEventListener("DOMContentLoaded", () => formHelper())
         JS
