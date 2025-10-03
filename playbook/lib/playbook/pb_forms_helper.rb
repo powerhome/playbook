@@ -41,12 +41,13 @@ module Playbook
         builder: ::Playbook::Forms::Builder
       )
 
-      content_for(:pb_js, javascript_tag(<<~JS))
-        window.addEventListener("DOMContentLoaded", function() { PbFormValidation.start() })
-        window.addEventListener("DOMContentLoaded", () => formHelper())
-      JS
-
-      form_with(**options, &block)
+      capture do
+        concat form_with(**options, &block)
+        concat javascript_tag(<<~JS))
+          window.addEventListener("DOMContentLoaded", function() { PbFormValidation.start() })
+          window.addEventListener("DOMContentLoaded", () => formHelper())
+        JS
+      end
     end
   end
 end
