@@ -2,6 +2,7 @@ version: '3'
 volumes:
   bundle:
   database:
+  vite_assets:
 services:
   web:
     working_dir: /home/app/src/playbook-website
@@ -17,6 +18,7 @@ services:
     volumes:
       - .:/home/app/src
       - bundle:/usr/local/rvm/gems
+      - vite_assets:/home/app/src/playbook-website/public/vite
     ports:
       - "8089:3000"
     depends_on:
