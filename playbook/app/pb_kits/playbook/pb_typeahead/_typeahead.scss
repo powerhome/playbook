@@ -4,7 +4,7 @@
 @import "../tokens/shadows";
 @import "../tokens/positioning";
 
-[class^=pb_typeahead_kit] {
+.pb_typeahead_kit {
   .typeahead-kit-select__option {
     cursor: pointer;
   }
@@ -28,7 +28,7 @@
       transition: opacity .15s ease-in-out;
     }
   }
-  [class^=pb_text_input_kit] {
+  .pb_text_input_kit {
     .text_input_wrapper {
       .text_input {
         max-height: none;
@@ -47,7 +47,7 @@
       }
     }
   }
-  [class^=pb_list_kit] {
+  .pb_list_kit_xpadding_borderless_ {
     max-height: 18em;
     overflow-y: auto;
     overscroll-behavior: contain;
@@ -60,15 +60,15 @@
     border-radius: $border_rad_heavier;
     transition: opacity .25s ease-in-out;
   }
-  &:focus-within [class^=pb_list_kit] {
+  &:focus-within .pb_list_kit_xpadding_borderless_ {
     display: block;
     opacity: 1;
   }
-  &:not(:focus-within) [class^=pb_list_kit] {
+  &:not(:focus-within) .pb_list_kit_xpadding_borderless_ {
     display: none;
     opacity: 0;
   }
-  [class^=pb_list_kit] {
+  .pb_list_kit_xpadding_borderless_ {
     li {
       transition: background-color .25s ease-in-out;
     }
@@ -161,7 +161,7 @@
   .typeahead-plus-icon {
     color: $text_lt_lighter;
   }
-  [class^=pb_badge_kit] span {
+  .pb_badge_kit_primary span {
     line-height: 16.5px;
     letter-spacing: normal;
   }
@@ -176,14 +176,14 @@
     }
   }
 
-  &[class*=dark] {
+  &.dark {
     .pb_typeahead_wrapper .pb_typeahead_loading_indicator {
       color: $text_dk_light;
     }
     .pb_text_input_kit_label {
       color: $text_dk_light;
     }
-    [class^=pb_text_input_kit].dark .text_input_wrapper .text_input {
+    .pb_text_input_kit.dark .text_input_wrapper .text_input {
       display: inherit !important;
     }
     .typeahead-kit-select__menu {
@@ -227,7 +227,7 @@
     .typeahead-kit-select__option--is-focused {
       background-color: $active_dark;
     }
-    [class^=pb_list_kit] {
+    .pb_list_kit_xpadding_borderless_ {
       background-color: $bg_dark;
     }
     .pb_item_kit {
