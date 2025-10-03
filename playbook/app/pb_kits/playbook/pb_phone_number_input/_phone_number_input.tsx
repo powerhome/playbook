@@ -110,37 +110,42 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.Ref<unknown>
 
   const inputRef = useRef<HTMLInputElement | null>(null)
   const itiRef = useRef<any>(null);
+  const wrapperRef = useRef<HTMLDivElement | null>(null);
   const [inputValue, setInputValue] = useState(value)
-  const [error, setError] = useState(props.error)
+  const [error, setError] = useState("")
   const [dropDownIsOpen, setDropDownIsOpen] = useState(false)
   const [selectedData, setSelectedData] = useState()
   const [hasTyped, setHasTyped] = useState(false)
+  const [formSubmitted, setFormSubmitted] = useState(false)
+
+  // Function to update validation state on the wrapper element
+  // Only applies when input is required
+  const updateValidationState = (hasError: boolean) => {
+    if (wrapperRef.current && required) {
+      if (hasError) {
+        wrapperRef.current.setAttribute('data-pb-phone-validation-error', 'true')
+      } else {
+        wrapperRef.current.removeAttribute('data-pb-phone-validation-error')
+      }
+    }
+  }
+
+  // Determine which error to display
+  // Show internal errors on blur (hasTyped) or on form submission (formSubmitted)
+  const shouldShowInternalError = (hasTyped || formSubmitted) && required && error
+  const displayError = props.error || (shouldShowInternalError ? error : "")
 
   useEffect(() => {
-    if ((error ?? '').length > 0) {
+    const hasError = error.length > 0
+    if (hasError) {
       onValidate(false)
     } else {
       onValidate(true)
     }
-  }, [error, onValidate])
 
-  /*
-    useImperativeHandle exposes the kit's input element to a parent component via a ref.
-    See the Playbook docs for use cases.
-    Read: https://react.dev/reference/react/useImperativeHandle
-  */
-  useImperativeHandle(ref, () => {
-    return {
-      clearField() {
-        setInputValue("")
-        setError("")
-        setHasTyped(false)
-      },
-      inputNode() {
-        return inputRef.current
-      }
-    }
-  })
+    // Update validation state whenever error changes
+    updateValidationState(hasError)
+  }, [error, onValidate])
 
   const unformatNumber = (formattedNumber: any) => {
     return formattedNumber.replace(/\D/g, "")
@@ -164,6 +169,13 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.Ref<unknown>
 
   const validateTooShortNumber = (itiInit: any) => {
     if (!itiInit) return
+
+    // If field is empty, don't show "too short" error
+    if (!inputValue || inputValue.trim() === '') {
+      setError('')
+      return false
+    }
+
     if (itiInit.getValidationError() === ValidationError.TooShort) {
       return showFormattedError('too short')
     } else {
@@ -206,16 +218,33 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.Ref<unknown>
 
   const validateRepeatCountryCode = (itiInit: any) => {
     if (!itiInit) return
-    const countryDialCode = itiInit.getSelectedCountryData().dialCode;
+    const countryDialCode = itiRef.current.getSelectedCountryData().dialCode;
     if (unformatNumber(inputValue).startsWith(countryDialCode)) {
       return showFormattedError('repeat country code')
     }
   }
 
+  // Validation for required empty fields
+  const validateRequiredField = () => {
+    if (required && (!inputValue || inputValue.trim() === '')) {
+      setError('Missing phone number')
+      return true
+    }
+    return false
+  }
 
   const validateErrors = () => {
-    if (!hasTyped && !error) return
+    // If field is empty, only show required field error if applicable
+    if (!inputValue || inputValue.trim() === '') {
+      if (validateRequiredField()) return
+      // Clear any existing errors if field is empty and not required
+      if (!required) {
+        setError('')
+      }
+      return
+    }
 
+    // Run validation checks
     if (itiRef.current) isValid(itiRef.current.isValidNumber())
     if (validateOnlyNumbers(itiRef.current)) return
     if (validateTooLongNumber(itiRef.current)) return
@@ -225,6 +254,121 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.Ref<unknown>
     if (validateRepeatCountryCode(itiRef.current)) return
   }
 
+  // Add listener for form validation to track when validation should be shown
+  useEffect(() => {
+    const handleInvalid = (event: Event) => {
+      const target = event.target as HTMLInputElement
+      const phoneNumberContainer = target.closest('.pb_phone_number_input')
+
+      if (phoneNumberContainer && phoneNumberContainer === wrapperRef.current) {
+        const invalidInputName = target.name || target.getAttribute('name')
+        if (invalidInputName === name) {
+          setFormSubmitted(true)
+          // Trigger validation when form is submitted
+          validateErrors()
+        }
+      }
+    }
+
+    document.addEventListener('invalid', handleInvalid, true)
+
+    return () => {
+      document.removeEventListener('invalid', handleInvalid, true)
+    }
+  }, [name, inputValue])
+
+  /*
+    useImperativeHandle exposes the kit's input element to a parent component via a ref.
+    See the Playbook docs for use cases.
+    Read: https://react.dev/reference/react/useImperativeHandle
+  */
+  useImperativeHandle(ref, () => {
+    return {
+      clearField() {
+        setInputValue("")
+        setError("")
+        setHasTyped(false)
+        setFormSubmitted(false)
+        // Only clear validation state if field was required
+        if (required) {
+          updateValidationState(false)
+        }
+      },
+      inputNode() {
+        return inputRef.current
+      },
+      // Expose validation method for React Hook Form
+      validate() {
+        // Run validation and return error message or true
+        const isEmpty = !inputValue || inputValue.trim() === ''
+
+        if (required && isEmpty) {
+          setError('Missing phone number')
+          setFormSubmitted(true)
+          return 'Missing phone number'
+        }
+
+        if (isEmpty) {
+          setError('')
+          return true
+        }
+
+        if (!itiRef.current) {
+          return true
+        }
+
+        // Check for repeat country code first
+        const countryDialCode = itiRef.current.getSelectedCountryData().dialCode;
+        if (unformatNumber(inputValue).startsWith(countryDialCode)) {
+          const countryName = itiRef.current.getSelectedCountryData().name
+          const errorMessage = `Invalid ${countryName} phone number (repeat country code)`
+          setError(errorMessage)
+          setFormSubmitted(true)
+          setHasTyped(true)
+          return errorMessage
+        }
+
+        // Check if it only contains valid characters
+        if (!containOnlyNumbers(inputValue)) {
+          const countryName = itiRef.current.getSelectedCountryData().name
+          const errorMessage = `Invalid ${countryName} phone number (enter numbers only)`
+          setError(errorMessage)
+          setFormSubmitted(true)
+          setHasTyped(true)
+          return errorMessage
+        }
+
+        // Check if valid number
+        if (!itiRef.current.isValidNumber()) {
+          const countryName = itiRef.current.getSelectedCountryData().name
+          const validationError = itiRef.current.getValidationError()
+          let errorMessage = ''
+
+          if (validationError === ValidationError.TooShort) {
+            errorMessage = `Invalid ${countryName} phone number (too short)`
+          } else if (validationError === ValidationError.TooLong) {
+            errorMessage = `Invalid ${countryName} phone number (too long)`
+          } else if (validationError === ValidationError.MissingAreaCode) {
+            errorMessage = `Invalid ${countryName} phone number (missing area code)`
+          } else {
+            errorMessage = `Invalid ${countryName} phone number`
+          }
+
+          // Set the error state so the validation attribute gets added
+          setError(errorMessage)
+          setFormSubmitted(true)
+          setHasTyped(true)
+
+          return errorMessage
+        }
+
+        // Clear error if valid
+        setError('')
+        return true
+      }
+    }
+  })
+
   const getCurrentSelectedData = (itiInit: any, inputValue: string) => {
     return { ...itiInit.getSelectedCountryData(), number: inputValue }
   }
@@ -232,6 +376,12 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.Ref<unknown>
   const handleOnChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
     if (!hasTyped) setHasTyped(true)
     setInputValue(evt.target.value)
+
+    // Reset form submitted state when user types
+    if (formSubmitted) {
+      setFormSubmitted(false)
+    }
+
     let phoneNumberData
     if (formatAsYouType) {
       const formattedPhoneNumberData = getCurrentSelectedData(itiRef.current, evt.target.value)
@@ -240,8 +390,28 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.Ref<unknown>
       phoneNumberData = getCurrentSelectedData(itiRef.current, evt.target.value)
     }
     setSelectedData(phoneNumberData)
-    onChange(phoneNumberData)
+
+    // Check if this is React Hook Form by checking if onChange expects target format
+    const isReactHookForm = onChange.toString().includes("target")
+    if (isReactHookForm) {
+      // For React Hook Form, pass the event with modified target value
+      onChange({
+        ...evt,
+        target: {
+          ...evt.target,
+          name,
+          value: phoneNumberData
+        }
+      } as any)
+    } else {
+      onChange(phoneNumberData)
+    }
+
     isValid(itiRef.current.isValidNumber())
+
+    // Trigger validation after onChange for React Hook Form
+    // This ensures validation state is up-to-date
+    setTimeout(() => validateErrors(), 0)
   }
 
   // Separating Concerns as React Docs Recommend
@@ -300,7 +470,7 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.Ref<unknown>
     dark,
     "data-phone-number": JSON.stringify(selectedData),
     disabled,
-    error,
+    error: displayError,
     type: 'tel',
     id,
     label,
@@ -310,7 +480,10 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.Ref<unknown>
     value: inputValue
   }
 
-  let wrapperProps: Record<string, unknown> = { className: classes }
+  let wrapperProps: Record<string, unknown> = {
+    className: classes,
+    ref: wrapperRef
+  }
 
   if (!isEmpty(aria)) textInputProps = {...textInputProps, ...ariaProps}
   if (!isEmpty(data)) wrapperProps = {...wrapperProps, ...dataProps}
