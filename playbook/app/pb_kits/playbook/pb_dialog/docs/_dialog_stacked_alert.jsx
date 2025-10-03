@@ -51,7 +51,7 @@ const DialogStackedAlert = () => {
   return (
     <div>
     <Flex
-        rowGap="xs" 
+        rowGap="xs"
         wrap
     >
       <Button
@@ -93,6 +93,7 @@ const DialogStackedAlert = () => {
           <Button
               fullWidth
               onClick={dialog.toggle}
+              variant= {dialog.status == "delete" ? "danger" : "primary"}
           >
             {dialog.buttonOneText}
           </Button>
