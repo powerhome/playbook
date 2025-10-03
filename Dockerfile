@@ -1,5 +1,5 @@
-# syntax = docker/dockerfile:1.8.1
-FROM phusion/passenger-customizable:1.0.19 AS base
+# syntax = docker/dockerfile:1.8.1@sha256:e87caa74dcb7d46cd820352bfea12591f3dba3ddc4285e19c7dcd13359f7cefd
+FROM phusion/passenger-customizable:1.0.19@sha256:fc0e0e62e8c4ef174ddd925abfb263e8b689e6a378dfb32ce44d511f2fa33640 AS base
 
 RUN --mount=type=cache,id=playbook-apt-cache,target=/var/cache/apt,sharing=locked \
     --mount=type=cache,id=playbook-apt-lib,target=/var/lib/apt,sharing=locked \
