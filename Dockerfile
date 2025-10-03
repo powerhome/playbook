@@ -82,6 +82,11 @@ RUN --mount=id=playbook-yarncache,type=cache,target=/home/app/.cache/yarn,uid=99
 RUN --mount=id=playbook-yarncache,type=cache,target=/home/app/.cache/yarn,uid=9999,gid=9999,sharing=locked \
     cd playbook-website; node /home/app/src/playbook-website/scripts/react-docgen.mjs --all-kits
 
+FROM release AS dev
+COPY --from=rubydeps --link $BUNDLE_TO $BUNDLE_TO
+RUN mkdir -p /home/app/src/playbook-website/tmp /home/app/src/playbook-website/log && \
+    chown -R 9999:9999 /home/app/src/playbook-website/tmp /home/app/src/playbook-website/log
+
 FROM base AS prod
 COPY --from=rubydeps --link $BUNDLE_TO $BUNDLE_TO
 COPY --link --chown=9999:9999 playbook /home/app/src/playbook
