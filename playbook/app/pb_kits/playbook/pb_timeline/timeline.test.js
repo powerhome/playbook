@@ -161,12 +161,12 @@ test('should pass showDate prop', () => {
     const props = { showDate: true }
     render(<TimelineDefault {...props} />)
     const kit = screen.getByTestId(testId)
-    expect(kit).toHaveClass('pb_timeline_kit_horizontal__with_date')
+    expect(kit).toHaveClass('pb_timeline_kit_horizontal_with_date')
 })
 
 test('should pass showDate prop with Children', () => {
     const props = { showDate: true }
     render(<TimelineWithChildren {...props} />)
     const kit = screen.getByTestId(testId)
-    expect(kit).toHaveClass('pb_timeline_kit_horizontal__with_date')
+    expect(kit).toHaveClass('pb_timeline_kit_horizontal_with_date')
 })
