@@ -1,0 +1,127 @@
+#!/bin/bash
+# Local Docker development helper script
+
+set -e
+
+PROJECT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
+cd "$PROJECT_ROOT"
+
+function help() {
+  cat <<EOF
+Playbook Website - Local Docker Development
+
+Usage: bin/docker_dev [command]
+
+Commands:
+  build       Build the Docker images
+  start       Start the development environment
+  stop        Stop the development environment
+  restart     Restart the development environment
+  logs        Show logs (Ctrl+C to exit)
+  shell       Open a bash shell in the web container
+  rails       Run rails commands (e.g., bin/docker-dev rails console)
+  db_console  Open MySQL console
+  db_reset    Reset the database (drop, create, migrate)
+  clean       Remove containers and volumes
+  help        Show this help message
+
+Examples:
+  bin/docker_dev build
+  bin/docker_dev start
+  bin/docker_dev logs
+  bin/docker_dev shell
+  bin/docker_dev rails console
+  bin/docker_dev rails db:migrate
+  bin/docker_dev db_reset
+
+EOF
+}
+
+function build() {
+  echo "Building Docker images..."
+  docker compose -f docker-compose.yml -f docker-compose.dev.yml build
+}
+
+function start() {
+  echo "Starting development environment..."
+  echo "Website will be available at http://localhost:8089"
+  docker compose -f docker-compose.yml -f docker-compose.dev.yml up -d
+  echo ""
+  echo "Environment started! Run 'bin/docker_dev logs' to see logs"
+}
+
+function stop() {
+  echo "Stopping development environment..."
+  docker compose -f docker-compose.yml -f docker-compose.dev.yml down
+}
+
+function restart() {
+  stop
+  start
+}
+
+function logs() {
+  docker compose -f docker-compose.yml -f docker-compose.dev.yml logs -f
+}
+
+function shell() {
+  docker compose -f docker-compose.yml -f docker-compose.dev.yml exec web bash
+}
+
+function rails_cmd() {
+  docker compose -f docker-compose.yml -f docker-compose.dev.yml exec web bash -c "cd playbook-website && bin/rails $*"
+}
+
+function db_console() {
+  docker compose -f docker-compose.yml -f docker-compose.dev.yml exec db mysql -u root -ppassword playbook_website_dev
+}
+
+function db_reset() {
+  echo "Resetting database..."
+  docker compose -f docker-compose.yml -f docker-compose.dev.yml exec web bash -c "cd playbook-website && bin/rails db:drop db:create db:migrate"
+  echo "Database reset complete!"
+}
+
+function clean() {
+  echo "Removing containers and volumes..."
+  docker compose -f docker-compose.yml -f docker-compose.dev.yml down -v
+  echo "Cleaned up!"
+}
+
+case "${1:-help}" in
+  build)
+    build
+    ;;
+  start)
+    start
+    ;;
+  stop)
+    stop
+    ;;
+  restart)
+    restart
+    ;;
+  logs)
+    logs
+    ;;
+  shell)
+    shell
+    ;;
+  rails)
+    shift
+    rails_cmd "$@"
+    ;;
+  db_console|db-console)
+    db_console
+    ;;
+  db_reset|db-reset)
+    db_reset
+    ;;
+  clean)
+    clean
+    ;;
+  help|*)
+    help
+    ;;
+esac
+
