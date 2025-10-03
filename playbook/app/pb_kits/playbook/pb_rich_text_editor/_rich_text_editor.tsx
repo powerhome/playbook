@@ -183,6 +183,7 @@ const RichTextEditor = (props: RichTextEditorProps): React.ReactElement => {
             {advancedEditorToolbar && (
               <EditorToolbar editor={advancedEditor}
                   extensions={extensions}
+                  simple={simple}
               />
             )}
           { children }

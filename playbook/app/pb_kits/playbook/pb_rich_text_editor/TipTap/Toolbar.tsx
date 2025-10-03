@@ -11,7 +11,7 @@ import { ToolbarTypes } from "./EditorTypes";
 import ToolbarHistoryItems from "./ToolbarHistory";
 import MoreExtensionsDropdown from "./MoreExtensionsDropdown";
 
-const EditorToolbar = ({ editor, extensions }: any): React.ReactElement => {
+const EditorToolbar = ({ editor, extensions, simple }: any): React.ReactElement => {
   const toolbaritems = [
     {
         icon: "bold",
@@ -33,6 +33,21 @@ const EditorToolbar = ({ editor, extensions }: any): React.ReactElement => {
     },
   ]
 
+  const simpleToolbaritems = [
+    {
+        icon: "bold",
+        text: "Bold",
+        classname:`toolbar_button ${editor.isActive('bold') ? 'is-active' : ''}`,
+        onclick:()=>editor.chain().focus().toggleBold().run(),
+    },
+    {
+        icon: "italic",
+        text: "Italic",
+        classname:`toolbar_button ${editor.isActive('italic') ? 'is-active' : ''}`,
+        onclick:() => editor.chain().focus().toggleItalic().run(),
+    },
+  ]
+
   return (
     <Background backgroundColor="white"
         className="toolbar"
@@ -42,6 +57,25 @@ const EditorToolbar = ({ editor, extensions }: any): React.ReactElement => {
           paddingX="sm"
           paddingY="xxs"
       >
+        {
+          simple ? (
+            <>
+              <Flex className="toolbar_block">
+                {simpleToolbaritems && simpleToolbaritems.map(
+                  ({ icon, text, classname, onclick}: ToolbarTypes, index: number) => (
+                    <EditorButton
+                        classname={classname}
+                        icon={icon}
+                        key={index}
+                        onclick={onclick}
+                        text={text}
+                    />
+                  )
+                )}
+              </Flex>
+            </>
+          ) : (
+            <>
         <FlexItem className="toolbar_block"
             displayFlex
         >
@@ -69,6 +103,10 @@ const EditorToolbar = ({ editor, extensions }: any): React.ReactElement => {
             }
         </FlexItem>
         <ToolbarHistoryItems editor={editor} />
+        </>
+          )
+        }
+       
       </Flex>
     </Background>
   );
