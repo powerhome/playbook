@@ -2,7 +2,7 @@ import React from 'react'
 import classnames from 'classnames'
 
 import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
-import { globalProps } from '../utilities/globalProps'
+import { globalProps, GlobalProps } from '../utilities/globalProps'
 
 import Body from '../pb_body/_body'
 import Caption from '../pb_caption/_caption'
@@ -33,8 +33,7 @@ type IconStatValueProps = {
     | "yellow"
     | "orange"
     | "green"
-    | "lighter",
-}
+} & GlobalProps
 
 const IconStatValue = (props: IconStatValueProps): React.ReactElement => {
   const {
@@ -50,13 +49,13 @@ const IconStatValue = (props: IconStatValueProps): React.ReactElement => {
     text = '',
     unit = '',
     value = 0,
-    variant = 'lighter',
+    variant = 'default',
   } = props
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
   const htmlProps = buildHtmlProps(htmlOptions)
   const classes = classnames(
-    buildCss('pb_icon_stat_value_kit', orientation, size, variant), globalProps(props),
+    buildCss('pb_icon_stat_value_kit', orientation), globalProps(props),
     className
   )
   const titleSize = function(size: "sm" | "md" | "lg") {
@@ -101,6 +100,8 @@ const IconStatValue = (props: IconStatValueProps): React.ReactElement => {
       <IconCircle
           dark={dark}
           icon={icon}
+          marginBottom={orientation == 'vertical' ? 'xs' : undefined}
+          marginRight={orientation == 'horizontal' ? 'sm' : undefined}
           size={size}
           variant={variant}
       />

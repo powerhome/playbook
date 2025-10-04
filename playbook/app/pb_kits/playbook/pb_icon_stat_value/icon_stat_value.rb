@@ -9,8 +9,8 @@ module Playbook
                   values: %w[sm md lg],
                   default: "sm"
       prop :variant, type: Playbook::Props::Enum,
-                     values: %w[default royal blue purple teal red yellow green orange lighter],
-                     default: "lighter"
+                     values: %w[default royal blue purple teal red yellow green orange],
+                     default: "default"
 
       prop :orientation, type: Playbook::Props::Enum,
                          values: %w[vertical horizontal],
@@ -25,7 +25,7 @@ module Playbook
       prop :value
 
       def classname
-        generate_classname("pb_icon_stat_value_kit", orientation, size, variant)
+        generate_classname("pb_icon_stat_value_kit", orientation)
       end
 
       def value_string
@@ -40,6 +40,14 @@ module Playbook
         else
           3
         end
+      end
+
+      def icon_margin_right
+        orientation === "horizontal" && "sm"
+      end
+
+      def icon_margin_bottom
+        orientation === "vertical" && "xs"
       end
     end
   end

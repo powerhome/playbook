@@ -3,7 +3,7 @@ import React from 'react'
 import classnames from 'classnames'
 
 import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
-import { globalProps } from '../utilities/globalProps'
+import { globalProps, GlobalProps } from '../utilities/globalProps'
 
 import Icon from '../pb_icon/_icon'
 
@@ -26,7 +26,7 @@ type IconCircleProps = {
     | "orange"
     | "green"
     | "lighter",
-}
+} & GlobalProps
 
 const IconCircle = (props: IconCircleProps) => {
   const {
