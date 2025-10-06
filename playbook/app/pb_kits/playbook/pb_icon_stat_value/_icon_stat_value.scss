@@ -3,51 +3,45 @@
 @import "../tokens/spacing";
 @import "../pb_icon_circle/icon_circle";
 
-[class^=pb_icon_stat_value_kit]{
+.pb_icon_stat_value_kit_horizontal,
+.pb_icon_stat_value_kit_vertical
+ {
   display: flex;
   align-items: baseline;
 
-  &[class*=_vertical]  {
+  &.pb_icon_stat_value_kit_vertical {
     flex-direction: column;
 
-    &[class*=_center]  {
+    &.text_align_center {
       align-items: center;
 
-      [class^=pb_title],
-      [class^=pb_body],
-      [class^=pb_caption] {
+      .pb_title_kit,
+      .pb_body_kit,
+      .pb_caption_kit_md {
         text-align: center;
       }
     }
 
-    &[class*=_right]  {
+    &.text_align_right {
       align-items: flex-end;
 
-      [class^=pb_title],
-      [class^=pb_body],
-      [class^=pb_caption] {
+      .pb_title_kit,
+      .pb_body_kit,
+      .pb_caption_kit_md {
         text-align: right;
       }
     }
-
-    [class^=pb_icon_circle] {
-      margin-bottom: $space-xs;
-    }
   }
 
-  &[class*=_horizontal]  {
+  &.pb_icon_stat_value_kit_horizontal {
     align-items: center;
 
-    &[class*=_center]  {
+    &.text_align_center {
       justify-content: center;
     }
 
-    &[class*=_right]  {
+    &.text_align_right {
       justify-content: flex-end;
-    }
-
-    [class^=pb_icon_circle] {
-      margin-right: $space-sm;
     }
   }
 }
