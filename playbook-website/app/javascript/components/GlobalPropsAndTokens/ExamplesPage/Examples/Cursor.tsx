@@ -46,26 +46,26 @@ const Cursor = () => {
     "zoomOut",
   ];
 
-  
+
   const VisualGuideCard = () => {
-      const cursorPairs = values.map(name => [name, (CursorImages as Record<string, string>)[name]]);
+    const cursorPairs = values.map(name => [name, (CursorImages as Record<string, string>)[name]]);
 
     return (
-       <Flex width="100%" gap="sm" wrap>
-      {cursorPairs.map(([name, image]) => (
-        <Card
-          key={name}
-          className="visual_guide_card_hover"
-          display="flex"
-          alignItems="center"
-          justifyContent="center"
-          background="light"
-        >
-          <img src={image} alt={`${name} cursor example`} />
-          <Body text={name} />
-        </Card>
-      ))}
-    </Flex>
+      <Flex width="100%" gap="sm" wrap>
+        {cursorPairs.map(([name, image]) => (
+          <Card
+            key={name}
+            className="visual_guide_card_hover"
+            display="flex"
+            alignItems="center"
+            justifyContent="center"
+            background="light"
+          >
+            <img src={image} alt={`${name} cursor example`} />
+            <Body text={name} />
+          </Card>
+        ))}
+      </Flex>
     );
   };
 

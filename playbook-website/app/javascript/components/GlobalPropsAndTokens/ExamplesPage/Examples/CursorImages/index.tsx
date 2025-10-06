@@ -6,7 +6,7 @@ import colResize from './colResize.svg';
 import contextMenu from './contextMenu.svg';
 import copy from './copy.svg';
 import crosshair from './crosshair.svg';
-import default from './default.svg';
+import defaultCursor from './defaultCursor.svg';
 import eResize from './eResize.svg';
 import ewResize from './ewResize.svg';
 import grab from './grab.svg';
