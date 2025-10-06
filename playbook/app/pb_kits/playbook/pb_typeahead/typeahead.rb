@@ -101,6 +101,8 @@ module Playbook
           plusIcon: plus_icon,
           truncate: truncate,
           wrapped: wrapped,
+          required: required,
+          validation: validation,
           searchContextSelector: search_context_selector,
           optionsByContext: options_by_context,
           clearOnContextChange: clear_on_context_change,
