@@ -117,17 +117,19 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.Ref<unknown>
   const [selectedData, setSelectedData] = useState()
   const [hasTyped, setHasTyped] = useState(false)
   const [formSubmitted, setFormSubmitted] = useState(false)
+  const [hasStartedValidating, setHasStartedValidating] = useState(false)
 
-  // Sync internal error state with prop changes
+  // Only sync initial error from props, not continuous updates
+  // Once validation starts, internal validation takes over
   useEffect(() => {
-    if (props.error !== undefined) {
+    if (props.error && !hasStartedValidating) {
       setError(props.error)
       // If there's an initial error from props, mark as submitted so it shows
-      if (props.error && props.error.length > 0) {
+      if (props.error) {
         setFormSubmitted(true)
       }
     }
-  }, [props.error])
+  }, [props.error, hasStartedValidating])
 
   // Function to update validation state on the wrapper element
   // Only applies when input is required
@@ -245,6 +247,11 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.Ref<unknown>
   }
 
   const validateErrors = () => {
+    // Signal validation has started, so prop errors won't override internal validation
+    if (!hasStartedValidating) {
+      setHasStartedValidating(true)
+    }
+
     // If field is empty, only show required field error if applicable
     if (!inputValue || inputValue.trim() === '') {
       if (validateRequiredField()) return
@@ -300,6 +307,7 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.Ref<unknown>
         setError("")
         setHasTyped(false)
         setFormSubmitted(false)
+        setHasStartedValidating(false)
         // Only clear validation state if field was required
         if (required) {
           updateValidationState(false)
