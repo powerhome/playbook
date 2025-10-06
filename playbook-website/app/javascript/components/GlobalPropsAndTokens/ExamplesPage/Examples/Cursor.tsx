@@ -2,9 +2,7 @@ import { Flex, Card, Body } from "playbook-ui";
 import ShowPage from "../../Templates/ShowPage";
 import PropsExamplesTable from "../../Templates/Subcomponents/PropsExamplesTable";
 import ExampleCodeCard from "../../Templates/Subcomponents/ExampleCodeCard";
-import * as CursorImages from "./CursorImages"
-
-console.log(CursorImages);
+import * as CursorImages from "./CursorImages";
 
 const Cursor = () => {
   const values = [
