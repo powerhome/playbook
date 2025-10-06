@@ -65,7 +65,7 @@ type Hover = Shadow & {
   color?: string,
   scale?: "sm" | "md" | "lg",
   underline?: boolean,
-  visibility?: boolean,
+  visible?: boolean,
 }
 
 type GroupHover  = {
@@ -252,7 +252,7 @@ const PROP_CATEGORIES: {[key:string]: (props: {[key: string]: any}) => string} =
       css += hover.underline ? `hover_underline ` : '';
       css += hover.scale ? `hover_scale_${hover.scale} ` : '';
       css += hover.color ? `hover_color-${hover.color } ` : '';
-      css += hover.visibility ? `hover_visibility` : '';
+      css += hover.visible ? `hover_visible_true` : '';
       return css;
   },
 
