@@ -1,26 +1,12 @@
-import { Flex, Image } from "playbook-ui";
+import { Flex, Card, Body } from "playbook-ui";
 import ShowPage from "../../Templates/ShowPage";
 import PropsExamplesTable from "../../Templates/Subcomponents/PropsExamplesTable";
 import ExampleCodeCard from "../../Templates/Subcomponents/ExampleCodeCard";
+import * as CursorImages from "./CursorImages"
+
+console.log(CursorImages);
 
 const Cursor = () => {
-  const VisualGuideCard = () => {
-
-    const images = Array.from({ length: 36 })
-    return (
-      <Flex width="100%" gap="sm" wrap>
-        {images.map((_, index) => (
-        <Image
-          key={index}
-          alt={`placeholder image ${index + 1}`}
-          size="lg"
-          url={`https://unsplash.it/500/400/?image=634`}
-        />
-      ))}
-      </Flex>
-    );
-  };
-
   const values = [
     "auto",
     "default",
@@ -59,6 +45,29 @@ const Cursor = () => {
     "zoomIn",
     "zoomOut",
   ];
+
+  
+  const VisualGuideCard = () => {
+      const cursorPairs = values.map(name => [name, (CursorImages as Record<string, string>)[name]]);
+
+    return (
+       <Flex width="100%" gap="sm" wrap>
+      {cursorPairs.map(([name, image]) => (
+        <Card
+          key={name}
+          className="visual_guide_card_hover"
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+          background="light"
+        >
+          <img src={image} alt={`${name} cursor example`} />
+          <Body text={name} />
+        </Card>
+      ))}
+    </Flex>
+    );
+  };
 
   const ValuesCards = () => {
     return (
@@ -105,8 +114,8 @@ const Cursor = () => {
               "Cursor",
               <ExampleCodeCard text="union" copyIcon={false} />,
               <ValuesCards />,
-                <ExampleCodeCard id="cursor-rails" text="cursor:'notAllowed'" />,
-                <ExampleCodeCard id="cursor-react" text="cursor='notAllowed'" />,
+              <ExampleCodeCard id="cursor-rails" text="cursor:'notAllowed'" />,
+              <ExampleCodeCard id="cursor-react" text="cursor='notAllowed'" />,
             ],
           ]}
         />
