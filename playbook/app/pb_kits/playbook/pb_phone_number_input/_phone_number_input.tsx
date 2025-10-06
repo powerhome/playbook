@@ -112,11 +112,22 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.Ref<unknown>
   const itiRef = useRef<any>(null);
   const wrapperRef = useRef<HTMLDivElement | null>(null);
   const [inputValue, setInputValue] = useState(value)
-  const [error, setError] = useState("")
+  const [error, setError] = useState(props.error || "")
   const [dropDownIsOpen, setDropDownIsOpen] = useState(false)
   const [selectedData, setSelectedData] = useState()
   const [hasTyped, setHasTyped] = useState(false)
   const [formSubmitted, setFormSubmitted] = useState(false)
+
+  // Sync internal error state with prop changes
+  useEffect(() => {
+    if (props.error !== undefined) {
+      setError(props.error)
+      // If there's an initial error from props, mark as submitted so it shows
+      if (props.error && props.error.length > 0) {
+        setFormSubmitted(true)
+      }
+    }
+  }, [props.error])
 
   // Function to update validation state on the wrapper element
   // Only applies when input is required
@@ -133,7 +144,7 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.Ref<unknown>
   // Determine which error to display
   // Show internal errors on blur (hasTyped) or on form submission (formSubmitted)
   const shouldShowInternalError = (hasTyped || formSubmitted) && required && error
-  const displayError = props.error || (shouldShowInternalError ? error : "")
+  const displayError = shouldShowInternalError ? error : ""
 
   useEffect(() => {
     const hasError = error.length > 0
