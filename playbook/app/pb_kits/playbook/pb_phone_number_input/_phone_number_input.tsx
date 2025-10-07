@@ -323,23 +323,7 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.Ref<unknown>
       phoneNumberData = getCurrentSelectedData(itiRef.current, evt.target.value)
     }
     setSelectedData(phoneNumberData)
-
-    // Check if this is React Hook Form by checking if onChange expects target format
-    const isReactHookForm = onChange.toString().includes("target")
-    if (isReactHookForm) {
-      // For React Hook Form, pass the event with modified target value
-      onChange({
-        ...evt,
-        target: {
-          ...evt.target,
-          name,
-          value: phoneNumberData
-        }
-      } as any)
-    } else {
-      onChange(phoneNumberData)
-    }
-
+    onChange(phoneNumberData)
     isValid(itiRef.current.isValidNumber())
   }
 
