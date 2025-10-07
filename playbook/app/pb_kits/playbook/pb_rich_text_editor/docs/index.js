@@ -13,3 +13,4 @@ export { default as RichTextEditorToolbarDisabled } from './_rich_text_editor_to
 export { default as RichTextEditorAdvancedPreview } from './_rich_text_editor_advanced_preview.jsx'
 export { default as RichTextEditorAdvancedSimple } from './_rich_text_editor_advanced_simple.jsx'
 export { default as RichTextEditorAdvancedFocus } from './_rich_text_editor_advanced_focus.jsx'
+export { default as RichTextEditorAdvancedTemplates } from './_rich_text_editor_advanced_templates.jsx'
