@@ -1,13 +1,13 @@
-import { Image, Flex, Card, Body } from "playbook-ui";
+import { Flex, Card, Body } from "playbook-ui";
 
 import ShowPage from "../../Templates/ShowPage";
 import PropsExamplesTable from "../../Templates/Subcomponents/PropsExamplesTable";
 import ExampleCodeCard from "../../Templates/Subcomponents/ExampleCodeCard";
 import HeaderWithIcon from "../../Templates/Subcomponents/HeaderWithIcon";
 import ValueCardWithTooltip from "../../Templates/Subcomponents/ValueCardWithTooltip";
-import * as DisplayImages from './DisplayImages'
+import * as PositionImages from './PositionImages'
 
-type PositionKey = keyof typeof DisplayImages;
+type PositionKey = keyof typeof PositionImages;
 
 const Position = () => {
   const VisualGuideExample = ({ position, positionSvg }: { position: any, positionSvg: PositionKey }) => {
@@ -23,7 +23,7 @@ const Position = () => {
           >
             <img
               alt={`Display example of ${position}`}
-              src={DisplayImages[positionSvg]}
+              src={PositionImages[positionSvg]}
             />
           </Card>
           <Body text={position} />
