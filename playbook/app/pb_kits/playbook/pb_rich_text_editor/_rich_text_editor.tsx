@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import classnames from 'classnames'
 import { TrixEditor } from 'react-trix'
 
@@ -77,7 +77,9 @@ const RichTextEditor = (props: RichTextEditorProps): React.ReactElement => {
 
   const ariaProps = buildAriaProps(aria),
     dataProps = buildDataProps(data),
-    [editor, setEditor] = useState<Editor>()
+    [editor, setEditor] = useState<Editor>(),
+    [showToolbarOnFocus, setShowToolbarOnFocus] = useState(false),
+    containerRef = useRef<HTMLDivElement>(null)
 
   const htmlProps = buildHtmlProps(htmlOptions)
   
@@ -128,6 +130,42 @@ const RichTextEditor = (props: RichTextEditorProps): React.ReactElement => {
     document.addEventListener('trix-blur', inlineFocus)
   }
 
+  //===========focus prop with advanced editor=================
+  const isClickInPopover = (event: Event): boolean => {
+    return !!(event.target as Element).closest('.pb_tiptap_toolbar_dropdown_popover')
+  }
+
+  const isClickInContainer = (event: Event): boolean => {
+    return !!(containerRef.current && containerRef.current.contains(event.target as Node))
+  }
+
+  useEffect(() => {
+    if (!advancedEditor || !focus) return
+
+    const handleFocus = () => setShowToolbarOnFocus(true)
+    
+    const handleClickOutside = (event: Event) => {
+      if (isClickInContainer(event) || isClickInPopover(event)) return
+      setShowToolbarOnFocus(false)
+    }
+
+    const editorElement = advancedEditor?.view?.dom
+    if (editorElement) {
+      editorElement.addEventListener('focus', handleFocus)
+    }
+
+    document.addEventListener('mousedown', handleClickOutside)
+
+    return () => {
+      if (editorElement) {
+        editorElement.removeEventListener('focus', handleFocus)
+      }
+      document.removeEventListener('mousedown', handleClickOutside)
+    }
+  }, [advancedEditor, focus])
+
+  //============= end focus prop with advanced editor=================
+
   useEffect(() => {
     if (!editor || !template) return
     editor.loadHTML('')
@@ -148,23 +186,22 @@ const RichTextEditor = (props: RichTextEditorProps): React.ReactElement => {
     })
   }, [editor])
 
-  const richTextEditorClass = 'pb_rich_text_editor_kit',
-    simpleClass = simple ? 'simple' : '',
-    focusClass = focus ? 'focus-editor-targets' : '',
-    stickyClass = sticky ? 'sticky' : '',
-    inlineClass = inline ? 'inline' : '',
-    toolbarBottomClass = toolbarBottom ? 'toolbar-bottom' : ''
-
-  let css = classnames(globalProps(props, { maxWidth }), className)
-  css = classnames(
-    richTextEditorClass,
-    simpleClass,
-    focusClass,
-    stickyClass,
-    inlineClass,
-    toolbarBottomClass,
-    css
+  // Generate CSS classes
+  const css = classnames(
+    'pb_rich_text_editor_kit',
+    {
+      simple: simple,
+      'focus-editor-targets': focus,
+      sticky: sticky,
+      inline: inline,
+      'toolbar-bottom': toolbarBottom,
+    },
+    globalProps(props, { maxWidth }),
+    className
   )
+
+  // Determine if toolbar should be shown
+  const shouldShowToolbar = focus && advancedEditor ? showToolbarOnFocus : advancedEditorToolbar
 
   return (
     <div
@@ -172,15 +209,16 @@ const RichTextEditor = (props: RichTextEditorProps): React.ReactElement => {
         {...dataProps}
         {...htmlProps}
         className={css}
+        ref={focus ? containerRef : undefined}
     >
       {
         advancedEditor ? (
           <div 
               className={classnames("pb_rich_text_editor_advanced_container", { 
-              ["toolbar-active"]: advancedEditorToolbar,
+              ["toolbar-active"]: shouldShowToolbar,
               })}
           >
-            {advancedEditorToolbar && (
+            {shouldShowToolbar && (
               <EditorToolbar editor={advancedEditor}
                   extensions={extensions}
                   simple={simple}
