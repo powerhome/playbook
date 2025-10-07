@@ -5,18 +5,28 @@ import PropsExamplesTable from "../../Templates/Subcomponents/PropsExamplesTable
 import ExampleCodeCard from "../../Templates/Subcomponents/ExampleCodeCard";
 import HeaderWithIcon from "../../Templates/Subcomponents/HeaderWithIcon";
 import ValueCardWithTooltip from "../../Templates/Subcomponents/ValueCardWithTooltip";
+import * as DisplayImages from './DisplayImages'
+
+type PositionKey = keyof typeof DisplayImages;
 
 const Position = () => {
-  const VisualGuideExample = ({ imageUrl, position }: any) => {
+  const VisualGuideExample = ({ position, positionSvg }: { position: any, positionSvg: PositionKey }) => {
     return (
       <>
         <Flex orientation="column" alignItems="center" gap="xs">
-            <Image
-              alt="picture of a misty forest"
-              size="lg"
-              url={imageUrl}
+          <Card
+            className="visual_guide_card_position"
+            display="flex"
+            alignItems="center"
+            justifyContent="center"
+            padding="xxs"
+          >
+            <img
+              alt={`Display example of ${position}`}
+              src={DisplayImages[positionSvg]}
             />
-            <Body text={position} />
+          </Card>
+          <Body text={position} />
         </Flex>
       </>
     )
@@ -24,12 +34,12 @@ const Position = () => {
 
   const PositionCard = () => {
       return (
-        <Flex width="100%" justify="around" wrap>
-          <VisualGuideExample imageUrl="https://unsplash.it/500/400/?image=634" position="Static" />
-          <VisualGuideExample imageUrl="https://unsplash.it/500/400/?image=634" position="Relative" />
-          <VisualGuideExample imageUrl="https://unsplash.it/500/400/?image=634" position="Absolute" />
-          <VisualGuideExample imageUrl="https://unsplash.it/500/400/?image=634" position="Fixed" />
-          <VisualGuideExample imageUrl="https://unsplash.it/500/400/?image=634" position="Sticky" />
+        <Flex gap="xs">
+          <VisualGuideExample position="Static" positionSvg="staticSvg" />
+          <VisualGuideExample position="Relative" positionSvg="relative" />
+          <VisualGuideExample position="Absolute" positionSvg="absolute" />
+          <VisualGuideExample position="Fixed" positionSvg="fixed" />
+          <VisualGuideExample position="Sticky" positionSvg="sticky" />
         </Flex>
       );
   };
