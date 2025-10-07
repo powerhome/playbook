@@ -3,6 +3,9 @@
 @import "../tokens/colors";
 
 .pb_text_input_kit {
+  label {
+    display: block !important;
+  }
   .pb_text_input_kit_label {
     margin-bottom: $space_xs;
     display: block;
