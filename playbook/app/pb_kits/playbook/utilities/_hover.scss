@@ -60,7 +60,7 @@
   @include hover-color-classes($text_colors);
   @include hover-color-classes($category_colors);
 
-.hover_visibility {
+.hover_visible_true {
   opacity: 0;
   transition: opacity $transition-speed ease;
 
@@ -70,7 +70,7 @@
 }
 
 .group_hover:hover {
-  .group_hover.hover_visibility {
+  .group_hover.hover_visible_true {
     opacity: 1;
   }
 }
