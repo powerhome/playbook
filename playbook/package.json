@@ -39,7 +39,7 @@
     "classnames": "2.5.1",
     "flatpickr": "^4.6.13",
     "highcharts": "^11.4.8",
-    "highcharts-react-official": "^3.2.1",
+    "highcharts-react-official": "^3.2.3",
     "intl-tel-input": "^24.7.0"
   },
   "devDependencies": {
