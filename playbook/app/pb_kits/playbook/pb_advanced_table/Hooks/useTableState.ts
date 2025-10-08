@@ -146,6 +146,8 @@ export function useTableState({
 
   // Pagination configuration
   const paginationInitializer = useMemo(() => {
+    if (!pagination) return {};
+
     return {
       getPaginationRowModel: getPaginationRowModel(),
       paginateExpandedRows: false,
@@ -200,6 +202,13 @@ export function useTableState({
     });
     onRowPinningChange({ top: allPinned });
   }, [table, pinnedRows?.value?.top?.join(',')]);
+
+  // Set pagination state when pagination is enabled
+  useEffect(() => {
+    if (pagination && paginationProps?.pageSize) {
+      table.setPageSize(paginationProps.pageSize);
+    }
+  }, [pagination, paginationProps?.pageSize, table]);
 
   // Check if table has any sub-rows
   const hasAnySubRows = table.getRowModel().rows.some(row => row.subRows && row.subRows.length > 0);
