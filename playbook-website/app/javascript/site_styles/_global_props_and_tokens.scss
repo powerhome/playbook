@@ -37,4 +37,29 @@
   .visual_guide_card_line_height {
    width: 110px;
   }
+
+  .text_jumbo {
+    font-size: $text_jumbo;
+  }
+  .text_largest {
+    font-size: $text_largest;
+  }
+  .text_larger {
+    font-size: $text_larger;
+  }
+  .text_large {
+    font-size: $text_large;
+  }
+  .text_default {
+    font-size: $font_base;
+  }
+  .text_small {
+    font-size: $font_small;
+  }
+  .text_smaller {
+    font-size: $font_smaller;
+  }
+  .text_smallest {
+    font-size: $font_smallest;
+  }
 }

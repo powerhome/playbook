@@ -14,7 +14,8 @@ import ZIndex from "./Examples/Z-Index";
 import LetterSpacing from "./Examples/LetterSpacing";
 import Shadows from "./Examples/Shadows";
 import Titles from "./Examples/Titles";
-
+import Transition from "./Examples/Transition";
+import Typography from "./Examples/Typography";
 
 const COMPONENT_MAP = {
   animation: Animation,
@@ -30,6 +31,8 @@ const COMPONENT_MAP = {
   shadows: Shadows,
   text_align: TextAlign,
   titles: Titles,
+  transition: Transition,
+  typography: Typography,
   vertical_align: VerticalAlign,
   z_index: ZIndex,
 };

@@ -25,5 +25,7 @@ tokens:
   - shadows
   - text_align
   - titles
+  - transition
+  - typography
   - vertical_align
   - z_index
