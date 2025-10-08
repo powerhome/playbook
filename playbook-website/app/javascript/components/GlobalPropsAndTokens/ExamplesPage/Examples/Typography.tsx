@@ -26,7 +26,7 @@ const Typography = () => {
         />
         <PropsExamplesTable
           firstColumnBold={false}
-          headers={["Example", "Font Size Tokens", "Value", "SASS Example"]}
+          headers={[<div style={{ width: 175 }}>Example</div>, "Font Size Tokens", "Value", "SASS Example"]}
           rows={[
             [
               <Body className="text_jumbo">Example</Body>,
@@ -131,7 +131,7 @@ const Typography = () => {
         />
         <PropsExamplesTable
           firstColumnBold={false}
-          headers={["Example", "Headings Tokens", "Value", "SASS Example"]}
+          headers={[<div style={{ width: 175 }}>Example</div>, "Headings Tokens", "Value", "SASS Example"]}
           rows={[
             [
               <Title size={1}>Heading</Title>,
@@ -173,7 +173,7 @@ const Typography = () => {
         />
         <PropsExamplesTable
           firstColumnBold={false}
-          headers={["Example", "Font Weight Tokens", "Value", "SASS Example"]}
+          headers={[<div style={{ width: 175 }}>Example</div>, "Font Weight Tokens", "Value", "SASS Example"]}
           rows={[
             [
               <Title size={4}>Example</Title>,
