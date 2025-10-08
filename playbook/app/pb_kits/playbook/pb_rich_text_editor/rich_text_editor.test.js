@@ -135,6 +135,10 @@ describe('Advanced TipTap Editor works as expected', () => {
     render(<TestAdvancedEditor simple />)
     
     const kit = screen.getByTestId(testId)
+    const toolbar = kit.querySelector('.toolbar')
+    expect(toolbar).toBeInTheDocument()
+    const toolbarDropdown = kit.querySelector('.editor_dropdown_button')
+    expect(toolbarDropdown).not.toBeInTheDocument()
     expect(kit).toHaveClass(`${kitClass} simple`)
   })
 
@@ -142,7 +146,26 @@ describe('Advanced TipTap Editor works as expected', () => {
     render(<TestAdvancedEditor sticky />)
     
     const kit = screen.getByTestId(testId)
+    const stickyToolbar = kit.querySelector('.pb_rich_text_editor_tiptap_toolbar_sticky')
+    expect(stickyToolbar).toBeInTheDocument()
     expect(kit).toHaveClass(`${kitClass} sticky`)
+  })
+
+  test('applies aria-label when provided', () => {
+    const ariaLabel = 'Rich Text Editor'
+    render(<TestAdvancedEditor aria={{ label: ariaLabel }} />)
+    
+    const kit = screen.getByTestId(testId)
+    expect(kit).toHaveAttribute('aria-label', ariaLabel)
+  })
+
+  test('supports inline prop with advanced editor', () => {
+    render(<TestAdvancedEditor inline />)
+    
+    const kit = screen.getByTestId(testId)
+    const toolbar = kit.querySelector('.toolbar')
+    expect(toolbar).toBeInTheDocument()
+    expect(kit).toHaveClass(`${kitClass} inline`)
   })
 
 describe('TipTap Editor Functionality', () => {
