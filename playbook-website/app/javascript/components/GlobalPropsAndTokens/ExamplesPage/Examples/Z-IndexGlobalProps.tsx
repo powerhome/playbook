@@ -85,7 +85,7 @@ const ZIndex = () => {
             <Caption text="React" />
             <ExampleCodeCard
               id="responsive-react"
-              text="textAlign= {{ xs: '1', sm: '2', md: '3', lg: '4', xl: '5', default: '6' }}"
+              text="zIndex= {{ xs: '1', sm: '2', md: '3', lg: '4', xl: '5', default: '6' }}"
             />
           </Flex>
         </>
@@ -96,7 +96,7 @@ const ZIndex = () => {
   return (
     <>
       <ShowPage
-        title="Text Align"
+        title="Z-Index"
         description={
           <>
             The Z-Index prop controls the stack order of components along the z-axis,
