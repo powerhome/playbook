@@ -19,6 +19,7 @@ examples:
   - rich_text_editor_simple: Simple
   - rich_text_editor_advanced_simple: Advanced (Simple)
   - rich_text_editor_attributes: Attributes
+  - rich_text_editor_advanced_attributes: Advanced (Attributes)
   - rich_text_editor_focus: Focus
   - rich_text_editor_advanced_focus: Advanced (Focus)
   - rich_text_editor_sticky: Sticky
