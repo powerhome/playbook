@@ -33,12 +33,16 @@ module Playbook
       [true, false]
     end
 
+    def hover_visible_values
+      %w[true false]
+    end
+
     def hover_values
       hover_options.keys.select { |sk| try(sk) }
     end
 
     def hover_attributes
-      %w[background shadow scale color underline]
+      %w[background shadow scale color underline visible]
     end
 
     def hover_props
