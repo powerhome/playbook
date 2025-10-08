@@ -26,7 +26,8 @@ examples:
   - rich_text_editor_advanced_sticky: Advanced (Sticky)
   - rich_text_editor_templates: Templates
   - rich_text_editor_advanced_templates: Advanced (Templates)
-  - rich_text_editor_toolbar_bottom: Toolbar Bottom
+  # - rich_text_editor_toolbar_bottom: Toolbar Bottom
   - rich_text_editor_inline: Inline
+  - rich_text_editor_advanced_inline: Advanced (Inline)
   - rich_text_editor_preview: Preview
   - rich_text_editor_advanced_preview: Advanced Preview

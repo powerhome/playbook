@@ -16,3 +16,4 @@ export { default as RichTextEditorAdvancedFocus } from './_rich_text_editor_adva
 export { default as RichTextEditorAdvancedTemplates } from './_rich_text_editor_advanced_templates.jsx'
 export { default as RichTextEditorAdvancedAttributes } from './_rich_text_editor_advanced_attributes.jsx'
 export { default as RichTextEditorAdvancedSticky } from './_rich_text_editor_advanced_sticky.jsx'
+export { default as RichTextEditorAdvancedInline } from './_rich_text_editor_advanced_inline.jsx'
