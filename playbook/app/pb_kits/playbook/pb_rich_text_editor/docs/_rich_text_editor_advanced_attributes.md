@@ -1,0 +1,1 @@
+Aria labels and data attributes can also be added to the top level div for the RichTextEditor.
