@@ -11,7 +11,7 @@ import { ToolbarTypes } from "./EditorTypes";
 import ToolbarHistoryItems from "./ToolbarHistory";
 import MoreExtensionsDropdown from "./MoreExtensionsDropdown";
 
-const EditorToolbar = ({ editor, extensions, simple }: any): React.ReactElement => {
+const EditorToolbar = ({ editor, extensions, simple, sticky }: any): React.ReactElement => {
   const toolbaritems = [
     {
         icon: "bold",
@@ -50,7 +50,8 @@ const EditorToolbar = ({ editor, extensions, simple }: any): React.ReactElement 
 
   return (
     <Background backgroundColor="white"
-        className="toolbar"
+        className={`toolbar ${sticky ? 'pb_rich_text_editor_tiptap_toolbar_sticky' : ''}`}
+        
     >
       <Flex flex="0"
           justify="between"

@@ -12,6 +12,7 @@
 }
 
 @mixin preview_tiptap_p {
+    margin: 1rem 0 0 0;
     min-height: 1rem;
 }
 
@@ -55,9 +56,13 @@
 }
 
 @mixin preview_tiptap_blockquote {
-    border-left: 3px solid $text_lt_lighter;
-    margin: 1.5rem 0;
-    padding-left: 1rem;
+    font-size: $font_larger;
+    padding: $space_sm $space_md;
+    font-style: italic;
+    margin: 1rem 0 0 0;
+    p {
+        margin: 0;
+    }
 }
 
 @mixin preview_tiptap_h1 {
@@ -65,6 +70,7 @@
     line-height: $text_larger;
     font-weight: $bolder;
     letter-spacing: $lspace_tight;
+    margin: 2.1rem 0 0 0;
 }
 
 @mixin preview_tiptap_h2 {
@@ -72,6 +78,7 @@
     line-height: $text_larger;
     font-weight: $bolder;
     letter-spacing: $lspace_tight;
+    margin: 1.9rem 0 0 0;
 }
 
 @mixin preview_tiptap_h3 {
@@ -79,6 +86,7 @@
     line-height: $text_large;
     font-weight: $bolder;
     letter-spacing: $lspace_tight;
+    margin: 1.7rem 0 0 0;
 }
 
 @mixin preview_tiptap_smaller_headings {
@@ -86,6 +94,7 @@
     line-height: $text_base;
     letter-spacing: $lspace_tight;
     font-weight: $bolder;
+    margin: 1rem 0 0 0;
 }
 
 @mixin preview_tiptap_hr {
@@ -101,6 +110,7 @@
 }
 
 @mixin preview_tiptap_ol {
+    margin: 1rem 0 0 0;
     padding-left: $space_md;
     list-style: decimal;
     li {

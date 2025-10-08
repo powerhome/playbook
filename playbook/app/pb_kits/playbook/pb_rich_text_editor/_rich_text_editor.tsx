@@ -222,6 +222,7 @@ const RichTextEditor = (props: RichTextEditorProps): React.ReactElement => {
               <EditorToolbar editor={advancedEditor}
                   extensions={extensions}
                   simple={simple}
+                  sticky={sticky}
               />
             )}
           { children }

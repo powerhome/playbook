@@ -42,6 +42,11 @@
     }
   }
 
+  .pb_rich_text_editor_tiptap_toolbar_sticky {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
   .toolbar {
     border-radius: $border_rad_heaviest $border_rad_heaviest 0 0;
     border: 1px solid $border_light;
@@ -73,6 +78,16 @@
     @include transition_default;
     :first-child {
       margin-top: 0;
+    }
+
+    h4,
+    h5,
+    h6,
+    ul,
+    ol,
+    blockquote,
+    p {
+      margin: 1rem 0 0 0;
     }
 
     code {
