@@ -65,7 +65,7 @@ const Typography = () => {
               />,
             ],
             [
-              <Body className="text_base">Example</Body>,
+              <Body>Example</Body>,
               <Title size={4}>$font_base</Title>,
               "15.5px",
               <ExampleCodeCard
