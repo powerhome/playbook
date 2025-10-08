@@ -187,7 +187,7 @@ const Hover = ({ example }: { example: string }) => (
             <tr>
               <td>
                 <Pill
-                  text="visibility"
+                  text="visible"
                   textTransform="none"
                   variant="warning"
                 />

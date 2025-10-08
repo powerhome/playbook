@@ -130,7 +130,7 @@ const Hover = () => {
             />,
           ],
           [
-            "Visibility",
+            "Visible",
             <ExampleCodeCard text="boolean" copyIcon={false} />,
             <ValuesCards values={["true", "false"]} />,
             <ExampleCodeCard
