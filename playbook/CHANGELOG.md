@@ -1,8 +1,10 @@
-# 15.2.0
+# ✨ Styled to Perfection
 
 ##### October 09, 2025
 
 ![release_image](https://github.com/user-attachments/assets/db119637-25e9-4157-9091-c5f7fdf034fc)
+
+🚆Choo-choo! We're keeping the optimization train rolling and continuing to refactor kit SCSS! With this refactor powering leaner, more efficient kits, there's less code bloat, more visual consistency, and a faster experience across the board!
 
 [15.2.0](https://github.com/powerhome/playbook/tree/15.2.0) full list of changes:
 
