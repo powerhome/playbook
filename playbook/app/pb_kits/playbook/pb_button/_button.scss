@@ -81,6 +81,12 @@ $pb_button_sizes: (
   // Loading state
   &.pb_button_loading {
     @include pb_button_loading(true);
+    &.pb_button_size_sm {
+        min-height: 30px;
+    }
+    &.pb_button_size_lg {
+        min-height: 45px;
+    }
   }
 
   // Disabled state
