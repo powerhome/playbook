@@ -1,0 +1,32 @@
+version: '3'
+
+services:
+  web:
+    platform: linux/amd64
+    build:
+      context: .
+      target: dev
+      platforms:
+        - linux/amd64
+    environment:
+      - RAILS_ENV=development
+      - DATABASE_HOST=db
+      - DATABASE_USER=root
+      - DATABASE_PASSWORD=password
+      - DATABASE_NAME=playbook_website_dev
+      - RAILS_LOG_TO_STDOUT=true
+      - SECRET_KEY_BASE=development_secret_key_base_change_in_production
+    command: >
+      bash -c "
+        rm -f tmp/pids/server.pid &&
+        bin/rails db:create db:migrate &&
+        bin/rails server --binding 0.0.0.0
+      "
+    stdin_open: true
+    tty: true
+
+  db:
+    command: --default-authentication-plugin=mysql_native_password
+    volumes:
+      - database:/var/lib/mysql
+
