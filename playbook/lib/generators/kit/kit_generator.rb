@@ -38,7 +38,7 @@ class KitGenerator < Rails::Generators::NamedBase
     @react_rendered = options[:react_rendered]
     @enhanced_element_used = options[:enhanced_element_used]
 
-    kit_props = options[:props].concat(%w[id:string classname:string data:object aria:object])
+    kit_props = options[:props].concat(%w[id:string classname:string data:object aria:object htmlOptions:object])
     @kit_props = kit_props.map { |hash| [hash.partition(":").first, hash.partition(":").last] }.to_h
     @kit_props = @kit_props.sort.to_h
     @unique_props = @kit_props.symbolize_keys.without(:id, :classname, :data, :aria)

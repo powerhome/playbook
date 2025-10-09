@@ -31,7 +31,7 @@ props_names = @kit_props.keys.map do |key|
                   when "data"
                     "data = {}"
                   when "htmlOptions"
-                     "htmlOptions?: {}"
+                     "htmlOptions = {}"
                   else 
                     key
                   end
@@ -61,11 +61,11 @@ const <%= @kit_name_pascal %> = (props: <%= type_name %>) => {
     <div
         {...ariaProps}
         {...dataProps}
-        {...htmlOptions}
+        {...htmlProps}
         className={classes}
         id={id}
     >
-      // Content Here
+    CONTENT HERE
     </div>
   )
 }
