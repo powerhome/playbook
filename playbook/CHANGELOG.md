@@ -2,7 +2,7 @@
 
 ##### October 09, 2025
 
-<img width="889" height="477" alt="release_image" src="https://github.com/user-attachments/assets/f3b8e53a-7a0b-4183-bb36-e53a7f81124b" />
+![release_image](https://github.com/user-attachments/assets/db119637-25e9-4157-9091-c5f7fdf034fc)
 
 [15.2.0](https://github.com/powerhome/playbook/tree/15.2.0) full list of changes:
 
