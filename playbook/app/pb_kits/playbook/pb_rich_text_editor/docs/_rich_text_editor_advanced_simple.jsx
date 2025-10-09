@@ -12,7 +12,7 @@ const RichTextEditorAdvancedSimple = (props) => {
             StarterKit,
             Link
         ],
-        content:"Add your text here. You can format your text, add links, quotes, and bullets."
+        content:"Add your text here. Use the simple toolbar above to format your text"
     })
       if (!editor) {
         return null
