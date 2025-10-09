@@ -1,14 +1,20 @@
 
-import React from 'react'
+import React, { useMemo } from 'react'
 import classnames from 'classnames'
-import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
+import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
+import Highcharts from "highcharts"
+import HighchartsReact from "highcharts-react-official"
+import pbLineGraphTheme from './pbLineGraphTheme'
 import { globalProps } from '../utilities/globalProps'
+
 
 type PbLineGraphProps = {
   aria?: { [key: string]: string },
   className?: string,
   data?: { [key: string]: string },
   id?: string,
+  htmlOptions?: { [key: string]: string | number | boolean | (() => void) };
+  options: Record<string, unknown>
 }
 
 const PbLineGraph = (props: PbLineGraphProps) => {
@@ -17,20 +23,37 @@ const PbLineGraph = (props: PbLineGraphProps) => {
   className,
   data = {},
   id,
+  htmlOptions = {},
+  options
   } = props
 
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
+  const htmlProps = buildHtmlProps(htmlOptions);
   const classes = classnames(buildCss('pb_pb_line_graph'), globalProps(props), className)
+  
+  const mergedOptions = useMemo(() => {
+    if (!options || typeof options !== "object") {
+      // eslint-disable-next-line no-console
+      console.error("❌ Invalid options passed to <PbLineGraph />", options)
+      return {}
+    }
 
+    return Highcharts.merge({}, pbLineGraphTheme, options)
+  }, [options])
   return (
-    <div
-        {...ariaProps}
-        {...dataProps}
-        className={classes}
-        id={id}
-    >
-      {className}
+    <div>
+        <HighchartsReact
+            containerProps={{
+                    className: classnames(classes),
+                    id: id,
+                    ...ariaProps,
+                    ...dataProps,
+                    ...htmlProps
+                  }}
+            highcharts={Highcharts}
+            options={mergedOptions}
+        />
     </div>
   )
 }
