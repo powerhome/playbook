@@ -7,12 +7,16 @@ type_name = "#{@kit_name_pascal}Props"
 
 props_types = @kit_props.map do |key, val|
   prop_name = key == "classname" ? "className" : key.camelize(:lower)
-  prop_type = case val
+  prop_type = if key == "htmlOptions"
+  "{ [key: string]: string | number | boolean | (() => void) | ((arg?: Event) => void) }"
+            else
+              case val
               when "enum", "one_of" then "'option_1' | 'option_2'"
               when "boolean", "bool" then "boolean"
               when "object", "obj" then "{ [key: string]: string }"
               else "string"
               end
+            end
 
   "#{prop_name}?: #{prop_type}"
 end
@@ -26,6 +30,8 @@ props_names = @kit_props.keys.map do |key|
                     "aria = {}"
                   when "data"
                     "data = {}"
+                  when "htmlOptions"
+                     "htmlOptions?: {}"
                   else 
                     key
                   end
@@ -34,7 +40,7 @@ props_names = @kit_props.keys.map do |key|
 %>
 import React from 'react'
 import classnames from 'classnames'
-import { buildAriaProps, buildCss, buildDataProps } from '../utilities/props'
+import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps'
 
 type <%= type_name %> = {
@@ -48,16 +54,18 @@ const <%= @kit_name_pascal %> = (props: <%= type_name %>) => {
 
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
+  const htmlProps = buildHtmlProps(htmlOptions)
   const classes = classnames(buildCss('pb_<%= @kit_name_underscore %>'), globalProps(props), className)
 
   return (
     <div
         {...ariaProps}
         {...dataProps}
+        {...htmlOptions}
         className={classes}
         id={id}
     >
-      {className}
+      // Content Here
     </div>
   )
 }
