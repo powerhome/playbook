@@ -1,0 +1,10 @@
+examples:
+  
+  rails:
+  - pb_line_graph_default: Default
+  
+  
+  react:
+  - pb_line_graph_default: Default
+  
+  

@@ -77,6 +77,7 @@ export { default as Pagination } from '../pb_kits/playbook/pb_pagination/_pagina
 export { default as Passphrase } from '../pb_kits/playbook/pb_passphrase/_passphrase'
 export { default as PbBarGraph} from '../pb_kits/playbook/pb_pb_bar_graph/_pb_bar_graph'
 export { default as PbCircleChart} from '../pb_kits/playbook/pb_pb_circle_chart/_pb_circle_chart'
+export { default as PbLineGraph} from '../pb_kits/playbook/pb_pb_line_graph/_pb_line_graph'
 export { default as PbReactPopover } from '../pb_kits/playbook/pb_popover/_popover'
 export { default as Person } from '../pb_kits/playbook/pb_person/_person'
 export { default as PersonContact } from '../pb_kits/playbook/pb_person_contact/_person_contact'
