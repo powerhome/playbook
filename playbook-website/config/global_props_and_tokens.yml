@@ -8,7 +8,10 @@ global_props:
   - display
   - max_width
   - min_width
+  - position
+  - text_align
   - width
+  - z_index
 
 
 tokens:
