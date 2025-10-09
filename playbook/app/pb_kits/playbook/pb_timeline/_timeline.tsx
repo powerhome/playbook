@@ -38,7 +38,7 @@ const Timeline = ({
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
   const htmlProps = buildHtmlProps(htmlOptions)
-  const dateStyle = showDate === true ? '_with_date' : ''
+  const dateStyle = showDate === true ? 'with_date' : ''
   const itemGapStyle = itemGap === 'none' ? '' : `gap_${itemGap}`
   const timelineCss = buildCss('pb_timeline_kit', `${orientation}`, dateStyle, itemGapStyle)
 
