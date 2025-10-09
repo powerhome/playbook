@@ -1,3 +1,42 @@
+# 15.2.0
+
+##### October 09, 2025
+
+<img width="889" height="477" alt="release_image" src="https://github.com/user-attachments/assets/f3b8e53a-7a0b-4183-bb36-e53a7f81124b" />
+
+[15.2.0](https://github.com/powerhome/playbook/tree/15.2.0) full list of changes:
+
+**Kit Enhancements:**
+
+- Typeahead: Scss Refactor [\#5248](https://github.com/powerhome/playbook/pull/5248) ([nidaqg](https://github.com/nidaqg))
+- Multipleusersstacked: Scss Refactor [\#5246](https://github.com/powerhome/playbook/pull/5246) ([nidaqg](https://github.com/nidaqg))
+- Icon Stat Value: Scss Refactor [\#5241](https://github.com/powerhome/playbook/pull/5241) ([nidaqg](https://github.com/nidaqg))
+- Button Kit: Ability to Dynamically Toggle Disabled State In Rails [\#5230](https://github.com/powerhome/playbook/pull/5230) ([nidaqg](https://github.com/nidaqg))
+
+**Fixed Bugs:**
+
+- Advanced Table: Fix 20 Row Cutoff and Fix Updated Paginationprops - React [\#5308](https://github.com/powerhome/playbook/pull/5308) ([kangaree](https://github.com/kangaree))
+- Hover Global Prop: Updated Visible Hover Prop - React and Rails [\#5298](https://github.com/powerhome/playbook/pull/5298) ([nidaqg](https://github.com/nidaqg))
+- Playbook Website: Update Memory Values to 1gi [\#5269](https://github.com/powerhome/playbook/pull/5269) ([c-gerke](https://github.com/c-gerke))
+- Typeahead: Fixes for React Rendered Typeahead Not Working With Validation [\#5261](https://github.com/powerhome/playbook/pull/5261) ([nidaqg](https://github.com/nidaqg))
+- Advanced Table: Not Respecting Paginationprops - React [\#5267](https://github.com/powerhome/playbook/pull/5267) ([kangaree](https://github.com/kangaree))
+- Textinput: Fix Alignment Issue [\#5307](https://github.com/powerhome/playbook/pull/5307) ([nickamantia](https://github.com/nickamantia))
+
+**Improvements:**
+
+- Hover Global Prop: Fixes for Docs [\#5312](https://github.com/powerhome/playbook/pull/5312) ([nidaqg](https://github.com/nidaqg))
+- Playbook Website: Create Transition and Typography Token Pages [\#5313](https://github.com/powerhome/playbook/pull/5313) ([kangaree](https://github.com/kangaree))
+- Global Props: Create Text Align, Position and Z-index Pages [\#5309](https://github.com/powerhome/playbook/pull/5309) ([skduncan](https://github.com/skduncan))
+- Playbook Website: Fixes for Card Doc Example [\#5310](https://github.com/powerhome/playbook/pull/5310) ([nidaqg](https://github.com/nidaqg))
+- Playbook Website: Add Images to Cursor Global Prop Page [\#5301](https://github.com/powerhome/playbook/pull/5301) ([nickamantia](https://github.com/nickamantia))
+- Dropdown: Scss Fixes [\#5236](https://github.com/powerhome/playbook/pull/5236) ([nidaqg](https://github.com/nidaqg))
+- Tokens: Create Letter Spacing, Shadow and Titles Token Pages [\#5260](https://github.com/powerhome/playbook/pull/5260) ([nickamantia](https://github.com/nickamantia))
+- Dialog: Add Danger Button to the "delete Status" Variants [\#5258](https://github.com/powerhome/playbook/pull/5258) ([skduncan](https://github.com/skduncan))
+- Dependency: Update Dependency Trix to V2 \[security\] [\#5211](https://github.com/powerhome/playbook/pull/5211) ([renovate[bot]](https://github.com/apps/renovate))
+
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/v15.2.0-rc.4...15.2.0)
+
 # 🪦RIP Webpacker💀
 
 ##### September 26, 2025
