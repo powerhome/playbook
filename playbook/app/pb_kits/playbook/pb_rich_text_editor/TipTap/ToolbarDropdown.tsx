@@ -146,6 +146,7 @@ const popoverReference = (
 
   return (
       <PbReactPopover
+          className='pb_tiptap_toolbar_dropdown_popover'
           closeOnClick='outside'
           padding='none'
           placement="bottom"

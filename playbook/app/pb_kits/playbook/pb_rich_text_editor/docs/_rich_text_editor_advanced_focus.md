@@ -1,0 +1,1 @@
+When the optional `focus` prop is set to true, the toolbar will only show once you click in to the RichTextEditor. 

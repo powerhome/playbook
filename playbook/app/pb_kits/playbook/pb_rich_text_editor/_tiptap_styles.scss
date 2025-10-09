@@ -9,6 +9,37 @@
 @import "previewer_mixin";
 
 [class^="pb_rich_text_editor_kit"] {
+    &.inline {
+        .toolbar {
+          opacity: 0;
+          transition: all 0.3s ease-in-out 0s;
+        }
+    
+        &:focus-within .toolbar {
+          opacity: 100;
+        }
+    
+        .ProseMirror {
+          border: 1px solid transparent;
+          transition: all 0.3s ease-in-out 0s;
+        }
+    
+        &:focus-within .ProseMirror {
+          border: 1px solid $border_light;
+          border-top: none;
+        }
+    
+        &:hover {
+          .toolbar {
+            opacity: 100;
+          }
+    
+          .ProseMirror {
+            border: 1px solid $border_light;
+            border-top: none;
+          }
+        }
+      }
   .toolbar_button {
     display: flex;
     align-items: center;
@@ -42,6 +73,11 @@
     }
   }
 
+  .pb_rich_text_editor_tiptap_toolbar_sticky {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
   .toolbar {
     border-radius: $border_rad_heaviest $border_rad_heaviest 0 0;
     border: 1px solid $border_light;

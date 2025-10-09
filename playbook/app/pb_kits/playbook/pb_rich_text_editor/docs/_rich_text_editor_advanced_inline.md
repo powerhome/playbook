@@ -1,0 +1,1 @@
+When the optional `inline` prop is set to true, the editor borders and the toolbar will only be visible when hovered or focused on. 
