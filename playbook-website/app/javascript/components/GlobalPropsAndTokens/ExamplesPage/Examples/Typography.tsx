@@ -265,10 +265,12 @@ const Typography = () => {
               <>
                 <ExampleCodeCard
                   id="link-1"
+                  marginBottom="xs"
                   text=".class-name { @include pb_link(); }"
                 />
                 <ExampleCodeCard
                   id="link-2"
+                  marginBottom="xs"
                   text=".class-name { @include pb_link($error); }"
                 />
                 <ExampleCodeCard
