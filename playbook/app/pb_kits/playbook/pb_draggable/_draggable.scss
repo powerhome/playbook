@@ -4,6 +4,7 @@
 
 .pb_draggable_container {
   .pb_draggable_item {
+
     &:hover {
       cursor: grab;
     }
@@ -141,4 +142,12 @@
       }
     }
   }
+  
+   .pb_draggable_item:has(.pb_item_kit) {
+       border-bottom: 1px solid $border_light;
+ }
+
+  .pb_draggable_item:has(.pb_item_kit):last-child {
+      border-bottom: none;
+ }
 }
