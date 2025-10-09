@@ -10,6 +10,9 @@ global_props:
   - min_width
   - position
   - text_align
+  - overflow
+  - truncate
+  - vertical_align
   - width
   - z_index
 

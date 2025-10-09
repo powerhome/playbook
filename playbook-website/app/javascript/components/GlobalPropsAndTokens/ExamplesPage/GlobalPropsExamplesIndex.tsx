@@ -13,6 +13,9 @@ import Position from "./Examples/PositionGlobalProps";
 import TextAlign from "./Examples/TextAlignGlobalProps";
 import Width from "./Examples/Width";
 import ZIndex from "./Examples/Z-IndexGlobalProps";
+import Overflow from "./Examples/OverflowGlobalProps";
+import Truncate from "./Examples/Truncate";
+import VerticalAlign from "./Examples/VerticalAlignGlobalProps";
 
 const COMPONENT_MAP = {
   cursor: Cursor,
@@ -26,6 +29,9 @@ const COMPONENT_MAP = {
   min_width: MinWidth,
   position: Position,
   text_align: TextAlign,
+  overflow: Overflow,
+  truncate: Truncate,
+  verticalAlign: VerticalAlign,
   width: Width,
   z_index: ZIndex,
 };

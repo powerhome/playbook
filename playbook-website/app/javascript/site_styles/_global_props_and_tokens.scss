@@ -25,7 +25,8 @@
   }
 
   .visual_guide_card_hover,
-  .visual_guide_card_cursor {
+  .visual_guide_card_cursor,
+  .visual_guide_card_truncate {
     width: 135px;
     height: 135px;
   }
@@ -62,5 +63,31 @@
   }
   .text_smallest {
     font-size: $font_smallest;
+  }
+
+  .visual_guide_card_overflow {
+    height: 216px;
+    width: 210px;
+
+    .visual_guide_card_overflow_content {
+      border-top: none;
+      border-left: none;
+      border-right: none;
+      height: 108px;
+    }
+  }
+
+  .visual_guide_card_vertical_align_wrapper {
+    align-items: center;
+    display: flex;
+    flex: 0 0 calc(50% - 8px);
+    flex-direction: column;
+    .visual_guide_card_vertical_align {
+      height: 164px;
+      width: 444px;
+    }
+    .visual_guide_card_vertical_align_content {
+      height: 164px;
+    }
   }
 }
