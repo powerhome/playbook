@@ -63,26 +63,27 @@ const Truncate = () => {
     <>
       <ShowPage
         title="Truncate"
-        description="The Truncate prop shortens overflowing text with an ellipsis, preventing layout breakage when space is limited. It's commonly used for labels, buttons, and titles where full text may not fit."        VisualGuideCard={TruncateCard()}
+        description="The Truncate prop shortens overflowing text with an ellipsis, preventing layout breakage when space is limited. It's commonly used for labels, buttons, and titles where full text may not fit."
+        VisualGuideCard={TruncateCard()}
       >
-      <PropsExamplesTable
-        headers={["Truncate", "Type", "Values", "Rails Example", "React Example"]}
-        rows={[
-          [
-            "Truncate",
-            <ExampleCodeCard text="union" copyIcon={false} />,
-            <ValuesCards />,
-            <ExampleCodeCard
-              id="truncate-rails"
-              text="truncate: '2'"
-            />,
-            <ExampleCodeCard
-              id="truncate-react"
-              text="truncate='2'"
-            />,
-          ],
-        ]}
-      />
+        <PropsExamplesTable
+          headers={["Truncate", "Type", "Values", "Rails Example", "React Example"]}
+          rows={[
+            [
+              "Truncate",
+              <ExampleCodeCard text="union" copyIcon={false} />,
+              <ValuesCards />,
+              <ExampleCodeCard
+                id="truncate-rails"
+                text="truncate: '2'"
+              />,
+              <ExampleCodeCard
+                id="truncate-react"
+                text="truncate='2'"
+              />,
+            ],
+          ]}
+        />
       </ShowPage>
     </>
   )

@@ -31,7 +31,7 @@ const COMPONENT_MAP = {
   text_align: TextAlign,
   overflow: Overflow,
   truncate: Truncate,
-  verticalAlign: VerticalAlign,
+  vertical_align: VerticalAlign,
   width: Width,
   z_index: ZIndex,
 };

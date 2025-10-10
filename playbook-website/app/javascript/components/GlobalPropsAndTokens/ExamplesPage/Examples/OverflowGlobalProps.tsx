@@ -84,50 +84,50 @@ const OverflowGlobalProps = () => {
         }
         VisualGuideCard={OverflowCard()}
       >
-      <PropsExamplesTable
-        headers={["Overflow", "Type", "Values", "Rails Example", "React Example"]}
-        rows={[
-          [
-            "Overflow",
-            <ExampleCodeCard text="union" copyIcon={false} />,
-            <ValuesCards />,
-            <ExampleCodeCard
-              id="overflow-rails"
-              text="overflow: 'hidden'"
-            />,
-            <ExampleCodeCard
-              id="overflow-react"
-              text="overflow='hidden'"
-            />,
-          ],
-          [
-            "Overflow X",
-            <ExampleCodeCard text="union" copyIcon={false} />,
-            <ValuesCards />,
-            <ExampleCodeCard
-              id="overflow-x-rails"
-              text="overflow_x: 'hidden'"
-            />,
-            <ExampleCodeCard
-              id="overflow-x-react"
-              text="overflowX='hidden'"
-            />,
-          ],
-          [
-            "Overflow Y",
-            <ExampleCodeCard text="union" copyIcon={false} />,
-            <ValuesCards />,
-            <ExampleCodeCard
-              id="overflow-y-rails"
-              text="overflow_y: 'hidden'"
-            />,
-            <ExampleCodeCard
-              id="overflow-y-react"
-              text="overflowY='hidden'"
-            />,
-          ],
-        ]}
-      />
+        <PropsExamplesTable
+          headers={["Overflow", "Type", "Values", "Rails Example", "React Example"]}
+          rows={[
+            [
+              "Overflow",
+              <ExampleCodeCard text="union" copyIcon={false} />,
+              <ValuesCards />,
+              <ExampleCodeCard
+                id="overflow-rails"
+                text="overflow: 'hidden'"
+              />,
+              <ExampleCodeCard
+                id="overflow-react"
+                text="overflow='hidden'"
+              />,
+            ],
+            [
+              "Overflow X",
+              <ExampleCodeCard text="union" copyIcon={false} />,
+              <ValuesCards />,
+              <ExampleCodeCard
+                id="overflow-x-rails"
+                text="overflow_x: 'hidden'"
+              />,
+              <ExampleCodeCard
+                id="overflow-x-react"
+                text="overflowX='hidden'"
+              />,
+            ],
+            [
+              "Overflow Y",
+              <ExampleCodeCard text="union" copyIcon={false} />,
+              <ValuesCards />,
+              <ExampleCodeCard
+                id="overflow-y-rails"
+                text="overflow_y: 'hidden'"
+              />,
+              <ExampleCodeCard
+                id="overflow-y-react"
+                text="overflowY='hidden'"
+              />,
+            ],
+          ]}
+        />
       </ShowPage>
     </>
   )
