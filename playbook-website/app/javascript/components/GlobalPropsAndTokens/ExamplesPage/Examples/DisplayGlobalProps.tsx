@@ -10,6 +10,12 @@ const DisplayGlobalProps = () => {
 
   type DisplayKey = keyof typeof DisplayImages;
 
+  const formatDisplay = (value: string) => {
+    return value.replace(/[-_]/g, " ").split(" ").map(word => 
+      word.charAt(0).toUpperCase() + word.slice(1)
+    ).join(" ");
+  };
+
   const VisualGuideExample = ({ display }: { display: DisplayKey }) => {
     return (
       <>
@@ -26,7 +32,7 @@ const DisplayGlobalProps = () => {
               src={DisplayImages[display]}
             />
           </Card>
-          <Body text={display} />
+          <Body text={formatDisplay(display)} />
         </Flex>
       </>
     )
@@ -37,10 +43,10 @@ const DisplayGlobalProps = () => {
       <Flex gap="sm" wrap>
         <VisualGuideExample display="block" />
         <VisualGuideExample display="inline" />
-        <VisualGuideExample display="inlineBlock" />
+        <VisualGuideExample display="inline_block" />
         <VisualGuideExample display="none" />
         <VisualGuideExample display="flex" />
-        <VisualGuideExample display="inlineFlex" />
+        <VisualGuideExample display="inline_flex" />
         <VisualGuideExample display="grid" />
       </Flex>
     );
@@ -49,10 +55,10 @@ const DisplayGlobalProps = () => {
   const values = [
     "block",
     "inline",
-    "inlineBlock",
+    "inline-block",
     "none",
     "flex",
-    "inlineFlex",
+    "inline-flex",
     "grid",
   ];
 
@@ -72,7 +78,7 @@ const sizes = {
       description="Display tokens define how an element is rendered within the layout. Values align with standard CSS display properties and offer consistent layout behavior across components."
       VisualGuideCard={DisplayCard()}
     >
-     <PropsExamplesTable
+    <PropsExamplesTable
         headers={[
         "Display",
         "Type",
@@ -82,11 +88,11 @@ const sizes = {
         ]}
         rows={
           values.map((value) => [
-            value,
+            formatDisplay(value),
             <ExampleCodeCard text="string" copyIcon={false} />,
             <ExampleCodeCard text={value} copyIcon={false} />,
-            <ExampleCodeCard text={`display:"${value}"`} />,
-            <ExampleCodeCard text={`display="${value}"`} />
+            <ExampleCodeCard text={`display:"${value.replace("-", "_")}"`} />,
+            <ExampleCodeCard text={`display="${value.replace("-", "_")}"`} />
           ])
         }
       />
