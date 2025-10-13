@@ -479,7 +479,7 @@ const Colors = () => {
             ],
             [
               <ColorSwatch color="#FFCB2E" />,
-              <Title size={4}>$warnings_secondary</Title>,
+              <Title size={4}>$warning_secondary</Title>,
               "lighten($warning, 10%)",
               <Card borderRadius="sm" background="light" padding="xxs" borderNone>
                 <Body>Warning Secondary</Body>
@@ -507,14 +507,6 @@ const Colors = () => {
               "rgba($error, $opacity_1)",
               <Card borderRadius="sm" background="light" padding="xxs" borderNone>
                 <Body>Error Subtle</Body>
-              </Card>,
-            ],
-            [
-              <ColorSwatch color="#FF3749" />,
-              <Title size={4}>$error_secondary</Title>,
-              "lighten($error, 10%)",
-              <Card borderRadius="sm" background="light" padding="xxs" borderNone>
-                <Body>Error Secondary</Body>
               </Card>,
             ],
             [
