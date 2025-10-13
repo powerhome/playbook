@@ -60,7 +60,7 @@ const LineHeightGlobalProps = () => {
       >
         <PropsExamplesTable
           headers={[
-            "Display",
+            "Line Height",
             "Type",
             "Values",
             "Rails Example",
@@ -71,8 +71,8 @@ const LineHeightGlobalProps = () => {
                 value,
                 <ExampleCodeCard text="string" copyIcon={false} />,
                 <ExampleCodeCard text={value} copyIcon={false} />,
-                <ExampleCodeCard text={`display:"${value}"`} />,
-                <ExampleCodeCard text={`display="${value}"`} />
+                <ExampleCodeCard id={`line-height-${value}-rails`} text={`display:"${value}"`} />,
+                <ExampleCodeCard id={`line-height-${value}-react`} text={`display="${value}"`} />
               ])
             }
         />
