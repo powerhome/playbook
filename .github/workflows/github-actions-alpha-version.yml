@@ -6,7 +6,6 @@ on:
 permissions:
   id-token: write         # REQUIRED for 2FA
   contents: read
-  issues: write
 jobs:
   Creating-Alpha-Version:
     if: github.event.label.name == 'alpha'
@@ -81,16 +80,18 @@ jobs:
           gem push playbook_ui-${{ env.new_ruby_alpha_version }}.gem --host https://rubygems.org/ --key ${{ env.GEM_HOST_API_KEY }}
           gem push playbook_ui_docs-${{ env.new_ruby_alpha_version }}.gem --host https://rubygems.org/ --key ${{ env.GEM_HOST_API_KEY }}
       - name: Leave PR comment
-        if: github.event.pull_request.head.repo.full_name == github.repository
+        permissions:
+          issues: write
         env:
           PR_NUMBER: ${{ github.event.pull_request.number }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           RUBY_GEM_VERSION: ${{ env.new_ruby_alpha_version }}
           RUBY_GEM_LINK: https://rubygems.org/gems/playbook_ui/versions/${{env.new_ruby_alpha_version}}
           NPM_VERSION: ${{ env.new_npm_alpha_version }}
           NPM_LINK: https://www.npmjs.com/package/playbook-ui/v/${{env.new_npm_alpha_version}}
         run: |
-          curl -H "Authorization: token ${GITHUB_TOKEN}" \
-              -X POST \
-              -d '{"body": "🎉 Congratulations on creating an Alpha Version! \n\n Your Alpha for Ruby Gems is [${{env.RUBY_GEM_VERSION}}](${{env.RUBY_GEM_LINK}}) \n\n Your Alpha for NPM is [${{env.NPM_VERSION}}](${{env.NPM_LINK}}) "}' \
+          curl -sS \
+            -H "Authorization: Bearer ${{ github.token }}" \
+            -H "Accept: application/vnd.github+json" \
+            -X POST \
+            -d '{"body": "🎉 Congratulations on creating an Alpha Version! \n\n Your Alpha for Ruby Gems is [${{env.RUBY_GEM_VERSION}}](${{env.RUBY_GEM_LINK}}) \n\n Your Alpha for NPM is [${{env.NPM_VERSION}}](${{env.NPM_LINK}}) "}' \
                 "https://api.github.com/repos/${{ github.repository }}/issues/${PR_NUMBER}/comments"
