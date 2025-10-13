@@ -56,7 +56,7 @@ const GroupHover = ({ example }: {example: string}) => (
             background="product_4_highlight"
             borderRadius="rounded"
             borderNone
-            hover={{ visibility: true }}
+            hover={{ visible: true }}
             padding="xs"
             groupHover
         >

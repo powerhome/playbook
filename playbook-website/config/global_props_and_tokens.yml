@@ -8,7 +8,13 @@ global_props:
   - display
   - max_width
   - min_width
+  - position
+  - text_align
+  - overflow
+  - truncate
+  - vertical_align
   - width
+  - z_index
 
 
 tokens:
@@ -16,11 +22,16 @@ tokens:
   - border_radius
   - display
   - line_height
+  - letter_spacing
   - opacity
   - overflow
   - position
   - scale
   - screen_sizes
+  - shadows
   - text_align
+  - titles
+  - transition
+  - typography
   - vertical_align
   - z_index

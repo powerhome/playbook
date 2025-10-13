@@ -9,7 +9,13 @@ import LineHeight from "./Examples/LineHeightGlobalProps";
 import Display from "./Examples/DisplayGlobalProps";
 import MaxWidth from "./Examples/MaxWidth";
 import MinWidth from "./Examples/MinWidth";
+import Position from "./Examples/PositionGlobalProps";
+import TextAlign from "./Examples/TextAlignGlobalProps";
 import Width from "./Examples/Width";
+import ZIndex from "./Examples/Z-IndexGlobalProps";
+import Overflow from "./Examples/OverflowGlobalProps";
+import Truncate from "./Examples/Truncate";
+import VerticalAlign from "./Examples/VerticalAlignGlobalProps";
 
 const COMPONENT_MAP = {
   cursor: Cursor,
@@ -21,7 +27,13 @@ const COMPONENT_MAP = {
   display: Display,
   max_width: MaxWidth,
   min_width: MinWidth,
+  position: Position,
+  text_align: TextAlign,
+  overflow: Overflow,
+  truncate: Truncate,
+  vertical_align: VerticalAlign,
   width: Width,
+  z_index: ZIndex,
 };
 
 const GlobalPropsExamples = () => {

@@ -64,10 +64,16 @@ module Playbook
         "#{object.id}-sanitized" if id.present?
       end
 
+      def error_id
+        "#{id}-error" if error.present?
+      end
+
     private
 
       def all_input_options
         {
+          'aria-describedby': error.present? ? error_id : nil,
+          'aria-invalid': error.present?,
           autocomplete: autocomplete == true ? nil : (autocomplete.presence || "off"),
           class: "text_input #{input_options.dig(:classname) || ''}",
           data: validation_data,

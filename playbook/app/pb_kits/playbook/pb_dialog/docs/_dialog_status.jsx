@@ -83,8 +83,8 @@ const DialogStatus = () => {
 
   return (
     <div>
-      <Flex 
-          rowGap="xs" 
+      <Flex
+          rowGap="xs"
           wrap
       >
         <Button
@@ -117,7 +117,7 @@ const DialogStatus = () => {
         >
           {"Success Status"}
         </Button>
-        <Button 
+        <Button
             marginRight="md"
             onClick={toggleErrorAlert}
         >
@@ -152,6 +152,7 @@ const DialogStatus = () => {
                   <Button
                       onClick={dialog.toggle}
                       paddingRight="xl"
+                      variant={dialog.status == "delete" ? "danger" : "primary"}
                   >
                   {dialog.buttonOneText}
                   </Button>

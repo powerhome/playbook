@@ -43,8 +43,8 @@ const Hover = () => {
         <VisualGuideExample text="Shadow" hoverProp={{ shadow: "deep" }} />
         <VisualGuideExample text="Scale" hoverProp={{ scale: "md" }} />
         <VisualGuideExample
-          text="Visibility"
-          hoverProp={{ visibility: "false" }}
+          text="Visible"
+          hoverProp={{ visible: "true" }}
         />
         <VisualGuideExample
           text="Underline"
@@ -130,16 +130,16 @@ const Hover = () => {
             />,
           ],
           [
-            "Visibility",
+            "Visible",
             <ExampleCodeCard text="boolean" copyIcon={false} />,
             <ValuesCards values={["true", "false"]} />,
             <ExampleCodeCard
-              id="hover-visibility-rails"
-              text="hover: { visibility: 'true' }"
+              id="hover-visible-rails"
+              text="hover: { visible: 'true' }"
             />,
             <ExampleCodeCard
-              id="hover-visibility-react"
-              text="hover={{ visibility: 'true' }}"
+              id="hover-visible-react"
+              text="hover={{ visible: 'true' }}"
             />,
           ],
           [

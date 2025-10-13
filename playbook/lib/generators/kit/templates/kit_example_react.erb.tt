@@ -1,5 +1,5 @@
 import React from 'react'
-import { <%= @kit_name_pascal %> } from '../../pb_<%= @kit_name_underscore %>/_<%= @kit_name_underscore %>'
+import <%= @kit_name_pascal %> from '../../pb_<%= @kit_name_underscore %>/_<%= @kit_name_underscore %>'
 
 const <%= @kit_name_pascal %>Default = (props) => (
   <div>

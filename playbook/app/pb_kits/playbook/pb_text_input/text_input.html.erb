@@ -1,6 +1,8 @@
 <%= pb_content_tag(:div, id: nil ) do  %>
   <% if object.label.present? %>
+  <label for="<%= object.input_options[:id] || object.id %>" >
     <%= pb_rails("caption", props: { text: object.label, dark: object.dark, classname: "pb_text_input_kit_label" }) %>
+  </label>
   <% end %>
   <%= content_tag(:div, class: "#{add_on_class} text_input_wrapper") do %>
     <% if content.present? %>
@@ -15,7 +17,7 @@
     <% else %>
       <%= input_tag %>
     <% end %>
-    <%= pb_rails("body", props: {dark: object.dark, status: "negative", text: object.error}) if object.error %>
+    <%= pb_rails("body", props: {dark: object.dark, status: "negative", text: object.error, id: object.error_id, aria: { atomic: "true", live: "polite" }, html_options: { role: "alert" }}) if object.error %>
   <% end %>
 <% end %>
 

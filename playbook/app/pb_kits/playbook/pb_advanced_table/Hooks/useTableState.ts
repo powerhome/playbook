@@ -203,6 +203,13 @@ export function useTableState({
     onRowPinningChange({ top: allPinned });
   }, [table, pinnedRows?.value?.top?.join(',')]);
 
+  // Set pagination state when pagination is enabled
+  useEffect(() => {
+    if (pagination && paginationProps?.pageSize) {
+      table.setPageSize(paginationProps.pageSize);
+    }
+  }, [pagination, paginationProps?.pageSize, table]);
+
   // Check if table has any sub-rows
   const hasAnySubRows = table.getRowModel().rows.some(row => row.subRows && row.subRows.length > 0);
   const selectedRowsLength = Object.keys(table.getState().rowSelection).length;

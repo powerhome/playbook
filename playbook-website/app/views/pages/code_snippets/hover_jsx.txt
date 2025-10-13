@@ -17,7 +17,7 @@
 />
 
 <Title
-    hover={{ visibility: true }}
+    hover={{ visible: true }}
     text="Surprise!"
 />
 
