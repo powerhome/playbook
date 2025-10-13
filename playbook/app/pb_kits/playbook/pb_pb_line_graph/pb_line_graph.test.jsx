@@ -61,3 +61,50 @@ test('Kit to exist', () => {
 
   expect(screen.getByTestId(testId)).toBeInTheDocument()
 })
+
+test('Kit to apply base classname', () => {
+  render(
+    <PbLineGraph 
+        data={{testid: testId}} 
+        options={chartOptions} 
+    />
+  )
+
+  expect(screen.getByTestId(testId)).toHaveClass('pb_pb_line_graph')
+})
+
+test('Kit to have custom class', () => {
+  render(
+    <PbLineGraph 
+        className='custom-class'
+        data={{testid: testId}} 
+        options={chartOptions} 
+    />
+  )
+
+  expect(screen.getByTestId(testId)).toHaveClass('custom-class')
+})
+
+test('Kit to apply global props', () => {
+  render(
+    <PbLineGraph 
+        data={{testid: testId}} 
+        margin="lg"
+        options={chartOptions} 
+    />
+  )
+
+  expect(screen.getByTestId(testId)).toHaveClass('m_lg')
+})
+
+test('kit to apply id', () => {
+  render(
+    <PbLineGraph 
+        data={{testid: testId}} 
+        id='line-graph-id'
+        options={chartOptions} 
+    />
+  )
+
+  expect(screen.getByTestId(testId)).toHaveAttribute('id', 'line-graph-id')
+})
