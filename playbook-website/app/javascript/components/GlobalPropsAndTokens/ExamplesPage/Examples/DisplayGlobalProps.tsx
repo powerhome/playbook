@@ -6,8 +6,6 @@ import ExampleCodeCard from "../../Templates/Subcomponents/ExampleCodeCard";
 import * as DisplayImages from './DisplayImages'
 const DisplayGlobalProps = () => {
 
-  console.log(DisplayImages)
-
   type DisplayKey = keyof typeof DisplayImages;
 
   const formatDisplay = (value: string) => {
@@ -91,8 +89,8 @@ const sizes = {
             formatDisplay(value),
             <ExampleCodeCard text="string" copyIcon={false} />,
             <ExampleCodeCard text={value} copyIcon={false} />,
-            <ExampleCodeCard text={`display:"${value.replace("-", "_")}"`} />,
-            <ExampleCodeCard text={`display="${value.replace("-", "_")}"`} />
+            <ExampleCodeCard id="display-rails" text={`display:"${value.replace("-", "_")}"`} />,
+            <ExampleCodeCard id="display-react" text={`display="${value.replace("-", "_")}"`} />
           ])
         }
       />
