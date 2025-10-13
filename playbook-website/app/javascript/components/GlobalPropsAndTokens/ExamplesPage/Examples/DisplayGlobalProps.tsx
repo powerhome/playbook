@@ -89,8 +89,8 @@ const sizes = {
             formatDisplay(value),
             <ExampleCodeCard text="string" copyIcon={false} />,
             <ExampleCodeCard text={value} copyIcon={false} />,
-            <ExampleCodeCard id="display-rails" text={`display:"${value.replace("-", "_")}"`} />,
-            <ExampleCodeCard id="display-react" text={`display="${value.replace("-", "_")}"`} />
+            <ExampleCodeCard id={`display-${value}-rails`} text={`display:"${value.replace("-", "_")}"`} />,
+            <ExampleCodeCard id={`display-${value}-react`} text={`display="${value.replace("-", "_")}"`} />
           ])
         }
       />
