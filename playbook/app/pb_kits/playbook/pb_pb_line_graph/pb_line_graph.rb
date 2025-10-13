@@ -8,6 +8,7 @@ module Playbook
       def react_props
         {
           className: classname,
+          data: data,
           options: options,
           id: id,
         }
