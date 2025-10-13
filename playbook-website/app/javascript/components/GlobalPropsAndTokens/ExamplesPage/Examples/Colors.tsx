@@ -30,7 +30,7 @@ const Colors = () => {
       <ShowPage
         pageType="tokens"
         title="Colors"
-        description={<>Display tokens define how an element is rendered within the layout. Values align with standard CSS display properties and offer consistent layout behavior across components. <Link href="https://developer.mozilla.org/en-US/docs/Web/CSS/color" text="Learn more on MDN." /></>}
+        description="Colors in Playbook are defined by tokens, which include base colors as well as colors at a semantic level, such as success, warning, and error. They ensure visual consistency, accessibility, and reliable usage across all components."
       >
         <Title size={2}>Base Colors</Title>
         <PropsExamplesTable
