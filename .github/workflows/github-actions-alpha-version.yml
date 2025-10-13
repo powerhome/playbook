@@ -3,6 +3,9 @@ run-name: ${{ github.actor }} is creating an Alpha Version 🚀
 on:
   pull_request:
     types: [ labeled ]
+permissions:
+  id-token: write         # REQUIRED for 2FA
+  contents: read
 jobs:
   Creating-Alpha-Version:
     if: github.event.label.name == 'alpha'
@@ -14,18 +17,19 @@ jobs:
       # Set an environment variable for the branch name
       BRANCH_NAME: ${{ github.head_ref }}
       GEM_HOST_API_KEY: ${{ secrets.RUBYGEMS_API_KEY }}
-      NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
     steps:
       - uses: actions/checkout@v3
-      - name: 'Enable registry auth'
+      - name: 'Enable internal registry auth'
         shell: bash
         run: |
-          echo "//registry.npmjs.org/:_authToken="$(echo -n '${{ secrets.NPM_TOKEN }}')"" >> ~/.npmrc
           echo "//npm.powerapp.cloud/:_auth="$(echo -n 'gh-actions:${{ secrets.POWERHOME_NPM_REGISTRY_PASSWORD }}' | base64)"" >> ~/.npmrc
           echo "//npm.powerapp.cloud/:always-auth = true" >> .npmrc
       - uses: actions/setup-node@v4
         with:
           node-version: 22.15.1
+          registry-url: 'https://registry.npmjs.org' # REQUIRED for 2FA
+      - name: Use npm 11.6.2
+        run: npm i -g npm@11.6.2
       - name: Ruby Setup
         uses: ruby/setup-ruby@v1
         with:
@@ -59,6 +63,7 @@ jobs:
           bundle
           bin/rails pb_release:action[${{env.new_ruby_alpha_version}}]
       - name: Version Up, Distribute and Publish (NPM)
+        if: github.event.pull_request.head.repo.full_name == github.repository
         run: |
           yarn install
           yarn version --new-version ${{ env.new_npm_alpha_version }}
@@ -67,6 +72,7 @@ jobs:
           npm pack
           npm publish --registry https://registry.npmjs.org playbook-ui-${{ env.new_npm_alpha_version }}.tgz --tag alpha
       - name: Version Up, Distribute and Publish (RubyGems)
+        if: github.event.pull_request.head.repo.full_name == github.repository
         run: |
           bin/build_gem
           gem build lib/playbook_ui_docs.gemspec
