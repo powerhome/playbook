@@ -32,7 +32,7 @@ const Colors = () => {
         title="Colors"
         description="Colors in Playbook are defined by tokens, which include base colors as well as colors at a semantic level, such as success, warning, and error. They ensure visual consistency, accessibility, and reliable usage across all components."
       >
-        <Title size={2}>Base Colors</Title>
+        <Title paddingTop="md" size={2}>Base Colors</Title>
         <PropsExamplesTable
           headers={["Color", "Token", "Value"]}
           rows={[
@@ -108,7 +108,7 @@ const Colors = () => {
             ],
           ]}
         />
-        <Title size={2}>Main Colors</Title>
+        <Title paddingTop="md" size={2}>Main Colors</Title>
         <PropsExamplesTable
           headers={["Color", "Token", "Value"]}
           rows={[
@@ -129,7 +129,7 @@ const Colors = () => {
             ],
           ]}
         />
-        <Title size={2}>UI Colors</Title>
+        <Title paddingTop="md" size={2}>UI Colors</Title>
         <PropsExamplesTable
           headers={["Color", "Token", "Value", "Use Case"]}
           rows={[
@@ -191,7 +191,7 @@ const Colors = () => {
             ],
           ]}
         />
-        <Title size={2}>Text Colors</Title>
+        <Title paddingTop="md" size={2}>Text Colors</Title>
         <PropsExamplesTable
           headers={["Color", "Token", "Value", "Use Case"]}
           rows={[
@@ -269,7 +269,7 @@ const Colors = () => {
             ],
           ]}
         />
-        <Title size={2}>State Colors</Title>
+        <Title paddingTop="md" size={2}>State Colors</Title>
         <PropsExamplesTable
           headers={["Color", "Token", "Value", "Use Case"]}
           rows={[
@@ -355,7 +355,7 @@ const Colors = () => {
             ],
           ]}
         />
-        <Title size={2}>Utility Colors</Title>
+        <Title paddingTop="md" size={2}>Utility Colors</Title>
         <PropsExamplesTable
           headers={["Color", "Token", "Value", "Use Case"]}
           rows={[
@@ -401,7 +401,7 @@ const Colors = () => {
             ],
           ]}
         />
-        <Title size={2}>Status Colors</Title>
+        <Title paddingTop="md" size={2}>Status Colors</Title>
         <PropsExamplesTable
           headers={["Color", "Token", "Value", "Use Case"]}
           rows={[
@@ -543,7 +543,7 @@ const Colors = () => {
             ],
           ]}
         />
-        <Title size={2}>Data Colors</Title>
+        <Title paddingTop="md" size={2}>Data Colors</Title>
         <PropsExamplesTable
           headers={["Color", "Token", "Value", "Use Case"]}
           rows={[
@@ -613,7 +613,7 @@ const Colors = () => {
             ],
           ]}
         />
-        <Title size={2}>Category Colors</Title>
+        <Title paddingTop="md" size={2}>Category Colors</Title>
         <PropsExamplesTable
           headers={["Color", "Token", "Value", "Use Case"]}
           rows={[
@@ -787,7 +787,7 @@ const Colors = () => {
             ],
           ]}
         />
-        <Title size={2}>Product Colors</Title>
+        <Title paddingTop="md" size={2}>Product Colors</Title>
         <PropsExamplesTable
           headers={["Color", "Token", "Value", "Use Case"]}
           rows={[
