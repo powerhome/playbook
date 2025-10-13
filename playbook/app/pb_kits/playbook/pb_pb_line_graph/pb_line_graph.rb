@@ -4,24 +4,20 @@ module Playbook
   module PbPbLineGraph
     class PbLineGraph < ::Playbook::KitBase
       prop :options, default: {}
-      prop :container_props, default: {}
 
       def react_props
         {
+          className: classname,
           options: options,
-          containerProps: container_props_hash,
+          id: id,
         }
       end
 
-      def container_props_hash
-        container_props.merge({
-                                id: id,
-                                className: classname,
-                              }).compact
-      end
-
       def classname
-        generate_classname("pb_pb_line_graph")
+        # Highcharts react needs classname attached to the container div,
+        # we pass an empty string here to avoid conflicts, classname is built in the TSX
+        # We still need generate_classnames to retain ability to pass in custom classnames or global props
+        generate_classname("")
       end
     end
   end

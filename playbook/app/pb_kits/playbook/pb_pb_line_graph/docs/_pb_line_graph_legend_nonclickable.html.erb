@@ -17,12 +17,23 @@
     },
   },
   legend: {
-    enabled: true,
-  events: {
-      itemClick: 'function () {return false;}'
-    }
+    enabled: true
   },
 } %>
 
-<%= pb_rails("pb_line_graph", props: {options: chart_options}) %>
+<%= pb_rails("pb_line_graph", props: {options: chart_options, id: "installations-chart"}) %>
 
+<script>
+// Prevent legend item click events from toggling series visibility
+document.addEventListener('click', function (e) {
+  var container = document.getElementById('installations-chart');
+  if (!container) return;
+
+  var legend = container.querySelector('.highcharts-legend');
+  if (legend && legend.contains(e.target)) {
+    e.stopImmediatePropagation();
+    e.preventDefault();
+  }
+}, true); 
+
+</script>
