@@ -18,7 +18,7 @@
     "highcharts-react-official": "^3.2.1",
     "match-sorter": "^8.0.0",
     "playbook-ui": ">= 1",
-    "react-hook-form": "^7.28.1"
+    "react-hook-form": "^7.65.0"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.24.8",
