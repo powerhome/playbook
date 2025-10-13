@@ -101,7 +101,7 @@
   <%= form.typeahead :example_typeahead_validation_react, props: { options: example_typeahead_options, pills: true, label: "Example Typeahead (React Rendered)", placeholder: "Search for a user", required: true, validation: { message: "Please select a color." } } %>
   <%= form.typeahead :example_typeahead_validation_react_2, props: { options: example_typeahead_options, pills: true, label: "Example Typeahead 2 (React Rendered)", placeholder: "Search for a user", required: true } %>
   <%= form.text_field :example_text_field_validation, props: { label: true, required: true } %>
-  <%= form.phone_number_field :example_phone_number_field_validation, props: { label: "Example phone field", hidden_inputs: true } %>
+  <%= form.phone_number_field :example_phone_number_field_validation, props: { label: "Example phone field", hidden_inputs: true, required: true } %>
   <%= form.email_field :example_email_field_validation, props: { label: true, required: true } %>
   <%= form.number_field :example_number_field_validation, props: { label: true, required: true } %>
   <%= form.search_field :example_project_number_validation, props: { label: true, required: true, validation: { pattern: "[0-9]{2}-[0-9]{5}", message: "Please enter a valid project number (example: 33-12345)." } } %>
