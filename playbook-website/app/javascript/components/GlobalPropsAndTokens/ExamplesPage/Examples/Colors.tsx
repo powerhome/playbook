@@ -2,6 +2,28 @@ import ShowPage from "../../Templates/ShowPage";
 import PropsExamplesTable from "../../Templates/Subcomponents/PropsExamplesTable";
 import { Title, Link, Card, Body } from "playbook-ui";
 
+interface ColorSwatchProps {
+  color: string;
+  border?: string;
+}
+
+const ColorSwatch: React.FC<ColorSwatchProps> = ({
+  color,
+  border,
+}) => {
+  return (
+    <div
+      style={{
+        backgroundColor: color,
+        borderRadius: 4,
+        height: 30,
+        width: 48,
+        ...(border && { border }),
+      }}
+    />
+  );
+};
+
 const Colors = () => {
   return (
     <>
@@ -15,72 +37,72 @@ const Colors = () => {
           headers={["Color", "Token", "Value"]}
           rows={[
             [
-              <div style={{ width: 48, height: 30, backgroundColor: "#0056CF", borderRadius: 4 }} />,
+              <ColorSwatch color="#0056CF" />,
               <Title size={4}>$royal</Title>,
               "#0056CF"
             ],
             [
-              <div style={{ width: 48, height: 30, backgroundColor: "#9E64E9", borderRadius: 4 }} />,
+              <ColorSwatch color="#9E64E9" />,
               <Title size={4}>$purple</Title>,
               "#9E64E9"
             ],
             [
-              <div style={{ width: 48, height: 30, backgroundColor: "#00C4D7", borderRadius: 4 }} />,
+              <ColorSwatch color="#00C4D7" />,
               <Title size={4}>$teal</Title>,
               "#00C4D7"
             ],
             [
-              <div style={{ width: 48, height: 30, backgroundColor: "#DA0014", borderRadius: 4 }} />,
+              <ColorSwatch color="#DA0014" />,
               <Title size={4}>$red</Title>,
               "#DA0014"
             ],
             [
-              <div style={{ width: 48, height: 30, backgroundColor: "#FF4A50", borderRadius: 4 }} />,
+              <ColorSwatch color="#FF4A50" />,
               <Title size={4}>$red_dark</Title>,
               "#FF4A50"
             ],
             [
-              <div style={{ width: 48, height: 30, backgroundColor: "#F9BB00", borderRadius: 4 }} />,
+              <ColorSwatch color="#F9BB00" />,
               <Title size={4}>$yellow</Title>,
               "#F9BB00"
             ],
             [
-              <div style={{ width: 48, height: 30, backgroundColor: "#1CA05C", borderRadius: 4 }} />,
+              <ColorSwatch color="#1CA05C" />,
               <Title size={4}>$green</Title>,
               "#1CA05C"
             ],
             [
-              <div style={{ width: 48, height: 30, backgroundColor: "#FD840C", borderRadius: 4 }} />,
+              <ColorSwatch color="#FD840C" />,
               <Title size={4}>$orange</Title>,
               "#FD840C"
             ],
             [
-              <div style={{ width: 48, height: 30, backgroundColor: "#FFFFFF", borderRadius: 4, border: "1px solid #E4E8F0" }} />,
+              <ColorSwatch color="#FFFFFF" border="1px solid #E4E8F0" />,
               <Title size={4}>$white</Title>,
               "#FFFFFF"
             ],
             [
-              <div style={{ width: 48, height: 30, backgroundColor: "#F3F7FB", borderRadius: 4, border: "1px solid #E4E8F0" }} />,
+              <ColorSwatch color="#F3F7FB" border="1px solid #E4E8F0" />,
               <Title size={4}>$silver</Title>,
               "#F3F7FB"
             ],
             [
-              <div style={{ width: 48, height: 30, backgroundColor: "#C1CDD6", borderRadius: 4, border: "1px solid #E4E8F0" }} />,
+              <ColorSwatch color="#C1CDD6" border="1px solid #E4E8F0" />,
               <Title size={4}>$slate</Title>,
               "#C1CDD6"
             ],
             [
-              <div style={{ width: 48, height: 30, backgroundColor: "#93A8B8", borderRadius: 4 }} />,
+              <ColorSwatch color="#93A8B8" />,
               <Title size={4}>$default</Title>,
               "#93A8B8"
             ],
             [
-              <div style={{ width: 48, height: 30, backgroundColor: "#242B42", borderRadius: 4 }} />,
+              <ColorSwatch color="#242B42" />,
               <Title size={4}>$charcoal</Title>,
               "#242B42"
             ],
             [
-              <div style={{ width: 48, height: 30, backgroundColor: "#000000", borderRadius: 4 }} />,
+              <ColorSwatch color="#000000" />,
               <Title size={4}>$black</Title>,
               "#000000"
             ],
@@ -91,17 +113,17 @@ const Colors = () => {
           headers={["Color", "Token", "Value"]}
           rows={[
             [
-              <div style={{ width: 48, height: 30, backgroundColor: "#0056CF", borderRadius: 4 }} />,
+              <ColorSwatch color="#0056CF" />,
               <Title size={4}>$primary</Title>,
               "$royal"
             ],
             [
-              <div style={{ width: 48, height: 30, backgroundColor: "#F9BB00", borderRadius: 4 }} />,
+              <ColorSwatch color="#F9BB00" />,
               <Title size={4}>$secondary</Title>,
               "$yellow"
             ],
             [
-              <div style={{ width: 48, height: 30, backgroundColor: "#9E64E9", borderRadius: 4 }} />,
+              <ColorSwatch color="#9E64E9" />,
               <Title size={4}>$tertiary</Title>,
               "$purple"
             ],
@@ -112,7 +134,7 @@ const Colors = () => {
           headers={["Color", "Token", "Value", "Use Case"]}
           rows={[
             [
-              <div style={{ width: 48, height: 30, backgroundColor: "#F3F7FB", borderRadius: 4, border: "1px solid #E4E8F0" }} />,
+              <ColorSwatch color="#F3F7FB" border="1px solid #E4E8F0" />,
               <Title size={4}>$bg_light</Title>,
               "$silver",
               <Card borderRadius="sm" background="light" padding="xxs" borderNone>
@@ -120,7 +142,7 @@ const Colors = () => {
               </Card>,
             ],
             [
-              <div style={{ width: 48, height: 30, backgroundColor: "#0A0527", borderRadius: 4 }} />,
+              <ColorSwatch color="#0A0527" />,
               <Title size={4}>$bg_dark</Title>,
               "#0A0527",
               <Card borderRadius="sm" background="light" padding="xxs" borderNone>
@@ -128,7 +150,7 @@ const Colors = () => {
               </Card>,
             ],
             [
-              <div style={{ width: 48, height: 30, backgroundColor: "#231E3D", borderRadius: 4 }} />,
+              <ColorSwatch color="#231E3D" />,
               <Title size={4}>$bg_dark_card</Title>,
               "#231E3D",
               <Card borderRadius="sm" background="light" padding="xxs" borderNone>
@@ -136,7 +158,7 @@ const Colors = () => {
               </Card>,
             ],
             [
-              <div style={{ width: 48, height: 30, backgroundColor: "#FFFFFF", borderRadius: 4, border: "1px solid #E4E8F0" }} />,
+              <ColorSwatch color="#FFFFFF" border="1px solid #E4E8F0" />,
               <Title size={4}>$card_light</Title>,
               "$white",
               <Card borderRadius="sm" background="light" padding="xxs" borderNone>
@@ -144,7 +166,7 @@ const Colors = () => {
               </Card>,
             ],
             [
-              <div style={{ width: 48, height: 30, backgroundColor: "#231E3D", borderRadius: 4 }} />,
+              <ColorSwatch color="#231E3D" />,
               <Title size={4}>$card_dark</Title>,
               "mix(white, $bg_dark, 10%)",
               <Card borderRadius="sm" background="light" padding="xxs" borderNone>
@@ -152,7 +174,7 @@ const Colors = () => {
               </Card>,
             ],
             [
-              <div style={{ width: 48, height: 30, backgroundColor: "#E4E8F0", borderRadius: 4 }} />,
+              <ColorSwatch color="#E4E8F0" />,
               <Title size={4}>$border_light</Title>,
               "#E4E8F0",
               <Card borderRadius="sm" background="light" padding="xxs" borderNone>
@@ -160,7 +182,7 @@ const Colors = () => {
               </Card>,
             ],
             [
-              <div style={{ width: 48, height: 30, backgroundColor: "#FAFDFF", borderRadius: 4 }} />,
+              <ColorSwatch color="#FAFDFF" />,
               <Title size={4}>$border_dark</Title>,
               "mix(white, $bg_dark, 20%)",
               <Card borderRadius="sm" background="light" padding="xxs" borderNone>
@@ -174,7 +196,7 @@ const Colors = () => {
           headers={["Color", "Token", "Value", "Use Case"]}
           rows={[
             [
-              <div style={{ width: 48, height: 30, backgroundColor: "#242B42", borderRadius: 4 }} />,
+              <ColorSwatch color="#242B42" />,
               <Title size={4}>$text_lt_default</Title>,
               "$charcoal",
               <Card borderRadius="sm" background="light" padding="xxs" borderNone>
@@ -182,7 +204,7 @@ const Colors = () => {
               </Card>,
             ],
             [
-              <div style={{ width: 48, height: 30, backgroundColor: "#687887", borderRadius: 4 }} />,
+              <ColorSwatch color="#687887" />,
               <Title size={4}>$text_lt_light</Title>,
               "#687887",
               <Card borderRadius="sm" background="light" padding="xxs" borderNone>
@@ -190,7 +212,7 @@ const Colors = () => {
               </Card>,
             ],
             [
-              <div style={{ width: 48, height: 30, backgroundColor: "#C1CDD6", borderRadius: 4 }} />,
+              <ColorSwatch color="#C1CDD6" />,
               <Title size={4}>$text_lt_lighter</Title>,
               "$slate",
               <Card borderRadius="sm" background="light" padding="xxs" borderNone>
@@ -198,7 +220,7 @@ const Colors = () => {
               </Card>,
             ],
             [
-              <div style={{ width: 48, height: 30, backgroundColor: "#157F48", borderRadius: 4 }} />,
+              <ColorSwatch color="#157F48" />,
               <Title size={4}>$text_lt_success_sm</Title>,
               "#157F48",
               <Card borderRadius="sm" background="light" padding="xxs" borderNone>
@@ -206,7 +228,7 @@ const Colors = () => {
               </Card>,
             ],
             [
-              <div style={{ width: 48, height: 30, backgroundColor: "#FFFFFF", borderRadius: 4, border: "1px solid #E4E8F0" }} />,
+              <ColorSwatch color="#FFFFFF" border="1px solid #E4E8F0" />,
               <Title size={4}>$text_dk_default</Title>,
               "#FFFFFF",
               <Card borderRadius="sm" background="light" padding="xxs" borderNone>
@@ -214,7 +236,7 @@ const Colors = () => {
               </Card>,
             ],
             [
-              <div style={{ width: 48, height: 30, backgroundColor: "rgba(255, 255, 255, 0.6)", borderRadius: 4, border: "1px solid #E4E8F0" }} />,
+              <ColorSwatch color="rgba(255, 255, 255, 0.6)" border="1px solid #E4E8F0" />,
               <Title size={4}>$text_dk_light</Title>,
               "rgba($white, $opacity_6)",
               <Card borderRadius="sm" background="light" padding="xxs" borderNone>
@@ -222,7 +244,7 @@ const Colors = () => {
               </Card>,
             ],
             [
-              <div style={{ width: 48, height: 30, backgroundColor: "rgba(255, 255, 255, 0.4)", borderRadius: 4, border: "1px solid #E4E8F0" }} />,
+              <ColorSwatch color="rgba(255, 255, 255, 0.4)" border="1px solid #E4E8F0" />,
               <Title size={4}>$text_dk_lighter</Title>,
               "rgba($white, $opacity_4)",
               <Card borderRadius="sm" background="light" padding="xxs" borderNone>
@@ -230,7 +252,7 @@ const Colors = () => {
               </Card>,
             ],
             [
-              <div style={{ width: 48, height: 30, backgroundColor: "#00CA74", borderRadius: 4 }} />,
+              <ColorSwatch color="#00CA74" />,
               <Title size={4}>$text_dk_success_sm</Title>,
               "#00CA74",
               <Card borderRadius="sm" background="light" padding="xxs" borderNone>
@@ -238,7 +260,7 @@ const Colors = () => {
               </Card>,
             ],
             [
-              <div style={{ width: 48, height: 30, backgroundColor: "#0056CF", borderRadius: 4 }} />,
+              <ColorSwatch color="#0056CF" />,
               <Title size={4}>$primary_action</Title>,
               "$primary",
               <Card borderRadius="sm" background="light" padding="xxs" borderNone>
@@ -252,7 +274,7 @@ const Colors = () => {
           headers={["Color", "Token", "Value", "Use Case"]}
           rows={[
             [
-              <div style={{ width: 48, height: 30, backgroundColor: "#0056CF", borderRadius: 4 }} />,
+              <ColorSwatch color="#0056CF" />,
               <Title size={4}>$primary_action</Title>,
               "$primary",
               <Card borderRadius="sm" background="light" padding="xxs" borderNone>
@@ -260,7 +282,7 @@ const Colors = () => {
               </Card>,
             ],
             [
-              <div style={{ width: 48, height: 30, backgroundColor: "#0082FF", borderRadius: 4 }} />,
+              <ColorSwatch color="#0082FF" />,
               <Title size={4}>$primary_action_dark</Title>,
               "#0082FF",
               <Card borderRadius="sm" background="light" padding="xxs" borderNone>
@@ -268,7 +290,7 @@ const Colors = () => {
               </Card>,
             ],
             [
-              <div style={{ width: 48, height: 30, backgroundColor: "rgba(0, 86, 207, 0.05)", borderRadius: 4, border: "1px solid #E4E8F0" }} />,
+              <ColorSwatch color="rgba(0, 86, 207, 0.05)" border="1px solid #E4E8F0" />,
               <Title size={4}>$secondary_action</Title>,
               "rgba($primary_action, 0.05)",
               <Card borderRadius="sm" background="light" padding="xxs" borderNone>
@@ -276,7 +298,7 @@ const Colors = () => {
               </Card>,
             ],
             [
-              <div style={{ width: 48, height: 30, backgroundColor: "#DCEAF5", borderRadius: 4, border: "1px solid #E4E8F0" }} />,
+              <ColorSwatch color="#DCEAF5" border="1px solid #E4E8F0" />,
               <Title size={4}>$hover_light</Title>,
               "darken($silver, 5%)",
               <Card borderRadius="sm" background="light" padding="xxs" borderNone>
@@ -284,7 +306,7 @@ const Colors = () => {
               </Card>,
             ],
             [
-              <div style={{ width: 48, height: 30, backgroundColor: "rgba(255, 255, 255, 0.2)", borderRadius: 4, border: "1px solid #E4E8F0" }} />,
+              <ColorSwatch color="rgba(255, 255, 255, 0.2)" border="1px solid #E4E8F0" />,
               <Title size={4}>$hover_dark</Title>,
               "rgba($white, $opacity_2)",
               <Card borderRadius="sm" background="light" padding="xxs" borderNone>
@@ -292,7 +314,7 @@ const Colors = () => {
               </Card>,
             ],
             [
-              <div style={{ width: 48, height: 30, backgroundColor: "#0056CF", borderRadius: 4 }} />,
+              <ColorSwatch color="#0056CF" />,
               <Title size={4}>$focus_color</Title>,
               "$primary",
               <Card borderRadius="sm" background="light" padding="xxs" borderNone>
@@ -300,7 +322,7 @@ const Colors = () => {
               </Card>,
             ],
             [
-              <div style={{ width: 48, height: 30, backgroundColor: "rgba(242, 247, 253, 0.5)", borderRadius: 4, border: "1px solid #E4E8F0" }} />,
+              <ColorSwatch color="rgba(242, 247, 253, 0.5)" border="1px solid #E4E8F0" />,
               <Title size={4}>$focus_input_light</Title>,
               "rgba($active_light, $opacity_5)",
               <Card borderRadius="sm" background="light" padding="xxs" borderNone>
@@ -308,7 +330,7 @@ const Colors = () => {
               </Card>,
             ],
             [
-              <div style={{ width: 48, height: 30, backgroundColor: "rgba(20, 64, 117, 0.5)", borderRadius: 4 }} />,
+              <ColorSwatch color="rgba(20, 64, 117, 0.5)" />,
               <Title size={4}>$focus_input_dark</Title>,
               "rgba(#144075, $opacity_5)",
               <Card borderRadius="sm" background="light" padding="xxs" borderNone>
@@ -316,7 +338,7 @@ const Colors = () => {
               </Card>,
             ],
             [
-              <div style={{ width: 48, height: 30, backgroundColor: "#background: #F2F7FD", borderRadius: 4, border: "1px solid #E4E8F0" }} />,
+              <ColorSwatch color="#F2F7FD" border="1px solid #E4E8F0" />,
               <Title size={4}>$active_light</Title>,
               "lighten(#E5F2FF, 3.5%)",
               <Card borderRadius="sm" background="light" padding="xxs" borderNone>
@@ -324,7 +346,7 @@ const Colors = () => {
               </Card>,
             ],
             [
-              <div style={{ width: 48, height: 30, backgroundColor: "#0082FF", borderRadius: 4 }} />,
+              <ColorSwatch color="#0082FF" />,
               <Title size={4}>$active_dark</Title>,
               "#0082FF",
               <Card borderRadius="sm" background="light" padding="xxs" borderNone>
@@ -338,7 +360,7 @@ const Colors = () => {
           headers={["Color", "Token", "Value", "Use Case"]}
           rows={[
             [
-              <div style={{ width: 48, height: 30, backgroundColor: "rgba(60, 106, 172, 0.5)", borderRadius: 4 }} />,
+              <ColorSwatch color="rgba(60, 106, 172, 0.5)" />,
               <Title size={4}>$shadow</Title>,
               "rgba(#3C6AAC, $opacity_2)",
               <Card borderRadius="sm" background="light" padding="xxs" borderNone>
@@ -346,7 +368,7 @@ const Colors = () => {
               </Card>,
             ],
             [
-              <div style={{ width: 48, height: 30, backgroundColor: "#0A0527", borderRadius: 4 }} />,
+              <ColorSwatch color="#0A0527" />,
               <Title size={4}>$shadow_dark</Title>,
               "$bg_dark",
               <Card borderRadius="sm" background="light" padding="xxs" borderNone>
@@ -354,7 +376,7 @@ const Colors = () => {
               </Card>,
             ],
             [
-              <div style={{ width: 48, height: 30, backgroundColor: "#1C75F2", borderRadius: 4 }} />,
+              <ColorSwatch color="#1C75F2" />,
               <Title size={4}>$gradient_start</Title>,
               "#1C75F2",
               <Card borderRadius="sm" background="light" padding="xxs" borderNone>
@@ -362,7 +384,7 @@ const Colors = () => {
               </Card>,
             ],
             [
-              <div style={{ width: 48, height: 30, backgroundColor: "#0056CF", borderRadius: 4 }} />,
+              <ColorSwatch color="#0056CF" />,
               <Title size={4}>$gradient_end</Title>,
               "$royal (#0056CF)",
               <Card borderRadius="sm" background="light" padding="xxs" borderNone>
@@ -370,7 +392,7 @@ const Colors = () => {
               </Card>,
             ],
             [
-              <div style={{ width: 48, height: 30, backgroundColor: "transparent", borderRadius: 4, border: "1px solid #E4E8F0" }} />,
+              <ColorSwatch color="transparent" border="1px solid #E4E8F0" />,
               <Title size={4}>$transparent</Title>,
               "transparent",
               <Card borderRadius="sm" background="light" padding="xxs" borderNone>
@@ -384,7 +406,7 @@ const Colors = () => {
           headers={["Color", "Token", "Value", "Use Case"]}
           rows={[
             [
-              <div style={{ width: 48, height: 30, backgroundColor: "#0056CF", borderRadius: 4 }} />,
+              <ColorSwatch color="#0056CF" />,
               <Title size={4}>$primary</Title>,
               "$primary",
               <Card borderRadius="sm" background="light" padding="xxs" borderNone>
@@ -392,7 +414,7 @@ const Colors = () => {
               </Card>,
             ],
             [
-              <div style={{ width: 48, height: 30, backgroundColor: "rgba(0, 86, 207, 0.1)", borderRadius: 4 }} />,
+              <ColorSwatch color="rgba(0, 86, 207, 0.1)" />,
               <Title size={4}>$primary_secondary</Title>,
               "lighten($primary, 10%)",
               <Card borderRadius="sm" background="light" padding="xxs" borderNone>
@@ -400,7 +422,7 @@ const Colors = () => {
               </Card>,
             ],
             [
-              <div style={{ width: 48, height: 30, backgroundColor: "#C1CDD6", borderRadius: 4 }} />,
+              <ColorSwatch color="#C1CDD6" />,
               <Title size={4}>$neutral</Title>,
               "$slate",
               <Card borderRadius="sm" background="light" padding="xxs" borderNone>
@@ -408,7 +430,7 @@ const Colors = () => {
               </Card>,
             ],
             [
-              <div style={{ width: 48, height: 30, backgroundColor: "#E0E6EB", borderRadius: 4 }} />,
+              <ColorSwatch color="#E0E6EB" />,
               <Title size={4}>$neutral_secondary</Title>,
               "lighten($neutral, 10%)",
               <Card borderRadius="sm" background="light" padding="xxs" borderNone>
@@ -416,7 +438,7 @@ const Colors = () => {
               </Card>,
             ],
             [
-              <div style={{ width: 48, height: 30, backgroundColor: "rgba(193, 205, 214, 0.1)", borderRadius: 4 }} />,
+              <ColorSwatch color="rgba(193, 205, 214, 0.1)" />,
               <Title size={4}>$neutral_subtle</Title>,
               "rgba($neutral, $opacity_1)",
               <Card borderRadius="sm" background="light" padding="xxs" borderNone>
@@ -424,7 +446,7 @@ const Colors = () => {
               </Card>,
             ],
             [
-              <div style={{ width: 48, height: 30, backgroundColor: "#1CA05C", borderRadius: 4 }} />,
+              <ColorSwatch color="#1CA05C" />,
               <Title size={4}>$success</Title>,
               "$green",
               <Card borderRadius="sm" background="light" padding="xxs" borderNone>
@@ -432,7 +454,7 @@ const Colors = () => {
               </Card>,
             ],
             [
-              <div style={{ width: 48, height: 30, backgroundColor: "#24CC75", borderRadius: 4 }} />,
+              <ColorSwatch color="#24CC75" />,
               <Title size={4}>$success_secondary</Title>,
               "lighten($success, 10%)",
               <Card borderRadius="sm" background="light" padding="xxs" borderNone>
@@ -440,7 +462,7 @@ const Colors = () => {
               </Card>,
             ],
             [
-              <div style={{ width: 48, height: 30, backgroundColor: "rgba(28, 160, 92, 0.1)", borderRadius: 4 }} />,
+              <ColorSwatch color="rgba(28, 160, 92, 0.1)" />,
               <Title size={4}>$success_subtle</Title>,
               "rgba($success, $opacity_1)",
               <Card borderRadius="sm" background="light" padding="xxs" borderNone>
@@ -448,7 +470,7 @@ const Colors = () => {
               </Card>,
             ],
             [
-              <div style={{ width: 48, height: 30, backgroundColor: "#F9BB00", borderRadius: 4 }} />,
+              <ColorSwatch color="#F9BB00" />,
               <Title size={4}>$warning</Title>,
               "$yellow",
               <Card borderRadius="sm" background="light" padding="xxs" borderNone>
@@ -456,7 +478,7 @@ const Colors = () => {
               </Card>,
             ],
             [
-              <div style={{ width: 48, height: 30, backgroundColor: "#FFCB2E", borderRadius: 4 }} />,
+              <ColorSwatch color="#FFCB2E" />,
               <Title size={4}>$warnings_secondary</Title>,
               "lighten($warning, 10%)",
               <Card borderRadius="sm" background="light" padding="xxs" borderNone>
@@ -464,7 +486,7 @@ const Colors = () => {
               </Card>,
             ],
             [
-              <div style={{ width: 48, height: 30, backgroundColor: "rgba(249, 187, 0, 0.1)", borderRadius: 4 }} />,
+              <ColorSwatch color="rgba(249, 187, 0, 0.1)" />,
               <Title size={4}>$warning_subtle</Title>,
               "rgba($warning, $opacity_1)",
               <Card borderRadius="sm" background="light" padding="xxs" borderNone>
@@ -472,7 +494,7 @@ const Colors = () => {
               </Card>,
             ],
             [
-              <div style={{ width: 48, height: 30, backgroundColor: "#DA0014", borderRadius: 4 }} />,
+              <ColorSwatch color="#DA0014" />,
               <Title size={4}>$error</Title>,
               "$red",
               <Card borderRadius="sm" background="light" padding="xxs" borderNone>
@@ -480,7 +502,7 @@ const Colors = () => {
               </Card>,
             ],
             [
-              <div style={{ width: 48, height: 30, backgroundColor: "rgba(218, 0, 20, 0.1)", borderRadius: 4 }} />,
+              <ColorSwatch color="rgba(218, 0, 20, 0.1)" />,
               <Title size={4}>$error_subtle</Title>,
               "rgba($error, $opacity_1)",
               <Card borderRadius="sm" background="light" padding="xxs" borderNone>
@@ -488,7 +510,7 @@ const Colors = () => {
               </Card>,
             ],
             [
-              <div style={{ width: 48, height: 30, backgroundColor: "#FF3749", borderRadius: 4 }} />,
+              <ColorSwatch color="#FF3749" />,
               <Title size={4}>$error_secondary</Title>,
               "lighten($error, 10%)",
               <Card borderRadius="sm" background="light" padding="xxs" borderNone>
@@ -496,7 +518,7 @@ const Colors = () => {
               </Card>,
             ],
             [
-              <div style={{ width: 48, height: 30, backgroundColor: "#FF4A50", borderRadius: 4 }} />,
+              <ColorSwatch color="#FF4A50" />,
               <Title size={4}>$error_dark</Title>,
               "$red_dark",
               <Card borderRadius="sm" background="light" padding="xxs" borderNone>
@@ -504,7 +526,7 @@ const Colors = () => {
               </Card>,
             ],
             [
-              <div style={{ width: 48, height: 30, backgroundColor: "#00C4D7", borderRadius: 4 }} />,
+              <ColorSwatch color="#00C4D7" />,
               <Title size={4}>$info</Title>,
               "$teal",
               <Card borderRadius="sm" background="light" padding="xxs" borderNone>
@@ -512,7 +534,7 @@ const Colors = () => {
               </Card>,
             ],
             [
-              <div style={{ width: 48, height: 30, backgroundColor: "#0AE9FF", borderRadius: 4 }} />,
+              <ColorSwatch color="#0AE9FF" />,
               <Title size={4}>$info_secondary</Title>,
               "lighten($teal, 10%)",
               <Card borderRadius="sm" background="light" padding="xxs" borderNone>
@@ -520,7 +542,7 @@ const Colors = () => {
               </Card>,
             ],
             [
-              <div style={{ width: 48, height: 30, backgroundColor: "rgba(0, 196, 215, 0.1)", borderRadius: 4 }} />,
+              <ColorSwatch color="rgba(0, 196, 215, 0.1)" />,
               <Title size={4}>$info_subtle</Title>,
               "rgba($info, $opacity_1)",
               <Card borderRadius="sm" background="light" padding="xxs" borderNone>
@@ -534,7 +556,7 @@ const Colors = () => {
           headers={["Color", "Token", "Value", "Use Case"]}
           rows={[
             [
-              <div style={{ width: 48, height: 30, backgroundColor: "#0056CF", borderRadius: 4 }} />,
+              <ColorSwatch color="#0056CF" />,
               <Title size={4}>$data_1</Title>,
               "$royal",
               <Card borderRadius="sm" background="light" padding="xxs" borderNone>
@@ -542,7 +564,7 @@ const Colors = () => {
               </Card>,
             ],
             [
-              <div style={{ width: 48, height: 30, backgroundColor: "#F9BB00", borderRadius: 4 }} />,
+              <ColorSwatch color="#F9BB00" />,
               <Title size={4}>$data_2</Title>,
               "$yellow",
               <Card borderRadius="sm" background="light" padding="xxs" borderNone>
@@ -550,7 +572,7 @@ const Colors = () => {
               </Card>,
             ],
             [
-              <div style={{ width: 48, height: 30, backgroundColor: "#9E64E9", borderRadius: 4 }} />,
+              <ColorSwatch color="#9E64E9" />,
               <Title size={4}>$data_3</Title>,
               "$purple",
               <Card borderRadius="sm" background="light" padding="xxs" borderNone>
@@ -558,7 +580,7 @@ const Colors = () => {
               </Card>,
             ],
             [
-              <div style={{ width: 48, height: 30, backgroundColor: "#1CA05C", borderRadius: 4 }} />,
+              <ColorSwatch color="#1CA05C" />,
               <Title size={4}>$data_4</Title>,
               "$green",
               <Card borderRadius="sm" background="light" padding="xxs" borderNone>
@@ -566,7 +588,7 @@ const Colors = () => {
               </Card>,
             ],
             [
-              <div style={{ width: 48, height: 30, backgroundColor: "#FD840C", borderRadius: 4 }} />,
+              <ColorSwatch color="#FD840C" />,
               <Title size={4}>$data_5</Title>,
               "$orange",
               <Card borderRadius="sm" background="light" padding="xxs" borderNone>
@@ -574,7 +596,7 @@ const Colors = () => {
               </Card>,
             ],
             [
-              <div style={{ width: 48, height: 30, backgroundColor: "#144075", borderRadius: 4 }} />,
+              <ColorSwatch color="#144075" />,
               <Title size={4}>$data_6</Title>,
               "#144075",
               <Card borderRadius="sm" background="light" padding="xxs" borderNone>
@@ -582,7 +604,7 @@ const Colors = () => {
               </Card>,
             ],
             [
-              <div style={{ width: 48, height: 30, backgroundColor: "#00C4D7", borderRadius: 4 }} />,
+              <ColorSwatch color="#00C4D7" />,
               <Title size={4}>$data_7</Title>,
               "$teal",
               <Card borderRadius="sm" background="light" padding="xxs" borderNone>
@@ -590,7 +612,7 @@ const Colors = () => {
               </Card>,
             ],
             [
-              <div style={{ width: 48, height: 30, backgroundColor: "#DA0014", borderRadius: 4 }} />,
+              <ColorSwatch color="#DA0014" />,
               <Title size={4}>$data_8</Title>,
               "$red",
               <Card borderRadius="sm" background="light" padding="xxs" borderNone>
@@ -604,7 +626,7 @@ const Colors = () => {
           headers={["Color", "Token", "Value", "Use Case"]}
           rows={[
             [
-              <div style={{ width: 48, height: 30, backgroundColor: "#0056CF", borderRadius: 4 }} />,
+              <ColorSwatch color="#0056CF" />,
               <Title size={4}>$category_1</Title>,
               "$royal",
               <Card borderRadius="sm" background="light" padding="xxs" borderNone>
@@ -612,7 +634,7 @@ const Colors = () => {
               </Card>,
             ],
             [
-              <div style={{ width: 48, height: 30, backgroundColor: "#0CD2E5", borderRadius: 4 }} />,
+              <ColorSwatch color="#0CD2E5" />,
               <Title size={4}>$category_2</Title>,
               "#0CD2E5",
               <Card borderRadius="sm" background="light" padding="xxs" borderNone>
@@ -620,7 +642,7 @@ const Colors = () => {
               </Card>,
             ],
             [
-              <div style={{ width: 48, height: 30, backgroundColor: "#F9BB00", borderRadius: 4 }} />,
+              <ColorSwatch color="#F9BB00" />,
               <Title size={4}>$category_3</Title>,
               "$yellow",
               <Card borderRadius="sm" background="light" padding="xxs" borderNone>
@@ -628,7 +650,7 @@ const Colors = () => {
               </Card>,
             ],
             [
-              <div style={{ width: 48, height: 30, backgroundColor: "#14D595", borderRadius: 4 }} />,
+              <ColorSwatch color="#14D595" />,
               <Title size={4}>$category_4</Title>,
               "#14D595",
               <Card borderRadius="sm" background="light" padding="xxs" borderNone>
@@ -636,7 +658,7 @@ const Colors = () => {
               </Card>,
             ],
             [
-              <div style={{ width: 48, height: 30, backgroundColor: "#A057FF", borderRadius: 4 }} />,
+              <ColorSwatch color="#A057FF" />,
               <Title size={4}>$category_5</Title>,
               "#A057FF",
               <Card borderRadius="sm" background="light" padding="xxs" borderNone>
@@ -644,7 +666,7 @@ const Colors = () => {
               </Card>,
             ],
             [
-              <div style={{ width: 48, height: 30, backgroundColor: "#FF7034", borderRadius: 4 }} />,
+              <ColorSwatch color="#FF7034" />,
               <Title size={4}>$category_6</Title>,
               "#FF7034",
               <Card borderRadius="sm" background="light" padding="xxs" borderNone>
@@ -652,7 +674,7 @@ const Colors = () => {
               </Card>,
             ],
             [
-              <div style={{ width: 48, height: 30, backgroundColor: "#97DA22", borderRadius: 4 }} />,
+              <ColorSwatch color="#97DA22" />,
               <Title size={4}>$category_7</Title>,
               "#97DA22",
               <Card borderRadius="sm" background="light" padding="xxs" borderNone>
@@ -660,7 +682,7 @@ const Colors = () => {
               </Card>,
             ],
             [
-              <div style={{ width: 48, height: 30, backgroundColor: "#EA599F", borderRadius: 4 }} />,
+              <ColorSwatch color="#EA599F" />,
               <Title size={4}>$category_8</Title>,
               "#EA599F",
               <Card borderRadius="sm" background="light" padding="xxs" borderNone>
@@ -668,7 +690,7 @@ const Colors = () => {
               </Card>,
             ],
             [
-              <div style={{ width: 48, height: 30, backgroundColor: "#0091FF", borderRadius: 4 }} />,
+              <ColorSwatch color="#0091FF" />,
               <Title size={4}>$category_9</Title>,
               "#0091FF",
               <Card borderRadius="sm" background="light" padding="xxs" borderNone>
@@ -676,7 +698,7 @@ const Colors = () => {
               </Card>,
             ],
             [
-              <div style={{ width: 48, height: 30, backgroundColor: "#5027E4", borderRadius: 4 }} />,
+              <ColorSwatch color="#5027E4" />,
               <Title size={4}>$category_10</Title>,
               "#5027E4",
               <Card borderRadius="sm" background="light" padding="xxs" borderNone>
@@ -684,7 +706,7 @@ const Colors = () => {
               </Card>,
             ],
             [
-              <div style={{ width: 48, height: 30, backgroundColor: "#DA0014", borderRadius: 4 }} />,
+              <ColorSwatch color="#DA0014" />,
               <Title size={4}>$category_11</Title>,
               "$red",
               <Card borderRadius="sm" background="light" padding="xxs" borderNone>
@@ -692,7 +714,7 @@ const Colors = () => {
               </Card>,
             ],
             [
-              <div style={{ width: 48, height: 30, backgroundColor: "#109922", borderRadius: 4 }} />,
+              <ColorSwatch color="#109922" />,
               <Title size={4}>$category_12</Title>,
               "#109922",
               <Card borderRadius="sm" background="light" padding="xxs" borderNone>
@@ -700,7 +722,7 @@ const Colors = () => {
               </Card>,
             ],
             [
-              <div style={{ width: 48, height: 30, backgroundColor: "#058F9D", borderRadius: 4 }} />,
+              <ColorSwatch color="#058F9D" />,
               <Title size={4}>$category_13</Title>,
               "#058F9D",
               <Card borderRadius="sm" background="light" padding="xxs" borderNone>
@@ -708,7 +730,7 @@ const Colors = () => {
               </Card>,
             ],
             [
-              <div style={{ width: 48, height: 30, backgroundColor: "#A33E6F", borderRadius: 4 }} />,
+              <ColorSwatch color="#A33E6F" />,
               <Title size={4}>$category_14</Title>,
               "#A33E6F",
               <Card borderRadius="sm" background="light" padding="xxs" borderNone>
@@ -716,7 +738,7 @@ const Colors = () => {
               </Card>,
             ],
             [
-              <div style={{ width: 48, height: 30, backgroundColor: "#B2171C", borderRadius: 4 }} />,
+              <ColorSwatch color="#B2171C" />,
               <Title size={4}>$category_15</Title>,
               "#B2171C",
               <Card borderRadius="sm" background="light" padding="xxs" borderNone>
@@ -724,7 +746,7 @@ const Colors = () => {
               </Card>,
             ],
             [
-              <div style={{ width: 48, height: 30, backgroundColor: "#0A5C49", borderRadius: 4 }} />,
+              <ColorSwatch color="#0A5C49" />,
               <Title size={4}>$category_16</Title>,
               "#0A5C49",
               <Card borderRadius="sm" background="light" padding="xxs" borderNone>
@@ -732,7 +754,7 @@ const Colors = () => {
               </Card>,
             ],
             [
-              <div style={{ width: 48, height: 30, backgroundColor: "#325B91", borderRadius: 4 }} />,
+              <ColorSwatch color="#325B91" />,
               <Title size={4}>$category_17</Title>,
               "#325B91",
               <Card borderRadius="sm" background="light" padding="xxs" borderNone>
@@ -740,7 +762,7 @@ const Colors = () => {
               </Card>,
             ],
             [
-              <div style={{ width: 48, height: 30, backgroundColor: "#BE4714", borderRadius: 4 }} />,
+              <ColorSwatch color="#BE4714" />,
               <Title size={4}>$category_18</Title>,
               "#BE4714",
               <Card borderRadius="sm" background="light" padding="xxs" borderNone>
@@ -748,7 +770,7 @@ const Colors = () => {
               </Card>,
             ],
             [
-              <div style={{ width: 48, height: 30, backgroundColor: "#000080", borderRadius: 4 }} />,
+              <ColorSwatch color="#000080" />,
               <Title size={4}>$category_19</Title>,
               "#000080",
               <Card borderRadius="sm" background="light" padding="xxs" borderNone>
@@ -756,7 +778,7 @@ const Colors = () => {
               </Card>,
             ],
             [
-              <div style={{ width: 48, height: 30, backgroundColor: "#5C0E0A", borderRadius: 4 }} />,
+              <ColorSwatch color="#5C0E0A" />,
               <Title size={4}>$category_20</Title>,
               "#5C0E0A",
               <Card borderRadius="sm" background="light" padding="xxs" borderNone>
@@ -764,7 +786,7 @@ const Colors = () => {
               </Card>,
             ],
             [
-              <div style={{ width: 48, height: 30, backgroundColor: "#040830", borderRadius: 4 }} />,
+              <ColorSwatch color="#040830" />,
               <Title size={4}>$category_21</Title>,
               "#040830",
               <Card borderRadius="sm" background="light" padding="xxs" borderNone>
@@ -778,7 +800,7 @@ const Colors = () => {
           headers={["Color", "Token", "Value", "Use Case"]}
           rows={[
             [
-              <div style={{ width: 48, height: 30, backgroundColor: "#003DB2", borderRadius: 4 }} />,
+              <ColorSwatch color="#003DB2" />,
               <Title size={4}>$product_1_background</Title>,
               "#003DB2",
               <Card borderRadius="sm" background="light" padding="xxs" borderNone>
@@ -786,7 +808,7 @@ const Colors = () => {
               </Card>,
             ],
             [
-              <div style={{ width: 48, height: 30, backgroundColor: "#0057FF", borderRadius: 4 }} />,
+              <ColorSwatch color="#0057FF" />,
               <Title size={4}>$product_1_highlight</Title>,
               "#0057FF",
               <Card borderRadius="sm" background="light" padding="xxs" borderNone>
@@ -794,7 +816,7 @@ const Colors = () => {
               </Card>,
             ],
             [
-              <div style={{ width: 48, height: 30, backgroundColor: "#6000AC", borderRadius: 4 }} />,
+              <ColorSwatch color="#6000AC" />,
               <Title size={4}>$product_2_background</Title>,
               "#6000AC",
               <Card borderRadius="sm" background="light" padding="xxs" borderNone>
@@ -802,7 +824,7 @@ const Colors = () => {
               </Card>,
             ],
             [
-              <div style={{ width: 48, height: 30, backgroundColor: "#8200E9", borderRadius: 4 }} />,
+              <ColorSwatch color="#8200E9" />,
               <Title size={4}>$product_2_highlight</Title>,
               "#8200E9",
               <Card borderRadius="sm" background="light" padding="xxs" borderNone>
@@ -810,7 +832,7 @@ const Colors = () => {
               </Card>,
             ],
             [
-              <div style={{ width: 48, height: 30, backgroundColor: "#B85C00", borderRadius: 4 }} />,
+              <ColorSwatch color="#B85C00" />,
               <Title size={4}>$product_3_background</Title>,
               "#B85C00",
               <Card borderRadius="sm" background="light" padding="xxs" borderNone>
@@ -818,7 +840,7 @@ const Colors = () => {
               </Card>,
             ],
             [
-              <div style={{ width: 48, height: 30, backgroundColor: "#CE7500", borderRadius: 4 }} />,
+              <ColorSwatch color="#CE7500" />,
               <Title size={4}>$product_3_highlight</Title>,
               "#CE7500",
               <Card borderRadius="sm" background="light" padding="xxs" borderNone>
@@ -826,7 +848,7 @@ const Colors = () => {
               </Card>,
             ],
             [
-              <div style={{ width: 48, height: 30, backgroundColor: "#007E8F", borderRadius: 4 }} />,
+              <ColorSwatch color="#007E8F" />,
               <Title size={4}>$product_4_background</Title>,
               "#007E8F",
               <Card borderRadius="sm" background="light" padding="xxs" borderNone>
@@ -834,7 +856,7 @@ const Colors = () => {
               </Card>,
             ],
             [
-              <div style={{ width: 48, height: 30, backgroundColor: "#00B9D2", borderRadius: 4 }} />,
+              <ColorSwatch color="#00B9D2" />,
               <Title size={4}>$product_4_highlight</Title>,
               "#00B9D2",
               <Card borderRadius="sm" background="light" padding="xxs" borderNone>
@@ -842,7 +864,7 @@ const Colors = () => {
               </Card>,
             ],
             [
-              <div style={{ width: 48, height: 30, backgroundColor: "#760B24", borderRadius: 4 }} />,
+              <ColorSwatch color="#760B24" />,
               <Title size={4}>$product_5_background</Title>,
               "#760B24",
               <Card borderRadius="sm" background="light" padding="xxs" borderNone>
@@ -850,7 +872,7 @@ const Colors = () => {
               </Card>,
             ],
             [
-              <div style={{ width: 48, height: 30, backgroundColor: "#B8032E", borderRadius: 4 }} />,
+              <ColorSwatch color="#B8032E" />,
               <Title size={4}>$product_5_highlight</Title>,
               "#B8032E",
               <Card borderRadius="sm" background="light" padding="xxs" borderNone>
@@ -858,7 +880,7 @@ const Colors = () => {
               </Card>,
             ],
             [
-              <div style={{ width: 48, height: 30, backgroundColor: "#008540", borderRadius: 4 }} />,
+              <ColorSwatch color="#008540" />,
               <Title size={4}>$product_6_background</Title>,
               "#008540",
               <Card borderRadius="sm" background="light" padding="xxs" borderNone>
@@ -866,7 +888,7 @@ const Colors = () => {
               </Card>,
             ],
             [
-              <div style={{ width: 48, height: 30, backgroundColor: "#00A851", borderRadius: 4 }} />,
+              <ColorSwatch color="#00A851" />,
               <Title size={4}>$product_6_highlight</Title>,
               "#00A851",
               <Card borderRadius="sm" background="light" padding="xxs" borderNone>
@@ -874,7 +896,7 @@ const Colors = () => {
               </Card>,
             ],
             [
-              <div style={{ width: 48, height: 30, backgroundColor: "#96006C", borderRadius: 4 }} />,
+              <ColorSwatch color="#96006C" />,
               <Title size={4}>$product_7_background</Title>,
               "#96006C",
               <Card borderRadius="sm" background="light" padding="xxs" borderNone>
@@ -882,7 +904,7 @@ const Colors = () => {
               </Card>,
             ],
             [
-              <div style={{ width: 48, height: 30, backgroundColor: "#CD0094", borderRadius: 4 }} />,
+              <ColorSwatch color="#CD0094" />,
               <Title size={4}>$product_7_highlight</Title>,
               "#CD0094",
               <Card borderRadius="sm" background="light" padding="xxs" borderNone>
@@ -890,7 +912,7 @@ const Colors = () => {
               </Card>,
             ],
             [
-              <div style={{ width: 48, height: 30, backgroundColor: "#144075", borderRadius: 4 }} />,
+              <ColorSwatch color="#144075" />,
               <Title size={4}>$product_8_background</Title>,
               "#144075",
               <Card borderRadius="sm" background="light" padding="xxs" borderNone>
@@ -898,7 +920,7 @@ const Colors = () => {
               </Card>,
             ],
             [
-              <div style={{ width: 48, height: 30, backgroundColor: "#1A569E", borderRadius: 4 }} />,
+              <ColorSwatch color="#1A569E" />,
               <Title size={4}>$product_8_highlight</Title>,
               "#1A569E",
               <Card borderRadius="sm" background="light" padding="xxs" borderNone>
@@ -906,7 +928,7 @@ const Colors = () => {
               </Card>,
             ],
             [
-              <div style={{ width: 48, height: 30, backgroundColor: "#FCC419", borderRadius: 4 }} />,
+              <ColorSwatch color="#FCC419" />,
               <Title size={4}>$product_9_background</Title>,
               "#FCC419",
               <Card borderRadius="sm" background="light" padding="xxs" borderNone>
@@ -914,7 +936,7 @@ const Colors = () => {
               </Card>,
             ],
             [
-              <div style={{ width: 48, height: 30, backgroundColor: "#FFD43B", borderRadius: 4 }} />,
+              <ColorSwatch color="#FFD43B" />,
               <Title size={4}>$product_9_highlight</Title>,
               "#FFD43B",
               <Card borderRadius="sm" background="light" padding="xxs" borderNone>
@@ -922,7 +944,7 @@ const Colors = () => {
               </Card>,
             ],
             [
-              <div style={{ width: 48, height: 30, backgroundColor: "#20C997", borderRadius: 4 }} />,
+              <ColorSwatch color="#20C997" />,
               <Title size={4}>$product_10_background</Title>,
               "#20C997",
               <Card borderRadius="sm" background="light" padding="xxs" borderNone>
@@ -930,7 +952,7 @@ const Colors = () => {
               </Card>,
             ],
             [
-              <div style={{ width: 48, height: 30, backgroundColor: "#38D9A9", borderRadius: 4 }} />,
+              <ColorSwatch color="#38D9A9" />,
               <Title size={4}>$product_10_highlight</Title>,
               "#38D9A9",
               <Card borderRadius="sm" background="light" padding="xxs" borderNone>
@@ -938,7 +960,7 @@ const Colors = () => {
               </Card>,
             ],
             [
-              <div style={{ width: 48, height: 30, backgroundColor: "#003DB2", borderRadius: 4 }} />,
+              <ColorSwatch color="#003DB2" />,
               <Title size={4}>$windows</Title>,
               "$product_1_background",
               <Card borderRadius="sm" background="light" padding="xxs" borderNone>
@@ -946,7 +968,7 @@ const Colors = () => {
               </Card>,
             ],
             [
-              <div style={{ width: 48, height: 30, backgroundColor: "#6000AC", borderRadius: 4 }} />,
+              <ColorSwatch color="#6000AC" />,
               <Title size={4}>$siding</Title>,
               "$product_2_background",
               <Card borderRadius="sm" background="light" padding="xxs" borderNone>
@@ -954,7 +976,7 @@ const Colors = () => {
               </Card>,
             ],
             [
-              <div style={{ width: 48, height: 30, backgroundColor: "#B85C00", borderRadius: 4 }} />,
+              <ColorSwatch color="#B85C00" />,
               <Title size={4}>$doors</Title>,
               "$product_3_background",
               <Card borderRadius="sm" background="light" padding="xxs" borderNone>
@@ -962,7 +984,7 @@ const Colors = () => {
               </Card>,
             ],
             [
-              <div style={{ width: 48, height: 30, backgroundColor: "#007E8F", borderRadius: 4 }} />,
+              <ColorSwatch color="#007E8F" />,
               <Title size={4}>$solar</Title>,
               "$product_4_background",
               <Card borderRadius="sm" background="light" padding="xxs" borderNone>
@@ -970,7 +992,7 @@ const Colors = () => {
               </Card>,
             ],
             [
-              <div style={{ width: 48, height: 30, backgroundColor: "#760B24", borderRadius: 4 }} />,
+              <ColorSwatch color="#760B24" />,
               <Title size={4}>$roofing</Title>,
               "$product_5_background",
               <Card borderRadius="sm" background="light" padding="xxs" borderNone>
@@ -978,7 +1000,7 @@ const Colors = () => {
               </Card>,
             ],
             [
-              <div style={{ width: 48, height: 30, backgroundColor: "#008540", borderRadius: 4 }} />,
+              <ColorSwatch color="#008540" />,
               <Title size={4}>$gutters</Title>,
               "$product_6_background",
               <Card borderRadius="sm" background="light" padding="xxs" borderNone>
@@ -986,7 +1008,7 @@ const Colors = () => {
               </Card>,
             ],
             [
-              <div style={{ width: 48, height: 30, backgroundColor: "#96006C", borderRadius: 4 }} />,
+              <ColorSwatch color="#96006C" />,
               <Title size={4}>$insulation</Title>,
               "$product_7_background",
               <Card borderRadius="sm" background="light" padding="xxs" borderNone>
@@ -994,7 +1016,7 @@ const Colors = () => {
               </Card>,
             ],
             [
-              <div style={{ width: 48, height: 30, backgroundColor: "#144075", borderRadius: 4 }} />,
+              <ColorSwatch color="#144075" />,
               <Title size={4}>$accessories</Title>,
               "$product_8_background",
               <Card borderRadius="sm" background="light" padding="xxs" borderNone>
