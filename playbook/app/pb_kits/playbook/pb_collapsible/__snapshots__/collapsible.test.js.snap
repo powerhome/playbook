@@ -32,9 +32,8 @@ exports[`html structure is correct 1`] = `
                 class="pb_custom_icon svg-inline--fa svg_lg svg_fw"
                 color="currentColor"
                 fill="none"
-                height="auto"
                 viewBox="0 0 30 25"
-                width="auto"
+                width="1em"
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <path
