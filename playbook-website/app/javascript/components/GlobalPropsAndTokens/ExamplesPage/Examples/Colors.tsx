@@ -333,6 +333,52 @@ const Colors = () => {
             ],
           ]}
         />
+        <Title size={2}>Utility Colors</Title>
+        <PropsExamplesTable
+          headers={["Color", "Token", "Value", "Use Case"]}
+          rows={[
+            [
+              <div style={{ width: 48, height: 30, backgroundColor: "rgba(60, 106, 172, 0.5)", borderRadius: 4 }} />,
+              <Title size={4}>$shadow</Title>,
+              "rgba(#3C6AAC, $opacity_2)",
+              <Card borderRadius="sm" background="light" padding="xxs" borderNone>
+                <Body>Light Mode, Shadow</Body>
+              </Card>,
+            ],
+            [
+              <div style={{ width: 48, height: 30, backgroundColor: "#0A0527", borderRadius: 4 }} />,
+              <Title size={4}>$shadow_dark</Title>,
+              "$bg_dark",
+              <Card borderRadius="sm" background="light" padding="xxs" borderNone>
+                <Body>Dark Mode, Shadow</Body>
+              </Card>,
+            ],
+            [
+              <div style={{ width: 48, height: 30, backgroundColor: "#1C75F2", borderRadius: 4 }} />,
+              <Title size={4}>$gradient_start</Title>,
+              "#1C75F2",
+              <Card borderRadius="sm" background="light" padding="xxs" borderNone>
+                <Body>Gradient Start</Body>
+              </Card>,
+            ],
+            [
+              <div style={{ width: 48, height: 30, backgroundColor: "#0056CF", borderRadius: 4 }} />,
+              <Title size={4}>$gradient_end</Title>,
+              "$royal (#0056CF)",
+              <Card borderRadius="sm" background="light" padding="xxs" borderNone>
+                <Body>Gradient End</Body>
+              </Card>,
+            ],
+            [
+              <div style={{ width: 48, height: 30, backgroundColor: "transparent", borderRadius: 4, border: "1px solid #CCC" }} />,
+              <Title size={4}>$transparent</Title>,
+              "transparent",
+              <Card borderRadius="sm" background="light" padding="xxs" borderNone>
+                <Body>Transparency</Body>
+              </Card>,
+            ],
+          ]}
+        />
         <Title size={2}>Status Colors</Title>
         <PropsExamplesTable
           headers={["Color", "Token", "Value", "Use Case"]}
