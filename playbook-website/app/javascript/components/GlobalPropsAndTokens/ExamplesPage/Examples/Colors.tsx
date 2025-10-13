@@ -1,6 +1,6 @@
 import ShowPage from "../../Templates/ShowPage";
 import PropsExamplesTable from "../../Templates/Subcomponents/PropsExamplesTable";
-import { Title, Link, Card, Body } from "playbook-ui";
+import { Title, Card, Body } from "playbook-ui";
 
 interface ColorSwatchProps {
   color: string;
