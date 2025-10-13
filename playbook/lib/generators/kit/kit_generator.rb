@@ -38,7 +38,7 @@ class KitGenerator < Rails::Generators::NamedBase
     @react_rendered = options[:react_rendered]
     @enhanced_element_used = options[:enhanced_element_used]
 
-    kit_props = options[:props].concat(%w[id:string classname:string data:object aria:object])
+    kit_props = options[:props].concat(%w[id:string classname:string data:object aria:object htmlOptions:object])
     @kit_props = kit_props.map { |hash| [hash.partition(":").first, hash.partition(":").last] }.to_h
     @kit_props = @kit_props.sort.to_h
     @unique_props = @kit_props.symbolize_keys.without(:id, :classname, :data, :aria)
@@ -125,7 +125,7 @@ class KitGenerator < Rails::Generators::NamedBase
         react_imports_page(
           path: REACT_EXAMPLES_PATH.to_s,
           import_statement: "import * as #{@kit_name_pascal} from 'kits/pb_#{@kit_name_underscore}/docs'\n",
-          webpack_statement: "  ...#{@kit_name_pascal},\n",
+          registry_statement: "  ...#{@kit_name_pascal},\n",
           import_area_indicator: "// KIT EXAMPLES\n"
         )
 
@@ -216,22 +216,22 @@ private
     end
   end
 
-  def react_imports_page(path:, import_statement:, webpack_statement:, import_area_indicator:)
+  def react_imports_page(path:, import_statement:, registry_statement:, import_area_indicator:)
     re_array = File.readlines(path)
 
     example_components = re_array.select { |a| a =~ /import\s\*\sas/ }
     example_components << import_statement
     example_components.sort! { |a, b| a.split("* as ")[1] <=> b.split("* as ")[1] }
 
-    webpack_components = re_array.select { |a| a =~ /\.\.\./ }
-    webpack_components << webpack_statement
-    webpack_components.sort!
+    registry_components = re_array.select { |a| a =~ /\.\.\./ }
+    registry_components << registry_statement
+    registry_components.sort!
 
     sorted_file_array = re_array[0..(re_array.index(import_area_indicator) + 1)]
     sorted_file_array += example_components
     sorted_file_array << "\n"
-    sorted_file_array << "WebpackerReact.registerComponents({\n"
-    sorted_file_array += webpack_components
+    sorted_file_array << "ComponentRegistry.registerComponents({\n"
+    sorted_file_array += registry_components
     sorted_file_array << "})\n"
 
     File.open(path, "w+") { |f| f.write(sorted_file_array.join) }
