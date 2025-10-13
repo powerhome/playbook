@@ -6,8 +6,6 @@ import ExampleCodeCard from "../../Templates/Subcomponents/ExampleCodeCard";
 import * as DisplayImages from './DisplayImages'
 const DisplayGlobalProps = () => {
 
-  console.log(DisplayImages)
-
   type DisplayKey = keyof typeof DisplayImages;
 
   const VisualGuideExample = ({ display }: { display: DisplayKey }) => {

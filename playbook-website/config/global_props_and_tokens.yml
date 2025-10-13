@@ -1,6 +1,7 @@
 global_props:
   - cursor
   - dark
+  - flex_box
   - hover
   - html_options
   - margin

@@ -39,7 +39,7 @@ const chartOptions = {
       text: "Number of Employees",
       style: {
         fontFamily: typography.font_family_base,
-        color: colors.text_lt_lighter,
+        color: "red",
         fontWeight: typography.bold,
         fontSize: typography.text_smaller,
       },

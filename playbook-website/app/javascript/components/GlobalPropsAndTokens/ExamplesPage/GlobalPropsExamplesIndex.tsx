@@ -6,6 +6,7 @@ import Cursor from "./Examples/Cursor";
 import Hover from "./Examples/Hover";
 import Dark from "./Examples/Dark";
 import LineHeight from "./Examples/LineHeightGlobalProps";
+import FlexBox from "./Examples/FlexBoxGlobalProps";
 import Display from "./Examples/DisplayGlobalProps";
 import MaxWidth from "./Examples/MaxWidth";
 import MinWidth from "./Examples/MinWidth";
@@ -17,6 +18,7 @@ import ZIndex from "./Examples/Z-IndexGlobalProps";
 const COMPONENT_MAP = {
   cursor: Cursor,
   dark: Dark,
+  flex_box: FlexBox,
   hover: Hover,
   html_options: HtmlOptions,
   margin: Margin,
