@@ -1,3 +1,6 @@
 export { default as PbLineGraphDefault } from './_pb_line_graph_default.jsx'
 export { default as PbLineGraphLegend } from './_pb_line_graph_legend.jsx'
 export { default as PbLineGraphLegendPosition } from './_pb_line_graph_legend_position.jsx'
+export { default as PbLineGraphLegendNonclickable } from './_pb_line_graph_legend_nonclickable.jsx'
+export { default as PbLineGraphHeight } from './_pb_line_graph_height.jsx'
+export { default as PbLineGraphColors } from './_pb_line_graph_colors.jsx'
