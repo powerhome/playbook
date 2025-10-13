@@ -6,6 +6,7 @@ on:
 permissions:
   id-token: write         # REQUIRED for 2FA
   contents: read
+  issues: write         # To post a comment on the PR
 jobs:
   Creating-Alpha-Version:
     if: github.event.label.name == 'alpha'
@@ -80,8 +81,6 @@ jobs:
           gem push playbook_ui-${{ env.new_ruby_alpha_version }}.gem --host https://rubygems.org/ --key ${{ env.GEM_HOST_API_KEY }}
           gem push playbook_ui_docs-${{ env.new_ruby_alpha_version }}.gem --host https://rubygems.org/ --key ${{ env.GEM_HOST_API_KEY }}
       - name: Leave PR comment
-        permissions:
-          issues: write
         env:
           PR_NUMBER: ${{ github.event.pull_request.number }}
           RUBY_GEM_VERSION: ${{ env.new_ruby_alpha_version }}
