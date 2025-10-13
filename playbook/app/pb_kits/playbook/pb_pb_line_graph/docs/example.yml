@@ -2,6 +2,11 @@ examples:
   
   rails:
   - pb_line_graph_default: Default
+  - pb_line_graph_legend: Legend
+  - pb_line_graph_legend_position: Legend Position
+  - pb_line_graph_legend_nonclickable: Legend NonClickable
+  - pb_line_graph_height: Height
+  - pb_line_graph_colors: Color Overrides
   
   
   react:
