@@ -55,17 +55,17 @@ const Colors = () => {
               "#FD840C"
             ],
             [
-              <div style={{ width: 48, height: 30, backgroundColor: "#FFFFFF", borderRadius: 4, border: "1px solid #CCC" }} />,
+              <div style={{ width: 48, height: 30, backgroundColor: "#FFFFFF", borderRadius: 4, border: "1px solid #E4E8F0" }} />,
               <Title size={4}>$white</Title>,
               "#FFFFFF"
             ],
             [
-              <div style={{ width: 48, height: 30, backgroundColor: "#F3F7FB", borderRadius: 4, border: "1px solid #CCC" }} />,
+              <div style={{ width: 48, height: 30, backgroundColor: "#F3F7FB", borderRadius: 4, border: "1px solid #E4E8F0" }} />,
               <Title size={4}>$silver</Title>,
               "#F3F7FB"
             ],
             [
-              <div style={{ width: 48, height: 30, backgroundColor: "#C1CDD6", borderRadius: 4 }} />,
+              <div style={{ width: 48, height: 30, backgroundColor: "#C1CDD6", borderRadius: 4, border: "1px solid #E4E8F0" }} />,
               <Title size={4}>$slate</Title>,
               "#C1CDD6"
             ],
@@ -112,7 +112,7 @@ const Colors = () => {
           headers={["Color", "Token", "Value", "Use Case"]}
           rows={[
             [
-              <div style={{ width: 48, height: 30, backgroundColor: "#F3F7FB", borderRadius: 4, border: "1px solid #CCC" }} />,
+              <div style={{ width: 48, height: 30, backgroundColor: "#F3F7FB", borderRadius: 4, border: "1px solid #E4E8F0" }} />,
               <Title size={4}>$bg_light</Title>,
               "$silver",
               <Card borderRadius="sm" background="light" padding="xxs" borderNone>
@@ -136,7 +136,7 @@ const Colors = () => {
               </Card>,
             ],
             [
-              <div style={{ width: 48, height: 30, backgroundColor: "#FFFFFF", borderRadius: 4, border: "1px solid #CCC" }} />,
+              <div style={{ width: 48, height: 30, backgroundColor: "#FFFFFF", borderRadius: 4, border: "1px solid #E4E8F0" }} />,
               <Title size={4}>$card_light</Title>,
               "$white",
               <Card borderRadius="sm" background="light" padding="xxs" borderNone>
@@ -206,7 +206,7 @@ const Colors = () => {
               </Card>,
             ],
             [
-              <div style={{ width: 48, height: 30, backgroundColor: "#FFFFFF", borderRadius: 4, border: "1px solid #CCC" }} />,
+              <div style={{ width: 48, height: 30, backgroundColor: "#FFFFFF", borderRadius: 4, border: "1px solid #E4E8F0" }} />,
               <Title size={4}>$text_dk_default</Title>,
               "#FFFFFF",
               <Card borderRadius="sm" background="light" padding="xxs" borderNone>
@@ -214,7 +214,7 @@ const Colors = () => {
               </Card>,
             ],
             [
-              <div style={{ width: 48, height: 30, backgroundColor: "rgba(255, 255, 255, 0.6)", borderRadius: 4 }} />,
+              <div style={{ width: 48, height: 30, backgroundColor: "rgba(255, 255, 255, 0.6)", borderRadius: 4, border: "1px solid #E4E8F0" }} />,
               <Title size={4}>$text_dk_light</Title>,
               "rgba($white, $opacity_6)",
               <Card borderRadius="sm" background="light" padding="xxs" borderNone>
@@ -222,7 +222,7 @@ const Colors = () => {
               </Card>,
             ],
             [
-              <div style={{ width: 48, height: 30, backgroundColor: "rgba(255, 255, 255, 0.4)", borderRadius: 4 }} />,
+              <div style={{ width: 48, height: 30, backgroundColor: "rgba(255, 255, 255, 0.4)", borderRadius: 4, border: "1px solid #E4E8F0" }} />,
               <Title size={4}>$text_dk_lighter</Title>,
               "rgba($white, $opacity_4)",
               <Card borderRadius="sm" background="light" padding="xxs" borderNone>
@@ -268,7 +268,7 @@ const Colors = () => {
               </Card>,
             ],
             [
-              <div style={{ width: 48, height: 30, backgroundColor: "rgba(0, 86, 207, 0.05)", borderRadius: 4 }} />,
+              <div style={{ width: 48, height: 30, backgroundColor: "rgba(0, 86, 207, 0.05)", borderRadius: 4, border: "1px solid #E4E8F0" }} />,
               <Title size={4}>$secondary_action</Title>,
               "rgba($primary_action, 0.05)",
               <Card borderRadius="sm" background="light" padding="xxs" borderNone>
@@ -276,7 +276,7 @@ const Colors = () => {
               </Card>,
             ],
             [
-              <div style={{ width: 48, height: 30, backgroundColor: "#E8EFF5", borderRadius: 4, border: "1px solid #CCC" }} />,
+              <div style={{ width: 48, height: 30, backgroundColor: "#E8EFF5", borderRadius: 4, border: "1px solid #E4E8F0" }} />,
               <Title size={4}>$hover_light</Title>,
               "darken($silver, 5%)",
               <Card borderRadius="sm" background="light" padding="xxs" borderNone>
@@ -284,7 +284,7 @@ const Colors = () => {
               </Card>,
             ],
             [
-              <div style={{ width: 48, height: 30, backgroundColor: "rgba(255, 255, 255, 0.2)", borderRadius: 4 }} />,
+              <div style={{ width: 48, height: 30, backgroundColor: "rgba(255, 255, 255, 0.2)", borderRadius: 4, border: "1px solid #E4E8F0" }} />,
               <Title size={4}>$hover_dark</Title>,
               "rgba($white, $opacity_2)",
               <Card borderRadius="sm" background="light" padding="xxs" borderNone>
@@ -300,7 +300,7 @@ const Colors = () => {
               </Card>,
             ],
             [
-              <div style={{ width: 48, height: 30, backgroundColor: "rgba(229, 242, 255, 0.5)", borderRadius: 4, border: "1px solid #CCC" }} />,
+              <div style={{ width: 48, height: 30, backgroundColor: "rgba(229, 242, 255, 0.5)", borderRadius: 4, border: "1px solid #E4E8F0" }} />,
               <Title size={4}>$focus_input_light</Title>,
               "rgba($active_light, $opacity_5)",
               <Card borderRadius="sm" background="light" padding="xxs" borderNone>
@@ -316,7 +316,7 @@ const Colors = () => {
               </Card>,
             ],
             [
-              <div style={{ width: 48, height: 30, backgroundColor: "#EAF5FF", borderRadius: 4, border: "1px solid #CCC" }} />,
+              <div style={{ width: 48, height: 30, backgroundColor: "#EAF5FF", borderRadius: 4, border: "1px solid #E4E8F0" }} />,
               <Title size={4}>$active_light</Title>,
               "lighten(#E5F2FF, 3.5%)",
               <Card borderRadius="sm" background="light" padding="xxs" borderNone>
