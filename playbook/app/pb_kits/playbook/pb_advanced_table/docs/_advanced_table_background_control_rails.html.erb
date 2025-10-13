@@ -1,0 +1,113 @@
+<% column_definitions = [
+    {
+      accessor: "year",
+      label: "Year",
+      cellAccessors: ["quarter", "month", "day"],
+    },
+    {
+      accessor: "newEnrollments",
+      label: "New Enrollments",
+      column_styling: { 
+        cell_background_color: ->(row) { row[:newEnrollments].to_i > 20 ? "success_secondary" : "warning_secondary" }
+      }
+    },
+    {
+      accessor: "scheduledMeetings",
+      label: "Scheduled Meetings",
+    },
+    {
+      accessor: "attendanceRate",
+      label: "Attendance Rate",
+    },
+    {
+      accessor: "completedClasses",
+      label: "Completed Classes",
+    },
+    {
+      accessor: "classCompletionRate",
+      label: "Class Completion Rate",
+    },
+    {
+      accessor: "graduatedStudents",
+      label: "Graduated Students",
+    }
+] %>
+
+<%= pb_rails("advanced_table", props: { id: "padding-control", table_data: @table_data, column_definitions: column_definitions }) do %>
+  <%= pb_rails("advanced_table/table_header", props: { column_definitions: column_definitions }) %>
+  <%= pb_rails("advanced_table/table_body", props: { table_data: @table_data, column_definitions: column_definitions }) %>
+<% end %>
+
+<% multi_header_column_definitions = [
+  {
+    accessor: "year",
+    label: "Year",
+    cellAccessors: ["quarter", "month", "day"],
+  },
+  {
+    label: "Enrollment Data",
+    columns: [
+      {
+        label: "Enrollment Stats",
+        columns: [
+          {
+            accessor: "newEnrollments",
+            label: "New Enrollments",
+            column_styling: { 
+              cell_background_color: ->(row) { row[:newEnrollments].to_i > 20 ? "success_secondary" : "warning_secondary" }
+            }
+          },
+          {
+            accessor: "scheduledMeetings",
+            label: "Scheduled Meetings",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    label: "Performance Data",
+    columns: [
+      {
+        label: "Completion Metrics",
+        columns: [
+          {
+            accessor: "completedClasses",
+            label: "Completed Classes",
+            column_styling: { 
+              cell_background_color: ->(row) { row[:completedClasses].to_i > 15 ? "info_secondary" : "neutral_secondary" }
+            }
+          },
+          {
+            accessor: "classCompletionRate",
+            label: "Class Completion Rate",
+            column_styling: { 
+              cell_background_color: ->(row) { row[:completedClasses].to_i > 15 ? "neutral_secondary" : "info_secondary" }
+            }
+          },
+        ],
+      },
+      {
+        label: "Attendance",
+        columns: [
+          {
+            accessor: "attendanceRate",
+            label: "Attendance Rate",
+          },
+          {
+            accessor: "graduatedStudents",
+            label: "Graduated Students",
+            column_styling: { 
+              cell_background_color: ->(row) { row[:graduatedStudents].to_i > 10 ? "primary_secondary" : "error_secondary" }
+            }
+          },
+        ],
+      },
+    ],
+  },
+] %>
+
+<%= pb_rails("advanced_table", props: { id: "padding-control-multi-header", table_data: @table_data, column_definitions: multi_header_column_definitions, padding_top: "lg" }) do %>
+  <%= pb_rails("advanced_table/table_header", props: { column_definitions: multi_header_column_definitions }) %>
+  <%= pb_rails("advanced_table/table_body", props: { table_data: @table_data, column_definitions: multi_header_column_definitions }) %>
+<% end %>

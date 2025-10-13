@@ -46,7 +46,34 @@ module Playbook
         classes = %w[id-cell]
         classes << "last-cell" if column[:is_last_in_group]
         classes << "pinned-left" if index.zero? && is_pinned_left && responsive == "scroll"
+
+        if column[:accessor].present?
+          orig_def = find_column_def_by_accessor(column_definitions, column[:accessor])
+          if orig_def && orig_def[:column_styling].is_a?(Hash) && orig_def[:column_styling][:cell_padding].present?
+            padding_value = orig_def[:column_styling][:cell_padding]
+            classes << "p_#{padding_value}"
+          end
+        end
+
         classes.join(" ")
+      end
+
+      def cell_background_color(column)
+        return nil unless column[:accessor].present?
+
+        orig_def = find_column_def_by_accessor(column_definitions, column[:accessor])
+        if orig_def && orig_def[:column_styling].is_a?(Hash) && orig_def[:column_styling][:cell_background_color].present?
+          bg_color = orig_def[:column_styling][:cell_background_color]
+          if bg_color.respond_to?(:call)
+            bg_color.call(row)
+          else
+            bg_color
+          end
+        end
+      end
+
+      def has_custom_background_color?(column)
+        cell_background_color(column).present?
       end
 
       def depth_accessors

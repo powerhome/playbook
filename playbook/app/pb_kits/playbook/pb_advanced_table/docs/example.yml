@@ -23,6 +23,8 @@ examples:
   - advanced_table_row_styling: Row Styling
   - advanced_table_column_styling_rails: Column Styling
   - advanced_table_column_styling_column_headers_rails: Column Styling with Multiple Headers
+  - advanced_table_padding_control_rails: Padding Control using Column Styling
+  - advanced_table_background_control_rails: Background Control using Column Styling
   - advanced_table_column_border_color_rails: Column Group Border Color
 
 

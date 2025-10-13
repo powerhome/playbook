@@ -12,7 +12,17 @@
     <% end %>
     <% object.column_definitions.each_with_index do |column, index| %>
         <% next unless column[:accessor].present? %>
-        <%= pb_rails("table/table_cell", props: {  html_options: { style: { "background-color": bg_color, color: font_color } }, classname:object.td_classname(column, index)}) do %>
+        <% 
+          if object.has_custom_background_color?(column)
+            custom_bg_color = object.cell_background_color(column)
+            component_name = "background"
+            component_props = { background_color: custom_bg_color, tag: "td", classname: object.td_classname(column, index) }
+          else
+            component_name = "table/table_cell"
+            component_props = { html_options: { style: { "background-color": bg_color, color: font_color } }, classname: object.td_classname(column, index) }
+          end
+        %>
+        <%= pb_rails(component_name, props: component_props) do %>
             <%= pb_rails("flex", props:{ align: "center", justify: object.justify_for(column, index), classname: object.loading ? "loading-cell" : "" }) do %>
                 <% if collapsible_trail && index.zero? %>
                     <% (1..depth).each do |i| %>

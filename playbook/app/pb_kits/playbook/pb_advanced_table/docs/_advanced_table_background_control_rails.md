@@ -1,0 +1,1 @@
+`column_styling` can also be used to control the background color on all cells in a given column via the use of the `cell_background_color` key/value pair. Use `cell_background_color` to achieve custom background colors for individual cells as seen here.
