@@ -22,6 +22,7 @@ $z_7: 700 !default;
 $z_8: 800 !default;
 $z_9: 900 !default;
 $z_10: 1000 !default;
+$z_max: 999999 !default; // Maximum value for a 32-bit signed integer
 $z_index: (
   zindex_1: $z_1,
   zindex_2: $z_1,
