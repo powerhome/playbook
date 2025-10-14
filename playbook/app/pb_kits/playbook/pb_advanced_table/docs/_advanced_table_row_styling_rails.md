@@ -1,4 +1,4 @@
-The `row_styling` prop can be used in conjunction with row ids to control certain styling options on individual rows. Currently, `row_styling` gives you 3 optional controls:
+The `row_styling` prop can be used in conjunction with row ids to control certain styling options on individual rows. It is an object that has several optional key/value pairs, this doc example highlights the following:
 
 - `background_color` : use this to control the background color of the row
 - `font_color`: use this to control font color for each row if needed, for example if using a darker background color.
