@@ -6,7 +6,7 @@ on:
 permissions:
   id-token: write         # REQUIRED for 2FA
   contents: read
-  issues: write         # To post a comment on the PR
+  issues: write           # Required to comment on PRs
   pull-requests: write    # Required to comment on PRs
 jobs:
   Creating-Alpha-Version:
