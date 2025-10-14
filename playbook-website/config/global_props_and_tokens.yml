@@ -20,6 +20,7 @@ global_props:
 tokens:
   - animation
   - border_radius
+  - colors
   - display
   - line_height
   - letter_spacing
