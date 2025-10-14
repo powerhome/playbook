@@ -34,12 +34,6 @@ This will add all the javascript to use the popovers, & graphs for example.
 import 'playbook-ui/dist/playbook-rails.js';
 ```
 
-#### Add Inline Rails JS to Your Layout (Needed for Rails Graphs)
-
-```erb
-<%= yield :pb_js %>
-```
-
 #### Add Font Awesome
 
 Playbook ships with font awesome but you’ll need to include it in your application
