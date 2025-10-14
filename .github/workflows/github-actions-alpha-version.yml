@@ -7,6 +7,7 @@ permissions:
   id-token: write         # REQUIRED for 2FA
   contents: read
   issues: write         # To post a comment on the PR
+  pull-requests: write    # Required to comment on PRs
 jobs:
   Creating-Alpha-Version:
     if: github.event.label.name == 'alpha'
@@ -15,6 +16,7 @@ jobs:
       id-token: write
       contents: read
       issues: write
+      pull-requests: write
     defaults:
       run:
         working-directory: ./playbook
@@ -84,35 +86,16 @@ jobs:
           echo "${{ env.new_ruby_alpha_version }}"
           gem push playbook_ui-${{ env.new_ruby_alpha_version }}.gem --host https://rubygems.org/ --key ${{ env.GEM_HOST_API_KEY }}
           gem push playbook_ui_docs-${{ env.new_ruby_alpha_version }}.gem --host https://rubygems.org/ --key ${{ env.GEM_HOST_API_KEY }}
-      - name: Leave PR comment (Octokit)
-        if: github.event.pull_request.head.repo.full_name == github.repository
-        uses: actions/github-script@v7
-        with:
-          script: |
-            const pr = context.payload.pull_request?.number
-            if (!pr) {
-              core.setFailed('No pull_request number in context.')
-              return
-            }
-            const rubyVersion = process.env.RUBY_GEM_VERSION
-            const rubyLink    = process.env.RUBY_GEM_LINK
-            const npmVersion  = process.env.NPM_VERSION
-            const npmLink     = process.env.NPM_LINK
-
-            const body = `🎉 Congratulations on creating an Alpha Version!
-
-            Your Alpha for RubyGems is [${rubyVersion}](${rubyLink})
-
-            Your Alpha for NPM is [${npmVersion}](${npmLink})`
-
-            await github.rest.issues.createComment({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              issue_number: pr,
-              body
-            })
+      - name: Leave PR comment
         env:
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           RUBY_GEM_VERSION: ${{ env.new_ruby_alpha_version }}
-          RUBY_GEM_LINK: https://rubygems.org/gems/playbook_ui/versions/${{ env.new_ruby_alpha_version }}
+          RUBY_GEM_LINK: https://rubygems.org/gems/playbook_ui/versions/${{env.new_ruby_alpha_version}}
           NPM_VERSION: ${{ env.new_npm_alpha_version }}
-          NPM_LINK: https://www.npmjs.com/package/playbook-ui/v/${{ env.new_npm_alpha_version }}
+          NPM_LINK: https://www.npmjs.com/package/playbook-ui/v/${{env.new_npm_alpha_version}}
+        run: |
+          curl -H "Authorization: Bearer ${GITHUB_TOKEN}" \
+              -X POST \
+              -d '{"body": "🎉 Congratulations on creating an Alpha Version! \n\n Your Alpha for Ruby Gems is [${{env.RUBY_GEM_VERSION}}](${{env.RUBY_GEM_LINK}}) \n\n Your Alpha for NPM is [${{env.NPM_VERSION}}](${{env.NPM_LINK}}) "}' \
+                "https://api.github.com/repos/${{ github.repository }}/issues/${PR_NUMBER}/comments"
