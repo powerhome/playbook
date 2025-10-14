@@ -11,6 +11,10 @@ jobs:
   Creating-Alpha-Version:
     if: github.event.label.name == 'alpha'
     runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+      issues: write
     defaults:
       run:
         working-directory: ./playbook
