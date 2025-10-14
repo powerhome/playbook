@@ -47,13 +47,16 @@ module Playbook
         classes << "last-cell" if column[:is_last_in_group]
         classes << "pinned-left" if index.zero? && is_pinned_left && responsive == "scroll"
 
+        row_style = row_styling.find { |style| style[:row_id].to_s == row_id.to_s }
+        row_padding = row_style&.[](:cell_padding)
+
         if column[:accessor].present?
           orig_def = find_column_def_by_accessor(column_definitions, column[:accessor])
-          if orig_def && orig_def[:column_styling].is_a?(Hash) && orig_def[:column_styling][:cell_padding].present?
-            padding_value = orig_def[:column_styling][:cell_padding]
-            classes << "p_#{padding_value}"
-          end
+          column_padding = orig_def[:column_styling][:cell_padding] if orig_def && orig_def[:column_styling].is_a?(Hash) && orig_def[:column_styling][:cell_padding].present?
         end
+
+        classes << "p_#{row_padding}" if row_padding.present?
+        classes << "p_#{column_padding}" if column_padding.present?
 
         classes.join(" ")
       end
@@ -74,6 +77,20 @@ module Playbook
 
       def has_custom_background_color?(column)
         cell_background_color(column).present?
+      end
+
+      # Uses a regular table/table_cell component if there is no custom background color; if there is a cell_background_color uses a background component with tag "td"
+      def cell_component_info(column, index, bg_color, font_color)
+        if has_custom_background_color?(column)
+          custom_bg_color = cell_background_color(column)
+          component_name = "background"
+          component_props = { background_color: custom_bg_color, tag: "td", classname: td_classname(column, index) }
+        else
+          component_name = "table/table_cell"
+          component_props = { html_options: { style: { "background-color": bg_color, color: font_color } }, classname: td_classname(column, index) }
+        end
+
+        { name: component_name, props: component_props }
       end
 
       def depth_accessors
