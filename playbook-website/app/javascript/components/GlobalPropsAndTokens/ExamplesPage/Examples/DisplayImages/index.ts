@@ -2,8 +2,8 @@ import block from './block.svg';
 import flex from './flex.svg';
 import grid from './grid.svg';
 import inline from './inline.svg';
-import inlineBlock from './inline-block.svg';
-import inlineFlex from './inline-flex.svg';
+import inline_block from './inline-block.svg';
+import inline_flex from './inline-flex.svg';
 import none from './none.svg';
 
 
@@ -12,8 +12,8 @@ export {
   flex,
   grid,
   inline,
-  inlineBlock,
-  inlineFlex,
+  inline_block,
+  inline_flex,
   none
 };
 
