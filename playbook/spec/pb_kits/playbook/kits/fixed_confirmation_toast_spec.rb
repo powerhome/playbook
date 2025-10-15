@@ -68,19 +68,26 @@ RSpec.describe Playbook::PbFixedConfirmationToast::FixedConfirmationToast do
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
       text = "Test text"
-      expect(subject.new(text: text).classname).to eq "pb_fixed_confirmation_toast_kit_neutral"
-      expect(subject.new(text: text, status: "success").classname).to eq "pb_fixed_confirmation_toast_kit_success"
-      expect(subject.new(text: text, status: "error").classname).to eq "pb_fixed_confirmation_toast_kit_error"
-      expect(subject.new(text: text, status: "neutral").classname).to eq "pb_fixed_confirmation_toast_kit_neutral"
-      expect(subject.new(text: text, status: "tip").classname).to eq "pb_fixed_confirmation_toast_kit_tip"
-      expect(subject.new(text: text, status: "tip", dark: true).classname).to eq "pb_fixed_confirmation_toast_kit_tip dark"
-      expect(subject.new(text: text, status: "tip", closeable: true).classname).to eq "pb_fixed_confirmation_toast_kit_tip remove_toast"
-      expect(subject.new(text: text, status: "error", multi_line: true).classname).to eq "pb_fixed_confirmation_toast_kit_error_multi_line"
-      expect(subject.new(text: text, status: "neutral", vertical: "top").classname).to eq "pb_fixed_confirmation_toast_kit_neutral"
-      expect(subject.new(text: text, status: "neutral", vertical: "top", horizontal: "center").classname).to eq "pb_fixed_confirmation_toast_kit_neutral positioned_toast top center"
-      expect(subject.new(text: text, status: "tip", icon: "arrow-down").classname).to eq "pb_fixed_confirmation_toast_kit_tip custom_icon"
-      expect(subject.new(text: text, icon: "none").classname).to eq "pb_fixed_confirmation_toast_kit_neutral"
-      expect(subject.new(text: text, status: "tip", auto_close: 3000).classname).to eq "pb_fixed_confirmation_toast_kit_tip auto_close_3000"
+      expect(subject.new(text: text).classname).to eq "pb_fixed_confirmation_toast_kit_neutral z_index_max"
+      expect(subject.new(text: text, status: "success").classname).to eq "pb_fixed_confirmation_toast_kit_success z_index_max"
+      expect(subject.new(text: text, status: "error").classname).to eq "pb_fixed_confirmation_toast_kit_error z_index_max"
+      expect(subject.new(text: text, status: "neutral").classname).to eq "pb_fixed_confirmation_toast_kit_neutral z_index_max"
+      expect(subject.new(text: text, status: "tip").classname).to eq "pb_fixed_confirmation_toast_kit_tip z_index_max"
+      expect(subject.new(text: text, status: "tip", dark: true).classname).to eq "pb_fixed_confirmation_toast_kit_tip dark z_index_max"
+      expect(subject.new(text: text, status: "tip", closeable: true).classname).to eq "pb_fixed_confirmation_toast_kit_tip remove_toast z_index_max"
+      expect(subject.new(text: text, status: "error", multi_line: true).classname).to eq "pb_fixed_confirmation_toast_kit_error_multi_line z_index_max"
+      expect(subject.new(text: text, status: "neutral", vertical: "top").classname).to eq "pb_fixed_confirmation_toast_kit_neutral z_index_max"
+      expect(subject.new(text: text, status: "neutral", vertical: "top", horizontal: "center").classname).to eq "pb_fixed_confirmation_toast_kit_neutral positioned_toast top center z_index_max"
+      expect(subject.new(text: text, status: "tip", icon: "arrow-down").classname).to eq "pb_fixed_confirmation_toast_kit_tip custom_icon z_index_max"
+      expect(subject.new(text: text, icon: "none").classname).to eq "pb_fixed_confirmation_toast_kit_neutral z_index_max"
+      expect(subject.new(text: text, status: "tip", auto_close: 3000).classname).to eq "pb_fixed_confirmation_toast_kit_tip auto_close_3000 z_index_max"
+    end
+  end
+
+  describe "z_index global prop to override default z-index" do
+    it "does not add z_index_max class when z_index prop is passed" do
+      expect(subject.new({}).classname).to include("z_index_max")
+      expect(subject.new(z_index: "10").classname).to include("z_index_10")
     end
   end
 end
