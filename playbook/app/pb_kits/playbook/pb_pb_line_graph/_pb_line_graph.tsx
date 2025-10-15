@@ -4,10 +4,11 @@ import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
 import Highcharts from "highcharts"
 import HighchartsReact from "highcharts-react-official"
-import pbCircleGraphTheme from './pbCircleChartTheme'
+import pbLineGraphTheme from './pbLineGraphTheme'
 import { globalProps } from '../utilities/globalProps'
 
-type PbCircleChartProps = {
+
+type PbLineGraphProps = {
   aria?: { [key: string]: string },
   className?: string,
   data?: { [key: string]: string },
@@ -16,7 +17,7 @@ type PbCircleChartProps = {
   options: Record<string, unknown>
 }
 
-const PbCircleChart = (props: PbCircleChartProps) => {
+const PbLineGraph = (props: PbLineGraphProps) => {
   const {
     aria = {},
   className,
@@ -29,34 +30,32 @@ const PbCircleChart = (props: PbCircleChartProps) => {
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
   const htmlProps = buildHtmlProps(htmlOptions);
-  const classes = classnames(buildCss('pb_pb_circle_chart'), globalProps(props), className)
-
+  const classes = classnames(buildCss('pb_pb_line_graph'), globalProps(props), className)
+  
   const mergedOptions = useMemo(() => {
     if (!options || typeof options !== "object") {
       // eslint-disable-next-line no-console
-      console.error("❌ Invalid options passed to <PbCircleChart />", options)
+      console.error("❌ Invalid options passed to <PbLineGraph />", options)
       return {}
     }
 
-    return Highcharts.merge({}, pbCircleGraphTheme, options)
+    return Highcharts.merge({}, pbLineGraphTheme, options)
   }, [options])
-
   return (
-
     <div>
-      <HighchartsReact
-          containerProps={{
-                  className: classnames(classes),
-                  id: id,
-                  ...ariaProps,
-                  ...dataProps,
-                  ...htmlProps
-                }}
-          highcharts={Highcharts}
-          options={mergedOptions}
-      />
+        <HighchartsReact
+            containerProps={{
+                    className: classnames(classes),
+                    id: id,
+                    ...ariaProps,
+                    ...dataProps,
+                    ...htmlProps
+                  }}
+            highcharts={Highcharts}
+            options={mergedOptions}
+        />
     </div>
   )
 }
 
-export default PbCircleChart
+export default PbLineGraph

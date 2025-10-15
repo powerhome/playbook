@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 module Playbook
-  module PbPbBarGraph
-    class PbBarGraph < ::Playbook::KitBase
+  module PbPbLineGraph
+    class PbLineGraph < ::Playbook::KitBase
       prop :options, default: {}
 
       def react_props

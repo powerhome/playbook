@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-require_relative "../../../../app/pb_kits/playbook/pb_pb_circle_chart/pb_circle_chart"
+require_relative "../../../../app/pb_kits/playbook/pb_pb_line_graph/pb_line_graph"
 
-RSpec.describe Playbook::PbPbCircleChart::PbCircleChart do
-  subject { Playbook::PbPbCircleChart::PbCircleChart }
+RSpec.describe Playbook::PbPbLineGraph::PbLineGraph do
+  subject { Playbook::PbPbLineGraph::PbLineGraph }
 
   it { is_expected.to define_prop(:options) }
 
