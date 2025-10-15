@@ -60,7 +60,8 @@ module Playbook
       end
 
       def classname
-        generate_classname("pb_fixed_confirmation_toast_kit", status, multi_line_class) + close_class + position_class + auto_close_class + icon_class
+        default_z_index = z_index.present? ? "" : " z_index_max"
+        generate_classname("pb_fixed_confirmation_toast_kit", status, multi_line_class) + close_class + position_class + auto_close_class + icon_class + default_z_index
       end
     end
   end

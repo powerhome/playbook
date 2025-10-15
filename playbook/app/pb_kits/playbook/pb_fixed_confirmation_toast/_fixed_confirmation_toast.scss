@@ -40,7 +40,6 @@ $confirmation_toast_colors: (
 
   &.positioned_toast {
     position: fixed;
-    z-index: $z_max !important;
     display: flex;
     justify-content: space-around;
     max-width: max-content;
