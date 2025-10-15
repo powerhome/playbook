@@ -25,7 +25,7 @@ type ExampleType = {
   customChildren?: boolean,
   description?: React.ReactChild[] | React.ReactChild | string | (() => JSX.Element),
   example?: string,
-  globalProps?: { [key: string]: string[] | number[] },
+  globalProps?: { [key: string]: string[] | number[] | any[] },
   globalPropsDescription?: React.ReactElement | React.ReactElement[] | string,
   screenSizes?: { [key: string]: string[] | number[] },
   secondExample?: string,
