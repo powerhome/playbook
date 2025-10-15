@@ -3,8 +3,8 @@
 module Playbook
   module PbAdvancedTable
     class TableRow < Playbook::KitBase
-      prop :id, type: Playbook::Props::String,
-                default: ""
+      prop :table_id, type: Playbook::Props::String,
+                      default: ""
       prop :column_definitions, type: Playbook::Props::Array,
                                 default: []
       prop :row
@@ -58,13 +58,13 @@ module Playbook
       # Selectable Rows No Subrows - checkboxes in their own first cell
       def render_checkbox_cell
         if selectable_rows
-          prefix = id ? "#{id}-" : ""
+          prefix = table_id ? "#{table_id}-" : ""
           pb_rails("table/table_cell", props: {
                      classname: "checkbox-cell",
                    }) do
             pb_rails("checkbox", props: {
                        id: "#{prefix}select-row-#{row_id || row.object_id}",
-                       indeterminate_parent: "#{id ? "#{id}-" : ''}select-all-rows",
+                       indeterminate_parent: "#{table_id ? "#{table_id}-" : ''}select-all-rows",
                        name: "#{prefix}select-row-#{row_id || row.object_id}",
                        data: {
                          row_id: row_id || row.object_id.to_s,
@@ -78,7 +78,7 @@ module Playbook
       # Selectable Rows w/ Subrows - checkboxes part of toggleable first cell
       def render_row_checkbox
         if selectable_rows
-          prefix = id ? "#{id}-" : ""
+          prefix = table_id ? "#{table_id}-" : ""
           indeterminate_parent =
             if depth.zero?
               "#{prefix}select-all-rows"

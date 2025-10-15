@@ -4,4 +4,6 @@ When a parent row is clicked, it will check all nested children rows, Children r
 
 The data attribute `data-selected-rows` on the parent `pb_advanced_table` div will update dynamically with each selection to show an array of ids corresponding to the current selection. 
 
-__NOTE__: Each object within the `table_data` Array must contain a unique id in order to attach an id to all Rows for this to function. 
+__NOTE__: Each object within the `table_data` Array must contain a unique id in order to attach an id to all Rows for this to function.
+
+If you want to use Subrow Headers as well, make sure to add `table_id` to the `table_header` and `table_body` subcomponents.
