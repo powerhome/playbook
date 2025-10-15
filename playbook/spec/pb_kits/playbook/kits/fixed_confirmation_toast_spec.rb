@@ -80,7 +80,8 @@ RSpec.describe Playbook::PbFixedConfirmationToast::FixedConfirmationToast do
       expect(subject.new(text: text, status: "neutral", vertical: "top", horizontal: "center").classname).to eq "pb_fixed_confirmation_toast_kit_neutral positioned_toast top center z_index_max"
       expect(subject.new(text: text, status: "tip", icon: "arrow-down").classname).to eq "pb_fixed_confirmation_toast_kit_tip custom_icon z_index_max"
       expect(subject.new(text: text, icon: "none").classname).to eq "pb_fixed_confirmation_toast_kit_neutral z_index_max"
-      expect(subject.new(text: text, status: "tip", auto_close: 3000).classname).to eq "pb_fixed_confirmation_toast_kit_tip auto_close_3000 z_index_max"
+      # auto_close MUST BE the last class, do not change this order in the following test
+      expect(subject.new(text: text, status: "tip", auto_close: 3000).classname).to eq "pb_fixed_confirmation_toast_kit_tip z_index_max auto_close_3000"
     end
   end
 
