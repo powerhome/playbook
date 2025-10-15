@@ -44,17 +44,17 @@ const ShowPage = ({
           </BreadCrumbItem>
           {isFlex ? (
             <>
-            <BreadCrumbItem href="/global_props/flex_box">
-              <Detail color="link">Flex Box</Detail>
-            </BreadCrumbItem>
+              <BreadCrumbItem href="/global_props/flex_box">
+                <Detail color="link">Flex Box</Detail>
+              </BreadCrumbItem>
               <BreadCrumbItem href="#">
-              <Detail color="link">{title}</Detail>
-            </BreadCrumbItem>
+                <Detail color="link">{title}</Detail>
+              </BreadCrumbItem>
             </>
-          ) : 
-          <BreadCrumbItem href="#">
-            <Detail color="default">{title}</Detail>
-          </BreadCrumbItem>
+          ) :
+            <BreadCrumbItem href="#">
+              <Detail color="default">{title}</Detail>
+            </BreadCrumbItem>
           }
         </BreadCrumbs>
         <Title size={1}>{title}</Title>
