@@ -7,6 +7,8 @@ import Hover from "./Examples/Hover";
 import Dark from "./Examples/Dark";
 import LineHeight from "./Examples/LineHeightGlobalProps";
 import FlexBox from "./Examples/FlexBoxGlobalProps";
+import FlexBoxOrder from "./Examples/FlexBoxOrderGlobalProps";
+import FlexBoxGap from "./Examples/FlexBoxGap";
 import Display from "./Examples/DisplayGlobalProps";
 import MaxWidth from "./Examples/MaxWidth";
 import MinWidth from "./Examples/MinWidth";
@@ -19,6 +21,8 @@ const COMPONENT_MAP = {
   cursor: Cursor,
   dark: Dark,
   flex_box: FlexBox,
+  flex_box_order: FlexBoxOrder,
+  flex_box_gap: FlexBoxGap,
   hover: Hover,
   html_options: HtmlOptions,
   margin: Margin,

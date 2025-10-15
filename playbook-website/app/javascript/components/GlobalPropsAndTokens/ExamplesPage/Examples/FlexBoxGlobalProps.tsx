@@ -5,10 +5,7 @@ import PropsExamplesTable from "../../Templates/Subcomponents/PropsExamplesTable
 import ExampleCodeCard from "../../Templates/Subcomponents/ExampleCodeCard";
 import * as FlexBoxImages from './FlexBoxImages';
 
-
-
-const DisplayGlobalProps = () => {
-
+const FlexBoxGlobalProps = () => {
 
     const sizes = {
         xs: { label: "xs", minWidth: "", maxWidth: "575px", descrption: "Extra small screens" },
@@ -21,9 +18,20 @@ const DisplayGlobalProps = () => {
 
     return (
         <>
-            <ShowPage>
+            <ShowPage title="Flex Box"
+                description={
+                    <>
+                        Flex Box enables a flexible layout structure by applying CSS Flexbox properties. It allows customization of direction, wrapping, growth, and shrinkage of child elements, making responsive layouts easier to build. For more information on Flex prop controls, refer to the{" "}
+                        <a
+                            href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/CSS_layout/Flexbox"
+                            target="_blank"
+                        >
+                            MDN document found here.
+                        </a>
+                    </>
+                }
+            >
                 <Flex gap="md" orientation="column">
-
                     <PropsExamplesTable
                         headers={[
                             "Flex Direction",
@@ -218,4 +226,4 @@ const DisplayGlobalProps = () => {
     );
 }
 
-export default DisplayGlobalProps;
+export default FlexBoxGlobalProps;

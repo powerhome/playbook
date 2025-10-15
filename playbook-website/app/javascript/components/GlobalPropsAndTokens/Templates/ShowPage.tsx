@@ -11,6 +11,7 @@ import CardHeader from "./Partials/CardHeader";
 import VisualGuide from "./Partials/VisualGuide";
 
 type ShowPageTypes = {
+  isFlex?: boolean;
   title: string;
   description?: string | ReactNode;
   descriptionSecondary?: string | ReactNode;
@@ -20,6 +21,7 @@ type ShowPageTypes = {
 };
 
 const ShowPage = ({
+  isFlex = false,
   title,
   description,
   descriptionSecondary,
@@ -40,9 +42,20 @@ const ShowPage = ({
           <BreadCrumbItem href={`/${pageType}`}>
             <Detail color="link">{pageType === "tokens" ? "Tokens" : "Global Props"}</Detail>
           </BreadCrumbItem>
+          {isFlex ? (
+            <>
+            <BreadCrumbItem href="/global_props/flex_box">
+              <Detail color="link">Flex Box</Detail>
+            </BreadCrumbItem>
+              <BreadCrumbItem href="#">
+              <Detail color="link">{title}</Detail>
+            </BreadCrumbItem>
+            </>
+          ) : 
           <BreadCrumbItem href="#">
             <Detail color="default">{title}</Detail>
           </BreadCrumbItem>
+          }
         </BreadCrumbs>
         <Title size={1}>{title}</Title>
         {pageType === "global_props" && <CardHeader />}
