@@ -53,5 +53,5 @@
 
 <%= pb_rails("advanced_table", props: { table_data: @table_data, column_definitions: column_definitions, id: "beta_sort" }) do %>
   <%= pb_rails("advanced_table/table_header", props: { column_definitions: column_definitions }) %>
-  <%= pb_rails("advanced_table/table_body", props: { id: "beta_sort", table_data: @table_data, column_definitions: column_definitions, enable_toggle_expansion: "all" }) %>
+  <%= pb_rails("advanced_table/table_body", props: { table_data: @table_data, column_definitions: column_definitions, enable_toggle_expansion: "all" }) %>
 <% end %>
