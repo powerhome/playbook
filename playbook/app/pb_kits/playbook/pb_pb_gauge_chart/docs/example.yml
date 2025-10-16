@@ -4,7 +4,7 @@ examples:
   - pb_gauge_chart_default: Default
   - pb_gauge_chart_disable_animation: Disable Animation
   - pb_gauge_chart_title: With Title
-  
+  - pb_gauge_chart_units: With Units
   
   react:
   - pb_gauge_chart_default: Default
