@@ -43,7 +43,7 @@ const FlexBoxOrderGlobalProps = () => {
                 title="Order"
                 description={
                     <>
-                        The Order prop defines the visual order of elements in a flex or grid layout. It overrides the source order to achieve alternative arrangements without changing HTML structure. For more information on Order prop controls,t refer to the{" "}
+                        The Order prop defines the visual order of elements in a flex or grid layout. It overrides the source order to achieve alternative arrangements without changing HTML structure. For more information on Order prop controls, refer to the{" "}
                         <a
                             href="https://developer.mozilla.org/en-US/docs/Web/CSS/order"
                             target="_blank"
