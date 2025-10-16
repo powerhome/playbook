@@ -1,0 +1,1 @@
+Tiptap allows you to set content within the editor using the 'content' prop within useEditor. See the code snippet below to see how this can be done. 
