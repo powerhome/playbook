@@ -1,0 +1,1 @@
+`column_styling` can also be used to control padding on all cells in a given column via the use of the `cell_padding` key/value pair. `cell_padding` lets you use 'xxs', 'xs', 'sm', 'md', 'lg', 'xl' and 'none'.

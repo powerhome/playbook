@@ -12,7 +12,8 @@
     <% end %>
     <% object.column_definitions.each_with_index do |column, index| %>
         <% next unless column[:accessor].present? %>
-        <%= pb_rails("table/table_cell", props: {  html_options: { style: { "background-color": bg_color, color: font_color } }, classname:object.td_classname(column, index)}) do %>
+        <% component_info = object.cell_component_info(column, index, bg_color, font_color) %>
+        <%= pb_rails(component_info[:name], props: component_info[:props]) do %>
             <%= pb_rails("flex", props:{ align: "center", justify: object.justify_for(column, index), classname: object.loading ? "loading-cell" : "" }) do %>
                 <% if collapsible_trail && index.zero? %>
                     <% (1..depth).each do |i| %>

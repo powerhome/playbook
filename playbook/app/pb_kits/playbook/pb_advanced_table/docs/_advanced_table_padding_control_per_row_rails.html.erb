@@ -1,0 +1,51 @@
+<% column_definitions = [
+    {
+      accessor: "year",
+      label: "Year",
+      cellAccessors: ["quarter", "month", "day"],
+    },
+    {
+      accessor: "newEnrollments",
+      label: "New Enrollments",
+    },
+    {
+      accessor: "scheduledMeetings",
+      label: "Scheduled Meetings",
+    },
+    {
+      accessor: "attendanceRate",
+      label: "Attendance Rate",
+    },
+    {
+      accessor: "completedClasses",
+      label: "Completed Classes",
+    },
+    {
+      accessor: "classCompletionRate",
+      label: "Class Completion Rate",
+    },
+    {
+      accessor: "graduatedStudents",
+      label: "Graduated Students",
+    }
+] %>
+
+<% row_styling = [
+  {
+    row_id: "1",
+    cell_padding: "md"
+  },
+  {
+    row_id: "3",
+    cell_padding: "lg"
+  },
+  {
+    row_id: "5",
+    cell_padding: "none"
+  },
+] %>
+
+<%= pb_rails("advanced_table", props: { id: "padding-control-per-row", table_data: @table_data_with_id, column_definitions: column_definitions, row_styling: row_styling }) do %>
+  <%= pb_rails("advanced_table/table_header", props: { column_definitions: column_definitions }) %>
+  <%= pb_rails("advanced_table/table_body", props: { table_data: @table_data_with_id, column_definitions: column_definitions, row_styling: row_styling }) %>
+<% end %>
