@@ -7,15 +7,6 @@ import * as FlexBoxImages from './FlexBoxImages';
 
 const FlexBoxGlobalProps = () => {
 
-    const sizes = {
-        xs: { label: "xs", minWidth: "", maxWidth: "575px", descrption: "Extra small screens" },
-        sm: { label: "sm", minWidth: "576px", maxWidth: "767px", descrption: "Small screens" },
-        md: { label: "md", minWidth: "768px", maxWidth: "991px", descrption: "Medium screens" },
-        lg: { label: "lg", minWidth: "992px", maxWidth: "1199px", descrption: "Large screens" },
-        xl: { label: "xl", minWidth: "1200px", maxWidth: "", descrption: "Extra large screens" },
-        default: { label: "default", minWidth: "", maxWidth: "", descrption: "Default is used as the final fallback and is not tied to a specific screen size." },
-    };
-
     return (
         <>
             <ShowPage title="Flex Box"
@@ -192,13 +183,13 @@ const FlexBoxGlobalProps = () => {
                     <Flex align="baseline" gap="xs" marginBottom="sm">
                         <Caption text="Rails" />
                         <Body>
-                            <ExampleCodeCard id="display-rails" text={`flex_direction:{ xs: "column", sm: "column", md: "row", lg: "row", xl: "row", default: "row" }`} />
+                            <ExampleCodeCard id="flex-direction-rails" text={`flex_direction:{ xs: "column", sm: "column", md: "row", lg: "row", xl: "row", default: "row" }`} />
                         </Body>
                     </Flex>
                     <Flex align="baseline" gap="xs">
                         <Caption text="React" />
                         <Body  >
-                            <ExampleCodeCard id="display-react" text={`flexDirection={{ xs: "column", sm: "column", md: "row", lg: "row", xl: "row", default: “row” }}`} />
+                            <ExampleCodeCard id="flex-direction-react" text={`flexDirection={{ xs: "column", sm: "column", md: "row", lg: "row", xl: "row", default: "row" }}`} />
                         </Body>
                     </Flex>
                     <Body marginY="md" text="The supported screen size keys are:" />
@@ -209,16 +200,38 @@ const FlexBoxGlobalProps = () => {
                             "Value",
                             "Description",
                         ]}
-                        rows={
-                            Object.values(sizes).map((size: { label: string; minWidth?: string; maxWidth?: string; descrption: string }) => [
-                                size.label,
-                                [
-                                    size.minWidth ? `min-width: ${size.minWidth}` : null,
-                                    size.maxWidth ? `max-width: ${size.maxWidth}` : null,
-                                ].filter(Boolean).join(", "),
-                                size.descrption,
-                            ])
-                        }
+                        rows={[
+                            [
+                                "xs",
+                                "max-width: 575px",
+                                "Extra small screens"
+                            ],
+                            [
+                                "sm",
+                                "min-width: 576px, max-width: 767px",
+                                "Small screens"
+                            ],
+                            [
+                                "md",
+                                "min-width: 768px, max-width: 991px",
+                                "Medium screens"
+                            ],
+                            [
+                                "lg",
+                                "min-width: 992px, max-width: 1199px",
+                                "Large screens"
+                            ],
+                            [
+                                "xl",
+                                "min-width: 1200px",
+                                "Extra large screens"
+                            ],
+                            [
+                                "default",
+                                "All sizes",
+                                "Default is used as a final fallback and is not tied to a specific screen size."
+                            ]
+                        ]}
                     />
                 </Card>
             </ShowPage>

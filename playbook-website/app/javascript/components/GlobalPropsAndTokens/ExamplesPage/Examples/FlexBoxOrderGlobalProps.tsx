@@ -7,14 +7,6 @@ import * as OrderImages from './OrderImages';
 
 
 const FlexBoxOrderGlobalProps = () => {
-    const sizes = {
-        xs: { label: "xs", minWidth: "", maxWidth: "575px", descrption: "Extra small screens" },
-        sm: { label: "sm", minWidth: "576px", maxWidth: "767px", descrption: "Small screens" },
-        md: { label: "md", minWidth: "768px", maxWidth: "991px", descrption: "Medium screens" },
-        lg: { label: "lg", minWidth: "992px", maxWidth: "1199px", descrption: "Large screens" },
-        xl: { label: "xl", minWidth: "1200px", maxWidth: "", descrption: "Extra large screens" },
-        default: { label: "default", minWidth: "", maxWidth: "", descrption: "Default is used as the final fallback and is not tied to a specific screen size." },
-    };
 
     const orderImagesRow = () => {
         return (
@@ -71,18 +63,18 @@ const FlexBoxOrderGlobalProps = () => {
                             "Row 1-12",
                             orderImagesRow(),
                             <>
-                                <ExampleCodeCard id="flex_order_rails_1" text="order: 1" marginBottom="xs" />
-                                <ExampleCodeCard id="flex_order_rails_2" text="order: 2" marginBottom="xs" />
-                                <ExampleCodeCard id="flex_order_rails_3" text="order: 3" marginBottom="xs" />
-                                <ExampleCodeCard id="flex_order_rails_4" text="order: 4" marginBottom="xs" />
-                                <ExampleCodeCard id="flex_order_rails_5" text="order: 5" marginBottom="xs" />
-                                <ExampleCodeCard id="flex_order_rails_6" text="order: 6" marginBottom="xs" />
-                                <ExampleCodeCard id="flex_order_rails_7" text="order: 7" marginBottom="xs" />
-                                <ExampleCodeCard id="flex_order_rails_8" text="order: 8" marginBottom="xs" />
-                                <ExampleCodeCard id="flex_order_rails_9" text="order: 9" marginBottom="xs" />
-                                <ExampleCodeCard id="flex_order_rails_10" text="order: 10" marginBottom="xs" />
-                                <ExampleCodeCard id="flex_order_rails_11" text="order: 11" marginBottom="xs" />
-                                <ExampleCodeCard id="flex_order_rails_12" text="order: 12" marginBottom="xs" />
+                                <ExampleCodeCard id="flex_order_rails_1" text='order: "1"' marginBottom="xs" />
+                                <ExampleCodeCard id="flex_order_rails_2" text='order: "2"' marginBottom="xs" />
+                                <ExampleCodeCard id="flex_order_rails_3" text='order: "3"' marginBottom="xs" />
+                                <ExampleCodeCard id="flex_order_rails_4" text='order: "4"' marginBottom="xs" />
+                                <ExampleCodeCard id="flex_order_rails_5" text='order: "5"' marginBottom="xs" />
+                                <ExampleCodeCard id="flex_order_rails_6" text='order: "6"' marginBottom="xs" />
+                                <ExampleCodeCard id="flex_order_rails_7" text='order: "7"' marginBottom="xs" />
+                                <ExampleCodeCard id="flex_order_rails_8" text='order: "8"' marginBottom="xs" />
+                                <ExampleCodeCard id="flex_order_rails_9" text='order: "9"' marginBottom="xs" />
+                                <ExampleCodeCard id="flex_order_rails_10" text='order: "10"' marginBottom="xs" />
+                                <ExampleCodeCard id="flex_order_rails_11" text='order: "11"' marginBottom="xs" />
+                                <ExampleCodeCard id="flex_order_rails_12" text='order: "12"' marginBottom="xs" />
                             </>
                             ,
                             <>
@@ -109,13 +101,13 @@ const FlexBoxOrderGlobalProps = () => {
                     <Flex align="baseline" gap="xs" marginBottom="sm">
                         <Caption text="Rails" />
                         <Body>
-                            <ExampleCodeCard id="display-rails" text={`order:{ xs: "1", sm: "1", md: "5", lg: "7", xl: "8", default: "5" }`} />
+                            <ExampleCodeCard id="flex-order-rails" text={`order:{ xs: "1", sm: "1", md: "5", lg: "7", xl: "8", default: "5" }`} />
                         </Body>
                     </Flex>
                     <Flex align="baseline" gap="xs">
                         <Caption text="React" />
                         <Body  >
-                            <ExampleCodeCard id="display-react" text={`order={{ xs: "1", sm: "1", md: "5", lg: "7", xl: "8", default: "5" }}`} />
+                            <ExampleCodeCard id="flex-order-react" text={`order={{ xs: "1", sm: "1", md: "5", lg: "7", xl: "8", default: "5" }}`} />
                         </Body>
                     </Flex>
                     <Body marginY="md" text="The supported screen size keys are:" />
@@ -126,16 +118,38 @@ const FlexBoxOrderGlobalProps = () => {
                             "Value",
                             "Description",
                         ]}
-                        rows={
-                            Object.values(sizes).map((size: { label: string; minWidth?: string; maxWidth?: string; descrption: string }) => [
-                                size.label,
-                                [
-                                    size.minWidth ? `min-width: ${size.minWidth}` : null,
-                                    size.maxWidth ? `max-width: ${size.maxWidth}` : null,
-                                ].filter(Boolean).join(", "),
-                                size.descrption,
-                            ])
-                        }
+                        rows={[
+                            [
+                                "xs",
+                                "max-width: 575px",
+                                "Extra small screens"
+                            ],
+                            [
+                                "sm",
+                                "min-width: 576px, max-width: 767px",
+                                "Small screens"
+                            ],
+                            [
+                                "md",
+                                "min-width: 768px, max-width: 991px",
+                                "Medium screens"
+                            ],
+                            [
+                                "lg",
+                                "min-width: 992px, max-width: 1199px",
+                                "Large screens"
+                            ],
+                            [
+                                "xl",
+                                "min-width: 1200px",
+                                "Extra large screens"
+                            ],
+                            [
+                                "default",
+                                "All sizes",
+                                "Default is used as a final fallback and is not tied to a specific screen size."
+                            ]
+                        ]}
                     />
                 </Card>
             </ShowPage>
