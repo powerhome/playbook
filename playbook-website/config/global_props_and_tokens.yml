@@ -8,6 +8,8 @@ global_props:
   - display
   - max_width
   - min_width
+  - number_spacing
+  - padding
   - position
   - text_align
   - overflow
@@ -30,6 +32,7 @@ tokens:
   - scale
   - screen_sizes
   - shadows
+  - spacing
   - text_align
   - titles
   - transition

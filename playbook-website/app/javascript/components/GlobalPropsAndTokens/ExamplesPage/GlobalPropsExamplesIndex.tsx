@@ -16,6 +16,8 @@ import ZIndex from "./Examples/Z-IndexGlobalProps";
 import Overflow from "./Examples/OverflowGlobalProps";
 import Truncate from "./Examples/Truncate";
 import VerticalAlign from "./Examples/VerticalAlignGlobalProps";
+import NumberSpacing from "./Examples/NumberSpacing";
+import Padding from "./Examples/Padding";
 
 const COMPONENT_MAP = {
   cursor: Cursor,
@@ -27,6 +29,8 @@ const COMPONENT_MAP = {
   display: Display,
   max_width: MaxWidth,
   min_width: MinWidth,
+  number_spacing: NumberSpacing,
+  padding: Padding,
   position: Position,
   text_align: TextAlign,
   overflow: Overflow,
