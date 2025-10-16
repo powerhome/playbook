@@ -1,0 +1,1 @@
+We are able to wrap the Highcharts Gauge kit within Playbook kits (such as Flex and Card components).
