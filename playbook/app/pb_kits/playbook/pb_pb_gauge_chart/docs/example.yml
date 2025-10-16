@@ -1,0 +1,10 @@
+examples:
+  
+  rails:
+  - pb_gauge_chart_default: Default
+  
+  
+  react:
+  - pb_gauge_chart_default: Default
+  
+  
