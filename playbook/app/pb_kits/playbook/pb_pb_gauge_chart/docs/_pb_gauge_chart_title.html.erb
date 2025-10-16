@@ -1,0 +1,14 @@
+<% data = [{ name: "Score", y: 780 }] %>
+
+<% chart_options = {
+  title: {
+    text: "Credit Score",
+  },
+  yAxis: {
+    min: 300,
+    max: 850,
+  },
+  series: [{ data: data }],
+} %>
+
+<%= pb_rails("pb_gauge_chart", props: { options: chart_options }) %>

@@ -2,6 +2,8 @@ examples:
   
   rails:
   - pb_gauge_chart_default: Default
+  - pb_gauge_chart_disable_animation: Disable Animation
+  - pb_gauge_chart_title: With Title
   
   
   react:
