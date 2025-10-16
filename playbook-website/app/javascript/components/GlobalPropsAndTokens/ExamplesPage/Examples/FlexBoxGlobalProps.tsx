@@ -198,7 +198,7 @@ const FlexBoxGlobalProps = () => {
                     <Flex align="baseline" gap="xs">
                         <Caption text="React" />
                         <Body  >
-                            <ExampleCodeCard id="display-react" text={`display={{ xs: "flex", sm: "flex", md: "flex", lg: "block", xl: "block", default: “block” }}`} />
+                            <ExampleCodeCard id="display-react" text={`flexDirection={{ xs: "column", sm: "column", md: "row", lg: "row", xl: "row", default: “row” }}`} />
                         </Body>
                     </Flex>
                     <Body marginY="md" text="The supported screen size keys are:" />
