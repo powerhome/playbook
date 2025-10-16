@@ -15,7 +15,7 @@ const FlexBoxGap = () => {
                 title="Gap"
                 description={
                     <>
-                        The Gap prop defines the spacing between child elements inside flex or grid containers. It replaces the need for margin-based spacing and ensures more predictable layout behavior. For more information on Gap prop controls{" "}
+                        The Gap prop defines the spacing between child elements inside flex or grid containers. It replaces the need for margin-based spacing and ensures more predictable layout behavior. For more information on Gap prop controls, refer to the{" "}
                         <a
                             href="https://developer.mozilla.org/en-US/docs/Web/CSS/gap"
                             target="_blank"
