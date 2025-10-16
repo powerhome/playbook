@@ -15,6 +15,7 @@ type PbGaugeChartProps = {
   data?: { [key: string]: string },
   htmlOptions?: { [key: string]: string | number | boolean | (() => void) | ((arg?: Event) => void) },
   id?: string,
+  ref?: React.RefObject<any>,
   options: Record<string, unknown>
 }
 
@@ -25,6 +26,7 @@ const PbGaugeChart = (props: PbGaugeChartProps) => {
   data = {},
   htmlOptions = {},
   id,
+  ref,
   options = {},
   } = props
 
@@ -52,6 +54,7 @@ const PbGaugeChart = (props: PbGaugeChartProps) => {
             containerProps={{
                     className: classnames(classes),
                     id: id,
+                    ref: ref,
                     ...ariaProps,
                     ...dataProps,
                     ...htmlProps

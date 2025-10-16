@@ -3,16 +3,31 @@ import { render, screen } from '../utilities/test-utils'
 
 import { PbGaugeChart } from 'playbook-ui'
 
-/* See these resources for more testing info:
-  - https://github.com/testing-library/jest-dom#usage for useage and examples
-  - https://jestjs.io/docs/en/using-matchers
-*/
+beforeEach(() => {
+  // Silences error logs within the test suite.
+  jest.spyOn(console, 'error');
+  jest.spyOn(console, 'warn');
+  console.error.mockImplementation(() => {});
+  console.warn.mockImplementation(() => {});
+});
 
-test('generated scaffold test - update me', () => {
-  const props = {
-    data: { testid: 'default' }
-  }
+afterEach(() => {
+  console.error.mockRestore();
+  console.warn.mockRestore();
+});
 
-  render(<PbGaugeChart {...props} />)
-    expect(screen.getByTestId('default')).toBeInTheDocument()
+const chartOptions = {
+  series:[{data:[{ name: "Name", y: 45 }]}]
+}
+
+const testId = 'pbgaugechart1'
+
+test('Kit to exist', () => {
+  render(
+  <PbGaugeChart
+      data={{testid: testId}} 
+      options={chartOptions} 
+  />
+)
+  expect(screen.getByTestId(testId)).toBeInTheDocument()
 })
