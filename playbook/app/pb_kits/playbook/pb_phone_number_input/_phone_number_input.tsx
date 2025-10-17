@@ -313,23 +313,23 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.Ref<unknown>
   }
 
   const handleOnChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
-  if (!hasTyped) setHasTyped(true)
+    if (!hasTyped) setHasTyped(true)
 
-  setInputValue(evt.target.value)
+    setInputValue(evt.target.value)
 
-  let phoneNumberData
+    let phoneNumberData
 
-  if (formatAsYouType) {
-    const formattedPhoneNumberData = getCurrentSelectedData(itiRef.current, evt.target.value)
-    phoneNumberData = {...formattedPhoneNumberData, number: unformatNumber(formattedPhoneNumberData.number)}
-  } else {
-    phoneNumberData = getCurrentSelectedData(itiRef.current, evt.target.value)
+    if (formatAsYouType) {
+      const formattedPhoneNumberData = getCurrentSelectedData(itiRef.current, evt.target.value)
+      phoneNumberData = {...formattedPhoneNumberData, number: unformatNumber(formattedPhoneNumberData.number)}
+    } else {
+      phoneNumberData = getCurrentSelectedData(itiRef.current, evt.target.value)
+    }
+
+    setSelectedData(phoneNumberData)
+    onChange(phoneNumberData)
+    isValid(itiRef.current.isValidNumber())
   }
-
-  setSelectedData(phoneNumberData)
-  onChange(phoneNumberData)
-  isValid(itiRef.current.isValidNumber())
-}
 
   // Separating Concerns as React Docs Recommend
   // This also Fixes things for our react_component rendering on the Rails Side
