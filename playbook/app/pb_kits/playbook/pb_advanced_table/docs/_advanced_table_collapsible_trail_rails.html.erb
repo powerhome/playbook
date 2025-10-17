@@ -31,6 +31,6 @@
 ] %>
 
 <%= pb_rails("advanced_table", props: { id: "collapsible_trail", table_data: @table_data, column_definitions: column_definitions }) do %>
-  <%= pb_rails("advanced_table/table_header", props: { column_definitions: column_definitions }) %>
-  <%= pb_rails("advanced_table/table_body", props: { table_data: @table_data, column_definitions: column_definitions, collapsible_trail: false }) %>
+  <%= pb_rails("advanced_table/table_header", props: { table_id: "collapsible_trail", column_definitions: column_definitions }) %>
+  <%= pb_rails("advanced_table/table_body", props: { table_id: "collapsible_trail", table_data: @table_data, column_definitions: column_definitions, collapsible_trail: false }) %>
 <% end %>

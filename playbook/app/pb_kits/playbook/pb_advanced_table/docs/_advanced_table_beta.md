@@ -2,7 +2,9 @@ The AdvancedTable kit accepts tree data and automatically renders expansion cont
 
 ### id
 
-A unique `id` is required to allow the table functionality to work properly. Without it, certain functions like the action bar will not be able to properly reference the correct table.
+A unique `id` is required to allow the table functionality to work properly. Without it, certain functions like the action bar, expand/collapse caching, or selectable rows will not be able to properly reference the correct table.
+
+You must also set `table_id` when using subcomponents like `table_header` or `table_body`.
 
 ### table_data
 
