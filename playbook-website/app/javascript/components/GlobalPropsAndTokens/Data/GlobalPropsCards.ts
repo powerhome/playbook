@@ -28,6 +28,13 @@ export const GlobalPropsCards = [
     link: "/global_props/flex_box",
   },
   {
+    title: "Height",
+    description:
+      "Sets fixed or responsive height values for consistent vertical sizing.",
+    icon: "arrows-up-down",
+    link: "/global_props/height",
+  },
+  {
     title: "Hover",
     description:
       "Changes element appearance on hover, allowing background, shadows, and scale adjustments.",
@@ -56,11 +63,25 @@ export const GlobalPropsCards = [
     link: "/global_props/margin",
   },
   {
+    title: "Max Height",
+    description:
+      "Sets an upper limit on an element’s height to maintain layout constraints.",
+    icon: "arrows-up-down-to-line",
+    link: "/global_props/max_height",
+  },
+  {
     title: "Max Width",
     description:
       "Restricts the maximum width of an element, ensuring responsive and consistent layouts.",
     icon: "arrows-left-right-to-line",
     link: "/global_props/max_width",
+  },
+  {
+    title: "Min Height",
+    description:
+      "Ensures a minimum vertical space, preventing content from collapsing too small.",
+    icon: "arrows-up-down-through-line",
+    link: "/global_props/min_height",
   },
   {
     title: "Min Width",

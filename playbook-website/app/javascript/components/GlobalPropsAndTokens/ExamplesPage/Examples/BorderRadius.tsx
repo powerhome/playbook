@@ -110,14 +110,6 @@ const BorderRadius = () => {
               />
             ],
             [
-              "$border_rad_lightest",
-              "1px",
-              <ExampleCodeCard
-                id="border-rad-lightest"
-                text="border-radius: $border_rad_lightest;"
-              />
-            ],
-            [
               "$border_rad_xl",
               "16px",
               <ExampleCodeCard

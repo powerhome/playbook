@@ -129,8 +129,8 @@ const ZIndex = () => {
                   "Z-Index",
                   <ExampleCodeCard text="union" copyIcon={false} />,
                   <ValuesCards />,
-                  <ExampleCodeCard text={`z_index:"5"`} />,
-                  <ExampleCodeCard text={`zIndex="5"`} />
+                  <ExampleCodeCard id="z-index-rails" text={`z_index:"5"`} />,
+                  <ExampleCodeCard id="z-index-react" text={`zIndex="5"`} />
                 ]
               ]
             }
