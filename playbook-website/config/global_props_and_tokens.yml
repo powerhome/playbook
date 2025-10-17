@@ -1,6 +1,9 @@
 global_props:
   - cursor
   - dark
+  - flex_box
+  - flex_box_order
+  - flex_box_gap
   - height
   - hover
   - html_options
@@ -11,6 +14,8 @@ global_props:
   - max_width
   - min_height
   - min_width
+  - number_spacing
+  - padding
   - position
   - text_align
   - overflow
@@ -33,6 +38,7 @@ tokens:
   - scale
   - screen_sizes
   - shadows
+  - spacing
   - text_align
   - titles
   - transition

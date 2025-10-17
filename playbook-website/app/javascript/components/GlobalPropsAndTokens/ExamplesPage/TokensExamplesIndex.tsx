@@ -17,6 +17,7 @@ import Titles from "./Examples/Titles";
 import Transition from "./Examples/Transition";
 import Typography from "./Examples/Typography";
 import Colors from "./Examples/Colors";
+import Spacing from "./Examples/Spacing";
 
 const COMPONENT_MAP = {
   animation: Animation,
@@ -31,6 +32,7 @@ const COMPONENT_MAP = {
   scale: Scale,
   screen_sizes: ScreenSizes,
   shadows: Shadows,
+  spacing: Spacing,
   text_align: TextAlign,
   titles: Titles,
   transition: Transition,
