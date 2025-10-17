@@ -315,16 +315,17 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.Ref<unknown>
   const handleOnChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
   if (!hasTyped) setHasTyped(true)
 
-  const currentValue = evt.target.value
+  setInputValue(evt.target.value)
 
-  setInputValue(currentValue)
   let phoneNumberData
+
   if (formatAsYouType) {
-    const formattedPhoneNumberData = getCurrentSelectedData(itiRef.current, currentValue)
+    const formattedPhoneNumberData = getCurrentSelectedData(itiRef.current, evt.target.value)
     phoneNumberData = {...formattedPhoneNumberData, number: unformatNumber(formattedPhoneNumberData.number)}
   } else {
-    phoneNumberData = getCurrentSelectedData(itiRef.current, currentValue)
+    phoneNumberData = getCurrentSelectedData(itiRef.current, evt.target.value)
   }
+
   setSelectedData(phoneNumberData)
   onChange(phoneNumberData)
   isValid(itiRef.current.isValidNumber())
