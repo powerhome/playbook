@@ -1,0 +1,39 @@
+<% data1 = [{ name: 'Data Used', y: 32 }] %>
+<% data2 = [{ name: 'Sales to Date', y: 65 }] %>
+
+<% chart_options_1 = {
+  title: {
+    text: "Data Usage",
+  },
+  series: [{ data: data1 }],
+  plotOptions: {
+    solidgauge: {
+      dataLabels: {
+        format:
+          '<span class="fix">{y:,f}</span>' +
+          '<span style="fill: #687887; font-size: 27px;">GB</span>',
+      },
+    },
+  },
+} %>
+
+<% chart_options_2 = {
+  title: {
+    text: "Sales Goal",
+  },
+  series: [{ data: data2 }],
+  plotOptions: {
+    solidgauge: {
+      dataLabels: {
+        format:
+          '<span y="28" style="fill: #687887; font-size: 16px;">$</span>' +
+          '<span class="fix" y="38">{y:,f}</span>' +
+          '<span style="fill: #687887; font-size: 27px;">k</span>',
+      },
+    },
+  },
+} %>
+
+
+<%= pb_rails("pb_gauge_chart", props: { options: chart_options_1 }) %>
+<%= pb_rails("pb_gauge_chart", props: { options: chart_options_2 }) %>

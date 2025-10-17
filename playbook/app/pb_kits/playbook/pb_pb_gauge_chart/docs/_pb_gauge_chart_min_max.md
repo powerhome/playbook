@@ -1,0 +1,1 @@
+By default, Highcharts set min to 0 and max to 100 but this can be customized if needed as shown here.
