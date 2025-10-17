@@ -186,7 +186,7 @@ type VerticalAlign =  {
   verticalAlign?: "baseline" | "super" | "top" | "middle" | "bottom" | "sub" | "text-top" | "text-bottom"
 }
 
-type ZIndexType = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10
+type ZIndexType = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 'max'
 type ZIndexResponsiveType = {[key: string]: ZIndexType}
 type ZIndex = {
   zIndex?: ZIndexType,
@@ -439,6 +439,8 @@ const PROP_CATEGORIES: {[key:string]: (props: {[key: string]: any}) => string} =
           Object.entries(zIndexEntry[1]).forEach((zIndexObj) => {
             css += `z_index_${zIndexObj[0]}_${zIndexObj[1]} `
           })
+        } else if (zIndexEntry[1] === 'max') {
+          css += `z_index_max `
         }
       }
     })

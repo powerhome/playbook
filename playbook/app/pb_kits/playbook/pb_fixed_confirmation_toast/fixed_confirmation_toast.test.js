@@ -76,3 +76,13 @@ test('renders position when provided', () => {
     );
     expect(container.querySelector('.positioned_toast')).toBeInTheDocument();
 });
+
+test('renders max zIndex by default', () => {
+    const { container } = render(<FixedConfirmationToast />);
+    expect(container.querySelector('.z_index_max')).toBeInTheDocument();
+});
+
+test('applies custom zIndex when provided', () => {
+    const { container } = render(<FixedConfirmationToast zIndex={10} />);
+    expect(container.querySelector('.z_index_10')).toBeInTheDocument();
+});

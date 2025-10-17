@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import classnames from "classnames";
 
-import { globalProps } from "../utilities/globalProps";
+import { globalProps, GlobalProps } from "../utilities/globalProps";
 import { buildHtmlProps } from "../utilities/props";
 import { VoidCallback } from "../types";
 
@@ -31,7 +31,8 @@ type FixedConfirmationToastProps = {
   status?: "success" | "error" | "neutral" | "tip";
   text?: string;
   vertical?: "top" | "bottom";
-};
+  zIndex?: number | string;
+} & GlobalProps
 
 const FixedConfirmationToast = (props: FixedConfirmationToastProps): React.ReactElement => {
   const [showToast, toggleToast] = useState(true);
@@ -50,6 +51,7 @@ const FixedConfirmationToast = (props: FixedConfirmationToastProps): React.React
     status = "neutral",
     text,
     vertical,
+    zIndex = 'max',
   } = props;
 
   const returnedIcon = icon || iconMap[status]
@@ -59,7 +61,7 @@ const FixedConfirmationToast = (props: FixedConfirmationToastProps): React.React
     `pb_fixed_confirmation_toast_kit_${status}${multiLine ? '_multi_line' : ''}`,
     { [`positioned_toast ${vertical} ${horizontal}`]: vertical && horizontal },
     `${iconClass}`,
-    globalProps(props),
+    globalProps(props, { zIndex }),
     className
   );
 

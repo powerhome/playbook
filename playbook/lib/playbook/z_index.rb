@@ -7,7 +7,7 @@ module Playbook
     end
 
     def z_index_values
-      %w[1 2 3 4 5 6 7 8 9 10]
+      %w[1 2 3 4 5 6 7 8 9 10 max]
     end
 
     def z_index_options
