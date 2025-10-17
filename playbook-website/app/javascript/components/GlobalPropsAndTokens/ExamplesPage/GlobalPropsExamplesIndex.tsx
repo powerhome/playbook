@@ -16,16 +16,22 @@ import ZIndex from "./Examples/Z-IndexGlobalProps";
 import Overflow from "./Examples/OverflowGlobalProps";
 import Truncate from "./Examples/Truncate";
 import VerticalAlign from "./Examples/VerticalAlignGlobalProps";
+import Height from "./Examples/Height";
+import MaxHeight from "./Examples/MaxHeight";
+import MinHeight from "./Examples/MinHeight";
 
 const COMPONENT_MAP = {
   cursor: Cursor,
   dark: Dark,
+  height: Height,
   hover: Hover,
   html_options: HtmlOptions,
   margin: Margin,
   line_height: LineHeight,
   display: Display,
+  max_height: MaxHeight,
   max_width: MaxWidth,
+  min_height: MinHeight,
   min_width: MinWidth,
   position: Position,
   text_align: TextAlign,

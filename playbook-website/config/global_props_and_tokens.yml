@@ -1,12 +1,15 @@
 global_props:
   - cursor
   - dark
+  - height
   - hover
   - html_options
   - margin
   - line_height
   - display
+  - max_height
   - max_width
+  - min_height
   - min_width
   - position
   - text_align
