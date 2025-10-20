@@ -1,4 +1,4 @@
-import React, { useState, useEffect, forwardRef} from 'react'
+import React, { useState, useEffect, forwardRef, useRef} from 'react'
 import Select from 'react-select'
 import AsyncSelect from 'react-select/async'
 import CreateableSelect from 'react-select/creatable'
@@ -139,6 +139,59 @@ const Typeahead = forwardRef<HTMLInputElement, TypeaheadProps>(({
       }
     : props.onBlur
 
+  // Create a ref to access React Select instance
+  const selectRef = useRef<any>(null)
+
+  // Configure focus on selected option using React Select's API
+  const handleMenuOpen = () => {
+    setTimeout(() => {
+      const currentValue = props.value || props.defaultValue
+      if (currentValue && selectRef.current) {
+
+        const options = props.options
+        if (options) {
+          // Find the index of the current value
+          const focusedIndex = options.findIndex((option: any) => {
+            const optionValue = props.getOptionValue ? props.getOptionValue(option) : option.value
+            const currentOptionValue = props.getOptionValue ? props.getOptionValue(currentValue) : currentValue.value
+            return optionValue === currentOptionValue
+          })
+          
+          if (focusedIndex >= 0 && options[focusedIndex]) {
+            // Use React Select's internal state to set focused option
+            if (selectRef.current && selectRef.current.setState) {
+              const targetOption = options[focusedIndex]
+              selectRef.current.setState({
+                focusedOption: targetOption,
+                focusedValue: null
+              })
+              
+              // Handle scrolling so selected option is visible
+              setTimeout(() => {
+                if (selectRef.current && selectRef.current.menuListRef) {
+                  const menuElement = selectRef.current.menuListRef
+                  if (menuElement && menuElement.children && menuElement.children[focusedIndex]) {
+                    // Calculate the position of the selected option and scroll the menu container
+                    const optionElement = menuElement.children[focusedIndex] as HTMLElement
+                    const optionTop = optionElement.offsetTop
+                    
+                    // Set the menu's scrollTop to position the selected option at the top
+                    menuElement.scrollTop = optionTop
+                  }
+                }
+              }, 20)
+            }
+          }
+        }
+      }
+    }, 0)
+    
+    // Call original onMenuOpen if provided
+    if (props.onMenuOpen) {
+      props.onMenuOpen()
+    }
+  }
+
   const selectProps = {
     cacheOptions: true,
     required,
@@ -172,6 +225,7 @@ const Typeahead = forwardRef<HTMLInputElement, TypeaheadProps>(({
     ...(preserveSearchInput ? { inputValue } : {}),
     onInputChange: handleInputChange,
     onBlur: handleBlur,
+    onMenuOpen: handleMenuOpen,
     ...props,
   }
 
@@ -269,7 +323,7 @@ const Typeahead = forwardRef<HTMLInputElement, TypeaheadProps>(({
     }
 
     if (action === 'select-option') {
-      if (selectProps.onMultiValueClick) selectProps.onMultiValueClick(option)
+      if (selectProps.onMultiValueClick && option) selectProps.onMultiValueClick(option)
       const multiValueClearEvent = new CustomEvent(`pb-typeahead-kit-${selectProps.id}-result-option-select`, { detail: option ? option : _data })
       document.dispatchEvent(multiValueClearEvent)
     }
@@ -317,6 +371,7 @@ const Typeahead = forwardRef<HTMLInputElement, TypeaheadProps>(({
           error={errorDisplay}
           isDisabled={disabled}
           onChange={handleOnChange}
+          ref={selectRef}
           {...selectProps}
       />
     </div>

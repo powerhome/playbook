@@ -16,3 +16,4 @@ export { default as TypeaheadTruncatedText } from './_typeahead_truncated_text.j
 export { default as TypeaheadReactHook } from './_typeahead_react_hook.jsx'
 export { default as TypeaheadDisabled } from './_typeahead_disabled.jsx'
 export { default as TypeaheadPreserveInput } from './_typeahead_preserve_input.jsx'
+export { default as TypeaheadDefaultValue } from './_typeahead_default_value.jsx'

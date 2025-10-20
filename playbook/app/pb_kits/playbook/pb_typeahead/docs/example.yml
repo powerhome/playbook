@@ -19,6 +19,7 @@ examples:
 
   react:
     - typeahead_default: Default
+    - typeahead_default_value: With Default Value
     - typeahead_react_hook: React Hook
     - typeahead_with_highlight: With Highlight
     - typeahead_with_pills: With Pills
