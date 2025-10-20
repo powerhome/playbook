@@ -155,7 +155,7 @@ const Typeahead = forwardRef<HTMLInputElement, TypeaheadProps>(({
       }
       
       // Only apply custom focus if user has NOT made a selection yet
-      if (currentValue && selectRef.current && !hasUserSelected) {
+      if (currentValue && selectRef.current && !hasUserSelected && !props.isMulti) {
 
         const options = props.options
         if (options) {
