@@ -147,7 +147,13 @@ const Typeahead = forwardRef<HTMLInputElement, TypeaheadProps>(({
   // Configure focus on selected option using React Select's API
   const handleMenuOpen = () => {
     setTimeout(() => {
-      const currentValue = props.value || props.defaultValue
+      let currentValue = props.value || props.defaultValue
+
+      // Handle react rendered rails version which passes arrays even for single selects
+      if (Array.isArray(currentValue) && currentValue.length > 0) {
+        currentValue = currentValue[0]
+      }
+      
       // Only apply custom focus if user has NOT made a selection yet
       if (currentValue && selectRef.current && !hasUserSelected) {
 

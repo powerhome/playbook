@@ -1,7 +1,7 @@
 examples:
   rails:
     - typeahead_default: Default
-    # - typeahead_default_options: With Default Options
+    - typeahead_default_options: With Default Options
     - typeahead_with_context: With Context
     - typeahead_with_pills: With Pills
     - typeahead_without_pills: Without Pills (Single Select)
