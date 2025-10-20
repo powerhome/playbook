@@ -331,8 +331,12 @@ export default class PbAdvancedTable extends PbEnhancedElement {
         // Split the dataContent to get all ancestor IDs, check against ExpandedRows
         const ancestorIds = dataContent.split("-").slice(0, -1);
 
+        // Get the table_id from the child row's parent to construct proper prefixed IDs
+        const parentRowId = childRow.dataset.rowParent;
+        const tableId = parentRowId ? parentRowId.split('_').slice(0, -1).join('_') : '';
+
         const prefixedAncestorIds = ancestorIds.map(
-          (id) => `${childRow.id}_${id}`
+          (id) => `${tableId}_${id}`
         );
         const allAncestorsExpanded = prefixedAncestorIds.every((id) =>
           PbAdvancedTable.expandedRows.has(id)

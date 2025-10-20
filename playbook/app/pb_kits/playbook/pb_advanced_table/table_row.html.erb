@@ -34,7 +34,7 @@
                             <% end %>
                             <% if object.row[:children].present? %>
                                 <button
-                                    id="<%= "#{object.id}_#{object.row.object_id}" %>"
+                                    id="<%= "#{object.table_id}_#{object.row.object_id}" %>"
                                     class="gray-icon expand-toggle-icon"
                                     data-advanced-table="true"
                                     style="color: <%= button_color %>"
