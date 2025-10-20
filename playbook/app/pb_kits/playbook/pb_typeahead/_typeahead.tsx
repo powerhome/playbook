@@ -30,6 +30,7 @@ import { GenericObject, Noop } from '../types'
  * a remote location to populate the options
  * @prop {string} label - the text for the optional typeahead input label
  * @prop {boolean} preserveSearchInput - whether to preserve the input value when the field loses focus
+ * @prop {boolean} hideClearIndicator - whether to hide the clear indicator (X button)
  */
 
 type TypeaheadProps = {
@@ -58,6 +59,7 @@ type TypeaheadProps = {
   searchContextSelector?: string,
   clearOnContextChange?: boolean,
   preserveSearchInput?: boolean,
+  hideClearIndicator?: boolean,
 } & GlobalProps
 
 export type SelectValueType = {
@@ -100,6 +102,7 @@ const Typeahead = forwardRef<HTMLInputElement, TypeaheadProps>(({
   validation,
   clearOnContextChange = false,
   preserveSearchInput = false, // Default to false to maintain backward compatibility
+  hideClearIndicator = false,
   ...props
 }: TypeaheadProps) => {
   // State to manage the input value when preserveSearchInput is true
@@ -144,7 +147,7 @@ const Typeahead = forwardRef<HTMLInputElement, TypeaheadProps>(({
     required,
     components: {
       Control,
-      ClearIndicator,
+      ClearIndicator: hideClearIndicator ? null : ClearIndicator,
       IndicatorsContainer,
       IndicatorSeparator: null as null,
       MenuList,
@@ -160,7 +163,7 @@ const Typeahead = forwardRef<HTMLInputElement, TypeaheadProps>(({
     defaultOptions: true,
     id: id || uniqueId(),
     inline: false,
-    isClearable: true,
+    isClearable: !hideClearIndicator,
     isSearchable: true,
     name,
     multiKit: '',

@@ -1,0 +1,33 @@
+<%
+  options = [
+    { label: 'Windows', value: 'windows' },
+    { label: 'Siding', value: 'siding' },
+    { label: 'Doors', value: 'doors' },
+    { label: 'Roofs', value: 'roofs' },
+    { label: 'Gutters', value: 'gutters' },
+    { label: 'Solar', value: 'solar' },
+  ]
+%>
+
+<%= pb_rails("typeahead", props: {
+    id: "typeahead-single-hide-clear",
+    options: options,
+    label: "Single Product (Clear Button Hidden)",
+    name: :single_hide_clear,
+    is_multi: false,
+    hide_clear_indicator: true,
+    default_options: [options[0]]
+  })
+%>
+
+<%= pb_rails("typeahead", props: {
+    id: "typeahead-hide-clear",
+    placeholder: "Select Products",
+    options: options,
+    label: "Products (Clear Button Hidden)",
+    name: :multi_hide_clear,
+    pills: true,
+    hide_clear_indicator: true,
+    default_options: [options[0], options[1]]
+  })
+%>

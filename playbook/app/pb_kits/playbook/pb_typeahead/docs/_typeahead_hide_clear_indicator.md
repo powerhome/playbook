@@ -1,0 +1,1 @@
+The `hide_clear_indicator` / `hideClearIndicator` prop removes the "x" on the right side of the input that clears all selections. For Single Select inputs, this prevents clearing the input entirely. For Multi Select inputs, you can still remove selections one by one via keyboard controls (but cannot clear all selections at once).

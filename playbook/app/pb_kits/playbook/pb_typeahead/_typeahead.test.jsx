@@ -138,3 +138,19 @@ test('typeahead with colored pills', () => {
   const pill = kit.querySelector(".pb_form_pill_kit.pb_form_pill_neutral")
   expect(pill).toBeInTheDocument()
 })
+
+test('typeahead with hideClearIndicator hides clear button', () => {
+  render(
+    <Typeahead
+        data={{ testid: 'hide-clear-test' }}
+        defaultValue={[options[0]]}
+        hideClearIndicator
+        isMulti
+        options={options}
+    />
+  )
+
+  const kit = screen.getByTestId('hide-clear-test')
+  const clearIndicator = kit.querySelector(".typeahead-kit-select__clear-indicator")
+  expect(clearIndicator).not.toBeInTheDocument()
+})
