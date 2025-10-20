@@ -94,6 +94,14 @@ const ZIndex = () => {
               />
             ],
             [
+              "max",
+              "999999",
+              <ExampleCodeCard
+                id="z-index-max"
+                text="z-index: $z_max;"
+              />
+            ],
+            [
               "header",
               "1000",
               <ExampleCodeCard

@@ -58,6 +58,10 @@
   z-index: $z_10 !important;
 }
 
+.z_index_max {
+  z-index: $z_max !important;
+}
+
 $zIndex_values: (
   1: $z_1,
   2: $z_2,
@@ -68,7 +72,8 @@ $zIndex_values: (
   7: $z_7,
   8: $z_8,
   9: $z_9,
-  10: $z_10
+  10: $z_10,
+  max: $z_max
 );
 
 @each $size, $size_value in $breakpoints_grid {

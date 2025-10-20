@@ -1,5 +1,5 @@
 import React from "react";
-import { Flex, FlexItem, Card, Title, Caption } from "playbook-ui";
+import { Flex, Card, Title, Caption } from "playbook-ui";
 import ShowPage from "../../Templates/ShowPage";
 import PropsExamplesTable from "../../Templates/Subcomponents/PropsExamplesTable";
 import ExampleCodeCard from "../../Templates/Subcomponents/ExampleCodeCard";
@@ -18,13 +18,14 @@ const ZIndex = () => {
       { name: "8", value: "800"},
       { name: "9", value: "900"},
       { name: "10", value: "1000"},
+      { name: "max", value: "999999"},
     ];
 
-    const cardIndexes = ["2", "3", "4", "5", "6", "7", "8", "9", "10"]
+    const cardIndexes = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "max"]
 
     const ZIndexCard = () => {
         return (
-          <Flex maxWidth="100%">
+          <Flex maxWidth="100%" wrap>
             <Card
               borderRadius="none"
               padding="xl"
