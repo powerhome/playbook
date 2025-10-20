@@ -5,6 +5,13 @@ examples:
   - pb_gauge_chart_disable_animation: Disable Animation
   - pb_gauge_chart_title: With Title
   - pb_gauge_chart_units: With Units
+  - pb_gauge_chart_full_circle: Full Circle
+  - pb_gauge_chart_min_max: With Min and Max Labels
+  - pb_gauge_chart_sizing: Sizing
+  - pb_gauge_chart_height: Height
+  - pb_gauge_chart_color: Custom Color
+  - pb_gauge_chart_complex: Complex Example
+  
   
   react:
   - pb_gauge_chart_default: Default

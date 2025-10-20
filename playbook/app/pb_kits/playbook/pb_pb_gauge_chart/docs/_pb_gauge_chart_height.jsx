@@ -34,7 +34,7 @@ const chartOptions2 = {
       dataLabels: {
         format:
           `<span class="fix">{y:,f}</span>` +
-          `<span style="fill: ${colors.text_lt_light}; font-size: ${typography.text_larger};">px</span>`,
+          `<span style="fill: ${colors.text_lt_light}; font-size: ${typography.text_larger};">%</span>`,
       },
     },
   },

@@ -1,0 +1,12 @@
+<% data = [{ name: "Name", y: 67 }] %>
+
+<% chart_options = {
+  series: [{ data: data }],
+  plotOptions: {
+    solidgauge: {
+      borderColor: '#00C4D7',
+    }
+  },
+} %>
+
+<%= pb_rails("pb_gauge_chart", props: { options: chart_options }) %>
