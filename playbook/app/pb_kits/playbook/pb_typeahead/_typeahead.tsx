@@ -106,6 +106,8 @@ const Typeahead = forwardRef<HTMLInputElement, TypeaheadProps>(({
   const [inputValue, setInputValue] = useState("")
   // State to track if form has been submitted to control validation display for react rendered rails kit
   const [formSubmitted, setFormSubmitted] = useState(false)
+  // State to track if user has made a selection (to disable defaultValue focus behavior)
+  const [hasUserSelected, setHasUserSelected] = useState(false)
 
   // If preserveSearchInput is true, we need to control the input value
   const handleInputChange = preserveSearchInput
@@ -146,7 +148,8 @@ const Typeahead = forwardRef<HTMLInputElement, TypeaheadProps>(({
   const handleMenuOpen = () => {
     setTimeout(() => {
       const currentValue = props.value || props.defaultValue
-      if (currentValue && selectRef.current) {
+      // Only apply custom focus if user has NOT made a selection yet
+      if (currentValue && selectRef.current && !hasUserSelected) {
 
         const options = props.options
         if (options) {
@@ -174,9 +177,12 @@ const Typeahead = forwardRef<HTMLInputElement, TypeaheadProps>(({
                     // Calculate the position of the selected option and scroll the menu container
                     const optionElement = menuElement.children[focusedIndex] as HTMLElement
                     const optionTop = optionElement.offsetTop
+                    const optionHeight = optionElement.offsetHeight
+                    const menuHeight = menuElement.clientHeight
                     
-                    // Set the menu's scrollTop to position the selected option at the top
-                    menuElement.scrollTop = optionTop
+                    // Set the menu's scrollTop to position the selected option in the middle
+                    const scrollToMiddle = optionTop - (menuHeight / 2) + (optionHeight / 2)
+                    menuElement.scrollTop = Math.max(0, scrollToMiddle)
                   }
                 }
               }, 20)
@@ -315,6 +321,8 @@ const Typeahead = forwardRef<HTMLInputElement, TypeaheadProps>(({
     // Reset form submitted state when a selection is made (this is all for react rendered rails kit)
     if (action === 'select-option') {
       setFormSubmitted(false)
+      // Mark that user has made a selection to disable default value focus behavior
+      setHasUserSelected(true)
     }
 
     // If a value is selected and we're preserving input on blur, clear the input

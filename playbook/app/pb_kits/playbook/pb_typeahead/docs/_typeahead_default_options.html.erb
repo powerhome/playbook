@@ -1,8 +1,5 @@
-import React from 'react'
-
-import Typeahead from '../_typeahead'
-
-const options = [
+<%
+  options = [
   { label: 'Orange', value: '#FFA500' },
   { label: 'Red', value: '#FF0000' },
   { label: 'Green', value: '#1e3d1eff' },
@@ -25,17 +22,15 @@ const options = [
   { label: 'Gold', value: '#FFD700' },
   { label: 'Beige', value: '#F5F5DC' },
   { label: 'Coral', value: '#FF7F50' }
-]
+  ]
+%>
 
-const TypeaheadDefaultValue = (props) => {
-  return (
-    <Typeahead
-        defaultValue={options[10]}
-        label="Colors"
-        options={options}
-        {...props}
-    />
-  )
-}
-
-export default TypeaheadDefaultValue
+<%= pb_rails("typeahead", props: {
+    default_options: [{ label: 'Gray', value: '#808080' }],
+    id: "typeahead-default-value",
+    options: options,
+    label: "Colors",
+    name: :foo,
+    is_multi: false
+  })
+%>
