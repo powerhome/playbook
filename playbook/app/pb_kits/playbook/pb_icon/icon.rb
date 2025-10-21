@@ -110,7 +110,8 @@ module Playbook
         svg["class"] = %w[pb_custom_icon svg-inline--fa].concat([object.custom_icon_classname]).join(" ")
         svg["id"] = object.id
         svg["data"] = object.data
-        svg["width"] = "1em"
+        svg["height"] = "auto"
+        svg["width"] = "auto"
         svg["tabindex"] = object.tabindex
         fill_color = object.color || "currentColor"
         doc.at_css("path")["fill"] = fill_color
