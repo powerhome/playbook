@@ -57,7 +57,7 @@
     "@types/flatpickr": "3.1.2",
     "@types/jest": "26.0.14",
     "@types/react": "17.0.54",
-    "@types/react-dom": "^18.0.11",
+    "@types/react-dom": "^19.2.2",
     "@types/react-highlight-words": "^0.20.0",
     "@types/react-modal": "3.16.1",
     "@typescript-eslint/eslint-plugin": "4.33.0",
@@ -76,7 +76,7 @@
     "jest-fail-on-console": "3.2.0",
     "lazysizes": "^5.3.2",
     "react": "^17.0.2",
-    "react-dom": "^17.0.2",
+    "react-dom": "^19.2.0",
     "react-dropzone": "^14.3.5",
     "react-highlight-words": "^0.20.0",
     "react-modal": "^3.16.1",
@@ -95,7 +95,7 @@
   },
   "peerDependencies": {
     "react": "^17.0.2",
-    "react-dom": "^17.0.2",
+    "react-dom": "^19.2.0",
     "react-is": "^17.0.2",
     "react-trix": "0.10.1",
     "trix": "2.1.15"
