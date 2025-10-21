@@ -34,7 +34,7 @@ exports[`html structure is correct 1`] = `
                 fill="none"
                 height="1.5em"
                 viewBox="0 0 30 25"
-                width="1em"
+                width="1.5em"
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <path
