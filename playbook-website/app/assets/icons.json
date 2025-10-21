@@ -820,6 +820,10 @@
     "category": "Files"
   },
   {
+    "name": "file-signature",
+    "category": "Files"
+  },
+  {
     "name": "file-spreadsheet",
     "category": "Files"
   },
@@ -1634,6 +1638,10 @@
   {
     "name": "sack-dollar",
     "category": "Sales"
+  },
+  {
+    "name": "fingerprint",
+    "category": "Security"
   },
   {
     "name": "key",
