@@ -12,7 +12,7 @@ import {
 
 import Example from '../Templates/Example'
 
-const ZINDEX = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+const ZINDEX = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 'max']
 const TOKENS = {
   '$z_1': 100,
   '$z_2': 200,
@@ -24,6 +24,7 @@ const TOKENS = {
   '$z_8': 800,
   '$z_9': 900,
   '$z_10': 1000,
+  '$z_max': 999999
 }
 
 const screenSizeProps = {
@@ -124,7 +125,7 @@ const ZIndex = ({ example, tokensExample }: { example: string, tokensExample?: s
             className="zIndex"
             key={`token-example-${token}`}
             shadow="deeper"
-            zIndex={TOKENS[token] / 100}
+            zIndex={token === '$z_max' ? 'max' : TOKENS[token] / 100}
           >
             <Body>{token}</Body>
             <Caption size="md">{`value: ${TOKENS[token]}`}</Caption>

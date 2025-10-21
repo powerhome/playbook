@@ -3,8 +3,8 @@
 module Playbook
   module PbAdvancedTable
     class TableBody < Playbook::KitBase
-      prop :id, type: Playbook::Props::String,
-                default: ""
+      prop :table_id, type: Playbook::Props::String,
+                      default: ""
       prop :table_data, type: Playbook::Props::Array,
                         default: []
       prop :column_definitions, type: Playbook::Props::Array,
@@ -53,7 +53,7 @@ module Playbook
         subrow_data_attributes = {
           advanced_table_content: subrow_ancestor_ids.join("-"),
           row_depth: current_depth,
-          row_parent: "#{id}_#{ancestor_ids.last}",
+          row_parent: "#{table_id}_#{ancestor_ids.last}",
         }
         # Subrow header if applicable
         output << pb_rails("advanced_table/table_subrow_header", props: { row: row, column_definitions: leaf_columns, depth: current_depth, subrow_header: subrow_headers[current_depth - 1], collapsible_trail: collapsible_trail, classname: "toggle-content", responsive: responsive, subrow_data_attributes: subrow_data_attributes, last_row: last_row, immediate_parent_row_id: immediate_parent_row_id }) if is_first_child_of_subrow && enable_toggle_expansion == "all"
@@ -69,7 +69,7 @@ module Playbook
                                   end
 
         # Additional class and data attributes needed for toggle logic
-        output << pb_rails("advanced_table/table_row", props: { id: id, row: row, column_definitions: leaf_columns, depth: current_depth, collapsible_trail: collapsible_trail, classname: additional_classes, table_data_attributes: current_data_attributes, responsive: responsive, loading: loading, selectable_rows: selectable_rows, row_id: row[:id], enable_toggle_expansion: enable_toggle_expansion, row_styling: row_styling, last_row: last_row, immediate_parent_row_id: immediate_parent_row_id })
+        output << pb_rails("advanced_table/table_row", props: { table_id: table_id, row: row, column_definitions: leaf_columns, depth: current_depth, collapsible_trail: collapsible_trail, classname: additional_classes, table_data_attributes: current_data_attributes, responsive: responsive, loading: loading, selectable_rows: selectable_rows, row_id: row[:id], enable_toggle_expansion: enable_toggle_expansion, row_styling: row_styling, last_row: last_row, immediate_parent_row_id: immediate_parent_row_id })
 
         if row[:children].present?
           row[:children].each do |child_row|
@@ -78,9 +78,9 @@ module Playbook
             data_content = new_ancestor_ids.join("-") + "-#{child_row.object_id}"
 
             child_data_attributes = {
-              top_parent: "#{id}_#{top_parent_id}",
+              top_parent: "#{table_id}_#{top_parent_id}",
               row_depth: current_depth + 1,
-              row_parent: "#{id}_#{immediate_parent_id}",
+              row_parent: "#{table_id}_#{immediate_parent_id}",
               advanced_table_content: data_content,
             }
 

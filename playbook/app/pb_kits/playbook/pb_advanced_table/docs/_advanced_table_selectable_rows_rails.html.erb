@@ -34,6 +34,6 @@
 %>
 
 <%= pb_rails("advanced_table", props: { id: "selectable_rows", table_data: @table_data_with_id, column_definitions: column_definitions, selectable_rows: true }) do %>
-  <%= pb_rails("advanced_table/table_header", props: { id: "selectable_rows", column_definitions: column_definitions, selectable_rows: true }) %>
-  <%= pb_rails("advanced_table/table_body", props: { id: "selectable_rows", table_data: @table_data_with_id, column_definitions: column_definitions, subrow_headers: subrow_headers, enable_toggle_expansion: "all", selectable_rows: true }) %>
+  <%= pb_rails("advanced_table/table_header", props: { table_id: "selectable_rows", column_definitions: column_definitions, selectable_rows: true }) %>
+  <%= pb_rails("advanced_table/table_body", props: { table_id: "selectable_rows", table_data: @table_data_with_id, column_definitions: column_definitions, subrow_headers: subrow_headers, enable_toggle_expansion: "all", selectable_rows: true }) %>
 <% end %>
