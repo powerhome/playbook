@@ -4,7 +4,7 @@ dependencies:
 machine:
   directory: playbook-website/
   environment:
-    CLUSTER: wc-prod-hq
+    CLUSTER: wc-prod-gm
 
 deploy: &deploy
   max_commits: # Automatically deploy all commits, no matter how many.
