@@ -220,7 +220,7 @@ const isToggleExpansionEnabled =
               />
             )
           }
-          {isToggleExpansionEnabled && hasAnySubRows && !expandByDepth && (
+          {isToggleExpansionEnabled && (hasAnySubRows || inlineRowLoading) && !expandByDepth && (
               <ToggleIconButton onClick={handleExpandOrCollapse} />
             )}
           {isToggleExpansionEnabled && hasAnySubRows && expandByDepth && (
