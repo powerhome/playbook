@@ -9,6 +9,9 @@ interface UseTableActionsProps {
   setExpanded: (expanded: GenericObject) => void;
   onToggleExpansionClick?: (arg: Row<GenericObject>) => void;
   onRowSelectionChange?: (rowSelection: any) => void;
+  inlineRowLoading?: boolean;
+  localPagination?: { pageIndex: number; pageSize: number };
+  setLocalPagination?: (pagination: { pageIndex: number; pageSize: number }) => void;
 }
 
 export function useTableActions({
@@ -16,7 +19,10 @@ export function useTableActions({
   expanded,
   setExpanded,
   onToggleExpansionClick,
-  onRowSelectionChange
+  onRowSelectionChange,
+  inlineRowLoading = false,
+  localPagination,
+  setLocalPagination
 }: UseTableActionsProps) {
 
   // State to achieve 1 second delay before fetching more rows
@@ -38,8 +44,17 @@ export function useTableActions({
 
   // Handle pagination
   const onPageChange = useCallback((page: number) => {
-    table.setPageIndex(page - 1);
-  }, [table]);
+    if (inlineRowLoading && setLocalPagination && localPagination) {
+      // Use manual pagination state for inlineRowLoading
+      setLocalPagination({
+        ...localPagination,
+        pageIndex: page - 1
+      });
+    } else {
+      // Use tanstack's built-in pagination
+      table.setPageIndex(page - 1);
+    }
+  }, [table, inlineRowLoading, setLocalPagination, localPagination]);
 
   // Handle scroll detection for infinite scroll/virtualization
   const fetchMoreOnBottomReached = useCallback((
