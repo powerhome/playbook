@@ -1,0 +1,40 @@
+<% chart_options = {
+  title: {
+    text: "Fixed Height in Pixels",
+  },
+  chart: {
+    height: "400",
+  },
+  series: [{ data: [{ name: "Pixels", y: 400 }] }],
+  plotOptions: {
+    solidgauge: {
+      dataLabels: {
+        format:
+          '<span class="fix">{y:,f}</span>' +
+          '<span style="fill: #687887; font-size: 27px;">px</span>',
+      },
+    },
+  },
+} %>
+
+<% chart_options_1 = {
+  title: {
+    text: "Height as Percentage of Width",
+  },
+  chart: {
+    height: "45%",
+  },
+  series: [{ data: [{ name: "Percentage", y: 45 }] }],
+  plotOptions: {
+    solidgauge: {
+      dataLabels: {
+        format:
+          '<span class="fix">{y:,f}</span>' +
+          '<span style="fill: #687887; font-size: 27px;">%</span>',
+      },
+    },
+  },
+} %>
+
+<%= pb_rails("pb_gauge_chart", props: { options: chart_options }) %>
+<%= pb_rails("pb_gauge_chart", props: { options: chart_options_1 }) %>

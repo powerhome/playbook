@@ -1,0 +1,12 @@
+<% data = [{ name: "Participants", y: 84 }] %>
+
+<% chart_options = {
+  series: [{ data: data }],
+  plotOptions: {
+    series: {
+      animation: false,
+    },
+  },
+} %>
+
+<%= pb_rails("pb_gauge_chart", props: { options: chart_options }) %>

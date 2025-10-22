@@ -1,0 +1,23 @@
+<% data = [{ name: "Capacity", y: 75 }] %>
+
+<% chart_options = {
+  title: {
+    text: "Seating Capacity",
+  },
+  series: [{ data: data }],
+  pane: {
+    startAngle: 0,
+    endAngle: 360,
+  },
+  plotOptions: {
+    solidgauge: {
+      dataLabels: {
+        format:
+          '<span class="fix">{y:,f}</span>' +
+          '<span style="fill: #687887; font-size: 27px;">%</span>',
+      },
+    },
+  },
+} %>
+
+<%= pb_rails("pb_gauge_chart", props: { options: chart_options }) %>

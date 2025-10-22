@@ -1,0 +1,45 @@
+<% chart_options = {
+  series:[{data:[{ name: "Name", y: 10 }]}],
+    chart: {
+    height: "150",
+  },
+  plotOptions: {
+    series: {
+      animation: false,
+    },
+    solidgauge: {
+      dataLabels: {
+        format:
+          '<span class="fix">{y:,f}</span>' +
+          '<span style="fill: #687887; font-size: 27px;">%</span>',
+      },
+    },
+  },
+} %>
+
+<%= pb_rails("flex", props: {wrap: true, padding: "xl", gap: "sm"}) do %>
+  <%= pb_rails("flex/flex_item", props: {flex: 1, grow: true }) do %>
+    <%= pb_rails("card", props: {max_width: "xs", padding: "md", }) do %>
+      <%= pb_rails("title", props: {padding_bottom: "sm", size: 4, text: "Abandoned Calls" })%>
+      <%= pb_rails("flex", props: {align: "stretch"}) do %>
+        <%= pb_rails("flex", props: {margin_right: "sm", orientation: "column"}) do %>
+          <%= pb_rails("body", props: {color: "light", padding_bottom: "sm",text: "Total Abandoned"}) %>
+          <%= pb_rails("flex", props: {align: "baseline", padding_bottom: "sx"}) do %>
+            <%= pb_rails("title", props: {size: 1, text: "39"})%>
+            <%= pb_rails("title", props: {color: "light", size: 3, text: "calls"}) %>
+          <% end %>
+          <%= pb_rails("caption", props: {size: "xs", text: "of 390" }) %>
+        <%end %>
+        <%= pb_rails("section_separator", props: {align_self: "stretch", margin_right: "sm", orientation: "vertical" }) %>
+        <%= pb_rails("flex", props: {orientation: "column", wrap: true}) do %>
+          <%= pb_rails("body", props: {color: "light", text: "% Abandoned"}) %>
+          <%= pb_rails("flex", props: {wrap: true}) do %>
+            <%= pb_rails("flex/flex_item", props: {fixed_size: "150px", overflow: "hidden", shrink: true}) do %>
+              <%= pb_rails("pb_gauge_chart", props: { options: chart_options }) %>
+            <% end %>
+          <% end %>
+        <% end %>
+      <%end %>
+    <% end %>
+  <% end %>
+<% end %>
