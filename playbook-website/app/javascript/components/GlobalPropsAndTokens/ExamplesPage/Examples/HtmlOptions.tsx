@@ -52,7 +52,7 @@ const HtmlOptions = () => {
               />,
               <ExampleCodeCard
                 id="html-attribute-react"
-                text="htmlOptions= {{ style: { width: '123px' } }}"
+                text="htmlOptions= {{ title: 'I’m the tooltip for title' } }}"
               />,
             ],
             [
