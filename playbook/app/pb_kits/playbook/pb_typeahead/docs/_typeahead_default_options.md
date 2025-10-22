@@ -1,0 +1,1 @@
+The optional `default_options` prop can be used to set a default value for the kit. When a default value is set, focus will be automatically set to the selected option and the dropdown container will scroll to bring the selected option into view. 

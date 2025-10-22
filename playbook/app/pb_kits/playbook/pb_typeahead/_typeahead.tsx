@@ -1,4 +1,4 @@
-import React, { useState, useEffect, forwardRef} from 'react'
+import React, { useState, useEffect, forwardRef, useRef} from 'react'
 import Select from 'react-select'
 import AsyncSelect from 'react-select/async'
 import CreateableSelect from 'react-select/creatable'
@@ -106,6 +106,8 @@ const Typeahead = forwardRef<HTMLInputElement, TypeaheadProps>(({
   const [inputValue, setInputValue] = useState("")
   // State to track if form has been submitted to control validation display for react rendered rails kit
   const [formSubmitted, setFormSubmitted] = useState(false)
+  // State to track if user has made a selection (to disable defaultValue focus behavior)
+  const [hasUserSelected, setHasUserSelected] = useState(false)
 
   // If preserveSearchInput is true, we need to control the input value
   const handleInputChange = preserveSearchInput
@@ -138,6 +140,69 @@ const Typeahead = forwardRef<HTMLInputElement, TypeaheadProps>(({
         }
       }
     : props.onBlur
+
+  // Create a ref to access React Select instance
+  const selectRef = useRef<any>(null)
+
+  // Configure focus on selected option using React Select's API
+  const handleMenuOpen = () => {
+    setTimeout(() => {
+      let currentValue = props.value || props.defaultValue
+
+      // Handle react rendered rails version which passes arrays even for single selects
+      if (Array.isArray(currentValue) && currentValue.length > 0) {
+        currentValue = currentValue[0]
+      }
+      
+      // Only apply custom focus if user has NOT made a selection yet
+      if (currentValue && selectRef.current && !hasUserSelected && !props.isMulti) {
+
+        const options = props.options
+        if (options) {
+          // Find the index of the current value
+          const focusedIndex = options.findIndex((option: any) => {
+            const optionValue = props.getOptionValue ? props.getOptionValue(option) : option.value
+            const currentOptionValue = props.getOptionValue ? props.getOptionValue(currentValue) : currentValue.value
+            return optionValue === currentOptionValue
+          })
+          
+          if (focusedIndex >= 0 && options[focusedIndex]) {
+            // Use React Select's internal state to set focused option
+            if (selectRef.current && selectRef.current.setState) {
+              const targetOption = options[focusedIndex]
+              selectRef.current.setState({
+                focusedOption: targetOption,
+                focusedValue: null
+              })
+              
+              // Handle scrolling so selected option is visible
+              setTimeout(() => {
+                if (selectRef.current && selectRef.current.menuListRef) {
+                  const menuElement = selectRef.current.menuListRef
+                  if (menuElement && menuElement.children && menuElement.children[focusedIndex]) {
+                    // Calculate the position of the selected option and scroll the menu container
+                    const optionElement = menuElement.children[focusedIndex] as HTMLElement
+                    const optionTop = optionElement.offsetTop
+                    const optionHeight = optionElement.offsetHeight
+                    const menuHeight = menuElement.clientHeight
+                    
+                    // Set the menu's scrollTop to position the selected option in the middle
+                    const scrollToMiddle = optionTop - (menuHeight / 2) + (optionHeight / 2)
+                    menuElement.scrollTop = Math.max(0, scrollToMiddle)
+                  }
+                }
+              }, 20)
+            }
+          }
+        }
+      }
+    }, 0)
+    
+    // Call original onMenuOpen if provided
+    if (props.onMenuOpen) {
+      props.onMenuOpen()
+    }
+  }
 
   const selectProps = {
     cacheOptions: true,
@@ -172,6 +237,7 @@ const Typeahead = forwardRef<HTMLInputElement, TypeaheadProps>(({
     ...(preserveSearchInput ? { inputValue } : {}),
     onInputChange: handleInputChange,
     onBlur: handleBlur,
+    onMenuOpen: handleMenuOpen,
     ...props,
   }
 
@@ -261,6 +327,8 @@ const Typeahead = forwardRef<HTMLInputElement, TypeaheadProps>(({
     // Reset form submitted state when a selection is made (this is all for react rendered rails kit)
     if (action === 'select-option') {
       setFormSubmitted(false)
+      // Mark that user has made a selection to disable default value focus behavior
+      setHasUserSelected(true)
     }
 
     // If a value is selected and we're preserving input on blur, clear the input
@@ -269,7 +337,7 @@ const Typeahead = forwardRef<HTMLInputElement, TypeaheadProps>(({
     }
 
     if (action === 'select-option') {
-      if (selectProps.onMultiValueClick) selectProps.onMultiValueClick(option)
+      if (selectProps.onMultiValueClick && option) selectProps.onMultiValueClick(option)
       const multiValueClearEvent = new CustomEvent(`pb-typeahead-kit-${selectProps.id}-result-option-select`, { detail: option ? option : _data })
       document.dispatchEvent(multiValueClearEvent)
     }
@@ -317,6 +385,7 @@ const Typeahead = forwardRef<HTMLInputElement, TypeaheadProps>(({
           error={errorDisplay}
           isDisabled={disabled}
           onChange={handleOnChange}
+          ref={selectRef}
           {...selectProps}
       />
     </div>
