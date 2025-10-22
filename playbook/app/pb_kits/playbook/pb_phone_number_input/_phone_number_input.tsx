@@ -314,14 +314,18 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.Ref<unknown>
 
   const handleOnChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
     if (!hasTyped) setHasTyped(true)
+
     setInputValue(evt.target.value)
+
     let phoneNumberData
+
     if (formatAsYouType) {
       const formattedPhoneNumberData = getCurrentSelectedData(itiRef.current, evt.target.value)
       phoneNumberData = {...formattedPhoneNumberData, number: unformatNumber(formattedPhoneNumberData.number)}
     } else {
       phoneNumberData = getCurrentSelectedData(itiRef.current, evt.target.value)
     }
+
     setSelectedData(phoneNumberData)
     onChange(phoneNumberData)
     isValid(itiRef.current.isValidNumber())
@@ -370,11 +374,26 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.Ref<unknown>
 
       inputRef.current.addEventListener("open:countrydropdown", () => setDropDownIsOpen(true))
       inputRef.current.addEventListener("close:countrydropdown", () => setDropDownIsOpen(false))
-    }
-    if (formatAsYouType) {
-      inputRef.current?.addEventListener("input", (evt) => {
-        handleOnChange(evt as unknown as React.ChangeEvent<HTMLInputElement>);
-      });
+
+      // Handle formatAsYouType with input event
+      if (formatAsYouType) {
+        inputRef.current.addEventListener("input", (evt: Event) => {
+          const target = evt.target as HTMLInputElement
+          const formattedValue = target.value
+
+          // Update internal state
+          setInputValue(formattedValue)
+          setHasTyped(true)
+
+          // Get phone number data with unformatted number
+          const formattedPhoneNumberData = getCurrentSelectedData(telInputInit, formattedValue)
+          const phoneNumberData = {...formattedPhoneNumberData, number: unformatNumber(formattedPhoneNumberData.number)}
+
+          setSelectedData(phoneNumberData)
+          onChange(phoneNumberData)
+          isValid(telInputInit.isValidNumber())
+        })
+      }
     }
   }, [])
 
@@ -389,7 +408,7 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.Ref<unknown>
     label,
     name,
     onBlur: validateErrors,
-    onChange: handleOnChange,
+    onChange: formatAsYouType ? undefined : handleOnChange,
     value: inputValue
   }
 
