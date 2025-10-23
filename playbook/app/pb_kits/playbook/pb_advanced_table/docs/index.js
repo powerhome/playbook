@@ -46,3 +46,4 @@ export { default as AdvancedTableSortPerColumn } from './_advanced_table_sort_pe
 export { default as AdvancedTableSortPerColumnForMultiColumn } from './_advanced_table_sort_per_column_for_multi_column.jsx'
 export { default as AdvancedTablePaddingControl } from './_advanced_table_padding_control.jsx'
 export { default as AdvancedTablePaddingControlPerRow } from './_advanced_table_padding_control_per_row.jsx'
+export { default as AdvancedTableInlineRowLoadingShowToggle } from './_advanced_table_inline_row_loading_show_toggle.jsx'
