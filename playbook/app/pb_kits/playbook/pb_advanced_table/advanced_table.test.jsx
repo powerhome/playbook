@@ -551,14 +551,14 @@ test("inlineRowLoading prop renders inline loading if true", () => {
   expect(inlineLoading).toBeInTheDocument()
 })
 
-test("showToggleWithInlineRowLoading prop shows header toggle when inlineRowLoading is true", () => {
+test("persistToggleExpansionButton prop shows header toggle when inlineRowLoading is true", () => {
   render(
     <AdvancedTable
         columnDefinitions={columnDefinitions}
         data={{ testid: testId }}
         enableToggleExpansion="all"
         inlineRowLoading
-        showToggleWithInlineRowLoading
+        persistToggleExpansionButton
         tableData={MOCK_DATA_NO_SUBROWS}
     />
   )

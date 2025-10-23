@@ -54,7 +54,6 @@ examples:
   - advanced_table_pagination_with_props: Pagination Props
   - advanced_table_loading: Loading State
   - advanced_table_inline_row_loading: Inline Row Loading
-  - advanced_table_inline_row_loading_show_toggle: Inline Row Loading with Show Toggle
   - advanced_table_column_headers: Multi-Header Columns
   - advanced_table_column_headers_multiple: Multi-Header Columns (Multiple Levels)
   - advanced_table_column_headers_custom_cell: Multi-Header Columns with Custom Cells

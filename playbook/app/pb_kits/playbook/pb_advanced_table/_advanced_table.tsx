@@ -63,7 +63,7 @@ type AdvancedTableProps = {
   scrollBarNone?: boolean,
   selectableRows?: boolean,
   showActionsBar?: boolean,
-  showToggleWithInlineRowLoading?: boolean,
+  persistToggleExpansionButton?: boolean,
   sortControl?: GenericObject
   tableData: GenericObject[]
   tableOptions?: GenericObject
@@ -110,7 +110,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
     scrollBarNone= false,
     showActionsBar = true,
     selectableRows,
-    showToggleWithInlineRowLoading = false,
+    persistToggleExpansionButton = false,
     sortControl,
     stickyLeftColumn,
     tableData,
@@ -351,13 +351,13 @@ const AdvancedTable = (props: AdvancedTableProps) => {
             loading={loading}
             onCustomSortClick={onCustomSortClick}
             onExpandByDepthClick={onExpandByDepthClick}
+            persistToggleExpansionButton={persistToggleExpansionButton}
             pinnedRows={pinnedRows}
             responsive={responsive}
             rowStyling={rowStyling}
             selectableRows={selectableRows}
             setExpanded={setExpanded}
             showActionsBar={showActionsBar}
-            showToggleWithInlineRowLoading={showToggleWithInlineRowLoading}
             sortControl={sortControl}
             stickyLeftColumn={stickyLeftColumn}
             subRowHeaders={tableOptions?.subRowHeaders}
