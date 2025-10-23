@@ -1,4 +1,4 @@
-# 🎶 Look at this release, isn’t it sweet?
+# 🎶 Look at this Release, isn’t it Sweet?
 ##### October 23, 2025
 
 ![release_image](https://github.com/user-attachments/assets/db119637-25e9-4157-9091-c5f7fdf034fc)
