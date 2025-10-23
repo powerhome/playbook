@@ -1,7 +1,11 @@
-# 15.3.0
+# 🎶 Look at this release, isn’t it sweet?
 ##### October 23, 2025
 
 ![release_image](https://github.com/user-attachments/assets/db119637-25e9-4157-9091-c5f7fdf034fc)
+
+Playbook 15.3.0’s quite the feat! New props and features, shiny and new, Refactors and bug fixes too! :pb_js is now obsolete, Wouldn’t you say this update’s neat? 🎶
+
+[15.3.0](https://github.com/powerhome/playbook/tree/15.3.0) full list of changes:
 
 **Improvements:**
 
@@ -83,7 +87,7 @@
 
 [Full Changelog](https://github.com/powerhome/playbook/compare/v15.2.0-rc.4...15.2.0)
 
-# 🪦RIP Webpacker💀
+# 🪦 RIP Webpacker 💀
 
 ##### September 26, 2025
 <img width="889" height="477" alt="release_image" src="https://github.com/user-attachments/assets/cb9664e0-5334-4883-bcb7-f30e9eb6b289" />
