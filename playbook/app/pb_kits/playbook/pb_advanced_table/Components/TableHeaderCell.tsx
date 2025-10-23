@@ -30,6 +30,7 @@ type TableHeaderCellProps = {
   headerChildren?: React.ReactNode | React.ReactNode[]
   isPinnedLeft?: boolean
   loading?: boolean
+  persistToggleExpansionButton?: boolean
   sortIcon?: string | string[]
   table?: Table<GenericObject>
 } & GlobalProps
@@ -58,6 +59,7 @@ export const TableHeaderCell = ({
     selectableRows,
     hasAnySubRows,
     showActionsBar,
+    persistToggleExpansionButton,
     stickyLeftColumn,
     inlineRowLoading,
     isActionBarVisible,
@@ -220,7 +222,7 @@ const isToggleExpansionEnabled =
               />
             )
           }
-          {isToggleExpansionEnabled && hasAnySubRows && !expandByDepth && (
+          {isToggleExpansionEnabled &&  ((hasAnySubRows) || (inlineRowLoading && persistToggleExpansionButton)) && !expandByDepth && (
               <ToggleIconButton onClick={handleExpandOrCollapse} />
             )}
           {isToggleExpansionEnabled && hasAnySubRows && expandByDepth && (

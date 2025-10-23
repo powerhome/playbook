@@ -108,6 +108,48 @@ const MOCK_DATA_WITH_ID = [
   },
 ]
 
+const MOCK_DATA_NO_SUBROWS = [
+  {
+    year: "2021",
+    quarter: null,
+    month: null,
+    day: null,
+    newEnrollments: "20",
+    scheduledMeetings: "10",
+    attendanceRate: "51%",
+    completedClasses: "3",
+    classCompletionRate: "33%",
+    graduatedStudents: "19",
+    children: [],
+  },
+  {
+    year: "2022",
+    quarter: null,
+    month: null,
+    day: null,
+    newEnrollments: "25",
+    scheduledMeetings: "17",
+    attendanceRate: "75%",
+    completedClasses: "5",
+    classCompletionRate: "45%",
+    graduatedStudents: "32",
+    children: [],
+  },
+  {
+    year: "2023",
+    quarter: null,
+    month: null,
+    day: null,
+    newEnrollments: "30",
+    scheduledMeetings: "22",
+    attendanceRate: "80%",
+    completedClasses: "7",
+    classCompletionRate: "55%",
+    graduatedStudents: "45",
+    children: [],
+  },
+]
+
 const columnDefinitions = [
   {
     accessor: "year",
@@ -507,6 +549,23 @@ test("inlineRowLoading prop renders inline loading if true", () => {
   rowButton.click()
   const inlineLoading = kit.querySelector(".pb_custom_icon")
   expect(inlineLoading).toBeInTheDocument()
+})
+
+test("persistToggleExpansionButton prop shows header toggle when inlineRowLoading is true", () => {
+  render(
+    <AdvancedTable
+        columnDefinitions={columnDefinitions}
+        data={{ testid: testId }}
+        enableToggleExpansion="all"
+        inlineRowLoading
+        persistToggleExpansionButton
+        tableData={MOCK_DATA_NO_SUBROWS}
+    />
+  )
+
+  const kit = screen.getByTestId(testId)
+  const headerToggleButton = kit.querySelector(".gray-icon.toggle-all-icon")
+  expect(headerToggleButton).toBeInTheDocument()
 })
 
 test("responsive prop functions as expected", () => {
