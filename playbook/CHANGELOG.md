@@ -1,7 +1,7 @@
 # 15.3.0
 ##### October 23, 2025
 
-<img width="889" height="477" alt="release_image" src="https://github.com/user-attachments/assets/dc14e990-9630-475f-9da0-c5b60d75e2e5" />
+![release_image](https://github.com/user-attachments/assets/db119637-25e9-4157-9091-c5f7fdf034fc)
 
 **Improvements:**
 
@@ -16,12 +16,15 @@
 - Playbook Website: Colors Token Page [\#5336](https://github.com/powerhome/playbook/pull/5336) ([kangaree](https://github.com/kangaree))
 - Global Props: Create Vertical Align, Truncate, and Overflow Pages [\#5328](https://github.com/powerhome/playbook/pull/5328) ([elisashapiro](https://github.com/elisashapiro))
 - Kit Generator Fixes [\#5323](https://github.com/powerhome/playbook/pull/5323) ([nidaqg](https://github.com/nidaqg))
+- Remove use of pb_js content [\#5285](https://github.com/powerhome/playbook/pull/5285) ([@xjunior](https://github.com/xjunior))
 
 **Kit Enhancements:**
 
 - Typeahead Kit: Focus and Scroll to Show Default Values on First Render [\#5370](https://github.com/powerhome/playbook/pull/5370) ([nidaqg](https://github.com/nidaqg))
 - Fixed Confirmation Toast: Z Index Set to 'max' by Default [\#5347](https://github.com/powerhome/playbook/pull/5347) ([nidaqg](https://github.com/nidaqg))
 - Advanced Table: Adding Cell Padding Control to Column Styling - Rails [\#5338](https://github.com/powerhome/playbook/pull/5338) ([elisashapiro](https://github.com/elisashapiro))
+- RichTextEditor: Create Parity Between TipTap and Trix Variants in the Kit [\#5277](https://github.com/powerhome/playbook/pull/5277) ([nidaqg](https://github.com/nidaqg))
+- Timeline kit: Scss Refactor [\#5250](https://github.com/powerhome/playbook/pull/5250) ([@nidaqg](https://github.com/nidaqg))
 
 **Fixed Bugs:**
 
@@ -29,6 +32,7 @@
 - Advanced Table Kit: Remove Top Level Id Repeated In All Rows With Table Id - Rails [\#5353](https://github.com/powerhome/playbook/pull/5353) ([kangaree](https://github.com/kangaree))
 - Button Kit: Size Props and Loading Prop to Work Together [\#5320](https://github.com/powerhome/playbook/pull/5320) ([nidaqg](https://github.com/nidaqg))
 - Draggable Kit: Draggable List Border Not Rendering [\#5319](https://github.com/powerhome/playbook/pull/5319) ([nickamantia](https://github.com/nickamantia))
+- Phone Number Input kit: Validation [\#5235](https://github.com/powerhome/playbook/pull/5235)  ([@skduncan](https://github.com/skduncan))
 
 **New Kits:**
 
