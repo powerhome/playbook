@@ -35,6 +35,7 @@ interface UseTableStateProps {
   onRowSelectionChange?: (arg: RowSelectionState) => void;
   columnVisibilityControl?: GenericObject;
   rowStyling?: GenericObject;
+  inlineRowLoading?: boolean;
 }
 
 export function useTableState({
@@ -53,7 +54,8 @@ export function useTableState({
   tableOptions,
   columnVisibilityControl,
   pinnedRows,
-  rowStyling
+  rowStyling,
+  inlineRowLoading = false
 }: UseTableStateProps) {
 
   // Create a local state for expanded and setExpanded if expandedControl not used
@@ -63,6 +65,12 @@ export function useTableState({
   const [localColumnVisibility, setLocalColumnVisibility] = useState({});
   const [localRowPinning, setLocalRowPinning] = useState<RowPinningState>({
     top: [],
+  });
+  // Manage local state to preserve current page index when inlineRowLoading is enabled so it does not boot table to page 1
+  // We can extend this for more usecases, but for now scoping it only for inlineRowLoading
+  const [localPagination, setLocalPagination] = useState({
+    pageIndex: paginationProps?.pageIndex ?? 0, 
+    pageSize: paginationProps?.pageSize ?? 20,
   });
   // Determine whether to use the prop or the local state
   const expanded = expandedControl ? expandedControl.value : localExpanded;
@@ -133,6 +141,7 @@ export function useTableState({
       ...(selectableRows  && { rowSelection }),
       ...(columnVisibility && { columnVisibility }),
       ...(pinnedRows && { rowPinning }),
+      ...(inlineRowLoading && { pagination: localPagination }),
     },
   }), [
     expanded,
@@ -142,23 +151,36 @@ export function useTableState({
     rowSelection,
     columnVisibility,
     rowPinning,
+    inlineRowLoading,
+    localPagination
   ]);
 
   // Pagination configuration
   const paginationInitializer = useMemo(() => {
     if (!pagination) return {};
 
-    return {
-      getPaginationRowModel: getPaginationRowModel(),
-      paginateExpandedRows: false,
-      initialState: {
-        pagination: {
-          pageIndex: paginationProps?.pageIndex ?? 0,
-          pageSize: paginationProps?.pageSize ?? 20,
+    if (inlineRowLoading) {
+      // Use manual pagination state when inlineRowLoading is enabled (see https://tanstack.com/table/latest/docs/guide/pagination#client-side-pagination)
+      return {
+        getPaginationRowModel: getPaginationRowModel(),
+        paginateExpandedRows: false,
+        onPaginationChange: setLocalPagination,
+        autoResetPageIndex: false, // This is what prevent auto-reset of page index
+      };
+    } else {
+      // Use normal pagination initialization for non- inlineRowLoading usecases
+      return {
+        getPaginationRowModel: getPaginationRowModel(),
+        paginateExpandedRows: false,
+        initialState: {
+          pagination: {
+            pageIndex: paginationProps?.pageIndex ?? 0,
+            pageSize: paginationProps?.pageSize ?? 20,
+          },
         },
-      },
-    };
-  }, [pagination, paginationProps]);
+      };
+    }
+  }, [pagination, paginationProps, inlineRowLoading]);
 
   // Initialize the table
   const table = useReactTable({
@@ -206,9 +228,27 @@ export function useTableState({
   // Set pagination state when pagination is enabled
   useEffect(() => {
     if (pagination && paginationProps?.pageSize) {
-      table.setPageSize(paginationProps.pageSize);
+      if (inlineRowLoading) {
+        // Update local pagination state for inlineRowLoading
+        setLocalPagination(prev => ({
+          ...prev,
+          pageSize: paginationProps.pageSize
+        }));
+      } else {
+        table.setPageSize(paginationProps.pageSize);
+      }
     }
-  }, [pagination, paginationProps?.pageSize, table]);
+  }, [pagination, paginationProps?.pageSize, table, inlineRowLoading]);
+
+  // Update local pagination when paginationProps change and inlineRowLoading is enabled
+  useEffect(() => {
+    if (pagination && inlineRowLoading && paginationProps) {
+      setLocalPagination({
+        pageIndex: paginationProps.pageIndex ?? localPagination.pageIndex,
+        pageSize: paginationProps.pageSize ?? localPagination.pageSize,
+      });
+    }
+  }, [pagination, inlineRowLoading, paginationProps?.pageIndex, paginationProps?.pageSize]);
 
   // Check if table has any sub-rows
   const hasAnySubRows = table.getRowModel().rows.some(row => row.subRows && row.subRows.length > 0);
@@ -247,6 +287,8 @@ export function useTableState({
     rowSelection,
     fullData,
     totalFetched,
-    isFetching
+    isFetching,
+    localPagination,
+    setLocalPagination
   };
 }
