@@ -43,7 +43,7 @@ const AdvancedTableInlineRowLoading = (props) => {
 
   return (
     <div>
-      <Caption>Inline Row Loading</Caption>
+      <Caption text="Inline Row Loading - Demonstrated in Row 1 (Rows 2 and 3 have data)" />
       <AdvancedTable
           columnDefinitions={columnDefinitions}
           enableToggleExpansion="all"
@@ -55,7 +55,19 @@ const AdvancedTableInlineRowLoading = (props) => {
         <AdvancedTable.Header />
         <AdvancedTable.Body subRowHeaders={subRowHeaders}/>
       </AdvancedTable>
-      <Caption>Inline Row Loading with Persist Toggle Expansion Button</Caption>
+      <Caption text="Inline Row Loading with No Subrow Data - All Rows Display Inline Row Loading and the Toggle All Button is not rendered" />
+      <AdvancedTable
+          columnDefinitions={columnDefinitions}
+          enableToggleExpansion="all"
+          inlineRowLoading
+          marginBottom="md"
+          tableData={MOCK_DATA_INLINE_LOADING_EMPTY_CHILDREN}
+          {...props}
+      >
+        <AdvancedTable.Header />
+        <AdvancedTable.Body subRowHeaders={subRowHeaders}/>
+      </AdvancedTable>
+      <Caption text="Inline Row Loading and Persist Toggle Expansion Button with No Subrow Data - All Rows Display Inline Row Loading and the Toggle All Button is rendered" />
       <AdvancedTable
           columnDefinitions={columnDefinitions}
           enableToggleExpansion="all"
