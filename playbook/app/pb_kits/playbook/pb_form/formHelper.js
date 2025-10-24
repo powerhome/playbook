@@ -7,7 +7,7 @@ const formHelper = () => {
 
             if (submitButton) {
                 let currentClass = submitButton.className;
-                let newClass = currentClass.replace("_enabled", "_disabled_loading");
+                let newClass = currentClass.replace("pb_button_enabled", "pb_button_disabled pb_button_loading");
 
                 let cancelClass = cancelButton ? cancelButton.className : "";
                 let newCancelClass = cancelClass.replace("_enabled", "_disabled");
