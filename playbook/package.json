@@ -47,7 +47,7 @@
     "@actions/github": "6.0.0",
     "@babel/preset-env": "^7.12.1",
     "@babel/preset-react": "^7.12.5",
-    "@babel/preset-typescript": "^7.15.0",
+    "@babel/preset-typescript": "^7.28.5",
     "@floating-ui/react": "^0.26.23",
     "@rollup/pluginutils": "^5.1.0",
     "@tanstack/react-table": "8.20.5",
