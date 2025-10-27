@@ -1,3 +1,51 @@
+# 🎶 Look at this Release, isn’t it Sweet?
+##### October 23, 2025
+
+![release_image](https://github.com/user-attachments/assets/db119637-25e9-4157-9091-c5f7fdf034fc)
+
+Playbook 15.3.0’s quite the feat! New props and features, shiny and new, Refactors and bug fixes too! :pb_js is now obsolete, Wouldn’t you say this update’s neat? 🎶
+
+[15.3.0](https://github.com/powerhome/playbook/tree/15.3.0) full list of changes:
+
+**Improvements:**
+
+- Breadcrumbs: Add Color Link to Doc Examples Figma Parity [\#5385](https://github.com/powerhome/playbook/pull/5385) ([elisashapiro](https://github.com/elisashapiro))
+- \[hq Shutdown\] Move Production Deployment to Gm [\#5379](https://github.com/powerhome/playbook/pull/5379) ([dgmorales](https://github.com/dgmorales))
+- Upgrades Playbook Icons [\#5376](https://github.com/powerhome/playbook/pull/5376) ([elisashapiro](https://github.com/elisashapiro))
+- Patterns: Create Alert Banner - Rails and React [\#5368](https://github.com/powerhome/playbook/pull/5368) ([elisashapiro](https://github.com/elisashapiro))
+- Global Props: Create Height, Min Height, and Max Height Pages [\#5364](https://github.com/powerhome/playbook/pull/5364) ([elisashapiro](https://github.com/elisashapiro))
+- Playbook Website: Padding and Number Spacing Globalprop, Spacing Token Pages [\#5359](https://github.com/powerhome/playbook/pull/5359) ([elisashapiro](https://github.com/elisashapiro))
+- Global Props: Create Flex Box, Flex Box: Order and Flex Box: Gap Pages [\#5352](https://github.com/powerhome/playbook/pull/5352) ([nickamantia](https://github.com/nickamantia))
+- Refactor Alpha and Rc Github Actions to Follow Npm Security Requirements [\#5339](https://github.com/powerhome/playbook/pull/5339) ([nidaqg](https://github.com/nidaqg))
+- Playbook Website: Colors Token Page [\#5336](https://github.com/powerhome/playbook/pull/5336) ([kangaree](https://github.com/kangaree))
+- Global Props: Create Vertical Align, Truncate, and Overflow Pages [\#5328](https://github.com/powerhome/playbook/pull/5328) ([elisashapiro](https://github.com/elisashapiro))
+- Kit Generator Fixes [\#5323](https://github.com/powerhome/playbook/pull/5323) ([nidaqg](https://github.com/nidaqg))
+- Remove use of pb_js content [\#5285](https://github.com/powerhome/playbook/pull/5285) ([@xjunior](https://github.com/xjunior))
+
+**Kit Enhancements:**
+
+- Typeahead Kit: Focus and Scroll to Show Default Values on First Render [\#5370](https://github.com/powerhome/playbook/pull/5370) ([nidaqg](https://github.com/nidaqg))
+- Fixed Confirmation Toast: Z Index Set to 'max' by Default [\#5347](https://github.com/powerhome/playbook/pull/5347) ([nidaqg](https://github.com/nidaqg))
+- Advanced Table: Adding Cell Padding Control to Column Styling - Rails [\#5338](https://github.com/powerhome/playbook/pull/5338) ([elisashapiro](https://github.com/elisashapiro))
+- RichTextEditor: Create Parity Between TipTap and Trix Variants in the Kit [\#5277](https://github.com/powerhome/playbook/pull/5277) ([nidaqg](https://github.com/nidaqg))
+- Timeline kit: Scss Refactor [\#5250](https://github.com/powerhome/playbook/pull/5250) ([@nidaqg](https://github.com/nidaqg))
+
+**Fixed Bugs:**
+
+- Phone Number Input Kit: Fix “format As You Type” Logic \(first Digit Not Registering\) [\#5365](https://github.com/powerhome/playbook/pull/5365) ([skduncan](https://github.com/skduncan))
+- Advanced Table Kit: Remove Top Level Id Repeated In All Rows With Table Id - Rails [\#5353](https://github.com/powerhome/playbook/pull/5353) ([kangaree](https://github.com/kangaree))
+- Button Kit: Size Props and Loading Prop to Work Together [\#5320](https://github.com/powerhome/playbook/pull/5320) ([nidaqg](https://github.com/nidaqg))
+- Draggable Kit: Draggable List Border Not Rendering [\#5319](https://github.com/powerhome/playbook/pull/5319) ([nickamantia](https://github.com/nickamantia))
+- Phone Number Input kit: Validation [\#5235](https://github.com/powerhome/playbook/pull/5235)  ([@skduncan](https://github.com/skduncan))
+
+**New Kits:**
+
+- Pb Gauge Chart: Scaffold New Beta Kit [\#5358](https://github.com/powerhome/playbook/pull/5358) ([nidaqg](https://github.com/nidaqg))
+- Pb Line Graph: Scaffold New Beta Kit [\#5318](https://github.com/powerhome/playbook/pull/5318) ([nidaqg](https://github.com/nidaqg))
+
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/v15.3.0-rc.7...15.3.0)
+
 # ✨ Styled to Perfection
 
 ##### October 09, 2025
@@ -39,7 +87,7 @@
 
 [Full Changelog](https://github.com/powerhome/playbook/compare/v15.2.0-rc.4...15.2.0)
 
-# 🪦RIP Webpacker💀
+# 🪦 RIP Webpacker 💀
 
 ##### September 26, 2025
 <img width="889" height="477" alt="release_image" src="https://github.com/user-attachments/assets/cb9664e0-5334-4883-bcb7-f30e9eb6b289" />
