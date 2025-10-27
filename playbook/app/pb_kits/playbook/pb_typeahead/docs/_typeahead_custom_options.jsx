@@ -58,6 +58,7 @@ const groupedOptions = [
 const TypeaheadCustomOptions = (props) => {
   return (
     <Typeahead
+        defaultValue={[{ label: "Pink", value: "#FFC0CB" }]}
         label="Colors"
         options={groupedOptions}
         {...props}

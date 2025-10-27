@@ -144,6 +144,18 @@ const Typeahead = forwardRef<HTMLInputElement, TypeaheadProps>(({
   // Create a ref to access React Select instance
   const selectRef = useRef<any>(null)
 
+  // Helper function to flatten grouped options if custom groups are used
+  const flattenOptions = (options: any[]): any[] => {
+    if (!options) return []
+    
+    return options.reduce((acc, option) => {
+      if (option.options && Array.isArray(option.options)) {
+        return [...acc, ...option.options]
+      }
+      return [...acc, option]
+    }, [])
+  }
+
   // Configure focus on selected option using React Select's API
   const handleMenuOpen = () => {
     setTimeout(() => {
@@ -159,17 +171,18 @@ const Typeahead = forwardRef<HTMLInputElement, TypeaheadProps>(({
 
         const options = props.options
         if (options) {
-          // Find the index of the current value
-          const focusedIndex = options.findIndex((option: any) => {
+          // Flatten grouped options to find the matching option and find matching option
+          const flatOptions = flattenOptions(options)
+          
+          const targetOption = flatOptions.find((option: any) => {
             const optionValue = props.getOptionValue ? props.getOptionValue(option) : option.value
             const currentOptionValue = props.getOptionValue ? props.getOptionValue(currentValue) : currentValue.value
             return optionValue === currentOptionValue
           })
           
-          if (focusedIndex >= 0 && options[focusedIndex]) {
+          if (targetOption) {
             // Use React Select's internal state to set focused option
             if (selectRef.current && selectRef.current.setState) {
-              const targetOption = options[focusedIndex]
               selectRef.current.setState({
                 focusedOption: targetOption,
                 focusedValue: null
@@ -179,11 +192,12 @@ const Typeahead = forwardRef<HTMLInputElement, TypeaheadProps>(({
               setTimeout(() => {
                 if (selectRef.current && selectRef.current.menuListRef) {
                   const menuElement = selectRef.current.menuListRef
-                  if (menuElement && menuElement.children && menuElement.children[focusedIndex]) {
-                    // Calculate the position of the selected option and scroll the menu container
-                    const optionElement = menuElement.children[focusedIndex] as HTMLElement
-                    const optionTop = optionElement.offsetTop
-                    const optionHeight = optionElement.offsetHeight
+                  // Find the focused option using React Select's class
+                  const focusedElement = menuElement.querySelector('.typeahead-kit-select__option--is-focused')
+                  
+                  if (focusedElement) {
+                    const optionTop = focusedElement.offsetTop
+                    const optionHeight = focusedElement.offsetHeight
                     const menuHeight = menuElement.clientHeight
                     
                     // Set the menu's scrollTop to position the selected option in the middle
