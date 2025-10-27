@@ -31,6 +31,8 @@ module Playbook
       prop :max_width, type: Playbook::Props::Enum,
                        values: %w[xs sm md lg xl],
                        default: "md"
+      prop :tip_tap_options, type: Playbook::Props::HashProp,
+                             default: {}
 
       def classname
         generate_classname("pb_rich_text_editor_kit", simple_class, focus_class, sticky_class, separator: " ")
@@ -85,6 +87,7 @@ module Playbook
           advancedEditorToolbar: advanced_editor_toolbar,
           extensions: extensions,
           maxWidth: max_width,
+          tipTapOptions: tip_tap_options,
         }
       end
     end

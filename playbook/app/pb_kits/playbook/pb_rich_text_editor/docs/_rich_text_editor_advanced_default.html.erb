@@ -6,15 +6,11 @@
   value: "Add your text here. You can format your text, add links, quotes, and bullets. This is the <strong>TipTap-based</strong> rich text editor rendered through Rails which requires a direct import of Tiptap into the tsx file.",
 }) %>
 
-<%= pb_rails("caption", props: { text: "Advanced Extra Extensions" }) %>
-<%= pb_rails("body", props: { margin_bottom: "md", text: "Not sure if possible: I think any extensions we want to use will need to be set up directly like all the examples below." }) %>
-
 <%= pb_rails("caption", props: { text: "AdvancedToolbar disabled" }) %>
 <%= pb_rails("rich_text_editor", props: { 
     rails_advanced_editor: true,
     advanced_editor_toolbar: false,
     margin_bottom: "md",
-    placeholder: "Advanced editor without toolbar...",
     value: "<p>This advanced editor has the toolbar disabled, showing only the content area.</p>"
 }) %>
 
@@ -23,7 +19,6 @@
   rails_advanced_editor: true,
   margin_bottom: "md",
   simple: true,
-  placeholder: "Simple advanced editor with minimal toolbar...",
   value: "<p>This is a <strong>simple</strong> version of the advanced editor with fewer toolbar options.</p>"
 }) %>
 
@@ -34,7 +29,6 @@
   name: "textarea-label",
   rails_advanced_editor: true,
   margin_bottom: "md",
-  placeholder: "Advanced editor with attributes...",
   value: "<p>This advanced editor has attributes, aria, and data attributes.</p>"
 }) %>
 
@@ -43,7 +37,6 @@
   rails_advanced_editor: true,
   focus: true,
   margin_bottom: "md",
-  placeholder: "Advanced editor with focus behavior...",
   value: "<p>This advanced editor shows the toolbar only when focused.</p>"
 }) %>
 
@@ -52,7 +45,6 @@
   rails_advanced_editor: true,
   sticky: true,
   margin_bottom: "md",
-  placeholder: "Advanced editor with sticky toolbar...",
   value: "<p>In this example, when you scroll down, the rich text editor's toolbar will scroll along with the page and it will no longer be visible at the top of the page. Dummy text to enable scroll.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean ornare lorem ut pellentesque tempor. Vivamus ut ex vestibulum velit rich text editor eleifend fringilla. Sed non metus dictum, elementum mauris wysiwyg html editor non, sagittis odio. Nullam pellentesque leo sit amet ante suscipit wysiwyg html editor sagittis. Donec tempus vulputate suscipit. Ut non felis rich text editor ac dolor pulvinar lacinia eu eget urna. Sed tincidunt sapien vulputate tellus fringilla sodales. Morbi accumsan dui wysiwyg html editor sed massa pellentesque, quis vestibulum lectus scelerisque. Nulla ultrices mi id felis luctus aliquet. Donec nec ligula wysiwyg html editor pretium sapien semper dictum eu id quam. Etiam ut sollicitudin nibh. Quisque eu ultrices dui. Nunc rich text editor congue, enim vitae dictum dignissim, libero nisl sagittis augue, non aliquet nibh tortor sit amet ex. Aliquam cursus maximus rich text editor mi eu consequat. Nullam tincidunt erat et placerat mattis. Nunc rich text editor congue, enim vitae dictum dignissim, libero nisl sagittis augue, non aliquet nibh tortor sit amet ex. Aliquam cursus maximus mi eu consequat. Nullam tincidunt erat et placerat mattis.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean ornare lorem ut pellentesque tempor. Vivamus ut ex vestibulum velit rich text editor eleifend fringilla. Sed non metus dictum, elementum mauris wysiwyg html editor non, sagittis odio. Nullam pellentesque leo sit amet ante suscipit wysiwyg html editor sagittis. Donec tempus vulputate suscipit. Ut non felis rich text editor ac dolor pulvinar lacinia eu eget urna. Sed tincidunt sapien vulputate tellus fringilla sodales. Morbi accumsan dui wysiwyg html editor sed massa pellentesque, quis vestibulum lectus scelerisque. Nulla ultrices mi id felis luctus aliquet. Donec nec ligula wysiwyg html editor pretium sapien semper dictum eu id quam. Etiam ut sollicitudin nibh. Quisque eu ultrices dui. Nunc rich text editor congue, enim vitae dictum dignissim, libero nisl sagittis augue, non aliquet nibh tortor vulputate suscipit. Ut non felis rich text editor ac dolor pulvinar lacinia eu eget urna. Sed tincidunt sapien vulputate tellus fringilla sodales. Morbi accumsan dui wysiwyg html editor sed massa pellentesque, quis vestibulum lectus scelerisque. Nulla ultrices mi id felis luctus aliquet. Donec nec ligula wysiwyg html editor pretium sapien semper dictum eu id quam. Etiam ut sollicitudin nibh. Quisque eu ultrices dui. Nunc rich text editor congue, enim vitae dictum dignissim, libero nisl sagittis augue, non aliquet nibh tortor sit amet ex. Aliquam cursus maximus rich text editor mi eu consequat. Nullam tincidunt erat et placerat mattis. Nunc rich text editor congue, enim vitae dictum dignissim, libero nisl sagittis augue, non aliquet nibh tortor sit amet ex. Aliquam cursus maximus mi eu consequat. Nullam tincidunt erat et placerat mattis.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean ornare lorem ut pellentesque tempor. Vivamus ut ex vestibulum velit rich text editor eleifend fringilla. Sed non metus dictum, elementum mauris wysiwyg html editor non, sagittis odio. Nullam pellentesque leo sit amet ante suscipit wysiwyg html editor sagittis. Donec tempus vulputate suscipit. Ut non felis rich text editor ac dolor pulvinar lacinia eu eget urna.</p>"
 }) %>
  
@@ -64,7 +56,6 @@
   rails_advanced_editor: true,
   inline: true,
   margin_bottom: "md",
-  placeholder: "Advanced editor with inline toolbar...",
   value: "<p>This advanced editor has an inline toolbar, showing all the formatting options.</p>"
 }) %>
 
@@ -73,7 +64,6 @@
   id: "advanced-preview-editor",
   rails_advanced_editor: true,
   margin_bottom: "md",
-  placeholder: "Add text here, format it, and press 'Preview Output' to see what your stylized output will look like on the page.",
   value: "Add text here, format it, and press \"Preview Output\" to see what your stylized output will look like on the page."
 }) %>
 
@@ -119,3 +109,19 @@
     document.getElementById('advanced-preview-button')?.addEventListener('click', handleAdvancedButtonClick)
   })
 </script>
+
+
+<%= pb_rails("caption", props: { margin_top: "md", text: "Bonus: Advanced Extra Extensions (couldnt help thinking about this a little)" }) %>
+<%= pb_rails("body", props: { margin_bottom: "md", text: "Possibly possible: I tried to set up a tip_tap_options prop via which any extensions would need to be passed through after being impoted directly to an external propject. Look at code example for hypothetical use." }) %>
+<% tip_tap_options = {
+  extensions: []  # Extensions would be passed here as actual TipTap extension objects. Not sure if would work right away or if rich_text_editor.tsx would need to account for them.
+} %>
+<%= pb_rails("rich_text_editor", props: { 
+  rails_advanced_editor: true,
+  tip_tap_options: tip_tap_options,
+  margin_bottom: "md",
+  value: "HYPOTHETICALLY extensions can be added via tip_tap_options.extensions array.",
+}) %>
+
+<%= pb_rails("caption", props: { text: "Alt thought: some sort of stimulus or enhanced element based RTE that imports TipTap directly into Rails?" }) %>
+<%= pb_rails("body", props: {text: "If anything, may serve as an extension of the EXTENSIONS/tip_tap_options configuration. Not sure if works solo." }) %>

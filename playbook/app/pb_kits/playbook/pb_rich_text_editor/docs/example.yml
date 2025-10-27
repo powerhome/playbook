@@ -2,7 +2,6 @@ examples:
 
   rails:
   - rich_text_editor_advanced_default: Advanced Default
-  - rich_text_editor_advanced_default_direct_import: Advanced Default (Direct Rails Import)
   - rich_text_editor_default: Default
   - rich_text_editor_simple: Simple
   - rich_text_editor_attributes: Attributes

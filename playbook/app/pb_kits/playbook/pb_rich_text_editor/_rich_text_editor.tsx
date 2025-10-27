@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from 'react'
 import classnames from 'classnames'
 import { TrixEditor } from 'react-trix'
 // We have to import Tiptap here because it is not compatible with Rails
-import { useEditor, EditorContent } from '@tiptap/react'
+import { useEditor, EditorContent, Extensions } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
 import Link from '@tiptap/extension-link'
 
@@ -53,7 +53,10 @@ type RichTextEditorProps = {
   sticky?: boolean,
   template: string,
   value?: string,
-  maxWidth?: string
+  maxWidth?: string,
+  tipTapOptions?: {
+    extensions?: string[]
+  }
 } & GlobalProps
 
 const RichTextEditor = (props: RichTextEditorProps): React.ReactElement => {
@@ -78,7 +81,8 @@ const RichTextEditor = (props: RichTextEditorProps): React.ReactElement => {
     sticky = false,
     template = '',
     value = '',
-    maxWidth = "md"
+    maxWidth = "md",
+    tipTapOptions = {}
   } = props
 
   const ariaProps = buildAriaProps(aria),
@@ -87,9 +91,21 @@ const RichTextEditor = (props: RichTextEditorProps): React.ReactElement => {
     [showToolbarOnFocus, setShowToolbarOnFocus] = useState(false),
     containerRef = useRef<HTMLDivElement>(null)
 
+  // POC: hypothetical link for external projects, build extensions array from tipTapOptions for railsAdvancedEditor
+  const buildExtensions = (extensionNames?: string[]) => {
+    const defaultExtensions = [StarterKit, Link]
+    
+    if (!extensionNames || extensionNames.length === 0) {
+      return defaultExtensions
+    }
+
+    // POC: not sure if will work sort of "out of the box/everything goes" like this or will need to permit each of whichever TipTap extensions we want.
+    return defaultExtensions
+  }
+
   // Creates TipTap editor when railsAdvancedEditor is true (from Rails)
   const internalDependencyTiptapEditor = useEditor({
-    extensions: [StarterKit, Link],
+    extensions: buildExtensions(tipTapOptions?.extensions),
     content: value || '',
     onUpdate: ({ editor }) => {
       const html = editor.getHTML()
