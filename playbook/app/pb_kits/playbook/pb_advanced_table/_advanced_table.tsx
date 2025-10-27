@@ -134,7 +134,9 @@ const AdvancedTable = (props: AdvancedTableProps) => {
     updateLoadingStateRowCount,
     fullData,
     totalFetched,
-    isFetching
+    isFetching,
+    localPagination,
+    setLocalPagination
   } = useTableState({
     tableData,
     columnDefinitions,
@@ -152,7 +154,8 @@ const AdvancedTable = (props: AdvancedTableProps) => {
     onRowSelectionChange,
     columnVisibilityControl,
     pinnedRows,
-    rowStyling
+    rowStyling,
+    inlineRowLoading
   });
 
   // Initialize table actions
@@ -165,7 +168,10 @@ const AdvancedTable = (props: AdvancedTableProps) => {
     expanded,
     setExpanded,
     onToggleExpansionClick,
-    onRowSelectionChange
+    onRowSelectionChange,
+    inlineRowLoading,
+    localPagination,
+    setLocalPagination
   });
 
   // Set table row count for loading state
