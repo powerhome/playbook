@@ -85,6 +85,8 @@ module Playbook
                              default: ""
       prop :sync_end_with, type: Playbook::Props::String,
                            default: ""
+      prop :cursor, type: Playbook::Props::String,
+                    default: "pointer"
 
       def classname
         default_margin_bottom = margin_bottom.present? ? "" : " mb_sm"

@@ -100,7 +100,7 @@ module Playbook
           cursor.to_s.gsub(/([a-z\d])([A-Z])/, '\1-\2').downcase
         else
           # Default to 'pointer'
-          "pointer"
+          "text"
         end
       end
 
