@@ -1,5 +1,13 @@
-<%= react_component('RichTextEditor',
-                    object.rich_text_options,
-                    aria: object.aria,
-                    data: object.data
-                   ) %>
+<% if object.is_rails_advanced? %>
+  <%= react_component('RichTextEditor',
+                      object.rich_text_advanced_options,
+                      aria: object.aria,
+                      data: object.data
+                     ) %>
+<% else %>
+  <%= react_component('RichTextEditor',
+                      object.rich_text_options,
+                      aria: object.aria,
+                      data: object.data
+                     ) %>
+<% end %>

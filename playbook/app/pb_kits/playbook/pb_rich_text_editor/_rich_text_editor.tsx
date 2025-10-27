@@ -1,6 +1,10 @@
 import React, { useEffect, useState, useRef } from 'react'
 import classnames from 'classnames'
 import { TrixEditor } from 'react-trix'
+// We have to import Tiptap here because it is not compatible with Rails
+import { useEditor, EditorContent } from '@tiptap/react'
+import StarterKit from '@tiptap/starter-kit'
+import Link from '@tiptap/extension-link'
 
 import inlineFocus from './inlineFocus'
 import useFocus from './useFocus'
@@ -30,6 +34,7 @@ type Editor = {
 type RichTextEditorProps = {
   aria?: { [key: string]: string },
   advancedEditor?: any,
+  railsAdvancedEditor?: boolean,
   advancedEditorToolbar?: boolean,
   toolbarBottom?: boolean,
   children?: React.ReactNode | React.ReactNode[],
@@ -55,6 +60,7 @@ const RichTextEditor = (props: RichTextEditorProps): React.ReactElement => {
   const {
     aria = {},
     advancedEditor,
+    railsAdvancedEditor,
     advancedEditorToolbar = true,
     toolbarBottom = false,
     children,
@@ -80,6 +86,28 @@ const RichTextEditor = (props: RichTextEditorProps): React.ReactElement => {
     [editor, setEditor] = useState<Editor>(),
     [showToolbarOnFocus, setShowToolbarOnFocus] = useState(false),
     containerRef = useRef<HTMLDivElement>(null)
+
+  // Creates TipTap editor when railsAdvancedEditor is true (from Rails)
+  const internalDependencyTiptapEditor = useEditor({
+    extensions: [StarterKit, Link],
+    content: value || '',
+    onUpdate: ({ editor }) => {
+      const html = editor.getHTML()
+      const text = editor.getText()
+      onChange(html, text)
+      
+      // POC: Update hidden input for TipTap Rails Advanced Editor form submission
+      if (railsAdvancedEditor) {
+        const hiddenInput = document.getElementById(`hidden-input-${props.id || 'rich-text-editor'}`)
+        if (hiddenInput) {
+          (hiddenInput as HTMLInputElement).value = html ?? ''
+        }
+      }
+    },
+  }, [railsAdvancedEditor])
+
+  // Uses Internal Dependency TipTap editor if railsAdvancedEditor is true, otherwise uses passed editor instance
+  const currentEditor = railsAdvancedEditor ? internalDependencyTiptapEditor : advancedEditor
 
   const htmlProps = buildHtmlProps(htmlOptions)
   
@@ -140,7 +168,8 @@ const RichTextEditor = (props: RichTextEditorProps): React.ReactElement => {
   }
 
   useEffect(() => {
-    if (!advancedEditor || !focus) return
+    // POC: Updates advancedEditor to currentEditor in useEffect so focus works for Rails and React Advanced Editors
+    if (!currentEditor || !focus) return
 
     const handleFocus = () => setShowToolbarOnFocus(true)
     
@@ -149,7 +178,7 @@ const RichTextEditor = (props: RichTextEditorProps): React.ReactElement => {
       setShowToolbarOnFocus(false)
     }
 
-    const editorElement = advancedEditor?.view?.dom
+    const editorElement = currentEditor?.view?.dom
     if (editorElement) {
       editorElement.addEventListener('focus', handleFocus)
     }
@@ -162,7 +191,7 @@ const RichTextEditor = (props: RichTextEditorProps): React.ReactElement => {
       }
       document.removeEventListener('mousedown', handleClickOutside)
     }
-  }, [advancedEditor, focus])
+  }, [currentEditor, focus])
 
   //============= end focus prop with advanced editor=================
 
@@ -201,7 +230,7 @@ const RichTextEditor = (props: RichTextEditorProps): React.ReactElement => {
   )
 
   // Determine if toolbar should be shown
-  const shouldShowToolbar = focus && advancedEditor ? showToolbarOnFocus : advancedEditorToolbar
+  const shouldShowToolbar = focus && currentEditor ? showToolbarOnFocus : advancedEditorToolbar
 
   return (
     <div
@@ -212,20 +241,32 @@ const RichTextEditor = (props: RichTextEditorProps): React.ReactElement => {
         ref={focus ? containerRef : undefined}
     >
       {
-        advancedEditor ? (
+        // POC: Uses currentEditor to render the editor content in return so works for Rails and React Advanced Editors
+        currentEditor ? (
           <div 
               className={classnames("pb_rich_text_editor_advanced_container", { 
               ["toolbar-active"]: shouldShowToolbar,
               })}
           >
             {shouldShowToolbar && (
-              <EditorToolbar editor={advancedEditor}
+              <EditorToolbar editor={currentEditor}
                   extensions={extensions}
                   simple={simple}
                   sticky={sticky}
               />
             )}
-          { children }
+            {/* POC: EditorContent ternary needed for TipTap editor in Rails Advanced Editors*/}
+            {railsAdvancedEditor ? <EditorContent editor={currentEditor} /> : <>{children}</>}
+            
+            {/* POC: Set up hidden input for TipTap Rails Advanced Editor form submission */}
+            {railsAdvancedEditor && (
+              <input 
+                  id={`hidden-input-${props.id || 'rich-text-editor'}`}
+                  name={name || 'content'}
+                  type="hidden" 
+                  value={currentEditor?.getHTML() ?? ''}
+              />
+            )}
           </div>
         ) : (
           <TrixEditor
