@@ -1,1 +1,1 @@
-Grouped options can also be achieved with the Typeahead as seen here.
+Grouped options can be rendered via structuring the options in the way shown in the code snippet below.

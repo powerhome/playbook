@@ -52,13 +52,13 @@
     }
   ]
 %>
-
+<br />
 <%= pb_rails("typeahead", props: {
-    default_options:[{ label: "Pink", value: "#FFC0CB" }],
     id: "typeahead-custom-options",
     options: grouped_options,
     label: "Colors",
     name: :foo,
+    placeholder: "Select a Color...",
     is_multi: false
   })
 %>
