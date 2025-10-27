@@ -9,29 +9,20 @@ $pb_card_border_radius: $border_rad_heavier;
 
 // used to display dropdown on the left of the calender
 .quick-pick-drop-down {
-  width: auto;
-  display: grid;
+  width: 100%;
 }
 
 .quick-pick-ul {
-  padding: $space_xs 0px;
   margin: 0;
   list-style: none;
 }
 
 .nav-item {
   list-style: none;
-  border-radius: 6px;
-  border-bottom: 0;
-  margin: $space_xs $space_sm;
 }
 
 .nav-item-link {
   text-decoration: none;
-  border-width: $pb_card_border_width;
-  border-style: solid;
-  border-color: $border_light;
-  border-radius: $pb_card_border_radius;
   padding: $space_xs 14px;
   transition-property: color, background-color;
   transition-duration: 0.15s;
@@ -40,15 +31,21 @@ $pb_card_border_radius: $border_rad_heavier;
   color: $charcoal;
   font-size: $font_default;
   font-weight: $regular;
+  text-align: left;
+  border-bottom: 1px solid $border_light;
   &.active {
-    border-width: 2px;
-    border-color: $primary;
+    color: $white;
+    background-color: $primary;
+    &:hover {
+      background-color: $product_1_background;
+      color: $white;
+    }
   }
   @media (hover:hover) {
     &:hover {
       cursor: pointer;
-      box-shadow: $shadow-deep;
-      border-color: $slate;
+      background-color: $bg_light;
+      color: $primary;
     }
   }
 }
@@ -56,20 +53,4 @@ $pb_card_border_radius: $border_rad_heavier;
 // Hide the calendar
 .quick-pick-drop-down > .flatpickr-months, .quick-pick-drop-down > .flatpickr-innerContainer {
   display: none;
-}
-
-@media only screen and (max-width: 767px) {
-  .quick-pick-ul {
-    padding: $space_xs $space_xs;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .nav-item {
-    margin: $space_xxs $space_xs;
-  }
-
-  .nav-item-link {
-    padding: $space_xs $space_xxs;
-  }
 }
