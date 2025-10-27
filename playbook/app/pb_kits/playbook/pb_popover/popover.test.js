@@ -159,6 +159,62 @@ const PopoverTestClicktoClose3 = () => {
   )
 };
 
+//Test Popover with appendTo="parent"
+const PopoverTestAppendToParent = () => {
+  const [mockState, setMockState] = React.useState(false)
+  const togglePopover = () => {
+    setMockState(!mockState)
+  }
+
+  const popoverReference = (
+    <Button onClick={togglePopover}
+        text="Click Me"
+    />
+  );
+  return (
+    <div data-testid="parent-container"
+        id="parent-container"
+    >
+      <PbReactPopover
+          appendTo="parent"
+          offset
+          reference={popoverReference}
+          show={mockState}
+      >
+        {"Appended to parent"}
+      </PbReactPopover>
+    </div>
+  )
+};
+
+//Test Popover with appendTo CSS selector
+const PopoverTestAppendToSelector = () => {
+  const [mockState, setMockState] = React.useState(false)
+  const togglePopover = () => {
+    setMockState(!mockState)
+  }
+
+  const popoverReference = (
+    <Button onClick={togglePopover}
+        text="Click Me"
+    />
+  );
+  return (
+    <div data-testid="custom-container"
+        id="custom-container"
+    >
+      <PbReactPopover
+          appendTo="#custom-container"
+          offset
+          reference={popoverReference}
+          show={mockState}
+      >
+        {"Appended to custom container"}
+      </PbReactPopover>
+    </div>
+  )
+};
+
 
   test("renders Popover", () => {
     render(<PopoverTest data={{ testid: testId}}/>)
@@ -217,4 +273,28 @@ const PopoverTestClicktoClose3 = () => {
     fireEvent.click(btn);
 
     expect(kit).not.toBeInTheDocument;
+  });
+
+  test("renders Popover with appendTo parent", () => {
+    render(<PopoverTestAppendToParent data={{ testid: testId}}/>)
+    const btn = screen.getByText(/click me/i)
+    fireEvent.click(btn);
+    const kit = screen.getByText("Appended to parent");
+    expect(kit).toBeInTheDocument();
+    
+    // Check that the popover is rendered inside the parent container
+    const parentContainer = screen.getByTestId("parent-container");
+    expect(parentContainer).toContainElement(kit);
+  });
+
+  test("renders Popover with appendTo CSS selector", () => {
+    render(<PopoverTestAppendToSelector data={{ testid: testId}}/>)
+    const btn = screen.getByText(/click me/i)
+    fireEvent.click(btn);
+    const kit = screen.getByText("Appended to custom container");
+    expect(kit).toBeInTheDocument();
+    
+    // Check that the popover is rendered inside the custom container
+    const customContainer = screen.getByTestId("custom-container");
+    expect(customContainer).toContainElement(kit);
   });

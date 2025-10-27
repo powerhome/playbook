@@ -70,7 +70,6 @@ const getAppendTarget = (
   if (!appendTo || appendTo === "body") return document.body;
 
   if (appendTo === "parent") {
-    // Find the reference wrapper span that gets created by PopperReference
     const referenceWrapper = document.querySelector(`#reference-${targetId}`);
     if (referenceWrapper?.parentElement) {
       return referenceWrapper.parentElement;
@@ -80,7 +79,6 @@ const getAppendTarget = (
   const selectorMatch = document.querySelector(appendTo);
   if (selectorMatch instanceof HTMLElement) return selectorMatch;
 
-  // fallback
   return document.body;
 };
 
