@@ -2,6 +2,7 @@ examples:
   rails:
     - typeahead_default: Default
     - typeahead_default_options: With Default Options
+    - typeahead_custom_options: With Custom Options
     - typeahead_with_context: With Context
     - typeahead_with_pills: With Pills
     - typeahead_without_pills: Without Pills (Single Select)
@@ -21,6 +22,7 @@ examples:
   react:
     - typeahead_default: Default
     - typeahead_default_value: With Default Value
+    - typeahead_custom_options: With Custom Options
     - typeahead_react_hook: React Hook
     - typeahead_with_highlight: With Highlight
     - typeahead_with_pills: With Pills

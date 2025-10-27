@@ -1,0 +1,1 @@
+Grouped options can also be achieved with the Typeahead as seen here.
