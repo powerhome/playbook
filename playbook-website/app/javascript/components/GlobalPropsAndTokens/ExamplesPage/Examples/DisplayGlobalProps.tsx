@@ -6,9 +6,13 @@ import ExampleCodeCard from "../../Templates/Subcomponents/ExampleCodeCard";
 import * as DisplayImages from './DisplayImages'
 const DisplayGlobalProps = () => {
 
-  console.log(DisplayImages)
-
   type DisplayKey = keyof typeof DisplayImages;
+
+  const formatDisplay = (value: string) => {
+    return value.replace(/[-_]/g, " ").split(" ").map(word => 
+      word.charAt(0).toUpperCase() + word.slice(1)
+    ).join(" ");
+  };
 
   const VisualGuideExample = ({ display }: { display: DisplayKey }) => {
     return (
@@ -26,7 +30,7 @@ const DisplayGlobalProps = () => {
               src={DisplayImages[display]}
             />
           </Card>
-          <Body text={display} />
+          <Body text={formatDisplay(display)} />
         </Flex>
       </>
     )
@@ -37,10 +41,10 @@ const DisplayGlobalProps = () => {
       <Flex gap="sm" wrap>
         <VisualGuideExample display="block" />
         <VisualGuideExample display="inline" />
-        <VisualGuideExample display="inlineBlock" />
+        <VisualGuideExample display="inline_block" />
         <VisualGuideExample display="none" />
         <VisualGuideExample display="flex" />
-        <VisualGuideExample display="inlineFlex" />
+        <VisualGuideExample display="inline_flex" />
         <VisualGuideExample display="grid" />
       </Flex>
     );
@@ -49,10 +53,10 @@ const DisplayGlobalProps = () => {
   const values = [
     "block",
     "inline",
-    "inlineBlock",
+    "inline-block",
     "none",
     "flex",
-    "inlineFlex",
+    "inline-flex",
     "grid",
   ];
 
@@ -72,7 +76,7 @@ const sizes = {
       description="Display tokens define how an element is rendered within the layout. Values align with standard CSS display properties and offer consistent layout behavior across components."
       VisualGuideCard={DisplayCard()}
     >
-     <PropsExamplesTable
+    <PropsExamplesTable
         headers={[
         "Display",
         "Type",
@@ -82,18 +86,18 @@ const sizes = {
         ]}
         rows={
           values.map((value) => [
-            value,
+            formatDisplay(value),
             <ExampleCodeCard text="string" copyIcon={false} />,
             <ExampleCodeCard text={value} copyIcon={false} />,
-            <ExampleCodeCard text={`display:"${value}"`} />,
-            <ExampleCodeCard text={`display="${value}"`} />
+            <ExampleCodeCard id={`display-${value}-rails`} text={`display:"${value.replace("-", "_")}"`} />,
+            <ExampleCodeCard id={`display-${value}-react`} text={`display="${value.replace("-", "_")}"`} />
           ])
         }
       />
 
 <Card>
     <Caption text="Responsiveness"/>
-    <Body text="This global support responsive values using a breakpoint-based syntax that allows you to define different property values at different screen sizes. This makes it easy to create adaptive layouts without writing custom media queries."/>
+    <Body text="This global prop supports responsive values using a breakpoint-based syntax that allows you to define different property values at different screen sizes. This makes it easy to create adaptive layouts without writing custom media queries."/>
     <Body marginY="md"text="Responsive values are defined using an object with screen size keys and corresponding property values. You can optionally include a default value that acts as a fallback when no breakpoint-specific value is matched. It looks like this:"/>
     <Flex align="baseline" gap="xs" marginBottom="sm">
         <Caption text="Rails"/>

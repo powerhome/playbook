@@ -5,7 +5,7 @@ require_relative "../../../../app/pb_kits/playbook/pb_advanced_table/table_body"
 RSpec.describe Playbook::PbAdvancedTable::TableBody do
   subject { Playbook::PbAdvancedTable::TableBody }
 
-  it { is_expected.to define_string_prop(:id).with_default("") }
+  it { is_expected.to define_string_prop(:table_id).with_default("") }
   it { is_expected.to define_array_prop(:table_data).with_default([]) }
   it { is_expected.to define_array_prop(:column_definitions).with_default([]) }
   it {

@@ -6,22 +6,50 @@ import Cursor from "./Examples/Cursor";
 import Hover from "./Examples/Hover";
 import Dark from "./Examples/Dark";
 import LineHeight from "./Examples/LineHeightGlobalProps";
+import FlexBox from "./Examples/FlexBoxGlobalProps";
+import FlexBoxOrder from "./Examples/FlexBoxOrderGlobalProps";
+import FlexBoxGap from "./Examples/FlexBoxGap";
 import Display from "./Examples/DisplayGlobalProps";
 import MaxWidth from "./Examples/MaxWidth";
 import MinWidth from "./Examples/MinWidth";
+import Position from "./Examples/PositionGlobalProps";
+import TextAlign from "./Examples/TextAlignGlobalProps";
 import Width from "./Examples/Width";
+import ZIndex from "./Examples/Z-IndexGlobalProps";
+import Overflow from "./Examples/OverflowGlobalProps";
+import Truncate from "./Examples/Truncate";
+import VerticalAlign from "./Examples/VerticalAlignGlobalProps";
+import Height from "./Examples/Height";
+import MaxHeight from "./Examples/MaxHeight";
+import MinHeight from "./Examples/MinHeight";
+import NumberSpacing from "./Examples/NumberSpacing";
+import Padding from "./Examples/Padding";
 
 const COMPONENT_MAP = {
   cursor: Cursor,
   dark: Dark,
+  flex_box: FlexBox,
+  flex_box_order: FlexBoxOrder,
+  flex_box_gap: FlexBoxGap,
+  height: Height,
   hover: Hover,
   html_options: HtmlOptions,
   margin: Margin,
   line_height: LineHeight,
   display: Display,
+  max_height: MaxHeight,
   max_width: MaxWidth,
+  min_height: MinHeight,
   min_width: MinWidth,
+  number_spacing: NumberSpacing,
+  padding: Padding,
+  position: Position,
+  text_align: TextAlign,
+  overflow: Overflow,
+  truncate: Truncate,
+  vertical_align: VerticalAlign,
   width: Width,
+  z_index: ZIndex,
 };
 
 const GlobalPropsExamples = () => {

@@ -1,5 +1,6 @@
 @import "playbook-tokens/colors";
 @import "playbook-tokens/spacing";
+@import "playbook-tokens/typography";
 
 .global_props_page,
 .tokens_show_page {
@@ -24,12 +25,14 @@
   }
 
   .visual_guide_card_hover,
-  .visual_guide_card_cursor {
+  .visual_guide_card_cursor,
+  .visual_guide_card_truncate {
     width: 135px;
     height: 135px;
   }
 
-   .visual_guide_card_display {
+   .visual_guide_card_display,
+   .visual_guide_card_padding {
     width: 110px;
     height: 110px;
   }
@@ -37,4 +40,66 @@
   .visual_guide_card_line_height {
    width: 110px;
   }
+
+  .text_jumbo {
+    font-size: $text_jumbo;
+  }
+  .text_largest {
+    font-size: $text_largest;
+  }
+  .text_larger {
+    font-size: $text_larger;
+  }
+  .text_large {
+    font-size: $text_large;
+  }
+  .text_default {
+    font-size: $font_base;
+  }
+  .text_small {
+    font-size: $font_small;
+  }
+  .text_smaller {
+    font-size: $font_smaller;
+  }
+  .text_smallest {
+    font-size: $font_smallest;
+  }
+
+  .visual_guide_card_overflow {
+    height: 216px;
+    width: 210px;
+
+    .visual_guide_card_overflow_content {
+      border-top: none;
+      border-left: none;
+      border-right: none;
+      height: 108px;
+    }
+  }
+
+  .visual_guide_card_vertical_align_wrapper {
+    align-items: center;
+    display: flex;
+    flex: 0 0 calc(50% - 8px);
+    flex-direction: column;
+    .visual_guide_card_vertical_align {
+      height: 164px;
+      width: 444px;
+    }
+    .visual_guide_card_vertical_align_content {
+      height: 164px;
+    }
+  }
+}
+
+.min-height-global,
+.max-height-global {
+  height: 538px;
+}
+
+.visual_guide_card_height_content,
+.visual_guide_card_max_height_content,
+.visual_guide_card_min_height_content {
+  width: 75px;
 }

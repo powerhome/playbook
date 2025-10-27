@@ -12,6 +12,7 @@ const BreadCrumbsDefault = (props) => {
         {...props}
     >
       <Icon
+          color="link"
           icon="home"
           size="1x"
           {...props}
@@ -21,6 +22,7 @@ const BreadCrumbsDefault = (props) => {
           href="/home"
       >
         <Title
+            color="link"
             size="4"
             tag="span"
             text="Home"
@@ -28,6 +30,7 @@ const BreadCrumbsDefault = (props) => {
         />
       </BreadCrumbItem>
       <Icon
+          color="link"
           icon="users"
           size="1x"
           {...props}
@@ -37,6 +40,7 @@ const BreadCrumbsDefault = (props) => {
           href="/users"
       >
         <Title
+            color="link"
             size="4"
             tag="span"
             text="Users"

@@ -1,5 +1,5 @@
 import React from 'react'
-import { render, screen } from '../utilities/test-utils'
+import { render, screen, fireEvent, waitFor } from '../utilities/test-utils'
 import Typeahead from './_typeahead'
 
 const options = [
@@ -137,4 +137,38 @@ test('typeahead with colored pills', () => {
   const kit = screen.getByTestId('pills-color-test')
   const pill = kit.querySelector(".pb_form_pill_kit.pb_form_pill_neutral")
   expect(pill).toBeInTheDocument()
+})
+
+test('typeahead with defaultValue with focus behavior', async () => {
+  render(
+    <Typeahead
+        data={{ testid: 'default-value-focus-test' }}
+        defaultValue={[options[1]]}
+        options={options}
+    />
+  )
+
+  const kit = screen.getByTestId('default-value-focus-test')
+  const inputDiv = kit.querySelector(".typeahead-kit-select__single-value")
+  expect(inputDiv).toHaveTextContent("Red")
+  
+  // Test that the control can receive focus
+  const control = kit.querySelector('.typeahead-kit-select__control')
+  expect(control).toBeInTheDocument()
+  
+  // Simulate opening the menu by clicking the control
+  fireEvent.mouseDown(control)
+  
+  // Wait for menu to appear
+  await waitFor(() => {
+    const menu = kit.querySelector('.typeahead-kit-select__menu')
+    expect(menu).toBeInTheDocument()
+  })
+  
+  // Check that the correct option has the focused class
+  await waitFor(() => {
+    const focusedOption = kit.querySelector('.typeahead-kit-select__option--is-focused')
+    expect(focusedOption).toBeInTheDocument()
+    expect(focusedOption).toHaveTextContent('Red')
+  })
 })

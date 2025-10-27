@@ -1,0 +1,19 @@
+<% chart_options = { series: [{ data:[{ name: "Point 1", y: 100 }] }] } %>
+<% chart_options_1 = { series: [{ data:[{ name: "Point 2", y: 75 }] }] } %>
+<% chart_options_2 = { series: [{ data:[{ name: "Point 3", y: 50 }] }] } %>
+<% chart_options_3 = { series: [{ data:[{ name: "Point 4", y: 25 }] }] } %>
+
+<%= pb_rails("flex", props: {wrap: true, align: "center"}) do %>
+  <%= pb_rails("flex/flex_item", props: {fixed_size: "400px", overflow: "hidden", shrink: true }) do %>
+    <%= pb_rails("pb_gauge_chart", props: { options: chart_options }) %>
+  <% end %>
+  <%= pb_rails("flex/flex_item", props: {fixed_size: "300px", overflow: "hidden", shrink: true }) do %>
+    <%= pb_rails("pb_gauge_chart", props: { options: chart_options_1 }) %>
+  <% end %>
+  <%= pb_rails("flex/flex_item", props: {fixed_size: "200px", overflow: "hidden", shrink: true }) do %>
+      <%= pb_rails("pb_gauge_chart", props: { options: chart_options_2 }) %>
+  <% end %>
+  <%= pb_rails("flex/flex_item", props: {fixed_size: "155px", overflow: "hidden", shrink: true }) do %>
+    <%= pb_rails("pb_gauge_chart", props: { options: chart_options_3 }) %>
+  <% end %>
+<% end %>

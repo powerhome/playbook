@@ -39,6 +39,7 @@ export const TableHeader = ({
     hasAnySubRows,
     showActionsBar,
     selectableRows,
+    persistToggleExpansionButton,
     responsive,
     headerRef,
     virtualizedRows,
@@ -92,6 +93,7 @@ export const TableHeader = ({
                   isPinnedLeft={isPinnedLeft}
                   key={`${header.id}-header`}
                   loading={loading}
+                  persistToggleExpansionButton={persistToggleExpansionButton}
                   sortIcon={sortIcon}
                   table={table}
               />
@@ -136,6 +138,7 @@ export const TableHeader = ({
                   isVirtualized
                   key={`${header.id}-header-virtualized`}
                   loading={loading}
+                  persistToggleExpansionButton={persistToggleExpansionButton}
                   sortIcon={sortIcon}
                   table={table}
               />

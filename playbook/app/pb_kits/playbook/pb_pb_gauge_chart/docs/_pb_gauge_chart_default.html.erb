@@ -1,0 +1,5 @@
+<% chart_options = {
+  series:[{data:[{ name: "Name", y: 45 }]}]
+} %>
+
+<%= pb_rails("pb_gauge_chart", props: { options: chart_options }) %>

@@ -1,13 +1,13 @@
 
 <div>
   <%= pb_rails("bread_crumbs", props: { aria: { label: "Breadcrumb Navigation" } }) do%>
-    <%= pb_rails("icon", props: { icon: "home"}) %>
+    <%= pb_rails("icon", props: { icon: "home", color: "link"}) %>
     <%= pb_rails("bread_crumbs/bread_crumb_item", props: { link: "/" }) do %> 
-      <%= pb_rails("title", props: { size: 4, text: "Home", tag: "span" }) %>
+      <%= pb_rails("title", props: { size: 4, text: "Home", tag: "span", color: "link" }) %>
      <%end%>
-     <%= pb_rails("icon", props: { icon: 'users'}) %>
+     <%= pb_rails("icon", props: { icon: 'users', color: "link"}) %>
     <%= pb_rails("bread_crumbs/bread_crumb_item", props: { link: "/users" }) do %> 
-      <%= pb_rails("title", props: { size: 4, text: "Users", tag: "span" }) %>
+      <%= pb_rails("title", props: { size: 4, text: "Users", tag: "span", color: "link" }) %>
      <%end%>
      <%= pb_rails("icon", props: { icon: "user"}) %>
     <%= pb_rails("bread_crumbs/bread_crumb_item") do %> 

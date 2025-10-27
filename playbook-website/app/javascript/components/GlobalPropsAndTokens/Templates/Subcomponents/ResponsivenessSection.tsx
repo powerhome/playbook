@@ -13,7 +13,7 @@ const ResponsivenessSection = ({
     <Card gap="sm">
       <Caption text="Responsiveness" />
       <Body>
-        This global support responsive values using a breakpoint-based syntax
+        This global prop supports responsive values using a breakpoint-based syntax
         that allows you to define different property values at different screen
         sizes. This makes it easy to create adaptive layouts without writing
         custom media queries.

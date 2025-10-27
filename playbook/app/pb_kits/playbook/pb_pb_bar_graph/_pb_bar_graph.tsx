@@ -1,6 +1,6 @@
 import React, { useMemo } from "react"
 import { globalProps } from "../utilities/globalProps";
-import { buildAriaProps, buildDataProps, buildHtmlProps } from "../utilities/props";
+import { buildAriaProps, buildDataProps, buildCss, buildHtmlProps } from "../utilities/props";
 import Highcharts from "highcharts"
 import HighchartsReact from "highcharts-react-official"
 
@@ -18,23 +18,25 @@ type PbBarGraphProps = {
   htmlOptions?: {[key: string]: string | number | boolean | (() => void)};
 }
 
-const PbBarGraph = ({
+const PbBarGraph = ( props: PbBarGraphProps): React.ReactElement => {
+const {
   aria = {},
   data = {},
   id,
   htmlOptions = {},
   options,
-  className = "pb_pb_bar_graph",
-}: PbBarGraphProps): React.ReactElement => {
+  className,
+} = props
 
   const ariaProps = buildAriaProps(aria);
   const dataProps = buildDataProps(data)
   const htmlProps = buildHtmlProps(htmlOptions);
+  const classes = classnames(buildCss('pb_pb_bar_graph'), globalProps(props), className)
 
   const mergedOptions = useMemo(() => {
     if (!options || typeof options !== "object") {
       // eslint-disable-next-line no-console
-      console.error("❌ Invalid options passed to <BarGraph />", options)
+      console.error("❌ Invalid options passed to <PbBarGraph />", options)
       return {}
     }
 
@@ -46,7 +48,7 @@ const PbBarGraph = ({
     <div>
       <HighchartsReact
           containerProps={{
-                  className: classnames(globalProps, className),
+                  className: classnames(classes),
                   id: id,
                   ...ariaProps,
                   ...dataProps,

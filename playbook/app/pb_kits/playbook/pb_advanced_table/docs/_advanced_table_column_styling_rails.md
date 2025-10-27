@@ -1,4 +1,4 @@
-The `column_styling` prop is an optional item that can be used within `column_definitions` as shown in the code snippet below. It is an object that has 2 optional key/value pairs:
+The `column_styling` prop is an optional item that can be used within `column_definitions` as shown in the code snippet below.  It is an object that has several optional key/value pairs, this doc example highlights the following:
 
 1) `header_alignment`: This will allow you to control alignment of header content which is set to right aligned by default. you can set this to `left`, `right` or `center`.
 

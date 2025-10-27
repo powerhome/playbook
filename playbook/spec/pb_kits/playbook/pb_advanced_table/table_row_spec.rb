@@ -5,7 +5,7 @@ require_relative "../../../../app/pb_kits/playbook/pb_advanced_table/table_row"
 RSpec.describe Playbook::PbAdvancedTable::TableRow do
   subject { Playbook::PbAdvancedTable::TableRow }
 
-  it { is_expected.to define_string_prop(:id).with_default("") }
+  it { is_expected.to define_string_prop(:table_id).with_default("") }
   it { is_expected.to define_array_prop(:column_definitions).with_default([]) }
   it { is_expected.to define_prop(:row) }
   it { is_expected.to define_prop(:depth) }
@@ -99,6 +99,45 @@ RSpec.describe Playbook::PbAdvancedTable::TableRow do
       it "does not include pinned-left for any column" do
         expect(instance.td_classname(basic_column, 0)).to eq "id-cell"
         expect(instance.td_classname(basic_column, 1)).to eq "id-cell"
+      end
+    end
+
+    context "with column-level cell padding" do
+      let(:column_definitions) do
+        [
+          { accessor: "test", column_styling: { cell_padding: "md" } },
+          { accessor: "other", column_styling: { cell_padding: "lg" } },
+        ]
+      end
+      let(:instance) { subject.new(row: {}, depth: 0, column_definitions: column_definitions) }
+
+      it "includes column padding class" do
+        expect(instance.td_classname({ accessor: "test" }, 0)).to eq "id-cell p_md"
+        expect(instance.td_classname({ accessor: "other" }, 1)).to eq "id-cell p_lg"
+      end
+
+      it "does not include padding for columns without cell_padding" do
+        expect(instance.td_classname({ accessor: "nonexistent" }, 2)).to eq "id-cell"
+      end
+    end
+
+    context "with row-level cell padding" do
+      let(:row_styling) do
+        [
+          { row_id: "1", cell_padding: "sm" },
+          { row_id: "2", cell_padding: "xl" },
+        ]
+      end
+      let(:instance) { subject.new(row: {}, depth: 0, row_styling: row_styling, row_id: "1") }
+
+      it "includes row padding class" do
+        expect(instance.td_classname(basic_column, 0)).to eq "id-cell p_sm"
+        expect(instance.td_classname(basic_column, 1)).to eq "id-cell p_sm"
+      end
+
+      it "does not include padding for rows without styling" do
+        instance = subject.new(row: {}, depth: 0, row_styling: row_styling, row_id: "3")
+        expect(instance.td_classname(basic_column, 0)).to eq "id-cell"
       end
     end
   end
@@ -233,6 +272,68 @@ RSpec.describe Playbook::PbAdvancedTable::TableRow do
       it "does not render row checkbox" do
         expect(instance.render_row_checkbox).to be_nil
       end
+    end
+  end
+
+  describe "#cell_background_color" do
+    let(:row) { { id: 1, value: 25 } }
+    let(:column_definitions) do
+      [
+        { accessor: "value", column_styling: { cell_background_color: "success_secondary" } },
+        { accessor: "other", column_styling: { cell_background_color: ->(row) { row[:value] > 20 ? "warning_secondary" : "error_secondary" } } },
+        { accessor: "none", column_styling: {} },
+      ]
+    end
+    let(:instance) { subject.new(row: row, depth: 0, column_definitions: column_definitions) }
+
+    context "with static background color" do
+      it "returns the static color" do
+        expect(instance.cell_background_color({ accessor: "value" })).to eq "success_secondary"
+      end
+    end
+
+    context "with lambda background color" do
+      it "calls the lambda with row data and returns result" do
+        expect(instance.cell_background_color({ accessor: "other" })).to eq "warning_secondary"
+      end
+
+      it "handles different lambda results" do
+        row[:value] = 15
+        instance = subject.new(row: row, depth: 0, column_definitions: column_definitions)
+        expect(instance.cell_background_color({ accessor: "other" })).to eq "error_secondary"
+      end
+    end
+
+    context "without background color" do
+      it "returns nil when no cell_background_color specified" do
+        expect(instance.cell_background_color({ accessor: "none" })).to be_nil
+      end
+
+      it "returns nil when column not found" do
+        expect(instance.cell_background_color({ accessor: "nonexistent" })).to be_nil
+      end
+    end
+  end
+
+  describe "#has_custom_background_color?" do
+    let(:column_definitions) do
+      [
+        { accessor: "with_color", column_styling: { cell_background_color: "success_secondary" } },
+        { accessor: "without_color", column_styling: {} },
+      ]
+    end
+    let(:instance) { subject.new(row: {}, depth: 0, column_definitions: column_definitions) }
+
+    it "returns true when column has background color" do
+      expect(instance.has_custom_background_color?({ accessor: "with_color" })).to be true
+    end
+
+    it "returns false when column has no background color" do
+      expect(instance.has_custom_background_color?({ accessor: "without_color" })).to be false
+    end
+
+    it "returns false when column not found" do
+      expect(instance.has_custom_background_color?({ accessor: "nonexistent" })).to be false
     end
   end
 

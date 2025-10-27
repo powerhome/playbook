@@ -23,7 +23,7 @@ const DatePickerRangePattern = (props) => {
 
       <DatePicker
           pickerId="end-date-picker"
-          placeholder="Select a End Date"
+          placeholder="Select an End Date"
           syncEndWith="quickpick-for-range"
           {...props}
       />

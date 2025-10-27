@@ -111,7 +111,7 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.Ref<unknown>
   const inputRef = useRef<HTMLInputElement | null>(null)
   const itiRef = useRef<any>(null);
   const [inputValue, setInputValue] = useState(value)
-  const [error, setError] = useState(props.error)
+  const [error, setError] = useState(props.error || "")
   const [dropDownIsOpen, setDropDownIsOpen] = useState(false)
   const [selectedData, setSelectedData] = useState()
   const [hasTyped, setHasTyped] = useState(false)
@@ -123,24 +123,6 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.Ref<unknown>
       onValidate(true)
     }
   }, [error, onValidate])
-
-  /*
-    useImperativeHandle exposes the kit's input element to a parent component via a ref.
-    See the Playbook docs for use cases.
-    Read: https://react.dev/reference/react/useImperativeHandle
-  */
-  useImperativeHandle(ref, () => {
-    return {
-      clearField() {
-        setInputValue("")
-        setError("")
-        setHasTyped(false)
-      },
-      inputNode() {
-        return inputRef.current
-      }
-    }
-  })
 
   const unformatNumber = (formattedNumber: any) => {
     return formattedNumber.replace(/\D/g, "")
@@ -164,6 +146,13 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.Ref<unknown>
 
   const validateTooShortNumber = (itiInit: any) => {
     if (!itiInit) return
+
+    // If field is empty, don't show "too short" error
+    if (!inputValue || inputValue.trim() === '') {
+      setError('')
+      return false
+    }
+
     if (itiInit.getValidationError() === ValidationError.TooShort) {
       return showFormattedError('too short')
     } else {
@@ -183,7 +172,7 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.Ref<unknown>
   }
 
   const validateUnhandledError = (itiInit: any) => {
-    if (!required || !itiInit) return
+    if (!itiInit) return
     if (itiInit.getValidationError() === ValidationError.SomethingWentWrong) {
       if (inputValue.length === 1) {
         return showFormattedError('too short')
@@ -206,14 +195,27 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.Ref<unknown>
 
   const validateRepeatCountryCode = (itiInit: any) => {
     if (!itiInit) return
-    const countryDialCode = itiInit.getSelectedCountryData().dialCode;
+    const countryDialCode = itiRef.current.getSelectedCountryData().dialCode;
     if (unformatNumber(inputValue).startsWith(countryDialCode)) {
       return showFormattedError('repeat country code')
     }
   }
 
+  const validateRequiredField = () => {
+    if (!inputValue || inputValue.trim() === '') {
+      setError('Missing phone number')
+      return true
+    }
+    return false
+  }
 
   const validateErrors = () => {
+    // If field is empty, show error message
+    if (!inputValue || inputValue.trim() === '') {
+      if (validateRequiredField()) return
+      return
+    }
+
     if (!hasTyped && !error) return
 
     if (itiRef.current) isValid(itiRef.current.isValidNumber())
@@ -225,20 +227,105 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.Ref<unknown>
     if (validateRepeatCountryCode(itiRef.current)) return
   }
 
+  /*
+    useImperativeHandle exposes the kit's input element to a parent component via a ref.
+    See the Playbook docs for use cases.
+    Read: https://react.dev/reference/react/useImperativeHandle
+  */
+  useImperativeHandle(ref, () => {
+    return {
+      clearField() {
+        setInputValue("")
+        setError("")
+        setHasTyped(false)
+      },
+      inputNode() {
+        return inputRef.current
+      },
+      // Expose validation method for React Hook Form
+      validate() {
+        // Run validation and return error message or true
+        const isEmpty = !inputValue || inputValue.trim() === ''
+
+        if (isEmpty) {
+          // Show missing phone number error
+          const errorMessage = 'Missing phone number'
+          setError(errorMessage)
+          setHasTyped(true)
+          // Only return error for React Hook Form if field is required
+          return required ? errorMessage : true
+        }
+
+        if (!itiRef.current) {
+          return true
+        }
+
+        // Check for repeat country code first
+        const countryDialCode = itiRef.current.getSelectedCountryData().dialCode;
+        if (unformatNumber(inputValue).startsWith(countryDialCode)) {
+          const countryName = itiRef.current.getSelectedCountryData().name
+          const errorMessage = `Invalid ${countryName} phone number (repeat country code)`
+          setError(errorMessage)
+          setHasTyped(true)
+          return errorMessage
+        }
+
+        // Check if it only contains valid characters
+        if (!containOnlyNumbers(inputValue)) {
+          const countryName = itiRef.current.getSelectedCountryData().name
+          const errorMessage = `Invalid ${countryName} phone number (enter numbers only)`
+          setError(errorMessage)
+          setHasTyped(true)
+          return errorMessage
+        }
+
+        // Check if valid number
+        if (!itiRef.current.isValidNumber()) {
+          const countryName = itiRef.current.getSelectedCountryData().name
+          const validationError = itiRef.current.getValidationError()
+          let errorMessage = ''
+
+          if (validationError === ValidationError.TooShort) {
+            errorMessage = `Invalid ${countryName} phone number (too short)`
+          } else if (validationError === ValidationError.TooLong) {
+            errorMessage = `Invalid ${countryName} phone number (too long)`
+          } else if (validationError === ValidationError.MissingAreaCode) {
+            errorMessage = `Invalid ${countryName} phone number (missing area code)`
+          } else {
+            errorMessage = `Invalid ${countryName} phone number`
+          }
+
+          setError(errorMessage)
+          setHasTyped(true)
+
+          return errorMessage
+        }
+
+        // Clear error if valid
+        setError('')
+        return true
+      }
+    }
+  })
+
   const getCurrentSelectedData = (itiInit: any, inputValue: string) => {
     return { ...itiInit.getSelectedCountryData(), number: inputValue }
   }
 
   const handleOnChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
     if (!hasTyped) setHasTyped(true)
+
     setInputValue(evt.target.value)
+
     let phoneNumberData
+
     if (formatAsYouType) {
       const formattedPhoneNumberData = getCurrentSelectedData(itiRef.current, evt.target.value)
       phoneNumberData = {...formattedPhoneNumberData, number: unformatNumber(formattedPhoneNumberData.number)}
     } else {
       phoneNumberData = getCurrentSelectedData(itiRef.current, evt.target.value)
     }
+
     setSelectedData(phoneNumberData)
     onChange(phoneNumberData)
     isValid(itiRef.current.isValidNumber())
@@ -287,11 +374,26 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.Ref<unknown>
 
       inputRef.current.addEventListener("open:countrydropdown", () => setDropDownIsOpen(true))
       inputRef.current.addEventListener("close:countrydropdown", () => setDropDownIsOpen(false))
-    }
-    if (formatAsYouType) {
-      inputRef.current?.addEventListener("input", (evt) => {
-        handleOnChange(evt as unknown as React.ChangeEvent<HTMLInputElement>);
-      });
+
+      // Handle formatAsYouType with input event
+      if (formatAsYouType) {
+        inputRef.current.addEventListener("input", (evt: Event) => {
+          const target = evt.target as HTMLInputElement
+          const formattedValue = target.value
+
+          // Update internal state
+          setInputValue(formattedValue)
+          setHasTyped(true)
+
+          // Get phone number data with unformatted number
+          const formattedPhoneNumberData = getCurrentSelectedData(telInputInit, formattedValue)
+          const phoneNumberData = {...formattedPhoneNumberData, number: unformatNumber(formattedPhoneNumberData.number)}
+
+          setSelectedData(phoneNumberData)
+          onChange(phoneNumberData)
+          isValid(telInputInit.isValidNumber())
+        })
+      }
     }
   }, [])
 
@@ -300,13 +402,13 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.Ref<unknown>
     dark,
     "data-phone-number": JSON.stringify(selectedData),
     disabled,
-    error,
+    error: hasTyped ? error : props.error,
     type: 'tel',
     id,
     label,
     name,
     onBlur: validateErrors,
-    onChange: handleOnChange,
+    onChange: formatAsYouType ? undefined : handleOnChange,
     value: inputValue
   }
 

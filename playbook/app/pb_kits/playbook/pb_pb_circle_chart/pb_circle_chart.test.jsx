@@ -49,3 +49,50 @@ test('Kit to exist', () => {
   expect(screen.getByTestId(testId)).toBeInTheDocument()
 })
 
+test('Kit to apply base classname', () => {
+  render(
+    <PbCircleChart
+        data={{testid: testId}} 
+        options={chartOptions} 
+    />
+  )
+
+  expect(screen.getByTestId(testId)).toHaveClass('pb_pb_circle_chart')
+})
+
+test('Kit to have custom class', () => {
+  render(
+    <PbCircleChart
+        className='custom-class'
+        data={{testid: testId}} 
+        options={chartOptions} 
+    />
+  )
+
+  expect(screen.getByTestId(testId)).toHaveClass('custom-class')
+})
+
+test('Kit to apply global props', () => {
+  render(
+    <PbCircleChart
+        data={{testid: testId}} 
+        margin="lg"
+        options={chartOptions} 
+    />
+  )
+
+  expect(screen.getByTestId(testId)).toHaveClass('m_lg')
+})
+
+test('kit to apply id', () => {
+  render(
+    <PbCircleChart
+        data={{testid: testId}} 
+        id='circle-chart-id'
+        options={chartOptions} 
+    />
+  )
+
+  expect(screen.getByTestId(testId)).toHaveAttribute('id', 'circle-chart-id')
+})
+

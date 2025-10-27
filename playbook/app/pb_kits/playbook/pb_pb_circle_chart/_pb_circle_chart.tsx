@@ -46,7 +46,7 @@ const PbCircleChart = (props: PbCircleChartProps) => {
     <div>
       <HighchartsReact
           containerProps={{
-                  className: classnames(globalProps, className),
+                  className: classnames(classes),
                   id: id,
                   ...ariaProps,
                   ...dataProps,

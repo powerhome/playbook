@@ -60,7 +60,10 @@ module Playbook
       end
 
       def classname
-        generate_classname("pb_fixed_confirmation_toast_kit", status, multi_line_class) + close_class + position_class + auto_close_class + icon_class
+        default_z_index = z_index.present? ? "" : " z_index_max"
+        # IMPORTANT: the AutoClose class must be the last class in the string for JS to read it correctly
+        # Changing the order will break the auto_close functionality
+        generate_classname("pb_fixed_confirmation_toast_kit", status, multi_line_class) + close_class + position_class + icon_class + default_z_index + auto_close_class
       end
     end
   end

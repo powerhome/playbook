@@ -1,0 +1,80 @@
+<%= pb_rails("flex", props: { gap: "md", orientation: "column" }) do %>
+  <%# Card #1 - Success %>
+  <%= pb_rails("card", props: { highlight: { color: 'success', position: 'side' }, padding: "xs", padding_right: "sm" }) do %>
+    <%= pb_rails("flex", props: { padding_left: "xxs", padding_top: "xxs" }) do %>
+      <%= pb_rails("flex", props: { padding_right: "xs", padding_top: "xs" }) do %>
+        <%= pb_rails("icon", props: { color: "success", icon: "check-circle", size: "lg" }) %>
+      <% end %>
+      <%= pb_rails("flex", props: { gap: "xxs", orientation: "column" }) do %>
+        <%= pb_rails("title", props: { size: 4, text: "Great Job!" }) %>
+        <%= pb_rails("body", props: { text: "This is body text explaining what was so great!" }) %>
+      <% end %>
+    <% end %>
+  <% end %>
+
+  <%# Card #2 - Error %>
+  <%= pb_rails("card", props: { highlight: { color: 'error', position: 'side' }, padding: "xs", padding_right: "sm" }) do %>
+    <%= pb_rails("flex", props: { padding_left: "xxs", padding_top: "xxs" }) do %>
+      <%= pb_rails("flex", props: { padding_right: "xs", padding_top: "xs" }) do %>
+        <%= pb_rails("icon", props: { color: "error", icon: "exclamation-circle", size: "lg" }) %>
+      <% end %>
+      <%= pb_rails("flex", props: { gap: "xxs", orientation: "column" }) do %>
+        <%= pb_rails("title", props: { size: 4, text: "Oh No!" }) %>
+        <%= pb_rails("body", props: { text: "This is body text explaining what went wrong!" }) %>
+      <% end %>
+    <% end %>
+  <% end %>
+
+  <%# Card #3 - Warning %>
+  <%= pb_rails("card", props: { highlight: { color: 'warning', position: 'side' }, padding: "xs", padding_right: "sm" }) do %>
+    <%= pb_rails("flex", props: { padding_left: "xxs", padding_top: "xxs" }) do %>
+      <%= pb_rails("flex", props: { padding_right: "xs", padding_top: "xs" }) do %>
+        <%= pb_rails("icon", props: { color: "warning", icon: "exclamation-triangle", size: "lg" }) %>
+      <% end %>
+      <%= pb_rails("flex", props: { gap: "xxs", orientation: "column" }) do %>
+        <%= pb_rails("title", props: { size: 4, text: "Watch Out!" }) %>
+        <%= pb_rails("body", props: { text: "This is body text explaining what to watch out for!" }) %>
+      <% end %>
+    <% end %>
+  <% end %>
+
+  <%# Card #4 - Neutral %>
+  <%= pb_rails("card", props: { highlight: { color: 'neutral', position: 'side' }, padding: "xs", padding_right: "sm" }) do %>
+    <%= pb_rails("flex", props: { padding_left: "xxs", padding_top: "xxs" }) do %>
+      <%= pb_rails("flex", props: { padding_right: "xs", padding_top: "xs" }) do %>
+        <%= pb_rails("icon", props: { color: "neutral", icon: "info-circle", size: "lg" }) %>
+      <% end %>
+      <%= pb_rails("flex", props: { gap: "xxs", orientation: "column" }) do %>
+        <%= pb_rails("title", props: { size: 4, text: "Some information" }) %>
+        <%= pb_rails("body", props: { text: "This is body text explaining something for you" }) %>
+      <% end %>
+    <% end %>
+  <% end %>
+
+  <%# Card #5 - Info: Showing Long Text with No Width Restriction %>
+  <%= pb_rails("card", props: { highlight: { color: 'info', position: 'side' }, padding: "xs", padding_right: "sm" }) do %>
+    <%= pb_rails("flex", props: { padding_left: "xxs", padding_top: "xxs" }) do %>
+      <%= pb_rails("flex", props: { padding_right: "xs", padding_top: "xs" }) do %>
+        <%= pb_rails("icon", props: { color: "info", icon: "info-circle", size: "lg" }) %>
+      <% end %>
+      <%= pb_rails("flex", props: { gap: "xxs", orientation: "column" }) do %>
+        <%= pb_rails("title", props: { size: 4, text: "Some information!" }) %>
+        <%= pb_rails("body", props: { text: "This is body text explaining something for you that is long but has no width restriction so will span the width of the page!" }) %>
+      <% end %>
+    <% end %>
+  <% end %>
+
+  <%# Card #6 - Primary: Showing Long Text with Width Restriction %>
+  <%= pb_rails("card", props: { highlight: { color: 'primary', position: 'side' }, padding: "xs", padding_right: "sm", width: "sm" }) do %>
+    <%= pb_rails("flex", props: { padding_left: "xxs", padding_top: "xxs" }) do %>
+      <%= pb_rails("flex", props: { padding_right: "xs", padding_top: "xs" }) do %>
+        <%= pb_rails("icon", props: { color: "primary", icon: "info-circle", size: "lg" }) %>
+      <% end %>
+      <%= pb_rails("flex", props: { gap: "xxs", orientation: "column" }) do %>
+        <%= pb_rails("title", props: { size: 4, text: "Some information!" }) %>
+        <%= pb_rails("body", props: { text: "This is body text explaining something for you that is long and wraps to the next line because the card has a width restriction in place" }) %>
+      <% end %>
+    <% end %>
+  <% end %>
+  <%# End of example stop here if copy+pasting %>
+<% end %>

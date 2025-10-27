@@ -31,10 +31,119 @@ RSpec.describe Playbook::PbTypeahead::Typeahead do
   it { is_expected.to define_prop(:value) }
   it { is_expected.to define_prop(:input_options).of_type(Playbook::Props::HashProp).with_default({}) }
   it { is_expected.to define_boolean_prop(:preserve_search_input).with_default(false) }
+  it { is_expected.to define_prop(:multi_kit).with_default("") }
+  it { is_expected.to define_prop(:plus_icon).with_default(false) }
+  it { is_expected.to define_prop(:pill_color).with_default("primary") }
 
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
       expect(subject.new({}).classname).to eq "pb_typeahead_kit mb_sm"
+    end
+  end
+
+  describe "focus behavior with default_options" do
+    before(:each) do
+      @default_option = { label: "Red", value: "#FF0000" }
+      @options = [
+        { label: "Orange", value: "#FFA500" },
+        { label: "Red", value: "#FF0000" },
+        { label: "Green", value: "#00FF00" },
+        { label: "Blue", value: "#0000FF" },
+      ]
+    end
+
+    it "passes default_options correctly to React props for focus behavior", :aggregate_failures do
+      typeahead = subject.new(
+        default_options: [@default_option],
+        options: @options,
+        is_multi: false
+      )
+
+      react_options = typeahead.typeahead_react_options
+
+      expect(react_options[:defaultValue]).to eq([@default_option])
+      expect(react_options[:options]).to eq(@options)
+      expect(react_options[:isMulti]).to eq(false)
+    end
+
+    it "handles single default option for non-multi select", :aggregate_failures do
+      typeahead = subject.new(
+        default_options: [@default_option],
+        options: @options,
+        is_multi: false
+      )
+
+      react_options = typeahead.typeahead_react_options
+
+      expect(react_options[:defaultValue]).to be_an(Array)
+      expect(react_options[:defaultValue].first).to eq(@default_option)
+      expect(react_options[:defaultValue].first[:label]).to eq("Red")
+      expect(react_options[:defaultValue].first[:value]).to eq("#FF0000")
+    end
+
+    it "handles multiple default options for multi select", :aggregate_failures do
+      multiple_defaults = [@default_option, { label: "Blue", value: "#0000FF" }]
+
+      typeahead = subject.new(
+        default_options: multiple_defaults,
+        options: @options,
+        is_multi: true
+      )
+
+      react_options = typeahead.typeahead_react_options
+
+      expect(react_options[:defaultValue]).to eq(multiple_defaults)
+      expect(react_options[:isMulti]).to eq(true)
+    end
+
+    it "passes empty array when no default_options provided", :aggregate_failures do
+      typeahead = subject.new(options: @options)
+      react_options = typeahead.typeahead_react_options
+      expect(react_options[:defaultValue]).to eq([])
+    end
+
+    it "ensures focus-related props are correctly mapped", :aggregate_failures do
+      typeahead = subject.new(
+        default_options: [@default_option],
+        options: @options,
+        get_option_label: "customLabelFunc",
+        get_option_value: "customValueFunc"
+      )
+
+      react_options = typeahead.typeahead_react_options
+
+      # These props affect how focus logic compares options
+      expect(react_options[:getOptionLabel]).to eq("customLabelFunc")
+      expect(react_options[:getOptionValue]).to eq("customValueFunc")
+      expect(react_options[:defaultValue]).to eq([@default_option])
+    end
+  end
+
+  describe "#typeahead_with_pills_options" do
+    before(:each) do
+      @expected_options = [{ label: "Windows", value: "1" }]
+      @expected_label = "Label Here"
+      @expected_placeholder = "Placeholder Here"
+    end
+
+    it "returns base props", :aggregate_failures do
+      base_example = subject.new(label: @expected_label, options: @expected_options, placeholder: @expected_placeholder)
+      expect(base_example.typeahead_react_options[:defaultValue]).to match_array([])
+      expect(base_example.typeahead_react_options[:isMulti]).to eq(true)
+      expect(base_example.typeahead_react_options[:options]).to match_array(@expected_options)
+      expect(base_example.typeahead_react_options[:label]).to eq(@expected_label)
+      expect(base_example.typeahead_react_options[:placeholder]).to eq(@expected_placeholder)
+    end
+
+    it "returns props with default_options", :aggregate_failures do
+      default_options_example = subject.new(default_options: @expected_options, label: @expected_label, options: @expected_options, placeholder: @expected_placeholder)
+      expect(default_options_example.typeahead_react_options[:defaultValue]).to match_array(@expected_options)
+      expect(default_options_example.typeahead_react_options[:options]).to match_array(@expected_options)
+    end
+    it "returns props with load_options", :aggregate_failures do
+      default_options_example = subject.new(async: true, load_options: "foo", label: @expected_label, options: @expected_options, placeholder: @expected_placeholder)
+      expect(default_options_example.typeahead_react_options[:async]).to be(true)
+      expect(default_options_example.typeahead_react_options[:loadOptions]).to eq("foo")
     end
   end
 end

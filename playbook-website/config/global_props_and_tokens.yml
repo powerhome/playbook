@@ -1,19 +1,34 @@
 global_props:
   - cursor
   - dark
+  - flex_box
+  - flex_box_order
+  - flex_box_gap
+  - height
   - hover
   - html_options
   - margin
   - line_height
   - display
+  - max_height
   - max_width
+  - min_height
   - min_width
+  - number_spacing
+  - padding
+  - position
+  - text_align
+  - overflow
+  - truncate
+  - vertical_align
   - width
+  - z_index
 
 
 tokens:
   - animation
   - border_radius
+  - colors
   - display
   - line_height
   - letter_spacing
@@ -23,7 +38,10 @@ tokens:
   - scale
   - screen_sizes
   - shadows
+  - spacing
   - text_align
   - titles
+  - transition
+  - typography
   - vertical_align
   - z_index

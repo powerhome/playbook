@@ -5,11 +5,13 @@ type ExampleCodeCardTypes = {
   id?: string;
   text?: string;
   copyIcon?: boolean;
+  marginBottom?: string;
 };
 const ExampleCodeCard = ({
   text,
   id,
   copyIcon = true,
+  marginBottom,
 }: ExampleCodeCardTypes) => {
   // eslint-disable-next-line no-unused-vars
   const [copied, copyToClipboard] = usePBCopy({ from: id });
@@ -37,6 +39,7 @@ const ExampleCodeCard = ({
       alignItems="center"
       gap="xxs"
       htmlOptions={{ onClick: () => copyIcon && handleCopy() }}
+      marginBottom={ marginBottom || undefined }
     >
       <Card borderRadius="sm" background="light" padding="xxs" borderNone>
         <Body id={id}>{text}</Body>

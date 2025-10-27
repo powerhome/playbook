@@ -1,0 +1,27 @@
+<% data = [{ name: "Rating", y: 4.5 }] %>
+
+<% chart_options = {
+title: {
+    text: "Product Rating",
+  },
+  yAxis: {
+    min: 0,
+    max: 5,
+    lineWidth: 0,
+    tickWidth: 0,
+    minorTickInterval: nil,
+    tickAmount: 2,
+    tickPositions: [0, 5],
+    labels: {
+      y: 26,
+      enabled: true,
+      style: {
+        color: '#C1CDD6',
+        fontWeight:'700',
+      }
+    },
+  },
+  series: [{ data: data }],
+} %>
+
+<%= pb_rails("pb_gauge_chart", props: { options: chart_options }) %>
