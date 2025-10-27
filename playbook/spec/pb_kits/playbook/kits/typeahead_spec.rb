@@ -117,6 +117,127 @@ RSpec.describe Playbook::PbTypeahead::Typeahead do
       expect(react_options[:getOptionValue]).to eq("customValueFunc")
       expect(react_options[:defaultValue]).to eq([@default_option])
     end
+
+    it "handles grouped options with default option for focus behavior", :aggregate_failures do
+      grouped_options = [
+        {
+          label: "Warm Colors",
+          options: [
+            { label: "Red", value: "#FF0000" },
+            { label: "Orange", value: "#FFA500" },
+            { label: "Yellow", value: "#FFFF00" },
+          ],
+        },
+        {
+          label: "Cool Colors",
+          options: [
+            { label: "Blue", value: "#0000FF" },
+            { label: "Teal", value: "#008080" },
+            { label: "Cyan", value: "#00FFFF" },
+          ],
+        },
+        {
+          label: "Fun Shades",
+          options: [
+            { label: "Pink", value: "#FFC0CB" },
+            { label: "Magenta", value: "#FF00FF" },
+            { label: "Purple", value: "#800080" },
+          ],
+        },
+      ]
+
+      pink_option = { label: "Pink", value: "#FFC0CB" }
+
+      typeahead = subject.new(
+        default_options: [pink_option],
+        options: grouped_options,
+        is_multi: false
+      )
+
+      react_options = typeahead.typeahead_react_options
+
+      # Verify grouped options structure is preserved
+      expect(react_options[:options]).to eq(grouped_options)
+      expect(react_options[:options].first[:label]).to eq("Warm Colors")
+      expect(react_options[:options].first[:options]).to be_an(Array)
+      # Verify default value is set correctly for focus behavior
+      expect(react_options[:defaultValue]).to eq([pink_option])
+      expect(react_options[:defaultValue].first[:label]).to eq("Pink")
+    end
+
+    it "handles grouped options with default option from first group", :aggregate_failures do
+      grouped_options = [
+        {
+          label: "Warm Colors",
+          options: [
+            { label: "Red", value: "#FF0000" },
+            { label: "Orange", value: "#FFA500" },
+            { label: "Yellow", value: "#FFFF00" },
+          ],
+        },
+        {
+          label: "Cool Colors",
+          options: [
+            { label: "Blue", value: "#0000FF" },
+            { label: "Teal", value: "#008080" },
+          ],
+        },
+      ]
+
+      orange_option = { label: "Orange", value: "#FFA500" }
+
+      typeahead = subject.new(
+        default_options: [orange_option],
+        options: grouped_options,
+        is_multi: false
+      )
+
+      react_options = typeahead.typeahead_react_options
+
+      # Verify grouped structure is maintained
+      expect(react_options[:options]).to eq(grouped_options)
+      # Verify default value from first group works correctly
+      expect(react_options[:defaultValue]).to eq([orange_option])
+      expect(react_options[:defaultValue].first[:label]).to eq("Orange")
+      expect(react_options[:defaultValue].first[:value]).to eq("#FFA500")
+    end
+
+    it "handles grouped options with multiple defaults for multi select", :aggregate_failures do
+      grouped_options = [
+        {
+          label: "Warm Colors",
+          options: [
+            { label: "Red", value: "#FF0000" },
+            { label: "Orange", value: "#FFA500" },
+          ],
+        },
+        {
+          label: "Cool Colors",
+          options: [
+            { label: "Blue", value: "#0000FF" },
+            { label: "Teal", value: "#008080" },
+          ],
+        },
+      ]
+
+      multiple_defaults = [
+        { label: "Red", value: "#FF0000" },
+        { label: "Blue", value: "#0000FF" },
+      ]
+
+      typeahead = subject.new(
+        default_options: multiple_defaults,
+        options: grouped_options,
+        is_multi: true
+      )
+
+      react_options = typeahead.typeahead_react_options
+
+      # Verify multiple defaults from different groups
+      expect(react_options[:defaultValue]).to eq(multiple_defaults)
+      expect(react_options[:defaultValue].length).to eq(2)
+      expect(react_options[:isMulti]).to eq(true)
+    end
   end
 
   describe "#typeahead_with_pills_options" do

@@ -172,3 +172,44 @@ test('typeahead with defaultValue with focus behavior', async () => {
     expect(focusedOption).toHaveTextContent('Red')
   })
 })
+
+test('typeahead with grouped options and defaultValue focus behavior', async () => {
+  const groupedOptions = [
+    {
+      label: "Warm Colors",
+      options: [
+        { label: "Red", value: "#FF0000" },
+        { label: "Orange", value: "#FFA500" },
+        { label: "Yellow", value: "#FFFF00" }
+      ]
+    },
+    {
+      label: "Cool Colors",
+      options: [
+        { label: "Blue", value: "#0000FF" },
+        { label: "Teal", value: "#008080" },
+        { label: "Cyan", value: "#00FFFF" }
+      ]
+    },
+    {
+      label: "Fun Shades",
+      options: [
+        { label: "Pink", value: "#FFC0CB" },
+        { label: "Magenta", value: "#FF00FF" },
+        { label: "Purple", value: "#800080" }
+      ]
+    }
+  ]
+
+  render(
+    <Typeahead
+        data={{ testid: 'grouped-options-focus-test' }}
+        defaultValue={[{ label: "Pink", value: "#FFC0CB" }]}
+        options={groupedOptions}
+    />
+  )
+
+  const kit = screen.getByTestId('grouped-options-focus-test')
+  const inputDiv = kit.querySelector(".typeahead-kit-select__single-value")
+  expect(inputDiv).toHaveTextContent("Pink")
+})
