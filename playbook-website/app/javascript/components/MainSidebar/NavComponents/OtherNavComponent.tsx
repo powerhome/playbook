@@ -95,7 +95,9 @@ export const OtherNavItems = ({
     }
   
     if (Object.keys(isActive).length === 0) {
-      return link.link === currentURL
+      // strip /react or /rails from the end of currentURL before comparing
+      const normalizedCurrentURL = currentURL.replace(/\/(react|rails)$/, '');
+      return link.link === currentURL || link.link === normalizedCurrentURL
     }
   
     return null
