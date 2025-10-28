@@ -42,7 +42,7 @@ private
   helper_method :current_building_block_type
 
   def set_building_block
-    @application_js.concat ["building_block_show"]
+    @application_js.concat ["building_blocks_show"]
     building_block = BUILDING_BLOCKS["BuildingBlocks"].find { |p| p["link"] == params[:name] }
 
     if building_block
