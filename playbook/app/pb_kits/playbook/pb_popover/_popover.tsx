@@ -1,5 +1,5 @@
 /* eslint-disable react/no-multi-comp */
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import ReactDOM from "react-dom";
 import {
   Popper,
@@ -170,11 +170,19 @@ const PbReactPopover = (props: PbPopoverProps): React.ReactElement => {
     minHeight,
     minWidth,
     width,
+    closeOnClick,
+    shouldClosePopover = noop,
   } = props;
 
-  useEffect(() => {
-    const { closeOnClick, shouldClosePopover = noop } = props;
+  // Store latest callback in a ref to avoid re-runs
+  const shouldClosePopoverRef = useRef(shouldClosePopover);
 
+  // Update ref on change
+  useEffect(() => {
+    shouldClosePopoverRef.current = shouldClosePopover;
+  }, [shouldClosePopover]);
+
+  useEffect(() => {
     if (!closeOnClick) return;
 
     // Function to handle popover event listener and targetId.
@@ -190,7 +198,7 @@ const PbReactPopover = (props: PbPopoverProps): React.ReactElement => {
         target.closest("#reference-" + targetId) !== null;
 
       const shouldClose = () => {
-        setTimeout(() => shouldClosePopover(true), 0);
+        setTimeout(() => shouldClosePopoverRef.current(true), 0);
       }
 
       switch (closeOnClick) {
@@ -211,7 +219,7 @@ const PbReactPopover = (props: PbPopoverProps): React.ReactElement => {
     return () => {
       document.body.removeEventListener("click", handleClick, { capture: true });
     };
-  }, [targetId, props.closeOnClick, props.shouldClosePopover]);
+  }, [targetId, closeOnClick]);
 
   const popoverComponent = (
     <Popover
