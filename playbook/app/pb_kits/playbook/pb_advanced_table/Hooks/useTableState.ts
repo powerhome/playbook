@@ -12,7 +12,6 @@ import {
 import { GenericObject } from "../../types";
 import { createColumnHelper } from "@tanstack/react-table";
 import { createCellFunction } from "../Utilities/CellRendererUtils";
-import { inline } from '@floating-ui/react';
 
 interface UseTableStateProps {
   tableData: GenericObject[];
