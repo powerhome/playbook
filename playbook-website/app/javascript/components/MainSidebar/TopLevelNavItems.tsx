@@ -16,7 +16,7 @@ export const TopLevelNavItem = ({
   kit,
   category,
   collapsibles,
-  patterns,
+  building_blocks,
   getting_started,
   design_guidelines,
   whats_new,
@@ -190,7 +190,7 @@ export const TopLevelNavItem = ({
                 name={name}
                 currentURL={currentURL}
                 dark={dark}
-                patterns={patterns}
+                building_blocks={building_blocks}
                 setIsActive={setIsActive}
                 isActive={isActive}
                 updateTopLevelNav={updateTopLevelNav}

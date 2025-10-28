@@ -13,7 +13,7 @@ const MainSidebar = ({
   kits_with_status,
   PBversion,
   search_list,
-  patterns,
+  building_blocks,
   getting_started,
   design_guidelines,
   whats_new,
@@ -88,7 +88,7 @@ const MainSidebar = ({
           kit={kit}
           category={category}
           collapsibles={collapsibles}
-          patterns={patterns}
+          building_blocks={building_blocks}
           getting_started={getting_started}
           design_guidelines={design_guidelines}
           whats_new={whats_new}

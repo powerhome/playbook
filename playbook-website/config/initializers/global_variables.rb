@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 MENU = Rails.cache.fetch("menu_yml") { YAML.load_file(Rails.root.join("config/menu.yml")) }
-PATTERNS = Rails.cache.fetch("patterns_yml") { YAML.load_file(Rails.root.join("config/patterns.yml")) }
+BUILDING_BLOCKS = Rails.cache.fetch("building_blocks_yml") { YAML.load_file(Rails.root.join("config/building_blocks.yml")) }
 GLOBAL_PROPS_AND_TOKENS = Rails.cache.fetch("global_props_and_tokens_yml") { YAML.load_file(Rails.root.join("config/global_props_and_tokens.yml")) }
 
 require "markdown_helper"

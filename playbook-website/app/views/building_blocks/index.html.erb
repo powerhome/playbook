@@ -2,9 +2,9 @@
   <%= pb_rails("background", props: { background_color: "light", padding: "xl" }) do %>
     <%= pb_rails("flex", props: { classname: "header-text", orientation: "column", horizontal: "center" }) do %>
       <div>
-        <%= pb_rails("title", props: { margin_bottom: "lg", text: "Patterns", tag: "h1", size: 1 }) %>
+        <%= pb_rails("title", props: { margin_bottom: "lg", text: "Building Blocks", tag: "h1", size: 1 }) %>
         <%= pb_rails("body", props: {
-          text: "Patterns are best-practice, UI-focused solutions that show how kits can be combined to achieve specific layouts, flows, and user goals. They highlight how components work together to create a cohesive experience!"
+          text: "Building Blocks are reusable, real-world examples that show how Playbook kits can be combined to build common UI interfaces. They highlight practical, best-practice ways to assemble layouts, flows, and interactions, making it easy to copy, adapt, and create consistent experiences across apps!"
         }) %>
       </div>
     <% end %>
@@ -14,13 +14,13 @@
     <div class="main-content-wrapper">
       <%= pb_rails("layout", props: { layout: "collection" }) do %>
         <%= pb_rails("layout/body", props: { classname: "sample-card-grid-override" }) do %>
-          <% @patterns.each do |pattern| %>
-            <a href="/patterns/<%= pattern["link"] %>">
+          <% @building_blocks.each do |building_block| %>
+            <a href="/building_blocks/<%= building_block["link"] %>">
               <%= pb_rails("card", props: { classname: "ui-sample-card", padding: "md" }) do %>
                 <%= pb_rails("flex", props: { classname: "flex-container", spacing: "between", vertical: "center" }) do %>
                   <%= pb_rails("title", props: {
                     id: 'kits-used',
-                    text: pattern["name"],
+                    text: building_block["name"],
                     tag: "h4",
                     size: 4,
                     variant: "link"

@@ -35,9 +35,9 @@ export const SideBarNavItems = [
         leftIcon:"palette"
     },
     {
-        name: "Patterns",
+        name: "Building Blocks",
         key: "top-nav-item-6",
-        link: "/patterns",
+        link: "/building_blocks",
         children: true,
         leftIcon:"chalkboard-teacher"
     },
