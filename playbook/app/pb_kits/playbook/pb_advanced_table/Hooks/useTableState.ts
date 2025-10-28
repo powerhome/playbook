@@ -250,16 +250,16 @@ export function useTableState({
     }
   }, [pagination, inlineRowLoading, paginationProps?.pageIndex, paginationProps?.pageSize]);
 
-  // Call the callback with the new page index when localPagination.pageIndex changes (for inlineRowLoading)
+  // Call the callback with the new page index when localPagination.pageIndex changes (with inlineRowLoading)
   useEffect(() => {
-    if (pagination && inlineRowLoading && paginationProps) {
+    if (pagination && inlineRowLoading && paginationProps?.onPageChange) {
       paginationProps.onPageChange(localPagination.pageIndex);
     }
   }, [localPagination.pageIndex, pagination, inlineRowLoading, paginationProps]);
 
-  // Call the callback with the new page index when table pagination state changes (for default pagination)
+  // Call the callback with the new page index when localPagination.pageIndex changes (without inlineRowLoading)
   useEffect(() => {
-    if (pagination && !inlineRowLoading && paginationProps) {
+    if (pagination && !inlineRowLoading && paginationProps?.onPageChange) {
       const currentPageIndex = table.getState().pagination.pageIndex;
       paginationProps.onPageChange(currentPageIndex);
     }
