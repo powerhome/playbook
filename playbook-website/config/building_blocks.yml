@@ -6,12 +6,12 @@ BuildingBlocks:
       - Global Props
     link: "global_positioning"
   - name: "Custom User Display"
-    description: "For a custom user display, you can use multiple kits to create a unique user experience. This pattern is designed to be flexible and adaptable to your needs."
+    description: "For a custom user display, you can use multiple kits to create a unique user experience. This building block is designed to be flexible and adaptable to your needs."
     tags:
       - User
     link: "custom_user_display"
   - name: "Table Filter Card"
-    description: "A responsive table with filter inside a card is a common configuration for organizing data. This pattern takes care of the set up so you can focus on implementation. Please note that these examples are not fully functional."
+    description: "A responsive table with filter inside a card is a common configuration for organizing data. This building block takes care of the set up so you can focus on implementation. Please note that these examples are not fully functional."
     tags:
       - Table, Filter
     link: "table_filter_card"
