@@ -89,7 +89,7 @@ const Popover = (props: PbPopoverProps) => {
   const popoverSpacing =
     filteredGlobalProps.includes("dark") || !filteredGlobalProps
       ? "p_sm"
-      : filteredGlobalProps 
+      : filteredGlobalProps
   const overflowHandling = maxHeight || maxWidth ? "overflow_handling" : "";
   const zIndexStyle = zIndex ? { zIndex: zIndex } : {};
   const widthHeightStyles = () => {
@@ -177,35 +177,41 @@ const PbReactPopover = (props: PbPopoverProps): React.ReactElement => {
 
     if (!closeOnClick) return;
 
-    document.body.addEventListener(
-      "click",
-      (e: MouseEvent) => {
-        const target = e.target as HTMLElement
+    // Function to handle popover event listener and targetId.
+    // Ensure that whenever the component is conditionally rendered
+    // that the old listener is removed and the new listener is
+    // updated with the targetId.
+    const handleClick = (e: MouseEvent) => {
+      const target = e.target as HTMLElement
 
-        const targetIsPopover =
-          target.closest("#" + targetId) !== null;
-        const targetIsReference =
-          target.closest("#reference-" + targetId) !== null;
+      const targetIsPopover =
+        target.closest("#" + targetId) !== null;
+      const targetIsReference =
+        target.closest("#reference-" + targetId) !== null;
 
-        const shouldClose = () => {
-          setTimeout(() => shouldClosePopover(true), 0);
-        }
+      const shouldClose = () => {
+        setTimeout(() => shouldClosePopover(true), 0);
+      }
 
-        switch (closeOnClick) {
-          case "outside":
-            if (!targetIsPopover && !targetIsReference) shouldClose();
-            break;
-          case "inside":
-            if (targetIsPopover) shouldClose();
-            break;
-          case "any":
-            if (targetIsPopover || !targetIsPopover && !targetIsReference) shouldClose();
-            break;
-        }
-      },
-      { capture: true }
-    );
-  }, []);
+      switch (closeOnClick) {
+        case "outside":
+          if (!targetIsPopover && !targetIsReference) shouldClose();
+          break;
+        case "inside":
+          if (targetIsPopover) shouldClose();
+          break;
+        case "any":
+          if (targetIsPopover || !targetIsPopover && !targetIsReference) shouldClose();
+          break;
+      }
+    };
+
+    document.body.addEventListener("click", handleClick, { capture: true });
+
+    return () => {
+      document.body.removeEventListener("click", handleClick, { capture: true });
+    };
+  }, [targetId, props.closeOnClick, props.shouldClosePopover]);
 
   const popoverComponent = (
     <Popover
