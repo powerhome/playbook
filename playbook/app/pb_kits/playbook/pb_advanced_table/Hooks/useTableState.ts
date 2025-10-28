@@ -12,6 +12,7 @@ import {
 import { GenericObject } from "../../types";
 import { createColumnHelper } from "@tanstack/react-table";
 import { createCellFunction } from "../Utilities/CellRendererUtils";
+import { inline } from '@floating-ui/react';
 
 interface UseTableStateProps {
   tableData: GenericObject[];
@@ -249,6 +250,21 @@ export function useTableState({
       });
     }
   }, [pagination, inlineRowLoading, paginationProps?.pageIndex, paginationProps?.pageSize]);
+
+  // Call the callback with the new page index when localPagination.pageIndex changes (for inlineRowLoading)
+  useEffect(() => {
+    if (pagination && inlineRowLoading && paginationProps) {
+      paginationProps.onPageChange(localPagination.pageIndex);
+    }
+  }, [localPagination.pageIndex, pagination, inlineRowLoading, paginationProps]);
+
+  // Call the callback with the new page index when table pagination state changes (for default pagination)
+  useEffect(() => {
+    if (pagination && !inlineRowLoading && paginationProps) {
+      const currentPageIndex = table.getState().pagination.pageIndex;
+      paginationProps.onPageChange(currentPageIndex);
+    }
+  }, [table.getState().pagination.pageIndex, pagination, inlineRowLoading, paginationProps]);
 
   // Check if table has any sub-rows
   const hasAnySubRows = table.getRowModel().rows.some(row => row.subRows && row.subRows.length > 0);
