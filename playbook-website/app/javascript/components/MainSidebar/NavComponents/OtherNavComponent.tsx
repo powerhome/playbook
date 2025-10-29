@@ -50,8 +50,10 @@ export const OtherNavItems = ({
   }))
 
   const globalPropsMenu = global_props_and_tokens?.global_props?.map((item: string) => {
+    let displayName = item.replace(/_/g, ' ').replace(/\b\w/g, (char: string) => char.toUpperCase())
+    
     const menuItem: any = {
-      name: item.replace(/_/g, ' ').replace(/\b\w/g, (char: string) => char.toUpperCase()),
+      name: displayName,
       link: createLink(`/global_props/${item}`),
     }
     
@@ -59,6 +61,8 @@ export const OtherNavItems = ({
       menuItem.tag = 'flex_box'
     } else if (item.startsWith('flex_box_')) {
       menuItem.tag = 'flex_box_child'
+      // Remove 'Flex Box ' prefix from child items to avoid redundancy
+      menuItem.name = displayName.replace(/^Flex Box\s+/, '')
     }
     
     return menuItem
@@ -120,12 +124,12 @@ export const OtherNavItems = ({
     return null
   }
 
-  // Group flex_box items together
+  // flex_box items get special handling
   const flexBoxParent = menuItems.find((item: any) => item?.tag === 'flex_box')
   const flexBoxChildren = menuItems.filter((item: any) => item?.tag === 'flex_box_child')
   const otherItems = menuItems.filter((item: any) => !item?.tag || (item?.tag !== 'flex_box' && item?.tag !== 'flex_box_child'))
 
-  // Create combined list with flex_box in alphabetical order
+  // Create combined list with flex_box 
   const allItemsToRender: any[] = [...otherItems]
   if (flexBoxParent) {
     // Find the correct alphabetical position for flex_box
@@ -169,9 +173,21 @@ export const OtherNavItems = ({
     <>
       {allItemsToRender.map((link: any, i: number) => {
         if (link.isFlexBoxParent) {
+          // Check if we're on a flex_box child page
+          const isOnChildPage = flexBoxChildren.some((child: any) => {
+            const normalizedCurrentURL = currentURL.replace(/\/(react|rails)$/, '');
+            return child.link === currentURL || child.link === normalizedCurrentURL;
+          });
+          
+          // Parent should only be active if we're on the exact flex_box page, not a child
+          const isParentActive = !isOnChildPage && (
+            currentURL === link.link || 
+            currentURL.replace(/\/(react|rails)$/, '') === link.link
+          );
+          
           return (
             <NavItem
-              active={currentURL.startsWith('/global_props/flex_box')}
+              active={isParentActive}
               collapsed={flexBoxCollapsed}
               collapsible={flexBoxChildren.length > 0}
               collapsibleTrail={flexBoxChildren.length > 0}
