@@ -24,6 +24,7 @@ import { uniqueId } from '../utilities/object';
 type ModifiedGlobalProps = Omit<GlobalProps, 'minWidth' | 'maxHeight' | 'minHeight'>
 
 type PbPopoverProps = {
+  appendTo?: string;
   aria?: { [key: string]: string };
   className?: string;
   closeOnClick?: "outside" | "inside" | "any";
@@ -60,6 +61,25 @@ const popoverModifiers = ({
   offset: boolean;
 }) => {
   return offset ? modifiers.concat([POPOVER_MODIFIERS.offset]) : modifiers;
+};
+
+const getAppendTarget = (
+  appendTo: string | undefined,
+  targetId: string
+): HTMLElement => {
+  if (!appendTo || appendTo === "body") return document.body;
+
+  if (appendTo === "parent") {
+    const referenceWrapper = document.querySelector(`#reference-${targetId}`);
+    if (referenceWrapper?.parentElement) {
+      return referenceWrapper.parentElement;
+    }
+  }
+
+  const selectorMatch = document.querySelector(appendTo);
+  if (selectorMatch instanceof HTMLElement) return selectorMatch;
+
+  return document.body;
 };
 
 const Popover = (props: PbPopoverProps) => {
@@ -113,7 +133,7 @@ const Popover = (props: PbPopoverProps) => {
 
   return (
     <Popper
-        modifiers={popoverModifiers({ modifiers, offset })}
+        modifiers={popoverModifiers({ modifiers, offset: offset || false })}
         placement={placement}
         referenceElement={referenceElement}
     >
@@ -154,6 +174,7 @@ const Popover = (props: PbPopoverProps) => {
 const PbReactPopover = (props: PbPopoverProps): React.ReactElement => {
   const [targetId] = useState(uniqueId('id-'))
   const {
+    appendTo,
     className,
     children,
     modifiers = [],
@@ -246,10 +267,10 @@ const PbReactPopover = (props: PbPopoverProps): React.ReactElement => {
         {show &&
           (usePortal ? (
             <>
-              {ReactDOM.createPortal(
-                popoverComponent,
-                document.querySelector(portal)
-              )}
+                {ReactDOM.createPortal(
+                  popoverComponent,
+                  getAppendTarget(appendTo, targetId)
+                )}
             </>
           ) : (
             { popoverComponent }
