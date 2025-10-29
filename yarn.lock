@@ -2506,18 +2506,18 @@
   resolved "https://npm.powerapp.cloud/@fortawesome/fontawesome-pro/-/fontawesome-pro-6.2.1.tgz#1cd5b79d93fdb955ef8a04996fef20a44207a6f0"
   integrity sha512-dHk7iiCf5MCmoUvmrYzfN/I3gebpgpA1oqlOffgOThnsaAR4kpaQ5YMTdkdG99Of1hnN0Bok6R+HE28zXb3SOg==
 
-"@hotwired/turbo-rails@^7.3.0":
-  version "7.3.0"
-  resolved "https://npm.powerapp.cloud/@hotwired/turbo-rails/-/turbo-rails-7.3.0.tgz#422c21752509f3edcd6c7b2725bbe9e157815f51"
-  integrity sha512-fvhO64vp/a2UVQ3jue9WTc2JisMv9XilIC7ViZmXAREVwiQ2S4UC7Go8f9A1j4Xu7DBI6SbFdqILk5ImqVoqyA==
+"@hotwired/turbo-rails@^8.0.20":
+  version "8.0.20"
+  resolved "https://npm.powerapp.cloud/@hotwired/turbo-rails/-/turbo-rails-8.0.20.tgz#a6f6f78591e9868ca1e5e67f4c7d453dbd49a475"
+  integrity sha512-4aYkYF9XMKL7ZZPfgElq15+60osZOwMwhztE4myKQYEzCPvaPUxwZH301tOrBNtWUwOD+TNOm1Hrpeaq22RX9A==
   dependencies:
-    "@hotwired/turbo" "^7.3.0"
-    "@rails/actioncable" "^7.0"
+    "@hotwired/turbo" "^8.0.20"
+    "@rails/actioncable" ">=7.0"
 
-"@hotwired/turbo@^7.3.0":
-  version "7.3.0"
-  resolved "https://npm.powerapp.cloud/@hotwired/turbo/-/turbo-7.3.0.tgz#2226000fff1aabda9fd9587474565c9929dbf15d"
-  integrity sha512-Dcu+NaSvHLT7EjrDrkEmH4qET2ZJZ5IcCWmNXxNQTBwlnE5tBZfN6WxZ842n5cHV52DH/AKNirbPBtcEXDLW4g==
+"@hotwired/turbo@^8.0.20":
+  version "8.0.20"
+  resolved "https://npm.powerapp.cloud/@hotwired/turbo/-/turbo-8.0.20.tgz#068ede648c4db09fed4cf0ac0266788056673f2f"
+  integrity sha512-IilkH/+h92BRLeY/rMMR3MUh1gshIfdra/qZzp/Bl5FmiALD/6sQZK/ecxSbumeyOYiWr/JRI+Au1YQmkJGnoA==
 
 "@isaacs/cliui@^8.0.2":
   version "8.0.2"
@@ -3184,10 +3184,10 @@
   resolved "https://npm.powerapp.cloud/@powerhome/power-fonts/-/866a853e8a3e36bf18b0eddceac6fba492d479d6#866a853e8a3e36bf18b0eddceac6fba492d479d6"
   integrity sha512-2M2e3c3eNgWMswTyS7yqzHS+SS8iRVfShWfdbpfjoOpuD0xDtqFqraU+/x4ZFELviYECkuy3ZcXKjKBruIBTJg==
 
-"@rails/actioncable@^7.0":
-  version "7.1.3"
-  resolved "https://npm.powerapp.cloud/@rails/actioncable/-/actioncable-7.1.3.tgz#4db480347775aeecd4dde2405659eef74a458881"
-  integrity sha512-ojNvnoZtPN0pYvVFtlO7dyEN9Oml1B6IDM+whGKVak69MMYW99lC2NOWXWeE3bmwEydbP/nn6ERcpfjHVjYQjA==
+"@rails/actioncable@>=7.0":
+  version "8.1.100"
+  resolved "https://npm.powerapp.cloud/@rails/actioncable/-/actioncable-8.1.100.tgz#b1f85f3482425fb91e5eba1deb55152ee0bb2f85"
+  integrity sha512-j4vJQqz51CDVYv2UafKRu4jiZi5/gTnm7NkyL+VMIgEw3s8jtVtmzu9uItUaZccUg9NJ6o05yVyBAHxNfTuCRA==
 
 "@remirror/core-constants@3.0.0":
   version "3.0.0"
