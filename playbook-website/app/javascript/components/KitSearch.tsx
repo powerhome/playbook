@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Typeahead, Badge, Flex } from 'playbook-ui'
 import { matchSorter } from 'match-sorter'
-import { VisualGuidelinesItems } from './MainSidebar/MenuData/GuidelinesNavItems'
 
 type Kit = {
   label: string,
@@ -20,14 +19,13 @@ interface VisualGuidelineItem {
 }
 
 const combineKitsandVisualGuidelines = (
-  kits: Kit[],
-  VisualGuidelineItems: VisualGuidelineItem[]):
-  (Kit | VisualGuidelineItem)[] => {
-  return [...kits, ...VisualGuidelineItems].sort((a, b) => a.label.localeCompare(b.label))
+  kits: Kit[]
+): Kit[] => {
+  return [...kits].sort((a, b) => a.label.localeCompare(b.label))
 }
 
 const KitSearch = ({ classname, id, kits }: KitSearchProps) => {
-  const kitsAndGuidelines = combineKitsandVisualGuidelines(kits, VisualGuidelinesItems)
+  const kitsAndGuidelines = combineKitsandVisualGuidelines(kits)
 
   const [filteredKits, setFilteredKits] = useState(kitsAndGuidelines)
 

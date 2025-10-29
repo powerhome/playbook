@@ -21,8 +21,9 @@ export const TopLevelNavItem = ({
   design_guidelines,
   whats_new,
   icons,
+  global_props_and_tokens,
   beta = false,
-}) => {
+}: any) => {
   const navigate = beta ? useNavigate() : null;
   //hook into collapsible logic for top level item
   const topLevelCollapsibles = SideBarNavItems.map(() => useCollapsible());
@@ -76,7 +77,7 @@ export const TopLevelNavItem = ({
       : false;
   };
 
-  // if url starts with /visual_guidelines or /kits, then relevant collapsible nav to be toggled open on first render
+  // if url starts with  /kits then relevant collapsible nav to be toggled open on first render
   const currentPage = currentURL.match(/^(\/[^/]+)\/[^/]+/);
   const kitsPage = currentURL.match(/^\/([^/?#]+)/);
   // if url starts with /kit, then relevant collapsible nav to be toggled open on first render
@@ -199,6 +200,7 @@ export const TopLevelNavItem = ({
                 design_guidelines={design_guidelines}
                 whats_new={whats_new}
                 beta={beta}
+                global_props_and_tokens={global_props_and_tokens}
               />
             )}
           </>

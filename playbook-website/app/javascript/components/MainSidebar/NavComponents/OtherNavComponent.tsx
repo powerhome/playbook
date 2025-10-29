@@ -1,7 +1,6 @@
 import React from "react";
 import { NavItem } from "playbook-ui";
 import { useNavigate } from "react-router-dom";
-import { VisualGuidelinesItems } from "../MenuData/GuidelinesNavItems";
 
 export const OtherNavItems = ({
   name,
@@ -16,8 +15,9 @@ export const OtherNavItems = ({
   design_guidelines,
   whats_new,
   beta = false,
-}) => {
-
+  global_props_and_tokens,
+}: any) => {
+console.log("global_props_and_tokens in OtherNavItems:", global_props_and_tokens);
   const navigate = beta ? useNavigate() : null;
   
   const createLink = (path) => {
@@ -49,14 +49,21 @@ export const OtherNavItems = ({
     link: createLink(`/${guide.url}`)
   }))
 
-  const tokensAndGuidelinesMenu = VisualGuidelinesItems.map(guide => ({
-    name: guide.label,
-    link: createLink(guide.value)
+  const globalPropsMenu = global_props_and_tokens?.global_props?.map((item: Record<string, any>) => ({
+    name: item.replace(/_/g, ' ').replace(/\b\w/g, (char: string) => char.toUpperCase()),
+    link: createLink(`/global_props/${item}`),
+  }))
+
+  const tokensMenu = global_props_and_tokens?.tokens?.map((item: Record<string, any>) => ({
+    name: item.replace(/_/g, ' ').replace(/\b\w/g, (char: string) => char.toUpperCase()),
+    link: createLink(`/tokens/${item}`),
   }))
 
   //conditionally render navitems depending on name
-  if (name === "Tokens & Guidelines") {
-    menuItems = tokensAndGuidelinesMenu
+  if (name === "Global Props") {
+    menuItems = globalPropsMenu
+  } else if (name === "Tokens") {
+    menuItems = tokensMenu
   } else if (name === "Building Blocks" && building_blocks) {
     menuItems = buildingBlocksMenu
   } else if (name === "Getting Started") {
