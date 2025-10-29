@@ -1,5 +1,4 @@
 global_props:
-  - border_radius
   - cursor
   - dark
   - flex_box
@@ -24,7 +23,8 @@ global_props:
   - vertical_align
   - width
   - z_index
-
+  - border_radius
+  - group_hover
 
 tokens:
   - animation

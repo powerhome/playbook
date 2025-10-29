@@ -25,6 +25,7 @@ import MinHeight from "./Examples/MinHeight";
 import NumberSpacing from "./Examples/NumberSpacing";
 import Padding from "./Examples/Padding";
 import BorderRadiusGlobalProps from "./Examples/BorderRadiusGlobalProps";
+import GroupHover from "./Examples/GroupHover";
 
 const COMPONENT_MAP = {
   cursor: Cursor,
@@ -52,6 +53,7 @@ const COMPONENT_MAP = {
   width: Width,
   z_index: ZIndex,
   border_radius: BorderRadiusGlobalProps,
+  group_hover: GroupHover,
 };
 
 const GlobalPropsExamples = () => {
