@@ -1,0 +1,1 @@
+Grouped options can be rendered via structuring the options in the way shown in the code snippet below.
