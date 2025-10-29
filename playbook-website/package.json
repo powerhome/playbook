@@ -32,7 +32,7 @@
     "@tiptap/extension-link": "^2.11.7",
     "@tiptap/extension-paragraph": "^2.11.7",
     "@tiptap/extension-text": "^2.11.7",
-    "@tiptap/pm": "^2.11.7",
+    "@tiptap/pm": "^2.27.0",
     "@tiptap/react": "^2.11.7",
     "@tiptap/starter-kit": "^2.11.7",
     "@vitejs/plugin-react": "^4.3.1",
