@@ -3,14 +3,11 @@ import React, { useState } from 'react'
 import Button from '../../pb_button/_button'
 import Flex from '../../pb_flex/_flex'
 import PbReactPopover from '../../pb_popover/_popover'
-// Temporary code to replicate bug - DO NOT MERGE (Revert example when done)
-import useSmallScreenIndicator from './hook/useSmallScreenIndicator'
 
 const PopoverClose = (props) => {
   const [showInsidePopover, setInsideShowPopover] = useState(false)
   const [showOutsidePopover, setOutsideShowPopover] = useState(false)
   const [showAnyPopover, setAnyShowPopover] = useState(false)
-  const isPwa = useSmallScreenIndicator()
 
   const handleInsideShouldClosePopover = (shouldClosePopover) => {
     setInsideShowPopover(!shouldClosePopover)
@@ -61,10 +58,6 @@ const PopoverClose = (props) => {
         variant="secondary"
     />
   )
-
-  if (isPwa) {
-    return null
-  }
 
   return (
     <Flex spacing="between">

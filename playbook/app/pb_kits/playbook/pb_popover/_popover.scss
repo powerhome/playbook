@@ -56,15 +56,3 @@
 .pb_popover_reference_wrapper {
   display: inline-block;
 }
-
-// Temporary code to replicate bug - DO NOT MERGE
-@media (max-width: 619px) {
-  :root {
-    --is-pwa: 1;
-  }
-}
-@media (min-width: 620px) {
-  :root {
-    --is-pwa: 0;
-  }
-}
