@@ -24,6 +24,7 @@ import MaxHeight from "./Examples/MaxHeight";
 import MinHeight from "./Examples/MinHeight";
 import NumberSpacing from "./Examples/NumberSpacing";
 import Padding from "./Examples/Padding";
+import BorderRadiusGlobalProps from "./Examples/BorderRadiusGlobalProps";
 
 const COMPONENT_MAP = {
   cursor: Cursor,
@@ -50,6 +51,7 @@ const COMPONENT_MAP = {
   vertical_align: VerticalAlign,
   width: Width,
   z_index: ZIndex,
+  border_radius: BorderRadiusGlobalProps,
 };
 
 const GlobalPropsExamples = () => {
