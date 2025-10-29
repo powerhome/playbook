@@ -4,7 +4,7 @@ import Icon from '../../pb_icon/_icon'
 import Card from '../../pb_card/_card'
 import Body from '../../pb_body/_body'
 
-const TableWithCollapsible = (props) => {
+const TableWithDynamicCollapsible = (props) => {
 
   const [isOpen, setIsOpen] = useState(false);
 
