@@ -4,6 +4,7 @@ global_props:
   - flex_box
   - flex_box_order
   - flex_box_gap
+  - flex_box_align
   - height
   - hover
   - html_options

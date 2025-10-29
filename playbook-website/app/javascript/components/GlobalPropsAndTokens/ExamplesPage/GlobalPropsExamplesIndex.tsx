@@ -26,6 +26,7 @@ import NumberSpacing from "./Examples/NumberSpacing";
 import Padding from "./Examples/Padding";
 import BorderRadiusGlobalProps from "./Examples/BorderRadiusGlobalProps";
 import GroupHover from "./Examples/GroupHover";
+import FlexBoxAlignGlobalProps from "./Examples/FlexBoxAlignGlobalProps";
 
 const COMPONENT_MAP = {
   cursor: Cursor,
@@ -33,6 +34,7 @@ const COMPONENT_MAP = {
   flex_box: FlexBox,
   flex_box_order: FlexBoxOrder,
   flex_box_gap: FlexBoxGap,
+  flex_box_align: FlexBoxAlignGlobalProps,
   height: Height,
   hover: Hover,
   html_options: HtmlOptions,
