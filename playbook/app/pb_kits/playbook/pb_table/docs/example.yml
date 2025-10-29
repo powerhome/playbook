@@ -31,6 +31,7 @@ examples:
     - table_with_subcomponents_as_divs: Table with Sub Components (Divs)
     - table_outer_padding: Outer Padding
     - table_with_collapsible: Table with Collapsible
+    - table_with_dynamic_collapsible: Table with Dynamic Collapsible
     - table_with_collapsible_with_custom_click: Table with Collapsible with Custom Click
     - table_with_collapsible_with_custom_content_rails: Table with Collapsible with Custom Content
     - table_with_collapsible_with_nested_rows_rails: Table with Collapsible with Nested Rows
@@ -71,6 +72,7 @@ examples:
     - table_with_subcomponents_as_divs: Table with Sub Components (Divs)
     - table_outer_padding: Outer Padding
     - table_with_collapsible: Table with Collapsible
+    - table_with_dynamic_collapsible: Table with Dynamic Collapsible
     - table_with_collapsible_with_custom_click: Table with Collapsible with Custom Click
     - table_with_collapsible_with_custom_content: Table with Collapsible with Custom Content
     - table_with_collapsible_with_nested_rows: Table with Collapsible with Nested Rows

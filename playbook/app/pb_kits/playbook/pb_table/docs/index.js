@@ -29,6 +29,7 @@ export { default as TableStickyLeftColumns } from './_table_sticky_left_columns.
 export { default as TableStickyRightColumns } from './_table_sticky_right_columns.jsx'
 export { default as TableStickyColumns } from './_table_sticky_columns.jsx'
 export { default as TableWithCollapsible } from './_table_with_collapsible.jsx'
+export { default as TableWithDynamicCollapsible } from './_table_with_dynamic_collapsible.jsx'
 export { default as TableWithCollapsibleWithCustomContent } from './_table_with_collapsible_with_custom_content.jsx'
 export { default as TableWithCollapsibleWithNestedTable } from './_table_with_collapsible_with_nested_table.jsx'
 export { default as TableWithCollapsibleWithNestedRows } from './_table_with_collapsible_with_nested_rows.jsx'

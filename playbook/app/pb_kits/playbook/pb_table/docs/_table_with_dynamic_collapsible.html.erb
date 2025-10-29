@@ -17,13 +17,14 @@
   <% end %>
   <%= pb_rails("table/table_body") do %>
       <%= pb_rails("table/table_row", props: { collapsible: true, collapsible_content: content, collapsible_side_highlight: true, id: "1" }) do %>
-          <%= pb_rails("table/table_cell", props: { text: "Value 1"}) %>
-          <%= pb_rails("table/table_cell", props: { text: "Value 2"}) %>
-          <%= pb_rails("table/table_cell", props: { text: "Value 3"}) %>
-          <%= pb_rails("table/table_cell", props: { text: "Value 4"}) %>
-          <%= pb_rails("table/table_cell", props: { text: "Value 5"}) %>
-          <%= pb_rails("table/table_cell", props: { text_align: "right"}) do %>
-            <%= pb_rails("icon", props: { icon: "chevron-down", fixed_width: true, color: "primary" }) %>
+          <%= pb_rails("table/table_cell", props: { text: "Value 1", html_options: { onclick: "toggleArrows()" }}) %>
+          <%= pb_rails("table/table_cell", props: { text: "Value 2", html_options: { onclick: "toggleArrows()" }}) %>
+          <%= pb_rails("table/table_cell", props: { text: "Value 3", html_options: { onclick: "toggleArrows()" }}) %>
+          <%= pb_rails("table/table_cell", props: { text: "Value 4", html_options: { onclick: "toggleArrows()" }}) %>
+          <%= pb_rails("table/table_cell", props: { text: "Value 5", html_options: { onclick: "toggleArrows()" }}) %>
+          <%= pb_rails("table/table_cell", props: { text_align: "right", html_options: { onclick: "toggleArrows()" }}) do %>
+            <%= pb_rails("icon", props: {id: "chevron-icon-down", icon: "chevron-down", fixed_width: true, color: "primary" }) %>
+            <%= pb_rails("icon", props: {id: "chevron-icon-up", icon: "chevron-up", fixed_width: true, color: "primary" }) %>
           <% end %>
       <% end %>
       <%= pb_rails("table/table_row") do %>
@@ -44,4 +45,19 @@
       <% end %>
   <% end %>
 <% end %>
-  
+
+<script>
+    const downArrow = document.getElementById("chevron-icon-down");
+    const upArrow = document.getElementById("chevron-icon-up");
+
+    upArrow.style.display = upArrow.style.display === 'none' ? 'inline-block' : 'none';
+
+    function toggleArrows() {
+        if (downArrow) {
+            downArrow.style.display = downArrow.style.display === 'none' ? 'inline-block' : 'none';
+        }
+        if (upArrow) {
+            upArrow.style.display = upArrow.style.display === 'none' ? 'inline-block' : 'none';
+        }
+    }
+</script>
