@@ -42,7 +42,7 @@ const FlexBoxAlignGlobalProps = () => {
             Align props control cross-axis alignment in flex and grid layouts.
             It supports alignment of content, items, and individual elements
             using properties like align-items, align-content, and align-self.
-            For more information on Align prop controls, refer to the
+            For more information on Align prop controls, refer to the{" "}
             <a
               href="https://developer.mozilla.org/en-US/docs/Web/CSS/align-items"
               target="_blank"
