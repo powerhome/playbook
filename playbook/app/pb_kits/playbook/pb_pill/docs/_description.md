@@ -1,1 +1,1 @@
-A pill uses both a keyword and a specific color to categorize an item. Each pill directly corresponds to a data color <a href="https://playbook.powerapp.cloud/visual_guidelines/colors" target="_blank">here</a>.
+A pill uses both a keyword and a specific color to categorize an item. Each pill directly corresponds to a data color <a href="https://playbook.powerapp.cloud/global_props/colors" target="_blank">here</a>.

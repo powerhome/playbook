@@ -1,1 +1,1 @@
-Pass any text, status, data, product, or category Playbook <a href="https://playbook.powerapp.cloud/visual_guidelines/colors" target="_blank">color token</a> to the `color` prop to change any icon's color. 
+Pass any text, status, data, product, or category Playbook <a href="https://playbook.powerapp.cloud/tokens/colors" target="_blank">color token</a> to the `color` prop to change any icon's color. 

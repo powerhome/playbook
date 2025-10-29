@@ -1,1 +1,1 @@
-Category colors can be passed into the background kit. Values `category_1` to `category_21` are accepted. List of all category and status colors can be viewed <a href="https://playbook.powerapp.cloud/visual_guidelines" target="_blank">here</a>.
+Category colors can be passed into the background kit. Values `category_1` to `category_21` are accepted. List of all category and status colors can be viewed <a href="https://playbook.powerapp.cloud/tokens/colors" target="_blank">here</a>.

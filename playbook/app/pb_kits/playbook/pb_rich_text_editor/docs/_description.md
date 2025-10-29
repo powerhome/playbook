@@ -1,1 +1,1 @@
-NOTE: All editors have a default max-width of "md". Use our [Max Width global prop](https://playbook.powerapp.cloud/visual_guidelines/max_width) to override this default, as necessary.
+NOTE: All editors have a default max-width of "md". Use our [Max Width global prop](https://playbook.powerapp.cloud/global_props/max_width) to override this default, as necessary.
