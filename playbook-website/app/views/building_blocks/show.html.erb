@@ -1,10 +1,10 @@
 <div class="sample-layout">
   <%= pb_rails("background", props: { background_color: "light", padding: "xl" }) do %>
     <%= pb_rails("flex", props: { margin_bottom: "md" }) do %>
-      <a href="/patterns">
+      <a href="/building_blocks">
         <%= pb_rails("title", props: {
           margin_right: "xs",
-          text: "Patterns",
+          text: "Building Blocks",
           tag: "h4",
           size: 4
         }) %>
@@ -16,7 +16,7 @@
         size: 4
       }) %>
       <%= pb_rails("title", props: {
-        text: @pattern["name"],
+        text: @building_block["name"],
         tag: "h4",
         size: 4
       }) %>
@@ -24,14 +24,14 @@
 
     <%= pb_rails("title", props: {
       margin_bottom: "sm",
-      text: @pattern["name"],
+      text: @building_block["name"],
       tag: "h2",
       size: 2
     }) %>
 
     <%= pb_rails("body", props: {
       margin_bottom: "xl",
-      text: @pattern["description"],
+      text: @building_block["description"],
       tag: "h4",
       size: 4
     }) %>
@@ -44,13 +44,13 @@
             <%= pb_rails("nav", props: { orientation: "horizontal", variant: "subtle" }) do %>
               <%= pb_rails("nav/item", props: {
                 text: "Rails",
-                link: "#{patterns_show_path(@pattern["link"], type: :rails)}",
-                active: current_pattern_type.rails?
+                link: "#{building_blocks_show_path(@building_block["link"], type: :rails)}",
+                active: current_building_block_type.rails?
               }) %>
               <%= pb_rails("nav/item", props: {
                 text: "React",
-                link: "#{patterns_show_path(@pattern["link"], type: :react)}",
-                active: current_pattern_type.react?
+                link: "#{building_blocks_show_path(@building_block["link"], type: :react)}",
+                active: current_building_block_type.react?
               }) %>
             <% end %>
           <% end %>
@@ -71,8 +71,8 @@
                 padding: "sm"
               }) do %>
                 <%= pb_rails("flex", props: { spacing: "around", wrap: true }) do %>
-                  <% kits_used_in_pattern(@pattern["link"]).each do |kit| %>
-                    <a href="/kits/<%= kit %>/<%= current_pattern_type %>">
+                  <% kits_used_in_building_block(@building_block["link"]).each do |kit| %>
+                    <a href="/kits/<%= kit %>/<%= current_building_block_type %>">
                       <%= pb_rails("pill", props: {
                         text: kit.titleize,
                         variant: "primary"
@@ -107,15 +107,15 @@
         id: "sample-card-body",
         padding: "xl"
       }) do %>
-        <%= render_pattern_ui(@pattern, current_pattern_type) %>
+        <%= render_building_block_ui(@building_block, current_building_block_type) %>
       <% end %>
 
       <div id="show-code-sample" class="pb--kit-show">
         <div class="pb--doc light_ui">
           <div class="pb--codeCopy close">
             <a class="pb--close-toggle copy-clipboard" href="#">Copy to Clipboard</a>
-            <div class="hiddenCodeforCopy"><%= get_raw_code_pattern(@pattern["link"], current_pattern_type) %></div>
-            <pre class="highlight"><%= get_pattern_code_content(@pattern["link"], current_pattern_type) %></pre>
+            <div class="hiddenCodeforCopy"><%= get_raw_code_building_block(@building_block["link"], current_building_block_type) %></div>
+            <pre class="highlight"><%= get_building_block_code_content(@building_block["link"], current_building_block_type) %></pre>
           </div>
         </div>
       </div>

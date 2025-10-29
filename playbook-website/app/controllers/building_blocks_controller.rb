@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
-class PatternsController < ApplicationController
+class BuildingBlocksController < ApplicationController
   before_action :set_js
-  before_action :set_pattern, only: :show
+  before_action :set_building_block, only: :show
   before_action :delete_dark_mode_cookie
 
   def index
     @show_sidebar = true
-    @patterns = PATTERNS["Patterns"]
+    @building_blocks = BUILDING_BLOCKS["BuildingBlocks"]
   end
 
   def show
@@ -36,23 +36,23 @@ class PatternsController < ApplicationController
 
 private
 
-  def current_pattern_type
+  def current_building_block_type
     params[:type].inquiry
   end
-  helper_method :current_pattern_type
+  helper_method :current_building_block_type
 
-  def set_pattern
-    @application_js.concat ["pattern-show"]
-    pattern = PATTERNS["Patterns"].find { |p| p["link"] == params[:name] }
+  def set_building_block
+    @application_js.concat ["building_blocks_show"]
+    building_block = BUILDING_BLOCKS["BuildingBlocks"].find { |p| p["link"] == params[:name] }
 
-    if pattern
-      @pattern = pattern
+    if building_block
+      @building_block = building_block
     else
-      redirect_to "/patterns", flash: { error: "That pattern does not exist" }
+      redirect_to "/building_blocks", flash: { error: "That building block does not exist" }
     end
   end
 
   def set_js
-    @application_js.concat ["patterns"]
+    @application_js.concat %w[building_blocks_show building_blocks]
   end
 end

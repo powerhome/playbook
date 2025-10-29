@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   include PlaybookWebsite::Markdown::Helper
 
   helper ApplicationHelper
-  helper PatternHelper
+  helper BuildingBlocksHelper
 
   def delete_dark_mode_cookie
     cookies.delete :dark_mode

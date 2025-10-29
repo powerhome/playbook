@@ -7,7 +7,7 @@ export const OtherNavItems = ({
   name,
   currentURL,
   dark,
-  patterns,
+  building_blocks,
   setIsActive,
   isActive,
   updateTopLevelNav,
@@ -27,9 +27,9 @@ export const OtherNavItems = ({
     return path;
   };
 
-  const patternsMenu = patterns?.Patterns?.map((item) => ({
+  const buildingBlocksMenu = building_blocks?.BuildingBlocks?.map((item) => ({
     name: item.name,
-    link: createLink(`/patterns/${item.link}`),
+    link: createLink(`/building_blocks/${item.link}`),
   }))
 
   let menuItems: { [key: string]: string }[] | string[] = []
@@ -57,8 +57,8 @@ export const OtherNavItems = ({
   //conditionally render navitems depending on name
   if (name === "Tokens & Guidelines") {
     menuItems = tokensAndGuidelinesMenu
-  } else if (name === "Patterns" && patterns) {
-    menuItems = patternsMenu
+  } else if (name === "Building Blocks" && building_blocks) {
+    menuItems = buildingBlocksMenu
   } else if (name === "Getting Started") {
     menuItems = guidesNavItems
   } else if (name === "Design Guidelines") {
@@ -95,7 +95,9 @@ export const OtherNavItems = ({
     }
   
     if (Object.keys(isActive).length === 0) {
-      return link.link === currentURL
+      // strip /react or /rails from the end of currentURL before comparing
+      const normalizedCurrentURL = currentURL.replace(/\/(react|rails)$/, '');
+      return link.link === currentURL || link.link === normalizedCurrentURL
     }
   
     return null

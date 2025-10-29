@@ -65,12 +65,12 @@ Rails.application.routes.draw do
   get "guides/:parent",         to: "guides#md_doc", as: "guides_parent"
   get "guides/:parent/:page",   to: "guides#md_doc", as: "guides_parent_page"
 
-  # Patterns
-  get "patterns", to: "patterns#index"
-  get "patterns/icons", to: "patterns#icons"
-  get "patterns/:name(/:type)", defaults: { type: "rails" },
-                                to: "patterns#show",
-                                as: "patterns_show"
+  # Building Blocks
+  get "building_blocks", to: "building_blocks#index"
+  get "building_blocks/icons", to: "building_blocks#icons"
+  get "building_blocks/:name(/:type)", defaults: { type: "rails" },
+                                       to: "building_blocks#show",
+                                       as: "building_blocks_show"
 
   # Icons
   get "playbook_icons", to: "playbook_icons#index"
