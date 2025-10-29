@@ -38,7 +38,10 @@ const AdvancedTablePaginationWithProps = (props) => {
   const paginationProps = {
     pageIndex: 1,
     pageSize: 10,
-    range: 2
+    range: 2,
+    onPageChange: (pageIndex) => {
+      console.log('Current page index:', pageIndex);
+    }
   }
   
   return (

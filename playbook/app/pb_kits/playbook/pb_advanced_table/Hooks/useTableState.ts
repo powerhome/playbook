@@ -250,6 +250,21 @@ export function useTableState({
     }
   }, [pagination, inlineRowLoading, paginationProps?.pageIndex, paginationProps?.pageSize]);
 
+  // Call the callback with the new page index when localPagination.pageIndex changes (with inlineRowLoading)
+  useEffect(() => {
+    if (pagination && inlineRowLoading && paginationProps?.onPageChange) {
+      paginationProps.onPageChange(localPagination.pageIndex);
+    }
+  }, [localPagination.pageIndex, pagination, inlineRowLoading, paginationProps]);
+
+  // Call the callback with the new page index when localPagination.pageIndex changes (without inlineRowLoading)
+  useEffect(() => {
+    if (pagination && !inlineRowLoading && paginationProps?.onPageChange) {
+      const currentPageIndex = table.getState().pagination.pageIndex;
+      paginationProps.onPageChange(currentPageIndex);
+    }
+  }, [table.getState().pagination.pageIndex, pagination, inlineRowLoading, paginationProps]);
+
   // Check if table has any sub-rows
   const hasAnySubRows = table.getRowModel().rows.some(row => row.subRows && row.subRows.length > 0);
   const selectedRowsLength = Object.keys(table.getState().rowSelection).length;
