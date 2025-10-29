@@ -86,4 +86,4 @@ const TableWithDynamicCollapsible = (props) => {
   )
 }
 
-export default TableWithCollapsible
+export default TableWithDynamicCollapsible
