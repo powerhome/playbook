@@ -99,8 +99,8 @@ module Playbook
           # Convert camelCase (ex. notAllowed) to kebab-case (ex. not-allowed)
           cursor.to_s.gsub(/([a-z\d])([A-Z])/, '\1-\2').downcase
         else
-          # Default to 'pointer'
-          "pointer"
+          # Default to 'text'
+          "text"
         end
       end
 
