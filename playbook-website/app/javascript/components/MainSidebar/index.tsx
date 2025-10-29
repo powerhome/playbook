@@ -77,6 +77,7 @@ const MainSidebar = ({
           classname="desktop-kit-search"
           id="desktop-kit-search"
           kits={search_list}
+          global_props_and_tokens={global_props_and_tokens}
         />
       </Flex>
       <Nav dark={dark} variant="bold" paddingTop="xxs">

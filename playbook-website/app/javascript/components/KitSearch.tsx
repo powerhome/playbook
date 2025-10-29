@@ -5,27 +5,37 @@ import { matchSorter } from 'match-sorter'
 type Kit = {
   label: string,
   value: string,
+  type?: string,
 }
 
 type KitSearchProps = {
   classname: string,
   kits: Kit[],
   id: string,
-}
-
-interface VisualGuidelineItem {
-  label: string,
-  value: string,
+  global_props_and_tokens?: Record<string, any>,
 }
 
 const combineKitsandVisualGuidelines = (
-  kits: Kit[]
+  kits: Kit[],
+  global_props_and_tokens?: Record<string, any>,
 ): Kit[] => {
-  return [...kits].sort((a, b) => a.label.localeCompare(b.label))
+  const globalPropsItems = global_props_and_tokens?.global_props?.map((item: string) => ({
+    label: item.replace(/_/g, ' ').replace(/\b\w/g, (char: string) => char.toUpperCase()),
+    value: `/global_props/${item}`,
+    type: 'global_prop'
+  })) || []
+
+  const tokensItems = global_props_and_tokens?.tokens?.map((item: string) => ({
+    label: item.replace(/_/g, ' ').replace(/\b\w/g, (char: string) => char.toUpperCase()),
+    value: `/tokens/${item}`,
+    type: 'token'
+  })) || []
+  
+  return [...kits, ...globalPropsItems, ...tokensItems].sort((a, b) => a.label.localeCompare(b.label))
 }
 
-const KitSearch = ({ classname, id, kits }: KitSearchProps) => {
-  const kitsAndGuidelines = combineKitsandVisualGuidelines(kits)
+const KitSearch = ({ classname, id, kits, global_props_and_tokens }: KitSearchProps) => {
+  const kitsAndGuidelines = combineKitsandVisualGuidelines(kits, global_props_and_tokens)
 
   const [filteredKits, setFilteredKits] = useState(kitsAndGuidelines)
 
@@ -55,14 +65,13 @@ const KitSearch = ({ classname, id, kits }: KitSearchProps) => {
     }
   }
 
-  const Item = ({ labelLeft }: { labelLeft: string }) => (
+  const Item = ({ labelLeft, type }: { labelLeft: string, type: string }) => (
     <Flex alignItems="center" justify="between">
         {labelLeft}
         <Badge
-          className="global-prop"
           dark
           margin="xs"
-          text="Global Prop"
+          text={type === 'global_prop' ? 'Global Prop' : 'Token'}
           variant="primary"
         />
     </Flex>
@@ -78,9 +87,12 @@ const KitSearch = ({ classname, id, kits }: KitSearchProps) => {
         onInputChange={handleFilteredKits}
         options={filteredKits}
         placeholder="Search..."
-        valueComponent={({ label, value }: { label: string, value: string }) => (
-          value.includes("guidelines") ? <Item labelLeft={label} /> : <>{label}</>
-        )}
+        valueComponent={(option: Kit) => {
+          if (option.type === 'global_prop' || option.type === 'token') {
+            return <Item labelLeft={option.label} type={option.type} />
+          }
+          return <>{option.label}</>
+        }}
       />
     </div>
   )
