@@ -75,14 +75,14 @@ const Margin = () => {
           <Caption text="Rails" />
           <ExampleCodeCard
             id="responsive-rails"
-            text="margin_bottom: { xs: 'xxs', sm: 'xs', md: 'sm', lg: 'md', xl: 'lg', default: 'xl' }"
+            text='margin_bottom: { xs: "xxs", sm: "xs", md: "sm", lg: "md", xl: "lg", default: "xl" }'
           />
         </Flex>
         <Flex alignItems="center" gap="sm">
           <Caption text="React" />
           <ExampleCodeCard
             id="responsive-react"
-            text="marginBottom= {{ xs: 'xxs', sm: 'xs', md: 'sm', lg: 'md', xl: 'lg', default: 'xl' }}"
+            text='marginBottom= {{ xs: "xxs", sm: "xs", md: "sm", lg: "md", xl: "lg", default: "xl" }}'
           />
         </Flex>
       </>
@@ -124,8 +124,8 @@ const Margin = () => {
               "Margin",
               <ExampleCodeCard text="union" copyIcon={false} />,
               <TypesCards />,
-              <ExampleCodeCard id="margin-rails" text="margin: 'sm'" />,
-              <ExampleCodeCard id="margin-react" text="margin= 'sm'" />,
+              <ExampleCodeCard id="margin-rails" text='margin: "sm"' />,
+              <ExampleCodeCard id="margin-react" text='margin= "sm"' />,
             ],
             [
               "Margin Left",
@@ -133,11 +133,11 @@ const Margin = () => {
               <TypesCards />,
               <ExampleCodeCard
                 id="margin-left-rails"
-                text="margin_left: 'sm'"
+                text='margin_left: "sm"'
               />,
               <ExampleCodeCard
                 id="margin-left-react"
-                text="marginLeft= 'sm'"
+                text='marginLeft= "sm"'
               />,
             ],
             [
@@ -146,19 +146,19 @@ const Margin = () => {
               <TypesCards />,
               <ExampleCodeCard
                 id="margin-right-rails"
-                text="margin_right: 'sm'"
+                text='margin_right: "sm"'
               />,
               <ExampleCodeCard
                 id="margin-right-react"
-                text="marginRight= 'sm'"
+                text='marginRight= "sm"'
               />,
             ],
             [
               "Margin Top",
               <ExampleCodeCard text="union" copyIcon={false} />,
               <TypesCards />,
-              <ExampleCodeCard id="margin-top-rails" text="margin_top: 'sm'" />,
-              <ExampleCodeCard id="margin-top-react" text="marginTop= 'sm'" />,
+              <ExampleCodeCard id="margin-top-rails" text='margin_top: "sm"' />,
+              <ExampleCodeCard id="margin-top-react" text='marginTop= "sm"' />,
             ],
             [
               "Margin Bottom",
@@ -166,26 +166,26 @@ const Margin = () => {
               <TypesCards />,
               <ExampleCodeCard
                 id="margin-bottom-rails"
-                text="margin_bottom: 'sm'"
+                text='margin_bottom: "sm"'
               />,
               <ExampleCodeCard
                 id="margin-bottom-react"
-                text="marginBottom= 'sm'"
+                text='marginBottom= "sm"'
               />,
             ],
             [
               "Margin X",
               <ExampleCodeCard text="union" copyIcon={false} />,
               <TypesCards />,
-              <ExampleCodeCard id="margin-x-rails" text="margin_x: 'sm'" />,
-              <ExampleCodeCard id="margin-x-react" text="marginX= 'sm'" />,
+              <ExampleCodeCard id="margin-x-rails" text='margin_x: "sm"' />,
+              <ExampleCodeCard id="margin-x-react" text='marginX= "sm"' />,
             ],
             [
               "Margin Y",
               <ExampleCodeCard text="union" copyIcon={false} />,
               <TypesCards />,
-              <ExampleCodeCard id="margin-y-rails" text="margin_y: 'sm'" />,
-              <ExampleCodeCard id="margin-y-react" text="marginY= 'sm'" />,
+              <ExampleCodeCard id="margin-y-rails" text='margin_y: "sm"' />,
+              <ExampleCodeCard id="margin-y-react" text='marginY= "sm"' />,
             ],
           ]}
         />

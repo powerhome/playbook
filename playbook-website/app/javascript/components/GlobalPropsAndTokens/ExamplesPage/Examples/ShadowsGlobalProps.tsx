@@ -55,22 +55,22 @@ const ShadowsGlobalProps = () => {
               "None",
               <ExampleCodeCard copyIcon={false} id="shadow-type-1" text="union" />,
               <ExampleCodeCard copyIcon={false} id="shadow-value-1" text="0 0 0 0 transparent" />,
-              <ExampleCodeCard id="shadow-rails-1" text="shadow: 'none'" />,
-              <ExampleCodeCard id="shadow-react-1" text="shadow='none'" />,
+              <ExampleCodeCard id="shadow-rails-1" text='shadow: "none"' />,
+              <ExampleCodeCard id="shadow-react-1" text='shadow="none"' />,
             ],
             [
               "Deep",
               <ExampleCodeCard copyIcon={false} id="shadow-type-2" text="union" />,
               <ExampleCodeCard copyIcon={false} id="shadow-value-2" text="0 4px 10px 0 rgba($shadow, 0.16)" />,
-              <ExampleCodeCard id="shadow-rails-2" text="shadow: 'deep'" />,
-              <ExampleCodeCard id="shadow-react-2" text="shadow='deep'" />,
+              <ExampleCodeCard id="shadow-rails-2" text='shadow: "deep"' />,
+              <ExampleCodeCard id="shadow-react-2" text='shadow="deep"' />,
             ],
             [
               "Deeper",
               <ExampleCodeCard copyIcon={false} id="shadow-type-3" text="union" />,
               <ExampleCodeCard copyIcon={false} id="shadow-value-3" text="0 12px 28px 0 rgba($shadow, 0.18)" />,
-              <ExampleCodeCard id="shadow-rails-3" text="shadow: 'deeper'" />,
-              <ExampleCodeCard id="shadow-react-3" text="shadow='deeper'" />,
+              <ExampleCodeCard id="shadow-rails-3" text='shadow: "deeper"' />,
+              <ExampleCodeCard id="shadow-react-3" text='shadow="deeper"' />,
             ],
             [
               "Deepest",
@@ -79,8 +79,8 @@ const ShadowsGlobalProps = () => {
                 <ExampleCodeCard copyIcon={false} id="shadow-value-4" text="0 30px 38px 4px $shadow," />
                 <ExampleCodeCard copyIcon={false} id="shadow-value-4" text="0 2px 14px 4px rgba($shadow, 0.1)" />
               </>,
-              <ExampleCodeCard id="shadow-rails-4" text="shadow: 'deepest'" />,
-              <ExampleCodeCard id="shadow-react-4" text="shadow='deepest'" />,
+              <ExampleCodeCard id="shadow-rails-4" text='shadow: "deepest"' />,
+              <ExampleCodeCard id="shadow-react-4" text='shadow="deepest"' />,
             ],
           ]}
         />
