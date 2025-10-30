@@ -30,7 +30,7 @@ export const GlobalPropsCards = [
   {
     title: "Align (Flex Box)",
     description:
-      "Controls alignment of items within a Flex Box container, both vertically and horizontally.",
+      "Controls alignment of items within a Flex Box container. This can be vertical or horizontal alignment depending on the flex direction.",
     icon: "objects-align-left",
     link: "/global_props/flex_box_align",
   },
