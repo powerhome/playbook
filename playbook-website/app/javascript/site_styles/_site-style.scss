@@ -270,7 +270,7 @@ body {
     filter: blur(8px);
     z-index: -1;
   }
-}
+
 
 .ghost {
   position: absolute;
@@ -393,4 +393,5 @@ body {
   90% {
     opacity: 0.8;
   }
+}
 }

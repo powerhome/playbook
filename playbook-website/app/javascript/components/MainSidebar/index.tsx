@@ -23,6 +23,18 @@ const MainSidebar = ({
 }: any) => {
   //active state for navItems(will be redundant once routing moved to react router)
   const [isActive, setIsActive] = useState({});
+  
+  // --------------Halloween only-----------------------------
+  // Check if we're in the last week of October (Oct 25-31)
+  // Add special Halloween decorations during this week!
+  const isHalloweenWeek = () => {
+    const today = new Date();
+    const month = today.getMonth(); // 0-indexed, so October is 9
+    const date = today.getDate();
+    return month === 9 && date >= 25 && date <= 31;
+  };
+  // --------------------------------------------------------
+
   const transformKitsData = (kitsArray: any) => {
     return kitsArray.map((kit: any) => {
       // There's only one key per object, so we get the kit name and its components
@@ -63,7 +75,7 @@ const MainSidebar = ({
         position="relative"
         style={{ position: 'relative' }}
       >
-        <FlyingGhosts />
+        {isHalloweenWeek() && <FlyingGhosts />}
         <a href={"/"}>
           <Image alt="Playbook logo" url={PBLogo} />
         </a>
