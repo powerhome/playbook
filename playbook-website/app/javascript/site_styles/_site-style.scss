@@ -251,3 +251,146 @@ body {
   }
 
 }
+
+.ghosts-container {
+  position: absolute;
+  width: 100%;
+  height: 120px;
+  pointer-events: none;
+  overflow: hidden;
+  top: -10px;
+  left: 0;
+  right: 0;
+  &::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.15) 0%, transparent 70%);
+    filter: blur(8px);
+    z-index: -1;
+  }
+}
+
+.ghost {
+  position: absolute;
+  font-size: 20px;
+  opacity: 0;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  filter: drop-shadow(0 0 8px rgba(0, 0, 0, 0.3));
+}
+
+.ghost-1 {
+  left: 5%;
+  animation: fly1 8s infinite;
+}
+
+.ghost-2 {
+  left: 25%;
+  animation: fly2 10s infinite;
+  animation-delay: 2s;
+}
+
+.ghost-3 {
+  left: 45%;
+  animation: fly3 9s infinite;
+  animation-delay: 4s;
+}
+
+.ghost-4 {
+  left: 65%;
+  animation: fly4 11s infinite;
+  animation-delay: 1s;
+}
+
+.ghost-5 {
+  left: 80%;
+  animation: fly5 7s infinite;
+  animation-delay: 3s;
+}
+
+@keyframes fly1 {
+  0%, 100% {
+    transform: translate(0, 0) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.8;
+  }
+  50% {
+    transform: translate(15px, 60px) rotate(10deg);
+    opacity: 0.9;
+  }
+  90% {
+    opacity: 0.8;
+  }
+}
+
+@keyframes fly2 {
+  0%, 100% {
+    transform: translate(0, 0) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.7;
+  }
+  50% {
+    transform: translate(-15px, 70px) rotate(-10deg);
+    opacity: 0.85;
+  }
+  90% {
+    opacity: 0.7;
+  }
+}
+
+@keyframes fly3 {
+  0%, 100% {
+    transform: translate(0, 0) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.9;
+  }
+  50% {
+    transform: translate(10px, 50px) rotate(5deg);
+    opacity: 1;
+  }
+  90% {
+    opacity: 0.9;
+  }
+}
+
+@keyframes fly4 {
+  0%, 100% {
+    transform: translate(0, 0) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.75;
+  }
+  50% {
+    transform: translate(-10px, 65px) rotate(-8deg);
+    opacity: 0.9;
+  }
+  90% {
+    opacity: 0.75;
+  }
+}
+
+@keyframes fly5 {
+  0%, 100% {
+    transform: translate(0, 0) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.8;
+  }
+  50% {
+    transform: translate(12px, 55px) rotate(7deg);
+    opacity: 0.95;
+  }
+  90% {
+    opacity: 0.8;
+  }
+}

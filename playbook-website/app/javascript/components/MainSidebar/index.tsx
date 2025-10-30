@@ -4,6 +4,7 @@ import { TopLevelNavItem } from "./TopLevelNavItems";
 // @ts-ignore
 import PBLogo from "../../images/pb-logo.svg";
 import KitSearch from "../KitSearch";
+import FlyingGhosts from "./FlyingGhosts";
 
 const MainSidebar = ({
   dark,
@@ -59,7 +60,10 @@ const MainSidebar = ({
         align="center"
         marginTop="lg"
         marginX="sm"
+        position="relative"
+        style={{ position: 'relative' }}
       >
+        <FlyingGhosts />
         <a href={"/"}>
           <Image alt="Playbook logo" url={PBLogo} />
         </a>
