@@ -28,6 +28,13 @@ export const GlobalPropsCards = [
     link: "/global_props/flex_box",
   },
   {
+    title: "Justify (Flex Box)",
+    description:
+      "Controls how items are distributed within a Flex Box container. This can be horizontal or vertical spacing depending on the flex direction.",
+    icon: "objects-align-top",
+    link: "/global_props/flex_box_justify",
+  },
+  {
     title: "Align (Flex Box)",
     description:
       "Controls alignment of items within a Flex Box container. This can be vertical or horizontal alignment depending on the flex direction.",
