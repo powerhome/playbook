@@ -4,6 +4,7 @@ global_props:
   - flex_box
   - flex_box_order
   - flex_box_gap
+  - flex_box_align
   - height
   - hover
   - html_options
@@ -23,7 +24,8 @@ global_props:
   - vertical_align
   - width
   - z_index
-
+  - border_radius
+  - group_hover
 
 tokens:
   - animation
