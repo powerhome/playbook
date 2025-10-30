@@ -27,7 +27,7 @@ global_props:
   - z_index
   - border_radius
   - group_hover
-  - shadows
+  - shadow
 
 tokens:
   - animation
@@ -41,7 +41,7 @@ tokens:
   - position
   - scale
   - screen_sizes
-  - shadows
+  - shadow
   - spacing
   - text_align
   - titles

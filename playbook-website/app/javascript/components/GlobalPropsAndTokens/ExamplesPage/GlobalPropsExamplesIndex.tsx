@@ -28,7 +28,7 @@ import BorderRadiusGlobalProps from "./Examples/BorderRadiusGlobalProps";
 import GroupHover from "./Examples/GroupHover";
 import FlexBoxAlignGlobalProps from "./Examples/FlexBoxAlignGlobalProps";
 import FlexBoxJustifyGlobalProps from "./Examples/FlexBoxJustifyGlobalProps";
-import ShadowsGlobalProps from "./Examples/ShadowsGlobalProps";
+import ShadowGlobalProps from "./Examples/ShadowGlobalProps";
 
 const COMPONENT_MAP = {
   cursor: Cursor,
@@ -59,7 +59,7 @@ const COMPONENT_MAP = {
   z_index: ZIndex,
   border_radius: BorderRadiusGlobalProps,
   group_hover: GroupHover,
-  shadows: ShadowsGlobalProps,
+  shadow: ShadowGlobalProps,
 };
 
 const GlobalPropsExamples = () => {

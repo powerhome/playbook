@@ -196,10 +196,10 @@ export const GlobalPropsCards = [
     link: "/global_props/group_hover",
   },
   {
-    title: "Shadows",
+    title: "Shadow",
     description:
       "Applies depth effects using box shadows to elevate components visually and create visual hierarchy.",
     icon: "files",
-    link: "/global_props/shadows",
+    link: "/global_props/shadow",
   }
 ];

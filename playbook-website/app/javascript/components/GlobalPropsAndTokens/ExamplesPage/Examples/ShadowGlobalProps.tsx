@@ -34,10 +34,10 @@ const ShadowsGlobalProps = () => {
   return (
     <>
       <ShowPage
-        title="Shadows"
+        title="Shadow"
         description={
           <>
-            The Shadows prop applies depth effects using box shadows. It can be used to elevate components visually, highlight interaction states, or distinguish overlapping layers like modals and cards. For more information on Shadows prop controls, refer to the{" "}
+            The Shadow prop applies depth effects using box shadows. It can be used to elevate components visually, highlight interaction states, or distinguish overlapping layers like modals and cards. For more information on Shadow prop controls, refer to the{" "}
             <a
               href="https://developer.mozilla.org/en-US/docs/Web/CSS/box-shadow"
               target="_blank"
@@ -49,7 +49,7 @@ const ShadowsGlobalProps = () => {
         VisualGuideCard={<VisualGuideCard />}
       >
         <PropsExamplesTable
-          headers={["Shadows", "Type", "Value", "Rails Example", "React Example"]}
+          headers={["Shadow", "Type", "Value", "Rails Example", "React Example"]}
           rows={[
             [
               "None",
