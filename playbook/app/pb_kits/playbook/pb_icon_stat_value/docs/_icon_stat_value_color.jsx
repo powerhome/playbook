@@ -9,7 +9,7 @@ const IconStatValueColor = (props) => {
           text="Mercury"
           unit="AU"
           value={0.39}
-          variant="blue"
+          variant="royal"
           {...props}
       />
       <br />
@@ -18,7 +18,7 @@ const IconStatValueColor = (props) => {
           text="Venus"
           unit="AU"
           value={0.723}
-          variant="royal"
+          variant="purple"
           {...props}
       />
       <br />
@@ -27,7 +27,7 @@ const IconStatValueColor = (props) => {
           text="Earth"
           unit="AU"
           value={1.0}
-          variant="purple"
+          variant="teal"
           {...props}
       />
       <br />
@@ -36,16 +36,16 @@ const IconStatValueColor = (props) => {
           text="Mars"
           unit="AU"
           value={1.524}
-          variant="teal"
+          variant="red"
           {...props}
       />
       <br />
       <IconStatValue
           icon="globe-americas"
-          text="Jupitar"
+          text="Jupiter"
           unit="AU"
           value={5.203}
-          variant="red"
+          variant="yellow"
           {...props}
       />
       <br />
@@ -54,15 +54,6 @@ const IconStatValueColor = (props) => {
           text="Saturn"
           unit="AU"
           value={9.539}
-          variant="yellow"
-          {...props}
-      />
-      <br />
-      <IconStatValue
-          icon="globe"
-          text="Uranus"
-          unit="AU"
-          value={19.18}
           variant="green"
           {...props}
       />
