@@ -28,6 +28,27 @@ export const GlobalPropsCards = [
     link: "/global_props/flex_box",
   },
   {
+    title: "Align (Flex Box)",
+    description:
+      "Controls alignment of items within a Flex Box container. This can be vertical or horizontal alignment depending on the flex direction.",
+    icon: "objects-align-left",
+    link: "/global_props/flex_box_align",
+  },
+  {
+    title: "Order (Flex Box)",
+    description:
+      "Changes the order of items within a Flex Box container, overriding the default source order.",
+    icon: "list-ol",
+    link: "/global_props/flex_box_order",
+  },
+  {
+    title: "Gap (Flex Box)",
+    description:
+      "Sets the gap between items in a Flex Box container, controlling space distribution.",
+    icon: "gap",
+    link: "/global_props/flex_box_gap",
+  },
+  {
     title: "Height",
     description:
       "Sets fixed or responsive height values for consistent vertical sizing.",
@@ -153,4 +174,18 @@ export const GlobalPropsCards = [
     icon: "bring-front",
     link: "/global_props/z_index",
   },
+  {
+    title: "Border Radius",
+    description:
+      "Applies rounded corners to elements, enhancing visual appeal and softening edges.",
+    icon: "draw-square",
+    link: "/global_props/border_radius", 
+  },
+  {
+    title: "Group Hover",
+    description:
+      "Enables hover effects on child elements when the parent element is hovered over.",
+    icon: "layer-group",
+    link: "/global_props/group_hover",
+  }
 ];

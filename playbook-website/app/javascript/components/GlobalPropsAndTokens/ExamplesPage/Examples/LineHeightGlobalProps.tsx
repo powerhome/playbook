@@ -1,4 +1,3 @@
-import React from "react";
 import { Flex, Card, Body } from "playbook-ui";
 import ShowPage from "../../Templates/ShowPage";
 import PropsExamplesTable from "../../Templates/Subcomponents/PropsExamplesTable";
@@ -71,8 +70,8 @@ const LineHeightGlobalProps = () => {
                 value,
                 <ExampleCodeCard text="string" copyIcon={false} />,
                 <ExampleCodeCard text={value} copyIcon={false} />,
-                <ExampleCodeCard id={`line-height-${value}-rails`} text={`display:"${value}"`} />,
-                <ExampleCodeCard id={`line-height-${value}-react`} text={`display="${value}"`} />
+                <ExampleCodeCard id={`line-height-${value}-rails`} text={`line_height:"${value}"`} />,
+                <ExampleCodeCard id={`line-height-${value}-react`} text={`lineHeight="${value}"`} />
               ])
             }
         />
