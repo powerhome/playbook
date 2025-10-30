@@ -93,11 +93,11 @@ const OverflowGlobalProps = () => {
               <ValuesCards />,
               <ExampleCodeCard
                 id="overflow-rails"
-                text="overflow: 'hidden'"
+                text='overflow: "hidden"'
               />,
               <ExampleCodeCard
                 id="overflow-react"
-                text="overflow='hidden'"
+                text='overflow="hidden"'
               />,
             ],
             [
@@ -106,11 +106,11 @@ const OverflowGlobalProps = () => {
               <ValuesCards />,
               <ExampleCodeCard
                 id="overflow-x-rails"
-                text="overflow_x: 'hidden'"
+                text='overflow_x: "hidden"'
               />,
               <ExampleCodeCard
                 id="overflow-x-react"
-                text="overflowX='hidden'"
+                text='overflowX="hidden"'
               />,
             ],
             [
@@ -119,11 +119,11 @@ const OverflowGlobalProps = () => {
               <ValuesCards />,
               <ExampleCodeCard
                 id="overflow-y-rails"
-                text="overflow_y: 'hidden'"
+                text='overflow_y: "hidden"'
               />,
               <ExampleCodeCard
                 id="overflow-y-react"
-                text="overflowY='hidden'"
+                text='overflowY="hidden"'
               />,
             ],
           ]}

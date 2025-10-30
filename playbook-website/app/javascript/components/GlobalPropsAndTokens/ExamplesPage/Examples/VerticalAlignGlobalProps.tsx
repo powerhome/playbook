@@ -143,11 +143,11 @@ const VerticalAlignGlobalProps = () => {
             <ValuesCards />,
             <ExampleCodeCard
               id="vertical-align-rails"
-              text="vertical_align: 'baseline'"
+              text='vertical_align: "baseline"'
             />,
             <ExampleCodeCard
               id="vertical-align-react"
-              text="verticalAlign='baseline'"
+              text='verticalAlign="baseline"'
             />,
           ],
         ]}

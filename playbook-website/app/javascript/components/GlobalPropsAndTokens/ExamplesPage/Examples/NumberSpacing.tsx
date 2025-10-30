@@ -58,11 +58,11 @@ const NumberSpacing = () => {
               <ExampleCodeCard text="tabular" copyIcon={false} />,
               <ExampleCodeCard
                 id="number-spacing-rails"
-                text="number_spacing: 'tabular'"
+                text='number_spacing: "tabular"'
               />,
               <ExampleCodeCard
                 id="number-spacing-react"
-                text="numberSpacing='tabular'"
+                text='numberSpacing="tabular"'
               />,
             ],
           ]}

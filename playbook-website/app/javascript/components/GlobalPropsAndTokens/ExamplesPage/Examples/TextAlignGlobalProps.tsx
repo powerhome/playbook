@@ -122,8 +122,8 @@ const TextAlign = () => {
                   "Text Align",
                   <ExampleCodeCard text="union" copyIcon={false} />,
                   <ValuesCards />,
-                  <ExampleCodeCard id="text-align-rails" text={`text_align:"right"`} />,
-                  <ExampleCodeCard id="text-align-react" text={`textAlign="right"`} />
+                  <ExampleCodeCard id="text-align-rails" text='text_align: "right"' />,
+                  <ExampleCodeCard id="text-align-react" text='textAlign="right"' />
                 ]
               ]
             }

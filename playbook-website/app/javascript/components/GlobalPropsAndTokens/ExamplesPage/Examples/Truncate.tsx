@@ -75,11 +75,11 @@ const Truncate = () => {
               <ValuesCards />,
               <ExampleCodeCard
                 id="truncate-rails"
-                text="truncate: '2'"
+                text='truncate: "2"'
               />,
               <ExampleCodeCard
                 id="truncate-react"
-                text="truncate='2'"
+                text='truncate="2"'
               />,
             ],
           ]}

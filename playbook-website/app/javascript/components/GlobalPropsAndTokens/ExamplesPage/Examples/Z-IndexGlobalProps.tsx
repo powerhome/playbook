@@ -1,4 +1,3 @@
-import React from "react";
 import { Flex, Card, Title, Caption } from "playbook-ui";
 import ShowPage from "../../Templates/ShowPage";
 import PropsExamplesTable from "../../Templates/Subcomponents/PropsExamplesTable";
@@ -130,8 +129,8 @@ const ZIndex = () => {
                   "Z-Index",
                   <ExampleCodeCard text="union" copyIcon={false} />,
                   <ValuesCards />,
-                  <ExampleCodeCard id="z-index-rails" text={`z_index:"5"`} />,
-                  <ExampleCodeCard id="z-index-react" text={`zIndex="5"`} />
+                  <ExampleCodeCard id="z-index-rails" text='z_index: "5"' />,
+                  <ExampleCodeCard id="z-index-react" text='zIndex="5"' />
                 ]
               ]
             }
