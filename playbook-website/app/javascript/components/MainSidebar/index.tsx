@@ -73,7 +73,6 @@ const MainSidebar = ({
         marginTop="lg"
         marginX="sm"
         position="relative"
-        style={{ position: 'relative' }}
       >
         {isHalloweenWeek() && <FlyingGhosts />}
         <a href={"/"}>
