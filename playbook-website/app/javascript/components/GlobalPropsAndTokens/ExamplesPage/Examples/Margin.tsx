@@ -7,6 +7,7 @@ import ResponsivenessSection from "../../Templates/Subcomponents/ResponsivenessS
 import ExampleCodeCard from "../../Templates/Subcomponents/ExampleCodeCard";
 import HeaderWithIcon from "../../Templates/Subcomponents/HeaderWithIcon";
 import ValueCardWithTooltip from "../../Templates/Subcomponents/ValueCardWithTooltip";
+import * as MarginImages from './MarginImages';
 
 import { SpacingValues } from "../../Data/SpacingValues";
 
@@ -15,29 +16,39 @@ const Margin = () => {
     return (
       <Flex width="100%" justify="between" wrap>
         <Image
-          alt="picture of a misty forest"
+          alt="Margin"
           size="lg"
-          url="https://unsplash.it/500/400/?image=634"
+          url={MarginImages.margin}
         />
         <Image
-          alt="picture of a misty forest"
+          alt="Margin Left"
           size="lg"
-          url="https://unsplash.it/500/400/?image=634"
+          url={MarginImages.marginLeft}
         />
         <Image
-          alt="picture of a misty forest"
+          alt="Margin Right"
           size="lg"
-          url="https://unsplash.it/500/400/?image=634"
+          url={MarginImages.marginRight}
         />
         <Image
-          alt="picture of a misty forest"
+          alt="Margin Top"
           size="lg"
-          url="https://unsplash.it/500/400/?image=634"
+          url={MarginImages.marginTop}
         />
         <Image
-          alt="picture of a misty forest"
+          alt="Margin Bottom"
           size="lg"
-          url="https://unsplash.it/500/400/?image=634"
+          url={MarginImages.marginBottom}
+        />
+        <Image
+          alt="Margin X"
+          size="lg"
+          url={MarginImages.marginX}
+        />
+        <Image
+          alt="Margin Y"
+          size="lg"
+          url={MarginImages.marginY}
         />
       </Flex>
     );
