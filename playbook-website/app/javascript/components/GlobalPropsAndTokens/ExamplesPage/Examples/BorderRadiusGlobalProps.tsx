@@ -6,88 +6,31 @@ import HeaderWithIcon from "../../Templates/Subcomponents/HeaderWithIcon";
 import ValueCardWithTooltip from "../../Templates/Subcomponents/ValueCardWithTooltip";
 
 const BorderRadiusGlobalProps = () => {
-
+  const borderRadiusOptions = [
+    { value: "none", label: "None" },
+    { value: "xs", label: "Extra Small" },
+    { value: "sm", label: "Small" },
+    { value: "md", label: "Medium" },
+    { value: "lg", label: "Large" },
+    { value: "xl", label: "Extra Large" },
+    { value: "rounded", label: "Rounded" },
+  ];
 
   const DisplayCard = () => {
     return (
-      <Flex gap="sm" wrap>
-        <Flex flexDirection="column" align="center" gap="xs">
-        <Card 
-            background="light"
-            borderRadius="none"
-            className="visual_guide_card_border_radius"
-            padding="xs" 
-            selected
-        >   
-        </Card>
-        <Caption size="xs">None</Caption>
-        </Flex>
-        <Flex flexDirection="column" align="center" gap="xs">
-        <Card 
-            background="light"
-            borderRadius="xs"
-            className="visual_guide_card_border_radius"
-            padding="xs" 
-            selected
-        >   
-        </Card>
-        <Caption size="xs">Extra Small</Caption>
-        </Flex>
-        <Flex flexDirection="column" align="center" gap="xs">
-        <Card 
-            background="light"
-            borderRadius="sm"
-            className="visual_guide_card_border_radius"
-            padding="xs" 
-            selected
-        >   
-        </Card>
-        <Caption size="xs">Small</Caption>
-        </Flex>
-        <Flex flexDirection="column" align="center" gap="xs">
-        <Card 
-            background="light"
-            borderRadius="md"
-            className="visual_guide_card_border_radius"
-            padding="xs" 
-            selected
-        >   
-        </Card>
-        <Caption size="xs">Medium</Caption>
-        </Flex>
-        <Flex flexDirection="column" align="center" gap="xs">
-        <Card 
-            background="light"
-            borderRadius="lg"
-            className="visual_guide_card_border_radius"
-            padding="xs" 
-            selected
-        >   
-        </Card>
-        <Caption size="xs">Large</Caption>
-        </Flex>
-        <Flex flexDirection="column" align="center" gap="xs">
-        <Card 
-            background="light"
-            borderRadius="xl"
-            className="visual_guide_card_border_radius"
-            padding="xs" 
-            selected
-        >   
-        </Card>
-        <Caption size="xs">Extra Large</Caption>
-        </Flex>
-        <Flex flexDirection="column" align="center" gap="xs">
-        <Card 
-            background="light"
-            borderRadius="rounded"
-            className="visual_guide_card_border_radius"
-            padding="xs" 
-            selected
-        >   
-        </Card>
-        <Caption size="xs">Rounded</Caption>
-        </Flex>
+      <Flex gap="sm" width="100%" wrap>
+        {borderRadiusOptions.map((option) => (
+          <Flex key={option.value} flexDirection="column" align="center" gap="xs">
+            <Card 
+              background="light"
+              borderRadius={option.value as any}
+              className="visual_guide_card_border_radius"
+              padding="xs" 
+              selected
+            />
+            <Caption size="xs">{option.label}</Caption>
+          </Flex>
+        ))}
       </Flex>
     );
   };

@@ -178,7 +178,7 @@ export const GlobalPropsCards = [
     title: "Border Radius",
     description:
       "Applies rounded corners to elements, enhancing visual appeal and softening edges.",
-    icon: "corner",
+    icon: "draw-square",
     link: "/global_props/border_radius", 
   },
   {
