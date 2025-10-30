@@ -3388,20 +3388,20 @@
     "@babel/runtime" "^7.12.5"
     "@testing-library/dom" "^7.28.1"
 
-"@tiptap/core@^2.11.7":
-  version "2.11.7"
-  resolved "https://npm.powerapp.cloud/@tiptap/core/-/core-2.11.7.tgz#38600a7dabc42ea84e8dfb7a74c19df10db95d14"
-  integrity sha512-zN+NFFxLsxNEL8Qioc+DL6b8+Tt2bmRbXH22Gk6F6nD30x83eaUSFlSv3wqvgyCq3I1i1NO394So+Agmayx6rQ==
+"@tiptap/core@^3.9.1":
+  version "3.9.1"
+  resolved "https://npm.powerapp.cloud/@tiptap/core/-/core-3.9.1.tgz#062f22940f1f57d502818cafd1309b8bdd70e8ca"
+  integrity sha512-qfqeR2WN9qr/3+29ocT7EgEBNP2sLHWwGYOEd++hgYixC3tOY4Juw90z1MUqVEOcUqswPDE1CrBNSgbFAitTDQ==
 
-"@tiptap/extension-blockquote@^2.11.7":
-  version "2.11.7"
-  resolved "https://npm.powerapp.cloud/@tiptap/extension-blockquote/-/extension-blockquote-2.11.7.tgz#ccbabedd2e19581424730613f00e971b527198ee"
-  integrity sha512-liD8kWowl3CcYCG9JQlVx1eSNc/aHlt6JpVsuWvzq6J8APWX693i3+zFqyK2eCDn0k+vW62muhSBe3u09hA3Zw==
+"@tiptap/extension-blockquote@^3.9.1":
+  version "3.9.1"
+  resolved "https://npm.powerapp.cloud/@tiptap/extension-blockquote/-/extension-blockquote-3.9.1.tgz#ad548a8178f129bba35b75badbd2c6001fb6b7a0"
+  integrity sha512-OL0px9tge5SHE6SeMcM6H5Q0aczCPh820nnFGNFH1d6Cr35pKKNyC3rXcUfsbySxsJNz5zetTE5s/oyqUWfM/Q==
 
-"@tiptap/extension-bold@^2.11.7":
-  version "2.11.7"
-  resolved "https://npm.powerapp.cloud/@tiptap/extension-bold/-/extension-bold-2.11.7.tgz#de45d9ab47b7342d83bb38823e57d1d4de3f3ae0"
-  integrity sha512-VTR3JlldBixXbjpLTFme/Bxf1xeUgZZY3LTlt5JDlCW3CxO7k05CIa+kEZ8LXpog5annytZDUVtWqxrNjmsuHQ==
+"@tiptap/extension-bold@^3.9.1":
+  version "3.9.1"
+  resolved "https://npm.powerapp.cloud/@tiptap/extension-bold/-/extension-bold-3.9.1.tgz#7a6bcd91f76c8637626237ffc54ae57527108f22"
+  integrity sha512-48jgjazCkvQh0sOmiDi8xQQg62o3iGEcZci0Qow3MRGKetVC0aSwmV0VuF4ai3rABPDxrlZbBP2EGq5PBoIfQw==
 
 "@tiptap/extension-bubble-menu@^2.11.7":
   version "2.11.7"
@@ -3410,30 +3410,35 @@
   dependencies:
     tippy.js "^6.3.7"
 
-"@tiptap/extension-bullet-list@^2.11.7":
-  version "2.11.7"
-  resolved "https://npm.powerapp.cloud/@tiptap/extension-bullet-list/-/extension-bullet-list-2.11.7.tgz#33d965074108ea8dd1ba558b525bb25e12e54876"
-  integrity sha512-WbPogE2/Q3e3/QYgbT1Sj4KQUfGAJNc5pvb7GrUbvRQsAh7HhtuO8hqdDwH8dEdD/cNUehgt17TO7u8qV6qeBw==
+"@tiptap/extension-bullet-list@^3.9.1":
+  version "3.9.1"
+  resolved "https://npm.powerapp.cloud/@tiptap/extension-bullet-list/-/extension-bullet-list-3.9.1.tgz#faa936dea1acb0f1601c990eec5d8d1f7379d153"
+  integrity sha512-NMigWhqpnPgaDz6xZtu13dnRoSqu8muPOzBDEPHlYASqamZQlWJvcPTd+wxngBbjL7cXEp8KChfujhM4xTREnA==
 
-"@tiptap/extension-code-block@^2.11.7":
-  version "2.11.7"
-  resolved "https://npm.powerapp.cloud/@tiptap/extension-code-block/-/extension-code-block-2.11.7.tgz#1aaaadd231317a0e1277aa987854a077cb83f0f7"
-  integrity sha512-To/y/2H04VWqiANy53aXjV7S6fA86c2759RsH1hTIe57jA1KyE7I5tlAofljOLZK/covkGmPeBddSPHGJbz++Q==
+"@tiptap/extension-code-block@^3.9.1":
+  version "3.9.1"
+  resolved "https://npm.powerapp.cloud/@tiptap/extension-code-block/-/extension-code-block-3.9.1.tgz#dd2b28cc4d1ada2204e71897cc91bdcc315a50bf"
+  integrity sha512-wwQ3DFH8hIYI4qNbZA1dOfJ8Y7XPnJIpc5pIENb9JAtTNkR0WbX1hc3g2tbRTxBu9HBqaOQOWygMTufntetNtg==
 
-"@tiptap/extension-code@^2.11.7":
-  version "2.11.7"
-  resolved "https://npm.powerapp.cloud/@tiptap/extension-code/-/extension-code-2.11.7.tgz#d9cb080992080d3a576482d8beee280d29d8a9df"
-  integrity sha512-VpPO1Uy/eF4hYOpohS/yMOcE1C07xmMj0/D989D9aS1x95jWwUVrSkwC+PlWMUBx9PbY2NRsg1ZDwVvlNKZ6yQ==
+"@tiptap/extension-code@^3.9.1":
+  version "3.9.1"
+  resolved "https://npm.powerapp.cloud/@tiptap/extension-code/-/extension-code-3.9.1.tgz#0e789e78fb141ce7e36322f2351487040f3cbeb3"
+  integrity sha512-fNhNDzZ7WQU7MdafH1XruoxCBQdVaUoevnOfH+CtXebbXnSw6LWZ/l9LHTP9Ng3bVijcoloxqtkfBNXinQeouA==
 
 "@tiptap/extension-document@^2.11.7":
   version "2.11.7"
   resolved "https://npm.powerapp.cloud/@tiptap/extension-document/-/extension-document-2.11.7.tgz#07e3fcf42069fda02b63758b2f236822a7a14acc"
   integrity sha512-95ouJXPjdAm9+VBRgFo4lhDoMcHovyl/awORDI8gyEn0Rdglt+ZRZYoySFzbVzer9h0cre+QdIwr9AIzFFbfdA==
 
-"@tiptap/extension-dropcursor@^2.11.7":
-  version "2.11.7"
-  resolved "https://npm.powerapp.cloud/@tiptap/extension-dropcursor/-/extension-dropcursor-2.11.7.tgz#389229b91ccce4d8ab2139acd9dafadbfedac7c0"
-  integrity sha512-63mL+nxQILizsr5NbmgDeOjFEWi34BLt7evwL6UUZEVM15K8V1G8pD9Y0kCXrZYpHWz0tqFRXdrhDz0Ppu8oVw==
+"@tiptap/extension-document@^3.9.1":
+  version "3.9.1"
+  resolved "https://npm.powerapp.cloud/@tiptap/extension-document/-/extension-document-3.9.1.tgz#f4b98625e218fc8d0c59786c44d0e95e38613011"
+  integrity sha512-hzeWra07/9tdjwHJAASBlkk3S8urkiQvsRKcdGjEsjhLCzp0sJyuMQKRdOjv3dwBI+SDtEZGj53P2mpJ0KVzXw==
+
+"@tiptap/extension-dropcursor@^3.9.1":
+  version "3.9.1"
+  resolved "https://npm.powerapp.cloud/@tiptap/extension-dropcursor/-/extension-dropcursor-3.9.1.tgz#3caaa8921e1a520e1d2665a44449cad74dacf834"
+  integrity sha512-maKd2r95J9HPLGtnHU5x3XP7GIeIIfWACQhumylDtC8SYzce33cygb0Yh8jRzr3GSz39PWW34cQ6+reLhXaPWA==
 
 "@tiptap/extension-floating-menu@^2.11.7":
   version "2.11.7"
@@ -3442,40 +3447,40 @@
   dependencies:
     tippy.js "^6.3.7"
 
-"@tiptap/extension-gapcursor@^2.11.7":
-  version "2.11.7"
-  resolved "https://npm.powerapp.cloud/@tiptap/extension-gapcursor/-/extension-gapcursor-2.11.7.tgz#82110b499ba7ae9a76cd57f42d535af3989abd98"
-  integrity sha512-EceesmPG7FyjXZ8EgeJPUov9G1mAf2AwdypxBNH275g6xd5dmU/KvjoFZjmQ0X1ve7mS+wNupVlGxAEUYoveew==
+"@tiptap/extension-gapcursor@^3.9.1":
+  version "3.9.1"
+  resolved "https://npm.powerapp.cloud/@tiptap/extension-gapcursor/-/extension-gapcursor-3.9.1.tgz#9b056868b13802d01c5120c77991f73646e2c953"
+  integrity sha512-+POd1gdTU+OOwWN544BoIOBN/WwRKE+WGGwUNY7mmCai9gLDxCXKXkY89yQW5rwzOHdHU/GapgjkSPNTstWG1g==
 
-"@tiptap/extension-hard-break@^2.11.7":
-  version "2.11.7"
-  resolved "https://npm.powerapp.cloud/@tiptap/extension-hard-break/-/extension-hard-break-2.11.7.tgz#6344893e9ac938684cecabad4ea037cc729f6cd7"
-  integrity sha512-zTkZSA6q+F5sLOdCkiC2+RqJQN0zdsJqvFIOVFL/IDVOnq6PZO5THzwRRLvOSnJJl3edRQCl/hUgS0L5sTInGQ==
+"@tiptap/extension-hard-break@^3.9.1":
+  version "3.9.1"
+  resolved "https://npm.powerapp.cloud/@tiptap/extension-hard-break/-/extension-hard-break-3.9.1.tgz#21633f3d8985d96b3643fa74fa3fd2edfc598034"
+  integrity sha512-Uc4TjNdwjMp4zUFmmzGYmBicgy5cHNhz6vd0eBZAzWSf3qqTdfER3B91ktM0d7hjhaNc2g6sl45W+PvzSthSwQ==
 
-"@tiptap/extension-heading@^2.11.7":
-  version "2.11.7"
-  resolved "https://npm.powerapp.cloud/@tiptap/extension-heading/-/extension-heading-2.11.7.tgz#0e29db2a5dcd3456c7ab1a40817b56b926a073ec"
-  integrity sha512-8kWh7y4Rd2fwxfWOhFFWncHdkDkMC1Z60yzIZWjIu72+6yQxvo8w3yeb7LI7jER4kffbMmadgcfhCHC/fkObBA==
+"@tiptap/extension-heading@^3.9.1":
+  version "3.9.1"
+  resolved "https://npm.powerapp.cloud/@tiptap/extension-heading/-/extension-heading-3.9.1.tgz#001aa04e9e2b2cb114e9b3751c381389c0ed3066"
+  integrity sha512-r3H5nejZ/SYUF9DUbDT2rZS3ZeQkHUNljP7lmI5JdHDrFc5/UrvtkQr+E2mLwmn0xA+8Dwccoc9fPwnTh3YyeA==
 
 "@tiptap/extension-highlight@^2.11.7":
   version "2.11.7"
   resolved "https://npm.powerapp.cloud/@tiptap/extension-highlight/-/extension-highlight-2.11.7.tgz#2c92a6b8de96edfbdb2d3cdbd9eb8cf9c8011da8"
   integrity sha512-c/NH4kIpNOWCUQv8RkFNDyOcgt+2pYFpDf0QBJmzhAuv4BIeS2bDmDtuNS7VgoWRZH+xxCNXfvm2BG+kjtipEg==
 
-"@tiptap/extension-history@^2.11.7":
-  version "2.11.7"
-  resolved "https://npm.powerapp.cloud/@tiptap/extension-history/-/extension-history-2.11.7.tgz#428d3a4e11f1c261ec34b68c2d3d84f1377ed81e"
-  integrity sha512-Cu5x3aS13I040QSRoLdd+w09G4OCVfU+azpUqxufZxeNs9BIJC+0jowPLeOxKDh6D5GGT2A8sQtxc6a/ssbs8g==
-
 "@tiptap/extension-horizontal-rule@^2.11.7":
   version "2.11.7"
   resolved "https://npm.powerapp.cloud/@tiptap/extension-horizontal-rule/-/extension-horizontal-rule-2.11.7.tgz#36e33184064f844aeb3950011c346643926e682b"
   integrity sha512-uVmQwD2dzZ5xwmvUlciy0ItxOdOfQjH6VLmu80zyJf8Yu7mvwP8JyxoXUX0vd1xHpwAhgQ9/ozjIWYGIw79DPQ==
 
-"@tiptap/extension-italic@^2.11.7":
-  version "2.11.7"
-  resolved "https://npm.powerapp.cloud/@tiptap/extension-italic/-/extension-italic-2.11.7.tgz#f3830c6ec8c7a12e20c64f9b7f100eff1a5382d9"
-  integrity sha512-r985bkQfG0HMpmCU0X0p/Xe7U1qgRm2mxvcp6iPCuts2FqxaCoyfNZ8YnMsgVK1mRhM7+CQ5SEg2NOmQNtHvPw==
+"@tiptap/extension-horizontal-rule@^3.9.1":
+  version "3.9.1"
+  resolved "https://npm.powerapp.cloud/@tiptap/extension-horizontal-rule/-/extension-horizontal-rule-3.9.1.tgz#606e5fc874d8449770821bdc09191c3b2d76e88c"
+  integrity sha512-Ar4jRvsQXgE6oUxWGrNrSUXO/Q6yHNjLqdEKXvZw1KeahbHwtgsgDscVSCr8Oi6JS8z9JWfh7Xm2fAqb5Xdgkg==
+
+"@tiptap/extension-italic@^3.9.1":
+  version "3.9.1"
+  resolved "https://npm.powerapp.cloud/@tiptap/extension-italic/-/extension-italic-3.9.1.tgz#656c12ba0c32b0fa06b6797608529e9b612fbc6e"
+  integrity sha512-0OTn+ZZcI/9CIDVMQH3byilzIUgfDkX/l5NhWpLeUBlqrGfgt61g5jwkYyy49uuVQfbxHwZHpDptkdnJGrfpkw==
 
 "@tiptap/extension-link@^2.11.7":
   version "2.11.7"
@@ -3484,35 +3489,67 @@
   dependencies:
     linkifyjs "^4.2.0"
 
-"@tiptap/extension-list-item@^2.11.7":
-  version "2.11.7"
-  resolved "https://npm.powerapp.cloud/@tiptap/extension-list-item/-/extension-list-item-2.11.7.tgz#06d9ea69dadaa09d260cfde81d5c77b56d8b0937"
-  integrity sha512-6ikh7Y+qAbkSuIHXPIINqfzmWs5uIGrylihdZ9adaIyvrN1KSnWIqrZIk/NcZTg5YFIJlXrnGSRSjb/QM3WUhw==
+"@tiptap/extension-link@^3.9.1":
+  version "3.9.1"
+  resolved "https://npm.powerapp.cloud/@tiptap/extension-link/-/extension-link-3.9.1.tgz#d9801439449654ad47b17a64b5c68d7f8a37881f"
+  integrity sha512-Q+5uYN8rvC+O00ec5m8mRTm5MZnvtkvhKq6bhgdPnQGggN3PIQ1+OSP0/9wu+leB+Ydk4PZMTPVxMtOhj55hRA==
+  dependencies:
+    linkifyjs "^4.3.2"
 
-"@tiptap/extension-ordered-list@^2.11.7":
-  version "2.11.7"
-  resolved "https://npm.powerapp.cloud/@tiptap/extension-ordered-list/-/extension-ordered-list-2.11.7.tgz#3310176a22ed6010b646ccf9c4fe6c25d05553dc"
-  integrity sha512-bLGCHDMB0vbJk7uu8bRg8vES3GsvxkX7Cgjgm/6xysHFbK98y0asDtNxkW1VvuRreNGz4tyB6vkcVCfrxl4jKw==
+"@tiptap/extension-list-item@^3.9.1":
+  version "3.9.1"
+  resolved "https://npm.powerapp.cloud/@tiptap/extension-list-item/-/extension-list-item-3.9.1.tgz#0478b04b5d4e71d7a258a69c740e9eadaf6412cf"
+  integrity sha512-Z+PHGPNVmRcC+J5qYL9ZQWp7Fq5XRg4EGfmmrYFANQn4UjYK3iushSmB0L0/npJfLdqxMZi+wtymNk7pVw7Zcg==
+
+"@tiptap/extension-list-keymap@^3.9.1":
+  version "3.9.1"
+  resolved "https://npm.powerapp.cloud/@tiptap/extension-list-keymap/-/extension-list-keymap-3.9.1.tgz#35596be004d174878414e72ebf94f1659d68af1b"
+  integrity sha512-lX8VxXavya+BsBLi+QOwAMY+rZcGUIA/2XEYr5VFSqs5CHfl9R6exj8B+eHEmlCHg1hcj15DpV+eYfgb1tAHUQ==
+
+"@tiptap/extension-list@^3.9.1":
+  version "3.9.1"
+  resolved "https://npm.powerapp.cloud/@tiptap/extension-list/-/extension-list-3.9.1.tgz#0375042f75bae6b5132438a12a70d25b42594f29"
+  integrity sha512-nqWP4GEWKUtlh2fOZcw7mHv73TFCstSfqymnwIa7bWGpGO3fmRnEiow/X6TeKC9MeOasNvEyaHgaYefnzbaANg==
+
+"@tiptap/extension-ordered-list@^3.9.1":
+  version "3.9.1"
+  resolved "https://npm.powerapp.cloud/@tiptap/extension-ordered-list/-/extension-ordered-list-3.9.1.tgz#ba23ac43d236abb0b8fcc846aa7ae6b799d07c68"
+  integrity sha512-EOq7D/aX8xFrLcGZnGMxWWHlwZWfuVjwTSqjtyPJ6voYTzgfkbsvAbx1tGTwOMK4dk1S9wno6QHVj1ifzzBJcQ==
 
 "@tiptap/extension-paragraph@^2.11.7":
   version "2.11.7"
   resolved "https://npm.powerapp.cloud/@tiptap/extension-paragraph/-/extension-paragraph-2.11.7.tgz#de7fba01ebd35bddf4d6225fff708eb223276bc5"
   integrity sha512-Pl3B4q6DJqTvvAdraqZaNP9Hh0UWEHL5nNdxhaRNuhKaUo7lq8wbDSIxIW3lvV0lyCs0NfyunkUvSm1CXb6d4Q==
 
-"@tiptap/extension-strike@^2.11.7":
-  version "2.11.7"
-  resolved "https://npm.powerapp.cloud/@tiptap/extension-strike/-/extension-strike-2.11.7.tgz#311b55f06bb3d1f93c02b809844cc8d27d110422"
-  integrity sha512-D6GYiW9F24bvAY7XMOARNZbC8YGPzdzWdXd8VOOJABhf4ynMi/oW4NNiko+kZ67jn3EGaKoz32VMJzNQgYi1HA==
+"@tiptap/extension-paragraph@^3.9.1":
+  version "3.9.1"
+  resolved "https://npm.powerapp.cloud/@tiptap/extension-paragraph/-/extension-paragraph-3.9.1.tgz#7a24df4a9f9d405e33122d4e0fbe7c9e41a87f2a"
+  integrity sha512-1p/teor132DpJoc8krgSRH6tdgA+0VysUAGfH7Cqq177bi6A0QFC1tF1reBdEmUg5dFrVs4sAIKdIbS6ayw0Hg==
 
-"@tiptap/extension-text-style@^2.11.7":
-  version "2.11.7"
-  resolved "https://npm.powerapp.cloud/@tiptap/extension-text-style/-/extension-text-style-2.11.7.tgz#1af9c23ed6154680eac1c0621d1112764c3fafb9"
-  integrity sha512-LHO6DBg/9SkCQFdWlVfw9nolUmw+Cid94WkTY+7IwrpyG2+ZGQxnKpCJCKyeaFNbDoYAtvu0vuTsSXeCkgShcA==
+"@tiptap/extension-strike@^3.9.1":
+  version "3.9.1"
+  resolved "https://npm.powerapp.cloud/@tiptap/extension-strike/-/extension-strike-3.9.1.tgz#6f6312806899bebb8e86c3dc313e5f2ec21ff9da"
+  integrity sha512-CiprEfK1daPMQDKlnqEXpsJRIu2VepMVTiOwx1H/gV4Ug/pDE06fgPWvI0XV03mN2/+d9sDWpF5gSqIV5ZtVjw==
 
 "@tiptap/extension-text@^2.11.7":
   version "2.11.7"
   resolved "https://npm.powerapp.cloud/@tiptap/extension-text/-/extension-text-2.11.7.tgz#bbd32763a5db1e6c0ad4239233a9f86e27d15179"
   integrity sha512-wObCn8qZkIFnXTLvBP+X8KgaEvTap/FJ/i4hBMfHBCKPGDx99KiJU6VIbDXG8d5ZcFZE0tOetK1pP5oI7qgMlQ==
+
+"@tiptap/extension-text@^3.9.1":
+  version "3.9.1"
+  resolved "https://npm.powerapp.cloud/@tiptap/extension-text/-/extension-text-3.9.1.tgz#642206446e03b87551343e555ca0b60c295e6a14"
+  integrity sha512-giNTcXxG2DP/B5xU8wNM9d441f6FNMYCkbW6bUtjg3USLUWazYmEvp/F6vJ2wa4PSnahH+mNiiylUi2imTnzDg==
+
+"@tiptap/extension-underline@^3.9.1":
+  version "3.9.1"
+  resolved "https://npm.powerapp.cloud/@tiptap/extension-underline/-/extension-underline-3.9.1.tgz#3610e627432a7295183d32fc7de9bdd8bb29138a"
+  integrity sha512-0TmC2gR+VAUvqhJvdHamqTcwC+sBo3uO0X7A45xpWuECUlBFD22VJB8aQg892FyfsRGxIuPFaAS5W7WaLGp9Tw==
+
+"@tiptap/extensions@^3.9.1":
+  version "3.9.1"
+  resolved "https://npm.powerapp.cloud/@tiptap/extensions/-/extensions-3.9.1.tgz#5e15a0dd0f2210402d4887207a3b4bae216718da"
+  integrity sha512-cFo3zsuqHvOo7wtUJ8+0wxdXq4L2iIupRJ3yjWKQ8q1Ajb6WYHXxiH4Q1rhZP6qHKdDZTrj/KP6YvadXZaZ8kw==
 
 "@tiptap/pm@^2.11.7":
   version "2.11.7"
@@ -3538,6 +3575,30 @@
     prosemirror-transform "^1.10.2"
     prosemirror-view "^1.37.0"
 
+"@tiptap/pm@^3.9.1":
+  version "3.9.1"
+  resolved "https://npm.powerapp.cloud/@tiptap/pm/-/pm-3.9.1.tgz#fdc60a5344dc0dd149762de5a19bf8cc71f0a542"
+  integrity sha512-9GnmyMgC0sZYxqgmoZ1ULETl+J+IRC2noG2+bVYHjxeQn3G3+R5W/APKmIA1DDWG1ShY1LP/htHlrCWswYMozA==
+  dependencies:
+    prosemirror-changeset "^2.3.0"
+    prosemirror-collab "^1.3.1"
+    prosemirror-commands "^1.6.2"
+    prosemirror-dropcursor "^1.8.1"
+    prosemirror-gapcursor "^1.3.2"
+    prosemirror-history "^1.4.1"
+    prosemirror-inputrules "^1.4.0"
+    prosemirror-keymap "^1.2.2"
+    prosemirror-markdown "^1.13.1"
+    prosemirror-menu "^1.2.4"
+    prosemirror-model "^1.24.1"
+    prosemirror-schema-basic "^1.2.3"
+    prosemirror-schema-list "^1.5.0"
+    prosemirror-state "^1.4.3"
+    prosemirror-tables "^1.6.4"
+    prosemirror-trailing-node "^3.0.0"
+    prosemirror-transform "^1.10.2"
+    prosemirror-view "^1.38.1"
+
 "@tiptap/react@^2.11.7":
   version "2.11.7"
   resolved "https://npm.powerapp.cloud/@tiptap/react/-/react-2.11.7.tgz#6ef43e012562eed40c5298220c87f075f6c12191"
@@ -3549,32 +3610,35 @@
     fast-deep-equal "^3"
     use-sync-external-store "^1"
 
-"@tiptap/starter-kit@^2.11.7":
-  version "2.11.7"
-  resolved "https://npm.powerapp.cloud/@tiptap/starter-kit/-/starter-kit-2.11.7.tgz#fd7f2c0021d5cd913afe289eb211b196cf509caf"
-  integrity sha512-K+q51KwNU/l0kqRuV5e1824yOLVftj6kGplGQLvJG56P7Rb2dPbM/JeaDbxQhnHT/KDGamG0s0Po0M3pPY163A==
+"@tiptap/starter-kit@^3.9.1":
+  version "3.9.1"
+  resolved "https://npm.powerapp.cloud/@tiptap/starter-kit/-/starter-kit-3.9.1.tgz#fbfc0f3f2d8c87fd6c0e2954580da6476772ce24"
+  integrity sha512-qnrb02VioVb1/MJyzMUw5+73/uA5GNtSBiA+n1BX36o5aCq51zZajU0z7Nm/9+JgHRFm0rlPDP0rFhmvxQ+vrg==
   dependencies:
-    "@tiptap/core" "^2.11.7"
-    "@tiptap/extension-blockquote" "^2.11.7"
-    "@tiptap/extension-bold" "^2.11.7"
-    "@tiptap/extension-bullet-list" "^2.11.7"
-    "@tiptap/extension-code" "^2.11.7"
-    "@tiptap/extension-code-block" "^2.11.7"
-    "@tiptap/extension-document" "^2.11.7"
-    "@tiptap/extension-dropcursor" "^2.11.7"
-    "@tiptap/extension-gapcursor" "^2.11.7"
-    "@tiptap/extension-hard-break" "^2.11.7"
-    "@tiptap/extension-heading" "^2.11.7"
-    "@tiptap/extension-history" "^2.11.7"
-    "@tiptap/extension-horizontal-rule" "^2.11.7"
-    "@tiptap/extension-italic" "^2.11.7"
-    "@tiptap/extension-list-item" "^2.11.7"
-    "@tiptap/extension-ordered-list" "^2.11.7"
-    "@tiptap/extension-paragraph" "^2.11.7"
-    "@tiptap/extension-strike" "^2.11.7"
-    "@tiptap/extension-text" "^2.11.7"
-    "@tiptap/extension-text-style" "^2.11.7"
-    "@tiptap/pm" "^2.11.7"
+    "@tiptap/core" "^3.9.1"
+    "@tiptap/extension-blockquote" "^3.9.1"
+    "@tiptap/extension-bold" "^3.9.1"
+    "@tiptap/extension-bullet-list" "^3.9.1"
+    "@tiptap/extension-code" "^3.9.1"
+    "@tiptap/extension-code-block" "^3.9.1"
+    "@tiptap/extension-document" "^3.9.1"
+    "@tiptap/extension-dropcursor" "^3.9.1"
+    "@tiptap/extension-gapcursor" "^3.9.1"
+    "@tiptap/extension-hard-break" "^3.9.1"
+    "@tiptap/extension-heading" "^3.9.1"
+    "@tiptap/extension-horizontal-rule" "^3.9.1"
+    "@tiptap/extension-italic" "^3.9.1"
+    "@tiptap/extension-link" "^3.9.1"
+    "@tiptap/extension-list" "^3.9.1"
+    "@tiptap/extension-list-item" "^3.9.1"
+    "@tiptap/extension-list-keymap" "^3.9.1"
+    "@tiptap/extension-ordered-list" "^3.9.1"
+    "@tiptap/extension-paragraph" "^3.9.1"
+    "@tiptap/extension-strike" "^3.9.1"
+    "@tiptap/extension-text" "^3.9.1"
+    "@tiptap/extension-underline" "^3.9.1"
+    "@tiptap/extensions" "^3.9.1"
+    "@tiptap/pm" "^3.9.1"
 
 "@tootallnate/once@1":
   version "1.1.2"
@@ -8497,6 +8561,11 @@ linkifyjs@^4.2.0:
   resolved "https://npm.powerapp.cloud/linkifyjs/-/linkifyjs-4.2.0.tgz#9dd30222b9cbabec9c950e725ec00031c7fa3f08"
   integrity sha512-pCj3PrQyATaoTYKHrgWRF3SJwsm61udVh+vuls/Rl6SptiDhgE7ziUIudAedRY9QEfynmM7/RmLEfPUyw1HPCw==
 
+linkifyjs@^4.3.2:
+  version "4.3.2"
+  resolved "https://npm.powerapp.cloud/linkifyjs/-/linkifyjs-4.3.2.tgz#d97eb45419aabf97ceb4b05a7adeb7b8c8ade2b1"
+  integrity sha512-NT1CJtq3hHIreOianA8aSXn6Cw0JzYOuDQbOrSPe7gqFnCpKP++MQe3ODgO3oh2GJFORkAAdqredOa60z63GbA==
+
 lint-staged@10.5.4:
   version "10.5.4"
   resolved "https://npm.powerapp.cloud/lint-staged/-/lint-staged-10.5.4.tgz#cd153b5f0987d2371fc1d2847a409a2fe705b665"
@@ -10131,6 +10200,13 @@ prosemirror-changeset@^2.2.1:
   dependencies:
     prosemirror-transform "^1.0.0"
 
+prosemirror-changeset@^2.3.0:
+  version "2.3.1"
+  resolved "https://npm.powerapp.cloud/prosemirror-changeset/-/prosemirror-changeset-2.3.1.tgz#eee3299cfabc7a027694e9abdc4e85505e9dd5e7"
+  integrity sha512-j0kORIBm8ayJNl3zQvD1TTPHJX3g042et6y/KQhZhnPrruO8exkTgG8X+NRpj7kIyMMEx74Xb3DyMIBtO0IKkQ==
+  dependencies:
+    prosemirror-transform "^1.0.0"
+
 prosemirror-collab@^1.3.1:
   version "1.3.1"
   resolved "https://npm.powerapp.cloud/prosemirror-collab/-/prosemirror-collab-1.3.1.tgz#0e8c91e76e009b53457eb3b3051fb68dad029a33"
@@ -10218,6 +10294,13 @@ prosemirror-model@^1.0.0, prosemirror-model@^1.20.0, prosemirror-model@^1.21.0, 
   dependencies:
     orderedmap "^2.0.0"
 
+prosemirror-model@^1.24.1:
+  version "1.25.4"
+  resolved "https://npm.powerapp.cloud/prosemirror-model/-/prosemirror-model-1.25.4.tgz#8ebfbe29ecbee9e5e2e4048c4fe8e363fcd56e7c"
+  integrity sha512-PIM7E43PBxKce8OQeezAs9j4TP+5yDpZVbuurd1h5phUxEKIu+G2a+EUZzIC5nS1mJktDJWzbqS23n1tsAf5QA==
+  dependencies:
+    orderedmap "^2.0.0"
+
 prosemirror-schema-basic@^1.2.3:
   version "1.2.4"
   resolved "https://npm.powerapp.cloud/prosemirror-schema-basic/-/prosemirror-schema-basic-1.2.4.tgz#389ce1ec09b8a30ea9bbb92c58569cb690c2d695"
@@ -10225,7 +10308,7 @@ prosemirror-schema-basic@^1.2.3:
   dependencies:
     prosemirror-model "^1.25.0"
 
-prosemirror-schema-list@^1.4.1:
+prosemirror-schema-list@^1.4.1, prosemirror-schema-list@^1.5.0:
   version "1.5.1"
   resolved "https://npm.powerapp.cloud/prosemirror-schema-list/-/prosemirror-schema-list-1.5.1.tgz#5869c8f749e8745c394548bb11820b0feb1e32f5"
   integrity sha512-927lFx/uwyQaGwJxLWCZRkjXG0p48KpMj6ueoYiu4JX05GGuGcgzAy62dfiV8eFZftgyBUvLx76RsMe20fJl+Q==
@@ -10273,6 +10356,15 @@ prosemirror-view@^1.0.0, prosemirror-view@^1.1.0, prosemirror-view@^1.27.0, pros
   version "1.39.1"
   resolved "https://npm.powerapp.cloud/prosemirror-view/-/prosemirror-view-1.39.1.tgz#9e24cc82649d37ed5d75bf59419694b0566927bb"
   integrity sha512-GhLxH1xwnqa5VjhJ29LfcQITNDp+f1jzmMPXQfGW9oNrF0lfjPzKvV5y/bjIQkyKpwCX3Fp+GA4dBpMMk8g+ZQ==
+  dependencies:
+    prosemirror-model "^1.20.0"
+    prosemirror-state "^1.0.0"
+    prosemirror-transform "^1.1.0"
+
+prosemirror-view@^1.38.1:
+  version "1.41.3"
+  resolved "https://npm.powerapp.cloud/prosemirror-view/-/prosemirror-view-1.41.3.tgz#753a37ebe172a3e313ad2c3d85496f9ed1b2c256"
+  integrity sha512-SqMiYMUQNNBP9kfPhLO8WXEk/fon47vc52FQsUiJzTBuyjKgEcoAwMyF04eQ4WZ2ArMn7+ReypYL60aKngbACQ==
   dependencies:
     prosemirror-model "^1.20.0"
     prosemirror-state "^1.0.0"
