@@ -1,4 +1,4 @@
-import { Flex, Background, Title, Detail, Example } from "playbook-ui";
+import { Flex, Background, Title, Detail } from "playbook-ui";
 import ShowPage from "../../Templates/ShowPage";
 import PropsExamplesTable from "../../Templates/Subcomponents/PropsExamplesTable";
 import HeaderWithIcon from "../../Templates/Subcomponents/HeaderWithIcon";

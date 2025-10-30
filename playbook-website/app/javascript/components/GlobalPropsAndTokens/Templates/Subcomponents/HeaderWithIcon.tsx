@@ -1,4 +1,3 @@
-import React from "react";
 import { Tooltip, Flex, Icon, Caption } from "playbook-ui";
 
 const HeaderWithIcon = () => {

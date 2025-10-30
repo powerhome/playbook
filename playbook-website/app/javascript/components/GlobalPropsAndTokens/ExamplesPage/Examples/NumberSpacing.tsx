@@ -1,4 +1,4 @@
-import { Body, Flex, Table  } from "playbook-ui";
+import { Body, Table  } from "playbook-ui";
 import ShowPage from "../../Templates/ShowPage";
 import PropsExamplesTable from "../../Templates/Subcomponents/PropsExamplesTable";
 import ExampleCodeCard from "../../Templates/Subcomponents/ExampleCodeCard";

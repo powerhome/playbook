@@ -1,4 +1,3 @@
-import React from "react";
 import { Body, Caption, Card, Flex } from "playbook-ui";
 
 import ShowPage from "../../Templates/ShowPage";
