@@ -27,6 +27,7 @@ global_props:
   - z_index
   - border_radius
   - group_hover
+  - shadows
 
 tokens:
   - animation
