@@ -4,4 +4,6 @@ The `column_styling` prop is an optional item that can be used within `column_de
 
 2) `cell_alignment`: This will allow you to control alignment of content within all cells in the given column. This is set to right aligned by default. you can set this to `left`, `right` or `center`.
 
+3) `font_color`: This will allow you to control the font color for a given column.
+
 `column_styling` can be used within the column_definition of all the columns or some of them, as shown. Each column has its own individual control in this way. 
