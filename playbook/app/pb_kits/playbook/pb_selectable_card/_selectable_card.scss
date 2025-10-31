@@ -217,3 +217,32 @@ $pb_selectable_paddings: (
     }
   }
 }
+
+.pb_selectable_card_kit_disabled,
+.pb_selectable_card_kit_checked_disabled {
+  >label {
+    cursor: not-allowed;
+
+    @media (hover:hover) {
+      &:hover {
+        box-shadow: none !important;
+      }
+    }
+  }
+}
+
+.pb_selectable_card_kit_disabled>label {
+  border-color: $border_light !important;
+
+  .dark & {
+    border-color: $border_dark !important;
+  }
+}
+
+.pb_selectable_card_kit_checked_disabled>label {
+  border-color: $primary !important;
+
+  .dark & {
+    border-color: $primary_action_dark !important;
+  }
+}

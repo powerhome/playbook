@@ -12,7 +12,7 @@ import TextAlign from "./Examples/TextAlign";
 import VerticalAlign from "./Examples/VerticalAlign";
 import ZIndex from "./Examples/Z-Index";
 import LetterSpacing from "./Examples/LetterSpacing";
-import Shadows from "./Examples/Shadows";
+import Shadow from "./Examples/Shadow";
 import Titles from "./Examples/Titles";
 import Transition from "./Examples/Transition";
 import Typography from "./Examples/Typography";
@@ -31,7 +31,7 @@ const COMPONENT_MAP = {
   position: Position,
   scale: Scale,
   screen_sizes: ScreenSizes,
-  shadows: Shadows,
+  shadow: Shadow,
   spacing: Spacing,
   text_align: TextAlign,
   titles: Titles,
