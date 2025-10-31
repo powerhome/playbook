@@ -12,6 +12,7 @@ import DropdownContext from "./context";
 import DropdownOption from "./subcomponents/DropdownOption";
 import DropdownTrigger from "./subcomponents/DropdownTrigger";
 import useDropdown from "./hooks/useDropdown";
+import  getQuickPickOptions from "./quickpick";
 
 import {
     separateChildComponents,
@@ -36,9 +37,9 @@ type DropdownProps = {
     label?: string;
     multiSelect?: boolean;
     onSelect?: (arg: GenericObject) => null;
-    options: GenericObject;
+    options?: GenericObject;
     separators?: boolean;
-    variant?: "default" | "subtle";
+    variant?: "default" | "subtle" | "quickpick";
     activeStyle?: {
       backgroundColor?: string;
       fontColor?: string;
@@ -85,6 +86,11 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
         globalProps(props),
         className
     );
+
+    // Use QuickPick options when variant is "quickpick"
+    const dropdownOptions = variant === "quickpick" 
+        ? getQuickPickOptions() 
+        : (options || []);
 
     const [isDropDownClosed, setIsDropDownClosed, toggleDropdown] = useDropdown(isClosed);
 
@@ -151,7 +157,7 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
     }, [isClosed])
 
     const blankSelectionOption: GenericObject = blankSelection ? [{ label: blankSelection, value: "" }] : [];
-    const optionsWithBlankSelection = blankSelectionOption.concat(options);
+    const optionsWithBlankSelection = blankSelectionOption.concat(dropdownOptions);
 
     const availableOptions = useMemo(()=> {
         if (!multiSelect) return optionsWithBlankSelection;
