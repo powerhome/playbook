@@ -40,6 +40,7 @@ type DropdownProps = {
     options?: GenericObject;
     separators?: boolean;
     variant?: "default" | "subtle" | "quickpick";
+    rangeEndsToday?: boolean;
     activeStyle?: {
       backgroundColor?: string;
       fontColor?: string;
@@ -72,6 +73,7 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
         formPillProps,
         onSelect,
         options,
+        rangeEndsToday = false,
         separators = true,
         variant = "default",
         activeStyle,
@@ -89,7 +91,7 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
 
     // Use QuickPick options when variant is "quickpick"
     const dropdownOptions = variant === "quickpick" 
-        ? getQuickPickOptions() 
+        ? getQuickPickOptions(rangeEndsToday) 
         : (options || []);
 
     const [isDropDownClosed, setIsDropDownClosed, toggleDropdown] = useDropdown(isClosed);

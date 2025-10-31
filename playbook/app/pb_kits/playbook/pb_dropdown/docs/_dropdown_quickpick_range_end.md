@@ -1,0 +1,1 @@
+The optional `rangeEndsToday` prop can be used with the quickpick variant to set end date on all ranges that start with 'this' to today's date. For instance, by default 'This Year' will set end day to 12/31/(current year), but if `rangeEndsToday` prop is used, end date on that range will be today's date.

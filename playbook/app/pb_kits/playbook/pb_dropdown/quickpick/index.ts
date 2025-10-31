@@ -12,27 +12,27 @@ type QuickPickOption = {
 };
 
 // Helper to get QuickPick options with date ranges
-const getQuickPickOptions = (): QuickPickOption[] => {
+const getQuickPickOptions = (rangeEndsToday = false): QuickPickOption[] => {
   const today = new Date();
   const yesterday = DateTime.getYesterdayDate(new Date());
 
   const thisWeekStartDate = DateTime.getFirstDayOfWeek(new Date());
-  const thisWeekEndDate = DateTime.getLastDayOfWeek(new Date());
+  const thisWeekEndDate = rangeEndsToday ? new Date() : DateTime.getLastDayOfWeek(new Date());
   const lastWeekStartDate = DateTime.getPreviousWeekStartDate(new Date());
   const lastWeekEndDate = DateTime.getPreviousWeekEndDate(new Date());
 
   const thisMonthStartDate = DateTime.getMonthStartDate(new Date());
-  const thisMonthEndDate = DateTime.getMonthEndDate(new Date());
+  const thisMonthEndDate = rangeEndsToday ? new Date() : DateTime.getMonthEndDate(new Date());
   const lastMonthStartDate = DateTime.getPreviousMonthStartDate(new Date());
   const lastMonthEndDate = DateTime.getPreviousMonthEndDate(new Date());
 
   const thisQuarterStartDate = DateTime.getQuarterStartDate(new Date());
-  const thisQuarterEndDate = DateTime.getQuarterEndDate(new Date());
+  const thisQuarterEndDate = rangeEndsToday ? new Date() : DateTime.getQuarterEndDate(new Date());
   const lastQuarterStartDate = DateTime.getPreviousQuarterStartDate(new Date());
   const lastQuarterEndDate = DateTime.getPreviousQuarterEndDate(new Date());
 
   const thisYearStartDate = DateTime.getYearStartDate(new Date());
-  const thisYearEndDate = DateTime.getYearEndDate(new Date());
+  const thisYearEndDate = rangeEndsToday ? new Date() : DateTime.getYearEndDate(new Date());
   const lastYearStartDate = DateTime.getPreviousYearStartDate(new Date());
   const lastYearEndDate = DateTime.getPreviousYearEndDate(new Date());
 
