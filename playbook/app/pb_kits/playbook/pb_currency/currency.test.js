@@ -133,3 +133,50 @@ test('handles negative amounts correctly', () => {
   expect(screen.getByTestId('test-negative-no-symbol')).toHaveTextContent('-400.50')
   expect(screen.getByTestId('test-negative-medium-size')).toHaveTextContent('$-500.55')
 })
+
+test('handles numeric amounts correctly', () => {
+  render(
+    <>
+      <Currency
+          amount={320}
+          data={{ testid: 'test-numeric-default' }}
+      />
+      <Currency
+          abbreviate
+          amount={3200000}
+          data={{ testid: 'test-numeric-millions' }}
+      />
+      <Currency
+          amount={123456.78}
+          commaSeparator
+          data={{ testid: 'test-numeric-comma-decimals' }}
+      />
+      <Currency
+          amount={400.50}
+          data={{ testid: 'test-numeric-no-symbol' }}
+          symbol=""
+      />
+      <Currency
+          amount={500.55}
+          data={{ testid: 'test-numeric-medium-size' }}
+          size="md"
+      />
+      <Currency
+          amount={-600.70}
+          data={{ testid: 'test-numeric-negative' }}
+      />
+      <Currency
+          amount={0.00}
+          data={{ testid: 'test-numeric-null' }}
+      />
+    </>
+  )
+
+  expect(screen.getByTestId('test-numeric-default')).toHaveTextContent('$320')
+  expect(screen.getByTestId('test-numeric-millions')).toHaveTextContent('$3.2M')
+  expect(screen.getByTestId('test-numeric-comma-decimals')).toHaveTextContent('$123,456.78')
+  expect(screen.getByTestId('test-numeric-no-symbol')).toHaveTextContent('400.50')
+  expect(screen.getByTestId('test-numeric-medium-size')).toHaveTextContent('$500.55')
+  expect(screen.getByTestId('test-numeric-negative')).toHaveTextContent('-$600.70')
+  expect(screen.getByTestId('test-numeric-null')).toHaveTextContent('$.00')
+})
