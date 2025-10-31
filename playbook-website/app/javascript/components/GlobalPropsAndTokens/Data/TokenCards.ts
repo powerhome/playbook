@@ -80,7 +80,7 @@ export const TokenCards = [
     title: "Shadow",
     description:
       "Depth and blur values for adding shadow effects, creating depth and emphasis.",
-    icon: "files",
+    icon: "shadow",
     link: "/tokens/shadow",
   },
   {

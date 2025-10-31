@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Card, Body, Icon, Flex, usePBCopy, Tooltip } from "playbook-ui";
 
 type ExampleCodeCardTypes = {

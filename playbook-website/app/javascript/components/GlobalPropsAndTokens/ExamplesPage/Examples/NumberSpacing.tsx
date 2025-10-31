@@ -1,4 +1,4 @@
-import { Body, Flex, Table  } from "playbook-ui";
+import { Body, Table  } from "playbook-ui";
 import ShowPage from "../../Templates/ShowPage";
 import PropsExamplesTable from "../../Templates/Subcomponents/PropsExamplesTable";
 import ExampleCodeCard from "../../Templates/Subcomponents/ExampleCodeCard";
@@ -58,11 +58,11 @@ const NumberSpacing = () => {
               <ExampleCodeCard text="tabular" copyIcon={false} />,
               <ExampleCodeCard
                 id="number-spacing-rails"
-                text="number_spacing: 'tabular'"
+                text='number_spacing: "tabular"'
               />,
               <ExampleCodeCard
                 id="number-spacing-react"
-                text="numberSpacing='tabular'"
+                text='numberSpacing="tabular"'
               />,
             ],
           ]}

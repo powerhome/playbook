@@ -21,9 +21,16 @@ export const SideBarNavItems = [
         leftIcon:"grid-2"
     },
     {
-        name: "Tokens & Guidelines",
+        name: "Global Props",
         key: "top-nav-item-4",
-        link: "/visual_guidelines",
+        link: "/global_props",
+        children: true,
+        leftIcon:"globe"
+    },
+    {
+        name: "Tokens",
+        key: "top-nav-item-8",
+        link: "/tokens",
         children: true,
         leftIcon:"shapes"
     },

@@ -1,5 +1,4 @@
-import React from "react";
-import { Body, Caption, Card, Flex } from "playbook-ui";
+import { Caption, Card, Flex } from "playbook-ui";
 
 import ShowPage from "../../Templates/ShowPage";
 import PropsExamplesTable from "../../Templates/Subcomponents/PropsExamplesTable";
@@ -36,7 +35,7 @@ const Padding = () => {
               src={PaddingImages[padding]}
             />
           </Card>
-          <Body text={formatText(padding)} />
+          <Caption size="xs" text={formatText(padding)} />
         </Flex>
       </>
     )
@@ -77,14 +76,14 @@ const Padding = () => {
           <Caption text="Rails" />
           <ExampleCodeCard
             id="padding-responsive-rails"
-            text="padding_bottom: { xs: 'xxs', sm: 'xs', md: 'sm', lg: 'md', xl: 'lg', default: 'xl' }"
+            text='padding_bottom: { xs: "xxs", sm: "xs", md: "sm", lg: "md", xl: "lg", default: "xl" }'
           />
         </Flex>
         <Flex alignItems="center" gap="sm">
           <Caption text="React" />
           <ExampleCodeCard
             id="padding-responsive-react"
-            text="paddingBottom={{ xs: 'xxs', sm: 'xs', md: 'sm', lg: 'md', xl: 'lg', default: 'xl' }}"
+            text='paddingBottom={{ xs: "xxs", sm: "xs", md: "sm", lg: "md", xl: "lg", default: "xl" }}'
           />
         </Flex>
       </>
@@ -129,8 +128,8 @@ const Padding = () => {
               "Padding",
               <ExampleCodeCard text="union" copyIcon={false} />,
               <ValuesCards />,
-              <ExampleCodeCard id="padding-rails" text="padding: 'sm'" />,
-              <ExampleCodeCard id="padding-react" text="padding='sm'" />,
+              <ExampleCodeCard id="padding-rails" text='padding: "sm"' />,
+              <ExampleCodeCard id="padding-react" text='padding="sm"' />,
             ],
             [
               "Padding Left",
@@ -138,11 +137,11 @@ const Padding = () => {
               <ValuesCards />,
               <ExampleCodeCard
                 id="padding-left-rails"
-                text="padding_left: 'sm'"
+                text='padding_left: "sm"'
               />,
               <ExampleCodeCard
                 id="padding-left-react"
-                text="paddingLeft='sm'"
+                text='paddingLeft="sm"'
               />,
             ],
             [
@@ -151,19 +150,19 @@ const Padding = () => {
               <ValuesCards />,
               <ExampleCodeCard
                 id="padding-right-rails"
-                text="padding_right: 'sm'"
+                text='padding_right: "sm"'
               />,
               <ExampleCodeCard
                 id="padding-right-react"
-                text="paddingRight='sm'"
+                text='paddingRight="sm"'
               />,
             ],
             [
               "Padding Top",
               <ExampleCodeCard text="union" copyIcon={false} />,
               <ValuesCards />,
-              <ExampleCodeCard id="padding-top-rails" text="padding_top: 'sm'" />,
-              <ExampleCodeCard id="padding-top-react" text="paddingTop='sm'" />,
+              <ExampleCodeCard id="padding-top-rails" text='padding_top: "sm"' />,
+              <ExampleCodeCard id="padding-top-react" text='paddingTop="sm"' />,
             ],
             [
               "Padding Bottom",
@@ -171,26 +170,26 @@ const Padding = () => {
               <ValuesCards />,
               <ExampleCodeCard
                 id="padding-bottom-rails"
-                text="padding_bottom: 'sm'"
+                text='padding_bottom: "sm"'
               />,
               <ExampleCodeCard
                 id="padding-bottom-react"
-                text="paddingBottom='sm'"
+                text='paddingBottom="sm"'
               />,
             ],
             [
               "Padding X",
               <ExampleCodeCard text="union" copyIcon={false} />,
               <ValuesCards />,
-              <ExampleCodeCard id="padding-x-rails" text="padding_x: 'sm'" />,
-              <ExampleCodeCard id="padding-x-react" text="paddingX='sm'" />,
+              <ExampleCodeCard id="padding-x-rails" text='padding_x: "sm"' />,
+              <ExampleCodeCard id="padding-x-react" text='paddingX="sm"' />,
             ],
             [
               "Padding Y",
               <ExampleCodeCard text="union" copyIcon={false} />,
               <ValuesCards />,
-              <ExampleCodeCard id="padding-y-rails" text="padding_y: 'sm'" />,
-              <ExampleCodeCard id="padding-y-react" text="paddingY='sm'" />,
+              <ExampleCodeCard id="padding-y-rails" text='padding_y: "sm"' />,
+              <ExampleCodeCard id="padding-y-react" text='paddingY="sm"' />,
             ],
           ]}
         />

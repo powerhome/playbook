@@ -1,3 +1,3 @@
 Use the `stack` and `gap` props in conjunction to layer multiple Skeleton loading bars on top of each other.
 
-`stack` accepts a number that correlates to the number of rows (1 is default), and `gap` accepts a portion of our [spacing props](https://playbook.powerapp.cloud/visual_guidelines/spacing) (`xxs` as default, `xs`, `sm`, `md`, `lg`, `xl`, `xxl`) to set the pixel distance between each row. `gap` will not do anything if there is no corresponding `stack` prop set.
+`stack` accepts a number that correlates to the number of rows (1 is default), and `gap` accepts a portion of our [spacing props](https://playbook.powerapp.cloud/global_props/spacing) (`xxs` as default, `xs`, `sm`, `md`, `lg`, `xl`, `xxl`) to set the pixel distance between each row. `gap` will not do anything if there is no corresponding `stack` prop set.

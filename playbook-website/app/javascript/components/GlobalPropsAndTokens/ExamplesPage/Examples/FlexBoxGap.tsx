@@ -1,4 +1,3 @@
-import React from "react";
 import { Flex, Card, Body, Caption } from "playbook-ui";
 import ShowPage from "../../Templates/ShowPage";
 import PropsExamplesTable from "../../Templates/Subcomponents/PropsExamplesTable";
@@ -39,50 +38,50 @@ const FlexBoxGap = () => {
                             "None",
                             <img src={GapImages.gap_none} alt="None" />,
                             "0px",
-                            <ExampleCodeCard id="flex_gap_none_rails" text="gap: 'none'" />,
-                            <ExampleCodeCard id="flex_gap_none_react" text="gap='none'" />,
+                            <ExampleCodeCard id="flex_gap_none_rails" text='gap: "none"' />,
+                            <ExampleCodeCard id="flex_gap_none_react" text='gap="none"' />,
                         ],
                         [
                             "XXS",
                             <img src={GapImages.gap_xxs} alt="XXS" />,
                             "4px",
-                            <ExampleCodeCard id="flex_gap_xxs_rails" text="gap: 'xxs'" />,
-                            <ExampleCodeCard id="flex_gap_xxs_react" text="gap='xxs'" />,
+                            <ExampleCodeCard id="flex_gap_xxs_rails" text='gap: "xxs"' />,
+                            <ExampleCodeCard id="flex_gap_xxs_react" text='gap="xxs"' />,
                         ],
                         [
                             "XS",
                             <img src={GapImages.gap_xs} alt="XS" />,
                             "8px",
-                            <ExampleCodeCard id="flex_gap_xs_rails" text="gap: 'xs'" />,
-                            <ExampleCodeCard id="flex_gap_xs_react" text="gap='xs'" />,
+                            <ExampleCodeCard id="flex_gap_xs_rails" text='gap: "xs"' />,
+                            <ExampleCodeCard id="flex_gap_xs_react" text='gap="xs"' />,
                         ],
                         [
                             "SM",
                             <img src={GapImages.gap_sm} alt="SM" />,
                             "16px",
-                            <ExampleCodeCard id="flex_gap_sm_rails" text="gap: 'sm'" />,
-                            <ExampleCodeCard id="flex_gap_sm_react" text="gap='sm'" />,
+                            <ExampleCodeCard id="flex_gap_sm_rails" text='gap: "sm"' />,
+                            <ExampleCodeCard id="flex_gap_sm_react" text='gap="sm"' />,
                         ],
                         [
                             "MD",
                             <img src={GapImages.gap_md} alt="MD" />,
                             "24px",
-                            <ExampleCodeCard id="flex_gap_md_rails" text="gap: 'md'" />,
-                            <ExampleCodeCard id="flex_gap_md_react" text="gap='md'" />,
+                            <ExampleCodeCard id="flex_gap_md_rails" text='gap: "md"' />,
+                            <ExampleCodeCard id="flex_gap_md_react" text='gap="md"' />,
                         ],
                         [
                             "LG",
                             <img src={GapImages.gap_lg} alt="LG" />,
                             "32px",
-                            <ExampleCodeCard id="flex_gap_lg_rails" text="gap: 'lg'" />,
-                            <ExampleCodeCard id="flex_gap_lg_react" text="gap='lg'" />,
+                            <ExampleCodeCard id="flex_gap_lg_rails" text='gap: "lg"' />,
+                            <ExampleCodeCard id="flex_gap_lg_react" text='gap="lg"' />,
                         ],
                         [
                             "XL",
                             <img src={GapImages.gap_xl} alt="XL" />,
                             "40px",
-                            <ExampleCodeCard id="flex_gap_xl_rails" text="gap: 'xl'" />,
-                            <ExampleCodeCard id="flex_gap_xl_react" text="gap='xl'" />,
+                            <ExampleCodeCard id="flex_gap_xl_rails" text='gap: "xl"' />,
+                            <ExampleCodeCard id="flex_gap_xl_react" text='gap="xl"' />,
                         ],
 
                     ]}

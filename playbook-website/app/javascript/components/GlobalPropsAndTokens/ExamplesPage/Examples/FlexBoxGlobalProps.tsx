@@ -1,4 +1,3 @@
-import React from "react";
 import { Flex, Card, Body, Caption } from "playbook-ui";
 import ShowPage from "../../Templates/ShowPage";
 import PropsExamplesTable from "../../Templates/Subcomponents/PropsExamplesTable";
@@ -34,26 +33,26 @@ const FlexBoxGlobalProps = () => {
                             [
                                 "Row",
                                 <img src={FlexBoxImages.directionRow} alt="Row" />,
-                                <ExampleCodeCard id="row_rails" text="flex_direction: 'row'" />,
-                                <ExampleCodeCard id="row_react" text="flexDirection='row'" />,
+                                <ExampleCodeCard id="row_rails" text='flex_direction: "row"' />,
+                                <ExampleCodeCard id="row_react" text='flexDirection="row"' />,
                             ],
                             [
                                 "Row Reverse",
                                 <img src={FlexBoxImages.directionRowReverse} alt="Row Reverse" />,
-                                <ExampleCodeCard id="row_reverse_rails" text="flex_direction: 'row_reverse'" />,
-                                <ExampleCodeCard id="row_reverse_react" text="flexDirection='rowReverse'" />,
+                                <ExampleCodeCard id="row_reverse_rails" text='flex_direction: "row_reverse"' />,
+                                <ExampleCodeCard id="row_reverse_react" text='flexDirection="rowReverse"' />,
                             ],
                             [
                                 "Column",
                                 <img src={FlexBoxImages.directionColumn} alt="Column" />,
-                                <ExampleCodeCard id="column_rails" text="flex_direction: 'column'" />,
-                                <ExampleCodeCard id="column_react" text="flexDirection='column'" />,
+                                <ExampleCodeCard id="column_rails" text='flex_direction: "column"' />,
+                                <ExampleCodeCard id="column_react" text='flexDirection="column"' />,
                             ],
                             [
                                 "Column Reverse",
                                 <img src={FlexBoxImages.directionColumnReverse} alt="Column Reverse" />,
-                                <ExampleCodeCard id="column_reverse_rails" text="flex_direction: 'column_reverse'" />,
-                                <ExampleCodeCard id="column_reverse_react" text="flexDirection='columnReverse'" />,
+                                <ExampleCodeCard id="column_reverse_rails" text='flex_direction: "column_reverse"' />,
+                                <ExampleCodeCard id="column_reverse_react" text='flexDirection="columnReverse"' />,
                             ],
 
                         ]}
@@ -70,20 +69,20 @@ const FlexBoxGlobalProps = () => {
                             [
                                 "No Wrap",
                                 <img src={FlexBoxImages.wrapNoWrap} alt="No Wrap" />,
-                                <ExampleCodeCard id="no_wrap_rails" text="flex_wrap: 'nowrap'" />,
-                                <ExampleCodeCard id="no_wrap_react" text="flexWrap='nowrap'" />,
+                                <ExampleCodeCard id="no_wrap_rails" text='flex_wrap: "nowrap"' />,
+                                <ExampleCodeCard id="no_wrap_react" text='flexWrap="nowrap"' />,
                             ],
                             [
                                 "Wrap",
                                 <img src={FlexBoxImages.wrapWrap} alt="Wrap" />,
-                                <ExampleCodeCard id="wrap_rails" text="flex_wrap: 'wrap'" />,
-                                <ExampleCodeCard id="wrap_react" text="flexWrap='wrap'" />,
+                                <ExampleCodeCard id="wrap_rails" text='flex_wrap: "wrap"' />,
+                                <ExampleCodeCard id="wrap_react" text='flexWrap="wrap"' />,
                             ],
                             [
                                 "Wrap Reverse",
                                 <img src={FlexBoxImages.wrapWrapReverse} alt="Wrap Reverse" />,
-                                <ExampleCodeCard id="wrap_reverse_rails" text="flex_wrap: 'wrap_reverse'" />,
-                                <ExampleCodeCard id="wrap_reverse_react" text="flexWrap='wrapReverse'" />,
+                                <ExampleCodeCard id="wrap_reverse_rails" text='flex_wrap: "wrap_reverse"' />,
+                                <ExampleCodeCard id="wrap_reverse_react" text='flexWrap="wrapReverse"' />,
                             ],
                         ]}
                     />
@@ -145,20 +144,20 @@ const FlexBoxGlobalProps = () => {
                             [
                                 "None",
                                 <img src={FlexBoxImages.flexNone} alt="None" />,
-                                <ExampleCodeCard id="flex_none_rails" text="flex: none" />,
-                                <ExampleCodeCard id="flex_none_react" text="flex='none'" />,
+                                <ExampleCodeCard id="flex_none_rails" text='flex: "none"' />,
+                                <ExampleCodeCard id="flex_none_react" text='flex="none"' />,
                             ],
                             [
                                 "Initial",
                                 <img src={FlexBoxImages.flexInitial} alt="Initial" />,
-                                <ExampleCodeCard id="flex_initial_rails" text="flex: initial" />,
-                                <ExampleCodeCard id="flex_initial_react" text="flex='initial'" />,
+                                <ExampleCodeCard id="flex_initial_rails" text='flex: "initial"' />,
+                                <ExampleCodeCard id="flex_initial_react" text='flex="initial"' />,
                             ],
                             [
                                 "Auto",
                                 <img src={FlexBoxImages.flexAuto} alt="Auto" />,
-                                <ExampleCodeCard id="flex_auto_rails" text="flex: auto" />,
-                                <ExampleCodeCard id="flex_auto_react" text="flex='auto'" />,
+                                <ExampleCodeCard id="flex_auto_rails" text='flex: "auto"' />,
+                                <ExampleCodeCard id="flex_auto_react" text='flex="auto"' />,
                             ],
                             [
                                 "0",

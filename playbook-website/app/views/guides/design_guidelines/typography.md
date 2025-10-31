@@ -4,7 +4,7 @@ description: Typography serves as the backbone of any design system. It’s not 
 icon: text
 ---
 
-For our Typography Tokens refer to [Typography](https://playbook.powerapp.cloud/visual_guidelines/typography) in [Tokens & Guidelines](https://playbook.powerapp.cloud/visual_guidelines)
+For our Typography Tokens refer to [Typography](https://playbook.powerapp.cloud/tokens/typography) in [Tokens](https://playbook.powerapp.cloud/tokens)
 
 #### Index
 

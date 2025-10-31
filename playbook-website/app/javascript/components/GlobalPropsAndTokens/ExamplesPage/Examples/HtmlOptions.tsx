@@ -1,4 +1,3 @@
-import React from "react";
 import ShowPage from "../../Templates/ShowPage";
 import PropsExamplesTable from "../../Templates/Subcomponents/PropsExamplesTable";
 import ExampleCodeCard from "../../Templates/Subcomponents/ExampleCodeCard";
@@ -48,33 +47,33 @@ const HtmlOptions = () => {
               "Title HTML attribute",
               <ExampleCodeCard
                 id="html-attribute-rails"
-                text="html_options:{ title: 'I’m the tooltip for title' }"
+                text={`html_options: { title: "I'm the tooltip for title" }`}
               />,
               <ExampleCodeCard
                 id="html-attribute-react"
-                text="htmlOptions= {{ title: 'I’m the tooltip for title' } }}"
+                text={`htmlOptions={{ title: "I'm the tooltip for title" }}`}
               />,
             ],
             [
               "Width Style",
               <ExampleCodeCard
                 id="width-style-rails"
-                text="html_options:{ style: { width: '123px' } }"
+                text={`html_options: { style: { width: "123px" } }`}
               />,
               <ExampleCodeCard
                 id="width-style-react"
-                text="htmlOptions= {{ style: { width: '123px' } }}"
+                text={`htmlOptions={{ style: { width: "123px" } }}`}
               />,
             ],
             [
               "ID and Color Style",
               <ExampleCodeCard
                 id="id-color-rails"
-                text="html_options:{ id: 'text', style: { color: 'blue' } }"
+                text={`html_options: { id: "text", style: { color: "blue" } }`}
               />,
               <ExampleCodeCard
                 id="id-color-react"
-                text="htmlOptions= {{ id: 'text', style: { color: 'blue' } }}"
+                text={`htmlOptions={{ id: "text", style: { color: "blue" } }}`}
               />,
             ],
           ]}

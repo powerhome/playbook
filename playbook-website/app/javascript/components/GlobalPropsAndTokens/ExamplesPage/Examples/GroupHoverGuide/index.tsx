@@ -32,7 +32,7 @@ const GroupHoverGuide = () => {
             </Flex>
           </Flex>
         </Card>
-        <Caption justifySelf="center" size="xs" marginTop="xs">
+        <Caption textAlign="center" size="xs" marginTop="xs">
           False
         </Caption>
       </FlexItem>
@@ -72,7 +72,7 @@ const GroupHoverGuide = () => {
             />
           </Flex>
         </Card>
-        <Caption justifySelf="center" size="xs" marginTop="xs">
+        <Caption textAlign="center" size="xs" marginTop="xs">
           True
         </Caption>
       </FlexItem>

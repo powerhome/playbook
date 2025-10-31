@@ -1,4 +1,3 @@
-import React from "react";
 import { Flex, Card, Body, Caption } from "playbook-ui";
 import ShowPage from "../../Templates/ShowPage";
 import PropsExamplesTable from "../../Templates/Subcomponents/PropsExamplesTable";
@@ -71,14 +70,14 @@ const TextAlign = () => {
             <Caption text="Rails" />
             <ExampleCodeCard
               id="responsive-rails"
-              text="text_align: { xs: 'justify', sm: 'justify', md: 'left', lg: 'left', xl: 'left', default: 'left' }"
+              text='text_align: { xs: "justify", sm: "justify", md: "left", lg: "left", xl: "left", default: "left" }'
             />
           </Flex>
           <Flex alignItems="center" gap="sm">
             <Caption text="React" />
             <ExampleCodeCard
               id="responsive-react"
-              text="textAlign= {{ xs: 'justify', sm: 'justify', md: 'left', lg: 'left', xl: 'left', default: 'left' }}"
+              text='textAlign={{ xs: "justify", sm: "justify", md: "left", lg: "left", xl: "left", default: "left" }}'
             />
           </Flex>
         </>
@@ -122,8 +121,8 @@ const TextAlign = () => {
                   "Text Align",
                   <ExampleCodeCard text="union" copyIcon={false} />,
                   <ValuesCards />,
-                  <ExampleCodeCard id="text-align-rails" text={`text_align:"right"`} />,
-                  <ExampleCodeCard id="text-align-react" text={`textAlign="right"`} />
+                  <ExampleCodeCard id="text-align-rails" text='text_align: "right"' />,
+                  <ExampleCodeCard id="text-align-react" text='textAlign="right"' />
                 ]
               ]
             }

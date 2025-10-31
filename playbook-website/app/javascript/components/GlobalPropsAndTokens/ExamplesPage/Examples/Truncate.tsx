@@ -1,4 +1,3 @@
-import React from "react";
 import { Body, Card, Flex  } from "playbook-ui";
 import ShowPage from "../../Templates/ShowPage";
 import PropsExamplesTable from "../../Templates/Subcomponents/PropsExamplesTable";
@@ -75,11 +74,11 @@ const Truncate = () => {
               <ValuesCards />,
               <ExampleCodeCard
                 id="truncate-rails"
-                text="truncate: '2'"
+                text='truncate: "2"'
               />,
               <ExampleCodeCard
                 id="truncate-react"
-                text="truncate='2'"
+                text='truncate="2"'
               />,
             ],
           ]}

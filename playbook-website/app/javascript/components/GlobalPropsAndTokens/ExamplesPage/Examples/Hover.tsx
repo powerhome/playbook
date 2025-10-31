@@ -83,11 +83,11 @@ const Hover = () => {
             <ExampleCodeCard text="${color}" copyIcon={false} />,
             <ExampleCodeCard
               id="hover-color-rails"
-              text="hover: { color: 'red' }"
+              text='hover: { color: "red" }'
             />,
             <ExampleCodeCard
               id="hover-color-react"
-              text="hover={{ color: 'red' }}"
+              text='hover={{ color: "red" }}'
             />,
           ],
           [
@@ -96,11 +96,11 @@ const Hover = () => {
             <ExampleCodeCard text="${background}" copyIcon={false} />,
             <ExampleCodeCard
               id="hover-background-rails"
-              text="hover: { background: 'slate' }"
+              text='hover: { background: "slate" }'
             />,
             <ExampleCodeCard
               id="hover-background-react"
-              text="hover={{ background: 'slate' }}"
+              text='hover={{ background: "slate" }}'
             />,
           ],
           [
@@ -109,11 +109,11 @@ const Hover = () => {
             <ValuesCards values={shadowValues} />,
             <ExampleCodeCard
               id="hover-shadow-rails"
-              text="hover: { shadow: 'deep' }"
+              text='hover: { shadow: "deep" }'
             />,
             <ExampleCodeCard
               id="hover-shadow-react"
-              text="hover={{ shadow:'deep' }}"
+              text='hover={{ shadow: "deep" }}'
             />,
           ],
           [
@@ -122,11 +122,11 @@ const Hover = () => {
             <ValuesCards values={scaleValues} />,
             <ExampleCodeCard
               id="hover-scale-rails"
-              text="hover: { scale: 'md' }"
+              text='hover: { scale: "md" }'
             />,
             <ExampleCodeCard
               id="hover-scale-react"
-              text="hover={{ scale: 'md' }}"
+              text='hover={{ scale: "md" }}'
             />,
           ],
           [
@@ -135,11 +135,11 @@ const Hover = () => {
             <ValuesCards values={["true", "false"]} />,
             <ExampleCodeCard
               id="hover-visible-rails"
-              text="hover: { visible: 'true' }"
+              text='hover: { visible: "true" }'
             />,
             <ExampleCodeCard
               id="hover-visible-react"
-              text="hover={{ visible: 'true' }}"
+              text='hover={{ visible: "true" }}'
             />,
           ],
           [
@@ -148,11 +148,11 @@ const Hover = () => {
             <ValuesCards values={["true", "false"]} />,
             <ExampleCodeCard
               id="hover-underline-rails"
-              text="hover: { underline: 'true' }"
+              text='hover: { underline: "true" }'
             />,
             <ExampleCodeCard
               id="hover-underline-react"
-              text="hover={{ underline: 'true' }}"
+              text='hover={{ underline: "true" }}'
             />,
           ],
         ]}

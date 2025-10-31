@@ -1,4 +1,3 @@
-import React from "react";
 import {
   Background,
   Layout,
@@ -42,7 +41,7 @@ const GlobalProps = () => {
         <Body text="Global Props are universal settings that apply to all components in our design system. They use Token values to control aspects like spacing, colors, and typography, ensuring consistent design and behavior across your application." />
         <Layout layout="collection" marginY="xl" paddingBottom="xl">
           <Layout.Body>
-            {GlobalPropsCards.map(({ title, description, link, icon }) => {
+            {GlobalPropsCards.sort((a, b) => a.title.localeCompare(b.title)).map(({ title, description, link, icon }) => {
               return (
                 <Link key={title} href={link}>
                   <Card padding="none" hover={{ shadow: "deep" }} flex={1} minHeight="300px">

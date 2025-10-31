@@ -1,4 +1,3 @@
-import React from "react";
 import {
   Background,
   Layout,
@@ -42,7 +41,7 @@ const Tokens = () => {
         <Body text="Tokens are reusable values that define core design elements like colors, typography, and spacing. They provide consistency across components and Global Props, ensuring scalable and cohesive design throughout the application." />
         <Layout layout="collection" marginY="xl" paddingBottom="xl">
           <Layout.Body>
-            {TokenCards.map(({ title, description, link, icon }) => {
+            {TokenCards.sort((a, b) => a.title.localeCompare(b.title)).map(({ title, description, link, icon }) => {
               return (
                 <Link key={title} href={link}>
                   <Card padding="none" hover={{ shadow: "deep" }} flex={1}>

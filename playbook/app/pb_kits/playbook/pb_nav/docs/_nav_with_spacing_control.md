@@ -1,1 +1,1 @@
-All Nav variants' navItems accept our [global Spacing](https://playbook.powerapp.cloud/visual_guidelines/spacing) (padding, margin) props for custom spacing requirements. This example uses paddingY="xxs" and margin="none" on the bold variant to show this in action!
+All Nav variants' navItems accept our global Spacing ([padding](https://playbook.powerapp.cloud/global_props/padding), [margin](https://playbook.powerapp.cloud/global_props/margin)) props for custom spacing requirements. This example uses paddingY="xxs" and margin="none" on the bold variant to show this in action!

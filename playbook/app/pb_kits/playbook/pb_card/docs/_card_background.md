@@ -1,1 +1,1 @@
-Add a background color by passing the color name to background. List of all colors can be viewed <a href="https://playbook.powerapp.cloud/visual_guidelines" target="_blank">here</a> under Product Colors and Status: Subtle Variations.
+Add a background color by passing the color name to background. List of all colors can be viewed <a href="https://playbook.powerapp.cloud/tokens/colors" target="_blank">here</a> under Product Colors and Status: Subtle Variations.

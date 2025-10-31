@@ -31,7 +31,7 @@ export const GlobalPropsCards = [
     title: "Justify (Flex Box)",
     description:
       "Controls how items are distributed within a Flex Box container. This can be horizontal or vertical spacing depending on the flex direction.",
-    icon: "objects-align-top",
+    icon: "objects-align-center-vertical",
     link: "/global_props/flex_box_justify",
   },
   {
@@ -115,14 +115,14 @@ export const GlobalPropsCards = [
     title: "Min Width",
     description:
       "Defines the smallest width an element can have, maintaining layout consistency and flexibility.",
-    icon: "arrows-from-line",
+    icon: "arrows-left-right-through-line",
     link: "/global_props/min_width",
   },
   {
     title: "Number Spacing",
     description:
       "Adjusts space between numerical characters for better readability and visual alignment.",
-    icon: "fa-solid fa-align-justify",
+    icon: "tally-4",
     link: "/global_props/number_spacing",
   },
   {
@@ -199,7 +199,7 @@ export const GlobalPropsCards = [
     title: "Shadow",
     description:
       "Applies depth effects using box shadows to elevate components visually and create visual hierarchy.",
-    icon: "files",
+    icon: "shadow",
     link: "/global_props/shadow",
   }
 ];

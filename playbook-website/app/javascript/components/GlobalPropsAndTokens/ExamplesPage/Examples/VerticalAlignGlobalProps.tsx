@@ -1,4 +1,3 @@
-import React from "react";
 import { Body, Caption, Card, Flex, Title } from "playbook-ui";
 import ShowPage from "../../Templates/ShowPage";
 import PropsExamplesTable from "../../Templates/Subcomponents/PropsExamplesTable";
@@ -103,14 +102,14 @@ const VerticalAlignGlobalProps = () => {
           <Caption text="Rails" />
           <ExampleCodeCard
             id="vertical-align-responsive-rails"
-            text="vertical_align: { xs: 'baseline', sm: 'baseline', md: 'top', lg: 'top', xl: 'top', default: 'top' }"
+            text='vertical_align: { xs: "baseline", sm: "baseline", md: "top", lg: "top", xl: "top", default: "top" }'
           />
         </Flex>
         <Flex alignItems="center" gap="sm">
           <Caption text="React" />
           <ExampleCodeCard
             id="vertical-align-responsive-react"
-            text="verticalAlign={{ xs: 'baseline', sm: 'baseline', md: 'top', lg: 'top', xl: 'top', default: 'top' }}"
+            text='verticalAlign={{ xs: "baseline", sm: "baseline", md: "top", lg: "top", xl: "top", default: "top" }}'
           />
         </Flex>
       </>
@@ -143,11 +142,11 @@ const VerticalAlignGlobalProps = () => {
             <ValuesCards />,
             <ExampleCodeCard
               id="vertical-align-rails"
-              text="vertical_align: 'baseline'"
+              text='vertical_align: "baseline"'
             />,
             <ExampleCodeCard
               id="vertical-align-react"
-              text="verticalAlign='baseline'"
+              text='verticalAlign="baseline"'
             />,
           ],
         ]}
