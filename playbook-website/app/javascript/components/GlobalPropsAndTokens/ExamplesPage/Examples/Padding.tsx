@@ -1,4 +1,4 @@
-import { Body, Caption, Card, Flex } from "playbook-ui";
+import { Caption, Card, Flex } from "playbook-ui";
 
 import ShowPage from "../../Templates/ShowPage";
 import PropsExamplesTable from "../../Templates/Subcomponents/PropsExamplesTable";
@@ -35,7 +35,7 @@ const Padding = () => {
               src={PaddingImages[padding]}
             />
           </Card>
-          <Body text={formatText(padding)} />
+          <Caption size="xs" text={formatText(padding)} />
         </Flex>
       </>
     )
