@@ -25,3 +25,4 @@ export {default as DropdownWithCustomRadioOptions} from './_dropdown_with_custom
 export {default as DropdownWithCustomActiveStyleOptions} from './_dropdown_with_custom_active_style_options.jsx'
 export { default as DropdownQuickpick } from './_dropdown_quickpick.jsx'
 export { default as DropdownQuickpickRangeEnd } from './_dropdown_quickpick_range_end.jsx'
+export { default as DropdownQuickpickDefaultDates } from './_dropdown_quickpick_default_dates.jsx'

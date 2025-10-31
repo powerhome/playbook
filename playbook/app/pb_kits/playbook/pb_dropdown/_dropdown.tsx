@@ -88,16 +88,25 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
         globalProps(props),
         className
     );
-
+    // ------------- Quick Pick ---------------------------------
     // Use QuickPick options when variant is "quickpick"
     const dropdownOptions = variant === "quickpick" 
         ? getQuickPickOptions(rangeEndsToday) 
         : (options || []);
+    // ----------------------------------------------------------
 
     const [isDropDownClosed, setIsDropDownClosed, toggleDropdown] = useDropdown(isClosed);
 
     const [filterItem, setFilterItem] = useState("");
     const initialSelected = useMemo(() => {
+      // Handle quickpick variant with string defaultValue (e.g., "This Month")
+      if (variant === "quickpick" && typeof defaultValue === "string" && defaultValue) {
+        const matchedOption = dropdownOptions.find(
+          (opt: GenericObject) => opt.label?.toLowerCase() === (defaultValue as string).toLowerCase()
+        );
+        return matchedOption || {};
+      }
+      
       if (multiSelect) {
         if (Array.isArray(defaultValue)) return defaultValue;
         return defaultValue && Object.keys(defaultValue).length
@@ -105,7 +114,7 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
           : [];
       }
       return defaultValue || {};
-    }, [multiSelect, defaultValue]);
+    }, [multiSelect, defaultValue, variant, dropdownOptions]);
 
     const [selected, setSelected] = useState<GenericObject | GenericObject[]>(
       initialSelected

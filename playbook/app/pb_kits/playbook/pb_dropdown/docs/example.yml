@@ -51,5 +51,6 @@ examples:
   - dropdown_with_external_control: useDropdown Hook
   - dropdown_quickpick: Quick Pick Variant
   - dropdown_quickpick_range_end: Quick Pick (Range Ends Today)
+  - dropdown_quickpick_default_dates: Quick Pick (Default Dates)
 
 
