@@ -110,4 +110,31 @@ RSpec.describe Playbook::PbCurrency::Currency do
       expect(no_symbol_num.title_props[:text]).to eq "-123"
     end
   end
+
+  describe "when given a numeric value" do
+    it "show correct amount with numeric value" do
+      num = subject.new(amount: 32)
+
+      expect(num.title_props[:text]).to eq "32"
+    end
+
+    it "show negative sign with numeric value" do
+      num = subject.new(amount: -123)
+
+      expect(num.title_props[:text]).to eq "-123"
+    end
+
+    it "show proper abbreviated amount with numeric value" do
+      num = subject.new(abbreviate: true, amount: 3200)
+
+      expect(num.title_props[:text]).to eq "3.2"
+      expect(num.body_props[:text]).to eq "K"
+    end
+
+    it "show proper comma separated amount with numeric value" do
+      num = subject.new(comma_separator: true, amount: 1234567890)
+
+      expect(num.title_props[:text]).to eq "1,234,567,890"
+    end
+  end
 end
