@@ -128,7 +128,7 @@ class PagesController < ApplicationController
 
     redirect_to root_path and return unless GLOBAL_PROPS_AND_TOKENS["global_props"]&.include?(name)
 
-    @page_title = "Global Props Example"
+    @page_title = "Global Props - #{name.titleize}"
     @show_sidebar = true
     render layout: "global_props_page"
   end
@@ -144,7 +144,7 @@ class PagesController < ApplicationController
 
     redirect_to root_path and return unless GLOBAL_PROPS_AND_TOKENS["tokens"]&.include?(name)
 
-    @page_title = "Tokens Example"
+    @page_title = "Tokens - #{name.titleize}"
     @show_sidebar = true
     render layout: "global_props_page"
   end
