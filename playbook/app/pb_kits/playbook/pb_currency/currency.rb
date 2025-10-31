@@ -125,13 +125,22 @@ module Playbook
       # Convert numeric input to string format
       def convert_amount(input)
         if input.is_a?(Numeric)
-          format("%.2f", input)
+          if input.zero? && null_display.nil?
+            ""
+          else
+            format("%.2f", input)
+          end
+        # Handle string representations of zero
+        elsif input.to_s.strip.match?(/^-?0+(\.0+)?$/) && null_display.nil?
+          ""
         else
           input.to_s
         end
       end
 
       def whole_value
+        return "" if currency_amount.blank?
+
         value = currency_amount.split(".").first
         if comma_separator
           number_with_delimiter(value.gsub(",", ""))
@@ -141,6 +150,8 @@ module Playbook
       end
 
       def decimal_value
+        return "00" if currency_amount.blank?
+
         currency_amount.split(".")[1] || "00"
       end
 
@@ -159,6 +170,8 @@ module Playbook
       end
 
       def abbreviated_value(index = 0..-2)
+        return "" if currency_amount.blank?
+
         value = currency_amount.split(".").first.gsub(",", "").to_i
         abbreviated_num = number_to_human(value, units: { thousand: "K", million: "M", billion: "B", trillion: "T" }).gsub(/\s+/, "")
         abbreviated_num[index]
@@ -186,6 +199,8 @@ module Playbook
 
         if decimals == "matching"
           if comma_separator
+            return "" if currency_amount.blank?
+
             number_with_delimiter(currency_amount.gsub(",", ""))
           else
             currency_amount

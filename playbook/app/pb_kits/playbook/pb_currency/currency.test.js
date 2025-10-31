@@ -165,6 +165,10 @@ test('handles numeric amounts correctly', () => {
           amount={-600.70}
           data={{ testid: 'test-numeric-negative' }}
       />
+      <Currency
+          amount={0.00}
+          data={{ testid: 'test-numeric-null' }}
+      />
     </>
   )
 
@@ -174,4 +178,5 @@ test('handles numeric amounts correctly', () => {
   expect(screen.getByTestId('test-numeric-no-symbol')).toHaveTextContent('400.50')
   expect(screen.getByTestId('test-numeric-medium-size')).toHaveTextContent('$500.55')
   expect(screen.getByTestId('test-numeric-negative')).toHaveTextContent('-$600.70')
+  expect(screen.getByTestId('test-numeric-null')).toHaveTextContent('$.00')
 })

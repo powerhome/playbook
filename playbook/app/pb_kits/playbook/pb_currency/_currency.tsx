@@ -62,6 +62,9 @@ const Currency = (props: CurrencyProps): React.ReactElement => {
   // Convert numeric input to string format
   const convertAmount = (input: string | number): string => {
     if (typeof input === 'number') {
+      if (input === 0 && !nullDisplay) {
+        return ""
+      }
       return input.toFixed(2)
     }
     return input

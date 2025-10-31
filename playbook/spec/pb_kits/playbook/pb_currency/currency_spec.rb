@@ -136,5 +136,12 @@ RSpec.describe Playbook::PbCurrency::Currency do
 
       expect(num.title_props[:text]).to eq "1,234,567,890"
     end
+
+    it "show empty string when numeric amount is equal to 0" do
+      num = subject.new(comma_separator: true, amount: 0.00)
+
+      expect(num.title_props[:text]).to eq ""
+      expect(num.body_props[:text]).to eq ".00"
+    end
   end
 end
