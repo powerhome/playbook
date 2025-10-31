@@ -17,8 +17,7 @@ module Playbook
       prop :symbol, type: Playbook::Props::String,
                     default: "$"
 
-      prop :amount, type: Playbook::Props::String,
-                    required: true
+      prop :amount, required: true
 
       prop :unit, type: Playbook::Props::String,
                   required: false
@@ -92,7 +91,7 @@ module Playbook
       end
 
       def negative_sign
-        amount.starts_with?("-") && swap_negative ? "-" : ""
+        currency_amount.starts_with?("-") && swap_negative ? "-" : ""
       end
 
       def body_props
@@ -117,10 +116,23 @@ module Playbook
         end
       end
 
+      def currency_amount
+        @currency_amount ||= convert_amount(amount)
+      end
+
     private
 
+      # Convert numeric input to string format
+      def convert_amount(input)
+        if input.is_a?(Numeric)
+          format("%.2f", input)
+        else
+          input.to_s
+        end
+      end
+
       def whole_value
-        value = amount.split(".").first
+        value = currency_amount.split(".").first
         if comma_separator
           number_with_delimiter(value.gsub(",", ""))
         else
@@ -129,7 +141,7 @@ module Playbook
       end
 
       def decimal_value
-        amount.split(".")[1] || "00"
+        currency_amount.split(".")[1] || "00"
       end
 
       def units_element
@@ -147,7 +159,7 @@ module Playbook
       end
 
       def abbreviated_value(index = 0..-2)
-        value = amount.split(".").first.gsub(",", "").to_i
+        value = currency_amount.split(".").first.gsub(",", "").to_i
         abbreviated_num = number_to_human(value, units: { thousand: "K", million: "M", billion: "B", trillion: "T" }).gsub(/\s+/, "")
         abbreviated_num[index]
       end
@@ -174,9 +186,9 @@ module Playbook
 
         if decimals == "matching"
           if comma_separator
-            number_with_delimiter(amount.gsub(",", ""))
+            number_with_delimiter(currency_amount.gsub(",", ""))
           else
-            amount
+            currency_amount
           end
         else
           whole_value
