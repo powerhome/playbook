@@ -1,12 +1,13 @@
 import React from 'react'
 import Dropdown from '../../pb_dropdown/_dropdown'
 
-const DropdownQuickPick = (props) => {
+const DropdownQuickpick = (props) => {
 
   return (
     <div>
       <Dropdown
-          label="Quick Pick"
+          label="Date Range"
+          onSelect={(selectedItem) => console.log(selectedItem)}
           variant="quickpick"
           {...props}
       />
@@ -14,4 +15,4 @@ const DropdownQuickPick = (props) => {
   )
 }
 
-export default DropdownQuickPick
+export default DropdownQuickpick
