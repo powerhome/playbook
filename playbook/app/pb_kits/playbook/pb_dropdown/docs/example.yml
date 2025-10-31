@@ -25,6 +25,7 @@ examples:
 
   react:
   - dropdown_default: Default
+  - dropdown_quick_pick: Quick Pick
   - dropdown_with_autocomplete: Autocomplete
   - dropdown_multi_select: Multi Select
   - dropdown_multi_select_with_autocomplete: Multi Select with Autocomplete

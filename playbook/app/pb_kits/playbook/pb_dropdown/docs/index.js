@@ -23,3 +23,4 @@ export { default as DropdownMultiSelectWithCustomOptions } from './_dropdown_mul
 export {default as DropdownWithCustomIconOptions} from './_dropdown_with_custom_icon_options.jsx'
 export {default as DropdownWithCustomRadioOptions} from './_dropdown_with_custom_radio_options.jsx'
 export {default as DropdownWithCustomActiveStyleOptions} from './_dropdown_with_custom_active_style_options.jsx'
+export { default as DropdownQuickPick } from './_dropdown_quickpick.jsx'
