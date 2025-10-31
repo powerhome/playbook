@@ -2,7 +2,7 @@ import ShowPage from "../../Templates/ShowPage";
 import PropsExamplesTable from "../../Templates/Subcomponents/PropsExamplesTable";
 import ExampleCodeCard from "../../Templates/Subcomponents/ExampleCodeCard";
 
-const Shadows = () => {
+const Shadow = () => {
     return (
         <>
             <ShowPage
@@ -54,4 +54,4 @@ const Shadows = () => {
     )
 }
 
-export default Shadows;
+export default Shadow;

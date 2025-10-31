@@ -4,6 +4,7 @@ global_props:
   - flex_box
   - flex_box_order
   - flex_box_gap
+  - flex_box_justify
   - flex_box_align
   - height
   - hover
@@ -26,6 +27,7 @@ global_props:
   - z_index
   - border_radius
   - group_hover
+  - shadow
 
 tokens:
   - animation
@@ -39,7 +41,7 @@ tokens:
   - position
   - scale
   - screen_sizes
-  - shadows
+  - shadow
   - spacing
   - text_align
   - titles

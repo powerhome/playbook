@@ -77,11 +77,11 @@ export const TokenCards = [
     link: "/tokens/screen_sizes",
   },
   {
-    title: "Shadows",
+    title: "Shadow",
     description:
       "Depth and blur values for adding shadow effects, creating depth and emphasis.",
     icon: "files",
-    link: "/tokens/shadows",
+    link: "/tokens/shadow",
   },
   {
     title: "Spacing",

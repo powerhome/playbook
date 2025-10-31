@@ -28,6 +28,13 @@ export const GlobalPropsCards = [
     link: "/global_props/flex_box",
   },
   {
+    title: "Justify (Flex Box)",
+    description:
+      "Controls how items are distributed within a Flex Box container. This can be horizontal or vertical spacing depending on the flex direction.",
+    icon: "objects-align-top",
+    link: "/global_props/flex_box_justify",
+  },
+  {
     title: "Align (Flex Box)",
     description:
       "Controls alignment of items within a Flex Box container. This can be vertical or horizontal alignment depending on the flex direction.",
@@ -187,5 +194,12 @@ export const GlobalPropsCards = [
       "Enables hover effects on child elements when the parent element is hovered over.",
     icon: "layer-group",
     link: "/global_props/group_hover",
+  },
+  {
+    title: "Shadow",
+    description:
+      "Applies depth effects using box shadows to elevate components visually and create visual hierarchy.",
+    icon: "files",
+    link: "/global_props/shadow",
   }
 ];
