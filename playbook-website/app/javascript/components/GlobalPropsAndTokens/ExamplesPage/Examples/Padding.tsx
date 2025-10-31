@@ -76,14 +76,14 @@ const Padding = () => {
           <Caption text="Rails" />
           <ExampleCodeCard
             id="padding-responsive-rails"
-            text="padding_bottom: { xs: 'xxs', sm: 'xs', md: 'sm', lg: 'md', xl: 'lg', default: 'xl' }"
+            text='padding_bottom: { xs: "xxs", sm: "xs", md: "sm", lg: "md", xl: "lg", default: "xl" }'
           />
         </Flex>
         <Flex alignItems="center" gap="sm">
           <Caption text="React" />
           <ExampleCodeCard
             id="padding-responsive-react"
-            text="paddingBottom={{ xs: 'xxs', sm: 'xs', md: 'sm', lg: 'md', xl: 'lg', default: 'xl' }}"
+            text='paddingBottom={{ xs: "xxs", sm: "xs", md: "sm", lg: "md", xl: "lg", default: "xl" }}'
           />
         </Flex>
       </>

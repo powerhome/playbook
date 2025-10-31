@@ -102,14 +102,14 @@ const VerticalAlignGlobalProps = () => {
           <Caption text="Rails" />
           <ExampleCodeCard
             id="vertical-align-responsive-rails"
-            text="vertical_align: { xs: 'baseline', sm: 'baseline', md: 'top', lg: 'top', xl: 'top', default: 'top' }"
+            text='vertical_align: { xs: "baseline", sm: "baseline", md: "top", lg: "top", xl: "top", default: "top" }'
           />
         </Flex>
         <Flex alignItems="center" gap="sm">
           <Caption text="React" />
           <ExampleCodeCard
             id="vertical-align-responsive-react"
-            text="verticalAlign={{ xs: 'baseline', sm: 'baseline', md: 'top', lg: 'top', xl: 'top', default: 'top' }}"
+            text='verticalAlign={{ xs: "baseline", sm: "baseline", md: "top", lg: "top", xl: "top", default: "top" }}'
           />
         </Flex>
       </>

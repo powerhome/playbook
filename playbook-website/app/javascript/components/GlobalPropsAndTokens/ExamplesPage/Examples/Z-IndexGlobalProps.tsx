@@ -78,14 +78,14 @@ const ZIndex = () => {
             <Caption text="Rails" />
             <ExampleCodeCard
               id="responsive-rails"
-              text="z_index: { xs: '1', sm: '2', md: '3', lg: '4', xl: '5', default: '6' }"
+              text='z_index: { xs: "1", sm: "2", md: "3", lg: "4", xl: "5", default: "6" }'
             />
           </Flex>
           <Flex alignItems="center" gap="sm">
             <Caption text="React" />
             <ExampleCodeCard
               id="responsive-react"
-              text="zIndex= {{ xs: '1', sm: '2', md: '3', lg: '4', xl: '5', default: '6' }}"
+              text='zIndex={{ xs: "1", sm: "2", md: "3", lg: "4", xl: "5", default: "6" }}'
             />
           </Flex>
         </>

@@ -70,14 +70,14 @@ const TextAlign = () => {
             <Caption text="Rails" />
             <ExampleCodeCard
               id="responsive-rails"
-              text="text_align: { xs: 'justify', sm: 'justify', md: 'left', lg: 'left', xl: 'left', default: 'left' }"
+              text='text_align: { xs: "justify", sm: "justify", md: "left", lg: "left", xl: "left", default: "left" }'
             />
           </Flex>
           <Flex alignItems="center" gap="sm">
             <Caption text="React" />
             <ExampleCodeCard
               id="responsive-react"
-              text="textAlign= {{ xs: 'justify', sm: 'justify', md: 'left', lg: 'left', xl: 'left', default: 'left' }}"
+              text='textAlign={{ xs: "justify", sm: "justify", md: "left", lg: "left", xl: "left", default: "left" }}'
             />
           </Flex>
         </>

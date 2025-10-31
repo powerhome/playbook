@@ -18,14 +18,14 @@ const FlexBoxAlignGlobalProps = () => {
           <Caption text="Rails" />
           <ExampleCodeCard
             id="responsive-align-flex-rails"
-            text="align_content: { xs: 'center', sm: 'center', md: 'start', lg: 'start', xl: 'start', default: 'start' }"
+            text='align_content: { xs: "center", sm: "center", md: "start", lg: "start", xl: "start", default: "start" }'
           />
         </Flex>
         <Flex alignItems="center" gap="sm">
           <Caption text="React" />
           <ExampleCodeCard
             id="responsive-align-flex-react"
-            text="alignContent= {{ xs: 'center', sm: 'center', md: 'start', lg: 'start', xl: 'start', default: 'start' }}"
+            text='alignContent={{ xs: "center", sm: "center", md: "start", lg: "start", xl: "start", default: "start" }}'
           />
         </Flex>
       </>
