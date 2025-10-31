@@ -66,6 +66,7 @@ const TableCellRenderer = ({
         // Find the “owning” colDefinition by accessor. Needed for multi column logic
         const colDef = findColumnDefByAccessor(columnDefinitions ?? [], column.id)
         const cellAlignment = colDef?.columnStyling?.cellAlignment ?? "right"
+        const cellFontColor = colDef?.columnStyling?.fontColor
         const paddingValue = colDef?.columnStyling?.cellPadding ?? customRowStyle?.cellPadding
         const paddingClass = paddingValue ? `p_${paddingValue}` : undefined
 
@@ -88,7 +89,7 @@ const TableCellRenderer = ({
                     : `${column.getStart("left")}px`
                   : undefined,
                   backgroundColor: i === 0 && customRowStyle?.backgroundColor,
-                  color: customRowStyle?.fontColor,
+                  color: cellFontColor || customRowStyle?.fontColor,
             }}
           >
             {collapsibleTrail && i === 0 && row.depth > 0 && renderCollapsibleTrail(row.depth)}

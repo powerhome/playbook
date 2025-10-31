@@ -1,5 +1,5 @@
 import React from "react";
-import AdvancedTable from '../../pb_advanced_table/_advanced_table';
+import { AdvancedTable, Background,colors } from "playbook-ui";
 import MOCK_DATA from "./advanced_table_mock_data.json";
 
 const AdvancedTableColumnStylingColumnHeaders = (props) => {
@@ -38,11 +38,24 @@ const AdvancedTableColumnStylingColumnHeaders = (props) => {
             {
               accessor: "completedClasses",
               label: "Completed Classes",
-              columnStyling:{headerAlignment: "center", cellAlignment: "center"},
+              columnStyling:{
+                headerAlignment: "center", 
+                cellAlignment: "center",
+                fontColor: colors.success,
+              },
             },
             {
               accessor: "classCompletionRate",
               label: "Class Completion Rate",
+              columnStyling: { cellPadding: "none", fontColor: colors.error },
+              customRenderer: (row, value) => (
+                <Background 
+                    backgroundColor={"warning_secondary"}
+                    padding="xs" 
+                >
+                {value}
+                </Background>
+              ), 
             },
           ],
         },
@@ -52,6 +65,7 @@ const AdvancedTableColumnStylingColumnHeaders = (props) => {
             {
               accessor: "attendanceRate",
               label: "Attendance Rate",
+              columnStyling: { fontColor: colors.category_1 },
             },
             {
               accessor: "scheduledMeetings",

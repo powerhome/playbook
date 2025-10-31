@@ -22,7 +22,6 @@ const AdvancedTablePaddingControl = (props) => {
          {value}
         </Background>
       ), 
-
     },
     {
       accessor: "scheduledMeetings",
@@ -39,6 +38,15 @@ const AdvancedTablePaddingControl = (props) => {
     {
       accessor: "classCompletionRate",
       label: "Class Completion Rate",
+      columnStyling:{cellPadding: "none", fontColor: "white"},
+      customRenderer: (row, value) => (
+        <Background 
+            backgroundColor={"category_1"}
+            padding="xs" 
+        >
+         {value}
+        </Background>
+      ), 
     },
     {
       accessor: "graduatedStudents",
