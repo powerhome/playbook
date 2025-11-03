@@ -2,11 +2,11 @@ import PbEnhancedElement from '../pb_enhanced_element'
 import { debounce } from '../utilities/object'
 
 // Kit selectors
-const KIT_SELECTOR = '[class^="pb_"][class*="_kit"]'
-const ERROR_MESSAGE_SELECTOR = '.pb_body_kit_negative'  
+const KIT_SELECTOR             = '[class^="pb_"][class*="_kit"]'
+const ERROR_MESSAGE_SELECTOR   = '.pb_body_kit_negative'
 
 // Validation selectors
-const FORM_SELECTOR = 'form[data-pb-form-validation="true"]'
+const FORM_SELECTOR            = 'form[data-pb-form-validation="true"]'
 const REQUIRED_FIELDS_SELECTOR = 'input[required],textarea[required],select[required]'
 const PHONE_NUMBER_VALIDATION_ERROR_SELECTOR = '[data-pb-phone-validation-error="true"]'
 

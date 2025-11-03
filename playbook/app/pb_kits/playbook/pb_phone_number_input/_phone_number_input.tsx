@@ -1,16 +1,21 @@
 import React, { forwardRef, useEffect, useRef, useState, useImperativeHandle } from 'react'
 import classnames from 'classnames'
+
 import intlTelInput from 'intl-tel-input/build/js/intlTelInputWithUtils.js'
+
 import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps'
+
 import TextInput from '../pb_text_input/_text_input'
 import { Callback } from '../types'
 import { isEmpty } from '../utilities/object'
+
 declare global {
   interface Window {
     intlTelInputGlobals: any
   }
 }
+
 type PhoneNumberInputProps = {
   aria?: { [key: string]: string },
   className?: string,
@@ -36,6 +41,7 @@ type PhoneNumberInputProps = {
   strictMode?: boolean,
   countrySearch?: boolean,
 }
+
 enum ValidationError {
   TooShort = 2,
   TooLong = 3,
@@ -46,6 +52,7 @@ enum ValidationError {
 const formatToGlobalCountryName = (countryName: string) => {
   return countryName.split("(")[0].trim()
 }
+
 const formatAllCountries = () => {
   const countryData = intlTelInput.getCountryData()
   for (let i = 0; i < countryData.length; i++) {
@@ -90,6 +97,7 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.Ref<unknown>
     strictMode = false,
     countrySearch = false,
   } = props
+
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
   const htmlProps = buildHtmlProps(htmlOptions)
@@ -339,6 +347,7 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.Ref<unknown>
           setHasTyped(true)
           return errorMessage
         }
+
         // Check if it only contains valid characters
         if (!containOnlyNumbers(inputValue)) {
           const countryName = itiRef.current.getSelectedCountryData().name
@@ -348,6 +357,7 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.Ref<unknown>
           setHasTyped(true)
           return errorMessage
         }
+
         // Check if valid number
         if (!itiRef.current.isValidNumber()) {
           const countryName = itiRef.current.getSelectedCountryData().name
@@ -370,15 +380,18 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.Ref<unknown>
 
           return errorMessage
         }
+
         // Clear error if valid
         setError('')
         return true
       }
     }
   })
+
   const getCurrentSelectedData = (itiInit: any, inputValue: string) => {
     return { ...itiInit.getSelectedCountryData(), number: inputValue }
   }
+
   const handleOnChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
     if (!hasTyped) setHasTyped(true)
     setInputValue(evt.target.value)
@@ -397,6 +410,7 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.Ref<unknown>
     } else {
       phoneNumberData = getCurrentSelectedData(itiRef.current, evt.target.value)
     }
+
     setSelectedData(phoneNumberData)
     onChange(phoneNumberData)
     isValid(itiRef.current.isValidNumber())
@@ -416,6 +430,7 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.Ref<unknown>
       onlyCountries.length > 0 ? onlyCountries.sort()[0] :
       excludeCountries.length > 0 ? excludeCountries.sort()[0] :
         "af";
+
   useEffect(() => {
     const telInputInit = intlTelInput(inputRef.current, {
       separateDialCode: true,
@@ -444,6 +459,7 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.Ref<unknown>
         onChange(phoneNumberData)
         validateErrors()
       })
+
       inputRef.current.addEventListener("open:countrydropdown", () => setDropDownIsOpen(true))
       inputRef.current.addEventListener("close:countrydropdown", () => setDropDownIsOpen(false))
 
@@ -492,6 +508,7 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.Ref<unknown>
   if (!isEmpty(aria)) textInputProps = {...textInputProps, ...ariaProps}
   if (!isEmpty(data)) wrapperProps = {...wrapperProps, ...dataProps}
   if (required) textInputProps.required = true
+
   return (
     <div
         {...wrapperProps}
@@ -513,4 +530,5 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.Ref<unknown>
     </div>
   )
 }
+
 export default forwardRef(PhoneNumberInput)
