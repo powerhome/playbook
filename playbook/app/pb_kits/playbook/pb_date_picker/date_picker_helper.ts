@@ -350,8 +350,14 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
   if (syncStartWith) {
     picker.config.onClose.push((selectedDates: string) => {
       if (selectedDates?.length) {
-        const quickpick = (document.querySelector(`#${syncStartWith}`) as HTMLElement & { _flatpickr?: any })?._flatpickr;
-        quickpick?.clear();
+        const element = document.querySelector(`#${syncStartWith}`) as any;
+        // Check if it's a Dropdown QuickPick (has _dropdownRef) or DatePicker QuickPick (has _flatpickr)
+        if (element?._dropdownRef?.current) {
+          element._dropdownRef.current.clearSelected();
+        } else {
+          const quickpick = element?._flatpickr;
+          quickpick?.clear();
+        }
       }
     });
   }
@@ -360,8 +366,14 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
   if (syncEndWith) {
     picker.config.onClose.push((selectedDates: string) => {
       if (selectedDates?.length) {
-        const quickpick = (document.querySelector(`#${syncEndWith}`) as HTMLElement & { _flatpickr?: any })?._flatpickr;
-        quickpick?.clear();
+        const element = document.querySelector(`#${syncEndWith}`) as any;
+        // Check if it's a Dropdown QuickPick (has _dropdownRef) or DatePicker QuickPick (has _flatpickr)
+        if (element?._dropdownRef?.current) {
+          element._dropdownRef.current.clearSelected();
+        } else {
+          const quickpick = element?._flatpickr;
+          quickpick?.clear();
+        }
       }
     });
   }

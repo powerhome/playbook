@@ -268,7 +268,8 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
         dark
     });
 
-    useImperativeHandle(ref, () => ({
+    // Create an internal ref object that holds the imperative handle methods
+    const imperativeRef = useRef({
       clearSelected: () => {
         if (multiSelect) {
           setSelected([]);
@@ -280,7 +281,36 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
         setFilterItem("");
         setIsDropDownClosed(true);
       },
-    }));
+    });
+
+    // Update imperativeRef whenever dependencies change
+    useEffect(() => {
+      imperativeRef.current = {
+        clearSelected: () => {
+          if (multiSelect) {
+            setSelected([]);
+            onSelect && onSelect([]);
+          } else {
+            setSelected({});
+            onSelect && onSelect(null);
+          }
+          setFilterItem("");
+          setIsDropDownClosed(true);
+        },
+      };
+    }, [multiSelect, onSelect, setSelected, setFilterItem, setIsDropDownClosed]);
+
+    useImperativeHandle(ref, () => imperativeRef.current);
+
+    // Create a ref to the outer div to attach the dropdown ref for DatePicker sync
+    const outerDivRef = useRef<HTMLDivElement>(null);
+    
+    useEffect(() => {
+      // Attach the ref to the DOM element so DatePicker can access it
+      if (outerDivRef.current && variant === "quickpick" && id) {
+        (outerDivRef.current as any)._dropdownRef = imperativeRef;
+      }
+    }, [variant, id]);
 
     return (
         <div {...ariaProps}
@@ -288,6 +318,7 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
             {...htmlProps}
             className={classes}
             id={id}
+            ref={outerDivRef}
             style={{position: "relative"}}
         >
             <DropdownContext.Provider
