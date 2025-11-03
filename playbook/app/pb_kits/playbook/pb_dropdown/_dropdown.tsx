@@ -284,6 +284,7 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
     });
 
     // Update imperativeRef whenever dependencies change
+    // (needed for external clearing of normal Dropdown + DatePicker-synced QuickPick Dropdown)
     useEffect(() => {
       imperativeRef.current = {
         clearSelected: () => {
@@ -311,6 +312,30 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
         (outerDivRef.current as any)._dropdownRef = imperativeRef;
       }
     }, [variant, id]);
+
+    // Sync defaultValue with DatePickers on mount when 3 input pattern is used
+    useEffect(() => {
+      if (variant === "quickpick" && initialSelected && typeof initialSelected === "object" && !Array.isArray(initialSelected)) {
+        const value = initialSelected.value;
+        
+        if (Array.isArray(value) && value.length === 2) {
+          const [start, end] = value;
+          
+          // Wait for DatePickers to be initialized
+          setTimeout(() => {
+            if (controlsStartId) {
+              const startPicker = (document.querySelector(`#${controlsStartId}`) as HTMLElement & { _flatpickr?: any })?._flatpickr;
+              startPicker?.setDate(start, true);
+            }
+            
+            if (controlsEndId) {
+              const endPicker = (document.querySelector(`#${controlsEndId}`) as HTMLElement & { _flatpickr?: any })?._flatpickr;
+              endPicker?.setDate(end, true);
+            }
+          }, 0);
+        }
+      }
+    }, [variant, initialSelected, controlsStartId, controlsEndId]);
 
     return (
         <div {...ariaProps}
