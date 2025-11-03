@@ -255,6 +255,19 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
         setSelected({});
         onSelect && onSelect(null);
         setFocusedOptionIndex(-1);
+        
+        // Clear linked DatePickers as well if this is a quickpick variant with controls
+        if (variant === "quickpick") {
+          if (controlsStartId) {
+            const startPicker = (document.querySelector(`#${controlsStartId}`) as HTMLElement & { _flatpickr?: any })?._flatpickr;
+            startPicker?.clear();
+          }
+          
+          if (controlsEndId) {
+            const endPicker = (document.querySelector(`#${controlsEndId}`) as HTMLElement & { _flatpickr?: any })?._flatpickr;
+            endPicker?.clear();
+          }
+        }
       }
     };
 
