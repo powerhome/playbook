@@ -41,6 +41,8 @@ type DropdownProps = {
     separators?: boolean;
     variant?: "default" | "subtle" | "quickpick";
     rangeEndsToday?: boolean;
+    controlsStartId?: string;
+    controlsEndId?: string;
     activeStyle?: {
       backgroundColor?: string;
       fontColor?: string;
@@ -74,6 +76,8 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
         onSelect,
         options,
         rangeEndsToday = false,
+        controlsStartId,
+        controlsEndId,
         separators = true,
         variant = "default",
         activeStyle,
@@ -220,6 +224,21 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
                    setFilterItem("");
                    setIsDropDownClosed(true);
                    onSelect && onSelect(clickedItem);
+                   
+                   // Sync with DatePickers if this is a quickpick variant
+                   if (variant === "quickpick" && Array.isArray(clickedItem.value)) {
+                       const [start, end] = clickedItem.value;
+                       
+                       if (controlsStartId) {
+                           const startPicker = (document.querySelector(`#${controlsStartId}`) as HTMLElement & { _flatpickr?: any })?._flatpickr;
+                           startPicker?.setDate(start, true);
+                       }
+                       
+                       if (controlsEndId) {
+                           const endPicker = (document.querySelector(`#${controlsEndId}`) as HTMLElement & { _flatpickr?: any })?._flatpickr;
+                           endPicker?.setDate(end, true);
+                       }
+                   }
             }
              };
 
