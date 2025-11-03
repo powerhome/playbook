@@ -1,3 +1,11 @@
+<% 
+  html_options_style = ""
+  if object.html_options[:style].is_a?(Hash)
+    html_options_style = object.html_options[:style].map { |k, v| "#{k.to_s.tr('_', '-')}: #{v}" }.join("; ")
+  elsif object.html_options[:style].is_a?(String)
+    html_options_style = object.html_options[:style]
+  end
+%>
 <% if object.image_url.present? %>
   <%= pb_content_tag(object.tag,
       style: "background-image: url('#{object.image_url}');
@@ -9,7 +17,7 @@
   <% end %>
 <% else %>
   <%= pb_content_tag(object.tag,
-      style: object.custom_background_color
+      style: "#{object.custom_background_color}#{html_options_style.present? ? "; #{html_options_style}" : ""}"
   ) do %>
     <%= content.presence %>
   <% end %>

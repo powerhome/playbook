@@ -105,16 +105,15 @@ module Playbook
             background_color: custom_bg_color,
             tag: "td",
             classname: td_classname(column, index),
-            html_options: { style: { color: effective_font_color } },
           }
+          component_props[:html_options] = { style: { color: effective_font_color } } if effective_font_color.present?
         else
           component_name = "table/table_cell"
+          style_hash = { "background-color": bg_color }
+          style_hash[:color] = effective_font_color if effective_font_color.present?
           component_props = {
             html_options: {
-              style: {
-                "background-color": bg_color,
-                color: effective_font_color,
-              },
+              style: style_hash,
             },
             classname: td_classname(column, index),
           }
