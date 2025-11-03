@@ -4,7 +4,7 @@ description: Playbook uses spacing tokens for consistency, simplifying design an
 icon: distribute-spacing-horizontal
 ---
 
-For our Spacing Tokens refer to [Spacing](https://playbook.powerapp.cloud/visual_guidelines/spacing) in [Tokens & Guidelines](https://playbook.powerapp.cloud/visual_guidelines)
+For our Spacing Tokens refer to [Padding](https://playbook.powerapp.cloud/tokens/padding) or [Margin](https://playbook.powerapp.cloud/tokens/margin) in our [Tokens Page](https://playbook.powerapp.cloud/tokens)
 
 #### Index
 

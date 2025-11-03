@@ -1,4 +1,4 @@
-import { Flex, Background, Title, Detail, Example } from "playbook-ui";
+import { Flex, Background, Title, Detail } from "playbook-ui";
 import ShowPage from "../../Templates/ShowPage";
 import PropsExamplesTable from "../../Templates/Subcomponents/PropsExamplesTable";
 import HeaderWithIcon from "../../Templates/Subcomponents/HeaderWithIcon";
@@ -104,57 +104,57 @@ const Width = () => {
               "0%",
               <ExampleCodeCard text="string" copyIcon={false} />,
               <Flex gap="xs" wrap><ExampleCodeCard text="0%" copyIcon={false} /></Flex>,
-              <ExampleCodeCard id="width-0-rails" text="width: '0'" />,
-              <ExampleCodeCard id="width-0-react" text="width= '0'" />,
+              <ExampleCodeCard id="width-0-rails" text='width: "0"' />,
+              <ExampleCodeCard id="width-0-react" text='width="0"' />,
             ],
             [
               "360px",
               <ExampleCodeCard text="string" copyIcon={false} />,
               <Flex gap="xs" wrap><ValueCardWithTooltip text="xs" tooltipText="360px"/></Flex>,
-              <ExampleCodeCard id="width-xs-rails" text="width: 'xs'" />,
-              <ExampleCodeCard id="width-xs-react" text="width= 'xs'" />,
+              <ExampleCodeCard id="width-xs-rails" text='width: "xs"' />,
+              <ExampleCodeCard id="width-xs-react" text='width="xs"' />,
             ],
             [
               "540px",
               <ExampleCodeCard text="string" copyIcon={false} />,
               <Flex gap="xs" wrap><ValueCardWithTooltip text="sm" tooltipText="540px"/></Flex>,
-              <ExampleCodeCard id="width-sm-rails" text="width: 'sm'" />,
-              <ExampleCodeCard id="width-sm-react" text="width= 'sm'" />,
+              <ExampleCodeCard id="width-sm-rails" text='width: "sm"' />,
+              <ExampleCodeCard id="width-sm-react" text='width="sm"' />,
             ],
             [
               "720px",
               <ExampleCodeCard text="string" copyIcon={false} />,
               <Flex gap="xs" wrap><ValueCardWithTooltip text="md" tooltipText="720px"/></Flex>,
-              <ExampleCodeCard id="width-md-rails" text="width: 'md" />,
-              <ExampleCodeCard id="width-md-react" text="width= 'md'" />,
+              <ExampleCodeCard id="width-md-rails" text='width: "md"' />,
+              <ExampleCodeCard id="width-md-react" text='width="md"' />,
             ],
             [
               "960px",
               <ExampleCodeCard text="string" copyIcon={false} />,
               <Flex gap="xs" wrap><ValueCardWithTooltip text="lg" tooltipText="360px"/></Flex>,
-              <ExampleCodeCard id="width-lg-rails" text="width: 'lg'" />,
-              <ExampleCodeCard id="width-lg-react" text="width= 'lg'" />,
+              <ExampleCodeCard id="width-lg-rails" text='width: "lg"' />,
+              <ExampleCodeCard id="width-lg-react" text='width="lg"' />,
             ],
             [
               "1140px",
               <ExampleCodeCard text="string" copyIcon={false} />,
               <Flex gap="xs" wrap><ValueCardWithTooltip text="xl" tooltipText="1140px"/></Flex>,
-              <ExampleCodeCard id="width-xl-rails" text="width: 'xl'" />,
-              <ExampleCodeCard id="width-xl-react" text="width= 'xl'" />,
+              <ExampleCodeCard id="width-xl-rails" text='width: "xl"' />,
+              <ExampleCodeCard id="width-xl-react" text='width="xl"' />,
             ],
             [
               "1320px",
               <ExampleCodeCard text="string" copyIcon={false} />,
               <Flex gap="xs" wrap><ValueCardWithTooltip text="xxl" tooltipText="1320px"/></Flex>,
-              <ExampleCodeCard id="width-xxl-rails" text="width: 'xxl'" />,
-              <ExampleCodeCard id="width-xxl-react" text="width= 'xxl'" />,
+              <ExampleCodeCard id="width-xxl-rails" text='width: "xxl"' />,
+              <ExampleCodeCard id="width-xxl-react" text='width="xxl"' />,
             ],
             [
               "100%",
               <ExampleCodeCard text="string" copyIcon={false} />,
               <Flex gap="xs" wrap><ExampleCodeCard text="100%" copyIcon={false} /></Flex>,
-              <ExampleCodeCard id="width-100-rails" text="width: '100%'" />,
-              <ExampleCodeCard id="width-100-react" text="width= '100%'" />,
+              <ExampleCodeCard id="width-100-rails" text='width: "100%"' />,
+              <ExampleCodeCard id="width-100-react" text='width="100%"' />,
             ],
           ]}
         />

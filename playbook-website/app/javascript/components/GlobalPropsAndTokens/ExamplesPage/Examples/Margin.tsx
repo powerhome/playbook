@@ -1,4 +1,3 @@
-import React from "react";
 import { Image, Flex, Caption } from "playbook-ui";
 
 import ShowPage from "../../Templates/ShowPage";
@@ -13,43 +12,29 @@ import { SpacingValues } from "../../Data/SpacingValues";
 
 const Margin = () => {
   const VisualGuideCard = () => {
+    const marginImages = [
+      { text: "Margin", url: MarginImages.margin },
+      { text: "Margin Left", url: MarginImages.marginLeft },
+      { text: "Margin Right", url: MarginImages.marginRight },
+      { text: "Margin Top", url: MarginImages.marginTop },
+      { text: "Margin Bottom", url: MarginImages.marginBottom },
+      { text: "Margin X", url: MarginImages.marginX },
+      { text: "Margin Y", url: MarginImages.marginY },
+    ];
+
     return (
       <Flex width="100%" justify="between" wrap>
-        <Image
-          alt="Margin"
-          size="lg"
-          url={MarginImages.margin}
-        />
-        <Image
-          alt="Margin Left"
-          size="lg"
-          url={MarginImages.marginLeft}
-        />
-        <Image
-          alt="Margin Right"
-          size="lg"
-          url={MarginImages.marginRight}
-        />
-        <Image
-          alt="Margin Top"
-          size="lg"
-          url={MarginImages.marginTop}
-        />
-        <Image
-          alt="Margin Bottom"
-          size="lg"
-          url={MarginImages.marginBottom}
-        />
-        <Image
-          alt="Margin X"
-          size="lg"
-          url={MarginImages.marginX}
-        />
-        <Image
-          alt="Margin Y"
-          size="lg"
-          url={MarginImages.marginY}
-        />
+        {marginImages.map((img) => (
+          <Flex key={img.text} flexDirection="column" align="center" gap="xs">
+            <Image
+              key={img.text}
+              alt={img.text}
+              size="lg"
+              url={img.url}
+            />
+            <Caption size="xs">{img.text}</Caption>
+          </Flex>
+        ))}
       </Flex>
     );
   };

@@ -19,6 +19,7 @@ const MainSidebar = ({
   design_guidelines,
   whats_new,
   icons,
+  global_props_and_tokens,
   beta = false,
 }: any) => {
   //active state for navItems(will be redundant once routing moved to react router)
@@ -91,6 +92,7 @@ const MainSidebar = ({
           classname="desktop-kit-search"
           id="desktop-kit-search"
           kits={search_list}
+          global_props_and_tokens={global_props_and_tokens}
         />
       </Flex>
       <Nav dark={dark} variant="bold" paddingTop="xxs">
@@ -109,6 +111,7 @@ const MainSidebar = ({
           whats_new={whats_new}
           icons={icons}
           beta={beta}
+          global_props_and_tokens={global_props_and_tokens}
         />
       </Nav>
     </>

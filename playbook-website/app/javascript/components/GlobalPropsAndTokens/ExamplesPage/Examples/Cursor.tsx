@@ -112,8 +112,8 @@ const Cursor = () => {
               "Cursor",
               <ExampleCodeCard text="union" copyIcon={false} />,
               <ValuesCards />,
-              <ExampleCodeCard id="cursor-rails" text="cursor:'notAllowed'" />,
-              <ExampleCodeCard id="cursor-react" text="cursor='notAllowed'" />,
+              <ExampleCodeCard id="cursor-rails" text='cursor: "notAllowed"' />,
+              <ExampleCodeCard id="cursor-react" text='cursor="notAllowed"' />,
             ],
           ]}
         />

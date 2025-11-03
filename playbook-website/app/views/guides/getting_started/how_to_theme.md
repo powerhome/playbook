@@ -4,7 +4,7 @@ description: You can customize and theme Playbook components by setting your own
 icon: wrench
 ---
 
-For a comprehensive overview of our tokens, refer to the [Tokens & Guidelines](https://playbook.powerapp.cloud/visual_guidelines) or review our [variables](https://github.com/powerhome/playbook/tree/master/playbook/app/pb_kits/playbook/tokens).
+For a comprehensive overview of our tokens, refer to the [Tokens](https://playbook.powerapp.cloud/tokens) or review our [variables](https://github.com/powerhome/playbook/tree/master/playbook/app/pb_kits/playbook/tokens).
 
 #### Index
 

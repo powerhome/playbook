@@ -4,7 +4,7 @@ description: As a design system primarily used for business software application
 icon: palette
 ---
 
-For all our Color Tokens refer to [Colors](https://playbook.powerapp.cloud/visual_guidelines/colors) in [Tokens & Guidelines](https://playbook.powerapp.cloud/visual_guidelines)
+For all our Color Tokens refer to [Colors](https://playbook.powerapp.cloud/tokens/colors) in [Tokens](https://playbook.powerapp.cloud/tokens)
 
 #### Index
 

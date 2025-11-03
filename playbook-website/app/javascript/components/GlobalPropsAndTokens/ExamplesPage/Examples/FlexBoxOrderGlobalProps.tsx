@@ -1,4 +1,3 @@
-import React from "react";
 import { Flex, Card, Body, Caption } from "playbook-ui";
 import ShowPage from "../../Templates/ShowPage";
 import PropsExamplesTable from "../../Templates/Subcomponents/PropsExamplesTable";
@@ -56,8 +55,8 @@ const FlexBoxOrderGlobalProps = () => {
                         [
                             "None",
                             <img src={OrderImages.order5} alt="None" />,
-                            <ExampleCodeCard id="flex_order_none_rails" text="order: 'none'" />,
-                            <ExampleCodeCard id="flex_order_none_react" text="order='none'" />,
+                            <ExampleCodeCard id="flex_order_none_rails" text='order: "none"' />,
+                            <ExampleCodeCard id="flex_order_none_react" text='order="none"' />,
                         ],
                         [
                             "Row 1-12",

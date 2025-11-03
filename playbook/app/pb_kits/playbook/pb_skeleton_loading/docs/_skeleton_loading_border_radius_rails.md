@@ -1,1 +1,1 @@
-The `border_radius` prop accepts all of our [BorderRadius](https://playbook.powerapp.cloud/visual_guidelines/border_radius) tokens, with `sm` as default.
+The `border_radius` prop accepts all of our [BorderRadius](https://playbook.powerapp.cloud/global_props/border_radius) tokens, with `sm` as default.

@@ -1,4 +1,3 @@
-import React from "react";
 import { Title, Flex, Icon, Card, Body } from "playbook-ui";
 
 const CardHeader = () => {

@@ -1,3 +1,3 @@
-For Form Pills with longer text, the truncate global prop can be used to truncate the label within each Form Pill. See [here](https://playbook.powerapp.cloud/visual_guidelines/truncate) for more information on the truncate global prop.
+For Form Pills with longer text, the truncate global prop can be used to truncate the label within each Form Pill. See [here](https://playbook.powerapp.cloud/global_props/truncate) for more information on the truncate global prop.
 
 __NOTE__: For Rails Form Pills (not ones embedded within a React-rendered Typeahead or MultiLevelSelect), a unique `id` is required to enable the Tooltip functionality displaying the text or tag section of the Form Pill.

@@ -117,8 +117,8 @@ const Position = () => {
             "Position",
             <ExampleCodeCard text="union" copyIcon={false} />,
             <PositionValuesCards />,
-            <ExampleCodeCard id="position-rails" text="position: 'absolute'" />,
-            <ExampleCodeCard id="position-react" text="position= 'absolute" />,
+            <ExampleCodeCard id="position-rails" text='position: "absolute"' />,
+            <ExampleCodeCard id="position-react" text='position="absolute"' />,
           ],
           [
             "Top",
@@ -126,11 +126,11 @@ const Position = () => {
             <SpacingValuesCards />,
             <ExampleCodeCard
               id="top-rails"
-              text="top: 'sm'"
+              text='top: "sm"'
             />,
             <ExampleCodeCard
               id="top-react"
-              text="top= 'sm'"
+              text='top="sm"'
             />,
           ],
           [
@@ -139,11 +139,11 @@ const Position = () => {
             <SpacingValuesCards />,
             <ExampleCodeCard
               id="bottom-rails"
-              text="bottom: 'sm'"
+              text='bottom: "sm"'
             />,
             <ExampleCodeCard
               id="bottom-react"
-              text="bottom= 'sm'"
+              text='bottom="sm"'
             />,
           ],
           [
@@ -152,11 +152,11 @@ const Position = () => {
             <SpacingValuesCards />,
             <ExampleCodeCard
               id="left-rails"
-              text="left: 'sm'"
+              text='left: "sm"'
             />,
             <ExampleCodeCard
               id="left-react"
-              text="left= 'sm'"
+              text='left="sm"'
             />,
           ],
           [
@@ -165,11 +165,11 @@ const Position = () => {
             <SpacingValuesCards />,
             <ExampleCodeCard
               id="right-rails"
-              text="right: 'sm'"
+              text='right: "sm"'
             />,
             <ExampleCodeCard
               id="right-react"
-              text="right= 'sm'"
+              text='right="sm"'
             />,
           ],
         ]}

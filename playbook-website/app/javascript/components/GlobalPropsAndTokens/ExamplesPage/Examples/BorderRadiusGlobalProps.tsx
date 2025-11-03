@@ -85,11 +85,11 @@ const values = [
             <TypesCards />,
             <ExampleCodeCard
               id="border-radius-rails"
-              text="border_radius: 'sm'"
+              text='border_radius: "sm"'
             />,
             <ExampleCodeCard
               id="border-radius-react"
-              text="borderRadius='sm'"
+              text='borderRadius="sm"'
             />,
           ]
         ]}

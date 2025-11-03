@@ -9,12 +9,11 @@ class PagesController < ApplicationController
   include ::ViteRails::TagHelpers
   rescue_from ActionView::MissingTemplate, :with => :page_not_found
 
-  before_action :set_js, only: %i[visual_guidelines]
   before_action :set_kit, only: %i[kit_show_rails kit_show_react kit_show_swift]
   before_action :ensure_kit_type_exists, only: %i[kit_show_rails kit_show_react kit_show_swift]
   before_action :set_category, only: %i[kit_category_show_rails kit_category_show_react kit_category_show_swift]
-  before_action :delete_dark_mode_cookie, only: %i[home getting_started visual_guidelines global_props global_props_show tokens tokens_show]
-  before_action :set_show_sidebar, only: %i[kits kit_category_show_rails kit_category_show_react kit_category_show_swift kit_show_react kit_show_rails kit_show_swift rails_in_react kit_show_demo visual_guidelines home]
+  before_action :delete_dark_mode_cookie, only: %i[home getting_started global_props global_props_show tokens tokens_show]
+  before_action :set_show_sidebar, only: %i[kits kit_category_show_rails kit_category_show_react kit_category_show_swift kit_show_react kit_show_rails kit_show_swift rails_in_react kit_show_demo home]
 
   def application_beta
     @kits = MENU["kits"]
@@ -129,7 +128,7 @@ class PagesController < ApplicationController
 
     redirect_to root_path and return unless GLOBAL_PROPS_AND_TOKENS["global_props"]&.include?(name)
 
-    @page_title = "Global Props Example"
+    @page_title = "Global Props - #{name.titleize}"
     @show_sidebar = true
     render layout: "global_props_page"
   end
@@ -145,7 +144,7 @@ class PagesController < ApplicationController
 
     redirect_to root_path and return unless GLOBAL_PROPS_AND_TOKENS["tokens"]&.include?(name)
 
-    @page_title = "Tokens Example"
+    @page_title = "Tokens - #{name.titleize}"
     @show_sidebar = true
     render layout: "global_props_page"
   end
@@ -272,18 +271,6 @@ class PagesController < ApplicationController
     render inline: raw_example, layout: false
   end
 
-  # TODO: rename this method once all guidelines are completed
-  def visual_guidelines
-    kit_examples = {}
-    Dir.glob(Rails.root.join("app/views/pages/code_snippets/*.txt")).each do |example_path|
-      example_txt = File.read(example_path)
-      formatted_example_txt = render_code(example_txt, "react")
-      kit_examples[example_path.split("/").last.sub(".txt", "")] = formatted_example_txt
-    end
-    @kit_examples_json = kit_examples
-    render "pages/visual_guidelines"
-  end
-
   def get_source(example)
     read_kit_file("_#{example}.jsx")
   end
@@ -332,10 +319,6 @@ private
       end)
     end
     group_components.flatten
-  end
-
-  def set_js
-    @application_js.concat ["visual_guidelines"]
   end
 
   def set_category
