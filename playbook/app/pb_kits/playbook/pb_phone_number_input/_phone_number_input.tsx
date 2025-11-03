@@ -225,6 +225,7 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.Ref<unknown>
       return true
     }
   }
+
   const validateRepeatCountryCode = (itiInit: any) => {
     if (!itiInit) return
     const countryDialCode = itiRef.current.getSelectedCountryData().dialCode;
@@ -337,6 +338,7 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.Ref<unknown>
         if (!itiRef.current) {
           return true
         }
+
         // Check for repeat country code first
         const countryDialCode = itiRef.current.getSelectedCountryData().dialCode;
         if (unformatNumber(inputValue).startsWith(countryDialCode)) {
@@ -363,6 +365,7 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.Ref<unknown>
           const countryName = itiRef.current.getSelectedCountryData().name
           const validationError = itiRef.current.getValidationError()
           let errorMessage = ''
+
           if (validationError === ValidationError.TooShort) {
             errorMessage = `Invalid ${countryName} phone number (too short)`
           } else if (validationError === ValidationError.TooLong) {
@@ -463,7 +466,6 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.Ref<unknown>
       inputRef.current.addEventListener("open:countrydropdown", () => setDropDownIsOpen(true))
       inputRef.current.addEventListener("close:countrydropdown", () => setDropDownIsOpen(false))
 
-
     // Handle formatAsYouType with input event
     if (formatAsYouType) {
       inputRef.current.addEventListener("input", (evt: Event) => {
@@ -482,7 +484,7 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.Ref<unknown>
           onChange(phoneNumberData)
           isValid(telInputInit.isValidNumber())
         })
-     }
+      }
     }
   }, [])
   let textInputProps: {[key: string]: any} = {

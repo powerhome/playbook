@@ -47,6 +47,7 @@ class PbFormValidation extends PbEnhancedElement {
     const { target } = event
     target.setCustomValidity('')
     const isValid = event.target.validity.valid
+
     if (isValid) {
       this.clearError(target)
     } else {
