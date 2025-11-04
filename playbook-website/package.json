@@ -8,7 +8,7 @@
   },
   "dependencies": {
     "@fortawesome/fontawesome-pro": "6.2.1",
-    "@mapbox/mapbox-gl-draw": "^1.4.1",
+    "@mapbox/mapbox-gl-draw": "^1.5.1",
     "@powerhome/playbook-icons": "1.0.2",
     "@powerhome/playbook-icons-react": "1.0.2",
     "@powerhome/power-fonts": "0.0.1",
