@@ -75,9 +75,14 @@
     })
   }
 
-  // Hide toasts on initial load and page show (back/forward navigation)
+  // Hide toasts immediately
   hidePositionToasts()
+
+  // Handle various page load/restore events
   window.addEventListener('pageshow', hidePositionToasts)
+  document.addEventListener('DOMContentLoaded', hidePositionToasts)
+  document.addEventListener('turbolinks:load', hidePositionToasts)
+  document.addEventListener('turbo:load', hidePositionToasts)
 
   buttons.forEach((button) => {
     button.onclick = () => {

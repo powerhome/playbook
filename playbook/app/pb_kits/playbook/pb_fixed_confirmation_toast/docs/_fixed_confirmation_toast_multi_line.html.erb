@@ -24,7 +24,6 @@
   horizontal: "center"
 }) %>
 
-
 <script type="text/javascript">
   const multitoasts = document.querySelectorAll(".multitoast-to-hide")
   const multibuttons = document.querySelectorAll("button[data-multitoast]")
@@ -35,9 +34,14 @@
     })
   }
 
-  // Hide toasts on initial load and page show (back/forward navigation)
+  // Hide toasts immediately
   hideMultiToasts()
+
+  // Handle various page load/restore events
   window.addEventListener('pageshow', hideMultiToasts)
+  document.addEventListener('DOMContentLoaded', hideMultiToasts)
+  document.addEventListener('turbolinks:load', hideMultiToasts)
+  document.addEventListener('turbo:load', hideMultiToasts)
 
   multibuttons.forEach((button) => {
     button.onclick = () => {
