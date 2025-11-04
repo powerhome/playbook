@@ -165,6 +165,13 @@
     line-height: 16.5px;
     letter-spacing: normal;
   }
+
+  // Add focus indicator for multi-value pills
+  .pb_form_pill_or_badge_focused {
+    outline: $primary solid 2px;
+    outline-offset: -1px;
+  }
+
   &.inline {
     &:not(:hover) {
       .text_input {
