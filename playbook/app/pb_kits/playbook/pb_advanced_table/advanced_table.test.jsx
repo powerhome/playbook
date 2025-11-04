@@ -740,6 +740,69 @@ test("columnStyling.cellPadding sets cell padding", () => {
   expect(firstEnrollmentCell).toHaveClass('p_none')
 });
 
+test("columnStyling.fontColor sets cell font color", () => {
+  const styledColumnDefs = [
+    {
+      accessor: "year",
+      label: "Year",
+      cellAccessors: ["quarter", "month", "day"],
+    },
+    {
+      accessor: "newEnrollments",
+      label: "New Enrollments",
+      columnStyling: { fontColor: colors.category_1 },
+    },
+    {
+      accessor: "scheduledMeetings",
+      label: "Scheduled Meetings",
+    },
+  ];
+
+  render(
+    <AdvancedTable
+        columnDefinitions={styledColumnDefs}
+        data={{ testid: testId }}
+        tableData={MOCK_DATA}
+    />
+  );
+
+  const firstEnrollmentCell = screen.getAllByText("20")[0].closest("td");
+  expect(firstEnrollmentCell).toHaveStyle({ color: colors.category_1 });
+});
+
+test("columnStyling.fontColor works with background color", () => {
+  const styledColumnDefs = [
+    {
+      accessor: "year",
+      label: "Year",
+      cellAccessors: ["quarter", "month", "day"],
+    },
+    {
+      accessor: "newEnrollments",
+      label: "New Enrollments",
+      columnStyling: { 
+        cellBackgroundColor: (row) => row.newEnrollments > 20 ? "success_secondary" : "warning_secondary",
+        fontColor: colors.white 
+      },
+    },
+    {
+      accessor: "scheduledMeetings",
+      label: "Scheduled Meetings",
+    },
+  ];
+
+  render(
+    <AdvancedTable
+        columnDefinitions={styledColumnDefs}
+        data={{ testid: testId }}
+        tableData={MOCK_DATA}
+    />
+  );
+
+  const firstEnrollmentCell = screen.getAllByText("20")[0].closest("td");
+  expect(firstEnrollmentCell).toHaveStyle({ color: colors.white });
+});
+
 test("renders virtualized table rows and header", () => {
   render(
     <AdvancedTable

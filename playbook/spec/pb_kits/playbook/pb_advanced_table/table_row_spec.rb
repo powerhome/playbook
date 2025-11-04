@@ -337,6 +337,105 @@ RSpec.describe Playbook::PbAdvancedTable::TableRow do
     end
   end
 
+  describe "#cell_font_color" do
+    let(:row) { { id: 1, value: 25 } }
+    let(:column_definitions) do
+      [
+        { accessor: "value", column_styling: { font_color: "red" } },
+        { accessor: "other", column_styling: { font_color: ->(row) { row[:value] > 20 ? "white" : "black" } } },
+        { accessor: "none", column_styling: {} },
+      ]
+    end
+    let(:instance) { subject.new(row: row, depth: 0, column_definitions: column_definitions) }
+
+    context "with static font color" do
+      it "returns the static color" do
+        expect(instance.cell_font_color({ accessor: "value" })).to eq "red"
+      end
+    end
+
+    context "with lambda font color" do
+      it "calls the lambda with row data and returns result" do
+        expect(instance.cell_font_color({ accessor: "other" })).to eq "white"
+      end
+
+      it "handles different lambda results" do
+        row[:value] = 15
+        instance = subject.new(row: row, depth: 0, column_definitions: column_definitions)
+        expect(instance.cell_font_color({ accessor: "other" })).to eq "black"
+      end
+    end
+
+    context "without font color" do
+      it "returns nil when no font_color specified" do
+        expect(instance.cell_font_color({ accessor: "none" })).to be_nil
+      end
+
+      it "returns nil when column not found" do
+        expect(instance.cell_font_color({ accessor: "nonexistent" })).to be_nil
+      end
+    end
+  end
+
+  describe "#cell_component_info" do
+    let(:row) { { id: 1, value: 25 } }
+    let(:column_definitions) do
+      [
+        { accessor: "with_font", column_styling: { font_color: "blue" } },
+        { accessor: "with_bg_and_font", column_styling: { cell_background_color: "success_secondary", font_color: "white" } },
+        { accessor: "with_bg_only", column_styling: { cell_background_color: "warning_secondary" } },
+        { accessor: "none", column_styling: {} },
+      ]
+    end
+    let(:instance) { subject.new(row: row, depth: 0, column_definitions: column_definitions) }
+
+    context "with font color only" do
+      it "uses table/table_cell with font color in style" do
+        result = instance.cell_component_info({ accessor: "with_font" }, 0, nil, nil)
+        expect(result[:name]).to eq "table/table_cell"
+        expect(result[:props][:html_options][:style][:color]).to eq "blue"
+      end
+    end
+
+    context "with background color and font color" do
+      it "uses background component with font color in html_options" do
+        result = instance.cell_component_info({ accessor: "with_bg_and_font" }, 0, nil, nil)
+        expect(result[:name]).to eq "background"
+        expect(result[:props][:background_color]).to eq "success_secondary"
+        expect(result[:props][:html_options][:style][:color]).to eq "white"
+      end
+    end
+
+    context "with background color only" do
+      it "uses background component without font color" do
+        result = instance.cell_component_info({ accessor: "with_bg_only" }, 0, nil, nil)
+        expect(result[:name]).to eq "background"
+        expect(result[:props][:background_color]).to eq "warning_secondary"
+        expect(result[:props][:html_options]).to be_nil
+      end
+    end
+
+    context "without font color" do
+      it "does not include color in style when no font color is present" do
+        result = instance.cell_component_info({ accessor: "none" }, 0, nil, nil)
+        expect(result[:name]).to eq "table/table_cell"
+        expect(result[:props][:html_options][:style]).not_to have_key(:color)
+      end
+    end
+
+    context "column font color takes precedence over row font color" do
+      it "uses column font color when both are present" do
+        result = instance.cell_component_info({ accessor: "with_font" }, 0, nil, "red")
+        expect(result[:props][:html_options][:style][:color]).to eq "blue"
+      end
+
+      it "falls back to row font color when column font color is not present" do
+        result = instance.cell_component_info({ accessor: "none" }, 0, nil, "red")
+        expect(result[:props][:html_options][:style][:color]).to eq "red"
+      end
+    end
+  end
+
   describe "prop behavior" do
     context "row_id prop" do
       it "uses provided row_id" do

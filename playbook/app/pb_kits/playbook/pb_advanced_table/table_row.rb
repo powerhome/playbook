@@ -79,15 +79,44 @@ module Playbook
         cell_background_color(column).present?
       end
 
+      def cell_font_color(column)
+        return nil unless column[:accessor].present?
+
+        orig_def = find_column_def_by_accessor(column_definitions, column[:accessor])
+        if orig_def && orig_def[:column_styling].is_a?(Hash) && orig_def[:column_styling][:font_color].present?
+          font_color = orig_def[:column_styling][:font_color]
+          if font_color.respond_to?(:call)
+            font_color.call(row)
+          else
+            font_color
+          end
+        end
+      end
+
       # Uses a regular table/table_cell component if there is no custom background color; if there is a cell_background_color uses a background component with tag "td"
       def cell_component_info(column, index, bg_color, font_color)
+        column_font_color = cell_font_color(column)
+        effective_font_color = column_font_color || font_color
+
         if has_custom_background_color?(column)
           custom_bg_color = cell_background_color(column)
           component_name = "background"
-          component_props = { background_color: custom_bg_color, tag: "td", classname: td_classname(column, index) }
+          component_props = {
+            background_color: custom_bg_color,
+            tag: "td",
+            classname: td_classname(column, index),
+          }
+          component_props[:html_options] = { style: { color: effective_font_color } } if effective_font_color.present?
         else
           component_name = "table/table_cell"
-          component_props = { html_options: { style: { "background-color": bg_color, color: font_color } }, classname: td_classname(column, index) }
+          style_hash = { "background-color": bg_color }
+          style_hash[:color] = effective_font_color if effective_font_color.present?
+          component_props = {
+            html_options: {
+              style: style_hash,
+            },
+            classname: td_classname(column, index),
+          }
         end
 
         { name: component_name, props: component_props }
