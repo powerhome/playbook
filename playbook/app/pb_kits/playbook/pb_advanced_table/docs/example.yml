@@ -11,6 +11,7 @@ examples:
   - advanced_table_responsive: Responsive Tables
   - advanced_table_custom_cell_rails: Custom Components for Cells
   - advanced_table_with_custom_header_rails: Custom Header Cell
+  - advanced_table_with_custom_header_multi_header_rails: Custom Header with Multiple Headers
   - advanced_table_column_headers: Multi-Header Columns
   - advanced_table_column_headers_multiple: Multi-Header Columns (Multiple Levels)
   - advanced_table_column_headers_vertical_border: Multi-Header Columns with Vertical Borders
