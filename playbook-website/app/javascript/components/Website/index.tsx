@@ -12,18 +12,20 @@ function Website() {
     kits_with_status, 
     PBversion, 
     search_list, 
-    patterns, 
     getting_started, 
     design_guidelines, 
     icons, 
     whats_new,
-    category
+    category,
+    building_blocks,
+    global_props_and_tokens
   }: any = useLoaderData();
 
   return (
     <Layout className="pb--page--content pb--website--new" dark={dark}>
       <Layout.Side className="pb--page--sideNav">
         <MainSidebar
+          building_blocks={building_blocks || []}
           dark={dark}
           type={type || "react"}
           category={category}
@@ -31,8 +33,8 @@ function Website() {
           kits_with_status={kits_with_status || kits}
           PBversion={PBversion || "Latest"}
           search_list={search_list || []}
-          patterns={patterns || []}
           getting_started={getting_started || []}
+          global_props_and_tokens={global_props_and_tokens || []}
           design_guidelines={design_guidelines || []}
           icons={icons || []}
           whats_new={whats_new || []}
