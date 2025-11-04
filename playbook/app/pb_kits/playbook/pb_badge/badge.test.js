@@ -112,3 +112,16 @@ test('displays notification variants', () => {
     cleanup()
   })
 })
+
+test('should allow tabIndex to be set', () => {
+  render(
+    <Badge
+        data={{ testid: testId }}
+        tabIndex={0}
+        text="+1"
+    />
+  )
+
+  const kit = screen.getByTestId(testId)
+  expect(kit).toHaveAttribute('tabIndex', '0')
+})

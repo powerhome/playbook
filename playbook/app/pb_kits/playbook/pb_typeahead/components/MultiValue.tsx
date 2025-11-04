@@ -43,6 +43,7 @@ const MultiValue = (props: Props) => {
             className={pillClassName}
             closeProps={removeProps}
             removeIcon
+            tabIndex={0}
             text={label}
             variant="primary"
         />

@@ -213,3 +213,66 @@ test('typeahead with grouped options and defaultValue focus behavior', async () 
   const inputDiv = kit.querySelector(".typeahead-kit-select__single-value")
   expect(inputDiv).toHaveTextContent("Pink")
 })
+
+test('multi-value pills have tabIndex for keyboard navigation', () => {
+  render(
+    <Typeahead
+        data={{ testid: 'pill-tabindex-test' }}
+        defaultValue={[options[0], options[1]]}
+        isMulti
+        options={options}
+    />
+  )
+
+  const kit = screen.getByTestId('pill-tabindex-test')
+  const pills = kit.querySelectorAll('.pb_form_pill_kit')
+  
+  expect(pills.length).toBe(2)
+  
+  pills.forEach(pill => {
+    expect(pill).toHaveAttribute('tabIndex', '0')
+  })
+})
+
+test('multi-value pills show focus indicator when focused', async () => {
+  render(
+    <Typeahead
+        data={{ testid: 'pill-focus-indicator-test' }}
+        defaultValue={[options[0], options[1], options[2]]}
+        isMulti
+        options={options}
+    />
+  )
+
+  const kit = screen.getByTestId('pill-focus-indicator-test')
+  const pills = kit.querySelectorAll('.pb_form_pill_kit')
+  
+  expect(pills.length).toBe(3)
+  
+  const firstPill = pills[0]
+  firstPill.focus()
+  
+  expect(document.activeElement).toBe(firstPill)
+})
+
+test('multi-value badges have tabIndex and focus class when focused', () => {
+  render(
+    <Typeahead
+        data={{ testid: 'badge-focus-test' }}
+        defaultValue={[options[0], options[1]]}
+        isMulti
+        multiKit="badge"
+        options={options}
+    />
+  )
+
+  const kit = screen.getByTestId('badge-focus-test')
+  const badges = kit.querySelectorAll('.pb_badge_kit_primary')
+  
+  expect(badges.length).toBe(2)
+
+  badges.forEach(badge => {
+    expect(badge).toHaveAttribute('tabIndex', '0')
+  })
+})
+

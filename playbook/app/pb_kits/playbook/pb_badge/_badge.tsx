@@ -25,6 +25,7 @@ type BadgeProps = {
   removeIcon?: boolean,
   removeOnClick?: React.MouseEventHandler<HTMLSpanElement>,
   rounded?: boolean,
+  tabIndex?: number,
   text?: string,
   variant?: "error" | "info" | "neutral" | "notification" | "notificationError" | "primary" | "success" | "warning",
 } & GlobalProps
@@ -39,6 +40,7 @@ const Badge = (props: BadgeProps): React.ReactElement => {
     removeIcon = false,
     removeOnClick,
     rounded = false,
+    tabIndex,
     text,
     variant = 'neutral',
   } = props
@@ -61,6 +63,7 @@ const Badge = (props: BadgeProps): React.ReactElement => {
         {...htmlProps}
         className={css}
         id={id}
+        tabIndex={tabIndex}
     >
       <span>
         {text}
