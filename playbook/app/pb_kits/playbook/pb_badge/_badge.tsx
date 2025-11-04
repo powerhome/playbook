@@ -20,7 +20,7 @@ type BadgeProps = {
     onTouchEnd?: React.TouchEventHandler<HTMLSpanElement>,
   },
   data?: {[key: string]: string},
-  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void) | ((event: any) => void) | any},
   id?: string,
   removeIcon?: boolean,
   removeOnClick?: React.MouseEventHandler<HTMLSpanElement>,

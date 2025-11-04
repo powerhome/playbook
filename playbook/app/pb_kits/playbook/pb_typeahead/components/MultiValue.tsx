@@ -33,6 +33,25 @@ const MultiValue = (props: Props) => {
   // Add className for focus state
   const pillClassName = isFocused ? 'pb_form_pill_or_badge_focused' : ''
 
+  // Handle keyboard events on the pill itself to enable deletion when using tabIndex
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
+    if (event.key === 'Backspace' || event.key === 'Delete') {
+      event.preventDefault()
+      event.stopPropagation()
+      // Trigger the remove action from react-select
+      if (removeProps && removeProps.onClick) {
+        removeProps.onClick(event as any)
+      }
+    }
+    // if arrow keys used, transfer focus to input so react-select can take over
+    else if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
+      const selectInput = event.currentTarget.closest('.pb_typeahead_kit')?.querySelector('input')
+      if (selectInput instanceof HTMLInputElement) {
+        selectInput.focus()
+      }
+    }
+  }
+
   return (
     <components.MultiValueContainer
         className="text_input_multivalue_container"
@@ -42,6 +61,7 @@ const MultiValue = (props: Props) => {
         <Badge
             className={pillClassName}
             closeProps={removeProps}
+            htmlOptions={{onKeyDown:handleKeyDown}}
             removeIcon
             tabIndex={0}
             text={label}
@@ -56,6 +76,7 @@ const MultiValue = (props: Props) => {
             closeProps={removeProps}
             color={pillColor}
             dark={dark}
+            htmlOptions={{onKeyDown:handleKeyDown}}
             marginRight="xs"
             name={label}
             size={multiKit === 'smallPill' ? 'small' : ''}
@@ -73,6 +94,7 @@ const MultiValue = (props: Props) => {
             closeProps={removeProps}
             color={pillColor}
             dark={dark}
+            htmlOptions={{onKeyDown:handleKeyDown}}
             marginRight="xs"
             name=''
             size={multiKit === 'smallPill' ? 'small' : ''}
