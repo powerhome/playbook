@@ -69,27 +69,23 @@
   const toasts = document.querySelectorAll(".toast-to-hide")
   const buttons = document.querySelectorAll("button[data-toast]")
 
-  const hideToasts = () => {
+  const hidePositionToasts = () => {
     toasts.forEach((toast) => {
       toast.style.display = "none"
     })
   }
 
+  // Hide toasts on initial load and page show (back/forward navigation)
+  hidePositionToasts()
+  window.addEventListener('pageshow', hidePositionToasts)
+
   buttons.forEach((button) => {
     button.onclick = () => {
       hideToasts()
       let toast = document.querySelector(button.getAttribute("data-toast"))
-
       if (toast) {
         toast.style.display = "flex"
       }
     }
   })
 </script>
-
-<!-- hiding toast on page load -->
-<style>
-  #toast-top-center, #toast-top-right, #toast-top-left, #toast-bottom-center, #toast-bottom-right, #toast-bottom-left {
-    display: none;
-  }
-</style>

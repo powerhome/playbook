@@ -22,13 +22,21 @@
 }) %>
 
 <script>
+const hideInitialAutoToasts = () => {
+  const toastAuto = document.getElementById('toast-auto-close');
+  const toastAutoCloseable = document.getElementById('toast-auto-close-closeable');
+  if (toastAuto) toastAuto.style.display = 'none';
+  if (toastAutoCloseable) toastAutoCloseable.style.display = 'none';
+}
+hideInitialAutoToasts();
+
 document.addEventListener('DOMContentLoaded', () => {
   // Initialize toast elements and buttons
   const toasts = {
     '#toast-auto-close': document.querySelector("#toast-auto-close"),
     '#toast-auto-close-closeable': document.querySelector("#toast-auto-close-closeable")
   }
-  
+
   const buttons = {
     '#toast-auto-close': document.querySelector("button[data-toast='#toast-auto-close']"),
     '#toast-auto-close-closeable': document.querySelector("button[data-toast='#toast-auto-close-closeable']")

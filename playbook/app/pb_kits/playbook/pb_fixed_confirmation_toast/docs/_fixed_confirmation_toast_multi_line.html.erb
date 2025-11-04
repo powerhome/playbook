@@ -35,6 +35,10 @@
     })
   }
 
+  // Hide toasts on initial load and page show (back/forward navigation)
+  hideMultiToasts()
+  window.addEventListener('pageshow', hideMultiToasts)
+
   multibuttons.forEach((button) => {
     button.onclick = () => {
       hideMultiToasts()
@@ -46,10 +50,3 @@
     }
   })
 </script>
-
-<!-- hiding toast on page load -->
-<style>
-  #toast-long, #toast-short {
-    display: none;
-  }
-</style>
