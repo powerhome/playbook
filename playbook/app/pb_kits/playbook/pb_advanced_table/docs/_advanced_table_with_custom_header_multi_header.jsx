@@ -82,7 +82,7 @@ const columnDefinitions = [
             >
               <Caption marginRight="xs">Attendance</Caption>
               <Tooltip placement="top" 
-                  text="Whoa. I'm a Tooltip Two!" 
+                  text="Whoa. I'm a Tooltip Too!" 
                   zIndex={10}
               >
                 <Icon cursor="pointer" 
