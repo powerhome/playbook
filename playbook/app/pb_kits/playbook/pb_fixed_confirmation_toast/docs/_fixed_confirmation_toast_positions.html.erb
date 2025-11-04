@@ -81,7 +81,7 @@
 
   buttons.forEach((button) => {
     button.onclick = () => {
-      hideToasts()
+      hidePositionToasts()
       let toast = document.querySelector(button.getAttribute("data-toast"))
       if (toast) {
         toast.style.display = "flex"
