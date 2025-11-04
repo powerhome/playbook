@@ -346,10 +346,7 @@ const Typeahead = forwardRef<HTMLInputElement, TypeaheadProps>(({
         ? activeElement as HTMLInputElement
         : document.querySelector('input[role="combobox"]:focus') as HTMLInputElement
 
-      console.log('Input check:', { input: !!input })
-
       if (!input) {
-        console.log('No input found, returning')
         return
       }
 
