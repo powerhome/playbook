@@ -1,30 +1,38 @@
+<%= pb_rails("rich_text_editor", props: { 
+  id: "content-preview-editor",
+  margin_bottom: "md",
+  value: "Add text here, format it, and press \"Preview Output\" to see what your stylized output will look like on the page."
+}) %>
 
-<%= pb_rails("rich_text_editor", props: { id: "content-preview-editor" }) %>
+<%= pb_rails("button", props: { id: "preview-button", text: "Preview Output", variant: "secondary" }) %>
+
 <div id="card-obfuscation" style="display:none">
   <%= pb_rails("card", props: { margin_top: "md", max_width: "md", padding: "sm" }) do %>
-   <div id="content-preview" class="trix-content">
+   <div id="content-preview" class="tiptap-content">
    </div>
   <% end %>
 </div>
-<%= pb_rails("button", props: { id: "preview-button", variant: "secondary", margin_top: "md" }) do %>
-  <span>Preview Output</span>
-<% end %>
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {
     function handleButtonClick() {
+      // Find the specific TipTap editor container by ID
       const editorContainer = [...document.querySelectorAll('[data-pb-react-props]')]
         .find(element => element.getAttribute('data-pb-react-props')?.includes('"id":"content-preview-editor"'))
 
-      const editorElement = editorContainer?.querySelector('trix-editor')
-      const inputId = editorElement?.getAttribute('input')
-      const inputElement = inputId && document.getElementById(inputId)
-      
-      const editorContent = inputElement?.value || '' 
+      if (!editorContainer) {
+        console.log('Editor container not found')
+        return
+      }
+
+      // Find the TipTap editor content
+      const tiptapEditor = editorContainer.querySelector('.ProseMirror')
       const previewArea = document.getElementById('content-preview')
       const cardDiv = document.getElementById('card-obfuscation')
 
-      if (previewArea && cardDiv) {
+      if (tiptapEditor && previewArea && cardDiv) {
+        // Get the HTML content from the TipTap editor
+        const editorContent = tiptapEditor.innerHTML || ''
         previewArea.innerHTML = editorContent 
         cardDiv.style.display = 'block'
       }

@@ -3,10 +3,10 @@ examples:
   rails:
   - rich_text_editor_default: Default
   - rich_text_editor_simple: Simple
-  - rich_text_editor_attributes: Attributes
+  # - rich_text_editor_attributes: Attributes
   - rich_text_editor_focus: Focus
   - rich_text_editor_sticky: Sticky
-  - rich_text_editor_templates: Templates
+  # - rich_text_editor_templates: Templates
   # - rich_text_editor_toolbar_bottom: Toolbar Bottom
   - rich_text_editor_inline: Inline
   - rich_text_editor_preview: Preview
