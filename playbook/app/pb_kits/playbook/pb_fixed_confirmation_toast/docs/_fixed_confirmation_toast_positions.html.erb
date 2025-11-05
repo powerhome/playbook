@@ -69,27 +69,28 @@
   const toasts = document.querySelectorAll(".toast-to-hide")
   const buttons = document.querySelectorAll("button[data-toast]")
 
-  const hideToasts = () => {
+  const hidePositionToasts = () => {
     toasts.forEach((toast) => {
       toast.style.display = "none"
     })
   }
 
+  // Hide toasts immediately
+  hidePositionToasts()
+
+  // Handle various page load/restore events
+  window.addEventListener('pageshow', hidePositionToasts)
+  document.addEventListener('DOMContentLoaded', hidePositionToasts)
+  document.addEventListener('turbolinks:load', hidePositionToasts)
+  document.addEventListener('turbo:load', hidePositionToasts)
+
   buttons.forEach((button) => {
     button.onclick = () => {
-      hideToasts()
+      hidePositionToasts()
       let toast = document.querySelector(button.getAttribute("data-toast"))
-
       if (toast) {
         toast.style.display = "flex"
       }
     }
   })
 </script>
-
-<!-- hiding toast on page load -->
-<style>
-  #toast-top-center, #toast-top-right, #toast-top-left, #toast-bottom-center, #toast-bottom-right, #toast-bottom-left {
-    display: none;
-  }
-</style>

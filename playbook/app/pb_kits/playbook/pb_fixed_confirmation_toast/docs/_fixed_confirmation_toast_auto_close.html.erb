@@ -22,13 +22,27 @@
 }) %>
 
 <script>
+// Hide toasts immediately
+const hideAutoToasts = () => {
+  const toastAuto = document.getElementById('toast-auto-close');
+  const toastAutoCloseable = document.getElementById('toast-auto-close-closeable');
+  if (toastAuto) toastAuto.style.display = 'none';
+  if (toastAutoCloseable) toastAutoCloseable.style.display = 'none';
+}
+hideAutoToasts();
+
+// Handle various page load/restore events
+window.addEventListener('pageshow', hideAutoToasts)
+document.addEventListener('turbolinks:load', hideAutoToasts)
+document.addEventListener('turbo:load', hideAutoToasts)
+
 document.addEventListener('DOMContentLoaded', () => {
   // Initialize toast elements and buttons
   const toasts = {
     '#toast-auto-close': document.querySelector("#toast-auto-close"),
     '#toast-auto-close-closeable': document.querySelector("#toast-auto-close-closeable")
   }
-  
+
   const buttons = {
     '#toast-auto-close': document.querySelector("button[data-toast='#toast-auto-close']"),
     '#toast-auto-close-closeable': document.querySelector("button[data-toast='#toast-auto-close-closeable']")
