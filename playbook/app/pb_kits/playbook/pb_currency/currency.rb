@@ -17,8 +17,7 @@ module Playbook
       prop :symbol, type: Playbook::Props::String,
                     default: "$"
 
-      prop :amount, type: Playbook::Props::String,
-                    required: true
+      prop :amount, required: true
 
       prop :unit, type: Playbook::Props::String,
                   required: false
@@ -92,7 +91,7 @@ module Playbook
       end
 
       def negative_sign
-        amount.starts_with?("-") && swap_negative ? "-" : ""
+        currency_amount.starts_with?("-") && swap_negative ? "-" : ""
       end
 
       def body_props
@@ -117,10 +116,32 @@ module Playbook
         end
       end
 
+      def currency_amount
+        @currency_amount ||= convert_amount(amount)
+      end
+
     private
 
+      # Convert numeric input to string format
+      def convert_amount(input)
+        if input.is_a?(Numeric)
+          if input.zero? && null_display.nil?
+            ""
+          else
+            format("%.2f", input)
+          end
+        # Handle string representations of zero
+        elsif input.to_s.strip.match?(/^-?0+(\.0+)?$/) && null_display.nil?
+          ""
+        else
+          input.to_s
+        end
+      end
+
       def whole_value
-        value = amount.split(".").first
+        return "" if currency_amount.blank?
+
+        value = currency_amount.split(".").first
         if comma_separator
           number_with_delimiter(value.gsub(",", ""))
         else
@@ -129,7 +150,9 @@ module Playbook
       end
 
       def decimal_value
-        amount.split(".")[1] || "00"
+        return "00" if currency_amount.blank?
+
+        currency_amount.split(".")[1] || "00"
       end
 
       def units_element
@@ -147,7 +170,9 @@ module Playbook
       end
 
       def abbreviated_value(index = 0..-2)
-        value = amount.split(".").first.gsub(",", "").to_i
+        return "" if currency_amount.blank?
+
+        value = currency_amount.split(".").first.gsub(",", "").to_i
         abbreviated_num = number_to_human(value, units: { thousand: "K", million: "M", billion: "B", trillion: "T" }).gsub(/\s+/, "")
         abbreviated_num[index]
       end
@@ -174,9 +199,11 @@ module Playbook
 
         if decimals == "matching"
           if comma_separator
-            number_with_delimiter(amount.gsub(",", ""))
+            return "" if currency_amount.blank?
+
+            number_with_delimiter(currency_amount.gsub(",", ""))
           else
-            amount
+            currency_amount
           end
         else
           whole_value
