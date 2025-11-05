@@ -76,6 +76,22 @@ const columnDefinitions = [
         {
           label: "Attendance",
           id: "attendance",
+          header: () => (
+            <Flex alignItems="center" 
+                justifyContent="center"
+            >
+              <Caption marginRight="xs">Attendance</Caption>
+              <Tooltip placement="top" 
+                  text="Whoa. I'm a Tooltip Too!" 
+                  zIndex={10}
+              >
+                <Icon cursor="pointer" 
+                    icon="info"
+                    size="xs" 
+                />
+              </Tooltip>
+            </Flex>
+          ),  
           columns: [
             {
               accessor: "attendanceRate",

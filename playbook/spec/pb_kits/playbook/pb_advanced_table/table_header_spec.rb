@@ -238,4 +238,69 @@ RSpec.describe Playbook::PbAdvancedTable::TableHeader do
       end
     end
   end
+
+  describe "#has_header_renderer?" do
+    let(:custom_header_proc) { ->(_cell, label) { "Custom: #{label}" } }
+    let(:column_definitions) do
+      [
+        { accessor: "name", label: "Name", header: custom_header_proc },
+        {
+          label: "Main Group",
+          id: "mainGroup",
+          columns: [
+            {
+              label: "Nested Group",
+              id: "nestedGroup",
+              header: custom_header_proc,
+              columns: [{ accessor: "col1", label: "Column 1" }],
+            },
+          ],
+        },
+      ]
+    end
+    let(:instance) { subject.new(column_definitions: column_definitions) }
+
+    it "returns true for leaf column with custom header" do
+      cell = { accessor: "name", label: "Name" }
+      expect(instance.has_header_renderer?(cell)).to be true
+    end
+
+    it "returns true for nested grouped column with custom header" do
+      cell = { label: "Nested Group", id: "nestedGroup", colspan: 1 }
+      expect(instance.has_header_renderer?(cell)).to be true
+    end
+
+    it "returns false for cell without custom header" do
+      cell = { accessor: "other", label: "Other" }
+      expect(instance.has_header_renderer?(cell)).to be false
+    end
+  end
+
+  describe "#render_header" do
+    let(:custom_header_proc) { ->(_cell, label) { "<div>#{label}</div>" } }
+    let(:column_definitions) do
+      [
+        { accessor: "name", label: "Name", header: custom_header_proc },
+        { label: "Group", id: "group1", header: custom_header_proc, columns: [{ accessor: "col1", label: "Column 1" }] },
+      ]
+    end
+    let(:instance) { subject.new(column_definitions: column_definitions) }
+
+    it "calls custom renderer and returns result" do
+      cell = { accessor: "name", label: "Name" }
+      expect(instance.render_header(cell)).to eq "<div>Name</div>"
+    end
+
+    it "returns label when no custom header exists" do
+      cell = { accessor: "other", label: "Other" }
+      expect(instance.render_header(cell)).to eq "Other"
+    end
+
+    it "returns label when custom renderer raises error" do
+      failing_proc = ->(_cell, _label) { raise StandardError }
+      instance = subject.new(column_definitions: [{ accessor: "test", label: "Test", header: failing_proc }])
+      cell = { accessor: "test", label: "Test" }
+      expect(instance.render_header(cell)).to eq "Test"
+    end
+  end
 end

@@ -1,0 +1,104 @@
+<%
+  column_definitions = [
+    {
+      accessor: "year",
+      label: "Year",
+      id: "year",
+      cellAccessors: ["quarter", "month", "day"],
+    },
+    {
+      label: "Enrollment Data",
+      id: "enrollmentData",
+      header: ->(cell, label) {
+        capture do
+          pb_rails("flex", props: { align_items: "center", justify_content: "center" }) do
+            pb_rails("caption", props: { margin_right: "xs", text: "Enrollment Data" }) +
+            pb_rails("icon", props: { id: "tooltip-interact-multi", icon: "info", size: "xs", cursor: "pointer" }) +
+            pb_rails("tooltip", props: {
+              trigger_element_id: "tooltip-interact-multi",
+              tooltip_id: "example-custom-tooltip-multi",
+              position: "top",
+              z_index: "10"
+            }) do
+              "Whoa. I'm a Tooltip"
+            end
+          end
+        end
+      },
+      columns: [
+        {
+          label: "Enrollment Stats",
+          id: "enrollmentStats",
+          columns: [
+            {
+              accessor: "newEnrollments",
+              id: "newEnrollments",
+              label: "New Enrollments",
+            },
+            {
+              accessor: "scheduledMeetings",
+              id: "scheduledMeetings",
+              label: "Scheduled Meetings",
+            },
+          ],
+        },
+      ],
+    },
+    {
+      label: "Performance Data",
+      id: "performanceData",
+      columns: [
+        {
+          label: "Completion Metrics",
+          id: "completionMetrics",
+          columns: [
+            {
+              accessor: "completedClasses",
+              id: "completedClasses",
+              label: "Completed Classes",
+            },
+            {
+              accessor: "classCompletionRate",
+              id: "classCompletionRate",
+              label: "Class Completion Rate",
+            },
+          ],
+        },
+        {
+          label: "Attendance",
+          id: "attendance",
+          header: ->(cell, label) {
+            capture do
+              pb_rails("flex", props: { align_items: "center", justify_content: "center" }) do
+                pb_rails("caption", props: { margin_right: "xs", text: "Attendance" }) +
+                pb_rails("icon", props: { id: "tooltip-interact-multi-2", icon: "info", size: "xs", cursor: "pointer" }) +
+                pb_rails("tooltip", props: {
+                  trigger_element_id: "tooltip-interact-multi-2",
+                  tooltip_id: "example-custom-tooltip-multi-2",
+                  position: "top",
+                  z_index: "10"
+                }) do
+                  "Whoa. I'm a Tooltip Too!"
+                end
+              end
+            end
+          },
+          columns: [
+            {
+              accessor: "attendanceRate",
+              id: "attendanceRate",
+              label: "Attendance Rate",
+            },
+            {
+              accessor: "scheduledMeetings",
+              id: "scheduledMeetings",
+              label: "Scheduled Meetings",
+            },
+          ],
+        },
+      ],
+    },
+  ]
+%>
+
+<%= pb_rails("advanced_table", props: { id: "custom_header_multi_header_table", table_data: @table_data, column_definitions: column_definitions }) %>
