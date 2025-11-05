@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import { render, screen, fireEvent } from "../utilities/test-utils"
 
 import { Dropdown, Icon, IconCircle } from 'playbook-ui'
@@ -394,3 +394,149 @@ test("applies activeStyle backgroundColor and fontColor when selected", () => {
     expect(selected).toHaveClass("bg-bg_light")
     expect(selected).toHaveClass("font-primary")
   })
+
+test("renders quickpick variant with auto-generated options", () => {
+  render(
+    <Dropdown
+        data={{ testid: testId }}
+        variant="quickpick"
+    />
+  )
+  
+  const kit = screen.getByTestId(testId)
+  expect(kit).toHaveClass('pb_dropdown_quickpick')
+  
+  // Check that quickpick options are generated
+  const options = kit.querySelectorAll('.pb_dropdown_option_list')
+  expect(options.length).toBe(10)
+  expect(options[0]).toHaveTextContent("Today")
+})
+
+test("quickpick variant accepts string defaultValue", () => {
+  render(
+    <Dropdown
+        data={{ testid: testId }}
+        defaultValue="This Month"
+        variant="quickpick"
+    />
+  )
+  
+  const kit = screen.getByTestId(testId)
+  const trigger = kit.querySelector('.pb_dropdown_trigger')
+  
+  expect(trigger).toHaveTextContent("This Month")
+})
+
+test("quickpick attaches _dropdownRef to DOM element when id is provided", () => {
+  render(
+    <Dropdown
+        data={{ testid: testId }}
+        id="test-quickpick"
+        variant="quickpick"
+    />
+  )
+  
+  const kit = screen.getByTestId(testId)
+  
+  // Check that the element has the _dropdownRef attached
+  expect(kit._dropdownRef).toBeDefined()
+  expect(kit._dropdownRef.current).toBeDefined()
+  expect(kit._dropdownRef.current.clearSelected).toBeDefined()
+})
+
+test("quickpick clears selection when clicking X icon", () => {
+  render(
+    <Dropdown
+        data={{ testid: testId }}
+        defaultValue="This Week"
+        variant="quickpick"
+    />
+  )
+  
+  const kit = screen.getByTestId(testId)
+  const trigger = kit.querySelector('.pb_dropdown_trigger')
+  
+  expect(trigger).toHaveTextContent("This Week")
+  
+  const clearIcon = kit.querySelector('[aria-label="times icon"]')
+  expect(clearIcon).toBeInTheDocument()
+  
+  fireEvent.click(clearIcon.parentElement)
+  
+  expect(trigger).toHaveTextContent("Select...")
+})
+
+test("quickpick returns date array values when option selected", () => {
+  const TestComponent = () => {
+    const [selected, setSelected] = useState(null)
+    return (
+      <>
+        <Dropdown
+            data={{ testid: testId }}
+            onSelect={(item) => setSelected(item)}
+            variant="quickpick"
+        />
+        {selected && (
+          <div data-testid="selected-value">
+            {JSON.stringify({
+              label: selected.label,
+              hasValue: !!selected.value,
+              isArray: Array.isArray(selected.value),
+              valueLength: selected.value?.length
+            })}
+          </div>
+        )}
+      </>
+    )
+  }
+
+  render(<TestComponent />)
+  
+  const kit = screen.getByTestId(testId)
+  const options = kit.querySelectorAll('.pb_dropdown_option_list')
+  
+  fireEvent.click(options[0])
+  
+  const selectedValue = screen.getByTestId('selected-value')
+  const data = JSON.parse(selectedValue.textContent)
+  
+  expect(data.label).toBe("Today")
+  expect(data.hasValue).toBe(true)
+  expect(data.isArray).toBe(true)
+  expect(data.valueLength).toBe(2)
+})
+
+test("quickpick option values are Date objects", () => {
+  const onSelectMock = jest.fn()
+  
+  render(
+    <Dropdown
+        data={{ testid: testId }}
+        onSelect={onSelectMock}
+        variant="quickpick"
+    />
+  )
+  
+  const kit = screen.getByTestId(testId)
+  const options = kit.querySelectorAll('.pb_dropdown_option_list')
+  
+  const thisMonthOption = Array.from(options).find(opt => opt.textContent === 'This Month')
+  fireEvent.click(thisMonthOption)
+  
+  const selectedItem = onSelectMock.mock.calls[0][0]
+  
+  expect(selectedItem.label).toBe("This Month")
+  expect(selectedItem.value).toBeDefined()
+  expect(Array.isArray(selectedItem.value)).toBe(true)
+  expect(selectedItem.value.length).toBe(2)
+  
+  const [startDate, endDate] = selectedItem.value
+  
+  expect(startDate instanceof Date).toBe(true)
+  expect(endDate instanceof Date).toBe(true)
+  
+  expect(startDate.getTime()).not.toBeNaN()
+  expect(endDate.getTime()).not.toBeNaN()
+  
+  expect(endDate.getTime()).toBeGreaterThanOrEqual(startDate.getTime())
+})

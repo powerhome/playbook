@@ -1,0 +1,1 @@
+To set a default value for the Dropdown, you can use the label of the range you want set as default, for example "This Year", "Today", etc. 

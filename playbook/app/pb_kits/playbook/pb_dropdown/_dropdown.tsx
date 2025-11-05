@@ -12,6 +12,7 @@ import DropdownContext from "./context";
 import DropdownOption from "./subcomponents/DropdownOption";
 import DropdownTrigger from "./subcomponents/DropdownTrigger";
 import useDropdown from "./hooks/useDropdown";
+import  getQuickPickOptions from "./quickpick";
 
 import {
     separateChildComponents,
@@ -36,9 +37,12 @@ type DropdownProps = {
     label?: string;
     multiSelect?: boolean;
     onSelect?: (arg: GenericObject) => null;
-    options: GenericObject;
+    options?: GenericObject;
     separators?: boolean;
-    variant?: "default" | "subtle";
+    variant?: "default" | "subtle" | "quickpick";
+    rangeEndsToday?: boolean;
+    controlsStartId?: string;
+    controlsEndId?: string;
     activeStyle?: {
       backgroundColor?: string;
       fontColor?: string;
@@ -71,6 +75,9 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
         formPillProps,
         onSelect,
         options,
+        rangeEndsToday = false,
+        controlsStartId,
+        controlsEndId,
         separators = true,
         variant = "default",
         activeStyle,
@@ -85,11 +92,25 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
         globalProps(props),
         className
     );
+    // ------------- Quick Pick ---------------------------------
+    // Use QuickPick options when variant is "quickpick"
+    const dropdownOptions = variant === "quickpick" 
+        ? getQuickPickOptions(rangeEndsToday) 
+        : (options || []);
+    // ----------------------------------------------------------
 
     const [isDropDownClosed, setIsDropDownClosed, toggleDropdown] = useDropdown(isClosed);
 
     const [filterItem, setFilterItem] = useState("");
     const initialSelected = useMemo(() => {
+      // Handle quickpick variant with string defaultValue (e.g., "This Month")
+      if (variant === "quickpick" && typeof defaultValue === "string" && defaultValue) {
+        const matchedOption = dropdownOptions.find(
+          (opt: GenericObject) => opt.label?.toLowerCase() === (defaultValue as string).toLowerCase()
+        );
+        return matchedOption || {};
+      }
+      
       if (multiSelect) {
         if (Array.isArray(defaultValue)) return defaultValue;
         return defaultValue && Object.keys(defaultValue).length
@@ -97,7 +118,7 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
           : [];
       }
       return defaultValue || {};
-    }, [multiSelect, defaultValue]);
+    }, [multiSelect, defaultValue, variant, dropdownOptions]);
 
     const [selected, setSelected] = useState<GenericObject | GenericObject[]>(
       initialSelected
@@ -151,7 +172,7 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
     }, [isClosed])
 
     const blankSelectionOption: GenericObject = blankSelection ? [{ label: blankSelection, value: "" }] : [];
-    const optionsWithBlankSelection = blankSelectionOption.concat(options);
+    const optionsWithBlankSelection = blankSelectionOption.concat(dropdownOptions);
 
     const availableOptions = useMemo(()=> {
         if (!multiSelect) return optionsWithBlankSelection;
@@ -203,6 +224,21 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
                    setFilterItem("");
                    setIsDropDownClosed(true);
                    onSelect && onSelect(clickedItem);
+                   
+                   // Sync with DatePickers if this is a quickpick variant
+                   if (variant === "quickpick" && Array.isArray(clickedItem.value)) {
+                       const [start, end] = clickedItem.value;
+                       
+                       if (controlsStartId) {
+                           const startPicker = (document.querySelector(`#${controlsStartId}`) as HTMLElement & { _flatpickr?: any })?._flatpickr;
+                           startPicker?.setDate(start, true);
+                       }
+                       
+                       if (controlsEndId) {
+                           const endPicker = (document.querySelector(`#${controlsEndId}`) as HTMLElement & { _flatpickr?: any })?._flatpickr;
+                           endPicker?.setDate(end, true);
+                       }
+                   }
             }
              };
 
@@ -219,6 +255,19 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
         setSelected({});
         onSelect && onSelect(null);
         setFocusedOptionIndex(-1);
+        
+        // Clear linked DatePickers as well if this is a quickpick variant with controls
+        if (variant === "quickpick") {
+          if (controlsStartId) {
+            const startPicker = (document.querySelector(`#${controlsStartId}`) as HTMLElement & { _flatpickr?: any })?._flatpickr;
+            startPicker?.clear();
+          }
+          
+          if (controlsEndId) {
+            const endPicker = (document.querySelector(`#${controlsEndId}`) as HTMLElement & { _flatpickr?: any })?._flatpickr;
+            endPicker?.clear();
+          }
+        }
       }
     };
 
@@ -232,7 +281,8 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
         dark
     });
 
-    useImperativeHandle(ref, () => ({
+    // Create an internal ref object that holds the imperative handle methods
+    const imperativeRef = useRef({
       clearSelected: () => {
         if (multiSelect) {
           setSelected([]);
@@ -244,7 +294,61 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
         setFilterItem("");
         setIsDropDownClosed(true);
       },
-    }));
+    });
+
+    // Update imperativeRef whenever dependencies change
+    // (needed for external clearing of normal Dropdown + DatePicker-synced QuickPick Dropdown)
+    useEffect(() => {
+      imperativeRef.current = {
+        clearSelected: () => {
+          if (multiSelect) {
+            setSelected([]);
+            onSelect && onSelect([]);
+          } else {
+            setSelected({});
+            onSelect && onSelect(null);
+          }
+          setFilterItem("");
+          setIsDropDownClosed(true);
+        },
+      };
+    }, [multiSelect, onSelect, setSelected, setFilterItem, setIsDropDownClosed]);
+
+    useImperativeHandle(ref, () => imperativeRef.current);
+
+    // Create a ref to the outer div to attach the dropdown ref for DatePicker sync
+    const outerDivRef = useRef<HTMLDivElement>(null);
+    
+    useEffect(() => {
+      // Attach the ref to the DOM element so DatePicker can access it
+      if (outerDivRef.current && variant === "quickpick" && id) {
+        (outerDivRef.current as any)._dropdownRef = imperativeRef;
+      }
+    }, [variant, id]);
+
+    // Sync defaultValue with DatePickers on mount when 3 input pattern is used
+    useEffect(() => {
+      if (variant === "quickpick" && initialSelected && typeof initialSelected === "object" && !Array.isArray(initialSelected)) {
+        const value = initialSelected.value;
+        
+        if (Array.isArray(value) && value.length === 2) {
+          const [start, end] = value;
+          
+          // Wait for DatePickers to be initialized
+          setTimeout(() => {
+            if (controlsStartId) {
+              const startPicker = (document.querySelector(`#${controlsStartId}`) as HTMLElement & { _flatpickr?: any })?._flatpickr;
+              startPicker?.setDate(start, true);
+            }
+            
+            if (controlsEndId) {
+              const endPicker = (document.querySelector(`#${controlsEndId}`) as HTMLElement & { _flatpickr?: any })?._flatpickr;
+              endPicker?.setDate(end, true);
+            }
+          }, 0);
+        }
+      }
+    }, [variant, initialSelected, controlsStartId, controlsEndId]);
 
     return (
         <div {...ariaProps}
@@ -252,6 +356,7 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
             {...htmlProps}
             className={classes}
             id={id}
+            ref={outerDivRef}
             style={{position: "relative"}}
         >
             <DropdownContext.Provider
