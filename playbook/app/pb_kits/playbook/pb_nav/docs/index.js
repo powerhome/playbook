@@ -21,3 +21,4 @@ export { default as NavWithSpacingControl } from "./_nav_with_spacing_control.js
 export { default as CollapsibleNavItemSpacing } from "./_collapsible_nav_item_spacing.jsx"
 export { default as CollapsibleNavNoIcon } from "./_collapsible_nav_no_icon.jsx"
 export { default as HorizontalNavExtendedunderline } from './_horizontal_nav_extendedunderline.jsx'
+export { default as HorizontalNavDisabled } from './_horizontal_nav_disabled.jsx'
