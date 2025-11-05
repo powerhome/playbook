@@ -51,7 +51,7 @@
     background-color: lighten($silver, $opacity_7);
   }
 
-  .bg-white {
+  .pb-bg-row-white {
     background-color: $white;
   }
 
@@ -278,7 +278,7 @@
         }
       }
 
-      &.bg-white {
+      &.pb-bg-row-white {
         td:first-child {
           background-color: $white;
         }
@@ -756,7 +756,7 @@
       border-bottom-color: $border_dark !important;
     }
 
-    .bg-white {
+    .pb-bg-row-white {
       background: $bg_dark_card;
     }
 
@@ -766,7 +766,7 @@
 
     // Dark mode virtualized rows
     .virtualized-table-row {
-      &.bg-white {
+      &.pb-bg-row-white {
         background: $bg_dark_card !important;
 
         td:first-child {
