@@ -35,10 +35,13 @@ class PbFormValidation extends PbEnhancedElement {
 
     // Add event listener to check for phone number validation errors
     this.element.addEventListener('submit', (event) => {
-      if (this.hasPhoneNumberValidationErrors()) {
-        event.preventDefault()
-        return false
-      }
+      // Use setTimeout to ensure React state updates have completed
+      setTimeout(() => {
+        if (this.hasPhoneNumberValidationErrors()) {
+          event.preventDefault()
+          return false
+        }
+      }, 0)
     })
   }
 
@@ -59,8 +62,11 @@ class PbFormValidation extends PbEnhancedElement {
     const { parentElement } = target
     const kitElement = parentElement.closest(KIT_SELECTOR)
 
+    // FIX: Add null check for kitElement
+    if (!kitElement) return
+
     // Check if this is a phone number input
-    const isPhoneNumberInput = kitElement && kitElement.classList.contains('pb_phone_number_input')
+    const isPhoneNumberInput = kitElement.classList.contains('pb_phone_number_input')
 
     // ensure clean error message state
     this.clearError(target)
