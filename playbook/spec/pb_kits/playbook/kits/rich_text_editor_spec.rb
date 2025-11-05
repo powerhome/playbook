@@ -12,7 +12,6 @@ RSpec.describe Playbook::PbRichTextEditor::RichTextEditor do
   it { is_expected.to define_boolean_prop(:toolbar_bottom).with_default(false) }
   it { is_expected.to define_boolean_prop(:advanced_editor_toolbar).with_default(true) }
   it { is_expected.to define_prop(:value) }
-  it { is_expected.to define_prop(:template) }
   it { is_expected.to define_prop(:placeholder) }
   it { is_expected.to define_prop(:input_options) }
   it {
@@ -45,7 +44,6 @@ RSpec.describe Playbook::PbRichTextEditor::RichTextEditor do
                               toolbar_bottom: true,
                               advanced_editor_toolbar: false,
                               value: "test value",
-                              template: "test template",
                               placeholder: "test placeholder",
                               extensions: [{ name: "test" }],
                               max_width: "lg",
@@ -58,7 +56,6 @@ RSpec.describe Playbook::PbRichTextEditor::RichTextEditor do
       expect(options[:toolbarBottom]).to eq true
       expect(options[:advancedEditorToolbar]).to eq false
       expect(options[:value]).to eq "test value"
-      expect(options[:template]).to eq "test template"
       expect(options[:placeholder]).to eq "test placeholder"
       expect(options[:extensions]).to eq [{ name: "test" }]
       expect(options[:maxWidth]).to eq "lg"

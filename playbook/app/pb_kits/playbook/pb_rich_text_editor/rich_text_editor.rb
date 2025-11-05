@@ -18,7 +18,6 @@ module Playbook
                             default: false
 
       prop :value
-      prop :template
       prop :placeholder
       prop :input_options
       prop :advanced_editor_toolbar, type: Playbook::Props::Boolean,
@@ -59,7 +58,6 @@ module Playbook
           railsEditor: true,
           simple: simple,
           sticky: sticky,
-          template: template,
           toolbarBottom: toolbar_bottom,
           value: value || "",
         }
