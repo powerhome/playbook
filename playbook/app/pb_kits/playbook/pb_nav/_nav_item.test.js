@@ -58,46 +58,6 @@ const NavDefault = (props) => {
     )
 }
 
-const NavDisabled = (props) => {
-    return (
-        <Nav
-            aria={{ label: navDisabledTestId }}
-            className={navClassName}
-            data={{ testid: navDisabledTestId }}
-            orientation="horizontal"
-            {...props}
-        >
-            <NavItem
-                imageUrl={itemImageUrl}
-                link="#"
-                text={itemTitle}
-            />
-            <NavItem
-                link="#"
-                text="Music"
-            />
-            <NavItem
-                active
-                link="#"
-                text="Video"
-            />
-            <NavItem
-                active
-                link="#"
-                text="Video"
-            />
-            <NavItem
-                aria={{ label: itemDisabledTestId }}
-                className={itemClassName}
-                data={{ testid: itemDisabledTestId }}
-                disabled
-                link="#"
-                text="Files"
-            />
-        </Nav>
-    )
-}
-
 test('should pass data prop', () => {
     render(<NavDefault />)
     const kit = screen.getByTestId(itemTestId)
@@ -149,27 +109,90 @@ test('should have a left icon', () => {
 })
 
 test('should apply disabled class when disabled', () => {
-    render(
-        <NavDisabled />
-    )
-    const kit = screen.getByTestId(itemDisabledTestId)
-    expect(kit).toHaveClass('pb_nav_item_disabled')
+    [
+     "default",
+     "subtle",
+     "bold"
+    ].forEach((variant) => {
+        render(
+            <Nav
+                aria={{ label: navDisabledTestId }}
+                className={navClassName}
+                data={{ testid: navDisabledTestId }}
+                orientation="horizontal"
+                variant={variant}
+            >
+            <NavItem
+                aria={{ label: `${itemDisabledTestId}-${variant}` }}
+                className={itemClassName}
+                data={{ testid: `${itemDisabledTestId}-${variant}` }}
+                disabled
+                link="#"
+                text="Files"
+            />
+           </Nav>
+        )
+        const kit = screen.getByTestId(`${itemDisabledTestId}-${variant}`)
+        expect(kit).toHaveClass('pb_nav_item_disabled')
+    })
 })
 
 test('should set aria-disabled when disabled', () => {
-    render(
-        <NavDisabled />
-    )
-    const item = screen.getByTestId(itemDisabledTestId)
-    expect(item).toHaveAttribute('aria-disabled', 'true')
+    [
+        "default",
+        "subtle",
+        "bold"
+    ].forEach((variant) => {
+        render(
+            <Nav
+                aria={{ label: navDisabledTestId }}
+                className={navClassName}
+                data={{ testid: navDisabledTestId }}
+                orientation="horizontal"
+                variant={variant}
+            >
+            <NavItem
+                aria={{ label: `${itemDisabledTestId}-${variant}` }}
+                className={itemClassName}
+                data={{ testid: `${itemDisabledTestId}-${variant}` }}
+                disabled
+                link="#"
+                text="Files"
+            />
+           </Nav>
+        )
+        const item = screen.getByTestId(`${itemDisabledTestId}-${variant}`)
+        expect(item).toHaveAttribute('aria-disabled', 'true')
+    })
 })
 
 test('should set tabIndex to -1 when disabled', () => {
-    render(
-        <NavDisabled />
-    )
-    const kit = screen.getByTestId(itemDisabledTestId)
-    expect(kit).toHaveAttribute('tabIndex', '-1') 
+    [
+        "default",
+        "subtle",
+        "bold"
+    ].forEach((variant) => {
+        render(
+            <Nav
+                aria={{ label: navDisabledTestId }}
+                className={navClassName}
+                data={{ testid: navDisabledTestId }}
+                orientation="horizontal"
+                variant={variant}
+            >
+            <NavItem
+                aria={{ label: `${itemDisabledTestId}-${variant}` }}
+                className={itemClassName}
+                data={{ testid: `${itemDisabledTestId}-${variant}` }}
+                disabled
+                link="#"
+                text="Files"
+            />
+           </Nav>
+        )
+        const kit = screen.getByTestId(`${itemDisabledTestId}-${variant}`)
+        expect(kit).toHaveAttribute('tabIndex', '-1')
+    })
 })
 
 test('should prevent onClick when disabled', () => {
