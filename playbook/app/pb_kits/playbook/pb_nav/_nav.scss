@@ -6,11 +6,6 @@
 @import "./horizontal_nav";
 @import "./collapsible_nav";
 
-@mixin disabled_nav_item {
-  color: $text_lt_lighter !important;
-  cursor: not-allowed !important;
-}
-
 [class^="pb_nav_list"] {
   //classes for fontSize and fontWeight props
   .font_size_small {
@@ -82,9 +77,11 @@
 }
 
 .pb_nav_item_disabled {
+  cursor: not-allowed !important;
  .pb_nav_list_item_text,
   .pb_nav_list_item_text_collapsible {
-    @include disabled_nav_item;
+    color: $text_lt_lighter !important;
+    cursor: not-allowed !important;
   }
 }
 
