@@ -5,6 +5,8 @@ import Nav from './_nav'
 import NavItem from './_item'
 
 const navTestId = 'nav'
+const navDisabledTestId = 'nav-disabled'
+const itemDisabledTestId = 'item-disabled'
 const itemTestId = 'item'
 const activeTestBorderlessId = 'activeborderless'
 const activeTestBorderId = 'active'
@@ -49,6 +51,46 @@ const NavDefault = (props) => {
                 text="Video"
             />
             <NavItem
+                link="#"
+                text="Files"
+            />
+        </Nav>
+    )
+}
+
+const NavDisabled = (props) => {
+    return (
+        <Nav
+            aria={{ label: navDisabledTestId }}
+            className={navClassName}
+            data={{ testid: navDisabledTestId }}
+            orientation="horizontal"
+            {...props}
+        >
+            <NavItem
+                imageUrl={itemImageUrl}
+                link="#"
+                text={itemTitle}
+            />
+            <NavItem
+                link="#"
+                text="Music"
+            />
+            <NavItem
+                active
+                link="#"
+                text="Video"
+            />
+            <NavItem
+                active
+                link="#"
+                text="Video"
+            />
+            <NavItem
+                aria={{ label: itemDisabledTestId }}
+                className={itemClassName}
+                data={{ testid: itemDisabledTestId }}
+                disabled
                 link="#"
                 text="Files"
             />
@@ -104,4 +146,44 @@ test('should have a left icon', () => {
     const kit = screen.getByTestId(itemTestId)
     const icon = kit.querySelector(".pb_custom_icon.pb_nav_list_item_icon_left")
     expect(icon).toBeInTheDocument()
+})
+
+test('should apply disabled class when disabled', () => {
+    render(
+        <NavDisabled />
+    )
+    const kit = screen.getByTestId(itemDisabledTestId)
+    expect(kit).toHaveClass('pb_nav_item_disabled')
+})
+
+test('should set aria-disabled when disabled', () => {
+    render(
+        <NavDisabled />
+    )
+    const item = screen.getByTestId(itemDisabledTestId)
+    expect(item).toHaveAttribute('aria-disabled', 'true')
+})
+
+test('should set tabIndex to -1 when disabled', () => {
+    render(
+        <NavDisabled />
+    )
+    const kit = screen.getByTestId(itemDisabledTestId)
+    expect(kit).toHaveAttribute('tabIndex', '-1') 
+})
+
+test('should prevent onClick when disabled', () => {
+    const handleClick = jest.fn()
+    render(
+        <NavItem
+            data={{ testid: 'disabled-click-item' }}
+            disabled
+            link="#"
+            onClick={handleClick}
+            text="Disabled Item"
+        />
+    )
+    const kit = screen.getByTestId('disabled-click-item')
+    kit.click()
+    expect(handleClick).not.toHaveBeenCalled()
 })
