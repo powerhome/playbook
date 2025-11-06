@@ -18,36 +18,37 @@ examples:
   - subtle_horizontal_nav: Subtle Horizontal Nav
   - bold_horizontal_nav: Bold Horizontal Nav
   - horizontal_nav_extendedunderline: Horizontal Nav With Extended Underline
+  - horizontal_nav_disabled: Horizontal Nav With Disabled Item
   - block_nav: Block
   - block_no_title_nav: Without Title
   - new_tab: Open in a New Tab
   - tab_nav: Tab Nav
 
   react:
-  # - default_nav: Default
-  # - with_icons_nav: With Icons
-  # - with_img_nav: With Custom Icon
-  # - no_highlight_nav: No Highlight
-  # - borderless_nav: No Borders
-  # - subtle_nav: Subtle Variant
-  # - subtle_with_icons_nav: Subtle With Icons
-  # - subtle_no_highlight_nav: Subtle No Highlight
-  # - bold_vertical_nav: Bold Variant
-  # - nav_with_spacing_control: Nav with Spacing Control
-  # - nav_with_font_control: Nav With Font Control
-  # - collapsible_nav: Collapsible Nav
-  # - collapsible_nav_with_all_options: Collapsible Nav With Options
-  # - collapsible_nav_item_spacing: Collapsible Nav With ItemSpacing
-  # - collapsible_nav_custom: Collapsible Nav With Custom Toggling
-  # - collapsible_nav_no_icon: Collapsible Nav No Icon
-  # - horizontal_nav: Horizontal Nav
-  # - subtle_horizontal_nav: Subtle Horizontal Nav
-  # - bold_horizontal_nav: Bold Horizontal Nav
+  - default_nav: Default
+  - with_icons_nav: With Icons
+  - with_img_nav: With Custom Icon
+  - no_highlight_nav: No Highlight
+  - borderless_nav: No Borders
+  - subtle_nav: Subtle Variant
+  - subtle_with_icons_nav: Subtle With Icons
+  - subtle_no_highlight_nav: Subtle No Highlight
+  - bold_vertical_nav: Bold Variant
+  - nav_with_spacing_control: Nav with Spacing Control
+  - nav_with_font_control: Nav With Font Control
+  - collapsible_nav: Collapsible Nav
+  - collapsible_nav_with_all_options: Collapsible Nav With Options
+  - collapsible_nav_item_spacing: Collapsible Nav With ItemSpacing
+  - collapsible_nav_custom: Collapsible Nav With Custom Toggling
+  - collapsible_nav_no_icon: Collapsible Nav No Icon
+  - horizontal_nav: Horizontal Nav
+  - subtle_horizontal_nav: Subtle Horizontal Nav
+  - bold_horizontal_nav: Bold Horizontal Nav
   - horizontal_nav_extendedunderline: Horizontal Nav With Extended Underline
   - horizontal_nav_disabled: Horizontal Nav With Disabled Item
-  # - block_nav: Block
-  # - block_no_title_nav: Without Title
-  # - new_tab: Open in a New Tab
+  - block_nav: Block
+  - block_no_title_nav: Without Title
+  - new_tab: Open in a New Tab
 
   swift:
   - nav_vertical_default_swift: Vertical Default

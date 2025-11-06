@@ -4,6 +4,7 @@ module Playbook
   module PbNav
     class Item < Playbook::KitBase
       prop :active, type: Playbook::Props::Boolean, default: false
+      prop :disabled, type: Playbook::Props::Boolean, default: false
       prop :font_size, type: Playbook::Props::Enum,
                        values: %w[normal small],
                        default: "normal"
@@ -26,7 +27,7 @@ module Playbook
         if collapsible
           "#{generate_classname('pb_nav_list_kit_item', active_class, highlighted_border_class)} #{generate_classname('pb_collapsible_nav_item', active_class, collapsible_trail_class)} #{font_size_class} #{font_weight_class} pb_nav_list_item_link_collapsible"
         else
-          "#{generate_classname('pb_nav_list_kit_item', active_class, highlighted_border_class)} #{font_size_class} #{font_weight_class} pb_nav_list_item_link"
+          "#{generate_classname('pb_nav_list_kit_item', active_class, highlighted_border_class)} #{font_size_class} #{font_weight_class} pb_nav_list_item_link #{disabled_class}"
         end
       end
 
@@ -81,7 +82,11 @@ module Playbook
       end
 
       def tag
-        link ? "a" : "div"
+        link && !disabled ? "a" : "div"
+      end
+
+      def is_link
+        link && !disabled
       end
 
       def collapsible_icons
@@ -96,6 +101,10 @@ module Playbook
 
       def active_class
         active ? "active" : nil
+      end
+
+      def disabled_class
+        disabled ? "pb_nav_item_disabled" : nil
       end
 
       def highlighted_border_class
