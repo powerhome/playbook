@@ -22,7 +22,7 @@ describe("DateStacked Kit", () => {
                 align="left"
                 data={{ testid: testId }}
                 date={new Date()}
-                size="sm"      
+                size="sm"
             />
         )
 
@@ -36,7 +36,7 @@ describe("DateStacked Kit", () => {
                 align="left"
                 data={{ testid: testId }}
                 date={new Date()}
-                size="sm"      
+                size="sm"
             />
         )
 
@@ -51,7 +51,7 @@ describe("DateStacked Kit", () => {
                 align="left"
                 data={{ testid: testId }}
                 date={new Date()}
-                size="sm"      
+                size="sm"
             />
         )
 
@@ -66,7 +66,7 @@ describe("DateStacked Kit", () => {
                 align="left"
                 data={{ testid: testId }}
                 date={new Date()}
-                size="md"      
+                size="md"
             />
         )
 
@@ -80,13 +80,30 @@ describe("DateStacked Kit", () => {
                 align="left"
                 data={{ testid: testId }}
                 date={futureDate}
-                size="sm"      
+                size="sm"
             />
         )
 
         const kit = screen.getByTestId(testId)
         const text = kit.querySelector(".pb_caption_kit_xs")
         expect(text.textContent).toEqual("2016")
+    })
+
+    test("renders current year when showCurrentYear is true", () => {
+        render(
+            <DateStacked
+                align="left"
+                data={{ testid: testId }}
+                date={new Date()}
+                showCurrentYear
+                size="sm"
+            />
+        )
+
+        const kit = screen.getByTestId(testId)
+        const text = kit.querySelector(".pb_caption_kit_xs")
+        const currentYear = new Date().getFullYear()
+        expect(text.textContent).toEqual(`${currentYear}`)
     })
 
     test("renders correct className when order reversed", () => {
@@ -96,7 +113,7 @@ describe("DateStacked Kit", () => {
                 data={{ testid: testId }}
                 date={futureDate}
                 reverse
-                size="sm"      
+                size="sm"
             />
         )
         const kit = screen.getByTestId(testId)
@@ -110,7 +127,7 @@ describe("DateStacked Kit", () => {
                 bold
                 data={{ testid: testId }}
                 date={futureDate}
-                size="md"      
+                size="md"
             />
         )
 
@@ -125,7 +142,7 @@ describe("DateStacked Kit", () => {
                 align="center"
                 data={{ testid: testId }}
                 date={futureDate}
-                size="md"      
+                size="md"
             />
         )
 
@@ -139,7 +156,7 @@ describe("DateStacked Kit", () => {
                 align="right"
                 data={{ testid: testId }}
                 date={futureDate}
-                size="md"      
+                size="md"
             />
         )
 
