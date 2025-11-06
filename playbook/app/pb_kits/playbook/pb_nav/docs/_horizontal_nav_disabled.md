@@ -1,0 +1,1 @@
+use the `disabled` prop on a navItem to set it as disabled. This will render the UI as disabled, prevent clicks and not allow for taIndex to access the item. 
