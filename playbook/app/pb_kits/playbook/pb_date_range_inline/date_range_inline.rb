@@ -14,7 +14,8 @@ module Playbook
       prop :align, type: Playbook::Props::Enum,
                    values: %w[left center right],
                    default: "left"
-
+      prop :show_current_year, type: Playbook::Props::Boolean,
+                               default: false
       def classname
         generate_classname("pb_date_range_inline_kit", dark_class, align)
       end
@@ -38,11 +39,12 @@ module Playbook
       end
 
       def time_display(time)
+        include_year = show_current_year || !dates_in_current_year?
         content_tag(:time, datetime: time.to_iso) do
-          if dates_in_current_year?
-            "#{time.to_month_downcase} #{time.to_day}"
-          else
+          if include_year
             "#{time.to_month_downcase} #{time.to_day}, #{time.to_year}"
+          else
+            "#{time.to_month_downcase} #{time.to_day}"
           end
         end
       end

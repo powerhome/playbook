@@ -2,11 +2,12 @@ examples:
   
   rails:
   - date_range_inline_default: Default
-  
+  - date_range_inline_show_current_year: Show Current Year
   
   react:
   - date_range_inline_default: Default
-
+  - date_range_inline_show_current_year: Show Current Year
+  
   swift:
   - date_range_inline_default_swift: Default
   - date_range_inline_props_swift: ""

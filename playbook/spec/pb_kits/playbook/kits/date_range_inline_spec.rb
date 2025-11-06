@@ -16,6 +16,7 @@ RSpec.describe Playbook::PbDateRangeInline::DateRangeInline do
 
   it { is_expected.to define_prop(:dark).with_default(false) }
   it { is_expected.to define_prop(:icon).with_default(false) }
+  it { is_expected.to define_prop(:show_current_year).with_default(false) }
 
   it do
     is_expected.to define_enum_prop(:align)

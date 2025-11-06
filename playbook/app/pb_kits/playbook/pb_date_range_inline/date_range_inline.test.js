@@ -111,6 +111,23 @@ describe("DateRangeInline Kit", () => {
         const text = kit.querySelector('.pb_caption_kit_md:first-child')
         expect(text.textContent).toEqual(" Jan 15 ")
     })
+
+    test("renders DateRangeInline with year when showCurrentYear is true", () => {
+        const currentYear = new Date().getFullYear()
+        render(
+            <DateRangeInline
+                data={{ testid: testId }}
+                endDate={new Date((`15 Aug ${currentYear}`))}
+                showCurrentYear
+                size="xs"
+                startDate={new Date(`15 Jan ${currentYear}`)}
+            />
+        )
+
+        const kit = screen.getByTestId(testId)
+        const text = kit.querySelector('.pb_caption_kit_md:first-child')
+        expect(text.textContent).toEqual(` Jan 15, ${currentYear} `)
+    })
     
 
 })
