@@ -17,7 +17,7 @@ export const getRowColorClass = (
     (inlineRowLoading && (rowHasNoChildren || row.getCanExpand()))
   );
 
-  return row.getIsSelected() ? "bg-row-selection" : shouldShowExpandedBackground ? "bg-silver" : "bg-white";
+  return row.getIsSelected() ? "bg-row-selection" : shouldShowExpandedBackground ? "bg-silver" : "pb-bg-row-white";
 }
 
 /**

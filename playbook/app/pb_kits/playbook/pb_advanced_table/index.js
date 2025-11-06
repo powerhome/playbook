@@ -76,7 +76,7 @@ export default class PbAdvancedTable extends PbEnhancedElement {
         // Only apply styling if the checkbox is inside a table row
         if (rowEl) {
           rowEl.classList.add("bg-row-selection");
-          rowEl.classList.remove("bg-white", "bg-silver");
+          rowEl.classList.remove("pb-bg-row-white", "bg-silver");
         }
       } else {
         // Only apply styling if the checkbox is inside a table row
@@ -85,9 +85,9 @@ export default class PbAdvancedTable extends PbEnhancedElement {
           
           if (this.isRowExpanded(rowEl)) {
             rowEl.classList.remove("bg-silver");
-            rowEl.classList.add("bg-white");
+            rowEl.classList.add("pb-bg-row-white");
           } else {
-            rowEl.classList.remove("bg-white");
+            rowEl.classList.remove("pb-bg-row-white");
             rowEl.classList.add("bg-silver");
           }
         }
@@ -120,7 +120,7 @@ export default class PbAdvancedTable extends PbEnhancedElement {
     if (isChecked) {
       PbAdvancedTable.selectedRows.add(rowId);
       rowEl.classList.add("bg-row-selection");
-      rowEl.classList.remove("bg-white", "bg-silver");
+      rowEl.classList.remove("pb-bg-row-white", "bg-silver");
     } else {
       PbAdvancedTable.selectedRows.delete(rowId);
     }
@@ -130,9 +130,9 @@ export default class PbAdvancedTable extends PbEnhancedElement {
 
       if (this.isRowExpanded(rowEl)) {
         rowEl.classList.remove("bg-silver");
-        rowEl.classList.add("bg-white");
+        rowEl.classList.add("pb-bg-row-white");
       } else {
-        rowEl.classList.remove("bg-white");
+        rowEl.classList.remove("pb-bg-row-white");
         rowEl.classList.add("bg-silver");
       }
     }
@@ -407,7 +407,7 @@ export default class PbAdvancedTable extends PbEnhancedElement {
     const row = this.element.closest("tr");
     if (row) {
       row.classList.toggle("bg-silver", !isVisible);
-      row.classList.toggle("bg-white", isVisible);
+      row.classList.toggle("pb-bg-row-white", isVisible);
     }
 
     this.addBorderRadiusOnLastVisibleRow();
