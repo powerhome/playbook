@@ -1,0 +1,30 @@
+<%= pb_rails("flex", props: { justify: "between" }) do %>
+  <%= pb_rails("flex", props: { orientation:"column", wrap: true }) do %>
+    <%= pb_rails("caption", props: { margin_bottom: "sm", text: "Default Variant" }) %>
+    <%= pb_rails("nav") do %>
+      <%= pb_rails("nav/item", props: { text: "About", link: "#" }) %>
+      <%= pb_rails("nav/item", props: { text: "Case Studies", link: "#", active: true }) %>
+      <%= pb_rails("nav/item", props: { text: "Service ", link: "#", disabled: true }) %>
+      <%= pb_rails("nav/item", props: { text: "Contacts", link: "#" }) %>
+    <% end %>
+  <% end %>
+    <%= pb_rails("flex", props: { orientation:"column", wrap: true }) do %>
+    <%= pb_rails("caption", props: { margin_bottom: "sm", text: "Subtle Variant" }) %>
+    <%= pb_rails("nav", props:{variant: "subtle"}) do %>
+      <%= pb_rails("nav/item", props: { text: "About", link: "#" }) %>
+      <%= pb_rails("nav/item", props: { text: "Case Studies", link: "#", active: true }) %>
+      <%= pb_rails("nav/item", props: { text: "Service ", link: "#", disabled: true }) %>
+      <%= pb_rails("nav/item", props: { text: "Contacts", link: "#" }) %>
+    <% end %>
+  <% end %>
+    <%= pb_rails("flex", props: { orientation:"column", wrap: true }) do %>
+    <%= pb_rails("caption", props: { margin_bottom: "sm", text: "Bold Variant" }) %>
+    <%= pb_rails("nav", props:{variant: "bold"}) do %>
+      <%= pb_rails("nav/item", props: { text: "About", link: "#" }) %>
+      <%= pb_rails("nav/item", props: { text: "Case Studies", link: "#", active: true }) %>
+      <%= pb_rails("nav/item", props: { text: "Service ", link: "#", disabled: true }) %>
+      <%= pb_rails("nav/item", props: { text: "Contacts", link: "#" }) %>
+    <% end %>
+  <% end %>
+  
+<% end %>
