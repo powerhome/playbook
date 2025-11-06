@@ -39,10 +39,10 @@ module Playbook
       end
 
       def year
-        current_year = DateTime.now.year.to_i
         if show_current_year
-          current_year.to_s
+          Playbook::PbKit::PbDateTime.new(date).to_year.to_s
         else
+          current_year = DateTime.now.year.to_i
           year = Playbook::PbKit::PbDateTime.new(date).to_year.to_i
           if current_year != year
             content_tag(:time, datetime: year) do
