@@ -30,6 +30,10 @@ RSpec.describe Playbook::PbDateStacked::DateStacked do
     is_expected.to define_prop(:bold)
       .of_type(Playbook::Props::Boolean)
   }
+  it {
+    is_expected.to define_prop(:show_current_year)
+      .of_type(Playbook::Props::Boolean)
+  }
 
   describe "#month" do
     it "displays the month" do
