@@ -213,10 +213,24 @@ export type GlobalProps = AlignContent & AlignItems & AlignSelf &
 
 const getResponsivePropClasses = (prop: {[key: string]: string}, classPrefix: string) => {
   const keys: string[] = Object.keys(prop)
-  return keys.map((size: Sizes) => {
-    const propValue: string = typeof(prop[size]) === 'string' ? camelToSnakeCase(prop[size]) : prop[size]
-    return `${classPrefix}_${size}_${propValue}`
-  }).join(" ")
+  const screenSizeValues = ["xs", "sm", "md", "lg", "xl"]
+  let classResult = ''
+  
+  // Handle default value separately (generates base class without size prefix)
+  if (prop.default !== undefined) {
+    const defaultValue: string = typeof(prop.default) === 'string' ? camelToSnakeCase(prop.default) : prop.default
+    classResult += `${classPrefix}_${defaultValue} `
+  }
+  
+  // Handle responsive sizes (generates classes with size prefix)
+  keys.forEach((key) => {
+    if (screenSizeValues.includes(key)) {
+      const propValue: string = typeof(prop[key]) === 'string' ? camelToSnakeCase(prop[key]) : prop[key]
+      classResult += `${classPrefix}_${key}_${propValue} `
+    }
+  })
+  
+  return classResult.trim()
 }
 
 //reusable function for top, bottom, right and left props
@@ -436,9 +450,11 @@ const PROP_CATEGORIES: {[key:string]: (props: {[key: string]: any}) => string} =
         if (typeof zIndexEntry[1] == "number") {
           css += `z_index_${zIndexEntry[1]} `
         } else if (typeof zIndexEntry[1] == "object") {
-          Object.entries(zIndexEntry[1]).forEach((zIndexObj) => {
-            css += `z_index_${zIndexObj[0]}_${zIndexObj[1]} `
+          const responsiveObj: {[key: string]: string} = {}
+          Object.entries(zIndexEntry[1]).forEach(([key, value]) => {
+            responsiveObj[key] = value.toString()
           })
+          css += getResponsivePropClasses(responsiveObj, 'z_index')
         } else if (zIndexEntry[1] === 'max') {
           css += `z_index_max `
         }
