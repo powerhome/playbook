@@ -479,9 +479,11 @@ const PROP_CATEGORIES: {[key:string]: (props: {[key: string]: any}) => string} =
         if (typeof displayEntry[1] == "string") {
           css += `display_${displayEntry[1]} `
         } else if (typeof displayEntry[1] == "object") {
-          Object.entries(displayEntry[1]).forEach((displayObj) => {
-            css += `display_${displayObj[0]}_${displayObj[1]} `
+          const responsiveObj: {[key: string]: string} = {}
+          Object.entries(displayEntry[1]).forEach(([key, value]) => {
+            responsiveObj[key] = typeof value === 'string' ? value : value.toString()
           })
+          css += getResponsivePropClasses(responsiveObj, 'display')
         } else {
           ' '
         }
