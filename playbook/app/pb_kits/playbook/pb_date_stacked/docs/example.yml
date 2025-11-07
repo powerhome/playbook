@@ -2,7 +2,6 @@ examples:
 
   rails:
   - date_stacked_default: Default
-  - date_stacked_not_current_year: Not Current Year
   - date_stacked_current_year: Show Current Year
   - date_stacked_reverse: Day & Month Reverse
   - date_stacked_sizes: Sizes
@@ -12,7 +11,6 @@ examples:
 
   react:
   - date_stacked_default: Default
-  - date_stacked_not_current_year: Not Current Year
   - date_stacked_current_year: Show Current Year
   - date_stacked_reverse: Day & Month Reverse
   - date_stacked_sizes: Sizes
