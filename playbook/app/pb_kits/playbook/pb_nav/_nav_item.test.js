@@ -108,7 +108,7 @@ test('should have a left icon', () => {
     expect(icon).toBeInTheDocument()
 })
 
-test('should apply disabled class when disabled', () => {
+test('should apply disabled class when disabled (horizontal nav)', () => {
     [
      "default",
      "subtle",
@@ -137,7 +137,7 @@ test('should apply disabled class when disabled', () => {
     })
 })
 
-test('should set aria-disabled when disabled', () => {
+test('should set aria-disabled when disabled (horizontal nav)', () => {
     [
         "default",
         "subtle",
@@ -166,7 +166,7 @@ test('should set aria-disabled when disabled', () => {
     })
 })
 
-test('should set tabIndex to -1 when disabled', () => {
+test('should set tabIndex to -1 when disabled (horizontal nav)', () => {
     [
         "default",
         "subtle",
@@ -209,4 +209,91 @@ test('should prevent onClick when disabled', () => {
     const kit = screen.getByTestId('disabled-click-item')
     kit.click()
     expect(handleClick).not.toHaveBeenCalled()
+})
+
+test('should apply disabled class when disabled (vertical nav)', () => {
+    [
+     "default",
+     "subtle",
+     "bold"
+    ].forEach((variant) => {
+        render(
+            <Nav
+                aria={{ label: navDisabledTestId }}
+                className={navClassName}
+                data={{ testid: navDisabledTestId }}
+                orientation="vertical"
+                variant={variant}
+            >
+            <NavItem
+                aria={{ label: `${itemDisabledTestId}-${variant}` }}
+                className={itemClassName}
+                data={{ testid: `${itemDisabledTestId}-${variant}` }}
+                disabled
+                link="#"
+                text="Files"
+            />
+           </Nav>
+        )
+        const kit = screen.getByTestId(`${itemDisabledTestId}-${variant}`)
+        expect(kit).toHaveClass('pb_nav_item_disabled')
+    })
+})
+
+test('should set aria-disabled when disabled (vertical nav)', () => {
+    [
+        "default",
+        "subtle",
+        "bold"
+    ].forEach((variant) => {
+        render(
+            <Nav
+                aria={{ label: navDisabledTestId }}
+                className={navClassName}
+                data={{ testid: navDisabledTestId }}
+                orientation="vertical"
+                variant={variant}
+            >
+            <NavItem
+                aria={{ label: `${itemDisabledTestId}-${variant}` }}
+                className={itemClassName}
+                data={{ testid: `${itemDisabledTestId}-${variant}` }}
+                disabled
+                link="#"
+                text="Files"
+            />
+           </Nav>
+        )
+        const item = screen.getByTestId(`${itemDisabledTestId}-${variant}`)
+        expect(item).toHaveAttribute('aria-disabled', 'true')
+    })
+})
+
+test('should set tabIndex to -1 when disabled (vertical nav)', () => {
+    [
+        "default",
+        "subtle",
+        "bold"
+    ].forEach((variant) => {
+        render(
+            <Nav
+                aria={{ label: navDisabledTestId }}
+                className={navClassName}
+                data={{ testid: navDisabledTestId }}
+                orientation="vertical"
+                variant={variant}
+            >
+            <NavItem
+                aria={{ label: `${itemDisabledTestId}-${variant}` }}
+                className={itemClassName}
+                data={{ testid: `${itemDisabledTestId}-${variant}` }}
+                disabled
+                link="#"
+                text="Files"
+            />
+           </Nav>
+        )
+        const kit = screen.getByTestId(`${itemDisabledTestId}-${variant}`)
+        expect(kit).toHaveAttribute('tabIndex', '-1')
+    })
 })
