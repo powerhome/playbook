@@ -1,3 +1,50 @@
+# 15.4.0
+
+##### November 10, 2025
+
+![release_image](https://github.com/user-attachments/assets/db119637-25e9-4157-9091-c5f7fdf034fc)
+
+[15.4.0](https://github.com/powerhome/playbook/tree/15.4.0) full list of changes:
+
+**Improvements:**
+
+- Playbook Website: Testing Hotjar [\#5484](https://github.com/powerhome/playbook/pull/5484) ([nidaqg](https://github.com/nidaqg))
+- Fixed Confirmation Toast: Some Toasts Appear Briefly Upon Initial Page Load - Rails Only [\#5461](https://github.com/powerhome/playbook/pull/5461) ([skduncan](https://github.com/skduncan))
+- Beta Website Fixes [\#5462](https://github.com/powerhome/playbook/pull/5462) ([nidaqg](https://github.com/nidaqg))
+- Playbook Website: Halloween Display [\#5437](https://github.com/powerhome/playbook/pull/5437) ([nidaqg](https://github.com/nidaqg))
+- Playbook Website: Flex Box Justify, Shadow, and Margin Global Prop Pages [\#5436](https://github.com/powerhome/playbook/pull/5436) ([kangaree](https://github.com/kangaree))
+- Playbook Website: New Global Props and Token Pages [\#5430](https://github.com/powerhome/playbook/pull/5430) ([nidaqg](https://github.com/nidaqg))
+- Icon Stat Value Kit: Fix Broken "color" Doc Example \(invalid 'blue' Color Reference\) [\#5429](https://github.com/powerhome/playbook/pull/5429) ([skduncan](https://github.com/skduncan))
+- Global Props: Border Radius, Align and Group Hover [\#5428](https://github.com/powerhome/playbook/pull/5428) ([nidaqg](https://github.com/nidaqg))
+- Table Kit: Dynamic Chevron for Collapsible Prop - Rails and React [\#5421](https://github.com/powerhome/playbook/pull/5421) ([nickamantia](https://github.com/nickamantia))
+- Playbook Website: Convert Patterns to Building Blocks [\#5417](https://github.com/powerhome/playbook/pull/5417) ([nidaqg](https://github.com/nidaqg))
+- Form Kit Docs: Fix Form Kit Submit Button Loading State After Scss Overhaul [\#5399](https://github.com/powerhome/playbook/pull/5399) ([skduncan](https://github.com/skduncan))
+
+
+**Kit Enhancements:**
+
+- Forms: Add Phone Number Input Kit Validation [\#5453](https://github.com/powerhome/playbook/pull/5453) ([nickamantia](https://github.com/nickamantia))
+- Advanced Table: Custom Cell on Multi-header Cells - Rails [\#5460](https://github.com/powerhome/playbook/pull/5460) ([elisashapiro](https://github.com/elisashapiro))
+- Typeahead: Focus State for Pills or Badges [\#5459](https://github.com/powerhome/playbook/pull/5459) ([nidaqg](https://github.com/nidaqg))
+- Dropdown: Quickpick Variant [\#5444](https://github.com/powerhome/playbook/pull/5444) ([nidaqg](https://github.com/nidaqg))
+- Advanced Table: Add Font Color Support to Column Styling Logic [\#5452](https://github.com/powerhome/playbook/pull/5452) ([elisashapiro](https://github.com/elisashapiro))
+- Advanced Table: Pagination Props to Include Onpagechange [\#5418](https://github.com/powerhome/playbook/pull/5418) ([nidaqg](https://github.com/nidaqg))
+- Typeahead: Grouped Options With Default Values [\#5410](https://github.com/powerhome/playbook/pull/5410) ([nidaqg](https://github.com/nidaqg))
+- Popover: React Appendto Prop [\#5404](https://github.com/powerhome/playbook/pull/5404) ([elisashapiro](https://github.com/elisashapiro))
+- Currency Kit: Allow Non String Inputs - Both Rails and React [\#5443](https://github.com/powerhome/playbook/pull/5443) ([skduncan](https://github.com/skduncan))
+- Selectable Card Kit: Disabled Styles - Rails & React [\#5427](https://github.com/powerhome/playbook/pull/5427) ([kangaree](https://github.com/kangaree))
+- Date Picker: Quickpick UI Update ([\#5380](https://github.com/powerhome/playbook/pull/5380)) ([@nidaqg](https://github.com/nidaqg))
+
+**Fixed Bugs:**
+
+- Advanced Table: Change Class 'bg-white' to 'pb-bg-row-white' to Solve for Nitro Style Bleed [\#5472](https://github.com/powerhome/playbook/pull/5472) ([nidaqg](https://github.com/nidaqg))
+- Popover Kit: Conditional Rendering Breaks Dismiss Logic - React Only [\#5416](https://github.com/powerhome/playbook/pull/5416) ([skduncan](https://github.com/skduncan))
+- Text Input: Cursor Is "pointer" Not "text" - Rails [\#5411](https://github.com/powerhome/playbook/pull/5411) ([elisashapiro](https://github.com/elisashapiro))
+- Advanced Table: Always Show Enabletoggleexpansion Icon When Inlinerowloading Prop Enabled - React [\#5387](https://github.com/powerhome/playbook/pull/5387) ([elisashapiro](https://github.com/elisashapiro))
+- Advanced Table: Inlinerowloading to Work With Pagination [\#5386](https://github.com/powerhome/playbook/pull/5386) ([nidaqg](https://github.com/nidaqg))
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/v15.4.0-rc.4...15.4.0)
+
 # 🎶 Look at this Release, isn’t it Sweet?
 ##### October 23, 2025
 
