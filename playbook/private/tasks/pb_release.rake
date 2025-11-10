@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "English"
+
 namespace :pb_release do
   desc "Update the version number in preparation to release"
   task :version do
@@ -76,6 +78,16 @@ namespace :pb_release do
     puts "Commit your changes and create a PR to merge to master"
   end
 
+  def npm_whoami_or_abort!
+    puts "\nChecking npm authentication..."
+    whoami_output = `npm whoami --registry https://registry.npmjs.org 2>&1`.strip
+    if $CHILD_STATUS.success? && !whoami_output.empty?
+      puts "✅ Confirmed logged in to npm as #{whoami_output}"
+    else
+      abort "🚫 Not logged in to npmjs. Please run:\n  npm login --registry https://registry.npmjs.org --auth-type=web"
+    end
+  end
+
   desc "Publish to RubyGems & NPM"
   task :push do
     dryrun = ARGV.include? "-d"
@@ -87,6 +99,8 @@ namespace :pb_release do
     puts "You about to release version #{version} | #{npm_version} (NPM). Is that correct? (y/N)"
     input = $stdin.gets.chomp
     raise Nope unless input.casecmp("y").zero?
+
+    npm_whoami_or_abort!
 
     # NPM Packaging
     puts "\nGenerating distribution files"
@@ -114,7 +128,13 @@ namespace :pb_release do
       `rm -rf dist/app  dist/pb_doc_helper.rb`
       puts "\nPublishing to NPM..."
       npm_suffix = looks_like_alpha ? "--tag alpha" : ""
-      `npm publish --registry https://registry.npmjs.org playbook-ui-#{npm_version}.tgz #{npm_suffix}`
+      cmd = "npm publish --registry https://registry.npmjs.org playbook-ui-#{npm_version}.tgz #{npm_suffix}"
+      puts "$ #{cmd}"
+      puts "A browser prompt may open for WebAuthn (Touch ID / YubiKey / passkey)..."
+      success = system(cmd)
+
+      abort "npm publish failed. If no browser prompt appeared, try running the same command manually:\n  #{cmd}" unless success
+
       puts "\nPublished to NPM. Now lets clean up..."
       `rm -rf playbook-ui-*.tgz`
     end
