@@ -182,6 +182,33 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
     }
   }
 
+  const positionCalendarIfNeeded = (fp: Instance) => {
+    const cal = document.querySelector(`#cal-${pickerId}`) as HTMLElement
+    if (!cal) return
+
+    const inputRect = fp.input.getBoundingClientRect()
+    const h = cal.getBoundingClientRect().height || 300
+    const spaceBelow = window.innerHeight - inputRect.bottom
+    const spaceAbove = inputRect.top
+
+    if (spaceBelow < h + 10 && spaceAbove >= h + 10) {
+      if (staticPosition) {
+        cal.style.top = 'auto'
+        cal.style.bottom = 'calc(100% + 5px)'
+      } else {
+        cal.style.position = 'fixed'
+        cal.style.top = `${Math.max(10, inputRect.top - h - 5)}px`
+        cal.style.left = `${inputRect.left}px`
+      }
+    } else if (staticPosition) {
+      cal.style.top = ''
+      cal.style.bottom = ''
+    } else {
+      Object.assign(cal.style, { position: '', top: '', left: '', bottom: '', right: '', transform: '' })
+      fp._positionCalendar()
+    }
+  }
+
   const setPlugins = (thisRangesEndToday: boolean, customQuickPickDates: any) => {
     const pluginList = []
 
@@ -239,6 +266,9 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
     }
   }
 
+  // Store resize / position handler reference for cleanup
+  let resizeRepositionHandlerRef: (() => void) | null = null
+
   // ===========================================================
   // |             Flatpickr initializer w/ config             |
   // ===========================================================
@@ -260,13 +290,24 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
     minDate: setMinDate,
     mode,
     nextArrow: '<i class="far fa-angle-right"></i>',
-    onOpen: [() => {
+    onOpen: [(_selectedDates, _dateStr, fp) => {
       calendarResizer()
-      window.addEventListener('resize', calendarResizer)
+      if (resizeRepositionHandlerRef) {
+        window.removeEventListener('resize', resizeRepositionHandlerRef)
+      }
+      resizeRepositionHandlerRef = () => {
+        calendarResizer()
+        positionCalendarIfNeeded(fp)
+      }
+      window.addEventListener('resize', resizeRepositionHandlerRef)
       if (!staticPosition && scrollContainer) attachToScroll(scrollContainer)
+      positionCalendarIfNeeded(fp)
     }],
     onClose: [(selectedDates, dateStr) => {
-      window.removeEventListener('resize', calendarResizer)
+      if (resizeRepositionHandlerRef) {
+        window.removeEventListener('resize', resizeRepositionHandlerRef)
+        resizeRepositionHandlerRef = null
+      }
       if (!staticPosition && scrollContainer) detachFromScroll(scrollContainer as HTMLElement)
       onClose(selectedDates, dateStr)
     }],
