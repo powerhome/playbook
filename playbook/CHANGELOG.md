@@ -1,8 +1,10 @@
-# 15.4.0
+# 🗓️ New Quick Picks: Today, Yesterday, This Week? Now!
 
 ##### November 10, 2025
 
 ![release_image](https://github.com/user-attachments/assets/db119637-25e9-4157-9091-c5f7fdf034fc)
+
+Meet the updated DatePicker Quick Pick as well as the all-new Dropdown Quick Pick! Streamlined, consistent, and built to work with the 3-input range pattern!
 
 [15.4.0](https://github.com/powerhome/playbook/tree/15.4.0) full list of changes:
 
