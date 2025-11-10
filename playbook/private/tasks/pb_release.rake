@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'English'
+require "English"
 
 namespace :pb_release do
   desc "Update the version number in preparation to release"
