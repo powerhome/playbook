@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'English'
+
 namespace :pb_release do
   desc "Update the version number in preparation to release"
   task :version do
@@ -79,7 +81,7 @@ namespace :pb_release do
   def npm_whoami_or_abort!
     puts "\nChecking npm authentication..."
     whoami_output = `npm whoami --registry https://registry.npmjs.org 2>&1`.strip
-    if $?.success? && !whoami_output.empty?
+    if $CHILD_STATUS.success? && !whoami_output.empty?
       puts "✅ Confirmed logged in to npm as #{whoami_output}"
     else
       abort "🚫 Not logged in to npmjs. Please run:\n  npm login --registry https://registry.npmjs.org --auth-type=web"
@@ -131,9 +133,7 @@ namespace :pb_release do
       puts "A browser prompt may open for WebAuthn (Touch ID / YubiKey / passkey)..."
       success = system(cmd)
 
-      unless success
-        abort "npm publish failed. If no browser prompt appeared, try running the same command manually:\n  #{cmd}"
-      end
+      abort "npm publish failed. If no browser prompt appeared, try running the same command manually:\n  #{cmd}" unless success
 
       puts "\nPublished to NPM. Now lets clean up..."
       `rm -rf playbook-ui-*.tgz`
