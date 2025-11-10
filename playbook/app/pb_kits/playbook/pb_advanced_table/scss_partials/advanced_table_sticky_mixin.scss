@@ -52,7 +52,7 @@
     }
   }
 
-  .bg-white {
+  .pb-bg-row-white {
     td:first-child,
     .sticky-left {
       background-color: $bg-main;
@@ -63,7 +63,7 @@
     &.bg-silver td:first-child {
       background-color: $bg-secondary;
     }
-    &.bg-white td:first-child {
+    &.pb-bg-row-white td:first-child {
       background-color: $bg-main;
     }
     &.bg-row-selection td:first-child {

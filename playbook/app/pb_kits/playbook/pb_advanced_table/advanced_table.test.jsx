@@ -308,10 +308,10 @@ test("Row toggle button exists and toggles subrows open and closed", () => {
   const kit = screen.getByTestId(testId)
   const rowButton = kit.querySelector(".gray-icon.expand-toggle-icon")
   expect(rowButton).toBeInTheDocument()
-  const subRow1 = kit.querySelector(".bg-white.depth-sub-row-1")
+  const subRow1 = kit.querySelector(".pb-bg-row-white.depth-sub-row-1")
   expect(subRow1).not.toBeInTheDocument()
   rowButton.click()
-  const subRow = kit.querySelector(".bg-white.depth-sub-row-1")
+  const subRow = kit.querySelector(".pb-bg-row-white.depth-sub-row-1")
   expect(subRow).toBeInTheDocument()
 })
 
@@ -328,13 +328,13 @@ test("toggleExpansionAll button exists and toggles subrows open and closed", asy
   const toggleButton = kit.querySelector(".gray-icon.toggle-all-icon");
   expect(toggleButton).toBeInTheDocument();
 
-  const subRow1 = kit.querySelector(".bg-white.depth-sub-row-1");
+  const subRow1 = kit.querySelector(".pb-bg-row-white.depth-sub-row-1");
   expect(subRow1).not.toBeInTheDocument();
 
   toggleButton.click();
 
   await waitFor(() => {
-    const subRow = kit.querySelector(".bg-white.depth-sub-row-1");
+    const subRow = kit.querySelector(".pb-bg-row-white.depth-sub-row-1");
     expect(subRow).toBeInTheDocument();
   })
 })
@@ -385,7 +385,7 @@ test("expandControl prop works as expected", () => {
   render (<AdvancedTableExpandControl/>)
 
   const kit = screen.getByTestId(testId)
-  const subRow = kit.querySelector(".bg-white.depth-sub-row-1")
+  const subRow = kit.querySelector(".pb-bg-row-white.depth-sub-row-1")
   expect(subRow).toBeInTheDocument()
 })
 

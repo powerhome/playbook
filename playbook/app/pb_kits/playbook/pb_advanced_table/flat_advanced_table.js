@@ -51,7 +51,7 @@ export default class PbFlatAdvancedTable extends PbEnhancedElement {
 
         const tr = rowCb.closest("tr");
         tr?.classList.toggle("bg-row-selection", rowCb.checked);
-        tr?.classList.toggle("bg-white", !rowCb.checked);
+        tr?.classList.toggle("pb-bg-row-white", !rowCb.checked);
       }
 
       if (allCb) {
@@ -62,7 +62,7 @@ export default class PbFlatAdvancedTable extends PbEnhancedElement {
           cb.checked = checked;
           const tr = cb.closest("tr");
           tr?.classList.toggle("bg-row-selection", checked);
-          tr?.classList.toggle("bg-white", !checked);
+          tr?.classList.toggle("pb-bg-row-white", !checked);
           const id = cb.id;
           if (checked) this.selectedRows.add(id);
           else this.selectedRows.delete(id);

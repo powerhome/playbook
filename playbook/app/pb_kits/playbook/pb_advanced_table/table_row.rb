@@ -39,7 +39,7 @@ module Playbook
       end
 
       def classname
-        generate_classname("pb_table_tr", "bg-white", subrow_depth_classname, separator: " ")
+        generate_classname("pb_table_tr", "pb-bg-row-white", subrow_depth_classname, separator: " ")
       end
 
       def td_classname(column, index)
