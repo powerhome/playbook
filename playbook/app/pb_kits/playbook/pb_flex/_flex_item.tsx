@@ -2,6 +2,7 @@ import React from 'react'
 import classnames from 'classnames'
 import { buildCss, buildHtmlProps } from '../utilities/props'
 import { globalProps, GlobalProps, globalInlineProps} from '../utilities/globalProps'
+
 type FlexItemPropTypes = {
   children: React.ReactNode[] | React.ReactNode,
   fixedSize?: string,
@@ -28,22 +29,28 @@ const FlexItem = (props: FlexItemPropTypes): React.ReactElement => {
     alignSelf,
     displayFlex
   } = props
+  
   const growClass = grow === true ? 'pb_flex_item_kit_grow' : ''
   const displayFlexClass = displayFlex === true ? 'pb_flex_item_kit_display_flex' : ''
   const flexClass = flex !== 'none' ? `pb_flex_item_kit_flex_${flex}` : ''
   const shrinkClass = shrink === true ? 'pb_flex_item_kit_shrink' : ''
   const alignSelfClass = alignSelf ? `pb_flex_item_kit_align_self_${alignSelf}` : ''
-  const fixedStyle =
-    fixedSize !== undefined ? { flexBasis: `${fixedSize}` } : null
+  const fixedStyle = fixedSize !== undefined ? { flexBasis: `${fixedSize}` } : null
   const orderClass = order !== 'none' ? `pb_flex_item_kit_order_${order}` : ''
   const dynamicInlineProps = globalInlineProps(props)
+
+// Extract style from htmlOptions and remove it
+  const { style: htmlStyle, ...htmlOptionsWithoutStyle } = htmlOptions
+  const htmlStyleObj = htmlStyle && typeof htmlStyle === 'object' ? htmlStyle : {}
+  
+  // Merge all styles
   const combinedStyles = {
+    ...htmlStyleObj,
     ...fixedStyle,
     ...dynamicInlineProps
   }
 
-  const htmlProps = buildHtmlProps(htmlOptions)
-
+  const htmlProps = buildHtmlProps(htmlOptionsWithoutStyle)
 
   return (
     <div

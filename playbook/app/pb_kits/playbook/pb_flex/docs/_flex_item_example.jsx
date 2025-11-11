@@ -15,6 +15,7 @@ const FlexItemExample = (props) => {
         <FlexItem
             displayFlex
             gap="xs"
+            htmlOptions={{style: {padding:"2px"}}}
             {...props}
         >
           <FlexItem>
