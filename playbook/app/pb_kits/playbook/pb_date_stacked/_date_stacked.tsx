@@ -19,6 +19,7 @@ type DateStackedProps = {
   size?: "sm" | "md";
   id?: string;
   reverse?: boolean;
+  showCurrentYear?: boolean;
 };
 
 const sizes: {sm: 4, md: 3} = {
@@ -37,6 +38,7 @@ const DateStacked = (props: DateStackedProps): React.ReactElement => {
     data={},
     htmlOptions={},
     size = "sm",
+    showCurrentYear = false,
   } = props;
   const classes = classnames(
     buildCss("pb_date_stacked_kit", align, size, {
@@ -55,7 +57,7 @@ const DateStacked = (props: DateStackedProps): React.ReactElement => {
   return (
     <>
       {bold == false ? (
-        <div 
+        <div
             {...dataProps}
             {...htmlProps}
             className={classes}
@@ -68,10 +70,10 @@ const DateStacked = (props: DateStackedProps): React.ReactElement => {
                 text={DateTime.toDay(date).toString()}
             />
           </div>
-          {currentYear != inputYear && <Caption size="xs">{inputYear}</Caption>}
+          {(currentYear != inputYear || showCurrentYear) && <Caption size="xs">{inputYear}</Caption>}
         </div>
       ) : (
-          <div 
+          <div
               {...dataProps}
               {...htmlProps}
               className={classes}
@@ -89,7 +91,7 @@ const DateStacked = (props: DateStackedProps): React.ReactElement => {
                   size="4"
                   text={DateTime.toDay(date).toString()}
               />
-              {currentYear != inputYear && <Title size="4">{inputYear}</Title>}
+              {(currentYear != inputYear || showCurrentYear) && <Title size="4">{inputYear}</Title>}
             </div>
           </div>
       )}

@@ -15,7 +15,7 @@ const DateStackedDefault = (props) => {
       <br />
 
       <DateStacked
-          date={new Date()}
+          date={new Date('20 Mar 2018')}
           size="md"
           {...props}
       />

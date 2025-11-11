@@ -4,16 +4,15 @@
 
       <div class="pb_date_stacked_day_month">
         <%= pb_rails("caption", props: { text: object.month }) %>
-        <%= pb_rails("title", props: { text: object.day , size: object.title_size }) do %><% end %>
+        <%= pb_rails("title", props: { text: object.day , size: object.title_size }) %>
         <%= pb_rails("caption", props: { text: object.year, size:"xs" }) %>
       </div>
 
     <% else %>
       <div class="pb_date_stacked_day_month">
         <%= pb_rails("title", props: { text: object.month, size: 4 }) %>
-        <%= pb_rails("title", props: { text: object.day, size: 4 }) do %><% end %>
+        <%= pb_rails("title", props: { text: object.day, size: 4 }) %>
         <%= pb_rails("title", props: { text: object.year, size:4 }) %>
-
       </div>
 
     <% end %>

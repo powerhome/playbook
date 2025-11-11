@@ -126,7 +126,7 @@ export default class PbDropdown extends PbEnhancedElement {
         .label.toString()
         .toLowerCase();
 
-      // hide or show option
+    // hide or show option
       const match = label.includes(lcTerm);
       opt.style.display = match ? "" : "none";
       if (match) hasMatch = true

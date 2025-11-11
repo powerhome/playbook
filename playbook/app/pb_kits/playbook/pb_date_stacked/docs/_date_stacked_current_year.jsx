@@ -1,12 +1,13 @@
 import React from 'react'
 import DateStacked from '../_date_stacked'
 
-const DateStackedNotCurrentYear = (props) => {
+const DateStackedCurrentYear = (props) => {
   return (
     <div>
 
       <DateStacked
-          date={new Date('20 Mar 2018')}
+          date={new Date()}
+          showCurrentYear
           size="sm"
           {...props}
       />
@@ -14,13 +15,13 @@ const DateStackedNotCurrentYear = (props) => {
       <br />
 
       <DateStacked
-          date={new Date('20 Mar 2018')}
+          date={new Date()}
+          showCurrentYear
           size="md"
           {...props}
       />
-
     </div>
   )
 }
 
-export default DateStackedNotCurrentYear
+export default DateStackedCurrentYear

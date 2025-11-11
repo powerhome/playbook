@@ -16,6 +16,8 @@ module Playbook
                   default: false
       prop :bold, type: Playbook::Props::Boolean,
                   default: false
+      prop :show_current_year, type: Playbook::Props::Boolean,
+                               default: false
 
       def classname
         generate_classname("pb_date_stacked_kit", align, size, reverse_class, dark_class)
@@ -37,11 +39,15 @@ module Playbook
       end
 
       def year
-        current_year = DateTime.now.year.to_i
-        year = Playbook::PbKit::PbDateTime.new(date).to_year.to_i
-        if current_year != year
-          content_tag(:time, datetime: year) do
-            year.to_s
+        if show_current_year
+          Playbook::PbKit::PbDateTime.new(date).to_year.to_s
+        else
+          current_year = DateTime.now.year.to_i
+          year = Playbook::PbKit::PbDateTime.new(date).to_year.to_i
+          if current_year != year
+            content_tag(:time, datetime: year) do
+              year.to_s
+            end
           end
         end
       end
