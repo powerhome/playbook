@@ -18,6 +18,8 @@ examples:
   - subtle_horizontal_nav: Subtle Horizontal Nav
   - bold_horizontal_nav: Bold Horizontal Nav
   - horizontal_nav_extendedunderline: Horizontal Nav With Extended Underline
+  - horizontal_nav_disabled: Horizontal Nav With Disabled Item
+  - vertical_nav_disabled: Vertical Nav With Disabled Item
   - block_nav: Block
   - block_no_title_nav: Without Title
   - new_tab: Open in a New Tab
@@ -44,6 +46,8 @@ examples:
   - subtle_horizontal_nav: Subtle Horizontal Nav
   - bold_horizontal_nav: Bold Horizontal Nav
   - horizontal_nav_extendedunderline: Horizontal Nav With Extended Underline
+  - horizontal_nav_disabled: Horizontal Nav With Disabled Item
+  - vertical_nav_disabled: Vertical Nav With Disabled Item
   - block_nav: Block
   - block_no_title_nav: Without Title
   - new_tab: Open in a New Tab

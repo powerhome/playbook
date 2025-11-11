@@ -44,7 +44,7 @@ $selector: ".pb_nav_list";
         transition-duration: 0.15s;
         transition-timing-function: $bezier;
         @media (hover: hover) {
-          &:hover {
+          &:hover:not(.pb_nav_item_disabled) {
             background-color: rgba($primary, 0.03);
             [class*="_icon"] {
               color: $primary;

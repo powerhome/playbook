@@ -1,0 +1,1 @@
+Use the `disabled` prop on a `navItem`/`nav_item` within a vertical nav to set it as disabled. This will render the UI as disabled, prevent clicks and not allow for tabIndex to access the item. 

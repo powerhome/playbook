@@ -45,16 +45,18 @@
 
   [class*="pb_nav_list_kit_item"],
   [class*="pb_nav_list_item"] {
-    &:hover { cursor: pointer; }
+    &:hover {
+      cursor: pointer;
+    }
   }
 }
 
 .pb_nav_extended_underline {
   position: relative;
-  
+
   // Add full-width border using pseudo-element so as not to break the active item border
   &::after {
-    content: '';
+    content: "";
     position: absolute;
     bottom: 0;
     left: 0;
@@ -65,13 +67,36 @@
   }
 
   .pb_nav_list_kit_item_active.pb_nav_list_item_link {
-      position: relative;
-      z-index: 2;
+    position: relative;
+    z-index: 2;
   }
 
   &.dark {
     &::after {
       background-color: rgba($white, $opacity_3);
+    }
+  }
+}
+
+// Disabled scss
+.pb_nav_item_disabled {
+  cursor: not-allowed !important;
+  .pb_nav_list_item_text, 
+  .pb_nav_list_item_icon_left,
+  .pb_nav_list_item_icon_right,
+  .pb_nav_list_item_icon_section {
+    color: $text_lt_lighter !important;
+    cursor: not-allowed !important;
+  }
+  @media (hover: hover) {
+    &:hover {
+      background-color: unset !important;
+      color: $text_lt_lighter !important;
+      .pb_nav_list_item_text,
+      .pb_nav_list_item_icon_left,
+      .pb_nav_list_item_icon_right {
+        color: $text_lt_lighter !important;
+      }
     }
   }
 }

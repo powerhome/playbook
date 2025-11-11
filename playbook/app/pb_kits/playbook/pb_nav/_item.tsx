@@ -43,6 +43,7 @@ type NavItemProps = {
   marginLeft?: Spacing;
   marginX?: Spacing;
   marginY?: Spacing;
+  disabled?: boolean;
 } & GlobalProps;
 
 const NavItem = (props: NavItemProps) => {
@@ -89,6 +90,7 @@ const NavItem = (props: NavItemProps) => {
     marginLeft,
     marginX,
     marginY,
+    disabled = false,
   } = props;
 
   const spacingMarginProps = {
@@ -140,11 +142,12 @@ const { filteredPadding, filteredMargin } = filterItemSpacing(itemSpacing);
   delete filteredProps?.marginLeft;
 
 
-  const isLink = !!link
+  const isLink = !!link && !disabled
   const Tag = isLink ? "a" : "div"
   const activeClass = active === true ? "active" : "";
   const highlightedBorderClass = active === true && highlighted_border === false ? "highlighted_border_none" : "";
   const collapsibleTrailClass = collapsible && collapsibleTrail ? "collapsible_trail" : "";
+  const disabledClass = disabled ? "pb_nav_item_disabled" : "";
 
   const fontSizeMapping = {
     "small": "font_size_small",
@@ -177,6 +180,7 @@ const { filteredPadding, filteredMargin } = filterItemSpacing(itemSpacing);
     fontWeightClass,
     tagClasses,
     collapsible ? globalProps(filteredProps, {...filteredPadding}) : globalProps(props, {...itemSpacing}),
+    disabledClass,
     className
   );
 
@@ -202,10 +206,19 @@ const { filteredPadding, filteredMargin } = filterItemSpacing(itemSpacing);
   const collapsibleClasses = buildCss("collapsible_nav_wrapper", activeClass, highlightedBorderClass, collapsibleTrailClass)
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (!isLink && (e.key === "Enter" || e.key === " ")) {
+    if (!disabled && !isLink && (e.key === "Enter" || e.key === " ")) {
       e.preventDefault()
       onClick?.()
     }
+  }
+
+  const handleClick = (e: React.MouseEvent) => {
+    if (disabled) {
+      e.preventDefault()
+      e.stopPropagation()
+      return
+    }
+    onClick?.()
   }
 
   return (
@@ -275,13 +288,14 @@ const { filteredPadding, filteredMargin } = filterItemSpacing(itemSpacing);
             {...ariaProps}
             {...dataProps}
             {...htmlProps}
+            aria-disabled={disabled}
             className={classes}
             href={isLink ? link : undefined}
             id={id}
-            onClick={onClick}
+            onClick={handleClick}
             onKeyDown={!isLink ? handleKeyDown : undefined}
             role={!isLink ? "button" : undefined}
-            tabIndex={!isLink ? 0 : undefined}
+            tabIndex={disabled ? -1 : (!isLink ? 0 : undefined)}
             target={isLink ? target : undefined}
         >
           {imageUrl && (
