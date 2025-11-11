@@ -70,22 +70,36 @@
   <%= javascript_tag do %>
     (function() {
       const loadDatePicker = () => {
-        datePickerHelper(<%= object.date_picker_config %>, "<%= object.scroll_container %>")
+        const input = document.getElementById("<%= object.picker_id %>");
+        if (input && !input._flatpickr) {
+          datePickerHelper(<%= object.date_picker_config %>, "<%= object.scroll_container %>")
 
-        if (<%= object.selection_type == "quickpick" %>) {
-          document.getElementById("<%= object.picker_id %>").addEventListener("change", ({ target }) => {
-            const startDate = document.getElementById("<%= object.start_date_id %>")
-            const endDate = document.getElementById("<%= object.end_date_id %>")
-            const splittedValue = target.value.split(" to ")
-            startDate.value = splittedValue[0]
-            endDate.value = splittedValue[1] ? splittedValue[1] : splittedValue[0]
-          })
+          if (<%= object.selection_type == "quickpick" %>) {
+            document.getElementById("<%= object.picker_id %>").addEventListener("change", ({ target }) => {
+              const startDate = document.getElementById("<%= object.start_date_id %>")
+              const endDate = document.getElementById("<%= object.end_date_id %>")
+              const splittedValue = target.value.split(" to ")
+              startDate.value = splittedValue[0]
+              endDate.value = splittedValue[1] ? splittedValue[1] : splittedValue[0]
+            })
+          }
         }
       }
 
-      window.addEventListener("DOMContentLoaded", () => {
+      // Try to initialize immediately if DOM is ready
+      if (document.readyState === "loading") {
+        window.addEventListener("DOMContentLoaded", loadDatePicker)
+      } else {
         loadDatePicker()
-      })
+      }
+
+      // For dynamically added content (modals, etc.), check again after a brief delay
+      setTimeout(() => {
+        const input = document.getElementById("<%= object.picker_id %>");
+        if (input && !input._flatpickr) {
+          loadDatePicker();
+        }
+      }, 100);
 
       if (<%= !object.custom_event_type.empty? %>) {
         window.addEventListener("<%= object.custom_event_type %>", () => {
