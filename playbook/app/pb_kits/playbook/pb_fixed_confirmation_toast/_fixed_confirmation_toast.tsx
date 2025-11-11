@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import classnames from "classnames";
 
 import { globalProps, GlobalProps } from "../utilities/globalProps";
@@ -36,6 +36,7 @@ type FixedConfirmationToastProps = {
 
 const FixedConfirmationToast = (props: FixedConfirmationToastProps): React.ReactElement => {
   const [showToast, toggleToast] = useState(true);
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   const {
     autoClose = 0,
@@ -67,21 +68,42 @@ const FixedConfirmationToast = (props: FixedConfirmationToastProps): React.React
 
   const htmlProps = buildHtmlProps(htmlOptions);
 
-  const autoCloseToast = () => {
-    if (autoClose && open) {
-      setTimeout(() => {
-        toggleToast(false);
-        onClose();
-      }, autoClose);
-    }
-  };
-
   useEffect(() => {
     toggleToast(open);
-    autoCloseToast();
   }, [open]);
 
+  // Manage auto-close timeout separately
+  useEffect(() => {
+    // Clear any existing timeout
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+      timeoutRef.current = null;
+    }
+
+    // Set new timeout if autoClose is enabled and toast is open
+    if (autoClose && open && showToast) {
+      timeoutRef.current = setTimeout(() => {
+        toggleToast(false);
+        onClose();
+        timeoutRef.current = null;
+      }, autoClose);
+    }
+
+    // Cleanup function to clear timeout on unmount or when dependencies change
+    return () => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+        timeoutRef.current = null;
+      }
+    };
+  }, [autoClose, open, showToast, onClose]);
+
   const handleClick = () => {
+    // Clear autoClose timeout when manually closing
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+      timeoutRef.current = null;
+    }
     toggleToast(!closeable);
     onClose();
   };
