@@ -1,0 +1,1 @@
+In order to use this kit, 'highcharts' and 'highcharts-react-official' must be installed in your repo.
