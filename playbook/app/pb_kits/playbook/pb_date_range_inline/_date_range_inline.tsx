@@ -19,6 +19,7 @@ type DateRangeInlineProps = {
   icon?: boolean;
   id?: string;
   size?: "sm" | "xs";
+  showCurrentYear?: boolean;
   startDate?: Date;
 };
 
@@ -45,6 +46,7 @@ const DateRangeInline = (props: DateRangeInlineProps): React.ReactElement => {
     icon = false,
     size = "sm",
     startDate,
+    showCurrentYear = false,
   } = props;
 
   const dateInCurrentYear = () => {
@@ -60,13 +62,10 @@ const DateRangeInline = (props: DateRangeInlineProps): React.ReactElement => {
   const htmlProps = buildHtmlProps(htmlOptions);
   
   const renderTime = (date: Date) => {
+    const includeYear = showCurrentYear || !dateInCurrentYear();
     return (
       <time dateTime={dateTimeIso(date)}>
-        {dateInCurrentYear() ? (
-          ` ${dateTimestamp(date, false)} `
-        ) : (
-          ` ${dateTimestamp(date, true)} `
-        )}
+        {` ${dateTimestamp(date, includeYear)} `}
       </time>
     );
   };
@@ -83,7 +82,8 @@ const DateRangeInline = (props: DateRangeInlineProps): React.ReactElement => {
             {icon && (
               <Caption 
                   dark={dark} 
-                  tag="span">
+                  tag="span"
+              >
                 <Icon
                     className="pb_date_range_inline_icon"
                     dark={dark}
@@ -96,12 +96,14 @@ const DateRangeInline = (props: DateRangeInlineProps): React.ReactElement => {
             )}
             <Caption 
                 dark={dark} 
-                tag="span">
+                tag="span"
+            >
               {renderTime(startDate)}
             </Caption>
             <Caption 
                 dark={dark} 
-                tag="span">
+                tag="span"
+            >
               <Icon
                   className="pb_date_range_inline_arrow"
                   dark={dark}
@@ -112,7 +114,8 @@ const DateRangeInline = (props: DateRangeInlineProps): React.ReactElement => {
             </Caption>
             <Caption 
                 dark={dark} 
-                tag="span">
+                tag="span"
+            >
               {renderTime(endDate)}
             </Caption>
           </>
@@ -124,7 +127,8 @@ const DateRangeInline = (props: DateRangeInlineProps): React.ReactElement => {
               <Body 
                   color={"light"} 
                   dark={dark}
-                  tag="span">
+                  tag="span"
+              >
                 <Icon
                     className="pb_date_range_inline_icon"
                     dark={dark}
@@ -137,13 +141,15 @@ const DateRangeInline = (props: DateRangeInlineProps): React.ReactElement => {
             )}
             <Body 
                 dark={dark} 
-                tag="span">
+                tag="span"
+            >
               {renderTime(startDate)}
             </Body>
             <Body 
                 color={"light"} 
                 dark={dark} 
-                tag="span">
+                tag="span"
+            >
               <Icon
                   className="pb_date_range_inline_arrow"
                   dark={dark}
@@ -154,7 +160,8 @@ const DateRangeInline = (props: DateRangeInlineProps): React.ReactElement => {
             </Body>
             <Body 
                 dark={dark} 
-                tag="span">
+                tag="span"
+            >
               {renderTime(endDate)}
             </Body>
           </>

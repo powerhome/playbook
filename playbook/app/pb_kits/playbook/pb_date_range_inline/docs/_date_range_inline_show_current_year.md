@@ -1,0 +1,1 @@
+By default, the Date Range Inline kit does NOT display the year if it is the current year. If you want to display the current year you can do so by setting `showCurrentYear`/`show_current_year` to true as shown here. 
