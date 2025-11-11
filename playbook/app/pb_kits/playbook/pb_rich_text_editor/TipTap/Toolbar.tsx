@@ -96,7 +96,7 @@ const EditorToolbar = ({ editor, extensions, simple, sticky }: any): React.React
             <SectionSeparator orientation="vertical" />
             <ToolbarNodes editor={editor} />
             {
-              extensions && (
+              extensions && extensions.length > 0 && (
                 <>
                   <MoreExtensionsDropdown extensions={extensions}/>
                 </>
