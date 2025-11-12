@@ -1,0 +1,1 @@
+Remove the "$" symbol by setting an empty string: `symbol=""`.
