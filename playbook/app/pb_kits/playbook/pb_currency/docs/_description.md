@@ -1,2 +1,2 @@
-Use to display monetary amounts, typically on dashboards or other layouts to show an overview or summary. User understanding increase when paired with labels. 
-Cents is automatically ".00" unless other wise overwritten (i.e. unit prop).
+Use this kit to display monetary amounts, typically on dashboards or other layouts to show an overview or summary. Pairing it with labels improves user understanding.
+Cents are automatically ".00" unless otherwise overwritten (i.e. `unit` prop).
