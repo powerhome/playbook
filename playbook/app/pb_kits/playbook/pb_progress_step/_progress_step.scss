@@ -4,292 +4,411 @@
 @import "../tokens/opacity";
 @import "../tokens/typography";
 
+.pb_progress_step_kit_horizontal.dark,
+.pb_progress_step_kit_vertical.dark,
+.pb_progress_step_kit_horizontal_icon.dark,
+.pb_progress_step_kit_vertical_icon.dark {
+  .pb_progress_step_item_inactive,
+  .pb_progress_step_item_active,
+  .pb_progress_step_item_complete,
+  .pb_progress_step_item_hidden {
+    &::before {
+      background-color: tint($bg_dark, 20%);
+    }
+  }
 
+  .circle {
+    box-shadow: 0 0 0 2px tint($bg_dark, 10%) !important;
+  }
 
-[class^=pb_progress_step_kit]{
-    list-style:none;
+  .pb_progress_step_item_inactive {
+    .circle,
+    &::before {
+      background-color: tint($bg_dark, 20%);
+    }
+  }
+
+  .pb_progress_step_item_complete {
+    .circle,
+    &::before {
+      background-color: $primary;
+    }
+  }
+  .pb_progress_step_item_active {
+    .circle {
+      background-color: tint($bg_dark, 10%);
+    }
+  }
+}
+
+.pb_progress_step_kit_horizontal.dark,
+.pb_progress_step_kit_horizontal_icon.dark {
+  .pb_progress_step_item_active {
+    &::before {
+      background-color: $primary;
+    }
+  }
+}
+
+//--------- Show icon on active and complete steps ----------
+.pb_progress_step_kit_horizontal_icon,
+.pb_progress_step_kit_vertical_icon,
+.pb_progress_step_kit_horizontal_icon_tracker,
+.pb_progress_step_kit_horizontal_icon_tracker_info {
+  .pb_progress_step_item_complete,
+  .pb_progress_step_item_active {
+    .box .circle svg {
+      opacity: 1;
+    }
+  }
+}
+
+//---------- Start of Horizontal ----------
+.pb_progress_step_kit_horizontal,
+.pb_progress_step_kit_horizontal_icon,
+.pb_progress_step_kit_horizontal_tracker,
+.pb_progress_step_kit_horizontal_icon_tracker,
+.pb_progress_step_kit_horizontal_tracker_info,
+.pb_progress_step_kit_horizontal_icon_tracker_info {
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+
+  .pb_progress_step_item_inactive,
+  .pb_progress_step_item_active,
+  .pb_progress_step_item_complete,
+  .pb_progress_step_item_hidden {
     display: flex;
-  [class*=pb_progress_step_item] {
-    display:flex;
-    flex-direction:column;
+    flex-direction: column;
+    position: relative;
+    flex-basis: 100%;
+    align-items: flex-end;
+
+    .circle {
+      height: 14px;
+      width: 14px;
+      border-radius: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 3;
+      box-shadow: 0 0 0 2px $white;
+
+      svg {
+        width: 10px;
+        height: 10px;
+        opacity: 0;
+        color: $white;
+      }
+    }
+
+    &::before {
+      content: "";
+      height: 4px;
+      position: absolute;
+      top: 5px;
+      width: calc(100% + 0.04em);
+      background-color: $border_light;
+    }
+
+    &:last-child::after,
+    &:first-child::before {
+      display: none;
+    }
+
+    &:first-child {
+      position: relative;
+      align-items: flex-start;
+      flex-basis: 0;
+
+      .box {
+        align-items: flex-start;
+      }
+    }
+
+    &:last-child {
+      .box {
+        align-items: flex-end;
+      }
+    }
+
+    .box {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      .content {
+        top: 16px;
+        position: absolute;
+        width: fit-content;
+        min-width: max-content;
+      }
+    }
+  }
+
+  .pb_progress_step_item_inactive {
+    .circle {
+      background-color: $border_light;
+      color: $border_light;
+    }
+  }
+
+  .pb_progress_step_item_active {
+    .circle {
+      background-color: $white;
+      border: solid 2px $primary;
+      color: rgba($primary, 0);
+    }
+
+    &::before {
+      background-color: $primary;
+    }
+  }
+
+  .pb_progress_step_item_complete {
+    .circle {
+      background-color: $primary;
+      color: $white;
+    }
+
+    &::before {
+      background-color: $primary;
+    }
+  }
+}
+
+//---------- Start of Tracker ----------
+.pb_progress_step_kit_horizontal_tracker,
+.pb_progress_step_kit_horizontal_icon_tracker,
+.pb_progress_step_kit_horizontal_tracker_info,
+.pb_progress_step_kit_horizontal_icon_tracker_info {
+  background-color: $border_light;
+  border-radius: 1rem;
+  height: 24px;
+  align-items: center;
+
+  .box {
+    .circle {
+      box-shadow: none;
+      height: 24px;
+      width: 24px;
+      border: $primary solid 4px;
+    }
+
+    .content {
+      top: -24px !important;
+      position: absolute;
+    }
+  }
+
+  li.pb_progress_step_item_inactive,
+  li.pb_progress_step_item_active,
+  li.pb_progress_step_item_complete,
+  li.pb_progress_step_item_hidden {
+    &::before {
+      background-color: $border_light;
+      height: 24px;
+      border-radius: 1rem;
+      top: 0;
+      width: calc(100% + 1.5em);
+    }
+
+    .box {
+      align-items: center;
+    }
+
+    &:first-child {
+      position: relative;
+
+      .box {
+        align-items: flex-start;
+      }
+    }
+
+    &:last-child {
+      .box {
+        align-items: flex-end;
+      }
+    }
+  }
+
+  li.pb_progress_step_item_active {
+    .circle {
+      height: 24px;
+      width: 24px;
+      border: $primary solid $border_rad_light;
+      background-color: rgba($white, $opacity_8);
+
+      svg {
+        color: darken($primary, 25%);
+      }
+    }
+
+    &::before {
+      background-color: $primary;
+    }
+  }
+
+  li.pb_progress_step_item_inactive {
+    &::before {
+      display: none;
+      background-color: $border_light;
+    }
+
+    .circle {
+      background-color: darken($border_light, 10%);
+      border: $border_light solid 6px;
+    }
+  }
+
+  li.pb_progress_step_item_complete {
+    &::before {
+      background-color: $primary;
+    }
+
+    .circle {
+      background-color: darken($primary, 25%);
+    }
+  }
+
+  li.pb_progress_step_item_hidden {
+    &::before,
+    .circle {
+      display: none;
+    }
+  }
+
+  li.pb_progress_step_item_hidden ~ li.pb_progress_step_item_active,
+  li.pb_progress_step_item_hidden ~ li.pb_progress_step_item_complete {
+    &::before {
+      width: calc(200% + 1.5em);
+    }
+  }
+}
+
+.pb_progress_step_kit_horizontal_tracker.dark,
+.pb_progress_step_kit_horizontal_icon_tracker.dark,
+.pb_progress_step_kit_horizontal_tracker_info.dark,
+.pb_progress_step_kit_horizontal_icon_tracker_info.dark {
+  background-color: tint($bg_dark, 20%);
+
+  .pb_progress_step_item_inactive {
+    .circle {
+      border-color: tint($bg_dark, 20%);
+    }
+  }
+}
+
+.pb_progress_step_kit_horizontal_tracker_info,
+.pb_progress_step_kit_horizontal_icon_tracker_info {
+  li.pb_progress_step_item_inactive .circle {
+    border-color: $border_light;
+  }
+
+  .box .circle,
+  li.pb_progress_step_item_active .circle {
+    border-color: $teal;
+  }
+
+  li.pb_progress_step_item_complete,
+  li.pb_progress_step_item_active {
+    &::before {
+      background-color: $teal;
+    }
+  }
+
+  li.pb_progress_step_item_complete .circle {
+    background-color: darken($teal, 25%);
+  }
+}
+//---------- End of Tracker ----------
+//---------- End of Horizontal ----------
+
+//---------- Start of Vertical ----------
+.pb_progress_step_kit_vertical,
+.pb_progress_step_kit_vertical_icon {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+
+  .pb_progress_step_item_inactive,
+  .pb_progress_step_item_active,
+  .pb_progress_step_item_complete,
+  .pb_progress_step_item_hidden {
+    display: flex;
+    flex-direction: column;
     position: relative;
     flex-basis: 100%;
 
     .circle {
-        height:14px;
-        width:14px;
-        border-radius:100%;  
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        z-index: 3;
-        box-shadow: 0 0 0 2px $white;
+      height: 14px;
+      width: 14px;
+      border-radius: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 3;
+      box-shadow: 0 0 0 2px $white;
+      margin: 0 8px;
 
-        svg {
-            width:10px;
-            height:10px;
-            opacity: 0;
-            color: $white;
-        }
-    }
-
-    &::before{
-        content: '';
-        height: 4px;
-        position: absolute;
-        top: 5px;
-        width:100%;
-        background-color:$border_light;
+      svg {
+        width: 10px;
+        height: 10px;
+        opacity: 0;
+        color: $white;
+      }
     }
 
-    &:last-child::after, &:first-child::before {
-        display:none;
+    &::before {
+      display: flex;
+      flex-direction: column;
+      content: "";
+      height: 100%;
+      position: absolute;
+      top: 14px;
+      left: 21px;
+      width: 4px;
+      background-color: $border_light;
     }
 
-    &[class*=_inactive]{
-        .circle{
-            background-color: $border_light;
-            color: $border_light;
-        }
-    }
-    &[class*=_active]{
-        .circle{
-            background-color: $white;
-            border: solid 2px $primary;
-            color: rgba( $primary, 0)
-        }
-        &::before{
-            background-color: $primary;
-        }
-    }
-    &[class*=_complete]{
-        .circle{
-            background-color: $primary;
-            color:$white;
-        }
-        &::before{
-            background-color: $primary;
-        }
-    }
-  }
-// Start of Horizontal
-  &[class*=horizontal]{
-    flex-direction: row;
-    [class*=pb_progress_step_item]{
-        align-items: flex-end;
-        &::before{
-            width: calc(100% + .04em);
-        }
-        [class*=box]{
-           display: flex;
-           flex-direction: column;
-           align-items: center;
-           .content{
-               top: 16px;
-               position: absolute;
-               width: fit-content;
-               min-width: max-content;
-           }
-        }
-        &:first-child {
-            position: relative;
-            align-items: flex-start;
-            flex-basis: 0;
-            .box{
-                align-items: flex-start;
-            }
-        }
-        &:last-child{
-            .box{
-                align-items: flex-end;
-            }
-    
-        }
-    }
-    // Start of Tracker
-    &[class*=tracker] {
-        background-color: $border_light;
-        border-radius: 1rem;
-        height:24px;
-        align-items: center;
-        [class*=box]{
-            .circle{
-                box-shadow: none;
-                height: 24px;
-                width: 24px;
-                border: $primary solid 4px;
-            }
-            .content{
-                top:-24px;
-                position: absolute;  
-            }
-        }
-        li[class*=pb_progress_step_item]{
-            &::before{
-                background-color: $border_light;
-                height: 24px;
-                border-radius: 1rem;
-                top: 0;
-                width: calc(100% + 1.5em);
-            }
-            .box{
-                align-items: center;
-            }
-            &:first-child{
-                position: relative;
-                .box{
-                    align-items: flex-start;
-                }
-            }
-            &:last-child{
-                .box{
-                    align-items: flex-end;
-                }
-            }
-        }
-        li[class*=_active]{
-            .circle{
-                height: 24px;
-                width: 24px;
-                border: $primary solid $border_rad_light;
-                background-color: rgba($white, $opacity_8);
-                svg {
-                    color: darken($primary,25%);
-                }
-            }
-            &::before {
-                background-color: $primary;
-            }
-        }
-        li[class*=_inactive]{
-            &::before {
-                display: none;
-                background-color: $border_light;
-            }
-            .circle{
-                background-color: darken($border_light,10%);
-                border: $border_light solid 6px;
-            }
-            
-        }
-        li[class*=_complete]{
-            &::before {
-                background-color: $primary;
-            }
-            .circle{
-                background-color: darken($primary,25%);
-            }
-        }
-        li[class*=_hidden]{
-            &::before, .circle {
-                display: none;
-            }
-        }
-        li[class*=_hidden] ~ li[class*=_active],
-        li[class*=_hidden] ~ li[class*=_complete] {
-            &::before {
-                width: calc(200% + 1.5em);
-            }
-        }
-        &[class*=dark]{
-            background-color: tint($bg_dark,20%);
-            [class*=_inactive]{
-                .circle{
-                    border-color: tint($bg_dark,20%);
-                }
-            }
-        }
-        &[class*=info]{
-            li[class*=inactive] .circle{
-                border-color: $border_light;
-            }
-            .box .circle , li[class*=_active] .circle{
-                border-color: $teal;
-            }
-            li[class*=_complete],li[class*=_active]{
-                &::before {
-                    background-color: $teal;
-                }
-            }
-            li[class*=_complete] .circle{
-                background-color: darken($teal,25%);
-            }
-        }
-    }
-    //End of Tracker
-
-  }
-// End of Horizontal
-
-// Start of Vertical
-  &[class*=vertical]{
-    flex-direction: column; 
-    [class*=pb_progress_step_item]{
-        [class*=box]{
-        display:flex;
-        flex-direction: row;
-        align-items: flex-start;
-        justify-content: flex-start;
-        margin: 8px;
-        }
-        &::before {
-            display: flex;
-            flex-direction: column;
-            content: '';
-            height: 100%;
-            position: absolute;
-            top:14px;
-            left: 21px;
-            width:4px;
-            background-color:$border_light;
-        }
-        &:last-child::before{
-            display:none;
-        }
-        .circle{
-            margin: 0 8px;
-        }
-    }
-  }
-//End of Vertical
-  &[class*=icon]{
-    [class*=progress_step_item][class*=_complete],
-    [class*=progress_step_item][class*=_active] {
-        [class*=box] .circle svg {
-            opacity: 1;
-            
-        }
-    }
+    &:last-child::after,
+    &:last-child::before {
+      display: none;
     }
 
-
-  &[class*=dark] {
-    [class*=progress_step_item]{
-        &::before{
-            background-color: tint($bg_dark,20%);
-        }
-    }
-    .circle{
-        box-shadow: 0 0 0 2px tint($bg_dark,10%);
-    }
-    [class*=active]{
-        .circle{
-            background-color: tint($bg_dark,10%);
-        }
-        &::before{
-            background-color: $primary;
-        }
-    }
-    [class*=inactive]{
-        .circle, &::before{
-           background-color: tint($bg_dark,20%);
-        }
-    }
-    [class*=complete]{
-        .circle, &::before{
-           background-color: $primary;
-        }
+    .box {
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      justify-content: flex-start;
+      margin: 8px;
     }
   }
 
+  .pb_progress_step_item_inactive {
+    .circle {
+      background-color: $border_light;
+      color: $border_light;
+    }
+  }
+
+  .pb_progress_step_item_active {
+    .circle {
+      background-color: $white;
+      border: solid 2px $primary;
+      color: rgba($primary, 0);
+    }
+  }
+
+  .pb_progress_step_item_complete {
+    .circle {
+      background-color: $primary;
+      color: $white;
+    }
+
+    &::before {
+      background-color: $primary;
+    }
+  }
 }
+//------- End of Vertical ---------

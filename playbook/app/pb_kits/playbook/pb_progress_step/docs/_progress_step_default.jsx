@@ -10,6 +10,7 @@ const ProgressStepDefault = (props) => (
         {...props}
     >
       <ProgressStepItem status="complete" />
+      <ProgressStepItem status="complete" />
       <ProgressStepItem status="active" />
       <ProgressStepItem status="inactive" />
     </ProgressStep>
