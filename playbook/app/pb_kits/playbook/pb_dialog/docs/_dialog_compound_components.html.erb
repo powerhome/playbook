@@ -1,7 +1,7 @@
 <%= pb_rails("button", props: { text: "Open Complex Dialog", data:{"open-dialog": "dialog-complex"} }) %>
 
 <%= pb_rails("dialog", props: { id:"dialog-complex", size: "lg", full_height: true }) do %>
-  <form>
+  <%= pb_form_with(scope: :example, method: :get, url: "", options: { remote: true }) do |form| %>
     <%= pb_rails("dialog/dialog_header", props: { id: "dialog-complex" } ) do %>
         <%= pb_rails("body", props: { text: "What do you need us to take care of?" }) %>
     <% end %>
@@ -13,5 +13,5 @@
 
     <% end %>
     <%= pb_rails("dialog/dialog_footer", props: {cancel_button: "Back", confirm_button: "Send my Issue", confirm_button_id:"confirm-complex", id: "dialog-complex"}) %>
-  </form>
+  <% end %>
 <% end %>
