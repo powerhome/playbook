@@ -9,6 +9,16 @@ const CurrencyNegative = (props) => {
           amount="-2,000.50"
           {...props}
       />
+      <Currency
+          amount="-2,000.50"
+          size="md"
+          {...props}
+      />
+      <Currency
+          amount="-2,000.50"
+          size="lg"
+          {...props}
+      />
     </>
   )
 }
