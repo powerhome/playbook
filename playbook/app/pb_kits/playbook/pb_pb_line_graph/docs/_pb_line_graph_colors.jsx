@@ -1,6 +1,6 @@
 import React from 'react'
 import PbLineGraph from '../../pb_pb_line_graph/_pb_line_graph'
-import { colors } from 'playbook-ui'
+import colors from '../../tokens/exports/_colors.module.scss'
 
 const data = [{
   name: 'Installation',

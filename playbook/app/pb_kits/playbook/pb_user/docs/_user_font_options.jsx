@@ -1,5 +1,5 @@
 import React from 'react'
-import { User } from 'playbook-ui'
+import User from '../../pb_user/_user'
 
 const UserFontOptions = (props) => {
   return (

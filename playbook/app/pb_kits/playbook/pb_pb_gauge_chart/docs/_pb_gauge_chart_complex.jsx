@@ -7,7 +7,8 @@ import Caption from '../../pb_caption/_caption'
 import Body from '../../pb_body/_body'
 import SectionSeparator from '../../pb_section_separator/_section_separator'
 import Title from '../../pb_title/_title'
-import { colors, typography } from 'playbook-ui'
+import colors from '../../tokens/exports/_colors.module.scss'
+import typography from '../../tokens/exports/_typography.module.scss'
 
 const data = [{ name: "Name", y: 10 }];
 

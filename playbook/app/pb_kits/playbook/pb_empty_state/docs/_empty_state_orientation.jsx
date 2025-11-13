@@ -1,5 +1,6 @@
 import React from 'react'
-import { EmptyState, Flex } from 'playbook-ui'
+import EmptyState from '../_empty_state'
+import Flex from '../../pb_flex/_flex'
 
 const EmptyStateOrientation = (props) => (
   <Flex align="center"

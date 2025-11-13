@@ -1,6 +1,8 @@
 import React from "react"
 import { useForm } from "react-hook-form"
-import { Radio, Flex, Body } from "playbook-ui"
+import Radio from "../_radio"
+import Body from "../../pb_body/_body"
+import Flex from "../../pb_flex/_flex"
 
 const RadioReactHook = () => {
   const { register, watch } = useForm({
