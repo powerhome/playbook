@@ -4,11 +4,10 @@ import ProgressStep from '../_progress_step.tsx'
 import ProgressStepItem from '../_progress_step_item.tsx'
 import Caption from '../../pb_caption/_caption'
 
-const ProgressStepColor = (props) => (
+const ProgressStepCustomIcon = (props) => (
   <div>
     <br />
     <ProgressStep 
-        color="info"
         icon 
         variant="tracker" 
         {...props}
@@ -16,7 +15,10 @@ const ProgressStepColor = (props) => (
       <ProgressStepItem status="complete">
         <Caption>{'Ordered'}</Caption>
       </ProgressStepItem>
-      <ProgressStepItem status="active">
+      <ProgressStepItem 
+          icon="exclamation-triangle"
+          status="active" 
+      >
         <Caption>{'Shipped'}</Caption>
       </ProgressStepItem>
       <ProgressStepItem status="inactive">
@@ -26,4 +28,4 @@ const ProgressStepColor = (props) => (
   </div>
 )
 
-export default ProgressStepColor
+export default ProgressStepCustomIcon

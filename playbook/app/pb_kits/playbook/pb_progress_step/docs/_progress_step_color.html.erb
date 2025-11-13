@@ -1,0 +1,14 @@
+<br><br>
+<%= pb_rails("progress_step",props:{ variant:"tracker", icon:true, color: "info"}) do %>
+  <%= pb_rails("progress_step/progress_step_item", props: {status: "complete"}) do %>
+      <%= pb_rails("caption", props:{text: "Ordered"})%>
+  <% end %>
+  <%= pb_rails("progress_step/progress_step_item", props: {status: "active"}) do %>
+      <%= pb_rails("caption", props:{text: "Shipped"})%>
+  <% end %>
+  <%= pb_rails("progress_step/progress_step_item", props: {status: "inactive"}) do %>
+      <%= pb_rails("caption", props:{text: "Delivered"})%>
+  <% end %>
+<% end %>
+
+<br>
