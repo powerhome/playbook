@@ -4,51 +4,6 @@
 @import "../tokens/opacity";
 @import "../tokens/typography";
 
-.pb_progress_step_kit_horizontal.dark,
-.pb_progress_step_kit_vertical.dark,
-.pb_progress_step_kit_horizontal_icon.dark,
-.pb_progress_step_kit_vertical_icon.dark {
-  .pb_progress_step_item_inactive,
-  .pb_progress_step_item_active,
-  .pb_progress_step_item_complete,
-  .pb_progress_step_item_hidden {
-    &::before {
-      background-color: tint($bg_dark, 20%);
-    }
-  }
-
-  .circle {
-    box-shadow: 0 0 0 2px tint($bg_dark, 10%) !important;
-  }
-
-  .pb_progress_step_item_inactive {
-    .circle,
-    &::before {
-      background-color: tint($bg_dark, 20%);
-    }
-  }
-
-  .pb_progress_step_item_complete {
-    .circle,
-    &::before {
-      background-color: $primary;
-    }
-  }
-  .pb_progress_step_item_active {
-    .circle {
-      background-color: tint($bg_dark, 10%);
-    }
-  }
-}
-
-.pb_progress_step_kit_horizontal.dark,
-.pb_progress_step_kit_horizontal_icon.dark {
-  .pb_progress_step_item_active {
-    &::before {
-      background-color: $primary;
-    }
-  }
-}
 
 //--------- Show icon on active and complete steps ----------
 .pb_progress_step_kit_horizontal_icon,
@@ -412,3 +367,51 @@
   }
 }
 //------- End of Vertical ---------
+
+
+//---------- Dark Mode Styles ----------
+.pb_progress_step_kit_horizontal.dark,
+.pb_progress_step_kit_vertical.dark,
+.pb_progress_step_kit_horizontal_icon.dark,
+.pb_progress_step_kit_vertical_icon.dark {
+  .pb_progress_step_item_inactive,
+  .pb_progress_step_item_active,
+  .pb_progress_step_item_complete,
+  .pb_progress_step_item_hidden {
+    &::before {
+      background-color: tint($bg_dark, 20%);
+    }
+  }
+
+  .circle {
+    box-shadow: 0 0 0 2px tint($bg_dark, 10%) !important;
+  }
+
+  .pb_progress_step_item_inactive {
+    .circle,
+    &::before {
+      background-color: tint($bg_dark, 20%);
+    }
+  }
+
+  .pb_progress_step_item_complete {
+    .circle,
+    &::before {
+      background-color: $primary;
+    }
+  }
+  .pb_progress_step_item_active {
+    .circle {
+      background-color: tint($bg_dark, 10%);
+    }
+  }
+}
+
+.pb_progress_step_kit_horizontal.dark,
+.pb_progress_step_kit_horizontal_icon.dark {
+  .pb_progress_step_item_active {
+    &::before {
+      background-color: $primary;
+    }
+  }
+}
