@@ -10,6 +10,8 @@ module Playbook
                   default: false
       prop :timezone, type: Playbook::Props::String,
                       default: "America/New_York"
+      prop :show_current_year, type: Playbook::Props::Boolean,
+                               default: false
 
       def date_time_value
         date || date_time
