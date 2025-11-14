@@ -1,7 +1,6 @@
 import React from "react"
 import AdvancedTable from '../_advanced_table'
 import colors from '../../tokens/exports/_colors.module.scss'
-// tokens/exports/_colors.module.scss'
 import MOCK_DATA from "./advanced_table_mock_data.json"
 
 
