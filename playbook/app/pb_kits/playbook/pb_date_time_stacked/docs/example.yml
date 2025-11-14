@@ -2,9 +2,11 @@ examples:
 
   rails:
   - date_time_stacked_default: Default
-  
+  - date_time_stacked_show_current_year: Show Current Year
+
   react:
   - date_time_stacked_default: Default
+  - date_time_stacked_show_current_year: Show Current Year
   
   swift:
   - date_time_stacked_default_swift: Default
