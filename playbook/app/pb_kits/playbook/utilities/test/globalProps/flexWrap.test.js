@@ -35,3 +35,21 @@ test('Global Props: returns proper class name', () => {
     })
   }
 })
+
+test('Global Props: returns proper class name with default key', () => {
+  const testId = `${testSubject}-default-responsive`
+  render(
+    <Body
+        data={{ testid: testId }}
+        flexWrap={{ default: "wrap", xs: "nowrap", sm: "wrap", md: "nowrap" }}
+        text="Hi"
+    />
+  )
+  const kit = screen.getByTestId(testId)
+  // Should have base class for default value
+  expect(kit).toHaveClass(`flex_wrap_wrap`)
+  // Should have responsive classes for screen sizes
+  expect(kit).toHaveClass(`flex_wrap_xs_nowrap`)
+  expect(kit).toHaveClass(`flex_wrap_sm_wrap`)
+  expect(kit).toHaveClass(`flex_wrap_md_nowrap`)
+})

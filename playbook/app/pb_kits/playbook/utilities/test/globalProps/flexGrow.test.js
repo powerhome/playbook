@@ -33,3 +33,21 @@ test('Global Props: Returns ordinal suffixed class name', () => {
     })
   }
 })
+
+test('Global Props: returns proper class name with default key', () => {
+  const testId = `${testSubject}-default-responsive`
+  render(
+    <Body
+        data={{ testid: testId }}
+        flexGrow={{ default: 1, xs: 0, sm: 1, md: 0 }}
+        text="Hi"
+    />
+  )
+  const kit = screen.getByTestId(testId)
+  // Should have base class for default value
+  expect(kit).toHaveClass(`flex_grow_1`)
+  // Should have responsive classes for screen sizes
+  expect(kit).toHaveClass(`flex_grow_xs_0`)
+  expect(kit).toHaveClass(`flex_grow_sm_1`)
+  expect(kit).toHaveClass(`flex_grow_md_0`)
+})

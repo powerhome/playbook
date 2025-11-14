@@ -35,3 +35,21 @@ test('Global Props: returns proper class name', () => {
     })
   }
 })
+
+test('Global Props: returns proper class name with default key', () => {
+  const testId = `${testSubject}-default-responsive`
+  render(
+    <Body
+        data={{ testid: testId }}
+        justifySelf={{ default: "end", xs: "start", sm: "end", md: "center" }}
+        text="Hi"
+    />
+  )
+  const kit = screen.getByTestId(testId)
+  // Should have base class for default value
+  expect(kit).toHaveClass(`justify_self_end`)
+  // Should have responsive classes for screen sizes
+  expect(kit).toHaveClass(`justify_self_xs_start`)
+  expect(kit).toHaveClass(`justify_self_sm_end`)
+  expect(kit).toHaveClass(`justify_self_md_center`)
+})

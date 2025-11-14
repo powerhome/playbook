@@ -35,3 +35,21 @@ test('Global Props: returns proper class name', () => {
     })
   }
 })
+
+test('Global Props: returns proper class name with default key', () => {
+  const testId = `${testSubject}-default-responsive`
+  render(
+    <Body
+        alignContent={{ default: "spaceAround", xs: "center", sm: "spaceAround", md: "center" }}
+        data={{ testid: testId }}
+        text="Hi"
+    />
+  )
+  const kit = screen.getByTestId(testId)
+  // Should have base class for default value
+  expect(kit).toHaveClass(`align_content_space_around`)
+  // Should have responsive classes for screen sizes
+  expect(kit).toHaveClass(`align_content_xs_center`)
+  expect(kit).toHaveClass(`align_content_sm_space_around`)
+  expect(kit).toHaveClass(`align_content_md_center`)
+})

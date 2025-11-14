@@ -35,3 +35,21 @@ test('Global Props: returns proper class name', () => {
     })
   }
 })
+
+test('Global Props: returns proper class name with default key', () => {
+  const testId = `${testSubject}-default-responsive`
+  render(
+    <Body
+        data={{ testid: testId }}
+        flexDirection={{ default: "column", xs: "row", sm: "column", md: "row" }}
+        text="Hi"
+    />
+  )
+  const kit = screen.getByTestId(testId)
+  // Should have base class for default value
+  expect(kit).toHaveClass(`flex_direction_column`)
+  // Should have responsive classes for screen sizes
+  expect(kit).toHaveClass(`flex_direction_xs_row`)
+  expect(kit).toHaveClass(`flex_direction_sm_column`)
+  expect(kit).toHaveClass(`flex_direction_md_row`)
+})
