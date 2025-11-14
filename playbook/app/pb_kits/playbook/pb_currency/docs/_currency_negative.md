@@ -1,0 +1,1 @@
+Small `Currency` kits have the negative sign on the lefthand side of the "$" symbol.
