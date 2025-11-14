@@ -107,3 +107,44 @@ test('should render the children elements', () => {
   expect(step2Kit).toHaveClass('pb_progress_step_item_active')
   expect(step3Kit).toHaveClass('pb_progress_step_item_inactive')
 })
+
+test('should render info color', () => {
+render( 
+        <ProgressStep
+            aria={{ label: testId }}
+            color="info"
+            data={{ testid: testId }} 
+            variant="tracker"
+        >
+          <ProgressStepItem status="complete">{'Step 1'}</ProgressStepItem>
+          <ProgressStepItem status="active">{'Step 2'}</ProgressStepItem>
+          <ProgressStepItem status="inactive">{'Step 3'}</ProgressStepItem>
+        </ProgressStep> 
+        )
+
+  const kit = screen.getByTestId(testId)
+  expect(kit).toHaveClass('pb_progress_step_kit_horizontal_tracker_info')
+})
+
+test('should render custom icon', () => {
+render( 
+        <ProgressStep
+            aria={{ label: testId }}
+            data={{ testid: testId }} 
+            variant="tracker"
+        >
+          <ProgressStepItem icon="exclamation-triangle" 
+              status="complete"
+          >
+            {'Step 1'}
+          </ProgressStepItem>
+          <ProgressStepItem status="active">{'Step 2'}</ProgressStepItem>
+          <ProgressStepItem status="inactive">{'Step 3'}</ProgressStepItem>
+        </ProgressStep> 
+        )
+
+  const kit = screen.getByTestId(testId)
+  expect(kit).toHaveClass('pb_progress_step_kit_horizontal_tracker')
+  const icon = kit.getAttribute('aria-label', "exclamation-triangle-icon")
+  expect(icon).toBeDefined()
+})

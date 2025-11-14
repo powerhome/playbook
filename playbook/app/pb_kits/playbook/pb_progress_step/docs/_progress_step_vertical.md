@@ -1,0 +1,1 @@
+`orientation` can also be set to `vertical` as shown here. By default, this is set to `horizontal`.
