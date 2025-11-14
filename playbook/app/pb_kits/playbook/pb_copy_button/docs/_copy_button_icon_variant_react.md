@@ -1,0 +1,1 @@
+Pass in `variant="icon"` to replace the Button with the Circle Icon Button kit.
