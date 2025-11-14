@@ -18,15 +18,9 @@ module Playbook
                             default: false
 
       prop :value
+      prop :template
       prop :placeholder
       prop :input_options
-      prop :advanced_editor_toolbar, type: Playbook::Props::Boolean,
-                                     default: true
-      prop :extensions, type: Playbook::Props::HashArray,
-                        default: []
-      prop :max_width, type: Playbook::Props::Enum,
-                       values: %w[xs sm md lg xl],
-                       default: "md"
 
       def classname
         generate_classname("pb_rich_text_editor_kit", simple_class, focus_class, sticky_class, separator: " ")
@@ -46,20 +40,17 @@ module Playbook
 
       def rich_text_options
         {
-          advancedEditorToolbar: advanced_editor_toolbar,
-          className: classname,
-          extensions: extensions,
-          focus: focus,
           id: id,
           inline: inline,
-          inputOptions: input_options,
-          maxWidth: max_width,
-          placeholder: placeholder,
-          railsEditor: true,
+          className: classname,
+          focus: focus,
           simple: simple,
           sticky: sticky,
           toolbarBottom: toolbar_bottom,
-          value: value || "",
+          value: value,
+          template: template,
+          placeholder: placeholder,
+          inputOptions: input_options,
         }
       end
     end
