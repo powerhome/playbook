@@ -1,14 +1,16 @@
 examples:
-  
+
   rails:
   - date_time_default: Default
   - date_time_align: Alignment
   - date_time_size: Size
+  - date_time_show_current_year: Show Current Year
 
   react:
   - date_time_default: Default
   - date_time_align: Alignment
   - date_time_size: Size
+  - date_time_show_current_year: Show Current Year
 
   swift:
   - date_time_default_swift: Default

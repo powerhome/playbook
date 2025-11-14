@@ -17,6 +17,7 @@ type DateTimeProps = {
   htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
   size?: "sm" | "md",
+  showCurrentYear?: boolean,
   showDayOfWeek: boolean,
   showIcon?: boolean,
   timeZone?: string
@@ -32,6 +33,7 @@ const DateTime = (props: DateTimeProps): React.ReactElement => {
     showDayOfWeek = false,
     datetime,
     id,
+    showCurrentYear = false,
     showIcon = false,
     size = 'md',
     timeZone = 'America/New_York',
@@ -59,6 +61,7 @@ const DateTime = (props: DateTimeProps): React.ReactElement => {
           vertical="baseline"
       >
         <FormattedDate
+            showCurrentYear={showCurrentYear}
             showDayOfWeek={showDayOfWeek}
             size={size}
             value={datetime}
