@@ -31,7 +31,6 @@
     "app/pb_kits/playbook/**/*.ts",
     "app/javascript/kits.js",
     "app/entrypoints/playbook.js",
-    "app/entrypoints/playbook-doc.js",
     "app/entrypoints/playbook-rails-react-bindings.js",
     "app/entrypoints/playbook-rails.js",
   ]

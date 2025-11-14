@@ -1,5 +1,5 @@
 import React from "react";
-import { AdvancedTable } from "playbook-ui";
+import AdvancedTable from '../_advanced_table';
 import MOCK_DATA from "./advanced_table_mock_data.json";
 
 const AdvancedTableColumnStylingColumnHeaders = (props) => {

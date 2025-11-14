@@ -1,5 +1,5 @@
 import React from "react";
-import { PbCircleChart } from "playbook-ui";
+import PbCircleChart from "../_pb_circle_chart";
 
 const dataFirst = [
   {

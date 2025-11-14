@@ -1,5 +1,6 @@
 import React from "react";
-import { PbCircleChart, colors } from "playbook-ui";
+import PbCircleChart from "../_pb_circle_chart";
+import colors from '../../tokens/exports/_colors.module.scss';
 
 const data= [
         {

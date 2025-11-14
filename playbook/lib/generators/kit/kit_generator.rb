@@ -16,7 +16,7 @@ class KitGenerator < Rails::Generators::NamedBase
   class_option :react_rendered, type: :boolean, default: false, desc: "Adds flag to determine if kit is rendered in react"
   class_option :enhanced_element_used, type: :boolean, default: false, desc: "Adds flag to determine if kit uses the enhanced element kit"
 
-  REACT_EXAMPLES_PATH = "app/entrypoints/playbook-doc.js"
+  REACT_EXAMPLES_PATH = "app/javascript/playbook-doc.js"
   REACT_INDEX_PATH = "app/javascript/kits.js"
 
   def create_templates

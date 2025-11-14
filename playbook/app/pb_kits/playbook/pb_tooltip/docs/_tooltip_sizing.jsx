@@ -1,5 +1,8 @@
 import React from 'react'
-import { Button, Tooltip, Flex, FlexItem } from 'playbook-ui';
+import Tooltip from '../_tooltip'
+import Button from '../../pb_button/_button'
+import Flex from '../../pb_flex/_flex'
+import FlexItem from '../../pb_flex/_flex_item'
 
 const TooltipSizing = (props) => {
 

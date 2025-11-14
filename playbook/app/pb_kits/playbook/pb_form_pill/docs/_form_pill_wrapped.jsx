@@ -1,5 +1,8 @@
 import React from 'react'
-import { Card, Caption, FormPill, Typeahead } from 'playbook-ui'
+import Card from '../../pb_card/_card'
+import Caption from '../../pb_caption/_caption'
+import FormPill from '../_form_pill'
+import Typeahead from '../../pb_typeahead/_typeahead'
 
 const names = [
   { label: 'Alexander Nathaniel Montgomery', value: 'Alexander Nathaniel Montgomery' },

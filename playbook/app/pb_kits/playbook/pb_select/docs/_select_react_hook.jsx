@@ -1,6 +1,8 @@
 import React, { useState } from "react"
 import { useForm } from "react-hook-form"
-import { Button, Body, Select } from "playbook-ui"
+import Select from "../_select"
+import Body from "../../pb_body/_body"
+import Button from "../../pb_button/_button"
 
 const SelectReactHook = (props) => {
   const { register, handleSubmit, formState: { errors } } = useForm({

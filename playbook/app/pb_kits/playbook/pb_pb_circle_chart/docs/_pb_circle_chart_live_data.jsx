@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { PbCircleChart, Button } from "playbook-ui";
+import PbCircleChart from "../_pb_circle_chart";
+import Button from "../../pb_button/_button";
 
 const chartData = [
   {

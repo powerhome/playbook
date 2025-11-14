@@ -1,5 +1,7 @@
 import React, { useState } from "react";
-import { AdvancedTable, TextInput, Body } from "playbook-ui";
+import AdvancedTable from '../../pb_advanced_table/_advanced_table'
+import TextInput from '../../pb_text_input/_text_input'
+import Body from '../../pb_body/_body'
 import MOCK_DATA from "./advanced_table_mock_data.json";
 
 const AdvancedTableInlineEditing = (props) => {

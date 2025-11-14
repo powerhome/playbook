@@ -1,5 +1,5 @@
 import React from 'react'
-import { LoadingInline } from 'playbook-ui'
+import LoadingInline from '../_loading_inline'
 
 const LoadingInlineVariant = (props) => {
   return (

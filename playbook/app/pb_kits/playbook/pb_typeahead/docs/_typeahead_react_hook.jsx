@@ -1,6 +1,7 @@
 import React from 'react'
 
-import { Typeahead, Title } from 'playbook-ui'
+import Typeahead from '../_typeahead'
+import Title from '../../pb_title/_title'
 import { useForm } from 'react-hook-form'
 
 const languages = [
