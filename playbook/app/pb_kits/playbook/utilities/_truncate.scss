@@ -11,6 +11,8 @@ $truncate-styles: (
   display: -webkit-box;
   -webkit-line-clamp: $number;
   -webkit-box-orient: vertical;
+  overflow-wrap: anywhere;
+  word-break: break-all;
 }
 
 @each $class, $number in $truncate-styles {
