@@ -56,11 +56,35 @@ $breakpoints_max_only: (
     )
 );
 
+// Code for floor-based breakpoint system (min-width only, inherits upward)
+$breakpoints_floor: (
+    xs: (
+        max: $screen-xs-min  // Special case: keep as max-width for mobile-only
+    ),
+    sm: (
+        min: $screen-sm-min  // Floor: applies from 576px upward
+    ),
+    md: (
+        min: $screen-md-min   // Floor: applies from 768px upward
+    ),
+    lg: (
+        min: $screen-lg-min   // Floor: applies from 992px upward
+    ),
+    xl: (
+        min: $screen-xl-min   // Floor: applies from 1200px upward
+    )
+);
 
 @function breakpoint($breakpoint_name) {
   @return map-get($breakpoints, $breakpoint_name);
 }
 
+// Alias for this floor-based system while set up side by side with break_at and break_on
+@mixin break_at_min($min_size) {
+  @media screen and (min-width: $min_size) {
+    @content;
+  }
+}
 
 @mixin break_at($size) {
   @media screen and (max-width: $size) {

@@ -7,15 +7,30 @@
   }
 
   @if $responsive {
-    @each $size, $size_value in $breakpoints_grid {
-      @each $prop_key, $prop_value in $props {
+    // Floor-based breakpoints: smaller breakpoints apply upward (unless overridden) xs->xl
+    $breakpoint_order: (xs, sm, md, lg, xl);
+    @each $size in $breakpoint_order {
+      $size_value: map-get($breakpoints_floor, $size);
+      @if $size_value {
+        @each $prop_key, $prop_value in $props {
           $min_size: map-get($size_value, "min");
           $max_size: map-get($size_value, "max");
           .#{$class_prefix}_#{$size}_#{$prop_key} {
-            @include break_on($min_size, $max_size) {
-              #{$css_attribute}: #{$prop_value} !important;
+            @if $max_size {
+              // xs: apply everywhere (from 0px upward) so it inherits to all sizes
+              // Therefore xs value applies to xs, sm, md, lg, xl unless overridden by larger breakpoints
+              @media screen {
+                #{$css_attribute}: #{$prop_value} !important;
+              }
+            } @else {
+              // sm, md, lg, xl: Use floor-based (min-width only, inherits upward)
+              // These come after xs in CSS, so they can override xs at their breakpoints
+              @include break_at_min($min_size) {
+                #{$css_attribute}: #{$prop_value} !important;
+              }
             }
           }
+        }
       }
     }
   }
