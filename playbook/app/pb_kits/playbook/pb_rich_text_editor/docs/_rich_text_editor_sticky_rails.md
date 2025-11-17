@@ -1,1 +1,0 @@
-Use the optional `sticky` prop to make the toolbar sticky on scroll.

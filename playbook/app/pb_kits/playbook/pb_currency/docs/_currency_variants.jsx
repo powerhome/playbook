@@ -6,6 +6,13 @@ const CurrencyVariants = (props) => {
   return (
     <>
       <Currency
+          amount="30,327.43"
+          label="Default"
+          marginBottom="md"
+          size="sm"
+          {...props}
+      />
+      <Currency
           amount="2,000.50"
           emphasized={false}
           label="Emphasized False"

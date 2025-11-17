@@ -1,0 +1,1 @@
+Abbreviate larger amounts into thousands (K), millions (M), billions (B), and even trillions (T). 

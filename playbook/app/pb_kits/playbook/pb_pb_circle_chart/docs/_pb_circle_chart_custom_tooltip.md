@@ -1,4 +1,5 @@
-Custom tooltip formatting is configured through the tooltip object in the options passed to the kit: 
+Tooltip options from Highcharts:
+
 `headerFormat` **Type**: String | when set to null will disable the header.
 `pointFormat` **Type**: String | defines the HTML template for each data point and supports custom HTML when `useHTML` is enabled.
 `useHTML` **Type**: boolean (default false) | enables HTML rendering in tooltips.
