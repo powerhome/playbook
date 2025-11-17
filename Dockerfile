@@ -82,6 +82,16 @@ RUN --mount=id=playbook-yarncache,type=cache,target=/home/app/.cache/yarn,uid=99
 RUN --mount=id=playbook-yarncache,type=cache,target=/home/app/.cache/yarn,uid=9999,gid=9999,sharing=locked \
     cd playbook-website; node /home/app/src/playbook-website/scripts/react-docgen.mjs --all-kits
 
+# Copy icons to app/javascript/images/ for static asset serving (used in all environments)
+COPY --link --from=jsdeps /home/app/src/node_modules/@powerhome/playbook-icons/icons /home/app/src/temp-icons
+RUN cp -r /home/app/src/temp-icons/* /home/app/src/playbook-website/app/javascript/images/ || true
+RUN rm -rf /home/app/src/temp-icons || true
+
+# Copy aliases.json
+COPY --link --from=jsdeps /home/app/src/node_modules/@powerhome/playbook-icons/aliases.json /home/app/src/aliases.json
+RUN cp /home/app/src/aliases.json /home/app/src/playbook-website/app/javascript/aliases.json || true
+RUN rm /home/app/src/aliases.json || true
+
 FROM base AS prod
 COPY --from=rubydeps --link $BUNDLE_TO $BUNDLE_TO
 COPY --link --chown=9999:9999 playbook /home/app/src/playbook
