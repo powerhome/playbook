@@ -62,6 +62,7 @@ const MultiValue = (props: Props) => {
             className={pillClassName}
             closeProps={removeProps}
             htmlOptions={{onKeyDown:handleKeyDown}}
+            marginRight="xs"
             removeIcon
             tabIndex={0}
             text={label}
