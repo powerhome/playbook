@@ -223,15 +223,29 @@ module Playbook
 
       # Determines if we should use static asset (img tag) or inline SVG
       # Use inline SVG when:
-      # - Color customization is needed (can't change fill on img tag)
       # - Custom icon URL is provided
       # - Asset URL is not available (e.g., in development with node_modules)
       # - Icon is in node_modules (development mode - can't be served as static asset)
+      # - Any icon kit props are customized (CSS classes only work on SVG elements)
       def should_inline_svg?
         return true if custom_icon.present?
         return true if icon_asset_url.nil?
-        return true if color.present? # Need to modify fill color
         return true if asset_path&.include?("node_modules/") # Development mode
+
+        # If any icon kit props are set (not defaults), use inline SVG
+        # CSS classes for transformations/styling only work on SVG elements, not img tags
+        return true if color.present?
+        return true if rotation.present?
+        return true if flip.present?
+        return true if spin
+        return true if pulse
+        return true if size.present?
+        return true if border
+        return true if inverse
+        return true if list_item
+        return true if pull.present?
+        # fixed_width defaults to true, so check if it's explicitly false
+        return true if fixed_width == false
 
         false
       end
