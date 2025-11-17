@@ -356,17 +356,6 @@ export default class PbDropdown extends PbEnhancedElement {
   }
 
   clearFormValidation(input) {
-    if (input.checkValidity()) {
-      const dropdownWrapperElement = input.closest(".dropdown_wrapper");
-      dropdownWrapperElement.classList.remove("error");
-
-      const errorLabelElement = dropdownWrapperElement.querySelector(
-        ".pb_body_kit_negative"
-      );
-      if (errorLabelElement) {
-        errorLabelElement.remove();
-      }
-    }
     if (this.isMultiSelect) {
       if (this.selectedOptions.size > 0) {
         const dropdownWrapperElement = input.closest(".dropdown_wrapper");
@@ -377,6 +366,19 @@ export default class PbDropdown extends PbEnhancedElement {
         if (errorLabelElement) {
           errorLabelElement.remove();
         }
+        return;
+      }
+    }
+    
+    if (input.checkValidity()) {
+      const dropdownWrapperElement = input.closest(".dropdown_wrapper");
+      dropdownWrapperElement.classList.remove("error");
+
+      const errorLabelElement = dropdownWrapperElement.querySelector(
+        ".pb_body_kit_negative"
+      );
+      if (errorLabelElement) {
+        errorLabelElement.remove();
       }
     }
   }
