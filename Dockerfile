@@ -86,6 +86,10 @@ RUN --mount=id=playbook-yarncache,type=cache,target=/home/app/.cache/yarn,uid=99
 RUN mkdir -p /home/app/src/playbook-website/app/javascript/images
 RUN cp -r /home/app/src/node_modules/@powerhome/playbook-icons/icons/* /home/app/src/playbook-website/app/javascript/images/ || true
 
+# Copy icons to public/vite/images/ for production serving
+RUN mkdir -p /home/app/src/playbook-website/public/vite/images
+RUN cp -r /home/app/src/node_modules/@powerhome/playbook-icons/icons/* /home/app/src/playbook-website/public/vite/images/ || true
+
 # Copy aliases.json
 RUN cp /home/app/src/node_modules/@powerhome/playbook-icons/aliases.json /home/app/src/playbook-website/app/javascript/aliases.json || true
 
