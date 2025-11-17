@@ -161,6 +161,12 @@
   .typeahead-plus-icon {
     color: $text_lt_lighter;
   }
+  .pb_badge_kit_primary {
+    cursor: pointer;
+    margin-bottom: 2px;
+    margin-right: $space_xs;
+    margin-top: 2px;
+  }
   .pb_badge_kit_primary span {
     line-height: 16.5px;
     letter-spacing: normal;
