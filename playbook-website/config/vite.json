@@ -4,7 +4,7 @@
     "watchAdditionalPaths": [],
     "additionalEntrypoints": [
       "app/javascript/components/**/*.{ts,js,tsx,jsx}",
-      "app/javascript/images/*",
+      "app/javascript/images/**/*",
       "app/javascript/scripts/*.{ts,js}",
       "app/javascript/site_styles/**/*.{scss,css}",
       "app/javascript/utilities/*.{ts,js}"

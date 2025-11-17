@@ -142,28 +142,46 @@ module Playbook
 
       # Returns the asset URL for the icon (cached, served as static asset)
       def icon_asset_url
-        # First try to get relative path for vite_asset_path
-        if icon_relative_path
-          # Try to use vite_asset_path if available (ViteRails)
-          # ViewComponent has access to helpers through view_context
-          helper_context = respond_to?(:view_context) ? view_context : self
+        return nil unless icon_relative_path
 
+        # Try to use vite_asset_path if available (ViteRails)
+        # ViewComponent has access to helpers through view_context
+        helper_context = respond_to?(:view_context) ? view_context : self
+
+        # First, try vite_asset_path (preferred - uses manifest with digesting)
+        begin
           if helper_context.respond_to?(:vite_asset_path)
-            return helper_context.vite_asset_path(icon_relative_path)
+            url = helper_context.vite_asset_path(icon_relative_path)
+            return url if url.present?
           elsif respond_to?(:helpers) && helpers.respond_to?(:vite_asset_path)
-            return helpers.vite_asset_path(icon_relative_path)
-          elsif respond_to?(:asset_path)
-            # Fallback to Rails asset_path if Vite is not available
-            return asset_path(icon_relative_path)
+            url = helpers.vite_asset_path(icon_relative_path)
+            return url if url.present?
+          end
+        rescue
+          # vite_asset_path failed - asset might not be in manifest
+          # This can happen if icons in subdirectories aren't processed by Vite
+        end
+
+        # Fallback: Try to construct a direct path to the asset
+        # Check if icon actually exists in app/javascript/images/
+        if icon_relative_path.start_with?("images/")
+          # Verify the file exists before constructing path
+          full_path = Rails.root.join("app/javascript", icon_relative_path)
+          if File.exist?(full_path)
+            # Construct path based on environment
+            # In test: /vite-test/images/...
+            # In production: /vite/images/... or /assets/images/...
+            if Rails.env.test?
+              return "/vite-test/#{icon_relative_path}"
+            elsif Rails.env.production?
+              return "/vite/#{icon_relative_path}"
+            else
+              # Development - try vite-dev
+              return "/vite-dev/#{icon_relative_path}"
+            end
           end
         end
 
-        # If icon_relative_path is nil (e.g., in development with node_modules),
-        # try to construct a direct path that Vite dev server can serve
-        # For now, return nil to fall back to inline in development
-        nil
-      rescue
-        # If asset helper fails, return nil to fall back to inline rendering
         nil
       end
 
