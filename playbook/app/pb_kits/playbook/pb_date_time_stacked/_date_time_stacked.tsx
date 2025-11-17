@@ -17,6 +17,7 @@ type DateTimeStackedProps = {
   datetime: Date,
   dark: boolean,
   timeZone?: string,
+  showCurrentYear?: boolean,
 }
 
 const DateTimeStacked = (props: DateTimeStackedProps): React.ReactElement => {
@@ -28,6 +29,7 @@ const DateTimeStacked = (props: DateTimeStackedProps): React.ReactElement => {
     dark,
     htmlOptions = {},
     timeZone = 'America/New_York',
+    showCurrentYear = false,
   } = props
 
   const classes = buildCss('pb_date_time_stacked_kit', globalProps(props))
@@ -46,6 +48,7 @@ const DateTimeStacked = (props: DateTimeStackedProps): React.ReactElement => {
             bold
             dark={dark}
             date={date || datetime}
+            showCurrentYear={showCurrentYear}
         />
       </FlexItem>
 
