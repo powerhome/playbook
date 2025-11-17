@@ -8,6 +8,25 @@
       border-right: 1px solid $border_light !important;
     }
 
+    // **Advanced Table** specific rules to eliminate double borders when vertical-border is active
+    .pb_advanced_table &,
+    &[data-vertical-border="true"] {
+      // Remove first column box-shadow (preserve border-right in Chrome and use CSS var to respect column group border colors)
+      .table-header-cells:first-child,
+      .table-header-cells-custom:first-child,
+      td:first-child,
+      .pb_table_td:first-child,
+      .checkbox-cell.checkbox-cell-header:first-child {
+        box-shadow: none !important;
+        border-right: 1px solid var(--column-border-color, #{$border_light}) !important;
+      }
+
+      .pb_table_td:nth-child(2) {
+        box-shadow: none !important;
+      }
+    }
+    // --- End Advanced Table First Column Code Section ---
+
     @media screen and (min-width: $screen-xs-min) {
       tr:hover, .pb_table_tr:hover {
         td:last-child, .pb_table_td:last-child {
