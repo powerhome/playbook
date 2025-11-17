@@ -1,5 +1,47 @@
 <% if object.is_svg? %>
-  <%= object.render_svg %>
+  <% if object.should_inline_svg? %>
+    <%# Inline SVG for color customization, custom icons, or when asset URL unavailable %>
+    <%= object.render_svg %>
+  <% else %>
+    <%# Use static asset (img tag) for better caching and performance %>
+    <% icon_url = object.icon_asset_url %>
+    <% if icon_url %>
+      <% 
+        # Build HTML attributes
+        html_attrs = {
+          class: object.custom_icon_classname,
+          src: icon_url,
+          alt: "",
+          width: "auto",
+          height: "auto"
+        }
+        html_attrs[:id] = object.id if object.id.present?
+        html_attrs[:tabindex] = object.tabindex if object.tabindex.present?
+        
+        # Add data attributes
+        if object.data.present?
+          object.data.each do |key, value|
+            html_attrs["data-#{key.to_s.tr('_', '-')}".to_sym] = value
+          end
+        end
+        
+        # Add ARIA attributes
+        aria_label = "#{object.icon} icon"
+        if object.aria.present?
+          object.aria.each do |key, value|
+            attr_name = key.to_s.start_with?("aria-") ? key.to_s : "aria-#{key.to_s.tr('_', '-')}"
+            html_attrs[attr_name.to_sym] = value
+          end
+          aria_label = object.aria[:label] || object.aria["label"] || aria_label
+        end
+        html_attrs[:alt] = aria_label
+      %>
+      <%= image_tag icon_url, html_attrs %>
+    <% else %>
+      <%# Fallback to inline if asset URL generation failed %>
+      <%= object.render_svg %>
+    <% end %>
+  <% end %>
 <% elsif object.valid_emoji? %>
   <span class="pb_icon_kit_emoji">
     <%= object.icon.html_safe %>
