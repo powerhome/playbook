@@ -1,0 +1,1 @@
+Use `decimals: "matching"` when you want the full decimal amount displayed as a single number rather than split visually.
