@@ -33,6 +33,8 @@ export default class PbDropdown extends PbEnhancedElement {
     this.formPillProps = this.element.dataset.formPillProps
       ? JSON.parse(this.element.dataset.formPillProps)
       : {};
+    const baseInput = this.element.querySelector(DROPDOWN_INPUT);
+    this.wasOriginallyRequired = baseInput && baseInput.hasAttribute("required");
     this.setDefaultValue();
     this.bindEventListeners();
     this.bindSearchInput();
@@ -587,7 +589,9 @@ export default class PbDropdown extends PbEnhancedElement {
     // for multi_select, for each selectedOption, create a hidden input
     const name = baseInput.getAttribute("name");
     this.selectedOptions.forEach((raw) => {
-      const id = JSON.parse(raw).id;
+      const optionData = JSON.parse(raw);
+      // Use id if available, otherwise fall back to value
+      const id = optionData.id || optionData.value;
       const inp = document.createElement("input");
       inp.type = "hidden";
       inp.name = name;
@@ -595,7 +599,19 @@ export default class PbDropdown extends PbEnhancedElement {
       inp.dataset.generated = "true";
       baseInput.insertAdjacentElement("afterend", inp);
     });
-    baseInput.value = "";
+    
+    // For multi-select, remove required from base input when there are selections
+    // The generated inputs handle the form submission with actual values
+    // Restore required attribute when there are no selections (if it was originally required)
+    if (this.selectedOptions.size > 0) {
+      baseInput.value = "";
+      baseInput.removeAttribute("required");
+    } else {
+      baseInput.value = "";
+      if (this.wasOriginallyRequired) {
+        baseInput.setAttribute("required", "");
+      }
+    }
   }
 
   handleBackspaceClear() {
