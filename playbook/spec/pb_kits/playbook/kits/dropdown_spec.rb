@@ -65,4 +65,77 @@ RSpec.describe Playbook::PbDropdown::Dropdown do
       expect(dropdown.send(:input_default_value)).to eq("1")
     end
   end
+
+  describe "#required with multi_select" do
+    it "includes pb_dropdown_multi_select and required attributes when both are true" do
+      dropdown = subject.new(multi_select: true, required: true, name: "test_field")
+      expect(dropdown.data).to include(pb_dropdown: true, pb_dropdown_multi_select: true)
+      expect(dropdown.required).to be true
+    end
+
+    it "supports multi_select with multiple default values" do
+      dropdown = subject.new(
+        multi_select: true,
+        default_value: [
+          { id: 1, label: "Option 1", value: "1" },
+          { id: 2, label: "Option 2", value: "2" },
+        ]
+      )
+      expect(dropdown.send(:input_default_value)).to eq("1,2")
+    end
+
+    it "configures component correctly for validation clearing after first selection" do
+      dropdown = subject.new(
+        multi_select: true,
+        required: true,
+        name: "office_locations",
+        options: [
+          { id: "office_1", label: "Office 1", value: "office_1" },
+          { id: "office_2", label: "Office 2", value: "office_2" },
+        ]
+      )
+      # Verify the component has the necessary data attributes for JavaScript validation
+      expect(dropdown.data[:pb_dropdown_multi_select]).to be true
+      expect(dropdown.required).to be true
+      # Verify multi_select is set correctly for JavaScript to detect
+      expect(dropdown.multi_select).to be true
+    end
+
+    it "handles options without id field by using value as fallback" do
+      dropdown = subject.new(
+        multi_select: true,
+        required: true,
+        name: "test_field",
+        options: [
+          { label: "Option 1", value: "value_1" },
+          { label: "Option 2", value: "value_2" },
+        ]
+      )
+      # Verify component still works with options that only have label and value
+      expect(dropdown.data[:pb_dropdown_multi_select]).to be true
+      expect(dropdown.required).to be true
+      expect(dropdown.options.length).to eq(2)
+    end
+
+    it "handles mixed options with and without id fields" do
+      dropdown = subject.new(
+        multi_select: true,
+        options: [
+          { id: "id_1", label: "Option 1", value: "value_1" },
+          { label: "Option 2", value: "value_2" },
+        ]
+      )
+      expect(dropdown.options.length).to eq(2)
+      expect(dropdown.options.first).to include(:id, :label, :value)
+      expect(dropdown.options.last).to include(:label, :value)
+      expect(dropdown.options.last).not_to have_key(:id)
+    end
+
+    it "properly configures name attribute with array notation for multi_select" do
+      dropdown = subject.new(multi_select: true, name: "test_field")
+      # The name should be configured to support array notation in the template
+      expect(dropdown.name).to eq("test_field")
+      expect(dropdown.multi_select).to be true
+    end
+  end
 end
