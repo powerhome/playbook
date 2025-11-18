@@ -1,8 +1,8 @@
-<%= pb_content_tag do %>
+  <%= pb_content_tag do %>
 
   <%= pb_rails("flex", props: {classname: "flex-container", vertical: "stretch"}) do %>
       <%= pb_rails("body", props: {classname: "flex-item"}) do %>
-        <%= pb_rails("date_stacked", props: { date: object.date_time_value, size: "sm", align: "right", bold: true, dark: object.dark }) %>
+        <%= pb_rails("date_stacked", props: { date: object.date_time_value, size: "sm", align: "right", bold: true, dark: object.dark, show_current_year: object.show_current_year }) %>
       <% end %>
       <%= pb_rails("section_separator", props: { orientation: "vertical", classname: "date-time-padding" }) %>
       <%= pb_rails("body", props: {classname: "flex-item"}) do %>

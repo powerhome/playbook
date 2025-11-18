@@ -11,6 +11,11 @@ RSpec.describe Playbook::PbDateTimeStacked::DateTimeStacked do
       .with_default(false)
   }
   it {
+    is_expected.to define_prop(:show_current_year)
+      .of_type(Playbook::Props::Boolean)
+      .with_default(false)
+  }
+  it {
     is_expected.to define_prop(:date_time)
       .of_type(Playbook::Props::Date)
   }

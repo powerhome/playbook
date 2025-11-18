@@ -41,3 +41,36 @@ test('renders time in timezone', () => {
   const kit = renderKit(DateTimeStacked, props)
   expect(kit).toHaveTextContent(`${monthDayYear}11:00aMDT`)
 })
+
+test('renders current year when showCurrentYear is true', () => {
+  const currentYearDate = new Date()
+  const currentYear = currentYearDate.getFullYear()
+  
+  const kit = renderKit(DateTimeStacked, {
+    data: { testid: 'datetimestacked-current-year' },
+    datetime: currentYearDate,
+    dark: false,
+    showCurrentYear: true,
+  })
+  expect(kit).toHaveTextContent(currentYear.toString())
+})
+
+test('hides current year by default', () => {
+  const currentYearDate = new Date()
+  const currentYear = currentYearDate.getFullYear()
+  
+  const kit = renderKit(DateTimeStacked, {
+    data: { testid: 'datetimestacked-hide-year' },
+    datetime: currentYearDate,
+    dark: false,
+  })
+ 
+  const yearElement = kit.querySelector('.pb_caption_kit_xs')
+
+  if (yearElement) {
+    expect(yearElement.textContent).not.toBe(currentYear.toString())
+  } else {
+
+    expect(yearElement).toBeNull()
+  }
+})

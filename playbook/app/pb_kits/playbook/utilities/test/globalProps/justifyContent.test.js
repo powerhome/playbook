@@ -35,3 +35,21 @@ test('Global Props: returns proper class name', () => {
     })
   }
 })
+
+test('Global Props: returns proper class name with default key', () => {
+  const testId = `${testSubject}-default-responsive`
+  render(
+    <Body
+        data={{ testid: testId }}
+        justifyContent={{ default: "spaceBetween", xs: "start", sm: "spaceBetween", md: "start" }}
+        text="Hi"
+    />
+  )
+  const kit = screen.getByTestId(testId)
+  // Should have base class for default value
+  expect(kit).toHaveClass(`justify_content_space_between`)
+  // Should have responsive classes for screen sizes
+  expect(kit).toHaveClass(`justify_content_xs_start`)
+  expect(kit).toHaveClass(`justify_content_sm_space_between`)
+  expect(kit).toHaveClass(`justify_content_md_start`)
+})
