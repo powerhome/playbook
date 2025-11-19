@@ -1,0 +1,1 @@
+Pass in `variant="button"` to replace the Circle Icon Button with the Button kit. Set the button's text with the `text` prop.

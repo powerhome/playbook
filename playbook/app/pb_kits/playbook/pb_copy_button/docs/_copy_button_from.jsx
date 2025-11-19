@@ -21,6 +21,7 @@ const CopyButtonFrom = (props) => {
         text="Copy Body text"
         tooltipPlacement="right"
         tooltipText="Body text copied!"
+        variant="button"
     />
 
     <TextInput
@@ -36,6 +37,7 @@ const CopyButtonFrom = (props) => {
         text="Copy Text Input"
         tooltipPlacement="right"
         tooltipText="Text input copied!"
+        variant="button"
     />
 
     <Textarea

@@ -1,5 +1,5 @@
 <%= pb_rails("body", props: { id: "body", text: "Copy this body text!"}) %>
-<%= pb_rails("copy_button", props: { text: "Copy Body text", from: "body", id: "copy-body-button" }) %>
+<%= pb_rails("copy_button", props: { text: "Copy Body text", from: "body", id: "copy-body-button", variant: "button" }) %>
 <%= pb_rails("text_input", props: { margin_top: "xs", placeholder: "Copy and paste here" }) %>
-<%= pb_rails("copy_button", props: { text: "Copy Text Input", from: "copy-input", id: "copy-input-button" }) %>
+<%= pb_rails("copy_button", props: { text: "Copy Text Input", from: "copy-input", id: "copy-input-button", variant: "button" }) %>
 <%= pb_rails("text_input", props: { margin_top: "xs", id: "copy-input" , value: "Copy and paste here" }) %>
