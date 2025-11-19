@@ -1,6 +1,10 @@
 <%= pb_content_tag do %>
-    <%= pb_rails("button", props: { icon: "copy" }) do %>
-      <%= object.text %>
+    <% if object.variant == "icon" %>
+      <%= pb_rails("circle_icon_button", props: { icon: "copy", variant: "link" }) %>
+    <% else %>
+      <%= pb_rails("button", props: { icon: "copy" }) do %>
+        <%= object.text %>
+      <% end %>
     <% end %>
   <% if object.id %> 
   <%= pb_rails("tooltip", props: {

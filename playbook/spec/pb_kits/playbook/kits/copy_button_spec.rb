@@ -21,6 +21,12 @@ RSpec.describe Playbook::PbCopyButton::CopyButton do
   it { is_expected.to define_prop(:value) }
   it { is_expected.to define_prop(:from) }
 
+  it {
+    is_expected.to define_enum_prop(:variant)
+      .with_default("button")
+      .with_values("button", "icon")
+  }
+
   describe "#classname" do
     it "returns the correct base class" do
       expect(subject.new.classname).to eq "pb_copy_button_kit"
