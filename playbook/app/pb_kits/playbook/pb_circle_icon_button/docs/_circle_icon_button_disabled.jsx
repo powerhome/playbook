@@ -2,9 +2,10 @@ import React from 'react'
 
 import CircleIconButton from '../_circle_icon_button'
 
-const CircleIconButtonDefault = (props) => (
+const CircleIconButtonDisabled = (props) => (
   <div>
     <CircleIconButton
+        disabled
         icon="plus"
         variant="primary"
         {...props}
@@ -13,6 +14,7 @@ const CircleIconButtonDefault = (props) => (
     <br />
 
     <CircleIconButton
+        disabled
         icon="pen"
         variant="secondary"
         {...props}
@@ -21,6 +23,7 @@ const CircleIconButtonDefault = (props) => (
     <br />
 
     <CircleIconButton
+        disabled
         icon="user"
         variant="link"
         {...props}
@@ -28,4 +31,4 @@ const CircleIconButtonDefault = (props) => (
   </div>
 )
 
-export default CircleIconButtonDefault
+export default CircleIconButtonDisabled

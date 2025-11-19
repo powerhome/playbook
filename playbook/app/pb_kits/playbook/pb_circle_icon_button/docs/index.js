@@ -3,3 +3,4 @@ export { default as CircleIconButtonClick } from './_circle_icon_button_click.js
 export { default as CircleIconButtonLink } from './_circle_icon_button_link.jsx'
 export { default as CircleIconButtonLoading } from './_circle_icon_button_loading.jsx'
 export { default as CircleIconButtonSize } from './_circle_icon_button_size.jsx'
+export { default as CircleIconButtonDisabled } from './_circle_icon_button_disabled.jsx'

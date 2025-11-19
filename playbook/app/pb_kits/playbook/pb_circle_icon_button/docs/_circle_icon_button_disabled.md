@@ -1,0 +1,1 @@
+Use the `disabled` prop to set to disabled. `disabled` can be applied to all variants as shown here. 

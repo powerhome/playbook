@@ -1,0 +1,1 @@
+The `variant` prop can be used to set the Circle Icon Button to `primary`, `secondary` or `link`. By default, variant is set to 'primary'. 

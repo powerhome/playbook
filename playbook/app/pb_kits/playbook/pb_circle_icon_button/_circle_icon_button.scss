@@ -1,5 +1,7 @@
 @import "../pb_button/button";
 @import "../pb_button/button_mixins";
+@import 'tokens/colors';
+@import 'tokens/opacity';
 
 $pb_button_styles: (
   "primary",
@@ -89,6 +91,12 @@ $pb_button_styles: (
           display: inline-block;
         }
       }
+    }
+  }
+  .pb_button_link {
+    &.pb_button_disabled {
+    background-color: unset !important;
+    color: rgba($charcoal, $opacity_5) !important;
     }
   }
 }
