@@ -1,7 +1,7 @@
 @import "../pb_button/button";
 @import "../pb_button/button_mixins";
-@import 'tokens/colors';
-@import 'tokens/opacity';
+@import '../tokens/colors';
+@import '../tokens/opacity';
 
 $pb_button_styles: (
   "primary",
