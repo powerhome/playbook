@@ -14,7 +14,7 @@ const CopyButtonDefault = (props) => (
 
     <Textarea
         {...props}
-        placeholder="Copy and paste here"
+        placeholder="Click the icon above to copy and paste here"
     />
   </div>
 )
