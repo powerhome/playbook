@@ -39,7 +39,10 @@
   <%= pb_rails("progress_step/progress_step_item", props: {status: "complete"}) do %>
   step 2
   <% end %>
-  <%= pb_rails("progress_step/progress_step_item", props: {status: "complete"}) do %>
+  <%= pb_rails("progress_step/progress_step_item", props: {status: "active"}) do %>
   step 3
+  <% end %>
+    <%= pb_rails("progress_step/progress_step_item", props: {status: "inactive"}) do %>
+  step 4
   <% end %>
 <% end %>

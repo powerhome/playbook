@@ -6,7 +6,6 @@ import ProgressStepItem from '../_progress_step_item.tsx'
 const ProgressStepDefault = (props) => (
   <div>
     <ProgressStep
-        icon
         {...props}
     >
       <ProgressStepItem status="complete" />
@@ -19,12 +18,24 @@ const ProgressStepDefault = (props) => (
 
     <ProgressStep {...props}>
       <ProgressStepItem status="complete">{'Step 1'}</ProgressStepItem>
-      <ProgressStepItem status="active">{'Step 2'}</ProgressStepItem>
-      <ProgressStepItem status="inactive">{'Step 3'}</ProgressStepItem>
+      <ProgressStepItem status="complete">{'Step 2'}</ProgressStepItem>
+      <ProgressStepItem status="active">{'Step 3'}</ProgressStepItem>
+      <ProgressStepItem status="inactive">{'Step 4'}</ProgressStepItem>
+      <ProgressStepItem status="inactive">{'Step 5'}</ProgressStepItem>
     </ProgressStep>
 
     <br />
     <br />
+
+    <ProgressStep 
+        icon
+        {...props}
+    >
+      <ProgressStepItem status="complete">{'Step 1'}</ProgressStepItem>
+      <ProgressStepItem status="complete">{'Step 2'}</ProgressStepItem>
+      <ProgressStepItem status="active">{'Step 3'}</ProgressStepItem>
+      <ProgressStepItem status="inactive">{'Step 4'}</ProgressStepItem>
+    </ProgressStep>
   </div>
 )
 
