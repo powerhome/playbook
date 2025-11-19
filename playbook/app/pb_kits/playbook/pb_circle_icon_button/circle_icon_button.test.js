@@ -44,3 +44,49 @@ test('adds size_small class when size is sm', () => {
   
   expect(kit).toHaveClass('pb_circle_icon_button_kit size_small')
 })
+
+test('adds disabled class when disabled is true', () => {
+  render(
+    <CircleIconButton
+        data={{ testid: 'disabled-test' }}
+        disabled
+        icon="plus"
+    />
+  )
+
+  const kit = screen.getByTestId('disabled-test')
+  const button = kit.querySelector('.pb_button_kit.pb_button_primary.pb_button_inline.pb_button_disabled')
+  
+  expect(button).toBeInTheDocument()
+})
+
+test('Disables button when disabled is true', () => {
+  render(
+    <CircleIconButton
+        data={{ testid: 'disabled-attribute-test' }}
+        disabled
+        icon="plus"
+    />
+  )
+
+  const kit = screen.getByTestId('disabled-attribute-test')
+  const button = kit.querySelector('button')
+  
+  expect(button).toBeDisabled()
+})
+
+test('Disables link button when disabled is true', () => {
+  render(
+    <CircleIconButton
+        data={{ testid: 'disabled-attribute-test' }}
+        disabled
+        icon="plus"
+        variant="link"
+    />
+  )
+
+  const kit = screen.getByTestId('disabled-attribute-test')
+  const button = kit.querySelector('button')
+  
+  expect(button).toBeDisabled()
+})
