@@ -23,7 +23,7 @@ RSpec.describe Playbook::PbCopyButton::CopyButton do
 
   it {
     is_expected.to define_enum_prop(:variant)
-      .with_default("button")
+      .with_default("icon")
       .with_values("button", "icon")
   }
 

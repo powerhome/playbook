@@ -35,7 +35,7 @@ const CopyButton = (props: CopyButtonProps) => {
     tooltipPlacement = 'bottom',
     tooltipText = 'Copied!',
     value = '',
-    variant = 'button',
+    variant = 'icon',
   } = props
 
   const [copied, copy] = usePBCopy({ value, from, timeout })

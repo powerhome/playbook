@@ -14,7 +14,7 @@ module Playbook
       prop :from
       prop :variant, type: Playbook::Props::Enum,
                      values: %w[button icon],
-                     default: "button"
+                     default: "icon"
 
       def classname
         generate_classname("pb_copy_button_kit")
