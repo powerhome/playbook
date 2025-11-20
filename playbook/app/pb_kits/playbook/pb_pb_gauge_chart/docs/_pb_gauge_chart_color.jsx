@@ -1,6 +1,6 @@
 import React from 'react'
 import PbGaugeChart from '../../pb_pb_gauge_chart/_pb_gauge_chart'
-import { colors } from 'playbook-ui'
+import colors from '../../tokens/exports/_colors.module.scss'
 
 const data = [{ name: "Name", y: 67 }]
 

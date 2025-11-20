@@ -1,5 +1,7 @@
 import React, { useState } from "react"
-import { AdvancedTable, Button, Flex } from "playbook-ui"
+import AdvancedTable from '../_advanced_table'
+import Flex from '../../pb_flex/_flex'
+import Button from '../../pb_button/_button'
 import MOCK_DATA from "./advanced_table_mock_data.json"
 import PAGINATION_MOCK_DATA from "./advanced_table_pagination_mock_data.json"
 

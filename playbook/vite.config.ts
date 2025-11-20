@@ -20,6 +20,7 @@ export default defineConfig({
       compress: false,
     },
     rollupOptions: {
+      preserveEntrySignatures: 'strict',
       input: {
         'chunks/vendor.js': resolve(__dirname, 'app/entrypoints/playbook.js'),
       },

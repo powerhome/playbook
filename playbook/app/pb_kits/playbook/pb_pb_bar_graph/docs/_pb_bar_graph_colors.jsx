@@ -1,5 +1,5 @@
 import React from 'react'
-import { PbBarGraph } from 'playbook-ui'
+import PbBarGraph from '../_pb_bar_graph'
 import colors from '../../tokens/exports/_colors.module.scss'
 
 const chartData = [{

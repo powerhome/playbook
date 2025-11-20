@@ -25,7 +25,6 @@ Gem::Specification.new do |s|
     "dist/chunks/*",
     "dist/playbook.css",
     "dist/reset.css",
-    "dist/playbook-doc.js",
     "dist/playbook-rails.js",
     "dist/playbook-rails-react-bindings.js",
     "dist/menu.yml",

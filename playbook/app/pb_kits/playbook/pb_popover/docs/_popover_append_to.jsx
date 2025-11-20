@@ -1,5 +1,8 @@
 import React, { useState } from "react";
-import { PbReactPopover, CircleIconButton, Body, Flex } from "playbook-ui";
+import PbReactPopover from "../_popover";
+import Body from "../../pb_body/_body";
+import Flex from "../../pb_flex/_flex";
+import CircleIconButton from "../../pb_circle_icon_button/_circle_icon_button";
 
 const PopoverAppendTo = (props) => {
   const [showParentPopover, setShowParentPopover] = useState(false);

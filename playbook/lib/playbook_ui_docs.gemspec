@@ -18,7 +18,6 @@ Gem::Specification.new do |s|
     "app/pb_kits/playbook/pb_*/docs/**/*",
     "dist/app/components/playbook/pb_docs/**/*",
     "dist/menu.yml",
-    "dist/playbook-doc.js",
     "dist/pb_doc_helper.rb"
   ]
 
