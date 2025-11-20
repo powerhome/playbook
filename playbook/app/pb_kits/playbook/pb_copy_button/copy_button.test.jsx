@@ -37,6 +37,29 @@ it('copies the value to clipboard and pastes it into an input', async () => {
   expect(navigator.clipboard.writeText).toHaveBeenCalledWith("copy");
 })
 
+test('passes text and tooltip props to icon variant', () => {
+  render(
+      <CopyButton
+          data={{ testid: 'text-test' }}
+          tooltipPlacement="right"
+          tooltipText="Text copied!"
+          value="copy"
+      />
+  )
+
+  const kit = screen.getByTestId('text-test')
+  const button = kit.querySelector('.pb_button_kit.pb_button_link.pb_button_inline.pb_button_enabled')
+  expect(button).toBeInTheDocument()
+
+  fireEvent.click(button)
+  const tooltipContent = screen.getByText("Text copied!")
+  expect(tooltipContent).toHaveTextContent("Text copied!")
+
+  const tooltip = kit.querySelector('.pb_tooltip_kit')
+  expect(tooltip).toBeInTheDocument()
+})
+
+
 test('passes text and tooltip props to button', () => {
   render(
       <CopyButton
@@ -45,6 +68,7 @@ test('passes text and tooltip props to button', () => {
           tooltipPlacement="right"
           tooltipText="Text copied!"
           value="copy"
+          variant="button"
       />
   )
 

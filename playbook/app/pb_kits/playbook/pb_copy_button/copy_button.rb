@@ -12,6 +12,9 @@ module Playbook
                           default: "Copied!"
       prop :value
       prop :from
+      prop :variant, type: Playbook::Props::Enum,
+                     values: %w[button icon],
+                     default: "icon"
 
       def classname
         generate_classname("pb_copy_button_kit")
