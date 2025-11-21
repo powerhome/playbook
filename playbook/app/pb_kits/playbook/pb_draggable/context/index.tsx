@@ -169,10 +169,23 @@ export const DraggableProvider = ({
   };
 
   const handleDragEnd = () => {
+    const draggedItemId = state.dragData.id;
+    const originalContainer = state.dragData.initialGroup;
+    const draggedItem = state.items.find(item => item.id === draggedItemId);
+    const finalContainer = draggedItem ? draggedItem.container : originalContainer;
+    
+    // Find items above and below in the same container
+    const itemsInContainer = state.items.filter(item => item.container === finalContainer);
+    const indexInContainer = itemsInContainer.findIndex(item => item.id === draggedItemId);
+    const itemAbove = indexInContainer > 0 ? itemsInContainer[indexInContainer - 1] : null;
+    const itemBelow = indexInContainer < itemsInContainer.length - 1 ? itemsInContainer[indexInContainer + 1] : null;
+    
     dispatch({ type: 'SET_IS_DRAGGING', payload: "" });
     dispatch({ type: 'SET_ACTIVE_CONTAINER', payload: "" });
     dispatch({ type: 'SET_DRAG_DATA', payload: { id: "", initialGroup: "", originId: "" } });
-    if (onDragEnd) onDragEnd();
+    
+    // Pass enhanced info to onDragEnd callback to give dev more context
+    if (onDragEnd) onDragEnd(draggedItemId, finalContainer, originalContainer, itemAbove, itemBelow);
   };
 
   const changeCategory = (itemId: string, container: string) => {
@@ -182,11 +195,26 @@ export const DraggableProvider = ({
   const handleDrop = (container: string) => {
     if (state.dragData.originId !== providerId) return; // Ignore drop events from other providers
 
+    const draggedItemId = state.dragData.id;
+    const originalContainer = state.dragData.initialGroup;
+    const draggedItem = state.items.find(item => item.id === draggedItemId);
+    
+    // Find items above and below in the same container (before changeCategory updates it)
+    const itemsInContainer = state.items.filter(item => item.container === container);
+    const indexInContainer = itemsInContainer.findIndex(item => item.id === draggedItemId);
+    const itemAbove = indexInContainer > 0 ? itemsInContainer[indexInContainer - 1] : null;
+    const itemBelow = indexInContainer < itemsInContainer.length - 1 ? itemsInContainer[indexInContainer + 1] : null;
+    
     dispatch({ type: 'SET_IS_DRAGGING', payload: "" });
     dispatch({ type: 'SET_ACTIVE_CONTAINER', payload: "" });
     // changeCategory will ensure the container is set correctly on drop for cross container and same container drops
-    changeCategory(state.dragData.id, container);
-    if (onDrop) onDrop(container);
+    changeCategory(draggedItemId, container);
+    
+    // Pass enhanced info to onDrop callback so devs have more context
+    if (onDrop && draggedItem) {
+      const updatedItem = { ...draggedItem, container };
+      onDrop(draggedItemId, container, originalContainer, updatedItem, itemAbove, itemBelow);
+    }
   };
 
   const handleDragOver = (e: Event, container: string) => {

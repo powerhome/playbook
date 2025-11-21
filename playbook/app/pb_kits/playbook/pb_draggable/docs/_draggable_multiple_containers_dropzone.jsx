@@ -84,6 +84,21 @@ const DraggableMultipleContainersDropzone = (props) => {
     <DraggableProvider 
         dropZone={{type: "outline"}}
         initialItems={data}
+        onDragEnd={(draggedItemId, finalContainer, originalContainer, itemAbove, itemBelow) => {
+          console.log(`Dragged Item ID: ${draggedItemId}`);
+          console.log(`Final Container: ${finalContainer}`);
+          console.log(`Original Container: ${originalContainer}`);
+          console.log('Item Above:', itemAbove);
+          console.log('Item Below:', itemBelow);
+        }}
+        onDrop={(draggedItemId, droppedContainer, originalContainer, item, itemAbove, itemBelow) => {
+          console.log(`Dragged Item ID: ${draggedItemId}`);
+          console.log(`Dropped Container: ${droppedContainer}`);
+          console.log(`Original Container: ${originalContainer}`);
+          console.log('Dropped Item:', item);
+          console.log('Item Above:', itemAbove);
+          console.log('Item Below:', itemBelow);
+        }}
         onReorder={(items) => setInitialState(items)}
     >
       <Flex
