@@ -1,6 +1,7 @@
 examples:
   react:
   - draggable_default: Default
+  - draggable_multiple_containers_dropzone: Dragging Across Multiple Containers with Dropzones
   - draggable_with_list: Draggable with List Kit
   - draggable_with_selectable_list: Draggable with SelectableList Kit
   - draggable_with_cards: Draggable with Cards

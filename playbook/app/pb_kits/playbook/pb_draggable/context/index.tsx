@@ -39,6 +39,32 @@ const reducer = (state: InitialStateType, action: ActionType) => {
 
       return { ...state, items: newItems };
     }
+    case 'REORDER_ITEMS_CROSS_CONTAINER': {
+      const { dragId, targetId, newContainer } = action.payload;
+      const newItems = [...state.items];
+      const draggedItem = newItems.find(item => item.id === dragId);
+      const draggedIndex = newItems.indexOf(draggedItem);
+      const targetIndex = newItems.findIndex(item => item.id === targetId);
+
+      // Update container temporarily so dropzone preview works correctly
+      const updatedItem = { ...draggedItem, container: newContainer };
+
+      newItems.splice(draggedIndex, 1);
+      newItems.splice(targetIndex, 0, updatedItem);
+
+      return { ...state, items: newItems };
+    }
+    case 'RESET_DRAG_CONTAINER': {
+      const { itemId, originalContainer } = action.payload;
+      return {
+        ...state,
+        items: state.items.map(item =>
+          item.id === itemId
+            ? { ...item, container: originalContainer }
+            : item
+        )
+      };
+    }
     default:
       return state;
   }
@@ -103,7 +129,16 @@ export const DraggableProvider = ({
     if (state.dragData.originId !== providerId) return; // Ignore drag events from other providers
 
     if (state.dragData.id !== id) {
-      dispatch({ type: 'REORDER_ITEMS', payload: { dragId: state.dragData.id, targetId: id } });
+      // Check if this is a cross-container drag
+      const isCrossContainer = state.dragData.initialGroup !== container;
+      
+      if (isCrossContainer) {
+        // Use cross-container reorder to update container temporarily for dropzone preview
+        dispatch({ type: 'REORDER_ITEMS_CROSS_CONTAINER', payload: { dragId: state.dragData.id, targetId: id, newContainer: container } });
+      } else {
+        // Same container: use normal reorder no need to be fancy nancy
+        dispatch({ type: 'REORDER_ITEMS', payload: { dragId: state.dragData.id, targetId: id } });
+      }
       dispatch({ type: 'SET_DRAG_DATA', payload: { id: state.dragData.id, initialGroup: container, originId: providerId } });
     }
     if (onDragEnter) onDragEnter(id, container);
@@ -125,6 +160,7 @@ export const DraggableProvider = ({
 
     dispatch({ type: 'SET_IS_DRAGGING', payload: "" });
     dispatch({ type: 'SET_ACTIVE_CONTAINER', payload: "" });
+    // changeCategory will ensure the container is set correctly on drop for cross container and same container drops
     changeCategory(state.dragData.id, container);
     if (onDrop) onDrop(container);
   };
