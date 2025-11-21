@@ -42,6 +42,45 @@ formatted_release.gsub!(/(?<=-\s).+/) { |match| titleize(match) }
 # Adjusted to also remove any leading spaces after bullet point and emoji/number removal
 formatted_release.gsub!(/-\s+/, "- ")
 
+# Group entries with the same header together
+def group_by_headers(text)
+  # Split into lines
+  lines = text.split("\n")
+  grouped_sections = {}
+  current_header = nil
+  header_order = []
+  preamble = []
+
+  lines.each do |line|
+    # Check if line is a section header (e.g., **Kit Enhancements:**)
+    if line.match?(/^\*\*.*:\*\*$/)
+      current_header = line
+      unless grouped_sections.key?(current_header)
+        grouped_sections[current_header] = []
+        header_order << current_header
+      end
+    elsif current_header
+      # Add line to current header's section
+      grouped_sections[current_header] << line
+    else
+      # Lines before any header (preamble)
+      preamble << line
+    end
+  end
+
+  # Reconstruct the text with grouped sections
+  result = preamble.join("\n")
+  header_order.each do |header|
+    result += "\n" unless result.empty? || result.end_with?("\n\n")
+    result += "\n#{header}\n"
+    result += grouped_sections[header].join("\n")
+  end
+
+  result
+end
+
+formatted_release = group_by_headers(formatted_release)
+
 # Write the new changelog to a file
 File.write("new-changelog.md", formatted_release)
 puts "🎉 Latest release formatted for Github and saved to new-changelog.md 🎉"

@@ -33,6 +33,45 @@ connect_formatted.gsub!(/\[.*?\]\(.*?\)\s*/, "") # Remove links and trailing spa
 
 connect_formatted.gsub!(/\(\s*\)/, "")
 
+# Group entries with the same header together
+def group_by_headers(text)
+  # Split into lines
+  lines = text.split("\n")
+  grouped_sections = {}
+  current_header = nil
+  header_order = []
+  preamble = []
+
+  lines.each do |line|
+    # Check if line is a section header (e.g., ✨ Kit Enhancements:, **Kit Enhancements:**)
+    if line.match?(/^(✨|🐛|🔥|\*\*).*:/)
+      current_header = line
+      unless grouped_sections.key?(current_header)
+        grouped_sections[current_header] = []
+        header_order << current_header
+      end
+    elsif current_header
+      # Add line to current header's section
+      grouped_sections[current_header] << line
+    else
+      # Lines before any header (preamble)
+      preamble << line
+    end
+  end
+
+  # Reconstruct the text with grouped sections
+  result = preamble.join("\n")
+  header_order.each do |header|
+    result += "\n" unless result.empty? || result.end_with?("\n\n")
+    result += "\n#{header}\n"
+    result += grouped_sections[header].join("\n")
+  end
+
+  result
+end
+
+connect_formatted = group_by_headers(connect_formatted)
+
 # Append link to full changelog
 full_changelog_link = "See [here](https://playbook.powerapp.cloud/changelog) for full Changelog"
 connect_formatted << "\n\n#{full_changelog_link}"
