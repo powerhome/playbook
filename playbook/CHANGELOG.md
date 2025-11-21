@@ -1,7 +1,11 @@
-# 15.5.0
+#  ✨ A DatePicker That Knows Where to Go ✨
 ##### November 21, 2025
 
 ![release_image](https://github.com/user-attachments/assets/db119637-25e9-4157-9091-c5f7fdf034fc)
+
+Our DatePicker just got smarter! It now positions its calendar based on available space, choosing top or bottom automatically. This keeps it fully visible and ensures a cleaner, more consistent experience!
+
+[15.5.0](https://github.com/powerhome/playbook/tree/15.5.0) full list of changes:
 
 **Kit Enhancements:**
 
