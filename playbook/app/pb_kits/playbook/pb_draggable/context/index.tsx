@@ -54,6 +54,30 @@ const reducer = (state: InitialStateType, action: ActionType) => {
 
       return { ...state, items: newItems };
     }
+    case 'MOVE_TO_CONTAINER_END': {
+      const { dragId, newContainer } = action.payload;
+      const newItems = [...state.items];
+      const draggedItem = newItems.find(item => item.id === dragId);
+      const draggedIndex = newItems.indexOf(draggedItem);
+
+      // Update container temporarily so dropzone preview works correctly
+      const updatedItem = { ...draggedItem, container: newContainer };
+
+      // Remove from current position
+      newItems.splice(draggedIndex, 1);
+
+      // Find the last item in the target container and insert after it
+      const lastIndexInContainer = newItems.map(item => item.container).lastIndexOf(newContainer);
+      if (lastIndexInContainer === -1) {
+        // Container is empty, add to end
+        newItems.push(updatedItem);
+      } else {
+        // Insert after last item in container
+        newItems.splice(lastIndexInContainer + 1, 0, updatedItem);
+      }
+
+      return { ...state, items: newItems };
+    }
     case 'RESET_DRAG_CONTAINER': {
       const { itemId, originalContainer } = action.payload;
       return {
@@ -170,6 +194,15 @@ export const DraggableProvider = ({
 
     e.preventDefault();
     dispatch({ type: 'SET_ACTIVE_CONTAINER', payload: container });
+    
+    // Check if we're dragging over a different container than where the item currently is
+    const draggedItem = state.items.find(item => item.id === state.dragData.id);
+    if (draggedItem && draggedItem.container !== container) {
+      // This handles the case when dragging to empty space at bottom of container OR in empty container
+      dispatch({ type: 'MOVE_TO_CONTAINER_END', payload: { dragId: state.dragData.id, newContainer: container } });
+      dispatch({ type: 'SET_DRAG_DATA', payload: { id: state.dragData.id, initialGroup: container, originId: providerId } });
+    }
+    
     if (onDragOver) onDragOver(e, container);
   };
 
