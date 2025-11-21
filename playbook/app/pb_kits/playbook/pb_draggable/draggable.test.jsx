@@ -256,3 +256,79 @@ test("line dropZone with horizontal direction applies 'line_horizontal' class to
   
   expect(container).toHaveClass("line_horizontal");
 });
+
+// Cross-container drag tests
+const multiContainerData = [
+  { id: "1", container: "To Do", text: "Task 1" },
+  { id: "2", container: "To Do", text: "Task 2" },
+  { id: "3", container: "In Progress", text: "Task 3" },
+  { id: "4", container: "Done", text: "Task 4" },
+];
+
+const containers = ["To Do", "In Progress", "Done"];
+
+const DraggableMultipleContainers = () => {
+  const [initialState, setInitialState] = useState(multiContainerData);
+
+  return (
+    <div data-testid={testId}>
+      <DraggableProvider
+          dropZone={{ type: "outline" }}
+          initialItems={multiContainerData}
+          onReorder={(items) => setInitialState(items)}
+      >
+        {containers.map((container) => (
+          <Draggable.Container
+              container={container}
+              data={{testid:`container-${container}`}}
+              key={container}
+          >
+            {initialState
+              .filter((item) => item.container === container)
+              .map(({ id, text }) => (
+                <Draggable.Item
+                    container={container}
+                    data-testid={`item-${id}`}
+                    dragId={id}
+                    key={id}
+                >
+                  {text}
+                </Draggable.Item>
+              ))}
+          </Draggable.Container>
+        ))}
+      </DraggableProvider>
+    </div>
+  );
+};
+
+test("renders multiple containers with correct items", () => {
+  render(<DraggableMultipleContainers />);
+  
+  const kit = screen.getByTestId(testId);
+  expect(kit).toBeInTheDocument();
+  
+  containers.forEach((container) => {
+    const containerEl = kit.querySelector(`[data-testid="container-${container}"]`);
+    expect(containerEl).toBeInTheDocument();
+  });
+  
+  // Check items are in correct containers
+  expect(screen.getByText("Task 1")).toBeInTheDocument();
+  expect(screen.getByText("Task 2")).toBeInTheDocument();
+  expect(screen.getByText("Task 3")).toBeInTheDocument();
+  expect(screen.getByText("Task 4")).toBeInTheDocument();
+});
+
+test("items have correct container association", () => {
+  const { container } = render(<DraggableMultipleContainers />);
+  
+  // items rendered within their respective containers
+  const todoContainer = container.querySelector('[data-testid="container-To Do"]');
+  const inProgressContainer = container.querySelector('[data-testid="container-In Progress"]');
+  const doneContainer = container.querySelector('[data-testid="container-Done"]');
+  
+  expect(todoContainer.querySelectorAll('.pb_draggable_item')).toHaveLength(2);
+  expect(inProgressContainer.querySelectorAll('.pb_draggable_item')).toHaveLength(1);
+  expect(doneContainer.querySelectorAll('.pb_draggable_item')).toHaveLength(1);
+})

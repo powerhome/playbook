@@ -39,6 +39,56 @@ const reducer = (state: InitialStateType, action: ActionType) => {
 
       return { ...state, items: newItems };
     }
+    case 'REORDER_ITEMS_CROSS_CONTAINER': {
+      const { dragId, targetId, newContainer } = action.payload;
+      const newItems = [...state.items];
+      const draggedItem = newItems.find(item => item.id === dragId);
+      const draggedIndex = newItems.indexOf(draggedItem);
+      const targetIndex = newItems.findIndex(item => item.id === targetId);
+
+      // Update container temporarily so dropzone preview works correctly
+      const updatedItem = { ...draggedItem, container: newContainer };
+
+      newItems.splice(draggedIndex, 1);
+      newItems.splice(targetIndex, 0, updatedItem);
+
+      return { ...state, items: newItems };
+    }
+    case 'MOVE_TO_CONTAINER_END': {
+      const { dragId, newContainer } = action.payload;
+      const newItems = [...state.items];
+      const draggedItem = newItems.find(item => item.id === dragId);
+      const draggedIndex = newItems.indexOf(draggedItem);
+
+      // Update container temporarily so dropzone preview works correctly
+      const updatedItem = { ...draggedItem, container: newContainer };
+
+      // Remove from current position
+      newItems.splice(draggedIndex, 1);
+
+      // Find the last item in the target container and insert after it
+      const lastIndexInContainer = newItems.map(item => item.container).lastIndexOf(newContainer);
+      if (lastIndexInContainer === -1) {
+        // Container is empty, add to end
+        newItems.push(updatedItem);
+      } else {
+        // Insert after last item in container
+        newItems.splice(lastIndexInContainer + 1, 0, updatedItem);
+      }
+
+      return { ...state, items: newItems };
+    }
+    case 'RESET_DRAG_CONTAINER': {
+      const { itemId, originalContainer } = action.payload;
+      return {
+        ...state,
+        items: state.items.map(item =>
+          item.id === itemId
+            ? { ...item, container: originalContainer }
+            : item
+        )
+      };
+    }
     default:
       return state;
   }
@@ -103,17 +153,39 @@ export const DraggableProvider = ({
     if (state.dragData.originId !== providerId) return; // Ignore drag events from other providers
 
     if (state.dragData.id !== id) {
-      dispatch({ type: 'REORDER_ITEMS', payload: { dragId: state.dragData.id, targetId: id } });
+      // Check if this is a cross-container drag
+      const isCrossContainer = state.dragData.initialGroup !== container;
+      
+      if (isCrossContainer) {
+        // Use cross-container reorder to update container temporarily for dropzone preview
+        dispatch({ type: 'REORDER_ITEMS_CROSS_CONTAINER', payload: { dragId: state.dragData.id, targetId: id, newContainer: container } });
+      } else {
+        // Same container: use normal reorder no need to be fancy nancy
+        dispatch({ type: 'REORDER_ITEMS', payload: { dragId: state.dragData.id, targetId: id } });
+      }
       dispatch({ type: 'SET_DRAG_DATA', payload: { id: state.dragData.id, initialGroup: container, originId: providerId } });
     }
     if (onDragEnter) onDragEnter(id, container);
   };
 
   const handleDragEnd = () => {
+    const draggedItemId = state.dragData.id;
+    const originalContainer = state.dragData.initialGroup;
+    const draggedItem = state.items.find(item => item.id === draggedItemId);
+    const finalContainer = draggedItem ? draggedItem.container : originalContainer;
+    
+    // Find items above and below in the same container
+    const itemsInContainer = state.items.filter(item => item.container === finalContainer);
+    const indexInContainer = itemsInContainer.findIndex(item => item.id === draggedItemId);
+    const itemAbove = indexInContainer > 0 ? itemsInContainer[indexInContainer - 1] : null;
+    const itemBelow = indexInContainer < itemsInContainer.length - 1 ? itemsInContainer[indexInContainer + 1] : null;
+    
     dispatch({ type: 'SET_IS_DRAGGING', payload: "" });
     dispatch({ type: 'SET_ACTIVE_CONTAINER', payload: "" });
     dispatch({ type: 'SET_DRAG_DATA', payload: { id: "", initialGroup: "", originId: "" } });
-    if (onDragEnd) onDragEnd();
+    
+    // Pass enhanced info to onDragEnd callback to give dev more context
+    if (onDragEnd) onDragEnd(draggedItemId, finalContainer, originalContainer, itemAbove, itemBelow);
   };
 
   const changeCategory = (itemId: string, container: string) => {
@@ -123,10 +195,26 @@ export const DraggableProvider = ({
   const handleDrop = (container: string) => {
     if (state.dragData.originId !== providerId) return; // Ignore drop events from other providers
 
+    const draggedItemId = state.dragData.id;
+    const originalContainer = state.dragData.initialGroup;
+    const draggedItem = state.items.find(item => item.id === draggedItemId);
+    
+    // Find items above and below in the same container (before changeCategory updates it)
+    const itemsInContainer = state.items.filter(item => item.container === container);
+    const indexInContainer = itemsInContainer.findIndex(item => item.id === draggedItemId);
+    const itemAbove = indexInContainer > 0 ? itemsInContainer[indexInContainer - 1] : null;
+    const itemBelow = indexInContainer < itemsInContainer.length - 1 ? itemsInContainer[indexInContainer + 1] : null;
+    
     dispatch({ type: 'SET_IS_DRAGGING', payload: "" });
     dispatch({ type: 'SET_ACTIVE_CONTAINER', payload: "" });
-    changeCategory(state.dragData.id, container);
-    if (onDrop) onDrop(container);
+    // changeCategory will ensure the container is set correctly on drop for cross container and same container drops
+    changeCategory(draggedItemId, container);
+    
+    // Pass enhanced info to onDrop callback so devs have more context
+    if (onDrop && draggedItem) {
+      const updatedItem = { ...draggedItem, container };
+      onDrop(draggedItemId, container, originalContainer, updatedItem, itemAbove, itemBelow);
+    }
   };
 
   const handleDragOver = (e: Event, container: string) => {
@@ -134,6 +222,15 @@ export const DraggableProvider = ({
 
     e.preventDefault();
     dispatch({ type: 'SET_ACTIVE_CONTAINER', payload: container });
+    
+    // Check if we're dragging over a different container than where the item currently is
+    const draggedItem = state.items.find(item => item.id === state.dragData.id);
+    if (draggedItem && draggedItem.container !== container) {
+      // This handles the case when dragging to empty space at bottom of container OR in empty container
+      dispatch({ type: 'MOVE_TO_CONTAINER_END', payload: { dragId: state.dragData.id, newContainer: container } });
+      dispatch({ type: 'SET_DRAG_DATA', payload: { id: state.dragData.id, initialGroup: container, originId: providerId } });
+    }
+    
     if (onDragOver) onDragOver(e, container);
   };
 
