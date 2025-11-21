@@ -29,7 +29,7 @@ export const ComponentsLoader: () => Promise<CategoryTypes[]> = async () => {
   return data;
 };
 
-export const ComponentShowLoader = async ({ params }) => {
+export const ComponentShowLoader = async ({ params }:any) => {
   const response = await fetch(`/beta/kits/${params.name}.json`);
   const data = await response.json();
   return data; 

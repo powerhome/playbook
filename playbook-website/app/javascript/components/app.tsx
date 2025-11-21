@@ -11,6 +11,10 @@ import ComponentList from './Website/src/pages/ComponentList'
 import CategoryShow from './Website/src/pages/CategoryShow'
 import KitShow from './Website/src/pages/KitShow'
 import IconList from './Website/src/pages/IconList'
+import Changelog from './Website/src/pages/Changelog'
+import GettingStarted from './Website/src/pages/GettingStarted'
+import DesignGuidelines from './Website/src/pages/DesignGuidelines'
+import GuidePage from './Website/src/pages/GuidePage'
 import Error from './Error'
 import { CategoryLoader, ComponentsLoader, ComponentShowLoader, } from './Website/src/hooks/loaders'
 
@@ -51,6 +55,36 @@ const router = createBrowserRouter(
       <Route
           element={<IconList />}
           path="icons"
+      />
+      <Route
+          element={<Changelog />}
+          loader={ComponentsLoader}
+          path="changelog"
+      />
+       <Route
+          element={<Changelog />}
+          loader={ComponentsLoader}
+          path="changelog/:variant"
+      />
+      <Route
+          element={<GettingStarted />}
+          loader={ComponentsLoader}
+          path="guides/getting_started"
+      />
+      <Route
+          element={<GuidePage />}
+          loader={ComponentsLoader}
+          path="guides/getting_started/:page"
+      />
+      <Route
+          element={<DesignGuidelines />}
+          loader={ComponentsLoader}
+          path="guides/design_guidelines"
+      />
+      <Route
+          element={<GuidePage />}
+          loader={ComponentsLoader}
+          path="guides/design_guidelines/:page"
       />
 
     </Route>
