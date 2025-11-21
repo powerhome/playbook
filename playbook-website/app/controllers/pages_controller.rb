@@ -37,6 +37,25 @@ class PagesController < ApplicationController
       }
     end
 
+    # Read markdown content for beta pages
+    changelog_content = Playbook::Engine.root.join("CHANGELOG.md").read
+    changelog_releases = Rails.cache.fetch("changelog_releases") do
+      paginate_changelog(changelog_content)
+    end
+
+    swift_changelog_content = Playbook::Engine.root.join("SWIFT_CHANGELOG.md").read
+    swift_changelog_releases = Rails.cache.fetch("swift_changelog_releases") do
+      paginate_changelog(swift_changelog_content)
+    end
+
+    figma_changelog_content = Playbook::Engine.root.join("FIGMA_CHANGELOG.md").read
+    figma_changelog_releases = Rails.cache.fetch("figma_changelog_releases") do
+      paginate_changelog(figma_changelog_content)
+    end
+
+    getting_started_content = File.read(Rails.root.join("app/views/guides/getting_started.html.md"))
+    design_guidelines_content = File.read(Rails.root.join("app/views/guides/design_guidelines.md"))
+
     respond_to do |format|
       format.html { render layout: "application_beta", inline: "" }
       format.json do
@@ -58,6 +77,14 @@ class PagesController < ApplicationController
           whats_new: DOCS[:whats_new],
           building_blocks: BUILDING_BLOCKS,
           global_props_and_tokens: GLOBAL_PROPS_AND_TOKENS,
+          changelog_content: changelog_content,
+          changelog_releases: changelog_releases,
+          swift_changelog_content: swift_changelog_content,
+          swift_changelog_releases: swift_changelog_releases,
+          figma_changelog_content: figma_changelog_content,
+          figma_changelog_releases: figma_changelog_releases,
+          getting_started_content: getting_started_content,
+          design_guidelines_content: design_guidelines_content,
 
         }
       end
