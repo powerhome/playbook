@@ -1,3 +1,43 @@
+# 15.5.0
+##### November 21, 2025
+
+![release_image](https://github.com/user-attachments/assets/db119637-25e9-4157-9091-c5f7fdf034fc)
+
+**Kit Enhancements:**
+
+- Copy Button Kit: Set Icon Variant As Default - React & Rails [\#5534](https://github.com/powerhome/playbook/pull/5534) ([kangaree](https://github.com/kangaree))
+- Progress Step: Scss Refactor [\#5506](https://github.com/powerhome/playbook/pull/5506) ([nidaqg](https://github.com/nidaqg))
+- Copy Kit: Create "icon" Variant - React [\#5504](https://github.com/powerhome/playbook/pull/5504) ([nickamantia](https://github.com/nickamantia))
+- Global Prop: Smarter Truncation [\#5503](https://github.com/powerhome/playbook/pull/5503) ([elisashapiro](https://github.com/elisashapiro))
+- Date Time Stacked Kit: Add Showcurrentyear Prop [\#5519](https://github.com/powerhome/playbook/pull/5519) ([elisashapiro](https://github.com/elisashapiro))
+- Date Time Kit: Add Showcurrentyear Prop [\#5518](https://github.com/powerhome/playbook/pull/5518) ([nickamantia](https://github.com/nickamantia))
+- Global Props: Add Default Breakpoint Support to React Responsive Props [\#5485](https://github.com/powerhome/playbook/pull/5485) ([elisashapiro](https://github.com/elisashapiro))
+- Date Picker Kit: Position Onscreen - React & Rails [\#5491](https://github.com/powerhome/playbook/pull/5491) ([kangaree](https://github.com/kangaree))
+- Date Stacked Kit: Add Showcurrentyear Prop [\#5479](https://github.com/powerhome/playbook/pull/5479) ([skduncan](https://github.com/skduncan))
+- Date Range Inline Kit: Add Showcurrentyear Prop [\#5478](https://github.com/powerhome/playbook/pull/5478) ([elisashapiro](https://github.com/elisashapiro))
+- Nav Kit: Disabled Prop for Horizontal Nav [\#5470](https://github.com/powerhome/playbook/pull/5470) ([nidaqg](https://github.com/nidaqg))
+- Datepicker: Better Initialization Logic \(rails\) [\#5463](https://github.com/powerhome/playbook/pull/5463) ([nidaqg](https://github.com/nidaqg))
+
+
+**Fixed Bugs:**
+
+- Dropdown and Form Kit: Multi-select Validation Error False Positives - Rails Only [\#5525](https://github.com/powerhome/playbook/pull/5525) ([kangaree](https://github.com/kangaree))
+- Typeahead Kit: Multikit Badge Spacing [\#5524](https://github.com/powerhome/playbook/pull/5524) ([elisashapiro](https://github.com/elisashapiro))
+- Table Kit: Fix Null Offsetwidth Error With Sticky Columns - React [\#5492](https://github.com/powerhome/playbook/pull/5492) ([kangaree](https://github.com/kangaree))
+- Global Props: React Flexitem Can't Use Htmlprops Style - React [\#5483](https://github.com/powerhome/playbook/pull/5483) ([nickamantia](https://github.com/nickamantia))
+- Fixed Confirmation Toast: Fix Early Autoclose by Clearing Timeouts [\#5477](https://github.com/powerhome/playbook/pull/5477) ([kangaree](https://github.com/kangaree))
+
+
+**Improvements:**
+
+- Playbook Dist: Remove Playbook-doc.js from Dist [\#5520](https://github.com/powerhome/playbook/pull/5520) ([nidaqg](https://github.com/nidaqg))
+- Building Blocks: Fix Typo [\#5516](https://github.com/powerhome/playbook/pull/5516) ([haydenrou](https://github.com/haydenrou))
+- Playbook Website: Currency Kit Updated Descriptions \(e.g., Matching Decimals\) [\#5505](https://github.com/powerhome/playbook/pull/5505) ([kangaree](https://github.com/kangaree))
+- Dialog Kit: Enhance Complex Dialog Doc Example With Playbook Form Kit and Remote Option - Rails Only [\#5501](https://github.com/powerhome/playbook/pull/5501) ([nickamantia](https://github.com/nickamantia))
+- Highcharts Documentations: Get New Highcharts Kits Ready to Be Taken Out Of Beta [\#5494](https://github.com/powerhome/playbook/pull/5494) ([nickamantia](https://github.com/nickamantia))
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/v15.5.0-rc.4...15.5.0)
+
 # 🗓️ New Quick Picks: Today, Yesterday, This Week? Now!
 
 ##### November 10, 2025
