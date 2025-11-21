@@ -100,6 +100,7 @@ const DraggableMultipleContainersDropzone = (props) => {
                 <Caption textAlign="center">{container}</Caption>
                 <Flex 
                     alignItems="stretch"
+                    gap="sm"
                     orientation="column" 
                 >
                   {initialState
@@ -118,7 +119,6 @@ const DraggableMultipleContainersDropzone = (props) => {
                             key={id}
                         >
                           <Card
-                              marginBottom="sm"
                               padding="sm"
                               {...props}
                           >
