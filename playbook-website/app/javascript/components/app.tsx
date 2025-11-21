@@ -14,6 +14,7 @@ import IconList from './Website/src/pages/IconList'
 import Changelog from './Website/src/pages/Changelog'
 import GettingStarted from './Website/src/pages/GettingStarted'
 import DesignGuidelines from './Website/src/pages/DesignGuidelines'
+import GuidePage from './Website/src/pages/GuidePage'
 import Error from './Error'
 import { CategoryLoader, ComponentsLoader, ComponentShowLoader, } from './Website/src/hooks/loaders'
 
@@ -71,9 +72,19 @@ const router = createBrowserRouter(
           path="guides/getting_started"
       />
       <Route
+          element={<GuidePage />}
+          loader={ComponentsLoader}
+          path="guides/getting_started/:page"
+      />
+      <Route
           element={<DesignGuidelines />}
           loader={ComponentsLoader}
           path="guides/design_guidelines"
+      />
+      <Route
+          element={<GuidePage />}
+          loader={ComponentsLoader}
+          path="guides/design_guidelines/:page"
       />
 
     </Route>

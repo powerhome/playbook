@@ -56,6 +56,22 @@ class PagesController < ApplicationController
     getting_started_content = File.read(Rails.root.join("app/views/guides/getting_started.html.md"))
     design_guidelines_content = File.read(Rails.root.join("app/views/guides/design_guidelines.md"))
 
+    # Read individual guide page if requested
+    guide_page_content = nil
+    if params[:page].present?
+      parent = if request.path.include?("getting_started")
+                 "getting_started"
+               elsif request.path.include?("design_guidelines")
+                 "design_guidelines"
+               end
+
+      if parent
+        search_path = File.join(Rails.root, "/app/views/guides/#{parent}")
+        file_path = Dir.glob("#{search_path}/#{params[:page]}*.md").first
+        guide_page_content = File.read(file_path) if file_path && File.exist?(file_path)
+      end
+    end
+
     respond_to do |format|
       format.html { render layout: "application_beta", inline: "" }
       format.json do
@@ -85,6 +101,7 @@ class PagesController < ApplicationController
           figma_changelog_releases: figma_changelog_releases,
           getting_started_content: getting_started_content,
           design_guidelines_content: design_guidelines_content,
+          guide_page_content: guide_page_content,
 
         }
       end

@@ -26,7 +26,9 @@ Rails.application.routes.draw do
   get "beta/changelog", to: "pages#application_beta"
   get "beta/changelog/:variant", to: "pages#application_beta"
   get "beta/guides/getting_started", to: "pages#application_beta"
+  get "beta/guides/getting_started/:page", to: "pages#application_beta"
   get "beta/guides/design_guidelines", to: "pages#application_beta"
+  get "beta/guides/design_guidelines/:page", to: "pages#application_beta"
 
   # Legacy View
   get "kits", to: "pages#kits"
