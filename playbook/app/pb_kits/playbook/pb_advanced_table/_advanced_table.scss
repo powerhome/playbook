@@ -791,6 +791,28 @@
       box-shadow: 1px 0px 0px 0px var(--column-border-color) !important;
     }
 
+    // Override last-header-cell border color in dark mode
+    .pb_advanced_table_header {
+      > tr:not(:first-child) {
+        .last-header-cell {
+          border-right: 1px solid $border_dark !important;
+        }
+      }
+
+      th[colspan]:not([colspan="1"]) {
+        border-right: 1px solid $border_dark !important;
+      }
+    }
+
+    // Override last-cell border color in dark mode for body cells
+    .pb_advanced_table_body {
+      tr {
+        .last-cell:not(:last-of-type) {
+          border-right: 1px solid $border_dark !important;
+        }
+      }
+    }
+
     // Apply border colors in dark mode
     &[class*="column-group-border-"] {
       // For top-level column groups (ENROLLMENT DATA, PERFORMANCE DATA)
@@ -850,7 +872,7 @@
     // Restore vertical border styling in dark mode when verticalBorder is true
     .pb_table[data-vertical-border="true"] {
       .pb_advanced_table_header {
-        > tr:not(:first-child) {
+        > tr {
           th:not(:last-child) {
             border-right: 1px solid $border_dark !important;
           }
@@ -864,11 +886,17 @@
         }
       }
 
+      tr.virtualized-table-row {
+        td:not(:last-child) {
+          border-right: 1px solid $border_dark !important;
+        }
+      }
+
       // When both verticalBorder AND columnGroupBorderColor are set in dark mode,
       // override the default border-dark with the custom color
       &.pb_advanced_table[class*="column-group-border-"] {
         .pb_advanced_table_header {
-          > tr:not(:first-child) {
+          > tr {
             th:not(:last-child) {
               border-right: 1px solid var(--column-border-color) !important;
             }
@@ -878,6 +906,12 @@
         .pb_advanced_table_body {
           td:not(:last-child),
           .pb_table_td:not(:last-child) {
+            border-right: 1px solid var(--column-border-color) !important;
+          }
+        }
+
+        tr.virtualized-table-row {
+          td:not(:last-child) {
             border-right: 1px solid var(--column-border-color) !important;
           }
         }
@@ -985,32 +1019,88 @@
   // Firefox-specific fix for last-header-cell and last-cell vertical borders
   @-moz-document url-prefix() {
     .pb_advanced_table_header {
-      .last-header-cell:not(:last-child) {
+      th[colspan]:not([colspan="1"]):not(:last-child) {
+        border-right: none !important;
+        box-shadow: 1px 0 0 0 $border_light !important;
+      }
+
+      .last-header-cell:not(:last-child),
+      > tr:last-child .last-header-cell:not(:last-child) {
         border-right: none !important;
         box-shadow: 1px 0 0 0 $border_light !important;
       }
     }
 
     .pb_advanced_table_body {
-      .last-cell:not(:last-child) {
+      tr .last-cell:not(:last-of-type),
+      td.last-cell:not(:last-child),
+      .pb_table_td.last-cell:not(:last-child) {
         border-right: none !important;
         box-shadow: 1px 0 0 0 $border_light !important;
+      }
+    }
+
+    &[class*="column-group-border-"] {
+      .pb_advanced_table_header {
+        th[colspan]:not([colspan="1"]):not(:last-child),
+        .last-header-cell:not(:last-child),
+        > tr:last-child .last-header-cell:not(:last-child) {
+          box-shadow: 1px 0 0 0 var(--column-border-color) !important;
+        }
+      }
+
+      .pb_advanced_table_body {
+        tr .last-cell:not(:last-of-type),
+        td.last-cell:not(:last-child),
+        .pb_table_td.last-cell:not(:last-child) {
+          box-shadow: 1px 0 0 0 var(--column-border-color) !important;
+        }
       }
     }
 
     // Dark mode Firefox fixes
     &.dark {
       .pb_advanced_table_header {
-        .last-header-cell:not(:last-child) {
+        // Convert all colspan headers to box-shadow with dark color
+        th[colspan]:not([colspan="1"]) {
+          border-right: none !important;
+          box-shadow: 1px 0 0 0 $border_dark !important;
+        }
+
+        // Convert all last-header-cell borders to box-shadow with dark color
+        .last-header-cell:not(:last-child),
+        > tr:last-child .last-header-cell:not(:last-child),
+        > tr:not(:first-child) .last-header-cell:not(:last-child),
+        > tr:not(:first-child) .last-header-cell:last-child {
           border-right: none !important;
           box-shadow: 1px 0 0 0 $border_dark !important;
         }
       }
 
       .pb_advanced_table_body {
-        .last-cell:not(:last-child) {
+        tr .last-cell:not(:last-of-type),
+        td.last-cell:not(:last-child),
+        .pb_table_td.last-cell:not(:last-child) {
           border-right: none !important;
           box-shadow: 1px 0 0 0 $border_dark !important;
+        }
+      }
+
+      &[class*="column-group-border-"] {
+        .pb_advanced_table_header {
+          th[colspan]:not([colspan="1"]):not(:last-child),
+          .last-header-cell:not(:last-child),
+          > tr:last-child .last-header-cell:not(:last-child) {
+            box-shadow: 1px 0 0 0 var(--column-border-color) !important;
+          }
+        }
+
+        .pb_advanced_table_body {
+          tr .last-cell:not(:last-of-type),
+          td.last-cell:not(:last-child),
+          .pb_table_td.last-cell:not(:last-child) {
+            box-shadow: 1px 0 0 0 var(--column-border-color) !important;
+          }
         }
       }
     }
