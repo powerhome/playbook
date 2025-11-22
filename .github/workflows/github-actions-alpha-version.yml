@@ -23,13 +23,13 @@ jobs:
       BRANCH_NAME: ${{ github.head_ref }}
       GEM_HOST_API_KEY: ${{ secrets.RUBYGEMS_API_KEY }}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744 # v3
       - name: 'Enable registry auth'
         shell: bash
         run: |
           echo "//npm.powerapp.cloud/:_auth="$(echo -n 'gh-actions:${{ secrets.POWERHOME_NPM_REGISTRY_PASSWORD }}' | base64)"" >> ~/.npmrc
           echo "//npm.powerapp.cloud/:always-auth = true" >> .npmrc
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: 22.15.1
       - name: Use npm 11.6.2
@@ -39,9 +39,9 @@ jobs:
         with:
           bundler-cache: true
       - name: Python Setup
-        uses: actions/setup-python@v4 
+        uses: actions/setup-python@7f4fc3e22c37d6ff65e88745f38bd3157c663f7c # v4 
         with: 
-          python-version: '3.9'
+          python-version: '3.9.25'
       - name: Set Git Config
         run: |
           git config --local user.name "${{ github.actor }}"
@@ -111,13 +111,13 @@ jobs:
     env:
       GEM_HOST_API_KEY: ${{ secrets.RUBYGEMS_API_KEY }}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744 # v3
       - name: 'Enable registry auth'
         shell: bash
         run: |
           echo "//npm.powerapp.cloud/:_auth="$(echo -n 'gh-actions:${{ secrets.POWERHOME_NPM_REGISTRY_PASSWORD }}' | base64)"" >> ~/.npmrc
           echo "//npm.powerapp.cloud/:always-auth = true" >> .npmrc
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: 22.15.1
       - name: Use npm 11.6.2
@@ -127,9 +127,9 @@ jobs:
         with:
           bundler-cache: true
       - name: Python Setup
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@7f4fc3e22c37d6ff65e88745f38bd3157c663f7c # v4
         with:
-          python-version: '3.9'
+          python-version: '3.9.25'
       - name: Set Git Config
         run: |
           git config --local user.name "${{ github.actor }}"
@@ -289,7 +289,7 @@ jobs:
             --notes "This is a release candidate version. Please test thoroughly before promoting to a stable release." \
             --prerelease
       - name: Leave PR comment
-        uses: actions/github-script@v7
+        uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7
         env:
           PR_NUMBER: ${{ github.event.pull_request.number }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
