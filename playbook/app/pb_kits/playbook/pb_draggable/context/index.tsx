@@ -30,9 +30,9 @@ const reducer = (state: InitialStateType, action: ActionType) => {
     case 'REORDER_ITEMS': {
       const { dragId, targetId } = action.payload;
       const newItems = [...state.items];
-      const draggedItem = newItems.find(item => item && item.id === dragId);
+      const draggedItem = newItems.find(item => item.id === dragId);
       const draggedIndex = newItems.indexOf(draggedItem);
-      const targetIndex = newItems.findIndex(item => item && item.id === targetId);
+      const targetIndex = newItems.findIndex(item => item.id === targetId);
 
       newItems.splice(draggedIndex, 1);
       newItems.splice(targetIndex, 0, draggedItem);
@@ -183,8 +183,8 @@ export const DraggableProvider = ({
     const finalContainer = draggedItem ? draggedItem.container : originalContainer;
     
     // Find items above and below in the same container
-    const itemsInContainer = state.items.filter(item => item.container === finalContainer);
-    const indexInContainer = itemsInContainer.findIndex(item => item.id === draggedItemId);
+    const itemsInContainer = state.items.filter(item => item && item.container === finalContainer);
+    const indexInContainer = itemsInContainer.findIndex(item => item && item.id === draggedItemId);
     const itemAbove = indexInContainer > 0 ? itemsInContainer[indexInContainer - 1] : null;
     const itemBelow = indexInContainer < itemsInContainer.length - 1 ? itemsInContainer[indexInContainer + 1] : null;
     
@@ -211,7 +211,7 @@ export const DraggableProvider = ({
     const draggedItem = state.items.find(item => item && item.id === draggedItemId);
     
     if (!draggedItem) {
-      // Item not found in state - clear drag state and exit
+      // Item not found in state: clear drag state and exit
       dispatch({ type: 'SET_IS_DRAGGING', payload: "" });
       dispatch({ type: 'SET_ACTIVE_CONTAINER', payload: "" });
       dispatch({ type: 'SET_DRAG_DATA', payload: { id: "", initialGroup: "", originId: "" } });
@@ -230,7 +230,7 @@ export const DraggableProvider = ({
     changeCategory(draggedItemId, container);
     
     // Pass enhanced info to onDrop callback so devs have more context
-    if (onDrop) {
+    if (onDrop && draggedItem) {
       const updatedItem = { ...draggedItem, container };
       onDrop(draggedItemId, container, originalContainer, updatedItem, itemAbove, itemBelow);
     }
@@ -240,7 +240,8 @@ export const DraggableProvider = ({
      if (state.dragData.originId !== providerId) return; // Ignore drag over events from other providers
 
     e.preventDefault();
-    
+    dispatch({ type: 'SET_ACTIVE_CONTAINER', payload: container });
+
     // Check if we're dragging over a different container than where the item currently is
     if (!state.dragData.id) return; // Guard against missing drag ID when dragging too quickly
     
@@ -248,18 +249,10 @@ export const DraggableProvider = ({
     
     // Only update if item exists and needs to move to a different container
     if (draggedItem && draggedItem.container !== container) {
-      // Only dispatch if we're not already in the process of updating to this container
-      // This is needed to prevent multiple rapid MOVE_TO_CONTAINER_END actions that can cause race conditions + errors (Not seen in PB, errors show up in Nitro console)
-      if (state.activeContainer !== container) {
-        dispatch({ type: 'SET_ACTIVE_CONTAINER', payload: container });
-        // This handles the case when dragging to empty space at bottom of container OR in empty container
-        dispatch({ type: 'MOVE_TO_CONTAINER_END', payload: { dragId: state.dragData.id, newContainer: container } });
-        dispatch({ type: 'SET_DRAG_DATA', payload: { id: state.dragData.id, initialGroup: container, originId: providerId } });
-      }
-    } else if (state.activeContainer !== container) {
-      // Just update active container if item is already in correct container
-      dispatch({ type: 'SET_ACTIVE_CONTAINER', payload: container });
-    }
+    // This handles the case when dragging to empty space at bottom of container OR in empty container
+      dispatch({ type: 'MOVE_TO_CONTAINER_END', payload: { dragId: state.dragData.id, newContainer: container } });
+      dispatch({ type: 'SET_DRAG_DATA', payload: { id: state.dragData.id, initialGroup: container, originId: providerId } });
+    } 
     
     if (onDragOver) onDragOver(e, container);
   };
