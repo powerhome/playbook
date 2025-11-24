@@ -171,6 +171,14 @@ export const DraggableProvider = ({
   const handleDragEnd = () => {
     const draggedItemId = state.dragData.id;
     const originalContainer = state.dragData.initialGroup;
+    
+    if (!draggedItemId) {
+      dispatch({ type: 'SET_IS_DRAGGING', payload: "" });
+      dispatch({ type: 'SET_ACTIVE_CONTAINER', payload: "" });
+      dispatch({ type: 'SET_DRAG_DATA', payload: { id: "", initialGroup: "", originId: "" } });
+      return;
+    }
+    
     const draggedItem = state.items.find(item => item.id === draggedItemId);
     const finalContainer = draggedItem ? draggedItem.container : originalContainer;
     
@@ -197,7 +205,18 @@ export const DraggableProvider = ({
 
     const draggedItemId = state.dragData.id;
     const originalContainer = state.dragData.initialGroup;
+    
+    if (!draggedItemId) return; // Guard against missing drag data when dropping too quickly
+    
     const draggedItem = state.items.find(item => item.id === draggedItemId);
+    
+    if (!draggedItem) {
+      // Item not found in state - clear drag state and exit
+      dispatch({ type: 'SET_IS_DRAGGING', payload: "" });
+      dispatch({ type: 'SET_ACTIVE_CONTAINER', payload: "" });
+      dispatch({ type: 'SET_DRAG_DATA', payload: { id: "", initialGroup: "", originId: "" } });
+      return;
+    }
     
     // Find items above and below in the same container (before changeCategory updates it)
     const itemsInContainer = state.items.filter(item => item.container === container);
@@ -211,7 +230,7 @@ export const DraggableProvider = ({
     changeCategory(draggedItemId, container);
     
     // Pass enhanced info to onDrop callback so devs have more context
-    if (onDrop && draggedItem) {
+    if (onDrop) {
       const updatedItem = { ...draggedItem, container };
       onDrop(draggedItemId, container, originalContainer, updatedItem, itemAbove, itemBelow);
     }
@@ -224,6 +243,8 @@ export const DraggableProvider = ({
     dispatch({ type: 'SET_ACTIVE_CONTAINER', payload: container });
     
     // Check if we're dragging over a different container than where the item currently is
+    if (!state.dragData.id) return; // Guard against missing drag ID when dragging too quickly
+    
     const draggedItem = state.items.find(item => item.id === state.dragData.id);
     if (draggedItem && draggedItem.container !== container) {
       // This handles the case when dragging to empty space at bottom of container OR in empty container
