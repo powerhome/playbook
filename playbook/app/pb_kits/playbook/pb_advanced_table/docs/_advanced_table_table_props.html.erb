@@ -29,5 +29,167 @@
       label: "Graduated Students",
     }
 ] %>
+<%= pb_rails("caption", props: { text: "Advanced Table Vertical Border Table Props" }) %>
+<%= pb_rails("advanced_table", props: { id: "table_props_table", table_data: @table_data, margin_bottom: "md", column_definitions: column_definitions, table_props: { vertical_border: true, container: false }}) %>
 
-<%= pb_rails("advanced_table", props: { id: "table_props_table", table_data: @table_data, column_definitions: column_definitions, table_props: { vertical_border: true, container: false }}) %>
+<% column_definitions_two = [
+  {
+    accessor: "year",
+    label: "Year",
+    cellAccessors: ["quarter", "month", "day"],
+  },
+  {
+    label: "Enrollment Data",
+    columns: [
+      {
+        accessor: "newEnrollments",
+        label: "New Enrollments",
+      },
+      {
+        accessor: "scheduledMeetings",
+        label: "Scheduled Meetings",
+      },
+    ],
+  },
+  {
+    label: "Performance Data",
+    columns: [
+      {
+        accessor: "attendanceRate",
+        label: "Attendance Rate",
+      },
+      {
+        accessor: "completedClasses",
+        label: "Completed Classes",
+      },
+      {
+        accessor: "classCompletionRate",
+        label: "Class Completion Rate",
+      },
+      {
+        accessor: "graduatedStudents",
+        label: "Graduated Students",
+      },
+    ],
+  },
+] %>
+<%= pb_rails("caption", props: { text: "Advanced Table Vertical Border Multi Header" }) %>
+<%= pb_rails("advanced_table", props: { id: "table_multi_headers_vertical_borders", margin_bottom: "md", table_data: @table_data, column_definitions: column_definitions_two, table_props: { vertical_border: true } }) %>
+
+<% column_definitions_three = [
+  {
+    accessor: "year",
+    label: "Year",
+    cellAccessors: ["quarter", "month", "day"],
+  },
+  {
+    label: "Enrollment Data",
+    columns: [
+      {
+        label: "Enrollment Stats",
+        columns: [
+          {
+            accessor: "newEnrollments",
+            label: "New Enrollments",
+          },
+          {
+            accessor: "scheduledMeetings",
+            label: "Scheduled Meetings",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    label: "Performance Data",
+    columns: [
+      {
+        label: "Completion Metrics",
+        columns: [
+          {
+            accessor: "completedClasses",
+            label: "Completed Classes",
+          },
+          {
+            accessor: "classCompletionRate",
+            label: "Class Completion Rate",
+          },
+        ],
+      },
+      {
+        label: "Attendance",
+        columns: [
+          {
+            accessor: "attendanceRate",
+            label: "Attendance Rate",
+          },
+          {
+            accessor: "scheduledMeetings",
+            label: "Scheduled Meetings",
+          },
+        ],
+      },
+    ],
+  },
+] %>
+<%= pb_rails("caption", props: { text: "Advanced Table Vertical Border Multi Header with Column Group Border Color" }) %>
+<%= pb_rails("advanced_table", props: { id: "beta_table_with_color_headers", margin_bottom: "md", table_data: @table_data, column_definitions: column_definitions_three, column_group_border_color: "text_lt_default", table_props: { vertical_border: true } }) %>
+
+<% column_definitions_four = [
+  {
+    accessor: "year",
+    label: "Year",
+    cellAccessors: ["quarter", "month", "day"],
+  },
+  {
+    label: "Enrollment Data",
+    columns: [
+      {
+        label: "Enrollment Stats",
+        columns: [
+          {
+            accessor: "newEnrollments",
+            label: "New Enrollments",
+          },
+          {
+            accessor: "scheduledMeetings",
+            label: "Scheduled Meetings",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    label: "Performance Data",
+    columns: [
+      {
+        label: "Completion Metrics",
+        columns: [
+          {
+            accessor: "completedClasses",
+            label: "Completed Classes",
+          },
+          {
+            accessor: "classCompletionRate",
+            label: "Class Completion Rate",
+          },
+        ],
+      },
+      {
+        label: "Attendance",
+        columns: [
+          {
+            accessor: "attendanceRate",
+            label: "Attendance Rate",
+          },
+          {
+            accessor: "scheduledMeetings",
+            label: "Scheduled Meetings",
+          },
+        ],
+      },
+    ],
+  },
+] %>
+<%= pb_rails("caption", props: { text: "Advanced Table Vertical Border Multi Header No Vertical Border" }) %>
+<%= pb_rails("advanced_table", props: {id: "beta_table_with_muilti_headers", table_data: @table_data, column_definitions: column_definitions_four }) %>
