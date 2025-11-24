@@ -240,16 +240,25 @@ export const DraggableProvider = ({
      if (state.dragData.originId !== providerId) return; // Ignore drag over events from other providers
 
     e.preventDefault();
-    dispatch({ type: 'SET_ACTIVE_CONTAINER', payload: container });
     
     // Check if we're dragging over a different container than where the item currently is
     if (!state.dragData.id) return; // Guard against missing drag ID when dragging too quickly
     
     const draggedItem = state.items.find(item => item.id === state.dragData.id);
+    
+    // Only update if item exists and needs to move to a different container
     if (draggedItem && draggedItem.container !== container) {
-      // This handles the case when dragging to empty space at bottom of container OR in empty container
-      dispatch({ type: 'MOVE_TO_CONTAINER_END', payload: { dragId: state.dragData.id, newContainer: container } });
-      dispatch({ type: 'SET_DRAG_DATA', payload: { id: state.dragData.id, initialGroup: container, originId: providerId } });
+      // Only dispatch if we're not already in the process of updating to this container
+      // This is needed to prevent multiple rapid MOVE_TO_CONTAINER_END actions that can cause race conditions + errors (Not seen in PB, errors show up in Nitro console)
+      if (state.activeContainer !== container) {
+        dispatch({ type: 'SET_ACTIVE_CONTAINER', payload: container });
+        // This handles the case when dragging to empty space at bottom of container OR in empty container
+        dispatch({ type: 'MOVE_TO_CONTAINER_END', payload: { dragId: state.dragData.id, newContainer: container } });
+        dispatch({ type: 'SET_DRAG_DATA', payload: { id: state.dragData.id, initialGroup: container, originId: providerId } });
+      }
+    } else if (state.activeContainer !== container) {
+      // Just update active container if item is already in correct container
+      dispatch({ type: 'SET_ACTIVE_CONTAINER', payload: container });
     }
     
     if (onDragOver) onDragOver(e, container);
