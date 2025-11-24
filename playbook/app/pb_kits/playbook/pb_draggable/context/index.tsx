@@ -218,9 +218,14 @@ export const DraggableProvider = ({
       return;
     }
     
-    // Find items above and below in the same container (before changeCategory updates it)
-    const itemsInContainer = state.items.filter(item => item.container === container);
-    const indexInContainer = itemsInContainer.findIndex(item => item.id === draggedItemId);
+    // If dropping in a different container and item hasn't been moved there yet, move to end
+    if (container !== originalContainer && draggedItem.container !== container) {
+      dispatch({ type: 'MOVE_TO_CONTAINER_END', payload: { dragId: draggedItemId, newContainer: container } });
+    }
+    
+    // Find items above and below in the same container
+    const itemsInContainer = state.items.filter(item => item && item.container === container);
+    const indexInContainer = itemsInContainer.findIndex(item => item && item.id === draggedItemId);
     const itemAbove = indexInContainer > 0 ? itemsInContainer[indexInContainer - 1] : null;
     const itemBelow = indexInContainer < itemsInContainer.length - 1 ? itemsInContainer[indexInContainer + 1] : null;
     
@@ -241,18 +246,19 @@ export const DraggableProvider = ({
 
     e.preventDefault();
     dispatch({ type: 'SET_ACTIVE_CONTAINER', payload: container });
-
-    // Check if we're dragging over a different container than where the item currently is
-    if (!state.dragData.id) return; // Guard against missing drag ID when dragging too quickly
     
+    // Guard against missing drag ID
+    if (!state.dragData.id) return;
+    
+    // Find the dragged item
     const draggedItem = state.items.find(item => item && item.id === state.dragData.id);
     
-    // Only update if item exists and needs to move to a different container
+    // Only move to container end if item exists and is in a different container
     if (draggedItem && draggedItem.container !== container) {
-    // This handles the case when dragging to empty space at bottom of container OR in empty container
+      // Move item to end of target container for preview
       dispatch({ type: 'MOVE_TO_CONTAINER_END', payload: { dragId: state.dragData.id, newContainer: container } });
       dispatch({ type: 'SET_DRAG_DATA', payload: { id: state.dragData.id, initialGroup: container, originId: providerId } });
-    } 
+    }
     
     if (onDragOver) onDragOver(e, container);
   };
