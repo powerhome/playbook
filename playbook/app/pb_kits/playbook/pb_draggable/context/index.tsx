@@ -144,6 +144,7 @@ export const DraggableProvider = ({
   }, [state.items]);
 
   const handleDragStart = (id: string, container: string) => {
+    console.log('[Draggable] handleDragStart:', { id, container, providerId });
     dispatch({ type: 'SET_DRAG_DATA', payload: { id: id, initialGroup: container, originId: providerId } });
     dispatch({ type: 'SET_IS_DRAGGING', payload: id });
     if (onDragStart) onDragStart(id, container);
@@ -155,6 +156,7 @@ export const DraggableProvider = ({
     if (state.dragData.id !== id) {
       // Check if this is a cross-container drag
       const isCrossContainer = state.dragData.initialGroup !== container;
+      console.log('[Draggable] handleDragEnter:', { id, container, isCrossContainer, draggedId: state.dragData.id });
       
       if (isCrossContainer) {
         // Use cross-container reorder to update container temporarily for dropzone preview
@@ -172,7 +174,10 @@ export const DraggableProvider = ({
     const draggedItemId = state.dragData.id;
     const originalContainer = state.dragData.initialGroup;
     
+    console.log('[Draggable] handleDragEnd:', { draggedItemId, originalContainer });
+    
     if (!draggedItemId) {
+      console.warn('[Draggable] handleDragEnd: No draggedItemId found');
       dispatch({ type: 'SET_IS_DRAGGING', payload: "" });
       dispatch({ type: 'SET_ACTIVE_CONTAINER', payload: "" });
       dispatch({ type: 'SET_DRAG_DATA', payload: { id: "", initialGroup: "", originId: "" } });
@@ -181,6 +186,8 @@ export const DraggableProvider = ({
     
     const draggedItem = state.items.find(item => item && item.id === draggedItemId);
     const finalContainer = draggedItem ? draggedItem.container : originalContainer;
+    
+    console.log('[Draggable] handleDragEnd item found:', { draggedItem: !!draggedItem, finalContainer });
     
     // Find items above and below in the same container
     const itemsInContainer = state.items.filter(item => item && item.container === finalContainer);
@@ -206,11 +213,17 @@ export const DraggableProvider = ({
     const draggedItemId = state.dragData.id;
     const originalContainer = state.dragData.initialGroup;
     
-    if (!draggedItemId) return; // Guard against missing drag data when dropping too quickly
+    console.log('[Draggable] handleDrop:', { draggedItemId, container, originalContainer });
+    
+    if (!draggedItemId) {
+      console.warn('[Draggable] handleDrop: No draggedItemId found');
+      return; // Guard against missing drag data when dropping too quickly
+    }
     
     const draggedItem = state.items.find(item => item && item.id === draggedItemId);
     
     if (!draggedItem) {
+      console.error('[Draggable] handleDrop: Item not found in state', { draggedItemId, itemsCount: state.items.length });
       // Item not found in state: clear drag state and exit
       dispatch({ type: 'SET_IS_DRAGGING', payload: "" });
       dispatch({ type: 'SET_ACTIVE_CONTAINER', payload: "" });
@@ -220,6 +233,7 @@ export const DraggableProvider = ({
     
     // If dropping in a different container and item hasn't been moved there yet, move to end
     if (container !== originalContainer && draggedItem.container !== container) {
+      console.log('[Draggable] handleDrop: Moving to container end');
       dispatch({ type: 'MOVE_TO_CONTAINER_END', payload: { dragId: draggedItemId, newContainer: container } });
     }
     
@@ -255,9 +269,12 @@ export const DraggableProvider = ({
     
     // Only move to container end if item exists and is in a different container
     if (draggedItem && draggedItem.container !== container) {
+      console.log('[Draggable] handleDragOver: Moving to container end', { dragId: state.dragData.id, fromContainer: draggedItem.container, toContainer: container });
       // Move item to end of target container for preview
       dispatch({ type: 'MOVE_TO_CONTAINER_END', payload: { dragId: state.dragData.id, newContainer: container } });
       dispatch({ type: 'SET_DRAG_DATA', payload: { id: state.dragData.id, initialGroup: container, originId: providerId } });
+    } else if (!draggedItem) {
+      console.error('[Draggable] handleDragOver: Item not found', { dragId: state.dragData.id, itemsCount: state.items.length });
     }
     
     if (onDragOver) onDragOver(e, container);
