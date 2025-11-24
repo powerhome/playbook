@@ -30,9 +30,9 @@ const reducer = (state: InitialStateType, action: ActionType) => {
     case 'REORDER_ITEMS': {
       const { dragId, targetId } = action.payload;
       const newItems = [...state.items];
-      const draggedItem = newItems.find(item => item.id === dragId);
+      const draggedItem = newItems.find(item => item && item.id === dragId);
       const draggedIndex = newItems.indexOf(draggedItem);
-      const targetIndex = newItems.findIndex(item => item.id === targetId);
+      const targetIndex = newItems.findIndex(item => item && item.id === targetId);
 
       newItems.splice(draggedIndex, 1);
       newItems.splice(targetIndex, 0, draggedItem);
@@ -42,9 +42,9 @@ const reducer = (state: InitialStateType, action: ActionType) => {
     case 'REORDER_ITEMS_CROSS_CONTAINER': {
       const { dragId, targetId, newContainer } = action.payload;
       const newItems = [...state.items];
-      const draggedItem = newItems.find(item => item.id === dragId);
+      const draggedItem = newItems.find(item => item && item.id === dragId);
       const draggedIndex = newItems.indexOf(draggedItem);
-      const targetIndex = newItems.findIndex(item => item.id === targetId);
+      const targetIndex = newItems.findIndex(item => item && item.id === targetId);
 
       // Update container temporarily so dropzone preview works correctly
       const updatedItem = { ...draggedItem, container: newContainer };
@@ -57,7 +57,7 @@ const reducer = (state: InitialStateType, action: ActionType) => {
     case 'MOVE_TO_CONTAINER_END': {
       const { dragId, newContainer } = action.payload;
       const newItems = [...state.items];
-      const draggedItem = newItems.find(item => item.id === dragId);
+      const draggedItem = newItems.find(item => item && item.id === dragId);
       const draggedIndex = newItems.indexOf(draggedItem);
 
       // Update container temporarily so dropzone preview works correctly
@@ -179,7 +179,7 @@ export const DraggableProvider = ({
       return;
     }
     
-    const draggedItem = state.items.find(item => item.id === draggedItemId);
+    const draggedItem = state.items.find(item => item && item.id === draggedItemId);
     const finalContainer = draggedItem ? draggedItem.container : originalContainer;
     
     // Find items above and below in the same container
@@ -208,7 +208,7 @@ export const DraggableProvider = ({
     
     if (!draggedItemId) return; // Guard against missing drag data when dropping too quickly
     
-    const draggedItem = state.items.find(item => item.id === draggedItemId);
+    const draggedItem = state.items.find(item => item && item.id === draggedItemId);
     
     if (!draggedItem) {
       // Item not found in state - clear drag state and exit
@@ -244,7 +244,7 @@ export const DraggableProvider = ({
     // Check if we're dragging over a different container than where the item currently is
     if (!state.dragData.id) return; // Guard against missing drag ID when dragging too quickly
     
-    const draggedItem = state.items.find(item => item.id === state.dragData.id);
+    const draggedItem = state.items.find(item => item && item.id === state.dragData.id);
     
     // Only update if item exists and needs to move to a different container
     if (draggedItem && draggedItem.container !== container) {
