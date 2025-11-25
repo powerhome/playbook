@@ -36,7 +36,7 @@
       >
         <%= pb_rails("icon", props: {
           classname: "cal_icon",
-          icon: "calendar-alt"
+          icon: object.selection_type == "time_selection" ? "clock" : "calendar-alt"
         }) %>
       </div>
     <% end %>

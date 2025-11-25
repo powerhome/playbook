@@ -26,9 +26,15 @@
   &:focus,
   :focus-within {
     div.cal_icon_wrapper,
-    input.date_picker_input {
+    input.date_picker_input,
+    input.text_input {
       @include transition_default;
       border-color: $primary;
+    }
+    .flatpickr-wrapper:focus-within .text_input.flatpickr-input,
+    .flatpickr-wrapper:focus-within .date_picker_input.flatpickr-input,
+    .pb_text_input_kit:focus-within .text_input_wrapper .text_input {
+      background-color: rgba($focus_input_light, $opacity_5);
     }
     .add-on-card {
       border-color: $primary;
@@ -63,7 +69,8 @@
   @import "./sass_partials/header_styles";
   @import "./sass_partials/overrides";
 
-  .date_picker_input.flatpickr-input {
+  .date_picker_input.flatpickr-input,
+  .text_input.flatpickr-input {
     text-overflow: ellipsis;
     padding-right: $space_xl + 10 !important;
   }

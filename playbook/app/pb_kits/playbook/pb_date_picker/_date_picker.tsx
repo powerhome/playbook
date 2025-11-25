@@ -246,7 +246,7 @@ const DatePicker = (props: DatePickerProps): React.ReactElement => {
               >
                 <Icon
                     className="cal_icon"
-                    icon="calendar-alt"
+                    icon={selectionType === "timeSelection" ? "clock" : "calendar-alt"}
                 />
               </div>
             }

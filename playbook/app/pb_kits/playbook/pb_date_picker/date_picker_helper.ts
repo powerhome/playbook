@@ -302,7 +302,6 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
     ...(selectionType === "timeSelection" && {
       noCalendar: true,
       enableTime: true,
-      dateFormat: timeFormat,
     }),
     locale: {
       rangeSeparator: ' to '
@@ -349,6 +348,33 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
         yearChangeHook(fp)
       }
     }],
+    onReady: [(_selectedDates, _dateStr, fp) => {
+      // Set up immediate removal of "at " prefix for time-only selection
+      if (selectionType === "timeSelection") {
+        // Remove immediately on ready
+        if (fp.input.value) {
+          fp.input.value = fp.input.value.replace(/^at\s+/i, '')
+        }
+        
+        // Override the input's value setter to intercept and remove "at " immediately
+        const input = fp.input
+        const originalDescriptor = Object.getOwnPropertyDescriptor(input, 'value') || 
+          Object.getOwnPropertyDescriptor(Object.getPrototypeOf(input), 'value')
+        
+        if (originalDescriptor && originalDescriptor.set) {
+          Object.defineProperty(input, 'value', {
+            get: originalDescriptor.get,
+            set: function(newValue: string) {
+              if (typeof newValue === 'string' && newValue.match(/^at\s+/i)) {
+                newValue = newValue.replace(/^at\s+/i, '')
+              }
+              originalDescriptor.set!.call(this, newValue)
+            },
+            configurable: true
+          })
+        }
+      }
+    }],
     plugins: setPlugins(thisRangesEndToday, customQuickPickDates),
     position,
     positionElement: getPositionElement(positionElement),
@@ -358,6 +384,7 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
 
   // Assign dynamically sourced flatpickr instance to variable
   const picker = document.querySelector<HTMLElement & { [x: string]: any }>(`#${pickerId}`)._flatpickr
+
 
   // Skip all calendar setup for time-only selection
   if (selectionType !== "timeSelection") {

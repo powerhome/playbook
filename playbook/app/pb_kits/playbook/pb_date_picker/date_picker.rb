@@ -57,7 +57,7 @@ module Playbook
       prop :position_element, type: Playbook::Props::String
       prop :scroll_container, type: Playbook::Props::String
       prop :selection_type, type: Playbook::Props::Enum,
-                            values: %w[week month quickpick timeSelection none],
+                            values: %w[week month quickpick time_selection none],
                             default: "none"
       prop :show_timezone, type: Playbook::Props::Boolean,
                            default: false
@@ -113,7 +113,7 @@ module Playbook
           position: position,
           positionElement: position_element,
           required: required,
-          selectionType: selection_type,
+          selectionType: selection_type == "time_selection" ? "timeSelection" : selection_type,
           showTimezone: show_timezone,
           staticPosition: static_position,
           thisRangesEndToday: this_ranges_end_today,
