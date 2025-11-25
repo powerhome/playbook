@@ -1,6 +1,8 @@
 The multiple container functionality also supports customized dropzone styling as shown here. 
 
-In addition to this, the `onDrop` and `onDragEnd` event listeners provide several arguments to allow developers more context from the drag event.
+In addition to this, the `enableCrossContainerPreview` prop can be used on the `DraggableProvider` as shown here to enable dropzone preview for cross-container dragging. 
+
+With `enableCrossContainerPreview`, the `onDrop` and `onDragEnd` event listeners will also provide several arguments to allow developers more context from the drag event.
 
 The `onDrop` callback is triggered when an item is successfully dropped into a container. It provides the following arguments:
 
