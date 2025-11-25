@@ -44,7 +44,7 @@ type DatePickerProps = {
   placeholder?: string,
   positionElement?: HTMLElement | null,
   scrollContainer?: string,
-  selectionType?: "month" | "week"| "quickpick",
+  selectionType?: "month" | "week"| "quickpick" | "timeSelection",
   showTimezone?: boolean,
   staticPosition: boolean,
   thisRangesEndToday?: boolean,

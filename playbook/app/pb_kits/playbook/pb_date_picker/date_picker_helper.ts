@@ -25,7 +25,7 @@ type DatePickerConfig = {
   hideIcon?: boolean;
   inLine?: boolean,
   onChange: (dateStr: string, selectedDates: Date[]) => void,
-  selectionType?: "month" | "week" | "quickpick" | "",
+  selectionType?: "month" | "week" | "quickpick" | "timeSelection" | "",
   onClose: (dateStr: Date[] | string, selectedDates: Date[] | string) => void,
   showTimezone?: boolean,
   staticPosition: boolean,
@@ -83,6 +83,10 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
 
   const defaultDateGetter = () => {
     if (defaultDate === '') {
+      // For time-only selection needs a default date so flatpickr has something to work with internally (will not be displayed)
+      if (selectionType === "timeSelection") {
+        return new Date()
+      }
       return null
     } else {
       return defaultDate
@@ -170,8 +174,13 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
     return disabledArray
   }
   const calendarResizer = () => {
+    // Skip calendar resizer and calendar/parentInput logicfor time-only selection (no calendar exists)
+    if (selectionType === "timeSelection") return
+    
     const cal = document.querySelector(`#cal-${pickerId}.open`) as HTMLElement
+    if (!cal) return
     const parentInput = cal.parentElement
+    if (!parentInput) return
     if (cal?.getBoundingClientRect().right > window.innerWidth) {
       parentInput.style.display = 'flex'
       parentInput.style.justifyContent = 'center'
@@ -212,6 +221,12 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
   const setPlugins = (thisRangesEndToday: boolean, customQuickPickDates: any) => {
     const pluginList = []
 
+    // time-only selection - use only timeSelect plugin
+    if (selectionType === "timeSelection") {
+      pluginList.push(timeSelectPlugin({ caption: timeCaption, showTimezone: showTimezone}))
+      return pluginList
+    }
+
     // month and week selection
     if (selectionType === "month" || plugins.length > 0) {
       pluginList.push(monthSelectPlugin({ shorthand: true, dateFormat: 'F Y', altFormat: 'F Y' }))
@@ -230,6 +245,7 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
   }
 
   const getDateFormat = () => {
+    if (selectionType === "timeSelection") return timeFormat
     return enableTime ? `${format} ${timeFormat}` : format
   }
 
@@ -283,6 +299,11 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
     defaultDate: defaultDateGetter(),
     disable: disabledParser(),
     enableTime,
+    ...(selectionType === "timeSelection" && {
+      noCalendar: true,
+      enableTime: true,
+      dateFormat: timeFormat,
+    }),
     locale: {
       rangeSeparator: ' to '
     },
@@ -291,17 +312,20 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
     mode,
     nextArrow: '<i class="far fa-angle-right"></i>',
     onOpen: [(_selectedDates, _dateStr, fp) => {
-      calendarResizer()
-      if (resizeRepositionHandlerRef) {
-        window.removeEventListener('resize', resizeRepositionHandlerRef)
-      }
-      resizeRepositionHandlerRef = () => {
+      // Skip calendar positioning/resizing for time-only selection
+      if (selectionType !== "timeSelection") {
         calendarResizer()
+        if (resizeRepositionHandlerRef) {
+          window.removeEventListener('resize', resizeRepositionHandlerRef)
+        }
+        resizeRepositionHandlerRef = () => {
+          calendarResizer()
+          positionCalendarIfNeeded(fp)
+        }
+        window.addEventListener('resize', resizeRepositionHandlerRef)
+        if (!staticPosition && scrollContainer) attachToScroll(scrollContainer)
         positionCalendarIfNeeded(fp)
       }
-      window.addEventListener('resize', resizeRepositionHandlerRef)
-      if (!staticPosition && scrollContainer) attachToScroll(scrollContainer)
-      positionCalendarIfNeeded(fp)
     }],
     onClose: [(selectedDates, dateStr) => {
       if (resizeRepositionHandlerRef) {
@@ -313,11 +337,17 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
     }],
     onChange: [(selectedDates, dateStr, fp) => {
       handleDatePickerChange(fp, selectedDates)
-      yearChangeHook(fp)
+      // Skip year change hook for time-only selection
+      if (selectionType !== "timeSelection") {
+        yearChangeHook(fp)
+      }
       onChange(dateStr, selectedDates)
     }],
     onYearChange: [(_selectedDates, _dateStr, fp) => {
-      yearChangeHook(fp)
+      // Skip year change hook for time-only selection
+      if (selectionType !== "timeSelection") {
+        yearChangeHook(fp)
+      }
     }],
     plugins: setPlugins(thisRangesEndToday, customQuickPickDates),
     position,
@@ -328,7 +358,10 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
 
   // Assign dynamically sourced flatpickr instance to variable
   const picker = document.querySelector<HTMLElement & { [x: string]: any }>(`#${pickerId}`)._flatpickr
-  picker.innerContainer.parentElement.id = `cal-${pickerId}`
+
+  // Skip all calendar setup for time-only selection
+  if (selectionType !== "timeSelection") {
+    picker.innerContainer.parentElement.id = `cal-${pickerId}`
 
   // replace year selector with dropdown
   picker.yearElements[0].parentElement.innerHTML = `<select class="numInput cur-year" type="number" tabIndex="-1" aria-label="Year" id="year-${pickerId}"></select>`
@@ -366,6 +399,7 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
         }
       }, 0)
     })
+  }
   }
 
   // === Automatic Sync Logic for 3 input range pattern===
@@ -420,11 +454,14 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
   }
 // === End of Automatic Sync Logic ===
 
-
   // Adding dropdown icons to year and month select
-  dropdown.insertAdjacentHTML('afterend', `<i class="year-dropdown-icon">${angleDown}</i>`)
-  if (picker.monthElements[0].parentElement) {
-    return picker.monthElements[0].insertAdjacentHTML('afterend', `<i class="month-dropdown-icon">${angleDown}</i>`)}
+  const dropdown = document.querySelector<HTMLElement & { [x: string]: any }>(`#year-${pickerId}`)
+  if (dropdown) {
+    dropdown.insertAdjacentHTML('afterend', `<i class="year-dropdown-icon">${angleDown}</i>`)
+  }
+  if (picker.monthElements && picker.monthElements[0]?.parentElement) {
+    picker.monthElements[0].insertAdjacentHTML('afterend', `<i class="month-dropdown-icon">${angleDown}</i>`)
+  }
   // if (picker.weekElements[0].parentElement){
   //   return  picker.weekElements[0].insertAdjacentHTML('afterend', '<i class="far fa-angle-down year-dropdown-icon" id="test-id"></i>')
   // }
