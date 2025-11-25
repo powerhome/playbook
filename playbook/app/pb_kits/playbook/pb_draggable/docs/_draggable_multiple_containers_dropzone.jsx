@@ -83,6 +83,7 @@ const DraggableMultipleContainersDropzone = (props) => {
   return (
     <DraggableProvider 
         dropZone={{type: "outline"}}
+        enableCrossContainerPreview
         initialItems={data}
         onDragEnd={(draggedItemId, finalContainer, originalContainer, itemAbove, itemBelow) => {
           console.log(`Dragged Item ID: ${draggedItemId}`);

@@ -36,9 +36,10 @@ export type ActionType =
     onReorder: (items: ItemType[]) => void;
     onDragStart?: (id: string, container: string) => void;
     onDragEnter?: (id: string, container: string) => void;
-    onDragEnd?: (draggedItemId: string, finalContainer: string, originalContainer: string, itemAbove: ItemType | null, itemBelow: ItemType | null) => void;
-    onDrop?: (draggedItemId: string, droppedContainer: string, originalContainer: string, item: ItemType, itemAbove: ItemType | null, itemBelow: ItemType | null) => void;
+    onDragEnd?: (...args: any[]) => void;
+    onDrop?: (...args: any[]) => void;
     onDragOver?: (e: Event, container: string) => void;
     dropZone?: DropZoneConfig | string; // Can accept string for backward compatibility
     providerId?: string;
+    enableCrossContainerPreview?: boolean;
   }
