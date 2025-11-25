@@ -9,6 +9,7 @@ export interface InitialStateType {
   dragData: { id: string; initialGroup: string, originId?: string };
   isDragging: string;
   activeContainer: string;
+  isCrossContainerPreview: boolean;
 }
 
 export type ActionType =
@@ -18,6 +19,7 @@ export type ActionType =
 } }
   | { type: 'SET_IS_DRAGGING'; payload: string }
   | { type: 'SET_ACTIVE_CONTAINER'; payload: string }
+  | { type: 'SET_CROSS_CONTAINER_PREVIEW'; payload: boolean }
   | { type: 'CHANGE_CATEGORY'; payload: { itemId: string; container: string } }
   | { type: 'REORDER_ITEMS'; payload: { dragId: string; targetId: string } }
   | { type: 'REORDER_ITEMS_CROSS_CONTAINER'; payload: { dragId: string; targetId: string; newContainer: string } }

@@ -5,7 +5,8 @@ const initialState: InitialStateType = {
   items: [],
   dragData: { id: "", initialGroup: "", originId: "" },
   isDragging: "",
-  activeContainer: ""
+  activeContainer: "",
+  isCrossContainerPreview: false
 };
 
 const reducer = (state: InitialStateType, action: ActionType) => {
@@ -18,6 +19,8 @@ const reducer = (state: InitialStateType, action: ActionType) => {
       return { ...state, isDragging: action.payload };
     case 'SET_ACTIVE_CONTAINER':
       return { ...state, activeContainer: action.payload };
+    case 'SET_CROSS_CONTAINER_PREVIEW':
+      return { ...state, isCrossContainerPreview: action.payload };
     case 'CHANGE_CATEGORY':
       return {
         ...state,
@@ -153,8 +156,11 @@ export const DraggableProvider = ({
   }, [initialItems]);
 
   useEffect(() => {
-    onReorder(state.items);
-  }, [state.items]);
+    // Only call onReorder if we're not in a cross-container preview (when flag is enabled)
+    if (!enableCrossContainerPreview || !state.isCrossContainerPreview) {
+      onReorder(state.items);
+    }
+  }, [state.items, state.isCrossContainerPreview, enableCrossContainerPreview]);
 
   const handleDragStart = (id: string, container: string) => {
     dispatch({ type: 'SET_DRAG_DATA', payload: { id: id, initialGroup: container, originId: providerId } });
@@ -215,6 +221,9 @@ export const DraggableProvider = ({
       type: "SET_DRAG_DATA",
       payload: { id: "", initialGroup: "", originId: "" },
     });
+    if (enableCrossContainerPreview) {
+      dispatch({ type: "SET_CROSS_CONTAINER_PREVIEW", payload: false });
+    }
   };
 
   const handleDragEnd = () => {
