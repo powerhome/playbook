@@ -9,7 +9,7 @@ export interface InitialStateType {
   dragData: { id: string; initialGroup: string, originId?: string };
   isDragging: string;
   activeContainer: string;
-  isCrossContainerPreview: boolean;
+  isCrossContainerPreview?: boolean;
 }
 
 export type ActionType =

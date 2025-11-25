@@ -5,8 +5,7 @@ const initialState: InitialStateType = {
   items: [],
   dragData: { id: "", initialGroup: "", originId: "" },
   isDragging: "",
-  activeContainer: "",
-  isCrossContainerPreview: false
+  activeContainer: ""
 };
 
 const reducer = (state: InitialStateType, action: ActionType) => {
@@ -19,8 +18,6 @@ const reducer = (state: InitialStateType, action: ActionType) => {
       return { ...state, isDragging: action.payload };
     case 'SET_ACTIVE_CONTAINER':
       return { ...state, activeContainer: action.payload };
-    case 'SET_CROSS_CONTAINER_PREVIEW':
-      return { ...state, isCrossContainerPreview: action.payload };
     case 'CHANGE_CATEGORY':
       return {
         ...state,
@@ -33,76 +30,14 @@ const reducer = (state: InitialStateType, action: ActionType) => {
     case 'REORDER_ITEMS': {
       const { dragId, targetId } = action.payload;
       const newItems = [...state.items];
-      const draggedItem = newItems.find(item => item && item.id === dragId);
-
-      if (!draggedItem) return state;
-
+      const draggedItem = newItems.find(item => item.id === dragId);
       const draggedIndex = newItems.indexOf(draggedItem);
-      const targetIndex = newItems.findIndex(item => item && item.id === targetId);
-
-      if (draggedIndex === -1 || targetIndex === -1) return state;
+      const targetIndex = newItems.findIndex(item => item.id === targetId);
 
       newItems.splice(draggedIndex, 1);
       newItems.splice(targetIndex, 0, draggedItem);
 
       return { ...state, items: newItems };
-    }
-    case 'REORDER_ITEMS_CROSS_CONTAINER': {
-      const { dragId, targetId, newContainer } = action.payload;
-      const newItems = [...state.items];
-      const draggedItem = newItems.find(item => item && item.id === dragId);
-
-      if (!draggedItem) return state;
-
-      const draggedIndex = newItems.indexOf(draggedItem);
-      const targetIndex = newItems.findIndex(item => item && item.id === targetId);
-
-      if (draggedIndex === -1 || targetIndex === -1) return state;
-
-      const updatedItem = { ...draggedItem, container: newContainer };
-      newItems.splice(draggedIndex, 1);
-      newItems.splice(targetIndex, 0, updatedItem);
-
-      return { ...state, items: newItems };
-    }
-    case 'MOVE_TO_CONTAINER_END': {
-      const { dragId, newContainer } = action.payload;
-      const newItems = [...state.items];
-      const draggedItem = newItems.find(item => item && item.id === dragId);
-
-      if (!draggedItem) return state;
-
-      const draggedIndex = newItems.indexOf(draggedItem);
-      if (draggedIndex === -1) return state;
-
-      // Update container temporarily so dropzone preview works correctly
-      const updatedItem = { ...draggedItem, container: newContainer };
-
-      // Remove from current position
-      newItems.splice(draggedIndex, 1);
-
-      const lastIndexInContainer = newItems
-        .map((item) => item && item.container)
-        .lastIndexOf(newContainer);
-
-      if (lastIndexInContainer === -1) {
-        newItems.push(updatedItem);
-      } else {
-        newItems.splice(lastIndexInContainer + 1, 0, updatedItem);
-      }
-
-      return { ...state, items: newItems };
-    }
-    case 'RESET_DRAG_CONTAINER': {
-      const { itemId, originalContainer } = action.payload;
-      return {
-        ...state,
-        items: state.items.map(item =>
-          item.id === itemId
-            ? { ...item, container: originalContainer }
-            : item
-        )
-      };
     }
     default:
       return state;
@@ -127,7 +62,6 @@ export const DraggableProvider = ({
   onDragOver,
   dropZone = { type: 'ghost', color: 'neutral', direction: 'vertical' },
   providerId = 'default', // fallback provided for backward compatibility, so this does not become a required prop
-  enableCrossContainerPreview = false,
 }: DraggableProviderType) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
@@ -156,11 +90,8 @@ export const DraggableProvider = ({
   }, [initialItems]);
 
   useEffect(() => {
-    // Only call onReorder if we're not in a cross-container preview (when flag is enabled)
-    if (!enableCrossContainerPreview || !state.isCrossContainerPreview) {
-      onReorder(state.items);
-    }
-  }, [state.items, state.isCrossContainerPreview, enableCrossContainerPreview]);
+    onReorder(state.items);
+  }, [state.items]);
 
   const handleDragStart = (id: string, container: string) => {
     dispatch({ type: 'SET_DRAG_DATA', payload: { id: id, initialGroup: container, originId: providerId } });
@@ -172,102 +103,17 @@ export const DraggableProvider = ({
     if (state.dragData.originId !== providerId) return; // Ignore drag events from other providers
 
     if (state.dragData.id !== id) {
-      const draggedItem = state.items.find(
-        (item) => item && item.id === state.dragData.id
-      );
-      const currentContainer =
-        draggedItem?.container ?? state.dragData.initialGroup;
-
-      const isCrossContainer =
-        enableCrossContainerPreview &&
-        currentContainer !== container &&
-        (currentContainer !== undefined || container !== undefined);
-
-      if (isCrossContainer) {
-        // Cross-container preview: temporarily adjust container + order
-        dispatch({
-          type: "REORDER_ITEMS_CROSS_CONTAINER",
-          payload: {
-            dragId: state.dragData.id,
-            targetId: id,
-            newContainer: container,
-          },
-        });
-      } else {
-        // Same-container reorder (or preview disabled)
-        dispatch({
-          type: "REORDER_ITEMS",
-          payload: { dragId: state.dragData.id, targetId: id },
-        });
-      }
-
-      // IMPORTANT: keep initialGroup as the ORIGINAL container for callbacks
-      dispatch({
-        type: "SET_DRAG_DATA",
-        payload: {
-          id: state.dragData.id,
-          initialGroup: state.dragData.initialGroup,
-          originId: providerId,
-        },
-      });
+      dispatch({ type: 'REORDER_ITEMS', payload: { dragId: state.dragData.id, targetId: id } });
+      dispatch({ type: 'SET_DRAG_DATA', payload: { id: state.dragData.id, initialGroup: container, originId: providerId } });
     }
     if (onDragEnter) onDragEnter(id, container);
   };
 
-  const resetDragState = () => {
-    dispatch({ type: "SET_IS_DRAGGING", payload: "" });
-    dispatch({ type: "SET_ACTIVE_CONTAINER", payload: "" });
-    dispatch({
-      type: "SET_DRAG_DATA",
-      payload: { id: "", initialGroup: "", originId: "" },
-    });
-    if (enableCrossContainerPreview) {
-      dispatch({ type: "SET_CROSS_CONTAINER_PREVIEW", payload: false });
-    }
-  };
-
   const handleDragEnd = () => {
-    const draggedItemId = state.dragData.id;
-    const originalContainer = state.dragData.initialGroup;
-
-    if (!draggedItemId) {
-      resetDragState();
-      return;
-    }
-
-    const draggedItem = state.items.find(
-      (item) => item && item.id === draggedItemId
-    );
-    const finalContainer = draggedItem?.container ?? originalContainer;
-
-    const itemsInContainer = state.items.filter(
-      (item) => item && item.container === finalContainer
-    );
-    const indexInContainer = itemsInContainer.findIndex(
-      (item) => item && item.id === draggedItemId
-    );
-    const itemAbove =
-      indexInContainer > 0 ? itemsInContainer[indexInContainer - 1] : null;
-    const itemBelow =
-      indexInContainer < itemsInContainer.length - 1
-        ? itemsInContainer[indexInContainer + 1]
-        : null;
-
-    resetDragState();
-
-    if (onDragEnd) {
-      if (!enableCrossContainerPreview) {
-        onDragEnd();
-      } else {
-        onDragEnd(
-          draggedItemId,
-          finalContainer,
-          originalContainer,
-          itemAbove,
-          itemBelow
-        );
-      }
-    }
+    dispatch({ type: 'SET_IS_DRAGGING', payload: "" });
+    dispatch({ type: 'SET_ACTIVE_CONTAINER', payload: "" });
+    dispatch({ type: 'SET_DRAG_DATA', payload: { id: "", initialGroup: "", originId: "" } });
+    if (onDragEnd) onDragEnd();
   };
 
   const changeCategory = (itemId: string, container: string) => {
@@ -277,77 +123,17 @@ export const DraggableProvider = ({
   const handleDrop = (container: string) => {
     if (state.dragData.originId !== providerId) return; // Ignore drop events from other providers
 
-    const draggedItemId = state.dragData.id;
-    const originalContainer = state.dragData.initialGroup;
-    
-    if (!draggedItemId) return;
-    
-    const draggedItem = state.items.find(item => item && item.id === draggedItemId);
-    
-    if (!draggedItem) {
-      resetDragState();
-      return;
-    }
-
-    const itemsInContainer = state.items.filter(
-      (item) => item && item.container === container
-    );
-    const indexInContainer = itemsInContainer.findIndex(
-      (item) => item && item.id === draggedItemId
-    );
-    const itemAbove =
-      indexInContainer > 0 ? itemsInContainer[indexInContainer - 1] : null;
-    const itemBelow =
-      indexInContainer < itemsInContainer.length - 1
-        ? itemsInContainer[indexInContainer + 1]
-        : null;
-
-    resetDragState();
-
-    // Ensure the container is set correctly on drop
-    changeCategory(draggedItemId, container);
-
-    if (onDrop) {
-      const updatedItem = { ...draggedItem, container };
-      if (!enableCrossContainerPreview) {
-        onDrop(container);
-      } else {
-        onDrop(
-          draggedItemId,
-          container,
-          originalContainer,
-          updatedItem,
-          itemAbove,
-          itemBelow
-        );
-      }
-    }
+    dispatch({ type: 'SET_IS_DRAGGING', payload: "" });
+    dispatch({ type: 'SET_ACTIVE_CONTAINER', payload: "" });
+    changeCategory(state.dragData.id, container);
+    if (onDrop) onDrop(container);
   };
 
   const handleDragOver = (e: Event, container: string) => {
-    if (state.dragData.originId !== providerId) return;
+     if (state.dragData.originId !== providerId) return; // Ignore drag over events from other providers
 
     e.preventDefault();
-    dispatch({ type: "SET_ACTIVE_CONTAINER", payload: container });
-
-    if (!state.dragData.id) {
-      if (onDragOver) onDragOver(e, container);
-      return;
-    }
-
-    if (enableCrossContainerPreview) {
-      const draggedItem = state.items.find(
-        (item) => item && item.id === state.dragData.id
-      );
-
-      if (draggedItem && draggedItem.container !== container) {
-        dispatch({
-          type: "MOVE_TO_CONTAINER_END",
-          payload: { dragId: state.dragData.id, newContainer: container },
-        });
-      }
-    }
-    
+    dispatch({ type: 'SET_ACTIVE_CONTAINER', payload: container });
     if (onDragOver) onDragOver(e, container);
   };
 
