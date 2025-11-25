@@ -199,10 +199,33 @@ export const DraggableProvider = ({
   };
 
   const handleDragEnd = () => {
+    const draggedItemId = state.dragData.id;
+    const originalContainer = state.dragData.initialGroup;
+    
     dispatch({ type: 'SET_IS_DRAGGING', payload: "" });
     dispatch({ type: 'SET_ACTIVE_CONTAINER', payload: "" });
     dispatch({ type: 'SET_DRAG_DATA', payload: { id: "", initialGroup: "", originId: "" } });
-    if (onDragEnd) onDragEnd();
+    if (onDragEnd) {
+      if (!enableCrossContainerPreview) {
+        onDragEnd();
+      } else {
+        const draggedItem = state.items.find(item => item && item.id === draggedItemId);
+        const finalContainer = draggedItem ? draggedItem.container : originalContainer;
+        
+        const itemsInContainer = state.items.filter(item => item && item.container === finalContainer);
+        const indexInContainer = itemsInContainer.findIndex(item => item && item.id === draggedItemId);
+        const itemAbove = indexInContainer > 0 ? itemsInContainer[indexInContainer - 1] : null;
+        const itemBelow = indexInContainer < itemsInContainer.length - 1 ? itemsInContainer[indexInContainer + 1] : null;
+        
+        onDragEnd(
+          draggedItemId,
+          finalContainer,
+          originalContainer,
+          itemAbove,
+          itemBelow
+        );
+      }
+    }
   };
 
   const changeCategory = (itemId: string, container: string) => {
@@ -212,10 +235,34 @@ export const DraggableProvider = ({
   const handleDrop = (container: string) => {
     if (state.dragData.originId !== providerId) return; // Ignore drop events from other providers
 
+    const draggedItemId = state.dragData.id;
+    const originalContainer = state.dragData.initialGroup;
+
     dispatch({ type: 'SET_IS_DRAGGING', payload: "" });
     dispatch({ type: 'SET_ACTIVE_CONTAINER', payload: "" });
     changeCategory(state.dragData.id, container);
-    if (onDrop) onDrop(container);
+    if (onDrop) {
+      if (!enableCrossContainerPreview) {
+        onDrop(container);
+      } else {
+        const draggedItem = state.items.find(item => item && item.id === draggedItemId);
+        const updatedItem = draggedItem ? { ...draggedItem, container } : null;
+        
+        const itemsInContainer = state.items.filter(item => item && item.container === container);
+        const indexInContainer = itemsInContainer.findIndex(item => item && item.id === draggedItemId);
+        const itemAbove = indexInContainer > 0 ? itemsInContainer[indexInContainer - 1] : null;
+        const itemBelow = indexInContainer < itemsInContainer.length - 1 ? itemsInContainer[indexInContainer + 1] : null;
+        
+        onDrop(
+          draggedItemId,
+          container,
+          originalContainer,
+          updatedItem,
+          itemAbove,
+          itemBelow
+        );
+      }
+    }
   };
 
   const handleDragOver = (e: Event, container: string) => {
