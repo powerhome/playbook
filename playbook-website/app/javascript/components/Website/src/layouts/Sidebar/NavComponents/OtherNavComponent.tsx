@@ -1,14 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { NavItem } from "playbook-ui";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 export const OtherNavItems = ({
   name,
-  currentURL,
   dark,
   building_blocks,
-  setIsActive,
-  isActive,
   updateTopLevelNav,
   parentIndex,
   getting_started,
@@ -18,8 +15,10 @@ export const OtherNavItems = ({
 }: any) => {
 
   const navigate = useNavigate();
+  const location = useLocation();
+  const currentURL = location.pathname + location.search;
   
-  const createLink = (path) => {
+  const createLink = (path: string) => {
     if (!path.startsWith("/beta")) {
       return `/beta${path}`;
     }
@@ -91,34 +90,18 @@ export const OtherNavItems = ({
     if (navigate) {
       navigate(link.link);
     }
-    
-    const key = `${link.link}-${i}`
-    setIsActive(() => {
-      const newIsActive = {}
-      newIsActive[key] = true
-      return newIsActive
-    })
-    updateTopLevelNav(parentIndex)
+    updateTopLevelNav(parentIndex);
   }
 
   const activeForItems = (link, i) => {
-    if (currentURL.startsWith("/guides/getting_started/icons") && link.name === "Icon Integration") {
+    // Special case for icon integration
+    if (currentURL.startsWith("/beta/guides/getting_started/icons") && link.name === "Icon Integration") {
       return true;
     }
   
-    const key = `${link.link}-${i}`
-  
-    if (isActive[key]) {
-      return true
-    }
-  
-    if (Object.keys(isActive).length === 0) {
-      // strip /react or /rails from the end of currentURL before comparing
-      const normalizedCurrentURL = currentURL.replace(/\/(react|rails)$/, '');
-      return link.link === currentURL || link.link === normalizedCurrentURL
-    }
-  
-    return null
+    // Strip /react or /rails from the end of currentURL before comparing
+    const normalizedCurrentURL = currentURL.replace(/\/(react|rails)$/, '');
+    return link.link === currentURL || link.link === normalizedCurrentURL;
   }
 
   // flex_box items get special handling
@@ -141,9 +124,23 @@ export const OtherNavItems = ({
     }
   }
 
-  const [flexBoxCollapsed, setFlexBoxCollapsed] = useState(
-    !currentURL.startsWith('/global_props/flex_box')
-  )
+  // Check if any flex_box child is active
+  const hasActiveFlexBoxChild = flexBoxChildren.some((child: any) => {
+    const normalizedCurrentURL = currentURL.replace(/\/(react|rails)$/, '');
+    return child.link === currentURL || child.link === normalizedCurrentURL;
+  });
+  
+  // Expand flex_box if we're on it or any of its children
+  const shouldExpandFlexBox = currentURL.startsWith('/beta/global_props/flex_box');
+  
+  const [flexBoxCollapsed, setFlexBoxCollapsed] = useState(!shouldExpandFlexBox);
+  
+  // Auto-expand when navigating to a flex_box child
+  useEffect(() => {
+    if (shouldExpandFlexBox) {
+      setFlexBoxCollapsed(false);
+    }
+  }, [location.pathname]);
 
   const handleFlexBoxIconClick = () => {
     setFlexBoxCollapsed(!flexBoxCollapsed)
@@ -153,15 +150,8 @@ export const OtherNavItems = ({
     if (navigate) {
       navigate(link.link);
     }
-    
-    const key = `${link.link}-${i}`
-    setIsActive(() => {
-      const newIsActive: any = {}
-      newIsActive[key] = true
-      return newIsActive
-    })
-    updateTopLevelNav(parentIndex)
-    return true
+    updateTopLevelNav(parentIndex);
+    return true;
   }
 
   return (

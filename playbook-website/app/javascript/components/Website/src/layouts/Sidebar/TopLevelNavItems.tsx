@@ -1,17 +1,13 @@
 import { useState, useEffect } from "react";
 import { NavItem, useCollapsible } from "playbook-ui";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { KitsNavItem, kitsType } from "./NavComponents/KitsNavComponent";
 import { SideBarNavItems } from "./MenuData/SidebarNavItems";
 import { OtherNavItems } from "./NavComponents/OtherNavComponent";
 
-const currentURL = window.location.pathname + window.location.search;
-
 export const TopLevelNavItem = ({
   dark,
   type,
-  isActive,
-  setIsActive,
   kits,
   kit,
   category,
@@ -23,6 +19,8 @@ export const TopLevelNavItem = ({
   global_props_and_tokens,
 }: any) => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const currentURL = location.pathname + location.search;
   //hook into collapsible logic for top level item
   const topLevelCollapsibles = SideBarNavItems.map(() => useCollapsible());
 
@@ -45,11 +43,6 @@ export const TopLevelNavItem = ({
     }
     
     topLevelCollapsibles.forEach(([, , setCollapsed], idx) => {
-      setIsActive(() => {
-        const newIsActive = {};
-        newIsActive[item] = true;
-        return newIsActive;
-      });
       if (idx === index) {
         setCollapsed(false);
       } else {
@@ -60,45 +53,44 @@ export const TopLevelNavItem = ({
     return true;
   };
 
-  //NOTE: All toggle and active state logic should be replaced with state once website moves to react router
-  const activeTopLevel = (key, link) => {
-    const kitsLink =
-      link === "/kits"
-        ? `/kits${kitsType(type) ? `?type=${kitsType(type)}` : ""}`
-        : link;
-    return isActive[key]
-      ? true
-      : Object.keys(isActive).length === 0
-      ? currentURL === kitsLink || currentURL === link
-      : false;
+  const activeTopLevel = (link, hasChildren) => { 
+    // Top level items should not be active if they have children (except for the special case above)
+    // Only leaf nodes (items without children or specific pages) should be active
+    if (hasChildren) {
+      return false;
+    }
+    
+    const betaLink = !link.startsWith("/beta") ? `/beta${link}` : link;
+    return currentURL.startsWith(betaLink);
+  };
+  
+  const shouldExpandTopLevel = (link) => {
+    const betaLink = !link.startsWith("/beta") ? `/beta${link}` : link;
+    
+    // Expand if current URL is under this section
+    if (link === "/kits") {
+      return currentURL.startsWith("/beta/kits") || currentURL.startsWith("/beta/kit_category");
+    }
+    if (link === "/changelog") {
+      return currentURL.startsWith("/beta/changelog");
+    }
+    if (link === "/guides/getting_started") {
+      return currentURL.startsWith("/beta/guides/getting_started");
+    }
+    if (link === "/guides/design_guidelines") {
+      return currentURL.startsWith("/beta/guides/design_guidelines");
+    }
+    
+    return currentURL.startsWith(betaLink);
   };
 
-  // if url starts with  /kits then relevant collapsible nav to be toggled open on first render
-  const currentPage = currentURL.match(/^(\/[^/]+)\/[^/]+/);
-  const kitsPage = currentURL.match(/^\/([^/?#]+)/);
-  // if url starts with /kit, then relevant collapsible nav to be toggled open on first render
-  const kitCategoryPage = currentURL.match(/^\/([^/]{3})/);
-  // if url matches /guides, than relevant collapsible nav to be toggled open on first render
-  const guidesPage = currentURL.split("/").slice(0, 3).join("/");
-  // if changelog_ is in the current url
-  const changelogPage = currentURL.includes("changelog_");
   //extract render logic out of return for better performance
   const renderTopItems = (name, key, children, leftIcon, link, i) => {
     const [collapsed] = topLevelCollapsibles[i];
 
-    //is link for navitem equal to current url? Logic will be redundant once website moves to react
+    //check if on current page for initial collapse state
     const onCurrentPage = () => {
-      const categoryMatch =
-        (currentPage &&
-          (currentPage[1] === link ||
-            (kitCategoryPage &&
-              `/${kitCategoryPage[1]}` ===
-                link.substring(0, link.length - 1)))) ||
-        (kitsPage && kitsPage[0] === link);
-
-      const guidesMatch = guidesPage === link;
-
-      return categoryMatch || guidesMatch ? true : false;
+      return shouldExpandTopLevel(link);
     };
 
     //use state to handle toggle logic to make sure both main click and right icon click works as expected
@@ -106,15 +98,15 @@ export const TopLevelNavItem = ({
       onCurrentPage() ? false : true
     );
 
-    //on first render, active item should be toggled open, after that custom toggling logic to run
+    //sync collapsed state with collapsible hook and re-check if should be expanded on location change
     useEffect(() => {
-      //isActive will always be empty on first render due to rails navigation. Once we move to React router, this code will not be needed
-      if (Object.keys(isActive).length === 0) {
-        setToggleTopNav(onCurrentPage() ? false : true);
+      // If we should be expanded based on current URL, don't collapse
+      if (shouldExpandTopLevel(link)) {
+        setToggleTopNav(false);
       } else {
         setToggleTopNav(collapsed);
       }
-    }, [collapsed, isActive]);
+    }, [collapsed, location]);
 
     //right icon click for top level item
     const handleComponentsIconClick = (i) => {
@@ -142,7 +134,7 @@ export const TopLevelNavItem = ({
 
     return (
       <NavItem
-        active={activeTopLevel(key, link)}
+        active={activeTopLevel(link, children)}
         collapsed={children && toggleTopNav}
         collapsible={children}
         collapsibleTrail={children}
@@ -173,8 +165,6 @@ export const TopLevelNavItem = ({
                     type={type}
                     dark={dark}
                     kit={kit}
-                    isActive={isActive}
-                    setIsActive={setIsActive}
                     updateTopLevelNav={updateTopLevelNav}
                     parentIndex={i}
                   />
@@ -183,11 +173,8 @@ export const TopLevelNavItem = ({
             ) : (
               <OtherNavItems
                 name={name}
-                currentURL={currentURL}
                 dark={dark}
                 building_blocks={building_blocks}
-                setIsActive={setIsActive}
-                isActive={isActive}
                 updateTopLevelNav={updateTopLevelNav}
                 parentIndex={i}
                 getting_started={getting_started}

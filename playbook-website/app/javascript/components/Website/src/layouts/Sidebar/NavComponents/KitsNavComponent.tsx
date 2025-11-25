@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import { NavItem } from "playbook-ui";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { linkFormat } from "../../../../../../utilities/website_sidebar_helper";
 
-export const kitsType = (type) => {
+export const kitsType = (type: string | null | undefined) => {
   if (type === null || type === undefined) {
     return "react";
   } else {
@@ -15,30 +15,23 @@ export const KitsNavItem = ({
   link,
   kitIndex,
   collapsibles,
-  category,
   type,
   dark,
-  kit,
-  isActive,
-  setIsActive,
   updateTopLevelNav,
   parentIndex,
-}) => {
+}: any) => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const currentURL = location.pathname + location.search;
   const [collapsed] = collapsibles[kitIndex];
   //set up custom toggling
-  const handleMainClick = (index, categoryKey) => {
+  const handleMainClick = (index:number, categoryKey:string) => {
     const linkPath = generateLink(categoryKey, null, type);
     if (linkPath && navigate) {
       navigate(linkPath);
     }
     
     collapsibles.forEach(([, , setCollapsed], idx) => {
-      setIsActive(() => {
-        const newIsActive = {};
-        newIsActive[`${categoryKey}-${index}`] = true;
-        return newIsActive;
-      });
       if (idx === index) {
         setCollapsed(false);
       } else {
@@ -51,8 +44,8 @@ export const KitsNavItem = ({
   };
 
   //make sure kits nav will stay toggled open when nested item is clicked
-  const updateKitsNav = (index) => {
-    collapsibles.forEach((collapsible, i) => {
+  const updateKitsNav = (index:number) => {
+    collapsibles.forEach((collapsible:any, i:number) => {
       const [, , setCollapsed] = collapsible;
       if (i !== index) {
         setCollapsed(true);
@@ -63,37 +56,27 @@ export const KitsNavItem = ({
   };
 
   //click on nested items
-  const handleSubItemClick = (subLinkIndex, sublink, Index) => {
+  const handleSubItemClick = (subLinkIndex:number, sublink:string, Index:number) => {
     const linkPath = generateLink(Object.keys(link)[0], sublink, type);
     if (navigate) {
       navigate(linkPath);
     }
     
-    setIsActive(() => {
-      const newIsActive = {};
-      newIsActive[`${sublink}-${subLinkIndex}`] = true;
-      return newIsActive;
-    });
     updateTopLevelNav(parentIndex);
     updateKitsNav(Index);
   };
 
   //click on non-collapsible navitem click
-  const handleNonCollapseLinkClick = (linkName) => {
+  const handleNonCollapseLinkClick = (linkName:string) => {
     const linkPath = generateLink(null, linkName, type);
     if (navigate) {
       navigate(linkPath);
     }
     
-    setIsActive(() => {
-      const newIsActive = {};
-      newIsActive[linkName] = true;
-      return newIsActive;
-    });
     updateTopLevelNav(parentIndex);
   };
 
-  const generateLink = (categoryKey, sublink, type) => {
+  const generateLink = (categoryKey:string, sublink:string | null, type:string | null | undefined) => {
     const basePrefix = "/beta";
     
     if (sublink) {
@@ -110,52 +93,53 @@ export const KitsNavItem = ({
   if (typeof link === "object") {
     const categoryKey = Object.keys(link)[0];
     const sublinks = link[categoryKey];
-    const isActiveCategory = isActive[kitIndex]
-      ? true
-      : Object.keys(isActive).length === 0
-      ? category === categoryKey
-      : false;
+    
+    // Check if any child is active - use exact path matching
+    const hasActiveSublink = sublinks.some((sublink:string) => {
+      const exactPath = `/beta/kits/${sublink}/`;
+      return currentURL.startsWith(exactPath) || currentURL.includes(`/kits/${sublink}/react`) || currentURL.includes(`/kits/${sublink}/rails`);
+    });
+    
+    // Parent category should only be active if we're on the category page itself, not a sublink
+    const isActiveCategory = currentURL.includes(`/kit_category/${categoryKey}`) && !hasActiveSublink;
 
-    const hasActiveSublink = link[Object.keys(link)[0]].some(
-      (sublink) => sublink === kit
-    );
-
-    //useState for handling collapsed state
+    //useState for handling collapsed state - should be expanded if any child is active
     const [toggleNav, setToggleNav] = useState(
-      isActiveCategory || hasActiveSublink ? false : true
+      !(isActiveCategory || hasActiveSublink)
     );
-    //useEffect to handle toggle to consolidate logic
+    
+    //useEffect to handle toggle - auto-expand if child is active
     useEffect(() => {
-      // isActive will always be empty on first render due to rails navigation. Once we move to React router, this code will not be needed
-      if (Object.keys(isActive).length === 0) {
-        setToggleNav(isActiveCategory || hasActiveSublink ? false : collapsed);
+      // Auto-expand if we're on this category or any of its children
+      if (isActiveCategory || hasActiveSublink) {
+        setToggleNav(false);
       } else {
         setToggleNav(collapsed);
       }
-    }, [collapsed, isActive]);
+    }, [collapsed, location]);
 
     //click event for right icon
-    const handleIconClick = (index) => {
-      collapsibles.forEach(([, ,], idx) => {
+    const handleIconClick = (index:number) => {
+      collapsibles.forEach(([, ,], idx:number) => {
         if (idx === index) {
           toggleNav === true ? setToggleNav(false) : setToggleNav(true);
         }
       });
     };
 
-    const calculateIsActiveCategory = (i, categoryKey, sublink) => {
+    const calculateIsActiveCategory = (i:number, categoryKey:string | null, sublink:string | null) => {
       if (sublink) {
-        return isActive[`${sublink}-${i}`]
-          ? true
-          : Object.keys(isActive).length === 0
-          ? kit === sublink
-          : false;
+        // Child item - check if this specific sublink is active with exact path matching
+        const exactPath = `/beta/kits/${sublink}/`;
+        return currentURL.startsWith(exactPath) || currentURL.includes(`/kits/${sublink}/react`) || currentURL.includes(`/kits/${sublink}/rails`);
       } else {
-        return isActive[`${categoryKey}-${i}`]
-          ? true
-          : Object.keys(isActive).length === 0
-          ? category === categoryKey
-          : false;
+        // Category item - only active on category page, not when a child is active
+        const onCategoryPage = currentURL.includes(`/kit_category/${categoryKey}`);
+        const hasActiveChild = sublinks.some((sl:string) => {
+          const exactPath = `/beta/kits/${sl}/`;
+          return currentURL.startsWith(exactPath) || currentURL.includes(`/kits/${sl}/react`) || currentURL.includes(`/kits/${sl}/rails`);
+        });
+        return onCategoryPage && !hasActiveChild;
       }
     };
 
@@ -177,7 +161,7 @@ export const KitsNavItem = ({
         paddingY="xxs"
         text={linkFormat(categoryKey)}
       >
-        {sublinks.map((sublink, j) => (
+        {sublinks.map((sublink:string, j:number) => (
           <NavItem
             active={calculateIsActiveCategory(j, null, sublink)}
             cursor="pointer"
@@ -193,15 +177,13 @@ export const KitsNavItem = ({
       </NavItem>
     );
   } else {
+    // Non-collapsible kit: check exact path match
+    const exactPath = `/beta/kits/${link}/`;
+    const isActive = currentURL.startsWith(exactPath) || currentURL.includes(`/kits/${link}/react`) || currentURL.includes(`/kits/${link}/rails`);
+    
     return (
       <NavItem
-        active={
-          isActive[link]
-            ? true
-            : Object.keys(isActive).length === 0
-            ? kit === link
-            : false
-        }
+        active={isActive}
         cursor="pointer"
         dark={dark}
         fontSize="small"

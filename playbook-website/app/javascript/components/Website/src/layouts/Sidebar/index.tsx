@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Nav, useCollapsible, Image, Badge, Flex } from "playbook-ui";
 import { TopLevelNavItem } from "./TopLevelNavItems";
 // @ts-ignore
@@ -21,8 +20,6 @@ const Sidebar = ({
   icons,
   global_props_and_tokens,
 }: any) => {
-  //active state for navItems(will be redundant once routing moved to react router)
-  const [isActive, setIsActive] = useState({});
   
   // --------------Halloween only-----------------------------
   // Check if we're in the last week of October (Oct 25-31)
@@ -98,8 +95,6 @@ const Sidebar = ({
         <TopLevelNavItem
           dark={dark}
           type={type}
-          isActive={isActive}
-          setIsActive={setIsActive}
           kits={kits}
           kit={kit}
           category={category}
