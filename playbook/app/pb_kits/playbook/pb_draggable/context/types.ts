@@ -18,8 +18,12 @@ export type ActionType =
 } }
   | { type: 'SET_IS_DRAGGING'; payload: string }
   | { type: 'SET_ACTIVE_CONTAINER'; payload: string }
+  | { type: 'SET_CROSS_CONTAINER_PREVIEW'; payload: boolean }
   | { type: 'CHANGE_CATEGORY'; payload: { itemId: string; container: string } }
-  | { type: 'REORDER_ITEMS'; payload: { dragId: string; targetId: string } };
+  | { type: 'REORDER_ITEMS'; payload: { dragId: string; targetId: string } }
+  | { type: 'REORDER_ITEMS_CROSS_CONTAINER'; payload: { dragId: string; targetId: string; newContainer: string } }
+  | { type: 'MOVE_TO_CONTAINER_END'; payload: { dragId: string; newContainer: string } }
+  | { type: 'RESET_DRAG_CONTAINER'; payload: { itemId: string; originalContainer: string } };
 
   export interface DropZoneConfig {
     type?: 'ghost' | 'outline' | 'shadow' | 'line';
@@ -33,9 +37,10 @@ export type ActionType =
     onReorder: (items: ItemType[]) => void;
     onDragStart?: (id: string, container: string) => void;
     onDragEnter?: (id: string, container: string) => void;
-    onDragEnd?: () => void;
-    onDrop?: (container: string) => void;
+    onDragEnd?: (...args: any[]) => void;
+    onDrop?: (...args: any[]) => void;
     onDragOver?: (e: Event, container: string) => void;
     dropZone?: DropZoneConfig | string; // Can accept string for backward compatibility
     providerId?: string;
+    enableCrossContainerPreview?: boolean;
   }
