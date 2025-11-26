@@ -53,14 +53,34 @@ export const TopLevelNavItem = ({
     return true;
   };
 
-  const activeTopLevel = (link, hasChildren) => { 
-    // Top level items should not be active if they have children (except for the special case above)
-    // Only leaf nodes (items without children or specific pages) should be active
+  const activeTopLevel = (link, hasChildren) => {
+    const betaLink = !link.startsWith("/beta") ? `/beta${link}` : link;
+    
+    // Special handling for items with children
     if (hasChildren) {
-      return false;
+      // Top level items with children should be active ONLY on their exact main page
+      if (link === "/kits") {
+        // Active on /beta/kits page but NOT on /beta/kits/something or /beta/kit_category
+        return currentURL === "/beta/kits" || currentURL.startsWith("/beta/kits?");
+      }
+      if (link === "/changelog") {
+        // Active on /beta/changelog page but NOT on /beta/changelog/web etc
+        return currentURL === "/beta/changelog" || currentURL === "/beta/changelog?";
+      }
+      if (link === "/guides/getting_started") {
+        // Active on the overview page but NOT on individual guide pages
+        return currentURL === "/beta/guides/getting_started" || currentURL === "/beta/guides/getting_started?";
+      }
+      if (link === "/guides/design_guidelines") {
+        // Active on the overview page but NOT on individual guide pages
+        return currentURL === "/beta/guides/design_guidelines" || currentURL === "/beta/guides/design_guidelines?";
+      }
+      
+      // For other items with children, only active on exact match
+      return currentURL === betaLink || currentURL.startsWith(`${betaLink}?`);
     }
     
-    const betaLink = !link.startsWith("/beta") ? `/beta${link}` : link;
+    // Items without children can use startsWith
     return currentURL.startsWith(betaLink);
   };
   
