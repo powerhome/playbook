@@ -41,18 +41,18 @@ const TimePicker = (props: TimePickerProps): JSX.Element => {
   // Parse initial time
   const parseTime = (timeStr: string | undefined): { hour: number, minute: number, meridiem: 'AM' | 'PM' } => {
     if (!timeStr) {
-      const now = new Date()
+      // Default to 12:00 PM when no time is provided
       if (timeFormat === '24hour') {
         return {
-          hour: now.getHours(),
-          minute: now.getMinutes(),
-          meridiem: now.getHours() < 12 ? 'AM' : 'PM',
+          hour: 12,
+          minute: 0,
+          meridiem: 'PM',
         }
       }
       return {
-        hour: now.getHours() % 12 || 12,
-        minute: now.getMinutes(),
-        meridiem: now.getHours() < 12 ? 'AM' : 'PM',
+        hour: 12,
+        minute: 0,
+        meridiem: 'PM',
       }
     }
 
@@ -64,6 +64,11 @@ const TimePicker = (props: TimePickerProps): JSX.Element => {
 
       if (timeFormat === '24hour') {
         // For 24-hour format, store hour as-is (0-23) but keep meridiem for internal state
+        // If meridiem is provided, convert to 24-hour first
+        if (meridiem) {
+          if (meridiem === 'PM' && hour !== 12) hour += 12
+          if (meridiem === 'AM' && hour === 12) hour = 0
+        }
         if (hour > 23) hour = 23
         if (hour < 0) hour = 0
         meridiem = hour < 12 ? 'AM' : 'PM'
@@ -73,20 +78,26 @@ const TimePicker = (props: TimePickerProps): JSX.Element => {
       // 12-hour format (AMPM)
       // If no meridiem specified, infer from hour (assuming 24-hour format input)
       if (!meridiem) {
-        meridiem = hour < 12 ? 'AM' : 'PM'
-        if (hour > 12) hour = hour % 12
-        if (hour === 0) hour = 12
-      } else {
-        // Convert to 24-hour, then back to 12-hour with meridiem
-        if (meridiem === 'PM' && hour !== 12) hour += 12
-        if (meridiem === 'AM' && hour === 12) hour = 0
-        hour = hour % 12 || 12
+        // Input is likely 24-hour format, convert to 12-hour
+        if (hour > 12) {
+          hour = hour % 12
+          meridiem = 'PM'
+        } else if (hour === 12) {
+          meridiem = 'PM'
+        } else if (hour === 0) {
+          hour = 12
+          meridiem = 'AM'
+        } else {
+          meridiem = 'AM'
+        }
       }
+      // If meridiem is provided, keep hour in 12-hour format (1-12) as-is
+      // No conversion needed - the input is already in 12-hour format
 
       return { hour, minute, meridiem }
     }
 
-    return { hour: timeFormat === '24hour' ? 0 : 12, minute: 0, meridiem: 'AM' }
+    return { hour: timeFormat === '24hour' ? 12 : 12, minute: 0, meridiem: 'PM' }
   }
 
   const hasInitialValue = !!(value || defaultTime)
@@ -99,7 +110,21 @@ const TimePicker = (props: TimePickerProps): JSX.Element => {
   const [minuteInputValue, setMinuteInputValue] = useState<string>(initialTime.minute.toString().padStart(2, '0'))
   
   // Update hour input value format based on timeFormat changes
+  // Only run this if timeFormat actually changes, not on initial mount
+  const prevTimeFormatRef = useRef(timeFormat)
+  const isInitialMountRef = useRef(true)
   useEffect(() => {
+    // Skip on initial mount - the parseTime function already handles the correct format
+    if (isInitialMountRef.current) {
+      isInitialMountRef.current = false
+      prevTimeFormatRef.current = timeFormat
+      return
+    }
+    
+    // Only convert if timeFormat actually changed
+    if (prevTimeFormatRef.current === timeFormat) return
+    prevTimeFormatRef.current = timeFormat
+
     if (timeFormat === '24hour') {
       // Convert from 12-hour to 24-hour if needed
       let hour24 = hour
@@ -111,23 +136,30 @@ const TimePicker = (props: TimePickerProps): JSX.Element => {
       setHourInputValue(hour24.toString())
     } else {
       // Convert from 24-hour to 12-hour if needed
+      // Only convert if hour is > 12 (definitely 24-hour format)
+      // Don't overwrite meridiem if hour is 1-12 (could be either format)
       let hour12 = hour
+      let shouldUpdateMeridiem = false
       if (hour12 > 12) {
         hour12 = hour12 % 12
+        shouldUpdateMeridiem = true
         setMeridiem('PM')
       } else if (hour12 === 0) {
         hour12 = 12
+        shouldUpdateMeridiem = true
         setMeridiem('AM')
-      } else if (hour12 === 12) {
+      } else if (hour12 === 12 && prevTimeFormatRef.current === '24hour') {
+        // Only set to PM if we're converting from 24-hour format
+        shouldUpdateMeridiem = true
         setMeridiem('PM')
-      } else {
-        setMeridiem('AM')
       }
+      // Don't change meridiem for hours 1-11 - preserve what was parsed
       if (hour12 > 12) hour12 = 12
       if (hour12 < 1) hour12 = 1
       setHour(hour12)
       setHourInputValue(hour12.toString())
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [timeFormat])
 
   const hourInputRef = useRef<HTMLInputElement>(null)
@@ -178,10 +210,52 @@ const TimePicker = (props: TimePickerProps): JSX.Element => {
       setHasSelectedTime(true)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [value, timeFormat])
+  }, [value])
+  
+  // Re-parse when timeFormat changes if we have a defaultTime
+  const prevTimeFormatRef3 = useRef(timeFormat)
+  const isInitialMountRef3 = useRef(true)
+  useEffect(() => {
+    // Skip on initial mount - the parseTime function already handles the correct format
+    if (isInitialMountRef3.current) {
+      isInitialMountRef3.current = false
+      prevTimeFormatRef3.current = timeFormat
+      return
+    }
+    
+    // Only re-parse if timeFormat actually changed
+    if (prevTimeFormatRef3.current === timeFormat) return
+    prevTimeFormatRef3.current = timeFormat
+    
+    // Re-parse defaultTime when timeFormat changes
+    if (defaultTime && !value) {
+      const parsed = parseTime(defaultTime)
+      setHour(parsed.hour)
+      setMinute(parsed.minute)
+      setMeridiem(parsed.meridiem)
+      setHourInputValue(parsed.hour.toString())
+      setMinuteInputValue(parsed.minute.toString().padStart(2, '0'))
+      setDisplayValue(getDisplayTime(parsed.hour, parsed.minute, parsed.meridiem))
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [timeFormat])
   
   // Update hour input value format based on timeFormat changes
+  // Only run this if timeFormat actually changes, not on initial mount
+  const prevTimeFormatRef2 = useRef(timeFormat)
+  const isInitialMountRef2 = useRef(true)
   useEffect(() => {
+    // Skip on initial mount - the parseTime function already handles the correct format
+    if (isInitialMountRef2.current) {
+      isInitialMountRef2.current = false
+      prevTimeFormatRef2.current = timeFormat
+      return
+    }
+    
+    // Only convert if timeFormat actually changed
+    if (prevTimeFormatRef2.current === timeFormat) return
+    prevTimeFormatRef2.current = timeFormat
+    
     // Only convert if we have a valid time selected
     if (!hasSelectedTime) return
     
@@ -198,25 +272,33 @@ const TimePicker = (props: TimePickerProps): JSX.Element => {
       }
     } else {
       // Convert from 24-hour to 12-hour if needed
+      // Only convert if hour is > 12 (definitely 24-hour format)
+      // Don't overwrite meridiem if hour is 1-12 (could be either format)
       let hour12 = hour
       let newMeridiem = meridiem
+      let shouldUpdateMeridiem = false
       if (hour12 > 12) {
         hour12 = hour12 % 12
         newMeridiem = 'PM'
+        shouldUpdateMeridiem = true
       } else if (hour12 === 0) {
         hour12 = 12
         newMeridiem = 'AM'
-      } else if (hour12 === 12) {
+        shouldUpdateMeridiem = true
+      } else if (hour12 === 12 && prevTimeFormatRef2.current === '24hour') {
+        // Only set to PM if we're converting from 24-hour format
         newMeridiem = 'PM'
-      } else {
-        newMeridiem = 'AM'
+        shouldUpdateMeridiem = true
       }
+      // Don't change meridiem for hours 1-11 - preserve what was parsed
       if (hour12 > 12) hour12 = 12
       if (hour12 < 1) hour12 = 1
-      if (hour12 !== hour || newMeridiem !== meridiem) {
+      if (hour12 !== hour || (shouldUpdateMeridiem && newMeridiem !== meridiem)) {
         setHour(hour12)
         setHourInputValue(hour12.toString())
-        setMeridiem(newMeridiem)
+        if (shouldUpdateMeridiem) {
+          setMeridiem(newMeridiem)
+        }
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
