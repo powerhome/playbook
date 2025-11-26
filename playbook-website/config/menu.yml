@@ -633,6 +633,12 @@ kits:
     icons_used: false
     react_rendered: false
     enhanced_element_used: false
+  - name: time_picker
+    platforms: web
+    status: beta
+    icons_used: false
+    react_rendered: false
+    enhanced_element_used: false
 - category: icons_and_images
   description: ''
   components:

@@ -107,6 +107,7 @@ export { default as TableRow } from '../pb_kits/playbook/pb_table/subcomponents/
 export { default as TextInput } from '../pb_kits/playbook/pb_text_input/_text_input'
 export { default as Textarea } from '../pb_kits/playbook/pb_textarea/_textarea'
 export { default as Time } from '../pb_kits/playbook/pb_time/_time'
+export { default as TimePicker} from '../pb_kits/playbook/pb_time_picker/_time_picker'
 export { default as TimeRangeInline } from '../pb_kits/playbook/pb_time_range_inline/_time_range_inline'
 export { default as TimeStacked } from '../pb_kits/playbook/pb_time_stacked/_time_stacked'
 export { default as Timeline } from '../pb_kits/playbook/pb_timeline/_timeline'

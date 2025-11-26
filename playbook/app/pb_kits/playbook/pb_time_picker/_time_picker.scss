@@ -1,0 +1,135 @@
+@import "../tokens/typography";
+@import "../tokens/spacing";
+@import "../tokens/colors";
+@import "../tokens/border_radius";
+@import "../tokens/shadows";
+@import "../tokens/positioning";
+
+.pb_time_picker {
+  .time_picker_wrapper {
+    position: relative;
+  }
+
+  .text_input_wrapper_add_on .add-on-card {
+    transition: background-color 0.3s ease-in-out 0s, border-color 0.3s ease-in-out 0s;
+    border-color: $border_light;
+  }
+
+  &:focus,
+  :focus-within {
+    .text_input_wrapper_add_on .add-on-card {
+      border-color: $primary;
+    }
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      .text_input_wrapper_add_on .add-on-card {
+        cursor: pointer;
+        background-color: rgba($focus_input_light, $opacity_5);
+      }
+    }
+  }
+
+  .text_input_wrapper_add_on .add-on-right .text_input {
+    cursor: pointer;
+  }
+
+  .pb_time_picker_container {
+    position: absolute;
+    background-color: $white;
+    overflow: hidden;
+    box-shadow: $shadow_deep;
+    border-radius: $border_rad_heavier;
+    border: 1px solid $border_light;
+    z-index: $z_1;
+    width: 100%;
+
+    .pb_time_selection {
+      color: inherit;
+      text-align: left;
+      margin-left: $space_sm;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: $space_xs;
+
+      .pb_caption_kit_md {
+        width: 100%;
+        flex-basis: 100%;
+        margin-bottom: 0;
+      }
+
+      .numInputWrapper {
+        width: auto;
+        display: inline-flex;
+        align-items: center;
+        margin-bottom: $space_xs;
+        input.numInput {
+          border: 1px solid $border_light !important;
+          border-radius: 5px;
+          text-align: center;
+          width: 60px;
+          margin-left: 0;
+          padding: $space_xs;
+          height: 40px;
+          font-size: 14px;
+          font-weight: $bolder;
+          &:focus {
+            border-color: $primary_action !important;
+            outline: none;
+          }
+        }
+        span {
+          &.arrowUp, &.arrowDown {
+            display: none;
+          }
+        }
+      }
+      .pb_caption_kit_md, .pb_caption_kit_xs {
+        line-height: $text_larger;
+      }
+      .pb_caption_kit_xs {
+        clear: both;
+        display: block;
+        width: 100%;
+        flex-basis: 100%;
+      }
+      .time-separator {
+        margin: 0;
+        text-align: center;
+        font-size: 14px;
+        line-height: 40px;
+        font-weight: $bolder;
+      }
+      .meridiem {
+        margin-bottom: $space_xs;
+        .pb_form_group_kit {
+          margin-left: 0;
+          display: flex;
+          gap: 0;
+        }
+
+        .datePicker-AMPM {
+          display: none;
+        }
+        &:focus, &:hover {
+          background: transparent;
+        }
+
+        .pb_selectable_card_kit_enabled > label,
+        .pb_selectable_card_kit_checked_enabled > label {
+          padding: 0;
+          margin: 0;
+          width: 60px;
+          height: 40px;
+          text-align: center;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-weight: $bolder;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,19 @@
+examples:
+  
+  rails:
+  - time_picker_default: Default
+  - time_picker_default_time: Default Time
+  - time_picker_24_hour: 24-Hour Format
+  - time_picker_label: Custom Label
+  - time_picker_timezone: With Timezone
+  
+  
+  react:
+  - time_picker_default: Default
+  - time_picker_default_time: Default Time
+  - time_picker_24_hour: 24-Hour Format
+  - time_picker_label: Custom Label
+  - time_picker_timezone: With Timezone
+  - time_picker_on_handler: onChange & onClose Handlers
+  
+  
