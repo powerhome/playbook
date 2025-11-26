@@ -73,6 +73,9 @@ PbDialog.start()
 import PbDatePicker from 'kits/pb_date_picker'
 PbDatePicker.start()
 
+import PbTimePicker from 'kits/pb_time_picker'
+PbTimePicker.start()
+
 import PbMultiLevelSelect from 'kits/pb_multi_level_select'
 PbMultiLevelSelect.start()
 

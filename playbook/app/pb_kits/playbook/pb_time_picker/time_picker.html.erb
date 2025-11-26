@@ -1,1 +1,9 @@
-<%= react_component("TimePicker", object.time_picker_react_props.merge(html_options)) %>
+<%= pb_content_tag(:div,
+    {
+      class: object.classname,
+      'data-pb-time-picker' => true,
+      'data-pb-react-props' => object.time_picker_react_props.to_json,
+    }.merge(combined_html_options)
+) do %>
+  <div class="time_picker_react_container"></div>
+<% end %>
