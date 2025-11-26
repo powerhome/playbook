@@ -43,7 +43,11 @@
     border-radius: $border_rad_heavier;
     border: 1px solid $border_light;
     z-index: $z_1;
-    width: 100%;
+    width: 307.875px;
+
+    &.pb_time_picker_container_24hour {
+      width: 280px;
+    }
 
     .pb_time_selection {
       color: inherit;
@@ -105,7 +109,7 @@
       .meridiem {
         margin-bottom: $space_xs;
         .pb_form_group_kit {
-          margin-left: 0;
+          margin-left: $space_xs;
           display: flex;
           gap: 0;
         }

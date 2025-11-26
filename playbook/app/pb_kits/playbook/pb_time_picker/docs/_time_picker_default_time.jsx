@@ -1,6 +1,5 @@
 import React from 'react'
 import TimePicker from '../../pb_time_picker/_time_picker'
-import Body from '../../pb_body/_body'
 
 const TimePickerDefaultTime = (props) => (
   <div>
@@ -10,17 +9,11 @@ const TimePickerDefaultTime = (props) => (
         label="12-Hour Format (2:30 PM)"
         {...props}
     />
-    <Body
-        marginTop="md"
-    />
     <TimePicker
         defaultTime="14:30"
         id="time-picker-default-time-24hr"
         label="24-Hour Format (14:30)"
         {...props}
-    />
-    <Body
-        marginTop="md"
     />
     <TimePicker
         defaultTime="14:30"

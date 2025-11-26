@@ -8,6 +8,12 @@ const TimePickerTimezone = (props) => (
         showTimezone
         {...props}
     />
+    <TimePicker
+        id="time-picker-timezone-24hour"
+        showTimezone
+        timeFormat="24hour"
+        {...props}
+    />
   </div>
 )
 

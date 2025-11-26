@@ -750,7 +750,7 @@ const TimePicker = (props: TimePickerProps): JSX.Element => {
         </TextInput>
         
         {showDropdown && (
-          <div className="pb_time_picker_container">
+          <div className={`pb_time_picker_container ${timeFormat === '24hour' ? 'pb_time_picker_container_24hour' : ''}`}>
             <div className="pb_time_selection">
               <Caption
                   className="pb_caption_kit_md"
