@@ -45,4 +45,12 @@ RSpec.describe Playbook::PbDatePicker::DatePicker do
   it "raises an error when not given a picker_id" do
     expect { subject.new {} }.to raise_error(Playbook::Props::Error)
   end
+
+  describe "#date_picker_config" do
+    it "converts time_selection to timeSelection for JavaScript" do
+      instance = subject.new({ picker_id: "test", selection_type: "time_selection" })
+      config = JSON.parse(instance.date_picker_config)
+      expect(config["selectionType"]).to eq "timeSelection"
+    end
+  end
 end

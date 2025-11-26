@@ -1,0 +1,1 @@
+Set `selectionType="timeSelection"` / `selection_type: "time_selection"` to turn the Date Picker into a Time Picker. This configuration is also compatible with `showTimezone`.

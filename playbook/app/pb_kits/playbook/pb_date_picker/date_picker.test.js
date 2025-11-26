@@ -251,4 +251,37 @@ describe('DatePicker Kit', () => {
       expect(input).toHaveValue(DateTime.getYearStartDate(new Date()).formatDate() + " to " + new Date().formatDate())
     })
   })
+
+  test('shows DatePicker time selection only (no calendar)', async () => {
+    const testId = 'datepicker-time-selection-only'
+    render(
+      <DatePicker
+          data={{ testid: testId }}
+          defaultDate={DEFAULT_DATE}
+          pickerId="date-picker-time-selection-only"
+          selectionType="timeSelection"
+      />
+    )
+
+    const kit = screen.getByTestId(testId)
+    const input = within(kit).getByPlaceholderText('Select Date')
+
+    fireEvent(
+      input,
+      new MouseEvent('click', {
+        bubbles: true,
+        cancelable: true,
+      }),
+    )
+
+    await waitFor(() => {
+      const caption = within(kit).getByText('Select Time')
+      expect(caption).toBeInTheDocument()
+      // Should show time inputs, not calendar
+      const hourInput = within(kit).getByLabelText('Hour')
+      const minuteInput = within(kit).getByLabelText('Minute')
+      expect(hourInput).toBeInTheDocument()
+      expect(minuteInput).toBeInTheDocument()
+    })
+  })
 })

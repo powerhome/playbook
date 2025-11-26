@@ -29,6 +29,7 @@ examples:
   - date_picker_month_and_year: Month & Year Only
   - date_picker_week: Week
   - date_picker_time: Time Selection
+  - date_picker_time_selection_only: Time Selection Only
   - date_picker_positions: Custom Positions
   - date_picker_positions_element: Custom Position (based on element)
   - date_picker_turbo_frames: Within Turbo Frames
@@ -62,5 +63,6 @@ examples:
   - date_picker_month_and_year: Month & Year Only
   - date_picker_week: Week
   - date_picker_time: Time Selection
+  - date_picker_time_selection_only: Time Selection Only
   - date_picker_positions: Custom Positions
   - date_picker_positions_element: Custom Position (based on element)
