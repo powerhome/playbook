@@ -16,7 +16,7 @@ import GettingStarted from './Website/src/pages/GettingStarted'
 import DesignGuidelines from './Website/src/pages/DesignGuidelines'
 import GuidePage from './Website/src/pages/GuidePage'
 import Error from './Error'
-import { CategoryLoader, ComponentsLoader, ComponentShowLoader, } from './Website/src/hooks/loaders'
+import { CategoryLoader, ComponentsLoader, ComponentShowLoader, GuidePageLoader } from './Website/src/hooks/loaders'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -73,7 +73,7 @@ const router = createBrowserRouter(
       />
       <Route
           element={<GuidePage />}
-          loader={ComponentsLoader}
+          loader={GuidePageLoader}
           path="guides/getting_started/:page"
       />
       <Route
@@ -83,7 +83,7 @@ const router = createBrowserRouter(
       />
       <Route
           element={<GuidePage />}
-          loader={ComponentsLoader}
+          loader={GuidePageLoader}
           path="guides/design_guidelines/:page"
       />
 
