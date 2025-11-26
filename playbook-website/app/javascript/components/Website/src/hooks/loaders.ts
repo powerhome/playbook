@@ -30,7 +30,20 @@ export const ComponentsLoader: () => Promise<CategoryTypes[]> = async () => {
 };
 
 export const ComponentShowLoader = async ({ params }:any) => {
-  const response = await fetch(`/beta/kits/${params.name}.json`);
+  // Check if this is an advanced_table section route
+  const isAdvancedTableSection = window.location.pathname.includes('/kits/advanced_table/');
+  
+  let url;
+  if (isAdvancedTableSection) {
+    // For advanced_table sections like /kits/advanced_table/default/react
+    // params.name is the section name, fetch from advanced_table with section param
+    url = `/beta/kits/advanced_table.json?section=${params.name}`;
+  } else {
+    // Normal kit route
+    url = `/beta/kits/${params.name}.json`;
+  }
+  
+  const response = await fetch(url);
   const data = await response.json();
   return data; 
 };

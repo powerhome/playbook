@@ -67,7 +67,7 @@ const KitShow = () => {
         </Flex>
 
         <Title 
-          text={`${linkFormat(name)} Component`}
+          text={`${linkFormat(name)}`}
           size={2}
           marginBottom="md"
         />

@@ -21,7 +21,38 @@ class PagesController < ApplicationController
     @type = params[:type] || "react"
     @kit = params[:name]
     @params = params
-    @examples = pb_doc_kit_examples(@kit, @type)
+
+    # Special handling for advanced_table sections
+    # Check both route params (params[:section]) and query params (params[:section])
+    section_param = params[:section]
+
+    if section_param.present?
+      # Find the section in all_kits
+      matching_kit = all_kits.find do |kit|
+        kit[:parent] == @kit && kit[:name] == section_param
+      end
+
+      if matching_kit
+        @kit_parent = matching_kit[:parent]
+        @kit_section = matching_kit[:kit_section]
+
+        # For advanced_table, get examples from parent kit but filter by kit_section
+        if @kit_parent == "advanced_table" && @kit_section.present?
+          all_examples = pb_doc_kit_examples(@kit_parent, @type)
+          # Filter examples to only include those in the kit_section array
+          @examples = all_examples.select do |example|
+            @kit_section.include?(example.values.first)
+          end
+        else
+          @examples = pb_doc_kit_examples(@kit, @type)
+        end
+      else
+        @examples = pb_doc_kit_examples(@kit, @type)
+      end
+    else
+      @examples = pb_doc_kit_examples(@kit, @type)
+    end
+
     @css = view_context.vite_asset_path("site_styles/main.scss")
 
     # first example from each kit
@@ -523,7 +554,9 @@ private
   end
 
   def read_kit_file(*args)
-    path = ::Playbook.kit_path(@kit, "docs", *args)
+    # For advanced_table sections, read from the parent kit directory
+    kit_name = @kit_parent == "advanced_table" ? @kit_parent : @kit
+    path = ::Playbook.kit_path(kit_name, "docs", *args)
     path.exist? ? path.read : ""
   end
 
