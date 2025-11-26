@@ -9,6 +9,7 @@ module Playbook
       require_relative "builder/date_picker_field"
       require_relative "builder/form_field_builder"
       require_relative "builder/select_field"
+      require_relative "builder/toggle_field"
       require_relative "builder/typeahead_field"
       require_relative "builder/intl_telephone_field"
       require_relative "builder/multi_level_select_field"
