@@ -96,7 +96,7 @@ console.log('usersToDisplay', usersToDisplay)
                 zIndex={10}
             >
               <div className={itemClasses +  (tooltip ? " user_count_tooltip" : "")}>
-              {`+${users.length - displayCount}`}
+                {`+${users.length - displayCount}`}
               </div>
             </Tooltip>
           }
