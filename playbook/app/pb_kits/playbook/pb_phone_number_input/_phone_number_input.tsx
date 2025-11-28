@@ -110,6 +110,8 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.Ref<unknown>
   const inputRef = useRef<HTMLInputElement | null>(null)
   const itiRef = useRef<any>(null);
   const wrapperRef = useRef<HTMLDivElement | null>(null);
+  const hasBlurredRef = useRef<boolean>(false);
+  const formSubmittedRef = useRef<boolean>(false);
   // Handle value prop - it might be a string or an object with number property (from react-hook-form)
   const getValueString = (val: any): string => {
     if (typeof val === 'string') return val
@@ -123,6 +125,15 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.Ref<unknown>
   const [hasTyped, setHasTyped] = useState(false)
   const [hasBlurred, setHasBlurred] = useState(false)
   const [formSubmitted, setFormSubmitted] = useState(false)
+  
+  // Keep refs in sync with state for use in event listeners
+  useEffect(() => {
+    hasBlurredRef.current = hasBlurred
+  }, [hasBlurred])
+  
+  useEffect(() => {
+    formSubmittedRef.current = formSubmitted
+  }, [formSubmitted])
   const [hasStartedValidating, setHasStartedValidating] = useState(false)
 
   // Sync value prop when it changes (e.g., from react-hook-form)
@@ -295,13 +306,14 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.Ref<unknown>
 
   // Add listener for form validation to track when validation should be shown
   useEffect(() => {
-    const handleInvalid = (event: Event) => {
+      const handleInvalid = (event: Event) => {
       const target = event.target as HTMLInputElement
       const phoneNumberContainer = target.closest('.pb_phone_number_input')
 
       if (phoneNumberContainer && phoneNumberContainer === wrapperRef.current) {
         const invalidInputName = target.name || target.getAttribute('name')
         if (invalidInputName === name) {
+          formSubmittedRef.current = true
           setFormSubmitted(true)
           // Trigger validation when form is submitted
           validateErrors()
@@ -327,7 +339,9 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.Ref<unknown>
         setInputValue("")
         setError("")
         setHasTyped(false)
+        hasBlurredRef.current = false
         setHasBlurred(false)
+        formSubmittedRef.current = false
         setFormSubmitted(false)
         setHasStartedValidating(false)
         // Only clear validation state if field was required
@@ -345,6 +359,7 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.Ref<unknown>
 
         if (required && isEmpty) {
           setError('Missing phone number')
+          formSubmittedRef.current = true
           setFormSubmitted(true)
           return 'Missing phone number'
         }
@@ -401,6 +416,7 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.Ref<unknown>
 
           // Set the error state so the validation attribute gets added
           setError(errorMessage)
+          formSubmittedRef.current = true
           setFormSubmitted(true)
           setHasTyped(true)
 
@@ -424,7 +440,14 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.Ref<unknown>
 
     // Reset form submitted state when user types
     if (formSubmitted) {
+      formSubmittedRef.current = false
       setFormSubmitted(false)
+    }
+
+    // Clear error when user starts typing (before blur)
+    // This prevents showing validation errors while typing
+    if (!hasBlurredRef.current && error) {
+      setError('')
     }
 
     let phoneNumberData
@@ -439,7 +462,12 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.Ref<unknown>
 
     setSelectedData(phoneNumberData)
     onChange(phoneNumberData)
-    isValid(itiRef.current.isValidNumber())
+    
+    // Don't call isValid callback on change - only on blur or form submission
+    // This prevents triggering validation while typing
+    if (hasBlurredRef.current || formSubmittedRef.current) {
+      isValid(itiRef.current.isValidNumber())
+    }
 
     // Don't validate on change - only validate on blur or form submission
   }
@@ -497,13 +525,22 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.Ref<unknown>
           setInputValue(formattedValue)
           setHasTyped(true)
 
+          // Clear error when user types (before blur) - use ref to get current value
+          if (!hasBlurredRef.current) {
+            setError('')
+          }
+
           // Get phone number data with unformatted number
           const formattedPhoneNumberData = getCurrentSelectedData(telInputInit, formattedValue)
           const phoneNumberData = {...formattedPhoneNumberData, number: unformatNumber(formattedPhoneNumberData.number)}
 
           setSelectedData(phoneNumberData)
           onChange(phoneNumberData)
-          isValid(telInputInit.isValidNumber())
+          
+          // Don't call isValid callback on change - only on blur or form submission
+          if (hasBlurredRef.current || formSubmittedRef.current) {
+            isValid(telInputInit.isValidNumber())
+          }
         })
       }
     }
@@ -519,6 +556,7 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.Ref<unknown>
     label,
     name,
     onBlur: () => {
+      hasBlurredRef.current = true
       setHasBlurred(true)
       validateErrors()
     },
