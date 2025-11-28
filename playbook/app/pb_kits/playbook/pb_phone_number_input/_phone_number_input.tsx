@@ -498,7 +498,7 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.Ref<unknown>
     id,
     label,
     name,
-    onBlur: (e: React.FocusEvent<HTMLInputElement>) => {
+    onBlur: () => {
       setHasBlurred(true)
       validateErrors()
     },
