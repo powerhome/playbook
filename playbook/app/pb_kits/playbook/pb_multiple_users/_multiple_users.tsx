@@ -5,17 +5,19 @@ import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../uti
 import { globalProps } from '../utilities/globalProps'
 
 import Avatar from '../pb_avatar/_avatar'
+import Tooltip from '../pb_tooltip/_tooltip'
 
 type MultipleUsersProps = {
   aria?: { [key: string]: string },
   className?: string,
   dark?: boolean,
   data?: { [key: string]: string },
-  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
+  htmlOptions?: { [key: string]: string | number | boolean | (() => void) },
   id?: string,
   maxDisplayedUsers?: number,
   reverse?: boolean,
   size?: "md" | "lg" | "sm" | "xl" | "xs" | "xxs",
+  tooltip?: boolean,
   users: Array<{ [key: string]: string }>,
 }
 
@@ -30,6 +32,7 @@ const MultipleUsers = (props: MultipleUsersProps): React.ReactElement => {
     maxDisplayedUsers = 4,
     reverse = false,
     size = 'xs',
+    tooltip = false,
     users,
   } = props
 
@@ -53,7 +56,7 @@ const MultipleUsers = (props: MultipleUsersProps): React.ReactElement => {
     dark && 'dark',
     buildCss('multiple_users_badge', avatarSizeClass)
   )
-
+console.log('usersToDisplay', usersToDisplay)
   return (
     <div
         {...ariaProps}
@@ -62,22 +65,63 @@ const MultipleUsers = (props: MultipleUsersProps): React.ReactElement => {
         className={classes}
         id={id}
     >
-      {usersToDisplay.map((avatarData, index) => (
-        <Avatar
-            {...avatarData}
-            className="pb_multiple_users_item"
-            dark={dark}
-            imageAlt={avatarData.name}
-            key={index}
-            size={size}
-        />
-      ))}
+      {tooltip ?
+        <>
+          {usersToDisplay.map((avatarData, index) => (
+            <Tooltip
+                key={"user_tooltip_" + index}
+                placement='top'
+                text={avatarData.name}
+                zIndex={10}
+            >
+              <Avatar
+                  {...avatarData}
+                  className={"pb_multiple_users_item" + (tooltip ? " user_tooltip" : "")}
+                  dark={dark}
+                  imageAlt={avatarData.name}
+                  key={index}
+                  size={size}
+              />
+            </Tooltip>
+          ))}
 
-      { users.length > maxDisplayedUsers && 
-        <div className={itemClasses}>
-          {`+${users.length - 3}`}
-        </div>
+          {users.length > maxDisplayedUsers &&
+            <Tooltip
+                placement='top'
+                text={
+                usersToDisplay.length < users.length
+                  ? users.slice(displayCount).map(u => u.name).join(', ')
+                  : ''
+                }
+                zIndex={10}
+            >
+              <div className={itemClasses +  (tooltip ? " user_count_tooltip" : "")}>
+              {`+${users.length - displayCount}`}
+              </div>
+            </Tooltip>
+          }
+        </>
+        :
+        <>
+          {usersToDisplay.map((avatarData, index) => (
+            <Avatar
+                {...avatarData}
+                className="pb_multiple_users_item"
+                dark={dark}
+                imageAlt={avatarData.name}
+                key={index}
+                size={size}
+            />
+          ))}
+
+          {users.length > maxDisplayedUsers &&
+            <div className={itemClasses}>
+              {`+${users.length - 3}`}
+            </div>
+          }
+        </>
       }
+
     </div>
   )
 }

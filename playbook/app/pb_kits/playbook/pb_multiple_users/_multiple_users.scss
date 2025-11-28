@@ -36,6 +36,18 @@ $pb_multiple_users_size_xxs: map-get($avatar-sizes, "xxs");
     height: $pb_multiple_users_size_xxs;
   }
 
+
+  .user_tooltip {
+    margin-left: $pb_multiple_users_overlap !important;
+  }
+
+  .user_count_tooltip {
+    margin-left: $pb_multiple_users_overlap !important;
+    // z-index: 20;
+    position: relative;
+
+  }
+
   .pb_multiple_users_item {
     margin-left: $pb_multiple_users_overlap;
     margin-right: 0;
