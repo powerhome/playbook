@@ -110,7 +110,13 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.Ref<unknown>
   const inputRef = useRef<HTMLInputElement | null>(null)
   const itiRef = useRef<any>(null);
   const wrapperRef = useRef<HTMLDivElement | null>(null);
-  const [inputValue, setInputValue] = useState(value)
+  // Handle value prop - it might be a string or an object with number property (from react-hook-form)
+  const getValueString = (val: any): string => {
+    if (typeof val === 'string') return val
+    if (val?.number) return val.number
+    return ""
+  }
+  const [inputValue, setInputValue] = useState(getValueString(value))
   const [error, setError] = useState(props.error || "")
   const [dropDownIsOpen, setDropDownIsOpen] = useState(false)
   const [selectedData, setSelectedData] = useState()
@@ -118,6 +124,15 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.Ref<unknown>
   const [hasBlurred, setHasBlurred] = useState(false)
   const [formSubmitted, setFormSubmitted] = useState(false)
   const [hasStartedValidating, setHasStartedValidating] = useState(false)
+
+  // Sync value prop when it changes (e.g., from react-hook-form)
+  useEffect(() => {
+    const newValue = getValueString(props.value)
+    if (newValue !== inputValue) {
+      setInputValue(newValue)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [props.value])
 
   // Only sync initial error from props, not continuous updates
   // Once validation starts, internal validation takes over
@@ -147,6 +162,10 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.Ref<unknown>
   // Show internal errors only after blur (hasBlurred) or on form submission (formSubmitted)
   const shouldShowInternalError = (hasBlurred || formSubmitted) && error
   const displayError = shouldShowInternalError ? error : ""
+  
+  // Only show error prop after blur (to prevent showing react-hook-form errors while typing)
+  const shouldShowPropError = hasBlurred || formSubmitted
+  const propError = shouldShowPropError ? (props.error || "") : ""
 
   useEffect(() => {
     const hasError = (error ?? '').length > 0
@@ -493,7 +512,7 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.Ref<unknown>
     dark,
     "data-phone-number": JSON.stringify(selectedData),
     disabled,
-    error: hasTyped ? error : props.error || displayError,
+    error: displayError || propError,
     type: 'tel',
     id,
     label,
