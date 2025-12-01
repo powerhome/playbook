@@ -54,7 +54,7 @@ test('should render aria-label', () => {
 test('should render withTooltip prop', () => {
   render(
       <MultipleUsers
-          data={{ testid: testId }}
+          data-testid={testId}
           users={[
             {
               name: 'Patrick Welch',
@@ -73,5 +73,5 @@ test('should render withTooltip prop', () => {
 
   const kit = screen.getByTestId(testId)
   const childWithTooltip = kit.querySelector('.pb_tooltip_kit')
-  expect(childWithTooltip).toHaveClass('pb_tooltip_kit')
+  expect(childWithTooltip).not.toBeNull()
 })
