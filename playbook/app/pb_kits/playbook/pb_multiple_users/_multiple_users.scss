@@ -43,9 +43,7 @@ $pb_multiple_users_size_xxs: map-get($avatar-sizes, "xxs");
 
   .user_count_tooltip {
     margin-left: $pb_multiple_users_overlap !important;
-    // z-index: 20;
     position: relative;
-
   }
 
   .pb_multiple_users_item {

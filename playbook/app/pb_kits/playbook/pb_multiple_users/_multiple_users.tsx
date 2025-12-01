@@ -56,7 +56,7 @@ const MultipleUsers = (props: MultipleUsersProps): React.ReactElement => {
     dark && 'dark',
     buildCss('multiple_users_badge', avatarSizeClass)
   )
-console.log('usersToDisplay', usersToDisplay)
+
   return (
     <div
         {...ariaProps}
