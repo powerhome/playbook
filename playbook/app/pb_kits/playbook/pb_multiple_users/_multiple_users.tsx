@@ -71,7 +71,7 @@ const MultipleUsers = (props: MultipleUsersProps): React.ReactElement => {
             <Tooltip
                 key={"user_tooltip_" + index}
                 placement='top'
-                text={avatarData.name}
+                text={avatarData.tooltip ? avatarData.tooltip : ''}
                 zIndex={10}
             >
               <Avatar
@@ -89,13 +89,20 @@ const MultipleUsers = (props: MultipleUsersProps): React.ReactElement => {
             <Tooltip
                 placement='top'
                 text={
-                usersToDisplay.length < users.length
-                  ? users.slice(displayCount).map(u => u.name).join(', ')
-                  : ''
+                  <div>
+                    {
+                      usersToDisplay.length < users.length ? 
+                        users.slice(displayCount).map((u, i) => (
+                          <div key={i}>{u.tooltip}</div>
+                        ))
+                      : 
+                        ''
+                    }
+                  </div>
                 }
                 zIndex={10}
             >
-              <div className={itemClasses +  (tooltip ? " user_count_tooltip" : "")}>
+              <div className={itemClasses + (tooltip ? " user_count_tooltip" : "")}>
                 {`+${users.length - displayCount}`}
               </div>
             </Tooltip>
