@@ -5,11 +5,12 @@ examples:
   - draggable_with_selectable_list: Draggable with SelectableList Kit
   - draggable_with_cards: Draggable with Cards
   - draggable_with_table: Draggable with Table
-  - draggable_multiple_containers: Dragging Across Multiple Containers
   - draggable_drop_zones: Draggable Drop Zones
   - draggable_drop_zones_colors: Draggable Drop Zones Colors
   - draggable_drop_zones_line: Draggable Drop Zones Line
   - draggable_event_listeners: Draggable Event Listeners
+  - draggable_multiple_containers: Dragging Across Multiple Containers
+  - draggable_multiple_containers_dropzone: Dragging Across Multiple Containers with Dropzones
 
   rails:
   - draggable_default: Default
@@ -17,8 +18,8 @@ examples:
   - draggable_with_selectable_list: Draggable with SelectableList Kit
   - draggable_with_cards: Draggable with Cards
   - draggable_with_table: Draggable with Table
-  - draggable_multiple_containers: Dragging Across Multiple Containers
   - draggable_drop_zones: Draggable Drop Zones
   - draggable_drop_zones_colors: Draggable Drop Zones Colors
   - draggable_drop_zones_line: Draggable Drop Zones Line
   - draggable_event_listeners: Draggable Event Listeners
+  - draggable_multiple_containers: Dragging Across Multiple Containers
