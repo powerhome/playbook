@@ -17,7 +17,7 @@ type MultipleUsersProps = {
   maxDisplayedUsers?: number,
   reverse?: boolean,
   size?: "md" | "lg" | "sm" | "xl" | "xs" | "xxs",
-  tooltip?: boolean,
+  withTooltip?: boolean,
   users: Array<{ [key: string]: string }>,
 }
 
