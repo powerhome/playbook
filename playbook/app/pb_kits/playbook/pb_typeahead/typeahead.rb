@@ -25,7 +25,8 @@ module Playbook
       prop :is_multi, type: Playbook::Props::Boolean,
                       default: true
 
-      prop :input_display, type: Playbook::Props::String,
+      prop :input_display, type: Playbook::Props::Enum,
+                           values: %w[none pills],
                            default: "pills"
 
       prop :pills, type: Playbook::Props::Boolean,
