@@ -102,16 +102,16 @@ const Background = (props: BackgroundProps): React.ReactElement => {
   useEffect(() => {
     const updateResponsiveProps = () => {
       setResponsiveProps({
-        backgroundSize: getResponsiveValue(props.backgroundSize),
-        backgroundPosition: getResponsiveValue(props.backgroundPosition),
-        backgroundRepeat: getResponsiveValue(props.backgroundRepeat),
-        backgroundColor: getResponsiveValue(props.backgroundColor),
-        imageUrl: getResponsiveValue(props.imageUrl),
+        backgroundSize: getResponsiveValue(backgroundSize),
+        backgroundPosition: getResponsiveValue(backgroundPosition),
+        backgroundRepeat: getResponsiveValue(backgroundRepeat),
+        backgroundColor: getResponsiveValue(backgroundColor),
+        imageUrl: getResponsiveValue(imageUrl),
       });
     };
     window.addEventListener('resize', updateResponsiveProps);
     return () => window.removeEventListener('resize', updateResponsiveProps);
-  }, [props]);
+  }, [backgroundSize, backgroundPosition, backgroundRepeat, backgroundColor, imageUrl]);
 
 
   // Extract currently applicable responsive values.
