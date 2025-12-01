@@ -1,3 +1,4 @@
+<%= pb_rails("caption", props: { text: "with all" }) %>
 <%= pb_rails("home_address_street", props: {
   address: "70 Prospect Ave",
   address_cont: "Apt M18",
@@ -6,6 +7,129 @@
   home_url: "https://powerhrg.com/",
   house_style: "Colonial",
   state: "PA",
+  zipcode: "19382",
+  territory: "PHL",
+}) %>
+
+<%= pb_rails("caption", props: { margin_top: "sm", text: "First two lines blank: without address and address cont and housestyle" }) %>
+<%= pb_rails("home_address_street", props: {
+  city: "West Chester",
+  home_id: 8250263,
+  home_url: "https://powerhrg.com/",
+  state: "PA",
+  zipcode: "19382",
+  territory: "PHL",
+}) %>
+
+<%= pb_rails("caption", props: { margin_top: "sm", text: "First line half blank Second line full: with housestyle and without address and address cont" }) %>
+<%= pb_rails("home_address_street", props: {
+  city: "West Chester",
+  home_id: 8250263,
+  home_url: "https://powerhrg.com/",
+  house_style: "Colonial",
+  state: "PA",
+  zipcode: "19382",
+  territory: "PHL",
+}) %>
+
+<%= pb_rails("caption", props: { margin_top: "sm", text: "First line full Second line blank: with address and housestyle and without address cont" }) %>
+<%= pb_rails("home_address_street", props: {
+  address: "70 Prospect Ave",
+  city: "West Chester",
+  home_id: 8250263,
+  home_url: "https://powerhrg.com/",
+  house_style: "Colonial",
+  state: "PA",
+  zipcode: "19382",
+  territory: "PHL",
+}) %>
+
+<%= pb_rails("caption", props: { margin_top: "sm", text: "First line half blank Second line full: without address and with housestyle and address cont" }) %>
+<%= pb_rails("home_address_street", props: {
+  address_cont: "Apt M18",
+  city: "West Chester",
+  home_id: 8250263,
+  home_url: "https://powerhrg.com/",
+  house_style: "Colonial",
+  state: "PA",
+  zipcode: "19382",
+  territory: "PHL",
+}) %>
+
+<%= pb_rails("caption", props: { margin_top: "sm", text: "First line blank Second line full: with address cont and without address and housestyle" }) %>
+<%= pb_rails("home_address_street", props: {
+  address_cont: "Apt M18",
+  city: "West Chester",
+  home_id: 8250263,
+  home_url: "https://powerhrg.com/",
+  state: "PA",
+  zipcode: "19382",
+  territory: "PHL",
+}) %>
+
+<%= pb_rails("caption", props: { margin_top: "sm", text: "Emphasis, Modified, Target and Formatted doc examples below" }) %>
+<%= pb_rails("home_address_street", props: {
+  address: "70 Prospect Ave",
+  city: "West Chester",
+  emphasis: "none",
+  home_id: 8250263,
+  home_url: "https://powerhrg.com/",
+  house_style: "Colonial",
+  margin_bottom: "sm",
+  state: "PA",
+  zipcode: "19382",
+  territory: "PHL",
+}) %>
+
+<%= pb_rails("home_address_street", props: {
+  city: "West Chester",
+  emphasis: "city",
+  home_id: 8250263,
+  home_url: "https://powerhrg.com/",
+  margin_bottom: "sm",
+  state: "PA",
+  zipcode: "19382",
+  territory: "PHL",
+}) %>
+
+<%= pb_rails("home_address_street", props: {
+  city: "West Chester",
+  emphasis: "none",
+  home_id: 8250263,
+  home_url: "https://powerhrg.com/",
+  margin_bottom: "sm",
+  state: "PA",
+  zipcode: "19382",
+  territory: "PHL",
+}) %>
+
+<%= pb_rails("home_address_street", props: {
+  address: "70 Prospect Ave",
+  city: "West Chester",
+  margin_bottom: "sm",
+  state: "PA",
+  zipcode: "19382",
+  territory: "PHL",
+}) %>
+
+<%= pb_rails("home_address_street", props: {
+  city: "West Chester",
+  home_id: 8250263,
+  home_url: "https://powerhrg.com/",
+  margin_bottom: "sm",
+  state: "PA",
+  target: "_blank",
+  zipcode: "19382",
+  territory: "PHL",
+}) %>
+
+<%= pb_rails("home_address_street", props: {
+  address: "70 pRoSpEcT ave",
+  city: "West Chester",
+  home_id: 8250263,
+  home_url: "https://powerhrg.com/",
+  preserve_case: true,
+  state: "pa",
   zipcode: "19382",
   territory: "PHL",
 }) %>
