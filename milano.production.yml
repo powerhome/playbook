@@ -20,6 +20,7 @@ links:
   logs: "https://splunk.powerapp.cloud/en-US/app/search/search?q=search%20k8s.namespace.name%3D%22$GITHUB_REPO_NAME-$ENVIRONMENT%22%20index%3D%22wc-prod-*%22&earliest=-15m&latest=now"
   metrics_hq: "https://metrics.wc.prod.hq.powerapp.cloud/d/s9c8D_K7k/pod-resource-usage?orgId=1&refresh=1m&var-datasource=prometheus-wc-prod-hq&var-namespace=playbook-production&var-filter=.*&var-pod=All"
   metrics_gotham: "https://metrics.wc.prod.gm.powerapp.cloud/d/s9c8D_K7k/pod-resource-usage?orgId=1&var-datasource=prometheus-wc-prod-gm&var-namespace=playbook-production&var-filter=.*&var-pod=All&refresh=1m"
+  errors: "https://sentry.io/organizations/power-home-remodeling-group/issues/?environment=$ENVIRONMENT&project=4505648187179008&query=is%3Aunresolved"
 
 ci:
   require:
