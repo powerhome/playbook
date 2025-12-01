@@ -39,6 +39,59 @@ const reducer = (state: InitialStateType, action: ActionType) => {
 
       return { ...state, items: newItems };
     }
+
+    // Used only when enableCrossContainerPreview is true
+    case "REORDER_ITEMS_CROSS_CONTAINER": {
+      const { dragId, targetId, newContainer } = action.payload;
+      const newItems = [...state.items];
+      const draggedItem = newItems.find((item) => item && item.id === dragId);
+
+      if (!draggedItem) return state;
+
+      const draggedIndex = newItems.indexOf(draggedItem);
+      const targetIndex = newItems.findIndex(
+        (item) => item && item.id === targetId
+      );
+
+      if (draggedIndex === -1 || targetIndex === -1) return state;
+
+      const updatedItem = { ...draggedItem, container: newContainer };
+      newItems.splice(draggedIndex, 1);
+      newItems.splice(targetIndex, 0, updatedItem);
+
+      return { ...state, items: newItems };
+    }
+
+    // Used only when enableCrossContainerPreview is true
+    case "MOVE_TO_CONTAINER_END": {
+      const { dragId, newContainer } = action.payload;
+      const newItems = [...state.items];
+      const draggedItem = newItems.find((item) => item && item.id === dragId);
+
+      if (!draggedItem) return state;
+
+      const draggedIndex = newItems.indexOf(draggedItem);
+      if (draggedIndex === -1) return state;
+
+      const updatedItem = { ...draggedItem, container: newContainer };
+
+      // Remove from current position
+      newItems.splice(draggedIndex, 1);
+
+      // Insert at end of target container
+      const lastIndexInContainer = newItems
+        .map((item) => item && item.container)
+        .lastIndexOf(newContainer);
+
+      if (lastIndexInContainer === -1) {
+        newItems.push(updatedItem);
+      } else {
+        newItems.splice(lastIndexInContainer + 1, 0, updatedItem);
+      }
+
+      return { ...state, items: newItems };
+    }
+
     default:
       return state;
   }
@@ -61,7 +114,9 @@ export const DraggableProvider = ({
   onDrop,
   onDragOver,
   dropZone = { type: 'ghost', color: 'neutral', direction: 'vertical' },
-  providerId = 'default', // fallback provided for backward compatibility, so this does not become a required prop
+  providerId = 'default', // fallback provided for backward compatibility
+  // Opt-in flag for cross-container preview
+  enableCrossContainerPreview = false,
 }: DraggableProviderType) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
@@ -103,17 +158,74 @@ export const DraggableProvider = ({
     if (state.dragData.originId !== providerId) return; // Ignore drag events from other providers
 
     if (state.dragData.id !== id) {
-      dispatch({ type: 'REORDER_ITEMS', payload: { dragId: state.dragData.id, targetId: id } });
-      dispatch({ type: 'SET_DRAG_DATA', payload: { id: state.dragData.id, initialGroup: container, originId: providerId } });
+      if (enableCrossContainerPreview) {
+        // Used only when enableCrossContainerPreview is true
+        const draggedItem = state.items.find(
+          (item) => item && item.id === state.dragData.id
+        );
+        const currentContainer =
+          draggedItem && draggedItem.container
+            ? draggedItem.container
+            : state.dragData.initialGroup;
+
+        const isCrossContainer =
+          currentContainer !== container &&
+          (currentContainer !== undefined || container !== undefined);
+
+        if (isCrossContainer) {
+          dispatch({
+            type: "REORDER_ITEMS_CROSS_CONTAINER",
+            payload: {
+              dragId: state.dragData.id,
+              targetId: id,
+              newContainer: container,
+            },
+          });
+        } else {
+          // Same container: keep original behavior
+          dispatch({
+            type: "REORDER_ITEMS",
+            payload: { dragId: state.dragData.id, targetId: id },
+          });
+        }
+      } else {
+        // Original behavior (no preview across containers)
+        dispatch({type: "REORDER_ITEMS", payload: { dragId: state.dragData.id, targetId: id }});
+      }
+
+      dispatch({type: "SET_DRAG_DATA",payload: {id: state.dragData.id, initialGroup: container, originId: providerId}});
     }
     if (onDragEnter) onDragEnter(id, container);
   };
 
   const handleDragEnd = () => {
+    const draggedItemId = state.dragData.id;
+    const originalContainer = state.dragData.initialGroup;
+    
     dispatch({ type: 'SET_IS_DRAGGING', payload: "" });
     dispatch({ type: 'SET_ACTIVE_CONTAINER', payload: "" });
     dispatch({ type: 'SET_DRAG_DATA', payload: { id: "", initialGroup: "", originId: "" } });
-    if (onDragEnd) onDragEnd();
+    if (onDragEnd) {
+      if (!enableCrossContainerPreview) {
+        onDragEnd();
+      } else {
+        const draggedItem = state.items.find(item => item && item.id === draggedItemId);
+        const finalContainer = draggedItem ? draggedItem.container : originalContainer;
+        
+        const itemsInContainer = state.items.filter(item => item && item.container === finalContainer);
+        const indexInContainer = itemsInContainer.findIndex(item => item && item.id === draggedItemId);
+        const itemAbove = indexInContainer > 0 ? itemsInContainer[indexInContainer - 1] : null;
+        const itemBelow = indexInContainer < itemsInContainer.length - 1 ? itemsInContainer[indexInContainer + 1] : null;
+        
+        onDragEnd(
+          draggedItemId,
+          finalContainer,
+          originalContainer,
+          itemAbove,
+          itemBelow
+        );
+      }
+    }
   };
 
   const changeCategory = (itemId: string, container: string) => {
@@ -123,10 +235,34 @@ export const DraggableProvider = ({
   const handleDrop = (container: string) => {
     if (state.dragData.originId !== providerId) return; // Ignore drop events from other providers
 
+    const draggedItemId = state.dragData.id;
+    const originalContainer = state.dragData.initialGroup;
+
     dispatch({ type: 'SET_IS_DRAGGING', payload: "" });
     dispatch({ type: 'SET_ACTIVE_CONTAINER', payload: "" });
     changeCategory(state.dragData.id, container);
-    if (onDrop) onDrop(container);
+    if (onDrop) {
+      if (!enableCrossContainerPreview) {
+        onDrop(container);
+      } else {
+        const draggedItem = state.items.find(item => item && item.id === draggedItemId);
+        const updatedItem = draggedItem ? { ...draggedItem, container } : null;
+        
+        const itemsInContainer = state.items.filter(item => item && item.container === container);
+        const indexInContainer = itemsInContainer.findIndex(item => item && item.id === draggedItemId);
+        const itemAbove = indexInContainer > 0 ? itemsInContainer[indexInContainer - 1] : null;
+        const itemBelow = indexInContainer < itemsInContainer.length - 1 ? itemsInContainer[indexInContainer + 1] : null;
+        
+        onDrop(
+          draggedItemId,
+          container,
+          originalContainer,
+          updatedItem,
+          itemAbove,
+          itemBelow
+        );
+      }
+    }
   };
 
   const handleDragOver = (e: Event, container: string) => {
@@ -134,6 +270,20 @@ export const DraggableProvider = ({
 
     e.preventDefault();
     dispatch({ type: 'SET_ACTIVE_CONTAINER', payload: container });
+
+    if (enableCrossContainerPreview && state.dragData.id) {
+      // Only when enableCrossContainerPreview is true: when hovering over a different container, move item to end
+      const draggedItem = state.items.find(
+        (item) => item && item.id === state.dragData.id
+      );
+      if (draggedItem && draggedItem.container !== container) {
+        dispatch({
+          type: "MOVE_TO_CONTAINER_END",
+          payload: { dragId: state.dragData.id, newContainer: container },
+        });
+      }
+    }
+
     if (onDragOver) onDragOver(e, container);
   };
 
