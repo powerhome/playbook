@@ -15,13 +15,22 @@ const options = [
 
 const TypeaheadInputDisplay = (props) => {
   return (
-    <Typeahead
-        inputDisplay="none"
-        isMulti
-        label="Colors"
-        options={options}
-        {...props}
-    />
+    <>
+      <Typeahead
+          inputDisplay="none"
+          isMulti
+          label="With Input Display None"
+          options={options}
+          {...props}
+      />
+      <br/>
+      <Typeahead
+          isMulti
+          label="With Input Display Pills (Default)"
+          options={options}
+          {...props}
+      />
+    </>
   )
 }
 

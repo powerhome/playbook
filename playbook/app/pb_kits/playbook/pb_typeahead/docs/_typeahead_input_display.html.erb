@@ -13,8 +13,17 @@ options = [
 
 <%= pb_rails("typeahead", props: {
     id: "typeahead-input-display-none",
+    label: "With Input Display None",
     options: options,
     name: :foo,
     input_display: "none",
+    })
+%>
+<br/>
+<%= pb_rails("typeahead", props: {
+    id: "typeahead-input-display-pills",
+    label: "With Input Display Pills (Default)",
+    options: options,
+    name: :foo,
     })
 %>
