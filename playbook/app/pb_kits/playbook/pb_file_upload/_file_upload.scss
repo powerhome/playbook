@@ -1,5 +1,5 @@
 .pb_file_upload_kit {
-  .pb_card_kit_deselected_border_radius_md {
+  .pb_card_kit {
     border: 1px #ccc dashed;
     text-align: center;
   }
@@ -11,7 +11,7 @@
   }
   &.error,
   &.pb_file_upload_kit_error {
-    .pb_card_kit_deselected_border_radius_md {
+    .pb_card_kit {
       border-color: $error;
     }
     .pb_body_kit_negative {
@@ -30,12 +30,12 @@
 }
 
 .dark .pb_file_upload_kit {
-  .pb_card_kit_deselected_border_radius_md {
+  .pb_card_kit {
     border: 1px $text_dk_lighter dashed;
   }
   &.error,
   &.pb_file_upload_kit_error {
-    .pb_card_kit_deselected_border_radius_md {
+    .pb_card_kit {
       border-color: $error_dark;
     }
   }
