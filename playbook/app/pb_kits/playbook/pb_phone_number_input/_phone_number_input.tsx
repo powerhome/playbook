@@ -272,7 +272,8 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.Ref<unknown>
     }
 
      // Only validate if field has been blurred or form has been submitted
-     if (!hasBlurred && !formSubmitted) return
+     // Use refs here since state updates are async and we need current values
+     if (!hasBlurredRef.current && !formSubmittedRef.current) return
 
     // Run validation checks
     if (itiRef.current) isValid(itiRef.current.isValidNumber())
