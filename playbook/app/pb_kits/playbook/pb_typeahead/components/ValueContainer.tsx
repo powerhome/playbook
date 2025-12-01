@@ -1,10 +1,9 @@
 import React from 'react'
-import { components, ValueContainerProps as ReactSelectValueContainerProps } from 'react-select'
+import { components } from 'react-select'
 import Body from '../../pb_body/_body'
 
-type ValueContainerProps = ReactSelectValueContainerProps<any, boolean, any>
 
-const ValueContainer = (props: ValueContainerProps): React.ReactElement => {
+const ValueContainer = (props: any): React.ReactElement => {
   const { children, selectProps, hasValue } = props
   const inputDisplay = (selectProps as any)?.inputDisplay
   const value = (selectProps as any)?.value
