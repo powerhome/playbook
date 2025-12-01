@@ -1,11 +1,10 @@
 import React from 'react'
 import MultipleUsers from '../../pb_multiple_users/_multiple_users'
 
-const MultipleUsersTooltip = (props) => {
+const MultipleUsersWithTooltip = (props) => {
     return (
         <div>
             <MultipleUsers
-                tooltip
                 users={[
                     {
                         name: 'Patrick Welch',
@@ -33,10 +32,11 @@ const MultipleUsersTooltip = (props) => {
                         tooltip: "Alicia Cooper - Busy"
                     },
                 ]}
+                withTooltip
                 {...props}
             />
         </div>
     )
 }
-
-export default MultipleUsersTooltip
+``
+export default MultipleUsersWithTooltip

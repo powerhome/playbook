@@ -50,3 +50,28 @@ test('should render aria-label', () => {
   const kit = screen.getByTestId(testId)
   expect(kit).toHaveAttribute('aria-label', testId)
 })
+
+test('should render withTooltip prop', () => {
+  render(
+      <MultipleUsers
+          data={{ testid: testId }}
+          users={[
+            {
+              name: 'Patrick Welch',
+              imageUrl: 'https://randomuser.me/api/portraits/men/9.jpg',
+              tooltip: "Patrick Welch - Online"
+            },
+            {
+              name: 'Lucille Sanchez',
+              imageUrl: 'https://randomuser.me/api/portraits/women/6.jpg',
+              tooltip: "Lucille Sanchez - Offline"
+            },
+          ]}
+          withTooltip
+      />
+  )
+
+  const kit = screen.getByTestId(testId)
+  const childWithTooltip = kit.querySelector('.pb_tooltip_kit')
+  expect(childWithTooltip).toHaveClass('pb_tooltip_kit')
+})

@@ -32,7 +32,7 @@ const MultipleUsers = (props: MultipleUsersProps): React.ReactElement => {
     maxDisplayedUsers = 4,
     reverse = false,
     size = 'xs',
-    tooltip = false,
+    withTooltip = false,
     users,
   } = props
 
@@ -65,7 +65,7 @@ const MultipleUsers = (props: MultipleUsersProps): React.ReactElement => {
         className={classes}
         id={id}
     >
-      {tooltip ?
+      {withTooltip ?
         <>
           {usersToDisplay.map((avatarData, index) => (
             <Tooltip
@@ -76,7 +76,7 @@ const MultipleUsers = (props: MultipleUsersProps): React.ReactElement => {
             >
               <Avatar
                   {...avatarData}
-                  className={"pb_multiple_users_item" + (tooltip ? " user_tooltip" : "")}
+                  className={"pb_multiple_users_item" + (withTooltip ? " user_tooltip" : "")}
                   dark={dark}
                   imageAlt={avatarData.name}
                   key={index}
@@ -102,7 +102,7 @@ const MultipleUsers = (props: MultipleUsersProps): React.ReactElement => {
                 }
                 zIndex={10}
             >
-              <div className={itemClasses + (tooltip ? " user_count_tooltip" : "")}>
+              <div className={itemClasses + (withTooltip ? " user_count_tooltip" : "")}>
                 {`+${users.length - displayCount}`}
               </div>
             </Tooltip>
