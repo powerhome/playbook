@@ -54,7 +54,7 @@ test('should render aria-label', () => {
 test('should render withTooltip prop', () => {
   render(
       <MultipleUsers
-          data-testid={testId}
+          data={{ testid: testId }}
           users={[
             {
               name: 'Patrick Welch',
