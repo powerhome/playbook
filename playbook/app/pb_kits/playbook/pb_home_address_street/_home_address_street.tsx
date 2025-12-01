@@ -96,20 +96,24 @@ const HomeAddressStreet = (props: HomeAddressStreetProps): React.ReactElement =>
       {hasAllEmptyProps && '—'}
       {emphasis == 'street' && !hasAllEmptyProps &&
         <div>
-          <Title
-              className="pb_home_address_street_address"
-              dark={dark}
-              size={4}
-          >
-            {joinPresent([formatStreetAdr(address), houseStyle], ' · ')}
-          </Title>
-          <Title
-              className="pb_home_address_street_address"
-              dark={dark}
-              size={4}
-          >
-            {titleize(addressCont)}
-          </Title>
+          {(address || houseStyle) && (
+            <Title
+                className="pb_home_address_street_address"
+                dark={dark}
+                size={4}
+            >
+              {joinPresent([formatStreetAdr(address), houseStyle], ' · ')}
+            </Title>
+          )}
+          {addressCont && (
+            <Title
+                className="pb_home_address_street_address"
+                dark={dark}
+                size={4}
+            >
+              {titleize(addressCont)}
+            </Title>
+          )}
           <Body color="light">
             {`${city ? `${titleize(city)}, ` : ''}${uppercaseState}${zipcode ? ` ${zipcode}` : ''}`}
           </Body>
@@ -117,10 +121,14 @@ const HomeAddressStreet = (props: HomeAddressStreetProps): React.ReactElement =>
       }
       {emphasis == 'city' && !hasAllEmptyProps &&
         <div>
-          <Body color="light">
-            {joinPresent([formatStreetAdr(address), houseStyle], ' · ')}
-          </Body>
-          <Body color="light">{titleize(addressCont)}</Body>
+          {(address || houseStyle) && (
+            <Body color="light">
+              {joinPresent([formatStreetAdr(address), houseStyle], ' · ')}
+            </Body>
+          )}
+          {addressCont && (
+            <Body color="light">{titleize(addressCont)}</Body>
+          )}
           <div>
             <Title
                 className="pb_home_address_street_address"
@@ -141,10 +149,14 @@ const HomeAddressStreet = (props: HomeAddressStreetProps): React.ReactElement =>
       }
       {emphasis == 'none' && !hasAllEmptyProps &&
         <div>
-          <Body dark={dark}>
-            {joinPresent([formatStreetAdr(address), houseStyle], ' · ')}
-          </Body>
-          <Body dark={dark}>{formatStreetAdr(addressCont)}</Body>
+          {(address || houseStyle) && (
+            <Body dark={dark}>
+              {joinPresent([formatStreetAdr(address), houseStyle], ' · ')}
+            </Body>
+          )}
+          {addressCont && (
+            <Body dark={dark}>{formatStreetAdr(addressCont)}</Body>
+          )}
           <div>
             <Body
                 color="light"
