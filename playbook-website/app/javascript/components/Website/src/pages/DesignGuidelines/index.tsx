@@ -24,7 +24,7 @@ const DesignGuidelines = () => {
         imageUrl={HeaderImage}
         width="100%"
         display={{ xs: "none", sm: "none", md: "none" }}
-        height="250px"
+        minHeight="250px"
         backgroundColor="dark"
         backgroundSize="contain"
         backgroundPosition="center"

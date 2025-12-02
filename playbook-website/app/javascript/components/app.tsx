@@ -15,6 +15,9 @@ import Changelog from './Website/src/pages/Changelog'
 import GettingStarted from './Website/src/pages/GettingStarted'
 import DesignGuidelines from './Website/src/pages/DesignGuidelines'
 import GuidePage from './Website/src/pages/GuidePage'
+import Color from './Website/src/pages/DesignGuidelines/Color'
+import Spacing from './Website/src/pages/DesignGuidelines/Spacing'
+import Typography from './Website/src/pages/DesignGuidelines/Typography'
 import Error from './Error'
 import { CategoryLoader, ComponentsLoader, ComponentShowLoader, GuidePageLoader } from './Website/src/hooks/loaders'
 
@@ -80,6 +83,21 @@ const router = createBrowserRouter(
           element={<DesignGuidelines />}
           loader={ComponentsLoader}
           path="guides/design_guidelines"
+      />
+      <Route
+          element={<Color />}
+          loader={ComponentsLoader}
+          path="guides/design_guidelines/color"
+      />
+      <Route
+          element={<Spacing />}
+          loader={ComponentsLoader}
+          path="guides/design_guidelines/spacing"
+      />
+      <Route
+          element={<Typography />}
+          loader={ComponentsLoader}
+          path="guides/design_guidelines/typography"
       />
       <Route
           element={<GuidePage />}
