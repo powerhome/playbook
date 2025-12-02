@@ -1,12 +1,42 @@
 <form id="example-form-validation" action="" method="get">
-    <%= pb_rails("phone_number_input", props: { error: "Missing phone number", id: "validation", initial_country: "af", value: "", required: true }) %>
+    <%= pb_rails("phone_number_input", props: { 
+        id: "validation", 
+        initial_country: "af", 
+        value: "", 
+        required: true 
+    }) %>
     <%= pb_rails("button", props: {html_type: "submit", text: "Save Phone Number"}) %>
 </form>
 
 <%= javascript_tag do %>
     document.addEventListener('DOMContentLoaded', function () {
-        document.querySelector('#example-form-validation').addEventListener('submit', function (e) {
-            if (e.target.querySelectorAll('[error]:not([error=""])').length > 0) e.preventDefault();
-        })
+        const form = document.querySelector('#example-form-validation');
+        
+        // Wait for React component to mount
+        function waitForComponent() {
+            const phoneInput = form.querySelector('#validation');
+            
+            if (!phoneInput) {
+                setTimeout(waitForComponent, 100);
+                return;
+            }
+            
+            // Wait for intl-tel-input to initialize, then focus and blur to trigger validation
+            setTimeout(function() {
+                phoneInput.focus();
+                setTimeout(function() {
+                    phoneInput.blur();
+                }, 100);
+            }, 500);
+        }
+        
+        waitForComponent();
+        
+        // Prevent form submission if there are validation errors
+        form.addEventListener('submit', function (e) {
+            if (e.target.querySelectorAll('[error]:not([error=""])').length > 0) {
+                e.preventDefault();
+            }
+        });
     })
 <% end %>
