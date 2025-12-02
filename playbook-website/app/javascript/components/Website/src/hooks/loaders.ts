@@ -29,9 +29,10 @@ export const ComponentsLoader: () => Promise<CategoryTypes[]> = async () => {
   return data;
 };
 
-export const ComponentShowLoader = async ({ params }:any) => {
-  // Check if this is an advanced_table section route
-  const isAdvancedTableSection = window.location.pathname.includes('/kits/advanced_table/');
+export const ComponentShowLoader = async ({ params, request }:any) => {
+  // Check if this is an advanced_table section route using the request URL
+  const requestUrl = new URL(request.url);
+  const isAdvancedTableSection = requestUrl.pathname.includes('/kits/advanced_table/');
   
   let url;
   if (isAdvancedTableSection) {
@@ -44,7 +45,7 @@ export const ComponentShowLoader = async ({ params }:any) => {
   }
   
   const response = await fetch(url);
-  const data = await response.json();
+  const data = await response.json();  
   return data; 
 };
 

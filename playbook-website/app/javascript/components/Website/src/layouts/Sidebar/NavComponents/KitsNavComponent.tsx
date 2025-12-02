@@ -96,8 +96,14 @@ export const KitsNavItem = ({
     
     // Check if any child is active - use exact path matching
     const hasActiveSublink = sublinks.some((sublink:string) => {
-      const exactPath = `/beta/kits/${sublink}/`;
-      return currentURL.startsWith(exactPath) || currentURL.includes(`/kits/${sublink}/react`) || currentURL.includes(`/kits/${sublink}/rails`);
+      if (categoryKey === "advanced_table") {
+        // For advanced_table, check for /kits/advanced_table/sublink/ pattern
+        const exactPath = `/beta/kits/advanced_table/${sublink}/`;
+        return currentURL.startsWith(exactPath) || currentURL.includes(`/kits/advanced_table/${sublink}/react`) || currentURL.includes(`/kits/advanced_table/${sublink}/rails`);
+      } else {
+        const exactPath = `/beta/kits/${sublink}/`;
+        return currentURL.startsWith(exactPath) || currentURL.includes(`/kits/${sublink}/react`) || currentURL.includes(`/kits/${sublink}/rails`);
+      }
     });
     
     // Parent category should only be active if we're on the category page itself, not a sublink
@@ -130,14 +136,26 @@ export const KitsNavItem = ({
     const calculateIsActiveCategory = (i:number, categoryKey:string | null, sublink:string | null) => {
       if (sublink) {
         // Child item - check if this specific sublink is active with exact path matching
-        const exactPath = `/beta/kits/${sublink}/`;
-        return currentURL.startsWith(exactPath) || currentURL.includes(`/kits/${sublink}/react`) || currentURL.includes(`/kits/${sublink}/rails`);
+        // For advanced_table parent, need to check advanced_table path pattern
+        const parentCategoryKey = categoryKey || Object.keys(link)[0];
+        if (parentCategoryKey === "advanced_table") {
+          const exactPath = `/beta/kits/advanced_table/${sublink}/`;
+          return currentURL.startsWith(exactPath) || currentURL.includes(`/kits/advanced_table/${sublink}/react`) || currentURL.includes(`/kits/advanced_table/${sublink}/rails`);
+        } else {
+          const exactPath = `/beta/kits/${sublink}/`;
+          return currentURL.startsWith(exactPath) || currentURL.includes(`/kits/${sublink}/react`) || currentURL.includes(`/kits/${sublink}/rails`);
+        }
       } else {
-        // Category item - only active on category page, not when a child is active
+        // Category item: only active on category page, not when a child is active
         const onCategoryPage = currentURL.includes(`/kit_category/${categoryKey}`);
         const hasActiveChild = sublinks.some((sl:string) => {
-          const exactPath = `/beta/kits/${sl}/`;
-          return currentURL.startsWith(exactPath) || currentURL.includes(`/kits/${sl}/react`) || currentURL.includes(`/kits/${sl}/rails`);
+          if (categoryKey === "advanced_table") {
+            const exactPath = `/beta/kits/advanced_table/${sl}/`;
+            return currentURL.startsWith(exactPath) || currentURL.includes(`/kits/advanced_table/${sl}/react`) || currentURL.includes(`/kits/advanced_table/${sl}/rails`);
+          } else {
+            const exactPath = `/beta/kits/${sl}/`;
+            return currentURL.startsWith(exactPath) || currentURL.includes(`/kits/${sl}/react`) || currentURL.includes(`/kits/${sl}/rails`);
+          }
         });
         return onCategoryPage && !hasActiveChild;
       }

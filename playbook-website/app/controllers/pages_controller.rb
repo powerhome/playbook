@@ -18,31 +18,53 @@ class PagesController < ApplicationController
   def application_beta
     @kits = MENU["kits"]
     @dark = cookies[:dark_mode] == "true"
-    @type = params[:type] || "react"
+    @type = params[:platform] || params[:type] || "react"
     @kit = params[:name]
     @params = params
 
     # Special handling for advanced_table sections
-    # Check both route params (params[:section]) and query params (params[:section])
-    section_param = params[:section]
+    # Detect if this is an advanced_table section route by checking the request path
+    is_advanced_table_section = request.path.include?("/kits/advanced_table/")
 
-    if section_param.present?
+    # For advanced_table routes, params[:name] is the section name
+    # For query param routes, params[:section] is the section name
+    section_param = is_advanced_table_section ? params[:name] : params[:section]
+
+    Rails.logger.debug "section_param: #{section_param}"
+
+    if section_param.present? && (is_advanced_table_section || params[:section].present?)
       # Find the section in all_kits
+      # For advanced_table sections, we need to set @kit to "advanced_table"
+      parent_kit = is_advanced_table_section ? "advanced_table" : @kit
+
       matching_kit = all_kits.find do |kit|
-        kit[:parent] == @kit && kit[:name] == section_param
+        kit[:parent] == parent_kit && kit[:name] == section_param
       end
+
+      Rails.logger.debug "matching_kit: #{matching_kit.inspect}"
 
       if matching_kit
         @kit_parent = matching_kit[:parent]
         @kit_section = matching_kit[:kit_section]
 
+        Rails.logger.debug "@kit_parent: #{@kit_parent}"
+        Rails.logger.debug "@kit_section: #{@kit_section.inspect}"
+
+        # For advanced_table sections, we need to override @kit to be the parent
+        # so that file reading works correctly
+        @kit = @kit_parent if is_advanced_table_section
+
+        Rails.logger.debug "@kit (after override): #{@kit}"
+
         # For advanced_table, get examples from parent kit but filter by kit_section
         if @kit_parent == "advanced_table" && @kit_section.present?
           all_examples = pb_doc_kit_examples(@kit_parent, @type)
+          Rails.logger.debug "all_examples count: #{all_examples.count}"
           # Filter examples to only include those in the kit_section array
           @examples = all_examples.select do |example|
             @kit_section.include?(example.values.first)
           end
+          Rails.logger.debug "filtered @examples count: #{@examples.count}"
         else
           @examples = pb_doc_kit_examples(@kit, @type)
         end

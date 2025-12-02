@@ -43,12 +43,12 @@ const router = createBrowserRouter(
       <Route
           element={<KitShow />}
           loader={ComponentShowLoader}
-          path="kits/:name/:platform"
+          path="kits/advanced_table/:name/:platform"
       />
       <Route
           element={<KitShow />}
           loader={ComponentShowLoader}
-          path="kits/advanced_table/:name/:platform"
+          path="kits/:name/:platform"
       />
       <Route
           element={<CategoryShow />}
