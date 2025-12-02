@@ -143,25 +143,30 @@ export default class PbDialog extends PbEnhancedElement {
 
     // Close dialog box on outside click
     dialogs.forEach((dialogElement) => {
-      const originalMousedownHandler = dialogElement._outsideClickHandler
-      if (originalMousedownHandler) dialogElement.removeEventListener("mousedown", originalMousedownHandler)
+      const originalClickHandler = dialogElement._outsideClickHandler
+      if (originalClickHandler) dialogElement.removeEventListener("click", originalClickHandler)
+      
       dialogElement._outsideClickHandler = (event) => {
         const dialogParentDataset = dialogElement.parentElement.dataset
         if (dialogParentDataset.overlayClick === "overlay_close") return
 
-        const dialogModal = event.target.getBoundingClientRect()
-        const clickedOutsideDialogModal = event.clientX < dialogModal.left ||
-          event.clientX > dialogModal.right ||
-          event.clientY < dialogModal.top ||
-          event.clientY > dialogModal.bottom
+        // Get the dialog's bounding box (the actual content area)
+        const rect = dialogElement.getBoundingClientRect()
+        const clickedInDialog = (
+          event.clientX >= rect.left &&
+          event.clientX <= rect.right &&
+          event.clientY >= rect.top &&
+          event.clientY <= rect.bottom
+        )
 
-        if (clickedOutsideDialogModal) {
+        // Only close if clicked outside the dialog content (on the backdrop)
+        if (!clickedInDialog) {
           dialogElement.close()
           event.stopPropagation()
         }
       }
 
-      dialogElement.addEventListener("mousedown", dialogElement._outsideClickHandler);
+      dialogElement.addEventListener("click", dialogElement._outsideClickHandler);
     })
   }
 }

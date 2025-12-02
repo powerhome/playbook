@@ -7,18 +7,29 @@ type ClearContainerProps = {
     id: string,
   },
   clearValue: () => void,
+  innerProps?: any,
 }
 
-const ClearContainer = (props: ClearContainerProps): React.ReactElement => {
-  const { selectProps, clearValue } = props
+const ClearContainer = (props: ClearContainerProps | any): React.ReactElement => {
+  const { selectProps, clearValue, innerProps } = props
   useEffect(() => {
     document.addEventListener(`pb-typeahead-kit-${selectProps.id}:clear`, clearValue)
   }, [clearValue, selectProps.id])
+
+  // To stop this from bubbling up when inside a dialog or other modal
+  const handleMouseDown = (event: React.MouseEvent) => {
+    event.stopPropagation()
+    innerProps?.onMouseDown?.(event)
+  }
 
   return (
     <components.ClearIndicator
         className="clear_indicator"
         {...props}
+        innerProps={{
+          ...innerProps,
+          onMouseDown: handleMouseDown,
+        }}
     />
   )
 }
