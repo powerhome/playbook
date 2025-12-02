@@ -1,15 +1,19 @@
-<%= pb_rails "body", props: {
-  classname: "pb_home_address_street_address",
-  color: "light",
-  text: object.address_house_style,
-  dark: object.dark
-} %>
-<%= pb_rails "body", props: {
-  classname: "pb_home_address_street_address",
-  color: "light",
-  text: object.address_house_style2,
-  dark: object.dark
-} %>
+<% if object.address_house_style.present? %>
+  <%= pb_rails "body", props: {
+    classname: "pb_home_address_street_address",
+    color: "light",
+    text: object.address_house_style,
+    dark: object.dark
+  } %>
+<% end %>
+<% if object.address_house_style2.present? %>
+  <%= pb_rails "body", props: {
+    classname: "pb_home_address_street_address",
+    color: "light",
+    text: object.address_house_style2,
+    dark: object.dark
+  } %>
+<% end %>
 <div>
   <%= pb_rails "title", props: {
     tag: "span",
