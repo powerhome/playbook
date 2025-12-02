@@ -19,7 +19,12 @@ type Props = {
 const MultiValue = (props: Props) => {
   const { removeProps, isFocused } = props
   const { imageUrl, label } = props.data
-  const { dark, multiKit, pillColor, truncate, wrapped } = props.selectProps
+  const { dark, multiKit, pillColor, truncate, wrapped, inputDisplay } = props.selectProps
+
+  // If inputDisplay is "none", don't render the pill/badge, just return null (the count handled in ValueContainer file)
+  if (inputDisplay === 'none') {
+    return null
+  }
 
   const formPillProps = {
     marginRight: 'xs',

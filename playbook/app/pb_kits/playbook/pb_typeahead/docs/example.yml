@@ -5,6 +5,7 @@ examples:
     - typeahead_default_options: With Default Options
     - typeahead_with_context: With Context
     - typeahead_with_pills: With Pills
+    - typeahead_input_display: Input Display
     - typeahead_without_pills: Without Pills (Single Select)
     - typeahead_with_pills_async: With Pills (Async Data)
     - typeahead_with_pills_async_users: With Pills (Async Data w/ Users)
@@ -26,6 +27,7 @@ examples:
     - typeahead_react_hook: React Hook
     - typeahead_with_highlight: With Highlight
     - typeahead_with_pills: With Pills
+    - typeahead_input_display: Input Display
     - typeahead_with_pills_async: With Pills (Async Data)
     - typeahead_with_pills_async_users: With Pills (Async Data w/ Users)
     - typeahead_with_pills_async_custom_options: With Pills (Async Data w/ Custom Options)

@@ -34,6 +34,7 @@ RSpec.describe Playbook::PbTypeahead::Typeahead do
   it { is_expected.to define_prop(:multi_kit).with_default("") }
   it { is_expected.to define_prop(:plus_icon).with_default(false) }
   it { is_expected.to define_prop(:pill_color).with_default("primary") }
+  it { is_expected.to define_prop(:input_display).with_default("pills") }
 
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
@@ -265,6 +266,10 @@ RSpec.describe Playbook::PbTypeahead::Typeahead do
       default_options_example = subject.new(async: true, load_options: "foo", label: @expected_label, options: @expected_options, placeholder: @expected_placeholder)
       expect(default_options_example.typeahead_react_options[:async]).to be(true)
       expect(default_options_example.typeahead_react_options[:loadOptions]).to eq("foo")
+    end
+    it "returns props with input_display", :aggregate_failures do
+      input_display_example = subject.new(input_display: "none", label: @expected_label, options: @expected_options, placeholder: @expected_placeholder)
+      expect(input_display_example.typeahead_react_options[:inputDisplay]).to eq("none")
     end
   end
 end
