@@ -153,13 +153,27 @@ module ApplicationHelper
 
     MENU["kits"].each do |kit|
       kit_category = kit["category"]
-      # Modify this line to include name, status and parent in the components array
-      components = kit["components"].map { |c| { name: c["name"], status: c["status"], parent: c["parent"] } }
+      # Modify this line to include name, status, platforms_status and parent in the components array
+      components = kit["components"].map { |c| { name: c["name"], status: c["status"], platforms_status: c["platforms_status"], parent: c["parent"] } }
 
       all_kits << { kit_category => components }
     end
 
     all_kits
+  end
+
+  # Helper method to get status for a specific platform
+  # Falls back to kit-level status if platform-specific status is not defined
+  def kit_status_for_platform(kit, platform)
+    platforms_status = kit[:platforms_status] || kit["platforms_status"]
+
+    if platforms_status && platforms_status[platform.to_s]
+      platforms_status[platform.to_s]
+    elsif platforms_status && platforms_status[platform.to_sym]
+      platforms_status[platform.to_sym]
+    else
+      kit[:status] || kit["status"]
+    end
   end
 
   def search_list
@@ -171,7 +185,9 @@ module ApplicationHelper
         _kit_category, components = kit.first
         components.each do |component|
           name_or_parent = component[:parent].presence || component[:name]
-          all_kits.push(name_or_parent) if component[:status] != "beta"
+          # Use kit-level status for search list (if any platform is not beta, include it)
+          status_for_type = kit_status_for_platform(component, @type || "react")
+          all_kits.push(name_or_parent) if status_for_type != "beta"
         end
       else
         all_kits.push(kit)

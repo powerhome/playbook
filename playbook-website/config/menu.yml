@@ -534,6 +534,7 @@ kits:
     platforms: *1
     description:
     status: stable
+    platforms_status: { rails: deprecated }
     icons_used: true
     react_rendered: true
     enhanced_element_used: false

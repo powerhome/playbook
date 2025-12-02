@@ -183,6 +183,7 @@ class KitGenerator < Rails::Generators::NamedBase
           f.puts "    - name: #{@kit_name_underscore}"
           f.puts "      platforms: #{platforms}"
           f.puts "      status: #{@kit_status}"
+          f.puts "      # platforms_status: { rails: stable, react: beta, swift: stable }  # Optional: Set status per platform"
           f.puts "      icons_used: #{@icons_used}"
           f.puts "      react_rendered: #{@react_rendered}"
           f.puts "      enhanced_element_used: #{@enhanced_element_used}"
