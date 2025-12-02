@@ -11,7 +11,7 @@
         <%= pb_rails("flex", props: { orientation: "row", align_items: "center", margin_top: "xl"}) do %>
             <%= pb_rails("title", props: { text: pb_kit_title(kit_value), tag: "h1", size: 1 }) %>
                 <% if @kit_status === "beta" || @kit_status === "deprecated" %>
-                  <%= pb_rails("card", props: { background: @kit_status == "beta" ? "product_9_background" : "product_5_highlight", margin_x: "xs", padding: "xxs", border_none: true }) do %>
+                  <%= pb_rails("card", props: { background: @kit_status == "beta" ? "product_9_background" : "product_5_highlight", margin_x: "sm", padding: "xxs", border_none: true }) do %>
                       <%= pb_rails("detail", props: {
                         bold: true,
                         color: "default",
@@ -29,7 +29,7 @@
           <%= render_markdown(pb_doc_kit_description(@kit)) %>
         </div>
         <% if @kit_status === "beta" || @kit_status === "deprecated" %>
-          <%= pb_rails("card", props: { background: @kit_status == "beta" ? "warning_subtle" : "error_subtle", highlight: { position: "side", color: @kit_status == "beta" ? "warning" : "product_5_highlight", shadow:"deep"}, margin_y: "md", padding: "sm"}) do %>
+          <%= pb_rails("card", props: { background: @kit_status == "beta" ? "warning_subtle" : "error_subtle", highlight: { position: "side", color: @kit_status == "beta" ? "warning" : "product_5_highlight", shadow:"deep"}, margin_y: "md", padding: "sm", width: "100%" }) do %>
             <%= pb_rails("flex", props:{ align: "center" }) do %>
               <%= pb_rails("body", props:{color: "light"}) do %>
               <%= pb_rails("icon", props: { icon: @kit_status == "beta" ? "info-circle" : "warning", fixed_width: true, padding_right:"xs", color: @kit_status == "beta" ? "warning" : "product_5_highlight" }) %>
