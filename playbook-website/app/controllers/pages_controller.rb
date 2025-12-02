@@ -30,8 +30,6 @@ class PagesController < ApplicationController
     # For query param routes, params[:section] is the section name
     section_param = is_advanced_table_section ? params[:name] : params[:section]
 
-    Rails.logger.debug "section_param: #{section_param}"
-
     if section_param.present? && (is_advanced_table_section || params[:section].present?)
       # Find the section in all_kits
       # For advanced_table sections, we need to set @kit to "advanced_table"
@@ -41,30 +39,28 @@ class PagesController < ApplicationController
         kit[:parent] == parent_kit && kit[:name] == section_param
       end
 
-      Rails.logger.debug "matching_kit: #{matching_kit.inspect}"
-
       if matching_kit
         @kit_parent = matching_kit[:parent]
         @kit_section = matching_kit[:kit_section]
-
-        Rails.logger.debug "@kit_parent: #{@kit_parent}"
-        Rails.logger.debug "@kit_section: #{@kit_section.inspect}"
 
         # For advanced_table sections, we need to override @kit to be the parent
         # so that file reading works correctly
         @kit = @kit_parent if is_advanced_table_section
 
-        Rails.logger.debug "@kit (after override): #{@kit}"
-
         # For advanced_table, get examples from parent kit but filter by kit_section
         if @kit_parent == "advanced_table" && @kit_section.present?
           all_examples = pb_doc_kit_examples(@kit_parent, @type)
-          Rails.logger.debug "all_examples count: #{all_examples.count}"
           # Filter examples to only include those in the kit_section array
           @examples = all_examples.select do |example|
             @kit_section.include?(example.values.first)
           end
-          Rails.logger.debug "filtered @examples count: #{@examples.count}"
+
+          # Load mock data for advanced_table (beta only - use separate variables)
+          @beta_table_data = advanced_table_mock_data_beta
+          @beta_table_data_with_id = advanced_table_mock_data_with_id_beta
+          @beta_table_data_no_subrows = advanced_table_mock_data_no_subrows_beta
+          @beta_table_data_pagination = advanced_table_pagination_mock_data
+          @beta_table_data_infinite_scroll = advanced_table_infinite_scroll_mock_data
         else
           @examples = pb_doc_kit_examples(@kit, @type)
         end
@@ -155,6 +151,11 @@ class PagesController < ApplicationController
           getting_started_content: getting_started_content,
           design_guidelines_content: design_guidelines_content,
           guide_page_content: guide_page_content,
+          table_data: @beta_table_data,
+          table_data_with_id: @beta_table_data_with_id,
+          table_data_no_subrows: @beta_table_data_no_subrows,
+          table_data_pagination: @beta_table_data_pagination,
+          table_data_infinite_scroll: @beta_table_data_infinite_scroll,
 
         }
       end
@@ -309,6 +310,8 @@ class PagesController < ApplicationController
     @table_data = advanced_table_mock_data if @kit == "advanced_table" || @kit_parent == "advanced_table"
     @table_data_with_id = advanced_table_mock_data_with_id if @kit == "advanced_table" || @kit_parent == "advanced_table"
     @table_data_no_subrows = advanced_table_mock_data_no_subrows if @kit == "advanced_table" || @kit_parent == "advanced_table"
+    @table_data_pagination = advanced_table_pagination_mock_data if @kit == "advanced_table" || @kit_parent == "advanced_table"
+    @table_data_infinite_scroll = advanced_table_infinite_scroll_mock_data if @kit == "advanced_table" || @kit_parent == "advanced_table"
     render "pages/kit_show"
   end
 
@@ -657,6 +660,40 @@ private
   def advanced_table_mock_data_no_subrows
     advanced_table_mock_data_no_subrows = File.read(Rails.root.join("app/components/playbook/pb_docs/advanced_table_mock_data_no_subrows.json"))
     JSON.parse(advanced_table_mock_data_no_subrows, object_class: OpenStruct)
+  end
+
+  # Beta versions - return plain JSON for React
+  def advanced_table_mock_data_beta
+    advanced_table_mock_data = File.read(Rails.root.join("app/components/playbook/pb_docs/advanced_table_mock_data.json"))
+    JSON.parse(advanced_table_mock_data)
+  end
+
+  def advanced_table_mock_data_with_id_beta
+    advanced_table_mock_data_with_id = File.read(Rails.root.join("app/components/playbook/pb_docs/advanced_table_mock_data_with_id.json"))
+    JSON.parse(advanced_table_mock_data_with_id)
+  end
+
+  def advanced_table_mock_data_no_subrows_beta
+    advanced_table_mock_data_no_subrows = File.read(Rails.root.join("app/components/playbook/pb_docs/advanced_table_mock_data_no_subrows.json"))
+    JSON.parse(advanced_table_mock_data_no_subrows)
+  end
+
+  def advanced_table_pagination_mock_data
+    file_path = Playbook::Engine.root.join("app/pb_kits/playbook/pb_advanced_table/docs/advanced_table_pagination_mock_data.json")
+    return nil unless File.exist?(file_path)
+
+    JSON.parse(File.read(file_path))
+  rescue
+    nil
+  end
+
+  def advanced_table_infinite_scroll_mock_data
+    file_path = Playbook::Engine.root.join("app/pb_kits/playbook/pb_advanced_table/docs/advanced_table_mock_data_infinite_scroll.json")
+    return nil unless File.exist?(file_path)
+
+    JSON.parse(File.read(file_path))
+  rescue
+    nil
   end
 
   def page_not_found
