@@ -23,7 +23,7 @@
             
             // Wait for intl-tel-input to initialize, then focus and blur to trigger validation
             setTimeout(function() {
-                phoneInput.focus();
+                phoneInput.focus({ preventScroll: true });
                 setTimeout(function() {
                     phoneInput.blur();
                 }, 100);
