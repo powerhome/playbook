@@ -33,7 +33,7 @@ const colorMap = {
   lighter: colors.text_lt_lighter,
   link: colors.primary,
   error: "#FF2229",
-  success: "#00CA74",
+  success: colors.text_dk_success_sm,
 };
 
 const CollapsibleIcon = ({
@@ -43,7 +43,7 @@ const CollapsibleIcon = ({
   iconColor,
   onIconClick,
 }: IconProps) => {
-  const color = colorMap[iconColor];
+  const color = colorMap[iconColor ?? "default"];
 
   const showIcon = (icon: string | string[]) => {
     if (icon === "none") {
@@ -60,6 +60,8 @@ const CollapsibleIcon = ({
       onIconClick();
     }
   };
+console.log('iconColor prop:', iconColor);
+console.log('Computed color:', color);
 
   return (
     <>
