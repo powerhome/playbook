@@ -43,7 +43,7 @@ const CollapsibleIcon = ({
   iconColor,
   onIconClick,
 }: IconProps) => {
-  const color = colorMap[iconColor ?? "default"];
+  const color = colorMap[iconColor];
 
   const showIcon = (icon: string | string[]) => {
     if (icon === "none") {
@@ -60,8 +60,6 @@ const CollapsibleIcon = ({
       onIconClick();
     }
   };
-console.log('iconColor prop:', iconColor);
-console.log('Computed color:', color);
 
   return (
     <>
