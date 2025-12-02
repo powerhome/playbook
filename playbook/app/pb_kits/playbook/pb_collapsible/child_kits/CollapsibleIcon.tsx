@@ -1,5 +1,6 @@
 import React from "react";
 import Icon, { IconSizes } from "../../pb_icon/_icon";
+import colors from '../../tokens/exports/_colors.module.scss'
 
 type IconColors =
   | "default"
@@ -28,9 +29,9 @@ type colorMap = {
 
 const colorMap = {
   default: "#242B42",
-  light: "#687887",
-  lighter: "#C1CDD6",
-  link: "#0056CF",
+  light: colors.text_lt_light,
+  lighter: colors.text_lt_lighter,
+  link: colors.primary,
   error: "#FF2229",
   success: "#00CA74",
 };
