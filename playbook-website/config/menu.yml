@@ -229,7 +229,7 @@ kits:
     platforms: *1
     description: Bar graphs are used to compare data. Bar graphs are not typically
       used to show percentages.
-    status: deprecated
+    status: stable
     icons_used: false
     react_rendered: true
     enhanced_element_used: false
