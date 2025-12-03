@@ -36,6 +36,12 @@ const colorMap = {
   success: colors.text_dk_success_sm,
 };
 
+  console.log('colors object:', colors);
+  console.log('text_lt_light:', colors.text_lt_light);
+  console.log('text_lt_lighter:', colors.text_lt_lighter);
+  console.log('primary:', colors.primary);
+  console.log('text_dk_success_sm:', colors.text_dk_success_sm);
+
 const CollapsibleIcon = ({
   collapsed,
   icon,
