@@ -45,8 +45,6 @@ const CollapsibleIcon = ({
 }: IconProps) => {
   const color = colorMap[iconColor];
 
-  console.log(color)
-
   const showIcon = (icon: string | string[]) => {
     if (icon === "none") {
       return []
