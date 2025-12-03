@@ -1,15 +1,19 @@
-<%= pb_rails "title", props: {
-  classname: "pb_home_address_street_address",
-  size: 4,
-  text: object.address_house_style,
-  dark: object.dark
-} %>
-<%= pb_rails "title", props: {
-  classname: "pb_home_address_street_address",
-  size: 4,
-  text: object.address_house_style2,
-  dark: object.dark
-} %>
+<% if object.address_house_style.present? %>
+  <%= pb_rails "title", props: {
+    classname: "pb_home_address_street_address",
+    size: 4,
+    text: object.address_house_style,
+    dark: object.dark
+  } %>
+<% end %>
+<% if object.address_house_style2.present? %>
+  <%= pb_rails "title", props: {
+    classname: "pb_home_address_street_address",
+    size: 4,
+    text: object.address_house_style2,
+    dark: object.dark
+  } %>
+<% end %>
 <%= pb_rails "body", props: {
   color: "light",
   text: object.city_state_zip,
