@@ -54,6 +54,7 @@ test('html structure is correct', () => {
     <Collapsible
         className="additional_class"
         data={{ testid: testId }}
+        iconColor='lighter'
         iconSize="lg"
     >
       <Collapsible.Main>
