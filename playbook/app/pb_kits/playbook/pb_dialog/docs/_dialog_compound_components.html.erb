@@ -1,24 +1,3 @@
-<% 
-  options = [
-    {
-      label: "United States",
-      value: "unitedStates",
-      id: "us"
-    },
-    {
-      label: "United Kingdom",
-      value: "unitedKingdom",
-      id: "gb"
-    },
-    {
-      label: "Pakistan",
-      value: "pakistan",
-      id: "pk"
-    }
-  ]
-%>
-
-
 <%= pb_rails("button", props: { text: "Open Complex Dialog", data:{"open-dialog": "dialog-complex"} }) %>
 
 <%= pb_rails("dialog", props: { id:"dialog-complex", size: "lg", full_height: true }) do %>
@@ -31,16 +10,6 @@
         <%= pb_rails("rich_text_editor", props: {id: "default", value: "Add your text here"}) %>
         <%= pb_rails("caption", props: { text: "Type in a word or term too help find tickets later. ex. training, phone setup, hr", margin_bottom: "xs", margin_top: "sm" }) %>
         <%= pb_rails("typeahead", props: { placeholder: "Tags.."}) %>
-        <%= pb_rails("dropdown", props: {options: options, autocomplete: true}) %>
-        <%= pb_rails("typeahead", props: {
-        id: "typeahead-default",
-        placeholder: "Select one...",
-        options: options,
-        name: :foo,
-        margin_top: "sm",
-        is_multi: false
-      })
-%>
 
     <% end %>
     <%= pb_rails("dialog/dialog_footer", props: {cancel_button: "Back", confirm_button: "Send my Issue", confirm_button_id:"confirm-complex", id: "dialog-complex"}) %>
