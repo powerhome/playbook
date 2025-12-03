@@ -8,6 +8,9 @@ const initialState: InitialStateType = {
   activeContainer: ""
 };
 
+// Track if a successful drop occurred to distinguish from dragEnd without drop
+let dropOccurred = false;
+
 const reducer = (state: InitialStateType, action: ActionType) => {
   switch (action.type) {
     case 'SET_ITEMS':
@@ -90,6 +93,19 @@ const reducer = (state: InitialStateType, action: ActionType) => {
       }
 
       return { ...state, items: newItems };
+    }
+
+    // Reset item back to its original container (e.g., when drag ends without valid drop)
+    case "RESET_DRAG_CONTAINER": {
+      const { itemId, originalContainer } = action.payload;
+      return {
+        ...state,
+        items: state.items.map(item =>
+          item.id === itemId
+            ? { ...item, container: originalContainer }
+            : item
+        )
+      };
     }
 
     default:
@@ -202,9 +218,18 @@ export const DraggableProvider = ({
     const draggedItemId = state.dragData.id;
     const originalContainer = state.dragData.initialGroup;
     
+    // If enableCrossContainerPreview is true and no drop occurred, reset item to original container
+    if (enableCrossContainerPreview && !dropOccurred && draggedItemId && originalContainer) {
+      dispatch({ type: 'RESET_DRAG_CONTAINER', payload: { itemId: draggedItemId, originalContainer } });
+    }
+    
     dispatch({ type: 'SET_IS_DRAGGING', payload: "" });
     dispatch({ type: 'SET_ACTIVE_CONTAINER', payload: "" });
     dispatch({ type: 'SET_DRAG_DATA', payload: { id: "", initialGroup: "", originId: "" } });
+    
+    // Reset the drop flag
+    dropOccurred = false;
+    
     if (onDragEnd) {
       if (!enableCrossContainerPreview) {
         onDragEnd();
@@ -237,6 +262,9 @@ export const DraggableProvider = ({
 
     const draggedItemId = state.dragData.id;
     const originalContainer = state.dragData.initialGroup;
+    
+    // Mark that a successful drop occurred
+    dropOccurred = true;
 
     dispatch({ type: 'SET_IS_DRAGGING', payload: "" });
     dispatch({ type: 'SET_ACTIVE_CONTAINER', payload: "" });
