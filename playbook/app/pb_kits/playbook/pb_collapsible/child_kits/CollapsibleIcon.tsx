@@ -43,7 +43,7 @@ const CollapsibleIcon = ({
   iconColor,
   onIconClick,
 }: IconProps) => {
-  const color = colorMap[iconColor ?? "default"];
+  const color = colorMap[iconColor];
 
   console.log(color)
 
