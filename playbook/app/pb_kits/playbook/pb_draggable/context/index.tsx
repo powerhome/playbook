@@ -316,7 +316,7 @@ export const DraggableProvider = ({
     const originalContainer = state.dragData.initialGroup;
     
     // If enableCrossContainerPreview is true and no drop occurred, reset item to original container
-    if (enableCrossContainerPreview && draggedItemId && originalContainer) {
+    if (enableCrossContainerPreview && !dragStateRef.current.dropOccurred && draggedItemId && originalContainer) {
       dispatch({ type: 'RESET_DRAG_CONTAINER', payload: { itemId: draggedItemId, originalContainer } });
     }
     
