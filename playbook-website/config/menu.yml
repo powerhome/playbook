@@ -208,7 +208,7 @@ kits:
     platforms: *1
     description: A key used to compare the variables and their value in any given
       graph.
-    status: stable
+    status: deprecated
     icons_used: false
     react_rendered: false
     enhanced_element_used: false

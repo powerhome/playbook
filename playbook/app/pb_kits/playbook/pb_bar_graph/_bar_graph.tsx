@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { globalProps } from "../utilities/globalProps";
 import { buildAriaProps, buildDataProps, buildHtmlProps } from "../utilities/props";
+import { deprecatedKitWarning } from "../utilities/deprecated";
 
 import HighchartsReact from "highcharts-react-official";
 import Highcharts from "highcharts";
@@ -167,6 +168,11 @@ if (Array.isArray(axisTitle) && axisTitle.length > 1 && axisTitle[1].name) {
   delete filteredProps.verticalAlign;
 
   const [options, setOptions] = useState({});
+
+  useEffect(() => {
+    // Warn about deprecated kit (only once per page load, dev mode only)
+    deprecatedKitWarning('BarGraph', '[Playbook] The "BarGraph" kit is deprecated. Please use "PbBarGraph" instead.');
+  }, []);
 
   useEffect(() => {
     setOptions(merge(staticOptions, customOptions));
