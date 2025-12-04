@@ -1,4 +1,4 @@
-import React, { createContext, useReducer, useContext, useEffect, useMemo } from "react";
+import React, { createContext, useReducer, useContext, useEffect, useMemo, useRef } from "react";
 import { InitialStateType, ActionType, DraggableProviderType } from "./types";
 
 const initialState: InitialStateType = {
@@ -135,6 +135,19 @@ export const DraggableProvider = ({
   enableCrossContainerPreview = false,
 }: DraggableProviderType) => {
   const [state, dispatch] = useReducer(reducer, initialState);
+  
+  // Track drag state for global listener
+  const dragStateRef = useRef<{
+    isDragging: boolean;
+    draggedItemId: string;
+    originalContainer: string;
+    dropOccurred: boolean;
+  }>({
+    isDragging: false,
+    draggedItemId: '',
+    originalContainer: '',
+    dropOccurred: false,
+  });
 
   // Parse dropZone prop - handle both string format (backward compatibility) and object format
   let dropZoneType = 'ghost';
@@ -164,7 +177,94 @@ export const DraggableProvider = ({
     onReorder(state.items);
   }, [state.items]);
 
+  // Monitor for failed drops by detecting mouse/pointer release during drag (this is needed for cross container preview)
+  useEffect(() => {
+    if (!enableCrossContainerPreview) return;
+
+    const handleGlobalMouseUp = () => {
+      // If we're dragging and mouse is released, wait a bit to see if drop occurs
+      if (dragStateRef.current.isDragging) {
+        setTimeout(() => {
+          // If drop still hasn't occurred, reset
+          if (dragStateRef.current.isDragging && !dragStateRef.current.dropOccurred) {
+            dispatch({
+              type: 'RESET_DRAG_CONTAINER',
+              payload: {
+                itemId: dragStateRef.current.draggedItemId,
+                originalContainer: dragStateRef.current.originalContainer,
+              },
+            });
+            dispatch({ type: 'SET_IS_DRAGGING', payload: "" });
+            dispatch({ type: 'SET_ACTIVE_CONTAINER', payload: "" });
+            dispatch({ type: 'SET_DRAG_DATA', payload: { id: "", initialGroup: "", originId: "" } });
+            
+            // Clear drag state
+            dragStateRef.current = {
+              isDragging: false,
+              draggedItemId: '',
+              originalContainer: '',
+              dropOccurred: false,
+            };
+          }
+        }, 50); // Small delay to let drop event fire if it's going to
+      }
+    };
+
+    document.addEventListener('mouseup', handleGlobalMouseUp);
+    document.addEventListener('pointerup', handleGlobalMouseUp);
+    
+    return () => {
+      document.removeEventListener('mouseup', handleGlobalMouseUp);
+      document.removeEventListener('pointerup', handleGlobalMouseUp);
+    };
+  }, [enableCrossContainerPreview]);
+
+  // Detect when dragging stops (isDragging goes from truthy to empty)
+  const prevIsDraggingRef = useRef(state.isDragging);
+  
+  useEffect(() => {
+    if (!enableCrossContainerPreview) return;
+
+    const wasDragging = prevIsDraggingRef.current;
+    const isNowDragging = state.isDragging;
+    
+    // Drag just ended (was dragging, now not)
+    if (wasDragging && !isNowDragging) {
+      
+      // If drop didn't occur, reset to original container
+      if (!dragStateRef.current.dropOccurred && dragStateRef.current.draggedItemId) {
+        dispatch({
+          type: 'RESET_DRAG_CONTAINER',
+          payload: {
+            itemId: dragStateRef.current.draggedItemId,
+            originalContainer: dragStateRef.current.originalContainer,
+          },
+        });
+      }
+      
+      // Clear drag state
+      dragStateRef.current = {
+        isDragging: false,
+        draggedItemId: '',
+        originalContainer: '',
+        dropOccurred: false,
+      };
+    }
+    
+    prevIsDraggingRef.current = isNowDragging;
+  }, [state.isDragging, enableCrossContainerPreview]);
+
   const handleDragStart = (id: string, container: string) => {
+    // Track drag in ref for global listener
+    if (enableCrossContainerPreview) {
+      dragStateRef.current = {
+        isDragging: true,
+        draggedItemId: id,
+        originalContainer: container,
+        dropOccurred: false,
+      };
+    }
+    
     dispatch({ type: 'SET_DRAG_DATA', payload: { id: id, initialGroup: container, originId: providerId } });
     dispatch({ type: 'SET_IS_DRAGGING', payload: id });
     if (onDragStart) onDragStart(id, container);
@@ -263,8 +363,10 @@ export const DraggableProvider = ({
     const draggedItemId = state.dragData.id;
     const originalContainer = state.dragData.initialGroup;
     
-    // Mark that a successful drop occurred
-    dropOccurred = true;
+    // Mark drop as successful in ref for global listener
+    if (enableCrossContainerPreview) {
+      dragStateRef.current.dropOccurred = true;
+    }
 
     dispatch({ type: 'SET_IS_DRAGGING', payload: "" });
     dispatch({ type: 'SET_ACTIVE_CONTAINER', payload: "" });
