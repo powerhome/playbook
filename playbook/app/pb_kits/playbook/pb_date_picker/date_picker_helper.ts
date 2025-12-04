@@ -331,15 +331,19 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
   }
 
   const defaultDateValue: any = defaultDateGetter()
-  const isBeforeMin = isDefaultDateBeforeMinDate(defaultDateValue, setMinDate)
-  const isAfterMax = isDefaultDateAfterMaxDate(defaultDateValue, setMaxDate)
+  // Only check for and out-of-range if user actually provided minDate/maxDate constraints
+  const isBeforeMin = minDate && isDefaultDateBeforeMinDate(defaultDateValue, setMinDate)
+  const isAfterMax = maxDate && isDefaultDateAfterMaxDate(defaultDateValue, setMaxDate)
   
-  // Temporarily adjust minDate/maxDate to allow defaultDate to render if it's out of range
-  const effectiveMinDate = isBeforeMin && defaultDateValue 
+  // Store these values for use in onClose handler
+  const hasOutOfRangeDefault = (isBeforeMin || isAfterMax) && defaultDateValue
+  
+  // Temporarily adjust minDate/maxDate to allow defaultDate to render if it's out of range via user provided minDate/maxDate constraints
+  const effectiveMinDate = isBeforeMin && defaultDateValue && minDate
     ? formatDateForFlatpickr(defaultDateValue) || setMinDate
     : setMinDate
   
-  const effectiveMaxDate = isAfterMax && defaultDateValue 
+  const effectiveMaxDate = isAfterMax && defaultDateValue && maxDate
     ? formatDateForFlatpickr(defaultDateValue) || setMaxDate
     : setMaxDate
   
@@ -361,6 +365,27 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
     mode,
     nextArrow: '<i class="far fa-angle-right"></i>',
     onOpen: [(_selectedDates, _dateStr, fp) => {
+      // If defaultDate was out of range of a dev set min/max date, restore it when calendar opens (in situation where the input was manually cleared or the calendar was closed without selection)
+      if (hasOutOfRangeDefault) {
+        const dateObj = toDateObject(defaultDateValue)
+        if (dateObj) {
+          const inputIsBlank = !fp.input.value || fp.input.value.trim() === ''
+          const noSelection = !fp.selectedDates || fp.selectedDates.length === 0
+          
+          if (inputIsBlank || noSelection) {
+            const formattedDate = fp.formatDate(dateObj, getDateFormat())
+            if (formattedDate) {
+              fp.input.value = formattedDate
+            }
+            fp.selectedDates = [dateObj]
+            fp.jumpToDate(dateObj)
+            setTimeout(() => {
+              yearChangeHook(fp)
+            }, 0)
+          }
+        }
+      }
+      
       calendarResizer()
       if (resizeRepositionHandlerRef) {
         window.removeEventListener('resize', resizeRepositionHandlerRef)
@@ -373,12 +398,30 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
       if (!staticPosition && scrollContainer) attachToScroll(scrollContainer)
       positionCalendarIfNeeded(fp)
     }],
-    onClose: [(selectedDates, dateStr) => {
+    onClose: [(selectedDates, dateStr, fp) => {
       if (resizeRepositionHandlerRef) {
         window.removeEventListener('resize', resizeRepositionHandlerRef)
         resizeRepositionHandlerRef = null
       }
       if (!staticPosition && scrollContainer) detachFromScroll(scrollContainer as HTMLElement)
+      
+      // If defaultDate was out of range and no date was selected, preserve the default date
+      if (hasOutOfRangeDefault && (!selectedDates || selectedDates.length === 0)) {
+        const dateObj = toDateObject(defaultDateValue)
+        if (dateObj && fp.input) {
+          const formattedDate = fp.formatDate(dateObj, getDateFormat())
+          if (formattedDate) {
+            setTimeout(() => {
+              if (fp.input && (!fp.selectedDates || fp.selectedDates.length === 0)) {
+                fp.input.value = formattedDate
+                fp.selectedDates = [dateObj]
+                fp.jumpToDate(dateObj)
+              }
+            }, 0)
+          }
+        }
+      }
+      
       onClose(selectedDates, dateStr)
     }],
     onChange: [(selectedDates, dateStr, fp) => {
@@ -400,23 +443,69 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
   const picker = document.querySelector<HTMLElement & { [x: string]: any }>(`#${pickerId}`)._flatpickr
   picker.innerContainer.parentElement.id = `cal-${pickerId}`
 
-  // If defaultDate was out of range, restore the original minDate/maxDate after initialization (defaultDate displayed, still cannot select dates outside the actual range)
+  // If defaultDate was out of range, restore the original minDate/maxDate after initialization (defaultDate displayed, still cannot select dates outside the actual range via user provided minDate/maxDate constraints)
   if ((isBeforeMin || isAfterMax) && defaultDateValue) {
+    const dateObj = toDateObject(defaultDateValue)
+    const formattedDate = dateObj ? picker.formatDate(dateObj, getDateFormat()) : null
+    
     setTimeout(() => {
-      if (isBeforeMin && setMinDate) {
+      if (!dateObj || !picker.input || !formattedDate) return
+
+      picker.setDate(dateObj, false)
+
+      if (isBeforeMin && setMinDate && minDate) {
         picker.set('minDate', setMinDate)
       }
-      if (isAfterMax && setMaxDate) {
+      if (isAfterMax && setMaxDate && maxDate) {
         picker.set('maxDate', setMaxDate)
       }
-      const dateObj = toDateObject(defaultDateValue)
-      if (dateObj) {
-        const formattedDate = picker.formatDate(dateObj, getDateFormat())
-        if (formattedDate && picker.input) {
-          picker.input.value = formattedDate
+      picker.input.value = formattedDate
+
+      picker.selectedDates = [dateObj]
+      
+      setTimeout(() => {
+        yearChangeHook(picker)
+      }, 0)
+      
+      // Restore function for out-of-range default dates
+      const restoreOutOfRangeValue = () => {
+        if (!picker.input) return
+        
+        const inputIsBlank = !picker.input.value || picker.input.value.trim() === ''
+        const noSelection = !picker.selectedDates || picker.selectedDates.length === 0
+        
+        if (inputIsBlank || noSelection) {
+          setTimeout(() => {
+            if (picker.input && (!picker.input.value || picker.input.value.trim() === '')) {
+              picker.input.value = formattedDate
+            }
+            if (!picker.selectedDates || picker.selectedDates.length === 0) {
+              picker.selectedDates = [dateObj]
+              if (picker.isOpen) {
+                picker.jumpToDate(dateObj)
+                picker.redraw()
+                setTimeout(() => {
+                  yearChangeHook(picker)
+                }, 0)
+              }
+            }
+          }, 0)
         }
       }
-    }, 0)
+      
+      const originalClear = picker.clear.bind(picker)
+      picker.clear = function(...args: any[]) {
+        const result = originalClear(...args)
+        setTimeout(() => restoreOutOfRangeValue(), 0)
+        return result
+      }
+
+      picker.input.addEventListener('input', restoreOutOfRangeValue)
+      
+      picker.config.onClose.push(() => {
+        restoreOutOfRangeValue()
+      })
+    }, 10)
   }
 
   // replace year selector with dropdown
