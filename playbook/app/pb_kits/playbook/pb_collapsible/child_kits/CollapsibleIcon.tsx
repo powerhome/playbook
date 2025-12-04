@@ -28,11 +28,11 @@ type colorMap = {
 };
 
 const colorMap = {
-  default: "#242B42",
+  default: colors.text_lt_default,
   light: colors.text_lt_light,
   lighter: colors.text_lt_lighter,
   link: colors.primary,
-  error: "#FF2229",
+  error: colors.red,
   success: colors.text_dk_success_sm,
 };
 
