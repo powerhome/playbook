@@ -7,7 +7,7 @@ const warnedKits = new Set<string>();
 /**
  * Logs a deprecation warning for a Playbook kit
  * - Only logs once per kit per page load (prevents spam on re-renders)
- * - Only logs in development mode (no warnings in production)
+ * - Only logs in development mode (not in production or test environments)
  * 
  * @param kitName - The name of the deprecated kit (e.g., 'BarGraph', 'RichTextEditor')
  * @param message - Optional custom deprecation message. If not provided, uses a default message.
@@ -22,8 +22,8 @@ export const deprecatedKitWarning = (
   kitName: string,
   message?: string
 ): void => {
-  // Only run in development mode
-  if (process.env.NODE_ENV === 'production') {
+  // Only run in development mode, not in production or test
+  if (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'test') {
     return;
   }
 
