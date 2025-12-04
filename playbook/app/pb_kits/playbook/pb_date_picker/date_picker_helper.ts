@@ -275,6 +275,76 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
 
   const { setMinDate, setMaxDate } = getMinMaxDates()
 
+  // Default Date + Min/Max Date Initialization Helper Functions section ----/
+  const toDateObject = (dateValue: any): Date | null => {
+    if (!dateValue) return null
+    if (dateValue instanceof Date) return dateValue
+    if (typeof dateValue === 'string') {
+      const parsed = new Date(dateValue)
+      return isNaN(parsed.getTime()) ? null : parsed
+    }
+    if (typeof dateValue === 'number') {
+      return new Date(dateValue)
+    }
+    return null
+  }
+
+  // Formatting Date for Flatpickr
+  const formatDateForFlatpickr = (dateValue: any): string | null => {
+    const dateObj = toDateObject(dateValue)
+    if (!dateObj) return null
+    
+    const year = dateObj.getFullYear()
+    const month = String(dateObj.getMonth() + 1).padStart(2, '0')
+    const day = String(dateObj.getDate()).padStart(2, '0')
+    return `${year}-${month}-${day}`
+  }
+
+  // Helper to check if defaultDate is earlier than minDate
+  const isDefaultDateBeforeMinDate = (defaultDateValue: any, minDateValue: any): boolean => {
+    if (!defaultDateValue || !minDateValue) return false
+    
+    const defaultDateObj = toDateObject(defaultDateValue)
+    const minDateObj = toDateObject(minDateValue)
+    
+    if (!defaultDateObj || !minDateObj) return false
+
+    const defaultDateOnly = new Date(defaultDateObj.getFullYear(), defaultDateObj.getMonth(), defaultDateObj.getDate())
+    const minDateOnly = new Date(minDateObj.getFullYear(), minDateObj.getMonth(), minDateObj.getDate())
+    
+    return defaultDateOnly < minDateOnly
+  }
+
+  // Helper to check if defaultDate is later than maxDate
+  const isDefaultDateAfterMaxDate = (defaultDateValue: any, maxDateValue: any): boolean => {
+    if (!defaultDateValue || !maxDateValue) return false
+    
+    const defaultDateObj = toDateObject(defaultDateValue)
+    const maxDateObj = toDateObject(maxDateValue)
+    
+    if (!defaultDateObj || !maxDateObj) return false
+    
+    const defaultDateOnly = new Date(defaultDateObj.getFullYear(), defaultDateObj.getMonth(), defaultDateObj.getDate())
+    const maxDateOnly = new Date(maxDateObj.getFullYear(), maxDateObj.getMonth(), maxDateObj.getDate())
+    
+    return defaultDateOnly > maxDateOnly
+  }
+
+  const defaultDateValue: any = defaultDateGetter()
+  const isBeforeMin = isDefaultDateBeforeMinDate(defaultDateValue, setMinDate)
+  const isAfterMax = isDefaultDateAfterMaxDate(defaultDateValue, setMaxDate)
+  
+  // Temporarily adjust minDate/maxDate to allow defaultDate to render if it's out of range
+  const effectiveMinDate = isBeforeMin && defaultDateValue 
+    ? formatDateForFlatpickr(defaultDateValue) || setMinDate
+    : setMinDate
+  
+  const effectiveMaxDate = isAfterMax && defaultDateValue 
+    ? formatDateForFlatpickr(defaultDateValue) || setMaxDate
+    : setMaxDate
+  
+  // End of Default Date + Min/Max Date Initialization Helper Functions section ----/
+  
   flatpickr(`#${pickerId}`, {
     allowInput,
     closeOnSelect,
@@ -286,8 +356,8 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
     locale: {
       rangeSeparator: ' to '
     },
-    maxDate: setMaxDate,
-    minDate: setMinDate,
+    maxDate: effectiveMaxDate,
+    minDate: effectiveMinDate,
     mode,
     nextArrow: '<i class="far fa-angle-right"></i>',
     onOpen: [(_selectedDates, _dateStr, fp) => {
@@ -329,6 +399,25 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
   // Assign dynamically sourced flatpickr instance to variable
   const picker = document.querySelector<HTMLElement & { [x: string]: any }>(`#${pickerId}`)._flatpickr
   picker.innerContainer.parentElement.id = `cal-${pickerId}`
+
+  // If defaultDate was out of range, restore the original minDate/maxDate after initialization (defaultDate displayed, still cannot select dates outside the actual range)
+  if ((isBeforeMin || isAfterMax) && defaultDateValue) {
+    setTimeout(() => {
+      if (isBeforeMin && setMinDate) {
+        picker.set('minDate', setMinDate)
+      }
+      if (isAfterMax && setMaxDate) {
+        picker.set('maxDate', setMaxDate)
+      }
+      const dateObj = toDateObject(defaultDateValue)
+      if (dateObj) {
+        const formattedDate = picker.formatDate(dateObj, getDateFormat())
+        if (formattedDate && picker.input) {
+          picker.input.value = formattedDate
+        }
+      }
+    }, 0)
+  }
 
   // replace year selector with dropdown
   picker.yearElements[0].parentElement.innerHTML = `<select class="numInput cur-year" type="number" tabIndex="-1" aria-label="Year" id="year-${pickerId}"></select>`
