@@ -4,7 +4,6 @@ import Background from './_background'
 
 const props = {
   data: { testid: 'background' },
-  backgroundColor: null,
 }
 
 it('Should be accessible', async () => {
@@ -41,4 +40,9 @@ test('backgroundSize = auto', () => {
 test('applies correct overlay class when imageOverlay prop is provided', () => {
   const kit = renderKit(Background, props, { imageOverlay: 'opacity_6' });
   expect(kit).toHaveClass('imageoverlay_opacity_6');
+});
+
+test('Sets backgroundColor to light as default when no backgroundColor prop is provided', () => {
+  const kit = renderKit(Background, props);
+  expect(kit).toHaveClass('pb_background_color_light');
 });
