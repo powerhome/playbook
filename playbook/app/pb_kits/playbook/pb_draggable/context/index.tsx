@@ -8,9 +8,6 @@ const initialState: InitialStateType = {
   activeContainer: ""
 };
 
-// Track if a successful drop occurred to distinguish from dragEnd without drop
-let dropOccurred = false;
-
 const reducer = (state: InitialStateType, action: ActionType) => {
   switch (action.type) {
     case 'SET_ITEMS':
@@ -319,16 +316,13 @@ export const DraggableProvider = ({
     const originalContainer = state.dragData.initialGroup;
     
     // If enableCrossContainerPreview is true and no drop occurred, reset item to original container
-    if (enableCrossContainerPreview && !dropOccurred && draggedItemId && originalContainer) {
+    if (enableCrossContainerPreview && draggedItemId && originalContainer) {
       dispatch({ type: 'RESET_DRAG_CONTAINER', payload: { itemId: draggedItemId, originalContainer } });
     }
     
     dispatch({ type: 'SET_IS_DRAGGING', payload: "" });
     dispatch({ type: 'SET_ACTIVE_CONTAINER', payload: "" });
     dispatch({ type: 'SET_DRAG_DATA', payload: { id: "", initialGroup: "", originId: "" } });
-    
-    // Reset the drop flag
-    dropOccurred = false;
     
     if (onDragEnd) {
       if (!enableCrossContainerPreview) {
