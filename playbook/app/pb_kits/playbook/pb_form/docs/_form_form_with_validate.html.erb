@@ -113,7 +113,17 @@
   <%= form.select :example_select_validation, [ ["Yes", 1], ["No", 2] ], props: { label: true, blank_selection: "Select One...", required: true, validation_message: "Please, select an option." } %>
   <%= form.collection_select :example_collection_select_validation, example_collection, :value, :name, props: { label: true, blank_selection: "Select One...", required: true } %>
   <%= form.check_box :example_checkbox_validation, props: { text: "Example Checkbox Validation", label: true, required: true }, checked_value: "1", unchecked_value: "0" %>
-  <%= form.date_picker :example_date_picker_2, props: { label: true, required: true, validation_message: "Please, select a date.", allow_input: true } %>
+  <%= form.date_picker :example_date_picker_2, props: { 
+    label: true, 
+    required: true, 
+    validation_message: "Please, select a date.", 
+    allow_input: true,
+    # Testing out-of-range default date feature: default_date is earlier than min_date
+    # This should still display the default date even though it's outside the valid range
+    default_date: (DateTime.current - 3.days).utc.iso8601,
+    min_date: (DateTime.current - 1.day).utc.iso8601,
+    max_date: (DateTime.current + 7.days).utc.iso8601
+  } %>
   <%= form.star_rating_field :example_star_rating_validation, props: { variant: "interactive", label: true, required: true } %>
   <%= form.time_zone_select_field :example_time_zone_select, ActiveSupport::TimeZone.us_zones, { default: "Eastern Time (US & Canada)" }, props: { label: true, blank_selection: "Select a Time Zone...", required: true } %>
   <%= form.multi_level_select :example_multi_level_select, props: { id: "multi-level-select-form", tree_data: treeData, margin_bottom: "sm", required: true, label: "Example Multi Level Select field" } %>
