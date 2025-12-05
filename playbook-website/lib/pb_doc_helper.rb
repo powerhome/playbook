@@ -41,7 +41,9 @@ module PlaybookWebsite
       kits.each do |kit|
         if kit.is_a?(Hash)
           nav_hash_array(kit).each do |sub_kit|
-            display_kits << render_pb_doc_kit(sub_kit[:name], type, limit_examples, false, dark_mode) if sub_kit[:status] != "beta" && pb_doc_has_kit_type?(sub_kit[:name], type)
+            # Get platform-specific status or fall back to kit-level status
+            kit_status = get_kit_status_for_platform(sub_kit, type)
+            display_kits << render_pb_doc_kit(sub_kit[:name], type, limit_examples, false, dark_mode) if kit_status != "beta" && pb_doc_has_kit_type?(sub_kit[:name], type)
           end
         elsif pb_doc_has_kit_type?(kit, type)
           display_kits << render_pb_doc_kit(kit, type, limit_examples, false, dark_mode)
@@ -75,6 +77,20 @@ module PlaybookWebsite
 
     def pb_doc_kit_path(kit, *args)
       Playbook.kit_path(kit, "docs", *args)
+    end
+
+    # Get the status for a specific platform
+    # Falls back to kit-level status if platform-specific status is not defined
+    def get_kit_status_for_platform(kit, platform)
+      platforms_status = kit[:platforms_status] || kit["platforms_status"]
+
+      if platforms_status && platforms_status[platform.to_s]
+        platforms_status[platform.to_s]
+      elsif platforms_status && platforms_status[platform.to_sym]
+        platforms_status[platform.to_sym]
+      else
+        kit[:status] || kit["status"]
+      end
     end
 
     def pb_doc_kit_examples(kit, type)

@@ -10,14 +10,14 @@
       <%= pb_rails("flex", props: { orientation: "column"}) do %>
         <%= pb_rails("flex", props: { orientation: "row", align_items: "center", margin_top: "xl"}) do %>
             <%= pb_rails("title", props: { text: pb_kit_title(kit_value), tag: "h1", size: 1 }) %>
-                <% if @kit_status === "beta" || @kit_status === "deprecated" %>
-                  <%= pb_rails("card", props: { background: @kit_status == "beta" ? "product_9_background" : "product_5_highlight", margin_x: "sm", padding: "xxs", border_none: true }) do %>
+                <% if current_platform_status === "beta" || current_platform_status === "deprecated" %>
+                  <%= pb_rails("card", props: { background: current_platform_status == "beta" ? "product_9_background" : "product_5_highlight", margin_x: "xs", padding: "xxs", border_none: true }) do %>
                       <%= pb_rails("detail", props: {
                         bold: true,
                         color: "default",
                         dark: true,
                         padding_x: "xxs",
-                        text: @kit_status == "beta" ? "Beta" : "Deprecated",
+                        text: current_platform_status == "beta" ? "Beta" : "Deprecated",
                       }) %>
                   <% end %> 
                 <% end %>
@@ -28,16 +28,21 @@
         <div class="markdown kit-show-description <%= cookies[:dark_mode] == "true" ? 'dark' : '' %>">
           <%= render_markdown(pb_doc_kit_description(@kit)) %>
         </div>
-        <% if @kit_status === "beta" || @kit_status === "deprecated" %>
-          <%= pb_rails("card", props: { background: @kit_status == "beta" ? "warning_subtle" : "error_subtle", highlight: { position: "side", color: @kit_status == "beta" ? "warning" : "product_5_highlight", shadow:"deep"}, margin_y: "md", padding: "sm", width: "100%" }) do %>
+        <% if current_platform_status === "beta" || current_platform_status === "deprecated" %>
+          <%= pb_rails("card", props: { background: current_platform_status == "beta" ? "warning_subtle" : "error_subtle", highlight: { position: "side", color: current_platform_status == "beta" ? "warning" : "product_5_highlight", shadow:"deep"}, margin_y: "md", padding: "sm"}) do %>
             <%= pb_rails("flex", props:{ align: "center" }) do %>
               <%= pb_rails("body", props:{color: "light"}) do %>
-              <%= pb_rails("icon", props: { icon: @kit_status == "beta" ? "info-circle" : "warning", fixed_width: true, padding_right:"xs", color: @kit_status == "beta" ? "warning" : "product_5_highlight" }) %>
+              <%= pb_rails("icon", props: { icon: current_platform_status == "beta" ? "info-circle" : "warning", fixed_width: true, padding_right:"xs", color: current_platform_status == "beta" ? "warning" : "product_5_highlight" }) %>
               <% end %>
               <%= pb_rails("flex/flex_item") do %>
-                <%= pb_rails("title", props: { text: @kit_status == "beta" ? "Beta" : "Deprecated", tag: "h4", size: 4 , padding_bottom:"xxs"}) %>
+                <%= pb_rails("title", props: { text: current_platform_status == "beta" ? "Beta" : "Deprecated", tag: "h4", size: 4 , padding_bottom:"xxs"}) %>
+                <% 
+                  component_name = platform_specific_status? ? "#{platform_display_name} side of the #{pb_kit_title(kit_value)} kit" : "#{pb_kit_title(kit_value)} kit"
+                  beta_message = platform_specific_status? ? "The #{component_name} is functional and supported, but may still be undergoing changes. Use with caution." : "Functional and supported, but may still be undergoing changes. Use with caution."
+                  deprecated_message = platform_specific_status? ? "Please avoid using the #{component_name}. This will be removed in future versions." : "Please avoid using. This component is deprecated and will be removed in future versions."
+                %>
                 <%= pb_rails("body", props: {
-                  text: @kit_status == "beta" ? "Functional and supported, but may still be undergoing changes. Use with caution." : "Please avoid using. This component is deprecated and will be removed in future versions.",
+                  text: current_platform_status == "beta" ? beta_message : deprecated_message,
                 }) %>
               <% end %>
             <% end %>
