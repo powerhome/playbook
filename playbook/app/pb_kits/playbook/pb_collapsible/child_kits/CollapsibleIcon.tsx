@@ -28,12 +28,12 @@ type colorMap = {
 };
 
 const colorMap = {
-  default: colors.text_lt_default,
-  light: colors.text_lt_light,
-  lighter: colors.text_lt_lighter,
-  link: colors.primary,
-  error: colors.red,
-  success: colors.text_dk_success_sm,
+  default:"text_lt_default",
+  light: "text_lt_light",
+  lighter: "text_lt_lighter",
+  link: "primary",
+  error: "red",
+  success: "text_dk_success_sm",
 };
 
 const CollapsibleIcon = ({
@@ -44,6 +44,7 @@ const CollapsibleIcon = ({
   onIconClick,
 }: IconProps) => {
   const color = colorMap[iconColor];
+  console.log('color', color);
 
   const showIcon = (icon: string | string[]) => {
     if (icon === "none") {
@@ -69,9 +70,10 @@ const CollapsibleIcon = ({
               className="icon_wrapper"
               key={icon ? showIcon(icon)[0] : "chevron-down"}
               onClick={(e) => handleIconClick(e)}
-              style={{ verticalAlign: "middle", color: color }}
+              style={{ verticalAlign: "middle"}}
           >
             <Icon
+                color={color}
                 icon={icon ? showIcon(icon)[0] : "chevron-down"}
                 size={iconSize}
             />
@@ -81,9 +83,10 @@ const CollapsibleIcon = ({
               className="icon_wrapper"
               key={icon ? showIcon(icon)[1] : "chevron-up"}
               onClick={(e) => handleIconClick(e)}
-              style={{ verticalAlign: "middle", color: color }}
+              style={{ verticalAlign: "middle" }}
           >
             <Icon
+                color={color}
                 icon={icon ? showIcon(icon)[1] : "chevron-up"}
                 size={iconSize}
             />
