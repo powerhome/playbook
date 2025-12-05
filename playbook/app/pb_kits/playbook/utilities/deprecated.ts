@@ -22,9 +22,30 @@ export const deprecatedKitWarning = (
   kitName: string,
   message?: string
 ): void => {
-  // Only run in development mode, not in production or test
-  if (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'test') {
+  // Skip in test environments (Jest sets NODE_ENV to 'test')
+  if (typeof process !== 'undefined' && process.env?.NODE_ENV === 'test') {
     return;
+  }
+
+  // Skip if production mode was set at build time
+  if (typeof process !== 'undefined' && process.env?.NODE_ENV === 'production') {
+    return;
+  }
+
+  // Skip if this looks like a production build (minified, no sourcemaps in browser)
+  // This helps catch cases where the package was built for production but consumed in dev
+  if (typeof window !== 'undefined') {
+    // Check for common production indicators
+    const isMinified = !new Error().stack?.includes('.ts:') && !new Error().stack?.includes('.tsx:');
+    // Allow warnings even in built packages when consumed locally (localhost)
+    const isLocalhost = window.location?.hostname === 'localhost' || 
+                        window.location?.hostname === '127.0.0.1' ||
+                        window.location?.hostname === '';
+    
+    // Only skip if it's minified AND not on localhost
+    if (isMinified && !isLocalhost) {
+      return;
+    }
   }
 
   // Only warn once per kit per page load
