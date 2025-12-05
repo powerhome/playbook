@@ -50,10 +50,18 @@ export const deprecatedKitWarning = (
   // Mark this kit as warned
   warnedKits.add(kitName);
 
-  // Log the warning
-  const defaultMessage = `[PLAYBOOK] The "${kitName}" kit is deprecated and will be removed in a future version. Please migrate to the recommended alternative.`;
+  // Build the warning message
+  const baseMessage = `PLAYBOOK DEPRECATION WARNING
+  ----------------------------
+  The "${kitName}" kit is deprecated and will be removed in a future version.`;
   
-  console.warn(message || defaultMessage);
+  const fullMessage = message 
+    ? `${baseMessage} ${message}`
+    : `${baseMessage} Please migrate to the recommended alternative
+ 
+  `;
+  
+  console.warn(fullMessage);
 };
 
 /**

@@ -34,7 +34,6 @@ const Legend = (props: LegendProps) => {
   } = props
 
   useEffect(() => {
-    console.log('TESTING ------------------------')
     deprecatedKitWarning('Legend')
   }, [])
 

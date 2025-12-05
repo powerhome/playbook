@@ -171,7 +171,7 @@ if (Array.isArray(axisTitle) && axisTitle.length > 1 && axisTitle[1].name) {
 
   useEffect(() => {
     // Warn about deprecated kit (only once per page load, dev mode only)
-    deprecatedKitWarning('BarGraph', '[Playbook] The "BarGraph" kit is deprecated. Please use "PbBarGraph" instead.');
+    deprecatedKitWarning('BarGraph', 'Please use "PbBarGraph" instead.');
   }, []);
 
   useEffect(() => {
