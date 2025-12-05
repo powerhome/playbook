@@ -27,23 +27,17 @@ export const deprecatedKitWarning = (
     return;
   }
 
-  // Skip if production mode was set at build time
-  if (typeof process !== 'undefined' && process.env?.NODE_ENV === 'production') {
-    return;
-  }
-
-  // Skip if this looks like a production build (minified, no sourcemaps in browser)
-  // This helps catch cases where the package was built for production but consumed in dev
+  // In browser environments, check if we're on localhost/dev
   if (typeof window !== 'undefined') {
-    // Check for common production indicators
-    const isMinified = !new Error().stack?.includes('.ts:') && !new Error().stack?.includes('.tsx:');
-    // Allow warnings even in built packages when consumed locally (localhost)
-    const isLocalhost = window.location?.hostname === 'localhost' || 
-                        window.location?.hostname === '127.0.0.1' ||
-                        window.location?.hostname === '';
+    const hostname = window.location?.hostname;
+    const isLocalDev = hostname === 'localhost' || 
+                       hostname === '127.0.0.1' ||
+                       hostname?.endsWith('.local') ||
+                       hostname?.includes('local.') ||
+                       !hostname; // file:// protocol
     
-    // Only skip if it's minified AND not on localhost
-    if (isMinified && !isLocalhost) {
+    // Only show warnings in local development
+    if (!isLocalDev) {
       return;
     }
   }
