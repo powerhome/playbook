@@ -1,6 +1,5 @@
 import React from "react";
 import Icon, { IconSizes } from "../../pb_icon/_icon";
-import colors from '../../tokens/exports/_colors.module.scss'
 
 type IconColors =
   | "default"
