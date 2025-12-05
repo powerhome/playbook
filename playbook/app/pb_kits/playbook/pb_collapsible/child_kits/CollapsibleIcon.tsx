@@ -31,7 +31,7 @@ const colorMap = {
   light: "text_lt_light",
   lighter: "text_lt_lighter",
   link: "primary",
-  error: "red",
+  error: "error",
   success: "text_dk_success_sm",
 };
 
@@ -43,7 +43,6 @@ const CollapsibleIcon = ({
   onIconClick,
 }: IconProps) => {
   const color = colorMap[iconColor];
-  console.log('color', color);
 
   const showIcon = (icon: string | string[]) => {
     if (icon === "none") {
