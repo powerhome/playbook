@@ -1,7 +1,9 @@
-# 15.6.0
+# 🔥 Smoother, Smarter, & More User-Friendly! 🔥
 ##### December 05, 2025
 
 ![release_image](https://github.com/user-attachments/assets/db119637-25e9-4157-9091-c5f7fdf034fc)
+
+This release is all about polishing the experience - fixing those sneaky edge cases, boosting accessibility, and adding quality-of-life improvements across multiple kits. Backgrounds resize more reliably, typeaheads are less chaotic, and draggable interactions are more flexible than ever! On top of that, several website improvements, cleaner code, accessibility upgrades, and some fresh new props and tooltips make this batch of changes feel extra delightful.
 
 [15.6.0](https://github.com/powerhome/playbook/tree/15.6.0) full list of changes:
 
