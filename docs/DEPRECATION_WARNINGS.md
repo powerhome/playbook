@@ -2,15 +2,15 @@
 
 ## Overview
 
-This system provides runtime console warnings when deprecated Playbook kits are used in development mode. It helps developers identify deprecated kit usage in Nitro, Tempo, Runway, and other apps without impacting production builds.
+This system provides runtime console warnings when deprecated Playbook kits (REACT) are used in development mode. It helps developers identify deprecated kit usage in Nitro, Tempo, Runway, and other apps without impacting production builds.
 
 ## How It Works
 
 ### Key Features
 
 ✅ **Once per page load**: Each deprecated kit logs exactly one warning per page load, preventing spam on re-renders  
-✅ **Dev mode only**: No warnings in production builds (`process.env.NODE_ENV === 'production'`)  
-✅ **Platform-specific**: Can warn only for React or Rails, or both  
+✅ **Dev mode only**: No warnings in production or staging builds
+✅ **Platform-specific**: Can warn only for React  
 ✅ **Customizable messages**: Default or custom deprecation messages
 
 ## Usage
@@ -45,15 +45,23 @@ const YourKit = (props: YourKitProps): React.ReactElement => {
 
 **Parameters:**
 - `kitName` (string, required): Name of the deprecated kit (e.g., 'BarGraph')
-- `message` (string, optional): Custom deprecation message. If omitted, uses default.
+- `message` (string, optional): Custom deprecation message to add to end of base message. If omitted, uses default.
 
 **Default message format:**
 ```
-[Playbook] The "{kitName}" kit is deprecated and will be removed in a future version. Please migrate to the recommended alternative.
+PLAYBOOK DEPRECATION WARNING
+  ----------------------------
+  The "${kitName}" kit is deprecated and will be removed in a future version. Please migrate to the recommended alternative`;
+```
+**Custom message format if used:**
+```
+PLAYBOOK DEPRECATION WARNING
+  ----------------------------
+  The "${kitName}" kit is deprecated and will be removed in a future version. "${message}"`;
 ```
 
 **Behavior:**
-- Only logs in development mode (`process.env.NODE_ENV !== 'production'`)
+- Only logs in development mode
 - Tracks warned kits in a Set to prevent duplicate warnings
 - Silent in production builds
 
@@ -67,11 +75,11 @@ useEffect(() => {
 }, []); // Run once on mount
 ```
 
-### 2. Provide helpful migration messages
+### 2. Provide helpful migration messages if needed
 ```tsx
 deprecatedKitWarning(
   'BarGraph', 
-  '[Playbook] The "BarGraph" kit is deprecated. Please use "PbBarGraph" instead.'
+  'Please use "PbBarGraph" instead.'
 );
 ```
 

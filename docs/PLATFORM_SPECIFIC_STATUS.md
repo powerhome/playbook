@@ -33,33 +33,16 @@ components:
   - name: my_component
     platforms: all
     status: stable  # Fallback if platform not specified in platforms_status
-    platforms_status:
-      rails: stable
-      react: beta
-      swift: deprecated
+    platforms_status:{ rails: deprecated, react: beta }
     icons_used: false
     react_rendered: false
     enhanced_element_used: false
 ```
 
-### Hybrid Approach
+When using both fields together, the `platforms_status` takes precedence when defined for a specific platform, otherwise it falls back to the kit-level `status`:
 
-You can also use both fields together. The `platforms_status` takes precedence when defined for a specific platform, otherwise it falls back to the kit-level `status`:
-
-```yaml
-components:
-  - name: my_component
-    platforms: all
-    status: stable  # Used for platforms not listed in platforms_status
-    platforms_status:
-      react: beta  # Only React is beta
-    icons_used: false
-    react_rendered: false
-    enhanced_element_used: false
-```
-
-In this example:
-- Rails implementation: `stable` (from fallback)
+In the example above:
+- Rails implementation: `deprecated` (from platforms_status)
 - React implementation: `beta` (from platforms_status)
 - Swift implementation: `stable` (from fallback)
 
@@ -79,25 +62,3 @@ Available status values:
 - `beta`: Functional and supported, but may undergo changes
 - `deprecated`: Avoid using, will be removed in future versions
 
-
-## Migration Guide
-
-If you want to migrate a kit from kit-level status to platform-specific status:
-
-**Before:**
-```yaml
-- name: my_component
-  status: beta
-```
-
-**After:**
-```yaml
-- name: my_component
-  status: stable  # Keep as fallback
-  platforms_status:
-    rails: stable
-    react: beta
-    swift: stable
-```
-
-You can do this migration gradually, there's no need to update all kits at once.
