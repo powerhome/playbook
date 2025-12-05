@@ -138,11 +138,13 @@ export const DraggableProvider = ({
     isDragging: boolean;
     draggedItemId: string;
     originalContainer: string;
+    currentContainer: string;
     dropOccurred: boolean;
   }>({
     isDragging: false,
     draggedItemId: '',
     originalContainer: '',
+    currentContainer: '',
     dropOccurred: false,
   });
 
@@ -178,19 +180,101 @@ export const DraggableProvider = ({
   useEffect(() => {
     if (!enableCrossContainerPreview) return;
 
+    // Allow drops anywhere on the document by preventing default dragover
+    const handleGlobalDragOver = (e: DragEvent) => {
+      if (dragStateRef.current.isDragging) {
+        e.preventDefault();
+      }
+    };
+
+    // Handle drops anywhere on the document (including non-container areas)
+    const handleGlobalDrop = (e: DragEvent) => {
+      if (!dragStateRef.current.isDragging) return;
+      
+      e.preventDefault();
+      
+      const currentContainer = dragStateRef.current.currentContainer;
+      
+      // If item is in a different container than original, treat it as a successful drop
+      if (currentContainer && currentContainer !== dragStateRef.current.originalContainer) {
+        
+        // Mark as dropped so other handlers know
+        dragStateRef.current.dropOccurred = true;
+        
+        // Trigger onDrop callback with the current container
+        if (onDrop) {
+          const draggedItem = state.items.find(item => item && item.id === dragStateRef.current.draggedItemId);
+          const updatedItem = draggedItem ? { ...draggedItem, container: currentContainer } : null;
+          const itemsInContainer = state.items.filter(item => item && item.container === currentContainer);
+          const indexInContainer = itemsInContainer.findIndex(item => item && item.id === dragStateRef.current.draggedItemId);
+          const itemAbove = indexInContainer > 0 ? itemsInContainer[indexInContainer - 1] : null;
+          const itemBelow = indexInContainer < itemsInContainer.length - 1 ? itemsInContainer[indexInContainer + 1] : null;
+          
+          onDrop(
+            dragStateRef.current.draggedItemId,
+            currentContainer,
+            dragStateRef.current.originalContainer,
+            updatedItem,
+            itemAbove,
+            itemBelow
+          );
+        }
+        
+        dispatch({ type: 'SET_IS_DRAGGING', payload: "" });
+        dispatch({ type: 'SET_ACTIVE_CONTAINER', payload: "" });
+        dispatch({ type: 'SET_DRAG_DATA', payload: { id: "", initialGroup: "", originId: "" } });
+      } else {
+        // Reset to original container
+        dispatch({
+          type: 'RESET_DRAG_CONTAINER',
+          payload: {
+            itemId: dragStateRef.current.draggedItemId,
+            originalContainer: dragStateRef.current.originalContainer,
+          },
+        });
+        dispatch({ type: 'SET_IS_DRAGGING', payload: "" });
+        dispatch({ type: 'SET_ACTIVE_CONTAINER', payload: "" });
+        dispatch({ type: 'SET_DRAG_DATA', payload: { id: "", initialGroup: "", originId: "" } });
+      }
+    };
+
     const handleGlobalMouseUp = () => {
       // If we're dragging and mouse is released, wait a bit to see if drop occurs
       if (dragStateRef.current.isDragging) {
         setTimeout(() => {
-          // If drop still hasn't occurred, reset
+          const currentContainer = dragStateRef.current.currentContainer;
+          
+          // If drop still hasn't occurred, check if item is in a different container
           if (dragStateRef.current.isDragging && !dragStateRef.current.dropOccurred) {
-            dispatch({
-              type: 'RESET_DRAG_CONTAINER',
-              payload: {
-                itemId: dragStateRef.current.draggedItemId,
-                originalContainer: dragStateRef.current.originalContainer,
-              },
-            });
+            // If item is in a different container than original, treat it as a successful drop
+            if (currentContainer && currentContainer !== dragStateRef.current.originalContainer) {
+              // Trigger onDrop callback with the current container
+              if (onDrop) {
+                const draggedItem = state.items.find(item => item && item.id === dragStateRef.current.draggedItemId);
+                const updatedItem = draggedItem ? { ...draggedItem, container: currentContainer } : null;
+                const itemsInContainer = state.items.filter(item => item && item.container === currentContainer);
+                const indexInContainer = itemsInContainer.findIndex(item => item && item.id === dragStateRef.current.draggedItemId);
+                const itemAbove = indexInContainer > 0 ? itemsInContainer[indexInContainer - 1] : null;
+                const itemBelow = indexInContainer < itemsInContainer.length - 1 ? itemsInContainer[indexInContainer + 1] : null;
+                
+                onDrop(
+                  dragStateRef.current.draggedItemId,
+                  currentContainer,
+                  dragStateRef.current.originalContainer,
+                  updatedItem,
+                  itemAbove,
+                  itemBelow
+                );
+              }
+            } else {
+              dispatch({
+                type: 'RESET_DRAG_CONTAINER',
+                payload: {
+                  itemId: dragStateRef.current.draggedItemId,
+                  originalContainer: dragStateRef.current.originalContainer,
+                },
+              });
+            }
             dispatch({ type: 'SET_IS_DRAGGING', payload: "" });
             dispatch({ type: 'SET_ACTIVE_CONTAINER', payload: "" });
             dispatch({ type: 'SET_DRAG_DATA', payload: { id: "", initialGroup: "", originId: "" } });
@@ -200,6 +284,7 @@ export const DraggableProvider = ({
               isDragging: false,
               draggedItemId: '',
               originalContainer: '',
+              currentContainer: '',
               dropOccurred: false,
             };
           }
@@ -207,10 +292,14 @@ export const DraggableProvider = ({
       }
     };
 
+    document.addEventListener('dragover', handleGlobalDragOver);
+    document.addEventListener('drop', handleGlobalDrop);
     document.addEventListener('mouseup', handleGlobalMouseUp);
     document.addEventListener('pointerup', handleGlobalMouseUp);
     
     return () => {
+      document.removeEventListener('dragover', handleGlobalDragOver);
+      document.removeEventListener('drop', handleGlobalDrop);
       document.removeEventListener('mouseup', handleGlobalMouseUp);
       document.removeEventListener('pointerup', handleGlobalMouseUp);
     };
@@ -224,7 +313,7 @@ export const DraggableProvider = ({
 
     const wasDragging = prevIsDraggingRef.current;
     const isNowDragging = state.isDragging;
-    
+
     // Drag just ended (was dragging, now not)
     if (wasDragging && !isNowDragging) {
       
@@ -244,6 +333,7 @@ export const DraggableProvider = ({
         isDragging: false,
         draggedItemId: '',
         originalContainer: '',
+        currentContainer: '',
         dropOccurred: false,
       };
     }
@@ -258,6 +348,7 @@ export const DraggableProvider = ({
         isDragging: true,
         draggedItemId: id,
         originalContainer: container,
+        currentContainer: container,
         dropOccurred: false,
       };
     }
@@ -294,6 +385,10 @@ export const DraggableProvider = ({
               newContainer: container,
             },
           });
+          // Update current container in ref
+          if (enableCrossContainerPreview) {
+            dragStateRef.current.currentContainer = container;
+          }
         } else {
           // Same container: keep original behavior
           dispatch({
@@ -306,7 +401,10 @@ export const DraggableProvider = ({
         dispatch({type: "REORDER_ITEMS", payload: { dragId: state.dragData.id, targetId: id }});
       }
 
-      dispatch({type: "SET_DRAG_DATA",payload: {id: state.dragData.id, initialGroup: container, originId: providerId}});
+      // When enableCrossContainerPreview is true, preserve the original initialGroup
+      // Otherwise, update it to track the current container
+      const newInitialGroup = enableCrossContainerPreview ? state.dragData.initialGroup : container;
+      dispatch({type: "SET_DRAG_DATA",payload: {id: state.dragData.id, initialGroup: newInitialGroup, originId: providerId}});
     }
     if (onDragEnter) onDragEnter(id, container);
   };
@@ -364,6 +462,7 @@ export const DraggableProvider = ({
 
     dispatch({ type: 'SET_IS_DRAGGING', payload: "" });
     dispatch({ type: 'SET_ACTIVE_CONTAINER', payload: "" });
+    dispatch({ type: 'SET_DRAG_DATA', payload: { id: "", initialGroup: "", originId: "" } });
     changeCategory(state.dragData.id, container);
     if (onDrop) {
       if (!enableCrossContainerPreview) {
@@ -405,6 +504,8 @@ export const DraggableProvider = ({
           type: "MOVE_TO_CONTAINER_END",
           payload: { dragId: state.dragData.id, newContainer: container },
         });
+        // Update current container in ref
+        dragStateRef.current.currentContainer = container;
       }
     }
 
