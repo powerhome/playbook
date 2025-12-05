@@ -1,3 +1,37 @@
+# 15.6.0
+##### December 05, 2025
+
+![release_image](https://github.com/user-attachments/assets/db119637-25e9-4157-9091-c5f7fdf034fc)
+
+[15.6.0](https://github.com/powerhome/playbook/tree/15.6.0) full list of changes:
+
+**Fixed Bugs:**
+
+- Dialog Kit: Fixing Close When Click Outside Logic [\#5580](https://github.com/powerhome/playbook/pull/5580) ([nidaqg](https://github.com/nidaqg))
+- Background Kit: Background Color to Work on Resize [\#5569](https://github.com/powerhome/playbook/pull/5569) ([nidaqg](https://github.com/nidaqg))
+- Typeahead and Dialog Kits: Stop Mouse Down Event Bubbling Up for Close on Typeahead + Better Logic for Dialog Click Outside [\#5553](https://github.com/powerhome/playbook/pull/5553) ([nidaqg](https://github.com/nidaqg))
+- File Upload Kit: Fixes for Broken Kit Styles - React Only [\#5550](https://github.com/powerhome/playbook/pull/5550) ([nidaqg](https://github.com/nidaqg))
+- Draggable Kit: Dropzone Preview to Work With Multi-container Drag + Arguments for Ondrop and Ondragend Callbacks [\#5543](https://github.com/powerhome/playbook/pull/5543) ([nidaqg](https://github.com/nidaqg))
+- Advanced Table Kit: Doubled Borders Fixes [\#5528](https://github.com/powerhome/playbook/pull/5528) ([elisashapiro](https://github.com/elisashapiro))
+
+
+**Improvements:**
+
+- Playbook Website: Added Deprecated Banner + Updated Beta Banner [\#5570](https://github.com/powerhome/playbook/pull/5570) ([nidaqg](https://github.com/nidaqg))
+- Phone Number Input Kit: Validate Onblur or Submission, Not Onchange [\#5561](https://github.com/powerhome/playbook/pull/5561) ([kangaree](https://github.com/kangaree))
+- Playbook Website: Bump Ci-kubed from 9.0.0 to 9.6.0 [\#5551](https://github.com/powerhome/playbook/pull/5551) ([rodolfoasantos](https://github.com/rodolfoasantos))
+- Cleanup: Remove Unused Bar Graph Scss File from Dist + Remove Legend Kit from Rails-react-binding File [\#5542](https://github.com/powerhome/playbook/pull/5542) ([nidaqg](https://github.com/nidaqg))
+- Dependency Update/upgrade: Rails \(7.1.5.1\) to 7.2.2 [\#5541](https://github.com/powerhome/playbook/pull/5541) ([kangaree](https://github.com/kangaree))
+
+
+**Kit Enhancements:**
+
+- Homeaddressstreet Kit: Accessibility Improvements [\#5568](https://github.com/powerhome/playbook/pull/5568) ([elisashapiro](https://github.com/elisashapiro))
+- Typeahead: New Inputdisplay Prop - React and Rails [\#5567](https://github.com/powerhome/playbook/pull/5567) ([nidaqg](https://github.com/nidaqg))
+- Multi User Kit: Add Tooltip Support Per Individual User [\#5560](https://github.com/powerhome/playbook/pull/5560) ([nickamantia](https://github.com/nickamantia))
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/v15.5.0...15.6.0)
+
 #  ✨ A DatePicker That Knows Where to Go ✨
 ##### November 21, 2025
 
