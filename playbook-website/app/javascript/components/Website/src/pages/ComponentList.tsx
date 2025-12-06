@@ -22,6 +22,7 @@ export type Kit = {
     status: "stable" | "beta";
   }[];
   description: string;
+  parent?: string;
 };
 
 export type Kits = Kit[];

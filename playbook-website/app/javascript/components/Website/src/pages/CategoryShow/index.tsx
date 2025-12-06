@@ -61,12 +61,13 @@ export default function CategoryShow() {
 
         <KitGrid>
           {kitsToShow.filter(component => component.status === "stable")
-          .map(({ description, name }: Kit, index: number) => {
+          .map(({ description, name, parent }: Kit, index: number) => {
             return(
               <KitCard
                 description={description}
                 name={name}
                 key={`category-${name}-${index}`}
+                parent={parent}
                 platform={platform}
               />
             )

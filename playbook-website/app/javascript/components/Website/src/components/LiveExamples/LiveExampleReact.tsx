@@ -141,7 +141,8 @@ const LiveExample: React.FC<LiveExampleProps> = ({ code, exampleProps = {} }) =>
       FormattedDate,
       // Third-party libs injected here (Highcharts*, maplibregl, etc.)
       ...thirdParty,
-      exampleProps,
+      // Spread exampleProps so MOCK_DATA etc. are top-level variables
+      ...exampleProps,
     }),
     [thirdParty, exampleProps, PBrest, FormattedDate],
   )
