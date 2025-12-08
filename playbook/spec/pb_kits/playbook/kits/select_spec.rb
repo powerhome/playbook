@@ -18,6 +18,7 @@ RSpec.describe Playbook::PbSelect::Select do
   it { is_expected.to define_boolean_prop(:inline).with_default(false) }
   it { is_expected.to define_boolean_prop(:compact).with_default(false) }
   it { is_expected.to define_boolean_prop(:show_arrow).with_default(false) }
+  it { is_expected.to define_hash_prop(:input_options).with_default({}) }
 
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
@@ -28,6 +29,29 @@ RSpec.describe Playbook::PbSelect::Select do
       expect(subject.new(compact: true).classnames).to eq "pb_select mb_sm compact"
       expect(subject.new(inline: true, show_arrow: true).classnames).to eq "pb_select mb_sm inline show_arrow"
       expect(subject.new(inline: true, compact: true, show_arrow: true).classnames).to eq "pb_select mb_sm inline compact show_arrow"
+    end
+  end
+
+  describe "#all_attributes" do
+    it "merges input_options into attributes" do
+      select = subject.new(
+        id: "default-id",
+        input_options: {
+          id: "custom-id",
+          class: "custom-class",
+          data: { controller: "search" },
+        }
+      )
+
+      expect(select.all_attributes[:id]).to eq "custom-id"
+      expect(select.all_attributes[:class]).to eq "custom-class"
+      expect(select.all_attributes[:data]).to eq({ controller: "search" })
+    end
+
+    it "uses default id when input_options id is not provided" do
+      select = subject.new(id: "default-id", input_options: {})
+
+      expect(select.all_attributes[:id]).to eq "default-id"
     end
   end
 end
