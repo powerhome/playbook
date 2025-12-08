@@ -202,87 +202,31 @@ export const DraggableProvider = ({
       
       e.preventDefault();
       
-      const currentContainer = dragStateRef.current.currentContainer;
+      // If we reach here, it means the drop was NOT on a valid container
+      // (otherwise the container's handleDrop would have set dropOccurred = true)
+      // So we should ALWAYS reset to original container for invalid drops
+      const originalContainer = dragStateRef.current.originalContainer;
       
-      // If item is in a different container than original, treat it as a successful drop
-      if (currentContainer && currentContainer !== dragStateRef.current.originalContainer) {
-        
-        // Mark as dropped so other handlers know
-        dragStateRef.current.dropOccurred = true;
-        
-        // Trigger onDrop callback with the current container
-        if (onDrop) {
-          const draggedItem = stateRef.current.items.find(item => item && item.id === dragStateRef.current.draggedItemId);
-          const updatedItem = draggedItem ? { ...draggedItem, container: currentContainer } : null;
-          const itemsInContainer = stateRef.current.items.filter(item => item && item.container === currentContainer);
-          const indexInContainer = itemsInContainer.findIndex(item => item && item.id === dragStateRef.current.draggedItemId);
-          const itemAbove = indexInContainer > 0 ? itemsInContainer[indexInContainer - 1] : null;
-          const itemBelow = indexInContainer < itemsInContainer.length - 1 ? itemsInContainer[indexInContainer + 1] : null;
-          
-          onDrop(
-            dragStateRef.current.draggedItemId,
-            currentContainer,
-            dragStateRef.current.originalContainer,
-            updatedItem,
-            itemAbove,
-            itemBelow
-          );
-        }
-        
-        // Trigger onDragEnd callback
-        if (onDragEnd) {
-          const itemsInContainer = stateRef.current.items.filter(item => item && item.container === currentContainer);
-          const indexInContainer = itemsInContainer.findIndex(item => item && item.id === dragStateRef.current.draggedItemId);
-          const itemAbove = indexInContainer > 0 ? itemsInContainer[indexInContainer - 1] : null;
-          const itemBelow = indexInContainer < itemsInContainer.length - 1 ? itemsInContainer[indexInContainer + 1] : null;
-          
-          onDragEnd(
-            dragStateRef.current.draggedItemId,
-            currentContainer,
-            dragStateRef.current.originalContainer,
-            itemAbove,
-            itemBelow
-          );
-        }
-        
-        dispatch({ type: 'SET_IS_DRAGGING', payload: "" });
-        dispatch({ type: 'SET_ACTIVE_CONTAINER', payload: "" });
-        dispatch({ type: 'SET_DRAG_DATA', payload: { id: "", initialGroup: "", originId: "" } });
-      } else {
-        // Reset to original container (item didn't move or dropped in invalid zone)
-        const originalContainer = dragStateRef.current.originalContainer;
-        
-        dispatch({
-          type: 'RESET_DRAG_CONTAINER',
-          payload: {
-            itemId: dragStateRef.current.draggedItemId,
-            originalContainer: originalContainer,
-          },
-        });
-        
-        // Call onDrop with original container info
-        if (onDrop) {
-          const draggedItem = stateRef.current.items.find(item => item && item.id === dragStateRef.current.draggedItemId);
-          const updatedItem = draggedItem ? { ...draggedItem, container: originalContainer } : null;
-          const itemsInContainer = stateRef.current.items.filter(item => item && item.container === originalContainer);
-          const indexInContainer = itemsInContainer.findIndex(item => item && item.id === dragStateRef.current.draggedItemId);
-          const itemAbove = indexInContainer > 0 ? itemsInContainer[indexInContainer - 1] : null;
-          const itemBelow = indexInContainer < itemsInContainer.length - 1 ? itemsInContainer[indexInContainer + 1] : null;
-          
-          onDrop(
-            dragStateRef.current.draggedItemId,
-            originalContainer,
-            originalContainer,
-            updatedItem,
-            itemAbove,
-            itemBelow
-          );
-        }
-        
-        dispatch({ type: 'SET_IS_DRAGGING', payload: "" });
-        dispatch({ type: 'SET_ACTIVE_CONTAINER', payload: "" });
-        dispatch({ type: 'SET_DRAG_DATA', payload: { id: "", initialGroup: "", originId: "" } });
-      }
+      dispatch({
+        type: 'RESET_DRAG_CONTAINER',
+        payload: {
+          itemId: dragStateRef.current.draggedItemId,
+          originalContainer: originalContainer,
+        },
+      });
+      
+      dispatch({ type: 'SET_IS_DRAGGING', payload: "" });
+      dispatch({ type: 'SET_ACTIVE_CONTAINER', payload: "" });
+      dispatch({ type: 'SET_DRAG_DATA', payload: { id: "", initialGroup: "", originId: "" } });
+      
+      // Clear drag state
+      dragStateRef.current = {
+        isDragging: false,
+        draggedItemId: '',
+        originalContainer: '',
+        currentContainer: '',
+        dropOccurred: false,
+      };
     };
 
     const handleGlobalMouseUp = () => {
