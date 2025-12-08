@@ -148,6 +148,12 @@ export const DraggableProvider = ({
     dropOccurred: false,
   });
 
+  // Track current state for use in gated event listeners (avoid stale closures)
+  const stateRef = useRef(state);
+  useEffect(() => {
+    stateRef.current = state;
+  }, [state]);
+
   // Parse dropZone prop - handle both string format (backward compatibility) and object format
   let dropZoneType = 'ghost';
   let dropZoneColor = 'neutral';
@@ -203,9 +209,9 @@ export const DraggableProvider = ({
         
         // Trigger onDrop callback with the current container
         if (onDrop) {
-          const draggedItem = state.items.find(item => item && item.id === dragStateRef.current.draggedItemId);
+          const draggedItem = stateRef.current.items.find(item => item && item.id === dragStateRef.current.draggedItemId);
           const updatedItem = draggedItem ? { ...draggedItem, container: currentContainer } : null;
-          const itemsInContainer = state.items.filter(item => item && item.container === currentContainer);
+          const itemsInContainer = stateRef.current.items.filter(item => item && item.container === currentContainer);
           const indexInContainer = itemsInContainer.findIndex(item => item && item.id === dragStateRef.current.draggedItemId);
           const itemAbove = indexInContainer > 0 ? itemsInContainer[indexInContainer - 1] : null;
           const itemBelow = indexInContainer < itemsInContainer.length - 1 ? itemsInContainer[indexInContainer + 1] : null;
@@ -220,18 +226,72 @@ export const DraggableProvider = ({
           );
         }
         
+        // Trigger onDragEnd callback
+        if (onDragEnd) {
+          const itemsInContainer = stateRef.current.items.filter(item => item && item.container === currentContainer);
+          const indexInContainer = itemsInContainer.findIndex(item => item && item.id === dragStateRef.current.draggedItemId);
+          const itemAbove = indexInContainer > 0 ? itemsInContainer[indexInContainer - 1] : null;
+          const itemBelow = indexInContainer < itemsInContainer.length - 1 ? itemsInContainer[indexInContainer + 1] : null;
+          
+          onDragEnd(
+            dragStateRef.current.draggedItemId,
+            currentContainer,
+            dragStateRef.current.originalContainer,
+            itemAbove,
+            itemBelow
+          );
+        }
+        
         dispatch({ type: 'SET_IS_DRAGGING', payload: "" });
         dispatch({ type: 'SET_ACTIVE_CONTAINER', payload: "" });
         dispatch({ type: 'SET_DRAG_DATA', payload: { id: "", initialGroup: "", originId: "" } });
       } else {
-        // Reset to original container
+        // Reset to original container (item didn't move or dropped in invalid zone)
+        const originalContainer = dragStateRef.current.originalContainer;
+        
         dispatch({
           type: 'RESET_DRAG_CONTAINER',
           payload: {
             itemId: dragStateRef.current.draggedItemId,
-            originalContainer: dragStateRef.current.originalContainer,
+            originalContainer: originalContainer,
           },
         });
+        
+        // Call onDrop with original container info
+        if (onDrop) {
+          const draggedItem = stateRef.current.items.find(item => item && item.id === dragStateRef.current.draggedItemId);
+          const updatedItem = draggedItem ? { ...draggedItem, container: originalContainer } : null;
+          const itemsInContainer = stateRef.current.items.filter(item => item && item.container === originalContainer);
+          const indexInContainer = itemsInContainer.findIndex(item => item && item.id === dragStateRef.current.draggedItemId);
+          const itemAbove = indexInContainer > 0 ? itemsInContainer[indexInContainer - 1] : null;
+          const itemBelow = indexInContainer < itemsInContainer.length - 1 ? itemsInContainer[indexInContainer + 1] : null;
+          
+          onDrop(
+            dragStateRef.current.draggedItemId,
+            originalContainer,
+            originalContainer,
+            updatedItem,
+            itemAbove,
+            itemBelow
+          );
+        }
+        
+        // Trigger onDragEnd callback
+        if (onDragEnd) {
+          const itemsInContainer = stateRef.current.items.filter(item => item && item.container === originalContainer);
+          const indexInContainer = itemsInContainer.findIndex(item => item && item.id === dragStateRef.current.draggedItemId);
+          const itemAbove = indexInContainer > 0 ? itemsInContainer[indexInContainer - 1] : null;
+          const itemBelow = indexInContainer < itemsInContainer.length - 1 ? itemsInContainer[indexInContainer + 1] : null;
+          
+          onDragEnd(
+            dragStateRef.current.draggedItemId,
+            originalContainer,
+            originalContainer,
+            itemAbove,
+            itemBelow
+          );
+        }
+        
         dispatch({ type: 'SET_IS_DRAGGING', payload: "" });
         dispatch({ type: 'SET_ACTIVE_CONTAINER', payload: "" });
         dispatch({ type: 'SET_DRAG_DATA', payload: { id: "", initialGroup: "", originId: "" } });
@@ -250,9 +310,9 @@ export const DraggableProvider = ({
             if (currentContainer && currentContainer !== dragStateRef.current.originalContainer) {
               // Trigger onDrop callback with the current container
               if (onDrop) {
-                const draggedItem = state.items.find(item => item && item.id === dragStateRef.current.draggedItemId);
+                const draggedItem = stateRef.current.items.find(item => item && item.id === dragStateRef.current.draggedItemId);
                 const updatedItem = draggedItem ? { ...draggedItem, container: currentContainer } : null;
-                const itemsInContainer = state.items.filter(item => item && item.container === currentContainer);
+                const itemsInContainer = stateRef.current.items.filter(item => item && item.container === currentContainer);
                 const indexInContainer = itemsInContainer.findIndex(item => item && item.id === dragStateRef.current.draggedItemId);
                 const itemAbove = indexInContainer > 0 ? itemsInContainer[indexInContainer - 1] : null;
                 const itemBelow = indexInContainer < itemsInContainer.length - 1 ? itemsInContainer[indexInContainer + 1] : null;
