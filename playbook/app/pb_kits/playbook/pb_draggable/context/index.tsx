@@ -92,16 +92,32 @@ const reducer = (state: InitialStateType, action: ActionType) => {
       return { ...state, items: newItems };
     }
 
-    // Reset item back to its original container (e.g., when drag ends without valid drop)
+    // Reset item back to its original container and position (e.g., when drag ends without valid drop)
     case "RESET_DRAG_CONTAINER": {
-      const { itemId, originalContainer } = action.payload;
+      const { itemId, originalContainer, originalIndex } = action.payload;
+      const newItems = [...state.items];
+      const draggedItem = newItems.find(item => item && item.id === itemId);
+      
+      if (!draggedItem) return state;
+      
+      const currentIndex = newItems.indexOf(draggedItem);
+      
+      // Remove from current position
+      newItems.splice(currentIndex, 1);
+      
+      // Restore container property and insert at original index
+      const restoredItem = { ...draggedItem, container: originalContainer };
+      
+      // Insert at original index, or at end if index is invalid
+      if (originalIndex !== undefined && originalIndex >= 0) {
+        newItems.splice(originalIndex, 0, restoredItem);
+      } else {
+        newItems.push(restoredItem);
+      }
+      
       return {
         ...state,
-        items: state.items.map(item =>
-          item.id === itemId
-            ? { ...item, container: originalContainer }
-            : item
-        )
+        items: newItems
       };
     }
 
@@ -138,12 +154,14 @@ export const DraggableProvider = ({
     isDragging: boolean;
     draggedItemId: string;
     originalContainer: string;
+    originalIndex: number;
     currentContainer: string;
     dropOccurred: boolean;
   }>({
     isDragging: false,
     draggedItemId: '',
     originalContainer: '',
+    originalIndex: -1,
     currentContainer: '',
     dropOccurred: false,
   });
@@ -212,6 +230,7 @@ export const DraggableProvider = ({
         payload: {
           itemId: dragStateRef.current.draggedItemId,
           originalContainer: originalContainer,
+          originalIndex: dragStateRef.current.originalIndex,
         },
       });
       
@@ -224,6 +243,7 @@ export const DraggableProvider = ({
         isDragging: false,
         draggedItemId: '',
         originalContainer: '',
+        originalIndex: -1,
         currentContainer: '',
         dropOccurred: false,
       };
@@ -263,6 +283,7 @@ export const DraggableProvider = ({
                 payload: {
                   itemId: dragStateRef.current.draggedItemId,
                   originalContainer: dragStateRef.current.originalContainer,
+                  originalIndex: dragStateRef.current.originalIndex,
                 },
               });
             }
@@ -275,6 +296,7 @@ export const DraggableProvider = ({
               isDragging: false,
               draggedItemId: '',
               originalContainer: '',
+              originalIndex: -1,
               currentContainer: '',
               dropOccurred: false,
             };
@@ -315,6 +337,7 @@ export const DraggableProvider = ({
           payload: {
             itemId: dragStateRef.current.draggedItemId,
             originalContainer: dragStateRef.current.originalContainer,
+            originalIndex: dragStateRef.current.originalIndex,
           },
         });
       }
@@ -324,6 +347,7 @@ export const DraggableProvider = ({
         isDragging: false,
         draggedItemId: '',
         originalContainer: '',
+        originalIndex: -1,
         currentContainer: '',
         dropOccurred: false,
       };
@@ -335,10 +359,14 @@ export const DraggableProvider = ({
   const handleDragStart = (id: string, container: string) => {
     // Track drag in ref for global listener
     if (enableCrossContainerPreview) {
+      // Find the original index of the item
+      const originalIndex = state.items.findIndex(item => item && item.id === id);
+      
       dragStateRef.current = {
         isDragging: true,
         draggedItemId: id,
         originalContainer: container,
+        originalIndex: originalIndex,
         currentContainer: container,
         dropOccurred: false,
       };
@@ -406,7 +434,7 @@ export const DraggableProvider = ({
     
     // If enableCrossContainerPreview is true and no drop occurred, reset item to original container
     if (enableCrossContainerPreview && !dragStateRef.current.dropOccurred && draggedItemId && originalContainer) {
-      dispatch({ type: 'RESET_DRAG_CONTAINER', payload: { itemId: draggedItemId, originalContainer } });
+      dispatch({ type: 'RESET_DRAG_CONTAINER', payload: { itemId: draggedItemId, originalContainer, originalIndex: dragStateRef.current.originalIndex } });
     }
     
     dispatch({ type: 'SET_IS_DRAGGING', payload: "" });
