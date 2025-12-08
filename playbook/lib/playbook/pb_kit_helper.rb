@@ -13,5 +13,36 @@ module Playbook
         render kit.new(props, &block), &block
       end
     end
+
+    def deprecated_kit_warning(kit_name, message = nil)
+      # Skip in test and production environments
+      return "".html_safe if Rails.env.test? || Rails.env.production?
+
+      # Build the warning message
+      base_message = "PLAYBOOK DEPRECATION WARNING\\n  ----------------------------\\n  The \\\"#{kit_name}\\\" kit is deprecated and will be removed in a future version."
+
+      full_message = if message
+                       "#{base_message} #{message}"
+                     else
+                       "#{base_message} Please migrate to the recommended alternative"
+                     end
+
+      # Escape the message for JavaScript
+      escaped_message = full_message.gsub("'", "\\\\'").gsub("\n", "\\n")
+
+      # Return a self-executing script that checks if we've already warned
+      # Uses client-side tracking to ensure one warning per page load
+      script = "<script type=\"text/javascript\">\n"
+      script += "(function() {\n"
+      script += "  if (!window.__PB_WARNED_KITS__) window.__PB_WARNED_KITS__ = new Set();\n"
+      script += "  if (!window.__PB_WARNED_KITS__.has('#{kit_name}')) {\n"
+      script += "    window.__PB_WARNED_KITS__.add('#{kit_name}');\n"
+      script += "    console.warn('#{escaped_message}');\n"
+      script += "  }\n"
+      script += "})();\n"
+      script += "</script>"
+
+      script.html_safe
+    end
   end
 end
