@@ -305,14 +305,45 @@ export const DraggableProvider = ({
       }
     };
 
+    // Detect when drag leaves document boundaries
+    const handleDragLeave = (e: DragEvent) => {
+      // Check if we're leaving the document (relatedTarget will be null)
+      if (!e.relatedTarget && dragStateRef.current.isDragging && !dragStateRef.current.dropOccurred) {
+        // Drag left the document: reset to original container immediately
+        dispatch({
+          type: 'RESET_DRAG_CONTAINER',
+          payload: {
+            itemId: dragStateRef.current.draggedItemId,
+            originalContainer: dragStateRef.current.originalContainer,
+            originalIndex: dragStateRef.current.originalIndex,
+          },
+        });
+        dispatch({ type: 'SET_IS_DRAGGING', payload: "" });
+        dispatch({ type: 'SET_ACTIVE_CONTAINER', payload: "" });
+        dispatch({ type: 'SET_DRAG_DATA', payload: { id: "", initialGroup: "", originId: "" } });
+        
+        // Clear drag state
+        dragStateRef.current = {
+          isDragging: false,
+          draggedItemId: '',
+          originalContainer: '',
+          originalIndex: -1,
+          currentContainer: '',
+          dropOccurred: false,
+        };
+      }
+    };
+
     document.addEventListener('dragover', handleGlobalDragOver);
     document.addEventListener('drop', handleGlobalDrop);
+    document.addEventListener('dragleave', handleDragLeave);
     document.addEventListener('mouseup', handleGlobalMouseUp);
     document.addEventListener('pointerup', handleGlobalMouseUp);
     
     return () => {
       document.removeEventListener('dragover', handleGlobalDragOver);
       document.removeEventListener('drop', handleGlobalDrop);
+      document.removeEventListener('dragleave', handleDragLeave);
       document.removeEventListener('mouseup', handleGlobalMouseUp);
       document.removeEventListener('pointerup', handleGlobalMouseUp);
     };
