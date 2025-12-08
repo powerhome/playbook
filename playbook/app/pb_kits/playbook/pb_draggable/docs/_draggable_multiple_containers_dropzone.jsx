@@ -86,23 +86,19 @@ const DraggableMultipleContainersDropzone = (props) => {
         enableCrossContainerPreview
         initialItems={data}
         onDragEnd={(draggedItemId, finalContainer, originalContainer, itemAbove, itemBelow) => {
-          console.log('-------I am the onDragEnd callback------');
           console.log(`Dragged Item ID: ${draggedItemId}`);
           console.log(`Final Container: ${finalContainer}`);
           console.log(`Original Container: ${originalContainer}`);
           console.log('Item Above:', itemAbove);
           console.log('Item Below:', itemBelow);
-          console.log("-------I am the end of the onDragEnd callback --------");
         }}
         onDrop={(draggedItemId, droppedContainer, originalContainer, item, itemAbove, itemBelow) => {
-          console.log('-------I am the onDrop callback------');
           console.log(`Dragged Item ID: ${draggedItemId}`);
           console.log(`Dropped Container: ${droppedContainer}`);
           console.log(`Original Container: ${originalContainer}`);
           console.log('Dropped Item:', item);
           console.log('Item Above:', itemAbove);
           console.log('Item Below:', itemBelow);
-          console.log("-------I am the end of the onDrop callback --------");
         }}
         onReorder={(items) => setInitialState(items)}
     >
