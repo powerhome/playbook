@@ -12,21 +12,3 @@
   min_date: "10/10/2020",
   picker_id: "date-picker-min-max2"
 }) %>
-
-<%= pb_rails("date_picker", props: {
-  format: "m/d/Y",
-  label: "Default date earlier than min_date (preserved)",
-  default_date: (DateTime.current - 3.days).utc.iso8601,
-  min_date: (DateTime.current - 1.day).utc.iso8601,
-  max_date: (DateTime.current + 7.days).utc.iso8601,
-  picker_id: "date-picker-min-max-default-before"
-}) %>
-
-<%= pb_rails("date_picker", props: {
-  format: "m/d/Y",
-  label: "Default date later than max_date (preserved)",
-  default_date: (DateTime.current + 10.days).utc.iso8601,
-  min_date: (DateTime.current - 1.day).utc.iso8601,
-  max_date: (DateTime.current + 7.days).utc.iso8601,
-  picker_id: "date-picker-min-max-default-after"
-}) %>
