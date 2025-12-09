@@ -184,3 +184,155 @@ test("when headerStyle is floating", () => {
   const kit = renderKit(Table, props, { headerStyle: "floating" })
   expect(kit).toHaveClass("pb_table table-sm table-responsive-collapse table-card header-floating table-collapse-sm")
 })
+
+test("renders withFilter variant with Card wrapper", () => {
+  const filterElement = <div data-testid="mock-filter">{"Mock Filter"}</div>
+
+  const { container } = render(
+    <Table
+        data={{testid: "table-with-filter"}}
+        filter={filterElement}
+        title="Test Table"
+        variant="withFilter"
+    >
+      <Table.Head>
+        <Table.Row>
+          <Table.Header>{"Column 1"}</Table.Header>
+        </Table.Row>
+      </Table.Head>
+      <Table.Body>
+        <Table.Row>
+          <Table.Cell>{"Value 1"}</Table.Cell>
+        </Table.Row>
+      </Table.Body>
+    </Table>
+  )
+
+  const card = container.querySelector('.pb_card_kit')
+  expect(card).toBeInTheDocument()
+  expect(screen.getByTestId("mock-filter")).toBeInTheDocument()
+})
+
+test("renders title when provided with withFilter variant", () => {
+  const filterElement = <div>{"Mock Filter"}</div>
+
+  render(
+    <Table
+        filter={filterElement}
+        title="Test Title"
+        variant="withFilter"
+    >
+      <Table.Head>
+        <Table.Row>
+          <Table.Header>{"Column 1"}</Table.Header>
+        </Table.Row>
+      </Table.Head>
+      <Table.Body>
+        <Table.Row>
+          <Table.Cell>{"Value 1"}</Table.Cell>
+        </Table.Row>
+      </Table.Body>
+    </Table>
+  )
+
+  expect(screen.getByText("Test Title")).toBeInTheDocument()
+})
+
+test("renders filter component in withFilter variant", () => {
+  const filterElement = <div data-testid="test-filter">{"Filter inputs"}</div>
+
+  render(
+    <Table
+        filter={filterElement}
+        variant="withFilter"
+    >
+      <Table.Head>
+        <Table.Row>
+          <Table.Header>{"Column 1"}</Table.Header>
+        </Table.Row>
+      </Table.Head>
+      <Table.Body>
+        <Table.Row>
+          <Table.Cell>{"Value 1"}</Table.Cell>
+        </Table.Row>
+      </Table.Body>
+    </Table>
+  )
+
+  expect(screen.getByTestId("test-filter")).toBeInTheDocument()
+  expect(screen.getByText("Filter inputs")).toBeInTheDocument()
+})
+
+test("renders SectionSeparator between filter and table in withFilter variant", () => {
+  const filterElement = <div>{"Filter content"}</div>
+
+  const { container } = render(
+    <Table
+        filter={filterElement}
+        variant="withFilter"
+    >
+      <Table.Head>
+        <Table.Row>
+          <Table.Header>{"Column 1"}</Table.Header>
+        </Table.Row>
+      </Table.Head>
+      <Table.Body>
+        <Table.Row>
+          <Table.Cell>{"Value 1"}</Table.Cell>
+        </Table.Row>
+      </Table.Body>
+    </Table>
+  )
+
+  const separator = container.querySelector('.pb_section_separator_kit')
+  expect(separator).toBeInTheDocument()
+})
+
+test("does not render title when not provided with withFilter variant", () => {
+  const filterElement = <div>{"Filter content"}</div>
+
+  const { container } = render(
+    <Table
+        filter={filterElement}
+        variant="withFilter"
+    >
+      <Table.Head>
+        <Table.Row>
+          <Table.Header>{"Column 1"}</Table.Header>
+        </Table.Row>
+      </Table.Head>
+      <Table.Body>
+        <Table.Row>
+          <Table.Cell>{"Value 1"}</Table.Cell>
+        </Table.Row>
+      </Table.Body>
+    </Table>
+  )
+
+  const title = container.querySelector('.pb_title_kit')
+  expect(title).not.toBeInTheDocument()
+})
+
+test("renders default variant without Card wrapper", () => {
+  render(
+    <Table
+        data={{testid: "default-table"}}
+        variant="default"
+    >
+      <Table.Head>
+        <Table.Row>
+          <Table.Header>{"Column 1"}</Table.Header>
+        </Table.Row>
+      </Table.Head>
+      <Table.Body>
+        <Table.Row>
+          <Table.Cell>{"Value 1"}</Table.Cell>
+        </Table.Row>
+      </Table.Body>
+    </Table>
+  )
+
+  const table = screen.getByTestId("default-table")
+  expect(table).toBeInTheDocument()
+  expect(table.closest('.pb_card_kit')).not.toBeInTheDocument()
+})
