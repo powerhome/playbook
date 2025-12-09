@@ -73,7 +73,7 @@ kits:
     enhanced_element_used: true
   - name: layout_&_positioning
     parent: advanced_table
-    kit_section: ["Sticky Header", "Sticky Header for Responsive Table", "Sticky Columns", "Sticky Columns with Sticky Header", "Responsive Tables", "Fullscreen", "Advanced Table Scrollbar None"]
+    kit_section: ["Sticky Header", "Sticky Header for Responsive Table", "Sticky Columns", "Sticky Columns with Sticky Header", "Responsive Tables", "Fullscreen", "Advanced Table Scrollbar None", "Multi-Header Rows"]
     platforms: *1
     status: stable
     icons_used: true

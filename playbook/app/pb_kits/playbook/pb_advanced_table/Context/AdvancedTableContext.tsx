@@ -4,6 +4,7 @@ import { useVirtualizer } from '@tanstack/react-virtual';
 import { Row } from "@tanstack/react-table";
 import { GenericObject } from "../../types";
 import { getRowHeightEstimate } from '../Utilities/TableContainerStyles';
+import { insertAlwaysAppearRows } from '../Utilities/AlwaysAppearRowsHelper';
 
 const AdvancedTableContext = createContext<any>({});
 
@@ -78,14 +79,20 @@ export const AdvancedTableProvider = ({ children, ...props }: {
       return [];
     }
 
-    const tableRows = table.getRowModel().rows;
+    const visibleRows = table.getRowModel().rows;
+    const allRows = table.getRowModel().flatRows;
+    const rowStyling = props.rowStyling || [];
+    
+    // Insert always-appear rows after their parents if needed
+    const totalRows = insertAlwaysAppearRows(visibleRows, allRows, rowStyling);
+
     const items: FlattenedItem[] = [];
     const subRowHeaders = props.subRowHeaders;
     const inlineRowLoading = props.inlineRowLoading;
     const columnDefinitions = props.columnDefinitions;
 
     // Process each row and insert special components
-    tableRows.forEach((row: Row<GenericObject>, index: number) => {
+    totalRows.forEach((row: Row<GenericObject>, index: number) => {
       const isFirstChildofSubrow = row.depth > 0 && row.index === 0;
 
       if (isFirstChildofSubrow && subRowHeaders) {
@@ -117,7 +124,7 @@ export const AdvancedTableProvider = ({ children, ...props }: {
     });
 
     const isFetching = props.isFetching || false;
-    const shouldAddFooter = table && !isFetching && tableRows.length > 0
+    const shouldAddFooter = table && !isFetching && totalRows.length > 0
 
     if (shouldAddFooter) {
       items.push({
@@ -134,6 +141,7 @@ export const AdvancedTableProvider = ({ children, ...props }: {
     props.subRowHeaders,
     props.inlineRowLoading,
     props.columnDefinitions,
+    props.rowStyling,
     // Add dependency on row model hash to refresh when data changes
     table?.getRowModel().rows.length,
     // Important: Add sorting state as a dependency to refresh when sorting changes

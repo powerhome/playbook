@@ -254,8 +254,15 @@
         border-right: 1px solid $border_light !important;
       }
     }
-    tr td:first-child {
+    tr td:first-child:not([colspan]) {
       padding-left: 8px !important;
+    }
+    // Override chrome-styles border for colspan cells (more specific than .table-card .chrome-styles:first-child)
+    tr td[colspan].chrome-styles {
+      border-right: 1px solid #E4E8F0 !important;
+    }
+    .table-card tr td[colspan].chrome-styles {
+      border-right: 1px solid #E4E8F0 !important;
     }
     tr .pb_table_td:last-child {
       padding-right: 8px !important;

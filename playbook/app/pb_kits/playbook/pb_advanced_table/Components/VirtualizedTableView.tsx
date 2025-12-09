@@ -8,6 +8,7 @@ import { GenericObject } from "../../types"
 import { isChrome } from "../Utilities/BrowserCheck"
 import { getVirtualizedRowStyle } from "../Utilities/TableContainerStyles"
 import { getRowColorClass } from "../Utilities/RowUtils"
+import { findColumnDefByAccessor } from "../Utilities/ColumnStylingHelper"
 
 import LoadingInline from "../../pb_loading_inline/_loading_inline"
 import Checkbox from "../../pb_checkbox/_checkbox"
@@ -46,6 +47,7 @@ export const VirtualizedTableView = ({
 
   const columnPinning = table.getState().columnPinning || { left: [] };
   const sortingState = JSON.stringify(table.getState().sorting || []);
+  const columnDefinitions = table.options.meta?.columnDefinitions || [];
 
   // Store column widths extracted from header
   const [columnWidths, setColumnWidths] = useState<{[key: string]: string}>({});
@@ -209,34 +211,71 @@ export const VirtualizedTableView = ({
                 </td>
               )}
 
-              {row.getVisibleCells().map((cell: Cell<GenericObject, unknown>, i: number) => {
-                const isPinnedLeft = columnPinning.left.includes(cell.column.id);
-                const isLastCell = cell.column.parent?.columns?.at(-1)?.id === cell.column.id;
-                const cellWidth = columnWidths[cell.column.id] || 'auto';
+              {(() => {
+                const visibleCells = row.getVisibleCells()
+                let cellsToSkip = 0
+                
+                return visibleCells.map((cell: Cell<GenericObject, unknown>, i: number) => {
+                  // Skip cells that are covered by a previous cell's colSpan
+                  if (cellsToSkip > 0) {
+                    cellsToSkip--
+                    return null
+                  }
 
-                return (
-                  <td
-                      align="right"
-                      className={classnames(
-                        `${cell.id}-cell position_relative`,
-                        isChrome() ? "chrome-styles" : "",
-                        isPinnedLeft && 'pinned-left',
-                        isLastCell && 'last-cell',
-                      )}
-                      key={`${cell.id}-data`}
-                      style={{ width: cellWidth }}
-                  >
-                    {collapsibleTrail && i === 0 && row.depth > 0 && renderCollapsibleTrail(row.depth)}
-                    <span id={`${cell.id}-span`}>
-                      {loading ? (
-                        <LoadingCell />
-                      ) : (
-                        flexRender(cell.column.columnDef.cell, cell.getContext())
-                      )}
-                    </span>
-                  </td>
-                );
-              })}
+                  const isPinnedLeft = columnPinning.left.includes(cell.column.id);
+                  const isLastCell = cell.column.parent?.columns?.at(-1)?.id === cell.column.id;
+                  const cellWidth = columnWidths[cell.column.id] || 'auto';
+
+                  // Find the "owning" colDefinition by accessor. Needed for multi column logic
+                  const colDef = findColumnDefByAccessor(columnDefinitions, cell.column.id)
+                  
+                  // Calculate colSpan: can be a number or a function that receives (row, value) and returns a number
+                  // If colSpan is 0, the cell will not be rendered (returns null)
+                  const cellValue = cell.getValue()
+                  let colSpan: number | undefined = undefined
+                  if (colDef?.colSpan !== undefined) {
+                    if (typeof colDef.colSpan === 'function') {
+                      colSpan = colDef.colSpan(row.original, cellValue)
+                    } else if (typeof colDef.colSpan === 'number') {
+                      colSpan = colDef.colSpan
+                    }
+                    
+                    // If colSpan is 0, don't render this cell
+                    if (colSpan === 0) {
+                      return null
+                    }
+                    
+                    // Set cellsToSkip to skip the next (colSpan - 1) cells
+                    if (colSpan && colSpan > 1) {
+                      cellsToSkip = colSpan - 1
+                    }
+                  }
+
+                  return (
+                    <td
+                        align="right"
+                        className={classnames(
+                          `${cell.id}-cell position_relative`,
+                          isChrome() ? "chrome-styles" : "",
+                          isPinnedLeft && 'pinned-left',
+                          isLastCell && 'last-cell',
+                        )}
+                        colSpan={colSpan && colSpan > 1 ? colSpan : undefined}
+                        key={`${cell.id}-data`}
+                        style={{ width: cellWidth }}
+                    >
+                      {collapsibleTrail && i === 0 && row.depth > 0 && renderCollapsibleTrail(row.depth)}
+                      <span id={`${cell.id}-span`}>
+                        {loading ? (
+                          <LoadingCell />
+                        ) : (
+                          flexRender(cell.column.columnDef.cell, cell.getContext())
+                        )}
+                      </span>
+                    </td>
+                  );
+                })
+              })()}
             </tr>
           );
         }
