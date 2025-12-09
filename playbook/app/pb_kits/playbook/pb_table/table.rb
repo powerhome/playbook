@@ -43,7 +43,9 @@ module Playbook
       prop :variant, type: Playbook::Props::Enum,
                      values: %w[default with_filter],
                      default: "default"
-      prop :filter
+      prop :filter_props, type: Playbook::Props::HashProp,
+                          default: {}
+      prop :filter_content
       prop :title, type: Playbook::Props::String,
                    default: nil
 

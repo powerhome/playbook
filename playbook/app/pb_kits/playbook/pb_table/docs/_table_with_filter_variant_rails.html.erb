@@ -10,23 +10,7 @@
         { id: 9, name: "Aaron", title: "Associate Nitro Quality Ninja", department: "Business Technology", branch: "Philadelphia", start_date: Date.new(2025, 1, 9) },
     ] %>
 
-
-<% filter = pb_rails("filter", props: {
-    background: false,
-    max_height: "50vh",
-    min_width: "xs",
-    popover_props: { width: "350px" },
-    results: 9,
-    sort_menu: [
-        { item: "Start Date", link: "?q[sorts]=started_on+asc", active: true, direction: "asc" },
-        { item: "First Name", link: "?q[sorts]=name+asc", active: false },
-        { item: "Title", link: "?q[sorts]=title+asc", active: false },
-        { item: "Department", link: "?q[sorts]=department+asc", active: false },
-        { item: "Branch", link: "?q[sorts]=branch+asc", active: false },
-        { item: "Territory ID", link: "?q[sorts]=territory_id+asc", active: false },
-    ],
-    template: "single"
-  }) do
+<% filter_content = 
     pb_rails("text_input", props: {
       label: "Territory ID",
       placeholder: "Enter Territory ID"
@@ -74,12 +58,23 @@
         variant: "secondary"
       })
     end
-  end %>
+%>
 
 <%= pb_rails("table", props: {
   variant: "with_filter",
   title: "Table Title Here",
-  filter: filter
+  filter_content: filter_content,
+  filter_props: {
+    results: 9,
+    sort_menu: [
+        { item: "Start Date", link: "?q[sorts]=started_on+asc", active: true, direction: "asc" },
+        { item: "First Name", link: "?q[sorts]=name+asc", active: false },
+        { item: "Title", link: "?q[sorts]=title+asc", active: false },
+        { item: "Department", link: "?q[sorts]=department+asc", active: false },
+        { item: "Branch", link: "?q[sorts]=branch+asc", active: false },
+        { item: "Territory ID", link: "?q[sorts]=territory_id+asc", active: false },
+    ],
+  }
 }) do %>
   <%= pb_rails("table/table_head") do %>
     <%= pb_rails("table/table_row") do %>

@@ -14,8 +14,22 @@
       flex_direction: "column",
       gap: "none"
     }) do %>
-      <%= object.filter %>
-      <%= pb_rails("section_separator") if object.filter.present? %>
+      <% if object.filter_content.present? %>
+        <%
+          default_filter_props = {
+            background: false,
+            max_height: "50vh",
+            min_width: "xs",
+            popover_props: { width: "350px" },
+            template: 'single'
+          }
+          merged_filter_props = default_filter_props.merge(object.filter_props)
+        %>
+        <%= pb_rails("filter", props: merged_filter_props) do %>
+          <%= object.filter_content %>
+        <% end %>
+      <% end %>
+      <%= pb_rails("section_separator") if object.filter_content.present? %>
       <% if object.tag == "table" %>
         <%= pb_content_tag(:table) do %>
           <%= content.presence %>
