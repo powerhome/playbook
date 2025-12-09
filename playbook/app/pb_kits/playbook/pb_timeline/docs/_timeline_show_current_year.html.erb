@@ -1,0 +1,60 @@
+<%= pb_rails("timeline", props: {orientation: "horizontal", show_date: true}) do %>
+    <%= pb_rails("timeline/item", props: {icon: "user", icon_color: "royal", line_style: "solid", date: Date.today, show_current_year: true }) do %>
+        <%= pb_rails("title_detail", props: {
+            title: "Jackson Heights",
+            detail: "37-27 74th Street"
+        }) %>
+    <% end %>
+    <%= pb_rails("timeline/item", props: {icon: "check", icon_color: "teal", line_style: "dotted" }) do %>
+        <%= pb_rails("title_detail", props: {
+            title: "Greenpoint",
+            detail: "81 Gate St Brooklyn"
+        }) %>
+    <% end %>
+    <%= pb_rails("timeline/item", props: { line_style: "solid"}) do |item| %>
+      <% item.label do %>
+        <%= pb_rails("timeline/label", props: { date: Date.today, show_current_year: true }) %>
+      <% end %>
+      <% item.step do %>
+        <%= pb_rails("timeline/step", props: { icon: 'map-marker-alt', icon_color: 'purple' }) %>
+      <% end %>
+      <% item.detail do %>
+        <%= pb_rails("title_detail", props: {
+          title: "Society Hill",
+          detail: "72 E St Astoria"
+        }) %>
+      <% end %>
+    <% end %>
+<% end %>
+
+<br /><br /><br />
+
+<%= pb_rails("timeline", props: {orientation: "vertical", show_date: true}) do %>
+    <%= pb_rails("timeline/item", props: {icon: "user", icon_color: "royal", line_style: "solid", date: Date.today, show_current_year: true }) do %>
+        <%= pb_rails("title_detail", props: {
+            title: "Jackson Heights",
+            detail: "37-27 74th Street"
+        }) %>
+    <% end %>
+    <%= pb_rails("timeline/item", props: {icon: "check", icon_color: "teal", line_style: "dotted" }) do %>
+        <%= pb_rails("title_detail", props: {
+            title: "Greenpoint",
+            detail: "81 Gate St Brooklyn"
+        }) %>
+    <% end %>
+    <%= pb_rails("timeline/item", props: { line_style: "solid"}) do |item| %>
+      <% item.label do %>
+        <%= pb_rails("timeline/label", props: { date: Date.today, show_current_year: true }) %>
+      <% end %>
+      <% item.step do %>
+        <%= pb_rails("timeline/step", props: { icon: 'map-marker-alt', icon_color: 'purple' }) %>
+      <% end %>
+      <% item.detail do %>
+        <%= pb_rails("title_detail", props: {
+          title: "Society Hill",
+          detail: "72 E St Astoria"
+        }) %>
+      <% end %>
+    <% end %>
+<% end %>
+

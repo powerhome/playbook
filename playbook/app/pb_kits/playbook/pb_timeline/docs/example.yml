@@ -5,6 +5,7 @@ examples:
   - timeline_vertical: Vertical
   - timeline_with_date: With Date
   - timeline_with_children: With Children
+  - timeline_show_current_year: Show Current Year
   - timeline_with_gap: With Gap
 
 
@@ -13,4 +14,5 @@ examples:
   - timeline_vertical: Vertical
   - timeline_with_date: With Date
   - timeline_with_children: With Children
+  - timeline_show_current_year: Show Current Year
   - timeline_with_gap: With Gap

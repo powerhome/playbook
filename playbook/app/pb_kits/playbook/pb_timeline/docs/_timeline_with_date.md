@@ -1,1 +1,1 @@
-Use the optional `showDate` prop to render the timeline kit with a visible date. If the date is from the current year, the year will not be displayed, however if date is NOT from the current year, the kit will display the year as well.
+Use the optional `showDate` prop to render the timeline kit with a visible date. By default, if the date is from the current year, the year will not be displayed; however, if the date is NOT from the current year, the kit will display the year as well.
