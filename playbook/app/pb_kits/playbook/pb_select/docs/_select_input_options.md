@@ -1,0 +1,1 @@
+Use the `input_options` / `inputOptions` prop to pass additional attributes directly to the underlying `<select>` element instead of the outer wrapper. This is useful for applying data attributes, custom IDs, or other HTML attributes that need to be on the select element itself.

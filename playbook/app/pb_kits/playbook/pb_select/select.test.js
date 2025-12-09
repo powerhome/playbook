@@ -66,3 +66,26 @@ test('returns multiple variant', () => {
 
   expect(selectElement).toHaveAttribute('multiple', '');
 });
+
+test('inputOptions are passed to select element', () => {
+  render(
+    <Select
+        data={{ testid: testId }}
+        inputOptions={{
+          id: 'custom-select-id',
+          className: 'custom-select-class',
+          'aria-label': 'Custom aria label',
+        }}
+        label="Favorite Food"
+        name="food"
+        options={options}
+    />
+  )
+
+  const kit = screen.getByTestId(testId)
+  const selectElement = kit.querySelector('select')
+
+  expect(selectElement).toHaveAttribute('id', 'custom-select-id')
+  expect(selectElement).toHaveClass('custom-select-class')
+  expect(selectElement).toHaveAttribute('aria-label', 'Custom aria label')
+});

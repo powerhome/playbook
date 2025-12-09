@@ -15,6 +15,7 @@ examples:
   - select_inline_compact: Select Inline Compact
   - select_attributes: Select W/ Attributes
   - select_multiple: Select Multiple
+  - select_input_options: Input Options
 
 
 
@@ -33,6 +34,7 @@ examples:
   - select_inline_compact: Select Inline Compact
   - select_multiple: Select Multiple
   - select_react_hook: React Hook
+  - select_input_options: Input Options
 
   swift:
   - select_default_swift: Default

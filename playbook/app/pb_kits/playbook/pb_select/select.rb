@@ -14,6 +14,8 @@ module Playbook
       prop :error
       prop :include_blank
       prop :inline, type: Playbook::Props::Boolean, default: false
+      prop :input_options, type: Playbook::Props::HashProp,
+                           default: {}
       prop :label
       prop :multiple, type: Playbook::Props::Boolean, default: false
       prop :name
@@ -38,7 +40,7 @@ module Playbook
           multiple: multiple,
           onchange: onchange,
           include_blank: include_blank,
-        }.merge(attributes)
+        }.merge(attributes).merge(input_options)
       end
 
       def classname

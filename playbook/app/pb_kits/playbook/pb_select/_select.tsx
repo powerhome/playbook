@@ -29,6 +29,7 @@ type SelectProps = {
   id?: string,
   includeBlank?: string,
   inline?: boolean,
+  inputOptions?: {[key: string]: string | number | boolean | (() => void)},
   label?: string,
   margin: string,
   marginBottom: string,
@@ -63,6 +64,7 @@ const Select = ({
   label,
   htmlOptions = {},
   inline = false,
+  inputOptions = {},
   multiple = false,
   name,
   onChange = () => undefined,
@@ -94,14 +96,17 @@ const Select = ({
   const angleDown = getAllIcons()["angleDown"].icon as unknown as { [key: string]: SVGElement }
 
   const selectWrapperClass = classnames(buildCss('pb_select_kit_wrapper'), { error }, className)
+  const selectId = (inputOptions?.id as string) || name
+
   const selectBody =(() =>{
     if (children) return children
     return (
       <select
           {...htmlOptions}
           {...domSafeProps(props)}
+          {...inputOptions}
           disabled={disabled}
-          id={name}
+          id={selectId}
           multiple={multiple}
           name={name}
           onChange={onChange}
@@ -125,7 +130,7 @@ const Select = ({
       {label &&
         <label
             className="pb_select_kit_label"
-            htmlFor={name}
+            htmlFor={selectId}
         >
           <Caption 
               dark={props.dark}
@@ -135,7 +140,7 @@ const Select = ({
       }
       <label
           className={selectWrapperClass}
-          htmlFor={name}
+          htmlFor={selectId}
       >
         {selectBody}
         { multiple !== true ?
