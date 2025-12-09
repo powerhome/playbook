@@ -27,4 +27,8 @@ The Table kit automatically sets these Filter defaults (which you can override v
 - `minWidth="xs"`
 - `popoverProps={{ width: "350px" }}`
 
-This replaces the manual composition of Card, Flex, Title, Filter, and SectionSeparator components.
+
+**IMPORTANT NOTE**: 
+The purpose of this variant is to provide an easy way to set up a Table with a Filter with Design standards applied by default.
+
+If you are looking for more customization than this embedded variant provides, you may be better served by using the individual kits as demonstrating in our Table Filter Card Building Block as seen [here](https://playbook.powerapp.cloud/building_blocks/table_filter_card/react).

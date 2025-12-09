@@ -87,8 +87,9 @@ const Table = (props: TableProps): React.ReactElement => {
     const isTableTag = tag === 'table'
     const dynamicInlineProps = globalInlineProps(props)
     const stickyRightColumnReversed = stickyRightColumn.reverse()
-    const isCardVariant = variant === 'withFilter'
-    const effectiveContainer = isCardVariant ? false : container
+
+    const isFilterVariant = variant === 'withFilter'
+    const effectiveContainer = isFilterVariant ? false : container
 
     const classNames = classnames(
         'pb_table',
@@ -222,6 +223,7 @@ const Table = (props: TableProps): React.ReactElement => {
         addDataTitle()
     }, [])
 
+// ------------ Default Table (non-filter variant rendering) ------------
     const renderTable = () => {
         const tableElement = responsive === 'scroll' ? (
             <div className='table-responsive-scroll'>
@@ -277,7 +279,9 @@ const Table = (props: TableProps): React.ReactElement => {
 
         return tableElement
     }
+// ------------ End Default Table (non-filter variant rendering) ------------
 
+// ------------ variant = 'withFilter' rendering  ------------
     const renderCardVariant = () => {
         // Render table element
         const tableElement = responsive === 'scroll' ? (
@@ -332,7 +336,7 @@ const Table = (props: TableProps): React.ReactElement => {
             )
         )
 
-        // Default filter props that can be overridden
+        // Default filter props that CAN be overridden (All props from Filter kit CAN be used, but these are the ones we set as defaults)
         const defaultFilterProps = {
             background: false,
             maxHeight: "50vh",
@@ -388,10 +392,13 @@ const Table = (props: TableProps): React.ReactElement => {
             </>
         )
     }
+// ------------ End variant = 'withFilter' rendering  ------------
+
+
 
     return (
         <>
-            {isCardVariant ? renderCardVariant() : renderTable()}
+            {isFilterVariant ? renderCardVariant() : renderTable()}
         </>
     )
 }
