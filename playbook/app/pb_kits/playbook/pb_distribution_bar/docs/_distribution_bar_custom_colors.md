@@ -1,1 +1,1 @@
-You can customize the order of the colors you would like to use by using the `colors` prop. Only the data and status colors will work for Playbook charts. See the [design page](https://playbook.powerapp.cloud/token/colors) for reference.
+You can customize the order of the colors you would like to use by using the `colors` prop. Only the data and status colors will work for Playbook charts. See the [design page](https://playbook.powerapp.cloud/tokens/colors) for reference.

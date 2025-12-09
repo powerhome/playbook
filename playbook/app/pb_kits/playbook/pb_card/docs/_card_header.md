@@ -1,1 +1,1 @@
-Card headers pass category, product, status and background colors only. List of all category, product, status and background colors can be viewed <a href="https://playbook.powerapp.cloud/token/colors" target="_blank">here</a>.
+Card headers pass category, product, status and background colors only. List of all category, product, status and background colors can be viewed <a href="https://playbook.powerapp.cloud/tokens/colors" target="_blank">here</a>.
