@@ -186,12 +186,10 @@ test("when headerStyle is floating", () => {
 })
 
 test("renders withFilter variant with Card wrapper", () => {
-  const filterElement = <div data-testid="mock-filter">{"Mock Filter"}</div>
-
   const { container } = render(
     <Table
         data={{testid: "table-with-filter"}}
-        filter={filterElement}
+        filterContent={<div>{"Mock Filter"}</div>}
         title="Test Table"
         variant="withFilter"
     >
@@ -210,15 +208,14 @@ test("renders withFilter variant with Card wrapper", () => {
 
   const card = container.querySelector('.pb_card_kit')
   expect(card).toBeInTheDocument()
-  expect(screen.getByTestId("mock-filter")).toBeInTheDocument()
+  const filter = container.querySelector('.pb_filter_kit')
+  expect(filter).toBeInTheDocument()
 })
 
 test("renders title when provided with withFilter variant", () => {
-  const filterElement = <div>{"Mock Filter"}</div>
-
   render(
     <Table
-        filter={filterElement}
+        filterContent={<div>{"Mock Filter"}</div>}
         title="Test Title"
         variant="withFilter"
     >
@@ -239,11 +236,9 @@ test("renders title when provided with withFilter variant", () => {
 })
 
 test("renders filter component in withFilter variant", () => {
-  const filterElement = <div data-testid="test-filter">{"Filter inputs"}</div>
-
-  render(
+  const { container } = render(
     <Table
-        filter={filterElement}
+        filterContent={<div data-testid="test-filter">{"Filter inputs"}</div>}
         variant="withFilter"
     >
       <Table.Head>
@@ -259,16 +254,14 @@ test("renders filter component in withFilter variant", () => {
     </Table>
   )
 
-  expect(screen.getByTestId("test-filter")).toBeInTheDocument()
-  expect(screen.getByText("Filter inputs")).toBeInTheDocument()
+  const filter = container.querySelector('.pb_filter_kit')
+  expect(filter).toBeInTheDocument()
 })
 
 test("renders SectionSeparator between filter and table in withFilter variant", () => {
-  const filterElement = <div>{"Filter content"}</div>
-
   const { container } = render(
     <Table
-        filter={filterElement}
+        filterContent={<div>{"Filter content"}</div>}
         variant="withFilter"
     >
       <Table.Head>
@@ -289,11 +282,9 @@ test("renders SectionSeparator between filter and table in withFilter variant", 
 })
 
 test("does not render title when not provided with withFilter variant", () => {
-  const filterElement = <div>{"Filter content"}</div>
-
   const { container } = render(
     <Table
-        filter={filterElement}
+        filterContent={<div>{"Filter content"}</div>}
         variant="withFilter"
     >
       <Table.Head>

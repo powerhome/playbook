@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { Button, Date as DateKit, DatePicker, Dropdown, Filter, Select, Table, TextInput, Typeahead } from "playbook-ui"
+import { Button, Date as DateKit, DatePicker, Dropdown, Select, Table, TextInput, Typeahead, Flex } from "playbook-ui"
 
 const TableWithFilterVariant = () => {
   const [territory, setTerritory] = useState("")
@@ -17,93 +17,84 @@ const TableWithFilterVariant = () => {
     { id: 9, name: "Aaron", title: "Associate Nitro Quality Ninja", department: "Business Technology", branch: "Philadelphia", startDate: "2025-01-09" },
   ]
 
-  // This is the filter element passed to the Table component
-  const filterElement = (
-    <Filter
-        background={false}
-        maxHeight="50vh"
-        minWidth="xs"
-        popoverProps={{ width: "350px" }}
-        results={50}
-        sortOptions={{
-          territory_id: "Territory ID",
-          first_name: "Name",
-          started_on: "Start Date",
-          department_name: "Department",
-          title_name: "Title",
-          branch_branch_name: "Branch",
-        }}
-        sortValue={[{ name: 'started_on', dir: 'asc' }]}
-    >
-      {({ closePopover }) => (
-        <>
-          <TextInput
-              label="Territory ID"
-              onChange={event => setTerritory(event.target.value)}
-              value={territory}
-          />
+  const filterContent = ({ closePopover }) => (
+          <>
+            <TextInput
+                label="Territory ID"
+                onChange={event => setTerritory(event.target.value)}
+                value={territory}
+            />
 
-          <TextInput
-              label="First Name"
-              onChange={event => setFirstName(event.target.value)}
-              value={firstName}
-          />
+            <TextInput
+                label="First Name"
+                onChange={event => setFirstName(event.target.value)}
+                value={firstName}
+            />
 
-          <Typeahead
-              label="Title"
-              options={[
-                { key: "senior-ux-engineer", label: "Senior UX Engineer", value: "senior-ux-engineer" },
-                { key: "ux-engineer", label: "UX Engineer", value: "ux-engineer" },
-                { key: "ux-designer", label: "UX Designer", value: "ux-designer" }
-              ]}
-          />
+            <Typeahead
+                label="Title"
+                options={[
+                  { key: "senior-ux-engineer", label: "Senior UX Engineer", value: "senior-ux-engineer" },
+                  { key: "ux-engineer", label: "UX Engineer", value: "ux-engineer" },
+                  { key: "ux-designer", label: "UX Designer", value: "ux-designer" }
+                ]}
+            />
 
-          <Select
-              blankSelection="All Departments"
-              label="Department"
-              options={[
-                { value: "Business Technology", label: "Business Technology", key: "business-technology" },
-                { value: "Customer Development", label: "Customer Development", key: "customer-development" },
-                { value: "Talent Acquisition", label: "Talent Acquisition", key: "talent-acquisition" }
-              ]}
-          />
+            <Select
+                blankSelection="All Departments"
+                label="Department"
+                options={[
+                  { value: "Business Technology", label: "Business Technology", key: "business-technology" },
+                  { value: "Customer Development", label: "Customer Development", key: "customer-development" },
+                  { value: "Talent Acquisition", label: "Talent Acquisition", key: "talent-acquisition" }
+                ]}
+            />
 
-          <Dropdown
-              label="Branch"
-              options={[
-                { key: "Philadelphia", label: "Philadelphia", value: "philadelphia" },
-                { key: "New York", label: "New York", value: "new-york" },
-                { key: "Austin", label: "Austin", value: "austin" }
-              ]}
-          />
+            <Dropdown
+                label="Branch"
+                options={[
+                  { key: "Philadelphia", label: "Philadelphia", value: "philadelphia" },
+                  { key: "New York", label: "New York", value: "new-york" },
+                  { key: "Austin", label: "Austin", value: "austin" }
+                ]}
+            />
 
-          <DatePicker
-              label="Start Date"
-              paddingY="sm"
-              pickerId="startedOn"
-          />
-
-          <Button
-              marginTop="sm"
-              onClick={() => {
-                alert("No filtering functionality - just a pattern demo!")
-                closePopover()
-              }}
-              text="Filter"
-          />
-          <Button
-              marginTop="sm"
-              text="Defaults"
-              variant="secondary"
-          />
-        </>
-      )}
-    </Filter>
-  )
+            <DatePicker
+                label="Start Date"
+                paddingY="sm"
+                pickerId="startedOn"
+            />
+            <Flex spacing="between">
+            <Button
+                onClick={() => {
+                  alert("No filtering functionality - just a pattern demo!")
+                  closePopover()
+                }}
+                text="Filter"
+            />
+            <Button
+                text="Defaults"
+                variant="secondary"
+            />
+            </Flex>
+          </>
+        )
   
   return (
     <Table 
-        filter={filterElement}
+        filterContent={filterContent}
+        filterProps={{
+          results: 50,
+          sortOptions: {
+            territory_id: "Territory ID",
+            first_name: "Name",
+            started_on: "Start Date",
+            department_name: "Department",
+            title_name: "Title",
+            branch_branch_name: "Branch",
+          },
+          sortValue: [{ name: 'started_on', dir: 'asc' }],
+        }}
         title="Table Title Here"
         variant="withFilter"
     >

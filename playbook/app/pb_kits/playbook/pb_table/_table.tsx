@@ -14,6 +14,7 @@ import Card from '../pb_card/_card'
 import Flex from '../pb_flex/_flex'
 import Title from '../pb_title/_title'
 import SectionSeparator from '../pb_section_separator/_section_separator'
+import Filter from '../pb_filter/_filter'
 
 type TableProps = {
     aria?: { [key: string]: string },
@@ -25,7 +26,8 @@ type TableProps = {
     data?: { [key: string]: string },
     dataTable: boolean,
     disableHover?: boolean,
-    filter?: React.ReactElement | React.ReactElement[],
+    filterProps?: { [key: string]: any },
+    filterContent?: any,
     headerStyle?: "default" | "borderless" | "floating"
     htmlOptions?: { [key: string]: string | number | boolean | (() => void) },
     id?: string,
@@ -57,7 +59,8 @@ const Table = (props: TableProps): React.ReactElement => {
         data = {},
         dataTable = false,
         disableHover = false,
-        filter,
+        filterProps = {},
+        filterContent,
         headerStyle = "default",
         htmlOptions = {},
         id,
@@ -329,6 +332,17 @@ const Table = (props: TableProps): React.ReactElement => {
             )
         )
 
+        // Default filter props that can be overridden
+        const defaultFilterProps = {
+            background: false,
+            maxHeight: "50vh",
+            minWidth: "xs",
+            popoverProps: { width: "350px" },
+        }
+
+        // Merge default props with user-provided props (user props override defaults)
+        const mergedFilterProps = { ...defaultFilterProps, ...filterProps }
+
         return (
             <>
                 {title && (
@@ -362,8 +376,12 @@ const Table = (props: TableProps): React.ReactElement => {
                         flexDirection="column"
                         gap="none"
                     >
-                        {filter}
-                        {filter && <SectionSeparator />}
+                        {filterContent && (
+                            <Filter {...mergedFilterProps}>
+                                {filterContent}
+                            </Filter>
+                        )}
+                        {filterContent && <SectionSeparator />}
                         {tableElement}
                     </Flex>
                 </Card>
