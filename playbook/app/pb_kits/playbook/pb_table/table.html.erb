@@ -1,17 +1,48 @@
-<% if object.responsive_classname %>
-  <% responsive_class = object.responsive_classname %>
-<% else %>
-  <% responsive_class = nil %>
-<% end %>
-
-<%= content_tag(:div, class: responsive_class, 'data-pb-table-wrapper' => true) do %>
-  <% if object.tag == "table" %>
-    <%= pb_content_tag(:table) do %>
-      <%= content.presence %>
+<% if object.with_filter_variant? %>
+  <%= pb_rails("title", props: {
+    padding_left: { xs: "sm", sm: "sm", md: "xl", lg: "xl", xl: "xl", default: "xl" },
+    padding_y: "md",
+    size: 3,
+    text: object.title
+  }) if object.title.present? %>
+  <%= pb_rails("card", props: {
+    margin_x: { xs: "sm", sm: "sm", md: "xl", lg: "xl", xl: "xl", default: "xl" },
+    padding: "none"
+  }) do %>
+    <%= pb_rails("flex", props: {
+      align: "stretch",
+      flex_direction: "column",
+      gap: "none"
+    }) do %>
+      <%= object.filter %>
+      <%= pb_rails("section_separator") if object.filter.present? %>
+      <% if object.tag == "table" %>
+        <%= pb_content_tag(:table) do %>
+          <%= content.presence %>
+        <% end %>
+      <% else %>
+        <%= pb_content_tag do %>
+          <%= content.presence %>
+        <% end %>
+      <% end %>
     <% end %>
+  <% end %>
+<% else %>
+  <% if object.responsive_classname %>
+    <% responsive_class = object.responsive_classname %>
   <% else %>
-    <%= pb_content_tag do %>
-      <%= content.presence %>
+    <% responsive_class = nil %>
+  <% end %>
+
+  <%= content_tag(:div, class: responsive_class, 'data-pb-table-wrapper' => true) do %>
+    <% if object.tag == "table" %>
+      <%= pb_content_tag(:table) do %>
+        <%= content.presence %>
+      <% end %>
+    <% else %>
+      <%= pb_content_tag do %>
+        <%= content.presence %>
+      <% end %>
     <% end %>
   <% end %>
 <% end %>

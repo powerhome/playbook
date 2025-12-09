@@ -1,0 +1,109 @@
+    <% users = [
+        { id: 1, name: "Jennifer", title: "Associate Scrum Master", department: "Business Technology", branch: "Philadelphia", start_date: Date.new(2025, 1, 1) },
+        { id: 2, name: "Nick", title: "UX Engineer II", department: "Business Technology", branch: "Philadelphia", start_date: Date.new(2025, 1, 2) },
+        { id: 3, name: "Nida", title: "Senior UX Engineer", department: "Business Technology", branch: "Philadelphia", start_date: Date.new(2025, 1, 3) },
+        { id: 4, name: "Justin", title: "Director of User Experience Engineering", department: "Business Technology", branch: "Philadelphia", start_date: Date.new(2025, 1, 4) },
+        { id: 5, name: "Edward", title: "UX Designer II", department: "Business Technology", branch: "Philadelphia", start_date: Date.new(2025, 1, 5) },
+        { id: 6, name: "Elisa", title: "UX Engineer", department: "Business Technology", branch: "Philadelphia", start_date: Date.new(2025, 1, 6) },
+        { id: 7, name: "Gary", title: "UX Engineer", department: "Business Technology", branch: "Philadelphia", start_date: Date.new(2025, 1, 7) },
+        { id: 8, name: "Barkley", title: "Nitro Quality Ninja", department: "Business Technology", branch: "Philadelphia", start_date: Date.new(2025, 1, 8) },
+        { id: 9, name: "Aaron", title: "Associate Nitro Quality Ninja", department: "Business Technology", branch: "Philadelphia", start_date: Date.new(2025, 1, 9) },
+    ] %>
+
+
+<% filter = pb_rails("filter", props: {
+    background: false,
+    max_height: "50vh",
+    min_width: "xs",
+    popover_props: { width: "350px" },
+    results: 9,
+    sort_menu: [
+        { item: "Start Date", link: "?q[sorts]=started_on+asc", active: true, direction: "asc" },
+        { item: "First Name", link: "?q[sorts]=name+asc", active: false },
+        { item: "Title", link: "?q[sorts]=title+asc", active: false },
+        { item: "Department", link: "?q[sorts]=department+asc", active: false },
+        { item: "Branch", link: "?q[sorts]=branch+asc", active: false },
+        { item: "Territory ID", link: "?q[sorts]=territory_id+asc", active: false },
+    ],
+    template: "single"
+  }) do
+    pb_rails("text_input", props: {
+      label: "Territory ID",
+      placeholder: "Enter Territory ID"
+    }) +
+    pb_rails("text_input", props: {
+      label: "First Name",
+      placeholder: "Enter Name"
+    }) +
+    pb_rails("typeahead", props: {
+      label: "Title",
+      options: [
+        { label: "Senior UX Engineer", value: "senior-ux-engineer" },
+        { label: "UX Engineer", value: "ux-engineer" },
+        { label: "UX Designer", value: "ux-designer" }
+      ]
+    }) +
+    pb_rails("select", props: {
+      blank_selection: "All Departments",
+      label: "Department",
+      options: [
+        { value: "Business Technology", text: "Business Technology" },
+        { value: "Customer Development", text: "Customer Development" },
+        { value: "Talent Acquisition", text: "Talent Acquisition" }
+      ]
+    }) +
+    pb_rails("dropdown", props: {
+      label: "Branch",
+      options: [
+        { label: "Philadelphia", value: "philadelphia" },
+        { label: "New York", value: "new-york" },
+        { label: "Austin", value: "austin" }
+      ]
+    }) +
+    pb_rails("date_picker", props: {
+      label: "Start Date",
+      padding_y: "sm",
+      picker_id: "startedOn"
+    }) +
+    pb_rails("flex", props: { spacing: "between" }) do
+      pb_rails("button", props: {
+        text: "Filter",
+      }) +
+      pb_rails("button", props: {
+        text: "Defaults",
+        variant: "secondary"
+      })
+    end
+  end %>
+
+<%= pb_rails("table", props: {
+  variant: "with_filter",
+  title: "Table Title Here",
+  filter: filter
+}) do %>
+  <%= pb_rails("table/table_head") do %>
+    <%= pb_rails("table/table_row") do %>
+      <%= pb_rails("table/table_header", props: { text: "Territory ID" }) %>
+      <%= pb_rails("table/table_header", props: { text: "Name" }) %>
+      <%= pb_rails("table/table_header", props: { text: "Title" }) %>
+      <%= pb_rails("table/table_header", props: { text: "Department" }) %>
+      <%= pb_rails("table/table_header", props: { text: "Branch" }) %>
+      <%= pb_rails("table/table_header", props: { text: "Start Date", text_align: "right" }) %>
+    <% end %>
+  <% end %>
+
+  <%= pb_rails("table/table_body") do %>
+    <% users.each do |user| %>
+      <%= pb_rails("table/table_row") do %>
+        <%= pb_rails("table/table_cell", props: { margin_x: { xs: "sm" }, number_spacing: "tabular" }) { user[:id].to_s } %>
+        <%= pb_rails("table/table_cell", props: { margin_x: { xs: "sm" } }) { user[:name] } %>
+        <%= pb_rails("table/table_cell", props: { margin_x: { xs: "sm" } }) { user[:title] } %>
+        <%= pb_rails("table/table_cell", props: { margin_x: { xs: "sm" } }) { user[:department] } %>
+        <%= pb_rails("table/table_cell", props: { margin_x: { xs: "sm" } }) { user[:branch] } %>
+        <%= pb_rails("table/table_cell", props: { margin_x: { xs: "sm" } }) do %>
+           <%= pb_rails("date", props: {alignment: "right", date: user[:start_date].to_s}) %>        
+        <% end %>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>

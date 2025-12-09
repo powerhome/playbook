@@ -40,6 +40,12 @@ module Playbook
       prop :header_style, type: Playbook::Props::Enum,
                           values: %w[default borderless floating],
                           default: "default"
+      prop :variant, type: Playbook::Props::Enum,
+                     values: %w[default with_filter],
+                     default: "default"
+      prop :filter
+      prop :title, type: Playbook::Props::String,
+                   default: nil
 
       def classname
         generate_classname(
@@ -52,6 +58,10 @@ module Playbook
 
       def responsive_classname
         responsive ? "table-responsive-#{responsive}" : nil
+      end
+
+      def with_filter_variant?
+        variant == "with_filter"
       end
 
     private
@@ -73,11 +83,13 @@ module Playbook
       end
 
       def container_class
-        container ? "table-card" : nil
+        effective_container = variant == "with_filter" ? false : container
+        effective_container ? "table-card" : nil
       end
 
       def collapse_class
-        responsive != "none" ? "table-collapse-#{collapse}" : ""
+        effective_collapse = variant == "with_filter" && collapse == "sm" ? "md" : collapse
+        responsive != "none" ? "table-collapse-#{effective_collapse}" : ""
       end
 
       def sticky_class

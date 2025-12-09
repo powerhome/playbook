@@ -40,6 +40,7 @@ examples:
     - table_with_selectable_rows: Table with Selectable Rows
     - table_with_header_style_borderless: Header Style Borderless
     - table_with_header_style_floating: Header Style Floating
+    - table_with_filter_variant_rails: Variant with Filter
 
   react:
     - table_sm: Small
