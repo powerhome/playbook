@@ -2,7 +2,7 @@
   <% if label %>
     <%= label %>
   <% else %>
-    <%= pb_rails("timeline/label", props: { date: date }) %>
+    <%= pb_rails("timeline/label", props: { date: date, show_current_year: show_current_year }) %>
   <% end %>
 
   <% if step %>

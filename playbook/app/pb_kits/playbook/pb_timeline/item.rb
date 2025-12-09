@@ -12,6 +12,8 @@ module Playbook
       prop :line_style, type: Playbook::Props::Enum,
                         values: %w[solid dotted],
                         default: "solid"
+      prop :show_current_year, type: Playbook::Props::Boolean,
+                               default: false
 
       renders_one :label
       renders_one :step
