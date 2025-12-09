@@ -38,3 +38,4 @@ export { default as TableWithSelectableRows } from './_table_with_selectable_row
 export { default as TableWithClickableRows } from './_table_with_clickable_rows.jsx'
 export { default as TableWithHeaderStyleBorderless } from './_table_with_header_style_borderless.jsx'
 export { default as TableWithHeaderStyleFloating } from './_table_with_header_style_floating.jsx'
+export { default as TableWithFilterVariant } from './_table_with_filter_variant.jsx'

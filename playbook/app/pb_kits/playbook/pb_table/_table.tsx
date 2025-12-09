@@ -10,6 +10,10 @@ import {
     TableCell,
 } from "./subcomponents";
 import { addDataTitle } from './utilities/addDataTitle'
+import Card from '../pb_card/_card'
+import Flex from '../pb_flex/_flex'
+import Title from '../pb_title/_title'
+import SectionSeparator from '../pb_section_separator/_section_separator'
 
 type TableProps = {
     aria?: { [key: string]: string },
@@ -21,6 +25,7 @@ type TableProps = {
     data?: { [key: string]: string },
     dataTable: boolean,
     disableHover?: boolean,
+    filter?: React.ReactElement | React.ReactElement[],
     headerStyle?: "default" | "borderless" | "floating"
     htmlOptions?: { [key: string]: string | number | boolean | (() => void) },
     id?: string,
@@ -33,20 +38,26 @@ type TableProps = {
     stickyRightColumn?: string[],
     striped?: boolean,
     tag?: "table" | "div",
+    title?: string,
+    variant?: "default" | "withFilter",
     verticalBorder?: boolean,
 } & GlobalProps
+
+type AllSizes = "none" | "xxs" | "xs" | "sm" | "md" | "lg" | "xl" | "xxl" | "auto" | "initial" | "inherit"
 
 const Table = (props: TableProps): React.ReactElement => {
     const {
         aria = {},
+        variant = 'default',
         children,
         className,
-        collapse = 'sm',
+        collapse = variant === 'withFilter' ? 'md' : 'sm',
         container = true,
         dark,
         data = {},
         dataTable = false,
         disableHover = false,
+        filter,
         headerStyle = "default",
         htmlOptions = {},
         id,
@@ -59,6 +70,7 @@ const Table = (props: TableProps): React.ReactElement => {
         stickyRightColumn= [],
         striped = false,
         tag = 'table',
+        title,
         verticalBorder = false,
     } = props
 
@@ -72,13 +84,15 @@ const Table = (props: TableProps): React.ReactElement => {
     const isTableTag = tag === 'table'
     const dynamicInlineProps = globalInlineProps(props)
     const stickyRightColumnReversed = stickyRightColumn.reverse()
+    const isCardVariant = variant === 'withFilter'
+    const effectiveContainer = isCardVariant ? false : container
 
     const classNames = classnames(
         'pb_table',
         `table-${size}`,
         `table-responsive-${responsive}`,
         {
-            'table-card': container,
+            'table-card': effectiveContainer,
             'table-dark': dark,
             'data_table': dataTable,
             'single-line': singleLine,
@@ -205,36 +219,10 @@ const Table = (props: TableProps): React.ReactElement => {
         addDataTitle()
     }, [])
 
-    return (
-        <>
-            {responsive === 'scroll' ? (
-                <div className='table-responsive-scroll'>
-                    {isTableTag ? (
-                        <table
-                            {...ariaProps}
-                            {...dataProps}
-                            {...htmlProps}
-                            className={classNames}
-                            id={id}
-                            style={dynamicInlineProps}
-                        >
-                            {children}
-                        </table>
-                    ) : (
-                        <div
-                            {...ariaProps}
-                            {...dataProps}
-                            {...htmlProps}
-                            className={classNames}
-                            id={id}
-                            style={dynamicInlineProps}
-                        >
-                            {children}
-                        </div>
-                    )}
-                </div>
-            ) : (
-                isTableTag ? (
+    const renderTable = () => {
+        const tableElement = responsive === 'scroll' ? (
+            <div className='table-responsive-scroll'>
+                {isTableTag ? (
                     <table
                         {...ariaProps}
                         {...dataProps}
@@ -256,8 +244,136 @@ const Table = (props: TableProps): React.ReactElement => {
                     >
                         {children}
                     </div>
-                )
-            )}
+                )}
+            </div>
+        ) : (
+            isTableTag ? (
+                <table
+                    {...ariaProps}
+                    {...dataProps}
+                    {...htmlProps}
+                    className={classNames}
+                    id={id}
+                    style={dynamicInlineProps}
+                >
+                    {children}
+                </table>
+            ) : (
+                <div
+                    {...ariaProps}
+                    {...dataProps}
+                    {...htmlProps}
+                    className={classNames}
+                    id={id}
+                    style={dynamicInlineProps}
+                >
+                    {children}
+                </div>
+            )
+        )
+
+        return tableElement
+    }
+
+    const renderCardVariant = () => {
+        // Render table element
+        const tableElement = responsive === 'scroll' ? (
+            <div className='table-responsive-scroll'>
+                {isTableTag ? (
+                    <table
+                        {...ariaProps}
+                        {...dataProps}
+                        {...htmlProps}
+                        className={classNames}
+                        id={id}
+                        style={dynamicInlineProps}
+                    >
+                        {children}
+                    </table>
+                ) : (
+                    <div
+                        {...ariaProps}
+                        {...dataProps}
+                        {...htmlProps}
+                        className={classNames}
+                        id={id}
+                        style={dynamicInlineProps}
+                    >
+                        {children}
+                    </div>
+                )}
+            </div>
+        ) : (
+            isTableTag ? (
+                <table
+                    {...ariaProps}
+                    {...dataProps}
+                    {...htmlProps}
+                    className={classNames}
+                    id={id}
+                    style={dynamicInlineProps}
+                >
+                    {children}
+                </table>
+            ) : (
+                <div
+                    {...ariaProps}
+                    {...dataProps}
+                    {...htmlProps}
+                    className={classNames}
+                    id={id}
+                    style={dynamicInlineProps}
+                >
+                    {children}
+                </div>
+            )
+        )
+
+        return (
+            <>
+                {title && (
+                    <Title         
+                        paddingLeft={{
+                            xs: "sm",
+                            sm: "sm",
+                            md: "xl",
+                            lg: "xl",
+                            xl: "xl",
+                            default: "xl",
+                        } as any}
+                        paddingY="md"
+                        size={3}
+                        text={title} 
+                    />
+                )}
+                <Card
+                    marginX={{
+                        xs: "sm",
+                        sm: "sm",
+                        md: "xl",
+                        lg: "xl",
+                        xl: "xl",
+                        default: "xl",
+                    } as any}
+                    padding="none"
+                >
+                    <Flex
+                        align="stretch"
+                        flexDirection="column"
+                        gap="none"
+                    >
+                        {filter}
+                        {filter && <SectionSeparator />}
+                        {tableElement}
+                    </Flex>
+                </Card>
+            </>
+        )
+    }
+
+    return (
+        <>
+            {isCardVariant ? renderCardVariant() : renderTable()}
         </>
     )
 }
