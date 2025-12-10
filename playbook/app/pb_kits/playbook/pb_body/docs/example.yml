@@ -5,6 +5,7 @@ examples:
   - body_articles: Best settings for articles
   - body_styled: Styled tags
   - body_truncate: Truncate
+  - body_with_phone_number: Phone Number
 
   react:
   - body_light: Default
@@ -12,3 +13,4 @@ examples:
   - body_articles: Best settings for articles
   - body_styled: Styled tags
   - body_truncate: Truncate
+  - body_with_phone_number: Phone Number

@@ -33,12 +33,14 @@ require "playbook/vertical_align"
 require "playbook/height"
 require "playbook/min_height"
 require "playbook/max_height"
+require "playbook/phone_number_helper"
 
 module Playbook
   include ActionView::Helpers
 
   class KitBase < ViewComponent::Base
     include Playbook::PbKitHelper
+    include Playbook::PhoneNumberHelper
     include Playbook::Props
     include Playbook::Classnames
     include Playbook::Spacing

@@ -1,8 +1,11 @@
 # frozen_string_literal: true
 
+require "playbook/phone_number_helper"
+
 module Playbook
   module PbKitHelper
     include ::Playbook::PbFormsHelper
+    include ::Playbook::PhoneNumberHelper
 
     def pb_rails(kit_name, props: {}, &block)
       kit = Playbook::KitResolver.resolve(kit_name.to_s)
