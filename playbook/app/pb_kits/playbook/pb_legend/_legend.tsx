@@ -1,9 +1,8 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import classnames from 'classnames'
 
 import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps'
-import { deprecatedKitWarning } from '../utilities/deprecated'
 
 import Body from '../pb_body/_body'
 import Title from '../pb_title/_title'
@@ -32,10 +31,6 @@ const Legend = (props: LegendProps) => {
     prefixText,
     text,
   } = props
-
-  useEffect(() => {
-    deprecatedKitWarning('Legend')
-  }, [])
 
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
