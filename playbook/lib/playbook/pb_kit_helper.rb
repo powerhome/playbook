@@ -30,10 +30,14 @@ module Playbook
       # Escape the message for JavaScript
       escaped_message = full_message.gsub("'", "\\\\'").gsub("\n", "\\n")
 
-      # Return a self-executing script that checks if we've already warned
+      # Return a self-executing script that checks if we're already warned
       # Uses client-side tracking to ensure one warning per page load
+      # Only shows warnings on localhost (matching React behavior)
       script = "<script type=\"text/javascript\">\n"
       script += "(function() {\n"
+      script += "  var hostname = window.location.hostname;\n"
+      script += "  var isLocalDev = hostname === 'localhost' || hostname === '127.0.0.1' || hostname.endsWith('.local') || hostname.includes('local.') || !hostname;\n"
+      script += "  if (!isLocalDev) return;\n"
       script += "  if (!window.__PB_WARNED_KITS__) window.__PB_WARNED_KITS__ = new Set();\n"
       script += "  if (!window.__PB_WARNED_KITS__.has('#{kit_name}')) {\n"
       script += "    window.__PB_WARNED_KITS__.add('#{kit_name}');\n"
