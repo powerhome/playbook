@@ -738,7 +738,7 @@
     td, .pb_table_td {
       border-width: 0 0 1px 0;
 
-      &:first-child {
+      &:first-child:not([colspan]) {
         border-radius: 0 0 0 4px;
         border-width: 0 0 1px 1px;
       }
@@ -746,6 +746,15 @@
         border-radius: 0 0 4px 0;
         border-width: 0 1px 1px 0;
       }
+    }
+  }
+  
+  // Target cells with rowspan that span into the last row
+  // These cells are in previous rows but visually span down to the last row
+  .pb_advanced_table_body {
+    // Target rowspan cells in the second-to-last row that span into the last row
+    tr:nth-last-child(2) td[rowspan]:first-child {
+      border-bottom-left-radius: 4px;
     }
   }
 
