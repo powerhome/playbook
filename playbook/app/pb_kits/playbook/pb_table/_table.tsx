@@ -398,7 +398,6 @@ const Table = (props: TableProps): React.ReactElement => {
                         {pagination && (
                             <>
                                 {pagination}
-                                <SectionSeparator />
                             </>
                         )}
                     </Flex>
