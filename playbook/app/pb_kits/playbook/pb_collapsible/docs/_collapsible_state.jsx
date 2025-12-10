@@ -22,7 +22,6 @@ const CollapsibleState = (props) => {
     <Collapsible
         collapsed={isCollapsed}
         icon={["plus", "minus"]}
-        iconColor='white'
         padding="none"
     >
       <Collapsible.Main padding="sm" 
@@ -41,7 +40,6 @@ const CollapsibleState = (props) => {
     <Collapsible
         collapsed={isCollapsed}
         icon={["plus", "minus"]}
-        iconColor='white'
         padding="none"
     >
       <Collapsible.Main padding="sm" 
@@ -60,7 +58,6 @@ const CollapsibleState = (props) => {
     <Collapsible
         collapsed={isCollapsed}
         icon={["plus", "minus"]}
-        iconColor='white'
         padding="none"
     >
         <Collapsible.Main padding="sm" 

@@ -27,12 +27,12 @@ type colorMap = {
 };
 
 const colorMap = {
-  default: "#242B42",
-  light: "#687887",
-  lighter: "#C1CDD6",
-  link: "#0056CF",
-  error: "#FF2229",
-  success: "#00CA74",
+  default:"text_lt_default",
+  light: "text_lt_light",
+  lighter: "text_lt_lighter",
+  link: "primary",
+  error: "error",
+  success: "text_dk_success_sm",
 };
 
 const CollapsibleIcon = ({
@@ -68,9 +68,10 @@ const CollapsibleIcon = ({
               className="icon_wrapper"
               key={icon ? showIcon(icon)[0] : "chevron-down"}
               onClick={(e) => handleIconClick(e)}
-              style={{ verticalAlign: "middle", color: color }}
+              style={{ verticalAlign: "middle"}}
           >
             <Icon
+                color={color}
                 icon={icon ? showIcon(icon)[0] : "chevron-down"}
                 size={iconSize}
             />
@@ -80,9 +81,10 @@ const CollapsibleIcon = ({
               className="icon_wrapper"
               key={icon ? showIcon(icon)[1] : "chevron-up"}
               onClick={(e) => handleIconClick(e)}
-              style={{ verticalAlign: "middle", color: color }}
+              style={{ verticalAlign: "middle" }}
           >
             <Icon
+                color={color}
                 icon={icon ? showIcon(icon)[1] : "chevron-up"}
                 size={iconSize}
             />

@@ -251,4 +251,28 @@ describe('DatePicker Kit', () => {
       expect(input).toHaveValue(DateTime.getYearStartDate(new Date()).formatDate() + " to " + new Date().formatDate())
     })
   })
+
+
+  test('displays defaultDate when it is later than maxDate', async () => {
+    const testId = 'datepicker-out-of-range-after'
+    const futureDateString = '01/15/2020'
+    const maxDateString = '01/10/2020'
+    
+    render(
+      <DatePicker
+          data={{ testid: testId }}
+          defaultDate={futureDateString}
+          format="m/d/Y"
+          maxDate={maxDateString}
+          pickerId="date-picker-out-of-range-after"
+      />
+    )
+
+    const kit = screen.getByTestId(testId)
+    const input = within(kit).getByPlaceholderText('Select Date')
+
+    await waitFor(() => {
+      expect(input).toHaveValue('01/15/2020')
+    }, { timeout: 5000 })
+  })
 })

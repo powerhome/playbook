@@ -13,6 +13,7 @@ body {
   position: relative;
   display: flex;
   flex-direction: column;
+  background-color: $white;
 }
 
 .pb--page {
@@ -51,7 +52,7 @@ body {
       .pb--kits,
       .pb--kit-show,
       .kit-show-wrapper {
-        padding: 0 ($space_xl + $space_md) $space_xl;
+        padding: 0 ($space_xl + $space_md) 0;
         @include break_at($nav_breakpoint) {
           padding: $space-lg;
         }

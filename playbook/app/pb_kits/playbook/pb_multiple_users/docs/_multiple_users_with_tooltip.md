@@ -1,0 +1,1 @@
+Use the `withTooltip` boolean prop to enable setting user-specific tooltip content via the `tooltip` property in the users array.

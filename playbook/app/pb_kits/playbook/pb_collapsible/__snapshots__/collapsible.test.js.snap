@@ -25,11 +25,11 @@ exports[`html structure is correct 1`] = `
           >
             <div
               class="icon_wrapper"
-              style="vertical-align: middle; color: rgb(193, 205, 214);"
+              style="vertical-align: middle;"
             >
               <svg
                 aria-label="chevron-down icon"
-                class="pb_custom_icon svg-inline--fa svg_lg svg_fw"
+                class="pb_custom_icon svg-inline--fa color_text_lt_lighter svg_lg svg_fw"
                 color="currentColor"
                 fill="none"
                 height="auto"

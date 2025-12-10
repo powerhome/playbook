@@ -276,3 +276,18 @@ test('multi-value badges have tabIndex and focus class when focused', () => {
   })
 })
 
+test('input display none shows number of selected items', () => {
+  render(
+    <Typeahead
+        data={{ testid: 'input-display-none-test' }}
+        defaultValue={[options[0], options[1]]}
+        inputDisplay="none"
+        isMulti
+        options={options}
+    />
+  )
+
+  const kit = screen.getByTestId('input-display-none-test')
+  const inputDisplayDiv = kit.querySelector(".pb_typeahead_selection_count")
+  expect(inputDisplayDiv).toHaveTextContent("2 items selected") 
+})

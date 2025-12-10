@@ -25,6 +25,10 @@ module Playbook
       prop :is_multi, type: Playbook::Props::Boolean,
                       default: true
 
+      prop :input_display, type: Playbook::Props::Enum,
+                           values: %w[none pills],
+                           default: "pills"
+
       prop :pills, type: Playbook::Props::Boolean,
                    default: false
 
@@ -78,7 +82,7 @@ module Playbook
       end
 
       def is_react?
-        pills || !is_multi || wrapped
+        pills || !is_multi || wrapped || input_display == "none"
       end
 
       def typeahead_react_options
@@ -91,6 +95,7 @@ module Playbook
           id: id,
           inline: inline,
           isMulti: is_multi,
+          inputDisplay: input_display,
           label: label,
           marginBottom: margin_bottom,
           multiKit: multi_kit,

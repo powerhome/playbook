@@ -2,11 +2,11 @@
   id: nil,
   class: object.classnames ) do %>
   <% if object.label %>
-    <label class="pb_select_kit_label" for="<%= object.name %>">
+    <label class="pb_select_kit_label" for="<%= object.input_options[:id] || object.name %>">
       <%= pb_rails("caption", props: { text: object.label, dark: object.dark }) %>
     </label>
   <% end %>
-  <label class="<%= object.select_wrapper_class %>" for="<%= object.name %>">
+  <label class="<%= object.select_wrapper_class %>" for="<%= object.input_options[:id] || object.name %>">
     <% if content.present? %>
       <%= content %>
       <%= pb_rails("body", props: { status: "negative", text: object.error }) %>

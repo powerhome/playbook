@@ -1,7 +1,7 @@
 examples:
 
   rails:
-  - background_light: Light
+  - background_light: Default
   - background_white: White
   - background_gradient: Gradient
   - background_image: Image
@@ -11,7 +11,7 @@ examples:
   - background_size: Size
 
   react:
-  - background_light: Light
+  - background_light: Default
   - background_white: White
   - background_gradient: Gradient
   - background_image: Image

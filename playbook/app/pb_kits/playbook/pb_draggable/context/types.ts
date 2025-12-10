@@ -23,7 +23,7 @@ export type ActionType =
   | { type: 'REORDER_ITEMS'; payload: { dragId: string; targetId: string } }
   | { type: 'REORDER_ITEMS_CROSS_CONTAINER'; payload: { dragId: string; targetId: string; newContainer: string } }
   | { type: 'MOVE_TO_CONTAINER_END'; payload: { dragId: string; newContainer: string } }
-  | { type: 'RESET_DRAG_CONTAINER'; payload: { itemId: string; originalContainer: string } };
+  | { type: 'RESET_DRAG_CONTAINER'; payload: { itemId: string; originalContainer: string, originalIndex: number } };
 
   export interface DropZoneConfig {
     type?: 'ghost' | 'outline' | 'shadow' | 'line';

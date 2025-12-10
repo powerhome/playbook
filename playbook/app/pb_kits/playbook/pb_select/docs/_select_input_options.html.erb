@@ -1,0 +1,16 @@
+<%= pb_rails("select", props: {
+  label: "Favorite Food",
+  name: "favorite_food",
+  options: [
+    { value: "pizza", value_text: "Pizza" },
+    { value: "tacos", value_text: "Tacos" },
+    { value: "sushi", value_text: "Sushi" }
+  ],
+  input_options: {
+    'aria-label': "Select your favorite food",
+    class: "custom-select-class",
+    data: { controller: "search", action: "change->search#filter" },
+    id: "favorite-food-select"
+  }
+}) %>
+
