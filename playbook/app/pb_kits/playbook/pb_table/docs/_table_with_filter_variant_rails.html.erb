@@ -96,7 +96,7 @@
         <%= pb_rails("table/table_cell", props: { margin_x: { xs: "sm" } }) { user[:department] } %>
         <%= pb_rails("table/table_cell", props: { margin_x: { xs: "sm" } }) { user[:branch] } %>
         <%= pb_rails("table/table_cell", props: { margin_x: { xs: "sm" } }) do %>
-           <%= pb_rails("date", props: {alignment: "right", date: user[:start_date].to_s}) %>        
+           <%= pb_rails("date", props: {alignment: "right", date: user[:start_date].to_s, show_current_year: true } ) %>        
         <% end %>
       <% end %>
     <% end %>

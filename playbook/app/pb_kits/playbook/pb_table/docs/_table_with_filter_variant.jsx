@@ -124,6 +124,7 @@ const TableWithFilterVariant = () => {
             <Table.Cell marginX={{ xs: "sm" }}>
               <DateKit 
                   alignment="right"
+                  showCurrentYear
                   value={user.startDate}
               />
             </Table.Cell>
