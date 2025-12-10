@@ -8,6 +8,8 @@ module Playbook
       prop :contact_type
       prop :contact_value
       prop :contact_detail
+      prop :icon_enabled, type: Playbook::Props::Boolean, default: true
+      prop :unstyled, type: Playbook::Props::Boolean, default: false
 
       def classname
         generate_classname("pb_contact_kit")

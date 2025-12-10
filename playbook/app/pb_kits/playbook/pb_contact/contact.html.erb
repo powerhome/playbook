@@ -1,24 +1,23 @@
-<%= pb_content_tag do %>
-  <%= pb_rails("body", props: { 
-        tag: "span", 
-        classname: "pb_contact_kit", 
-        color: "light",
-        dark: object.dark
-  }) do %>
-    <% if contact_type == "email" %>
-      <%= pb_rails("icon", props: { 
-            custom_icon: Playbook::Engine::root.join(envelope_path),
-            fixed_width: true,
-            dark: object.dark
-      }) %>
+<% if unstyled %>
+  <%= content_tag :span, class: object.classname, id: object.id, data: object.data, aria: object.aria, **object.html_options do %>
+    <% if icon_enabled %>
+      <% if contact_type == "email" %>
+        <%= pb_rails("icon", props: { 
+              custom_icon: Playbook::Engine::root.join(envelope_path),
+              fixed_width: true,
+              dark: object.dark
+        }) %>
+      <% else %>
+        <%= pb_rails("icon", props: { 
+              icon: object.contact_icon, 
+              fixed_width: true,
+              dark: object.dark
+        }) %>
+      <% end %>
+      <%= " #{object.formatted_contact_value}" if object.contact_value %>
     <% else %>
-      <%= pb_rails("icon", props: { 
-            icon: object.contact_icon, 
-            fixed_width: true,
-            dark: object.dark
-      }) %>
+      <%= object.formatted_contact_value if object.contact_value %>
     <% end %>
-    <%= object.formatted_contact_value if object.contact_value %>
 
     <%= pb_rails("caption", props: { 
           text: object.contact_detail, 
@@ -26,5 +25,40 @@
           size: 'xs',
           dark: object.dark
         }) if object.contact_detail %>
+  <% end %>
+<% else %>
+  <%= pb_content_tag do %>
+    <%= pb_rails("body", props: { 
+          tag: "span", 
+          classname: "pb_contact_kit", 
+          color: "light",
+          dark: object.dark
+    }) do %>
+      <% if icon_enabled %>
+        <% if contact_type == "email" %>
+          <%= pb_rails("icon", props: { 
+                custom_icon: Playbook::Engine::root.join(envelope_path),
+                fixed_width: true,
+                dark: object.dark
+          }) %>
+        <% else %>
+          <%= pb_rails("icon", props: { 
+                icon: object.contact_icon, 
+                fixed_width: true,
+                dark: object.dark
+          }) %>
+        <% end %>
+        <%= " #{object.formatted_contact_value}" if object.contact_value %>
+      <% else %>
+        <%= object.formatted_contact_value if object.contact_value %>
+      <% end %>
+
+      <%= pb_rails("caption", props: { 
+            text: object.contact_detail, 
+            tag: 'span', 
+            size: 'xs',
+            dark: object.dark
+          }) if object.contact_detail %>
+    <% end %>
   <% end %>
 <% end %>

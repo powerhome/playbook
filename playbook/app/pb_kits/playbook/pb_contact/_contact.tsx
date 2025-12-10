@@ -61,7 +61,9 @@ type ContactProps = {
   data?: { [key: string]: string }
   dark?: boolean
   htmlOptions?: { [key: string]: string | number | boolean | (() => void) }
+  iconEnabled?: boolean
   id?: string
+  unstyled?: boolean
 }
 
 const Contact = (props: ContactProps): React.ReactElement => {
@@ -74,7 +76,9 @@ const Contact = (props: ContactProps): React.ReactElement => {
     data = {},
     dark = false,
     htmlOptions = {},
+    iconEnabled = true,
     id,
+    unstyled = false,
   } = props
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
@@ -85,6 +89,51 @@ const Contact = (props: ContactProps): React.ReactElement => {
     className
   )
 
+  const formattedValue = formatContact(contactValue, contactType)
+  const content = (
+    <>
+      {iconEnabled && (contactType === 'email' ? (
+        <Icon 
+            className="svg-inline--fa envelope"
+            customIcon={envelopeIcon} 
+            dark={dark} 
+            fixedWidth 
+        />
+      ) : (
+        <Icon
+            dark={dark}
+            fixedWidth
+            icon={contactTypeMap[contactType] || 'phone'}
+        />
+      ))}
+      {iconEnabled ? ` ${formattedValue} ` : formattedValue}
+      {contactDetail && (
+        <Caption
+            dark={dark}
+            size="xs"
+            tag="span"
+            text={contactDetail}
+        />
+      )}
+    </>
+  )
+
+  // When unstyled, render just the content without Body wrapper
+  if (unstyled) {
+    return (
+      <span
+          {...ariaProps}
+          {...dataProps}
+          {...htmlProps}
+          className={classes}
+          id={id}
+      >
+        {content}
+      </span>
+    )
+  }
+
+  // Default styled mode with Body wrapper
   return (
     <div
         {...ariaProps}
@@ -95,33 +144,11 @@ const Contact = (props: ContactProps): React.ReactElement => {
     >
       <Body
           className="pb_contact_kit"
-          color={"light"} 
+          color="light" 
           dark={dark}
           tag="span"
       >
-          {contactType === 'email' ? (
-            <Icon 
-                className="svg-inline--fa envelope"
-                customIcon={envelopeIcon} 
-                dark={dark} 
-                fixedWidth 
-            />
-          ) : (
-            <Icon
-                dark={dark}
-                fixedWidth
-                icon={contactTypeMap[contactType] || 'phone'}
-            />
-          )}
-        {` ${formatContact(contactValue, contactType)} `}
-        {contactDetail && (
-          <Caption
-              dark={dark}
-              size="xs"
-              tag="span"
-              text={contactDetail}
-          />
-        )}
+        {content}
       </Body>
     </div>
   )
