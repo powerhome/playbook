@@ -31,6 +31,10 @@
         <% end %>
       <% end %>
       <%= pb_rails("section_separator") if object.filter_content.present? %>
+      <% if object.pagination.present? %>
+        <%= object.pagination %>
+        <%= pb_rails("section_separator") %>
+      <% end %>
       <% if object.tag == "table" %>
         <%= pb_content_tag(:table) do %>
           <%= content.presence %>
@@ -39,6 +43,9 @@
         <%= pb_content_tag do %>
           <%= content.presence %>
         <% end %>
+      <% end %>
+      <% if object.pagination.present? %>
+        <%= object.pagination %>
       <% end %>
     <% end %>
   <% end %>

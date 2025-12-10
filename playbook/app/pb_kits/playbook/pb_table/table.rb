@@ -46,6 +46,7 @@ module Playbook
       prop :filter_props, type: Playbook::Props::HashProp,
                           default: {}
       prop :filter_content
+      prop :pagination
       prop :title, type: Playbook::Props::String,
                    default: nil
 

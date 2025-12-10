@@ -8,6 +8,23 @@
         { id: 7, name: "Gary", title: "UX Engineer", department: "Business Technology", branch: "Philadelphia", start_date: Date.new(2025, 1, 7) },
         { id: 8, name: "Barkley", title: "Nitro Quality Ninja", department: "Business Technology", branch: "Philadelphia", start_date: Date.new(2025, 1, 8) },
         { id: 9, name: "Aaron", title: "Associate Nitro Quality Ninja", department: "Business Technology", branch: "Philadelphia", start_date: Date.new(2025, 1, 9) },
+        { id: 10, name: "Sarah", title: "Senior Product Manager", department: "Business Technology", branch: "New York", start_date: Date.new(2025, 1, 10) },
+        { id: 11, name: "Michael", title: "Software Engineer III", department: "Business Technology", branch: "Austin", start_date: Date.new(2025, 1, 11) },
+        { id: 12, name: "Emma", title: "Data Analyst II", department: "Customer Development", branch: "Philadelphia", start_date: Date.new(2025, 1, 12) },
+        { id: 13, name: "David", title: "QA Engineer", department: "Business Technology", branch: "New York", start_date: Date.new(2025, 1, 13) },
+        { id: 14, name: "Lisa", title: "UX Researcher", department: "Business Technology", branch: "Philadelphia", start_date: Date.new(2025, 1, 14) },
+        { id: 15, name: "James", title: "DevOps Engineer", department: "Business Technology", branch: "Austin", start_date: Date.new(2025, 1, 15) },
+        { id: 16, name: "Anna", title: "Product Designer", department: "Business Technology", branch: "Philadelphia", start_date: Date.new(2025, 1, 16) },
+        { id: 17, name: "Robert", title: "Backend Engineer", department: "Business Technology", branch: "New York", start_date: Date.new(2025, 1, 17) },
+        { id: 18, name: "Maria", title: "Frontend Developer", department: "Business Technology", branch: "Austin", start_date: Date.new(2025, 1, 18) },
+        { id: 19, name: "William", title: "Tech Lead", department: "Business Technology", branch: "Philadelphia", start_date: Date.new(2025, 1, 19) },
+        { id: 20, name: "Jessica", title: "Scrum Master", department: "Business Technology", branch: "New York", start_date: Date.new(2025, 1, 20) },
+        { id: 21, name: "Daniel", title: "Software Architect", department: "Business Technology", branch: "Austin", start_date: Date.new(2025, 1, 21) },
+        { id: 22, name: "Laura", title: "Business Analyst", department: "Customer Development", branch: "Philadelphia", start_date: Date.new(2025, 1, 22) },
+        { id: 23, name: "Chris", title: "Security Engineer", department: "Business Technology", branch: "New York", start_date: Date.new(2025, 1, 23) },
+        { id: 24, name: "Ashley", title: "UX Engineer III", department: "Business Technology", branch: "Austin", start_date: Date.new(2025, 1, 24) },
+        { id: 25, name: "Kevin", title: "Platform Engineer", department: "Business Technology", branch: "Philadelphia", start_date: Date.new(2025, 1, 25) },
+        { id: 26, name: "Michelle", title: "Content Designer", department: "Business Technology", branch: "New York", start_date: Date.new(2025, 1, 26) },
     ] %>
 
 <% filter_content = 
@@ -56,13 +73,17 @@
     end
 %>
 
+<%# Replace "model" in pagination here with your specific data source %>
+<% pagination_element = pb_rails("pagination", props: { model: @users, view: self, padding_y:"xs", margin_left:"lg" }) %>
+
 <%= pb_rails("table", props: {
   variant: "with_filter",
   title: "Table Title Here",
   filter_content: filter_content,
+  pagination: pagination_element,
   filter_props: {
-    id: "user-table-filters-1",
-    results: 9,
+    id: "user-table-filters-2",
+    results: users.length,
     sort_menu: [
         { item: "Start Date", link: "?q[sorts]=started_on+asc", active: true, direction: "asc" },
         { item: "First Name", link: "?q[sorts]=name+asc", active: false },
