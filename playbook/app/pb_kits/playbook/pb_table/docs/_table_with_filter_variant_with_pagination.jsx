@@ -1,7 +1,8 @@
 import React, { useState } from "react"
-import { Button, Date as DateKit, DatePicker, Dropdown, Select, Table, TextInput, Typeahead, Flex } from "playbook-ui"
+import { Button, Date as DateKit, DatePicker, Dropdown, Pagination, Select, Table, TextInput, Typeahead, Flex } from "playbook-ui"
 
- // Mock Data for Table  
+
+// Mock Data for Table
   const users = [
     { id: 1, name: "Jennifer", title: "Associate Scrum Master", department: "Business Technology", branch: "Philadelphia", startDate: "2025-01-01" },
     { id: 2, name: "Nick", title: "UX Engineer II", department: "Business Technology", branch: "Philadelphia", startDate: "2025-01-02" },
@@ -12,12 +13,43 @@ import { Button, Date as DateKit, DatePicker, Dropdown, Select, Table, TextInput
     { id: 7, name: "Gary", title: "UX Engineer", department: "Business Technology", branch: "Philadelphia", startDate: "2025-01-07" },
     { id: 8, name: "Barkley", title: "Nitro Quality Ninja", department: "Business Technology", branch: "Philadelphia", startDate: "2025-01-08" },
     { id: 9, name: "Aaron", title: "Associate Nitro Quality Ninja", department: "Business Technology", branch: "Philadelphia", startDate: "2025-01-09" },
+    { id: 10, name: "Sarah", title: "Senior Product Manager", department: "Business Technology", branch: "New York", startDate: "2025-01-10" },
+    { id: 11, name: "Michael", title: "Software Engineer III", department: "Business Technology", branch: "Austin", startDate: "2025-01-11" },
+    { id: 12, name: "Emma", title: "Data Analyst II", department: "Customer Development", branch: "Philadelphia", startDate: "2025-01-12" },
+    { id: 13, name: "David", title: "QA Engineer", department: "Business Technology", branch: "New York", startDate: "2025-01-13" },
+    { id: 14, name: "Lisa", title: "UX Researcher", department: "Business Technology", branch: "Philadelphia", startDate: "2025-01-14" },
+    { id: 15, name: "James", title: "DevOps Engineer", department: "Business Technology", branch: "Austin", startDate: "2025-01-15" },
+    { id: 16, name: "Anna", title: "Product Designer", department: "Business Technology", branch: "Philadelphia", startDate: "2025-01-16" },
+    { id: 17, name: "Robert", title: "Backend Engineer", department: "Business Technology", branch: "New York", startDate: "2025-01-17" },
+    { id: 18, name: "Maria", title: "Frontend Developer", department: "Business Technology", branch: "Austin", startDate: "2025-01-18" },
+    { id: 19, name: "William", title: "Tech Lead", department: "Business Technology", branch: "Philadelphia", startDate: "2025-01-19" },
+    { id: 20, name: "Jessica", title: "Scrum Master", department: "Business Technology", branch: "New York", startDate: "2025-01-20" },
+    { id: 21, name: "Daniel", title: "Software Architect", department: "Business Technology", branch: "Austin", startDate: "2025-01-21" },
+    { id: 22, name: "Laura", title: "Business Analyst", department: "Customer Development", branch: "Philadelphia", startDate: "2025-01-22" },
+    { id: 23, name: "Chris", title: "Security Engineer", department: "Business Technology", branch: "New York", startDate: "2025-01-23" },
+    { id: 24, name: "Ashley", title: "UX Engineer III", department: "Business Technology", branch: "Austin", startDate: "2025-01-24" },
+    { id: 25, name: "Kevin", title: "Platform Engineer", department: "Business Technology", branch: "Philadelphia", startDate: "2025-01-25" },
+    { id: 26, name: "Michelle", title: "Content Designer", department: "Business Technology", branch: "New York", startDate: "2025-01-26" },
   ]
 
-const TableWithFilterVariant = () => {
-  const [territory, setTerritory] = useState("")
 
-  // --------Filter content example ------
+const TableWithFilterVariantWithPagination = () => {
+  const [territory, setTerritory] = useState("")
+  // ------Pagination-----
+  const [activePage, setActivePage] = useState(1)
+    // Calculate pagination
+  const itemsPerPage = 20
+  const totalPages = Math.ceil(users.length / itemsPerPage)
+  const startIndex = (activePage - 1) * itemsPerPage
+  const endIndex = startIndex + itemsPerPage
+  const currentData = users.slice(startIndex, endIndex)
+  
+  const onPageChange = (page) => {
+    setActivePage(page)
+  }
+  // ------End Pagination-----
+  
+// -------Filter content example ------
   const filterContent = ({ closePopover }) => (
           <>
             <TextInput
@@ -25,7 +57,6 @@ const TableWithFilterVariant = () => {
                 onChange={event => setTerritory(event.target.value)}
                 value={territory}
             />
-
             <Typeahead
                 label="Title"
                 options={[
@@ -75,7 +106,21 @@ const TableWithFilterVariant = () => {
           </>
         )
   // -------End Filter content example ------
-  
+
+  // -------Pagination element example ------
+  const paginationElement = (
+    <Pagination
+        current={activePage}
+        key={`pagination-${activePage}`}
+        marginLeft="lg"
+        onChange={onPageChange}
+        paddingY="xs"
+        range={5}
+        total={totalPages}
+    />
+  )
+  // -------End Pagination element example ------
+
   return (
     <Table 
         filterContent={filterContent}
@@ -91,6 +136,7 @@ const TableWithFilterVariant = () => {
           },
           sortValue: [{ name: 'started_on', dir: 'asc' }],
         }}
+        pagination={paginationElement}
         title="Table Title Here"
         variant="withFilter"
     >
@@ -105,7 +151,7 @@ const TableWithFilterVariant = () => {
         </Table.Row>
       </Table.Head>
       <Table.Body>
-        {users.map((user) => (
+        {currentData.map((user) => (
           <Table.Row key={user.id}>
             <Table.Cell 
                 marginX={{ xs: "sm" }}
@@ -131,4 +177,4 @@ const TableWithFilterVariant = () => {
   )
 }
 
-export default TableWithFilterVariant
+export default TableWithFilterVariantWithPagination

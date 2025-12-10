@@ -32,6 +32,7 @@ type TableProps = {
     htmlOptions?: { [key: string]: string | number | boolean | (() => void) },
     id?: string,
     outerPadding?: "none" | "xxs" | "xs" | "sm" | "md" | "lg" | "xl",
+    pagination?: React.ReactElement,
     responsive?: "collapse" | "scroll" | "none",
     singleLine?: boolean,
     size?: "sm" | "md" | "lg",
@@ -65,6 +66,7 @@ const Table = (props: TableProps): React.ReactElement => {
         htmlOptions = {},
         id,
         outerPadding = '',
+        pagination,
         responsive = 'collapse',
         singleLine = false,
         size = 'sm',
@@ -386,7 +388,19 @@ const Table = (props: TableProps): React.ReactElement => {
                             </Filter>
                         )}
                         {filterContent && <SectionSeparator />}
+                        {pagination && (
+                            <>
+                                {pagination}
+                                <SectionSeparator />
+                            </>
+                        )}
                         {tableElement}
+                        {pagination && (
+                            <>
+                                {pagination}
+                                <SectionSeparator />
+                            </>
+                        )}
                     </Flex>
                 </Card>
             </>

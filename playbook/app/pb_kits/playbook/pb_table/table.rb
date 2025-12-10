@@ -50,7 +50,7 @@ module Playbook
                    default: nil
 
       def size_class
-        variant == "with_filter" && size == "md" ? "sm" : collapse
+        variant === "with_filter" && size == "md" ? "sm" : size
       end
 
       def classname
