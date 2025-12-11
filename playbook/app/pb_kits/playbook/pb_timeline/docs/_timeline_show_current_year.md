@@ -1,0 +1,1 @@
+By default, the Timeline kit does NOT display the year if it is the current year. If you want to display the current year you can do so by setting `showCurrentYear`/`show_current_year` to true. Pass it to `Timeline.Item`/`timeline/item` when using its `date` prop, or to `Timeline.Label`/`timeline/label` if following the "With Children" pattern.

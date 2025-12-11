@@ -170,3 +170,54 @@ test('should pass showDate prop with Children', () => {
     const kit = screen.getByTestId(testId)
     expect(kit).toHaveClass('pb_timeline_kit_horizontal_with_date')
 })
+
+test('should pass showCurrentYear prop to items with date', () => {
+    const currentYear = new Date().getFullYear().toString()
+    render(
+        <Timeline
+            data={{ testid: testId }}
+            showDate
+        >
+            <Timeline.Item
+                date={new Date()}
+                icon="user"
+                iconColor="royal"
+                showCurrentYear
+            >
+                <TitleDetail
+                    detail="37-27 74th Street"
+                    title="Jackson Heights"
+                />
+            </Timeline.Item>
+        </Timeline>
+    )
+    const kit = screen.getByTestId(testId)
+    expect(kit).toBeInTheDocument()
+    const yearCaption = kit.querySelector('.pb_caption_kit_xs')
+    expect(yearCaption).toBeInTheDocument()
+    expect(yearCaption.textContent).toEqual(currentYear)
+})
+
+test('should not show current year by default', () => {
+    const currentYear = new Date().getFullYear().toString()
+    render(
+        <Timeline
+            data={{ testid: testId }}
+            showDate
+        >
+            <Timeline.Item
+                date={new Date()}
+                icon="user"
+                iconColor="royal"
+            >
+                <TitleDetail
+                    detail="37-27 74th Street"
+                    title="Jackson Heights"
+                />
+            </Timeline.Item>
+        </Timeline>
+    )
+    const kit = screen.getByTestId(testId)
+    expect(kit).toBeInTheDocument()
+    expect(kit).not.toHaveTextContent(currentYear)
+})

@@ -9,6 +9,7 @@ type TimelineLabelProps = {
   children?: React.ReactNode,
   className?: string,
   htmlOptions?: { [key: string]: any },
+  showCurrentYear?: boolean,
 } & GlobalProps
 
 const TimelineLabel: React.FC<TimelineLabelProps> = ({
@@ -16,6 +17,7 @@ const TimelineLabel: React.FC<TimelineLabelProps> = ({
   children,
   className,
   htmlOptions = {},
+  showCurrentYear = false,
   ...props
 }) => {
   const htmlProps = buildHtmlProps(htmlOptions)
@@ -28,6 +30,7 @@ const TimelineLabel: React.FC<TimelineLabelProps> = ({
       {date && (
         <DateStacked align="center"
             date={date}
+            showCurrentYear={showCurrentYear}
             size="sm"
         />
       )}

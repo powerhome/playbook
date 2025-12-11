@@ -3,7 +3,8 @@
     <%= pb_rails("date_stacked", props: {
         date: object.date,
         size: "sm",
-        align: "center"
+        align: "center",
+        show_current_year: object.show_current_year
     }) %>
   <% else %>
     <%= content.presence %>

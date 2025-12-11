@@ -18,6 +18,7 @@ type ItemProps = {
   icon?: string,
   iconColor?: 'default' | 'royal' | 'blue' | 'purple' | 'teal' | 'red' | 'yellow' | 'green',
   lineStyle?: 'solid' | 'dotted',
+  showCurrentYear?: boolean,
 } & GlobalProps
 
 function isElementOfType<P>(
@@ -35,6 +36,7 @@ const TimelineItem = ({
   icon = 'user',
   iconColor = 'default',
   lineStyle = 'solid',
+  showCurrentYear = false,
   ...props
 }: ItemProps): React.ReactElement => {
   const timelineItemCss = buildCss('pb_timeline_item_kit', lineStyle)
@@ -73,6 +75,7 @@ const TimelineItem = ({
               <DateStacked
                   align="center"
                   date={date}
+                  showCurrentYear={showCurrentYear}
                   size="sm"
               />
             )}
