@@ -79,3 +79,4 @@ examples:
   - advanced_table_column_border_color: Column Group Border Color
   - advanced_table_fullscreen: Fullscreen
   - advanced_table_infinite_scroll: Infinite Scroll
+  - advanced_table_row_headers: Multi-Header Rows
