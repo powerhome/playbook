@@ -90,6 +90,8 @@ export const TableHeaderCell = ({
    : undefined
 
  const headerAlignment =   colDef?.columnStyling?.headerAlignment ?? colDef?.columnStyling?.headerAligment
+ const headerBackgroundColor = colDef?.columnStyling?.headerBackgroundColor
+ const headerFontColor = colDef?.columnStyling?.headerFontColor
 
   const isLeafColumn =
   header?.column.getLeafColumns().length === 1 &&
@@ -194,6 +196,8 @@ const isToggleExpansionEnabled =
         id={cellId}
         key={`${header?.id}-header`}
         style={{
+          backgroundColor: headerBackgroundColor,
+          color: headerFontColor,
           left: isPinnedLeft
             ? header?.index === 1 //Accounting for set min-width for first column
               ? '180px'
