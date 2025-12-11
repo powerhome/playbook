@@ -6,6 +6,10 @@ RSpec.describe Playbook::PbTimeline::Label do
   subject { Playbook::PbTimeline::Label }
 
   it { is_expected.to define_prop(:date) }
+  it {
+    is_expected.to define_boolean_prop(:show_current_year)
+      .with_default(false)
+  }
 
   describe "#classname" do
     it "returns the correct class name" do

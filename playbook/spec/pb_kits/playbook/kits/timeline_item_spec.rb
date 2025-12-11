@@ -20,6 +20,10 @@ RSpec.describe Playbook::PbTimeline::Item do
       .with_default("solid")
       .with_values("solid", "dotted")
   }
+  it {
+    is_expected.to define_boolean_prop(:show_current_year)
+      .with_default(false)
+  }
 
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
