@@ -81,7 +81,7 @@ kits:
     enhanced_element_used: true
   - name: styling
     parent: advanced_table
-    kit_section: ["Collapsible Trail","Row Styling", "Padding Control using Row Styling", "Column Styling", "Column Styling with Multiple Headers", "Column Styling Background Color", "Padding Control using Column Styling", "Column Group Border Color"]
+    kit_section: ["Collapsible Trail","Row Styling", "Padding Control using Row Styling", "Column Styling", "Column Styling with Multiple Headers", "Column Styling Background Color", "Column Styling Background Color with Multiple Headers","Padding Control using Column Styling", "Column Group Border Color"]
     platforms: *1
     status: stable
     icons_used: true

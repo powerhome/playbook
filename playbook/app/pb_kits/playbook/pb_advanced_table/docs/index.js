@@ -47,3 +47,4 @@ export { default as AdvancedTableSortPerColumnForMultiColumn } from './_advanced
 export { default as AdvancedTablePaddingControl } from './_advanced_table_padding_control.jsx'
 export { default as AdvancedTablePaddingControlPerRow } from './_advanced_table_padding_control_per_row.jsx'
 export { default as AdvancedTableColumnStylingBackground } from './_advanced_table_column_styling_background.jsx'
+export { default as AdvancedTableColumnStylingBackgroundMulti } from './_advanced_table_column_styling_background_multi.jsx'
