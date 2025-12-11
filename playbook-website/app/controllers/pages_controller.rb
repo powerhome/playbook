@@ -55,7 +55,7 @@ class PagesController < ApplicationController
             @kit_section.include?(example.values.first)
           end
 
-          # Load mock data for advanced_table (beta only - use separate variables)
+          # Load mock data for advanced_table (beta only: use separate variables)
           @beta_table_data = advanced_table_mock_data_beta
           @beta_table_data_with_id = advanced_table_mock_data_with_id_beta
           @beta_table_data_no_subrows = advanced_table_mock_data_no_subrows_beta
