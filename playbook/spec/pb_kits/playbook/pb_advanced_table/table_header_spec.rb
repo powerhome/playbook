@@ -303,4 +303,152 @@ RSpec.describe Playbook::PbAdvancedTable::TableHeader do
       expect(instance.render_header(cell)).to eq "Test"
     end
   end
+
+  describe "#header_background_color" do
+    let(:column_definitions) do
+      [
+        { accessor: "name", label: "Name", column_styling: { header_background_color: "success" } },
+        { accessor: "email", label: "Email", column_styling: { header_background_color: "error" } },
+        { accessor: "phone", label: "Phone", column_styling: {} },
+      ]
+    end
+    let(:instance) { subject.new(column_definitions: column_definitions) }
+
+    it "returns header background color for leaf column" do
+      cell = { accessor: "name", label: "Name" }
+      expect(instance.header_background_color(cell)).to eq "success"
+    end
+
+    it "returns different background color for different columns" do
+      cell = { accessor: "email", label: "Email" }
+      expect(instance.header_background_color(cell)).to eq "error"
+    end
+
+    it "returns nil when no header_background_color is specified" do
+      cell = { accessor: "phone", label: "Phone" }
+      expect(instance.header_background_color(cell)).to be_nil
+    end
+
+    it "returns nil when column is not found" do
+      cell = { accessor: "nonexistent", label: "Nonexistent" }
+      expect(instance.header_background_color(cell)).to be_nil
+    end
+  end
+
+  describe "#header_font_color" do
+    let(:column_definitions) do
+      [
+        { accessor: "name", label: "Name", column_styling: { header_font_color: "white" } },
+        { accessor: "email", label: "Email", column_styling: { header_font_color: "black" } },
+      ]
+    end
+    let(:instance) { subject.new(column_definitions: column_definitions) }
+
+    it "returns header font color for leaf column" do
+      cell = { accessor: "name", label: "Name" }
+      expect(instance.header_font_color(cell)).to eq "white"
+    end
+
+    it "returns different font color for different columns" do
+      cell = { accessor: "email", label: "Email" }
+      expect(instance.header_font_color(cell)).to eq "black"
+    end
+
+    it "returns nil when no header_font_color is specified" do
+      cell = { accessor: "phone", label: "Phone" }
+      expect(instance.header_font_color(cell)).to be_nil
+    end
+
+    it "returns nil when column is not found" do
+      cell = { accessor: "nonexistent", label: "Nonexistent" }
+      expect(instance.header_font_color(cell)).to be_nil
+    end
+  end
+
+  describe "#has_custom_header_background_color?" do
+    it "returns true when header_background_color is present" do
+      instance = subject.new({})
+      cell = { header_background_color: "success" }
+      expect(instance.has_custom_header_background_color?(cell)).to be true
+    end
+
+    it "returns false when header_background_color is not present" do
+      instance = subject.new({})
+      cell = { label: "Test" }
+      expect(instance.has_custom_header_background_color?(cell)).to be false
+    end
+
+    it "returns false when header_background_color is nil" do
+      instance = subject.new({})
+      cell = { header_background_color: nil }
+      expect(instance.has_custom_header_background_color?(cell)).to be false
+    end
+  end
+
+  describe "#header_component_info" do
+    let(:column_definitions) do
+      [
+        { accessor: "name", label: "Name", column_styling: {} },
+        { accessor: "with_bg", label: "With Background", column_styling: { header_background_color: "success" } },
+        { accessor: "with_font", label: "With Font", column_styling: { header_font_color: "white" } },
+        { accessor: "with_both", label: "With Both", column_styling: { header_background_color: "error", header_font_color: "white" } },
+      ]
+    end
+    let(:instance) { subject.new(column_definitions: column_definitions) }
+
+    context "without custom background color" do
+      it "uses table/table_header component" do
+        cell = { accessor: "name", label: "Name", colspan: 1, sort_menu: nil }
+        result = instance.header_component_info(cell, 0, 0)
+        expect(result[:name]).to eq "table/table_header"
+        expect(result[:props][:classname]).to include "table-header-cells"
+      end
+
+      it "includes font color in html_options when present" do
+        cell = { accessor: "with_font", label: "With Font", colspan: 1, sort_menu: nil, header_font_color: "white" }
+        result = instance.header_component_info(cell, 0, 0)
+        expect(result[:name]).to eq "table/table_header"
+        expect(result[:props][:html_options][:style][:color]).to eq "white"
+      end
+    end
+
+    context "with custom background color" do
+      it "uses background component" do
+        cell = { accessor: "with_bg", label: "With Background", colspan: 1, header_background_color: "success" }
+        result = instance.header_component_info(cell, 0, 0)
+        expect(result[:name]).to eq "background"
+        expect(result[:props][:background_color]).to eq "success"
+        expect(result[:props][:tag]).to eq "th"
+      end
+
+      it "includes font color in html_options when present" do
+        cell = { accessor: "with_both", label: "With Both", colspan: 1, header_background_color: "error", header_font_color: "white" }
+        result = instance.header_component_info(cell, 0, 0)
+        expect(result[:name]).to eq "background"
+        expect(result[:props][:background_color]).to eq "error"
+        expect(result[:props][:html_options][:style][:color]).to eq "white"
+      end
+
+      it "does not include color in style when no font color" do
+        cell = { accessor: "with_bg", label: "With Background", colspan: 1, header_background_color: "success" }
+        result = instance.header_component_info(cell, 0, 0)
+        expect(result[:props][:html_options][:style]).to be_empty
+      end
+    end
+
+    context "with different cell positions" do
+      it "adds pinned-left class for first column" do
+        instance = subject.new(column_definitions: column_definitions, responsive: "scroll")
+        cell = { accessor: "name", label: "Name", colspan: 1 }
+        result = instance.header_component_info(cell, 0, 0)
+        expect(result[:props][:classname]).to include "pinned-left"
+      end
+
+      it "does not add pinned-left for non-first columns" do
+        cell = { accessor: "name", label: "Name", colspan: 1 }
+        result = instance.header_component_info(cell, 1, 0)
+        expect(result[:props][:classname]).not_to include "pinned-left"
+      end
+    end
+  end
 end

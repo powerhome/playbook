@@ -8,26 +8,16 @@
       accessor: "newEnrollments",
       label: "New Enrollments",
       column_styling: { 
-        cell_background_color: "error_subtle",
-        header_background_color: "error_subtle"
+        cell_background_color: ->(row) { row[:newEnrollments].to_i > 20 ? "success_secondary" : "warning_secondary" }
       }
     },
     {
       accessor: "scheduledMeetings",
       label: "Scheduled Meetings",
-      column_styling: { 
-        cell_background_color: "info_subtle",
-      }
     },
     {
       accessor: "attendanceRate",
       label: "Attendance Rate",
-      column_styling: { 
-        cell_background_color: "info",
-        header_background_color: "info",
-        header_font_color: "white",
-        font_color: "white"
-      }
     },
     {
       accessor: "completedClasses",
@@ -36,6 +26,10 @@
     {
       accessor: "classCompletionRate",
       label: "Class Completion Rate",
+      column_styling: { 
+        cell_background_color: "category_1",
+        font_color: "white"
+      }
     },
     {
       accessor: "graduatedStudents",

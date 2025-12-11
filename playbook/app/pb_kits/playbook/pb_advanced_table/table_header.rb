@@ -119,6 +119,59 @@ module Playbook
         end
       end
 
+      # Get header background color from column styling
+      def header_background_color(cell)
+        original_def = find_original_column_def_for_cell(cell)
+        return nil unless original_def
+
+        original_def.dig(:column_styling, :header_background_color)
+      end
+
+      # Get header font color from column styling
+      def header_font_color(cell)
+        original_def = find_original_column_def_for_cell(cell)
+        return nil unless original_def
+
+        original_def.dig(:column_styling, :header_font_color)
+      end
+
+      # Check if header has custom background color
+      def has_custom_header_background_color?(cell)
+        cell[:header_background_color].present?
+      end
+
+      # Returns component info for header cell (uses background kit if custom bg color)
+      def header_component_info(cell, cell_index, row_index)
+        header_id = cell[:accessor].present? ? cell[:accessor] : "header_#{row_index}_#{cell_index}"
+        classname = [th_classname(is_first_column: cell_index.zero?), ("last-header-cell" if cell[:is_last_in_group] && cell_index != 0)].compact.join(" ")
+
+        if has_custom_header_background_color?(cell)
+          component_name = "background"
+          component_props = {
+            background_color: cell[:header_background_color],
+            tag: "th",
+            classname: classname,
+          }
+          component_props[:html_options] = {
+            id: header_id,
+            colspan: cell[:colspan],
+            style: { color: cell[:header_font_color] },
+          }
+          component_props[:html_options][:style].delete(:color) unless cell[:header_font_color].present?
+        else
+          component_name = "table/table_header"
+          component_props = {
+            id: header_id,
+            colspan: cell[:colspan],
+            classname: classname,
+            sort_menu: cell[:accessor] ? cell[:sort_menu] : nil,
+          }
+          component_props[:html_options] = { style: { color: cell[:header_font_color] } } if cell[:header_font_color].present?
+        end
+
+        { name: component_name, props: component_props }
+      end
+
     private
 
       # Find the original column definition for a cell
@@ -163,6 +216,8 @@ module Playbook
           else
             raw_styling = col[:column_styling] || {}
             header_alignment = raw_styling[:header_alignment]
+            header_background_color = raw_styling[:header_background_color]
+            header_font_color = raw_styling[:header_font_color]
 
             colspan = 1
             cell_hash = {
@@ -172,6 +227,8 @@ module Playbook
               sort_menu: col[:sort_menu],
               is_last_in_group: is_last && current_depth.positive?,
               header_alignment: header_alignment,
+              header_background_color: header_background_color,
+              header_font_color: header_font_color,
             }
             cell_hash[:id] = col[:id] if col[:id].present?
             rows[current_depth] << cell_hash

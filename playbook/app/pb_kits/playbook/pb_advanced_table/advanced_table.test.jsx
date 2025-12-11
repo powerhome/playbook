@@ -888,3 +888,98 @@ test("Sort icon renders with enableSort on individual columns", () => {
   expect(sortButton).toBeInTheDocument();
 });
 
+test("columnStyling.backgroundColor works as excpected", () => {
+  const styledColumnDefs = [
+    {
+      accessor: "year",
+      label: "Year",
+      cellAccessors: ["quarter", "month", "day"],
+    },
+    {
+      accessor: "newEnrollments",
+      label: "New Enrollments",
+      columnStyling: { 
+        cellBackgroundColor: colors.error_subtle,
+      },
+    },
+    {
+      accessor: "scheduledMeetings",
+      label: "Scheduled Meetings",
+    },
+  ];
+
+  render(
+    <AdvancedTable
+        columnDefinitions={styledColumnDefs}
+        data={{ testid: testId }}
+        tableData={MOCK_DATA}
+    />
+  );
+
+  const firstEnrollmentCell = screen.getAllByText("20")[0].closest("td");
+  expect(firstEnrollmentCell).toHaveStyle({ backgroundColor: colors.error_subtle });
+});
+
+test("columnStyling.headerBackgroundColor works as excpected", () => {
+  const styledColumnDefs = [
+    {
+      accessor: "year",
+      label: "Year",
+      cellAccessors: ["quarter", "month", "day"],
+    },
+    {
+      accessor: "newEnrollments",
+      label: "New Enrollments",
+      columnStyling: { 
+        headerBackgroundColor: colors.error_subtle,
+      },
+    },
+    {
+      accessor: "scheduledMeetings",
+      label: "Scheduled Meetings",
+    },
+  ];
+
+  render(
+    <AdvancedTable
+        columnDefinitions={styledColumnDefs}
+        data={{ testid: testId }}
+        tableData={MOCK_DATA}
+    />
+  );
+
+  const firstEnrollmentHeader = screen.getAllByText("New Enrollments")[0].closest("th");
+  expect(firstEnrollmentHeader).toHaveStyle({ backgroundColor: colors.error_subtle });
+});
+
+test("columnStyling.headerFontColor works as excpected", () => {
+  const styledColumnDefs = [
+    {
+      accessor: "year",
+      label: "Year",
+      cellAccessors: ["quarter", "month", "day"],
+    },
+    {
+      accessor: "newEnrollments",
+      label: "New Enrollments",
+      columnStyling: { 
+        headerFontColor: colors.white,
+      },
+    },
+    {
+      accessor: "scheduledMeetings",
+      label: "Scheduled Meetings",
+    },
+  ];
+
+  render(
+    <AdvancedTable
+        columnDefinitions={styledColumnDefs}
+        data={{ testid: testId }}
+        tableData={MOCK_DATA}
+    />
+  );
+
+  const firstEnrollmentHeader = screen.getAllByText("New Enrollments")[0].closest("th");
+  expect(firstEnrollmentHeader).toHaveStyle({ color: colors.white });
+});

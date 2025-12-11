@@ -1,0 +1,1 @@
+`column_styling` can also be used to control the background color on individual cells in a given column as shown here. 
