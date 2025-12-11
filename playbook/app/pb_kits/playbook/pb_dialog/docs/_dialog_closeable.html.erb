@@ -1,0 +1,24 @@
+<%= pb_rails("flex", props:{wrap:true}) do %>
+<%= pb_rails("button", props: { text: "Open Simple Dialog", data: {"open-dialog": "dialog-simple"}, margin_right:"md" }) %>
+<%= pb_rails("button", props: { text: "Open Complex Dialog", data: {"open-dialog": "dialog-complex2"} }) %>
+<% end %>
+
+<%= pb_rails("dialog", props: { 
+    id:"dialog-simple", 
+    size: "sm", 
+    title: "Header Title is the Title Prop", 
+    text: "Hello Body Text, Nice to meet ya.", 
+    cancel_button: "Cancel Button", 
+    closeable: false,
+    confirm_button: "Okay", 
+    confirm_button_id: "confirm-button-simple"
+}) %>
+
+<%= pb_rails("dialog", props: { 
+    id:"dialog-complex2", 
+    size: "sm"
+}) do %>
+ <%= pb_rails("dialog/dialog_header", props: { id: "dialog-complex2", title:"Header Title inside Dialog Header", closeable: false } ) %>
+    <%= pb_rails("dialog/dialog_body", props:{text: "Hello Body Text, Nice to meet ya."}) %>
+    <%= pb_rails("dialog/dialog_footer", props: {cancel_button: "Cancel Button", confirm_button: "Okay", confirm_button_id:"confirm-complex2", id: "dialog-complex2"}) %>
+<% end %>

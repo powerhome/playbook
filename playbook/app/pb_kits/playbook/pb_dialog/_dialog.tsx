@@ -51,6 +51,7 @@ const Dialog = (props: DialogProps): React.ReactElement => {
     cancelButton,
     confirmButton,
     className,
+    closeable,
     data = {},
     htmlOptions = {},
     id,
@@ -187,7 +188,7 @@ const Dialog = (props: DialogProps): React.ReactElement => {
             style={{ content: dynamicInlineProps }}
         >
           <>
-            {title && !status ? <Dialog.Header>{title}</Dialog.Header> : null}
+            {title && !status ? <Dialog.Header closeable={closeable}>{title}</Dialog.Header> : null}
             {!status && text ? <Dialog.Body>{text}</Dialog.Body> : null}
             {status && (
               <Dialog.Body

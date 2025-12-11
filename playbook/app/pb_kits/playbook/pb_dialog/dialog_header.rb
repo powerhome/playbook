@@ -4,6 +4,8 @@ module Playbook
   module PbDialog
     class DialogHeader < Playbook::KitBase
       prop :title
+      prop :closeable, type: Playbook::Props::Boolean,
+                       default: true
 
       def classname
         generate_classname("dialog_header")

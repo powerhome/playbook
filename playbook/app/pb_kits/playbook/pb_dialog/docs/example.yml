@@ -12,6 +12,7 @@ examples:
   - dialog_full_height_placement: Full Height Placement
   - dialog_loading: Loading
   - dialog_turbo_frames: Within Turbo Frames
+  - dialog_closeable: Close Button in Header
 
 
   react:
@@ -25,6 +26,7 @@ examples:
   - dialog_full_height: Full Height
   - dialog_full_height_placement: Full Height Placement
   - dialog_loading: Loading
+  - dialog_closeable: Close Button in Header
 
   swift:
   - dialog_default_swift: Simple
