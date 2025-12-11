@@ -314,6 +314,7 @@ private
           parent: component["parent"],
           kit_section: component["kit_section"] || [],
           status: component["status"],
+          platforms_status: component["platforms_status"],
           icons_used: component["icons_used"],
           react_rendered: component["react_rendered"],
           enhanced_element_used: component["enhanced_element_used"],
@@ -343,6 +344,37 @@ private
     components.reject { |component| status && component["status"] == status }
   end
 
+  # Get the status for the current platform
+  # Falls back to kit-level status if platform-specific status is not defined
+  def current_platform_status
+    return @kit_status unless @kit_platforms_status
+
+    platform_status = @kit_platforms_status[@type] || @kit_platforms_status[@type.to_sym]
+    platform_status || @kit_status
+  end
+
+  # Check if the status is platform-specific (different from overall kit status)
+  def platform_specific_status?
+    return false unless @kit_platforms_status
+
+    current_status = current_platform_status
+    # If platforms_status exists and the current platform has a different status than the kit-level status
+    (@kit_platforms_status[@type] || @kit_platforms_status[@type.to_sym]) &&
+      current_status != @kit_status
+  end
+
+  # Get platform display name
+  def platform_display_name
+    case @type
+    when "rails" then "Rails"
+    when "react" then "React"
+    when "swift" then "Swift"
+    else @type.capitalize
+    end
+  end
+
+  helper_method :current_platform_status, :platform_specific_status?, :platform_display_name
+
   def set_kit
     matching_kit = if params[:section].present?
                      all_kits.find do |kit|
@@ -359,6 +391,7 @@ private
       @kit_parent = matching_kit[:parent]
       @kit_section = matching_kit[:kit_section]
       @kit_status = matching_kit[:status]
+      @kit_platforms_status = matching_kit[:platforms_status]
       @icons_used = matching_kit[:icons_used]
       @react_rendered = matching_kit[:react_rendered]
       @enhanced_element_used = matching_kit[:enhanced_element_used]
