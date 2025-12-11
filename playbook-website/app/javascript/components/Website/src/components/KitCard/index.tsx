@@ -9,9 +9,10 @@ type KitCardProps = {
   description: string;
   name: string;
   platform: string;
+  parent?: string;
 };
 
-export const KitCard = ({ description, name, platform }: KitCardProps) => {
+export const KitCard = ({ description, name, platform, parent }: KitCardProps) => {
   const { kits } = useLoaderData() as {
     kits: Array<{ category: string; components: Array<{ name: string }> }>;
   };
@@ -21,8 +22,8 @@ export const KitCard = ({ description, name, platform }: KitCardProps) => {
     category.components?.some((component) => component.name === name)
   );
 
-  const generateLink = ({ componentName, platform, category }: any) => {
-    if (category && category.startsWith("advanced_table")) {
+  const generateLink = ({ componentName, platform, parent }: any) => {
+    if (parent && parent === "advanced_table") {
       return `/beta/kits/advanced_table/${componentName}/${platform}`;
     }
     return `/beta/kits/${componentName}/${platform}`;
@@ -34,6 +35,7 @@ export const KitCard = ({ description, name, platform }: KitCardProps) => {
         componentName: name,
         platform,
         category: kitCategory?.category,
+        parent,
       })}
     >
       <Card
