@@ -46,7 +46,15 @@ module Playbook
         elsif contact_type == "international"
           contact_value
         else
-          number_to_phone(formatted_value, area_code: true)
+          # Check if number has leading 1 (US country code)
+          # Format like "+1 (212) 555-1234"
+          intl_code = ""
+          cleaned_number = formatted_value
+          if cleaned_number.length == 11 && cleaned_number.start_with?("1")
+            intl_code = "+1 "
+            cleaned_number = cleaned_number.sub(/^1/, "")
+          end
+          "#{intl_code}#{number_to_phone(cleaned_number, area_code: true)}"
         end
       end
 
