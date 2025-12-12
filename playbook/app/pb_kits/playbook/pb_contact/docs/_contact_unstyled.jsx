@@ -7,7 +7,6 @@ const ContactUnstyled = (props) => {
     <div>
       <Body color="default">
         <Contact
-            contactType="home"
             contactValue="2125551234"
             iconEnabled={false}
             unstyled
@@ -16,7 +15,6 @@ const ContactUnstyled = (props) => {
       </Body>
       <Body color="light">
         <Contact
-            contactType="work"
             contactValue="12125551234"
             iconEnabled={false}
             unstyled
@@ -25,7 +23,6 @@ const ContactUnstyled = (props) => {
       </Body>
       <Body color="lighter">
         <Contact
-            contactType="cell"
             contactValue="4155551234"
             iconEnabled={false}
             unstyled
