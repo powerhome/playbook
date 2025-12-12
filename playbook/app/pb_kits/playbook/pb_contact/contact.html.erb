@@ -1,4 +1,4 @@
-<% if unstyled %>
+<% if object.unstyled %>
   <%= content_tag :span, class: object.classname, id: object.id, data: object.data, aria: object.aria, **object.html_options do %>
     <% if icon_enabled %>
       <% if contact_type == "email" %>
