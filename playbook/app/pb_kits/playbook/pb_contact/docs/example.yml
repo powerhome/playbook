@@ -3,11 +3,13 @@ examples:
   rails:
   - contact_default: Default
   - contact_with_detail: Detail Indicator
+  - contact_unstyled: Unstyled
 
 
   react:
   - contact_default: Default
   - contact_with_detail: Detail Indicator
+  - contact_unstyled: Unstyled
 
 
   swift:

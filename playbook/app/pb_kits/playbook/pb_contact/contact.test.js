@@ -149,3 +149,79 @@ test('international contact type preserves original format', () => {
   const kit = screen.getByTestId('test-international-format')
   expect(kit).toHaveTextContent('+44 20 7946 0958')
 })
+
+test('iconEnabled prop hides icon when false', () => {
+  render(
+    <>
+      <Contact
+          contactType="home"
+          contactValue="2125551234"
+          data={{ testid: 'test-with-icon' }}
+          iconEnabled
+      />
+      <Contact
+          contactType="home"
+          contactValue="2125551234"
+          data={{ testid: 'test-without-icon' }}
+          iconEnabled={false}
+      />
+    </>
+  )
+
+  // With icon enabled, should have icon
+  expect(screen.getByTestId('test-with-icon').querySelector('.pb_custom_icon')).toBeInTheDocument()
+  
+  // Without icon, should not have icon
+  expect(screen.getByTestId('test-without-icon').querySelector('.pb_custom_icon')).not.toBeInTheDocument()
+  
+  // But should still have the formatted phone number
+  expect(screen.getByTestId('test-without-icon')).toHaveTextContent('(212) 555-1234')
+})
+
+test('unstyled prop renders without Body wrapper', () => {
+  render(
+    <>
+      <Contact
+          contactType="home"
+          contactValue="2125551234"
+          data={{ testid: 'test-styled' }}
+      />
+      <Contact
+          contactType="home"
+          contactValue="2125551234"
+          data={{ testid: 'test-unstyled' }}
+          unstyled
+      />
+    </>
+  )
+
+  // Styled version should have Body wrapper with pb_contact_kit class
+  const styled = screen.getByTestId('test-styled')
+  const styledBody = styled.querySelector('span.pb_contact_kit')
+  expect(styledBody).toBeInTheDocument()
+  expect(styledBody).toHaveTextContent('(212) 555-1234')
+
+  // Unstyled version should be a span without Body wrapper
+  const unstyled = screen.getByTestId('test-unstyled')
+  expect(unstyled.tagName).toBe('SPAN')
+  expect(unstyled.querySelector('span.pb_contact_kit')).not.toBeInTheDocument()
+  expect(unstyled).toHaveTextContent('(212) 555-1234')
+})
+
+test('unstyled and iconEnabled work together', () => {
+  render(
+    <Contact
+        contactType="home"
+        contactValue="2125551234"
+        data={{ testid: 'test-unstyled-no-icon' }}
+        iconEnabled={false}
+        unstyled
+    />
+  )
+
+  const kit = screen.getByTestId('test-unstyled-no-icon')
+  expect(kit.tagName).toBe('SPAN')
+  expect(kit.querySelector('.pb_custom_icon')).not.toBeInTheDocument()
+  expect(kit.querySelector('.pb_body_kit')).not.toBeInTheDocument()
+  expect(kit).toHaveTextContent('(212) 555-1234')
+})
