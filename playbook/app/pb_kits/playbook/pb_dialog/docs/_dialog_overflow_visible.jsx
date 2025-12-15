@@ -2,8 +2,6 @@ import React, { useState } from 'react'
 
 import Body from '../../pb_body/_body'
 import Button from '../../pb_button/_button'
-import Caption from '../../pb_caption/_caption'
-import DatePicker from '../../pb_date_picker/_date_picker'
 import Dialog from '../../pb_dialog/_dialog'
 import Typeahead from '../../pb_typeahead/_typeahead'
 
@@ -33,36 +31,9 @@ const DialogOverflowVisible = () => {
           size="md"
       >
         <Dialog.Header>
-          <Body>{'Select Date and Location'}</Body>
+          <Body>{'Select Location'}</Body>
         </Dialog.Header>
         <Dialog.Body>
-          <Caption marginBottom="xs">{'Start Date'}</Caption>
-          <DatePicker
-              maxDate="12/31/2025"
-              minDate="01/01/2020"
-              name="start_date"
-              pickerId="start-date-picker"
-              placeholder="Select start date"
-              staticPosition={false}
-          />
-          <Caption marginBottom="xs"
-              marginTop="md"
-          >
-            {'End Date'}
-          </Caption>
-          <DatePicker
-              maxDate="12/31/2025"
-              minDate="01/01/2020"
-              name="end_date"
-              pickerId="end-date-picker"
-              placeholder="Select end date"
-              staticPosition={false}
-          />
-          <Caption marginBottom="xs"
-              marginTop="md"
-          >
-            {'Location'}
-          </Caption>
           <Typeahead
               options={typeaheadOptions}
               placeholder="Select a location..."
