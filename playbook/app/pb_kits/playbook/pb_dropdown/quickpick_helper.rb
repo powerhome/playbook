@@ -29,16 +29,16 @@ module Playbook
           last_year_end_date = (today - 1.year).end_of_year
 
           [
-            { id: "quickpick-today", label: "Today", value: format_date(today), formatted_start_date: format_date(today), formatted_end_date: format_date(today) },
-            { id: "quickpick-yesterday", label: "Yesterday", value: format_date(yesterday), formatted_start_date: format_date(yesterday), formatted_end_date: format_date(yesterday) },
-            { id: "quickpick-this-week", label: "This Week", value: format_date_range(this_week_start_date, this_week_end_date), formatted_start_date: format_date(this_week_start_date), formatted_end_date: format_date(this_week_end_date) },
-            { id: "quickpick-this-month", label: "This Month", value: format_date_range(this_month_start_date, this_month_end_date), formatted_start_date: format_date(this_month_start_date), formatted_end_date: format_date(this_month_end_date) },
-            { id: "quickpick-this-quarter", label: "This Quarter", value: format_date_range(this_quarter_start_date, this_quarter_end_date), formatted_start_date: format_date(this_quarter_start_date), formatted_end_date: format_date(this_quarter_end_date) },
-            { id: "quickpick-this-year", label: "This Year", value: format_date_range(this_year_start_date, this_year_end_date), formatted_start_date: format_date(this_year_start_date), formatted_end_date: format_date(this_year_end_date) },
-            { id: "quickpick-last-week", label: "Last Week", value: format_date_range(last_week_start_date, last_week_end_date), formatted_start_date: format_date(last_week_start_date), formatted_end_date: format_date(last_week_end_date) },
-            { id: "quickpick-last-month", label: "Last Month", value: format_date_range(last_month_start_date, last_month_end_date), formatted_start_date: format_date(last_month_start_date), formatted_end_date: format_date(last_month_end_date) },
-            { id: "quickpick-last-quarter", label: "Last Quarter", value: format_date_range(last_quarter_start_date, last_quarter_end_date), formatted_start_date: format_date(last_quarter_start_date), formatted_end_date: format_date(last_quarter_end_date) },
-            { id: "quickpick-last-year", label: "Last Year", value: format_date_range(last_year_start_date, last_year_end_date), formatted_start_date: format_date(last_year_start_date), formatted_end_date: format_date(last_year_end_date) },
+            { id: "quickpick-today", label: "Today", value: [today.to_s, today.to_s], formatted_start_date: format_date(today), formatted_end_date: format_date(today) },
+            { id: "quickpick-yesterday", label: "Yesterday", value: [yesterday.to_s, yesterday.to_s], formatted_start_date: format_date(yesterday), formatted_end_date: format_date(yesterday) },
+            { id: "quickpick-this-week", label: "This Week", value: [this_week_start_date.to_s, this_week_end_date.to_s], formatted_start_date: format_date(this_week_start_date), formatted_end_date: format_date(this_week_end_date) },
+            { id: "quickpick-this-month", label: "This Month", value: [this_month_start_date.to_s, this_month_end_date.to_s], formatted_start_date: format_date(this_month_start_date), formatted_end_date: format_date(this_month_end_date) },
+            { id: "quickpick-this-quarter", label: "This Quarter", value: [this_quarter_start_date.to_s, this_quarter_end_date.to_s], formatted_start_date: format_date(this_quarter_start_date), formatted_end_date: format_date(this_quarter_end_date) },
+            { id: "quickpick-this-year", label: "This Year", value: [this_year_start_date.to_s, this_year_end_date.to_s], formatted_start_date: format_date(this_year_start_date), formatted_end_date: format_date(this_year_end_date) },
+            { id: "quickpick-last-week", label: "Last Week", value: [last_week_start_date.to_s, last_week_end_date.to_s], formatted_start_date: format_date(last_week_start_date), formatted_end_date: format_date(last_week_end_date) },
+            { id: "quickpick-last-month", label: "Last Month", value: [last_month_start_date.to_s, last_month_end_date.to_s], formatted_start_date: format_date(last_month_start_date), formatted_end_date: format_date(last_month_end_date) },
+            { id: "quickpick-last-quarter", label: "Last Quarter", value: [last_quarter_start_date.to_s, last_quarter_end_date.to_s], formatted_start_date: format_date(last_quarter_start_date), formatted_end_date: format_date(last_quarter_end_date) },
+            { id: "quickpick-last-year", label: "Last Year", value: [last_year_start_date.to_s, last_year_end_date.to_s], formatted_start_date: format_date(last_year_start_date), formatted_end_date: format_date(last_year_end_date) },
           ]
         end
 
