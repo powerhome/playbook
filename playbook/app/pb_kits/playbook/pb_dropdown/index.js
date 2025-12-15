@@ -279,14 +279,14 @@ export default class PbDropdown extends PbEnhancedElement {
           if (controlsStartId) {
             const startPicker = document.querySelector(`#${controlsStartId}`)?._flatpickr;
             if (startPicker) {
-              startPicker.setDate(optionData.formatted_start_date, true);
+              startPicker.setDate(optionData.formatted_start_date, true, "m/d/Y");
             }
           }
           
           if (controlsEndId) {
             const endPicker = document.querySelector(`#${controlsEndId}`)?._flatpickr;
             if (endPicker) {
-              endPicker.setDate(optionData.formatted_end_date, true);
+              endPicker.setDate(optionData.formatted_end_date, true, "m/d/Y");
             }
           }
         }
@@ -495,14 +495,14 @@ export default class PbDropdown extends PbEnhancedElement {
           if (controlsStartId) {
             const startPicker = document.querySelector(`#${controlsStartId}`)?._flatpickr;
             if (startPicker) {
-              startPicker.setDate(optionData.formatted_start_date, true);
+              startPicker.setDate(optionData.formatted_start_date, true, "m/d/Y");
             }
           }
           
           if (controlsEndId) {
             const endPicker = document.querySelector(`#${controlsEndId}`)?._flatpickr;
             if (endPicker) {
-              endPicker.setDate(optionData.formatted_end_date, true);
+              endPicker.setDate(optionData.formatted_end_date, true, "m/d/Y");
             }
           }
         };
