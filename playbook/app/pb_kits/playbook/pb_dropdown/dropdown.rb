@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative "quickpick_helper"
+
 module Playbook
   module PbDropdown
     class Dropdown < Playbook::KitBase
@@ -14,7 +16,7 @@ module Playbook
       prop :blank_selection, type: Playbook::Props::String,
                              default: ""
       prop :variant, type: Playbook::Props::Enum,
-                     values: %w[default subtle],
+                     values: %w[default subtle quickpick],
                      default: "default"
       prop :separators, type: Playbook::Props::Boolean,
                         default: true
@@ -26,6 +28,12 @@ module Playbook
                           default: false
       prop :form_pill_props, type: Playbook::Props::HashProp,
                              default: {}
+      prop :range_ends_today, type: Playbook::Props::Boolean,
+                              default: false
+      prop :controls_end_id, type: Playbook::Props::String,
+                             default: ""
+      prop :controls_start_id, type: Playbook::Props::String,
+                               default: ""
 
       def data
         Hash(prop(:data)).merge(
@@ -60,7 +68,12 @@ module Playbook
       end
 
       def options_with_blank
-        blank_selection.present? ? [{ id: "", value: "", label: blank_selection }] + options : options
+        dropdown_options = variant == "quickpick" ? quickpick_options : options
+        blank_selection.present? ? [{ id: "", value: "", label: blank_selection }] + dropdown_options : dropdown_options
+      end
+
+      def quickpick_options
+        QuickpickHelper.get_quickpick_options(range_ends_today: range_ends_today)
       end
     end
   end

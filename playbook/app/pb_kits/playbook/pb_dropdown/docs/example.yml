@@ -22,6 +22,8 @@ examples:
   - dropdown_multi_select_with_default: Multi Select Default Value
   - dropdown_blank_selection: Blank Selection
   - dropdown_separators_hidden: Separators Hidden
+  - dropdown_quickpick_rails: Quick Pick Variant
+  - dropdown_quickpick_range_end_rails: Quick Pick Variant (Range Ends Today)
 
   react:
   - dropdown_default: Default

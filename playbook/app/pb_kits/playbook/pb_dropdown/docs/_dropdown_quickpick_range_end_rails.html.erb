@@ -1,0 +1,19 @@
+
+<%= pb_rails("dropdown", props: {
+  id: "date-range-quickpick-end-today",
+  label: "Date Range", 
+  variant: "quickpick", 
+  range_ends_today: true 
+}) %>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const dropdown = document.getElementById("date-range-quickpick-end-today");
+    if (dropdown) {
+      dropdown.addEventListener("pb:dropdown:selected", (e) => {
+        const option = e.detail;
+        console.log("Selected option:", option);
+      });
+    }
+  });
+</script>
