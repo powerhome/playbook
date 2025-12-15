@@ -76,7 +76,8 @@
     <%= pb_rails("typeahead", props: {
       options: typeahead_options,
       placeholder: "Select a location...",
-      id: "location-typeahead"
+      id: "location-typeahead",
+      is_multi: false,
     }) %>
   <% end %>
   <%= pb_rails("dialog/dialog_footer", props: {
