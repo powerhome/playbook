@@ -47,8 +47,10 @@ module Playbook
         Hash(prop(:data)).merge(
           pb_dropdown: true,
           pb_dropdown_multi_select: multi_select,
-          form_pill_props: form_pill_props.to_json
-        )
+          form_pill_props: form_pill_props.to_json,
+          start_date_id: variant == "quickpick" ? start_date_id : nil,
+          end_date_id: variant == "quickpick" ? end_date_id : nil
+        ).compact
       end
 
       def classname

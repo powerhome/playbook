@@ -256,15 +256,19 @@ export default class PbDropdown extends PbEnhancedElement {
         // Handle quickpick variant: populate start/end date hidden inputs
         const optionData = JSON.parse(value);
         if (optionData.formatted_start_date && optionData.formatted_end_date) {
-          const startDateInput = document.getElementById(
-            this.element.querySelector('input[name*="start"]')?.id || "start_date_id"
-          );
-          const endDateInput = document.getElementById(
-            this.element.querySelector('input[name*="end"]')?.id || "end_date_id"
-          );
+          // Use data attributes for IDs to support fully custom names
+          const startDateId = this.element.dataset.startDateId;
+          const endDateId = this.element.dataset.endDateId;
           
-          if (startDateInput) startDateInput.value = optionData.formatted_start_date;
-          if (endDateInput) endDateInput.value = optionData.formatted_end_date;
+          if (startDateId) {
+            const startDateInput = document.getElementById(startDateId);
+            if (startDateInput) startDateInput.value = optionData.formatted_start_date;
+          }
+          
+          if (endDateId) {
+            const endDateInput = document.getElementById(endDateId);
+            if (endDateInput) endDateInput.value = optionData.formatted_end_date;
+          }
         }
       }
       if (customDisplayElement) {
