@@ -10,7 +10,7 @@ RSpec.describe Playbook::PbDropdown::Dropdown do
   it { is_expected.to define_string_prop(:name) }
   it { is_expected.to define_boolean_prop(:required).with_default(false) }
   it { is_expected.to define_string_prop(:blank_selection).with_default("") }
-  it { is_expected.to define_enum_prop(:variant).with_values("default", "subtle").with_default("default") }
+  it { is_expected.to define_enum_prop(:variant).with_values("default", "subtle", "quickpick").with_default("default") }
   it { is_expected.to define_boolean_prop(:separators).with_default(true) }
   it { is_expected.to define_string_prop(:default_value) }
   it { is_expected.to define_boolean_prop(:autocomplete) }
