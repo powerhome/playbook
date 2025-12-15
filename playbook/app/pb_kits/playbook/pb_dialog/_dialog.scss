@@ -402,7 +402,7 @@
 }
 
 //styles specific to rails version of kit
-// rails version has own wrapper because of the way the overlay functions for the HTML dialog used to create this
+// rails version uses div instead of native dialog element to avoid top layer issues
 .pb_dialog_wrapper_rails {
   $medium: 500px;
   $large: 800px;
@@ -410,6 +410,78 @@
 
   .dialog_status_text_align {
     text-align: center;
+  }
+
+  // Overlay for rails kit (replaces dialog::backdrop)
+  .pb_dialog_overlay_rails {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: none;
+    background-color: rgba($bg_dark, $opacity_4);
+    animation-name: overlayFade;
+    animation-duration: 0.2s;
+    z-index: 100;
+    
+    &.pb_dialog_overlay_open {
+      display: block;
+    }
+  }
+
+  // Hide dialog by default
+  // Dialog uses fixed positioning, centered by default
+  .pb_dialog_rails {
+    display: none;
+    position: fixed !important;
+    z-index: 101; // Above overlay
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) !important;
+    // Override the modalFadeIn animation that conflicts with positioning
+    animation: none !important;
+    
+    // Placement-based positioning
+    &.pb_dialog_md_center,
+    &.pb_dialog_sm_center,
+    &.pb_dialog_lg_center,
+    &.pb_dialog_xl_center,
+    &.pb_dialog_status_size_center,
+    &.pb_dialog_content_center {
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) !important;
+    }
+    
+    &.pb_dialog_md_left,
+    &.pb_dialog_sm_left,
+    &.pb_dialog_lg_left,
+    &.pb_dialog_xl_left,
+    &.pb_dialog_status_size_left,
+    &.pb_dialog_content_left {
+      top: 50%;
+      left: $space_lg;
+      transform: translate(0, -50%) !important;
+    }
+    
+    &.pb_dialog_md_right,
+    &.pb_dialog_sm_right,
+    &.pb_dialog_lg_right,
+    &.pb_dialog_xl_right,
+    &.pb_dialog_status_size_right,
+    &.pb_dialog_content_right {
+      top: 50%;
+      right: $space_lg;
+      left: auto;
+      transform: translate(0, -50%) !important;
+    }
+    
+    &.pb_dialog_open {
+      display: block;
+      // Add a simple fade-in animation that doesn't conflict with positioning
+      animation: overlayFade 0.2s ease-in-out;
+    }
   }
 
   &.full_height_left {
@@ -554,28 +626,7 @@
 
   // Fixes for stylesheets in nitro that were conflicting with our kit. DO NOT REMOVE.
   // Conflicts were only apparent in nitro, not in playbook local env
-  .pb_dialog_rails {
-    position: fixed !important;
-    top: 0 !important;
-    padding: unset !important;
-    margin: auto;
-
-  }
-
-  // Overlay for rails kit
-  dialog::backdrop {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: rgba($bg_dark, $opacity_4);
-    animation-name: overlayFade;
-    animation-duration: 0.2s;
-  }
+  // Note: Positioning is now handled above in .pb_dialog_rails base styles
 
   .dialog-button-class {
     background-color: unset;

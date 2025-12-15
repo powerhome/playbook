@@ -32,7 +32,7 @@ export default class PbDialog extends PbEnhancedElement {
   }
 
   handleCustomEvent = (event) => {
-    const dialogId = event.detail?.dialogId || this.element.querySelector("dialog")?.id
+    const dialogId = event.detail?.dialogId || this.element.querySelector("[role='dialog']")?.id
     const dialog = dialogId && document.getElementById(dialogId)
   
     if (!dialog) {
@@ -50,10 +50,10 @@ export default class PbDialog extends PbEnhancedElement {
     if (knownActions.includes(action)) {
       switch (action) {
         case 'open':
-          if (!dialog.open) dialog.showModal()
+          if (!this.isDialogOpen(dialog)) this.openDialog(dialog)
           break
         case 'close':
-          if (dialog.open) dialog.close(event.detail?.returnValue)
+          if (this.isDialogOpen(dialog)) this.closeDialog(dialog, event.detail?.returnValue)
           break
         case 'clickConfirm':
           this.triggerButtonClick(dialog, event, 'confirm')
@@ -85,6 +85,61 @@ export default class PbDialog extends PbEnhancedElement {
     } else {
       console.warn(`[PbDialog] Could not find ${type} button for dialog`)
     }
+  }
+
+  isDialogOpen(dialog) {
+    return dialog && dialog.classList.contains('pb_dialog_open')
+  }
+
+  openDialog(dialog) {
+    if (!dialog) return
+    
+    const wrapper = dialog.closest('[data-pb-dialog-wrapper]')
+    if (!wrapper) return
+    
+    // Add open class to dialog
+    dialog.classList.add('pb_dialog_open')
+    dialog.setAttribute('aria-hidden', 'false')
+    
+    // Show overlay
+    const overlay = wrapper.querySelector('[data-pb-dialog-overlay]')
+    if (overlay) {
+      overlay.classList.add('pb_dialog_overlay_open')
+    }
+    
+    // Lock body scroll
+    document.body.classList.add('pb_dialog_body_open')
+    
+    // Focus management - focus first focusable element
+    const firstFocusable = dialog.querySelector('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])')
+    if (firstFocusable) {
+      firstFocusable.focus()
+    } else {
+      dialog.focus()
+    }
+  }
+
+  closeDialog(dialog, returnValue) {
+    if (!dialog) return
+    
+    const wrapper = dialog.closest('[data-pb-dialog-wrapper]')
+    if (!wrapper) return
+    
+    // Remove open class
+    dialog.classList.remove('pb_dialog_open')
+    dialog.setAttribute('aria-hidden', 'true')
+    
+    // Hide overlay
+    const overlay = wrapper.querySelector('[data-pb-dialog-overlay]')
+    if (overlay) {
+      overlay.classList.remove('pb_dialog_overlay_open')
+    }
+    
+    // Unlock body scroll
+    document.body.classList.remove('pb_dialog_body_open')
+    
+    // Dispatch close event for compatibility
+    dialog.dispatchEvent(new CustomEvent('close', { detail: { returnValue } }))
   }
 
   setupDialog() {
@@ -122,7 +177,9 @@ export default class PbDialog extends PbEnhancedElement {
       open._openDialogClickHandler = () => {
         const openTriggerData = open.dataset.openDialog;
         const targetDialogOpen = document.getElementById(openTriggerData)
-        if (targetDialogOpen && !targetDialogOpen.open) targetDialogOpen.showModal()
+        if (targetDialogOpen && !this.isDialogOpen(targetDialogOpen)) {
+          this.openDialog(targetDialogOpen)
+        }
       };
 
       open.addEventListener("click", open._openDialogClickHandler)
@@ -135,7 +192,9 @@ export default class PbDialog extends PbEnhancedElement {
       close._closeDialogClickHandler = () => {
         const closeTriggerData = close.dataset.closeDialog;
         const targetDialogClose = document.getElementById(closeTriggerData)
-        if (targetDialogClose) targetDialogClose.close();
+        if (targetDialogClose) {
+          this.closeDialog(targetDialogClose)
+        }
       };
 
       close.addEventListener("click", close._closeDialogClickHandler)
@@ -143,25 +202,40 @@ export default class PbDialog extends PbEnhancedElement {
 
     // Close dialog box on outside click
     dialogs.forEach((dialogElement) => {
-      const originalMousedownHandler = dialogElement._outsideClickHandler
-      if (originalMousedownHandler) dialogElement.removeEventListener("mousedown", originalMousedownHandler)
-      dialogElement._outsideClickHandler = (event) => {
-        const dialogParentDataset = dialogElement.parentElement.dataset
-        if (dialogParentDataset.overlayClick === "overlay_close") return
+      const wrapper = dialogElement.closest('[data-pb-dialog-wrapper]')
+      if (!wrapper) return
+      
+      const overlay = wrapper.querySelector('[data-pb-dialog-overlay]')
+      if (!overlay) return
+      
+      const originalClickHandler = overlay._overlayClickHandler
+      if (originalClickHandler) overlay.removeEventListener("click", originalClickHandler)
+      
+      overlay._overlayClickHandler = (event) => {
+        const wrapperDataset = wrapper.dataset
+        if (wrapperDataset.overlayClick === "overlay_close") return
 
-        const dialogModal = event.target.getBoundingClientRect()
-        const clickedOutsideDialogModal = event.clientX < dialogModal.left ||
-          event.clientX > dialogModal.right ||
-          event.clientY < dialogModal.top ||
-          event.clientY > dialogModal.bottom
-
-        if (clickedOutsideDialogModal) {
-          dialogElement.close()
+        // Only close if clicking directly on overlay, not on dialog content
+        // Check if click is on overlay (not on dialog or its children)
+        if (event.target === overlay && !dialogElement.contains(event.target)) {
+          this.closeDialog(dialogElement)
           event.stopPropagation()
         }
       }
 
-      dialogElement.addEventListener("mousedown", dialogElement._outsideClickHandler);
+      overlay.addEventListener("click", overlay._overlayClickHandler);
+      
+      // Also handle ESC key
+      const originalKeydownHandler = dialogElement._escapeKeyHandler
+      if (originalKeydownHandler) dialogElement.removeEventListener("keydown", originalKeydownHandler)
+      
+      dialogElement._escapeKeyHandler = (event) => {
+        if (event.key === 'Escape' && this.isDialogOpen(dialogElement)) {
+          this.closeDialog(dialogElement)
+        }
+      }
+      
+      dialogElement.addEventListener("keydown", dialogElement._escapeKeyHandler)
     })
   }
 }
