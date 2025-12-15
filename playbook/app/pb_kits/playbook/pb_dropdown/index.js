@@ -252,6 +252,20 @@ export default class PbDropdown extends PbEnhancedElement {
         const selectedLabel = JSON.parse(value).label;
         triggerElement.textContent = selectedLabel;
         this.emitSelectionChange();
+        
+        // Handle quickpick variant: populate start/end date hidden inputs
+        const optionData = JSON.parse(value);
+        if (optionData.formatted_start_date && optionData.formatted_end_date) {
+          const startDateInput = document.getElementById(
+            this.element.querySelector('input[name*="start"]')?.id || "start_date_id"
+          );
+          const endDateInput = document.getElementById(
+            this.element.querySelector('input[name*="end"]')?.id || "end_date_id"
+          );
+          
+          if (startDateInput) startDateInput.value = optionData.formatted_start_date;
+          if (endDateInput) endDateInput.value = optionData.formatted_end_date;
+        }
       }
       if (customDisplayElement) {
         triggerElement.textContent = "";

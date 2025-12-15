@@ -24,6 +24,7 @@ examples:
   - dropdown_separators_hidden: Separators Hidden
   - dropdown_quickpick_rails: Quick Pick Variant
   - dropdown_quickpick_range_end_rails: Quick Pick Variant (Range Ends Today)
+  - dropdown_quickpick_default_dates: Quick Pick Variant (Default Dates)
 
   react:
   - dropdown_default: Default

@@ -30,10 +30,18 @@ module Playbook
                              default: {}
       prop :range_ends_today, type: Playbook::Props::Boolean,
                               default: false
-      prop :controls_end_id, type: Playbook::Props::String,
-                             default: ""
-      prop :controls_start_id, type: Playbook::Props::String,
-                               default: ""
+      # prop :controls_end_id, type: Playbook::Props::String,
+      #                        default: ""
+      # prop :controls_start_id, type: Playbook::Props::String,
+      #                          default: ""
+      prop :start_date_id, type: Playbook::Props::String,
+                           default: "start_date_id"
+      prop :start_date_name, type: Playbook::Props::String,
+                             default: "start_date_name"
+      prop :end_date_id, type: Playbook::Props::String,
+                         default: "end_date_id"
+      prop :end_date_name, type: Playbook::Props::String,
+                           default: "end_date_name"
 
       def data
         Hash(prop(:data)).merge(
@@ -56,7 +64,12 @@ module Playbook
       def input_default_value
         return "" unless default_value.present?
 
-        if multi_select
+        if variant == "quickpick"
+          matched_option = quickpick_options.find do |opt|
+            opt[:label].downcase == default_value.downcase
+          end
+          matched_option[:id] if matched_option
+        elsif multi_select
           default_value.map { |v| v.transform_keys(&:to_s)["id"] }.join(",")
         else
           default_value.transform_keys(&:to_s)["id"]
