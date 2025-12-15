@@ -570,10 +570,16 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
     picker.config.onClose.push((selectedDates: string) => {
       if (selectedDates?.length) {
         const element = document.querySelector(`#${syncStartWith}`) as any;
-        // Check if it's a Dropdown QuickPick (has _dropdownRef) or DatePicker QuickPick (has _flatpickr)
+        // Check if it's a React Dropdown (has _dropdownRef)
         if (element?._dropdownRef?.current) {
           element._dropdownRef.current.clearSelected();
-        } else {
+        }
+        // Check if it's a Rails Dropdown (has _pbDropdownInstance)
+        else if (element?._pbDropdownInstance) {
+          element._pbDropdownInstance.clearSelected();
+        }
+        // Check if it's a DatePicker QuickPick (has _flatpickr)
+        else {
           const quickpick = element?._flatpickr;
           quickpick?.clear();
         }
@@ -586,10 +592,16 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
     picker.config.onClose.push((selectedDates: string) => {
       if (selectedDates?.length) {
         const element = document.querySelector(`#${syncEndWith}`) as any;
-        // Check if it's a Dropdown QuickPick (has _dropdownRef) or DatePicker QuickPick (has _flatpickr)
+        // Check if it's a React Dropdown (has _dropdownRef)
         if (element?._dropdownRef?.current) {
           element._dropdownRef.current.clearSelected();
-        } else {
+        }
+        // Check if it's a Rails Dropdown (has _pbDropdownInstance)
+        else if (element?._pbDropdownInstance) {
+          element._pbDropdownInstance.clearSelected();
+        }
+        // Check if it's a DatePicker QuickPick (has _flatpickr)
+        else {
           const quickpick = element?._flatpickr;
           quickpick?.clear();
         }

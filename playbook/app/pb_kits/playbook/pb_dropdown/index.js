@@ -28,6 +28,9 @@ export default class PbDropdown extends PbEnhancedElement {
   clearBtn = null;
 
   connect() {
+    // Store instance on element for DatePicker sync
+    this.element._pbDropdownInstance = this;
+    
     this.keyboardHandler = new PbDropdownKeyboard(this);
     this.isMultiSelect = this.element.dataset.pbDropdownMultiSelect === "true";
     this.formPillProps = this.element.dataset.formPillProps
@@ -641,6 +644,38 @@ export default class PbDropdown extends PbEnhancedElement {
     this.updatePills();
     this.updateClearButton();
     this.syncHiddenInputs();
+    this.emitSelectionChange();
+  }
+
+  // Method for DatePicker sync - only clears the dropdown, not the DatePickers
+  clearSelected() {
+    // Only clear if this is a single-select quickpick variant
+    if (this.element.dataset.pbDropdownVariant !== "quickpick" || this.isMultiSelect) {
+      return;
+    }
+    
+    const customDisplay = this.element.querySelector(
+      "#dropdown_trigger_custom_display"
+    );
+    if (customDisplay) {
+      customDisplay.style.display = "none";
+    }
+    
+    // Clear quickpick hidden inputs only (not the DatePickers)
+    const startDateId = this.element.dataset.startDateId;
+    const endDateId = this.element.dataset.endDateId;
+    
+    if (startDateId) {
+      const startDateInput = document.getElementById(startDateId);
+      if (startDateInput) startDateInput.value = "";
+    }
+    if (endDateId) {
+      const endDateInput = document.getElementById(endDateId);
+      if (endDateInput) endDateInput.value = "";
+    }
+    
+    this.resetDropdownValue();
+    this.updateClearButton();
     this.emitSelectionChange();
   }
 
