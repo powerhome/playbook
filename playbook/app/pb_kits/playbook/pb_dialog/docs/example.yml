@@ -25,6 +25,7 @@ examples:
   - dialog_full_height: Full Height
   - dialog_full_height_placement: Full Height Placement
   - dialog_loading: Loading
+  - dialog_overflow_visible: Overflow Visible
 
   swift:
   - dialog_default_swift: Simple
