@@ -227,5 +227,21 @@ RSpec.describe Playbook::PbDropdown::Dropdown do
       this_month_option = options.find { |opt| opt[:label] == "This Month" }
       expect(this_month_option[:formatted_end_date]).to eq(Date.today.strftime("%m/%d/%Y"))
     end
+
+    it "supports blank_selection with quickpick to clear date inputs" do
+      dropdown = subject.new(
+        variant: "quickpick",
+        blank_selection: "Select a date range",
+        start_date_id: "custom_start",
+        end_date_id: "custom_end"
+      )
+      # Verify blank selection option is included
+      options = dropdown.send(:options_with_blank)
+      blank_option = options.first
+      expect(blank_option).to include(id: "", value: "", label: "Select a date range")
+      # Verify blank option does not have date fields
+      expect(blank_option).not_to have_key(:formatted_start_date)
+      expect(blank_option).not_to have_key(:formatted_end_date)
+    end
   end
 end

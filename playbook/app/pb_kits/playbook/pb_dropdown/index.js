@@ -258,13 +258,13 @@ export default class PbDropdown extends PbEnhancedElement {
         
         // Handle quickpick variant: populate start/end date hidden inputs
         const optionData = JSON.parse(value);
+        const startDateId = this.element.dataset.startDateId;
+        const endDateId = this.element.dataset.endDateId;
+        const controlsStartId = this.element.dataset.controlsStartId;
+        const controlsEndId = this.element.dataset.controlsEndId;
+        
         if (optionData.formatted_start_date && optionData.formatted_end_date) {
-          // Use data attributes for IDs to support fully custom names
-          const startDateId = this.element.dataset.startDateId;
-          const endDateId = this.element.dataset.endDateId;
-          const controlsStartId = this.element.dataset.controlsStartId;
-          const controlsEndId = this.element.dataset.controlsEndId;
-          
+          // Populate date inputs when option has date fields
           if (startDateId) {
             const startDateInput = document.getElementById(startDateId);
             if (startDateInput) startDateInput.value = optionData.formatted_start_date;
@@ -287,6 +287,32 @@ export default class PbDropdown extends PbEnhancedElement {
             const endPicker = document.querySelector(`#${controlsEndId}`)?._flatpickr;
             if (endPicker) {
               endPicker.setDate(optionData.formatted_end_date, true, "m/d/Y");
+            }
+          }
+        } else if (startDateId || endDateId) {
+          // Clear date inputs when option doesn't have date fields (e.g., blank selection)
+          if (startDateId) {
+            const startDateInput = document.getElementById(startDateId);
+            if (startDateInput) startDateInput.value = "";
+          }
+          
+          if (endDateId) {
+            const endDateInput = document.getElementById(endDateId);
+            if (endDateInput) endDateInput.value = "";
+          }
+          
+          // Clear DatePickers as well
+          if (controlsStartId) {
+            const startPicker = document.querySelector(`#${controlsStartId}`)?._flatpickr;
+            if (startPicker) {
+              startPicker.clear();
+            }
+          }
+          
+          if (controlsEndId) {
+            const endPicker = document.querySelector(`#${controlsEndId}`)?._flatpickr;
+            if (endPicker) {
+              endPicker.clear();
             }
           }
         }
