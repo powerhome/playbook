@@ -589,6 +589,19 @@ export default class PbDropdown extends PbEnhancedElement {
     if (customDisplay) {
       customDisplay.style.display = "none";
     }
+    
+    // Clear quickpick hidden inputs
+    const startDateId = this.element.dataset.startDateId;
+    const endDateId = this.element.dataset.endDateId;
+    if (startDateId) {
+      const startDateInput = document.getElementById(startDateId);
+      if (startDateInput) startDateInput.value = "";
+    }
+    if (endDateId) {
+      const endDateInput = document.getElementById(endDateId);
+      if (endDateInput) endDateInput.value = "";
+    }
+    
     this.resetDropdownValue();
     this.updatePills();
     this.updateClearButton();
