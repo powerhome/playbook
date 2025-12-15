@@ -65,10 +65,13 @@ module Playbook
         return "" unless default_value.present?
 
         if variant == "quickpick"
+          d = default_value.to_s.downcase
           matched_option = quickpick_options.find do |opt|
-            opt[:label].downcase == default_value.downcase
+            opt[:label].downcase == d
           end
-          matched_option[:id] if matched_option
+          return matched_option[:id] if matched_option
+
+          ""
         elsif multi_select
           default_value.map { |v| v.transform_keys(&:to_s)["id"] }.join(",")
         else
