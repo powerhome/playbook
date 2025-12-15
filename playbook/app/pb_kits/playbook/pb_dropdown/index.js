@@ -259,6 +259,8 @@ export default class PbDropdown extends PbEnhancedElement {
           // Use data attributes for IDs to support fully custom names
           const startDateId = this.element.dataset.startDateId;
           const endDateId = this.element.dataset.endDateId;
+          const controlsStartId = this.element.dataset.controlsStartId;
+          const controlsEndId = this.element.dataset.controlsEndId;
           
           if (startDateId) {
             const startDateInput = document.getElementById(startDateId);
@@ -268,6 +270,21 @@ export default class PbDropdown extends PbEnhancedElement {
           if (endDateId) {
             const endDateInput = document.getElementById(endDateId);
             if (endDateInput) endDateInput.value = optionData.formatted_end_date;
+          }
+          
+          // Sync with DatePickers if controlsStartId/controlsEndId are present
+          if (controlsStartId) {
+            const startPicker = document.querySelector(`#${controlsStartId}`)?._flatpickr;
+            if (startPicker) {
+              startPicker.setDate(optionData.formatted_start_date, true);
+            }
+          }
+          
+          if (controlsEndId) {
+            const endPicker = document.querySelector(`#${controlsEndId}`)?._flatpickr;
+            if (endPicker) {
+              endPicker.setDate(optionData.formatted_end_date, true);
+            }
           }
         }
       }
@@ -593,6 +610,9 @@ export default class PbDropdown extends PbEnhancedElement {
     // Clear quickpick hidden inputs
     const startDateId = this.element.dataset.startDateId;
     const endDateId = this.element.dataset.endDateId;
+    const controlsStartId = this.element.dataset.controlsStartId;
+    const controlsEndId = this.element.dataset.controlsEndId;
+    
     if (startDateId) {
       const startDateInput = document.getElementById(startDateId);
       if (startDateInput) startDateInput.value = "";
@@ -600,6 +620,21 @@ export default class PbDropdown extends PbEnhancedElement {
     if (endDateId) {
       const endDateInput = document.getElementById(endDateId);
       if (endDateInput) endDateInput.value = "";
+    }
+    
+    // Clear linked DatePickers if controlsStartId/controlsEndId are present
+    if (controlsStartId) {
+      const startPicker = document.querySelector(`#${controlsStartId}`)?._flatpickr;
+      if (startPicker) {
+        startPicker.clear();
+      }
+    }
+    
+    if (controlsEndId) {
+      const endPicker = document.querySelector(`#${controlsEndId}`)?._flatpickr;
+      if (endPicker) {
+        endPicker.clear();
+      }
     }
     
     this.resetDropdownValue();
