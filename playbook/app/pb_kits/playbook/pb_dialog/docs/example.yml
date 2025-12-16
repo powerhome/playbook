@@ -13,6 +13,7 @@ examples:
   - dialog_loading: Loading
   - dialog_turbo_frames: Within Turbo Frames
   - dialog_overflow_visible: Overflow Visible
+  - dialog_closeable: Close Button in Header
 
 
   react:
@@ -27,6 +28,7 @@ examples:
   - dialog_full_height_placement: Full Height Placement
   - dialog_loading: Loading
   - dialog_overflow_visible: Overflow Visible
+  - dialog_closeable: Close Button in Header
 
   swift:
   - dialog_default_swift: Simple

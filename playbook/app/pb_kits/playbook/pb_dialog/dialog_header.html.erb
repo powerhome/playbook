@@ -1,10 +1,11 @@
 <%= pb_content_tag(:div, class: object.sticky_header) do %>
         <%= pb_rails("flex", props: {classname:object.classname, spacing:"between", padding:"sm", align:"center"}) do %>
             <%= content.presence || object.title %>
-
-            <button class="dialog-button-class pb_dialog_close_icon" type="button" data-close-dialog= <%= object.id %> aria-label="Close Dialog" >
-                <%= pb_rails("icon", props: { custom_icon: Playbook::Engine::root.join(times_icon), aria: { hidden: true } }) %>
-            </button>
+            <% if object.closeable %>
+                <button class="dialog-button-class pb_dialog_close_icon" type="button" data-close-dialog= <%= object.id %> aria-label="Close Dialog" >
+                    <%= pb_rails("icon", props: { custom_icon: Playbook::Engine::root.join(times_icon), aria: { hidden: true } }) %>
+                </button>
+            <% end %>
         <% end %>
         <%= pb_rails("section_separator") %>
 <% end %>
