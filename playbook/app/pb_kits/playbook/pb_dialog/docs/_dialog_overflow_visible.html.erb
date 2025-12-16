@@ -1,0 +1,71 @@
+<% 
+  typeahead_options = [
+    {
+      label: "United States",
+      value: "unitedStates",
+      id: "us"
+    },
+    {
+      label: "United Kingdom",
+      value: "unitedKingdom",
+      id: "gb"
+    },
+    {
+      label: "Canada",
+      value: "canada",
+      id: "ca"
+    },
+    {
+      label: "Australia",
+      value: "australia",
+      id: "au"
+    },
+    {
+      label: "Germany",
+      value: "germany",
+      id: "de"
+    },
+    {
+      label: "France",
+      value: "france",
+      id: "fr"
+    },
+    {
+      label: "Japan",
+      value: "japan",
+      id: "jp"
+    },
+    {
+      label: "Brazil",
+      value: "brazil",
+      id: "br"
+    }
+  ]
+%>
+
+<%= pb_rails("button", props: { text: "Open Dialog with Overflow Visible", data: {"open-dialog": "dialog-overflow-visible"} }) %>
+
+<%= pb_rails("dialog", props: { 
+    id: "dialog-overflow-visible", 
+    size: "md", 
+    overflow: "visible"
+}) do %>
+  <%= pb_rails("dialog/dialog_header", props: { id: "dialog-overflow-visible" } ) do %>
+    <%= pb_rails("body", props: { text: "Select Location" }) %>
+  <% end %>
+  <%= pb_rails("dialog/dialog_body") do %>
+    <%= pb_rails("typeahead", props: {
+      options: typeahead_options,
+      placeholder: "Select a location...",
+      id: "location-typeahead",
+      is_multi: false,
+    }) %>
+  <% end %>
+  <%= pb_rails("dialog/dialog_footer", props: {
+    cancel_button: "Cancel",
+    confirm_button: "Save",
+    confirm_button_id: "confirm-overflow-visible",
+    id: "dialog-overflow-visible"
+  }) %>
+<% end %>
+
