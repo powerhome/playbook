@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import classnames from "classnames";
 import { globalProps } from "../utilities/globalProps";
 import { buildAriaProps, buildDataProps, buildHtmlProps } from "../utilities/props";
+import { deprecatedKitWarning} from "../utilities/deprecated";
 
 import HighchartsReact from "highcharts-react-official";
 import Highcharts from "highcharts";
@@ -141,6 +142,11 @@ const LineGraph = ({
   useEffect(() => {
     setOptions(merge(staticOptions, customOptions));
   }, [chartData]);
+
+    useEffect(() => {
+      // Warn about deprecated kit
+      deprecatedKitWarning('LineGraph', 'Please use "PbLineGraph" instead.');
+    }, []);
 
   return (
     <HighchartsReact

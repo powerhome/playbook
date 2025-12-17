@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import classnames from "classnames";
 import HighchartsReact from "highcharts-react-official";
 import highchartsMore from "highcharts/highcharts-more";
+import { deprecatedKitWarning } from "../utilities/deprecated";
 
 import Highcharts from "highcharts";
 
@@ -184,6 +185,11 @@ const CircleChart = ({
     setOptions(merge(staticOptions, customOptions));
   }, [chartData]);
 
+    useEffect(() => {
+      // Warn about deprecated kit
+      deprecatedKitWarning('CircleChart', 'Please use "PbCircleChart" instead.');
+    }, []);
+    
 
   return (
     <>

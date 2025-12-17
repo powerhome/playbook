@@ -10,6 +10,7 @@ import solidGauge from "highcharts/modules/solid-gauge";
 import defaultColors from "../tokens/exports/_colors.module.scss";
 import typography from "../tokens/exports/_typography.module.scss";
 
+import { deprecatedKitWarning } from "../utilities/deprecated";
 import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from "../utilities/props";
 import { globalProps } from "../utilities/globalProps";
 import { GenericObject } from "../types";
@@ -190,6 +191,11 @@ const Gauge = ({
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [chartData]);
+
+    useEffect(() => {
+    // Warn about deprecated kit
+    deprecatedKitWarning('Gauge', 'Please use "PbGaugeChart" instead.');
+  }, []);
 
   return (
     <HighchartsReact
