@@ -10,13 +10,20 @@ RSpec.describe Playbook::PbDropdown::Dropdown do
   it { is_expected.to define_string_prop(:name) }
   it { is_expected.to define_boolean_prop(:required).with_default(false) }
   it { is_expected.to define_string_prop(:blank_selection).with_default("") }
-  it { is_expected.to define_enum_prop(:variant).with_values("default", "subtle").with_default("default") }
+  it { is_expected.to define_enum_prop(:variant).with_values("default", "subtle", "quickpick").with_default("default") }
   it { is_expected.to define_boolean_prop(:separators).with_default(true) }
   it { is_expected.to define_string_prop(:default_value) }
   it { is_expected.to define_boolean_prop(:autocomplete) }
   it { is_expected.to define_boolean_prop(:searchbar) }
   it { is_expected.to define_boolean_prop(:multi_select).with_default(false) }
   it { is_expected.to define_hash_prop(:form_pill_props).with_default({}) }
+  it { is_expected.to define_boolean_prop(:range_ends_today).with_default(false) }
+  it { is_expected.to define_string_prop(:controls_start_id).with_default("") }
+  it { is_expected.to define_string_prop(:controls_end_id).with_default("") }
+  it { is_expected.to define_string_prop(:start_date_id).with_default("start_date_id") }
+  it { is_expected.to define_string_prop(:start_date_name).with_default("start_date_name") }
+  it { is_expected.to define_string_prop(:end_date_id).with_default("end_date_id") }
+  it { is_expected.to define_string_prop(:end_date_name).with_default("end_date_name") }
 
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
@@ -136,6 +143,105 @@ RSpec.describe Playbook::PbDropdown::Dropdown do
       # The name should be configured to support array notation in the template
       expect(dropdown.name).to eq("test_field")
       expect(dropdown.multi_select).to be true
+    end
+  end
+
+  describe "quickpick variant" do
+    it "includes variant in data attributes" do
+      dropdown = subject.new(variant: "quickpick")
+      expect(dropdown.data).to include(pb_dropdown_variant: "quickpick")
+    end
+
+    it "includes start_date_id and end_date_id in data when variant is quickpick" do
+      dropdown = subject.new(variant: "quickpick")
+      expect(dropdown.data).to include(
+        start_date_id: "start_date_id",
+        end_date_id: "end_date_id"
+      )
+    end
+
+    it "uses custom start_date_id and end_date_id when provided" do
+      dropdown = subject.new(
+        variant: "quickpick",
+        start_date_id: "custom_start",
+        end_date_id: "custom_end"
+      )
+      expect(dropdown.data).to include(
+        start_date_id: "custom_start",
+        end_date_id: "custom_end"
+      )
+    end
+
+    it "includes controls_start_id and controls_end_id when provided" do
+      dropdown = subject.new(
+        variant: "quickpick",
+        controls_start_id: "start-picker",
+        controls_end_id: "end-picker"
+      )
+      expect(dropdown.data).to include(
+        controls_start_id: "start-picker",
+        controls_end_id: "end-picker"
+      )
+    end
+
+    it "does not include controls_start_id and controls_end_id when empty" do
+      dropdown = subject.new(variant: "quickpick")
+      expect(dropdown.data).not_to have_key(:controls_start_id)
+      expect(dropdown.data).not_to have_key(:controls_end_id)
+    end
+
+    it "does not include quickpick data attributes when variant is not quickpick" do
+      dropdown = subject.new(variant: "default")
+      expect(dropdown.data).not_to have_key(:start_date_id)
+      expect(dropdown.data).not_to have_key(:end_date_id)
+    end
+
+    it "supports default_value with quickpick variant" do
+      dropdown = subject.new(
+        variant: "quickpick",
+        default_value: "This Month"
+      )
+      expect(dropdown.send(:input_default_value)).to eq("quickpick-this-month")
+    end
+
+    it "supports range_ends_today option" do
+      dropdown = subject.new(
+        variant: "quickpick",
+        range_ends_today: true
+      )
+      expect(dropdown.range_ends_today).to be true
+    end
+
+    it "generates quickpick options automatically" do
+      dropdown = subject.new(variant: "quickpick")
+      options = dropdown.send(:quickpick_options)
+      expect(options).to be_an(Array)
+      expect(options.length).to eq(10)
+      expect(options.first).to include(:id, :label, :value, :formatted_start_date, :formatted_end_date)
+    end
+
+    it "generates quickpick options with range_ends_today" do
+      dropdown = subject.new(variant: "quickpick", range_ends_today: true)
+      options = dropdown.send(:quickpick_options)
+      # Verify "This Month" ends today instead of end of month
+      this_month_option = options.find { |opt| opt[:label] == "This Month" }
+      expect(this_month_option[:formatted_end_date]).to eq(Date.today.strftime("%m/%d/%Y"))
+    end
+
+    it "supports blank_selection with quickpick to clear date inputs" do
+      dropdown = subject.new(
+        variant: "quickpick",
+        blank_selection: "Select a date range",
+        start_date_id: "custom_start",
+        end_date_id: "custom_end"
+      )
+      # Verify blank selection option is included
+      options = dropdown.send(:options_with_blank)
+      blank_option = options.first
+      expect(blank_option).to include(id: "", value: "", label: "Select a date range")
+      # Verify blank option does not have date fields
+      expect(blank_option).not_to have_key(:formatted_start_date)
+      expect(blank_option).not_to have_key(:formatted_end_date)
     end
   end
 end

@@ -20,12 +20,14 @@
 
 %>
 
-<%= pb_rails("dropdown", props: {options: options}) %>
+<%= pb_rails("dropdown", props: {id: "country-dropdown", options: options}) %>
 
 <script>
   document.addEventListener("pb:dropdown:selected", (e) => {
-    const option   = e.detail;
-    const dropdown = e.target;
-    console.log("Selected option:", option);
-})
+    if (e.target.id === "country-dropdown") {
+      const option   = e.detail;
+      const dropdown = e.target;
+      console.log("Selected option:", option);
+    }
+  });
 </script>

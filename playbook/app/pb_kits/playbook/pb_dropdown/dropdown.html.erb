@@ -10,6 +10,10 @@
             style="display: none"
             <%= object.required ? "required" : ""%>
         />
+        <% if object.variant == "quickpick" %>
+          <input id="<%= object.start_date_id %>" name="<%= object.start_date_name %>" style="display: none">
+          <input id="<%= object.end_date_id %>" name="<%= object.end_date_name %>" style="display: none">
+        <% end %>
         <% if content.present? %>
             <%= content.presence %>
             <%= pb_rails("body", props: { status: "negative", text: object.error }) %>

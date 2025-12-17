@@ -1,0 +1,30 @@
+<%= pb_rails("dropdown", props: {
+  id: "dropdown-quickpick-with-date-pickers-default",
+  label: "Date Range",
+  name: "date_range",
+  margin_bottom: "sm",
+  variant: "quickpick",
+  default_value: "This Month",
+  controls_start_id: "start-date-picker-default",
+  controls_end_id: "end-date-picker-default",
+  start_date_id: "quickpick_start_date_default",
+  start_date_name: "start_date",
+  end_date_id: "quickpick_end_date_default",
+  end_date_name: "end_date"
+}) %>
+
+<%= pb_rails("date_picker", props: {
+  picker_id: "start-date-picker-default",
+  label: "Start Date",
+  name: "start_date_picker",
+  placeholder: "Select Start Date",
+  sync_start_with: "dropdown-quickpick-with-date-pickers-default"
+}) %>
+
+<%= pb_rails("date_picker", props: {
+  picker_id: "end-date-picker-default",
+  label: "End Date",
+  name: "end_date_picker",
+  placeholder: "Select End Date",
+  sync_end_with: "dropdown-quickpick-with-date-pickers-default"
+}) %>
