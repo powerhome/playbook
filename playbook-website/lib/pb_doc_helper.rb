@@ -4,7 +4,7 @@ module PlaybookWebsite
   module PbDocHelper
     def pb_kit_title(title)
       highcharts_kits = %w[pb_bar_graph pb_circle_chart pb_line_graph pb_gauge_chart]
-      return title.titleize.tr("_", " ") if highcharts_kits.include?(title)
+      return "PB #{title.sub(/^pb_/, '').tr('_', ' ').titleize}" if highcharts_kits.include?(title)
 
       title.remove("pb_").titleize.tr("_", " ")
     end

@@ -136,8 +136,14 @@ module ApplicationHelper
   end
 
   def format_search_hash(kit)
+    highcharts_kits = %w[pb_bar_graph pb_circle_chart pb_line_graph pb_gauge_chart]
+    label = if highcharts_kits.include?(kit.to_s)
+              "PB #{kit.to_s.sub(/^pb_/, '').tr(' ', ' ').titleize}"
+            else
+              kit.to_s.titleize
+            end
     {
-      label: kit.to_s.titleize,
+      label: label,
       value: if @type == "react" || @type.nil?
                "/#{kit == 'advanced_table' ? 'kit_category' : 'kits'}/#{kit}#{kit == 'advanced_table' ? '?type=react' : '/react'}"
              elsif @type == "swift"
