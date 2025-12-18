@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { globalProps } from "../utilities/globalProps";
 import { buildAriaProps, buildDataProps, buildHtmlProps } from "../utilities/props";
+import { deprecatedKitWarning } from "../utilities/deprecated";
 
 import HighchartsReact from "highcharts-react-official";
 import Highcharts from "highcharts";
@@ -172,6 +173,11 @@ if (Array.isArray(axisTitle) && axisTitle.length > 1 && axisTitle[1].name) {
     setOptions(merge(staticOptions, customOptions));
   }, [chartData]);
 
+    useEffect(() => {
+    // Warn about deprecated kit
+    deprecatedKitWarning('BarGraph', 'Please use "PbBarGraph" instead.');
+  }, []);
+  
   return (
     <HighchartsReact
         containerProps={{

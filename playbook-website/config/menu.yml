@@ -215,13 +215,13 @@ kits:
   - name: gauge
     platforms: *1
     description:
-    status: stable
+    status: deprecated
     icons_used: false
     react_rendered: true
     enhanced_element_used: false
   - name: pb_gauge_chart
     platforms: web
-    status: beta
+    status: stable
     icons_used: false
     react_rendered: true
     enhanced_element_used: false
@@ -229,7 +229,7 @@ kits:
     platforms: *1
     description: Bar graphs are used to compare data. Bar graphs are not typically
       used to show percentages.
-    status: stable
+    status: deprecated
     icons_used: false
     react_rendered: true
     enhanced_element_used: false
@@ -237,33 +237,33 @@ kits:
     description: Bar graphs are used to compare data. Bar graphs are not typically
       used to show percentages.
     platforms: *1
-    status: beta
+    status: stable
     icons_used: false
     react_rendered: true
     enhanced_element_used: false
   - name: circle_chart
     platforms: *1
     description:
-    status: stable
+    status: deprecated
     icons_used: false
     react_rendered: true
     enhanced_element_used: false
   - name: pb_circle_chart
     platforms: web
-    status: beta
+    status: stable
     icons_used: false
     react_rendered: true
     enhanced_element_used: false
   - name: line_graph
     platforms: *1
     description: Line graphs are used to show changes in data over time.
-    status: stable
+    status: deprecated
     icons_used: false
     react_rendered: true
     enhanced_element_used: false
   - name: pb_line_graph
     platforms: web
-    status: beta
+    status: stable
     icons_used: false
     react_rendered: true
     enhanced_element_used: false
