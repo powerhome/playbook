@@ -82,6 +82,9 @@ PbCheckbox.start()
 import PbButton from 'kits/pb_button'
 PbButton.start()
 
+import PbTimePicker from 'kits/pb_time_picker'
+PbTimePicker.start()
+
 import 'flatpickr'
 
 // React-Rendered Rails Kits =====

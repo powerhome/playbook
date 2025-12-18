@@ -1,0 +1,20 @@
+<%= pb_rails("time_picker", props: {
+  id: "time-picker-input-options",
+  label: "Appointment Time",
+  input_options: {
+    aria: { 
+      describedby: "appointment-help-text",
+      label: "Select your preferred appointment time"
+    },
+    data: { 
+      testid: "appointment-time-input"
+    },
+    placeholder: "Choose a time"
+  }
+}) %>
+
+<%= pb_rails("caption", props: { 
+  id: "appointment-help-text",
+  text: "Select a time between 9 AM and 5 PM",
+  margin_top: "xs"
+}) %>

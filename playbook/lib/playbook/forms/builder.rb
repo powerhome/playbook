@@ -16,6 +16,7 @@ module Playbook
       require_relative "builder/dropdown_field"
       require_relative "builder/star_rating_field"
       require_relative "builder/time_zone_select_field"
+      require_relative "builder/time_picker_field"
 
       prepend(FormFieldBuilder.new(:email_field, kit_name: "text_input"))
       prepend(FormFieldBuilder.new(:number_field, kit_name: "text_input"))
