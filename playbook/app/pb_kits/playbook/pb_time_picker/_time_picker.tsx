@@ -665,6 +665,7 @@ const TimePicker = (props: TimePickerProps): JSX.Element => {
               disabled={disabled}
               id={`${uniqueId}-input`}
               name={fieldName}
+              onChange={() => { /* onChange handled via dropdown selection */ }}
               onClick={disabled ? undefined : handleInputClick}
               onFocus={disabled ? undefined : handleInputFocus}
               onKeyDown={disabled ? undefined : handleInputKeyDown}
