@@ -1,19 +1,11 @@
-# 15.7.0
+# ☎️ Your Phone Number, Your Rules ☎️
 ##### December 19, 2025
 
 ![release_image](https://github.com/user-attachments/assets/db119637-25e9-4157-9091-c5f7fdf034fc)
 
-**Improvements:**
+We’ve loosened the reins on the Contact kit. Disable the icon and default styles to get just the formatted phone number text, ready to be wrapped in your Typography kit of choice! Get the phone number formatting you need with none of the added fluff!
 
-- Playbook Website: Use More Standard Setup for Playbook Icons [\#5632](https://github.com/powerhome/playbook/pull/5632) ([kangaree](https://github.com/kangaree))
-- Highcharts: Deprecate Old Highcharts Kits and Take New Ones Out Of Beta [\#5630](https://github.com/powerhome/playbook/pull/5630) ([nidaqg](https://github.com/nidaqg))
-- Playbook Website: Dialog Overflow Auto Docs \(with Typeahead\) [\#5625](https://github.com/powerhome/playbook/pull/5625) ([kangaree](https://github.com/kangaree))
-- Playbook Website: Deprecation Warnings and Ui Flags [\#5573](https://github.com/powerhome/playbook/pull/5573) ([nidaqg](https://github.com/nidaqg))
-- Playbook Website: Broken Link to New Colors Page In 3 Docs [\#5610](https://github.com/powerhome/playbook/pull/5610) ([elisashapiro](https://github.com/elisashapiro))
-- Playbook Website: Google Analytics 404 [\#5601](https://github.com/powerhome/playbook/pull/5601) ([nickamantia](https://github.com/nickamantia))
-- Playbook Website: Typo In Error State Docs [\#5600](https://github.com/powerhome/playbook/pull/5600) ([elisashapiro](https://github.com/elisashapiro))
-- Collapsible Icon Re-factor With Tokenized Colors [\#5572](https://github.com/powerhome/playbook/pull/5572) ([nickamantia](https://github.com/nickamantia))
-
+[15.7.0](https://github.com/powerhome/playbook/tree/15.7.0) full list of changes:
 
 **Kit Enhancements:**
 
@@ -26,6 +18,16 @@
 - Select Kit: Input\_options Prop for Kit + Form Kit [\#5602](https://github.com/powerhome/playbook/pull/5602) ([elisashapiro](https://github.com/elisashapiro))
 - Datepicker and Defaultdate When Min/max Date Range Set [\#5587](https://github.com/powerhome/playbook/pull/5587) ([elisashapiro](https://github.com/elisashapiro))
 
+**Improvements:**
+
+- Playbook Website: Use More Standard Setup for Playbook Icons [\#5632](https://github.com/powerhome/playbook/pull/5632) ([kangaree](https://github.com/kangaree))
+- Highcharts: Deprecate Old Highcharts Kits and Take New Ones Out Of Beta [\#5630](https://github.com/powerhome/playbook/pull/5630) ([nidaqg](https://github.com/nidaqg))
+- Playbook Website: Dialog Overflow Auto Docs \(with Typeahead\) [\#5625](https://github.com/powerhome/playbook/pull/5625) ([kangaree](https://github.com/kangaree))
+- Playbook Website: Deprecation Warnings and Ui Flags [\#5573](https://github.com/powerhome/playbook/pull/5573) ([nidaqg](https://github.com/nidaqg))
+- Playbook Website: Broken Link to New Colors Page In 3 Docs [\#5610](https://github.com/powerhome/playbook/pull/5610) ([elisashapiro](https://github.com/elisashapiro))
+- Playbook Website: Google Analytics 404 [\#5601](https://github.com/powerhome/playbook/pull/5601) ([nickamantia](https://github.com/nickamantia))
+- Playbook Website: Typo In Error State Docs [\#5600](https://github.com/powerhome/playbook/pull/5600) ([elisashapiro](https://github.com/elisashapiro))
+- Collapsible Icon Re-factor With Tokenized Colors [\#5572](https://github.com/powerhome/playbook/pull/5572) ([nickamantia](https://github.com/nickamantia))
 
 **Fixed Bugs:**
 
