@@ -24,6 +24,9 @@ import {
   normalizeMinuteOnBlur,
   convertTo24HourFormat,
   convertTo12HourFormat,
+  generateHourOptions,
+  generateMinuteOptions,
+  getValidInitialMeridiem as getValidInitialMeridiemHelper,
   TimeFormat,
   ParsedTime,
 } from './time_picker_helper'
@@ -78,6 +81,12 @@ const TimePicker = (props: TimePickerProps): JSX.Element => {
   // Form Validation Tracking for React Rendered Rails Kit
   const [formSubmitted, setFormSubmitted] = useState(false)
 
+  const uniqueId = useMemo(() => {
+    return id || `time-picker-${Math.random().toString(36).substr(2, 9)}`
+  }, [id])
+
+  const fieldName = name || `${uniqueId}-time`
+
   useEffect(() => {
     const handleInvalid = (event: Event) => {
       const target = event.target as HTMLInputElement
@@ -85,7 +94,6 @@ const TimePicker = (props: TimePickerProps): JSX.Element => {
 
       if (timePickerContainer) {
         const invalidInputName = target.name || target.getAttribute('name')
-        const fieldName = name || `${id}-time`
         if (invalidInputName === fieldName) {
           setFormSubmitted(true)
         }
@@ -96,7 +104,7 @@ const TimePicker = (props: TimePickerProps): JSX.Element => {
     return () => {
       document.removeEventListener('invalid', handleInvalid, true)
     }
-  }, [name, id])
+  }, [fieldName])
 
   // Min/Max Time Range Validation
   const minTimeMinutes = parseTimeToMinutes(minTime)
@@ -122,17 +130,9 @@ const TimePicker = (props: TimePickerProps): JSX.Element => {
     return isAnyPMTimeValidHelper(minTimeMinutes, maxTimeMinutes)
   }
 
+  // Wrapper for helper function with component's min/max context
   const getValidInitialMeridiem = (parsedMeridiem: 'AM' | 'PM'): 'AM' | 'PM' => {
-    const amValid = isAnyAMTimeValidHelper(minTimeMinutes, maxTimeMinutes)
-    const pmValid = isAnyPMTimeValidHelper(minTimeMinutes, maxTimeMinutes)
-    
-    if (parsedMeridiem === 'AM' && amValid) return 'AM'
-    if (parsedMeridiem === 'PM' && pmValid) return 'PM'
-    
-    if (!pmValid && amValid) return 'AM'
-    if (!amValid && pmValid) return 'PM'
-    
-    return parsedMeridiem
+    return getValidInitialMeridiemHelper(parsedMeridiem, minTimeMinutes, maxTimeMinutes)
   }
 
   const hasInitialValue = !!(value || defaultTime)
@@ -181,12 +181,52 @@ const TimePicker = (props: TimePickerProps): JSX.Element => {
   const amInputRef = useRef<HTMLInputElement | null>(null)
   const pmInputRef = useRef<HTMLInputElement | null>(null)
   const timePickerWrapperRef = useRef<HTMLDivElement>(null)
+  const hourDropdownRef = useRef<HTMLDivElement>(null)
+  const minuteDropdownRef = useRef<HTMLDivElement>(null)
   const [showDropdown, setShowDropdown] = useState(false)
-  
-  // Generate a unique ID for Time Picker instance if not provided
-  const uniqueId = useMemo(() => {
-    return id || `time-picker-${Math.random().toString(36).substr(2, 9)}`
-  }, [id])
+  const [showHourDropdown, setShowHourDropdown] = useState(false)
+  const [showMinuteDropdown, setShowMinuteDropdown] = useState(false)
+
+  // Input dropdown scrolling
+  const scrollDropdownToSelected = (dropdownRef: React.RefObject<HTMLDivElement>) => {
+    if (dropdownRef.current) {
+      const selectedOption = dropdownRef.current.querySelector('.selected') as HTMLElement
+      if (selectedOption) {
+        const dropdown = dropdownRef.current
+        const dropdownHeight = dropdown.clientHeight
+        const optionTop = selectedOption.offsetTop
+        const optionHeight = selectedOption.clientHeight
+        // Center the selected option in the dropdown
+        dropdown.scrollTop = optionTop - (dropdownHeight / 2) + (optionHeight / 2)
+      }
+    }
+  }
+
+  useEffect(() => {
+    if (showHourDropdown) {
+      scrollDropdownToSelected(hourDropdownRef)
+    }
+  }, [showHourDropdown])
+
+  useEffect(() => {
+    if (showMinuteDropdown) {
+      scrollDropdownToSelected(minuteDropdownRef)
+    }
+  }, [showMinuteDropdown])
+
+  useEffect(() => {
+    if (showHourDropdown) {
+      setTimeout(() => scrollDropdownToSelected(hourDropdownRef), 0)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [hour])
+
+  useEffect(() => {
+    if (showMinuteDropdown) {
+      setTimeout(() => scrollDropdownToSelected(minuteDropdownRef), 0)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [minute])
   
   const [displayValue, setDisplayValue] = useState(
     hasInitialValue ? getDisplayTime(hour, minute, meridiem, timeFormat) : ''
@@ -219,6 +259,9 @@ const TimePicker = (props: TimePickerProps): JSX.Element => {
 
   // Close dropdown and handle validation
   const closeDropdown = (skipValidation = false) => {
+    setShowHourDropdown(false)
+    setShowMinuteDropdown(false)
+
     // If user hasn't selected anything, just close the dropdown
     if (!hasSelectedTime) {
       setShowDropdown(false)
@@ -365,6 +408,28 @@ const TimePicker = (props: TimePickerProps): JSX.Element => {
     setMinuteInputValue(result.displayValue)
   }
 
+  const handleHourOptionClick = (h: number) => {
+    setHour(h)
+    setHourInputValue(h.toString())
+    setHasSelectedTime(true)
+    setShowHourDropdown(false)
+    const timeString = get24HourTime(h, minute, meridiem, timeFormat)
+    if (onChange) {
+      onChange(timeString)
+    }
+  }
+
+  const handleMinuteOptionClick = (m: number) => {
+    setMinute(m)
+    setMinuteInputValue(m.toString().padStart(2, '0'))
+    setHasSelectedTime(true)
+    setShowMinuteDropdown(false)
+    const timeString = get24HourTime(hour, m, meridiem, timeFormat)
+    if (onChange) {
+      onChange(timeString)
+    }
+  }
+
   const handleMeridiemChange = (mer: 'AM' | 'PM') => {
     setMeridiem(mer)
     setHasSelectedTime(true)
@@ -395,6 +460,9 @@ const TimePicker = (props: TimePickerProps): JSX.Element => {
     } else if (e.key === 'Tab' && !e.shiftKey && showDropdown) {
       e.preventDefault()
       hourInputRef.current?.focus()
+    } else if (e.key === 'Tab' && e.shiftKey) {
+      // Allow shift+tab to go to previous element
+      return
     } else if (e.key === 'Backspace' || e.key === 'Delete') {
       // Allow clearing the input
       e.preventDefault()
@@ -405,31 +473,39 @@ const TimePicker = (props: TimePickerProps): JSX.Element => {
       if (!showDropdown) {
         setShowDropdown(true)
       }
+    } else {
+      // Prevent typing in main input - alternative to readonly that allows for validation to occur
+      e.preventDefault()
     }
   }
 
   const handleHourKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'ArrowRight' || e.key === 'Tab') {
+    if (e.key === 'Tab') {
       if (!e.shiftKey) {
         e.preventDefault()
+        setShowHourDropdown(false)
         minuteInputRef.current?.focus()
       }
     } else if (e.key === 'Enter') {
       e.preventDefault()
+      setShowHourDropdown(false)
       closeDropdown()
     } else if (e.key === 'Escape') {
       e.preventDefault()
+      setShowHourDropdown(false)
       closeDropdown()
     }
   }
 
   const handleMinuteKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'ArrowLeft' || (e.key === 'Tab' && e.shiftKey)) {
+    if (e.key === 'Tab' && e.shiftKey) {
       e.preventDefault()
+      setShowMinuteDropdown(false)
       hourInputRef.current?.focus()
     } else if (e.key === 'Tab') {
       if (!e.shiftKey) {
         e.preventDefault()
+        setShowMinuteDropdown(false)
         if (timeFormat === '24hour') {
           closeDropdown()
         } else {
@@ -443,9 +519,11 @@ const TimePicker = (props: TimePickerProps): JSX.Element => {
       }
     } else if (e.key === 'Enter') {
       e.preventDefault()
+      setShowMinuteDropdown(false)
       closeDropdown()
     } else if (e.key === 'Escape') {
       e.preventDefault()
+      setShowMinuteDropdown(false)
       closeDropdown()
     }
   }
@@ -544,9 +622,6 @@ const TimePicker = (props: TimePickerProps): JSX.Element => {
     className
   )
 
-  // Get the field name for form submission
-  const fieldName = name || `${uniqueId}-time`
-
   // Get hour constraints for the input
   const { maxHour, minHour } = getHourConstraints(timeFormat)
 
@@ -572,6 +647,7 @@ const TimePicker = (props: TimePickerProps): JSX.Element => {
       <div className="time_picker_wrapper">
         <TextInput
             addOn={{ icon: 'clock', alignment: 'right', border: true }}
+            cursor="pointer"
             disabled={disabled}
             error={errorDisplay}
             id={`${uniqueId}-input`}
@@ -593,8 +669,8 @@ const TimePicker = (props: TimePickerProps): JSX.Element => {
               onFocus={disabled ? undefined : handleInputFocus}
               onKeyDown={disabled ? undefined : handleInputKeyDown}
               placeholder="Select Time"
-              readOnly
               required={required}
+              style={{ caretColor: 'transparent' }}
               type="text"
               value={displayValue}
               {...inputHtmlProps}
@@ -609,10 +685,10 @@ const TimePicker = (props: TimePickerProps): JSX.Element => {
                   size="md"
                   text="Select Time"
               />
-              <div className={`numInputWrapper ${hasSelectedTime && isHourDisabled(hour, meridiem) ? 'disabled' : ''}`}>
+              <div className="time_input_wrapper">
                 <input
                     aria-label="Hour"
-                    className={`numInput time-hour ${hasSelectedTime && !isCurrentTimeValid(hour, minute, meridiem) ? 'invalid' : ''}`}
+                    className={`time_input time-hour ${hasSelectedTime && !isCurrentTimeValid(hour, minute, meridiem) ? 'invalid' : ''}`}
                     id={`${uniqueId}-hour`}
                     inputMode="numeric"
                     max={maxHour}
@@ -621,6 +697,7 @@ const TimePicker = (props: TimePickerProps): JSX.Element => {
                     name={`${uniqueId}-hour`}
                     onBlur={handleHourBlur}
                     onChange={handleHourChange}
+                    onClick={() => { setShowHourDropdown(!showHourDropdown); setShowMinuteDropdown(false) }}
                     onKeyDown={handleHourKeyDown}
                     pattern="[0-9]*"
                     ref={hourInputRef}
@@ -629,14 +706,28 @@ const TimePicker = (props: TimePickerProps): JSX.Element => {
                     type="number"
                     value={hourInputValue}
                 />
-                <span className="arrowUp" />
-                <span className="arrowDown" />
+                {showHourDropdown && (
+                  <div 
+                      className="time_dropdown"
+                      ref={hourDropdownRef}
+                  >
+                    {generateHourOptions(timeFormat).map((h) => (
+                      <div
+                          className={`time_dropdown_option ${hour === h ? 'selected' : ''}`}
+                          key={h}
+                          onClick={() => handleHourOptionClick(h)}
+                      >
+                        {timeFormat === '24hour' ? h.toString().padStart(2, '0') : h}
+                      </div>
+                    ))}
+                  </div>
+                )}
               </div>
               <span className="time-separator">{':'}</span>
-              <div className="numInputWrapper">
+              <div className="time_input_wrapper">
                 <input
                     aria-label="Minute"
-                    className={`numInput time-minute ${hasSelectedTime && !isCurrentTimeValid(hour, minute, meridiem) ? 'invalid' : ''}`}
+                    className={`time_input time-minute ${hasSelectedTime && !isCurrentTimeValid(hour, minute, meridiem) ? 'invalid' : ''}`}
                     id={`${uniqueId}-minute`}
                     inputMode="numeric"
                     max={59}
@@ -645,6 +736,7 @@ const TimePicker = (props: TimePickerProps): JSX.Element => {
                     name={`${uniqueId}-minute`}
                     onBlur={handleMinuteBlur}
                     onChange={handleMinuteChange}
+                    onClick={() => { setShowMinuteDropdown(!showMinuteDropdown); setShowHourDropdown(false) }}
                     onKeyDown={handleMinuteKeyDown}
                     pattern="[0-9]*"
                     ref={minuteInputRef}
@@ -653,8 +745,22 @@ const TimePicker = (props: TimePickerProps): JSX.Element => {
                     type="number"
                     value={minuteInputValue}
                 />
-                <span className="arrowUp" />
-                <span className="arrowDown" />
+                {showMinuteDropdown && (
+                  <div 
+                      className="time_dropdown"
+                      ref={minuteDropdownRef}
+                  >
+                    {generateMinuteOptions().map((m) => (
+                      <div
+                          className={`time_dropdown_option ${minute === m ? 'selected' : ''}`}
+                          key={m}
+                          onClick={() => handleMinuteOptionClick(m)}
+                      >
+                        {m.toString().padStart(2, '0')}
+                      </div>
+                    ))}
+                  </div>
+                )}
               </div>
               {timeFormat === 'AMPM' && (
                 <div className="meridiem">

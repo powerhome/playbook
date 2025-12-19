@@ -460,11 +460,8 @@ export const processMinuteInput = (rawValue: string): MinuteInputResult => {
     return { value: '59', minute: 59, isValid: true, capped: true }
   }
 
-  // For minutes, always display with leading zero for 0-9
-  const displayValue = numValue.toString().padStart(2, '0')
-
   return {
-    value: displayValue,
+    value: rawValue,
     minute: numValue >= 0 ? numValue : null,
     isValid: true,
     capped: false,
@@ -593,6 +590,51 @@ export const convertTo12HourFormat = (
   }
 }
 
+/**
+ * Generate hour options based on time format
+ * @param timeFormat - 'AMPM' for 12-hour (1-12), '24hour' for 24-hour (0-23)
+ * @returns Array of valid hour numbers
+ */
+export const generateHourOptions = (timeFormat: TimeFormat): number[] => {
+  if (timeFormat === '24hour') {
+    return Array.from({ length: 24 }, (_, i) => i) // 0-23
+  }
+  return Array.from({ length: 12 }, (_, i) => i + 1) // 1-12
+}
+
+/**
+ * Generate minute options (00-59)
+ * @returns Array of minute numbers 0-59
+ */
+export const generateMinuteOptions = (): number[] => {
+  return Array.from({ length: 60 }, (_, i) => i) // 0-59
+}
+
+/**
+ * Determine the valid initial meridiem based on min/max time constraints
+ * If the parsed meridiem is invalid, returns a valid alternative
+ * @param parsedMeridiem - The initially parsed meridiem
+ * @param minTimeMinutes - Minimum time in minutes (or null)
+ * @param maxTimeMinutes - Maximum time in minutes (or null)
+ * @returns The valid meridiem to use
+ */
+export const getValidInitialMeridiem = (
+  parsedMeridiem: 'AM' | 'PM',
+  minTimeMinutes: number | null,
+  maxTimeMinutes: number | null
+): 'AM' | 'PM' => {
+  const amValid = isAnyAMTimeValid(minTimeMinutes, maxTimeMinutes)
+  const pmValid = isAnyPMTimeValid(minTimeMinutes, maxTimeMinutes)
+  
+  if (parsedMeridiem === 'AM' && amValid) return 'AM'
+  if (parsedMeridiem === 'PM' && pmValid) return 'PM'
+  
+  if (!pmValid && amValid) return 'AM'
+  if (!amValid && pmValid) return 'PM'
+  
+  return parsedMeridiem
+}
+
 export default {
   parseTimeToMinutes,
   parseTime,
@@ -614,4 +656,7 @@ export default {
   to12Hour,
   convertTo24HourFormat,
   convertTo12HourFormat,
+  generateHourOptions,
+  generateMinuteOptions,
+  getValidInitialMeridiem,
 }

@@ -4,6 +4,7 @@
 @import "../tokens/border_radius";
 @import "../tokens/shadows";
 @import "../tokens/positioning";
+@import "../pb_body/body_mixins";
 
 .pb_time_picker {
   > label {
@@ -76,7 +77,7 @@
   .pb_time_picker_container {
     position: absolute;
     background-color: $white;
-    overflow: hidden;
+    overflow: visible;
     box-shadow: $shadow_deep;
     border-radius: $border_rad_heavier;
     border: 1px solid $border_light;
@@ -102,14 +103,15 @@
         margin-bottom: 0;
       }
 
-      .numInputWrapper {
-        width: auto;
+      .time_input_wrapper {
+        position: relative;
         display: inline-flex;
         align-items: center;
         margin-bottom: $space_xs;
-        input.numInput {
-          border: 1px solid $border_light !important;
-          border-radius: 5px;
+
+        input.time_input {
+          border: 1px solid $border_light;
+          border-radius: $border_radius_md;
           text-align: center;
           width: 60px;
           margin-left: 0;
@@ -117,25 +119,78 @@
           height: 40px;
           font-size: 14px;
           font-weight: $bolder;
+          background-color: $white;
+          cursor: pointer;
           transition: border-color 0.2s ease, background-color 0.2s ease;
+          color: $text_lt_default;
+
+          appearance: textfield;
+          -moz-appearance: textfield;
+          &::-webkit-outer-spin-button,
+          &::-webkit-inner-spin-button {
+            appearance: none;
+            -webkit-appearance: none;
+            margin: 0;
+          }
+
           &:focus {
-            border-color: $primary_action !important;
+            border-color: $primary;
             outline: none;
           }
+
+          &:hover {
+            background-color: $focus_input_light;
+          }
+
           &.invalid {
-            border-color: $error !important;
+            border-color: $error;
             background-color: rgba($error, 0.05);
           }
         }
-        span {
-          &.arrowUp, &.arrowDown {
-            display: none;
+
+        // Time Selection Dropdowns
+        .time_dropdown {
+          position: absolute;
+          top: 100%;
+          left: 0;
+          background-color: $white;
+          border: 1px solid $border_light;
+          border-radius: $border_rad_heavier;
+          box-shadow: $shadow_deep;
+          margin-top: $space_xxs;
+          max-height: 200px;
+          overflow-y: auto;
+          overflow-x: hidden;
+          z-index: $z_1;
+          min-width: 60px;
+          width: max-content;
+
+          scrollbar-width: none; // Firefox
+          -ms-overflow-style: none; // IE/Edge
+          &::-webkit-scrollbar {
+            display: none; // Chrome/Safari/Opera
           }
-        }
-        &.disabled {
-          input.numInput {
-            color: $text_lt_lighter;
-            cursor: not-allowed;
+
+          .time_dropdown_option {
+            @include pb_body;
+            padding: $space_xs $space_sm;
+            text-align: center;
+            cursor: pointer;
+            transition: background-color 0.15s ease;
+            white-space: nowrap;
+
+            &:hover {
+              background-color: $bg_light;
+            }
+
+            &.selected {
+              background-color: $primary;
+              color: $white;
+
+              &:hover {
+                background-color: $product_1_background;
+              }
+            }
           }
         }
       }
