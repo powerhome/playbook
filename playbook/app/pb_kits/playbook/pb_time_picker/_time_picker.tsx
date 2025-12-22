@@ -279,9 +279,6 @@ const TimePicker = (props: TimePickerProps): JSX.Element => {
       if (onClose) {
         onClose(timeString)
       }
-      if (process.env.NODE_ENV === 'development') {
-        console.log('TimePicker onClose:', timeString)
-      }
     } else {
       // Invalid time - revert to last valid time or reset to defaults
       if (lastValidTime) {
@@ -369,9 +366,6 @@ const TimePicker = (props: TimePickerProps): JSX.Element => {
       if (onChange) {
         onChange(timeString)
       }
-      if (process.env.NODE_ENV === 'development') {
-        console.log('TimePicker onChange:', timeString)
-      }
     }
   }
 
@@ -395,9 +389,6 @@ const TimePicker = (props: TimePickerProps): JSX.Element => {
       const timeString = get24HourTime(hour, result.minute, meridiem, timeFormat)
       if (onChange) {
         onChange(timeString)
-      }
-      if (process.env.NODE_ENV === 'development') {
-        console.log('TimePicker onChange:', timeString)
       }
     }
   }
@@ -436,9 +427,6 @@ const TimePicker = (props: TimePickerProps): JSX.Element => {
     const timeString = get24HourTime(hour, minute, mer, timeFormat)
     if (onChange) {
       onChange(timeString)
-    }
-    if (process.env.NODE_ENV === 'development') {
-      console.log('TimePicker onChange:', timeString)
     }
   }
   
