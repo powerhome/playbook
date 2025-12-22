@@ -56,58 +56,51 @@
     }
 
     .text_input_wrapper_add_on .add-on-card {
-      background-color: $bg_light;
+      background-color: shade($white, 5%);
       cursor: not-allowed;
+      opacity: 0.5;
     }
 
     .text_input_wrapper_add_on .add-on-right .text_input {
       cursor: not-allowed;
     }
 
-    @media (hover: hover) {
-      &:hover {
-        .text_input_wrapper_add_on .add-on-card {
-          cursor: not-allowed;
-          background-color: $bg_light;
-        }
-      }
-    }
   }
 
   .pb_time_picker_container {
     position: absolute;
+    top: 100%;
     background-color: $white;
     overflow: visible;
     box-shadow: $shadow_deep;
     border-radius: $border_rad_heavier;
     border: 1px solid $border_light;
+    margin-top: $space_xxs;
     z-index: $z_1;
-    width: 307.875px;
+    width: 314.2px;
 
     &.pb_time_picker_container_24hour {
-      width: 280px;
+      width: 170.4px;
     }
 
     .pb_time_selection {
       color: inherit;
       text-align: left;
-      margin-left: $space_sm;
+      margin: $space_sm;
       display: flex;
       flex-wrap: wrap;
       align-items: center;
-      gap: $space_xs;
-
-      .pb_caption_kit_md {
-        width: 100%;
-        flex-basis: 100%;
-        margin-bottom: 0;
-      }
 
       .time_input_wrapper {
         position: relative;
         display: inline-flex;
-        align-items: center;
-        margin-bottom: $space_xs;
+        flex-direction: column;
+        align-items: flex-start;
+
+        > label {
+          margin-bottom: $space_xxs;
+          cursor: pointer;
+        }
 
         input.time_input {
           border: 1px solid $border_light;
@@ -116,7 +109,7 @@
           width: 60px;
           margin-left: 0;
           padding: $space_xs;
-          height: 40px;
+          height: 45px;
           font-size: 14px;
           font-weight: $bolder;
           background-color: $white;
@@ -162,13 +155,26 @@
           overflow-y: auto;
           overflow-x: hidden;
           z-index: $z_1;
-          min-width: 60px;
-          width: max-content;
+          width: 60px;
 
-          scrollbar-width: none; // Firefox
-          -ms-overflow-style: none; // IE/Edge
+          // Firefox Scrollbar Styles
+          scrollbar-width: thin;
+          scrollbar-color: rgba($text_lt_lighter, 0.5) transparent;
+
+          // Chrome/Safari/Edge (WebKit) Scrollbar Styles
           &::-webkit-scrollbar {
-            display: none; // Chrome/Safari/Opera
+            width: 6px;
+          }
+          &::-webkit-scrollbar-track {
+            background: transparent;
+          }
+          &::-webkit-scrollbar-thumb {
+            background-color: rgba($text_lt_lighter, 0.5);
+            border-radius: 3px;
+            
+            &:hover {
+              background-color: rgba($text_lt_lighter, 0.7);
+            }
           }
 
           .time_dropdown_option {
@@ -202,9 +208,6 @@
           color: $error;
         }
       }
-      .pb_caption_kit_md, .pb_caption_kit_xs {
-        line-height: $text_larger;
-      }
       .pb_caption_kit_xs {
         clear: both;
         display: block;
@@ -212,16 +215,22 @@
         flex-basis: 100%;
       }
       .time-separator {
-        margin: 0;
-        text-align: center;
+        padding: 20px 6px 0 6px;
         font-size: 14px;
-        line-height: 40px;
         font-weight: $bolder;
       }
       .meridiem {
-        margin-bottom: $space_xs;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        margin-left: $space_md;
+        
+        > .time_input_label {
+          margin-bottom: $space_xxs;
+        }
+        
         .pb_form_group_kit {
-          margin-left: $space_xs;
+          margin-left: 0;
           display: flex;
           gap: 0;
         }
@@ -263,7 +272,7 @@
           padding: 0;
           margin: 0;
           width: 60px;
-          height: 40px;
+          height: 45px;
           text-align: center;
           display: flex;
           align-items: center;

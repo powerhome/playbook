@@ -639,6 +639,7 @@ const TimePicker = (props: TimePickerProps): JSX.Element => {
         <label htmlFor={`${uniqueId}-input`}>
           <Caption
               className="pb_time_picker_kit_label"
+              marginBottom="xs"
               size="md"
               text={label}
           />
@@ -681,14 +682,15 @@ const TimePicker = (props: TimePickerProps): JSX.Element => {
         {showDropdown && !disabled && (
           <div className={`pb_time_picker_container ${timeFormat === '24hour' ? 'pb_time_picker_container_24hour' : ''}`}>
             <div className="pb_time_selection">
-              <Caption
-                  className="pb_caption_kit_md"
-                  size="md"
-                  text="Select Time"
-              />
               <div className="time_input_wrapper">
+                <label htmlFor={`${uniqueId}-hour`}>
+                  <Caption
+                      className="time_input_label"
+                      size="sm"
+                      text="Hour"
+                  />
+                </label>
                 <input
-                    aria-label="Hour"
                     className={`time_input time-hour ${hasSelectedTime && !isCurrentTimeValid(hour, minute, meridiem) ? 'invalid' : ''}`}
                     id={`${uniqueId}-hour`}
                     inputMode="numeric"
@@ -726,8 +728,14 @@ const TimePicker = (props: TimePickerProps): JSX.Element => {
               </div>
               <span className="time-separator">{':'}</span>
               <div className="time_input_wrapper">
+                <label htmlFor={`${uniqueId}-minute`}>
+                  <Caption
+                      className="time_input_label"
+                      size="sm"
+                      text="Minute"
+                  />
+                </label>
                 <input
-                    aria-label="Minute"
                     className={`time_input time-minute ${hasSelectedTime && !isCurrentTimeValid(hour, minute, meridiem) ? 'invalid' : ''}`}
                     id={`${uniqueId}-minute`}
                     inputMode="numeric"
@@ -765,6 +773,11 @@ const TimePicker = (props: TimePickerProps): JSX.Element => {
               </div>
               {timeFormat === 'AMPM' && (
                 <div className="meridiem">
+                  <Caption
+                      className="time_input_label"
+                      size="sm"
+                      text="Period"
+                  />
                   <div className="pb_form_group_kit">
                     <SelectableCard
                         checked={meridiem === 'AM'}
@@ -796,6 +809,7 @@ const TimePicker = (props: TimePickerProps): JSX.Element => {
                 <div className="time_range_error">
                   <Caption
                       className="time_range_error_text"
+                      marginTop="sm"
                       size="xs"
                       text={getTimeRangeErrorMessage(minTime, maxTime, timeFormat)}
                   />
@@ -803,6 +817,8 @@ const TimePicker = (props: TimePickerProps): JSX.Element => {
               )}
               {showTimezone && (
                 <Caption
+                    lineHeight="tighter"
+                    marginTop="sm"
                     size="xs"
                     text={getTimezoneText()}
                 />
