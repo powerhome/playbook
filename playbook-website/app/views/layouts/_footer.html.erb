@@ -27,7 +27,7 @@
     <%= pb_rails("flex", props: { justify: "center", margin: "lg"}) do %>
       <%= pb_rails("flex", props: {  margin_x: { xs: "xl" }, classname: "link-container", justify: "between", max_width: "xl", flex_direction: { xs: "row" } }) do %>
         <%= pb_rails("flex", props: { max_width: "sm",  padding_top: "xl", display: { xs: "none" } }) do %>
-          <%= vite_image_tag("images/power-subtract-logo.svg") %>
+          <%= vite_image_tag("images/power-subtract-logo.svg", alt: "Power Logo") %>
           <%= pb_rails("flex/flex_item", props: { align_self: "center" }) do %>
             <%= pb_rails("body", props: { dark: true, text: "As the highest-rated residential remodeler in the nation, our international technology team builds a custom suite of products that continuously transform our business.", color: "light", padding_left: "lg", display: { md: "none", sm: "none", xs: "none" }}) %>
           <% end %>
