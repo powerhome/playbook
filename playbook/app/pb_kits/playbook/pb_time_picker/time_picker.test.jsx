@@ -71,14 +71,14 @@ describe('TimePicker', () => {
     render(<TimePicker data={{ testid: 'clickable-picker' }} />)
     const input = screen.getByPlaceholderText('Select Time')
     fireEvent.click(input)
-    expect(screen.getByText('Select Time', { selector: '.pb_caption_kit_md' })).toBeInTheDocument()
+    expect(screen.getByText('Hour', { selector: '.pb_caption_kit_sm' })).toBeInTheDocument()
   })
 
   test('does not open dropdown on input click when disabled', () => {
     render(<TimePicker disabled />)
     const input = screen.getByPlaceholderText('Select Time')
     fireEvent.click(input)
-    expect(screen.queryByText('Select Time', { selector: '.pb_caption_kit_md' })).not.toBeInTheDocument()
+    expect(screen.queryByText('Hour', { selector: '.pb_caption_kit_sm' })).not.toBeInTheDocument()
   })
 
   test('renders with required attribute', () => {
