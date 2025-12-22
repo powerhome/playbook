@@ -288,6 +288,10 @@
     "category": "Arrows"
   },
   {
+    "name": "exchange-alt",
+    "category": "Arrows"
+  },
+  {
     "name": "exchange",
     "category": "Arrows"
   },
@@ -392,6 +396,10 @@
     "category": "Arrows"
   },
   {
+    "name": "up-right-from-square",
+    "category": "Arrows"
+  },
+  {
     "name": "up",
     "category": "Arrows"
   },
@@ -413,6 +421,10 @@
   },
   {
     "name": "trophy-alt",
+    "category": "Awards"
+  },
+  {
+    "name": "trophy",
     "category": "Awards"
   },
   {
@@ -464,6 +476,10 @@
     "category": "Business"
   },
   {
+    "name": "cart-shopping",
+    "category": "Business"
+  },
+  {
     "name": "circle-dollar",
     "category": "Business"
   },
@@ -496,6 +512,10 @@
     "category": "Business"
   },
   {
+    "name": "receipt",
+    "category": "Business"
+  },
+  {
     "name": "shopping-bag",
     "category": "Business"
   },
@@ -521,6 +541,10 @@
   },
   {
     "name": "ticket",
+    "category": "Business"
+  },
+  {
+    "name": "wallet",
     "category": "Business"
   },
   {
@@ -589,6 +613,18 @@
   },
   {
     "name": "envelope",
+    "category": "Communication"
+  },
+  {
+    "name": "envelopes-bulk",
+    "category": "Communication"
+  },
+  {
+    "name": "fax",
+    "category": "Communication"
+  },
+  {
+    "name": "inbox",
     "category": "Communication"
   },
   {
@@ -728,6 +764,10 @@
     "category": "Education"
   },
   {
+    "name": "books",
+    "category": "Education"
+  },
+  {
     "name": "calculator",
     "category": "Education"
   },
@@ -848,6 +888,10 @@
     "category": "Files"
   },
   {
+    "name": "folder-upload",
+    "category": "Files"
+  },
+  {
     "name": "folder",
     "category": "Files"
   },
@@ -873,6 +917,10 @@
   },
   {
     "name": "hand-point-right",
+    "category": "Hands"
+  },
+  {
+    "name": "handshake-simple",
     "category": "Hands"
   },
   {
@@ -1136,6 +1184,10 @@
     "category": "Interface Core"
   },
   {
+    "name": "rectangle-list",
+    "category": "Interface Core"
+  },
+  {
     "name": "rectangle-wide",
     "category": "Interface Core"
   },
@@ -1177,6 +1229,14 @@
   },
   {
     "name": "square",
+    "category": "Interface Core"
+  },
+  {
+    "name": "table-columns",
+    "category": "Interface Core"
+  },
+  {
+    "name": "tasks",
     "category": "Interface Core"
   },
   {
@@ -1284,7 +1344,15 @@
     "category": "Location"
   },
   {
+    "name": "radar",
+    "category": "Location"
+  },
+  {
     "name": "solar-system",
+    "category": "Location"
+  },
+  {
+    "name": "tree-palm",
     "category": "Location"
   },
   {
@@ -1396,6 +1464,18 @@
     "category": "Media"
   },
   {
+    "name": "face-angry",
+    "category": "People"
+  },
+  {
+    "name": "face-laugh-beam",
+    "category": "People"
+  },
+  {
+    "name": "face-meh",
+    "category": "People"
+  },
+  {
     "name": "face-smile-plus",
     "category": "People"
   },
@@ -1424,11 +1504,23 @@
     "category": "People"
   },
   {
+    "name": "people-group",
+    "category": "People"
+  },
+  {
+    "name": "people-simple",
+    "category": "People"
+  },
+  {
     "name": "people",
     "category": "People"
   },
   {
     "name": "person-dress",
+    "category": "People"
+  },
+  {
+    "name": "person-to-portal",
     "category": "People"
   },
   {
@@ -1453,6 +1545,18 @@
   },
   {
     "name": "user-circle",
+    "category": "People"
+  },
+  {
+    "name": "user-cog",
+    "category": "People"
+  },
+  {
+    "name": "user-doctor",
+    "category": "People"
+  },
+  {
+    "name": "user-edit",
     "category": "People"
   },
   {
@@ -1692,6 +1796,10 @@
     "category": "Technology"
   },
   {
+    "name": "flask",
+    "category": "Technology"
+  },
+  {
     "name": "github",
     "category": "Technology"
   },
@@ -1741,6 +1849,10 @@
   },
   {
     "name": "solar-panel",
+    "category": "Technology"
+  },
+  {
+    "name": "tv",
     "category": "Technology"
   },
   {
@@ -1864,6 +1976,10 @@
     "category": "Time"
   },
   {
+    "name": "anchor",
+    "category": "Tools"
+  },
+  {
     "name": "binoculars",
     "category": "Tools"
   },
@@ -1920,11 +2036,23 @@
     "category": "Vehicles"
   },
   {
+    "name": "car-side",
+    "category": "Vehicles"
+  },
+  {
     "name": "car",
     "category": "Vehicles"
   },
   {
     "name": "helicopter-symbol",
+    "category": "Vehicles"
+  },
+  {
+    "name": "plane-departure",
+    "category": "Vehicles"
+  },
+  {
+    "name": "plane",
     "category": "Vehicles"
   },
   {
@@ -1965,6 +2093,10 @@
   },
   {
     "name": "fire",
+    "category": "Weather"
+  },
+  {
+    "name": "gauge-high",
     "category": "Weather"
   },
   {
