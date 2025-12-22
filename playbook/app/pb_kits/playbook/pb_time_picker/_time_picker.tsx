@@ -805,7 +805,7 @@ const TimePicker = (props: TimePickerProps): JSX.Element => {
               )}
               {showTimezone && (
                 <Caption
-                    lineHeight="tighter"
+                    lineHeight="tight"
                     marginTop="sm"
                     size="xs"
                     text={getTimezoneText()}
