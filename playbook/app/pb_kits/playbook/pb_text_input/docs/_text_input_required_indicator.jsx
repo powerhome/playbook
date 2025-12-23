@@ -10,9 +10,7 @@ const TextInputDefault = (props) => {
 
   return (
       <TextInput
-          aria={{ label: 'hello' }}
-          data={{ say: 'hi', yell: 'go' }}
-          id="unique-id"
+          id="text_input_required_indicator"
           label="First Name"
           name="firstName"
           onChange={handleOnChangeFirstName}

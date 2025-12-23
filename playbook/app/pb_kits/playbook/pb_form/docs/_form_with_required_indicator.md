@@ -1,0 +1,3 @@
+The `required_indicator` prop adds a red asterisk (*) to the input label, visually marking the field as required. This works with both `label: true` for auto-generated labels and `label: "Custom Text"` for custom labels.
+
+While it's typically used alongside the `required` prop for HTML5 validation, you can use `required_indicator` independently if you're handling validation differently (e.g., client-side or backend validation).
