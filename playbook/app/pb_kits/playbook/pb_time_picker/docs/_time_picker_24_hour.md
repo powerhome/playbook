@@ -1,0 +1,1 @@
+Set `time_format` / `timeFormat` to 24hour to display the time selection dropdown in a 24-hour format.

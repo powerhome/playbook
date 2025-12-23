@@ -1,0 +1,14 @@
+<%= pb_rails("time_picker", props: {
+  id: "time-picker-input-options",
+  label: "Appointment Time",
+  input_options: {
+    aria: { 
+      describedby: "appointment-help-text",
+      label: "Select your preferred appointment time"
+    },
+    data: { 
+      testid: "appointment-time-input"
+    },
+    placeholder: "Choose a time"
+  }
+}) %>

@@ -633,6 +633,13 @@ kits:
     icons_used: false
     react_rendered: false
     enhanced_element_used: false
+  - name: time_picker
+    platforms: web
+    description: A time picker component that allows users to select a time independently of the date.
+    status: beta
+    icons_used: true
+    react_rendered: true
+    enhanced_element_used: true
 - category: icons_and_images
   description: ''
   components:

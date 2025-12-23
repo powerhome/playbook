@@ -101,6 +101,7 @@ import * as Table from '../pb_kits/playbook/pb_table/docs'
 import * as TextInput from '../pb_kits/playbook/pb_text_input/docs'
 import * as Textarea from '../pb_kits/playbook/pb_textarea/docs'
 import * as Time from '../pb_kits/playbook/pb_time/docs'
+import * as TimePicker from 'kits/pb_time_picker/docs'
 import * as TimeRangeInline from '../pb_kits/playbook/pb_time_range_inline/docs'
 import * as TimeStacked from '../pb_kits/playbook/pb_time_stacked/docs'
 import * as Timeline from '../pb_kits/playbook/pb_timeline/docs'
@@ -213,6 +214,7 @@ ComponentRegistry.registerComponents({
   ...TextInput,
   ...Textarea,
   ...Time,
+  ...TimePicker,
   ...TimeRangeInline,
   ...TimeStacked,
   ...Timeline,
