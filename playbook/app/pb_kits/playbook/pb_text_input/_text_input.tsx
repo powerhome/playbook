@@ -9,6 +9,7 @@ import Card from '../pb_card/_card'
 import Caption from '../pb_caption/_caption'
 import Body from '../pb_body/_body'
 import Icon from '../pb_icon/_icon'
+import colors from '../tokens/exports/_colors.module.scss'
 
 import { INPUTMASKS } from './inputMask'
 
@@ -28,6 +29,7 @@ type TextInputProps = {
   onChange: (e: React.FormEvent<HTMLInputElement>, sanitizedValue?: string) => void,
   placeholder: string,
   required?: boolean,
+  requiredIndicator?: boolean,
   type: string,
   value: string | number,
   children: React.ReactElement,
@@ -60,6 +62,7 @@ const TextInput = (props: TextInputProps, ref: React.LegacyRef<HTMLInputElement>
     type = 'text',
     value = '',
     children = null,
+    requiredIndicator = false,
     autoComplete = true,
   } = props
 
@@ -208,9 +211,9 @@ const TextInput = (props: TextInputProps, ref: React.LegacyRef<HTMLInputElement>
     >
       {label && (
         <label htmlFor={id}>
-          <Caption className="pb_text_input_kit_label" 
-              text={label} 
-          />
+          <Caption className="pb_text_input_kit_label">
+            {label} {requiredIndicator ? <div style={{ display: "inline", color: `${colors.error}` }}>*</div> : null}
+          </Caption>
         </label>
       )}
       <div className={`${addOnCss} text_input_wrapper`}>

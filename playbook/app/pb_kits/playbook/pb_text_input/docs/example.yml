@@ -22,6 +22,7 @@ examples:
   - text_input_mask: Mask
   - text_input_sanitize: Sanitized Masked Input
   - text_input_autocomplete: Autocomplete
+  - text_input_required_indicator: Required Indicator
 
 
   swift:
