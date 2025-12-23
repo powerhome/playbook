@@ -344,3 +344,19 @@ test('does not add autocomplete attribute otherwise', () => {
   const input = within(kit).getByRole('textbox')
   expect(input).not.toHaveAttribute("autocomplete")
 })
+
+test('renders required indicator asterisk when requiredIndicator is true', () => {
+  render(
+    <TextInput
+        data={{ testid: testId }}
+        label="Email Address"
+        requiredIndicator
+    />
+  )
+
+  const kit = screen.getByTestId(testId)
+  const label = within(kit).getByText(/Email Address/)
+  
+  expect(label).toBeInTheDocument()
+  expect(kit).toHaveTextContent('*') 
+})

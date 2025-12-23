@@ -18,6 +18,7 @@ RSpec.describe Playbook::PbTextInput::TextInput do
   it { is_expected.to define_prop(:type).with_default("text") }
   it { is_expected.to define_hash_prop(:input_options).with_default({}) }
   it { is_expected.to define_prop(:mask).with_default(nil) }
+  it { is_expected.to define_prop(:required_indicator).with_default(false) }
 
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do

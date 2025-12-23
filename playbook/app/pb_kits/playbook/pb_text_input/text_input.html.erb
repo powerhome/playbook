@@ -1,7 +1,13 @@
 <%= pb_content_tag(:div, id: nil ) do  %>
   <% if object.label.present? %>
   <label for="<%= object.input_options[:id] || object.id %>" >
+    <% if object.required_indicator %>
+      <%= pb_rails("caption", props: { dark: object.dark, classname: "pb_text_input_kit_label" }) do %>
+        <%= object.label %><span style="color: #DA0014;"> *</span>
+      <% end %>
+    <% else %>
     <%= pb_rails("caption", props: { text: object.label, dark: object.dark, classname: "pb_text_input_kit_label" }) %>
+    <% end %>
   </label>
   <% end %>
   <%= content_tag(:div, class: "#{add_on_class} text_input_wrapper") do %>
