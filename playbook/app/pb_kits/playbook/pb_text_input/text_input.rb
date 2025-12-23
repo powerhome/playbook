@@ -38,6 +38,8 @@ module Playbook
       prop :mask, type: Playbook::Props::Enum,
                   values: ["currency", "zip_code", "postal_code", "ssn", "credit_card", "cvv", nil],
                   default: nil
+      prop :required_indicator, type: Playbook::Props::Boolean,
+                                default: false
 
       def classname
         default_margin_bottom = margin_bottom.present? ? "" : " mb_sm"

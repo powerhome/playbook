@@ -212,7 +212,7 @@ const TextInput = (props: TextInputProps, ref: React.LegacyRef<HTMLInputElement>
       {label && (
         <label htmlFor={id}>
           <Caption className="pb_text_input_kit_label">
-            {label} {requiredIndicator ? <div style={{ display: "inline", color: `${colors.error}` }}>*</div> : null}
+            {label} {requiredIndicator ? <span style={{ color: `${colors.error}` }}>*</span> : null}
           </Caption>
         </label>
       )}
