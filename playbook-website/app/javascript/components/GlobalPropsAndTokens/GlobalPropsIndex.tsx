@@ -53,9 +53,11 @@ const GlobalProps = () => {
 
                     <Flex justify="between" align="center" padding="sm">
                       <Title size={4} color="link" text={title} />
-                      <Title size={4} color="link">
-                        <Icon icon="arrow-right-long" />
-                      </Title>
+                      <Icon
+                          aria={{ hidden: true }} 
+                          color="link" 
+                          icon="arrow-right-long" 
+                      />
                     </Flex>
 
                     <Body
