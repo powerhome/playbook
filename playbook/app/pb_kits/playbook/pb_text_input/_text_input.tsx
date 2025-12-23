@@ -211,9 +211,18 @@ const TextInput = (props: TextInputProps, ref: React.LegacyRef<HTMLInputElement>
     >
       {label && (
         <label htmlFor={id}>
-          <Caption className="pb_text_input_kit_label">
-            {label} {requiredIndicator ? <span style={{ color: `${colors.error}` }}>*</span> : null}
-          </Caption>
+          {
+            requiredIndicator ? (
+              <Caption className="pb_text_input_kit_label">
+                {label} <span style={{ color: `${colors.error}` }}>*</span>
+              </Caption>
+            ) : (
+              <Caption className="pb_text_input_kit_label" 
+                  text={label} 
+              />
+            )
+          }
+
         </label>
       )}
       <div className={`${addOnCss} text_input_wrapper`}>
