@@ -1,5 +1,5 @@
 import { Layout } from "playbook-ui";
-import MainSidebar from "../MainSidebar";
+import Sidebar from "./src/layouts/Sidebar";
 import LayoutRight from "./src/layouts/LayoutRight";
 import { useLoaderData } from "react-router-dom";
 
@@ -24,7 +24,7 @@ function Website() {
   return (
     <Layout className="pb--page--content pb--website--new" dark={dark}>
       <Layout.Side className="pb--page--sideNav">
-        <MainSidebar
+        <Sidebar
           building_blocks={building_blocks || []}
           dark={dark}
           type={type || "react"}
