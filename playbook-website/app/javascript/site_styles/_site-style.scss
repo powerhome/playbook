@@ -253,8 +253,7 @@ body {
 
 }
 
-// Seasonal Styles (Ghost and Santa Frog)
-.ghosts-container, .santa-frogs-container {
+.ghosts-container {
   position: absolute;
   width: 100%;
   height: 120px;
@@ -274,7 +273,7 @@ body {
   }
 
 
-.ghost,.santa-frog {
+.ghost {
   position: absolute;
   font-size: 20px;
   opacity: 0;
@@ -283,30 +282,30 @@ body {
   filter: drop-shadow(0 0 8px rgba(0, 0, 0, 0.3));
 }
 
-.ghost-1, .santa-frog-1 {
+.ghost-1 {
   left: 5%;
   animation: fly1 8s infinite;
 }
 
-.ghost-2, .santa-frog-2 {
+.ghost-2 {
   left: 25%;
   animation: fly2 10s infinite;
   animation-delay: 2s;
 }
 
-.ghost-3, .santa-frog-3 {
+.ghost-3 {
   left: 45%;
   animation: fly3 9s infinite;
   animation-delay: 4s;
 }
 
-.ghost-4, .santa-frog-4 {
+.ghost-4 {
   left: 65%;
   animation: fly4 11s infinite;
   animation-delay: 1s;
 }
 
-.ghost-5, .santa-frog-5 {
+.ghost-5 {
   left: 80%;
   animation: fly5 7s infinite;
   animation-delay: 3s;
