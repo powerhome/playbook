@@ -42,7 +42,7 @@
     "eslint": "6.8.0",
     "postcss-flexbugs-fixes": "^5.0.2",
     "postcss-import": "^14.1.0",
-    "postcss-preset-env": "^7.0.1",
+    "postcss-preset-env": "^10.6.0",
     "react": "^17.0.2",
     "react-docgen": "^7.0.3",
     "react-docgen-typescript": "^2.2.2",
