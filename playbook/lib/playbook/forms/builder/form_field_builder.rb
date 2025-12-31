@@ -67,6 +67,8 @@ module Playbook
               props[:label] = @template.label_tag(input_id, props[:label]) unless props[:required_indicator]
             end
 
+            options[:data] = (options[:data] || {}).merge(pb_emoji_mask: true) if props.key?(:emoji_mask) && props[:emoji_mask]
+
             @template.pb_rails(kit_name, props: props) do
               input
             end
