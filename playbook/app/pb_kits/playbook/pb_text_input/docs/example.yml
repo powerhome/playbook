@@ -10,6 +10,8 @@ examples:
   - text_input_options: Input Options
   - text_input_mask: Mask
   - text_input_autocomplete: Autocomplete
+  - text_input_required_indicator: Required Indicator
+
   
   react:
   - text_input_default: Default
@@ -22,6 +24,7 @@ examples:
   - text_input_mask: Mask
   - text_input_sanitize: Sanitized Masked Input
   - text_input_autocomplete: Autocomplete
+  - text_input_required_indicator: Required Indicator
 
 
   swift:
