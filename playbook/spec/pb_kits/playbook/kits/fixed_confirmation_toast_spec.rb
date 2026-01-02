@@ -58,10 +58,9 @@ RSpec.describe Playbook::PbFixedConfirmationToast::FixedConfirmationToast do
   end
 
   describe "#auto_close" do
-    it "returns auto close class with duration when auto_close is present" do
-      expect(subject.new({}).auto_close_class).to eq ""
-      expect(subject.new(auto_close: 3000).auto_close_class).to eq " auto_close_3000"
-      expect(subject.new(auto_close: 10000).auto_close_class).to eq " auto_close_10000"
+    it "returns auto close data attribute with duration when auto_close is present" do
+      expect(subject.new({}).auto_close_attribute).to eq({})
+      expect(subject.new(auto_close: 5000).auto_close_attribute).to eq({ "pb-auto-close": 5000 })
     end
   end
 
@@ -80,8 +79,6 @@ RSpec.describe Playbook::PbFixedConfirmationToast::FixedConfirmationToast do
       expect(subject.new(text: text, status: "neutral", vertical: "top", horizontal: "center").classname).to eq "pb_fixed_confirmation_toast_kit_neutral positioned_toast top center z_index_max"
       expect(subject.new(text: text, status: "tip", icon: "arrow-down").classname).to eq "pb_fixed_confirmation_toast_kit_tip custom_icon z_index_max"
       expect(subject.new(text: text, icon: "none").classname).to eq "pb_fixed_confirmation_toast_kit_neutral z_index_max"
-      # auto_close MUST BE the last class, do not change this order in the following test
-      expect(subject.new(text: text, status: "tip", auto_close: 3000).classname).to eq "pb_fixed_confirmation_toast_kit_tip z_index_max auto_close_3000"
     end
   end
 

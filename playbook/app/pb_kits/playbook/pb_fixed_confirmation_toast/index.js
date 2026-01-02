@@ -21,17 +21,12 @@ export default class PbFixedConfirmationToast extends PbEnhancedElement {
   }
 
   autoCloseToast(element) {
-    const classListValues = element.classList.value
-    const hasAutoCloseClass = classListValues.includes('auto_close')
+    const autoCloseDataAttr = element.getAttribute('data-pb-auto-close')
 
-    if (hasAutoCloseClass) {
-      const classList = classListValues.split(' ')
-      const autoCloseValue = classList[classList.length - 1].split('_')[2]
-      const autoCloseIntValue = parseInt(autoCloseValue)
-
+    if (autoCloseDataAttr) {
       setTimeout(() => {
         this.removeToast(element)
-      }, autoCloseIntValue)
+      }, parseInt(autoCloseDataAttr))
     }
   }
 }
