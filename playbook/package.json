@@ -68,6 +68,8 @@
     "eslint-plugin-react-hooks": "4.6.0",
     "eslint-webpack-plugin": "2.7.0",
     "filemanager-webpack-plugin": "4.0.0",
+    "highcharts": "^11.4.8",
+    "highcharts-react-official": "^3.2.1",
     "identity-obj-proxy": "3.0.0",
     "jest": "26.6.3",
     "jest-axe": "4.1.0",
