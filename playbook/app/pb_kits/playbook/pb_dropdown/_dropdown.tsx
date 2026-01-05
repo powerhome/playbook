@@ -20,12 +20,23 @@ import {
     handleClickOutside,
 } from "./utilities";
 
+type CustomQuickPickDate = {
+    label: string;
+    value: string[] | { timePeriod: string; amount: number };
+};
+
+type CustomQuickPickDates = {
+    override?: boolean;
+    dates: CustomQuickPickDate[];
+};
+
 type DropdownProps = {
     aria?: { [key: string]: string };
     autocomplete?: boolean;
     blankSelection?: string;
     children?: React.ReactChild[] | React.ReactChild | React.ReactElement[];
     className?: string;
+    customQuickPickDates?: CustomQuickPickDates;
     formPillProps?: GenericObject;
     dark?: boolean;
     data?: { [key: string]: string };
@@ -63,6 +74,7 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
         blankSelection = '',
         children,
         className,
+        customQuickPickDates,
         dark = false,
         data = {},
         defaultValue = {},
@@ -95,7 +107,7 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
     // ------------- Quick Pick ---------------------------------
     // Use QuickPick options when variant is "quickpick"
     const dropdownOptions = variant === "quickpick" 
-        ? getQuickPickOptions(rangeEndsToday) 
+        ? getQuickPickOptions(rangeEndsToday, customQuickPickDates) 
         : (options || []);
     // ----------------------------------------------------------
 
