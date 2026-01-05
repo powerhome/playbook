@@ -31,3 +31,4 @@ examples:
   - rich_text_editor_advanced_inline: Advanced (Inline)
   - rich_text_editor_preview: Preview
   - rich_text_editor_advanced_preview: Advanced Preview
+  - rich_text_editor_advanced_rows: Advanced Height

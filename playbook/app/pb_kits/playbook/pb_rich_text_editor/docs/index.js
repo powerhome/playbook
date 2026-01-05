@@ -17,3 +17,4 @@ export { default as RichTextEditorAdvancedTemplates } from './_rich_text_editor_
 export { default as RichTextEditorAdvancedAttributes } from './_rich_text_editor_advanced_attributes.jsx'
 export { default as RichTextEditorAdvancedSticky } from './_rich_text_editor_advanced_sticky.jsx'
 export { default as RichTextEditorAdvancedInline } from './_rich_text_editor_advanced_inline.jsx'
+export { default as RichTextEditorAdvancedRows } from './_rich_text_editor_advanced_rows.jsx'

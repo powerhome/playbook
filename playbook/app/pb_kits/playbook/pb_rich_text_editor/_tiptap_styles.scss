@@ -205,6 +205,31 @@
     }
   }
 }
+
+.pb_rich_text_editor_advanced_container.textarea_height_sm {
+  div {
+    .tiptap.ProseMirror {
+      min-height: 100px;
+    }
+  }
+}
+
+.pb_rich_text_editor_advanced_container.textarea_height_md {
+  div {
+    .tiptap.ProseMirror {
+      min-height: 150px;
+    }
+  }
+}
+
+.pb_rich_text_editor_advanced_container.textarea_height_lg {
+  div {
+    .tiptap.ProseMirror {
+      min-height: 200px;
+    }
+  }
+}
+
 .tiptap-content {
   @include preview_tiptap_first_child;
   a {
