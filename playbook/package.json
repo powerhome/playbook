@@ -4,6 +4,16 @@
   "description": "Nitro's Design System",
   "main": "./dist/playbook.js",
   "types": "./dist/types/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/playbook.js",
+      "types": "./dist/types/index.d.ts"
+    },
+  "./charts": {
+    "types": "./dist/types/charts.d.ts",
+    "import": "./dist/charts.js"
+  }
+  },
   "scripts": {
     "flow": "flow",
     "lint": "eslint . --ext .js,.jsx",
@@ -27,7 +37,8 @@
   },
   "files": [
     "dist/*",
-    "fonts/*"
+    "fonts/*",
+    "charts.d.ts"
   ],
   "bugs": {
     "url": "https://github.com/powerhome/playbook/issues"

@@ -7,10 +7,10 @@ import {
   Title,
   StatChange,
   FlexItem,
-  PbGaugeChart,
   colors,
   typography
 } from "playbook-ui";
+import { PbGaugeChart } from "playbook-ui/charts";
 
 const TicketsChartCard = () => {
 
