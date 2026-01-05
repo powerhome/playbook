@@ -9,10 +9,14 @@
       "import": "./dist/playbook.js",
       "types": "./dist/types/index.d.ts"
     },
-  "./charts": {
-    "types": "./dist/types/charts.d.ts",
-    "import": "./dist/charts.js"
-  }
+    "./charts": {
+      "types": "./dist/types/charts.d.ts",
+      "import": "./dist/charts.js"
+    },
+    "./dist/playbook.css": "./dist/playbook.css",
+    "./dist/reset.css": "./dist/reset.css",
+    "./dist/*": "./dist/*",
+    "./fonts/*": "./fonts/*"
   },
   "scripts": {
     "flow": "flow",
