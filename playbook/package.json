@@ -41,8 +41,7 @@
   },
   "files": [
     "dist/*",
-    "fonts/*",
-    "charts.d.ts"
+    "fonts/*"
   ],
   "bugs": {
     "url": "https://github.com/powerhome/playbook/issues"
