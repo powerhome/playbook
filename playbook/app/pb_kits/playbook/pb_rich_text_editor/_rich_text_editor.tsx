@@ -44,7 +44,7 @@ type RichTextEditorProps = {
   name?: string,
   onChange: (html: string, text: string) => void,
   placeholder?: string,
-  textareaHeight?: string,
+  textareaHeight?: "sm" | "md" | "lg",
   simple?: boolean,
   sticky?: boolean,
   template: string,
