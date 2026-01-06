@@ -18,6 +18,8 @@ module Playbook
       prop :autocomplete, default: true
       prop :disabled, type: Playbook::Props::Boolean,
                       default: false
+      prop :emoji_mask, type: Playbook::Props::Boolean,
+                        default: false
       prop :error
       prop :inline, type: Playbook::Props::Boolean,
                     default: false
@@ -117,7 +119,9 @@ module Playbook
       def validation_data
         fields = input_options.dig(:data) || {}
         fields[:message] = validation_message unless validation_message.blank?
-        mask ? fields.merge(pb_input_mask: true) : fields
+        fields[:pb_input_mask] = true if mask
+        fields[:pb_emoji_mask] = true if emoji_mask
+        fields
       end
 
       def error_class

@@ -1,4 +1,4 @@
-import React, { forwardRef, ChangeEvent } from 'react'
+import React, { forwardRef, ChangeEvent, ClipboardEvent } from 'react'
 import classnames from 'classnames'
 
 import { globalProps, GlobalProps, domSafeProps } from '../utilities/globalProps'
@@ -12,6 +12,7 @@ import Icon from '../pb_icon/_icon'
 import colors from '../tokens/exports/_colors.module.scss'
 
 import { INPUTMASKS } from './inputMask'
+import { stripEmojisForPaste, applyEmojiMask } from '../utilities/emojiMask'
 
 type TextInputProps = {
   aria?: { [key: string]: string },
@@ -19,6 +20,7 @@ type TextInputProps = {
   data?: { [key: string]: string },
   dark?: boolean,
   disabled?: boolean,
+  emojiMask?: boolean,
   error?: string,
   htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
@@ -49,6 +51,7 @@ const TextInput = (props: TextInputProps, ref: React.LegacyRef<HTMLInputElement>
     dark = false,
     data = {},
     disabled,
+    emojiMask = false,
     error,
     htmlOptions = {},
     id,
@@ -102,6 +105,11 @@ const TextInput = (props: TextInputProps, ref: React.LegacyRef<HTMLInputElement>
   const isMaskedInput = mask && mask in INPUTMASKS
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    // Apply emoji mask if enabled using centralized helper
+    if (emojiMask) {
+      applyEmojiMask(e.target)
+    }
+
     if (isMaskedInput) {
       const inputValue = e.target.value
 
@@ -134,6 +142,29 @@ const TextInput = (props: TextInputProps, ref: React.LegacyRef<HTMLInputElement>
     }
   }
 
+  // Handle paste event for emoji mask - updates input value, cursor position, and calls onChange
+  const handlePaste = (e: ClipboardEvent<HTMLInputElement>) => {
+    if (emojiMask) {
+      const pastedText = e.clipboardData.getData('text')
+      const filteredText = stripEmojisForPaste(pastedText)
+      
+      if (pastedText !== filteredText) {
+        e.preventDefault()
+        const input = e.currentTarget
+        const start = input.selectionStart || 0
+        const end = input.selectionEnd || 0
+        const currentValue = input.value
+        const newValue = currentValue.slice(0, start) + filteredText + currentValue.slice(end)
+        const newCursorPosition = start + filteredText.length
+        
+        input.value = newValue
+        input.selectionStart = input.selectionEnd = newCursorPosition
+        
+        onChange({ ...e, target: input, currentTarget: input } as unknown as ChangeEvent<HTMLInputElement>)
+      }
+    }
+  }
+
   const childInput = children ? children.type === "input" : undefined
 
   let formattedValue;
@@ -145,10 +176,16 @@ const TextInput = (props: TextInputProps, ref: React.LegacyRef<HTMLInputElement>
 
   const errorId = error ? `${id}-error` : undefined
 
+  // Set custom handler between emoji mask and input mask
+  const shouldUseCustomHandler = isMaskedInput || emojiMask
+
+  // Filter out emojiMask from props passed to DOM element
+  const { emojiMask: _emojiMask, ...domProps } = props
+
   const textInput = (
     childInput ? React.cloneElement(children, { className: "text_input" }) :
     (<input
-        {...domSafeProps(props)}
+        {...domSafeProps(domProps)}
         aria-describedby={errorId}
         aria-invalid={!!error}
         autoComplete={typeof autoComplete === "string" ? autoComplete : ( autoComplete ? undefined : "off" )}
@@ -157,7 +194,8 @@ const TextInput = (props: TextInputProps, ref: React.LegacyRef<HTMLInputElement>
         id={id}
         key={id}
         name={name}
-        onChange={isMaskedInput ? handleChange : onChange}
+        onChange={shouldUseCustomHandler ? handleChange : onChange}
+        onPaste={emojiMask ? handlePaste : undefined}
         pattern={isMaskedInput ? INPUTMASKS[mask]?.pattern : undefined}
         placeholder={placeholder || (isMaskedInput ? INPUTMASKS[mask]?.placeholder : undefined)}
         ref={ref}

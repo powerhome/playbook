@@ -1,26 +1,64 @@
 import PbEnhancedElement from "../pb_enhanced_element"
 import { INPUTMASKS } from "./inputMask"
+import { stripEmojisForPaste, applyEmojiMask } from "../utilities/emojiMask"
 
 export default class PbTextInput extends PbEnhancedElement {
   static get selector() {
-    return '[data-pb-input-mask="true"]';
+    return '[data-pb-input-mask="true"], [data-pb-emoji-mask="true"]';
   }
 
   connect() {
     this.handleInput = this.handleInput.bind(this);
+    this.handlePaste = this.handlePaste.bind(this);
     this.element.addEventListener("input", this.handleInput);
+    this.element.addEventListener("paste", this.handlePaste);
     this.handleInput(); 
   }
 
   disconnect() {
     this.element.removeEventListener("input", this.handleInput);
+    this.element.removeEventListener("paste", this.handlePaste);
   }
 
-  handleInput() {
-    const maskType = this.element.getAttribute("mask");
+  hasEmojiMask() {
+    return this.element.dataset.pbEmojiMask === "true";
+  }
+
+  handlePaste(event) {
+    if (!this.hasEmojiMask()) return;
+
+    const pastedText = event.clipboardData.getData('text');
+    const filteredText = stripEmojisForPaste(pastedText);
+
+    if (pastedText !== filteredText) {
+      event.preventDefault();
+      const input = this.element;
+      const start = input.selectionStart || 0;
+      const end = input.selectionEnd || 0;
+      const currentValue = input.value;
+      const newValue = currentValue.slice(0, start) + filteredText + currentValue.slice(end);
+      const newCursor = start + filteredText.length;
+      
+      input.value = newValue;
+      input.selectionStart = input.selectionEnd = newCursor;
+      
+      // Continue to handleInput for mask processing, emoji filtering handled above
+      this.handleInput({ skipEmojiFilter: true });
+    }
+  }
+
+  handleInput({ skipEmojiFilter = false } = {}) {
     const cursorPosition = this.element.selectionStart;
-    const rawValue = this.element.value;
-    let formattedValue = rawValue;
+    let baseValue = this.element.value;
+
+    // Apply emoji mask if enabled (skip if already filtered in paste handler)
+    if (this.hasEmojiMask() && !skipEmojiFilter) {
+      const result = applyEmojiMask(this.element);
+      baseValue = result.value;
+    }
+
+    const maskType = this.element.getAttribute("mask");
+    let formattedValue = baseValue;
 
     const maskKey = {
       currency: 'currency',
@@ -32,13 +70,14 @@ export default class PbTextInput extends PbEnhancedElement {
     }[maskType];
 
     if (maskKey && INPUTMASKS[maskKey]) {
-      formattedValue = INPUTMASKS[maskKey].format(rawValue);
+      formattedValue = INPUTMASKS[maskKey].format(baseValue);
     }
 
     const sanitizedInput = this.element
       .closest(".text_input_wrapper")
       ?.querySelector('[data="sanitized-pb-input"]');
 
+    // Ensure sanitized input uses the already filtered value
     if (sanitizedInput) {
       switch (maskType) {
         case "ssn":
@@ -55,8 +94,10 @@ export default class PbTextInput extends PbEnhancedElement {
       }
     }
 
-    this.element.value = formattedValue;
-    setCursorPosition(this.element, cursorPosition, rawValue, formattedValue);
+    if (maskType) {
+      this.element.value = formattedValue;
+      setCursorPosition(this.element, cursorPosition, baseValue, formattedValue);
+    }
   }
 }
 
