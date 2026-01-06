@@ -6,12 +6,16 @@
   "types": "./dist/types/index.d.ts",
   "exports": {
     ".": {
+      "types": "./dist/types/index.d.ts",
       "import": "./dist/playbook.js",
-      "types": "./dist/types/index.d.ts"
+      "require": "./dist/playbook.js",
+      "default": "./dist/playbook.js"
     },
     "./charts": {
       "types": "./dist/types/charts.d.ts",
-      "import": "./dist/charts.js"
+      "import": "./dist/charts.js",
+      "require": "./dist/charts.js",
+      "default": "./dist/charts.js"
     },
     "./dist/playbook.css": "./dist/playbook.css",
     "./dist/reset.css": "./dist/reset.css",
