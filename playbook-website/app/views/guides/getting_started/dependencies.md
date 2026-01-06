@@ -38,11 +38,12 @@ To install them add them to your project using `yarn add`, `npm install`, or man
 | **PB Line Graph**      | [PB Line Graph](https://playbook.powerapp.cloud/kits/pb_line_graph/react)         | [highcharts](https://www.npmjs.com/package/highcharts),<br>[highcharts-react-official](https://www.npmjs.com/package/highcharts-react-official) | highcharts,<br>highcharts-react-official |
 | **Rich Text Editor**<br>(TipTap Editor) | [Rich Text Editor](https://playbook.powerapp.cloud/kits/rich_text_editor/react) | - [@tiptap/core](https://www.npmjs.com/package/@tiptap/core)<br>- [@tiptap/react](https://www.npmjs.com/package/@tiptap/react)<br>- [@tiptap/starter-kit](https://www.npmjs.com/package/@tiptap/starter-kit)<br>- [@tiptap/extension-document](https://www.npmjs.com/package/@tiptap/extension-document)<br>- [@tiptap/extension-highlight](https://www.npmjs.com/package/@tiptap/extension-highlight)<br>- [@tiptap/extension-horizontal-rule](https://www.npmjs.com/package/@tiptap/extension-horizontal-rule)<br>- [@tiptap/extension-link](https://www.npmjs.com/package/@tiptap/extension-link)<br>- [@tiptap/extension-paragraph](https://www.npmjs.com/package/@tiptap/extension-paragraph)<br>- [@tiptap/extension-text](https://www.npmjs.com/package/@tiptap/extension-text)<br>- [@tiptap/pm](https://www.npmjs.com/package/@tiptap/pm) | - @tiptap/core<br>- @tiptap/react<br>- @tiptap/starter-kit<br>- @tiptap/extension-document<br>- @tiptap/extension-highlight<br>- @tiptap/extension-horizontal-rule<br>- @tiptap/extension-link<br>- @tiptap/extension-paragraph<br>- @tiptap/extension-text<br>- @tiptap/pm |
 
+**Chart Kits**: 
+
 PbBarGraph, PbCircleChart, PbGaugeChart, and PbLineGraph are available through a separate entrypoint to keep Highcharts optional. Import them using:
 ```javascript
 import { PbBarGraph, PbCircleChart, PbGaugeChart, PbLineGraph } from 'playbook-ui/charts'
-```**Chart Kits**: 
-
+```
 ## Bundled Dependencies
 
 These kits use dependencies that are bundled with them; no additional installation is required.
