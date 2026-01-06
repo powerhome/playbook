@@ -3,9 +3,10 @@ import RichTextEditor from '../_rich_text_editor'
 import { useEditor, EditorContent } from "@tiptap/react"
 import StarterKit from "@tiptap/starter-kit"
 import Link from '@tiptap/extension-link'
+import { Caption } from "playbook-ui"
 
 
-const RichTextEditorAdvancedRows = (props) => {
+const RichTextEditorAdvancedHeight = (props) => {
 
   const editor = useEditor({
     extensions: [
@@ -33,9 +34,10 @@ const RichTextEditorAdvancedRows = (props) => {
 
   return (
     <div>
+      <Caption>sm</Caption>
       <RichTextEditor
           advancedEditor={editor}
-          textareaHeight="sm"
+          inputHeight="sm"
           {...props}
       >
         <EditorContent editor={editor} />
@@ -43,9 +45,10 @@ const RichTextEditorAdvancedRows = (props) => {
 
       <br />
 
+      <Caption>md</Caption>
       <RichTextEditor
           advancedEditor={editor2}
-          textareaHeight="md"
+          inputHeight="md"
           {...props}
       >
         <EditorContent editor={editor2} />
@@ -53,9 +56,10 @@ const RichTextEditorAdvancedRows = (props) => {
 
       <br />
 
+      <Caption>lg</Caption>
       <RichTextEditor
-          advancedEditor={editor}
-          textareaHeight="lg"
+          advancedEditor={editor3}
+          inputHeight="lg"
           {...props}
       >
         <EditorContent editor={editor3} />
@@ -64,4 +68,4 @@ const RichTextEditorAdvancedRows = (props) => {
   )
 }
 
-export default RichTextEditorAdvancedRows
+export default RichTextEditorAdvancedHeight

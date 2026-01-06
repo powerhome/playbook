@@ -44,7 +44,8 @@ type RichTextEditorProps = {
   name?: string,
   onChange: (html: string, text: string) => void,
   placeholder?: string,
-  textareaHeight?: "sm" | "md" | "lg",
+  inputHeight?: "sm" | "md" | "lg",
+  inputMinHeight?: "sm" | "md" | "lg",
   simple?: boolean,
   sticky?: boolean,
   template: string,
@@ -69,7 +70,8 @@ const RichTextEditor = (props: RichTextEditorProps): React.ReactElement => {
     name,
     onChange = noop,
     placeholder,
-    textareaHeight,
+    inputHeight,
+    inputMinHeight,
     simple = false,
     sticky = false,
     template = '',
@@ -218,7 +220,7 @@ const RichTextEditor = (props: RichTextEditorProps): React.ReactElement => {
           <div 
               className={classnames(
                 "pb_rich_text_editor_advanced_container",
-                { [`textarea_height_${textareaHeight}`]: !!textareaHeight, ["toolbar-active"]: shouldShowToolbar }
+                { [`input_height_${inputHeight}`]: !!inputHeight,[`input_min_height_${inputMinHeight}`]: !!inputMinHeight ,["toolbar-active"]: shouldShowToolbar }
               )}
           >
             {shouldShowToolbar && (
