@@ -30,16 +30,20 @@ module Playbook
         closeable.present? ? " remove_toast" : ""
       end
 
-      def auto_close_class
-        auto_close.present? ? " auto_close_#{auto_close}" : ""
-      end
-
       def position_class
         horizontal && vertical ? " positioned_toast #{vertical} #{horizontal}" : ""
       end
 
       def multi_line_class
         multi_line.present? ? "multi_line" : nil
+      end
+
+      def auto_close_attribute
+        auto_close.present? ? { "pb-auto-close": auto_close } : {}
+      end
+
+      def data
+        Hash(prop(:data)).merge(auto_close_attribute)
       end
 
       def icon_value
@@ -61,9 +65,7 @@ module Playbook
 
       def classname
         default_z_index = z_index.present? ? "" : " z_index_max"
-        # IMPORTANT: the AutoClose class must be the last class in the string for JS to read it correctly
-        # Changing the order will break the auto_close functionality
-        generate_classname("pb_fixed_confirmation_toast_kit", status, multi_line_class) + close_class + position_class + icon_class + default_z_index + auto_close_class
+        generate_classname("pb_fixed_confirmation_toast_kit", status, multi_line_class) + close_class + position_class + icon_class + default_z_index
       end
     end
   end
