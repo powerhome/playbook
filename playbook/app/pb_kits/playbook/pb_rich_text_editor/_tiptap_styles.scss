@@ -209,8 +209,8 @@
 .pb_rich_text_editor_advanced_container.input_height_sm {
   div {
     .tiptap.ProseMirror {
-      height: 100px;
-      overflow: scroll;
+      height: 131px;
+      overflow: auto;
     }
   }
 }
@@ -218,8 +218,8 @@
 .pb_rich_text_editor_advanced_container.input_height_md {
   div {
     .tiptap.ProseMirror {
-      height: 150px;
-      overflow: scroll;
+      height: 180px;
+      overflow: auto;
     }
   }
 }
@@ -227,8 +227,8 @@
 .pb_rich_text_editor_advanced_container.input_height_lg {
   div {
     .tiptap.ProseMirror {
-      height: 200px;
-      overflow: scroll;
+      height: 230px;
+      overflow: auto;
     }
   }
 }
@@ -236,7 +236,7 @@
 .pb_rich_text_editor_advanced_container.input_min_height_sm {
   div {
     .tiptap.ProseMirror {
-      min-height: 100px;
+      min-height: 131px;
     }
   }
 }
@@ -244,7 +244,7 @@
 .pb_rich_text_editor_advanced_container.input_min_height_md {
   div {
     .tiptap.ProseMirror {
-      min-height: 150px;
+      min-height: 180px;
     }
   }
 }
@@ -252,7 +252,7 @@
 .pb_rich_text_editor_advanced_container.input_min_height_lg {
   div {
     .tiptap.ProseMirror {
-      min-height: 200px;
+      min-height: 230px;
     }
   }
 }

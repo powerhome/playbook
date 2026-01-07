@@ -1,0 +1,1 @@
+Use the `inputHeight` prop to keep the text area a speficic height and add a scroll bar.
