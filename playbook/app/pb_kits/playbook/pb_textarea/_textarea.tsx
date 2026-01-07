@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 
-import React, { forwardRef, useEffect, useRef } from 'react'
+import React, { forwardRef, useEffect, useRef, ChangeEvent, ClipboardEvent } from 'react'
 import classnames from 'classnames'
 
 import PbTextarea from '.'
@@ -14,6 +14,8 @@ import Caption from '../pb_caption/_caption'
 import Flex from '../pb_flex/_flex'
 import FlexItem from '../pb_flex/_flex_item'
 
+import { stripEmojisForPaste, applyEmojiMask } from '../utilities/emojiMask'
+
 type TextareaProps = {
   aria?: {[key: string]: string},
   characterCount?: string,
@@ -21,6 +23,7 @@ type TextareaProps = {
   children?: React.ReactChild[],
   data?: {[key: string]: string},
   disabled?: boolean,
+  emojiMask?: boolean,
   error?: string,
   htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
@@ -45,6 +48,7 @@ const Textarea = ({
   children,
   data = {},
   disabled,
+  emojiMask = false,
   htmlOptions = {},
   inline = false,
   resize = 'none',
@@ -66,6 +70,37 @@ const Textarea = ({
       PbTextarea.addMatch(ref.current)
     }
   })
+
+  const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    // Apply emoji mask if enabled using centralized helper
+    if (emojiMask) {
+      applyEmojiMask(e.target)
+    }
+    onChange(e)
+  }
+
+  // Handle paste event for emoji mask - updates textarea value, cursor position, and calls onChange
+  const handlePaste = (e: ClipboardEvent<HTMLTextAreaElement>) => {
+    if (emojiMask) {
+      const pastedText = e.clipboardData.getData('text')
+      const filteredText = stripEmojisForPaste(pastedText)
+      
+      if (pastedText !== filteredText) {
+        e.preventDefault()
+        const textarea = e.currentTarget
+        const start = textarea.selectionStart || 0
+        const end = textarea.selectionEnd || 0
+        const currentValue = textarea.value
+        const newValue = currentValue.slice(0, start) + filteredText + currentValue.slice(end)
+        const newCursorPosition = start + filteredText.length
+        
+        textarea.value = newValue
+        textarea.selectionStart = textarea.selectionEnd = newCursorPosition
+        
+        onChange({ ...e, target: textarea, currentTarget: textarea } as unknown as ChangeEvent<HTMLTextAreaElement>)
+      }
+    }
+  }
 
   const errorClass = error ? 'error' : null
   const inlineClass = inline ? 'inline' : ''
@@ -94,7 +129,8 @@ const Textarea = ({
         <textarea
             disabled={disabled}
             name={name}
-            onChange={onChange}
+            onChange={emojiMask ? handleChange : onChange}
+            onPaste={emojiMask ? handlePaste : undefined}
             placeholder={placeholder}
             ref={ref}
             required={required}

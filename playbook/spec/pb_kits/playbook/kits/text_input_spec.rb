@@ -18,6 +18,7 @@ RSpec.describe Playbook::PbTextInput::TextInput do
   it { is_expected.to define_prop(:type).with_default("text") }
   it { is_expected.to define_hash_prop(:input_options).with_default({}) }
   it { is_expected.to define_prop(:mask).with_default(nil) }
+  it { is_expected.to define_prop(:emoji_mask).with_default(false) }
   it { is_expected.to define_prop(:required_indicator).with_default(false) }
 
   describe "#classname" do
@@ -50,6 +51,30 @@ RSpec.describe Playbook::PbTextInput::TextInput do
       it "does not set data-pb-input-mask" do
         text_input = subject.new(mask: nil)
         expect(text_input.input_tag).not_to include("data-pb-input-mask")
+      end
+    end
+  end
+
+  describe "#emoji_mask" do
+    context "when emoji_mask is true" do
+      it "sets data-pb-emoji-mask attribute" do
+        text_input = subject.new(emoji_mask: true)
+        expect(text_input.input_tag).to include('data-pb-emoji-mask="true"')
+      end
+    end
+
+    context "when emoji_mask is false" do
+      it "does not set data-pb-emoji-mask attribute" do
+        text_input = subject.new(emoji_mask: false)
+        expect(text_input.input_tag).not_to include("data-pb-emoji-mask")
+      end
+    end
+
+    context "when emoji_mask is combined with input mask" do
+      it "sets both data attributes" do
+        text_input = subject.new(emoji_mask: true, mask: "currency")
+        expect(text_input.input_tag).to include('data-pb-emoji-mask="true"')
+        expect(text_input.input_tag).to include('data-pb-input-mask="true"')
       end
     end
   end
