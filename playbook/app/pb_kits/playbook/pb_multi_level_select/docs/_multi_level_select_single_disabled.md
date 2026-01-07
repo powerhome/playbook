@@ -1,0 +1,1 @@
+Individual items can be disabled by including `disabled: true` within the object on the treeData for the `single` variant. Disabled options are visibly disabled in the dropdown UI and cannot be selected via mouse click or keyboard navigation. When a parent node is disabled, all of its children are automatically disabled as well.

@@ -358,6 +358,13 @@ const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>((pr
     const { id, value: inputText } = e.target;
     // The radio button needs a unique ID, this grabs the ID before the hyphen
     const selectedItemID = id.match(/^[^-]*/)[0];
+
+    // Check if the item is disabled - if so, don't allow selection (safety check in addition to native disabled attribute)
+    const clickedItem = filterFormattedDataById(formattedData, selectedItemID);
+    if (clickedItem.length > 0 && clickedItem[0].disabled) {
+      return;
+    }
+    
     // Reset tree checked state, triggering useEffect
     const treeWithNoSelections = modifyRecursive(formattedData, false);
     // Update tree with single selection
