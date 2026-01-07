@@ -4,31 +4,18 @@ require_relative "../../../app/pb_kits/playbook/pb_body/body"
 
 RSpec.describe Playbook::Flex do
   subject { Playbook::PbBody::Body }
-  let(:screen_sizes) { %w[xs sm md lg xl] }
 
-  describe "#classname" do
-    it "returns ordinal suffixed class name", :aggregate_failures do
-      13.times do |num|
-        expect(subject.new({ flex: num }).classname).to include("flex_#{num}")
+  test_global_prop(
+    :flex,
+    (0..12).to_a,
+    ->(v) { "flex_#{v}" },
+    responsive_pattern: ->(size, v) { "flex_#{size}_#{v}" }
+  )
 
-        screen_sizes.each do |size|
-          obj = {}
-          obj[size] = num
-          expect(subject.new({ flex: obj }).classname).to include("flex_#{size}_#{num}")
-        end
-      end
-    end
-
-    it "returns proper class name", :aggregate_failures do
-      %w[auto initial none].each do |word|
-        expect(subject.new({ flex: word }).classname).to include("flex_#{word}")
-
-        screen_sizes.each do |size|
-          obj = {}
-          obj[size] = word
-          expect(subject.new({ flex: obj }).classname).to include("flex_#{size}_#{word.underscore}")
-        end
-      end
-    end
-  end
+  test_global_prop(
+    :flex,
+    %w[auto initial none],
+    ->(v) { "flex_#{v}" },
+    responsive_pattern: ->(size, v) { "flex_#{size}_#{v.underscore}" }
+  )
 end
