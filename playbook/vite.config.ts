@@ -23,7 +23,7 @@ export default defineConfig({
       preserveEntrySignatures: 'strict',
       input: {
         'chunks/vendor.js': resolve(__dirname, 'app/entrypoints/playbook.js'),
-        'charts': resolve(__dirname, 'app/entrypoints/playbook-charts.js'),
+        'charts.js': resolve(__dirname, 'app/entrypoints/playbook-charts.js'),
       },
       output: {
         assetFileNames: ({name}) => {
