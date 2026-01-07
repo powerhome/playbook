@@ -53,7 +53,6 @@ const config = {
       'playbook-ui/dist/reset': resolve(__dirname, '../playbook/app/entrypoints/reset.scss'),
       'playbook-ui/dist/playbook': resolve(__dirname, '../playbook/app/entrypoints/playbook.scss'),
       'playbook-ui/dist/playbook-rails.js': resolve(__dirname, '../playbook/app/entrypoints/playbook-rails.js'),
-      'playbook-ui/dist/playbook-rails-charts.js': resolve(__dirname, '../playbook/app/entrypoints/playbook-rails-charts-bindings.js'),
       'playbook-ui/dist/tokens': resolve(__dirname, '../playbook/dist/tokens'),
       'playbook-ui/charts': resolve(__dirname, '../playbook/app/entrypoints/playbook-charts.js'),
       'playbook-ui': resolve(__dirname, '../playbook/app/entrypoints/playbook.js'),
