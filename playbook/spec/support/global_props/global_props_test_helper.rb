@@ -49,6 +49,55 @@ module GlobalPropsTestHelper
       end
     end
   end
+
+  # Test that a global prop with nested hash structure (i.e., hover) generates correct classnames
+  #
+  # @param prop_name [Symbol] The name of the global prop (e.g., :hover)
+  # @param test_cases [Array] Array of test case hashes with:
+  #   - :nested_key [Symbol] - Key inside the nested hash (e.g., :shadow, :scale)
+  #   - :values [Array] - Array of values to test for this nested key
+  #   - :classname_pattern [Proc] - Lambda that generates expected classname
+  #     Example: ->(v) { "hover_shadow_#{v}" }
+  #   - :excludes [String, Array, nil] - Optional classname(s) that should NOT be present
+  #
+  # Usage:
+  #   test_nested_global_prop(
+  #     :hover,
+  #     [
+  #       { nested_key: :shadow, values: %w[deep deeper], classname_pattern: ->(v) { "hover_shadow_#{v}" } },
+  #       { nested_key: :underline, values: [true], classname_pattern: ->(_) { "hover_underline" } },
+  #       { nested_key: :underline, values: [false], excludes: "hover_underline" },
+  #     ]
+  #   )
+  def test_nested_global_prop(prop_name, test_cases)
+    describe "##{prop_name}" do
+      it "returns correct class names", :aggregate_failures do
+        test_cases.each do |test_case|
+          nested_key = test_case[:nested_key]
+          values = test_case[:values]
+          classname_pattern = test_case[:classname_pattern]
+          excludes = test_case[:excludes]
+
+          values.each do |value|
+            prop_value = { nested_key => value }
+            instance = subject.new({ prop_name => prop_value })
+
+            if classname_pattern
+              expected_classname = classname_pattern.call(value)
+              expect(instance.classname).to include(expected_classname)
+            end
+
+            next unless excludes
+
+            excludes_array = excludes.is_a?(Array) ? excludes : [excludes]
+            excludes_array.each do |excluded_classname|
+              expect(instance.classname).not_to include(excluded_classname)
+            end
+          end
+        end
+      end
+    end
+  end
 end
 
 RSpec.configure do |config|
