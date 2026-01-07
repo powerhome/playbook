@@ -1,0 +1,1 @@
+Use the inputMinHeight prop to render the text area with a minimum height. If the text exceeds the text area, the text area will grow to accommodate it.
