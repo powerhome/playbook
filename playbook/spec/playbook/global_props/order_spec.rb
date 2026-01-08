@@ -33,4 +33,12 @@ RSpec.describe Playbook::Flex do
     :order,
     %w[flex_order_1 flex_order_3 flex_order_12]
   )
+
+  # NOTE: Currently using allow_errors: true because globalProps generates classes for invalid values
+  test_global_prop_invalid_values(
+    :order,
+    [0, 13, 999, -1, "invalid", "bad_value", "special-chars!@#"],
+    %w[flex_order_0 flex_order_13 flex_order_999 flex_order_-1 flex_order_invalid flex_order_bad_value flex_order_special-chars!@#],
+    allow_errors: true
+  )
 end

@@ -1,4 +1,4 @@
-import { testGlobalProp, testGlobalPropAbsence } from './globalPropsTestHelper'
+import { testGlobalProp, testGlobalPropAbsence, testGlobalPropInvalidValues } from './globalPropsTestHelper'
 import Body from '../../../pb_body/_body'
 import Button from '../../../pb_button/_button'
 import Card from '../../../pb_card/_card'
@@ -21,4 +21,13 @@ testGlobalPropAbsence(
   ['truncate_0', 'truncate_1', 'truncate_2', 'truncate_3', 'truncate_4', 'truncate_5'],
   undefined,
   { excludeZero: true, skipNull: true }
+)
+
+// NOTE: Currently using skipKnownIssues: true because globalProps.ts generates classes for invalid values
+testGlobalPropInvalidValues(
+  'truncate',
+  [0, 6, 999, -1, 'invalid', 'bad_value', 'special-chars!@#'],
+  ['truncate_0', 'truncate_6', 'truncate_999', 'truncate_-1', 'truncate_invalid', 'truncate_bad_value', 'truncate_special-chars!@#'],
+  undefined,
+  { skipKnownIssues: true }
 )

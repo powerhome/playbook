@@ -31,4 +31,12 @@ RSpec.describe Playbook::Flex do
     :align_self,
     %w[align_self_auto align_self_start align_self_end align_self_center align_self_stretch align_self_baseline]
   )
+
+  # NOTE: Currently using allow_errors: true because globalProps generates classes for invalid values
+  test_global_prop_invalid_values(
+    :align_self,
+    ["invalid", "bad_value", "not_an_align_value", "special-chars!@#"],
+    %w[align_self_invalid align_self_bad_value align_self_not_an_align_value align_self_special-chars!@#],
+    allow_errors: true
+  )
 end

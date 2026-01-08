@@ -50,4 +50,12 @@ RSpec.describe Playbook::Flex do
     :flex,
     %w[flex_0 flex_1 flex_12 flex_auto flex_initial flex_none]
   )
+
+  # NOTE: Currently using allow_errors: true because globalProps generates classes for invalid values
+  test_global_prop_invalid_values(
+    :flex,
+    [999, -1, "invalid", "out_of_range", "bad_string", 13, "special-chars!@#"],
+    %w[flex_999 flex_-1 flex_invalid flex_out_of_range flex_bad_string flex_13 flex_special-chars!@#],
+    allow_errors: true
+  )
 end

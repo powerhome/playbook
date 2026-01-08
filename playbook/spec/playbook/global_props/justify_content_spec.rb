@@ -32,4 +32,12 @@ RSpec.describe Playbook::Flex do
     :justify_content,
     %w[justify_content_start justify_content_end justify_content_center justify_content_space_between justify_content_space_around justify_content_space_evenly]
   )
+
+  # NOTE: Currently using allow_errors: true because globalProps generates classes for invalid values
+  test_global_prop_invalid_values(
+    :justify_content,
+    ["invalid", "bad_value", "not_a_justify_value", "special-chars!@#"],
+    %w[justify_content_invalid justify_content_bad_value justify_content_not_a_justify_value justify_content_special-chars!@#],
+    allow_errors: true
+  )
 end

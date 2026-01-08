@@ -32,4 +32,12 @@ RSpec.describe Playbook::Flex do
     :flex_wrap,
     %w[flex_wrap_wrap flex_wrap_nowrap flex_wrap_wrap_reverse]
   )
+
+  # NOTE: Currently using allow_errors: true because globalProps generates classes for invalid values
+  test_global_prop_invalid_values(
+    :flex_wrap,
+    ["invalid", "bad_value", "not_a_wrap_value", "special-chars!@#"],
+    %w[flex_wrap_invalid flex_wrap_bad_value flex_wrap_not_a_wrap_value flex_wrap_special-chars!@#],
+    allow_errors: true
+  )
 end

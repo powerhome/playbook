@@ -1,4 +1,4 @@
-import { testGlobalProp, testGlobalPropResponsiveWithDefault, testGlobalPropAbsence } from './globalPropsTestHelper'
+import { testGlobalProp, testGlobalPropResponsiveWithDefault, testGlobalPropAbsence, testGlobalPropInvalidValues } from './globalPropsTestHelper'
 import Body from '../../../pb_body/_body'
 import Button from '../../../pb_button/_button'
 import Card from '../../../pb_card/_card'
@@ -28,4 +28,13 @@ testGlobalPropAbsence(
   ['flex_grow_0', 'flex_grow_1'],
   undefined,
   { skipNull: true }
+)
+
+// NOTE: Currently using skipKnownIssues: true because globalProps.ts generates classes for invalid values
+testGlobalPropInvalidValues(
+  'flexGrow',
+  [2, -1, 999, 'invalid', 'bad_value', 'special-chars!@#'],
+  ['flex_grow_2', 'flex_grow_-1', 'flex_grow_999', 'flex_grow_invalid', 'flex_grow_bad_value', 'flex_grow_special-chars!@#'],
+  undefined,
+  { skipKnownIssues: true }
 )

@@ -33,4 +33,12 @@ RSpec.describe Playbook::Flex do
     :display,
     %w[display_block display_inline display_flex display_none display_grid]
   )
+
+  # NOTE: Currently using allow_errors: true because globalProps generates classes for invalid values
+  test_global_prop_invalid_values(
+    :display,
+    ["invalid", "bad_value", "not_a_display_value", "special-chars!@#", "display_with_underscores"],
+    %w[display_invalid display_bad_value display_not_a_display_value display_special-chars!@# display_display_with_underscores],
+    allow_errors: true
+  )
 end

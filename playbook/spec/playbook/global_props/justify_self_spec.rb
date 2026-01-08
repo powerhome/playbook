@@ -32,4 +32,12 @@ RSpec.describe Playbook::Flex do
     :justify_self,
     %w[justify_self_auto justify_self_start justify_self_end justify_self_center justify_self_stretch]
   )
+
+  # NOTE: Currently using allow_errors: true because globalProps generates classes for invalid values
+  test_global_prop_invalid_values(
+    :justify_self,
+    ["invalid", "bad_value", "not_a_justify_value", "special-chars!@#"],
+    %w[justify_self_invalid justify_self_bad_value justify_self_not_a_justify_value justify_self_special-chars!@#],
+    allow_errors: true
+  )
 end

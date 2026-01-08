@@ -1,4 +1,4 @@
-import { testGlobalProp, testGlobalPropResponsiveWithDefault, testGlobalPropAbsence } from './globalPropsTestHelper'
+import { testGlobalProp, testGlobalPropResponsiveWithDefault, testGlobalPropAbsence, testGlobalPropInvalidValues } from './globalPropsTestHelper'
 import { camelToSnakeCase } from '../../../utilities/text'
 import Body from '../../../pb_body/_body'
 import Button from '../../../pb_button/_button'
@@ -29,4 +29,14 @@ testGlobalPropAbsence(
   ['flex_direction_row', 'flex_direction_column', 'flex_direction_column_reverse'],
   undefined,
   { skipNull: true }
+)
+
+// NOTE: Currently using skipKnownIssues: true because globalProps.ts generates classes for invalid values
+// NOTE: Using allowRenderingErrors: true because invalid types (like numbers) cause rendering errors with camelToSnakeCase
+testGlobalPropInvalidValues(
+  'flexDirection',
+  ['invalid', 'bad_value', 'not_a_direction', 'special-chars!@#'],
+  ['flex_direction_invalid', 'flex_direction_bad_value', 'flex_direction_not_a_direction', 'flex_direction_special-chars!@#'],
+  undefined,
+  { skipKnownIssues: true, allowRenderingErrors: true }
 )

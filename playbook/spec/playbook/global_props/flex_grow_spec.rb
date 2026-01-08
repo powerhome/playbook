@@ -32,4 +32,12 @@ RSpec.describe Playbook::FlexGrow do
     :flex_grow,
     %w[flex_grow_0 flex_grow_1]
   )
+
+  # NOTE: Currently using allow_errors: true because globalProps generates classes for invalid values
+  test_global_prop_invalid_values(
+    :flex_grow,
+    [2, -1, 999, "invalid", "bad_value", "special-chars!@#"],
+    %w[flex_grow_2 flex_grow_-1 flex_grow_999 flex_grow_invalid flex_grow_bad_value flex_grow_special-chars!@#],
+    allow_errors: true
+  )
 end

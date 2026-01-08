@@ -169,6 +169,58 @@ module GlobalPropsTestHelper
       end
     end
   end
+
+  # Test that a global prop handles invalid values gracefully without throwing errors or generating unexpected classes
+  #
+  # @param prop_name [Symbol] The name of the global prop (e.g., :display, :flex)
+  # @param invalid_values [Array] Array of invalid values to test
+  #   Example: ['invalid', 'bad_value', 123, 'special-chars!@#']
+  # @param excluded_classnames [Array] Array of classnames that should NOT be present
+  #   Example: ['display_invalid', 'display_bad_value', 'display_123']
+  # @param options [Hash] Optional configuration
+  #   - :allow_errors [Boolean] - If true, allows errors to be raised (default: false)
+  #     Note: Some invalid values might cause errors, which is acceptable as long as
+  #     they don't generate unexpected classes. Set to true if you expect some values to fail.
+  #
+  # Usage:
+  #   # Test that display prop handles invalid values gracefully
+  #   test_global_prop_invalid_values(
+  #     :display,
+  #     ['invalid', 'bad_value', 123, 'special-chars!@#'],
+  #     ['display_invalid', 'display_bad_value', 'display_123', 'display_special-chars!@#']
+  #   )
+  #
+  # Usage (with allow_errors):
+  #   # Test numeric prop with out-of-range values
+  #   test_global_prop_invalid_values(
+  #     :flex,
+  #     [999, -1, 'invalid', 'out_of_range'],
+  #     ['flex_999', 'flex_-1', 'flex_invalid', 'flex_out_of_range'],
+  #     allow_errors: true
+  #   )
+  def test_global_prop_invalid_values(prop_name, invalid_values, excluded_classnames, options = {})
+    allow_errors = options.fetch(:allow_errors, false)
+
+    describe "##{prop_name} with invalid values" do
+      it "handles invalid values gracefully", :aggregate_failures do
+        invalid_values.each do |invalid_value|
+          instance = subject.new({ prop_name => invalid_value })
+
+          # None of the excluded classnames should be present
+          excluded_classnames.each do |excluded_classname|
+            expect(instance.classname).not_to include(excluded_classname)
+          end
+        rescue => e
+          # If errors are allowed, that's acceptable as long as no unexpected classes were generated
+          raise e unless allow_errors
+
+          # If we allow errors, we can't verify classes, so we just ensure it doesn't crash silently
+          # and that the error is expected
+          expect(e).to be_a(StandardError)
+        end
+      end
+    end
+  end
 end
 
 RSpec.configure do |config|

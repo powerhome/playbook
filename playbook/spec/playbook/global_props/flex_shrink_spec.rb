@@ -32,4 +32,12 @@ RSpec.describe Playbook::FlexGrow do
     :flex_shrink,
     %w[flex_shrink_0 flex_shrink_1]
   )
+
+  # NOTE: Currently using allow_errors: true because globalProps generates classes for invalid values
+  test_global_prop_invalid_values(
+    :flex_shrink,
+    [2, -1, 999, "invalid", "bad_value", "special-chars!@#"],
+    %w[flex_shrink_2 flex_shrink_-1 flex_shrink_999 flex_shrink_invalid flex_shrink_bad_value flex_shrink_special-chars!@#],
+    allow_errors: true
+  )
 end

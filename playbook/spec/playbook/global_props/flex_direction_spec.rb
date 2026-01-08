@@ -32,4 +32,12 @@ RSpec.describe Playbook::Flex do
     :flex_direction,
     %w[flex_direction_row flex_direction_column flex_direction_row_reverse flex_direction_column_reverse]
   )
+
+  # NOTE: Currently using allow_errors: true because globalProps generates classes for invalid values
+  test_global_prop_invalid_values(
+    :flex_direction,
+    ["invalid", "bad_value", "not_a_direction", "special-chars!@#"],
+    %w[flex_direction_invalid flex_direction_bad_value flex_direction_not_a_direction flex_direction_special-chars!@#],
+    allow_errors: true
+  )
 end

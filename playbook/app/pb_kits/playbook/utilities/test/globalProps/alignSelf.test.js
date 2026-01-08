@@ -1,4 +1,4 @@
-import { testGlobalProp, testGlobalPropResponsiveWithDefault, testGlobalPropAbsence } from './globalPropsTestHelper'
+import { testGlobalProp, testGlobalPropResponsiveWithDefault, testGlobalPropAbsence, testGlobalPropInvalidValues } from './globalPropsTestHelper'
 import { camelToSnakeCase } from '../../../utilities/text'
 import Body from '../../../pb_body/_body'
 import Button from '../../../pb_button/_button'
@@ -29,4 +29,14 @@ testGlobalPropAbsence(
   ['align_self_start', 'align_self_center', 'align_self_end', 'align_self_stretch', 'align_self_baseline', 'align_self_auto'],
   undefined,
   { skipNull: true }
+)
+
+// NOTE: Currently using skipKnownIssues: true because globalProps.ts generates classes for invalid values
+// NOTE: Using allowRenderingErrors: true because invalid types (like numbers) cause rendering errors with camelToSnakeCase
+testGlobalPropInvalidValues(
+  'alignSelf',
+  ['invalid', 'bad_value', 'not_an_align_value', 'special-chars!@#'],
+  ['align_self_invalid', 'align_self_bad_value', 'align_self_not_an_align_value', 'align_self_special-chars!@#'],
+  undefined,
+  { skipKnownIssues: true, allowRenderingErrors: true }
 )

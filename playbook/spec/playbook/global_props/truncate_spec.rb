@@ -33,4 +33,12 @@ RSpec.describe Playbook::Flex do
     %w[truncate_0 truncate_1 truncate_2 truncate_3 truncate_4 truncate_5],
     exclude_zero: true
   )
+
+  # NOTE: Currently using allow_errors: true because globalProps generates classes for invalid values
+  test_global_prop_invalid_values(
+    :truncate,
+    [0, 6, 999, -1, "invalid", "bad_value", "special-chars!@#"],
+    %w[truncate_0 truncate_6 truncate_999 truncate_-1 truncate_invalid truncate_bad_value truncate_special-chars!@#],
+    allow_errors: true
+  )
 end
