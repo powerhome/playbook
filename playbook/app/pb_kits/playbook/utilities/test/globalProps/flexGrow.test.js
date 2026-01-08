@@ -1,10 +1,19 @@
 import { testGlobalProp, testGlobalPropResponsiveWithDefault, testGlobalPropAbsence } from './globalPropsTestHelper'
+import Body from '../../../pb_body/_body'
+import Button from '../../../pb_button/_button'
+import Card from '../../../pb_card/_card'
+import Title from '../../../pb_title/_title'
+import Flex from '../../../pb_flex/_flex'
+import Link from '../../../pb_link/_link'
+import Badge from '../../../pb_badge/_badge'
 
+// Note: TextInput excluded - flexGrow is a flexbox property that doesn't apply to form inputs
 testGlobalProp(
   'flexGrow',
   [0, 1],
   (v) => `flex_grow_${v}`,
-  (size, v) => `flex_grow_${size}_${v}`
+  (size, v) => `flex_grow_${size}_${v}`,
+  [Body, Button, Card, Title, Flex, Link, Badge]
 )
 
 testGlobalPropResponsiveWithDefault(

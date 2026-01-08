@@ -10,40 +10,54 @@ module GlobalPropsTestHelper
   # @param responsive_pattern [Proc, nil] Optional lambda for responsive classnames
   #   When provided, tests responsive breakpoints (xs, sm, md, lg, xl)
   #   Example: ->(size, v) { "display_#{size}_#{v}" }
+  # @param test_subjects [Array, Class, nil] Optional array of classes or single class to test
+  #   When provided, tests each class in the array. Defaults to subject if not provided.
+  #   Example: [Playbook::PbBody::Body, Playbook::PbButton::Button]
   #
-  # Usage (direct values only):
+  # Usage (direct values only, single subject):
   #   test_global_prop(
   #     :display,
   #     %w[block inline flex],
   #     ->(v) { "display_#{v}" }
   #   )
   #
-  # Usage (with responsive breakpoints):
+  # Usage (with responsive breakpoints, multiple subjects):
   #   test_global_prop(
   #     :display,
   #     %w[block inline flex],
   #     ->(v) { "display_#{v}" },
-  #     responsive_pattern: ->(size, v) { "display_#{size}_#{v}" }
+  #     responsive_pattern: ->(size, v) { "display_#{size}_#{v}" },
+  #     test_subjects: [Playbook::PbBody::Body, Playbook::PbButton::Button]
   #   )
-  def test_global_prop(prop_name, valid_values, classname_pattern, responsive_pattern: nil)
-    describe "##{prop_name}" do
-      it "returns correct class names", :aggregate_failures do
-        screen_sizes = %w[xs sm md lg xl]
+  def test_global_prop(prop_name, valid_values, classname_pattern, responsive_pattern: nil, test_subjects: nil)
+    # Normalize to array for consistent handling
+    subjects_to_test = if test_subjects
+                         test_subjects.is_a?(Array) ? test_subjects : [test_subjects]
+                       else
+                         [subject]
+                       end
 
-        valid_values.each do |value|
-          # Test direct prop value
-          expected_classname = classname_pattern.call(value)
-          instance = subject.new({ prop_name => value })
-          expect(instance.classname).to include(expected_classname)
+    subjects_to_test.each do |test_subject|
+      subject_name = test_subject.name.split("::").last
+      describe "##{prop_name} (#{subject_name})" do
+        it "returns correct class names", :aggregate_failures do
+          screen_sizes = %w[xs sm md lg xl]
 
-          # Test responsive breakpoints if pattern provided
-          next unless responsive_pattern
+          valid_values.each do |value|
+            # Test direct prop value
+            expected_classname = classname_pattern.call(value)
+            instance = test_subject.new({ prop_name => value })
+            expect(instance.classname).to include(expected_classname)
 
-          screen_sizes.each do |size|
-            responsive_obj = { size => value }
-            expected_responsive_classname = responsive_pattern.call(size, value)
-            responsive_instance = subject.new({ prop_name => responsive_obj })
-            expect(responsive_instance.classname).to include(expected_responsive_classname)
+            # Test responsive breakpoints if pattern provided
+            next unless responsive_pattern
+
+            screen_sizes.each do |size|
+              responsive_obj = { size => value }
+              expected_responsive_classname = responsive_pattern.call(size, value)
+              responsive_instance = test_subject.new({ prop_name => responsive_obj })
+              expect(responsive_instance.classname).to include(expected_responsive_classname)
+            end
           end
         end
       end
