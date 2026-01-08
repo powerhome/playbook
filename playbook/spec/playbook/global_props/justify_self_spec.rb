@@ -11,4 +11,9 @@ RSpec.describe Playbook::Flex do
     ->(v) { "justify_self_#{v.underscore}" },
     responsive_pattern: ->(size, v) { "justify_self_#{size}_#{v.underscore}" }
   )
+
+  test_global_prop_absence(
+    :justify_self,
+    %w[justify_self_auto justify_self_start justify_self_end justify_self_center justify_self_stretch]
+  )
 end

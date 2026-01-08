@@ -1,4 +1,4 @@
-import { testGlobalProp, testGlobalPropWithDefault } from './globalPropsTestHelper'
+import { testGlobalProp, testGlobalPropWithDefault, testGlobalPropAbsence } from './globalPropsTestHelper'
 
 // Test numeric values (0-12) - flex prop expects strings
 testGlobalProp(
@@ -21,4 +21,11 @@ testGlobalPropWithDefault(
   { default: '3', xs: '1', sm: '3', md: '1' },
   (v) => `flex_${v}`,
   (size, v) => `flex_${size}_${v}`
+)
+
+testGlobalPropAbsence(
+  'flex',
+  ['flex_0', 'flex_1', 'flex_12', 'flex_auto', 'flex_initial', 'flex_none'],
+  undefined,
+  { skipNull: true }
 )

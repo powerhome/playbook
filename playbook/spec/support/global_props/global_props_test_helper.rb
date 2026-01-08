@@ -98,6 +98,63 @@ module GlobalPropsTestHelper
       end
     end
   end
+
+  # Test that a global prop does NOT generate classnames when prop is nil or not passed
+  #
+  # @param prop_name [Symbol] The name of the global prop (e.g., :display, :flex)
+  # @param excluded_classnames [Array] Array of classnames that should NOT be present
+  #   Example: ['display_block', 'display_flex', 'display_none']
+  # @param options [Hash] Optional configuration
+  #   - :exclude_zero [Boolean] - If true, also test that 0 doesn't generate classes (default: false)
+  #     Note: Some props like flex: 0 are valid, so this should be false for those
+  #
+  # Usage:
+  #   # Test that display prop doesn't generate classes when nil/not passed
+  #   test_global_prop_absence(
+  #     :display,
+  #     ['display_block', 'display_flex', 'display_none']
+  #   )
+  #
+  # Usage (with exclude_zero):
+  #   # Test that truncate prop doesn't generate classes, including for 0
+  #   test_global_prop_absence(
+  #     :truncate,
+  #     ['truncate_0', 'truncate_1', 'truncate_2'],
+  #     exclude_zero: true
+  #   )
+  def test_global_prop_absence(prop_name, excluded_classnames, options = {})
+    exclude_zero = options.fetch(:exclude_zero, false)
+
+    describe "##{prop_name} when not provided" do
+      it "does not generate class names", :aggregate_failures do
+        # Test with prop not passed at all
+        instance_without_prop = subject.new({})
+        excluded_classnames.each do |excluded_classname|
+          expect(instance_without_prop.classname).not_to include(excluded_classname)
+        end
+
+        # Test with prop set to nil
+        instance_with_nil = subject.new({ prop_name => nil })
+        excluded_classnames.each do |excluded_classname|
+          expect(instance_with_nil.classname).not_to include(excluded_classname)
+        end
+
+        # Test with prop set to empty string (if applicable)
+        instance_with_empty = subject.new({ prop_name => "" })
+        excluded_classnames.each do |excluded_classname|
+          expect(instance_with_empty.classname).not_to include(excluded_classname)
+        end
+
+        # Optionally test with 0 if exclude_zero is true
+        if exclude_zero
+          instance_with_zero = subject.new({ prop_name => 0 })
+          excluded_classnames.each do |excluded_classname|
+            expect(instance_with_zero.classname).not_to include(excluded_classname)
+          end
+        end
+      end
+    end
+  end
 end
 
 RSpec.configure do |config|

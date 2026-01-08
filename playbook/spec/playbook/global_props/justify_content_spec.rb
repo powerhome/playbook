@@ -11,4 +11,9 @@ RSpec.describe Playbook::Flex do
     ->(v) { "justify_content_#{v.underscore}" },
     responsive_pattern: ->(size, v) { "justify_content_#{size}_#{v.underscore}" }
   )
+
+  test_global_prop_absence(
+    :justify_content,
+    %w[justify_content_start justify_content_end justify_content_center justify_content_space_between justify_content_space_around justify_content_space_evenly]
+  )
 end

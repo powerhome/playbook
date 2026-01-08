@@ -11,4 +11,9 @@ RSpec.describe Playbook::Flex do
     ->(v) { "flex_order_#{v}" },
     responsive_pattern: ->(size, v) { "order_#{size}_#{v}" }
   )
+
+  test_global_prop_absence(
+    :order,
+    %w[flex_order_1 flex_order_3 flex_order_12]
+  )
 end

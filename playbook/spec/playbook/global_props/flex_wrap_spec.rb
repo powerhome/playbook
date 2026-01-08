@@ -11,4 +11,9 @@ RSpec.describe Playbook::Flex do
     ->(v) { "flex_wrap_#{v}" },
     responsive_pattern: ->(size, v) { "flex_wrap_#{size}_#{v.underscore}" }
   )
+
+  test_global_prop_absence(
+    :flex_wrap,
+    %w[flex_wrap_wrap flex_wrap_nowrap flex_wrap_wrap_reverse]
+  )
 end

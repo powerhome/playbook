@@ -11,4 +11,9 @@ RSpec.describe Playbook::FlexGrow do
     ->(v) { "flex_shrink_#{v}" },
     responsive_pattern: ->(size, v) { "flex_shrink_#{size}_#{v}" }
   )
+
+  test_global_prop_absence(
+    :flex_shrink,
+    %w[flex_shrink_0 flex_shrink_1]
+  )
 end
