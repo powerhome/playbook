@@ -1,4 +1,4 @@
-import { testGlobalProp, testGlobalPropWithDefault, testGlobalPropAbsence } from './globalPropsTestHelper'
+import { testGlobalProp, testGlobalPropResponsiveWithDefault, testGlobalPropAbsence } from './globalPropsTestHelper'
 import { camelToSnakeCase } from '../../../utilities/text'
 
 testGlobalProp(
@@ -8,7 +8,7 @@ testGlobalProp(
   (size, v) => `flex_direction_${size}_${camelToSnakeCase(v)}`
 )
 
-testGlobalPropWithDefault(
+testGlobalPropResponsiveWithDefault(
   'flexDirection',
   { default: 'column', xs: 'row', sm: 'column', md: 'row' },
   (v) => `flex_direction_${camelToSnakeCase(v)}`,

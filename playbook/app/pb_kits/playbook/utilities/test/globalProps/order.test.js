@@ -1,4 +1,4 @@
-import { testGlobalProp, testGlobalPropWithDefault, testGlobalPropAbsence } from './globalPropsTestHelper'
+import { testGlobalProp, testGlobalPropResponsiveWithDefault, testGlobalPropAbsence } from './globalPropsTestHelper'
 
 // Test numeric values (1-12)
 testGlobalProp(
@@ -8,7 +8,7 @@ testGlobalProp(
   (size, v) => `flex_order_${size}_${v}`
 )
 
-testGlobalPropWithDefault(
+testGlobalPropResponsiveWithDefault(
   'order',
   { default: 3, xs: 1, sm: 3, md: 1 },
   (v) => `flex_order_${v}`,

@@ -60,7 +60,11 @@ export const testGlobalProp = (propName, validValues, classnamePattern, responsi
 }
 
 /**
- * Test that a global prop with default key and responsive breakpoints generates correct classnames
+ * Test that a global prop with responsive breakpoints and default value generates correct classnames
+ *
+ * Tests responsive behavior by verifying that:
+ * - The default value generates a base classname
+ * - Each responsive breakpoint (xs, sm, md, lg, xl) generates the correct responsive classname
  *
  * @param {string} propName - The name of the global prop (e.g., 'display', 'flex')
  * @param {Object} responsiveValues - Object with 'default' and responsive breakpoint keys
@@ -72,14 +76,14 @@ export const testGlobalProp = (propName, validValues, classnamePattern, responsi
  * @param {React.Component} TestComponent - Optional component to test (defaults to Body)
  *
  * @example
- * testGlobalPropWithDefault(
+ * testGlobalPropResponsiveWithDefault(
  *   'alignContent',
  *   { default: "spaceAround", xs: "center", sm: "spaceAround", md: "center" },
  *   (v) => `align_content_${camelToSnakeCase(v)}`,
  *   (size, v) => `align_content_${size}_${camelToSnakeCase(v)}`
  * )
  */
-export const testGlobalPropWithDefault = (propName, responsiveValues, classnamePattern, responsivePattern, TestComponent = Body) => {
+export const testGlobalPropResponsiveWithDefault = (propName, responsiveValues, classnamePattern, responsivePattern, TestComponent = Body) => {
   test('Global Props: returns proper class name with default key', () => {
     const testId = `${TEST_SUBJECT}-default-responsive`
     render(

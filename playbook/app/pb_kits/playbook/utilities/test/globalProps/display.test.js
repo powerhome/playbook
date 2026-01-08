@@ -1,4 +1,4 @@
-import { testGlobalProp, testGlobalPropWithDefault, testGlobalPropAbsence } from './globalPropsTestHelper'
+import { testGlobalProp, testGlobalPropResponsiveWithDefault, testGlobalPropAbsence } from './globalPropsTestHelper'
 import { camelToSnakeCase } from '../../../utilities/text'
 
 testGlobalProp(
@@ -8,7 +8,7 @@ testGlobalProp(
   (size, v) => `display_${size}_${camelToSnakeCase(v)}`
 )
 
-testGlobalPropWithDefault(
+testGlobalPropResponsiveWithDefault(
   'display',
   { default: 'none', xs: 'block', sm: 'none', md: 'block' },
   (v) => `display_${camelToSnakeCase(v)}`,

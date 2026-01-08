@@ -1,4 +1,4 @@
-import { testGlobalProp, testGlobalPropWithDefault, testGlobalPropAbsence } from './globalPropsTestHelper'
+import { testGlobalProp, testGlobalPropResponsiveWithDefault, testGlobalPropAbsence } from './globalPropsTestHelper'
 import { camelToSnakeCase } from '../../../utilities/text'
 
 testGlobalProp(
@@ -8,7 +8,7 @@ testGlobalProp(
   (size, v) => `flex_wrap_${size}_${camelToSnakeCase(v)}`
 )
 
-testGlobalPropWithDefault(
+testGlobalPropResponsiveWithDefault(
   'flexWrap',
   { default: 'wrap', xs: 'nowrap', sm: 'wrap', md: 'nowrap' },
   (v) => `flex_wrap_${camelToSnakeCase(v)}`,

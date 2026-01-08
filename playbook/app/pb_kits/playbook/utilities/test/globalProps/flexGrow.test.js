@@ -1,4 +1,4 @@
-import { testGlobalProp, testGlobalPropWithDefault, testGlobalPropAbsence } from './globalPropsTestHelper'
+import { testGlobalProp, testGlobalPropResponsiveWithDefault, testGlobalPropAbsence } from './globalPropsTestHelper'
 
 testGlobalProp(
   'flexGrow',
@@ -7,7 +7,7 @@ testGlobalProp(
   (size, v) => `flex_grow_${size}_${v}`
 )
 
-testGlobalPropWithDefault(
+testGlobalPropResponsiveWithDefault(
   'flexGrow',
   { default: 1, xs: 0, sm: 1, md: 0 },
   (v) => `flex_grow_${v}`,
