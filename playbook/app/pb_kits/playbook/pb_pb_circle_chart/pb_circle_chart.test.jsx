@@ -1,7 +1,7 @@
 import React from 'react'
 import { render, screen } from '../utilities/test-utils'
 
-import { PbCircleChart } from 'playbook-ui'
+import PbCircleChart from './_pb_circle_chart'
 
 beforeEach(() => {
   // Silences error logs within the test suite.

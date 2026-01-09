@@ -1,56 +1,42 @@
-import React from 'react'
-import { render, screen } from '../../test-utils'
-
-import Body from '../../../pb_body/_body'
+import { testGlobalProp, testGlobalPropResponsiveWithDefault, testGlobalPropAbsence, testGlobalPropInvalidValues } from './globalPropsTestHelper'
 import { camelToSnakeCase } from '../../../utilities/text'
-import { SCREEN_SIZES } from '../../test-utils'
+import Body from '../../../pb_body/_body'
+import Button from '../../../pb_button/_button'
+import Card from '../../../pb_card/_card'
+import Title from '../../../pb_title/_title'
+import TextInput from '../../../pb_text_input/_text_input'
+import Flex from '../../../pb_flex/_flex'
+import Link from '../../../pb_link/_link'
+import Badge from '../../../pb_badge/_badge'
 
-const testSubject = 'body'
+testGlobalProp(
+  'display',
+  ['block', 'inline', 'inline_block', 'flex', 'inline_flex', 'none', 'grid'],
+  (v) => `display_${camelToSnakeCase(v)}`,
+  (size, v) => `display_${size}_${camelToSnakeCase(v)}`,
+  [Body, Button, Card, Title, TextInput, Flex, Link, Badge]
+)
 
-// %w[block inline_block inline flex inline_flex none]
-test('Global Props: returns proper class name', () => {
-  const propValues = ["block", "inline", "inline_block", "flex", "inline_flex", "none", "grid" ]
-  for(let x = 0, y = propValues.length; x < y; ++x) {
-    const testId = `${testSubject}-${propValues[x]}`
-    render(
-      <Body
-          data={{ testid: testId }}
-          display={`${propValues[x]}`}
-          text="Hi"
-      />
-    )
-    const kit = screen.getByTestId(testId)
-    expect(kit).toHaveClass(`display_${camelToSnakeCase(propValues[x])}`)
+testGlobalPropResponsiveWithDefault(
+  'display',
+  { default: 'none', xs: 'block', sm: 'none', md: 'block' },
+  (v) => `display_${camelToSnakeCase(v)}`,
+  (size, v) => `display_${size}_${camelToSnakeCase(v)}`
+)
 
-    SCREEN_SIZES.forEach((size) => {
-      const testId = `${testSubject}-${propValues[x]}-${size}`
-      render(
-        <Body
-            data={{ testid: testId }}
-            display={{ [size]: propValues[x] }}
-            text="Hi"
-        />
-      )
-      const kit = screen.getByTestId(testId)
-      expect(kit).toHaveClass(`display_${size}_${camelToSnakeCase(propValues[x])}`)
-    })
-  }
-})
+testGlobalPropAbsence(
+  'display',
+  ['display_block', 'display_inline', 'display_flex', 'display_none', 'display_grid'],
+  undefined,
+  { skipNull: true },
+)
 
-test('Global Props: returns proper class name with default key', () => {
-  const testId = `${testSubject}-default-responsive`
-  render(
-    <Body
-        data={{ testid: testId }}
-        display={{ default: "none", xs: "block", sm: "none", md: "block" }}
-        text="Hi"
-    />
-  )
-  const kit = screen.getByTestId(testId)
-  // Should have base class for default value
-  expect(kit).toHaveClass(`display_none`)
-  // Should have responsive classes for screen sizes
-  expect(kit).toHaveClass(`display_xs_block`)
-  expect(kit).toHaveClass(`display_sm_none`)
-  expect(kit).toHaveClass(`display_md_block`)
-})
+// NOTE: Currently using skipKnownIssues: true because globalProps.ts generates classes for invalid values
+// NOTE: Using allowRenderingErrors: true because invalid types (like numbers) cause rendering errors with camelToSnakeCase
+testGlobalPropInvalidValues(
+  'display',
+  ['invalid', 'bad_value', 'not_a_display_value', 'special-chars!@#', 'display_with_underscores'],
+  ['display_invalid', 'display_bad_value', 'display_not_a_display_value', 'display_special-chars!@#', 'display_display_with_underscores'],
+  undefined,
+  { skipKnownIssues: true, allowRenderingErrors: true }
+)

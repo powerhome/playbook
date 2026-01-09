@@ -1,55 +1,42 @@
-import React from 'react'
-import { render, screen } from '../../test-utils'
-
+import { testGlobalProp, testGlobalPropResponsiveWithDefault, testGlobalPropAbsence, testGlobalPropInvalidValues } from './globalPropsTestHelper'
+import { camelToSnakeCase } from '../../../utilities/text'
 import Body from '../../../pb_body/_body'
-import { camelToSnakeCase } from '../../text'
-import { SCREEN_SIZES } from '../../test-utils'
+import Button from '../../../pb_button/_button'
+import Card from '../../../pb_card/_card'
+import Title from '../../../pb_title/_title'
+import Flex from '../../../pb_flex/_flex'
+import Link from '../../../pb_link/_link'
+import Badge from '../../../pb_badge/_badge'
 
-const testSubject = 'body'
+// Note: TextInput excluded - justifyContent is a flexbox property that doesn't apply to form inputs
+testGlobalProp(
+  'justifyContent',
+  ['start', 'center', 'end', 'spaceBetween', 'spaceAround', 'spaceEvenly'],
+  (v) => `justify_content_${camelToSnakeCase(v)}`,
+  (size, v) => `justify_content_${size}_${camelToSnakeCase(v)}`,
+  [Body, Button, Card, Title, Flex, Link, Badge]
+)
 
-test('Global Props: returns proper class name', () => {
-  const propValues = ["start", "center", "end", "spaceBetween", "spaceAround", "spaceEvenly"]
-  for(let x = 0, y = propValues.length; x < y; ++x) {
-    const testId = `${testSubject}-${propValues[x]}`
-    render(
-      <Body
-          data={{ testid: testId }}
-          justifyContent={`${propValues[x]}`}
-          text="Hi"
-      />
-    )
-    const kit = screen.getByTestId(testId)
-    expect(kit).toHaveClass(`justify_content_${camelToSnakeCase(propValues[x])}`)
+testGlobalPropResponsiveWithDefault(
+  'justifyContent',
+  { default: 'spaceBetween', xs: 'start', sm: 'spaceBetween', md: 'start' },
+  (v) => `justify_content_${camelToSnakeCase(v)}`,
+  (size, v) => `justify_content_${size}_${camelToSnakeCase(v)}`
+)
 
-    SCREEN_SIZES.forEach((size) => {
-      const testId = `${testSubject}-${propValues[x]}-${size}`
-      render(
-        <Body
-            data={{ testid: testId }}
-            justifyContent={{ [size]: propValues[x] }}
-            text="Hi"
-        />
-      )
-      const kit = screen.getByTestId(testId)
-      expect(kit).toHaveClass(`justify_content_${size}_${camelToSnakeCase(propValues[x])}`)
-    })
-  }
-})
+testGlobalPropAbsence(
+  'justifyContent',
+  ['justify_content_start', 'justify_content_center', 'justify_content_end', 'justify_content_space_between', 'justify_content_space_around', 'justify_content_space_evenly'],
+  undefined,
+  { skipNull: true }
+)
 
-test('Global Props: returns proper class name with default key', () => {
-  const testId = `${testSubject}-default-responsive`
-  render(
-    <Body
-        data={{ testid: testId }}
-        justifyContent={{ default: "spaceBetween", xs: "start", sm: "spaceBetween", md: "start" }}
-        text="Hi"
-    />
-  )
-  const kit = screen.getByTestId(testId)
-  // Should have base class for default value
-  expect(kit).toHaveClass(`justify_content_space_between`)
-  // Should have responsive classes for screen sizes
-  expect(kit).toHaveClass(`justify_content_xs_start`)
-  expect(kit).toHaveClass(`justify_content_sm_space_between`)
-  expect(kit).toHaveClass(`justify_content_md_start`)
-})
+// NOTE: Currently using skipKnownIssues: true because globalProps.ts generates classes for invalid values
+// NOTE: Using allowRenderingErrors: true because invalid types (like numbers) cause rendering errors with camelToSnakeCase
+testGlobalPropInvalidValues(
+  'justifyContent',
+  ['invalid', 'bad_value', 'not_a_justify_value', 'special-chars!@#'],
+  ['justify_content_invalid', 'justify_content_bad_value', 'justify_content_not_a_justify_value', 'justify_content_special-chars!@#'],
+  undefined,
+  { skipKnownIssues: true, allowRenderingErrors: true }
+)

@@ -8,7 +8,6 @@ import * as AdvancedTable from '../pb_kits/playbook/pb_advanced_table/docs'
 import * as Avatar from '../pb_kits/playbook/pb_avatar/docs'
 import * as Background from '../pb_kits/playbook/pb_background/docs'
 import * as Badge from '../pb_kits/playbook/pb_badge/docs'
-import * as BarGraphDocs from '../pb_kits/playbook/pb_bar_graph/docs'
 import * as Body from '../pb_kits/playbook/pb_body/docs'
 import * as BreadCrumbs from '../pb_kits/playbook/pb_bread_crumbs/docs'
 import * as Button from '../pb_kits/playbook/pb_button/docs'
@@ -16,7 +15,6 @@ import * as ButtonToolbar from '../pb_kits/playbook/pb_button_toolbar/docs'
 import * as Caption from '../pb_kits/playbook/pb_caption/docs'
 import * as Card from '../pb_kits/playbook/pb_card/docs'
 import * as Checkbox from '../pb_kits/playbook/pb_checkbox/docs'
-import * as CircleChart from '../pb_kits/playbook/pb_circle_chart/docs'
 import * as CircleIconButton from '../pb_kits/playbook/pb_circle_icon_button/docs'
 import * as Collapsible from '../pb_kits/playbook/pb_collapsible/docs'
 import * as Contact from '../pb_kits/playbook/pb_contact/docs'
@@ -43,7 +41,6 @@ import * as FixedConfirmationToast from '../pb_kits/playbook/pb_fixed_confirmati
 import * as Flex from '../pb_kits/playbook/pb_flex/docs'
 import * as FormGroup from '../pb_kits/playbook/pb_form_group/docs'
 import * as FormPill from '../pb_kits/playbook/pb_form_pill/docs'
-import * as Gauge from '../pb_kits/playbook/pb_gauge/docs'
 import * as Hashtag from '../pb_kits/playbook/pb_hashtag/docs'
 import * as Highlight from '../pb_kits/playbook/pb_highlight/docs'
 import * as HomeAddressStreet from '../pb_kits/playbook/pb_home_address_street/docs'
@@ -58,7 +55,6 @@ import * as LabelValue from '../pb_kits/playbook/pb_label_value/docs'
 import * as Layout from '../pb_kits/playbook/pb_layout/docs'
 import * as LegendDocs from '../pb_kits/playbook/pb_legend/docs'
 import * as Lightbox from '../pb_kits/playbook/pb_lightbox/docs'
-import * as LineGraphDocs from '../pb_kits/playbook/pb_line_graph/docs'
 import * as Link from '../pb_kits/playbook/pb_link/docs'
 import * as List from '../pb_kits/playbook/pb_list/docs'
 import * as LoadingInline from '../pb_kits/playbook/pb_loading_inline/docs'
@@ -121,7 +117,6 @@ ComponentRegistry.registerComponents({
   ...Avatar,
   ...Background,
   ...Badge,
-  ...BarGraphDocs,
   ...Body,
   ...BreadCrumbs,
   ...Button,
@@ -129,7 +124,6 @@ ComponentRegistry.registerComponents({
   ...Caption,
   ...Card,
   ...Checkbox,
-  ...CircleChart,
   ...CircleIconButton,
   ...Collapsible,
   ...Contact,
@@ -156,7 +150,6 @@ ComponentRegistry.registerComponents({
   ...Flex,
   ...FormGroup,
   ...FormPill,
-  ...Gauge,
   ...Hashtag,
   ...Highlight,
   ...HomeAddressStreet,
@@ -171,7 +164,6 @@ ComponentRegistry.registerComponents({
   ...Layout,
   ...LegendDocs,
   ...Lightbox,
-  ...LineGraphDocs,
   ...Link,
   ...List,
   ...LoadingInline,
