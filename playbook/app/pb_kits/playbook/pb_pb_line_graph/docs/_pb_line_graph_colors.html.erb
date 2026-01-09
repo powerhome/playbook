@@ -19,7 +19,13 @@
 
 <% chart_options = {
   series: data,
-  colors: ['#1CA05C', '#FD804C', '#144075', '#00C4D7', '#DA0014'],
+  colors: [
+    Playbook::Tokens::Colors::DATA_4,
+    Playbook::Tokens::Colors::DATA_5,
+    Playbook::Tokens::Colors::DATA_6,
+    Playbook::Tokens::Colors::DATA_7,
+    Playbook::Tokens::Colors::DATA_8
+  ],
   title: { text: "Line Graph with Custom Data Colors" },
   xAxis: {
     categories: categories,
