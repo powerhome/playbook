@@ -1,1 +1,0 @@
-We are able to wrap our Gauge kits within multiple other Flex and Card components.

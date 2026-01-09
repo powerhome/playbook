@@ -7,16 +7,33 @@ import {
   Title,
   StatChange,
   FlexItem,
-  Gauge,
+  colors,
+  typography
 } from "playbook-ui";
+import { PbGaugeChart } from "playbook-ui/charts";
 
 const TicketsChartCard = () => {
-  const data = [
-    {
-      name: "Percent of Tickets Sold",
-      value: 75,
+
+  const data = [{ name: "Percent of Tickets Sold", y: 75 }];
+  const chartOptions = {
+    series: [{ data: data }],
+    pane: {
+      startAngle: 0,
+      endAngle: 360,
     },
-  ];
+    plotOptions: {
+      solidgauge: {
+        dataLabels: {
+          format:
+            `<span class="fix">{y:,f}</span>` +
+            `<span style="fill: ${colors.text_lt_light}; font-size: ${typography.text_larger};">%</span>`,
+        },
+      },
+    },
+    chart: {
+      height: "150",
+    },
+  };
 
   return (
     <Flex
@@ -41,13 +58,9 @@ const TicketsChartCard = () => {
               <StatChange change="increase" value="3.94" />
             </Flex>
             <FlexItem className="gauge-max-width">
-              <Gauge
-                hover={{ scale: "lg" }}
-                chartData={data}
-                fullCircle
-                height="150px"
+              <PbGaugeChart
+                options={chartOptions}
                 id="gauge-full-circle"
-                suffix="%"
                 paddingLeft="md"
               />
             </FlexItem>

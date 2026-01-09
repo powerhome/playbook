@@ -5,7 +5,7 @@
     "allowSyntheticDefaultImports": true,
     "checkJs": false,
     "declaration": true,
-    "declarationDir": "./dist",
+    "declarationDir": "./dist/types",
     "declarationMap": false,
     "jsx": "react-jsx",
     "lib": ["dom", "es2015", "es2016", "es2019", "dom.iterable"],
@@ -31,6 +31,7 @@
     "app/pb_kits/playbook/**/*.ts",
     "app/javascript/kits.js",
     "app/entrypoints/playbook.js",
+    "app/entrypoints/playbook-charts.js",
     "app/entrypoints/playbook-rails-react-bindings.js",
     "app/entrypoints/playbook-rails.js",
   ]
