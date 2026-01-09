@@ -20,6 +20,13 @@ PreCommit:
       - '.eslintrc'
       - 'app/pb_kits/playbook/**/*.js'
       - 'app/pb_kits/playbook/**/*.jsx'
+  VerifyTokens:
+    enabled: true
+    description: 'Verify color tokens are in sync'
+    required_executable: 'bash'
+    command: ['bash', '.git-hooks/pre_commit/verify_tokens.sh']
+    include:
+      - 'playbook/app/pb_kits/playbook/tokens/**/*.scss'
 
 CommitMsg:
   CapitalizedSubject:
