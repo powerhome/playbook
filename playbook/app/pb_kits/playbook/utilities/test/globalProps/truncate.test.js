@@ -1,21 +1,33 @@
-import React from 'react'
-import { render, screen } from '../../test-utils'
-
+import { testGlobalProp, testGlobalPropAbsence, testGlobalPropInvalidValues } from './globalPropsTestHelper'
 import Body from '../../../pb_body/_body'
+import Button from '../../../pb_button/_button'
+import Card from '../../../pb_card/_card'
+import Title from '../../../pb_title/_title'
+import TextInput from '../../../pb_text_input/_text_input'
+import Flex from '../../../pb_flex/_flex'
+import Link from '../../../pb_link/_link'
+import Badge from '../../../pb_badge/_badge'
 
-const testSubject = 'body'
+testGlobalProp(
+  'truncate',
+  [1, 2, 3, 4, 5],
+  (v) => `truncate_${v}`,
+  null,
+  [Body, Button, Card, Title, TextInput, Flex, Link, Badge]
+)
 
-test('Global Props: Returns corrrect truncate class name', () => {
-  for(let x = 1, y = 5; x <= y; ++x) {
-    const testId = `${testSubject}-${x}`
-    render(
-      <Body
-          data={{ testid: testId }}
-          text="Hi"
-          truncate={`${x}`}
-      />
-    )
-    const kit = screen.getByTestId(testId)
-    expect(kit).toHaveClass(`truncate_${x}`)
-  }
-})
+testGlobalPropAbsence(
+  'truncate',
+  ['truncate_0', 'truncate_1', 'truncate_2', 'truncate_3', 'truncate_4', 'truncate_5'],
+  undefined,
+  { excludeZero: true, skipNull: true }
+)
+
+// NOTE: Currently using skipKnownIssues: true because globalProps.ts generates classes for invalid values
+testGlobalPropInvalidValues(
+  'truncate',
+  [0, 6, 999, -1, 'invalid', 'bad_value', 'special-chars!@#'],
+  ['truncate_0', 'truncate_6', 'truncate_999', 'truncate_-1', 'truncate_invalid', 'truncate_bad_value', 'truncate_special-chars!@#'],
+  undefined,
+  { skipKnownIssues: true }
+)
