@@ -12,6 +12,7 @@ What this means for you:
 
 👉 Using chart kits? 
 - Install highcharts + highcharts-react-official and import from ‘playbook-ui/charts’
+
 👉 Not using chart kits? 
 - You’re free and clear.
 
