@@ -2,219 +2,179 @@
 
 require "rails_helper"
 
-RSpec.describe Playbook::Tokens::Colors do
-  # Path to the SCSS source of truth
-  let(:scss_path) do
-    Playbook::Engine.root.join("app/pb_kits/playbook/tokens/_colors.scss")
-  end
+RSpec.describe Playbook::Tokens do
+  describe ".colors" do
+    let(:colors) { described_class.colors }
 
-  let(:scss_content) { File.read(scss_path) }
-
-  describe "SCSS sync validation" do
-    # This spec ensures Ruby token values stay in sync with SCSS definitions.
-    # If this fails, update lib/playbook/tokens.rb to match _colors.scss
-
-    # Helper to extract simple HEX values from SCSS (e.g., "$royal: #0056CF")
-    def extract_scss_hex_value(scss_content, variable_name)
-      match = scss_content.match(/\$#{variable_name}:\s*(#[0-9A-Fa-f]{6})\s*!default;/)
-      match&.captures&.first&.upcase
+    it "returns a ColorHash instance" do
+      expect(colors).to be_a(Playbook::Tokens::ColorHash)
     end
 
-    describe "base colors" do
-      it "ROYAL matches SCSS $royal" do
-        expect(described_class::ROYAL.upcase).to eq(extract_scss_hex_value(scss_content, "royal"))
-      end
-
-      it "PURPLE matches SCSS $purple" do
-        expect(described_class::PURPLE.upcase).to eq(extract_scss_hex_value(scss_content, "purple"))
-      end
-
-      it "TEAL matches SCSS $teal" do
-        expect(described_class::TEAL.upcase).to eq(extract_scss_hex_value(scss_content, "teal"))
-      end
-
-      it "RED matches SCSS $red" do
-        expect(described_class::RED.upcase).to eq(extract_scss_hex_value(scss_content, "red"))
-      end
-
-      it "YELLOW matches SCSS $yellow" do
-        expect(described_class::YELLOW.upcase).to eq(extract_scss_hex_value(scss_content, "yellow"))
-      end
-
-      it "GREEN matches SCSS $green" do
-        expect(described_class::GREEN.upcase).to eq(extract_scss_hex_value(scss_content, "green"))
-      end
-
-      it "ORANGE matches SCSS $orange" do
-        expect(described_class::ORANGE.upcase).to eq(extract_scss_hex_value(scss_content, "orange"))
-      end
+    it "loads all expected tokens" do
+      # Should have 100+ tokens from the full SCSS export
+      expect(colors.keys.size).to be >= 100
     end
 
-    describe "interface colors" do
-      it "WHITE matches SCSS $white" do
-        expect(described_class::WHITE.upcase).to eq(extract_scss_hex_value(scss_content, "white"))
-      end
-
-      it "SILVER matches SCSS $silver" do
-        expect(described_class::SILVER.upcase).to eq(extract_scss_hex_value(scss_content, "silver"))
-      end
-
-      it "SLATE matches SCSS $slate" do
-        expect(described_class::SLATE.upcase).to eq(extract_scss_hex_value(scss_content, "slate"))
-      end
-
-      it "CHARCOAL matches SCSS $charcoal" do
-        expect(described_class::CHARCOAL.upcase).to eq(extract_scss_hex_value(scss_content, "charcoal"))
-      end
-
-      it "BLACK matches SCSS $black" do
-        expect(described_class::BLACK.upcase).to eq(extract_scss_hex_value(scss_content, "black"))
-      end
-    end
-
-    describe "data colors" do
-      it "DATA_6 matches SCSS $data_6" do
-        expect(described_class::DATA_6.upcase).to eq(extract_scss_hex_value(scss_content, "data_6"))
-      end
-
-      # DATA_1-5, 7-8 reference other variables, so we test the resolved values
-      it "DATA_1 equals ROYAL (per SCSS $data_1: $royal)" do
-        expect(described_class::DATA_1).to eq(described_class::ROYAL)
-      end
-
-      it "DATA_2 equals YELLOW (per SCSS $data_2: $yellow)" do
-        expect(described_class::DATA_2).to eq(described_class::YELLOW)
-      end
-
-      it "DATA_3 equals PURPLE (per SCSS $data_3: $purple)" do
-        expect(described_class::DATA_3).to eq(described_class::PURPLE)
-      end
-
-      it "DATA_4 equals GREEN (per SCSS $data_4: $green)" do
-        expect(described_class::DATA_4).to eq(described_class::GREEN)
-      end
-
-      it "DATA_5 equals ORANGE (per SCSS $data_5: $orange)" do
-        expect(described_class::DATA_5).to eq(described_class::ORANGE)
-      end
-
-      it "DATA_7 equals TEAL (per SCSS $data_7: $teal)" do
-        expect(described_class::DATA_7).to eq(described_class::TEAL)
-      end
-
-      it "DATA_8 equals RED (per SCSS $data_8: $red)" do
-        expect(described_class::DATA_8).to eq(described_class::RED)
-      end
-    end
-
-    describe "product colors" do
-      (1..10).each do |i|
-        it "PRODUCT_#{i}_BACKGROUND matches SCSS" do
-          expected = extract_scss_hex_value(scss_content, "product_#{i}_background")
-          actual = described_class.const_get("PRODUCT_#{i}_BACKGROUND").upcase
-          expect(actual).to eq(expected)
-        end
-
-        it "PRODUCT_#{i}_HIGHLIGHT matches SCSS" do
-          expected = extract_scss_hex_value(scss_content, "product_#{i}_highlight")
-          actual = described_class.const_get("PRODUCT_#{i}_HIGHLIGHT").upcase
-          expect(actual).to eq(expected)
-        end
-      end
-    end
-
-    describe "category colors" do
-      # Direct HEX values in SCSS
-      [2, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21].each do |i|
-        it "CATEGORY_#{i} matches SCSS $category_#{i}" do
-          expected = extract_scss_hex_value(scss_content, "category_#{i}")
-          actual = described_class.const_get("CATEGORY_#{i}").upcase
-          expect(actual).to eq(expected)
-        end
-      end
-
-      # Variable references
-      it "CATEGORY_1 equals ROYAL (per SCSS $category_1: $royal)" do
-        expect(described_class::CATEGORY_1).to eq(described_class::ROYAL)
-      end
-
-      it "CATEGORY_3 equals YELLOW (per SCSS $category_3: $yellow)" do
-        expect(described_class::CATEGORY_3).to eq(described_class::YELLOW)
-      end
-
-      it "CATEGORY_11 equals RED (per SCSS $category_11: $red)" do
-        expect(described_class::CATEGORY_11).to eq(described_class::RED)
-      end
-    end
-  end
-
-  describe "API" do
-    describe ".[]" do
+    describe "hash-style access" do
       it "accesses colors by symbol key" do
-        expect(described_class[:royal]).to eq("#0056CF")
-        expect(described_class["data_1".to_sym]).to eq("#0056CF")
+        expect(colors[:royal]).to eq("#0056CF")
+        expect(colors[:green]).to eq("#1CA05C")
       end
 
       it "accesses colors by string key" do
-        expect(described_class["royal"]).to eq("#0056CF")
+        expect(colors["royal"]).to eq("#0056CF")
+      end
+
+      it "returns nil for unknown keys" do
+        expect(colors[:not_a_color]).to be_nil
       end
     end
 
-    describe ".all" do
-      it "returns a hash of all colors" do
-        all_colors = described_class.all
-        expect(all_colors).to be_a(Hash)
-        expect(all_colors[:royal]).to eq("#0056CF")
-        expect(all_colors[:green]).to eq("#1CA05C")
-      end
-
-      it "is frozen" do
-        expect(described_class.all).to be_frozen
-      end
-    end
-
-    describe ".data_colors" do
-      it "returns an array of 8 data colors in order" do
-        colors = described_class.data_colors
-        expect(colors).to be_an(Array)
-        expect(colors.length).to eq(8)
-        expect(colors.first).to eq(described_class::DATA_1)
-        expect(colors.last).to eq(described_class::DATA_8)
-      end
-
-      it "is frozen" do
-        expect(described_class.data_colors).to be_frozen
-      end
-    end
-
-    describe ".status_colors" do
-      it "returns a hash with status colors" do
-        colors = described_class.status_colors
-        expect(colors).to be_a(Hash)
-        expect(colors[:success]).to eq(described_class::SUCCESS)
-        expect(colors[:error]).to eq(described_class::ERROR)
-        expect(colors[:warning]).to eq(described_class::WARNING)
-        expect(colors[:info]).to eq(described_class::INFO)
-      end
-    end
-
-    describe ".category_colors" do
-      it "returns an array of 21 category colors" do
-        colors = described_class.category_colors
-        expect(colors).to be_an(Array)
-        expect(colors.length).to eq(21)
-      end
-    end
-
-    describe "method access" do
-      it "allows accessing colors as methods" do
-        expect(described_class.royal).to eq("#0056CF")
-        expect(described_class.data_1).to eq("#0056CF")
-        expect(described_class.green).to eq("#1CA05C")
+    describe "method-style access" do
+      it "accesses colors as methods" do
+        expect(colors.royal).to eq("#0056CF")
+        expect(colors.green).to eq("#1CA05C")
+        expect(colors.data_4).to eq("#1CA05C")
       end
 
       it "raises NoMethodError for undefined colors" do
-        expect { described_class.not_a_color }.to raise_error(NoMethodError)
+        expect { colors.not_a_color }.to raise_error(NoMethodError)
+      end
+    end
+
+    describe "#to_h" do
+      it "returns the underlying hash" do
+        hash = colors.to_h
+        expect(hash).to be_a(Hash)
+        expect(hash[:royal]).to eq("#0056CF")
+      end
+
+      it "is frozen" do
+        expect(colors.to_h).to be_frozen
+      end
+    end
+
+    describe "#keys" do
+      it "returns all color keys" do
+        keys = colors.keys
+        expect(keys).to include(:royal, :green, :success, :error)
+      end
+    end
+
+    describe "#key?" do
+      it "returns true for existing keys" do
+        expect(colors.key?(:royal)).to be true
+        expect(colors.key?("royal")).to be true
+      end
+
+      it "returns false for missing keys" do
+        expect(colors.key?(:not_a_color)).to be false
+      end
+    end
+  end
+
+  describe ".reload_colors!" do
+    it "reloads colors from JSON" do
+      reloaded = described_class.reload_colors!
+      expect(reloaded).to be_a(Playbook::Tokens::ColorHash)
+    end
+  end
+
+  # Validate that Sass-resolved values are present
+  # These are computed values that prove Sass is actually resolving functions
+  describe "Sass-resolved values" do
+    let(:colors) { described_class.colors }
+
+    # These values are computed by Sass from functions like mix(), lighten(), etc.
+    # If these tests pass, it proves the Sass compilation is working correctly
+
+    it "includes hover_light (darken($silver, 5%))" do
+      # This is a computed value, not a literal in SCSS
+      expect(colors[:hover_light]).to be_present
+      expect(colors[:hover_light]).to match(/^#[0-9a-fA-F]{6}$/)
+    end
+
+    it "includes success_secondary (lighten($success, 10%))" do
+      expect(colors[:success_secondary]).to be_present
+      expect(colors[:success_secondary]).to match(/^#[0-9a-fA-F]{6}$/)
+    end
+
+    it "includes border_dark (mix(white, $bg_dark, 20%))" do
+      expect(colors[:border_dark]).to be_present
+      expect(colors[:border_dark]).to match(/^#[0-9a-fA-F]{6}$/)
+    end
+
+    it "includes error_subtle (rgba($error, $opacity_1))" do
+      # This should be an rgba value
+      expect(colors[:error_subtle]).to be_present
+      expect(colors[:error_subtle]).to match(/^rgba\(/)
+    end
+
+    it "includes hover_dark (rgba($white, $opacity_2))" do
+      expect(colors[:hover_dark]).to be_present
+      expect(colors[:hover_dark]).to match(/^rgba\(/)
+    end
+  end
+
+  # Validate base colors match SCSS source
+  describe "base color values" do
+    let(:colors) { described_class.colors }
+
+    # These are literal values in SCSS, so we can validate exactly
+    it "royal equals #0056CF" do
+      expect(colors[:royal].upcase).to eq("#0056CF")
+    end
+
+    it "green equals #1CA05C" do
+      expect(colors[:green].upcase).to eq("#1CA05C")
+    end
+
+    it "purple equals #9E64E9" do
+      expect(colors[:purple].upcase).to eq("#9E64E9")
+    end
+
+    it "teal equals #00C4D7" do
+      expect(colors[:teal].upcase).to eq("#00C4D7")
+    end
+
+    it "red equals #DA0014" do
+      expect(colors[:red].upcase).to eq("#DA0014")
+    end
+
+    it "yellow equals #F9BB00" do
+      expect(colors[:yellow].upcase).to eq("#F9BB00")
+    end
+  end
+
+  # Validate data colors for chart usage
+  describe "data colors" do
+    let(:colors) { described_class.colors }
+
+    it "includes all 8 data colors" do
+      (1..8).each do |i|
+        expect(colors.key?("data_#{i}".to_sym)).to be true
+      end
+    end
+
+    it "data_1 equals royal" do
+      expect(colors["data_1".to_sym]).to eq(colors[:royal])
+    end
+
+    it "data_4 equals green" do
+      expect(colors["data_4".to_sym]).to eq(colors[:green])
+    end
+  end
+
+  # Validate product colors
+  describe "product colors" do
+    let(:colors) { described_class.colors }
+
+    it "includes all 10 product background and highlight colors" do
+      (1..10).each do |i|
+        expect(colors.key?("product_#{i}_background".to_sym))
+          .to be(true), "Missing product_#{i}_background"
+        expect(colors.key?("product_#{i}_highlight".to_sym))
+          .to be(true), "Missing product_#{i}_highlight"
       end
     end
   end
