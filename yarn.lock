@@ -3472,6 +3472,11 @@
   resolved "https://npm.powerapp.cloud/@tiptap/extension-horizontal-rule/-/extension-horizontal-rule-2.11.7.tgz#36e33184064f844aeb3950011c346643926e682b"
   integrity sha512-uVmQwD2dzZ5xwmvUlciy0ItxOdOfQjH6VLmu80zyJf8Yu7mvwP8JyxoXUX0vd1xHpwAhgQ9/ozjIWYGIw79DPQ==
 
+"@tiptap/extension-horizontal-rule@^3.15.3":
+  version "3.15.3"
+  resolved "https://npm.powerapp.cloud/@tiptap/extension-horizontal-rule/-/extension-horizontal-rule-3.15.3.tgz#efdda498dc5af178601fa38315ed54be9e3bc791"
+  integrity sha512-FYkN7L6JsfwwNEntmLklCVKvgL0B0N47OXMacRk6kYKQmVQ4Nvc7q/VJLpD9sk4wh4KT1aiCBfhKEBTu5pv1fg==
+
 "@tiptap/extension-italic@^2.11.7":
   version "2.11.7"
   resolved "https://npm.powerapp.cloud/@tiptap/extension-italic/-/extension-italic-2.11.7.tgz#f3830c6ec8c7a12e20c64f9b7f100eff1a5382d9"
