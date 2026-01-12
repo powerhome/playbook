@@ -101,6 +101,7 @@ const classes = classnames(
                     ) : (
                       <Radio
                           checked={item.checked}
+                          disabled={item.disabled}
                           id={`${item.id}-${item.label}`}
                           label={item.label}
                           name={inputName}
