@@ -1,6 +1,7 @@
 examples:
   rails:
   - button_default: Button Variants
+  - button_icon_variant: Icon Button Variant
   - button_reaction: Reaction Button
   - button_full_width: Button Full Width
   - button_link: Button Links
@@ -16,6 +17,7 @@ examples:
   
   react:
   - button_default: Button Variants
+  - button_icon_variant: Icon Button Variant
   - button_reaction: Reaction Button
   - button_full_width: Button Full Width
   - button_link: Button Links
