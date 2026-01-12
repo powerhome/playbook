@@ -1,82 +1,50 @@
-import React from 'react'
-import { render, screen } from '../../test-utils'
-
+import { testGlobalProp, testGlobalPropResponsiveWithDefault, testGlobalPropAbsence, testGlobalPropInvalidValues } from './globalPropsTestHelper'
 import Body from '../../../pb_body/_body'
-import { SCREEN_SIZES } from '../../test-utils'
+import Button from '../../../pb_button/_button'
+import Card from '../../../pb_card/_card'
+import Title from '../../../pb_title/_title'
+import TextInput from '../../../pb_text_input/_text_input'
+import Flex from '../../../pb_flex/_flex'
+import Link from '../../../pb_link/_link'
+import Badge from '../../../pb_badge/_badge'
 
-const testSubject = 'body'
+// Test numeric values (0-12) - flex prop expects strings
+testGlobalProp(
+  'flex',
+  Array.from({ length: 13 }, (_, i) => String(i)),
+  (v) => `flex_${v}`,
+  (size, v) => `flex_${size}_${v}`,
+  [Body, Button, Card, Title, TextInput, Flex, Link, Badge]
+)
 
-test('Global Props: Returns ordinal suffixed class name', () => {
-  for(let x = 0, y = 13; x < y; ++x) {
-    const testId = `${testSubject}-${x}`
-    render(
-      <Body
-          data={{ testid: testId }}
-          flex={`${x}`}
-          text="Hi"
-      />
-    )
-    const kit = screen.getByTestId(testId)
-    expect(kit).toHaveClass(`flex_${x}`)
+// Test string values
+testGlobalProp(
+  'flex',
+  ['auto', 'initial', 'none'],
+  (v) => `flex_${v}`,
+  (size, v) => `flex_${size}_${v}`,
+  [Body, Button, Card, Title, TextInput, Flex, Link, Badge]
+)
 
-    SCREEN_SIZES.forEach((size) => {
-      const testId = `${testSubject}-${x}-${size}`
-      render(
-        <Body
-            data={{ testid: testId }}
-            flex={{ [size]: x }}
-            text="Hi"
-        />
-      )
-      const kit = screen.getByTestId(testId)
-      expect(kit).toHaveClass(`flex_${size}_${x}`)
-    })
-  }
-})
+testGlobalPropResponsiveWithDefault(
+  'flex',
+  { default: '3', xs: '1', sm: '3', md: '1' },
+  (v) => `flex_${v}`,
+  (size, v) => `flex_${size}_${v}`
+)
 
-test('Global Props: returns proper class name', () => {
-  const propValues = ["auto", "initial", "none"]
-  for(let x = 0, y = propValues.length; x < y; ++x) {
-    const testId = `${testSubject}-${propValues[x]}`
-    render(
-      <Body
-          data={{ testid: testId }}
-          flex={`${propValues[x]}`}
-          text="Hi"
-      />
-    )
-    const kit = screen.getByTestId(testId)
-    expect(kit).toHaveClass(`flex_${propValues[x]}`)
+testGlobalPropAbsence(
+  'flex',
+  ['flex_0', 'flex_1', 'flex_12', 'flex_auto', 'flex_initial', 'flex_none'],
+  undefined,
+  { skipNull: true }
+)
 
-    SCREEN_SIZES.forEach((size) => {
-      const testId = `${testSubject}-${propValues[x]}-${size}`
-      render(
-        <Body
-            data={{ testid: testId }}
-            flex={{ [size]: propValues[x] }}
-            text="Hi"
-        />
-      )
-      const kit = screen.getByTestId(testId)
-      expect(kit).toHaveClass(`flex_${size}_${propValues[x]}`)
-    })
-  }
-})
-
-test('Global Props: returns proper class name with default key', () => {
-  const testId = `${testSubject}-default-responsive`
-  render(
-    <Body
-        data={{ testid: testId }}
-        flex={{ default: "3", xs: "1", sm: "3", md: "1" }}
-        text="Hi"
-    />
-  )
-  const kit = screen.getByTestId(testId)
-  // Should have base class for default value
-  expect(kit).toHaveClass(`flex_3`)
-  // Should have responsive classes for screen sizes
-  expect(kit).toHaveClass(`flex_xs_1`)
-  expect(kit).toHaveClass(`flex_sm_3`)
-  expect(kit).toHaveClass(`flex_md_1`)
-})
+// NOTE: Currently using skipKnownIssues: true because globalProps.ts generates classes for invalid values
+testGlobalPropInvalidValues(
+  'flex',
+  [999, -1, 'invalid', 'out_of_range', 'bad_string', 13, 'special-chars!@#'],
+  ['flex_999', 'flex_-1', 'flex_invalid', 'flex_out_of_range', 'flex_bad_string', 'flex_13', 'flex_special-chars!@#'],
+  undefined,
+  { skipKnownIssues: true }
+)

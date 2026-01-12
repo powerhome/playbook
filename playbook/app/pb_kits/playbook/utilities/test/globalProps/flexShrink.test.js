@@ -1,53 +1,40 @@
-import React from 'react'
-import { render, screen } from '../../test-utils'
-
+import { testGlobalProp, testGlobalPropResponsiveWithDefault, testGlobalPropAbsence, testGlobalPropInvalidValues } from './globalPropsTestHelper'
 import Body from '../../../pb_body/_body'
-import { SCREEN_SIZES } from '../../test-utils'
+import Button from '../../../pb_button/_button'
+import Card from '../../../pb_card/_card'
+import Title from '../../../pb_title/_title'
+import Flex from '../../../pb_flex/_flex'
+import Link from '../../../pb_link/_link'
+import Badge from '../../../pb_badge/_badge'
 
-const testSubject = 'body'
+// Note: TextInput excluded - flexShrink is a flexbox property that doesn't apply to form inputs
+testGlobalProp(
+  'flexShrink',
+  [0, 1],
+  (v) => `flex_shrink_${v}`,
+  (size, v) => `flex_shrink_${size}_${v}`,
+  [Body, Button, Card, Title, Flex, Link, Badge]
+)
 
-test('Global Props: Returns ordinal suffixed class name', () => {
-  for(let x = 0, y = 2; x < y; ++x) {
-    const testId = `${testSubject}-${x}`
-    render(
-      <Body
-          data={{ testid: testId }}
-          flexShrink={x}
-          text="Hi"
-      />
-    )
-    const kit = screen.getByTestId(testId)
-    expect(kit).toHaveClass(`flex_shrink_${x}`)
+testGlobalPropResponsiveWithDefault(
+  'flexShrink',
+  { default: 0, xs: 1, sm: 0, md: 1 },
+  (v) => `flex_shrink_${v}`,
+  (size, v) => `flex_shrink_${size}_${v}`
+)
 
-    SCREEN_SIZES.forEach((size) => {
-      const testId = `${testSubject}-${x}-${size}`
-      render(
-        <Body
-            data={{ testid: testId }}
-            flexShrink={{ [size]: x }}
-            text="Hi"
-        />
-      )
-      const kit = screen.getByTestId(testId)
-      expect(kit).toHaveClass(`flex_shrink_${size}_${x}`)
-    })
-  }
-})
+testGlobalPropAbsence(
+  'flexShrink',
+  ['flex_shrink_0', 'flex_shrink_1'],
+  undefined,
+  { skipNull: true }
+)
 
-test('Global Props: returns proper class name with default key', () => {
-  const testId = `${testSubject}-default-responsive`
-  render(
-    <Body
-        data={{ testid: testId }}
-        flexShrink={{ default: 0, xs: 1, sm: 0, md: 1 }}
-        text="Hi"
-    />
-  )
-  const kit = screen.getByTestId(testId)
-  // Should have base class for default value
-  expect(kit).toHaveClass(`flex_shrink_0`)
-  // Should have responsive classes for screen sizes
-  expect(kit).toHaveClass(`flex_shrink_xs_1`)
-  expect(kit).toHaveClass(`flex_shrink_sm_0`)
-  expect(kit).toHaveClass(`flex_shrink_md_1`)
-})
+// NOTE: Currently using skipKnownIssues: true because globalProps.ts generates classes for invalid values
+testGlobalPropInvalidValues(
+  'flexShrink',
+  [2, -1, 999, 'invalid', 'bad_value', 'special-chars!@#'],
+  ['flex_shrink_2', 'flex_shrink_-1', 'flex_shrink_999', 'flex_shrink_invalid', 'flex_shrink_bad_value', 'flex_shrink_special-chars!@#'],
+  undefined,
+  { skipKnownIssues: true }
+)

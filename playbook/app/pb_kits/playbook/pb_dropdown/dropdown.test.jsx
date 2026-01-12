@@ -540,3 +540,124 @@ test("quickpick option values are Date objects", () => {
   
   expect(endDate.getTime()).toBeGreaterThanOrEqual(startDate.getTime())
 })
+
+test("customQuickPickDates overrides default options when override is true or undefined", () => {
+  render(
+    <Dropdown
+        customQuickPickDates={{
+          dates: [
+            {
+              label: "Last 15 months",
+              value: { timePeriod: "months", amount: 15 }
+            },
+            {
+              label: "Custom Range",
+              value: ["06/01/2022", "06/07/2022"]
+            }
+          ]
+        }}
+        data={{ testid: testId }}
+        variant="quickpick"
+    />
+  )
+  
+  const kit = screen.getByTestId(testId)
+  const options = kit.querySelectorAll('.pb_dropdown_option_list')
+  
+  expect(options.length).toBe(2)
+  expect(options[0]).toHaveTextContent("Last 15 months")
+  expect(options[1]).toHaveTextContent("Custom Range")
+})
+
+test("customQuickPickDates appends to defaults when override is false", () => {
+  render(
+    <Dropdown
+        customQuickPickDates={{
+          override: false,
+          dates: [
+            {
+              label: "Custom Option",
+              value: { timePeriod: "days", amount: 30 }
+            }
+          ]
+        }}
+        data={{ testid: testId }}
+        variant="quickpick"
+    />
+  )
+  
+  const kit = screen.getByTestId(testId)
+  const options = kit.querySelectorAll('.pb_dropdown_option_list')
+  
+  expect(options.length).toBe(11)
+  expect(options[0]).toHaveTextContent("Today")
+  expect(options[10]).toHaveTextContent("Custom Option")
+})
+
+test("customQuickPickDates with explicit date array returns correct values", () => {
+  const onSelectMock = jest.fn()
+  
+  render(
+    <Dropdown
+        customQuickPickDates={{
+          dates: [
+            {
+              label: "First Week of June 2022",
+              value: ["06/01/2022", "06/07/2022"]
+            }
+          ]
+        }}
+        data={{ testid: testId }}
+        onSelect={onSelectMock}
+        variant="quickpick"
+    />
+  )
+  
+  const kit = screen.getByTestId(testId)
+  const option = kit.querySelector('.pb_dropdown_option_list')
+  
+  fireEvent.click(option)
+  
+  const selectedItem = onSelectMock.mock.calls[0][0]
+  
+  expect(selectedItem.label).toBe("First Week of June 2022")
+  expect(Array.isArray(selectedItem.value)).toBe(true)
+  expect(selectedItem.value.length).toBe(2)
+})
+
+test("customQuickPickDates with timePeriod calculates dates correctly", () => {
+  const onSelectMock = jest.fn()
+  
+  render(
+    <Dropdown
+        customQuickPickDates={{
+          dates: [
+            {
+              label: "Last 7 days",
+              value: { timePeriod: "days", amount: 7 }
+            }
+          ]
+        }}
+        data={{ testid: testId }}
+        onSelect={onSelectMock}
+        variant="quickpick"
+    />
+  )
+  
+  const kit = screen.getByTestId(testId)
+  const option = kit.querySelector('.pb_dropdown_option_list')
+  
+  fireEvent.click(option)
+  
+  const selectedItem = onSelectMock.mock.calls[0][0]
+  
+  expect(selectedItem.label).toBe("Last 7 days")
+  expect(Array.isArray(selectedItem.value)).toBe(true)
+  
+  const [startDate, endDate] = selectedItem.value
+  expect(startDate instanceof Date).toBe(true)
+  expect(endDate instanceof Date).toBe(true)
+  
+  const today = new Date()
+  expect(endDate.toDateString()).toBe(today.toDateString())
+})

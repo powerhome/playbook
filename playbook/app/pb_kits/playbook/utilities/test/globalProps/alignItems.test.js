@@ -1,54 +1,42 @@
-import React from 'react'
-import { render, screen } from '../../test-utils'
-
-import Body from '../../../pb_body/_body'
+import { testGlobalProp, testGlobalPropResponsiveWithDefault, testGlobalPropAbsence, testGlobalPropInvalidValues } from './globalPropsTestHelper'
 import { camelToSnakeCase } from '../../../utilities/text'
-import { SCREEN_SIZES } from '../../test-utils'
+import Body from '../../../pb_body/_body'
+import Button from '../../../pb_button/_button'
+import Card from '../../../pb_card/_card'
+import Title from '../../../pb_title/_title'
+import Flex from '../../../pb_flex/_flex'
+import Link from '../../../pb_link/_link'
+import Badge from '../../../pb_badge/_badge'
 
-const testSubject = 'body'
+// Note: TextInput excluded - alignItems is a flexbox property that doesn't apply to form inputs
+testGlobalProp(
+  'alignItems',
+  ['start', 'center', 'end', 'baseline', 'stretch', 'flexStart', 'flexEnd'],
+  (v) => `align_items_${camelToSnakeCase(v)}`,
+  (size, v) => `align_items_${size}_${camelToSnakeCase(v)}`,
+  [Body, Button, Card, Title, Flex, Link, Badge]
+)
 
-test('Global Props: returns proper class name', () => {
-  const propValues = ["start", "center", "end", "baseline", "stretch", "flexStart", "flexEnd"]
-  for(let x = 0, y = propValues.length; x < y; ++x) {
-    const testId = `${testSubject}-${propValues[x]}`
-    render(
-      <Body
-          alignItems={`${propValues[x]}`}
-          data={{ testid: testId }}
-          text="Hi"
-      />
-    )
-    const kit = screen.getByTestId(testId)
-    expect(kit).toHaveClass(`align_items_${camelToSnakeCase(propValues[x])}`)
-    SCREEN_SIZES.forEach((size) => {
-      const testId = `${testSubject}-${propValues[x]}-${size}`
-      render(
-        <Body
-            alignItems={{ [size]: propValues[x] }}
-            data={{ testid: testId }}
-            text="Hi"
-        />
-      )
-      const kit = screen.getByTestId(testId)
-      expect(kit).toHaveClass(`align_items_${size}_${camelToSnakeCase(propValues[x])}`)
-    })
-  }
-})
+testGlobalPropResponsiveWithDefault(
+  'alignItems',
+  { default: 'end', xs: 'center', sm: 'end', md: 'center' },
+  (v) => `align_items_${camelToSnakeCase(v)}`,
+  (size, v) => `align_items_${size}_${camelToSnakeCase(v)}`
+)
 
-test('Global Props: returns proper class name with default key', () => {
-  const testId = `${testSubject}-default-responsive`
-  render(
-    <Body
-        alignItems={{ default: "end", xs: "center", sm: "end", md: "center" }}
-        data={{ testid: testId }}
-        text="Hi"
-    />
-  )
-  const kit = screen.getByTestId(testId)
-  // Should have base class for default value
-  expect(kit).toHaveClass(`align_items_end`)
-  // Should have responsive classes for screen sizes
-  expect(kit).toHaveClass(`align_items_xs_center`)
-  expect(kit).toHaveClass(`align_items_sm_end`)
-  expect(kit).toHaveClass(`align_items_md_center`)
-})
+testGlobalPropAbsence(
+  'alignItems',
+  ['align_items_start', 'align_items_center', 'align_items_end', 'align_items_baseline', 'align_items_stretch', 'align_items_flex_start', 'align_items_flex_end'],
+  undefined,
+  { skipNull: true }
+)
+
+// NOTE: Currently using skipKnownIssues: true because globalProps.ts generates classes for invalid values
+// NOTE: Using allowRenderingErrors: true because invalid types (like numbers) cause rendering errors with camelToSnakeCase
+testGlobalPropInvalidValues(
+  'alignItems',
+  ['invalid', 'bad_value', 'not_an_align_value', 'special-chars!@#'],
+  ['align_items_invalid', 'align_items_bad_value', 'align_items_not_an_align_value', 'align_items_special-chars!@#'],
+  undefined,
+  { skipKnownIssues: true, allowRenderingErrors: true }
+)

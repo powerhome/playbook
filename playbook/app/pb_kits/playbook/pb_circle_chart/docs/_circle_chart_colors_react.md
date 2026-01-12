@@ -1,2 +1,0 @@
-Custom data colors allow for color customization to match the needs of business requirements. 
-Import the colors from Playbook's tokens, then set custom colors in the plotOptions.pie.colors array using the desired color variables. Hex colors are also available `eg: #CA0095`.

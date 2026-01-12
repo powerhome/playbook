@@ -4,7 +4,31 @@ module Playbook
   module PbDropdown
     module QuickpickHelper
       class << self
-        def get_quickpick_options(range_ends_today: false)
+        def get_quickpick_options(range_ends_today: false, custom_quick_pick_dates: {})
+          default_options = build_default_options(range_ends_today)
+
+          # Handle custom_quick_pick_dates
+          return default_options if custom_quick_pick_dates.blank?
+
+          dates = custom_quick_pick_dates[:dates] || custom_quick_pick_dates["dates"]
+          return default_options if dates.blank?
+
+          custom_options = dates.map { |date_config| build_custom_option(date_config) }
+
+          # Override logic
+          override = custom_quick_pick_dates[:override]
+          override = custom_quick_pick_dates["override"] if override.nil?
+
+          if override == false
+            default_options + custom_options
+          else
+            custom_options
+          end
+        end
+
+      private
+
+        def build_default_options(range_ends_today)
           today = Date.today
           yesterday = today - 1.day
 
@@ -42,7 +66,64 @@ module Playbook
           ]
         end
 
-      private
+        def build_custom_option(date_config)
+          label = date_config[:label] || date_config["label"]
+          value = date_config[:value] || date_config["value"]
+
+          date_range = calculate_date_range(value)
+          start_date = date_range[0]
+          end_date = date_range[1]
+
+          {
+            id: "quickpick-#{label.downcase.gsub(/\s+/, '-')}",
+            label: label,
+            value: [start_date.to_s, end_date.to_s],
+            formatted_start_date: format_date(start_date),
+            formatted_end_date: format_date(end_date),
+          }
+        end
+
+        def calculate_date_range(value)
+          # Parse date strings if value is an array
+          if value.is_a?(Array)
+            [parse_date_string(value[0]), parse_date_string(value[1])]
+          else
+            # Calculate date range from time_period and amount
+            time_period = value[:time_period] || value["time_period"] || value[:timePeriod] || value["timePeriod"]
+            amount = value[:amount] || value["amount"]
+
+            end_date = Date.today
+            start_date = calculate_start_date(time_period, amount, end_date)
+
+            [start_date, end_date]
+          end
+        end
+
+        def parse_date_string(date_str)
+          # Handle US date format (MM/DD/YYYY) because Ruby's Date.parse defaults to European format (DD/MM/YYYY)
+          if date_str.include?("/")
+            Date.strptime(date_str, "%m/%d/%Y")
+          else
+            Date.parse(date_str)
+          end
+        end
+
+        def calculate_start_date(time_period, amount, end_date)
+          case time_period.to_s
+          when "days"
+            end_date - amount.days
+          when "weeks"
+            end_date - amount.weeks
+          when "months"
+            end_date - amount.months
+          when "quarters"
+            end_date - (amount * 3).months
+          when "years"
+            end_date - amount.years
+          else
+            raise ArgumentError, "Invalid time period: #{time_period}"
+          end
+        end
 
         def format_date(date)
           date.strftime("%m/%d/%Y")

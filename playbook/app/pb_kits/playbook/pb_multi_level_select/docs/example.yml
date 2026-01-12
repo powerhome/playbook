@@ -15,6 +15,7 @@ examples:
   - multi_level_select_disabled_options: Disabled Options (Return All Selected)
   - multi_level_select_disabled_options_parent_default: Disabled Parent Option (Default)
   - multi_level_select_disabled_options_parent: Disabled Parent Option (Return All Selected)
+  - multi_level_select_single_disabled: Disabled Options (Single Select)
 
   react:
   - multi_level_select_default: Default
@@ -33,3 +34,4 @@ examples:
   - multi_level_select_disabled_options: Disabled Options (Return All Selected)
   - multi_level_select_disabled_options_parent_default: Disabled Parent Option (Default)
   - multi_level_select_disabled_options_parent: Disabled Parent Option (Return All Selected)
+  - multi_level_select_single_disabled: Disabled Options (Single Select)

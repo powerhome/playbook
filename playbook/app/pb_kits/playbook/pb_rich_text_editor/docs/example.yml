@@ -29,5 +29,7 @@ examples:
   # - rich_text_editor_toolbar_bottom: Toolbar Bottom
   - rich_text_editor_inline: Inline
   - rich_text_editor_advanced_inline: Advanced (Inline)
+  - rich_text_editor_advanced_height: Advanced Height
+  - rich_text_editor_advanced_min_height: Advanced Min Height
   - rich_text_editor_preview: Preview
   - rich_text_editor_advanced_preview: Advanced Preview
