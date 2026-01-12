@@ -2,28 +2,42 @@
 
 # Overcommit pre-commit hook: Verify tokens are in sync
 #
-# This runs only when SCSS token files are staged.
-# It regenerates tokens and fails if colors.json needs updating.
+# POC#3: Watches tokens/colors.yml (YAML source of truth)
+# Regenerates both SCSS and JSON if YAML changed but outputs weren't updated.
 
 cd playbook
 
-# Store current colors.json content
-BEFORE=$(cat lib/playbook/tokens/colors.json 2>/dev/null || echo "")
+# Store current file contents
+JSON_BEFORE=$(cat lib/playbook/tokens/colors.json 2>/dev/null || echo "")
+SCSS_BEFORE=$(cat app/pb_kits/playbook/tokens/_colors.generated.scss 2>/dev/null || echo "")
 
-# Regenerate tokens
-yarn generate:tokens --silent 2>/dev/null
+# Regenerate from YAML source
+yarn generate:from-tokens --silent 2>/dev/null
 
 # Compare
-AFTER=$(cat lib/playbook/tokens/colors.json 2>/dev/null || echo "")
+JSON_AFTER=$(cat lib/playbook/tokens/colors.json 2>/dev/null || echo "")
+SCSS_AFTER=$(cat app/pb_kits/playbook/tokens/_colors.generated.scss 2>/dev/null || echo "")
 
-if [ "$BEFORE" != "$AFTER" ]; then
+NEEDS_UPDATE=""
+
+if [ "$JSON_BEFORE" != "$JSON_AFTER" ]; then
+  NEEDS_UPDATE="$NEEDS_UPDATE lib/playbook/tokens/colors.json"
+fi
+
+if [ "$SCSS_BEFORE" != "$SCSS_AFTER" ]; then
+  NEEDS_UPDATE="$NEEDS_UPDATE app/pb_kits/playbook/tokens/_colors.generated.scss"
+fi
+
+if [ -n "$NEEDS_UPDATE" ]; then
   echo ""
-  echo "❌ tokens/colors.json is out of sync with SCSS!"
+  echo "❌ Generated token files are out of sync with colors.yml!"
   echo ""
-  echo "Token files were changed but colors.json wasn't regenerated."
-  echo "The file has been updated for you. Please stage it:"
+  echo "The YAML was changed but generated files weren't updated."
+  echo "They have been regenerated for you. Please stage them:"
   echo ""
-  echo "  git add playbook/lib/playbook/tokens/colors.json"
+  for file in $NEEDS_UPDATE; do
+    echo "  git add playbook/$file"
+  done
   echo ""
   exit 1
 fi

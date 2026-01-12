@@ -22,11 +22,11 @@ PreCommit:
       - 'app/pb_kits/playbook/**/*.jsx'
   VerifyTokens:
     enabled: true
-    description: 'Verify color tokens are in sync'
+    description: 'Verify color tokens are in sync with YAML source'
     required_executable: 'bash'
     command: ['bash', '.git-hooks/pre_commit/verify_tokens.sh']
     include:
-      - 'playbook/app/pb_kits/playbook/tokens/**/*.scss'
+      - 'playbook/tokens/**/*.yml'
 
 CommitMsg:
   CapitalizedSubject:

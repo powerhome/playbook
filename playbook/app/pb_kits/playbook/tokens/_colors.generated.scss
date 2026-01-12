@@ -1,0 +1,127 @@
+// =============================================================================
+// AUTO-GENERATED — DO NOT EDIT
+// Generated from tokens/colors.yml
+// Run: yarn generate:from-tokens
+// =============================================================================
+
+@import "./opacity";
+
+/* Base Colors */
+$royal: #0056CF !default;
+$purple: #9E64E9 !default;
+$teal: #00C4D7 !default;
+$red: #DA0014 !default;
+$red_dark: #FF4A50 !default;
+$yellow: #F9BB00 !default;
+$green: #1CA05C !default;
+$orange: #FD804C !default;
+$default: #93A8B8 !default;
+
+/* Interface Colors */
+$white: #FFFFFF !default;
+$silver: #F3F7FB !default;
+$slate: #C1CDD6 !default;
+$charcoal: #242B42 !default;
+$black: #000000 !default;
+
+/* Main Colors */
+$primary: $royal !default;
+$secondary: $yellow !default;
+$tertiary: $purple !default;
+
+/* Background Colors */
+$bg_light: $silver !default;
+$bg_dark: #0A0527 !default;
+$bg_dark_card: #231E3D !default;
+
+/* Card Colors */
+$card_light: $white !default;
+$card_dark: mix($white, $bg_dark, 10%) !default;
+
+/* Active Colors */
+$active_light: lighten(#E5F2FF, 3.5%) !default;
+$active_dark: #0082FF !default;
+
+/* Hover Colors */
+$hover_light: darken($silver, 5%) !default;
+$hover_dark: rgba($white, 0.2) !default;
+
+/* Border Colors */
+$border_light: #E4E8F0 !default;
+$border_dark: mix($white, $bg_dark, 20%) !default;
+
+/* Data Colors */
+$data_1: $royal !default;
+$data_2: $yellow !default;
+$data_3: $purple !default;
+$data_4: $green !default;
+$data_5: $orange !default;
+$data_6: #144075 !default;
+$data_7: $teal !default;
+$data_8: $red !default;
+
+/* Status Colors */
+$success: $green !default;
+$success_secondary: lighten($green, 10%) !default;
+$success_subtle: rgba($green, 0.1) !default;
+$warning: $yellow !default;
+$warning_secondary: lighten($yellow, 10%) !default;
+$warning_subtle: rgba($yellow, 0.1) !default;
+$error: $red !default;
+$error_secondary: lighten($red, 10%) !default;
+$error_subtle: rgba($red, 0.1) !default;
+$info: $teal !default;
+$info_secondary: lighten($teal, 10%) !default;
+$info_subtle: rgba($teal, 0.1) !default;
+$neutral: $slate !default;
+$neutral_secondary: lighten($slate, 10%) !default;
+$neutral_subtle: rgba($slate, 0.1) !default;
+
+/* Product Colors */
+$product_1_background: #003DB2 !default;
+$product_1_highlight: #0057FF !default;
+$product_2_background: #6000AC !default;
+$product_2_highlight: #8200E9 !default;
+$product_3_background: #B85C00 !default;
+$product_3_highlight: #CE7500 !default;
+$product_4_background: #007E8F !default;
+$product_4_highlight: #00B9D2 !default;
+$product_5_background: #760B24 !default;
+$product_5_highlight: #B8032E !default;
+$product_6_background: #008540 !default;
+$product_6_highlight: #00A851 !default;
+$product_7_background: #96006C !default;
+$product_7_highlight: #CD0094 !default;
+$product_8_background: #144075 !default;
+$product_8_highlight: #1A569E !default;
+$product_9_background: #FCC419 !default;
+$product_9_highlight: #FFD43B !default;
+$product_10_background: #20C997 !default;
+$product_10_highlight: #38D9A9 !default;
+
+/* Category Colors */
+$category_1: $royal !default;
+$category_2: #0CD2E5 !default;
+$category_3: $yellow !default;
+$category_4: #14D595 !default;
+$category_5: #A057FF !default;
+$category_6: #FF7034 !default;
+$category_7: #97DA22 !default;
+$category_8: #EA599F !default;
+$category_9: #0091FF !default;
+$category_10: #5027E4 !default;
+$category_11: $red !default;
+$category_12: #109922 !default;
+$category_13: #058F9D !default;
+$category_14: #A33E6F !default;
+$category_15: #B2171C !default;
+$category_16: #0A5C49 !default;
+$category_17: #325B91 !default;
+$category_18: #BE4714 !default;
+$category_19: #000080 !default;
+$category_20: #5C0E0A !default;
+$category_21: #040830 !default;
+
+/* Gradient Colors */
+$gradient_start: #1C75F2 !default;
+$gradient_end: $royal !default;

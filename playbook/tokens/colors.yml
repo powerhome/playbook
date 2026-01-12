@@ -1,0 +1,310 @@
+# Playbook Color Tokens — Source of Truth
+#
+# This file defines all color tokens. SCSS and Rails JSON are generated from this.
+# DO NOT edit the generated files directly.
+#
+# Supported token types:
+#   value:  - Direct hex/rgba value
+#   alias:  - Reference to another token
+#   derive: - Computed from another token (lighten, darken, mix, rgba)
+
+# =============================================================================
+# Base Colors
+# =============================================================================
+base:
+  royal:
+    value: "#0056CF"
+  purple:
+    value: "#9E64E9"
+  teal:
+    value: "#00C4D7"
+  red:
+    value: "#DA0014"
+  red_dark:
+    value: "#FF4A50"
+  yellow:
+    value: "#F9BB00"
+  green:
+    value: "#1CA05C"
+  orange:
+    value: "#FD804C"
+  default:
+    value: "#93A8B8"
+
+# =============================================================================
+# Interface Colors
+# =============================================================================
+interface:
+  white:
+    value: "#FFFFFF"
+  silver:
+    value: "#F3F7FB"
+  slate:
+    value: "#C1CDD6"
+  charcoal:
+    value: "#242B42"
+  black:
+    value: "#000000"
+
+# =============================================================================
+# Main Colors (Aliases)
+# =============================================================================
+main:
+  primary:
+    alias: royal
+  secondary:
+    alias: yellow
+  tertiary:
+    alias: purple
+
+# =============================================================================
+# Background Colors
+# =============================================================================
+background:
+  bg_light:
+    alias: silver
+  bg_dark:
+    value: "#0A0527"
+  bg_dark_card:
+    value: "#231E3D"
+
+# =============================================================================
+# Card Colors
+# =============================================================================
+card:
+  card_light:
+    alias: white
+  card_dark:
+    derive:
+      from: bg_dark
+      op: mix
+      with: white
+      amount: 10%
+
+# =============================================================================
+# Active Colors
+# =============================================================================
+active:
+  active_light:
+    derive:
+      from: "#E5F2FF"
+      op: lighten
+      amount: 3.5%
+  active_dark:
+    value: "#0082FF"
+
+# =============================================================================
+# Hover Colors
+# =============================================================================
+hover:
+  hover_light:
+    derive:
+      from: silver
+      op: darken
+      amount: 5%
+  hover_dark:
+    derive:
+      from: white
+      op: rgba
+      alpha: 0.2
+
+# =============================================================================
+# Border Colors
+# =============================================================================
+border:
+  border_light:
+    value: "#E4E8F0"
+  border_dark:
+    derive:
+      from: bg_dark
+      op: mix
+      with: white
+      amount: 20%
+
+# =============================================================================
+# Data Colors (for charts)
+# =============================================================================
+data:
+  data_1:
+    alias: royal
+  data_2:
+    alias: yellow
+  data_3:
+    alias: purple
+  data_4:
+    alias: green
+  data_5:
+    alias: orange
+  data_6:
+    value: "#144075"
+  data_7:
+    alias: teal
+  data_8:
+    alias: red
+
+# =============================================================================
+# Status Colors
+# =============================================================================
+status:
+  success:
+    alias: green
+  success_secondary:
+    derive:
+      from: green
+      op: lighten
+      amount: 10%
+  success_subtle:
+    derive:
+      from: green
+      op: rgba
+      alpha: 0.1
+  warning:
+    alias: yellow
+  warning_secondary:
+    derive:
+      from: yellow
+      op: lighten
+      amount: 10%
+  warning_subtle:
+    derive:
+      from: yellow
+      op: rgba
+      alpha: 0.1
+  error:
+    alias: red
+  error_secondary:
+    derive:
+      from: red
+      op: lighten
+      amount: 10%
+  error_subtle:
+    derive:
+      from: red
+      op: rgba
+      alpha: 0.1
+  info:
+    alias: teal
+  info_secondary:
+    derive:
+      from: teal
+      op: lighten
+      amount: 10%
+  info_subtle:
+    derive:
+      from: teal
+      op: rgba
+      alpha: 0.1
+  neutral:
+    alias: slate
+  neutral_secondary:
+    derive:
+      from: slate
+      op: lighten
+      amount: 10%
+  neutral_subtle:
+    derive:
+      from: slate
+      op: rgba
+      alpha: 0.1
+
+# =============================================================================
+# Product Colors
+# =============================================================================
+product:
+  product_1_background:
+    value: "#003DB2"
+  product_1_highlight:
+    value: "#0057FF"
+  product_2_background:
+    value: "#6000AC"
+  product_2_highlight:
+    value: "#8200E9"
+  product_3_background:
+    value: "#B85C00"
+  product_3_highlight:
+    value: "#CE7500"
+  product_4_background:
+    value: "#007E8F"
+  product_4_highlight:
+    value: "#00B9D2"
+  product_5_background:
+    value: "#760B24"
+  product_5_highlight:
+    value: "#B8032E"
+  product_6_background:
+    value: "#008540"
+  product_6_highlight:
+    value: "#00A851"
+  product_7_background:
+    value: "#96006C"
+  product_7_highlight:
+    value: "#CD0094"
+  product_8_background:
+    value: "#144075"
+  product_8_highlight:
+    value: "#1A569E"
+  product_9_background:
+    value: "#FCC419"
+  product_9_highlight:
+    value: "#FFD43B"
+  product_10_background:
+    value: "#20C997"
+  product_10_highlight:
+    value: "#38D9A9"
+
+# =============================================================================
+# Category Colors
+# =============================================================================
+category:
+  category_1:
+    alias: royal
+  category_2:
+    value: "#0CD2E5"
+  category_3:
+    alias: yellow
+  category_4:
+    value: "#14D595"
+  category_5:
+    value: "#A057FF"
+  category_6:
+    value: "#FF7034"
+  category_7:
+    value: "#97DA22"
+  category_8:
+    value: "#EA599F"
+  category_9:
+    value: "#0091FF"
+  category_10:
+    value: "#5027E4"
+  category_11:
+    alias: red
+  category_12:
+    value: "#109922"
+  category_13:
+    value: "#058F9D"
+  category_14:
+    value: "#A33E6F"
+  category_15:
+    value: "#B2171C"
+  category_16:
+    value: "#0A5C49"
+  category_17:
+    value: "#325B91"
+  category_18:
+    value: "#BE4714"
+  category_19:
+    value: "#000080"
+  category_20:
+    value: "#5C0E0A"
+  category_21:
+    value: "#040830"
+
+# =============================================================================
+# Gradient Colors
+# =============================================================================
+gradient:
+  gradient_start:
+    value: "#1C75F2"
+  gradient_end:
+    alias: royal
+
