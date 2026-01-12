@@ -11,8 +11,8 @@ RSpec.describe Playbook::Tokens do
     end
 
     it "loads all expected tokens" do
-      # Should have 100+ tokens from the full SCSS export
-      expect(colors.keys.size).to be >= 100
+      # Should have 90+ tokens from the YAML source
+      expect(colors.keys.size).to be >= 90
     end
 
     describe "hash-style access" do
