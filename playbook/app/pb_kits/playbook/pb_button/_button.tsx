@@ -56,7 +56,8 @@ const buttonClassName = (props: ButtonPropTypes) => {
   } = props
 
   const classNames = ['pb_button_kit']
-  const isIconOnly = icon && !text && !children
+  // Icon-only: has icon, no text/children, and not a reaction button (reaction buttons have count)
+  const isIconOnly = icon && !text && !children && variant !== 'reaction'
 
   if (variant) classNames.push(`pb_button_${variant}`)
   if (type) classNames.push(`pb_button_${type}`)

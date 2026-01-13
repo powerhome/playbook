@@ -74,7 +74,7 @@ module Playbook
       end
 
       def icon_only?
-        icon.present? && text.blank?
+        icon.present? && text.blank? && variant != "reaction"
       end
 
       def classname
