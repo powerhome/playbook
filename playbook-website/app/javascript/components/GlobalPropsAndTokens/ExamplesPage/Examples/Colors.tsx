@@ -34,6 +34,7 @@ const Colors = () => {
       >
         <Title paddingTop="md" size={2}>Base Colors</Title>
         <PropsExamplesTable
+          firstColumnBold={false}
           headers={["Color", "Token", "Value"]}
           rows={[
             [
@@ -110,6 +111,7 @@ const Colors = () => {
         />
         <Title paddingTop="md" size={2}>Main Colors</Title>
         <PropsExamplesTable
+          firstColumnBold={false}
           headers={["Color", "Token", "Value"]}
           rows={[
             [
@@ -131,6 +133,7 @@ const Colors = () => {
         />
         <Title paddingTop="md" size={2}>UI Colors</Title>
         <PropsExamplesTable
+          firstColumnBold={false}
           headers={["Color", "Token", "Value", "Use Case"]}
           rows={[
             [
@@ -193,6 +196,7 @@ const Colors = () => {
         />
         <Title paddingTop="md" size={2}>Text Colors</Title>
         <PropsExamplesTable
+          firstColumnBold={false}
           headers={["Color", "Token", "Value", "Use Case"]}
           rows={[
             [
@@ -271,6 +275,7 @@ const Colors = () => {
         />
         <Title paddingTop="md" size={2}>State Colors</Title>
         <PropsExamplesTable
+          firstColumnBold={false}
           headers={["Color", "Token", "Value", "Use Case"]}
           rows={[
             [
@@ -357,6 +362,7 @@ const Colors = () => {
         />
         <Title paddingTop="md" size={2}>Utility Colors</Title>
         <PropsExamplesTable
+          firstColumnBold={false}
           headers={["Color", "Token", "Value", "Use Case"]}
           rows={[
             [
@@ -403,6 +409,7 @@ const Colors = () => {
         />
         <Title paddingTop="md" size={2}>Status Colors</Title>
         <PropsExamplesTable
+          firstColumnBold={false}
           headers={["Color", "Token", "Value", "Use Case"]}
           rows={[
             [
@@ -545,6 +552,7 @@ const Colors = () => {
         />
         <Title paddingTop="md" size={2}>Data Colors</Title>
         <PropsExamplesTable
+          firstColumnBold={false}
           headers={["Color", "Token", "Value", "Use Case"]}
           rows={[
             [
@@ -615,6 +623,7 @@ const Colors = () => {
         />
         <Title paddingTop="md" size={2}>Category Colors</Title>
         <PropsExamplesTable
+          firstColumnBold={false}
           headers={["Color", "Token", "Value", "Use Case"]}
           rows={[
             [
@@ -789,6 +798,7 @@ const Colors = () => {
         />
         <Title paddingTop="md" size={2}>Product Colors</Title>
         <PropsExamplesTable
+          firstColumnBold={false}
           headers={["Color", "Token", "Value", "Use Case"]}
           rows={[
             [

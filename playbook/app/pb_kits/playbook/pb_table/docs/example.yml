@@ -40,6 +40,8 @@ examples:
     - table_with_selectable_rows: Table with Selectable Rows
     - table_with_header_style_borderless: Header Style Borderless
     - table_with_header_style_floating: Header Style Floating
+    - table_with_filter_variant_rails: Variant with Filter
+    - table_with_filter_variant_with_pagination_rails: Variant with Filter and Pagination
 
   react:
     - table_sm: Small
@@ -81,3 +83,5 @@ examples:
     - table_with_selectable_rows: Table with Selectable Rows
     - table_with_header_style_borderless: Header Style Borderless
     - table_with_header_style_floating: Header Style Floating
+    - table_with_filter_variant: Variant with Filter
+    - table_with_filter_variant_with_pagination: Variant with Filter and Pagination

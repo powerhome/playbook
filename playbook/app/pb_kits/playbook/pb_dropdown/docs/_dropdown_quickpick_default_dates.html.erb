@@ -1,0 +1,19 @@
+
+<%= pb_rails("dropdown", props: {
+  id: "date-range-with-default",
+  label: "Date Range",
+  variant: "quickpick",
+  default_value: "This Year"
+}) %>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const dropdown = document.getElementById("date-range-with-default");
+    if (dropdown) {
+      dropdown.addEventListener("pb:dropdown:selected", (e) => {
+        const option = e.detail;
+        console.log("Selected option:", option);
+      });
+    }
+  });
+</script>

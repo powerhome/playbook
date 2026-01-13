@@ -1,0 +1,12 @@
+<%= pb_rails("dropdown", props: {id: "date-range-quickpick-1", label: "Date Range", variant: "quickpick"}) %>
+
+
+<script>
+  const dropdown = document.getElementById("date-range-quickpick-1");
+  if (dropdown) {
+    dropdown.addEventListener("pb:dropdown:selected", (e) => {
+      const option = e.detail;
+      console.log("Selected option:", option);
+    });
+  }
+</script>

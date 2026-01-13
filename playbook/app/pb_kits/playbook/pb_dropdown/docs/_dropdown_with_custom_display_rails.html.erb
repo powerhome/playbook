@@ -47,7 +47,7 @@
 %>
 
 
-<%= pb_rails("dropdown", props: {options: options}) do %>
+<%= pb_rails("dropdown", props: {id: "user-dropdown", options: options}) do %>
     <%= pb_rails("dropdown/dropdown_trigger", props: {placeholder: "Select a User", custom_display: custom_display}) %>
     <%= pb_rails("dropdown/dropdown_container") do %>
         <% options.each do |option| %>
@@ -71,6 +71,8 @@
 
 <script>
   document.addEventListener("pb:dropdown:selected", (e) => {
+    if (e.target.id !== "user-dropdown") return;
+    
     const option   = e.detail;
     const dropdown = e.target;
 

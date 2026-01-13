@@ -1,0 +1,42 @@
+<%= pb_rails("time_picker", props: { 
+  id: "time-picker-min-only",
+  label: "Minimum Time Only",
+  min_time: "09:00",
+}) %>
+
+<%= pb_rails("time_picker", props: { 
+  id: "time-picker-max-only",
+  label: "Maximum Time Only",
+  max_time: "17:00",
+  time_format: "24hour",
+}) %>
+
+<%= pb_rails("time_picker", props: { 
+  id: "time-picker-min-max-12hr",
+  label: "Min & Max Time Range (12-hour)",
+  min_time: "09:00",
+  max_time: "17:00",
+}) %>
+
+<%= pb_rails("time_picker", props: { 
+  id: "time-picker-min-max-24hr",
+  label: "Min & Max Time Range (24-hour)",
+  min_time: "09:00",
+  max_time: "17:00",
+  time_format: "24hour",
+}) %>
+
+<%= pb_rails("time_picker", props: { 
+  id: "time-picker-pm-only",
+  label: "PM Only Range (AM disabled)",
+  min_time: "13:00",
+  max_time: "17:00",
+}) %>
+
+<%= pb_rails("time_picker", props: { 
+  id: "time-picker-am-only",
+  label: "AM Only Range (PM disabled)",
+  min_time: "06:00",
+  max_time: "11:30"
+}) %>
+

@@ -1,22 +1,43 @@
 # frozen_string_literal: true
 
 require_relative "../../../app/pb_kits/playbook/pb_body/body"
+require_relative "../../../app/pb_kits/playbook/pb_button/button"
+require_relative "../../../app/pb_kits/playbook/pb_card/card"
+require_relative "../../../app/pb_kits/playbook/pb_title/title"
+require_relative "../../../app/pb_kits/playbook/pb_flex/flex"
+require_relative "../../../app/pb_kits/playbook/pb_link/link"
+require_relative "../../../app/pb_kits/playbook/pb_badge/badge"
 
 RSpec.describe Playbook::Flex do
   subject { Playbook::PbBody::Body }
-  let(:screen_sizes) { %w[xs sm md lg xl] }
 
-  describe "#classname" do
-    it "returns proper class name", :aggregate_failures do
-      %w[row column rowReverse columnReverse].each do |word|
-        expect(subject.new({ flex_direction: word }).classname).to include("flex_direction_#{word.underscore}")
+  # NOTE: TextInput excluded - flex_direction is a flexbox property that doesn't apply to form inputs
+  test_global_prop(
+    :flex_direction,
+    %w[row column rowReverse columnReverse],
+    ->(v) { "flex_direction_#{v.underscore}" },
+    responsive_pattern: ->(size, v) { "flex_direction_#{size}_#{v.underscore}" },
+    test_subjects: [
+      Playbook::PbBody::Body,
+      Playbook::PbButton::Button,
+      Playbook::PbCard::Card,
+      Playbook::PbTitle::Title,
+      Playbook::PbFlex::Flex,
+      Playbook::PbLink::Link,
+      Playbook::PbBadge::Badge,
+    ]
+  )
 
-        screen_sizes.each do |size|
-          obj = {}
-          obj[size] = word
-          expect(subject.new({ flex_direction: obj }).classname).to include("flex_direction_#{size}_#{word.underscore}")
-        end
-      end
-    end
-  end
+  test_global_prop_absence(
+    :flex_direction,
+    %w[flex_direction_row flex_direction_column flex_direction_row_reverse flex_direction_column_reverse]
+  )
+
+  # NOTE: Currently using allow_errors: true because globalProps generates classes for invalid values
+  test_global_prop_invalid_values(
+    :flex_direction,
+    ["invalid", "bad_value", "not_a_direction", "special-chars!@#"],
+    %w[flex_direction_invalid flex_direction_bad_value flex_direction_not_a_direction flex_direction_special-chars!@#],
+    allow_errors: true
+  )
 end

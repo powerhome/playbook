@@ -1,0 +1,1 @@
+Use the `min_time` / `minTime` and `max_time` / `maxTime` props to restrict the selectable time range. This example demonstrates minimum-only, maximum-only, and combined ranges in both 12-hour and 24-hour formats.

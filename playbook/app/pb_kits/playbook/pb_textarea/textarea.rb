@@ -3,6 +3,8 @@
 module Playbook
   module PbTextarea
     class Textarea < Playbook::KitBase
+      prop :emoji_mask, type: Playbook::Props::Boolean,
+                        default: false
       prop :error
       prop :inline, type: Playbook::Props::Boolean,
                     default: false
@@ -26,6 +28,12 @@ module Playbook
 
       def character_counter
         max_characters && character_count ? "#{character_count} / #{max_characters}" : character_count
+      end
+
+      def textarea_options
+        {
+          data: emoji_mask ? { pb_emoji_mask: true } : {},
+        }
       end
 
     private

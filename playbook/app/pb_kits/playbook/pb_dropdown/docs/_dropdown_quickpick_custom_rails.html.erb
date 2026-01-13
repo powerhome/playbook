@@ -1,0 +1,64 @@
+<%= pb_rails("dropdown", props: {
+  custom_quick_pick_dates: {
+    dates: [
+      # Allow Playbook to handle the logic...
+      {
+        label: "Last 15 months",
+        value: {
+          time_period: "months",
+          amount: 15
+        }
+      },
+      # Or, be explicit with an exact date range for more control...
+      {
+        label: "First Week of June 2022",
+        value: ["06/01/2022", "06/07/2022"]
+      }
+    ]
+  },
+  id: "date-range-quickpick-custom",
+  label: "Date Range",
+  margin_bottom: "sm",
+  variant: "quickpick"
+}) %>
+
+<%= pb_rails("dropdown", props: {
+  custom_quick_pick_dates: {
+    override: false,
+    dates: [
+      {
+        label: "Last 15 months",
+        value: {
+          time_period: "months",
+          amount: 15
+        }
+      },
+      {
+        label: "First Week of June 2022",
+        value: ["06/01/2022", "06/07/2022"]
+      }
+    ]
+  },
+  id: "date-range-quickpick-custom-append-to-defaults",
+  label: "Date Range - Append to Defaults",
+  variant: "quickpick"
+}) %>
+
+<script>
+  const dropdown1 = document.getElementById("date-range-quickpick-custom");
+  if (dropdown1) {
+    dropdown1.addEventListener("pb:dropdown:selected", (e) => {
+      const option = e.detail;
+      console.log("Selected option:", option);
+    });
+  }
+
+  const dropdown2 = document.getElementById("date-range-quickpick-custom-append-to-defaults");
+  if (dropdown2) {
+    dropdown2.addEventListener("pb:dropdown:selected", (e) => {
+      const option = e.detail;
+      console.log("Selected option:", option);
+    });
+  }
+</script>
+

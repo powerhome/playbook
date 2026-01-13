@@ -1,20 +1,29 @@
-<%= pb_rails("date_picker", props: {
-  mode: "range",
-  picker_id: "quick-pick-date-range",
-  placeholder: "Select a Date Range",
-  selection_type: "quickpick",
-  controls_end_id: "quick-pick-date-range-end",
-  controls_start_id: "quick-pick-date-range-start",
+<%= pb_rails("dropdown", props: {
+  id: "dropdown-quickpick-with-date-pickers-1",
+  label: "Date Range",
+  name: "date_range",
+  margin_bottom: "sm",
+  variant: "quickpick",
+  controls_start_id: "start-date-picker-1",
+  controls_end_id: "end-date-picker-1",
+  start_date_id: "quickpick_start_date_1",
+  start_date_name: "start_date",
+  end_date_id: "quickpick_end_date_1",
+  end_date_name: "end_date"
 }) %>
 
 <%= pb_rails("date_picker", props: {
-  picker_id: "quick-pick-date-range-start",
-  placeholder: "Select a Start Date",
-  sync_start_with:"quick-pick-date-range",
+  picker_id: "start-date-picker-1",
+  label: "Start Date",
+  name: "start_date_picker",
+  placeholder: "Select Start Date",
+  sync_start_with: "dropdown-quickpick-with-date-pickers-1"
 }) %>
 
 <%= pb_rails("date_picker", props: {
-  picker_id: "quick-pick-date-range-end",
-  placeholder: "Select an End Date",
-  sync_end_with:"quick-pick-date-range",
+  picker_id: "end-date-picker-1",
+  label: "End Date",
+  name: "end_date_picker",
+  placeholder: "Select End Date",
+  sync_end_with: "dropdown-quickpick-with-date-pickers-1"
 }) %>

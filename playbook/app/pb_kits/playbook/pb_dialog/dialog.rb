@@ -23,6 +23,7 @@ module Playbook
                     default: ""
       prop :custom_event_type, type: Playbook::Props::String,
                                default: ""
+      prop :closeable, type: Playbook::Props::Boolean, default: true
 
       def classname
         generate_classname("pb_dialog pb_dialog_rails pb_dialog_#{size}_#{placement}")

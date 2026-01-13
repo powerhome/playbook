@@ -1,0 +1,1 @@
+The `default_time` / `defaultTime` prop sets a default time value and accepts both 12-hour and 24-hour formats.

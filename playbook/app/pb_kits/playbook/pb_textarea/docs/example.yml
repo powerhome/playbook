@@ -7,6 +7,7 @@ examples:
   - textarea_error: Textarea w/ Error
   - textarea_character_counter: Character Counter
   - textarea_inline: Inline
+  - textarea_emoji_mask: Emoji Mask
 
   react:
   - textarea_default: Default
@@ -15,6 +16,7 @@ examples:
   - textarea_error: Textarea w/ Error
   - textarea_character_counter: Character Counter
   - textarea_inline: Inline
+  - textarea_emoji_mask: Emoji Mask
 
   swift:
   - textarea_default_swift: Default

@@ -6,10 +6,10 @@ import { GlobalProps, globalProps } from '../../utilities/globalProps'
 import Card from '../../pb_card/_card'
 
 export type FilterBackgroundProps = {
-  background: boolean,
-  className: string,
+  background?: boolean,
+  className?: string,
   children?: React.ReactChild[] | React.ReactChild,
-  dark: boolean,
+  dark?: boolean,
 } & GlobalProps
 
 const FilterBackground = (props: FilterBackgroundProps): React.ReactElement => {

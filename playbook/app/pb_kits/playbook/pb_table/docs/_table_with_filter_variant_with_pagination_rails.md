@@ -1,0 +1,3 @@
+The `with_filter` variant can also be used with the Pagination kit as shown here. Simply set up your Pagination as normal, and pass the Pagination kit to the prop `pagination` as shown.
+
+**IMPORTANT NOTE**: This is NOT a working example of pagination, please set up your use case with the relevant data in your controller. For more information on the Pagination Kit and how to use it, see the documentation [here](https://playbook.powerapp.cloud/kits/pagination/rails)

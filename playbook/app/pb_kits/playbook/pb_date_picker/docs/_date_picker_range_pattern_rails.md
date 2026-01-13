@@ -1,4 +1,4 @@
-You can link a Quickpick DatePicker to standard DatePickers using the following props:
+You can link a Quickpick Dropdown to standard DatePickers using the following props:
 
 **For the Quickpick DatePicker**:
 `controls_start_id`: ID of the DatePicker that should receive the start date.

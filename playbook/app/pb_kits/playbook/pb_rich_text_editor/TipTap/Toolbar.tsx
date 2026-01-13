@@ -4,7 +4,7 @@ import Flex from "../../pb_flex/_flex";
 import FlexItem from "../../pb_flex/_flex_item";
 import SectionSeparator from "../../pb_section_separator/_section_separator";
 
-import  EditorButton  from "./EditorButton";
+import EditorButton  from "./EditorButton";
 import ToolbarDropdown from "./ToolbarDropdown";
 import ToolbarNodes from "./ToolbarNodes";
 import { ToolbarTypes } from "./EditorTypes";

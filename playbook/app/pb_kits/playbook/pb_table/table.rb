@@ -40,10 +40,23 @@ module Playbook
       prop :header_style, type: Playbook::Props::Enum,
                           values: %w[default borderless floating],
                           default: "default"
+      prop :variant, type: Playbook::Props::Enum,
+                     values: %w[default with_filter],
+                     default: "default"
+      prop :filter_props, type: Playbook::Props::HashProp,
+                          default: {}
+      prop :filter_content
+      prop :pagination
+      prop :title, type: Playbook::Props::String,
+                   default: nil
+
+      def size_class
+        variant === "with_filter" && size == "md" ? "sm" : size
+      end
 
       def classname
         generate_classname(
-          "pb_table", "table-#{size}", single_line_class, dark_class,
+          "pb_table", "table-#{size_class}", single_line_class, dark_class,
           disable_hover_class, container_class, data_table_class, sticky_class, sticky_left_column_class,
           sticky_right_column_class, collapse_class, vertical_border_class, striped_class, outer_padding_class,
           "table-responsive-#{responsive}", header_style_class, separator: " "
@@ -52,6 +65,10 @@ module Playbook
 
       def responsive_classname
         responsive ? "table-responsive-#{responsive}" : nil
+      end
+
+      def with_filter_variant?
+        variant == "with_filter"
       end
 
     private
@@ -73,11 +90,13 @@ module Playbook
       end
 
       def container_class
-        container ? "table-card" : nil
+        effective_container = variant == "with_filter" ? false : container
+        effective_container ? "table-card" : nil
       end
 
       def collapse_class
-        responsive != "none" ? "table-collapse-#{collapse}" : ""
+        effective_collapse = variant == "with_filter" && collapse == "sm" ? "md" : collapse
+        responsive != "none" ? "table-collapse-#{effective_collapse}" : ""
       end
 
       def sticky_class

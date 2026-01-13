@@ -1,0 +1,1 @@
+Use the `overflow: "visible"` global prop to allow Typeahead dropdown menus to appear outside the dialog boundaries. By default, dialogs clip content that extends beyond their edges, but this prop enables pop-up elements to render above the dialog overlay. 

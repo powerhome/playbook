@@ -81,7 +81,7 @@ kits:
     enhanced_element_used: true
   - name: styling
     parent: advanced_table
-    kit_section: ["Collapsible Trail","Row Styling", "Padding Control using Row Styling", "Column Styling", "Column Styling with Multiple Headers", "Padding Control using Column Styling", "Column Group Border Color"]
+    kit_section: ["Collapsible Trail","Row Styling", "Padding Control using Row Styling", "Column Styling", "Column Styling with Multiple Headers", "Column Styling Background Color", "Column Styling Background Color with Multiple Headers","Column Styling Individual Cell Background Color", "Padding Control using Column Styling", "Column Group Border Color"]
     platforms: *1
     status: stable
     icons_used: true
@@ -212,23 +212,8 @@ kits:
     icons_used: false
     react_rendered: false
     enhanced_element_used: false
-  - name: gauge
-    platforms: *1
-    description:
-    status: stable
-    icons_used: false
-    react_rendered: true
-    enhanced_element_used: false
   - name: pb_gauge_chart
     platforms: web
-    status: beta
-    icons_used: false
-    react_rendered: true
-    enhanced_element_used: false
-  - name: bar_graph
-    platforms: *1
-    description: Bar graphs are used to compare data. Bar graphs are not typically
-      used to show percentages.
     status: stable
     icons_used: false
     react_rendered: true
@@ -237,33 +222,19 @@ kits:
     description: Bar graphs are used to compare data. Bar graphs are not typically
       used to show percentages.
     platforms: *1
-    status: beta
-    icons_used: false
-    react_rendered: true
-    enhanced_element_used: false
-  - name: circle_chart
-    platforms: *1
-    description:
     status: stable
     icons_used: false
     react_rendered: true
     enhanced_element_used: false
   - name: pb_circle_chart
     platforms: web
-    status: beta
-    icons_used: false
-    react_rendered: true
-    enhanced_element_used: false
-  - name: line_graph
-    platforms: *1
-    description: Line graphs are used to show changes in data over time.
     status: stable
     icons_used: false
     react_rendered: true
     enhanced_element_used: false
   - name: pb_line_graph
     platforms: web
-    status: beta
+    status: stable
     icons_used: false
     react_rendered: true
     enhanced_element_used: false
@@ -633,6 +604,13 @@ kits:
     icons_used: false
     react_rendered: false
     enhanced_element_used: false
+  - name: time_picker
+    platforms: web
+    description: A time picker component that allows users to select a time independently of the date.
+    status: beta
+    icons_used: true
+    react_rendered: true
+    enhanced_element_used: true
 - category: icons_and_images
   description: ''
   components:

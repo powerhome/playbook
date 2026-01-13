@@ -11,6 +11,7 @@
     <%= text_area(
         :object,
         :method,
+        :data => object.textarea_options[:data],
         :max_characters => object.max_characters,
         :name => object.name,
         :onkeyup => object.onkeyup,

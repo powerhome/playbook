@@ -10,6 +10,11 @@ import {
     TableCell,
 } from "./subcomponents";
 import { addDataTitle } from './utilities/addDataTitle'
+import Card from '../pb_card/_card'
+import Flex from '../pb_flex/_flex'
+import Title from '../pb_title/_title'
+import SectionSeparator from '../pb_section_separator/_section_separator'
+import Filter from '../pb_filter/_filter'
 
 type TableProps = {
     aria?: { [key: string]: string },
@@ -21,10 +26,13 @@ type TableProps = {
     data?: { [key: string]: string },
     dataTable: boolean,
     disableHover?: boolean,
+    filterProps?: { [key: string]: any },
+    filterContent?: any,
     headerStyle?: "default" | "borderless" | "floating"
     htmlOptions?: { [key: string]: string | number | boolean | (() => void) },
     id?: string,
     outerPadding?: "none" | "xxs" | "xs" | "sm" | "md" | "lg" | "xl",
+    pagination?: React.ReactElement,
     responsive?: "collapse" | "scroll" | "none",
     singleLine?: boolean,
     size?: "sm" | "md" | "lg",
@@ -33,24 +41,32 @@ type TableProps = {
     stickyRightColumn?: string[],
     striped?: boolean,
     tag?: "table" | "div",
+    title?: string,
+    variant?: "default" | "withFilter",
     verticalBorder?: boolean,
 } & GlobalProps
+
+type AllSizes = "none" | "xxs" | "xs" | "sm" | "md" | "lg" | "xl" | "xxl" | "auto" | "initial" | "inherit"
 
 const Table = (props: TableProps): React.ReactElement => {
     const {
         aria = {},
+        variant = 'default',
         children,
         className,
-        collapse = 'sm',
+        collapse = variant === 'withFilter' ? 'md' : 'sm',
         container = true,
         dark,
         data = {},
         dataTable = false,
         disableHover = false,
+        filterProps = {},
+        filterContent,
         headerStyle = "default",
         htmlOptions = {},
         id,
         outerPadding = '',
+        pagination,
         responsive = 'collapse',
         singleLine = false,
         size = 'sm',
@@ -59,6 +75,7 @@ const Table = (props: TableProps): React.ReactElement => {
         stickyRightColumn= [],
         striped = false,
         tag = 'table',
+        title,
         verticalBorder = false,
     } = props
 
@@ -73,12 +90,15 @@ const Table = (props: TableProps): React.ReactElement => {
     const dynamicInlineProps = globalInlineProps(props)
     const stickyRightColumnReversed = stickyRightColumn.reverse()
 
+    const isFilterVariant = variant === 'withFilter'
+    const effectiveContainer = isFilterVariant ? false : container
+
     const classNames = classnames(
         'pb_table',
         `table-${size}`,
         `table-responsive-${responsive}`,
         {
-            'table-card': container,
+            'table-card': effectiveContainer,
             'table-dark': dark,
             'data_table': dataTable,
             'single-line': singleLine,
@@ -205,36 +225,11 @@ const Table = (props: TableProps): React.ReactElement => {
         addDataTitle()
     }, [])
 
-    return (
-        <>
-            {responsive === 'scroll' ? (
-                <div className='table-responsive-scroll'>
-                    {isTableTag ? (
-                        <table
-                            {...ariaProps}
-                            {...dataProps}
-                            {...htmlProps}
-                            className={classNames}
-                            id={id}
-                            style={dynamicInlineProps}
-                        >
-                            {children}
-                        </table>
-                    ) : (
-                        <div
-                            {...ariaProps}
-                            {...dataProps}
-                            {...htmlProps}
-                            className={classNames}
-                            id={id}
-                            style={dynamicInlineProps}
-                        >
-                            {children}
-                        </div>
-                    )}
-                </div>
-            ) : (
-                isTableTag ? (
+// ------------ Default Table (non-filter variant rendering) ------------
+    const renderTable = () => {
+        const tableElement = responsive === 'scroll' ? (
+            <div className='table-responsive-scroll'>
+                {isTableTag ? (
                     <table
                         {...ariaProps}
                         {...dataProps}
@@ -256,8 +251,167 @@ const Table = (props: TableProps): React.ReactElement => {
                     >
                         {children}
                     </div>
-                )
-            )}
+                )}
+            </div>
+        ) : (
+            isTableTag ? (
+                <table
+                    {...ariaProps}
+                    {...dataProps}
+                    {...htmlProps}
+                    className={classNames}
+                    id={id}
+                    style={dynamicInlineProps}
+                >
+                    {children}
+                </table>
+            ) : (
+                <div
+                    {...ariaProps}
+                    {...dataProps}
+                    {...htmlProps}
+                    className={classNames}
+                    id={id}
+                    style={dynamicInlineProps}
+                >
+                    {children}
+                </div>
+            )
+        )
+
+        return tableElement
+    }
+// ------------ End Default Table (non-filter variant rendering) ------------
+
+// ------------ variant = 'withFilter' rendering  ------------
+    const renderCardVariant = () => {
+        // Render table element
+        const tableElement = responsive === 'scroll' ? (
+            <div className='table-responsive-scroll'>
+                {isTableTag ? (
+                    <table
+                        {...ariaProps}
+                        {...dataProps}
+                        {...htmlProps}
+                        className={classNames}
+                        id={id}
+                        style={dynamicInlineProps}
+                    >
+                        {children}
+                    </table>
+                ) : (
+                    <div
+                        {...ariaProps}
+                        {...dataProps}
+                        {...htmlProps}
+                        className={classNames}
+                        id={id}
+                        style={dynamicInlineProps}
+                    >
+                        {children}
+                    </div>
+                )}
+            </div>
+        ) : (
+            isTableTag ? (
+                <table
+                    {...ariaProps}
+                    {...dataProps}
+                    {...htmlProps}
+                    className={classNames}
+                    id={id}
+                    style={dynamicInlineProps}
+                >
+                    {children}
+                </table>
+            ) : (
+                <div
+                    {...ariaProps}
+                    {...dataProps}
+                    {...htmlProps}
+                    className={classNames}
+                    id={id}
+                    style={dynamicInlineProps}
+                >
+                    {children}
+                </div>
+            )
+        )
+
+        // Default filter props that CAN be overridden (All props from Filter kit CAN be used, but these are the ones we set as defaults)
+        const defaultFilterProps = {
+            background: false,
+            maxHeight: "50vh",
+            minWidth: "xs",
+            popoverProps: { width: "350px" },
+        }
+
+        // Merge default props with user-provided props (user props override defaults)
+        const mergedFilterProps = { ...defaultFilterProps, ...filterProps }
+
+        return (
+            <>
+                {title && (
+                    <Title         
+                        paddingLeft={{
+                            xs: "sm",
+                            sm: "sm",
+                            md: "xl",
+                            lg: "xl",
+                            xl: "xl",
+                            default: "xl",
+                        } as any}
+                        paddingY="md"
+                        size={3}
+                        text={title} 
+                    />
+                )}
+                <Card
+                    marginX={{
+                        xs: "sm",
+                        sm: "sm",
+                        md: "xl",
+                        lg: "xl",
+                        xl: "xl",
+                        default: "xl",
+                    } as any}
+                    padding="none"
+                >
+                    <Flex
+                        align="stretch"
+                        flexDirection="column"
+                        gap="none"
+                    >
+                        {filterContent && (
+                            <Filter {...mergedFilterProps}>
+                                {filterContent}
+                            </Filter>
+                        )}
+                        {filterContent && <SectionSeparator />}
+                        {pagination && (
+                            <>
+                                {pagination}
+                                <SectionSeparator />
+                            </>
+                        )}
+                        {tableElement}
+                        {pagination && (
+                            <>
+                                {pagination}
+                            </>
+                        )}
+                    </Flex>
+                </Card>
+            </>
+        )
+    }
+// ------------ End variant = 'withFilter' rendering  ------------
+
+
+
+    return (
+        <>
+            {isFilterVariant ? renderCardVariant() : renderTable()}
         </>
     )
 }

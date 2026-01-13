@@ -1,7 +1,7 @@
 import React from 'react'
 import { render, screen } from '../utilities/test-utils'
 
-import { PbLineGraph } from 'playbook-ui'
+import PbLineGraph from './_pb_line_graph'
 
 beforeEach(() => {
   // Silences error logs within the test suite.

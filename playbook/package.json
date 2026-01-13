@@ -1,9 +1,27 @@
 {
   "name": "playbook-ui",
-  "version": "15.6.0",
+  "version": "16.0.0",
   "description": "Nitro's Design System",
   "main": "./dist/playbook.js",
   "types": "./dist/types/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/types/index.d.ts",
+      "import": "./dist/playbook.js",
+      "require": "./dist/playbook.js",
+      "default": "./dist/playbook.js"
+    },
+    "./charts": {
+      "types": "./dist/types/charts.d.ts",
+      "import": "./dist/charts.js",
+      "require": "./dist/charts.js",
+      "default": "./dist/charts.js"
+    },
+    "./dist/playbook.css": "./dist/playbook.css",
+    "./dist/reset.css": "./dist/reset.css",
+    "./dist/*": "./dist/*",
+    "./fonts/*": "./fonts/*"
+  },
   "scripts": {
     "flow": "flow",
     "lint": "eslint . --ext .js,.jsx",
@@ -38,8 +56,6 @@
     "@popperjs/core": "^2.11.8",
     "classnames": "2.5.1",
     "flatpickr": "^4.6.13",
-    "highcharts": "^11.4.8",
-    "highcharts-react-official": "^3.2.1",
     "intl-tel-input": "^24.7.0"
   },
   "devDependencies": {
@@ -70,6 +86,8 @@
     "eslint-plugin-react-hooks": "4.6.0",
     "eslint-webpack-plugin": "2.7.0",
     "filemanager-webpack-plugin": "4.0.0",
+    "highcharts": "^11.4.8",
+    "highcharts-react-official": "^3.2.1",
     "identity-obj-proxy": "3.0.0",
     "jest": "26.6.3",
     "jest-axe": "4.1.0",
@@ -98,7 +116,17 @@
     "react-dom": "^17.0.2",
     "react-is": "^17.0.2",
     "react-trix": "0.10.1",
-    "trix": "2.1.15"
+    "trix": "2.1.15",
+    "highcharts": "^11.0.0",
+    "highcharts-react-official": "^3.0.0"
+  },
+  "peerDependenciesMeta": {
+    "highcharts": {
+      "optional": true
+    },
+    "highcharts-react-official": {
+      "optional": true
+    }
   },
   "resolutions": {
     "react": "^17.0.2",

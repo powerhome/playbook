@@ -344,3 +344,72 @@ test('does not add autocomplete attribute otherwise', () => {
   const input = within(kit).getByRole('textbox')
   expect(input).not.toHaveAttribute("autocomplete")
 })
+
+test('renders required indicator asterisk when requiredIndicator is true', () => {
+  render(
+    <TextInput
+        data={{ testid: testId }}
+        label="Email Address"
+        requiredIndicator
+    />
+  )
+
+  const kit = screen.getByTestId(testId)
+  const label = within(kit).getByText(/Email Address/)
+  
+  expect(label).toBeInTheDocument()
+  expect(kit).toHaveTextContent('*') 
+})
+
+const TextInputEmojiMask = (props) => {
+  const [value, setValue] = useState('')
+  const handleOnChange = ({ target }) => {
+    setValue(target.value)
+  }
+
+  return (
+    <TextInput
+        emojiMask
+        onChange={handleOnChange}
+        value={value}
+        {...props}
+    />
+  )
+}
+
+test('removes emoji characters when emojiMask is enabled', () => {
+  render(
+    <TextInputEmojiMask
+        data={{ testid: testId }}
+    />
+  )
+
+  const kit = screen.getByTestId(testId)
+  const input = within(kit).getByRole('textbox')
+
+  fireEvent.change(input, { target: { value: 'Hello 👋 World 🌍' } })
+  expect(input.value).toBe('Hello  World ')
+
+  fireEvent.change(input, { target: { value: '😀😂🎉' } })
+  expect(input.value).toBe('')
+
+  fireEvent.change(input, { target: { value: 'Hello World' } })
+  expect(input.value).toBe('Hello World')
+})
+
+test('allows accented characters when emojiMask is enabled', () => {
+  render(
+    <TextInputEmojiMask
+        data={{ testid: testId }}
+    />
+  )
+
+  const kit = screen.getByTestId(testId)
+  const input = within(kit).getByRole('textbox')
+
+  fireEvent.change(input, { target: { value: 'Café résumé naïve' } })
+  expect(input.value).toBe('Café résumé naïve')
+
+  fireEvent.change(input, { target: { value: 'àëǒüñ' } })
+  expect(input.value).toBe('àëǒüñ')
+})

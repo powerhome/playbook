@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Card, Body, Icon, Flex, usePBCopy, Tooltip } from "playbook-ui";
 
 type ExampleCodeCardTypes = {
@@ -7,6 +7,7 @@ type ExampleCodeCardTypes = {
   copyIcon?: boolean;
   marginBottom?: string;
 };
+
 const ExampleCodeCard = ({
   text,
   id,
@@ -23,38 +24,50 @@ const ExampleCodeCard = ({
     setTimeout(() => setShowTooltip(false), 1500);
   };
 
-  useEffect(() => {
-    const el = document.getElementById(id);
-    if (!el) return;
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      handleCopy();
+    }
+  };
 
-    el.addEventListener("click", handleCopy);
-    return () => {
-      el.removeEventListener("click", handleCopy);
-    };
-  }, [copyToClipboard]);
+  if (!copyIcon) {
+    return (
+      <Flex alignItems="center" gap="xxs" marginBottom={marginBottom || undefined}>
+        <Card background="light" borderNone borderRadius="sm" padding="xxs">
+          <Body>{text}</Body>
+        </Card>
+      </Flex>
+    );
+  }
 
   return (
     <Flex
-      cursor={copyIcon ? "pointer" : "default"}
       alignItems="center"
+      cursor="pointer"
       gap="xxs"
-      htmlOptions={{ onClick: () => copyIcon && handleCopy() }}
-      marginBottom={ marginBottom || undefined }
+      htmlOptions={{
+        "aria-label": `Copy ${text} to clipboard`,
+        onClick: handleCopy,
+        onKeyDown: handleKeyDown,
+        role: "button",
+        tabIndex: 0,
+      }}
+      inline="flex"
+      marginBottom={marginBottom || undefined}
     >
       <Card borderRadius="sm" background="light" padding="xxs" borderNone>
         <Body id={id}>{text}</Body>
       </Card>
-      {copyIcon && (
-        <Tooltip
-          delay={{ close: 1000 }}
-          forceOpenTooltip={showTooltip}
-          placement="top"
-          showTooltip={false}
-          text="Copied!"
-        >
-          <Icon icon="clipboard" color="light" />
-        </Tooltip>
-      )}
+      <Tooltip
+        delay={{ close: 1000 }}
+        forceOpenTooltip={showTooltip}
+        placement="top"
+        showTooltip={false}
+        text="Copied!"
+      >
+        <Icon aria={{ hidden: true }} color="light" icon="clipboard" />
+      </Tooltip>
     </Flex>
   );
 };

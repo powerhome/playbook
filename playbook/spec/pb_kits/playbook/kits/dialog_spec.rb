@@ -16,6 +16,9 @@ RSpec.describe Playbook::PbDialog::Dialog do
       .with_values("left", "right", "center")
       .with_default("center")
   }
+
+  it { is_expected.to define_prop(:closeable).with_default(true) }
+
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
       expect(subject.new({}).classname).to eq "pb_dialog pb_dialog_rails pb_dialog_md_center"

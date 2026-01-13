@@ -54,14 +54,15 @@ const PopoverAppendTo = (props) => {
         <Body text="Click info for more details" />
         &nbsp;
         <PbReactPopover
-            appendTo=".kit-show-wrapper"
+            appendTo=".pb--page--sideNav"
             offset
             placement="top"
             reference={selectorPopoverReference}
             show={showSelectorPopover}
+            zIndex={10}
             {...props}
         >
-          {'I\'m a popover. I have been appended to the .kit-show-wrapper.'}
+          {'I\'m a popover. I have been appended to the .pb--page--sideNav.'}
         </PbReactPopover>
       </Flex>
     </>

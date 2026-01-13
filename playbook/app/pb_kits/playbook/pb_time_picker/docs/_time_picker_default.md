@@ -1,0 +1,1 @@
+Use the Time Picker for time-only selection. For date and time selection, use the [DatePicker with Time Selection Enabled](https://playbook.powerapp.cloud/kits/date_picker/react#time-selection) instead.

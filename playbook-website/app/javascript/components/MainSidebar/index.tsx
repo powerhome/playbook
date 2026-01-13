@@ -5,6 +5,7 @@ import { TopLevelNavItem } from "./TopLevelNavItems";
 import PBLogo from "../../images/pb-logo.svg";
 import KitSearch from "../KitSearch";
 import FlyingGhosts from "./FlyingGhosts";
+import SantaFrog from "./SantaFrog";
 
 const MainSidebar = ({
   dark,
@@ -33,6 +34,17 @@ const MainSidebar = ({
     const month = today.getMonth(); // 0-indexed, so October is 9
     const date = today.getDate();
     return month === 9 && date >= 25 && date <= 31;
+  };
+  // --------------------------------------------------------
+
+  // ---------------Christmas only----------------------------
+  // Check fi we are in last two weeks of December (Dec 17-31)
+  // Add special Christmas decorations during this time!
+  const isChristmasTime = () => {
+    const today = new Date();
+    const month = today.getMonth(); // 0-indexed, so December is 11
+    const date = today.getDate();
+    return month === 11 && date >= 17 && date <= 31;
   };
   // --------------------------------------------------------
 
@@ -76,6 +88,7 @@ const MainSidebar = ({
         position="relative"
       >
         {isHalloweenWeek() && <FlyingGhosts />}
+        {isChristmasTime() && <SantaFrog />}
         <a href={"/"}>
           <Image alt="Playbook logo" url={PBLogo} />
         </a>

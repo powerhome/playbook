@@ -129,3 +129,17 @@ test('renders loading dialog with disabled buttons', async () => {
 
   cleanup()
 })
+
+test('renders dialog without close button when closeable is false', async () => {
+
+  const { queryByText, container } = render(<DialogTest closeable={false} />);
+
+  fireEvent.click(queryByText('Open Dialog'));
+
+  await waitFor(() => expect(queryByText("Header Title is the Title Prop")));
+
+  const closeBtn = container.querySelector('.pb_dialog_close_icon');
+  expect(closeBtn).not.toBeInTheDocument();
+
+  cleanup()
+})

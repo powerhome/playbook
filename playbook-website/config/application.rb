@@ -27,8 +27,16 @@ module PlaybookWebsite
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.0
 
-    config.icon_path = Rails.env.production? ? "app/javascript/images/" : "../node_modules/@powerhome/playbook-icons/icons"
-    config.icon_alias_path = Rails.env.production? ? "app/javascript/aliases.json" : "../node_modules/@powerhome/playbook-icons/aliases.json"
+    config.icon_path = if Rails.env.development?
+                         "../node_modules/@powerhome/playbook-icons/icons"
+                       else
+                         "app/javascript/images/"
+                       end
+    config.icon_alias_path = if Rails.env.development?
+                               "../node_modules/@powerhome/playbook-icons/aliases.json"
+                             else
+                               "app/javascript/aliases.json"
+                             end
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files

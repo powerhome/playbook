@@ -1,0 +1,296 @@
+@import "../tokens/typography";
+@import "../tokens/spacing";
+@import "../tokens/colors";
+@import "../tokens/border_radius";
+@import "../tokens/shadows";
+@import "../tokens/positioning";
+@import "../pb_body/body_mixins";
+
+.pb_time_picker {
+  > label {
+    cursor: pointer;
+    display: block;
+  }
+
+  .time_picker_wrapper {
+    position: relative;
+  }
+
+  .text_input_wrapper_add_on .add-on-card {
+    transition: background-color 0.3s ease-in-out 0s;
+    border-color: $border_light;
+  }
+
+  .text_input_wrapper_add_on:focus-within .add-on-card {
+    transition: background-color 0.3s ease-in-out 0s, border-color 0.15s ease-in-out 0s;
+    border-color: $primary;
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      .text_input_wrapper_add_on .add-on-card {
+        cursor: pointer;
+        background-color: rgba($focus_input_light, $opacity_5);
+      }
+    }
+  }
+
+  .text_input_wrapper_add_on .add-on-right .text_input {
+    cursor: pointer;
+  }
+
+  &.error {
+    .text_input_wrapper_add_on .add-on-card {
+      border-color: $error;
+    }
+    
+    .text_input_wrapper_add_on:focus-within .add-on-card {
+      transition: background-color 0.3s ease-in-out 0s, border-color 0.15s ease-in-out 0s;
+      border-color: $error;
+    }
+  }
+
+  &.disabled {
+    > label {
+      cursor: not-allowed;
+    }
+
+    .text_input_wrapper_add_on .add-on-card {
+      background-color: shade($white, 5%);
+      cursor: not-allowed;
+      opacity: 0.5;
+    }
+
+    .text_input_wrapper_add_on .add-on-right .text_input {
+      cursor: not-allowed;
+    }
+
+  }
+
+  .pb_time_picker_container {
+    position: absolute;
+    top: 100%;
+    background-color: $white;
+    overflow: visible;
+    box-shadow: $shadow_deep;
+    border-radius: $border_rad_heavier;
+    border: 1px solid $border_light;
+    margin-top: $space_xxs;
+    z-index: $z_1;
+    width: 314.2px;
+
+    &.pb_time_picker_container_24hour {
+      width: 170.4px;
+    }
+
+    .pb_time_selection {
+      color: inherit;
+      text-align: left;
+      margin: $space_sm;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+
+      .time_input_wrapper {
+        position: relative;
+        display: inline-flex;
+        flex-direction: column;
+        align-items: flex-start;
+
+        > label {
+          margin-bottom: $space_xxs;
+          cursor: pointer;
+        }
+
+        input.time_input {
+          border: 1px solid $border_light;
+          border-radius: $border_radius_md;
+          text-align: center;
+          width: 60px;
+          margin-left: 0;
+          padding: $space_xs;
+          height: 45px;
+          font-size: 14px;
+          font-weight: $bolder;
+          background-color: $white;
+          cursor: pointer;
+          transition: border-color 0.2s ease, background-color 0.2s ease;
+          color: $text_lt_default;
+
+          appearance: textfield;
+          -moz-appearance: textfield;
+          &::-webkit-outer-spin-button,
+          &::-webkit-inner-spin-button {
+            appearance: none;
+            -webkit-appearance: none;
+            margin: 0;
+          }
+
+          &:focus {
+            border-color: $primary;
+            outline: none;
+          }
+
+          &:hover {
+            background-color: $focus_input_light;
+          }
+
+          &.invalid {
+            border-color: $error;
+            background-color: rgba($error, 0.05);
+          }
+        }
+
+        // Time Selection Dropdowns
+        .time_dropdown {
+          position: absolute;
+          top: 100%;
+          left: 0;
+          background-color: $white;
+          border: 1px solid $border_light;
+          border-radius: $border_rad_heavier;
+          box-shadow: $shadow_deep;
+          margin-top: $space_xxs;
+          max-height: 200px;
+          overflow-y: auto;
+          overflow-x: hidden;
+          z-index: $z_1;
+          width: 60px;
+
+          // Firefox Scrollbar Styles
+          scrollbar-width: thin;
+          scrollbar-color: rgba($text_lt_lighter, 0.5) transparent;
+
+          // Chrome/Safari/Edge (WebKit) Scrollbar Styles
+          &::-webkit-scrollbar {
+            width: 6px;
+          }
+          &::-webkit-scrollbar-track {
+            background: transparent;
+          }
+          &::-webkit-scrollbar-thumb {
+            background-color: rgba($text_lt_lighter, 0.5);
+            border-radius: 3px;
+            
+            &:hover {
+              background-color: rgba($text_lt_lighter, 0.7);
+            }
+          }
+
+          .time_dropdown_option {
+            @include pb_body;
+            padding: $space_xs $space_sm;
+            text-align: center;
+            cursor: pointer;
+            transition: background-color 0.15s ease;
+            white-space: nowrap;
+
+            &:hover {
+              background-color: $bg_light;
+            }
+
+            &.selected {
+              background-color: $primary;
+              color: $white;
+
+              &:hover {
+                background-color: $product_1_background;
+              }
+            }
+          }
+        }
+      }
+
+      .time_range_error {
+        width: 100%;
+        flex-basis: 100%;
+        .time_range_error_text {
+          color: $error;
+        }
+      }
+      .pb_caption_kit_xs {
+        clear: both;
+        display: block;
+        width: 100%;
+        flex-basis: 100%;
+      }
+      .time-separator {
+        padding: 20px 6px 0 6px;
+        font-size: 14px;
+        font-weight: $bolder;
+      }
+      .meridiem {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        margin-left: $space_md;
+        
+        > .time_input_label {
+          margin-bottom: $space_xxs;
+        }
+        
+        .pb_form_group_kit {
+          margin-left: 0;
+          display: flex;
+          gap: 0;
+        }
+
+        .datePicker-AMPM {
+          display: none;
+        }
+        &:focus, &:hover {
+          background: transparent;
+        }
+
+        // Override SelectableCard's display:none to make radio inputs keyboard accessible using visually-hidden pattern to keep inputs focusable but not visible
+        .pb_selectable_card_kit_enabled,
+        .pb_selectable_card_kit_checked_enabled,
+        .pb_selectable_card_kit_disabled,
+        .pb_selectable_card_kit_checked_disabled {
+          > input[type="radio"] {
+            display: block;
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+          }
+
+          > input[type="radio"]:focus + label {
+            border-color: $primary;
+          }
+        }
+
+        .pb_selectable_card_kit_enabled > label,
+        .pb_selectable_card_kit_checked_enabled > label,
+        .pb_selectable_card_kit_disabled > label,
+        .pb_selectable_card_kit_checked_disabled > label {
+          padding: 0;
+          margin: 0;
+          width: 60px;
+          height: 45px;
+          text-align: center;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-weight: $bolder;
+        }
+
+        .disabled_meridiem > label,
+        .pb_selectable_card_kit_disabled > label,
+        .pb_selectable_card_kit_checked_disabled > label {
+          opacity: 0.5;
+          cursor: not-allowed;
+          background-color: $bg_light;
+          &:hover {
+            background-color: $bg_light;
+          }
+        }
+      }
+    }
+  }
+}
