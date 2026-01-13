@@ -1,6 +1,6 @@
 import { NavLink, useLoaderData, useParams } from "react-router-dom"
 import { Body, Flex, Title, Card, Button, Caption } from "playbook-ui"
-import { useState } from "react"
+import { useState, useMemo } from "react"
 import ReactMarkdown from 'react-markdown'
 
 import { Hero } from "../../components/Hero"
@@ -12,6 +12,20 @@ const KitShow = () => {
   const { name, platform } = useParams()
   const loaderData = useLoaderData() as any
   const { kits, examples } = loaderData
+  // Prepare example props for advanced_table examples
+  const exampleProps = useMemo(() => {
+    const isAdvancedTable = loaderData?.kit === "advanced_table"
+    if (!isAdvancedTable) return {}
+    
+    return {
+      // Provide datasets to examples under expected variable names
+      MOCK_DATA: loaderData.table_data || [],
+      MOCK_DATA_WITH_ID: loaderData.table_data_with_id || [],
+      MOCK_DATA_NO_SUBROWS: loaderData.table_data_no_subrows || [],
+      PAGINATION_MOCK_DATA: loaderData.table_data_pagination || [],
+      INFINITE_SCROLL_MOCK_DATA: loaderData.table_data_infinite_scroll || [],
+    }
+  }, [loaderData])
 
   // Find which category this kit belongs to
   const kitCategory = kits?.find((category: { components: any[] }) => 
@@ -67,7 +81,7 @@ const KitShow = () => {
         </Flex>
 
         <Title 
-          text={`${linkFormat(name)} Component`}
+          text={`${linkFormat(name)}`}
           size={2}
           marginBottom="md"
         />
@@ -87,6 +101,7 @@ const KitShow = () => {
                   />
                   <LiveExample
                     code={example.source}
+                    exampleProps={exampleProps}
                   />
                   {
                     example.description && example.description !== "" && (
