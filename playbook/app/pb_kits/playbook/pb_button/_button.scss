@@ -116,10 +116,8 @@ $pb_button_sizes: (
   // Icon-only button (icon prop set, no text) - square with equal padding
   // Rails: uses .pb_button_icon_only class
   // React: detects when pb_button_content has an empty text span
-  // React loading: detects when loading and no pb_button_content
   &.pb_button_icon_only,
-  &:has(.pb_button_content > span:empty),
-  &.pb_button_loading:not(:has(.pb_button_content)) {
+  &:has(.pb_button_content > span:empty) {
     aspect-ratio: 1;
     min-width: auto;
     width: auto;

@@ -51,9 +51,12 @@ const buttonClassName = (props: ButtonPropTypes) => {
     type = 'inline',
     variant = 'primary',
     size = null,
+    text,
+    children,
   } = props
 
   const classNames = ['pb_button_kit']
+  const isIconOnly = icon && !text && !children
 
   if (variant) classNames.push(`pb_button_${variant}`)
   if (type) classNames.push(`pb_button_${type}`)
@@ -63,6 +66,7 @@ const buttonClassName = (props: ButtonPropTypes) => {
   if (size) classNames.push(`pb_button_size_${size}`)
   if (variant === 'reaction' && icon && !isValidEmoji(icon)) classNames.push('pb_button_reaction_default')
   if (variant === 'reaction' && highlight) classNames.push('pb_button_active')
+  if (isIconOnly) classNames.push('pb_button_icon_only')
 
   return classNames.join(' ')
 }
