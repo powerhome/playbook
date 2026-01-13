@@ -33,11 +33,11 @@ function Website() {
           kits_with_status={kits_with_status || kits}
           PBversion={PBversion || "Latest"}
           search_list={search_list || []}
-          getting_started={getting_started || []}
+          getting_started={getting_started || { pages: [] }}
           global_props_and_tokens={global_props_and_tokens || []}
-          design_guidelines={design_guidelines || []}
+          design_guidelines={design_guidelines || { pages: [] }}
           icons={icons || []}
-          whats_new={whats_new || []}
+          whats_new={whats_new || { pages: [] }}
           beta={true}
         />
       </Layout.Side>
