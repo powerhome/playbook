@@ -1,7 +1,6 @@
 examples:
   rails:
   - button_default: Button Variants
-  - button_icon_variant: Icon Button Variant
   - button_reaction: Reaction Button
   - button_full_width: Button Full Width
   - button_link: Button Links
@@ -14,10 +13,10 @@ examples:
   - button_form: Button Form Attribute
   - button_managed_disabled: Button Toggle Disabled State
   - button_managed_disabled_helper: Button Toggle Disabled State Helper
+  - button_icon_variant: Icon Button Variant
   
   react:
   - button_default: Button Variants
-  - button_icon_variant: Icon Button Variant
   - button_reaction: Reaction Button
   - button_full_width: Button Full Width
   - button_link: Button Links
@@ -29,6 +28,7 @@ examples:
   - button_size: Button Size
   - button_form: Button Form Attribute
   - button_hover: Button Hover
+  - button_icon_variant: Icon Button Variant
 
   swift:
   - button_default_swift: Button Variants
