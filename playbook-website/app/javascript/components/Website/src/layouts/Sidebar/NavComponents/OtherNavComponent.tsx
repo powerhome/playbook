@@ -28,7 +28,7 @@ export const OtherNavItems = ({
   const buildingBlocksMenu = building_blocks?.BuildingBlocks?.map((item) => ({
     name: item.name,
     link: createLink(`/building_blocks/${item.link}`),
-  }))
+  })) || []
 
   let menuItems: { [key: string]: string }[] | string[] = []
 
@@ -64,12 +64,12 @@ export const OtherNavItems = ({
     }
     
     return menuItem
-  }).sort((a, b) => a.name.localeCompare(b.name))
+  }).sort((a, b) => a.name.localeCompare(b.name)) || []
 
   const tokensMenu = global_props_and_tokens?.tokens?.map((item: Record<string, any>) => ({
     name: item.replace(/_/g, ' ').replace(/\b\w/g, (char: string) => char.toUpperCase()),
     link: createLink(`/tokens/${item}`),
-  })).sort((a, b) => a.name.localeCompare(b.name))
+  })).sort((a, b) => a.name.localeCompare(b.name)) || []
 
   //conditionally render navitems depending on name
   if (name === "Global Props") {

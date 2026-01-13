@@ -64,6 +64,12 @@ export const CategoryLoader: (
   return filteredData;
 };
 
+export const GuidesLoader = async () => {
+  const response = await fetch("/beta/kits.json");
+  const data = await response.json();
+  return data;
+};
+
 export const GuidePageLoader = async ({ params }: any) => {
   const guidePath = params.page;
   const guideType = window.location.pathname.includes('getting_started') ? 'getting_started' : 'design_guidelines';

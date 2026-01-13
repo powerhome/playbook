@@ -19,7 +19,7 @@ import Color from './Website/src/pages/DesignGuidelines/Color'
 import Spacing from './Website/src/pages/DesignGuidelines/Spacing'
 import Typography from './Website/src/pages/DesignGuidelines/Typography'
 import Error from './Error'
-import { CategoryLoader, ComponentsLoader, ComponentShowLoader, GuidePageLoader } from './Website/src/hooks/loaders'
+import { CategoryLoader, ComponentsLoader, ComponentShowLoader, GuidesLoader, GuidePageLoader } from './Website/src/hooks/loaders'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -71,7 +71,7 @@ const router = createBrowserRouter(
       />
       <Route
           element={<GettingStarted />}
-          loader={ComponentsLoader}
+          loader={GuidesLoader}
           path="guides/getting_started"
       />
       <Route
@@ -81,22 +81,22 @@ const router = createBrowserRouter(
       />
       <Route
           element={<DesignGuidelines />}
-          loader={ComponentsLoader}
+          loader={GuidesLoader}
           path="guides/design_guidelines"
       />
       <Route
           element={<Color />}
-          loader={ComponentsLoader}
+          loader={GuidesLoader}
           path="guides/design_guidelines/color"
       />
       <Route
           element={<Spacing />}
-          loader={ComponentsLoader}
+          loader={GuidesLoader}
           path="guides/design_guidelines/spacing"
       />
       <Route
           element={<Typography />}
-          loader={ComponentsLoader}
+          loader={GuidesLoader}
           path="guides/design_guidelines/typography"
       />
       <Route
