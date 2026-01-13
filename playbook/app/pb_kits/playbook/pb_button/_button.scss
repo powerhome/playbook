@@ -122,17 +122,22 @@ $pb_button_sizes: (
     min-width: auto;
     width: auto;
     height: auto;
+    padding: $pb_button_v_padding !important;
+    min-height: ($pb_button_v_padding * 2) + $font_small;
     
-    @each $name, $size in $pb_button_sizes {
-      &.pb_button_size_#{$name} {
-        padding: $size !important;
-        min-height: ($size * 2) + $size;
-      }
+    &.pb_button_size_sm {
+      padding: $font_smaller !important;
+      min-height: ($font_smaller * 2) + $font_smaller;
     }
     
-    &:not([class*="pb_button_size_"]) {
-      padding: $pb_button_v_padding !important;
-      min-height: ($pb_button_v_padding * 2) + $font_small;
+    &.pb_button_size_md {
+      padding: $font_small !important;
+      min-height: ($font_small * 2) + $font_small;
+    }
+    
+    &.pb_button_size_lg {
+      padding: ($font_large - 2px) !important;
+      min-height: (($font_large - 2px) * 2) + ($font_large - 2px);
     }
 
     // Remove margins from icons
@@ -142,8 +147,7 @@ $pb_button_sizes: (
       margin-left: 0;
     }
 
-    > span > [class*="mr_xs"],
-    > span > [class*="ml_xs"],
+    // Remove margins from Rails icon wrapper spans
     > span {
       margin-right: 0 !important;
       margin-left: 0 !important;
