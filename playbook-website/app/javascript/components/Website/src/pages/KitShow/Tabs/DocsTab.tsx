@@ -48,49 +48,47 @@ export const DocsTab = ({
 
   // Helper function to render an example card
   const renderExampleCard = (example: any) => (
-    <Card
-      key={example.example_key}
-      marginBottom="lg"
-      padding="none"
-      width="100%"
-      id={example.example_key}
-    >
-      <Caption text={example.title} margin="md" />
-      <LiveExample code={example.source} exampleProps={exampleProps} />
-      {example.description && example.description !== "" && (
-        <Body margin="md">
-          <ReactMarkdown>{example.description}</ReactMarkdown>
-        </Body>
-      )}
-      {/* Code Section */}
-      <>
-        <Flex justify="end" align="center" marginBottom="sm">
-          <Button
-            text={copyState[example.example_key] ? "Copied!" : "Copy Code"}
-            variant="link"
-            size="sm"
-            icon="copy"
-            onClick={() => copyCode(example.source, example.example_key)}
-            marginRight="sm"
-          />
-          <Button
-            text={visibleCode[example.example_key] ? "Hide Code" : "Show Code"}
-            variant="link"
-            size="sm"
-            icon="code"
-            onClick={() => toggleCode(example.example_key)}
-          />
-        </Flex>
-
-        {visibleCode[example.example_key] && (
-          <Card borderNone width="100%">
-            <pre className="highlight">
-              <code>{example.source}</code>
-            </pre>
-          </Card>
+    <div id={example.example_key} key={example.example_key}>
+      <Card marginBottom="lg" padding="none" width="100%">
+        <Caption text={example.title} margin="md" />
+        <LiveExample code={example.source} exampleProps={exampleProps} />
+        {example.description && example.description !== "" && (
+          <Body margin="md">
+            <ReactMarkdown>{example.description}</ReactMarkdown>
+          </Body>
         )}
-      </>
-    </Card>
+        {/* Code Section */}
+        <>
+          <Flex justify="end" align="center" marginBottom="sm">
+            <Button
+              text={copyState[example.example_key] ? "Copied!" : "Copy Code"}
+              variant="link"
+              size="sm"
+              icon="copy"
+              onClick={() => copyCode(example.source, example.example_key)}
+              marginRight="sm"
+            />
+            <Button
+              text={
+                visibleCode[example.example_key] ? "Hide Code" : "Show Code"
+              }
+              variant="link"
+              size="sm"
+              icon="code"
+              onClick={() => toggleCode(example.example_key)}
+            />
+          </Flex>
+
+          {visibleCode[example.example_key] && (
+            <Card borderNone width="100%">
+              <pre className="highlight">
+                <code>{example.source}</code>
+              </pre>
+            </Card>
+          )}
+        </>
+      </Card>
+    </div>
   );
 
   // Organize examples by sections or show all if no sections

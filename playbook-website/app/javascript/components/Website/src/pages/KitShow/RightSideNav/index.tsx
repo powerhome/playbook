@@ -11,6 +11,13 @@ interface RightSideNavProps {
 }
 
 const RightSideNav = ({ examples, sections }: RightSideNavProps) => {
+  const handleClick = (id: string) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
+
   // Render nav items organized by sections or show all if no sections
   const renderNavItems = () => {
     if (sections && sections.length > 0) {
@@ -21,20 +28,26 @@ const RightSideNav = ({ examples, sections }: RightSideNavProps) => {
 
         if (sectionExamples.length === 0) return null;
 
+        const sectionId = section.title.toLowerCase().replace(/\s+/g, "-");
+
         return (
           <div key={section.title}>
-            <Caption
-              text={section.title}
-              marginY="xs"
-            />
+            <div onClick={() => handleClick(sectionId)}>
+              <Caption cursor="pointer" text={section.title} marginY="xs" />
+            </div>
             {sectionExamples.map((example: any) => (
-              <Caption
-                size="xs"
-                text={example.title}
+              <div
                 key={example.example_key}
-                marginLeft="xs"
-                color="light"
-              />
+                onClick={() => handleClick(example.example_key)}
+              >
+                <Caption
+                  size="xs"
+                  text={example.title}
+                  marginLeft="xs"
+                  color="light"
+                  cursor="pointer"
+                />
+              </div>
             ))}
           </div>
         );
@@ -42,7 +55,12 @@ const RightSideNav = ({ examples, sections }: RightSideNavProps) => {
     } else {
       // No sections, render all examples without section headers
       return examples.map((example: any) => (
-        <Caption size="xs" text={example.title} key={example.example_key} />
+        <div
+          key={example.example_key}
+          onClick={() => handleClick(example.example_key)}
+        >
+          <Caption size="xs" text={example.title} cursor="pointer" />
+        </div>
       ));
     }
   };
