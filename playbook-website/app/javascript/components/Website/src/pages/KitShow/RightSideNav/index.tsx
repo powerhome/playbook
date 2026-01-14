@@ -25,16 +25,14 @@ const RightSideNav = ({ examples, sections }: RightSideNavProps) => {
           <div key={section.title}>
             <Caption
               text={section.title}
-              marginBottom="xs"
-              marginTop="sm"
-              tag="h3"
+              marginY="xs"
             />
             {sectionExamples.map((example: any) => (
               <Caption
                 size="xs"
                 text={example.title}
                 key={example.example_key}
-                marginLeft="sm"
+                marginLeft="xs"
                 color="light"
               />
             ))}
