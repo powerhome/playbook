@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { NavLink, useLoaderData } from "react-router-dom"
 import { Body, Flex } from "playbook-ui"
 
@@ -22,6 +22,11 @@ export default function CategoryShow() {
   const { components, category, description } = useLoaderData() as LoaderData
   const [kitsToShow, setKitsToShow] = useState(components)
   const [platform, setPlatform] = useState('react')
+
+  // Update kitsToShow when components data changes from navigation (fix for bug where filtered kits would persist between categories)
+  useEffect(() => {
+    setKitsToShow(components)
+  }, [components])
 
   return (
     <>
