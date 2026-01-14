@@ -4,6 +4,7 @@ import PBLogo from "../../../../images/pb-logo.svg";
 import KitSearch from "../../../KitSearch";
 import { PlatformToggle } from "../components/PlatformToggle";
 import DarkModeToggle from "../components/DarkModeToggle";
+import "./header.scss";
 
 interface HeaderProps {
   dark?: boolean;
@@ -60,13 +61,13 @@ const Header = ({
           <FlexItem>
             <Flex
               orientation="row"
-              align="center"
+              align="stretch"
               paddingTop="xs"
               paddingBottom="xs"
               gap="md"
             >
               <KitSearch
-                classname="desktop-kit-search"
+                classname="desktop-kit-search-new"
                 id="desktop-kit-search"
                 kits={search_list}
                 global_props_and_tokens={global_props_and_tokens}

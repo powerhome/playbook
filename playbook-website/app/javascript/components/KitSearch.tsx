@@ -79,7 +79,6 @@ const KitSearch = ({ classname, id, kits, global_props_and_tokens, marginBottom 
   )
 
   return (
-    <div>
       <Typeahead
         className={classname}
         dark={document.cookie.split("; ").includes("dark_mode=true")}
@@ -96,7 +95,6 @@ const KitSearch = ({ classname, id, kits, global_props_and_tokens, marginBottom 
           return <>{option.label}</>
         }}
       />
-    </div>
   )
 }
 
