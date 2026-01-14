@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Body, Flex, Card, Button, Caption } from "playbook-ui";
 import ReactMarkdown from "react-markdown";
-import LiveExample from "../../components/LiveExamples/LiveExampleReact";
+import LiveExample from "../../../components/LiveExamples/LiveExampleReact";
 
 interface DocsTabProps {
   examples: any[];

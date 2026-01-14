@@ -5,10 +5,10 @@ import ReactMarkdown from "react-markdown";
 
 import { PageContainer } from "../../components/PageContainer";
 import { linkFormat } from "../../../../../utilities/website_sidebar_helper";
-import { DocsTab } from "./DocsTab";
-import { PropsTab } from "./PropsTab";
-import { BuildingBlocksTab } from "./BuildingBlocksTab";
-import { ReferencesTab } from "./ReferencesTab";
+import { DocsTab } from "./Tabs/DocsTab";
+import { PropsTab } from "./Tabs/PropsTab";
+import { BuildingBlocksTab } from "./Tabs/BuildingBlocksTab";
+import { ReferencesTab } from "./Tabs/ReferencesTab";
 
 const KitShow = () => {
   const { name } = useParams();
