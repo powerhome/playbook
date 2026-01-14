@@ -38,5 +38,5 @@ const MultipleUsersWithTooltip = (props) => {
         </div>
     )
 }
-``
+
 export default MultipleUsersWithTooltip
