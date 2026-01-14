@@ -1,4 +1,4 @@
-import { Flex, Icon, Nav, NavItem, Body } from "playbook-ui";
+import { Flex, Icon, Nav, NavItem } from "playbook-ui";
 import { ReactSVG } from "./ReactSVG";
 import { RailsSVG } from "./RailsSVG";
 import { SwiftSVG } from "./SwiftSVG";

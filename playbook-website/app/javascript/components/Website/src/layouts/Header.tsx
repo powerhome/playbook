@@ -3,6 +3,7 @@ import { Flex, Image, Badge, SectionSeparator, FlexItem } from "playbook-ui";
 import PBLogo from "../../../../images/pb-logo.svg";
 import KitSearch from "../../../KitSearch";
 import { PlatformToggle } from "../components/PlatformToggle";
+import DarkModeToggle from "../components/DarkModeToggle";
 
 interface HeaderProps {
   dark?: boolean;
@@ -23,8 +24,8 @@ const Header = ({
 }: HeaderProps) => {
   return (
     <>
-      <Flex orientation="row" align="center" paddingX="md">
-        {/* Logo and Version Badge */}
+      <Flex orientation="row" align="center" paddingRight="md">
+        {/* Start Logo and Version Badge */}
         <FlexItem fixedSize="250px">
           <Flex
             orientation="row"
@@ -32,6 +33,7 @@ const Header = ({
             gap="sm"
             paddingTop="xs"
             paddingBottom="xxs"
+            paddingLeft="md"
           >
             <a href={"/"}>
               <Image alt="Playbook logo" url={PBLogo} />
@@ -45,27 +47,35 @@ const Header = ({
             />
           </Flex>
         </FlexItem>
-        {/* React/Rails/Swift Toggle */}
-        <FlexItem marginLeft="xl">
-          <PlatformToggle 
-            platform={platform}
-            setPlatform={setPlatform}
-          />
-        </FlexItem>
-        {/* Search Bar */}
-        <Flex
-          orientation="row"
-          align="center"
-          paddingTop="xs"
-          paddingBottom="xs"
-        >
-          <KitSearch
-            classname="desktop-kit-search"
-            id="desktop-kit-search"
-            kits={search_list}
-            global_props_and_tokens={global_props_and_tokens}
-            marginBottom="none"
-          />
+        {/* End Logo and Version Badge */}
+
+        <Flex justify="between" align="center" width="100%">
+          {/* Start React/Rails/Swift Toggle */}
+          <FlexItem paddingLeft="xl">
+            <PlatformToggle platform={platform} setPlatform={setPlatform} />
+          </FlexItem>
+          {/* End React/Rails/Swift Toggle */}
+
+          {/* Start Search Bar + dark mode toggle */}
+          <FlexItem>
+            <Flex
+              orientation="row"
+              align="center"
+              paddingTop="xs"
+              paddingBottom="xs"
+              gap="md"
+            >
+              <KitSearch
+                classname="desktop-kit-search"
+                id="desktop-kit-search"
+                kits={search_list}
+                global_props_and_tokens={global_props_and_tokens}
+                marginBottom="none"
+              />
+              <DarkModeToggle initMode={dark} />
+            </Flex>
+          </FlexItem>
+          {/* End Search Bar + dark mode toggle */}
         </Flex>
       </Flex>
       <SectionSeparator width="100%" />
