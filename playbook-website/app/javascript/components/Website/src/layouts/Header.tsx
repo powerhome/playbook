@@ -25,7 +25,11 @@ const Header = ({
 }: HeaderProps) => {
   return (
     <>
-      <Flex orientation="row" align="center" paddingRight="md">
+      <Flex 
+        orientation="row" 
+        align="center"
+        display={{ xs: "none", sm: "none", md: "none", lg: "flex" }}
+      >
         {/* Start Logo and Version Badge */}
         <FlexItem fixedSize="250px">
           <Flex
@@ -34,7 +38,7 @@ const Header = ({
             gap="sm"
             paddingTop="xs"
             paddingBottom="xxs"
-            paddingLeft="md"
+            paddingX="md"
           >
             <a href={"/"}>
               <Image alt="Playbook logo" url={PBLogo} />
@@ -58,7 +62,7 @@ const Header = ({
           {/* End React/Rails/Swift Toggle */}
 
           {/* Start Search Bar + dark mode toggle */}
-          <FlexItem>
+          <FlexItem paddingRight="md">
             <Flex
               orientation="row"
               align="stretch"
