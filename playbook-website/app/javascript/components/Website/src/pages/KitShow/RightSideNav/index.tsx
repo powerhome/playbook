@@ -1,48 +1,24 @@
-import {
-  Background,
-  Caption,
-  Nav,
-  NavItem,
-} from "playbook-ui"
-import { linkFormat } from '../../../../../../utilities/website_sidebar_helper'
+import { Caption, Flex } from "playbook-ui";
 
 interface RightSideNavProps {
-  examples: any[]
+  examples: any[];
 }
 
 const RightSideNav = ({ examples }: RightSideNavProps) => {
   return (
-    <Background
-      backgroundColor="white"
-      className="right-side-nav"
-      display={{ xs: "none", sm: "none", md: "none", lg: "block" }}
-      paddingTop="xl"
-      position="sticky"
-      style={{ 
-        width: "206px", 
-        top: "20px", 
-        height: "fit-content",
-        flexShrink: 0
-      }}
+    <Flex
+      display={{ xs: "none", sm: "none", md: "none", lg: "none", xl: "flex" }}
+      flexDirection="column"
+      marginLeft="lg"
+      width="206px"
+      shrink
     >
-      <Caption
-        marginBottom="sm"
-        paddingX="md"
-        text="On This Page"
-        size="xs"
-      />
-      <Nav variant="subtle">
-        {examples && examples.map((example: any, index: number) => (
-          <NavItem
-            key={index}
-            link={`#${example.name}`}
-            text={linkFormat(example.name)}
-            fontSize="sm"
-          />
+      {examples &&
+        examples.map((example: any, index: number) => (
+          <Caption size="xs" text={example.title} key={index} />
         ))}
-      </Nav>
-    </Background>
-  )
-}
+    </Flex>
+  );
+};
 
-export default RightSideNav
+export default RightSideNav;

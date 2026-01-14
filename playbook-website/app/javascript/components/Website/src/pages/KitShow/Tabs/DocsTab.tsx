@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Body, Flex, Card, Button, Caption } from "playbook-ui";
 import ReactMarkdown from "react-markdown";
 import LiveExample from "../../../components/LiveExamples/LiveExampleReact";
+import RightSideNav from "../RightSideNav";
 
 interface DocsTabProps {
   examples: any[];
@@ -35,71 +36,68 @@ export const DocsTab = ({ examples, exampleProps, name }: DocsTabProps) => {
   };
 
   return (
-    <>
-      {examples && examples.length > 0 ? (
-        <>
-          {examples.map((example: any) => (
-            <Card
-              key={example.example_key}
-              marginBottom="lg"
-              padding="none"
-            >
-              <Caption text={example.title} margin="md" />
-              <LiveExample
-                code={example.source}
-                exampleProps={exampleProps}
-              />
-              {example.description && example.description !== "" && (
-                <Body margin="md">
-                  <ReactMarkdown>{example.description}</ReactMarkdown>
-                </Body>
-              )}
-              {/* Code Section */}
-              <>
-                <Flex justify="end" align="center" marginBottom="sm">
-                  <Button
-                    text={
-                      copyState[example.example_key]
-                        ? "Copied!"
-                        : "Copy Code"
-                    }
-                    variant="link"
-                    size="sm"
-                    icon="copy"
-                    onClick={() =>
-                      copyCode(example.source, example.example_key)
-                    }
-                    marginRight="sm"
-                  />
-                  <Button
-                    text={
-                      visibleCode[example.example_key]
-                        ? "Hide Code"
-                        : "Show Code"
-                    }
-                    variant="link"
-                    size="sm"
-                    icon="code"
-                    onClick={() => toggleCode(example.example_key)}
-                  />
-                </Flex>
-
-                {visibleCode[example.example_key] && (
-                  <Card borderNone width="100%">
-                    <pre className="highlight">
-                      <code>{example.source}</code>
-                    </pre>
-                  </Card>
+    <Flex>
+      <Flex flexDirection="column" flex={1} minWidth={0} overflow="auto">
+        {examples && examples.length > 0 ? (
+          <>
+            {examples.map((example: any) => (
+              <Card key={example.example_key} marginBottom="lg" padding="none" width="100%">
+                <Caption text={example.title} margin="md" />
+                <LiveExample
+                  code={example.source}
+                  exampleProps={exampleProps}
+                />
+                {example.description && example.description !== "" && (
+                  <Body margin="md">
+                    <ReactMarkdown>{example.description}</ReactMarkdown>
+                  </Body>
                 )}
-              </>
-            </Card>
-          ))}
-        </>
-      ) : (
-        <Card padding="md">
-          <Body text={`No examples found for ${name} component.`} />
-        </Card>
-      )}
-    </>
+                {/* Code Section */}
+                <>
+                  <Flex justify="end" align="center" marginBottom="sm">
+                    <Button
+                      text={
+                        copyState[example.example_key] ? "Copied!" : "Copy Code"
+                      }
+                      variant="link"
+                      size="sm"
+                      icon="copy"
+                      onClick={() =>
+                        copyCode(example.source, example.example_key)
+                      }
+                      marginRight="sm"
+                    />
+                    <Button
+                      text={
+                        visibleCode[example.example_key]
+                          ? "Hide Code"
+                          : "Show Code"
+                      }
+                      variant="link"
+                      size="sm"
+                      icon="code"
+                      onClick={() => toggleCode(example.example_key)}
+                    />
+                  </Flex>
+
+                  {visibleCode[example.example_key] && (
+                    <Card borderNone width="100%">
+                      <pre className="highlight">
+                        <code>{example.source}</code>
+                      </pre>
+                    </Card>
+                  )}
+                </>
+              </Card>
+            ))}
+          </>
+        ) : (
+          <Card padding="md">
+            <Body text={`No examples found for ${name} component.`} />
+          </Card>
+        )}
+      </Flex>
+      <RightSideNav examples={examples} />
+    </Flex>
   );
 };

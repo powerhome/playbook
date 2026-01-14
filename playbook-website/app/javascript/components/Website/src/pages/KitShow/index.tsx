@@ -69,12 +69,11 @@ const KitShow = () => {
             onClick={() => setActiveTab("references")}
           />
         </Nav>
-
         {/* Docs Tab Content */}
         {activeTab === "docs" && (
-          <DocsTab 
-            examples={examples} 
-            exampleProps={exampleProps} 
+          <DocsTab
+            examples={examples}
+            exampleProps={exampleProps}
             name={name}
           />
         )}
