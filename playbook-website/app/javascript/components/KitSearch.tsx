@@ -13,6 +13,7 @@ type KitSearchProps = {
   kits: Kit[],
   id: string,
   global_props_and_tokens?: Record<string, any>,
+  marginBottom?: string,
 }
 
 const combineKitsandVisualGuidelines = (
@@ -34,7 +35,7 @@ const combineKitsandVisualGuidelines = (
   return [...kits, ...globalPropsItems, ...tokensItems].sort((a, b) => a.label.localeCompare(b.label))
 }
 
-const KitSearch = ({ classname, id, kits, global_props_and_tokens }: KitSearchProps) => {
+const KitSearch = ({ classname, id, kits, global_props_and_tokens, marginBottom }: KitSearchProps) => {
   const kitsAndGuidelines = combineKitsandVisualGuidelines(kits, global_props_and_tokens)
 
   const [filteredKits, setFilteredKits] = useState(kitsAndGuidelines)
@@ -83,6 +84,7 @@ const KitSearch = ({ classname, id, kits, global_props_and_tokens }: KitSearchPr
         className={classname}
         dark={document.cookie.split("; ").includes("dark_mode=true")}
         id={id}
+        marginBottom={marginBottom || 'sm'}
         onChange={handleChange}
         onInputChange={handleFilteredKits}
         options={filteredKits}

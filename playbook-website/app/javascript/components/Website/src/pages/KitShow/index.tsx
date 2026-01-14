@@ -1,17 +1,16 @@
-import { NavLink, useLoaderData, useParams } from "react-router-dom"
+import { useLoaderData, useParams } from "react-router-dom"
 import { Body, Flex, Title, Card, Button, Caption } from "playbook-ui"
 import { useState, useMemo } from "react"
 import ReactMarkdown from 'react-markdown'
 
-import { Hero } from "../../components/Hero"
 import { PageContainer } from "../../components/PageContainer"
 import { linkFormat } from "../../../../../utilities/website_sidebar_helper"
 import LiveExample from "../../components/LiveExamples/LiveExampleReact"
 
 const KitShow = () => {
-  const { name, platform } = useParams()
+  const { name } = useParams()
   const loaderData = useLoaderData() as any
-  const { kits, examples } = loaderData
+  const { examples, kit_description } = loaderData
   // Prepare example props for advanced_table examples
   const exampleProps = useMemo(() => {
     const isAdvancedTable = loaderData?.kit === "advanced_table"
@@ -27,10 +26,6 @@ const KitShow = () => {
     }
   }, [loaderData])
 
-  // Find which category this kit belongs to
-  const kitCategory = kits?.find((category: { components: any[] }) => 
-    category.components?.some(component => component.name === name)
-  )
 
   const [visibleCode, setVisibleCode] = useState<{ [key: string]: boolean }>({})
   const [copyState, setCopyState] = useState<{ [key: string]: boolean }>({})
@@ -56,35 +51,17 @@ const KitShow = () => {
 
   return (
     <>
-      <Hero 
-        title={`${linkFormat(name)} (${platform})`} 
-        description={`Documentation for the ${linkFormat(name)} component`}
-      />
-      
       <PageContainer>
-        <Flex align="center" className="category-breadcrumb" marginBottom="md">
-          <NavLink to="/beta/kits">
-            <Body className="previous-route" color="link"><b>Components</b></Body>
-          </NavLink>
-          <Body marginX="xxs" text="/" />
-          {kitCategory && (
-            <>
-              <NavLink to={`/beta/kit_category/${kitCategory.category}`}>
-                <Body className="previous-route" color="link">
-                  <b>{linkFormat(kitCategory.category)}</b>
-                </Body>
-              </NavLink>
-              <Body marginX="xxs" text="/" />
-            </>
-          )}
-          <Body><b>{linkFormat(name)}</b></Body>
-        </Flex>
-
         <Title 
           text={`${linkFormat(name)}`}
-          size={2}
-          marginBottom="md"
+          size={1}
+          marginBottom={kit_description ? undefined : "md"}
         />
+        {kit_description && kit_description !== "" && (
+          <Body marginTop="sm" marginBottom="md">
+            <ReactMarkdown>{kit_description}</ReactMarkdown>
+          </Body>
+        )}
 
         {/* Render Examples via react-live */}
         {examples && examples.length > 0 ? (

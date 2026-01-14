@@ -73,6 +73,9 @@ class PagesController < ApplicationController
 
     @css = view_context.vite_asset_path("site_styles/main.scss")
 
+    # Read kit description from _description.md file
+    kit_description = read_kit_file("_description.md")
+
     # first example from each kit
     examples = @examples.map do |example|
       example_key = example.keys.first.to_s
@@ -130,6 +133,7 @@ class PagesController < ApplicationController
           type: @type,
           examples: examples,
           kit: @kit,
+          kit_description: kit_description,
           params: @params,
           category: @category,
           css: @css,

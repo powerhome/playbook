@@ -8,12 +8,11 @@ export const PageContainer = ({ children }: PageContainerProps) => {
   return (
     <Flex
       align="stretch"
-      gap="lg"
       maxWidth="xxl"
       marginX="auto"
       orientation="column"
-      paddingX="sm"
-      paddingBottom="lg"
+      paddingX="xl"
+      marginY="lg"
     >
       {children}
     </Flex>
