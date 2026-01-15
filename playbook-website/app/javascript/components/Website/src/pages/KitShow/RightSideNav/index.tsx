@@ -1,5 +1,5 @@
 import { Caption, Flex, colors, spacing } from "playbook-ui";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 interface Section {
   title: string;
@@ -13,6 +13,17 @@ interface RightSideNavProps {
 
 const RightSideNav = ({ examples, sections }: RightSideNavProps) => {
   const [activeId, setActiveId] = useState<string>("");
+  const navItemsRef = useRef<{ [key: string]: HTMLDivElement | null }>({});
+
+  // Scroll active nav item into view if the nav is too long to fit the page
+  useEffect(() => {
+    if (activeId && navItemsRef.current[activeId]) {
+      navItemsRef.current[activeId]?.scrollIntoView({
+        behavior: "smooth",
+        block: "nearest",
+      });
+    }
+  }, [activeId]);
 
   // Set up IntersectionObserver to track which example is in view to render 'active' state
   useEffect(() => {
@@ -74,6 +85,7 @@ const RightSideNav = ({ examples, sections }: RightSideNavProps) => {
             {sectionExamples.map((example: any) => (
               <div
                 key={example.example_key}
+                ref={(el) => (navItemsRef.current[example.example_key] = el)}
                 onClick={() => handleClick(example.example_key)}
                 style={{
                   borderLeft: `3px solid ${
@@ -98,6 +110,7 @@ const RightSideNav = ({ examples, sections }: RightSideNavProps) => {
       return examples.map((example: any) => (
         <div
           key={example.example_key}
+          ref={(el) => (navItemsRef.current[example.example_key] = el)}
           onClick={() => handleClick(example.example_key)}
           style={{
             borderLeft: `3px solid ${
