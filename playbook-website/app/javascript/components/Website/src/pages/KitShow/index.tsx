@@ -47,7 +47,11 @@ const KitShow = () => {
                 <ReactMarkdown>{kit_description}</ReactMarkdown>
               </Body>
             </Flex>
-            <div style={{ width: "206px", flexShrink: 0 }} />
+            <Flex
+              display={{ xs: "none", sm: "none", md: "none", lg: "none", xl: "flex" }}
+              shrink
+              htmlOptions={{ style: { width: "206px"} }}
+            />
           </Flex>
         )}
 
