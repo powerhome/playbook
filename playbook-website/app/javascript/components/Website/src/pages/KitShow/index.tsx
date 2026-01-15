@@ -13,7 +13,7 @@ import { ReferencesTab } from "./Tabs/ReferencesTab";
 const KitShow = () => {
   const { name } = useParams();
   const loaderData = useLoaderData() as any;
-  const { examples, kit_description, kit_sections } = loaderData;
+  const { examples, kit_description, kit_sections, available_props } = loaderData;
 
   // Prepare example props for advanced_table examples
   const exampleProps = useMemo(() => {
@@ -89,7 +89,7 @@ const KitShow = () => {
         )}
 
         {/* Props Tab Content */}
-        {activeTab === "props" && <PropsTab />}
+        {activeTab === "props" && <PropsTab availableProps={available_props} />}
 
         {/* Building Blocks Tab Content */}
         {activeTab === "building-blocks" && <BuildingBlocksTab />}

@@ -79,6 +79,22 @@ class PagesController < ApplicationController
     # Read kit sections from _sections.yml file if it exists
     kit_sections = read_kit_sections
 
+    # Get available props for React kits
+    available_props = nil
+    if @type == "react"
+      begin
+        kit_example = Playbook::PbDocs::KitExample.new(
+          kit: @kit,
+          example_title: "Default",
+          example_key: @kit,
+          type: "react"
+        )
+        available_props = kit_example.available_props
+      rescue => e
+        Rails.logger.error("Error fetching available props: #{e.message}")
+      end
+    end
+
     # first example from each kit
     examples = @examples.map do |example|
       example_key = example.keys.first.to_s
@@ -138,6 +154,7 @@ class PagesController < ApplicationController
           kit: @kit,
           kit_description: kit_description,
           kit_sections: kit_sections,
+          available_props: available_props,
           params: @params,
           category: @category,
           css: @css,
