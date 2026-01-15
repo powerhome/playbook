@@ -2,6 +2,7 @@ import { Flex, Icon, Nav, NavItem } from "playbook-ui";
 import { ReactSVG } from "./ReactSVG";
 import { RailsSVG } from "./RailsSVG";
 import { SwiftSVG } from "./SwiftSVG";
+import "./styles.scss";
 
 type PlatformToggleProps = {
   platform: string;
@@ -26,9 +27,10 @@ export const PlatformToggle = ({
           active={platform === name}
           link="#"
           onClick={() => setPlatform(name)}
+          className="platform-toggle-item"
         >
           <Flex align="center" gap="xs">
-            <Icon customIcon={<PlatformIcon active={platform === name} />} />
+            <Icon className="platformIcon" customIcon={<PlatformIcon active={platform === name} />} />
             <span className="pb_nav_list_item_text">{label}</span>
           </Flex>
         </NavItem>
