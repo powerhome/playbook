@@ -14,10 +14,11 @@ interface RightSideNavProps {
 const RightSideNav = ({ examples, sections }: RightSideNavProps) => {
   const [activeId, setActiveId] = useState<string>("");
   const navItemsRef = useRef<{ [key: string]: HTMLDivElement | null }>({});
+  const isManualScrollRef = useRef(false);
 
   // Scroll active nav item into view if the nav is too long to fit the page
   useEffect(() => {
-    if (activeId && navItemsRef.current[activeId]) {
+    if (activeId && navItemsRef.current[activeId] && !isManualScrollRef.current) {
       navItemsRef.current[activeId]?.scrollIntoView({
         behavior: "smooth",
         block: "nearest",
@@ -55,10 +56,15 @@ const RightSideNav = ({ examples, sections }: RightSideNavProps) => {
   }, [examples]);
 
   const handleClick = (id: string) => {
+    isManualScrollRef.current = true;
     const element = document.getElementById(id);
     if (element) {
       element.scrollIntoView({ behavior: "smooth", block: "start" });
     }
+    // Reset the flag after scroll completes
+    setTimeout(() => {
+      isManualScrollRef.current = false;
+    }, 1000);
   };
 
   // Render nav items organized by sections or show all if no sections
@@ -97,7 +103,7 @@ const RightSideNav = ({ examples, sections }: RightSideNavProps) => {
                 <Caption
                   size="xs"
                   text={example.title}
-                  color="light"
+                  color={activeId === example.example_key ? "link" : "light"}
                   cursor="pointer"
                 />
               </div>
@@ -119,7 +125,12 @@ const RightSideNav = ({ examples, sections }: RightSideNavProps) => {
             paddingLeft: spacing.space_xs,
           }}
         >
-          <Caption size="xs" text={example.title} cursor="pointer" />
+          <Caption 
+            size="xs" 
+            text={example.title} 
+            color={activeId === example.example_key ? "link" : "light"}
+            cursor="pointer" 
+          />
         </div>
       ));
     }
