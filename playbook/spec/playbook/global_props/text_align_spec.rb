@@ -12,12 +12,11 @@ require_relative "../../../app/pb_kits/playbook/pb_badge/badge"
 RSpec.describe Playbook::Flex do
   subject { Playbook::PbBody::Body }
 
-  # text_align values - basic values only (justifyAll and matchParent may not be supported in Rails)
   test_global_prop(
     :text_align,
-    %w[start end left right center justify],
-    ->(v) { "text_align_#{v}" },
-    responsive_pattern: ->(size, v) { "text_align_#{size}_#{v}" },
+    %w[start end left right center justify justify-all match-parent],
+    ->(v) { "text_align_#{v.underscore}" },
+    responsive_pattern: ->(size, v) { "text_align_#{size}_#{v.underscore}" },
     test_subjects: [
       Playbook::PbBody::Body,
       Playbook::PbButton::Button,
