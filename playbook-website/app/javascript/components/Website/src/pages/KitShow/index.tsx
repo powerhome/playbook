@@ -1,5 +1,5 @@
 import { useLoaderData, useParams } from "react-router-dom";
-import { Body, Title, Nav, NavItem } from "playbook-ui";
+import { Body, Title, Nav, NavItem, Flex } from "playbook-ui";
 import { useState, useMemo } from "react";
 import ReactMarkdown from "react-markdown";
 
@@ -41,9 +41,14 @@ const KitShow = () => {
           marginBottom={kit_description ? undefined : "md"}
         />
         {kit_description && kit_description !== "" && (
-          <Body marginTop="sm" marginBottom="md">
-            <ReactMarkdown>{kit_description}</ReactMarkdown>
-          </Body>
+          <Flex>
+            <Flex flex={1} minWidth={0}>
+              <Body marginTop="sm" marginBottom="md">
+                <ReactMarkdown>{kit_description}</ReactMarkdown>
+              </Body>
+            </Flex>
+            <div style={{ width: "206px", flexShrink: 0 }} />
+          </Flex>
         )}
 
         {/* Navigation Tabs */}

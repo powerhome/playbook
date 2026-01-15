@@ -48,7 +48,7 @@ export const DocsTab = ({
 
   // Helper function to render an example card
   const renderExampleCard = (example: any) => (
-    <div id={example.example_key} key={example.example_key}>
+    <div id={example.example_key} key={example.example_key} style={{ width: "100%" }}>
       <Card marginBottom="lg" padding="none" width="100%">
         <Caption text={example.title} margin="md" />
         <LiveExample code={example.source} exampleProps={exampleProps} />

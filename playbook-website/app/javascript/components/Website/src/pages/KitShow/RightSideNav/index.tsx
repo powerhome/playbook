@@ -70,7 +70,14 @@ const RightSideNav = ({ examples, sections }: RightSideNavProps) => {
       display={{ xs: "none", sm: "none", md: "none", lg: "none", xl: "flex" }}
       flexDirection="column"
       paddingLeft="lg"
-      htmlOptions={{ style: { width: "206px" } }}
+      position="sticky"
+      alignSelf="flex-start"
+      htmlOptions={{
+        style: {
+          width: "206px",
+          top: "20px",
+        },
+      }}
       shrink
     >
       {examples && renderNavItems()}
