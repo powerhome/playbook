@@ -106,6 +106,7 @@ export const DocsTab = ({
           <div
             key={section.title}
             id={section.title.toLowerCase().replace(/\s+/g, "-")}
+            style={{ width: "100%" }}
           >
             <Title
               color="light"
