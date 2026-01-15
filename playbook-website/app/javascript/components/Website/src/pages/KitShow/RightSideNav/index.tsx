@@ -31,9 +31,13 @@ const RightSideNav = ({ examples, sections }: RightSideNavProps) => {
         const sectionId = section.title.toLowerCase().replace(/\s+/g, "-");
 
         return (
-          <div key={section.title}>
+          <div key={section.title} style={{ marginBottom: "16px" }}>
             <div onClick={() => handleClick(sectionId)}>
-              <Caption cursor="pointer" text={section.title} marginY="xs" />
+              <Caption
+                cursor="pointer"
+                text={section.title}
+                marginBottom="xxs"
+              />
             </div>
             {sectionExamples.map((example: any) => (
               <div
