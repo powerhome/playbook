@@ -76,6 +76,8 @@ const RightSideNav = ({ examples, sections }: RightSideNavProps) => {
         style: {
           width: "206px",
           top: "20px",
+          maxHeight: "calc(100vh - 120px)",
+          overflowY: "auto",
         },
       }}
       shrink
