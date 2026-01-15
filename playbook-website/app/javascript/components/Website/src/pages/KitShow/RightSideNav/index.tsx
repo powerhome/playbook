@@ -1,5 +1,6 @@
-import { Caption, Flex, colors, spacing } from "playbook-ui";
+import { Caption, Flex, colors } from "playbook-ui";
 import { useState, useEffect, useRef } from "react";
+import "./styles.scss";
 
 interface Section {
   title: string;
@@ -80,7 +81,7 @@ const RightSideNav = ({ examples, sections }: RightSideNavProps) => {
         const sectionId = section.title.toLowerCase().replace(/\s+/g, "-");
 
         return (
-          <div key={section.title} style={{ marginBottom: "16px" }}>
+          <div key={section.title} style={{ marginBottom: "16px", width: "100%" }}>
             <div onClick={() => handleClick(sectionId)}>
               <Caption
                 cursor="pointer"
@@ -93,11 +94,11 @@ const RightSideNav = ({ examples, sections }: RightSideNavProps) => {
                 key={example.example_key}
                 ref={(el) => (navItemsRef.current[example.example_key] = el)}
                 onClick={() => handleClick(example.example_key)}
+                className="category-nav-item"
                 style={{
                   borderLeft: `3px solid ${
                     activeId === example.example_key ? colors.primary : colors.border_light
-                  }`,
-                  paddingLeft: spacing.space_xs,
+                  }`
                 }}
               >
                 <Caption
@@ -118,11 +119,11 @@ const RightSideNav = ({ examples, sections }: RightSideNavProps) => {
           key={example.example_key}
           ref={(el) => (navItemsRef.current[example.example_key] = el)}
           onClick={() => handleClick(example.example_key)}
+          className="category-nav-item"
           style={{
             borderLeft: `3px solid ${
               activeId === example.example_key ? colors.primary : colors.border_light
-            }`,
-            paddingLeft: spacing.space_xs,
+            }`
           }}
         >
           <Caption 
