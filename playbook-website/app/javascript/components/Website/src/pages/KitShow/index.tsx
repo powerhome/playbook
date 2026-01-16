@@ -1,5 +1,5 @@
 import { useLoaderData, useParams } from "react-router-dom";
-import { Body, Title, Nav, NavItem, Flex } from "playbook-ui";
+import { Body, Title, Nav, NavItem, Flex, SectionSeparator } from "playbook-ui";
 import { useState, useMemo } from "react";
 import ReactMarkdown from "react-markdown";
 
@@ -39,9 +39,10 @@ const KitShow = () => {
           text={`${linkFormat(name)}`}
           size={1}
           marginBottom={kit_description ? undefined : "md"}
+          paddingX="xl"
         />
         {kit_description && kit_description !== "" && (
-          <Flex>
+          <Flex paddingX="xl">
             <Flex flex={1} minWidth={0}>
               <Body marginTop="sm" marginBottom="md">
                 <ReactMarkdown>{kit_description}</ReactMarkdown>
@@ -56,7 +57,7 @@ const KitShow = () => {
         )}
 
         {/* Navigation Tabs */}
-        <Nav orientation="horizontal" marginBottom="md" extendedUnderline>
+        <Nav orientation="horizontal" paddingX="xl">
           <NavItem
             text="Docs"
             active={activeTab === "docs"}
@@ -78,6 +79,7 @@ const KitShow = () => {
             onClick={() => setActiveTab("references")}
           />
         </Nav>
+        <SectionSeparator marginBottom="lg" />
         {/* Docs Tab Content */}
         {activeTab === "docs" && (
           <DocsTab

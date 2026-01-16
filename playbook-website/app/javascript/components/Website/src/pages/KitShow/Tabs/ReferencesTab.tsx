@@ -1,9 +1,11 @@
-import { Body, Card } from "playbook-ui";
+import { Body, Card, Flex } from "playbook-ui";
 
 export const ReferencesTab = () => {
   return (
-    <Card padding="md">
-      <Body text="References coming soon..." />
-    </Card>
+    <Flex paddingX="xl" width="100%">
+      <Card padding="md" width="100%">
+        <Body text="References coming soon..." />
+      </Card>
+    </Flex>
   );
 };

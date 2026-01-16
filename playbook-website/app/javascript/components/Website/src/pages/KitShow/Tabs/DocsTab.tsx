@@ -114,7 +114,6 @@ export const DocsTab = ({
               size={3}
               bold={false}
               marginBottom="md"
-              marginTop="lg"
             />
             {sectionExamples.map(renderExampleCard)}
           </div>
@@ -127,7 +126,7 @@ export const DocsTab = ({
   };
 
   return (
-    <Flex>
+    <Flex paddingRight="xl" paddingLeft="md">
       <Flex flexDirection="column" flex={1} minWidth={0} overflow="auto">
         {examples && examples.length > 0 ? (
           <>{renderExamples()}</>

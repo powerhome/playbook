@@ -11,7 +11,6 @@ export const PageContainer = ({ children }: PageContainerProps) => {
       maxWidth="xxl"
       marginX="auto"
       orientation="column"
-      paddingX="xl"
       marginY="lg"
     >
       {children}

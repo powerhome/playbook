@@ -141,7 +141,7 @@ const RightSideNav = ({ examples, sections }: RightSideNavProps) => {
     <Flex
       display={{ xs: "none", sm: "none", md: "none", lg: "none", xl: "flex" }}
       flexDirection="column"
-      paddingLeft="lg"
+      marginLeft="xl"
       position="sticky"
       alignSelf="flex-start"
       htmlOptions={{
