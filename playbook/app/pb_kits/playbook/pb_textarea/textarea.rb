@@ -8,6 +8,8 @@ module Playbook
       prop :error
       prop :inline, type: Playbook::Props::Boolean,
                     default: false
+      prop :input_options, type: Playbook::Props::HashProp,
+                           default: {}
       prop :label
       prop :method
       prop :name
