@@ -1,4 +1,3 @@
-import React from 'react';
 
 type RailsSVGProps = {
 	active: boolean,
@@ -8,7 +7,7 @@ export const RailsSVG = ({ active }: RailsSVGProps) => {
 	const svgColor = active ? '#0056CF' : '#687887'
 
 	return (
-		<div className="filter-icon">
+		<div className="filter-icon" style={{height: '16px'}}>
 			<svg width="18" height="16" viewBox="0 0 25 23" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
 				<path d="M15.2969 0L15.566 1.19979L17.4054 1.15843L17.2257 0.0829274L15.2969 0Z" fill={svgColor} />
 				<path d="M11.1235 2.56303L10.0469 1.36345L11.5272 0.660156L12.6039 1.77702L11.1235 2.56303Z" fill={svgColor} />

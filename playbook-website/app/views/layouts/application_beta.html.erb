@@ -6,7 +6,6 @@
     <%= vite_javascript_tag(*@application_js) %>
   </head>
   <body class="<%= @body_class %> <%= controller_name %> <%= action_name%>">
-    <%= render 'layouts/mobile_nav'%>
     <div class="pb--page--dark-mode-toggle-mobile">
     </div>
       <%= react_component("Website") %>

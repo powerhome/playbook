@@ -1,0 +1,5 @@
+@import "playbook-tokens/colors";
+
+.platform-toggle-item:hover svg path {
+  fill: $primary;
+}

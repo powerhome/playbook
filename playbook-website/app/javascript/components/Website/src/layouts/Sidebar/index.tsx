@@ -1,8 +1,5 @@
-import { Nav, useCollapsible, Image, Badge, Flex } from "playbook-ui";
+import { Nav, useCollapsible } from "playbook-ui";
 import { TopLevelNavItem } from "./TopLevelNavItems";
-// @ts-ignore
-import PBLogo from "../../../../../images/pb-logo.svg";
-import KitSearch from "../../../../KitSearch";
 import FlyingGhosts from "./FlyingGhosts";
 
 const Sidebar = ({
@@ -11,8 +8,6 @@ const Sidebar = ({
   category,
   kit,
   kits_with_status,
-  PBversion,
-  search_list,
   building_blocks,
   getting_started,
   design_guidelines,
@@ -63,35 +58,8 @@ const Sidebar = ({
 
   return (
     <>
-      <Flex
-        orientation="row"
-        spacing="between"
-        align="center"
-        marginTop="lg"
-        marginX="sm"
-        position="relative"
-      >
-        {isHalloweenWeek() && <FlyingGhosts />}
-        <a href={"/"}>
-          <Image alt="Playbook logo" url={PBLogo} />
-        </a>
-        <Badge text={PBversion} dark={dark} variant="success" rounded />
-      </Flex>
-      <Flex
-        orientation="column"
-        align="stretch"
-        marginBottom="xxs"
-        marginTop="md"
-        marginX="sm"
-      >
-        <KitSearch
-          classname="desktop-kit-search"
-          id="desktop-kit-search"
-          kits={search_list}
-          global_props_and_tokens={global_props_and_tokens}
-        />
-      </Flex>
-      <Nav dark={dark} variant="bold" paddingTop="xxs">
+      {isHalloweenWeek() && <FlyingGhosts />}
+      <Nav dark={dark} variant="bold" paddingTop="md">
         <TopLevelNavItem
           dark={dark}
           type={type}

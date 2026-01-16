@@ -1,0 +1,68 @@
+sections:
+  - title: "Size & Density"
+    examples:
+      - table_sm
+      - table_md
+      - table_lg
+      - table_multiline
+      - table_single_line
+      - table_outer_padding
+
+  - title: "Layout & Structure"
+    examples:
+      - table_responsive_table
+      - table_with_subcomponents
+      - table_with_subcomponents_as_divs
+      - table_with_background_kit
+
+
+  - title: "Sticky & Positional Behaviors"
+    examples:
+      - table_sticky
+      - table_sticky_left_columns
+      - table_sticky_right_columns
+      - table_sticky_columns
+      - table_alignment_row
+      - table_alignment_column
+      - table_alignment_shift_row
+      - table_alignment_shift_data
+      - table_side_highlight
+      - table_container
+
+  - title: "Collapsible & Nested Behaviors"
+    examples:
+      - table_with_collapsible
+      - table_with_dynamic_collapsible
+      - table_with_collapsible_with_custom_click
+      - table_with_collapsible_with_custom_content
+      - table_with_collapsible_with_nested_rows
+      - table_with_collapsible_with_nested_table
+
+  - title: "Data Presentation"
+    examples:
+      - table_data_table
+      - table_vertical_border
+      - table_striped
+
+  - title: "Header Variants"
+    examples:
+      - table_header
+      - table_with_header_style_borderless
+      - table_with_header_style_floating
+
+  - title: "Interactive Tables"
+    examples:
+      - table_with_clickable_rows
+      - table_with_selectable_rows
+      - table_with_filter_variant
+      - table_with_filter_variant_with_pagination
+      - table_disable_hover
+
+  - title: "Table Actions"
+    examples:
+      - table_one_action
+      - table_two_actions
+      - table_two_plus_actions
+      - table_action_middle
+      - table_icon_buttons
+      

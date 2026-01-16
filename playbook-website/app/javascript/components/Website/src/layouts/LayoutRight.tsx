@@ -1,8 +1,7 @@
 import { Outlet, useLocation } from "react-router-dom"
 import { useEffect } from "react"
-import DarkModeToggle from "../components/DarkModeToggle.js"
 
-import { Background, Button, FlexItem, Flex } from "playbook-ui"
+import { Background, Button, Flex } from "playbook-ui"
 
 export default function LayoutRight({ dark }: { dark: string }) {
   const location = useLocation()
@@ -40,12 +39,6 @@ export default function LayoutRight({ dark }: { dark: string }) {
             text='Back to Legacy View'
             variant='link'
         />
-        <FlexItem
-            className='pb--page--dark-mode-toggle-desktop'
-            marginRight='md'
-        >
-          <DarkModeToggle initMode={dark} />
-        </FlexItem>
       </Flex>
       <Outlet />
     </Background>
