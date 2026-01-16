@@ -14,7 +14,7 @@
                   <%= object.render_select_all_checkbox %>
                 <% end %>
               <% end %>
-              <% if object.enable_toggle_expansion == "header" || object.enable_toggle_expansion == "all" %>
+              <% if object.show_toggle_all_button? %>
                 <% if loading %>
                   <div class="<%= object.loading ? 'loading-toggle-icon' : '' %>"></div>
                 <% else %>

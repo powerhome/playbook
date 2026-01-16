@@ -33,6 +33,8 @@ RSpec.describe Playbook::PbAdvancedTable::AdvancedTable do
   it { is_expected.to define_boolean_prop(:show_actions_bar).with_default(true) }
   it { is_expected.to define_array_prop(:actions).with_default([]) }
   it { is_expected.to define_boolean_prop(:scroll_bar_none).with_default(false) }
+  it { is_expected.to define_boolean_prop(:inline_row_loading).with_default(false) }
+  it { is_expected.to define_boolean_prop(:persist_toggle_expansion_button).with_default(false) }
 
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do

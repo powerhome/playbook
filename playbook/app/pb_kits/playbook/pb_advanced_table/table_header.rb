@@ -19,6 +19,12 @@ module Playbook
                              default: false
       prop :show_actions_bar, type: Playbook::Props::Boolean,
                               default: true
+      prop :inline_row_loading, type: Playbook::Props::Boolean,
+                                default: false
+      prop :persist_toggle_expansion_button, type: Playbook::Props::Boolean,
+                                             default: false
+      prop :table_data, type: Playbook::Props::Array,
+                        default: []
 
       def classname
         additional_classes = []
@@ -133,6 +139,20 @@ module Playbook
         return nil unless original_def
 
         original_def.dig(:column_styling, :header_font_color)
+      end
+
+      # Check if any row in the table has children
+      def has_any_sub_rows?
+        return false if table_data.blank?
+
+        table_data.any? { |row| row_has_children?(row) }
+      end
+
+      # Determines if the toggle-all button should be shown in the header based on inline row loading and persist toggle expansion button props
+      def show_toggle_all_button?
+        return false unless enable_toggle_expansion == "header" || enable_toggle_expansion == "all"
+
+        has_any_sub_rows? || (inline_row_loading && persist_toggle_expansion_button)
       end
 
       # Check if header has custom background color
@@ -316,6 +336,20 @@ module Playbook
           end
         end
         nil
+      end
+
+      # 2 inline row loading helper methods
+      def row_has_children?(row)
+        children = row_children_for(row)
+        children.present? && children.is_a?(::Array) && !children.empty?
+      end
+
+      def row_children_for(row)
+        if row.respond_to?(:children)
+          row.children
+        elsif row.respond_to?(:[])
+          row[:children] || row["children"]
+        end
       end
     end
   end

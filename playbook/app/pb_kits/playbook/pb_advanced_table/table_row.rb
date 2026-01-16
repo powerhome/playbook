@@ -33,6 +33,8 @@ module Playbook
                       default: false
       prop :immediate_parent_row_id, type: Playbook::Props::String,
                                      default: ""
+      prop :inline_row_loading, type: Playbook::Props::Boolean,
+                                default: false
 
       def data
         Hash(prop(:data)).merge(table_data_attributes)
@@ -183,6 +185,23 @@ module Playbook
           else
             "end"
           end
+        end
+      end
+
+      # Determines if the row should show an expand button (true if row has children or inline_row_loading true and row has empty children array)
+      def show_expand_button?
+        children = row_children
+        return true if children.present?
+        return true if inline_row_loading && children.is_a?(::Array) && children.empty?
+
+        false
+      end
+
+      def row_children
+        if row.respond_to?(:children)
+          row.children
+        elsif row.respond_to?(:[])
+          row[:children] || row["children"]
         end
       end
 

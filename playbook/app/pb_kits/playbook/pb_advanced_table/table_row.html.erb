@@ -32,7 +32,7 @@
                                     <%= object.render_row_checkbox %>
                                 <% end %>
                             <% end %>
-                            <% if object.row[:children].present? %>
+                            <% if object.show_expand_button? %>
                                 <button
                                     id="<%= "#{object.table_id}_#{object.row.object_id}" %>"
                                     class="gray-icon expand-toggle-icon"

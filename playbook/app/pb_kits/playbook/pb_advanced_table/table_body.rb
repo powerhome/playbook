@@ -25,6 +25,8 @@ module Playbook
                              default: false
       prop :row_styling, type: Playbook::Props::Array,
                          default: []
+      prop :inline_row_loading, type: Playbook::Props::Boolean,
+                                default: false
 
       def flatten_columns(columns)
         columns.flat_map do |col|
@@ -69,7 +71,24 @@ module Playbook
                                   end
 
         # Additional class and data attributes needed for toggle logic
-        output << pb_rails("advanced_table/table_row", props: { table_id: table_id, row: row, column_definitions: leaf_columns, depth: current_depth, collapsible_trail: collapsible_trail, classname: additional_classes, table_data_attributes: current_data_attributes, responsive: responsive, loading: loading, selectable_rows: selectable_rows, row_id: row[:id], enable_toggle_expansion: enable_toggle_expansion, row_styling: row_styling, last_row: last_row, immediate_parent_row_id: immediate_parent_row_id })
+        output << pb_rails("advanced_table/table_row", props: { table_id: table_id, row: row, column_definitions: leaf_columns, depth: current_depth, collapsible_trail: collapsible_trail, classname: additional_classes, table_data_attributes: current_data_attributes, responsive: responsive, loading: loading, selectable_rows: selectable_rows, row_id: row[:id], enable_toggle_expansion: enable_toggle_expansion, row_styling: row_styling, last_row: last_row, immediate_parent_row_id: immediate_parent_row_id, inline_row_loading: inline_row_loading })
+
+        # Render inline loading row when inline_row_loading is enabled and row has empty children
+        if inline_row_loading
+          children = row_children_for(row)
+          if children.is_a?(::Array) && children.empty?
+            max_depth = cell_accessors_length(column_definitions)
+            if current_depth < max_depth
+              loading_row_data_attributes = {
+                advanced_table_content: "#{new_ancestor_ids.join('-')}-loading",
+                row_depth: current_depth + 1,
+                row_parent: "#{table_id}_#{row.object_id}",
+                inline_loading_row: true,
+              }
+              output << render_inline_loading_row(leaf_columns.length, current_depth, loading_row_data_attributes)
+            end
+          end
+        end
 
         if row[:children].present?
           row[:children].each do |child_row|
@@ -102,6 +121,37 @@ module Playbook
         return "pinned-left" if index.zero? && responsive == "scroll"
 
         ""
+      end
+
+      # 3 helper methods for inline row loading
+      def render_inline_loading_row(column_count, depth, data_attributes)
+        padding_left = depth.zero? ? "0.5em" : "#{(depth + 1) * 2}em"
+
+        content_tag(:tr, class: "toggle-content inline-loading-row", data: data_attributes) do
+          content_tag(:td, colspan: column_count, style: "padding-left: #{padding_left}") do
+            pb_rails("loading_inline")
+          end
+        end
+      end
+
+      def row_children_for(row)
+        if row.respond_to?(:children)
+          row.children
+        elsif row.respond_to?(:[])
+          row[:children] || row["children"]
+        end
+      end
+
+      def cell_accessors_length(col_defs)
+        first_col = col_defs.first
+        return 0 unless first_col
+
+        accessors = if first_col.respond_to?(:cellAccessors)
+                      first_col.cellAccessors
+                    elsif first_col.respond_to?(:[])
+                      first_col[:cellAccessors] || first_col["cellAccessors"]
+                    end
+        accessors&.length || 0
       end
 
     private

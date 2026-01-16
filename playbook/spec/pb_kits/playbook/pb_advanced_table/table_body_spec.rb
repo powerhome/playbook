@@ -22,6 +22,7 @@ RSpec.describe Playbook::PbAdvancedTable::TableBody do
       .with_values("none", "scroll")
   }
   it { is_expected.to define_boolean_prop(:selectable_rows).with_default(false) }
+  it { is_expected.to define_boolean_prop(:inline_row_loading).with_default(false) }
 
   describe "#classname" do
     it "returns base class name" do
@@ -204,6 +205,89 @@ RSpec.describe Playbook::PbAdvancedTable::TableBody do
       expect(row_with_children).to have_key(:children)
       expect(row_with_children[:children]).to be_an(Array)
       expect(row_with_children[:children].length).to eq 2
+    end
+  end
+
+  describe "#row_children_for" do
+    let(:instance) { subject.new({}) }
+
+    context "with Hash row" do
+      it "returns children using symbol key" do
+        row = { name: "Parent", children: [{ name: "Child" }] }
+        expect(instance.row_children_for(row)).to eq [{ name: "Child" }]
+      end
+
+      it "returns children using string key" do
+        row = { "name" => "Parent", "children" => [{ "name" => "Child" }] }
+        expect(instance.row_children_for(row)).to eq [{ "name" => "Child" }]
+      end
+
+      it "returns nil when children key is absent" do
+        row = { name: "Leaf" }
+        expect(instance.row_children_for(row)).to be_nil
+      end
+
+      it "returns empty array when children is empty" do
+        row = { name: "Lazy", children: [] }
+        expect(instance.row_children_for(row)).to eq []
+      end
+    end
+
+    context "with OpenStruct row" do
+      it "returns children using method access" do
+        row = OpenStruct.new(name: "Parent", children: [OpenStruct.new(name: "Child")])
+        expect(instance.row_children_for(row).length).to eq 1
+      end
+
+      it "returns empty array when children is empty" do
+        row = OpenStruct.new(name: "Lazy", children: [])
+        expect(instance.row_children_for(row)).to eq []
+      end
+    end
+  end
+
+  describe "#cell_accessors_length" do
+    let(:instance) { subject.new({}) }
+
+    context "with Hash column definitions" do
+      it "returns length of cellAccessors using symbol key" do
+        col_defs = [{ accessor: "name", cellAccessors: %w[level1 level2] }]
+        expect(instance.cell_accessors_length(col_defs)).to eq 2
+      end
+
+      it "returns length of cellAccessors using string key" do
+        col_defs = [{ "accessor" => "name", "cellAccessors" => %w[level1 level2 level3] }]
+        expect(instance.cell_accessors_length(col_defs)).to eq 3
+      end
+
+      it "returns 0 when cellAccessors is absent" do
+        col_defs = [{ accessor: "name" }]
+        expect(instance.cell_accessors_length(col_defs)).to eq 0
+      end
+
+      it "returns 0 when column_definitions is empty" do
+        expect(instance.cell_accessors_length([])).to eq 0
+      end
+    end
+
+    context "with OpenStruct column definitions" do
+      it "returns length of cellAccessors using method access" do
+        col_defs = [OpenStruct.new(accessor: "name", cellAccessors: %w[level1 level2])]
+        expect(instance.cell_accessors_length(col_defs)).to eq 2
+      end
+    end
+  end
+
+  describe "#render_inline_loading_row" do
+    let(:instance) { subject.new({}) }
+
+    it "responds to method" do
+      expect(instance).to respond_to(:render_inline_loading_row)
+    end
+
+    it "accepts correct parameters" do
+      method = instance.method(:render_inline_loading_row)
+      expect(method.arity).to eq 3
     end
   end
 end

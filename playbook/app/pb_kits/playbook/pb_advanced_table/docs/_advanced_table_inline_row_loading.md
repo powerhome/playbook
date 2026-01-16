@@ -6,9 +6,9 @@ In the first Advanced Table in this code example, 2021 has an empty children arr
 This prop is set to `false` by default. 
 
 
-### persistToggleExpansion
+### persistToggleExpansionButton
 The `persistToggleExpansionButton` is a boolean prop that renders the toggle-all icon in the top left header cell for complex datasets with empty `children` arrays and advanced querying logic explained in the preceeding doc example. Your logic may require an additional query helper file to update data specifically from requerying via toggle all buttons.
 
 In the second and third Advanced Tables in this code example, all 3 rows have empty children arrays. The second Advanced Table demonstrates that the toggle all button does not render (prior to an initial row expansion) without `persistToggleExpansionButton` in place. The third Advanced Table shows the toggle all button due to `persistToggleExpansionButton`. 
 
-This prop is set to false by default and should only be used in conjunction with `inlineRowLoading`.
+This prop is set to `false` by default and should only be used in conjunction with `inlineRowLoading`.
