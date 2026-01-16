@@ -1,0 +1,64 @@
+<% column_definitions = [
+    {
+      accessor: "year",
+      label: "Year",
+      cellAccessors: ["quarter", "month", "day"],
+    },
+    {
+      accessor: "newEnrollments",
+      label: "New Enrollments",
+    },
+    {
+      accessor: "scheduledMeetings",
+      label: "Scheduled Meetings",
+    },
+    {
+      accessor: "attendanceRate",
+      label: "Attendance Rate",
+    },
+    {
+      accessor: "completedClasses",
+      label: "Completed Classes",
+    },
+    {
+      accessor: "classCompletionRate",
+      label: "Class Completion Rate",
+    },
+    {
+      accessor: "graduatedStudents",
+      label: "Graduated Students",
+    }
+] %>
+
+<%= pb_rails("caption", props: { text: "Inline Row Loading - Demonstrated in Row 1 (Rows 2 and 3 have data)" }) %>
+
+<%= pb_rails("advanced_table", props: {
+  id: "inline-loading-table-1",
+  table_data: @table_data_inline_loading,
+  column_definitions: column_definitions,
+  enable_toggle_expansion: "all",
+  inline_row_loading: true,
+  margin_bottom: "md"
+}) %>
+
+<%= pb_rails("caption", props: { text: "Inline Row Loading with No Subrow Data - All Rows Display Inline Row Loading and the Toggle All Button is not rendered" }) %>
+
+<%= pb_rails("advanced_table", props: {
+  id: "inline-loading-table-2",
+  table_data: @table_data_inline_loading_empty_children,
+  column_definitions: column_definitions,
+  enable_toggle_expansion: "all",
+  inline_row_loading: true,
+  margin_bottom: "md"
+}) %>
+
+<%= pb_rails("caption", props: { text: "Inline Row Loading and Persist Toggle Expansion Button with No Subrow Data - All Rows Display Inline Row Loading and the Toggle All Button is rendered" }) %>
+
+<%= pb_rails("advanced_table", props: {
+  id: "inline-loading-table-3",
+  table_data: @table_data_inline_loading_empty_children,
+  column_definitions: column_definitions,
+  enable_toggle_expansion: "all",
+  inline_row_loading: true,
+  persist_toggle_expansion_button: true
+}) %>
