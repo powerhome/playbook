@@ -126,7 +126,7 @@ export const DocsTab = ({
   };
 
   return (
-    <Flex paddingRight="xl" paddingLeft="md">
+    <Flex paddingRight="md" paddingLeft="xl">
       <Flex flexDirection="column" flex={1} minWidth={0} overflow="auto">
         {examples && examples.length > 0 ? (
           <>{renderExamples()}</>
