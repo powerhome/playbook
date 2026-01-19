@@ -23,7 +23,7 @@ export const DocsTab = ({
   sections,
 }: DocsTabProps) => {
   const [visibleCode, setVisibleCode] = useState<{ [key: string]: boolean }>(
-    {}
+    {},
   );
   const [copyState, setCopyState] = useState<{ [key: string]: boolean }>({});
 
@@ -48,7 +48,11 @@ export const DocsTab = ({
 
   // Helper function to render an example card
   const renderExampleCard = (example: any) => (
-    <div id={example.example_key} key={example.example_key} style={{ width: "100%" }}>
+    <div
+      id={example.example_key}
+      key={example.example_key}
+      style={{ width: "100%" }}
+    >
       <Card marginBottom="lg" padding="none" width="100%">
         <Caption text={example.title} margin="md" />
         <LiveExample code={example.source} exampleProps={exampleProps} />
@@ -97,7 +101,7 @@ export const DocsTab = ({
       // Render examples organized by sections
       return sections.map((section) => {
         const sectionExamples = examples.filter((example) =>
-          section.examples.includes(example.example_key)
+          section.examples.includes(example.example_key),
         );
 
         if (sectionExamples.length === 0) return null;
@@ -126,7 +130,10 @@ export const DocsTab = ({
   };
 
   return (
-    <Flex paddingRight="md" paddingLeft="xl">
+    <Flex
+      paddingRight={{ xs: "xl", sm: "xl", md: "xl", lg: "xl", xl: "md" }}
+      paddingLeft="xl"
+    >
       <Flex flexDirection="column" flex={1} minWidth={0} overflow="auto">
         {examples && examples.length > 0 ? (
           <>{renderExamples()}</>

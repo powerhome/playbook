@@ -51,7 +51,7 @@ const KitShow = () => {
             <Flex
               display={{ xs: "none", sm: "none", md: "none", lg: "none", xl: "flex" }}
               shrink
-              htmlOptions={{ style: { width: "206px"} }}
+              htmlOptions={{ style: { width: "228px"} }}
             />
           </Flex>
         )}
