@@ -26,9 +26,11 @@ const Header = ({
   return (
     <>
       <Flex 
+        className="pb--page--header--new"
         orientation="row" 
         align="center"
         display={{ xs: "none", sm: "none", md: "none", lg: "flex" }}
+        dark={dark}
       >
         {/* Start Logo and Version Badge */}
         <FlexItem fixedSize="250px">
