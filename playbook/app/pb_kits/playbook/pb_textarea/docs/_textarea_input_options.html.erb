@@ -23,3 +23,17 @@
   name: "comment",
   rows: 4
 }) %>
+
+<br/>
+
+<%= pb_rails("textarea", props: { 
+  label: "Data and ARIA Attributes", 
+  name: "description",
+  rows: 4,
+  input_options: {
+    'aria-label': "Enter description",
+    'aria-describedby': "help-text",
+    data: { controller: "textarea", action: "focus->handleFocus" },
+    id: "description-textarea"
+  }
+}) %>

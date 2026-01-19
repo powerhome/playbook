@@ -11,12 +11,7 @@
     <%= text_area_tag(
         object.name,
         object.value,
-        :data => object.textarea_options[:data],
-        :id => object.input_options[:id] || "object_method",
-        :max_characters => object.max_characters,
-        :onkeyup => object.onkeyup,
-        :placeholder => object.placeholder,
-        :rows => object.rows) %>
+        object.all_textarea_attributes) %>
     <% if object.error %>
       <% if object.character_count %>
         <%= pb_rails("flex", props: { spacing: "between", vertical: "center" }) do %>
