@@ -12,6 +12,7 @@ examples:
   - phone_number_input_format: Format as You Type
   - phone_number_input_strict_mode: Strict Mode
   - phone_number_input_country_search: Country Search
+  - phone_number_input_required_indicator: Required Indicator
 
   rails:
   - phone_number_input_default: Default
@@ -24,3 +25,4 @@ examples:
   - phone_number_input_strict_mode: Strict Mode
   - phone_number_input_hidden_inputs: Hidden Inputs
   - phone_number_input_country_search: Country Search
+  - phone_number_input_required_indicator: Required Indicator
