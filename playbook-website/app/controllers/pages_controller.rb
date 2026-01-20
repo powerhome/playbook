@@ -73,6 +73,28 @@ class PagesController < ApplicationController
 
     @css = view_context.vite_asset_path("site_styles/main.scss")
 
+    # Read kit description from _description.md file
+    kit_description = read_kit_file("_description.md")
+
+    # Read kit sections from _sections.yml file if it exists
+    kit_sections = read_kit_sections
+
+    # Get available props for React kits
+    available_props = nil
+    if @type == "react"
+      begin
+        kit_example = Playbook::PbDocs::KitExample.new(
+          kit: @kit,
+          example_title: "Default",
+          example_key: @kit,
+          type: "react"
+        )
+        available_props = kit_example.available_props
+      rescue => e
+        Rails.logger.error("Error fetching available props: #{e.message}")
+      end
+    end
+
     # first example from each kit
     examples = @examples.map do |example|
       example_key = example.keys.first.to_s
@@ -130,6 +152,9 @@ class PagesController < ApplicationController
           type: @type,
           examples: examples,
           kit: @kit,
+          kit_description: kit_description,
+          kit_sections: kit_sections,
+          available_props: available_props,
           params: @params,
           category: @category,
           css: @css,
@@ -288,6 +313,8 @@ class PagesController < ApplicationController
     @table_data = advanced_table_mock_data
     @table_data_with_id = advanced_table_mock_data_with_id
     @table_data_no_subrows = advanced_table_mock_data_no_subrows
+    @table_data_inline_loading = advanced_table_mock_data_inline_loading
+    @table_data_inline_loading_empty_children = advanced_table_mock_data_inline_loading_empty_children
   end
 
   def kit_category_show_rails
@@ -297,6 +324,8 @@ class PagesController < ApplicationController
     @table_data = advanced_table_mock_data
     @table_data_with_id = advanced_table_mock_data_with_id
     @table_data_no_subrows = advanced_table_mock_data_no_subrows
+    @table_data_inline_loading = advanced_table_mock_data_inline_loading
+    @table_data_inline_loading_empty_children = advanced_table_mock_data_inline_loading_empty_children
     render template: "pages/kit_category_show"
   end
 
@@ -312,6 +341,8 @@ class PagesController < ApplicationController
     @table_data_no_subrows = advanced_table_mock_data_no_subrows if @kit == "advanced_table" || @kit_parent == "advanced_table"
     @table_data_pagination = advanced_table_pagination_mock_data if @kit == "advanced_table" || @kit_parent == "advanced_table"
     @table_data_infinite_scroll = advanced_table_infinite_scroll_mock_data if @kit == "advanced_table" || @kit_parent == "advanced_table"
+    @table_data_inline_loading = advanced_table_mock_data_inline_loading if @kit == "advanced_table" || @kit_parent == "advanced_table"
+    @table_data_inline_loading_empty_children = advanced_table_mock_data_inline_loading_empty_children if @kit == "advanced_table" || @kit_parent == "advanced_table"
     render "pages/kit_show"
   end
 
@@ -618,6 +649,22 @@ private
     path.exist? ? path.read : ""
   end
 
+  def read_kit_sections
+    # Read _sections.yml file if it exists
+    kit_name = @kit_parent == "advanced_table" ? @kit_parent : @kit
+    sections_path = ::Playbook.kit_path(kit_name, "docs", "_sections.yml")
+
+    return nil unless sections_path.exist?
+
+    begin
+      sections_data = YAML.load_file(sections_path)
+      sections_data&.dig("sections")
+    rescue => e
+      Rails.logger.error("Error reading sections file: #{e.message}")
+      nil
+    end
+  end
+
   def handle_kit_collection(type)
     @kits = params[:names].split("%26")
     @kits_array = @kits.first.split("&")
@@ -727,6 +774,16 @@ private
     JSON.parse(File.read(file_path))
   rescue
     nil
+  end
+
+  def advanced_table_mock_data_inline_loading
+    data = File.read(Rails.root.join("app/components/playbook/pb_docs/advanced_table_mock_data_inline_loading.json"))
+    JSON.parse(data, object_class: OpenStruct)
+  end
+
+  def advanced_table_mock_data_inline_loading_empty_children
+    data = File.read(Rails.root.join("app/components/playbook/pb_docs/advanced_table_mock_data_inline_loading_empty_children.json"))
+    JSON.parse(data, object_class: OpenStruct)
   end
 
   def page_not_found

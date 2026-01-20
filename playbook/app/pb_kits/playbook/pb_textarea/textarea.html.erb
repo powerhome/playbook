@@ -14,16 +14,10 @@
       <%= pb_rails("body", props: { dark: object.dark, status: "negative", text: object.error }) %>
     <% end %>
   <% else %>
-    <%= text_area(
-        :object,
-        :method,
-        :data => object.textarea_options[:data],
-        :max_characters => object.max_characters,
-        :name => object.name,
-        :onkeyup => object.onkeyup,
-        :placeholder => object.placeholder,
-        :rows => object.rows,
-        :value => object.value) %>
+    <%= text_area_tag(
+        object.name,
+        object.value,
+        object.all_textarea_attributes) %>
     <% if object.error %>
       <% if object.character_count %>
         <%= pb_rails("flex", props: { spacing: "between", vertical: "center" }) do %>
