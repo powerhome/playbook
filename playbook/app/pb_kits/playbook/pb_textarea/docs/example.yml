@@ -8,6 +8,7 @@ examples:
   - textarea_character_counter: Character Counter
   - textarea_inline: Inline
   - textarea_emoji_mask: Emoji Mask
+  - textarea_required_indicator: Required Indicator
 
   react:
   - textarea_default: Default
