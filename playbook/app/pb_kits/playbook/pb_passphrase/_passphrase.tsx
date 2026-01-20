@@ -113,11 +113,18 @@ const Passphrase = (props: PassphraseProps): React.ReactElement => {
     >
       <label>
         <Flex align="baseline">
-          <Caption
-              className="passphrase-label"
-          >
-            {label} {requiredIndicator ? <span style={{ display: "inline", color: `${colors.error}` }}>*</span> : <></>}
-          </Caption>
+          {requiredIndicator ? (
+            <Caption
+                className="passphrase-label"
+            >
+              {label} <span style={{ color: `${colors.error}` }}>*</span>
+            </Caption>
+          ) : (
+            <Caption
+                className="passphrase-label"
+                text={label}
+            />
+          )}
           {tips.length > 0 && !confirmation &&
             <PbReactPopover
                 className="passphrase-tips"
