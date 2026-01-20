@@ -42,3 +42,4 @@ examples:
     - typeahead_truncated_text: Truncated Text
     - typeahead_disabled: Disabled
     - typeahead_preserve_input: Preserve Search Input
+    - typeahead_required_indicator: Required Indicator
