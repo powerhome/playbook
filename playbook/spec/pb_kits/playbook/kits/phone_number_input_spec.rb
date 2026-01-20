@@ -26,4 +26,11 @@ RSpec.describe Playbook::PbPhoneNumberInput do
       expect(subject.new(classname: "additional_class").classname).to eq "#{classname} additional_class"
     end
   end
+
+  describe "phone_number_input_options" do
+    it "passes required_indicator as requiredIndicator to javascript" do
+      example = subject.new(required_indicator: true)
+      expect(example.phone_number_input_options[:requiredIndicator]).to be true
+    end
+  end
 end
