@@ -1,5 +1,5 @@
 import React from 'react'
-import { render, screen } from '../utilities/test-utils'
+import { render, screen, within } from '../utilities/test-utils'
 import { Passphrase } from 'playbook-ui'
 
 const testId = 'text-input1',
@@ -85,4 +85,34 @@ test('popover target does not show when tips are not given', () => {
 
   const kit = screen.getByTestId(testId)
   expect(kit.querySelector('[class^=pb_popover_reference_wrapper]')).toBeNull()
+})
+
+test('renders required indicator asterisk when requiredIndicator is true', () => {
+  render(
+    <Passphrase
+        data={{ testid: testId }}
+        label="Passphrase"
+        requiredIndicator
+    />
+  )
+
+  const kit = screen.getByTestId(testId)
+  const label = within(kit).getByText(/Passphrase/)
+  
+  expect(label).toBeInTheDocument()
+  expect(kit).toHaveTextContent('*') 
+})
+
+test('does not render required indicator asterisk when requiredIndicator is false', () => {
+  render(
+    <Passphrase
+        data={{ testid: testId }}
+        label="Passphrase"
+    />
+  )
+
+  const kit = screen.getByTestId(testId)
+  const label = within(kit).getByText(/Passphrase/)
+  expect(label).toBeInTheDocument()
+  expect(kit).not.toHaveTextContent('*') 
 })
