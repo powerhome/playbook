@@ -10,6 +10,7 @@ examples:
   # - rich_text_editor_toolbar_bottom: Toolbar Bottom
   - rich_text_editor_inline: Inline
   - rich_text_editor_preview: Preview
+  - rich_text_editor_required_indicator: Required Indicator
 
   react:
   - rich_text_editor_default: Default
