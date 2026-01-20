@@ -1,0 +1,39 @@
+<%= pb_rails("textarea", props: { 
+  label: "ID on Container", 
+  id: "container-id",
+  name: "comment",
+  rows: 4
+}) %>
+
+<br/>
+
+<%= pb_rails("textarea", props: { 
+  label: "ID on Textarea via input_options", 
+  input_options: { id: "textarea-id" },
+  name: "comment",
+  rows: 4
+}) %>
+
+<br/>
+
+<%= pb_rails("textarea", props: { 
+  label: "Both Container and Textarea IDs", 
+  id: "container-id-2",
+  input_options: { id: "textarea-id-2" },
+  name: "comment",
+  rows: 4
+}) %>
+
+<br/>
+
+<%= pb_rails("textarea", props: { 
+  label: "Data and ARIA Attributes", 
+  name: "description",
+  rows: 4,
+  input_options: {
+    'aria-label': "Enter description",
+    'aria-describedby': "help-text",
+    data: { controller: "textarea", action: "focus->handleFocus" },
+    id: "description-textarea"
+  }
+}) %>
