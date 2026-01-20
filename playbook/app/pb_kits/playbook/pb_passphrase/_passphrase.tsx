@@ -7,6 +7,7 @@ import { globalProps } from "../utilities/globalProps"
 import Body from '../pb_body/_body'
 import Caption from '../pb_caption/_caption'
 import CircleIconButton from '../pb_circle_icon_button/_circle_icon_button'
+import colors from '../tokens/exports/_colors.module.scss'
 import Flex from '../pb_flex/_flex'
 import Icon from '../pb_icon/_icon'
 import PbReactPopover from '../pb_popover/_popover'
@@ -25,6 +26,7 @@ type PassphraseProps = {
   inputProps?: GenericObject,
   label?: string,
   onChange: (inputValue: string) => void,
+  requiredIndicator?: boolean,
   showTipsBelow?: "always" | "xs" | "sm" | "md" | "lg" | "xl",
   tips?: Array<string>,
   uncontrolled?: boolean,
@@ -43,6 +45,7 @@ const Passphrase = (props: PassphraseProps): React.ReactElement => {
     inputProps = {},
     label = confirmation ? "Confirm Passphrase" : "Passphrase",
     onChange = () => undefined,
+    requiredIndicator = false,
     showTipsBelow = "always",
     tips = [],
     uncontrolled = false,
@@ -112,8 +115,9 @@ const Passphrase = (props: PassphraseProps): React.ReactElement => {
         <Flex align="baseline">
           <Caption
               className="passphrase-label"
-              text={label}
-          />
+          >
+            {label} {requiredIndicator ? <div style={{ display: "inline", color: `${colors.error}` }}>*</div> : <></>}
+          </Caption>
           {tips.length > 0 && !confirmation &&
             <PbReactPopover
                 className="passphrase-tips"

@@ -19,3 +19,4 @@ examples:
   - passphrase_strength_change: Strength Change
   - passphrase_common: Common Passphrases
   - passphrase_breached: Breached Passphrases
+  - passphrase_input_required_indicator: Required Indicator
