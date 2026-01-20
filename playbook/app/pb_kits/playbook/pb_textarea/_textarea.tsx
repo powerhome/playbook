@@ -127,15 +127,21 @@ const Textarea = ({
         {...htmlProps}
         className={classes}
     >
+    {label && (
+      <label>
       {
         requiredIndicator ? (
-          <Caption>
+          <Caption className="pb_text_input_kit_label">
             {label} <span style={{ color: `${colors.error}` }}>*</span>
           </Caption>
         ) : (
-          <Caption text={label} />
+          <Caption  className="pb_text_input_kit_label"
+              text={label}
+          />
         )
       }
+      </label>
+    )}
       {children || (
         <textarea
             disabled={disabled}
