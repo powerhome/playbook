@@ -19,3 +19,4 @@ export { default as RichTextEditorAdvancedSticky } from './_rich_text_editor_adv
 export { default as RichTextEditorAdvancedInline } from './_rich_text_editor_advanced_inline.jsx'
 export { default as RichTextEditorAdvancedHeight } from './_rich_text_editor_advanced_height.jsx'
 export { default as RichTextEditorAdvancedMinHeight } from './_rich_text_editor_advanced_min_height.jsx'
+export { default as RichTextEditorRequiredIndicator } from './_rich_text_editor_required_indicator.jsx'
