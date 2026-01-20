@@ -313,6 +313,8 @@ class PagesController < ApplicationController
     @table_data = advanced_table_mock_data
     @table_data_with_id = advanced_table_mock_data_with_id
     @table_data_no_subrows = advanced_table_mock_data_no_subrows
+    @table_data_inline_loading = advanced_table_mock_data_inline_loading
+    @table_data_inline_loading_empty_children = advanced_table_mock_data_inline_loading_empty_children
   end
 
   def kit_category_show_rails
@@ -322,6 +324,8 @@ class PagesController < ApplicationController
     @table_data = advanced_table_mock_data
     @table_data_with_id = advanced_table_mock_data_with_id
     @table_data_no_subrows = advanced_table_mock_data_no_subrows
+    @table_data_inline_loading = advanced_table_mock_data_inline_loading
+    @table_data_inline_loading_empty_children = advanced_table_mock_data_inline_loading_empty_children
     render template: "pages/kit_category_show"
   end
 
@@ -337,6 +341,8 @@ class PagesController < ApplicationController
     @table_data_no_subrows = advanced_table_mock_data_no_subrows if @kit == "advanced_table" || @kit_parent == "advanced_table"
     @table_data_pagination = advanced_table_pagination_mock_data if @kit == "advanced_table" || @kit_parent == "advanced_table"
     @table_data_infinite_scroll = advanced_table_infinite_scroll_mock_data if @kit == "advanced_table" || @kit_parent == "advanced_table"
+    @table_data_inline_loading = advanced_table_mock_data_inline_loading if @kit == "advanced_table" || @kit_parent == "advanced_table"
+    @table_data_inline_loading_empty_children = advanced_table_mock_data_inline_loading_empty_children if @kit == "advanced_table" || @kit_parent == "advanced_table"
     render "pages/kit_show"
   end
 
@@ -768,6 +774,16 @@ private
     JSON.parse(File.read(file_path))
   rescue
     nil
+  end
+
+  def advanced_table_mock_data_inline_loading
+    data = File.read(Rails.root.join("app/components/playbook/pb_docs/advanced_table_mock_data_inline_loading.json"))
+    JSON.parse(data, object_class: OpenStruct)
+  end
+
+  def advanced_table_mock_data_inline_loading_empty_children
+    data = File.read(Rails.root.join("app/components/playbook/pb_docs/advanced_table_mock_data_inline_loading_empty_children.json"))
+    JSON.parse(data, object_class: OpenStruct)
   end
 
   def page_not_found
