@@ -98,9 +98,8 @@ test('renders required indicator asterisk when requiredIndicator is true', () =>
 
   const kit = screen.getByTestId(testId)
   const label = within(kit).getByText(/Passphrase/)
-  
   expect(label).toBeInTheDocument()
-  expect(kit).toHaveTextContent('*') 
+  expect(kit).toHaveTextContent('*')
 })
 
 test('does not render required indicator asterisk when requiredIndicator is false', () => {
@@ -114,5 +113,5 @@ test('does not render required indicator asterisk when requiredIndicator is fals
   const kit = screen.getByTestId(testId)
   const label = within(kit).getByText(/Passphrase/)
   expect(label).toBeInTheDocument()
-  expect(kit).not.toHaveTextContent('*') 
+  expect(kit).not.toHaveTextContent('*')
 })
