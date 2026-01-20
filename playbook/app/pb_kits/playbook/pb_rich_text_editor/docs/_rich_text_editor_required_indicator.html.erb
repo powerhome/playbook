@@ -1,6 +1,9 @@
 <%= pb_rails("rich_text_editor", props: {
-  input_options: { id: 'hidden_input_id',
-  name: "hidden_input_name" },
+  id: "required-indicator",
+  input_options: {
+    id: 'hidden_input_id',
+    name: "hidden_input_name"
+  },
   label: "Label",
   required_indicator: true,
   value: "Add your text here. You can format your text, add links, quotes, and bullets."

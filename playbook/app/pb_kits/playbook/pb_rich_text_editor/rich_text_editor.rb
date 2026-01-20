@@ -54,6 +54,8 @@ module Playbook
           template: template,
           placeholder: placeholder,
           inputOptions: input_options,
+          label: label,
+          requiredIndicator: required_indicator,
         }
       end
     end
