@@ -1,0 +1,1 @@
+The `backgroundColor`, `backgroundSize`, `backgroundPosition`, `backgroundRepeat`, and `imageUrl` props support responsive sizes. To use them, pass an object to the prop containing your values relative to responsive break points (show code below). To test this here, resize your browser window to responsively change this Background's size and color.
