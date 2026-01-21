@@ -3,6 +3,19 @@
 <% else %>
   <%= pb_content_tag(:div,
                      class: object.classname + object.inline_class) do %>
+
+    <% if object.label.present? %>
+    <label for="<%= object.input_options[:id] || object.id %>" >
+      <% if object.required_indicator %>
+        <%= pb_rails("caption", props: { dark: object.dark, classname: "pb_typeahead_kit_label" }) do %>
+          <%= object.label %><span class="required" style="color: #DA0014;"> *</span>
+        <% end %>
+      <% else %>
+      <%= pb_rails("caption", props: { text: object.label, dark: object.dark, classname: "pb_typeahead_kit_label" }) %>
+      <% end %>
+    </label>
+    <% end %>
+
     <div class="pb_typeahead_wrapper">
       <div class="pb_typeahead_loading_indicator" data-pb-typeahead-kit-loading-indicator>
         <%= pb_rails("icon", props: {

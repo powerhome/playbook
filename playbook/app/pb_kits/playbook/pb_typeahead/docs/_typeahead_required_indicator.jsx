@@ -11,6 +11,7 @@ const options = [
 const TypeaheadRequiredIndicator = (props) => {
   return (
     <Typeahead
+        id="typeahead_required_indicator"
         label="Colors"
         options={options}
         requiredIndicator
