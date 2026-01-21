@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 
 import Textarea from '../_textarea'
 
-const TextareaDefault = (props) => {
+const TextareaRequiredIndicator = (props) => {
   const [value, setValue] = useState('Default value text')
   const handleChange = (event) => {
     setValue(event.target.value)
@@ -22,4 +22,4 @@ const TextareaDefault = (props) => {
   )
 }
 
-export default TextareaDefault
+export default TextareaRequiredIndicator
