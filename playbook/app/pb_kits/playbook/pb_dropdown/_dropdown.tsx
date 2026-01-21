@@ -36,6 +36,7 @@ type DropdownProps = {
     blankSelection?: string;
     children?: React.ReactChild[] | React.ReactChild | React.ReactElement[];
     className?: string;
+    clearable?: boolean;
     customQuickPickDates?: CustomQuickPickDates;
     formPillProps?: GenericObject;
     dark?: boolean;
@@ -74,6 +75,7 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
         blankSelection = '',
         children,
         className,
+        clearable = true,
         customQuickPickDates,
         dark = false,
         data = {},
@@ -375,6 +377,7 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
                 value={{
                     activeStyle,
                     autocomplete,
+                    clearable,
                     dropdownContainerRef,
                     filteredOptions,
                     filterItem,

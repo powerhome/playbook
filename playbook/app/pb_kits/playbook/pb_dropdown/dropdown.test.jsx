@@ -466,7 +466,27 @@ test("quickpick clears selection when clicking X icon", () => {
   expect(trigger).toHaveTextContent("Select...")
 })
 
+test("quickpick hides clear icon when clearable is false", () => {
+  render(
+    <Dropdown
+        clearable={false}
+        data={{ testid: testId }}
+        defaultValue="This Week"
+        variant="quickpick"
+    />
+  )
+  
+  const kit = screen.getByTestId(testId)
+  const trigger = kit.querySelector('.pb_dropdown_trigger')
+  
+  expect(trigger).toHaveTextContent("This Week")
+  
+  const clearIcon = kit.querySelector('[aria-label="times icon"]')
+  expect(clearIcon).not.toBeInTheDocument()
+})
+
 test("quickpick returns date array values when option selected", () => {
+  // eslint-disable-next-line react/no-multi-comp
   const TestComponent = () => {
     const [selected, setSelected] = useState(null)
     return (

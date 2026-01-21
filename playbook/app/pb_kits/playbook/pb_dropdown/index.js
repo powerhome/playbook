@@ -48,6 +48,7 @@ export default class PbDropdown extends PbEnhancedElement {
     this.updatePills();
 
     this.clearBtn = this.element.querySelector(CLEAR_ICON_SELECTOR);
+    this.isClearable = this.element.dataset.pbDropdownClearable !== "false";
     if (this.clearBtn) {
       this.clearBtn.style.display = "none";
       this.clearBtn.addEventListener("click", (e) => {
@@ -60,6 +61,10 @@ export default class PbDropdown extends PbEnhancedElement {
 
   updateClearButton() {
     if (!this.clearBtn) return;
+    if (!this.isClearable) {
+      this.clearBtn.style.display = "none";
+      return;
+    }
     const hasSelection = this.isMultiSelect
       ? this.selectedOptions.size > 0
       : Boolean(this.element.querySelector(DROPDOWN_INPUT).value);

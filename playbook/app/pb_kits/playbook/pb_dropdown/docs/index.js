@@ -28,3 +28,4 @@ export { default as DropdownQuickpickRangeEnd } from './_dropdown_quickpick_rang
 export { default as DropdownQuickpickDefaultDates } from './_dropdown_quickpick_default_dates.jsx'
 export { default as DropdownQuickpickWithDatePickers } from './_dropdown_quickpick_with_date_pickers.jsx'
 export { default as DropdownQuickpickCustom } from './_dropdown_quickpick_custom.jsx'
+export { default as DropdownQuickpickWithReset } from './_dropdown_quickpick_with_reset.jsx'

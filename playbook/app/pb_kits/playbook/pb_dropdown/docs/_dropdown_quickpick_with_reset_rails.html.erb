@@ -1,0 +1,32 @@
+<%= pb_rails("dropdown", props: {
+  id: "date-range-quickpick-reset",
+  label: "Date Range",
+  variant: "quickpick",
+  clearable: false
+}) %>
+
+<%= pb_rails("button", props: {
+  margin_top: "md",
+  text: "Reset",
+  html_options: {
+    onclick: "handleReset()"
+  }
+}) %>
+
+<script>
+  function handleReset() {
+    const dropdown = document.querySelector("#date-range-quickpick-reset[data-pb-dropdown]");
+    const instance = dropdown?._pbDropdownInstance;
+    
+    if (instance) {
+      instance.clearSelection();
+    }
+  }
+  
+  document.addEventListener("DOMContentLoaded", () => {
+    const dropdown = document.getElementById("date-range-quickpick-reset");
+    dropdown?.addEventListener("pb:dropdown:selected", (e) => {
+      console.log("Selected option:", e.detail);
+    });
+  });
+</script>
