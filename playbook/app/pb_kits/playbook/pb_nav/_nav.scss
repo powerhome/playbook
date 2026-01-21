@@ -79,7 +79,8 @@
 }
 
 // Disabled scss
-.pb_nav_item_disabled {
+.pb_nav_item_disabled, 
+.pb_nav_item_inactive {
   cursor: not-allowed !important;
   .pb_nav_list_item_text, 
   .pb_nav_list_item_icon_left,
@@ -99,4 +100,34 @@
       }
     }
   }
+}
+
+.pb_nav_item_inactive { 
+  .pb_nav_list_item_text_collapsible {
+    color: $text_lt_lighter !important;
+    cursor: not-allowed !important;
+  }
+   @media (hover: hover) {
+    &:hover {
+      .pb_nav_list_item_icon_section_collapsible {
+        color: $text_lt_lighter !important;
+      }
+    }
+  }
+}
+
+.pb_nav_item_inactive { 
+  .pb_collapsible_content_kit {
+  .pb_nav_list_item_text_collapsible {
+    color: $text_lt_lighter !important;
+    cursor: not-allowed !important;
+  }
+   @media (hover: hover) {
+    &:hover {
+      .pb_nav_list_item_icon_section_collapsible {
+        color: $text_lt_lighter !important;
+      }
+    }
+  }
+}
 }

@@ -26,6 +26,7 @@ examples:
   - tab_nav: Tab Nav
 
   react:
+  - collapsible_nav_disabled_item: Collapsible Nav With Disabled Item
   - default_nav: Default
   - with_icons_nav: With Icons
   - with_img_nav: With Custom Icon
