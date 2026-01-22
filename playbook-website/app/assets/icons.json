@@ -184,6 +184,14 @@
     "category": "Arrows"
   },
   {
+    "name": "arrows-maximize",
+    "category": "Arrows"
+  },
+  {
+    "name": "arrows-minimize",
+    "category": "Arrows"
+  },
+  {
     "name": "arrows-repeat",
     "category": "Arrows"
   },
@@ -469,6 +477,10 @@
   },
   {
     "name": "address-card",
+    "category": "Business"
+  },
+  {
+    "name": "box-taped",
     "category": "Business"
   },
   {
@@ -820,6 +832,10 @@
     "category": "Files"
   },
   {
+    "name": "file-dashed-line",
+    "category": "Files"
+  },
+  {
     "name": "file-download",
     "category": "Files"
   },
@@ -896,6 +912,10 @@
     "category": "Files"
   },
   {
+    "name": "folders",
+    "category": "Files"
+  },
+  {
     "name": "memo-circle-check",
     "category": "Files"
   },
@@ -917,6 +937,10 @@
   },
   {
     "name": "hand-point-right",
+    "category": "Hands"
+  },
+  {
+    "name": "hands-holding-diamond",
     "category": "Hands"
   },
   {
@@ -945,6 +969,10 @@
   },
   {
     "name": "dumbbell",
+    "category": "Health"
+  },
+  {
+    "name": "heart-filled",
     "category": "Health"
   },
   {
@@ -993,6 +1021,10 @@
   },
   {
     "name": "bookmark",
+    "category": "Interface Core"
+  },
+  {
+    "name": "border-all",
     "category": "Interface Core"
   },
   {
@@ -1145,6 +1177,10 @@
   },
   {
     "name": "object-exclude",
+    "category": "Interface Core"
+  },
+  {
+    "name": "object-group",
     "category": "Interface Core"
   },
   {
@@ -1852,6 +1888,10 @@
     "category": "Technology"
   },
   {
+    "name": "square-code",
+    "category": "Technology"
+  },
+  {
     "name": "tv",
     "category": "Technology"
   },
@@ -1885,6 +1925,18 @@
   },
   {
     "name": "h3",
+    "category": "Text"
+  },
+  {
+    "name": "h4",
+    "category": "Text"
+  },
+  {
+    "name": "h5",
+    "category": "Text"
+  },
+  {
+    "name": "h6",
     "category": "Text"
   },
   {
