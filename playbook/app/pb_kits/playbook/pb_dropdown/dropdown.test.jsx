@@ -122,6 +122,80 @@ test('generated placeholder prop', () => {
 
 })
 
+test('placeholder prop passed directly to Dropdown', () => {
+  render(
+    <Dropdown
+        data={{ testid: testId }}
+        options={options}
+        placeholder="Choose a country"
+    />
+  )
+
+  const kit = screen.getByTestId(testId)
+  const trigger = kit.querySelector('.pb_dropdown_trigger')
+  expect(trigger).toHaveTextContent('Choose a country')
+})
+
+test('placeholder works with default variant', () => {
+  render(
+    <Dropdown
+        data={{ testid: testId }}
+        options={options}
+        placeholder="Select an option"
+        variant="default"
+    />
+  )
+
+  const kit = screen.getByTestId(testId)
+  const trigger = kit.querySelector('.pb_dropdown_trigger')
+  expect(trigger).toHaveTextContent('Select an option')
+})
+
+test('placeholder works with subtle variant', () => {
+  render(
+    <Dropdown
+        data={{ testid: testId }}
+        options={options}
+        placeholder="Pick an option"
+        separators={false}
+        variant="subtle"
+    />
+  )
+
+  const kit = screen.getByTestId(testId)
+  expect(kit).toHaveClass('pb_dropdown_subtle')
+  const trigger = kit.querySelector('.pb_dropdown_trigger')
+  expect(trigger).toHaveTextContent('Pick an option')
+})
+
+test('placeholder works with quickpick variant', () => {
+  render(
+    <Dropdown
+        data={{ testid: testId }}
+        placeholder="Select a date range"
+        variant="quickpick"
+    />
+  )
+
+  const kit = screen.getByTestId(testId)
+  expect(kit).toHaveClass('pb_dropdown_quickpick')
+  const trigger = kit.querySelector('.pb_dropdown_trigger')
+  expect(trigger).toHaveTextContent('Select a date range')
+})
+
+test('placeholder shows default "Select..." when not provided', () => {
+  render(
+    <Dropdown
+        data={{ testid: testId }}
+        options={options}
+    />
+  )
+
+  const kit = screen.getByTestId(testId)
+  const trigger = kit.querySelector('.pb_dropdown_trigger')
+  expect(trigger).toHaveTextContent('Select...')
+})
+
 test('generated label prop', () => { 
   render (
     <Dropdown
