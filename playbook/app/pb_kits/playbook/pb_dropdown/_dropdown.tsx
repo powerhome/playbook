@@ -50,6 +50,7 @@ type DropdownProps = {
     multiSelect?: boolean;
     onSelect?: (arg: GenericObject) => null;
     options?: GenericObject;
+    placeholder?: string;
     separators?: boolean;
     variant?: "default" | "subtle" | "quickpick";
     rangeEndsToday?: boolean;
@@ -89,6 +90,7 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
         formPillProps,
         onSelect,
         options,
+        placeholder,
         rangeEndsToday = false,
         controlsStartId,
         controlsEndId,
@@ -429,7 +431,7 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
                         </>
                     ) : (
                         <>
-                            <DropdownTrigger />
+                            <DropdownTrigger placeholder={placeholder} />
                             <DropdownContainer>
                                 {optionsWithBlankSelection &&
                                     optionsWithBlankSelection?.map((option: GenericObject) => (

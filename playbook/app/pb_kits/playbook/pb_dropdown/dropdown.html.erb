@@ -18,7 +18,7 @@
             <%= content.presence %>
             <%= pb_rails("body", props: { status: "negative", text: object.error }) %>
         <% else %>
-            <%= pb_rails("dropdown/dropdown_trigger", props:{ autocomplete: object.autocomplete, multi_select:object.multi_select }) %>
+            <%= pb_rails("dropdown/dropdown_trigger", props:{ autocomplete: object.autocomplete, multi_select:object.multi_select, placeholder: object.placeholder }) %>
             <%= pb_rails("dropdown/dropdown_container", props: { searchbar: object.searchbar }) do %>
                 <% if options_with_blank.present? %>
                     <% options_with_blank.each do |option| %>
