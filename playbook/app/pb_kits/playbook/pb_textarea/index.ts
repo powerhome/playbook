@@ -11,18 +11,21 @@ export default class PbTextarea extends PbEnhancedElement {
   }
 
   hasEmojiMask(): boolean {
+    if (!this.element) return false
     return (this.element as HTMLElement).dataset.pbEmojiMask === "true"
   }
 
-  onInput(): void {
+  onInput = (): void => {
+    if (!this.element) return
+    
     if ((this.element as HTMLElement).closest('.resize_auto')) {
-      this.style.height = 'auto'
-      this.style.height = (this.scrollHeight) + 'px'
+      (this.element as HTMLTextAreaElement).style.height = 'auto';
+      (this.element as HTMLTextAreaElement).style.height = (this.element as HTMLTextAreaElement).scrollHeight + 'px'
     }
   }
 
   handleEmojiInput = (): void => {
-    if (!this.hasEmojiMask()) return
+    if (!this.element || !this.hasEmojiMask()) return
     
     if (this.skipNextEmojiFilter) {
       this.skipNextEmojiFilter = false
@@ -33,7 +36,7 @@ export default class PbTextarea extends PbEnhancedElement {
   }
 
   handleEmojiPaste = (event: ClipboardEvent): void => {
-    if (!this.hasEmojiMask()) return
+    if (!this.element || !this.hasEmojiMask()) return
 
     const pastedText = event.clipboardData?.getData('text') || ''
     const filteredText = stripEmojisForPaste(pastedText)
@@ -57,6 +60,8 @@ export default class PbTextarea extends PbEnhancedElement {
   }
 
   connect(): void {
+    if (!this.element) return
+    
     if ((this.element as HTMLElement).closest('.resize_auto')) {
       this.element.setAttribute('style', 'height:' + (this.element as HTMLTextAreaElement).scrollHeight + 'px;overflow-y:hidden;')
       this.element.addEventListener('input', this.onInput, false)
@@ -69,6 +74,8 @@ export default class PbTextarea extends PbEnhancedElement {
   }
 
   disconnect(): void {
+    if (!this.element) return
+    
     this.element.removeEventListener('input', this.onInput, false)
     this.element.removeEventListener('input', this.handleEmojiInput, false)
     this.element.removeEventListener('paste', this.handleEmojiPaste as EventListener, false)
