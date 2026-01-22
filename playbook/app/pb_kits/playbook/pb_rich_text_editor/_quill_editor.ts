@@ -1,27 +1,27 @@
+import PbEnhancedElement from "../pb_enhanced_element";
 import Quill from 'quill';
 import 'quill/dist/quill.snow.css';
 
-interface QuillEditorOptions {
-  placeholder?: string;
-  theme?: 'snow' | 'bubble';
-  readOnly?: boolean;
-  modules?: {
-    toolbar?: any;
-  };
-}
+const QUILL_EDITOR_SELECTOR = "[data-quill-editor]";
 
-export class QuillEditor {
+export default class PbQuillEditor extends PbEnhancedElement {
+  static get selector() {
+    return QUILL_EDITOR_SELECTOR;
+  }
+
   private quill: any = null;
-  private container: HTMLElement;
-  private options: QuillEditorOptions;
 
-  constructor(container: HTMLElement, options: QuillEditorOptions = {}) {
-    this.container = container;
-    this.options = {
-      theme: 'snow',
-      placeholder: options.placeholder || 'Write something...',
-      readOnly: options.readOnly || false,
-      modules: options.modules || {
+  connect() {
+    const container = this.element.querySelector('.quill-editor-container') as HTMLElement;
+    if (!container) return;
+
+    const placeholder = this.element.getAttribute('data-placeholder') || 'Write something...';
+    const theme = (this.element.getAttribute('data-theme') as 'snow' | 'bubble') || 'snow';
+
+    const options = {
+      theme: theme,
+      placeholder: placeholder,
+      modules: {
         toolbar: [
           [{ 'header': [1, 2, 3, false] }],
           ['bold', 'italic', 'underline', 'strike'],
@@ -30,18 +30,13 @@ export class QuillEditor {
           ['link'],
           ['clean']
         ]
-      },
-      ...options
+      }
     };
 
-    this.initialize();
-  }
-
-  private initialize(): void {
-    this.quill = new Quill(this.container, this.options);
+    this.quill = new Quill(container, options);
 
     // Set up change handler if there's a hidden input to sync with
-    const hiddenInput = this.container.parentElement?.querySelector('input[type="hidden"]') as HTMLInputElement;
+    const hiddenInput = this.element.querySelector('input[type="hidden"]') as HTMLInputElement;
     if (hiddenInput) {
       this.quill.on('text-change', () => {
         hiddenInput.value = this.getHTML();
@@ -57,47 +52,31 @@ export class QuillEditor {
         },
         bubbles: true
       });
-      this.container.dispatchEvent(event);
+      this.element.dispatchEvent(event);
     });
   }
 
-  public getHTML(): string {
+  disconnect() {
+    if (this.quill) {
+      this.quill = null;
+    }
+  }
+
+  getHTML(): string {
     return this.quill?.root.innerHTML || '';
   }
 
-  public getText(): string {
+  getText(): string {
     return this.quill?.getText() || '';
   }
 
-  public setContent(html: string): void {
+  setContent(html: string): void {
     if (this.quill) {
       this.quill.root.innerHTML = html;
     }
   }
 
-  public getQuill(): any {
+  getQuill(): any {
     return this.quill;
   }
-
-  public destroy(): void {
-    // Clean up if needed
-    this.quill = null;
-  }
 }
-
-// Auto-initialize Quill editors on page load
-document.addEventListener('DOMContentLoaded', () => {
-  const editors = document.querySelectorAll('[data-quill-editor]');
-  editors.forEach((element) => {
-    const container = element.querySelector('.quill-editor-container') as HTMLElement;
-    if (container) {
-      const placeholder = element.getAttribute('data-placeholder') || undefined;
-      const theme = (element.getAttribute('data-theme') as 'snow' | 'bubble') || 'snow';
-      
-      new QuillEditor(container, {
-        placeholder,
-        theme
-      });
-    }
-  });
-});

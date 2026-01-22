@@ -1,6 +1,7 @@
 // Other JS/Plugins
 export { default as datePickerHelper } from '../pb_kits/playbook/pb_date_picker/date_picker_helper'
 export { default as PbPopover } from '../pb_kits/playbook/pb_popover'
+export { default as PbQuillEditor } from '../pb_kits/playbook/pb_rich_text_editor/_quill_editor'
 export { default as PbTable } from '../pb_kits/playbook/pb_table'
 export { default as PbTextarea } from '../pb_kits/playbook/pb_textarea'
 export { default as PbTooltip } from '../pb_kits/playbook/pb_tooltip'

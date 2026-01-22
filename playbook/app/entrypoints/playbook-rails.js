@@ -85,6 +85,9 @@ PbButton.start()
 import PbTimePicker from 'kits/pb_time_picker'
 PbTimePicker.start()
 
+import PbQuillEditor from 'kits/pb_rich_text_editor/_quill_editor'
+PbQuillEditor.start()
+
 import 'flatpickr'
 
 // React-Rendered Rails Kits =====
