@@ -77,6 +77,7 @@ const MultiLevelSelectInputDisplay = (props) => {
         onSelect={(selectedNodes) =>
           console.log("Selected Items", selectedNodes)
         }
+        returnAllSelected
         treeData={treeData}
         {...props}
     />
