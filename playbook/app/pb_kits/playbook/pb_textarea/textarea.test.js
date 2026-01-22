@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { render, screen, fireEvent } from "../utilities/test-utils"
+import { render, screen, fireEvent, within } from "../utilities/test-utils"
 
 import Textarea from "./_textarea"
 
@@ -264,5 +264,22 @@ describe("Textarea Emoji Mask", () => {
 
     fireEvent.change(textarea, { target: { value: 'àëǒüñ' } })
     expect(textarea.value).toBe('àëǒüñ')
+  })
+
+  test('renders required indicator asterisk when requiredIndicator is true', () => {
+    render(
+      <Textarea
+          data={{ testid: testId }}
+          label="Name"
+          required
+          requiredIndicator
+      />
+    )
+
+    const kit = screen.getByTestId(testId)
+    const label = within(kit).getByText(/Name/)
+
+    expect(label).toBeInTheDocument()
+    expect(kit).toHaveTextContent('*')
   })
 })

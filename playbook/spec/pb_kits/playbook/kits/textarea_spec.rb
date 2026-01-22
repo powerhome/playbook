@@ -23,6 +23,7 @@ RSpec.describe Playbook::PbTextarea::Textarea do
     is_expected.to define_boolean_prop(:emoji_mask)
       .with_default(false)
   }
+  it { is_expected.to define_prop(:required_indicator).with_default(false) }
   it { is_expected.to define_hash_prop(:input_options).with_default({}) }
 
   describe "#classname" do

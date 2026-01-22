@@ -23,6 +23,8 @@ module Playbook
       prop :character_count
       prop :onkeyup
       prop :max_characters
+      prop :required_indicator, type: Playbook::Props::Boolean,
+                                default: false
 
       def classname
         generate_classname("pb_textarea_kit") + error_class + resize_class + inline_class
