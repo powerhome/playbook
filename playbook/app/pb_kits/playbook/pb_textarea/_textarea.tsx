@@ -52,6 +52,7 @@ const Textarea = ({
   disabled,
   emojiMask = false,
   htmlOptions = {},
+  id,
   inline = false,
   resize = 'none',
   error,
@@ -128,7 +129,7 @@ const Textarea = ({
         className={classes}
     >
     {label && (
-      <label>
+      <label htmlFor={id}>
       {
         requiredIndicator ? (
           <Caption className="pb_text_input_kit_label">

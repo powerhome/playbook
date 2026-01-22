@@ -68,6 +68,7 @@ const RichTextEditor = (props: RichTextEditorProps): React.ReactElement => {
     data = {},
     focus = false,
     htmlOptions = {},
+    id,
     inputOptions = {},
     inline = false,
     extensions,
@@ -222,15 +223,18 @@ const RichTextEditor = (props: RichTextEditorProps): React.ReactElement => {
         ref={focus ? containerRef : undefined}
     >
     {label && (
-      <label>
+      <label  htmlFor={id}>
         {
           requiredIndicator ? (
-            <Caption className="pb_text_input_kit_label">
+            <Caption className="pb_text_input_kit_label"
+                marginBottom="xs"
+            >
               {label} <span style={{ color: `${colors.error}` }}>*</span>
             </Caption>
           ) : (
             <Caption
                 className="pb_text_input_kit_label"
+                marginBottom="xs"
                 text={label}
             />
           )
