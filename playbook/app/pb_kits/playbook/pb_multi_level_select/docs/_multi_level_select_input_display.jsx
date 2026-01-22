@@ -71,28 +71,16 @@ const treeData = [
 
 const MultiLevelSelectInputDisplay = (props) => {
   return (
-    <>
-      <MultiLevelSelect
-          id="multi-level-select-input-display-none"
-          inputDisplay="none"
-          label="With Input Display None"
-          onSelect={(selectedNodes) =>
-            console.log("Selected Items", selectedNodes)
-          }
-          treeData={treeData}
-          {...props}
-      />
-      <br/>
-      <MultiLevelSelect
-          id="multi-level-select-input-display-pills"
-          label="With Input Display Pills (Default)"
-          onSelect={(selectedNodes) =>
-            console.log("Selected Items", selectedNodes)
-          }
-          treeData={treeData}
-          {...props}
-      />
-    </>
+    <MultiLevelSelect
+        id="multi-level-select-input-display-none"
+        inputDisplay="none"
+        label="With Input Display None"
+        onSelect={(selectedNodes) =>
+          console.log("Selected Items", selectedNodes)
+        }
+        treeData={treeData}
+        {...props}
+    />
   );
 };
 
