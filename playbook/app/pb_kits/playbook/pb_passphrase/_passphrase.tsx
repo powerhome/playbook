@@ -102,6 +102,7 @@ const Passphrase = (props: PassphraseProps): React.ReactElement => {
 
   const shieldIcon = getAllIcons()["shieldCheck"]
   const eyeIcon = getAllIcons()["eye"]
+  const hasLabel = label && label !== ""
 
   return (
     <div
@@ -114,9 +115,9 @@ const Passphrase = (props: PassphraseProps): React.ReactElement => {
       <label>
         <Flex
             align="baseline"
-            marginBottom="xs"
+            {...(hasLabel ? { marginBottom: "xs" } : {})}
         >
-          {requiredIndicator ? (
+          {hasLabel && (requiredIndicator ? (
             <Caption
                 className="passphrase-label"
             >
@@ -127,7 +128,7 @@ const Passphrase = (props: PassphraseProps): React.ReactElement => {
                 className="passphrase-label"
                 text={label}
             />
-          )}
+          ))}
           {tips.length > 0 && !confirmation &&
             <PbReactPopover
                 className="passphrase-tips"
