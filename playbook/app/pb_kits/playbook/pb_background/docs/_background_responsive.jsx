@@ -1,8 +1,8 @@
-import React, { Fragment as F } from 'react'
+import React from 'react'
 import Background from '../../pb_background/_background'
 
 const BackgroundResponsive = (props) => (
-  <F>
+  <>
     <Background
         alt="colorful background"
         backgroundColor={{ xs: "primary", sm: "warning", md: "success", lg: "error", xl: "category_1" }}
@@ -24,7 +24,7 @@ const BackgroundResponsive = (props) => (
         padding="xl"
         {...props}
     />
-  </F>
+  </>
 )
 
 export default BackgroundResponsive
