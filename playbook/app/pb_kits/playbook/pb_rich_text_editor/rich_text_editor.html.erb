@@ -1,5 +1,14 @@
+<% if object.advanced_editor %>
+  <div class="pb_rich_text_editor_advanced_kit" 
+       data-quill-editor
+       data-placeholder="<%= object.placeholder %>"
+       data-theme="snow">
+    <div class="quill-editor-container"></div>
+  </div>
+<% else %>
 <%= react_component('RichTextEditor',
                     object.rich_text_options,
                     aria: object.aria,
                     data: object.data
                    ) %>
+<% end %>

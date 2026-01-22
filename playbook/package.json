@@ -56,7 +56,8 @@
     "@popperjs/core": "^2.11.8",
     "classnames": "2.5.1",
     "flatpickr": "^4.6.13",
-    "intl-tel-input": "^24.7.0"
+    "intl-tel-input": "^24.7.0",
+    "quill": "^2.0.3"
   },
   "devDependencies": {
     "@actions/core": "1.10.0",
@@ -112,13 +113,13 @@
     "vite-plugin-ruby": "^5.0.0"
   },
   "peerDependencies": {
+    "highcharts": "^11.0.0",
+    "highcharts-react-official": "^3.0.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-is": "^17.0.2",
     "react-trix": "0.10.1",
-    "trix": "2.1.15",
-    "highcharts": "^11.0.0",
-    "highcharts-react-official": "^3.0.0"
+    "trix": "2.1.15"
   },
   "peerDependenciesMeta": {
     "highcharts": {

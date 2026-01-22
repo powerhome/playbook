@@ -82,6 +82,8 @@ export { default as ProgressStep } from '../pb_kits/playbook/pb_progress_step/_p
 export { default as ProgressStepItem } from '../pb_kits/playbook/pb_progress_step/_progress_step_item'
 export { default as Radio } from '../pb_kits/playbook/pb_radio/_radio'
 export { default as RichTextEditor } from '../pb_kits/playbook/pb_rich_text_editor/_rich_text_editor'
+// Initialize Quill editors for advanced editor mode
+import '../pb_kits/playbook/pb_rich_text_editor/_quill_editor'
 export { default as SectionSeparator } from '../pb_kits/playbook/pb_section_separator/_section_separator'
 export { default as Select } from '../pb_kits/playbook/pb_select/_select'
 export { default as SelectableCard } from '../pb_kits/playbook/pb_selectable_card/_selectable_card'
