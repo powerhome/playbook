@@ -7,3 +7,4 @@ export { default as BackgroundStatusSubtle } from './_background_status_subtle.j
 export { default as BackgroundCategory } from './_background_category.jsx'
 export { default as BackgroundSize } from './_background_size.jsx'
 export { default as BackgroundOverlay } from './_background_overlay.jsx'
+export { default as BackgroundResponsive } from './_background_responsive.jsx'
