@@ -1,8 +1,7 @@
 import React from 'react'
-
 import Checkbox from '../_checkbox'
 
-const CheckboxRequiredIndicator = (props) => {
+const CheckboxRequiredIndicator = () => {
   return (
     <div>
       <Checkbox
@@ -10,7 +9,6 @@ const CheckboxRequiredIndicator = (props) => {
           requiredIndicator
           text="Checkbox label"
           value="check-box value"
-          {...props}
       />
     </div>
   )
