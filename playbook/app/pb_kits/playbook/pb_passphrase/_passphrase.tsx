@@ -112,7 +112,10 @@ const Passphrase = (props: PassphraseProps): React.ReactElement => {
         id={id}
     >
       <label>
-        <Flex align="baseline">
+        <Flex
+            align="baseline"
+            marginBottom="xs"
+        >
           {requiredIndicator ? (
             <Caption
                 className="passphrase-label"
