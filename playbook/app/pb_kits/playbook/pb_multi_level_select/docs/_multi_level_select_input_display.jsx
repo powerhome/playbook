@@ -74,7 +74,6 @@ const MultiLevelSelectInputDisplay = (props) => {
     <MultiLevelSelect
         id="multi-level-select-input-display-none"
         inputDisplay="none"
-        label="With Input Display None"
         onSelect={(selectedNodes) =>
           console.log("Selected Items", selectedNodes)
         }

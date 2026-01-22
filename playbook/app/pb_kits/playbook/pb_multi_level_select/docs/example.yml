@@ -4,7 +4,7 @@ examples:
     - multi_level_select_single: Single Select
     - multi_level_select_single_children_only: Single Select w/ Hidden Radios
     - multi_level_select_return_all_selected: Return All Selected
-    - multi_level_select_input_display: Input Display
+    - multi_level_select_input_display: With Input Display None
     - multi_level_select_selected_ids: Selected Ids
     - multi_level_select_with_form: With Form
     - multi_level_select_color: With Pills (Custom Color)
@@ -24,7 +24,7 @@ examples:
     - multi_level_select_single: Single Select
     - multi_level_select_single_children_only: Single Select w/ Hidden Radios
     - multi_level_select_return_all_selected: Return All Selected
-    - multi_level_select_input_display: Input Display
+    - multi_level_select_input_display: With Input Display None
     - multi_level_select_selected_ids_react: Selected Ids
     - multi_level_select_color: With Pills (Custom Color)
     - multi_level_select_with_children: Checkboxes With Children
