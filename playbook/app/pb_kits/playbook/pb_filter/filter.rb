@@ -44,9 +44,9 @@ module Playbook
       def sort_icon(direction)
         case direction
         when "asc"
-          "sort-amount-up"
+          "arrow-up-short-wide"
         when "desc"
-          "sort-amount-down"
+          "arrow-down-wide-short"
         else
           ""
         end
