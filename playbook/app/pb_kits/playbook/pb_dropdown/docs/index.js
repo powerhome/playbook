@@ -11,6 +11,7 @@ export { default as DropdownSubcomponentStructure } from './_dropdown_subcompone
 export { default as DropdownError } from './_dropdown_error.jsx'
 export { default as DropdownDefaultValue } from './_dropdown_default_value.jsx'
 export { default as DropdownBlankSelection } from './_dropdown_blank_selection.jsx'
+export { default as DropdownWithPlaceholder } from './_dropdown_with_placeholder.jsx'
 export { default as DropdownClearSelection } from './_dropdown_clear_selection.jsx'
 export { default as DropdownSubtleVariant } from './_dropdown_subtle_variant.jsx'
 export { default as DropdownSeparatorsHidden } from './_dropdown_separators_hidden.jsx'
