@@ -22,7 +22,7 @@ const MultiValue = (props: Props) => {
   const { dark, multiKit, pillColor, truncate, wrapped, inputDisplay } = props.selectProps
 
   // Extract label - use data.label or data.name if available, otherwise use empty string
-  const label = props.data.label || (props.data as any).name || ''
+  const label = props.data.label || props.data.name || ''
 
   // If inputDisplay is "none", don't render the pill/badge, just return null (the count handled in ValueContainer file)
   if (inputDisplay === 'none') {

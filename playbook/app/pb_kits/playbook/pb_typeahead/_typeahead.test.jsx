@@ -294,16 +294,16 @@ test('input display none shows number of selected items', () => {
 
 test('typeahead with pills that use name instead of label', () => {
   const customOptions = [
-    { name: 'Nihar', id: '1' },
-    { name: 'kylehgousel', id: '2' },
+    { name: 'Nihar', value: '1' },
+    { name: 'kylehgousel', value: '2' },
   ]
 
   render(
     <Typeahead
         data={{ testid: 'pills-custom-fields-test' }}
-        defaultValue={[{ name: 'Nihar', id: '1' }]}
+        defaultValue={[{ name: 'Nihar', value: '1' }]}
         getOptionLabel={(option) => option.name}
-        getOptionValue={(option) => option.id}
+        getOptionValue={(option) => option.value}
         isMulti
         options={customOptions}
     />
