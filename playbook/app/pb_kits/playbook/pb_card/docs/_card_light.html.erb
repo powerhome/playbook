@@ -22,5 +22,15 @@
     <%= pb_rails("card", props: { height:"sm" }) do %> Card 2 <% end %>
     <%= pb_rails("card", props: { height:"xs" }) do %> Card 3 <% end %>
   <% end %>
+
+<%= pb_rails("caption", props: { text: "Text Align responsive: left on default, center on md, right on lg" }) %>
+  <%= pb_rails("card", props: {
+    text_align: { default: "left", md: "center", lg: "right" },
+    width: "100%"
+  })  do %>
+    <%= pb_rails("body", props: { }) do %> text 1 <% end %>
+    <%= pb_rails("body", props: { }) do %> text 2 <% end %>
+    <%= pb_rails("body", props: { }) do %> text 3 <% end %>
+  <% end %>
 <% end %>
 
