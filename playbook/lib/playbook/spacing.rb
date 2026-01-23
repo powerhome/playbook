@@ -195,7 +195,7 @@ module Playbook
         elsif gap_values.include?(gap_value.to_s)
           "gap_#{gap_value.underscore}"
         end
-      end.compact.join(" ")
+      end.flatten.compact.join(" ")
     end
 
     def column_gap_props
