@@ -291,3 +291,26 @@ test('input display none shows number of selected items', () => {
   const inputDisplayDiv = kit.querySelector(".pb_typeahead_selection_count")
   expect(inputDisplayDiv).toHaveTextContent("2 items selected") 
 })
+
+test('typeahead with pills that use name instead of label', () => {
+  const customOptions = [
+    { name: 'Nihar', id: '1' },
+    { name: 'kylehgousel', id: '2' },
+  ]
+
+  render(
+    <Typeahead
+        data={{ testid: 'pills-custom-fields-test' }}
+        defaultValue={[{ name: 'Nihar', id: '1' }]}
+        getOptionLabel={(option) => option.name}
+        getOptionValue={(option) => option.id}
+        isMulti
+        options={customOptions}
+    />
+  )
+
+  const kit = screen.getByTestId('pills-custom-fields-test')
+  const pill = kit.querySelector(".pb_form_pill_kit.pb_form_pill_primary")
+  expect(pill).toBeInTheDocument()
+  expect(pill).toHaveTextContent("Nihar")
+})
