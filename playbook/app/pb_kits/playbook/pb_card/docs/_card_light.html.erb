@@ -1,4 +1,26 @@
-<%= pb_rails("card", props: {
-})  do %>
-  Card content
+<%= pb_rails("flex", props: {
+  gap: "md",
+  orientation: "column"
+}) do %>
+
+  <%= pb_rails("caption", props: { text: "flex direction responsive: row on md + xl, column as default" }) %>
+  <%= pb_rails("card", props: {
+    flex_direction: { default: "column", md: "row", xl:"row" }
+  })  do %>
+      <%= pb_rails("body", props: { text: "Item 1", color: "default" }) %>
+    <%= pb_rails("body", props: { text: "Item 2", color: "default" }) %>
+    <%= pb_rails("body", props: { text: "Item 3", color: "default" }) %>
+  <% end %>
+
+  <%= pb_rails("caption", props: { text: "align items responsive: start on default, center on md, end on lg" }) %>
+  <%= pb_rails("card", props: {
+    display: "flex",
+    flex_direction: "row",
+    align_items: { default: "start", md: "center", lg: "end" },
+  })  do %>
+    <%= pb_rails("card", props: {height:"xs" }) do %> Card 1 <% end %>
+    <%= pb_rails("card", props: { height:"sm" }) do %> Card 2 <% end %>
+    <%= pb_rails("card", props: { height:"xs" }) do %> Card 3 <% end %>
+  <% end %>
 <% end %>
+
