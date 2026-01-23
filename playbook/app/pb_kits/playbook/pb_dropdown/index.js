@@ -116,10 +116,40 @@ export default class PbDropdown extends PbEnhancedElement {
       const el = this.target;
       el.style.height = "auto";
       requestAnimationFrame(() => {
-        const newHeight = el.scrollHeight + "px";
+        // Calculate 18em in pixels (matches SCSS max-height: 18em)
+        const fontSize = parseFloat(getComputedStyle(el).fontSize) || 16;
+        const maxHeight = fontSize * 18;
+        const scrollHeight = el.scrollHeight;
+        const newHeight = Math.min(scrollHeight, maxHeight);
         el.offsetHeight; // force reflow
-        el.style.height = newHeight;
+        el.style.height = newHeight + "px";
       });
+    }
+  }
+
+  adjustDropdownPosition(container) {
+    if (!container) return;
+
+    const wrapper = this.element.querySelector(".dropdown_wrapper");
+    if (!wrapper) return;
+
+    const wrapperRect = wrapper.getBoundingClientRect();
+    const h = container.getBoundingClientRect().height || container.scrollHeight;
+    const spaceBelow = window.innerHeight - wrapperRect.bottom;
+    const spaceAbove = wrapperRect.top;
+
+    // If not enough space below but enough space above, position above
+    if (spaceBelow < h + 10 && spaceAbove >= h + 10) {
+      container.style.top = "auto";
+      container.style.bottom = "calc(100% + 5px)";
+      container.style.marginTop = "0";
+      container.style.marginBottom = "0";
+    } else {
+      // Default: position below
+      container.style.top = "";
+      container.style.bottom = "";
+      container.style.marginTop = "";
+      container.style.marginBottom = "";
     }
   }
 
@@ -370,7 +400,16 @@ export default class PbDropdown extends PbEnhancedElement {
   showElement(elem) {
     elem.classList.remove("close");
     elem.classList.add("open");
-    elem.style.height = elem.scrollHeight + "px";
+    
+    // Calculate height respecting max-height constraint (18em)
+    const fontSize = parseFloat(getComputedStyle(elem).fontSize) || 16;
+    const maxHeight = fontSize * 18; // matches SCSS max-height: 18em
+    const scrollHeight = elem.scrollHeight;
+    const height = Math.min(scrollHeight, maxHeight);
+    elem.style.height = height + "px";
+    
+    // Auto-position dropdown above if not enough space below
+    this.adjustDropdownPosition(elem);
   }
 
   hideElement(elem) {

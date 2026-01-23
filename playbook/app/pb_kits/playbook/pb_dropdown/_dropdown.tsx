@@ -215,6 +215,34 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
         }
     }, [isDropDownClosed]);
 
+    // Auto-position dropdown above/below based on available space
+    useEffect(() => {
+        if (!isDropDownClosed && dropdownContainerRef.current) {
+            const container = dropdownContainerRef.current;
+            const wrapper = container.closest('.dropdown_wrapper') as HTMLElement;
+            if (!wrapper) return;
+
+            const wrapperRect = wrapper.getBoundingClientRect();
+            const h = container.getBoundingClientRect().height || container.scrollHeight;
+            const spaceBelow = window.innerHeight - wrapperRect.bottom;
+            const spaceAbove = wrapperRect.top;
+
+            // If not enough space below but enough space above, position above
+            if (spaceBelow < h + 10 && spaceAbove >= h + 10) {
+                container.style.top = "auto";
+                container.style.bottom = "calc(100% + 5px)";
+                container.style.marginTop = "0";
+                container.style.marginBottom = "0";
+            } else {
+                // Default: position below
+                container.style.top = "";
+                container.style.bottom = "";
+                container.style.marginTop = "";
+                container.style.marginBottom = "";
+            }
+        }
+    }, [isDropDownClosed, dropdownContainerRef]);
+
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setFilterItem(e.target.value);
