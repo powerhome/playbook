@@ -163,7 +163,7 @@ test('placeholder works with subtle variant', () => {
   )
 
   const kit = screen.getByTestId(testId)
-  expect(kit).toHaveClass('pb_dropdown_subtle')
+  expect(kit).toHaveClass('pb_dropdown_subtle_separators_hidden')
   const trigger = kit.querySelector('.pb_dropdown_trigger')
   expect(trigger).toHaveTextContent('Pick an option')
 })
