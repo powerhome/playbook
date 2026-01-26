@@ -131,7 +131,11 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>((props, ref) => {
         {requiredIndicator && (
           <span
               aria-hidden="true"
-              className="pb_checkbox_required_indicator"
+              className="pb_required_indicator"
+              style={{
+                color: colors.error,
+                marginLeft: spacing.space_xs,
+              }}
           >
            {'*'}
           </span>
