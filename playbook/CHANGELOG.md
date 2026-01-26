@@ -1,7 +1,9 @@
-# 16.1.0
+# Global Props: Supervised at All Times 👀
 ##### January 26, 2026
 
 ![release_image](https://github.com/user-attachments/assets/db119637-25e9-4157-9091-c5f7fdf034fc)
+
+Global props are now covered by automated tests. That means fewer surprises, safer refactors, and better protection against breaking changes when using global props across Playbook kits. Small change on the surface, big reliability boost underneath!
 
 [16.1.0](https://github.com/powerhome/playbook/tree/16.1.0) full list of changes:
 
