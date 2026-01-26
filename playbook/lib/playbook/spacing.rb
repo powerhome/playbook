@@ -176,26 +176,16 @@ module Playbook
       selected_gap_props = gap_options.keys.select { |sk| try(sk) }
       return nil unless selected_gap_props.present?
 
-      screen_size_values = %w[xs sm md lg xl]
-
       selected_gap_props.map do |k|
         gap_value = send(k)
         if gap_value.is_a?(Hash)
-          class_result = []
-
-          # Handle default value separately (generates base class without size prefix)
-          class_result << "gap_#{gap_value[:default].underscore}" if gap_value.key?(:default) && gap_values.include?(gap_value[:default].to_s)
-
-          # Handle responsive sizes (generates classes with size prefix)
-          gap_value.each do |media_size, gap_spacing_value|
-            class_result << "gap_#{media_size}_#{gap_spacing_value.underscore}" if screen_size_values.include?(media_size.to_s) && gap_values.include?(gap_spacing_value.to_s)
+          gap_value.map do |media_size, gap_spacing_value|
+            "gap_#{media_size}_#{gap_spacing_value.underscore}" if gap_values.include?(gap_spacing_value.to_s)
           end
-
-          class_result
         elsif gap_values.include?(gap_value.to_s)
           "gap_#{gap_value.underscore}"
         end
-      end.flatten.compact.join(" ")
+      end.compact.join(" ")
     end
 
     def column_gap_props
