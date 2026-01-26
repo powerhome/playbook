@@ -5,6 +5,18 @@
     <%= pb_rails("icon", props: { icon: "minus", classname: "indeterminate_icon hidden", fixed_width: true}) %>
   </span>
   <span class="pb_checkbox_label">
-    <%= pb_rails("body", props: { status: object.checkbox_label_status, text: object.text, dark: object.dark, margin_right: object.form_spacing ? "xs" : "" }) %>
+    <%= pb_rails("body", props: { status: object.checkbox_label_status, dark: object.dark, margin_right: object.form_spacing ? "xs" : "" }) do %>
+    <%= object.text%>
+      <% if object.required_indicator %>
+    <span
+      class="pb_checkbox-required-indicator"
+      aria-hidden="true"
+      style="color: #DA0014;"
+    >*</span>
+  <% end %>
   </span>
+
+
+<% end %>
+  
 <% end %>
