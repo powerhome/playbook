@@ -26,9 +26,9 @@ module Playbook
                     default: "_self"
       def classname
         if collapsible
-          "#{generate_classname('pb_nav_list_kit_item', active_class, highlighted_border_class)} #{generate_classname('pb_collapsible_nav_item', active_class, collapsible_trail_class)} #{font_size_class} #{font_weight_class} #{inactive_class} pb_nav_list_item_link_collapsible"
+          "#{generate_classname('pb_nav_list_kit_item', active_class, highlighted_border_class)} #{generate_classname('pb_collapsible_nav_item', active_class, collapsible_trail_class)} #{font_size_class} #{font_weight_class} pb_nav_list_item_link_collapsible"
         else
-          "#{generate_classname('pb_nav_list_kit_item', active_class, highlighted_border_class)} #{font_size_class} #{font_weight_class} pb_nav_list_item_link#{disabled_class}"
+          "#{generate_classname('pb_nav_list_kit_item', active_class, highlighted_border_class)} #{font_size_class} #{font_weight_class} #{inactive_class} pb_nav_list_item_link#{disabled_class}"
         end
       end
 
@@ -95,7 +95,7 @@ module Playbook
       end
 
       def collapsible_nav_classname
-        generate_classname("collapsible_nav_wrapper", active_class, collapsible_trail_class)
+        generate_classname("collapsible_nav_wrapper", active_class, collapsible_trail_class, inactive_class)
       end
 
     private
@@ -108,7 +108,7 @@ module Playbook
         disabled ? " pb_nav_item_disabled" : nil
       end
 
-      def inavtive_class
+      def inactive_class
         inactive ? " pb_nav_item_inactive" : nil
       end
 

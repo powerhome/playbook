@@ -107,13 +107,6 @@
     color: $text_lt_lighter !important;
     cursor: not-allowed !important;
   }
-   @media (hover: hover) {
-    &:hover {
-      .pb_nav_list_item_icon_section_collapsible {
-        color: $text_lt_lighter !important;
-      }
-    }
-  }
 }
 
 .pb_nav_item_inactive { 
@@ -122,12 +115,14 @@
     color: $text_lt_lighter !important;
     cursor: not-allowed !important;
   }
+}
    @media (hover: hover) {
     &:hover {
       .pb_nav_list_item_icon_section_collapsible {
-        color: $text_lt_lighter !important;
+        path {
+          color: $text_lt_lighter !important;
+        }
       }
     }
   }
-}
 }
