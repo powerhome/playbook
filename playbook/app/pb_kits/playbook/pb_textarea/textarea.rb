@@ -36,6 +36,8 @@ module Playbook
 
       def textarea_options
         {
+          'aria-describedby': error.present? ? error_id : nil,
+          'aria-invalid': error.present?,
           data: emoji_mask ? { pb_emoji_mask: true } : {},
         }
       end
@@ -64,6 +66,10 @@ module Playbook
         result[:data] = merged_data unless merged_data.empty?
 
         result
+      end
+
+      def error_id
+        "#{id}-error" if error.present?
       end
 
     private
