@@ -135,6 +135,7 @@
     position: sticky;
     top: 0;
     background-color: $white;
+    border-radius: $border_radius_md;
     z-index: $z_8;
   }
 
@@ -256,7 +257,7 @@
   }
   &.full_height_left {
     justify-content: flex-start;
-    
+
     .pb_dialog {
       border-radius: 0;
       height: 100%;
@@ -302,7 +303,7 @@
 
   &.full_height_center {
     justify-content: center;
-    
+
     .pb_dialog {
       border-radius: 0;
       height: 100%;
@@ -346,7 +347,7 @@
 
   &.full_height_right {
     justify-content: flex-end;
-    
+
     .pb_dialog {
       border-radius: 0;
       height: 100%;
@@ -417,7 +418,7 @@
       margin: unset !important;
       margin-right: auto !important;
     }
-    
+
     .pb_dialog {
       border-radius: 0;
       height: 100% !important;
@@ -463,7 +464,7 @@
 
   &.full_height_center {
     justify-content: center;
-    
+
     .pb_dialog {
       border-radius: 0;
       height: 100% !important;
@@ -510,7 +511,7 @@
       margin: unset !important;
       margin-left: auto !important;
     }
-    
+
     .pb_dialog {
       border-radius: 0;
       height: 100% !important;
