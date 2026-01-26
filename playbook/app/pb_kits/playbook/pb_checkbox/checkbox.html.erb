@@ -6,16 +6,13 @@
   </span>
   <span class="pb_checkbox_label">
     <%= pb_rails("body", props: { status: object.checkbox_label_status, dark: object.dark, margin_right: object.form_spacing ? "xs" : "" }) do %>
-    <%= object.text%>
+      <%= object.text%>
       <% if object.required_indicator %>
-    <span
-      class="pb_checkbox_required_indicator"
-      aria-hidden="true"
-    >*</span>
-  <% end %>
+        <span
+          class="pb_checkbox_required_indicator"
+          aria-hidden="true"
+        >*</span>
+      <% end %>
+    <% end %>
   </span>
-
-
-<% end %>
-  
 <% end %>
