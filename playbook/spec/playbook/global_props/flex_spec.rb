@@ -1,34 +1,61 @@
 # frozen_string_literal: true
 
 require_relative "../../../app/pb_kits/playbook/pb_body/body"
+require_relative "../../../app/pb_kits/playbook/pb_button/button"
+require_relative "../../../app/pb_kits/playbook/pb_card/card"
+require_relative "../../../app/pb_kits/playbook/pb_title/title"
+require_relative "../../../app/pb_kits/playbook/pb_text_input/text_input"
+require_relative "../../../app/pb_kits/playbook/pb_flex/flex"
+require_relative "../../../app/pb_kits/playbook/pb_link/link"
+require_relative "../../../app/pb_kits/playbook/pb_badge/badge"
 
 RSpec.describe Playbook::Flex do
   subject { Playbook::PbBody::Body }
-  let(:screen_sizes) { %w[xs sm md lg xl] }
 
-  describe "#classname" do
-    it "returns ordinal suffixed class name", :aggregate_failures do
-      13.times do |num|
-        expect(subject.new({ flex: num }).classname).to include("flex_#{num}")
+  test_global_prop(
+    :flex,
+    (0..12).to_a,
+    ->(v) { "flex_#{v}" },
+    responsive_pattern: ->(size, v) { "flex_#{size}_#{v}" },
+    test_subjects: [
+      Playbook::PbBody::Body,
+      Playbook::PbButton::Button,
+      Playbook::PbCard::Card,
+      Playbook::PbTitle::Title,
+      Playbook::PbTextInput::TextInput,
+      Playbook::PbFlex::Flex,
+      Playbook::PbLink::Link,
+      Playbook::PbBadge::Badge,
+    ]
+  )
 
-        screen_sizes.each do |size|
-          obj = {}
-          obj[size] = num
-          expect(subject.new({ flex: obj }).classname).to include("flex_#{size}_#{num}")
-        end
-      end
-    end
+  test_global_prop(
+    :flex,
+    %w[auto initial none],
+    ->(v) { "flex_#{v}" },
+    responsive_pattern: ->(size, v) { "flex_#{size}_#{v.underscore}" },
+    test_subjects: [
+      Playbook::PbBody::Body,
+      Playbook::PbButton::Button,
+      Playbook::PbCard::Card,
+      Playbook::PbTitle::Title,
+      Playbook::PbTextInput::TextInput,
+      Playbook::PbFlex::Flex,
+      Playbook::PbLink::Link,
+      Playbook::PbBadge::Badge,
+    ]
+  )
 
-    it "returns proper class name", :aggregate_failures do
-      %w[auto initial none].each do |word|
-        expect(subject.new({ flex: word }).classname).to include("flex_#{word}")
+  test_global_prop_absence(
+    :flex,
+    %w[flex_0 flex_1 flex_12 flex_auto flex_initial flex_none]
+  )
 
-        screen_sizes.each do |size|
-          obj = {}
-          obj[size] = word
-          expect(subject.new({ flex: obj }).classname).to include("flex_#{size}_#{word.underscore}")
-        end
-      end
-    end
-  end
+  # NOTE: Currently using allow_errors: true because globalProps generates classes for invalid values
+  test_global_prop_invalid_values(
+    :flex,
+    [999, -1, "invalid", "out_of_range", "bad_string", 13, "special-chars!@#"],
+    %w[flex_999 flex_-1 flex_invalid flex_out_of_range flex_bad_string flex_13 flex_special-chars!@#],
+    allow_errors: true
+  )
 end

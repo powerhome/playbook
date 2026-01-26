@@ -1,55 +1,42 @@
-import React from 'react'
-import { render, screen } from '../../test-utils'
-
-import Body from '../../../pb_body/_body'
+import { testGlobalProp, testGlobalPropResponsiveWithDefault, testGlobalPropAbsence, testGlobalPropInvalidValues } from './globalPropsTestHelper'
 import { camelToSnakeCase } from '../../../utilities/text'
-import { SCREEN_SIZES } from '../../test-utils'
+import Body from '../../../pb_body/_body'
+import Button from '../../../pb_button/_button'
+import Card from '../../../pb_card/_card'
+import Title from '../../../pb_title/_title'
+import Flex from '../../../pb_flex/_flex'
+import Link from '../../../pb_link/_link'
+import Badge from '../../../pb_badge/_badge'
 
-const testSubject = 'body'
+// Note: TextInput excluded - flexWrap is a flexbox property that doesn't apply to form inputs
+testGlobalProp(
+  'flexWrap',
+  ['wrap', 'nowrap', 'wrapReverse'],
+  (v) => `flex_wrap_${camelToSnakeCase(v)}`,
+  (size, v) => `flex_wrap_${size}_${camelToSnakeCase(v)}`,
+  [Body, Button, Card, Title, Flex, Link, Badge]
+)
 
-test('Global Props: returns proper class name', () => {
-  const propValues = ["wrap", "nowrap", "wrapReverse"]
-  for(let x = 0, y = 3; x < y; ++x) {
-    const testId = `${testSubject}-${propValues[x]}`
-    render(
-      <Body
-          data={{ testid: testId }}
-          flexWrap={`${propValues[x]}`}
-          text="Hi"
-      />
-    )
-    const kit = screen.getByTestId(testId)
-    expect(kit).toHaveClass(`flex_wrap_${camelToSnakeCase(propValues[x])}`)
+testGlobalPropResponsiveWithDefault(
+  'flexWrap',
+  { default: 'wrap', xs: 'nowrap', sm: 'wrap', md: 'nowrap' },
+  (v) => `flex_wrap_${camelToSnakeCase(v)}`,
+  (size, v) => `flex_wrap_${size}_${camelToSnakeCase(v)}`
+)
 
-    SCREEN_SIZES.forEach((size) => {
-      const testId = `${testSubject}-${propValues[x]}-${size}`
-      render(
-        <Body
-            data={{ testid: testId }}
-            flexWrap={{ [size]: propValues[x] }}
-            text="Hi"
-        />
-      )
-      const kit = screen.getByTestId(testId)
-      expect(kit).toHaveClass(`flex_wrap_${size}_${camelToSnakeCase(propValues[x])}`)
-    })
-  }
-})
+testGlobalPropAbsence(
+  'flexWrap',
+  ['flex_wrap_wrap', 'flex_wrap_nowrap', 'flex_wrap_wrap_reverse'],
+  undefined,
+  { skipNull: true }
+)
 
-test('Global Props: returns proper class name with default key', () => {
-  const testId = `${testSubject}-default-responsive`
-  render(
-    <Body
-        data={{ testid: testId }}
-        flexWrap={{ default: "wrap", xs: "nowrap", sm: "wrap", md: "nowrap" }}
-        text="Hi"
-    />
-  )
-  const kit = screen.getByTestId(testId)
-  // Should have base class for default value
-  expect(kit).toHaveClass(`flex_wrap_wrap`)
-  // Should have responsive classes for screen sizes
-  expect(kit).toHaveClass(`flex_wrap_xs_nowrap`)
-  expect(kit).toHaveClass(`flex_wrap_sm_wrap`)
-  expect(kit).toHaveClass(`flex_wrap_md_nowrap`)
-})
+// NOTE: Currently using skipKnownIssues: true because globalProps.ts generates classes for invalid values
+// NOTE: Using allowRenderingErrors: true because invalid types (like numbers) cause rendering errors with camelToSnakeCase
+testGlobalPropInvalidValues(
+  'flexWrap',
+  ['invalid', 'bad_value', 'not_a_wrap_value', 'special-chars!@#'],
+  ['flex_wrap_invalid', 'flex_wrap_bad_value', 'flex_wrap_not_a_wrap_value', 'flex_wrap_special-chars!@#'],
+  undefined,
+  { skipKnownIssues: true, allowRenderingErrors: true }
+)

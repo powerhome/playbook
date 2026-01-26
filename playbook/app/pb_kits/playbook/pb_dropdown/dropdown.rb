@@ -15,6 +15,8 @@ module Playbook
       prop :default_value
       prop :blank_selection, type: Playbook::Props::String,
                              default: ""
+      prop :custom_quick_pick_dates, type: Playbook::Props::HashProp,
+                                     default: {}
       prop :variant, type: Playbook::Props::Enum,
                      values: %w[default subtle quickpick],
                      default: "default"
@@ -94,7 +96,10 @@ module Playbook
       end
 
       def quickpick_options
-        QuickpickHelper.get_quickpick_options(range_ends_today: range_ends_today)
+        QuickpickHelper.get_quickpick_options(
+          range_ends_today: range_ends_today,
+          custom_quick_pick_dates: custom_quick_pick_dates
+        )
       end
     end
   end

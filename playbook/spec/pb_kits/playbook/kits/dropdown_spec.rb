@@ -24,6 +24,7 @@ RSpec.describe Playbook::PbDropdown::Dropdown do
   it { is_expected.to define_string_prop(:start_date_name).with_default("start_date_name") }
   it { is_expected.to define_string_prop(:end_date_id).with_default("end_date_id") }
   it { is_expected.to define_string_prop(:end_date_name).with_default("end_date_name") }
+  it { is_expected.to define_hash_prop(:custom_quick_pick_dates).with_default({}) }
 
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
@@ -242,6 +243,106 @@ RSpec.describe Playbook::PbDropdown::Dropdown do
       # Verify blank option does not have date fields
       expect(blank_option).not_to have_key(:formatted_start_date)
       expect(blank_option).not_to have_key(:formatted_end_date)
+    end
+
+    it "supports custom_quick_pick_dates to override default options" do
+      dropdown = subject.new(
+        variant: "quickpick",
+        custom_quick_pick_dates: {
+          dates: [
+            { label: "Last 15 months", value: { time_period: "months", amount: 15 } },
+            { label: "Custom Range", value: ["06/01/2022", "06/07/2022"] },
+          ],
+        }
+      )
+      options = dropdown.send(:quickpick_options)
+      expect(options.length).to eq(2)
+      expect(options.first[:label]).to eq("Last 15 months")
+      expect(options.last[:label]).to eq("Custom Range")
+    end
+
+    it "supports custom_quick_pick_dates with override false to append to defaults" do
+      dropdown = subject.new(
+        variant: "quickpick",
+        custom_quick_pick_dates: {
+          override: false,
+          dates: [
+            { label: "Custom Option", value: { time_period: "days", amount: 30 } },
+          ],
+        }
+      )
+      options = dropdown.send(:quickpick_options)
+      # Should have 10 defaults + 1 custom = 11 options
+      expect(options.length).to eq(11)
+      expect(options.first[:label]).to eq("Today")
+      expect(options.last[:label]).to eq("Custom Option")
+    end
+
+    it "custom_quick_pick_dates generates correct date values for time_period" do
+      dropdown = subject.new(
+        variant: "quickpick",
+        custom_quick_pick_dates: {
+          dates: [
+            { label: "Last 7 days", value: { time_period: "days", amount: 7 } },
+          ],
+        }
+      )
+      options = dropdown.send(:quickpick_options)
+      option = options.first
+      expect(option[:label]).to eq("Last 7 days")
+      expect(option[:value]).to be_an(Array)
+      expect(option[:value].length).to eq(2)
+      expect(option[:formatted_end_date]).to eq(Date.today.strftime("%m/%d/%Y"))
+    end
+
+    it "custom_quick_pick_dates generates correct date values for explicit date array" do
+      dropdown = subject.new(
+        variant: "quickpick",
+        custom_quick_pick_dates: {
+          dates: [
+            { label: "First Week of June 2022", value: ["06/01/2022", "06/07/2022"] },
+          ],
+        }
+      )
+      options = dropdown.send(:quickpick_options)
+      option = options.first
+      expect(option[:label]).to eq("First Week of June 2022")
+      expect(option[:formatted_start_date]).to eq("06/01/2022")
+      expect(option[:formatted_end_date]).to eq("06/07/2022")
+    end
+
+    it "custom_quick_pick_dates supports various time_period values" do
+      dropdown = subject.new(
+        variant: "quickpick",
+        custom_quick_pick_dates: {
+          dates: [
+            { label: "Last 2 weeks", value: { time_period: "weeks", amount: 2 } },
+            { label: "Last 3 months", value: { time_period: "months", amount: 3 } },
+            { label: "Last 2 quarters", value: { time_period: "quarters", amount: 2 } },
+            { label: "Last 1 year", value: { time_period: "years", amount: 1 } },
+          ],
+        }
+      )
+      options = dropdown.send(:quickpick_options)
+      expect(options.length).to eq(4)
+      options.each do |option|
+        expect(option).to include(:id, :label, :value, :formatted_start_date, :formatted_end_date)
+        expect(option[:formatted_end_date]).to eq(Date.today.strftime("%m/%d/%Y"))
+      end
+    end
+
+    it "custom_quick_pick_dates works with string keys" do
+      dropdown = subject.new(
+        variant: "quickpick",
+        custom_quick_pick_dates: {
+          "dates" => [
+            { "label" => "Custom", "value" => { "time_period" => "days", "amount" => 5 } },
+          ],
+        }
+      )
+      options = dropdown.send(:quickpick_options)
+      expect(options.length).to eq(1)
+      expect(options.first[:label]).to eq("Custom")
     end
   end
 end

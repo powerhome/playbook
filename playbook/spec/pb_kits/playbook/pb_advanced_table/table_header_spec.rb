@@ -19,6 +19,9 @@ RSpec.describe Playbook::PbAdvancedTable::TableHeader do
   }
   it { is_expected.to define_boolean_prop(:selectable_rows).with_default(false) }
   it { is_expected.to define_boolean_prop(:show_actions_bar).with_default(true) }
+  it { is_expected.to define_boolean_prop(:inline_row_loading).with_default(false) }
+  it { is_expected.to define_boolean_prop(:persist_toggle_expansion_button).with_default(false) }
+  it { is_expected.to define_array_prop(:table_data).with_default([]) }
 
   describe "#classname" do
     it "returns base class name" do
@@ -448,6 +451,157 @@ RSpec.describe Playbook::PbAdvancedTable::TableHeader do
         cell = { accessor: "name", label: "Name", colspan: 1 }
         result = instance.header_component_info(cell, 1, 0)
         expect(result[:props][:classname]).not_to include "pinned-left"
+      end
+    end
+  end
+
+  describe "#has_any_sub_rows?" do
+    context "when some rows have actual children" do
+      it "returns true with Hash data" do
+        table_data = [
+          { name: "Team A", children: [{ name: "Member 1" }] },
+          { name: "Team B" },
+        ]
+        instance = subject.new(table_data: table_data)
+        expect(instance.has_any_sub_rows?).to be true
+      end
+
+      it "returns true with OpenStruct data" do
+        table_data = [
+          OpenStruct.new(name: "Team A", children: [OpenStruct.new(name: "Member 1")]),
+          OpenStruct.new(name: "Team B"),
+        ]
+        instance = subject.new(table_data: table_data)
+        expect(instance.has_any_sub_rows?).to be true
+      end
+    end
+
+    context "when no rows have children" do
+      it "returns false" do
+        table_data = [
+          { name: "Item 1" },
+          { name: "Item 2" },
+        ]
+        instance = subject.new(table_data: table_data)
+        expect(instance.has_any_sub_rows?).to be false
+      end
+    end
+
+    context "when all rows have empty children arrays" do
+      it "returns false" do
+        table_data = [
+          { name: "2021", children: [] },
+          { name: "2022", children: [] },
+        ]
+        instance = subject.new(table_data: table_data)
+        expect(instance.has_any_sub_rows?).to be false
+      end
+    end
+
+    context "when rows have nil children" do
+      it "returns false" do
+        table_data = [
+          { name: "Leaf 1", children: nil },
+          { name: "Leaf 2", children: nil },
+        ]
+        instance = subject.new(table_data: table_data)
+        expect(instance.has_any_sub_rows?).to be false
+      end
+    end
+  end
+
+  describe "#show_toggle_all_button?" do
+    let(:column_definitions) { [{ accessor: "name", label: "Name" }] }
+
+    context "when enable_toggle_expansion is 'none'" do
+      it "returns false" do
+        table_data = [{ name: "Parent", children: [{ name: "Child" }] }]
+        instance = subject.new(
+          table_data: table_data,
+          column_definitions: column_definitions,
+          enable_toggle_expansion: "none"
+        )
+        expect(instance.show_toggle_all_button?).to be false
+      end
+    end
+
+    context "when enable_toggle_expansion is 'all'" do
+      context "with actual children" do
+        it "returns true" do
+          table_data = [{ name: "Parent", children: [{ name: "Child" }] }]
+          instance = subject.new(
+            table_data: table_data,
+            column_definitions: column_definitions,
+            enable_toggle_expansion: "all"
+          )
+          expect(instance.show_toggle_all_button?).to be true
+        end
+      end
+
+      context "with all empty children and inline_row_loading ON" do
+        it "returns false without persist_toggle_expansion_button" do
+          table_data = [
+            { name: "2021", children: [] },
+            { name: "2022", children: [] },
+          ]
+          instance = subject.new(
+            table_data: table_data,
+            column_definitions: column_definitions,
+            enable_toggle_expansion: "all",
+            inline_row_loading: true,
+            persist_toggle_expansion_button: false
+          )
+          expect(instance.show_toggle_all_button?).to be false
+        end
+
+        it "returns true with persist_toggle_expansion_button" do
+          table_data = [
+            { name: "2021", children: [] },
+            { name: "2022", children: [] },
+          ]
+          instance = subject.new(
+            table_data: table_data,
+            column_definitions: column_definitions,
+            enable_toggle_expansion: "all",
+            inline_row_loading: true,
+            persist_toggle_expansion_button: true
+          )
+          expect(instance.show_toggle_all_button?).to be true
+        end
+      end
+
+      context "with no children at all" do
+        it "returns false" do
+          table_data = [{ name: "Item 1" }, { name: "Item 2" }]
+          instance = subject.new(
+            table_data: table_data,
+            column_definitions: column_definitions,
+            enable_toggle_expansion: "all"
+          )
+          expect(instance.show_toggle_all_button?).to be false
+        end
+      end
+    end
+
+    context "when enable_toggle_expansion is 'header'" do
+      it "returns true when rows have children" do
+        table_data = [{ name: "Parent", children: [{ name: "Child" }] }]
+        instance = subject.new(
+          table_data: table_data,
+          column_definitions: column_definitions,
+          enable_toggle_expansion: "header"
+        )
+        expect(instance.show_toggle_all_button?).to be true
+      end
+
+      it "returns false when no rows have children" do
+        table_data = [{ name: "Item 1" }, { name: "Item 2" }]
+        instance = subject.new(
+          table_data: table_data,
+          column_definitions: column_definitions,
+          enable_toggle_expansion: "header"
+        )
+        expect(instance.show_toggle_all_button?).to be false
       end
     end
   end

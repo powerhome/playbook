@@ -4,6 +4,8 @@ import { TrixEditor } from 'react-trix'
 
 import inlineFocus from './inlineFocus'
 import useFocus from './useFocus'
+import Caption from '../pb_caption/_caption'
+import colors from '../tokens/exports/_colors.module.scss'
 import { globalProps, GlobalProps } from '../utilities/globalProps'
 import { buildAriaProps, buildDataProps, noop, buildHtmlProps } from '../utilities/props'
 
@@ -40,11 +42,14 @@ type RichTextEditorProps = {
   inputOptions?: { [key: string]: string | number | boolean | (() => void) },
   id?: string,
   inline?: boolean,
+  label?: string,
   extensions?: { [key: string]: string }[],
   name?: string,
   onChange: (html: string, text: string) => void,
   placeholder?: string,
-  textareaHeight?: string,
+  inputHeight?: "sm" | "md" | "lg",
+  inputMinHeight?: "sm" | "md" | "lg",
+  requiredIndicator?: boolean,
   simple?: boolean,
   sticky?: boolean,
   template: string,
@@ -63,6 +68,7 @@ const RichTextEditor = (props: RichTextEditorProps): React.ReactElement => {
     data = {},
     focus = false,
     htmlOptions = {},
+    id,
     inputOptions = {},
     inline = false,
     extensions,
@@ -74,7 +80,9 @@ const RichTextEditor = (props: RichTextEditorProps): React.ReactElement => {
     sticky = false,
     template = '',
     value = '',
-    maxWidth = "md"
+    maxWidth = "md",
+    requiredIndicator = false,
+    label,
   } = props
 
   const ariaProps = buildAriaProps(aria),
@@ -84,7 +92,7 @@ const RichTextEditor = (props: RichTextEditorProps): React.ReactElement => {
     containerRef = useRef<HTMLDivElement>(null)
 
   const htmlProps = buildHtmlProps(htmlOptions)
-  
+
   const handleOnEditorReady = (editorInstance: Editor) => {
     setEditor(editorInstance)
     setTimeout(() => {
@@ -92,7 +100,7 @@ const RichTextEditor = (props: RichTextEditorProps): React.ReactElement => {
       if (oldId) {
         const hiddenInput = document.getElementById(oldId)
         if (hiddenInput) {
-          const newId = (inputOptions.id as string) || oldId  
+          const newId = (inputOptions.id as string) || oldId
           hiddenInput.id = newId
           editorInstance.element.setAttribute('input', newId)
 
@@ -117,7 +125,7 @@ const RichTextEditor = (props: RichTextEditorProps): React.ReactElement => {
       // set button attributes
       inlineCodeButton.dataset.trixAttribute = 'inlineCode'
       blockCodeButton.insertAdjacentElement('afterend', inlineCodeButton)
-    } 
+    }
 
     if (toolbarBottom) editor.element.after(toolbarElement)
 
@@ -145,7 +153,7 @@ const RichTextEditor = (props: RichTextEditorProps): React.ReactElement => {
     if (!advancedEditor || !focus) return
 
     const handleFocus = () => setShowToolbarOnFocus(true)
-    
+
     const handleClickOutside = (event: Event) => {
       if (isClickInContainer(event) || isClickInPopover(event)) return
       setShowToolbarOnFocus(false)
@@ -213,6 +221,26 @@ const RichTextEditor = (props: RichTextEditorProps): React.ReactElement => {
         className={css}
         ref={focus ? containerRef : undefined}
     >
+    {label && (
+      <label  htmlFor={id}>
+        {
+          requiredIndicator ? (
+            <Caption className="pb_text_input_kit_label"
+                marginBottom="xs"
+            >
+              {label} <span style={{ color: `${colors.error}` }}>*</span>
+            </Caption>
+          ) : (
+            <Caption
+                className="pb_text_input_kit_label"
+                marginBottom="xs"
+                text={label}
+            />
+          )
+        }
+
+      </label>
+    )}
       {
         advancedEditor ? (
           <div 

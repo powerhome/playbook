@@ -109,12 +109,17 @@ module Playbook
 
         svg["class"] = %w[pb_custom_icon svg-inline--fa].concat([object.custom_icon_classname]).join(" ")
         svg["id"] = object.id
-        svg["data"] = object.data
         svg["height"] = "auto"
         svg["width"] = "auto"
         svg["tabindex"] = object.tabindex
         fill_color = object.color || "currentColor"
         doc.at_css("path")["fill"] = fill_color
+
+        if object.data.present?
+          object.data.each do |key, value|
+            svg["data-#{key}"] = value
+          end
+        end
 
         if object.aria.present?
           object.aria.each do |key, value|

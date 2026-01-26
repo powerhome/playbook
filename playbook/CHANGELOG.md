@@ -1,3 +1,53 @@
+# Highcharts Begone! 🪄✨📊
+##### January 09, 2026
+
+![release_image](https://github.com/user-attachments/assets/db119637-25e9-4157-9091-c5f7fdf034fc)
+
+The day has arrived: We’ve officially removed Highcharts from Playbook’s core bundle 🎉
+Don’t worry, charts still work! We have just removed all legacy Highcharts kits and replaced with new, lightweight chart wrappers!
+
+What this means for you:
+- No more Highcharts bundled into Playbook’s dist, making for a smaller bundle size!
+- Highcharts is now opt-in and only required if you use chart kits
+
+👉 Using chart kits? 
+- Install highcharts + highcharts-react-official and import from ‘playbook-ui/charts’
+
+👉 Not using chart kits? 
+- You’re free and clear.
+
+This is a breaking change but a big win for performance and maintainability!
+
+[16.0.0](https://github.com/powerhome/playbook/tree/16.0.0) full list of changes:
+
+**Breaking:**
+- Highcharts: Delete Legacy Highchart Kits + Separate New Kits Into New Entrypoint [\#5657](https://github.com/powerhome/playbook/pull/5657) ([nidaqg](https://github.com/nidaqg))
+
+
+**Kit Enhancements:**
+- Dropdown: Quickpick Variant Customquickpickdates Prop [\#5669](https://github.com/powerhome/playbook/pull/5669) ([elisashapiro](https://github.com/elisashapiro))
+- Rich Text Editor: Add Ability to Set Height Of Editor [\#5663](https://github.com/powerhome/playbook/pull/5663) ([nickamantia](https://github.com/nickamantia))
+- Textinput and Textarea: Add "emoji Mask" Input Validation [\#5662](https://github.com/powerhome/playbook/pull/5662) ([elisashapiro](https://github.com/elisashapiro))
+- Fixed Confirmation Toast: Make Auto Close Logic More Robust [\#5656](https://github.com/powerhome/playbook/pull/5656) ([nidaqg](https://github.com/nidaqg))
+- Text Input: Mandatory Field Prop for Input Fields [\#5651](https://github.com/powerhome/playbook/pull/5651) ([nidaqg](https://github.com/nidaqg))
+
+
+**Improvements:**
+
+- Global Props Automated Testing: Standardize With Shared Helpers [\#5681](https://github.com/powerhome/playbook/pull/5681) ([kangaree](https://github.com/kangaree))
+- Playbook Website: Alerts and Dialogs Rails Kit Category Page Bug [\#5654](https://github.com/powerhome/playbook/pull/5654) ([elisashapiro](https://github.com/elisashapiro))
+- Playbook Website: Accessibility Updates to New Tokens/global Props Pages [\#5648](https://github.com/powerhome/playbook/pull/5648) ([elisashapiro](https://github.com/elisashapiro))
+- Upgrade Playbook Icons [\#5646](https://github.com/powerhome/playbook/pull/5646) ([elisashapiro](https://github.com/elisashapiro))
+
+
+**New Kits:**
+
+- Timepicker Kit [\#5633](https://github.com/powerhome/playbook/pull/5633) ([elisashapiro](https://github.com/elisashapiro))
+
+
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/v15.8.0-rc.1...16.0.0)
+
 # ☎️ Your Phone Number, Your Rules ☎️
 ##### December 19, 2025
 

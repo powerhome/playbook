@@ -1,5 +1,5 @@
-import React from "react"
-import { render, screen } from "../utilities/test-utils"
+import React, { useState } from "react"
+import { render, screen, fireEvent, within } from "../utilities/test-utils"
 
 import Textarea from "./_textarea"
 
@@ -209,5 +209,77 @@ describe("TextArea Kit Props", () => {
     const textarea = kit.querySelector("textarea")
 
     expect(textarea.required).toBeTruthy()
+  })
+})
+
+describe("Textarea Emoji Mask", () => {
+  const TextareaEmojiMask = (props) => {
+    const [value, setValue] = useState('')
+    const handleOnChange = ({ target }) => {
+      setValue(target.value)
+    }
+
+    return (
+      <Textarea
+          emojiMask
+          onChange={handleOnChange}
+          value={value}
+          {...props}
+      />
+    )
+  }
+
+  test("removes emoji characters when emojiMask is enabled", () => {
+    render(
+      <TextareaEmojiMask
+          data={{ testid: testId }}
+      />
+    )
+
+    const kit = screen.getByTestId(testId)
+    const textarea = kit.querySelector("textarea")
+
+    fireEvent.change(textarea, { target: { value: 'Hello 👋 World 🌍' } })
+    expect(textarea.value).toBe('Hello  World ')
+
+    fireEvent.change(textarea, { target: { value: '😀😂🎉' } })
+    expect(textarea.value).toBe('')
+
+    fireEvent.change(textarea, { target: { value: 'Hello World' } })
+    expect(textarea.value).toBe('Hello World')
+  })
+
+  test("allows accented characters when emojiMask is enabled", () => {
+    render(
+      <TextareaEmojiMask
+          data={{ testid: testId }}
+      />
+    )
+
+    const kit = screen.getByTestId(testId)
+    const textarea = kit.querySelector("textarea")
+
+    fireEvent.change(textarea, { target: { value: 'Café résumé naïve' } })
+    expect(textarea.value).toBe('Café résumé naïve')
+
+    fireEvent.change(textarea, { target: { value: 'àëǒüñ' } })
+    expect(textarea.value).toBe('àëǒüñ')
+  })
+
+  test('renders required indicator asterisk when requiredIndicator is true', () => {
+    render(
+      <Textarea
+          data={{ testid: testId }}
+          label="Name"
+          required
+          requiredIndicator
+      />
+    )
+
+    const kit = screen.getByTestId(testId)
+    const label = within(kit).getByText(/Name/)
+
+    expect(label).toBeInTheDocument()
+    expect(kit).toHaveTextContent('*')
   })
 })

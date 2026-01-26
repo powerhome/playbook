@@ -1,7 +1,7 @@
 import React from 'react'
 import { render, screen } from '../utilities/test-utils'
 
-import { PbGaugeChart } from 'playbook-ui'
+import PbGaugeChart from './_pb_gauge_chart'
 
 beforeEach(() => {
   // Silences error logs within the test suite.

@@ -11,8 +11,78 @@ type QuickPickOption = {
   id?: string;
 };
 
+type CustomQuickPickDate = {
+  label: string;
+  value: string[] | { timePeriod: string; amount: number };
+};
+
+type CustomQuickPickDates = {
+  override?: boolean;
+  dates: CustomQuickPickDate[];
+};
+
+// Helper function to calculate date range from timePeriod and amount
+const calculateDateRange = (timePeriod: string, amount: number): Date[] => {
+  const endDate = new Date();
+  const startDate = new Date();
+
+  switch (timePeriod) {
+    case 'days':
+      startDate.setDate(endDate.getDate() - amount);
+      break;
+    case 'weeks':
+      startDate.setDate(endDate.getDate() - (amount * 7));
+      break;
+    case 'months':
+      startDate.setMonth(endDate.getMonth() - amount);
+      break;
+    case 'quarters':
+      startDate.setMonth(endDate.getMonth() - (amount * 3));
+      break;
+    case 'years':
+      startDate.setFullYear(endDate.getFullYear() - amount);
+      break;
+    default:
+      throw new Error('Invalid time period');
+  }
+  return [startDate, endDate];
+};
+
+// Helper to format date for display
+const formatDate = (date: Date) => {
+  const day = String(date.getDate()).padStart(2, "0");
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const year = date.getFullYear();
+
+  return `${month}/${day}/${year}`;
+};
+
+// Helper to create a QuickPickOption from a custom date
+const createOptionFromCustomDate = (customDate: CustomQuickPickDate): QuickPickOption => {
+  let dateRange: Date[];
+  
+  if (Array.isArray(customDate.value)) {
+    // Explicit date range as string array
+    dateRange = customDate.value.map((dateStr: string) => new Date(dateStr));
+  } else {
+    // Calculate from timePeriod and amount
+    dateRange = calculateDateRange(
+      customDate.value.timePeriod,
+      customDate.value.amount
+    );
+  }
+
+  return {
+    label: customDate.label,
+    value: dateRange,
+    formattedStartDate: formatDate(dateRange[0]),
+    formattedEndDate: formatDate(dateRange[1]),
+    id: `quickpick-${customDate.label.toLowerCase().replace(/\s+/g, '-')}`,
+  };
+};
+
 // Helper to get QuickPick options with date ranges
-const getQuickPickOptions = (rangeEndsToday = false): QuickPickOption[] => {
+const getQuickPickOptions = (rangeEndsToday = false, customQuickPickDates?: CustomQuickPickDates): QuickPickOption[] => {
   const today = new Date();
   const yesterday = DateTime.getYesterdayDate(new Date());
 
@@ -36,14 +106,7 @@ const getQuickPickOptions = (rangeEndsToday = false): QuickPickOption[] => {
   const lastYearStartDate = DateTime.getPreviousYearStartDate(new Date());
   const lastYearEndDate = DateTime.getPreviousYearEndDate(new Date());
 
-  const formatDate = (date: Date) => {
-  const day = String(date.getDate()).padStart(2, "0")
-  const month = String(date.getMonth() + 1).padStart(2, "0")
-  const year = date.getFullYear()
-
-  return `${month}/${day}/${year}`
-}
-  return [
+  const defaultOptions: QuickPickOption[] = [
     { label: 'Today', value: [today, today], id: 'quickpick-today' },
     { label: 'Yesterday', value: [yesterday, yesterday], formattedStartDate: `${formatDate(yesterday)}`, formattedEndDate: `${formatDate(yesterday)}`, id: 'quickpick-yesterday' },
     { label: 'This Week', value: [thisWeekStartDate, thisWeekEndDate], formattedStartDate: `${formatDate(thisWeekStartDate)}`, formattedEndDate: `${formatDate(thisWeekEndDate)}`, id: 'quickpick-this-week' },
@@ -55,6 +118,19 @@ const getQuickPickOptions = (rangeEndsToday = false): QuickPickOption[] => {
     { label: 'Last Quarter', value: [lastQuarterStartDate, lastQuarterEndDate], formattedStartDate: `${formatDate(lastQuarterStartDate)}`, formattedEndDate: `${formatDate(lastQuarterEndDate)}`, id: 'quickpick-last-quarter' },
     { label: 'Last Year', value: [lastYearStartDate, lastYearEndDate], formattedStartDate: `${formatDate(lastYearStartDate)}`, formattedEndDate: `${formatDate(lastYearEndDate)}`, id: 'quickpick-last-year' },
   ];
+
+  // Handle customQuickPickDates and override logic
+  if (customQuickPickDates && customQuickPickDates.dates && customQuickPickDates.dates.length > 0) {
+    const customOptions = customQuickPickDates.dates.map(createOptionFromCustomDate);
+    
+    if (customQuickPickDates.override === false) {
+      return [...defaultOptions, ...customOptions];
+    }
+    
+    return customOptions;
+  }
+
+  return defaultOptions;
 };
 
 export default getQuickPickOptions

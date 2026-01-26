@@ -46,14 +46,27 @@ module Playbook
               options[:data] = (options[:data] || {}).merge(message: validation[:message]) if validation[:message].present?
             end
 
+            options[:data] = (options[:data] || {}).merge(pb_emoji_mask: true) if props.key?(:emoji_mask) && props[:emoji_mask]
+
             input = super(name, **options, &block)
 
             input_id = input[/\bid="([^"]+)"/, 1] || "#{@object_name}_#{name}"
 
             if props[:label] == true
-              props[:label] = @template.label(@object_name, name)
+              # If using required_indicator, extract just the text and let the template handle rendering
+              props[:label] = if props[:required_indicator]
+                                if @object && @object.class.respond_to?(:human_attribute_name)
+                                  @object.class.human_attribute_name(name)
+                                else
+                                  name.to_s.humanize
+                                end
+                              else
+                                # Legacy behavior (generate full label HTML) left untouched
+                                @template.label(@object_name, name)
+                              end
             elsif props[:label].is_a?(String)
-              props[:label] = @template.label_tag(input_id, props[:label])
+              # If using required_indicator, keep as text; otherwise wrap in label_tag
+              props[:label] = @template.label_tag(input_id, props[:label]) unless props[:required_indicator]
             end
 
             @template.pb_rails(kit_name, props: props) do

@@ -1,11 +1,55 @@
 <%= pb_content_tag do %>
-    <% object.users.take(object.display_count).each do |user| %>
-      <%= pb_rails("avatar", props: user.merge({size: object.size, classname: "pb_multiple_users_item", dark: object.dark}) ) %>
-    <% end %>
+    <% if object.with_tooltip %>
+      <% object.users.take(object.display_count).each_with_index do |user, index| %>
+        <% user_id = "multiple-users-#{object.object_id}-user-#{index}" %>
+        <div id="<%= user_id %>" class="pb_multiple_users_item">
+          <%= pb_rails("avatar", props: user.except(:tooltip).merge({size: object.size, dark: object.dark})) %>
+        </div>
+      <% end %>
 
-    <% if object.more_than_four %>
-      <div class="pb_multiple_users_item multiple_users_badge_<%= object.size %><%= object.dark ? " dark" : "" %>">
-        <%= "+#{object.users.count - object.display_count}" %>
-      </div>
+      <% if object.more_than_four %>
+        <% badge_id = "multiple-users-#{object.object_id}-badge" %>
+        <div id="<%= badge_id %>" class="pb_multiple_users_item multiple_users_badge_<%= object.size %><%= object.dark ? " dark" : "" %>">
+          <%= "+#{object.users.count - object.display_count}" %>
+        </div>
+      <% end %>
+
+      <% object.users.take(object.display_count).each_with_index do |user, index| %>
+        <% if user[:tooltip].present? %>
+          <% user_id = "multiple-users-#{object.object_id}-user-#{index}" %>
+          <%= pb_rails("tooltip", props: {
+            trigger_element_selector: "##{user_id}",
+            tooltip_id: "#{user_id}-tooltip",
+            position: "top",
+            z_index: "10"
+          }) do %>
+            <%= user[:tooltip] %>
+          <% end %>
+        <% end %>
+      <% end %>
+
+      <% if object.more_than_four %>
+        <% badge_id = "multiple-users-#{object.object_id}-badge" %>
+        <%= pb_rails("tooltip", props: {
+          trigger_element_selector: "##{badge_id}",
+          tooltip_id: "#{badge_id}-tooltip",
+          position: "top",
+          z_index: "10"
+        }) do %>
+          <% object.users.drop(object.display_count).each do |user| %>
+            <div><%= user[:tooltip] || user[:name] %></div>
+          <% end %>
+        <% end %>
+      <% end %>
+    <% else %>
+      <% object.users.take(object.display_count).each do |user| %>
+        <%= pb_rails("avatar", props: user.merge({size: object.size, classname: "pb_multiple_users_item", dark: object.dark})) %>
+      <% end %>
+
+      <% if object.more_than_four %>
+        <div class="pb_multiple_users_item multiple_users_badge_<%= object.size %><%= object.dark ? " dark" : "" %>">
+          <%= "+#{object.users.count - object.display_count}" %>
+        </div>
+      <% end %>
     <% end %>
 <% end %>

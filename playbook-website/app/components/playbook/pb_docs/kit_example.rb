@@ -95,6 +95,9 @@ module Playbook
       end
 
       def sanitize_code(stringified_code)
+        # Chart components that should import from playbook-ui/charts
+        chart_components = %w[PbBarGraph PbCircleChart PbGaugeChart PbLineGraph]
+
         stringified_code = stringified_code.gsub('"../.."', '"playbook-ui"')
                                            .gsub('"../../"', '"playbook-ui"')
                                            .gsub("'../../'", "'playbook-ui'")
@@ -106,14 +109,27 @@ module Playbook
           "import { #{::Regexp.last_match(1)} } from 'playbook-ui'"
         end
         stringified_code = stringified_code.gsub("import { FormattedDate }", "import { Date as FormattedDate }")
-        # Combine separate playbook-ui import statements into one
+
+        # Separate chart components from regular components
         imports = stringified_code.scan(/^\s*import\s+{([^}]+)}\s+from\s+['"]playbook-ui['"]/)
-        components = imports.flatten.join(", ").split(",").map(&:strip).uniq
-        if components.any?
-          new_import_statement = "import { #{components.join(', ')} } from 'playbook-ui'"
+        all_components = imports.flatten.join(", ").split(",").map(&:strip).uniq
+
+        chart_imports = all_components.select { |comp| chart_components.include?(comp) }
+        regular_imports = all_components.reject { |comp| chart_components.include?(comp) }
+
+        if all_components.any?
+          # Remove all old import statements
           stringified_code.gsub!(/^\s*import\s+{([^}]+)}\s+from\s+['"]playbook-ui['"]/, "")
-          stringified_code = stringified_code.sub(/import\s+React[\s\S]+?\n/, "\\0\n#{new_import_statement}")
+
+          # Build new import statements
+          new_imports = []
+          new_imports << "import { #{regular_imports.join(', ')} } from 'playbook-ui'" if regular_imports.any?
+          new_imports << "import { #{chart_imports.join(', ')} } from 'playbook-ui/charts'" if chart_imports.any?
+
+          # Insert after React import
+          stringified_code = stringified_code.sub(/import\s+React[\s\S]+?\n/, "\\0\n#{new_imports.join("\n")}")
         end
+
         # Replace several empty lines with one empty line
         stringified_code.gsub!(/\n\s*\n{2,}/, "\n\n")
         stringified_code = dark ? stringified_code.gsub("{...props}", "dark") : stringified_code.gsub(/\s*{...props}\s*\n/, "\n")

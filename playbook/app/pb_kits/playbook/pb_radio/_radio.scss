@@ -13,6 +13,10 @@
   display: inline-flex;
   cursor: pointer;
 
+  &:has(input:disabled) {
+    cursor: not-allowed;
+  }
+
   .pb_radio_button {
     width: 22px;
     min-width: 22px;
@@ -84,6 +88,10 @@
 .pb_radio_kit.dark.error.vertical,
 .pb_radio_kit_vertical.dark,
 .pb_radio_kit_vertical.dark.error {
+  &:has(input:disabled) {
+    cursor: not-allowed;
+  }
+
   .pb_radio_button {
     border-color: $border_dark;
   }

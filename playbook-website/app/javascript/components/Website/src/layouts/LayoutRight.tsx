@@ -1,9 +1,22 @@
-import { Outlet } from "react-router-dom"
-import DarkModeToggle from "../components/DarkModeToggle.js"
+import { Outlet, useLocation } from "react-router-dom"
+import { useEffect } from "react"
 
-import { Background, Button, FlexItem, Flex } from "playbook-ui"
+import { Background, Button, Flex } from "playbook-ui"
 
 export default function LayoutRight({ dark }: { dark: string }) {
+  const location = useLocation()
+  
+  // Scroll to top when route changes
+  useEffect(() => {
+    // Scroll the main content area
+    const mainContent = document.querySelector('.pb--page--content--main')
+    if (mainContent) {
+      mainContent.scrollTop = 0
+    }
+    // Also scroll window as fallback
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }, [location.pathname])
+  
   return (
     <Background
         backgroundColor={dark ? "dark" : "white"}
@@ -26,12 +39,6 @@ export default function LayoutRight({ dark }: { dark: string }) {
             text='Back to Legacy View'
             variant='link'
         />
-        <FlexItem
-            className='pb--page--dark-mode-toggle-desktop'
-            marginRight='md'
-        >
-          <DarkModeToggle initMode={dark} />
-        </FlexItem>
       </Flex>
       <Outlet />
     </Background>

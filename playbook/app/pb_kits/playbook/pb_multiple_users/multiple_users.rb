@@ -8,6 +8,7 @@ module Playbook
                   values: %w[xxs xs],
                   default: "xs"
       prop :users, type: Playbook::Props::HashArray, required: true
+      prop :with_tooltip, type: Playbook::Props::Boolean, default: false
 
       def more_than_four
         users.count > 4

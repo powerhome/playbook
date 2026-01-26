@@ -23,6 +23,7 @@ export default defineConfig({
       preserveEntrySignatures: 'strict',
       input: {
         'chunks/vendor.js': resolve(__dirname, 'app/entrypoints/playbook.js'),
+        'charts.js': resolve(__dirname, 'app/entrypoints/playbook-charts.js'),
       },
       output: {
         assetFileNames: ({name}) => {
@@ -60,6 +61,10 @@ export default defineConfig({
         'trix',
         'react-trix',
         'tiptap/react',
+        'highcharts',
+        'highcharts-react-official',
+        'highcharts/highcharts-more',
+        'highcharts/modules/solid-gauge',
       ],
     },
   },
