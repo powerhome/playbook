@@ -135,7 +135,8 @@
     position: sticky;
     top: 0;
     background-color: $white;
-    border-radius: $border_radius_md;
+    border-top-left-radius: $border_radius_md;
+    border-top-right-radius: $border_radius_md;
     z-index: $z_8;
   }
 
