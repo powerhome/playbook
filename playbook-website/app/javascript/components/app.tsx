@@ -11,8 +11,15 @@ import ComponentList from './Website/src/pages/ComponentList'
 import CategoryShow from './Website/src/pages/CategoryShow'
 import KitShow from './Website/src/pages/KitShow'
 import IconList from './Website/src/pages/IconList'
+import Changelog from './Website/src/pages/Changelog'
+import GettingStarted from './Website/src/pages/GettingStarted'
+import DesignGuidelines from './Website/src/pages/DesignGuidelines'
+import GuidePage from './Website/src/pages/GuidePage'
+import Color from './Website/src/pages/DesignGuidelines/Color'
+import Spacing from './Website/src/pages/DesignGuidelines/Spacing'
+import Typography from './Website/src/pages/DesignGuidelines/Typography'
 import Error from './Error'
-import { CategoryLoader, ComponentsLoader, ComponentShowLoader, } from './Website/src/hooks/loaders'
+import { CategoryLoader, ComponentsLoader, ComponentShowLoader, GuidesLoader, GuidePageLoader } from './Website/src/hooks/loaders'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -36,12 +43,12 @@ const router = createBrowserRouter(
       <Route
           element={<KitShow />}
           loader={ComponentShowLoader}
-          path="kits/:name/:platform"
+          path="kits/advanced_table/:name/:platform"
       />
       <Route
           element={<KitShow />}
           loader={ComponentShowLoader}
-          path="kits/advanced_table/:name/:platform"
+          path="kits/:name/:platform"
       />
       <Route
           element={<CategoryShow />}
@@ -51,6 +58,51 @@ const router = createBrowserRouter(
       <Route
           element={<IconList />}
           path="icons"
+      />
+      <Route
+          element={<Changelog />}
+          loader={ComponentsLoader}
+          path="changelog"
+      />
+       <Route
+          element={<Changelog />}
+          loader={ComponentsLoader}
+          path="changelog/:variant"
+      />
+      <Route
+          element={<GettingStarted />}
+          loader={GuidesLoader}
+          path="guides/getting_started"
+      />
+      <Route
+          element={<GuidePage />}
+          loader={GuidePageLoader}
+          path="guides/getting_started/:page"
+      />
+      <Route
+          element={<DesignGuidelines />}
+          loader={GuidesLoader}
+          path="guides/design_guidelines"
+      />
+      <Route
+          element={<Color />}
+          loader={GuidesLoader}
+          path="guides/design_guidelines/color"
+      />
+      <Route
+          element={<Spacing />}
+          loader={GuidesLoader}
+          path="guides/design_guidelines/spacing"
+      />
+      <Route
+          element={<Typography />}
+          loader={GuidesLoader}
+          path="guides/design_guidelines/typography"
+      />
+      <Route
+          element={<GuidePage />}
+          loader={GuidePageLoader}
+          path="guides/design_guidelines/:page"
       />
 
     </Route>

@@ -23,6 +23,8 @@ RSpec.describe Playbook::PbTextarea::Textarea do
     is_expected.to define_boolean_prop(:emoji_mask)
       .with_default(false)
   }
+  it { is_expected.to define_prop(:required_indicator).with_default(false) }
+  it { is_expected.to define_hash_prop(:input_options).with_default({}) }
 
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
@@ -45,6 +47,37 @@ RSpec.describe Playbook::PbTextarea::Textarea do
       it "returns empty data in textarea_options" do
         textarea = subject.new(emoji_mask: false)
         expect(textarea.textarea_options[:data]).to eq({})
+      end
+    end
+  end
+
+  describe "#input_options" do
+    context "when input_options id is provided" do
+      it "allows setting id via input_options" do
+        textarea = subject.new(input_options: { id: "custom-textarea-id" })
+        expect(textarea.input_options[:id]).to eq "custom-textarea-id"
+      end
+    end
+
+    context "when input_options id is not provided" do
+      it "returns empty hash by default" do
+        textarea = subject.new({})
+        expect(textarea.input_options).to eq({})
+      end
+    end
+
+    context "when input_options contains other attributes" do
+      it "allows setting multiple attributes" do
+        textarea = subject.new(
+          input_options: {
+            id: "textarea-id",
+            class: "custom-class",
+            data: { controller: "textarea" },
+          }
+        )
+        expect(textarea.input_options[:id]).to eq "textarea-id"
+        expect(textarea.input_options[:class]).to eq "custom-class"
+        expect(textarea.input_options[:data]).to eq({ controller: "textarea" })
       end
     end
   end

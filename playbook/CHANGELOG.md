@@ -1,3 +1,44 @@
+# Global Props: Supervised at All Times 👀
+##### January 26, 2026
+
+![release_image](https://github.com/user-attachments/assets/db119637-25e9-4157-9091-c5f7fdf034fc)
+
+Global props are now covered by automated tests. That means fewer surprises, safer refactors, and better protection against breaking changes when using global props across Playbook kits. Small change on the surface, big reliability boost underneath!
+
+[16.1.0](https://github.com/powerhome/playbook/tree/16.1.0) full list of changes:
+
+**Kit Enhancements:**
+
+- Rich Text Editor + Textarea: `requiredindicator` Prop for Input Fields \(2 Of 6\) [\#5724](https://github.com/powerhome/playbook/pull/5724) ([kyleghousel](https://github.com/kyleghousel))
+- Textarea Kit: Fix Unchangeable Input Id (rails) [\#5715](https://github.com/powerhome/playbook/pull/5715) ([kangaree](https://github.com/kangaree))
+- Advanced Table: Add `inline_row_loading` Prop (rails) [\#5713](https://github.com/powerhome/playbook/pull/5713) ([elisashapiro](https://github.com/elisashapiro))
+- Multiple Users Kit: Add Tooltip Support Per Individual User (rails) [\#5700](https://github.com/powerhome/playbook/pull/5700) ([elisashapiro](https://github.com/elisashapiro))
+- Multilevelselect: Add Disabled Functionality for Single Variant (react and Rails) [\#5680](https://github.com/powerhome/playbook/pull/5680) ([elisashapiro](https://github.com/elisashapiro))
+
+
+**Fixed Bugs:**
+
+- Textarea Kit: Tempo Sentry Typeerror [\#5723](https://github.com/powerhome/playbook/pull/5723) ([elisashapiro](https://github.com/elisashapiro))
+- Icon Kit: Fix Data Hashprop Propagation to a Rendered Svg (rails Only) [\#5682](https://github.com/powerhome/playbook/pull/5682) ([victor-oliveira](https://github.com/victor-oliveira), ([kangaree](https://github.com/kangaree)))
+
+
+**Improvements:**
+
+- Update Ci-kubed Library Version to V9.8.0 [\#5741](https://github.com/powerhome/playbook/pull/5741) ([c-gerke](https://github.com/c-gerke))
+- Upgrades Playbook Icons [\#5737](https://github.com/powerhome/playbook/pull/5737) ([elisashapiro](https://github.com/elisashapiro))
+- Background Kit: Write Responsive Prop Docs (react) [\#5736](https://github.com/powerhome/playbook/pull/5736) ([kyleghousel](https://github.com/kyleghousel))
+- Playbook Website Docs: Multi Level Select - Input Display None [\#5735](https://github.com/powerhome/playbook/pull/5735) ([nkp521](https://github.com/nkp521))
+- Remove Examples Folder from Repo [\#5731](https://github.com/powerhome/playbook/pull/5731) ([nidaqg](https://github.com/nidaqg))
+- Global Props Automated Testing: Integration Tests [\#5726](https://github.com/powerhome/playbook/pull/5726) ([kangaree](https://github.com/kangaree))
+- Move Playbook to Hq [\#5710](https://github.com/powerhome/playbook/pull/5710) ([dgmorales](https://github.com/dgmorales))
+- Global Props Automated Testing: Cover All Props [\#5707](https://github.com/powerhome/playbook/pull/5707) ([kangaree](https://github.com/kangaree))
+- Beta Website: Enhancements [\#5547]([https://github.com/powerhome/playbook/pull/5706](https://github.com/powerhome/playbook/pull/5547)) ([nidaqg](https://github.com/nidaqg))
+- Beta Website: Kit Show Page and Header Enhancements [\#5706](https://github.com/powerhome/playbook/pull/5706) ([nidaqg](https://github.com/nidaqg))
+- Update Github Action to Tag Automated Prs As Inactive Rcs by Default [\#5699](https://github.com/powerhome/playbook/pull/5699) ([nidaqg](https://github.com/nidaqg))
+
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/v16.1.0-rc.3...16.1.0)
+
 # Highcharts Begone! 🪄✨📊
 ##### January 09, 2026
 

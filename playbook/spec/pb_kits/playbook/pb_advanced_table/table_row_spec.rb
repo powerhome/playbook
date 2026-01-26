@@ -25,6 +25,7 @@ RSpec.describe Playbook::PbAdvancedTable::TableRow do
       .with_default("header")
       .with_values("all", "header", "none")
   }
+  it { is_expected.to define_boolean_prop(:inline_row_loading).with_default(false) }
 
   describe "#classname" do
     context "basic functionality" do
@@ -432,6 +433,101 @@ RSpec.describe Playbook::PbAdvancedTable::TableRow do
       it "falls back to row font color when column font color is not present" do
         result = instance.cell_component_info({ accessor: "none" }, 0, nil, "red")
         expect(result[:props][:html_options][:style][:color]).to eq "red"
+      end
+    end
+  end
+
+  describe "#show_expand_button?" do
+    let(:column_definitions) { [{ accessor: "name", label: "Name", cellAccessors: ["level1"] }] }
+
+    context "when row has actual children" do
+      it "returns true" do
+        row = { name: "Parent", children: [{ name: "Child 1" }] }
+        instance = subject.new(row: row, depth: 0, column_definitions: column_definitions)
+        expect(instance.show_expand_button?).to be true
+      end
+    end
+
+    context "when row has no children key" do
+      it "returns false" do
+        row = { name: "Leaf" }
+        instance = subject.new(row: row, depth: 0, column_definitions: column_definitions)
+        expect(instance.show_expand_button?).to be false
+      end
+    end
+
+    context "when row has empty children array" do
+      context "with inline_row_loading disabled" do
+        it "returns false" do
+          row = { name: "Lazy Parent", children: [] }
+          instance = subject.new(row: row, depth: 0, column_definitions: column_definitions, inline_row_loading: false)
+          expect(instance.show_expand_button?).to be false
+        end
+      end
+
+      context "with inline_row_loading enabled" do
+        it "returns true" do
+          row = { name: "Lazy Parent", children: [] }
+          instance = subject.new(row: row, depth: 0, column_definitions: column_definitions, inline_row_loading: true)
+          expect(instance.show_expand_button?).to be true
+        end
+      end
+    end
+
+    context "when row has nil children" do
+      it "returns false" do
+        row = { name: "Leaf", children: nil }
+        instance = subject.new(row: row, depth: 0, column_definitions: column_definitions)
+        expect(instance.show_expand_button?).to be false
+      end
+
+      it "returns false even with inline_row_loading enabled" do
+        row = { name: "Leaf", children: nil }
+        instance = subject.new(row: row, depth: 0, column_definitions: column_definitions, inline_row_loading: true)
+        expect(instance.show_expand_button?).to be false
+      end
+    end
+  end
+
+  describe "#row_children" do
+    context "with Hash row" do
+      it "returns children using symbol key" do
+        row = { name: "Parent", children: [{ name: "Child" }] }
+        instance = subject.new(row: row, depth: 0)
+        expect(instance.row_children).to eq [{ name: "Child" }]
+      end
+
+      it "returns children using string key" do
+        row = { "name" => "Parent", "children" => [{ "name" => "Child" }] }
+        instance = subject.new(row: row, depth: 0)
+        expect(instance.row_children).to eq [{ "name" => "Child" }]
+      end
+
+      it "returns nil when children key is absent" do
+        row = { name: "Leaf" }
+        instance = subject.new(row: row, depth: 0)
+        expect(instance.row_children).to be_nil
+      end
+
+      it "returns empty array when children is empty" do
+        row = { name: "Lazy", children: [] }
+        instance = subject.new(row: row, depth: 0)
+        expect(instance.row_children).to eq []
+      end
+    end
+
+    context "with OpenStruct row" do
+      it "returns children using method access" do
+        row = OpenStruct.new(name: "Parent", children: [OpenStruct.new(name: "Child")])
+        instance = subject.new(row: row, depth: 0)
+        expect(instance.row_children.length).to eq 1
+        expect(instance.row_children.first.name).to eq "Child"
+      end
+
+      it "returns empty array when children is empty" do
+        row = OpenStruct.new(name: "Lazy", children: [])
+        instance = subject.new(row: row, depth: 0)
+        expect(instance.row_children).to eq []
       end
     end
   end

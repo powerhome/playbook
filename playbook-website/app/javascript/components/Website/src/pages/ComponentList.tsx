@@ -1,13 +1,13 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { NavLink, Outlet, useLoaderData, useOutlet } from "react-router-dom"
 import { Body, Flex } from 'playbook-ui'
 
 import { KitCard } from "../components/KitCard"
-import { KitFilter } from "../components/KitFilter"
 import { Hero } from "../components/Hero"
 import { KitGrid } from "../components/KitGrid"
 import { PageContainer } from "../components/PageContainer"
 import { CategoryTitle } from "../components/CategoryTitle"
+import { usePlatform } from "../contexts/PlatformContext"
 
 export type Kit = {
   id?: any
@@ -22,6 +22,7 @@ export type Kit = {
     status: "stable" | "beta";
   }[];
   description: string;
+  parent?: string;
 };
 
 export type Kits = Kit[];
@@ -37,25 +38,25 @@ export default function ComponentList() {
   const outlet = useOutlet()
   const { kits } = useLoaderData()
   const [kitsToShow, setKitsToShow] = useState(kits)
-  const [platform, setPlatform] = useState('react')
+  const { platform } = usePlatform()
+
+  // Filter kits based on platform
+  useEffect(() => {
+    const filtered = kits.map((kit: Kit) => {
+      const filteredComponents = kit.components.filter(component => 
+        component.platforms?.includes(platform)
+      )
+      return { ...kit, components: filteredComponents }
+    }).filter((kit: Kit) => kit.components.length > 0)
+    
+    setKitsToShow(filtered)
+  }, [platform, kits])
 
   return (
     <>
       {!outlet && (
         <>
           <Hero description={description} title="Components" />
-
-          <Flex
-            align="center"
-            orientation="column"
-            paddingBottom="lg"
-          >
-            <KitFilter
-              kits={kits}
-              setFilteredKits={setKitsToShow}
-              setPlatform={setPlatform}
-            />
-          </Flex>
 
           <PageContainer>
             {kitsToShow.filter(({ components }: {components: Component[] }) => 
