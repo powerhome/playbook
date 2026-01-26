@@ -13,6 +13,7 @@ const TextareaDefault = (props) => {
           label="Label"
           rows={4}
           {...props}
+          id="example-1"
       />
 
       <br />
@@ -21,6 +22,7 @@ const TextareaDefault = (props) => {
           label="Label"
           placeholder="Placeholder text"
           {...props}
+          id="example-2"
       />
 
       <br />
@@ -32,6 +34,7 @@ const TextareaDefault = (props) => {
           placeholder="Placeholder text"
           value={value}
           {...props}
+          id="example-3"
       />
 
     </div>
