@@ -68,9 +68,7 @@
     .pb_dropdown_container {
       position: absolute;
       background-color: $white;
-      overflow-y: auto;
-      overflow-x: hidden;
-      max-height: 18em;
+      overflow: hidden;
       box-shadow: $shadow_deep;
       border-radius: $border_rad_heavier;
       border: 1px solid $border_light;
