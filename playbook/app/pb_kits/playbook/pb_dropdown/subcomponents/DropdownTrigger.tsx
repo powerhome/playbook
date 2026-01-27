@@ -44,6 +44,7 @@ const DropdownTrigger = (props: DropdownTriggerProps) => {
 
   const {
     autocomplete,
+    clearable,
     filterItem,
     handleBackspace,
     handleChange,
@@ -225,7 +226,7 @@ const DropdownTrigger = (props: DropdownTriggerProps) => {
                       key={`${isDropDownClosed ? "chevron-down" : "chevron-up"}`}
                   > 
                   {
-                    selectedArray.length > 0 && (
+                    clearable !== false && selectedArray.length > 0 && (
                       <div onClick={(e)=>{e.stopPropagation();handleBackspace()}}>
                         <Icon
                             cursor="pointer"
