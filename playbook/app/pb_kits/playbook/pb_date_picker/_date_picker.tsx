@@ -196,6 +196,8 @@ const DatePicker = (props: DatePickerProps): React.ReactElement => {
 
   const angleDown = getAllIcons()["angleDown"].icon as unknown as { [key: string]: SVGElement }
 
+  const errorId = error ? `${pickerId}-error` : undefined
+
   return (
     <div
         {...ariaProps}
@@ -211,14 +213,18 @@ const DatePicker = (props: DatePickerProps): React.ReactElement => {
       >
 
         {!hideLabel && (
-          <Caption
-              className="pb_date_picker_kit_label"
-              text={label}
-          />
+           <label htmlFor={pickerId}>
+            <Caption
+                className="pb_date_picker_kit_label"
+                text={label}
+            />
+          </label>
         )}
           <>
             <div className="date_picker_input_wrapper">
               <input
+                  aria-describedby={errorId}
+                  aria-invalid={!!error}
                   autoComplete="off"
                   className="date_picker_input"
                   disabled={disableInput}
@@ -232,6 +238,9 @@ const DatePicker = (props: DatePickerProps): React.ReactElement => {
 
               {error &&
                   <Body
+                      aria={{ atomic: "true", live: "polite" }}
+                      htmlOptions={{ role: "alert" }}
+                      id={errorId}
                       status="negative"
                       text={error}
                       variant={null}
