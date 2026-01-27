@@ -43,6 +43,7 @@ RSpec.describe Playbook::PbTimePicker::TimePicker do
       expect(props[:showTimezone]).to eq(false)
       expect(props[:required]).to eq(false)
       expect(props[:disabled]).to eq(false)
+      expect(props[:requiredIndicator]).to eq(false)
     end
 
     it "includes error when provided" do
@@ -142,6 +143,13 @@ RSpec.describe Playbook::PbTimePicker::TimePicker do
       props = instance.time_picker_react_props
 
       expect(props[:htmlOptions]).to eq({ style: "margin-top: 10px" })
+    end
+
+    it "includes requiredIndicator when true" do
+      instance = subject.new({ required_indicator: true })
+      props = instance.time_picker_react_props
+
+      expect(props[:requiredIndicator]).to eq(true)
     end
   end
 end

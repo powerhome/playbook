@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import TimePicker from '../../pb_time_picker/_time_picker'
 import Body from '../../pb_body/_body'
+import Flex from '../../pb_flex/_flex'
 
 const TimePickerOnHandler = (props) => {
   const [selectedTime, setSelectedTime] = useState('')
@@ -17,7 +18,9 @@ const TimePickerOnHandler = (props) => {
   return (
     <div>
       {(selectedTime || closedTime) && (
-        <div style={{ marginBottom: '16px' }}>
+        <Flex marginBottom="sm" 
+            orientation="column"
+        >
           {selectedTime && (
             <Body
                 text={`onChange: ${selectedTime}`}
@@ -29,7 +32,7 @@ const TimePickerOnHandler = (props) => {
                 text={`onClose: ${closedTime}`}
             />
           )}
-        </div>
+        </Flex>
       )}
       <TimePicker
           id="time-picker-on-handler"

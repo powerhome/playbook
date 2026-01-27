@@ -16,6 +16,8 @@ module Playbook
       prop :name, type: Playbook::Props::String
       prop :required, type: Playbook::Props::Boolean,
                       default: false
+      prop :required_indicator, type: Playbook::Props::Boolean,
+                                default: false
       prop :show_timezone, type: Playbook::Props::Boolean,
                            default: false
       prop :time_format, type: Playbook::Props::Enum,
@@ -68,6 +70,7 @@ module Playbook
           minTime: min_time,
           name: name,
           required: required,
+          requiredIndicator: required_indicator,
           showTimezone: show_timezone,
           timeFormat: time_format,
           validationMessage: validation_message,

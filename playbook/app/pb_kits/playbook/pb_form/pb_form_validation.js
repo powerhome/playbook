@@ -26,6 +26,10 @@ class PbFormValidation extends PbEnhancedElement {
       const isPhoneNumberInput = field.closest('.pb_phone_number_input')
       if (isPhoneNumberInput) return
 
+      // Skip TimePicker inputs - they handle their own validation
+      const isTimePickerInput = field.closest('.pb_time_picker')
+      if (isTimePickerInput) return
+
       FIELD_EVENTS.forEach((e) => {
         field.addEventListener(e, debounce((event) => {
           this.validateFormField(event)
@@ -67,13 +71,16 @@ class PbFormValidation extends PbEnhancedElement {
 
     // Check if this is a phone number input
     const isPhoneNumberInput = kitElement.classList.contains('pb_phone_number_input')
+    
+    // Check if this is a TimePicker input
+    const isTimePickerInput = kitElement.classList.contains('pb_time_picker')
 
     // ensure clean error message state
     this.clearError(target)
     kitElement.classList.add('error')
 
-    // Only add error message if it's NOT a phone number input
-    if (!isPhoneNumberInput) {
+    // Only add error message if it's NOT a phone number input or TimePicker input
+    if (!isPhoneNumberInput && !isTimePickerInput) {
       // set the error message element
       const errorMessageContainer = this.errorMessageContainer
 

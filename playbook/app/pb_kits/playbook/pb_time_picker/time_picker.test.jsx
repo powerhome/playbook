@@ -1,5 +1,5 @@
 import React from 'react'
-import { render, screen, fireEvent } from '../utilities/test-utils'
+import { render, screen, fireEvent, within } from '../utilities/test-utils'
 
 import TimePicker from './_time_picker'
 
@@ -110,5 +110,51 @@ describe('TimePicker', () => {
     fireEvent.click(input)
     expect(screen.getByText('AM')).toBeInTheDocument()
     expect(screen.getByText('PM')).toBeInTheDocument()
+  })
+
+  test('renders required indicator asterisk when requiredIndicator is true', () => {
+    render(
+      <TimePicker
+          data={{ testid: 'required-indicator-picker' }}
+          label="Select Time"
+          requiredIndicator
+      />
+    )
+    const kit = screen.getByTestId('required-indicator-picker')
+    const label = within(kit).getByText(/Select Time/)
+    
+    expect(label).toBeInTheDocument()
+    expect(kit).toHaveTextContent('*')
+  })
+
+  test('requiredIndicator works independently of required prop', () => {
+    render(
+      <TimePicker
+          data={{ testid: 'indicator-without-required' }}
+          label="Select Time"
+          requiredIndicator
+      />
+    )
+    const kit = screen.getByTestId('indicator-without-required')
+    
+    expect(kit).toHaveTextContent('*')
+    const input = screen.getByPlaceholderText('Select Time')
+    expect(input).not.toHaveAttribute('required')
+  })
+
+  test('requiredIndicator and required can be used together', () => {
+    render(
+      <TimePicker
+          data={{ testid: 'both-props-picker' }}
+          label="Select Time"
+          required
+          requiredIndicator
+      />
+    )
+    const kit = screen.getByTestId('both-props-picker')
+    const input = screen.getByPlaceholderText('Select Time')
+    
+    expect(kit).toHaveTextContent('*')
+    expect(input).toHaveAttribute('required')
   })
 })
