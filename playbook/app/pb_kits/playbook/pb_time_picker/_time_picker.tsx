@@ -185,6 +185,28 @@ const TimePicker = (props: TimePickerProps): JSX.Element => {
   const [showHourDropdown, setShowHourDropdown] = useState(false)
   const [showMinuteDropdown, setShowMinuteDropdown] = useState(false)
 
+  // Clicking the clock add-on opens the dropdown
+  useEffect(() => {
+    if (disabled) return
+
+    const addOnCard = document.querySelector(`#${uniqueId}-input`)?.closest('.text_input_wrapper_add_on')?.querySelector('.add-on-card') as HTMLElement
+    
+    if (addOnCard) {
+      const handleAddOnClick = (e: Event) => {
+        e.preventDefault()
+        e.stopPropagation()
+        setShowDropdown(true)
+      }
+      
+      addOnCard.addEventListener('click', handleAddOnClick)
+      addOnCard.style.cursor = 'pointer'
+      
+      return () => {
+        addOnCard.removeEventListener('click', handleAddOnClick)
+      }
+    }
+  }, [uniqueId, disabled, setShowDropdown])
+
   // Input dropdown scrolling
   const scrollDropdownToSelected = (dropdownRef: React.RefObject<HTMLDivElement>) => {
     if (dropdownRef.current) {
