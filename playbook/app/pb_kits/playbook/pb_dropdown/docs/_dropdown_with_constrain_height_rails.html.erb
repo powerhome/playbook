@@ -1,0 +1,20 @@
+<% 
+  # Create a long list of options to demonstrate height constraint
+  options = (1..30).map do |i|
+    { label: "Option #{i}", value: "option_#{i}", id: "opt_#{i}" }
+  end
+%>
+
+<%= pb_rails("dropdown", props: {
+  id: "dropdown-no-constrain",
+  options: options,
+  label: "Without Constrain Height (Default)",
+  margin_bottom: "md"
+}) %>
+
+<%= pb_rails("dropdown", props: {
+  id: "dropdown-constrain",
+  options: options,
+  constrain_height: true,
+  label: "With Constrain Height"
+}) %>

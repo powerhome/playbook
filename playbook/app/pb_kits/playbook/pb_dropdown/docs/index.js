@@ -30,3 +30,4 @@ export { default as DropdownQuickpickDefaultDates } from './_dropdown_quickpick_
 export { default as DropdownQuickpickWithDatePickers } from './_dropdown_quickpick_with_date_pickers.jsx'
 export { default as DropdownQuickpickCustom } from './_dropdown_quickpick_custom.jsx'
 export { default as DropdownWithClearable } from './_dropdown_with_clearable.jsx'
+export { default as DropdownWithConstrainHeight } from './_dropdown_with_constrain_height.jsx'

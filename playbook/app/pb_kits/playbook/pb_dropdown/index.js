@@ -114,15 +114,21 @@ export default class PbDropdown extends PbEnhancedElement {
   adjustDropdownHeight() {
     if (this.target.classList.contains("open")) {
       const el = this.target;
+      const shouldConstrain = el.classList.contains("constrain_height");
       el.style.height = "auto";
       requestAnimationFrame(() => {
-        // Calculate 18em in pixels (matches SCSS max-height: 18em)
-        const fontSize = parseFloat(getComputedStyle(el).fontSize) || 16;
-        const maxHeight = fontSize * 18;
-        const scrollHeight = el.scrollHeight;
-        const newHeight = Math.min(scrollHeight, maxHeight);
-        el.offsetHeight; // force reflow
-        el.style.height = newHeight + "px";
+        if (shouldConstrain) {
+          // Calculate 18em in pixels (matches SCSS max-height: 18em)
+          const fontSize = parseFloat(getComputedStyle(el).fontSize) || 16;
+          const maxHeight = fontSize * 18;
+          const scrollHeight = el.scrollHeight;
+          const newHeight = Math.min(scrollHeight, maxHeight);
+          el.offsetHeight; // force reflow
+          el.style.height = newHeight + "px";
+        } else {
+          el.offsetHeight; // force reflow
+          el.style.height = el.scrollHeight + "px";
+        }
       });
     }
   }
@@ -401,12 +407,17 @@ export default class PbDropdown extends PbEnhancedElement {
     elem.classList.remove("close");
     elem.classList.add("open");
     
-    // Calculate height respecting max-height constraint (18em)
-    const fontSize = parseFloat(getComputedStyle(elem).fontSize) || 16;
-    const maxHeight = fontSize * 18; // matches SCSS max-height: 18em
-    const scrollHeight = elem.scrollHeight;
-    const height = Math.min(scrollHeight, maxHeight);
-    elem.style.height = height + "px";
+    const shouldConstrain = elem.classList.contains("constrain_height");
+    if (shouldConstrain) {
+      // Calculate height respecting max-height constraint (18em)
+      const fontSize = parseFloat(getComputedStyle(elem).fontSize) || 16;
+      const maxHeight = fontSize * 18; // matches SCSS max-height: 18em
+      const scrollHeight = elem.scrollHeight;
+      const height = Math.min(scrollHeight, maxHeight);
+      elem.style.height = height + "px";
+    } else {
+      elem.style.height = elem.scrollHeight + "px";
+    }
     
     // Auto-position dropdown above if not enough space below
     this.adjustDropdownPosition(elem);

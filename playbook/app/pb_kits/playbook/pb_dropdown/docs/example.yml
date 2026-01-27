@@ -24,6 +24,7 @@ examples:
   - dropdown_with_placeholder: Placeholder
   - dropdown_separators_hidden: Separators Hidden
   - dropdown_with_clearable: Clearable
+  - dropdown_with_constrain_height_rails: Constrain Height
   - dropdown_quickpick_rails: Quick Pick Variant
   - dropdown_quickpick_range_end_rails: Quick Pick Variant (Range Ends Today)
   - dropdown_quickpick_default_dates: Quick Pick Variant (Default Dates)
@@ -57,6 +58,7 @@ examples:
   - dropdown_with_placeholder: Placeholder
   - dropdown_clear_selection: Clear Selection
   - dropdown_with_clearable: Clearable
+  - dropdown_with_constrain_height: Constrain Height
   - dropdown_separators_hidden: Separators Hidden
   - dropdown_with_external_control: useDropdown Hook
   - dropdown_quickpick: Quick Pick Variant

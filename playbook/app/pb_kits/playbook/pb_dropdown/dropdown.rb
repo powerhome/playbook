@@ -47,6 +47,8 @@ module Playbook
       prop :end_date_name, type: Playbook::Props::String,
                            default: "end_date_name"
       prop :placeholder, type: Playbook::Props::String
+      prop :constrain_height, type: Playbook::Props::Boolean,
+                              default: false
 
       def data
         Hash(prop(:data)).merge(

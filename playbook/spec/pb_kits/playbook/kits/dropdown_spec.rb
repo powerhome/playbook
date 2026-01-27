@@ -27,6 +27,7 @@ RSpec.describe Playbook::PbDropdown::Dropdown do
   it { is_expected.to define_string_prop(:end_date_name).with_default("end_date_name") }
   it { is_expected.to define_hash_prop(:custom_quick_pick_dates).with_default({}) }
   it { is_expected.to define_boolean_prop(:clearable).with_default(true) }
+  it { is_expected.to define_boolean_prop(:constrain_height).with_default(false) }
 
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
@@ -387,6 +388,31 @@ RSpec.describe Playbook::PbDropdown::Dropdown do
         variant: "quickpick"
       )
       expect(dropdown.placeholder).to eq("Select a date range")
+    end
+  end
+
+  describe "#constrain_height" do
+    it "accepts constrain_height prop" do
+      dropdown = subject.new(constrain_height: true)
+      expect(dropdown.constrain_height).to be true
+    end
+
+    it "defaults to false" do
+      dropdown = subject.new({})
+      expect(dropdown.constrain_height).to be false
+    end
+
+    it "passes constrain_height to dropdown_container" do
+      require_relative "../../../../app/pb_kits/playbook/pb_dropdown/dropdown_container"
+      container = Playbook::PbDropdown::DropdownContainer.new(constrain_height: true)
+      expect(container.constrain_height).to be true
+      expect(container.classname).to include("constrain_height")
+    end
+
+    it "does not add constrain_height class to container when false" do
+      require_relative "../../../../app/pb_kits/playbook/pb_dropdown/dropdown_container"
+      container = Playbook::PbDropdown::DropdownContainer.new(constrain_height: false)
+      expect(container.classname).not_to include("constrain_height")
     end
   end
 end
