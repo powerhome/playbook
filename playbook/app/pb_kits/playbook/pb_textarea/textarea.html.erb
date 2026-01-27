@@ -38,7 +38,14 @@
           <% end %>
         <% end %>
       <% else %>
-        <%= pb_rails("body", props: { dark: object.dark, status: "negative", text: object.error }) %>
+        <%= pb_rails("body", props: {
+          dark: object.dark,
+          status: "negative",
+          text: object.error
+          id: object.error_id,
+          aria: { atomic: "true", live: "polite" },
+          html_options: { role: "alert" },
+        }) %>
       <% end %>
     <% else %>
       <%= pb_rails("caption", props: { margin: "none", size: "xs", text: object.character_counter }) %>
