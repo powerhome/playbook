@@ -21,9 +21,6 @@ $transition: $transition_cubic;
     font-size: $text_lt_default;
     padding-left: $space_xs;
     user-select: none;
-    .pb_checkbox_required_indicator {
-      color: #DA0014;
-    }
   }
 
   .pb_checkbox_checkmark,
