@@ -369,6 +369,10 @@ const TimePicker = (props: TimePickerProps): JSX.Element => {
     }
   }
 
+  const handleHourFocus = (e: React.FocusEvent<HTMLInputElement>) => {
+    e.target.select()
+  }
+
   const handleHourBlur = () => {
     const result = normalizeHourOnBlur(hourInputValue, hour, timeFormat)
     setHour(result.hour)
@@ -391,6 +395,10 @@ const TimePicker = (props: TimePickerProps): JSX.Element => {
         onChange(timeString)
       }
     }
+  }
+
+  const handleMinuteFocus = (e: React.FocusEvent<HTMLInputElement>) => {
+    e.target.select()
   }
 
   const handleMinuteBlur = () => {
@@ -482,6 +490,30 @@ const TimePicker = (props: TimePickerProps): JSX.Element => {
       e.preventDefault()
       setShowHourDropdown(false)
       closeDropdown()
+    } else if (e.key === 'ArrowDown') {
+      // ArrowDown increases value (like scrolling down a list)
+      e.preventDefault()
+      const { maxHour, minHour } = getHourConstraints(timeFormat)
+      const newHour = hour >= maxHour ? minHour : hour + 1
+      setHour(newHour)
+      setHourInputValue(timeFormat === '24hour' ? newHour.toString().padStart(2, '0') : newHour.toString())
+      setHasSelectedTime(true)
+      const timeString = get24HourTime(newHour, minute, meridiem, timeFormat)
+      if (onChange) {
+        onChange(timeString)
+      }
+    } else if (e.key === 'ArrowUp') {
+      // ArrowUp decreases value (like scrolling up a list)
+      e.preventDefault()
+      const { maxHour, minHour } = getHourConstraints(timeFormat)
+      const newHour = hour <= minHour ? maxHour : hour - 1
+      setHour(newHour)
+      setHourInputValue(timeFormat === '24hour' ? newHour.toString().padStart(2, '0') : newHour.toString())
+      setHasSelectedTime(true)
+      const timeString = get24HourTime(newHour, minute, meridiem, timeFormat)
+      if (onChange) {
+        onChange(timeString)
+      }
     }
   }
 
@@ -513,6 +545,28 @@ const TimePicker = (props: TimePickerProps): JSX.Element => {
       e.preventDefault()
       setShowMinuteDropdown(false)
       closeDropdown()
+    } else if (e.key === 'ArrowDown') {
+      // ArrowDown increases value (like scrolling down a list)
+      e.preventDefault()
+      const newMinute = minute >= 59 ? 0 : minute + 1
+      setMinute(newMinute)
+      setMinuteInputValue(newMinute.toString().padStart(2, '0'))
+      setHasSelectedTime(true)
+      const timeString = get24HourTime(hour, newMinute, meridiem, timeFormat)
+      if (onChange) {
+        onChange(timeString)
+      }
+    } else if (e.key === 'ArrowUp') {
+      // ArrowUp decreases value (like scrolling up a list)
+      e.preventDefault()
+      const newMinute = minute <= 0 ? 59 : minute - 1
+      setMinute(newMinute)
+      setMinuteInputValue(newMinute.toString().padStart(2, '0'))
+      setHasSelectedTime(true)
+      const timeString = get24HourTime(hour, newMinute, meridiem, timeFormat)
+      if (onChange) {
+        onChange(timeString)
+      }
     }
   }
 
@@ -689,6 +743,7 @@ const TimePicker = (props: TimePickerProps): JSX.Element => {
                     onBlur={handleHourBlur}
                     onChange={handleHourChange}
                     onClick={() => { setShowHourDropdown(!showHourDropdown); setShowMinuteDropdown(false) }}
+                    onFocus={handleHourFocus}
                     onKeyDown={handleHourKeyDown}
                     pattern="[0-9]*"
                     ref={hourInputRef}
@@ -734,6 +789,7 @@ const TimePicker = (props: TimePickerProps): JSX.Element => {
                     onBlur={handleMinuteBlur}
                     onChange={handleMinuteChange}
                     onClick={() => { setShowMinuteDropdown(!showMinuteDropdown); setShowHourDropdown(false) }}
+                    onFocus={handleMinuteFocus}
                     onKeyDown={handleMinuteKeyDown}
                     pattern="[0-9]*"
                     ref={minuteInputRef}
