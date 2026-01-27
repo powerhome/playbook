@@ -36,8 +36,6 @@ module Playbook
 
       def textarea_options
         {
-          'aria-describedby': error.present? ? error_id : nil,
-          'aria-invalid': error.present?,
           data: emoji_mask ? { pb_emoji_mask: true } : {},
         }
       end
@@ -49,7 +47,10 @@ module Playbook
         merged_data = data_attrs.merge(input_data)
 
         base_attributes = {
-          id: input_options[:id] || "object_method",
+          'aria-describedby': error.present? ? error_id : nil,
+          'aria-invalid': error.present?,
+          id: input_options[:id] || id ||
+              "object_method",
           max_characters: max_characters,
           name: name,
           onkeyup: onkeyup,
