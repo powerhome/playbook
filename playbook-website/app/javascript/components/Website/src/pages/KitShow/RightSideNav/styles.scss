@@ -1,0 +1,13 @@
+@import "playbook-tokens/colors";
+@import "playbook-tokens/spacing";
+
+.category-nav-item {
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  padding-left: $space_xs;
+  width: 100%;
+
+  &:hover {
+    background-color: $focus_input_light;
+  }
+}

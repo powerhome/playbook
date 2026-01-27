@@ -76,6 +76,12 @@
       z-index: $z_1;
       width: 100%;
 
+      &.constrain_height {
+        overflow-y: auto;
+        overflow-x: hidden;
+        max-height: 18em;
+      }
+
       .pb_dropdown_option,
       .pb_dropdown_option_list,
       .pb_dropdown_option_selected,

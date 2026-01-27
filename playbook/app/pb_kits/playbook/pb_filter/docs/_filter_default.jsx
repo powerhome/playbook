@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import Button from '../../pb_button/_button'
 import Filter from '../../pb_filter/_filter'
@@ -6,11 +6,18 @@ import Flex from '../../pb_flex/_flex'
 import Select from '../../pb_select/_select'
 import TextInput from '../../pb_text_input/_text_input'
 
-const SortingChangeCallback = (sortOptions) => {
-  alert(JSON.stringify(sortOptions[0]))
-}
-
 const FilterDefault = (props) => {
+  const [sortValue, setSortValue] = useState([{ name: 'popularity', dir: 'desc' }])
+  const [sortValue2, setSortValue2] = useState([{ name: 'popularity', dir: 'desc' }])
+
+  const handleSortChange = (sortOptions) => {
+    setSortValue(sortOptions)
+    alert(JSON.stringify(sortOptions[0]))
+  }
+
+  const handleSortChange2 = (sortOptions) => {
+    setSortValue2(sortOptions)
+  }
   const options = [
     { value: 'USA' },
     { value: 'Canada' },
@@ -29,7 +36,7 @@ const FilterDefault = (props) => {
           }}
           marginBottom="xl"
           minWidth="375px"
-          onSortChange={SortingChangeCallback}
+          onSortChange={handleSortChange}
           results={1}
           sortOptions={{
             popularity: 'Popularity',
@@ -38,7 +45,7 @@ const FilterDefault = (props) => {
             // eslint-disable-next-line
             manager_name: 'Manager\'s Name',
           }}
-          sortValue={[{ name: 'popularity', dir: 'desc' }]}
+          sortValue={sortValue}
           {...props}
       >
       {({ closePopover }) => (
@@ -82,7 +89,7 @@ const FilterDefault = (props) => {
       <Filter
           double
           minWidth="375px"
-          onSortChange={SortingChangeCallback}
+          onSortChange={handleSortChange2}
           results={0}
           sortOptions={{
             popularity: 'Popularity',
@@ -91,7 +98,7 @@ const FilterDefault = (props) => {
             // eslint-disable-next-line
             manager_name: 'Manager\'s Name',
           }}
-          sortValue={[{ name: 'popularity', dir: 'desc' }]}
+          sortValue={sortValue2}
           {...props}
       >
       {({ closePopover }) => (

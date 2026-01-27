@@ -49,6 +49,10 @@ module Playbook
       def wrapped_class
         wrapped ? "wrapped" : nil
       end
+
+      def truncate_props
+        nil
+      end
     end
   end
 end

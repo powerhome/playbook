@@ -32,7 +32,6 @@ const DarkModeToggle = ({ initMode }: ToggleProps) => {
           >
             <Icon
                 className="toggle-icon"
-                dark
                 fixedWidth
                 icon="spinner"
                 marginRight="xs"
@@ -53,7 +52,6 @@ const DarkModeToggle = ({ initMode }: ToggleProps) => {
             >
               <Icon
                   className="toggle-icon"
-                  dark
                   fixedWidth
                   icon="moon"
                   marginRight="xs"

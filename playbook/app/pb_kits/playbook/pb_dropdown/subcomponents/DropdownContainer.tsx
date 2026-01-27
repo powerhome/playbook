@@ -19,6 +19,7 @@ type DropdownContainerProps = {
   aria?: { [key: string]: string };
   children?: React.ReactChild[] | React.ReactChild;
   className?: string;
+  constrainHeight?: boolean;
   dark?: boolean;
   data?: { [key: string]: string };
   htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
@@ -31,6 +32,7 @@ const DropdownContainer = (props: DropdownContainerProps) => {
     aria = {},
     children,
     className,
+    constrainHeight = false,
     dark = false,
     data = {},
     htmlOptions = {},
@@ -54,6 +56,7 @@ const DropdownContainer = (props: DropdownContainerProps) => {
   const classes = classnames(
     buildCss("pb_dropdown_container"),
     `${isDropDownClosed ? "close" : "open"}`,
+    constrainHeight && "constrain_height",
     globalProps(props),
     className
   );

@@ -120,6 +120,7 @@ const PassphraseMeterSettings = (props) => {
             "These examples will all share the same input value. Type in any of the inputs to see how the strength meter changes in response to different settings."
           }
         </Body>
+        <br/>
         <Passphrase
             label={"Type your passphrase"}
             onChange={handleChange}

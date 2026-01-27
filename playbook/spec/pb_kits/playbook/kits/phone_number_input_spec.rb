@@ -17,12 +17,20 @@ RSpec.describe Playbook::PbPhoneNumberInput do
   it { is_expected.to define_boolean_prop(:format_as_you_type).with_default(false) }
   it { is_expected.to define_boolean_prop(:strict_mode).with_default(false) }
   it { is_expected.to define_boolean_prop(:country_search).with_default(false) }
+  it { is_expected.to define_boolean_prop(:required_indicator).with_default(false) }
 
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
       classname = "pb_phone_number_input"
       expect(subject.new({}).classname).to eq classname
       expect(subject.new(classname: "additional_class").classname).to eq "#{classname} additional_class"
+    end
+  end
+
+  describe "phone_number_input_options" do
+    it "passes required_indicator as requiredIndicator to javascript" do
+      example = subject.new(required_indicator: true)
+      expect(example.phone_number_input_options[:requiredIndicator]).to be true
     end
   end
 end
