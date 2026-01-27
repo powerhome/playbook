@@ -480,7 +480,7 @@ const Typeahead = forwardRef<HTMLInputElement, TypeaheadProps>(
     <div
         {...dataProps}
         {...htmlProps}
-        className={classes}
+        className={classnames(classes, inlineClass)}
     >
       {label && (
         <label htmlFor={id}>
