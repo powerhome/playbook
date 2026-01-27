@@ -27,7 +27,7 @@
     "@hotwired/turbo-rails": "^7.3.0",
     "@originjs/vite-plugin-commonjs": "^1.0.3",
     "@tiptap/extension-document": "^2.11.7",
-    "@tiptap/extension-highlight": "^2.11.7",
+    "@tiptap/extension-highlight": "^3.17.1",
     "@tiptap/extension-horizontal-rule": "^2.11.7",
     "@tiptap/extension-link": "^2.11.7",
     "@tiptap/extension-paragraph": "^2.11.7",
