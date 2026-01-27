@@ -78,7 +78,6 @@ const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>((pr
     onSelect = () => null,
     selectedIds,
     variant = "multi",
-    children,
     wrapped,
     pillColor = "primary"
   } = props
@@ -119,6 +118,7 @@ const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>((pr
 
   const arrowDownElementId = `arrow_down_${id}`
   const arrowUpElementId = `arrow_up_${id}`
+  const inputId = id ? `${id}_input` : (name || "multiselect_input")
 
   const modifyRecursive = (tree: { [key: string]: any }[], check: boolean) => {
     if (!Array.isArray(tree)) {
@@ -327,7 +327,7 @@ const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>((pr
   // Handle click on input wrapper(entire div with pills, typeahead, etc) so it doesn't close when input or form pill is clicked
   const handleInputWrapperClick = (e: any) => {
     if (
-      e.target.id === "multiselect_input" ||
+      e.target.id === inputId ||
       e.target.classList.contains("pb_form_pill_tag") ||
       disabled
     ) {
@@ -458,12 +458,17 @@ const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>((pr
         className={classes}
         id={id}
     >
-      {label &&
-        <Caption
-            marginBottom="xs"
-            text={label}
-        />
-      }
+      {label && (
+        <label
+            className="pb_multi_level_select_kit_label"
+            htmlFor={inputId}
+        >
+          <Caption
+              marginBottom="xs"
+              text={label}
+          />
+        </label>
+      )}
       <MultiLevelSelectContext.Provider value={{
           variant,
           inputName,
@@ -473,7 +478,8 @@ const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>((pr
           handleRadioButtonClick,
           handledropdownItemClick,
           filterItem,
-      }}>
+      }}
+      >
       <div className="wrapper"
           ref={dropdownRef}
       >
@@ -562,13 +568,14 @@ const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>((pr
 
             <input
                 disabled={disabled}
-                id="multiselect_input"
+                id={inputId}
                 onChange={(e) => {
                   variant === "single"
                     ? handleRadioInputChange(e.target.value)
                     : setFilterItem(e.target.value);
                 }}
                 onClick={() => setIsDropdownClosed(false)}
+                onFocus={() => !disabled && setIsDropdownClosed(false)}
                 placeholder={
                   inputDisplay === "none" && itemsSelectedLength()
                     ? `${itemsSelectedLength()} ${
@@ -583,7 +590,8 @@ const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>((pr
 
           {isDropdownClosed ? (
             <div id={arrowDownElementId}
-                key="chevron-down">
+                key="chevron-down"
+            >
               <Icon
                   icon="chevron-down"
                   id={arrowDownElementId}
@@ -592,7 +600,8 @@ const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>((pr
             </div>
           ) : (
             <div id={arrowUpElementId}
-                key="chevron-up">
+                key="chevron-up"
+            >
               <Icon
                   icon="chevron-up"
                   id={arrowUpElementId}
