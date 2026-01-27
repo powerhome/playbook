@@ -40,7 +40,7 @@ type DatePickerProps = {
   maxDate: string,
   minDate: string,
   name: string,
-  pickerId?: string,
+  pickerId: string,
   placeholder?: string,
   positionElement?: HTMLElement | null,
   scrollContainer?: string,
