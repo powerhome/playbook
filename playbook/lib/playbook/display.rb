@@ -12,6 +12,11 @@ module Playbook
       css = ""
       if responsive
         display_value = send(:display)
+
+        # Handle default value separately (generates base class without size prefix)
+        css += "display_#{display_value[:default]} " if display_value.key?(:default) && display_values.include?(display_value[:default].to_s)
+
+        # Handle responsive sizes (generates classes with size prefix)
         display_value.each do |key, value|
           css += "display_#{key}_#{value} " if display_size_values.include?(key.to_s) && display_values.include?(value.to_s)
         end

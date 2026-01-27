@@ -11,16 +11,26 @@ module Playbook
       selected_props = vertical_align_options.keys.select { |sk| try(sk) }
       return nil unless selected_props.present?
 
+      screen_size_values = %w[xs sm md lg xl]
+
       selected_props.map do |k|
         vertical_align_value = send(k)
         if vertical_align_value.is_a?(Hash)
-          vertical_align_value.map do |media_size, flex_value|
-            "vertical_align_#{media_size}_#{flex_value.underscore}" if vertical_align_values.include? flex_value
+          class_result = []
+
+          # Handle default value separately (generates base class without size prefix)
+          class_result << "vertical_align_#{vertical_align_value[:default].underscore}" if vertical_align_value.key?(:default) && vertical_align_values.include?(vertical_align_value[:default])
+
+          # Handle responsive sizes (generates classes with size prefix)
+          vertical_align_value.each do |media_size, flex_value|
+            class_result << "vertical_align_#{media_size}_#{flex_value.underscore}" if screen_size_values.include?(media_size.to_s) && vertical_align_values.include?(flex_value)
           end
+
+          class_result
         else
           "vertical_align_#{vertical_align_value.underscore}" if vertical_align_values.include? vertical_align_value
         end
-      end.compact.join(" ")
+      end.flatten.compact.join(" ")
     end
     # rubocop:enable Style/IfInsideElse
 
