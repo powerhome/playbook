@@ -5,12 +5,12 @@ import { globalProps, GlobalProps } from '../utilities/globalProps'
 import Caption from '../pb_caption/_caption'
 import SelectableCard from '../pb_selectable_card/_selectable_card'
 import TextInput from '../pb_text_input/_text_input'
+import colors from '../tokens/exports/_colors.module.scss'
 
 import {
   parseTime,
   parseTimeToMinutes,
   isTimeInRange as isTimeInRangeHelper,
-  isHourDisabled as isHourDisabledHelper,
   isAnyAMTimeValid as isAnyAMTimeValidHelper,
   isAnyPMTimeValid as isAnyPMTimeValidHelper,
   getDisplayTime,
@@ -48,6 +48,7 @@ type TimePickerProps = {
   onChange?: (time: string) => void,
   onClose?: (time: string) => void,
   required?: boolean,
+  requiredIndicator?: boolean,
   showTimezone?: boolean,
   timeFormat?: TimeFormat,
   validationMessage?: string,
@@ -72,6 +73,7 @@ const TimePicker = (props: TimePickerProps): JSX.Element => {
     onChange,
     onClose,
     required = false,
+    requiredIndicator = false,
     showTimezone = false,
     timeFormat = 'AMPM',
     validationMessage,
@@ -112,10 +114,6 @@ const TimePicker = (props: TimePickerProps): JSX.Element => {
 
   const isTimeInRange = (h: number, m: number, mer?: 'AM' | 'PM'): boolean => {
     return isTimeInRangeHelper(h, m, mer, timeFormat, minTimeMinutes, maxTimeMinutes)
-  }
-
-  const isHourDisabled = (h: number, mer?: 'AM' | 'PM'): boolean => {
-    return isHourDisabledHelper(h, mer, timeFormat, minTimeMinutes, maxTimeMinutes)
   }
 
   const isCurrentTimeValid = (h: number, m: number, mer: 'AM' | 'PM'): boolean => {
@@ -679,12 +677,22 @@ const TimePicker = (props: TimePickerProps): JSX.Element => {
     >
       {label && (
         <label htmlFor={`${uniqueId}-input`}>
-          <Caption
-              className="pb_time_picker_kit_label"
-              marginBottom="xs"
-              size="md"
-              text={label}
-          />
+          {requiredIndicator ? (
+            <Caption
+                className="pb_time_picker_kit_label"
+                marginBottom="xs"
+                size="md"
+            >
+              {label} <span style={{ color: `${colors.error}` }}>{'*'}</span>
+            </Caption>
+          ) : (
+            <Caption
+                className="pb_time_picker_kit_label"
+                marginBottom="xs"
+                size="md"
+                text={label}
+            />
+          )}
         </label>
       )}
       <div className="time_picker_wrapper">
