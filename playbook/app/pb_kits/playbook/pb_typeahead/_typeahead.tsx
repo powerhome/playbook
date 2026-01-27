@@ -62,8 +62,9 @@ type TypeaheadProps = {
 } & GlobalProps
 
 export type SelectValueType = {
-  label: string,
+  label?: string,
   value: string,
+  name?: string,
   imageUrl?: string,
   pillColor?: string,
 }
