@@ -49,8 +49,7 @@ module Playbook
         base_attributes = {
           'aria-describedby': error.present? ? error_id : nil,
           'aria-invalid': error.present?,
-          id: input_options[:id] || id ||
-              "object_method",
+          id: input_options[:id] || id || "object_method",
           max_characters: max_characters,
           name: name,
           onkeyup: onkeyup,

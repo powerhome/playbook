@@ -3,7 +3,7 @@ import React, {useState} from 'react'
 import Textarea from '../_textarea'
 
 const TextareaDefault = (props) => {
-  const [value, setValue] = useState('Example of comment text')
+  const [value, setValue] = useState('Default value text')
   const handleChange = (event) => {
     setValue(event.target.value)
   }
@@ -13,7 +13,7 @@ const TextareaDefault = (props) => {
           label="Label"
           rows={4}
           {...props}
-          id="example-1"
+          id="default-example-1"
       />
 
       <br />
@@ -22,19 +22,19 @@ const TextareaDefault = (props) => {
           label="Label"
           placeholder="Placeholder text"
           {...props}
-          id="example-2"
+          id="default-example-2"
       />
 
       <br />
 
       <Textarea
-          label="Comment"
+          label="Label"
           name="comment"
           onChange={(e) => handleChange(e)}
           placeholder="Placeholder text"
           value={value}
           {...props}
-          id="comment"
+          id="default-example-3"
       />
 
     </div>
