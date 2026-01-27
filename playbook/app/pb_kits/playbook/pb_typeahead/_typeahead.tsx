@@ -459,7 +459,7 @@ const Typeahead = forwardRef<HTMLInputElement, TypeaheadProps>(
     const dataProps = buildDataProps(data)
     const htmlProps = buildHtmlProps(htmlOptions)
     const classes = classnames(
-      "pb_typeahead_kit react-select",
+      "pb_typeahead_kit pb_text_input_kit react-select",
       `mb_${marginBottom}`,
       globalProps(filteredProps),
       className,
@@ -476,23 +476,26 @@ const Typeahead = forwardRef<HTMLInputElement, TypeaheadProps>(
         : "")
 
     return (
-      <div
-          {...dataProps}
-          {...htmlProps}
-          className={classnames(classes, inlineClass)}
-      >
-        {label && (
-          <label htmlFor={id}>
-            {requiredIndicator ? (
-              <Caption className="pb_typeahead_kit_label">
-                {label} <span style={{color: `${colors.error}`}}>*</span>
+    <div
+        {...dataProps}
+        {...htmlProps}
+        className={classes}
+    >
+      {label && (
+        <label htmlFor={id}>
+          {
+            requiredIndicator ? (
+              <Caption className="pb_text_input_kit_label">
+                {label} <span style={{ color: colors.error }}>*</span>
               </Caption>
             ) : (
-              <Caption className="pb_typeahead_kit_label"
-                  text={label} />
-            )}
-          </label>
-        )}
+              <Caption className="pb_text_input_kit_label" 
+                  text={label} 
+              />
+            )
+          }
+        </label>
+      )}
         <Tag
             classNamePrefix="typeahead-kit-select"
             error={errorDisplay}
@@ -501,7 +504,7 @@ const Typeahead = forwardRef<HTMLInputElement, TypeaheadProps>(
             ref={selectRef}
             {...selectProps}
         />
-      </div>
+    </div>
     )
   },
 )

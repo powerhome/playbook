@@ -1,8 +1,8 @@
 <% if object.is_react? %>
   <%= react_component('Typeahead', object.typeahead_react_options) %>
 <% else %>
-  <%= pb_content_tag(:div,
-                     class: object.classname + object.inline_class) do %>
+  <%= pb_content_tag(:div, class: object.classname + object.inline_class) do %>
+
     <div class="pb_typeahead_wrapper">
       <div class="pb_typeahead_loading_indicator" data-pb-typeahead-kit-loading-indicator>
         <%= pb_rails("icon", props: {
@@ -25,7 +25,6 @@
         id: object.input_options[:id],
         dark: object.dark,
       }) %>
-      
       <%= pb_rails("list", props: { ordered: false, borderless: true, xpadding: true, role: "status", aria: { live: "polite" }, data: { pb_typeahead_kit_results: true } }) do %>
       <% end %>
     </div>
