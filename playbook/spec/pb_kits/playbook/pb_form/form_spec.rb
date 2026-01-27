@@ -19,7 +19,7 @@ RSpec.describe Playbook::PbForm::Form, type: :kit do
   it "allows the user to not set the URL" do
     model_name = double(name: "User", route_key: :users, param_key: :id)
     model = double("model", model_name: model_name, persisted?: false)
-    object = double("object", to_model: model)
+    object = double("object", to_model: model || false)
     rendered = helper.pb_rails "form", props: { options: { model: object } }
 
     expect(rendered).to have_tag("form[action='/users']")
