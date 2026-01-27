@@ -4,4 +4,4 @@ examples:
   - form_form_with: Default
   - form_form_with_validate: Default + Validation
   - form_form_with_loading: Default + Loading
-  - form_with_required_indicator: Required Indicator
+  - form_form_with_required_indicator: Required Indicator
