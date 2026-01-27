@@ -1,12 +1,14 @@
-<%= pb_content_tag do %>
+<%= pb_content_tag(:div, id: nil) do %>
   <% if object.label.present? %>
-    <% if object.required_indicator %>
-      <%= pb_rails("caption", props: { text: object.label, dark: object.dark }) do %>
-        <%= object.label %><span style="color: #DA0014;"> *</span>
+    <label for="<%= object.input_options[:id] || object.id %>" >
+      <% if object.required_indicator %>
+        <%= pb_rails("caption", props: { text: object.label, dark: object.dark }) do %>
+          <%= object.label %><span style="color: #DA0014;"> *</span>
+        <% end %>
+      <% else %>
+        <%= pb_rails("caption", props: {text: object.label, dark: object.dark}) %>
       <% end %>
-    <% else %>
-    <%= pb_rails("caption", props: {text: object.label, dark: object.dark}) %>
-    <% end %>
+    </label>
   <% end %>
   <% if content.present? %>
     <%= content %>
@@ -22,14 +24,28 @@
       <% if object.character_count %>
         <%= pb_rails("flex", props: { spacing: "between", vertical: "center" }) do %>
           <%= pb_rails("flex/flex_item") do %>
-             <%= pb_rails("body", props: { dark: object.dark, status: "negative", text: object.error }) %>
+            <%= pb_rails("body", props: {
+              dark: object.dark,
+              status: "negative",
+              text: object.error,
+              id: object.error_id,
+              aria: { atomic: "true", live: "polite" },
+              html_options: { role: "alert" },
+            }) %>
           <% end %>
           <%= pb_rails("flex/flex_item") do %>
             <%= pb_rails("caption", props: { margin: "none", size: "xs", text: object.character_counter }) %>
           <% end %>
         <% end %>
       <% else %>
-        <%= pb_rails("body", props: { dark: object.dark, status: "negative", text: object.error }) %>
+        <%= pb_rails("body", props: {
+          dark: object.dark,
+          status: "negative",
+          text: object.error,
+          id: object.error_id,
+          aria: { atomic: "true", live: "polite" },
+          html_options: { role: "alert" },
+        }) %>
       <% end %>
     <% else %>
       <%= pb_rails("caption", props: { margin: "none", size: "xs", text: object.character_counter }) %>

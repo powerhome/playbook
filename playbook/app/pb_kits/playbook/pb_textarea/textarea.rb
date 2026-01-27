@@ -47,7 +47,9 @@ module Playbook
         merged_data = data_attrs.merge(input_data)
 
         base_attributes = {
-          id: input_options[:id] || "object_method",
+          'aria-describedby': error.present? ? error_id : nil,
+          'aria-invalid': error.present?,
+          id: input_options[:id] || id || "object_method",
           max_characters: max_characters,
           name: name,
           onkeyup: onkeyup,
@@ -64,6 +66,10 @@ module Playbook
         result[:data] = merged_data unless merged_data.empty?
 
         result
+      end
+
+      def error_id
+        "#{id}-error" if error.present?
       end
 
     private
