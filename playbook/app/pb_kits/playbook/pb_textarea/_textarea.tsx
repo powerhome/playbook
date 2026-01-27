@@ -149,6 +149,7 @@ const Textarea = ({
             aria-describedby={errorId}
             aria-invalid={!!error}
             disabled={disabled}
+            id={id}
             name={name}
             onChange={emojiMask ? handleChange : onChange}
             onPaste={emojiMask ? handlePaste : undefined}
