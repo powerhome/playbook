@@ -1,1 +1,1 @@
-Add a `pickerId`/`picker_id` to your Date Picker so that clicking the label will move focus directly to the input.
+`pickerId`/`picker_id` is a **required prop** in order to instatiate the Date Picker. The presence of `pickerId`/`picker_id` in your Date Picker also makes it so that clicking the label will move focus directly to the input.
