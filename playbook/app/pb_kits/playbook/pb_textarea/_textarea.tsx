@@ -189,6 +189,9 @@ const Textarea = ({
             </Flex>
           ) : (
             <Body
+                aria={{ atomic: "true", live: "polite" }}
+                htmlOptions={{ role: "alert" }}
+                id={errorId}
                 status="negative"
                 text={error}
             />
