@@ -1,6 +1,8 @@
 <%= pb_content_tag do %>
     <% if object.label.present? %>
-        <%= pb_rails("caption", props: {text: object.label, margin_bottom:"xs"}) %>
+        <label for="<%= object.select_id %>" data-dropdown="pb-dropdown-label">
+            <%= pb_rails("caption", props: { text: object.label, margin_bottom: "xs", classname: "pb_dropdown_kit_label", dark: object.dark }) %>
+        </label>
     <% end %>
     <div class="dropdown_wrapper<%= error_class %>" style="position: relative">
         <input
@@ -16,9 +18,11 @@
         <% end %>
         <% if content.present? %>
             <%= content.presence %>
-            <%= pb_rails("body", props: { status: "negative", text: object.error }) %>
+            <% if object.error.present? %>
+                <%= pb_rails("body", props: { status: "negative", text: object.error, id: object.error_id, aria: { atomic: "true", live: "polite" }, html_options: { role: "alert" }, dark: object.dark }) %>
+            <% end %>
         <% else %>
-            <%= pb_rails("dropdown/dropdown_trigger", props:{ autocomplete: object.autocomplete, multi_select:object.multi_select }) %>
+            <%= pb_rails("dropdown/dropdown_trigger", props: { autocomplete: object.autocomplete, multi_select: object.multi_select, select_id: object.select_id, error_id: object.error_id, error: object.error }) %>
             <%= pb_rails("dropdown/dropdown_container", props: { searchbar: object.searchbar }) do %>
                 <% if options_with_blank.present? %>
                     <% options_with_blank.each do |option| %>
@@ -27,7 +31,9 @@
                 <% end %>
             <% end %>
 
-            <%= pb_rails("body", props: { status: "negative", text: object.error }) %>
+            <% if object.error.present? %>
+                <%= pb_rails("body", props: { status: "negative", text: object.error, id: object.error_id, aria: { atomic: "true", live: "polite" }, html_options: { role: "alert" }, dark: object.dark }) %>
+            <% end %>
         <% end %>
     </div>
 <% end %>

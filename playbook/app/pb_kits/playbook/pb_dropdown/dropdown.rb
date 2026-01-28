@@ -10,6 +10,7 @@ module Playbook
       prop :label, type: Playbook::Props::String
       prop :name, type: Playbook::Props::String
       prop :error, type: Playbook::Props::String
+      prop :id, type: Playbook::Props::String
       prop :required, type: Playbook::Props::Boolean,
                       default: false
       prop :default_value
@@ -60,6 +61,14 @@ module Playbook
 
       def classname
         generate_classname("pb_dropdown", variant, separators_class)
+      end
+
+      def select_id
+        id.presence || (label.present? ? label.downcase.gsub(/\s+/, "_") : nil)
+      end
+
+      def error_id
+        error.present? ? "#{select_id || 'dropdown_trigger'}-error" : nil
       end
 
     private
