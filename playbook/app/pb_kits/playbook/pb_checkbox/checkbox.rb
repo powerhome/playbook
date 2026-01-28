@@ -23,6 +23,8 @@ module Playbook
       prop :hidden_input, type: Playbook::Props::Boolean,
                           default: false
       prop :hidden_value
+      prop :required_indicator, type: Playbook::Props::Boolean,
+                                default: false
 
       def classname
         generate_classname("pb_checkbox_kit", checked_class) + error_class

@@ -4,6 +4,8 @@ import Icon from '../pb_icon/_icon'
 import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
 import classnames from 'classnames'
 import { globalProps, GlobalProps } from '../utilities/globalProps'
+import colors from '../tokens/exports/_colors.module.scss'
+import spacing from '../tokens/exports/_spacing.module.scss'
 
 type CheckboxProps = {
   aria?: {[key: string]: string},
@@ -19,6 +21,7 @@ type CheckboxProps = {
   indeterminate?: boolean,
   name?: string,
   onChange?: (event: React.FormEvent<HTMLInputElement>) => void,
+  requiredIndicator?: boolean,
   tabIndex?: number,
   text?: string,
   value?: string,
@@ -39,6 +42,7 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>((props, ref) => {
     indeterminate = false,
     name = '',
     onChange = () => { void 0 },
+    requiredIndicator = false,
     tabIndex,
     text = '',
     value = '',
@@ -124,7 +128,20 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>((props, ref) => {
           variant={null}
       >
         {text}
+        {requiredIndicator && (
+          <span
+              aria-hidden="true"
+              className="pb_required_indicator"
+              style={{
+                color: colors.error,
+                marginLeft: spacing.space_xs,
+              }}
+          >
+           {'*'}
+          </span>
+        )}
       </Body>
+
     </label>
   )
 })
