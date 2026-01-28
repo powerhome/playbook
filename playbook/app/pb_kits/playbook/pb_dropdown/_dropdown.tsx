@@ -120,10 +120,12 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
     const [isDropDownClosed, setIsDropDownClosed, toggleDropdown] = useDropdown(isClosed);
 
     // Use a suffix for the trigger ID to avoid conflict with the outer div's id
+    const sanitizeForId = (str: string) =>
+      str.toLowerCase().replace(/\s+/g, "_").replace(/[^a-z0-9_]/g, "");
     const selectId = id
       ? `${id}_trigger`
       : label
-        ? label.toLowerCase().replace(/\s+/g, "_")
+        ? sanitizeForId(label)
         : undefined;
     const errorId = error ? `${selectId}-error` : undefined;
 

@@ -70,7 +70,7 @@ module Playbook
       end
 
       def select_id
-        id.presence || (label.present? ? label.downcase.gsub(/\s+/, "_") : nil)
+        id.presence || (label.present? ? label.downcase.gsub(/\s+/, "_").gsub(/[^a-z0-9_]/, "") : nil)
       end
 
       def error_id
