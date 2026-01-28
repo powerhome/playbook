@@ -112,13 +112,38 @@
 }
 
 .pb_nav_item_inactive {
+  cursor: not-allowed !important;
+
+  .pb_nav_list_item_icon_section {
+    color: $text_lt_lighter !important;
+    cursor: not-allowed !important;
+  }
+
+}
+
+.pb_nav_item_inactive:hover {
+  background-color: $white !important;
+}
+
+.pb_nav_item_inactive {
   .pb_nav_list_item_text_collapsible {
     color: $text_lt_lighter !important;
     cursor: not-allowed !important;
   }
 }
 
+.pb_collapsible_content_kit {
+  .pb_nav_list_item_link:hover {
+    background-color: $white !important;
+  }
+}
+
 .pb_nav_item_inactive {
+
+  .pb_nav_list_item_link:hover {
+    background-color: $white !important;
+  }
+
   .pb_nav_list_item_link {
     cursor: not-allowed !important;
   }
@@ -138,18 +163,20 @@
     }
   }
 
-  @media (hover: hover) {
-    &:hover {
-      .pb_nav_list_item_icon_section_collapsible {
-        path {
-          color: $text_lt_lighter !important;
-        }
-      }
+  .icon_wrapper {
+    svg {
+      color: $text_lt_lighter !important;
     }
   }
 
   @media (hover: hover) {
     &:hover {
+
+      .pb_nav_list_item_icon_section_collapsible {
+        path {
+          color: $text_lt_lighter !important;
+        }
+      }
 
       .pb_collapsible_main_kit {
         background-color: $white !important;
@@ -169,7 +196,6 @@
 
   .icon_wrapper:hover {
     background-color: $white !important;
-
   }
 
 }

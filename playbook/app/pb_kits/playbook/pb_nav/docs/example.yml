@@ -1,6 +1,5 @@
 examples:
   rails:
-  - collapsible_nav_disabled_item: Collapsible Nav With Disabled Item
   - default_nav: Default
   - with_icons_nav: With Icons
   - with_img_nav: With Custom Icon
@@ -15,6 +14,7 @@ examples:
   - collapsible_nav: Collapsible Nav
   - collapsible_nav_with_all_options: Collapsible Nav With Options
   - collapsible_nav_no_icon: Collapsible Nav No Icon
+  - collapsible_nav_disabled_item: Collapsible Nav With Disabled Item
   - horizontal_nav: Horizontal Nav
   - subtle_horizontal_nav: Subtle Horizontal Nav
   - bold_horizontal_nav: Bold Horizontal Nav
@@ -27,7 +27,6 @@ examples:
   - tab_nav: Tab Nav
 
   react:
-  - collapsible_nav_disabled_item: Collapsible Nav With Disabled Item
   - default_nav: Default
   - with_icons_nav: With Icons
   - with_img_nav: With Custom Icon
@@ -44,6 +43,7 @@ examples:
   - collapsible_nav_item_spacing: Collapsible Nav With ItemSpacing
   - collapsible_nav_custom: Collapsible Nav With Custom Toggling
   - collapsible_nav_no_icon: Collapsible Nav No Icon
+  - collapsible_nav_disabled_item: Collapsible Nav With Disabled Item
   - horizontal_nav: Horizontal Nav
   - subtle_horizontal_nav: Subtle Horizontal Nav
   - bold_horizontal_nav: Bold Horizontal Nav
