@@ -113,7 +113,14 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
 
     const [isDropDownClosed, setIsDropDownClosed, toggleDropdown] = useDropdown(isClosed);
 
-    const errorId = error ? `${id || "dropdown"}-error` : undefined;
+    const selectId =
+      id ||
+      (label
+        ? label
+            .toLowerCase()
+            .replace(/\s+/g, "_")
+        : undefined);
+    const errorId = error ? `${selectId}-error` : undefined;
 
     const [filterItem, setFilterItem] = useState("");
     const initialSelected = useMemo(() => {
@@ -147,8 +154,13 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
 
     const dropdownRef = useRef(null);
     const inputRef = useRef<HTMLInputElement>(null);
-    const inputWrapperRef = useRef(null);
+    const inputWrapperRef = useRef<HTMLDivElement | null>(null);
     const dropdownContainerRef = useRef(null);
+
+    const handleLabelClick = () => {
+      inputWrapperRef.current?.focus();
+      if (isDropDownClosed) toggleDropdown();
+    };
 
     const selectedArray = Array.isArray(selected)
     ? selected
@@ -392,6 +404,7 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
                     inputWrapperRef,
                     isDropDownClosed,
                     isInputFocused,
+                    selectId,
                     multiSelect,
                     onSelect,
                     optionsWithBlankSelection,
@@ -403,13 +416,18 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
                     toggleDropdown
                 }}
             >
-                {label &&
-                    <Caption
-                        dark={dark}
-                        marginBottom="xs"
-                        text={label}
-                    />
-                }
+                {label && (
+                    <label
+                        htmlFor={selectId}
+                        onClick={handleLabelClick}
+                    >
+                        <Caption
+                            className="pb_dropdown_kit_label"
+                            dark={dark}
+                            text={label}
+                        />
+                    </label>
+                )}
                 <div className={`dropdown_wrapper ${error ? 'error' : ''}`}
                     onBlur={() => {
                         // Debounce to delay the execution to prevent jumpiness in Focus state

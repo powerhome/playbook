@@ -56,6 +56,7 @@ const DropdownTrigger = (props: DropdownTriggerProps) => {
     isInputFocused,
     multiSelect,
     selected,
+    selectId,
     setIsInputFocused,
     toggleDropdown,
   } = useContext(DropdownContext);
@@ -117,6 +118,7 @@ const DropdownTrigger = (props: DropdownTriggerProps) => {
             <div
                 aria-describedby={errorId}
                 aria-invalid={!!error}
+                id={selectId}
                 onClick={() => toggleDropdown()}
                 onKeyDown= {handleKeyDown}
                 ref={inputWrapperRef}
@@ -135,6 +137,7 @@ const DropdownTrigger = (props: DropdownTriggerProps) => {
                   htmlOptions={{
                     "aria-describedby": errorId,
                     "aria-invalid": !!error,
+                    id: selectId,
                     onClick: () => handleWrapperClick(),
                     onKeyDown: handleKeyDown,
                     tabIndex: "0",
