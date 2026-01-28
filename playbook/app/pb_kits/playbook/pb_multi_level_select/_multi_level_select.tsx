@@ -144,16 +144,17 @@ const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>(
 
     const arrowDownElementId = `arrow_down_${id}`;
     const arrowUpElementId = `arrow_up_${id}`;
-    // Control id for label htmlFor: use name (like Select), or slug of label text, or fallback
-    const labelForId =
-      name ||
-      (label
-        ? label
-            .toLowerCase()
-            .replace(/\s+/g, "_")
-            .replace(/[^a-z0-9_]/g, "")
-        : null) ||
-      (id ? `${id}_input` : "multiselect_input");
+    // Control id for label htmlFor: use suffix to avoid conflict with outer div's id
+    const labelForId = id
+      ? `${id}_input`
+      : name ||
+        (label
+          ? label
+              .toLowerCase()
+              .replace(/\s+/g, "_")
+              .replace(/[^a-z0-9_]/g, "")
+          : null) ||
+        "multiselect_input";
     const errorId = error ? `${labelForId}-error` : undefined;
 
     const modifyRecursive = (
@@ -262,6 +263,10 @@ const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>(
     useEffect(() => {
       // Function to handle clicks outside the dropdown
       const handleClickOutside = (event: any) => {
+        // Don't close if clicking on the associated label
+        const labelEl = document.querySelector(`label[for="${labelForId}"]`);
+        if (labelEl?.contains(event.target)) return;
+
         if (
           dropdownRef.current &&
           !dropdownRef.current.contains(event.target) &&
@@ -277,7 +282,7 @@ const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>(
       return () => {
         window.removeEventListener("click", handleClickOutside);
       };
-    }, []);
+    }, [labelForId]);
 
     useEffect(() => {
       if (id) {
@@ -372,6 +377,14 @@ const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>(
           target: { name, value: getDefaultCheckedItems(updatedTree) },
         });
       }
+    };
+
+    // Handle click on label - focus input and open dropdown
+    const handleLabelClick = (e: React.MouseEvent) => {
+      e.stopPropagation();
+      const input = document.getElementById(labelForId);
+      if (input) input.focus();
+      setIsDropdownClosed(false);
     };
 
     // Handle click on input wrapper(entire div with pills, typeahead, etc) so it doesn't close when input or form pill is clicked
@@ -516,7 +529,9 @@ const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>(
           id={id}
       >
         {label && (
-          <label htmlFor={labelForId}>
+          <label htmlFor={labelForId}
+              onClick={handleLabelClick}
+          >
             <Caption
                 className="pb_multi_level_select_kit_label"
                 marginBottom="xs"

@@ -36,8 +36,6 @@ type DropdownProps = {
     blankSelection?: string;
     children?: React.ReactChild[] | React.ReactChild | React.ReactElement[];
     className?: string;
-    clearable?: boolean;
-    constrainHeight?: boolean;
     customQuickPickDates?: CustomQuickPickDates;
     formPillProps?: GenericObject;
     dark?: boolean;
@@ -51,7 +49,6 @@ type DropdownProps = {
     multiSelect?: boolean;
     onSelect?: (arg: GenericObject) => null;
     options?: GenericObject;
-    placeholder?: string;
     separators?: boolean;
     variant?: "default" | "subtle" | "quickpick";
     rangeEndsToday?: boolean;
@@ -77,8 +74,6 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
         blankSelection = '',
         children,
         className,
-        clearable = true,
-        constrainHeight = false,
         customQuickPickDates,
         dark = false,
         data = {},
@@ -92,7 +87,6 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
         formPillProps,
         onSelect,
         options,
-        placeholder,
         rangeEndsToday = false,
         controlsStartId,
         controlsEndId,
@@ -119,13 +113,12 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
 
     const [isDropDownClosed, setIsDropDownClosed, toggleDropdown] = useDropdown(isClosed);
 
-    const selectId =
-      id ||
-      (label
-        ? label
-            .toLowerCase()
-            .replace(/\s+/g, "_")
-        : undefined);
+    // Use a suffix for the trigger ID to avoid conflict with the outer div's id
+    const selectId = id
+      ? `${id}_trigger`
+      : label
+        ? label.toLowerCase().replace(/\s+/g, "_")
+        : undefined;
     const errorId = error ? `${selectId}-error` : undefined;
 
     const [filterItem, setFilterItem] = useState("");
@@ -163,9 +156,14 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
     const inputWrapperRef = useRef<HTMLDivElement | null>(null);
     const dropdownContainerRef = useRef(null);
 
-    const handleLabelClick = () => {
-      inputWrapperRef.current?.focus();
-      if (isDropDownClosed) toggleDropdown();
+    const handleLabelClick = (e: React.MouseEvent) => {
+      e.stopPropagation();
+      if (selectId) {
+        const trigger = document.getElementById(selectId);
+        if (trigger) trigger.focus();
+      }
+      setIsInputFocused(true);
+      toggleDropdown();
     };
 
     const selectedArray = Array.isArray(selected)
@@ -230,34 +228,6 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
             setFocusedOptionIndex(newIndex);
         }
     }, [isDropDownClosed]);
-
-    // Auto-position dropdown above/below based on available space
-    useEffect(() => {
-        if (!isDropDownClosed && dropdownContainerRef.current) {
-            const container = dropdownContainerRef.current;
-            const wrapper = container.closest('.dropdown_wrapper') as HTMLElement;
-            if (!wrapper) return;
-
-            const wrapperRect = wrapper.getBoundingClientRect();
-            const h = container.getBoundingClientRect().height || container.scrollHeight;
-            const spaceBelow = window.innerHeight - wrapperRect.bottom;
-            const spaceAbove = wrapperRect.top;
-
-            // If not enough space below but enough space above, position above
-            if (spaceBelow < h + 10 && spaceAbove >= h + 10) {
-                container.style.top = "auto";
-                container.style.bottom = "calc(100% + 5px)";
-                container.style.marginTop = "0";
-                container.style.marginBottom = "0";
-            } else {
-                // Default: position below
-                container.style.top = "";
-                container.style.bottom = "";
-                container.style.marginTop = "";
-                container.style.marginBottom = "";
-            }
-        }
-    }, [isDropDownClosed, dropdownContainerRef]);
 
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -423,7 +393,6 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
                 value={{
                     activeStyle,
                     autocomplete,
-                    clearable,
                     dropdownContainerRef,
                     error,
                     errorId,
@@ -485,8 +454,8 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
                         </>
                     ) : (
                         <>
-                            <DropdownTrigger placeholder={placeholder} />
-                            <DropdownContainer constrainHeight={constrainHeight}>
+                            <DropdownTrigger />
+                            <DropdownContainer>
                                 {optionsWithBlankSelection &&
                                     optionsWithBlankSelection?.map((option: GenericObject) => (
                                         <DropdownOption key={option.id}
