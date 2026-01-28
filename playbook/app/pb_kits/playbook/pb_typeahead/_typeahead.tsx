@@ -23,8 +23,6 @@ import * as kitComponents from "./components"
 
 import {noop, buildDataProps, buildHtmlProps} from "../utilities/props"
 import {GenericObject, Noop} from "../types"
-import colors from "../tokens/exports/_colors.module.scss"
-import Caption from "../pb_caption/_caption"
 
 /**
  * @typedef {object} Props
@@ -262,7 +260,6 @@ const Typeahead = forwardRef<HTMLInputElement, TypeaheadProps>(
 
     const selectProps = {
       cacheOptions: true,
-      required,
       components: {
         Control,
         ClearIndicator,
@@ -290,6 +287,7 @@ const Typeahead = forwardRef<HTMLInputElement, TypeaheadProps>(
       inline: false,
       isClearable: true,
       isSearchable: true,
+      label: label,
       name,
       multiKit: "",
       onCreateOption: null as null,
@@ -301,6 +299,8 @@ const Typeahead = forwardRef<HTMLInputElement, TypeaheadProps>(
       onInputChange: handleInputChange,
       onBlur: handleBlur,
       onMenuOpen: handleMenuOpen,
+      required,
+      requiredIndicator: requiredIndicator,
       ...props,
     }
 
@@ -482,29 +482,14 @@ const Typeahead = forwardRef<HTMLInputElement, TypeaheadProps>(
         {...htmlProps}
         className={classnames(classes, inlineClass)}
     >
-      {label && (
-        <label htmlFor={id}>
-          {
-            requiredIndicator ? (
-              <Caption className="pb_text_input_kit_label">
-                {label} <span style={{ color: colors.error }}>*</span>
-              </Caption>
-            ) : (
-              <Caption className="pb_text_input_kit_label" 
-                  text={label} 
-              />
-            )
-          }
-        </label>
-      )}
-        <Tag
-            classNamePrefix="typeahead-kit-select"
-            error={errorDisplay}
-            isDisabled={disabled}
-            onChange={handleOnChange}
-            ref={selectRef}
-            {...selectProps}
-        />
+      <Tag
+          classNamePrefix="typeahead-kit-select"
+          error={errorDisplay}
+          isDisabled={disabled}
+          onChange={handleOnChange}
+          ref={selectRef}
+          {...selectProps}
+      />
     </div>
     )
   },
