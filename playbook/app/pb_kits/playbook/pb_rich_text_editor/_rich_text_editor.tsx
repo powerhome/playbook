@@ -75,8 +75,7 @@ const RichTextEditor = (props: RichTextEditorProps): React.ReactElement => {
     name,
     onChange = noop,
     placeholder,
-    inputHeight,
-    inputMinHeight,
+    textareaHeight,
     simple = false,
     sticky = false,
     template = '',
@@ -244,10 +243,10 @@ const RichTextEditor = (props: RichTextEditorProps): React.ReactElement => {
     )}
       {
         advancedEditor ? (
-          <div
+          <div 
               className={classnames(
                 "pb_rich_text_editor_advanced_container",
-                { [`input_height_${inputHeight}`]: !!inputHeight,[`input_min_height_${inputMinHeight}`]: !!inputMinHeight ,["toolbar-active"]: shouldShowToolbar }
+                { [`textarea_height_${textareaHeight}`]: !!textareaHeight, ["toolbar-active"]: shouldShowToolbar }
               )}
           >
             {shouldShowToolbar && (

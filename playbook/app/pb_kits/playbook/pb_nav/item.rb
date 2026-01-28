@@ -20,6 +20,7 @@ module Playbook
       prop :icon_left
       prop :icon_right
       prop :image_url
+      prop :inactive, type: Playbook::Props::Boolean, default: false
       prop :target, type: Playbook::Props::Enum,
                     values: %w[_blank _self _parent _top],
                     default: "_self"
@@ -27,7 +28,7 @@ module Playbook
         if collapsible
           "#{generate_classname('pb_nav_list_kit_item', active_class, highlighted_border_class)} #{generate_classname('pb_collapsible_nav_item', active_class, collapsible_trail_class)} #{font_size_class} #{font_weight_class} pb_nav_list_item_link_collapsible"
         else
-          "#{generate_classname('pb_nav_list_kit_item', active_class, highlighted_border_class)} #{font_size_class} #{font_weight_class} pb_nav_list_item_link#{disabled_class}"
+          "#{generate_classname('pb_nav_list_kit_item', active_class, highlighted_border_class)} #{font_size_class} #{font_weight_class} pb_nav_list_item_link#{disabled_class}#{inactive_class}"
         end
       end
 
@@ -94,7 +95,7 @@ module Playbook
       end
 
       def collapsible_nav_classname
-        generate_classname("collapsible_nav_wrapper", active_class, collapsible_trail_class)
+        generate_classname("collapsible_nav_wrapper", active_class, collapsible_trail_class, inactive_class)
       end
 
     private
@@ -105,6 +106,10 @@ module Playbook
 
       def disabled_class
         disabled ? " pb_nav_item_disabled" : nil
+      end
+
+      def inactive_class
+        inactive ? " pb_nav_item_inactive" : nil
       end
 
       def highlighted_border_class
