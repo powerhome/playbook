@@ -118,7 +118,11 @@ const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>((pr
 
   const arrowDownElementId = `arrow_down_${id}`
   const arrowUpElementId = `arrow_up_${id}`
-  const inputId = id ? `${id}_input` : (name || "multiselect_input")
+  // Control id for label htmlFor: use name (like Select), or slug of label text, or fallback
+  const labelForId =
+    name ||
+    (label ? label.toLowerCase().replace(/\s+/g, "_").replace(/[^a-z0-9_]/g, "") : null) ||
+    (id ? `${id}_input` : "multiselect_input")
 
   const modifyRecursive = (tree: { [key: string]: any }[], check: boolean) => {
     if (!Array.isArray(tree)) {
@@ -327,7 +331,7 @@ const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>((pr
   // Handle click on input wrapper(entire div with pills, typeahead, etc) so it doesn't close when input or form pill is clicked
   const handleInputWrapperClick = (e: any) => {
     if (
-      e.target.id === inputId ||
+      e.target.id === labelForId ||
       e.target.classList.contains("pb_form_pill_tag") ||
       disabled
     ) {
@@ -461,7 +465,7 @@ const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>((pr
       {label && (
         <label
             className="pb_multi_level_select_kit_label"
-            htmlFor={inputId}
+            htmlFor={labelForId}
         >
           <Caption
               marginBottom="xs"
@@ -568,7 +572,7 @@ const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>((pr
 
             <input
                 disabled={disabled}
-                id={inputId}
+                id={labelForId}
                 onChange={(e) => {
                   variant === "single"
                     ? handleRadioInputChange(e.target.value)
