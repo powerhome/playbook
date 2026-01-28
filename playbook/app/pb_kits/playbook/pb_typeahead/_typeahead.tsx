@@ -460,7 +460,7 @@ const Typeahead = forwardRef<HTMLInputElement, TypeaheadProps>(
     const dataProps = buildDataProps(data)
     const htmlProps = buildHtmlProps(htmlOptions)
     const classes = classnames(
-      "pb_typeahead_kit pb_text_input_kit react-select",
+      "pb_typeahead_kit react-select",
       `mb_${marginBottom}`,
       globalProps(filteredProps),
       className
