@@ -44,6 +44,7 @@ const DropdownTrigger = (props: DropdownTriggerProps) => {
 
   const {
     autocomplete,
+    clearable,
     error,
     errorId,
     filterItem,
