@@ -44,6 +44,8 @@ const DropdownTrigger = (props: DropdownTriggerProps) => {
 
   const {
     autocomplete,
+    error,
+    errorId,
     filterItem,
     handleBackspace,
     handleChange,
@@ -113,6 +115,8 @@ const DropdownTrigger = (props: DropdownTriggerProps) => {
       {
           children ? (
             <div
+                aria-describedby={errorId}
+                aria-invalid={!!error}
                 onClick={() => toggleDropdown()}
                 onKeyDown= {handleKeyDown}
                 ref={inputWrapperRef}
@@ -129,6 +133,8 @@ const DropdownTrigger = (props: DropdownTriggerProps) => {
                   className={triggerWrapperClasses}
                   cursor={`${autocomplete ? "text" : "pointer"}`}
                   htmlOptions={{
+                    "aria-describedby": errorId,
+                    "aria-invalid": !!error,
                     onClick: () => handleWrapperClick(),
                     onKeyDown: handleKeyDown,
                     tabIndex: "0",

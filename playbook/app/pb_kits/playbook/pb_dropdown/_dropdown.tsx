@@ -113,6 +113,8 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
 
     const [isDropDownClosed, setIsDropDownClosed, toggleDropdown] = useDropdown(isClosed);
 
+    const errorId = error ? `${id || "dropdown"}-error` : undefined;
+
     const [filterItem, setFilterItem] = useState("");
     const initialSelected = useMemo(() => {
       // Handle quickpick variant with string defaultValue (e.g., "This Month")
@@ -376,6 +378,8 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
                     activeStyle,
                     autocomplete,
                     dropdownContainerRef,
+                    error,
+                    errorId,
                     filteredOptions,
                     filterItem,
                     focusedOptionIndex,
@@ -438,12 +442,16 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
                         </>
                     )}
 
-                    {error &&
+                    {error && (
                         <Body
+                            aria={{ atomic: "true", live: "polite" }}
+                            dark={dark}
+                            htmlOptions={{ role: "alert" }}
+                            id={errorId}
                             status="negative"
                             text={error}
                         />
-                    }
+                    )}
                 </div>
             </DropdownContext.Provider>
         </div>
