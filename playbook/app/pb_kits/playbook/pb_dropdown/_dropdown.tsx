@@ -425,6 +425,7 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
                         <Caption
                             className="pb_dropdown_kit_label"
                             dark={dark}
+                            marginBottom="xs"
                             text={label}
                         />
                     </label>
