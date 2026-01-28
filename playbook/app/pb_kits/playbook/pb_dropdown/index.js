@@ -14,6 +14,7 @@ const DROPDOWN_INPUT = "#dropdown-selected-option";
 const SEARCH_INPUT_SELECTOR = "[data-dropdown-autocomplete]";
 const SEARCH_BAR_SELECTOR = "[data-dropdown-search]";
 const CLEAR_ICON_SELECTOR = "#dropdown_clear_icon";
+const LABEL_SELECTOR = '[data-dropdown="pb-dropdown-label"]';
 
 export default class PbDropdown extends PbEnhancedElement {
   static get selector() {
@@ -30,14 +31,15 @@ export default class PbDropdown extends PbEnhancedElement {
   connect() {
     // Store instance on element for DatePicker sync
     this.element._pbDropdownInstance = this;
-    
+
     this.keyboardHandler = new PbDropdownKeyboard(this);
     this.isMultiSelect = this.element.dataset.pbDropdownMultiSelect === "true";
     this.formPillProps = this.element.dataset.formPillProps
       ? JSON.parse(this.element.dataset.formPillProps)
       : {};
     const baseInput = this.element.querySelector(DROPDOWN_INPUT);
-    this.wasOriginallyRequired = baseInput && baseInput.hasAttribute("required");
+    this.wasOriginallyRequired =
+      baseInput && baseInput.hasAttribute("required");
     this.setDefaultValue();
     this.bindEventListeners();
     this.bindSearchInput();
@@ -70,15 +72,24 @@ export default class PbDropdown extends PbEnhancedElement {
   bindEventListeners() {
     const customTrigger =
       this.element.querySelector(CUSTOM_DISPLAY_SELECTOR) || this.element;
-    customTrigger.addEventListener("click", () =>
-      this.toggleElement(this.target)
-    );
+    customTrigger.addEventListener("click", (e) => {
+      const label = e.target.closest(LABEL_SELECTOR);
+      if (label && label.htmlFor) {
+        const trigger = this.element.querySelector(
+          `#${CSS.escape(label.htmlFor)}`,
+        );
+        if (trigger) {
+          trigger.focus();
+        }
+      }
+      this.toggleElement(this.target);
+    });
 
     this.target.addEventListener("click", this.handleOptionClick.bind(this));
     document.addEventListener(
       "click",
       this.handleDocumentClick.bind(this),
-      true
+      true,
     );
   }
 
@@ -87,7 +98,7 @@ export default class PbDropdown extends PbEnhancedElement {
     if (!this.searchBar) return;
 
     this.searchBar.addEventListener("input", (e) =>
-      this.handleSearch(e.target.value)
+      this.handleSearch(e.target.value),
     );
   }
 
@@ -102,7 +113,7 @@ export default class PbDropdown extends PbEnhancedElement {
 
     // Live filter
     this.searchInput.addEventListener("input", (e) =>
-      this.handleSearch(e.target.value)
+      this.handleSearch(e.target.value),
     );
   }
 
@@ -120,28 +131,31 @@ export default class PbDropdown extends PbEnhancedElement {
 
   handleSearch(term = "") {
     const lcTerm = term.toLowerCase();
-    let hasMatch = false
+    let hasMatch = false;
     this.element.querySelectorAll(OPTION_SELECTOR).forEach((opt) => {
       //make it so that if the option is selected, it will not show up in the search results
-      if (this.isMultiSelect && this.selectedOptions.has(opt.dataset.dropdownOptionLabel)) {
-      opt.style.display = "none";
-      return;
-    }
+      if (
+        this.isMultiSelect &&
+        this.selectedOptions.has(opt.dataset.dropdownOptionLabel)
+      ) {
+        opt.style.display = "none";
+        return;
+      }
       const label = JSON.parse(opt.dataset.dropdownOptionLabel)
         .label.toString()
         .toLowerCase();
 
-    // hide or show option
+      // hide or show option
       const match = label.includes(lcTerm);
       opt.style.display = match ? "" : "none";
-      if (match) hasMatch = true
+      if (match) hasMatch = true;
     });
 
     this.adjustDropdownHeight();
 
-    this.removeNoOptionsMessage()
+    this.removeNoOptionsMessage();
     if (!hasMatch) {
-      this.showNoOptionsMessage()
+      this.showNoOptionsMessage();
     }
   }
 
@@ -149,7 +163,8 @@ export default class PbDropdown extends PbEnhancedElement {
     if (this.element.querySelector(".dropdown_no_options")) return;
 
     const noOptionElement = document.createElement("div");
-    noOptionElement.className = "pb_body_kit_light dropdown_no_options pb_item_kit p_xs display_flex justify_content_center";
+    noOptionElement.className =
+      "pb_body_kit_light dropdown_no_options pb_item_kit p_xs display_flex justify_content_center";
     noOptionElement.textContent = "no option";
 
     this.target.appendChild(noOptionElement);
@@ -200,6 +215,8 @@ export default class PbDropdown extends PbEnhancedElement {
   }
 
   isClickOutside(event) {
+    const label = event.target.closest(LABEL_SELECTOR);
+    if (label && this.element.contains(label)) return false;
     const customTrigger = this.element.querySelector(CUSTOM_DISPLAY_SELECTOR);
     if (customTrigger) {
       return !customTrigger.contains(event.target);
@@ -230,8 +247,8 @@ export default class PbDropdown extends PbEnhancedElement {
         ? JSON.parse(
             this.element.querySelector(
               OPTION_SELECTOR +
-                `[data-dropdown-option-label*='"id":"${hiddenInput.value}"']`
-            ).dataset.dropdownOptionLabel
+                `[data-dropdown-option-label*='"id":"${hiddenInput.value}"']`,
+            ).dataset.dropdownOptionLabel,
           )
         : null;
     }
@@ -240,14 +257,14 @@ export default class PbDropdown extends PbEnhancedElement {
       new CustomEvent("pb:dropdown:selected", {
         detail,
         bubbles: true,
-      })
+      }),
     );
   }
 
   onOptionSelected(value, selectedOption) {
     const triggerElement = this.element.querySelector(DROPDOWN_TRIGGER_DISPLAY);
     const customDisplayElement = this.element.querySelector(
-      "#dropdown_trigger_custom_display"
+      "#dropdown_trigger_custom_display",
     );
 
     if (triggerElement) {
@@ -255,36 +272,46 @@ export default class PbDropdown extends PbEnhancedElement {
         const selectedLabel = JSON.parse(value).label;
         triggerElement.textContent = selectedLabel;
         this.emitSelectionChange();
-        
+
         // Handle quickpick variant: populate start/end date hidden inputs
         const optionData = JSON.parse(value);
         const startDateId = this.element.dataset.startDateId;
         const endDateId = this.element.dataset.endDateId;
         const controlsStartId = this.element.dataset.controlsStartId;
         const controlsEndId = this.element.dataset.controlsEndId;
-        
+
         if (optionData.formatted_start_date && optionData.formatted_end_date) {
           // Populate date inputs when option has date fields
           if (startDateId) {
             const startDateInput = document.getElementById(startDateId);
-            if (startDateInput) startDateInput.value = optionData.formatted_start_date;
+            if (startDateInput)
+              startDateInput.value = optionData.formatted_start_date;
           }
-          
+
           if (endDateId) {
             const endDateInput = document.getElementById(endDateId);
-            if (endDateInput) endDateInput.value = optionData.formatted_end_date;
+            if (endDateInput)
+              endDateInput.value = optionData.formatted_end_date;
           }
-          
+
           // Sync with DatePickers if controlsStartId/controlsEndId are present
           if (controlsStartId) {
-            const startPicker = document.querySelector(`#${controlsStartId}`)?._flatpickr;
+            const startPicker = document.querySelector(
+              `#${controlsStartId}`,
+            )?._flatpickr;
             if (startPicker) {
-              startPicker.setDate(optionData.formatted_start_date, true, "m/d/Y");
+              startPicker.setDate(
+                optionData.formatted_start_date,
+                true,
+                "m/d/Y",
+              );
             }
           }
-          
+
           if (controlsEndId) {
-            const endPicker = document.querySelector(`#${controlsEndId}`)?._flatpickr;
+            const endPicker = document.querySelector(
+              `#${controlsEndId}`,
+            )?._flatpickr;
             if (endPicker) {
               endPicker.setDate(optionData.formatted_end_date, true, "m/d/Y");
             }
@@ -295,22 +322,26 @@ export default class PbDropdown extends PbEnhancedElement {
             const startDateInput = document.getElementById(startDateId);
             if (startDateInput) startDateInput.value = "";
           }
-          
+
           if (endDateId) {
             const endDateInput = document.getElementById(endDateId);
             if (endDateInput) endDateInput.value = "";
           }
-          
+
           // Clear DatePickers as well
           if (controlsStartId) {
-            const startPicker = document.querySelector(`#${controlsStartId}`)?._flatpickr;
+            const startPicker = document.querySelector(
+              `#${controlsStartId}`,
+            )?._flatpickr;
             if (startPicker) {
               startPicker.clear();
             }
           }
-          
+
           if (controlsEndId) {
-            const endPicker = document.querySelector(`#${controlsEndId}`)?._flatpickr;
+            const endPicker = document.querySelector(
+              `#${controlsEndId}`,
+            )?._flatpickr;
             if (endPicker) {
               endPicker.clear();
             }
@@ -350,7 +381,9 @@ export default class PbDropdown extends PbEnhancedElement {
           this.adjustDropdownHeight();
         }
       });
-      this.element.querySelector(DROPDOWN_INPUT).value = Array.from(this.selectedOptions)
+      this.element.querySelector(DROPDOWN_INPUT).value = Array.from(
+        this.selectedOptions,
+      )
         .map((opt) => JSON.parse(opt).id)
         .join(",");
     } else {
@@ -382,7 +415,7 @@ export default class PbDropdown extends PbEnhancedElement {
       this.keyboardHandler.focusedOptionIndex = -1;
       const options = this.element.querySelectorAll(OPTION_SELECTOR);
       options.forEach((option) =>
-        option.classList.remove("pb_dropdown_option_focused")
+        option.classList.remove("pb_dropdown_option_focused"),
       );
     }
   }
@@ -417,7 +450,7 @@ export default class PbDropdown extends PbEnhancedElement {
           hiddenInput.closest(".dropdown_wrapper").classList.add("error");
         }
       },
-      true
+      true,
     );
   }
 
@@ -427,7 +460,7 @@ export default class PbDropdown extends PbEnhancedElement {
         const dropdownWrapperElement = input.closest(".dropdown_wrapper");
         dropdownWrapperElement.classList.remove("error");
         const errorLabelElement = dropdownWrapperElement.querySelector(
-          ".pb_body_kit_negative"
+          ".pb_body_kit_negative",
         );
         if (errorLabelElement) {
           errorLabelElement.remove();
@@ -435,13 +468,13 @@ export default class PbDropdown extends PbEnhancedElement {
         return;
       }
     }
-    
+
     if (input.checkValidity()) {
       const dropdownWrapperElement = input.closest(".dropdown_wrapper");
       dropdownWrapperElement.classList.remove("error");
 
       const errorLabelElement = dropdownWrapperElement.querySelector(
-        ".pb_body_kit_negative"
+        ".pb_body_kit_negative",
       );
       if (errorLabelElement) {
         errorLabelElement.remove();
@@ -452,7 +485,7 @@ export default class PbDropdown extends PbEnhancedElement {
   setDefaultValue() {
     const hiddenInput = this.element.querySelector(DROPDOWN_INPUT);
     const optionEls = Array.from(
-      this.element.querySelectorAll(OPTION_SELECTOR)
+      this.element.querySelectorAll(OPTION_SELECTOR),
     );
     const defaultValue = hiddenInput.dataset.defaultValue || "";
     if (!defaultValue) return;
@@ -498,44 +531,53 @@ export default class PbDropdown extends PbEnhancedElement {
       selectedOption.classList.add("pb_dropdown_option_selected");
       const optionData = JSON.parse(selectedOption.dataset.dropdownOptionLabel);
       this.setTriggerElementText(optionData.label);
-      
+
       // Handle quickpick variant: populate start/end date hidden inputs and sync DatePickers
       if (optionData.formatted_start_date && optionData.formatted_end_date) {
         const startDateId = this.element.dataset.startDateId;
         const endDateId = this.element.dataset.endDateId;
         const controlsStartId = this.element.dataset.controlsStartId;
         const controlsEndId = this.element.dataset.controlsEndId;
-        
+
         if (startDateId) {
           const startDateInput = document.getElementById(startDateId);
-          if (startDateInput) startDateInput.value = optionData.formatted_start_date;
+          if (startDateInput)
+            startDateInput.value = optionData.formatted_start_date;
         }
-        
+
         if (endDateId) {
           const endDateInput = document.getElementById(endDateId);
           if (endDateInput) endDateInput.value = optionData.formatted_end_date;
         }
-        
+
         // Sync with DatePickers - retry with delays to ensure DatePickers are initialized
         const syncDatePickers = () => {
           if (controlsStartId) {
-            const startPicker = document.querySelector(`#${controlsStartId}`)?._flatpickr;
+            const startPicker = document.querySelector(
+              `#${controlsStartId}`,
+            )?._flatpickr;
             if (startPicker) {
-              startPicker.setDate(optionData.formatted_start_date, true, "m/d/Y");
+              startPicker.setDate(
+                optionData.formatted_start_date,
+                true,
+                "m/d/Y",
+              );
             }
           }
-          
+
           if (controlsEndId) {
-            const endPicker = document.querySelector(`#${controlsEndId}`)?._flatpickr;
+            const endPicker = document.querySelector(
+              `#${controlsEndId}`,
+            )?._flatpickr;
             if (endPicker) {
               endPicker.setDate(optionData.formatted_end_date, true, "m/d/Y");
             }
           }
         };
-        
+
         // Try immediately
         syncDatePickers();
-        
+
         // Retry after short delay in case DatePickers aren't ready yet
         setTimeout(syncDatePickers, 100);
         setTimeout(syncDatePickers, 300);
@@ -598,7 +640,7 @@ export default class PbDropdown extends PbEnhancedElement {
 
     const wrapper = this.element.querySelector("#dropdown_pills_wrapper");
     const placeholder = this.element.querySelector(
-      "#dropdown_trigger_display_multi_select"
+      "#dropdown_trigger_display_multi_select",
     );
     if (!wrapper) return;
 
@@ -616,7 +658,12 @@ export default class PbDropdown extends PbEnhancedElement {
       // Create a form pill for each selected option
       const pill = document.createElement("div");
       const color = this.formPillProps.color || "primary";
-      pill.classList.add("pb_form_pill_kit", `pb_form_pill_${color}`, "pb_form_pill_none", "mr_xs");
+      pill.classList.add(
+        "pb_form_pill_kit",
+        `pb_form_pill_${color}`,
+        "pb_form_pill_none",
+        "mr_xs",
+      );
       if (this.formPillProps.size === "small") {
         pill.classList.add("pb_form_pill_small");
       }
@@ -641,8 +688,8 @@ export default class PbDropdown extends PbEnhancedElement {
 
         const optEl = this.element.querySelector(
           `${OPTION_SELECTOR}[data-dropdown-option-label*='"id":${JSON.stringify(
-            id
-          )}']`
+            id,
+          )}']`,
         );
         if (optEl) {
           optEl.style.display = "";
@@ -671,18 +718,18 @@ export default class PbDropdown extends PbEnhancedElement {
       }
     }
     const customDisplay = this.element.querySelector(
-      "#dropdown_trigger_custom_display"
+      "#dropdown_trigger_custom_display",
     );
     if (customDisplay) {
       customDisplay.style.display = "none";
     }
-    
+
     // Clear quickpick hidden inputs
     const startDateId = this.element.dataset.startDateId;
     const endDateId = this.element.dataset.endDateId;
     const controlsStartId = this.element.dataset.controlsStartId;
     const controlsEndId = this.element.dataset.controlsEndId;
-    
+
     if (startDateId) {
       const startDateInput = document.getElementById(startDateId);
       if (startDateInput) startDateInput.value = "";
@@ -691,22 +738,24 @@ export default class PbDropdown extends PbEnhancedElement {
       const endDateInput = document.getElementById(endDateId);
       if (endDateInput) endDateInput.value = "";
     }
-    
+
     // Clear linked DatePickers if controlsStartId/controlsEndId are present
     if (controlsStartId) {
-      const startPicker = document.querySelector(`#${controlsStartId}`)?._flatpickr;
+      const startPicker = document.querySelector(
+        `#${controlsStartId}`,
+      )?._flatpickr;
       if (startPicker) {
         startPicker.clear();
       }
     }
-    
+
     if (controlsEndId) {
       const endPicker = document.querySelector(`#${controlsEndId}`)?._flatpickr;
       if (endPicker) {
         endPicker.clear();
       }
     }
-    
+
     this.resetDropdownValue();
     this.updatePills();
     this.updateClearButton();
@@ -717,21 +766,24 @@ export default class PbDropdown extends PbEnhancedElement {
   // Method for DatePicker sync - only clears the dropdown, not the DatePickers
   clearSelected() {
     // Only clear if this is a single-select quickpick variant
-    if (this.element.dataset.pbDropdownVariant !== "quickpick" || this.isMultiSelect) {
+    if (
+      this.element.dataset.pbDropdownVariant !== "quickpick" ||
+      this.isMultiSelect
+    ) {
       return;
     }
-    
+
     const customDisplay = this.element.querySelector(
-      "#dropdown_trigger_custom_display"
+      "#dropdown_trigger_custom_display",
     );
     if (customDisplay) {
       customDisplay.style.display = "none";
     }
-    
+
     // Clear quickpick hidden inputs only (not the DatePickers)
     const startDateId = this.element.dataset.startDateId;
     const endDateId = this.element.dataset.endDateId;
-    
+
     if (startDateId) {
       const startDateInput = document.getElementById(startDateId);
       if (startDateInput) startDateInput.value = "";
@@ -740,7 +792,7 @@ export default class PbDropdown extends PbEnhancedElement {
       const endDateInput = document.getElementById(endDateId);
       if (endDateInput) endDateInput.value = "";
     }
-    
+
     this.resetDropdownValue();
     this.updateClearButton();
     this.emitSelectionChange();
@@ -767,7 +819,7 @@ export default class PbDropdown extends PbEnhancedElement {
       inp.dataset.generated = "true";
       baseInput.insertAdjacentElement("afterend", inp);
     });
-    
+
     // For multi-select, remove required from base input when there are selections
     // The generated inputs handle the form submission with actual values
     // Restore required attribute when there are no selections (if it was originally required)

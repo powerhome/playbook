@@ -1,6 +1,6 @@
 <%= pb_content_tag do %>
     <% if content.present? %>
-        <div style="display: inline-block" tabindex="0" data-dropdown="pb-dropdown-trigger" data-dropdown-custom-trigger<% if object.select_id.present? %> id="<%= object.select_id %>"<% end %><% if object.error_id.present? %> aria-describedby="<%= object.error_id %>"<% end %> aria-invalid="<%= object.error.present? %>">
+        <div class="<%= object.trigger_wrapper_classes %>" style="display: inline-block" tabindex="0" data-dropdown="pb-dropdown-trigger" data-dropdown-custom-trigger<% if object.select_id.present? %> id="<%= object.select_id %>"<% end %><% if object.error_id.present? %> aria-describedby="<%= object.error_id %>"<% end %> aria-invalid="<%= object.error.present? %>">
           <%= content.presence %>
         </div>
     <% else %>
@@ -9,10 +9,11 @@
         border_radius:"lg",
         classname: object.trigger_wrapper_classes,
         cursor: object.autocomplete ? "text" : "pointer",
+        id: object.select_id,
         justify: "between",
         padding_x:"sm",
         padding_y:"xs",
-        html_options: { tabindex: "0", id: object.select_id, "aria-describedby": object.error_id, "aria-invalid": object.error.present?, "data-dropdown": "pb-dropdown-trigger" }
+        html_options: { tabindex: "0", "aria-describedby": object.error_id, "aria-invalid": object.error.present?, "data-dropdown": "pb-dropdown-trigger" }
         }) do %>
         <%= pb_rails("flex/flex_item", props: { fixed_size: object.multi_select ? "85%" : "" }) do %>
             <%= pb_rails("flex", props: {align: "center"}) do %>
