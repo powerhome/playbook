@@ -418,6 +418,7 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
             >
                 {label && (
                     <label
+                        data-dropdown="pb-dropdown-label"
                         htmlFor={selectId}
                         onClick={handleLabelClick}
                     >
