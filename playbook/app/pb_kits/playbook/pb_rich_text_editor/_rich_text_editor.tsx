@@ -94,6 +94,8 @@ const RichTextEditor = (props: RichTextEditorProps): React.ReactElement => {
 
   const htmlProps = buildHtmlProps(htmlOptions)
 
+  const [labelId, setLabelId] = useState<string>("")
+
   const handleOnEditorReady = (editorInstance: Editor) => {
     setEditor(editorInstance)
     setTimeout(() => {
@@ -101,10 +103,14 @@ const RichTextEditor = (props: RichTextEditorProps): React.ReactElement => {
       if (oldId) {
         const hiddenInput = document.getElementById(oldId)
         if (hiddenInput) {
-          const newId = (inputOptions.id as string) || oldId
+          const newId = (inputOptions.id as string) || (id as string) || oldId
+          setLabelId(newId)
+
           hiddenInput.id = newId
           editorInstance.element.setAttribute('input', newId)
 
+          editorInstance.element.id = newId
+          setLabelId(newId)
           if (inputOptions.name) {
             hiddenInput.setAttribute('name', inputOptions.name as string)
           }
@@ -223,7 +229,7 @@ const RichTextEditor = (props: RichTextEditorProps): React.ReactElement => {
         ref={focus ? containerRef : undefined}
     >
     {label && (
-      <label  htmlFor={id}>
+      <label htmlFor={labelId}>
         {
           requiredIndicator ? (
             <Caption className="pb_text_input_kit_label"
