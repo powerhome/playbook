@@ -13,6 +13,9 @@ module Playbook
                           default: false
       prop :multi_select, type: Playbook::Props::Boolean,
                           default: false
+      prop :select_id, type: Playbook::Props::String
+      prop :error_id, type: Playbook::Props::String
+      prop :error, type: Playbook::Props::String
 
       def data
         Hash(prop(:data)).merge(dropdown_trigger: true, dropdown_placeholder: default_display_placeholder)
