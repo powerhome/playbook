@@ -463,7 +463,7 @@ const Typeahead = forwardRef<HTMLInputElement, TypeaheadProps>(
       "pb_typeahead_kit pb_text_input_kit react-select",
       `mb_${marginBottom}`,
       globalProps(filteredProps),
-      className,
+      className
     )
 
     const inlineClass = selectProps.inline ? "inline" : null
