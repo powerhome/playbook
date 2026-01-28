@@ -36,6 +36,7 @@ type PhoneNumberInputProps = {
   excludeCountries: string[],
   preferredCountries?: string[],
   required?: boolean,
+  requiredIndicator?: boolean,
   value?: string,
   formatAsYouType?: boolean,
   strictMode?: boolean,
@@ -91,6 +92,7 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.Ref<unknown>
     onlyCountries = [],
     excludeCountries = [],
     required = false,
+    requiredIndicator = false,
     preferredCountries = [],
     value = "",
     formatAsYouType = false,
@@ -533,6 +535,7 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.Ref<unknown>
       validateErrors()
     },
     onChange: formatAsYouType ? undefined : handleOnChange,
+    requiredIndicator,
     value: inputValue
   }
 

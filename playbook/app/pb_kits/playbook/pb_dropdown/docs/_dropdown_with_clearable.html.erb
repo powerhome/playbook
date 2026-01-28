@@ -1,0 +1,52 @@
+<% 
+  options = [
+    { label: 'United States', value: 'unitedStates', id: 'us' },
+    { label: 'Canada', value: 'canada', id: 'ca' },
+    { label: 'Pakistan', value: 'pakistan', id: 'pk' },
+  ]
+%>
+
+<%= pb_rails("dropdown", props: {
+  id: "date-range-quickpick-reset-closeable",
+  label: "Quick Pick",
+  variant: "quickpick",
+  clearable: false
+}) %>
+
+<%= pb_rails("button", props: {
+  margin_y: "md",
+  text: "Reset",
+  html_options: {
+    onclick: "handleReset()"
+  }
+}) %>
+
+<%= pb_rails("dropdown", props: {
+  id: "closeable-default",
+  options: options,
+  clearable: false,
+  default_value: options.last,
+  margin_bottom: "md",
+  label: "Default"
+}) %>
+
+<%= pb_rails("dropdown", props: {
+  id: "closeable-subtle",
+  options: options,
+  clearable: false,
+  default_value: options.second,
+  variant: "subtle",
+  separators: false,
+  label: "Subtle"
+}) %>
+
+<script>
+  function handleReset() {
+    const dropdown = document.querySelector("#date-range-quickpick-reset-closeable[data-pb-dropdown]");
+    const instance = dropdown?._pbDropdownInstance;
+    
+    if (instance) {
+      instance.clearSelection();
+    }
+  }
+</script>

@@ -50,6 +50,7 @@ export default class PbDropdown extends PbEnhancedElement {
     this.updatePills();
 
     this.clearBtn = this.element.querySelector(CLEAR_ICON_SELECTOR);
+    this.isClearable = this.element.dataset.pbDropdownClearable !== "false";
     if (this.clearBtn) {
       this.clearBtn.style.display = "none";
       this.clearBtn.addEventListener("click", (e) => {
@@ -62,6 +63,10 @@ export default class PbDropdown extends PbEnhancedElement {
 
   updateClearButton() {
     if (!this.clearBtn) return;
+    if (!this.isClearable) {
+      this.clearBtn.style.display = "none";
+      return;
+    }
     const hasSelection = this.isMultiSelect
       ? this.selectedOptions.size > 0
       : Boolean(this.element.querySelector(DROPDOWN_INPUT).value);
@@ -120,12 +125,48 @@ export default class PbDropdown extends PbEnhancedElement {
   adjustDropdownHeight() {
     if (this.target.classList.contains("open")) {
       const el = this.target;
+      const shouldConstrain = el.classList.contains("constrain_height");
       el.style.height = "auto";
       requestAnimationFrame(() => {
-        const newHeight = el.scrollHeight + "px";
-        el.offsetHeight; // force reflow
-        el.style.height = newHeight;
+        if (shouldConstrain) {
+          // Calculate 18em in pixels (matches SCSS max-height: 18em)
+          const fontSize = parseFloat(getComputedStyle(el).fontSize) || 16;
+          const maxHeight = fontSize * 18;
+          const scrollHeight = el.scrollHeight;
+          const newHeight = Math.min(scrollHeight, maxHeight);
+          el.offsetHeight; // force reflow
+          el.style.height = newHeight + "px";
+        } else {
+          el.offsetHeight; // force reflow
+          el.style.height = el.scrollHeight + "px";
+        }
       });
+    }
+  }
+
+  adjustDropdownPosition(container) {
+    if (!container) return;
+
+    const wrapper = this.element.querySelector(".dropdown_wrapper");
+    if (!wrapper) return;
+
+    const wrapperRect = wrapper.getBoundingClientRect();
+    const h = container.getBoundingClientRect().height || container.scrollHeight;
+    const spaceBelow = window.innerHeight - wrapperRect.bottom;
+    const spaceAbove = wrapperRect.top;
+
+    // If not enough space below but enough space above, position above
+    if (spaceBelow < h + 10 && spaceAbove >= h + 10) {
+      container.style.top = "auto";
+      container.style.bottom = "calc(100% + 5px)";
+      container.style.marginTop = "0";
+      container.style.marginBottom = "0";
+    } else {
+      // Default: position below
+      container.style.top = "";
+      container.style.bottom = "";
+      container.style.marginTop = "";
+      container.style.marginBottom = "";
     }
   }
 
@@ -398,7 +439,21 @@ export default class PbDropdown extends PbEnhancedElement {
   showElement(elem) {
     elem.classList.remove("close");
     elem.classList.add("open");
-    elem.style.height = elem.scrollHeight + "px";
+    
+    const shouldConstrain = elem.classList.contains("constrain_height");
+    if (shouldConstrain) {
+      // Calculate height respecting max-height constraint (18em)
+      const fontSize = parseFloat(getComputedStyle(elem).fontSize) || 16;
+      const maxHeight = fontSize * 18; // matches SCSS max-height: 18em
+      const scrollHeight = elem.scrollHeight;
+      const height = Math.min(scrollHeight, maxHeight);
+      elem.style.height = height + "px";
+    } else {
+      elem.style.height = elem.scrollHeight + "px";
+    }
+    
+    // Auto-position dropdown above if not enough space below
+    this.adjustDropdownPosition(elem);
   }
 
   hideElement(elem) {

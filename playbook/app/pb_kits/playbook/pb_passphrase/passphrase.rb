@@ -10,6 +10,7 @@ module Playbook
                              values: %w[always xs sm md lg xl],
                              default: "always"
       prop :tips, type: Playbook::Props::Array, default: []
+      prop :required_indicator, type: Playbook::Props::Boolean, default: false
       prop :value, type: Playbook::Props::String
 
       def classname
@@ -23,6 +24,7 @@ module Playbook
           confirmation: confirmation,
           inputProps: input_props,
           label: label,
+          requiredIndicator: required_indicator,
           showTipsBelow: show_tips_below,
           tips: tips,
           uncontrolled: true,

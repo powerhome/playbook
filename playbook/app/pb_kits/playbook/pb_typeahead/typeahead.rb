@@ -123,6 +123,10 @@ module Playbook
         end
         base_options
       end
+
+      def truncate_props
+        nil unless is_react?
+      end
     end
   end
 end

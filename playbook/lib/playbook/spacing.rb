@@ -176,48 +176,78 @@ module Playbook
       selected_gap_props = gap_options.keys.select { |sk| try(sk) }
       return nil unless selected_gap_props.present?
 
+      screen_size_values = %w[xs sm md lg xl]
+
       selected_gap_props.map do |k|
         gap_value = send(k)
         if gap_value.is_a?(Hash)
-          gap_value.map do |media_size, gap_spacing_value|
-            "gap_#{media_size}_#{gap_spacing_value.underscore}" if gap_values.include?(gap_spacing_value.to_s)
+          class_result = []
+
+          # Handle default value separately (generates base class without size prefix)
+          class_result << "gap_#{gap_value[:default].underscore}" if gap_value.key?(:default) && gap_values.include?(gap_value[:default].to_s)
+
+          # Handle responsive sizes (generates classes with size prefix)
+          gap_value.each do |media_size, gap_spacing_value|
+            class_result << "gap_#{media_size}_#{gap_spacing_value.underscore}" if screen_size_values.include?(media_size.to_s) && gap_values.include?(gap_spacing_value.to_s)
           end
+
+          class_result
         elsif gap_values.include?(gap_value.to_s)
           "gap_#{gap_value.underscore}"
         end
-      end.compact.join(" ")
+      end.flatten.compact.join(" ")
     end
 
     def column_gap_props
       selected_column_gap_props = column_gap_options.keys.select { |sk| try(sk) }
       return nil unless selected_column_gap_props.present?
 
+      screen_size_values = %w[xs sm md lg xl]
+
       selected_column_gap_props.map do |k|
         column_gap_value = send(k)
         if column_gap_value.is_a?(Hash)
-          column_gap_value.map do |media_size, column_gap_spacing_value|
-            "column_gap_#{media_size}_#{column_gap_spacing_value.underscore}" if gap_values.include?(column_gap_spacing_value.to_s)
+          class_result = []
+
+          # Handle default value separately (generates base class without size prefix)
+          class_result << "column_gap_#{column_gap_value[:default].underscore}" if column_gap_value.key?(:default) && gap_values.include?(column_gap_value[:default].to_s)
+
+          # Handle responsive sizes (generates classes with size prefix)
+          column_gap_value.each do |media_size, column_gap_spacing_value|
+            class_result << "column_gap_#{media_size}_#{column_gap_spacing_value.underscore}" if screen_size_values.include?(media_size.to_s) && gap_values.include?(column_gap_spacing_value.to_s)
           end
+
+          class_result
         elsif gap_values.include?(column_gap_value.to_s)
           "column_gap_#{column_gap_value.underscore}"
         end
-      end.compact.join(" ")
+      end.flatten.compact.join(" ")
     end
 
     def row_gap_props
       selected_row_gap_props = row_gap_options.keys.select { |sk| try(sk) }
       return nil unless selected_row_gap_props.present?
 
+      screen_size_values = %w[xs sm md lg xl]
+
       selected_row_gap_props.map do |k|
         row_gap_value = send(k)
         if row_gap_value.is_a?(Hash)
-          row_gap_value.map do |media_size, row_gap_spacing_value|
-            "row_gap_#{media_size}_#{row_gap_spacing_value.underscore}" if gap_values.include?(row_gap_spacing_value.to_s)
+          class_result = []
+
+          # Handle default value separately (generates base class without size prefix)
+          class_result << "row_gap_#{row_gap_value[:default].underscore}" if row_gap_value.key?(:default) && gap_values.include?(row_gap_value[:default].to_s)
+
+          # Handle responsive sizes (generates classes with size prefix)
+          row_gap_value.each do |media_size, row_gap_spacing_value|
+            class_result << "row_gap_#{media_size}_#{row_gap_spacing_value.underscore}" if screen_size_values.include?(media_size.to_s) && gap_values.include?(row_gap_spacing_value.to_s)
           end
+
+          class_result
         elsif gap_values.include?(row_gap_value.to_s)
           "row_gap_#{row_gap_value.underscore}"
         end
-      end.compact.join(" ")
+      end.flatten.compact.join(" ")
     end
   end
 end

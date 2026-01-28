@@ -476,12 +476,12 @@ RSpec.describe "Global Props Integration Tests" do
       expect(card_classname).to include("break_on_sm:m_lg")
       expect(card_classname).to include("break_on_md:m_xl")
 
-      # Flex responsive gap (uses gap_default_ and gap_breakpoint_ format)
-      expect(flex_classname).to include("gap_default_sm")
+      # Flex responsive gap (uses new default key format matching React)
+      expect(flex_classname).to include("gap_sm")
       expect(flex_classname).to include("gap_md_lg")
 
-      # Body responsive text_align (uses text_align_default_ format)
-      expect(body_classname).to include("text_align_default_left")
+      # Body responsive text_align (uses new default key format matching React)
+      expect(body_classname).to include("text_align_left")
       expect(body_classname).to include("text_align_sm_center")
       expect(body_classname).to include("text_align_md_right")
     end

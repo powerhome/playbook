@@ -9,3 +9,4 @@ export { default as PhoneNumberInputAccessInputElement } from './_phone_number_i
 export { default as PhoneNumberInputFormat } from './_phone_number_input_format'
 export { default as PhoneNumberInputStrictMode } from './_phone_number_input_strict_mode'
 export { default as PhoneNumberInputCountrySearch } from './_phone_number_input_country_search'
+export { default as PhoneNumberInputRequiredIndicator } from './_phone_number_input_required_indicator.jsx'

@@ -21,7 +21,7 @@ const FormPillTruncatedText = (props) => {
           isMulti
           label="Truncation Within Typeahead"
           options={names}
-          truncate={1}
+          truncate={"1"}
           {...props}
       />
       <Caption text="Form Pill Truncation"/>
@@ -31,20 +31,20 @@ const FormPillTruncatedText = (props) => {
             name="Princess Amelia Mignonette Grimaldi Thermopolis Renaldo"
             onClick={() => alert('Click!')}
             tabIndex={0}
-            truncate={1}
+            truncate={"1"}
         />
         <FormPill
             icon="badge-check"
             onClick={() => {alert('Click!')}}
             tabIndex={0}
             text="icon and a very long tag to show truncation"
-            truncate={1}
+            truncate={"1"}
         />
         <FormPill
             onClick={() => {alert('Click!')}}
             tabIndex={0}
             text="form pill with a very long tag to show truncation"
-            truncate={1}
+            truncate={"1"}
         />
       </Card>
     </>

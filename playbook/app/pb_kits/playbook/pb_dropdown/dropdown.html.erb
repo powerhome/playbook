@@ -23,6 +23,7 @@
             <% end %>
         <% else %>
             <%= pb_rails("dropdown/dropdown_trigger", props: { autocomplete: object.autocomplete, multi_select: object.multi_select, placeholder: object.placeholder, select_id: object.select_id, error_id: object.error_id, error: object.error }) %>
+            <%= pb_rails("dropdown/dropdown_trigger", props:{ autocomplete: object.autocomplete, multi_select:object.multi_select, placeholder: object.placeholder }) %>
             <%= pb_rails("dropdown/dropdown_container", props: { searchbar: object.searchbar, constrain_height: object.constrain_height }) do %>
                 <% if options_with_blank.present? %>
                     <% options_with_blank.each do |option| %>
