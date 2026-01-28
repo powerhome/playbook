@@ -154,6 +154,7 @@ const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>(
             .replace(/[^a-z0-9_]/g, "")
         : null) ||
       (id ? `${id}_input` : "multiselect_input");
+    const errorId = error ? `${labelForId}-error` : undefined;
 
     const modifyRecursive = (
       tree: { [key: string]: any }[],
@@ -626,6 +627,8 @@ const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>(
                 )}
 
                 <input
+                    aria-describedby={errorId}
+                    aria-invalid={!!error}
                     disabled={disabled}
                     id={labelForId}
                     onChange={(e) => {
@@ -679,10 +682,16 @@ const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>(
             </div>
           </div>
         </MultiLevelSelectContext.Provider>
-        {error && <Body dark={props.dark}
-            status="negative"
-            text={error}
-                  />}
+        {error && (
+          <Body
+              aria={{ atomic: "true", live: "polite" }}
+              dark={props.dark}
+              htmlOptions={{ role: "alert" }}
+              id={errorId}
+              status="negative"
+              text={error}
+          />
+        )}
       </div>
     );
   },
