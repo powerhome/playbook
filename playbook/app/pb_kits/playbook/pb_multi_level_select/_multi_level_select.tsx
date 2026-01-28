@@ -145,15 +145,12 @@ const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>(
     const arrowDownElementId = `arrow_down_${id}`;
     const arrowUpElementId = `arrow_up_${id}`;
     // Control id for label htmlFor: use suffix to avoid conflict with outer div's id
+    const sanitizeForId = (str: string) =>
+      str.toLowerCase().replace(/\s+/g, "_").replace(/[^a-z0-9_]/g, "");
     const labelForId = id
       ? `${id}_input`
-      : name ||
-        (label
-          ? label
-              .toLowerCase()
-              .replace(/\s+/g, "_")
-              .replace(/[^a-z0-9_]/g, "")
-          : null) ||
+      : (name ? sanitizeForId(name) : null) ||
+        (label ? sanitizeForId(label) : null) ||
         "multiselect_input";
     const errorId = error ? `${labelForId}-error` : undefined;
 
