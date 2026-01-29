@@ -111,7 +111,7 @@ const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>(
       buildCss("pb_multi_level_select"),
       error && "error",
       globalProps(props),
-      className,
+      className
     );
 
     const dropdownRef = useRef(null);
