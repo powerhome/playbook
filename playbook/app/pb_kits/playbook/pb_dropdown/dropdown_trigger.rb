@@ -14,6 +14,7 @@ module Playbook
       prop :multi_select, type: Playbook::Props::Boolean,
                           default: false
       prop :select_id, type: Playbook::Props::String
+      prop :label, type: Playbook::Props::String
       prop :error_id, type: Playbook::Props::String
       prop :error, type: Playbook::Props::String
 
