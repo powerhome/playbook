@@ -94,35 +94,40 @@ const RichTextEditor = (props: RichTextEditorProps): React.ReactElement => {
 
   const htmlProps = buildHtmlProps(htmlOptions)
 
-  const [labelId, setLabelId] = useState<string>("")
+  const fieldId = (inputOptions.id as string) || (id as string) || null
+  const labelElementId = `${fieldId}_label`
 
   const handleOnEditorReady = (editorInstance: Editor) => {
     setEditor(editorInstance)
     setTimeout(() => {
-      const oldId = editorInstance.element.getAttribute('input')
-      if (oldId) {
-        const hiddenInput = document.getElementById(oldId)
-        if (hiddenInput) {
-          const newId = (inputOptions.id as string) || (id as string) || oldId
-          setLabelId(newId)
+      const oldId = editorInstance.element?.getAttribute("input")
+      if (!oldId) return
 
-          hiddenInput.id = newId
-          editorInstance.element.setAttribute('input', newId)
+      const hiddenInput = document.getElementById(oldId)
+      if (!hiddenInput) return
 
-          editorInstance.element.setAttribute(
-            'aria-labelledby',
-            `${newId}_ label`
-          )
+      hiddenInput.id = fieldId
+      if (inputOptions.name) hiddenInput.setAttribute("name", inputOptions.name as string)
 
-          editorInstance.element.id = newId
-          setLabelId(newId)
-          if (inputOptions.name) {
-            hiddenInput.setAttribute('name', inputOptions.name as string)
-          }
-        }
-      }
+      editorInstance.element.setAttribute("input", fieldId)
+
+      editorInstance.element.setAttribute("aria-labelledby", labelElementId)
+
+      editorInstance.element.id = `${fieldId}`
     })
   }
+
+  useEffect(() => {
+    if (!advancedEditor) return
+
+    const dom = advancedEditor.view?.dom as HTMLElement | undefined
+    if (!dom) return
+
+    dom.setAttribute("aria-labelledby", labelElementId)
+    dom.setAttribute("role", "textbox")
+    dom.setAttribute("aria-multiline", "true")
+
+  }, [advancedEditor, fieldId, labelElementId])
 
   // DOM manipulation must wait for editor to be ready
   if (editor && editor.element) {
@@ -235,8 +240,13 @@ const RichTextEditor = (props: RichTextEditorProps): React.ReactElement => {
     >
     {label && (
       <label
-          htmlFor={labelId}
-          id={`${labelId}_label`}
+          htmlFor={fieldId}
+          id={labelElementId}
+          onMouseDown={(e) => {
+          if (!advancedEditor) return
+            e.preventDefault()
+            advancedEditor.commands.focus()
+          }}
       >
         {
           requiredIndicator ? (
