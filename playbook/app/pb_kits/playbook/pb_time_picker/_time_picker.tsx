@@ -5,12 +5,12 @@ import { globalProps, GlobalProps } from '../utilities/globalProps'
 import Caption from '../pb_caption/_caption'
 import SelectableCard from '../pb_selectable_card/_selectable_card'
 import TextInput from '../pb_text_input/_text_input'
+import colors from '../tokens/exports/_colors.module.scss'
 
 import {
   parseTime,
   parseTimeToMinutes,
   isTimeInRange as isTimeInRangeHelper,
-  isHourDisabled as isHourDisabledHelper,
   isAnyAMTimeValid as isAnyAMTimeValidHelper,
   isAnyPMTimeValid as isAnyPMTimeValidHelper,
   getDisplayTime,
@@ -48,6 +48,7 @@ type TimePickerProps = {
   onChange?: (time: string) => void,
   onClose?: (time: string) => void,
   required?: boolean,
+  requiredIndicator?: boolean,
   showTimezone?: boolean,
   timeFormat?: TimeFormat,
   validationMessage?: string,
@@ -72,6 +73,7 @@ const TimePicker = (props: TimePickerProps): JSX.Element => {
     onChange,
     onClose,
     required = false,
+    requiredIndicator = false,
     showTimezone = false,
     timeFormat = 'AMPM',
     validationMessage,
@@ -112,10 +114,6 @@ const TimePicker = (props: TimePickerProps): JSX.Element => {
 
   const isTimeInRange = (h: number, m: number, mer?: 'AM' | 'PM'): boolean => {
     return isTimeInRangeHelper(h, m, mer, timeFormat, minTimeMinutes, maxTimeMinutes)
-  }
-
-  const isHourDisabled = (h: number, mer?: 'AM' | 'PM'): boolean => {
-    return isHourDisabledHelper(h, mer, timeFormat, minTimeMinutes, maxTimeMinutes)
   }
 
   const isCurrentTimeValid = (h: number, m: number, mer: 'AM' | 'PM'): boolean => {
@@ -186,6 +184,28 @@ const TimePicker = (props: TimePickerProps): JSX.Element => {
   const [showDropdown, setShowDropdown] = useState(false)
   const [showHourDropdown, setShowHourDropdown] = useState(false)
   const [showMinuteDropdown, setShowMinuteDropdown] = useState(false)
+
+  // Clicking the clock add-on opens the dropdown
+  useEffect(() => {
+    if (disabled) return
+
+    const addOnCard = document.querySelector(`#${uniqueId}-input`)?.closest('.text_input_wrapper_add_on')?.querySelector('.add-on-card') as HTMLElement
+    
+    if (addOnCard) {
+      const handleAddOnClick = (e: Event) => {
+        e.preventDefault()
+        e.stopPropagation()
+        setShowDropdown(true)
+      }
+      
+      addOnCard.addEventListener('click', handleAddOnClick)
+      addOnCard.style.cursor = 'pointer'
+      
+      return () => {
+        addOnCard.removeEventListener('click', handleAddOnClick)
+      }
+    }
+  }, [uniqueId, disabled, setShowDropdown])
 
   // Input dropdown scrolling
   const scrollDropdownToSelected = (dropdownRef: React.RefObject<HTMLDivElement>) => {
@@ -369,6 +389,10 @@ const TimePicker = (props: TimePickerProps): JSX.Element => {
     }
   }
 
+  const handleHourFocus = (e: React.FocusEvent<HTMLInputElement>) => {
+    e.target.select()
+  }
+
   const handleHourBlur = () => {
     const result = normalizeHourOnBlur(hourInputValue, hour, timeFormat)
     setHour(result.hour)
@@ -391,6 +415,10 @@ const TimePicker = (props: TimePickerProps): JSX.Element => {
         onChange(timeString)
       }
     }
+  }
+
+  const handleMinuteFocus = (e: React.FocusEvent<HTMLInputElement>) => {
+    e.target.select()
   }
 
   const handleMinuteBlur = () => {
@@ -482,6 +510,30 @@ const TimePicker = (props: TimePickerProps): JSX.Element => {
       e.preventDefault()
       setShowHourDropdown(false)
       closeDropdown()
+    } else if (e.key === 'ArrowDown') {
+      // ArrowDown increases value (like scrolling down a list)
+      e.preventDefault()
+      const { maxHour, minHour } = getHourConstraints(timeFormat)
+      const newHour = hour >= maxHour ? minHour : hour + 1
+      setHour(newHour)
+      setHourInputValue(timeFormat === '24hour' ? newHour.toString().padStart(2, '0') : newHour.toString())
+      setHasSelectedTime(true)
+      const timeString = get24HourTime(newHour, minute, meridiem, timeFormat)
+      if (onChange) {
+        onChange(timeString)
+      }
+    } else if (e.key === 'ArrowUp') {
+      // ArrowUp decreases value (like scrolling up a list)
+      e.preventDefault()
+      const { maxHour, minHour } = getHourConstraints(timeFormat)
+      const newHour = hour <= minHour ? maxHour : hour - 1
+      setHour(newHour)
+      setHourInputValue(timeFormat === '24hour' ? newHour.toString().padStart(2, '0') : newHour.toString())
+      setHasSelectedTime(true)
+      const timeString = get24HourTime(newHour, minute, meridiem, timeFormat)
+      if (onChange) {
+        onChange(timeString)
+      }
     }
   }
 
@@ -513,6 +565,28 @@ const TimePicker = (props: TimePickerProps): JSX.Element => {
       e.preventDefault()
       setShowMinuteDropdown(false)
       closeDropdown()
+    } else if (e.key === 'ArrowDown') {
+      // ArrowDown increases value (like scrolling down a list)
+      e.preventDefault()
+      const newMinute = minute >= 59 ? 0 : minute + 1
+      setMinute(newMinute)
+      setMinuteInputValue(newMinute.toString().padStart(2, '0'))
+      setHasSelectedTime(true)
+      const timeString = get24HourTime(hour, newMinute, meridiem, timeFormat)
+      if (onChange) {
+        onChange(timeString)
+      }
+    } else if (e.key === 'ArrowUp') {
+      // ArrowUp decreases value (like scrolling up a list)
+      e.preventDefault()
+      const newMinute = minute <= 0 ? 59 : minute - 1
+      setMinute(newMinute)
+      setMinuteInputValue(newMinute.toString().padStart(2, '0'))
+      setHasSelectedTime(true)
+      const timeString = get24HourTime(hour, newMinute, meridiem, timeFormat)
+      if (onChange) {
+        onChange(timeString)
+      }
     }
   }
 
@@ -625,12 +699,22 @@ const TimePicker = (props: TimePickerProps): JSX.Element => {
     >
       {label && (
         <label htmlFor={`${uniqueId}-input`}>
-          <Caption
-              className="pb_time_picker_kit_label"
-              marginBottom="xs"
-              size="md"
-              text={label}
-          />
+          {requiredIndicator ? (
+            <Caption
+                className="pb_time_picker_kit_label"
+                marginBottom="xs"
+                size="md"
+            >
+              {label} <span style={{ color: `${colors.error}` }}>{'*'}</span>
+            </Caption>
+          ) : (
+            <Caption
+                className="pb_time_picker_kit_label"
+                marginBottom="xs"
+                size="md"
+                text={label}
+            />
+          )}
         </label>
       )}
       <div className="time_picker_wrapper">
@@ -689,6 +773,7 @@ const TimePicker = (props: TimePickerProps): JSX.Element => {
                     onBlur={handleHourBlur}
                     onChange={handleHourChange}
                     onClick={() => { setShowHourDropdown(!showHourDropdown); setShowMinuteDropdown(false) }}
+                    onFocus={handleHourFocus}
                     onKeyDown={handleHourKeyDown}
                     pattern="[0-9]*"
                     ref={hourInputRef}
@@ -734,6 +819,7 @@ const TimePicker = (props: TimePickerProps): JSX.Element => {
                     onBlur={handleMinuteBlur}
                     onChange={handleMinuteChange}
                     onClick={() => { setShowMinuteDropdown(!showMinuteDropdown); setShowHourDropdown(false) }}
+                    onFocus={handleMinuteFocus}
                     onKeyDown={handleMinuteKeyDown}
                     pattern="[0-9]*"
                     ref={minuteInputRef}

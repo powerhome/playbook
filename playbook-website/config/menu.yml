@@ -607,7 +607,7 @@ kits:
   - name: time_picker
     platforms: web
     description: A time picker component that allows users to select a time independently of the date.
-    status: beta
+    status: stable
     icons_used: true
     react_rendered: true
     enhanced_element_used: true
