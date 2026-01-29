@@ -94,8 +94,8 @@ const RichTextEditor = (props: RichTextEditorProps): React.ReactElement => {
 
   const htmlProps = buildHtmlProps(htmlOptions)
 
-  const fieldId = (inputOptions.id as string) || (id as string) || null
-  const labelElementId = `${fieldId}-label`
+  const fieldId = (inputOptions.id || id) ? (inputOptions.id as string) || (id as string) : null
+  const labelElementId = fieldId ? `${fieldId}-label` : null
 
   const handleOnEditorReady = (editorInstance: Editor) => {
     setEditor(editorInstance)
@@ -109,13 +109,15 @@ const RichTextEditor = (props: RichTextEditorProps): React.ReactElement => {
 
       if (inputOptions.name) hiddenInput.setAttribute("name", inputOptions.name as string)
 
+      if (!fieldId || !labelElementId) return
+
       editorInstance.element.id = fieldId
       editorInstance.element.setAttribute("aria-labelledby", labelElementId)
     })
   }
 
   useEffect(() => {
-    if (!advancedEditor) return
+    if (!advancedEditor || !fieldId || !labelElementId) return
 
     const dom = advancedEditor.view?.dom as HTMLElement | undefined
     if (!dom) return
@@ -123,7 +125,6 @@ const RichTextEditor = (props: RichTextEditorProps): React.ReactElement => {
     dom.setAttribute("aria-labelledby", labelElementId)
     dom.setAttribute("role", "textbox")
     dom.setAttribute("aria-multiline", "true")
-
   }, [advancedEditor, fieldId, labelElementId])
 
   // DOM manipulation must wait for editor to be ready
@@ -237,13 +238,12 @@ const RichTextEditor = (props: RichTextEditorProps): React.ReactElement => {
     >
     {label && (
       <label
-          htmlFor={fieldId}
-          id={labelElementId}
+          {...(fieldId ? { htmlFor: fieldId, id: labelElementId } : {})}
           onMouseDown={(e) => {
-          if (!advancedEditor) return
-            e.preventDefault()
-            advancedEditor.commands.focus()
-          }}
+          if (!advancedEditor || !fieldId) return
+          e.preventDefault()
+          advancedEditor.commands.focus()
+        }}
       >
         {
           requiredIndicator ? (
