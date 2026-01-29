@@ -1,0 +1,10 @@
+examples:
+  
+  rails:
+  - full_screen_view_default: Default
+  
+  
+  react:
+  - full_screen_view_default: Default
+  
+  

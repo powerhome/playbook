@@ -1,0 +1,78 @@
+@import "../tokens/colors";
+@import "../tokens/spacing";
+@import "../tokens/positioning";
+
+.pb_full_screen_view {
+  .fullscreen-close-button {
+    align-items: center;
+    background: none;
+    border: none;
+    color: $text_lt_light;
+    cursor: pointer;
+    display: flex;
+    padding: 2px 0;
+    
+    &:hover {
+      color: $primary;
+    }
+
+    &:focus-visible {
+      border-radius: 4px;
+      outline: 2px solid $primary;
+      outline-offset: 2px;
+    }
+  }
+}
+
+.fullscreen-overlay {
+  background-color: $bg_light;
+  box-sizing: border-box;
+  height: 100vh;
+  left: 0;
+  overflow: auto;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: $z_max;
+}
+
+.fullscreen-header {
+  background-color: $white;
+  box-sizing: border-box;
+  height: 44px;
+  padding: 13px 20px;
+  position: sticky;
+  top: 0;
+  width: 100%;
+  z-index: $z_10;
+}
+
+.fullscreen-content {
+  box-sizing: border-box;
+  height: calc(100vh - 44px);
+  overflow: auto;
+  padding: $space_lg;
+}
+
+// Dark mode support
+.dark {
+  .pb_full_screen_view {
+    .fullscreen-close-button {
+      color: $text_dk_light;
+
+      &:hover {
+        color: $primary;
+      }
+    }
+  }
+
+  .fullscreen-overlay {
+    background-color: $bg_dark;
+  }
+
+  .fullscreen-header {
+    background-color: $bg_dark_card;
+  }
+}
+
+

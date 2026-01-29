@@ -41,6 +41,7 @@ import * as FixedConfirmationToast from '../pb_kits/playbook/pb_fixed_confirmati
 import * as Flex from '../pb_kits/playbook/pb_flex/docs'
 import * as FormGroup from '../pb_kits/playbook/pb_form_group/docs'
 import * as FormPill from '../pb_kits/playbook/pb_form_pill/docs'
+import * as FullScreenView from 'kits/pb_full_screen_view/docs'
 import * as Hashtag from '../pb_kits/playbook/pb_hashtag/docs'
 import * as Highlight from '../pb_kits/playbook/pb_highlight/docs'
 import * as HomeAddressStreet from '../pb_kits/playbook/pb_home_address_street/docs'
@@ -150,6 +151,7 @@ ComponentRegistry.registerComponents({
   ...Flex,
   ...FormGroup,
   ...FormPill,
+  ...FullScreenView,
   ...Hashtag,
   ...Highlight,
   ...HomeAddressStreet,
