@@ -1,0 +1,1 @@
+The optional `label` prop adds a visible label to the advanced editor. Providing an id via the `id` or `inputOptions` props associates the `label` with the editor for accessibility, enabling screen reader support and label-based focus behavior.
