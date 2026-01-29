@@ -109,6 +109,11 @@ const RichTextEditor = (props: RichTextEditorProps): React.ReactElement => {
           hiddenInput.id = newId
           editorInstance.element.setAttribute('input', newId)
 
+          editorInstance.element.setAttribute(
+            'aria-labelledby',
+            `${newId}_ label`
+          )
+
           editorInstance.element.id = newId
           setLabelId(newId)
           if (inputOptions.name) {
@@ -229,7 +234,10 @@ const RichTextEditor = (props: RichTextEditorProps): React.ReactElement => {
         ref={focus ? containerRef : undefined}
     >
     {label && (
-      <label htmlFor={labelId}>
+      <label
+          htmlFor={labelId}
+          id={`${labelId}_label`}
+      >
         {
           requiredIndicator ? (
             <Caption className="pb_text_input_kit_label"
