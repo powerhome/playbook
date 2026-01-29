@@ -120,6 +120,7 @@ const Textarea = ({
   const characterCounter = () => {
     return maxCharacters && characterCount ? `${checkIfZero(characterCount)} / ${maxCharacters}` : `${checkIfZero(characterCount)}`
   }
+  const errorId = error ? `${id}-error` : undefined
 
   return (
     <div
@@ -145,7 +146,10 @@ const Textarea = ({
     )}
       {children || (
         <textarea
+            aria-describedby={errorId}
+            aria-invalid={!!error}
             disabled={disabled}
+            id={id}
             name={name}
             onChange={emojiMask ? handleChange : onChange}
             onPaste={emojiMask ? handlePaste : undefined}
@@ -167,6 +171,9 @@ const Textarea = ({
             >
               <FlexItem>
                 <Body
+                    aria={{ atomic: "true", live: "polite" }}
+                    htmlOptions={{ role: "alert" }}
+                    id={errorId}
                     margin="none"
                     status="negative"
                     text={error}
@@ -182,6 +189,9 @@ const Textarea = ({
             </Flex>
           ) : (
             <Body
+                aria={{ atomic: "true", live: "polite" }}
+                htmlOptions={{ role: "alert" }}
+                id={errorId}
                 status="negative"
                 text={error}
             />
