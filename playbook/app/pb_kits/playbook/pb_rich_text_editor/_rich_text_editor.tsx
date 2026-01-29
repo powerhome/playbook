@@ -95,10 +95,11 @@ const RichTextEditor = (props: RichTextEditorProps): React.ReactElement => {
   const htmlProps = buildHtmlProps(htmlOptions)
 
   const fieldId = (inputOptions.id as string) || (id as string) || null
-  const labelElementId = `${fieldId}_label`
+  const labelElementId = `${fieldId}-label`
 
   const handleOnEditorReady = (editorInstance: Editor) => {
     setEditor(editorInstance)
+
     setTimeout(() => {
       const oldId = editorInstance.element?.getAttribute("input")
       if (!oldId) return
@@ -106,14 +107,10 @@ const RichTextEditor = (props: RichTextEditorProps): React.ReactElement => {
       const hiddenInput = document.getElementById(oldId)
       if (!hiddenInput) return
 
-      hiddenInput.id = fieldId
       if (inputOptions.name) hiddenInput.setAttribute("name", inputOptions.name as string)
 
-      editorInstance.element.setAttribute("input", fieldId)
-
+      editorInstance.element.id = fieldId
       editorInstance.element.setAttribute("aria-labelledby", labelElementId)
-
-      editorInstance.element.id = `${fieldId}`
     })
   }
 
