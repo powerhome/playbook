@@ -1,6 +1,10 @@
 <%= pb_content_tag do %>
     <% if content.present? %>
-        <div class="<%= object.trigger_wrapper_classes %>" style="display: inline-block" tabindex="0" data-dropdown="pb-dropdown-trigger" data-dropdown-custom-trigger<% if object.label.present? %> aria-label="<%= [object.label, object.default_display_placeholder].join(', ') %>"<% end %><% if object.select_id.present? %> id="<%= object.select_id %>"<% end %><% if object.error_id.present? %> aria-describedby="<%= object.error_id %>"<% end %> aria-invalid="<%= object.error.present? %>">
+        <div style="display: inline-block" tabindex="0" data-dropdown="pb-dropdown-trigger" data-dropdown-custom-trigger aria-invalid="<%= object.error.present? %>"
+            <% if object.label.present? %> aria-label="<%= [object.label, object.default_display_placeholder].join(', ') %>"<% end %>
+            <% if object.select_id.present? %> id="<%= object.select_id %>"<% end %>
+            <% if object.error_id.present? %> aria-describedby="<%= object.error_id %>"<% end %>
+        >
           <%= content.presence %>
         </div>
     <% else %>
