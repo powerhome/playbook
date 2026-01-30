@@ -94,7 +94,7 @@ const RichTextEditor = (props: RichTextEditorProps): React.ReactElement => {
 
   const htmlProps = buildHtmlProps(htmlOptions)
 
-  const fieldId = (inputOptions.id || id) ? (inputOptions.id as string) || (id as string) : null
+  const fieldId = id ? (id as string) : null
   const labelElementId = fieldId ? `${fieldId}-label` : null
 
   const handleOnEditorReady = (editorInstance: Editor) => {
@@ -107,23 +107,24 @@ const RichTextEditor = (props: RichTextEditorProps): React.ReactElement => {
       const hiddenInput = document.getElementById(oldId) as HTMLElement | null
       if (!hiddenInput) return
 
-      const newId =
-        (inputOptions.id as string) || oldId
+      const hiddenInputId = (inputOptions.id as string) || oldId
 
-      if (newId !== oldId) {
-        hiddenInput.id = newId
-        editorInstance.element?.setAttribute("input", newId)
+      if (hiddenInputId !== oldId) {
+        hiddenInput.id = hiddenInputId
+        editorInstance.element?.setAttribute("input", hiddenInputId)
       }
 
       if (inputOptions.name) {
         hiddenInput.setAttribute("name", inputOptions.name as string)
       }
 
+      const editorDomId = (id as string) || `${hiddenInputId}_trix`
+      const trixLabelId = ((id as string) || hiddenInputId) + "-label"
+
       if (label) {
-        const labelId = `${newId}-label`
-        editorInstance.element?.setAttribute("aria-labelledby", labelId)
-        editorInstance.element.id = `${newId}_trix`
+        editorInstance.element?.setAttribute("aria-labelledby", trixLabelId)
       }
+      editorInstance.element!.id = editorDomId
     })
   }
 
@@ -239,7 +240,7 @@ const RichTextEditor = (props: RichTextEditorProps): React.ReactElement => {
   // Determine if toolbar should be shown
   const shouldShowToolbar = focus && advancedEditor ? showToolbarOnFocus : advancedEditorToolbar
 
-  const labelFor = advancedEditor ? fieldId : (fieldId ? `${fieldId}_trix` : undefined)
+  const labelFor = advancedEditor ? fieldId : (id ? id : (inputOptions.id ? `${inputOptions.id}_trix` : undefined))
 
   return (
     <div
