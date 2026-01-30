@@ -240,10 +240,10 @@ const RichTextEditor = (props: RichTextEditorProps): React.ReactElement => {
       <label
           {...(fieldId ? { htmlFor: fieldId, id: labelElementId } : {})}
           onMouseDown={(e) => {
-          if (!advancedEditor || !fieldId) return
-          e.preventDefault()
-          advancedEditor.commands.focus()
-        }}
+            if (!advancedEditor || !fieldId) return
+            e.preventDefault()
+            advancedEditor.commands.focus()
+          }}
       >
         {
           requiredIndicator ? (
@@ -267,9 +267,9 @@ const RichTextEditor = (props: RichTextEditorProps): React.ReactElement => {
         advancedEditor ? (
           <div
               className={classnames(
-                "pb_rich_text_editor_advanced_container",
-                { [`input_height_${inputHeight}`]: !!inputHeight,[`input_min_height_${inputMinHeight}`]: !!inputMinHeight ,["toolbar-active"]: shouldShowToolbar }
-              )}
+              "pb_rich_text_editor_advanced_container",
+              { [`input_height_${inputHeight}`]: !!inputHeight,[`input_min_height_${inputMinHeight}`]: !!inputMinHeight ,["toolbar-active"]: shouldShowToolbar }
+            )}
           >
             {shouldShowToolbar && (
               <EditorToolbar editor={advancedEditor}
