@@ -1,7 +1,7 @@
  <%= pb_rails("nav", props: { variant: "bold" }) do %>
-    <%= pb_rails("nav/item", props: { text: "Overview", link: "#", collapsible: true, icon_left:"city", collapsed: false }) do %>
+    <%= pb_rails("nav/item", props: { text: "Overview", link: "#", collapsible: true, icon_left:"city", disabled: true }) do %>
         <%= pb_rails("nav", props: { variant: "bold" }) do %>
-            <%= pb_rails("nav/item", props: { text: "City", link: "#", inactive: true }) %>
+            <%= pb_rails("nav/item", props: { text: "City", link: "#" }) %>
             <%= pb_rails("nav/item", props: { text: "People", link: "#" }) %>
             <%= pb_rails("nav/item", props: { text: "Business", link: "#" }) %>
         <% end %>
@@ -13,9 +13,9 @@
             <%= pb_rails("nav/item", props: { text: "Style", link: "#" }) %>
         <% end %>
     <% end %>
-    <%= pb_rails("nav/item", props: { text: "Similar Artists", link: "#", collapsible: true, icon_left: "city", inactive: true }) do %>
+    <%= pb_rails("nav/item", props: { text: "Similar Artists", link: "#", collapsible: true, icon_left: "city" }) do %>
         <%= pb_rails("nav", props: { variant: "bold" }) do %>
-            <%= pb_rails("nav/item", props: { text: "City", link: "#" }) %>
+            <%= pb_rails("nav/item", props: { text: "City", link: "#", disabled: true }) %>
             <%= pb_rails("nav/item", props: { text: "People", link: "#" }) %>
             <%= pb_rails("nav/item", props: { text: "Business", link: "#" }) %>
         <% end %>

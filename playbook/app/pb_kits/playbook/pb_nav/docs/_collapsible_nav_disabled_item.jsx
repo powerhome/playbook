@@ -9,17 +9,15 @@ const CollapsibleNavDisabledItem = (props) => {
         {...props}
     >
       <NavItem
-          active
-        //   inactive
           collapsed={false}
           collapsible
+          disabled
           iconLeft="city" 
           link="#" 
           text="Overview" 
           {...props}
       >
         <NavItem
-            inactive
             link="#" 
             text="City"
             {...props}
@@ -38,12 +36,13 @@ const CollapsibleNavDisabledItem = (props) => {
       <NavItem 
           collapsible 
           iconLeft="theater-masks"
-          inactive
+        
           link="#" 
           text="Albums" 
           {...props}
       >
         <NavItem 
+            disabled
             link="#" 
             text="Entertainment" 
             {...props}

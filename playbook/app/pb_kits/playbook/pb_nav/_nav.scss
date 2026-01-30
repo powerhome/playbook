@@ -85,8 +85,7 @@
 }
 
 // Disabled scss
-.pb_nav_item_disabled,
-.pb_nav_item_inactive {
+.pb_nav_item_disabled{
   cursor: not-allowed !important;
 
   .pb_nav_list_item_text,
@@ -99,7 +98,7 @@
 
   @media (hover: hover) {
     &:hover {
-      background-color: unset !important;
+      background-color: $white !important;
       color: $text_lt_lighter !important;
 
       .pb_nav_list_item_text,
@@ -111,91 +110,72 @@
   }
 }
 
-.pb_nav_item_inactive {
-  cursor: not-allowed !important;
-
-  .pb_nav_list_item_icon_section {
-    color: $text_lt_lighter !important;
+  .pb_nav_item_disabled {
     cursor: not-allowed !important;
-  }
 
-}
-
-.pb_nav_item_inactive:hover {
-  background-color: $white !important;
-}
-
-.pb_nav_item_inactive {
-  .pb_nav_list_item_text_collapsible {
-    color: $text_lt_lighter !important;
-    cursor: not-allowed !important;
-  }
-}
-
-.pb_collapsible_content_kit {
-  .pb_nav_list_item_link:hover {
-    background-color: $white !important;
-  }
-}
-
-.pb_nav_item_inactive {
-
-  .pb_nav_list_item_link:hover {
-    background-color: $white !important;
-  }
-
-  .pb_nav_list_item_link {
-    cursor: not-allowed !important;
-  }
-
-  .cursor_pointer {
-    cursor: not-allowed !important;
-  }
-
-  .pb_nav_list_item_link_collapsible {
-    cursor: not-allowed !important;
-  }
-
-  .pb_collapsible_content_kit {
-    .pb_nav_list_item_text_collapsible {
+    .pb_nav_list_item_text,
+    .pb_nav_list_item_text_collapsible,
+    .pb_nav_list_item_icon_left,
+    .pb_nav_list_item_icon_right,
+    .pb_nav_list_item_icon_section,
+    .pb_nav_list_item_link,
+    .pb_nav_list_item_link_collapsible,
+    .cursor_pointer {
       color: $text_lt_lighter !important;
-
+      cursor: not-allowed !important;
     }
-  }
 
-  .icon_wrapper {
+    .pb_collapsible_main_kit {
+      background-color: $white !important;
+    }
+
+    .icon_wrapper,
     svg {
       color: $text_lt_lighter !important;
+      cursor: not-allowed !important;
     }
-  }
 
-  @media (hover: hover) {
-    &:hover {
+    @media (hover: hover) {
+      &:hover {
+        background-color: $white !important;
 
-      .pb_nav_list_item_icon_section_collapsible {
-        path {
+        .pb_collapsible_main_kit,
+        .pb_nav_list_item_link,
+        .icon_wrapper {
+          background-color: $white !important;
+        }
+
+        .pb_nav_list_item_icon_section_collapsible path,
+        .pb_nav_list_item_link_collapsible path {
           color: $text_lt_lighter !important;
         }
       }
+    }
+  }
 
-      .pb_collapsible_main_kit {
+  .collapsible_nav_wrapper_pb_nav_item_disabled {
+    .pb_collapsible_main_kit {
+      background-color: $white !important;
+    }
+
+    .pb_nav_list_item_link,
+    .pb_nav_list_item_text,
+    .pb_nav_list_item_icon_left,
+    .pb_nav_list_item_icon_right,
+    .icon_wrapper,
+    .pb_nav_list_item_icon_section {
+      color: $text_lt_lighter !important;
+      cursor: not-allowed !important;
+    }
+
+    .icon_wrapper svg {
+      color: $text_lt_lighter !important;
+    }
+
+    &:hover {
+      .icon_wrapper,
+      .pb_nav_list_item_link {
         background-color: $white !important;
       }
-
-      .pb_nav_list_item_link_collapsible {
-        .icon_wrapper svg {
-          cursor: not-allowed !important;
-        }
-
-        path {
-          color: $text_lt_lighter !important;
-        }
-      }
     }
   }
-
-  .icon_wrapper:hover {
-    background-color: $white !important;
-  }
-
-}
