@@ -24,7 +24,7 @@
     "@babel/preset-env": "^7.24.8",
     "@babel/preset-react": "^7.13.13",
     "@babel/preset-typescript": "^7.24.7",
-    "@hotwired/turbo-rails": "^7.3.0",
+    "@hotwired/turbo-rails": "^8.0.23",
     "@originjs/vite-plugin-commonjs": "^1.0.3",
     "@tiptap/extension-document": "^2.11.7",
     "@tiptap/extension-highlight": "^2.11.7",
