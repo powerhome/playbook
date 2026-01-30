@@ -6,5 +6,6 @@ examples:
   
   react:
   - full_screen_view_default: Default
+  - full_screen_view_table_and_filter: Table and Filter
   
   
