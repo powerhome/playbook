@@ -244,7 +244,7 @@ const RichTextEditor = (props: RichTextEditorProps): React.ReactElement => {
     )}
       {
         advancedEditor ? (
-          <div 
+          <div
               className={classnames(
                 "pb_rich_text_editor_advanced_container",
                 { [`input_height_${inputHeight}`]: !!inputHeight,[`input_min_height_${inputMinHeight}`]: !!inputMinHeight ,["toolbar-active"]: shouldShowToolbar }
