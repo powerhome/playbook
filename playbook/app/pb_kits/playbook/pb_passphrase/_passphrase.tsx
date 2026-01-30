@@ -178,22 +178,40 @@ const Passphrase = (props: PassphraseProps): React.ReactElement => {
               {...inputProps}
           />
           <span
+              aria-label={
+                showPassphrase
+                  ? "Passphrase currently visible. Click icon to hide password"
+                  : "Passphrase currently hidden. Click icon to reveal password"
+              }
+              aria-pressed={showPassphrase}
               className="show-passphrase-icon"
               onClick={toggleShowPassphrase}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                  e.preventDefault()
+                  toggleShowPassphrase(e as any)
+                }
+              }}
+              role="button"
+              tabIndex={0}
           >
             <Body
                 className={showPassphrase ? "hide-icon" : ""}
                 color="light"
                 dark={dark}
             >
-              <Icon icon="eye-slash" />
+              <Icon 
+                  aria={{ label: "eye icon" }} 
+                  icon="eye-slash" 
+              />
             </Body>
             <Body
                 className={showPassphrase ? "" : "hide-icon"}
                 color="light"
                 dark={dark}
             >
-            <Icon  
+            <Icon 
+                aria={{ label: "eye icon" }} 
                 className="svg-inline--fa"
                 customIcon={eyeIcon.icon as unknown as { [key: string]: SVGElement }}
             />
