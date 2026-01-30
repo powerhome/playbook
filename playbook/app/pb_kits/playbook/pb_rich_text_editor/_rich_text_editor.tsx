@@ -104,15 +104,26 @@ const RichTextEditor = (props: RichTextEditorProps): React.ReactElement => {
       const oldId = editorInstance.element?.getAttribute("input")
       if (!oldId) return
 
-      const hiddenInput = document.getElementById(oldId)
+      const hiddenInput = document.getElementById(oldId) as HTMLElement | null
       if (!hiddenInput) return
 
-      if (inputOptions.name) hiddenInput.setAttribute("name", inputOptions.name as string)
+      const newId =
+        (inputOptions.id as string) || oldId
 
-      if (!fieldId || !labelElementId) return
+      if (newId !== oldId) {
+        hiddenInput.id = newId
+        editorInstance.element?.setAttribute("input", newId)
+      }
 
-      editorInstance.element.id = fieldId
-      editorInstance.element.setAttribute("aria-labelledby", labelElementId)
+      if (inputOptions.name) {
+        hiddenInput.setAttribute("name", inputOptions.name as string)
+      }
+
+      if (label) {
+        const labelId = `${newId}-label`
+        editorInstance.element?.setAttribute("aria-labelledby", labelId)
+        editorInstance.element.id = `${newId}_trix`
+      }
     })
   }
 
@@ -228,6 +239,8 @@ const RichTextEditor = (props: RichTextEditorProps): React.ReactElement => {
   // Determine if toolbar should be shown
   const shouldShowToolbar = focus && advancedEditor ? showToolbarOnFocus : advancedEditorToolbar
 
+  const labelFor = advancedEditor ? fieldId : (fieldId ? `${fieldId}_trix` : undefined)
+
   return (
     <div
         {...ariaProps}
@@ -238,7 +251,7 @@ const RichTextEditor = (props: RichTextEditorProps): React.ReactElement => {
     >
     {label && (
       <label
-          {...(fieldId ? { htmlFor: fieldId, id: labelElementId } : {})}
+          {...(labelFor ? { htmlFor: labelFor, id: labelElementId } : {})}
           onMouseDown={(e) => {
             if (!advancedEditor || !fieldId) return
             e.preventDefault()
