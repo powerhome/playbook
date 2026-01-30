@@ -25,7 +25,6 @@ const RichTextEditorAdvancedLabel = (props) => {
           advancedEditor={editor}
           id={"advanced-example"}
           label="Advanced Example Label"
-          requiredIndicator
           {...props}
       >
         <EditorContent editor={editor}/>
@@ -34,7 +33,6 @@ const RichTextEditorAdvancedLabel = (props) => {
       <RichTextEditor
           advancedEditor={editorNoLabel}
           label="Advanced Example Label No ID"
-          requiredIndicator
           {...props}
       >
         <EditorContent editor={editorNoLabel}/>
