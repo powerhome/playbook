@@ -8,7 +8,7 @@ const RichTextEditorLabel = (props) => {
   return (
     <div>
       <RichTextEditor
-          inputOptions = {{ id: "example" }}
+          id="example"
           label="Example Label"
           onChange={handleOnChange}
           value={value}
