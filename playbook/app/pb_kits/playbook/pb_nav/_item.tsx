@@ -182,7 +182,6 @@ const { filteredPadding, filteredMargin } = filterItemSpacing(itemSpacing);
     tagClasses,
     collapsible ? globalProps(filteredProps, {...filteredPadding}) : globalProps(props, {...itemSpacing}),
     disabledClass,
-    inactiveClass,
     className
   );
 
