@@ -108,9 +108,6 @@ module Playbook
         disabled ? " pb_nav_item_disabled" : nil
       end
 
-      def inactive_class
-        inactive ? " pb_nav_item_inactive" : nil
-      end
 
       def highlighted_border_class
         !highlighted_border && active ? "highlighted_border_none" : nil
