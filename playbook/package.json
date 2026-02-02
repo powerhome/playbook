@@ -61,7 +61,7 @@
   "devDependencies": {
     "@actions/core": "1.10.0",
     "@actions/github": "6.0.0",
-    "@babel/preset-env": "^7.12.1",
+    "@babel/preset-env": "^7.29.0",
     "@babel/preset-react": "^7.12.5",
     "@babel/preset-typescript": "^7.15.0",
     "@floating-ui/react": "^0.26.23",
