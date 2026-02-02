@@ -149,7 +149,6 @@ const { filteredPadding, filteredMargin } = filterItemSpacing(itemSpacing);
   const highlightedBorderClass = active === true && highlighted_border === false ? "highlighted_border_none" : "";
   const collapsibleTrailClass = collapsible && collapsibleTrail ? "collapsible_trail" : "";
   const disabledClass = disabled ? "pb_nav_item_disabled" : "";
-  const inactiveClass = inactive ? "pb_nav_item_inactive" : "";
 
   const fontSizeMapping = {
     "small": "font_size_small",
