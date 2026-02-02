@@ -8,6 +8,7 @@ const RichTextEditorRequiredIndicator = (props) => {
   return (
     <div>
       <RichTextEditor
+          inputOptions = {{ id: "required" }}
           label="Label"
           onChange={handleOnChange}
           requiredIndicator

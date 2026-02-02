@@ -9,6 +9,7 @@ type Props = {
     dark?: boolean,
     label: string,
     error?: string,
+    requiredIndicator?: boolean,
   },
 }
 
@@ -19,6 +20,7 @@ const TypeaheadControl = (props: Props) => (
         error={props.selectProps.error}
         label={props.selectProps.label}
         marginBottom="none"
+        requiredIndicator={props.selectProps.requiredIndicator}
     >
       <Flex>
         <components.Control
