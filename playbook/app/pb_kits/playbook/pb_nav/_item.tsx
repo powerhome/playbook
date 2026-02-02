@@ -44,7 +44,6 @@ type NavItemProps = {
   marginX?: Spacing;
   marginY?: Spacing;
   disabled?: boolean;
-  inactive?: boolean;
 } & GlobalProps;
 
 const NavItem = (props: NavItemProps) => {
