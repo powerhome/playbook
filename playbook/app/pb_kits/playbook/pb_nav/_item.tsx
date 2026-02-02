@@ -91,7 +91,7 @@ const NavItem = (props: NavItemProps) => {
     marginX,
     marginY,
     disabled = false,
-    inactive = false,
+ 
   } = props;
 
   const spacingMarginProps = {
