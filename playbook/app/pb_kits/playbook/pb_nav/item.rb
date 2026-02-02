@@ -20,7 +20,6 @@ module Playbook
       prop :icon_left
       prop :icon_right
       prop :image_url
-      prop :inactive, type: Playbook::Props::Boolean, default: false
       prop :target, type: Playbook::Props::Enum,
                     values: %w[_blank _self _parent _top],
                     default: "_self"
