@@ -7,7 +7,7 @@
     <div class="dropdown_wrapper<%= error_class %>" style="position: relative">
         <input
             data-default-value="<%= input_default_value %>"
-            id="dropdown-selected-option"
+            data-dropdown-selected-option
             name="<%= object.name %><%= '[]' if object.multi_select %>"
             style="display: none"
             <%= object.required ? "required" : ""%>

@@ -4,16 +4,16 @@ import { PbDropdownKeyboard } from "./keyboard_accessibility";
 const DROPDOWN_SELECTOR = "[data-pb-dropdown]";
 const TRIGGER_SELECTOR = "[data-dropdown-trigger]";
 const CONTAINER_SELECTOR = "[data-dropdown-container]";
-const DOWN_ARROW_SELECTOR = "#dropdown_open_icon";
-const UP_ARROW_SELECTOR = "#dropdown_close_icon";
+const DOWN_ARROW_SELECTOR = "[data-dropdown-open-icon]";
+const UP_ARROW_SELECTOR = "[data-dropdown-close-icon]";
 const OPTION_SELECTOR = "[data-dropdown-option-label]";
 const CUSTOM_DISPLAY_SELECTOR = "[data-dropdown-custom-trigger]";
-const DROPDOWN_TRIGGER_DISPLAY = "#dropdown_trigger_display";
+const DROPDOWN_TRIGGER_DISPLAY = "[data-dropdown-trigger-display]";
 const DROPDOWN_PLACEHOLDER = "[data-dropdown-placeholder]";
-const DROPDOWN_INPUT = "#dropdown-selected-option";
+const DROPDOWN_INPUT = "[data-dropdown-selected-option]";
 const SEARCH_INPUT_SELECTOR = "[data-dropdown-autocomplete]";
 const SEARCH_BAR_SELECTOR = "[data-dropdown-search]";
-const CLEAR_ICON_SELECTOR = "#dropdown_clear_icon";
+const CLEAR_ICON_SELECTOR = "[data-dropdown-clear-icon]";
 const LABEL_SELECTOR = '[data-dropdown="pb-dropdown-label"]';
 
 export default class PbDropdown extends PbEnhancedElement {
@@ -305,7 +305,7 @@ export default class PbDropdown extends PbEnhancedElement {
   onOptionSelected(value, selectedOption) {
     const triggerElement = this.element.querySelector(DROPDOWN_TRIGGER_DISPLAY);
     const customDisplayElement = this.element.querySelector(
-      "#dropdown_trigger_custom_display",
+      '[data-dropdown-trigger-custom-display]',
     );
 
     if (triggerElement) {
@@ -693,9 +693,9 @@ export default class PbDropdown extends PbEnhancedElement {
   updatePills() {
     if (!this.isMultiSelect) return;
 
-    const wrapper = this.element.querySelector("#dropdown_pills_wrapper");
+    const wrapper = this.element.querySelector('[data-dropdown-pills-wrapper]');
     const placeholder = this.element.querySelector(
-      "#dropdown_trigger_display_multi_select",
+      '[data-dropdown-trigger-display-multi-select]',
     );
     if (!wrapper) return;
 
@@ -773,7 +773,7 @@ export default class PbDropdown extends PbEnhancedElement {
       }
     }
     const customDisplay = this.element.querySelector(
-      "#dropdown_trigger_custom_display",
+      '[data-dropdown-trigger-custom-display]',
     );
     if (customDisplay) {
       customDisplay.style.display = "none";
@@ -829,7 +829,7 @@ export default class PbDropdown extends PbEnhancedElement {
     }
 
     const customDisplay = this.element.querySelector(
-      "#dropdown_trigger_custom_display",
+      '[data-dropdown-trigger-custom-display]',
     );
     if (customDisplay) {
       customDisplay.style.display = "none";
