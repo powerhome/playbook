@@ -16,6 +16,7 @@ const SEARCH_BAR_SELECTOR = "[data-dropdown-search]";
 const CLEAR_ICON_SELECTOR = "[data-dropdown-clear-icon]";
 const LABEL_SELECTOR = '[data-dropdown="pb-dropdown-label"]';
 
+
 export default class PbDropdown extends PbEnhancedElement {
   static get selector() {
     return DROPDOWN_SELECTOR;
