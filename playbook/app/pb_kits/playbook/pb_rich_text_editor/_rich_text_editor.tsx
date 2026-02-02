@@ -94,24 +94,50 @@ const RichTextEditor = (props: RichTextEditorProps): React.ReactElement => {
 
   const htmlProps = buildHtmlProps(htmlOptions)
 
+  const fieldId = id ? (id as string) : null
+  const labelElementId = fieldId ? `${fieldId}-label` : null
+
   const handleOnEditorReady = (editorInstance: Editor) => {
     setEditor(editorInstance)
-    setTimeout(() => {
-      const oldId = editorInstance.element.getAttribute('input')
-      if (oldId) {
-        const hiddenInput = document.getElementById(oldId)
-        if (hiddenInput) {
-          const newId = (inputOptions.id as string) || oldId
-          hiddenInput.id = newId
-          editorInstance.element.setAttribute('input', newId)
 
-          if (inputOptions.name) {
-            hiddenInput.setAttribute('name', inputOptions.name as string)
-          }
-        }
+    setTimeout(() => {
+      const oldId = editorInstance.element?.getAttribute("input")
+      if (!oldId) return
+
+      const hiddenInput = document.getElementById(oldId) as HTMLElement | null
+      if (!hiddenInput) return
+
+      const hiddenInputId = (inputOptions.id as string) || oldId
+
+      if (hiddenInputId !== oldId) {
+        hiddenInput.id = hiddenInputId
+        editorInstance.element?.setAttribute("input", hiddenInputId)
       }
+
+      if (inputOptions.name) {
+        hiddenInput.setAttribute("name", inputOptions.name as string)
+      }
+
+      const editorDomId = (id as string) || `${hiddenInputId}_trix`
+      const trixLabelId = ((id as string) || hiddenInputId) + "-label"
+
+      if (label) {
+        editorInstance.element?.setAttribute("aria-labelledby", trixLabelId)
+      }
+      editorInstance.element!.id = editorDomId
     })
   }
+
+  useEffect(() => {
+    if (!advancedEditor || !fieldId || !labelElementId) return
+
+    const dom = advancedEditor.view?.dom as HTMLElement | undefined
+    if (!dom) return
+
+    dom.setAttribute("aria-labelledby", labelElementId)
+    dom.setAttribute("role", "textbox")
+    dom.setAttribute("aria-multiline", "true")
+  }, [advancedEditor, fieldId, labelElementId])
 
   // DOM manipulation must wait for editor to be ready
   if (editor && editor.element) {
@@ -214,6 +240,8 @@ const RichTextEditor = (props: RichTextEditorProps): React.ReactElement => {
   // Determine if toolbar should be shown
   const shouldShowToolbar = focus && advancedEditor ? showToolbarOnFocus : advancedEditorToolbar
 
+  const labelFor = advancedEditor ? fieldId : (id ? id : (inputOptions.id ? `${inputOptions.id}_trix` : undefined))
+
   return (
     <div
         {...ariaProps}
@@ -223,7 +251,14 @@ const RichTextEditor = (props: RichTextEditorProps): React.ReactElement => {
         ref={focus ? containerRef : undefined}
     >
     {label && (
-      <label  htmlFor={id}>
+      <label
+          {...(labelFor ? { htmlFor: labelFor, id: labelElementId } : {})}
+          onMouseDown={(e) => {
+            if (!advancedEditor || !fieldId) return
+            e.preventDefault()
+            advancedEditor.commands.focus()
+          }}
+      >
         {
           requiredIndicator ? (
             <Caption className="pb_text_input_kit_label"
@@ -246,9 +281,9 @@ const RichTextEditor = (props: RichTextEditorProps): React.ReactElement => {
         advancedEditor ? (
           <div
               className={classnames(
-                "pb_rich_text_editor_advanced_container",
-                { [`input_height_${inputHeight}`]: !!inputHeight,[`input_min_height_${inputMinHeight}`]: !!inputMinHeight ,["toolbar-active"]: shouldShowToolbar }
-              )}
+              "pb_rich_text_editor_advanced_container",
+              { [`input_height_${inputHeight}`]: !!inputHeight,[`input_min_height_${inputMinHeight}`]: !!inputMinHeight ,["toolbar-active"]: shouldShowToolbar }
+            )}
           >
             {shouldShowToolbar && (
               <EditorToolbar editor={advancedEditor}
