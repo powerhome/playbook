@@ -292,7 +292,7 @@ const Typeahead = forwardRef<HTMLInputElement, TypeaheadProps>(
       multiKit: "",
       onCreateOption: null as null,
       plusIcon: false,
-          ...(inputDisplay === 'none' ? { hideSelectedOptions: false, closeMenuOnSelect: false } : {}),
+      ...(inputDisplay === 'none' ? { hideSelectedOptions: false, closeMenuOnSelect: false } : {}),
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       onMultiValueClick: (_option: SelectValueType): any => undefined,
       pillColor: pillColor,
