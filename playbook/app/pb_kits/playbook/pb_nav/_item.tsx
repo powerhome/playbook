@@ -232,8 +232,8 @@ const { filteredPadding, filteredMargin } = filterItemSpacing(itemSpacing);
               icon={iconRight && iconRight}
               iconSize="xs"
               id={id}
-              onClick={onClick}
-              onIconClick={onIconRightClick}
+              onClick={disabled ? undefined : onClick}
+              onIconClick={disabled ? undefined : onIconRightClick}
           >
             <Collapsible.Main
                 className={globalProps({ ...finalItemSpacing })}
