@@ -198,6 +198,7 @@ const { filteredPadding, filteredMargin } = filterItemSpacing(itemSpacing);
     if (React.isValidElement(child)) {
       const childProps: NavChildProps = {
         itemSpacing: itemSpacing,
+        ...(disabled && { disabled: disabled })
       };
       return React.cloneElement(child, childProps);
     }

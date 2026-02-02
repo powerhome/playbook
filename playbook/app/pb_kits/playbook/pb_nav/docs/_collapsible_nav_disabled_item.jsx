@@ -36,7 +36,6 @@ const CollapsibleNavDisabledItem = (props) => {
       <NavItem 
           collapsible 
           iconLeft="theater-masks"
-        
           link="#" 
           text="Albums" 
           {...props}
