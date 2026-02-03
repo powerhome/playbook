@@ -4,6 +4,18 @@
     'data-validation-message' => object.validation_message,
       ) do %>
   <div class="input_wrapper">
+    <% unless object.hide_label %>
+      <label for="<%= object.picker_id %>">
+        <% if object.required_indicator %>
+          <%= pb_rails("caption", props: { classname: "pb_date_picker_kit_label"}) do%>
+            <%= object.label %><span style="color: #DA0014;"> *</span>
+          <% end %>
+        <% else %>
+          <%= pb_rails("caption", props: { classname: "pb_date_picker_kit_label", text: object.label }) %>
+        <% end %>
+      </label>
+    <% end %>
+
     <% if content.present? %>
       <%= content %>
     <% else %>
@@ -16,11 +28,12 @@
         disabled: object.disable_input,
         error: object.error,
         id: object.picker_id,
-        label: object.hide_label ? nil : object.label,
+        label: nil,
         margin_bottom: "none",
         name: object.name,
         placeholder: object.placeholder,
         required: object.required,
+        required_indicator: false,
       }) %>
     <% end %>
 

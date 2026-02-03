@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "json"
+
 require_relative "../../../../app/pb_kits/playbook/pb_date_picker/date_picker"
 
 RSpec.describe Playbook::PbDatePicker::DatePicker do
@@ -32,6 +34,7 @@ RSpec.describe Playbook::PbDatePicker::DatePicker do
   it { is_expected.to define_prop(:static_position).of_type(Playbook::Props::Boolean).with_default(true) }
   it { is_expected.to define_prop(:selection_type).of_type(Playbook::Props::Enum).with_default("none") }
   it { is_expected.to define_boolean_prop(:required).with_default(false) }
+  it { is_expected.to define_boolean_prop(:required_indicator).with_default(false) }
   it { is_expected.to define_prop(:year_range).of_type(Playbook::Props::Array).with_default([1900, 2100]) }
 
   describe "#classname" do
@@ -44,5 +47,13 @@ RSpec.describe Playbook::PbDatePicker::DatePicker do
 
   it "raises an error when not given a picker_id" do
     expect { subject.new {} }.to raise_error(Playbook::Props::Error)
+  end
+
+  describe "date_picker_config" do
+    it "passes required_indicator as requiredIndicator" do
+      config_json = subject.new(picker_id: "spec-test", required_indicator: true).date_picker_config
+      parsed = JSON.parse(config_json)
+      expect(parsed["requiredIndicator"]).to be true
+    end
   end
 end
