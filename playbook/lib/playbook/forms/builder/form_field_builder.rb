@@ -61,7 +61,7 @@ module Playbook
                                   name.to_s.humanize
                                 end
                               else
-                                # Legacy behavior .(generate full label HTML) left untouched
+                                # Legacy behavior (generate full label HTML) left untouched
                                 @template.label(@object_name, name)
                               end
             elsif props[:label].is_a?(String)

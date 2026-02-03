@@ -19,7 +19,6 @@ examples:
     - typeahead_dynamic_options_pure_rails: Dynamic Options (Pure Rails)
     - typeahead_disabled: Disabled
     - typeahead_preserve_input: Preserve Search Input
-    - typeahead_required_indicator: Required Indicator
 
   react:
     - typeahead_default: Default
@@ -43,4 +42,3 @@ examples:
     - typeahead_truncated_text: Truncated Text
     - typeahead_disabled: Disabled
     - typeahead_preserve_input: Preserve Search Input
-    - typeahead_required_indicator: Required Indicator
