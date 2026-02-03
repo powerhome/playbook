@@ -45,8 +45,6 @@ const DropdownTrigger = (props: DropdownTriggerProps) => {
   const {
     autocomplete,
     clearable,
-    error,
-    errorId,
     filterItem,
     handleBackspace,
     handleChange,
@@ -55,10 +53,8 @@ const DropdownTrigger = (props: DropdownTriggerProps) => {
     inputWrapperRef,
     isDropDownClosed,
     isInputFocused,
-    label: contextLabel,
     multiSelect,
     selected,
-    selectId,
     setIsInputFocused,
     toggleDropdown,
   } = useContext(DropdownContext);
@@ -108,10 +104,6 @@ const DropdownTrigger = (props: DropdownTriggerProps) => {
     ? placeholder
     : "Select...";
 
-  const triggerAriaLabel = contextLabel
-    ? (children ? contextLabel : `${contextLabel}, ${defaultDisplayPlaceholder}`)
-    : undefined;
-
   return (
     <div {...ariaProps} 
         {...dataProps} 
@@ -122,10 +114,6 @@ const DropdownTrigger = (props: DropdownTriggerProps) => {
       {
           children ? (
             <div
-                aria-describedby={errorId}
-                aria-invalid={!!error}
-                aria-label={triggerAriaLabel}
-                id={selectId}
                 onClick={() => toggleDropdown()}
                 onKeyDown= {handleKeyDown}
                 ref={inputWrapperRef}
@@ -142,10 +130,6 @@ const DropdownTrigger = (props: DropdownTriggerProps) => {
                   className={triggerWrapperClasses}
                   cursor={`${autocomplete ? "text" : "pointer"}`}
                   htmlOptions={{
-                    "aria-describedby": errorId,
-                    "aria-invalid": !!error,
-                    "aria-label": triggerAriaLabel,
-                    id: selectId,
                     onClick: () => handleWrapperClick(),
                     onKeyDown: handleKeyDown,
                     tabIndex: "0",

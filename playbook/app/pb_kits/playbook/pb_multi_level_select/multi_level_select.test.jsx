@@ -192,7 +192,7 @@ describe('MultiLevelSelect multi variant', () => {
       />
     )
     const kit = screen.getByTestId(testId)
-    const input = kit.querySelector('#multi-disabled-test_input')
+    const input = kit.querySelector('#multiselect_input')
     fireEvent.click(input)
     
     const disabledCheckbox = kit.querySelector('input[type="checkbox"][disabled]')
@@ -227,7 +227,7 @@ describe('MultiLevelSelect single variant', () => {
       />
     )
     const kit = screen.getByTestId(testId)
-    const input = kit.querySelector('#single-disabled-test_input')
+    const input = kit.querySelector('#multiselect_input')
     fireEvent.click(input)
     
     const disabledRadio = kit.querySelector('input[type="radio"][disabled]')
@@ -246,7 +246,7 @@ describe('MultiLevelSelect single variant', () => {
       />
     )
     const kit = screen.getByTestId(testId)
-    const input = kit.querySelector('#single-disabled-click-test_input')
+    const input = kit.querySelector('#multiselect_input')
     fireEvent.click(input)
     
     const disabledRadio = kit.querySelector('input[type="radio"][disabled]')
@@ -267,7 +267,7 @@ describe('MultiLevelSelect single variant', () => {
       />
     )
     const kit = screen.getByTestId(testId)
-    const input = kit.querySelector('#single-enabled-click-test_input')
+    const input = kit.querySelector('#multiselect_input')
     fireEvent.click(input)
     
     const enabledRadio = kit.querySelector('input[type="radio"]:not([disabled])')
