@@ -8,6 +8,7 @@ import Caption from '../pb_caption/_caption'
 import colors from '../tokens/exports/_colors.module.scss'
 import { globalProps, GlobalProps } from '../utilities/globalProps'
 import { buildAriaProps, buildDataProps, noop, buildHtmlProps } from '../utilities/props'
+import './_dedupe_trix_toolbar'
 
 import EditorToolbar from './TipTap/Toolbar'
 
@@ -48,6 +49,7 @@ type RichTextEditorProps = {
   value?: string,
   maxWidth?: string
   TrixEditor?: React.ComponentType<any>,
+  trixInstance?: any,
 } & GlobalProps
 
 const RichTextEditor = (props: RichTextEditorProps): React.ReactElement => {
@@ -78,6 +80,7 @@ const RichTextEditor = (props: RichTextEditorProps): React.ReactElement => {
     requiredIndicator = false,
     label,
     TrixEditor,
+    trixInstance: trixInstance = undefined,
   } = props
 
   const ariaProps = buildAriaProps(aria),
@@ -91,6 +94,11 @@ const RichTextEditor = (props: RichTextEditorProps): React.ReactElement => {
   const fieldId = id ? (id as string) : null
   const labelElementId = fieldId ? `${fieldId}-label` : null
 
+
+  trixInstance && (trixInstance.config.textAttributes.inlineCode = {
+    tagName: 'code',
+    inheritable: true,
+  }) 
   const handleOnEditorReady = (editorInstance: Editor) => {
     setEditor(editorInstance)
 

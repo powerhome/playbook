@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import RichTextEditor from '../../pb_rich_text_editor/_rich_text_editor'
 import { TrixEditor } from 'react-trix'
-// eslint-disable-next-line no-unused-vars
 import Trix from 'trix'
 
 const RichTextEditorLabel = (props) => {
@@ -15,6 +14,7 @@ const RichTextEditorLabel = (props) => {
           id="example"
           label="Example Label"
           onChange={handleOnChange}
+          trixInstance={Trix}
           value={value}
           {...props}
       />
@@ -23,6 +23,7 @@ const RichTextEditorLabel = (props) => {
           TrixEditor={TrixEditor}
           label="Example Label No ID"
           onChange={handleOnChange}
+          trixInstance={Trix}
           value={value}
           {...props}
       />

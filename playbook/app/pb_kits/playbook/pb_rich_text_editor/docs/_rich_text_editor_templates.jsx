@@ -3,7 +3,6 @@ import RichTextEditor from '../../pb_rich_text_editor/_rich_text_editor'
 import Select from '../../pb_select/_select'
 import { changelog, release } from './templates.js'
 import { TrixEditor } from 'react-trix'
-// eslint-disable-next-line no-unused-vars
 import Trix from 'trix'
 
 const RichTextEditorTemplates = (props) => {
@@ -37,6 +36,7 @@ const RichTextEditorTemplates = (props) => {
           TrixEditor={TrixEditor}
           id="template"
           template={editorContent}
+          trixInstance={Trix}
           {...props}
       />
     </div>
