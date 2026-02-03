@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react'
 import classnames from 'classnames'
-import { TrixEditor } from 'react-trix'
+// The user must import and pass TrixEditor as a prop if using the default editor
 
 import inlineFocus from './inlineFocus'
 import useFocus from './useFocus'
@@ -8,14 +8,6 @@ import Caption from '../pb_caption/_caption'
 import colors from '../tokens/exports/_colors.module.scss'
 import { globalProps, GlobalProps } from '../utilities/globalProps'
 import { buildAriaProps, buildDataProps, noop, buildHtmlProps } from '../utilities/props'
-
-import Trix from 'trix'
-import './_dedupe_trix_toolbar'
-
-Trix.config.textAttributes.inlineCode = {
-  tagName: 'code',
-  inheritable: true,
-}
 
 import EditorToolbar from './TipTap/Toolbar'
 
@@ -55,6 +47,7 @@ type RichTextEditorProps = {
   template: string,
   value?: string,
   maxWidth?: string
+  TrixEditor?: React.ComponentType<any>,
 } & GlobalProps
 
 const RichTextEditor = (props: RichTextEditorProps): React.ReactElement => {
@@ -84,6 +77,7 @@ const RichTextEditor = (props: RichTextEditorProps): React.ReactElement => {
     maxWidth = "md",
     requiredIndicator = false,
     label,
+    TrixEditor,
   } = props
 
   const ariaProps = buildAriaProps(aria),
@@ -295,15 +289,23 @@ const RichTextEditor = (props: RichTextEditorProps): React.ReactElement => {
           { children }
           </div>
         ) : (
-          <TrixEditor
-              className=""
-              fileParamName={name}
-              mergeTags={[]}
-              onChange={onChange}
-              onEditorReady={handleOnEditorReady}
-              placeholder={placeholder}
-              value={value}
-          />
+          TrixEditor ? (
+            <TrixEditor
+                className=""
+                fileParamName={name}
+                mergeTags={[]}
+                onChange={onChange}
+                onEditorReady={handleOnEditorReady}
+                placeholder={placeholder}
+                value={value}
+            />
+          ) : (
+            <div style={{ color: 'red', padding: '1em', border: '1px solid #f00', background: '#fff0f0' }}>
+              <strong>Trix Editor is not available.</strong><br />
+              Please import <code>TrixEditor</code> from <code>react-trix</code> and pass it as a prop to <code>RichTextEditor</code>.<br />
+              <pre>{`import { TrixEditor } from 'react-trix';\n<RichTextEditor TrixEditor={TrixEditor} ... />`}</pre>
+            </div>
+          )
         )
       }
     </div>

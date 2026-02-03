@@ -4,7 +4,6 @@ export { default as RichTextEditorAttributes } from './_rich_text_editor_attribu
 export { default as RichTextEditorFocus } from './_rich_text_editor_focus.jsx'
 export { default as RichTextEditorSticky } from './_rich_text_editor_sticky.jsx'
 export { default as RichTextEditorTemplates } from './_rich_text_editor_templates.jsx'
-export { default as RichTextEditorToolbarBottom } from './_rich_text_editor_toolbar_bottom.jsx'
 export { default as RichTextEditorInline } from './_rich_text_editor_inline.jsx'
 export { default as RichTextEditorPreview } from './_rich_text_editor_preview.jsx'
 export { default as RichTextEditorAdvancedDefault } from './_rich_text_editor_advanced_default.jsx'

@@ -1,40 +1,41 @@
 examples:
 
   rails:
-  - rich_text_editor_default: Default
-  - rich_text_editor_simple: Simple
-  - rich_text_editor_attributes: Attributes
-  - rich_text_editor_focus: Focus
-  - rich_text_editor_sticky: Sticky
-  - rich_text_editor_templates: Templates
-  # - rich_text_editor_toolbar_bottom: Toolbar Bottom
-  - rich_text_editor_inline: Inline
-  - rich_text_editor_required_indicator: Required Indicator
-  - rich_text_editor_preview: Preview
 
   react:
-  - rich_text_editor_default: Default
   - rich_text_editor_advanced_default: Advanced Default
   - rich_text_editor_more_extensions: Advanced (Extra Extensions)
   - rich_text_editor_toolbar_disabled: Advanced (Toolbar disabled)
-  - rich_text_editor_simple: Simple
   - rich_text_editor_advanced_simple: Advanced (Simple)
-  - rich_text_editor_attributes: Attributes
   - rich_text_editor_advanced_attributes: Advanced (Attributes)
-  - rich_text_editor_focus: Focus
   - rich_text_editor_advanced_focus: Advanced (Focus)
-  - rich_text_editor_sticky: Sticky
   - rich_text_editor_advanced_sticky: Advanced (Sticky)
-  - rich_text_editor_templates: Templates
   - rich_text_editor_advanced_templates: Advanced (Templates)
-  # - rich_text_editor_toolbar_bottom: Toolbar Bottom
-  - rich_text_editor_inline: Inline
   - rich_text_editor_advanced_inline: Advanced (Inline)
   - rich_text_editor_advanced_height: Advanced Height
   - rich_text_editor_advanced_min_height: Advanced Min Height
-  - rich_text_editor_label: Label
   - rich_text_editor_advanced_label: Advanced (Label)
-  - rich_text_editor_required_indicator: Required Indicator
   - rich_text_editor_advanced_required_indicator: Advanced Required Indicator
-  - rich_text_editor_preview: Preview
   - rich_text_editor_advanced_preview: Advanced Preview
+  - rich_text_editor_default: Legacy Default (Trix)
+  - rich_text_editor_simple: Legacy Simple (Trix)
+  - rich_text_editor_attributes: Legacy Attributes (Trix)
+  - rich_text_editor_focus: Legacy Focus (Trix)
+  - rich_text_editor_sticky: Legacy Sticky (Trix)
+  - rich_text_editor_templates: Legacy Templates (Trix)
+  - rich_text_editor_inline: Legacy Inline (Trix)
+  - rich_text_editor_label: Legacy Label (Trix)
+  - rich_text_editor_required_indicator: Legacy Required Indicator (Trix)
+  - rich_text_editor_preview: Legacy Preview (Trix)
+
+
+
+
+
+
+
+
+
+
+
+
