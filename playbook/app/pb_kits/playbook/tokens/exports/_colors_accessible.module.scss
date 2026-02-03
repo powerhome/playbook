@@ -1,0 +1,20 @@
+/**
+ * Color tokens updated after accessibility audit(WCAG-compliant).
+ */
+@import "../colors_accessible";
+
+:export {
+  @mixin export-colors($colors-list) {
+    @each $name, $color in $colors-list {
+      #{"" + $name}: $color;
+    }
+  }
+  @include export-colors($accessible_text_colors);
+  @include export-colors($accessible_input_text_colors);
+  @include export-colors($accessible_input_background_colors);
+  @include export-colors($accessible_input_border_colors);
+  @include export-colors($accessible_status_text_colors);
+  @include export-colors($accessible_status_background_colors);
+  @include export-colors($accessible_status_icon_background_colors);
+  @include export-colors($accessible_status_border_colors);
+}
