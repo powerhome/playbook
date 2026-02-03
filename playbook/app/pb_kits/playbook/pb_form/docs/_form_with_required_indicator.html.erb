@@ -1,3 +1,11 @@
+<% 
+  example_dropdown_options = [
+    { label: 'United States', value: 'United States', id: 'us' },
+    { label: 'Canada', value: 'Canada', id: 'ca' },
+    { label: 'Pakistan', value: 'Pakistan', id: 'pk' },
+  ]
+%>
+
 <%= pb_form_with(scope: :example, url: "", method: :get, validate: true) do |form| %>
   <%= form.typeahead :example_typeahead_field, props: { label: true, required: true, required_indicator: true } %>
   <%= form.text_field :example_text_field, props: { label: true, required: true, required_indicator: true } %>
@@ -12,6 +20,8 @@
   <%= form.text_area :example_text_area_2, props: { label: "Textarea Custom Label", required: true, required_indicator: true } %>
   <%# <%= form.check_box :example_checkbox, props: { label: true, text: "Checkbox Label", required: true, required_indicator: true } %>
   <%= form.time_picker :example_time_picker_required_indicator, props: { label: true, required: true, required_indicator: true } %>
+  <%= form.dropdown_field :example_dropdown, props: { label: true, options: example_dropdown_options, required: true, required_indicator: true } %>
+  <%= form.dropdown_field :example_dropdown_2, props: { label: "Dropdown Custom Label", options: example_dropdown_options, required: true, required_indicator: true } %>
 
   <%= form.actions do |action| %>
     <%= action.submit %>
