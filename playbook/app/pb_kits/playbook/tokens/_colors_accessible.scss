@@ -5,7 +5,7 @@
 =====================================*/
 
 /* Text Colors ----------------------*/
-$text_default:       #242B42 !default;
+$text_default_color: #242B42 !default; // text_default_color is temporary name accounting for conflict with typography token text_default
 $text_light:         #4B546B !default;
 $text_lighter:       #617290 !default;
 $text_success:       #158149 !default;
@@ -20,7 +20,7 @@ $text_error_dark:    #FF1A1A !default;
 $text_link_dark:     #0E89FF !default;
 
 $accessible_text_colors: (
-  text_default:        $text_default,
+  text_default:        $text_default_color,
   text_light:          $text_light,
   text_lighter:        $text_lighter,
   text_success:        $text_success,
