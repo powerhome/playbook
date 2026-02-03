@@ -9,4 +9,3 @@ export { default as screenSizes } from 'tokens/exports/_screen_sizes.module.scss
 export { default as shadows } from 'tokens/exports/_shadows.module.scss'
 export { default as spacing } from 'tokens/exports/_spacing.module.scss'
 export { default as typography } from 'tokens/exports/_typography.module.scss'
-export { default as colorsAccessible } from 'tokens/exports/_colors_accessible.module.scss'
