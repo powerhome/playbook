@@ -7,16 +7,16 @@ module Playbook
       require_relative "builder/checkbox_field"
       require_relative "builder/collection_select_field"
       require_relative "builder/date_picker_field"
-      require_relative "builder/dropdown_field"
       require_relative "builder/form_field_builder"
       require_relative "builder/select_field"
+      require_relative "builder/typeahead_field"
       require_relative "builder/intl_telephone_field"
       require_relative "builder/multi_level_select_field"
       require_relative "builder/phone_number_field"
+      require_relative "builder/dropdown_field"
       require_relative "builder/star_rating_field"
       require_relative "builder/time_zone_select_field"
       require_relative "builder/time_picker_field"
-      require_relative "builder/typeahead_field"
 
       prepend(FormFieldBuilder.new(:email_field, kit_name: "text_input"))
       prepend(FormFieldBuilder.new(:number_field, kit_name: "text_input"))

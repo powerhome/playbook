@@ -8,7 +8,6 @@ examples:
     - checkbox_indeterminate: Indeterminate Checkbox
     - checkbox_disabled: Disabled Checkbox
     - checkbox_form: Form and Hidden Input
-    # - checkbox_required_indicator: Required Indicator
 
   react:
   - checkbox_default: Default
@@ -18,7 +17,6 @@ examples:
   - checkbox_error: Default w/ Error
   - checkbox_indeterminate: Indeterminate Checkbox
   - checkbox_disabled: Disabled Checkbox
-  # - checkbox_required_indicator: Required Indicator
 
   swift:
     - checkbox_default_swift: Default

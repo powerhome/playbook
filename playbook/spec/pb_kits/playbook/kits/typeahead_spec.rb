@@ -35,7 +35,6 @@ RSpec.describe Playbook::PbTypeahead::Typeahead do
   it { is_expected.to define_prop(:plus_icon).with_default(false) }
   it { is_expected.to define_prop(:pill_color).with_default("primary") }
   it { is_expected.to define_prop(:input_display).with_default("pills") }
-  it { is_expected.to define_boolean_prop(:required_indicator).with_default(false) }
 
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do

@@ -20,7 +20,6 @@ RSpec.describe Playbook::PbCheckbox::Checkbox do
   it { is_expected.to define_hash_prop(:input_options).with_default({}) }
   it { is_expected.to define_boolean_prop(:hidden_input).with_default(false) }
   it { is_expected.to define_prop(:hidden_value) }
-  it { is_expected.to define_prop(:required_indicator).with_default(false) }
 
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
