@@ -298,15 +298,15 @@ const RichTextEditor = (props: RichTextEditorProps): React.ReactElement => {
           </div>
         ) : (
           TrixEditor ? (
-            <TrixEditor
-                className=""
-                fileParamName={name}
-                mergeTags={[]}
-                onChange={onChange}
-                onEditorReady={handleOnEditorReady}
-                placeholder={placeholder}
-                value={value}
-            />
+            React.createElement(TrixEditor, {
+                className: "",
+                fileParamName: name,
+                mergeTags: [],
+                onChange: onChange,
+                onEditorReady: handleOnEditorReady,
+                placeholder: placeholder,
+                value: value,
+            })
           ) : (
             <div style={{ color: 'red', padding: '1em', border: '1px solid #f00', background: '#fff0f0' }}>
               <strong>Trix Editor is not available.</strong><br />
