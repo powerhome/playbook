@@ -66,8 +66,18 @@ const TableCellRenderer = ({
         // Find the "owning" colDefinition by accessor. Needed for multi column logic
         const colDef = findColumnDefByAccessor(columnDefinitions ?? [], column.id)
         const cellAlignment = colDef?.columnStyling?.cellAlignment ?? "right"
-        const cellFontColor = colDef?.columnStyling?.fontColor
-        const cellBackgroundColor = colDef?.columnStyling?.cellBackgroundColor
+        
+        // Support function-based styling for conditional rendering
+        const cellFontColorValue = colDef?.columnStyling?.fontColor
+        const cellFontColor = typeof cellFontColorValue === 'function' 
+          ? cellFontColorValue(row) 
+          : cellFontColorValue
+        
+        const cellBackgroundColorValue = colDef?.columnStyling?.cellBackgroundColor
+        const cellBackgroundColor = typeof cellBackgroundColorValue === 'function' 
+          ? cellBackgroundColorValue(row) 
+          : cellBackgroundColorValue
+        
         const paddingValue = colDef?.columnStyling?.cellPadding ?? customRowStyle?.cellPadding
         const paddingClass = paddingValue ? `p_${paddingValue}` : undefined
 
