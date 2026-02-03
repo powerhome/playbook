@@ -39,13 +39,6 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      @include transition_default;
-
-      &:focus-within {
-        border-color: $primary;
-        background-color: $focus_input_light;
-      }
-
       .input_inner_container {
         width: 100%;
       }
