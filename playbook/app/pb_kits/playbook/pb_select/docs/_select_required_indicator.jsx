@@ -20,9 +20,11 @@ const SelectRequiredIndicator = () => {
 
   return (
     <div>
-      <Select label="Favorite Snack"
+      <Select
+          label="Favorite Snack"
           name="food"
           options={options}
+          requiredIndicator
       />
     </div>
   );

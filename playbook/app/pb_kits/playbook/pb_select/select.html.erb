@@ -1,6 +1,6 @@
 <%= pb_content_tag(:div,
   id: nil,
-  class: object.classnames ) do %>
+  class: object.classnames + object.inline_class ) do %>
   <% if object.label %>
     <label class="pb_select_kit_label" for="<%= object.input_options[:id] || object.name %>">
       <%= pb_rails("caption", props: { text: object.label, dark: object.dark }) %>
@@ -17,6 +17,7 @@
           object.options_to_array,
           selected: object.selected,
           disabled: object.disabled_options,
+          required_indicator: object.required_indicator,
         ),
         object.all_attributes
       )
