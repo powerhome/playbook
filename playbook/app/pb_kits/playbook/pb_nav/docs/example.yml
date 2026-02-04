@@ -14,6 +14,7 @@ examples:
   - collapsible_nav: Collapsible Nav
   - collapsible_nav_with_all_options: Collapsible Nav With Options
   - collapsible_nav_no_icon: Collapsible Nav No Icon
+  - collapsible_nav_disabled_item: Collapsible Nav With Disabled Item
   - horizontal_nav: Horizontal Nav
   - subtle_horizontal_nav: Subtle Horizontal Nav
   - bold_horizontal_nav: Bold Horizontal Nav
@@ -42,6 +43,7 @@ examples:
   - collapsible_nav_item_spacing: Collapsible Nav With ItemSpacing
   - collapsible_nav_custom: Collapsible Nav With Custom Toggling
   - collapsible_nav_no_icon: Collapsible Nav No Icon
+  - collapsible_nav_disabled_item: Collapsible Nav With Disabled Item
   - horizontal_nav: Horizontal Nav
   - subtle_horizontal_nav: Subtle Horizontal Nav
   - bold_horizontal_nav: Bold Horizontal Nav
@@ -62,9 +64,3 @@ examples:
   - nav_horizontal_subtle_no_highlight_swift: Horizontal Subtle No Highlight
   - nav_horizontal_bold_swift: Horizontal Bold
   - nav_props_swift: ""
-
-
-
-  
-
-  

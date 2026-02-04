@@ -23,3 +23,4 @@ export { default as CollapsibleNavNoIcon } from "./_collapsible_nav_no_icon.jsx"
 export { default as HorizontalNavExtendedunderline } from './_horizontal_nav_extendedunderline.jsx'
 export { default as HorizontalNavDisabled } from './_horizontal_nav_disabled.jsx'
 export { default as VerticalNavDisabled } from './_vertical_nav_disabled.jsx'
+export { default as CollapsibleNavDisabledItem } from './_collapsible_nav_disabled_item.jsx'
