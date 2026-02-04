@@ -1,119 +1,124 @@
-import React from "react"
-import { render, screen, fireEvent } from "../utilities/test-utils"
+import React from 'react'
+import { render, screen, fireEvent } from '../utilities/test-utils'
 
-import { MultiLevelSelect } from "playbook-ui"
+import { MultiLevelSelect } from 'playbook-ui'
 
 const treeData = [
   {
-    label: "Power Home Remodeling",
-    value: "powerHomeRemodeling",
-    id: "powerhome1",
+    label: 'Power Home Remodeling',
+    value: 'powerHomeRemodeling',
+    id: 'powerhome1',
     expanded: true,
     children: [
       {
-        label: "People",
-        value: "people",
-        id: "people1",
+        label: 'People',
+        value: 'people',
+        id: 'people1',
         children: [
           {
-            label: "Talent Acquisition",
-            value: "talentAcquisition",
-            id: "talent1"
+            label: 'Talent Acquisition',
+            value: 'talentAcquisition',
+            id: 'talent1',
           },
           {
-            label: "Business Affairs",
-            value: "businessAffairs",
-            id: "business1"
-          }
-        ]
+            label: 'Business Affairs',
+            value: 'businessAffairs',
+            id: 'business1',
+          },
+        ],
       },
       {
-        label: "Contact Center",
-        value: "contactCenter",
-        id: "contact1"
-      }
-    ]
-  }
+        label: 'Contact Center',
+        value: 'contactCenter',
+        id: 'contact1',
+      },
+    ],
+  },
 ]
 
 const treeDataWithDisabledOptions = [
   {
-    label: "Power Home Remodeling",
-    value: "powerHomeRemodeling",
-    id: "powerhome1",
+    label: 'Power Home Remodeling',
+    value: 'powerHomeRemodeling',
+    id: 'powerhome1',
     expanded: true,
     children: [
       {
-        label: "People",
-        value: "people",
-        id: "people1",
-        disabled: true
+        label: 'People',
+        value: 'people',
+        id: 'people1',
+        disabled: true,
       },
       {
-        label: "Contact Center",
-        value: "contactCenter",
-        id: "contact1"
-      }
-    ]
-  }
+        label: 'Contact Center',
+        value: 'contactCenter',
+        id: 'contact1',
+      },
+    ],
+  },
 ]
 
 const treeDataWithDisabledParent = [
   {
-    label: "Power Home Remodeling",
-    value: "powerHomeRemodeling",
-    id: "powerhome1",
+    label: 'Power Home Remodeling',
+    value: 'powerHomeRemodeling',
+    id: 'powerhome1',
     expanded: true,
     disabled: true,
     children: [
       {
-        label: "People",
-        value: "people",
-        id: "people1"
+        label: 'People',
+        value: 'people',
+        id: 'people1',
       },
       {
-        label: "Contact Center",
-        value: "contactCenter",
-        id: "contact1"
-      }
-    ]
-  }
+        label: 'Contact Center',
+        value: 'contactCenter',
+        id: 'contact1',
+      },
+    ],
+  },
 ]
 
 const testId = "multiselect-test"
 
-describe("MultiLevelSelect", () => {
-  test("should render custom class", () => {
+describe('MultiLevelSelect', () => {
+  test('should render custom class', () => {
     render(
-      <MultiLevelSelect className="custom-class"
+      <MultiLevelSelect
+          className='custom-class'
           data={{ testid: testId }}
           treeData={treeData}
       />
     )
     const kit = screen.getByTestId(testId)
-    expect(kit).toHaveClass("custom-class")
+    expect(kit).toHaveClass('custom-class')
   })
 
-  test("should render with default multi variant", () => {
-    render(<MultiLevelSelect data={{ testid: testId }}
-        treeData={treeData}
-           />)
-    const kit = screen.getByTestId(testId)
-    expect(kit).toHaveClass("pb_multi_level_select")
-  })
-
-  test("should render label when provided", () => {
+  test('should render with default multi variant', () => {
     render(
-      <MultiLevelSelect data={{ testid: testId }}
+      <MultiLevelSelect
+          data={{ testid: testId }}
+          treeData={treeData}
+      />
+    )
+    const kit = screen.getByTestId(testId)
+    expect(kit).toHaveClass('pb_multi_level_select')
+  })
+
+  test('should render label when provided', () => {
+    render(
+      <MultiLevelSelect
+          data={{ testid: testId }}
           label="Select Location"
           treeData={treeData}
       />
     )
     const kit = screen.getByTestId(testId)
-    expect(kit).toHaveTextContent("Select Location")
+    expect(kit).toHaveTextContent('Select Location')
   })
 
-  test("should render error message when provided", () => {
+  test('should render error message when provided', () => {
     render(
       <MultiLevelSelect
           data={{ testid: testId }}
@@ -122,17 +127,20 @@ describe("MultiLevelSelect", () => {
       />
     )
     const kit = screen.getByTestId(testId)
-    expect(kit).toHaveTextContent("Please select an option")
-    expect(kit).toHaveClass("error")
+    expect(kit).toHaveTextContent('Please select an option')
+    expect(kit).toHaveClass('error')
   })
 
-  test("should disable input when disabled prop is true", () => {
-    render(<MultiLevelSelect data={{ testid: testId }}
-        disabled
-        treeData={treeData}
-           />)
+  test('should disable input when disabled prop is true', () => {
+    render(
+      <MultiLevelSelect
+          data={{ testid: testId }}
+          disabled
+          treeData={treeData}
+      />
+    )
     const kit = screen.getByTestId(testId)
-    const input = kit.querySelector("#multiselect_input")
+    const input = kit.querySelector('#multiselect_input')
     expect(input).toBeDisabled()
   })
 
@@ -167,21 +175,24 @@ describe("MultiLevelSelect", () => {
   })
 })
 
-describe("MultiLevelSelect multi variant", () => {
-  test("should render checkboxes for multi variant", () => {
-    render(<MultiLevelSelect data={{ testid: testId }}
-        treeData={treeData}
-        variant="multi"
-           />)
+describe('MultiLevelSelect multi variant', () => {
+  test('should render checkboxes for multi variant', () => {
+    render(
+      <MultiLevelSelect
+          data={{ testid: testId }}
+          treeData={treeData}
+          variant="multi"
+      />
+    )
     const kit = screen.getByTestId(testId)
-    const input = kit.querySelector("#multiselect_input")
+    const input = kit.querySelector('#multiselect_input')
     fireEvent.click(input)
 
     const checkboxes = kit.querySelectorAll('input[type="checkbox"]')
     expect(checkboxes.length).toBeGreaterThan(0)
   })
 
-  test("should call onSelect when checkbox is clicked", () => {
+  test('should call onSelect when checkbox is clicked', () => {
     const mockOnSelect = jest.fn()
     render(
       <MultiLevelSelect
@@ -192,7 +203,7 @@ describe("MultiLevelSelect multi variant", () => {
       />
     )
     const kit = screen.getByTestId(testId)
-    const input = kit.querySelector("#multiselect_input")
+    const input = kit.querySelector('#multiselect_input')
     fireEvent.click(input)
 
     const checkbox = kit.querySelector('input[type="checkbox"]')
@@ -201,7 +212,7 @@ describe("MultiLevelSelect multi variant", () => {
     expect(mockOnSelect).toHaveBeenCalled()
   })
 
-  test("should render disabled checkbox inputs for disabled options", () => {
+  test('should render disabled checkbox inputs for disabled options', () => {
     render(
       <MultiLevelSelect
           data={{ testid: testId }}
@@ -211,7 +222,7 @@ describe("MultiLevelSelect multi variant", () => {
       />
     )
     const kit = screen.getByTestId(testId)
-    const input = kit.querySelector("#multi-disabled-test_input")
+    const input = kit.querySelector('#multi-disabled-test_input')
     fireEvent.click(input)
 
     const disabledCheckbox = kit.querySelector('input[type="checkbox"][disabled]')
@@ -219,21 +230,24 @@ describe("MultiLevelSelect multi variant", () => {
   })
 })
 
-describe("MultiLevelSelect single variant", () => {
-  test("should render radio buttons for single variant", () => {
-    render(<MultiLevelSelect data={{ testid: testId }}
-        treeData={treeData}
-        variant="single"
-           />)
+describe('MultiLevelSelect single variant', () => {
+  test('should render radio buttons for single variant', () => {
+    render(
+      <MultiLevelSelect
+          data={{ testid: testId }}
+          treeData={treeData}
+          variant="single"
+      />
+    )
     const kit = screen.getByTestId(testId)
-    const input = kit.querySelector("#multiselect_input")
+    const input = kit.querySelector('#multiselect_input')
     fireEvent.click(input)
 
     const radios = kit.querySelectorAll('input[type="radio"]')
     expect(radios.length).toBeGreaterThan(0)
   })
 
-  test("should render disabled radio inputs for disabled options", () => {
+  test('should render disabled radio inputs for disabled options', () => {
     render(
       <MultiLevelSelect
           data={{ testid: testId }}
@@ -243,14 +257,14 @@ describe("MultiLevelSelect single variant", () => {
       />
     )
     const kit = screen.getByTestId(testId)
-    const input = kit.querySelector("#single-disabled-test_input")
+    const input = kit.querySelector('#single-disabled-test_input')
     fireEvent.click(input)
 
     const disabledRadio = kit.querySelector('input[type="radio"][disabled]')
     expect(disabledRadio).toBeInTheDocument()
   })
 
-  test("disabled options cannot be selected", () => {
+  test('disabled options cannot be selected', () => {
     const mockOnSelect = jest.fn()
     render(
       <MultiLevelSelect
@@ -262,7 +276,7 @@ describe("MultiLevelSelect single variant", () => {
       />
     )
     const kit = screen.getByTestId(testId)
-    const input = kit.querySelector("#single-disabled-click-test_input")
+    const input = kit.querySelector('#single-disabled-click-test_input')
     fireEvent.click(input)
 
     const disabledRadio = kit.querySelector('input[type="radio"][disabled]')
@@ -271,7 +285,7 @@ describe("MultiLevelSelect single variant", () => {
     expect(mockOnSelect).not.toHaveBeenCalled()
   })
 
-  test("enabled options can be selected", () => {
+  test('enabled options can be selected', () => {
     const mockOnSelect = jest.fn()
     render(
       <MultiLevelSelect
@@ -283,7 +297,7 @@ describe("MultiLevelSelect single variant", () => {
       />
     )
     const kit = screen.getByTestId(testId)
-    const input = kit.querySelector("#single-enabled-click-test_input")
+    const input = kit.querySelector('#single-enabled-click-test_input')
     fireEvent.click(input)
 
     const enabledRadio = kit.querySelector('input[type="radio"]:not([disabled])')
@@ -292,7 +306,7 @@ describe("MultiLevelSelect single variant", () => {
     expect(mockOnSelect).toHaveBeenCalled()
   })
 
-  test("should close dropdown after selection", () => {
+  test('should close dropdown after selection', () => {
     render(
       <MultiLevelSelect
           data={{ testid: testId }}
@@ -301,17 +315,17 @@ describe("MultiLevelSelect single variant", () => {
       />
     )
     const kit = screen.getByTestId(testId)
-    const input = kit.querySelector("#multiselect_input")
+    const input = kit.querySelector('#multiselect_input')
     fireEvent.click(input)
 
     const enabledRadio = kit.querySelector('input[type="radio"]:not([disabled])')
     fireEvent.click(enabledRadio)
 
-    const dropdownClosed = kit.querySelector(".dropdown_menu.close")
+    const dropdownClosed = kit.querySelector('.dropdown_menu.close')
     expect(dropdownClosed).toBeInTheDocument()
   })
 
-  test("should update input value after selection", () => {
+  test('should update input value after selection', () => {
     render(
       <MultiLevelSelect
           data={{ testid: testId }}
@@ -320,18 +334,18 @@ describe("MultiLevelSelect single variant", () => {
       />
     )
     const kit = screen.getByTestId(testId)
-    const input = kit.querySelector("#multiselect_input")
+    const input = kit.querySelector('#multiselect_input')
     fireEvent.click(input)
 
     const enabledRadio = kit.querySelector('input[type="radio"]:not([disabled])')
     fireEvent.click(enabledRadio)
 
-    expect(input.value).toBe("Power Home Remodeling")
+    expect(input.value).toBe('Power Home Remodeling')
   })
 })
 
-describe("MultiLevelSelect disabled parent behavior", () => {
-  test("children of disabled parent should also be disabled in single variant", () => {
+describe('MultiLevelSelect disabled parent behavior', () => {
+  test('children of disabled parent should also be disabled in single variant', () => {
     render(
       <MultiLevelSelect
           data={{ testid: testId }}
@@ -340,16 +354,16 @@ describe("MultiLevelSelect disabled parent behavior", () => {
       />
     )
     const kit = screen.getByTestId(testId)
-    const input = kit.querySelector("#multiselect_input")
+    const input = kit.querySelector('#multiselect_input')
     fireEvent.click(input)
 
     const radios = kit.querySelectorAll('input[type="radio"]')
-    radios.forEach((radio) => {
+    radios.forEach(radio => {
       expect(radio).toBeDisabled()
     })
   })
 
-  test("children of disabled parent should also be disabled in multi variant", () => {
+  test('children of disabled parent should also be disabled in multi variant', () => {
     render(
       <MultiLevelSelect
           data={{ testid: testId }}
@@ -358,18 +372,18 @@ describe("MultiLevelSelect disabled parent behavior", () => {
       />
     )
     const kit = screen.getByTestId(testId)
-    const input = kit.querySelector("#multiselect_input")
+    const input = kit.querySelector('#multiselect_input')
     fireEvent.click(input)
 
     const checkboxes = kit.querySelectorAll('input[type="checkbox"]')
-    checkboxes.forEach((checkbox) => {
+    checkboxes.forEach(checkbox => {
       expect(checkbox).toBeDisabled()
     })
   })
 })
 
-describe("MultiLevelSelect onChange callback", () => {
-  test("should call onChange when selection changes in multi variant", () => {
+describe('MultiLevelSelect onChange callback', () => {
+  test('should call onChange when selection changes in multi variant', () => {
     const mockOnChange = jest.fn()
     render(
       <MultiLevelSelect
@@ -380,7 +394,7 @@ describe("MultiLevelSelect onChange callback", () => {
       />
     )
     const kit = screen.getByTestId(testId)
-    const input = kit.querySelector("#multiselect_input")
+    const input = kit.querySelector('#multiselect_input')
     fireEvent.click(input)
 
     const checkbox = kit.querySelector('input[type="checkbox"]')
@@ -389,7 +403,7 @@ describe("MultiLevelSelect onChange callback", () => {
     expect(mockOnChange).toHaveBeenCalled()
   })
 
-  test("should call onChange when selection changes in single variant", () => {
+  test('should call onChange when selection changes in single variant', () => {
     const mockOnChange = jest.fn()
     render(
       <MultiLevelSelect
@@ -400,7 +414,7 @@ describe("MultiLevelSelect onChange callback", () => {
       />
     )
     const kit = screen.getByTestId(testId)
-    const input = kit.querySelector("#multiselect_input")
+    const input = kit.querySelector('#multiselect_input')
     fireEvent.click(input)
 
     const enabledRadio = kit.querySelector('input[type="radio"]:not([disabled])')
@@ -410,8 +424,8 @@ describe("MultiLevelSelect onChange callback", () => {
   })
 })
 
-describe("MultiLevelSelect inputName prop", () => {
-  test("should use inputName for radio button name attribute", () => {
+describe('MultiLevelSelect inputName prop', () => {
+  test('should use inputName for radio button name attribute', () => {
     render(
       <MultiLevelSelect
           data={{ testid: testId }}
@@ -421,10 +435,10 @@ describe("MultiLevelSelect inputName prop", () => {
       />
     )
     const kit = screen.getByTestId(testId)
-    const input = kit.querySelector("#multiselect_input")
+    const input = kit.querySelector('#multiselect_input')
     fireEvent.click(input)
 
     const radio = kit.querySelector('input[type="radio"]')
-    expect(radio).toHaveAttribute("name", "location_select")
+    expect(radio).toHaveAttribute('name', 'location_select')
   })
 })
