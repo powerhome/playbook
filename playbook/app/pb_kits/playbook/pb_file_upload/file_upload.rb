@@ -23,9 +23,6 @@ module Playbook
 
       prop :error, type: Playbook::Props::String
 
-      prop :required_indicator, type: Playbook::Props::Boolean,
-                                default: false
-
       def classname
         file_upload_class = generate_classname("pb_file_upload_kit")
         file_upload_class + error_class + full_width_class

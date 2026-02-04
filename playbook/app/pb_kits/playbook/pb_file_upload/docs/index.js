@@ -4,4 +4,3 @@ export { default as FileUploadCustomMessage } from "./_file_upload_custom_messag
 export { default as FileUploadCustomDescription } from "./_file_upload_custom_description.jsx";
 export { default as FileUploadMaxSize } from "./_file_upload_max_size.jsx";
 export { default as FileUploadError } from "./_file_upload_error.jsx";
-export { default as FileUploadRequiredIndicator } from "./_file_upload_required_indicator.jsx";

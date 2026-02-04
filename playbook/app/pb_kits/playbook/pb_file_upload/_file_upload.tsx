@@ -34,7 +34,6 @@ type FileUploadProps = {
   onFilesAccepted: Callback<File, File>;
   onFilesRejected: (error: string, files: readonly FileRejection[]) => void;
   error?: string;
-  requiredIndicator?: boolean;
 };
 
 const getFormattedFileSize = (fileSize: number): string => {
@@ -52,7 +51,6 @@ const FileUpload = (props: FileUploadProps): React.ReactElement => {
     error,
     htmlOptions = {},
     maxSize,
-    requiredIndicator = false,
     onFilesAccepted = noop,
     onFilesRejected = noop,
   } = props;
@@ -151,20 +149,6 @@ const FileUpload = (props: FileUploadProps): React.ReactElement => {
           ) : (
             <p>{getDescription()}</p>
           )}
-          <>
-            {requiredIndicator && (
-              <span
-                  aria-hidden="true"
-                  className="pb_required_indicator"
-                  style={{
-                  color: colors.error,
-                  marginLeft: spacing.space_xs,
-                }}
-              >
-                {"*"}
-              </span>
-            )}
-          </>
         </Body>
       </Card>
       {error && (
