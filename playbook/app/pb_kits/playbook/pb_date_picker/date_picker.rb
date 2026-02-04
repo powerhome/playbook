@@ -71,8 +71,6 @@ module Playbook
                                    default: false
       prop :required, type: Playbook::Props::Boolean,
                       default: false
-      prop :required_indicator, type: Playbook::Props::Boolean,
-                                default: false
       prop :year_range, type: Playbook::Props::Array,
                         default: [1900, 2100]
       prop :custom_event_type, type: Playbook::Props::String,
@@ -115,7 +113,6 @@ module Playbook
           position: position,
           positionElement: position_element,
           required: required,
-          requiredIndicator: required_indicator,
           selectionType: selection_type,
           showTimezone: show_timezone,
           staticPosition: static_position,

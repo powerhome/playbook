@@ -1,0 +1,856 @@
+diff --git a/playbook/app/pb_kits/playbook/pb_textarea/_textarea.tsx b/playbook/app/pb_kits/playbook/pb_textarea/_textarea.tsx
+index 32c931827a..e2ea3279de 100644
+--- a/playbook/app/pb_kits/playbook/pb_textarea/_textarea.tsx
++++ b/playbook/app/pb_kits/playbook/pb_textarea/_textarea.tsx
+@@ -1,46 +1,47 @@
+ /* eslint-disable react-hooks/rules-of-hooks */
+ 
+-import React, { forwardRef, useEffect, useRef, ChangeEvent, ClipboardEvent } from 'react'
+-import classnames from 'classnames'
++import React, { forwardRef, useEffect, useRef, ChangeEvent, ClipboardEvent } from "react"
++import classnames from "classnames"
+ 
+-import PbTextarea from '.'
+-import type { InputCallback } from '../types'
++import PbTextarea from "."
++import type { InputCallback } from "../types"
+ 
+-import { buildAriaProps, buildDataProps, buildHtmlProps } from '../utilities/props'
+-import { globalProps, GlobalProps } from '../utilities/globalProps'
++import { buildAriaProps, buildDataProps, buildHtmlProps } from "../utilities/props"
++import { globalProps, GlobalProps } from "../utilities/globalProps"
+ 
+-import Body from '../pb_body/_body'
+-import Caption from '../pb_caption/_caption'
+-import Flex from '../pb_flex/_flex'
+-import FlexItem from '../pb_flex/_flex_item'
+-import colors from '../tokens/exports/_colors.module.scss'
++import Body from "../pb_body/_body"
++import Caption from "../pb_caption/_caption"
++import Flex from "../pb_flex/_flex"
++import FlexItem from "../pb_flex/_flex_item"
++import colors from "../tokens/exports/_colors.module.scss"
+ 
+-import { stripEmojisForPaste, applyEmojiMask } from '../utilities/emojiMask'
++import { stripEmojisForPaste, applyEmojiMask } from "../utilities/emojiMask"
+ 
+ type TextareaProps = {
+-  aria?: {[key: string]: string},
+-  characterCount?: string,
+-  className?: string,
+-  children?: React.ReactChild[],
+-  data?: {[key: string]: string},
+-  disabled?: boolean,
+-  emojiMask?: boolean,
+-  error?: string,
+-  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
+-  id?: string,
+-  inline?: boolean,
+-  object?: string,
+-  method?: string,
+-  label?: string,
+-  maxCharacters?: string,
+-  placeholder?: string,
+-  value?: string,
+-  name?: string,
+-  required?: boolean,
+-  requiredIndicator?: boolean,
+-  rows?: number,
+-  resize: "none" | "both" | "horizontal" | "vertical" | "auto",
+-  onChange?: InputCallback<HTMLTextAreaElement>,
++  aria?: { [key: string]: string }
++  characterCount?: string
++  className?: string
++  children?: React.ReactChild[]
++  data?: { [key: string]: string }
++  disabled?: boolean
++  emojiMask?: boolean
++  error?: string
++  htmlOptions?: { [key: string]: string | number | boolean | (() => void) }
++  id?: string
++  inline?: boolean
++  inputOptions?: { [k: string]: any }
++  object?: string
++  method?: string
++  label?: string
++  maxCharacters?: string
++  placeholder?: string
++  value?: string
++  name?: string
++  required?: boolean
++  requiredIndicator?: boolean
++  rows?: number
++  resize: "none" | "both" | "horizontal" | "vertical" | "auto"
++  onChange?: InputCallback<HTMLTextAreaElement>
+ } & GlobalProps
+ 
+ const Textarea = ({
+@@ -54,7 +55,8 @@ const Textarea = ({
+   htmlOptions = {},
+   id,
+   inline = false,
+-  resize = 'none',
++  inputOptions = {},
++  resize = "none",
+   error,
+   label,
+   maxCharacters,
+@@ -70,11 +72,13 @@ const Textarea = ({
+ }: TextareaProps) => {
+   const ref = useRef<HTMLTextAreaElement>(null)
+   useEffect(() => {
+-    if (ref.current && resize === 'auto') {
++    if (ref.current && resize === "auto") {
+       PbTextarea.addMatch(ref.current)
+     }
+   })
+ 
++  const textareaId = inputOptions?.id ?? id
++
+   const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+     // Apply emoji mask if enabled using centralized helper
+     if (emojiMask) {
+@@ -86,7 +90,7 @@ const Textarea = ({
+   // Handle paste event for emoji mask - updates textarea value, cursor position, and calls onChange
+   const handlePaste = (e: ClipboardEvent<HTMLTextAreaElement>) => {
+     if (emojiMask) {
+-      const pastedText = e.clipboardData.getData('text')
++      const pastedText = e.clipboardData.getData("text")
+       const filteredText = stripEmojisForPaste(pastedText)
+ 
+       if (pastedText !== filteredText) {
+@@ -101,72 +105,101 @@ const Textarea = ({
+         textarea.value = newValue
+         textarea.selectionStart = textarea.selectionEnd = newCursorPosition
+ 
+-        onChange({ ...e, target: textarea, currentTarget: textarea } as unknown as ChangeEvent<HTMLTextAreaElement>)
++        onChange({
++          ...e,
++          target: textarea,
++          currentTarget: textarea
++        } as unknown as ChangeEvent<HTMLTextAreaElement>)
+       }
+     }
+   }
+ 
+-  const errorClass = error ? 'error' : null
+-  const inlineClass = inline ? 'inline' : ''
++  const errorClass = error ? "error" : null
++  const inlineClass = inline ? "inline" : ""
+   const resizeClass = `resize_${resize}`
+-  const classes = classnames('pb_textarea_kit', errorClass, inlineClass, resizeClass, globalProps(props), className)
+-  const noCount = typeof characterCount !== 'undefined'
+-  const ariaProps: {[key: string]: string} = buildAriaProps(aria)
+-  const dataProps: {[key: string]: string} = buildDataProps(data)
++  const classes = classnames(
++    "pb_textarea_kit",
++    errorClass,
++    inlineClass,
++    resizeClass,
++    globalProps(props),
++    className
++  )
++  const noCount = typeof characterCount !== "undefined"
++  const ariaProps: { [key: string]: string } = buildAriaProps(aria)
++  const dataProps: { [key: string]: string } = buildDataProps(data)
+   const htmlProps = buildHtmlProps(htmlOptions)
+-  const checkIfZero = (characterCount: string | number) => {
+-    return characterCount == 0 ? characterCount.toString() : characterCount
++
++  const inputOptionsData = inputOptions?.data || {}
++  const textareaDataProps = buildDataProps(inputOptionsData)
++
++  // Extract aria attributes and data from inputOptions to handle separately
++  const {
++    "aria-describedby": customAriaDescribedBy,
++    "aria-invalid": customAriaInvalid,
++    data: _data,
++    ...inputOptionsWithoutAriaAndData
++  } = inputOptions || {}
++
++  const errorId = error ? `${textareaId}-error` : undefined
++
++  // Build aria-describedby: combine error ID with custom if both exist
++  const ariaDescribedBy = [errorId, customAriaDescribedBy].filter(Boolean).join(" ")
++
++  const textareaAttrs = {
++    "aria-describedby": ariaDescribedBy || undefined,
++    "aria-invalid": customAriaInvalid !== undefined ? customAriaInvalid : !!error,
++    id: textareaId,
++    name,
++    rows,
++    placeholder,
++    value,
++    disabled,
++    required,
++    onChange: emojiMask ? handleChange : onChange,
++    onPaste: emojiMask ? handlePaste : undefined,
++    ...inputOptionsWithoutAriaAndData,
++    ...textareaDataProps
+   }
++
++  const checkIfZero = (characterCount?: string | number): string => {
++    if (characterCount === undefined || characterCount === null) return ""
++    return characterCount == 0 ? characterCount.toString() : String(characterCount)
++  }
++
+   const characterCounter = () => {
+-    return maxCharacters && characterCount ? `${checkIfZero(characterCount)} / ${maxCharacters}` : `${checkIfZero(characterCount)}`
++    return maxCharacters && characterCount
++      ? `${checkIfZero(characterCount)} / ${maxCharacters}`
++      : `${checkIfZero(characterCount)}`
+   }
+-  const errorId = error ? `${id}-error` : undefined
+ 
+   return (
+-    <div
+-        {...ariaProps}
++    <div {...ariaProps}
+         {...dataProps}
+         {...htmlProps}
+         className={classes}
+     >
+-    {label && (
+-      <label htmlFor={id}>
+-      {
+-        requiredIndicator ? (
+-          <Caption className="pb_text_input_kit_label">
+-            {label} <span style={{ color: `${colors.error}` }}>*</span>
+-          </Caption>
+-        ) : (
+-          <Caption  className="pb_text_input_kit_label"
+-              text={label}
+-          />
+-        )
+-      }
+-      </label>
+-    )}
+-      {children || (
+-        <textarea
+-            aria-describedby={errorId}
+-            aria-invalid={!!error}
+-            disabled={disabled}
+-            id={id}
+-            name={name}
+-            onChange={emojiMask ? handleChange : onChange}
+-            onPaste={emojiMask ? handlePaste : undefined}
+-            placeholder={placeholder}
+-            ref={ref}
+-            required={required}
+-            rows={rows}
+-            value={value}
+-            {...props}
+-        />
++      {label && (
++        <label htmlFor={textareaId}>
++          {requiredIndicator ? (
++            <Caption className="pb_text_input_kit_label">
++              {label} <span style={{ color: `${colors.error}` }}>{"*"}</span>
++            </Caption>
++          ) : (
++            <Caption className="pb_text_input_kit_label"
++                text={label}
++            />
++          )}
++        </label>
+       )}
++      {children || <textarea ref={ref}
++          {...textareaAttrs}
++                   />}
+ 
+       {error ? (
+         <>
+           {characterCount ? (
+-            <Flex
+-                spacing="between"
++            <Flex spacing="between"
+                 vertical="center"
+             >
+               <FlexItem>
+@@ -180,8 +213,7 @@ const Textarea = ({
+                 />
+               </FlexItem>
+               <FlexItem>
+-                <Caption
+-                    margin="none"
++                <Caption margin="none"
+                     size="xs"
+                     text={characterCounter()}
+                 />
+@@ -198,16 +230,13 @@ const Textarea = ({
+           )}
+         </>
+       ) : (
+-         noCount && (
+-          <Caption
+-              margin="none"
+-              size="xs"
+-              text={characterCounter()}
+-          />
+-        )
++        noCount && <Caption margin="none"
++            size="xs"
++            text={characterCounter()}
++                   />
+       )}
+     </div>
+-  );
++  )
+ }
+ 
+ export default forwardRef(Textarea)
+diff --git a/playbook/app/pb_kits/playbook/pb_textarea/docs/_textarea_input_options.jsx b/playbook/app/pb_kits/playbook/pb_textarea/docs/_textarea_input_options.jsx
+new file mode 100644
+index 0000000000..1b007318bd
+--- /dev/null
++++ b/playbook/app/pb_kits/playbook/pb_textarea/docs/_textarea_input_options.jsx
+@@ -0,0 +1,68 @@
++import React, { useState } from "react"
++
++import Textarea from "../_textarea"
++
++const TextareaInputOptions = (props) => {
++  const [value1, setValue1] = useState("")
++  const [value2, setValue2] = useState("")
++  const [value3, setValue3] = useState("")
++  const [value4, setValue4] = useState("")
++
++  return (
++    <div>
++      <Textarea
++          id="container-id"
++          label="ID on Container"
++          name="comment"
++          onChange={(e) => setValue1(e.target.value)}
++          rows={4}
++          value={value1}
++          {...props}
++      />
++
++      <br />
++
++      <Textarea
++          inputOptions={{ id: "textarea-id" }}
++          label="ID on Textarea via inputOptions"
++          name="comment"
++          onChange={(e) => setValue2(e.target.value)}
++          rows={4}
++          value={value2}
++          {...props}
++      />
++
++      <br />
++
++      <Textarea
++          id="container-id-2"
++          inputOptions={{ id: "textarea-id-2" }}
++          label="Both Container and Textarea IDs"
++          name="comment"
++          onChange={(e) => setValue3(e.target.value)}
++          rows={4}
++          value={value3}
++          {...props}
++      />
++
++      <br />
++
++      <Textarea
++          inputOptions={{
++          "aria-label": "Enter description",
++          "aria-describedby": "help-text",
++          data: { controller: "textarea", action: "focus->handleFocus" },
++          id: "description-textarea"
++        }}
++          label="Data and ARIA Attributes"
++          name="description"
++          onChange={(e) => setValue4(e.target.value)}
++          rows={4}
++          value={value4}
++          {...props}
++      />
++    </div>
++  )
++}
++
++export default TextareaInputOptions
+diff --git a/playbook/app/pb_kits/playbook/pb_textarea/docs/example.yml b/playbook/app/pb_kits/playbook/pb_textarea/docs/example.yml
+index 6207a457ee..6693aa2554 100644
+--- a/playbook/app/pb_kits/playbook/pb_textarea/docs/example.yml
++++ b/playbook/app/pb_kits/playbook/pb_textarea/docs/example.yml
+@@ -20,6 +20,7 @@ examples:
+   - textarea_inline: Inline
+   - textarea_emoji_mask: Emoji Mask
+   - textarea_required_indicator: Required Indicator
++  - textarea_input_options: Input Options
+ 
+   swift:
+   - textarea_default_swift: Default
+diff --git a/playbook/app/pb_kits/playbook/pb_textarea/docs/index.js b/playbook/app/pb_kits/playbook/pb_textarea/docs/index.js
+index 39a6966472..e598b3cdbf 100644
+--- a/playbook/app/pb_kits/playbook/pb_textarea/docs/index.js
++++ b/playbook/app/pb_kits/playbook/pb_textarea/docs/index.js
+@@ -1,8 +1,9 @@
+-export { default as TextareaDefault } from './_textarea_default.jsx'
+-export { default as TextareaResize } from './_textarea_resize.jsx'
+-export { default as TextareaCustom } from './_textarea_custom.jsx'
+-export { default as TextareaError } from './_textarea_error.jsx'
+-export { default as TextareaCharacterCounter } from './_textarea_character_counter.jsx'
+-export { default as TextareaInline } from './_textarea_inline.jsx'
+-export { default as TextareaEmojiMask } from './_textarea_emoji_mask.jsx'
+-export { default as TextareaRequiredIndicator } from './_textarea_required_indicator.jsx'
++export { default as TextareaDefault } from "./_textarea_default.jsx"
++export { default as TextareaResize } from "./_textarea_resize.jsx"
++export { default as TextareaCustom } from "./_textarea_custom.jsx"
++export { default as TextareaError } from "./_textarea_error.jsx"
++export { default as TextareaCharacterCounter } from "./_textarea_character_counter.jsx"
++export { default as TextareaInline } from "./_textarea_inline.jsx"
++export { default as TextareaEmojiMask } from "./_textarea_emoji_mask.jsx"
++export { default as TextareaRequiredIndicator } from "./_textarea_required_indicator.jsx"
++export { default as TextareaInputOptions } from "./_textarea_input_options.jsx"
+diff --git a/playbook/app/pb_kits/playbook/pb_textarea/textarea.test.js b/playbook/app/pb_kits/playbook/pb_textarea/textarea.test.js
+index c3770cf998..20266b0131 100644
+--- a/playbook/app/pb_kits/playbook/pb_textarea/textarea.test.js
++++ b/playbook/app/pb_kits/playbook/pb_textarea/textarea.test.js
+@@ -7,36 +7,27 @@ const testId = "textarea-kit"
+ 
+ describe("TextArea Kit Props", () => {
+   test("Expects to have correct classname", () => {
+-    render(
+-      <Textarea
+-          data={{ testid: testId }}
+-          label="Label"
+-      />
+-    )
++    render(<Textarea data={{ testid: testId }}
++        label="Label"
++           />)
+ 
+     const kit = screen.getByTestId(testId)
+     expect(kit).toHaveClass("pb_textarea_kit")
+   })
+ 
+   test("should render aria-label", () => {
+-    render(
+-      <Textarea
+-          aria={{ label: testId }}
+-          data={{ testid: testId }}
+-      />
+-    )
++    render(<Textarea aria={{ label: testId }}
++        data={{ testid: testId }}
++           />)
+ 
+     const kit = screen.getByTestId(testId)
+     expect(kit).toHaveAttribute("aria-label", testId)
+   })
+ 
+   test("should render custom classname", () => {
+-    render(
+-      <Textarea
+-          className={"text_class"}
+-          data={{ testid: testId }}
+-      />
+-    )
++    render(<Textarea className={"text_class"}
++        data={{ testid: testId }}
++           />)
+ 
+     const kit = screen.getByTestId(testId)
+ 
+@@ -44,12 +35,9 @@ describe("TextArea Kit Props", () => {
+   })
+ 
+   test("should render value", () => {
+-    render(
+-      <Textarea
+-          data={{ testid: testId }}
+-          value={"Default Value"}
+-      />
+-    )
++    render(<Textarea data={{ testid: testId }}
++        value={"Default Value"}
++           />)
+ 
+     const kit = screen.getByTestId(testId)
+     const textarea = kit.querySelector("textarea")
+@@ -58,12 +46,9 @@ describe("TextArea Kit Props", () => {
+   })
+ 
+   test("should render disabled", () => {
+-    render(
+-      <Textarea
+-          data={{ testid: testId }}
+-          disabled={false}
+-      />
+-    )
++    render(<Textarea data={{ testid: testId }}
++        disabled={false}
++           />)
+ 
+     const kit = screen.getByTestId(testId)
+     const textarea = kit.querySelector("textarea")
+@@ -72,12 +57,9 @@ describe("TextArea Kit Props", () => {
+   })
+ 
+   test("should render rows", () => {
+-    render(
+-      <Textarea
+-          data={{ testid: testId }}
+-          rows={7}
+-      />
+-    )
++    render(<Textarea data={{ testid: testId }}
++        rows={7}
++           />)
+ 
+     const kit = screen.getByTestId(testId)
+     const textarea = kit.querySelector("textarea")
+@@ -86,12 +68,9 @@ describe("TextArea Kit Props", () => {
+   })
+ 
+   test("should render character count", () => {
+-    render(
+-      <Textarea
+-          characterCount={50}
+-          data={{ testid: testId }}
+-      />
+-    )
++    render(<Textarea characterCount={50}
++        data={{ testid: testId }}
++           />)
+ 
+     const kit = screen.getByTestId(testId)
+     const counter = kit.querySelector(".pb_caption_kit_xs")
+@@ -100,12 +79,9 @@ describe("TextArea Kit Props", () => {
+   })
+ 
+   test("should have inline class", () => {
+-    render(
+-      <Textarea
+-          data={{ testid: testId }}
+-          inline
+-      />
+-    )
++    render(<Textarea data={{ testid: testId }}
++        inline
++           />)
+ 
+     const kit = screen.getByTestId(testId)
+ 
+@@ -113,12 +89,9 @@ describe("TextArea Kit Props", () => {
+   })
+ 
+   test("should have resize class", () => {
+-    render(
+-      <Textarea
+-          data={{ testid: testId }}
+-          resize={"none"}
+-      />
+-    )
++    render(<Textarea data={{ testid: testId }}
++        resize={"none"}
++           />)
+ 
+     const kit = screen.getByTestId(testId)
+ 
+@@ -126,12 +99,9 @@ describe("TextArea Kit Props", () => {
+   })
+ 
+   test("should render error", () => {
+-    render(
+-      <Textarea
+-          data={{ testid: testId }}
+-          error={"error message"}
+-      />
+-    )
++    render(<Textarea data={{ testid: testId }}
++        error={"error message"}
++           />)
+ 
+     const kit = screen.getByTestId(testId)
+     const error = kit.querySelector(".pb_body_kit_negative")
+@@ -141,12 +111,9 @@ describe("TextArea Kit Props", () => {
+   })
+ 
+   test("should render label", () => {
+-    render(
+-      <Textarea
+-          data={{ testid: testId }}
+-          label={"Test Label"}
+-      />
+-    )
++    render(<Textarea data={{ testid: testId }}
++        label={"Test Label"}
++           />)
+ 
+     const kit = screen.getByTestId(testId)
+     const error = kit.querySelector(".pb_caption_kit_md")
+@@ -155,13 +122,10 @@ describe("TextArea Kit Props", () => {
+   })
+ 
+   test("should render max character display", () => {
+-    render(
+-      <Textarea
+-          characterCount={"11"}
+-          data={{ testid: testId }}
+-          maxCharacters={"10"}
+-      />
+-    )
++    render(<Textarea characterCount={"11"}
++        data={{ testid: testId }}
++        maxCharacters={"10"}
++           />)
+ 
+     const kit = screen.getByTestId(testId)
+     const error = kit.querySelector(".pb_caption_kit_xs")
+@@ -170,12 +134,9 @@ describe("TextArea Kit Props", () => {
+   })
+ 
+   test("should render max character display", () => {
+-    render(
+-      <Textarea
+-          data={{ testid: testId }}
+-          name={"TestName"}
+-      />
+-    )
++    render(<Textarea data={{ testid: testId }}
++        name={"TestName"}
++           />)
+ 
+     const kit = screen.getByTestId(testId)
+     const textarea = kit.querySelector("textarea")
+@@ -184,12 +145,9 @@ describe("TextArea Kit Props", () => {
+   })
+ 
+   test("should render placeholder", () => {
+-    render(
+-      <Textarea
+-          data={{ testid: testId }}
+-          placeholder={"Test Placeholder"}
+-      />
+-    )
++    render(<Textarea data={{ testid: testId }}
++        placeholder={"Test Placeholder"}
++           />)
+ 
+     const kit = screen.getByTestId(testId)
+     const textarea = kit.querySelector("textarea")
+@@ -198,12 +156,9 @@ describe("TextArea Kit Props", () => {
+   })
+ 
+   test("should be required", () => {
+-    render(
+-      <Textarea
+-          data={{ testid: testId }}
+-          required
+-      />
+-    )
++    render(<Textarea data={{ testid: testId }}
++        required
++           />)
+ 
+     const kit = screen.getByTestId(testId)
+     const textarea = kit.querySelector("textarea")
+@@ -214,72 +169,172 @@ describe("TextArea Kit Props", () => {
+ 
+ describe("Textarea Emoji Mask", () => {
+   const TextareaEmojiMask = (props) => {
+-    const [value, setValue] = useState('')
++    const [value, setValue] = useState("")
+     const handleOnChange = ({ target }) => {
+       setValue(target.value)
+     }
+ 
+-    return (
+-      <Textarea
+-          emojiMask
+-          onChange={handleOnChange}
+-          value={value}
+-          {...props}
+-      />
+-    )
++    return (<Textarea emojiMask
++        onChange={handleOnChange}
++        value={value}
++        {...props}
++            />)
+   }
+ 
+   test("removes emoji characters when emojiMask is enabled", () => {
++    render(<TextareaEmojiMask data={{ testid: testId }} />)
++
++    const kit = screen.getByTestId(testId)
++    const textarea = kit.querySelector("textarea")
++
++    fireEvent.change(textarea, { target: { value: "Hello 👋 World 🌍" } })
++    expect(textarea.value).toBe("Hello  World ")
++
++    fireEvent.change(textarea, { target: { value: "😀😂🎉" } })
++    expect(textarea.value).toBe("")
++
++    fireEvent.change(textarea, { target: { value: "Hello World" } })
++    expect(textarea.value).toBe("Hello World")
++  })
++
++  test("allows accented characters when emojiMask is enabled", () => {
++    render(<TextareaEmojiMask data={{ testid: testId }} />)
++
++    const kit = screen.getByTestId(testId)
++    const textarea = kit.querySelector("textarea")
++
++    fireEvent.change(textarea, { target: { value: "Café résumé naïve" } })
++    expect(textarea.value).toBe("Café résumé naïve")
++
++    fireEvent.change(textarea, { target: { value: "àëǒüñ" } })
++    expect(textarea.value).toBe("àëǒüñ")
++  })
++
++  test("renders required indicator asterisk when requiredIndicator is true", () => {
++    render(<Textarea data={{ testid: testId }}
++        label="Name"
++        required
++        requiredIndicator
++           />)
++
++    const kit = screen.getByTestId(testId)
++    const label = within(kit).getByText(/Name/)
++
++    expect(label).toBeInTheDocument()
++    expect(kit).toHaveTextContent("*")
++  })
++})
++
++describe("Textarea Input Options", () => {
++  test("should apply inputOptions.id to textarea element", () => {
++    render(<Textarea data={{ testid: testId }}
++        inputOptions={{ id: "custom-textarea-id" }}
++           />)
++
++    const kit = screen.getByTestId(testId)
++    const textarea = kit.querySelector("textarea")
++
++    expect(textarea).toHaveAttribute("id", "custom-textarea-id")
++  })
++
++  test("should allow inputOptions.id to override id prop", () => {
+     render(
+-      <TextareaEmojiMask
+-          data={{ testid: testId }}
++      <Textarea data={{ testid: testId }}
++          id="wrapper-id"
++          inputOptions={{ id: "textarea-id" }}
+       />
+     )
+ 
+     const kit = screen.getByTestId(testId)
+     const textarea = kit.querySelector("textarea")
+ 
+-    fireEvent.change(textarea, { target: { value: 'Hello 👋 World 🌍' } })
+-    expect(textarea.value).toBe('Hello  World ')
++    expect(textarea).toHaveAttribute("id", "textarea-id")
++  })
++
++  test("should apply inputOptions.data as data-* attributes", () => {
++    render(
++      <Textarea
++          data={{ testid: testId }}
++          inputOptions={{
++          data: { controller: "textarea", action: "focus->handleFocus" }
++        }}
++      />
++    )
+ 
+-    fireEvent.change(textarea, { target: { value: '😀😂🎉' } })
+-    expect(textarea.value).toBe('')
++    const kit = screen.getByTestId(testId)
++    const textarea = kit.querySelector("textarea")
+ 
+-    fireEvent.change(textarea, { target: { value: 'Hello World' } })
+-    expect(textarea.value).toBe('Hello World')
++    expect(textarea).toHaveAttribute("data-controller", "textarea")
++    expect(textarea).toHaveAttribute("data-action", "focus->handleFocus")
+   })
+ 
+-  test("allows accented characters when emojiMask is enabled", () => {
++  test("should apply multiple inputOptions attributes to textarea", () => {
+     render(
+-      <TextareaEmojiMask
++      <Textarea
+           data={{ testid: testId }}
++          inputOptions={{
++          id: "textarea-id",
++          className: "custom-class",
++          data: { controller: "textarea" }
++        }}
+       />
+     )
+ 
+     const kit = screen.getByTestId(testId)
+     const textarea = kit.querySelector("textarea")
+ 
+-    fireEvent.change(textarea, { target: { value: 'Café résumé naïve' } })
+-    expect(textarea.value).toBe('Café résumé naïve')
++    expect(textarea).toHaveAttribute("id", "textarea-id")
++    expect(textarea).toHaveAttribute("class", "custom-class")
++    expect(textarea).toHaveAttribute("data-controller", "textarea")
++  })
+ 
+-    fireEvent.change(textarea, { target: { value: 'àëǒüñ' } })
+-    expect(textarea.value).toBe('àëǒüñ')
++  test("should merge aria-describedby from error and inputOptions", () => {
++    render(
++      <Textarea
++          data={{ testid: testId }}
++          error="This is an error"
++          inputOptions={{
++          "aria-describedby": "custom-help-text"
++        }}
++      />
++    )
++
++    const kit = screen.getByTestId(testId)
++    const textarea = kit.querySelector("textarea")
++
++    // Should contain both the error ID and custom ID
++    expect(textarea).toHaveAttribute("aria-describedby", expect.stringContaining("-error"))
++    expect(textarea).toHaveAttribute(
++      "aria-describedby",
++      expect.stringContaining("custom-help-text")
++    )
+   })
+ 
+-  test('renders required indicator asterisk when requiredIndicator is true', () => {
++  test("should allow inputOptions aria-invalid to override error state", () => {
+     render(
+       <Textarea
+           data={{ testid: testId }}
+-          label="Name"
+-          required
+-          requiredIndicator
++          error="This is an error"
++          inputOptions={{
++          "aria-invalid": false
++        }}
+       />
+     )
+ 
+     const kit = screen.getByTestId(testId)
+-    const label = within(kit).getByText(/Name/)
++    const textarea = kit.querySelector("textarea")
+ 
+-    expect(label).toBeInTheDocument()
+-    expect(kit).toHaveTextContent('*')
++    expect(textarea).toHaveAttribute("aria-invalid", "false")
++  })
++
++  test("should default aria-invalid to error state when not provided in inputOptions", () => {
++    render(<Textarea data={{ testid: testId }}
++        error="This is an error"
++           />)
++
++    const kit = screen.getByTestId(testId)
++    const textarea = kit.querySelector("textarea")
++
++    expect(textarea).toHaveAttribute("aria-invalid", "true")
+   })
+ })
