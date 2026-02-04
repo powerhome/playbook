@@ -99,7 +99,7 @@ const DatePicker = (props: DatePickerProps): React.ReactElement => {
     plugins = false,
     position,
     positionElement,
-    requiredIndicator,
+    requiredIndicator = false,
     scrollContainer,
     selectionType = '',
     showTimezone = false,
