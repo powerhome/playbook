@@ -143,16 +143,42 @@ const Textarea = ({
   const ariaProps: { [key: string]: string } = buildAriaProps(aria)
   const dataProps: { [key: string]: string } = buildDataProps(data)
   const htmlProps = buildHtmlProps(htmlOptions)
+
+  const inputOptionsData = inputOptions?.data || {}
+  const textareaDataProps = buildDataProps(inputOptionsData)
+
+  const inputOptionsWithoutData = Object.fromEntries(
+    Object.entries(inputOptions || {}).filter(([key]) => key !== "data")
+  )
+
+  const errorId = error ? `${textareaId}-error` : undefined
+
+  const textareaAttrs = {
+    "aria-describedby": errorId,
+    "aria-invalid": !!error,
+    id: textareaId,
+    name,
+    rows,
+    placeholder,
+    value,
+    disabled,
+    required,
+    onChange: emojiMask ? handleChange : onChange,
+    onPaste: emojiMask ? handlePaste : undefined,
+    ...inputOptionsWithoutData,
+    ...textareaDataProps
+  }
+
   const checkIfZero = (characterCount?: string | number): string => {
     if (characterCount === undefined || characterCount === null) return ""
     return characterCount == 0 ? characterCount.toString() : String(characterCount)
   }
+
   const characterCounter = () => {
     return maxCharacters && characterCount
       ? `${checkIfZero(characterCount)} / ${maxCharacters}`
       : `${checkIfZero(characterCount)}`
   }
-  const errorId = error ? `${textareaId}-error` : undefined
 
   return (
     <div {...ariaProps}
@@ -173,23 +199,10 @@ const Textarea = ({
           )}
         </label>
       )}
-      {children || (
-        <textarea
-            aria-describedby={errorId}
-            aria-invalid={!!error}
-            disabled={disabled}
-            id={textareaId}
-            name={name}
-            onChange={emojiMask ? handleChange : onChange}
-            onPaste={emojiMask ? handlePaste : undefined}
-            placeholder={placeholder}
-            ref={ref}
-            required={required}
-            rows={rows}
-            value={value}
-            {...props}
-        />
-      )}
+      {children || <textarea ref={ref}
+          {...props}
+          {...textareaAttrs}
+                   />}
 
       {error ? (
         <>
