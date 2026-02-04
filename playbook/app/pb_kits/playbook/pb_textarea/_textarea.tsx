@@ -77,20 +77,6 @@ const Textarea = ({
     }
   })
 
-  // Warn if both `id` and `inputOptions.id` are provided, as `inputOptions.id` will take precedence.
-  if (
-    typeof console !== "undefined" &&
-    typeof console.warn === "function" &&
-    id !== undefined &&
-    inputOptions &&
-    Object.prototype.hasOwnProperty.call(inputOptions, "id") &&
-    inputOptions.id !== id
-  ) {
-    console.warn(
-      "PbTextarea: both `id` and `inputOptions.id` were provided; `inputOptions.id` will be used. " +
-        "To avoid ambiguity, please provide only one of these."
-    )
-  }
   const textareaId = inputOptions?.id ?? id
 
   const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
@@ -200,7 +186,6 @@ const Textarea = ({
         </label>
       )}
       {children || <textarea ref={ref}
-          {...props}
           {...textareaAttrs}
                    />}
 
