@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 
-import React, { forwardRef, useEffect, useRef, ChangeEvent, ClipboardEvent } from "react"
+import React, { forwardRef, useEffect, useRef, useId, ChangeEvent, ClipboardEvent } from "react"
 import classnames from "classnames"
 
 import PbTextarea from "."
@@ -71,13 +71,15 @@ const Textarea = ({
   ...props
 }: TextareaProps) => {
   const ref = useRef<HTMLTextAreaElement>(null)
+  const generatedId = useId()
+
   useEffect(() => {
     if (ref.current && resize === "auto") {
       PbTextarea.addMatch(ref.current)
     }
   })
 
-  const textareaId = inputOptions?.id ?? id
+  const textareaId = inputOptions?.id ?? id ?? generatedId
 
   const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     // Apply emoji mask if enabled using centralized helper
