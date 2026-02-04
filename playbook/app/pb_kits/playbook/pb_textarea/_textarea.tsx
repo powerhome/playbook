@@ -1,12 +1,22 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 
-import React, { forwardRef, useEffect, useRef, useId, ChangeEvent, ClipboardEvent } from "react"
+import React, { forwardRef, useEffect, useRef, ChangeEvent, ClipboardEvent } from "react"
 import classnames from "classnames"
 
 import PbTextarea from "."
 import type { InputCallback } from "../types"
 
 import { buildAriaProps, buildDataProps, buildHtmlProps } from "../utilities/props"
+
+let pbTextareaIdCounter = 0
+const useUniqueId = (prefix = "pb_textarea_") => {
+  const idRef = useRef<string | null>(null)
+  if (idRef.current === null) {
+    pbTextareaIdCounter += 1
+    idRef.current = `${prefix}${pbTextareaIdCounter}`
+  }
+  return idRef.current
+}
 import { globalProps, GlobalProps } from "../utilities/globalProps"
 
 import Body from "../pb_body/_body"
@@ -71,7 +81,7 @@ const Textarea = ({
   ...props
 }: TextareaProps) => {
   const ref = useRef<HTMLTextAreaElement>(null)
-  const generatedId = useId()
+  const generatedId = useUniqueId()
 
   useEffect(() => {
     if (ref.current && resize === "auto") {
