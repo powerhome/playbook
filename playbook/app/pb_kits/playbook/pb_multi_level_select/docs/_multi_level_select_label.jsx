@@ -73,14 +73,11 @@ const MultiLevelSelectDefault = (props) => {
   return (
     <div>
       <MultiLevelSelect
-          id='multiselect-label'
+          id="select_a_department"
           label="Select a Department"
           onSelect={(selectedNodes) =>
-          console.log(
-            "Selected Items",
-            selectedNodes
-          )
-        }
+            console.log("Selected Items", selectedNodes)
+          }
           treeData={treeData}
           {...props}
       />
