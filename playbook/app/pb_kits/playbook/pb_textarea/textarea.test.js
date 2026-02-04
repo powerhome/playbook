@@ -287,4 +287,54 @@ describe("Textarea Input Options", () => {
     expect(textarea).toHaveAttribute("class", "custom-class")
     expect(textarea).toHaveAttribute("data-controller", "textarea")
   })
+
+  test("should merge aria-describedby from error and inputOptions", () => {
+    render(
+      <Textarea
+          data={{ testid: testId }}
+          error="This is an error"
+          inputOptions={{
+          "aria-describedby": "custom-help-text"
+        }}
+      />
+    )
+
+    const kit = screen.getByTestId(testId)
+    const textarea = kit.querySelector("textarea")
+
+    // Should contain both the error ID and custom ID
+    expect(textarea).toHaveAttribute("aria-describedby", expect.stringContaining("-error"))
+    expect(textarea).toHaveAttribute(
+      "aria-describedby",
+      expect.stringContaining("custom-help-text")
+    )
+  })
+
+  test("should allow inputOptions aria-invalid to override error state", () => {
+    render(
+      <Textarea
+          data={{ testid: testId }}
+          error="This is an error"
+          inputOptions={{
+          "aria-invalid": false
+        }}
+      />
+    )
+
+    const kit = screen.getByTestId(testId)
+    const textarea = kit.querySelector("textarea")
+
+    expect(textarea).toHaveAttribute("aria-invalid", "false")
+  })
+
+  test("should default aria-invalid to error state when not provided in inputOptions", () => {
+    render(<Textarea data={{ testid: testId }}
+        error="This is an error"
+           />)
+
+    const kit = screen.getByTestId(testId)
+    const textarea = kit.querySelector("textarea")
+
+    expect(textarea).toHaveAttribute("aria-invalid", "true")
+  })
 })

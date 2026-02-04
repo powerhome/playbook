@@ -133,15 +133,21 @@ const Textarea = ({
   const inputOptionsData = inputOptions?.data || {}
   const textareaDataProps = buildDataProps(inputOptionsData)
 
-  const inputOptionsWithoutData = Object.fromEntries(
-    Object.entries(inputOptions || {}).filter(([key]) => key !== "data")
-  )
+  // Extract aria attributes from inputOptions to handle separately
+  const {
+    "aria-describedby": customAriaDescribedBy,
+    "aria-invalid": customAriaInvalid,
+    ...inputOptionsWithoutAriaAndData
+  } = inputOptions || {}
 
   const errorId = error ? `${textareaId}-error` : undefined
 
+  // Build aria-describedby: combine error ID with custom if both exist
+  const ariaDescribedBy = [errorId, customAriaDescribedBy].filter(Boolean).join(" ")
+
   const textareaAttrs = {
-    "aria-describedby": errorId,
-    "aria-invalid": !!error,
+    "aria-describedby": ariaDescribedBy || undefined,
+    "aria-invalid": customAriaInvalid !== undefined ? customAriaInvalid : !!error,
     id: textareaId,
     name,
     rows,
@@ -151,7 +157,7 @@ const Textarea = ({
     required,
     onChange: emojiMask ? handleChange : onChange,
     onPaste: emojiMask ? handlePaste : undefined,
-    ...inputOptionsWithoutData,
+    ...inputOptionsWithoutAriaAndData,
     ...textareaDataProps
   }
 
