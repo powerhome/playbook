@@ -1,57 +1,46 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 
-import React, { forwardRef, useEffect, useRef, ChangeEvent, ClipboardEvent } from "react"
-import classnames from "classnames"
+import React, { forwardRef, useEffect, useRef, ChangeEvent, ClipboardEvent } from 'react'
+import classnames from 'classnames'
 
-import PbTextarea from "."
-import type { InputCallback } from "../types"
+import PbTextarea from '.'
+import type { InputCallback } from '../types'
 
-import { buildAriaProps, buildDataProps, buildHtmlProps } from "../utilities/props"
+import { buildAriaProps, buildDataProps, buildHtmlProps } from '../utilities/props'
+import { globalProps, GlobalProps } from '../utilities/globalProps'
 
-import { globalProps, GlobalProps } from "../utilities/globalProps"
+import Body from '../pb_body/_body'
+import Caption from '../pb_caption/_caption'
+import Flex from '../pb_flex/_flex'
+import FlexItem from '../pb_flex/_flex_item'
+import colors from '../tokens/exports/_colors.module.scss'
 
-import Body from "../pb_body/_body"
-import Caption from "../pb_caption/_caption"
-import Flex from "../pb_flex/_flex"
-import FlexItem from "../pb_flex/_flex_item"
-import colors from "../tokens/exports/_colors.module.scss"
+import { stripEmojisForPaste, applyEmojiMask } from '../utilities/emojiMask'
 
-import { stripEmojisForPaste, applyEmojiMask } from "../utilities/emojiMask"
-
-let pbTextareaIdCounter = 0
-const useUniqueId = (prefix = "pb_textarea_") => {
-  const idRef = useRef<string | null>(null)
-  if (idRef.current === null) {
-    pbTextareaIdCounter += 1
-    idRef.current = `${prefix}${pbTextareaIdCounter}`
-  }
-  return idRef.current
-}
 type TextareaProps = {
-  aria?: { [key: string]: string }
-  characterCount?: string
-  className?: string
-  children?: React.ReactChild[]
-  data?: { [key: string]: string }
-  disabled?: boolean
-  emojiMask?: boolean
-  error?: string
-  htmlOptions?: { [key: string]: string | number | boolean | (() => void) }
-  id?: string
-  inline?: boolean
-  inputOptions?: { [k: string]: any }
-  object?: string
-  method?: string
-  label?: string
-  maxCharacters?: string
-  placeholder?: string
-  value?: string
-  name?: string
-  required?: boolean
-  requiredIndicator?: boolean
-  rows?: number
-  resize: "none" | "both" | "horizontal" | "vertical" | "auto"
-  onChange?: InputCallback<HTMLTextAreaElement>
+  aria?: {[key: string]: string},
+  characterCount?: string,
+  className?: string,
+  children?: React.ReactChild[],
+  data?: {[key: string]: string},
+  disabled?: boolean,
+  emojiMask?: boolean,
+  error?: string,
+  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
+  id?: string,
+  inline?: boolean,
+  object?: string,
+  method?: string,
+  label?: string,
+  maxCharacters?: string,
+  placeholder?: string,
+  value?: string,
+  name?: string,
+  required?: boolean,
+  requiredIndicator?: boolean,
+  rows?: number,
+  resize: "none" | "both" | "horizontal" | "vertical" | "auto",
+  onChange?: InputCallback<HTMLTextAreaElement>,
 } & GlobalProps
 
 const Textarea = ({
@@ -65,8 +54,7 @@ const Textarea = ({
   htmlOptions = {},
   id,
   inline = false,
-  inputOptions = {},
-  resize = "none",
+  resize = 'none',
   error,
   label,
   maxCharacters,
@@ -81,15 +69,11 @@ const Textarea = ({
   ...props
 }: TextareaProps) => {
   const ref = useRef<HTMLTextAreaElement>(null)
-  const generatedId = useUniqueId()
-
   useEffect(() => {
-    if (ref.current && resize === "auto") {
+    if (ref.current && resize === 'auto') {
       PbTextarea.addMatch(ref.current)
     }
   })
-
-  const textareaId = inputOptions?.id ?? id ?? generatedId
 
   const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     // Apply emoji mask if enabled using centralized helper
@@ -102,7 +86,7 @@ const Textarea = ({
   // Handle paste event for emoji mask - updates textarea value, cursor position, and calls onChange
   const handlePaste = (e: ClipboardEvent<HTMLTextAreaElement>) => {
     if (emojiMask) {
-      const pastedText = e.clipboardData.getData("text")
+      const pastedText = e.clipboardData.getData('text')
       const filteredText = stripEmojisForPaste(pastedText)
 
       if (pastedText !== filteredText) {
@@ -117,100 +101,72 @@ const Textarea = ({
         textarea.value = newValue
         textarea.selectionStart = textarea.selectionEnd = newCursorPosition
 
-        onChange({
-          ...e,
-          target: textarea,
-          currentTarget: textarea
-        } as unknown as ChangeEvent<HTMLTextAreaElement>)
+        onChange({ ...e, target: textarea, currentTarget: textarea } as unknown as ChangeEvent<HTMLTextAreaElement>)
       }
     }
   }
 
-  const errorClass = error ? "error" : null
-  const inlineClass = inline ? "inline" : ""
+  const errorClass = error ? 'error' : null
+  const inlineClass = inline ? 'inline' : ''
   const resizeClass = `resize_${resize}`
-  const classes = classnames(
-    "pb_textarea_kit",
-    errorClass,
-    inlineClass,
-    resizeClass,
-    globalProps(props),
-    className
-  )
-  const noCount = typeof characterCount !== "undefined"
-  const ariaProps: { [key: string]: string } = buildAriaProps(aria)
-  const dataProps: { [key: string]: string } = buildDataProps(data)
+  const classes = classnames('pb_textarea_kit', errorClass, inlineClass, resizeClass, globalProps(props), className)
+  const noCount = typeof characterCount !== 'undefined'
+  const ariaProps: {[key: string]: string} = buildAriaProps(aria)
+  const dataProps: {[key: string]: string} = buildDataProps(data)
   const htmlProps = buildHtmlProps(htmlOptions)
-
-  // Extract aria attributes and data from inputOptions to handle separately
-  const {
-    "aria-describedby": customAriaDescribedBy,
-    "aria-invalid": customAriaInvalid,
-    data: inputOptionsData,
-    ...inputOptionsWithoutAriaAndData
-  } = inputOptions || {}
-
-  const textareaDataProps = buildDataProps(inputOptionsData || {})
-
-  const errorId = error ? `${textareaId}-error` : undefined
-
-  // Build aria-describedby: combine error ID with custom if both exist
-  const ariaDescribedBy = [errorId, customAriaDescribedBy].filter(Boolean).join(" ")
-
-  const textareaAttrs = {
-    "aria-describedby": ariaDescribedBy || undefined,
-    "aria-invalid": customAriaInvalid !== undefined ? customAriaInvalid : !!error,
-    id: textareaId,
-    name,
-    rows,
-    placeholder,
-    value,
-    disabled,
-    required,
-    onChange: emojiMask ? handleChange : onChange,
-    onPaste: emojiMask ? handlePaste : undefined,
-    ...inputOptionsWithoutAriaAndData,
-    ...textareaDataProps
+  const checkIfZero = (characterCount: string | number) => {
+    return characterCount == 0 ? characterCount.toString() : characterCount
   }
-
-  const checkIfZero = (characterCount?: string | number): string => {
-    if (characterCount === undefined || characterCount === null) return ""
-    return characterCount == 0 ? characterCount.toString() : String(characterCount)
-  }
-
   const characterCounter = () => {
-    return maxCharacters && characterCount
-      ? `${checkIfZero(characterCount)} / ${maxCharacters}`
-      : `${checkIfZero(characterCount)}`
+    return maxCharacters && characterCount ? `${checkIfZero(characterCount)} / ${maxCharacters}` : `${checkIfZero(characterCount)}`
   }
+  const errorId = error ? `${id}-error` : undefined
 
   return (
-    <div {...ariaProps}
+    <div
+        {...ariaProps}
         {...dataProps}
         {...htmlProps}
         className={classes}
     >
-      {label && (
-        <label htmlFor={textareaId}>
-          {requiredIndicator ? (
-            <Caption className="pb_text_input_kit_label">
-              {label} <span style={{ color: `${colors.error}` }}>{"*"}</span>
-            </Caption>
-          ) : (
-            <Caption className="pb_text_input_kit_label"
-                text={label}
-            />
-          )}
-        </label>
+    {label && (
+      <label htmlFor={id}>
+      {
+        requiredIndicator ? (
+          <Caption className="pb_text_input_kit_label">
+            {label} <span style={{ color: `${colors.error}` }}>*</span>
+          </Caption>
+        ) : (
+          <Caption  className="pb_text_input_kit_label"
+              text={label}
+          />
+        )
+      }
+      </label>
+    )}
+      {children || (
+        <textarea
+            aria-describedby={errorId}
+            aria-invalid={!!error}
+            disabled={disabled}
+            id={id}
+            name={name}
+            onChange={emojiMask ? handleChange : onChange}
+            onPaste={emojiMask ? handlePaste : undefined}
+            placeholder={placeholder}
+            ref={ref}
+            required={required}
+            rows={rows}
+            value={value}
+            {...props}
+        />
       )}
-      {children || <textarea ref={ref}
-          {...textareaAttrs}
-                   />}
 
       {error ? (
         <>
           {characterCount ? (
-            <Flex spacing="between"
+            <Flex
+                spacing="between"
                 vertical="center"
             >
               <FlexItem>
@@ -224,7 +180,8 @@ const Textarea = ({
                 />
               </FlexItem>
               <FlexItem>
-                <Caption margin="none"
+                <Caption
+                    margin="none"
                     size="xs"
                     text={characterCounter()}
                 />
@@ -241,13 +198,16 @@ const Textarea = ({
           )}
         </>
       ) : (
-        noCount && <Caption margin="none"
-            size="xs"
-            text={characterCounter()}
-                   />
+         noCount && (
+          <Caption
+              margin="none"
+              size="xs"
+              text={characterCounter()}
+          />
+        )
       )}
     </div>
-  )
+  );
 }
 
 export default forwardRef(Textarea)
