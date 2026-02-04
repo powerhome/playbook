@@ -23,14 +23,14 @@ const DropdownRequiredIndicator = (props) => {
   return (
     <div>
       <Dropdown
-          id="select_a_country"
           label="Select a Country"
           options={options}
           requiredIndicator
           {...props}
       >
         {options.map((option) => (
-          <Dropdown.Option key={option.id}
+          <Dropdown.Option 
+              key={option.id} 
               option={option}
           />
         ))}
