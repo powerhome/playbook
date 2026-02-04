@@ -142,16 +142,15 @@ const Textarea = ({
   const dataProps: { [key: string]: string } = buildDataProps(data)
   const htmlProps = buildHtmlProps(htmlOptions)
 
-  const inputOptionsData = inputOptions?.data || {}
-  const textareaDataProps = buildDataProps(inputOptionsData)
-
   // Extract aria attributes and data from inputOptions to handle separately
   const {
     "aria-describedby": customAriaDescribedBy,
     "aria-invalid": customAriaInvalid,
-    data: _data,
+    data: inputOptionsData,
     ...inputOptionsWithoutAriaAndData
   } = inputOptions || {}
+
+  const textareaDataProps = buildDataProps(inputOptionsData || {})
 
   const errorId = error ? `${textareaId}-error` : undefined
 
