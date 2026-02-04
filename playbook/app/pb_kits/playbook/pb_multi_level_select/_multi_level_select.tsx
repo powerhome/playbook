@@ -15,6 +15,7 @@ import Body from "../pb_body/_body";
 import Caption from "../pb_caption/_caption";
 import MultiLevelSelectOptions from "./multi_level_select_options";
 import MultiLevelSelectContext from "./context";
+import colors from "../tokens/exports/_colors.module.scss"
 
 import {
   getAncestorsOfUnchecked,
