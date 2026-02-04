@@ -150,20 +150,15 @@ const Select = (
         <label className="pb_select_kit_label"
             htmlFor={selectId}
         >
-          <Caption dark={props.dark}
-              text={label}
-          />
-          {requiredIndicator && (
-            <span
-                aria-hidden="true"
-                className="pb_required_indicator"
-                style={{
-                color: "#DC3545",
-                marginLeft: "4px",
-              }}
-            >
-              {"*"}
-            </span>
+          {requiredIndicator ? (
+            <Caption dark={props.dark}>
+              {label}
+              <span style={{ color: "#DA0014" }}> *</span>
+            </Caption>
+          ) : (
+            <Caption dark={props.dark}
+                text={label}
+            />
           )}
         </label>
       )}

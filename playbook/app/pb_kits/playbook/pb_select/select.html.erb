@@ -3,7 +3,13 @@
   class: object.classnames + object.inline_class ) do %>
   <% if object.label %>
     <label class="pb_select_kit_label" for="<%= object.input_options[:id] || object.name %>">
-      <%= pb_rails("caption", props: { text: object.label, dark: object.dark }) %>
+      <% if object.required_indicator %>
+        <%= pb_rails("caption", props: { dark: object.dark }) do %>
+          <%= object.label %><span style="color: #DA0014;"> *</span>
+        <% end %>       
+      <% else %>
+        <%= pb_rails("caption", props: { text: object.label, dark: object.dark }) %>
+      <% end %>
     </label>
   <% end %>
   <label class="<%= object.select_wrapper_class %>" for="<%= object.input_options[:id] || object.name %>">
@@ -17,7 +23,6 @@
           object.options_to_array,
           selected: object.selected,
           disabled: object.disabled_options,
-          required_indicator: object.required_indicator,
         ),
         object.all_attributes
       )
