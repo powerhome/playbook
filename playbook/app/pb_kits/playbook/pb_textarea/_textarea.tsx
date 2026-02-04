@@ -133,10 +133,11 @@ const Textarea = ({
   const inputOptionsData = inputOptions?.data || {}
   const textareaDataProps = buildDataProps(inputOptionsData)
 
-  // Extract aria attributes from inputOptions to handle separately
+  // Extract aria attributes and data from inputOptions to handle separately
   const {
     "aria-describedby": customAriaDescribedBy,
     "aria-invalid": customAriaInvalid,
+    data: _data,
     ...inputOptionsWithoutAriaAndData
   } = inputOptions || {}
 
