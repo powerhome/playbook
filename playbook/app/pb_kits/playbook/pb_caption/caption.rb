@@ -4,7 +4,7 @@ module Playbook
   module PbCaption
     class Caption < Playbook::KitBase
       prop :size, type: Playbook::Props::Enum,
-                  values: %w[xs sm md base lg xl],
+                  values: %w[xs md lg],
                   default: "md"
       prop :tag, type: Playbook::Props::Enum,
                  values: %w[h1 h2 h3 h4 h5 h6 p span div caption],
