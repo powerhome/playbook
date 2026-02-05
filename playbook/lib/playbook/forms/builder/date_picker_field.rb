@@ -20,7 +20,23 @@ module Playbook
         props[:name] = html_attribute_name
         props[:picker_id] = html_id
 
-        @template.pb_rails("date_picker", props: props)
+        input = text_field(
+          name,
+          autocomplete: "off",
+          disabled: props[:disable_input],
+          data: props[:input_data],
+          aria: props[:input_aria],
+          props: {
+            error: props[:error],
+            label: nil,
+            placeholder: props[:placeholder],
+            required: props[:required],
+          }
+        )
+
+        @template.pb_rails("date_picker", props: props) do
+          input
+        end
       end
     end
   end
