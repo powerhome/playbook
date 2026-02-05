@@ -1,6 +1,6 @@
 <%= pb_content_tag(:div,
   id: nil,
-  class: object.classnames + object.inline_class ) do %>
+  class: object.classnames ) do %>
   <% if object.label %>
     <label class="pb_select_kit_label" for="<%= object.input_options[:id] || object.name %>">
       <% if object.required_indicator %>
