@@ -1,5 +1,8 @@
 @import "./opacity";
 
+/* Accessible color tokens (WCAG-compliant) — defined in _colors_accessible.scss */
+@import "./colors_accessible";
+
 /*=====================================
 Base colors should not be documented.
 Only document color use.

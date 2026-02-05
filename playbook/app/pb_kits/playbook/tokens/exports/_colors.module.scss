@@ -6,6 +6,7 @@
       #{"" + $name}: $color;
     }
   }
+  /* Legacy tokens — from _colors.scss */
   @include export-colors($product_colors);
   @include export-colors($status_colors);
   @include export-colors($data_colors);
@@ -23,4 +24,13 @@
   @include export-colors($category_colors);
   gradient_start: $gradient_start;
   gradient_end: $gradient_end;
+  /* Accessible tokens — from _colors_accessible.scss */
+  @include export-colors($accessible_text_colors);
+  @include export-colors($accessible_input_text_colors);
+  @include export-colors($accessible_input_background_colors);
+  @include export-colors($accessible_input_border_colors);
+  @include export-colors($accessible_status_text_colors);
+  @include export-colors($accessible_status_background_colors);
+  @include export-colors($accessible_status_icon_background_colors);
+  @include export-colors($accessible_status_border_colors);
 }

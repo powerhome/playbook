@@ -23,15 +23,15 @@
             <%= pb_rails("flex", props: {align: "center"}) do %>
                 <% if object.custom_display.present?  %>
                     <%= pb_rails("flex", props: {align: "center"}) do %>
-                        <div id="dropdown_trigger_custom_display" style="display: none;">
+                        <div data-dropdown-trigger-custom-display style="display: none;">
                             <%= object.custom_display %>
                         </div>
-                        <%= pb_rails("body", props: {text: object.default_display_placeholder, id: "dropdown_trigger_display"}) %>
+                        <%= pb_rails("body", props: {text: object.default_display_placeholder, data: { 'dropdown-trigger-display': true }}) %>
                     <% end %>
                 <% else %>
                     <% if object.multi_select %>
                         <%= pb_rails("flex", props: { align: "center", wrap: true }) do %>
-                            <%= pb_rails("flex", props: { id:"dropdown_pills_wrapper", wrap: true }) do %>
+                            <%= pb_rails("flex", props: { data: { 'dropdown-pills-wrapper': true }, wrap: true }) do %>
                             <% end %>   
                         <% if object.autocomplete %>
                                 <input
@@ -42,7 +42,7 @@
                                     autocomplete="off"
                                 />
                             <% else %>
-                                <%= pb_rails("body", props: {text: object.default_display_placeholder, id: "dropdown_trigger_display_multi_select"}) %>
+                                <%= pb_rails("body", props: {text: object.default_display_placeholder, data: { "dropdown-trigger-display-multi-select": true }}) %>
                             <% end %>
                         <% end %>
                     <% else %>
@@ -55,7 +55,7 @@
                                 autocomplete="off"
                             />
                         <% else %>
-                            <%= pb_rails("body", props: {text: object.default_display_placeholder, id: "dropdown_trigger_display"}) %>
+                            <%= pb_rails("body", props: {text: object.default_display_placeholder, data: { 'dropdown-trigger-display': true }}) %>
                         <% end %>
                     <% end %>
                 <% end %>
@@ -63,9 +63,9 @@
         <% end %>
             <%= pb_rails("flex/flex_item") do %>
                 <%= pb_rails("body", props: {display: "flex", align_items:"center" }) do  %>
-                    <%= pb_rails("icon", props: {icon: "times", cursor: "pointer", size:"sm", id: "dropdown_clear_icon", padding_right:"xs" }) %>
-                    <%= pb_rails("icon", props: {icon: "chevron-down", cursor: "pointer", size:"sm", id: "dropdown_open_icon"}) %>
-                    <%= pb_rails("icon", props: {icon: "chevron-up", cursor: "pointer", size:"sm", id: "dropdown_close_icon"}) %>
+                    <%= pb_rails("icon", props: {icon: "times", cursor: "pointer", size:"sm", data:{'dropdown-clear-icon': true }, padding_right:"xs" }) %>
+                    <%= pb_rails("icon", props: {icon: "chevron-down", cursor: "pointer", size:"sm", data:{'dropdown-open-icon': true }}) %>
+                    <%= pb_rails("icon", props: {icon: "chevron-up", cursor: "pointer", size:"sm", data:{ 'dropdown-close-icon': true }}) %>
                 <% end %>
             <% end %>
     <% end %>

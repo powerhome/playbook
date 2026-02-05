@@ -91,6 +91,7 @@ const NavItem = (props: NavItemProps) => {
     marginX,
     marginY,
     disabled = false,
+ 
   } = props;
 
   const spacingMarginProps = {
@@ -197,13 +198,14 @@ const { filteredPadding, filteredMargin } = filterItemSpacing(itemSpacing);
     if (React.isValidElement(child)) {
       const childProps: NavChildProps = {
         itemSpacing: itemSpacing,
+        ...(disabled && { disabled: disabled })
       };
       return React.cloneElement(child, childProps);
     }
     return child;
   });
 
-  const collapsibleClasses = buildCss("collapsible_nav_wrapper", activeClass, highlightedBorderClass, collapsibleTrailClass)
+  const collapsibleClasses = buildCss("collapsible_nav_wrapper", activeClass, highlightedBorderClass, collapsibleTrailClass, disabledClass)
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (!disabled && !isLink && (e.key === "Enter" || e.key === " ")) {
@@ -231,8 +233,8 @@ const { filteredPadding, filteredMargin } = filterItemSpacing(itemSpacing);
               icon={iconRight && iconRight}
               iconSize="xs"
               id={id}
-              onClick={onClick}
-              onIconClick={onIconRightClick}
+              onClick={disabled ? undefined : onClick}
+              onIconClick={disabled ? undefined : onIconRightClick}
           >
             <Collapsible.Main
                 className={globalProps({ ...finalItemSpacing })}
