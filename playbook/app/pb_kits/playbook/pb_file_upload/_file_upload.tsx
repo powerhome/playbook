@@ -162,4 +162,4 @@ const FileUpload = (props: FileUploadProps): React.ReactElement => {
   );
 };
 
-export default FileUpload;
+export default FileUpload
