@@ -15,7 +15,7 @@ RSpec.describe Playbook::PbCaption::Caption do
   it {
     is_expected.to define_enum_prop(:size)
       .with_default("md")
-      .with_values("xs", "sm", "md", "base", "lg", "xl")
+      .with_values("xs", "md", "lg")
   }
   it do
     is_expected.to define_enum_prop(:tag)
