@@ -6,7 +6,7 @@ module Playbook
       def phone_number_field(name, props: {})
         props[:name] = name
 
-        if props[:label] == true && props[:required_indicator]
+        if props[:label] == true
           props[:label] = if @object && @object.class.respond_to?(:human_attribute_name)
                             @object.class.human_attribute_name(name)
                           else
