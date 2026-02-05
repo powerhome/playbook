@@ -11,7 +11,7 @@ type CaptionProps = {
   data?: {[key: string]: string},
   htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
-  size?: "xs" | "sm" | "md" | "lg" | "xl",
+  size?: "xs" | "md" | "lg",
   tag?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "p" | "span" | "div" | "caption",
   text?: string,
   variant?: null | "link",
