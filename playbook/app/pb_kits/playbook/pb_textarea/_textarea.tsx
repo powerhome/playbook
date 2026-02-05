@@ -156,7 +156,7 @@ const Textarea = ({
     ...inputOptionsWithoutAriaAndData,
     ...textareaDataProps
   }
-  
+
   const checkIfZero = (characterCount: string | number) => {
     return characterCount == 0 ? characterCount.toString() : characterCount
   }
@@ -172,7 +172,7 @@ const Textarea = ({
         className={classes}
     >
     {label && (
-      <label htmlFor={id}>
+      <label htmlFor={textareaId}>
       {
         requiredIndicator ? (
           <Caption className="pb_text_input_kit_label">
