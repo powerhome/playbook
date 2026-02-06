@@ -95,7 +95,7 @@ const Select = (
 
   const inlineClass = inline ? "inline" : null;
   const compactClass = compact ? "compact" : null;
-  const classes = classnames(
+  const WrapperClasses = classnames(
     buildCss("pb_select"),
     globalProps({
       ...props,
@@ -111,7 +111,7 @@ const Select = (
     [key: string]: SVGElement;
   };
 
-  const selectWrapperClass = classnames(
+  const classes = classnames(
     buildCss("pb_select_kit_wrapper"),
     { error },
     className,
@@ -163,7 +163,7 @@ const Select = (
           )}
         </label>
       )}
-      <label className={selectWrapperClass}
+      <label className={classes}
           htmlFor={selectId}
       >
         {selectBody}
