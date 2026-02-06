@@ -15,7 +15,6 @@ const FormGroupDatePicker = (props) => (
           {...props}
       />
       <DatePicker
-          id="event-date"
           label="event date"
           pickerId="date-picker-default"
           {...props}
