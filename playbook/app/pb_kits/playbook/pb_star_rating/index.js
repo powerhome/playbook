@@ -38,7 +38,28 @@ export default class PbStarRating extends PbEnhancedElement {
           event.preventDefault()
           this.handleStarClick(star.id)
         }
+
+        const stars = Array.from(this.element.querySelectorAll("[role='radio']"))
+        const index = stars.indexOf(star)
+
+        if (event.key === "ArrowRight" && stars[index + 1]) {
+          event.preventDefault()
+          stars[index + 1].focus()
+        }
+
+        if (event.key === "ArrowLeft" && stars[index - 1]) {
+          event.preventDefault()
+          stars[index - 1].focus()
+        }
       })
+
+      const label = this.element.querySelector("[id$='_label']")
+      if (label) {
+        label.addEventListener("click", () => {
+          const firstStar = this.element.querySelector("[role='radio']")
+          firstStar?.focus()
+        })
+      }
     })
   }
 
@@ -51,11 +72,13 @@ export default class PbStarRating extends PbEnhancedElement {
     const allStars = this.element.querySelectorAll(STAR_RATING_SELECTOR)
 
     allStars.forEach(star => {
-      const starId = star.id
       const icon = star.querySelector(".interactive-star-icon")
+      const isChecked = star.id <= clickedStarId
+
+      star.setAttribute("aria-checked", isChecked.toString())
 
       if (icon) {
-        if (starId <= clickedStarId) {
+        if (isChecked) {
           if (star.classList.contains("yellow_star")) {
             icon.classList.add("yellow-star-selected")
           } else if (star.classList.contains("primary_star_light")) {
