@@ -52,15 +52,15 @@ export default class PbStarRating extends PbEnhancedElement {
           stars[index - 1].focus()
         }
       })
-
-      const label = this.element.querySelector("[id$='_label']")
-      if (label) {
-        label.addEventListener("click", () => {
-          const firstStar = this.element.querySelector("[role='radio']")
-          firstStar?.focus()
-        })
-      }
     })
+    
+    const label = this.element.querySelector("[id$='_label']")
+    if (label) {
+      label.addEventListener("click", () => {
+        const firstStar = this.element.querySelector("[role='radio']")
+        firstStar?.focus()
+      })
+    }
   }
 
   handleStarClick(starId) {
