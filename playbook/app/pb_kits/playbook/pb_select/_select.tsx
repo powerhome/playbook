@@ -111,11 +111,11 @@ const Select = (
     [key: string]: SVGElement;
   };
 
-  const selectWrapperClass = classnames(
-    buildCss("pb_select_kit_wrapper"),
-    { error },
+  const selectKitClass = classnames(
+    buildCss("pb_select_kit"),
     className,
   );
+
   const selectId = (inputOptions?.id as string) || name;
 
   const selectBody = (() => {
@@ -162,7 +162,7 @@ const Select = (
           )}
         </label>
       )}
-      <label className={selectWrapperClass}
+      <label className={selectKitClass}
           htmlFor={selectId}
       >
         {selectBody}
