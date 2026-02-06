@@ -9,11 +9,13 @@ const FormGroupDatePicker = (props) => (
   <div>
     <FormGroup>
       <TextInput
+          id="event-name"
           label="Event"
           placeholder="Event Name"
           {...props}
       />
       <DatePicker
+          id="event-date"
           label="event date"
           pickerId="date-picker-default"
           {...props}
