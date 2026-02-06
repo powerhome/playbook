@@ -1,10 +1,11 @@
 examples:
- rails:
+
+  rails:
   - file_upload_default: File Upload
   - file_upload_custom: Custom
   - file_upload_error: Error
 
- react:
+  react:
   - file_upload_default: Default List of files to upload
   - file_upload_accept: Accept only certain types of files
   - file_upload_custom_message: Add a custom message
