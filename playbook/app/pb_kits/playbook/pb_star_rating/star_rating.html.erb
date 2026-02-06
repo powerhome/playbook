@@ -37,7 +37,9 @@
     <% else %>
       <%= pb_rails("flex", props: { data: {"pb-star-rating-wrapper": "true" }, orientation: "column" }) do %>
         <% if object.label.present? %>
-          <%= pb_rails("caption", props: {text: object.label, margin_bottom:"xs"}) %>
+          <label for="<%= object.input_options[:id] || object.id %>" >
+            <%= pb_rails("caption", props: {text: object.label, margin_bottom:"xs"}) %>
+          </label>
         <% end %>
 
         <%= hidden_input_tag %>
