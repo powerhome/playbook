@@ -111,11 +111,7 @@ const Select = (
     [key: string]: SVGElement;
   };
 
-  const classes = classnames(
-    buildCss("pb_select_kit_wrapper"),
-    { error },
-    className,
-  );
+  const classes = classnames(buildCss("pb_select_kit_wrapper"), error && "error", className);
 
   const selectId = (inputOptions?.id as string) || name;
 
