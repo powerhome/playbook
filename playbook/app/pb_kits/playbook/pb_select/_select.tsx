@@ -145,7 +145,7 @@ const Select = (
     <div {...ariaProps}
         {...dataProps}
         {...htmlProps}
-        className={classes}
+        className={WrapperClasses}
     >
       {label && (
         <label className="pb_select_kit_label"
