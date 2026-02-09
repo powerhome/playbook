@@ -37,21 +37,15 @@
     <% else %>
       <%= pb_rails("flex", props: { data: {"pb-star-rating-wrapper": "true" }, orientation: "column" }) do %>
         <% if object.label.present? %>
-          <%= pb_rails("caption", props: {id: "#{object.id}_label", text: object.label, margin_bottom:"xs"}) %>
+          <%= pb_rails("caption", props: {text: object.label, margin_bottom:"xs"}) %>
         <% end %>
 
         <%= hidden_input_tag %>
 
-        <%= pb_rails("flex", props: { orientation: "row", role: "radiogroup", "aria-labelledby": "#{object.id}_label", data: { "pb-star-rating-group": "true" } }) do %>
+        <%= pb_rails("flex", props: { orientation: "row" }) do %>
           <% object.denominator.times do |index| %>
-            <div 
-              role="radio"
-              tabindex="<%= index.zero? ? 0 : -1 %>" 
-              aria-checked="false"
-              data-pb-star-rating id="<%= "#{object.id}_star_#{index + 1}"  %>" 
-              class="<%= star_color %>"
-            >
-              <%= pb_rails("icon", props: { classname: "#{background_star_color} pb_star_#{size} interactive-star-icon", custom_icon: Playbook::Engine.root.join(background_star_path) } ) %>
+            <div data-pb-star-rating id="<%= index + 1 %>" class="<%= star_color %>">
+              <%= pb_rails("icon", props: { classname: "#{background_star_color} pb_star_#{size} interactive-star-icon", custom_icon: Playbook::Engine.root.join(background_star_path), tabindex: 0 } ) %>
             </div>
           <% end %>
         <% end %>
