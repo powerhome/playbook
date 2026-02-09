@@ -37,7 +37,7 @@ const MultipleUsers = (props: MultipleUsersProps): React.ReactElement => {
   } = props
 
   const displayCount =
-    users.length > maxDisplayedUsers ? maxDisplayedUsers - 1 : users.length
+    users.length > maxDisplayedUsers ? Math.max(1, maxDisplayedUsers - 1) : users.length
   const usersToDisplay = users.slice(0, displayCount)
 
   const reverseClass = reverse === true ? 'reverse' : ''
@@ -56,6 +56,10 @@ const MultipleUsers = (props: MultipleUsersProps): React.ReactElement => {
     dark && 'dark',
     buildCss('multiple_users_badge', avatarSizeClass)
   )
+
+  const itemsShouldOverlap = (index: number, length: number): boolean => {
+    return reverse ? index < length - 1 : index > 0;
+  }
 
   return (
     <div
@@ -76,7 +80,7 @@ const MultipleUsers = (props: MultipleUsersProps): React.ReactElement => {
             >
               <Avatar
                   {...avatarData}
-                  className={"pb_multiple_users_item" + (withTooltip ? " user_tooltip" : "")}
+                  className={`pb_multiple_users_item${itemsShouldOverlap(index, usersToDisplay.length) ? ' pb_multiple_users_overlap' : ''}`}
                   dark={dark}
                   imageAlt={avatarData.name}
                   key={index}
@@ -102,7 +106,7 @@ const MultipleUsers = (props: MultipleUsersProps): React.ReactElement => {
                 }
                 zIndex={10}
             >
-              <div className={itemClasses + (withTooltip ? " user_count_tooltip" : "")}>
+              <div className={itemClasses + " pb_multiple_users_count_overlap"}>
                 {`+${users.length - displayCount}`}
               </div>
             </Tooltip>
@@ -111,19 +115,20 @@ const MultipleUsers = (props: MultipleUsersProps): React.ReactElement => {
         :
         <>
           {usersToDisplay.map((avatarData, index) => (
-            <Avatar
-                {...avatarData}
-                className="pb_multiple_users_item"
-                dark={dark}
-                imageAlt={avatarData.name}
-                key={index}
-                size={size}
-            />
+            <div key={index}>
+              <Avatar
+                  {...avatarData}
+                  className={`pb_multiple_users_item${itemsShouldOverlap(index, usersToDisplay.length) ? ' pb_multiple_users_overlap' : ''}`}
+                  dark={dark}
+                  imageAlt={avatarData.name}
+                  size={size}
+              />
+            </div>
           ))}
 
           {users.length > maxDisplayedUsers &&
-            <div className={itemClasses}>
-              {`+${users.length - 3}`}
+            <div className={itemClasses + " pb_multiple_users_count_overlap"}>
+              {`+${users.length - displayCount}`}
             </div>
           }
         </>
