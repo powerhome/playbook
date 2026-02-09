@@ -4,7 +4,8 @@ module Playbook
   module Forms
     class Builder
       def phone_number_field(name, props: {})
-        props[:name] = name
+        props[:name] = name.to_s
+        props[:id] ||= name.to_s
 
         if props[:label] == true
           props[:label] = if @object && @object.class.respond_to?(:human_attribute_name)
