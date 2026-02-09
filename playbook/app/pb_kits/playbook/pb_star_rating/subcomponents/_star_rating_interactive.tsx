@@ -82,7 +82,6 @@ const StarRatingInteractive = (props: StarRatingInteractiveProps) => {
                             aria-label={`Rate ${starIndex} out of ${denominator} stars`}
                             key={index}
                             onKeyDown={(event) => handleOnKeyDown(event, starIndex)}
-                            tabIndex={0}
                         >
                             <Icon
                                 className={starClass.trim()}
@@ -93,6 +92,7 @@ const StarRatingInteractive = (props: StarRatingInteractiveProps) => {
                                     onMouseEnter: () => handleMouseEnter(starIndex),
                                     onMouseLeave: () => handleMouseLeave(),
                                 }}
+                                tabIndex={0}
                             />
                         </div>
                     );
