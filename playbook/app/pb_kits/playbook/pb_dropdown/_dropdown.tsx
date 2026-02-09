@@ -6,13 +6,14 @@ import { GenericObject } from "../types";
 
 import Body from '../pb_body/_body';
 import Caption from "../pb_caption/_caption";
+import colors from "../tokens/exports/_colors.module.scss";
 
 import DropdownContainer from "./subcomponents/DropdownContainer";
 import DropdownContext from "./context";
 import DropdownOption from "./subcomponents/DropdownOption";
 import DropdownTrigger from "./subcomponents/DropdownTrigger";
 import useDropdown from "./hooks/useDropdown";
-import  getQuickPickOptions from "./quickpick";
+import getQuickPickOptions from "./quickpick";
 
 import {
     separateChildComponents,
@@ -61,6 +62,7 @@ type DropdownProps = {
       backgroundColor?: string;
       fontColor?: string;
     };
+    requiredIndicator?: boolean;
 };
 
 interface DropdownComponent
@@ -99,6 +101,7 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
         separators = true,
         variant = "default",
         activeStyle,
+        requiredIndicator = false
     } = props;
 
     const ariaProps = buildAriaProps(aria);
@@ -459,18 +462,28 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
                 }}
             >
                 {label && (
-                    <label
-                        data-dropdown="pb-dropdown-label"
-                        htmlFor={selectId}
-                        onClick={handleLabelClick}
-                    >
-                        <Caption
-                            className="pb_dropdown_kit_label"
-                            dark={dark}
-                            marginBottom="xs"
-                            text={label}
-                        />
-                    </label>
+                  <label
+                      data-dropdown="pb-dropdown-label"
+                      htmlFor={selectId}
+                      onClick={handleLabelClick}
+                  >
+                    {requiredIndicator ? (
+                      <Caption
+                          className="pb_dropdown_kit_label"
+                          dark={dark}
+                          marginBottom="xs"
+                      >
+                        {label} <span style={{ color: `${colors.error}` }}>*</span>
+                      </Caption>
+                    ) : (
+                      <Caption
+                          className="pb_dropdown_kit_label"
+                          dark={dark}
+                          marginBottom="xs"
+                          text={label}
+                      />
+                    )}
+                  </label>
                 )}
                 <div className={`dropdown_wrapper ${error ? 'error' : ''}`}
                     onBlur={() => {
