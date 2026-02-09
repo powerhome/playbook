@@ -1,75 +1,89 @@
-import React, { forwardRef, useEffect, useRef, useState, useImperativeHandle } from 'react'
-import classnames from 'classnames'
+import React, {
+  forwardRef,
+  useEffect,
+  useRef,
+  useState,
+  useImperativeHandle,
+} from "react";
+import classnames from "classnames";
 
-import intlTelInput from 'intl-tel-input/build/js/intlTelInputWithUtils.js'
+import intlTelInput from "intl-tel-input/build/js/intlTelInputWithUtils.js";
 
-import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
-import { globalProps } from '../utilities/globalProps'
+import {
+  buildAriaProps,
+  buildCss,
+  buildDataProps,
+  buildHtmlProps,
+} from "../utilities/props";
+import { globalProps } from "../utilities/globalProps";
 
-import TextInput from '../pb_text_input/_text_input'
-import { Callback } from '../types'
-import { isEmpty } from '../utilities/object'
+import TextInput from "../pb_text_input/_text_input";
+import { Callback } from "../types";
+import { isEmpty } from "../utilities/object";
 
 declare global {
   interface Window {
-    intlTelInputGlobals: any
+    intlTelInputGlobals: any;
   }
 }
 
 type PhoneNumberInputProps = {
-  aria?: { [key: string]: string },
-  className?: string,
-  dark?: boolean,
-  data?: { [key: string]: string },
-  disabled?: boolean,
-  error?: string,
-  hiddenInputs?: boolean,
-  htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
-  id?: string,
-  initialCountry?: string,
-  isValid?: (valid: boolean) => void,
-  label?: string,
-  name?: string,
-  onChange?: (e: React.FormEvent<HTMLInputElement>) => void,
-  onValidate?: Callback<boolean, void>,
-  onlyCountries: string[],
-  excludeCountries: string[],
-  preferredCountries?: string[],
-  required?: boolean,
-  requiredIndicator?: boolean,
-  value?: string,
-  formatAsYouType?: boolean,
-  strictMode?: boolean,
-  countrySearch?: boolean,
-}
+  aria?: { [key: string]: string };
+  className?: string;
+  dark?: boolean;
+  data?: { [key: string]: string };
+  disabled?: boolean;
+  error?: string;
+  hiddenInputs?: boolean;
+  htmlOptions?: { [key: string]: string | number | boolean | (() => void) };
+  id?: string;
+  initialCountry?: string;
+  isValid?: (valid: boolean) => void;
+  label?: string;
+  name?: string;
+  onChange?: (e: React.FormEvent<HTMLInputElement>) => void;
+  onValidate?: Callback<boolean, void>;
+  onlyCountries: string[];
+  excludeCountries: string[];
+  preferredCountries?: string[];
+  required?: boolean;
+  requiredIndicator?: boolean;
+  value?: string;
+  formatAsYouType?: boolean;
+  strictMode?: boolean;
+  countrySearch?: boolean;
+};
 
 enum ValidationError {
   TooShort = 2,
   TooLong = 3,
   MissingAreaCode = 4,
-  SomethingWentWrong = -99
+  SomethingWentWrong = -99,
 }
 
 const formatToGlobalCountryName = (countryName: string) => {
-  return countryName.split("(")[0].trim()
-}
+  return countryName.split("(")[0].trim();
+};
 
 const formatAllCountries = () => {
-  const countryData = intlTelInput.getCountryData()
+  const countryData = intlTelInput.getCountryData();
   for (let i = 0; i < countryData.length; i++) {
-    const country = countryData[i]
-    country.name = formatToGlobalCountryName(country.name)
+    const country = countryData[i];
+    country.name = formatToGlobalCountryName(country.name);
   }
-}
+};
 
-formatAllCountries()
+formatAllCountries();
 
 const containOnlyNumbers = (value: string) => {
   // eslint-disable-next-line no-useless-escape
-  return /^[()+\-\ .\d]*$/g.test(value)
-}
+  return /^[()+\-\ .\d]*$/g.test(value);
+};
 
-const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.Ref<unknown>) => {
+const PhoneNumberInput = (
+  props: PhoneNumberInputProps,
+  ref?: React.Ref<unknown>,
+) => {
   const {
     aria = {},
     className,
@@ -78,15 +92,15 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.Ref<unknown>
     disabled = false,
     hiddenInputs = false,
     htmlOptions = {},
-    id = "",
+    id = "phone_number_input",
     initialCountry = "",
     isValid = () => {
-      void 0
+      void 0;
     },
-    label = "",
-    name = "",
+    label = "Phone Number",
+    name = "phone",
     onChange = () => {
-      void 0
+      void 0;
     },
     onValidate = () => null,
     onlyCountries = [],
@@ -98,218 +112,221 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.Ref<unknown>
     formatAsYouType = false,
     strictMode = false,
     countrySearch = false,
-  } = props
+  } = props;
 
-  const ariaProps = buildAriaProps(aria)
-  const dataProps = buildDataProps(data)
-  const htmlProps = buildHtmlProps(htmlOptions)
+  const ariaProps = buildAriaProps(aria);
+  const dataProps = buildDataProps(data);
+  const htmlProps = buildHtmlProps(htmlOptions);
   const classes = classnames(
     buildCss("pb_phone_number_input"),
     globalProps(props),
-    className
-  )
+    className,
+  );
 
-  const inputRef = useRef<HTMLInputElement | null>(null)
+  const inputRef = useRef<HTMLInputElement | null>(null);
   const itiRef = useRef<any>(null);
   const wrapperRef = useRef<HTMLDivElement | null>(null);
   const hasBlurredRef = useRef<boolean>(false);
   const formSubmittedRef = useRef<boolean>(false);
-  const [inputValue, setInputValue] = useState(value)
-  const [error, setError] = useState(props.error || "")
-  const [dropDownIsOpen, setDropDownIsOpen] = useState(false)
-  const [selectedData, setSelectedData] = useState()
-  const [hasTyped, setHasTyped] = useState(false)
-  const [hasBlurred, setHasBlurred] = useState(false)
-  const [formSubmitted, setFormSubmitted] = useState(false)
-  const [hasStartedValidating, setHasStartedValidating] = useState(false)
-  
+  const [inputValue, setInputValue] = useState(value);
+  const [error, setError] = useState(props.error || "");
+  const [dropDownIsOpen, setDropDownIsOpen] = useState(false);
+  const [selectedData, setSelectedData] = useState();
+  const [hasTyped, setHasTyped] = useState(false);
+  const [hasBlurred, setHasBlurred] = useState(false);
+  const [formSubmitted, setFormSubmitted] = useState(false);
+  const [hasStartedValidating, setHasStartedValidating] = useState(false);
+
   // Keep refs in sync with state for use in event listeners
   useEffect(() => {
-    hasBlurredRef.current = hasBlurred
-  }, [hasBlurred])
-  
+    hasBlurredRef.current = hasBlurred;
+  }, [hasBlurred]);
+
   useEffect(() => {
-    formSubmittedRef.current = formSubmitted
-  }, [formSubmitted])
+    formSubmittedRef.current = formSubmitted;
+  }, [formSubmitted]);
 
   // Only sync initial error from props, not continuous updates
   // Once validation starts, internal validation takes over
   useEffect(() => {
     if (props.error && !hasStartedValidating) {
-      setError(props.error)
+      setError(props.error);
       // If there's an initial error from props, mark as submitted so it shows
       if (props.error) {
-        setFormSubmitted(true)
+        setFormSubmitted(true);
       }
     }
-  }, [props.error, hasStartedValidating])
+  }, [props.error, hasStartedValidating]);
 
   // Function to update validation state on the wrapper element
   // Only applies when input is required
   const updateValidationState = (hasError: boolean) => {
     if (wrapperRef.current && required) {
       if (hasError) {
-        wrapperRef.current.setAttribute('data-pb-phone-validation-error', 'true')
+        wrapperRef.current.setAttribute(
+          "data-pb-phone-validation-error",
+          "true",
+        );
       } else {
-        wrapperRef.current.removeAttribute('data-pb-phone-validation-error')
+        wrapperRef.current.removeAttribute("data-pb-phone-validation-error");
       }
     }
-  }
+  };
 
   // Determine which error to display
   // Show internal errors only after blur (hasBlurred) or on form submission (formSubmitted)
-  const shouldShowInternalError = (hasBlurred || formSubmitted) && error
-  const displayError = shouldShowInternalError ? error : ""
+  const shouldShowInternalError = (hasBlurred || formSubmitted) && error;
+  const displayError = shouldShowInternalError ? error : "";
 
   useEffect(() => {
-    const hasError = (error ?? '').length > 0
+    const hasError = (error ?? "").length > 0;
     if (hasError) {
-      onValidate(false)
+      onValidate(false);
     } else {
-      onValidate(true)
+      onValidate(true);
     }
 
     // Update validation state whenever error changes
-    updateValidationState(hasError)
-  }, [error, onValidate])
+    updateValidationState(hasError);
+  }, [error, onValidate]);
 
   const unformatNumber = (formattedNumber: any) => {
-    return formattedNumber.replace(/\D/g, "")
-  }
+    return formattedNumber.replace(/\D/g, "");
+  };
 
-  const showFormattedError = (reason = '') => {
-    const countryName = itiRef.current.getSelectedCountryData().name
-    const reasonText = reason.length > 0 ? ` (${reason})` : ''
-    setError(`Invalid ${countryName} phone number${reasonText}`)
-    return true
-  }
+  const showFormattedError = (reason = "") => {
+    const countryName = itiRef.current.getSelectedCountryData().name;
+    const reasonText = reason.length > 0 ? ` (${reason})` : "";
+    setError(`Invalid ${countryName} phone number${reasonText}`);
+    return true;
+  };
 
   const validateTooLongNumber = (itiInit: any) => {
-    if (!itiInit) return
+    if (!itiInit) return;
 
     if (itiInit.getValidationError() === ValidationError.TooLong) {
-      return showFormattedError('too long')
+      return showFormattedError("too long");
     } else {
-      setError('')
+      setError("");
     }
-  }
+  };
 
   const validateTooShortNumber = (itiInit: any) => {
-    if (!itiInit) return
+    if (!itiInit) return;
     // If field is empty, don't show "too short" error
-    if (!inputValue || inputValue.trim() === '') {
-      setError('')
-      return false
+    if (!inputValue || inputValue.trim() === "") {
+      setError("");
+      return false;
     }
     if (itiInit.getValidationError() === ValidationError.TooShort) {
-      return showFormattedError('too short')
+      return showFormattedError("too short");
     } else {
       if (inputValue.length === 1) {
-        return showFormattedError('too short')
+        return showFormattedError("too short");
       } else {
-        setError('')
+        setError("");
       }
     }
-  }
+  };
 
   const validateOnlyNumbers = (itiInit: any) => {
-    if (!itiInit) return
+    if (!itiInit) return;
     if (inputValue && !containOnlyNumbers(inputValue)) {
-      return showFormattedError('enter numbers only')
+      return showFormattedError("enter numbers only");
     }
-  }
+  };
 
   const validateUnhandledError = (itiInit: any) => {
-    if (!required || !itiInit) return
+    if (!required || !itiInit) return;
     if (itiInit.getValidationError() === ValidationError.SomethingWentWrong) {
       if (inputValue.length === 1) {
-        return showFormattedError('too short')
+        return showFormattedError("too short");
       } else if (inputValue.length === 0) {
-        setError('Missing phone number')
-        return true
+        setError("Missing phone number");
+        return true;
       } else {
-        return showFormattedError()
+        return showFormattedError();
       }
     }
-  }
+  };
   const validateMissingAreaCode = (itiInit: any) => {
-    if (!itiInit) return
+    if (!itiInit) return;
     if (itiInit.getValidationError() === ValidationError.MissingAreaCode) {
-      showFormattedError('missing area code')
-      return true
+      showFormattedError("missing area code");
+      return true;
     }
-  }
+  };
 
   const validateRepeatCountryCode = (itiInit: any) => {
-    if (!itiInit) return
+    if (!itiInit) return;
     const countryDialCode = itiRef.current.getSelectedCountryData().dialCode;
     if (unformatNumber(inputValue).startsWith(countryDialCode)) {
-      return showFormattedError('repeat country code')
+      return showFormattedError("repeat country code");
     }
-  }
+  };
 
   // Validation for required empty fields
   const validateRequiredField = () => {
-    if (required && (!inputValue || inputValue.trim() === '')) {
-      setError('Missing phone number')
-      return true
+    if (required && (!inputValue || inputValue.trim() === "")) {
+      setError("Missing phone number");
+      return true;
     }
-    return false
-  }
+    return false;
+  };
 
   const validateErrors = () => {
     // Signal validation has started, so prop errors won't override internal validation
     if (!hasStartedValidating) {
-      setHasStartedValidating(true)
+      setHasStartedValidating(true);
     }
 
     // If field is empty, only show required field error if applicable
-    if (!inputValue || inputValue.trim() === '') {
-      if (validateRequiredField()) return
+    if (!inputValue || inputValue.trim() === "") {
+      if (validateRequiredField()) return;
       // Clear any existing errors if field is empty and not required
       if (!required) {
-        setError('')
+        setError("");
       }
-      return
+      return;
     }
 
-     // Only validate if field has been blurred or form has been submitted
-     // Use refs here since state updates are async and we need current values
-     if (!hasBlurredRef.current && !formSubmittedRef.current) return
+    // Only validate if field has been blurred or form has been submitted
+    // Use refs here since state updates are async and we need current values
+    if (!hasBlurredRef.current && !formSubmittedRef.current) return;
 
     // Run validation checks
-    if (itiRef.current) isValid(itiRef.current.isValidNumber())
-    if (validateOnlyNumbers(itiRef.current)) return
-    if (validateTooLongNumber(itiRef.current)) return
-    if (validateTooShortNumber(itiRef.current)) return
-    if (validateUnhandledError(itiRef.current)) return
-    if (validateMissingAreaCode(itiRef.current)) return
-    if (validateRepeatCountryCode(itiRef.current)) return
-  }
+    if (itiRef.current) isValid(itiRef.current.isValidNumber());
+    if (validateOnlyNumbers(itiRef.current)) return;
+    if (validateTooLongNumber(itiRef.current)) return;
+    if (validateTooShortNumber(itiRef.current)) return;
+    if (validateUnhandledError(itiRef.current)) return;
+    if (validateMissingAreaCode(itiRef.current)) return;
+    if (validateRepeatCountryCode(itiRef.current)) return;
+  };
 
   // Add listener for form validation to track when validation should be shown
   useEffect(() => {
     const handleInvalid = (event: Event) => {
-      const target = event.target as HTMLInputElement
-      const phoneNumberContainer = target.closest('.pb_phone_number_input')
+      const target = event.target as HTMLInputElement;
+      const phoneNumberContainer = target.closest(".pb_phone_number_input");
 
       if (phoneNumberContainer && phoneNumberContainer === wrapperRef.current) {
-        const invalidInputName = target.name || target.getAttribute('name')
+        const invalidInputName = target.name || target.getAttribute("name");
         if (invalidInputName === name) {
-          formSubmittedRef.current = true
-          setFormSubmitted(true)
+          formSubmittedRef.current = true;
+          setFormSubmitted(true);
           // Trigger validation when form is submitted
-          validateErrors()
+          validateErrors();
         }
       }
-    }
+    };
 
-    document.addEventListener('invalid', handleInvalid, true)
+    document.addEventListener("invalid", handleInvalid, true);
 
     return () => {
-      document.removeEventListener('invalid', handleInvalid, true)
-    }
-  }, [name, inputValue])
+      document.removeEventListener("invalid", handleInvalid, true);
+    };
+  }, [name, inputValue]);
 
   /*
     useImperativeHandle exposes the kit's input element to a parent component via a ref.
@@ -319,147 +336,160 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.Ref<unknown>
   useImperativeHandle(ref, () => {
     return {
       clearField() {
-        setInputValue("")
-        setError("")
-        setHasTyped(false)
-        hasBlurredRef.current = false
-        setHasBlurred(false)
-        formSubmittedRef.current = false
-        setFormSubmitted(false)
-        setHasStartedValidating(false)
+        setInputValue("");
+        setError("");
+        setHasTyped(false);
+        hasBlurredRef.current = false;
+        setHasBlurred(false);
+        formSubmittedRef.current = false;
+        setFormSubmitted(false);
+        setHasStartedValidating(false);
         // Only clear validation state if field was required
         if (required) {
-          updateValidationState(false)
+          updateValidationState(false);
         }
       },
       inputNode() {
-        return inputRef.current
+        return inputRef.current;
       },
       // Expose validation method for React Hook Form
       validate() {
         // Run validation and return error message or true
-        const isEmpty = !inputValue || inputValue.trim() === ''
+        const isEmpty = !inputValue || inputValue.trim() === "";
 
         if (required && isEmpty) {
-          setError('Missing phone number')
-          formSubmittedRef.current = true
-          setFormSubmitted(true)
-          return 'Missing phone number'
+          setError("Missing phone number");
+          formSubmittedRef.current = true;
+          setFormSubmitted(true);
+          return "Missing phone number";
         }
 
         if (isEmpty) {
           // Show missing phone number error
-          const errorMessage = 'Missing phone number'
-          setError(errorMessage)
-          setHasTyped(true)
+          const errorMessage = "Missing phone number";
+          setError(errorMessage);
+          setHasTyped(true);
           // Only return error for React Hook Form if field is required
-          return required ? errorMessage : true
+          return required ? errorMessage : true;
         }
 
         if (!itiRef.current) {
-          return true
+          return true;
         }
 
         // Check for repeat country code first
-        const countryDialCode = itiRef.current.getSelectedCountryData().dialCode;
+        const countryDialCode =
+          itiRef.current.getSelectedCountryData().dialCode;
         if (unformatNumber(inputValue).startsWith(countryDialCode)) {
-          const countryName = itiRef.current.getSelectedCountryData().name
-          const errorMessage = `Invalid ${countryName} phone number (repeat country code)`
-          setError(errorMessage)
-          setFormSubmitted(true)
-          setHasTyped(true)
-          return errorMessage
+          const countryName = itiRef.current.getSelectedCountryData().name;
+          const errorMessage = `Invalid ${countryName} phone number (repeat country code)`;
+          setError(errorMessage);
+          setFormSubmitted(true);
+          setHasTyped(true);
+          return errorMessage;
         }
 
         // Check if it only contains valid characters
         if (!containOnlyNumbers(inputValue)) {
-          const countryName = itiRef.current.getSelectedCountryData().name
-          const errorMessage = `Invalid ${countryName} phone number (enter numbers only)`
-          setError(errorMessage)
-          setFormSubmitted(true)
-          setHasTyped(true)
-          return errorMessage
+          const countryName = itiRef.current.getSelectedCountryData().name;
+          const errorMessage = `Invalid ${countryName} phone number (enter numbers only)`;
+          setError(errorMessage);
+          setFormSubmitted(true);
+          setHasTyped(true);
+          return errorMessage;
         }
 
         // Check if valid number
         if (!itiRef.current.isValidNumber()) {
-          const countryName = itiRef.current.getSelectedCountryData().name
-          const validationError = itiRef.current.getValidationError()
-          let errorMessage = ''
+          const countryName = itiRef.current.getSelectedCountryData().name;
+          const validationError = itiRef.current.getValidationError();
+          let errorMessage = "";
 
           if (validationError === ValidationError.TooShort) {
-            errorMessage = `Invalid ${countryName} phone number (too short)`
+            errorMessage = `Invalid ${countryName} phone number (too short)`;
           } else if (validationError === ValidationError.TooLong) {
-            errorMessage = `Invalid ${countryName} phone number (too long)`
+            errorMessage = `Invalid ${countryName} phone number (too long)`;
           } else if (validationError === ValidationError.MissingAreaCode) {
-            errorMessage = `Invalid ${countryName} phone number (missing area code)`
+            errorMessage = `Invalid ${countryName} phone number (missing area code)`;
           } else {
-            errorMessage = `Invalid ${countryName} phone number`
+            errorMessage = `Invalid ${countryName} phone number`;
           }
 
           // Set the error state so the validation attribute gets added
-          setError(errorMessage)
-          formSubmittedRef.current = true
-          setFormSubmitted(true)
-          setHasTyped(true)
+          setError(errorMessage);
+          formSubmittedRef.current = true;
+          setFormSubmitted(true);
+          setHasTyped(true);
 
-          return errorMessage
+          return errorMessage;
         }
 
         // Clear error if valid
-        setError('')
-        return true
-      }
-    }
-  })
+        setError("");
+        return true;
+      },
+    };
+  });
 
   const getCurrentSelectedData = (itiInit: any, inputValue: string) => {
-    return { ...itiInit.getSelectedCountryData(), number: inputValue }
-  }
+    return { ...itiInit.getSelectedCountryData(), number: inputValue };
+  };
 
   const handleOnChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
-    if (!hasTyped) setHasTyped(true)
-    setInputValue(evt.target.value)
+    if (!hasTyped) setHasTyped(true);
+    setInputValue(evt.target.value);
 
     // Reset form submitted state when user types
     if (formSubmitted) {
-      formSubmittedRef.current = false
-      setFormSubmitted(false)
+      formSubmittedRef.current = false;
+      setFormSubmitted(false);
     }
 
-    let phoneNumberData
+    let phoneNumberData;
 
     // Handle formatAsYouType with input event
     if (formatAsYouType) {
-      const formattedPhoneNumberData = getCurrentSelectedData(itiRef.current, evt.target.value)
-      phoneNumberData = {...formattedPhoneNumberData, number: unformatNumber(formattedPhoneNumberData.number)}
+      const formattedPhoneNumberData = getCurrentSelectedData(
+        itiRef.current,
+        evt.target.value,
+      );
+      phoneNumberData = {
+        ...formattedPhoneNumberData,
+        number: unformatNumber(formattedPhoneNumberData.number),
+      };
     } else {
-      phoneNumberData = getCurrentSelectedData(itiRef.current, evt.target.value)
+      phoneNumberData = getCurrentSelectedData(
+        itiRef.current,
+        evt.target.value,
+      );
     }
 
-    setSelectedData(phoneNumberData)
-    onChange(phoneNumberData)
-    
+    setSelectedData(phoneNumberData);
+    onChange(phoneNumberData);
+
     // Don't call isValid callback on change - only on blur or form submission
     // This prevents triggering validation while typing
     // Use refs to get current values in case this is called from event listener
     if (hasBlurredRef.current || formSubmittedRef.current) {
-      isValid(itiRef.current.isValidNumber())
+      isValid(itiRef.current.isValidNumber());
     }
 
     // Don't validate on change - only validate on blur or form submission
-  }
+  };
 
   // Separating Concerns as React Docs Recommend
   // This also Fixes things for our react_component rendering on the Rails Side
-  useEffect(formatAllCountries, [])
+  useEffect(formatAllCountries, []);
   // If an initial country is not specified, the "globe" icon will show
   // Always set a country
   const fallbackCountry =
-    preferredCountries.length > 0 ? preferredCountries[0] :
-      onlyCountries.length > 0 ? onlyCountries.sort()[0] :
-      excludeCountries.length > 0 ? excludeCountries.sort()[0] :
-        "af";
+    preferredCountries.length > 0
+      ? preferredCountries[0]
+      : onlyCountries.length > 0
+        ? onlyCountries.sort()[0]
+        : excludeCountries.length > 0
+          ? excludeCountries.sort()[0]
+          : "af";
 
   useEffect(() => {
     const telInputInit = intlTelInput(inputRef.current, {
@@ -474,100 +504,115 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.Ref<unknown>
       fixDropdownWidth: false,
       formatAsYouType: formatAsYouType,
       strictMode: strictMode,
-      hiddenInput: hiddenInputs ? () => ({
-        phone: `${name}_full`,
-        country: `${name}_country_code`,
-      }) : null,
-    })
+      hiddenInput: hiddenInputs
+        ? () => ({
+            phone: `${name}_full`,
+            country: `${name}_country_code`,
+          })
+        : null,
+    });
 
     itiRef.current = telInputInit;
 
     if (inputRef.current) {
       inputRef.current.addEventListener("countrychange", (evt: Event) => {
-        const phoneNumberData = getCurrentSelectedData(telInputInit, (evt.target as HTMLInputElement).value)
-        setSelectedData(phoneNumberData)
-        onChange(phoneNumberData)
-        validateErrors()
-      })
+        const phoneNumberData = getCurrentSelectedData(
+          telInputInit,
+          (evt.target as HTMLInputElement).value,
+        );
+        setSelectedData(phoneNumberData);
+        onChange(phoneNumberData);
+        validateErrors();
+      });
 
-      inputRef.current.addEventListener("open:countrydropdown", () => setDropDownIsOpen(true))
-      inputRef.current.addEventListener("close:countrydropdown", () => setDropDownIsOpen(false))
+      inputRef.current.addEventListener("open:countrydropdown", () =>
+        setDropDownIsOpen(true),
+      );
+      inputRef.current.addEventListener("close:countrydropdown", () =>
+        setDropDownIsOpen(false),
+      );
 
-    // Handle formatAsYouType with input event
-    if (formatAsYouType) {
-      inputRef.current.addEventListener("input", (evt: Event) => {
-          const target = evt.target as HTMLInputElement
-          const formattedValue = target.value
+      // Handle formatAsYouType with input event
+      if (formatAsYouType) {
+        inputRef.current.addEventListener("input", (evt: Event) => {
+          const target = evt.target as HTMLInputElement;
+          const formattedValue = target.value;
 
           // Update internal state
-          setInputValue(formattedValue)
-          setHasTyped(true)
+          setInputValue(formattedValue);
+          setHasTyped(true);
 
           // Get phone number data with unformatted number
-          const formattedPhoneNumberData = getCurrentSelectedData(telInputInit, formattedValue)
-          const phoneNumberData = {...formattedPhoneNumberData, number: unformatNumber(formattedPhoneNumberData.number)}
+          const formattedPhoneNumberData = getCurrentSelectedData(
+            telInputInit,
+            formattedValue,
+          );
+          const phoneNumberData = {
+            ...formattedPhoneNumberData,
+            number: unformatNumber(formattedPhoneNumberData.number),
+          };
 
-          setSelectedData(phoneNumberData)
-          onChange(phoneNumberData)
-          
+          setSelectedData(phoneNumberData);
+          onChange(phoneNumberData);
+
           // Don't call isValid callback on change - only on blur or form submission
           // Use refs to check current blur state in the event listener (closure issue)
           if (hasBlurredRef.current || formSubmittedRef.current) {
-            isValid(telInputInit.isValidNumber())
+            isValid(telInputInit.isValidNumber());
           }
-        })
+        });
       }
     }
-  }, [])
-  let textInputProps: {[key: string]: any} = {
-    className: dropDownIsOpen ? 'dropdown_open' : '',
+  }, []);
+  let textInputProps: { [key: string]: any } = {
+    className: dropDownIsOpen ? "dropdown_open" : "",
     dark,
     "data-phone-number": JSON.stringify(selectedData),
     disabled,
     error: displayError || props.error || "",
-    type: 'tel',
+    type: "tel",
     id,
     label,
     name,
     onBlur: () => {
-      hasBlurredRef.current = true
-      setHasBlurred(true)
-      validateErrors()
+      hasBlurredRef.current = true;
+      setHasBlurred(true);
+      validateErrors();
     },
     onChange: formatAsYouType ? undefined : handleOnChange,
     requiredIndicator,
-    value: inputValue
-  }
+    value: inputValue,
+  };
 
   let wrapperProps: Record<string, unknown> = {
     className: classes,
-    ref: wrapperRef
-  }
+    ref: wrapperRef,
+  };
 
-  if (!isEmpty(aria)) textInputProps = {...textInputProps, ...ariaProps}
-  if (!isEmpty(data)) wrapperProps = {...wrapperProps, ...dataProps}
-  if (required) textInputProps.required = true
+  if (!isEmpty(aria)) textInputProps = { ...textInputProps, ...ariaProps };
+  if (!isEmpty(data)) wrapperProps = { ...wrapperProps, ...dataProps };
+  if (required) textInputProps.required = true;
 
   return (
-    <div
-        {...wrapperProps}
+    <div {...wrapperProps}
         {...htmlProps}
     >
       <TextInput
-          ref={inputNode => {
-            if (ref) {
-              if (typeof ref === 'function') {
-                ref(inputNode)
-              } else {
-                (ref as React.MutableRefObject<HTMLInputElement | null>).current = inputNode
-              }
+          ref={(inputNode) => {
+          if (ref) {
+            if (typeof ref === "function") {
+              ref(inputNode);
+            } else {
+              (ref as React.MutableRefObject<HTMLInputElement | null>).current =
+                inputNode;
             }
-            inputRef.current = inputNode
-          }}
+          }
+          inputRef.current = inputNode;
+        }}
           {...textInputProps}
       />
     </div>
-  )
-}
+  );
+};
 
-export default forwardRef(PhoneNumberInput)
+export default forwardRef(PhoneNumberInput);

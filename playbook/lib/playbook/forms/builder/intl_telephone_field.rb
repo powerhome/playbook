@@ -5,6 +5,7 @@ module Playbook
     class Builder
       def intl_telephone(name, props: {})
         props[:name] = name
+        props[:id] ||= name.to_s
 
         if props[:label] == true
           props[:label] = if @object && @object.class.respond_to?(:human_attribute_name)
