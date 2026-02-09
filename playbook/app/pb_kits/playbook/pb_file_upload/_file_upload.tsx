@@ -49,10 +49,10 @@ const FileUpload = (props: FileUploadProps): React.ReactElement => {
   }, [onFilesAccepted])
 
   type DropZoneProps = {
-    getRootProps: () => DropzoneRootProps & any;
-    getInputProps: () => DropzoneInputProps & any;
+    getRootProps: () => DropzoneRootProps & any
+    getInputProps: () => DropzoneInputProps & any
     isDragActive: boolean;
-    fileRejections: readonly FileRejection[];
+    fileRejections: readonly FileRejection[]
   }
 
   const { getRootProps, getInputProps, isDragActive, fileRejections }: DropZoneProps = useDropzone({
@@ -63,7 +63,7 @@ const FileUpload = (props: FileUploadProps): React.ReactElement => {
 
   const prevRejected = useRef<readonly FileRejection[] | null>(null);
 
-  let maxFileSizeText = '';
+  let maxFileSizeText = ''
   if (maxSize !== undefined) {
     maxFileSizeText = `Max file size is ${getFormattedFileSize(maxSize)}.`
   }
@@ -72,10 +72,9 @@ const FileUpload = (props: FileUploadProps): React.ReactElement => {
     if (fileRejections === prevRejected.current) return
     const isFileTooLarge = maxSize && fileRejections.length > 0 && fileRejections[0].file.size > maxSize;
     if (isFileTooLarge) {
-      onFilesRejected(`File size is too large! ${maxFileSizeText}`,
-        fileRejections)
+      onFilesRejected(`File size is too large! ${maxFileSizeText}`, fileRejections)
     }
-    prevRejected.current = fileRejections;
+    prevRejected.current = fileRejections
   }, [maxFileSizeText, maxSize, onFilesRejected, fileRejections])
 
   const acceptedFileTypes = () => {
@@ -85,7 +84,7 @@ const FileUpload = (props: FileUploadProps): React.ReactElement => {
 
     return Object.keys(accept).map((fileType) => {
       if (fileType.startsWith('image/')) {
-        return fileType.replace('image/', ' ');
+        return fileType.replace('image/', ' ')
       } else {
         return fileType
       }
@@ -103,27 +102,26 @@ const FileUpload = (props: FileUploadProps): React.ReactElement => {
 
   return (
     <div
-        className={classnames(buildCss('pb_file_upload_kit'),{ 
-      'error': error }, globalProps(props), className)}
+        className={classnames(buildCss('pb_file_upload_kit'), { 'error': error }, globalProps(props), className)}
         {...dataProps}
         {...htmlProps}
         {...getRootProps()}
     >
       <Card dark={dark}>
         <input {...getInputProps()} />
-        <Body 
+        <Body
             color="light"
             dark={dark}
         >
           {isDragActive ?
             <p>{'Drop the files here ...'}</p>
-          :
+            :
             <p>{getDescription()}</p>
           }
         </Body>
       </Card>
       {error && (
-        <Body 
+        <Body
             dark={dark}
             marginTop="xxs"
             status="negative"
