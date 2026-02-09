@@ -47,7 +47,10 @@ const StarRatingInteractive = (props: StarRatingInteractiveProps) => {
     }
 
     return (
-        <div>
+        <Flex 
+            className="star_rating_wrapper" 
+            orientation="column"
+        >
             {label &&
                 <Caption
                     className="pb_star_rating_kit_label"
@@ -98,7 +101,7 @@ const StarRatingInteractive = (props: StarRatingInteractiveProps) => {
                     );
                 })}
             </Flex>
-        </div>
+        </Flex>
     )
 }
 
