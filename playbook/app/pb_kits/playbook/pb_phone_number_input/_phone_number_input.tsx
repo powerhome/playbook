@@ -78,13 +78,13 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.Ref<unknown>
     disabled = false,
     hiddenInputs = false,
     htmlOptions = {},
-    id = "phone_number_input",
+    id = "",
     initialCountry = "",
     isValid = () => {
       void 0
     },
-    label = "Phone Number",
-    name = "phone",
+    label = "",
+    name = "",
     onChange = () => {
       void 0
     },
