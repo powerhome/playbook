@@ -37,7 +37,7 @@ const MultipleUsers = (props: MultipleUsersProps): React.ReactElement => {
   } = props;
 
   const displayCount =
-    users.length > maxDisplayedUsers ? maxDisplayedUsers - 1 : users.length;
+    users.length > maxDisplayedUsers ? Math.max(1, maxDisplayedUsers - 1) : users.length;
   const usersToDisplay = users.slice(0, displayCount);
 
   const reverseClass = reverse === true ? 'reverse' : '';
