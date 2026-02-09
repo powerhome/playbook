@@ -9,6 +9,7 @@ const FormGroupButton = (props) => (
     <div>
       <FormGroup>
         <TextInput
+            id="search-with-label"
             label="With Label"
             placeholder="Search"
             {...props}
