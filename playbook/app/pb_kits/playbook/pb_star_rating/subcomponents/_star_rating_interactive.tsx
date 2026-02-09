@@ -55,7 +55,7 @@ const StarRatingInteractive = (props: StarRatingInteractiveProps) => {
                 <Caption
                     className="pb_star_rating_kit_label"
                     marginBottom="xs"
-                    text={label}
+                    text={label} 
                 />
             }
             <Flex className="star_flex_area">
