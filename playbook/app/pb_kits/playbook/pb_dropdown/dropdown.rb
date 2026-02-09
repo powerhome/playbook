@@ -10,6 +10,7 @@ module Playbook
       prop :label, type: Playbook::Props::String
       prop :name, type: Playbook::Props::String
       prop :error, type: Playbook::Props::String
+      prop :id, type: Playbook::Props::String
       prop :required, type: Playbook::Props::Boolean,
                       default: false
       prop :default_value
@@ -36,6 +37,8 @@ module Playbook
                              default: ""
       prop :controls_start_id, type: Playbook::Props::String,
                                default: ""
+      prop :clearable, type: Playbook::Props::Boolean,
+                       default: true
       prop :start_date_id, type: Playbook::Props::String,
                            default: "start_date_id"
       prop :start_date_name, type: Playbook::Props::String,
@@ -44,12 +47,16 @@ module Playbook
                          default: "end_date_id"
       prop :end_date_name, type: Playbook::Props::String,
                            default: "end_date_name"
+      prop :placeholder, type: Playbook::Props::String
+      prop :constrain_height, type: Playbook::Props::Boolean,
+                              default: false
 
       def data
         Hash(prop(:data)).merge(
           pb_dropdown: true,
           pb_dropdown_multi_select: multi_select,
           pb_dropdown_variant: variant,
+          pb_dropdown_clearable: clearable,
           form_pill_props: form_pill_props.to_json,
           start_date_id: variant == "quickpick" ? start_date_id : nil,
           end_date_id: variant == "quickpick" ? end_date_id : nil,
@@ -60,6 +67,14 @@ module Playbook
 
       def classname
         generate_classname("pb_dropdown", variant, separators_class)
+      end
+
+      def select_id
+        id.presence || (label.present? ? label.downcase.gsub(/\s+/, "_").gsub(/[^a-z0-9_]/, "") : nil)
+      end
+
+      def error_id
+        error.present? ? "#{select_id || 'dropdown_trigger'}-error" : nil
       end
 
     private

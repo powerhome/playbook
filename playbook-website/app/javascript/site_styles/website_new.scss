@@ -9,4 +9,30 @@
     background: $bg_dark;
     color: $white;
   }
+  
+  // Override the min-height since header is now sticky and takes space in flow
+  &.pb--page--content {
+    min-height: auto;
+  }
+  
+  // Adjust heights for sticky header (header takes ~89px)
+  .pb--page--sideNav {
+    height: calc(100vh - 89px);
+  }
+  
+  .pb--page--content--main {
+    height: calc(100vh - 89px);
+  }
+}
+
+// Fix header to stay at top of viewport
+.pb--page--header--new {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: $white;
+  
+  &.dark {
+    background: tint(#0a0527, 10);
+  }
 }

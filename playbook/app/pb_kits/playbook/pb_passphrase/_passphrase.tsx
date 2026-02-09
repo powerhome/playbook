@@ -7,6 +7,7 @@ import { globalProps } from "../utilities/globalProps"
 import Body from '../pb_body/_body'
 import Caption from '../pb_caption/_caption'
 import CircleIconButton from '../pb_circle_icon_button/_circle_icon_button'
+import colors from '../tokens/exports/_colors.module.scss'
 import Flex from '../pb_flex/_flex'
 import Icon from '../pb_icon/_icon'
 import PbReactPopover from '../pb_popover/_popover'
@@ -25,6 +26,7 @@ type PassphraseProps = {
   inputProps?: GenericObject,
   label?: string,
   onChange: (inputValue: string) => void,
+  requiredIndicator?: boolean,
   showTipsBelow?: "always" | "xs" | "sm" | "md" | "lg" | "xl",
   tips?: Array<string>,
   uncontrolled?: boolean,
@@ -43,6 +45,7 @@ const Passphrase = (props: PassphraseProps): React.ReactElement => {
     inputProps = {},
     label = confirmation ? "Confirm Passphrase" : "Passphrase",
     onChange = () => undefined,
+    requiredIndicator = false,
     showTipsBelow = "always",
     tips = [],
     uncontrolled = false,
@@ -99,6 +102,7 @@ const Passphrase = (props: PassphraseProps): React.ReactElement => {
 
   const shieldIcon = getAllIcons()["shieldCheck"]
   const eyeIcon = getAllIcons()["eye"]
+  const hasLabel = label && label !== ""
 
   return (
     <div
@@ -109,11 +113,22 @@ const Passphrase = (props: PassphraseProps): React.ReactElement => {
         id={id}
     >
       <label>
-        <Flex align="baseline">
-          <Caption
-              className="passphrase-label"
-              text={label}
-          />
+        <Flex
+            align="baseline"
+            {...(hasLabel ? { marginBottom: "xs" } : {})}
+        >
+          {hasLabel && (requiredIndicator ? (
+            <Caption
+                className="passphrase-label"
+            >
+              {label} <span style={{ color: `${colors.error}` }}>*</span>
+            </Caption>
+          ) : (
+            <Caption
+                className="passphrase-label"
+                text={label}
+            />
+          ))}
           {tips.length > 0 && !confirmation &&
             <PbReactPopover
                 className="passphrase-tips"
@@ -163,22 +178,40 @@ const Passphrase = (props: PassphraseProps): React.ReactElement => {
               {...inputProps}
           />
           <span
+              aria-label={
+                showPassphrase
+                  ? "Passphrase currently visible. Click icon to hide password"
+                  : "Passphrase currently hidden. Click icon to reveal password"
+              }
+              aria-pressed={showPassphrase}
               className="show-passphrase-icon"
               onClick={toggleShowPassphrase}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                  e.preventDefault()
+                  toggleShowPassphrase(e as any)
+                }
+              }}
+              role="button"
+              tabIndex={0}
           >
             <Body
                 className={showPassphrase ? "hide-icon" : ""}
                 color="light"
                 dark={dark}
             >
-              <Icon icon="eye-slash" />
+              <Icon 
+                  aria={{ label: "eye icon" }} 
+                  icon="eye-slash" 
+              />
             </Body>
             <Body
                 className={showPassphrase ? "" : "hide-icon"}
                 color="light"
                 dark={dark}
             >
-            <Icon  
+            <Icon 
+                aria={{ label: "eye icon" }} 
                 className="svg-inline--fa"
                 customIcon={eyeIcon.icon as unknown as { [key: string]: SVGElement }}
             />

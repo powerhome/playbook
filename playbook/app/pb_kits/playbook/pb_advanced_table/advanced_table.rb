@@ -33,6 +33,10 @@ module Playbook
                              default: false
       prop :row_styling, type: Playbook::Props::Array,
                          default: []
+      prop :inline_row_loading, type: Playbook::Props::Boolean,
+                                default: false
+      prop :persist_toggle_expansion_button, type: Playbook::Props::Boolean,
+                                             default: false
 
       def classname
         additional_classes = [

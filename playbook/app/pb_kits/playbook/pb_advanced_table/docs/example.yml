@@ -29,6 +29,7 @@ examples:
   - advanced_table_background_control_rails: Column Styling Background Color
   - advanced_table_background_colors_rails: Column Styling Individual Cell Background Color
   - advanced_table_column_border_color_rails: Column Group Border Color
+  - advanced_table_inline_row_loading_rails: Inline Row Loading
 
 
   react:
@@ -77,6 +78,7 @@ examples:
   - advanced_table_column_styling: Column Styling
   - advanced_table_column_styling_column_headers: Column Styling with Multiple Headers
   - advanced_table_column_styling_background: Column Styling Background Color
+  - advanced_table_column_styling_background_custom: Column Styling Background Color (Custom)
   - advanced_table_column_styling_background_multi: Column Styling Background Color with Multiple Headers
   - advanced_table_padding_control: Padding Control using Column Styling
   - advanced_table_column_border_color: Column Group Border Color

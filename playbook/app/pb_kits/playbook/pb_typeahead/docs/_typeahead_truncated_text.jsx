@@ -17,7 +17,7 @@ const TypeaheadTruncatedText = (props) => {
           isMulti
           label="Truncation Within Typeahead"
           options={names}
-          truncate={1}
+          truncate={"1"}
           {...props}
       />
     </>

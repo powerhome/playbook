@@ -13,6 +13,10 @@ RSpec.describe Playbook::PbMultipleUsers::MultipleUsers do
     is_expected.to define_prop(:users)
       .of_type(Playbook::Props::HashArray)
   }
+  it {
+    is_expected.to define_boolean_prop(:with_tooltip)
+      .with_default(false)
+  }
 
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do

@@ -13,6 +13,7 @@ import Body from '../pb_body/_body'
 import Caption from '../pb_caption/_caption'
 import Flex from '../pb_flex/_flex'
 import FlexItem from '../pb_flex/_flex_item'
+import colors from '../tokens/exports/_colors.module.scss'
 
 import { stripEmojisForPaste, applyEmojiMask } from '../utilities/emojiMask'
 
@@ -36,6 +37,7 @@ type TextareaProps = {
   value?: string,
   name?: string,
   required?: boolean,
+  requiredIndicator?: boolean,
   rows?: number,
   resize: "none" | "both" | "horizontal" | "vertical" | "auto",
   onChange?: InputCallback<HTMLTextAreaElement>,
@@ -50,6 +52,7 @@ const Textarea = ({
   disabled,
   emojiMask = false,
   htmlOptions = {},
+  id,
   inline = false,
   resize = 'none',
   error,
@@ -60,6 +63,7 @@ const Textarea = ({
   onChange = () => {},
   placeholder,
   required,
+  requiredIndicator = false,
   rows = 4,
   value,
   ...props
@@ -84,7 +88,7 @@ const Textarea = ({
     if (emojiMask) {
       const pastedText = e.clipboardData.getData('text')
       const filteredText = stripEmojisForPaste(pastedText)
-      
+
       if (pastedText !== filteredText) {
         e.preventDefault()
         const textarea = e.currentTarget
@@ -93,10 +97,10 @@ const Textarea = ({
         const currentValue = textarea.value
         const newValue = currentValue.slice(0, start) + filteredText + currentValue.slice(end)
         const newCursorPosition = start + filteredText.length
-        
+
         textarea.value = newValue
         textarea.selectionStart = textarea.selectionEnd = newCursorPosition
-        
+
         onChange({ ...e, target: textarea, currentTarget: textarea } as unknown as ChangeEvent<HTMLTextAreaElement>)
       }
     }
@@ -116,6 +120,7 @@ const Textarea = ({
   const characterCounter = () => {
     return maxCharacters && characterCount ? `${checkIfZero(characterCount)} / ${maxCharacters}` : `${checkIfZero(characterCount)}`
   }
+  const errorId = error ? `${id}-error` : undefined
 
   return (
     <div
@@ -124,10 +129,27 @@ const Textarea = ({
         {...htmlProps}
         className={classes}
     >
-      <Caption text={label} />
+    {label && (
+      <label htmlFor={id}>
+      {
+        requiredIndicator ? (
+          <Caption className="pb_text_input_kit_label">
+            {label} <span style={{ color: `${colors.error}` }}>*</span>
+          </Caption>
+        ) : (
+          <Caption  className="pb_text_input_kit_label"
+              text={label}
+          />
+        )
+      }
+      </label>
+    )}
       {children || (
         <textarea
+            aria-describedby={errorId}
+            aria-invalid={!!error}
             disabled={disabled}
+            id={id}
             name={name}
             onChange={emojiMask ? handleChange : onChange}
             onPaste={emojiMask ? handlePaste : undefined}
@@ -143,19 +165,22 @@ const Textarea = ({
       {error ? (
         <>
           {characterCount ? (
-            <Flex 
-                spacing="between" 
+            <Flex
+                spacing="between"
                 vertical="center"
             >
               <FlexItem>
-                <Body 
+                <Body
+                    aria={{ atomic: "true", live: "polite" }}
+                    htmlOptions={{ role: "alert" }}
+                    id={errorId}
                     margin="none"
                     status="negative"
-                    text={error} 
+                    text={error}
                 />
               </FlexItem>
               <FlexItem>
-                <Caption 
+                <Caption
                     margin="none"
                     size="xs"
                     text={characterCounter()}
@@ -163,7 +188,10 @@ const Textarea = ({
               </FlexItem>
             </Flex>
           ) : (
-            <Body 
+            <Body
+                aria={{ atomic: "true", live: "polite" }}
+                htmlOptions={{ role: "alert" }}
+                id={errorId}
                 status="negative"
                 text={error}
             />
@@ -171,7 +199,7 @@ const Textarea = ({
         </>
       ) : (
          noCount && (
-          <Caption 
+          <Caption
               margin="none"
               size="xs"
               text={characterCounter()}

@@ -18,11 +18,82 @@ class PagesController < ApplicationController
   def application_beta
     @kits = MENU["kits"]
     @dark = cookies[:dark_mode] == "true"
-    @type = params[:type] || "react"
+    @type = params[:platform] || params[:type] || "react"
     @kit = params[:name]
     @params = params
-    @examples = pb_doc_kit_examples(@kit, @type)
+
+    # Special handling for advanced_table sections
+    # Detect if this is an advanced_table section route by checking the request path
+    is_advanced_table_section = request.path.include?("/kits/advanced_table/")
+
+    # For advanced_table routes, params[:name] is the section name
+    # For query param routes, params[:section] is the section name
+    section_param = is_advanced_table_section ? params[:name] : params[:section]
+
+    if section_param.present? && (is_advanced_table_section || params[:section].present?)
+      # Find the section in all_kits
+      # For advanced_table sections, we need to set @kit to "advanced_table"
+      parent_kit = is_advanced_table_section ? "advanced_table" : @kit
+
+      matching_kit = all_kits.find do |kit|
+        kit[:parent] == parent_kit && kit[:name] == section_param
+      end
+
+      if matching_kit
+        @kit_parent = matching_kit[:parent]
+        @kit_section = matching_kit[:kit_section]
+
+        # For advanced_table sections, we need to override @kit to be the parent
+        # so that file reading works correctly
+        @kit = @kit_parent if is_advanced_table_section
+
+        # For advanced_table, get examples from parent kit but filter by kit_section
+        if @kit_parent == "advanced_table" && @kit_section.present?
+          all_examples = pb_doc_kit_examples(@kit_parent, @type)
+          # Filter examples to only include those in the kit_section array
+          @examples = all_examples.select do |example|
+            @kit_section.include?(example.values.first)
+          end
+
+          # Load mock data for advanced_table (beta only: use separate variables)
+          @beta_table_data = advanced_table_mock_data_beta
+          @beta_table_data_with_id = advanced_table_mock_data_with_id_beta
+          @beta_table_data_no_subrows = advanced_table_mock_data_no_subrows_beta
+          @beta_table_data_pagination = advanced_table_pagination_mock_data
+          @beta_table_data_infinite_scroll = advanced_table_infinite_scroll_mock_data
+        else
+          @examples = pb_doc_kit_examples(@kit, @type)
+        end
+      else
+        @examples = pb_doc_kit_examples(@kit, @type)
+      end
+    else
+      @examples = pb_doc_kit_examples(@kit, @type)
+    end
+
     @css = view_context.vite_asset_path("site_styles/main.scss")
+
+    # Read kit description from _description.md file
+    kit_description = read_kit_file("_description.md")
+
+    # Read kit sections from _sections.yml file if it exists
+    kit_sections = read_kit_sections
+
+    # Get available props for React kits
+    available_props = nil
+    if @type == "react"
+      begin
+        kit_example = Playbook::PbDocs::KitExample.new(
+          kit: @kit,
+          example_title: "Default",
+          example_key: @kit,
+          type: "react"
+        )
+        available_props = kit_example.available_props
+      rescue => e
+        Rails.logger.error("Error fetching available props: #{e.message}")
+      end
+    end
 
     # first example from each kit
     examples = @examples.map do |example|
@@ -37,6 +108,41 @@ class PagesController < ApplicationController
       }
     end
 
+    # Read markdown content for beta pages
+    changelog_content = Playbook::Engine.root.join("CHANGELOG.md").read
+    changelog_releases = Rails.cache.fetch("changelog_releases") do
+      paginate_changelog(changelog_content)
+    end
+
+    swift_changelog_content = Playbook::Engine.root.join("SWIFT_CHANGELOG.md").read
+    swift_changelog_releases = Rails.cache.fetch("swift_changelog_releases") do
+      paginate_changelog(swift_changelog_content)
+    end
+
+    figma_changelog_content = Playbook::Engine.root.join("FIGMA_CHANGELOG.md").read
+    figma_changelog_releases = Rails.cache.fetch("figma_changelog_releases") do
+      paginate_changelog(figma_changelog_content)
+    end
+
+    getting_started_content = File.read(Rails.root.join("app/views/guides/getting_started.html.md"))
+    design_guidelines_content = File.read(Rails.root.join("app/views/guides/design_guidelines.md"))
+
+    # Read individual guide page if requested
+    guide_page_content = nil
+    if params[:page].present?
+      parent = if request.path.include?("getting_started")
+                 "getting_started"
+               elsif request.path.include?("design_guidelines")
+                 "design_guidelines"
+               end
+
+      if parent
+        search_path = File.join(Rails.root, "/app/views/guides/#{parent}")
+        file_path = Dir.glob("#{search_path}/#{params[:page]}*.md").first
+        guide_page_content = File.read(file_path) if file_path && File.exist?(file_path)
+      end
+    end
+
     respond_to do |format|
       format.html { render layout: "application_beta", inline: "" }
       format.json do
@@ -46,6 +152,9 @@ class PagesController < ApplicationController
           type: @type,
           examples: examples,
           kit: @kit,
+          kit_description: kit_description,
+          kit_sections: kit_sections,
+          available_props: available_props,
           params: @params,
           category: @category,
           css: @css,
@@ -58,6 +167,20 @@ class PagesController < ApplicationController
           whats_new: DOCS[:whats_new],
           building_blocks: BUILDING_BLOCKS,
           global_props_and_tokens: GLOBAL_PROPS_AND_TOKENS,
+          changelog_content: changelog_content,
+          changelog_releases: changelog_releases,
+          swift_changelog_content: swift_changelog_content,
+          swift_changelog_releases: swift_changelog_releases,
+          figma_changelog_content: figma_changelog_content,
+          figma_changelog_releases: figma_changelog_releases,
+          getting_started_content: getting_started_content,
+          design_guidelines_content: design_guidelines_content,
+          guide_page_content: guide_page_content,
+          table_data: @beta_table_data,
+          table_data_with_id: @beta_table_data_with_id,
+          table_data_no_subrows: @beta_table_data_no_subrows,
+          table_data_pagination: @beta_table_data_pagination,
+          table_data_infinite_scroll: @beta_table_data_infinite_scroll,
 
         }
       end
@@ -190,6 +313,8 @@ class PagesController < ApplicationController
     @table_data = advanced_table_mock_data
     @table_data_with_id = advanced_table_mock_data_with_id
     @table_data_no_subrows = advanced_table_mock_data_no_subrows
+    @table_data_inline_loading = advanced_table_mock_data_inline_loading
+    @table_data_inline_loading_empty_children = advanced_table_mock_data_inline_loading_empty_children
   end
 
   def kit_category_show_rails
@@ -199,6 +324,8 @@ class PagesController < ApplicationController
     @table_data = advanced_table_mock_data
     @table_data_with_id = advanced_table_mock_data_with_id
     @table_data_no_subrows = advanced_table_mock_data_no_subrows
+    @table_data_inline_loading = advanced_table_mock_data_inline_loading
+    @table_data_inline_loading_empty_children = advanced_table_mock_data_inline_loading_empty_children
     render template: "pages/kit_category_show"
   end
 
@@ -212,6 +339,10 @@ class PagesController < ApplicationController
     @table_data = advanced_table_mock_data if @kit == "advanced_table" || @kit_parent == "advanced_table"
     @table_data_with_id = advanced_table_mock_data_with_id if @kit == "advanced_table" || @kit_parent == "advanced_table"
     @table_data_no_subrows = advanced_table_mock_data_no_subrows if @kit == "advanced_table" || @kit_parent == "advanced_table"
+    @table_data_pagination = advanced_table_pagination_mock_data if @kit == "advanced_table" || @kit_parent == "advanced_table"
+    @table_data_infinite_scroll = advanced_table_infinite_scroll_mock_data if @kit == "advanced_table" || @kit_parent == "advanced_table"
+    @table_data_inline_loading = advanced_table_mock_data_inline_loading if @kit == "advanced_table" || @kit_parent == "advanced_table"
+    @table_data_inline_loading_empty_children = advanced_table_mock_data_inline_loading_empty_children if @kit == "advanced_table" || @kit_parent == "advanced_table"
     render "pages/kit_show"
   end
 
@@ -512,8 +643,26 @@ private
   end
 
   def read_kit_file(*args)
-    path = ::Playbook.kit_path(@kit, "docs", *args)
+    # For advanced_table sections, read from the parent kit directory
+    kit_name = @kit_parent == "advanced_table" ? @kit_parent : @kit
+    path = ::Playbook.kit_path(kit_name, "docs", *args)
     path.exist? ? path.read : ""
+  end
+
+  def read_kit_sections
+    # Read _sections.yml file if it exists
+    kit_name = @kit_parent == "advanced_table" ? @kit_parent : @kit
+    sections_path = ::Playbook.kit_path(kit_name, "docs", "_sections.yml")
+
+    return nil unless sections_path.exist?
+
+    begin
+      sections_data = YAML.load_file(sections_path)
+      sections_data&.dig("sections")
+    rescue => e
+      Rails.logger.error("Error reading sections file: #{e.message}")
+      nil
+    end
   end
 
   def handle_kit_collection(type)
@@ -591,6 +740,50 @@ private
   def advanced_table_mock_data_no_subrows
     advanced_table_mock_data_no_subrows = File.read(Rails.root.join("app/components/playbook/pb_docs/advanced_table_mock_data_no_subrows.json"))
     JSON.parse(advanced_table_mock_data_no_subrows, object_class: OpenStruct)
+  end
+
+  # Beta versions - return plain JSON for React
+  def advanced_table_mock_data_beta
+    advanced_table_mock_data = File.read(Rails.root.join("app/components/playbook/pb_docs/advanced_table_mock_data.json"))
+    JSON.parse(advanced_table_mock_data)
+  end
+
+  def advanced_table_mock_data_with_id_beta
+    advanced_table_mock_data_with_id = File.read(Rails.root.join("app/components/playbook/pb_docs/advanced_table_mock_data_with_id.json"))
+    JSON.parse(advanced_table_mock_data_with_id)
+  end
+
+  def advanced_table_mock_data_no_subrows_beta
+    advanced_table_mock_data_no_subrows = File.read(Rails.root.join("app/components/playbook/pb_docs/advanced_table_mock_data_no_subrows.json"))
+    JSON.parse(advanced_table_mock_data_no_subrows)
+  end
+
+  def advanced_table_pagination_mock_data
+    file_path = Playbook::Engine.root.join("app/pb_kits/playbook/pb_advanced_table/docs/advanced_table_pagination_mock_data.json")
+    return nil unless File.exist?(file_path)
+
+    JSON.parse(File.read(file_path))
+  rescue
+    nil
+  end
+
+  def advanced_table_infinite_scroll_mock_data
+    file_path = Playbook::Engine.root.join("app/pb_kits/playbook/pb_advanced_table/docs/advanced_table_mock_data_infinite_scroll.json")
+    return nil unless File.exist?(file_path)
+
+    JSON.parse(File.read(file_path))
+  rescue
+    nil
+  end
+
+  def advanced_table_mock_data_inline_loading
+    data = File.read(Rails.root.join("app/components/playbook/pb_docs/advanced_table_mock_data_inline_loading.json"))
+    JSON.parse(data, object_class: OpenStruct)
+  end
+
+  def advanced_table_mock_data_inline_loading_empty_children
+    data = File.read(Rails.root.join("app/components/playbook/pb_docs/advanced_table_mock_data_inline_loading_empty_children.json"))
+    JSON.parse(data, object_class: OpenStruct)
   end
 
   def page_not_found

@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from "react"
-import { LoadingInline, Card, colors } from "playbook-ui"
+import { LoadingInline, Card, colors, Flex } from "playbook-ui"
 import { LiveProvider, LivePreview, LiveError } from "react-live"
 // All third party loaders should live in separate files and get imported here
 import { highchartsLoader, maplibreLoader, tiptapLoader, ThirdPartyLoader, ThirdPartyScope } from "./ThirdPartyLoaders"
@@ -102,6 +102,7 @@ const LiveExample: React.FC<LiveExampleProps> = ({ code, exampleProps = {} }) =>
   const [thirdParty, setThirdParty] = useState<ThirdPartyScope>({})
   const [libsKey, setLibsKey] = useState("")
   const [libsReady, setLibsReady] = useState(!needsThirdParty)
+  const [isRendering, setIsRendering] = useState(true)
 
   useEffect(() => {
     let cancelled = false
@@ -125,6 +126,17 @@ const LiveExample: React.FC<LiveExampleProps> = ({ code, exampleProps = {} }) =>
     }
   }, [code, needsThirdParty])
 
+  useEffect(() => {
+    if (libsReady) {
+      setIsRendering(true)
+      // Give LivePreview time to render
+      const timer = setTimeout(() => {
+        setIsRendering(false)
+      }, 300)
+      return () => clearTimeout(timer)
+    }
+  }, [libsReady, libsKey])
+
   const scope = useMemo(
     () => ({
       // React + hooks (so stripped imports still work)
@@ -141,16 +153,17 @@ const LiveExample: React.FC<LiveExampleProps> = ({ code, exampleProps = {} }) =>
       FormattedDate,
       // Third-party libs injected here (Highcharts*, maplibregl, etc.)
       ...thirdParty,
-      exampleProps,
+      // Spread exampleProps so MOCK_DATA etc. are top-level variables
+      ...exampleProps,
     }),
     [thirdParty, exampleProps, PBrest, FormattedDate],
   )
 
-  if (!libsReady) {
+  if (!libsReady || isRendering) {
     return (
-      <div style={{ padding: 16 }}>
-        <LoadingInline text="Loading example…" />
-      </div>
+      <Flex textAlign="center" justify="center" padding="md">
+        <LoadingInline />
+      </Flex>
     )
   }
 

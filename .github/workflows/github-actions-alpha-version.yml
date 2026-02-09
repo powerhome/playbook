@@ -170,8 +170,10 @@ jobs:
           echo "Found Semver labels: $SEMVER_LABEL"
 
           if [ -z "$SEMVER_LABEL" ]; then
-            echo "⛔ Error: No valid Semver label (major, minor, patch) found on PR #$PR_NUMBER."
-            exit 1
+            echo "⏭️ No Semver label found on PR #$PR_NUMBER."
+            echo "ℹ️ This is likely an automated PR. Treating as 'Inactive RC' and skipping the release candidate process."
+            echo "SKIP_REMAINING_STEPS=true" >> $GITHUB_ENV  # Set flag to skip steps
+            exit 0  # Exit the job early, skipping the rest of the workflow
           fi
 
           LABEL_COUNT=$(echo "$SEMVER_LABEL" | wc -l)
