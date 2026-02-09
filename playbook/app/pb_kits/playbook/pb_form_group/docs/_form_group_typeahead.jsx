@@ -17,6 +17,7 @@ const FormGroupTypeahead = (props) => {
     <div>
       <FormGroup>
         <Typeahead
+            id="products"
             label="Products"
             options={options}
             {...props}
