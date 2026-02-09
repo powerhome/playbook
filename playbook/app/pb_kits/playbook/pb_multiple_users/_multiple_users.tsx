@@ -57,7 +57,7 @@ const MultipleUsers = (props: MultipleUsersProps): React.ReactElement => {
     buildCss('multiple_users_badge', avatarSizeClass)
   )
 
-  const itemsShouldOverlap = (index: number, length: number): boolean => {
+  const shouldApplyOverlapClass = (index: number, length: number): boolean => {
     return reverse ? index < length - 1 : index > 0;
   }
 
@@ -80,7 +80,7 @@ const MultipleUsers = (props: MultipleUsersProps): React.ReactElement => {
             >
               <Avatar
                   {...avatarData}
-                  className={`pb_multiple_users_item${itemsShouldOverlap(index, usersToDisplay.length) ? ' pb_multiple_users_overlap' : ''}`}
+                  className={`pb_multiple_users_item${shouldApplyOverlapClass(index, usersToDisplay.length) ? ' pb_multiple_users_overlap' : ''}`}
                   dark={dark}
                   imageAlt={avatarData.name}
                   key={index}
@@ -118,7 +118,7 @@ const MultipleUsers = (props: MultipleUsersProps): React.ReactElement => {
             <div key={index}>
               <Avatar
                   {...avatarData}
-                  className={`pb_multiple_users_item${itemsShouldOverlap(index, usersToDisplay.length) ? ' pb_multiple_users_overlap' : ''}`}
+                  className={`pb_multiple_users_item${shouldApplyOverlapClass(index, usersToDisplay.length) ? ' pb_multiple_users_overlap' : ''}`}
                   dark={dark}
                   imageAlt={avatarData.name}
                   size={size}
