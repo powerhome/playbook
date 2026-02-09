@@ -157,7 +157,7 @@ const Select = (
           )}
         </label>
       )}
-      <label className={classes}
+      <label className="pb_select_kit_wrapper"
           htmlFor={selectId}
       >
         {selectBody}
