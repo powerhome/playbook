@@ -37,18 +37,36 @@
     <% else %>
       <%= pb_rails("flex", props: { data: {"pb-star-rating-wrapper": "true" }, orientation: "column" }) do %>
         <% if object.label.present? %>
-          <%= pb_rails("caption", props: {text: object.label, margin_bottom:"xs"}) %>
+          <figcaption
+            id="<%= "#{object.input_id}-caption" %>"
+            class="pb_star_rating_caption"
+            onclick="document.getElementById('<%= object.input_id %>')?.focus()"
+          >
+            <%= pb_rails("caption", props: {text: object.label, margin_bottom:"xs"}) %>
+          </figcaption>
         <% end %>
 
         <%= hidden_input_tag %>
-
-        <%= pb_rails("flex", props: { orientation: "row" }) do %>
-          <% object.denominator.times do |index| %>
-            <div data-pb-star-rating id="<%= index + 1 %>" class="<%= star_color %>">
-              <%= pb_rails("icon", props: { classname: "#{background_star_color} pb_star_#{size} interactive-star-icon", custom_icon: Playbook::Engine.root.join(background_star_path), tabindex: 0 } ) %>
-            </div>
+        <div
+          id="<%= object.input_id %>"
+          role="radiogroup"
+          tabindex="0"
+          aria-describedby="<%= "#{object.input_id}-caption" %>"
+        >
+          <%= pb_rails("flex", props: { orientation: "row" }) do %>
+            <% object.denominator.times do |index| %>
+              <div 
+                data-pb-star-rating 
+                class="<%= star_color %>" 
+                role="radio" 
+                tabindex="0" 
+                aria-label="Rate <%= index + 1 %> out of <%= object.denominator %> stars" 
+              >
+                  <%= pb_rails("icon", props: { classname: "#{background_star_color} pb_star_#{size} interactive-star-icon", custom_icon: Playbook::Engine.root.join(background_star_path) } ) %>
+              </div>
+            <% end %>
           <% end %>
-        <% end %>
+        </div>
       <% end %>
     <% end %>
   <% end %>
