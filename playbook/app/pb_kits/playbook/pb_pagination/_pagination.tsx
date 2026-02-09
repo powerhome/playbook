@@ -3,6 +3,14 @@ import classnames from 'classnames'
 import { GlobalProps, globalProps } from '../utilities/globalProps'
 import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
 import Icon from '../pb_icon/_icon';
+import Body from '../pb_body/_body';
+import Flex from '../pb_flex/_flex';
+import Button from '../pb_button/_button';
+import Dropdown from '../pb_dropdown/_dropdown';
+import DropdownTrigger from "../pb_dropdown/subcomponents/DropdownTrigger";
+import DropdownContainer from "../pb_dropdown/subcomponents/DropdownContainer";
+import DropdownOption from "../pb_dropdown/subcomponents/DropdownOption";
+
 
 type PaginationProps = {
   aria?: { [key: string]: string },
@@ -29,6 +37,19 @@ const Pagination = ( props: PaginationProps) => {
     total = 1,
   } = props
   const [currentPage, setCurrentPage] = useState(current);
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Detect mobile screen size (767px and below)
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 767);
+    };
+
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   const handlePageChange = (pageNumber: number) => {
     if (pageNumber >= 1 && pageNumber <= total) {
@@ -37,6 +58,20 @@ const Pagination = ( props: PaginationProps) => {
         onChange(pageNumber);
       }
     }
+  };
+
+  const createPageOptions = () => {
+    const options = [];
+    
+    for (let pageNumber = 1; pageNumber <= total; pageNumber++) {
+      options.push({
+        label: String(pageNumber),
+        value: String(pageNumber),
+        id: `page-${pageNumber}`
+      });
+    }
+    
+    return options;
   };
 
   const renderPageButtons = (): JSX.Element[] => {
@@ -154,19 +189,68 @@ const Pagination = ( props: PaginationProps) => {
         id={id}
     >
       <div className="pb_pagination">
-        <li
-            className={`pagination-left ${currentPage === 1 ? 'disabled' : ''}`}
-            onClick={() => handlePageChange(currentPage - 1)}
-        >
-          <Icon icon="chevron-left" />
-        </li>
-        {renderPageButtons()}
-        <li
-            className={`pagination-right ${currentPage === total ? 'disabled' : ''}`}
-            onClick={() => handlePageChange(currentPage + 1)}
-        >
-          <Icon icon="chevron-right" />
-        </li>
+        {isMobile ? (
+          <Flex alignItems="center">
+            <li
+                className={`pagination-left ${currentPage === 1 ? "disabled" : ""}`}
+                onClick={() => handlePageChange(currentPage - 1)}
+            >
+              <Flex alignItems="center">
+                <Icon icon="chevron-left" />
+                <Body>Previous</Body>
+              </Flex>
+            </li>
+            <Dropdown
+                onSelect={(option) => handlePageChange(Number(option.value))}
+                options={createPageOptions()}
+                separators={false}
+            >
+            <DropdownTrigger>
+            <Button variant="secondary">
+              <Flex alignItems="center">
+                <Body>
+                  <b>{currentPage}</b> of {total}
+                </Body>
+                <Icon icon="chevron-down" />
+              </Flex>
+            </Button>
+            </DropdownTrigger>
+            <DropdownContainer>
+              {createPageOptions().map((option) => (
+                <DropdownOption
+                    key={option.id}
+                    option={option}
+                />
+              ))}
+            </DropdownContainer>
+            </Dropdown>
+            <li
+                className={`pagination-right ${currentPage === total ? "disabled" : ""}`}
+                onClick={() => handlePageChange(currentPage + 1)}
+            >
+              <Flex alignItems="center">
+                <Body>Next</Body>
+                <Icon icon="chevron-right" />
+              </Flex>
+            </li>
+          </Flex>
+        ) : (
+          <>
+            <li
+                className={`pagination-left ${currentPage === 1 ? "disabled" : ""}`}
+                onClick={() => handlePageChange(currentPage - 1)}
+            >
+              <Icon icon="chevron-left" />
+            </li>
+            {renderPageButtons()}
+            <li
+                className={`pagination-right ${currentPage === total ? "disabled" : ""}`}
+                onClick={() => handlePageChange(currentPage + 1)}
+            >
+              <Icon icon="chevron-right" />
+            </li>
+          </>
+        )}
       </div>
     </div>
   );
