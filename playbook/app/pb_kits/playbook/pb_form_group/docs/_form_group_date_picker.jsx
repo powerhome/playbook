@@ -9,6 +9,7 @@ const FormGroupDatePicker = (props) => (
   <div>
     <FormGroup>
       <TextInput
+          id="event-name"
           label="Event"
           placeholder="Event Name"
           {...props}
