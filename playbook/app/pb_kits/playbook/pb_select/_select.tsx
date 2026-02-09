@@ -139,7 +139,7 @@ const Select = ({
         </label>
       }
       <label
-          className={classes}
+          className={selectWrapperClass}
           htmlFor={selectId}
       >
         {selectBody}
