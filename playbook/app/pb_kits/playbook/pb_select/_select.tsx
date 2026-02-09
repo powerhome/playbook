@@ -95,7 +95,7 @@ const Select = (
 
   const inlineClass = inline ? "inline" : null;
   const compactClass = compact ? "compact" : null;
-  const WrapperClasses = classnames(
+  const classes = classnames(
     buildCss("pb_select"),
     globalProps({
       ...props,
@@ -110,8 +110,6 @@ const Select = (
   const angleDown = getAllIcons()["angleDown"].icon as unknown as {
     [key: string]: SVGElement;
   };
-
-  const classes = classnames(buildCss("pb_select_kit_wrapper"), error && "error", className);
 
   const selectId = (inputOptions?.id as string) || name;
 
@@ -141,7 +139,7 @@ const Select = (
     <div {...ariaProps}
         {...dataProps}
         {...htmlProps}
-        className={WrapperClasses}
+        className={classes}
     >
       {label && (
         <label className="pb_select_kit_label"

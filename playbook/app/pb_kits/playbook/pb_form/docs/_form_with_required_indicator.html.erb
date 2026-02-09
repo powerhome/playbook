@@ -10,7 +10,8 @@
   <%= form.url_field :example_url_field, props: { label: true, required: true, required_indicator: true } %>
   <%= form.phone_number_field :example_phone_number_field, props: { label: true, required: true, required_indicator: true } %>
   <%= form.time_picker :example_time_picker_required_indicator, props: { label: true, required: true, required_indicator: true } %>
-  <%= form.select :example_select_required_indicator, props: {label: "Select Label", margin_y: 'sm', required: true, required_indicator: true } %>
+  <%= form.select :example_select_required_indicator, [["Yes", 1], ["No", 2]], props: { label: true, required: true, required_indicator: true } %>
+  <%= form.select :example_select_required_indicator_2, [["Yes", 1], ["No", 2]], props: { label: "Example Select Field", required: true, required_indicator: true } %>
 
   <%= form.actions do |action| %>
     <%= action.submit %>
