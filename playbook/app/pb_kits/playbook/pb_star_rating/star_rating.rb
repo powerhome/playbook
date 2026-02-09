@@ -125,10 +125,6 @@ module Playbook
           value: default_value || ""
         )
       end
-
-      def input_id
-        input_options[:id] || id
-      end
     end
   end
 end
