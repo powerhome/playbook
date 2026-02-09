@@ -3,8 +3,8 @@
 module Playbook
   module Forms
     class Builder
-      def intl_telephone(name, props: {})
-        props[:name] = name.to_s
+      def phone_number_field(name, props: {})
+        props[:name] = name
         props[:id] ||= name.to_s
 
         if props[:label] == true
@@ -14,6 +14,7 @@ module Playbook
                             name.to_s.humanize
                           end
         end
+
         @template.pb_rails("phone_number_input", props: props)
       end
     end
