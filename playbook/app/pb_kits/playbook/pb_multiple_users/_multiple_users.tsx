@@ -1,25 +1,25 @@
-import React from 'react'
-import classnames from 'classnames'
+import React from 'react';
+import classnames from 'classnames';
 
-import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
-import { globalProps } from '../utilities/globalProps'
+import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props';
+import { globalProps } from '../utilities/globalProps';
 
-import Avatar from '../pb_avatar/_avatar'
-import Tooltip from '../pb_tooltip/_tooltip'
+import Avatar from '../pb_avatar/_avatar';
+import Tooltip from '../pb_tooltip/_tooltip';
 
 type MultipleUsersProps = {
-  aria?: { [key: string]: string },
+  aria?: { [key: string]: string; },
   className?: string,
   dark?: boolean,
-  data?: { [key: string]: string },
-  htmlOptions?: { [key: string]: string | number | boolean | (() => void) },
+  data?: { [key: string]: string; },
+  htmlOptions?: { [key: string]: string | number | boolean | (() => void); },
   id?: string,
   maxDisplayedUsers?: number,
   reverse?: boolean,
   size?: "md" | "lg" | "sm" | "xl" | "xs" | "xxs",
   withTooltip?: boolean,
-  users: Array<{ [key: string]: string }>,
-}
+  users: Array<{ [key: string]: string; }>,
+};
 
 const MultipleUsers = (props: MultipleUsersProps): React.ReactElement => {
   const {
@@ -34,28 +34,33 @@ const MultipleUsers = (props: MultipleUsersProps): React.ReactElement => {
     size = 'xs',
     withTooltip = false,
     users,
-  } = props
+  } = props;
 
   const displayCount =
-    users.length > maxDisplayedUsers ? maxDisplayedUsers - 1 : users.length
-  const usersToDisplay = users.slice(0, displayCount)
+    users.length > maxDisplayedUsers ? maxDisplayedUsers - 1 : users.length;
+  const usersToDisplay = users.slice(0, displayCount);
 
-  const reverseClass = reverse === true ? 'reverse' : ''
-  const avatarSizeClass = size === 'xxs' ? 'xxs' : 'xs'
-  const ariaProps = buildAriaProps(aria)
-  const dataProps = buildDataProps(data)
-  const htmlProps = buildHtmlProps(htmlOptions)
+  const reverseClass = reverse === true ? 'reverse' : '';
+  const avatarSizeClass = size === 'xxs' ? 'xxs' : 'xs';
+  const ariaProps = buildAriaProps(aria);
+  const dataProps = buildDataProps(data);
+  const htmlProps = buildHtmlProps(htmlOptions);
   const classes = classnames(
     buildCss('pb_multiple_users_kit', reverseClass),
     globalProps(props),
     className
-  )
+  );
 
   const itemClasses = classnames(
     'pb_multiple_users_item',
     dark && 'dark',
     buildCss('multiple_users_badge', avatarSizeClass)
-  )
+  );
+
+  const itemsShouldOverlap = (index: number, length: number): boolean => {
+    return reverse ? index < length - 1 : index > 0;
+  };
+
 
   return (
     <div
@@ -76,7 +81,7 @@ const MultipleUsers = (props: MultipleUsersProps): React.ReactElement => {
             >
               <Avatar
                   {...avatarData}
-                  className={"pb_multiple_users_item" + (withTooltip ? " user_tooltip" : "")}
+                  className={`pb_multiple_users_item${itemsShouldOverlap(index, usersToDisplay.length) ? ' pb_multiple_users_overlap' : ''}`}
                   dark={dark}
                   imageAlt={avatarData.name}
                   key={index}
@@ -89,20 +94,20 @@ const MultipleUsers = (props: MultipleUsersProps): React.ReactElement => {
             <Tooltip
                 placement='top'
                 text={
-                  <div>
-                    {
-                      usersToDisplay.length < users.length ? 
-                        users.slice(displayCount).map((u, i) => (
-                          <div key={i}>{u.tooltip}</div>
-                        ))
-                      : 
-                        ''
-                    }
-                  </div>
-                }
+                <div>
+                  {
+                    usersToDisplay.length < users.length ?
+                      users.slice(displayCount).map((u, i) => (
+                        <div key={i}>{u.tooltip}</div>
+                      ))
+                      :
+                      ''
+                  }
+                </div>
+              }
                 zIndex={10}
             >
-              <div className={itemClasses + (withTooltip ? " user_count_tooltip" : "")}>
+              <div className={itemClasses + " pb_multiple_users_count_overlap"}>
                 {`+${users.length - displayCount}`}
               </div>
             </Tooltip>
@@ -111,26 +116,27 @@ const MultipleUsers = (props: MultipleUsersProps): React.ReactElement => {
         :
         <>
           {usersToDisplay.map((avatarData, index) => (
-            <Avatar
-                {...avatarData}
-                className="pb_multiple_users_item"
-                dark={dark}
-                imageAlt={avatarData.name}
-                key={index}
-                size={size}
-            />
+            <div key={index}>
+              <Avatar
+                  {...avatarData}
+                  className={`pb_multiple_users_item${itemsShouldOverlap(index, usersToDisplay.length) ? ' pb_multiple_users_overlap' : ''}`}
+                  dark={dark}
+                  imageAlt={avatarData.name}
+                  size={size}
+              />
+            </div>
           ))}
 
           {users.length > maxDisplayedUsers &&
-            <div className={itemClasses}>
-              {`+${users.length - 3}`}
+            <div className={itemClasses + " pb_multiple_users_count_overlap"}>
+              {`+${users.length - displayCount}`}
             </div>
           }
         </>
       }
 
     </div>
-  )
-}
+  );
+};
 
-export default MultipleUsers
+export default MultipleUsers;

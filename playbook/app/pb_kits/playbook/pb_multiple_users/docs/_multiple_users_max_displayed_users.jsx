@@ -1,5 +1,7 @@
 import React from 'react'
+import Body from '../../pb_body/_body'
 import MultipleUsers from '../_multiple_users'
+
 
 const MultipleUsersMaxDisplayedUsers = (props) => {
     const status = () => (Math.random() < 0.5 ? 'Online' : 'Offline')
@@ -22,8 +24,10 @@ const MultipleUsersMaxDisplayedUsers = (props) => {
     ]
     return (
         <div>
-            <p>Total Users: {users.length}</p>
-            <br />
+            <Body
+                marginBottom={"md"}
+                text={`Total Users: ${users.length}`}
+            />
             <MultipleUsers
                 maxDisplayedUsers={3}
                 {...props}
@@ -35,6 +39,7 @@ const MultipleUsersMaxDisplayedUsers = (props) => {
                 maxDisplayedUsers={6}
                 {...props}
                 users={users}
+                withTooltip
             />
             <br />
             <br />
