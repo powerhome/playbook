@@ -44,8 +44,8 @@
 
         <%= pb_rails("flex", props: { orientation: "row" }) do %>
           <% object.denominator.times do |index| %>
-            <div data-pb-star-rating id="<%= index + 1 %>" class="<%= star_color %>" aria-label="Rate <%= index + 1 %> out of <%= object.denominator %> stars" >
-              <%= pb_rails("icon", props: { classname: "#{background_star_color} pb_star_#{size} interactive-star-icon", custom_icon: Playbook::Engine.root.join(background_star_path), tabindex: 0 } ) %>
+            <div data-pb-star-rating id="<%= index + 1 %>" class="<%= star_color %>" >
+              <%= pb_rails("icon", props: { aria: { label: "Rate #{index + 1} out of #{object.denominator} stars" }, classname: "#{background_star_color} pb_star_#{size} interactive-star-icon", custom_icon: Playbook::Engine.root.join(background_star_path), tabindex: 0 } ) %>
             </div>
           <% end %>
         <% end %>

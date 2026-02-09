@@ -79,11 +79,11 @@ const StarRatingInteractive = (props: StarRatingInteractiveProps) => {
 
                     return (
                         <div
-                            aria-label={`Rate ${starIndex} out of ${denominator} stars`}
                             key={index}
                             onKeyDown={(event) => handleOnKeyDown(event, starIndex)}
                         >
                             <Icon
+                                aria={{ label: `Rate ${starIndex} out of ${denominator} stars` }}
                                 className={starClass.trim()}
                                 cursor="pointer"
                                 customIcon={starIcon[backgroundType].icon as unknown as { [key: string]: SVGElement }}
