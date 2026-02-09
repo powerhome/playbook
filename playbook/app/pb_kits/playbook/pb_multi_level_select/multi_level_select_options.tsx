@@ -65,7 +65,7 @@ const classes = classnames(
         items.map((item: { [key: string]: any }) => {
           return (
             <div key={item.id}>
-              <li className={"dropdown_item"} 
+              <li className={"dropdown_item"}
                   data-name={item.id}
               >
                 <div className="dropdown_item_checkbox_row">
@@ -114,7 +114,7 @@ const classes = classnames(
                       />
                     )
                   ) : (
-                    <Checkbox id={item.id} 
+                    <Checkbox id={item.id}
                         text={item.label}
                     >
                         <input
