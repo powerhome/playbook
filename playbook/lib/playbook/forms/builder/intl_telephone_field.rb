@@ -3,7 +3,7 @@
 module Playbook
   module Forms
     class Builder
-      def phone_number_field(name, props: {})
+      def intl_telephone(name, props: {})
         props[:name] = name
         props[:id] ||= name.to_s
 
