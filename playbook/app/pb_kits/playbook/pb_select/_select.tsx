@@ -111,6 +111,7 @@ const Select = (
     [key: string]: SVGElement;
   };
 
+  const selectWrapperClass = classnames(buildCss('pb_select_kit_wrapper'), { error }, className)
   const selectId = (inputOptions?.id as string) || name;
 
   const selectBody = (() => {
@@ -157,7 +158,7 @@ const Select = (
           )}
         </label>
       )}
-      <label className="pb_select_kit_wrapper"
+      <label className={selectWrapperClass}
           htmlFor={selectId}
       >
         {selectBody}
@@ -177,4 +178,4 @@ const Select = (
   );
 };
 
-export default forwardRef(Select);
+export default forwardRef(Select)
