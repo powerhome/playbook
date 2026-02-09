@@ -11,6 +11,7 @@ require "playbook/pb_kit_helper"
 require "playbook/pb_doc_helper" # Duplicated from website (Temp)
 require "playbook/kit_base"
 require "playbook/kit_resolver"
+require "playbook/tokens"
 
 module Playbook
   ROOT_PATH = Pathname.new(File.join(__dir__, ".."))
