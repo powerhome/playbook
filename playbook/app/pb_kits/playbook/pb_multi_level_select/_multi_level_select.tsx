@@ -15,6 +15,7 @@ import Body from "../pb_body/_body";
 import Caption from "../pb_caption/_caption";
 import MultiLevelSelectOptions from "./multi_level_select_options";
 import MultiLevelSelectContext from "./context";
+import colors from "../tokens/exports/_colors.module.scss"
 
 import {
   getAncestorsOfUnchecked,
@@ -45,6 +46,7 @@ type MultiLevelSelectProps = {
   label?: string;
   name?: string;
   required?: boolean;
+  requiredIndicator?: boolean;
   returnAllSelected?: boolean;
   showCheckedChildren?: boolean;
   treeData?: { [key: string]: string }[] | any;
@@ -93,6 +95,7 @@ const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>(
       name,
       label,
       required = false,
+      requiredIndicator = false,
       returnAllSelected = false,
       showCheckedChildren = true,
       treeData,
@@ -529,11 +532,20 @@ const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>(
           <label htmlFor={labelForId}
               onClick={handleLabelClick}
           >
+          {requiredIndicator ? (
+            <Caption
+                className="pb_multi_level_select_kit_label"
+                marginBottom="xs"
+            >
+              {label} <span style={{ color: `${colors.error}` }}>*</span>
+            </Caption>
+          ) : (
             <Caption
                 className="pb_multi_level_select_kit_label"
                 marginBottom="xs"
                 text={label}
             />
+          )}
           </label>
         )}
         <MultiLevelSelectContext.Provider
