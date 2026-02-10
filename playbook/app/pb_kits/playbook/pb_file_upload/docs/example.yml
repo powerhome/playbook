@@ -12,4 +12,3 @@ examples:
   - file_upload_custom_description: Add your one accepted files description
   - file_upload_max_size: Set a file size limit
   - file_upload_error: Error
-  
