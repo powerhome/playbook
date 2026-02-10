@@ -154,6 +154,15 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.Ref<unknown>
         wrapperRef.current.removeAttribute('data-pb-phone-validation-error')
       }
     }
+    
+    // Set custom validity on the input element to prevent form submission
+    if (inputRef.current) {
+      if (hasError && error) {
+        inputRef.current.setCustomValidity(error)
+      } else {
+        inputRef.current.setCustomValidity('')
+      }
+    }
   }
 
   // Determine which error to display
