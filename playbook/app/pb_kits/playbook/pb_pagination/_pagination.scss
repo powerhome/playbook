@@ -108,8 +108,16 @@ $top_bottom_radius: 0px;
 
 .pb_pagination_mobile {
  padding: $space_xxs 0px !important;
+ position: relative;
+ 
+ .pagination-right {
+  border-left: none !important;
+ }
+ .pagination-left {
+  border-right: none !important;
+ }
   .pagination-dropdown {
-    position: relative;
+    position: static;
     flex: 1;
     margin: 0 $space_xxs;
   }

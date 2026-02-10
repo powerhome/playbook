@@ -248,6 +248,7 @@ const Pagination = ( props: PaginationProps) => {
                   onClick={handleDropdownToggle}
               >
                 <Flex alignItems="center" 
+                    gap="xxs"
                     justify="between"
                 >
                   <Body>
