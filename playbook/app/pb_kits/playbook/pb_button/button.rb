@@ -73,6 +73,10 @@ module Playbook
         emoji_regex.match?(icon)
       end
 
+      def icon_only?
+        icon.present? && text.blank? && variant != "reaction"
+      end
+
       def classname
         class_names = ["pb_button_kit"]
         class_names << "pb_button_#{variant}" if variant
@@ -82,6 +86,7 @@ module Playbook
         class_names << "pb_button_size_#{size}" if size
         class_names << "pb_button_reaction_default" if variant === "reaction" && icon && !valid_emoji(icon)
         class_names << "pb_button_active" if variant === "reaction" && highlight
+        class_names << "pb_button_icon_only" if icon_only?
 
         class_names.join(" ")
         generate_classname(class_names.compact.join(" "), separator: " ")
