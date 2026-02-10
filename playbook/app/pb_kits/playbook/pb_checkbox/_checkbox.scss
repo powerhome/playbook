@@ -85,7 +85,7 @@ $transition: $transition_cubic;
 
     &:disabled ~ .pb_checkbox_checkmark {
       cursor: not-allowed;
-      background-color: $input_background_disabled;
+      background-color: mix($charcoal, $white, 5%);
       border-color: $input_border_disabled;
 
       & ~ .pb_checkbox_label {
