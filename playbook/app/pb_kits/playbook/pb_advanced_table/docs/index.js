@@ -48,3 +48,4 @@ export { default as AdvancedTablePaddingControl } from './_advanced_table_paddin
 export { default as AdvancedTablePaddingControlPerRow } from './_advanced_table_padding_control_per_row.jsx'
 export { default as AdvancedTableColumnStylingBackground } from './_advanced_table_column_styling_background.jsx'
 export { default as AdvancedTableColumnStylingBackgroundMulti } from './_advanced_table_column_styling_background_multi.jsx'
+export { default as AdvancedTableColumnStylingBackgroundCustom } from './_advanced_table_column_styling_background_custom.jsx'

@@ -920,6 +920,39 @@ test("columnStyling.backgroundColor works as excpected", () => {
   expect(firstEnrollmentCell).toHaveStyle({ backgroundColor: colors.error_subtle });
 });
 
+test("columnStyling.cellBackgroundColor works as expected with function", () => {
+  const styledColumnDefs = [
+    {
+      accessor: "year",
+      label: "Year",
+      cellAccessors: ["quarter", "month", "day"],
+    },
+    {
+      accessor: "newEnrollments",
+      label: "New Enrollments",
+      columnStyling:{
+        cellBackgroundColor: (row) => row.original.newEnrollments > 15 ? colors.success_subtle : colors.error_subtle,
+        fontColor: (row) => row.original.newEnrollments > 15 ? colors.success : colors.error,
+      },    
+    },
+    {
+      accessor: "scheduledMeetings",
+      label: "Scheduled Meetings",
+    },
+  ];
+
+  render(
+    <AdvancedTable
+        columnDefinitions={styledColumnDefs}
+        data={{ testid: testId }}
+        tableData={MOCK_DATA}
+    />
+  );
+
+  const firstEnrollmentCell = screen.getAllByText("20")[0].closest("td");
+  expect(firstEnrollmentCell).toHaveStyle({ backgroundColor: colors.success_subtle, color: colors.success });
+}); 
+
 test("columnStyling.headerBackgroundColor works as excpected", () => {
   const styledColumnDefs = [
     {

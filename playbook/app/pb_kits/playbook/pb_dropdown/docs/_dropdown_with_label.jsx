@@ -25,6 +25,7 @@ const DropdownDefault = (props) => {
   return (
   <div>
     <Dropdown
+        id="select_a_country"
         label="Select a Country"
         options={options}
         {...props}
