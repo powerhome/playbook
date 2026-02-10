@@ -16,7 +16,7 @@ examples:
   - select_attributes: Select W/ Attributes
   - select_multiple: Select Multiple
   - select_input_options: Input Options
-  - select_required_indicator: Required Indicator 
+  - select_required_indicator: Required Indicator
 
 
   react:
