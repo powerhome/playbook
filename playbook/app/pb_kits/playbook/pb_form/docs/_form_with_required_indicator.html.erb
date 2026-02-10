@@ -146,6 +146,8 @@
   <%= form.time_picker :example_time_picker_required_indicator, props: { label: true, required: true, required_indicator: true } %>
   <%= form.date_picker :example_date_picker_required_indicator, props: { label: true, required: true, required_indicator: true } %>
   <%= form.date_picker :example_date_picker_required_indicator_custom, props: { label: "Custom Date Picker Label", required: true, required_indicator: true } %>
+  <%= form.select :example_select_required_indicator, [["Yes", 1], ["No", 2]], props: { label: true, required: true, required_indicator: true } %>
+  <%= form.select :example_select_required_indicator_2, [["Yes", 1], ["No", 2]], props: { label: "Example Select Field", required: true, required_indicator: true } %>
   <%= form.multi_level_select :example_multi_level_select_required_indicator, props: {
     label: true,
     margin_y: 'sm',
