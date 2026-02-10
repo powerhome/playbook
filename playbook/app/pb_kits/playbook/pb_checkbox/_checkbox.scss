@@ -62,7 +62,7 @@ $transition: $transition_cubic;
     left: $offscreen;
 
     &:focus ~ .pb_checkbox_checkmark {
-        box-shadow: 0px 0px 0px 2px $white, 0px 0px 0px 4px $primary;
+        box-shadow: 0px 0px 0px 2px $white, 0px 0px 0px 4px $input_border_state;
     }
     &:checked ~ .pb_checkbox_checkmark,
     & ~ .pb_checkbox_indeterminate {
@@ -112,7 +112,7 @@ $transition: $transition_cubic;
   &.dark {
     input {
       &:focus ~ .pb_checkbox_checkmark {
-        box-shadow: 0px 0px 0px 2px $bg_dark_card, 0px 0px 0px 4px $primary;      
+        box-shadow: 0px 0px 0px 2px $bg_dark_card, 0px 0px 0px 4px $input_border_state_dark;      
       }
 
       &:disabled ~ .pb_checkbox_checkmark {
