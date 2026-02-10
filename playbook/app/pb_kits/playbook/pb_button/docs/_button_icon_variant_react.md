@@ -1,0 +1,1 @@
+The icon button variant automatically renders when you provide an `icon` prop without a corresponding `text` prop. The button will only display an icon (no text) and will be wrapped with the icon button styling. This works with all button variants including "link", "primary", "secondary", etc. Simply use `<Button icon="rocket" variant="primary" />` to get an icon button.
