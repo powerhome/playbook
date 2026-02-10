@@ -1,41 +1,43 @@
 examples:
+
   rails:
-    - select_default: Default
-    - select_blank: Blank Selection Text
-    - select_disabled_options: Disabled Options
-    - select_disabled: Disabled Select Field
-    - select_required: Required Select Field
-    - select_value_text_same: Equal option value and value text
-    - select_custom_select: Custom Select
-    - select_custom_select_subheaders: Custom Select Subheaders
-    - select_error: Select w/ Error
-    - select_inline: Select Inline
-    - select_inline_show_arrow: Select Inline (Always Show Arrow)
-    - select_inline_compact: Select Inline Compact
-    - select_attributes: Select W/ Attributes
-    - select_multiple: Select Multiple
-    - select_input_options: Input Options
-    - select_required_indicator: Required Indicator
+  - select_default: Default
+  - select_blank: Blank Selection Text
+  - select_disabled_options: Disabled Options
+  - select_disabled: Disabled Select Field
+  - select_required: Required Select Field
+  - select_value_text_same: Equal option value and value text
+  - select_custom_select: Custom Select
+  - select_custom_select_subheaders: Custom Select Subheaders
+  - select_error: Select w/ Error
+  - select_inline: Select Inline
+  - select_inline_show_arrow: Select Inline (Always Show Arrow)
+  - select_inline_compact: Select Inline Compact
+  - select_attributes: Select W/ Attributes
+  - select_multiple: Select Multiple
+  - select_input_options: Input Options
+  - select_required_indicator: Required Indicator 
+
 
   react:
-    - select_default: Default
-    - select_blank: Blank Selection Text
-    - select_disabled_options: Disabled Options
-    - select_disabled: Disabled Select Field
-    - select_required: Required Select Field
-    - select_value_text_same: Equal option value and value text
-    - select_custom_select: Custom Select
-    - select_custom_select_subheaders: Custom Select Subheaders
-    - select_error: Select w/ Error
-    - select_inline: Select Inline
-    - select_inline_show_arrow: Select Inline (Always Show Arrow)
-    - select_inline_compact: Select Inline Compact
-    - select_multiple: Select Multiple
-    - select_react_hook: React Hook
-    - select_input_options: Input Options
-    - select_required_indicator: Required Indicator
+  - select_default: Default
+  - select_blank: Blank Selection Text
+  - select_disabled_options: Disabled Options
+  - select_disabled: Disabled Select Field
+  - select_required: Required Select Field
+  - select_value_text_same: Equal option value and value text
+  - select_custom_select: Custom Select
+  - select_custom_select_subheaders: Custom Select Subheaders
+  - select_error: Select w/ Error
+  - select_inline: Select Inline
+  - select_inline_show_arrow: Select Inline (Always Show Arrow)
+  - select_inline_compact: Select Inline Compact
+  - select_multiple: Select Multiple
+  - select_react_hook: React Hook
+  - select_input_options: Input Options
+  - select_required_indicator: Required Indicator
 
   swift:
-    - select_default_swift: Default
-    - select_error_swift: Error
-    - select_props_table: ""
+  - select_default_swift: Default
+  - select_error_swift: Error
+  - select_props_table: ""
