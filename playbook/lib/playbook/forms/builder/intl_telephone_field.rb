@@ -4,7 +4,7 @@ module Playbook
   module Forms
     class Builder
       def intl_telephone(name, props: {})
-        props[:name] = name
+        props[:name] = name.to_s
         props[:id] ||= name.to_s
 
         if props[:label] == true
