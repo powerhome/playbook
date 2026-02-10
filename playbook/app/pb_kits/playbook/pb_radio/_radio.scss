@@ -53,12 +53,12 @@
 
     &:disabled + .pb_radio_button {
       cursor: not-allowed;
-      background-color: mix($charcoal, $white, 5%);
+      background-color: $input_background_disabled;
       border-color: $input_border_disabled;
 
       & ~ .pb_body_kit {
         cursor: not-allowed;
-        color: $input_text_disabled;
+        color: $text_light;
       }
     }
 
