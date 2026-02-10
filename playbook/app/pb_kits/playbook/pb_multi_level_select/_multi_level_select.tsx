@@ -420,9 +420,7 @@ const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>(
 
     // Single select
     const handleRadioButtonClick = (e: React.ChangeEvent<HTMLInputElement>) => {
-      const { id, value: inputText } = e.target;
-      // The radio button needs a unique ID, this grabs the ID before the hyphen
-      const selectedItemID = id.match(/^[^-]*/)[0];
+      const { id: selectedItemID, value: inputText } = e.target;
 
       // Check if the item is disabled - if so, don't allow selection (safety check in addition to native disabled attribute)
       const clickedItem = filterFormattedDataById(
