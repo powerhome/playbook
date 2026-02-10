@@ -21,3 +21,5 @@ export { default as RichTextEditorAdvancedHeight } from './_rich_text_editor_adv
 export { default as RichTextEditorAdvancedMinHeight } from './_rich_text_editor_advanced_min_height.jsx'
 export { default as RichTextEditorRequiredIndicator } from './_rich_text_editor_required_indicator.jsx'
 export { default as RichTextEditorAdvancedRequiredIndicator } from './_rich_text_editor_advanced_required_indicator.jsx'
+export { default as RichTextEditorLabel } from './_rich_text_editor_label.jsx'
+export { default as RichTextEditorAdvancedLabel } from './_rich_text_editor_advanced_label.jsx'

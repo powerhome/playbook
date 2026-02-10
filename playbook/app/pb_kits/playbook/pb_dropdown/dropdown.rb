@@ -10,6 +10,7 @@ module Playbook
       prop :label, type: Playbook::Props::String
       prop :name, type: Playbook::Props::String
       prop :error, type: Playbook::Props::String
+      prop :id, type: Playbook::Props::String
       prop :required, type: Playbook::Props::Boolean,
                       default: false
       prop :default_value
@@ -49,6 +50,8 @@ module Playbook
       prop :placeholder, type: Playbook::Props::String
       prop :constrain_height, type: Playbook::Props::Boolean,
                               default: false
+      prop :required_indicator, type: Playbook::Props::Boolean,
+                                default: false
 
       def data
         Hash(prop(:data)).merge(
@@ -66,6 +69,14 @@ module Playbook
 
       def classname
         generate_classname("pb_dropdown", variant, separators_class)
+      end
+
+      def select_id
+        id.presence || (label.present? ? label.downcase.gsub(/\s+/, "_").gsub(/[^a-z0-9_]/, "") : nil)
+      end
+
+      def error_id
+        error.present? ? "#{select_id || 'dropdown_trigger'}-error" : nil
       end
 
     private
