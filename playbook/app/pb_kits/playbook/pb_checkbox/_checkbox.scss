@@ -100,12 +100,12 @@ $transition: $transition_cubic;
 
     &:disabled:checked ~ .pb_checkbox_checkmark {
       background-color: $neutral;
-      border-color: $neutral;
+      border-color: $input_border_disabled;
     }
 
     &:disabled:checked:hover ~ .pb_checkbox_checkmark {
       background-color: $neutral;
-      border-color: $neutral;
+      border-color: $input_border_disabled;
     }
   }
 
@@ -154,9 +154,9 @@ $transition: $transition_cubic;
        input {
         &:checked ~ .pb_checkbox_checkmark,
         & ~ .pb_checkbox_indeterminate {
-          border-color: $primary;
+          border-color: $input_border_state_dark;
           &:hover {
-            border-color: $primary;
+            border-color: $input_border_state_dark;
           }
         }
       }
