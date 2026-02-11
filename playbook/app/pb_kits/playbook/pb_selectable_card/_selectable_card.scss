@@ -54,7 +54,7 @@ $pb_selectable_paddings: (
     @media (hover:hover) {
       &:hover {
         box-shadow: $shadow-deep;
-        border-color: $slate;
+        border-color: $input_border_default;
       }
     }
 
@@ -68,7 +68,7 @@ $pb_selectable_paddings: (
       border-width: $pb_selectable_card_border;
       border-style: solid;
       border-color: $white;
-      background: $primary_action;
+      background: $status_border_primary;
       color: $white;
       font-size: $font_smaller;
       text-align: center;
@@ -104,10 +104,10 @@ $pb_selectable_paddings: (
         }
 
         .separator {
-          background: $royal;
+          background: $status_border_primary;
         }
         .psuedo_separator {
-          background-color: $royal;
+          background-color: $status_border_primary;
         }
       }
 
@@ -139,7 +139,7 @@ $pb_selectable_paddings: (
       &:checked {
         ~label {
           border-width: $pb_card_border_width;
-          outline: 1px solid $primary;
+          outline: 1px solid $status_border_primary;
         }
 
       }
@@ -155,7 +155,7 @@ $pb_selectable_paddings: (
       input[type="radio"] {
         &:checked ~ label {
           border-width: $pb_card_border_width;
-          outline: 1px solid $primary_action_dark;
+          outline: 1px solid $status_border_primary_dark;
         }
       }
     }
@@ -166,10 +166,11 @@ $pb_selectable_paddings: (
     > label {
       @include pb_card_dark;
       background: $bg_dark_card;
+      border-color: $input_border_default_dark;
 
       .pb_selectable_card_circle {
         border-color: $bg_dark;
-        background: $primary_action_dark;
+        background: $status_border_primary_dark;
       }
     }
 
@@ -178,6 +179,7 @@ $pb_selectable_paddings: (
       &:checked ~ label {
         @include pb_card_selected_dark;
         background: $bg_dark_card;
+        border-color: $status_border_primary_dark;
       }
     }
 
@@ -187,10 +189,10 @@ $pb_selectable_paddings: (
 
     &.error {
       > label {
-        border-color: $error_dark;
+        border-color: $input_border_error_dark;
       }
       .separator{
-        background: $error_dark;
+        background: $input_border_error_dark;
       }
     }
   }
@@ -200,7 +202,7 @@ $pb_selectable_paddings: (
     padding-right: 1px;
     margin-top: -1px;
     margin-bottom: -1px;
-    background: $border_light;
+    background: $input_border_default;
   }
 
   .psuedo_separator {
@@ -210,10 +212,10 @@ $pb_selectable_paddings: (
 
   &.error {
     > label {
-      border-color: $error;
+      border-color: $input_border_error;
     }
     .separator {
-      background: $error;
+      background: $input_border_error;
     }
   }
 }
@@ -232,17 +234,17 @@ $pb_selectable_paddings: (
 }
 
 .pb_selectable_card_kit_disabled>label {
-  border-color: $border_light !important;
+  border-color: $input_border_disabled !important;
 
   .dark & {
-    border-color: $border_dark !important;
+    border-color: $input_border_disabled_dark !important;
   }
 }
 
 .pb_selectable_card_kit_checked_disabled>label {
-  border-color: $primary !important;
+  border-color: $status_border_primary !important;
 
   .dark & {
-    border-color: $primary_action_dark !important;
+    border-color: $status_border_primary_dark !important;
   }
 }

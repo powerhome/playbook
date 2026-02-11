@@ -1,4 +1,5 @@
 @import "../tokens/transition";
+@import "../tokens/colors";
 
 .pb_selectable_icon_kit,
 .pb_selectable_icon_kit_checked,
@@ -42,12 +43,12 @@
 
 		&:checked ~ label * {
 			transition: color $transition_short ease;
-			color: $primary;
+			color: $status_border_primary;
 		}
-		
+
 		&:not(:checked) ~ label {
 			transition: color $transition_short ease;
-			color: $slate;
+			color: $input_text_default;
 
 		}
 	}
@@ -75,19 +76,19 @@
 		display: none;
 		appearance: none;
 		transition: color $transition_short ease;
-		
+
 		&:checked ~ label * {
 			transition: color $transition_short ease;
-			color: $active_dark !important;
+			color: $status_border_primary_dark !important;
 		}
-			
+
 		&:not(:checked) ~ label {
 			transition: color $transition_short ease;
-			color: $text_dk_lighter;
+			color: $text_light_dark;
 
 			h4 {
 				transition: color $transition_short ease;
-				color: $text_dk_default;
+				color: $text_default_dark;
 			}
 		}
 	}
