@@ -237,7 +237,7 @@ const Pagination = ( props: PaginationProps) => {
             >
               <Flex alignItems="center">
                 <Icon icon="chevron-left" />
-                <Body>Previous</Body>
+                <Body>Prev</Body>
               </Flex>
             </li>
             <div className="pagination-dropdown" 
@@ -267,7 +267,7 @@ const Pagination = ( props: PaginationProps) => {
                         key={option.id}
                         onClick={() => handlePageChange(Number(option.value))}
                     >
-                      <Body text={option.label} />
+                      <Body>Page {option.label}</Body>
                     </div>
                   ))}
                 </div>
