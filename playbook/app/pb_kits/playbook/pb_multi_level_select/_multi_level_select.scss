@@ -31,10 +31,10 @@
     }
 
     .input_wrapper {
-      background-color: $white;
+      background-color: $input_background_default;
       cursor: pointer;
       padding: $space_xs + 1 $space_sm;
-      border: 1px solid #e4e8f0;
+      border: 1px solid $input_border_default;
       border-radius: $border_rad_heavier;
       display: flex;
       align-items: center;
@@ -42,8 +42,8 @@
       @include transition_default;
 
       &:focus-within {
-        border-color: $primary;
-        background-color: $focus_input_light;
+        border-color: $input_border_state;
+        background-color: $input_background_state;
       }
 
       .input_inner_container {
@@ -61,7 +61,7 @@
       }
 
       &:has(input:disabled) {
-        background-color: shade($white, 5%);
+        background-color: $input_background_disabled;
         box-shadow: none;
         cursor: default;
         opacity: 0.5;
