@@ -37,6 +37,7 @@ type DropdownProps = {
     children?: React.ReactChild[] | React.ReactChild | React.ReactElement[];
     className?: string;
     clearable?: boolean;
+    closeOnClick?: "outside" | "inside" | "any";
     constrainHeight?: boolean;
     customQuickPickDates?: CustomQuickPickDates;
     formPillProps?: GenericObject;
@@ -78,6 +79,7 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
         children,
         className,
         clearable = true,
+        closeOnClick = "any",
         constrainHeight = false,
         customQuickPickDates,
         dark = false,
@@ -191,13 +193,14 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
             setIsDropDownClosed,
             setFocusedOptionIndex,
             setIsInputFocused,
+            closeOnClick,
         });
 
         window.addEventListener("click", handleClick);
         return () => {
             window.removeEventListener("click", handleClick);
         };
-    }, []);
+    }, [closeOnClick]);
 
     useEffect(() => {
         setHasTriggerSubcomponent(!!trigger);
@@ -273,6 +276,8 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
 
 
       const handleOptionClick = (clickedItem: GenericObject) => {
+                const shouldCloseOnClick = closeOnClick === "any" || closeOnClick === "inside";
+                
                 if (multiSelect) {
                     setSelected((prev) => {
                        const list = prev as GenericObject[];
@@ -284,11 +289,15 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
                        return next;
                    });
                    setFilterItem("");
-                   setIsDropDownClosed(true);
+                   if (shouldCloseOnClick) {
+                       setIsDropDownClosed(true);
+                   }
                } else {
                    setSelected(clickedItem);
                    setFilterItem("");
-                   setIsDropDownClosed(true);
+                   if (shouldCloseOnClick) {
+                       setIsDropDownClosed(true);
+                   }
                    onSelect && onSelect(clickedItem);
                    
                    // Sync with DatePickers if this is a quickpick variant

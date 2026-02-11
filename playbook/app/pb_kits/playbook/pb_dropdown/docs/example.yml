@@ -61,6 +61,7 @@ examples:
   - dropdown_with_constrain_height: Constrain Height
   - dropdown_separators_hidden: Separators Hidden
   - dropdown_with_external_control: useDropdown Hook
+  - dropdown_closing_options: Closing Options
   - dropdown_quickpick: Quick Pick Variant
   - dropdown_quickpick_range_end: Quick Pick Variant (Range Ends Today)
   - dropdown_quickpick_default_dates: Quick Pick Variant (Default Dates)
