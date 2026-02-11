@@ -4,26 +4,35 @@
     'data-validation-message' => object.validation_message,
       ) do %>
   <div class="input_wrapper">
+    <% if !object.hide_label && object.label %>
+      <label for="<%= object.picker_id %>">
+        <% if object.required_indicator %>
+          <%= pb_rails("caption", props: { dark: object.dark, classname: "pb_date_picker_kit_label" }) do %>
+            <%= object.label %><span style="color: #DA0014;"> *</span>
+          <% end %>
+        <% else %>
+          <%= pb_rails("caption", props: { text: object.label, dark: object.dark, classname: "pb_date_picker_kit_label" }) %>
+        <% end %>
+      </label>
+    <% end %>
     <% if content.present? %>
       <%= content %>
     <% else %>
-      <%= pb_rails("text_input", props: {
-        aria: object.input_aria,
-        autocomplete: false,
-        cursor: object.cursor,
-        dark: object.dark,
-        data: object.input_data,
-        disabled: object.disable_input,
-        error: object.error,
-        id: object.picker_id,
-        label: object.hide_label ? nil : object.label,
-        margin_bottom: "none",
-        name: object.name,
-        placeholder: object.placeholder,
-        required: object.required,
-      }) %>
+    <%= pb_rails("text_input", props: {
+      aria: object.input_aria,
+      autocomplete: false,
+      cursor: object.cursor,
+      dark: object.dark,
+      data: object.input_data,
+      disabled: object.disable_input,
+      error: object.error,
+      id: object.picker_id,
+      margin_bottom: "none",
+      name: object.name,
+      placeholder: object.placeholder,
+      required: object.required,
+    }) %>
     <% end %>
-
     <% if object.selection_type == "quickpick" %>
       <input type="hidden" id="<%= "#{object.start_date_id}" %>" name="<%= "#{object.start_date_name}" %>">
       <input type="hidden" id="<%= "#{object.end_date_id}" %>" name="<%= "#{object.end_date_name}" %>">

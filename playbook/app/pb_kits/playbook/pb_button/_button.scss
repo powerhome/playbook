@@ -112,4 +112,45 @@ $pb_button_sizes: (
       @include pb_button_disabled_dark;
     }
   }
+
+  // Icon-only button (icon prop set, no text) - square with equal padding
+  // Rails: uses .pb_button_icon_only class
+  // React: detects when pb_button_content has an empty text span
+  &.pb_button_icon_only,
+  &:has(.pb_button_content > span:empty) {
+    aspect-ratio: 1;
+    min-width: auto;
+    width: auto;
+    height: auto;
+    padding: $pb_button_v_padding !important;
+    min-height: ($pb_button_v_padding * 2) + $font_small;
+    
+    &.pb_button_size_sm {
+      padding: $font_smaller !important;
+      min-height: ($font_smaller * 2) + $font_smaller;
+    }
+    
+    &.pb_button_size_md {
+      padding: $font_small !important;
+      min-height: ($font_small * 2) + $font_small;
+    }
+    
+    &.pb_button_size_lg {
+      padding: ($font_large - 2px) !important;
+      min-height: (($font_large - 2px) * 2) + ($font_large - 2px);
+    }
+
+    // Remove margins from icons
+    .button_with_icon,
+    .button_with_icon_right {
+      margin-right: 0;
+      margin-left: 0;
+    }
+
+    // Remove margins from Rails icon wrapper spans
+    > span {
+      margin-right: 0 !important;
+      margin-left: 0 !important;
+    }
+  }
 }

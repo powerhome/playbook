@@ -31,7 +31,8 @@
     "test-coverage": "jest --collectCoverage",
     "test-coverage-summary": "jest --collectCoverage --coverageReporters=\"json-summary\"",
     "release": "rm -rf dist; npx vite build",
-    "watch": "npx vite build --watch"
+    "watch": "npx vite build --watch",
+    "generate:tokens": "node scripts/generate-tokens.js"
   },
   "repository": {
     "type": "git",
