@@ -55,8 +55,10 @@
         border: none;
         font-family: $font_family_base;
         font-size: $font_base;
+        background-color: $input_background_default;
         &:focus {
           outline: none;
+          background-color: $input_background_state;
         }
       }
 
@@ -65,6 +67,9 @@
         box-shadow: none;
         cursor: default;
         opacity: 0.5;
+        input {
+          background-color: $input_background_disabled;
+        }
       }
     }
   }
