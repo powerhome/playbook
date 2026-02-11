@@ -97,13 +97,13 @@
         padding-bottom: $space_xs;
         cursor: pointer;
         &:hover {
-          background-color: $status_background_primary_hover;
+          background-color: $bg_light;
         }
 
         &.pb_dropdown_option_focused,
         &.pb_dropdown_option_list_focused,
         &.pb_dropdown_option_selected_focused {
-          background-color: $status_background_primary_hover;
+          background-color: $bg_light;
         }
 
         &.pb_dropdown_option_list,
@@ -112,21 +112,21 @@
 
           &:hover, &:focus {
             .pb_body_kit {
-              color: $status_text_primary;
+              color: $primary;
             }
           }
         }
         &.pb_dropdown_option_selected,
         &.pb_dropdown_option_selected_focused {
-          background-color: $status_background_primary;
-          color: $status_text_primary;
+          background-color: $primary;
+          color: $white;
           [class^="pb_body"],
           [class^="pb_title_kit"], a {
-            color: $status_text_primary !important;
+            color: $white !important;
           }
           border-bottom: 1px solid $border_light;
           &:hover {
-            background-color: $status_background_primary_hover;
+            background-color: $product_1_background;
           }
 
           // activeStyle font color map
@@ -339,10 +339,10 @@
     .pb_dropdown_container {
       background-color: $bg_dark !important;
       border-color: rgba($white, 0.15);
-      color: $text_default_dark;
+      color: $white;
       [class^="pb_body"],
       [class^="pb_title_kit"] {
-        color: $text_default_dark !important;
+        color: $white !important;
       }
 
       .pb_dropdown_option,
@@ -352,13 +352,13 @@
       .pb_dropdown_option_list_focused,
       .pb_dropdown_option_selected_focused {
         &:hover {
-          background-color: $status_iconBackground_neutral_hover_dark;
+          background-color: $hover_dark;
         }
 
         &.pb_dropdown_option_focused,
         &.pb_dropdown_option_list_focused,
         &.pb_dropdown_option_selected_focused {
-          background-color: $status_iconBackground_neutral_hover_dark;
+          background-color: $hover_dark;
         }
 
         &.pb_dropdown_option_list,
@@ -367,7 +367,7 @@
         }
         &.pb_dropdown_option_selected,
         &.pb_dropdown_option_selected_focused {
-          background-color: $status_background_primary;
+          background-color: $primary;
           border-bottom: rgba($white, 0.15);
         }
       }
