@@ -1,7 +1,9 @@
-# 16.2.0
+# Labels That Actually Label 🏷️
 ##### February 11, 2026
 
 ![release_image](https://github.com/user-attachments/assets/db119637-25e9-4157-9091-c5f7fdf034fc)
+
+Labels now label. Required means required. Validation actually validates: This release brings thoughtful accessibility upgrades across forms, tables, and tokens,  plus a healthy dose of polish to boot!
 
 [16.2.0](https://github.com/powerhome/playbook/tree/16.2.0) full list of changes:
 
