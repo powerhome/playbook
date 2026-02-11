@@ -1,5 +1,6 @@
 import React from 'react'
 import Dropdown from '../../pb_dropdown/_dropdown'
+import Caption from '../../pb_caption/_caption'
 
 const DropdownClosingOptions = (props) => {
     const options = [
@@ -22,12 +23,22 @@ const DropdownClosingOptions = (props) => {
 
     return (
         <>
+            <Caption 
+                marginBottom="xs" 
+                text="Any"
+            />
             <Dropdown
+                closeOnClick='any'
                 options={options}
                 {...props}
             />
-            <br />
 
+            <br />
+                
+            <Caption 
+                marginBottom="xs" 
+                text="Outside"
+            />
             <Dropdown
                 closeOnClick='outside'
                 options={options}
@@ -35,6 +46,11 @@ const DropdownClosingOptions = (props) => {
             />
 
             <br />
+
+            <Caption 
+                marginBottom="xs" 
+                text="Inside"
+            />
             <Dropdown
                 closeOnClick='inside'
                 options={options}
