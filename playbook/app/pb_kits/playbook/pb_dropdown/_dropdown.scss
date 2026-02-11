@@ -21,16 +21,16 @@
     .dropdown_trigger_wrapper_focus_select_only,
     .dropdown_trigger_wrapper_select_only {
       @include pb_body;
-      border: 1px solid $border_light;
+      border: 1px solid $input_border_default;
       background-color: $white;
       min-height: 45px;
       @media (hover: hover) {
         &:hover,
         &:active,
         &:focus {
-          background-color: $focus_input_light;
+          background-color: $input_background_state;
           input {
-            background-color: $focus_input_light;
+            background-color: $input_background_state;
           }
         }
       }
@@ -45,22 +45,22 @@
         }
       }
       &:focus {
-        box-shadow: 0px 0px 0 1px $primary !important;
+        box-shadow: 0px 0px 0 1px $status_border_primary !important;
         outline: unset;
         transition: box-shadow 0.15s ease-in-out;
       }
       &:focus-within {
-        box-shadow: 0px 0px 0 1px $primary !important;
+        box-shadow: 0px 0px 0 1px $status_border_primary !important;
         outline: unset;
         transition: box-shadow 0.15s ease-in-out;
       }
 
       &.dropdown_trigger_wrapper_select_only {
-        box-shadow: inset 0 -11px 20px rgba($primary, 0.05);
+        box-shadow: inset 0 -11px 20px rgba($status_border_primary, 0.05);
       }
 
       &.dropdown_trigger_wrapper_focus {
-        box-shadow: 0px 0px 0 1px $primary !important;
+        box-shadow: 0px 0px 0 1px $status_border_primary !important;
         transition: box-shadow 0.1s ease-in-out;
       }
     }
@@ -71,7 +71,7 @@
       overflow: hidden;
       box-shadow: $shadow_deep;
       border-radius: $border_rad_heavier;
-      border: 1px solid $border_light;
+      border: 1px solid $input_border_default;
       margin-top: $space_xs;
       z-index: $z_1;
       width: 100%;
@@ -94,38 +94,38 @@
         padding-bottom: $space_xs;
         cursor: pointer;
         &:hover {
-          background-color: $bg_light;
+          background-color: $status_background_primary_hover;
         }
 
         &.pb_dropdown_option_focused,
         &.pb_dropdown_option_list_focused,
         &.pb_dropdown_option_selected_focused {
-          background-color: $bg_light;
+          background-color: $status_background_primary_hover;
         }
 
         &.pb_dropdown_option_list,
         &.pb_dropdown_option_list_focused {
-          border-bottom: 1px solid $border_light;
+          border-bottom: 1px solid $input_border_default;
 
           &:hover, &:focus {
             .pb_body_kit {
-              color: $primary;
+              color: $status_text_primary;
             }
           }
         }
         &.pb_dropdown_option_selected,
         &.pb_dropdown_option_selected_focused {
-          background-color: $primary;
-          color: $white;
+          background-color: $status_background_primary;
+          color: $status_text_primary;
           [class^="pb_body"],
           [class^="pb_title_kit"], a {
-            color: $white !important;
+            color: $status_text_primary !important;
           }
-          border-bottom: 1px solid $border_light;
+          border-bottom: 1px solid $input_border_default;
           &:hover {
-            background-color: $product_1_background;
+            background-color: $status_background_primary_hover;
           }
- 
+
           // activeStyle font color map
           @each $name, $color in $font-colors {
             &.font-#{$name} {
@@ -137,7 +137,7 @@
             &.bg-#{$name} {
               background-color: $bg;
             }
-          }     
+          }
         }
       }
 
@@ -171,7 +171,7 @@
       .dropdown_trigger_wrapper_focus,
       .dropdown_trigger_wrapper_focus_select_only,
       .dropdown_trigger_wrapper_select_only {
-        border-color: $error;
+        border-color: $input_border_error;
         box-shadow: none !important;
       }
     }
@@ -198,7 +198,7 @@
   &.pb_dropdown_subtle_separators_hidden {
     .dropdown_wrapper {
       .pb_dropdown_container {
-        
+
         .pb_dropdown_option:first-child,
         .pb_dropdown_option_list:first-child,
         .pb_dropdown_option_selected:first-child,
@@ -228,7 +228,7 @@
           border-radius: $border_radius_md;
           border-bottom: none;
           position: relative;
-        
+
           &::after {
             content: "";
             position: absolute;
@@ -236,21 +236,21 @@
             right: -$space_xs;
             bottom: -4.5px;
             height: 1px;
-            background: $border_light;
+            background: $input_border_default;
           }
         }
-        
+
         .pb_dropdown_option:last-child::after,
         .pb_dropdown_option_list:last-child::after,
         .pb_dropdown_option_selected:last-child::after,
         .pb_dropdown_option_focused:last-child::after,
         .pb_dropdown_option_list_focused:last-child::after,
         .pb_dropdown_option_selected_focused:last-child::after {
-          display: none; 
+          display: none;
         }
       }
     }
-  
+
     &.pb_dropdown_subtle_separators_hidden {
       .dropdown_wrapper {
         .pb_dropdown_container {
@@ -262,7 +262,7 @@
           .pb_dropdown_option_selected_focused:first-child {
             margin-top: $space_xs;
           }
-  
+
           .pb_dropdown_option:last-child,
           .pb_dropdown_option_list:last-child,
           .pb_dropdown_option_selected:last-child,
@@ -280,7 +280,7 @@
           .pb_dropdown_option_selected_focused {
             padding: $space_xxs $space_xs;
             margin: $space_xxs $space_xs;
-     
+
             &::after {
               height: 0px;
             }
@@ -302,21 +302,21 @@
       .dropdown_trigger_wrapper_focus_select_only,
       .dropdown_trigger_wrapper_select_only {
         @include pb_body_light_dark;
-        background-color: rgba($white, 0.1) !important;
+        background-color: $input_background_default_dark !important;
         background: none;
-        border-color: rgba($white, 0.15);
+        border-color: $input_border_default_dark;
         @media (hover: hover) {
           &:hover,
           &:active,
           &:focus {
-            background-color: rgba($white, 0.05) !important;
+            background-color: $input_background_state_dark !important;
           }
         }
         [class^="pb_body"] {
-          color: $white;
+          color: $text_default_dark;
         }
         &.dropdown_trigger_wrapper_select_only {
-          box-shadow: inset 0 -11px 20px rgba($white, 0.05);
+          box-shadow: inset 0 -11px 20px rgba($status_border_primary_dark, 0.05);
         }
         .dropdown_input {
           background-color: unset;
@@ -329,17 +329,17 @@
         .dropdown_trigger_wrapper_focus,
         .dropdown_trigger_wrapper_focus_select_only,
         .dropdown_trigger_wrapper_select_only {
-          border-color: $error_dark;
+          border-color: $input_border_error_dark;
         }
       }
     }
     .pb_dropdown_container {
       background-color: $bg_dark !important;
-      border-color: rgba($white, 0.15);
-      color: $white;
+      border-color: $input_border_default_dark;
+      color: $text_default_dark;
       [class^="pb_body"],
       [class^="pb_title_kit"] {
-        color: $white !important;
+        color: $text_default_dark !important;
       }
 
       .pb_dropdown_option,
@@ -349,23 +349,23 @@
       .pb_dropdown_option_list_focused,
       .pb_dropdown_option_selected_focused {
         &:hover {
-          background-color: $hover_dark;
+          background-color: $status_iconBackground_neutral_hover_dark;
         }
 
         &.pb_dropdown_option_focused,
         &.pb_dropdown_option_list_focused,
         &.pb_dropdown_option_selected_focused {
-          background-color: $hover_dark;
+          background-color: $status_iconBackground_neutral_hover_dark;
         }
 
         &.pb_dropdown_option_list,
         &.pb_dropdown_option_list_focused {
-          border-color: rgba($white, 0.15);
+          border-color: $input_border_default_dark;
         }
         &.pb_dropdown_option_selected,
         &.pb_dropdown_option_selected_focused {
-          background-color: $primary;
-          border-bottom: rgba($white, 0.15);
+          background-color: $status_background_primary;
+          border-bottom: $input_border_default_dark;
         }
       }
     }
