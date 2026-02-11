@@ -4,7 +4,8 @@
 @import "../tokens/border_radius";
 
 // Base styles
-.pb_link_kit {
+.pb_link_kit,
+.pb_link_kit_underline {
   @include pb_link($primary);
   &:hover {
     color: $text_lt_default;
