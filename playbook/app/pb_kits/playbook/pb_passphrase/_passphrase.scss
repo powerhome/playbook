@@ -50,7 +50,7 @@
       cursor: pointer;
       @media (hover:hover) {
         &:hover .pb_body_kit_light {
-          color: $primary;
+          color: $input_text_active;
         }
       }
 
