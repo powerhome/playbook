@@ -44,7 +44,7 @@
           outline: none;
         }
         &::placeholder {
-          color: $text_placeholder;
+          color: $input_text_disabled;
         }
       }
       &:focus {
@@ -324,6 +324,9 @@
         .dropdown_input {
           background-color: unset;
           color: $white;
+          &::placeholder {
+            color: $input_text_disabled_dark;
+          }
         }
       }
 
