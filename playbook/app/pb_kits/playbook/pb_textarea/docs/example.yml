@@ -20,6 +20,7 @@ examples:
   - textarea_inline: Inline
   - textarea_emoji_mask: Emoji Mask
   - textarea_required_indicator: Required Indicator
+  - textarea_disabled: Disabled
 
   swift:
   - textarea_default_swift: Default
