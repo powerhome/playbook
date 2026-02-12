@@ -53,8 +53,8 @@ $pb_selectable_paddings: (
 
     @media (hover:hover) {
       &:hover {
-        box-shadow: $shadow-deep;
-        border-color: $slate;
+        box-shadow: $input_border_state_dark;
+        border-color: $input_border_default_dark;
       }
     }
 
@@ -168,7 +168,7 @@ $pb_selectable_paddings: (
       background: $bg_dark_card;
 
       .pb_selectable_card_circle {
-        border-color: $bg_dark;
+        border-color: $input_border_default_dark;
         background: $primary_action_dark;
       }
     }
