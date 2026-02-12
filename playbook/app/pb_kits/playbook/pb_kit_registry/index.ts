@@ -1,198 +1,180 @@
 // eslint-disable-next-line
 // @ts-nocheck
-import PbEnhancedElement from '../pb_enhanced_element'
+import PbEnhancedElement from "../pb_enhanced_element";
+
+type KitClass = typeof PbEnhancedElement;
 
 class PbKitRegistry {
-  private static instance: PbKitRegistry
-  private kits: Map<string, typeof PbEnhancedElement> = new Map()
-  private mutationObserver: MutationObserver | null = null
-  private initialized = false
+  private static instance: PbKitRegistry;
+
+  // array to avoid overwriting if multiple kits share a selector
+  private kits: Map<string, KitClass[]> = new Map();
+
+  private mutationObserver: MutationObserver | null = null;
+  private initialized = false;
+
+  // rAF batching to reduce jank during heavy DOM churn
+  private queued = false;
+  private pendingMutations: MutationRecord[] = [];
 
   static getInstance(): PbKitRegistry {
     if (!PbKitRegistry.instance) {
-      PbKitRegistry.instance = new PbKitRegistry()
+      PbKitRegistry.instance = new PbKitRegistry();
     }
-    return PbKitRegistry.instance
+    return PbKitRegistry.instance;
   }
 
-  register(kit: typeof PbEnhancedElement): void {
-    const selector = kit.selector
+  register(kit: KitClass): void {
+    const selector = kit.selector;
     if (!selector) {
-      console.warn('[PbKitRegistry] Kit missing selector:', kit.name)
-      return
+      console.warn("[PbKitRegistry] Kit missing selector:", kit.name);
+      return;
     }
-    this.kits.set(selector, kit)
+
+    const list = this.kits.get(selector) || [];
+    list.push(kit);
+    this.kits.set(selector, list);
   }
 
   start(): void {
-    if (this.initialized) return
-    this.initialized = true
+    if (this.initialized) return;
+    this.initialized = true;
+
+    const target = document.documentElement || document;
 
     // Single MutationObserver for ALL kits
-    this.mutationObserver = new MutationObserver((mutations) => {
-      this.processMutations(mutations)
-    })
+    // attributes OFF
+    this.mutationObserver = new MutationObserver((muts) => this.onMutations(muts));
 
-    this.mutationObserver.observe(document, {
-      attributes: true,
+    this.mutationObserver.observe(target, {
       childList: true,
-      subtree: true
-    })
+      subtree: true,
+      // attributes: false by omission
+    });
 
     // Initial scan of document
-    this.scanDocument()
-  }
-
-  private scanDocument(): void {
-    this.kits.forEach((kit, selector) => {
-      try {
-        const elements = document.querySelectorAll(selector)
-        elements.forEach((element) => {
-          kit.addMatch(element)
-        })
-      } catch (error) {
-        console.error(`[PbKitRegistry] Error scanning for selector "${selector}":`, error)
-      }
-    })
-  }
-
-  private processMutations(mutations: MutationRecord[]): void {
-    const addedNodes = new Set<Element>()
-    const removedNodes = new Set<Element>()
-    const attributeChangedNodes = new Set<Element>()
-
-    // Collect all changes first to batch process
-    for (const mutation of mutations) {
-      if (mutation.type === 'childList') {
-        mutation.addedNodes.forEach(node => {
-          if (node.nodeType === Node.ELEMENT_NODE) {
-            addedNodes.add(node as Element)
-          }
-        })
-        mutation.removedNodes.forEach(node => {
-          if (node.nodeType === Node.ELEMENT_NODE) {
-            removedNodes.add(node as Element)
-          }
-        })
-      } else if (mutation.type === 'attributes' && mutation.target.nodeType === Node.ELEMENT_NODE) {
-        // Attribute changes might affect selector matching - needs special handling
-        attributeChangedNodes.add(mutation.target as Element)
-      }
-    }
-
-    // Process removals first
-    if (removedNodes.size > 0) {
-      this.handleRemovals(removedNodes)
-    }
-
-    // Process attribute changes (could be add OR remove)
-    if (attributeChangedNodes.size > 0) {
-      this.handleAttributeChanges(attributeChangedNodes)
-    }
-
-    // Process additions
-    if (addedNodes.size > 0) {
-      this.handleAdditions(addedNodes)
-    }
-  }
-
-  private handleAttributeChanges(nodes: Set<Element>): void {
-    nodes.forEach(node => {
-      this.kits.forEach((kit, selector) => {
-        try {
-          const currentlyMatches = node.matches?.(selector)
-          const hasInstance = kit.elements?.has(node)
-
-          if (currentlyMatches && !hasInstance) {
-            // Element now matches but wasn't registered, add it
-            kit.addMatch(node)
-          } else if (!currentlyMatches && hasInstance) {
-            // Element no longer matches but is still registered, remove it
-            kit.removeMatch(node)
-          }
-          // If matches and has instance, or doesn't match and no instance, no action needed
-        } catch (error) {
-          console.debug(`[PbKitRegistry] Error handling attribute change for "${selector}":`, error)
-        }
-      })
-    })
-  }
-
-  private handleRemovals(nodes: Set<Element>): void {
-    nodes.forEach(node => {
-      this.kits.forEach((kit, selector) => {
-        try {
-          // Check if the removed node itself matches
-          if (node.matches?.(selector)) {
-            kit.removeMatch(node)
-          }
-          // Check descendants
-          const descendants = node.querySelectorAll?.(selector)
-          descendants?.forEach(el => kit.removeMatch(el))
-        } catch (error) {
-          // Selector might be invalid or node might be detached
-          console.debug(`[PbKitRegistry] Error removing matches for "${selector}":`, error)
-        }
-      })
-    })
-  }
-
-  private handleAdditions(nodes: Set<Element>): void {
-    nodes.forEach(node => {
-      this.kits.forEach((kit, selector) => {
-        try {
-          // Check if the added node itself matches
-          if (node.matches?.(selector)) {
-            kit.addMatch(node)
-          }
-          // Check descendants
-          const descendants = node.querySelectorAll?.(selector)
-          descendants?.forEach(el => kit.addMatch(el))
-        } catch (error) {
-          // Selector might be invalid
-          console.debug(`[PbKitRegistry] Error adding matches for "${selector}":`, error)
-        }
-      })
-    })
+    this.scan(document);
   }
 
   stop(): void {
-    if (!this.initialized) return
+    if (!this.initialized) return;
 
-    // Disconnect observer
-    this.mutationObserver?.disconnect()
-    this.mutationObserver = null
+    this.mutationObserver?.disconnect();
+    this.mutationObserver = null;
 
-    // Disconnect all kit instances
-    this.kits.forEach(kit => {
-      try {
-        const elements = kit.elements
-        if (elements) {
-          elements.forEach((instance, element) => {
-            kit.removeMatch(element)
-          })
+    // Disconnect all kit instances safely (snapshot keys first)
+    this.kits.forEach((kitsForSelector) => {
+      kitsForSelector.forEach((kit) => {
+        if (!kit.elements) return;
+        const els = Array.from(kit.elements.keys());
+        els.forEach((el) => kit.removeMatch(el));
+      });
+    });
+
+    this.pendingMutations = [];
+    this.queued = false;
+    this.initialized = false;
+  }
+
+  // ---- Mutation batching ----
+
+  private onMutations(muts: MutationRecord[]): void {
+    this.pendingMutations.push(...muts);
+
+    if (this.queued) return;
+    this.queued = true;
+
+    requestAnimationFrame(() => {
+      this.queued = false;
+      const batch = this.pendingMutations;
+      this.pendingMutations = [];
+      this.processMutations(batch);
+    });
+  }
+
+  private processMutations(mutations: MutationRecord[]): void {
+    // We only care about added nodes here.
+    // Removals handled by cleanupDisconnected() (no selector queries on removed subtrees)
+    const addedRoots: Element[] = [];
+
+    for (const mutation of mutations) {
+      if (mutation.type !== "childList") continue;
+
+      mutation.addedNodes.forEach((node) => {
+        if (node.nodeType === Node.ELEMENT_NODE) {
+          addedRoots.push(node as Element);
         }
-      } catch (error) {
-        console.error('[PbKitRegistry] Error stopping kit:', error)
-      }
-    })
-
-    this.initialized = false
-  }
-
-  // Useful for debugging
-  getRegisteredKits(): string[] {
-    return Array.from(this.kits.keys())
-  }
-
-  // Force re-scan (useful after major DOM changes)
-  rescan(): void {
-    if (!this.initialized) {
-      console.warn('[PbKitRegistry] Cannot rescan - registry not initialized')
-      return
+      });
     }
-    this.scanDocument()
+
+    // Enhance anything newly inserted
+    if (addedRoots.length) {
+      for (const root of addedRoots) {
+        this.scan(root);
+      }
+    }
+
+    // Handle removals cheaply: only look at already-enhanced elements
+    this.cleanupDisconnected();
+  }
+
+  // ---- Scanning / enhancing ----
+
+  private scan(root: ParentNode): void {
+    // For each selector, query within root once and attach all kits registered to it
+    this.kits.forEach((kitsForSelector, selector) => {
+      let matches: NodeListOf<Element>;
+      try {
+        // querySelectorAll doesn’t include root itself, so we handle that below too
+        matches = (root as any).querySelectorAll
+          ? (root as any).querySelectorAll(selector)
+          : document.querySelectorAll(selector);
+      } catch (error) {
+        console.debug(`[PbKitRegistry] Invalid selector "${selector}"`, error);
+        return;
+      }
+
+      if (matches && matches.length) {
+        matches.forEach((el) => {
+          kitsForSelector.forEach((kit) => kit.addMatch(el));
+        });
+      }
+
+      // Include root itself if it matches
+      if ((root as any).matches?.(selector)) {
+        kitsForSelector.forEach((kit) => kit.addMatch(root as any));
+      }
+    });
+  }
+
+  // No selector queries on removals
+  // We just remove instances whose elements are no longer in the DOM
+  private cleanupDisconnected(): void {
+    this.kits.forEach((kitsForSelector) => {
+      kitsForSelector.forEach((kit) => {
+        if (!kit.elements) return;
+
+        // Snapshot keys to avoid mutate-while-iterating
+        const els = Array.from(kit.elements.keys());
+        for (const el of els) {
+          if (!el.isConnected) {
+            kit.removeMatch(el);
+          }
+        }
+      });
+    });
+  }
+
+  // Debug helpers
+  getRegisteredSelectors(): string[] {
+    return Array.from(this.kits.keys());
+  }
+
+  // Optional: manually rescan a subtree (useful if some page toggles data-* after insertion)
+  rescan(root: ParentNode = document): void {
+    if (!this.initialized) return;
+    this.scan(root);
   }
 }
 
-export default PbKitRegistry.getInstance()
+export default PbKitRegistry.getInstance();
