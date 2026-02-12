@@ -535,7 +535,7 @@ const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>(
                 className="pb_multi_level_select_kit_label"
                 marginBottom="xs"
             >
-              {label} <span style={{ color: `${colors.error}` }}>*</span>
+              {label} <span className="required_indicator">*</span>
             </Caption>
           ) : (
             <Caption

@@ -123,6 +123,10 @@
     display: block;
   }
 
+  .required_indicator {
+    color: $text_error;
+  }
+
   &.dark {
     &.error {
       .wrapper {
@@ -134,5 +138,9 @@
         color: $text_error_dark;
       }
     }
+  }
+
+  .required_indicator {
+    color: $text_error_dark;
   }
 }
