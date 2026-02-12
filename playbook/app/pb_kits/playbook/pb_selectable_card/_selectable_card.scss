@@ -43,6 +43,8 @@ $pb_selectable_paddings: (
       padding: 1px;
     }
 
+    border-color: $input_border_default;
+
     @include pb_card;
     transition-property: none;
     transition-duration: 0s;
@@ -53,8 +55,8 @@ $pb_selectable_paddings: (
 
     @media (hover:hover) {
       &:hover {
-        box-shadow: $input_border_state_dark;
-        border-color: $input_border_default_dark;
+        box-shadow: $shadow_deep;
+        border-color: $input_border_default;
       }
     }
 
@@ -139,7 +141,7 @@ $pb_selectable_paddings: (
       &:checked {
         ~label {
           border-width: $pb_card_border_width;
-          outline: 1px solid $primary;
+          outline: 1px solid $status_text_primary;
         }
 
       }
@@ -166,9 +168,10 @@ $pb_selectable_paddings: (
     > label {
       @include pb_card_dark;
       background: $bg_dark_card;
+      border-color: $input_border_default;
 
       .pb_selectable_card_circle {
-        border-color: $input_border_default_dark;
+        border-color: $input_border_default;
         background: $primary_action_dark;
       }
     }
@@ -240,7 +243,7 @@ $pb_selectable_paddings: (
 }
 
 .pb_selectable_card_kit_checked_disabled>label {
-  border-color: $primary !important;
+  border-color: $status_text_primary !important;
 
   .dark & {
     border-color: $primary_action_dark !important;
