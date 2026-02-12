@@ -82,10 +82,10 @@
     position: absolute;
     z-index: $z_1;
     width: 100%;
-    background-color: $input_background_default;
+    background-color: $white;
     padding: $space_sm $space_sm $space_sm 0;
     border-radius: $border_rad_heavier;
-    border: 1px solid $input_border_default;
+    border: 1px solid #e4e8f0;
     max-height: 600px;
     overflow: auto;
 
