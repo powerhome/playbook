@@ -15,12 +15,12 @@
   color: $text_lt_light;
   @media (hover: hover) {
     &:hover{
-      background-color: rgba($input_background_state,$opacity_5);
+      background-color: rgba($focus_input_light,$opacity_5);
     }
   }
   &.dark {
-    color: $text_lt_light;
-    border-color: $input_border_default_dark;
+    color: $white;
+    border-color: $border_dark;
   }
   &.no_label_shift {
     top: 0;

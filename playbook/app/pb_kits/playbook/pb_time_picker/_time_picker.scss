@@ -18,19 +18,19 @@
 
   .text_input_wrapper_add_on .add-on-card {
     transition: background-color 0.3s ease-in-out 0s;
-    border-color: $border_light;
+    border-color: $input_border_default;
   }
 
   .text_input_wrapper_add_on:focus-within .add-on-card {
     transition: background-color 0.3s ease-in-out 0s, border-color 0.15s ease-in-out 0s;
-    border-color: $primary;
+    border-color: $status_border_primary;
   }
 
   @media (hover: hover) {
     &:hover {
       .text_input_wrapper_add_on .add-on-card {
         cursor: pointer;
-        background-color: rgba($focus_input_light, $opacity_5);
+        background-color: $input_background_state;
       }
     }
   }
@@ -41,12 +41,12 @@
 
   &.error {
     .text_input_wrapper_add_on .add-on-card {
-      border-color: $error;
+      border-color: $input_border_error;
     }
-    
+
     .text_input_wrapper_add_on:focus-within .add-on-card {
       transition: background-color 0.3s ease-in-out 0s, border-color 0.15s ease-in-out 0s;
-      border-color: $error;
+      border-color: $input_border_error;
     }
   }
 
@@ -74,7 +74,7 @@
     overflow: visible;
     box-shadow: $shadow_deep;
     border-radius: $border_rad_heavier;
-    border: 1px solid $border_light;
+    border: 1px solid $input_border_default;
     margin-top: $space_xxs;
     z-index: $z_1;
     width: 314.2px;
@@ -103,7 +103,7 @@
         }
 
         input.time_input {
-          border: 1px solid $border_light;
+          border: 1px solid $input_border_default;
           border-radius: $border_radius_md;
           text-align: center;
           width: 60px;
@@ -127,17 +127,17 @@
           }
 
           &:focus {
-            border-color: $primary;
+            border-color: $status_border_primary;
             outline: none;
           }
 
           &:hover {
-            background-color: $focus_input_light;
+            background-color: $input_background_state;
           }
 
           &.invalid {
-            border-color: $error;
-            background-color: rgba($error, 0.05);
+            border-color: $input_border_error;
+            background-color: rgba($input_border_error, 0.05);
           }
         }
 
@@ -147,7 +147,7 @@
           top: 100%;
           left: 0;
           background-color: $white;
-          border: 1px solid $border_light;
+          border: 1px solid $input_border_default;
           border-radius: $border_rad_heavier;
           box-shadow: $shadow_deep;
           margin-top: $space_xxs;
@@ -171,7 +171,7 @@
           &::-webkit-scrollbar-thumb {
             background-color: rgba($text_lt_lighter, 0.5);
             border-radius: 3px;
-            
+
             &:hover {
               background-color: rgba($text_lt_lighter, 0.7);
             }
@@ -190,7 +190,7 @@
             }
 
             &.selected {
-              background-color: $primary;
+              background-color: $status_border_primary;
               color: $white;
 
               &:hover {
@@ -205,7 +205,7 @@
         width: 100%;
         flex-basis: 100%;
         .time_range_error_text {
-          color: $error;
+          color: $input_border_error;
         }
       }
       .pb_caption_kit_xs {
@@ -224,11 +224,11 @@
         flex-direction: column;
         align-items: flex-start;
         margin-left: $space_md;
-        
+
         > .time_input_label {
           margin-bottom: $space_xxs;
         }
-        
+
         .pb_form_group_kit {
           margin-left: 0;
           display: flex;
@@ -261,7 +261,10 @@
           }
 
           > input[type="radio"]:focus + label {
-            border-color: $primary;
+            border-color: $status_border_primary;
+                        &:dark {
+              color: $text_default_color !important;
+            }
           }
         }
 
@@ -278,6 +281,7 @@
           align-items: center;
           justify-content: center;
           font-weight: $bolder;
+          color: $text_lt_default;
         }
 
         .disabled_meridiem > label,
