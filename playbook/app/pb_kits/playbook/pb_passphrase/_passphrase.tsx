@@ -7,7 +7,6 @@ import { globalProps } from "../utilities/globalProps"
 import Body from '../pb_body/_body'
 import Caption from '../pb_caption/_caption'
 import CircleIconButton from '../pb_circle_icon_button/_circle_icon_button'
-import colors from '../tokens/exports/_colors.module.scss'
 import Flex from '../pb_flex/_flex'
 import Icon from '../pb_icon/_icon'
 import PbReactPopover from '../pb_popover/_popover'
@@ -121,7 +120,7 @@ const Passphrase = (props: PassphraseProps): React.ReactElement => {
             <Caption
                 className="passphrase-label"
             >
-              {label} <span style={{ color: `${colors.error}` }}>*</span>
+              {label} <span className="required_indicator">*</span>
             </Caption>
           ) : (
             <Caption

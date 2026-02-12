@@ -77,4 +77,14 @@
       left: -($space_xs * 1.5);
     }
   }
+
+  .required_indicator {
+    color: $text_error;
+  }
+
+  &.dark {
+    .required_indicator {
+      color: $text_error_dark;
+    }
+  }
 }
