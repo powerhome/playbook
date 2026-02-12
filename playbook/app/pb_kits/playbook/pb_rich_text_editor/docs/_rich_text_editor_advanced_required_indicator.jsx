@@ -22,6 +22,7 @@ const RichTextEditorAdvancedRequiredIndicator = (props) => {
     <div>
       <RichTextEditor
           advancedEditor={editor}
+          id={"required-advanced"}
           label="Label"
           requiredIndicator
           {...props}

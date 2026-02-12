@@ -7,8 +7,10 @@
 @import "./collapsible_nav";
 
 [class^="pb_nav_list"] {
+
   //classes for fontSize and fontWeight props
   .font_size_small {
+
     .pb_nav_list_item_text,
     .pb_nav_list_item_text_collapsible {
       font-size: $font_small;
@@ -16,6 +18,7 @@
   }
 
   .font_size_normal {
+
     .pb_nav_list_item_text,
     .pb_nav_list_item_text_collapsible {
       font-size: $font_normal;
@@ -23,6 +26,7 @@
   }
 
   .font_bolder {
+
     .pb_nav_list_item_text,
     .pb_nav_list_item_text_collapsible {
       font-weight: $bolder !important;
@@ -30,6 +34,7 @@
   }
 
   .font_bold {
+
     .pb_nav_list_item_text,
     .pb_nav_list_item_text_collapsible {
       font-weight: $bold !important;
@@ -37,6 +42,7 @@
   }
 
   .font_regular {
+
     .pb_nav_list_item_text,
     .pb_nav_list_item_text_collapsible {
       font-weight: $regular;
@@ -79,19 +85,22 @@
 }
 
 // Disabled scss
-.pb_nav_item_disabled {
+.pb_nav_item_disabled{
   cursor: not-allowed !important;
-  .pb_nav_list_item_text, 
+
+  .pb_nav_list_item_text,
   .pb_nav_list_item_icon_left,
   .pb_nav_list_item_icon_right,
   .pb_nav_list_item_icon_section {
     color: $text_lt_lighter !important;
     cursor: not-allowed !important;
   }
+
   @media (hover: hover) {
     &:hover {
-      background-color: unset !important;
+      background-color: $white !important;
       color: $text_lt_lighter !important;
+
       .pb_nav_list_item_text,
       .pb_nav_list_item_icon_left,
       .pb_nav_list_item_icon_right {
@@ -100,3 +109,73 @@
     }
   }
 }
+
+  .pb_nav_item_disabled {
+    cursor: not-allowed !important;
+
+    .pb_nav_list_item_text,
+    .pb_nav_list_item_text_collapsible,
+    .pb_nav_list_item_icon_left,
+    .pb_nav_list_item_icon_right,
+    .pb_nav_list_item_icon_section,
+    .pb_nav_list_item_link,
+    .pb_nav_list_item_link_collapsible,
+    .cursor_pointer {
+      color: $text_lt_lighter !important;
+      cursor: not-allowed !important;
+    }
+
+    .pb_collapsible_main_kit {
+      background-color: $white !important;
+    }
+
+    .icon_wrapper,
+    svg {
+      color: $text_lt_lighter !important;
+      cursor: not-allowed !important;
+    }
+
+    @media (hover: hover) {
+      &:hover {
+        background-color: $white !important;
+
+        .pb_collapsible_main_kit,
+        .pb_nav_list_item_link,
+        .icon_wrapper {
+          background-color: $white !important;
+        }
+
+        .pb_nav_list_item_icon_section_collapsible path,
+        .pb_nav_list_item_link_collapsible path {
+          color: $text_lt_lighter !important;
+        }
+      }
+    }
+  }
+
+  .collapsible_nav_wrapper_pb_nav_item_disabled {
+    .pb_collapsible_main_kit {
+      background-color: $white !important;
+    }
+
+    .pb_nav_list_item_link,
+    .pb_nav_list_item_text,
+    .pb_nav_list_item_icon_left,
+    .pb_nav_list_item_icon_right,
+    .icon_wrapper,
+    .pb_nav_list_item_icon_section {
+      color: $text_lt_lighter !important;
+      cursor: not-allowed !important;
+    }
+
+    .icon_wrapper svg {
+      color: $text_lt_lighter !important;
+    }
+
+    &:hover {
+      .icon_wrapper,
+      .pb_nav_list_item_link {
+        background-color: $white !important;
+      }
+    }
+  }

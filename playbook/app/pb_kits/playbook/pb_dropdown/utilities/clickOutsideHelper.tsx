@@ -25,6 +25,12 @@ export const handleClickOutside =
       ) {
         shouldClose = false;
       }
+      // Target dropdown container to open dropdown
+      if (
+        targetElement.getAttribute("data-dropdown") === "pb-dropdown-label"
+      ) {
+        shouldClose = false;
+      }
       targetElement = targetElement.parentElement as HTMLElement;
     }
     if (

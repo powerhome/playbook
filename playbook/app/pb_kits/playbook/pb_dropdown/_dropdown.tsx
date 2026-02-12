@@ -6,13 +6,14 @@ import { GenericObject } from "../types";
 
 import Body from '../pb_body/_body';
 import Caption from "../pb_caption/_caption";
+import colors from "../tokens/exports/_colors.module.scss";
 
 import DropdownContainer from "./subcomponents/DropdownContainer";
 import DropdownContext from "./context";
 import DropdownOption from "./subcomponents/DropdownOption";
 import DropdownTrigger from "./subcomponents/DropdownTrigger";
 import useDropdown from "./hooks/useDropdown";
-import  getQuickPickOptions from "./quickpick";
+import getQuickPickOptions from "./quickpick";
 
 import {
     separateChildComponents,
@@ -61,6 +62,7 @@ type DropdownProps = {
       backgroundColor?: string;
       fontColor?: string;
     };
+    requiredIndicator?: boolean;
 };
 
 interface DropdownComponent
@@ -99,6 +101,7 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
         separators = true,
         variant = "default",
         activeStyle,
+        requiredIndicator = false
     } = props;
 
     const ariaProps = buildAriaProps(aria);
@@ -118,6 +121,16 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
     // ----------------------------------------------------------
 
     const [isDropDownClosed, setIsDropDownClosed, toggleDropdown] = useDropdown(isClosed);
+
+    // Use a suffix for the trigger ID to avoid conflict with the outer div's id
+    const sanitizeForId = (str: string) =>
+      str.toLowerCase().replace(/\s+/g, "_").replace(/[^a-z0-9_]/g, "");
+    const selectId = id
+      ? `${id}_trigger`
+      : label
+        ? sanitizeForId(label)
+        : undefined;
+    const errorId = error ? `${selectId}-error` : undefined;
 
     const [filterItem, setFilterItem] = useState("");
     const initialSelected = useMemo(() => {
@@ -151,8 +164,18 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
 
     const dropdownRef = useRef(null);
     const inputRef = useRef<HTMLInputElement>(null);
-    const inputWrapperRef = useRef(null);
+    const inputWrapperRef = useRef<HTMLDivElement | null>(null);
     const dropdownContainerRef = useRef(null);
+
+    const handleLabelClick = (e: React.MouseEvent) => {
+      e.stopPropagation();
+      if (selectId) {
+        const trigger = document.getElementById(selectId);
+        if (trigger) trigger.focus();
+      }
+      setIsInputFocused(true);
+      toggleDropdown();
+    };
 
     const selectedArray = Array.isArray(selected)
     ? selected
@@ -411,9 +434,12 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
                     autocomplete,
                     clearable,
                     dropdownContainerRef,
-                    filteredOptions,
+                    error,
+                    errorId,
                     filterItem,
+                    filteredOptions,
                     focusedOptionIndex,
+                    label,
                     formPillProps,
                     handleBackspace,
                     handleChange,
@@ -423,6 +449,7 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
                     inputWrapperRef,
                     isDropDownClosed,
                     isInputFocused,
+                    selectId,
                     multiSelect,
                     onSelect,
                     optionsWithBlankSelection,
@@ -434,13 +461,30 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
                     toggleDropdown
                 }}
             >
-                {label &&
-                    <Caption
-                        dark={dark}
-                        marginBottom="xs"
-                        text={label}
-                    />
-                }
+                {label && (
+                  <label
+                      data-dropdown="pb-dropdown-label"
+                      htmlFor={selectId}
+                      onClick={handleLabelClick}
+                  >
+                    {requiredIndicator ? (
+                      <Caption
+                          className="pb_dropdown_kit_label"
+                          dark={dark}
+                          marginBottom="xs"
+                      >
+                        {label} <span style={{ color: `${colors.error}` }}>*</span>
+                      </Caption>
+                    ) : (
+                      <Caption
+                          className="pb_dropdown_kit_label"
+                          dark={dark}
+                          marginBottom="xs"
+                          text={label}
+                      />
+                    )}
+                  </label>
+                )}
                 <div className={`dropdown_wrapper ${error ? 'error' : ''}`}
                     onBlur={() => {
                         // Debounce to delay the execution to prevent jumpiness in Focus state
@@ -473,12 +517,16 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
                         </>
                     )}
 
-                    {error &&
+                    {error && (
                         <Body
+                            aria={{ atomic: "true", live: "polite" }}
+                            dark={dark}
+                            htmlOptions={{ role: "alert" }}
+                            id={errorId}
                             status="negative"
                             text={error}
                         />
-                    }
+                    )}
                 </div>
             </DropdownContext.Provider>
         </div>
