@@ -57,7 +57,7 @@ export default class PbEnhancedElement {
   }
 
   static stop(): void {
-    this.mutationObserver.stop()
+    this.observer.stop()
   }
 
   connect(): void {
