@@ -28,10 +28,10 @@
     div.cal_icon_wrapper,
     input.date_picker_input {
       @include transition_default;
-      border-color: $primary;
+      border-color: $status_border_primary;
     }
     .add-on-card {
-      border-color: $primary;
+      border-color: $status_border_primary;
     }
   }
 
@@ -39,18 +39,18 @@
     &:hover {
       .add-on-card {
         cursor: pointer;
-        background-color: rgba($focus_input_light,$opacity_5);
+        background-color: rgba($input_background_state, $opacity_5);
       }
     }
   }
   .text_input_wrapper_add_on .add-on-icon {
-    color: $text_lt_light
+    color: $status_border_primary
   }
 
   .text_input_wrapper_add_on .add-on-right .text_input{
     cursor: pointer;
   }
-  
+
 }
 
 
@@ -71,7 +71,7 @@
   // Calendar Shadow and Border
   .flatpickr-calendar {
     box-shadow: $shadow_deeper;
-    border: 1px solid $border_light;
+    border: 1px solid $input_border_default;
   }
 
   // Hide Caret

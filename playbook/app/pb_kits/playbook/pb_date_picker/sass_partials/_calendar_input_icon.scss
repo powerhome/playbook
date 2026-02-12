@@ -5,7 +5,7 @@
   position: absolute;
   top: $space_md + 2;
   right: 0;
-  border-left: 1px solid $border_light;
+  border-left: 1px solid $input_border_default;
   width: $space_xl + $space_xs;
   height: $space_xl + 5;
   display: flex;
@@ -15,12 +15,12 @@
   color: $text_lt_light;
   @media (hover: hover) {
     &:hover{
-      background-color: rgba($focus_input_light,$opacity_5);
+      background-color: rgba($input_background_state,$opacity_5);
     }
   }
   &.dark {
-    color: $white;
-    border-color: $border_dark;
+    color: $text_lt_light;
+    border-color: $input_border_default_dark;
   }
   &.no_label_shift {
     top: 0;
