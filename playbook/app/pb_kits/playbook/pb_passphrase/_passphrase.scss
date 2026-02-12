@@ -51,6 +51,9 @@
       @media (hover:hover) {
         &:hover .pb_body_kit_light {
           color: $input_text_active;
+          &.dark {
+            color: $input_text_state_active;
+          }
         }
       }
 
