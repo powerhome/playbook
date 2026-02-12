@@ -56,9 +56,13 @@
         font-family: $font_family_base;
         font-size: $font_base;
         background-color: $input_background_default;
+        &::placeholder {
+          color: $input_text_default;
+        }
         &:focus {
           outline: none;
           background-color: $input_background_state;
+          color: $input_text_active;
         }
       }
 
@@ -69,6 +73,7 @@
         opacity: 0.5;
         input {
           background-color: $input_background_disabled;
+          color: $input_text_disabled;
         }
       }
     }
