@@ -44,7 +44,7 @@
           outline: none;
         }
         &::placeholder {
-          color: $input_text_disabled;
+          color: $input_text_default;
         }
       }
       &:focus {
@@ -325,7 +325,7 @@
           background-color: unset;
           color: $white;
           &::placeholder {
-            color: $input_text_disabled_dark;
+            color: $input_text_default_dark;
           }
         }
       }
