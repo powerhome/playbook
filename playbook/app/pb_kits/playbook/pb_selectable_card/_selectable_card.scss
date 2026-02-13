@@ -168,7 +168,7 @@ $pb_selectable_paddings: (
     > label {
       @include pb_card_dark;
       background: $bg_dark_card;
-      border-color: $input_border_default;
+      border-color: $input_border_default_dark;
 
       .pb_selectable_card_circle {
         border-color: $input_border_default;
