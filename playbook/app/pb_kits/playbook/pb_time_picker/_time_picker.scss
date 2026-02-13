@@ -21,9 +21,13 @@
     border-color: $input_border_default;
   }
 
-  .text_input_wrapper_add_on:focus-within .add-on-card {
-    transition: background-color 0.3s ease-in-out 0s, border-color 0.15s ease-in-out 0s;
-    border-color: $status_border_primary;
+  &:focus,
+  :focus-within {
+    .text_input_wrapper_add_on .text_input,
+    .text_input_wrapper_add_on .add-on-card {
+      transition: background-color 0.3s ease-in-out 0s, border-color 0.15s ease-in-out 0s;
+      border-color: $status_border_primary;
+    }
   }
 
   &.dark .text_input_wrapper_add_on .add-on-card {
@@ -35,9 +39,20 @@
     color: $input_text_default_dark;
   }
 
-  &.dark .text_input_wrapper_add_on:focus-within .add-on-card {
-    transition: background-color 0.3s ease-in-out 0s, border-color 0.15s ease-in-out 0s;
-    border-color: $status_border_primary;
+  &.dark {
+    &:focus,
+    :focus-within {
+      .text_input_wrapper_add_on .text_input,
+      .text_input_wrapper_add_on .add-on-card {
+        transition: background-color 0.3s ease-in-out 0s, border-color 0.15s ease-in-out 0s;
+        border-color: $status_border_primary;
+      }
+      .text_input_wrapper_add_on .add-on-card.add-on-card-dark,
+      .text_input_wrapper_add_on .add-on-card {
+        border-width: 1px !important;
+        border-color: $status_border_primary !important;
+      }
+    }
   }
 
   @media (hover: hover) {
@@ -64,9 +79,13 @@
       border-color: $input_border_error;
     }
 
-    .text_input_wrapper_add_on:focus-within .add-on-card {
-      transition: background-color 0.3s ease-in-out 0s, border-color 0.15s ease-in-out 0s;
-      border-color: $input_border_error;
+    &:focus,
+    :focus-within {
+      .text_input_wrapper_add_on .text_input,
+      .text_input_wrapper_add_on .add-on-card {
+        transition: background-color 0.3s ease-in-out 0s, border-color 0.15s ease-in-out 0s;
+        border-color: $input_border_error;
+      }
     }
   }
 

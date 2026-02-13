@@ -192,11 +192,13 @@ const TimePicker = (props: TimePickerProps): JSX.Element => {
     if (disabled) return
 
     const addOnCard = document.querySelector(`#${uniqueId}-input`)?.closest('.text_input_wrapper_add_on')?.querySelector('.add-on-card') as HTMLElement
+    const inputElement = document.getElementById(`${uniqueId}-input`) as HTMLInputElement
     
-    if (addOnCard) {
+    if (addOnCard && inputElement) {
       const handleAddOnClick = (e: Event) => {
         e.preventDefault()
         e.stopPropagation()
+        inputElement.focus()
         setShowDropdown(true)
       }
       
