@@ -50,6 +50,7 @@ export default class PbEnhancedElement {
     const enhansedElement = this.elements.get(element)
     enhansedElement.disconnect()
     this.elements.delete(element)
+    delete element._pbEnhanced
   }
 
   static start(): void {
