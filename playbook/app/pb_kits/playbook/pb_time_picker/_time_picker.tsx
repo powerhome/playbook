@@ -704,6 +704,7 @@ const TimePicker = (props: TimePickerProps): JSX.Element => {
           {requiredIndicator ? (
             <Caption
                 className="pb_time_picker_kit_label"
+                dark={dark}
                 marginBottom="xs"
                 size="md"
             >
@@ -712,6 +713,7 @@ const TimePicker = (props: TimePickerProps): JSX.Element => {
           ) : (
             <Caption
                 className="pb_time_picker_kit_label"
+                dark={dark}
                 marginBottom="xs"
                 size="md"
                 text={label}
@@ -761,6 +763,7 @@ const TimePicker = (props: TimePickerProps): JSX.Element => {
                 <label htmlFor={`${uniqueId}-hour`}>
                   <Caption
                       className="time_input_label"
+                      dark={dark}
                       size="sm"
                       text="Hour"
                   />
@@ -807,6 +810,7 @@ const TimePicker = (props: TimePickerProps): JSX.Element => {
                 <label htmlFor={`${uniqueId}-minute`}>
                   <Caption
                       className="time_input_label"
+                      dark={dark}
                       size="sm"
                       text="Minute"
                   />
@@ -852,6 +856,7 @@ const TimePicker = (props: TimePickerProps): JSX.Element => {
                 <div className="meridiem">
                   <Caption
                       className="time_input_label"
+                      dark={dark}
                       size="sm"
                       text="Period"
                   />
@@ -859,6 +864,7 @@ const TimePicker = (props: TimePickerProps): JSX.Element => {
                     <SelectableCard
                         checked={meridiem === 'AM'}
                         className={!isAnyAMTimeValid() ? 'disabled_meridiem' : ''}
+                        dark={dark}
                         disabled={!isAnyAMTimeValid()}
                         inputId={`${uniqueId}-am`}
                         multi={false}
@@ -870,6 +876,7 @@ const TimePicker = (props: TimePickerProps): JSX.Element => {
                     <SelectableCard
                         checked={meridiem === 'PM'}
                         className={!isAnyPMTimeValid() ? 'disabled_meridiem' : ''}
+                        dark={dark}
                         disabled={!isAnyPMTimeValid()}
                         inputId={`${uniqueId}-pm`}
                         multi={false}
@@ -886,6 +893,7 @@ const TimePicker = (props: TimePickerProps): JSX.Element => {
                 <div className="time_range_error">
                   <Caption
                       className="time_range_error_text"
+                      dark={dark}
                       marginTop="sm"
                       size="xs"
                       text={getTimeRangeErrorMessage(minTime, maxTime, timeFormat)}
@@ -894,6 +902,7 @@ const TimePicker = (props: TimePickerProps): JSX.Element => {
               )}
               {showTimezone && (
                 <Caption
+                    dark={dark}
                     lineHeight="tight"
                     marginTop="sm"
                     size="xs"

@@ -26,11 +26,31 @@
     border-color: $status_border_primary;
   }
 
+  &.dark .text_input_wrapper_add_on .add-on-card {
+    border-color: $input_border_default_dark;
+    background-color: $input_background_default_dark;
+  }
+
+  &.dark .text_input_wrapper_add_on .add-on-icon {
+    color: $input_text_default_dark;
+  }
+
+  &.dark .text_input_wrapper_add_on:focus-within .add-on-card {
+    transition: background-color 0.3s ease-in-out 0s, border-color 0.15s ease-in-out 0s;
+    border-color: $status_border_primary;
+  }
+
   @media (hover: hover) {
     &:hover {
       .text_input_wrapper_add_on .add-on-card {
         cursor: pointer;
         background-color: $input_background_state;
+      }
+    }
+    &.dark:hover {
+      .text_input_wrapper_add_on .add-on-card {
+        cursor: pointer;
+        background-color: $input_background_state_dark;
       }
     }
   }
@@ -51,20 +71,39 @@
   }
 
   &.disabled {
+    border-color: $input_border_disabled;
     > label {
       cursor: not-allowed;
     }
 
     .text_input_wrapper_add_on .add-on-card {
-      background-color: shade($white, 5%);
+      background-color: $input_background_disabled;
+      border-color: $input_border_disabled;
       cursor: not-allowed;
-      opacity: 0.5;
+    }
+
+    .text_input_wrapper_add_on .add-on-icon {
+      color: $input_text_disabled;
     }
 
     .text_input_wrapper_add_on .add-on-right .text_input {
       cursor: not-allowed;
     }
 
+  }
+
+  &.dark.disabled {
+    border-color: $input_border_disabled_dark;
+
+    .text_input_wrapper_add_on .add-on-card {
+      background-color: $input_background_disabled_dark;
+      border-color: $input_border_disabled_dark;
+      cursor: not-allowed;
+    }
+
+    .text_input_wrapper_add_on .add-on-icon {
+      color: $input_text_disabled_dark;
+    }
   }
 
   .pb_time_picker_container {
@@ -115,7 +154,7 @@
           background-color: $white;
           cursor: pointer;
           transition: border-color 0.2s ease, background-color 0.2s ease;
-          color: $text_lt_default;
+          color: $input_text_default;
 
           appearance: textfield;
           -moz-appearance: textfield;
@@ -281,7 +320,7 @@
           align-items: center;
           justify-content: center;
           font-weight: $bolder;
-          color: $text_lt_default;
+          color: $input_text_default;
         }
 
         .disabled_meridiem > label,
@@ -292,6 +331,108 @@
           background-color: $bg_light;
           &:hover {
             background-color: $bg_light;
+          }
+        }
+      }
+    }
+  }
+
+  &.dark {
+    .pb_time_picker_container {
+      background-color: $bg_dark;
+      border-color: $border_dark;
+      box-shadow: $shadow_deep;
+
+      .pb_time_selection {
+        color: $input_text_default_dark;
+
+        .time_input_wrapper {
+          > label {
+            color: $input_text_default_dark;
+          }
+
+          input.time_input {
+            border: 1px solid $input_border_default_dark;
+            background-color: $input_background_default_dark;
+            color: $input_text_default_dark;
+
+            &:focus {
+              border-color: $status_border_primary;
+              outline: none;
+            }
+
+            &:hover {
+              background-color: $input_background_state_dark;
+            }
+
+            &.invalid {
+              border-color: $input_border_error_dark;
+              background-color: rgba($input_border_error_dark, 0.05);
+            }
+          }
+
+          .time_dropdown {
+            background-color: $bg_dark;
+            border: 1px solid $border_dark;
+            scrollbar-color: rgba($text_dk_lighter, 0.5) transparent;
+
+            &::-webkit-scrollbar-thumb {
+              background-color: rgba($text_dk_lighter, 0.5);
+
+              &:hover {
+                background-color: rgba($text_dk_lighter, 0.7);
+              }
+            }
+
+            .time_dropdown_option {
+              color: $input_text_default_dark;
+
+              &:hover {
+                background-color: $hover_dark;
+              }
+
+              &.selected {
+                background-color: $status_border_primary;
+                color: $white;
+
+                &:hover {
+                  background-color: $product_1_background;
+                }
+              }
+            }
+          }
+        }
+
+        .time_range_error {
+          .time_range_error_text {
+            color: $text_error_dark;
+          }
+        }
+
+        .meridiem {
+          .pb_selectable_card_kit_enabled > label,
+          .pb_selectable_card_kit_checked_enabled > label,
+          .pb_selectable_card_kit_disabled > label,
+          .pb_selectable_card_kit_checked_disabled > label {
+            color: $input_text_default_dark;
+            background-color: $input_background_default_dark;
+            border: 1px solid $input_border_default_dark;
+          }
+
+          .pb_selectable_card_kit_enabled > label:hover,
+          .pb_selectable_card_kit_checked_enabled > label:hover {
+            background-color: $input_background_state_dark;
+          }
+
+          .disabled_meridiem > label,
+          .pb_selectable_card_kit_disabled > label,
+          .pb_selectable_card_kit_checked_disabled > label {
+            opacity: 0.5;
+            cursor: not-allowed;
+            background-color: $bg_dark_card;
+            &:hover {
+              background-color: $bg_dark_card;
+            }
           }
         }
       }
