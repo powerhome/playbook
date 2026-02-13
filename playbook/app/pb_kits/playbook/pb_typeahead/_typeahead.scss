@@ -335,6 +335,9 @@
         .text_input {
           background-color: $input_background_disabled_dark;
           border-color: $input_border_disabled_dark;
+          .placeholder {
+            color: $input_text_disabled_dark;
+          }
         }
         .clear_indicator,
         .typeahead-kit-select__indicator {
