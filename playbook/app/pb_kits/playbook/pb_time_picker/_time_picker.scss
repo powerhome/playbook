@@ -154,7 +154,7 @@
           background-color: $white;
           cursor: pointer;
           transition: border-color 0.2s ease, background-color 0.2s ease;
-          color: $input_text_default;
+          color: $input_text_active;
 
           appearance: textfield;
           -moz-appearance: textfield;
@@ -317,7 +317,7 @@
           align-items: center;
           justify-content: center;
           font-weight: $bolder;
-          color: $input_text_default;
+          color: $input_text_active;
         }
 
         .disabled_meridiem > label,
@@ -351,7 +351,7 @@
           input.time_input {
             border: 1px solid $input_border_default_dark;
             background-color: $input_background_default_dark;
-            color: $input_text_default_dark;
+            color: $input_text_state_active;
 
             &:focus {
               border-color: $status_border_primary;
@@ -411,7 +411,7 @@
           .pb_selectable_card_kit_checked_enabled > label,
           .pb_selectable_card_kit_disabled > label,
           .pb_selectable_card_kit_checked_disabled > label {
-            color: $input_text_default_dark;
+            color: $input_text_state_active;
             background-color: $input_background_default_dark;
             border: 1px solid $input_border_default_dark;
           }
