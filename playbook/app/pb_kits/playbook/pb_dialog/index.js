@@ -8,8 +8,11 @@ export default class PbDialog extends PbEnhancedElement {
   }
 
   connect() {
-    window.addEventListener("DOMContentLoaded", () => this.setupDialog())
-    window.addEventListener("turbo:frame-load", () => this.setupDialog())
+    this.domContentLoadedHandler = () => this.setupDialog()
+    this.turboFrameLoadHandler = () => this.setupDialog()
+    
+    window.addEventListener("DOMContentLoaded", this.domContentLoadedHandler)
+    window.addEventListener("turbo:frame-load", this.turboFrameLoadHandler)
 
     // Code for custom_event_type setup (can take multiple events in a string separated by commas)
     const customEventTypeString = this.element.dataset.customEventType
@@ -24,11 +27,45 @@ export default class PbDialog extends PbEnhancedElement {
   }
 
   disconnect() {
+    // Clean up window event listeners
+    if (this.domContentLoadedHandler) {
+      window.removeEventListener("DOMContentLoaded", this.domContentLoadedHandler)
+    }
+    if (this.turboFrameLoadHandler) {
+      window.removeEventListener("turbo:frame-load", this.turboFrameLoadHandler)
+    }
+
+    // Clean up custom event listeners
     if (this.customEventTypes && Array.isArray(this.customEventTypes)) {
       this.customEventTypes.forEach(eventType => {
         window.removeEventListener(eventType, this.handleCustomEvent)
       })
     }
+
+    // Clean up dialog-specific listeners that were set up in setupDialog
+    const openTriggers = document.querySelectorAll("[data-open-dialog]")
+    openTriggers.forEach((open) => {
+      if (open._openDialogClickHandler) {
+        open.removeEventListener("click", open._openDialogClickHandler)
+        delete open._openDialogClickHandler
+      }
+    })
+
+    const closeTriggers = document.querySelectorAll("[data-close-dialog]")
+    closeTriggers.forEach((close) => {
+      if (close._closeDialogClickHandler) {
+        close.removeEventListener("click", close._closeDialogClickHandler)
+        delete close._closeDialogClickHandler
+      }
+    })
+
+    const dialogs = document.querySelectorAll(".pb_dialog_rails")
+    dialogs.forEach((dialogElement) => {
+      if (dialogElement._outsideClickHandler) {
+        dialogElement.removeEventListener("mousedown", dialogElement._outsideClickHandler)
+        delete dialogElement._outsideClickHandler
+      }
+    })
   }
 
   handleCustomEvent = (event) => {

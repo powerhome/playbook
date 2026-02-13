@@ -54,12 +54,64 @@ export default class PbDropdown extends PbEnhancedElement {
     this.isClearable = this.element.dataset.pbDropdownClearable !== "false";
     if (this.clearBtn) {
       this.clearBtn.style.display = "none";
-      this.clearBtn.addEventListener("click", (e) => {
+      this.clearBtnHandler = (e) => {
         e.stopPropagation();
         this.clearSelection();
-      });
+      }
+      this.clearBtn.addEventListener("click", this.clearBtnHandler);
     }
     this.updateClearButton();
+  }
+
+  disconnect() {
+    // Clean up stored instance reference
+    if (this.element._pbDropdownInstance === this) {
+      delete this.element._pbDropdownInstance
+    }
+
+    // Clean up keyboard handler
+    if (this.keyboardHandler && typeof this.keyboardHandler.disconnect === 'function') {
+      this.keyboardHandler.disconnect()
+    }
+
+    // Clean up custom trigger click listener
+    if (this.customTriggerClickHandler) {
+      const customTrigger = this.element.querySelector(CUSTOM_DISPLAY_SELECTOR) || this.element
+      customTrigger.removeEventListener('click', this.customTriggerClickHandler)
+    }
+
+    // Clean up target click listener
+    if (this.handleOptionClickBound) {
+      this.target.removeEventListener('click', this.handleOptionClickBound)
+    }
+
+    // Clean up document click listener
+    if (this.handleDocumentClickBound) {
+      document.removeEventListener('click', this.handleDocumentClickBound, true)
+    }
+
+    // Clean up search bar listener
+    if (this.searchBar && this.searchBarHandler) {
+      this.searchBar.removeEventListener('input', this.searchBarHandler)
+    }
+
+    // Clean up search input listeners
+    if (this.searchInput) {
+      if (this.searchInputFocusHandler) {
+        const trigger = this.element.querySelector(TRIGGER_SELECTOR)
+        if (trigger) {
+          trigger.removeEventListener('click', this.searchInputFocusHandler)
+        }
+      }
+      if (this.searchInputHandler) {
+        this.searchInput.removeEventListener('input', this.searchInputHandler)
+      }
+    }
+
+    // Clean up clear button listener
+    if (this.clearBtn && this.clearBtnHandler) {
+      this.clearBtn.removeEventListener('click', this.clearBtnHandler)
+    }
   }
 
   updateClearButton() {
@@ -78,7 +130,7 @@ export default class PbDropdown extends PbEnhancedElement {
   bindEventListeners() {
     const customTrigger =
       this.element.querySelector(CUSTOM_DISPLAY_SELECTOR) || this.element;
-    customTrigger.addEventListener("click", (e) => {
+    this.customTriggerClickHandler = (e) => {
       const label = e.target.closest(LABEL_SELECTOR);
       if (label && label.htmlFor) {
         const trigger = this.element.querySelector(
@@ -89,12 +141,16 @@ export default class PbDropdown extends PbEnhancedElement {
         }
       }
       this.toggleElement(this.target);
-    });
+    }
+    customTrigger.addEventListener("click", this.customTriggerClickHandler);
 
-    this.target.addEventListener("click", this.handleOptionClick.bind(this));
+    this.handleOptionClickBound = this.handleOptionClick.bind(this)
+    this.target.addEventListener("click", this.handleOptionClickBound);
+    
+    this.handleDocumentClickBound = this.handleDocumentClick.bind(this)
     document.addEventListener(
       "click",
-      this.handleDocumentClick.bind(this),
+      this.handleDocumentClickBound,
       true,
     );
   }
@@ -103,9 +159,8 @@ export default class PbDropdown extends PbEnhancedElement {
     this.searchBar = this.element.querySelector(SEARCH_BAR_SELECTOR);
     if (!this.searchBar) return;
 
-    this.searchBar.addEventListener("input", (e) =>
-      this.handleSearch(e.target.value),
-    );
+    this.searchBarHandler = (e) => this.handleSearch(e.target.value)
+    this.searchBar.addEventListener('input', this.searchBarHandler);
   }
 
   bindSearchInput() {
@@ -113,14 +168,14 @@ export default class PbDropdown extends PbEnhancedElement {
     if (!this.searchInput) return;
 
     // Focus the input when anyone clicks the wrapper
+    this.searchInputFocusHandler = () => this.searchInput.focus()
     this.element
       .querySelector(TRIGGER_SELECTOR)
-      ?.addEventListener("click", () => this.searchInput.focus());
+      ?.addEventListener('click', this.searchInputFocusHandler);
 
     // Live filter
-    this.searchInput.addEventListener("input", (e) =>
-      this.handleSearch(e.target.value),
-    );
+    this.searchInputHandler = (e) => this.handleSearch(e.target.value)
+    this.searchInput.addEventListener('input', this.searchInputHandler);
   }
 
   adjustDropdownHeight() {
