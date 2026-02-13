@@ -203,10 +203,10 @@
 
   &.dark {
     .pb_typeahead_wrapper .pb_typeahead_loading_indicator {
-      color: $text_dk_light;
+      color: $input_text_default_dark;
     }
     .pb_text_input_kit_label {
-      color: $text_dk_light;
+      color: $text_default_dark;
     }
     .pb_text_input_kit.dark .text_input_wrapper .text_input {
       display: inherit !important;
@@ -232,7 +232,7 @@
       }
     }
     .text_input_wrapper{
-      color: text_dk_default;
+      color: $text_dk_default;
     }
     .typeahead-kit-select__option:hover {
       background-color: $active_dark;
@@ -268,24 +268,24 @@
 
     .text_input {
       .typeahead-kit-select__input-container{
-        color: $text_dk_default
+        color: $input_text_state_active;
       }
       .typeahead-kit-select {
         &__single-value{
-          color: $text_dk_default;
+          color: $input_text_state_active;
         }
       }
       &.typeahead-kit-select {
         &__single-value{
-          color: $text_dk_default;
+          color: $input_text_state_active;
         }
         &__control {
         
           &--is-focused {
             @include pb_textarea_focus;
             @include transition_default;
-            border-color: $active_dark;
-            background-color: rgba($focus_input_dark,$opacity_5);
+            border-color: $input_border_state_dark;
+            background-color: $input_background_state_dark;
             box-shadow: none;
             .typeahead-plus-icon {
               display: none;
@@ -308,10 +308,39 @@
 
       &:hover {
         .text_input {
-          background-color: $hover_dark;
+          background-color: $input_background_state_dark;
         }
       }
     }
 
+    .pb_text_input_kit {
+      .text_input_wrapper {
+        .clear_indicator,
+        .typeahead-kit-select__indicator {
+          color: $input_text_default_dark;
+          &:hover {
+            color: $input_text_state_active;
+          }
+        }
+        &:focus-within {
+          .clear_indicator,
+          .typeahead-kit-select__indicator {
+            color: $input_text_state_active;
+          }
+        }
+      }
+    }
+    #typeahead-disabled {
+      .text_input_wrapper {
+        .text_input {
+          background-color: $input_background_disabled_dark;
+          border-color: $input_border_disabled_dark;
+        }
+        .clear_indicator,
+        .typeahead-kit-select__indicator {
+          color: $input_text_disabled_dark;
+        }
+      }
+    }
   }
 }
