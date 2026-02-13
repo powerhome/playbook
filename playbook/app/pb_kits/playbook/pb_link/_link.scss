@@ -110,7 +110,22 @@
         outline: 1px solid $primary;
         outline-offset: 2px;
       }
+      text-decoration: underline;
     }
+  }
+}
+
+// Dark mode color + underline combinations
+@each $dark_color_name, $dark_color_value in $pb_dark_link_colors {
+  .pb_link_kit_#{$dark_color_name}_underline.dark {
+    @include pb_link($dark_color_value);
+    &:hover {
+      color: map-get($pb_dark_link_hover_colors, $dark_color_name);
+    }
+    &:visited {
+      color: darken($primary_action, 10%);
+    }
+    text-decoration: underline;
   }
 }
 
