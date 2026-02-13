@@ -43,9 +43,8 @@ $pb_selectable_paddings: (
       padding: 1px;
     }
 
-    border-color: $input_border_default;
-
     @include pb_card;
+    border-color: $input_border_default;
     transition-property: none;
     transition-duration: 0s;
     background-color: $white;
@@ -106,10 +105,10 @@ $pb_selectable_paddings: (
         }
 
         .separator {
-          background: $royal;
+          background: $input_border-state;
         }
         .psuedo_separator {
-          background-color: $royal;
+          background-color: $input_border-state;
         }
       }
 
@@ -190,10 +189,10 @@ $pb_selectable_paddings: (
 
     &.error {
       > label {
-        border-color: $error_dark;
+        border-color: $input_border_error_dark;
       }
       .separator{
-        background: $error_dark;
+        background: $input_border_error_dark;
       }
     }
   }
@@ -213,10 +212,10 @@ $pb_selectable_paddings: (
 
   &.error {
     > label {
-      border-color: $error;
+      border-color: $input_border_error;
     }
     .separator {
-      background: $error;
+      background: $input_border_error;
     }
   }
 }
@@ -235,10 +234,12 @@ $pb_selectable_paddings: (
 }
 
 .pb_selectable_card_kit_disabled>label {
-  border-color: $border_light !important;
+  border-color: $input_border_disabled !important;
+  color: $input_text_disabled;
+  background-color: $input_background_disabled;
 
   .dark & {
-    border-color: $border_dark !important;
+    border-color: $input_border_disabled_dark !important;
   }
 }
 
