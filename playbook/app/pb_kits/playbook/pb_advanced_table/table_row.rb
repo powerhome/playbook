@@ -35,13 +35,28 @@ module Playbook
                                      default: ""
       prop :inline_row_loading, type: Playbook::Props::Boolean,
                                 default: false
+      prop :is_pinned_row, type: Playbook::Props::Boolean,
+                           default: false
+      prop :pinned_index, type: Playbook::Props::Numeric,
+                          default: nil
 
       def data
         Hash(prop(:data)).merge(table_data_attributes)
       end
 
       def classname
-        generate_classname("pb_table_tr", "pb-bg-row-white", subrow_depth_classname, separator: " ")
+        classes = ["pb_table_tr", "pb-bg-row-white", subrow_depth_classname]
+        classes << "pinned-row" if is_pinned_row
+        generate_classname(*classes, separator: " ")
+      end
+
+      def pinned_row_style
+        return nil unless is_pinned_row && pinned_index.is_a?(Numeric)
+
+        header_offset = "var(--advanced-table-header-height, 40px)"
+        row_offset = "calc(2.5em * #{pinned_index})"
+        bg = row_styling.find { |style| style[:row_id].to_s == row_id.to_s }&.[](:background_color) || "white"
+        "position: sticky; top: calc(#{header_offset} + #{row_offset}); z-index: 3; background: #{bg};"
       end
 
       def td_classname(column, index)

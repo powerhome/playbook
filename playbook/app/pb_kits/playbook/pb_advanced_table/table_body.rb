@@ -27,6 +27,8 @@ module Playbook
                          default: []
       prop :inline_row_loading, type: Playbook::Props::Boolean,
                                 default: false
+      prop :pinned_rows, type: Playbook::Props::HashProp,
+                         default: {}
 
       def flatten_columns(columns)
         columns.flat_map do |col|
@@ -42,14 +44,21 @@ module Playbook
         end.compact
       end
 
-      def render_row_and_children(row, column_definitions, current_depth, first_parent_child, ancestor_ids = [], top_parent_id = nil, additional_classes: "", table_data_attributes: {}, immediate_parent_row_id: nil)
+      def render_row_and_children(row, column_definitions, current_depth, first_parent_child, ancestor_ids = [], top_parent_id = nil, additional_classes: "", table_data_attributes: {}, immediate_parent_row_id: nil, is_pinned_row: false, pinned_index: nil, skip_pinned_ids: nil, initial_table_data_attributes: nil)
+        if skip_pinned_ids && row_id_for(row) && skip_pinned_ids.include?(row_id_for(row).to_s)
+          return is_pinned_row ? [ActiveSupport::SafeBuffer.new, pinned_index] : ActiveSupport::SafeBuffer.new
+        end
+
         top_parent_id ||= row.object_id
         new_ancestor_ids = ancestor_ids + [row.object_id]
-        leaf_columns = flatten_columns(column_definitions)
+        leaf_columns = flatten_columns(column_definitions || [])
 
         output = ActiveSupport::SafeBuffer.new
-        is_first_child_of_subrow = current_depth.positive? && first_parent_child && subrow_headers[current_depth - 1].present?
-        last_row = subrow_headers.length == current_depth
+        subrow_headers_arr = subrow_headers || []
+        is_first_child_of_subrow = current_depth.positive? && first_parent_child && subrow_headers_arr[current_depth - 1].present?
+        last_row = subrow_headers_arr.length == current_depth
+
+        next_pinned_index = pinned_index
 
         subrow_ancestor_ids = ancestor_ids + ["#{row.object_id}sr"]
         subrow_data_attributes = {
@@ -58,7 +67,15 @@ module Playbook
           row_parent: "#{table_id}_#{ancestor_ids.last}",
         }
         # Subrow header if applicable
-        output << pb_rails("advanced_table/table_subrow_header", props: { row: row, column_definitions: leaf_columns, depth: current_depth, subrow_header: subrow_headers[current_depth - 1], collapsible_trail: collapsible_trail, classname: "toggle-content", responsive: responsive, subrow_data_attributes: subrow_data_attributes, last_row: last_row, immediate_parent_row_id: immediate_parent_row_id }) if is_first_child_of_subrow && enable_toggle_expansion == "all"
+        if is_first_child_of_subrow && enable_toggle_expansion == "all"
+          subrow_props = { row: row, column_definitions: leaf_columns, depth: current_depth, subrow_header: subrow_headers_arr[current_depth - 1], collapsible_trail: collapsible_trail, classname: "toggle-content", responsive: responsive, subrow_data_attributes: subrow_data_attributes, last_row: last_row, immediate_parent_row_id: immediate_parent_row_id }
+          if is_pinned_row && next_pinned_index
+            subrow_props[:is_pinned_row] = true
+            subrow_props[:pinned_index] = next_pinned_index
+            next_pinned_index += 1
+          end
+          output << pb_rails("advanced_table/table_subrow_header", props: subrow_props)
+        end
 
         current_data_attributes = if current_depth.zero?
                                     {
@@ -67,11 +84,17 @@ module Playbook
                                       row_parent: nil,
                                     }
                                   else
-                                    table_data_attributes
+                                    initial_table_data_attributes || table_data_attributes
                                   end
 
         # Additional class and data attributes needed for toggle logic
-        output << pb_rails("advanced_table/table_row", props: { table_id: table_id, row: row, column_definitions: leaf_columns, depth: current_depth, collapsible_trail: collapsible_trail, classname: additional_classes, table_data_attributes: current_data_attributes, responsive: responsive, loading: loading, selectable_rows: selectable_rows, row_id: row[:id], enable_toggle_expansion: enable_toggle_expansion, row_styling: row_styling, last_row: last_row, immediate_parent_row_id: immediate_parent_row_id, inline_row_loading: inline_row_loading })
+        row_props = { table_id: table_id, row: row, column_definitions: leaf_columns, depth: current_depth, collapsible_trail: collapsible_trail, classname: additional_classes, table_data_attributes: current_data_attributes, responsive: responsive, loading: loading, selectable_rows: selectable_rows, row_id: row[:id], enable_toggle_expansion: enable_toggle_expansion, row_styling: row_styling, last_row: last_row, immediate_parent_row_id: immediate_parent_row_id, inline_row_loading: inline_row_loading }
+        if is_pinned_row && next_pinned_index
+          row_props[:is_pinned_row] = true
+          row_props[:pinned_index] = next_pinned_index
+          next_pinned_index += 1
+        end
+        output << pb_rails("advanced_table/table_row", props: row_props)
 
         # Render inline loading row when inline_row_loading is enabled and row has empty children
         if inline_row_loading
@@ -103,11 +126,21 @@ module Playbook
               advanced_table_content: data_content,
             }
 
-            output << render_row_and_children(child_row, column_definitions, current_depth + 1, is_first_child, new_ancestor_ids, top_parent_id, additional_classes: "toggle-content", table_data_attributes: child_data_attributes, immediate_parent_row_id: row[:id])
+            child_opts = { additional_classes: "toggle-content", table_data_attributes: child_data_attributes, immediate_parent_row_id: row[:id] }
+            child_opts[:is_pinned_row] = is_pinned_row
+            child_opts[:pinned_index] = next_pinned_index if is_pinned_row
+            child_opts[:skip_pinned_ids] = skip_pinned_ids if skip_pinned_ids
+
+            child_output, next_pinned_index = render_row_and_children(child_row, column_definitions, current_depth + 1, is_first_child, new_ancestor_ids, top_parent_id, **child_opts)
+            output << child_output
           end
         end
 
-        output
+        if is_pinned_row
+          [output, next_pinned_index]
+        else
+          output
+        end
       end
 
       def classname
@@ -140,6 +173,69 @@ module Playbook
         elsif row.respond_to?(:[])
           row[:children] || row["children"]
         end
+      end
+
+      def row_id_for(row)
+        return nil if row.nil?
+
+        row[:id] || row["id"]
+      end
+
+      def pinned_top_ids
+        return [] if pinned_rows.nil? || !pinned_rows.respond_to?(:[])
+
+        top = pinned_rows["top"] || pinned_rows[:top]
+        Array(top).map(&:to_s)
+      end
+
+      def pinned_ids_set
+        return Set.new if pinned_top_ids.blank?
+
+        set = Set.new
+        pinned_root_rows.each do |root|
+          collect_row_and_descendant_ids(root[:row], set)
+        end
+        set
+      end
+
+      def collect_row_and_descendant_ids(row, set)
+        id = row_id_for(row)
+        set.add(id.to_s) if id
+        row_children_for(row)&.each { |child| collect_row_and_descendant_ids(child, set) }
+      end
+
+      def find_row_by_id(data, id, depth: 0, ancestor_ids: [], parent_row: nil)
+        id_str = id.to_s
+        Array(data).each do |row|
+          return { row: row, depth: depth, ancestor_ids: ancestor_ids, parent_row: parent_row } if row_id_for(row).to_s == id_str
+
+          found = find_row_by_id(row_children_for(row), id_str, depth: depth + 1, ancestor_ids: ancestor_ids + [row.object_id], parent_row: row)
+          return found if found
+        end
+        nil
+      end
+
+      def pinned_root_rows
+        return [] if pinned_top_ids.blank?
+
+        pinned_top_ids.filter_map { |id| find_row_by_id(table_data, id) }
+      end
+
+      def has_pinned_rows?
+        pinned_root_rows.any?
+      end
+
+      def pinned_root_initial_data_attributes(root_info)
+        return {} if root_info[:depth].to_i.zero?
+
+        anc = root_info[:ancestor_ids] || []
+        content = (anc + [root_info[:row].object_id]).join("-")
+        {
+          top_parent: "#{table_id}_#{anc.first}",
+          row_depth: root_info[:depth],
+          row_parent: "#{table_id}_#{anc.last}",
+          advanced_table_content: content,
+        }
       end
 
       def cell_accessors_length(col_defs)
