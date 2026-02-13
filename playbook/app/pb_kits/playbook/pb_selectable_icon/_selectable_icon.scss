@@ -16,7 +16,6 @@
 		&:hover * {
 			transition: transform $transition_short ease;
 			transform: translateY(-2px);
-			border-color: $input_background_state;
 		}
 	}
 
@@ -41,16 +40,15 @@
 		display: none;
 		appearance: none;
 		transition: color $transition_short ease;
-		border-color: $input_background_state;
 
 		&:checked ~ label * {
 			transition: color $transition_short ease;
-			color: $active_light;
+			color: $status_text_primary;
 		}
 		
 		&:not(:checked) ~ label {
 			transition: color $transition_short ease;
-			color: $slate;
+			color: $text_lighter;
 
 		}
 	}
@@ -81,16 +79,16 @@
 		
 		&:checked ~ label * {
 			transition: color $transition_short ease;
-			color: $active_dark !important;
+			color: $status_text_primary_dark !important;
 		}
 			
 		&:not(:checked) ~ label {
 			transition: color $transition_short ease;
-			color: $text_dk_lighter;
+			color: $text_lighter;
 
 			h4 {
 				transition: color $transition_short ease;
-				color: $text_dk_default;
+				color: $text_default_dark;
 			}
 		}
 	}
