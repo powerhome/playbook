@@ -301,9 +301,6 @@
 
           > input[type="radio"]:focus + label {
             border-color: $status_border_primary;
-                        &:dark {
-              color: $text_default_color !important;
-            }
           }
         }
 

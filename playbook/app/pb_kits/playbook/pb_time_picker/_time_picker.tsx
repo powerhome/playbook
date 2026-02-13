@@ -683,6 +683,7 @@ const TimePicker = (props: TimePickerProps): JSX.Element => {
     globalProps(props),
     errorDisplay ? 'error' : null,
     disabled ? 'disabled' : null,
+    dark ? 'dark' : null,
     className
   )
 
