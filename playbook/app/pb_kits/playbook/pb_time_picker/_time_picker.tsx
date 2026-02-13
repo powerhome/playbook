@@ -35,6 +35,7 @@ type TimePickerProps = {
   aria?: { [key: string]: string },
   className?: string,
   data?: { [key: string]: string },
+  dark?: boolean,
   defaultTime?: string,
   disabled?: boolean,
   error?: string,
@@ -60,6 +61,7 @@ const TimePicker = (props: TimePickerProps): JSX.Element => {
     aria = {},
     className,
     data = {},
+    dark = false,
     defaultTime,
     disabled = false,
     error,
@@ -721,6 +723,7 @@ const TimePicker = (props: TimePickerProps): JSX.Element => {
         <TextInput
             addOn={{ icon: 'clock', alignment: 'right', border: true }}
             cursor="pointer"
+            dark={dark}
             disabled={disabled}
             error={errorDisplay}
             id={`${uniqueId}-input`}
