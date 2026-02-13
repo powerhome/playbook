@@ -45,7 +45,7 @@
 
 		&:checked ~ label * {
 			transition: color $transition_short ease;
-			color: $primary;
+			color: $active_light;
 		}
 		
 		&:not(:checked) ~ label {
