@@ -240,13 +240,14 @@ $pb_selectable_paddings: (
 
   .dark & {
     border-color: $input_border_disabled_dark !important;
+    color: $input_text_disabled_dark;
+    background-color: $input_background_disabled_dark;
   }
 }
 
 .pb_selectable_card_kit_checked_disabled>label {
-  border-color: $status_text_primary !important;
-
+  border-color: $input_border_state !important;
   .dark & {
-    border-color: $primary_action_dark !important;
+    border-color: $input_border_state_dark !important;
   }
 }

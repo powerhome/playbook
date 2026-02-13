@@ -84,7 +84,7 @@
 			
 		&:not(:checked) ~ label {
 			transition: color $transition_short ease;
-			color: $text_lighter;
+			color: $text_lighter_dark;
 
 			h4 {
 				transition: color $transition_short ease;
