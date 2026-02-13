@@ -327,7 +327,7 @@
         }
       }
     }
-    #typeahead-disabled {
+    &:has(.typeahead-kit-select__control--is-disabled) {
       .text_input_wrapper {
         .text_input {
           background-color: $input_background_disabled_dark;
