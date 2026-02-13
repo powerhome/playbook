@@ -765,7 +765,7 @@
     }
   }
 
-  // Row Pinning - additional inline styles in RegularTableView.tsx
+  // Row Pinning - React uses inline style; Rails passes same style via html_options from table_body
   .pinned-row {
     box-shadow: 0 4px 10px 0 rgba($shadow, 0.16) !important;
   }

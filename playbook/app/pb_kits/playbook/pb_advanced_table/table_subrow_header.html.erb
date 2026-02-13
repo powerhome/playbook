@@ -1,4 +1,4 @@
-<%= pb_content_tag(:tr, (object.pinned_row_style.present? ? { style: object.pinned_row_style } : {})) do %>
+<%= pb_content_tag(:tr) do %>
         <% object.column_definitions.each_with_index do |column, index| %>
             <%= pb_rails("table/table_cell", props: { classname: object.td_classname(index) }) do %>
                 <%= pb_rails("flex", props:{ align: "center", justify: "start" }) do %>

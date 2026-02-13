@@ -5,7 +5,7 @@
   font_color = row_style&.[](:font_color)
 %>
 
-<%= pb_content_tag(:tr, (object.pinned_row_style.present? ? { style: object.pinned_row_style } : {})) do %>
+<%= pb_content_tag(:tr) do %>
     <% has_separate_checkbox = object.selectable_rows && object.enable_toggle_expansion == "none" %>
     <% if has_separate_checkbox %>
         <%= object.render_checkbox_cell %>

@@ -72,6 +72,7 @@ module Playbook
           if is_pinned_row && next_pinned_index
             subrow_props[:is_pinned_row] = true
             subrow_props[:pinned_index] = next_pinned_index
+            subrow_props[:html_options] = { style: build_pinned_row_style(next_pinned_index, background: "var(--pb_table_sticky_bg, #f5f5f5)") }
             next_pinned_index += 1
           end
           output << pb_rails("advanced_table/table_subrow_header", props: subrow_props)
@@ -92,6 +93,8 @@ module Playbook
         if is_pinned_row && next_pinned_index
           row_props[:is_pinned_row] = true
           row_props[:pinned_index] = next_pinned_index
+          row_bg = (row_styling || []).find { |s| s[:row_id].to_s == row_id_for(row).to_s }&.[](:background_color) || "white"
+          row_props[:html_options] = { style: build_pinned_row_style(next_pinned_index, background: row_bg) }
           next_pinned_index += 1
         end
         output << pb_rails("advanced_table/table_row", props: row_props)
@@ -223,6 +226,13 @@ module Playbook
 
       def has_pinned_rows?
         pinned_root_rows.any?
+      end
+
+      # Build inline style for sticky pinned row (matches React). Pass via html_options so the tr gets the attribute.
+      def build_pinned_row_style(pinned_index, background: "white")
+        header_offset = "var(--advanced-table-header-height, 44px)"
+        row_offset = "calc(2.5em * #{pinned_index})"
+        "position: sticky; top: calc(#{header_offset} + #{row_offset}); z-index: 3; background: #{background};"
       end
 
       def pinned_root_initial_data_attributes(root_info)
