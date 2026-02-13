@@ -57,7 +57,7 @@ $flag-min-resolution: 192dpi;
   }
 
   input::placeholder {
-    color: $input_background_state;
+    color: $focus_input_light;
   }
 
   .dropdown_open:not(.error) {
@@ -200,7 +200,7 @@ $flag-min-resolution: 192dpi;
 
   .iti__dropdown-content {
     border-radius: $space_xs;
-    border: 1px solid $input_border_default !important;
+    border: 1px solid $border_light !important;
     position: absolute;
     top: 100%;
   }
@@ -213,7 +213,7 @@ $flag-min-resolution: 192dpi;
         background-color: rgba($white, 0);
 
         &+ .text_input {
-          background-color: $input_border_default_dark;
+          background-color: rgba($white, 0.15);
         }
 
         .iti__selected-country {
