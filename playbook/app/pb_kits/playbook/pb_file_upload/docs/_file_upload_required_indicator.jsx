@@ -6,7 +6,7 @@ import FileUpload from "../../pb_file_upload/_file_upload";
 const UploadFileRequiredIndicator = () => {
   return (
     <div>
-      <FileUpload requiredIndicator />
+      <FileUpload />
     </div>
   );
 };
