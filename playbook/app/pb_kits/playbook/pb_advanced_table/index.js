@@ -304,7 +304,34 @@ export default class PbAdvancedTable extends PbEnhancedElement {
         lastVisibleRow.classList.add("last-visible-row");
         lastVisibleRow.classList.add("last-row-cell");
       }
+
+      PbAdvancedTable.updatePinnedRowsStickyTops(table);
     }
+  }
+
+  /**
+   * Recompute sticky top for visible pinned rows so collapsed rows don't leave a gap.
+   * Call after expand/collapse and on load.
+   */
+  static updatePinnedRowsStickyTops(advancedTableWrapper) {
+    const pinnedTbody = advancedTableWrapper?.querySelector("tbody.pinned-rows-tbody");
+    if (!pinnedTbody) return;
+
+    const pinnedRows = Array.from(pinnedTbody.querySelectorAll("tr.pinned-row"));
+    const visibleRows = pinnedRows.filter(
+      (tr) => tr.style.display !== "none" && tr.offsetParent !== null
+    );
+
+    const headerOffset = "var(--advanced-table-header-height, 44px)";
+    visibleRows.forEach((tr, index) => {
+      tr.style.top = `calc(${headerOffset} + 2.5em * ${index})`;
+    });
+  }
+
+  static updatePinnedRowsStickyTopsForAll() {
+    document.querySelectorAll(".pb_advanced_table").forEach((wrapper) => {
+      PbAdvancedTable.updatePinnedRowsStickyTops(wrapper);
+    });
   }
 
   hideCloseIcon() {
@@ -500,3 +527,14 @@ window.expandAllRows = (element) => {
 window.expandAllSubRows = (element, rowDepth) => {
   PbAdvancedTable.handleToggleAllSubRows(element, rowDepth);
 };
+
+// Fix pinned row sticky tops on load (collapsed rows would otherwise leave a gap)
+if (typeof document !== "undefined") {
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", () =>
+      PbAdvancedTable.updatePinnedRowsStickyTopsForAll()
+    );
+  } else {
+    PbAdvancedTable.updatePinnedRowsStickyTopsForAll();
+  }
+}
