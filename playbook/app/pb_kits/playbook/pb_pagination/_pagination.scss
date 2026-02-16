@@ -73,8 +73,9 @@ $top_bottom_radius: 0px;
   }
   .disabled {
     pointer-events: none;
+    cursor: not-allowed;
     opacity: 0.5;        
-    color: grey; 
+    color: #B0BDC7; // replace with $text_disabled once added to tokens
 
     & > span {
       padding: $pagination_padding;
@@ -112,9 +113,11 @@ $top_bottom_radius: 0px;
  
  .pagination-right {
   border-left: none !important;
+  padding: 6px 13px !important;
  }
  .pagination-left {
   border-right: none !important;
+  padding: 6px 13px !important;
  }
   .pagination-dropdown {
     position: static;
@@ -123,7 +126,7 @@ $top_bottom_radius: 0px;
   }
 
   .pagination-dropdown-trigger {
-    padding: $pagination_padding;
+    padding: 6px 10px 6px 13px !important;
     background-color: $bg_light;
     border-radius: $border_rad_light;
     cursor: pointer;

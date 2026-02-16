@@ -5,7 +5,7 @@ import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../uti
 import Icon from '../pb_icon/_icon';
 import Body from '../pb_body/_body';
 import Flex from '../pb_flex/_flex';
-
+import Detail from '../pb_detail/_detail';
 
 type PaginationProps = {
   aria?: { [key: string]: string },
@@ -237,7 +237,11 @@ const Pagination = ( props: PaginationProps) => {
             >
               <Flex alignItems="center">
                 <Icon icon="chevron-left" />
-                <Body>Prev</Body>
+                <Detail color="default" 
+                    marginLeft="xxs"
+                >
+                  Prev
+                </Detail>
               </Flex>
             </li>
             <div className="pagination-dropdown" 
@@ -251,11 +255,12 @@ const Pagination = ( props: PaginationProps) => {
                     gap="xxs"
                     justify="between"
                 >
-                  <Body>
+                  <Detail color="default">
                     <b>{currentPage}</b> of {total}
-                  </Body>
+                  </Detail>
                   <Icon color="primary" 
                       icon={isDropdownOpen ? "chevron-up" : "chevron-down"} 
+                      size="xs"
                   />
                 </Flex>
               </div>
@@ -278,7 +283,11 @@ const Pagination = ( props: PaginationProps) => {
                 onClick={() => handlePageChange(currentPage + 1)}
             >
               <Flex alignItems="center">
-                <Body>Next</Body>
+                <Detail color="default" 
+                    marginRight="xxs"
+                >
+                    Next
+                </Detail>
                 <Icon icon="chevron-right" />
               </Flex>
             </li>
