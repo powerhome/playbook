@@ -255,8 +255,13 @@ const Pagination = ( props: PaginationProps) => {
                     gap="xxs"
                     justify="between"
                 >
+                  <Detail bold
+                      color="default"
+                  >
+                    {currentPage}
+                  </Detail>
                   <Detail color="default">
-                    <b>{currentPage}</b> of {total}
+                    of {total}
                   </Detail>
                   <Icon color="primary" 
                       icon={isDropdownOpen ? "chevron-up" : "chevron-down"} 
