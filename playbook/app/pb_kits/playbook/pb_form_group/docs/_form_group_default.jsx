@@ -7,16 +7,19 @@ const FormGroupDefault = (props) => (
   <div>
     <FormGroup>
       <TextInput
+          id="first-name"
           label="First Name"
           placeholder="Enter First Name"
           {...props}
       />
       <TextInput
-          label="Middle Intial"
+          id="middle-initial"
+          label="Middle Initial"
           placeholder="Enter Middle Initial"
           {...props}
       />
       <TextInput
+          id="last-name"
           label="Last Name"
           placeholder="Enter Last Name"
           {...props}

@@ -37,11 +37,11 @@ $pb_multiple_users_size_xxs: map-get($avatar-sizes, "xxs");
   }
 
 
-  .user_tooltip {
+  .pb_multiple_users_overlap {
     margin-left: $pb_multiple_users_overlap !important;
   }
 
-  .user_count_tooltip {
+  .pb_multiple_users_count_overlap {
     margin-left: $pb_multiple_users_overlap !important;
     position: relative;
   }
@@ -82,5 +82,10 @@ $pb_multiple_users_size_xxs: map-get($avatar-sizes, "xxs");
     &:first-of-type {
       margin-right: 0;
     }
+  }
+
+  .pb_multiple_users_count_overlap {
+    margin-left: 0 !important;
+    margin-right: $pb_multiple_users_overlap !important;
   }
 }

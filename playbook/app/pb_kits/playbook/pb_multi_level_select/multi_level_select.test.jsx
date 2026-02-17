@@ -143,6 +143,36 @@ describe('MultiLevelSelect', () => {
     const input = kit.querySelector('#multiselect_input')
     expect(input).toBeDisabled()
   })
+
+  test("should render label with asterisk when requiredIndicator is true", () => {
+    render(
+      <MultiLevelSelect
+          data={{ testid: testId }}
+          label="Select Location"
+          requiredIndicator
+          treeData={treeData}
+      />
+    )
+    const kit = screen.getByTestId(testId)
+    const label = kit.querySelector("label")
+    expect(label).toHaveTextContent("Select Location")
+    expect(label).toHaveTextContent("*")
+  })
+
+  test("should render label without asterisk when requiredIndicator is false", () => {
+    render(
+      <MultiLevelSelect
+          data={{ testid: testId }}
+          label="Select Location"
+          requiredIndicator={false}
+          treeData={treeData}
+      />
+    )
+    const kit = screen.getByTestId(testId)
+    const label = kit.querySelector("label")
+    expect(label).toHaveTextContent("Select Location")
+    expect(label).not.toHaveTextContent("*")
+  })
 })
 
 describe('MultiLevelSelect multi variant', () => {
@@ -157,7 +187,7 @@ describe('MultiLevelSelect multi variant', () => {
     const kit = screen.getByTestId(testId)
     const input = kit.querySelector('#multiselect_input')
     fireEvent.click(input)
-    
+
     const checkboxes = kit.querySelectorAll('input[type="checkbox"]')
     expect(checkboxes.length).toBeGreaterThan(0)
   })
@@ -175,10 +205,10 @@ describe('MultiLevelSelect multi variant', () => {
     const kit = screen.getByTestId(testId)
     const input = kit.querySelector('#multiselect_input')
     fireEvent.click(input)
-    
+
     const checkbox = kit.querySelector('input[type="checkbox"]')
     fireEvent.click(checkbox)
-    
+
     expect(mockOnSelect).toHaveBeenCalled()
   })
 
@@ -194,7 +224,7 @@ describe('MultiLevelSelect multi variant', () => {
     const kit = screen.getByTestId(testId)
     const input = kit.querySelector('#multi-disabled-test_input')
     fireEvent.click(input)
-    
+
     const disabledCheckbox = kit.querySelector('input[type="checkbox"][disabled]')
     expect(disabledCheckbox).toBeInTheDocument()
   })
@@ -212,7 +242,7 @@ describe('MultiLevelSelect single variant', () => {
     const kit = screen.getByTestId(testId)
     const input = kit.querySelector('#multiselect_input')
     fireEvent.click(input)
-    
+
     const radios = kit.querySelectorAll('input[type="radio"]')
     expect(radios.length).toBeGreaterThan(0)
   })
@@ -229,7 +259,7 @@ describe('MultiLevelSelect single variant', () => {
     const kit = screen.getByTestId(testId)
     const input = kit.querySelector('#single-disabled-test_input')
     fireEvent.click(input)
-    
+
     const disabledRadio = kit.querySelector('input[type="radio"][disabled]')
     expect(disabledRadio).toBeInTheDocument()
   })
@@ -248,10 +278,10 @@ describe('MultiLevelSelect single variant', () => {
     const kit = screen.getByTestId(testId)
     const input = kit.querySelector('#single-disabled-click-test_input')
     fireEvent.click(input)
-    
+
     const disabledRadio = kit.querySelector('input[type="radio"][disabled]')
     fireEvent.click(disabledRadio)
-    
+
     expect(mockOnSelect).not.toHaveBeenCalled()
   })
 
@@ -269,10 +299,10 @@ describe('MultiLevelSelect single variant', () => {
     const kit = screen.getByTestId(testId)
     const input = kit.querySelector('#single-enabled-click-test_input')
     fireEvent.click(input)
-    
+
     const enabledRadio = kit.querySelector('input[type="radio"]:not([disabled])')
     fireEvent.click(enabledRadio)
-    
+
     expect(mockOnSelect).toHaveBeenCalled()
   })
 
@@ -287,10 +317,10 @@ describe('MultiLevelSelect single variant', () => {
     const kit = screen.getByTestId(testId)
     const input = kit.querySelector('#multiselect_input')
     fireEvent.click(input)
-    
+
     const enabledRadio = kit.querySelector('input[type="radio"]:not([disabled])')
     fireEvent.click(enabledRadio)
-    
+
     const dropdownClosed = kit.querySelector('.dropdown_menu.close')
     expect(dropdownClosed).toBeInTheDocument()
   })
@@ -306,10 +336,10 @@ describe('MultiLevelSelect single variant', () => {
     const kit = screen.getByTestId(testId)
     const input = kit.querySelector('#multiselect_input')
     fireEvent.click(input)
-    
+
     const enabledRadio = kit.querySelector('input[type="radio"]:not([disabled])')
     fireEvent.click(enabledRadio)
-    
+
     expect(input.value).toBe('Power Home Remodeling')
   })
 })
@@ -326,7 +356,7 @@ describe('MultiLevelSelect disabled parent behavior', () => {
     const kit = screen.getByTestId(testId)
     const input = kit.querySelector('#multiselect_input')
     fireEvent.click(input)
-    
+
     const radios = kit.querySelectorAll('input[type="radio"]')
     radios.forEach(radio => {
       expect(radio).toBeDisabled()
@@ -344,7 +374,7 @@ describe('MultiLevelSelect disabled parent behavior', () => {
     const kit = screen.getByTestId(testId)
     const input = kit.querySelector('#multiselect_input')
     fireEvent.click(input)
-    
+
     const checkboxes = kit.querySelectorAll('input[type="checkbox"]')
     checkboxes.forEach(checkbox => {
       expect(checkbox).toBeDisabled()
@@ -366,10 +396,10 @@ describe('MultiLevelSelect onChange callback', () => {
     const kit = screen.getByTestId(testId)
     const input = kit.querySelector('#multiselect_input')
     fireEvent.click(input)
-    
+
     const checkbox = kit.querySelector('input[type="checkbox"]')
     fireEvent.click(checkbox)
-    
+
     expect(mockOnChange).toHaveBeenCalled()
   })
 
@@ -386,10 +416,10 @@ describe('MultiLevelSelect onChange callback', () => {
     const kit = screen.getByTestId(testId)
     const input = kit.querySelector('#multiselect_input')
     fireEvent.click(input)
-    
+
     const enabledRadio = kit.querySelector('input[type="radio"]:not([disabled])')
     fireEvent.click(enabledRadio)
-    
+
     expect(mockOnChange).toHaveBeenCalled()
   })
 })
@@ -407,7 +437,7 @@ describe('MultiLevelSelect inputName prop', () => {
     const kit = screen.getByTestId(testId)
     const input = kit.querySelector('#multiselect_input')
     fireEvent.click(input)
-    
+
     const radio = kit.querySelector('input[type="radio"]')
     expect(radio).toHaveAttribute('name', 'location_select')
   })
