@@ -1,3 +1,54 @@
+# Labels That Actually Label 🏷️
+##### February 11, 2026
+
+![release_image](https://github.com/user-attachments/assets/db119637-25e9-4157-9091-c5f7fdf034fc)
+
+Labels now label. Required means required. Validation actually validates: This release brings thoughtful accessibility upgrades across forms, tables, and tokens,  plus a healthy dose of polish to boot!
+
+[16.2.0](https://github.com/powerhome/playbook/tree/16.2.0) full list of changes:
+
+**Kit Enhancements:**
+
+- Star Rating: Make Labels Accessible - Rails + React, Interactive Only [\#5822](https://github.com/powerhome/playbook/pull/5822) ([ekanarek](https://github.com/ekanarek))
+- Phone Number Input Kit: Validation Re: Too Short/too Long Not Just Presence [\#5821](https://github.com/powerhome/playbook/pull/5821) ([nickamantia](https://github.com/nickamantia))
+- Dropdown: New requiredindicator Prop [\#5801](https://github.com/powerhome/playbook/pull/5801) ([ekanarek](https://github.com/ekanarek))
+- Datepicker + Multilevelselect:  New requiredindicator Prop [\#5798](https://github.com/powerhome/playbook/pull/5798) ([mclancy96](https://github.com/mclancy96))
+- Dropdown Kit: Change Ids to Data Attributes for Rails Implementation [\#5794](https://github.com/powerhome/playbook/pull/5794) ([nidaqg](https://github.com/nidaqg))
+- Nav Kit: Add Disabled State for Collapsible Nav - React and Rails [\#5757](https://github.com/powerhome/playbook/pull/5757) ([nickamantia](https://github.com/nickamantia))
+- Passphrase: Accessible Labels for Passphrase [\#5786](https://github.com/powerhome/playbook/pull/5786) ([kenjelly22](https://github.com/kenjelly22))
+- Advanced Table: Configurable Control Of Cellbackgroundcolor and Fontcolor Within Columnstyling - React [\#5785](https://github.com/powerhome/playbook/pull/5785) ([nidaqg](https://github.com/nidaqg))
+- Rich Text Editor: Accessible Labels for Rich Text Editor [\#5777](https://github.com/powerhome/playbook/pull/5777) ([kyleghousel](https://github.com/kyleghousel))
+- Dropdown + Multilevelselect: Accessible Labels for Dropdown + Multilevelselect [\#5766](https://github.com/powerhome/playbook/pull/5766) ([nkp521](https://github.com/nkp521))
+- Time Picker: Final Cleanup [\#5765](https://github.com/powerhome/playbook/pull/5765) ([elisashapiro](https://github.com/elisashapiro))
+- Datepicker: Accessible Labels - React Only [\#5764](https://github.com/powerhome/playbook/pull/5764) ([kyleghousel](https://github.com/kyleghousel))
+-  Textarea: Accessible Labels [\#5758](https://github.com/powerhome/playbook/pull/5758) ([kyleghousel](https://github.com/kyleghousel))
+- Global Props: Default Option to Responsive Flex Props [\#5748](https://github.com/powerhome/playbook/pull/5748) ([nidaqg](https://github.com/nidaqg))
+- Filter Kit: Sort Icon to Toggle With Sort [\#5746](https://github.com/powerhome/playbook/pull/5746) ([nidaqg](https://github.com/nidaqg))
+- Dropdown Kit: Clearable Prop for X Button, Placeholder Prop, Constrain Height Prop and Position [\#5745](https://github.com/powerhome/playbook/pull/5745) ([kangaree](https://github.com/kangaree))
+- Passphrase + Phone Number Input: New requiredindicator Prop [\#5727](https://github.com/powerhome/playbook/pull/5727) ([nkp521](https://github.com/nkp521))
+
+
+**Fixed Bugs:**
+- Multipleusers Kit:  Maxdisplayedusers Prop Displaying Incorrectly [\#5825](https://github.com/powerhome/playbook/pull/5825) ([mclancy96](https://github.com/mclancy96))
+- Multlevelselect: Fixes for Single Select Ids [\#5824](https://github.com/powerhome/playbook/pull/5824) ([nidaqg](https://github.com/nidaqg))
+- React Rendered Rails Kits: Add Debounce to Mutation Observer [\#5810](https://github.com/powerhome/playbook/pull/5810) ([nidaqg](https://github.com/nidaqg))
+- Typeahead: Fix Inputdisplay="none" Selection Visibility + Deselection Behavior [\#5787](https://github.com/powerhome/playbook/pull/5787) ([elisashapiro](https://github.com/elisashapiro))
+- Table Kit: Address Null Offsetwidth With Sticky Columns - Rails [\#5778](https://github.com/powerhome/playbook/pull/5778) ([elisashapiro](https://github.com/elisashapiro))
+- Dialog: Fix Overflow: “visible” Dialog Doc Border Radius Missing [\#5754](https://github.com/powerhome/playbook/pull/5754) ([kyleghousel](https://github.com/kyleghousel))
+- Typeahead: Rails With Pills - Async Data -  Pills Display Incorrectly [\#5747](https://github.com/powerhome/playbook/pull/5747) ([nkp521](https://github.com/nkp521))
+- Unionize Global Truncation Prop, Handle Unionization In Form Pill and Typeahead [\#5744](https://github.com/powerhome/playbook/pull/5744) ([kyleghousel](https://github.com/kyleghousel))
+
+
+**Improvements:**
+
+- Accessibility: Accessible Labels for Form Group Examples [\#5820](https://github.com/powerhome/playbook/pull/5820) ([mclancy96](https://github.com/mclancy96))
+- Implement Rails Access to Playbook Design Tokens: Colors Accessible [\#5818](https://github.com/powerhome/playbook/pull/5818) ([elisashapiro](https://github.com/elisashapiro))
+- Advanced Table Docs: Misidentified Icon In Markdown [\#5811](https://github.com/powerhome/playbook/pull/5811) ([ekanarek](https://github.com/ekanarek))
+- Implement Accessible Color Tokens In Playbook [\#5797](https://github.com/powerhome/playbook/pull/5797) ([elisashapiro](https://github.com/elisashapiro))
+
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/v16.2.0-rc.6...16.2.0)
+
 # Global Props: Supervised at All Times 👀
 ##### January 26, 2026
 

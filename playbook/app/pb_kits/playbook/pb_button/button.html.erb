@@ -16,17 +16,21 @@
             <% end %>
         <% end %>
     <% else %>
-    <% if object.icon && !object.icon_right %>
-        <span>
-            <%= pb_rails("icon", props: { icon: "#{icon}", fixed_width: true, margin_right: "xs", font_style: object.icon_font_family }) %>
-        </span>
+    <% if !object.loading %>
+        <% if object.icon && !object.icon_right %>
+            <span>
+                <%= pb_rails("icon", props: { icon: "#{icon}", fixed_width: true, font_style: object.icon_font_family }.merge((object.icon_only? && content.blank?) ? {} : { margin_right: "xs" })) %>
+            </span>
+        <% end %>
     <% end %>
     <%= pb_rails("icon", props: { custom_icon: Playbook::Engine::root.join(spinner_path), pulse: true, fixed_width: true, classname: "loading-icon" }) %>
     <span class="pb_button_content"><%= content.presence || object.text %></span>
-    <% if object.icon && object.icon_right %>
-        <span>
-            <%= pb_rails("icon", props: { icon: "#{icon}", fixed_width: true, margin_left: "xs", font_style: object.icon_font_family }) %>
-        </span>
+    <% if !object.loading %>
+        <% if object.icon && object.icon_right %>
+            <span>
+                <%= pb_rails("icon", props: { icon: "#{icon}", fixed_width: true, font_style: object.icon_font_family }.merge((object.icon_only? && content.blank?) ? {} : { margin_left: "xs" })) %>
+            </span>
+        <% end %>
     <% end %>
     <% end %>
 
