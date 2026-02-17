@@ -24,6 +24,8 @@ module Playbook
       prop :show_arrow, type: Playbook::Props::Boolean, default: false
       prop :required, type: Playbook::Props::Boolean, default: false
       prop :validation_message, type: Playbook::Props::String, default: ""
+      prop :required_indicator, type: Playbook::Props::Boolean,
+                                default: false
 
       def classnames
         ([classname] + [inline_class, compact_class, show_arrow_class])
@@ -37,6 +39,7 @@ module Playbook
           prompt: blank_selection,
           disabled: disabled,
           required: required,
+          requiredIndicator: required_indicator,
           multiple: multiple,
           onchange: onchange,
           include_blank: include_blank,
