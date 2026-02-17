@@ -76,7 +76,7 @@
     const option   = e.detail;
     const dropdown = e.target;
 
-    const display = dropdown.querySelector("#dropdown_trigger_custom_display");
+    const display = dropdown.querySelector("[data-dropdown-trigger-custom-display]");
     if (!display) return;
 
     const nameEl = display.querySelector("#dropdown-avatar-name");

@@ -28,8 +28,31 @@ export const unmountPlaybookReactKits = () => {
   ComponentRegistry.unmountComponents()
 }
 
-const observer = new MutationObserver(() => {
-  mountPlaybookReactKits()
+// Debounce to prevent excessive remounting during rapid DOM changes
+let mountTimeout = null
+const debouncedMount = () => {
+  if (mountTimeout) clearTimeout(mountTimeout)
+  mountTimeout = setTimeout(() => {
+    mountPlaybookReactKits()
+    mountTimeout = null
+  }, 50)
+}
+
+const observer = new MutationObserver((mutations) => {
+  // Only respond to mutations that add new nodes with PB components
+  const hasNewPbComponents = mutations.some((mutation) => {
+    return Array.from(mutation.addedNodes).some((node) => {
+      if (node.nodeType !== 1) return false
+      return (
+        node.hasAttribute?.('data-pb-react-component') ||
+        node.querySelector?.('[data-pb-react-component]')
+      )
+    })
+  })
+  
+  if (hasNewPbComponents) {
+    debouncedMount()
+  }
 })
 
 observer.observe(document.body, { childList: true, subtree: true })

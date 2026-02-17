@@ -28,6 +28,7 @@ RSpec.describe Playbook::PbDropdown::Dropdown do
   it { is_expected.to define_hash_prop(:custom_quick_pick_dates).with_default({}) }
   it { is_expected.to define_boolean_prop(:clearable).with_default(true) }
   it { is_expected.to define_boolean_prop(:constrain_height).with_default(false) }
+  it { is_expected.to define_boolean_prop(:required_indicator).with_default(false) }
 
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
