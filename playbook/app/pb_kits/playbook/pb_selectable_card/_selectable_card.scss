@@ -135,14 +135,28 @@ $pb_selectable_paddings: (
   }
 
   &.display_input {
+    .separator {
+      background: $input_border_default;
+    }
+
+    .psuedo_separator {
+      background-color: $input_border_default;
+    }
+
     input[type="checkbox"],
     input[type="radio"] {
       &:checked {
-        ~label {
+        ~ label {
           border-width: $pb_card_border_width;
-          outline: 1px solid $status_text_primary;
-        }
+          outline: 1px solid $input_border_state;
 
+          .separator {
+            background: $input_border_state;
+          }
+          .psuedo_separator {
+            background-color: $input_border_state;
+          }
+        }
       }
     }
 
@@ -152,12 +166,36 @@ $pb_selectable_paddings: (
     }
 
     &.dark {
+      .separator {
+        background: $input_border_default_dark;
+      }
+
+      .psuedo_separator {
+        background-color: $input_border_default_dark;
+      }
+
       input[type="checkbox"],
       input[type="radio"] {
         &:checked ~ label {
           border-width: $pb_card_border_width;
-          outline: 1px solid $primary_action_dark;
+          outline: 1px solid $input_border_state_dark;
+
+          .separator {
+            background: $input_border_state_dark;
+          }
+          .psuedo_separator {
+            background-color: $input_border_state_dark;
+          }
         }
+      }
+    }
+
+    &.error {
+      .separator {
+        background: $input_border_error;
+      }
+      .psuedo_separator {
+        background-color: $input_border_error;
       }
     }
   }
@@ -191,8 +229,11 @@ $pb_selectable_paddings: (
       > label {
         border-color: $input_border_error_dark;
       }
-      .separator{
+      .separator {
         background: $input_border_error_dark;
+      }
+      .psuedo_separator {
+        background-color: $input_border_error_dark;
       }
     }
   }
@@ -216,6 +257,9 @@ $pb_selectable_paddings: (
     }
     .separator {
       background: $input_border_error;
+    }
+    .psuedo_separator {
+      background-color: $input_border_error;
     }
   }
 }
