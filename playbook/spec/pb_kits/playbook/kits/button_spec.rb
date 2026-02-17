@@ -156,4 +156,57 @@ RSpec.describe Playbook::PbButton::Button do
       end
     end
   end
+
+  describe "#icon_only?" do
+    it "returns true when icon is present and text is blank", :aggregate_failures do
+      expect(subject.new(icon: "plus").icon_only?).to be true
+      expect(subject.new(icon: "user", text: nil).icon_only?).to be true
+      expect(subject.new(icon: "bars", text: "").icon_only?).to be true
+    end
+
+    it "returns false when text is present", :aggregate_failures do
+      expect(subject.new(icon: "plus", text: "Click me").icon_only?).to be false
+      expect(subject.new(icon: "user", text: "Button").icon_only?).to be false
+    end
+
+    it "returns false when variant is reaction", :aggregate_failures do
+      expect(subject.new(icon: "plus", variant: "reaction").icon_only?).to be false
+      expect(subject.new(icon: "user", variant: "reaction", text: nil).icon_only?).to be false
+    end
+
+    it "returns false when icon is not present", :aggregate_failures do
+      expect(subject.new(text: nil).icon_only?).to be false
+      expect(subject.new({}).icon_only?).to be false
+    end
+  end
+
+  describe "#classname with icon-only" do
+    it "includes pb_button_icon_only when icon is present and text is blank", :aggregate_failures do
+      expect(subject.new(icon: "plus").classname).to include("pb_button_icon_only")
+      expect(subject.new(icon: "user", text: nil).classname).to include("pb_button_icon_only")
+      expect(subject.new(icon: "bars", variant: "secondary").classname).to include("pb_button_icon_only")
+      expect(subject.new(icon: "cog", variant: "link").classname).to include("pb_button_icon_only")
+      expect(subject.new(icon: "trash", variant: "danger").classname).to include("pb_button_icon_only")
+    end
+
+    it "does not include pb_button_icon_only when text is present", :aggregate_failures do
+      expect(subject.new(icon: "plus", text: "Click me").classname).to_not include("pb_button_icon_only")
+      expect(subject.new(icon: "user", text: "Button").classname).to_not include("pb_button_icon_only")
+    end
+
+    it "does not include pb_button_icon_only when variant is reaction", :aggregate_failures do
+      expect(subject.new(icon: "plus", variant: "reaction").classname).to_not include("pb_button_icon_only")
+      expect(subject.new(icon: "user", variant: "reaction", text: nil).classname).to_not include("pb_button_icon_only")
+    end
+
+    it "includes pb_button_icon_only with size classes", :aggregate_failures do
+      expect(subject.new(icon: "plus", size: "sm").classname).to include("pb_button_icon_only")
+      expect(subject.new(icon: "user", size: "md").classname).to include("pb_button_icon_only")
+      expect(subject.new(icon: "bars", size: "lg").classname).to include("pb_button_icon_only")
+    end
+
+    it "includes pb_button_icon_only with loading state", :aggregate_failures do
+      expect(subject.new(icon: "plus", loading: true).classname).to include("pb_button_icon_only")
+    end
+  end
 end

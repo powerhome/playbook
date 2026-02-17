@@ -1,0 +1,24 @@
+<%= pb_rails("select", props: {
+  label: "Favorite Snacks",
+  name: "food",
+  required_indicator: true,
+  options: [
+    {
+      value: "1",
+      value_text: "Popcorn",
+    },
+    {
+      value: "2",
+      selected: true,
+      value_text: "Chips",
+    },
+    {
+      value: "3",
+      value_text: "Twizzlers",
+    },
+    {
+      value: "4",
+      value_text: "Cookies",
+    },
+  ]
+}) %>

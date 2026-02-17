@@ -37,7 +37,7 @@ const MultipleUsers = (props: MultipleUsersProps): React.ReactElement => {
   } = props
 
   const displayCount =
-    users.length > maxDisplayedUsers ? maxDisplayedUsers - 1 : users.length
+    users.length > maxDisplayedUsers ? Math.max(1, maxDisplayedUsers - 1) : users.length
   const usersToDisplay = users.slice(0, displayCount)
 
   const reverseClass = reverse === true ? 'reverse' : ''
@@ -57,6 +57,70 @@ const MultipleUsers = (props: MultipleUsersProps): React.ReactElement => {
     buildCss('multiple_users_badge', avatarSizeClass)
   )
 
+  const shouldApplyOverlapClass = (index: number, length: number): boolean => {
+    return reverse ? index < length - 1 : index > 0;
+  }
+
+  const renderAvatar = (avatarData: { [key: string]: string; }, index: number) => {
+    const avatar = (
+      <Avatar
+          {...avatarData}
+          className={`pb_multiple_users_item${shouldApplyOverlapClass(index, usersToDisplay.length) ? ' pb_multiple_users_overlap' : ''}`}
+          dark={dark}
+          imageAlt={avatarData.name}
+          size={size}
+      />
+    );
+
+    if (withTooltip) {
+      return (
+        <Tooltip
+            key={"user_tooltip_" + index}
+            placement='top'
+            text={avatarData.tooltip ? avatarData.tooltip : ''}
+            zIndex={10}
+        >
+          {avatar}
+        </Tooltip>
+      );
+    }
+
+    return <div key={index}>{avatar}</div>;
+  };
+
+  const renderCountBadge = () => {
+    const badge = (
+      <div className={itemClasses + " pb_multiple_users_count_overlap"}>
+        {`+${users.length - displayCount}`}
+      </div>
+    );
+
+    if (withTooltip) {
+      return (
+        <Tooltip
+            placement='top'
+            text={
+            <div>
+              {
+                usersToDisplay.length < users.length ?
+                  users.slice(displayCount).map((u, i) => (
+                    <div key={i}>{u.tooltip}</div>
+                  ))
+                  :
+                  ''
+              }
+            </div>
+          }
+            zIndex={10}
+        >
+          {badge}
+        </Tooltip>
+      );
+    }
+
+    return badge;
+  };
+
   return (
     <div
         {...ariaProps}
@@ -65,72 +129,12 @@ const MultipleUsers = (props: MultipleUsersProps): React.ReactElement => {
         className={classes}
         id={id}
     >
-      {withTooltip ?
-        <>
-          {usersToDisplay.map((avatarData, index) => (
-            <Tooltip
-                key={"user_tooltip_" + index}
-                placement='top'
-                text={avatarData.tooltip ? avatarData.tooltip : ''}
-                zIndex={10}
-            >
-              <Avatar
-                  {...avatarData}
-                  className={"pb_multiple_users_item" + (withTooltip ? " user_tooltip" : "")}
-                  dark={dark}
-                  imageAlt={avatarData.name}
-                  key={index}
-                  size={size}
-              />
-            </Tooltip>
-          ))}
+      {usersToDisplay.map((avatarData, index) => renderAvatar(avatarData, index))}
 
-          {users.length > maxDisplayedUsers &&
-            <Tooltip
-                placement='top'
-                text={
-                  <div>
-                    {
-                      usersToDisplay.length < users.length ? 
-                        users.slice(displayCount).map((u, i) => (
-                          <div key={i}>{u.tooltip}</div>
-                        ))
-                      : 
-                        ''
-                    }
-                  </div>
-                }
-                zIndex={10}
-            >
-              <div className={itemClasses + (withTooltip ? " user_count_tooltip" : "")}>
-                {`+${users.length - displayCount}`}
-              </div>
-            </Tooltip>
-          }
-        </>
-        :
-        <>
-          {usersToDisplay.map((avatarData, index) => (
-            <Avatar
-                {...avatarData}
-                className="pb_multiple_users_item"
-                dark={dark}
-                imageAlt={avatarData.name}
-                key={index}
-                size={size}
-            />
-          ))}
-
-          {users.length > maxDisplayedUsers &&
-            <div className={itemClasses}>
-              {`+${users.length - 3}`}
-            </div>
-          }
-        </>
-      }
+      {users.length > maxDisplayedUsers && renderCountBadge()}
 
     </div>
-  )
-}
+  );
+};
 
-export default MultipleUsers
+export default MultipleUsers;
