@@ -1,6 +1,7 @@
 Datepicker supports `position` options from [Flatpickr Options Documentation](https://flatpickr.js.org/options/). There are multiple positioning options to choose from.
 
 **Note:** In order for the above prop to work properly, you must also send `staticPosition={false}` to your Datepicker kit instance.
+If you are using the Datepicker within a Dialog, you cannot use the `staticPosition`/`static_position` prop.
 
 #### Affix Datepicker Upon Scrolling
 
