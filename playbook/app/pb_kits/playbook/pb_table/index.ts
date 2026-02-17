@@ -79,21 +79,22 @@ export default class PbTable extends PbEnhancedElement {
           header.classList.add('sticky-left-shadow');
         }
 
-        accumulatedWidth += (header as HTMLElement).offsetWidth;
+        const headerWidth = (header as HTMLElement).offsetWidth;
+        accumulatedWidth += headerWidth;
+
+        cells.forEach((cell) => {
+          cell.classList.add('sticky');
+          (cell as HTMLElement).style.left = `${accumulatedWidth - headerWidth}px`;
+
+          if (!isLastColumn) {
+            cell.classList.add('with-border-right');
+            cell.classList.remove('sticky-left-shadow');
+          } else {
+            cell.classList.remove('with-border-right');
+            cell.classList.add('sticky-left-shadow');
+          }
+        });
       }
-
-      cells.forEach((cell) => {
-        cell.classList.add('sticky');
-        (cell as HTMLElement).style.left = `${accumulatedWidth - (header as HTMLElement).offsetWidth}px`;
-
-        if (!isLastColumn) {
-          cell.classList.add('with-border-right');
-          cell.classList.remove('sticky-left-shadow');
-        } else {
-          cell.classList.remove('with-border-right');
-          cell.classList.add('sticky-left-shadow');
-        }
-      });
     });
   }
 
@@ -140,21 +141,22 @@ export default class PbTable extends PbEnhancedElement {
           header.classList.add('sticky-right-shadow');
         }
 
-        accumulatedWidth += (header as HTMLElement).offsetWidth;
+        const headerWidth = (header as HTMLElement).offsetWidth;
+        accumulatedWidth += headerWidth;
+
+        cells.forEach((cell) => {
+          cell.classList.add('sticky');
+          (cell as HTMLElement).style.right = `${accumulatedWidth - headerWidth}px`;
+
+          if (!isLastColumn) {
+            cell.classList.add('with-border-left');
+            cell.classList.remove('sticky-right-shadow');
+          } else {
+            cell.classList.remove('with-border-left');
+            cell.classList.add('sticky-right-shadow');
+          }
+        });
       }
-
-      cells.forEach((cell) => {
-        cell.classList.add('sticky');
-        (cell as HTMLElement).style.right = `${accumulatedWidth - (header as HTMLElement).offsetWidth}px`;
-
-        if (!isLastColumn) {
-          cell.classList.add('with-border-left');
-          cell.classList.remove('sticky-right-shadow');
-        } else {
-          cell.classList.remove('with-border-left');
-          cell.classList.add('sticky-right-shadow');
-        }
-      });
     });
   }
 

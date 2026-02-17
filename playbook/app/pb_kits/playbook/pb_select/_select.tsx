@@ -4,7 +4,7 @@ import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
 import { globalProps, GlobalProps, domSafeProps } from '../utilities/globalProps'
 import type { InputCallback } from '../types'
-import { getAllIcons } from "../utilities/icons/allicons"
+import { getAllIcons } from '../utilities/icons/allicons'
 
 import Body from '../pb_body/_body'
 import Caption from '../pb_caption/_caption'
@@ -38,6 +38,7 @@ type SelectProps = {
   onChange: InputCallback<HTMLSelectElement>,
   options: SelectOption[],
   required?: boolean,
+  requiredIndicator?: boolean,
   showArrow?: boolean,
   value?: string,
 } & GlobalProps
@@ -70,6 +71,7 @@ const Select = ({
   onChange = () => undefined,
   options = [],
   required = false,
+  requiredIndicator = false,
   showArrow = false,
   value,
   ...props
@@ -121,39 +123,45 @@ const Select = ({
   })()
 
   return (
-    <div
-        {...ariaProps}
+    <div {...ariaProps}
         {...dataProps}
         {...htmlProps}
         className={classes}
     >
-      {label &&
-        <label
-            className="pb_select_kit_label"
+      {label && (
+        <label className="pb_select_kit_label"
             htmlFor={selectId}
         >
-          <Caption 
-              dark={props.dark}
-              text={label} 
-          />
+          {requiredIndicator ? (
+            <Caption 
+                dark={props.dark}>
+              {label}
+              <span style={{ color: "#DA0014" }}> *</span>
+            </Caption>
+          ) : (
+            <Caption 
+                dark={props.dark}
+                text={label}
+            />
+          )}
         </label>
-      }
-      <label
+      )}
+      <label 
           className={selectWrapperClass}
           htmlFor={selectId}
       >
         {selectBody}
-        { multiple !== true ?
+        { multiple !== true ? 
           <Icon
               className="pb_select_kit_caret svg-inline--fa"
               customIcon={angleDown}
               fixedWidth
-          />
-          :
-          null
+         />
+         : 
+         null
         }
-        {error &&
-          <Body
+        {error && 
+          <Body 
               dark={props.dark}
               status="negative"
               text={error}

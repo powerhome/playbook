@@ -755,3 +755,26 @@ test("customQuickPickDates with timePeriod calculates dates correctly", () => {
   const today = new Date()
   expect(endDate.toDateString()).toBe(today.toDateString())
 })
+
+test("requiredIndicator prop renders asterisk when true", () => {
+  render(
+    <Dropdown
+        data={{ testid: testId }}
+        label="Required Dropdown"
+        options={options}
+        requiredIndicator
+    >
+      {options.map((option) => (
+        <Dropdown.Option key={option.id}
+            option={option}
+        />
+      ))}
+    </Dropdown>,
+  );
+
+  const kit = screen.getByTestId(testId);
+  const label = screen.getByText("Required Dropdown");
+
+  expect(label).toBeInTheDocument();
+  expect(kit).toHaveTextContent("*");
+});

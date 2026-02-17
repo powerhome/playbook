@@ -32,6 +32,8 @@ examples:
   - rich_text_editor_advanced_inline: Advanced (Inline)
   - rich_text_editor_advanced_height: Advanced Height
   - rich_text_editor_advanced_min_height: Advanced Min Height
+  - rich_text_editor_label: Label
+  - rich_text_editor_advanced_label: Advanced (Label)
   - rich_text_editor_required_indicator: Required Indicator
   - rich_text_editor_advanced_required_indicator: Advanced Required Indicator
   - rich_text_editor_preview: Preview

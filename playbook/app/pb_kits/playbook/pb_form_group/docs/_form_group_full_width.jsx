@@ -9,16 +9,19 @@ const FormGroupFullWidth = (props) => (
     <div>
       <FormGroup fullWidth>
         <TextInput
+            id="first-name-full-width"
             label="First Name"
             placeholder="Enter First Name"
             {...props}
         />
         <TextInput
-            label="Middle Intial"
+            id="middle-initial-full-width"
+            label="Middle Initial"
             placeholder="Enter Middle Initial"
             {...props}
         />
         <TextInput
+            id="last-name-full-width"
             label="Last Name"
             placeholder="Enter Last Name"
             {...props}

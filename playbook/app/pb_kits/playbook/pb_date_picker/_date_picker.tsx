@@ -10,6 +10,7 @@ import datePickerHelper from './date_picker_helper'
 import Icon from '../pb_icon/_icon'
 import Caption from '../pb_caption/_caption'
 import Body from '../pb_body/_body'
+import colors from "../tokens/exports/_colors.module.scss"
 
 type DatePickerProps = {
   allowInput?: boolean,
@@ -40,9 +41,10 @@ type DatePickerProps = {
   maxDate: string,
   minDate: string,
   name: string,
-  pickerId?: string,
+  pickerId: string,
   placeholder?: string,
   positionElement?: HTMLElement | null,
+  requiredIndicator?: boolean
   scrollContainer?: string,
   selectionType?: "month" | "week"| "quickpick",
   showTimezone?: boolean,
@@ -97,6 +99,7 @@ const DatePicker = (props: DatePickerProps): React.ReactElement => {
     plugins = false,
     position,
     positionElement,
+    requiredIndicator,
     scrollContainer,
     selectionType = '',
     showTimezone = false,
@@ -196,6 +199,8 @@ const DatePicker = (props: DatePickerProps): React.ReactElement => {
 
   const angleDown = getAllIcons()["angleDown"].icon as unknown as { [key: string]: SVGElement }
 
+  const errorId = error ? `${pickerId}-error` : undefined
+
   return (
     <div
         {...ariaProps}
@@ -211,14 +216,23 @@ const DatePicker = (props: DatePickerProps): React.ReactElement => {
       >
 
         {!hideLabel && (
-          <Caption
-              className="pb_date_picker_kit_label"
-              text={label}
-          />
+           <label htmlFor={pickerId}>
+            {requiredIndicator ? (
+              <Caption className="pb_date_picker_kit_label">
+                {label} <span style={{ color: `${colors.error}` }}>*</span>
+              </Caption>
+            ) : (
+              <Caption className="pb_date_picker_kit_label"
+                  text={label}
+              />
+            )}
+          </label>
         )}
           <>
             <div className="date_picker_input_wrapper">
               <input
+                  aria-describedby={errorId}
+                  aria-invalid={!!error}
                   autoComplete="off"
                   className="date_picker_input"
                   disabled={disableInput}
@@ -232,6 +246,9 @@ const DatePicker = (props: DatePickerProps): React.ReactElement => {
 
               {error &&
                   <Body
+                      aria={{ atomic: "true", live: "polite" }}
+                      htmlOptions={{ role: "alert" }}
+                      id={errorId}
                       status="negative"
                       text={error}
                       variant={null}
