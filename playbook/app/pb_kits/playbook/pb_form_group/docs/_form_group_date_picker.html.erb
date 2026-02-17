@@ -1,6 +1,6 @@
 <div>
   <%= pb_rails("form_group") do %>
-    <%= pb_rails("text_input", props: { label: "Event", placeholder: "Event Name" }) %>
+    <%= pb_rails("text_input", props: { label: "Event", placeholder: "Event Name", id: "event-name" }) %>
     <%= pb_rails("date_picker", props: { label: "Event Date", picker_id: "date-picker-default" }) %>
   <% end %>
 </div>

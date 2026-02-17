@@ -1,0 +1,1 @@
+The `requiredIndicator`/`required_indicator` prop displays a red asterisk (*) next to the label to visually indicate that the field is required. This is purely visual and does not enforce validation—you can pair it with HTML `required`, client-side validation, or server-side validation as needed.

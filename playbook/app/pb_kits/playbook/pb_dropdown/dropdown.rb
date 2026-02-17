@@ -50,6 +50,8 @@ module Playbook
       prop :placeholder, type: Playbook::Props::String
       prop :constrain_height, type: Playbook::Props::Boolean,
                               default: false
+      prop :required_indicator, type: Playbook::Props::Boolean,
+                                default: false
 
       def data
         Hash(prop(:data)).merge(

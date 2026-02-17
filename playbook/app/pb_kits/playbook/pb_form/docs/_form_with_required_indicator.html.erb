@@ -1,3 +1,135 @@
+<% tree_data = [
+  {
+    label: "HQ",
+    value: "hQ",
+    id: "hq",
+  },
+  {
+    label: "Philadelphia",
+    value: "philadelphia",
+    id: "phl",
+    children: [
+      {
+        label: "Marketing & Sales PHL",
+        value: "marketingAndSalesPhl",
+        id: "marketingPHL",
+      },
+      {
+        label: "Installation Office PHL",
+        value: "installationOfficePhl",
+        id: "installationPHL",
+      },
+      {
+        label: "Warehouse PHL",
+        value: "warehousePhl",
+        id: "warehousePHL",
+      },
+    ]
+  },
+  {
+    label: "New Jersey",
+    value: "newJersey",
+    id: "nj",
+    children: [
+      {
+        label: "New Jersey",
+        value: "newJersey",
+        id: "nj1",
+        children: [
+          {
+            label: "Marketing & Sales NJ",
+            value: "marketingAndSalesNj",
+            id: "marketingNJ",
+          },
+          {
+            label: "Installation Office NJ",
+            value: "installationOfficeNj",
+            id: "installationNJ",
+          },
+          {
+            label: "Warehouse NJ",
+            value: "warehouseNj",
+            id: "warehouseNJ",
+          },
+        ],
+      },
+      {
+        label: "Princeton",
+        value: "princeton",
+        id: "princeton",
+        children: [
+          {
+            label: "Marketing & Sales Princeton",
+            value: "marketingAndSalesPrinceton",
+            id: "marketingPR",
+          },
+          {
+            label: "Installation Office Princeton",
+            value: "installationOfficePrinceton",
+            id: "installationPR",
+          },
+          {
+            label: "Warehouse Princeton",
+            value: "warehousePrinceton",
+            id: "warehousePR",
+          },
+        ]
+      },
+    ]
+  },
+  {
+    label: "Maryland",
+    value: "maryland",
+    id: "MD",
+    children: [
+      {
+        label: "Marketing & Sales MD",
+        value: "marketingAndSalesMd",
+        id: "marketingMD",
+      },
+      {
+        label: "Installation Office MD",
+        value: "installationOfficeMd",
+        id: "installationMD",
+      },
+      {
+        label: "Warehouse MD",
+        value: "warehouseMd",
+        id: "warehouseMD",
+      },
+    ]
+  },
+  {
+    label: "Connecticut",
+    value: "connecticut",
+    id: "CT",
+    children: [
+      {
+        label: "Marketing & Sales CT",
+        value: "marketingAndSalesCt",
+        id: "marketingCT",
+      },
+      {
+        label: "Installation Office CT",
+        value: "installationOfficeCt",
+        id: "installationCT",
+      },
+      {
+        label: "Warehouse CT",
+        value: "warehouseCt",
+        id: "warehouseCT",
+      },
+    ]
+  },
+]; %>
+<%
+  example_dropdown_options = [
+    { label: 'United States', value: 'United States', id: 'us' },
+    { label: 'Canada', value: 'Canada', id: 'ca' },
+    { label: 'Pakistan', value: 'Pakistan', id: 'pk' }
+  ]
+%>
+
 <%= pb_form_with(scope: :example, url: "", method: :get, validate: true) do |form| %>
   <%= form.typeahead :example_typeahead_field, props: { label: true, required: true, required_indicator: true } %>
   <%= form.text_field :example_text_field, props: { label: true, required: true, required_indicator: true } %>
@@ -10,8 +142,28 @@
   <%= form.url_field :example_url_field, props: { label: true, required: true, required_indicator: true } %>
   <%= form.text_area :example_text_area, props: { label: true, required: true, required_indicator: true } %>
   <%= form.text_area :example_text_area_2, props: { label: "Textarea Custom Label", required: true, required_indicator: true } %>
-  <%# <%= form.check_box :example_checkbox, props: { label: true, text: "Checkbox Label", required: true, required_indicator: true } %>
+  <%# form.check_box :example_checkbox, props: { label: true, text: "Checkbox Label", required: true, required_indicator: true } %>
   <%= form.time_picker :example_time_picker_required_indicator, props: { label: true, required: true, required_indicator: true } %>
+  <%= form.date_picker :example_date_picker_required_indicator, props: { label: true, required: true, required_indicator: true } %>
+  <%= form.date_picker :example_date_picker_required_indicator_custom, props: { label: "Custom Date Picker Label", required: true, required_indicator: true } %>
+  <%= form.select :example_select_required_indicator, [["Yes", 1], ["No", 2]], props: { label: true, required: true, required_indicator: true } %>
+  <%= form.select :example_select_required_indicator_2, [["Yes", 1], ["No", 2]], props: { label: "Example Select Field", required: true, required_indicator: true } %>
+  <%= form.multi_level_select :example_multi_level_select_required_indicator, props: {
+    label: true,
+    margin_y: 'sm',
+    required: true,
+    required_indicator: true,
+    tree_data: tree_data
+  } %>
+  <%= form.multi_level_select :example_multi_level_select_required_indicator_custom, props: {
+    label: "Custom Multi Level Select Label",
+    margin_y: 'sm',
+    required: true,
+    required_indicator: true,
+    tree_data: tree_data
+  } %>
+  <%= form.dropdown_field :example_dropdown, props: { label: true, options: example_dropdown_options, required: true, required_indicator: true } %>
+  <%= form.dropdown_field :example_dropdown_2, props: { label: "Dropdown Custom Label", options: example_dropdown_options, required: true, required_indicator: true } %>
 
   <%= form.actions do |action| %>
     <%= action.submit %>

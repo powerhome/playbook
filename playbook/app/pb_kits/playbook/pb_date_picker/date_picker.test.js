@@ -257,7 +257,7 @@ describe('DatePicker Kit', () => {
     const testId = 'datepicker-out-of-range-after'
     const futureDateString = '01/15/2020'
     const maxDateString = '01/10/2020'
-    
+
     render(
       <DatePicker
           data={{ testid: testId }}
@@ -274,5 +274,40 @@ describe('DatePicker Kit', () => {
     await waitFor(() => {
       expect(input).toHaveValue('01/15/2020')
     }, { timeout: 5000 })
+  })
+
+  test("renders required indicator asterisk when requiredIndicator is true", () => {
+    const testId = "datepicker-required-indicator"
+
+    render(
+      <DatePicker
+          data={{ testid: testId }}
+          label="Required Date"
+          pickerId="date-picker-required-indicator"
+          requiredIndicator
+      />
+    )
+
+    const kit = screen.getByTestId(testId)
+    const label = within(kit).getByText(/Required Date/)
+    expect(label).toBeInTheDocument()
+    expect(kit).toHaveTextContent("*")
+  })
+
+  test("does not render required indicator asterisk when requiredIndicator is false", () => {
+    const testId = "datepicker-no-required-indicator"
+
+    render(
+      <DatePicker
+          data={{ testid: testId }}
+          label="Optional Date"
+          pickerId="date-picker-no-required-indicator"
+      />
+    )
+
+    const kit = screen.getByTestId(testId)
+    const label = within(kit).getByText(/Optional Date/)
+    expect(label).toBeInTheDocument()
+    expect(kit).not.toHaveTextContent("*")
   })
 })
