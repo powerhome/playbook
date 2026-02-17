@@ -22,7 +22,7 @@
   }
 
   &:focus,
-  :focus-within {
+  &:focus-within {
     .text_input_wrapper_add_on .text_input,
     .text_input_wrapper_add_on .add-on-card {
       transition: background-color 0.3s ease-in-out 0s, border-color 0.15s ease-in-out 0s;
@@ -41,7 +41,7 @@
 
   &.dark {
     &:focus,
-    :focus-within {
+    &:focus-within {
       .text_input_wrapper_add_on .text_input,
       .text_input_wrapper_add_on .add-on-card {
         transition: background-color 0.3s ease-in-out 0s, border-color 0.15s ease-in-out 0s;
@@ -80,7 +80,7 @@
     }
 
     &:focus,
-    :focus-within {
+    &:focus-within {
       .text_input_wrapper_add_on .text_input,
       .text_input_wrapper_add_on .add-on-card {
         transition: background-color 0.3s ease-in-out 0s, border-color 0.15s ease-in-out 0s;
