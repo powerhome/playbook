@@ -32,6 +32,8 @@ module Playbook
                    default: ""
       prop :label, type: Playbook::Props::String,
                    default: ""
+      prop :required_indicator, type: Playbook::Props::Boolean,
+                                default: false
       prop :show_checked_children, type: Playbook::Props::Boolean,
                                    default: true
 
@@ -50,6 +52,7 @@ module Playbook
           label: label,
           treeData: tree_data,
           required: required,
+          requiredIndicator: required_indicator,
           returnAllSelected: return_all_selected,
           selectedIds: selected_ids,
           inputName: input_name,

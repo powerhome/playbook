@@ -152,7 +152,7 @@ kits:
     enhanced_element_used: false
   - name: icon_button
     platforms: *1
-    status: stable
+    status: deprecated
     icons_used: true
     react_rendered: false
     enhanced_element_used: false

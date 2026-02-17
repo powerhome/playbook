@@ -20,6 +20,7 @@ type StarRatingProps = {
     htmlOptions?: { [key: string]: string | number | boolean | (() => void) },
     icon?: string,
     id?: string,
+    label?: string,
     rating: number,
     denominator: number,
     colorOption?: "yellow" | "primary" | "subtle" | "outline",
@@ -38,6 +39,7 @@ const StarRating = (props: StarRatingProps) => {
         layoutOption = "default",
         htmlOptions = {},
         id,
+        label,
         rating = 0,
         denominator = 5,
         colorOption = "yellow",
@@ -112,6 +114,7 @@ const StarRating = (props: StarRatingProps) => {
                     colorOption={colorOption}
                     dark={dark}
                     denominator={denominator}
+                    label={label}
                     onClick={onClick}
                     size={size}
                 />
