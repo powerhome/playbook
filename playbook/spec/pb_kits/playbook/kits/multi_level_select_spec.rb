@@ -20,6 +20,7 @@ RSpec.describe Playbook::PbMultiLevelSelect::MultiLevelSelect do
     it { is_expected.to define_boolean_prop(:required).with_default(false) }
     it { is_expected.to define_string_prop(:error).with_default("") }
     it { is_expected.to define_string_prop(:label).with_default("") }
+    it { is_expected.to define_boolean_prop(:required_indicator).with_default(false) }
     it { is_expected.to define_boolean_prop(:show_checked_children).with_default(true) }
   end
 
@@ -65,7 +66,7 @@ RSpec.describe Playbook::PbMultiLevelSelect::MultiLevelSelect do
 
       expected_keys = %i[
         data disabled error id inputDisplay name label
-        treeData required returnAllSelected selectedIds
+        treeData required requiredIndicator returnAllSelected selectedIds
         inputName variant pillColor wrapped showCheckedChildren
       ]
       expect(options.keys).to match_array(expected_keys)
@@ -104,6 +105,11 @@ RSpec.describe Playbook::PbMultiLevelSelect::MultiLevelSelect do
     it "includes required prop" do
       mls = subject.new(required: true)
       expect(mls.multi_level_select_options[:required]).to eq true
+    end
+
+    it "includes required_indicator prop" do
+      mls = subject.new(required_indicator: true)
+      expect(mls.multi_level_select_options[:requiredIndicator]).to eq true
     end
 
     it "includes error prop" do
