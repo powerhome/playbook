@@ -28,3 +28,4 @@ export { default as DatePickerQuickPickCustomOverride } from './_date_picker_qui
 export { default as DatePickerQuickPickDefaultDate } from './_date_picker_quick_pick_default_date'
 export { default as DatePickerRangePattern } from './_date_picker_range_pattern'
 export { default as DatePickerAndDropdownRange } from './_date_picker_and_dropdown_range.jsx'
+export { default as DatePickerRequiredIndicator } from "./_date_picker_required_indicator.jsx";

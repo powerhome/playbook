@@ -20,6 +20,16 @@ PreCommit:
       - '.eslintrc'
       - 'app/pb_kits/playbook/**/*.js'
       - 'app/pb_kits/playbook/**/*.jsx'
+  VerifyTokens:
+    enabled: true
+    description: 'Verify generated token JSON (colors.json; add typography etc. when expanded) in sync with SCSS/types'
+    required_executable: 'bash'
+    command: ['bash', '.git-hooks/pre_commit/verify_tokens.sh']
+    # Broad: any token SCSS or colors types. Hook runs generator (currently only outputs colors.json) and checks that file.
+    include:
+      - 'playbook/app/pb_kits/playbook/tokens/**/*.scss'
+      - 'playbook/app/pb_kits/playbook/types/colors.ts'
+      # When adding more token types, add their type files here and extend verify_tokens.sh to check each generated JSON.
 
 CommitMsg:
   CapitalizedSubject:

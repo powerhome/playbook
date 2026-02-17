@@ -6,13 +6,14 @@ import { GenericObject } from "../types";
 
 import Body from '../pb_body/_body';
 import Caption from "../pb_caption/_caption";
+import colors from "../tokens/exports/_colors.module.scss";
 
 import DropdownContainer from "./subcomponents/DropdownContainer";
 import DropdownContext from "./context";
 import DropdownOption from "./subcomponents/DropdownOption";
 import DropdownTrigger from "./subcomponents/DropdownTrigger";
 import useDropdown from "./hooks/useDropdown";
-import  getQuickPickOptions from "./quickpick";
+import getQuickPickOptions from "./quickpick";
 
 import {
     separateChildComponents,
@@ -37,6 +38,7 @@ type DropdownProps = {
     children?: React.ReactChild[] | React.ReactChild | React.ReactElement[];
     className?: string;
     clearable?: boolean;
+    closeOnClick?: "outside" | "inside" | "any";
     constrainHeight?: boolean;
     customQuickPickDates?: CustomQuickPickDates;
     formPillProps?: GenericObject;
@@ -61,6 +63,7 @@ type DropdownProps = {
       backgroundColor?: string;
       fontColor?: string;
     };
+    requiredIndicator?: boolean;
 };
 
 interface DropdownComponent
@@ -78,6 +81,7 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
         children,
         className,
         clearable = true,
+        closeOnClick = "any",
         constrainHeight = false,
         customQuickPickDates,
         dark = false,
@@ -99,6 +103,7 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
         separators = true,
         variant = "default",
         activeStyle,
+        requiredIndicator = false
     } = props;
 
     const ariaProps = buildAriaProps(aria);
@@ -191,13 +196,14 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
             setIsDropDownClosed,
             setFocusedOptionIndex,
             setIsInputFocused,
+            closeOnClick,
         });
 
         window.addEventListener("click", handleClick);
         return () => {
             window.removeEventListener("click", handleClick);
         };
-    }, []);
+    }, [closeOnClick]);
 
     useEffect(() => {
         setHasTriggerSubcomponent(!!trigger);
@@ -273,6 +279,8 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
 
 
       const handleOptionClick = (clickedItem: GenericObject) => {
+                const shouldCloseOnClick = closeOnClick === "any" || closeOnClick === "inside";
+                
                 if (multiSelect) {
                     setSelected((prev) => {
                        const list = prev as GenericObject[];
@@ -284,11 +292,15 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
                        return next;
                    });
                    setFilterItem("");
-                   setIsDropDownClosed(true);
+                   if (shouldCloseOnClick) {
+                       setIsDropDownClosed(true);
+                   }
                } else {
                    setSelected(clickedItem);
                    setFilterItem("");
-                   setIsDropDownClosed(true);
+                   if (shouldCloseOnClick) {
+                       setIsDropDownClosed(true);
+                   }
                    onSelect && onSelect(clickedItem);
                    
                    // Sync with DatePickers if this is a quickpick variant
@@ -459,18 +471,28 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
                 }}
             >
                 {label && (
-                    <label
-                        data-dropdown="pb-dropdown-label"
-                        htmlFor={selectId}
-                        onClick={handleLabelClick}
-                    >
-                        <Caption
-                            className="pb_dropdown_kit_label"
-                            dark={dark}
-                            marginBottom="xs"
-                            text={label}
-                        />
-                    </label>
+                  <label
+                      data-dropdown="pb-dropdown-label"
+                      htmlFor={selectId}
+                      onClick={handleLabelClick}
+                  >
+                    {requiredIndicator ? (
+                      <Caption
+                          className="pb_dropdown_kit_label"
+                          dark={dark}
+                          marginBottom="xs"
+                      >
+                        {label} <span style={{ color: `${colors.error}` }}>*</span>
+                      </Caption>
+                    ) : (
+                      <Caption
+                          className="pb_dropdown_kit_label"
+                          dark={dark}
+                          marginBottom="xs"
+                          text={label}
+                      />
+                    )}
+                  </label>
                 )}
                 <div className={`dropdown_wrapper ${error ? 'error' : ''}`}
                     onBlur={() => {

@@ -1,13 +1,19 @@
 <%= pb_content_tag do %>
     <% if object.label.present? %>
         <label for="<%= object.select_id %>" data-dropdown="pb-dropdown-label">
-            <%= pb_rails("caption", props: { text: object.label, margin_bottom: "xs", classname: "pb_dropdown_kit_label", dark: object.dark }) %>
+            <% if object.required_indicator %>
+                <%= pb_rails("caption", props: { margin_bottom: "xs", classname: "pb_dropdown_kit_label", dark: object.dark }) do %>
+                    <%= object.label %><span style="color: #DA0014;"> *</span>
+                <% end %>
+            <% else %>
+                <%= pb_rails("caption", props: { text: object.label, margin_bottom: "xs", classname: "pb_dropdown_kit_label", dark: object.dark }) %>
+            <% end %>
         </label>
     <% end %>
     <div class="dropdown_wrapper<%= error_class %>" style="position: relative">
         <input
             data-default-value="<%= input_default_value %>"
-            id="dropdown-selected-option"
+            data-dropdown-selected-option
             name="<%= object.name %><%= '[]' if object.multi_select %>"
             style="display: none"
             <%= object.required ? "required" : ""%>

@@ -25,6 +25,8 @@ module Playbook
       prop :max_characters
       prop :required_indicator, type: Playbook::Props::Boolean,
                                 default: false
+      prop :disabled, type: Playbook::Props::Boolean,
+                      default: false
 
       def classname
         generate_classname("pb_textarea_kit") + error_class + resize_class + inline_class
@@ -49,6 +51,7 @@ module Playbook
         base_attributes = {
           'aria-describedby': error.present? ? error_id : nil,
           'aria-invalid': error.present?,
+          disabled: disabled,
           id: textarea_id,
           max_characters: max_characters,
           name: name,
