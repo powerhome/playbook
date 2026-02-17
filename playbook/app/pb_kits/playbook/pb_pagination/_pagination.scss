@@ -114,15 +114,27 @@ $top_bottom_radius: 0px;
  .pagination-right {
   border-left: none !important;
   padding: 6px 13px !important;
+  flex-shrink: 0;
+
+  @media (max-width: 435px) {
+    padding: 6px 10px !important;
+  }
  }
  .pagination-left {
   border-right: none !important;
   padding: 6px 13px !important;
+  flex-shrink: 0;
+
+  @media (max-width: 435px) {
+    padding: 6px 10px !important;
+  }
  }
   .pagination-dropdown {
     position: static;
     flex: 1;
     margin: 0 $space_xxs;
+    min-width: 0;
+    overflow: hidden;
   }
 
   .pagination-dropdown-trigger {
@@ -131,9 +143,15 @@ $top_bottom_radius: 0px;
     border-radius: $border_rad_light;
     cursor: pointer;
     transition: all 0.2s ease;
+    white-space: nowrap;
+    overflow: hidden;
 
     &:hover {
       background-color: $active_light;
+    }
+
+    @media (max-width: 435px) {
+      padding: 6px 8px 6px 10px !important;
     }
   }
 
