@@ -31,6 +31,7 @@ examples:
   - date_picker_time: Time Selection
   - date_picker_positions: Custom Positions
   - date_picker_positions_element: Custom Position (based on element)
+  - date_picker_required_indicator: Required Indicator
   - date_picker_turbo_frames: Within Turbo Frames
 
   react:
@@ -64,3 +65,4 @@ examples:
   - date_picker_time: Time Selection
   - date_picker_positions: Custom Positions
   - date_picker_positions_element: Custom Position (based on element)
+  - date_picker_required_indicator: Required Indicator

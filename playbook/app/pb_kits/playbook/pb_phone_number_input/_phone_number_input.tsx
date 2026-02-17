@@ -36,6 +36,7 @@ type PhoneNumberInputProps = {
   excludeCountries: string[],
   preferredCountries?: string[],
   required?: boolean,
+  requiredIndicator?: boolean,
   value?: string,
   formatAsYouType?: boolean,
   strictMode?: boolean,
@@ -91,6 +92,7 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.Ref<unknown>
     onlyCountries = [],
     excludeCountries = [],
     required = false,
+    requiredIndicator = false,
     preferredCountries = [],
     value = "",
     formatAsYouType = false,
@@ -150,6 +152,15 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.Ref<unknown>
         wrapperRef.current.setAttribute('data-pb-phone-validation-error', 'true')
       } else {
         wrapperRef.current.removeAttribute('data-pb-phone-validation-error')
+      }
+    }
+    
+    // Set custom validity on the input element to prevent form submission
+    if (inputRef.current) {
+      if (hasError && error) {
+        inputRef.current.setCustomValidity(error)
+      } else {
+        inputRef.current.setCustomValidity('')
       }
     }
   }
@@ -533,6 +544,7 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.Ref<unknown>
       validateErrors()
     },
     onChange: formatAsYouType ? undefined : handleOnChange,
+    requiredIndicator,
     value: inputValue
   }
 

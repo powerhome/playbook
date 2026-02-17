@@ -10,6 +10,7 @@ RSpec.describe Playbook::PbDropdown::Dropdown do
   it { is_expected.to define_string_prop(:name) }
   it { is_expected.to define_boolean_prop(:required).with_default(false) }
   it { is_expected.to define_string_prop(:blank_selection).with_default("") }
+  it { is_expected.to define_string_prop(:placeholder) }
   it { is_expected.to define_enum_prop(:variant).with_values("default", "subtle", "quickpick").with_default("default") }
   it { is_expected.to define_boolean_prop(:separators).with_default(true) }
   it { is_expected.to define_string_prop(:default_value) }
@@ -25,6 +26,9 @@ RSpec.describe Playbook::PbDropdown::Dropdown do
   it { is_expected.to define_string_prop(:end_date_id).with_default("end_date_id") }
   it { is_expected.to define_string_prop(:end_date_name).with_default("end_date_name") }
   it { is_expected.to define_hash_prop(:custom_quick_pick_dates).with_default({}) }
+  it { is_expected.to define_boolean_prop(:clearable).with_default(true) }
+  it { is_expected.to define_boolean_prop(:constrain_height).with_default(false) }
+  it { is_expected.to define_boolean_prop(:required_indicator).with_default(false) }
 
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
@@ -151,6 +155,16 @@ RSpec.describe Playbook::PbDropdown::Dropdown do
     it "includes variant in data attributes" do
       dropdown = subject.new(variant: "quickpick")
       expect(dropdown.data).to include(pb_dropdown_variant: "quickpick")
+    end
+
+    it "includes clearable in data attributes" do
+      dropdown = subject.new(variant: "quickpick", clearable: false)
+      expect(dropdown.data).to include(pb_dropdown_clearable: false)
+    end
+
+    it "defaults clearable to true" do
+      dropdown = subject.new(variant: "quickpick")
+      expect(dropdown.data).to include(pb_dropdown_clearable: true)
     end
 
     it "includes start_date_id and end_date_id in data when variant is quickpick" do
@@ -343,6 +357,63 @@ RSpec.describe Playbook::PbDropdown::Dropdown do
       options = dropdown.send(:quickpick_options)
       expect(options.length).to eq(1)
       expect(options.first[:label]).to eq("Custom")
+    end
+  end
+
+  describe "#placeholder" do
+    it "accepts placeholder prop" do
+      dropdown = subject.new(placeholder: "Choose an option")
+      expect(dropdown.placeholder).to eq("Choose an option")
+    end
+
+    it "works with default variant" do
+      dropdown = subject.new(
+        placeholder: "Select a country",
+        options: [{ id: 1, label: "Option 1", value: "1" }]
+      )
+      expect(dropdown.placeholder).to eq("Select a country")
+    end
+
+    it "works with subtle variant" do
+      dropdown = subject.new(
+        placeholder: "Pick an option",
+        variant: "subtle",
+        options: [{ id: 1, label: "Option 1", value: "1" }]
+      )
+      expect(dropdown.placeholder).to eq("Pick an option")
+    end
+
+    it "works with quickpick variant" do
+      dropdown = subject.new(
+        placeholder: "Select a date range",
+        variant: "quickpick"
+      )
+      expect(dropdown.placeholder).to eq("Select a date range")
+    end
+  end
+
+  describe "#constrain_height" do
+    it "accepts constrain_height prop" do
+      dropdown = subject.new(constrain_height: true)
+      expect(dropdown.constrain_height).to be true
+    end
+
+    it "defaults to false" do
+      dropdown = subject.new({})
+      expect(dropdown.constrain_height).to be false
+    end
+
+    it "passes constrain_height to dropdown_container" do
+      require_relative "../../../../app/pb_kits/playbook/pb_dropdown/dropdown_container"
+      container = Playbook::PbDropdown::DropdownContainer.new(constrain_height: true)
+      expect(container.constrain_height).to be true
+      expect(container.classname).to include("constrain_height")
+    end
+
+    it "does not add constrain_height class to container when false" do
+      require_relative "../../../../app/pb_kits/playbook/pb_dropdown/dropdown_container"
+      container = Playbook::PbDropdown::DropdownContainer.new(constrain_height: false)
+      expect(container.classname).not_to include("constrain_height")
     end
   end
 end

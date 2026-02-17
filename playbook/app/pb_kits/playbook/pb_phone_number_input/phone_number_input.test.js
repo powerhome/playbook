@@ -1,5 +1,5 @@
 import React from "react";
-import { render, screen, act } from "../utilities/test-utils";
+import { render, screen, act, within } from "../utilities/test-utils";
 import PhoneNumberInput from "./_phone_number_input";
 
 const testId = "phoneNumberInput";
@@ -129,7 +129,7 @@ test("should format phone number as '555-555-5555' with formatAsYouType and 'us'
     };
 
     render(<PhoneNumberInput {...props} />);
-    
+
     const input = screen.getByRole("textbox");
     
     act(() => {
@@ -154,7 +154,38 @@ test("should pass countrySearch prop to component", () => {
     };
   
     render(<PhoneNumberInput {...props} />);
-    
+
     const wrapper = screen.getByTestId('phone-input-with-search');
     expect(wrapper).toBeInTheDocument();
 });
+
+test("renders required indicator asterisk when requiredIndicator is true", () => {
+    const props = {
+        data: { testid: testId },
+        id: testId,
+        label: "Required Phone Number",
+        requiredIndicator: true,
+    };
+
+    render(<PhoneNumberInput {...props} />);
+
+    const kit = screen.getByTestId(testId);
+    const label = within(kit).getByText(/Required Phone Number/);
+    expect(label).toBeInTheDocument();
+    expect(kit).toHaveTextContent("*");
+});
+
+test("does not render required indicator asterisk when requiredIndicator is false", () => {
+    const props = {
+        data: { testid: testId },
+        id: testId,
+        label: "Phone Number",
+    };
+
+    render(<PhoneNumberInput {...props} />);
+
+    const kit = screen.getByTestId(testId);
+    const label = within(kit).getByText(/Phone Number/);
+    expect(label).toBeInTheDocument();
+    expect(kit).not.toHaveTextContent("*");
+});  

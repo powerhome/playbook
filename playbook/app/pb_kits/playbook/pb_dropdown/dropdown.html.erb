@@ -1,11 +1,19 @@
 <%= pb_content_tag do %>
     <% if object.label.present? %>
-        <%= pb_rails("caption", props: {text: object.label, margin_bottom:"xs"}) %>
+        <label for="<%= object.select_id %>" data-dropdown="pb-dropdown-label">
+            <% if object.required_indicator %>
+                <%= pb_rails("caption", props: { margin_bottom: "xs", classname: "pb_dropdown_kit_label", dark: object.dark }) do %>
+                    <%= object.label %><span style="color: #DA0014;"> *</span>
+                <% end %>
+            <% else %>
+                <%= pb_rails("caption", props: { text: object.label, margin_bottom: "xs", classname: "pb_dropdown_kit_label", dark: object.dark }) %>
+            <% end %>
+        </label>
     <% end %>
     <div class="dropdown_wrapper<%= error_class %>" style="position: relative">
         <input
             data-default-value="<%= input_default_value %>"
-            id="dropdown-selected-option"
+            data-dropdown-selected-option
             name="<%= object.name %><%= '[]' if object.multi_select %>"
             style="display: none"
             <%= object.required ? "required" : ""%>
@@ -16,10 +24,12 @@
         <% end %>
         <% if content.present? %>
             <%= content.presence %>
-            <%= pb_rails("body", props: { status: "negative", text: object.error }) %>
+            <% if object.error.present? %>
+                <%= pb_rails("body", props: { status: "negative", text: object.error, id: object.error_id, aria: { atomic: "true", live: "polite" }, html_options: { role: "alert" }, dark: object.dark }) %>
+            <% end %>
         <% else %>
-            <%= pb_rails("dropdown/dropdown_trigger", props:{ autocomplete: object.autocomplete, multi_select:object.multi_select }) %>
-            <%= pb_rails("dropdown/dropdown_container", props: { searchbar: object.searchbar }) do %>
+            <%= pb_rails("dropdown/dropdown_trigger", props: { autocomplete: object.autocomplete, multi_select: object.multi_select, placeholder: object.placeholder, select_id: object.select_id, label: object.label, error_id: object.error_id, error: object.error }) %>
+            <%= pb_rails("dropdown/dropdown_container", props: { searchbar: object.searchbar, constrain_height: object.constrain_height }) do %>
                 <% if options_with_blank.present? %>
                     <% options_with_blank.each do |option| %>
                         <%= pb_rails("dropdown/dropdown_option", props: {option: option}) %>
@@ -27,7 +37,9 @@
                 <% end %>
             <% end %>
 
-            <%= pb_rails("body", props: { status: "negative", text: object.error }) %>
+            <% if object.error.present? %>
+                <%= pb_rails("body", props: { status: "negative", text: object.error, id: object.error_id, aria: { atomic: "true", live: "polite" }, html_options: { role: "alert" }, dark: object.dark }) %>
+            <% end %>
         <% end %>
     </div>
 <% end %>

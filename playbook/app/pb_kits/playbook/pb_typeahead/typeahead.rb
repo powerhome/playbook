@@ -60,7 +60,8 @@ module Playbook
                       default: false
       prop :preserve_search_input, type: Playbook::Props::Boolean,
                                    default: false
-
+      prop :required_indicator, type: Playbook::Props::Boolean,
+                                default: false
       def classname
         default_margin_bottom = margin_bottom.present? ? "" : " mb_sm"
         generate_classname("pb_typeahead_kit") + default_margin_bottom
@@ -107,6 +108,7 @@ module Playbook
           truncate: truncate,
           wrapped: wrapped,
           required: required,
+          requiredIndicator: required_indicator,
           validation: validation,
           searchContextSelector: search_context_selector,
           optionsByContext: options_by_context,
@@ -122,6 +124,10 @@ module Playbook
           base_options[:loadOptions] = load_options
         end
         base_options
+      end
+
+      def truncate_props
+        nil unless is_react?
       end
     end
   end

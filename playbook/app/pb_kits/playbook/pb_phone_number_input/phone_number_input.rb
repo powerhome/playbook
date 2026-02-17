@@ -7,6 +7,8 @@ module Playbook
                       default: false
       prop :required, type: Playbook::Props::Boolean,
                       default: false
+      prop :required_indicator, type: Playbook::Props::Boolean,
+                                default: false
       prop :initial_country, type: Playbook::Props::String,
                              default: ""
       prop :label, type: Playbook::Props::String,
@@ -52,6 +54,7 @@ module Playbook
           excludeCountries: exclude_countries,
           preferredCountries: preferred_countries,
           required: required,
+          requiredIndicator: required_indicator,
           value: value,
           countrySearch: country_search,
         }

@@ -28,6 +28,11 @@ module Playbook
       css = ""
       if responsive
         z_index_value = send(:z_index)
+
+        # Handle default value separately (generates base class without size prefix)
+        css += "z_index_#{z_index_value[:default]} " if z_index_value.key?(:default) && z_index_values.include?(z_index_value[:default].to_s)
+
+        # Handle responsive sizes (generates classes with size prefix)
         z_index_value.each do |key, value|
           css += "z_index_#{key}_#{value} " if screen_size_values.include?(key.to_s) && z_index_values.include?(value.to_s)
         end

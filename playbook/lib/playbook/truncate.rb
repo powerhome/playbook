@@ -11,7 +11,7 @@ module Playbook
       return nil unless selected_props.present?
 
       selected_props.map do |k|
-        truncate_value = send(k)
+        truncate_value = send(k).to_s
         "truncate_#{truncate_value}" if truncate_values.include? truncate_value
       end.compact.join(" ")
     end
