@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import MultiLevelSelect from "../_multi_level_select";
-import { Button, Flex } from "playbook-ui";
+import { Button } from "playbook-ui";
 
 const treeData = [
   { label: "Current year", value: "currentYear", id: "current:year" },
@@ -26,16 +26,13 @@ const MultiLevelSelectReactResetKey = (props) => {
   };
 
   return (
-    <Flex
-        maxWidth="sm"
-        orientation="column"
-        rowGap="md"
-    >
+    <>
       <MultiLevelSelect
           {...props}
           id="multi-level-select-react-reset-key"
           key={`timeRange-${selectedId}`}
           label="Time Range"
+          marginBottom="sm"
           onSelect={(nodes) => {
             if (nodes?.length) setSelectedId(nodes[0].id);
           }}
@@ -48,7 +45,7 @@ const MultiLevelSelectReactResetKey = (props) => {
           text="Default"
           variant="secondary"
       />
-    </Flex>
+    </>
   );
 };
 
