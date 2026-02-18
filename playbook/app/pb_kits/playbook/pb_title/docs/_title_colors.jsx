@@ -10,6 +10,20 @@ const TitleColors = (props) => {
           {...props}
       />
       <Title
+          color="light"
+          size={3}
+          tag="h1"
+          text="Title Color"
+          {...props}
+      />
+      <Title
+          color="lighter"
+          size={3}
+          tag="h1"
+          text="Title Color"
+          {...props}
+      />
+      <Title
           color="link"
           size={3}
           tag="h1"
