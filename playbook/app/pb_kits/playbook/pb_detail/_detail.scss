@@ -13,7 +13,7 @@
 
   // Base styles
   a {
-    color: $text_link;
+    color: $primary;
     &:hover {
       cursor: pointer;
       color: $text_default_color;
@@ -44,7 +44,7 @@
 }
 
 .pb_detail_kit_color_link {
-  @include pb_detail($text_link);
+  @include pb_detail($primary);
 }
 
 .pb_detail_kit_color_error {
