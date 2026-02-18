@@ -194,6 +194,9 @@ const DatePicker = (props: DatePickerProps): React.ReactElement => {
     if (error) {
       base += ' error'
     }
+    if (disableInput) {
+      base += ' disabled'
+    }
     return base
   }
 
