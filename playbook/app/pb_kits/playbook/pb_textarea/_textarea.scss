@@ -24,6 +24,7 @@
   .pb_text_area_kit:focus,
   textarea:active,
   .pb_text_area_kit:active {
+    border-color: $primary;
     @include pb_textarea_focus_light;
     @include transition_default;
   }
@@ -116,7 +117,7 @@
         border-color: transparent;
       }
       &:focus {
-        border-color: $input_border_state;
+        border-color: $primary;
       }
     }
   }

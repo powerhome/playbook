@@ -55,7 +55,7 @@
   &:focus {
     .trix-button-row, trix-editor {
       background-color: $input_background_state;
-      border-color: $input_border_state;
+      border-color: $primary;
     }
   }
   .trix-dialog.trix-dialog--link {
@@ -251,7 +251,7 @@
     &:focus, &:focus-within {
       trix-toolbar .trix-button-row {
         @include transition_default;
-        border-color: $input_border_state;
+        border-color: $primary;
       }
     }
   }
@@ -275,7 +275,7 @@
       &:focus-within {
         trix-editor {
           @include transition_default;
-          border-color: $input_border_state;
+          border-color: $primary;
           background-color: $input_background_state;
         }
       }
@@ -286,7 +286,7 @@
       background-color: transparent;
       &:focus {
         @include transition_default;
-        border-color: $input_border_state;
+        border-color: $primary;
         background-color: $input_background_state;
       }
     }

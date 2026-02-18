@@ -28,10 +28,10 @@
     div.cal_icon_wrapper,
     input.date_picker_input {
       @include transition_default;
-      border-color: $status_border_primary;
+      border-color: $primary;
     }
     .add-on-card {
-      border-color: $status_border_primary;
+      border-color: $primary;
     }
   }
 

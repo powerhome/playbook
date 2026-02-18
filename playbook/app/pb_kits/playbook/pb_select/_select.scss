@@ -24,7 +24,7 @@
       }
     }
     &:focus{
-      border-color: $input_border_state;
+      border-color: $primary;
       @include transition_default;
     }
     &:focus ~ .pb_select_kit_caret {
@@ -53,7 +53,7 @@
     padding: $space_xs 0px !important;
     max-height: unset !important;
     &:focus{
-      border-color: $input_border_state;
+      border-color: $primary;
       @include transition_default;
     }
     option {
@@ -109,7 +109,7 @@
     }
     @mixin active_arrow_style {
       svg {
-        color: $input_text_active !important;
+        color: $primary !important;
         font-size: 16px;
       }
     }
@@ -127,7 +127,7 @@
     &:hover {
       @include active_arrow_style();
       select {
-        color: $input_text_active !important;
+        color: $primary !important;
         background: $input_background_state;
       }
     }
@@ -204,7 +204,7 @@
     padding: $space_xs 0px !important;
     max-height: unset !important;
     &:focus{
-      border-color: $input_border_state_dark;
+      border-color: $primary;
       @include transition_default;
     }
     option {
@@ -249,7 +249,7 @@
         background: $input_background_state_dark;
       }
       svg {
-        color: $input_text_state_active !important;
+        color: $primary !important;
         font-size: 16px;
       }
     }

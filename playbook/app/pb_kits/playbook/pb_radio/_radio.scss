@@ -42,12 +42,12 @@
     left: $offscreen;
     &:focus-visible {
       & ~ .pb_radio_button {
-        box-shadow: 0px 0px 0px 2px $white, 0px 0px 0px 4px $input_border_state;
+        box-shadow: 0px 0px 0px 2px $white, 0px 0px 0px 4px $primary;
       }
     }
     &:checked {
       & ~ .pb_radio_button {
-        border: 6px solid $input_border_state;
+        border: 6px solid $primary;
       }
     }
 
@@ -98,7 +98,7 @@
   input {
     &:focus-visible {
       & ~ .pb_radio_button {
-        box-shadow: 0px 0px 0px 2px $bg_dark_card, 0px 0px 0px 4px $input_border_state_dark;
+        box-shadow: 0px 0px 0px 2px $bg_dark_card, 0px 0px 0px 4px $primary;
       }
     }
     &:checked {

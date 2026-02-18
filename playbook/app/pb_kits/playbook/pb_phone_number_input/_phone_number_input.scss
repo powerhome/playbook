@@ -62,7 +62,7 @@ $flag-min-resolution: 192dpi;
 
   .dropdown_open:not(.error) {
     .text_input {
-      border-color: $status_border_primary !important;
+      border-color: $primary !important;
     }
 
     .iti__selected-country:focus-visible {
@@ -99,12 +99,12 @@ $flag-min-resolution: 192dpi;
     border-radius: $space_xxs;
 
     &[aria-expanded="true"] {
-      color: $text_link;
+      color: $primary_action;
     }
 
     &:focus-visible {
       outline-style: solid;
-      outline-color: $status_border_primary;
+      outline-color: $primary;
     }
   }
 
@@ -112,7 +112,7 @@ $flag-min-resolution: 192dpi;
     background-color: $hover_light;
 
     .iti__country-name, .iti__dial-code {
-      color: $status_border_primary;
+      color: $primary;
     }
   }
 
@@ -168,7 +168,7 @@ $flag-min-resolution: 192dpi;
   .iti__arrow.iti__arrow--up::before {
     transform: rotate(-($transform-rotate-deg/3));
     top: $space_xs + 4px;
-    color: $text_link;
+    color: $primary_action;
   }
 
   .iti__country-list .iti__country {

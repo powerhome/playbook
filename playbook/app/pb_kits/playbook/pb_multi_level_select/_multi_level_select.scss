@@ -42,7 +42,7 @@
       @include transition_default;
 
       &:focus-within {
-        border-color: $input_border_state;
+        border-color: $primary;
         background-color: $input_background_state;
       }
 
@@ -108,7 +108,7 @@
         .pb_button_enabled {
           color: $input_text_default;
           &:hover {
-            color: $input_text_active;
+            color: $primary;
           }
         }
       }

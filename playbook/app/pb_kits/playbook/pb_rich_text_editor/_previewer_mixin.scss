@@ -47,8 +47,8 @@
 }
 
 @mixin preview_tiptap_a {
-    color: $text_link;
-    border-bottom: 1px solid $text_link;
+    color: $primary;
+    border-bottom: 1px solid $primary;
     &:hover {
       color: $text_default_color;
       border-bottom: 1px solid $text_default_color;

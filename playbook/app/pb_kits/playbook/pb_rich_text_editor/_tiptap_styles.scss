@@ -193,7 +193,7 @@
   &:focus-visible,
   &:focus-within {
     outline: unset;
-    box-shadow: 0 0 0 1px $input_border_state;
+    box-shadow: 0 0 0 1px $primary;
     border-radius: $border_rad_heaviest;
     transition: box-shadow 0.3s ease-in-out, border-radius 0.3s ease-in-out;
   }

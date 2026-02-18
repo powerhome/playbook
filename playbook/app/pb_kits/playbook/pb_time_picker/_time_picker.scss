@@ -26,7 +26,7 @@
     .text_input_wrapper_add_on .text_input,
     .text_input_wrapper_add_on .add-on-card {
       transition: background-color 0.3s ease-in-out 0s, border-color 0.15s ease-in-out 0s;
-      border-color: $status_border_primary;
+      border-color: $primary;
     }
   }
 
@@ -185,7 +185,7 @@
           }
 
           &:focus {
-            border-color: $status_border_primary;
+            border-color: $primary;
             outline: none;
           }
 
@@ -248,7 +248,7 @@
             }
 
             &.selected {
-              background-color: $status_border_primary;
+              background-color: $primary;
               color: $white;
 
               &:hover {
@@ -319,7 +319,7 @@
           }
 
           > input[type="radio"]:focus + label {
-            border-color: $status_border_primary;
+            border-color: $primary;
           }
         }
 

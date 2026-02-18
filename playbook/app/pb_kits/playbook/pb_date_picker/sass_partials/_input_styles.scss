@@ -35,6 +35,7 @@
     .date_picker_input:-webkit-autofill:focus {
       @include pb_textarea_focus_light;
       @include transition_default;
+      border-color: $primary;
     }
 
     input:disabled,

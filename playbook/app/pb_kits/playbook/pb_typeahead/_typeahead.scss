@@ -146,7 +146,7 @@
         &--is-focused {
           @include pb_textarea_focus;
           @include transition_default;
-          border-color: $input_border_state;
+          border-color: $primary;
           background-color: $input_background_state;
           box-shadow: none;
           .typeahead-plus-icon {
@@ -186,7 +186,7 @@
 
   // Add focus indicator for multi-value pills
   .pb_form_pill_or_badge_focused {
-    outline: $input_border_state solid 2px;
+    outline: $primary solid 2px;
     outline-offset: -1px;
   }
 

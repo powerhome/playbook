@@ -48,22 +48,22 @@
         }
       }
       &:focus {
-        box-shadow: 0px 0px 0 1px $status_border_primary !important;
+        box-shadow: 0px 0px 0 1px $primary !important;
         outline: unset;
         transition: box-shadow 0.15s ease-in-out;
       }
       &:focus-within {
-        box-shadow: 0px 0px 0 1px $status_border_primary !important;
+        box-shadow: 0px 0px 0 1px $primary !important;
         outline: unset;
         transition: box-shadow 0.15s ease-in-out;
       }
 
       &.dropdown_trigger_wrapper_select_only {
-        box-shadow: inset 0 -11px 20px rgba($status_border_primary, 0.05);
+        box-shadow: inset 0 -11px 20px rgba($primary, 0.05);
       }
 
       &.dropdown_trigger_wrapper_focus {
-        box-shadow: 0px 0px 0 1px $status_border_primary !important;
+        box-shadow: 0px 0px 0 1px $primary !important;
         transition: box-shadow 0.1s ease-in-out;
       }
     }
