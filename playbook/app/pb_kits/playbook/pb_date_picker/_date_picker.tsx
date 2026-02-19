@@ -221,11 +221,14 @@ const DatePicker = (props: DatePickerProps): React.ReactElement => {
         {!hideLabel && (
            <label htmlFor={pickerId}>
             {requiredIndicator ? (
-              <Caption className="pb_date_picker_kit_label">
+              <Caption className="pb_date_picker_kit_label"
+                  color="lighter"
+              >
                 {label} <span style={{ color: `${colors.error}` }}>*</span>
               </Caption>
             ) : (
               <Caption className="pb_date_picker_kit_label"
+                  color="lighter"
                   text={label}
               />
             )}
