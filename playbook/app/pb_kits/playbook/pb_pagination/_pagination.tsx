@@ -45,9 +45,25 @@ const Pagination = ( props: PaginationProps) => {
     };
 
     checkMobile();
-    window.addEventListener('resize', checkMobile);
+    
+    // Throttle resize event to prevent performance issues in Nitro where 
+    // the Nitro Nav is also listening to the resize event and causing multiple re-renders
+    let timeoutId: NodeJS.Timeout | null = null;
+    const throttledCheckMobile = () => {
+      if (timeoutId === null) {
+        timeoutId = setTimeout(() => {
+          checkMobile();
+          timeoutId = null;
+        }, 150);
+      }
+    };
 
-    return () => window.removeEventListener('resize', checkMobile);
+    window.addEventListener('resize', throttledCheckMobile);
+
+    return () => {
+      window.removeEventListener('resize', throttledCheckMobile);
+      if (timeoutId) clearTimeout(timeoutId);
+    };
   }, []);
 
   // Close dropdown when clicking outside
