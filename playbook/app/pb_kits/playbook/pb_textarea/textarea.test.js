@@ -149,7 +149,7 @@ describe("TextArea Kit Props", () => {
     )
 
     const kit = screen.getByTestId(testId)
-    const error = kit.querySelector(".pb_caption_kit_md")
+    const error = kit.querySelector(".pb_caption_kit_md_lighter")
 
     expect(error.innerHTML).toBe("Test Label")
   })
