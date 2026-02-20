@@ -2,10 +2,13 @@
 
 require "open-uri"
 require "json"
+require "digest"
 
 module Playbook
   module PbIcon
     class Icon < Playbook::KitBase
+      ICON_PATH_DEV_CACHE_TTL_SECONDS = 2
+
       prop :border, type: Playbook::Props::Boolean,
                     default: false
       prop :fixed_width, type: Playbook::Props::Boolean,
@@ -174,24 +177,25 @@ module Playbook
 
               # If path doesn't exist, keep behavior aligned (no path resolution)
               if Dir.exist?(root)
-                # Approximate invalidation: directory mtime.
-                @icon_path_index_mtime = safe_mtime(root)
+                @icon_path_index_cache_key = icon_path_cache_key(root)
 
                 # One scan builds the map for O(1) lookups
                 # Key is the filename (without .svg) to match existing usage
                 index = {}
-                Dir.glob(File.join(root.to_s, "**", "*.svg")).each do |p|
+                Dir.glob(File.join(root.to_s, "**", "*.svg")).sort.each do |p|
                   name = File.basename(p, ".svg")
                   index[name] ||= p
                 end
                 index.freeze
               else
-                @icon_path_index_mtime = nil
+                @icon_path_index_cache_key = nil
                 {}
               end
             else
               {}
             end
+
+          @icon_path_index_checked_at = monotonic_now if Rails.env.development?
 
           @icon_path_index
         end
@@ -214,10 +218,46 @@ module Playbook
 
           return true unless Rails.application.config.respond_to?(:icon_path)
 
+          # In development, skip expensive tree digest checks for a short window
+          # This keeps hot-reload behavior while avoiding per-render full scans
+          return true if Rails.env.development? && within_dev_icon_index_ttl?
+
           root = Rails.root.join(Rails.application.config.icon_path)
-          safe_mtime(root) == @icon_path_index_mtime
+          fresh = icon_path_cache_key(root) == @icon_path_index_cache_key
+          @icon_path_index_checked_at = monotonic_now
+          fresh
         rescue
           false
+        end
+
+        def within_dev_icon_index_ttl?
+          return false unless defined?(@icon_path_index_checked_at)
+
+          (monotonic_now - @icon_path_index_checked_at) < ICON_PATH_DEV_CACHE_TTL_SECONDS
+        rescue
+          false
+        end
+
+        def monotonic_now
+          Process.clock_gettime(Process::CLOCK_MONOTONIC)
+        end
+
+        def icon_path_cache_key(root)
+          return safe_mtime(root) unless Rails.env.development?
+
+          digest = Digest::SHA1.new
+          root_prefix = "#{root}/"
+
+          Dir.glob(File.join(root.to_s, "**", "*.svg")).sort.each do |path|
+            stat = File.stat(path)
+            digest << path.delete_prefix(root_prefix)
+            digest << stat.mtime.to_f.to_s
+            digest << stat.size.to_s
+          end
+
+          digest.hexdigest
+        rescue
+          nil
         end
 
         def safe_mtime(path)
