@@ -147,20 +147,27 @@ module Playbook
 
       # Class-level caches
       class << self
+        @cache_mutex = Mutex.new
+        attr_reader :cache_mutex
+
         # Cache aliases.json across the process, but invalidate when the file changes (dev-safe)
         def icon_alias_map
           return @icon_alias_map if alias_cache_fresh?
 
-          @icon_alias_map =
-            if Rails.application.config.respond_to?(:icon_alias_path)
-              base_path = Rails.application.config.icon_alias_path
-              full_path = Rails.root.join(base_path)
-              @icon_alias_map_mtime = safe_mtime(full_path)
+          cache_mutex.synchronize do
+            return @icon_alias_map if alias_cache_fresh?
 
-              json = File.read(full_path)
-              parsed = JSON.parse(json)
-              parsed.fetch("aliases", {}).freeze
-            end
+            @icon_alias_map =
+              if Rails.application.config.respond_to?(:icon_alias_path)
+                base_path = Rails.application.config.icon_alias_path
+                full_path = Rails.root.join(base_path)
+                @icon_alias_map_mtime = safe_mtime(full_path)
+
+                json = File.read(full_path)
+                parsed = JSON.parse(json)
+                parsed.fetch("aliases", {}).freeze
+              end
+          end
 
           @icon_alias_map
         end
@@ -170,32 +177,36 @@ module Playbook
         def icon_path_index
           return @icon_path_index if index_cache_fresh?
 
-          @icon_path_index =
-            if Rails.application.config.respond_to?(:icon_path)
-              base_path = Rails.application.config.icon_path
-              root = Rails.root.join(base_path)
+          cache_mutex.synchronize do
+            return @icon_path_index if index_cache_fresh?
 
-              # If path doesn't exist, keep behavior aligned (no path resolution)
-              if Dir.exist?(root)
-                @icon_path_index_cache_key = icon_path_cache_key(root)
+            @icon_path_index =
+              if Rails.application.config.respond_to?(:icon_path)
+                base_path = Rails.application.config.icon_path
+                root = Rails.root.join(base_path)
 
-                # One scan builds the map for O(1) lookups
-                # Key is the filename (without .svg) to match existing usage
-                index = {}
-                Dir.glob(File.join(root.to_s, "**", "*.svg")).sort.each do |p|
-                  name = File.basename(p, ".svg")
-                  index[name] ||= p
+                # If path doesn't exist, keep behavior aligned (no path resolution)
+                if Dir.exist?(root)
+                  @icon_path_index_cache_key = icon_path_cache_key(root)
+
+                  # One scan builds the map for O(1) lookups
+                  # Key is the filename (without .svg) to match existing usage
+                  index = {}
+                  Dir.glob(File.join(root.to_s, "**", "*.svg")).sort.each do |p|
+                    name = File.basename(p, ".svg")
+                    index[name] ||= p
+                  end
+                  index.freeze
+                else
+                  @icon_path_index_cache_key = nil
+                  {}
                 end
-                index.freeze
               else
-                @icon_path_index_cache_key = nil
                 {}
               end
-            else
-              {}
-            end
 
-          @icon_path_index_checked_at = monotonic_now if Rails.env.development?
+            @icon_path_index_checked_at = monotonic_now if Rails.env.development?
+          end
 
           @icon_path_index
         end
