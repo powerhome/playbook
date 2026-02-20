@@ -133,11 +133,14 @@ const Textarea = ({
       <label htmlFor={id}>
       {
         requiredIndicator ? (
-          <Caption className="pb_text_input_kit_label">
+          <Caption className="pb_text_input_kit_label"
+              color="lighter"
+          >
             {label} <span style={{ color: `${colors.text_error}` }}>*</span>
           </Caption>
         ) : (
           <Caption  className="pb_text_input_kit_label"
+              color="lighter"
               text={label}
           />
         )

@@ -707,6 +707,7 @@ const TimePicker = (props: TimePickerProps): JSX.Element => {
           {requiredIndicator ? (
             <Caption
                 className="pb_time_picker_kit_label"
+                color="lighter"
                 dark={dark}
                 marginBottom="xs"
                 size="md"
@@ -716,6 +717,7 @@ const TimePicker = (props: TimePickerProps): JSX.Element => {
           ) : (
             <Caption
                 className="pb_time_picker_kit_label"
+                color="lighter"
                 dark={dark}
                 marginBottom="xs"
                 size="md"
@@ -766,6 +768,7 @@ const TimePicker = (props: TimePickerProps): JSX.Element => {
                 <label htmlFor={`${uniqueId}-hour`}>
                   <Caption
                       className="time_input_label"
+                      color="lighter"
                       dark={dark}
                       size="sm"
                       text="Hour"
@@ -813,6 +816,7 @@ const TimePicker = (props: TimePickerProps): JSX.Element => {
                 <label htmlFor={`${uniqueId}-minute`}>
                   <Caption
                       className="time_input_label"
+                      color="lighter"
                       dark={dark}
                       size="sm"
                       text="Minute"
@@ -859,6 +863,7 @@ const TimePicker = (props: TimePickerProps): JSX.Element => {
                 <div className="meridiem">
                   <Caption
                       className="time_input_label"
+                      color="lighter"
                       dark={dark}
                       size="sm"
                       text="Period"
@@ -905,6 +910,7 @@ const TimePicker = (props: TimePickerProps): JSX.Element => {
               )}
               {showTimezone && (
                 <Caption
+                    color="lighter"
                     dark={dark}
                     lineHeight="tight"
                     marginTop="sm"

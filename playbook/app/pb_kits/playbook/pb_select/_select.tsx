@@ -134,12 +134,14 @@ const Select = ({
         >
           {requiredIndicator ? (
             <Caption 
+                color="lighter"
                 dark={props.dark}>
               {label}
               <span style={{ color: "#DA0014" }}> *</span>
             </Caption>
           ) : (
             <Caption 
+                color="lighter"
                 dark={props.dark}
                 text={label}
             />

@@ -532,6 +532,7 @@ const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>(
           {requiredIndicator ? (
             <Caption
                 className="pb_multi_level_select_kit_label"
+                color="lighter"
                 marginBottom="xs"
             >
               {label} <span className="required_indicator">*</span>
@@ -539,6 +540,7 @@ const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>(
           ) : (
             <Caption
                 className="pb_multi_level_select_kit_label"
+                color="lighter"
                 marginBottom="xs"
                 text={label}
             />

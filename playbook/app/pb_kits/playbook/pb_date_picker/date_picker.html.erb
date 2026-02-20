@@ -7,11 +7,11 @@
     <% if !object.hide_label && object.label %>
       <label for="<%= object.picker_id %>">
         <% if object.required_indicator %>
-          <%= pb_rails("caption", props: { dark: object.dark, classname: "pb_date_picker_kit_label" }) do %>
+          <%= pb_rails("caption", props: { dark: object.dark, classname: "pb_date_picker_kit_label", color: "lighter" }) do %>
             <%= object.label %><span style="color: #DA0014;"> *</span>
           <% end %>
         <% else %>
-          <%= pb_rails("caption", props: { text: object.label, dark: object.dark, classname: "pb_date_picker_kit_label" }) %>
+          <%= pb_rails("caption", props: { text: object.label, dark: object.dark, classname: "pb_date_picker_kit_label", color: "lighter" }) %>
         <% end %>
       </label>
     <% end %>

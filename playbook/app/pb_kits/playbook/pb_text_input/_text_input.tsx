@@ -253,6 +253,7 @@ const TextInput = (props: TextInputProps, ref: React.LegacyRef<HTMLInputElement>
             requiredIndicator ? (
               <Caption
                   className="pb_text_input_kit_label"
+                  color="lighter"
                   dark={dark}
               >
                 {label} <span style={{ color: dark ? colors.text_error_dark : colors.text_error }}>*</span>
@@ -260,6 +261,7 @@ const TextInput = (props: TextInputProps, ref: React.LegacyRef<HTMLInputElement>
             ) : (
                 <Caption
                     className="pb_text_input_kit_label"
+                    color="lighter"
                     dark={dark}
                     text={label}
               />

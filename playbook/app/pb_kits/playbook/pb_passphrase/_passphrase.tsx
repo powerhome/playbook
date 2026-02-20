@@ -119,12 +119,14 @@ const Passphrase = (props: PassphraseProps): React.ReactElement => {
           {hasLabel && (requiredIndicator ? (
             <Caption
                 className="passphrase-label"
+                color="lighter"
             >
               {label} <span className="required_indicator">*</span>
             </Caption>
           ) : (
             <Caption
                 className="passphrase-label"
+                color="lighter"
                 text={label}
             />
           ))}
@@ -142,12 +144,14 @@ const Passphrase = (props: PassphraseProps): React.ReactElement => {
                   orientation="column"
               >
                 <Caption
+                    color="lighter"
                     marginBottom="xs"
                     text="Tips for a good passphrase"
                 />
                 <div>
                   {tips.map((tip, i) => (
                     <Caption
+                        color="lighter"
                         key={i}
                         marginBottom="xs"
                         size="xs"
