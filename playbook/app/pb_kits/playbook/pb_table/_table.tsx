@@ -354,7 +354,7 @@ const Table = (props: TableProps): React.ReactElement => {
         const mergedFilterProps = { ...defaultFilterProps, ...filterProps }
         
         // Default card props that CAN be overridden (All props from Card kit CAN be used, but these are the ones we set as defaults)
-        const defaultCardProps = {
+        const defaultCardProps: { [key: string]: any } = {
             padding: "none",
         }
 
@@ -362,7 +362,7 @@ const Table = (props: TableProps): React.ReactElement => {
         const mergedCardProps = { ...defaultCardProps, ...cardProps }
 
         // Default title props that CAN be overridden (All props from Title kit CAN be used, but these are the ones we set as defaults)
-        const defaultTitleProps = {
+        const defaultTitleProps: { [key: string]: any } = {
             size: 3,
             paddingY: "md",
         }
