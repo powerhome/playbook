@@ -82,30 +82,35 @@ module Playbook
         )
       end
 
+      # Instance-level memoization of alias map lookup result
       def icon_alias_map
-        return unless Rails.application.config.respond_to?(:icon_alias_path)
+        return @icon_alias_map if defined?(@icon_alias_map)
 
-        base_path = Rails.application.config.icon_alias_path
-        json = File.read(Rails.root.join(base_path))
-        JSON.parse(json)["aliases"].freeze
+        @icon_alias_map = self.class.icon_alias_map
       end
 
+      # Instance-level memoization of resolved asset path
       def asset_path
-        return unless Rails.application.config.respond_to?(:icon_path)
+        return @asset_path if defined?(@asset_path)
 
-        base_path = Rails.application.config.icon_path
-        resolved_icon = resolve_alias(icon)
-        icon_path = Dir.glob(Rails.root.join(base_path, "**", "#{resolved_icon}.svg")).first
-        icon_path if icon_path && File.exist?(icon_path)
+        @asset_path =
+          if Rails.application.config.respond_to?(:icon_path)
+            resolved_icon = resolve_alias(icon)
+            path = self.class.icon_path_index[resolved_icon]
+            path if path && File.exist?(path)
+          end
+      end
+
+      def is_svg?
+        return @is_svg if defined?(@is_svg)
+
+        @is_svg = (icon || custom_icon.to_s).include?(".svg") || asset_path.present?
       end
 
       def render_svg
         doc = Nokogiri::XML(URI.open(asset_path || icon || custom_icon)) # rubocop:disable Security/Open
-        svg = doc.at_css "svg"
-
-        unless svg
-          return "" # Return an empty string if SVG element is not found
-        end
+        svg = doc.at_css("svg")
+        return "" unless svg
 
         svg["class"] = %w[pb_custom_icon svg-inline--fa].concat([object.custom_icon_classname]).join(" ")
         svg["id"] = object.id
@@ -113,7 +118,9 @@ module Playbook
         svg["width"] = "auto"
         svg["tabindex"] = object.tabindex
         fill_color = object.color || "currentColor"
-        doc.at_css("path")["fill"] = fill_color
+
+        # Safely apply fill to all paths (avoids nil errors + handles multi-path icons)
+        doc.css("path").each { |p| p["fill"] = fill_color }
 
         if object.data.present?
           object.data.each do |key, value|
@@ -135,14 +142,96 @@ module Playbook
         ""
       end
 
-      def is_svg?
-        (icon || custom_icon.to_s).include?(".svg") || asset_path.present?
+      # Class-level caches
+      class << self
+        # Cache aliases.json across the process, but invalidate when the file changes (dev-safe)
+        def icon_alias_map
+          return @icon_alias_map if alias_cache_fresh?
+
+          @icon_alias_map =
+            if Rails.application.config.respond_to?(:icon_alias_path)
+              base_path = Rails.application.config.icon_alias_path
+              full_path = Rails.root.join(base_path)
+              @icon_alias_map_mtime = safe_mtime(full_path)
+
+              json = File.read(full_path)
+              parsed = JSON.parse(json)
+              parsed.fetch("aliases", {}).freeze
+            end
+
+          @icon_alias_map
+        end
+
+        # Cache an index of icon_name to file path for all SVGs in the configured directory, with invalidation based on directory mtime
+        # Avoids recursive Dir.glob for every icon render
+        def icon_path_index
+          return @icon_path_index if index_cache_fresh?
+
+          @icon_path_index =
+            if Rails.application.config.respond_to?(:icon_path)
+              base_path = Rails.application.config.icon_path
+              root = Rails.root.join(base_path)
+
+              # If path doesn't exist, keep behavior aligned (no path resolution)
+              if Dir.exist?(root)
+                # Approximate invalidation: directory mtime.
+                @icon_path_index_mtime = safe_mtime(root)
+
+                # One scan builds the map for O(1) lookups
+                # Key is the filename (without .svg) to match existing usage
+                index = {}
+                Dir.glob(File.join(root.to_s, "**", "*.svg")).each do |p|
+                  name = File.basename(p, ".svg")
+                  index[name] ||= p
+                end
+                index.freeze
+              else
+                @icon_path_index_mtime = nil
+                {}
+              end
+            else
+              {}
+            end
+
+          @icon_path_index
+        end
+
+      private
+
+        def alias_cache_fresh?
+          return false unless defined?(@icon_alias_map)
+
+          return true unless Rails.application.config.respond_to?(:icon_alias_path)
+
+          full_path = Rails.root.join(Rails.application.config.icon_alias_path)
+          safe_mtime(full_path) == @icon_alias_map_mtime
+        rescue
+          false
+        end
+
+        def index_cache_fresh?
+          return false unless defined?(@icon_path_index)
+
+          return true unless Rails.application.config.respond_to?(:icon_path)
+
+          root = Rails.root.join(Rails.application.config.icon_path)
+          safe_mtime(root) == @icon_path_index_mtime
+        rescue
+          false
+        end
+
+        def safe_mtime(path)
+          File.exist?(path) ? File.mtime(path) : nil
+        rescue
+          nil
+        end
       end
 
     private
 
       def resolve_alias(icon)
         return icon unless icon_alias_map
+        return icon if icon.nil?
 
         aliases = icon_alias_map[icon]
         return icon unless aliases
@@ -155,8 +244,8 @@ module Playbook
       end
 
       def file_exists?(alias_name)
-        base_path = Rails.application.config.icon_path
-        File.exist?(Dir.glob(Rails.root.join(base_path, "**", "#{alias_name}.svg")).first)
+        # Use the cached index (no recursive glob)
+        self.class.icon_path_index.key?(alias_name)
       end
 
       def svg_size
