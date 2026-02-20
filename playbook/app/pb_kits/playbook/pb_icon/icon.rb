@@ -8,6 +8,7 @@ module Playbook
   module PbIcon
     class Icon < Playbook::KitBase
       ICON_PATH_DEV_CACHE_TTL_SECONDS = 2
+      ICON_PATH_PROD_CACHE_TTL_SECONDS = 60
 
       prop :border, type: Playbook::Props::Boolean,
                     default: false
@@ -204,7 +205,7 @@ module Playbook
                 {}
               end
 
-            @icon_path_index_checked_at = monotonic_now if Rails.env.development?
+            @icon_path_index_checked_at = monotonic_now
           end
 
           @icon_path_index
@@ -232,9 +233,10 @@ module Playbook
 
           return true unless Rails.application.config.respond_to?(:icon_path)
 
-          # In development, skip expensive tree digest checks for a short window
-          # This keeps hot-reload behavior while avoiding per-render full scans
-          return true if Rails.env.development? && within_dev_icon_index_ttl?
+          # In development and production, skip re-checks for a short TTL window
+          # to avoid repeated tree scans on hot paths.
+          return true if Rails.env.development? && within_icon_index_ttl?(ICON_PATH_DEV_CACHE_TTL_SECONDS)
+          return true if Rails.env.production? && within_icon_index_ttl?(ICON_PATH_PROD_CACHE_TTL_SECONDS)
 
           root = Rails.root.join(Rails.application.config.icon_path)
           fresh = icon_path_cache_key(root) == @icon_path_index_cache_key
@@ -244,10 +246,10 @@ module Playbook
           false
         end
 
-        def within_dev_icon_index_ttl?
+        def within_icon_index_ttl?(ttl_seconds)
           return false unless defined?(@icon_path_index_checked_at)
 
-          (monotonic_now - @icon_path_index_checked_at) < ICON_PATH_DEV_CACHE_TTL_SECONDS
+          (monotonic_now - @icon_path_index_checked_at) < ttl_seconds
         rescue
           false
         end
@@ -257,14 +259,18 @@ module Playbook
         end
 
         def icon_path_cache_key(root)
-          return safe_mtime(root) unless Rails.env.development?
+          return safe_mtime(root) unless Rails.env.development? || Rails.env.production?
 
           digest = Digest::SHA1.new
           root_prefix = "#{root}/"
 
           Dir.glob(File.join(root.to_s, "**", "*.svg")).sort.each do |path|
-            stat = File.stat(path)
             digest << path.delete_prefix(root_prefix)
+            next unless Rails.env.development?
+
+            # Development tracks file metadata for rapid local edits.
+            # Production only needs path-set change detection during periodic checks.
+            stat = File.stat(path)
             digest << stat.mtime.to_f.to_s
             digest << stat.size.to_s
           end
