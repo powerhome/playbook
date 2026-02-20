@@ -148,7 +148,6 @@ module Playbook
       # Class-level caches
       class << self
         @cache_mutex = Mutex.new
-        attr_reader :cache_mutex
 
         # Cache aliases.json across the process, but invalidate when the file changes (dev-safe)
         def icon_alias_map
@@ -212,6 +211,10 @@ module Playbook
         end
 
       private
+
+        def cache_mutex
+          @cache_mutex ||= Mutex.new
+        end
 
         def alias_cache_fresh?
           return false unless defined?(@icon_alias_map)
