@@ -20,6 +20,7 @@ type TableProps = {
     aria?: { [key: string]: string },
     children: React.ReactNode[] | React.ReactNode,
     className: string,
+    cardProps?: { [key: string]: any },
     collapse?: "sm" | "md" | "lg",
     container?: boolean,
     dark?: boolean,
@@ -42,6 +43,7 @@ type TableProps = {
     striped?: boolean,
     tag?: "table" | "div",
     title?: string,
+    titleProps?: { [key: string]: any },
     variant?: "default" | "withFilter",
     verticalBorder?: boolean,
 } & GlobalProps
@@ -52,6 +54,8 @@ const Table = (props: TableProps): React.ReactElement => {
     const {
         aria = {},
         variant = 'default',
+        cardProps = {},
+        titleProps = {},
         children,
         className,
         collapse = variant === 'withFilter' ? 'md' : 'sm',
@@ -348,34 +352,33 @@ const Table = (props: TableProps): React.ReactElement => {
 
         // Merge default props with user-provided props (user props override defaults)
         const mergedFilterProps = { ...defaultFilterProps, ...filterProps }
+        
+        // Default card props that CAN be overridden (All props from Card kit CAN be used, but these are the ones we set as defaults)
+        const defaultCardProps = {
+            padding: "none",
+        }
+
+        // Merge default props with user-provided props (user props override defaults)
+        const mergedCardProps = { ...defaultCardProps, ...cardProps }
+
+        // Default title props that CAN be overridden (All props from Title kit CAN be used, but these are the ones we set as defaults)
+        const defaultTitleProps = {
+            size: 3,
+            paddingY: "md",
+        }
+
+        // Merge default props with user-provided props (user props override defaults)
+        const mergedTitleProps = { ...defaultTitleProps, ...titleProps }
 
         return (
             <>
                 {title && (
-                    <Title         
-                        paddingLeft={{
-                            xs: "sm",
-                            sm: "sm",
-                            md: "xl",
-                            lg: "xl",
-                            xl: "xl",
-                            default: "xl",
-                        } as any}
-                        paddingY="md"
-                        size={3}
+                    <Title {...mergedTitleProps} 
                         text={title} 
-                    />
+                    />      
                 )}
                 <Card
-                    marginX={{
-                        xs: "sm",
-                        sm: "sm",
-                        md: "xl",
-                        lg: "xl",
-                        xl: "xl",
-                        default: "xl",
-                    } as any}
-                    padding="none"
+                    {...mergedCardProps}
                 >
                     <Flex
                         align="stretch"

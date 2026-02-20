@@ -49,6 +49,10 @@ module Playbook
       prop :pagination
       prop :title, type: Playbook::Props::String,
                    default: nil
+      prop :card_props, type: Playbook::Props::HashProp,
+                        default: {}
+      prop :title_props, type: Playbook::Props::HashProp,
+                         default: {}
 
       def size_class
         variant === "with_filter" && size == "md" ? "sm" : size
