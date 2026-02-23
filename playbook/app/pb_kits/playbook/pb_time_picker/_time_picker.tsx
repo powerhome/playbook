@@ -35,6 +35,7 @@ type TimePickerProps = {
   aria?: { [key: string]: string },
   className?: string,
   data?: { [key: string]: string },
+  dark?: boolean,
   defaultTime?: string,
   disabled?: boolean,
   error?: string,
@@ -60,6 +61,7 @@ const TimePicker = (props: TimePickerProps): JSX.Element => {
     aria = {},
     className,
     data = {},
+    dark = false,
     defaultTime,
     disabled = false,
     error,
@@ -190,11 +192,13 @@ const TimePicker = (props: TimePickerProps): JSX.Element => {
     if (disabled) return
 
     const addOnCard = document.querySelector(`#${uniqueId}-input`)?.closest('.text_input_wrapper_add_on')?.querySelector('.add-on-card') as HTMLElement
+    const inputElement = document.getElementById(`${uniqueId}-input`) as HTMLInputElement
     
-    if (addOnCard) {
+    if (addOnCard && inputElement) {
       const handleAddOnClick = (e: Event) => {
         e.preventDefault()
         e.stopPropagation()
+        inputElement.focus()
         setShowDropdown(true)
       }
       
@@ -681,6 +685,7 @@ const TimePicker = (props: TimePickerProps): JSX.Element => {
     globalProps(props),
     errorDisplay ? 'error' : null,
     disabled ? 'disabled' : null,
+    dark ? 'dark' : null,
     className
   )
 
@@ -702,6 +707,8 @@ const TimePicker = (props: TimePickerProps): JSX.Element => {
           {requiredIndicator ? (
             <Caption
                 className="pb_time_picker_kit_label"
+                color="lighter"
+                dark={dark}
                 marginBottom="xs"
                 size="md"
             >
@@ -710,6 +717,8 @@ const TimePicker = (props: TimePickerProps): JSX.Element => {
           ) : (
             <Caption
                 className="pb_time_picker_kit_label"
+                color="lighter"
+                dark={dark}
                 marginBottom="xs"
                 size="md"
                 text={label}
@@ -721,6 +730,7 @@ const TimePicker = (props: TimePickerProps): JSX.Element => {
         <TextInput
             addOn={{ icon: 'clock', alignment: 'right', border: true }}
             cursor="pointer"
+            dark={dark}
             disabled={disabled}
             error={errorDisplay}
             id={`${uniqueId}-input`}
@@ -758,6 +768,8 @@ const TimePicker = (props: TimePickerProps): JSX.Element => {
                 <label htmlFor={`${uniqueId}-hour`}>
                   <Caption
                       className="time_input_label"
+                      color="lighter"
+                      dark={dark}
                       size="sm"
                       text="Hour"
                   />
@@ -804,6 +816,8 @@ const TimePicker = (props: TimePickerProps): JSX.Element => {
                 <label htmlFor={`${uniqueId}-minute`}>
                   <Caption
                       className="time_input_label"
+                      color="lighter"
+                      dark={dark}
                       size="sm"
                       text="Minute"
                   />
@@ -849,6 +863,8 @@ const TimePicker = (props: TimePickerProps): JSX.Element => {
                 <div className="meridiem">
                   <Caption
                       className="time_input_label"
+                      color="lighter"
+                      dark={dark}
                       size="sm"
                       text="Period"
                   />
@@ -856,6 +872,7 @@ const TimePicker = (props: TimePickerProps): JSX.Element => {
                     <SelectableCard
                         checked={meridiem === 'AM'}
                         className={!isAnyAMTimeValid() ? 'disabled_meridiem' : ''}
+                        dark={dark}
                         disabled={!isAnyAMTimeValid()}
                         inputId={`${uniqueId}-am`}
                         multi={false}
@@ -867,6 +884,7 @@ const TimePicker = (props: TimePickerProps): JSX.Element => {
                     <SelectableCard
                         checked={meridiem === 'PM'}
                         className={!isAnyPMTimeValid() ? 'disabled_meridiem' : ''}
+                        dark={dark}
                         disabled={!isAnyPMTimeValid()}
                         inputId={`${uniqueId}-pm`}
                         multi={false}
@@ -883,6 +901,7 @@ const TimePicker = (props: TimePickerProps): JSX.Element => {
                 <div className="time_range_error">
                   <Caption
                       className="time_range_error_text"
+                      dark={dark}
                       marginTop="sm"
                       size="xs"
                       text={getTimeRangeErrorMessage(minTime, maxTime, timeFormat)}
@@ -891,6 +910,8 @@ const TimePicker = (props: TimePickerProps): JSX.Element => {
               )}
               {showTimezone && (
                 <Caption
+                    color="lighter"
+                    dark={dark}
                     lineHeight="tight"
                     marginTop="sm"
                     size="xs"

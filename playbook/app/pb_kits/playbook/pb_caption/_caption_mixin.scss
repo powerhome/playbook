@@ -2,33 +2,33 @@
 @import "../tokens/typography";
 
 $pb_caption_colors: (
-  default:        $text_lt_default,
-  light:          $text_lt_light,
-  link:           $primary,
-  lighter:        $text_lt_lighter,
-  success:        $text_lt_success_sm,
-  error:          $error,
+  default:        $text_default_color,
+  light:          $text_light,
+  link:           $text_link,
+  lighter:        $text_lighter,
+  success:        $text_success,
+  error:          $text_error,
 );
 
 $pb_dark_caption_colors: (
-  default:        $text_dk_default,
-  light:          $text_dk_light,
-  lighter:        $text_dk_lighter,
-  link:           $active_dark,
-  success:        $text_dk_success_sm,
-  error:          $error_dark,
+  default:        $text_default_dark,
+  light:          $text_light_dark,
+  lighter:        $text_lighter_dark,
+  link:           $text_link_dark,
+  success:        $text_success_dark,
+  error:          $text_error_dark,
 );
 
 
 @mixin caption($font_size: $font_smaller, $font_weight: $bold) {
   font-weight: $font_weight;
-  color: $text_lt_light;
+  color: $text_light;
   text-transform: uppercase;
   font-size: $font_size;
   letter-spacing: $lspace_loosest;
 }
 
-@mixin caption_color($color: $text_lt_light) {
+@mixin caption_color($color: $text_light) {
   color: $color;
 }
 
@@ -43,5 +43,5 @@ $pb_dark_caption_colors: (
 }
 
 @mixin caption_dark {
-  color: $text_dk_light;
+  color: $text_light_dark;
 }

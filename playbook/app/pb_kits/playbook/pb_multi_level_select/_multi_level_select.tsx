@@ -15,7 +15,6 @@ import Body from "../pb_body/_body";
 import Caption from "../pb_caption/_caption";
 import MultiLevelSelectOptions from "./multi_level_select_options";
 import MultiLevelSelectContext from "./context";
-import colors from "../tokens/exports/_colors.module.scss"
 
 import {
   getAncestorsOfUnchecked,
@@ -533,13 +532,15 @@ const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>(
           {requiredIndicator ? (
             <Caption
                 className="pb_multi_level_select_kit_label"
+                color="lighter"
                 marginBottom="xs"
             >
-              {label} <span style={{ color: `${colors.error}` }}>*</span>
+              {label} <span className="required_indicator">*</span>
             </Caption>
           ) : (
             <Caption
                 className="pb_multi_level_select_kit_label"
+                color="lighter"
                 marginBottom="xs"
                 text={label}
             />
