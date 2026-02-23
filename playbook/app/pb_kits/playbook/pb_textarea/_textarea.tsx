@@ -81,19 +81,14 @@ const Textarea = ({
   ...props
 }: TextareaProps) => {
   const ref = useRef<HTMLTextAreaElement>(null)
-  const generatedId = useUniqueId()
   useEffect(() => {
     if (ref.current && resize === 'auto') {
       PbTextarea.addMatch(ref.current)
     }
   })
 
-<<<<<<< PLAY-2798-id-vs-inputoptionsid-for-textarea
   const containerId = id
   const textareaId = inputOptions?.id ?? (id ? `${id}-input` : undefined)
-=======
-  const textareaId = inputOptions?.id ?? id ?? generatedId
->>>>>>> master
 
   const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     // Apply emoji mask if enabled using centralized helper
@@ -143,7 +138,6 @@ const Textarea = ({
   } = inputOptions || {}
 
   const textareaDataProps = buildDataProps(inputOptionsData || {})
-<<<<<<< PLAY-2798-id-vs-inputoptionsid-for-textarea
   const errorId = error ? (containerId ? `${containerId}-error` : (textareaId ? `${textareaId}-error` : undefined)) : undefined
   const ariaDescribedBy = [errorId, customAriaDescribedBy].filter(Boolean).join(" ")
 
@@ -151,15 +145,6 @@ const Textarea = ({
     ...(textareaId ? { id: textareaId } : {}),
     "aria-describedby": ariaDescribedBy || undefined,
     "aria-invalid": customAriaInvalid !== undefined ? customAriaInvalid : !!error,
-=======
-  const errorId = error ? `${textareaId}-error` : undefined
-  const ariaDescribedBy = [errorId, customAriaDescribedBy].filter(Boolean).join(" ")
-
-  const textareaAttrs = {
-    "aria-describedby": ariaDescribedBy || undefined,
-    "aria-invalid": customAriaInvalid !== undefined ? customAriaInvalid : !!error,
-    id: textareaId,
->>>>>>> master
     name,
     rows,
     placeholder,
@@ -188,21 +173,13 @@ const Textarea = ({
         id={containerId}
     >
     {label && (
-<<<<<<< PLAY-2798-id-vs-inputoptionsid-for-textarea
       <label {...(textareaId ? { htmlFor: textareaId } : {})}>
-      {
-        requiredIndicator ? (
-          <Caption className="pb_text_input_kit_label">
-            {label} <span style={{ color: `${colors.error}` }}>{"*"}</span>
-=======
-      <label htmlFor={textareaId}>
       {
         requiredIndicator ? (
           <Caption className="pb_text_input_kit_label"
               color="lighter"
           >
-            {label} <span style={{ color: `${colors.text_error}` }}>*</span>
->>>>>>> master
+            {label} <span style={{ color: `${colors.text_error}` }}>{"*"}</span>
           </Caption>
         ) : (
           <Caption  className="pb_text_input_kit_label"
