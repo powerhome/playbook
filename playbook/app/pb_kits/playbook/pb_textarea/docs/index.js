@@ -7,3 +7,4 @@ export { default as TextareaCharacterCounter } from './_textarea_character_count
 export { default as TextareaInline } from './_textarea_inline.jsx'
 export { default as TextareaEmojiMask } from './_textarea_emoji_mask.jsx'
 export { default as TextareaRequiredIndicator } from './_textarea_required_indicator.jsx'
+export { default as TextareaInputOptions } from "./_textarea_input_options.jsx"

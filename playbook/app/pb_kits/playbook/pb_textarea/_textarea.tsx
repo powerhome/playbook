@@ -17,6 +17,16 @@ import colors from '../tokens/exports/_colors.module.scss'
 
 import { stripEmojisForPaste, applyEmojiMask } from '../utilities/emojiMask'
 
+let pbTextareaIdCounter = 0
+const useUniqueId = (prefix = "pb_textarea_") => {
+  const idRef = useRef<string | null>(null)
+  if (idRef.current === null) {
+    pbTextareaIdCounter += 1
+    idRef.current = `${prefix}${pbTextareaIdCounter}`
+  }
+  return idRef.current
+}
+
 type TextareaProps = {
   aria?: {[key: string]: string},
   characterCount?: string,
@@ -29,6 +39,7 @@ type TextareaProps = {
   htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
   inline?: boolean,
+  inputOptions?: { [k: string]: any },
   object?: string,
   method?: string,
   label?: string,
@@ -54,6 +65,7 @@ const Textarea = ({
   htmlOptions = {},
   id,
   inline = false,
+  inputOptions = {},
   resize = 'none',
   error,
   label,
@@ -69,11 +81,14 @@ const Textarea = ({
   ...props
 }: TextareaProps) => {
   const ref = useRef<HTMLTextAreaElement>(null)
+  const generatedId = useUniqueId()
   useEffect(() => {
     if (ref.current && resize === 'auto') {
       PbTextarea.addMatch(ref.current)
     }
   })
+
+  const textareaId = inputOptions?.id ?? id ?? generatedId
 
   const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     // Apply emoji mask if enabled using centralized helper
@@ -114,13 +129,40 @@ const Textarea = ({
   const ariaProps: {[key: string]: string} = buildAriaProps(aria)
   const dataProps: {[key: string]: string} = buildDataProps(data)
   const htmlProps = buildHtmlProps(htmlOptions)
+
+  const {
+    "aria-describedby": customAriaDescribedBy,
+    "aria-invalid": customAriaInvalid,
+    data: inputOptionsData,
+    ...inputOptionsWithoutAriaAndData
+  } = inputOptions || {}
+
+  const textareaDataProps = buildDataProps(inputOptionsData || {})
+  const errorId = error ? `${textareaId}-error` : undefined
+  const ariaDescribedBy = [errorId, customAriaDescribedBy].filter(Boolean).join(" ")
+
+  const textareaAttrs = {
+    "aria-describedby": ariaDescribedBy || undefined,
+    "aria-invalid": customAriaInvalid !== undefined ? customAriaInvalid : !!error,
+    id: textareaId,
+    name,
+    rows,
+    placeholder,
+    value,
+    disabled,
+    required,
+    onChange: emojiMask ? handleChange : onChange,
+    onPaste: emojiMask ? handlePaste : undefined,
+    ...inputOptionsWithoutAriaAndData,
+    ...textareaDataProps
+  }
+
   const checkIfZero = (characterCount: string | number) => {
     return characterCount == 0 ? characterCount.toString() : characterCount
   }
   const characterCounter = () => {
     return maxCharacters && characterCount ? `${checkIfZero(characterCount)} / ${maxCharacters}` : `${checkIfZero(characterCount)}`
   }
-  const errorId = error ? `${id}-error` : undefined
 
   return (
     <div
@@ -130,7 +172,7 @@ const Textarea = ({
         className={classes}
     >
     {label && (
-      <label htmlFor={id}>
+      <label htmlFor={textareaId}>
       {
         requiredIndicator ? (
           <Caption className="pb_text_input_kit_label"
@@ -147,23 +189,9 @@ const Textarea = ({
       }
       </label>
     )}
-      {children || (
-        <textarea
-            aria-describedby={errorId}
-            aria-invalid={!!error}
-            disabled={disabled}
-            id={id}
-            name={name}
-            onChange={emojiMask ? handleChange : onChange}
-            onPaste={emojiMask ? handlePaste : undefined}
-            placeholder={placeholder}
-            ref={ref}
-            required={required}
-            rows={rows}
-            value={value}
-            {...props}
-        />
-      )}
+      {children || <textarea ref={ref}
+          {...textareaAttrs}
+                   />}
 
       {error ? (
         <>
