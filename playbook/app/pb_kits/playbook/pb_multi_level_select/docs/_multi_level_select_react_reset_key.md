@@ -1,0 +1,1 @@
+When a parent resets a Multi Level Select (e.g., “Default” or “Clear”), the kit needs a `key` that changes with the selection because React uses the `key` to determine component identity and whether to preserve internal state. If the `key` doesn’t change, React reuses the existing instance and may keep showing the old selection instead of resetting to the new one.
