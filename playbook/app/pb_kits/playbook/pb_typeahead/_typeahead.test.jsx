@@ -20,7 +20,7 @@ test('typeahead classname + label renders as expected', () => {
   )
 
   const kit = screen.getByTestId('typeahead-test')
-  const label = kit.querySelector(".pb_caption_kit_md.pb_text_input_kit_label")
+  const label = kit.querySelector(".pb_caption_kit_md_lighter.pb_text_input_kit_label")
   expect(kit).toHaveClass("pb_typeahead_kit")
   expect(label).toHaveTextContent("Colors")
 })
@@ -289,7 +289,35 @@ test('input display none shows number of selected items', () => {
 
   const kit = screen.getByTestId('input-display-none-test')
   const inputDisplayDiv = kit.querySelector(".pb_typeahead_selection_count")
-  expect(inputDisplayDiv).toHaveTextContent("2 items selected") 
+  expect(inputDisplayDiv).toHaveTextContent("2 items selected")
+})
+
+test('input display none keeps selected options visible in dropdown with selected styling', async () => {
+  render(
+    <Typeahead
+        data={{ testid: 'input-display-none-dropdown-test' }}
+        defaultValue={[options[0], options[1]]}
+        inputDisplay="none"
+        isMulti
+        options={options}
+    />
+  )
+
+  const kit = screen.getByTestId('input-display-none-dropdown-test')
+  const control = kit.querySelector('.typeahead-kit-select__control')
+  fireEvent.mouseDown(control)
+
+  await waitFor(() => {
+    const menu = kit.querySelector('.typeahead-kit-select__menu')
+    expect(menu).toBeInTheDocument()
+  })
+
+  // Selected options (Orange, Red) should remain in the dropdown and be marked as selected
+  const selectedOptions = kit.querySelectorAll('.typeahead-kit-select__option--is-selected')
+  expect(selectedOptions.length).toBe(2)
+  const labels = Array.from(selectedOptions).map((el) => el.textContent)
+  expect(labels).toContain('Orange')
+  expect(labels).toContain('Red')
 })
 
 test('typeahead with pills that use name instead of label', () => {

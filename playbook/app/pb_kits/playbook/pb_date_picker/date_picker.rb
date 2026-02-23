@@ -71,6 +71,8 @@ module Playbook
                                    default: false
       prop :required, type: Playbook::Props::Boolean,
                       default: false
+      prop :required_indicator, type: Playbook::Props::Boolean,
+                                default: false
       prop :year_range, type: Playbook::Props::Array,
                         default: [1900, 2100]
       prop :custom_event_type, type: Playbook::Props::String,
@@ -113,6 +115,7 @@ module Playbook
           position: position,
           positionElement: position_element,
           required: required,
+          requiredIndicator: required_indicator,
           selectionType: selection_type,
           showTimezone: show_timezone,
           staticPosition: static_position,
@@ -133,6 +136,7 @@ module Playbook
         class_string = "cal_icon_wrapper"
         class_string += " dark" if dark
         class_string += " no_label_shift" if hide_label
+        class_string += " disabled" if disable_input
         class_string += error_class
         class_string
       end

@@ -11,7 +11,11 @@ $merge_kits1: map-merge($status_colors, $category_colors);
 $merge_kits2: map-merge($merge_kits1, $product_colors);
 $merge_kits3: map-merge($merge_kits2, $text_colors);
 $merge_kits4: map-merge($merge_kits3, $data_colors);
-$icon_colors: map-merge($merge_kits4, $additional_colors);
+$merge_kits5: map-merge($merge_kits4, $additional_colors);
+$merge_kits6: map-merge($merge_kits5, $accessible_text_colors);
+$merge_kits7: map-merge($merge_kits6, $accessible_input_text_colors);
+$merge_kits8: map-merge($merge_kits7, $accessible_status_text_colors);
+$icon_colors: map-merge($merge_kits8, $accessible_status_icon_background_colors);
 
 .pb_custom_icon, .pb_icon_kit {
   @each $color_name, $color_value in $icon_colors {

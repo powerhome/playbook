@@ -1,0 +1,254 @@
+/*=====================================
+  Accessible Color Tokens (WCAG-compliant)
+  Source of truth for new color tokens, starting with accessible text, border, input, and status colors.
+  Do not document base values; document usage only.
+=====================================*/
+
+/* Text Colors ----------------------*/
+$text_default_color: #242B42 !default; // text_default_color is temporary name accounting for conflict with typography token text_default
+$text_light:         #4B546B !default;
+$text_lighter:       #617290 !default;
+$text_success:       #158149 !default;
+$text_error:         #DA0014 !default;
+$text_link:          #0056CF !default;
+$text_disabled:      #B0BDC7 !default;
+
+$text_default_dark:  #FFFFFF !default;
+$text_light_dark:    #B4B2BE !default;
+$text_lighter_dark:  #8A879A !default;
+$text_success_dark:  #00CA74 !default;
+$text_error_dark:    #FF1A1A !default;
+$text_link_dark:     #0E89FF !default;
+$text_disabled_dark: #656576 !default;
+
+$accessible_text_colors: (
+  text_default:        $text_default_color,
+  text_light:          $text_light,
+  text_lighter:        $text_lighter,
+  text_success:        $text_success,
+  text_error:          $text_error,
+  text_link:           $text_link,
+  text_disabled:       $text_disabled,
+  text_default_dark:   $text_default_dark,
+  text_light_dark:     $text_light_dark,
+  text_lighter_dark:   $text_lighter_dark,
+  text_success_dark:   $text_success_dark,
+  text_error_dark:     $text_error_dark,
+  text_link_dark:      $text_link_dark,
+  text_disabled_dark:  $text_disabled_dark
+);
+
+/* Input Text & Icon Colors ----------------------*/
+$input_text_default:        #617290 !default;
+$input_text_active:         #242B42 !default;
+$input_text_disabled:       #B4BBC3 !default;
+$input_text_error:          #DA0014 !default;
+
+$input_text_default_dark:   #B0B0B0 !default;
+$input_text_state_active:   #FFFFFF !default;
+$input_text_disabled_dark:  #615D73 !default;
+$input_text_error_dark:     #FF1A1A !default;
+
+$accessible_input_text_colors: (
+  input_text_default:       $input_text_default,
+  input_text_active:        $input_text_active,
+  input_text_disabled:      $input_text_disabled,
+  input_text_error:         $input_text_error,
+  input_text_default_dark:  $input_text_default_dark,
+  input_text_state_active:  $input_text_state_active,
+  input_text_disabled_dark: $input_text_disabled_dark,
+  input_text_error_dark:    $input_text_error_dark
+);
+
+/* Input Background Colors ----------------------*/
+$input_background_default:   #FFFFFF !default;
+$input_background_state:     #FBFDFF !default;
+$input_background_disabled:  #F4F4F6 !default;
+
+$input_background_default_dark:   #44405A !default;
+$input_background_state_dark:    #36324E !default;
+$input_background_disabled_dark: #171333 !default;
+
+$accessible_input_background_colors: (
+  input_background_default:       $input_background_default,
+  input_background_state:         $input_background_state,
+  input_background_disabled:      $input_background_disabled,
+  input_background_default_dark:  $input_background_default_dark,
+  input_background_state_dark:    $input_background_state_dark,
+  input_background_disabled_dark: $input_background_disabled_dark
+);
+
+/* Input Border Colors ----------------------*/
+$input_border_default:   #828EA7 !default;
+$input_border_state:     #0056CF !default;
+$input_border_error:     #DA0014 !default;
+$input_border_disabled:  #E4E8F0 !default;
+
+$input_border_default_dark:  #6E6A84 !default;
+$input_border_state_dark:   #0E89FF !default;
+$input_border_error_dark:   #FF1A1A !default;
+$input_border_disabled_dark: #6E6A84 !default;
+
+$accessible_input_border_colors: (
+  input_border_default:       $input_border_default,
+  input_border_state:         $input_border_state,
+  input_border_error:         $input_border_error,
+  input_border_disabled:      $input_border_disabled,
+  input_border_default_dark:  $input_border_default_dark,
+  input_border_state_dark:    $input_border_state_dark,
+  input_border_error_dark:    $input_border_error_dark,
+  input_border_disabled_dark: $input_border_disabled_dark
+);
+
+/* Status Text and Icon colors ----------------------*/
+$status_text_neutral:       #576775 !default;
+$status_text_primary:       #0056CF !default;
+$status_text_success:       #107441 !default;
+$status_text_error:         #BF0012 !default;
+$status_text_warning:       #886600 !default;
+$status_text_info:          #16747E !default;
+$status_text_notification:  #FFFFFF !default;
+
+$status_text_neutral_dark:       #93A8B8 !default;
+$status_text_primary_dark:      #0E89FF !default;
+$status_text_success_dark:      #00CA74 !default;
+$status_text_error_dark:        #FF4A50 !default;
+$status_text_warning_dark:      #F9BB00 !default;
+$status_text_info_dark:         #00C4D7 !default;
+
+$accessible_status_text_colors: (
+  status_text_neutral:       $status_text_neutral,
+  status_text_primary:       $status_text_primary,
+  status_text_success:       $status_text_success,
+  status_text_error:         $status_text_error,
+  status_text_warning:       $status_text_warning,
+  status_text_info:          $status_text_info,
+  status_text_notification:  $status_text_notification,
+  status_text_neutral_dark:  $status_text_neutral_dark,
+  status_text_primary_dark:   $status_text_primary_dark,
+  status_text_success_dark:   $status_text_success_dark,
+  status_text_error_dark:     $status_text_error_dark,
+  status_text_warning_dark:   $status_text_warning_dark,
+  status_text_info_dark:      $status_text_info_dark
+);
+
+/* Status Background colors ----------------------*/
+$status_background_neutral:         #EDEDED !default;
+$status_background_primary:         #E5EEFA !default;
+$status_background_success:        #E0F0E8 !default;
+$status_background_error:          #FBE5E7 !default;
+$status_background_warning:        #FBF5E3 !default;
+$status_background_info:           #DEF8FC !default;
+$status_background_notification:   #0056CF !default;
+$status_background_notificationError: #DA0014 !default;
+
+$status_background_neutral_hover:   #E3E3E3 !default;
+$status_background_primary_hover:   #CEE0F7 !default;
+$status_background_success_hover:   #CDEADB !default;
+$status_background_error_hover:     #F9CDD1 !default;
+$status_background_warning_hover:   #FAEDC7 !default;
+$status_background_info_hover:      #C4F2F7 !default;
+
+$status_background_dark:                  #231E3D !default;
+$status_background_notification_dark:    #0E89FF !default;
+$status_background_notificationError_dark: #FF4A50 !default;
+
+$status_background_neutral_hover_dark:    #292543 !default;
+$status_background_primary_hover_dark:    #0B2137 !default;
+$status_background_success_hover_dark:   #1C2B25 !default;
+$status_background_error_hover_dark:      #2E1F1F !default;
+$status_background_warning_hover_dark:    #2B261D !default;
+$status_background_info_hover_dark:       #212645 !default;
+
+$accessible_status_background_colors: (
+  status_background_neutral:              $status_background_neutral,
+  status_background_primary:              $status_background_primary,
+  status_background_success:              $status_background_success,
+  status_background_error:                $status_background_error,
+  status_background_warning:              $status_background_warning,
+  status_background_info:                 $status_background_info,
+  status_background_notification:         $status_background_notification,
+  status_background_notificationError:     $status_background_notificationError,
+  status_background_neutral_hover:        $status_background_neutral_hover,
+  status_background_primary_hover:        $status_background_primary_hover,
+  status_background_success_hover:        $status_background_success_hover,
+  status_background_error_hover:          $status_background_error_hover,
+  status_background_warning_hover:        $status_background_warning_hover,
+  status_background_info_hover:           $status_background_info_hover,
+  status_background_dark:                 $status_background_dark,
+  status_background_notification_dark:    $status_background_notification_dark,
+  status_background_notificationError_dark: $status_background_notificationError_dark,
+  status_background_neutral_hover_dark:   $status_background_neutral_hover_dark,
+  status_background_primary_hover_dark:   $status_background_primary_hover_dark,
+  status_background_success_hover_dark:   $status_background_success_hover_dark,
+  status_background_error_hover_dark:     $status_background_error_hover_dark,
+  status_background_warning_hover_dark:   $status_background_warning_hover_dark,
+  status_background_info_hover_dark:      $status_background_info_hover_dark
+);
+
+/* Status Icon Background colors ----------------------*/
+$status_iconBackground_neutral_hover:   #EDEDED !default;
+$status_iconBackground_primary_hover:   #E5EEFA !default;
+$status_iconBackground_success_hover:   #E0F0E8 !default;
+$status_iconBackground_error_hover:     #FBE5E7 !default;
+$status_iconBackground_warning_hover:   #FBF5E3 !default;
+$status_iconBackground_info_hover:     #DEF8FC !default;
+
+$status_iconBackground_neutral_hover_dark:   #403C57 !default;
+$status_iconBackground_primary_hover_dark:   #1B3956 !default;
+$status_iconBackground_success_hover_dark:  #2D483D !default;
+$status_iconBackground_error_hover_dark:    #522F2F !default;
+$status_iconBackground_warning_hover_dark:  #463B27 !default;
+$status_iconBackground_info_hover_dark:     #1A4662 !default;
+
+$accessible_status_icon_background_colors: (
+  status_iconBackground_neutral_hover:       $status_iconBackground_neutral_hover,
+  status_iconBackground_primary_hover:       $status_iconBackground_primary_hover,
+  status_iconBackground_success_hover:       $status_iconBackground_success_hover,
+  status_iconBackground_error_hover:         $status_iconBackground_error_hover,
+  status_iconBackground_warning_hover:       $status_iconBackground_warning_hover,
+  status_iconBackground_info_hover:          $status_iconBackground_info_hover,
+  status_iconBackground_neutral_hover_dark:  $status_iconBackground_neutral_hover_dark,
+  status_iconBackground_primary_hover_dark: $status_iconBackground_primary_hover_dark,
+  status_iconBackground_success_hover_dark: $status_iconBackground_success_hover_dark,
+  status_iconBackground_error_hover_dark:  $status_iconBackground_error_hover_dark,
+  status_iconBackground_warning_hover_dark: $status_iconBackground_warning_hover_dark,
+  status_iconBackground_info_hover_dark:    $status_iconBackground_info_hover_dark
+);
+
+/* Status Border colors ----------------------*/
+$status_border_neutral:       #576775 !default;
+$status_border_primary:       #0056CF !default;
+$status_border_success:       #107441 !default;
+$status_border_error:         #BF0012 !default;
+$status_border_warning:       #886600 !default;
+$status_border_info:          #16747E !default;
+$status_border_notification:  #FFFFFF !default;
+
+$status_border_neutral_dark:       #93A8B8 !default;
+$status_border_primary_dark:      #0E89FF !default;
+$status_border_success_dark:      #00CA74 !default;
+$status_border_error_dark:        #FF4A50 !default;
+$status_border_warning_dark:      #F9BB00 !default;
+$status_border_info_dark:         #00C4D7 !default;
+
+$status_border_focus:       #0056CF !default;
+$status_border_focus_dark:  #0E89FF !default;
+
+$accessible_status_border_colors: (
+  status_border_neutral:       $status_border_neutral,
+  status_border_primary:       $status_border_primary,
+  status_border_success:       $status_border_success,
+  status_border_error:         $status_border_error,
+  status_border_warning:       $status_border_warning,
+  status_border_info:          $status_border_info,
+  status_border_notification:  $status_border_notification,
+  status_border_neutral_dark:  $status_border_neutral_dark,
+  status_border_primary_dark:  $status_border_primary_dark,
+  status_border_success_dark:  $status_border_success_dark,
+  status_border_error_dark:    $status_border_error_dark,
+  status_border_warning_dark:  $status_border_warning_dark,
+  status_border_info_dark:     $status_border_info_dark,
+  status_border_focus:         $status_border_focus,
+  status_border_focus_dark:    $status_border_focus_dark
+);

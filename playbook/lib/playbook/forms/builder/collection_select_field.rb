@@ -7,7 +7,13 @@ module Playbook
         props[:input_options] ||= {}
         props[:input_options][:id] ||= "#{@object_name}_#{name}"
 
-        props[:label] = @template.label(@object_name, name, for: props[:input_options][:id]) if props[:label] == true
+        if props[:label] == true
+          props[:label] = if @object && @object.class.respond_to?(:human_attribute_name)
+                            @object.class.human_attribute_name(name)
+                          else
+                            name.to_s.humanize
+                          end
+        end
 
         options[:skip_default_ids] = false unless options.key?(:skip_default_ids)
         options[:prompt] = props[:blank_selection] || ""

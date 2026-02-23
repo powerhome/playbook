@@ -10,6 +10,7 @@ import datePickerHelper from './date_picker_helper'
 import Icon from '../pb_icon/_icon'
 import Caption from '../pb_caption/_caption'
 import Body from '../pb_body/_body'
+import colors from "../tokens/exports/_colors.module.scss"
 
 type DatePickerProps = {
   allowInput?: boolean,
@@ -43,6 +44,7 @@ type DatePickerProps = {
   pickerId: string,
   placeholder?: string,
   positionElement?: HTMLElement | null,
+  requiredIndicator?: boolean
   scrollContainer?: string,
   selectionType?: "month" | "week"| "quickpick",
   showTimezone?: boolean,
@@ -97,6 +99,7 @@ const DatePicker = (props: DatePickerProps): React.ReactElement => {
     plugins = false,
     position,
     positionElement,
+    requiredIndicator,
     scrollContainer,
     selectionType = '',
     showTimezone = false,
@@ -191,6 +194,9 @@ const DatePicker = (props: DatePickerProps): React.ReactElement => {
     if (error) {
       base += ' error'
     }
+    if (disableInput) {
+      base += ' disabled'
+    }
     return base
   }
 
@@ -214,10 +220,18 @@ const DatePicker = (props: DatePickerProps): React.ReactElement => {
 
         {!hideLabel && (
            <label htmlFor={pickerId}>
-            <Caption
-                className="pb_date_picker_kit_label"
-                text={label}
-            />
+            {requiredIndicator ? (
+              <Caption className="pb_date_picker_kit_label"
+                  color="lighter"
+              >
+                {label} <span style={{ color: `${colors.error}` }}>*</span>
+              </Caption>
+            ) : (
+              <Caption className="pb_date_picker_kit_label"
+                  color="lighter"
+                  text={label}
+              />
+            )}
           </label>
         )}
           <>

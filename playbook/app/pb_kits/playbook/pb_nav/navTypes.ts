@@ -21,5 +21,6 @@ export type NavChildProps = {
     orientation?: "vertical" | "horizontal";
     variant?: "normal" | "subtle";
     itemSpacing?: SpacingObject
+    disabled?: boolean
   };
   

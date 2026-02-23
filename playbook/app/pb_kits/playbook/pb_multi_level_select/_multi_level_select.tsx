@@ -45,6 +45,7 @@ type MultiLevelSelectProps = {
   label?: string;
   name?: string;
   required?: boolean;
+  requiredIndicator?: boolean;
   returnAllSelected?: boolean;
   showCheckedChildren?: boolean;
   treeData?: { [key: string]: string }[] | any;
@@ -93,6 +94,7 @@ const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>(
       name,
       label,
       required = false,
+      requiredIndicator = false,
       returnAllSelected = false,
       showCheckedChildren = true,
       treeData,
@@ -417,9 +419,7 @@ const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>(
 
     // Single select
     const handleRadioButtonClick = (e: React.ChangeEvent<HTMLInputElement>) => {
-      const { id, value: inputText } = e.target;
-      // The radio button needs a unique ID, this grabs the ID before the hyphen
-      const selectedItemID = id.match(/^[^-]*/)[0];
+      const { id: selectedItemID, value: inputText } = e.target;
 
       // Check if the item is disabled - if so, don't allow selection (safety check in addition to native disabled attribute)
       const clickedItem = filterFormattedDataById(
@@ -529,11 +529,22 @@ const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>(
           <label htmlFor={labelForId}
               onClick={handleLabelClick}
           >
+          {requiredIndicator ? (
             <Caption
                 className="pb_multi_level_select_kit_label"
+                color="lighter"
+                marginBottom="xs"
+            >
+              {label} <span className="required_indicator">*</span>
+            </Caption>
+          ) : (
+            <Caption
+                className="pb_multi_level_select_kit_label"
+                color="lighter"
                 marginBottom="xs"
                 text={label}
             />
+          )}
           </label>
         )}
         <MultiLevelSelectContext.Provider
