@@ -25,6 +25,7 @@ examples:
   - dropdown_separators_hidden: Separators Hidden
   - dropdown_with_clearable: Clearable
   - dropdown_with_constrain_height_rails: Constrain Height
+  - dropdown_closing_options_rails: Closing Options
   - dropdown_quickpick_rails: Quick Pick Variant
   - dropdown_quickpick_range_end_rails: Quick Pick Variant (Range Ends Today)
   - dropdown_quickpick_default_dates: Quick Pick Variant (Default Dates)
