@@ -73,8 +73,9 @@ $top_bottom_radius: 0px;
   }
   .disabled {
     pointer-events: none;
+    cursor: not-allowed;
     opacity: 0.5;        
-    color: grey; 
+    color: #B0BDC7; // replace with $text_disabled once added to tokens
 
     & > span {
       padding: $pagination_padding;
@@ -103,5 +104,104 @@ $top_bottom_radius: 0px;
   .pagination-right {
     border-right: none;
     margin-left: $space_xxs;
+  }
+}
+
+.pb_pagination_mobile {
+ padding: $space_xxs 0px !important;
+ position: relative;
+ 
+ .pagination-right {
+  border-left: none !important;
+  padding: 6px 13px !important;
+  flex-shrink: 0;
+
+  @media (max-width: 435px) {
+    padding: 6px 10px !important;
+  }
+ }
+ .pagination-left {
+  border-right: none !important;
+  padding: 6px 13px !important;
+  flex-shrink: 0;
+
+  @media (max-width: 435px) {
+    padding: 6px 10px !important;
+  }
+ }
+  .pagination-dropdown {
+    position: static;
+    flex: 1;
+    margin: 0 $space_xxs;
+    min-width: 0;
+    overflow: hidden;
+  }
+
+  .pagination-dropdown-trigger {
+    padding: 6px 10px 6px 13px !important;
+    background-color: $bg_light;
+    border-radius: $border_rad_light;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+    overflow: hidden;
+
+    &:hover {
+      background-color: $active_light;
+    }
+
+    @media (max-width: 435px) {
+      padding: 6px 8px 6px 10px !important;
+    }
+  }
+
+  .pagination-dropdown-menu {
+    position: absolute;
+    left: 0;
+    right: 0;
+    background-color: $white;
+    border: $border_rad_lightest solid $border_light;
+    border-radius: $border_rad_light;
+    box-shadow: $shadow_deep;
+    max-height: 200px;
+    overflow-y: auto;
+    z-index: 1000;
+
+    &.below {
+      top: 100%;
+      margin-top: $space_xs;
+    }
+
+    &.above {
+      bottom: 100%;
+      margin-bottom: $space_xs;
+    }
+  }
+
+  .pagination-dropdown-option {
+    padding: $pagination_padding;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+
+    &:hover {
+      background-color: $active_light;
+    }
+
+    &.active {
+      background-color: $primary;
+      .pb_body_kit {
+        color: $white;
+      }
+    }
+
+    &:first-child {
+      border-top-left-radius: $border_rad_light;
+      border-top-right-radius: $border_rad_light;
+    }
+
+    &:last-child {
+      border-bottom-left-radius: $border_rad_light;
+      border-bottom-right-radius: $border_rad_light;
+    }
   }
 }
