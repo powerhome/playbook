@@ -17,16 +17,6 @@ import colors from '../tokens/exports/_colors.module.scss'
 
 import { stripEmojisForPaste, applyEmojiMask } from '../utilities/emojiMask'
 
-let pbTextareaIdCounter = 0
-const useUniqueId = (prefix = "pb_textarea_") => {
-  const idRef = useRef<string | null>(null)
-  if (idRef.current === null) {
-    pbTextareaIdCounter += 1
-    idRef.current = `${prefix}${pbTextareaIdCounter}`
-  }
-  return idRef.current
-}
-
 type TextareaProps = {
   aria?: {[key: string]: string},
   characterCount?: string,
