@@ -626,7 +626,7 @@ const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>(
 
                     {!returnAllSelected &&
                     inputDisplay === "pills"
-                      ? getTopmostCheckedItems(formattedData).map((item, index) => (
+                      ? getTopmostCheckedItems(formattedData).map((item) => (
                           <FormPill
                               color={pillColor}
                               key={item.id}
