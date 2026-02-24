@@ -118,6 +118,8 @@ const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>(
     );
 
     const dropdownRef = useRef(null);
+    const prevTreeDataRef = useRef(treeData);
+    const prevSelectedIdsRef = useRef<string[] | undefined>(undefined);
 
     // State for whether dropdown is open or closed
     const [isDropdownClosed, setIsDropdownClosed] = useState(true);
@@ -216,12 +218,42 @@ const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>(
     };
 
     useEffect(() => {
-      const formattedData = addCheckedAndParentProperty(
-        treeData,
-        variant === "single" ? [selectedIds?.[0]] : selectedIds,
-      );
+      const selectedIdsToApply =
+        variant === "single" ? [selectedIds?.[0]] : selectedIds;
 
-      setFormattedData(formattedData);
+      const idsEqual = (
+        a: string[] | undefined,
+        b: string[] | undefined,
+      ): boolean => {
+        if (a === b) return true;
+        if (!a || !b) return false;
+        if (a.length !== b.length) return false;
+        const setA = new Set(a);
+        return b.every((id: string) => setA.has(id));
+      };
+
+      const treeDataUnchanged = prevTreeDataRef.current === treeData;
+      const selectedIdsUnchanged =
+        prevSelectedIdsRef.current !== undefined &&
+        selectedIdsToApply !== undefined &&
+        idsEqual(prevSelectedIdsRef.current, selectedIdsToApply);
+
+      if (treeDataUnchanged && selectedIdsUnchanged) {
+        console.log(
+          "[pb_multi_level_select] skipping sync (selectedIds unchanged)",
+        );
+        return;
+      }
+
+      console.log("[pb_multi_level_select] syncing from props", selectedIdsToApply);
+      prevTreeDataRef.current = treeData;
+      prevSelectedIdsRef.current = selectedIdsToApply;
+
+      const formatted = addCheckedAndParentProperty(
+        treeData,
+        selectedIdsToApply,
+      );
+      setFormattedData(formatted);
 
       if (variant === "single") {
         // No selectedIds, reset state
@@ -231,7 +263,7 @@ const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>(
           // If there is a selectedId but no current item, set the selectedItem
           if (selectedIds?.length !== 0 && !singleSelectedItem.value) {
             const selectedItem = filterFormattedDataById(
-              formattedData,
+              formatted,
               selectedIds[0],
             );
 
