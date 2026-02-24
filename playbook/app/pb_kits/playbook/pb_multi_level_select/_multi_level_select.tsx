@@ -22,6 +22,7 @@ import {
   findByFilter,
   getCheckedItems,
   getDefaultCheckedItems,
+  getTopmostCheckedItems,
   recursiveCheckParent,
   getExpandedItems,
 } from "./_helper_functions";
@@ -624,12 +625,11 @@ const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>(
                       : null}
 
                     {!returnAllSelected &&
-                    defaultReturn.length !== 0 &&
                     inputDisplay === "pills"
-                      ? defaultReturn.map((item, index) => (
+                      ? getTopmostCheckedItems(formattedData).map((item, index) => (
                           <FormPill
                               color={pillColor}
-                              key={index}
+                              key={item.id}
                               onClick={(event: any) =>
                               handlePillClose(event, item)
                             }
@@ -644,7 +644,7 @@ const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>(
                       inputDisplay === "pills" && <br />}
 
                     {!returnAllSelected &&
-                      defaultReturn.length !== 0 &&
+                      getTopmostCheckedItems(formattedData).length !== 0 &&
                       inputDisplay === "pills" && <br />}
                   </>
                 )}
