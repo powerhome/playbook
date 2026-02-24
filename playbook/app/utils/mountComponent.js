@@ -12,7 +12,7 @@ function installAsyncTypeaheadMlsInteractionGuard() {
   document.__asyncTypeaheadMlsInteractionGuardInstalled = true
 
   const typeaheadComponentSelector = '[data-pb-react-component="Typeahead"]'
-  const loadingTypeaheadSelector = '[data-pb-react-component="Typeahead"] [aria-busy="true"]'
+  const loadingStateSelector = '[aria-busy="true"], .typeahead-kit-select__loading-indicator'
   const multiLevelSelectSelector = '[data-pb-react-component="MultiLevelSelect"], #location_select'
   const asyncTypeaheadEligibilityCache = new WeakMap()
 
@@ -40,10 +40,12 @@ function installAsyncTypeaheadMlsInteractionGuard() {
   }
 
   const hasLoadingAsyncTypeahead = () => {
-    const loadingTypeaheadNodes = document.querySelectorAll(loadingTypeaheadSelector)
-    for (const loadingTypeaheadNode of loadingTypeaheadNodes) {
-      const typeaheadComponentNode = loadingTypeaheadNode.closest(typeaheadComponentSelector)
-      if (isAsyncTypeaheadComponent(typeaheadComponentNode)) {
+    const typeaheadComponentNodes = document.querySelectorAll(typeaheadComponentSelector)
+    for (const typeaheadComponentNode of typeaheadComponentNodes) {
+      if (
+        isAsyncTypeaheadComponent(typeaheadComponentNode) &&
+        typeaheadComponentNode.querySelector(loadingStateSelector)
+      ) {
         return true
       }
     }
