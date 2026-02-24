@@ -12,7 +12,7 @@ function installAsyncTypeaheadMlsInteractionGuard() {
   document.__asyncTypeaheadMlsInteractionGuardInstalled = true
 
   const typeaheadComponentSelector = '[data-pb-react-component="Typeahead"]'
-  const loadingStateSelector = '[aria-busy="true"], .typeahead-kit-select__loading-indicator'
+  const loadingStateSelector = '.typeahead-kit-select__loading-indicator, .typeahead-kit-select__control--is-loading'
   const multiLevelSelectSelector = '[data-pb-react-component="MultiLevelSelect"], #location_select'
   const asyncTypeaheadEligibilityCache = new WeakMap()
 
