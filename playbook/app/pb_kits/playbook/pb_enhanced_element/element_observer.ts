@@ -23,7 +23,7 @@ export default class ElementObserver {
   }
 
   stop(): void {
-    this.mutationObserverdisconnect()
+    this.mutationObserver.disconnect()
   }
 
   catchup(): void {

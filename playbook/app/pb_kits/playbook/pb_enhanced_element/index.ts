@@ -50,6 +50,7 @@ export default class PbEnhancedElement {
     const enhansedElement = this.elements.get(element)
     enhansedElement.disconnect()
     this.elements.delete(element)
+    delete element._pbEnhanced
   }
 
   static start(): void {
@@ -57,7 +58,7 @@ export default class PbEnhancedElement {
   }
 
   static stop(): void {
-    this.mutationObserver.stop()
+    this.observer.stop()
   }
 
   connect(): void {
