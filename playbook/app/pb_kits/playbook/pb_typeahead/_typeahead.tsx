@@ -137,6 +137,30 @@ const Typeahead = forwardRef<HTMLInputElement, TypeaheadProps>(
     const [formSubmitted, setFormSubmitted] = useState(false)
     // State to track if user has made a selection (to disable defaultValue focus behavior)
     const [hasUserSelected, setHasUserSelected] = useState(false)
+    // Async loading state (used for aria-busy + optional external guards)
+    const [asyncLoading, setAsyncLoading] = useState(false)
+    const mountedRef = useRef(true)
+
+    // Watchdog + sequence to avoid stuck loading and stale request completion
+    const asyncLoadingTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(
+      null,
+    )
+    const asyncRequestSeqRef = useRef(0)
+
+    const clearAsyncLoadingTimeout = () => {
+      if (asyncLoadingTimeoutRef.current) {
+        clearTimeout(asyncLoadingTimeoutRef.current)
+        asyncLoadingTimeoutRef.current = null
+      }
+    }
+
+    useEffect(() => {
+      mountedRef.current = true
+      return () => {
+        mountedRef.current = false
+        clearAsyncLoadingTimeout()
+      }
+    }, [])
 
     // If preserveSearchInput is true, we need to control the input value
     const handleInputChange = preserveSearchInput
@@ -258,6 +282,84 @@ const Typeahead = forwardRef<HTMLInputElement, TypeaheadProps>(
       }
     }
 
+    // Resolve loadOptions (string path to function) once
+const resolvedLoadOptions =
+  isString(loadOptions) ? get(window, loadOptions) : loadOptions
+
+    // Wrap loadOptions to track async loading safely for BOTH callback + promise styles.
+    // Includes watchdog timeout + request sequencing to avoid stuck loading / stale clears.
+    const wrappedLoadOptions =
+      async
+        ? (inputValue: any, callback?: any) => {
+            const seq = ++asyncRequestSeqRef.current
+
+            if (mountedRef.current) setAsyncLoading(true)
+            clearAsyncLoadingTimeout()
+
+            // Start watchdog for ALL async calls (covers callback + promise + hung requests)
+            asyncLoadingTimeoutRef.current = setTimeout(() => {
+              if (!mountedRef.current) return
+              if (seq !== asyncRequestSeqRef.current) return
+              setAsyncLoading(false)
+              asyncLoadingTimeoutRef.current = null
+            }, 10000)
+
+            const wrappedCallback =
+              typeof callback === "function"
+                ? (options: any) => {
+                    // Only clear if this is still the latest request
+                    if (seq === asyncRequestSeqRef.current) {
+                      clearAsyncLoadingTimeout()
+                      if (mountedRef.current) setAsyncLoading(false)
+                    }
+                    return callback(options)
+                  }
+                : undefined
+
+            let result
+            try {
+              // Preserve signature: if callback is provided, pass it through
+              result = wrappedCallback
+                ? resolvedLoadOptions(inputValue, wrappedCallback)
+                : resolvedLoadOptions(inputValue)
+            } catch (e) {
+              if (seq === asyncRequestSeqRef.current) {
+                clearAsyncLoadingTimeout()
+                if (mountedRef.current) setAsyncLoading(false)
+              }
+              throw e
+            }
+
+            // Promise-style completion
+            if (result && typeof (result as any).then === "function") {
+              return (result as Promise<any>)
+                .then((opts) => {
+                  if (seq === asyncRequestSeqRef.current) {
+                    clearAsyncLoadingTimeout()
+                    if (mountedRef.current) setAsyncLoading(false)
+                  }
+                  return opts
+                })
+                .catch((e) => {
+                  if (seq === asyncRequestSeqRef.current) {
+                    clearAsyncLoadingTimeout()
+                    if (mountedRef.current) setAsyncLoading(false)
+                  }
+                  throw e
+                })
+            }
+
+            // Callback-style will clear via wrappedCallback.
+            // Sync/no-callback/no-promise: clear immediately (and cancel watchdog)
+            if (!wrappedCallback && seq === asyncRequestSeqRef.current) {
+              clearAsyncLoadingTimeout()
+              if (mountedRef.current) setAsyncLoading(false)
+            }
+
+            return result
+          }
+        : resolvedLoadOptions
+
     const selectProps = {
       cacheOptions: true,
       components: {
@@ -272,9 +374,7 @@ const Typeahead = forwardRef<HTMLInputElement, TypeaheadProps>(
         ValueContainer,
         ...components,
       },
-      loadOptions: isString(loadOptions)
-        ? get(window, loadOptions)
-        : loadOptions,
+      loadOptions: wrappedLoadOptions,
       getOptionLabel: isString(getOptionLabel)
         ? get(window, getOptionLabel)
         : getOptionLabel,
@@ -481,7 +581,9 @@ const Typeahead = forwardRef<HTMLInputElement, TypeaheadProps>(
     <div
         {...dataProps}
         {...htmlProps}
+        aria-busy={asyncLoading ? "true" : "false"}
         className={classnames(classes, inlineClass)}
+        data-pb-typeahead-loading={asyncLoading ? "true" : "false"}
     >
       <Tag
           classNamePrefix="typeahead-kit-select"
