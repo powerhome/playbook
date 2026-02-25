@@ -52,7 +52,7 @@ module Playbook
           'aria-describedby': error.present? ? error_id : nil,
           'aria-invalid': error.present?,
           disabled: disabled,
-          id: input_options[:id] || id || "object_method",
+          id: textarea_id,
           max_characters: max_characters,
           name: name,
           onkeyup: onkeyup,
@@ -71,8 +71,12 @@ module Playbook
         result
       end
 
+      def textarea_id
+        input_options[:id].presence || (id.present? ? "#{id}-input" : "object_method")
+      end
+
       def error_id
-        "#{id}-error" if error.present?
+        id.present? ? "#{id}-error" : nil
       end
 
     private

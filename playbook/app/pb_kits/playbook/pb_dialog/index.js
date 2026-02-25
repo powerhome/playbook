@@ -8,8 +8,16 @@ export default class PbDialog extends PbEnhancedElement {
   }
 
   connect() {
-    window.addEventListener("DOMContentLoaded", () => this.setupDialog())
-    window.addEventListener("turbo:frame-load", () => this.setupDialog())
+    // Store references to this instance's specific elements
+    this.dialogElement = this.element.querySelector(".pb_dialog_rails")
+    this.dialogId = this.dialogElement?.id
+    this.managedTriggers = new Set()
+    
+    this.domContentLoadedHandler = () => this.setupDialog()
+    this.turboFrameLoadHandler = () => this.setupDialog()
+    
+    window.addEventListener("DOMContentLoaded", this.domContentLoadedHandler)
+    window.addEventListener("turbo:frame-load", this.turboFrameLoadHandler)
 
     // Code for custom_event_type setup (can take multiple events in a string separated by commas)
     const customEventTypeString = this.element.dataset.customEventType
@@ -24,10 +32,37 @@ export default class PbDialog extends PbEnhancedElement {
   }
 
   disconnect() {
+    // Clean up window event listeners
+    if (this.domContentLoadedHandler) {
+      window.removeEventListener("DOMContentLoaded", this.domContentLoadedHandler)
+    }
+    if (this.turboFrameLoadHandler) {
+      window.removeEventListener("turbo:frame-load", this.turboFrameLoadHandler)
+    }
+
+    // Clean up custom event listeners
     if (this.customEventTypes && Array.isArray(this.customEventTypes)) {
       this.customEventTypes.forEach(eventType => {
         window.removeEventListener(eventType, this.handleCustomEvent)
       })
+    }
+
+    // Clean up only the triggers that this instance managed
+    this.managedTriggers.forEach((trigger) => {
+      if (trigger._openDialogClickHandler) {
+        trigger.removeEventListener("click", trigger._openDialogClickHandler)
+        delete trigger._openDialogClickHandler
+      }
+      if (trigger._closeDialogClickHandler) {
+        trigger.removeEventListener("click", trigger._closeDialogClickHandler)
+        delete trigger._closeDialogClickHandler
+      }
+    })
+
+    // Clean up this dialog's outside click handler
+    if (this.dialogElement && this.dialogElement._outsideClickHandler) {
+      this.dialogElement.removeEventListener("mousedown", this.dialogElement._outsideClickHandler)
+      delete this.dialogElement._outsideClickHandler
     }
   }
 
@@ -88,9 +123,12 @@ export default class PbDialog extends PbEnhancedElement {
   }
 
   setupDialog() {
-    const openTrigger = document.querySelectorAll("[data-open-dialog]");
-    const closeTrigger = document.querySelectorAll("[data-close-dialog]");
-    const dialogs = document.querySelectorAll(".pb_dialog_rails")
+    // Only set up triggers and dialogs that belong to this instance
+    if (!this.dialogId) return
+    
+    const openTrigger = document.querySelectorAll(`[data-open-dialog="${this.dialogId}"]`);
+    const closeTrigger = document.querySelectorAll(`[data-close-dialog="${this.dialogId}"]`);
+    const dialogs = this.dialogElement ? [this.dialogElement] : []
 
     const loadingButton = document.querySelector('[data-disable-with="Loading"]');
     if (loadingButton && !loadingButton.dataset.listenerAttached) {
@@ -126,6 +164,7 @@ export default class PbDialog extends PbEnhancedElement {
       };
 
       open.addEventListener("click", open._openDialogClickHandler)
+      this.managedTriggers.add(open)
     });
 
     closeTrigger.forEach((close) => {
@@ -139,6 +178,7 @@ export default class PbDialog extends PbEnhancedElement {
       };
 
       close.addEventListener("click", close._closeDialogClickHandler)
+      this.managedTriggers.add(close)
     });
 
     // Close dialog box on outside click

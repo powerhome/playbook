@@ -1,8 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import classnames from 'classnames'
 import { GlobalProps, globalProps } from '../utilities/globalProps'
 import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
 import Icon from '../pb_icon/_icon';
+import Body from '../pb_body/_body';
+import Flex from '../pb_flex/_flex';
+import Detail from '../pb_detail/_detail';
 
 type PaginationProps = {
   aria?: { [key: string]: string },
@@ -29,14 +32,102 @@ const Pagination = ( props: PaginationProps) => {
     total = 1,
   } = props
   const [currentPage, setCurrentPage] = useState(current);
+  const [isMobile, setIsMobile] = useState(false);
+  // State for dropdown menu
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [dropdownPosition, setDropdownPosition] = useState<'below' | 'above'>('below');
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  // Detect mobile screen size (767px and below)
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 767);
+    };
+
+    checkMobile();
+    
+    // Throttle resize event to prevent performance issues in Nitro where 
+    // the Nitro Nav is also listening to the resize event and causing multiple re-renders
+    let timeoutId: NodeJS.Timeout | null = null;
+    const throttledCheckMobile = () => {
+      if (timeoutId === null) {
+        timeoutId = setTimeout(() => {
+          checkMobile();
+          timeoutId = null;
+        }, 150);
+      }
+    };
+
+    window.addEventListener('resize', throttledCheckMobile);
+
+    return () => {
+      window.removeEventListener('resize', throttledCheckMobile);
+      if (timeoutId) clearTimeout(timeoutId);
+    };
+  }, []);
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsDropdownOpen(false);
+      }
+    };
+
+    if (isDropdownOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isDropdownOpen]);
+
+  // Determine dropdown position based on available space
+  const checkDropdownPosition = () => {
+    if (dropdownRef.current) {
+      const rect = dropdownRef.current.getBoundingClientRect();
+      const dropdownHeight = 200;
+      const spaceBelow = window.innerHeight - rect.bottom;
+      const spaceAbove = rect.top;
+
+      if (spaceBelow < dropdownHeight && spaceAbove > spaceBelow) {
+        setDropdownPosition('above');
+      } else {
+        setDropdownPosition('below');
+      }
+    }
+  };
+
+  const handleDropdownToggle = () => {
+    if (!isDropdownOpen) {
+      checkDropdownPosition();
+    }
+    setIsDropdownOpen(!isDropdownOpen);
+  };
 
   const handlePageChange = (pageNumber: number) => {
     if (pageNumber >= 1 && pageNumber <= total) {
       setCurrentPage(pageNumber);
+      setIsDropdownOpen(false);
       if (onChange) {
         onChange(pageNumber);
       }
     }
+  };
+
+  const createPageOptions = () => {
+    const options = [];
+    
+    for (let pageNumber = 1; pageNumber <= total; pageNumber++) {
+      options.push({
+        label: String(pageNumber),
+        value: String(pageNumber),
+        id: `page-${pageNumber}`
+      });
+    }
+    
+    return options;
   };
 
   const renderPageButtons = (): JSX.Element[] => {
@@ -153,20 +244,92 @@ const Pagination = ( props: PaginationProps) => {
         className={classes}
         id={id}
     >
-      <div className="pb_pagination">
-        <li
-            className={`pagination-left ${currentPage === 1 ? 'disabled' : ''}`}
-            onClick={() => handlePageChange(currentPage - 1)}
-        >
-          <Icon icon="chevron-left" />
-        </li>
-        {renderPageButtons()}
-        <li
-            className={`pagination-right ${currentPage === total ? 'disabled' : ''}`}
-            onClick={() => handlePageChange(currentPage + 1)}
-        >
-          <Icon icon="chevron-right" />
-        </li>
+      <div className={`pb_pagination ${isMobile ? "pb_pagination_mobile" : ""}`}>
+        {isMobile ? (
+          <Flex alignItems="center">
+            <li
+                className={`pagination-left ${currentPage === 1 ? "disabled" : ""}`}
+                onClick={() => handlePageChange(currentPage - 1)}
+            >
+              <Flex alignItems="center">
+                <Icon icon="chevron-left" />
+                <Detail color="default" 
+                    marginLeft="xxs"
+                >
+                  Prev
+                </Detail>
+              </Flex>
+            </li>
+            <div className="pagination-dropdown" 
+                ref={dropdownRef}
+            >
+              <div
+                  className="pagination-dropdown-trigger"
+                  onClick={handleDropdownToggle}
+              >
+                <Flex alignItems="center" 
+                    gap="xxs"
+                    justify="between"
+                >
+                  <Detail bold
+                      color="default"
+                  >
+                    {currentPage}
+                  </Detail>
+                  <Detail color="default">
+                    of {total}
+                  </Detail>
+                  <Icon color="primary" 
+                      icon={isDropdownOpen ? "chevron-up" : "chevron-down"} 
+                      size="xs"
+                  />
+                </Flex>
+              </div>
+              {isDropdownOpen && (
+                <div className={`pagination-dropdown-menu ${dropdownPosition}`}>
+                  {createPageOptions().map((option) => (
+                    <div
+                        className={`pagination-dropdown-option ${Number(option.value) === currentPage ? 'active' : ''}`}
+                        key={option.id}
+                        onClick={() => handlePageChange(Number(option.value))}
+                    >
+                      <Body>Page {option.label}</Body>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+            <li
+                className={`pagination-right ${currentPage === total ? "disabled" : ""}`}
+                onClick={() => handlePageChange(currentPage + 1)}
+            >
+              <Flex alignItems="center">
+                <Detail color="default" 
+                    marginRight="xxs"
+                >
+                    Next
+                </Detail>
+                <Icon icon="chevron-right" />
+              </Flex>
+            </li>
+          </Flex>
+        ) : (
+          <>
+            <li
+                className={`pagination-left ${currentPage === 1 ? "disabled" : ""}`}
+                onClick={() => handlePageChange(currentPage - 1)}
+            >
+              <Icon icon="chevron-left" />
+            </li>
+            {renderPageButtons()}
+            <li
+                className={`pagination-right ${currentPage === total ? "disabled" : ""}`}
+                onClick={() => handlePageChange(currentPage + 1)}
+            >
+              <Icon icon="chevron-right" />
+            </li>
+          </>
+        )}
       </div>
     </div>
   );

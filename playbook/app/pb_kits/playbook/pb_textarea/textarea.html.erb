@@ -1,6 +1,6 @@
-<%= pb_content_tag(:div, id: nil) do %>
+<%= pb_content_tag(:div, id: object.id) do %>
   <% if object.label.present? %>
-    <label for="<%= object.input_options[:id] || object.id %>" >
+    <label for="<%= object.textarea_id %>" >
       <% if object.required_indicator %>
         <%= pb_rails("caption", props: { color: "lighter", text: object.label, dark: object.dark }) do %>
           <%= object.label %><span style="color: #DA0014;"> *</span>

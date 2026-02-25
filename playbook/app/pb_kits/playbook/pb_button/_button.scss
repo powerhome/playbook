@@ -115,9 +115,10 @@ $pb_button_sizes: (
 
   // Icon-only button (icon prop set, no text) - square with equal padding
   // Rails: uses .pb_button_icon_only class
-  // React: detects when pb_button_content has an empty text span
+  // React: when pb_button_content is empty (no text). Do not match when content has
+  // text + icon (e.g. "Exit Fullscreen" + FA icon) which can include empty spans.
   &.pb_button_icon_only,
-  &:has(.pb_button_content > span:empty) {
+  &:has(.pb_button_content:empty) {
     aspect-ratio: 1;
     min-width: auto;
     width: auto;

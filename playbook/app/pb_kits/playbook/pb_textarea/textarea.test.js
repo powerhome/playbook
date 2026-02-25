@@ -296,7 +296,7 @@ describe("Textarea Input Options", () => {
     expect(textarea).toHaveAttribute("id", "custom-textarea-id")
   })
 
-  test("should allow inputOptions.id to override id prop", () => {
+  test("should apply id prop to container and inputOptions.id to textarea", () => {
     render(
       <Textarea data={{ testid: testId }}
           id="wrapper-id"
@@ -307,7 +307,25 @@ describe("Textarea Input Options", () => {
     const kit = screen.getByTestId(testId)
     const textarea = kit.querySelector("textarea")
 
+    expect(kit).toHaveAttribute("id", "wrapper-id")
     expect(textarea).toHaveAttribute("id", "textarea-id")
+  })
+
+  test("should apply id prop to container and derived id to textarea when only id passed", () => {
+    render(
+      <Textarea data={{ testid: testId }}
+          id="wrapper-id"
+          label="Label"
+      />
+    )
+
+    const kit = screen.getByTestId(testId)
+    const textarea = kit.querySelector("textarea")
+    const label = kit.querySelector("label")
+
+    expect(kit).toHaveAttribute("id", "wrapper-id")
+    expect(textarea).toHaveAttribute("id", "wrapper-id-input")
+    expect(label).toHaveAttribute("for", "wrapper-id-input")
   })
 
   test("should apply inputOptions.data as data-* attributes", () => {
@@ -353,8 +371,9 @@ describe("Textarea Input Options", () => {
           data={{ testid: testId }}
           error="This is an error"
           inputOptions={{
-          "aria-describedby": "custom-help-text"
-        }}
+            id: "describedby-textarea",
+            "aria-describedby": "custom-help-text"
+          }}
       />
     )
 
