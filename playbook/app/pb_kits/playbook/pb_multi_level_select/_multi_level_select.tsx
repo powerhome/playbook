@@ -120,6 +120,7 @@ const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>(
     const dropdownRef = useRef(null);
     const prevTreeDataRef = useRef(treeData);
     const prevSelectedIdsRef = useRef<string[] | undefined>(undefined);
+    const justEmittedSelectionRef = useRef(false);
 
     // State for whether dropdown is open or closed
     const [isDropdownClosed, setIsDropdownClosed] = useState(true);
@@ -252,14 +253,11 @@ const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>(
         return;
       }
 
-      // Don't overwrite with empty when we already have checked items (parent may not have re-rendered yet)
-      const hasCheckedItems =
-        variant === "single"
-          ? (singleSelectedItem?.item?.length ?? 0) > 0
-          : (formattedData?.length && getDefaultCheckedItems(formattedData).length > 0);
-      if (selectedIdsToApply?.length === 0 && hasCheckedItems) {
+      // Don't overwrite with empty when we just emitted a selection (parent hasn't re-rendered yet)
+      if (selectedIdsToApply?.length === 0 && justEmittedSelectionRef.current) {
+        justEmittedSelectionRef.current = false;
         console.log(
-          "[pb_multi_level_select] skipping sync (ignoring stale empty selectedIds)",
+          "[pb_multi_level_select] skipping sync (just emitted selection, ignoring stale empty)",
         );
         return;
       }
@@ -423,7 +421,7 @@ const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>(
       // Prevents the dropdown from closing when clicking on the pill
       event.stopPropagation();
       const updatedTree = changeItem(clickedItem, false);
-      // Logic for removing items from returnArray or defaultReturn when pills clicked
+      justEmittedSelectionRef.current = true;
       if (returnAllSelected) {
         onSelect(getCheckedItems(updatedTree));
         onChange({ target: { name, value: getCheckedItems(updatedTree) } });
@@ -463,6 +461,7 @@ const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>(
 
       const filtered = filterFormattedDataById(formattedData, clickedItem);
       const updatedTree = changeItem(filtered[0], check);
+      justEmittedSelectionRef.current = true;
       if (returnAllSelected) {
         onSelect(getCheckedItems(updatedTree));
         onChange({ target: { name, value: getCheckedItems(updatedTree) } });
