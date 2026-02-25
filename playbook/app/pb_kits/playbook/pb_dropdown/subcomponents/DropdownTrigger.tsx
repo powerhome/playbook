@@ -44,6 +44,7 @@ const DropdownTrigger = (props: DropdownTriggerProps) => {
 
   const {
     autocomplete,
+    blankSelection,
     clearable,
     error,
     errorId,
@@ -57,6 +58,7 @@ const DropdownTrigger = (props: DropdownTriggerProps) => {
     isInputFocused,
     label: contextLabel,
     multiSelect,
+    optionsWithBlankSelection,
     selected,
     selectId,
     setIsInputFocused,
@@ -240,20 +242,22 @@ const DropdownTrigger = (props: DropdownTriggerProps) => {
                         onClick: (e: Event) => {e.stopPropagation();handleWrapperClick()}
                       }}
                       key={`${isDropDownClosed ? "chevron-down" : "chevron-up"}`}
-                  > 
-                  {
-                    clearable !== false && selectedArray.length > 0 && (
-                      <div onClick={(e)=>{e.stopPropagation();handleBackspace()}}>
-                        <Icon
-                            cursor="pointer"
-                            dark={dark}
-                            icon="times"
-                            paddingRight="xs"
-                            size="sm"
-                        />
-                      </div>
-                    )
-                  }
+                  >
+                    {(!blankSelection || selected?.value !== optionsWithBlankSelection?.[0]?.value) && (
+                      <>
+                        {clearable !== false && selectedArray.length > 0 && (
+                          <div onClick={(e)=>{e.stopPropagation();handleBackspace()}}>
+                            <Icon
+                                cursor="pointer"
+                                dark={dark}
+                                icon="times"
+                                paddingRight="xs"
+                                size="sm"
+                            />
+                          </div>
+                        )}
+                      </>
+                    )}
                     <Icon
                         cursor="pointer"
                         dark={dark}
