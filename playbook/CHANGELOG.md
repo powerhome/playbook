@@ -1,7 +1,9 @@
-# 16.3.0
+# 💥 Big Contrast Energy 💥
 ##### February 25, 2026
 
 ![release_image](https://github.com/user-attachments/assets/db119637-25e9-4157-9091-c5f7fdf034fc)
+
+We’ve turned up the contrast (the good kind) with accessible color tokens across core form and typography kits! Cleaner, clearer, more inclusive: stronger accessibility foundation, same Playbook feel!
 
 [16.3.0](https://github.com/powerhome/playbook/tree/16.3.0) full list of changes:
 
