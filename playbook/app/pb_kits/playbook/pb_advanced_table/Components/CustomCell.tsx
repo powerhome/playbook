@@ -11,6 +11,7 @@ import Icon from "../../pb_icon/_icon"
 import Checkbox from "../../pb_checkbox/_checkbox"
 
 import AdvancedTableContext from "../Context/AdvancedTableContext"
+import { getDescendantRowIds } from "../Utilities/ExpansionControlHelpers"
 
 interface CustomCellProps {
   getValue?: Getter<string>
@@ -31,13 +32,25 @@ export const CustomCell = ({
   selectableRows,
   customStyle = {},
 }: CustomCellProps & GlobalProps) => {
-  const { setExpanded, expanded, expandedControl, inlineRowLoading, hasAnySubRows } = useContext(AdvancedTableContext);
+  const { setExpanded, expanded, expandedControl, inlineRowLoading, hasAnySubRows, cascadeCollapse } = useContext(AdvancedTableContext);
 
   const handleOnExpand = (row: Row<GenericObject>) => {
     onRowToggleClick && onRowToggleClick(row);
-    
-    if (!expandedControl) {
-      setExpanded({ ...expanded, [row.id]: !row.getIsExpanded() });
+
+    const willBeExpanded = !row.getIsExpanded();
+    if (willBeExpanded) {
+      if (!expandedControl) {
+        setExpanded({ ...expanded, [row.id]: true });
+      }
+    } else {
+      if (cascadeCollapse) {
+        const idsToRemove = new Set([row.id, ...getDescendantRowIds(row)]);
+        const nextExpanded = { ...expanded };
+        idsToRemove.forEach((id) => delete nextExpanded[id]);
+        setExpanded(nextExpanded);
+      } else if (!expandedControl) {
+        setExpanded({ ...expanded, [row.id]: false });
+      }
     }
   };
 

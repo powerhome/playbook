@@ -63,6 +63,7 @@ export const TableHeaderCell = ({
     stickyLeftColumn,
     inlineRowLoading,
     isActionBarVisible,
+    cascadeCollapse,
   } = useContext(AdvancedTableContext);
 
   type justifyTypes = "none" | "center" | "start" | "end" | "between" | "around" | "evenly"
@@ -182,7 +183,8 @@ const isToggleExpansionEnabled =
       table.getRowModel(),
       expanded,
       undefined,
-      depth
+      depth,
+      cascadeCollapse
     )
     setExpanded(updated)
   }
