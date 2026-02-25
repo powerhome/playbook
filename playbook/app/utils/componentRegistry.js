@@ -128,19 +128,21 @@ class ComponentRegistry {
   _safeUnmount(el) {
     if (!el) return
 
-    // If element is already detached, drop tracking + marker and move on
-    if (!el.isConnected) {
-      el.removeAttribute?.('data-pb-react-mounted')
-      this.mountedComponents.delete(el)
-      return
-    }
     try {
+      // IMPORTANT:
+      // Always attempt to unmount, even if the node is detached.
+      // During DOM swaps the mount point can be disconnected skipping unmount leaks
+      // effects/portals/listeners and causes intermittent breakage, especially when using Turbo
       ReactDOM.unmountComponentAtNode(el)
     } catch (err) {
       // eslint-disable-next-line no-console
       console.warn('[PB] Unmount warning:', err)
     }
-    el.removeAttribute('data-pb-react-mounted')
+
+    // Clean marker + tracking regardless
+    try { el.removeAttribute?.('data-pb-react-mounted') } catch (_) {
+      // Ignore errors if element is already detached or invalid
+    }
     this.mountedComponents.delete(el)
   }
 
