@@ -58,6 +58,7 @@ const DropdownTrigger = (props: DropdownTriggerProps) => {
     isInputFocused,
     label: contextLabel,
     multiSelect,
+    optionsWithBlankSelection,
     selected,
     selectId,
     setIsInputFocused,
@@ -264,6 +265,7 @@ const DropdownTrigger = (props: DropdownTriggerProps) => {
                         size="sm"
                     />
                   </Body>
+                 
                 </FlexItem>
               </Flex>
             </>
