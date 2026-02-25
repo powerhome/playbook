@@ -58,7 +58,6 @@ const DropdownTrigger = (props: DropdownTriggerProps) => {
     isInputFocused,
     label: contextLabel,
     multiSelect,
-    optionsWithBlankSelection,
     selected,
     selectId,
     setIsInputFocused,
