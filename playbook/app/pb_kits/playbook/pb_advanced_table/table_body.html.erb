@@ -1,5 +1,22 @@
-<%= pb_content_tag(:tbody) do %>
-        <% object.table_data.each do |row| %>
-          <%= render_row_and_children(row, object.column_definitions, 0, false) %>
-        <% end %>
+<% table_data = object.table_data || [] %>
+<% if object.has_pinned_rows? %>
+  <%= pb_content_tag(:tbody, class: "pinned-rows-tbody") do %>
+    <% next_index = 0 %>
+    <% object.pinned_root_rows.each do |root_info| %>
+      <% row_output, next_index = object.render_row_and_children(root_info[:row], object.column_definitions, root_info[:depth], root_info[:depth] > 0, root_info[:ancestor_ids] || [], root_info[:ancestor_ids]&.first, immediate_parent_row_id: object.row_id_for(root_info[:parent_row]), is_pinned_row: true, pinned_index: next_index, initial_table_data_attributes: root_info[:depth].to_i > 0 ? object.pinned_root_initial_data_attributes(root_info) : nil) %>
+      <%= row_output %>
+    <% end %>
+  <% end %>
+  <%= pb_content_tag(:tbody) do %>
+    <% table_data.each do |row| %>
+      <% result = object.render_row_and_children(row, object.column_definitions, 0, false, skip_pinned_ids: object.pinned_ids_set) %>
+      <%= result.is_a?(Array) ? result[0] : result %>
+    <% end %>
+  <% end %>
+<% else %>
+  <%= pb_content_tag(:tbody) do %>
+    <% table_data.each do |row| %>
+      <%= object.render_row_and_children(row, object.column_definitions, 0, false) %>
+    <% end %>
+  <% end %>
 <% end %>
