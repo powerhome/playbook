@@ -1,3 +1,50 @@
+# 16.3.0
+##### February 25, 2026
+
+![release_image](https://github.com/user-attachments/assets/db119637-25e9-4157-9091-c5f7fdf034fc)
+
+[16.3.0](https://github.com/powerhome/playbook/tree/16.3.0) full list of changes:
+
+**Improvements:**
+
+- Playbook Performance: Added Global Enhanced Element Registry + Correct Cleanup [\#5843](https://github.com/powerhome/playbook/pull/5843) ([nidaqg](https://github.com/nidaqg))
+- Website: Multi Level Select React Key Doc [\#5865](https://github.com/powerhome/playbook/pull/5865) ([kangaree](https://github.com/kangaree))
+- Accessible Color Tokens: Add Tokens for disabled text [\#5853](https://github.com/powerhome/playbook/pull/5853) ([elisashapiro](https://github.com/elisashapiro))
+- Rails Dialog Kit: Date Picker Hidden Underneath [\#5847](https://github.com/powerhome/playbook/pull/5847) ([nickamantia](https://github.com/nickamantia))
+
+**Kit Enhancements:**
+
+- Icon Kit: Icon.rb Optimization to Prevent Repeated Io + Glob Work [\#5873](https://github.com/powerhome/playbook/pull/5873) ([nidaqg](https://github.com/nidaqg))
+- Textarea Kit:  Inputoptions With Id Association [\#5858](https://github.com/powerhome/playbook/pull/5858) ([elisashapiro](https://github.com/elisashapiro))
+- Pagination: Mobile View [\#5827](https://github.com/powerhome/playbook/pull/5827) ([nidaqg](https://github.com/nidaqg))
+- Textarea: React Inputoptions Prop [\#5812](https://github.com/powerhome/playbook/pull/5812) ([mclancy96](https://github.com/mclancy96))
+- Accessibility: Changes to input kit Labels [\#5872](https://github.com/powerhome/playbook/pull/5872) ([elisashapiro](https://github.com/elisashapiro))
+- Accessibility: Improve Selectable List and List Kits [\#5852](https://github.com/powerhome/playbook/pull/5852) ([elisashapiro](https://github.com/elisashapiro))
+- Rich Text Edtior: Accessibility Improvements [\#5850](https://github.com/powerhome/playbook/pull/5850) ([elisashapiro](https://github.com/elisashapiro))
+- Accessibility: Improve Accessibility for Datepicker, Timepicker and Phonenumberinput Kits [\#5848](https://github.com/powerhome/playbook/pull/5848) ([mclancy96](https://github.com/mclancy96))
+- Accessibility: Update Typography Kits and Icon Colors [\#5846](https://github.com/powerhome/playbook/pull/5846) ([elisashapiro](https://github.com/elisashapiro))
+- Accessibility: Improve Accessibility for Selectable Card and Selectable Icon [\#5845](https://github.com/powerhome/playbook/pull/5845) ([shantelgray](https://github.com/shantelgray))
+- Accessibility: Improve Accessibility for Select, Passphrase and Typeahead Icons [\#5841](https://github.com/powerhome/playbook/pull/5841) ([ekanarek](https://github.com/ekanarek))
+- Accessibility: Improve Accessibility for Dropdown [\#5837](https://github.com/powerhome/playbook/pull/5837) ([mclancy96](https://github.com/mclancy96))
+- Accessibility: Improve Accessibility for Multi Level Select [\#5835](https://github.com/powerhome/playbook/pull/5835) ([ekanarek](https://github.com/ekanarek))
+- Accessibility: Improve Accessibility for Checkbox & Radio Kits [\#5830](https://github.com/powerhome/playbook/pull/5830) ([ekanarek](https://github.com/ekanarek))
+- Accessibility: Update Text Input and Textarea Border Colors [\#5823](https://github.com/powerhome/playbook/pull/5823) ([elisashapiro](https://github.com/elisashapiro))
+- Dropdown: Add Closing Behavior Props - React [\#5836](https://github.com/powerhome/playbook/pull/5836) ([nickamantia](https://github.com/nickamantia))
+- Textarea Kit: No Rails Disabled Prop & No React Disabled Doc [\#5844](https://github.com/powerhome/playbook/pull/5844) ([mclancy96](https://github.com/mclancy96))
+- Accessibility: Accessible Labels for Phone Number Inputs [\#5826](https://github.com/powerhome/playbook/pull/5826) ([shantelgray](https://github.com/shantelgray))
+- Select Kit: Add Requiredindicator Prop - React and Rails [\#5809](https://github.com/powerhome/playbook/pull/5809) ([shantelgray](https://github.com/shantelgray))
+
+
+**Fixed Bugs:**
+
+- Button Kit: Fix "icon-only" Style Bleed With Font Awesome Icons and Text [\#5864](https://github.com/powerhome/playbook/pull/5864) ([kangaree](https://github.com/kangaree))
+- Link Kit: Underline Variant Does Not Get Hover/visited Link Color Styles [\#5838](https://github.com/powerhome/playbook/pull/5838) ([nickamantia](https://github.com/nickamantia))
+
+
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/v16.3.0-rc.5...16.3.0)
+
+
 # Labels That Actually Label 🏷️
 ##### February 11, 2026
 
