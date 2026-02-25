@@ -27,6 +27,9 @@ import {
   getExpandedItems,
 } from "./_helper_functions";
 
+// Survives Strict Mode remount so we don't overwrite selection when parent sends stale []
+let justEmittedSelectionModule = false;
+
 interface MultiLevelSelectComponent extends React.ForwardRefExoticComponent<
   MultiLevelSelectProps & React.RefAttributes<HTMLInputElement>
 > {
@@ -253,9 +256,12 @@ const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>(
         return;
       }
 
-      // Don't overwrite with empty when we just emitted a selection (parent hasn't re-rendered yet)
-      if (selectedIdsToApply?.length === 0 && justEmittedSelectionRef.current) {
+      // Don't overwrite with empty when we just emitted a selection (parent hasn't re-rendered yet; ref + module for Strict Mode remount)
+      const justEmitted =
+        justEmittedSelectionRef.current || justEmittedSelectionModule;
+      if (selectedIdsToApply?.length === 0 && justEmitted) {
         justEmittedSelectionRef.current = false;
+        // Don't clear module here so a second effect run with [] (same remount) also skips
         console.log(
           "[pb_multi_level_select] skipping sync (just emitted selection, ignoring stale empty)",
         );
@@ -268,6 +274,7 @@ const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>(
           selectedIdsToApply,
         );
       }
+      justEmittedSelectionModule = false;
       prevTreeDataRef.current = treeData;
       prevSelectedIdsRef.current = selectedIdsToApply;
 
@@ -422,6 +429,7 @@ const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>(
       event.stopPropagation();
       const updatedTree = changeItem(clickedItem, false);
       justEmittedSelectionRef.current = true;
+      justEmittedSelectionModule = true;
       if (returnAllSelected) {
         onSelect(getCheckedItems(updatedTree));
         onChange({ target: { name, value: getCheckedItems(updatedTree) } });
@@ -462,6 +470,7 @@ const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>(
       const filtered = filterFormattedDataById(formattedData, clickedItem);
       const updatedTree = changeItem(filtered[0], check);
       justEmittedSelectionRef.current = true;
+      justEmittedSelectionModule = true;
       if (returnAllSelected) {
         onSelect(getCheckedItems(updatedTree));
         onChange({ target: { name, value: getCheckedItems(updatedTree) } });
