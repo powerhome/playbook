@@ -218,6 +218,11 @@ const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>(
     };
 
     useEffect(() => {
+      console.log("[pb_multi_level_select] effect ran", {
+        selectedIdsProp: selectedIds,
+        id: props.id ?? props.name,
+      });
+
       const selectedIdsToApply =
         variant === "single" ? [selectedIds?.[0]] : selectedIds;
 
