@@ -252,6 +252,18 @@ const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>(
         return;
       }
 
+      // Don't overwrite with empty when we already have checked items (parent may not have re-rendered yet)
+      const hasCheckedItems =
+        variant === "single"
+          ? (singleSelectedItem?.item?.length ?? 0) > 0
+          : (formattedData?.length && getDefaultCheckedItems(formattedData).length > 0);
+      if (selectedIdsToApply?.length === 0 && hasCheckedItems) {
+        console.log(
+          "[pb_multi_level_select] skipping sync (ignoring stale empty selectedIds)",
+        );
+        return;
+      }
+
       if (selectedIdsToApply !== undefined) {
         console.log(
           "[pb_multi_level_select] syncing from props",
