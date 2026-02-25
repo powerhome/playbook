@@ -137,6 +137,16 @@ const Typeahead = forwardRef<HTMLInputElement, TypeaheadProps>(
     const [formSubmitted, setFormSubmitted] = useState(false)
     // State to track if user has made a selection (to disable defaultValue focus behavior)
     const [hasUserSelected, setHasUserSelected] = useState(false)
+    // State to track async loading state
+    const [asyncLoading, setAsyncLoading] = useState(false)
+    const mountedRef = useRef(true)
+
+    useEffect(() => {
+      mountedRef.current = true
+      return () => {
+        mountedRef.current = false
+      }
+    }, [])
 
     // If preserveSearchInput is true, we need to control the input value
     const handleInputChange = preserveSearchInput
@@ -258,6 +268,57 @@ const Typeahead = forwardRef<HTMLInputElement, TypeaheadProps>(
       }
     }
 
+    // Resolve loadOptions (string path to function) once
+const resolvedLoadOptions =
+  isString(loadOptions) ? get(window, loadOptions) : loadOptions
+
+// Wrap loadOptions to track async loading safely for BOTH callback + promise styles
+const wrappedLoadOptions =
+  async
+    ? (inputValue: any, callback?: any) => {
+        if (mountedRef.current) setAsyncLoading(true)
+
+        // If react-select passes a callback, wrap it so we clear loading on completion
+        const wrappedCallback =
+          typeof callback === "function"
+            ? (options: any) => {
+                if (mountedRef.current) setAsyncLoading(false)
+                return callback(options)
+              }
+            : undefined
+
+        let result
+        try {
+          // Preserve signature: if callback is provided, pass it through
+          result = wrappedCallback
+            ? resolvedLoadOptions(inputValue, wrappedCallback)
+            : resolvedLoadOptions(inputValue)
+        } catch (e) {
+          if (mountedRef.current) setAsyncLoading(false)
+          throw e
+        }
+
+        // Promise-style completion
+        if (result && typeof (result as any).then === "function") {
+          return (result as Promise<any>)
+            .then((opts) => {
+              if (mountedRef.current) setAsyncLoading(false)
+              return opts
+            })
+            .catch((e) => {
+              if (mountedRef.current) setAsyncLoading(false)
+              throw e
+            })
+        }
+
+        // Callback-style will clear via wrappedCallback.
+        // Sync/no-callback/no-promise: clear immediately.
+        if (!wrappedCallback && mountedRef.current) setAsyncLoading(false)
+
+        return result
+      }
+    : resolvedLoadOptions
+
     const selectProps = {
       cacheOptions: true,
       components: {
@@ -272,9 +333,7 @@ const Typeahead = forwardRef<HTMLInputElement, TypeaheadProps>(
         ValueContainer,
         ...components,
       },
-      loadOptions: isString(loadOptions)
-        ? get(window, loadOptions)
-        : loadOptions,
+      loadOptions: wrappedLoadOptions,
       getOptionLabel: isString(getOptionLabel)
         ? get(window, getOptionLabel)
         : getOptionLabel,
@@ -481,7 +540,9 @@ const Typeahead = forwardRef<HTMLInputElement, TypeaheadProps>(
     <div
         {...dataProps}
         {...htmlProps}
+        aria-busy={asyncLoading ? "true" : "false"}
         className={classnames(classes, inlineClass)}
+        data-pb-typeahead-loading={asyncLoading ? "true" : "false"}
     >
       <Tag
           classNamePrefix="typeahead-kit-select"
