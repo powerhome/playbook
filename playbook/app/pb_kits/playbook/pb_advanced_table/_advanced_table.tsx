@@ -31,6 +31,7 @@ type FullscreenControls = {
 type AdvancedTableProps = {
   aria?: { [key: string]: string }
   actions?: React.ReactNode[] | React.ReactNode
+  cascadeCollapse?: boolean
   children?: React.ReactNode | React.ReactNode[]
   className?: string
   columnDefinitions: GenericObject[]
@@ -80,6 +81,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
   const {
     aria = {},
     actions,
+    cascadeCollapse = false,
     children,
     className,
     columnDefinitions,
@@ -173,7 +175,8 @@ const AdvancedTable = (props: AdvancedTableProps) => {
     onRowSelectionChange,
     inlineRowLoading,
     localPagination,
-    setLocalPagination
+    setLocalPagination,
+    cascadeCollapse
   });
 
   // Set table row count for loading state
@@ -339,6 +342,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
       >
         {renderFullscreenHeader()}
         <AdvancedTableProvider
+            cascadeCollapse={cascadeCollapse}
             columnDefinitions={columnDefinitions}
             columnGroupBorderColor={columnGroupBorderColor}
             columnVisibilityControl={columnVisibilityControl}

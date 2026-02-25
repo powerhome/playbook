@@ -1016,3 +1016,76 @@ test("columnStyling.headerFontColor works as excpected", () => {
   const firstEnrollmentHeader = screen.getAllByText("New Enrollments")[0].closest("th");
   expect(firstEnrollmentHeader).toHaveStyle({ color: colors.white });
 });
+
+test("cascadeCollapse=false (default) preserves existing behavior when parent is re-expanded", () => {
+  render(
+    <AdvancedTable
+        columnDefinitions={columnDefinitions}
+        data={{ testid: testId }}
+        tableData={MOCK_DATA}
+    />
+  )
+
+  const kit = screen.getByTestId(testId)
+  const getParentExpandButton = () => kit.querySelector("tbody tr .gray-icon.expand-toggle-icon")
+  const parentButton = getParentExpandButton()
+  expect(parentButton).toBeInTheDocument()
+  parentButton.click()
+  let subRow = kit.querySelector(".pb-bg-row-white.depth-sub-row-1")
+  expect(subRow).toBeInTheDocument()
+  getParentExpandButton().click()
+  subRow = kit.querySelector(".pb-bg-row-white.depth-sub-row-1")
+  expect(subRow).not.toBeInTheDocument()
+  getParentExpandButton().click()
+  subRow = kit.querySelector(".pb-bg-row-white.depth-sub-row-1")
+  expect(subRow).toBeInTheDocument()
+})
+
+test("cascadeCollapse=true collapses all descendants when parent is collapsed", () => {
+  render(
+    <AdvancedTable
+        cascadeCollapse
+        columnDefinitions={columnDefinitions}
+        data={{ testid: testId }}
+        tableData={MOCK_DATA}
+    />
+  )
+
+  const kit = screen.getByTestId(testId)
+  const getParentExpandButton = () => kit.querySelector("tbody tr .gray-icon.expand-toggle-icon")
+  const parentButton = getParentExpandButton()
+  expect(parentButton).toBeInTheDocument()
+  parentButton.click()
+  expect(kit.querySelector(".depth-sub-row-1")).toBeInTheDocument()
+  getParentExpandButton().click()
+  expect(kit.querySelector(".depth-sub-row-1")).not.toBeInTheDocument()
+  getParentExpandButton().click()
+  expect(kit.querySelector(".depth-sub-row-1")).toBeInTheDocument()
+})
+
+test("cascadeCollapse=true with header toggle all: collapse all then expand all shows only direct children", async () => {
+  render(
+    <AdvancedTable
+        cascadeCollapse
+        columnDefinitions={columnDefinitions}
+        data={{ testid: testId }}
+        tableData={MOCK_DATA}
+    />
+  )
+
+  const kit = screen.getByTestId(testId)
+  const toggleAllButton = kit.querySelector(".gray-icon.toggle-all-icon")
+  expect(toggleAllButton).toBeInTheDocument()
+  toggleAllButton.click()
+  await waitFor(() => {
+    expect(kit.querySelector(".depth-sub-row-1")).toBeInTheDocument()
+  })
+  toggleAllButton.click()
+  await waitFor(() => {
+    expect(kit.querySelector(".depth-sub-row-1")).not.toBeInTheDocument()
+  })
+  toggleAllButton.click()
+  await waitFor(() => {
+    expect(kit.querySelector(".depth-sub-row-1")).toBeInTheDocument()
+  })
+})
