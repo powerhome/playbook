@@ -239,13 +239,20 @@ const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>(
         idsEqual(prevSelectedIdsRef.current, selectedIdsToApply);
 
       if (treeDataUnchanged && selectedIdsUnchanged) {
-        console.log(
-          "[pb_multi_level_select] skipping sync (selectedIds unchanged)",
-        );
+        if (prevSelectedIdsRef.current !== undefined) {
+          console.log(
+            "[pb_multi_level_select] skipping sync (selectedIds unchanged)",
+          );
+        }
         return;
       }
 
-      console.log("[pb_multi_level_select] syncing from props", selectedIdsToApply);
+      if (selectedIdsToApply !== undefined) {
+        console.log(
+          "[pb_multi_level_select] syncing from props",
+          selectedIdsToApply,
+        );
+      }
       prevTreeDataRef.current = treeData;
       prevSelectedIdsRef.current = selectedIdsToApply;
 
