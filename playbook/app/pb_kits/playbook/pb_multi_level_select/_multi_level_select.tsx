@@ -274,7 +274,7 @@ const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>(
           selectedIdsToApply,
         );
       }
-      justEmittedSelectionModule = false;
+      if (selectedIdsToApply?.length === 0) justEmittedSelectionModule = false;
       prevTreeDataRef.current = treeData;
       prevSelectedIdsRef.current = selectedIdsToApply;
 
