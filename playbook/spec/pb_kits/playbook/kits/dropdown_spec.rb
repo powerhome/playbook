@@ -27,6 +27,7 @@ RSpec.describe Playbook::PbDropdown::Dropdown do
   it { is_expected.to define_string_prop(:end_date_name).with_default("end_date_name") }
   it { is_expected.to define_hash_prop(:custom_quick_pick_dates).with_default({}) }
   it { is_expected.to define_boolean_prop(:clearable).with_default(true) }
+  it { is_expected.to define_enum_prop(:close_on_click).with_values("outside", "inside", "any").with_default("any") }
   it { is_expected.to define_boolean_prop(:constrain_height).with_default(false) }
   it { is_expected.to define_boolean_prop(:required_indicator).with_default(false) }
 
@@ -48,6 +49,18 @@ RSpec.describe Playbook::PbDropdown::Dropdown do
     it "does not include blank selection option if blank_selection is not present" do
       dropdown = subject.new(options: [{ id: 1, label: "Option 1", value: "1" }])
       expect(dropdown.send(:options_with_blank)).not_to include({ id: "", value: "", label: "" })
+    end
+  end
+
+  describe "#close_on_click" do
+    it "includes close_on_click in data and defaults to any" do
+      dropdown = subject.new(options: [])
+      expect(dropdown.data).to include(pb_dropdown_close_on_click: "any")
+    end
+
+    it "passes close_on_click value to data" do
+      dropdown = subject.new(options: [], close_on_click: "outside")
+      expect(dropdown.data).to include(pb_dropdown_close_on_click: "outside")
     end
   end
 
