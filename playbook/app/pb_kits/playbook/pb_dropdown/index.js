@@ -24,7 +24,38 @@ export default class PbDropdown extends PbEnhancedElement {
   }
 
   get target() {
-    return this.element.querySelector(CONTAINER_SELECTOR);
+    return this.cachedElements?.target || this.element.querySelector(CONTAINER_SELECTOR);
+  }
+
+  get baseInput() {
+    return this.cachedElements?.baseInput || this.element.querySelector(DROPDOWN_INPUT);
+  }
+
+  get trigger() {
+    return this.cachedElements?.trigger || this.element.querySelector(TRIGGER_SELECTOR);
+  }
+
+  get customTrigger() {
+    return this.cachedElements?.customTrigger || this.element.querySelector(CUSTOM_DISPLAY_SELECTOR);
+  }
+
+  get dropdownWrapper() {
+    return this.cachedElements?.dropdownWrapper || this.element.querySelector(".dropdown_wrapper");
+  }
+
+  get placeholder() {
+    return this.cachedElements?.placeholder || this.element.querySelector(DROPDOWN_PLACEHOLDER);
+  }
+
+  cacheElements() {
+    this.cachedElements = {
+      target: this.element.querySelector(CONTAINER_SELECTOR),
+      baseInput: this.element.querySelector(DROPDOWN_INPUT),
+      trigger: this.element.querySelector(TRIGGER_SELECTOR),
+      customTrigger: this.element.querySelector(CUSTOM_DISPLAY_SELECTOR),
+      dropdownWrapper: this.element.querySelector(".dropdown_wrapper"),
+      placeholder: this.element.querySelector(DROPDOWN_PLACEHOLDER),
+    };
   }
 
   selectedOptions = new Set();
@@ -33,13 +64,14 @@ export default class PbDropdown extends PbEnhancedElement {
   connect() {
     // Store instance on element for DatePicker sync
     this.element._pbDropdownInstance = this;
+    this.cacheElements();
 
     this.keyboardHandler = new PbDropdownKeyboard(this);
     this.isMultiSelect = this.element.dataset.pbDropdownMultiSelect === "true";
     this.formPillProps = this.element.dataset.formPillProps
       ? JSON.parse(this.element.dataset.formPillProps)
       : {};
-    const baseInput = this.element.querySelector(DROPDOWN_INPUT);
+    const baseInput = this.baseInput;
     this.wasOriginallyRequired =
       baseInput && baseInput.hasAttribute("required");
     this.setDefaultValue();
@@ -77,7 +109,7 @@ export default class PbDropdown extends PbEnhancedElement {
 
     // Clean up custom trigger click listener
     if (this.customTriggerClickHandler) {
-      const customTrigger = this.element.querySelector(CUSTOM_DISPLAY_SELECTOR) || this.element
+      const customTrigger = this.customTrigger || this.element
       customTrigger.removeEventListener('click', this.customTriggerClickHandler)
     }
 
@@ -99,7 +131,7 @@ export default class PbDropdown extends PbEnhancedElement {
     // Clean up search input listeners
     if (this.searchInput) {
       if (this.searchInputFocusHandler) {
-        const trigger = this.element.querySelector(TRIGGER_SELECTOR)
+        const trigger = this.trigger
         if (trigger) {
           trigger.removeEventListener('click', this.searchInputFocusHandler)
         }
@@ -123,14 +155,13 @@ export default class PbDropdown extends PbEnhancedElement {
     }
     const hasSelection = this.isMultiSelect
       ? this.selectedOptions.size > 0
-      : Boolean(this.element.querySelector(DROPDOWN_INPUT).value);
+      : Boolean(this.baseInput?.value);
 
     this.clearBtn.style.display = hasSelection ? "" : "none";
   }
 
   bindEventListeners() {
-    const customTrigger =
-      this.element.querySelector(CUSTOM_DISPLAY_SELECTOR) || this.element;
+    const customTrigger = this.customTrigger || this.element;
     this.customTriggerClickHandler = (e) => {
       const label = e.target.closest(LABEL_SELECTOR);
       if (label && label.htmlFor) {
@@ -170,9 +201,7 @@ export default class PbDropdown extends PbEnhancedElement {
 
     // Focus the input when anyone clicks the wrapper
     this.searchInputFocusHandler = () => this.searchInput.focus()
-    this.element
-      .querySelector(TRIGGER_SELECTOR)
-      ?.addEventListener('click', this.searchInputFocusHandler);
+    this.trigger?.addEventListener('click', this.searchInputFocusHandler);
 
     // Live filter
     this.searchInputHandler = (e) => this.handleSearch(e.target.value)
@@ -204,7 +233,7 @@ export default class PbDropdown extends PbEnhancedElement {
   adjustDropdownPosition(container) {
     if (!container) return;
 
-    const wrapper = this.element.querySelector(".dropdown_wrapper");
+    const wrapper = this.dropdownWrapper;
     if (!wrapper) return;
 
     const wrapperRect = wrapper.getBoundingClientRect();
@@ -277,7 +306,7 @@ export default class PbDropdown extends PbEnhancedElement {
 
   handleOptionClick(event) {
     const option = event.target.closest(OPTION_SELECTOR);
-    const hiddenInput = this.element.querySelector(DROPDOWN_INPUT);
+    const hiddenInput = this.baseInput;
 
     if (option) {
       const value = option.dataset.dropdownOptionLabel;
@@ -315,11 +344,11 @@ export default class PbDropdown extends PbEnhancedElement {
   isClickOutside(event) {
     const label = event.target.closest(LABEL_SELECTOR);
     if (label && this.element.contains(label)) return false;
-    const customTrigger = this.element.querySelector(CUSTOM_DISPLAY_SELECTOR);
+    const customTrigger = this.customTrigger;
     if (customTrigger) {
       return !customTrigger.contains(event.target);
     } else {
-      const triggerElement = this.element.querySelector(TRIGGER_SELECTOR);
+      const triggerElement = this.trigger;
       const containerElement =
         this.element.parentNode.querySelector(CONTAINER_SELECTOR);
 
@@ -340,7 +369,7 @@ export default class PbDropdown extends PbEnhancedElement {
     if (this.isMultiSelect) {
       detail = Array.from(this.selectedOptions).map(JSON.parse);
     } else {
-      const hiddenInput = this.element.querySelector(DROPDOWN_INPUT);
+      const hiddenInput = this.baseInput;
       detail = hiddenInput.value
         ? JSON.parse(
             this.element.querySelector(
@@ -459,7 +488,7 @@ export default class PbDropdown extends PbEnhancedElement {
       this.emitSelectionChange();
     }
 
-    const customTrigger = this.element.querySelector(CUSTOM_DISPLAY_SELECTOR);
+    const customTrigger = this.customTrigger;
     if (customTrigger) {
       if (this.target.classList.contains("open")) {
         this.hideElement(this.target);
@@ -479,7 +508,7 @@ export default class PbDropdown extends PbEnhancedElement {
           this.adjustDropdownHeight();
         }
       });
-      this.element.querySelector(DROPDOWN_INPUT).value = Array.from(
+      this.baseInput.value = Array.from(
         this.selectedOptions,
       )
         .map((opt) => JSON.parse(opt).id)
@@ -552,7 +581,7 @@ export default class PbDropdown extends PbEnhancedElement {
   }
 
   handleFormValidation() {
-    const hiddenInput = this.element.querySelector(DROPDOWN_INPUT);
+    const hiddenInput = this.baseInput;
 
     hiddenInput.addEventListener(
       "invalid",
@@ -595,7 +624,7 @@ export default class PbDropdown extends PbEnhancedElement {
   }
 
   setDefaultValue() {
-    const hiddenInput = this.element.querySelector(DROPDOWN_INPUT);
+    const hiddenInput = this.baseInput;
     const optionEls = Array.from(
       this.element.querySelectorAll(OPTION_SELECTOR),
     );
@@ -708,7 +737,7 @@ export default class PbDropdown extends PbEnhancedElement {
   }
 
   resetDropdownValue() {
-    const hiddenInput = this.element.querySelector(DROPDOWN_INPUT);
+    const hiddenInput = this.baseInput;
     const options = this.element.querySelectorAll(OPTION_SELECTOR);
     options.forEach((option) => {
       option.classList.remove("pb_dropdown_option_selected");
@@ -717,7 +746,7 @@ export default class PbDropdown extends PbEnhancedElement {
 
     hiddenInput.value = "";
 
-    const defaultPlaceholder = this.element.querySelector(DROPDOWN_PLACEHOLDER);
+    const defaultPlaceholder = this.placeholder;
     this.setTriggerElementText(defaultPlaceholder.dataset.dropdownPlaceholder);
 
     if (this.searchInput) {
@@ -916,7 +945,7 @@ export default class PbDropdown extends PbEnhancedElement {
       .querySelectorAll('input[data-generated="true"]')
       .forEach((n) => n.remove());
 
-    const baseInput = this.element.querySelector(DROPDOWN_INPUT);
+    const baseInput = this.baseInput;
     if (!baseInput) return;
     // for multi_select, for each selectedOption, create a hidden input
     const name = baseInput.getAttribute("name");
@@ -954,10 +983,10 @@ export default class PbDropdown extends PbEnhancedElement {
         this.adjustDropdownHeight();
       });
 
-      const hiddenInput = this.element.querySelector(DROPDOWN_INPUT);
+      const hiddenInput = this.baseInput;
       if (hiddenInput) hiddenInput.value = "";
 
-      const placeholder = this.element.querySelector(DROPDOWN_PLACEHOLDER);
+      const placeholder = this.placeholder;
       if (placeholder)
         this.setTriggerElementText(placeholder.dataset.dropdownPlaceholder);
     }

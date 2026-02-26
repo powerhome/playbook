@@ -21,10 +21,18 @@ export default class PbAdvancedTable extends PbEnhancedElement {
     this.childRowsMap = new Map();
   }
 
+  get table() {
+    return this.cachedTable || (this.cachedTable = this.element.closest("table"));
+  }
+
+  get mainTable() {
+    return this.cachedMainTable || (this.cachedMainTable = this.element.closest(".pb_advanced_table"));
+  }
+
   // Fetch and cache child rows for a given parent row ID
   childRowsFor(parentId) {
     if (!this.childRowsMap.has(parentId)) {
-      const table = this.element.closest("table");
+      const table = this.table;
       const rows = Array.from(
         table.querySelectorAll(`tr[data-row-parent="${parentId}"]`)
       );
@@ -34,7 +42,8 @@ export default class PbAdvancedTable extends PbEnhancedElement {
   }
 
   updateTableSelectedRowsAttribute() {
-    const mainTable = this.element.closest(".pb_advanced_table");
+    const mainTable = this.mainTable;
+    if (!mainTable) return;
     mainTable.dataset.selectedRows = JSON.stringify(
       Array.from(PbAdvancedTable.selectedRows)
     );
@@ -42,7 +51,8 @@ export default class PbAdvancedTable extends PbEnhancedElement {
 
   // Recalculate selected count based on all checked checkboxes
   recalculateSelectedCount() {
-    const table = this.element.closest("table");
+    const table = this.table;
+    if (!table) return;
     
     // Get all checkboxes that could be part of the selection
     // This includes row checkboxes and any parent checkboxes that might be programmatically checked
@@ -96,7 +106,7 @@ export default class PbAdvancedTable extends PbEnhancedElement {
     });
     
     this.updateTableSelectedRowsAttribute();
-    updateSelectionActionBar(table.closest(".pb_advanced_table"), PbAdvancedTable.selectedRows.size);
+    updateSelectionActionBar(this.mainTable, PbAdvancedTable.selectedRows.size);
     
     // Sync header select-all state
     if (selectAllCheckbox) {
@@ -140,7 +150,7 @@ export default class PbAdvancedTable extends PbEnhancedElement {
 
     this.updateTableSelectedRowsAttribute();
 
-    const table = checkbox.closest("table");
+    const table = this.table;
     const selectAllCheckbox = table.querySelector("#select-all-rows");
 
     if (selectAllCheckbox) {
@@ -154,7 +164,7 @@ export default class PbAdvancedTable extends PbEnhancedElement {
       );
       selectAllInput.checked = allChecked;
     }
-    updateSelectionActionBar(table.closest(".pb_advanced_table"), PbAdvancedTable.selectedRows.size);
+    updateSelectionActionBar(this.mainTable, PbAdvancedTable.selectedRows.size);
   }
 
   get target() {
@@ -162,10 +172,11 @@ export default class PbAdvancedTable extends PbEnhancedElement {
   }
 
   connect() {
-    const table = this.element.closest("table");
+    const table = this.table;
+    if (!table) return;
 
     this.hideCloseIcon();
-    const mainTable = this.element.closest(".pb_advanced_table");
+    const mainTable = this.mainTable;
     
     // This so it is hidden on first render
     if (mainTable) {
@@ -272,9 +283,7 @@ export default class PbAdvancedTable extends PbEnhancedElement {
       }
 
       // Find direct child rows
-      const childRows = Array.from(
-        table.querySelectorAll(`[data-row-parent="${toggleBtn.id}"]`)
-      );
+      const childRows = this.childRowsFor(toggleBtn.id);
       this.toggleElement(childRows);
 
       // Restore original element context
@@ -285,7 +294,8 @@ export default class PbAdvancedTable extends PbEnhancedElement {
   }
 
   addBorderRadiusOnLastVisibleRow() {
-    const parentElement = this.element.closest(".pb_advanced_table");
+    const parentElement = this.mainTable;
+    if (!parentElement) return;
 
     const table = document.getElementById(parentElement.id);
 
@@ -317,11 +327,9 @@ export default class PbAdvancedTable extends PbEnhancedElement {
     elements.forEach((elem) => {
       elem.style.display = "table-row";
       elem.classList.add("is-visible");
-      const childRowsAll = this.element
-        .closest("table")
-        .querySelectorAll(
-          `[data-advanced-table-content^="${elem.dataset.advancedTableContent}-"]`
-        );
+      const childRowsAll = this.table.querySelectorAll(
+        `[data-advanced-table-content^="${elem.dataset.advancedTableContent}-"]`
+      );
 
       childRowsAll.forEach((childRow) => {
         const dataContent = childRow.dataset.advancedTableContent;
@@ -383,8 +391,7 @@ export default class PbAdvancedTable extends PbEnhancedElement {
       const currentDepth = parseInt(elem.dataset.rowDepth);
       if (childrenArray.length > currentDepth) {
         // Find the child rows corresponding to this parent row
-        const childRows = this.element
-          .closest("table")
+        const childRows = this.table
           .querySelectorAll(
             `[data-advanced-table-content^="${elem.dataset.advancedTableContent}-"]`
           );
@@ -412,8 +419,8 @@ export default class PbAdvancedTable extends PbEnhancedElement {
 
     const row = this.element.closest("tr");
     if (row) {
-      row.classList.toggle("bg-silver", !isExpanded);
-      row.classList.toggle("pb-bg-row-white", isExpanded);
+      row.classList.toggle("bg-silver", isExpanded);
+      row.classList.toggle("pb-bg-row-white", !isExpanded);
     }
 
     this.addBorderRadiusOnLastVisibleRow();
