@@ -738,6 +738,12 @@ kits:
     icons_used: false
     react_rendered: false
     enhanced_element_used: false
+  - name: full_screen_view
+    platforms: web
+    status: stable
+    icons_used: true
+    react_rendered: false
+    enhanced_element_used: false
 - category: message_text_patterns
   description:
   components:
