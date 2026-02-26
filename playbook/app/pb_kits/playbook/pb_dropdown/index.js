@@ -1,5 +1,6 @@
 import PbEnhancedElement from "../pb_enhanced_element";
 import { PbDropdownKeyboard } from "./keyboard_accessibility";
+import { setArrowVisibility, toggleVisibility } from "../utilities/domHelpers";
 
 const DROPDOWN_SELECTOR = "[data-pb-dropdown]";
 const TRIGGER_SELECTOR = "[data-dropdown-trigger]";
@@ -532,22 +533,22 @@ export default class PbDropdown extends PbEnhancedElement {
   }
 
   toggleElement(elem) {
-    if (elem.classList.contains("open")) {
-      this.hideElement(elem);
-      this.updateArrowDisplay(false);
-      return;
-    }
-    this.showElement(elem);
-    this.updateArrowDisplay(true);
+    const isOpen = toggleVisibility({
+      isVisible: elem.classList.contains("open"),
+      onHide: () => this.hideElement(elem),
+      onShow: () => this.showElement(elem),
+    });
+
+    this.updateArrowDisplay(isOpen);
   }
 
   updateArrowDisplay(isOpen) {
-    const downArrow = this.element.querySelector(DOWN_ARROW_SELECTOR);
-    const upArrow = this.element.querySelector(UP_ARROW_SELECTOR);
-    if (downArrow && upArrow) {
-      downArrow.style.display = isOpen ? "none" : "inline-block";
-      upArrow.style.display = isOpen ? "inline-block" : "none";
-    }
+    setArrowVisibility({
+      rootElement: this.element,
+      downSelector: DOWN_ARROW_SELECTOR,
+      upSelector: UP_ARROW_SELECTOR,
+      showDownArrow: !isOpen,
+    });
   }
 
   handleFormValidation() {

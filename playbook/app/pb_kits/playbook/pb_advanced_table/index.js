@@ -1,5 +1,6 @@
 import PbEnhancedElement from "../pb_enhanced_element";
 import { updateSelectionActionBar } from "./advanced_table_action_bar";
+import { setArrowVisibility, toggleVisibility } from "../utilities/domHelpers";
 
 const ADVANCED_TABLE_SELECTOR = "[data-advanced-table]";
 const DOWN_ARROW_SELECTOR = "#advanced-table_open_icon";
@@ -401,28 +402,39 @@ export default class PbAdvancedTable extends PbEnhancedElement {
 
     const isVisible = elements[0].classList.contains("is-visible");
 
-    isVisible ? this.hideElement(elements) : this.showElement(elements);
-    isVisible ? this.displayDownArrow() : this.displayUpArrow();
+    const isExpanded = toggleVisibility({
+      isVisible,
+      onHide: () => this.hideElement(elements),
+      onShow: () => this.showElement(elements),
+    });
+
+    isExpanded ? this.displayUpArrow() : this.displayDownArrow();
 
     const row = this.element.closest("tr");
     if (row) {
-      row.classList.toggle("bg-silver", !isVisible);
-      row.classList.toggle("pb-bg-row-white", isVisible);
+      row.classList.toggle("bg-silver", !isExpanded);
+      row.classList.toggle("pb-bg-row-white", isExpanded);
     }
 
     this.addBorderRadiusOnLastVisibleRow();
   }
 
   displayDownArrow() {
-    this.element.querySelector(DOWN_ARROW_SELECTOR).style.display =
-      "inline-block";
-    this.element.querySelector(UP_ARROW_SELECTOR).style.display = "none";
+    setArrowVisibility({
+      rootElement: this.element,
+      downSelector: DOWN_ARROW_SELECTOR,
+      upSelector: UP_ARROW_SELECTOR,
+      showDownArrow: true,
+    });
   }
 
   displayUpArrow() {
-    this.element.querySelector(UP_ARROW_SELECTOR).style.display =
-      "inline-block";
-    this.element.querySelector(DOWN_ARROW_SELECTOR).style.display = "none";
+    setArrowVisibility({
+      rootElement: this.element,
+      downSelector: DOWN_ARROW_SELECTOR,
+      upSelector: UP_ARROW_SELECTOR,
+      showDownArrow: false,
+    });
   }
 
   static handleToggleAllHeaders(element) {
