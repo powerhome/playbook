@@ -15,6 +15,9 @@
 .pb_dropdown_quickpick,
 .pb_dropdown_default_separators_hidden,
 .pb_dropdown_subtle_separators_hidden {
+  label {
+    display: block !important;
+  }
   .dropdown_wrapper {
     .dropdown_trigger_wrapper,
     .dropdown_trigger_wrapper_focus,
