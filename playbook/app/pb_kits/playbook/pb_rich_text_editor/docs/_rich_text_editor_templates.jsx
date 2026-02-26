@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import RichTextEditor from '../../pb_rich_text_editor/_rich_text_editor'
 import Select from '../../pb_select/_select'
 import { changelog, release } from './templates.js'
+import { TrixEditor } from 'react-trix'
+import Trix from 'trix'
 
 const RichTextEditorTemplates = (props) => {
   const [editorContent, setEditorContent] = useState('')
@@ -31,8 +33,10 @@ const RichTextEditorTemplates = (props) => {
           {...props}
       />
       <RichTextEditor
+          TrixEditor={TrixEditor}
           id="template"
           template={editorContent}
+          trixInstance={Trix}
           {...props}
       />
     </div>

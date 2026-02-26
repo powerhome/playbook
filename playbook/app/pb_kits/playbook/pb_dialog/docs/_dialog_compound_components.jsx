@@ -4,7 +4,7 @@ import Body from '../../pb_body/_body'
 import Button from '../../pb_button/_button'
 import Caption from '../../pb_caption/_caption'
 import Dialog from '../../pb_dialog/_dialog'
-import RichTextEditor from '../../pb_rich_text_editor/_rich_text_editor'
+import Textarea from '../../pb_textarea/_textarea'
 import Typeahead from '../../pb_typeahead/_typeahead'
 
 const DialogCompound = () => {
@@ -25,8 +25,12 @@ const DialogCompound = () => {
           <Body>{'What do you need us to take care of?'}</Body>
         </Dialog.Header>
         <Dialog.Body>
+          <Textarea
+              id="default-example-1"
+              label="Description"
+              rows={4}
+          />
           <Caption marginBottom="xs">{'Description'}</Caption>
-          <RichTextEditor />
           <br />
           <Caption>
             {

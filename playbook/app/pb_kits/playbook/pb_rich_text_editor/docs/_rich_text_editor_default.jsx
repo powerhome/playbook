@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import RichTextEditor from '../../pb_rich_text_editor/_rich_text_editor'
+import { TrixEditor } from 'react-trix' 
+import Trix from 'trix'
 
 const RichTextEditorDefault = (props) => {
   const [value, setValue] = useState('Add your text here. You can format your text, add links, quotes, and bullets.'),
@@ -8,7 +10,9 @@ const RichTextEditorDefault = (props) => {
   return (
     <div>
       <RichTextEditor
+          TrixEditor={TrixEditor}
           onChange={handleOnChange}
+          trixInstance={Trix}
           value={value}
           {...props}
       />
