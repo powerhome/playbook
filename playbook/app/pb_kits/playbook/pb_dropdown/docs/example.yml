@@ -32,6 +32,7 @@ examples:
   - dropdown_quickpick_with_date_pickers_rails: Quick Pick with Date Pickers
   - dropdown_quickpick_with_date_pickers_default_rails: Quick Pick with Date Pickers (Default Value)
   - dropdown_required_indicator: Required Indicator
+  - dropdown_custom_event_type: Custom Event Type
 
   react:
   - dropdown_default: Default

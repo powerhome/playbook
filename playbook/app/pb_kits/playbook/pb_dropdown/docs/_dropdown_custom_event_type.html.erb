@@ -1,0 +1,224 @@
+<%
+  default_options = [
+    { label: 'United States', value: 'unitedStates', id: 'us' },
+    { label: 'Canada', value: 'canada', id: 'ca' },
+    { label: 'Pakistan', value: 'pakistan', id: 'pk' },
+    { label: 'India', value: 'India', id: 'in' },
+    { label: 'Mexico', value: 'Mexico', id: 'mx' },
+  ]
+
+  multi_options = [
+    { label: 'United States', value: 'unitedStates', id: 'us' },
+    { label: 'Canada', value: 'canada', id: 'ca' },
+    { label: 'Pakistan', value: 'pakistan', id: 'pk' },
+    { label: 'India', value: 'india', id: 'in' },
+    { label: 'United Kingdom', value: 'unitedKingdom', id: 'uk' },
+  ]
+
+  autocomplete_options = [
+    { label: "United States", value: "unitedStates", areaCode: "+1", icon: "🇺🇸", id: "us" },
+    { label: "United Kingdom", value: "unitedKingdom", areaCode: "+44", icon: "🇬🇧", id: "gb" },
+    { label: "Pakistan", value: "pakistan", areaCode: "+92", icon: "🇵🇰", id: "pk" },
+  ]
+
+  custom_display_options = [
+    { label: "Strong Bad", value: "strongBad", id: "strong-bad", status: "Offline" },
+    { label: "Strong Mad", value: "strongMad", id: "strong-mad", status: "Online" },
+    { label: "Strong Sad", value: "strongSad", id: "strong-sad", status: "Away" },
+  ]
+
+  custom_display_content = capture do
+    pb_rails("flex", props: { align: "center" }) do
+      concat(pb_rails("avatar", props: { name: "", size: "xs", id: "cet-dropdown-avatar" }))
+      concat(pb_rails("body", props: { text: "", size: "xs", margin_x: "xs", id: "cet-dropdown-avatar-name" }))
+      concat(pb_rails("badge", props: { text: "", id: "cet-dropdown-avatar-status" }))
+    end
+  end
+%>
+
+<!-- Example 1: Default dropdown -->
+<%= pb_rails("dropdown", props: {
+  custom_event_type: "form:submitted,pb:dropdown:clearRequest",
+  id: "dropdown-default-cet",
+  label: "Default dropdown",
+  margin_bottom: "sm",
+  options: default_options,
+}) %>
+<%= pb_rails("flex", props: { wrap: true, gap: "sm", align: "center", margin_bottom: "md" }) do %>
+  <%= pb_rails("button", props: { id: "clear-default-cet", text: "Clear", variant: "primary" }) %>
+  <%= pb_rails("button", props: { id: "select-default-cet", text: "Select Canada", variant: "secondary" }) %>
+  <%= pb_rails("button", props: { id: "simulate-default-cet", text: "Simulate form submit", variant: "secondary" }) %>
+<% end %>
+
+<script>
+  (function() {
+    var id = "dropdown-default-cet";
+    document.getElementById("clear-default-cet").addEventListener("click", function() {
+      document.dispatchEvent(new CustomEvent("pb:dropdown:clearRequest", { detail: { dropdownId: id } }));
+    });
+    document.getElementById("select-default-cet").addEventListener("click", function() {
+      document.dispatchEvent(new CustomEvent("pb:dropdown:select", { detail: { dropdownId: id, optionId: "ca" } }));
+    });
+    document.getElementById("simulate-default-cet").addEventListener("click", function() {
+      document.dispatchEvent(new CustomEvent("form:submitted", { detail: { dropdownId: id } }));
+    });
+  })();
+</script>
+
+<!-- Example 2: Multi select -->
+<%= pb_rails("dropdown", props: {
+  custom_event_type: "form:submitted,pb:dropdown:clearRequest",
+  id: "dropdown-multi-cet",
+  label: "Multi select dropdown",
+  margin_bottom: "sm",
+  multi_select: true,
+  options: multi_options,
+}) %>
+<%= pb_rails("flex", props: { wrap: true, gap: "sm", align: "center", margin_bottom: "md" }) do %>
+  <%= pb_rails("button", props: { id: "clear-multi-cet", text: "Clear", variant: "primary" }) %>
+  <%= pb_rails("button", props: { id: "select-multi-cet", text: "Select US + UK", variant: "secondary" }) %>
+  <%= pb_rails("button", props: { id: "simulate-multi-cet", text: "Simulate form submit", variant: "secondary" }) %>
+<% end %>
+
+<script>
+  (function() {
+    var id = "dropdown-multi-cet";
+    document.getElementById("clear-multi-cet").addEventListener("click", function() {
+      document.dispatchEvent(new CustomEvent("pb:dropdown:clearRequest", { detail: { dropdownId: id } }));
+    });
+    document.getElementById("select-multi-cet").addEventListener("click", function() {
+      document.dispatchEvent(new CustomEvent("pb:dropdown:select", { detail: { dropdownId: id, optionIds: ["us", "uk"] } }));
+    });
+    document.getElementById("simulate-multi-cet").addEventListener("click", function() {
+      document.dispatchEvent(new CustomEvent("form:submitted", { detail: { dropdownId: id } }));
+    });
+  })();
+</script>
+
+<!-- Example 3: Autocomplete -->
+<%= pb_rails("dropdown", props: {
+  autocomplete: true,
+  custom_event_type: "form:submitted,pb:dropdown:clearRequest",
+  id: "dropdown-autocomplete-cet",
+  label: "Autocomplete dropdown",
+  margin_bottom: "sm",
+  options: autocomplete_options,
+}) %>
+<%= pb_rails("flex", props: { wrap: true, gap: "sm", align: "center", margin_bottom: "md" }) do %>
+  <%= pb_rails("button", props: { id: "clear-autocomplete-cet", text: "Clear", variant: "primary" }) %>
+  <%= pb_rails("button", props: { id: "select-autocomplete-cet", text: "Select Pakistan", variant: "secondary" }) %>
+  <%= pb_rails("button", props: { id: "simulate-autocomplete-cet", text: "Simulate form submit", variant: "secondary" }) %>
+<% end %>
+
+<script>
+  (function() {
+    var id = "dropdown-autocomplete-cet";
+    document.getElementById("clear-autocomplete-cet").addEventListener("click", function() {
+      document.dispatchEvent(new CustomEvent("pb:dropdown:clearRequest", { detail: { dropdownId: id } }));
+    });
+    document.getElementById("select-autocomplete-cet").addEventListener("click", function() {
+      document.dispatchEvent(new CustomEvent("pb:dropdown:select", { detail: { dropdownId: id, optionId: "pk" } }));
+    });
+    document.getElementById("simulate-autocomplete-cet").addEventListener("click", function() {
+      document.dispatchEvent(new CustomEvent("form:submitted", { detail: { dropdownId: id } }));
+    });
+  })();
+</script>
+
+<!-- Example 4: Quick pick (Date Range) -->
+<%= pb_rails("dropdown", props: {
+  custom_event_type: "form:submitted,pb:dropdown:clearRequest",
+  id: "dropdown-quickpick-cet",
+  label: "Quickpick dropdown",
+  margin_bottom: "sm",
+  variant: "quickpick",
+}) %>
+<%= pb_rails("flex", props: { wrap: true, gap: "sm", align: "center", margin_bottom: "md" }) do %>
+  <%= pb_rails("button", props: { id: "clear-quickpick-cet", text: "Clear", variant: "primary" }) %>
+  <%= pb_rails("button", props: { id: "select-quickpick-cet", text: "Select This Week", variant: "secondary" }) %>
+  <%= pb_rails("button", props: { id: "simulate-quickpick-cet", text: "Simulate form submit", variant: "secondary" }) %>
+<% end %>
+
+<script>
+  (function() {
+    var id = "dropdown-quickpick-cet";
+    document.getElementById("clear-quickpick-cet").addEventListener("click", function() {
+      document.dispatchEvent(new CustomEvent("pb:dropdown:clearRequest", { detail: { dropdownId: id } }));
+    });
+    document.getElementById("select-quickpick-cet").addEventListener("click", function() {
+      document.dispatchEvent(new CustomEvent("pb:dropdown:select", { detail: { dropdownId: id, optionId: "quickpick-this-week" } }));
+    });
+    document.getElementById("simulate-quickpick-cet").addEventListener("click", function() {
+      document.dispatchEvent(new CustomEvent("form:submitted", { detail: { dropdownId: id } }));
+    });
+  })();
+</script>
+
+<!-- Example 5: Custom display -->
+<%= pb_rails("dropdown", props: {
+  custom_event_type: "form:submitted,pb:dropdown:clearRequest",
+  id: "dropdown-custom-display-cet",
+  label: "Custom display (Subcomponent) dropdown",
+  margin_bottom: "sm",
+  options: custom_display_options,
+}) do %>
+  <%= pb_rails("dropdown/dropdown_trigger", props: { placeholder: "Select a User", custom_display: custom_display_content }) %>
+  <%= pb_rails("dropdown/dropdown_container") do %>
+    <% custom_display_options.each do |option| %>
+      <%= pb_rails("dropdown/dropdown_option", props: { option: option }) do %>
+        <%= pb_rails("flex", props: { align: "center", justify: "between" }) do %>
+          <%= pb_rails("flex/flex_item") do %>
+            <%= pb_rails("user", props: { name: option[:label], align: "left", avatar: true, orientation: "horizontal" }) %>
+          <% end %>
+          <%= pb_rails("flex/flex_item") do %>
+            <%= pb_rails("badge", props: { rounded: true, dark: true, text: option[:status], variant: option[:status] == "Offline" ? "neutral" : option[:status] == "Online" ? "success" : "warning" }) %>
+          <% end %>
+        <% end %>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>
+<%= pb_rails("flex", props: { wrap: true, gap: "sm", align: "center", margin_bottom: "md" }) do %>
+  <%= pb_rails("button", props: { id: "clear-custom-display-cet", text: "Clear", variant: "primary" }) %>
+  <%= pb_rails("button", props: { id: "select-custom-display-cet", text: "Select Strong Sad", variant: "secondary" }) %>
+  <%= pb_rails("button", props: { id: "simulate-custom-display-cet", text: "Simulate form submit", variant: "secondary" }) %>
+<% end %>
+
+<script>
+  (function() {
+    var id = "dropdown-custom-display-cet";
+    document.getElementById("clear-custom-display-cet").addEventListener("click", function() {
+      document.dispatchEvent(new CustomEvent("pb:dropdown:clearRequest", { detail: { dropdownId: id } }));
+    });
+    document.getElementById("select-custom-display-cet").addEventListener("click", function() {
+      document.dispatchEvent(new CustomEvent("pb:dropdown:select", { detail: { dropdownId: id, optionId: "strong-sad" } }));
+    });
+    document.getElementById("simulate-custom-display-cet").addEventListener("click", function() {
+      document.dispatchEvent(new CustomEvent("form:submitted", { detail: { dropdownId: id } }));
+    });
+
+    document.addEventListener("pb:dropdown:selected", function(e) {
+      if (e.target && e.target.id === id && e.detail) {
+        var display = e.target.querySelector("[data-dropdown-trigger-custom-display]");
+        if (!display) return;
+        var nameEl = display.querySelector("#cet-dropdown-avatar-name");
+        if (nameEl) nameEl.textContent = e.detail.label;
+        var avatarEl = display.querySelector("#cet-dropdown-avatar");
+        if (avatarEl) {
+          var wrapper = avatarEl.querySelector(".avatar_wrapper");
+          if (wrapper) {
+            var initials = (e.detail.label[0] + (e.detail.label.split(" ").pop() || "")[0]).toUpperCase();
+            wrapper.dataset.name = e.detail.label;
+            wrapper.setAttribute("data-initials", initials);
+          }
+        }
+        var badgeEl = display.querySelector("#cet-dropdown-avatar-status");
+        if (badgeEl && e.detail.status) {
+          var variant = e.detail.status === "Online" ? "success" : e.detail.status === "Offline" ? "neutral" : "warning";
+          badgeEl.querySelector("span").textContent = e.detail.status;
+          badgeEl.className = "pb_badge_kit_" + variant;
+        }
+      }
+    });
+  })();
+</script>

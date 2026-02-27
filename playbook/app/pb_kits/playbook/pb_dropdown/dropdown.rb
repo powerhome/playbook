@@ -52,6 +52,8 @@ module Playbook
                               default: false
       prop :required_indicator, type: Playbook::Props::Boolean,
                                 default: false
+      prop :custom_event_type, type: Playbook::Props::String,
+                               default: ""
 
       def data
         Hash(prop(:data)).merge(
@@ -63,7 +65,8 @@ module Playbook
           start_date_id: variant == "quickpick" ? start_date_id : nil,
           end_date_id: variant == "quickpick" ? end_date_id : nil,
           controls_start_id: variant == "quickpick" && controls_start_id.present? ? controls_start_id : nil,
-          controls_end_id: variant == "quickpick" && controls_end_id.present? ? controls_end_id : nil
+          controls_end_id: variant == "quickpick" && controls_end_id.present? ? controls_end_id : nil,
+          custom_event_type: custom_event_type.presence
         ).compact
       end
 
