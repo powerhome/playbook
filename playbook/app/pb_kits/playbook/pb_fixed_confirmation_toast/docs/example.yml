@@ -2,6 +2,7 @@ examples:
   
   rails:
   - fixed_confirmation_toast_default: Default
+  - fixed_confirmation_toast_nav_margin: Nav Top Margin
   - fixed_confirmation_toast_multi_line: Multi Line
   - fixed_confirmation_toast_close: Click to Close
   - fixed_confirmation_toast_positions: Click to Show Positions
@@ -12,6 +13,7 @@ examples:
   
   react:
   - fixed_confirmation_toast_default: Default
+  - fixed_confirmation_toast_nav_margin: Nav Top Margin
   - fixed_confirmation_toast_multi_line: Multi Line
   - fixed_confirmation_toast_close: Click to Close
   - fixed_confirmation_toast_positions: Click to Show Positions
