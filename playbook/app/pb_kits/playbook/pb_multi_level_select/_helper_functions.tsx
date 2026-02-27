@@ -76,6 +76,27 @@ export const getCheckedItems = (
   return checkedItems;
 };
 
+// Returns checked items that have no checked ancestor (one pill per "root" of selection).
+// Use for pill display when returnAllSelected is false so parent-only selections show a pill.
+export const getTopmostCheckedItems = (
+  data: { [key: string]: any }[],
+  parentChecked = false
+): { [key: string]: any }[] => {
+  const result: { [key: string]: any }[] = [];
+  if (!Array.isArray(data)) return result;
+  data.forEach((item: { [key: string]: any }) => {
+    if (item.checked && !parentChecked) {
+      result.push(item);
+    }
+    if (item.children && item.children.length > 0) {
+      result.push(
+        ...getTopmostCheckedItems(item.children, item.checked || parentChecked)
+      );
+    }
+  });
+  return result;
+};
+
 export const getDefaultCheckedItems = (
   treeData: { [key: string]: any }[]
 ): { [key: string]: any }[] => {

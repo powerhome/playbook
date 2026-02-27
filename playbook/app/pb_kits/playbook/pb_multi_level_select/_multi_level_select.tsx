@@ -22,9 +22,13 @@ import {
   findByFilter,
   getCheckedItems,
   getDefaultCheckedItems,
+  getTopmostCheckedItems,
   recursiveCheckParent,
   getExpandedItems,
 } from "./_helper_functions";
+
+// Survives Strict Mode remount so we don't overwrite selection when parent sends stale []
+let justEmittedSelectionModule = false;
 
 interface MultiLevelSelectComponent extends React.ForwardRefExoticComponent<
   MultiLevelSelectProps & React.RefAttributes<HTMLInputElement>
@@ -44,6 +48,7 @@ type MultiLevelSelectProps = {
   inputName?: string;
   label?: string;
   name?: string;
+  registerClearFunction?: boolean;
   required?: boolean;
   requiredIndicator?: boolean;
   returnAllSelected?: boolean;
@@ -93,6 +98,7 @@ const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>(
       inputName,
       name,
       label,
+      registerClearFunction = true,
       required = false,
       requiredIndicator = false,
       returnAllSelected = false,
@@ -117,6 +123,9 @@ const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>(
     );
 
     const dropdownRef = useRef(null);
+    const prevTreeDataRef = useRef(treeData);
+    const prevSelectedIdsRef = useRef<string[] | undefined>(undefined);
+    const justEmittedSelectionRef = useRef(false);
 
     // State for whether dropdown is open or closed
     const [isDropdownClosed, setIsDropdownClosed] = useState(true);
@@ -215,12 +224,67 @@ const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>(
     };
 
     useEffect(() => {
-      const formattedData = addCheckedAndParentProperty(
-        treeData,
-        variant === "single" ? [selectedIds?.[0]] : selectedIds,
-      );
+      console.log("[pb_multi_level_select] effect ran", {
+        selectedIdsProp: selectedIds,
+        id: props.id ?? props.name,
+      });
 
-      setFormattedData(formattedData);
+      const selectedIdsToApply =
+        variant === "single" ? [selectedIds?.[0]] : selectedIds;
+
+      const idsEqual = (
+        a: string[] | undefined,
+        b: string[] | undefined,
+      ): boolean => {
+        if (a === b) return true;
+        if (!a || !b) return false;
+        if (a.length !== b.length) return false;
+        const setA = new Set(a);
+        return b.every((id: string) => setA.has(id));
+      };
+
+      const treeDataUnchanged = prevTreeDataRef.current === treeData;
+      const selectedIdsUnchanged =
+        prevSelectedIdsRef.current !== undefined &&
+        selectedIdsToApply !== undefined &&
+        idsEqual(prevSelectedIdsRef.current, selectedIdsToApply);
+
+      if (treeDataUnchanged && selectedIdsUnchanged) {
+        if (prevSelectedIdsRef.current !== undefined) {
+          console.log(
+            "[pb_multi_level_select] skipping sync (selectedIds unchanged)",
+          );
+        }
+        return;
+      }
+
+      // Don't overwrite with empty when we just emitted a selection (parent hasn't re-rendered yet; ref + module for Strict Mode remount)
+      const justEmitted =
+        justEmittedSelectionRef.current || justEmittedSelectionModule;
+      if (selectedIdsToApply?.length === 0 && justEmitted) {
+        justEmittedSelectionRef.current = false;
+        // Don't clear module here so a second effect run with [] (same remount) also skips
+        console.log(
+          "[pb_multi_level_select] skipping sync (just emitted selection, ignoring stale empty)",
+        );
+        return;
+      }
+
+      if (selectedIdsToApply !== undefined) {
+        console.log(
+          "[pb_multi_level_select] syncing from props",
+          selectedIdsToApply,
+        );
+      }
+      if (selectedIdsToApply?.length === 0) justEmittedSelectionModule = false;
+      prevTreeDataRef.current = treeData;
+      prevSelectedIdsRef.current = selectedIdsToApply;
+
+      const formatted = addCheckedAndParentProperty(
+        treeData,
+        selectedIdsToApply,
+      );
+      setFormattedData(formatted);
 
       if (variant === "single") {
         // No selectedIds, reset state
@@ -230,7 +294,7 @@ const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>(
           // If there is a selectedId but no current item, set the selectedItem
           if (selectedIds?.length !== 0 && !singleSelectedItem.value) {
             const selectedItem = filterFormattedDataById(
-              formattedData,
+              formatted,
               selectedIds[0],
             );
 
@@ -248,6 +312,13 @@ const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>(
         }
       }
     }, [treeData, selectedIds]);
+
+    // Clear "just emitted" on unmount so we don't block sync when we mount again (e.g. come back to step)
+    useEffect(() => {
+      return () => {
+        justEmittedSelectionModule = false;
+      };
+    }, []);
 
     useEffect(() => {
       if (returnAllSelected) {
@@ -284,7 +355,7 @@ const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>(
     }, [labelForId]);
 
     useEffect(() => {
-      if (id) {
+      if (id && registerClearFunction) {
         // Attach the clear function to the window, scoped by the id
         (window as any)[`clearMultiLevelSelect_${id}`] = () => {
           const resetData = modifyRecursive(formattedData, false);
@@ -298,7 +369,7 @@ const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>(
           delete (window as any)[`clearMultiLevelSelect_${id}`];
         };
       }
-    }, [formattedData, id, onSelect]);
+    }, [formattedData, id, onSelect, registerClearFunction]);
 
     // Iterate over tree, find item and set checked or unchecked
     const modifyValue = (
@@ -366,7 +437,8 @@ const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>(
       // Prevents the dropdown from closing when clicking on the pill
       event.stopPropagation();
       const updatedTree = changeItem(clickedItem, false);
-      // Logic for removing items from returnArray or defaultReturn when pills clicked
+      justEmittedSelectionRef.current = true;
+      justEmittedSelectionModule = true;
       if (returnAllSelected) {
         onSelect(getCheckedItems(updatedTree));
         onChange({ target: { name, value: getCheckedItems(updatedTree) } });
@@ -406,6 +478,8 @@ const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>(
 
       const filtered = filterFormattedDataById(formattedData, clickedItem);
       const updatedTree = changeItem(filtered[0], check);
+      justEmittedSelectionRef.current = true;
+      justEmittedSelectionModule = true;
       if (returnAllSelected) {
         onSelect(getCheckedItems(updatedTree));
         onChange({ target: { name, value: getCheckedItems(updatedTree) } });
@@ -624,12 +698,11 @@ const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>(
                       : null}
 
                     {!returnAllSelected &&
-                    defaultReturn.length !== 0 &&
                     inputDisplay === "pills"
-                      ? defaultReturn.map((item, index) => (
+                      ? getTopmostCheckedItems(formattedData).map((item) => (
                           <FormPill
                               color={pillColor}
-                              key={index}
+                              key={item.id}
                               onClick={(event: any) =>
                               handlePillClose(event, item)
                             }
@@ -644,7 +717,7 @@ const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>(
                       inputDisplay === "pills" && <br />}
 
                     {!returnAllSelected &&
-                      defaultReturn.length !== 0 &&
+                      getTopmostCheckedItems(formattedData).length !== 0 &&
                       inputDisplay === "pills" && <br />}
                   </>
                 )}
