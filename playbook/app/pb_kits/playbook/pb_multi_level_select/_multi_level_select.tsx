@@ -311,6 +311,13 @@ const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>(
       }
     }, [treeData, selectedIds]);
 
+    // Clear "just emitted" on unmount so we don't block sync when we mount again (e.g. come back to step)
+    useEffect(() => {
+      return () => {
+        justEmittedSelectionModule = false;
+      };
+    }, []);
+
     useEffect(() => {
       if (returnAllSelected) {
         setReturnedArray(getCheckedItems(formattedData));
