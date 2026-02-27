@@ -48,6 +48,7 @@ type MultiLevelSelectProps = {
   inputName?: string;
   label?: string;
   name?: string;
+  registerClearFunction?: boolean;
   required?: boolean;
   requiredIndicator?: boolean;
   returnAllSelected?: boolean;
@@ -97,6 +98,7 @@ const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>(
       inputName,
       name,
       label,
+      registerClearFunction = true,
       required = false,
       requiredIndicator = false,
       returnAllSelected = false,
@@ -353,7 +355,7 @@ const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>(
     }, [labelForId]);
 
     useEffect(() => {
-      if (id) {
+      if (id && registerClearFunction) {
         // Attach the clear function to the window, scoped by the id
         (window as any)[`clearMultiLevelSelect_${id}`] = () => {
           const resetData = modifyRecursive(formattedData, false);
@@ -367,7 +369,7 @@ const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>(
           delete (window as any)[`clearMultiLevelSelect_${id}`];
         };
       }
-    }, [formattedData, id, onSelect]);
+    }, [formattedData, id, onSelect, registerClearFunction]);
 
     // Iterate over tree, find item and set checked or unchecked
     const modifyValue = (
