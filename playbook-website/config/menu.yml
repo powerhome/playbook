@@ -49,7 +49,7 @@ kits:
     enhanced_element_used: true
   - name: row_interaction
     parent: advanced_table
-    kit_section: ["Expanded Control", "Expand by Depth", "SubRow Headers", "Pinned Rows", "Selectable Rows", "Selectable Rows (No Subrows)", "Selectable Rows (With Actions)", "Selectable Rows (No Actions Bar)"]
+    kit_section: ["Expanded Control", "Expand by Depth", "SubRow Headers", "Cascade Collapse", "Pinned Rows", "Selectable Rows", "Selectable Rows (No Subrows)", "Selectable Rows (With Actions)", "Selectable Rows (No Actions Bar)"]
     platforms: *1
     status: stable
     icons_used: true
