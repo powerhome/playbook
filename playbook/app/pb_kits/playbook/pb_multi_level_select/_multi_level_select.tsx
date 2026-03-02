@@ -198,9 +198,11 @@ const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>(
           disabled: isDisabled,
         };
         if (newItem.children && newItem.children.length > 0) {
+        const shouldCascade =
+        newItem.checked && !returnAllSelected && variant !== "single";
           const children =
-            item.checked && !returnAllSelected
-              ? modifyRecursive(item.children, true)
+            shouldCascade
+              ? modifyRecursive(cloneDeep(newItem.children), true)
               : item.children;
           newItem.children = addCheckedAndParentProperty(
             children,

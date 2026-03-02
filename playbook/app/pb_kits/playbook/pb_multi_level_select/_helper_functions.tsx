@@ -102,7 +102,7 @@ export const getDefaultCheckedItems = (
         } else {
           const parent = items.find(
             (parentItem: { [key: string]: any }) =>
-              parentItem.id === item.parentId
+              parentItem.id === item.parent_id
           );
           if (!parent || !parent.checked) {
             checkedDefault.push(item);
