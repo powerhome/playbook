@@ -1,1 +1,1 @@
-Use the `navTopMargin` prop to position the toast lower on the page. This is useful for cases where we want to position the toast below a header or nav.
+Use the `navMarginTop` prop to position the toast lower on the page. This is useful for cases where we want to position the toast below a header or nav.
