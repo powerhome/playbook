@@ -29,6 +29,7 @@ RSpec.describe Playbook::PbDropdown::Dropdown do
   it { is_expected.to define_boolean_prop(:clearable).with_default(true) }
   it { is_expected.to define_boolean_prop(:constrain_height).with_default(false) }
   it { is_expected.to define_boolean_prop(:required_indicator).with_default(false) }
+  it { is_expected.to define_string_prop(:custom_event_type).with_default("") }
 
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
@@ -414,6 +415,23 @@ RSpec.describe Playbook::PbDropdown::Dropdown do
       require_relative "../../../../app/pb_kits/playbook/pb_dropdown/dropdown_container"
       container = Playbook::PbDropdown::DropdownContainer.new(constrain_height: false)
       expect(container.classname).not_to include("constrain_height")
+    end
+  end
+
+  describe "custom_event_type" do
+    it "includes custom_event_type in data when present" do
+      dropdown = subject.new(custom_event_type: "form:submitted,pb:dropdown:clearRequest")
+      expect(dropdown.data).to include(custom_event_type: "form:submitted,pb:dropdown:clearRequest")
+    end
+
+    it "omits custom_event_type from data when blank" do
+      dropdown = subject.new(custom_event_type: "")
+      expect(dropdown.data).not_to have_key(:custom_event_type)
+    end
+
+    it "omits custom_event_type from data when not passed" do
+      dropdown = subject.new({})
+      expect(dropdown.data).not_to have_key(:custom_event_type)
     end
   end
 end
