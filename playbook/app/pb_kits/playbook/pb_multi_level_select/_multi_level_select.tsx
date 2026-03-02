@@ -179,6 +179,7 @@ const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>(
       parent_id: string | null = null,
       depth = 0,
       parentDisabled = false,
+      ancestorChecked = false
     ) => {
       if (!Array.isArray(treeData)) {
         return;
@@ -188,30 +189,36 @@ const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>(
         const isDisabled =
           item.disabled || (parentDisabled && !returnAllSelected);
 
+          const explicitlySelected = Boolean(
+            selectedIds && selectedIds?.length && selectedIds.includes(item.id)
+          );
+
+          const checked =
+          !isDisabled &&
+          (explicitlySelected || (ancestorChecked && !returnAllSelected && variant !== "single"))
+
         const newItem = {
           ...item,
-          checked: Boolean(
-            selectedIds && selectedIds.length && selectedIds.includes(item.id),
-          ),
+          checked: checked,
           parent_id,
           depth,
           disabled: isDisabled,
         };
         if (newItem.children && newItem.children.length > 0) {
-        const shouldCascade =
-        newItem.checked && !returnAllSelected && variant !== "single";
-          const children =
-            shouldCascade
-              ? modifyRecursive(cloneDeep(newItem.children), true)
-              : item.children;
-          newItem.children = addCheckedAndParentProperty(
-            children,
-            selectedIds,
-            newItem.id,
-            depth + 1,
-            isDisabled,
-          );
-        }
+        // if this node is checked (by explicit selection or ancestor cascade),
+        // and we're in default, cascade to descendants
+        const cascadeToChildren =
+        checked && !returnAllSelected && variant !== "single"
+
+        newItem.children = addCheckedAndParentProperty(
+          newItem.children,
+          selectedIds,
+          newItem.id,
+          depth + 1,
+          isDisabled,
+          cascadeToChildren
+        )
+      }
         return newItem;
       });
     };
