@@ -13,7 +13,7 @@
 &.error {
   .wrapper {
     .input_wrapper {
-      border-color: $error;
+      border-color: $input_border_error;
     }
   }
   .pb_body_kit_negative {
@@ -31,10 +31,10 @@
     }
 
     .input_wrapper {
-      background-color: $white;
+      background-color: $input_background_default;
       cursor: pointer;
       padding: $space_xs + 1 $space_sm;
-      border: 1px solid #e4e8f0;
+      border: 1px solid $input_border_default;
       border-radius: $border_rad_heavier;
       display: flex;
       align-items: center;
@@ -42,8 +42,8 @@
       @include transition_default;
 
       &:focus-within {
-        border-color: $primary;
-        background-color: $focus_input_light;
+        border-color: $input_border_state;
+        background-color: $input_background_state;
       }
 
       .input_inner_container {
@@ -55,16 +55,26 @@
         border: none;
         font-family: $font_family_base;
         font-size: $font_base;
+        background-color: $input_background_default;
+        &::placeholder {
+          color: $input_text_default;
+        }
         &:focus {
           outline: none;
+          background-color: $input_background_state;
+          color: $input_text_active;
         }
       }
 
       &:has(input:disabled) {
-        background-color: shade($white, 5%);
+        background-color: $input_background_disabled;
         box-shadow: none;
         cursor: default;
         opacity: 0.5;
+        input {
+          background-color: $input_background_disabled;
+          color: $input_text_disabled;
+        }
       }
     }
   }
@@ -96,9 +106,9 @@
         .pb_button_link,
         .pb_button_inline,
         .pb_button_enabled {
-          color: $charcoal;
+          color: $input_text_default;
           &:hover {
-            color: $primary;
+            color: $input_text_active;
           }
         }
       }
@@ -113,16 +123,24 @@
     display: block;
   }
 
+  .required_indicator {
+    color: $text_error;
+  }
+
   &.dark {
     &.error {
       .wrapper {
         .input_wrapper {
-          border-color: $error_dark;
+          border-color: $input_border_error_dark;
         }
       }
       .pb_body_kit_negative {
-        color: $error_dark;
+        color: $text_error_dark;
       }
     }
+  }
+
+  .required_indicator {
+    color: $text_error_dark;
   }
 }

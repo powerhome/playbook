@@ -4,7 +4,7 @@
 @import "../tokens/animation-curves";
 @import "../pb_body/body_mixins";
 
-@mixin pb_textarea($border_color, $background_color, $text_color) {
+@mixin pb_textarea($border_color, $background_color, $text_color, $disabled_border, $disabled_bg, $disabled_text) {
   @include pb_body_dark;
   border: 1px solid $border_color;
   border-radius: $border_rad_heavier;
@@ -33,40 +33,61 @@
     }
   }
   &:disabled, &:disabled:hover, &:disabled:focus, &:disabled:active {
-    background-color: shade($background_color, 5%);
+    border-color: $disabled_border;
+    background-color: $disabled_bg;
+    color: $disabled_text;
     box-shadow: none;
-    opacity: 0.5;
+    pointer-events: none;
+    user-select: none;
   }
   &:-webkit-autofill,
   &:-webkit-autofill:hover,
   &:-internal-autofill-selected {
     color: $text_color;
-    background-color: rgba($focus_input_light, $opacity_5);
+    background-color: $input_background_state;
     transition: background-color 0.3s ease-in-out 0s;
     font-family: $font_family_base;
   }
 }
 
-@mixin pb_textarea_focus($focus_color: $focus_input_light) {
+@mixin pb_textarea_focus($focus_color: $input_background_state) {
   background-color: $focus_color;
 }
 
 // Textarea ======================
 @mixin pb_textarea_light {
-  @include pb_textarea($border_light, $white, $text_lt_default);
+  @include pb_textarea(
+    $input_border_default,
+    $input_background_default,
+    $input_text_active,
+    $input_border_disabled,
+    $input_background_disabled,
+    $input_text_disabled
+  );
 }
 
 @mixin pb_textarea_dark {
-  @include pb_textarea($border_dark, $bg_dark, $text_dk_default);
+  @include pb_textarea(
+    $input_border_default_dark,
+    $input_background_default_dark,
+    $input_text_default_dark,
+    $input_border_disabled_dark,
+    $input_background_disabled_dark,
+    $input_text_disabled_dark
+  );
 }
 
-// Hovers ======================
+// Focus and Hovers ======================
 @mixin pb_textarea_focus_light {
-  @include pb_textarea_focus($focus_input_light);
+  border-color: $input_border_state;
+  background-color: $input_background_state;
+  color: $input_text_active;
 }
 
 @mixin pb_textarea_focus_dark {
-  @include pb_textarea_focus($focus_input_dark);
+  border-color: $input_border_state_dark;
+  background-color: $input_background_state_dark;
+  color: $input_text_state_active;
 }
 
 // Transitions ======================

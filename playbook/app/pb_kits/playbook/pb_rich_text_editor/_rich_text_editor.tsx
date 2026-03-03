@@ -264,6 +264,7 @@ const RichTextEditor = (props: RichTextEditorProps): React.ReactElement => {
         {
           requiredIndicator ? (
             <Caption className="pb_text_input_kit_label"
+                color="lighter"
                 marginBottom="xs"
             >
               {label} <span style={{ color: `${colors.error}` }}>*</span>
@@ -271,6 +272,7 @@ const RichTextEditor = (props: RichTextEditorProps): React.ReactElement => {
           ) : (
             <Caption
                 className="pb_text_input_kit_label"
+                color="lighter"
                 marginBottom="xs"
                 text={label}
             />

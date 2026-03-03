@@ -5,6 +5,8 @@ module Playbook
     class PhoneNumberInput < Playbook::KitBase
       prop :disabled, type: Playbook::Props::Boolean,
                       default: false
+      prop :dark, type: Playbook::Props::Boolean,
+                  default: false
       prop :required, type: Playbook::Props::Boolean,
                       default: false
       prop :required_indicator, type: Playbook::Props::Boolean,

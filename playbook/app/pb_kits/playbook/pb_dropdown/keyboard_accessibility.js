@@ -12,18 +12,34 @@ export class PbDropdownKeyboard {
     this.searchInput = this.dropdownElement.querySelector(
       SEARCH_INPUT_SELECTOR
     );
+    // Store bound handlers for cleanup
+    this.handleKeyDownBound = this.handleKeyDown.bind(this);
+    this.handleSearchInputBound = () => this.openDropdownIfClosed();
     this.init();
   }
 
   init() {
     this.dropdownElement.addEventListener(
       "keydown",
-      this.handleKeyDown.bind(this)
+      this.handleKeyDownBound
     );
     if (this.searchInput) {
-      this.searchInput.addEventListener("input", () =>
-        this.openDropdownIfClosed()
+      this.searchInput.addEventListener("input", this.handleSearchInputBound);
+    }
+  }
+
+  disconnect() {
+    // Remove keydown listener
+    if (this.dropdownElement && this.handleKeyDownBound) {
+      this.dropdownElement.removeEventListener(
+        "keydown",
+        this.handleKeyDownBound
       );
+    }
+    
+    // Remove search input listener
+    if (this.searchInput && this.handleSearchInputBound) {
+      this.searchInput.removeEventListener("input", this.handleSearchInputBound);
     }
   }
 

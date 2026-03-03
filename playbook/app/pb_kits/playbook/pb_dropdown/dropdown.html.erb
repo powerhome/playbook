@@ -2,11 +2,11 @@
     <% if object.label.present? %>
         <label for="<%= object.select_id %>" data-dropdown="pb-dropdown-label">
             <% if object.required_indicator %>
-                <%= pb_rails("caption", props: { margin_bottom: "xs", classname: "pb_dropdown_kit_label", dark: object.dark }) do %>
+                <%= pb_rails("caption", props: { margin_bottom: "xs", classname: "pb_dropdown_kit_label", color: "lighter", dark: object.dark }) do %>
                     <%= object.label %><span style="color: #DA0014;"> *</span>
                 <% end %>
             <% else %>
-                <%= pb_rails("caption", props: { text: object.label, margin_bottom: "xs", classname: "pb_dropdown_kit_label", dark: object.dark }) %>
+                <%= pb_rails("caption", props: { text: object.label, margin_bottom: "xs", classname: "pb_dropdown_kit_label", color: "lighter", dark: object.dark }) %>
             <% end %>
         </label>
     <% end %>

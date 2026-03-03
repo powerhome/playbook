@@ -1,5 +1,6 @@
 @import "../pb_body/body_mixins";
 @import "./textarea_mixin";
+@import "../tokens/colors";
 @import "../tokens/spacing";
 @import "../tokens/titles";
 
@@ -13,20 +14,26 @@
   textarea::placeholder,
   .pb_text_area_kit::placeholder {
     @include pb_body_light;
+    color: $input_text_default;
   }
   textarea,
   .pb_text_area_kit {
     @include pb_textarea_light;
   }
   textarea:focus,
-  .pb_text_area_kit:focus {
-    border-color: $primary;
+  .pb_text_area_kit:focus,
+  textarea:active,
+  .pb_text_area_kit:active {
     @include pb_textarea_focus_light;
     @include transition_default;
   }
   textarea:hover,
   .pb_text_area_kit:hover {
-    background-color: rgba($focus_input_light,$opacity_5);
+    background-color: $input_background_state;
+  }
+  textarea:disabled::placeholder,
+  .pb_text_area_kit:disabled::placeholder {
+    color: $input_text_disabled;
   }
 
   &.resize_both > textarea {
@@ -43,27 +50,63 @@
   }
 
   &.dark {
-    textarea::placeholder {
+    textarea::placeholder,
+    .pb_text_area_kit::placeholder {
       @include pb_body_light_dark;
+      color: $input_text_default_dark;
     }
     textarea,
     .pb_text_area_kit {
-      @include pb_body_dark;
-      background-color: rgba($white, $opacity_1);
-      border-color: rgba($white, 0.15);
+      @include pb_textarea_dark;
     }
-    textarea:focus, .pb_text_area_kit:focus {
-      border-color: $active_dark;
-      background-color: rgba($white, 0.025);
+    textarea:hover,
+    .pb_text_area_kit:hover {
+      background-color: $input_background_state_dark;
+    }
+    textarea:focus,
+    .pb_text_area_kit:focus,
+    textarea:active,
+    .pb_text_area_kit:active {
+      @include pb_textarea_focus_dark;
+      @include transition_default;
+    }
+    textarea:-webkit-autofill,
+    textarea:-webkit-autofill:hover,
+    textarea:-internal-autofill-selected,
+    .pb_text_area_kit:-webkit-autofill,
+    .pb_text_area_kit:-webkit-autofill:hover,
+    .pb_text_area_kit:-internal-autofill-selected {
+      background-color: $input_background_state_dark;
+      color: $input_text_default_dark;
+    }
+    textarea:disabled,
+    .pb_text_area_kit:disabled {
+      border-color: $input_border_disabled_dark;
+      background-color: $input_background_disabled_dark;
+      color: $input_text_disabled_dark;
+    }
+    textarea:disabled::placeholder,
+    .pb_text_area_kit:disabled::placeholder {
+      color: $input_text_disabled_dark;
     }
   }
 
   &.error {
     .pb_body_kit_negative {
       margin-top: $space_xs / 2 !important;
+      color: $text_error;
     }
     textarea {
-      border-color: $error;
+      border-color: $input_border_error;
+    }
+  }
+
+  &.dark.error {
+    .pb_body_kit_negative {
+      color: $text_error_dark;
+    }
+    textarea {
+      border-color: $input_border_error_dark;
     }
   }
 
@@ -73,7 +116,7 @@
         border-color: transparent;
       }
       &:focus {
-        border-color: $primary;
+        border-color: $input_border_state;
       }
     }
   }

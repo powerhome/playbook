@@ -25,7 +25,7 @@
         }
     
         &:focus-within .ProseMirror {
-          border: 1px solid $border_light;
+          border: 1px solid $input_border_default;
           border-top: none;
         }
     
@@ -35,7 +35,7 @@
           }
     
           .ProseMirror {
-            border: 1px solid $border_light;
+            border: 1px solid $input_border_default;
             border-top: none;
           }
         }
@@ -80,7 +80,7 @@
   }
   .toolbar {
     border-radius: $border_rad_heaviest $border_rad_heaviest 0 0;
-    border: 1px solid $border_light;
+    border: 1px solid $input_border_default;
     overflow-x: auto;
     &_block {
       gap: $space_xs;
@@ -101,7 +101,7 @@
 
   .ProseMirror {
     background: $white;
-    border: 1px solid $border_light;
+    border: 1px solid $input_border_default;
     border-radius: $border_rad_heaviest;
     height: 100%;
     padding: 1rem 1.5rem 1.5rem 1.5rem;
@@ -193,7 +193,7 @@
   &:focus-visible,
   &:focus-within {
     outline: unset;
-    box-shadow: 0 0 0 1px $primary;
+    box-shadow: 0 0 0 1px $input_border_state;
     border-radius: $border_rad_heaviest;
     transition: box-shadow 0.3s ease-in-out, border-radius 0.3s ease-in-out;
   }

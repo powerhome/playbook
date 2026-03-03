@@ -3,24 +3,24 @@
 @import "../tokens/typography";
 
 $pb_detail_colors: (
-  light:          $text_lt_light,
-  default:        $text_lt_default,
-  lighter:        $text_lt_lighter,
-  link:           $primary,
-  error:          $error,
-  success:        $text_lt_success_sm,
+  light:          $text_light,
+  default:        $text_default_color,
+  lighter:        $text_lighter,
+  link:           $text_link,
+  error:          $text_error,
+  success:        $text_success,
 );
 
 $pb_dark_detail_colors: (
-  light:          $text_dk_light,
-  default:        $text_dk_default,
-  lighter:        $text_dk_lighter,
-  link:           $active_dark,
-  error:          $error_dark,
-  success:        $text_dk_success_sm,
+  light:          $text_light_dark,
+  default:        $text_default_dark,
+  lighter:        $text_lighter_dark,
+  link:           $text_link_dark,
+  error:          $text_error_dark,
+  success:        $text_success_dark,
 );
 
-@mixin pb_detail($color: $text_lt_light) {
+@mixin pb_detail($color: $text_light) {
   line-height: $lh_tight;
   color: $color;
   font-size: $text_small;

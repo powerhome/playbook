@@ -210,3 +210,174 @@ describe('Pagination Component', () => {
     expect(screen.getByText('19')).toBeInTheDocument()
   })
 }) 
+
+describe('Pagination Mobile View', () => {
+  let originalInnerWidth
+
+  beforeEach(() => {
+    // Store original value
+    originalInnerWidth = window.innerWidth
+    
+    // Mock window.innerWidth for mobile
+    Object.defineProperty(window, 'innerWidth', {
+      writable: true,
+      configurable: true,
+      value: 767
+    })
+  })
+
+  afterEach(() => {
+    // Restore original value
+    Object.defineProperty(window, 'innerWidth', {
+      writable: true,
+      configurable: true,
+      value: originalInnerWidth
+    })
+  })
+
+  test('renders mobile layout on small screens', () => {
+    render(<Pagination {...defaultProps} />)
+    
+    const mobilePagination = document.querySelector('.pb_pagination_mobile')
+    expect(mobilePagination).toBeInTheDocument()
+  })
+
+  test('renders Prev and Next buttons in mobile view', () => {
+    render(<Pagination {...defaultProps} />)
+    
+    expect(screen.getByText('Prev')).toBeInTheDocument()
+    expect(screen.getByText('Next')).toBeInTheDocument()
+  })
+
+  test('displays current page and total in dropdown trigger', () => {
+    render(<Pagination {...defaultProps} 
+        current={3}
+        total={10}
+           />)
+    
+    expect(screen.getByText('3', { exact: false })).toBeInTheDocument()
+    expect(screen.getByText(/of 10/)).toBeInTheDocument()
+  })
+
+  test('opens dropdown when trigger is clicked', () => {
+    render(<Pagination {...defaultProps} />)
+    
+    const dropdownTrigger = document.querySelector('.pagination-dropdown-trigger')
+    expect(dropdownTrigger).toBeInTheDocument()
+    
+    let dropdownMenu = document.querySelector('.pagination-dropdown-menu')
+    expect(dropdownMenu).not.toBeInTheDocument()
+    
+    fireEvent.click(dropdownTrigger)
+    
+    dropdownMenu = document.querySelector('.pagination-dropdown-menu')
+    expect(dropdownMenu).toBeInTheDocument()
+  })
+
+  test('displays all page options in dropdown', () => {
+    render(<Pagination {...defaultProps} 
+        total={5}
+           />)
+    
+    const dropdownTrigger = document.querySelector('.pagination-dropdown-trigger')
+    fireEvent.click(dropdownTrigger)
+    
+    expect(screen.getByText('Page 1')).toBeInTheDocument()
+    expect(screen.getByText('Page 2')).toBeInTheDocument()
+    expect(screen.getByText('Page 3')).toBeInTheDocument()
+    expect(screen.getByText('Page 4')).toBeInTheDocument()
+    expect(screen.getByText('Page 5')).toBeInTheDocument()
+  })
+
+  test('highlights current page in dropdown', () => {
+    render(<Pagination {...defaultProps} 
+        current={3}
+        total={5}
+           />)
+    
+    const dropdownTrigger = document.querySelector('.pagination-dropdown-trigger')
+    fireEvent.click(dropdownTrigger)
+    
+    const activePage = screen.getByText('Page 3').parentElement
+    expect(activePage).toHaveClass('active')
+  })
+
+  test('changes page when dropdown option is clicked', () => {
+    const mockOnChange = jest.fn()
+    render(<Pagination {...defaultProps} 
+        onChange={mockOnChange}
+        total={5}
+           />)
+    
+    const dropdownTrigger = document.querySelector('.pagination-dropdown-trigger')
+    fireEvent.click(dropdownTrigger)
+    
+    const page3Option = screen.getByText('Page 3')
+    fireEvent.click(page3Option)
+    
+    expect(mockOnChange).toHaveBeenCalledWith(3)
+  })
+
+  test('closes dropdown after selecting a page', () => {
+    render(<Pagination {...defaultProps} 
+        total={5}
+           />)
+    
+    const dropdownTrigger = document.querySelector('.pagination-dropdown-trigger')
+    fireEvent.click(dropdownTrigger)
+    
+    let dropdownMenu = document.querySelector('.pagination-dropdown-menu')
+    expect(dropdownMenu).toBeInTheDocument()
+    
+    const page3Option = screen.getByText('Page 3')
+    fireEvent.click(page3Option)
+    
+    dropdownMenu = document.querySelector('.pagination-dropdown-menu')
+    expect(dropdownMenu).not.toBeInTheDocument()
+  })
+
+  test('Prev button navigates to previous page', () => {
+    const mockOnChange = jest.fn()
+    render(<Pagination {...defaultProps} 
+        current={3}
+        onChange={mockOnChange}
+           />)
+    
+    const prevButton = document.querySelector('.pagination-left')
+    fireEvent.click(prevButton)
+    
+    expect(mockOnChange).toHaveBeenCalledWith(2)
+  })
+
+  test('Next button navigates to next page', () => {
+    const mockOnChange = jest.fn()
+    render(<Pagination {...defaultProps} 
+        current={3}
+        onChange={mockOnChange}
+           />)
+    
+    const nextButton = document.querySelector('.pagination-right')
+    fireEvent.click(nextButton)
+    
+    expect(mockOnChange).toHaveBeenCalledWith(4)
+  })
+
+  test('disables Prev button on first page', () => {
+    render(<Pagination {...defaultProps} 
+        current={1}
+           />)
+    
+    const prevButton = document.querySelector('.pagination-left')
+    expect(prevButton).toHaveClass('disabled')
+  })
+
+  test('disables Next button on last page', () => {
+    render(<Pagination {...defaultProps} 
+        current={10}
+           />)
+    
+    const nextButton = document.querySelector('.pagination-right')
+    expect(nextButton).toHaveClass('disabled')
+  })
+
+})

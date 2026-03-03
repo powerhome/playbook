@@ -20,7 +20,7 @@ test('typeahead classname + label renders as expected', () => {
   )
 
   const kit = screen.getByTestId('typeahead-test')
-  const label = kit.querySelector(".pb_caption_kit_md.pb_text_input_kit_label")
+  const label = kit.querySelector(".pb_caption_kit_md_lighter.pb_text_input_kit_label")
   expect(kit).toHaveClass("pb_typeahead_kit")
   expect(label).toHaveTextContent("Colors")
 })

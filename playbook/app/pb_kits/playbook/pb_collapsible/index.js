@@ -11,9 +11,11 @@ export default class PbCollapsible extends PbEnhancedElement {
   }
 
   connect() {
-    this.element.addEventListener('click', () => {
+    this.clickHandler = () => {
       this.toggleElement(this.target)
-    })
+    }
+    this.element.addEventListener('click', this.clickHandler)
+    
      // Check the initial state of the collapsible content and set the arrow accordingly
      if (this.target.classList.contains('is-visible')) {
       this.displayUpArrow()
@@ -21,9 +23,19 @@ export default class PbCollapsible extends PbEnhancedElement {
       this.displayDownArrow()
     }
     // Listen for a custom event to toggle the collapsible
-    document.addEventListener(`${this.target.id}`, () => {
+    this.customEventHandler = () => {
       this.toggleElement(this.target)
-    })
+    }
+    document.addEventListener(`${this.target.id}`, this.customEventHandler)
+  }
+
+  disconnect() {
+    if (this.clickHandler) {
+      this.element.removeEventListener('click', this.clickHandler)
+    }
+    if (this.customEventHandler && this.target) {
+      document.removeEventListener(`${this.target.id}`, this.customEventHandler)
+    }
   }
 
   get target() {

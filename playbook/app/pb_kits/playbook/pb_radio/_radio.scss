@@ -23,7 +23,7 @@
     height: 22px;
     box-sizing: border-box;
     border-radius: 1000px;
-    border: 2px solid $border_light;
+    border: 2px solid $input_border_default;
     margin-right: $space_xs;
     transition: background $transition_default ease,
       box-shadow $transition_default ease, border-color $transition_default ease;
@@ -32,7 +32,7 @@
   @media (hover: hover) {
     &:hover .pb_radio_button {
       background-color: $bg_light;
-      border-color: $border_light;
+      border-color: $input_border_default;
     }
   }
 
@@ -42,30 +42,30 @@
     left: $offscreen;
     &:focus-visible {
       & ~ .pb_radio_button {
-        box-shadow: 0px 0px 0px 2px $white, 0px 0px 0px 4px $primary;
+        box-shadow: 0px 0px 0px 2px $white, 0px 0px 0px 4px $input_border_state;
       }
     }
     &:checked {
       & ~ .pb_radio_button {
-        border: 6px solid $primary;
+        border: 6px solid $input_border_state;
       }
     }
 
     &:disabled + .pb_radio_button {
       cursor: not-allowed;
       background-color: mix($charcoal, $white, 5%);
-      border-color: $border_light;
+      border-color: $input_border_disabled;
 
       & ~ .pb_body_kit {
         cursor: not-allowed;
-        color: $text_lt_light;
+        color: $text_light;
       }
     }
 
     &:disabled:checked + .pb_radio_button {
       cursor: not-allowed;
       background-color: $white;
-      border: 6px solid $neutral;
+      border: 6px solid $input_border_disabled;
     }
   }
 }
@@ -93,35 +93,35 @@
   }
 
   .pb_radio_button {
-    border-color: $border_dark;
+    border-color: $input_border_default_dark;
   }
   input {
     &:focus-visible {
       & ~ .pb_radio_button {
-        box-shadow: 0px 0px 0px 2px $bg_dark_card, 0px 0px 0px 4px $primary;
+        box-shadow: 0px 0px 0px 2px $bg_dark_card, 0px 0px 0px 4px $input_border_state_dark;
       }
     }
     &:checked {
       & ~ .pb_radio_button {
-        border: 6px solid $active_dark;
+        border: 6px solid $input_border_state_dark;
       }
     }
 
     &:disabled + .pb_radio_button {
       cursor: not-allowed;
       background-color: mix($charcoal, $white, 80%);
-      border: 2px solid $border_dark;
+      border: 2px solid $input_border_disabled_dark;
 
       & ~ .pb_body_kit {
         cursor: not-allowed;
-        color: $text_dk_light;
+        color: $input_text_disabled_dark;
       }
     }
 
     &:disabled:checked {
       & ~ .pb_radio_button {
         background-color: mix($charcoal, $white, 80%);
-        border: 6px solid $border_dark;
+        border: 6px solid $input_border_disabled_dark;
       }
     }
   }
@@ -130,7 +130,7 @@
     &:hover {
       .pb_radio_button {
         background-color: rgba($white, 0.1);
-        border-color: $border_dark;
+        border-color: $input_border_disabled_dark;
       }
     }
   }
@@ -140,10 +140,10 @@
 .pb_radio_kit.dark.error.vertical,
 .pb_radio_kit_vertical.dark.error {
   > .pb_radio_button {
-    border-color: $error_dark;
+    border-color: $input_border_error_dark;
   }
   > .pb_body_kit_negative {
-    color: $error_dark;
+    color: $text_error_dark;
   }
 }
 
@@ -151,6 +151,6 @@
 .pb_radio_kit.error.vertical,
 .pb_radio_kit_vertical.error {
   > .pb_radio_button {
-    border-color: $error;
+    border-color: $text_error;
   }
 }

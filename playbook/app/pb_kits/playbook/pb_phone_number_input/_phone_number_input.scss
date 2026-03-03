@@ -36,7 +36,7 @@ $flag-min-resolution: 192dpi;
     font-style: normal;
     text-rendering: optimizeLegibility;
     -moz-font-feature-settings: "liga" on;
-    color: $charcoal;
+    color: $text_default_color;
   }
 
   .iti__country-list {
@@ -62,7 +62,7 @@ $flag-min-resolution: 192dpi;
 
   .dropdown_open:not(.error) {
     .text_input {
-      border-color: $primary !important;
+      border-color: $status_border_primary !important;
     }
 
     .iti__selected-country:focus-visible {
@@ -76,7 +76,7 @@ $flag-min-resolution: 192dpi;
   }
 
   .iti__divider {
-    border-bottom: 1px solid $border_light !important;
+    border-bottom: 1px solid $input_border_default !important;
   }
 
   .iti__selected-country-primary {
@@ -99,12 +99,12 @@ $flag-min-resolution: 192dpi;
     border-radius: $space_xxs;
 
     &[aria-expanded="true"] {
-      color: $primary_action;
+      color: $text_link;
     }
 
     &:focus-visible {
       outline-style: solid;
-      outline-color: $primary;
+      outline-color: $status_border_primary;
     }
   }
 
@@ -112,12 +112,12 @@ $flag-min-resolution: 192dpi;
     background-color: $hover_light;
 
     .iti__country-name, .iti__dial-code {
-      color: $primary;
+      color: $status_border_primary;
     }
   }
 
   .iti__country-container:hover + .text_input {
-    background-color: $focus_input_light;
+    background-color: $input_background_state;
   }
 
   .iti__flag {
@@ -168,7 +168,7 @@ $flag-min-resolution: 192dpi;
   .iti__arrow.iti__arrow--up::before {
     transform: rotate(-($transform-rotate-deg/3));
     top: $space_xs + 4px;
-    color: $primary_action;
+    color: $text_link;
   }
 
   .iti__country-list .iti__country {
@@ -224,7 +224,7 @@ $flag-min-resolution: 192dpi;
 
     .iti__selected-country {
       background-color: rgba($white, 0);
-      color: $white;
+      color: $text_default_dark;
     }
 
     .iti__dropdown-content {
@@ -275,7 +275,7 @@ $flag-min-resolution: 192dpi;
     }
 
     .iti__selected-dial-code {
-      color: $white;
+      color: $text_default_dark;
     }
   }
 

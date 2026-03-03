@@ -17,3 +17,4 @@ export { default as MultiLevelSelectDisabledOptionsDefault } from "./_multi_leve
 export { default as MultiLevelSelectLabel } from "./_multi_level_select_label.jsx"
 export { default as MultiLevelSelectSingleDisabled } from "./_multi_level_select_single_disabled.jsx"
 export { default as MultiLevelSelectRequiredIndicator } from "./_multi_level_select_required_indicator.jsx"
+export { default as MultiLevelSelectReactResetKey } from "./_multi_level_select_react_reset_key.jsx"

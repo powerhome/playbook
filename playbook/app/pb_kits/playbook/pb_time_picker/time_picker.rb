@@ -3,6 +3,8 @@
 module Playbook
   module PbTimePicker
     class TimePicker < ::Playbook::KitBase
+      prop :dark, type: Playbook::Props::Boolean,
+                  default: false
       prop :default_time, type: Playbook::Props::String
       prop :disabled, type: Playbook::Props::Boolean,
                       default: false
@@ -28,7 +30,7 @@ module Playbook
       prop :value, type: Playbook::Props::String
 
       def classname
-        generate_classname("pb_time_picker") + error_class + disabled_class
+        generate_classname("pb_time_picker") + error_class + disabled_class + dark_class
       end
 
       def error_class
@@ -37,6 +39,10 @@ module Playbook
 
       def disabled_class
         disabled ? " disabled" : ""
+      end
+
+      def dark_class
+        dark ? " dark" : ""
       end
 
       # Flatten nested data/aria hashes for React compatibility
@@ -59,6 +65,7 @@ module Playbook
         props = {
           className: classname,
           data: data,
+          dark: dark,
           defaultTime: default_time,
           disabled: disabled,
           error: error,

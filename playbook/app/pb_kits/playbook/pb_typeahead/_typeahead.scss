@@ -18,18 +18,32 @@
     .pb_list_kit {
       cursor: pointer;
     }
+
     .pb_typeahead_loading_indicator {
       position: absolute;
       width: min-content;
       bottom: 0.6em;
       right: 1em;
       opacity: 0;
-      color: $text_lt_light;
+      color: $text_default_color;
       transition: opacity .15s ease-in-out;
     }
   }
   .pb_text_input_kit {
     .text_input_wrapper {
+      .clear_indicator,
+      .typeahead-kit-select__indicator {
+        color: $input_text_default;
+        &:hover {
+          color: $input_text_active;
+        }
+      }
+      &:focus-within {
+        .clear_indicator,
+        .typeahead-kit-select__indicator {
+          color: $input_text_active;
+        }
+      }
       .text_input {
         max-height: none;
       }
@@ -43,7 +57,7 @@
 
     @media (hover:hover) {
       &:hover {
-        background-color: $bg_light;
+        background-color: $input_background_state;
       }
     }
   }
@@ -54,7 +68,7 @@
     position: absolute;
     left: 0;
     right: 0;
-    background: white;
+    background: $input_background_default;
     box-shadow: $shadow_deep;
     z-index: 100;
     border-radius: $border_rad_heavier;
@@ -74,11 +88,11 @@
     }
     & > [data-pb-typeahead-kit-results] > li {
       &:focus-within {
-        background-color: $active_light;
+        background-color: $input_background_state;
       }
       > button {
         background: none;
-        color: $text_lt_default;
+        color: $text_default_color;
         border: none;
         padding: 0;
         font: inherit;
@@ -118,22 +132,22 @@
   .text_input {
     .typeahead-kit-select {
       &__single-value{
-        color: $text_lt_default;
+        color: $input_text_active;
       }
     }
     &.typeahead-kit-select {
       &__single-value{
-        color: $text_lt_default;
+        color: $input_text_active;
       }
       &__control {
         &--is-disabled {
-          background-color: shade($white, 5%);
+          background-color: $input_background_disabled;
         }
         &--is-focused {
           @include pb_textarea_focus;
           @include transition_default;
-          border-color: $primary;
-          background-color: rgba($focus_input_light,$opacity_5);
+          border-color: $input_border_state;
+          background-color: $input_background_state;
           box-shadow: none;
           .typeahead-plus-icon {
             display: none;
@@ -159,7 +173,7 @@
     }
   }
   .typeahead-plus-icon {
-    color: $text_lt_lighter;
+    color: $input_text_default;
   }
   .pb_badge_kit_primary {
     margin-bottom: 2px;
@@ -172,7 +186,7 @@
 
   // Add focus indicator for multi-value pills
   .pb_form_pill_or_badge_focused {
-    outline: $primary solid 2px;
+    outline: $input_border_state solid 2px;
     outline-offset: -1px;
   }
 
@@ -189,10 +203,7 @@
 
   &.dark {
     .pb_typeahead_wrapper .pb_typeahead_loading_indicator {
-      color: $text_dk_light;
-    }
-    .pb_text_input_kit_label {
-      color: $text_dk_light;
+      color: $input_text_default_dark;
     }
     .pb_text_input_kit.dark .text_input_wrapper .text_input {
       display: inherit !important;
@@ -218,7 +229,7 @@
       }
     }
     .text_input_wrapper{
-      color: text_dk_default;
+      color: $text_dk_default;
     }
     .typeahead-kit-select__option:hover {
       background-color: $active_dark;
@@ -254,24 +265,24 @@
 
     .text_input {
       .typeahead-kit-select__input-container{
-        color: $text_dk_default
+        color: $input_text_state_active;
       }
       .typeahead-kit-select {
         &__single-value{
-          color: $text_dk_default;
+          color: $input_text_state_active;
         }
       }
       &.typeahead-kit-select {
         &__single-value{
-          color: $text_dk_default;
+          color: $input_text_state_active;
         }
         &__control {
         
           &--is-focused {
             @include pb_textarea_focus;
             @include transition_default;
-            border-color: $active_dark;
-            background-color: rgba($focus_input_dark,$opacity_5);
+            border-color: $input_border_state_dark;
+            background-color: $input_background_state_dark;
             box-shadow: none;
             .typeahead-plus-icon {
               display: none;
@@ -294,10 +305,42 @@
 
       &:hover {
         .text_input {
-          background-color: $hover_dark;
+          background-color: $input_background_state_dark;
         }
       }
     }
 
+    .pb_text_input_kit {
+      .text_input_wrapper {
+        .clear_indicator,
+        .typeahead-kit-select__indicator {
+          color: $input_text_default_dark;
+          &:hover {
+            color: $input_text_state_active;
+          }
+        }
+        &:focus-within {
+          .clear_indicator,
+          .typeahead-kit-select__indicator {
+            color: $input_text_state_active;
+          }
+        }
+      }
+    }
+    &:has(.typeahead-kit-select__control--is-disabled) {
+      .text_input_wrapper {
+        .text_input {
+          background-color: $input_background_disabled_dark;
+          border-color: $input_border_disabled_dark;
+          .placeholder {
+            color: $input_text_disabled_dark;
+          }
+        }
+        .clear_indicator,
+        .typeahead-kit-select__indicator {
+          color: $input_text_disabled_dark;
+        }
+      }
+    }
   }
 }
