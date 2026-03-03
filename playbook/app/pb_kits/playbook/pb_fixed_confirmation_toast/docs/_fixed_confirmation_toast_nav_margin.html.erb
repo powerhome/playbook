@@ -1,6 +1,46 @@
+<%= pb_rails("button", props: { text: "Top Nav Toast", variant: "secondary", data: { toast: "#top-nav" } }) %>
+
 <%= pb_rails("fixed_confirmation_toast", props: {
-  text: "Error Message",
-  status: "error",
+  classname: "top-nav-margin",
   closeable: true,
+  id: "top-nav",
+  multi_line: true,
+  text: "Top nav Margin.",
+  status: "tip",
+  vertical: "top",
+  horizontal: "center",
   nav_margin_top: true
-})%>
+}) %>
+
+
+
+<script type="text/javascript">
+  const navtoast = document.querySelectorAll(".top-nav-margin")
+  const navbutton = document.querySelectorAll("button[data-toast]")
+
+  const hideNavToast = () => {
+    navtoast.forEach((toast) => {
+      toast.style.display = "none"
+    })
+  }
+
+  // Hide toasts immediately
+  hideNavToast()
+
+  // Handle various page load/restore events
+  window.addEventListener('pageshow', hideNavToast)
+  document.addEventListener('DOMContentLoaded', hideNavToast)
+  document.addEventListener('turbolinks:load', hideNavToast)
+  document.addEventListener('turbo:load', hideNavToast)
+
+  navbutton.forEach((button) => {
+    button.onclick = () => {
+      hideNavToast()
+      let toast = document.querySelector(button.getAttribute("data-toast"))
+
+      if (toast) {
+        toast.style.display = "flex"
+      }
+    }
+  })
+</script>
