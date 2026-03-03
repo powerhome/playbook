@@ -1,26 +1,12 @@
 import React, { useEffect, useState, useRef } from 'react'
 import classnames from 'classnames'
-// The user must import and pass TrixEditor as a prop if using the default editor
 
-import inlineFocus from './inlineFocus'
-import useFocus from './useFocus'
 import Caption from '../pb_caption/_caption'
 import colors from '../tokens/exports/_colors.module.scss'
 import { globalProps, GlobalProps } from '../utilities/globalProps'
 import { buildAriaProps, buildDataProps, noop, buildHtmlProps } from '../utilities/props'
-import './_dedupe_trix_toolbar'
-
-import EditorToolbar from './TipTap/Toolbar'
-
-type Editor = {
-  attributeIsActive?: ([any]: string) => boolean,
-  element?: HTMLElement,
-  getSelectedDocument?: () => any,
-  getSelectedRange?: () => Array<number>,
-  insertHTML?: ([any]: string) => void,
-  loadHTML?: ([any]: string) => void,
-  setSelectedRange?: (range: Array<number>) => void,
-}
+import TipTapEditor from './_tiptap_editor'
+import TrixTextEditor from './_trix_editor'
 
 type RichTextEditorProps = {
   aria?: { [key: string]: string },
@@ -85,51 +71,13 @@ const RichTextEditor = (props: RichTextEditorProps): React.ReactElement => {
 
   const ariaProps = buildAriaProps(aria),
     dataProps = buildDataProps(data),
-    [editor, setEditor] = useState<Editor>(),
     [showToolbarOnFocus, setShowToolbarOnFocus] = useState(false),
     containerRef = useRef<HTMLDivElement>(null)
 
   const htmlProps = buildHtmlProps(htmlOptions)
 
   const fieldId = id ? (id as string) : null
-  const labelElementId = fieldId ? `${fieldId}-label` : null
-
-
-  trixInstance && (trixInstance.config.textAttributes.inlineCode = {
-    tagName: 'code',
-    inheritable: true,
-  }) 
-  const handleOnEditorReady = (editorInstance: Editor) => {
-    setEditor(editorInstance)
-
-    setTimeout(() => {
-      const oldId = editorInstance.element?.getAttribute("input")
-      if (!oldId) return
-
-      const hiddenInput = document.getElementById(oldId) as HTMLElement | null
-      if (!hiddenInput) return
-
-      const hiddenInputId = (inputOptions.id as string) || oldId
-
-      if (hiddenInputId !== oldId) {
-        hiddenInput.id = hiddenInputId
-        editorInstance.element?.setAttribute("input", hiddenInputId)
-      }
-
-      if (inputOptions.name) {
-        hiddenInput.setAttribute("name", inputOptions.name as string)
-      }
-
-      const editorDomId = (id as string) || `${hiddenInputId}_trix`
-      const trixLabelId = ((id as string) || hiddenInputId) + "-label"
-
-      if (label) {
-        editorInstance.element?.setAttribute("aria-labelledby", trixLabelId)
-      }
-      editorInstance.element!.id = editorDomId
-    })
-  }
-
+  const labelElementId = fieldId ? `${fieldId}-label` : undefined
   useEffect(() => {
     if (!advancedEditor || !fieldId || !labelElementId) return
 
@@ -140,34 +88,6 @@ const RichTextEditor = (props: RichTextEditorProps): React.ReactElement => {
     dom.setAttribute("role", "textbox")
     dom.setAttribute("aria-multiline", "true")
   }, [advancedEditor, fieldId, labelElementId])
-
-  // DOM manipulation must wait for editor to be ready
-  if (editor && editor.element) {
-    const toolbarElement = editor.element.parentElement.querySelector('trix-toolbar') as HTMLElement,
-      blockCodeButton = toolbarElement.querySelector('[data-trix-attribute=code]') as HTMLElement
-
-    // replace default trix "block code" button with "inline code" button
-    let inlineCodeButton = toolbarElement.querySelector('[data-trix-attribute=inlineCode]') as HTMLElement
-    if (!inlineCodeButton) {
-      inlineCodeButton = blockCodeButton.cloneNode(true) as HTMLElement
-      blockCodeButton.hidden = true
-      // set button attributes
-      inlineCodeButton.dataset.trixAttribute = 'inlineCode'
-      blockCodeButton.insertAdjacentElement('afterend', inlineCodeButton)
-    }
-
-    if (toolbarBottom) editor.element.after(toolbarElement)
-
-    focus
-      ? (document.addEventListener('trix-focus', useFocus),
-        document.addEventListener('trix-blur', useFocus),
-        // eslint-disable-next-line react-hooks/rules-of-hooks
-        useFocus())
-      : null
-
-    document.addEventListener('trix-focus', inlineFocus)
-    document.addEventListener('trix-blur', inlineFocus)
-  }
 
   //===========focus prop with advanced editor=================
   const isClickInPopover = (event: Event): boolean => {
@@ -204,26 +124,6 @@ const RichTextEditor = (props: RichTextEditorProps): React.ReactElement => {
   }, [advancedEditor, focus])
 
   //============= end focus prop with advanced editor=================
-
-  useEffect(() => {
-    if (!editor || !template) return
-    editor.loadHTML('')
-    editor.setSelectedRange([0, 0])
-    editor.insertHTML(template)
-  }, [editor, template])
-
-  useEffect(() => {
-    if (!editor?.element) return
-    editor.element.addEventListener('click', ({ target }: Event) => {
-      const trixEditorContainer = (target as Element).closest('.pb_rich_text_editor_kit')
-      if (!trixEditorContainer) return
-
-      const anchorElement = (target as Element).closest('a')
-      if (!anchorElement) return
-
-      if (anchorElement.hasAttribute('href')) window.open(anchorElement.href)
-    })
-  }, [editor])
 
   // Generate CSS classes
   const css = classnames(
@@ -281,43 +181,34 @@ const RichTextEditor = (props: RichTextEditorProps): React.ReactElement => {
 
       </label>
     )}
-      {
-        advancedEditor ? (
-          <div
-              className={classnames(
-              "pb_rich_text_editor_advanced_container",
-              { [`input_height_${inputHeight}`]: !!inputHeight,[`input_min_height_${inputMinHeight}`]: !!inputMinHeight ,["toolbar-active"]: shouldShowToolbar }
-            )}
-          >
-            {shouldShowToolbar && (
-              <EditorToolbar editor={advancedEditor}
-                  extensions={extensions}
-                  simple={simple}
-                  sticky={sticky}
-              />
-            )}
-          { children }
-          </div>
-        ) : (
-          TrixEditor ? (
-            React.createElement(TrixEditor, {
-                className: "",
-                fileParamName: name,
-                mergeTags: [],
-                onChange: onChange,
-                onEditorReady: handleOnEditorReady,
-                placeholder: placeholder,
-                value: value,
-            })
-          ) : (
-            <div style={{ color: 'red', padding: '1em', border: '1px solid #f00', background: '#fff0f0' }}>
-              <strong>Trix Editor is not available.</strong><br />
-              Please import <code>TrixEditor</code> from <code>react-trix</code> and pass it as a prop to <code>RichTextEditor</code>.<br />
-              <pre>{`import { TrixEditor } from 'react-trix';\n<RichTextEditor TrixEditor={TrixEditor} ... />`}</pre>
-            </div>
-          )
-        )
-      }
+      {advancedEditor ? (
+        <TipTapEditor
+            editor={advancedEditor}
+            extensions={extensions}
+            inputHeight={inputHeight}
+            inputMinHeight={inputMinHeight}
+            shouldShowToolbar={shouldShowToolbar}
+            simple={simple}
+            sticky={sticky}
+        >
+          {children}
+        </TipTapEditor>
+      ) : (
+        <TrixTextEditor
+            TrixEditor={TrixEditor}
+            focus={focus}
+            id={id}
+            inputOptions={inputOptions}
+            label={label}
+            name={name}
+            onChange={onChange}
+            placeholder={placeholder}
+            template={template}
+            toolbarBottom={toolbarBottom}
+            trixInstance={trixInstance}
+            value={value}
+        />
+      )}
     </div>
   )
 }
