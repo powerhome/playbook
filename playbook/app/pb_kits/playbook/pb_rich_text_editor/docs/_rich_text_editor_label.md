@@ -1,1 +1,0 @@
-The optional `label` prop adds a visible label to the editor. Passing in the `id` prop associates the `label` with the editor for accessibility, enabling screen reader support and label-based focus behavior.
