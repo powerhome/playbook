@@ -5,7 +5,7 @@ import Button from '../../pb_button/_button'
 import Dialog from '../../pb_dialog/_dialog'
 import Flex from '../../pb_flex/_flex'
 import Caption from '../../pb_caption/_caption'
-import Textarea from "../../pb_textarea";
+import Textarea from "../../pb_textarea/_textarea";
 import Typeahead from '../../pb_typeahead/_typeahead'
 
 const useDialog = (visible = false) => {
@@ -77,7 +77,7 @@ const DialogFullHeightPlacement = () => {
             </Dialog.Header>
             <Dialog.Body>
               <Textarea
-                  id="default-example-2"
+                  id={`default-example-2-${index}`}
                   label="Description"
                   rows={4}
               />
