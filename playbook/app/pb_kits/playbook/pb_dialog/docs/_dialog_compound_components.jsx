@@ -30,7 +30,6 @@ const DialogCompound = () => {
               label="Description"
               rows={4}
           />
-          <Caption marginBottom="xs">{'Description'}</Caption>
           <br />
           <Caption>
             {
