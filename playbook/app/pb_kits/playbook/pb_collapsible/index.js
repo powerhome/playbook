@@ -1,4 +1,5 @@
 import PbEnhancedElement from '../pb_enhanced_element'
+import { getElementHeight, setArrowVisibility, toggleVisibility } from '../utilities/domHelpers'
 
 const MAIN_SELECTOR = '[data-collapsible-main]'
 const CONTENT_SELECTOR = '[data-collapsible-content]'
@@ -43,15 +44,7 @@ export default class PbCollapsible extends PbEnhancedElement {
   }
 
   showElement(elem) {
-  // Get the natural height of the element
-    const getHeight = () => {
-      elem.style.display = 'block'
-      const height = elem.scrollHeight + 'px' // Get it's height
-      elem.style.display = '' //  Hide it again
-      return height
-    }
-
-    const height = getHeight()
+    const height = getElementHeight(elem)
     elem.classList.add('is-visible')
     elem.style.height = height // Update the max-height
     elem.style.overflow = "hidden"
@@ -82,26 +75,22 @@ export default class PbCollapsible extends PbEnhancedElement {
   }
 
   toggleElement(elem) {
-    if (elem.classList.contains('is-visible')) {
-      this.hideElement(elem)
-      this.displayDownArrow()
-      return
-    }
-    // Otherwise, show it
-    this.showElement(elem)
-    this.displayUpArrow()
+    const isExpanded = toggleVisibility({
+      isVisible: elem.classList.contains('is-visible'),
+      onHide: () => this.hideElement(elem),
+      onShow: () => this.showElement(elem),
+    })
+
+    isExpanded ? this.displayUpArrow() : this.displayDownArrow()
   }
 
   toggleArrows(showDownArrow) {
-    const downArrow = this.element.querySelector(DOWN_ARROW_SELECTOR);
-    const upArrow = this.element.querySelector(UP_ARROW_SELECTOR);
-  
-    if (downArrow) {
-      downArrow.style.display = showDownArrow ? 'inline-block' : 'none';
-    }
-    if (upArrow) {
-      upArrow.style.display = showDownArrow ? 'none' : 'inline-block';
-    }
+    setArrowVisibility({
+      rootElement: this.element,
+      downSelector: DOWN_ARROW_SELECTOR,
+      upSelector: UP_ARROW_SELECTOR,
+      showDownArrow,
+    })
   }
   
   displayDownArrow() {
