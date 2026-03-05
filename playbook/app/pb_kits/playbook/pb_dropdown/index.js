@@ -68,6 +68,7 @@ export default class PbDropdown extends PbEnhancedElement {
 
     this.keyboardHandler = new PbDropdownKeyboard(this);
     this.isMultiSelect = this.element.dataset.pbDropdownMultiSelect === "true";
+    this.closeOnClick = this.element.dataset.pbDropdownCloseOnClick || "any";
     this.formPillProps = this.element.dataset.formPillProps
       ? JSON.parse(this.element.dataset.formPillProps)
       : {};
@@ -171,6 +172,12 @@ export default class PbDropdown extends PbEnhancedElement {
         if (trigger) {
           trigger.focus();
         }
+      }
+      if (
+        this.closeOnClick === "outside" &&
+        this.target?.contains(e.target)
+      ) {
+        return;
       }
       this.toggleElement(this.target);
     }
@@ -335,7 +342,13 @@ export default class PbDropdown extends PbEnhancedElement {
 
   handleDocumentClick(event) {
     if (event.target.closest(SEARCH_BAR_SELECTOR)) return;
-    if (this.isClickOutside(event) && this.target.classList.contains("open")) {
+    const shouldCloseOnOutsideClick =
+      this.closeOnClick === "outside" || this.closeOnClick === "any";
+    if (
+      shouldCloseOnOutsideClick &&
+      this.isClickOutside(event) &&
+      this.target.classList.contains("open")
+    ) {
       this.hideElement(this.target);
       this.updateArrowDisplay(false);
     }
@@ -346,11 +359,12 @@ export default class PbDropdown extends PbEnhancedElement {
     if (label && this.element.contains(label)) return false;
     const customTrigger = this.customTrigger;
     if (customTrigger) {
-      return !customTrigger.contains(event.target);
+      const clickInTrigger = customTrigger.contains(event.target);
+      const clickInContainer = this.target?.contains(event.target);
+      return !clickInTrigger && !clickInContainer;
     } else {
       const triggerElement = this.trigger;
-      const containerElement =
-        this.element.parentNode.querySelector(CONTAINER_SELECTOR);
+      const containerElement = this.element.querySelector(CONTAINER_SELECTOR);
 
       const isOutsideTrigger = triggerElement
         ? !triggerElement.contains(event.target)
@@ -489,11 +503,15 @@ export default class PbDropdown extends PbEnhancedElement {
     }
 
     const customTrigger = this.customTrigger;
-    if (customTrigger) {
-      if (this.target.classList.contains("open")) {
-        this.hideElement(this.target);
-        this.updateArrowDisplay(false);
-      }
+    const shouldCloseOnOptionSelect =
+      this.closeOnClick === "any" || this.closeOnClick === "inside";
+    if (
+      customTrigger &&
+      shouldCloseOnOptionSelect &&
+      this.target.classList.contains("open")
+    ) {
+      this.hideElement(this.target);
+      this.updateArrowDisplay(false);
     }
 
     const options = this.element.querySelectorAll(OPTION_SELECTOR);

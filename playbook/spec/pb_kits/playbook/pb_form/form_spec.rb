@@ -25,6 +25,12 @@ RSpec.describe Playbook::PbForm::Form, type: :kit do
     expect(rendered).to have_tag("form[action='/users']")
   end
 
+  it "handles nil model without deprecation warning" do
+    rendered = helper.pb_rails "form", props: { options: { model: nil, url: "/users" } }
+
+    expect(rendered).to have_tag("form[action='/users']")
+  end
+
   it "allows the user to set the URL" do
     rendered = helper.pb_rails "form", props: { options: { url: "http://example.org" } }
 

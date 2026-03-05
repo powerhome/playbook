@@ -42,6 +42,7 @@ examples:
   - advanced_table_expanded_control: Expanded Control
   - advanced_table_expand_by_depth: Expand by Depth
   - advanced_table_subrow_headers: SubRow Headers
+  - advanced_table_cascade_collapse: Cascade Collapse
   - advanced_table_collapsible_trail: Collapsible Trail
   - advanced_table_table_options: Table Options
   - advanced_table_table_props: Table Props

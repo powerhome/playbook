@@ -23,6 +23,8 @@ RSpec.describe Playbook::PbTable::Table do
   it { is_expected.to define_hash_prop(:filter_props).with_default({}) }
   it { is_expected.to define_prop(:filter_content) }
   it { is_expected.to define_string_prop(:title) }
+  it { is_expected.to define_hash_prop(:card_props).with_default({}) }
+  it { is_expected.to define_hash_prop(:title_props).with_default({}) }
 
   describe "#container" do
     it "returns false when it is specified" do
