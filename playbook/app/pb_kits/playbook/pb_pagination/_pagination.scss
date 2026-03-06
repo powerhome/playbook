@@ -130,14 +130,22 @@ $top_bottom_radius: 0px;
   }
  }
   .pagination-dropdown {
-    position: static;
+    position: relative;
     flex: 1;
     margin: 0 $space_xxs;
     min-width: 0;
-    overflow: hidden;
+    overflow: visible;
+  }
+
+  .rails-trigger {
+    height: 31.59px;
   }
 
   .pagination-dropdown-trigger {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: $space_xxs;
     padding: 6px 10px 6px 13px !important;
     background-color: $bg_light;
     border-radius: $border_rad_light;
@@ -145,6 +153,14 @@ $top_bottom_radius: 0px;
     transition: all 0.2s ease;
     white-space: nowrap;
     overflow: hidden;
+
+    &::-webkit-details-marker {
+      display: none;
+    }
+
+    &::marker {
+      content: "";
+    }
 
     &:hover {
       background-color: $active_light;
@@ -183,12 +199,23 @@ $top_bottom_radius: 0px;
     cursor: pointer;
     transition: background-color 0.2s ease;
 
+    > a {
+      color: inherit;
+      display: block;
+      text-decoration: none;
+    }
+
     &:hover {
       background-color: $active_light;
     }
 
     &.active {
       background-color: $primary;
+
+      > a {
+        color: $white;
+      }
+
       .pb_body_kit {
         color: $white;
       }
@@ -202,6 +229,44 @@ $top_bottom_radius: 0px;
     &:last-child {
       border-bottom-left-radius: $border_rad_light;
       border-bottom-right-radius: $border_rad_light;
+    }
+  }
+
+  details.pagination-dropdown[open] {
+    .pagination-dropdown-icon {
+      transform: rotate(180deg);
+    }
+  }
+
+  .pagination-dropdown-icon {
+    color: $primary;
+    display: inline-flex;
+    transition: transform 0.2s ease;
+  }
+}
+
+
+
+// Rails renderer outputs both desktop and mobile markup.
+// Use CSS to match the React breakpoint behavior.
+.pb_pagination {
+  .pagination-mobile {
+    display: none;
+  }
+}
+
+@media (max-width: 767px) {
+  .rails-pagination-mobile {
+   padding: 2px 0px !important;
+}
+
+  .pb_pagination {
+    .pagination-desktop {
+      display: none;
+    }
+
+    .pagination-mobile {
+      display: flex;
     }
   }
 }
