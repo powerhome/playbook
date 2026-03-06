@@ -49,3 +49,4 @@ export { default as AdvancedTablePaddingControlPerRow } from './_advanced_table_
 export { default as AdvancedTableColumnStylingBackground } from './_advanced_table_column_styling_background.jsx'
 export { default as AdvancedTableColumnStylingBackgroundMulti } from './_advanced_table_column_styling_background_multi.jsx'
 export { default as AdvancedTableColumnStylingBackgroundCustom } from './_advanced_table_column_styling_background_custom.jsx'
+export { default as AdvancedTableCascadeCollapse } from './_advanced_table_cascade_collapse.jsx'

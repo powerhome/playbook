@@ -1,15 +1,16 @@
 <%# ------------ variant = 'withFilter' rendering  ------------ %>
 <% if object.with_filter_variant? %>
-  <%= pb_rails("title", props: {
-    padding_left: { xs: "sm", sm: "sm", md: "xl", lg: "xl", xl: "xl", default: "xl" },
-    padding_y: "md",
-    size: 3,
-    text: object.title
-  }) if object.title.present? %>
-  <%= pb_rails("card", props: {
-    margin_x: { xs: "sm", sm: "sm", md: "xl", lg: "xl", xl: "xl", default: "xl" },
-    padding: "none"
-  }) do %>
+<% default_card_props = {
+  padding: "none"
+} %>
+<% default_title_props = {
+  size: 3,
+  padding_y: "md"
+} %>
+<% merged_title_props = default_title_props.merge(object.title_props || {}) %>
+<% merged_card_props = default_card_props.merge(object.card_props || {}) %>
+  <%= pb_rails("title", props: { text: object.title }.merge(merged_title_props)) if object.title.present? %>
+  <%= pb_rails("card", props: merged_card_props) do %>
     <%= pb_rails("flex", props: {
       align: "stretch",
       flex_direction: "column",
@@ -24,7 +25,7 @@
             popover_props: { width: "350px" },
             template: 'single'
           }
-          merged_filter_props = default_filter_props.merge(object.filter_props)
+          merged_filter_props = default_filter_props.merge(object.filter_props || {})
         %>
         <%= pb_rails("filter", props: merged_filter_props) do %>
           <%= object.filter_content %>

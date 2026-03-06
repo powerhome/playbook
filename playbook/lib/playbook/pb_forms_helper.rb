@@ -28,6 +28,9 @@ module Playbook
     def pb_form_with(data: {}, validate: false, loading: false, **kwargs, &block)
       global_props, form_options = extract_all_props(kwargs)
 
+      # Handle nil model to avoid Rails 8.0 deprecation warning
+      form_options[:model] = false if form_options.key?(:model) && form_options[:model].nil?
+
       classnames = ["pb-form"]
       classnames << form_options[:class] if form_options[:class].present?
       classnames << "pb_form_loading" if loading
