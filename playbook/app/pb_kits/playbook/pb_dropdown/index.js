@@ -421,7 +421,7 @@ export default class PbDropdown extends PbEnhancedElement {
   // Set single-select dropdown to the option with the given id. No-op if id not found.
   setSelectionByOptionId(optionId) {
     if (this.isMultiSelect) return;
-    const hiddenInput = this.element.querySelector(DROPDOWN_INPUT);
+    const hiddenInput = this.baseInput;
     const optionEls = Array.from(this.element.querySelectorAll(OPTION_SELECTOR));
     const selectedOption = optionEls.find((opt) => {
       try {
@@ -434,7 +434,7 @@ export default class PbDropdown extends PbEnhancedElement {
 
     optionEls.forEach((opt) => opt.classList.remove("pb_dropdown_option_selected"));
     selectedOption.classList.add("pb_dropdown_option_selected");
-    hiddenInput.value = optionId;
+    if (hiddenInput) hiddenInput.value = optionId;
     const optionData = JSON.parse(selectedOption.dataset.dropdownOptionLabel);
     const customDisplayElement = this.element.querySelector(
       '[data-dropdown-trigger-custom-display]',
