@@ -11,6 +11,9 @@ examples:
   - rich_text_editor_inline: Inline
   - rich_text_editor_required_indicator: Required Indicator
   - rich_text_editor_preview: Preview
+  - rich_text_editor_tiptap_default: "TipTap (Vanilla JS)"
+  - rich_text_editor_quill_default: "Quill"
+  - rich_text_editor_lexxy_default: "Lexxy"
 
   react:
   - rich_text_editor_default: Default

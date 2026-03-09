@@ -73,6 +73,12 @@
     }
   }
 
+  // Active state for toolbar (Rails kit uses pb_button_kit pb_button_link; override link variant when active)
+  .toolbar button.pb_button_kit.is-active {
+    color: $primary;
+    background-color: $bg_light;
+  }
+
   .pb_rich_text_editor_tiptap_toolbar_sticky {
     position: sticky;
     top: 0;
@@ -83,6 +89,9 @@
     border: 1px solid $input_border_default;
     overflow-x: auto;
     &_block {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
       gap: $space_xs;
     }
     .editor-dropdown-button {

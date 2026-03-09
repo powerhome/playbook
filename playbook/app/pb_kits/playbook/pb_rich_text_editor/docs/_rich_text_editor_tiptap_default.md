@@ -1,0 +1,1 @@
+TipTap (vanilla JS) kit — no React. Same editor core as the React TipTap variant; content is synced to a hidden input for Rails form submission. Use `pb_rails("rich_text_editor_tiptap", props: { input_options: { id: "...", name: "..." }, value: "..." })`.

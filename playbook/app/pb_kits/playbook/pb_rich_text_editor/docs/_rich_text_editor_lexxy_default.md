@@ -1,0 +1,1 @@
+Lexxy (37signals / Lexical) kit — form-associated custom element; submits with the form like a textarea. Attachments disabled in this demo. Use `pb_rails("rich_text_editor_lexxy", props: { input_options: { id: "...", name: "..." }, placeholder: "..." })`.

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lexxy POC – Rails-friendly RTE (37signals / Lexical)</title>
+  <link rel="stylesheet" href="https://unpkg.com/@37signals/lexxy@0.7.6-beta/dist/stylesheets/lexxy-content.css" />
+  <link rel="stylesheet" href="https://unpkg.com/@37signals/lexxy@0.7.6-beta/dist/stylesheets/lexxy-editor.css" />
+  <link rel="stylesheet" href="../playbook-rte-tokens.css" />
+  <style>
+    * { box-sizing: border-box; }
+    body { font-family: system-ui, sans-serif; max-width: 720px; margin: 2rem auto; padding: 0 1rem; }
+    h1 { font-size: 1.25rem; margin-bottom: 0.5rem; }
+    .poc-note { font-size: 0.875rem; color: #666; margin-bottom: 1.5rem; }
+    label { display: block; font-weight: 600; margin-bottom: 0.5rem; }
+    .pb_rich_text_editor_kit.rte-container { overflow: hidden; }
+    .output { margin-top: 1rem; padding: 12px; background: #f9f9f9; border-radius: 6px; font-size: 0.875rem; word-break: break-all; }
+    .output h3 { margin: 0 0 0.5rem; font-size: 0.875rem; }
+    button[type="submit"] { margin-top: 1rem; padding: 8px 16px; background: #242B42; color: #fff; border: none; border-radius: 6px; cursor: pointer; font-family: "Power Centra", "Helvetica Neue", Helvetica, Arial, sans-serif; }
+  </style>
+</head>
+<body>
+  <h1>Lexxy POC</h1>
+  <p class="poc-note">
+    No React. Lexxy (37signals) is loaded from CDN; it’s a form-associated custom element, so it submits with the form like a textarea.
+    Attachments are disabled in this demo. In Rails you’d use <code>form.rich_text_area</code> with the Lexxy gem.
+  </p>
+
+  <form id="rte-form" action="#" method="post">
+    <label for="lexxy-editor">Body (rich text)</label>
+    <div class="pb_rich_text_editor_kit rte-container">
+      <lexxy-editor
+        id="lexxy-editor"
+        name="content"
+        placeholder="Write something…"
+        class="lexxy-content"
+      ></lexxy-editor>
+    </div>
+    <button type="submit">Submit (simulate Rails form)</button>
+  </form>
+
+  <div class="output">
+    <h3>Value (what Rails would receive)</h3>
+    <pre id="output-value">(type to see output)</pre>
+  </div>
+
+  <script type="module">
+    // Load Lexxy from CDN; this registers the <lexxy-editor> custom element
+    const Lexxy = await import('https://esm.sh/@37signals/lexxy@0.7.6-beta');
+    // Disable attachments for this demo (no backend)
+    if (Lexxy.configure) {
+      Lexxy.configure({ default: { attachments: false } });
+    }
+
+    const form = document.getElementById('rte-form');
+    const editorEl = document.getElementById('lexxy-editor');
+    const outputEl = document.getElementById('output-value');
+
+    function updateOutput() {
+      // Form-associated custom elements: try .value, else FormData (some implementations only set value on submit)
+      let value = typeof editorEl.value === 'string' ? editorEl.value : '';
+      if (!value && typeof FormData !== 'undefined') {
+        const fd = new FormData(form);
+        value = fd.get('content') ?? '';
+      }
+      outputEl.textContent = value || '(empty)';
+    }
+
+    editorEl.addEventListener('lexxy:change', updateOutput);
+    editorEl.addEventListener('lexxy:initialize', () => {
+      updateOutput();
+    });
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const fd = new FormData(form);
+      const value = fd.get('content') ?? editorEl.value ?? '';
+      const preview = String(value).slice(0, 300) + (value.length > 300 ? '…' : '');
+      alert('Form submit (Rails would receive):\n\n' + preview);
+    });
+  </script>
+</body>
+</html>

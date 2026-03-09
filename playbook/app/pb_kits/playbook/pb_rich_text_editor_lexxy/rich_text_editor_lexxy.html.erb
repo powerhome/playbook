@@ -1,0 +1,32 @@
+<link rel="stylesheet" href="https://unpkg.com/@37signals/lexxy@0.7.6-beta/dist/stylesheets/lexxy-content.css" />
+<link rel="stylesheet" href="https://unpkg.com/@37signals/lexxy@0.7.6-beta/dist/stylesheets/lexxy-editor.css" />
+<%= pb_content_tag(:div, id: object.container_id, class: object.classname, data: { pb_rte_lexxy: true }) do %>
+  <div class="pb_rich_text_editor_kit">
+  <% if object.label.present? %>
+    <label for="<%= object.input_id %>">
+      <% if object.required_indicator %>
+        <%= pb_rails("caption", props: { color: "lighter", text: object.label, dark: object.dark }) %><span style="color: #DA0014;"> *</span>
+      <% else %>
+        <%= pb_rails("caption", props: { color: "lighter", text: object.label, dark: object.dark }) %>
+      <% end %>
+    </label>
+  <% end %>
+  <lexxy-editor
+    id="<%= object.input_id %>"
+    name="<%= object.input_name %>"
+    placeholder="<%= h(object.placeholder.presence || 'Write something…') %>"
+    class="lexxy-content"
+  ></lexxy-editor>
+  </div>
+<% end %>
+
+<script type="module">
+(async function() {
+  const container = document.getElementById("<%= object.container_id %>");
+  if (!container) return;
+  const Lexxy = await import("https://esm.sh/@37signals/lexxy@0.7.6-beta");
+  if (Lexxy.configure) {
+    Lexxy.configure({ default: { attachments: false } });
+  }
+})();
+</script>

@@ -1,0 +1,113 @@
+/**
+ * Playbook design system tokens for Rich Text Editor POCs.
+ * Matches pb_rich_text_editor_kit / trix-editor styling so POCs share the same visual language.
+ * Source: playbook/app/pb_kits/playbook/pb_rich_text_editor, pb_textarea/textarea_mixin.
+ */
+
+.pb_rich_text_editor_kit {
+  /* Design tokens (from Playbook SCSS) */
+  --pb-rte-font-family: "Power Centra", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --pb-rte-font-size: 15.5px;
+  --pb-rte-font-weight: 400;
+  --pb-rte-line-height: 1.4;
+  --pb-rte-color: #242B42;
+  --pb-rte-bg: #FFFFFF;
+  --pb-rte-border: #828EA7;
+  --pb-rte-border-focus: #0056CF;
+  --pb-rte-bg-focus: #F3F7FB;
+  --pb-rte-radius: 6px;
+  --pb-rte-padding-y: 12px;
+  --pb-rte-padding-x: 16px;
+  --pb-rte-transition: 0.3s cubic-bezier(0.64, 0, 0.35, 1);
+  --pb-rte-toolbar-bg: #FFFFFF;
+  --pb-rte-toolbar-active-bg: #F3F7FB;
+}
+
+/* Editor body: same look as trix-editor / pb_textarea_light */
+.pb_rich_text_editor_kit .ProseMirror,
+.pb_rich_text_editor_kit .ql-editor,
+.pb_rich_text_editor_kit lexxy-editor {
+  line-height: var(--pb-rte-line-height);
+  color: var(--pb-rte-color);
+  font-size: var(--pb-rte-font-size);
+  font-weight: var(--pb-rte-font-weight);
+  font-family: var(--pb-rte-font-family);
+  border: 1px solid var(--pb-rte-border);
+  border-radius: var(--pb-rte-radius);
+  display: block;
+  width: 100%;
+  background-color: var(--pb-rte-bg);
+  padding: var(--pb-rte-padding-y) var(--pb-rte-padding-x);
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  outline: none;
+  overflow: auto;
+  overflow-wrap: break-word;
+  resize: none;
+  transition-property: box-shadow, color, background-color, border-color;
+  transition-duration: 0.3s;
+  transition-timing-function: cubic-bezier(0.64, 0, 0.35, 1);
+  box-sizing: border-box;
+}
+
+/* Editor body when below toolbar: no top radius (single continuous block) */
+.pb_rich_text_editor_kit .rte-toolbar + .rte-editor-wrap .ProseMirror,
+.pb_rich_text_editor_kit .rte-editor-wrap .ProseMirror,
+.pb_rich_text_editor_kit .ql-container .ql-editor,
+.pb_rich_text_editor_kit .ql-toolbar + .ql-container .ql-editor {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+/* Focus state (align with Playbook input focus) */
+.pb_rich_text_editor_kit:focus-within .ProseMirror,
+.pb_rich_text_editor_kit:focus-within .ql-editor,
+.pb_rich_text_editor_kit:focus-within lexxy-editor {
+  border-color: var(--pb-rte-border-focus);
+  background-color: var(--pb-rte-bg-focus);
+}
+
+/* Toolbar: match trix-toolbar / .trix-button-row */
+.pb_rich_text_editor_kit .rte-toolbar,
+.pb_rich_text_editor_kit .ql-toolbar.ql-snow {
+  background: var(--pb-rte-toolbar-bg);
+  border: 1px solid var(--pb-rte-border);
+  border-bottom: none;
+  padding: 4px;
+  border-top-left-radius: var(--pb-rte-radius);
+  border-top-right-radius: var(--pb-rte-radius);
+  box-sizing: border-box;
+}
+
+.pb_rich_text_editor_kit .rte-toolbar button,
+.pb_rich_text_editor_kit .ql-toolbar.ql-snow .ql-formats {
+  font-family: var(--pb-rte-font-family);
+}
+
+.pb_rich_text_editor_kit .rte-toolbar button.is-active,
+.pb_rich_text_editor_kit .ql-toolbar.ql-snow button.ql-active {
+  background-color: var(--pb-rte-toolbar-active-bg);
+}
+
+/* Quill: single border on editor body; container is borderless so toolbar + editor read as one block */
+.pb_rich_text_editor_kit .ql-container.ql-snow {
+  border: none;
+}
+
+.pb_rich_text_editor_kit .ql-toolbar.ql-snow {
+  border-bottom: none;
+}
+
+/* Lexxy: ensure editor host gets same treatment (it may wrap contenteditable) */
+.pb_rich_text_editor_kit lexxy-editor {
+  min-height: 160px;
+}
+
+.pb_rich_text_editor_kit .ProseMirror {
+  min-height: 120px;
+}
+
+.pb_rich_text_editor_kit .ql-editor {
+  min-height: 160px;
+}

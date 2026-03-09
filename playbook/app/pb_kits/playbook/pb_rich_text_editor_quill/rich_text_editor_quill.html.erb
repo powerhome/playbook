@@ -1,0 +1,47 @@
+<link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet" />
+<%= pb_content_tag(:div, id: object.container_id, class: object.classname, data: { pb_rte_quill: true, input_id: object.input_id, initial_html: object.initial_html }) do %>
+  <div class="pb_rich_text_editor_kit">
+  <% if object.label.present? %>
+    <label for="<%= object.input_id %>">
+      <% if object.required_indicator %>
+        <%= pb_rails("caption", props: { color: "lighter", text: object.label, dark: object.dark }) %><span style="color: #DA0014;"> *</span>
+      <% else %>
+        <%= pb_rails("caption", props: { color: "lighter", text: object.label, dark: object.dark }) %>
+      <% end %>
+    </label>
+  <% end %>
+  <input type="hidden" name="<%= object.input_name %>" id="<%= object.input_id %>" value="" />
+  <div id="<%= object.editor_node_id %>">
+    <%= raw object.initial_html %>
+  </div>
+  </div>
+<% end %>
+
+<script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
+<script>
+(function() {
+  const container = document.getElementById("<%= object.container_id %>");
+  if (!container) return;
+  const inputId = container.dataset.inputId;
+  const hiddenInput = document.getElementById(inputId);
+  const editorNode = document.getElementById("<%= object.editor_node_id %>");
+  if (!editorNode || !hiddenInput) return;
+
+  function syncToHiddenInput() {
+    if (typeof Quill !== "undefined" && window._pbQuillInstances && window._pbQuillInstances["<%= object.container_id %>"]) {
+      const quill = window._pbQuillInstances["<%= object.container_id %>"];
+      hiddenInput.value = quill.root.innerHTML;
+    }
+  }
+
+  if (typeof Quill === "undefined") return;
+  const quill = new Quill("#<%= object.editor_node_id %>", {
+    theme: "snow",
+    placeholder: "<%= j(object.placeholder.presence || 'Compose...') %>",
+  });
+  window._pbQuillInstances = window._pbQuillInstances || {};
+  window._pbQuillInstances["<%= object.container_id %>"] = quill;
+  quill.on("text-change", syncToHiddenInput);
+  syncToHiddenInput();
+})();
+</script>

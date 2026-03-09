@@ -107,14 +107,14 @@ const RichTextEditor = (props: RichTextEditorProps): React.ReactElement => {
       const hiddenInput = document.getElementById(oldId) as HTMLElement | null
       if (!hiddenInput) return
 
-      const hiddenInputId = (inputOptions.id as string) || oldId
+      const hiddenInputId = (inputOptions?.id as string) || oldId
 
       if (hiddenInputId !== oldId) {
         hiddenInput.id = hiddenInputId
         editorInstance.element?.setAttribute("input", hiddenInputId)
       }
 
-      if (inputOptions.name) {
+      if (inputOptions?.name) {
         hiddenInput.setAttribute("name", inputOptions.name as string)
       }
 
@@ -240,7 +240,7 @@ const RichTextEditor = (props: RichTextEditorProps): React.ReactElement => {
   // Determine if toolbar should be shown
   const shouldShowToolbar = focus && advancedEditor ? showToolbarOnFocus : advancedEditorToolbar
 
-  const labelFor = advancedEditor ? fieldId : (id ? id : (inputOptions.id ? `${inputOptions.id}_trix` : undefined))
+  const labelFor = advancedEditor ? fieldId : (id ? id : (inputOptions?.id ? `${inputOptions.id}_trix` : undefined))
 
   return (
     <div

@@ -1,0 +1,86 @@
+// Playbook-themed overrides for Quill POC (toolbar + icons).
+// Scoped to [data-pb-rte-quill] so default Quill styling is unchanged elsewhere.
+
+@import "../tokens/border_radius";
+@import "../tokens/colors";
+@import "../tokens/spacing";
+@import "../tokens/transition";
+
+[data-pb-rte-quill] {
+  .ql-toolbar.ql-snow {
+    background: $white;
+    border: 1px solid $input_border_default;
+    border-bottom: 1px solid $input_border_default;
+    border-radius: $border_rad_heaviest $border_rad_heaviest 0 0;
+    padding: $space_xs;
+    @include transition_default;
+  }
+
+  .ql-container.ql-snow {
+    border: 1px solid $input_border_default;
+    border-radius: 0 0 $border_rad_heaviest $border_rad_heaviest;
+  }
+
+  // Single border: remove Quill Snow’s extra border/outline from the inner editor to avoid double-thick bottom and blue focus
+  .ql-container .ql-editor {
+    border: none;
+    outline: none;
+    box-shadow: none;
+  }
+
+  .ql-toolbar .ql-formats {
+    margin-right: $space_sm;
+  }
+
+  .ql-toolbar.ql-snow button {
+    background: transparent;
+    border: none;
+    border-radius: $border_rad_heaviest;
+    color: $text_lt_light;
+    width: $space_xl + 2;
+    height: $space_xl + 2;
+    @include transition_default;
+
+    &:hover {
+      background-color: $neutral_subtle;
+    }
+
+    &.ql-active {
+      color: $primary;
+      background-color: $bg_light;
+    }
+
+    &:focus-visible {
+      outline: none;
+    }
+  }
+
+  // Quill uses .ql-stroke and .ql-fill for SVG strokes/fills; use currentColor so icons match toolbar color
+  .ql-toolbar .ql-stroke {
+    stroke: currentColor;
+  }
+
+  .ql-toolbar .ql-fill {
+    fill: currentColor;
+  }
+
+  .ql-toolbar button svg {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+
+  // Picker (e.g. heading dropdown) align with Playbook
+  .ql-toolbar .ql-picker {
+    color: $text_lt_light;
+
+    &.ql-expanded {
+      .ql-picker-label {
+        color: $primary;
+      }
+    }
+  }
+
+  .ql-toolbar .ql-picker-label:hover {
+    color: $primary;
+  }
+}

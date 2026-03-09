@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quill POC – Rails-friendly RTE (no React)</title>
+  <link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet" />
+  <link rel="stylesheet" href="../playbook-rte-tokens.css" />
+  <style>
+    * { box-sizing: border-box; }
+    body { font-family: system-ui, sans-serif; max-width: 720px; margin: 2rem auto; padding: 0 1rem; }
+    h1 { font-size: 1.25rem; margin-bottom: 0.5rem; }
+    .poc-note { font-size: 0.875rem; color: #666; margin-bottom: 1.5rem; }
+    label { display: block; font-weight: 600; margin-bottom: 0.5rem; }
+    .pb_rich_text_editor_kit.rte-container { overflow: hidden; }
+    .hidden-input { display: none; }
+    .output { margin-top: 1rem; padding: 12px; background: #f9f9f9; border-radius: 6px; font-size: 0.875rem; word-break: break-all; }
+    .output h3 { margin: 0 0 0.5rem; font-size: 0.875rem; }
+    button[type="submit"] { margin-top: 1rem; padding: 8px 16px; background: #242B42; color: #fff; border: none; border-radius: 6px; cursor: pointer; font-family: "Power Centra", "Helvetica Neue", Helvetica, Arial, sans-serif; }
+  </style>
+</head>
+<body>
+  <h1>Quill POC</h1>
+  <p class="poc-note">
+    No React. Quill is initialized on a div; content is synced to a hidden input for Rails form submission.
+    Uses Quill Snow theme (toolbar on top); easily themeable with CSS.
+  </p>
+
+  <form id="rte-form" action="#" method="post">
+    <label for="content">Body (rich text)</label>
+    <input type="hidden" name="content" id="content" />
+    <div class="pb_rich_text_editor_kit rte-container">
+      <div id="editor">
+        <p>Add your text here. You can format with the toolbar (bold, lists, links).</p>
+      </div>
+    </div>
+    <button type="submit">Submit (simulate Rails form)</button>
+  </form>
+
+  <div class="output">
+    <h3>Hidden input value – HTML (what Rails would receive)</h3>
+    <pre id="output-value"></pre>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
+  <script>
+    const hiddenInput = document.getElementById('content');
+    const outputEl = document.getElementById('output-value');
+
+    function syncToHiddenInput() {
+      const html = quill.root.innerHTML;
+      hiddenInput.value = html;
+      outputEl.textContent = html || '(empty)';
+    }
+
+    const quill = new Quill('#editor', {
+      theme: 'snow',
+      placeholder: 'Compose...',
+    });
+
+    quill.on('text-change', syncToHiddenInput);
+    syncToHiddenInput();
+
+    document.getElementById('rte-form').addEventListener('submit', function (e) {
+      e.preventDefault();
+      alert('Form submit (Rails would receive):\n\n' + hiddenInput.value.slice(0, 200) + (hiddenInput.value.length > 200 ? '...' : ''));
+    });
+  </script>
+</body>
+</html>

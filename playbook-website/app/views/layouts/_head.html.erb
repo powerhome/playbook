@@ -6,6 +6,9 @@
 <link rel="manifest" href="/site.webmanifest">
 <%= csrf_meta_tags%>
 <%= csp_meta_tag%>
+<% if controller_name == "pages" && action_name == "kit_show_rails" && @kit == "rich_text_editor" %>
+  <link rel="stylesheet" href="/pocs/rich_text_editor/playbook-rte-tokens.css" />
+<% end %>
 
 <meta content="user-scalable=0, initial-scale=1.0, minimum-scale=1" name="viewport" />
 

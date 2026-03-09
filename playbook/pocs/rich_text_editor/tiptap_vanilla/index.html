@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TipTap Vanilla JS POC – Rails-friendly RTE (no React)</title>
+  <link rel="stylesheet" href="../playbook-rte-tokens.css" />
+  <style>
+    * { box-sizing: border-box; }
+    body { font-family: system-ui, sans-serif; max-width: 720px; margin: 2rem auto; padding: 0 1rem; }
+    h1 { font-size: 1.25rem; margin-bottom: 0.5rem; }
+    .poc-note { font-size: 0.875rem; color: #666; margin-bottom: 1.5rem; }
+    label { display: block; font-weight: 600; margin-bottom: 0.5rem; }
+    .pb_rich_text_editor_kit.rte-container { overflow: hidden; }
+    .rte-toolbar { display: flex; gap: 2px; flex-wrap: wrap; }
+    .rte-toolbar button { padding: 6px 10px; border: none; border-radius: 4px; cursor: pointer; font-size: 14px; }
+    .rte-toolbar button:hover { background: rgba(130, 142, 167, 0.15); }
+    .rte-editor-wrap { padding: 0; }
+    .ProseMirror p { margin: 0 0 0.5em; }
+    .ProseMirror p:last-child { margin-bottom: 0; }
+    .hidden-input { display: none; }
+    .output { margin-top: 1rem; padding: 12px; background: #f9f9f9; border-radius: 6px; font-size: 0.875rem; word-break: break-all; }
+    .output h3 { margin: 0 0 0.5rem; font-size: 0.875rem; }
+    button[type="submit"] { margin-top: 1rem; padding: 8px 16px; background: #242B42; color: #fff; border: none; border-radius: 6px; cursor: pointer; font-family: "Power Centra", "Helvetica Neue", Helvetica, Arial, sans-serif; }
+  </style>
+</head>
+<body>
+  <h1>TipTap Vanilla JS POC</h1>
+  <p class="poc-note">
+    No React. Editor is initialized with TipTap core + StarterKit + Link on a plain div.
+    Content is synced to a hidden input for Rails-style form submission.
+  </p>
+
+  <form id="rte-form" action="#" method="post">
+    <label for="content">Body (rich text)</label>
+    <input type="hidden" name="content" id="content" />
+    <div class="pb_rich_text_editor_kit rte-container" id="rte-container">
+      <div class="rte-toolbar" id="toolbar">
+        <button type="button" data-action="bold" title="Bold">B</button>
+        <button type="button" data-action="italic" title="Italic">I</button>
+        <button type="button" data-action="strike" title="Strike">S</button>
+        <button type="button" data-action="heading" data-level="1" title="Heading 1">H1</button>
+        <button type="button" data-action="heading" data-level="2" title="Heading 2">H2</button>
+        <button type="button" data-action="bulletList" title="Bullet list">•</button>
+        <button type="button" data-action="orderedList" title="Ordered list">1.</button>
+        <button type="button" data-action="blockquote" title="Quote">"</button>
+        <button type="button" data-action="codeBlock" title="Code block">&lt;/&gt;</button>
+        <button type="button" data-action="link" title="Link">🔗</button>
+      </div>
+      <div class="rte-editor-wrap">
+        <div id="editor"></div>
+      </div>
+    </div>
+    <button type="submit">Submit (simulate Rails form)</button>
+  </form>
+
+  <div class="output">
+    <h3>Hidden input value (what Rails would receive)</h3>
+    <pre id="output-value"></pre>
+  </div>
+
+  <script type="module">
+    // CDN: TipTap vanilla – no React. jsDelivr used to avoid esm.sh peer-dependency issues with ProseMirror.
+    const { Editor } = await import('https://cdn.jsdelivr.net/npm/@tiptap/core@2.8.0/+esm');
+    const { default: StarterKit } = await import('https://cdn.jsdelivr.net/npm/@tiptap/starter-kit@2.8.0/+esm');
+    const { default: Link } = await import('https://cdn.jsdelivr.net/npm/@tiptap/extension-link@2.8.0/+esm');
+
+    const hiddenInput = document.getElementById('content');
+    const outputEl = document.getElementById('output-value');
+
+    function syncToHiddenInput(editor) {
+      const html = editor.getHTML();
+      hiddenInput.value = html;
+      outputEl.textContent = html || '(empty)';
+    }
+
+    const editor = new Editor({
+      element: document.querySelector('#editor'),
+      extensions: [
+        StarterKit.configure({ heading: { levels: [1, 2, 3] } }),
+        Link.configure({ openOnClick: false, HTMLAttributes: { target: '_blank', rel: 'noopener' } }),
+      ],
+      content: '<p>Add your text here. You can format with the toolbar (bold, lists, links).</p>',
+      editable: true,
+      onUpdate: ({ editor }) => syncToHiddenInput(editor),
+    });
+
+    // Initial sync
+    syncToHiddenInput(editor);
+
+    // Toolbar buttons
+    // TipTap chain methods use "toggle*" names (e.g. toggleBold, not bold)
+    const actionToChain = {
+      bold: 'toggleBold',
+      italic: 'toggleItalic',
+      strike: 'toggleStrike',
+      bulletList: 'toggleBulletList',
+      orderedList: 'toggleOrderedList',
+      blockquote: 'toggleBlockquote',
+      codeBlock: 'toggleCodeBlock',
+    };
+
+    document.getElementById('toolbar').addEventListener('click', (e) => {
+      const btn = e.target.closest('button[data-action]');
+      if (!btn) return;
+      e.preventDefault();
+      const action = btn.dataset.action;
+      const level = btn.dataset.level ? parseInt(btn.dataset.level, 10) : null;
+
+      if (action === 'heading' && level) {
+        editor.chain().focus().toggleHeading({ level }).run();
+      } else if (action === 'link') {
+        const url = window.prompt('URL:');
+        if (url) editor.chain().focus().setLink({ href: url }).run();
+      } else {
+        const chainMethod = actionToChain[action];
+        if (chainMethod && typeof editor.chain().focus()[chainMethod] === 'function') {
+          editor.chain().focus()[chainMethod]().run();
+        }
+      }
+
+      // Update active state
+      document.querySelectorAll('#toolbar button').forEach((b) => b.classList.remove('is-active'));
+      if (action === 'bold' && editor.isActive('bold')) btn.classList.add('is-active');
+      if (action === 'italic' && editor.isActive('italic')) btn.classList.add('is-active');
+      if (action === 'strike' && editor.isActive('strike')) btn.classList.add('is-active');
+      if (action === 'blockquote' && editor.isActive('blockquote')) btn.classList.add('is-active');
+      if (action === 'bulletList' && editor.isActive('bulletList')) btn.classList.add('is-active');
+      if (action === 'orderedList' && editor.isActive('orderedList')) btn.classList.add('is-active');
+      if (action === 'codeBlock' && editor.isActive('codeBlock')) btn.classList.add('is-active');
+      if (action === 'heading' && level != null && editor.isActive('heading', { level })) btn.classList.add('is-active');
+    });
+
+    document.getElementById('rte-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      alert('Form submit (Rails would receive):\n\n' + hiddenInput.value.slice(0, 200) + (hiddenInput.value.length > 200 ? '...' : ''));
+    });
+  </script>
+</body>
+</html>
