@@ -56,7 +56,7 @@ Object.entries(icons).forEach(([key, value]) => {
 
 document.addEventListener('DOMContentLoaded', () => {
   const anchors = new AnchorJS()
-  anchors.add('.pb--kit-example > .pb_caption_kit_md:first-child')
+  anchors.add('.pb--kit-example > .pb_caption_kit_md_lighter:first-child')
   const propsTableAnchors = new AnchorJS()
   propsTableAnchors.options = {
     class: 'props-table-anchor',

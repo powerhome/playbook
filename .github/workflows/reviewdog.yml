@@ -9,14 +9,14 @@ concurrency:
 
 jobs:
   brakeman:
-    name: Brakeman
+    name: brakeman
     runs-on: ubuntu-latest
     steps:
       - name: Check out code
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
-      - name: "Brakeman playbook"
+      - name: "brakeman playbook"
         uses: reviewdog/action-brakeman@5083efd49634e26645a0736681b618ccc3fb7f14 # v2
         with:
           brakeman_version: gemfile
