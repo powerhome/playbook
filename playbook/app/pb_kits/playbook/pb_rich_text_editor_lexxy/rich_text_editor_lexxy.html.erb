@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="https://unpkg.com/@37signals/lexxy@0.7.6-beta/dist/stylesheets/lexxy-content.css" />
 <link rel="stylesheet" href="https://unpkg.com/@37signals/lexxy@0.7.6-beta/dist/stylesheets/lexxy-editor.css" />
-<%= pb_content_tag(:div, id: object.container_id, class: object.classname, data: { pb_rte_lexxy: true }) do %>
+<%= pb_content_tag(:div, id: object.container_id, class: object.classname, data: { pb_rte_lexxy: true, initial_html: object.value.presence }) do %>
   <div class="pb_rich_text_editor_kit">
   <% if object.label.present? %>
     <label for="<%= object.input_id %>">
@@ -27,6 +27,12 @@
   const Lexxy = await import("https://esm.sh/@37signals/lexxy@0.7.6-beta");
   if (Lexxy.configure) {
     Lexxy.configure({ default: { attachments: false } });
+  }
+  const initialHtml = container.dataset.initialHtml;
+  if (initialHtml) {
+    await customElements.whenDefined("lexxy-editor");
+    const editor = container.querySelector("lexxy-editor");
+    if (editor) editor.value = initialHtml;
   }
 })();
 </script>
