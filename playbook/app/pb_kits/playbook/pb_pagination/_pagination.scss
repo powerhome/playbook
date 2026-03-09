@@ -108,15 +108,12 @@ $top_bottom_radius: 0px;
 }
 
 
-// These overrides prevent Rails from getting padding/borders twice.
 .pb_pagination.rails-pagination-mobile {
-  // background-clip: padding-box;
 
   @media (min-width: 768px) {
     padding: $space_xxs 0px !important;
     overflow: hidden;
 
-    // Rails desktop only: reduce button vertical padding by 1px
     .pagination-left > a,
     .pagination-left > span,
     .pagination-right > a,
