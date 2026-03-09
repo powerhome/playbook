@@ -125,8 +125,11 @@ $top_bottom_radius: 0px;
     .pagination-number > span,
     .active > span {
       padding: 6px 13px 5px 13px !important;
-      font-weight: $bold;
     }
+  }
+
+  .pagination-dropdown-current {
+    font-weight: $bold;
   }
 
   .pagination-left,
@@ -223,6 +226,7 @@ $top_bottom_radius: 0px;
 
   .rails-trigger {
     height: 31.59px;
+    font-size: $text_small;
   }
 
   .pagination-dropdown-trigger {
