@@ -7,7 +7,10 @@
 .pb_textarea_kit {
   margin-bottom: $space_sm;
 
-  .pb_caption_kit_md {
+  label {
+    display: block !important;
+  }
+  .pb_caption_kit_md_lighter {
     margin-bottom: $space_xs !important;
     display: block;
   }

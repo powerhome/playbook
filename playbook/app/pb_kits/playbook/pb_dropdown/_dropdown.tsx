@@ -441,6 +441,7 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
                 value={{
                     activeStyle,
                     autocomplete,
+                    blankSelection,
                     clearable,
                     dropdownContainerRef,
                     error,

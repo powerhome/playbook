@@ -1,11 +1,20 @@
 <%= pb_rails("button", props: { text: "Open Dialog", data: {"open-dialog": "dialog-1"} }) %>
 
-<%= pb_rails("dialog", props: { 
-    id:"dialog-1", 
-    size: "sm", 
-    title: "Header Title is the Title Prop", 
-    text: "Hello Body Text, Nice to meet ya.", 
-    cancel_button: "Cancel Button", 
-    confirm_button: "Okay", 
-    confirm_button_id: "confirm-button-1"
-}) %>
+<%= pb_rails("dialog", props: {
+        id:"dialog-1",
+        size: "md",
+        title: "Header Title is the Title Prop"
+}) do %>
+    <%= pb_rails("dialog/dialog_body") do %>
+        <%= pb_rails("button", props: { aria: { label: "Loading" }, loading: true, margin_right: "lg", text: "Button Primary" }) %>
+        <div style="height: 800px; background-color: lightgray;"></div>
+        <%= pb_rails("button", props: { loading: true, text: "Loading..." }) %>
+    <% end %>
+
+    <%= pb_rails("dialog/dialog_footer") do %>
+        <%= pb_rails("flex", props: { spacing: "between", padding_x: "md", padding_bottom: "md", padding: "sm" }) do %>
+            <%= pb_rails("button", props: { loading: true, text: "Send My Issue" }) %>
+            <%= pb_rails("button", props: { text: "Back", variant: "link", data: {"close-dialog": "dialog-1"} }) %>
+        <% end %>
+    <% end %>
+<% end %>
