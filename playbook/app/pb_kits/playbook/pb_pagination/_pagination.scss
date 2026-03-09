@@ -107,6 +107,82 @@ $top_bottom_radius: 0px;
   }
 }
 
+
+// These overrides prevent Rails from getting padding/borders twice.
+.pb_pagination.rails-pagination-mobile {
+  // background-clip: padding-box;
+
+  @media (min-width: 768px) {
+    padding: $space_xxs 0px !important;
+    overflow: hidden;
+
+    // Rails desktop only: reduce button vertical padding by 1px
+    .pagination-left > a,
+    .pagination-left > span,
+    .pagination-right > a,
+    .pagination-right > span {
+      padding: 6px 11px 5px;
+    }
+
+    .pagination-number > a,
+    .pagination-number > span,
+    .active > span {
+      padding: 6px 13px 5px 13px !important;
+    }
+  }
+
+  .pagination-left,
+  .pagination-right {
+    padding: 0;
+  }
+
+  .pagination-left {
+    border-right: none;
+  }
+
+  .pagination-right {
+    border-left: none;
+  }
+
+  .pagination-left > a,
+  .pagination-left > span,
+  .pagination-right > a,
+  .pagination-right > span {
+    display: inline-flex;
+    align-items: center;
+    padding: 10px 11px 9px;
+  }
+
+  .pagination-number {
+    padding: 0;
+
+    > a,
+    > span {
+      display: inline-flex;
+      align-items: center;
+      padding: $pagination_padding;
+    }
+  }
+
+  .pb_pagination_mobile {
+    .pagination-left,
+    .pagination-right {
+      padding: 0 !important;
+    }
+
+    .pagination-left > a,
+    .pagination-left > span,
+    .pagination-right > a,
+    .pagination-right > span {
+      padding: 6px 13px !important;
+
+      @media (max-width: 435px) {
+        padding: 6px 10px !important;
+      }
+    }
+  }
+}
+
 .pb_pagination_mobile {
  padding: $space_xxs 0px !important;
  position: relative;
@@ -116,6 +192,11 @@ $top_bottom_radius: 0px;
   padding: 6px 13px !important;
   flex-shrink: 0;
 
+  > a,
+  > span {
+    border-left: none !important;
+  }
+
   @media (max-width: 435px) {
     padding: 6px 10px !important;
   }
@@ -124,6 +205,11 @@ $top_bottom_radius: 0px;
   border-right: none !important;
   padding: 6px 13px !important;
   flex-shrink: 0;
+
+  > a,
+  > span {
+    border-right: none !important;
+  }
 
   @media (max-width: 435px) {
     padding: 6px 10px !important;
@@ -245,10 +331,6 @@ $top_bottom_radius: 0px;
   }
 }
 
-
-
-// Rails renderer outputs both desktop and mobile markup.
-// Use CSS to match the React breakpoint behavior.
 .pb_pagination {
   .pagination-mobile {
     display: none;
@@ -256,9 +338,9 @@ $top_bottom_radius: 0px;
 }
 
 @media (max-width: 767px) {
-  .rails-pagination-mobile {
-   padding: 2px 0px !important;
-}
+  .pb_pagination.rails-pagination-mobile {
+    padding: 0px !important;
+  }
 
   .pb_pagination {
     .pagination-desktop {
