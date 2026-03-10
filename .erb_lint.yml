@@ -1,0 +1,23 @@
+# Aligned with nitro-web root .erb_lint.yml
+# Lint ERB in playbook kits and playbook-website app
+
+glob: "**/*.erb"
+exclude:
+  - "**/node_modules/**"
+  - "**/vendor/**"
+  - "**/tmp/**"
+
+EnableDefaultLinters: true
+
+linters:
+  RequireInputAutocomplete:
+    enabled: false
+  NoJavascriptTagHelper:
+    enabled: false
+  AllowedScriptType:
+    enabled: false
+  Rubocop:
+    enabled: true
+    rubocop_config:
+      inherit_from:
+        - .erb_rubocop.yml

@@ -27,7 +27,8 @@
   },
   "lint-staged": {
     "*.{js,jsx,tsx,ts}": "eslint",
-    "*.rb": "bundle exec --gemfile=playbook-website/Gemfile rubocop --parallel"
+    "*.rb": "bundle exec --gemfile=playbook-website/Gemfile rubocop --parallel --fail-level W",
+    "*.erb": "bundle exec --gemfile=playbook-website/Gemfile erb_lint --allow-no-files"
   },
   "dependencies": {
     "eslint-plugin-react": "^7.33.2"

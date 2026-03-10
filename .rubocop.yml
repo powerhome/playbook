@@ -1,17 +1,42 @@
+# Aligned with nitro-web (nitro_linting .rubocop_standard.yml + .metrics_offense_levels.yml).
+# Run with --fail-level W (e.g. in lint-staged) to treat warnings as failures.
+# Nitro uses inherit_gem: nitro_linting; we replicate the same rules here.
+
+require:
+  - rubocop-rails
+
 AllCops:
   TargetRubyVersion: 3.3
+  NewCops: enable
+  Exclude:
+    - "**/bin/*"
+    - "**/node_modules/**/*"
+    - "**/tmp/**/*"
+    - "**/vendor/**/*"
 
 Gemspec/RequiredRubyVersion:
   Enabled: false
 
 Style/HashSyntax:
-  Enabled: false
+  EnforcedShorthandSyntax: always
 
 Layout/AccessModifierIndentation:
   EnforcedStyle: outdent
 
 Layout/LineLength:
-  Enabled: false
+  Max: 120
+  Exclude:
+    - "*.gemspec"
+    - "**/spec/**/*_spec.rb"
+    - "**/db/migrate/*"
+
+Lint/AmbiguousBlockAssociation:
+  Exclude:
+    - "**/spec/**/*_spec.rb"
+
+Lint/EmptyBlock:
+  Exclude:
+    - "**/config/routes.rb"
 
 Lint/RaiseException:
   Enabled: true
@@ -22,8 +47,51 @@ Lint/ScriptPermission:
 Lint/StructNewOverride:
   Enabled: true
 
-Metrics:
+# Metrics aligned with nitro-web .metrics_offense_levels.yml
+Metrics/AbcSize:
+  Enabled: true
+  Max: 30
+  Exclude:
+    - "spec/**/*"
+    - "test/**/*"
+
+Metrics/BlockLength:
   Enabled: false
+
+Metrics/ClassLength:
+  Enabled: true
+  Max: 500
+
+Metrics/CyclomaticComplexity:
+  Enabled: false
+
+Metrics/MethodLength:
+  Enabled: true
+  Max: 40
+  Exclude:
+    - "spec/**/*"
+    - "test/**/*"
+    - "**/db/migrate/*"
+
+Metrics/ModuleLength:
+  Enabled: true
+  Max: 500
+
+Metrics/ParameterLists:
+  Enabled: true
+  Max: 7
+
+Metrics/PerceivedComplexity:
+  Enabled: true
+  Max: 18
+
+Naming/PredicatePrefix:
+  Exclude:
+    - "**/spec/**/*_spec.rb"
+
+Naming/FileName:
+  Exclude:
+    - "**/Guardfile"
 
 Naming/PredicateName:
   Enabled: false
@@ -79,3 +147,17 @@ Style/TrailingCommaInArrayLiteral:
 
 Style/TrailingCommaInHashLiteral:
   EnforcedStyleForMultiline: comma
+
+# Rails (playbook-website); no-op in playbook gem
+Rails/RequireDependency:
+  Enabled: true
+
+Rails/SkipsModelValidations:
+  Exclude:
+    - "**/db/migrate/*"
+
+Rails/UnknownEnv:
+  Environments:
+    - development
+    - production
+    - test
