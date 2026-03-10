@@ -535,7 +535,9 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
       // Code block triggers after form.reset() is called and executed
       setTimeout(() => {
         dropdown.value = picker.currentYear
-        picker.monthsDropdownContainer.value = picker.currentMonth
+        if (picker.monthsDropdownContainer) {
+          picker.monthsDropdownContainer.value = picker.currentMonth
+        }
 
         /* Reset date picker to default value on form.reset() */
         if (defaultDate){
