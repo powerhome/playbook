@@ -41,7 +41,7 @@ document.addEventListener(PB_REACT_MOUNT_EVENT, (e) => {
 })
 
 document.addEventListener(PB_REACT_UNMOUNT_EVENT, (e) => {
-  const root = e.detail?.root instanceof Element ? e.detail.root : null
+  const root = e.detail?.root instanceof Element ? e.detail.root : document
   unmountComponents(root)
 })
 
