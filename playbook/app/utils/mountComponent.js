@@ -13,7 +13,12 @@ function mountComponents(root) {
 }
 
 function unmountComponents(root) {
-  if (root) {
+  const isDomRoot =
+    root instanceof Element ||
+    root instanceof Document ||
+    root instanceof DocumentFragment
+
+  if (isDomRoot) {
     ComponentRegistry.unmountWithin(root)
   } else {
     ComponentRegistry.unmountComponents()
@@ -117,7 +122,9 @@ document.addEventListener('turbo:render', () => {
   installTypeaheadLoadingMlsGuard()
 })
 
-document.addEventListener('turbo:before-cache', unmountComponents)
+document.addEventListener('turbo:before-cache', () => {
+  unmountComponents()
+})
 
 document.addEventListener(
   'turbo:before-frame-render',
