@@ -6,8 +6,8 @@
     "prepare": "husky install",
     "lint": "eslint . --ext .js,.jsx,.tsx,.ts",
     "lint-fix": "eslint . --ext .js,.jsx,.tsx,.ts --fix",
-    "prettier:check": "prettier \"**/*.{js,jsx,tsx,ts,json,css,scss,md}\" --check",
-    "prettier:write": "prettier \"**/*.{js,jsx,tsx,ts,json,css,scss,md}\" --write"
+    "prettier:check": "prettier \"**/*.{js,jsx,tsx,ts,json,css,scss,md,yml,yaml}\" --check",
+    "prettier:write": "prettier \"**/*.{js,jsx,tsx,ts,json,css,scss,md,yml,yaml}\" --write"
   },
   "workspaces": {
     "packages": [
@@ -29,7 +29,7 @@
     "prettier": "^3.0.0"
   },
   "lint-staged": {
-    "*.{js,jsx,tsx,ts,json,css,scss,md}": "npx prettier --write",
+    "*.{js,jsx,tsx,ts,json,css,scss,md,yml,yaml}": "npx prettier --write",
     "*.{js,jsx,tsx,ts}": "eslint",
     "*.rb": "bundle exec --gemfile=playbook-website/Gemfile rubocop --parallel --fail-level W",
     "*.erb": "bundle exec --gemfile=playbook-website/Gemfile erb_lint --allow-no-files"
