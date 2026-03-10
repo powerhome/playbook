@@ -85,10 +85,6 @@ Metrics/PerceivedComplexity:
   Enabled: true
   Max: 18
 
-Naming/PredicatePrefix:
-  Exclude:
-    - "**/spec/**/*_spec.rb"
-
 Naming/FileName:
   Exclude:
     - "**/Guardfile"

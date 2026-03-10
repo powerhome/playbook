@@ -27,5 +27,4 @@ playbook/tmp
 playbook-docs/node_modules
 playbook-docs/tmp
 *.dec.*
-.overcommit.yml
 node_modules

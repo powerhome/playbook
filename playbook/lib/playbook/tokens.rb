@@ -13,7 +13,7 @@ module Playbook
   # --- Current design ---
   # Only colors: tokens/colors.json (accessible keys from _colors.module.scss + types/colors.ts).
   # When you add or change accessible color tokens, run `yarn generate:tokens` and stage the updated
-  # colors.json; otherwise Overcommit will run the generator on commit and fail until you do.
+  # colors.json; otherwise the pre-commit hook will run the generator on commit and fail until you do.
   #
   # --- Next steps for additional token types ---
   # - One JSON per type (tokens/typography.json, tokens/spacing.json, …) and one method per type below.
@@ -21,8 +21,8 @@ module Playbook
   #   (or a similar wrapper if the shape differs [TODO: Rename ColorHash to TokenHash if appropriate]).
   #   Add a reload_typography! (or reload_*!) if needed.
   # - Ensure generate-tokens.js is extended to write that JSON (same pattern: compile SCSS → extract → write).
-  # - Update .overcommit.yml include paths and .git-hooks/pre_commit/verify_tokens.sh to compare the new
-  #   generated file so commits stay in sync.
+  # - Update .husky/pre-commit (VerifyTokens include paths) and .git-hooks/pre_commit/verify_tokens.sh
+  #   to compare the new generated file so commits stay in sync.
   #
   #   Example for typography:
   #     def typography

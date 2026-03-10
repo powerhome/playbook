@@ -2,3 +2,9 @@
 . "$(dirname "$0")/_/husky.sh"
 
 yarn lint-staged
+
+# Verify token JSON (e.g. colors.json) is in sync when token sources are staged (was Overcommit VerifyTokens)
+staged=$(git diff --cached --name-only)
+if echo "$staged" | grep -qE '^playbook/app/pb_kits/playbook/tokens/.*\.scss$|^playbook/app/pb_kits/playbook/types/colors\.ts$'; then
+  bash .git-hooks/pre_commit/verify_tokens.sh || exit 1
+fi
