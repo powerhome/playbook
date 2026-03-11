@@ -12,6 +12,7 @@ import {
 import { GenericObject } from "../../types";
 import { createColumnHelper } from "@tanstack/react-table";
 import { createCellFunction } from "../Utilities/CellRendererUtils";
+import { getParentOnlySortedRowModel } from "../Utilities/RowModelUtils";
 
 interface UseTableStateProps {
   tableData: GenericObject[];
@@ -36,6 +37,7 @@ interface UseTableStateProps {
   columnVisibilityControl?: GenericObject;
   rowStyling?: GenericObject;
   inlineRowLoading?: boolean;
+  sortParentOnly?: boolean;
 }
 
 export function useTableState({
@@ -55,7 +57,8 @@ export function useTableState({
   columnVisibilityControl,
   pinnedRows,
   rowStyling,
-  inlineRowLoading = false
+  inlineRowLoading = false,
+  sortParentOnly = false
 }: UseTableStateProps) {
 
   // Create a local state for expanded and setExpanded if expandedControl not used
@@ -190,7 +193,7 @@ export function useTableState({
     getSubRows: (row: GenericObject) => row.children,
     getCoreRowModel: getCoreRowModel(),
     getExpandedRowModel: getExpandedRowModel(),
-    getSortedRowModel: getSortedRowModel(),
+    getSortedRowModel: sortParentOnly ? getParentOnlySortedRowModel() : getSortedRowModel(),
     enableSortingRemoval: enableSortingRemoval,
     sortDescFirst: true,
     onRowSelectionChange: setRowSelection,
