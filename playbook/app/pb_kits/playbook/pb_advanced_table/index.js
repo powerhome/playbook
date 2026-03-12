@@ -196,6 +196,17 @@ export default class PbAdvancedTable extends PbEnhancedElement {
     if (table.dataset.pbAdvancedTableInitialized) return;
     table.dataset.pbAdvancedTableInitialized = "true";
 
+    // Measure header height so pinned rows don't overlap when header wraps (e.g. mobile)
+    if (mainTable) {
+      PbAdvancedTable.updateStickyHeaderRowHeights(mainTable);
+      const resizeObserver = new ResizeObserver(() => {
+        PbAdvancedTable.updateStickyHeaderRowHeights(mainTable);
+        PbAdvancedTable.updatePinnedRowsStickyTops(mainTable);
+      });
+      resizeObserver.observe(table);
+      mainTable._advancedTableHeaderResizeObserver = resizeObserver;
+    }
+
     // Delegate checkbox changes
     table.addEventListener("change", (event) => {
       const checkbox = event.target.closest('input[type="checkbox"]');
@@ -316,8 +327,42 @@ export default class PbAdvancedTable extends PbEnhancedElement {
         lastVisibleRow.classList.add("last-row-cell");
       }
 
+      PbAdvancedTable.updateStickyHeaderRowHeights(parentElement);
       PbAdvancedTable.updatePinnedRowsStickyTops(table);
     }
+  }
+
+  /**
+   * Measure thead height and set --advanced-table-header-height so pinned rows and
+   * multi-row sticky headers use the correct offset. Re-run when header wraps (e.g. mobile).
+   */
+  static updateStickyHeaderRowHeights(advancedTableWrapper) {
+    if (!advancedTableWrapper) return;
+    const table = advancedTableWrapper.querySelector("table.pb_table");
+    const thead = table?.querySelector("thead");
+    if (!thead) return;
+
+    const rows = Array.from(thead.querySelectorAll("tr"));
+    let totalHeight = 0;
+    rows.forEach((tr, index) => {
+      const h = tr.offsetHeight;
+      if (index === 0) {
+        advancedTableWrapper.style.setProperty(
+          "--advanced-table-header-row-0-height",
+          `${h}px`
+        );
+      } else if (index === 1) {
+        advancedTableWrapper.style.setProperty(
+          "--advanced-table-header-row-1-height",
+          `${h}px`
+        );
+      }
+      totalHeight += h;
+    });
+    advancedTableWrapper.style.setProperty(
+      "--advanced-table-header-height",
+      `${totalHeight}px`
+    );
   }
 
   /**
@@ -547,13 +592,18 @@ window.expandAllSubRows = (element, rowDepth) => {
   PbAdvancedTable.handleToggleAllSubRows(element, rowDepth);
 };
 
-// Fix pinned row sticky tops on load (collapsed rows would otherwise leave a gap)
+// Fix header height and pinned row sticky tops on load (header wrap + collapsed rows)
+function updateAllAdvancedTableStickyHeights() {
+  document.querySelectorAll(".pb_advanced_table").forEach((wrapper) => {
+    PbAdvancedTable.updateStickyHeaderRowHeights(wrapper);
+    PbAdvancedTable.updatePinnedRowsStickyTops(wrapper);
+  });
+}
+
 if (typeof document !== "undefined") {
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", () =>
-      PbAdvancedTable.updatePinnedRowsStickyTopsForAll()
-    );
+    document.addEventListener("DOMContentLoaded", updateAllAdvancedTableStickyHeights);
   } else {
-    PbAdvancedTable.updatePinnedRowsStickyTopsForAll();
+    updateAllAdvancedTableStickyHeights();
   }
 }
