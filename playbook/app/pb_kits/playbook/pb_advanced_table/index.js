@@ -384,12 +384,6 @@ export default class PbAdvancedTable extends PbEnhancedElement {
     });
   }
 
-  static updatePinnedRowsStickyTopsForAll() {
-    document.querySelectorAll(".pb_advanced_table").forEach((wrapper) => {
-      PbAdvancedTable.updatePinnedRowsStickyTops(wrapper);
-    });
-  }
-
   hideCloseIcon() {
     const closeIcon = this.element.querySelector(UP_ARROW_SELECTOR);
     closeIcon.style.display = "none";

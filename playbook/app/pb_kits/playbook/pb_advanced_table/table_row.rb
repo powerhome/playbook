@@ -39,6 +39,10 @@ module Playbook
                            default: false
       prop :pinned_index, type: Playbook::Props::Numeric,
                           default: nil
+      prop :html_options, type: Playbook::Props::HashProp,
+                          default: {}
+      prop :classname, type: Playbook::Props::String,
+                       default: ""
 
       def data
         Hash(prop(:data)).merge(table_data_attributes)
@@ -47,16 +51,8 @@ module Playbook
       def classname
         classes = ["pb_table_tr", "pb-bg-row-white", subrow_depth_classname]
         classes << "pinned-row" if is_pinned_row
+        classes << prop(:classname) if prop(:classname).to_s.present?
         generate_classname(*classes, separator: " ")
-      end
-
-      def pinned_row_style
-        return nil unless is_pinned_row && pinned_index.is_a?(Numeric)
-
-        header_offset = "var(--advanced-table-header-height, 40px)"
-        row_offset = "calc(2.5em * #{pinned_index})"
-        bg = row_styling.find { |style| style[:row_id].to_s == row_id.to_s }&.[](:background_color) || "white"
-        "position: sticky; top: calc(#{header_offset} + #{row_offset}); z-index: 3; background: #{bg};"
       end
 
       def td_classname(column, index)
