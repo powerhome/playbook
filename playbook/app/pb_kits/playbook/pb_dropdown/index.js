@@ -1,5 +1,6 @@
 import PbEnhancedElement from "../pb_enhanced_element";
 import { PbDropdownKeyboard } from "./keyboard_accessibility";
+import { setArrowVisibility, toggleVisibility } from "../utilities/domHelpers";
 
 const DROPDOWN_SELECTOR = "[data-pb-dropdown]";
 const TRIGGER_SELECTOR = "[data-dropdown-trigger]";
@@ -23,7 +24,38 @@ export default class PbDropdown extends PbEnhancedElement {
   }
 
   get target() {
-    return this.element.querySelector(CONTAINER_SELECTOR);
+    return this.cachedElements?.target || this.element.querySelector(CONTAINER_SELECTOR);
+  }
+
+  get baseInput() {
+    return this.cachedElements?.baseInput || this.element.querySelector(DROPDOWN_INPUT);
+  }
+
+  get trigger() {
+    return this.cachedElements?.trigger || this.element.querySelector(TRIGGER_SELECTOR);
+  }
+
+  get customTrigger() {
+    return this.cachedElements?.customTrigger || this.element.querySelector(CUSTOM_DISPLAY_SELECTOR);
+  }
+
+  get dropdownWrapper() {
+    return this.cachedElements?.dropdownWrapper || this.element.querySelector(".dropdown_wrapper");
+  }
+
+  get placeholder() {
+    return this.cachedElements?.placeholder || this.element.querySelector(DROPDOWN_PLACEHOLDER);
+  }
+
+  cacheElements() {
+    this.cachedElements = {
+      target: this.element.querySelector(CONTAINER_SELECTOR),
+      baseInput: this.element.querySelector(DROPDOWN_INPUT),
+      trigger: this.element.querySelector(TRIGGER_SELECTOR),
+      customTrigger: this.element.querySelector(CUSTOM_DISPLAY_SELECTOR),
+      dropdownWrapper: this.element.querySelector(".dropdown_wrapper"),
+      placeholder: this.element.querySelector(DROPDOWN_PLACEHOLDER),
+    };
   }
 
   selectedOptions = new Set();
@@ -32,13 +64,15 @@ export default class PbDropdown extends PbEnhancedElement {
   connect() {
     // Store instance on element for DatePicker sync
     this.element._pbDropdownInstance = this;
+    this.cacheElements();
 
     this.keyboardHandler = new PbDropdownKeyboard(this);
     this.isMultiSelect = this.element.dataset.pbDropdownMultiSelect === "true";
+    this.closeOnClick = this.element.dataset.pbDropdownCloseOnClick || "any";
     this.formPillProps = this.element.dataset.formPillProps
       ? JSON.parse(this.element.dataset.formPillProps)
       : {};
-    const baseInput = this.element.querySelector(DROPDOWN_INPUT);
+    const baseInput = this.baseInput;
     this.wasOriginallyRequired =
       baseInput && baseInput.hasAttribute("required");
     this.setDefaultValue();
@@ -54,12 +88,96 @@ export default class PbDropdown extends PbEnhancedElement {
     this.isClearable = this.element.dataset.pbDropdownClearable !== "false";
     if (this.clearBtn) {
       this.clearBtn.style.display = "none";
-      this.clearBtn.addEventListener("click", (e) => {
+      this.clearBtnHandler = (e) => {
         e.stopPropagation();
         this.clearSelection();
-      });
+      }
+      this.clearBtn.addEventListener("click", this.clearBtnHandler);
     }
     this.updateClearButton();
+
+    // Listen for clear and select events from external source
+    this.handleClearEventBound = this.handleClearEvent.bind(this);
+    document.addEventListener("pb:dropdown:clear", this.handleClearEventBound);
+    this.handleSelectEventBound = this.handleSelectEvent.bind(this);
+    document.addEventListener("pb:dropdown:select", this.handleSelectEventBound);
+
+    // Listen for custom_event_type to clear on custom events
+    const customEventTypeString = this.element.dataset.customEventType;
+    if (customEventTypeString) {
+      this.customClearEventTypes = customEventTypeString
+        .split(",")
+        .map((e) => e.trim())
+        .filter(Boolean);
+      this.handleCustomClearBound = this.handleCustomClearEvent.bind(this);
+      this.customClearEventTypes.forEach((eventType) => {
+        document.addEventListener(eventType, this.handleCustomClearBound);
+      });
+    }
+  }
+
+  disconnect() {
+    // Clean up stored instance reference
+    if (this.element._pbDropdownInstance === this) {
+      delete this.element._pbDropdownInstance
+    }
+
+    // Clean up keyboard handler
+    if (this.keyboardHandler && typeof this.keyboardHandler.disconnect === 'function') {
+      this.keyboardHandler.disconnect()
+    }
+
+    // Clean up custom trigger click listener
+    if (this.customTriggerClickHandler) {
+      const customTrigger = this.customTrigger || this.element
+      customTrigger.removeEventListener('click', this.customTriggerClickHandler)
+    }
+
+    // Clean up target click listener
+    if (this.handleOptionClickBound) {
+      this.target.removeEventListener('click', this.handleOptionClickBound)
+    }
+
+    // Clean up document click listener
+    if (this.handleDocumentClickBound) {
+      document.removeEventListener('click', this.handleDocumentClickBound, true)
+    }
+
+    // Clean up search bar listener
+    if (this.searchBar && this.searchBarHandler) {
+      this.searchBar.removeEventListener('input', this.searchBarHandler)
+    }
+
+    // Clean up search input listeners
+    if (this.searchInput) {
+      if (this.searchInputFocusHandler) {
+        const trigger = this.trigger
+        if (trigger) {
+          trigger.removeEventListener('click', this.searchInputFocusHandler)
+        }
+      }
+      if (this.searchInputHandler) {
+        this.searchInput.removeEventListener('input', this.searchInputHandler)
+      }
+    }
+
+    // Clean up clear button listener
+    if (this.clearBtn && this.clearBtnHandler) {
+      this.clearBtn.removeEventListener('click', this.clearBtnHandler)
+    }
+
+    // Clean up external clear/select listeners
+    if (this.handleClearEventBound) {
+      document.removeEventListener("pb:dropdown:clear", this.handleClearEventBound)
+    }
+    if (this.handleSelectEventBound) {
+      document.removeEventListener("pb:dropdown:select", this.handleSelectEventBound)
+    }
+    if (this.customClearEventTypes && this.handleCustomClearBound) {
+      this.customClearEventTypes.forEach((eventType) => {
+        document.removeEventListener(eventType, this.handleCustomClearBound)
+      })
+    }
   }
 
   updateClearButton() {
@@ -70,15 +188,14 @@ export default class PbDropdown extends PbEnhancedElement {
     }
     const hasSelection = this.isMultiSelect
       ? this.selectedOptions.size > 0
-      : Boolean(this.element.querySelector(DROPDOWN_INPUT).value);
+      : Boolean(this.baseInput?.value);
 
     this.clearBtn.style.display = hasSelection ? "" : "none";
   }
 
   bindEventListeners() {
-    const customTrigger =
-      this.element.querySelector(CUSTOM_DISPLAY_SELECTOR) || this.element;
-    customTrigger.addEventListener("click", (e) => {
+    const customTrigger = this.customTrigger || this.element;
+    this.customTriggerClickHandler = (e) => {
       const label = e.target.closest(LABEL_SELECTOR);
       if (label && label.htmlFor) {
         const trigger = this.element.querySelector(
@@ -88,13 +205,23 @@ export default class PbDropdown extends PbEnhancedElement {
           trigger.focus();
         }
       }
+      if (
+        this.closeOnClick === "outside" &&
+        this.target?.contains(e.target)
+      ) {
+        return;
+      }
       this.toggleElement(this.target);
-    });
+    }
+    customTrigger.addEventListener("click", this.customTriggerClickHandler);
 
-    this.target.addEventListener("click", this.handleOptionClick.bind(this));
+    this.handleOptionClickBound = this.handleOptionClick.bind(this)
+    this.target.addEventListener("click", this.handleOptionClickBound);
+    
+    this.handleDocumentClickBound = this.handleDocumentClick.bind(this)
     document.addEventListener(
       "click",
-      this.handleDocumentClick.bind(this),
+      this.handleDocumentClickBound,
       true,
     );
   }
@@ -103,9 +230,8 @@ export default class PbDropdown extends PbEnhancedElement {
     this.searchBar = this.element.querySelector(SEARCH_BAR_SELECTOR);
     if (!this.searchBar) return;
 
-    this.searchBar.addEventListener("input", (e) =>
-      this.handleSearch(e.target.value),
-    );
+    this.searchBarHandler = (e) => this.handleSearch(e.target.value)
+    this.searchBar.addEventListener('input', this.searchBarHandler);
   }
 
   bindSearchInput() {
@@ -113,14 +239,12 @@ export default class PbDropdown extends PbEnhancedElement {
     if (!this.searchInput) return;
 
     // Focus the input when anyone clicks the wrapper
-    this.element
-      .querySelector(TRIGGER_SELECTOR)
-      ?.addEventListener("click", () => this.searchInput.focus());
+    this.searchInputFocusHandler = () => this.searchInput.focus()
+    this.trigger?.addEventListener('click', this.searchInputFocusHandler);
 
     // Live filter
-    this.searchInput.addEventListener("input", (e) =>
-      this.handleSearch(e.target.value),
-    );
+    this.searchInputHandler = (e) => this.handleSearch(e.target.value)
+    this.searchInput.addEventListener('input', this.searchInputHandler);
   }
 
   adjustDropdownHeight() {
@@ -148,7 +272,7 @@ export default class PbDropdown extends PbEnhancedElement {
   adjustDropdownPosition(container) {
     if (!container) return;
 
-    const wrapper = this.element.querySelector(".dropdown_wrapper");
+    const wrapper = this.dropdownWrapper;
     if (!wrapper) return;
 
     const wrapperRect = wrapper.getBoundingClientRect();
@@ -221,7 +345,7 @@ export default class PbDropdown extends PbEnhancedElement {
 
   handleOptionClick(event) {
     const option = event.target.closest(OPTION_SELECTOR);
-    const hiddenInput = this.element.querySelector(DROPDOWN_INPUT);
+    const hiddenInput = this.baseInput;
 
     if (option) {
       const value = option.dataset.dropdownOptionLabel;
@@ -250,22 +374,158 @@ export default class PbDropdown extends PbEnhancedElement {
 
   handleDocumentClick(event) {
     if (event.target.closest(SEARCH_BAR_SELECTOR)) return;
-    if (this.isClickOutside(event) && this.target.classList.contains("open")) {
+    const shouldCloseOnOutsideClick =
+      this.closeOnClick === "outside" || this.closeOnClick === "any";
+    if (
+      shouldCloseOnOutsideClick &&
+      this.isClickOutside(event) &&
+      this.target.classList.contains("open")
+    ) {
       this.hideElement(this.target);
       this.updateArrowDisplay(false);
     }
   }
 
+  // ----- External events handling section -----
+  // Handles pb:dropdown:clear - clear this dropdown when event.detail.dropdownId matches.
+  handleClearEvent(event) {
+    const targetId = event.detail?.dropdownId;
+    if (targetId && this.element.id === targetId) {
+      this.clearSelection();
+    }
+  }
+
+  // Handles custom_event_type events (e.g. turbo:submit-end) - clear when detail.dropdownId matches or is omitted.
+  handleCustomClearEvent(event) {
+    const targetId = event.detail?.dropdownId;
+    if (targetId == null || this.element.id === targetId) {
+      this.clearSelection();
+    }
+  }
+
+  // Handles pb:dropdown:select - set dropdown selection by option id(s).
+  // Single: detail: { dropdownId, optionId }. Multi: detail: { dropdownId, optionIds: ['id1', 'id2'] }.
+  handleSelectEvent(event) {
+    const targetId = event.detail?.dropdownId;
+    if (!targetId || this.element.id !== targetId) return;
+
+    const optionId = event.detail?.optionId;
+    const optionIds = event.detail?.optionIds;
+    if (optionId != null) {
+      this.setSelectionByOptionId(optionId);
+    } else if (Array.isArray(optionIds)) {
+      this.setSelectionByOptionIds(optionIds);
+    }
+  }
+
+  // Set single-select dropdown to the option with the given id. No-op if id not found.
+  setSelectionByOptionId(optionId) {
+    if (this.isMultiSelect) return;
+    const hiddenInput = this.baseInput;
+    const optionEls = Array.from(this.element.querySelectorAll(OPTION_SELECTOR));
+    const selectedOption = optionEls.find((opt) => {
+      try {
+        return JSON.parse(opt.dataset.dropdownOptionLabel).id === optionId;
+      } catch {
+        return false;
+      }
+    });
+    if (!selectedOption) return;
+
+    optionEls.forEach((opt) => opt.classList.remove("pb_dropdown_option_selected"));
+    selectedOption.classList.add("pb_dropdown_option_selected");
+    if (hiddenInput) hiddenInput.value = optionId;
+    const optionData = JSON.parse(selectedOption.dataset.dropdownOptionLabel);
+    const customDisplayElement = this.element.querySelector(
+      '[data-dropdown-trigger-custom-display]',
+    );
+    if (customDisplayElement) {
+      this.setTriggerElementText("");
+      customDisplayElement.style.display = "block";
+      customDisplayElement.style.paddingRight = "8px";
+    } else {
+      this.setTriggerElementText(optionData.label);
+    }
+    if (this.searchInput) {
+      this.searchInput.value = optionData.label;
+    }
+
+    if (optionData.formatted_start_date && optionData.formatted_end_date) {
+      const startDateId = this.element.dataset.startDateId;
+      const endDateId = this.element.dataset.endDateId;
+      const controlsStartId = this.element.dataset.controlsStartId;
+      const controlsEndId = this.element.dataset.controlsEndId;
+      if (startDateId) {
+        const startDateInput = document.getElementById(startDateId);
+        if (startDateInput) startDateInput.value = optionData.formatted_start_date;
+      }
+      if (endDateId) {
+        const endDateInput = document.getElementById(endDateId);
+        if (endDateInput) endDateInput.value = optionData.formatted_end_date;
+      }
+      const syncDatePickers = () => {
+        if (controlsStartId) {
+          const startPicker = document.querySelector(`#${CSS.escape(controlsStartId)}`)?._flatpickr;
+          if (startPicker) startPicker.setDate(optionData.formatted_start_date, true, "m/d/Y");
+        }
+        if (controlsEndId) {
+          const endPicker = document.querySelector(`#${CSS.escape(controlsEndId)}`)?._flatpickr;
+          if (endPicker) endPicker.setDate(optionData.formatted_end_date, true, "m/d/Y");
+        }
+      };
+      syncDatePickers();
+      setTimeout(syncDatePickers, 100);
+      setTimeout(syncDatePickers, 300);
+    }
+
+    this.updateClearButton();
+    this.emitSelectionChange();
+  }
+
+  // Set multi-select dropdown to the options with the given ids. Invalid ids are skipped.
+  setSelectionByOptionIds(optionIds) {
+    if (!this.isMultiSelect || !optionIds.length) return;
+    const optionEls = Array.from(this.element.querySelectorAll(OPTION_SELECTOR));
+    this.selectedOptions.clear();
+    optionEls.forEach((opt) => {
+      opt.classList.remove("pb_dropdown_option_selected");
+      opt.style.display = "";
+    });
+
+    optionIds.forEach((id) => {
+      const opt = optionEls.find((o) => {
+        try {
+          return JSON.parse(o.dataset.dropdownOptionLabel).id === id;
+        } catch {
+          return false;
+        }
+      });
+      if (opt) {
+        const raw = opt.dataset.dropdownOptionLabel;
+        this.selectedOptions.add(raw);
+        opt.style.display = "none";
+      }
+    });
+
+    this.updatePills();
+    this.updateClearButton();
+    this.adjustDropdownHeight();
+    this.syncHiddenInputs();
+    this.emitSelectionChange();
+  }
+  // ----- End External events handling section -----
+
   isClickOutside(event) {
     const label = event.target.closest(LABEL_SELECTOR);
     if (label && this.element.contains(label)) return false;
-    const customTrigger = this.element.querySelector(CUSTOM_DISPLAY_SELECTOR);
+    const customTrigger = this.customTrigger;
     if (customTrigger) {
-      return !customTrigger.contains(event.target);
+      const clickInTrigger = customTrigger.contains(event.target);
+      const clickInContainer = this.target?.contains(event.target);
+      return !clickInTrigger && !clickInContainer;
     } else {
-      const triggerElement = this.element.querySelector(TRIGGER_SELECTOR);
-      const containerElement =
-        this.element.parentNode.querySelector(CONTAINER_SELECTOR);
+      const triggerElement = this.trigger;
+      const containerElement = this.element.querySelector(CONTAINER_SELECTOR);
 
       const isOutsideTrigger = triggerElement
         ? !triggerElement.contains(event.target)
@@ -284,7 +544,7 @@ export default class PbDropdown extends PbEnhancedElement {
     if (this.isMultiSelect) {
       detail = Array.from(this.selectedOptions).map(JSON.parse);
     } else {
-      const hiddenInput = this.element.querySelector(DROPDOWN_INPUT);
+      const hiddenInput = this.baseInput;
       detail = hiddenInput.value
         ? JSON.parse(
             this.element.querySelector(
@@ -403,12 +663,16 @@ export default class PbDropdown extends PbEnhancedElement {
       this.emitSelectionChange();
     }
 
-    const customTrigger = this.element.querySelector(CUSTOM_DISPLAY_SELECTOR);
-    if (customTrigger) {
-      if (this.target.classList.contains("open")) {
-        this.hideElement(this.target);
-        this.updateArrowDisplay(false);
-      }
+    const customTrigger = this.customTrigger;
+    const shouldCloseOnOptionSelect =
+      this.closeOnClick === "any" || this.closeOnClick === "inside";
+    if (
+      customTrigger &&
+      shouldCloseOnOptionSelect &&
+      this.target.classList.contains("open")
+    ) {
+      this.hideElement(this.target);
+      this.updateArrowDisplay(false);
     }
 
     const options = this.element.querySelectorAll(OPTION_SELECTOR);
@@ -423,7 +687,7 @@ export default class PbDropdown extends PbEnhancedElement {
           this.adjustDropdownHeight();
         }
       });
-      this.element.querySelector(DROPDOWN_INPUT).value = Array.from(
+      this.baseInput.value = Array.from(
         this.selectedOptions,
       )
         .map((opt) => JSON.parse(opt).id)
@@ -477,26 +741,26 @@ export default class PbDropdown extends PbEnhancedElement {
   }
 
   toggleElement(elem) {
-    if (elem.classList.contains("open")) {
-      this.hideElement(elem);
-      this.updateArrowDisplay(false);
-      return;
-    }
-    this.showElement(elem);
-    this.updateArrowDisplay(true);
+    const isOpen = toggleVisibility({
+      isVisible: elem.classList.contains("open"),
+      onHide: () => this.hideElement(elem),
+      onShow: () => this.showElement(elem),
+    });
+
+    this.updateArrowDisplay(isOpen);
   }
 
   updateArrowDisplay(isOpen) {
-    const downArrow = this.element.querySelector(DOWN_ARROW_SELECTOR);
-    const upArrow = this.element.querySelector(UP_ARROW_SELECTOR);
-    if (downArrow && upArrow) {
-      downArrow.style.display = isOpen ? "none" : "inline-block";
-      upArrow.style.display = isOpen ? "inline-block" : "none";
-    }
+    setArrowVisibility({
+      rootElement: this.element,
+      downSelector: DOWN_ARROW_SELECTOR,
+      upSelector: UP_ARROW_SELECTOR,
+      showDownArrow: !isOpen,
+    });
   }
 
   handleFormValidation() {
-    const hiddenInput = this.element.querySelector(DROPDOWN_INPUT);
+    const hiddenInput = this.baseInput;
 
     hiddenInput.addEventListener(
       "invalid",
@@ -539,7 +803,7 @@ export default class PbDropdown extends PbEnhancedElement {
   }
 
   setDefaultValue() {
-    const hiddenInput = this.element.querySelector(DROPDOWN_INPUT);
+    const hiddenInput = this.baseInput;
     const optionEls = Array.from(
       this.element.querySelectorAll(OPTION_SELECTOR),
     );
@@ -652,7 +916,7 @@ export default class PbDropdown extends PbEnhancedElement {
   }
 
   resetDropdownValue() {
-    const hiddenInput = this.element.querySelector(DROPDOWN_INPUT);
+    const hiddenInput = this.baseInput;
     const options = this.element.querySelectorAll(OPTION_SELECTOR);
     options.forEach((option) => {
       option.classList.remove("pb_dropdown_option_selected");
@@ -661,7 +925,7 @@ export default class PbDropdown extends PbEnhancedElement {
 
     hiddenInput.value = "";
 
-    const defaultPlaceholder = this.element.querySelector(DROPDOWN_PLACEHOLDER);
+    const defaultPlaceholder = this.placeholder;
     this.setTriggerElementText(defaultPlaceholder.dataset.dropdownPlaceholder);
 
     if (this.searchInput) {
@@ -860,7 +1124,7 @@ export default class PbDropdown extends PbEnhancedElement {
       .querySelectorAll('input[data-generated="true"]')
       .forEach((n) => n.remove());
 
-    const baseInput = this.element.querySelector(DROPDOWN_INPUT);
+    const baseInput = this.baseInput;
     if (!baseInput) return;
     // for multi_select, for each selectedOption, create a hidden input
     const name = baseInput.getAttribute("name");
@@ -898,10 +1162,10 @@ export default class PbDropdown extends PbEnhancedElement {
         this.adjustDropdownHeight();
       });
 
-      const hiddenInput = this.element.querySelector(DROPDOWN_INPUT);
+      const hiddenInput = this.baseInput;
       if (hiddenInput) hiddenInput.value = "";
 
-      const placeholder = this.element.querySelector(DROPDOWN_PLACEHOLDER);
+      const placeholder = this.placeholder;
       if (placeholder)
         this.setTriggerElementText(placeholder.dataset.dropdownPlaceholder);
     }

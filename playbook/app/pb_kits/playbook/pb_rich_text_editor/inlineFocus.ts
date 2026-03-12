@@ -1,8 +1,9 @@
-const inlineFocus = () => {
-  const trixEditorElement = event.target as Element
-  const trixEditorContainer = trixEditorElement.closest('.pb_rich_text_editor_kit')
+const inlineFocus = (event: Event) => {
+  const trixEditorElement = event.target
+  if (!(trixEditorElement instanceof Element)) return
 
-  if (!trixEditorContainer.classList.contains('inline')) return
+  const trixEditorContainer = trixEditorElement.closest('.pb_rich_text_editor_kit')
+  if (!trixEditorContainer?.classList.contains('inline')) return
 
   trixEditorContainer.classList.toggle('focused')
 }

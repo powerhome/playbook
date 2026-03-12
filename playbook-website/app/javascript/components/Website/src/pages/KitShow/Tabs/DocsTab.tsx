@@ -54,7 +54,7 @@ export const DocsTab = ({
       style={{ width: "100%" }}
     >
       <Card marginBottom="lg" padding="none" width="100%">
-        <Caption text={example.title} margin="md" />
+        <Caption text={example.title} color="lighter" margin="md" />
         <LiveExample code={example.source} exampleProps={exampleProps} />
         {example.description && example.description !== "" && (
           <Body margin="md">

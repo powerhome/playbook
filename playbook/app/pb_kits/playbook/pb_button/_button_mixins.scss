@@ -57,7 +57,7 @@ $pb_button_border_width: 0px;
   }
 
   .loading-icon {
-    position: absolute;
+    position: static;
     display: none;
   }
   .pb_button_content {
@@ -158,10 +158,15 @@ $pb_button_border_width: 0px;
 // Loading =====================
 @mixin pb_button_loading($loading: false) {
   @if $loading == true {
+    display: inline-grid;
+    place-items: center;
+
     .loading-icon {
+      grid-area: 1 / 1;
       display: block;
     }
     .pb_button_content {
+      grid-area: 1 / 1;
       visibility: hidden;
     }
   }

@@ -25,6 +25,7 @@ examples:
   - dropdown_separators_hidden: Separators Hidden
   - dropdown_with_clearable: Clearable
   - dropdown_with_constrain_height_rails: Constrain Height
+  - dropdown_closing_options_rails: Closing Options
   - dropdown_quickpick_rails: Quick Pick Variant
   - dropdown_quickpick_range_end_rails: Quick Pick Variant (Range Ends Today)
   - dropdown_quickpick_default_dates: Quick Pick Variant (Default Dates)
@@ -32,6 +33,7 @@ examples:
   - dropdown_quickpick_with_date_pickers_rails: Quick Pick with Date Pickers
   - dropdown_quickpick_with_date_pickers_default_rails: Quick Pick with Date Pickers (Default Value)
   - dropdown_required_indicator: Required Indicator
+  - dropdown_custom_event_type: Custom Event Type
 
   react:
   - dropdown_default: Default
@@ -62,6 +64,7 @@ examples:
   - dropdown_with_constrain_height: Constrain Height
   - dropdown_separators_hidden: Separators Hidden
   - dropdown_with_external_control: useDropdown Hook
+  - dropdown_closing_options: Closing Options
   - dropdown_quickpick: Quick Pick Variant
   - dropdown_quickpick_range_end: Quick Pick Variant (Range Ends Today)
   - dropdown_quickpick_default_dates: Quick Pick Variant (Default Dates)

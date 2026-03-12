@@ -5,7 +5,7 @@ import Button from '../../pb_button/_button'
 import Dialog from '../../pb_dialog/_dialog'
 import Flex from '../../pb_flex/_flex'
 import Caption from '../../pb_caption/_caption'
-import RichTextEditor from '../../pb_rich_text_editor/_rich_text_editor'
+import Textarea from '../../pb_textarea/_textarea'
 import Typeahead from '../../pb_typeahead/_typeahead'
 
 const useDialog = (visible = false) => {
@@ -77,8 +77,11 @@ const DialogFullHeight = () => {
               <Body>{title}</Body>
             </Dialog.Header>
             <Dialog.Body>
-              <Caption marginBottom="xs">{"Description"}</Caption>
-              <RichTextEditor />
+              <Textarea
+                  id="default-example-1"
+                  label="Description"
+                  rows={4}
+              />
               <br />
               <Caption>
                 {

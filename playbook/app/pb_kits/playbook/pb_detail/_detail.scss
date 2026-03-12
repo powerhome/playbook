@@ -13,10 +13,10 @@
 
   // Base styles
   a {
-    color: $primary;
+    color: $text_link;
     &:hover {
       cursor: pointer;
-      color: $text_lt_default;
+      color: $text_default_color;
     }
   }
 
@@ -32,58 +32,58 @@
 
 // Color variations - Light Mode
 .pb_detail_kit_color_light {
-  @include pb_detail($text_lt_light);
+  @include pb_detail($text_light);
 }
 
 .pb_detail_kit_color_default {
-  @include pb_detail($text_lt_default);
+  @include pb_detail($text_default_color);
 }
 
 .pb_detail_kit_color_lighter {
-  @include pb_detail($text_lt_lighter);
+  @include pb_detail($text_lighter);
 }
 
 .pb_detail_kit_color_link {
-  @include pb_detail($primary);
+  @include pb_detail($text_link);
 }
 
 .pb_detail_kit_color_error {
-  @include pb_detail($error);
+  @include pb_detail($text_error);
 }
 
 .pb_detail_kit_color_success {
-  @include pb_detail($text_lt_success_sm);
+  @include pb_detail($text_success);
 }
 
 // Color variations - Dark Mode
 .pb_detail_kit.dark.pb_detail_kit_color_light,
 .pb_detail_kit_color_light.dark {
-  @include pb_detail($text_dk_light);
+  @include pb_detail($text_light_dark);
 }
 
 .pb_detail_kit.dark.pb_detail_kit_color_default,
 .pb_detail_kit_color_default.dark {
-  @include pb_detail($text_dk_default);
+  @include pb_detail($text_default_dark);
 }
 
 .pb_detail_kit.dark.pb_detail_kit_color_lighter,
 .pb_detail_kit_color_lighter.dark {
-  @include pb_detail($text_dk_lighter);
+  @include pb_detail($text_lighter_dark);
 }
 
 .pb_detail_kit.dark.pb_detail_kit_color_link,
 .pb_detail_kit_color_link.dark {
-  @include pb_detail($active_dark);
+  @include pb_detail($text_link_dark);
 }
 
 .pb_detail_kit.dark.pb_detail_kit_color_error,
 .pb_detail_kit_color_error.dark {
-  @include pb_detail($error_dark);
+  @include pb_detail($text_error_dark);
 }
 
 .pb_detail_kit.dark.pb_detail_kit_color_success,
 .pb_detail_kit_color_success.dark {
-  @include pb_detail($text_dk_success_sm);
+  @include pb_detail($text_success_dark);
 }
 
 // Bold styles

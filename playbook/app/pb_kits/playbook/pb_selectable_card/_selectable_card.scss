@@ -44,6 +44,7 @@ $pb_selectable_paddings: (
     }
 
     @include pb_card;
+    border-color: $input_border_default;
     transition-property: none;
     transition-duration: 0s;
     background-color: $white;
@@ -53,8 +54,8 @@ $pb_selectable_paddings: (
 
     @media (hover:hover) {
       &:hover {
-        box-shadow: $shadow-deep;
-        border-color: $slate;
+        box-shadow: $shadow_deep;
+        border-color: $input_border_default;
       }
     }
 
@@ -104,10 +105,10 @@ $pb_selectable_paddings: (
         }
 
         .separator {
-          background: $royal;
+          background: $input_border_state;
         }
         .psuedo_separator {
-          background-color: $royal;
+          background-color: $input_border_state;
         }
       }
 
@@ -134,14 +135,28 @@ $pb_selectable_paddings: (
   }
 
   &.display_input {
+    .separator {
+      background: $input_border_default;
+    }
+
+    .psuedo_separator {
+      background-color: $input_border_default;
+    }
+
     input[type="checkbox"],
     input[type="radio"] {
       &:checked {
-        ~label {
+        ~ label {
           border-width: $pb_card_border_width;
-          outline: 1px solid $primary;
-        }
+          outline: 1px solid $input_border_state;
 
+          .separator {
+            background: $input_border_state;
+          }
+          .psuedo_separator {
+            background-color: $input_border_state;
+          }
+        }
       }
     }
 
@@ -151,12 +166,36 @@ $pb_selectable_paddings: (
     }
 
     &.dark {
+      .separator {
+        background: $input_border_default_dark;
+      }
+
+      .psuedo_separator {
+        background-color: $input_border_default_dark;
+      }
+
       input[type="checkbox"],
       input[type="radio"] {
         &:checked ~ label {
           border-width: $pb_card_border_width;
-          outline: 1px solid $primary_action_dark;
+          outline: 1px solid $input_border_state_dark;
+
+          .separator {
+            background: $input_border_state_dark;
+          }
+          .psuedo_separator {
+            background-color: $input_border_state_dark;
+          }
         }
+      }
+    }
+
+    &.error {
+      .separator {
+        background: $input_border_error;
+      }
+      .psuedo_separator {
+        background-color: $input_border_error;
       }
     }
   }
@@ -166,9 +205,10 @@ $pb_selectable_paddings: (
     > label {
       @include pb_card_dark;
       background: $bg_dark_card;
+      border-color: $input_border_default_dark;
 
       .pb_selectable_card_circle {
-        border-color: $bg_dark;
+        border-color: $input_border_default;
         background: $primary_action_dark;
       }
     }
@@ -187,10 +227,13 @@ $pb_selectable_paddings: (
 
     &.error {
       > label {
-        border-color: $error_dark;
+        border-color: $input_border_error_dark;
       }
-      .separator{
-        background: $error_dark;
+      .separator {
+        background: $input_border_error_dark;
+      }
+      .psuedo_separator {
+        background-color: $input_border_error_dark;
       }
     }
   }
@@ -210,10 +253,13 @@ $pb_selectable_paddings: (
 
   &.error {
     > label {
-      border-color: $error;
+      border-color: $input_border_error;
     }
     .separator {
-      background: $error;
+      background: $input_border_error;
+    }
+    .psuedo_separator {
+      background-color: $input_border_error;
     }
   }
 }
@@ -232,17 +278,20 @@ $pb_selectable_paddings: (
 }
 
 .pb_selectable_card_kit_disabled>label {
-  border-color: $border_light !important;
+  border-color: $input_border_disabled !important;
+  color: $input_text_disabled;
+  background-color: $input_background_disabled;
 
   .dark & {
-    border-color: $border_dark !important;
+    border-color: $input_border_disabled_dark !important;
+    color: $input_text_disabled_dark;
+    background-color: $input_background_disabled_dark;
   }
 }
 
 .pb_selectable_card_kit_checked_disabled>label {
-  border-color: $primary !important;
-
+  border-color: $input_border_state !important;
   .dark & {
-    border-color: $primary_action_dark !important;
+    border-color: $input_border_state_dark !important;
   }
 }

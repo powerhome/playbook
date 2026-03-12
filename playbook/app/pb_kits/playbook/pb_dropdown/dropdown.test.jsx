@@ -212,7 +212,7 @@ test('generated label prop', () => {
   )
 
   const kit = screen.getByTestId(testId)
-  const label = kit.querySelector('.pb_caption_kit_md')
+  const label = kit.querySelector('.pb_caption_kit_md_lighter')
   expect(label).toHaveTextContent('Countries')
 })
 

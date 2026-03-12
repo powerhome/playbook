@@ -30,7 +30,7 @@
 .pb_body_kit_error_neutral,
 .pb_body_kit_error_positive,
 .pb_body_kit_error_negative {
-  @include pb_body($text_lt_default);
+  @include pb_body($text_default_color);
   
   b,
   strong {
@@ -38,9 +38,9 @@
   }
 
   a {
-    color: $primary;
+    color: $text_link;
     &:hover {
-      color: $text_lt_default;
+      color: $text_default_color;
     }
   }
 
@@ -110,7 +110,7 @@
   @include pb_body_dark();
   
   a {
-    color: $active_dark;
+    color: $text_link_dark;
   }
 }
 

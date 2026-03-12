@@ -19,6 +19,7 @@ RSpec.describe Playbook::PbSelect::Select do
   it { is_expected.to define_boolean_prop(:compact).with_default(false) }
   it { is_expected.to define_boolean_prop(:show_arrow).with_default(false) }
   it { is_expected.to define_hash_prop(:input_options).with_default({}) }
+  it { is_expected.to define_boolean_prop(:required_indicator).with_default(false) }
 
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do

@@ -1,4 +1,5 @@
 @import "../../pb_textarea/textarea_mixin";
+@import "../../tokens/colors";
 
 .pb_date_picker_kit {
 
@@ -13,6 +14,7 @@
     input::placeholder,
     .date_picker_input .placeholder {
       @include pb_body_light;
+      color: $input_text_default;
     }
 
     input,
@@ -24,17 +26,90 @@
 
     input:hover,
     .date_picker_input:hover {
-      background-color: rgba($focus_input_light, $opacity_5);
+      background-color: $input_background_state;
     }
 
     input:focus,
     .date_picker_input:focus,
     input:-webkit-autofill:focus,
     .date_picker_input:-webkit-autofill:focus {
-      @include pb_textarea_focus;
+      @include pb_textarea_focus_light;
       @include transition_default;
-      border-color: $primary;
-      background-color: rgba($focus_input_light, $opacity_5);
+    }
+
+    input:disabled,
+    .date_picker_input:disabled {
+      border-color: $input_border_disabled;
+      background-color: $input_background_disabled;
+      color: $input_text_disabled;
+    }
+
+    input:disabled::placeholder,
+    .date_picker_input:disabled::placeholder {
+      color: $input_text_disabled;
+    }
+  }
+
+  &.dark {
+    .date_picker_input_wrapper {
+      input::placeholder,
+      .date_picker_input .placeholder {
+        @include pb_body_light_dark;
+        color: $input_text_default_dark;
+      }
+
+      input,
+      .date_picker_input {
+        @include pb_textarea_dark;
+        @include pb_body_dark;
+        overflow: hidden;
+      }
+
+      input:hover,
+      .date_picker_input:hover {
+        background-color: $input_background_state_dark;
+      }
+
+      input:focus,
+      .date_picker_input:focus,
+      input:active,
+      .date_picker_input:active,
+      input:-webkit-autofill:focus,
+      .date_picker_input:-webkit-autofill:focus {
+        @include pb_textarea_focus_dark;
+        @include transition_default;
+      }
+
+      input:-webkit-autofill,
+      input:-webkit-autofill:hover,
+      input:-internal-autofill-selected,
+      .date_picker_input:-webkit-autofill,
+      .date_picker_input:-webkit-autofill:hover,
+      .date_picker_input:-internal-autofill-selected {
+        background-color: $input_background_state_dark;
+        color: $input_text_default_dark;
+      }
+
+      input:disabled,
+      .date_picker_input:disabled {
+        border-color: $input_border_disabled_dark;
+        background-color: $input_background_disabled_dark;
+        color: $input_text_disabled_dark;
+      }
+
+      input:disabled::placeholder,
+      .date_picker_input:disabled::placeholder {
+        color: $input_text_disabled_dark;
+      }
+    }
+
+    &.error {
+      .date_picker_input_wrapper {
+        input,
+        .date_picker_input {
+          border-color: $input_border_error_dark;
+        }
+      }
     }
   }
 
@@ -46,7 +121,7 @@
 
       input,
       .date_picker_input {
-        border-color: $error;
+        border-color: $input_border_error;
       }
     }
   }

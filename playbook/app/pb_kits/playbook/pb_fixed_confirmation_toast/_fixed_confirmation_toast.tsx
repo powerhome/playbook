@@ -26,6 +26,7 @@ type FixedConfirmationToastProps = {
   icon?: string,
   id?: string;
   multiLine?: boolean;
+  navMarginTop?: boolean;
   onClose?: VoidCallback;
   open?: boolean;
   status?: "success" | "error" | "neutral" | "tip";
@@ -47,6 +48,7 @@ const FixedConfirmationToast = (props: FixedConfirmationToastProps): React.React
     htmlOptions = {},
     icon,
     multiLine = false,
+    navMarginTop = false,
     onClose = () => undefined,
     open = true,
     status = "neutral",
@@ -61,6 +63,7 @@ const FixedConfirmationToast = (props: FixedConfirmationToastProps): React.React
   const css = classnames(
     `pb_fixed_confirmation_toast_kit_${status}${multiLine ? '_multi_line' : ''}`,
     { [`positioned_toast ${vertical} ${horizontal}`]: vertical && horizontal },
+    { [`nav_margin_top`]: navMarginTop },
     `${iconClass}`,
     globalProps(props, { zIndex }),
     className

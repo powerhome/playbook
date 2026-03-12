@@ -3,14 +3,14 @@
 <%= pb_rails("card", props: { classname: "pb--doc", padding: "none", dark: dark, id: "pb--doc-#{example_key}" }) do %>
   <% unless (type == "swift") %>
     <div class="pb--kit-example">
-      <%= pb_rails("caption", props: { text: example_title, dark: dark }) %>
+      <%= pb_rails("caption", props: { text: example_title, color: "lighter", dark: dark }) %>
       <br />
       <%= example %>
       <br>
     </div>
   <% else %>
     <div class="pb--kit-example-markdown pt_none markdown kit_show_swift <%= dark ? "dark" : "" %>">
-      <%= pb_rails("caption", props: { text: example_title, dark: dark, margin_top: "md" }) %>
+      <%= pb_rails("caption", props: { text: example_title, color: "lighter", dark: dark, margin_top: "md" }) %>
       <%= render_markdown(description) %>
     </div>
   <% end %>

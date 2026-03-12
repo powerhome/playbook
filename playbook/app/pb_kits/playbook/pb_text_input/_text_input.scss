@@ -15,6 +15,7 @@
     input::placeholder,
     .text_input .placeholder {
       @include pb_body_light;
+      color: $input_text_default;
     }
     input,
     .text_input {
@@ -24,16 +25,20 @@
     }
     input:hover,
     .text_input:hover {
-      background-color: rgba($focus_input_light, $opacity_5);
+      background-color: $input_background_state;
     }
     input:focus,
     .text_input:focus,
+    input:active,
+    .text_input:active,
     input:-webkit-autofill:focus,
     .text_input:-webkit-autofill:focus {
-      @include pb_textarea_focus;
+      @include pb_textarea_focus_light;
       @include transition_default;
-      border-color: $primary;
-      background-color: rgba($focus_input_light, $opacity_5);
+    }
+    input:disabled::placeholder,
+    .text_input:disabled::placeholder {
+      color: $input_text_disabled;
     }
   }
   &.dark {
@@ -47,29 +52,52 @@
         border-right: 0;
       }
     }
+    .add-on-icon {
+      color: $input_text_default_dark;
+    }
     .text_input_wrapper {
       input::placeholder,
       .text_input .placeholder {
         @include pb_body_light_dark;
+        color: $input_text_default_dark;
       }
       input,
       .text_input {
         @include pb_textarea_dark;
         @include pb_body_dark;
         overflow: hidden;
-        background-color: rgba($white, $opacity_1);
-        border-color: rgba($white, 0.15);
       }
       input:hover,
       .text_input:hover {
-        background-color: rgba($white, 0.15);
+        background-color: $input_background_state_dark;
       }
       input:focus,
       .text_input:focus,
+      input:active,
+      .text_input:active,
       input:-webkit-autofill:focus,
       .text_input:-webkit-autofill:focus {
-        border-color: $active_dark;
-        background-color: rgba($white, 0.025);
+        @include pb_textarea_focus_dark;
+        @include transition_default;
+      }
+      input:-webkit-autofill,
+      input:-webkit-autofill:hover,
+      input:-internal-autofill-selected,
+      .text_input:-webkit-autofill,
+      .text_input:-webkit-autofill:hover,
+      .text_input:-internal-autofill-selected {
+        background-color: $input_background_state_dark;
+        color: $input_text_default_dark;
+      }
+      input:disabled,
+      .text_input:disabled {
+        border-color: $input_border_disabled_dark;
+        background-color: $input_background_disabled_dark;
+        color: $input_text_disabled_dark;
+      }
+      input:disabled::placeholder,
+      .text_input:disabled::placeholder {
+        color: $input_text_disabled_dark;
       }
     }
     &.error {
@@ -77,23 +105,23 @@
         // The `:not` here prevents error styling from affecting the country search input in the Phone Number Input Kit.
         input:not(.iti__search-input),
         .text_input {
-          border-color: $error_dark;
+          border-color: $input_border_error_dark;
         }
         .pb_body_kit_negative {
-          color: $error_dark;
+          color: $text_error_dark;
         }
       }
       .text_input_wrapper_add_on {
         .add-on {
           &-right {
             .add-on-card {
-              border: 1px solid $error_dark;
+              border: 1px solid $input_border_error_dark;
               border-left: 0;
             }
           }
           &-left {
             .add-on-card {
-              border: 1px solid $error_dark;
+              border: 1px solid $input_border_error_dark;
               border-right: 0;
             }
           }
@@ -105,24 +133,25 @@
     .text_input_wrapper {
       .pb_body_kit_negative {
         margin-top: $space_xs / 2;
+        color: $text_error;
       }
       // The `:not` here prevents error styling from affecting the country search input in the Phone Number Input Kit.
       input:not(.iti__search-input),
       .text_input {
-        border-color: $error;
+        border-color: $input_border_error;
       }
     }
     .text_input_wrapper_add_on {
       .add-on {
         &-right {
           .add-on-card {
-            border: 1px solid $error;
+            border: 1px solid $input_border_error;
             border-left: 0;
           }
         }
         &-left {
           .add-on-card {
-            border: 1px solid $error;
+            border: 1px solid $input_border_error;
             border-right: 0;
           }
         }
@@ -197,13 +226,15 @@
         align-items: center;
         justify-content: center;
         width: 45px;
+        border: 1px solid $input_border_default;
+        background-color: $input_background_default;
       }
       &-icon {
-        color: $text_lt_lighter;
+        color: $input_text_default;
       }
       &-card-dark {
-        background-color: rgba($white, $opacity_1);
-        border-color: rgba($white, 0.15);
+        background-color: $input_background_default_dark;
+        border-color: $input_border_default_dark;
       }
       &-left {
         .text_input {
@@ -220,7 +251,7 @@
       }
     }
     .text_input:focus ~ .add-on-card-dark {
-      background-color: $focus_input_dark;
+      background-color: $input_background_state_dark;
       border-width: 0px;
     }
     .card-left-aligned {

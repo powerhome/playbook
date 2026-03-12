@@ -24,6 +24,7 @@ RSpec.describe Playbook::PbTextarea::Textarea do
       .with_default(false)
   }
   it { is_expected.to define_prop(:required_indicator).with_default(false) }
+  it { is_expected.to define_prop(:disabled).with_default(false) }
   it { is_expected.to define_hash_prop(:input_options).with_default({}) }
 
   describe "#classname" do

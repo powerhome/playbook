@@ -136,6 +136,7 @@ module Playbook
         class_string = "cal_icon_wrapper"
         class_string += " dark" if dark
         class_string += " no_label_shift" if hide_label
+        class_string += " disabled" if disable_input
         class_string += error_class
         class_string
       end
