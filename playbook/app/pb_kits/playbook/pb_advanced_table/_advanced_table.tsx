@@ -66,6 +66,7 @@ type AdvancedTableProps = {
   showActionsBar?: boolean,
   persistToggleExpansionButton?: boolean,
   sortControl?: GenericObject
+  sortParentOnly?: boolean
   tableData: GenericObject[]
   tableOptions?: GenericObject
   tableProps?: GenericObject
@@ -114,6 +115,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
     selectableRows,
     persistToggleExpansionButton = false,
     sortControl,
+    sortParentOnly = false,
     stickyLeftColumn,
     tableData,
     tableOptions,
@@ -159,7 +161,8 @@ const AdvancedTable = (props: AdvancedTableProps) => {
     columnVisibilityControl,
     pinnedRows,
     rowStyling,
-    inlineRowLoading
+    inlineRowLoading,
+    sortParentOnly
   });
 
   // Initialize table actions

@@ -28,7 +28,7 @@
     <% end %>
     <%= pb_rails("dialog/dialog_body") do %>
         <%= pb_rails("caption", props: { text: "Description", margin_bottom: "xs" }) %>
-        <%= pb_rails("rich_text_editor", props: {id: "default", value: "Add your text here"}) %>
+        <%= pb_rails("textarea", props: {id: "default"}) %>
         <%= pb_rails("caption", props: { text: "Type in a word or term too help find tickets later. ex. training, phone setup, hr", margin_bottom: "xs", margin_top: "sm" }) %>
         <%= pb_rails("typeahead", props: { placeholder: "Tags.."}) %>
         <%= pb_rails("dropdown", props: {options: options, autocomplete: true}) %>
