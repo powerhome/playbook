@@ -23,6 +23,7 @@ RSpec.describe Playbook::PbAdvancedTable::TableBody do
   }
   it { is_expected.to define_boolean_prop(:selectable_rows).with_default(false) }
   it { is_expected.to define_boolean_prop(:inline_row_loading).with_default(false) }
+  it { is_expected.to define_hash_prop(:pinned_rows).with_default({}) }
 
   describe "#classname" do
     it "returns base class name" do
@@ -288,6 +289,133 @@ RSpec.describe Playbook::PbAdvancedTable::TableBody do
     it "accepts correct parameters" do
       method = instance.method(:render_inline_loading_row)
       expect(method.arity).to eq 3
+    end
+  end
+
+  describe "pinned_rows" do
+    describe "#pinned_top_ids" do
+      it "returns empty array when pinned_rows is nil or empty" do
+        expect(subject.new({}).pinned_top_ids).to eq []
+        expect(subject.new(pinned_rows: {}).pinned_top_ids).to eq []
+      end
+
+      it "returns top ids from symbol key" do
+        instance = subject.new(pinned_rows: { top: %w[row_1 row_2] })
+        expect(instance.pinned_top_ids).to eq %w[row_1 row_2]
+      end
+
+      it "returns top ids from string key" do
+        instance = subject.new(pinned_rows: { "top" => ["totals"] })
+        expect(instance.pinned_top_ids).to eq %w[totals]
+      end
+
+      it "stringifies id values" do
+        instance = subject.new(pinned_rows: { top: [123, :totals] })
+        expect(instance.pinned_top_ids).to eq %w[123 totals]
+      end
+    end
+
+    describe "#row_id_for" do
+      let(:instance) { subject.new({}) }
+
+      it "returns id from symbol key" do
+        expect(instance.row_id_for({ id: "abc" })).to eq "abc"
+      end
+
+      it "returns id from string key" do
+        expect(instance.row_id_for({ "id" => "xyz" })).to eq "xyz"
+      end
+
+      it "returns nil for nil row" do
+        expect(instance.row_id_for(nil)).to be_nil
+      end
+    end
+
+    describe "#find_row_by_id" do
+      let(:table_data) do
+        [
+          { id: "a", name: "Row A" },
+          { id: "b", name: "Row B", children: [{ id: "b1", name: "Child B1" }] },
+        ]
+      end
+      let(:instance) { subject.new(table_data: table_data) }
+
+      it "finds top-level row by id" do
+        found = instance.find_row_by_id(table_data, "a")
+        expect(found).to be_a(Hash)
+        expect(found[:row][:id]).to eq "a"
+        expect(found[:depth]).to eq 0
+      end
+
+      it "finds nested row by id" do
+        found = instance.find_row_by_id(table_data, "b1")
+        expect(found).to be_a(Hash)
+        expect(found[:row][:id]).to eq "b1"
+        expect(found[:depth]).to eq 1
+      end
+
+      it "returns nil when id not found" do
+        expect(instance.find_row_by_id(table_data, "missing")).to be_nil
+      end
+    end
+
+    describe "#pinned_root_rows" do
+      let(:table_data) do
+        [
+          { id: "totals", name: "Totals" },
+          { id: "row_1", name: "Row 1" },
+        ]
+      end
+
+      it "returns empty array when no pinned_rows" do
+        instance = subject.new(table_data: table_data)
+        expect(instance.pinned_root_rows).to eq []
+      end
+
+      it "returns root info hashes for each pinned id found in table_data" do
+        instance = subject.new(table_data: table_data, pinned_rows: { top: ["totals"] })
+        rows = instance.pinned_root_rows
+        expect(rows.length).to eq 1
+        expect(rows.first[:row][:id]).to eq "totals"
+        expect(rows.first[:depth]).to eq 0
+      end
+
+      it "skips ids not found in table_data" do
+        instance = subject.new(table_data: table_data, pinned_rows: { top: %w[totals nonexistent] })
+        rows = instance.pinned_root_rows
+        expect(rows.length).to eq 1
+        expect(rows.first[:row][:id]).to eq "totals"
+      end
+    end
+
+    describe "#has_pinned_rows?" do
+      it "returns false when no pinned rows" do
+        instance = subject.new(table_data: [{ id: "1" }])
+        expect(instance.has_pinned_rows?).to be false
+      end
+
+      it "returns true when pinned_root_rows is non-empty" do
+        instance = subject.new(table_data: [{ id: "totals" }], pinned_rows: { top: ["totals"] })
+        expect(instance.has_pinned_rows?).to be true
+      end
+    end
+
+    describe "#build_pinned_row_style" do
+      let(:instance) { subject.new(table_id: "t1") }
+
+      it "returns sticky style string with index and default background" do
+        style = instance.build_pinned_row_style(0)
+        expect(style).to include("position: sticky")
+        expect(style).to include("top: calc(var(--advanced-table-header-height, 44px) + 2.5em * 0)")
+        expect(style).to include("z-index: 3")
+        expect(style).to include("background: white")
+      end
+
+      it "uses custom background when given" do
+        style = instance.build_pinned_row_style(1, background: "#f0f0f0")
+        expect(style).to include("background: #f0f0f0")
+        expect(style).to include("2.5em * 1")
+      end
     end
   end
 end
