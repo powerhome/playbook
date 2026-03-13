@@ -51,7 +51,7 @@ module Playbook
       def classname
         classes = ["pb_table_tr", "pb-bg-row-white", subrow_depth_classname]
         classes << "pinned-row" if is_pinned_row
-        classes << prop(:classname) if prop(:classname).to_s.present?
+        classes.reject!(&:blank?)
         generate_classname(*classes, separator: " ")
       end
 
