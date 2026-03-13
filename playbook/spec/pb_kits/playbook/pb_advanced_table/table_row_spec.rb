@@ -31,13 +31,13 @@ RSpec.describe Playbook::PbAdvancedTable::TableRow do
     context "basic functionality" do
       it "returns base class name for root row" do
         instance = subject.new(row: {}, depth: 0)
-        expect(instance.classname).to eq "pb_table_tr pb-bg-row-white"
+        expect(instance.classname).to eq "pb_table_tr pb-bg-row-white "
       end
 
       it "includes depth class for subrows", :aggregate_failures do
-        expect(subject.new(row: {}, depth: 1).classname).to eq "pb_table_tr pb-bg-row-white depth-sub-row-1"
-        expect(subject.new(row: {}, depth: 2).classname).to eq "pb_table_tr pb-bg-row-white depth-sub-row-2"
-        expect(subject.new(row: {}, depth: 3).classname).to eq "pb_table_tr pb-bg-row-white depth-sub-row-3"
+        expect(subject.new(row: {}, depth: 1).classname).to eq "pb_table_tr pb-bg-row-white depth-sub-row-1 "
+        expect(subject.new(row: {}, depth: 2).classname).to eq "pb_table_tr pb-bg-row-white depth-sub-row-2 "
+        expect(subject.new(row: {}, depth: 3).classname).to eq "pb_table_tr pb-bg-row-white depth-sub-row-3 "
       end
 
       it "does not include depth class for root rows" do
