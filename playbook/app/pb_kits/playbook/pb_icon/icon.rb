@@ -112,7 +112,13 @@ module Playbook
       end
 
       def render_svg
-        doc = Nokogiri::XML(URI.open(asset_path || icon || custom_icon)) # rubocop:disable Security/Open
+        source = asset_path || icon || custom_icon
+        content = if source.to_s.include?("://")
+                    URI.open(source, "User-Agent" => "Playbook-Icon-Kit/1.0 (https://github.com/powerhome/playbook)", &:read) # rubocop:disable Security/Open
+                  else
+                    URI.open(source, &:read) # rubocop:disable Security/Open
+                  end
+        doc = Nokogiri::XML(content)
         svg = doc.at_css("svg")
         return "" unless svg
 
