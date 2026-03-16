@@ -1,0 +1,1 @@
+Use the `position` prop to control where the popover appears relative to its trigger. Valid values include `top`, `bottom`, `left`, `right`, and aligned variants such as `top-start`, `top-end`, `bottom-start`, `bottom-end`, `left-start`, `left-end`, `right-start`, and `right-end`.

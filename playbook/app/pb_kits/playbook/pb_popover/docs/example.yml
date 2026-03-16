@@ -7,6 +7,7 @@ examples:
     - popover_scroll_height: Scroll and Height Settings
     - popover_actionable_content: With Actionable Content
     - popover_append_to: Append To
+    - popover_position: Position
 
   react:
     - popover_default: Default
@@ -16,3 +17,4 @@ examples:
     - popover_scroll_height: Scroll and Height Settings
     - popover_actionable_content: With Actionable Content
     - popover_append_to: Append To
+    - popover_placement: Placement
