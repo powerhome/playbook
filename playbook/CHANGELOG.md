@@ -1,3 +1,41 @@
+# 🧠 Smarter Architecture, Faster UI
+##### March 17, 2026
+
+![release_image](https://github.com/user-attachments/assets/db119637-25e9-4157-9091-c5f7fdf034fc)
+
+This release tunes up React-rendered Rails kits and Enhanced Elements so everything runs a little faster and behaves a little nicer! Expect smoother mounting, more reliable interactions, and better flexibility for custom implementations
+
+[16.4.0](https://github.com/powerhome/playbook/tree/16.4.0) full list of changes:
+
+**Improvements:**
+
+- Popover Kit: Added Placement and Position Popover Docs [\#5936](https://github.com/powerhome/playbook/pull/5936) ([elisashapiro](https://github.com/elisashapiro))
+
+
+**Kit Enhancements:**
+
+- Datepicker Kit: Guard Monthsdropdowncontainer Access In Datepicker Form Reset Handler [\#5920](https://github.com/powerhome/playbook/pull/5920) ([viniciusgama](https://github.com/viniciusgama))
+- React Rendered Rails Kits: Custom Events and Api Calls for Mounting and Unmounting [\#5919](https://github.com/powerhome/playbook/pull/5919) ([nidaqg](https://github.com/nidaqg))
+- Advanced Table: Sortparentonly - React [\#5905](https://github.com/powerhome/playbook/pull/5905) ([elisashapiro](https://github.com/elisashapiro))
+- Dropdown: Custom_event_type and Turbo/stimulus Docs [\#5896](https://github.com/powerhome/playbook/pull/5896) ([elisashapiro](https://github.com/elisashapiro))
+- Fixed Confirmation Toast: Navmargintop Boolean for Fcts Hidden by Top Navs [\#5893](https://github.com/powerhome/playbook/pull/5893) ([nickamantia](https://github.com/nickamantia))
+- Rich Text Editor: Add Deprecation Msg to Rails Rte [\#5903](https://github.com/powerhome/playbook/pull/5903) ([nidaqg](https://github.com/nidaqg))
+- Enhanced Element Kits: New Domhelper Utility [\#5891](https://github.com/powerhome/playbook/pull/5891) ([nidaqg](https://github.com/nidaqg))
+- Dropdown Kit: Close_on_click Prop - Rails [\#5878](https://github.com/powerhome/playbook/pull/5878) ([kangaree](https://github.com/kangaree))
+- Advanced Table: Cascading Collapse - React [\#5887](https://github.com/powerhome/playbook/pull/5887) ([elisashapiro](https://github.com/elisashapiro))
+- Table Kit: Cardprops and Titleprops for Withfilter Variant [\#5871](https://github.com/powerhome/playbook/pull/5871) ([nidaqg](https://github.com/nidaqg))
+
+
+**Fixed Bugs:**
+
+- Playbook Website: Doc Example Anchor Links & Copy Icon Not Working [\#5898](https://github.com/powerhome/playbook/pull/5898) ([elisashapiro](https://github.com/elisashapiro))
+- Multilevelselect: Fixes for Default Variant Not Retaining Selection [\#5897](https://github.com/powerhome/playbook/pull/5897) ([nidaqg](https://github.com/nidaqg))
+- Button Kit: Loading Button Scrolling Away When In Dialog [\#5892](https://github.com/powerhome/playbook/pull/5892) ([nidaqg](https://github.com/nidaqg))
+- React Rendered Rails Kits: Fixes for Async Typeahead and Mls Interaction Issue [\#5882](https://github.com/powerhome/playbook/pull/5882) ([nidaqg](https://github.com/nidaqg))
+
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/v16.4.0-rc.5...16.4.0)
+
 # 💥 Big Contrast Energy 💥
 ##### February 25, 2026
 
