@@ -214,7 +214,7 @@ const Position = () => {
               text='top: { value: "sm", inset: true }, bottom: { value: "sm", inset: true }, left: { value: "sm", inset: true }, right: { value: "sm", inset: true }'
             />,
             <ExampleCodeCard
-              id="inset-react"
+              id="inset-all-react"
               text='top={{ value: "sm", inset: true }}, bottom={{ value: "sm", inset: true }}, left={{ value: "sm", inset: true }}, right={{ value: "sm", inset: true }}'
             />,
           ],
