@@ -1,7 +1,9 @@
-# 16.4.0
+# 🧠 Smarter Architecture, Faster UI
 ##### March 17, 2026
 
 ![release_image](https://github.com/user-attachments/assets/db119637-25e9-4157-9091-c5f7fdf034fc)
+
+This release tunes up React-rendered Rails kits and Enhanced Elements so everything runs a little faster and behaves a little nicer! Expect smoother mounting, more reliable interactions, and better flexibility for custom implementations
 
 [16.4.0](https://github.com/powerhome/playbook/tree/16.4.0) full list of changes:
 
