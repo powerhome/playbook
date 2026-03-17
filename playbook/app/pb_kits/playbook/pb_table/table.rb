@@ -46,6 +46,10 @@ module Playbook
       prop :filter_props, type: Playbook::Props::HashProp,
                           default: {}
       prop :filter_content
+      # Pre-rendered filter slot (e.g. output of nitro_search_playbook_filter).
+      # When present, this is rendered as-is; filter_content and filter_props are ignored.
+      # Use this for Nitro search integration and manual filter submission.
+      prop :filter
       prop :pagination
       prop :title, type: Playbook::Props::String,
                    default: nil

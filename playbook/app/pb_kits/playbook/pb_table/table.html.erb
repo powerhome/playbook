@@ -16,7 +16,10 @@
       flex_direction: "column",
       gap: "none"
     }) do %>
-      <% if object.filter_content.present? %>
+      <% has_filter = object.filter.present? || object.filter_content.present? %>
+      <% if object.filter.present? %>
+        <%= object.filter %>
+      <% elsif object.filter_content.present? %>
         <%
           default_filter_props = {
             background: false,
@@ -31,7 +34,7 @@
           <%= object.filter_content %>
         <% end %>
       <% end %>
-      <%= pb_rails("section_separator") if object.filter_content.present? %>
+      <%= pb_rails("section_separator") if has_filter %>
       <% if object.pagination.present? %>
         <%= object.pagination %>
         <%= pb_rails("section_separator") %>
