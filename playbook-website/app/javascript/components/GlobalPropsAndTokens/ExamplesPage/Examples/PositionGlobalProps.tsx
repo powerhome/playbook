@@ -198,7 +198,7 @@ const Position = () => {
             <BooleanValueCards />,
             <ExampleCodeCard
               id="inset-rails"
-              text='top:{ value: "sm", inset: true }'
+              text='top: { value: "sm", inset: true }'
             />,
             <ExampleCodeCard
               id="inset-react"
