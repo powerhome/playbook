@@ -1,0 +1,45 @@
+<%# External filter: capture any filter markup and pass it via the filter prop.
+    Use your own helper (e.g. a search/filter form) or pb_rails("filter") as shown here. %>
+<% users = [
+  { name: "Alex", role: "Engineer" },
+  { name: "Sam", role: "Designer" },
+  { name: "Jordan", role: "Manager" },
+] %>
+
+<% filter_output = capture do %>
+  <%= pb_rails("filter", props: {
+    id: "external-filter-demo",
+    template: "single",
+    results: 3,
+    background: false,
+    sort_menu: [
+      { item: "Name", link: "#", active: true, direction: "asc" },
+      { item: "Role", link: "#", active: false },
+    ],
+  }) do %>
+    <%= pb_rails("text_input", props: { label: "Name", placeholder: "Search by name" }) %>
+    <%= pb_rails("text_input", props: { label: "Role", placeholder: "e.g. Engineer, Designer" }) %>
+    <%= pb_rails("button", props: { text: "Apply" }) %>
+  <% end %>
+<% end %>
+
+<%= pb_rails("table", props: {
+  variant: "with_filter",
+  title: "Table with External Filter",
+  filter: filter_output,
+}) do %>
+  <%= pb_rails("table/table_head") do %>
+    <%= pb_rails("table/table_row") do %>
+      <%= pb_rails("table/table_header", props: { text: "Name" }) %>
+      <%= pb_rails("table/table_header", props: { text: "Role" }) %>
+    <% end %>
+  <% end %>
+  <%= pb_rails("table/table_body") do %>
+    <% users.each do |user| %>
+      <%= pb_rails("table/table_row") do %>
+        <%= pb_rails("table/table_cell") { user[:name] } %>
+        <%= pb_rails("table/table_cell") { user[:role] } %>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>
