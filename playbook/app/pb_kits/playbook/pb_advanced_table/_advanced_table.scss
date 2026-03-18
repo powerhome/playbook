@@ -63,6 +63,51 @@
     width: 100%;
   }
 
+  // Override pb_table endcap: first and last column use same padding as rest of row
+  // First column
+  .pb_table.table-sm tbody tr td:first-child,
+  .pb_table.table-sm tbody tr .pb_table_td:first-child,
+  .pb_table.table-sm tbody .pb_table_tr td:first-child,
+  .pb_table.table-sm tbody .pb_table_tr .pb_table_td:first-child,
+  .pb_table.table-sm .pb_table_tbody tr td:first-child,
+  .pb_table.table-sm .pb_table_tbody tr .pb_table_td:first-child,
+  .pb_table.table-sm .pb_table_tbody .pb_table_tr td:first-child,
+  .pb_table.table-sm .pb_table_tbody .pb_table_tr .pb_table_td:first-child {
+    padding-left: $space-xs;
+  }
+  .pb_table.table-md tbody tr td:first-child,
+  .pb_table.table-md tbody tr .pb_table_td:first-child,
+  .pb_table.table-md tbody .pb_table_tr td:first-child,
+  .pb_table.table-md tbody .pb_table_tr .pb_table_td:first-child,
+  .pb_table.table-md .pb_table_tbody tr td:first-child,
+  .pb_table.table-md .pb_table_tbody tr .pb_table_td:first-child,
+  .pb_table.table-md .pb_table_tbody .pb_table_tr td:first-child,
+  .pb_table.table-md .pb_table_tbody .pb_table_tr .pb_table_td:first-child {
+    padding-left: $space-sm;
+  }
+
+  // Last column
+  .pb_table.table-sm tbody tr td:last-child,
+  .pb_table.table-sm tbody tr .pb_table_td:last-child,
+  .pb_table.table-sm tbody .pb_table_tr td:last-child,
+  .pb_table.table-sm tbody .pb_table_tr .pb_table_td:last-child,
+  .pb_table.table-sm .pb_table_tbody tr td:last-child,
+  .pb_table.table-sm .pb_table_tbody tr .pb_table_td:last-child,
+  .pb_table.table-sm .pb_table_tbody .pb_table_tr td:last-child,
+  .pb_table.table-sm .pb_table_tbody .pb_table_tr .pb_table_td:last-child {
+    padding-right: $space-xs;
+  }
+  .pb_table.table-md tbody tr td:last-child,
+  .pb_table.table-md tbody tr .pb_table_td:last-child,
+  .pb_table.table-md tbody .pb_table_tr td:last-child,
+  .pb_table.table-md tbody .pb_table_tr .pb_table_td:last-child,
+  .pb_table.table-md .pb_table_tbody tr td:last-child,
+  .pb_table.table-md .pb_table_tbody tr .pb_table_td:last-child,
+  .pb_table.table-md .pb_table_tbody .pb_table_tr td:last-child,
+  .pb_table.table-md .pb_table_tbody .pb_table_tr .pb_table_td:last-child {
+    padding-right: $space-sm;
+  }
+
   // Virtualized Table and Rows for Infinite Scroll
   scrollbar-gutter: stable right-edges;
   .virtualized-header-row-header {
@@ -720,7 +765,7 @@
     }
   }
 
-  // Row Pinning - additional inline styles in RegularTableView.tsx
+  // Row Pinning - React uses inline style; Rails passes same style via html_options from table_body
   .pinned-row {
     box-shadow: 0 4px 10px 0 rgba($shadow, 0.16) !important;
   }

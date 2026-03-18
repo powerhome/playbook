@@ -1,0 +1,57 @@
+<%# Example sort method for demonstration purposes %>
+<% if params["sort"] %>
+  <% sort_param = params["sort"].gsub(/_(asc|desc)\z/, "") %>
+  <% sort_direction = params["sort"].end_with?("_asc") ? 1 : -1 %>
+  <% @table_data_with_id.sort! do |a, b|
+    value_a = a[sort_param] || a[sort_param.to_sym]
+    value_b = b[sort_param] || b[sort_param.to_sym]
+
+    value_a = value_a.to_i if value_a.is_a?(String) && value_a.match?(/^\d+$/)
+    value_b = value_b.to_i if value_b.is_a?(String) && value_b.match?(/^\d+$/)
+
+    sort_direction * (value_a <=> value_b)
+  end %>
+<% end %>
+
+<% column_definitions = [
+    {
+      accessor: "year",
+      label: "Year",
+      cellAccessors: ["quarter", "month", "day"],
+      sort_menu: [
+        { item: "Year", link: "?sort=year_asc#pinned_rows_table", active: params["sort"] == "year_asc", direction: "asc" },
+        { item: "Year", link: "?sort=year_desc#pinned_rows_table", active: params["sort"] == "year_desc", direction: "desc" }
+      ],
+    },
+    {
+      accessor: "newEnrollments",
+      label: "New Enrollments",
+    },
+    {
+      accessor: "scheduledMeetings",
+      label: "Scheduled Meetings",
+    },
+    {
+      accessor: "attendanceRate",
+      label: "Attendance Rate",
+    },
+    {
+      accessor: "completedClasses",
+      label: "Completed Classes",
+    },
+    {
+      accessor: "classCompletionRate",
+      label: "Class Completion Rate",
+    },
+    {
+      accessor: "graduatedStudents",
+      label: "Graduated Students",
+    }
+] %>
+
+<% pinned_rows = { top: ["8"] } %>
+
+<%= pb_rails("advanced_table", props: { id: "pinned_rows_table", table_data: @table_data_with_id, column_definitions: column_definitions, max_height: "xs", pinned_rows: pinned_rows, responsive: "none", table_props: { sticky: true }}) do %>
+  <%= pb_rails("advanced_table/table_header", props: { table_id: "pinned_rows_table", column_definitions: column_definitions }) %>
+  <%= pb_rails("advanced_table/table_body", props: { table_id: "pinned_rows_table", table_data: @table_data_with_id, column_definitions: column_definitions, pinned_rows: pinned_rows }) %>
+<% end %>

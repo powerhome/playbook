@@ -35,13 +35,24 @@ module Playbook
                                      default: ""
       prop :inline_row_loading, type: Playbook::Props::Boolean,
                                 default: false
+      prop :is_pinned_row, type: Playbook::Props::Boolean,
+                           default: false
+      prop :pinned_index, type: Playbook::Props::Numeric,
+                          default: nil
+      prop :html_options, type: Playbook::Props::HashProp,
+                          default: {}
+      prop :classname, type: Playbook::Props::String,
+                       default: ""
 
       def data
         Hash(prop(:data)).merge(table_data_attributes)
       end
 
       def classname
-        generate_classname("pb_table_tr", "pb-bg-row-white", subrow_depth_classname, separator: " ")
+        classes = ["pb_table_tr", "pb-bg-row-white", subrow_depth_classname]
+        classes << "pinned-row" if is_pinned_row
+        classes.reject!(&:blank?)
+        generate_classname(*classes, separator: " ")
       end
 
       def td_classname(column, index)

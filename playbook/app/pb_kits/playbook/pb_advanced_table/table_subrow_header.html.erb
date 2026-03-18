@@ -1,4 +1,7 @@
-<%= pb_content_tag(:tr) do %>
+<% tr_options = (object.html_options || {}).stringify_keys %>
+<% tr_options["class"] = [tr_options["class"], object.classname].reject(&:blank?).join(" ") %>
+
+<%= pb_content_tag(:tr, tr_options) do %>
         <% object.column_definitions.each_with_index do |column, index| %>
             <%= pb_rails("table/table_cell", props: { classname: object.td_classname(index) }) do %>
                 <%= pb_rails("flex", props:{ align: "center", justify: "start" }) do %>

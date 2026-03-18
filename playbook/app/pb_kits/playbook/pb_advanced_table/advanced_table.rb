@@ -37,6 +37,8 @@ module Playbook
                                 default: false
       prop :persist_toggle_expansion_button, type: Playbook::Props::Boolean,
                                              default: false
+      prop :pinned_rows, type: Playbook::Props::HashProp,
+                         default: {}
 
       def classname
         additional_classes = [

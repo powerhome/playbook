@@ -7,6 +7,7 @@ examples:
   - advanced_table_table_props: Table Props
   - advanced_table_sticky_header_rails: Sticky Header
   - advanced_table_table_props_sticky_header: Sticky Header for Responsive Table
+  - advanced_table_pinned_rows_rails: Pinned Rows
   - advanced_table_beta_sort: Enable Sorting
   - advanced_table_responsive: Responsive Tables
   - advanced_table_custom_cell_rails: Custom Components for Cells

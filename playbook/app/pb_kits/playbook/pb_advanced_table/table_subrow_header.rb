@@ -19,13 +19,21 @@ module Playbook
       prop :responsive, type: Playbook::Props::Enum,
                         values: %w[none scroll],
                         default: "scroll"
+      prop :is_pinned_row, type: Playbook::Props::Boolean,
+                           default: false
+      prop :pinned_index, type: Playbook::Props::Numeric,
+                          default: nil
+      prop :html_options, type: Playbook::Props::HashProp,
+                          default: {}
 
       def data
         Hash(prop(:data)).merge(subrow_data_attributes)
       end
 
       def classname
-        generate_classname("pb_table_tr", "bg-silver", "pb_subrow_header", subrow_depth_classname, separator: " ")
+        classes = ["pb_table_tr", "bg-silver", "pb_subrow_header", subrow_depth_classname]
+        classes << "pinned-row" if is_pinned_row
+        generate_classname(*classes, separator: " ")
       end
 
       def td_classname(index)
