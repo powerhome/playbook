@@ -210,7 +210,7 @@ const Position = () => {
             <ExampleCodeCard text="union" copyIcon={false} />,
             <BooleanValueCards />,
             <ExampleCodeCard
-              id="inset-rails"
+              id="inset-all-rails"
               text='top: { value: "sm", inset: true }, bottom: { value: "sm", inset: true }, left: { value: "sm", inset: true }, right: { value: "sm", inset: true }'
             />,
             <ExampleCodeCard
