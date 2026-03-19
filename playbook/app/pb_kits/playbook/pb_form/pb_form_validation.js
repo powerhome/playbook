@@ -12,7 +12,6 @@ const PHONE_NUMBER_VALIDATION_ERROR_SELECTOR = '[data-pb-phone-validation-error=
 
 const FIELD_EVENTS = [
   'change',
-  'blur',
   'valid',
   'invalid',
 ]
@@ -24,8 +23,16 @@ class PbFormValidation extends PbEnhancedElement {
   connect() {
     this.boundFields = new WeakSet()
     this.bindValidationListeners()
-    this.mutationObserver = new MutationObserver(() => {
+
+    // Debounce rebinding so dynamic kits (ex: Typeahead result rendering)
+    // don't cause repeated expensive scans.
+    this.debouncedBindValidationListeners = debounce(() => {
       this.bindValidationListeners()
+    }, 100)
+
+    this.mutationObserver = new MutationObserver((mutations) => {
+      if (!this.hasNewRequiredFields(mutations)) return
+      this.debouncedBindValidationListeners()
     })
     this.mutationObserver.observe(this.element, { childList: true, subtree: true })
 
@@ -113,9 +120,10 @@ class PbFormValidation extends PbEnhancedElement {
       const errorMessageContainer = this.errorMessageContainer
       errorMessageContainer.textContent = target.validationMessage
 
-      // Prefer appending to the kit wrapper so nested kit structures work
-      // consistently across different kits.
-      ;(kitElement || parentElement).appendChild(errorMessageContainer)
+      // Many kits (including Typeahead) expect the error message to live inside
+      // `.text_input_wrapper` for styling and show/hide logic.
+      const errorParent = this.getErrorParent(target, kitElement, parentElement)
+      errorParent.appendChild(errorMessageContainer)
     }
   }
 
@@ -124,9 +132,32 @@ class PbFormValidation extends PbEnhancedElement {
     const kitElement = this.getKitElement(target)
     // Remove error class from kit element
     if (kitElement) kitElement.classList.remove('error')
-    // Remove error message from kit element first, fall back to parent element
-    const errorMessageContainer = (kitElement || parentElement).querySelector(ERROR_MESSAGE_SELECTOR)
+
+    const errorParent = this.getErrorParent(target, kitElement, parentElement)
+    // Remove error message from the error parent first, then fall back to kit element
+    const errorMessageContainer =
+      errorParent.querySelector(ERROR_MESSAGE_SELECTOR) ||
+      (kitElement || parentElement).querySelector(ERROR_MESSAGE_SELECTOR)
     if (errorMessageContainer) errorMessageContainer.remove()
+  }
+
+  getErrorParent(target, kitElement, parentElement) {
+    return (
+      target.closest('.text_input_wrapper') ||
+      kitElement?.querySelector?.('.text_input_wrapper') ||
+      kitElement ||
+      parentElement
+    )
+  }
+
+  hasNewRequiredFields(mutations) {
+    return mutations.some((mutation) => {
+      return Array.from(mutation.addedNodes || []).some((node) => {
+        if (!(node instanceof Element)) return false
+        if (node.matches && node.matches(REQUIRED_FIELDS_SELECTOR)) return true
+        return !!node.querySelector?.(REQUIRED_FIELDS_SELECTOR)
+      })
+    })
   }
 
   getKitElement(target) {
