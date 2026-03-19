@@ -41,6 +41,7 @@ examples:
     - table_with_header_style_borderless: Header Style Borderless
     - table_with_header_style_floating: Header Style Floating
     - table_with_filter_variant_rails: Variant with Filter
+    - table_with_filter_variant_external_filter_rails: Variant with Filter (External Filter)
     - table_with_filter_variant_with_pagination_rails: Variant with Filter and Pagination
     - table_with_filter_with_card_title_props_rails: Variant with Filter (with Card and Title Props)
 
