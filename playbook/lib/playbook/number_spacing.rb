@@ -19,6 +19,8 @@ module Playbook
   private
 
     def number_spacing_props
+      return nil unless values.key?(:number_spacing) || number_spacing
+
       selected_index_props = number_spacing_options.keys.select { |sk| try(sk) }
       return nil unless selected_index_props.present?
 

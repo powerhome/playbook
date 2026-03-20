@@ -7,6 +7,8 @@ module Playbook
     end
 
     def truncate_props
+      return nil unless values.key?(:truncate) || truncate
+
       selected_props = truncate_options.keys.select { |sk| try(sk) }
       return nil unless selected_props.present?
 

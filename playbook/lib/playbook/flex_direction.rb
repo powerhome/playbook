@@ -8,6 +8,8 @@ module Playbook
 
     # rubocop:disable Style/IfInsideElse
     def flex_direction_props
+      return nil unless values.key?(:flex_direction) || flex_direction
+
       selected_props = flex_direction_options.keys.select { |sk| try(sk) }
       return nil unless selected_props.present?
 

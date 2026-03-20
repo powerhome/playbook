@@ -8,6 +8,8 @@ module Playbook
 
     # rubocop:disable Style/IfInsideElse
     def justify_self_props
+      return nil unless values.key?(:justify_self) || justify_self
+
       selected_props = justify_self_options.keys.select { |sk| try(sk) }
       return nil unless selected_props.present?
 

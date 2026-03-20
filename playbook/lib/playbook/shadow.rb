@@ -7,6 +7,8 @@ module Playbook
     end
 
     def shadow_props
+      return nil unless values.key?(:shadow) || shadow
+
       selected_props = shadow_options.keys.select { |sk| try(sk) }
       return nil unless selected_props.present?
 

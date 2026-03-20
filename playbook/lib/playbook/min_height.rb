@@ -7,6 +7,8 @@ module Playbook
     end
 
     def min_height_props
+      return nil unless values.key?(:min_height) || min_height
+
       selected_props = min_height_options.keys.select { |sk| try(sk) }
       return nil unless selected_props.present?
 

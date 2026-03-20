@@ -7,6 +7,8 @@ module Playbook
     end
 
     def border_radius_props
+      return nil unless values.key?(:border_radius) || border_radius
+
       selected_props = border_radius_options.keys.select { |sk| try(sk) }
       return nil unless selected_props.present?
 

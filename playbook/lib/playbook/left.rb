@@ -23,6 +23,8 @@ module Playbook
   private
 
     def left_props
+      return nil unless values.key?(:left) || left
+
       selected_props = left_options.keys.select { |sk| try(sk) }
       return nil unless selected_props.present?
 

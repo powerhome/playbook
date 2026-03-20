@@ -21,6 +21,8 @@ module Playbook
     end
 
     def z_index_props
+      return nil unless values.key?(:z_index) || z_index
+
       selected_props = z_index_options.keys.select { |sk| try(sk) }
       return nil unless selected_props.present?
 

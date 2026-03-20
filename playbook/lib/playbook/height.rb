@@ -7,6 +7,8 @@ module Playbook
     end
 
     def height_props
+      return nil unless values.key?(:height) || height
+
       selected_props = height_options.keys.select { |sk| try(sk) }
       return nil unless selected_props.present?
 

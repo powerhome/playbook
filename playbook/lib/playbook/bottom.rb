@@ -23,6 +23,8 @@ module Playbook
   private
 
     def bottom_props
+      return nil unless values.key?(:bottom) || bottom
+
       selected_props = bottom_options.keys.select { |sk| try(sk) }
       return nil unless selected_props.present?
 

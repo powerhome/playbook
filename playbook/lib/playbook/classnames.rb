@@ -63,6 +63,8 @@ module Playbook
   private
 
     def dark_props
+      return nil unless values.key?(:dark) || dark
+
       dark ? "dark" : nil
     end
   end

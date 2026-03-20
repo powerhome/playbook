@@ -8,6 +8,8 @@ module Playbook
 
     # rubocop:disable Style/IfInsideElse
     def flex_shrink_props
+      return nil unless values.key?(:flex_shrink) || flex_shrink
+
       selected_props = flex_shrink_options.keys.select { |sk| try(sk) }
       return nil unless selected_props.present?
 

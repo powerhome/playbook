@@ -109,7 +109,10 @@ module Playbook
     end
 
     def spacing_props
-      selected_props = spacing_options.keys.select { |sk| try(sk) }
+      relevant = spacing_options.keys.select { |k| values.key?(k) || self.class.props[k]&.default }
+      return nil if relevant.empty?
+
+      selected_props = relevant.select { |sk| try(sk) }
       return nil unless selected_props.present?
 
       css = ""
@@ -143,6 +146,8 @@ module Playbook
     end
 
     def min_width_props
+      return nil unless values.key?(:min_width) || min_width
+
       selected_minw_props = min_width_options.keys.select { |sk| try(sk) }
       return nil unless selected_minw_props.present?
 
@@ -153,6 +158,8 @@ module Playbook
     end
 
     def max_width_props
+      return nil unless values.key?(:max_width) || max_width
+
       selected_mw_props = max_width_options.keys.select { |sk| try(sk) }
       return nil unless selected_mw_props.present?
 
@@ -163,6 +170,8 @@ module Playbook
     end
 
     def width_props
+      return nil unless values.key?(:width) || width
+
       selected_w_props = width_options.keys.select { |sk| try(sk) }
       return nil unless selected_w_props.present?
 
@@ -173,6 +182,8 @@ module Playbook
     end
 
     def gap_props
+      return nil unless values.key?(:gap) || gap
+
       selected_gap_props = gap_options.keys.select { |sk| try(sk) }
       return nil unless selected_gap_props.present?
 
@@ -199,6 +210,8 @@ module Playbook
     end
 
     def column_gap_props
+      return nil unless values.key?(:column_gap) || column_gap
+
       selected_column_gap_props = column_gap_options.keys.select { |sk| try(sk) }
       return nil unless selected_column_gap_props.present?
 
@@ -225,6 +238,8 @@ module Playbook
     end
 
     def row_gap_props
+      return nil unless values.key?(:row_gap) || row_gap
+
       selected_row_gap_props = row_gap_options.keys.select { |sk| try(sk) }
       return nil unless selected_row_gap_props.present?
 

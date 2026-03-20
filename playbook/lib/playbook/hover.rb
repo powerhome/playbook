@@ -46,6 +46,8 @@ module Playbook
     end
 
     def hover_props
+      return nil unless values.key?(:hover) || values.key?(:group_hover) || hover || group_hover
+
       selected_props = hover_options.keys.select { |sk| try(sk) }
 
       return nil if selected_props.nil? && group_hover.nil?

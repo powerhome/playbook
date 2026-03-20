@@ -7,6 +7,8 @@ module Playbook
     end
 
     def max_height_props
+      return nil unless values.key?(:max_height) || max_height
+
       selected_props = max_height_options.keys.select { |sk| try(sk) }
       return nil unless selected_props.present?
 

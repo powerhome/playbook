@@ -21,6 +21,8 @@ module Playbook
     end
 
     def overflow_props
+      return nil unless values.key?(:overflow) || values.key?(:overflow_x) || values.key?(:overflow_y) || overflow || overflow_x || overflow_y
+
       selected_props = overflow_options.keys.select { |sk| try(sk) }
       return nil unless selected_props.present?
 

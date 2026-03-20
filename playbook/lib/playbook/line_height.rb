@@ -7,6 +7,8 @@ module Playbook
     end
 
     def line_height_props
+      return nil unless values.key?(:line_height) || line_height
+
       selected_props = line_height_options.keys.select { |sk| try(sk) }
       return nil unless selected_props.present?
 

@@ -8,6 +8,8 @@ module Playbook
 
     # rubocop:disable Style/IfInsideElse
     def flex_grow_props
+      return nil unless values.key?(:flex_grow) || flex_grow
+
       selected_props = flex_grow_options.keys.select { |sk| try(sk) }
       return nil unless selected_props.present?
 

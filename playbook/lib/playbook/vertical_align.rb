@@ -8,6 +8,8 @@ module Playbook
 
     # rubocop:disable Style/IfInsideElse
     def vertical_align_props
+      return nil unless values.key?(:vertical_align) || vertical_align
+
       selected_props = vertical_align_options.keys.select { |sk| try(sk) }
       return nil unless selected_props.present?
 

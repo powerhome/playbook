@@ -8,6 +8,8 @@ module Playbook
 
     # rubocop:disable Style/IfInsideElse
     def order_props
+      return nil unless values.key?(:order) || order
+
       selected_props = order_options.keys.select { |sk| try(sk) }
       return nil unless selected_props.present?
 

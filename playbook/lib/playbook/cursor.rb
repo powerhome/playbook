@@ -7,6 +7,8 @@ module Playbook
     end
 
     def cursor_props
+      return nil unless values.key?(:cursor) || cursor
+
       selected_props = cursor_options.keys.select { |sk| try(sk) }
       return nil unless selected_props.present?
 

@@ -7,6 +7,8 @@ module Playbook
     end
 
     def display_props
+      return nil unless values.key?(:display) || display
+
       selected_props = display_options.keys.select { |sk| try(sk) }
       responsive = selected_props.present? && try(:display).is_a?(::Hash)
       css = ""

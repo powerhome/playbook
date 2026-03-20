@@ -8,6 +8,8 @@ module Playbook
 
     # rubocop:disable Style/IfInsideElse
     def align_content_props
+      return nil unless values.key?(:align_content) || align_content
+
       selected_props = align_content_options.keys.select { |sk| try(sk) }
       return nil unless selected_props.present?
 

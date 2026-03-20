@@ -19,6 +19,8 @@ module Playbook
   private
 
     def position_props
+      return nil unless values.key?(:position) || position
+
       selected_props = position_options.keys.select { |sk| try(sk) }
       return nil unless selected_props.present?
 
