@@ -9,6 +9,8 @@ const ERROR_MESSAGE_SELECTOR   = '.pb_body_kit_negative'
 const FORM_SELECTOR            = 'form[data-pb-form-validation="true"]'
 const REQUIRED_FIELDS_SELECTOR = 'input[required],textarea[required],select[required]'
 const PHONE_NUMBER_VALIDATION_ERROR_SELECTOR = '[data-pb-phone-validation-error="true"]'
+const FORM_VALIDATION_MESSAGE_ATTR = 'data-pb-form-validation-message'
+const FORM_VALIDATION_MESSAGE_REUSED_ATTR = 'data-pb-form-validation-message-reused'
 
 const FIELD_EVENTS = [
   'change',
@@ -24,8 +26,6 @@ class PbFormValidation extends PbEnhancedElement {
     this.boundFields = new WeakSet()
     this.bindValidationListeners()
 
-    // Debounce rebinding so dynamic kits (ex: Typeahead result rendering)
-    // don't cause repeated expensive scans.
     this.debouncedBindValidationListeners = debounce(() => {
       this.bindValidationListeners()
     }, 100)
@@ -36,8 +36,13 @@ class PbFormValidation extends PbEnhancedElement {
     })
     this.mutationObserver.observe(this.element, { childList: true, subtree: true })
 
-    // Add event listener to check for phone number validation errors
     this.element.addEventListener('submit', (event) => {
+      const hasInvalidFields = this.validateOnSubmit()
+      if (hasInvalidFields) {
+        event.preventDefault()
+        return false
+      }
+
       // Use setTimeout to ensure React state updates have completed
       setTimeout(() => {
         if (this.hasPhoneNumberValidationErrors()) {
@@ -48,6 +53,35 @@ class PbFormValidation extends PbEnhancedElement {
     })
   }
 
+  validateOnSubmit() {
+    let foundInvalid = false
+
+    this.formValidationFields.forEach((field) => {
+      if (this.isReactTypeaheadField(field)) return
+
+      const isPhoneNumberInput = field.closest('.pb_phone_number_input')
+      if (isPhoneNumberInput) return
+
+      const isTimePickerInput = field.closest('.pb_time_picker')
+      if (isTimePickerInput) return
+
+      // Reset and then apply any custom message before checking validity.
+      field.setCustomValidity('')
+      const kitElement = this.getKitElement(field)
+      const message = this.getValidationMessage(field, kitElement)
+      if (message) field.setCustomValidity(message)
+
+      if (field.validity.valid) {
+        this.clearError(field)
+      } else {
+        foundInvalid = true
+        this.showValidationMessage(field)
+      }
+    })
+
+    return foundInvalid
+  }
+
   disconnect() {
     if (this.mutationObserver) this.mutationObserver.disconnect()
   }
@@ -56,20 +90,28 @@ class PbFormValidation extends PbEnhancedElement {
     this.formValidationFields.forEach((field) => {
       if (this.boundFields?.has(field)) return
 
-      // Skip phone number inputs - they handle their own validation
+      if (this.isReactTypeaheadField(field)) return
+
       const isPhoneNumberInput = field.closest('.pb_phone_number_input')
       if (isPhoneNumberInput) return
 
-      // Skip TimePicker inputs - they handle their own validation
       const isTimePickerInput = field.closest('.pb_time_picker')
       if (isTimePickerInput) return
 
-      const handler = debounce((event) => {
+      const debouncedHandler = debounce((event) => {
         this.validateFormField(event)
       }, 250)
 
+      const invalidHandler = (event) => {
+        this.validateFormField(event)
+      }
+
       FIELD_EVENTS.forEach((eventName) => {
-        field.addEventListener(eventName, handler, false)
+        if (eventName === 'invalid') {
+          field.addEventListener(eventName, invalidHandler, true)
+        } else {
+          field.addEventListener(eventName, debouncedHandler, false)
+        }
       })
 
       this.boundFields?.add(field)
@@ -77,13 +119,14 @@ class PbFormValidation extends PbEnhancedElement {
   }
 
   validateFormField(event) {
-    // Only prevent native browser validation UI for invalid events.
     if (event.type === 'invalid') event.preventDefault()
 
     const { target } = event
+
+    if (this.isReactTypeaheadField(target)) return
+
     const kitElement = this.getKitElement(target)
 
-    // Reset any custom validity before we check validity.
     target.setCustomValidity('')
 
     const isValid = target.validity.valid
@@ -100,53 +143,78 @@ class PbFormValidation extends PbEnhancedElement {
   showValidationMessage(target) {
     const { parentElement } = target
     const kitElement = this.getKitElement(target)
-
-    // FIX: Add null check for kitElement
     if (!kitElement) return
 
-    // Check if this is a phone number input
     const isPhoneNumberInput = kitElement.classList.contains('pb_phone_number_input')
     
-    // Check if this is a TimePicker input
     const isTimePickerInput = kitElement.classList.contains('pb_time_picker')
 
     // ensure clean error message state
     this.clearError(target)
     kitElement.classList.add('error')
 
-    // Only add error message if it's NOT a phone number input or TimePicker input
     if (!isPhoneNumberInput && !isTimePickerInput) {
-      // set the error message element
-      const errorMessageContainer = this.errorMessageContainer
-      errorMessageContainer.textContent = target.validationMessage
-
-      // Many kits (including Typeahead) expect the error message to live inside
-      // `.text_input_wrapper` for styling and show/hide logic.
       const errorParent = this.getErrorParent(target, kitElement, parentElement)
-      errorParent.appendChild(errorMessageContainer)
+      const message = this.getValidationMessage(target, kitElement) || target.validationMessage
+
+      let errorMessageElement = errorParent.querySelector(`[${FORM_VALIDATION_MESSAGE_ATTR}="true"]`)
+      if (!errorMessageElement) {
+        const existingEmpty = Array.from(errorParent.querySelectorAll(ERROR_MESSAGE_SELECTOR)).find((el) => {
+          return (el.textContent || '').trim() === ''
+        })
+        if (existingEmpty) {
+          errorMessageElement = existingEmpty
+          errorMessageElement.setAttribute(FORM_VALIDATION_MESSAGE_ATTR, 'true')
+          errorMessageElement.setAttribute(FORM_VALIDATION_MESSAGE_REUSED_ATTR, 'true')
+        }
+      }
+
+      if (!errorMessageElement) {
+        errorMessageElement = this.errorMessageContainer
+        errorParent.appendChild(errorMessageElement)
+      }
+
+      errorMessageElement.textContent = message
     }
   }
 
   clearError(target) {
     const { parentElement } = target
     const kitElement = this.getKitElement(target)
-    // Remove error class from kit element
     if (kitElement) kitElement.classList.remove('error')
 
     const errorParent = this.getErrorParent(target, kitElement, parentElement)
-    // Remove error message from the error parent first, then fall back to kit element
-    const errorMessageContainer =
-      errorParent.querySelector(ERROR_MESSAGE_SELECTOR) ||
-      (kitElement || parentElement).querySelector(ERROR_MESSAGE_SELECTOR)
-    if (errorMessageContainer) errorMessageContainer.remove()
+    const messageEl = errorParent.querySelector(`[${FORM_VALIDATION_MESSAGE_ATTR}="true"]`)
+    if (messageEl) {
+      const reused = messageEl.getAttribute(FORM_VALIDATION_MESSAGE_REUSED_ATTR) === 'true'
+      if (reused) {
+        messageEl.textContent = ''
+        messageEl.removeAttribute(FORM_VALIDATION_MESSAGE_ATTR)
+        messageEl.removeAttribute(FORM_VALIDATION_MESSAGE_REUSED_ATTR)
+      } else {
+        messageEl.remove()
+      }
+    }
   }
 
   getErrorParent(target, kitElement, parentElement) {
-    return (
+    const candidate =
       target.closest('.text_input_wrapper') ||
-      kitElement?.querySelector?.('.text_input_wrapper') ||
+      target.closest('.pb_select_kit_wrapper') ||
       kitElement ||
       parentElement
+
+    if (kitElement && candidate && candidate !== kitElement && !kitElement.contains(candidate)) {
+      return kitElement
+    }
+
+    return candidate
+  }
+
+  isReactTypeaheadField(el) {
+    return !!(
+      el?.closest?.('[data-pb-react-component="Typeahead"]') ||
+      el?.closest?.('.pb_typeahead_kit.react-select')
     )
   }
 
@@ -165,10 +233,16 @@ class PbFormValidation extends PbEnhancedElement {
   }
 
   getValidationMessage(target, kitElement) {
-    // Support both styles used across kits:
-    // - Rails input kits: data-message (dataset.message)
-    // - Select/React kits: data-validation-message (dataset.validationMessage)
-    return target.dataset?.message || target.dataset?.validationMessage || kitElement?.dataset?.validationMessage || ''
+    const fromTarget = target.dataset?.message || target.dataset?.validationMessage
+
+    const wrapperWithMessage =
+      target.closest?.('[data-validation-message]') ||
+      target.closest?.('[data-pb-select]')
+    const fromWrapper = wrapperWithMessage?.dataset?.validationMessage
+
+    const fromKit = kitElement?.dataset?.validationMessage
+
+    return fromTarget || fromWrapper || fromKit || ''
   }
 
   // Check if there are phone number input errors
@@ -181,6 +255,7 @@ class PbFormValidation extends PbEnhancedElement {
     const errorContainer = document.createElement('div')
     const kitClassName = ERROR_MESSAGE_SELECTOR.replace(/\./, '')
     errorContainer.classList.add(kitClassName)
+    errorContainer.setAttribute(FORM_VALIDATION_MESSAGE_ATTR, 'true')
     errorContainer.setAttribute('role', 'alert')
     errorContainer.setAttribute('aria-live', 'polite')
     return errorContainer
