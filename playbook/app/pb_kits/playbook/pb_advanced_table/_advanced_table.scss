@@ -674,12 +674,18 @@
     @each $color_name, $color_value in $border_color_options {
       &.column-group-border-#{$color_name} {
         @if $theme == "light" {
+          &:not(.advanced-table-no-table-container) {
+            @include advanced-table-sticky-wrapper-frame($color_value);
+          }
           @include advanced-table-sticky-mixin(
             $color_value,
             $white,
             lighten($silver, $opacity_7)
           );
         } @else if $theme == "dark" {
+          &:not(.advanced-table-no-table-container) {
+            @include advanced-table-sticky-wrapper-frame($color_value);
+          }
           @include advanced-table-sticky-mixin(
             $color_value,
             $bg_dark_card,
@@ -714,6 +720,10 @@
       overflow-x: auto;
       width: 100%;
       @include scrollbar-styling;
+
+      &:not(.advanced-table-no-table-container) {
+        @include advanced-table-sticky-wrapper-frame($border_light);
+      }
 
       // These are the responsive borders that should NOT inherit the custom color
       @include advanced-table-sticky-mixin(
@@ -1008,6 +1018,11 @@
       .sticky-left {
         background-color: $bg_dark;
       }
+
+      &:not(.advanced-table-no-table-container) {
+        @include advanced-table-sticky-wrapper-frame($border_dark);
+      }
+
       @include advanced-table-sticky-mixin(
         $border_dark,
         $bg_dark_card,
@@ -1024,6 +1039,10 @@
               background: $bg_dark_card;
             }
           }
+        }
+
+        &:not(.advanced-table-no-table-container) {
+          @include advanced-table-sticky-wrapper-frame($border_dark);
         }
 
         // These are the responsive borders that should NOT inherit the custom color
