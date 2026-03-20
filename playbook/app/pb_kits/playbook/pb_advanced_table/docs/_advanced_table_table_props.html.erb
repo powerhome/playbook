@@ -30,4 +30,34 @@
     }
 ] %>
 
+<%= pb_rails("caption", props: { text: "Default Advanced Table Table Props Doc Example" }) %>
 <%= pb_rails("advanced_table", props: { id: "table_props_table", table_data: @table_data, column_definitions: column_definitions, table_props: { vertical_border: true, container: false }}) %>
+
+<%= pb_rails("caption", props: { text: "Advanced Table with just container: false" }) %>
+<%= pb_rails("advanced_table", props: { id: "table_props_table_2", table_data: @table_data, column_definitions: column_definitions, table_props: { container: false }}) %>
+
+<%= pb_rails("caption", props: { text: "Typical set up: Card and Flex around Filter, SectionSeparator, and AdvancedTable with container: false" }) %>
+<%= pb_rails("card", props: { padding: "none", margin_bottom: "xl" }) do %>
+  <%= pb_rails("flex", props: { align: "stretch", orientation: "column", gap: "none" }) do %>
+    <%= pb_rails("filter", props: {
+      background: false,
+      max_height: (@table_data.to_a.size < 10) ? "50vh" : "none",
+      min_width: "xs",
+      popover_props: { width: "350px" },
+      id: "rails-table-props-filter-with-data",
+      template: "single",
+      results: @table_data.to_a.size,
+    }) do %>
+      <%= pb_form_with(scope: :example, method: :get, url: "", validate: true) do |form| %>
+        <%= form.number_field :new_leads_eq, props: { label: "New Leads" } %>
+        <%= form.text_field :conversion_rate_eq, props: { label: "Conversion Rate" } %>
+        <%= form.actions do |action| %>
+          <%= action.submit props: { text: "Filter" } %>
+          <%= action.button props: { type: "reset", text: "Defaults", variant: "secondary" } %>
+        <% end %>
+      <% end %>
+    <% end %>
+    <%= pb_rails("section_separator") %>
+    <%= pb_rails("advanced_table", props: { id: "rails_template_advanced_table", table_data: @table_data, column_definitions: column_definitions, table_props: { container: false } }) %>
+  <% end %>
+<% end %>
