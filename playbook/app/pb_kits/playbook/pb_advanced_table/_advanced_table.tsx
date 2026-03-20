@@ -127,6 +127,8 @@ const AdvancedTable = (props: AdvancedTableProps) => {
     fullScreenControl,
   } = props;
 
+  const noTableCardContainer = tableProps?.container === false;
+
   // Component refs
   const tableWrapperRef = useRef<HTMLDivElement>(null);
 
@@ -281,6 +283,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
       'hidden-action-bar': (selectableRows || columnVisibilityControl) && !isActionBarVisible,
     },
     {'advanced-table-sticky-left-columns': stickyLeftColumn && stickyLeftColumn.length > 0},
+    { 'advanced-table-no-table-container': noTableCardContainer },
     columnGroupBorderColor ? `column-group-border-${columnGroupBorderColor}` : '',
     scrollBarNone ? 'advanced-table-hide-scrollbar' : '',
     globalProps(props),
