@@ -113,6 +113,10 @@ module Playbook
 
       def render_svg
         source = asset_path || icon || custom_icon
+        cache_key = [source, object.custom_icon_classname, object.id, object.tabindex, object.color, object.data, object.aria].map(&:to_s).join("|")
+        cached = self.class.cached_svg(cache_key)
+        return cached if cached
+
         content = if source.to_s.include?("://")
                     URI.open(source, "User-Agent" => "Playbook-Icon-Kit/1.0 (https://github.com/powerhome/playbook)", &:read) # rubocop:disable Security/Open
                   else
@@ -146,15 +150,37 @@ module Playbook
           end
         end
 
-        raw doc
+        result = raw doc
+        self.class.store_svg(cache_key, result)
+        result
       rescue OpenURI::HTTPError, StandardError
         # Handle any exceptions and return an empty string
         ""
       end
 
+      SVG_RENDER_CACHE_MAX = 500
+
       # Class-level caches
       class << self
         @cache_mutex = Mutex.new
+
+        def cached_svg(key)
+          @svg_render_cache&.[](key)
+        end
+
+        def store_svg(key, value)
+          cache_mutex.synchronize do
+            @svg_render_cache ||= {}
+            @svg_render_cache.shift if @svg_render_cache.size >= SVG_RENDER_CACHE_MAX
+            @svg_render_cache[key] = value
+          end
+        end
+
+        def clear_svg_cache
+          cache_mutex.synchronize do
+            @svg_render_cache = nil
+          end
+        end
 
         # Cache aliases.json across the process, but invalidate when the file changes (dev-safe)
         def icon_alias_map
@@ -212,6 +238,7 @@ module Playbook
               end
 
             @icon_path_index_checked_at = monotonic_now
+            @svg_render_cache = nil
           end
 
           @icon_path_index
