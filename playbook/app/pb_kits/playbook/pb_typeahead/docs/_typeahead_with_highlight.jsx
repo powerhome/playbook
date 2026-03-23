@@ -36,23 +36,6 @@ const USERS = [
 const TypeaheadWithHighlight = (props) => {
   const [selectedUser, setSelectedUser] = useState()
 
-  const promiseOptions = (inputValue = "") => (
-    new Promise((resolve) => {
-      const query = inputValue.toLowerCase()
-      const filteredUsers = USERS.filter((option) => {
-        const isSelectedUser = option.name === selectedUser?.name
-        const matchesQuery =
-          !query ||
-          option.name.toLowerCase().includes(query) ||
-          option.title.toLowerCase().includes(query)
-
-        return !isSelectedUser && matchesQuery
-      })
-
-      setTimeout(() => resolve(filteredUsers), 250)
-    })
-  )
-
   const formatOptionLabel = ({name, territory, title}, {inputValue}) => {
     const escapeRegExp = (value = "") => (
       value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")
@@ -116,14 +99,13 @@ const TypeaheadWithHighlight = (props) => {
   return (
     <React.Fragment>
       <Typeahead
-          async
           components={customComponents}
           formatOptionLabel={formatOptionLabel}
           getOptionLabel={(option) => option.name}
           getOptionValue={({name, title}) => `${name} ${title}`}
           label="Users"
-          loadOptions={promiseOptions}
           onChange={(user) => setSelectedUser(user)}
+          options={USERS.filter((option) => option.name != selectedUser?.name)}
           placeholder="type the name of a user"
           {...props}
       />
