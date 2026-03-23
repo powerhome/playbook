@@ -1,4 +1,3 @@
-/* eslint-disable react/no-danger */
 /* eslint-disable react/no-multi-comp */
 
 import React, { useState } from 'react'
@@ -37,15 +36,44 @@ const USERS = [
 const TypeaheadWithHighlight = (props) => {
   const [selectedUser, setSelectedUser] = useState()
 
-  const formatOptionLabel = ({name, territory, title}, {inputValue}) => {
+  const promiseOptions = (inputValue = "") => (
+    new Promise((resolve) => {
+      const query = inputValue.toLowerCase()
+      const filteredUsers = USERS.filter((option) => {
+        const isSelectedUser = option.name === selectedUser?.name
+        const matchesQuery =
+          !query ||
+          option.name.toLowerCase().includes(query) ||
+          option.title.toLowerCase().includes(query)
 
-    const highlighted = (text) => {
+        return !isSelectedUser && matchesQuery
+      })
+
+      setTimeout(() => resolve(filteredUsers), 250)
+    })
+  )
+
+  const formatOptionLabel = ({name, territory, title}, {inputValue}) => {
+    const escapeRegExp = (value = "") => (
+      value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")
+    )
+
+    const highlighted = (text = "") => {
       if (!inputValue.length) return text
-      return text.replace(
-        new RegExp(inputValue, 'gi'),
-        (highlighted) => `<mark>${highlighted}</mark>`
-      )
+
+      const escapedInputValue = escapeRegExp(inputValue)
+      const regex = new RegExp(`(${escapedInputValue})`, 'gi')
+      const parts = text.split(regex)
+
+      return parts.map((part, index) => {
+        if (part.toLowerCase() === inputValue.toLowerCase()) {
+          return <mark key={`${part}-${index}`}>{part}</mark>
+        }
+
+        return <React.Fragment key={`${part}-${index}`}>{part}</React.Fragment>
+      })
     }
+
     return (
       <Flex>
         <FlexItem>
@@ -61,11 +89,12 @@ const TypeaheadWithHighlight = (props) => {
               size={4}
               {...props}
           >
-            <span dangerouslySetInnerHTML={{ __html: highlighted(name) }} /></Title>
+            {highlighted(name)}
+          </Title>
           <Body color="light"
               {...props}
           >
-            <span dangerouslySetInnerHTML={{ __html: highlighted(title) }} />{" • "}
+            {highlighted(title)}{" • "}
             {territory}
           </Body>
         </FlexItem>
@@ -87,13 +116,14 @@ const TypeaheadWithHighlight = (props) => {
   return (
     <React.Fragment>
       <Typeahead
+          async
           components={customComponents}
           formatOptionLabel={formatOptionLabel}
           getOptionLabel={(option) => option.name}
           getOptionValue={({name, title}) => `${name} ${title}`}
           label="Users"
+          loadOptions={promiseOptions}
           onChange={(user) => setSelectedUser(user)}
-          options={USERS.filter((option) => option.name != selectedUser?.name)}
           placeholder="type the name of a user"
           {...props}
       />
