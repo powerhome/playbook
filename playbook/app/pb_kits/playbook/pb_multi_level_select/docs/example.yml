@@ -18,6 +18,7 @@ examples:
     - multi_level_select_disabled_options_parent: Disabled Parent Option (Return All Selected)
     - multi_level_select_single_disabled: Disabled Options (Single Select)
     - multi_level_select_required_indicator: Required Indicator
+    - multi_level_select_placeholder: Placeholder
 
   react:
     - multi_level_select_default: Default
@@ -40,3 +41,4 @@ examples:
     - multi_level_select_single_disabled: Disabled Options (Single Select)
     - multi_level_select_required_indicator: Required Indicator
     - multi_level_select_react_reset_key: Reset with Key (React)
+    - multi_level_select_placeholder: Placeholder

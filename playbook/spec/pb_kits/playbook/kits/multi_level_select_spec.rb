@@ -20,6 +20,7 @@ RSpec.describe Playbook::PbMultiLevelSelect::MultiLevelSelect do
     it { is_expected.to define_boolean_prop(:required).with_default(false) }
     it { is_expected.to define_string_prop(:error).with_default("") }
     it { is_expected.to define_string_prop(:label).with_default("") }
+    it { is_expected.to define_string_prop(:placeholder).with_default("Start typing...") }
     it { is_expected.to define_boolean_prop(:required_indicator).with_default(false) }
     it { is_expected.to define_boolean_prop(:show_checked_children).with_default(true) }
   end
@@ -65,7 +66,7 @@ RSpec.describe Playbook::PbMultiLevelSelect::MultiLevelSelect do
       options = mls.multi_level_select_options
 
       expected_keys = %i[
-        data disabled error id inputDisplay name label
+        data disabled error id inputDisplay name label placeholder
         treeData required requiredIndicator returnAllSelected selectedIds
         inputName variant pillColor wrapped showCheckedChildren
       ]
@@ -165,6 +166,16 @@ RSpec.describe Playbook::PbMultiLevelSelect::MultiLevelSelect do
     it "includes name prop" do
       mls = subject.new(name: "location")
       expect(mls.multi_level_select_options[:name]).to eq "location"
+    end
+
+    it "includes placeholder prop" do
+      mls = subject.new(placeholder: "Choose an option…")
+      expect(mls.multi_level_select_options[:placeholder]).to eq "Choose an option…"
+    end
+
+    it "defaults placeholder in options" do
+      mls = subject.new({})
+      expect(mls.multi_level_select_options[:placeholder]).to eq "Start typing..."
     end
   end
 

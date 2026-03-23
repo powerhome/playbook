@@ -51,6 +51,7 @@ type MultiLevelSelectProps = {
   treeData?: { [key: string]: string }[] | any;
   onChange?: (event: { target: { name?: string; value: any } }) => void;
   onSelect?: (prop: { [key: string]: any }) => void;
+  placeholder?: string;
   selectedIds?: string[] | any;
   variant?: "multi" | "single";
   wrapped?: boolean;
@@ -100,6 +101,7 @@ const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>(
       treeData,
       onChange = () => null,
       onSelect = () => null,
+      placeholder: placeholderText = "Start typing...",
       selectedIds,
       variant = "multi",
       wrapped,
@@ -675,7 +677,7 @@ const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>(
                       ? `${itemsSelectedLength()} ${
                           itemsSelectedLength() === 1 ? "item" : "items"
                         } selected`
-                      : "Start typing..."
+                      : placeholderText
                   }
                     required={required}
                     value={singleSelectedItem.value || filterItem}

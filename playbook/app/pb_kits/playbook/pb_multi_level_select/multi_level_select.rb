@@ -32,6 +32,8 @@ module Playbook
                    default: ""
       prop :label, type: Playbook::Props::String,
                    default: ""
+      prop :placeholder, type: Playbook::Props::String,
+                         default: "Start typing..."
       prop :required_indicator, type: Playbook::Props::Boolean,
                                 default: false
       prop :show_checked_children, type: Playbook::Props::Boolean,
@@ -50,6 +52,7 @@ module Playbook
           inputDisplay: input_display,
           name: name,
           label: label,
+          placeholder: placeholder,
           treeData: tree_data,
           required: required,
           requiredIndicator: required_indicator,
