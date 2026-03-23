@@ -48,7 +48,14 @@ module Playbook
           hidden_action_bar_class,
         ]
         additional_classes << "column-group-border-#{column_group_border_color}" if column_group_border_color != "none"
+        additional_classes << "advanced-table-no-table-container" if no_table_card_container?
         generate_classname("pb_advanced_table", *additional_classes, separator: " ")
+      end
+
+      def no_table_card_container?
+        return false unless table_props.is_a?(Hash)
+
+        table_props[:container] == false || table_props["container"] == false
       end
 
       def responsive_classname
