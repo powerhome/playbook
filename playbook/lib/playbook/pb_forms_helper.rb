@@ -47,8 +47,26 @@ module Playbook
       capture do
         concat form_with(**options, &block)
         concat javascript_tag(<<~JS)
-          window.addEventListener("DOMContentLoaded", function() { PbFormValidation.start() })
-          window.addEventListener("DOMContentLoaded", () => formHelper())
+          (function() {
+            function startPbFormValidation() {
+              try {
+                if (window.PbFormValidation && typeof window.PbFormValidation.start === "function") {
+                  window.PbFormValidation.start()
+                }
+              } catch (e) {}
+            }
+
+            function startFormHelper() {
+              try {
+                if (typeof formHelper === "function") formHelper()
+              } catch (e) {}
+            }
+
+            window.addEventListener("DOMContentLoaded", startPbFormValidation)
+            document.addEventListener("turbo:load", startPbFormValidation)
+            document.addEventListener("turbo:render", startPbFormValidation)
+            window.addEventListener("DOMContentLoaded", startFormHelper)
+          })();
         JS
       end
     end

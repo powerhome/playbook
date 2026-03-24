@@ -22,6 +22,12 @@ class PbFormValidation extends PbEnhancedElement {
     return FORM_SELECTOR
   }
 
+  static start() {
+    if (this.__pbStarted) return
+    this.__pbStarted = true
+    super.start()
+  }
+
   connect() {
     this.boundFields = new WeakSet()
     this.bindValidationListeners()
@@ -65,18 +71,22 @@ class PbFormValidation extends PbEnhancedElement {
       const isTimePickerInput = field.closest('.pb_time_picker')
       if (isTimePickerInput) return
 
-      // Reset and then apply any custom message before checking validity.
+      // Reset any previous custom validity before checking validity.
       field.setCustomValidity('')
       const kitElement = this.getKitElement(field)
-      const message = this.getValidationMessage(field, kitElement)
-      if (message) field.setCustomValidity(message)
 
       if (field.validity.valid) {
         this.clearError(field)
-      } else {
-        foundInvalid = true
-        this.showValidationMessage(field)
+        return
       }
+
+      // Only set custom message when invalid (otherwise the field becomes
+      // permanently invalid).
+      const message = this.getValidationMessage(field, kitElement)
+      if (message) field.setCustomValidity(message)
+
+      foundInvalid = true
+      this.showValidationMessage(field)
     })
 
     return foundInvalid
@@ -143,15 +153,16 @@ class PbFormValidation extends PbEnhancedElement {
   showValidationMessage(target) {
     const { parentElement } = target
     const kitElement = this.getKitElement(target)
-    if (!kitElement) return
 
-    const isPhoneNumberInput = kitElement.classList.contains('pb_phone_number_input')
-    
-    const isTimePickerInput = kitElement.classList.contains('pb_time_picker')
+    const isPhoneNumberInput = kitElement?.classList?.contains('pb_phone_number_input') || false
+    const isTimePickerInput = kitElement?.classList?.contains('pb_time_picker') || false
 
     // ensure clean error message state
     this.clearError(target)
-    kitElement.classList.add('error')
+    if (kitElement) kitElement.classList.add('error')
+
+    const controlWrapper = this.getControlWrapper(target, kitElement)
+    if (controlWrapper) controlWrapper.classList.add('error')
 
     if (!isPhoneNumberInput && !isTimePickerInput) {
       const errorParent = this.getErrorParent(target, kitElement, parentElement)
@@ -183,6 +194,9 @@ class PbFormValidation extends PbEnhancedElement {
     const kitElement = this.getKitElement(target)
     if (kitElement) kitElement.classList.remove('error')
 
+    const controlWrapper = this.getControlWrapper(target, kitElement)
+    if (controlWrapper) controlWrapper.classList.remove('error')
+
     const errorParent = this.getErrorParent(target, kitElement, parentElement)
     const messageEl = errorParent.querySelector(`[${FORM_VALIDATION_MESSAGE_ATTR}="true"]`)
     if (messageEl) {
@@ -201,6 +215,9 @@ class PbFormValidation extends PbEnhancedElement {
     const candidate =
       target.closest('.text_input_wrapper') ||
       target.closest('.pb_select_kit_wrapper') ||
+      target.closest('.dropdown_wrapper') ||
+      target.closest('.input_wrapper') ||
+      target.closest('.pb_typeahead_wrapper') ||
       kitElement ||
       parentElement
 
@@ -209,6 +226,18 @@ class PbFormValidation extends PbEnhancedElement {
     }
 
     return candidate
+  }
+
+  getControlWrapper(target, kitElement) {
+    // Some kits apply error styles to a specific wrapper, not the outer kit element.
+    return (
+      target.closest('.dropdown_wrapper') ||
+      target.closest('.pb_select_kit_wrapper') ||
+      target.closest('.text_input_wrapper') ||
+      kitElement?.querySelector?.('.dropdown_wrapper') ||
+      kitElement?.querySelector?.('.pb_select_kit_wrapper') ||
+      null
+    )
   }
 
   isReactTypeaheadField(el) {
@@ -229,7 +258,15 @@ class PbFormValidation extends PbEnhancedElement {
   }
 
   getKitElement(target) {
-    return target.closest(KIT_SELECTOR) || target.parentElement?.closest(KIT_SELECTOR)
+    return (
+      target.closest(KIT_SELECTOR) ||
+      target.parentElement?.closest(KIT_SELECTOR) ||
+      // Some kits don't expose a *_kit class but do expose data hooks.
+      target.closest('[data-pb-select]') ||
+      target.closest('[data-pb-date-picker]') ||
+      target.closest('[data-pb-typeahead-kit]') ||
+      null
+    )
   }
 
   getValidationMessage(target, kitElement) {
@@ -237,7 +274,9 @@ class PbFormValidation extends PbEnhancedElement {
 
     const wrapperWithMessage =
       target.closest?.('[data-validation-message]') ||
-      target.closest?.('[data-pb-select]')
+      target.closest?.('[data-pb-select]') ||
+      target.closest?.('.dropdown_wrapper') ||
+      target.closest?.('.pb_select_kit_wrapper')
     const fromWrapper = wrapperWithMessage?.dataset?.validationMessage
 
     const fromKit = kitElement?.dataset?.validationMessage
@@ -267,3 +306,17 @@ class PbFormValidation extends PbEnhancedElement {
 }
 
 window.PbFormValidation = PbFormValidation
+
+// In consuming Rails apps, `DOMContentLoaded` may not fire on navigation when
+// Turbo is enabled. Autostart ensures validation works consistently across repos
+// as long as this bundle is loaded.
+const __pbStartFormValidation = () => {
+  if (!window.PbFormValidation || typeof window.PbFormValidation.start !== 'function') return
+  if (window.__pbFormValidationStarted) return
+  window.__pbFormValidationStarted = true
+  window.PbFormValidation.start()
+}
+
+document.addEventListener('DOMContentLoaded', __pbStartFormValidation)
+document.addEventListener('turbo:load', __pbStartFormValidation)
+document.addEventListener('turbo:render', __pbStartFormValidation)
