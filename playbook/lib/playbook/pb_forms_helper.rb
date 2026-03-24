@@ -49,7 +49,6 @@ module Playbook
         concat javascript_tag(<<~JS)
           (function() {
             // Keep a local `PbFormValidation` reference for backwards compatibility
-            // with existing expectations/tests.
             var PbFormValidation = window.PbFormValidation || { start: function() {} };
 
             function startPbFormValidation() {

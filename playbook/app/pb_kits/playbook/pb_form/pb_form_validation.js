@@ -49,7 +49,6 @@ class PbFormValidation extends PbEnhancedElement {
         return false
       }
 
-      // Use setTimeout to ensure React state updates have completed
       setTimeout(() => {
         if (this.hasPhoneNumberValidationErrors()) {
           event.preventDefault()
@@ -71,7 +70,6 @@ class PbFormValidation extends PbEnhancedElement {
       const isTimePickerInput = field.closest('.pb_time_picker')
       if (isTimePickerInput) return
 
-      // Reset any previous custom validity before checking validity.
       field.setCustomValidity('')
       const kitElement = this.getKitElement(field)
 
@@ -80,8 +78,6 @@ class PbFormValidation extends PbEnhancedElement {
         return
       }
 
-      // Only set custom message when invalid (otherwise the field becomes
-      // permanently invalid).
       const message = this.getValidationMessage(field, kitElement)
       if (message) field.setCustomValidity(message)
 
@@ -229,7 +225,6 @@ class PbFormValidation extends PbEnhancedElement {
   }
 
   getControlWrapper(target, kitElement) {
-    // Some kits apply error styles to a specific wrapper, not the outer kit element.
     return (
       target.closest('.dropdown_wrapper') ||
       target.closest('.pb_select_kit_wrapper') ||
@@ -284,7 +279,6 @@ class PbFormValidation extends PbEnhancedElement {
     return fromTarget || fromWrapper || fromKit || ''
   }
 
-  // Check if there are phone number input errors
   hasPhoneNumberValidationErrors() {
     const phoneNumberErrors = this.element.querySelectorAll(PHONE_NUMBER_VALIDATION_ERROR_SELECTOR)
     return phoneNumberErrors.length > 0
@@ -300,16 +294,12 @@ class PbFormValidation extends PbEnhancedElement {
     return errorContainer
   }
   get formValidationFields() {
-    // Query each time so dynamically-mounted required fields are included.
     return this.element.querySelectorAll(REQUIRED_FIELDS_SELECTOR)
   }
 }
 
 window.PbFormValidation = PbFormValidation
 
-// In consuming Rails apps, `DOMContentLoaded` may not fire on navigation when
-// Turbo is enabled. Autostart ensures validation works consistently across repos
-// as long as this bundle is loaded.
 const __pbStartFormValidation = () => {
   if (!window.PbFormValidation || typeof window.PbFormValidation.start !== 'function') return
   if (window.__pbFormValidationStarted) return
