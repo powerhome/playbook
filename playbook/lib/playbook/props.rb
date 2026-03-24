@@ -27,14 +27,26 @@ module Playbook
     private :values=
 
     def initialize(prop_values = {}, &block)
-      self.values = { children: block }.merge(Hash(prop_values))
+      # merge! avoids allocating a second Hash — mutates the literal in place
+      self.values = { children: block }.merge!(Hash(prop_values))
       self.class.props.each do |key, definition|
-        definition.validate! values[key]
+        val = values[key]
+        # Skip the 3-method-dispatch validate! chain for nil values on
+        # non-required props. For a typical component, ~70 of ~77 props
+        # are nil — this turns 210+ method dispatches into nil checks.
+        next if val.nil? && !definition.required
+
+        definition.validate! val
       end
     end
 
     def prop(name)
-      self.class.props[name].value values[name]
+      val = values[name]
+      if val.nil?
+        self.class.props[name].default
+      else
+        val
+      end
     end
 
     included do
@@ -48,9 +60,16 @@ module Playbook
       end
 
       def prop(name, type: Playbook::Props::String, **options)
-        self.props = props.merge(name => type.new(**options.merge(name: name, kit: self)))
+        definition = type.new(**options.merge(name: name, kit: self))
+        default_val = definition.default
+        self.props = props.merge(name => definition)
 
-        define_method(name) { prop(name) }
+        # Inline the default lookup — avoids the self.class.props[name]
+        # class_attribute lookup and .value() dispatch on every access.
+        define_method(name) {
+          val = values[name]
+          val.nil? ? default_val : val
+        }
       end
 
       def partial(path)

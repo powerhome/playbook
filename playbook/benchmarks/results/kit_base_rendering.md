@@ -224,3 +224,33 @@ Cumulative from baseline: 15.0 → 1.0 allocations per combined_html_options cal
 | Kit | Baseline | Final | Delta |
 |-----|----------|-------|-------|
 | All | 15.0 | 1.0 | **-93%** |
+
+---
+
+## Step 7: Optimize Props initialization — merge!, skip nil validation, inline defaults
+
+Date: 2026-03-23
+Change: Three optimizations in `lib/playbook/props.rb`:
+
+1. **merge! instead of merge** in initialize: `{ children: block }.merge!(prop_values)`
+   avoids allocating a second Hash. Saves 1 alloc per Kit.new().
+
+2. **Skip validate! for nil non-required props**: ~70 of ~77 props are nil on a typical
+   kit. Each was dispatching `definition.validate!(nil)` which calls `validate!` →
+   `value()` → `validate()` (3 method dispatches). Now skipped with a simple nil check.
+
+3. **Inline default in define_method**: Accessor was `define_method(name) { prop(name) }`
+   which dispatched through `prop()` → `self.class.props[name].value(values[name])`.
+   Now inlines: `val = values[name]; val.nil? ? default_val : val` — 1 Hash lookup
+   instead of 3 method dispatches.
+
+### Allocations: .new()
+
+| Kit | Before | After |
+|-----|--------|-------|
+| Badge | 7.0 | 6.0 |
+| Body | 7.0 | 6.0 |
+| Icon | 7.0 | 6.0 |
+| Card | 6.0 | 5.0 |
+
+Icon render_svg: 14.0 → 13.0 allocs
