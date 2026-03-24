@@ -126,7 +126,7 @@ module Playbook
     def spacing_props
       css = +""
       SPACING_PROP_MAP.each do |prop_name, prefix|
-        spacing_value = values[prop_name]
+        spacing_value = send(prop_name)
         next unless spacing_value
 
         if spacing_value.is_a?(::Hash)
