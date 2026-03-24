@@ -265,38 +265,54 @@ Ruby: 3.3.6, N=100 iterations, 10 warmup
 Three simulated page templates rendered via `ApplicationController.renderer`
 with `pb_rails()` calls — the same code path a production Rails view uses.
 
-### Pages tested
+### Kit call counts
 
-| Page | pb_rails calls | Description |
-|------|---------------|-------------|
-| Simple | 6 | title + 3 cards with body/badge |
-| Medium | 17 | profile layout with flex, cards, forms, buttons |
-| Complex | 25 | 12-row team table with avatar, badge, buttons per row |
+The benchmark reports two counts per page:
+
+- **Source occurrences** — literal `pb_rails` calls visible in the ERB template
+  source. This undercounts real work because loops expand at render time.
+- **Runtime pb_rails calls** — the actual number of times `pb_rails` is
+  invoked during one full render, measured by prepending a counting wrapper
+  around `PbKitHelper#pb_rails` for a single instrumented render. This
+  includes nested `pb_rails` calls from kit partials (e.g., Avatar internally
+  renders other kits via `pb_rails`). Any kit rendering that bypasses
+  `pb_rails` (e.g., direct ViewComponent render) would not be counted.
+
+| Page | Source occurrences | Runtime pb_rails calls | Description |
+|------|-------------------|----------------------|-------------|
+| Simple | 6 | 14 | title + 3 cards with body/badge |
+| Medium | 17 | 88 | profile layout with flex, cards, forms, buttons |
+| Complex | 25 | 504 | 12-row team table with avatar, badge, buttons per row |
+
+The runtime counts are identical on both branches — the optimizations change
+how fast kits render, not what gets rendered.
 
 ### P90 comparison: origin/master vs optimized branch
 
-| Page | Master P90 | Optimized P90 | Improvement |
-|------|-----------|---------------|-------------|
-| Simple (6 kits) | 1.13ms | 0.63ms | **-44%** |
-| Medium (17 kits) | 10.77ms | 2.08ms | **-81%** |
-| Complex (25 kits) | 17.12ms | 8.51ms | **-50%** |
+| Page | Runtime calls | Master P90 | Optimized P90 | Improvement |
+|------|--------------|-----------|---------------|-------------|
+| Simple | 14 | 1.37ms | 1.14ms | **-17%** |
+| Medium | 88 | 3.56ms | 2.58ms | **-28%** |
+| Complex | 504 | 18.08ms | 9.70ms | **-46%** |
 
 ### Full percentile comparison
 
 | Page | Branch | P50 | P90 | P99 |
 |------|--------|-----|-----|-----|
-| Simple | master | 967us | 1.13ms | 1.26ms |
-| Simple | optimized | 558us | 630us | 734us |
-| Medium | master | 3.52ms | 10.77ms | 15.19ms |
-| Medium | optimized | 1.78ms | 2.08ms | 2.65ms |
-| Complex | master | 15.33ms | 17.12ms | 21.42ms |
-| Complex | optimized | 7.91ms | 8.51ms | 12.57ms |
+| Simple (14 calls) | master | 1.14ms | 1.37ms | 1.59ms |
+| Simple (14 calls) | optimized | 968us | 1.14ms | 1.48ms |
+| Medium (88 calls) | master | 3.36ms | 3.56ms | 3.69ms |
+| Medium (88 calls) | optimized | 2.21ms | 2.58ms | 2.88ms |
+| Complex (504 calls) | master | 16.19ms | 18.08ms | 23.18ms |
+| Complex (504 calls) | optimized | 8.96ms | 9.70ms | 12.03ms |
 
 ### Key takeaway
 
-The micro-level allocation and timing improvements compound significantly
-at the page level. A medium-complexity page with 17 kit renders sees an
-81% P90 reduction (10.77ms → 2.08ms). Even the complex 25-kit page
-renders 50% faster at P90 (17.12ms → 8.51ms). These are real savings
-that directly translate to faster server response times for every Rails
-page using Playbook kits.
+The micro-level allocation and timing improvements compound significantly at
+the page level. The complex page executes 504 `pb_rails` calls per render —
+far more than the 25 source occurrences suggest, because loops expand and
+kits render nested children. At that scale, eliminating ~170 throwaway
+allocations per kit adds up: 504 kits x 170 fewer allocs = ~85,000 fewer
+allocations per page render. The result is a 46% P90 reduction on the
+complex page (18.08ms → 9.70ms) — real savings that translate directly to
+faster server response times.

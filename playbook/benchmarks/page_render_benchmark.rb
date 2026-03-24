@@ -11,6 +11,28 @@
 #   3. Complex page — a data table page with nested kits, repeated rows,
 #                     and heavy utility prop usage
 #
+# Kit counting:
+#   The benchmark reports two counts per page:
+#
+#   - "source occurrences" — literal `pb_rails` calls in the ERB template
+#     text. This is what you see reading the source, but it undercounts
+#     real work because loops (3.times, 12.times, etc.) expand at render
+#     time.
+#
+#   - "runtime pb_rails calls" — the actual number of times `pb_rails`
+#     is invoked during one full render of the template. Measured by
+#     prepending a counting wrapper around PbKitHelper#pb_rails for a
+#     single instrumented render, then removing the wrapper before the
+#     timed benchmark loop.
+#
+#   Note: "runtime pb_rails calls" counts every invocation of the
+#   pb_rails helper method. Some kits render child components internally
+#   via their .html.erb partial templates (e.g., Avatar renders an
+#   OnlineStatus), and those internal pb_rails calls ARE counted here.
+#   However, any kit rendering that bypasses pb_rails (e.g., direct
+#   ViewComponent render calls) would not be counted. For the standard
+#   Playbook kit set, pb_rails is the primary rendering entry point.
+#
 # Reports P50/P90/P99 percentiles for each page.
 #
 # Usage:
@@ -33,6 +55,47 @@ renderer = ApplicationController.renderer.new(
   http_host: "localhost",
   https: false
 )
+
+# ---------------------------------------------------------------------------
+# pb_rails call counting via Module#prepend
+# ---------------------------------------------------------------------------
+#
+# We define a module that wraps pb_rails to increment a thread-local counter.
+# This module is prepended for exactly one render to measure the runtime call
+# count, then removed (by redefining pb_rails to call super directly) before
+# the timed benchmark loop — so instrumentation overhead never touches the
+# latency measurements.
+
+module PbRailsCounter
+  def pb_rails(...)
+    Thread.current[:pb_rails_count] += 1
+    super
+  end
+end
+
+def count_runtime_pb_rails_calls(renderer, template)
+  # Prepend the counter module onto the helper proxy that ApplicationController
+  # uses for its view context. This means every pb_rails call during render
+  # — including nested calls from kit partials — goes through our wrapper.
+  helper_proxy = ApplicationController._helpers
+  helper_proxy.prepend(PbRailsCounter)
+
+  # Reset counter, render once, capture count
+  Thread.current[:pb_rails_count] = 0
+  renderer.render(inline: template, layout: false)
+  count = Thread.current[:pb_rails_count]
+
+  # Remove instrumentation: redefine pb_rails on the helper proxy to just
+  # call super (the original PbKitHelper#pb_rails), effectively bypassing
+  # the PbRailsCounter wrapper for all subsequent renders.
+  helper_proxy.define_method(:pb_rails) { |*args, **kwargs, &block| super(*args, **kwargs, &block) }
+
+  count
+end
+
+def count_source_occurrences(template)
+  template.scan(/pb_rails/).length
+end
 
 # ---------------------------------------------------------------------------
 # Page templates (inline ERB)
@@ -192,10 +255,6 @@ def measure_render(label, renderer, template)
   { label: label, p50: p50, p90: p90, p99: p99, min: min_val, max: max_val }
 end
 
-def count_pb_rails(template)
-  template.scan(/pb_rails/).length
-end
-
 # ---------------------------------------------------------------------------
 # Run benchmarks
 # ---------------------------------------------------------------------------
@@ -215,15 +274,55 @@ pages = {
   "Complex page" => { template: COMPLEX_PAGE, desc: "12-row team table with avatar, badge, buttons per row" },
 }
 
+# ---------------------------------------------------------------------------
+# Phase 1: Instrumented render to count runtime pb_rails calls
+# ---------------------------------------------------------------------------
+
+$stderr.puts "--- Phase 1: Counting runtime pb_rails calls (one instrumented render) ---"
+$stderr.puts ""
+
+pages.each do |name, config|
+  source_count = count_source_occurrences(config[:template])
+  runtime_count = count_runtime_pb_rails_calls(renderer, config[:template])
+  config[:source_count] = source_count
+  config[:runtime_count] = runtime_count
+
+  $stderr.puts "  %-30s source occurrences: %-4d  runtime pb_rails calls: %-4d" % [
+    name, source_count, runtime_count
+  ]
+end
+
+$stderr.puts ""
+$stderr.puts "  (Runtime count includes nested pb_rails calls from kit partials."
+$stderr.puts "   Instrumentation is removed before the timed benchmark below.)"
+$stderr.puts ""
+
+# Post-instrumentation warmup: the define_method override that removes the
+# counter module invalidates Ruby's method cache. Run a few renders to let
+# the VM re-optimize before we start timing.
+$stderr.puts "  Warming up after instrumentation removal..."
+pages.each do |_name, config|
+  WARMUP.times { renderer.render(inline: config[:template], layout: false) }
+end
+$stderr.puts "  Done."
+$stderr.puts ""
+
+# ---------------------------------------------------------------------------
+# Phase 2: Timed benchmark (no instrumentation overhead)
+# ---------------------------------------------------------------------------
+
+$stderr.puts "--- Phase 2: Timed benchmark (#{N} iterations, #{WARMUP} warmup) ---"
+$stderr.puts ""
+
 results = {}
 
 pages.each do |name, config|
-  kit_count = count_pb_rails(config[:template])
-  $stderr.puts "--- #{name} (#{kit_count} pb_rails calls) ---"
+  $stderr.puts "--- #{name} (#{config[:runtime_count]} runtime pb_rails calls) ---"
   $stderr.puts "    #{config[:desc]}"
   $stderr.puts ""
   results[name] = measure_render(name, renderer, config[:template])
-  results[name][:kit_count] = kit_count
+  results[name][:source_count] = config[:source_count]
+  results[name][:runtime_count] = config[:runtime_count]
   $stderr.puts ""
 end
 
@@ -231,11 +330,17 @@ $stderr.puts "=" * 78
 $stderr.puts "SUMMARY"
 $stderr.puts "=" * 78
 $stderr.puts ""
-$stderr.puts "  %-30s %-8s %-12s %-12s %-12s" % ["Page", "Kits", "P50", "P90", "P99"]
-$stderr.puts "  " + "-" * 74
+$stderr.puts "  %-20s %-10s %-10s %-12s %-12s %-12s" % [
+  "Page", "Source", "Runtime", "P50", "P90", "P99"
+]
+$stderr.puts "  %-20s %-10s %-10s %-12s %-12s %-12s" % [
+  "", "calls", "calls", "", "", ""
+]
+$stderr.puts "  " + "-" * 76
 results.each do |name, r|
-  $stderr.puts "  %-30s %-8d %-12s %-12s %-12s" % [
-    name, r[:kit_count], format_time(r[:p50]), format_time(r[:p90]), format_time(r[:p99])
+  $stderr.puts "  %-20s %-10d %-10d %-12s %-12s %-12s" % [
+    name, r[:source_count], r[:runtime_count],
+    format_time(r[:p50]), format_time(r[:p90]), format_time(r[:p99])
   ]
 end
 $stderr.puts ""
