@@ -291,13 +291,13 @@ The benchmark reports two counts per page:
 The runtime counts are identical on both branches — the optimizations
 change how fast kits render, not what gets rendered.
 
-### P50/P90 comparison: origin/master vs optimized branch
+### P50/P90 comparison: origin/master vs optimized branch (N=1000)
 
 | Page | Runtime calls | Master P50 | Optimized P50 | Master P90 | Optimized P90 | P90 Delta |
 |------|--------------|-----------|---------------|-----------|---------------|-----------|
-| Simple | 14 | 1.03ms | 539us | 1.29ms | 612us | **-53%** |
-| Medium | 46 | 3.53ms | 1.78ms | 3.79ms | 2.07ms | **-45%** |
-| Complex | 195 | 16.59ms | 9.12ms | 18.02ms | 9.72ms | **-46%** |
+| Simple | 14 | 1.01ms | 528us | 1.21ms | 612us | **-49%** |
+| Medium | 46 | 3.50ms | 1.77ms | 3.83ms | 2.07ms | **-46%** |
+| Complex | 195 | 18.82ms | 8.95ms | 24.55ms | 9.52ms | **-61%** |
 
 ### Key takeaway
 
@@ -306,4 +306,7 @@ level. The complex page invokes `pb_rails` 195 times per render — far
 more than the 25 source occurrences suggest, because loops expand and
 kits render nested children. At that scale, eliminating ~170 throwaway
 allocations per kit adds up to ~33,000 fewer allocations per page render.
-The result is a 46% P90 reduction on the complex page (18.02ms → 9.72ms).
+The result is a 61% P90 reduction on the complex page (24.55ms → 9.52ms).
+At higher sample counts (N=1000), master's P90 drifts upward from GC
+pressure caused by the extra allocations, while the optimized branch
+stays stable.

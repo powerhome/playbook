@@ -214,8 +214,8 @@ RENDERER = ApplicationController.renderer.new(
 # Benchmark helpers
 # ---------------------------------------------------------------------------
 
-N = 200 # iterations for percentile measurement
-WARMUP = 20
+N = 1000 # iterations for percentile measurement
+WARMUP = 50
 
 def percentiles(samples, *pcts)
   sorted = samples.sort
