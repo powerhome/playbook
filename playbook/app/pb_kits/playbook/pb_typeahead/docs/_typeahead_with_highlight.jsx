@@ -1,4 +1,3 @@
-/* eslint-disable react/no-danger */
 /* eslint-disable react/no-multi-comp */
 
 import React, { useState } from 'react'
@@ -38,14 +37,26 @@ const TypeaheadWithHighlight = (props) => {
   const [selectedUser, setSelectedUser] = useState()
 
   const formatOptionLabel = ({name, territory, title}, {inputValue}) => {
+    const escapeRegExp = (value = "") => (
+      value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")
+    )
 
-    const highlighted = (text) => {
+    const highlighted = (text = "") => {
       if (!inputValue.length) return text
-      return text.replace(
-        new RegExp(inputValue, 'gi'),
-        (highlighted) => `<mark>${highlighted}</mark>`
-      )
+
+      const escapedInputValue = escapeRegExp(inputValue)
+      const regex = new RegExp(`(${escapedInputValue})`, 'gi')
+      const parts = text.split(regex)
+
+      return parts.map((part, index) => {
+        if (part.toLowerCase() === inputValue.toLowerCase()) {
+          return <mark key={`${part}-${index}`}>{part}</mark>
+        }
+
+        return <React.Fragment key={`${part}-${index}`}>{part}</React.Fragment>
+      })
     }
+
     return (
       <Flex>
         <FlexItem>
@@ -61,11 +72,12 @@ const TypeaheadWithHighlight = (props) => {
               size={4}
               {...props}
           >
-            <span dangerouslySetInnerHTML={{ __html: highlighted(name) }} /></Title>
+            {highlighted(name)}
+          </Title>
           <Body color="light"
               {...props}
           >
-            <span dangerouslySetInnerHTML={{ __html: highlighted(title) }} />{" • "}
+            {highlighted(title)}{" • "}
             {territory}
           </Body>
         </FlexItem>
