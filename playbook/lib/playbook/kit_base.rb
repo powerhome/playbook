@@ -157,12 +157,19 @@ module Playbook
       content_tag(:div, "", html_attrs)
     end
 
+    EMPTY_HASH = {}.freeze
+
     def global_inline_props
-      {
-        height: height,
-        min_height: min_height,
-        max_height: max_height,
-      }.compact
+      h = height
+      mh = min_height
+      xh = max_height
+      return EMPTY_HASH if h.nil? && mh.nil? && xh.nil?
+
+      r = {}
+      r[:height] = h if h
+      r[:min_height] = mh if mh
+      r[:max_height] = xh if xh
+      r
     end
 
   private
@@ -190,8 +197,17 @@ module Playbook
     end
 
     def dynamic_inline_props
-      styles = global_inline_props.map { |key, value| "#{key.to_s.tr('_', '-')}: #{value}" if inline_validator(key, value) }.compact
-      styles.join("; ").presence
+      return @_dynamic_inline_props if defined?(@_dynamic_inline_props)
+
+      @_dynamic_inline_props = begin
+        gip = global_inline_props
+        if gip.empty?
+          nil
+        else
+          styles = gip.filter_map { |key, value| "#{key.to_s.tr('_', '-')}: #{value}" if inline_validator(key, value) }
+          styles.empty? ? nil : styles.join("; ")
+        end
+      end
     end
 
     def inline_validator(key, value)

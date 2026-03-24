@@ -158,3 +158,23 @@ on `{ data: data, aria: aria }`. Since neither `:data` nor `:aria` contains unde
 
 5 fewer allocations per render (the Hash from transform_keys, 2 Strings from to_s,
 2 Strings from tr, 2 Symbols from to_sym — some of which Ruby interns).
+
+---
+
+## Step 5: Short-circuit global_inline_props and memoize dynamic_inline_props
+
+Date: 2026-03-23
+Change: `global_inline_props` now returns a frozen EMPTY_HASH when height,
+min_height, and max_height are all nil (the common case), avoiding a Hash
+allocation + compact. `dynamic_inline_props` is memoized since it's called
+from both `kit_base_default_options` and `combined_html_options`, and
+short-circuits immediately when `global_inline_props` is empty.
+
+### Allocations: combined_html_options
+
+| Kit | Before | After |
+|-----|--------|-------|
+| All | 10.0 | 4.0 |
+
+6 fewer allocations — eliminated Hash from global_inline_props, Array from .map,
+Array from .compact, and the redundant second call from kit_base_default_options.
