@@ -197,16 +197,46 @@ class PbFormValidation extends PbEnhancedElement {
     this.mutationObserver.observe(this.element, { childList: true, subtree: true })
 
     this.element.addEventListener('submit', (event) => {
+      // If we intentionally resubmitted (after async phone validation settled),
+      // allow the submit through without re-gating.
+      if (this._pbBypassNextSubmit) {
+        this._pbBypassNextSubmit = false
+        return
+      }
+
+      const submitter = event.submitter
+
       const hasInvalidFields = this.validateOnSubmit()
       if (hasInvalidFields) {
         event.preventDefault()
         return false
       }
 
+      // Phone Number Input is skipped from standard validation flow and reports
+      // errors asynchronously via data attributes. preventDefault must be called
+      // synchronously, so we gate submit here and re-submit after a tick.
+      const hasPhoneNumberKit = !!this.element.querySelector('.pb_phone_number_input')
+      if (!hasPhoneNumberKit) return
+
+      // If already invalid, block immediately.
+      if (this.hasPhoneNumberValidationErrors()) {
+        event.preventDefault()
+        return false
+      }
+
+      // Otherwise, pause submit and re-check after React state updates.
+      event.preventDefault()
       setTimeout(() => {
-        if (this.hasPhoneNumberValidationErrors()) {
-          event.preventDefault()
-          return false
+        if (this.hasPhoneNumberValidationErrors()) return
+
+        this._pbBypassNextSubmit = true
+        if (typeof this.element.requestSubmit === 'function') {
+          // Preserve which button triggered submit when possible
+          if (submitter) this.element.requestSubmit(submitter)
+          else this.element.requestSubmit()
+        } else {
+          // Fallback: submits without firing submit event
+          this.element.submit()
         }
       }, 0)
     })
