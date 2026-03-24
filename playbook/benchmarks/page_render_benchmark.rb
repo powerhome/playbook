@@ -19,23 +19,27 @@
 #
 #   The benchmark reports two counts per page:
 #
-#   - "source occurrences" — literal pb_rails calls in the ERB source text.
-#     Undercounts real work because loops (3.times, 12.times) expand at
-#     render time.
+#   - "pb_rails in source" — literal pb_rails calls in the ERB template
+#     text. Undercounts real work because loops (3.times, 12.times)
+#     expand at render time.
 #
-#   - "runtime pb_rails calls" — the actual number of times the pb_rails
-#     helper method is invoked during one full render. Measured via Ruby's
-#     TracePoint API: a :call event observer counts invocations of any
-#     method named :pb_rails during a single render, then is disabled.
-#     This count includes nested pb_rails calls from kit partials (e.g.,
-#     Avatar internally renders child components via pb_rails). Kit
-#     rendering that bypasses pb_rails entirely (e.g., a direct
-#     ViewComponent render call) would not be counted. For the standard
-#     Playbook kit set, pb_rails is the primary entry point.
+#   - "runtime pb_rails calls" — the actual number of times
+#     Playbook::PbKitHelper#pb_rails is invoked during one full render.
+#     Measured via Ruby's TracePoint API: a :call event observer fires
+#     for each invocation of pb_rails on Playbook::PbKitHelper during a
+#     single render, then is disabled. This count includes nested
+#     pb_rails calls from kit partials (e.g., Avatar internally renders
+#     child components via pb_rails). Kit rendering that bypasses
+#     pb_rails entirely (e.g., a direct ViewComponent render call)
+#     would not be counted. For the standard Playbook kit set, pb_rails
+#     is the primary rendering entry point.
 #
-#   The counting pass uses TracePoint, which observes method calls without
-#   modifying any module, class, or method definition. No instrumentation
-#   artifacts are present in the call path during the timed benchmark.
+#   The counting pass uses TracePoint, which observes method calls
+#   without modifying any module, class, or method definition. Both
+#   the counting pass and the timed pass use the same RENDERER (the
+#   TracePoint is simply disabled before timing begins). No
+#   instrumentation artifacts are present in the call path during
+#   the timed benchmark.
 #
 # Timing methodology:
 #
@@ -165,17 +169,23 @@ ERB
 # Runtime pb_rails call counting — via TracePoint (zero mutation)
 # ---------------------------------------------------------------------------
 #
-# To count how many times pb_rails is actually invoked during a render, we
-# use Ruby's TracePoint API to observe :call events on the :pb_rails method.
-# This is completely non-invasive: no modules are prepended, no methods are
-# redefined, no controller state is mutated. TracePoint is enabled for
-# exactly one render, then disabled. The timed benchmark runs afterward
-# with no tracing artifacts in the call path.
+# To count how many times Playbook::PbKitHelper#pb_rails is invoked during a
+# render, we use Ruby's TracePoint API to observe :call events. The filter
+# checks both method_id (:pb_rails) and defined_class (Playbook::PbKitHelper)
+# so we count only the Playbook helper, not any unrelated method that happens
+# to share the name.
+#
+# TracePoint is non-invasive: no modules are prepended, no methods are
+# redefined, no controller state is mutated. It is enabled for exactly one
+# render per template, then disabled. Both the counting pass and the timed
+# pass use the same RENDERER — the TracePoint is simply off during timing.
+
+PB_RAILS_OWNER = Playbook::PbKitHelper
 
 def count_runtime_pb_rails_calls(template)
   count = 0
   tp = TracePoint.new(:call) do |t|
-    count += 1 if t.method_id == :pb_rails
+    count += 1 if t.method_id == :pb_rails && t.defined_class == PB_RAILS_OWNER
   end
 
   tp.enable
@@ -185,7 +195,7 @@ def count_runtime_pb_rails_calls(template)
   count
 end
 
-def count_source_occurrences(template)
+def count_source_pb_rails(template)
   template.scan(/pb_rails/).length
 end
 
@@ -242,8 +252,8 @@ def measure_render(label, template)
 
   p50, p90, p99 = percentiles(samples, 50, 90, 99)
 
-  $stderr.puts "  %-30s P50=%-10s P90=%-10s P99=%-10s" % [
-    label, format_time(p50), format_time(p90), format_time(p99)
+  $stderr.puts "  %-30s P50=%-10s P90=%-10s P99=%-10s (P99 low-confidence at N=%d)" % [
+    label, format_time(p50), format_time(p90), format_time(p99), N
   ]
   { label: label, p50: p50, p90: p90, p99: p99 }
 end
@@ -268,29 +278,29 @@ pages = {
 }
 
 # ---------------------------------------------------------------------------
-# Phase 1: Count runtime pb_rails calls (separate controller, no impact on
-# the ApplicationController used for timing)
+# Phase 1: Count runtime pb_rails calls
+# (TracePoint on the same RENDERER — disabled before Phase 2 timing begins)
 # ---------------------------------------------------------------------------
 
 $stderr.puts "--- Phase 1: Counting runtime pb_rails calls ---"
-$stderr.puts "    (uses TracePoint to observe :call events — zero mutation of any module)"
+$stderr.puts "    (TracePoint observes Playbook::PbKitHelper#pb_rails — zero mutation)"
 $stderr.puts ""
 
 pages.each do |name, config|
-  source_count = count_source_occurrences(config[:template])
+  source_count = count_source_pb_rails(config[:template])
   runtime_count = count_runtime_pb_rails_calls(config[:template])
   config[:source_count] = source_count
   config[:runtime_count] = runtime_count
 
-  $stderr.puts "  %-20s source: %-4d  runtime pb_rails calls: %-4d" % [
+  $stderr.puts "  %-20s pb_rails in source: %-4d  runtime pb_rails calls: %-4d" % [
     name, source_count, runtime_count
   ]
 end
 
 $stderr.puts ""
-$stderr.puts "  Runtime count = every pb_rails invocation during one render, including"
-$stderr.puts "  nested calls from kit partials. Does not count kit rendering that"
-$stderr.puts "  bypasses pb_rails (e.g., direct ViewComponent render calls)."
+$stderr.puts "  Runtime count = every Playbook::PbKitHelper#pb_rails invocation during"
+$stderr.puts "  one render, including nested calls from kit partials. Does not count"
+$stderr.puts "  kit rendering that bypasses pb_rails (e.g., direct ViewComponent render)."
 $stderr.puts ""
 
 # ---------------------------------------------------------------------------
@@ -321,22 +331,21 @@ $stderr.puts "=" * 78
 $stderr.puts "SUMMARY"
 $stderr.puts "=" * 78
 $stderr.puts ""
-$stderr.puts "  %-20s %-8s %-10s %-12s %-12s" % [
-  "Page", "Source", "Runtime", "P50", "P90"
+$stderr.puts "  %-20s %-10s %-10s %-12s %-12s" % [
+  "Page", "In source", "Runtime", "P50", "P90"
 ]
-$stderr.puts "  %-20s %-8s %-10s %-12s %-12s" % [
-  "", "occur.", "calls", "", ""
+$stderr.puts "  %-20s %-10s %-10s %-12s %-12s" % [
+  "", "(text)", "pb_rails", "", ""
 ]
-$stderr.puts "  " + "-" * 62
+$stderr.puts "  " + "-" * 64
 results.each do |name, r|
-  $stderr.puts "  %-20s %-8d %-10d %-12s %-12s" % [
+  $stderr.puts "  %-20s %-10d %-10d %-12s %-12s" % [
     name, r[:source_count], r[:runtime_count],
     format_time(r[:p50]), format_time(r[:p90])
   ]
 end
 $stderr.puts ""
-$stderr.puts "  Note: This is a synthetic benchmark using inline ERB templates."
-$stderr.puts "  Template compilation overhead differs from file-backed production"
-$stderr.puts "  views, but kit infrastructure cost (Props, Classnames, utility"
-$stderr.puts "  modules, combined_html_options) is exercised identically."
+$stderr.puts "  Synthetic benchmark: inline ERB templates, not file-backed views."
+$stderr.puts "  Template compilation overhead differs from production; kit"
+$stderr.puts "  infrastructure cost (Props, Classnames, utility modules) is identical."
 $stderr.puts ""
