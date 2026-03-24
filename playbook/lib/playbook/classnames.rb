@@ -32,7 +32,7 @@ module Playbook
       s = cursor_props;      css << " " << s if s
       # Flex utilities
       s = flex_direction_props; css << " " << s if s
-      s = flex_wrap_props;   css << " " << s if s
+      s = flex_wrap_props; css << " " << s if s
       s = justify_content_props; css << " " << s if s
       s = justify_self_props; css << " " << s if s
       s = align_items_props; css << " " << s if s

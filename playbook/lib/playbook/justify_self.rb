@@ -20,8 +20,8 @@ module Playbook
           css << "justify_self_#{media_size}_#{self_value} " if SCREEN_SIZES.include?(media_size.to_s) && JUSTIFY_SELF_VALUES.include?(self_value)
         end
         css.strip unless css.empty?
-      else
-        "justify_self_#{value}" if JUSTIFY_SELF_VALUES.include?(value)
+      elsif JUSTIFY_SELF_VALUES.include?(value)
+        "justify_self_#{value}"
       end
     end
 

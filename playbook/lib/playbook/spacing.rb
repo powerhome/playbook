@@ -33,6 +33,7 @@ module Playbook
     SCREEN_SIZE_VALUES = %w[xs sm md lg xl default].freeze
     BREAK_METHOD_VALUES = %w[on at].freeze
     SCREEN_SIZES = %w[xs sm md lg xl].freeze
+    SPACING_HASH_SKIP_KEYS = %i[default break].freeze
 
     SPACING_PROP_MAP = {
       margin: "m",
@@ -93,11 +94,20 @@ module Playbook
 
     def spacing_options
       {
-        margin: "m", margin_bottom: "mb", margin_left: "ml",
-        margin_right: "mr", margin_top: "mt", margin_x: "mx",
-        margin_y: "my", padding: "p", padding_bottom: "pb",
-        padding_left: "pl", padding_right: "pr", padding_top: "pt",
-        padding_x: "px", padding_y: "py",
+        margin: "m",
+        margin_bottom: "mb",
+        margin_left: "ml",
+        margin_right: "mr",
+        margin_top: "mt",
+        margin_x: "mx",
+        margin_y: "my",
+        padding: "p",
+        padding_bottom: "pb",
+        padding_left: "pl",
+        padding_right: "pr",
+        padding_top: "pt",
+        padding_x: "px",
+        padding_y: "py",
       }
     end
 
@@ -123,7 +133,7 @@ module Playbook
           default_value = spacing_value[:default]
           break_value = spacing_value[:break] || BREAK_METHOD_VALUES.first
           spacing_value.each do |key, value|
-            next if key == :default || key == :break
+            next if SPACING_HASH_SKIP_KEYS.include?(key)
 
             css << "break_#{break_value}_#{key}\:#{prefix}_#{value} " if SCREEN_SIZE_VALUES.include?(key.to_s) && SPACING_VALUES.include?(value.to_s)
           end

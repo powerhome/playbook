@@ -121,9 +121,7 @@ module Playbook
       inline = dynamic_inline_props
 
       # Fast path: no custom html_options and no inline styles (the common case)
-      if ho.empty? && inline.nil?
-        return data_attributes
-      end
+      return data_attributes if ho.empty? && inline.nil?
 
       merged = default_html_options.dup
 
@@ -203,9 +201,9 @@ module Playbook
     end
 
     def dynamic_inline_props
-      return @_dynamic_inline_props if defined?(@_dynamic_inline_props)
+      return @dynamic_inline_props if defined?(@dynamic_inline_props)
 
-      @_dynamic_inline_props = begin
+      @dynamic_inline_props = begin
         gip = global_inline_props
         if gip.empty?
           nil

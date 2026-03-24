@@ -20,8 +20,8 @@ module Playbook
           css << "flex_wrap_#{media_size}_#{wrap_value.underscore} " if SCREEN_SIZES.include?(media_size.to_s) && FLEX_WRAP_VALUES.include?(wrap_value)
         end
         css.strip unless css.empty?
-      else
-        "flex_wrap_#{value}" if FLEX_WRAP_VALUES.include?(value)
+      elsif FLEX_WRAP_VALUES.include?(value)
+        "flex_wrap_#{value}"
       end
     end
 

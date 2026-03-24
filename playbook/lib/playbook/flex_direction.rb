@@ -20,8 +20,8 @@ module Playbook
           css << "flex_direction_#{media_size}_#{flex_value.underscore} " if SCREEN_SIZES.include?(media_size.to_s) && FLEX_DIRECTION_VALUES.include?(flex_value)
         end
         css.strip unless css.empty?
-      else
-        "flex_direction_#{value.underscore}" if FLEX_DIRECTION_VALUES.include?(value)
+      elsif FLEX_DIRECTION_VALUES.include?(value)
+        "flex_direction_#{value.underscore}"
       end
     end
 

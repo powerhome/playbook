@@ -20,8 +20,8 @@ module Playbook
           css << "flex_#{media_size}_#{val} " if SCREEN_SIZES.include?(media_size.to_s) && FLEX_VALUES.include?(val.to_s)
         end
         css.strip unless css.empty?
-      else
-        "flex_#{value}" if FLEX_VALUES.include?(value.to_s)
+      elsif FLEX_VALUES.include?(value.to_s)
+        "flex_#{value}"
       end
     end
 

@@ -20,8 +20,8 @@ module Playbook
           css << "display_#{key}_#{val} " if DISPLAY_SIZE_VALUES.include?(key.to_s) && DISPLAY_VALUES.include?(val.to_s)
         end
         css.strip unless css.empty?
-      else
-        "display_#{value}" if DISPLAY_VALUES.include?(value)
+      elsif DISPLAY_VALUES.include?(value)
+        "display_#{value}"
       end
     end
 

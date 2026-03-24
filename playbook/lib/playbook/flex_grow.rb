@@ -20,8 +20,8 @@ module Playbook
           css << "flex_grow_#{media_size}_#{grow_value} " if SCREEN_SIZES.include?(media_size.to_s) && FLEX_GROW_VALUES.include?(grow_value.to_s)
         end
         css.strip unless css.empty?
-      else
-        "flex_grow_#{value}" if FLEX_GROW_VALUES.include?(value.to_s)
+      elsif FLEX_GROW_VALUES.include?(value.to_s)
+        "flex_grow_#{value}"
       end
     end
 

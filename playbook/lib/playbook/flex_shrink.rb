@@ -20,8 +20,8 @@ module Playbook
           css << "flex_shrink_#{media_size}_#{shrink_value} " if SCREEN_SIZES.include?(media_size.to_s) && FLEX_SHRINK_VALUES.include?(shrink_value.to_s)
         end
         css.strip unless css.empty?
-      else
-        "flex_shrink_#{value}" if FLEX_SHRINK_VALUES.include?(value.to_s)
+      elsif FLEX_SHRINK_VALUES.include?(value.to_s)
+        "flex_shrink_#{value}"
       end
     end
 

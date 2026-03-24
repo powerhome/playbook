@@ -32,8 +32,8 @@ module Playbook
           css << "z_index_#{key}_#{val} " if SCREEN_SIZES.include?(key.to_s) && Z_INDEX_VALUES.include?(val.to_s)
         end
         css.strip unless css.empty?
-      else
-        "z_index_#{value}" if Z_INDEX_VALUES.include?(value)
+      elsif Z_INDEX_VALUES.include?(value)
+        "z_index_#{value}"
       end
     end
   end

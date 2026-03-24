@@ -20,8 +20,8 @@ module Playbook
           css << "text_align_#{media_size}_#{flex_value.underscore} " if SCREEN_SIZES.include?(media_size.to_s) && TEXT_ALIGN_VALUES.include?(flex_value)
         end
         css.strip unless css.empty?
-      else
-        "text_align_#{value.underscore}" if TEXT_ALIGN_VALUES.include?(value)
+      elsif TEXT_ALIGN_VALUES.include?(value)
+        "text_align_#{value.underscore}"
       end
     end
 

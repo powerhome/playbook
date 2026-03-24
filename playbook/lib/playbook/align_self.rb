@@ -20,8 +20,8 @@ module Playbook
           css << "align_self_#{media_size}_#{align_value} " if SCREEN_SIZES.include?(media_size.to_s) && ALIGN_SELF_VALUES.include?(align_value)
         end
         css.strip unless css.empty?
-      else
-        "align_self_#{value}" if ALIGN_SELF_VALUES.include?(value)
+      elsif ALIGN_SELF_VALUES.include?(value)
+        "align_self_#{value}"
       end
     end
 

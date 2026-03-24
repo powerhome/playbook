@@ -66,10 +66,10 @@ module Playbook
 
         # Inline the default lookup — avoids the self.class.props[name]
         # class_attribute lookup and .value() dispatch on every access.
-        define_method(name) {
+        define_method(name) do
           val = values[name]
           val.nil? ? default_val : val
-        }
+        end
       end
 
       def partial(path)
