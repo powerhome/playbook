@@ -254,3 +254,49 @@ Change: Three optimizations in `lib/playbook/props.rb`:
 | Card | 6.0 | 5.0 |
 
 Icon render_svg: 14.0 → 13.0 allocs
+
+---
+
+## Real-World Page Render Benchmark
+
+Date: 2026-03-24
+Ruby: 3.3.6, N=100 iterations, 10 warmup
+
+Three simulated page templates rendered via `ApplicationController.renderer`
+with `pb_rails()` calls — the same code path a production Rails view uses.
+
+### Pages tested
+
+| Page | pb_rails calls | Description |
+|------|---------------|-------------|
+| Simple | 6 | title + 3 cards with body/badge |
+| Medium | 17 | profile layout with flex, cards, forms, buttons |
+| Complex | 25 | 12-row team table with avatar, badge, buttons per row |
+
+### P90 comparison: origin/master vs optimized branch
+
+| Page | Master P90 | Optimized P90 | Improvement |
+|------|-----------|---------------|-------------|
+| Simple (6 kits) | 1.13ms | 0.63ms | **-44%** |
+| Medium (17 kits) | 10.77ms | 2.08ms | **-81%** |
+| Complex (25 kits) | 17.12ms | 8.51ms | **-50%** |
+
+### Full percentile comparison
+
+| Page | Branch | P50 | P90 | P99 |
+|------|--------|-----|-----|-----|
+| Simple | master | 967us | 1.13ms | 1.26ms |
+| Simple | optimized | 558us | 630us | 734us |
+| Medium | master | 3.52ms | 10.77ms | 15.19ms |
+| Medium | optimized | 1.78ms | 2.08ms | 2.65ms |
+| Complex | master | 15.33ms | 17.12ms | 21.42ms |
+| Complex | optimized | 7.91ms | 8.51ms | 12.57ms |
+
+### Key takeaway
+
+The micro-level allocation and timing improvements compound significantly
+at the page level. A medium-complexity page with 17 kit renders sees an
+81% P90 reduction (10.77ms → 2.08ms). Even the complex 25-kit page
+renders 50% faster at P90 (17.12ms → 8.51ms). These are real savings
+that directly translate to faster server response times for every Rails
+page using Playbook kits.
