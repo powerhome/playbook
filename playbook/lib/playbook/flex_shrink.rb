@@ -6,42 +6,31 @@ module Playbook
       base.prop :flex_shrink
     end
 
-    # rubocop:disable Style/IfInsideElse
+    FLEX_SHRINK_VALUES = %w[1 0].freeze
+    SCREEN_SIZES = %w[xs sm md lg xl].freeze
+
     def flex_shrink_props
-      selected_props = flex_shrink_options.keys.select { |sk| try(sk) }
-      return nil unless selected_props.present?
+      value = flex_shrink
+      return nil unless value
 
-      screen_size_values = %w[xs sm md lg xl]
-
-      selected_props.map do |k|
-        flex_shrink_value = send(k)
-        if flex_shrink_value.is_a?(Hash)
-          class_result = []
-
-          # Handle default value separately (generates base class without size prefix)
-          class_result << "flex_shrink_#{flex_shrink_value[:default]}" if flex_shrink_value.key?(:default) && flex_shrink_values.include?(flex_shrink_value[:default].to_s)
-
-          # Handle responsive sizes (generates classes with size prefix)
-          flex_shrink_value.each do |media_size, shrink_value|
-            class_result << "flex_shrink_#{media_size}_#{shrink_value}" if screen_size_values.include?(media_size.to_s) && flex_shrink_values.include?(shrink_value.to_s)
-          end
-
-          class_result
-        else
-          "flex_shrink_#{flex_shrink_value}" if flex_shrink_values.include? flex_shrink_value.to_s
+      if value.is_a?(::Hash)
+        css = +""
+        css << "flex_shrink_#{value[:default]} " if value.key?(:default) && FLEX_SHRINK_VALUES.include?(value[:default].to_s)
+        value.each do |media_size, shrink_value|
+          css << "flex_shrink_#{media_size}_#{shrink_value} " if SCREEN_SIZES.include?(media_size.to_s) && FLEX_SHRINK_VALUES.include?(shrink_value.to_s)
         end
-      end.flatten.compact.join(" ")
+        css.strip unless css.empty?
+      else
+        "flex_shrink_#{value}" if FLEX_SHRINK_VALUES.include?(value.to_s)
+      end
     end
-    # rubocop:enable Style/IfInsideElse
 
     def flex_shrink_options
-      {
-        flex_shrink: "flex_shrink",
-      }
+      { flex_shrink: "flex_shrink" }
     end
 
     def flex_shrink_values
-      %w[1 0]
+      FLEX_SHRINK_VALUES
     end
   end
 end

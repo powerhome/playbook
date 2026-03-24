@@ -6,44 +6,35 @@ module Playbook
       base.prop :z_index
     end
 
+    Z_INDEX_VALUES = %w[1 2 3 4 5 6 7 8 9 10 max].freeze
+    SCREEN_SIZES = %w[xs sm md lg xl].freeze
+
     def z_index_values
-      %w[1 2 3 4 5 6 7 8 9 10 max]
+      Z_INDEX_VALUES
     end
 
     def z_index_options
-      {
-        z_index: "z-index",
-      }
+      { z_index: "z-index" }
     end
 
     def screen_size_values
-      %w[xs sm md lg xl]
+      SCREEN_SIZES
     end
 
     def z_index_props
-      selected_props = z_index_options.keys.select { |sk| try(sk) }
-      return nil unless selected_props.present?
+      value = z_index
+      return nil unless value
 
-      responsive = selected_props.present? && try(:z_index).is_a?(::Hash)
-      css = ""
-      if responsive
-        z_index_value = send(:z_index)
-
-        # Handle default value separately (generates base class without size prefix)
-        css += "z_index_#{z_index_value[:default]} " if z_index_value.key?(:default) && z_index_values.include?(z_index_value[:default].to_s)
-
-        # Handle responsive sizes (generates classes with size prefix)
-        z_index_value.each do |key, value|
-          css += "z_index_#{key}_#{value} " if screen_size_values.include?(key.to_s) && z_index_values.include?(value.to_s)
+      if value.is_a?(::Hash)
+        css = +""
+        css << "z_index_#{value[:default]} " if value.key?(:default) && Z_INDEX_VALUES.include?(value[:default].to_s)
+        value.each do |key, val|
+          css << "z_index_#{key}_#{val} " if SCREEN_SIZES.include?(key.to_s) && Z_INDEX_VALUES.include?(val.to_s)
         end
+        css.strip unless css.empty?
       else
-        selected_props.each do |k|
-          z_index_value = send(k)
-          css += "z_index_#{z_index_value} " if z_index_values.include? z_index_value
-        end
+        "z_index_#{value}" if Z_INDEX_VALUES.include?(value)
       end
-
-      css unless css.blank?
     end
   end
 end

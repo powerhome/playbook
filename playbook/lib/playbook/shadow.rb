@@ -6,24 +6,21 @@ module Playbook
       base.prop :shadow
     end
 
-    def shadow_props
-      selected_props = shadow_options.keys.select { |sk| try(sk) }
-      return nil unless selected_props.present?
+    SHADOW_VALUES = %w[none deep deeper deepest].freeze
 
-      selected_props.map do |k|
-        shadow_value = send(k)
-        "shadow_#{shadow_value}" if shadow_values.include? shadow_value
-      end.compact.join(" ")
+    def shadow_props
+      value = shadow
+      return nil unless value
+
+      "shadow_#{value}" if SHADOW_VALUES.include?(value)
     end
 
     def shadow_options
-      {
-        shadow: "shadow",
-      }
+      { shadow: "shadow" }
     end
 
     def shadow_values
-      %w[none deep deeper deepest]
+      SHADOW_VALUES
     end
   end
 end
