@@ -67,5 +67,9 @@ module Playbook
       css << " " << s if s
       css
     end
+
+    def dark_props
+      dark ? "dark" : nil
+    end
   end
 end
