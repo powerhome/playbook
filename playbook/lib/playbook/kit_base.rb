@@ -186,10 +186,7 @@ module Playbook
     end
 
     def data_attributes
-      {
-        data: data,
-        aria: aria,
-      }.transform_keys { |key| key.to_s.tr("_", "-").to_sym }
+      { data: data, aria: aria }
     end
 
     def dynamic_inline_props

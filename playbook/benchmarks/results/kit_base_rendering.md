@@ -140,3 +140,21 @@ dispatches per call (when all spacing props are nil).
 - Marginal improvement at best, within measurement noise for most kits
 - No allocation change — this only reduces method dispatch overhead
 - Kept because the code is cleaner and slightly more direct
+
+---
+
+## Step 4: Remove dead transform_keys in data_attributes
+
+Date: 2026-03-23
+Change: `data_attributes` called `.transform_keys { |key| key.to_s.tr("_", "-").to_sym }`
+on `{ data: data, aria: aria }`. Since neither `:data` nor `:aria` contains underscores,
+`tr("_", "-")` is a no-op. Removed the transform_keys entirely.
+
+### Allocations: combined_html_options
+
+| Kit | Before | After |
+|-----|--------|-------|
+| All | 15.0 | 10.0 |
+
+5 fewer allocations per render (the Hash from transform_keys, 2 Strings from to_s,
+2 Strings from tr, 2 Symbols from to_sym — some of which Ruby interns).
