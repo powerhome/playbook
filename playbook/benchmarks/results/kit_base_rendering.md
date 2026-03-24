@@ -115,3 +115,28 @@ This eliminates 2 Array allocations (the literal + compact result) and
 - Timing within measurement noise — the Array overhead was small compared to
   the method dispatch savings from Step 1
 - Cumulative vs baseline: Badge classname P90 54→29us (**-46%**), Body 58→29us (**-50%**)
+
+---
+
+## Step 3: Replace send() with values[] in spacing_props
+
+Date: 2026-03-23
+Change: In `spacing_props`, replaced `send(prop_name)` with `values[prop_name]`
+for the 14 SPACING_PROP_MAP entries. Since all spacing props default to nil,
+a direct Hash lookup is equivalent to calling the accessor. Saves 14 method
+dispatches per call (when all spacing props are nil).
+
+### P90 Timing
+
+| Kit | .classname (min) | P90 Delta vs Step 2 |
+|-----|------------------|---------------------|
+| Badge | 28.0us | -3% (noise) |
+| Body | 26.0us | -10% |
+| Icon | 40.0us | 0% (noise) |
+| Card | 43.0us | +43% (noise) |
+
+### Key observations
+
+- Marginal improvement at best, within measurement noise for most kits
+- No allocation change — this only reduces method dispatch overhead
+- Kept because the code is cleaner and slightly more direct
