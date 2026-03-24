@@ -178,3 +178,49 @@ short-circuits immediately when `global_inline_props` is empty.
 
 6 fewer allocations — eliminated Hash from global_inline_props, Array from .map,
 Array from .compact, and the redundant second call from kit_base_default_options.
+
+---
+
+## Step 6: Short-circuit combined_html_options for the common empty path
+
+Date: 2026-03-23
+Change: When `html_options` is the default empty hash and there are no inline
+styles (the common case for most kits), `combined_html_options` now returns
+`data_attributes` directly — skipping `default_html_options.dup`, the iteration
+loop, and `.deep_merge`.
+
+### Allocations: combined_html_options
+
+| Kit | Before | After |
+|-----|--------|-------|
+| All | 4.0 | 1.0 |
+
+Cumulative from baseline: 15.0 → 1.0 allocations per combined_html_options call.
+
+---
+
+## Final Summary vs Baseline
+
+### P90 Timing — classname (no utility props)
+
+| Kit | Baseline | Final | Delta |
+|-----|----------|-------|-------|
+| Badge | 54.0us | ~29us | **-46%** |
+| Body | 58.0us | ~29us | **-50%** |
+| Icon | 64.0us | ~40us | **-38%** |
+| Card | 57.0us | ~30us | **-47%** |
+
+### Allocations — classname (no utility props)
+
+| Kit | Baseline | Final | Delta |
+|-----|----------|-------|-------|
+| Badge | 173.0 | 4.0 | **-98%** |
+| Body | 173.0 | 4.0 | **-98%** |
+| Icon | 177.0 | 8.0 | **-95%** |
+| Card | 181.0 | 8.0 | **-96%** |
+
+### Allocations — combined_html_options
+
+| Kit | Baseline | Final | Delta |
+|-----|----------|-------|-------|
+| All | 15.0 | 1.0 | **-93%** |

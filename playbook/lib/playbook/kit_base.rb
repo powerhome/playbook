@@ -117,20 +117,26 @@ module Playbook
     # rubocop:enable Style/OptionalBooleanParameter
 
     def combined_html_options
+      ho = html_options
+      inline = dynamic_inline_props
+
+      # Fast path: no custom html_options and no inline styles (the common case)
+      if ho.empty? && inline.nil?
+        return data_attributes
+      end
+
       merged = default_html_options.dup
 
-      html_options.each do |key, value|
+      ho.each do |key, value|
         if key == :style && value.is_a?(Hash)
-          # Convert style hash to CSS string
           merged[:style] = value.map { |k, v| "#{k.to_s.tr('_', '-')}: #{v}" }.join("; ")
         else
           merged[key] = value
         end
       end
 
-      inline_styles = dynamic_inline_props
-      if inline_styles.present?
-        merged[:style] = merged[:style].present? ? "#{merged[:style]}; #{inline_styles}" : inline_styles
+      if inline
+        merged[:style] = merged[:style] ? "#{merged[:style]}; #{inline}" : inline
       end
 
       merged.deep_merge(data_attributes)
