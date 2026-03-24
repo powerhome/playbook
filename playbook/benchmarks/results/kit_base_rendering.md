@@ -79,3 +79,39 @@ Icon render_svg: 14.0 allocs
 - With utility props set, allocations dropped from 198-210 → 14-19
 - The remaining allocations are from the Array + compact + join in `generate_classname` itself
 - `.new()` and `combined_html_options` unchanged (as expected, they weren't touched)
+
+---
+
+## Step 2: Rewrite generate_classname — replace Array+compact+join with String concat
+
+Date: 2026-03-23
+Change: Replaced the 43-element Array literal + `.compact.join(" ")` in
+`generate_classname` with direct String concatenation using a mutable String
+(`+""`) and `<<`. Also updated `generate_classname_without_spacing` to match.
+This eliminates 2 Array allocations (the literal + compact result) and
+1 String allocation (from join) per call.
+
+### P90 Timing
+
+| Kit | .classname (min) | .classname (util) | P90 Delta vs Step 1 |
+|-----|------------------|-------------------|---------------------|
+| Badge | 29.0us | 28.0us | -9% (noise) |
+| Body | 29.0us | 34.0us | -3% (noise) |
+| Icon | 40.0us | 43.0us | +3% (noise) |
+| Card | 30.0us | 32.0us | 0% (noise) |
+
+### Allocations per call
+
+| Kit | .classname (min) | .classname (util) |
+|-----|------------------|-------------------|
+| Badge | 4.0 | 11.0 |
+| Body | 4.0 | 11.0 |
+| Icon | 8.0 | 14.0 |
+| Card | 8.0 | 16.0 |
+
+### Key observations
+
+- Allocations dropped 7→4 for Badge/Body (minimal), 11→8 for Icon/Card (minimal)
+- Timing within measurement noise — the Array overhead was small compared to
+  the method dispatch savings from Step 1
+- Cumulative vs baseline: Badge classname P90 54→29us (**-46%**), Body 58→29us (**-50%**)

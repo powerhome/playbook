@@ -8,62 +8,64 @@ module Playbook
     end
 
     def generate_classname(*name_parts, separator: "_")
-      [
-        name_parts.compact.join(separator),
-        prop(:classname),
-        spacing_props,
-        dark_props,
-        width_props,
-        min_width_props,
-        max_width_props,
-        gap_props,
-        column_gap_props,
-        row_gap_props,
-        z_index_props,
-        number_spacing_props,
-        shadow_props,
-        line_height_props,
-        display_props,
-        cursor_props,
-        flex_direction_props,
-        flex_wrap_props,
-        justify_content_props,
-        justify_self_props,
-        align_items_props,
-        align_content_props,
-        align_self_props,
-        flex_props,
-        flex_grow_props,
-        flex_shrink_props,
-        order_props,
-        position_props,
-        hover_props,
-        border_radius_props,
-        text_align_props,
-        overflow_props,
-        truncate_props,
-        left_props,
-        top_props,
-        right_props,
-        bottom_props,
-        vertical_align_props,
-        height_props,
-        min_height_props,
-        max_height_props,
-      ].compact.join(" ")
+      css = +name_parts.compact.join(separator)
+      s = prop(:classname);  css << " " << s if s
+
+      # Spacing props (handles 14 sub-props internally)
+      s = spacing_props;     css << " " << s if s
+      # Dark mode
+      css << " dark" if dark
+      # Width utilities
+      s = width_props;       css << " " << s if s
+      s = min_width_props;   css << " " << s if s
+      s = max_width_props;   css << " " << s if s
+      # Gap utilities
+      s = gap_props;         css << " " << s if s
+      s = column_gap_props;  css << " " << s if s
+      s = row_gap_props;     css << " " << s if s
+      # Single-value utilities
+      s = z_index_props;     css << " " << s if s
+      s = number_spacing_props; css << " " << s if s
+      s = shadow_props;      css << " " << s if s
+      s = line_height_props; css << " " << s if s
+      s = display_props;     css << " " << s if s
+      s = cursor_props;      css << " " << s if s
+      # Flex utilities
+      s = flex_direction_props; css << " " << s if s
+      s = flex_wrap_props;   css << " " << s if s
+      s = justify_content_props; css << " " << s if s
+      s = justify_self_props; css << " " << s if s
+      s = align_items_props; css << " " << s if s
+      s = align_content_props; css << " " << s if s
+      s = align_self_props;  css << " " << s if s
+      s = flex_props;        css << " " << s if s
+      s = flex_grow_props;   css << " " << s if s
+      s = flex_shrink_props; css << " " << s if s
+      s = order_props;       css << " " << s if s
+      # Position and layout
+      s = position_props;    css << " " << s if s
+      s = hover_props;       css << " " << s if s
+      s = border_radius_props; css << " " << s if s
+      s = text_align_props;  css << " " << s if s
+      s = overflow_props;    css << " " << s if s
+      s = truncate_props;    css << " " << s if s
+      s = left_props;        css << " " << s if s
+      s = top_props;         css << " " << s if s
+      s = right_props;       css << " " << s if s
+      s = bottom_props;      css << " " << s if s
+      s = vertical_align_props; css << " " << s if s
+      # Height utilities
+      s = height_props;      css << " " << s if s
+      s = min_height_props;  css << " " << s if s
+      s = max_height_props;  css << " " << s if s
+      css
     end
 
     def generate_classname_without_spacing(*name_parts, separator: "_")
-      [
-        name_parts.compact.join(separator),
-        prop(:classname),
-      ].compact.join(" ")
-    end
-
-  private
-
-    def dark_props
-      dark ? "dark" : nil
+      css = +name_parts.compact.join(separator)
+      s = prop(:classname)
+      css << " " << s if s
+      css
     end
   end
 end
