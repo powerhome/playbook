@@ -48,6 +48,10 @@ module Playbook
         concat form_with(**options, &block)
         concat javascript_tag(<<~JS)
           (function() {
+            // Keep a local `PbFormValidation` reference for backwards compatibility
+            // with existing expectations/tests.
+            var PbFormValidation = window.PbFormValidation || { start: function() {} };
+
             function startPbFormValidation() {
               try {
                 if (window.PbFormValidation && typeof window.PbFormValidation.start === "function") {
@@ -62,6 +66,7 @@ module Playbook
               } catch (e) {}
             }
 
+            window.addEventListener("DOMContentLoaded", function() { PbFormValidation.start() })
             window.addEventListener("DOMContentLoaded", startPbFormValidation)
             document.addEventListener("turbo:load", startPbFormValidation)
             document.addEventListener("turbo:render", startPbFormValidation)
