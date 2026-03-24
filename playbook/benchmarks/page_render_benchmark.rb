@@ -1,39 +1,49 @@
 # frozen_string_literal: true
 
 #
-# Real-world page render benchmark: measures the wall-clock time to render
-# ERB pages that use pb_rails() to instantiate and render real kit components,
-# the same way a production Rails view does.
+# Synthetic page-level integration benchmark for Playbook kit rendering.
 #
-# Simulates three page complexities:
-#   1. Simple page  — a handful of kits (card, body, title, badge)
-#   2. Medium page  — a form layout with many kits and utility props
-#   3. Complex page — a data table page with nested kits, repeated rows,
-#                     and heavy utility prop usage
+# Renders inline ERB templates through ApplicationController.renderer with
+# pb_rails() calls — exercising the same Kit.new → classname → ViewComponent
+# render path that a real Rails view would, but using inline templates rather
+# than file-backed views. This means template compilation overhead differs
+# from production, but the kit infrastructure cost (Props, Classnames,
+# utility modules, combined_html_options) is identical.
 #
-# Kit counting:
+# Three page complexities are tested:
+#   1. Simple  — a handful of kits (title, body, card, badge)
+#   2. Medium  — a profile layout with flex, cards, forms, buttons
+#   3. Complex — a 12-row data table with avatar, badge, buttons per row
+#
+# Kit call counting:
+#
 #   The benchmark reports two counts per page:
 #
-#   - "source occurrences" — literal `pb_rails` calls in the ERB template
-#     text. This is what you see reading the source, but it undercounts
-#     real work because loops (3.times, 12.times, etc.) expand at render
-#     time.
+#   - "source occurrences" — literal pb_rails calls in the ERB source text.
+#     Undercounts real work because loops (3.times, 12.times) expand at
+#     render time.
 #
-#   - "runtime pb_rails calls" — the actual number of times `pb_rails`
-#     is invoked during one full render of the template. Measured by
-#     prepending a counting wrapper around PbKitHelper#pb_rails for a
-#     single instrumented render, then removing the wrapper before the
-#     timed benchmark loop.
+#   - "runtime pb_rails calls" — the actual number of times the pb_rails
+#     helper method is invoked during one full render. Measured via Ruby's
+#     TracePoint API: a :call event observer counts invocations of any
+#     method named :pb_rails during a single render, then is disabled.
+#     This count includes nested pb_rails calls from kit partials (e.g.,
+#     Avatar internally renders child components via pb_rails). Kit
+#     rendering that bypasses pb_rails entirely (e.g., a direct
+#     ViewComponent render call) would not be counted. For the standard
+#     Playbook kit set, pb_rails is the primary entry point.
 #
-#   Note: "runtime pb_rails calls" counts every invocation of the
-#   pb_rails helper method. Some kits render child components internally
-#   via their .html.erb partial templates (e.g., Avatar renders an
-#   OnlineStatus), and those internal pb_rails calls ARE counted here.
-#   However, any kit rendering that bypasses pb_rails (e.g., direct
-#   ViewComponent render calls) would not be counted. For the standard
-#   Playbook kit set, pb_rails is the primary rendering entry point.
+#   The counting pass uses TracePoint, which observes method calls without
+#   modifying any module, class, or method definition. No instrumentation
+#   artifacts are present in the call path during the timed benchmark.
 #
-# Reports P50/P90/P99 percentiles for each page.
+# Timing methodology:
+#
+#   - WARMUP renders are run before timing begins (not measured).
+#   - N timed iterations are collected without forced GC between them,
+#     to approximate steady-state rendering conditions.
+#   - P50 and P90 are reported. P99 is shown for completeness but should
+#     be interpreted cautiously at N=200 (only 2 samples define it).
 #
 # Usage:
 #   cd playbook && ASDF_RUBY_VERSION=3.3.6 ruby benchmarks/page_render_benchmark.rb
@@ -43,59 +53,6 @@ ENV["RAILS_ENV"] = "test"
 ENV["BUNDLE_GEMFILE"] ||= File.expand_path("../Gemfile", __dir__)
 require "bundler/setup"
 require_relative "../spec/dummy/config/environment"
-
-# ---------------------------------------------------------------------------
-# Renderer setup
-# ---------------------------------------------------------------------------
-
-# Make pb_rails available to the view context used by the renderer
-ApplicationController.helper Playbook::PbKitHelper
-
-renderer = ApplicationController.renderer.new(
-  http_host: "localhost",
-  https: false
-)
-
-# ---------------------------------------------------------------------------
-# pb_rails call counting via Module#prepend
-# ---------------------------------------------------------------------------
-#
-# We define a module that wraps pb_rails to increment a thread-local counter.
-# This module is prepended for exactly one render to measure the runtime call
-# count, then removed (by redefining pb_rails to call super directly) before
-# the timed benchmark loop — so instrumentation overhead never touches the
-# latency measurements.
-
-module PbRailsCounter
-  def pb_rails(...)
-    Thread.current[:pb_rails_count] += 1
-    super
-  end
-end
-
-def count_runtime_pb_rails_calls(renderer, template)
-  # Prepend the counter module onto the helper proxy that ApplicationController
-  # uses for its view context. This means every pb_rails call during render
-  # — including nested calls from kit partials — goes through our wrapper.
-  helper_proxy = ApplicationController._helpers
-  helper_proxy.prepend(PbRailsCounter)
-
-  # Reset counter, render once, capture count
-  Thread.current[:pb_rails_count] = 0
-  renderer.render(inline: template, layout: false)
-  count = Thread.current[:pb_rails_count]
-
-  # Remove instrumentation: redefine pb_rails on the helper proxy to just
-  # call super (the original PbKitHelper#pb_rails), effectively bypassing
-  # the PbRailsCounter wrapper for all subsequent renders.
-  helper_proxy.define_method(:pb_rails) { |*args, **kwargs, &block| super(*args, **kwargs, &block) }
-
-  count
-end
-
-def count_source_occurrences(template)
-  template.scan(/pb_rails/).length
-end
 
 # ---------------------------------------------------------------------------
 # Page templates (inline ERB)
@@ -205,11 +162,50 @@ COMPLEX_PAGE = <<~'ERB'
 ERB
 
 # ---------------------------------------------------------------------------
+# Runtime pb_rails call counting — via TracePoint (zero mutation)
+# ---------------------------------------------------------------------------
+#
+# To count how many times pb_rails is actually invoked during a render, we
+# use Ruby's TracePoint API to observe :call events on the :pb_rails method.
+# This is completely non-invasive: no modules are prepended, no methods are
+# redefined, no controller state is mutated. TracePoint is enabled for
+# exactly one render, then disabled. The timed benchmark runs afterward
+# with no tracing artifacts in the call path.
+
+def count_runtime_pb_rails_calls(template)
+  count = 0
+  tp = TracePoint.new(:call) do |t|
+    count += 1 if t.method_id == :pb_rails
+  end
+
+  tp.enable
+  RENDERER.render(inline: template, layout: false)
+  tp.disable
+
+  count
+end
+
+def count_source_occurrences(template)
+  template.scan(/pb_rails/).length
+end
+
+# ---------------------------------------------------------------------------
+# Timed benchmark renderer — clean, no instrumentation
+# ---------------------------------------------------------------------------
+
+ApplicationController.helper Playbook::PbKitHelper
+
+RENDERER = ApplicationController.renderer.new(
+  http_host: "localhost",
+  https: false
+)
+
+# ---------------------------------------------------------------------------
 # Benchmark helpers
 # ---------------------------------------------------------------------------
 
-N = 100 # iterations for percentile measurement
-WARMUP = 10
+N = 200 # iterations for percentile measurement
+WARMUP = 20
 
 def percentiles(samples, *pcts)
   sorted = samples.sort
@@ -229,30 +225,27 @@ def format_time(us)
   end
 end
 
-def measure_render(label, renderer, template)
-  # Warmup
+def measure_render(label, template)
+  # Warmup — let the VM optimize, template caches fill, etc.
   WARMUP.times do
-    renderer.render(inline: template, layout: false)
+    RENDERER.render(inline: template, layout: false)
   end
 
+  # Timed iterations — no forced GC, to approximate steady-state conditions.
   samples = []
   N.times do
-    GC.start
     t0 = Process.clock_gettime(Process::CLOCK_MONOTONIC)
-    renderer.render(inline: template, layout: false)
+    RENDERER.render(inline: template, layout: false)
     t1 = Process.clock_gettime(Process::CLOCK_MONOTONIC)
     samples << (t1 - t0) * 1_000_000 # microseconds
   end
 
   p50, p90, p99 = percentiles(samples, 50, 90, 99)
-  min_val = samples.min
-  max_val = samples.max
 
-  $stderr.puts "  %-30s P50=%-10s P90=%-10s P99=%-10s Min=%-10s Max=%-10s" % [
-    label, format_time(p50), format_time(p90), format_time(p99),
-    format_time(min_val), format_time(max_val)
+  $stderr.puts "  %-30s P50=%-10s P90=%-10s P99=%-10s" % [
+    label, format_time(p50), format_time(p90), format_time(p99)
   ]
-  { label: label, p50: p50, p90: p90, p99: p99, min: min_val, max: max_val }
+  { label: label, p50: p50, p90: p90, p99: p99 }
 end
 
 # ---------------------------------------------------------------------------
@@ -260,11 +253,11 @@ end
 # ---------------------------------------------------------------------------
 
 $stderr.puts "Ruby #{RUBY_VERSION}"
-$stderr.puts "N=#{N} iterations per page, #{WARMUP} warmup"
+$stderr.puts "N=#{N} timed iterations per page, #{WARMUP} warmup"
 $stderr.puts ""
 
 $stderr.puts "=" * 78
-$stderr.puts "PAGE RENDER BENCHMARK"
+$stderr.puts "SYNTHETIC PAGE RENDER BENCHMARK"
 $stderr.puts "=" * 78
 $stderr.puts ""
 
@@ -275,43 +268,37 @@ pages = {
 }
 
 # ---------------------------------------------------------------------------
-# Phase 1: Instrumented render to count runtime pb_rails calls
+# Phase 1: Count runtime pb_rails calls (separate controller, no impact on
+# the ApplicationController used for timing)
 # ---------------------------------------------------------------------------
 
-$stderr.puts "--- Phase 1: Counting runtime pb_rails calls (one instrumented render) ---"
+$stderr.puts "--- Phase 1: Counting runtime pb_rails calls ---"
+$stderr.puts "    (uses TracePoint to observe :call events — zero mutation of any module)"
 $stderr.puts ""
 
 pages.each do |name, config|
   source_count = count_source_occurrences(config[:template])
-  runtime_count = count_runtime_pb_rails_calls(renderer, config[:template])
+  runtime_count = count_runtime_pb_rails_calls(config[:template])
   config[:source_count] = source_count
   config[:runtime_count] = runtime_count
 
-  $stderr.puts "  %-30s source occurrences: %-4d  runtime pb_rails calls: %-4d" % [
+  $stderr.puts "  %-20s source: %-4d  runtime pb_rails calls: %-4d" % [
     name, source_count, runtime_count
   ]
 end
 
 $stderr.puts ""
-$stderr.puts "  (Runtime count includes nested pb_rails calls from kit partials."
-$stderr.puts "   Instrumentation is removed before the timed benchmark below.)"
-$stderr.puts ""
-
-# Post-instrumentation warmup: the define_method override that removes the
-# counter module invalidates Ruby's method cache. Run a few renders to let
-# the VM re-optimize before we start timing.
-$stderr.puts "  Warming up after instrumentation removal..."
-pages.each do |_name, config|
-  WARMUP.times { renderer.render(inline: config[:template], layout: false) }
-end
-$stderr.puts "  Done."
+$stderr.puts "  Runtime count = every pb_rails invocation during one render, including"
+$stderr.puts "  nested calls from kit partials. Does not count kit rendering that"
+$stderr.puts "  bypasses pb_rails (e.g., direct ViewComponent render calls)."
 $stderr.puts ""
 
 # ---------------------------------------------------------------------------
-# Phase 2: Timed benchmark (no instrumentation overhead)
+# Phase 2: Timed benchmark (ApplicationController renderer, zero
+# instrumentation in the call path)
 # ---------------------------------------------------------------------------
 
-$stderr.puts "--- Phase 2: Timed benchmark (#{N} iterations, #{WARMUP} warmup) ---"
+$stderr.puts "--- Phase 2: Timed renders (#{N} iterations, #{WARMUP} warmup, no forced GC) ---"
 $stderr.puts ""
 
 results = {}
@@ -320,27 +307,36 @@ pages.each do |name, config|
   $stderr.puts "--- #{name} (#{config[:runtime_count]} runtime pb_rails calls) ---"
   $stderr.puts "    #{config[:desc]}"
   $stderr.puts ""
-  results[name] = measure_render(name, renderer, config[:template])
+  results[name] = measure_render(name, config[:template])
   results[name][:source_count] = config[:source_count]
   results[name][:runtime_count] = config[:runtime_count]
   $stderr.puts ""
 end
 
+# ---------------------------------------------------------------------------
+# Summary
+# ---------------------------------------------------------------------------
+
 $stderr.puts "=" * 78
 $stderr.puts "SUMMARY"
 $stderr.puts "=" * 78
 $stderr.puts ""
-$stderr.puts "  %-20s %-10s %-10s %-12s %-12s %-12s" % [
-  "Page", "Source", "Runtime", "P50", "P90", "P99"
+$stderr.puts "  %-20s %-8s %-10s %-12s %-12s" % [
+  "Page", "Source", "Runtime", "P50", "P90"
 ]
-$stderr.puts "  %-20s %-10s %-10s %-12s %-12s %-12s" % [
-  "", "calls", "calls", "", "", ""
+$stderr.puts "  %-20s %-8s %-10s %-12s %-12s" % [
+  "", "occur.", "calls", "", ""
 ]
-$stderr.puts "  " + "-" * 76
+$stderr.puts "  " + "-" * 62
 results.each do |name, r|
-  $stderr.puts "  %-20s %-10d %-10d %-12s %-12s %-12s" % [
+  $stderr.puts "  %-20s %-8d %-10d %-12s %-12s" % [
     name, r[:source_count], r[:runtime_count],
-    format_time(r[:p50]), format_time(r[:p90]), format_time(r[:p99])
+    format_time(r[:p50]), format_time(r[:p90])
   ]
 end
+$stderr.puts ""
+$stderr.puts "  Note: This is a synthetic benchmark using inline ERB templates."
+$stderr.puts "  Template compilation overhead differs from file-backed production"
+$stderr.puts "  views, but kit infrastructure cost (Props, Classnames, utility"
+$stderr.puts "  modules, combined_html_options) is exercised identically."
 $stderr.puts ""

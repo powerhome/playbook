@@ -257,62 +257,53 @@ Icon render_svg: 14.0 → 13.0 allocs
 
 ---
 
-## Real-World Page Render Benchmark
+## Synthetic Page Render Benchmark
 
 Date: 2026-03-24
-Ruby: 3.3.6, N=100 iterations, 10 warmup
+Ruby: 3.3.6, N=200 timed iterations, 20 warmup, no forced GC
 
-Three simulated page templates rendered via `ApplicationController.renderer`
-with `pb_rails()` calls — the same code path a production Rails view uses.
+Three inline ERB templates rendered via `ApplicationController.renderer`
+with `pb_rails()` calls. This exercises the same Kit.new → classname →
+ViewComponent render path as a production view, but uses inline templates
+rather than file-backed views (template compilation overhead differs;
+kit infrastructure cost is identical).
 
 ### Kit call counts
 
 The benchmark reports two counts per page:
 
-- **Source occurrences** — literal `pb_rails` calls visible in the ERB template
-  source. This undercounts real work because loops expand at render time.
+- **Source occurrences** — literal `pb_rails` calls visible in the ERB
+  source. Undercounts real work because loops expand at render time.
 - **Runtime pb_rails calls** — the actual number of times `pb_rails` is
-  invoked during one full render, measured by prepending a counting wrapper
-  around `PbKitHelper#pb_rails` for a single instrumented render. This
-  includes nested `pb_rails` calls from kit partials (e.g., Avatar internally
-  renders other kits via `pb_rails`). Any kit rendering that bypasses
-  `pb_rails` (e.g., direct ViewComponent render) would not be counted.
+  invoked during one full render. Measured via Ruby's TracePoint API:
+  a `:call` event observer counts invocations of any method named
+  `:pb_rails` during a single render, then is disabled. This includes
+  nested `pb_rails` calls from kit partials (e.g., Avatar internally
+  renders child components). Kit rendering that bypasses `pb_rails`
+  (e.g., direct ViewComponent render) would not be counted.
 
 | Page | Source occurrences | Runtime pb_rails calls | Description |
 |------|-------------------|----------------------|-------------|
 | Simple | 6 | 14 | title + 3 cards with body/badge |
-| Medium | 17 | 88 | profile layout with flex, cards, forms, buttons |
-| Complex | 25 | 504 | 12-row team table with avatar, badge, buttons per row |
+| Medium | 17 | 46 | profile layout with flex, cards, forms, buttons |
+| Complex | 25 | 195 | 12-row team table with avatar, badge, buttons per row |
 
-The runtime counts are identical on both branches — the optimizations change
-how fast kits render, not what gets rendered.
+The runtime counts are identical on both branches — the optimizations
+change how fast kits render, not what gets rendered.
 
-### P90 comparison: origin/master vs optimized branch
+### P50/P90 comparison: origin/master vs optimized branch
 
-| Page | Runtime calls | Master P90 | Optimized P90 | Improvement |
-|------|--------------|-----------|---------------|-------------|
-| Simple | 14 | 1.37ms | 1.14ms | **-17%** |
-| Medium | 88 | 3.56ms | 2.58ms | **-28%** |
-| Complex | 504 | 18.08ms | 9.70ms | **-46%** |
-
-### Full percentile comparison
-
-| Page | Branch | P50 | P90 | P99 |
-|------|--------|-----|-----|-----|
-| Simple (14 calls) | master | 1.14ms | 1.37ms | 1.59ms |
-| Simple (14 calls) | optimized | 968us | 1.14ms | 1.48ms |
-| Medium (88 calls) | master | 3.36ms | 3.56ms | 3.69ms |
-| Medium (88 calls) | optimized | 2.21ms | 2.58ms | 2.88ms |
-| Complex (504 calls) | master | 16.19ms | 18.08ms | 23.18ms |
-| Complex (504 calls) | optimized | 8.96ms | 9.70ms | 12.03ms |
+| Page | Runtime calls | Master P50 | Optimized P50 | Master P90 | Optimized P90 | P90 Delta |
+|------|--------------|-----------|---------------|-----------|---------------|-----------|
+| Simple | 14 | 1.03ms | 539us | 1.29ms | 612us | **-53%** |
+| Medium | 46 | 3.53ms | 1.78ms | 3.79ms | 2.07ms | **-45%** |
+| Complex | 195 | 16.59ms | 9.12ms | 18.02ms | 9.72ms | **-46%** |
 
 ### Key takeaway
 
-The micro-level allocation and timing improvements compound significantly at
-the page level. The complex page executes 504 `pb_rails` calls per render —
-far more than the 25 source occurrences suggest, because loops expand and
+The micro-level allocation and timing improvements compound at the page
+level. The complex page invokes `pb_rails` 195 times per render — far
+more than the 25 source occurrences suggest, because loops expand and
 kits render nested children. At that scale, eliminating ~170 throwaway
-allocations per kit adds up: 504 kits x 170 fewer allocs = ~85,000 fewer
-allocations per page render. The result is a 46% P90 reduction on the
-complex page (18.08ms → 9.70ms) — real savings that translate directly to
-faster server response times.
+allocations per kit adds up to ~33,000 fewer allocations per page render.
+The result is a 46% P90 reduction on the complex page (18.02ms → 9.72ms).
