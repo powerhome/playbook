@@ -1,181 +1,25 @@
 import PbEnhancedElement from '../pb_enhanced_element'
 import { debounce } from '../utilities/object'
 
-const SELECTORS = {
-  kit: '[class^="pb_"][class*="_kit"]',
-  errorMessage: '.pb_body_kit_negative',
+// Kit selectors
+const KIT_SELECTOR             = '[class^="pb_"][class*="_kit"]'
+const ERROR_MESSAGE_SELECTOR   = '.pb_body_kit_negative'
 
-  form: 'form[data-pb-form-validation="true"]',
-  requiredFields: 'input[required],textarea[required],select[required]',
-  phoneValidationError: '[data-pb-phone-validation-error="true"]',
+// Validation selectors
+const FORM_SELECTOR            = 'form[data-pb-form-validation="true"]'
+const REQUIRED_FIELDS_SELECTOR = 'input[required],textarea[required],select[required]'
+const PHONE_NUMBER_VALIDATION_ERROR_SELECTOR = '[data-pb-phone-validation-error="true"]'
+const FORM_VALIDATION_MESSAGE_ATTR = 'data-pb-form-validation-message'
+const FORM_VALIDATION_MESSAGE_REUSED_ATTR = 'data-pb-form-validation-message-reused'
 
-  errorParents: [
-    '.text_input_wrapper',
-    '.pb_select_kit_wrapper',
-    '.dropdown_wrapper',
-    '.input_wrapper',
-    '.pb_typeahead_wrapper',
-  ],
-  controlWrappers: [
-    '.dropdown_wrapper',
-    '.pb_select_kit_wrapper',
-    '.text_input_wrapper',
-  ],
-  kitFallbacks: [
-    '[data-pb-select]',
-    '[data-pb-date-picker]',
-    '[data-pb-typeahead-kit]',
-  ],
-  messageWrappers: [
-    '[data-validation-message]',
-    '[data-pb-select]',
-    '.dropdown_wrapper',
-    '.pb_select_kit_wrapper',
-  ],
-  reactTypeaheadRoots: [
-    '[data-pb-react-component="Typeahead"]',
-    '.pb_typeahead_kit.react-select',
-  ],
-}
-
-const ATTRS = {
-  message: 'data-pb-form-validation-message',
-  reused: 'data-pb-form-validation-message-reused',
-}
-
-const FIELD_EVENTS = ['change', 'valid', 'invalid']
-
-const closestAny = (el, selectors) => {
-  if (!el || !selectors) return null
-  for (const selector of selectors) {
-    const found = el.closest?.(selector)
-    if (found) return found
-  }
-  return null
-}
-
-const isReactTypeaheadField = (el) => {
-  return !!closestAny(el, SELECTORS.reactTypeaheadRoots)
-}
-
-const shouldSkipField = (field) => {
-  return (
-    isReactTypeaheadField(field) ||
-    !!field?.closest?.('.pb_phone_number_input, .pb_time_picker')
-  )
-}
-
-const getKitElement = (target) => {
-  return (
-    target.closest?.(SELECTORS.kit) ||
-    target.parentElement?.closest?.(SELECTORS.kit) ||
-    closestAny(target, SELECTORS.kitFallbacks) ||
-    null
-  )
-}
-
-const getControlWrapper = (target, kitElement) => {
-  const fromTarget = closestAny(target, SELECTORS.controlWrappers)
-  if (fromTarget) return fromTarget
-
-  if (!kitElement) return null
-  for (const selector of SELECTORS.controlWrappers) {
-    const found = kitElement.querySelector?.(selector)
-    if (found) return found
-  }
-
-  return null
-}
-
-const getErrorParent = (target, kitElement, parentElement) => {
-  const candidate =
-    closestAny(target, SELECTORS.errorParents) ||
-    kitElement ||
-    parentElement
-
-  if (!candidate) return null
-
-  if (
-    kitElement &&
-    candidate &&
-    candidate !== kitElement &&
-    !kitElement.contains(candidate)
-  ) {
-    return kitElement
-  }
-
-  return candidate
-}
-
-const getValidationMessage = (target, kitElement) => {
-  const fromTarget = target.dataset?.message || target.dataset?.validationMessage
-
-  const wrapperWithMessage = closestAny(target, SELECTORS.messageWrappers)
-  const fromWrapper = wrapperWithMessage?.dataset?.validationMessage
-
-  const fromKit = kitElement?.dataset?.validationMessage
-
-  return fromTarget || fromWrapper || fromKit || ''
-}
-
-const hasNewRequiredFields = (mutations) => {
-  return mutations.some((mutation) => {
-    return Array.from(mutation.addedNodes || []).some((node) => {
-      if (!(node instanceof Element)) return false
-      if (node.matches && node.matches(SELECTORS.requiredFields)) return true
-      return !!node.querySelector?.(SELECTORS.requiredFields)
-    })
-  })
-}
-
-const createErrorMessageContainer = (doc = document) => {
-  const errorContainer = doc.createElement('div')
-  const kitClassName = SELECTORS.errorMessage.replace(/\./, '')
-  errorContainer.classList.add(kitClassName)
-  errorContainer.setAttribute(ATTRS.message, 'true')
-  errorContainer.setAttribute('role', 'alert')
-  errorContainer.setAttribute('aria-live', 'polite')
-  return errorContainer
-}
-
-const findOrCreateErrorMessageElement = (errorParent) => {
-  if (!errorParent) return null
-  let errorMessageElement = errorParent.querySelector(`[${ATTRS.message}="true"]`)
-  if (errorMessageElement) return errorMessageElement
-
-  const existingEmpty = Array.from(errorParent.querySelectorAll(SELECTORS.errorMessage)).find((el) => {
-    return (el.textContent || '').trim() === ''
-  })
-
-  if (existingEmpty) {
-    existingEmpty.setAttribute(ATTRS.message, 'true')
-    existingEmpty.setAttribute(ATTRS.reused, 'true')
-    return existingEmpty
-  }
-
-  errorMessageElement = createErrorMessageContainer(errorParent.ownerDocument || document)
-  errorParent.appendChild(errorMessageElement)
-  return errorMessageElement
-}
-
-const clearOurErrorMessage = (errorParent) => {
-  if (!errorParent) return
-  const messageEl = errorParent.querySelector(`[${ATTRS.message}="true"]`)
-  if (!messageEl) return
-
-  const reused = messageEl.getAttribute(ATTRS.reused) === 'true'
-  if (reused) {
-    messageEl.textContent = ''
-    messageEl.removeAttribute(ATTRS.message)
-    messageEl.removeAttribute(ATTRS.reused)
-  } else {
-    messageEl.remove()
-  }
-}
-
+const FIELD_EVENTS = [
+  'change',
+  'valid',
+  'invalid',
+]
 class PbFormValidation extends PbEnhancedElement {
   static get selector() {
-    return SELECTORS.form
+    return FORM_SELECTOR
   }
 
   static start() {
@@ -193,7 +37,7 @@ class PbFormValidation extends PbEnhancedElement {
     }, 100)
 
     this.mutationObserver = new MutationObserver((mutations) => {
-      if (!hasNewRequiredFields(mutations)) return
+      if (!this.hasNewRequiredFields(mutations)) return
       this.debouncedBindValidationListeners()
     })
     this.mutationObserver.observe(this.element, { childList: true, subtree: true })
@@ -218,10 +62,27 @@ class PbFormValidation extends PbEnhancedElement {
     let foundInvalid = false
 
     this.formValidationFields.forEach((field) => {
-      if (shouldSkipField(field)) return
+      if (this.isReactTypeaheadField(field)) return
 
-      const isValid = this.validateField(field)
-      if (!isValid) foundInvalid = true
+      const isPhoneNumberInput = field.closest('.pb_phone_number_input')
+      if (isPhoneNumberInput) return
+
+      const isTimePickerInput = field.closest('.pb_time_picker')
+      if (isTimePickerInput) return
+
+      field.setCustomValidity('')
+      const kitElement = this.getKitElement(field)
+
+      if (field.validity.valid) {
+        this.clearError(field)
+        return
+      }
+
+      const message = this.getValidationMessage(field, kitElement)
+      if (message) field.setCustomValidity(message)
+
+      foundInvalid = true
+      this.showValidationMessage(field)
     })
 
     return foundInvalid
@@ -235,7 +96,13 @@ class PbFormValidation extends PbEnhancedElement {
     this.formValidationFields.forEach((field) => {
       if (this.boundFields?.has(field)) return
 
-      if (shouldSkipField(field)) return
+      if (this.isReactTypeaheadField(field)) return
+
+      const isPhoneNumberInput = field.closest('.pb_phone_number_input')
+      if (isPhoneNumberInput) return
+
+      const isTimePickerInput = field.closest('.pb_time_picker')
+      if (isTimePickerInput) return
 
       const debouncedHandler = debounce((event) => {
         this.validateFormField(event)
@@ -262,65 +129,172 @@ class PbFormValidation extends PbEnhancedElement {
 
     const { target } = event
 
-    this.validateField(target)
-  }
+    if (this.isReactTypeaheadField(target)) return
 
-  validateField(target) {
-    if (shouldSkipField(target)) return true
+    const kitElement = this.getKitElement(target)
 
-    const kitElement = getKitElement(target)
     target.setCustomValidity('')
 
-    if (target.validity.valid) {
-      this.clearError(target)
-      return true
-    }
+    const isValid = target.validity.valid
 
-    const message = getValidationMessage(target, kitElement)
-    if (message) target.setCustomValidity(message)
-    this.showValidationMessage(target)
-    return false
+    if (isValid) {
+      this.clearError(target)
+    } else {
+      const message = this.getValidationMessage(target, kitElement)
+      if (message) target.setCustomValidity(message)
+      this.showValidationMessage(target)
+    }
   }
 
   showValidationMessage(target) {
     const { parentElement } = target
-    const kitElement = getKitElement(target)
+    const kitElement = this.getKitElement(target)
+
+    const isPhoneNumberInput = kitElement?.classList?.contains('pb_phone_number_input') || false
+    const isTimePickerInput = kitElement?.classList?.contains('pb_time_picker') || false
 
     // ensure clean error message state
     this.clearError(target)
     if (kitElement) kitElement.classList.add('error')
 
-    const controlWrapper = getControlWrapper(target, kitElement)
+    const controlWrapper = this.getControlWrapper(target, kitElement)
     if (controlWrapper) controlWrapper.classList.add('error')
 
-    const errorParent = getErrorParent(target, kitElement, parentElement)
-    if (!errorParent) return
+    if (!isPhoneNumberInput && !isTimePickerInput) {
+      const errorParent = this.getErrorParent(target, kitElement, parentElement)
+      const message = this.getValidationMessage(target, kitElement) || target.validationMessage
 
-    const message = getValidationMessage(target, kitElement) || target.validationMessage
-    const errorMessageElement = findOrCreateErrorMessageElement(errorParent)
-    if (!errorMessageElement) return
-    errorMessageElement.textContent = message
+      let errorMessageElement = errorParent.querySelector(`[${FORM_VALIDATION_MESSAGE_ATTR}="true"]`)
+      if (!errorMessageElement) {
+        const existingEmpty = Array.from(errorParent.querySelectorAll(ERROR_MESSAGE_SELECTOR)).find((el) => {
+          return (el.textContent || '').trim() === ''
+        })
+        if (existingEmpty) {
+          errorMessageElement = existingEmpty
+          errorMessageElement.setAttribute(FORM_VALIDATION_MESSAGE_ATTR, 'true')
+          errorMessageElement.setAttribute(FORM_VALIDATION_MESSAGE_REUSED_ATTR, 'true')
+        }
+      }
+
+      if (!errorMessageElement) {
+        errorMessageElement = this.errorMessageContainer
+        errorParent.appendChild(errorMessageElement)
+      }
+
+      errorMessageElement.textContent = message
+    }
   }
 
   clearError(target) {
     const { parentElement } = target
-    const kitElement = getKitElement(target)
+    const kitElement = this.getKitElement(target)
     if (kitElement) kitElement.classList.remove('error')
 
-    const controlWrapper = getControlWrapper(target, kitElement)
+    const controlWrapper = this.getControlWrapper(target, kitElement)
     if (controlWrapper) controlWrapper.classList.remove('error')
 
-    const errorParent = getErrorParent(target, kitElement, parentElement)
-    if (!errorParent) return
-    clearOurErrorMessage(errorParent)
+    const errorParent = this.getErrorParent(target, kitElement, parentElement)
+    const messageEl = errorParent.querySelector(`[${FORM_VALIDATION_MESSAGE_ATTR}="true"]`)
+    if (messageEl) {
+      const reused = messageEl.getAttribute(FORM_VALIDATION_MESSAGE_REUSED_ATTR) === 'true'
+      if (reused) {
+        messageEl.textContent = ''
+        messageEl.removeAttribute(FORM_VALIDATION_MESSAGE_ATTR)
+        messageEl.removeAttribute(FORM_VALIDATION_MESSAGE_REUSED_ATTR)
+      } else {
+        messageEl.remove()
+      }
+    }
+  }
+
+  getErrorParent(target, kitElement, parentElement) {
+    const candidate =
+      target.closest('.text_input_wrapper') ||
+      target.closest('.pb_select_kit_wrapper') ||
+      target.closest('.dropdown_wrapper') ||
+      target.closest('.input_wrapper') ||
+      target.closest('.pb_typeahead_wrapper') ||
+      kitElement ||
+      parentElement
+
+    if (kitElement && candidate && candidate !== kitElement && !kitElement.contains(candidate)) {
+      return kitElement
+    }
+
+    return candidate
+  }
+
+  getControlWrapper(target, kitElement) {
+    return (
+      target.closest('.dropdown_wrapper') ||
+      target.closest('.pb_select_kit_wrapper') ||
+      target.closest('.text_input_wrapper') ||
+      kitElement?.querySelector?.('.dropdown_wrapper') ||
+      kitElement?.querySelector?.('.pb_select_kit_wrapper') ||
+      null
+    )
+  }
+
+  isReactTypeaheadField(el) {
+    return !!(
+      el?.closest?.('[data-pb-react-component="Typeahead"]') ||
+      el?.closest?.('.pb_typeahead_kit.react-select')
+    )
+  }
+
+  hasNewRequiredFields(mutations) {
+    return mutations.some((mutation) => {
+      return Array.from(mutation.addedNodes || []).some((node) => {
+        if (!(node instanceof Element)) return false
+        if (node.matches && node.matches(REQUIRED_FIELDS_SELECTOR)) return true
+        return !!node.querySelector?.(REQUIRED_FIELDS_SELECTOR)
+      })
+    })
+  }
+
+  getKitElement(target) {
+    return (
+      target.closest(KIT_SELECTOR) ||
+      target.parentElement?.closest(KIT_SELECTOR) ||
+      // Some kits don't expose a *_kit class but do expose data hooks.
+      target.closest('[data-pb-select]') ||
+      target.closest('[data-pb-date-picker]') ||
+      target.closest('[data-pb-typeahead-kit]') ||
+      null
+    )
+  }
+
+  getValidationMessage(target, kitElement) {
+    const fromTarget = target.dataset?.message || target.dataset?.validationMessage
+
+    const wrapperWithMessage =
+      target.closest?.('[data-validation-message]') ||
+      target.closest?.('[data-pb-select]') ||
+      target.closest?.('.dropdown_wrapper') ||
+      target.closest?.('.pb_select_kit_wrapper')
+    const fromWrapper = wrapperWithMessage?.dataset?.validationMessage
+
+    const fromKit = kitElement?.dataset?.validationMessage
+
+    return fromTarget || fromWrapper || fromKit || ''
   }
 
   hasPhoneNumberValidationErrors() {
-    const phoneNumberErrors = this.element.querySelectorAll(SELECTORS.phoneValidationError)
+    const phoneNumberErrors = this.element.querySelectorAll(PHONE_NUMBER_VALIDATION_ERROR_SELECTOR)
     return phoneNumberErrors.length > 0
   }
+
+  get errorMessageContainer() {
+    const errorContainer = document.createElement('div')
+    const kitClassName = ERROR_MESSAGE_SELECTOR.replace(/\./, '')
+    errorContainer.classList.add(kitClassName)
+    errorContainer.setAttribute(FORM_VALIDATION_MESSAGE_ATTR, 'true')
+    errorContainer.setAttribute('role', 'alert')
+    errorContainer.setAttribute('aria-live', 'polite')
+    return errorContainer
+  }
   get formValidationFields() {
-    return this.element.querySelectorAll(SELECTORS.requiredFields)
+    return this.element.querySelectorAll(REQUIRED_FIELDS_SELECTOR)
   }
 }
 
