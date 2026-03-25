@@ -108,13 +108,15 @@ class PbFormValidation extends PbEnhancedElement {
         this.validateFormField(event)
       }, 250)
 
-      const invalidHandler = (event) => {
+      const immediateHandler = (event) => {
         this.validateFormField(event)
       }
 
       FIELD_EVENTS.forEach((eventName) => {
         if (eventName === 'invalid') {
-          field.addEventListener(eventName, invalidHandler, true)
+          field.addEventListener(eventName, immediateHandler, true)
+        } else if (eventName === 'change' && field.tagName === 'SELECT') {
+          field.addEventListener(eventName, immediateHandler, false)
         } else {
           field.addEventListener(eventName, debouncedHandler, false)
         }
@@ -182,6 +184,8 @@ class PbFormValidation extends PbEnhancedElement {
       }
 
       errorMessageElement.textContent = message
+      // If we previously hid a reused error element, unhide it now.
+      errorMessageElement.style.display = ""
     }
   }
 
@@ -199,6 +203,9 @@ class PbFormValidation extends PbEnhancedElement {
       const reused = messageEl.getAttribute(FORM_VALIDATION_MESSAGE_REUSED_ATTR) === 'true'
       if (reused) {
         messageEl.textContent = ''
+        // Hide reused (pre-rendered) message elements so spacing/message
+        // disappears immediately (ex: Select kit).
+        messageEl.style.display = "none"
         messageEl.removeAttribute(FORM_VALIDATION_MESSAGE_ATTR)
         messageEl.removeAttribute(FORM_VALIDATION_MESSAGE_REUSED_ATTR)
       } else {
