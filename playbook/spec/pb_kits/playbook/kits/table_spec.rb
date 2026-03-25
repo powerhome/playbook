@@ -22,6 +22,7 @@ RSpec.describe Playbook::PbTable::Table do
   it { is_expected.to define_enum_prop(:variant).with_default("default").with_values("default", "with_filter") }
   it { is_expected.to define_hash_prop(:filter_props).with_default({}) }
   it { is_expected.to define_prop(:filter_content) }
+  it { is_expected.to define_prop(:filter) }
   it { is_expected.to define_string_prop(:title) }
   it { is_expected.to define_hash_prop(:card_props).with_default({}) }
   it { is_expected.to define_hash_prop(:title_props).with_default({}) }
@@ -74,6 +75,12 @@ RSpec.describe Playbook::PbTable::Table do
     it "uses md collapse by default for with_filter variant" do
       table = subject.new(variant: "with_filter")
       expect(table.classname).to include("table-collapse-md")
+    end
+
+    it "accepts filter prop for pre-rendered external filter" do
+      table = subject.new(variant: "with_filter", filter: "<div class=\"external-filter\">Filter</div>".html_safe)
+      expect(table.filter).to be_present
+      expect(table.filter).to include("external-filter")
     end
   end
 end
