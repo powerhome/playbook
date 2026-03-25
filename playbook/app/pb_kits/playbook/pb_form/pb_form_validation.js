@@ -32,6 +32,21 @@ class PbFormValidation extends PbEnhancedElement {
     this.boundFields = new WeakSet()
     this.bindValidationListeners()
 
+    this._pbTypeaheadInvalidCaptureHandler = (event) => {
+      const target = event.target
+      if (!(target instanceof HTMLInputElement || target instanceof HTMLTextAreaElement || target instanceof HTMLSelectElement)) return
+      if (!this.isReactTypeaheadField(target)) return
+      if (target.getClientRects().length) return
+
+      const container = target.closest('[data-pb-react-component="Typeahead"]') || target.closest('.pb_typeahead_kit.react-select')
+      const anchor = container?.querySelector?.('.typeahead-kit-select__control') || container
+      if (anchor && window.getComputedStyle(anchor).position === 'static') anchor.style.position = 'relative'
+
+      target.style.cssText += ';display:block;position:absolute;top:0;left:0;width:1px;height:1px;opacity:0;pointer-events:none;margin:0;padding:0;border:0;'
+    }
+
+    this.element.addEventListener('invalid', this._pbTypeaheadInvalidCaptureHandler, true)
+
     this.debouncedBindValidationListeners = debounce(() => {
       this.bindValidationListeners()
     }, 100)
@@ -90,6 +105,10 @@ class PbFormValidation extends PbEnhancedElement {
 
   disconnect() {
     if (this.mutationObserver) this.mutationObserver.disconnect()
+    if (this._pbTypeaheadInvalidCaptureHandler) {
+      this.element.removeEventListener('invalid', this._pbTypeaheadInvalidCaptureHandler, true)
+      this._pbTypeaheadInvalidCaptureHandler = null
+    }
   }
 
   bindValidationListeners() {
@@ -127,8 +146,6 @@ class PbFormValidation extends PbEnhancedElement {
   }
 
   validateFormField(event) {
-    if (event.type === 'invalid') event.preventDefault()
-
     const { target } = event
 
     if (this.isReactTypeaheadField(target)) return
@@ -203,8 +220,6 @@ class PbFormValidation extends PbEnhancedElement {
       const reused = messageEl.getAttribute(FORM_VALIDATION_MESSAGE_REUSED_ATTR) === 'true'
       if (reused) {
         messageEl.textContent = ''
-        // Hide reused (pre-rendered) message elements so spacing/message
-        // disappears immediately (ex: Select kit).
         messageEl.style.display = "none"
         messageEl.removeAttribute(FORM_VALIDATION_MESSAGE_ATTR)
         messageEl.removeAttribute(FORM_VALIDATION_MESSAGE_REUSED_ATTR)
