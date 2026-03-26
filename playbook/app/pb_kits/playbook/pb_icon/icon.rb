@@ -51,9 +51,19 @@ module Playbook
       def warn_font_awesome_fallback
         return "".html_safe if Rails.env.test? || Rails.env.production?
         return "".html_safe if icon.nil? || icon.to_s.empty?
+        # Only warn if Playbook icons are configured (prevents noise when not set up)
+        return "".html_safe unless Rails.application.config.respond_to?(:icon_path)
 
-        escaped_icon = icon.to_s.gsub("'", "\\\\'")
-        message = "[Playbook] Icon '#{escaped_icon}' not found in Playbook icons. Falling back to Font Awesome. Font Awesome will be removed from Nitro in the future. Please use Playbook Icons instead. See https://playbook.powerapp.cloud/playbook_icons for available icons."
+        # Use JSON.generate for proper JavaScript string escaping
+        # This handles quotes, newlines, and </script> injection (XSS prevention)
+        icon_js = JSON.generate(icon.to_s)
+
+        message = "[Playbook] Icon '#{icon}' not found in Playbook icons. " \
+                  "Falling back to Font Awesome. " \
+                  "Font Awesome will be removed from Nitro in the future. " \
+                  "Please use Playbook Icons instead. " \
+                  "See https://playbook.powerapp.cloud/playbook_icons for available icons."
+        message_js = JSON.generate(message)
 
         script = "<script type=\"text/javascript\">\n"
         script += "(function() {\n"
@@ -61,9 +71,9 @@ module Playbook
         script += "  var isLocalDev = hostname === 'localhost' || hostname === '127.0.0.1' || hostname.endsWith('.local') || hostname.includes('local.') || !hostname;\n"
         script += "  if (!isLocalDev) return;\n"
         script += "  if (!window.__PB_WARNED_ICONS__) window.__PB_WARNED_ICONS__ = new Set();\n"
-        script += "  if (!window.__PB_WARNED_ICONS__.has('#{escaped_icon}')) {\n"
-        script += "    window.__PB_WARNED_ICONS__.add('#{escaped_icon}');\n"
-        script += "    console.warn('#{message}');\n"
+        script += "  if (!window.__PB_WARNED_ICONS__.has(#{icon_js})) {\n"
+        script += "    window.__PB_WARNED_ICONS__.add(#{icon_js});\n"
+        script += "    console.warn(#{message_js});\n"
         script += "  }\n"
         script += "})();\n"
         script += "</script>"
