@@ -48,6 +48,29 @@ module Playbook
         emoji_regex.match?(icon)
       end
 
+      def warn_font_awesome_fallback
+        return "".html_safe if Rails.env.test? || Rails.env.production?
+        return "".html_safe if icon.nil? || icon.to_s.empty?
+
+        escaped_icon = icon.to_s.gsub("'", "\\\\'")
+        message = "[Playbook] Icon '#{escaped_icon}' not found in Playbook icons. Falling back to Font Awesome. Font Awesome will be removed from Nitro in the future. Please use Playbook Icons instead. See https://playbook.powerapp.cloud/playbook_icons for available icons."
+
+        script = "<script type=\"text/javascript\">\n"
+        script += "(function() {\n"
+        script += "  var hostname = window.location.hostname;\n"
+        script += "  var isLocalDev = hostname === 'localhost' || hostname === '127.0.0.1' || hostname.endsWith('.local') || hostname.includes('local.') || !hostname;\n"
+        script += "  if (!isLocalDev) return;\n"
+        script += "  if (!window.__PB_WARNED_ICONS__) window.__PB_WARNED_ICONS__ = new Set();\n"
+        script += "  if (!window.__PB_WARNED_ICONS__.has('#{escaped_icon}')) {\n"
+        script += "    window.__PB_WARNED_ICONS__.add('#{escaped_icon}');\n"
+        script += "    console.warn('#{message}');\n"
+        script += "  }\n"
+        script += "})();\n"
+        script += "</script>"
+
+        script.html_safe
+      end
+
       def classname
         generate_classname(
           "pb_icon_kit",

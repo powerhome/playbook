@@ -3,6 +3,7 @@ import classnames from 'classnames'
 import { buildAriaProps, buildDataProps, buildHtmlProps } from '../utilities/props'
 import { GlobalProps, globalProps } from '../utilities/globalProps'
 import { isValidEmoji } from '../utilities/validEmojiChecker'
+import { warnFontAwesomeFallback } from '../utilities/iconFallbackWarning'
 
 export type IconSizes = "lg"
 | "xs"
@@ -164,6 +165,9 @@ const Icon = (props: IconProps) => {
       iconElement = <PowerIcon /> as ReactSVGElement
     } else {
       faClasses[`fa-${icon}`] = icon as string
+      if (icon && window.PB_ICONS && Object.keys(window.PB_ICONS).length > 0) {
+        warnFontAwesomeFallback(icon as string)
+      }
     }
   }
 

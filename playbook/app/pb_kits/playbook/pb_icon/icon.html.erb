@@ -5,6 +5,7 @@
     <%= object.icon.html_safe %>
   </span>
 <% else %>
+  <%= object.warn_font_awesome_fallback %>
   <%= pb_content_tag(:i) do %>
   <% end %>
   <%= content_tag(:span, nil,
