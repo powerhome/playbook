@@ -42,7 +42,7 @@ class PbFormValidation extends PbEnhancedElement {
       const anchor = container?.querySelector?.('.typeahead-kit-select__control') || container
       if (anchor && window.getComputedStyle(anchor).position === 'static') anchor.style.position = 'relative'
 
-      target.style.cssText += ';display:block;position:absolute;top:0;left:0;width:1px;height:1px;opacity:0;pointer-events:none;margin:0;padding:0;border:0;'
+      target.style.cssText += 'position:absolute;top:0;left:0;'
     }
 
     this.element.addEventListener('invalid', this._pbTypeaheadInvalidCaptureHandler, true)
