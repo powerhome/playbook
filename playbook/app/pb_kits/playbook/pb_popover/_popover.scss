@@ -48,6 +48,21 @@
   border: 0;
   box-shadow: $shadow_deeper;
 }
+
+// Outer shell when scroll_shell: overflow visible + positioning for portaled menus.
+.pb_popover_body--scrollable {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  overflow: visible;
+  position: relative;
+}
+
+.pb_popover_body_scroll {
+  min-height: 0;
+  flex: 1 1 auto;
+}
+
 .overflow_handling {
   overflow: auto;
 }

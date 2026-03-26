@@ -19,6 +19,8 @@ module Playbook
       prop :close_on_click, type: Playbook::Props::Enum,
                             values: %w[none outside inside any],
                             default: "none"
+      prop :scroll_shell, type: Playbook::Props::Boolean, default: false
+      prop :allow_overflow, type: Playbook::Props::Boolean, default: false
 
       def classname
         generate_classname_without_spacing("pb_popover_kit")
@@ -42,8 +44,25 @@ module Playbook
         out
       end
 
+      def dimensions?
+        max_height.present? || max_width.present? || width.present?
+      end
+
+      def scroll_shell_inner?
+        return false unless dimensions?
+
+        return true if scroll_shell
+        return true if allow_overflow && max_height.present?
+
+        false
+      end
+
       def width_height_class_helper
-        "overflow_handling" if max_height || max_width || width
+        return "pb_popover_body--scrollable" if scroll_shell_inner?
+        return "" if allow_overflow && dimensions?
+        return "overflow_handling" if dimensions?
+
+        ""
       end
 
       def data

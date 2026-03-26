@@ -1,5 +1,5 @@
 /* eslint-disable react/no-multi-comp */
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import ReactDOM from "react-dom";
 import {
   Popper,
@@ -21,6 +21,8 @@ import classnames from "classnames";
 import { globalProps, GlobalProps } from "../utilities/globalProps";
 import { uniqueId } from '../utilities/object';
 
+import { PopoverBodyContext } from "./popover_body_context";
+
 type ModifiedGlobalProps = Omit<GlobalProps, 'minWidth' | 'maxHeight' | 'minHeight'>
 
 type PbPopoverProps = {
@@ -35,6 +37,20 @@ type PbPopoverProps = {
   reference: PopperReference & any;
   show?: boolean;
   shouldClosePopover?: (arg0: boolean) => void;
+  /**
+   * When `maxHeight` / `maxWidth` / `width` are set: use an outer popover body with
+   * `overflow: visible` and an inner scroll region with `overflow: auto`, so long
+   * content scrolls while overlay kits (e.g. Dropdown) can portal to the outer body
+   * and avoid clipping.
+   */
+  scrollShell?: boolean;
+  /**
+   * Relaxes clipping from the popover body. With **only** width/maxWidth: single-layer
+   * body with no `overflow: auto` so overlays can extend past the edge. With
+   * **maxHeight**: uses the scroll shell (outer overflow visible + inner scroll) so
+   * height is respected and Dropdown can still portal to the outer body.
+   */
+  allowOverflow?: boolean;
 } & ModifiedGlobalProps & Omit<PopperProps<any>, 'children'>
 & { children?: React.ReactChild[] | React.ReactChild }
 
@@ -101,7 +117,16 @@ const Popover = (props: PbPopoverProps) => {
     minWidth,
     width,
     targetId,
+    scrollShell = false,
+    allowOverflow = false,
   } = props;
+
+  const outerBodyRef = useRef<HTMLDivElement>(null);
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const scrollShellContext = useMemo(
+    () => ({ bodyRef: outerBodyRef, scrollRef }),
+    []
+  );
 
   const items = globalProps(props).split(' ')
   const filteredItems = items.filter(item => !item.includes('min-width') && !item.includes('width'))
@@ -110,7 +135,16 @@ const Popover = (props: PbPopoverProps) => {
     filteredGlobalProps.includes("dark") || !filteredGlobalProps
       ? "p_sm"
       : filteredGlobalProps
-  const overflowHandling = maxHeight || maxWidth ? "overflow_handling" : "";
+  const hasMaxDimensions = Boolean(maxHeight || maxWidth || width);
+  const hasMaxHeight = Boolean(maxHeight);
+  const useScrollShellLayout = Boolean(
+    hasMaxDimensions &&
+      (scrollShell || (Boolean(allowOverflow) && hasMaxHeight))
+  );
+  const overflowHandling =
+    hasMaxDimensions && !useScrollShellLayout && !allowOverflow
+      ? "overflow_handling"
+      : "";
   const zIndexStyle = zIndex ? { zIndex: zIndex } : {};
   const widthHeightStyles = () => {
     return Object.assign(
@@ -129,6 +163,36 @@ const Popover = (props: PbPopoverProps) => {
     buildCss("pb_popover_kit"),
     filteredGlobalProps,
     className
+  );
+
+  const bodyContent = useScrollShellLayout ? (
+    <PopoverBodyContext.Provider value={scrollShellContext}>
+      <div
+          className={classnames(
+            "pb_popover_body",
+            "pb_popover_body--scrollable",
+            popoverSpacing
+          )}
+          id={targetId}
+          ref={outerBodyRef}
+          style={widthHeightStyles()}
+      >
+        <div
+            className={classnames("pb_popover_body_scroll", "overflow_handling")}
+            ref={scrollRef}
+        >
+          {children}
+        </div>
+      </div>
+    </PopoverBodyContext.Provider>
+  ) : (
+    <div
+        className={classnames("pb_popover_body", popoverSpacing, overflowHandling)}
+        id={targetId}
+        style={widthHeightStyles()}
+    >
+      {children}
+    </div>
   );
 
   return (
@@ -152,17 +216,7 @@ const Popover = (props: PbPopoverProps) => {
             <div
                 className={classnames(`${buildCss("pb_popover_tooltip")} show`)}
             >
-              <div
-                  className={classnames(
-                    "pb_popover_body",
-                    popoverSpacing,
-                    overflowHandling
-                  )}
-                  id={targetId}
-                  style={widthHeightStyles()}
-              >
-                {children}
-              </div>
+              {bodyContent}
             </div>
           </div>
         );
@@ -287,7 +341,7 @@ const PbReactPopover = (props: PbPopoverProps): React.ReactElement => {
                 )}
             </>
           ) : (
-            { popoverComponent }
+            popoverComponent
           ))}
       </>
     </PopperManager>
