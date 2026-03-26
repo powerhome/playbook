@@ -47,16 +47,21 @@ const DropdownContainer = (props: DropdownContainerProps) => {
     handleChange,
     inputRef,
     isDropDownClosed,
+    menuPortaled,
+    portaledVariant,
     setFocusedOptionIndex,
   } = useContext(DropdownContext);
 
   const ariaProps = buildAriaProps(aria);
   const dataProps = buildDataProps(data);
   const htmlProps = buildHtmlProps(htmlOptions);
+  const pv = portaledVariant === "quickpick" ? "default" : portaledVariant || "default";
   const classes = classnames(
     buildCss("pb_dropdown_container"),
     `${isDropDownClosed ? "close" : "open"}`,
     constrainHeight && "constrain_height",
+    menuPortaled && "pb_dropdown_container--portaled",
+    menuPortaled && `pb_dropdown_container--portaled-${pv}`,
     globalProps(props),
     className
   );

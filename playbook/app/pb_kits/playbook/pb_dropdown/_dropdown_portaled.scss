@@ -1,0 +1,195 @@
+// When the menu is portaled outside `.dropdown_wrapper` (Popover scroll shell), nested
+// selectors under `.pb_dropdown_default .dropdown_wrapper` no longer apply—restore panel
+// and list row styles at the container.
+
+.pb_dropdown_container.pb_dropdown_container--portaled.pb_dropdown_container--portaled-default {
+  position: absolute;
+  background-color: $white;
+  overflow: hidden;
+  box-shadow: $shadow_deep;
+  border-radius: $border_rad_heavier;
+  border: 1px solid $border_light;
+  margin-top: $space_xs;
+  z-index: $z_3;
+  width: 100%;
+  box-sizing: border-box;
+
+  &.constrain_height {
+    overflow-y: auto;
+    overflow-x: hidden;
+    max-height: 18em;
+  }
+
+  .pb_dropdown_option,
+  .pb_dropdown_option_list,
+  .pb_dropdown_option_selected,
+  .pb_dropdown_option_focused,
+  .pb_dropdown_option_list_focused,
+  .pb_dropdown_option_selected_focused {
+    padding-left: $space_sm;
+    padding-right: $space_sm;
+    padding-top: $space_xs;
+    padding-bottom: $space_xs;
+    cursor: pointer;
+    &:hover {
+      background-color: $bg_light;
+    }
+
+    &.pb_dropdown_option_focused,
+    &.pb_dropdown_option_list_focused,
+    &.pb_dropdown_option_selected_focused {
+      background-color: $bg_light;
+    }
+
+    &.pb_dropdown_option_list,
+    &.pb_dropdown_option_list_focused {
+      border-bottom: 1px solid $border_light;
+
+      &:hover, &:focus {
+        .pb_body_kit {
+          color: $primary;
+        }
+      }
+    }
+    &.pb_dropdown_option_selected,
+    &.pb_dropdown_option_selected_focused {
+      background-color: $primary;
+      color: $white;
+      [class^="pb_body"],
+      [class^="pb_title_kit"], a {
+        color: $white !important;
+      }
+      border-bottom: 1px solid $border_light;
+      &:hover {
+        background-color: $product_1_background;
+      }
+
+      @each $name, $color in $font-colors {
+        &.font-#{$name} {
+          @include apply-font-color($color);
+        }
+      }
+      @each $name, $bg in $background-colors {
+        &.bg-#{$name} {
+          background-color: $bg;
+        }
+      }
+    }
+  }
+
+  .dropdown_option_wrapper {
+    width: 100%;
+  }
+
+  &.close {
+    display: none;
+    animation-name: fadeOut;
+    animation-duration: 150ms;
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+  }
+
+  &.open {
+    display: block;
+    animation-name: fadeIn;
+    animation-duration: 150ms;
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+  }
+}
+
+.pb_dropdown_container.pb_dropdown_container--portaled.pb_dropdown_container--portaled-subtle {
+  position: absolute;
+  background-color: $white;
+  overflow: hidden;
+  box-shadow: $shadow_deep;
+  border-radius: $border_rad_heavier;
+  border: 1px solid $border_light;
+  margin-top: $space_xs;
+  z-index: $z_3;
+  width: 100%;
+  box-sizing: border-box;
+
+  &.constrain_height {
+    overflow-y: auto;
+    overflow-x: hidden;
+    max-height: 18em;
+  }
+
+  .pb_dropdown_option:first-child,
+  .pb_dropdown_option_list:first-child,
+  .pb_dropdown_option_selected:first-child,
+  .pb_dropdown_option_focused:first-child,
+  .pb_dropdown_option_list_focused:first-child,
+  .pb_dropdown_option_selected_focused:first-child {
+    margin-top: $space_xs;
+  }
+
+  .pb_dropdown_option:last-child,
+  .pb_dropdown_option_list:last-child,
+  .pb_dropdown_option_selected:last-child,
+  .pb_dropdown_option_focused:last-child,
+  .pb_dropdown_option_list_focused:last-child,
+  .pb_dropdown_option_selected_focused:last-child {
+    margin-bottom: $space_xs;
+  }
+
+  .pb_dropdown_option,
+  .pb_dropdown_option_list,
+  .pb_dropdown_option_selected,
+  .pb_dropdown_option_focused,
+  .pb_dropdown_option_list_focused,
+  .pb_dropdown_option_selected_focused {
+    margin: $space_xs;
+    padding: $space_xs;
+    border-radius: $border_radius_md;
+    border-bottom: none;
+    position: relative;
+    cursor: pointer;
+
+    &::after {
+      content: "";
+      position: absolute;
+      left: -$space_xs;
+      right: -$space_xs;
+      bottom: -4.5px;
+      height: 1px;
+      background: $input_border_default;
+    }
+
+    &:hover {
+      background-color: $bg_light;
+    }
+
+    &.pb_dropdown_option_focused,
+    &.pb_dropdown_option_list_focused,
+    &.pb_dropdown_option_selected_focused {
+      background-color: $bg_light;
+    }
+  }
+
+  .pb_dropdown_option:last-child::after,
+  .pb_dropdown_option_list:last-child::after,
+  .pb_dropdown_option_selected:last-child::after,
+  .pb_dropdown_option_focused:last-child::after,
+  .pb_dropdown_option_list_focused:last-child::after,
+  .pb_dropdown_option_selected_focused:last-child::after {
+    display: none;
+  }
+
+  &.close {
+    display: none;
+    animation-name: fadeOut;
+    animation-duration: 150ms;
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+  }
+
+  &.open {
+    display: block;
+    animation-name: fadeIn;
+    animation-duration: 150ms;
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+  }
+}

@@ -1,4 +1,5 @@
-import React, { useState, useRef, useEffect, forwardRef, useImperativeHandle, useMemo } from "react";
+import React, { useState, useRef, useEffect, useLayoutEffect, forwardRef, useImperativeHandle, useMemo } from "react";
+import ReactDOM from "react-dom";
 import classnames from "classnames";
 import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from "../utilities/props";
 import { globalProps } from "../utilities/globalProps";
@@ -20,6 +21,8 @@ import {
     prepareSubcomponents,
     handleClickOutside,
 } from "./utilities";
+
+import { usePopoverBodyContext } from "../pb_popover/popover_body_context";
 
 type CustomQuickPickDate = {
     label: string;
@@ -164,10 +167,10 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
     //state for keyboard events
     const [focusedOptionIndex, setFocusedOptionIndex] = useState(-1);
 
-    const dropdownRef = useRef(null);
+    const dropdownRef = useRef<HTMLDivElement | null>(null);
     const inputRef = useRef<HTMLInputElement>(null);
     const inputWrapperRef = useRef<HTMLDivElement | null>(null);
-    const dropdownContainerRef = useRef(null);
+    const dropdownContainerRef = useRef<HTMLDivElement | null>(null);
 
     const handleLabelClick = (e: React.MouseEvent) => {
       e.stopPropagation();
@@ -187,6 +190,12 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
 
     const { trigger, container, otherChildren } =
         separateChildComponents(children);
+
+    const popoverBody = usePopoverBodyContext();
+    const shouldPortalMenu =
+      popoverBody != null && variant === "default" && !children;
+
+    const [scrollTick, setScrollTick] = useState(0);
 
     useEffect(() => {
      // Handle clicks outside the dropdown
@@ -243,33 +252,79 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
         }
     }, [isDropDownClosed]);
 
-    // Auto-position dropdown above/below based on available space
-    useEffect(() => {
-        if (!isDropDownClosed && dropdownContainerRef.current) {
-            const container = dropdownContainerRef.current;
-            const wrapper = container.closest('.dropdown_wrapper') as HTMLElement;
-            if (!wrapper) return;
+    // Auto-position dropdown above/below; when portaled into Popover scroll shell, align to outer body.
+    // When the menu is portaled it is no longer under `.dropdown_wrapper`, so `closest()` would fail—use
+    // `dropdownRef` (the wrapper) for trigger geometry in both cases.
+    useLayoutEffect(() => {
+        if (isDropDownClosed || !dropdownContainerRef.current) return;
+        const container = dropdownContainerRef.current as HTMLElement;
+        const wrapper =
+            (dropdownRef.current as HTMLElement | null) ||
+            (container.closest(".dropdown_wrapper") as HTMLElement | null);
+        if (!wrapper) return;
 
-            const wrapperRect = wrapper.getBoundingClientRect();
+        if (shouldPortalMenu && popoverBody?.bodyRef?.current) {
+            const body = popoverBody.bodyRef.current;
+            const br = body.getBoundingClientRect();
+            const wr = wrapper.getBoundingClientRect();
             const h = container.getBoundingClientRect().height || container.scrollHeight;
-            const spaceBelow = window.innerHeight - wrapperRect.bottom;
-            const spaceAbove = wrapperRect.top;
+            const spaceBelow = window.innerHeight - wr.bottom;
+            const spaceAbove = wr.top;
 
-            // If not enough space below but enough space above, position above
+            container.style.position = "absolute";
+            container.style.left = `${wr.left - br.left}px`;
+            container.style.width = `${wr.width}px`;
+            container.style.marginTop = "0";
+            container.style.marginBottom = "0";
+            container.style.zIndex = "2";
+
             if (spaceBelow < h + 10 && spaceAbove >= h + 10) {
                 container.style.top = "auto";
-                container.style.bottom = "calc(100% + 5px)";
-                container.style.marginTop = "0";
-                container.style.marginBottom = "0";
+                container.style.bottom = `${br.bottom - wr.top + 5}px`;
             } else {
-                // Default: position below
-                container.style.top = "";
-                container.style.bottom = "";
-                container.style.marginTop = "";
-                container.style.marginBottom = "";
+                container.style.top = `${wr.bottom - br.top}px`;
+                container.style.bottom = "auto";
             }
+            return;
         }
-    }, [isDropDownClosed, dropdownContainerRef]);
+
+        const wrapperRect = wrapper.getBoundingClientRect();
+        const h = container.getBoundingClientRect().height || container.scrollHeight;
+        const spaceBelow = window.innerHeight - wrapperRect.bottom;
+        const spaceAbove = wrapperRect.top;
+
+        if (spaceBelow < h + 10 && spaceAbove >= h + 10) {
+            container.style.top = "auto";
+            container.style.bottom = "calc(100% + 5px)";
+            container.style.marginTop = "0";
+            container.style.marginBottom = "0";
+        } else {
+            container.style.top = "";
+            container.style.bottom = "";
+            container.style.marginTop = "";
+            container.style.marginBottom = "";
+        }
+    }, [
+        isDropDownClosed,
+        shouldPortalMenu,
+        popoverBody,
+        scrollTick,
+    ]);
+
+    useEffect(() => {
+        if (!shouldPortalMenu || !popoverBody?.scrollRef?.current || isDropDownClosed) return;
+        const el = popoverBody.scrollRef.current;
+        const onScroll = () => setScrollTick((n) => n + 1);
+        el.addEventListener("scroll", onScroll, { passive: true });
+        return () => el.removeEventListener("scroll", onScroll);
+    }, [shouldPortalMenu, popoverBody?.scrollRef, isDropDownClosed]);
+
+    useEffect(() => {
+        if (!shouldPortalMenu || isDropDownClosed) return;
+        const onResize = () => setScrollTick((n) => n + 1);
+        window.addEventListener("resize", onResize);
+        return () => window.removeEventListener("resize", onResize);
+    }, [shouldPortalMenu, isDropDownClosed]);
 
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -444,6 +499,8 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
                     blankSelection,
                     clearable,
                     dropdownContainerRef,
+                    menuPortaled: shouldPortalMenu,
+                    portaledVariant: variant,
                     error,
                     errorId,
                     filterItem,
@@ -499,9 +556,11 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
                 )}
                 <div className={`dropdown_wrapper ${error ? 'error' : ''}`}
                     onBlur={() => {
-                        // Debounce to delay the execution to prevent jumpiness in Focus state
                         setTimeout(() => {
-                            if (!dropdownRef.current.contains(document.activeElement)) {
+                            const active = document.activeElement as Node | null;
+                            const inWrapper = dropdownRef.current?.contains(active);
+                            const inMenu = dropdownContainerRef.current?.contains(active);
+                            if (!inWrapper && !inMenu) {
                                 setIsInputFocused(false);
                             }
                         }, 0);
@@ -518,14 +577,36 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
                     ) : (
                         <>
                             <DropdownTrigger placeholder={placeholder} />
-                            <DropdownContainer constrainHeight={constrainHeight}>
-                                {optionsWithBlankSelection &&
-                                    optionsWithBlankSelection?.map((option: GenericObject) => (
-                                        <DropdownOption key={option.id}
-                                            option={option}
-                                        />
-                                    ))}
-                            </DropdownContainer>
+                            {shouldPortalMenu &&
+                            popoverBody?.bodyRef?.current &&
+                            !isDropDownClosed
+                              ? ReactDOM.createPortal(
+                                  <DropdownContainer constrainHeight={constrainHeight}>
+                                    {optionsWithBlankSelection &&
+                                      optionsWithBlankSelection?.map(
+                                        (option: GenericObject) => (
+                                          <DropdownOption
+                                              key={option.id}
+                                              option={option}
+                                          />
+                                        )
+                                      )}
+                                  </DropdownContainer>,
+                                  popoverBody.bodyRef.current
+                                )
+                              : !shouldPortalMenu ? (
+                                  <DropdownContainer constrainHeight={constrainHeight}>
+                                    {optionsWithBlankSelection &&
+                                      optionsWithBlankSelection?.map(
+                                        (option: GenericObject) => (
+                                          <DropdownOption
+                                              key={option.id}
+                                              option={option}
+                                          />
+                                        )
+                                      )}
+                                  </DropdownContainer>
+                                ) : null}
                         </>
                     )}
 

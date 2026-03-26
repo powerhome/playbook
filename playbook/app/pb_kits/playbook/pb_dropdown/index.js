@@ -117,6 +117,11 @@ export default class PbDropdown extends PbEnhancedElement {
   }
 
   disconnect() {
+    this.unbindPopoverShellPositionListeners();
+    if (this.target && this._popoverMenuRestore) {
+      this.restorePopoverMenuPlacement(this.target);
+    }
+
     // Clean up stored instance reference
     if (this.element._pbDropdownInstance === this) {
       delete this.element._pbDropdownInstance
@@ -265,6 +270,9 @@ export default class PbDropdown extends PbEnhancedElement {
           el.offsetHeight; // force reflow
           el.style.height = el.scrollHeight + "px";
         }
+        if (this._popoverPositionOuter) {
+          this.adjustDropdownPositionPopoverShell(el, this._popoverPositionOuter);
+        }
       });
     }
   }
@@ -293,6 +301,89 @@ export default class PbDropdown extends PbEnhancedElement {
       container.style.marginTop = "";
       container.style.marginBottom = "";
     }
+  }
+
+  /** Match React Dropdown: menu appended to `.pb_popover_body--scrollable` escapes `.pb_popover_body_scroll` clip. */
+  adjustDropdownPositionPopoverShell(container, outerBody) {
+    if (!container || !outerBody) return;
+    const wrapper = this.dropdownWrapper;
+    if (!wrapper) return;
+
+    const br = outerBody.getBoundingClientRect();
+    const wr = wrapper.getBoundingClientRect();
+    const h = container.getBoundingClientRect().height || container.scrollHeight;
+    const spaceBelow = window.innerHeight - wr.bottom;
+    const spaceAbove = wr.top;
+
+    container.style.position = "absolute";
+    container.style.left = `${wr.left - br.left}px`;
+    container.style.width = `${wr.width}px`;
+    container.style.marginTop = "0";
+    container.style.marginBottom = "0";
+    container.style.zIndex = "2";
+
+    if (spaceBelow < h + 10 && spaceAbove >= h + 10) {
+      container.style.top = "auto";
+      container.style.bottom = `${br.bottom - wr.top + 5}px`;
+    } else {
+      container.style.top = `${wr.bottom - br.top}px`;
+      container.style.bottom = "auto";
+    }
+  }
+
+  bindPopoverShellPositionListeners(outerBody, scrollShell, container) {
+    this.unbindPopoverShellPositionListeners();
+    this._popoverPositionOuter = outerBody;
+    this._popoverPositionContainer = container;
+    this._popoverPositionBound = () => {
+      if (this._popoverPositionContainer && this._popoverPositionOuter) {
+        this.adjustDropdownPositionPopoverShell(
+          this._popoverPositionContainer,
+          this._popoverPositionOuter,
+        );
+      }
+    };
+    scrollShell.addEventListener("scroll", this._popoverPositionBound, {
+      passive: true,
+    });
+    window.addEventListener("resize", this._popoverPositionBound);
+    this._popoverPositionScroll = scrollShell;
+  }
+
+  unbindPopoverShellPositionListeners() {
+    if (this._popoverPositionScroll && this._popoverPositionBound) {
+      this._popoverPositionScroll.removeEventListener(
+        "scroll",
+        this._popoverPositionBound,
+      );
+      window.removeEventListener("resize", this._popoverPositionBound);
+    }
+    this._popoverPositionScroll = null;
+    this._popoverPositionBound = null;
+    this._popoverPositionOuter = null;
+    this._popoverPositionContainer = null;
+  }
+
+  restorePopoverMenuPlacement(container) {
+    if (!this._popoverMenuRestore || !container) return;
+    const { parent, nextSibling } = this._popoverMenuRestore;
+    if (!parent) return;
+    if (nextSibling) parent.insertBefore(container, nextSibling);
+    else parent.appendChild(container);
+    this._popoverMenuRestore = null;
+    container.classList.remove(
+      "pb_dropdown_container--portaled",
+      "pb_dropdown_container--portaled-default",
+      "pb_dropdown_container--portaled-subtle",
+    );
+    container.style.position = "";
+    container.style.left = "";
+    container.style.top = "";
+    container.style.bottom = "";
+    container.style.width = "";
+    container.style.zIndex = "";
+    container.style.marginTop = "";
+    container.style.marginBottom = "";
   }
 
   handleSearch(term = "") {
@@ -704,7 +795,7 @@ export default class PbDropdown extends PbEnhancedElement {
   showElement(elem) {
     elem.classList.remove("close");
     elem.classList.add("open");
-    
+
     const shouldConstrain = elem.classList.contains("constrain_height");
     if (shouldConstrain) {
       // Calculate height respecting max-height constraint (18em)
@@ -716,12 +807,40 @@ export default class PbDropdown extends PbEnhancedElement {
     } else {
       elem.style.height = elem.scrollHeight + "px";
     }
-    
-    // Auto-position dropdown above if not enough space below
-    this.adjustDropdownPosition(elem);
+
+    const wrapper = this.dropdownWrapper;
+    const outerBody = wrapper?.closest(".pb_popover_body--scrollable");
+    const scrollShell = outerBody?.querySelector(".pb_popover_body_scroll");
+
+    if (outerBody && scrollShell) {
+      if (elem.parentNode !== outerBody) {
+        if (!this._popoverMenuRestore) {
+          this._popoverMenuRestore = {
+            parent: elem.parentNode,
+            nextSibling: elem.nextSibling,
+          };
+        }
+        outerBody.appendChild(elem);
+      }
+      const portaledVariant = this.element.classList.contains(
+        "pb_dropdown_subtle",
+      )
+        ? "subtle"
+        : "default";
+      elem.classList.add(
+        "pb_dropdown_container--portaled",
+        `pb_dropdown_container--portaled-${portaledVariant}`,
+      );
+      this.adjustDropdownPositionPopoverShell(elem, outerBody);
+      this.bindPopoverShellPositionListeners(outerBody, scrollShell, elem);
+    } else {
+      this.adjustDropdownPosition(elem);
+    }
   }
 
   hideElement(elem) {
+    this.unbindPopoverShellPositionListeners();
+    this.restorePopoverMenuPlacement(elem);
     elem.style.height = elem.scrollHeight + "px";
     window.setTimeout(() => {
       elem.classList.add("close");
