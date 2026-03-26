@@ -21,6 +21,8 @@ export type FilterDoubleProps = {
   results?: number,
   sortOptions?: SortOptions,
   sortValue?: SortValue[],
+  allowOverflow?: boolean,
+  scrollShell?: boolean,
 } & FilterBackgroundProps
 
 const FilterDouble = ({
@@ -35,6 +37,8 @@ const FilterDouble = ({
   minWidth,
   placement,
   popoverProps,
+  allowOverflow,
+  scrollShell,
   ...bgProps
 }: FilterDoubleProps): React.ReactElement => (
   <FilterBackground
@@ -46,11 +50,13 @@ const FilterDouble = ({
         vertical="center"
     >
       <FiltersPopover
+          allowOverflow={allowOverflow}
           dark={dark}
           maxHeight={maxHeight}
           minWidth={minWidth}
           placement={placement}
           popoverProps={popoverProps}
+          scrollShell={scrollShell}
       >
           {children}
       </FiltersPopover>

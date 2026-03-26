@@ -11,8 +11,12 @@ type FiltersPopoverProps = {
   minWidth?: string,
   placement?: "top" | "right" | "bottom" | "left" | "top-start" | "top-end" | "bottom-start" | "bottom-end" | "right-start" | "right-end" | "left-start" | "left-end",
   popoverProps?: GenericObject,
+  /** See Popover `scrollShell`: inner scroll + Dropdown portaled to outer body when max dimensions are set. */
+  scrollShell?: boolean,
+  /** See Popover `allowOverflow`: width-only avoids clipping; with `maxHeight`, uses scroll shell so height is respected. */
+  allowOverflow?: boolean,
 }
-const FiltersPopover = ({ children, dark, maxHeight, minWidth, placement = "bottom-start", popoverProps }: FiltersPopoverProps): React.ReactElement => {
+const FiltersPopover = ({ children, dark, maxHeight, minWidth, placement = "bottom-start", popoverProps, scrollShell, allowOverflow }: FiltersPopoverProps): React.ReactElement => {
   const [hide, updateHide] = useState(true)
   const toggle = () => updateHide(!hide)
 
@@ -28,11 +32,13 @@ const FiltersPopover = ({ children, dark, maxHeight, minWidth, placement = "bott
 
   return (
     <PbReactPopover
+        allowOverflow={allowOverflow}
         closeOnClick="outside"
         maxHeight={maxHeight}
         minWidth={minWidth}
         placement={placement}
         reference={filterButton}
+        scrollShell={scrollShell}
         shouldClosePopover={updateHide}
         show={!hide}
         {...popoverProps}

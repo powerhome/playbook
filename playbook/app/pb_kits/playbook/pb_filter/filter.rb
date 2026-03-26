@@ -17,6 +17,8 @@ module Playbook
                        default: "bottom-start"
       prop :popover_props, type: Playbook::Props::HashProp,
                            default: {}
+      prop :scroll_shell, type: Playbook::Props::Boolean, default: false
+      prop :allow_overflow, type: Playbook::Props::Boolean, default: false
 
       def classname
         generate_classname("pb_filter_kit").rstrip

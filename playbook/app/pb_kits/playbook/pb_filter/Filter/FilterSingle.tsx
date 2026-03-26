@@ -20,6 +20,8 @@ export type FilterSingleProps = {
   results?: number,
   sortOptions?: SortOptions,
   sortValue?: SortValue[],
+  allowOverflow?: boolean,
+  scrollShell?: boolean,
 } & FilterBackgroundProps
 
 const FilterSingle = ({
@@ -34,6 +36,8 @@ const FilterSingle = ({
   minWidth,
   placement,
   popoverProps,
+  allowOverflow,
+  scrollShell,
   ...bgProps
 }: FilterSingleProps): React.ReactElement => {
   return (
@@ -49,11 +53,13 @@ const FilterSingle = ({
         { children &&
           <>
             <FiltersPopover
+                allowOverflow={allowOverflow}
                 dark={dark}
                 maxHeight={maxHeight}
                 minWidth={minWidth}
                 placement={placement}
                 popoverProps={popoverProps}
+                scrollShell={scrollShell}
             >
             {children}
             </FiltersPopover>
