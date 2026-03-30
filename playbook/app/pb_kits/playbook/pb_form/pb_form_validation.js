@@ -34,68 +34,8 @@ class PbFormValidation extends PbEnhancedElement {
     this._typeaheadFieldHandlers = new WeakMap()
 
     this.bindValidationListeners()
-    this._setupTypeaheadTooltipHandler()
     this._setupMutationObserver()
     this._setupSubmitHandler()
-  }
-
-  _setupTypeaheadTooltipHandler() {
-    this._typeaheadHandler = (event) => {
-      const target = event.target
-      if (!(target instanceof HTMLInputElement)) return
-      if (!this.isReactTypeaheadField(target)) return
-
-      if (target.dataset.pbTypeaheadProxy) return
-
-      const container =
-        target.closest('[data-pb-react-component="Typeahead"]') ||
-        target.closest('.pb_typeahead_kit.react-select')
-      if (!container) return
-
-      const kitElement = this.getKitElement(target)
-      const customMessage = this.getValidationMessage(target, kitElement)
-      if (customMessage) target.setCustomValidity(customMessage)
-
-      event.preventDefault()
-
- 
-      const controlEl = container.querySelector('.typeahead-kit-select__control') || container
-      const rect = controlEl.getBoundingClientRect()
-
-      const proxy = document.createElement('input')
-      proxy.required = true
-      proxy.tabIndex = -1
-      proxy.setAttribute('aria-hidden', 'true')
-      proxy.dataset.pbTypeaheadProxy = 'true'
-      if (customMessage) proxy.setCustomValidity(customMessage)
-      proxy.style.cssText =
-        'position:fixed;' +
-        'top:' + rect.top + 'px;' +
-        'left:' + rect.left + 'px;' +
-        'width:' + Math.max(rect.width, 1) + 'px;' +
-        'height:' + Math.max(rect.height, 1) + 'px;' +
-        'opacity:0;pointer-events:none;border:0;padding:0;margin:0;box-sizing:border-box;'
-
-      this.element.appendChild(proxy)
-
-      void proxy.offsetWidth
-
-      proxy.reportValidity()
-
-      let removed = false
-      const removeProxy = () => {
-        if (removed) return
-        removed = true
-        proxy.setCustomValidity('')
-        if (proxy.parentElement) proxy.remove()
-      }
-      document.addEventListener('pointerdown', removeProxy, { once: true, capture: true })
-      document.addEventListener('keydown',     removeProxy, { once: true, capture: true })
-      this.element.addEventListener('submit',  removeProxy, { once: true, capture: true })
-      setTimeout(removeProxy, 10000)
-    }
-
-    this.element.addEventListener('invalid', this._typeaheadHandler, true)
   }
 
   _setupMutationObserver() {
@@ -147,7 +87,6 @@ class PbFormValidation extends PbEnhancedElement {
     let foundInvalid = false
 
     this.formValidationFields.forEach((field) => {
-      if (field.dataset?.pbTypeaheadProxy) return
       if (this.isTypeaheadField(field)) return
 
       const isPhoneNumberInput = field.closest('.pb_phone_number_input')
@@ -177,11 +116,6 @@ class PbFormValidation extends PbEnhancedElement {
   disconnect() {
     this.mutationObserver?.disconnect()
 
-    if (this._typeaheadHandler) {
-      this.element.removeEventListener('invalid', this._typeaheadHandler, true)
-      this._typeaheadHandler = null
-    }
-
     this._pendingFieldsToBind?.clear()
     this._pendingFieldsToBind    = null
     this._flushPendingFieldBinds = null
@@ -195,7 +129,6 @@ class PbFormValidation extends PbEnhancedElement {
   bindFieldValidationListeners(field) {
     if (!field || !(field instanceof Element)) return
     if (this.boundFields?.has(field)) return
-    if (field.dataset?.pbTypeaheadProxy) return
     if (this.isTypeaheadField(field)) {
       this.bindTypeaheadValidationListeners(field)
       return
