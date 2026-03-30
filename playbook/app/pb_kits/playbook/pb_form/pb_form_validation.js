@@ -29,37 +29,107 @@ class PbFormValidation extends PbEnhancedElement {
   }
 
   connect() {
-    this.boundFields = new WeakSet()
+    this.boundFields    = new WeakSet()
+    this._fieldHandlers = new WeakMap()
+    this._typeaheadFieldHandlers = new WeakMap()
+
     this.bindValidationListeners()
+    this._setupTypeaheadTooltipHandler()
+    this._setupMutationObserver()
+    this._setupSubmitHandler()
+  }
 
-    this._pbTypeaheadInvalidCaptureHandler = (event) => {
+  _setupTypeaheadTooltipHandler() {
+    this._typeaheadHandler = (event) => {
       const target = event.target
-      if (!(target instanceof HTMLInputElement || target instanceof HTMLTextAreaElement || target instanceof HTMLSelectElement)) return
+      if (!(target instanceof HTMLInputElement)) return
       if (!this.isReactTypeaheadField(target)) return
-      if (target.getClientRects().length) return
 
-      const container = target.closest('[data-pb-react-component="Typeahead"]') || target.closest('.pb_typeahead_kit.react-select')
-      const anchor = container?.querySelector?.('.typeahead-kit-select__control') || container
-      if (anchor && window.getComputedStyle(anchor).position === 'static') anchor.style.position = 'relative'
+      if (target.dataset.pbTypeaheadProxy) return
 
-      target.style.cssText += 'position:absolute;top:0;left:0;'
+      const container =
+        target.closest('[data-pb-react-component="Typeahead"]') ||
+        target.closest('.pb_typeahead_kit.react-select')
+      if (!container) return
+
+      const kitElement = this.getKitElement(target)
+      const customMessage = this.getValidationMessage(target, kitElement)
+      if (customMessage) target.setCustomValidity(customMessage)
+
+      event.preventDefault()
+
+ 
+      const controlEl = container.querySelector('.typeahead-kit-select__control') || container
+      const rect = controlEl.getBoundingClientRect()
+
+      const proxy = document.createElement('input')
+      proxy.required = true
+      proxy.tabIndex = -1
+      proxy.setAttribute('aria-hidden', 'true')
+      proxy.dataset.pbTypeaheadProxy = 'true'
+      if (customMessage) proxy.setCustomValidity(customMessage)
+      proxy.style.cssText =
+        'position:fixed;' +
+        'top:' + rect.top + 'px;' +
+        'left:' + rect.left + 'px;' +
+        'width:' + Math.max(rect.width, 1) + 'px;' +
+        'height:' + Math.max(rect.height, 1) + 'px;' +
+        'opacity:0;pointer-events:none;border:0;padding:0;margin:0;box-sizing:border-box;'
+
+      this.element.appendChild(proxy)
+
+      void proxy.offsetWidth
+
+      proxy.reportValidity()
+
+      let removed = false
+      const removeProxy = () => {
+        if (removed) return
+        removed = true
+        proxy.setCustomValidity('')
+        if (proxy.parentElement) proxy.remove()
+      }
+      document.addEventListener('pointerdown', removeProxy, { once: true, capture: true })
+      document.addEventListener('keydown',     removeProxy, { once: true, capture: true })
+      this.element.addEventListener('submit',  removeProxy, { once: true, capture: true })
+      setTimeout(removeProxy, 10000)
     }
 
-    this.element.addEventListener('invalid', this._pbTypeaheadInvalidCaptureHandler, true)
+    this.element.addEventListener('invalid', this._typeaheadHandler, true)
+  }
 
-    this.debouncedBindValidationListeners = debounce(() => {
-      this.bindValidationListeners()
-    }, 100)
+  _setupMutationObserver() {
+    this._pendingFieldsToBind    = new Set()
+    this._flushPendingFieldBinds = debounce(() => {
+      if (!this._pendingFieldsToBind?.size) return
+      this._pendingFieldsToBind.forEach((f) => this.bindFieldValidationListeners(f))
+      this._pendingFieldsToBind.clear()
+    }, 50)
 
     this.mutationObserver = new MutationObserver((mutations) => {
-      if (!this.hasNewRequiredFields(mutations)) return
-      this.debouncedBindValidationListeners()
+      let sawRequired = false
+      mutations.forEach(({ addedNodes }) => {
+        addedNodes.forEach((node) => {
+          if (!(node instanceof Element)) return
+          if (node.matches(REQUIRED_FIELDS_SELECTOR)) {
+            this._pendingFieldsToBind.add(node)
+            sawRequired = true
+          }
+          node.querySelectorAll?.(REQUIRED_FIELDS_SELECTOR)?.forEach?.((el) => {
+            this._pendingFieldsToBind.add(el)
+            sawRequired = true
+          })
+        })
+      })
+      if (sawRequired) this._flushPendingFieldBinds()
     })
-    this.mutationObserver.observe(this.element, { childList: true, subtree: true })
 
+    this.mutationObserver.observe(this.element, { childList: true, subtree: true })
+  }
+
+  _setupSubmitHandler() {
     this.element.addEventListener('submit', (event) => {
-      const hasInvalidFields = this.validateOnSubmit()
-      if (hasInvalidFields) {
+      if (this.validateOnSubmit()) {
         event.preventDefault()
         return false
       }
@@ -77,7 +147,8 @@ class PbFormValidation extends PbEnhancedElement {
     let foundInvalid = false
 
     this.formValidationFields.forEach((field) => {
-      if (this.isReactTypeaheadField(field)) return
+      if (field.dataset?.pbTypeaheadProxy) return
+      if (this.isTypeaheadField(field)) return
 
       const isPhoneNumberInput = field.closest('.pb_phone_number_input')
       if (isPhoneNumberInput) return
@@ -86,43 +157,58 @@ class PbFormValidation extends PbEnhancedElement {
       if (isTimePickerInput) return
 
       field.setCustomValidity('')
-      const kitElement = this.getKitElement(field)
+      const ctx = this.getValidationContext(field)
 
       if (field.validity.valid) {
-        this.clearError(field)
+        this.clearError(field, ctx)
         return
       }
 
-      const message = this.getValidationMessage(field, kitElement)
+      const message = ctx.validationMessage
       if (message) field.setCustomValidity(message)
 
       foundInvalid = true
-      this.showValidationMessage(field)
+      this.showValidationMessage(field, ctx)
     })
 
     return foundInvalid
   }
 
   disconnect() {
-    if (this.mutationObserver) this.mutationObserver.disconnect()
-    if (this._pbTypeaheadInvalidCaptureHandler) {
-      this.element.removeEventListener('invalid', this._pbTypeaheadInvalidCaptureHandler, true)
-      this._pbTypeaheadInvalidCaptureHandler = null
+    this.mutationObserver?.disconnect()
+
+    if (this._typeaheadHandler) {
+      this.element.removeEventListener('invalid', this._typeaheadHandler, true)
+      this._typeaheadHandler = null
     }
+
+    this._pendingFieldsToBind?.clear()
+    this._pendingFieldsToBind    = null
+    this._flushPendingFieldBinds = null
+    this._typeaheadFieldHandlers = null
   }
 
   bindValidationListeners() {
-    this.formValidationFields.forEach((field) => {
-      if (this.boundFields?.has(field)) return
+    this.formValidationFields.forEach((field) => this.bindFieldValidationListeners(field))
+  }
 
-      if (this.isReactTypeaheadField(field)) return
+  bindFieldValidationListeners(field) {
+    if (!field || !(field instanceof Element)) return
+    if (this.boundFields?.has(field)) return
+    if (field.dataset?.pbTypeaheadProxy) return
+    if (this.isTypeaheadField(field)) {
+      this.bindTypeaheadValidationListeners(field)
+      return
+    }
 
-      const isPhoneNumberInput = field.closest('.pb_phone_number_input')
-      if (isPhoneNumberInput) return
+    const isPhoneNumberInput = field.closest('.pb_phone_number_input')
+    if (isPhoneNumberInput) return
 
-      const isTimePickerInput = field.closest('.pb_time_picker')
-      if (isTimePickerInput) return
+    const isTimePickerInput = field.closest('.pb_time_picker')
+    if (isTimePickerInput) return
 
+    let handlers = this._fieldHandlers?.get(field)
+    if (!handlers) {
       const debouncedHandler = debounce((event) => {
         this.validateFormField(event)
       }, 250)
@@ -131,57 +217,118 @@ class PbFormValidation extends PbEnhancedElement {
         this.validateFormField(event)
       }
 
-      FIELD_EVENTS.forEach((eventName) => {
-        if (eventName === 'invalid') {
-          field.addEventListener(eventName, immediateHandler, true)
-        } else if (eventName === 'change' && field.tagName === 'SELECT') {
-          field.addEventListener(eventName, immediateHandler, false)
-        } else {
-          field.addEventListener(eventName, debouncedHandler, false)
-        }
-      })
+      handlers = { debouncedHandler, immediateHandler }
+      this._fieldHandlers?.set(field, handlers)
+    }
 
-      this.boundFields?.add(field)
+    FIELD_EVENTS.forEach((eventName) => {
+      if (eventName === 'invalid') {
+        field.addEventListener(eventName, handlers.immediateHandler, true)
+      } else if (eventName === 'change' && field.tagName === 'SELECT') {
+        field.addEventListener(eventName, handlers.immediateHandler, false)
+      } else {
+        field.addEventListener(eventName, handlers.debouncedHandler, false)
+      }
     })
+
+    this.boundFields?.add(field)
+  }
+
+  bindTypeaheadValidationListeners(field) {
+    if (!field || !(field instanceof HTMLInputElement || field instanceof HTMLTextAreaElement || field instanceof HTMLSelectElement)) return
+    if (this.boundFields?.has(field)) return
+
+    let handlers = this._typeaheadFieldHandlers?.get(field)
+    if (!handlers) {
+      const applyCustomMessage = () => {
+        const kitElement = this.getKitElement(field)
+        const ctx = this.getValidationContext(field)
+        const message = this.getValidationMessage(field, kitElement)
+
+        field.setCustomValidity('')
+        if (!message) {
+          if (!this.isReactTypeaheadField(field)) this.showValidationMessage(field, ctx)
+          return
+        }
+
+        if (field.validity.valueMissing || !field.validity.valid) {
+          field.setCustomValidity(message)
+        }
+
+        if (!this.isReactTypeaheadField(field)) {
+          this.showValidationMessage(field, ctx)
+        }
+      }
+
+      const clearCustomMessage = () => {
+        field.setCustomValidity('')
+        if (!this.isReactTypeaheadField(field)) {
+          this.clearError(field)
+        }
+      }
+
+      handlers = { applyCustomMessage, clearCustomMessage }
+      this._typeaheadFieldHandlers?.set(field, handlers)
+    }
+
+    field.addEventListener('invalid', handlers.applyCustomMessage, true)
+    field.addEventListener('input', handlers.clearCustomMessage, false)
+    field.addEventListener('change', handlers.clearCustomMessage, false)
+
+    this.boundFields?.add(field)
   }
 
   validateFormField(event) {
+    event.preventDefault()
     const { target } = event
+    if (this.isTypeaheadField(target)) return
 
-    if (this.isReactTypeaheadField(target)) return
+    // Suppress the native browser tooltip; PB shows its own inline error instead.
 
-    const kitElement = this.getKitElement(target)
+    const ctx = this.getValidationContext(target)
 
     target.setCustomValidity('')
 
     const isValid = target.validity.valid
 
     if (isValid) {
-      this.clearError(target)
+      this.clearError(target, ctx)
     } else {
-      const message = this.getValidationMessage(target, kitElement)
+      const message = ctx.validationMessage
       if (message) target.setCustomValidity(message)
-      this.showValidationMessage(target)
+      this.showValidationMessage(target, ctx)
     }
   }
 
-  showValidationMessage(target) {
-    const { parentElement } = target
+  getValidationContext(target) {
+    const parentElement = target?.parentElement || null
     const kitElement = this.getKitElement(target)
+    const controlWrapper = this.getControlWrapper(target, kitElement)
+    const errorParent = this.getErrorParent(target, kitElement, parentElement)
+    const validationMessage = this.getValidationMessage(target, kitElement)
 
-    const isPhoneNumberInput = kitElement?.classList?.contains('pb_phone_number_input') || false
-    const isTimePickerInput = kitElement?.classList?.contains('pb_time_picker') || false
+    return {
+      parentElement,
+      kitElement,
+      controlWrapper,
+      errorParent,
+      validationMessage,
+      isPhoneNumberInput: !!kitElement?.classList?.contains('pb_phone_number_input'),
+      isTimePickerInput: !!kitElement?.classList?.contains('pb_time_picker'),
+    }
+  }
+
+  showValidationMessage(target, ctx = this.getValidationContext(target)) {
+    const { kitElement, controlWrapper, errorParent, validationMessage, isPhoneNumberInput, isTimePickerInput } = ctx
 
     // ensure clean error message state
-    this.clearError(target)
+    this.clearError(target, ctx)
     if (kitElement) kitElement.classList.add('error')
 
-    const controlWrapper = this.getControlWrapper(target, kitElement)
     if (controlWrapper) controlWrapper.classList.add('error')
 
     if (!isPhoneNumberInput && !isTimePickerInput) {
-      const errorParent = this.getErrorParent(target, kitElement, parentElement)
-      const message = this.getValidationMessage(target, kitElement) || target.validationMessage
+      const message = validationMessage || target.validationMessage
 
       let errorMessageElement = errorParent.querySelector(`[${FORM_VALIDATION_MESSAGE_ATTR}="true"]`)
       if (!errorMessageElement) {
@@ -206,15 +353,10 @@ class PbFormValidation extends PbEnhancedElement {
     }
   }
 
-  clearError(target) {
-    const { parentElement } = target
-    const kitElement = this.getKitElement(target)
+  clearError(target, ctx = this.getValidationContext(target)) {
+    const { kitElement, controlWrapper, errorParent } = ctx
     if (kitElement) kitElement.classList.remove('error')
-
-    const controlWrapper = this.getControlWrapper(target, kitElement)
     if (controlWrapper) controlWrapper.classList.remove('error')
-
-    const errorParent = this.getErrorParent(target, kitElement, parentElement)
     const messageEl = errorParent.querySelector(`[${FORM_VALIDATION_MESSAGE_ATTR}="true"]`)
     if (messageEl) {
       const reused = messageEl.getAttribute(FORM_VALIDATION_MESSAGE_REUSED_ATTR) === 'true'
@@ -264,14 +406,8 @@ class PbFormValidation extends PbEnhancedElement {
     )
   }
 
-  hasNewRequiredFields(mutations) {
-    return mutations.some((mutation) => {
-      return Array.from(mutation.addedNodes || []).some((node) => {
-        if (!(node instanceof Element)) return false
-        if (node.matches && node.matches(REQUIRED_FIELDS_SELECTOR)) return true
-        return !!node.querySelector?.(REQUIRED_FIELDS_SELECTOR)
-      })
-    })
+  isTypeaheadField(el) {
+    return !!el?.closest?.('.pb_typeahead_kit')
   }
 
   getKitElement(target) {
