@@ -11875,10 +11875,10 @@ trim-lines@^3.0.0:
   resolved "https://npm.powerapp.cloud/trim-lines/-/trim-lines-3.0.1.tgz#d802e332a07df861c48802c04321017b1bd87338"
   integrity sha512-kRj8B+YHZCc9kQYdWfJB2/oUl9rA99qbowYYBtr4ui4mZyAQ2JpvVBd/6U2YloATfqBhBTSMhTpgBHtU0Mf3Rg==
 
-trix@2.1.15:
-  version "2.1.15"
-  resolved "https://npm.powerapp.cloud/trix/-/trix-2.1.15.tgz#fabad796ea779a8ae96522402fbc214cbfc4015f"
-  integrity sha512-LoaXWczdTUV8+3Box92B9b1iaDVbxD14dYemZRxi3PwY+AuDm97BUJV2aHLBUFPuDABhxp0wzcbf0CxHCVmXiw==
+trix@2.1.18:
+  version "2.1.18"
+  resolved "https://npm.powerapp.cloud/trix/-/trix-2.1.18.tgz#d87a5be64c10ecdab64f5af47f941b5318c08225"
+  integrity sha512-DWOdTsz3n9PO3YBc1R6pGh9MG1cXys/2+rouc/qsISncjc2MBew2UOW8nXh3NjUOjobKsXCIPR6LB02abg2EYg==
   dependencies:
     dompurify "^3.2.5"
 
