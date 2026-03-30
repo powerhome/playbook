@@ -504,6 +504,10 @@
     "category": "Business"
   },
   {
+    "name": "clipboard-question",
+    "category": "Business"
+  },
+  {
     "name": "clipboard",
     "category": "Business"
   },
@@ -1148,6 +1152,10 @@
     "category": "Interface Core"
   },
   {
+    "name": "icons",
+    "category": "Interface Core"
+  },
+  {
     "name": "layer-group",
     "category": "Interface Core"
   },
@@ -1233,6 +1241,14 @@
   },
   {
     "name": "save",
+    "category": "Interface Core"
+  },
+  {
+    "name": "search-minus",
+    "category": "Interface Core"
+  },
+  {
+    "name": "search-plus",
     "category": "Interface Core"
   },
   {
@@ -2140,7 +2156,31 @@
     "category": "Weather"
   },
   {
+    "name": "cloud-moon-rain",
+    "category": "Weather"
+  },
+  {
+    "name": "cloud-showers-heavy",
+    "category": "Weather"
+  },
+  {
+    "name": "cloud-sun-rain",
+    "category": "Weather"
+  },
+  {
+    "name": "cloud",
+    "category": "Weather"
+  },
+  {
+    "name": "clouds-moon",
+    "category": "Weather"
+  },
+  {
     "name": "clouds-sun",
+    "category": "Weather"
+  },
+  {
+    "name": "clouds",
     "category": "Weather"
   },
   {
@@ -2160,6 +2200,10 @@
     "category": "Weather"
   },
   {
+    "name": "smog",
+    "category": "Weather"
+  },
+  {
     "name": "snowflake",
     "category": "Weather"
   },
@@ -2173,6 +2217,14 @@
   },
   {
     "name": "thermometer-half",
+    "category": "Weather"
+  },
+  {
+    "name": "thunderstorm-moon",
+    "category": "Weather"
+  },
+  {
+    "name": "thunderstorm-sun",
     "category": "Weather"
   },
   {
