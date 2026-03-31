@@ -3,7 +3,8 @@ import React, { useState } from 'react'
 import Body from '../../pb_body/_body'
 import SelectableCard from '../../pb_selectable_card/_selectable_card'
 import Title from '../../pb_title/_title'
-
+import Caption from '../../pb_caption/_caption'
+import Card from '../../pb_card/_card'
 const SelectableCardInput = (props) => {
   const [state, setState] = useState({
     firstCheckbox: true,
@@ -28,16 +29,14 @@ const SelectableCardInput = (props) => {
 
   return (
     <>
-      <Title
-          size={3}
-          text="What programming languages do you know?"
+      <Title text="PLAY-2880 CSB temporary doc example"/>
+      <Caption marginY="sm"
+          text="Input Variant Checkbox Examples - Light Mode"
           {...props}
       />
-
-      <br />
-
       <SelectableCard
           checked={state.firstCheckbox}
+          disabled
           inputId="firstCheckbox"
           name="firstCheckbox"
           onChange={handleSelect}
@@ -45,9 +44,8 @@ const SelectableCardInput = (props) => {
           variant="displayInput"
           {...props}
       >
-        <Body {...props}>{'Ruby'}</Body>
+        <Body {...props}>{"Disabled + checked"}</Body>
       </SelectableCard>
-
       <SelectableCard
           checked={state.secondCheckbox}
           inputId="secondCheckbox"
@@ -57,9 +55,8 @@ const SelectableCardInput = (props) => {
           variant="displayInput"
           {...props}
       >
-        <Body {...props}>{'JavaScript'}</Body>
+        <Body {...props}>{"Clickable + checked initially"}</Body>
       </SelectableCard>
-
       <SelectableCard
           checked={state.thirdCheckbox}
           inputId="thirdCheckbox"
@@ -69,11 +66,11 @@ const SelectableCardInput = (props) => {
           variant="displayInput"
           {...props}
       >
-        <Body {...props}>{'TypeScript'}</Body>
+        <Body {...props}>{"Clickable + unchecked initially"}</Body>
       </SelectableCard>
-
       <SelectableCard
           checked={state.fourthCheckbox}
+          disabled
           inputId="fourthCheckbox"
           name="fourthCheckbox"
           onChange={handleSelect}
@@ -81,21 +78,15 @@ const SelectableCardInput = (props) => {
           variant="displayInput"
           {...props}
       >
-        <Body {...props}>{'Swift'}</Body>
+        <Body {...props}>{"Disabled + unchecked"}</Body>
       </SelectableCard>
-
-      <br />
-
-      <Title
-          size={3}
-          text="How likely are you to recommend Playbook to a friend?"
+      <Caption marginY="sm"
+          text="Input Variant Radio Examples - Light Mode"
           {...props}
       />
-
-      <br />
-
       <SelectableCard
-          checked={state.radioSelected === 'first'}
+          checked={state.radioSelected === "first"}
+          disabled
           inputId="radio-1"
           multi={false}
           name="radio"
@@ -104,11 +95,10 @@ const SelectableCardInput = (props) => {
           variant="displayInput"
           {...props}
       >
-        <Body {...props}>{'5'}</Body>
+        <Body {...props}>{"Disabled + checked initially"}</Body>
       </SelectableCard>
-
       <SelectableCard
-          checked={state.radioSelected === 'second'}
+          checked={state.radioSelected === "second"}
           inputId="radio-2"
           multi={false}
           name="radio"
@@ -117,13 +107,10 @@ const SelectableCardInput = (props) => {
           variant="displayInput"
           {...props}
       >
-        <Body {...props}>
-          {'4'}
-        </Body>
+        <Body {...props}>{"Selectable"}</Body>
       </SelectableCard>
-
       <SelectableCard
-          checked={state.radioSelected === 'third'}
+          checked={state.radioSelected === "third"}
           inputId="radio-3"
           multi={false}
           name="radio"
@@ -132,11 +119,11 @@ const SelectableCardInput = (props) => {
           variant="displayInput"
           {...props}
       >
-        <Body {...props}>{'3'}</Body>
+        <Body {...props}>{"Selectable"}</Body>
       </SelectableCard>
-
       <SelectableCard
-          checked={state.radioSelected === 'fourth'}
+          checked={state.radioSelected === "fourth"}
+          disabled
           inputId="radio-4"
           multi={false}
           name="radio"
@@ -145,21 +132,124 @@ const SelectableCardInput = (props) => {
           variant="displayInput"
           {...props}
       >
-        <Body {...props}>{'2'}</Body>
+        <Body {...props}>{"Disabled + unchecked"}</Body>
       </SelectableCard>
-
+      <Card dark>
+      <Caption dark
+          marginY="sm"
+          text="Input Variant Checkbox Examples - Dark Mode"
+          {...props}
+      />
       <SelectableCard
-          checked={state.radioSelected === 'fifth'}
-          inputId="radio-5"
-          multi={false}
-          name="radio"
-          onChange={handleRadioSelect}
-          value="fifth"
+          checked={state.firstCheckbox}
+          dark
+          disabled
+          inputId="firstCheckbox"
+          name="firstCheckbox"
+          onChange={handleSelect}
+          value="firstCheckbox"
           variant="displayInput"
           {...props}
       >
-        <Body {...props}>{'1'}</Body>
+        <Body dark>{"Disabled + checked"}</Body>
       </SelectableCard>
+      <SelectableCard
+          checked={state.secondCheckbox}
+          dark
+          inputId="secondCheckbox"
+          name="secondCheckbox"
+          onChange={handleSelect}
+          value="secondCheckbox"
+          variant="displayInput"
+          {...props}
+      >
+        <Body dark>{"Clickable + checked initially"}</Body>
+      </SelectableCard>
+      <SelectableCard
+          checked={state.thirdCheckbox}
+          dark
+          inputId="thirdCheckbox"
+          name="thirdCheckbox"
+          onChange={handleSelect}
+          value="thirdCheckbox"
+          variant="displayInput"
+          {...props}
+      >
+        <Body dark>{"Clickable + unchecked initially"}</Body>
+      </SelectableCard>
+      <SelectableCard
+          checked={state.fourthCheckbox}
+          dark
+          disabled
+          inputId="fourthCheckbox"
+          name="fourthCheckbox"
+          onChange={handleSelect}
+          value="fourthCheckbox"
+          variant="displayInput"
+          {...props}
+      >
+        <Body dark>{"Disabled + unchecked"}</Body>
+      </SelectableCard>
+      <Caption dark
+          marginY="sm"
+          text="Input Variant Radio Examples - Dark Mode"
+          {...props}
+      />
+      <SelectableCard
+          checked={state.radioSelected === "first"}
+          dark
+          disabled
+          inputId="radio-1"
+          multi={false}
+          name="radio"
+          onChange={handleRadioSelect}
+          value="first"
+          variant="displayInput"
+          {...props}
+      >
+        <Body dark>{"Disabled + checked initially"}</Body>
+      </SelectableCard>
+      <SelectableCard
+          checked={state.radioSelected === "second"}
+          dark
+          inputId="radio-2"
+          multi={false}
+          name="radio"
+          onChange={handleRadioSelect}
+          value="second"
+          variant="displayInput"
+          {...props}
+      >
+        <Body dark>{"Selectable"}</Body>
+      </SelectableCard>
+      <SelectableCard
+          checked={state.radioSelected === "third"}
+          dark
+          inputId="radio-3"
+          multi={false}
+          name="radio"
+          onChange={handleRadioSelect}
+          value="third"
+          variant="displayInput"
+          {...props}
+      >
+        <Body dark>{"Selectable"}</Body>
+      </SelectableCard>
+      <SelectableCard
+          checked={state.radioSelected === "fourth"}
+          dark
+          disabled
+          inputId="radio-4"
+          multi={false}
+          name="radio"
+          onChange={handleRadioSelect}
+          value="fourth"
+          variant="displayInput"
+          {...props}
+      >
+        <Body dark>{"Disabled + unchecked"}</Body>
+      </SelectableCard>
+      </Card>
     </>
   )
 }
