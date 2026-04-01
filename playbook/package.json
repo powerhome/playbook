@@ -34,7 +34,9 @@
     "watch": "npx vite build --watch",
     "generate:tokens": "node scripts/generate-tokens.js",
     "generate:ai-metadata": "node scripts/generate-ai-metadata.mjs",
-    "generate:ai-metadata:dry-run": "node scripts/generate-ai-metadata.mjs --dry-run --verbose"
+    "generate:ai-metadata:dry-run": "node scripts/generate-ai-metadata.mjs --dry-run --verbose",
+    "generate:global-props-metadata": "node scripts/generate-global-props-metadata.mjs",
+    "generate:all-ai-metadata": "node scripts/generate-ai-metadata.mjs && node scripts/generate-global-props-metadata.mjs"
   },
   "repository": {
     "type": "git",
