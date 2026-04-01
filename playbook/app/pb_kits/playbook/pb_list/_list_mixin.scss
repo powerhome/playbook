@@ -21,14 +21,14 @@
       width: 20px;
       flex: 0 0 20px;
       text-align: left;
-      color: $text_lighter;
+      color: $text_lt_lighter;
       font-weight: $bold;
       margin-right: $space-sm;
     }
   }
 
   li {
-    border-bottom: 1px solid $input_border_default;
+    border-bottom: 1px solid $border_light;
     padding: $space-sm 0;
     display: flex;
     align-items: left;
@@ -69,14 +69,14 @@
 }
 @mixin pb_list_dark {
   color: $white;
-  border-bottom: 1px solid $input_border_default_dark;
+  border-bottom: 1px solid $border_dark;
 
   &:last-child {
     border-bottom: 0;
   }
 
   &:before {
-    color: $text_lighter_dark;
+    color: $text_dk_light;
   }
 }
 @mixin pb_list_large {

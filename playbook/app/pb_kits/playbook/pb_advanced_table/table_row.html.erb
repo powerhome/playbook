@@ -3,9 +3,11 @@
   button_color = row_style&.[](:expand_button_color)
   bg_color = row_style&.[](:background_color)
   font_color = row_style&.[](:font_color)
+  tr_options = (object.html_options || {}).stringify_keys
+  tr_options["class"] = [tr_options["class"], object.classname].reject(&:blank?).join(" ")
 %>
 
-<%= pb_content_tag(:tr) do %>
+<%= pb_content_tag(:tr, tr_options) do %>
     <% has_separate_checkbox = object.selectable_rows && object.enable_toggle_expansion == "none" %>
     <% if has_separate_checkbox %>
         <%= object.render_checkbox_cell %>

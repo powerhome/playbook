@@ -6,24 +6,21 @@ module Playbook
       base.prop :height
     end
 
-    def height_props
-      selected_props = height_options.keys.select { |sk| try(sk) }
-      return nil unless selected_props.present?
+    HEIGHT_VALUES = %w[auto xs sm md lg xl xxl xxxl].freeze
 
-      selected_props.map do |k|
-        height_value = send(k)
-        "height_#{height_value}" if height_values.include? height_value.to_s
-      end.compact.join(" ")
+    def height_props
+      value = height
+      return nil unless value
+
+      "height_#{value}" if HEIGHT_VALUES.include?(value.to_s)
     end
 
     def height_options
-      {
-        height: "height",
-      }
+      { height: "height" }
     end
 
     def height_values
-      %w[auto xs sm md lg xl xxl xxxl]
+      HEIGHT_VALUES
     end
   end
 end

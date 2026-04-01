@@ -173,6 +173,33 @@ describe('MultiLevelSelect', () => {
     expect(label).toHaveTextContent("Select Location")
     expect(label).not.toHaveTextContent("*")
   })
+
+  test('should use default placeholder when none is passed', () => {
+    render(
+      <MultiLevelSelect
+          data={{ testid: testId }}
+          id="mls-placeholder-default"
+          treeData={treeData}
+      />
+    )
+    expect(
+      screen.getByPlaceholderText('Start typing...')
+    ).toBeInTheDocument()
+  })
+
+  test('should use custom placeholder when passed', () => {
+    render(
+      <MultiLevelSelect
+          data={{ testid: testId }}
+          id="mls-placeholder-custom"
+          placeholder="Choose items…"
+          treeData={treeData}
+      />
+    )
+    expect(
+      screen.getByPlaceholderText('Choose items…')
+    ).toBeInTheDocument()
+  })
 })
 
 describe('MultiLevelSelect multi variant', () => {

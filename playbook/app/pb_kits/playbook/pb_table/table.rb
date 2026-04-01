@@ -46,6 +46,10 @@ module Playbook
       prop :filter_props, type: Playbook::Props::HashProp,
                           default: {}
       prop :filter_content
+      # Pre-rendered filter slot (e.g. output of capture { your_filter_helper }).
+      # When present, this is rendered as-is; filter_content and filter_props are ignored.
+      # Use this for manual filter submission or app-specific filter helpers.
+      prop :filter
       prop :pagination
       prop :title, type: Playbook::Props::String,
                    default: nil

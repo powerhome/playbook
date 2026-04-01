@@ -1,0 +1,109 @@
+<%
+  tree_base = [{
+      label: "Power Home Remodeling",
+      value: "powerHomeRemodeling",
+      id: "100",
+      expanded: true,
+      children: [
+        {
+          label: "People",
+          value: "people",
+          id: "101",
+          expanded: true,
+          children: [
+            {
+              label: "Talent Acquisition",
+              value: "talentAcquisition",
+              id: "102",
+            },
+            {
+              label: "Business Affairs",
+              value: "business Affairs",
+              id: "103",
+              children: [
+                {
+                  label: "Initiatives",
+                  value: "initiatives",
+                  id: "104",
+                },
+                {
+                  label: "Learning & Development",
+                  value: "learningAndDevelopment",
+                  id: "105",
+                },
+              ],
+            },
+            {
+              label: "People Experience",
+              value: "peopleExperience",
+              id: "106",
+            },
+          ],
+        },
+        {
+          label: "Contact Center",
+          value: "contactCenter",
+          id: "107",
+          children: [
+            {
+              label: "Appointment Management",
+              value: "appointmentManagement",
+              id: "108",
+            },
+            {
+              label: "Customer Service",
+              value: "customerService",
+              id: "109",
+            },
+            {
+              label: "Energy",
+              value: "energy",
+              id: "110",
+            },
+          ],
+        },
+      ],
+  }]
+
+  prefix_mls_ids = nil
+  prefix_mls_ids = ->(nodes, pfx) {
+    nodes.map do |n|
+      h = n.dup
+      h[:id] = "#{pfx}#{n[:id]}"
+      h[:children] = prefix_mls_ids.call(n[:children], pfx) if n[:children].present?
+      h
+    end
+  }
+
+  tree_multi = prefix_mls_ids.call(tree_base, "phm_")
+  tree_return_all = prefix_mls_ids.call(tree_base, "phr_")
+  tree_single = prefix_mls_ids.call(tree_base, "phs_")
+%>
+
+<%= pb_rails("multi_level_select", props: {
+  id: "multi-level-select-placeholder-multi-rails",
+  label: "Multi (default)",
+  margin_bottom: "sm",
+  name: "placeholder_multi",
+  tree_data: tree_multi,
+  placeholder: "Search or choose options…",
+}) %>
+
+<%= pb_rails("multi_level_select", props: {
+  id: "multi-level-select-placeholder-return-all-rails",
+  label: "Multi (return all selected)",
+  margin_bottom: "sm",
+  name: "placeholder_return_all",
+  placeholder: "Departments...",
+  return_all_selected: true,
+  tree_data: tree_return_all,
+}) %>
+
+<%= pb_rails("multi_level_select", props: {
+  id: "multi-level-select-placeholder-single-rails",
+  label: "Single",
+  name: "placeholder_single",
+  placeholder: "Select one option…",
+  tree_data: tree_single,
+  variant: "single",
+}) %>

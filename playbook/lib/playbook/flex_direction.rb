@@ -6,42 +6,31 @@ module Playbook
       base.prop :flex_direction
     end
 
-    # rubocop:disable Style/IfInsideElse
+    FLEX_DIRECTION_VALUES = %w[row column rowReverse columnReverse].freeze
+    SCREEN_SIZES = %w[xs sm md lg xl].freeze
+
     def flex_direction_props
-      selected_props = flex_direction_options.keys.select { |sk| try(sk) }
-      return nil unless selected_props.present?
+      value = flex_direction
+      return nil unless value
 
-      screen_size_values = %w[xs sm md lg xl]
-
-      selected_props.map do |k|
-        flex_direction_value = send(k)
-        if flex_direction_value.is_a?(Hash)
-          class_result = []
-
-          # Handle default value separately (generates base class without size prefix)
-          class_result << "flex_direction_#{flex_direction_value[:default].underscore}" if flex_direction_value.key?(:default) && flex_direction_values.include?(flex_direction_value[:default])
-
-          # Handle responsive sizes (generates classes with size prefix)
-          flex_direction_value.each do |media_size, flex_value|
-            class_result << "flex_direction_#{media_size}_#{flex_value.underscore}" if screen_size_values.include?(media_size.to_s) && flex_direction_values.include?(flex_value)
-          end
-
-          class_result
-        else
-          "flex_direction_#{flex_direction_value.underscore}" if flex_direction_values.include? flex_direction_value
+      if value.is_a?(::Hash)
+        css = +""
+        css << "flex_direction_#{value[:default].underscore} " if value.key?(:default) && FLEX_DIRECTION_VALUES.include?(value[:default])
+        value.each do |media_size, flex_value|
+          css << "flex_direction_#{media_size}_#{flex_value.underscore} " if SCREEN_SIZES.include?(media_size.to_s) && FLEX_DIRECTION_VALUES.include?(flex_value)
         end
-      end.flatten.compact.join(" ")
+        css.strip unless css.empty?
+      elsif FLEX_DIRECTION_VALUES.include?(value)
+        "flex_direction_#{value.underscore}"
+      end
     end
-    # rubocop:enable Style/IfInsideElse
 
     def flex_direction_options
-      {
-        flex_direction: "flex_direction",
-      }
+      { flex_direction: "flex_direction" }
     end
 
     def flex_direction_values
-      %w[row column rowReverse columnReverse]
+      FLEX_DIRECTION_VALUES
     end
   end
 end

@@ -10,6 +10,7 @@ This release tunes up React-rendered Rails kits and Enhanced Elements so everyth
 **Improvements:**
 
 - Popover Kit: Added Placement and Position Popover Docs [\#5936](https://github.com/powerhome/playbook/pull/5936) ([elisashapiro](https://github.com/elisashapiro))
+- Rich Text Editor: Make Trix an Optional Dependency in Playbook [\#5796](https://github.com/powerhome/playbook/pull/5796) ([nidaqg](https://github.com/nidaqg))
 
 
 **Kit Enhancements:**

@@ -12,35 +12,16 @@ const DialogDefault = () => {
     <>
       <Button onClick={open}>{'Open Dialog'}</Button>
       <Dialog
+          cancelButton="Cancel Button"
+          confirmButton="Okay"
           onCancel={close}
           onClose={close}
           onConfirm={close}
           opened={isOpen}
-          size="md"
+          size="sm"
+          text="Hello Body Text, Nice to meet ya."
           title="Header Title is the Title Prop"
-      >
-        <Dialog.Body>
-            <Button
-                aria={{ label: 'Loading' }}
-                loading
-                text="Button Primary"
-            />
-            <div style={{height: '800px', backgroundColor: 'lightgray'}} />
-            <Button
-                loading
-                text="Loading..."
-            />
-          </Dialog.Body>
-          <Dialog.Footer>
-            <Button
-                loading
-                text="Send My Issue"
-            />
-            <Button  variant="link">
-              {"Back"}
-            </Button>
-          </Dialog.Footer>
-        </Dialog>
+      />
     </>
   )
 }
