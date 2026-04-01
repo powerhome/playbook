@@ -1,0 +1,106 @@
+{
+  "$schema": "https://playbook.powerapp.cloud/schemas/kit-schema.json",
+  "name": "Title",
+  "description": "Typically used as headers. Follow semantic hierarchy — Title 1s should",
+  "platforms": [
+    "react",
+    "rails"
+  ],
+  "props": {
+    "bold": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": true
+    },
+    "color": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "default",
+        "light",
+        "lighter",
+        "success",
+        "error",
+        "link"
+      ],
+      "default": null
+    },
+    "size": {
+      "type": "SizeType | SizeResponsiveType",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": 3
+    },
+    "displaySize": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "xs",
+        "sm",
+        "md",
+        "lg",
+        "xl",
+        "xxl"
+      ],
+      "default": null
+    },
+    "tag": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "h1",
+        "h2",
+        "h3",
+        "h4",
+        "h5",
+        "h6",
+        "div",
+        "span"
+      ],
+      "default": "h3"
+    },
+    "text": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "variant": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "link"
+      ],
+      "default": null
+    }
+  },
+  "globalProps": true,
+  "usage": {
+    "react": {
+      "import": "import { Title } from 'playbook-ui'",
+      "example": "<Title color=\"default\" displaySize=\"xs\"></Title>"
+    },
+    "rails": {
+      "import": null,
+      "example": "<%= pb_rails(\"title\", props: { color: \"default\", display_size: \"xs\" }) %>"
+    }
+  }
+}

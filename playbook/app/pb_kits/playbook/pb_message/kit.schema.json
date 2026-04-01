@@ -1,0 +1,104 @@
+{
+  "$schema": "https://playbook.powerapp.cloud/schemas/kit-schema.json",
+  "name": "Message",
+  "description": "This multi kit consist of a an avatar, a status, a caption, a body",
+  "platforms": [
+    "react",
+    "rails"
+  ],
+  "props": {
+    "avatarGrayscale": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "avatarName": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "avatarStatus": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "away",
+        "offline",
+        "online"
+      ]
+    },
+    "avatarUrl": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "label": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "message": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "timestamp": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "timestampObject": {
+      "type": "Date",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "timezone": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": "America/New_York"
+    },
+    "alignTimestamp": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "left",
+        "right"
+      ],
+      "default": "right"
+    }
+  },
+  "globalProps": true,
+  "usage": {
+    "react": {
+      "import": "import { Message } from 'playbook-ui'",
+      "example": "<Message avatarStatus=\"away\" alignTimestamp=\"left\"></Message>"
+    },
+    "rails": {
+      "import": null,
+      "example": "<%= pb_rails(\"message\", props: { avatar_status: \"away\", align_timestamp: \"left\" }) %>"
+    }
+  }
+}

@@ -1,0 +1,147 @@
+{
+  "$schema": "https://playbook.powerapp.cloud/schemas/kit-schema.json",
+  "name": "User",
+  "description": "This kit was created for having a systematic way of displaying users",
+  "platforms": [
+    "react",
+    "rails"
+  ],
+  "props": {
+    "align": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "left",
+        "center",
+        "right"
+      ],
+      "default": "left"
+    },
+    "avatar": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "avatarUrl": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "bold": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": true
+    },
+    "avatarGrayscale": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "name": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "nameStyle": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "title",
+        "body",
+        "caption",
+        "detail"
+      ],
+      "default": "title"
+    },
+    "orientation": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "horizontal",
+        "vertical"
+      ],
+      "default": "horizontal"
+    },
+    "size": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "sm",
+        "md",
+        "lg"
+      ],
+      "default": "sm"
+    },
+    "subtitle": {
+      "type": "string | Array<Node> | Node",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "territory": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "title": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "titleStyle": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "title",
+        "body",
+        "caption",
+        "detail"
+      ],
+      "default": "body"
+    }
+  },
+  "globalProps": true,
+  "usage": {
+    "react": {
+      "import": "import { User } from 'playbook-ui'",
+      "example": "<User align=\"left\" nameStyle=\"title\"></User>"
+    },
+    "rails": {
+      "import": null,
+      "example": "<%= pb_rails(\"user\", props: { align: \"left\", name_style: \"title\" }) %>"
+    }
+  }
+}

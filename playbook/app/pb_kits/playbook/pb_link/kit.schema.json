@@ -1,0 +1,118 @@
+{
+  "$schema": "https://playbook.powerapp.cloud/schemas/kit-schema.json",
+  "name": "Link",
+  "description": "Text link for navigation to other pages or sections.",
+  "platforms": [
+    "react",
+    "rails"
+  ],
+  "props": {
+    "color": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "default",
+        "body",
+        "muted",
+        "destructive"
+      ],
+      "default": "default"
+    },
+    "disabled": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "href": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "icon": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "iconRight": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "tabIndex": {
+      "type": "number",
+      "platforms": [
+        "react"
+      ]
+    },
+    "tag": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "a",
+        "h1",
+        "h2",
+        "h3",
+        "h4",
+        "h5",
+        "h6",
+        "p",
+        "span",
+        "div"
+      ],
+      "default": "a"
+    },
+    "target": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "text": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "underline": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "tabindex": {
+      "platforms": [
+        "rails"
+      ]
+    }
+  },
+  "globalProps": true,
+  "usage": {
+    "react": {
+      "import": "import { Link } from 'playbook-ui'",
+      "example": "<Link color=\"default\" tag=\"a\"></Link>"
+    },
+    "rails": {
+      "import": null,
+      "example": "<%= pb_rails(\"link\", props: { color: \"default\", tag: \"a\" }) %>"
+    }
+  }
+}

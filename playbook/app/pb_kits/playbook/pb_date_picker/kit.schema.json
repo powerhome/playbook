@@ -1,0 +1,375 @@
+{
+  "$schema": "https://playbook.powerapp.cloud/schemas/kit-schema.json",
+  "name": "DatePicker",
+  "description": "Playbook's date picker is built using flatpickr, a vanilla js library.",
+  "platforms": [
+    "react",
+    "rails"
+  ],
+  "props": {
+    "allowInput": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "customQuickPickDates": {
+      "type": "object",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "defaultDate": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": ""
+    },
+    "disableDate": {
+      "type": "array",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "disableInput": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "disableRange": {
+      "type": "array",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "disableWeekdays": {
+      "type": "array",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "enableTime": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "error": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "format": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": "m/d/Y"
+    },
+    "hideIcon": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "hideLabel": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "initializeOnce": {
+      "type": "boolean",
+      "platforms": [
+        "react"
+      ]
+    },
+    "inLine": {
+      "type": "boolean",
+      "platforms": [
+        "react"
+      ]
+    },
+    "inputAria": {
+      "type": "object",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "inputData": {
+      "type": "object",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "inputOnChange": {
+      "type": "ReactNode",
+      "platforms": [
+        "react"
+      ]
+    },
+    "inputValue": {
+      "type": "string",
+      "platforms": [
+        "react"
+      ]
+    },
+    "label": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": "Date Picker"
+    },
+    "maxDate": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "minDate": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "name": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "pickerId": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "placeholder": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": "Select Date"
+    },
+    "positionElement": {
+      "type": "HTMLElement | null",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "requiredIndicator": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "scrollContainer": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "selectionType": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "month",
+        "week",
+        "quickpick"
+      ],
+      "default": "none"
+    },
+    "showTimezone": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "staticPosition": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": true
+    },
+    "thisRangesEndToday": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "timeFormat": {
+      "type": "string",
+      "platforms": [
+        "react"
+      ]
+    },
+    "type": {
+      "type": "string",
+      "platforms": [
+        "react"
+      ]
+    },
+    "yearRange": {
+      "type": "array",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "controlsStartId": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": ""
+    },
+    "controlsEndId": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": ""
+    },
+    "syncStartWith": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": ""
+    },
+    "syncEndWith": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": ""
+    },
+    "endDateId": {
+      "platforms": [
+        "rails"
+      ],
+      "type": "string",
+      "default": "end_date_id"
+    },
+    "endDateName": {
+      "platforms": [
+        "rails"
+      ],
+      "type": "string",
+      "default": "end_date_name"
+    },
+    "inline": {
+      "platforms": [
+        "rails"
+      ],
+      "type": "boolean",
+      "default": false
+    },
+    "mode": {
+      "platforms": [
+        "rails"
+      ],
+      "type": "string",
+      "default": "single"
+    },
+    "plugins": {
+      "platforms": [
+        "rails"
+      ],
+      "type": "boolean",
+      "default": false
+    },
+    "startDateId": {
+      "platforms": [
+        "rails"
+      ],
+      "type": "string",
+      "default": "start_date_id"
+    },
+    "startDateName": {
+      "platforms": [
+        "rails"
+      ],
+      "type": "string",
+      "default": "start_date_name"
+    },
+    "required": {
+      "platforms": [
+        "rails"
+      ],
+      "type": "boolean",
+      "default": false
+    },
+    "customEventType": {
+      "platforms": [
+        "rails"
+      ],
+      "type": "string",
+      "default": ""
+    },
+    "validationMessage": {
+      "platforms": [
+        "rails"
+      ],
+      "type": "string",
+      "default": ""
+    }
+  },
+  "globalProps": true,
+  "usage": {
+    "react": {
+      "import": "import { DatePicker } from 'playbook-ui'",
+      "example": "<DatePicker selectionType=\"month\"></DatePicker>"
+    },
+    "rails": {
+      "import": null,
+      "example": "<%= pb_rails(\"date_picker\", props: { selection_type: \"month\" }) %>"
+    }
+  }
+}

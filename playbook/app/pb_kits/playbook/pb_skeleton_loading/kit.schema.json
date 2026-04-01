@@ -1,0 +1,42 @@
+{
+  "$schema": "https://playbook.powerapp.cloud/schemas/kit-schema.json",
+  "name": "SkeletonLoading",
+  "description": "SkeletonLoading component",
+  "platforms": [
+    "react",
+    "rails"
+  ],
+  "props": {
+    "stack": {
+      "type": "number",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": 1
+    },
+    "color": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "default",
+        "white"
+      ],
+      "default": "default"
+    }
+  },
+  "globalProps": true,
+  "usage": {
+    "react": {
+      "import": "import { SkeletonLoading } from 'playbook-ui'",
+      "example": "<SkeletonLoading color=\"default\"></SkeletonLoading>"
+    },
+    "rails": {
+      "import": null,
+      "example": "<%= pb_rails(\"skeleton_loading\", props: { color: \"default\" }) %>"
+    }
+  }
+}

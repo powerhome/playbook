@@ -1,0 +1,168 @@
+{
+  "$schema": "https://playbook.powerapp.cloud/schemas/kit-schema.json",
+  "name": "Card",
+  "description": "Content container with optional header, body sections, and various styling options.",
+  "platforms": [
+    "react",
+    "rails"
+  ],
+  "props": {
+    "background": {
+      "type": "BackgroundColors | ProductColors | \"none\"",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "white",
+        "light",
+        "dark",
+        "product_1_background",
+        "product_1_highlight",
+        "product_2_background",
+        "product_2_highlight",
+        "product_3_background",
+        "product_3_highlight",
+        "product_4_background",
+        "product_4_highlight",
+        "product_5_background",
+        "product_5_highlight",
+        "product_6_background",
+        "product_6_highlight",
+        "product_7_background",
+        "product_7_highlight",
+        "product_8_background",
+        "product_8_highlight",
+        "product_9_background",
+        "product_9_highlight",
+        "product_10_background",
+        "product_10_highlight",
+        "windows",
+        "siding",
+        "doors",
+        "solar",
+        "roofing",
+        "gutters",
+        "insulation",
+        "none",
+        "success_subtle",
+        "warning_subtle",
+        "error_subtle",
+        "info_subtle",
+        "neutral_subtle"
+      ],
+      "default": "none"
+    },
+    "borderNone": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "dragId": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "draggableItem": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "dragHandle": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": true
+    },
+    "length": {
+      "type": "number",
+      "platforms": [
+        "react"
+      ]
+    },
+    "selected": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "tag": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "div",
+        "section",
+        "footer",
+        "header",
+        "article",
+        "aside",
+        "main",
+        "nav"
+      ],
+      "default": "div"
+    },
+    "headerColor": {
+      "type": "BackgroundColors | ProductColors | CategoryColors | StatusColors | \"none\"",
+      "platforms": [
+        "react"
+      ],
+      "default": "category_1"
+    },
+    "headerColorStriped": {
+      "type": "boolean",
+      "platforms": [
+        "react"
+      ],
+      "default": false
+    },
+    "highlight": {
+      "platforms": [
+        "rails"
+      ],
+      "type": "string"
+    },
+    "items": {
+      "platforms": [
+        "rails"
+      ],
+      "type": "array"
+    },
+    "dropZoneLineColor": {
+      "platforms": [
+        "rails"
+      ],
+      "type": "enum",
+      "values": [
+        "primary",
+        "purple"
+      ],
+      "default": null
+    }
+  },
+  "globalProps": true,
+  "usage": {
+    "react": {
+      "import": "import { Card } from 'playbook-ui'",
+      "example": "<Card background=\"white\" tag=\"div\"></Card>"
+    },
+    "rails": {
+      "import": null,
+      "example": "<%= pb_rails(\"card\", props: { background: \"white\", tag: \"div\" }) %>"
+    }
+  }
+}

@@ -1,0 +1,86 @@
+{
+  "$schema": "https://playbook.powerapp.cloud/schemas/kit-schema.json",
+  "name": "Avatar",
+  "description": "Avatar displays a user's picture. This helps aid easy recognition",
+  "platforms": [
+    "react",
+    "rails"
+  ],
+  "props": {
+    "grayscale": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "imageAlt": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": ""
+    },
+    "imageUrl": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "name": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": ""
+    },
+    "size": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "md",
+        "lg",
+        "sm",
+        "xl",
+        "xs",
+        "xxs"
+      ],
+      "default": "md"
+    },
+    "status": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "away",
+        "offline",
+        "online"
+      ]
+    },
+    "componentOverlay": {
+      "platforms": [
+        "rails"
+      ]
+    }
+  },
+  "globalProps": true,
+  "usage": {
+    "react": {
+      "import": "import { Avatar } from 'playbook-ui'",
+      "example": "<Avatar size=\"md\" status=\"away\"></Avatar>"
+    },
+    "rails": {
+      "import": null,
+      "example": "<%= pb_rails(\"avatar\", props: { size: \"md\", status: \"away\" }) %>"
+    }
+  }
+}

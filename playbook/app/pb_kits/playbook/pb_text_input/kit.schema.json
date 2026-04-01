@@ -1,0 +1,155 @@
+{
+  "$schema": "https://playbook.powerapp.cloud/schemas/kit-schema.json",
+  "name": "TextInput",
+  "description": "Area where user can enter small amount of text. Commonly used in",
+  "platforms": [
+    "react",
+    "rails"
+  ],
+  "props": {
+    "disabled": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "emojiMask": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "error": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "inline": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "name": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "label": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "mask": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "currency",
+        "zipCode",
+        "postalCode",
+        "ssn"
+      ],
+      "default": null
+    },
+    "onChange": {
+      "type": "ReactNode",
+      "platforms": [
+        "react"
+      ]
+    },
+    "placeholder": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "required": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "requiredIndicator": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "type": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": "text"
+    },
+    "value": {
+      "type": "string | number",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "autoComplete": {
+      "type": "boolean | string",
+      "platforms": [
+        "react"
+      ]
+    },
+    "autocomplete": {
+      "platforms": [
+        "rails"
+      ],
+      "default": true
+    },
+    "inputOptions": {
+      "platforms": [
+        "rails"
+      ],
+      "type": "string"
+    },
+    "validation": {
+      "platforms": [
+        "rails"
+      ],
+      "type": "string"
+    },
+    "addOn": {
+      "platforms": [
+        "rails"
+      ],
+      "type": "string"
+    }
+  },
+  "globalProps": true,
+  "usage": {
+    "react": {
+      "import": "import { TextInput } from 'playbook-ui'",
+      "example": "<TextInput mask=\"currency\"></TextInput>"
+    },
+    "rails": {
+      "import": null,
+      "example": "<%= pb_rails(\"text_input\", props: { mask: \"currency\" }) %>"
+    }
+  }
+}

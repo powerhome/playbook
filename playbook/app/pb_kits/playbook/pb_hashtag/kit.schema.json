@@ -1,0 +1,71 @@
+{
+  "$schema": "https://playbook.powerapp.cloud/schemas/kit-schema.json",
+  "name": "Hashtag",
+  "description": "Hashtag is used to display home, project and other forms of IDs.",
+  "platforms": [
+    "react",
+    "rails"
+  ],
+  "props": {
+    "newWindow": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "rel": {
+      "type": "string",
+      "platforms": [
+        "react"
+      ]
+    },
+    "target": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "text": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "type": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "default",
+        "home",
+        "project",
+        "appointment"
+      ],
+      "default": "default"
+    },
+    "url": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    }
+  },
+  "globalProps": true,
+  "usage": {
+    "react": {
+      "import": "import { Hashtag } from 'playbook-ui'",
+      "example": "<Hashtag type=\"default\"></Hashtag>"
+    },
+    "rails": {
+      "import": null,
+      "example": "<%= pb_rails(\"hashtag\", props: { type: \"default\" }) %>"
+    }
+  }
+}

@@ -1,0 +1,91 @@
+{
+  "$schema": "https://playbook.powerapp.cloud/schemas/kit-schema.json",
+  "name": "Caption",
+  "description": "Use to provide supplementary context. Default size is best when providing",
+  "platforms": [
+    "react",
+    "rails"
+  ],
+  "props": {
+    "color": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "default",
+        "light",
+        "lighter",
+        "success",
+        "error",
+        "link"
+      ],
+      "default": null
+    },
+    "size": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "xs",
+        "sm",
+        "md",
+        "lg",
+        "xl"
+      ],
+      "default": "md"
+    },
+    "tag": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "h1",
+        "h2",
+        "h3",
+        "h4",
+        "h5",
+        "h6",
+        "p",
+        "span",
+        "div",
+        "caption"
+      ],
+      "default": "div"
+    },
+    "text": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "variant": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "link"
+      ],
+      "default": null
+    }
+  },
+  "globalProps": true,
+  "usage": {
+    "react": {
+      "import": "import { Caption } from 'playbook-ui'",
+      "example": "<Caption color=\"default\" size=\"xs\"></Caption>"
+    },
+    "rails": {
+      "import": null,
+      "example": "<%= pb_rails(\"caption\", props: { color: \"default\", size: \"xs\" }) %>"
+    }
+  }
+}

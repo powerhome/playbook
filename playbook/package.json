@@ -32,7 +32,9 @@
     "test-coverage-summary": "jest --collectCoverage --coverageReporters=\"json-summary\"",
     "release": "rm -rf dist; npx vite build",
     "watch": "npx vite build --watch",
-    "generate:tokens": "node scripts/generate-tokens.js"
+    "generate:tokens": "node scripts/generate-tokens.js",
+    "generate:ai-metadata": "node scripts/generate-ai-metadata.mjs",
+    "generate:ai-metadata:dry-run": "node scripts/generate-ai-metadata.mjs --dry-run --verbose"
   },
   "repository": {
     "type": "git",

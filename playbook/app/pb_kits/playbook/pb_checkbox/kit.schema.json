@@ -1,0 +1,143 @@
+{
+  "$schema": "https://playbook.powerapp.cloud/schemas/kit-schema.json",
+  "name": "Checkbox",
+  "description": "Checkbox is used for a list of selections that are meant to have",
+  "platforms": [
+    "react",
+    "rails"
+  ],
+  "props": {
+    "checked": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "disabled": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "error": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "indeterminate": {
+      "type": "boolean",
+      "platforms": [
+        "react"
+      ]
+    },
+    "name": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "onChange": {
+      "type": "ReactNode",
+      "platforms": [
+        "react"
+      ]
+    },
+    "requiredIndicator": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "tabIndex": {
+      "type": "number",
+      "platforms": [
+        "react"
+      ]
+    },
+    "text": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "value": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "indeterminateMain": {
+      "platforms": [
+        "rails"
+      ],
+      "type": "boolean",
+      "default": false
+    },
+    "indeterminateMainLabels": {
+      "platforms": [
+        "rails"
+      ],
+      "type": "array"
+    },
+    "indeterminateParent": {
+      "platforms": [
+        "rails"
+      ]
+    },
+    "inputOptions": {
+      "platforms": [
+        "rails"
+      ],
+      "type": "string"
+    },
+    "required": {
+      "platforms": [
+        "rails"
+      ],
+      "type": "boolean",
+      "default": false
+    },
+    "formSpacing": {
+      "platforms": [
+        "rails"
+      ],
+      "type": "boolean",
+      "default": false
+    },
+    "hiddenInput": {
+      "platforms": [
+        "rails"
+      ],
+      "type": "boolean",
+      "default": false
+    },
+    "hiddenValue": {
+      "platforms": [
+        "rails"
+      ]
+    }
+  },
+  "globalProps": true,
+  "usage": {
+    "react": {
+      "import": "import { Checkbox } from 'playbook-ui'",
+      "example": "<Checkbox></Checkbox>"
+    },
+    "rails": {
+      "import": null,
+      "example": "<%= pb_rails(\"checkbox\", props: { text: \"Example\" }) %>"
+    }
+  }
+}

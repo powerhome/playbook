@@ -1,0 +1,49 @@
+{
+  "$schema": "https://playbook.powerapp.cloud/schemas/kit-schema.json",
+  "name": "StatChange",
+  "description": "Displays the increase, decrease, or neutral change in data.",
+  "platforms": [
+    "react",
+    "rails"
+  ],
+  "props": {
+    "change": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "increase",
+        "decrease",
+        "neutral"
+      ],
+      "default": "neutral"
+    },
+    "icon": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "value": {
+      "type": "string | number",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    }
+  },
+  "globalProps": true,
+  "usage": {
+    "react": {
+      "import": "import { StatChange } from 'playbook-ui'",
+      "example": "<StatChange change=\"increase\"></StatChange>"
+    },
+    "rails": {
+      "import": null,
+      "example": "<%= pb_rails(\"stat_change\", props: { change: \"increase\" }) %>"
+    }
+  }
+}

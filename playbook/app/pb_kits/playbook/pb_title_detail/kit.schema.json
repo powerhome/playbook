@@ -1,0 +1,49 @@
+{
+  "$schema": "https://playbook.powerapp.cloud/schemas/kit-schema.json",
+  "name": "TitleDetail",
+  "description": "This kit can be used in many versatile ways. It consist of a title",
+  "platforms": [
+    "react",
+    "rails"
+  ],
+  "props": {
+    "align": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "left",
+        "center",
+        "right"
+      ],
+      "default": "left"
+    },
+    "detail": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "title": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    }
+  },
+  "globalProps": true,
+  "usage": {
+    "react": {
+      "import": "import { TitleDetail } from 'playbook-ui'",
+      "example": "<TitleDetail align=\"left\"></TitleDetail>"
+    },
+    "rails": {
+      "import": null,
+      "example": "<%= pb_rails(\"title_detail\", props: { align: \"left\" }) %>"
+    }
+  }
+}

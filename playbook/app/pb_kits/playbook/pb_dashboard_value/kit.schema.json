@@ -1,0 +1,54 @@
+{
+  "$schema": "https://playbook.powerapp.cloud/schemas/kit-schema.json",
+  "name": "DashboardValue",
+  "description": "Use in dashboards to give the viewer a quick overview of important",
+  "platforms": [
+    "react",
+    "rails"
+  ],
+  "props": {
+    "align": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "left",
+        "center",
+        "right"
+      ],
+      "default": "left"
+    },
+    "statLabel": {
+      "type": "string statValue?: { unit?: string value?: string | number",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "statChange": {
+      "platforms": [
+        "rails"
+      ],
+      "type": "string"
+    },
+    "statValue": {
+      "platforms": [
+        "rails"
+      ],
+      "type": "string"
+    }
+  },
+  "globalProps": true,
+  "usage": {
+    "react": {
+      "import": "import { DashboardValue } from 'playbook-ui'",
+      "example": "<DashboardValue align=\"left\"></DashboardValue>"
+    },
+    "rails": {
+      "import": null,
+      "example": "<%= pb_rails(\"dashboard_value\", props: { align: \"left\" }) %>"
+    }
+  }
+}

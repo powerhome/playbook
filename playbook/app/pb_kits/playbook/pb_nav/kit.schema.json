@@ -1,0 +1,104 @@
+{
+  "$schema": "https://playbook.powerapp.cloud/schemas/kit-schema.json",
+  "name": "Nav",
+  "description": "The nav is a grouped set of links that take the user to another page,",
+  "platforms": [
+    "react",
+    "rails"
+  ],
+  "props": {
+    "borderless": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "extendedUnderline": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "highlight": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": true
+    },
+    "onClick": {
+      "type": "function",
+      "platforms": [
+        "react"
+      ]
+    },
+    "orientation": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "vertical",
+        "horizontal"
+      ],
+      "default": "vertical"
+    },
+    "link": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": "#"
+    },
+    "title": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "variant": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "normal",
+        "subtle"
+      ],
+      "default": "normal"
+    },
+    "itemSpacing": {
+      "type": "SpacingObject",
+      "platforms": [
+        "react"
+      ]
+    },
+    "tabbing": {
+      "platforms": [
+        "rails"
+      ],
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "globalProps": true,
+  "usage": {
+    "react": {
+      "import": "import { Nav } from 'playbook-ui'",
+      "example": "<Nav orientation=\"vertical\" variant=\"normal\"></Nav>"
+    },
+    "rails": {
+      "import": null,
+      "example": "<%= pb_rails(\"nav\", props: { orientation: \"vertical\", variant: \"normal\" }) %>"
+    }
+  }
+}

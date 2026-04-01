@@ -1,0 +1,87 @@
+{
+  "$schema": "https://playbook.powerapp.cloud/schemas/kit-schema.json",
+  "name": "Filter",
+  "description": "This kit can be implemented in a variety of ways. To see examples",
+  "platforms": [
+    "react",
+    "rails"
+  ],
+  "props": {
+    "filters": {
+      "platforms": [
+        "rails"
+      ],
+      "type": "array"
+    },
+    "sortMenu": {
+      "platforms": [
+        "rails"
+      ],
+      "type": "array"
+    },
+    "results": {
+      "platforms": [
+        "rails"
+      ],
+      "type": "string"
+    },
+    "template": {
+      "platforms": [
+        "rails"
+      ],
+      "type": "enum",
+      "values": [
+        "default",
+        "single",
+        "filter_only",
+        "sort_only"
+      ],
+      "default": "default"
+    },
+    "background": {
+      "platforms": [
+        "rails"
+      ],
+      "type": "boolean",
+      "default": true
+    },
+    "placement": {
+      "platforms": [
+        "rails"
+      ],
+      "type": "enum",
+      "values": [
+        "top",
+        "bottom",
+        "left",
+        "right",
+        "top-start",
+        "top-end",
+        "bottom-start",
+        "bottom-end",
+        "right-start",
+        "right-end",
+        "left-start",
+        "left-end"
+      ],
+      "default": "bottom-start"
+    },
+    "popoverProps": {
+      "platforms": [
+        "rails"
+      ],
+      "type": "string"
+    }
+  },
+  "globalProps": true,
+  "usage": {
+    "react": {
+      "import": "import { Filter } from 'playbook-ui'",
+      "example": "<Filter template=\"default\" placement=\"top\"></Filter>"
+    },
+    "rails": {
+      "import": null,
+      "example": "<%= pb_rails(\"filter\", props: { template: \"default\", placement: \"top\" }) %>"
+    }
+  }
+}

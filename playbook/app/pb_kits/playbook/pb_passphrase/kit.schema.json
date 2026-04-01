@@ -1,0 +1,94 @@
+{
+  "$schema": "https://playbook.powerapp.cloud/schemas/kit-schema.json",
+  "name": "Passphrase",
+  "description": "Secure password input with strength indicator and show/hide toggle.",
+  "platforms": [
+    "react",
+    "rails"
+  ],
+  "props": {
+    "confirmation": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "inputProps": {
+      "type": "GenericObject",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "label": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "onChange": {
+      "type": "function",
+      "platforms": [
+        "react"
+      ]
+    },
+    "requiredIndicator": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "showTipsBelow": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "always",
+        "xs",
+        "sm",
+        "md",
+        "lg",
+        "xl"
+      ],
+      "default": "always"
+    },
+    "tips": {
+      "type": "array",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "uncontrolled": {
+      "type": "boolean",
+      "platforms": [
+        "react"
+      ]
+    },
+    "value": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    }
+  },
+  "globalProps": true,
+  "usage": {
+    "react": {
+      "import": "import { Passphrase } from 'playbook-ui'",
+      "example": "<Passphrase showTipsBelow=\"always\"></Passphrase>"
+    },
+    "rails": {
+      "import": null,
+      "example": "<%= pb_rails(\"passphrase\", props: { show_tips_below: \"always\" }) %>"
+    }
+  }
+}

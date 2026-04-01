@@ -1,0 +1,59 @@
+{
+  "$schema": "https://playbook.powerapp.cloud/schemas/kit-schema.json",
+  "name": "Contact",
+  "description": "Use to display customer's or user's contact information.",
+  "platforms": [
+    "react",
+    "rails"
+  ],
+  "props": {
+    "contactDetail": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "contactType": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "contactValue": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "iconEnabled": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": true
+    },
+    "unstyled": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    }
+  },
+  "globalProps": true,
+  "usage": {
+    "react": {
+      "import": "import { Contact } from 'playbook-ui'",
+      "example": "<Contact></Contact>"
+    },
+    "rails": {
+      "import": null,
+      "example": "<%= pb_rails(\"contact\", props: { text: \"Example\" }) %>"
+    }
+  }
+}

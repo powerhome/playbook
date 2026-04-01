@@ -1,0 +1,190 @@
+{
+  "$schema": "https://playbook.powerapp.cloud/schemas/kit-schema.json",
+  "name": "MultiLevelSelect",
+  "description": "The MultiLevelSelect kit renders a multi leveled select dropdown",
+  "platforms": [
+    "react",
+    "rails"
+  ],
+  "props": {
+    "disabled": {
+      "type": "boolean;",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "error": {
+      "type": "string;",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": ""
+    },
+    "inputDisplay": {
+      "type": "\"pills\" | \"none\";",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "pills",
+        "none"
+      ],
+      "default": "pills"
+    },
+    "inputName": {
+      "type": "string;",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": ""
+    },
+    "label": {
+      "type": "string;",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": ""
+    },
+    "name": {
+      "type": "string;",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "required": {
+      "type": "boolean;",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "requiredIndicator": {
+      "type": "boolean;",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "returnAllSelected": {
+      "type": "boolean;",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "showCheckedChildren": {
+      "type": "boolean;",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": true
+    },
+    "treeData": {
+      "type": "{ [key: string]: string }[] | any;",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "onChange": {
+      "type": "function",
+      "platforms": [
+        "react"
+      ]
+    },
+    "onSelect": {
+      "type": "function",
+      "platforms": [
+        "react"
+      ]
+    },
+    "placeholder": {
+      "type": "string;",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": "Start typing..."
+    },
+    "selectedIds": {
+      "type": "string[] | any;",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "variant": {
+      "type": "\"multi\" | \"single\";",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "multi",
+        "single"
+      ],
+      "default": "multi"
+    },
+    "wrapped": {
+      "type": "boolean;",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "pillColor": {
+      "platforms": [
+        "rails"
+      ],
+      "type": "enum",
+      "values": [
+        "primary",
+        "neutral",
+        "success",
+        "warning",
+        "error",
+        "info",
+        "data_1",
+        "data_2",
+        "data_3",
+        "data_4",
+        "data_5",
+        "data_6",
+        "data_7",
+        "data_8",
+        "windows",
+        "siding",
+        "roofing",
+        "doors",
+        "gutters",
+        "solar",
+        "insulation",
+        "accessories"
+      ],
+      "default": "primary"
+    }
+  },
+  "globalProps": true,
+  "usage": {
+    "react": {
+      "import": "import { MultiLevelSelect } from 'playbook-ui'",
+      "example": "<MultiLevelSelect inputDisplay=\"pills\" variant=\"multi\"></MultiLevelSelect>"
+    },
+    "rails": {
+      "import": null,
+      "example": "<%= pb_rails(\"multi_level_select\", props: { input_display: \"pills\", variant: \"multi\" }) %>"
+    }
+  }
+}

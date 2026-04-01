@@ -1,0 +1,43 @@
+{
+  "$schema": "https://playbook.powerapp.cloud/schemas/kit-schema.json",
+  "name": "PersonContact",
+  "description": "This kit can be used to display a person contact information.",
+  "platforms": [
+    "react",
+    "rails"
+  ],
+  "props": {
+    "firstName": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "lastName": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "contacts": {
+      "type": "array",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    }
+  },
+  "globalProps": true,
+  "usage": {
+    "react": {
+      "import": "import { PersonContact } from 'playbook-ui'",
+      "example": "<PersonContact></PersonContact>"
+    },
+    "rails": {
+      "import": null,
+      "example": "<%= pb_rails(\"person_contact\", props: { text: \"Example\" }) %>"
+    }
+  }
+}

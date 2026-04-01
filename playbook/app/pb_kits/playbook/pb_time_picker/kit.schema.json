@@ -1,0 +1,143 @@
+{
+  "$schema": "https://playbook.powerapp.cloud/schemas/kit-schema.json",
+  "name": "TimePicker",
+  "description": "A time picker component that allows users to select a time independently of the date.",
+  "platforms": [
+    "react",
+    "rails"
+  ],
+  "props": {
+    "defaultTime": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "disabled": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "error": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "inputOptions": {
+      "type": "{ [key: string]: string | number | boolean | (() => void) | ((arg?: Event) => void) }",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "label": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": "Time Picker"
+    },
+    "maxTime": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "minTime": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "name": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "onChange": {
+      "type": "function",
+      "platforms": [
+        "react"
+      ]
+    },
+    "onClose": {
+      "type": "function",
+      "platforms": [
+        "react"
+      ]
+    },
+    "required": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "requiredIndicator": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "showTimezone": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "timeFormat": {
+      "type": "TimeFormat",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "AMPM",
+        "24hour"
+      ],
+      "default": "AMPM"
+    },
+    "validationMessage": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": ""
+    },
+    "value": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    }
+  },
+  "globalProps": true,
+  "usage": {
+    "react": {
+      "import": "import { TimePicker } from 'playbook-ui'",
+      "example": "<TimePicker timeFormat=\"AMPM\"></TimePicker>"
+    },
+    "rails": {
+      "import": null,
+      "example": "<%= pb_rails(\"time_picker\", props: { time_format: \"AMPM\" }) %>"
+    }
+  }
+}

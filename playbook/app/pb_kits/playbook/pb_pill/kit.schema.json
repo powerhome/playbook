@@ -1,0 +1,57 @@
+{
+  "$schema": "https://playbook.powerapp.cloud/schemas/kit-schema.json",
+  "name": "Pill",
+  "description": "A pill uses both a keyword and a specific color to categorize an",
+  "platforms": [
+    "react",
+    "rails"
+  ],
+  "props": {
+    "text": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "variant": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "success",
+        "warning",
+        "error",
+        "info",
+        "neutral",
+        "primary"
+      ],
+      "default": "neutral"
+    },
+    "textTransform": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "none",
+        "lowercase"
+      ],
+      "default": "lowercase"
+    }
+  },
+  "globalProps": true,
+  "usage": {
+    "react": {
+      "import": "import { Pill } from 'playbook-ui'",
+      "example": "<Pill variant=\"success\" textTransform=\"none\"></Pill>"
+    },
+    "rails": {
+      "import": null,
+      "example": "<%= pb_rails(\"pill\", props: { variant: \"success\", text_transform: \"none\" }) %>"
+    }
+  }
+}

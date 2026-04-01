@@ -1,0 +1,126 @@
+{
+  "$schema": "https://playbook.powerapp.cloud/schemas/kit-schema.json",
+  "name": "Timestamp",
+  "description": "This low profile kit displays time. Elapsed, current, future, or",
+  "platforms": [
+    "react",
+    "rails"
+  ],
+  "props": {
+    "align": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "left",
+        "center",
+        "right"
+      ],
+      "default": "left"
+    },
+    "text": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "timestamp": {
+      "type": "Date | string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "timezone": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": "America/New_York"
+    },
+    "showCurrentYear": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "showDate": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": true
+    },
+    "showUser": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "hideUpdated": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "showTime": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": true
+    },
+    "showTimezone": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "unstyled": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "variant": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "default",
+        "elapsed",
+        "updated"
+      ],
+      "default": "default"
+    }
+  },
+  "globalProps": true,
+  "usage": {
+    "react": {
+      "import": "import { Timestamp } from 'playbook-ui'",
+      "example": "<Timestamp align=\"left\" variant=\"default\"></Timestamp>"
+    },
+    "rails": {
+      "import": null,
+      "example": "<%= pb_rails(\"timestamp\", props: { align: \"left\", variant: \"default\" }) %>"
+    }
+  }
+}

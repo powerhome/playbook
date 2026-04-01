@@ -1,0 +1,151 @@
+{
+  "$schema": "https://playbook.powerapp.cloud/schemas/kit-schema.json",
+  "name": "RichTextEditor",
+  "description": "Full-featured text editor with formatting options.",
+  "platforms": [
+    "react"
+  ],
+  "props": {
+    "advancedEditor": {
+      "type": "any",
+      "platforms": [
+        "react"
+      ]
+    },
+    "advancedEditorToolbar": {
+      "type": "boolean",
+      "platforms": [
+        "react"
+      ]
+    },
+    "toolbarBottom": {
+      "type": "boolean",
+      "platforms": [
+        "react"
+      ]
+    },
+    "focus": {
+      "type": "boolean",
+      "platforms": [
+        "react"
+      ]
+    },
+    "inputOptions": {
+      "type": "{ [key: string]: string | number | boolean | (() => void) }",
+      "platforms": [
+        "react"
+      ]
+    },
+    "inline": {
+      "type": "boolean",
+      "platforms": [
+        "react"
+      ]
+    },
+    "label": {
+      "type": "string",
+      "platforms": [
+        "react"
+      ]
+    },
+    "extensions": {
+      "type": "object",
+      "platforms": [
+        "react"
+      ]
+    },
+    "name": {
+      "type": "string",
+      "platforms": [
+        "react"
+      ]
+    },
+    "onChange": {
+      "type": "function",
+      "platforms": [
+        "react"
+      ]
+    },
+    "placeholder": {
+      "type": "string",
+      "platforms": [
+        "react"
+      ]
+    },
+    "inputHeight": {
+      "type": "enum",
+      "platforms": [
+        "react"
+      ],
+      "values": [
+        "sm",
+        "md",
+        "lg"
+      ]
+    },
+    "inputMinHeight": {
+      "type": "enum",
+      "platforms": [
+        "react"
+      ],
+      "values": [
+        "sm",
+        "md",
+        "lg"
+      ]
+    },
+    "requiredIndicator": {
+      "type": "boolean",
+      "platforms": [
+        "react"
+      ]
+    },
+    "simple": {
+      "type": "boolean",
+      "platforms": [
+        "react"
+      ]
+    },
+    "sticky": {
+      "type": "boolean",
+      "platforms": [
+        "react"
+      ]
+    },
+    "template": {
+      "type": "string",
+      "platforms": [
+        "react"
+      ]
+    },
+    "value": {
+      "type": "string",
+      "platforms": [
+        "react"
+      ]
+    },
+    "TrixEditor": {
+      "type": "ReactNode",
+      "platforms": [
+        "react"
+      ]
+    },
+    "trixInstance": {
+      "type": "any",
+      "platforms": [
+        "react"
+      ]
+    }
+  },
+  "globalProps": true,
+  "usage": {
+    "react": {
+      "import": "import { RichTextEditor } from 'playbook-ui'",
+      "example": "<RichTextEditor inputHeight=\"sm\" inputMinHeight=\"sm\"></RichTextEditor>"
+    },
+    "rails": {
+      "import": null,
+      "example": "<%= pb_rails(\"rich_text_editor\", props: { input_height: \"sm\", input_min_height: \"sm\" }) %>"
+    }
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "$schema": "https://playbook.powerapp.cloud/schemas/kit-schema.json",
+  "name": "WeekdayStacked",
+  "description": "WeekdayStacked component",
+  "platforms": [
+    "react",
+    "rails"
+  ],
+  "props": {
+    "align": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "left",
+        "center",
+        "right"
+      ],
+      "default": "left"
+    },
+    "date": {
+      "type": "Date",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "variant": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "day_only",
+        "month_day",
+        "expanded"
+      ],
+      "default": "month_day"
+    },
+    "compact": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    }
+  },
+  "globalProps": true,
+  "usage": {
+    "react": {
+      "import": "import { WeekdayStacked } from 'playbook-ui'",
+      "example": "<WeekdayStacked align=\"left\" variant=\"day_only\"></WeekdayStacked>"
+    },
+    "rails": {
+      "import": null,
+      "example": "<%= pb_rails(\"weekday_stacked\", props: { align: \"left\", variant: \"day_only\" }) %>"
+    }
+  }
+}

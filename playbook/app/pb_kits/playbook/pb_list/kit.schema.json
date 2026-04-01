@@ -1,0 +1,110 @@
+{
+  "$schema": "https://playbook.powerapp.cloud/schemas/kit-schema.json",
+  "name": "List",
+  "description": "Lists display a vertical set of related content.",
+  "platforms": [
+    "react",
+    "rails"
+  ],
+  "props": {
+    "borderless": {
+      "type": "boolean;",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "enableDrag": {
+      "type": "boolean;",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "layout": {
+      "type": "\"\" | \"left\" | \"right\";",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "left",
+        "right",
+        ""
+      ],
+      "default": ""
+    },
+    "ordered": {
+      "type": "boolean;",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "role": {
+      "type": "string;",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "tabIndex": {
+      "type": "number;",
+      "platforms": [
+        "react"
+      ]
+    },
+    "text": {
+      "type": "string;",
+      "platforms": [
+        "react"
+      ]
+    },
+    "size": {
+      "type": "string;",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "variant": {
+      "type": "string;",
+      "platforms": [
+        "react"
+      ]
+    },
+    "xpadding": {
+      "type": "boolean;",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "items": {
+      "platforms": [
+        "rails"
+      ],
+      "type": "array"
+    },
+    "tabindex": {
+      "platforms": [
+        "rails"
+      ]
+    }
+  },
+  "globalProps": true,
+  "usage": {
+    "react": {
+      "import": "import { List } from 'playbook-ui'",
+      "example": "<List layout=\"left\"></List>"
+    },
+    "rails": {
+      "import": null,
+      "example": "<%= pb_rails(\"list\", props: { layout: \"left\" }) %>"
+    }
+  }
+}

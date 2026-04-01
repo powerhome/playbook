@@ -1,0 +1,101 @@
+{
+  "$schema": "https://playbook.powerapp.cloud/schemas/kit-schema.json",
+  "name": "Body",
+  "description": "Default text style for paragraphs. Follow hiearchy when using \"light\"",
+  "platforms": [
+    "react",
+    "rails"
+  ],
+  "props": {
+    "color": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "default",
+        "light",
+        "lighter",
+        "link",
+        "error",
+        "success"
+      ],
+      "default": "default"
+    },
+    "highlightedText": {
+      "type": "array",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "highlighting": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "status": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "neutral",
+        "negative",
+        "positive"
+      ],
+      "default": "neutral"
+    },
+    "tag": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "h1",
+        "h2",
+        "h3",
+        "h4",
+        "h5",
+        "h6",
+        "p",
+        "span",
+        "div"
+      ],
+      "default": "div"
+    },
+    "text": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "variant": {
+      "type": "enum",
+      "platforms": [
+        "react"
+      ],
+      "values": [
+        "link"
+      ]
+    }
+  },
+  "globalProps": true,
+  "usage": {
+    "react": {
+      "import": "import { Body } from 'playbook-ui'",
+      "example": "<Body color=\"default\" status=\"neutral\"></Body>"
+    },
+    "rails": {
+      "import": null,
+      "example": "<%= pb_rails(\"body\", props: { color: \"default\", status: \"neutral\" }) %>"
+    }
+  }
+}

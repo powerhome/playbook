@@ -1,0 +1,380 @@
+{
+  "$schema": "https://playbook.powerapp.cloud/schemas/global-props-schema.json",
+  "name": "GlobalProps",
+  "description": "Global props available on all Playbook components. These props provide consistent spacing, layout, display, and styling across the design system.",
+  "breakpoints": {
+    "xs": "0-575px",
+    "sm": "576-767px",
+    "md": "768-991px",
+    "lg": "992-1199px",
+    "xl": "1200px+"
+  },
+  "spacing": {
+    "values": ["none", "xxs", "xs", "sm", "md", "lg", "xl", "auto", "initial", "inherit"],
+    "description": "Standard spacing scale used for margin and padding props.",
+    "tokens": {
+      "none": "0",
+      "xxs": "4px",
+      "xs": "8px",
+      "sm": "12px",
+      "md": "16px",
+      "lg": "24px",
+      "xl": "32px"
+    }
+  },
+  "props": {
+    "margin": {
+      "type": "enum | responsive",
+      "values": ["none", "xxs", "xs", "sm", "md", "lg", "xl", "auto", "initial", "inherit"],
+      "responsive": true,
+      "description": "Margin on all sides.",
+      "example": "margin=\"md\" or margin={{ default: 'sm', md: 'lg' }}"
+    },
+    "marginTop": {
+      "type": "enum | responsive",
+      "values": ["none", "xxs", "xs", "sm", "md", "lg", "xl", "auto", "initial", "inherit"],
+      "responsive": true,
+      "description": "Top margin."
+    },
+    "marginBottom": {
+      "type": "enum | responsive",
+      "values": ["none", "xxs", "xs", "sm", "md", "lg", "xl", "auto", "initial", "inherit"],
+      "responsive": true,
+      "description": "Bottom margin."
+    },
+    "marginLeft": {
+      "type": "enum | responsive",
+      "values": ["none", "xxs", "xs", "sm", "md", "lg", "xl", "auto", "initial", "inherit"],
+      "responsive": true,
+      "description": "Left margin."
+    },
+    "marginRight": {
+      "type": "enum | responsive",
+      "values": ["none", "xxs", "xs", "sm", "md", "lg", "xl", "auto", "initial", "inherit"],
+      "responsive": true,
+      "description": "Right margin."
+    },
+    "marginX": {
+      "type": "enum | responsive",
+      "values": ["none", "xxs", "xs", "sm", "md", "lg", "xl", "auto", "initial", "inherit"],
+      "responsive": true,
+      "description": "Horizontal margin (left and right)."
+    },
+    "marginY": {
+      "type": "enum | responsive",
+      "values": ["none", "xxs", "xs", "sm", "md", "lg", "xl", "auto", "initial", "inherit"],
+      "responsive": true,
+      "description": "Vertical margin (top and bottom)."
+    },
+    "padding": {
+      "type": "enum | responsive",
+      "values": ["none", "xxs", "xs", "sm", "md", "lg", "xl", "auto", "initial", "inherit"],
+      "responsive": true,
+      "description": "Padding on all sides.",
+      "example": "padding=\"md\" or padding={{ default: 'sm', md: 'lg' }}"
+    },
+    "paddingTop": {
+      "type": "enum | responsive",
+      "values": ["none", "xxs", "xs", "sm", "md", "lg", "xl", "auto", "initial", "inherit"],
+      "responsive": true,
+      "description": "Top padding."
+    },
+    "paddingBottom": {
+      "type": "enum | responsive",
+      "values": ["none", "xxs", "xs", "sm", "md", "lg", "xl", "auto", "initial", "inherit"],
+      "responsive": true,
+      "description": "Bottom padding."
+    },
+    "paddingLeft": {
+      "type": "enum | responsive",
+      "values": ["none", "xxs", "xs", "sm", "md", "lg", "xl", "auto", "initial", "inherit"],
+      "responsive": true,
+      "description": "Left padding."
+    },
+    "paddingRight": {
+      "type": "enum | responsive",
+      "values": ["none", "xxs", "xs", "sm", "md", "lg", "xl", "auto", "initial", "inherit"],
+      "responsive": true,
+      "description": "Right padding."
+    },
+    "paddingX": {
+      "type": "enum | responsive",
+      "values": ["none", "xxs", "xs", "sm", "md", "lg", "xl", "auto", "initial", "inherit"],
+      "responsive": true,
+      "description": "Horizontal padding (left and right)."
+    },
+    "paddingY": {
+      "type": "enum | responsive",
+      "values": ["none", "xxs", "xs", "sm", "md", "lg", "xl", "auto", "initial", "inherit"],
+      "responsive": true,
+      "description": "Vertical padding (top and bottom)."
+    },
+    "display": {
+      "type": "enum | responsive",
+      "values": ["block", "inline", "inline_block", "flex", "inline_flex", "none", "hidden"],
+      "responsive": true,
+      "description": "CSS display property.",
+      "example": "display=\"flex\" or display={{ default: 'block', md: 'flex' }}"
+    },
+    "dark": {
+      "type": "boolean",
+      "default": false,
+      "description": "Applies dark mode styling."
+    },
+    "borderRadius": {
+      "type": "enum",
+      "values": ["none", "xs", "sm", "md", "lg", "xl", "rounded"],
+      "description": "Border radius."
+    },
+    "shadow": {
+      "type": "enum",
+      "values": ["none", "deep", "deeper", "deepest"],
+      "description": "Box shadow depth."
+    },
+    "position": {
+      "type": "enum",
+      "values": ["relative", "absolute", "fixed", "sticky", "static"],
+      "description": "CSS position property."
+    },
+    "top": {
+      "type": "enum | object",
+      "values": ["none", "xxs", "xs", "sm", "md", "lg", "xl"],
+      "description": "Top positioning. Can also use object: { value: 'sm', inset: true }."
+    },
+    "right": {
+      "type": "enum | object",
+      "values": ["none", "xxs", "xs", "sm", "md", "lg", "xl"],
+      "description": "Right positioning. Can also use object: { value: 'sm', inset: true }."
+    },
+    "bottom": {
+      "type": "enum | object",
+      "values": ["none", "xxs", "xs", "sm", "md", "lg", "xl"],
+      "description": "Bottom positioning. Can also use object: { value: 'sm', inset: true }."
+    },
+    "left": {
+      "type": "enum | object",
+      "values": ["none", "xxs", "xs", "sm", "md", "lg", "xl"],
+      "description": "Left positioning. Can also use object: { value: 'sm', inset: true }."
+    },
+    "zIndex": {
+      "type": "enum | responsive",
+      "values": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, "max"],
+      "responsive": true,
+      "description": "Z-index stacking order."
+    },
+    "cursor": {
+      "type": "enum",
+      "values": ["auto", "default", "none", "pointer", "wait", "text", "move", "notAllowed", "grab", "grabbing", "crosshair", "help", "progress", "cell", "copy", "alias", "noDrop", "contextMenu", "allScroll", "colResize", "rowResize", "zoomIn", "zoomOut", "eResize", "nResize", "neResize", "nwResize", "sResize", "seResize", "swResize", "wResize", "ewResize", "nsResize", "neswResize", "nwseResize", "verticalText"],
+      "description": "CSS cursor type."
+    },
+    "overflow": {
+      "type": "enum",
+      "values": ["scroll", "visible", "hidden", "auto"],
+      "description": "CSS overflow property."
+    },
+    "overflowX": {
+      "type": "enum",
+      "values": ["scroll", "visible", "hidden", "auto"],
+      "description": "CSS overflow-x property."
+    },
+    "overflowY": {
+      "type": "enum",
+      "values": ["scroll", "visible", "hidden", "auto"],
+      "description": "CSS overflow-y property."
+    },
+    "truncate": {
+      "type": "enum",
+      "values": ["none", 1, 2, 3, 4, 5],
+      "description": "Truncates text with ellipsis after specified number of lines."
+    },
+    "textAlign": {
+      "type": "enum | responsive",
+      "values": ["start", "end", "left", "right", "center", "justify", "justifyAll", "matchParent"],
+      "responsive": true,
+      "description": "Text alignment."
+    },
+    "verticalAlign": {
+      "type": "enum | responsive",
+      "values": ["baseline", "super", "top", "middle", "bottom", "sub", "text-top", "text-bottom"],
+      "responsive": true,
+      "description": "Vertical alignment."
+    },
+    "lineHeight": {
+      "type": "enum",
+      "values": ["loosest", "looser", "loose", "normal", "tight", "tighter", "tightest"],
+      "description": "Line height."
+    },
+    "numberSpacing": {
+      "type": "enum",
+      "values": ["tabular"],
+      "description": "Number spacing for tabular alignment."
+    },
+    "width": {
+      "type": "string",
+      "description": "CSS width. Supports values like '100%', '50px', 'auto'."
+    },
+    "minWidth": {
+      "type": "string",
+      "description": "CSS min-width."
+    },
+    "maxWidth": {
+      "type": "string",
+      "description": "CSS max-width."
+    },
+    "height": {
+      "type": "string | enum",
+      "values": ["auto", "xs", "sm", "md", "lg", "xl", "xxl", "xxxl"],
+      "description": "Height. Predefined values or custom CSS value."
+    },
+    "minHeight": {
+      "type": "string | enum",
+      "values": ["auto", "xs", "sm", "md", "lg", "xl", "xxl", "xxxl"],
+      "description": "Minimum height."
+    },
+    "maxHeight": {
+      "type": "string | enum",
+      "values": ["auto", "xs", "sm", "md", "lg", "xl", "xxl", "xxxl"],
+      "description": "Maximum height."
+    },
+    "gap": {
+      "type": "enum | responsive",
+      "values": ["none", "xxs", "xs", "sm", "md", "lg", "xl"],
+      "responsive": true,
+      "description": "Gap between flex/grid items."
+    },
+    "rowGap": {
+      "type": "enum | responsive",
+      "values": ["none", "xxs", "xs", "sm", "md", "lg", "xl"],
+      "responsive": true,
+      "description": "Gap between rows."
+    },
+    "columnGap": {
+      "type": "enum | responsive",
+      "values": ["none", "xxs", "xs", "sm", "md", "lg", "xl"],
+      "responsive": true,
+      "description": "Gap between columns."
+    },
+    "flex": {
+      "type": "enum | responsive",
+      "values": ["auto", "initial", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "none"],
+      "responsive": true,
+      "description": "Flex shorthand property."
+    },
+    "flexGrow": {
+      "type": "enum | responsive",
+      "values": [0, 1],
+      "responsive": true,
+      "description": "Flex grow factor."
+    },
+    "flexShrink": {
+      "type": "enum | responsive",
+      "values": [0, 1],
+      "responsive": true,
+      "description": "Flex shrink factor."
+    },
+    "flexDirection": {
+      "type": "enum | responsive",
+      "values": ["row", "column", "rowReverse", "columnReverse"],
+      "responsive": true,
+      "description": "Flex direction."
+    },
+    "flexWrap": {
+      "type": "enum | responsive",
+      "values": ["wrap", "nowrap", "wrapReverse"],
+      "responsive": true,
+      "description": "Flex wrap behavior."
+    },
+    "justifyContent": {
+      "type": "enum | responsive",
+      "values": ["start", "end", "center", "spaceBetween", "spaceAround", "spaceEvenly"],
+      "responsive": true,
+      "description": "Justify content (main axis alignment)."
+    },
+    "justifySelf": {
+      "type": "enum | responsive",
+      "values": ["auto", "start", "end", "center", "stretch"],
+      "responsive": true,
+      "description": "Justify self alignment."
+    },
+    "alignItems": {
+      "type": "enum | responsive",
+      "values": ["start", "end", "center", "flexStart", "flexEnd", "stretch", "baseline"],
+      "responsive": true,
+      "description": "Align items (cross axis alignment)."
+    },
+    "alignContent": {
+      "type": "enum | responsive",
+      "values": ["start", "end", "center", "spaceBetween", "spaceAround", "spaceEvenly"],
+      "responsive": true,
+      "description": "Align content for multi-line flex containers."
+    },
+    "alignSelf": {
+      "type": "enum | responsive",
+      "values": ["auto", "start", "end", "center", "stretch", "baseline"],
+      "responsive": true,
+      "description": "Align self override."
+    },
+    "order": {
+      "type": "enum | responsive",
+      "values": ["none", "first", 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+      "responsive": true,
+      "description": "Flex order."
+    },
+    "hover": {
+      "type": "object",
+      "properties": {
+        "shadow": {
+          "type": "enum",
+          "values": ["none", "deep", "deeper", "deepest"]
+        },
+        "background": {
+          "type": "string",
+          "description": "Background color on hover."
+        },
+        "color": {
+          "type": "string",
+          "description": "Text color on hover."
+        },
+        "scale": {
+          "type": "enum",
+          "values": ["sm", "md", "lg"]
+        },
+        "underline": {
+          "type": "boolean"
+        },
+        "visible": {
+          "type": "boolean"
+        }
+      },
+      "description": "Hover state effects.",
+      "example": "hover={{ shadow: 'deep', scale: 'sm' }}"
+    },
+    "groupHover": {
+      "type": "boolean",
+      "default": false,
+      "description": "Enables group hover styling."
+    }
+  },
+  "responsiveUsage": {
+    "description": "Many global props support responsive values using an object with breakpoint keys.",
+    "example": {
+      "padding": "{{ default: 'sm', xs: 'xs', md: 'md', lg: 'lg' }}",
+      "display": "{{ default: 'block', md: 'flex' }}",
+      "textAlign": "{{ default: 'center', lg: 'left' }}"
+    },
+    "breakpoints": {
+      "default": "Base value (mobile-first)",
+      "xs": "0-575px",
+      "sm": "576-767px",
+      "md": "768-991px",
+      "lg": "992-1199px",
+      "xl": "1200px+"
+    }
+  },
+  "warnings": {
+    "domSafeProps": {
+      "description": "When spreading props onto DOM elements in custom components, use domSafeProps() to remove non-DOM props.",
+      "nonSafeProps": ["marginRight", "marginLeft", "marginTop", "marginBottom", "marginX", "marginY", "margin", "paddingRight", "paddingLeft", "paddingTop", "paddingBottom", "paddingX", "paddingY", "padding", "dark", "enableDrag", "requiredIndicator"]
+    }
+  }
+}

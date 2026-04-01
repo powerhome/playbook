@@ -1,0 +1,54 @@
+{
+  "$schema": "https://playbook.powerapp.cloud/schemas/kit-schema.json",
+  "name": "SelectableList",
+  "description": "List of items that can be selected, supporting single or multiple selection.",
+  "platforms": [
+    "react",
+    "rails"
+  ],
+  "props": {
+    "enableDrag": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "variant": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "checkbox",
+        "radio"
+      ],
+      "default": "checkbox"
+    },
+    "text": {
+      "platforms": [
+        "rails"
+      ],
+      "type": "string"
+    },
+    "items": {
+      "platforms": [
+        "rails"
+      ],
+      "type": "array"
+    }
+  },
+  "globalProps": true,
+  "usage": {
+    "react": {
+      "import": "import { SelectableList } from 'playbook-ui'",
+      "example": "<SelectableList variant=\"checkbox\"></SelectableList>"
+    },
+    "rails": {
+      "import": null,
+      "example": "<%= pb_rails(\"selectable_list\", props: { variant: \"checkbox\" }) %>"
+    }
+  }
+}
