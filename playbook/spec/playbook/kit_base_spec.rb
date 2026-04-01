@@ -76,4 +76,69 @@ RSpec.describe Playbook::KitBase do
       )
     end
   end
+
+  describe "#combined_html_options" do
+    it "returns data and aria attributes when no html_options are set" do
+      instance = subject.new(data: { testid: "abc" }, aria: { label: "test" })
+
+      result = instance.combined_html_options
+
+      expect(result[:data]).to eq(testid: "abc")
+      expect(result[:aria]).to eq(label: "test")
+    end
+
+    it "merges html_options into the result" do
+      instance = subject.new(html_options: { role: "button", tabindex: 0 })
+
+      result = instance.combined_html_options
+
+      expect(result[:role]).to eq("button")
+      expect(result[:tabindex]).to eq(0)
+    end
+
+    it "converts style hash to CSS string" do
+      instance = subject.new(html_options: { style: { background_color: "red", font_size: "14px" } })
+
+      result = instance.combined_html_options
+
+      expect(result[:style]).to include("background-color: red")
+      expect(result[:style]).to include("font-size: 14px")
+    end
+  end
+
+  describe "#data_attributes" do
+    it "returns a hash with data and aria keys" do
+      instance = subject.new(data: { testid: "x" }, aria: { label: "y" })
+
+      result = instance.send(:data_attributes)
+
+      expect(result).to eq(data: { testid: "x" }, aria: { label: "y" })
+    end
+
+    it "returns empty hashes when data and aria are not set" do
+      instance = subject.new({})
+
+      result = instance.send(:data_attributes)
+
+      expect(result).to eq(data: {}, aria: {})
+    end
+  end
+
+  describe "#global_inline_props" do
+    it "returns height values when set" do
+      instance = subject.new(height: "100px")
+
+      result = instance.global_inline_props
+
+      expect(result[:height]).to eq("100px")
+    end
+
+    it "returns an empty hash when no height props are set" do
+      instance = subject.new({})
+
+      result = instance.global_inline_props
+
+      expect(result).to be_empty
+    end
+  end
 end

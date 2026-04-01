@@ -6,26 +6,23 @@ module Playbook
       base.prop :number_spacing
     end
 
+    NUMBER_SPACING_VALUES = %w[tabular].freeze
+
     def number_spacing_values
-      %w[tabular]
+      NUMBER_SPACING_VALUES
     end
 
     def number_spacing_options
-      {
-        number_spacing: "ns",
-      }
+      { number_spacing: "ns" }
     end
 
   private
 
     def number_spacing_props
-      selected_index_props = number_spacing_options.keys.select { |sk| try(sk) }
-      return nil unless selected_index_props.present?
+      value = number_spacing
+      return nil unless value
 
-      selected_index_props.map do |k|
-        index_value = send(k)
-        "ns_#{index_value}" if number_spacing_values.include? index_value
-      end.compact.join(" ")
+      "ns_#{value}" if NUMBER_SPACING_VALUES.include?(value)
     end
   end
 end

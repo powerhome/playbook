@@ -6,24 +6,21 @@ module Playbook
       base.prop :border_radius
     end
 
-    def border_radius_props
-      selected_props = border_radius_options.keys.select { |sk| try(sk) }
-      return nil unless selected_props.present?
+    BORDER_RADIUS_VALUES = %w[none xs sm md lg xl rounded].freeze
 
-      selected_props.map do |k|
-        border_radius_value = send(k)
-        "border_radius_#{border_radius_value}" if border_radius_values.include? border_radius_value
-      end.compact.join(" ")
+    def border_radius_props
+      value = border_radius
+      return nil unless value
+
+      "border_radius_#{value}" if BORDER_RADIUS_VALUES.include?(value)
     end
 
     def border_radius_options
-      {
-        border_radius: "border_radius",
-      }
+      { border_radius: "border_radius" }
     end
 
     def border_radius_values
-      %w[none xs sm md lg xl rounded]
+      BORDER_RADIUS_VALUES
     end
   end
 end
