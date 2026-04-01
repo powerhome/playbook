@@ -1,7 +1,7 @@
 {
   "$schema": "https://playbook.powerapp.cloud/schemas/kit-schema.json",
   "name": "SkeletonLoading",
-  "description": "SkeletonLoading component",
+  "description": "Placeholder loading state that mimics the shape of content.",
   "platforms": [
     "react",
     "rails"

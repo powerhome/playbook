@@ -1,7 +1,7 @@
 {
   "$schema": "https://playbook.powerapp.cloud/schemas/kit-schema.json",
   "name": "EmptyState",
-  "description": "EmptyState component",
+  "description": "Empty state placeholder for when no content is available.",
   "platforms": [
     "react",
     "rails"
