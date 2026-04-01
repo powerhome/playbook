@@ -30,13 +30,15 @@
     "test-watch": "jest --watch",
     "test-coverage": "jest --collectCoverage",
     "test-coverage-summary": "jest --collectCoverage --coverageReporters=\"json-summary\"",
-    "release": "rm -rf dist; npx vite build",
+    "release": "rm -rf dist; npx vite build && yarn build:ai:full",
     "watch": "npx vite build --watch",
     "generate:tokens": "node scripts/generate-tokens.js",
     "generate:ai-metadata": "node scripts/generate-ai-metadata.mjs",
     "generate:ai-metadata:dry-run": "node scripts/generate-ai-metadata.mjs --dry-run --verbose",
     "generate:global-props-metadata": "node scripts/generate-global-props-metadata.mjs",
-    "generate:all-ai-metadata": "node scripts/generate-ai-metadata.mjs && node scripts/generate-global-props-metadata.mjs"
+    "generate:all-ai-metadata": "node scripts/generate-ai-metadata.mjs && node scripts/generate-global-props-metadata.mjs",
+    "build:ai": "node scripts/build-ai-dist.mjs",
+    "build:ai:full": "yarn generate:all-ai-metadata && yarn build:ai"
   },
   "repository": {
     "type": "git",
