@@ -1,7 +1,7 @@
 {
   "$schema": "https://playbook.powerapp.cloud/schemas/kit-schema.json",
   "name": "Form",
-  "description": "The form kit provides consumers with a convenient, consistently styled",
+  "description": "Form component",
   "platforms": [
     "rails"
   ],

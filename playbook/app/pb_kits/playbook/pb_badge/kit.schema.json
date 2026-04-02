@@ -1,7 +1,7 @@
 {
   "$schema": "https://playbook.powerapp.cloud/schemas/kit-schema.json",
   "name": "Badge",
-  "description": "Badges can be used for notification, tags, and status. They are used",
+  "description": "Badge component",
   "platforms": [
     "react",
     "rails"

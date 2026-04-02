@@ -9,6 +9,12 @@
  *   3. Merging props from both platforms into a unified schema
  *   4. Adding metadata from menu.yml (descriptions, related components)
  * 
+ * Limitations:
+ *   - TypeScript parsing uses regex, not a full AST parser
+ *   - Only parses `type XProps = {}` patterns, not interfaces
+ *   - May miss complex composed/extended types
+ *   - Imported prop types are not followed
+ * 
  * Usage:
  *   yarn generate:ai-metadata                    # Generate all schemas
  *   yarn generate:ai-metadata --kit=button       # Generate single component
@@ -20,6 +26,8 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import yaml from 'js-yaml';
+import { getGlobalPropNames } from './lib/global-props-parser.mjs';
 
 // =============================================================================
 // CONFIGURATION
@@ -42,35 +50,30 @@ const CONFIG = {
 };
 
 /**
- * Global props that are inherited by all components via GlobalProps.
+ * Global props dynamically loaded from globalProps.ts
  * These are filtered out from component-specific prop definitions.
- * 
- * TODO: Consider loading these dynamically from globalProps.ts
  */
-const GLOBAL_PROPS = new Set([
-  // Layout & Positioning
-  'display', 'position', 'top', 'right', 'bottom', 'left', 'zIndex',
-  'width', 'minWidth', 'maxWidth', 'height', 'minHeight', 'maxHeight',
-  
-  // Flexbox
-  'flex', 'flexDirection', 'flexWrap', 'flexGrow', 'flexShrink',
-  'justifyContent', 'justifySelf', 'alignItems', 'alignContent', 'alignSelf',
-  'order', 'gap', 'rowGap', 'columnGap',
-  
-  // Spacing
-  'margin', 'marginX', 'marginY', 'marginTop', 'marginRight', 'marginBottom', 'marginLeft',
-  'padding', 'paddingX', 'paddingY', 'paddingTop', 'paddingRight', 'paddingBottom', 'paddingLeft',
-  
-  // Typography & Visual
-  'textAlign', 'verticalAlign', 'lineHeight', 'truncate', 'numberSpacing',
-  'shadow', 'borderRadius', 'cursor', 'overflow', 'overflowX', 'overflowY',
-  
-  // Interactivity
-  'hover', 'groupHover', 'dark',
-  
-  // Common HTML/React props (not component-specific)
-  'aria', 'data', 'htmlOptions', 'id', 'className', 'children', 'key', 'ref',
-]);
+let GLOBAL_PROPS;
+try {
+  GLOBAL_PROPS = getGlobalPropNames();
+  // Add common HTML/React props that aren't in globalProps.ts
+  ['aria', 'data', 'htmlOptions', 'id', 'className', 'children', 'key', 'ref'].forEach(p => GLOBAL_PROPS.add(p));
+} catch (e) {
+  console.warn('⚠️  Could not load global props dynamically, using fallback list');
+  GLOBAL_PROPS = new Set([
+    'display', 'position', 'top', 'right', 'bottom', 'left', 'zIndex',
+    'width', 'minWidth', 'maxWidth', 'height', 'minHeight', 'maxHeight',
+    'flex', 'flexDirection', 'flexWrap', 'flexGrow', 'flexShrink',
+    'justifyContent', 'justifySelf', 'alignItems', 'alignContent', 'alignSelf',
+    'order', 'gap', 'rowGap', 'columnGap',
+    'margin', 'marginX', 'marginY', 'marginTop', 'marginRight', 'marginBottom', 'marginLeft',
+    'padding', 'paddingX', 'paddingY', 'paddingTop', 'paddingRight', 'paddingBottom', 'paddingLeft',
+    'textAlign', 'verticalAlign', 'lineHeight', 'truncate', 'numberSpacing',
+    'shadow', 'borderRadius', 'cursor', 'overflow', 'overflowX', 'overflowY',
+    'hover', 'groupHover', 'dark',
+    'aria', 'data', 'htmlOptions', 'id', 'className', 'children', 'key', 'ref',
+  ]);
+}
 
 // =============================================================================
 // CLI ARGUMENT PARSING
@@ -153,57 +156,33 @@ function loadMenuYml() {
  * Handles categories, components, and their properties.
  */
 function parseMenuYaml(content) {
+  // Use js-yaml for proper YAML parsing (supports anchors, aliases, etc.)
+  const parsed = yaml.load(content);
+  
+  // Transform to our expected format
   const result = { kits: [] };
-  let currentCategory = null;
-  let currentComponent = null;
-  let inComponentsSection = false;
-
-  for (const line of content.split('\n')) {
-    const trimmed = line.trim();
-    
-    // Skip empty lines and comments
-    if (!trimmed || trimmed.startsWith('#')) continue;
-
-    // New category starts
-    if (trimmed.startsWith('- category:')) {
-      currentCategory = {
-        category: trimmed.split(':')[1].trim(),
-        description: '',
-        components: [],
-      };
-      result.kits.push(currentCategory);
-      currentComponent = null;
-      inComponentsSection = false;
-      continue;
-    }
-
-    // Components section starts
-    if (trimmed === 'components:' && currentCategory) {
-      inComponentsSection = true;
-      continue;
-    }
-
-    // New component starts
-    if (trimmed.startsWith('- name:') && currentCategory && inComponentsSection) {
-      currentComponent = {
-        name: trimmed.split(':')[1].trim(),
-      };
-      currentCategory.components.push(currentComponent);
-      continue;
-    }
-
-    // Component property (key: value)
-    if (currentComponent && trimmed.includes(':') && !trimmed.startsWith('-')) {
-      const colonIndex = trimmed.indexOf(':');
-      const key = trimmed.slice(0, colonIndex).trim();
-      const value = trimmed.slice(colonIndex + 1).trim();
-      
-      if (key && value) {
-        currentComponent[key] = value;
+  
+  if (Array.isArray(parsed)) {
+    for (const category of parsed) {
+      if (category.category) {
+        result.kits.push({
+          category: category.category,
+          description: category.description || '',
+          components: (category.components || []).map(comp => ({
+            name: comp.name,
+            description: comp.description || '',
+            schema_path: comp.schema_path || null,
+            related_components: comp.related_components || null,
+            props_summary: comp.props_summary || null,
+            platforms: comp.platforms || null,
+            subcomponents: comp.subcomponents || null,
+            status: comp.status || null,
+          })),
+        });
       }
     }
   }
-
+  
   return result;
 }
 

@@ -1,7 +1,7 @@
 {
   "$schema": "https://playbook.powerapp.cloud/schemas/kit-schema.json",
   "name": "Card",
-  "description": "Content container with optional header, body sections, and various styling options.",
+  "description": "Card component",
   "platforms": [
     "react",
     "rails"

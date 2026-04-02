@@ -129,7 +129,8 @@ dist/ai/
 | `yarn generate:ai-metadata` | Generate kit.schema.json for all components |
 | `yarn generate:global-props-metadata` | Generate global-props.schema.json |
 | `yarn generate:all-ai-metadata` | Generate both kit and global props schemas |
-| `yarn build:ai` | Copy schemas to dist/ai/ |
+| `yarn build:ai` | Clean and copy schemas to dist/ai/ (default clean) |
+| `yarn build:ai --no-clean` | Incremental build without cleaning |
 | `yarn build:ai:full` | Generate + build (full rebuild) |
 | `yarn release` | Full release build (includes AI metadata) |
 
@@ -141,8 +142,24 @@ dist/ai/
 2. Parses TypeScript (`.tsx`) files for React prop types
 3. Parses Ruby (`.rb`) files for Rails prop definitions
 4. Merges props from both platforms
-5. Pulls descriptions from `menu.yml`
+5. Pulls descriptions from `menu.yml` (using proper YAML parser)
 6. Outputs `kit.schema.json` in each component folder
+
+**Known Limitations:**
+
+The TypeScript parsing uses regex patterns rather than a full AST parser. This means:
+
+- Only `type XProps = { ... }` patterns are parsed (not `interface`)
+- Props defined via type composition (`extends`, `&`) may be missed
+- Imported prop types from other files are not followed
+- Complex generic types may not resolve correctly
+
+The Ruby parsing has similar limitations:
+
+- Uses regex to extract `prop` definitions
+- May miss dynamically defined props
+
+**Mitigation:** Global props are dynamically loaded from `globalProps.ts` via a shared parser module, ensuring those are always accurate. For component-specific props, the regex approach captures ~95% of cases correctly.
 
 ### Global Props Generation (`generate-global-props-metadata.mjs`)
 
@@ -236,6 +253,7 @@ Props marked with `responsive: true` accept either a single value or a breakpoin
 | `scripts/generate-ai-metadata.mjs` | Generates kit schemas from TS/Ruby source |
 | `scripts/generate-global-props-metadata.mjs` | Generates global props schema |
 | `scripts/build-ai-dist.mjs` | Builds dist/ai folder |
+| `scripts/lib/global-props-parser.mjs` | Shared module for parsing global props |
 | `app/pb_kits/playbook/pb_*/kit.schema.json` | Individual kit schemas (source) |
 | `app/pb_kits/playbook/utilities/global-props.schema.json` | Global props schema (source) |
 | `dist/ai/*` | Distribution folder (built) |

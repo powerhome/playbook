@@ -1,7 +1,7 @@
 {
   "$schema": "https://playbook.powerapp.cloud/schemas/kit-schema.json",
   "name": "Time",
-  "description": "This kit consist of large display and table display format. It includes",
+  "description": "Time component",
   "platforms": [
     "react",
     "rails"

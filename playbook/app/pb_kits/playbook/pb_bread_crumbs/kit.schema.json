@@ -1,7 +1,7 @@
 {
   "$schema": "https://playbook.powerapp.cloud/schemas/kit-schema.json",
   "name": "BreadCrumbs",
-  "description": "BreadCrumbs can be used for keeping a user aware of their route location.",
+  "description": "BreadCrumbs component",
   "platforms": [
     "react",
     "rails"

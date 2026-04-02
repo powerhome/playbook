@@ -1,7 +1,7 @@
 {
   "$schema": "https://playbook.powerapp.cloud/schemas/kit-schema.json",
   "name": "DistributionBar",
-  "description": "Can be used in the same way a pie chart can be used. By default,",
+  "description": "DistributionBar component",
   "platforms": [
     "react",
     "rails"

@@ -1,7 +1,7 @@
 {
   "$schema": "https://playbook.powerapp.cloud/schemas/kit-schema.json",
   "name": "Timeline",
-  "description": "The timeline kit can use two different line styles in the same timeline",
+  "description": "Timeline component",
   "platforms": [
     "react",
     "rails"

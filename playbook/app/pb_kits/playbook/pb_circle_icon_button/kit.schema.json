@@ -1,7 +1,7 @@
 {
   "$schema": "https://playbook.powerapp.cloud/schemas/kit-schema.json",
   "name": "CircleIconButton",
-  "description": "When using Icon Circle Button, the icon must be clear a clear indication",
+  "description": "CircleIconButton component",
   "platforms": [
     "react",
     "rails"

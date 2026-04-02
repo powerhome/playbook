@@ -1,7 +1,7 @@
 {
   "$schema": "https://playbook.powerapp.cloud/schemas/kit-schema.json",
   "name": "HomeAddressStreet",
-  "description": "This kit can be used to display the address for a homeowner/project.",
+  "description": "HomeAddressStreet component",
   "platforms": [
     "react",
     "rails"

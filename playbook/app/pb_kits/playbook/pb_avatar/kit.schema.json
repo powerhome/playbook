@@ -1,7 +1,7 @@
 {
   "$schema": "https://playbook.powerapp.cloud/schemas/kit-schema.json",
   "name": "Avatar",
-  "description": "Avatar displays a user's picture. This helps aid easy recognition",
+  "description": "Avatar component",
   "platforms": [
     "react",
     "rails"

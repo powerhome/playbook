@@ -99,6 +99,7 @@
     "jest": "26.6.3",
     "jest-axe": "4.1.0",
     "jest-fail-on-console": "3.2.0",
+    "js-yaml": "^4.1.1",
     "lazysizes": "^5.3.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
@@ -119,11 +120,11 @@
     "vite-plugin-ruby": "^5.0.0"
   },
   "peerDependencies": {
+    "highcharts": "^11.0.0",
+    "highcharts-react-official": "^3.0.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-is": "^17.0.2",
-    "highcharts": "^11.0.0",
-    "highcharts-react-official": "^3.0.0"
+    "react-is": "^17.0.2"
   },
   "peerDependenciesMeta": {
     "highcharts": {

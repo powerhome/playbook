@@ -9,8 +9,8 @@
  *   - index.json with a manifest of all available schemas
  * 
  * Usage:
- *   yarn build:ai              # Build dist/ai folder
- *   yarn build:ai --clean      # Clean and rebuild
+ *   yarn build:ai              # Clean and build (default)
+ *   yarn build:ai --no-clean   # Incremental build without cleaning
  */
 
 import fs from 'fs';
@@ -30,14 +30,16 @@ const CONFIG = {
 // =============================================================================
 
 async function main() {
-  const clean = process.argv.includes('--clean');
+  // Default to clean builds to prevent stale artifacts
+  const noClean = process.argv.includes('--no-clean');
+  const clean = !noClean;
 
   console.log('');
   console.log('📦 Building AI Metadata Distribution');
   console.log('═'.repeat(50));
   console.log('');
 
-  // Clean output directory if requested
+  // Clean output directory (default behavior to prevent stale artifacts)
   if (clean && fs.existsSync(CONFIG.outputDir)) {
     console.log('🧹 Cleaning dist/ai...');
     fs.rmSync(CONFIG.outputDir, { recursive: true });

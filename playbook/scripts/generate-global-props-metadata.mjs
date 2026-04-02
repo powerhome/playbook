@@ -7,6 +7,7 @@
  * TypeScript type definitions from globalProps.ts and its imports.
  * 
  * No manual value lists - everything is parsed from source!
+ * Uses shared parsing logic from lib/global-props-parser.mjs
  * 
  * Usage:
  *   yarn generate:global-props-metadata           # Generate schema
@@ -16,6 +17,12 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import {
+  TypeRegistry,
+  parseTypeDefinitions,
+  parsePropsFromBlock,
+  PATHS,
+} from './lib/global-props-parser.mjs';
 
 // =============================================================================
 // CONFIGURATION
@@ -24,8 +31,8 @@ import { fileURLToPath } from 'url';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const CONFIG = {
-  globalPropsPath: path.resolve(__dirname, '../app/pb_kits/playbook/utilities/globalProps.ts'),
-  typesDir: path.resolve(__dirname, '../app/pb_kits/playbook/types'),
+  globalPropsPath: PATHS.globalPropsTs,
+  typesDir: PATHS.typesDir,
   outputPath: path.resolve(__dirname, '../app/pb_kits/playbook/utilities/global-props.schema.json'),
   schemaVersion: 'https://playbook.powerapp.cloud/schemas/global-props-schema.json',
 };
@@ -108,168 +115,7 @@ const PROP_METADATA = {
 };
 
 // =============================================================================
-// TYPE REGISTRY (collects all type definitions)
-// =============================================================================
-
-class TypeRegistry {
-  constructor() {
-    this.types = new Map();
-  }
-
-  /**
-   * Register a type definition.
-   */
-  register(name, definition) {
-    this.types.set(name, definition);
-  }
-
-  /**
-   * Resolve a type reference to its actual values.
-   * @param {string} typeExpr - The type expression to resolve
-   * @param {Set} visited - Set of already visited types (prevents infinite loops)
-   */
-  resolve(typeExpr, visited = new Set()) {
-    if (!typeExpr) return null;
-    
-    typeExpr = typeExpr.trim();
-    
-    // Prevent infinite loops
-    if (visited.has(typeExpr)) return null;
-    visited.add(typeExpr);
-    
-    // Already have this type registered?
-    if (this.types.has(typeExpr)) {
-      const def = this.types.get(typeExpr);
-      // If it's another reference, resolve recursively
-      if (typeof def === 'string') {
-        return this.resolve(def, visited);
-      }
-      return def;
-    }
-    
-    // Handle union types: A | B | C
-    if (typeExpr.includes('|')) {
-      return this.resolveUnion(typeExpr, visited);
-    }
-    
-    // Handle simple literals
-    if (typeExpr.startsWith('"') || typeExpr.startsWith("'")) {
-      return { type: 'enum', values: [typeExpr.slice(1, -1)] };
-    }
-    
-    if (/^\d+$/.test(typeExpr)) {
-      return { type: 'enum', values: [parseInt(typeExpr, 10)] };
-    }
-    
-    // Primitive types
-    if (typeExpr === 'boolean') return { type: 'boolean' };
-    if (typeExpr === 'string') return { type: 'string' };
-    if (typeExpr === 'number') return { type: 'number' };
-    
-    return null;
-  }
-
-  /**
-   * Resolve a union type like: "a" | "b" | SomeType | number
-   */
-  resolveUnion(unionExpr, visited = new Set()) {
-    const parts = this.splitUnion(unionExpr);
-    const values = [];
-    let hasObject = false;
-    let hasString = false;
-    
-    for (const part of parts) {
-      const trimmed = part.trim();
-      
-      // Skip empty parts
-      if (!trimmed) continue;
-      
-      // String literal
-      if ((trimmed.startsWith('"') && trimmed.endsWith('"')) ||
-          (trimmed.startsWith("'") && trimmed.endsWith("'"))) {
-        values.push(trimmed.slice(1, -1));
-        continue;
-      }
-      
-      // Number literal
-      if (/^\d+$/.test(trimmed)) {
-        values.push(parseInt(trimmed, 10));
-        continue;
-      }
-      
-      // 'max' as a special value
-      if (trimmed === "'max'" || trimmed === '"max"') {
-        values.push('max');
-        continue;
-      }
-      
-      // Object type
-      if (trimmed.startsWith('{')) {
-        hasObject = true;
-        continue;
-      }
-      
-      // String type
-      if (trimmed === 'string') {
-        hasString = true;
-        continue;
-      }
-      
-      // Type reference - resolve it (with visited set)
-      const resolved = this.resolve(trimmed, new Set(visited));
-      if (resolved?.values) {
-        values.push(...resolved.values);
-      } else if (resolved?.type === 'string') {
-        hasString = true;
-      }
-    }
-    
-    // Deduplicate
-    const uniqueValues = [...new Set(values)];
-    
-    if (uniqueValues.length === 0) {
-      if (hasString) return { type: 'string' };
-      if (hasObject) return { type: 'object' };
-      return null;
-    }
-    
-    let type = 'enum';
-    if (hasObject) type = 'enum | object';
-    if (hasString) type = 'string | enum';
-    
-    return { type, values: uniqueValues };
-  }
-
-  /**
-   * Split a union type string by | while respecting braces and parens.
-   */
-  splitUnion(str) {
-    const parts = [];
-    let current = '';
-    let depth = 0;
-    
-    for (const char of str) {
-      if (char === '{' || char === '(' || char === '<') depth++;
-      else if (char === '}' || char === ')' || char === '>') depth--;
-      
-      if (char === '|' && depth === 0) {
-        parts.push(current.trim());
-        current = '';
-      } else {
-        current += char;
-      }
-    }
-    
-    if (current.trim()) {
-      parts.push(current.trim());
-    }
-    
-    return parts;
-  }
-}
-
-// =============================================================================
-// TYPESCRIPT PARSER
+// TYPESCRIPT PARSER (uses shared TypeRegistry from lib/global-props-parser.mjs)
 // =============================================================================
 
 /**
@@ -288,34 +134,6 @@ function parseImportedTypes(registry) {
 }
 
 /**
- * Parse type definitions from a TypeScript content string.
- */
-function parseTypeDefinitions(content, registry) {
-  // Match: export type TypeName = "value1" | "value2" | ...
-  const typePattern = /(?:export\s+)?type\s+(\w+)\s*=\s*([^;{]+?)(?:;|\n|$)/g;
-  let match;
-  
-  while ((match = typePattern.exec(content)) !== null) {
-    const [, typeName, typeExpr] = match;
-    registry.register(typeName, typeExpr.trim());
-  }
-  
-  // Match: export const SomeValues = [0, 1] as const  ->  type Binary = typeof SomeValues[number]
-  const constArrayPattern = /export\s+const\s+(\w+)\s*=\s*\[([^\]]+)\]\s*as\s+const/g;
-  while ((match = constArrayPattern.exec(content)) !== null) {
-    const [, constName, values] = match;
-    const parsedValues = values.split(',').map(v => {
-      v = v.trim();
-      if (v.startsWith('"') || v.startsWith("'")) return v.slice(1, -1);
-      if (/^\d+$/.test(v)) return parseInt(v, 10);
-      return v;
-    });
-    // Register the values array name as an enum
-    registry.register(constName, { type: 'enum', values: parsedValues });
-  }
-}
-
-/**
  * Parse the main globalProps.ts file.
  */
 function parseGlobalPropsFile(registry) {
@@ -325,7 +143,6 @@ function parseGlobalPropsFile(registry) {
   parseTypeDefinitions(content, registry);
   
   // Parse object-style type definitions
-  // Match: type TypeName = { prop?: type, ... }
   const objectTypePattern = /type\s+(\w+)\s*=\s*\{([^}]+)\}/g;
   let match;
   const typeProps = {};
@@ -354,31 +171,6 @@ function parseGlobalPropsFile(registry) {
   const domUnsafeProps = extractDomUnsafeProps(content);
   
   return { typeProps, globalPropTypes, domUnsafeProps };
-}
-
-/**
- * Parse props from a type block like { prop?: Type, ... }
- */
-function parsePropsFromBlock(block, registry) {
-  const props = {};
-  
-  // Match: propName?: TypeExpr,
-  const propPattern = /(\w+)\??:\s*([^,\n]+)/g;
-  let match;
-  
-  while ((match = propPattern.exec(block)) !== null) {
-    const [, propName, typeExpr] = match;
-    
-    // Skip internal props
-    if (propName === 'break' || propName === 'default') continue;
-    
-    const resolved = registry.resolve(typeExpr.trim());
-    if (resolved) {
-      props[propName] = resolved;
-    }
-  }
-  
-  return props;
 }
 
 /**

@@ -1,7 +1,7 @@
 {
   "$schema": "https://playbook.powerapp.cloud/schemas/kit-schema.json",
   "name": "Select",
-  "description": "Select displays multiple options for a user to pick from in a dropdown",
+  "description": "Select component",
   "platforms": [
     "react",
     "rails"

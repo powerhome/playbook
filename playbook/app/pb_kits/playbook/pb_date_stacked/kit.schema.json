@@ -1,7 +1,7 @@
 {
   "$schema": "https://playbook.powerapp.cloud/schemas/kit-schema.json",
   "name": "DateStacked",
-  "description": "Use to display the date, stacking month and day. Year will not show",
+  "description": "DateStacked component",
   "platforms": [
     "react",
     "rails"

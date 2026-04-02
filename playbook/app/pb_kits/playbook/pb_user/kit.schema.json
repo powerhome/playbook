@@ -1,7 +1,7 @@
 {
   "$schema": "https://playbook.powerapp.cloud/schemas/kit-schema.json",
   "name": "User",
-  "description": "This kit was created for having a systematic way of displaying users",
+  "description": "User component",
   "platforms": [
     "react",
     "rails"

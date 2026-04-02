@@ -1,7 +1,7 @@
 {
   "$schema": "https://playbook.powerapp.cloud/schemas/kit-schema.json",
   "name": "TextInput",
-  "description": "Area where user can enter small amount of text. Commonly used in",
+  "description": "TextInput component",
   "platforms": [
     "react",
     "rails"

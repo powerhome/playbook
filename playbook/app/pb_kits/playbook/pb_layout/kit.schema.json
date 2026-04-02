@@ -1,7 +1,7 @@
 {
   "$schema": "https://playbook.powerapp.cloud/schemas/kit-schema.json",
   "name": "Layout",
-  "description": "Layouts used for positioning content inside of pages, cards, or containers.",
+  "description": "Layout component",
   "platforms": [
     "react",
     "rails"
