@@ -9,7 +9,7 @@ This system generates JSON schema files that describe every Playbook component's
 - Generate correct Playbook code
 - Understand component APIs without parsing TypeScript
 - Know which props are available on which platforms (React, Rails, Swift)
-- Access usage examples and related component suggestions
+- Access usage examples
 
 ## Quick Start
 
@@ -88,8 +88,7 @@ dist/ai/
       "import": null,
       "example": "<%= pb_rails(\"button\", props: { variant: \"primary\", text: \"Click me\" }) %>"
     }
-  },
-  "relatedComponents": ["circle_icon_button", "button_toolbar"]
+  }
 }
 ```
 
@@ -142,7 +141,9 @@ dist/ai/
 2. Parses TypeScript (`.tsx`) files for React prop types
 3. Parses Ruby (`.rb`) files for Rails prop definitions
 4. Merges props from both platforms
-5. Pulls descriptions from `menu.yml` (using proper YAML parser)
+5. Reads from `menu.yml`:
+   - Component descriptions
+   - Swift platform detection (`swift_only: true`)
 6. Outputs `kit.schema.json` in each component folder
 
 **Known Limitations:**
@@ -160,6 +161,25 @@ The Ruby parsing has similar limitations:
 - May miss dynamically defined props
 
 **Coverage:** ~95% of props are captured correctly. Global props use a shared parser module that handles intersection types (`&`) and resolves type references across files.
+
+### `menu.yml` Role
+
+The `menu.yml` file (`playbook-website/config/menu.yml`) is the component registry for Playbook. The AI scripts read:
+
+| Field | Auto-Generated? | Notes |
+|-------|-----------------|-------|
+| `description` | No | Manual - write clear descriptions for AI |
+| `swift_only` | No | Manual - set `true` for Swift-only components |
+| Props/types | Yes | Parsed from TSX/Ruby source files |
+
+**What requires manual updates:**
+- Adding/editing component descriptions
+- Adding `swift_only: true` for new Swift components
+
+**What's automatic:**
+- All prop names, types, and values
+- Platform detection (React/Rails)
+- Default values
 
 ### Global Props Generation (`generate-global-props-metadata.mjs`)
 
@@ -211,13 +231,13 @@ The `VerifyAIMetadata` pre-commit hook automatically ensures schemas stay in syn
 4. **Fails if schemas changed** (meaning your commit has stale metadata)
 
 **Triggered by changes to:**
-- `playbook/app/pb_kits/playbook/pb_*/**/*.tsx` - React components
-- `playbook/app/pb_kits/playbook/pb_*/**/*.rb` - Rails components
-- `playbook/app/pb_kits/playbook/utilities/globalProps.ts`
-- `playbook/app/pb_kits/playbook/types/*.ts`
-- `playbook/app/pb_kits/playbook/tokens/_spacing.scss`
-- `playbook/app/pb_kits/playbook/tokens/_screen_sizes.scss`
-- `playbook-website/config/menu.yml`
+- `playbook/app/pb_kits/playbook/pb_*/**/*.tsx` - React components (props)
+- `playbook/app/pb_kits/playbook/pb_*/**/*.rb` - Rails components (props)
+- `playbook/app/pb_kits/playbook/utilities/globalProps.ts` - Global props
+- `playbook/app/pb_kits/playbook/types/*.ts` - Type definitions
+- `playbook/app/pb_kits/playbook/tokens/_spacing.scss` - Spacing tokens
+- `playbook/app/pb_kits/playbook/tokens/_screen_sizes.scss` - Breakpoints
+- `playbook-website/config/menu.yml` - Descriptions, swift_only
 
 **If the hook fails:**
 ```bash
@@ -294,8 +314,9 @@ Props marked with `responsive: true` accept either a single value or a breakpoin
 | `scripts/generate-global-props-metadata.mjs` | Generates global props schema |
 | `scripts/build-ai-dist.mjs` | Builds dist/ai folder |
 | `scripts/lib/global-props-parser.mjs` | Shared module for parsing global props |
-| `app/pb_kits/playbook/pb_*/kit.schema.json` | Individual kit schemas (source) |
-| `app/pb_kits/playbook/utilities/global-props.schema.json` | Global props schema (source) |
+| `app/pb_kits/playbook/pb_*/kit.schema.json` | Individual kit schemas (generated) |
+| `app/pb_kits/playbook/utilities/global-props.schema.json` | Global props schema (generated) |
 | `dist/ai/*` | Distribution folder (built) |
 | `.overcommit.yml` | Overcommit hook configuration |
 | `.git-hooks/pre_commit/verify_ai_metadata.sh` | Pre-commit verification script |
+| `playbook-website/config/menu.yml` | Component registry (descriptions, swift_only) |

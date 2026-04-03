@@ -97,26 +97,6 @@ kits:
     icons_used: true
     react_rendered: false
     enhanced_element_used: true
-    schema_path: pb_dialog/kit.schema.json
-    props_summary:
-      - opened: boolean (required)
-      - size: "sm | md | lg | xl | status_size | content"
-      - title: string
-      - text: string
-      - status: "info | caution | delete | error | success"
-      - closeable: boolean
-      - placement: "left | center | right"
-      - confirmButton: string
-      - cancelButton: string
-      - onClose: function
-      - onConfirm: function
-      - onCancel: function
-      - loading: boolean
-      - fullHeight: boolean
-    related_components:
-      - popover
-      - fixed_confirmation_toast
-      - overlay
     subcomponents:
       - Dialog.Header
       - Dialog.Body
@@ -131,18 +111,6 @@ kits:
     icons_used: true
     react_rendered: false
     enhanced_element_used: true
-    schema_path: pb_fixed_confirmation_toast/kit.schema.json
-    props_summary:
-      - status: "success | error | neutral | tip"
-      - text: string
-      - closeable: boolean
-      - autoClose: number (ms)
-      - horizontal: "left | center | right"
-      - vertical: "top | bottom"
-      - onClose: function
-    related_components:
-      - dialog
-      - tooltip
   - name: popover
     platforms: *1
     description: A popover is a way to toggle content on top of other content. It
@@ -152,18 +120,6 @@ kits:
     icons_used: false
     react_rendered: false
     enhanced_element_used: true
-    schema_path: pb_popover/kit.schema.json
-    props_summary:
-      - reference: React.RefObject (required)
-      - show: boolean
-      - placement: "top | bottom | left | right | top-start | top-end | bottom-start | bottom-end"
-      - offset: boolean
-      - closeOnClick: "inside | outside | any | none"
-      - shouldClosePopover: function
-    related_components:
-      - dialog
-      - tooltip
-      - dropdown
   - name: tooltip
     platforms: *1
     description: Small overlay providing contextual information on hover or focus.
@@ -171,16 +127,6 @@ kits:
     icons_used: false
     react_rendered: false
     enhanced_element_used: true
-    schema_path: pb_tooltip/kit.schema.json
-    props_summary:
-      - text: string (required)
-      - placement: "top | bottom | left | right"
-      - trigger: string
-      - delay: "{ open: number, close: number }"
-      - interaction: boolean
-    related_components:
-      - popover
-      - copy_button
 - category: buttons
   description: Buttons are used primarily for actions, such as “Save” and “Cancel”.
     Link Buttons are used for less important or less commonly used actions, such as
@@ -193,22 +139,6 @@ kits:
     icons_used: true
     react_rendered: false
     enhanced_element_used: true
-    schema_path: pb_button/kit.schema.json
-    props_summary:
-      - variant: "primary | secondary | link | danger | reaction"
-      - size: "sm | md | lg"
-      - disabled: boolean
-      - loading: boolean
-      - icon: string
-      - iconRight: boolean
-      - fullWidth: boolean
-      - link: string
-      - htmlType: "submit | reset | button"
-    related_components:
-      - icon_button
-      - circle_icon_button
-      - button_toolbar
-      - link
   - name: button_toolbar
     platforms: *1
     description: This kit should primarily hold the most commonly used buttons.
@@ -216,13 +146,6 @@ kits:
     icons_used: false
     react_rendered: false
     enhanced_element_used: false
-    schema_path: pb_button_toolbar/kit.schema.json
-    props_summary:
-      - orientation: "horizontal | vertical"
-      - variant: "primary | secondary"
-    related_components:
-      - button
-      - icon_button
   - name: circle_icon_button
     platforms: *1
     description: When using Icon Circle Button, the icon must be clear a clear indication
@@ -231,16 +154,6 @@ kits:
     icons_used: true
     react_rendered: false
     enhanced_element_used: false
-    schema_path: pb_circle_icon_button/kit.schema.json
-    props_summary:
-      - icon: string (required)
-      - variant: "primary | secondary | link"
-      - disabled: boolean
-      - link: string
-    related_components:
-      - button
-      - icon_button
-      - icon_circle
   - name: icon_button
     platforms: *1
     status: deprecated
@@ -248,15 +161,6 @@ kits:
     react_rendered: false
     enhanced_element_used: false
     deprecated_note: Use Button with icon prop or CircleIconButton instead
-    schema_path: pb_icon_button/kit.schema.json
-    props_summary:
-      - icon: string (required)
-      - variant: "default | inline"
-      - onClick: function
-      - disabled: boolean
-    related_components:
-      - button
-      - circle_icon_button
   - name: copy_button
     platforms: *1
     description: Button that copies text to clipboard with visual feedback.
@@ -264,15 +168,6 @@ kits:
     icons_used: false
     react_rendered: false
     enhanced_element_used: true
-    schema_path: pb_copy_button/kit.schema.json
-    props_summary:
-      - text: string (required)
-      - from: string
-      - tooltipPlacement: "top | bottom | left | right"
-      - tooltipText: string
-    related_components:
-      - button
-      - tooltip
 - category: data_visualization
   description: Components for displaying data in tables, lists, charts, and graphs.
   components:
@@ -283,13 +178,6 @@ kits:
     icons_used: true
     react_rendered: true
     enhanced_element_used: false
-    schema_path: pb_map/kit.schema.json
-    props_summary:
-      - zoomBtns: boolean
-      - flyTo: boolean
-      - scrollZoom: boolean
-    related_components:
-      - image
   - name: table
     platforms: *1
     description: Tables display a collection of structured data and typically have
@@ -298,18 +186,6 @@ kits:
     icons_used: false
     react_rendered: false
     enhanced_element_used: true
-    schema_path: pb_table/kit.schema.json
-    props_summary:
-      - size: "sm | md | lg"
-      - responsive: "none | scroll | collapse"
-      - singleLine: boolean
-      - sticky: boolean
-      - striped: boolean
-      - verticalBorder: boolean
-    related_components:
-      - advanced_table
-      - list
-      - filter
     subcomponents:
       - Table.Head
       - Table.Body
@@ -322,15 +198,6 @@ kits:
     icons_used: true
     react_rendered: false
     enhanced_element_used: false
-    schema_path: pb_list/kit.schema.json
-    props_summary:
-      - ordered: boolean
-      - borderless: boolean
-      - size: "default | small"
-      - xpadding: boolean
-    related_components:
-      - table
-      - nav
   - name: filter
     platforms: *1
     description: This kit can be implemented in a variety of ways. To see examples
@@ -340,16 +207,6 @@ kits:
     icons_used: true
     react_rendered: false
     enhanced_element_used: false
-    schema_path: pb_filter/kit.schema.json
-    props_summary:
-      - filters: array
-      - sortOptions: array
-      - template: "default | single | none"
-      - results: number
-    related_components:
-      - table
-      - typeahead
-      - select
   - name: distribution_bar
     platforms: *1
     description: Can be used in the same way a pie chart can be used. By default,
@@ -358,14 +215,6 @@ kits:
     icons_used: false
     react_rendered: true
     enhanced_element_used: false
-    schema_path: pb_distribution_bar/kit.schema.json
-    props_summary:
-      - widths: "array (required)"
-      - colors: array
-      - size: "sm | md | lg"
-    related_components:
-      - legend
-      - progress_simple
   - name: legend
     platforms: *1
     description: A key used to compare the variables and their value in any given
@@ -374,13 +223,6 @@ kits:
     icons_used: false
     react_rendered: false
     enhanced_element_used: false
-    schema_path: pb_legend/kit.schema.json
-    props_summary:
-      - color: string (required)
-      - text: string (required)
-    related_components:
-      - distribution_bar
-      - pb_circle_chart
   - name: pb_gauge_chart
     platforms: web
     description: Circular gauge chart for displaying a single value within a range.
@@ -388,9 +230,6 @@ kits:
     icons_used: false
     react_rendered: true
     enhanced_element_used: false
-    related_components:
-      - pb_circle_chart
-      - progress_simple
   - name: pb_bar_graph
     description: Bar graphs are used to compare data. Bar graphs are not typically
       used to show percentages.
@@ -399,9 +238,6 @@ kits:
     icons_used: false
     react_rendered: true
     enhanced_element_used: false
-    related_components:
-      - pb_line_graph
-      - legend
   - name: pb_circle_chart
     platforms: web
     description: Circular chart for displaying proportional data.
@@ -409,9 +245,6 @@ kits:
     icons_used: false
     react_rendered: true
     enhanced_element_used: false
-    related_components:
-      - distribution_bar
-      - legend
   - name: pb_line_graph
     platforms: web
     description: Line graph for displaying data trends over time.
@@ -419,9 +252,6 @@ kits:
     icons_used: false
     react_rendered: true
     enhanced_element_used: false
-    related_components:
-      - pb_bar_graph
-      - legend
 - category: date_and_time_text_patterns
   description: Components for displaying dates and times in various formats.
   components:
@@ -433,16 +263,6 @@ kits:
     icons_used: true
     react_rendered: false
     enhanced_element_used: false
-    schema_path: pb_date/kit.schema.json
-    props_summary:
-      - value: "Date | string (required)"
-      - size: "sm | md | lg"
-      - showIcon: boolean
-      - showDayOfWeek: boolean
-    related_components:
-      - date_stacked
-      - date_time
-      - timestamp
   - name: date_range_inline
     platforms: *1
     description: Use to display a date range. Year will not show if it is the current
@@ -451,15 +271,6 @@ kits:
     icons_used: true
     react_rendered: false
     enhanced_element_used: false
-    schema_path: pb_date_range_inline/kit.schema.json
-    props_summary:
-      - startDate: "Date | string (required)"
-      - endDate: "Date | string (required)"
-      - size: "sm | xs"
-      - icon: boolean
-    related_components:
-      - date_range_stacked
-      - date
   - name: date_range_stacked
     platforms: *1
     description: Displays a date range in a vertical stacked format.
@@ -467,14 +278,6 @@ kits:
     icons_used: true
     react_rendered: false
     enhanced_element_used: false
-    schema_path: pb_date_range_stacked/kit.schema.json
-    props_summary:
-      - startDate: "Date | string (required)"
-      - endDate: "Date | string (required)"
-      - size: "sm | md"
-    related_components:
-      - date_range_inline
-      - date_stacked
   - name: date_stacked
     platforms: *1
     description: Use to display the date, stacking month and day. Year will not show
@@ -483,15 +286,6 @@ kits:
     icons_used: false
     react_rendered: false
     enhanced_element_used: false
-    schema_path: pb_date_stacked/kit.schema.json
-    props_summary:
-      - date: "Date | string (required)"
-      - size: "sm | md"
-      - bold: boolean
-      - reverse: boolean
-    related_components:
-      - date
-      - date_year_stacked
   - name: date_time
     platforms: *1
     description: Date Time is a composite kit that leverages the Date and Time kits.
@@ -500,16 +294,6 @@ kits:
     icons_used: false
     react_rendered: false
     enhanced_element_used: false
-    schema_path: pb_date_time/kit.schema.json
-    props_summary:
-      - datetime: "Date | string (required)"
-      - timezone: string
-      - showTimezone: boolean
-      - size: "sm | md"
-    related_components:
-      - date
-      - time
-      - timestamp
   - name: date_time_stacked
     platforms: *1
     description: Displays date and time in a vertical stacked format.
@@ -517,15 +301,6 @@ kits:
     icons_used: false
     react_rendered: false
     enhanced_element_used: false
-    schema_path: pb_date_time_stacked/kit.schema.json
-    props_summary:
-      - datetime: "Date | string (required)"
-      - timezone: string
-      - showTimezone: boolean
-    related_components:
-      - date_time
-      - date_stacked
-      - time_stacked
   - name: date_year_stacked
     platforms: *1
     description: This kit is a simple option for displaying dates in a month, day
@@ -534,13 +309,6 @@ kits:
     icons_used: false
     react_rendered: false
     enhanced_element_used: false
-    schema_path: pb_date_year_stacked/kit.schema.json
-    props_summary:
-      - date: "Date | string (required)"
-      - align: "left | center | right"
-    related_components:
-      - date_stacked
-      - date
   - name: time
     platforms: *1
     description: This kit consist of large display and table display format. It includes
@@ -549,17 +317,6 @@ kits:
     icons_used: true
     react_rendered: false
     enhanced_element_used: false
-    schema_path: pb_time/kit.schema.json
-    props_summary:
-      - time: "Date | string (required)"
-      - showTimezone: boolean
-      - timezone: string
-      - showIcon: boolean
-      - size: "md | sm"
-    related_components:
-      - time_stacked
-      - timestamp
-      - date_time
   - name: time_range_inline
     platforms: *1
     description: Displays a time range in an inline format.
@@ -567,15 +324,6 @@ kits:
     icons_used: true
     react_rendered: false
     enhanced_element_used: false
-    schema_path: pb_time_range_inline/kit.schema.json
-    props_summary:
-      - startTime: "Date | string (required)"
-      - endTime: "Date | string (required)"
-      - timezone: string
-      - icon: boolean
-    related_components:
-      - time
-      - date_range_inline
   - name: time_stacked
     platforms: *1
     description: Displays time in a vertical stacked format.
@@ -583,14 +331,6 @@ kits:
     icons_used: false
     react_rendered: false
     enhanced_element_used: false
-    schema_path: pb_time_stacked/kit.schema.json
-    props_summary:
-      - time: "Date | string (required)"
-      - timezone: string
-      - showTimezone: boolean
-    related_components:
-      - time
-      - date_time_stacked
   - name: timestamp
     platforms: *3
     description: This low profile kit displays time. Elapsed, current, future, or
@@ -599,18 +339,6 @@ kits:
     icons_used: false
     react_rendered: false
     enhanced_element_used: false
-    schema_path: pb_timestamp/kit.schema.json
-    props_summary:
-      - timestamp: "Date | string (required)"
-      - timezone: string
-      - showTimezone: boolean
-      - align: "left | center | right"
-      - showDate: boolean
-      - showUser: boolean
-    related_components:
-      - time
-      - date_time
-      - message
   - name: weekday_stacked
     platforms: *1
     description: Displays day of week and date in a stacked format.
@@ -618,14 +346,6 @@ kits:
     icons_used: false
     react_rendered: false
     enhanced_element_used: false
-    schema_path: pb_weekday_stacked/kit.schema.json
-    props_summary:
-      - date: "Date | string (required)"
-      - align: "left | center | right"
-      - variant: "day_only | expanded | month_day"
-    related_components:
-      - date_stacked
-      - date
 - category: form_and_dashboard_text_patterns
   description: Components for displaying structured data on forms and dashboards.
   components:
@@ -636,14 +356,6 @@ kits:
     icons_used: true
     react_rendered: false
     enhanced_element_used: false
-    schema_path: pb_contact/kit.schema.json
-    props_summary:
-      - contactType: "cell | email | work | wrong-phone | home | work-cell"
-      - contactValue: string (required)
-      - contactDetail: string
-    related_components:
-      - person_contact
-      - icon_value
   - name: currency
     platforms: *1
     description: Use to display monetary amounts, typically on dashboards or other
@@ -653,18 +365,6 @@ kits:
     icons_used: false
     react_rendered: false
     enhanced_element_used: false
-    schema_path: pb_currency/kit.schema.json
-    props_summary:
-      - amount: string (required)
-      - label: string
-      - unit: string
-      - size: "sm | md | lg"
-      - align: "left | center | right"
-      - symbol: string
-      - decimals: "default | matching"
-    related_components:
-      - stat_value
-      - dashboard_value
   - name: home_address_street
     platforms: *1
     description: This kit can be used to display the address for a homeowner/project.
@@ -674,18 +374,6 @@ kits:
     icons_used: false
     react_rendered: false
     enhanced_element_used: false
-    schema_path: pb_home_address_street/kit.schema.json
-    props_summary:
-      - address: string (required)
-      - addressCont: string
-      - city: string (required)
-      - homeId: string
-      - homeUrl: string
-      - state: string
-      - zipcode: string
-    related_components:
-      - contact
-      - source
   - name: label_pill
     platforms: *1
     description: This kit combines the caption and pill kit with all its variants.
@@ -693,15 +381,6 @@ kits:
     icons_used: false
     react_rendered: false
     enhanced_element_used: false
-    schema_path: pb_label_pill/kit.schema.json
-    props_summary:
-      - label: string (required)
-      - pillValue: string (required)
-      - variant: "neutral | success | warning | error | info | primary"
-    related_components:
-      - pill
-      - caption
-      - badge
   - name: label_value
     platforms: *1
     description: This kit can be very versatile when used to display text data.
@@ -709,15 +388,6 @@ kits:
     icons_used: true
     react_rendered: false
     enhanced_element_used: false
-    schema_path: pb_label_value/kit.schema.json
-    props_summary:
-      - label: string (required)
-      - value: string
-      - variant: "default | details"
-      - icon: string
-    related_components:
-      - title_detail
-      - title_value
   - name: person
     platforms: *1
     description: This kit is broken down into a first name last name format with normal
@@ -726,13 +396,6 @@ kits:
     icons_used: false
     react_rendered: false
     enhanced_element_used: false
-    schema_path: pb_person/kit.schema.json
-    props_summary:
-      - firstName: string (required)
-      - lastName: string
-    related_components:
-      - person_contact
-      - user
   - name: person_contact
     platforms: *1
     description: This kit can be used to display a person contact information.
@@ -740,15 +403,6 @@ kits:
     icons_used: false
     react_rendered: false
     enhanced_element_used: false
-    schema_path: pb_person_contact/kit.schema.json
-    props_summary:
-      - firstName: string (required)
-      - lastName: string
-      - contacts: "array (required)"
-    related_components:
-      - person
-      - contact
-      - user
   - name: source
     platforms: *1
     description: General use is to describe the discovery of businesses, customers,
@@ -757,15 +411,6 @@ kits:
     icons_used: true
     react_rendered: false
     enhanced_element_used: false
-    schema_path: pb_source/kit.schema.json
-    props_summary:
-      - source: string (required)
-      - type: string
-      - user: object
-      - hideIcon: boolean
-    related_components:
-      - user
-      - icon_value
   - name: dashboard_value
     platforms: *1
     description: Use in dashboards to give the viewer a quick overview of important
@@ -774,17 +419,6 @@ kits:
     icons_used: false
     react_rendered: false
     enhanced_element_used: false
-    schema_path: pb_dashboard_value/kit.schema.json
-    props_summary:
-      - statLabel: string
-      - statValue: string | object (required)
-      - statChange: object
-      - size: "sm | md | lg"
-      - align: "left | center | right"
-    related_components:
-      - stat_value
-      - stat_change
-      - currency
   - name: stat_change
     platforms: *1
     description: Displays the increase, decrease, or neutral change in data.
@@ -792,14 +426,6 @@ kits:
     icons_used: true
     react_rendered: false
     enhanced_element_used: false
-    schema_path: pb_stat_change/kit.schema.json
-    props_summary:
-      - "change: increase | decrease | neutral (required)"
-      - "value: string | number (required)"
-      - "icon: string"
-    related_components:
-      - stat_value
-      - dashboard_value
   - name: stat_value
     platforms: *1
     description: This kit was cerated for the main use as a dashboard display for
@@ -808,15 +434,6 @@ kits:
     icons_used: false
     react_rendered: false
     enhanced_element_used: false
-    schema_path: pb_stat_value/kit.schema.json
-    props_summary:
-      - value: string | number (required)
-      - unit: string
-      - size: "sm | md | lg"
-    related_components:
-      - stat_change
-      - dashboard_value
-      - currency
   - name: title_count
     platforms: *1
     description: This kits consists of title kit and body text. It is used to display
@@ -826,15 +443,6 @@ kits:
     icons_used: false
     react_rendered: false
     enhanced_element_used: false
-    schema_path: pb_title_count/kit.schema.json
-    props_summary:
-      - count: number (required)
-      - title: string (required)
-      - size: "sm | md | lg"
-      - align: "left | center | right"
-    related_components:
-      - title_detail
-      - stat_value
   - name: title_detail
     platforms: *1
     description: This kit can be used in many versatile ways. It consist of a title
@@ -843,14 +451,6 @@ kits:
     icons_used: false
     react_rendered: false
     enhanced_element_used: false
-    schema_path: pb_title_detail/kit.schema.json
-    props_summary:
-      - title: string (required)
-      - detail: string
-      - align: "left | center | right"
-    related_components:
-      - title_count
-      - label_value
 - category: form_elements
   description: Form wrapper components and specialized form controls.
   components:
@@ -861,16 +461,6 @@ kits:
     icons_used: false
     react_rendered: false
     enhanced_element_used: false
-    schema_path: pb_file_upload/kit.schema.json
-    props_summary:
-      - accept: "string | string[]"
-      - maxSize: number
-      - onFilesAccepted: function
-      - onFilesRejected: function
-      - customMessage: string
-    related_components:
-      - form
-      - button
   - name: toggle
     platforms: *1
     description: Physical switch that allows users to turn things on or off. Used
@@ -879,15 +469,6 @@ kits:
     icons_used: false
     react_rendered: false
     enhanced_element_used: false
-    schema_path: pb_toggle/kit.schema.json
-    props_summary:
-      - checked: boolean
-      - onChange: function
-      - size: "sm | md"
-      - name: string
-    related_components:
-      - checkbox
-      - radio
   - name: form_pill
     platforms: *1
     description: Pill-shaped form elements for tags, selections, or filters.
@@ -895,18 +476,6 @@ kits:
     icons_used: true
     react_rendered: false
     enhanced_element_used: false
-    schema_path: pb_form_pill/kit.schema.json
-    props_summary:
-      - text: string (required)
-      - name: string
-      - variant: "primary | neutral"
-      - icon: string
-      - size: "small | big"
-      - closeProps: object
-    related_components:
-      - pill
-      - typeahead
-      - multi_level_select
   - name: form
     platforms: *4
     description: The form kit provides consumers with a convenient, consistently styled
@@ -915,14 +484,6 @@ kits:
     icons_used: false
     react_rendered: false
     enhanced_element_used: true
-    schema_path: pb_form/kit.schema.json
-    props_summary:
-      - action: string
-      - method: "get | post | patch | put | delete"
-    related_components:
-      - form_group
-      - text_input
-      - button
   - name: form_group
     platforms: *1
     description: Groups related form fields together with optional labels.
@@ -930,13 +491,6 @@ kits:
     icons_used: false
     react_rendered: false
     enhanced_element_used: false
-    schema_path: pb_form_group/kit.schema.json
-    props_summary:
-      - fullWidth: boolean
-    related_components:
-      - form
-      - text_input
-      - select
 - category: form_input
   description: Components for text-based user input in forms.
   components:
@@ -947,18 +501,6 @@ kits:
     icons_used: true
     react_rendered: true
     enhanced_element_used: false
-    schema_path: pb_passphrase/kit.schema.json
-    props_summary:
-      - label: string
-      - value: string
-      - onChange: function
-      - showTipsBelow: "always | xs | sm | md | lg | xl"
-      - tips: "string[]"
-      - confirmation: boolean
-      - minLength: number
-    related_components:
-      - text_input
-      - form
   - name: phone_number_input
     platforms: *1
     description: International phone number input with country code selection and formatting.
@@ -966,18 +508,6 @@ kits:
     icons_used: false
     react_rendered: true
     enhanced_element_used: false
-    schema_path: pb_phone_number_input/kit.schema.json
-    props_summary:
-      - initialCountry: string
-      - preferredCountries: "string[]"
-      - onlyCountries: "string[]"
-      - value: string
-      - onChange: function
-      - label: string
-      - required: boolean
-    related_components:
-      - text_input
-      - form
   - name: text_input
     platforms: *1
     description: Area where user can enter small amount of text. Commonly used in
@@ -986,22 +516,6 @@ kits:
     icons_used: true
     react_rendered: false
     enhanced_element_used: false
-    schema_path: pb_text_input/kit.schema.json
-    props_summary:
-      - type: "text | email | password | number | tel | url | search"
-      - label: string
-      - placeholder: string
-      - value: string
-      - onChange: function
-      - error: string
-      - disabled: boolean
-      - required: boolean
-      - addOn: "{ icon: string, alignment: left | right }"
-    related_components:
-      - textarea
-      - select
-      - form
-      - passphrase
   - name: rich_text_editor
     platforms: *1
     description: Full-featured text editor with formatting options.
@@ -1010,17 +524,6 @@ kits:
     icons_used: true
     react_rendered: true
     enhanced_element_used: false
-    schema_path: pb_rich_text_editor/kit.schema.json
-    props_summary:
-      - onChange: function
-      - template: string
-      - placeholder: string
-      - focus: boolean
-      - simple: boolean
-      - sticky: boolean
-    related_components:
-      - textarea
-      - form
   - name: textarea
     platforms: *1
     description: Area where user can enter larger amounts of text. Commonly used in
@@ -1029,22 +532,6 @@ kits:
     icons_used: false
     react_rendered: false
     enhanced_element_used: true
-    schema_path: pb_textarea/kit.schema.json
-    props_summary:
-      - label: string
-      - placeholder: string
-      - value: string
-      - onChange: function
-      - rows: number
-      - resize: "none | both | horizontal | vertical | auto"
-      - characterCount: string
-      - maxCharacters: string
-      - error: string
-      - required: boolean
-    related_components:
-      - text_input
-      - rich_text_editor
-      - form
   - name: typeahead
     platforms: *1
     description: Typeahead is auto suggestion or completion based on what the user
@@ -1053,21 +540,6 @@ kits:
     icons_used: true
     react_rendered: true
     enhanced_element_used: true
-    schema_path: pb_typeahead/kit.schema.json
-    props_summary:
-      - options: "array (required)"
-      - label: string
-      - placeholder: string
-      - async: boolean
-      - loadOptions: function
-      - isMulti: boolean
-      - createable: boolean
-      - getOptionLabel: function
-      - getOptionValue: function
-    related_components:
-      - select
-      - dropdown
-      - multi_level_select
 - category: form_selection
   description: Components for selecting options, dates, and making choices in forms.
   components:
@@ -1080,21 +552,6 @@ kits:
     icons_used: true
     react_rendered: false
     enhanced_element_used: false
-    schema_path: pb_date_picker/kit.schema.json
-    props_summary:
-      - pickerId: string (required)
-      - mode: "single | multiple | range"
-      - defaultDate: "string | Date"
-      - minDate: "string | Date"
-      - maxDate: "string | Date"
-      - enableTime: boolean
-      - allowInput: boolean
-      - placeholder: string
-      - label: string
-      - onChange: function
-    related_components:
-      - time_picker
-      - text_input
   - name: dropdown
     platforms: *1
     description: Customizable dropdown menu with trigger element and various option configurations.
@@ -1102,19 +559,6 @@ kits:
     icons_used: true
     react_rendered: false
     enhanced_element_used: true
-    schema_path: pb_dropdown/kit.schema.json
-    props_summary:
-      - options: "array"
-      - label: string
-      - onSelect: function
-      - separators: boolean
-      - triggerRef: React.RefObject
-      - autocomplete: boolean
-    related_components:
-      - select
-      - popover
-      - typeahead
-      - multi_level_select
     subcomponents:
       - Dropdown.Trigger
       - Dropdown.Container
@@ -1127,18 +571,6 @@ kits:
     icons_used: true
     react_rendered: true
     enhanced_element_used: false
-    schema_path: pb_multi_level_select/kit.schema.json
-    props_summary:
-      - treeData: "array (required)"
-      - onSelect: function
-      - returnAllSelected: boolean
-      - variant: "multi | single"
-      - inputDisplay: "pills | none"
-      - selectedIds: "string[]"
-    related_components:
-      - dropdown
-      - typeahead
-      - checkbox
   - name: select
     platforms: *1
     description: Select displays multiple options for a user to pick from in a dropdown
@@ -1147,21 +579,6 @@ kits:
     icons_used: true
     react_rendered: false
     enhanced_element_used: true
-    schema_path: pb_select/kit.schema.json
-    props_summary:
-      - options: "array (required)"
-      - label: string
-      - blank_selection: string
-      - disabled: boolean
-      - required: boolean
-      - error: string
-      - multiple: boolean
-      - name: string
-      - onChange: function
-    related_components:
-      - dropdown
-      - typeahead
-      - radio
   - name: selectable_card
     platforms: *1
     description: Cards for information/content that can be selected. There is design
@@ -1170,21 +587,6 @@ kits:
     icons_used: true
     react_rendered: false
     enhanced_element_used: false
-    schema_path: pb_selectable_card/kit.schema.json
-    props_summary:
-      - checked: boolean
-      - disabled: boolean
-      - icon: boolean
-      - inputId: string
-      - multi: boolean
-      - name: string
-      - onChange: function
-      - variant: "default | displayInput"
-    related_components:
-      - card
-      - checkbox
-      - radio
-      - selectable_card_icon
   - name: selectable_card_icon
     platforms: *1
     description: Selectable card variant with icon display for visual selection options.
@@ -1192,18 +594,6 @@ kits:
     icons_used: false
     react_rendered: false
     enhanced_element_used: false
-    schema_path: pb_selectable_card_icon/kit.schema.json
-    props_summary:
-      - icon: string (required)
-      - titleText: string
-      - bodyText: string
-      - checked: boolean
-      - inputId: string
-      - name: string
-    related_components:
-      - selectable_card
-      - selectable_icon
-      - icon
   - name: selectable_icon
     platforms: *1
     description: Icon-based selection input for compact visual choices.
@@ -1211,19 +601,6 @@ kits:
     icons_used: true
     react_rendered: false
     enhanced_element_used: false
-    schema_path: pb_selectable_icon/kit.schema.json
-    props_summary:
-      - icon: string (required)
-      - checked: boolean
-      - disabled: boolean
-      - inputId: string
-      - name: string
-      - onChange: function
-      - text: string
-    related_components:
-      - selectable_card_icon
-      - icon
-      - checkbox
   - name: radio
     platforms: *3
     description: Radio is a control that allows the user to only choose one predefined
@@ -1232,19 +609,6 @@ kits:
     icons_used: false
     react_rendered: false
     enhanced_element_used: false
-    schema_path: pb_radio/kit.schema.json
-    props_summary:
-      - checked: boolean
-      - disabled: boolean
-      - label: string
-      - name: string (required)
-      - value: string
-      - onChange: function
-      - orientation: "vertical | horizontal"
-    related_components:
-      - checkbox
-      - select
-      - selectable_card
   - name: checkbox
     platforms: *1
     description: Checkbox is used for a list of selections that are meant to have
@@ -1253,21 +617,6 @@ kits:
     icons_used: true
     react_rendered: false
     enhanced_element_used: true
-    schema_path: pb_checkbox/kit.schema.json
-    props_summary:
-      - checked: boolean
-      - disabled: boolean
-      - label: string
-      - name: string
-      - value: string
-      - onChange: function
-      - indeterminate: boolean
-      - error: boolean
-    related_components:
-      - radio
-      - toggle
-      - selectable_card
-      - multi_level_select
   - name: selectable_list
     platforms: *1
     description: List of items that can be selected, supporting single or multiple selection.
@@ -1275,14 +624,6 @@ kits:
     icons_used: false
     react_rendered: false
     enhanced_element_used: false
-    schema_path: pb_selectable_list/kit.schema.json
-    props_summary:
-      - variant: "radio | checkbox"
-      - children: ReactNode
-    related_components:
-      - radio
-      - checkbox
-      - list
   - name: time_picker
     platforms: web
     description: A time picker component that allows users to select a time independently of the date.
@@ -1290,17 +631,6 @@ kits:
     icons_used: true
     react_rendered: true
     enhanced_element_used: true
-    schema_path: pb_time_picker/kit.schema.json
-    props_summary:
-      - pickerId: string (required)
-      - defaultValue: string
-      - minTime: string
-      - maxTime: string
-      - onChange: function
-      - label: string
-    related_components:
-      - date_picker
-      - text_input
 - category: icons_and_images
   description: Components for displaying icons, images, and visual media.
   components:
@@ -1312,18 +642,6 @@ kits:
     icons_used: true
     react_rendered: false
     enhanced_element_used: false
-    schema_path: pb_icon/kit.schema.json
-    props_summary:
-      - icon: string (required)
-      - size: "xs | sm | 1x | lg | 2x | 3x | 4x | 5x"
-      - rotation: "90 | 180 | 270"
-      - flip: "horizontal | vertical | both"
-      - spin: boolean
-      - fontStyle: "far | fas | fab | fak"
-    related_components:
-      - icon_circle
-      - icon_value
-      - circle_icon_button
   - name: icon_circle
     platforms: *1
     description: Similar to Icon, Icon Circle is a graphical symbol within a circle
@@ -1332,15 +650,6 @@ kits:
     icons_used: true
     react_rendered: false
     enhanced_element_used: false
-    schema_path: pb_icon_circle/kit.schema.json
-    props_summary:
-      - icon: string (required)
-      - size: "xs | sm | md | lg | xl"
-      - variant: "default | royal | blue | purple | teal | red | yellow | green"
-    related_components:
-      - icon
-      - circle_icon_button
-      - avatar
   - name: icon_stat_value
     platforms: *1
     description: Displays a statistic value with an associated icon.
@@ -1348,14 +657,6 @@ kits:
     icons_used: true
     react_rendered: false
     enhanced_element_used: false
-    schema_path: pb_icon_stat_value/kit.schema.json
-    props_summary:
-      - icon: string (required)
-      - text: string (required)
-      - size: "sm | md | lg"
-    related_components:
-      - stat_value
-      - icon_value
   - name: icon_value
     platforms: *1
     description: Icon Value leverages our icon kit, to display a value of some sort
@@ -1364,14 +665,6 @@ kits:
     icons_used: true
     react_rendered: false
     enhanced_element_used: false
-    schema_path: pb_icon_value/kit.schema.json
-    props_summary:
-      - icon: string (required)
-      - text: string (required)
-      - align: "left | center | right"
-    related_components:
-      - icon
-      - label_value
   - name: user_badge
     platforms: *1
     description: This kit was created to display employee icons related to a Nitro
@@ -1380,13 +673,6 @@ kits:
     icons_used: false
     react_rendered: false
     enhanced_element_used: false
-    schema_path: pb_user_badge/kit.schema.json
-    props_summary:
-      - badge: "pvi | million-dollar"
-      - size: "sm | md | lg"
-    related_components:
-      - badge
-      - user
   - name: image
     platforms: *1
     description: A responsive image component.
@@ -1394,15 +680,6 @@ kits:
     icons_used: false
     react_rendered: false
     enhanced_element_used: false
-    schema_path: pb_image/kit.schema.json
-    props_summary:
-      - url: string (required)
-      - alt: string
-      - size: "xs | sm | md | lg | xl | none"
-      - rounded: boolean
-    related_components:
-      - avatar
-      - lightbox
   - name: lightbox
     platforms: *2
     description: The Lightbox kit is a popup window overlay that will appear on top
@@ -1411,14 +688,6 @@ kits:
     icons_used: false
     react_rendered: false
     enhanced_element_used: false
-    schema_path: pb_lightbox/kit.schema.json
-    props_summary:
-      - photos: "array (required)"
-      - initialPhoto: number
-      - onClose: function
-    related_components:
-      - image
-      - dialog
   - name: star_rating
     platforms: *1
     description: A component to view other people’s opinions and experiences. Use
@@ -1428,15 +697,6 @@ kits:
     icons_used: true
     react_rendered: false
     enhanced_element_used: true
-    schema_path: pb_star_rating/kit.schema.json
-    props_summary:
-      - rating: number (required)
-      - denominator: number
-      - layoutOption: "default | onestar | number"
-      - size: "sm | md | lg"
-    related_components:
-      - icon
-      - badge
 - category: layout_and_structure
   description: Components for structuring and organizing page layouts and content containers.
   components:
@@ -1448,18 +708,6 @@ kits:
     icons_used: false
     react_rendered: false
     enhanced_element_used: false
-    schema_path: pb_flex/kit.schema.json
-    props_summary:
-      - orientation: "row | column"
-      - justify: "start | center | end | spaceBetween | spaceAround | spaceEvenly"
-      - align: "start | center | end | stretch | baseline"
-      - wrap: boolean
-      - gap: "none | xxs | xs | sm | md | lg | xl"
-      - inline: boolean
-    related_components:
-      - layout
-      - card
-      - body
   - name: layout
     platforms: *1
     description: Layouts used for positioning content inside of pages, cards, or containers.
@@ -1467,17 +715,6 @@ kits:
     icons_used: false
     react_rendered: false
     enhanced_element_used: false
-    schema_path: pb_layout/kit.schema.json
-    props_summary:
-      - variant: "light | dark | transparent"
-      - size: "xs | sm | md | lg | xl"
-      - position: "left | right"
-      - collapse: "xs | sm | md | lg | xl"
-      - full: boolean
-    related_components:
-      - flex
-      - card
-      - background
   - name: card
     platforms: *3
     description: Content container with optional header, body sections, and various styling options.
@@ -1485,20 +722,6 @@ kits:
     icons_used: true
     react_rendered: false
     enhanced_element_used: false
-    schema_path: pb_card/kit.schema.json
-    props_summary:
-      - borderRadius: "none | xs | sm | md | lg | xl | rounded"
-      - borderNone: boolean
-      - background: "none | white | light | dark | product colors"
-      - padding: "none | xxs | xs | sm | md | lg | xl"
-      - selected: boolean
-      - highlight: "{ position: side | top, color: string }"
-      - tag: "div | section | footer | header | article | aside | main | nav"
-    related_components:
-      - selectable_card
-      - flex
-      - body
-      - title
     subcomponents:
       - Card.Header
       - Card.Body
@@ -1510,14 +733,6 @@ kits:
     icons_used: false
     react_rendered: false
     enhanced_element_used: false
-    schema_path: pb_section_separator/kit.schema.json
-    props_summary:
-      - variant: "card | background"
-      - text: string
-      - orientation: "horizontal | vertical"
-    related_components:
-      - card
-      - flex
   - name: background
     platforms: *1
     description: The background kit is used for adding a background to a page or to
@@ -1526,14 +741,6 @@ kits:
     icons_used: false
     react_rendered: false
     enhanced_element_used: false
-    schema_path: pb_background/kit.schema.json
-    props_summary:
-      - backgroundColor: "gradient | dark | light | white | status colors | category colors | product colors"
-      - imageUrl: string
-      - tag: string
-    related_components:
-      - card
-      - layout
   - name: collapsible
     platforms: *1
     description: Collapsible content that can be expanded or collapsed.
@@ -1541,16 +748,6 @@ kits:
     icons_used: true
     react_rendered: false
     enhanced_element_used: true
-    schema_path: pb_collapsible/kit.schema.json
-    props_summary:
-      - collapsed: boolean
-      - onCollapse: function
-      - icon: "string | string[]"
-      - iconColor: "default | light | lighter | link | error | success"
-      - iconSize: "xs | sm | 1x | lg | 2x | 3x | 4x | 5x"
-    related_components:
-      - card
-      - flex
     subcomponents:
       - Collapsible.Main
       - Collapsible.Content
@@ -1561,14 +758,6 @@ kits:
     icons_used: false
     react_rendered: false
     enhanced_element_used: true
-    schema_path: pb_overlay/kit.schema.json
-    props_summary:
-      - color: "card_light | card_dark | bg_light | bg_dark | opacity"
-      - gradient: boolean
-      - layout: "default | left | right | center | none"
-    related_components:
-      - dialog
-      - popover
   - name: draggable
     platforms: *1
     description: Drag and drop functionality for reordering items.
@@ -1576,14 +765,6 @@ kits:
     icons_used: false
     react_rendered: false
     enhanced_element_used: false
-    schema_path: pb_draggable/kit.schema.json
-    props_summary:
-      - initialItems: array
-      - onReorder: function
-      - dropZoneData: object
-    related_components:
-      - list
-      - table
     subcomponents:
       - Draggable.Container
       - Draggable.Item
@@ -1597,13 +778,6 @@ kits:
     icons_used: false
     react_rendered: false
     enhanced_element_used: false
-    schema_path: pb_highlight/kit.schema.json
-    props_summary:
-      - text: string (required)
-      - highlightedText: "string | string[]"
-    related_components:
-      - body
-      - title
   - name: message
     platforms: *1
     description: This multi kit consist of a an avatar, a status, a caption, a body
@@ -1612,18 +786,6 @@ kits:
     icons_used: false
     react_rendered: false
     enhanced_element_used: false
-    schema_path: pb_message/kit.schema.json
-    props_summary:
-      - avatarUrl: string
-      - avatarName: string
-      - avatarStatus: "online | away | offline"
-      - label: string
-      - message: string
-      - timestamp: string
-    related_components:
-      - avatar
-      - timestamp
-      - body
 - category: navigation
   description: Components for navigation, breadcrumbs, and pagination.
   components:
@@ -1634,12 +796,6 @@ kits:
     icons_used: false
     react_rendered: false
     enhanced_element_used: false
-    schema_path: pb_bread_crumbs/kit.schema.json
-    props_summary:
-      - links: "array (required)"
-    related_components:
-      - nav
-      - link
   - name: nav
     platforms: *1
     description: The nav is a grouped set of links that take the user to another page,
@@ -1649,25 +805,12 @@ kits:
     icons_used: true
     react_rendered: false
     enhanced_element_used: true
-    schema_path: pb_nav/kit.schema.json
-    props_summary:
-      - variant: "normal | subtle | bold"
-      - orientation: "vertical | horizontal"
-      - highlight: boolean
-      - link: string
-    related_components:
-      - bread_crumbs
-      - list
     subcomponents:
       - Nav.Item
   - name: pagination
     platforms: *4
     description: Pagination for navigating through multiple pages of content.
     status: stable
-    schema_path: pb_pagination/kit.schema.json
-    related_components:
-      - table
-      - list
 - category: state_and_progress_indicators
   description: Components for showing loading states, progress, and timelines.
   components:
@@ -1678,15 +821,6 @@ kits:
     icons_used: false
     react_rendered: false
     enhanced_element_used: false
-    schema_path: pb_empty_state/kit.schema.json
-    props_summary:
-      - title: string (required)
-      - description: string
-      - icon: string
-      - image: string
-    related_components:
-      - card
-      - icon_circle
   - name: loading_inline
     platforms: *1
     description: The loading kit is used to indicate to users that a page is still
@@ -1695,12 +829,6 @@ kits:
     icons_used: true
     react_rendered: false
     enhanced_element_used: false
-    schema_path: pb_loading_inline/kit.schema.json
-    props_summary:
-      - align: "left | center | right"
-    related_components:
-      - progress_simple
-      - button
   - name: progress_pills
     platforms: *1
     description: Progress pills indicate a specific point in time of a series of sequential
@@ -1709,27 +837,11 @@ kits:
     icons_used: false
     react_rendered: false
     enhanced_element_used: false
-    schema_path: pb_progress_pills/kit.schema.json
-    props_summary:
-      - active: number (required)
-      - steps: number (required)
-      - title: string
-    related_components:
-      - progress_step
-      - progress_simple
   - name: progress_simple
     platforms: *1
     description: Displays the current progress of an operation flow. User understanding
       increases when paired with labels or numbers.
     status: stable
-    schema_path: pb_progress_simple/kit.schema.json
-    props_summary:
-      - percent: number (required)
-      - max: number
-      - value: string
-    related_components:
-      - progress_pills
-      - distribution_bar
   - name: progress_step
     platforms: *1
     description: 'Progress step kit is used to show the progress of a process. There
@@ -1738,15 +850,6 @@ kits:
     icons_used: true
     react_rendered: false
     enhanced_element_used: false
-    schema_path: pb_progress_step/kit.schema.json
-    props_summary:
-      - steps: "array (required)"
-      - icon: boolean
-      - orientation: "horizontal | vertical"
-      - variant: "default | tracker"
-    related_components:
-      - progress_pills
-      - timeline
     subcomponents:
       - ProgressStep.Item
   - name: timeline
@@ -1757,13 +860,6 @@ kits:
     icons_used: true
     react_rendered: false
     enhanced_element_used: false
-    schema_path: pb_timeline/kit.schema.json
-    props_summary:
-      - orientation: "horizontal | vertical"
-      - showDate: boolean
-    related_components:
-      - progress_step
-      - list
     subcomponents:
       - Timeline.Item
   - name: skeleton_loading
@@ -1773,15 +869,6 @@ kits:
     icons_used: false
     react_rendered: false
     enhanced_element_used: false
-    schema_path: pb_skeleton_loading/kit.schema.json
-    props_summary:
-      - borderRadius: "none | xs | sm | md | lg | xl | rounded"
-      - height: string
-      - width: string
-      - gap: "xxs | xs | sm | md | lg | xl"
-    related_components:
-      - loading_inline
-      - card
 - category: tags
   description: Components for tags, badges, pills, and status indicators.
   components:
@@ -1793,14 +880,6 @@ kits:
     icons_used: true
     react_rendered: false
     enhanced_element_used: false
-    schema_path: pb_badge/kit.schema.json
-    props_summary:
-      - text: string (required)
-      - variant: "primary | success | warning | error | info | neutral"
-      - rounded: boolean
-    related_components:
-      - pill
-      - online_status
   - name: online_status
     platforms: *1
     description: Online Status is a small indicator that lets the user know the status
@@ -1809,13 +888,6 @@ kits:
     icons_used: false
     react_rendered: false
     enhanced_element_used: false
-    schema_path: pb_online_status/kit.schema.json
-    props_summary:
-      - "status: online | offline | away (required)"
-    related_components:
-      - badge
-      - avatar
-      - user
   - name: pill
     platforms: *3
     description: A pill uses both a keyword and a specific color to categorize an
@@ -1824,16 +896,6 @@ kits:
     icons_used: false
     react_rendered: false
     enhanced_element_used: false
-    schema_path: pb_pill/kit.schema.json
-    props_summary:
-      - text: string (required)
-      - variant: "primary | warning | error | info | neutral | success"
-      - closeProps: object
-      - textTransform: "none | lowercase"
-    related_components:
-      - badge
-      - label_pill
-      - form_pill
   - name: hashtag
     platforms: *1
     description: Hashtag is used to display home, project and other forms of IDs.
@@ -1842,14 +904,6 @@ kits:
     icons_used: false
     react_rendered: false
     enhanced_element_used: false
-    schema_path: pb_hashtag/kit.schema.json
-    props_summary:
-      - text: string (required)
-      - type: "default | home | project | appointment"
-      - url: string
-    related_components:
-      - pill
-      - home_address_street
 - category: typography
   description: Text components for consistent typography throughout the application.
   components:
@@ -1862,19 +916,6 @@ kits:
     icons_used: false
     react_rendered: false
     enhanced_element_used: false
-    schema_path: pb_body/kit.schema.json
-    props_summary:
-      - color: "default | light | lighter | link"
-      - text: string
-      - tag: "p | span | div | h1 | h2 | h3 | h4 | h5 | h6"
-      - status: "neutral | negative | positive"
-      - highlightedText: "string[]"
-      - highlighting: boolean
-    related_components:
-      - title
-      - caption
-      - detail
-      - highlight
   - name: caption
     platforms: *1
     description: Use to provide supplementary context. Default size is best when providing
@@ -1884,16 +925,6 @@ kits:
     icons_used: false
     react_rendered: false
     enhanced_element_used: false
-    schema_path: pb_caption/kit.schema.json
-    props_summary:
-      - size: "xs | sm | md | lg"
-      - text: string
-      - tag: "div | span | caption | h1 | h2 | h3 | h4 | h5 | h6 | p | label"
-      - variant: "null | link"
-    related_components:
-      - body
-      - detail
-      - title
   - name: detail
     platforms: *1
     description: Used for tables or designs with large amounts of data or text.
@@ -1901,15 +932,6 @@ kits:
     icons_used: false
     react_rendered: false
     enhanced_element_used: false
-    schema_path: pb_detail/kit.schema.json
-    props_summary:
-      - text: string
-      - bold: boolean
-      - color: "default | light | lighter | link"
-    related_components:
-      - body
-      - caption
-      - title
   - name: title
     platforms: *1
     description: Typically used as headers. Follow semantic hierarchy — Title 1s should
@@ -1919,19 +941,6 @@ kits:
     icons_used: false
     react_rendered: false
     enhanced_element_used: false
-    schema_path: pb_title/kit.schema.json
-    props_summary:
-      - size: "1 | 2 | 3 | 4"
-      - text: string
-      - tag: "h1 | h2 | h3 | h4 | h5 | h6 | p | span | div"
-      - variant: "null | link"
-      - bold: boolean
-      - color: "default | light | lighter | link"
-    related_components:
-      - body
-      - caption
-      - detail
-      - highlight
   - name: link
     platforms: *1
     description: Text link for navigation to other pages or sections.
@@ -1939,19 +948,6 @@ kits:
     icons_used: false
     react_rendered: false
     enhanced_element_used: false
-    schema_path: pb_link/kit.schema.json
-    props_summary:
-      - href: string
-      - text: string
-      - underline: boolean
-      - icon: string
-      - iconRight: boolean
-      - target: "_blank | _self | _parent | _top"
-      - tag: "a | h1 | h2 | h3 | h4 | h5 | h6"
-    related_components:
-      - button
-      - nav
-      - bread_crumbs
 - category: user
   description: Components for displaying user information, avatars, and user-related data.
   components:
@@ -1965,18 +961,6 @@ kits:
     icons_used: true
     react_rendered: false
     enhanced_element_used: false
-    schema_path: pb_avatar/kit.schema.json
-    props_summary:
-      - name: string (required)
-      - imageUrl: string
-      - size: "xs | sm | md | lg | xl"
-      - imageAlt: string
-      - status: "online | away | offline"
-    related_components:
-      - user
-      - multiple_users
-      - multiple_users_stacked
-      - online_status
   - name: multiple_users
     platforms: *1
     description: The multiple users kit is used to show that more than one user is
@@ -1985,14 +969,6 @@ kits:
     icons_used: false
     react_rendered: false
     enhanced_element_used: false
-    schema_path: pb_multiple_users/kit.schema.json
-    props_summary:
-      - users: "array (required)"
-      - size: "xs | sm | md | lg | xl"
-    related_components:
-      - avatar
-      - user
-      - multiple_users_stacked
   - name: multiple_users_stacked
     platforms: *1
     description: Multiple users stacked is used in tight spaces, where we need to
@@ -2001,14 +977,6 @@ kits:
     icons_used: false
     react_rendered: false
     enhanced_element_used: false
-    schema_path: pb_multiple_users_stacked/kit.schema.json
-    props_summary:
-      - users: "array (required)"
-      - size: "xs | sm | md | lg | xl"
-    related_components:
-      - avatar
-      - user
-      - multiple_users
   - name: user
     platforms: *1
     description: This kit was created for having a systematic way of displaying users
@@ -2018,17 +986,4 @@ kits:
     icons_used: false
     react_rendered: false
     enhanced_element_used: false
-    schema_path: pb_user/kit.schema.json
-    props_summary:
-      - name: string (required)
-      - avatar: boolean
-      - avatarUrl: string
-      - orientation: "horizontal | vertical"
-      - size: "sm | md | lg"
-      - title: string
-      - territory: string
-    related_components:
-      - avatar
-      - multiple_users
-      - person
       - person_contact

@@ -106,7 +106,6 @@ function loadMenuYml() {
           components: (c.components || []).map(comp => ({
             name: comp.name,
             description: comp.description || '',
-            related_components: comp.related_components || null,
             platforms: comp.platforms || null,
           })),
         })),
@@ -386,15 +385,6 @@ function generateSchema(kitName, options = {}) {
     globalProps: true,
     usage: generateUsage(kitName, props),
   };
-
-  if (menuData?.related_components) {
-    try {
-      const related = menuData.related_components;
-      schema.relatedComponents = (typeof related === 'string')
-        ? related.replace(/[\[\]]/g, '').split(',').map(s => s.trim()).filter(Boolean)
-        : related;
-    } catch { /* ignore */ }
-  }
 
   return schema;
 }
