@@ -1,3 +1,44 @@
+# Leaner, Faster, Smoother Rails! 💥
+##### April 03, 2026
+
+![release_image](https://github.com/user-attachments/assets/db119637-25e9-4157-9091-c5f7fdf034fc)
+
+We trimmed the fat and optimized the core for the base of our Rails kits: fewer allocations, faster classnames, and noticeably snappier renders!
+
+[16.5.0](https://github.com/powerhome/playbook/tree/16.5.0) full list of changes:
+
+**Kit Enhancements:**
+
+- Selectable Card Kit: Input Variant Style Updates [\#6002](https://github.com/powerhome/playbook/pull/6002) ([elisashapiro](https://github.com/elisashapiro))
+- Advanced Table: Pinned Rows Overlap Multi-header Rows [\#6001](https://github.com/powerhome/playbook/pull/6001) ([elisashapiro](https://github.com/elisashapiro))
+- Playbook Rails: Optimize Kit Base Rendering [\#5974](https://github.com/powerhome/playbook/pull/5974) ([terryfinn](https://github.com/terryfinn))
+- Global Props: Grouphover for All Hover Global Props [\#5973](https://github.com/powerhome/playbook/pull/5973) ([elisashapiro](https://github.com/elisashapiro))
+- Table Kit: External Filter Prop - Rails [\#5943](https://github.com/powerhome/playbook/pull/5943) ([kangaree](https://github.com/kangaree))
+- Multilevelselect: Placeholder Prop [\#5969](https://github.com/powerhome/playbook/pull/5969) ([elisashapiro](https://github.com/elisashapiro))
+- Advanced Table: Border Radius Remains [\#5964](https://github.com/powerhome/playbook/pull/5964) ([elisashapiro](https://github.com/elisashapiro))
+- List Kit: Border Token Revert, Keeping Selectable List Accessible [\#5944](https://github.com/powerhome/playbook/pull/5944) ([elisashapiro](https://github.com/elisashapiro))
+- Advanced Table Kit: Pinned Rows - Rails Only [\#5929](https://github.com/powerhome/playbook/pull/5929) ([kangaree](https://github.com/kangaree))
+
+
+**Fixed Bugs:**
+
+- Select Kit: Tie Labels With Ids - Rails [\#6000](https://github.com/powerhome/playbook/pull/6000) ([kangaree](https://github.com/kangaree))
+- Circle Icon Button: Loading Icon Misplacement - Rails [\#5961](https://github.com/powerhome/playbook/pull/5961) ([elisashapiro](https://github.com/elisashapiro))
+
+
+**Improvements:**
+
+- Update Dependency Trix to V2.1.16 (security) [\#5994](https://github.com/powerhome/playbook/pull/5994) ([renovate[bot]](https://github.com/apps/renovate))
+- Playbook Website: Document Advanced Table - Grouped Headers, Custom Headers, Sort, and Pinned Rows [\#5980](https://github.com/powerhome/playbook/pull/5980) ([kangaree](https://github.com/kangaree))
+- Playbook Website: Upgrades Playbook Icons [\#5993](https://github.com/powerhome/playbook/pull/5993) ([elisashapiro](https://github.com/elisashapiro))
+- Typeahead Docs: Better Way to Handle Highlighting Within Typeahead [\#5970](https://github.com/powerhome/playbook/pull/5970) ([nidaqg](https://github.com/nidaqg))
+- Playbook Website: Docs on Display Global Prop and Full Width Buttons [\#5968](https://github.com/powerhome/playbook/pull/5968) ([kangaree](https://github.com/kangaree))
+- Update Nokogiri and Dependencies [\#5937](https://github.com/powerhome/playbook/pull/5937) ([elisashapiro](https://github.com/elisashapiro))
+- Global Props: Update Position Global Prop Page to Display Inset [\#5930](https://github.com/powerhome/playbook/pull/5930) ([nickamantia](https://github.com/nickamantia))
+
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/v16.5.0-rc.5...16.5.0)
+
 # 🧠 Smarter Architecture, Faster UI
 ##### March 17, 2026
 
