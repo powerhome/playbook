@@ -160,7 +160,6 @@ kits:
     icons_used: true
     react_rendered: false
     enhanced_element_used: false
-    deprecated_note: Use Button with icon prop or CircleIconButton instead
   - name: copy_button
     platforms: *1
     description: Button that copies text to clipboard with visual feedback.
