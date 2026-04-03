@@ -141,9 +141,7 @@ dist/ai/
 2. Parses TypeScript (`.tsx`) files for React prop types
 3. Parses Ruby (`.rb`) files for Rails prop definitions
 4. Merges props from both platforms
-5. Reads from `menu.yml`:
-   - Component descriptions
-   - Swift platform detection (`swift_only: true`)
+5. Generates descriptions from component names
 6. Outputs `kit.schema.json` in each component folder
 
 **Known Limitations:**
@@ -161,25 +159,6 @@ The Ruby parsing has similar limitations:
 - May miss dynamically defined props
 
 **Coverage:** ~95% of props are captured correctly. Global props use a shared parser module that handles intersection types (`&`) and resolves type references across files.
-
-### `menu.yml` Role
-
-The `menu.yml` file (`playbook-website/config/menu.yml`) is the component registry for Playbook. The AI scripts read:
-
-| Field | Auto-Generated? | Notes |
-|-------|-----------------|-------|
-| `description` | No | Manual - write clear descriptions for AI |
-| `swift_only` | No | Manual - set `true` for Swift-only components |
-| Props/types | Yes | Parsed from TSX/Ruby source files |
-
-**What requires manual updates:**
-- Adding/editing component descriptions
-- Adding `swift_only: true` for new Swift components
-
-**What's automatic:**
-- All prop names, types, and values
-- Platform detection (React/Rails)
-- Default values
 
 ### Global Props Generation (`generate-global-props-metadata.mjs`)
 
@@ -237,7 +216,6 @@ The `VerifyAIMetadata` pre-commit hook automatically ensures schemas stay in syn
 - `playbook/app/pb_kits/playbook/types/*.ts` - Type definitions
 - `playbook/app/pb_kits/playbook/tokens/_spacing.scss` - Spacing tokens
 - `playbook/app/pb_kits/playbook/tokens/_screen_sizes.scss` - Breakpoints
-- `playbook-website/config/menu.yml` - Descriptions, swift_only
 
 **If the hook fails:**
 ```bash
@@ -319,4 +297,3 @@ Props marked with `responsive: true` accept either a single value or a breakpoin
 | `dist/ai/*` | Distribution folder (built) |
 | `.overcommit.yml` | Overcommit hook configuration |
 | `.git-hooks/pre_commit/verify_ai_metadata.sh` | Pre-commit verification script |
-| `playbook-website/config/menu.yml` | Component registry (descriptions, swift_only) |

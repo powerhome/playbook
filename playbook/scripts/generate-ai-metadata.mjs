@@ -9,7 +9,7 @@
  *   1. Parse .tsx files for React prop definitions
  *   2. Parse .rb files for Rails prop definitions  
  *   3. Merge props from both platforms
- *   4. Add metadata from menu.yml
+ *   4. Generate descriptions from component names
  * 
  * Limitations (regex-based parsing):
  *   - Only parses `type XProps = {}` patterns, not interfaces
@@ -26,7 +26,6 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import yaml from 'js-yaml';
 import { getGlobalPropNames } from './lib/global-props-parser.mjs';
 
 // =============================================================================
@@ -37,7 +36,6 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const CONFIG = {
   pbKitsDir: path.resolve(__dirname, '../app/pb_kits/playbook'),
-  menuYmlPath: path.resolve(__dirname, '../../playbook-website/config/menu.yml'),
   schemaVersion: 'https://playbook.powerapp.cloud/schemas/kit-schema.json',
   excludedDirs: ['docs', 'utilities'],
 };
@@ -83,45 +81,6 @@ function extractBracedContent(content, startIndex) {
     i++;
   }
   return content.slice(startIndex, i - 1);
-}
-
-// =============================================================================
-// MENU.YML PARSING
-// =============================================================================
-
-function loadMenuYml() {
-  try {
-    const content = readFile(CONFIG.menuYmlPath);
-    if (!content) return { kits: [] };
-    
-    const parsed = yaml.load(content);
-    if (!Array.isArray(parsed)) return { kits: [] };
-    
-    return {
-      kits: parsed
-        .filter(c => c.category)
-        .map(c => ({
-          category: c.category,
-          description: c.description || '',
-          components: (c.components || []).map(comp => ({
-            name: comp.name,
-            description: comp.description || '',
-            platforms: comp.platforms || null,
-          })),
-        })),
-    };
-  } catch (e) {
-    console.warn('⚠️  Could not load menu.yml:', e.message);
-    return { kits: [] };
-  }
-}
-
-function findInMenu(menu, kitName) {
-  for (const cat of menu.kits) {
-    const comp = cat.components.find(c => c.name === kitName);
-    if (comp) return { ...comp, category: cat.category };
-  }
-  return null;
 }
 
 // =============================================================================
@@ -368,19 +327,15 @@ function generateSchema(kitName, options = {}) {
     return null;
   }
 
-  const menu = loadMenuYml();
-  const menuData = findInMenu(menu, kitName);
-
   const platforms = [];
   if (fs.existsSync(tsxFile)) platforms.push('react');
   if (fs.existsSync(rbFile)) platforms.push('rails');
-  if (menuData?.platforms?.includes('swift')) platforms.push('swift');
 
   const schema = {
     $schema: CONFIG.schemaVersion,
     name: snakeToPascal(kitName),
-    description: menuData?.description || `${snakeToPascal(kitName)} component`,
-    platforms: [...new Set(platforms)],
+    description: `${snakeToPascal(kitName)} component`,
+    platforms,
     props,
     globalProps: true,
     usage: generateUsage(kitName, props),
