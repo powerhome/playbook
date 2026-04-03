@@ -43,7 +43,7 @@ module Playbook
       end
 
       def symbolize_props(props)
-        props.transform_values do |value|
+        props.transform_keys { |k| k.to_s.underscore }.transform_values do |value|
           type = (value["type"] || "string").gsub(/;$/, "")
           values = value["values"]
 
