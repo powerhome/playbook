@@ -199,9 +199,43 @@ AI metadata is built as part of the release process:
 "release": "rm -rf dist; npx vite build && yarn build:ai:full"
 ```
 
-## Updating Schemas
+## Keeping Schemas in Sync
 
-When you add or modify components:
+### Overcommit Hook (Automatic)
+
+The `VerifyAIMetadata` pre-commit hook automatically ensures schemas stay in sync with source files. When you commit, it:
+
+1. Captures checksums of all schema files
+2. Regenerates metadata silently
+3. Compares before/after
+4. **Fails if schemas changed** (meaning your commit has stale metadata)
+
+**Triggered by changes to:**
+- `playbook/app/pb_kits/playbook/pb_*/**/*.tsx` - React components
+- `playbook/app/pb_kits/playbook/pb_*/**/*.rb` - Rails components
+- `playbook/app/pb_kits/playbook/utilities/globalProps.ts`
+- `playbook/app/pb_kits/playbook/types/*.ts`
+- `playbook/app/pb_kits/playbook/tokens/_spacing.scss`
+- `playbook/app/pb_kits/playbook/tokens/_screen_sizes.scss`
+- `playbook-website/config/menu.yml`
+
+**If the hook fails:**
+```bash
+❌ AI metadata is out of sync with source files!
+
+The schema files have been updated. Please stage them:
+
+  git add playbook/app/pb_kits/playbook/*/kit.schema.json
+  git add playbook/app/pb_kits/playbook/utilities/global-props.schema.json
+```
+
+**Hook files:**
+- `.overcommit.yml` - Hook configuration
+- `.git-hooks/pre_commit/verify_ai_metadata.sh` - Verification script
+
+### Manual Updates
+
+If you need to regenerate manually:
 
 1. **New component**: Run `yarn generate:ai-metadata` - it will pick up the new kit
 2. **Modified props**: Run `yarn generate:ai-metadata --kit=component_name`
@@ -263,3 +297,5 @@ Props marked with `responsive: true` accept either a single value or a breakpoin
 | `app/pb_kits/playbook/pb_*/kit.schema.json` | Individual kit schemas (source) |
 | `app/pb_kits/playbook/utilities/global-props.schema.json` | Global props schema (source) |
 | `dist/ai/*` | Distribution folder (built) |
+| `.overcommit.yml` | Overcommit hook configuration |
+| `.git-hooks/pre_commit/verify_ai_metadata.sh` | Pre-commit verification script |

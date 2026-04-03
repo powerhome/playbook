@@ -31,6 +31,20 @@ PreCommit:
       - 'playbook/app/pb_kits/playbook/types/colors.ts'
       # When adding more token types, add their type files here and extend verify_tokens.sh to check each generated JSON.
 
+  VerifyAIMetadata:
+    enabled: true
+    description: 'Verify AI metadata schemas are in sync with component source files'
+    required_executable: 'bash'
+    command: ['bash', '.git-hooks/pre_commit/verify_ai_metadata.sh']
+    include:
+      - 'playbook/app/pb_kits/playbook/pb_*/**/*.tsx'
+      - 'playbook/app/pb_kits/playbook/pb_*/**/*.rb'
+      - 'playbook/app/pb_kits/playbook/utilities/globalProps.ts'
+      - 'playbook/app/pb_kits/playbook/types/*.ts'
+      - 'playbook/app/pb_kits/playbook/tokens/_spacing.scss'
+      - 'playbook/app/pb_kits/playbook/tokens/_screen_sizes.scss'
+      - 'playbook-website/config/menu.yml'
+
 CommitMsg:
   CapitalizedSubject:
     enabled: false
