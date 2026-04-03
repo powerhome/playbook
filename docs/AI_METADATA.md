@@ -107,8 +107,8 @@ dist/ai/
     "xl": "1200px+"
   },
   "spacing": {
-    "values": ["none", "xxs", "xs", "sm", "md", "lg", "xl"],
-    "tokens": { "sm": "12px", "md": "16px", "lg": "24px" }
+    "values": ["none", "xxs", "xs", "sm", "md", "lg", "xl", "xxl", "auto"],
+    "tokens": { "xxs": "4px", "xs": "8px", "sm": "16px", "md": "24px", "lg": "32px", "xl": "40px" }
   },
   "props": {
     "margin": {
@@ -147,26 +147,32 @@ dist/ai/
 
 **Known Limitations:**
 
-The TypeScript parsing uses regex patterns rather than a full AST parser. This means:
+The TypeScript parsing uses regex patterns rather than a full AST parser:
 
 - Only `type XProps = { ... }` patterns are parsed (not `interface`)
 - Props defined via type composition (`extends`, `&`) may be missed
 - Imported prop types from other files are not followed
-- Complex generic types may not resolve correctly
+- Complex patterns like `typeof X[number]` aren't resolved
 
 The Ruby parsing has similar limitations:
 
 - Uses regex to extract `prop` definitions
 - May miss dynamically defined props
 
-**Mitigation:** Global props are dynamically loaded from `globalProps.ts` via a shared parser module, ensuring those are always accurate. For component-specific props, the regex approach captures ~95% of cases correctly.
+**Coverage:** ~95% of props are captured correctly. Global props use a shared parser module that handles intersection types (`&`) and resolves type references across files.
 
 ### Global Props Generation (`generate-global-props-metadata.mjs`)
 
-1. Parses `utilities/globalProps.ts` and `types/*.ts`
-2. Extracts all type definitions and enum values
-3. Adds descriptions and responsive flags
-4. Outputs `utilities/global-props.schema.json`
+**Fully dynamic** - parses everything from source, no hardcoded values:
+
+1. Parses `utilities/globalProps.ts` and `types/*.ts` for prop definitions
+2. Detects responsive props by scanning test files for `testGlobalPropResponsiveWithDefault`
+3. Parses `tokens/_spacing.scss` for spacing token values
+4. Parses `tokens/_screen_sizes.scss` for breakpoint values
+5. Auto-generates descriptions from prop names
+6. Outputs `utilities/global-props.schema.json`
+
+When Playbook changes, the schema updates automatically - no manual edits needed.
 
 ### Build Distribution (`build-ai-dist.mjs`)
 
