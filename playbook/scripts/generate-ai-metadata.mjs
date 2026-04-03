@@ -354,8 +354,8 @@ function getAllKitNames() {
       entry.startsWith('pb_') &&
       fs.statSync(path.join(CONFIG.pbKitsDir, entry)).isDirectory()
     )
-    .map(dir => dir.replace('pb_', ''))
-    .filter(name => !CONFIG.excludedDirs.includes(name) && !name.startsWith('pb_'))
+    .map(dir => dir.replace(/^pb_/, ''))  // Remove only the leading pb_ prefix
+    .filter(name => !CONFIG.excludedDirs.includes(name))
     .sort();
 }
 

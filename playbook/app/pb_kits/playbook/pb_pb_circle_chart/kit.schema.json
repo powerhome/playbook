@@ -1,0 +1,29 @@
+{
+  "$schema": "https://playbook.powerapp.cloud/schemas/kit-schema.json",
+  "name": "PbCircleChart",
+  "description": "PbCircleChart component",
+  "platforms": [
+    "react",
+    "rails"
+  ],
+  "props": {
+    "options": {
+      "type": "Record<string, unknown>",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    }
+  },
+  "globalProps": true,
+  "usage": {
+    "react": {
+      "import": "import { PbCircleChart } from 'playbook-ui'",
+      "example": "<PbCircleChart></PbCircleChart>"
+    },
+    "rails": {
+      "import": null,
+      "example": "<%= pb_rails(\"pb_circle_chart\", props: { text: \"Example\" }) %>"
+    }
+  }
+}
