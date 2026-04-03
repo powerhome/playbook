@@ -3,7 +3,6 @@
 library 'github.com/powerhome/ci-kubed@1c81d877a05417860bca4d369e088bca18fe640b'
 
 app.build(
-  cluster: ['wc-beta-px'],
   buildCacheVolumeSize: '15Gi',
   resources: [
     requestCpu: '2',
