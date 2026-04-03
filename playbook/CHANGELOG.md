@@ -1,7 +1,9 @@
-# 16.5.0
+# Leaner, Faster, Smoother Rails! 💥
 ##### April 03, 2026
 
 ![release_image](https://github.com/user-attachments/assets/db119637-25e9-4157-9091-c5f7fdf034fc)
+
+We trimmed the fat and optimized the core for the base of our Rails kits: fewer allocations, faster classnames, and noticeably snappier renders!
 
 [16.5.0](https://github.com/powerhome/playbook/tree/16.5.0) full list of changes:
 
