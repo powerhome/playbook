@@ -8,7 +8,7 @@
   ],
   "props": {
     "disabled": {
-      "type": "boolean;",
+      "type": "boolean",
       "platforms": [
         "react",
         "rails"
@@ -16,7 +16,7 @@
       "default": false
     },
     "error": {
-      "type": "string;",
+      "type": "string",
       "platforms": [
         "react",
         "rails"
@@ -24,7 +24,7 @@
       "default": ""
     },
     "inputDisplay": {
-      "type": "\"pills\" | \"none\";",
+      "type": "enum",
       "platforms": [
         "react",
         "rails"
@@ -36,7 +36,7 @@
       "default": "pills"
     },
     "inputName": {
-      "type": "string;",
+      "type": "string",
       "platforms": [
         "react",
         "rails"
@@ -44,7 +44,7 @@
       "default": ""
     },
     "label": {
-      "type": "string;",
+      "type": "string",
       "platforms": [
         "react",
         "rails"
@@ -52,14 +52,14 @@
       "default": ""
     },
     "name": {
-      "type": "string;",
+      "type": "string",
       "platforms": [
         "react",
         "rails"
       ]
     },
     "required": {
-      "type": "boolean;",
+      "type": "boolean",
       "platforms": [
         "react",
         "rails"
@@ -67,7 +67,7 @@
       "default": false
     },
     "requiredIndicator": {
-      "type": "boolean;",
+      "type": "boolean",
       "platforms": [
         "react",
         "rails"
@@ -75,7 +75,7 @@
       "default": false
     },
     "returnAllSelected": {
-      "type": "boolean;",
+      "type": "boolean",
       "platforms": [
         "react",
         "rails"
@@ -83,7 +83,7 @@
       "default": false
     },
     "showCheckedChildren": {
-      "type": "boolean;",
+      "type": "boolean",
       "platforms": [
         "react",
         "rails"
@@ -91,7 +91,7 @@
       "default": true
     },
     "treeData": {
-      "type": "{ [key: string]: string }[] | any;",
+      "type": "{ [key: string]: string }[] | any",
       "platforms": [
         "react",
         "rails"
@@ -110,7 +110,7 @@
       ]
     },
     "placeholder": {
-      "type": "string;",
+      "type": "string",
       "platforms": [
         "react",
         "rails"
@@ -118,14 +118,14 @@
       "default": "Start typing..."
     },
     "selectedIds": {
-      "type": "string[] | any;",
+      "type": "string[] | any",
       "platforms": [
         "react",
         "rails"
       ]
     },
     "variant": {
-      "type": "\"multi\" | \"single\";",
+      "type": "enum",
       "platforms": [
         "react",
         "rails"
@@ -137,7 +137,7 @@
       "default": "multi"
     },
     "wrapped": {
-      "type": "boolean;",
+      "type": "boolean",
       "platforms": [
         "react",
         "rails"

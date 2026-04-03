@@ -187,19 +187,19 @@ function parseTypeBlock(block) {
     const match = trimmed.match(/^(\w+)\??:\s*(.*)$/);
     if (match && depth <= 0) {
       if (currentProp && currentType && !GLOBAL_PROPS.has(currentProp)) {
-        const typeInfo = parseTypeString(currentType.replace(/,\s*$/, '').trim());
+        const typeInfo = parseTypeString(currentType.replace(/[,;]\s*$/, '').trim());
         props[currentProp] = { type: typeInfo.type, platforms: ['react'], ...typeInfo.values && { values: typeInfo.values } };
       }
       currentProp = match[1];
-      currentType = match[2].replace(/,\s*$/, '');
+      currentType = match[2].replace(/[,;]\s*$/, '');
       if (!currentType.includes('{') || currentType.includes('}')) depth = 0;
     } else if (currentProp && depth > 0) {
-      currentType += ' ' + trimmed.replace(/,\s*$/, '');
+      currentType += ' ' + trimmed.replace(/[,;]\s*$/, '');
     }
   }
 
   if (currentProp && currentType && !GLOBAL_PROPS.has(currentProp)) {
-    const typeInfo = parseTypeString(currentType.replace(/,\s*$/, '').trim());
+    const typeInfo = parseTypeString(currentType.replace(/[,;]\s*$/, '').trim());
     props[currentProp] = { type: typeInfo.type, platforms: ['react'], ...typeInfo.values && { values: typeInfo.values } };
   }
 

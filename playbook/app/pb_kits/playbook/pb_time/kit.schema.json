@@ -8,7 +8,7 @@
   ],
   "props": {
     "align": {
-      "type": "\"left\" | \"center\" | \"right\";",
+      "type": "enum",
       "platforms": [
         "react",
         "rails"
@@ -21,13 +21,13 @@
       "default": "left"
     },
     "date": {
-      "type": "Date;",
+      "type": "Date",
       "platforms": [
         "react"
       ]
     },
     "showIcon": {
-      "type": "boolean;",
+      "type": "boolean",
       "platforms": [
         "react",
         "rails"
@@ -35,21 +35,19 @@
       "default": false
     },
     "size": {
-      "type": "\"md\" | \"sm\";",
+      "type": "enum",
       "platforms": [
         "react",
         "rails"
       ],
       "values": [
-        "xs",
-        "sm",
         "md",
-        "lg"
+        "sm"
       ],
       "default": "sm"
     },
     "showTimezone": {
-      "type": "boolean;",
+      "type": "boolean",
       "platforms": [
         "react",
         "rails"
@@ -57,13 +55,13 @@
       "default": true
     },
     "timeZone": {
-      "type": "string;",
+      "type": "string",
       "platforms": [
         "react"
       ]
     },
     "unstyled": {
-      "type": "boolean;",
+      "type": "boolean",
       "platforms": [
         "react",
         "rails"
@@ -86,11 +84,11 @@
   "usage": {
     "react": {
       "import": "import { Time } from 'playbook-ui'",
-      "example": "<Time align=\"left\" size=\"xs\"></Time>"
+      "example": "<Time align=\"left\" size=\"md\"></Time>"
     },
     "rails": {
       "import": null,
-      "example": "<%= pb_rails(\"time\", props: { align: \"left\", size: \"xs\" }) %>"
+      "example": "<%= pb_rails(\"time\", props: { align: \"left\", size: \"md\" }) %>"
     }
   }
 }

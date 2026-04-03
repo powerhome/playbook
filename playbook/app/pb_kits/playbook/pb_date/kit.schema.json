@@ -8,7 +8,7 @@
   ],
   "props": {
     "alignment": {
-      "type": "\"left\" | \"center\" | \"right\";",
+      "type": "enum",
       "platforms": [
         "react",
         "rails"
@@ -21,7 +21,7 @@
       "default": "left"
     },
     "showDayOfWeek": {
-      "type": "boolean;",
+      "type": "boolean",
       "platforms": [
         "react",
         "rails"
@@ -29,7 +29,7 @@
       "default": false
     },
     "showCurrentYear": {
-      "type": "boolean;",
+      "type": "boolean",
       "platforms": [
         "react",
         "rails"
@@ -37,7 +37,7 @@
       "default": false
     },
     "showIcon": {
-      "type": "boolean;",
+      "type": "boolean",
       "platforms": [
         "react",
         "rails"
@@ -45,21 +45,20 @@
       "default": false
     },
     "size": {
-      "type": "\"sm\" | \"md\" | \"lg\";",
+      "type": "enum",
       "platforms": [
         "react",
         "rails"
       ],
       "values": [
-        "lg",
-        "md",
         "sm",
-        "xs"
+        "md",
+        "lg"
       ],
       "default": "md"
     },
     "unstyled": {
-      "type": "boolean;",
+      "type": "boolean",
       "platforms": [
         "react",
         "rails"
@@ -67,7 +66,7 @@
       "default": false
     },
     "value": {
-      "type": "Date;",
+      "type": "Date",
       "platforms": [
         "react"
       ]
@@ -88,11 +87,11 @@
   "usage": {
     "react": {
       "import": "import { Date } from 'playbook-ui'",
-      "example": "<Date alignment=\"left\" size=\"lg\"></Date>"
+      "example": "<Date alignment=\"left\" size=\"sm\"></Date>"
     },
     "rails": {
       "import": null,
-      "example": "<%= pb_rails(\"date\", props: { alignment: \"left\", size: \"lg\" }) %>"
+      "example": "<%= pb_rails(\"date\", props: { alignment: \"left\", size: \"sm\" }) %>"
     }
   }
 }

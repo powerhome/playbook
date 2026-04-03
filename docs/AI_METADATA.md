@@ -208,7 +208,7 @@ When Playbook changes, the schema updates automatically - no manual edits needed
 AI metadata is generated during setup when you run `./run.sh`:
 
 ```
-setup: cd playbook && yarn generate:all-ai-metadata && cd ../playbook-website && node scripts/global-props.mjs
+setup: cd playbook && yarn generate:all-ai-metadata && cd ../playbook-website && yarn generate:global-props-values
 ```
 
 ### Release

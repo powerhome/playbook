@@ -8,20 +8,26 @@
   ],
   "props": {
     "dropZone": {
-      "type": "'ghost' | 'outline' | 'shadow' | 'line';",
+      "type": "enum",
       "platforms": [
         "react"
+      ],
+      "values": [
+        "ghost",
+        "outline",
+        "shadow",
+        "line"
       ]
     },
     "dropZoneColor": {
-      "type": "'primary' | 'neutral' | 'purple';",
+      "type": "enum",
       "platforms": [
         "react",
         "rails"
       ],
       "values": [
-        "neutral",
         "primary",
+        "neutral",
         "purple"
       ],
       "default": "neutral"
@@ -50,11 +56,11 @@
   "usage": {
     "react": {
       "import": "import { Draggable } from 'playbook-ui'",
-      "example": "<Draggable dropZoneColor=\"neutral\" dropZoneType=\"ghost\"></Draggable>"
+      "example": "<Draggable dropZone=\"ghost\" dropZoneColor=\"primary\"></Draggable>"
     },
     "rails": {
       "import": null,
-      "example": "<%= pb_rails(\"draggable\", props: { drop_zone_color: \"neutral\", drop_zone_type: \"ghost\" }) %>"
+      "example": "<%= pb_rails(\"draggable\", props: { drop_zone: \"ghost\", drop_zone_color: \"primary\" }) %>"
     }
   }
 }
