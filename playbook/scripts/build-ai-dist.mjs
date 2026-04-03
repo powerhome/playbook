@@ -3,14 +3,15 @@
  * Build AI Metadata Distribution
  * ===============================
  * 
- * Consolidates all AI-friendly metadata into dist/ai/ for distribution:
+ * Consolidates AI metadata into dist/ai/:
  *   - kit.schema.json files for each component
  *   - global-props.schema.json
- *   - index.json with a manifest of all available schemas
+ *   - all-schemas.json (combined)
+ *   - index.json (manifest)
  * 
  * Usage:
  *   yarn build:ai              # Clean and build (default)
- *   yarn build:ai --no-clean   # Incremental build without cleaning
+ *   yarn build:ai --no-clean   # Incremental build
  */
 
 import fs from 'fs';
@@ -19,135 +20,81 @@ import { fileURLToPath } from 'url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-const CONFIG = {
-  pbKitsDir: path.resolve(__dirname, '../app/pb_kits/playbook'),
-  outputDir: path.resolve(__dirname, '../dist/ai'),
-  globalPropsSchema: path.resolve(__dirname, '../app/pb_kits/playbook/utilities/global-props.schema.json'),
-};
+// =============================================================================
+// CONFIG
+// =============================================================================
+
+const KITS_DIR = path.resolve(__dirname, '../app/pb_kits/playbook');
+const OUTPUT_DIR = path.resolve(__dirname, '../dist/ai');
+const GLOBAL_PROPS_PATH = path.join(KITS_DIR, 'utilities/global-props.schema.json');
+
+// =============================================================================
+// HELPERS
+// =============================================================================
+
+const readJson = (p) => { try { return JSON.parse(fs.readFileSync(p, 'utf8')); } catch { return null; } };
+const writeJson = (p, data) => fs.writeFileSync(p, JSON.stringify(data, null, 2) + '\n');
+const getVersion = () => readJson(path.resolve(__dirname, '../package.json'))?.version || 'unknown';
+
+function getKitDirs() {
+  return fs.readdirSync(KITS_DIR)
+    .filter(d => d.startsWith('pb_') && fs.statSync(path.join(KITS_DIR, d)).isDirectory())
+    .map(d => ({ dir: d, name: d.replace('pb_', ''), schemaPath: path.join(KITS_DIR, d, 'kit.schema.json') }))
+    .filter(k => fs.existsSync(k.schemaPath));
+}
 
 // =============================================================================
 // MAIN
 // =============================================================================
 
 async function main() {
-  // Default to clean builds to prevent stale artifacts
-  const noClean = process.argv.includes('--no-clean');
-  const clean = !noClean;
+  const clean = !process.argv.includes('--no-clean');
 
-  console.log('');
-  console.log('📦 Building AI Metadata Distribution');
-  console.log('═'.repeat(50));
-  console.log('');
+  console.log('\n📦 Building AI Metadata Distribution');
+  console.log('═'.repeat(45) + '\n');
 
-  // Clean output directory (default behavior to prevent stale artifacts)
-  if (clean && fs.existsSync(CONFIG.outputDir)) {
+  // Clean if requested (default)
+  if (clean && fs.existsSync(OUTPUT_DIR)) {
     console.log('🧹 Cleaning dist/ai...');
-    fs.rmSync(CONFIG.outputDir, { recursive: true });
+    fs.rmSync(OUTPUT_DIR, { recursive: true });
   }
 
-  // Create output directories
-  const kitsDir = path.join(CONFIG.outputDir, 'kits');
-  fs.mkdirSync(kitsDir, { recursive: true });
+  // Create directories
+  const kitsOutputDir = path.join(OUTPUT_DIR, 'kits');
+  fs.mkdirSync(kitsOutputDir, { recursive: true });
 
-  // Track what we're building
-  const manifest = {
-    version: getPackageVersion(),
-    generated: new Date().toISOString(),
-    schemas: {
-      globalProps: 'global-props.schema.json',
-      kits: {},
-    },
-  };
-
-  // Copy global props schema
-  if (fs.existsSync(CONFIG.globalPropsSchema)) {
-    const destPath = path.join(CONFIG.outputDir, 'global-props.schema.json');
-    fs.copyFileSync(CONFIG.globalPropsSchema, destPath);
+  // Copy global props
+  if (fs.existsSync(GLOBAL_PROPS_PATH)) {
+    fs.copyFileSync(GLOBAL_PROPS_PATH, path.join(OUTPUT_DIR, 'global-props.schema.json'));
     console.log('✅ global-props.schema.json');
   } else {
-    console.log('⚠️  global-props.schema.json not found - run yarn generate:global-props-metadata first');
+    console.log('⚠️  global-props.schema.json not found');
   }
 
-  // Find and copy all kit schemas
-  const kitDirs = fs.readdirSync(CONFIG.pbKitsDir)
-    .filter(dir => dir.startsWith('pb_'))
-    .filter(dir => fs.statSync(path.join(CONFIG.pbKitsDir, dir)).isDirectory());
+  // Copy kit schemas
+  const kits = getKitDirs();
+  const manifest = { version: getVersion(), generated: new Date().toISOString(), schemas: { globalProps: 'global-props.schema.json', kits: {} } };
+  const allSchemas = { globalProps: readJson(GLOBAL_PROPS_PATH), kits: {} };
 
-  let copiedCount = 0;
-
-  for (const kitDir of kitDirs) {
-    const kitName = kitDir.replace('pb_', '');
-    const schemaPath = path.join(CONFIG.pbKitsDir, kitDir, 'kit.schema.json');
-
-    if (fs.existsSync(schemaPath)) {
-      const destPath = path.join(kitsDir, `${kitName}.schema.json`);
-      fs.copyFileSync(schemaPath, destPath);
-      manifest.schemas.kits[kitName] = `kits/${kitName}.schema.json`;
-      copiedCount++;
-    }
+  for (const { name, schemaPath } of kits) {
+    fs.copyFileSync(schemaPath, path.join(kitsOutputDir, `${name}.schema.json`));
+    manifest.schemas.kits[name] = `kits/${name}.schema.json`;
+    allSchemas.kits[name] = readJson(schemaPath);
   }
 
-  console.log(`✅ ${copiedCount} kit schemas copied to dist/ai/kits/`);
+  console.log(`✅ ${kits.length} kit schemas → dist/ai/kits/`);
 
-  // Write manifest/index
-  const indexPath = path.join(CONFIG.outputDir, 'index.json');
-  fs.writeFileSync(indexPath, JSON.stringify(manifest, null, 2) + '\n');
-  console.log('✅ index.json (manifest)');
+  // Write manifest and combined schemas
+  writeJson(path.join(OUTPUT_DIR, 'index.json'), manifest);
+  console.log('✅ index.json');
 
-  // Create a combined schemas file for easy consumption
-  const allSchemas = {
-    globalProps: loadJsonSafe(CONFIG.globalPropsSchema),
-    kits: {},
-  };
-
-  for (const kitDir of kitDirs) {
-    const kitName = kitDir.replace('pb_', '');
-    const schemaPath = path.join(CONFIG.pbKitsDir, kitDir, 'kit.schema.json');
-    if (fs.existsSync(schemaPath)) {
-      allSchemas.kits[kitName] = loadJsonSafe(schemaPath);
-    }
-  }
-
-  const allSchemasPath = path.join(CONFIG.outputDir, 'all-schemas.json');
-  fs.writeFileSync(allSchemasPath, JSON.stringify(allSchemas, null, 2) + '\n');
-  console.log('✅ all-schemas.json (combined)');
+  writeJson(path.join(OUTPUT_DIR, 'all-schemas.json'), allSchemas);
+  console.log('✅ all-schemas.json');
 
   // Summary
-  console.log('');
-  console.log('─'.repeat(50));
-  console.log('📊 Summary');
-  console.log('─'.repeat(50));
-  console.log(`   Output:      dist/ai/`);
-  console.log(`   Kit schemas: ${copiedCount}`);
-  console.log(`   Files:`);
-  console.log(`     • index.json           - Manifest with paths`);
-  console.log(`     • global-props.schema.json`);
-  console.log(`     • all-schemas.json     - All schemas combined`);
-  console.log(`     • kits/*.schema.json   - Individual kit schemas`);
-  console.log('');
-  console.log('✨ Done!');
-  console.log('');
+  console.log('\n' + '─'.repeat(45));
+  console.log(`📊 Built ${kits.length + 3} files to dist/ai/`);
+  console.log('─'.repeat(45) + '\n✨ Done!\n');
 }
 
-function getPackageVersion() {
-  try {
-    const pkgPath = path.resolve(__dirname, '../package.json');
-    const pkg = JSON.parse(fs.readFileSync(pkgPath, 'utf8'));
-    return pkg.version;
-  } catch {
-    return 'unknown';
-  }
-}
-
-function loadJsonSafe(filePath) {
-  try {
-    return JSON.parse(fs.readFileSync(filePath, 'utf8'));
-  } catch {
-    return null;
-  }
-}
-
-main().catch(error => {
-  console.error('Fatal error:', error);
-  process.exit(1);
-});
+main().catch(e => { console.error('Fatal:', e); process.exit(1); });

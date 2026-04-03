@@ -3,24 +3,24 @@
  * Generate AI-Friendly Metadata for Playbook Components
  * ======================================================
  * 
- * This script generates kit.schema.json files for each Playbook component by:
- *   1. Parsing TypeScript (.tsx) files for React prop definitions
- *   2. Parsing Ruby (.rb) files for Rails prop definitions  
- *   3. Merging props from both platforms into a unified schema
- *   4. Adding metadata from menu.yml (descriptions, related components)
+ * Generates kit.schema.json files by parsing TypeScript and Ruby source files.
  * 
- * Limitations:
- *   - TypeScript parsing uses regex, not a full AST parser
+ * How it works:
+ *   1. Parse .tsx files for React prop definitions
+ *   2. Parse .rb files for Rails prop definitions  
+ *   3. Merge props from both platforms
+ *   4. Add metadata from menu.yml
+ * 
+ * Limitations (regex-based parsing):
  *   - Only parses `type XProps = {}` patterns, not interfaces
- *   - May miss complex composed/extended types
+ *   - May miss composed/extended types
  *   - Imported prop types are not followed
  * 
  * Usage:
- *   yarn generate:ai-metadata                    # Generate all schemas
- *   yarn generate:ai-metadata --kit=button       # Generate single component
- *   yarn generate:ai-metadata --dry-run          # Preview without writing
- *   yarn generate:ai-metadata --verbose          # Show detailed output
- *   yarn generate:ai-metadata --output-dir=dist  # Custom output directory
+ *   yarn generate:ai-metadata                    # All components
+ *   yarn generate:ai-metadata --kit=button       # Single component
+ *   yarn generate:ai-metadata --dry-run          # Preview only
+ *   yarn generate:ai-metadata --verbose          # Detailed output
  */
 
 import fs from 'fs';
@@ -36,460 +36,255 @@ import { getGlobalPropNames } from './lib/global-props-parser.mjs';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const CONFIG = {
-  // Path to Playbook component directories
   pbKitsDir: path.resolve(__dirname, '../app/pb_kits/playbook'),
-  
-  // Path to menu.yml for component metadata
   menuYmlPath: path.resolve(__dirname, '../../playbook-website/config/menu.yml'),
-  
-  // Schema version URL (for $schema field)
   schemaVersion: 'https://playbook.powerapp.cloud/schemas/kit-schema.json',
-  
-  // Directories to exclude from processing
   excludedDirs: ['docs', 'utilities'],
 };
 
+const GLOBAL_PROPS = getGlobalPropNames();
+['aria', 'data', 'htmlOptions', 'id', 'className', 'children', 'key', 'ref'].forEach(p => GLOBAL_PROPS.add(p));
+
+// =============================================================================
+// HELPERS
+// =============================================================================
+
+const snakeToCamel = (s) => s.replace(/_([a-z])/g, (_, c) => c.toUpperCase());
+const camelToSnake = (s) => s.replace(/[A-Z]/g, c => `_${c.toLowerCase()}`);
+const snakeToPascal = (s) => s.split('_').map(w => w[0].toUpperCase() + w.slice(1)).join('');
+
+const isQuoted = (s) => (s.startsWith('"') && s.endsWith('"')) || (s.startsWith("'") && s.endsWith("'"));
+const stripQuotes = (s) => s.slice(1, -1);
+
+const readFile = (p) => fs.existsSync(p) ? fs.readFileSync(p, 'utf8') : null;
+
 /**
- * Global props dynamically loaded from globalProps.ts
- * These are filtered out from component-specific prop definitions.
+ * Parse a literal value (JS or Ruby) into native type.
  */
-let GLOBAL_PROPS;
-try {
-  GLOBAL_PROPS = getGlobalPropNames();
-  // Add common HTML/React props that aren't in globalProps.ts
-  ['aria', 'data', 'htmlOptions', 'id', 'className', 'children', 'key', 'ref'].forEach(p => GLOBAL_PROPS.add(p));
-} catch (e) {
-  console.warn('⚠️  Could not load global props dynamically, using fallback list');
-  GLOBAL_PROPS = new Set([
-    'display', 'position', 'top', 'right', 'bottom', 'left', 'zIndex',
-    'width', 'minWidth', 'maxWidth', 'height', 'minHeight', 'maxHeight',
-    'flex', 'flexDirection', 'flexWrap', 'flexGrow', 'flexShrink',
-    'justifyContent', 'justifySelf', 'alignItems', 'alignContent', 'alignSelf',
-    'order', 'gap', 'rowGap', 'columnGap',
-    'margin', 'marginX', 'marginY', 'marginTop', 'marginRight', 'marginBottom', 'marginLeft',
-    'padding', 'paddingX', 'paddingY', 'paddingTop', 'paddingRight', 'paddingBottom', 'paddingLeft',
-    'textAlign', 'verticalAlign', 'lineHeight', 'truncate', 'numberSpacing',
-    'shadow', 'borderRadius', 'cursor', 'overflow', 'overflowX', 'overflowY',
-    'hover', 'groupHover', 'dark',
-    'aria', 'data', 'htmlOptions', 'id', 'className', 'children', 'key', 'ref',
-  ]);
+function parseLiteral(val) {
+  if (val === 'true') return true;
+  if (val === 'false') return false;
+  if (val === 'null' || val === 'undefined' || val === 'nil') return null;
+  if (isQuoted(val)) return stripQuotes(val);
+  if (val !== '' && !isNaN(val)) return Number(val);
+  if (val === '{}') return {};
+  if (val === '[]') return [];
+  return val;
 }
 
-// =============================================================================
-// CLI ARGUMENT PARSING
-// =============================================================================
-
 /**
- * Parse command line arguments into an options object.
- * 
- * @returns {{ kit: string|null, outputDir: string|null, dryRun: boolean, verbose: boolean }}
+ * Extract balanced braces content starting after an opening brace.
  */
-function parseCliArgs() {
-  const options = {
-    kit: null, 
-    outputDir: null,
-    dryRun: false,
-    verbose: false,
-  };
-
-  for (const arg of process.argv.slice(2)) {
-    if (arg.startsWith('--kit=')) {
-      options.kit = arg.slice(6);
-    } else if (arg.startsWith('--output-dir=')) {
-      options.outputDir = arg.slice(13);
-    } else if (arg === '--dry-run') {
-      options.dryRun = true;
-    } else if (arg === '--verbose') {
-      options.verbose = true;
-    } else if (arg === '--help' || arg === '-h') {
-      printHelp();
-      process.exit(0);
-    }
+function extractBracedContent(content, startIndex) {
+  let depth = 1, i = startIndex;
+  while (depth > 0 && i < content.length) {
+    if (content[i] === '{') depth++;
+    if (content[i] === '}') depth--;
+    i++;
   }
-
-  return options;
-}
-
-function printHelp() {
-  console.log(`
-Generate AI-Friendly Metadata for Playbook Components
-
-Usage:
-  yarn generate:ai-metadata [options]
-
-Options:
-  --kit=<name>       Generate schema for a single kit (e.g., --kit=button)
-  --output-dir=<dir> Output directory (default: each kit's folder)
-  --dry-run          Preview output without writing files
-  --verbose          Show detailed logging
-  --help, -h         Show this help message
-
-Examples:
-  yarn generate:ai-metadata                    # Generate all schemas
-  yarn generate:ai-metadata --kit=button       # Generate only button schema
-  yarn generate:ai-metadata --dry-run --verbose # Preview with details
-`);
+  return content.slice(startIndex, i - 1);
 }
 
 // =============================================================================
-// YAML PARSING (Simple parser for menu.yml)
+// MENU.YML PARSING
 // =============================================================================
 
-/**
- * Parse the menu.yml file to extract component metadata.
- * This is a simplified parser that handles the specific structure of menu.yml.
- * 
- * @returns {{ kits: Array<{ category: string, components: Array }> }}
- */
 function loadMenuYml() {
   try {
-    const content = fs.readFileSync(CONFIG.menuYmlPath, 'utf8');
-    return parseMenuYaml(content);
-  } catch (error) {
-    console.warn('⚠️  Could not load menu.yml:', error.message);
+    const content = readFile(CONFIG.menuYmlPath);
+    if (!content) return { kits: [] };
+    
+    const parsed = yaml.load(content);
+    if (!Array.isArray(parsed)) return { kits: [] };
+    
+    return {
+      kits: parsed
+        .filter(c => c.category)
+        .map(c => ({
+          category: c.category,
+          description: c.description || '',
+          components: (c.components || []).map(comp => ({
+            name: comp.name,
+            description: comp.description || '',
+            related_components: comp.related_components || null,
+            platforms: comp.platforms || null,
+          })),
+        })),
+    };
+  } catch (e) {
+    console.warn('⚠️  Could not load menu.yml:', e.message);
     return { kits: [] };
   }
 }
 
-/**
- * Simple YAML parser tailored for menu.yml structure.
- * Handles categories, components, and their properties.
- */
-function parseMenuYaml(content) {
-  // Use js-yaml for proper YAML parsing (supports anchors, aliases, etc.)
-  const parsed = yaml.load(content);
-  
-  // Transform to our expected format
-  const result = { kits: [] };
-  
-  if (Array.isArray(parsed)) {
-    for (const category of parsed) {
-      if (category.category) {
-        result.kits.push({
-          category: category.category,
-          description: category.description || '',
-          components: (category.components || []).map(comp => ({
-            name: comp.name,
-            description: comp.description || '',
-            schema_path: comp.schema_path || null,
-            related_components: comp.related_components || null,
-            props_summary: comp.props_summary || null,
-            platforms: comp.platforms || null,
-            subcomponents: comp.subcomponents || null,
-            status: comp.status || null,
-          })),
-        });
-      }
-    }
-  }
-  
-  return result;
-}
-
-/**
- * Find a component's metadata in the parsed menu.yml data.
- * 
- * @param {object} menu - Parsed menu.yml data
- * @param {string} kitName - Component name (e.g., "button")
- * @returns {object|null} Component metadata or null if not found
- */
-function findComponentInMenu(menu, kitName) {
-  for (const category of menu.kits || []) {
-    for (const component of category.components || []) {
-      if (component.name === kitName) {
-        return {
-          ...component,
-          category: category.category,
-          categoryDescription: category.description,
-        };
-      }
-    }
+function findInMenu(menu, kitName) {
+  for (const cat of menu.kits) {
+    const comp = cat.components.find(c => c.name === kitName);
+    if (comp) return { ...comp, category: cat.category };
   }
   return null;
 }
 
 // =============================================================================
-// TYPESCRIPT PROP PARSING
+// TYPESCRIPT PARSING
 // =============================================================================
 
 /**
- * Parse TypeScript prop definitions from a .tsx component file.
- * 
- * Looks for type definitions like:
- *   type ButtonProps = {
- *     variant?: "primary" | "secondary",
- *     disabled?: boolean,
- *   } & GlobalProps
- * 
- * @param {string} filePath - Path to the .tsx file
- * @returns {object} Props object with name -> { type, platforms, values?, default? }
+ * Parse TypeScript type string into schema format.
  */
-function parseTypeScriptProps(filePath) {
-  if (!fs.existsSync(filePath)) return {};
-
-  const content = fs.readFileSync(filePath, 'utf8');
-  const props = {};
-
-  // Find type definitions ending in Props or PropTypes
-  const typeDefPattern = /type\s+(\w*(?:Props|PropTypes))\s*=\s*\{/g;
-  let match;
-
-  while ((match = typeDefPattern.exec(content)) !== null) {
-    const propsBlock = extractBalancedBraces(content, match.index + match[0].length);
-    const extractedProps = parsePropsBlock(propsBlock);
-    
-    // Add extracted props (later definitions override earlier ones)
-    Object.assign(props, extractedProps);
-  }
-
-  // Extract default values from destructuring patterns
-  extractDefaultValues(content, props);
-
-  return props;
-}
-
-/**
- * Extract content between balanced braces starting at a position.
- * Handles nested braces correctly.
- */
-function extractBalancedBraces(content, startIndex) {
-  let braceCount = 1;
-  let endIndex = startIndex;
-
-  while (braceCount > 0 && endIndex < content.length) {
-    const char = content[endIndex];
-    if (char === '{') braceCount++;
-    else if (char === '}') braceCount--;
-    endIndex++;
-  }
-
-  return content.slice(startIndex, endIndex - 1);
-}
-
-/**
- * Parse a TypeScript props block into individual prop definitions.
- */
-function parsePropsBlock(propsBlock) {
-  const props = {};
-  const lines = propsBlock.split('\n');
-  
-  let currentPropName = null;
-  let currentPropType = '';
-  let braceDepth = 0;
-
-  for (const line of lines) {
-    const trimmed = line.trim();
-    
-    // Skip empty lines and comments
-    if (!trimmed || trimmed.startsWith('//') || trimmed.startsWith('/*')) continue;
-
-    // Track nested brace depth for multi-line types
-    braceDepth += (trimmed.match(/\{/g) || []).length;
-    braceDepth -= (trimmed.match(/\}/g) || []).length;
-
-    // Match prop definition: propName?: TypeExpression,
-    const propMatch = trimmed.match(/^(\w+)\??:\s*(.*)$/);
-
-    if (propMatch && braceDepth <= 0) {
-      // Save previous prop if exists
-      if (currentPropName && currentPropType) {
-        addPropToCollection(currentPropName, currentPropType, props);
-      }
-
-      currentPropName = propMatch[1];
-      currentPropType = propMatch[2].replace(/,\s*$/, '');
-
-      // Reset brace depth if type is complete on this line
-      if (!currentPropType.includes('{') || currentPropType.includes('}')) {
-        braceDepth = 0;
-      }
-    } else if (currentPropName && braceDepth > 0) {
-      // Continue accumulating multi-line type
-      currentPropType += ' ' + trimmed.replace(/,\s*$/, '');
-    }
-  }
-
-  // Don't forget the last prop
-  if (currentPropName && currentPropType) {
-    addPropToCollection(currentPropName, currentPropType, props);
-  }
-
-  return props;
-}
-
-/**
- * Add a prop to the collection after parsing its type.
- */
-function addPropToCollection(name, typeString, props) {
-  // Skip global props - they're inherited separately
-  if (GLOBAL_PROPS.has(name)) return;
-
-  const typeInfo = parseTypeScriptType(typeString.trim());
-
-  props[name] = {
-    type: typeInfo.type,
-    platforms: ['react'],
-    ...(typeInfo.values && { values: typeInfo.values }),
-  };
-}
-
-/**
- * Parse a TypeScript type string into a simplified schema format.
- * 
- * Examples:
- *   "primary" | "secondary"  -> { type: "enum", values: ["primary", "secondary"] }
- *   string                   -> { type: "string" }
- *   boolean                  -> { type: "boolean" }
- *   () => void               -> { type: "function" }
- */
-function parseTypeScriptType(typeStr) {
+function parseTypeString(typeStr) {
   if (!typeStr) return { type: 'any' };
-
-  // Normalize whitespace
   typeStr = typeStr.replace(/\s+/g, ' ').trim();
 
-  // Handle union types: "a" | "b" | "c"
+  // Union of literals: "a" | "b" | "c"
   if (typeStr.includes('|')) {
     const parts = typeStr.split('|').map(p => p.trim());
-
-    // Check if all parts are literal values (strings, numbers, null, undefined)
-    const allLiterals = parts.every(p =>
-      (p.startsWith('"') && p.endsWith('"')) ||
-      (p.startsWith("'") && p.endsWith("'")) ||
-      p === 'null' || p === 'undefined' ||
-      !isNaN(Number(p))
+    const isAllLiterals = parts.every(p => 
+      isQuoted(p) || p === 'null' || p === 'undefined' || !isNaN(Number(p))
     );
-
-    if (allLiterals) {
+    
+    if (isAllLiterals) {
       const values = parts
         .filter(p => p !== 'null' && p !== 'undefined')
-        .map(p => {
-          // Remove quotes from string literals
-          if (p.startsWith('"') || p.startsWith("'")) return p.slice(1, -1);
-          // Convert numeric literals to numbers
-          if (!isNaN(Number(p))) return Number(p);
-          return p;
-        });
-
+        .map(p => isQuoted(p) ? stripQuotes(p) : Number(p));
       return { type: 'enum', values };
     }
-
-    // Mixed union type - keep as-is
     return { type: typeStr };
   }
 
-  // Map common TypeScript types to simpler names
-  const typeMap = {
-    'string': 'string',
-    'number': 'number',
-    'boolean': 'boolean',
-  };
-
-  if (typeMap[typeStr]) return { type: typeMap[typeStr] };
-
-  // React-specific types
-  if (typeStr.includes('React') || typeStr.includes('Node') || typeStr.includes('Element')) {
-    return { type: 'ReactNode' };
-  }
-
-  // Function types
-  if (typeStr.includes('=>') || typeStr.startsWith('(') || typeStr.includes('EventHandler')) {
+  // Primitives
+  if (['string', 'number', 'boolean'].includes(typeStr)) return { type: typeStr };
+  
+  // React types
+  if (/React|Node|Element/.test(typeStr)) return { type: 'ReactNode' };
+  
+  // Functions
+  if (typeStr.includes('=>') || typeStr.startsWith('(') || typeStr.includes('Handler')) {
     return { type: 'function' };
   }
-
-  // Object and array types
+  
+  // Objects/Arrays
   if (typeStr.startsWith('{')) return { type: 'object' };
   if (typeStr.endsWith('[]') || typeStr.startsWith('Array')) return { type: 'array' };
 
-  // Return as-is for complex types
   return { type: typeStr };
 }
 
 /**
- * Extract default values from destructuring patterns in the component.
- * 
- * Looks for patterns like:
- *   const { variant = "primary", disabled = false } = props
+ * Parse props from a TypeScript type block.
  */
-function extractDefaultValues(content, props) {
-  const destructuringPattern = /(?:const|let)\s*\{([^}]+)\}\s*=\s*(?:props|this\.props)/g;
-  let match;
+function parseTypeBlock(block) {
+  const props = {};
+  let currentProp = null;
+  let currentType = '';
+  let depth = 0;
 
-  while ((match = destructuringPattern.exec(content)) !== null) {
-    const destructuring = match[1];
+  for (const line of block.split('\n')) {
+    const trimmed = line.trim();
+    if (!trimmed || trimmed.startsWith('//') || trimmed.startsWith('/*')) continue;
 
-    // Match: propName = defaultValue
-    const defaultPattern = /(\w+)\s*=\s*([^,\n}]+)/g;
-    let defaultMatch;
+    depth += (trimmed.match(/\{/g) || []).length - (trimmed.match(/\}/g) || []).length;
 
-    while ((defaultMatch = defaultPattern.exec(destructuring)) !== null) {
-      const [, propName, defaultValue] = defaultMatch;
-      const cleanValue = defaultValue.trim().replace(/,\s*$/, '');
-
-      if (props[propName] && cleanValue) {
-        props[propName].default = parseJsValue(cleanValue);
+    const match = trimmed.match(/^(\w+)\??:\s*(.*)$/);
+    if (match && depth <= 0) {
+      if (currentProp && currentType && !GLOBAL_PROPS.has(currentProp)) {
+        const typeInfo = parseTypeString(currentType.replace(/,\s*$/, '').trim());
+        props[currentProp] = { type: typeInfo.type, platforms: ['react'], ...typeInfo.values && { values: typeInfo.values } };
       }
+      currentProp = match[1];
+      currentType = match[2].replace(/,\s*$/, '');
+      if (!currentType.includes('{') || currentType.includes('}')) depth = 0;
+    } else if (currentProp && depth > 0) {
+      currentType += ' ' + trimmed.replace(/,\s*$/, '');
+    }
+  }
+
+  if (currentProp && currentType && !GLOBAL_PROPS.has(currentProp)) {
+    const typeInfo = parseTypeString(currentType.replace(/,\s*$/, '').trim());
+    props[currentProp] = { type: typeInfo.type, platforms: ['react'], ...typeInfo.values && { values: typeInfo.values } };
+  }
+
+  return props;
+}
+
+/**
+ * Extract default values from destructuring: const { x = "default" } = props
+ */
+function extractDefaults(content, props) {
+  const regex = /(?:const|let)\s*\{([^}]+)\}\s*=\s*(?:props|this\.props)/g;
+  for (const [, destructure] of content.matchAll(regex)) {
+    for (const [, name, val] of destructure.matchAll(/(\w+)\s*=\s*([^,\n}]+)/g)) {
+      if (props[name]) props[name].default = parseLiteral(val.trim().replace(/,\s*$/, ''));
     }
   }
 }
 
+/**
+ * Parse all props from a .tsx file.
+ */
+function parseTypeScript(filePath) {
+  const content = readFile(filePath);
+  if (!content) return {};
+
+  const props = {};
+  const typeRegex = /type\s+(\w*(?:Props|PropTypes))\s*=\s*\{/g;
+  
+  for (const match of content.matchAll(typeRegex)) {
+    const block = extractBracedContent(content, match.index + match[0].length);
+    Object.assign(props, parseTypeBlock(block));
+  }
+
+  extractDefaults(content, props);
+  return props;
+}
+
 // =============================================================================
-// RUBY PROP PARSING
+// RUBY PARSING
 // =============================================================================
+
+const RUBY_TYPE_MAP = {
+  Boolean: 'boolean', Number: 'number', String: 'string',
+  Enum: 'enum', Hash: 'object', Array: 'array', HashArray: 'array',
+};
+
+function parseRubyArray(str) {
+  if (str.startsWith('%w[')) {
+    return str.slice(3, -1).split(/\s+/).filter(v => v && v !== 'nil');
+  }
+  try {
+    return JSON.parse(str.replace(/'/g, '"').replace(/nil/g, 'null')).filter(v => v !== null);
+  } catch {
+    return str.slice(1, -1).split(',').map(v => v.trim().replace(/["']/g, '')).filter(v => v && v !== 'nil');
+  }
+}
 
 /**
- * Parse Ruby prop definitions from a Rails component .rb file.
- * 
- * Looks for definitions like:
- *   prop :variant, type: Playbook::Props::Enum,
- *        values: %w[primary secondary],
- *        default: "primary"
- * 
- * @param {string} filePath - Path to the .rb file
- * @returns {object} Props object with camelCase names
+ * Parse all props from a .rb file.
  */
-function parseRubyProps(filePath) {
-  if (!fs.existsSync(filePath)) return {};
+function parseRuby(filePath) {
+  const content = readFile(filePath);
+  if (!content) return {};
 
-  const content = fs.readFileSync(filePath, 'utf8');
   const props = {};
+  const propRegex = /prop\s+:(\w+)([^]*?)(?=\n\s*(?:prop\s+:|def\s+|private|protected|end\s*$))/gm;
 
-  // Match prop definitions - capture from 'prop :name' until next prop/def/end
-  const propPattern = /prop\s+:(\w+)([^]*?)(?=\n\s*(?:prop\s+:|def\s+|private|protected|end\s*$))/gm;
-  let match;
-
-  while ((match = propPattern.exec(content)) !== null) {
-    const propName = match[1];
-    const propBody = match[2];
-
-    // Convert snake_case to camelCase
-    const camelName = snakeToCamel(propName);
-
-    // Skip global props
+  for (const [, name, body] of content.matchAll(propRegex)) {
+    const camelName = snakeToCamel(name);
     if (GLOBAL_PROPS.has(camelName)) continue;
 
-    const prop = {
-      platforms: ['rails'],
-    };
+    const prop = { platforms: ['rails'] };
 
-    // Extract type: Playbook::Props::Boolean, String, Enum, etc.
-    const typeMatch = propBody.match(/type:\s*Playbook::Props::(\w+)/);
-    if (typeMatch) {
-      prop.type = mapRubyTypeToSchema(typeMatch[1]);
-    }
+    const typeMatch = body.match(/type:\s*Playbook::Props::(\w+)/);
+    if (typeMatch) prop.type = RUBY_TYPE_MAP[typeMatch[1]] || 'string';
 
-    // Extract values: %w[a b c] or ["a", "b", "c"]
-    const valuesMatch = propBody.match(/values:\s*(%w\[[^\]]+\]|\[[^\]]+\])/);
+    const valuesMatch = body.match(/values:\s*(%w\[[^\]]+\]|\[[^\]]+\])/);
     if (valuesMatch) {
       prop.values = parseRubyArray(valuesMatch[1]);
       prop.type = 'enum';
     }
 
-    // Extract default value
-    const defaultMatch = propBody.match(/default:\s*("[^"]*"|'[^']*'|true|false|nil|\d+(?:\.\d+)?)/);
-    if (defaultMatch) {
-      prop.default = parseRubyValue(defaultMatch[1].trim());
-    }
+    const defaultMatch = body.match(/default:\s*("[^"]*"|'[^']*'|true|false|nil|\d+(?:\.\d+)?)/);
+    if (defaultMatch) prop.default = parseLiteral(defaultMatch[1].trim());
 
     props[camelName] = prop;
   }
@@ -497,163 +292,36 @@ function parseRubyProps(filePath) {
   return props;
 }
 
-/**
- * Map Ruby Playbook prop types to schema types.
- */
-function mapRubyTypeToSchema(rubyType) {
-  const typeMap = {
-    'Boolean': 'boolean',
-    'Number': 'number',
-    'String': 'string',
-    'Enum': 'enum',
-    'Hash': 'object',
-    'Array': 'array',
-    'HashArray': 'array',
-  };
-  return typeMap[rubyType] || 'string';
-}
-
-/**
- * Parse Ruby array syntax: %w[a b c] or ["a", "b"]
- */
-function parseRubyArray(str) {
-  // %w[word list] syntax
-  if (str.startsWith('%w[')) {
-    return str.slice(3, -1).split(/\s+/).filter(v => v && v !== 'nil');
-  }
-
-  // Standard array syntax
-  try {
-    const normalized = str.replace(/'/g, '"').replace(/nil/g, 'null');
-    return JSON.parse(normalized).filter(v => v !== null);
-  } catch {
-    // Fallback: split by comma and clean up
-    return str.slice(1, -1)
-      .split(',')
-      .map(v => v.trim().replace(/["']/g, ''))
-      .filter(v => v && v !== 'nil');
-  }
-}
-
-/**
- * Parse a Ruby value into a JavaScript value.
- */
-function parseRubyValue(val) {
-  if (val === 'true') return true;
-  if (val === 'false') return false;
-  if (val === 'nil') return null;
-  if (val.startsWith('"') && val.endsWith('"')) return val.slice(1, -1);
-  if (val.startsWith("'") && val.endsWith("'")) return val.slice(1, -1);
-  if (!isNaN(val) && val !== '') return Number(val);
-  return val;
-}
-
-// =============================================================================
-// VALUE PARSING UTILITIES
-// =============================================================================
-
-/**
- * Parse a JavaScript/TypeScript literal value.
- */
-function parseJsValue(val) {
-  if (val === 'true') return true;
-  if (val === 'false') return false;
-  if (val === 'null' || val === 'undefined') return null;
-  if (val.startsWith('"') && val.endsWith('"')) return val.slice(1, -1);
-  if (val.startsWith("'") && val.endsWith("'")) return val.slice(1, -1);
-  if (!isNaN(val) && val !== '') return Number(val);
-  if (val === '{}') return {};
-  if (val === '[]') return [];
-  return val;
-}
-
-/**
- * Convert snake_case to camelCase.
- */
-function snakeToCamel(str) {
-  return str.replace(/_([a-z])/g, (_, letter) => letter.toUpperCase());
-}
-
-/**
- * Convert camelCase to snake_case.
- */
-function camelToSnake(str) {
-  return str.replace(/[A-Z]/g, letter => `_${letter.toLowerCase()}`);
-}
-
-/**
- * Convert snake_case to PascalCase.
- */
-function snakeToPascal(str) {
-  return str.split('_')
-    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-    .join('');
-}
-
 // =============================================================================
 // SCHEMA GENERATION
 // =============================================================================
 
 /**
- * Merge React and Rails props into a unified schema.
- * 
- * When a prop exists in both platforms:
- *   - Combines platforms array
- *   - Uses React type if available (usually more specific)
- *   - Handles differing defaults between platforms
+ * Merge React and Rails props into unified schema.
  */
-function mergeProps(reactProps, railsProps) {
+function mergeProps(react, rails) {
   const merged = {};
-  const allPropNames = new Set([
-    ...Object.keys(reactProps),
-    ...Object.keys(railsProps),
-  ]);
+  const allNames = new Set([...Object.keys(react), ...Object.keys(rails)]);
 
-  for (const name of allPropNames) {
-    const reactProp = reactProps[name];
-    const railsProp = railsProps[name];
+  for (const name of allNames) {
+    const r = react[name];
+    const rb = rails[name];
 
-    if (reactProp && railsProp) {
-      // Prop exists in both platforms
+    if (r && rb) {
       merged[name] = {
-        type: reactProp.type || railsProp.type,
+        type: r.type || rb.type,
         platforms: ['react', 'rails'],
+        ...(r.values || rb.values) && { values: r.values || rb.values },
       };
-
-      // Use values from whichever has them (prefer React)
-      if (reactProp.values || railsProp.values) {
-        merged[name].values = reactProp.values || railsProp.values;
-      }
-
-      // Handle defaults - note if they differ between platforms
-      const reactDefault = reactProp.default;
-      const railsDefault = railsProp.default;
-
-      if (reactDefault !== undefined && railsDefault !== undefined) {
-        if (JSON.stringify(reactDefault) !== JSON.stringify(railsDefault)) {
-          // Defaults differ - document both
-          merged[name].default = { react: reactDefault, rails: railsDefault };
-        } else {
-          merged[name].default = reactDefault;
-        }
-      } else {
-        merged[name].default = reactDefault ?? railsDefault;
-      }
-
-      // Include description if available
-      if (reactProp.description || railsProp.description) {
-        merged[name].description = reactProp.description || railsProp.description;
+      
+      const rd = r.default, rbd = rb.default;
+      if (rd !== undefined || rbd !== undefined) {
+        merged[name].default = (rd !== undefined && rbd !== undefined && JSON.stringify(rd) !== JSON.stringify(rbd))
+          ? { react: rd, rails: rbd }
+          : (rd ?? rbd);
       }
     } else {
-      // Prop exists in only one platform
-      merged[name] = { ...(reactProp || railsProp) };
-    }
-
-    // Clean up undefined values
-    for (const key of Object.keys(merged[name])) {
-      if (merged[name][key] === undefined) {
-        delete merged[name][key];
-      }
+      merged[name] = { ...(r || rb) };
     }
   }
 
@@ -661,102 +329,71 @@ function mergeProps(reactProps, railsProps) {
 }
 
 /**
- * Generate usage examples for both React and Rails.
+ * Generate usage examples for React and Rails.
  */
-function generateUsageExamples(kitName, props) {
-  const componentName = snakeToPascal(kitName);
+function generateUsage(kitName, props) {
+  const pascal = snakeToPascal(kitName);
+  const examples = Object.entries(props).filter(([, p]) => p.values?.length).slice(0, 2);
 
-  // Find props with enum values for example usage
-  const exampleProps = Object.entries(props)
-    .filter(([_, p]) => p.values?.length > 0)
-    .slice(0, 2);
-
-  // React example
-  const reactPropsStr = exampleProps
-    .map(([name, p]) => `${name}="${p.values[0]}"`)
-    .join(' ');
-
-  // Rails example
-  const railsPropsStr = exampleProps
-    .map(([name, p]) => `${camelToSnake(name)}: "${p.values[0]}"`)
-    .join(', ');
+  const reactProps = examples.map(([n, p]) => `${n}="${p.values[0]}"`).join(' ');
+  const railsProps = examples.map(([n, p]) => `${camelToSnake(n)}: "${p.values[0]}"`).join(', ');
 
   return {
     react: {
-      import: `import { ${componentName} } from 'playbook-ui'`,
-      example: `<${componentName}${reactPropsStr ? ' ' + reactPropsStr : ''}></${componentName}>`,
+      import: `import { ${pascal} } from 'playbook-ui'`,
+      example: `<${pascal}${reactProps ? ' ' + reactProps : ''}></${pascal}>`,
     },
     rails: {
       import: null,
-      example: `<%= pb_rails("${kitName}", props: { ${railsPropsStr || 'text: "Example"'} }) %>`,
+      example: `<%= pb_rails("${kitName}", props: { ${railsProps || 'text: "Example"'} }) %>`,
     },
   };
 }
 
 /**
- * Generate a complete kit.schema.json for a component.
+ * Generate complete kit.schema.json for a component.
  */
-function generateKitSchema(kitName, options = {}) {
+function generateSchema(kitName, options = {}) {
   const kitDir = path.join(CONFIG.pbKitsDir, `pb_${kitName}`);
+  if (!fs.existsSync(kitDir)) return null;
 
-  if (!fs.existsSync(kitDir)) {
-    if (options.verbose) console.log(`  ⏭️  Skipping ${kitName}: directory not found`);
-    return null;
-  }
-
-  // Parse props from both platforms
   const tsxFile = path.join(kitDir, `_${kitName}.tsx`);
   const rbFile = path.join(kitDir, `${kitName}.rb`);
 
-  const reactProps = parseTypeScriptProps(tsxFile);
-  const railsProps = parseRubyProps(rbFile);
-  const mergedProps = mergeProps(reactProps, railsProps);
+  const reactProps = parseTypeScript(tsxFile);
+  const railsProps = parseRuby(rbFile);
+  const props = mergeProps(reactProps, railsProps);
 
-  if (Object.keys(mergedProps).length === 0) {
-    if (options.verbose) console.log(`  ⏭️  Skipping ${kitName}: no props found`);
+  if (Object.keys(props).length === 0) {
+    if (options.verbose) console.log(`  ⏭️  ${kitName}: no props found`);
     return null;
   }
 
-  // Get metadata from menu.yml
   const menu = loadMenuYml();
-  const menuData = findComponentInMenu(menu, kitName);
+  const menuData = findInMenu(menu, kitName);
 
-  // Determine available platforms
   const platforms = [];
   if (fs.existsSync(tsxFile)) platforms.push('react');
   if (fs.existsSync(rbFile)) platforms.push('rails');
+  if (menuData?.platforms?.includes('swift')) platforms.push('swift');
 
-  // Check for Swift support in menu.yml
-  if (menuData?.platforms?.includes('swift')) {
-    platforms.push('swift');
-  }
-
-  // Build the schema
-  const componentName = snakeToPascal(kitName);
   const schema = {
     $schema: CONFIG.schemaVersion,
-    name: componentName,
-    description: menuData?.description || `${componentName} component`,
+    name: snakeToPascal(kitName),
+    description: menuData?.description || `${snakeToPascal(kitName)} component`,
     platforms: [...new Set(platforms)],
-    props: mergedProps,
+    props,
     globalProps: true,
-    usage: generateUsageExamples(kitName, mergedProps),
+    usage: generateUsage(kitName, props),
   };
 
-  // Add related components if available
   if (menuData?.related_components) {
     try {
       const related = menuData.related_components;
-      if (typeof related === 'string') {
-        schema.relatedComponents = related
-          .replace(/[\[\]]/g, '')
-          .split(',')
-          .map(s => s.trim())
-          .filter(Boolean);
-      }
-    } catch {
-      // Ignore parsing errors for related components
-    }
+      schema.relatedComponents = (typeof related === 'string')
+        ? related.replace(/[\[\]]/g, '').split(',').map(s => s.trim()).filter(Boolean)
+        : related;
+    } catch { /* ignore */ }
   }
 
   return schema;
@@ -766,125 +403,99 @@ function generateKitSchema(kitName, options = {}) {
 // KIT DISCOVERY
 // =============================================================================
 
-/**
- * Get all kit names from the pb_kits directory.
- */
 function getAllKitNames() {
-  const entries = fs.readdirSync(CONFIG.pbKitsDir);
-
-  return entries
-    .filter(entry => {
-      // Must start with pb_ prefix
-      if (!entry.startsWith('pb_')) return false;
-
-      // Must be a directory
-      const fullPath = path.join(CONFIG.pbKitsDir, entry);
-      if (!fs.statSync(fullPath).isDirectory()) return false;
-
-      return true;
-    })
+  return fs.readdirSync(CONFIG.pbKitsDir)
+    .filter(entry => 
+      entry.startsWith('pb_') &&
+      fs.statSync(path.join(CONFIG.pbKitsDir, entry)).isDirectory()
+    )
     .map(dir => dir.replace('pb_', ''))
-    .filter(name => {
-      // Exclude utility directories
-      if (CONFIG.excludedDirs.includes(name)) return false;
-
-      // Skip malformed names (e.g., pb_pb_something)
-      if (name.startsWith('pb_')) return false;
-
-      return true;
-    })
+    .filter(name => !CONFIG.excludedDirs.includes(name) && !name.startsWith('pb_'))
     .sort();
 }
 
 // =============================================================================
-// MAIN EXECUTION
+// CLI
+// =============================================================================
+
+function parseArgs() {
+  const opts = { kit: null, outputDir: null, dryRun: false, verbose: false };
+  
+  for (const arg of process.argv.slice(2)) {
+    if (arg.startsWith('--kit=')) opts.kit = arg.slice(6);
+    else if (arg.startsWith('--output-dir=')) opts.outputDir = arg.slice(13);
+    else if (arg === '--dry-run') opts.dryRun = true;
+    else if (arg === '--verbose') opts.verbose = true;
+    else if (arg === '--help' || arg === '-h') {
+      console.log(`
+Usage: yarn generate:ai-metadata [options]
+
+Options:
+  --kit=<name>       Single component (e.g., --kit=button)
+  --output-dir=<dir> Custom output directory
+  --dry-run          Preview without writing
+  --verbose          Detailed output
+  --help             Show this message
+`);
+      process.exit(0);
+    }
+  }
+  return opts;
+}
+
+// =============================================================================
+// MAIN
 // =============================================================================
 
 async function main() {
-  const options = parseCliArgs();
+  const opts = parseArgs();
 
-  console.log('');
-  console.log('🔧 Generating AI Metadata for Playbook Components');
-  console.log('═'.repeat(50));
-  console.log('');
+  console.log('\n🔧 Generating AI Metadata for Playbook Components');
+  console.log('═'.repeat(50) + '\n');
 
-  // Determine which kits to process
-  const kitNames = options.kit ? [options.kit] : getAllKitNames();
+  const kitNames = opts.kit ? [opts.kit] : getAllKitNames();
+  if (opts.verbose) console.log(`📦 Found ${kitNames.length} kits to process\n`);
 
-  if (options.verbose) {
-    console.log(`📦 Found ${kitNames.length} kits to process\n`);
-  }
-
-  // Track results
-  let successCount = 0;
-  let skipCount = 0;
+  let success = 0, skipped = 0;
   const errors = [];
 
-  // Process each kit
   for (const kitName of kitNames) {
     try {
-      const schema = generateKitSchema(kitName, { verbose: options.verbose });
+      const schema = generateSchema(kitName, { verbose: opts.verbose });
+      if (!schema) { skipped++; continue; }
 
-      if (!schema) {
-        skipCount++;
-        continue;
-      }
-
-      // Determine output path
-      const outputPath = options.outputDir
-        ? path.join(options.outputDir, `${kitName}.schema.json`)
+      const outputPath = opts.outputDir
+        ? path.join(opts.outputDir, `${kitName}.schema.json`)
         : path.join(CONFIG.pbKitsDir, `pb_${kitName}`, 'kit.schema.json');
 
-      if (options.dryRun) {
-        console.log(`📝 [DRY RUN] Would write: ${outputPath}`);
-        if (options.verbose) {
-          const preview = JSON.stringify(schema, null, 2).slice(0, 400);
-          console.log(preview + '...\n');
-        }
+      if (opts.dryRun) {
+        console.log(`📝 [DRY RUN] ${outputPath}`);
+        if (opts.verbose) console.log(JSON.stringify(schema, null, 2).slice(0, 400) + '...\n');
       } else {
-        // Ensure output directory exists
-        const outputDir = path.dirname(outputPath);
-        if (!fs.existsSync(outputDir)) {
-          fs.mkdirSync(outputDir, { recursive: true });
-        }
-
-        // Write the schema file
+        fs.mkdirSync(path.dirname(outputPath), { recursive: true });
         fs.writeFileSync(outputPath, JSON.stringify(schema, null, 2) + '\n');
         console.log(`✅ ${kitName}`);
       }
-
-      successCount++;
-    } catch (error) {
-      errors.push({ kit: kitName, error: error.message });
-      if (options.verbose) {
-        console.error(`❌ ${kitName}: ${error.message}`);
-      }
+      success++;
+    } catch (e) {
+      errors.push({ kit: kitName, error: e.message });
+      if (opts.verbose) console.error(`❌ ${kitName}: ${e.message}`);
     }
   }
 
-  // Print summary
-  console.log('');
-  console.log('─'.repeat(50));
+  console.log('\n' + '─'.repeat(50));
   console.log('📊 Summary');
   console.log('─'.repeat(50));
-  console.log(`   ✅ Generated: ${successCount}`);
-  console.log(`   ⏭️  Skipped:   ${skipCount}`);
+  console.log(`   ✅ Generated: ${success}`);
+  console.log(`   ⏭️  Skipped:   ${skipped}`);
   console.log(`   ❌ Errors:    ${errors.length}`);
 
-  if (errors.length > 0 && options.verbose) {
+  if (errors.length && opts.verbose) {
     console.log('\n🔴 Errors:');
-    for (const { kit, error } of errors) {
-      console.log(`   • ${kit}: ${error}`);
-    }
+    errors.forEach(({ kit, error }) => console.log(`   • ${kit}: ${error}`));
   }
 
-  console.log('');
-  console.log('✨ Done!');
-  console.log('');
+  console.log('\n✨ Done!\n');
 }
 
-// Run the script
-main().catch(error => {
-  console.error('Fatal error:', error);
-  process.exit(1);
-});
+main().catch(e => { console.error('Fatal:', e); process.exit(1); });

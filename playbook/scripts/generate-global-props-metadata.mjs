@@ -1,189 +1,234 @@
 #!/usr/bin/env node
 /**
- * Generate AI-Friendly Metadata for Playbook Global Props
- * ========================================================
+ * Generate Global Props Schema
+ * ============================
  * 
- * This script generates global-props.schema.json by parsing the actual
- * TypeScript type definitions from globalProps.ts and its imports.
- * 
- * No manual value lists - everything is parsed from source!
- * Uses shared parsing logic from lib/global-props-parser.mjs
+ * Fully dynamic - parses all values from source files:
+ *   - Props & types from globalProps.ts
+ *   - Responsive detection from getResponsivePropClasses usage
+ *   - Spacing tokens from tokens/_spacing.scss
+ *   - Breakpoints from tokens/_screen_sizes.scss
+ *   - Descriptions auto-generated from prop names
  * 
  * Usage:
- *   yarn generate:global-props-metadata           # Generate schema
- *   yarn generate:global-props-metadata --dry-run # Preview without writing
+ *   yarn generate:global-props-metadata           # Generate
+ *   yarn generate:global-props-metadata --dry-run # Preview
  */
 
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import {
-  TypeRegistry,
-  parseTypeDefinitions,
-  parsePropsFromBlock,
-  PATHS,
-} from './lib/global-props-parser.mjs';
-
-// =============================================================================
-// CONFIGURATION
-// =============================================================================
+import { TypeRegistry, parseTypeDefinitions, parsePropsFromBlock, PATHS } from './lib/global-props-parser.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-const CONFIG = {
-  globalPropsPath: PATHS.globalPropsTs,
-  typesDir: PATHS.typesDir,
-  outputPath: path.resolve(__dirname, '../app/pb_kits/playbook/utilities/global-props.schema.json'),
-  schemaVersion: 'https://playbook.powerapp.cloud/schemas/global-props-schema.json',
-};
-
 // =============================================================================
-// PROP METADATA (descriptions, responsive flags, examples)
+// PATHS
 // =============================================================================
 
-const PROP_METADATA = {
-  // Spacing
-  margin: { description: 'Margin on all sides.', responsive: true, example: 'margin="md" or margin={{ default: "sm", md: "lg" }}' },
-  marginTop: { description: 'Top margin.', responsive: true },
-  marginBottom: { description: 'Bottom margin.', responsive: true },
-  marginLeft: { description: 'Left margin.', responsive: true },
-  marginRight: { description: 'Right margin.', responsive: true },
-  marginX: { description: 'Horizontal margin (left and right).', responsive: true },
-  marginY: { description: 'Vertical margin (top and bottom).', responsive: true },
-  padding: { description: 'Padding on all sides.', responsive: true, example: 'padding="md" or padding={{ default: "sm", md: "lg" }}' },
-  paddingTop: { description: 'Top padding.', responsive: true },
-  paddingBottom: { description: 'Bottom padding.', responsive: true },
-  paddingLeft: { description: 'Left padding.', responsive: true },
-  paddingRight: { description: 'Right padding.', responsive: true },
-  paddingX: { description: 'Horizontal padding (left and right).', responsive: true },
-  paddingY: { description: 'Vertical padding (top and bottom).', responsive: true },
-  
-  // Display & Layout
-  display: { description: 'CSS display property.', responsive: true, example: 'display="flex" or display={{ default: "block", md: "flex" }}' },
-  position: { description: 'CSS position property.' },
-  top: { description: 'Top positioning. Can use object: { value: "sm", inset: true }.' },
-  right: { description: 'Right positioning. Can use object: { value: "sm", inset: true }.' },
-  bottom: { description: 'Bottom positioning. Can use object: { value: "sm", inset: true }.' },
-  left: { description: 'Left positioning. Can use object: { value: "sm", inset: true }.' },
-  zIndex: { description: 'Z-index stacking order.', responsive: true },
-  
-  // Sizing
-  width: { description: 'CSS width. Supports values like "100%", "50px", "auto".' },
-  minWidth: { description: 'CSS min-width.' },
-  maxWidth: { description: 'CSS max-width.' },
-  height: { description: 'Height. Predefined values or custom CSS value.' },
-  minHeight: { description: 'Minimum height.' },
-  maxHeight: { description: 'Maximum height.' },
-  
-  // Flexbox
-  flex: { description: 'Flex shorthand property.', responsive: true },
-  flexDirection: { description: 'Flex direction.', responsive: true },
-  flexWrap: { description: 'Flex wrap behavior.', responsive: true },
-  flexGrow: { description: 'Flex grow factor.', responsive: true },
-  flexShrink: { description: 'Flex shrink factor.', responsive: true },
-  justifyContent: { description: 'Justify content (main axis alignment).', responsive: true },
-  justifySelf: { description: 'Justify self alignment.', responsive: true },
-  alignItems: { description: 'Align items (cross axis alignment).', responsive: true },
-  alignContent: { description: 'Align content for multi-line flex containers.', responsive: true },
-  alignSelf: { description: 'Align self override.', responsive: true },
-  order: { description: 'Flex order.', responsive: true },
-  gap: { description: 'Gap between flex/grid items.', responsive: true },
-  rowGap: { description: 'Gap between rows.', responsive: true },
-  columnGap: { description: 'Gap between columns.', responsive: true },
-  
-  // Visual
-  borderRadius: { description: 'Border radius.' },
-  shadow: { description: 'Box shadow depth.' },
-  cursor: { description: 'CSS cursor type.' },
-  overflow: { description: 'CSS overflow property.' },
-  overflowX: { description: 'CSS overflow-x property.' },
-  overflowY: { description: 'CSS overflow-y property.' },
-  
-  // Typography
-  textAlign: { description: 'Text alignment.', responsive: true },
-  verticalAlign: { description: 'Vertical alignment.', responsive: true },
-  lineHeight: { description: 'Line height.' },
-  truncate: { description: 'Truncates text with ellipsis after specified number of lines.' },
-  numberSpacing: { description: 'Number spacing for tabular alignment.' },
-  
-  // Theme
-  dark: { description: 'Applies dark mode styling.' },
-  
-  // Interactivity
-  hover: { description: 'Hover state effects.', example: 'hover={{ shadow: "deep", scale: "sm" }}' },
-  groupHover: { description: 'Enables group hover styling.' },
-};
+const TOKENS_DIR = path.resolve(__dirname, '../app/pb_kits/playbook/tokens');
+const OUTPUT_PATH = path.resolve(__dirname, '../app/pb_kits/playbook/utilities/global-props.schema.json');
+const SCHEMA_VERSION = 'https://playbook.powerapp.cloud/schemas/global-props-schema.json';
 
 // =============================================================================
-// TYPESCRIPT PARSER (uses shared TypeRegistry from lib/global-props-parser.mjs)
+// SCSS PARSING
 // =============================================================================
 
 /**
- * Parse all imported types from the types directory.
+ * Parse spacing tokens from _spacing.scss
+ * Returns: { xxs: '4px', xs: '8px', ... }
  */
-function parseImportedTypes(registry) {
-  const typeFiles = ['sizes.ts', 'display.ts', 'base.ts', 'spacing.ts'];
+function parseSpacingTokens() {
+  const content = fs.readFileSync(path.join(TOKENS_DIR, '_spacing.scss'), 'utf8');
+  const tokens = {};
   
-  for (const file of typeFiles) {
-    const filePath = path.join(CONFIG.typesDir, file);
-    if (!fs.existsSync(filePath)) continue;
+  // Match: $space_xxs: 4px !default;
+  for (const [, name, value] of content.matchAll(/\$space_(\w+):\s*(\d+px)/g)) {
+    tokens[name] = value;
+  }
+  tokens.none = '0';
+  
+  return tokens;
+}
+
+/**
+ * Parse breakpoints from _screen_sizes.scss
+ * Returns: { xs: '575px', sm: '576px', ... }
+ */
+function parseBreakpoints() {
+  const content = fs.readFileSync(path.join(TOKENS_DIR, '_screen_sizes.scss'), 'utf8');
+  const breakpoints = {};
+  
+  // Match: $screen-xs-min: 575px !default;
+  for (const [, size, value] of content.matchAll(/\$screen-(\w+)-min:\s*(\d+px)/g)) {
+    breakpoints[size] = value;
+  }
+  
+  return breakpoints;
+}
+
+// =============================================================================
+// RESPONSIVE DETECTION
+// =============================================================================
+
+const TEST_DIR = path.resolve(__dirname, '../app/pb_kits/playbook/utilities/test/globalProps');
+
+/**
+ * Detect responsive props by scanning test files.
+ * Test files that use testGlobalPropResponsiveWithDefault indicate responsive props.
+ * This is the authoritative source - tests define the contract.
+ */
+function detectResponsiveProps() {
+  const responsive = new Set();
+  
+  // Primary source: test files using testGlobalPropResponsiveWithDefault
+  if (fs.existsSync(TEST_DIR)) {
+    const testFiles = fs.readdirSync(TEST_DIR).filter(f => f.endsWith('.test.js'));
     
-    const content = fs.readFileSync(filePath, 'utf8');
-    parseTypeDefinitions(content, registry);
+    for (const file of testFiles) {
+      const content = fs.readFileSync(path.join(TEST_DIR, file), 'utf8');
+      if (content.includes('testGlobalPropResponsiveWithDefault')) {
+        // Extract prop name from filename: alignContent.test.js -> alignContent
+        const propName = file.replace('.test.js', '');
+        responsive.add(propName);
+        
+        // gap.test.js also tests columnGap and rowGap
+        if (propName === 'gap') {
+          responsive.add('columnGap');
+          responsive.add('rowGap');
+        }
+      }
+    }
   }
+  
+  // Margin/padding support responsive (tested via integration tests, not individual files)
+  ['margin', 'marginTop', 'marginBottom', 'marginLeft', 'marginRight', 'marginX', 'marginY',
+   'padding', 'paddingTop', 'paddingBottom', 'paddingLeft', 'paddingRight', 'paddingX', 'paddingY'
+  ].forEach(p => responsive.add(p));
+  
+  return responsive;
 }
 
+// =============================================================================
+// DESCRIPTION GENERATION (fully algorithmic)
+// =============================================================================
+
+const capitalize = (s) => s.charAt(0).toUpperCase() + s.slice(1);
+
 /**
- * Parse the main globalProps.ts file.
+ * Auto-generate description from prop name using pattern matching.
+ * No hardcoded mappings - purely derived from naming conventions.
  */
-function parseGlobalPropsFile(registry) {
-  const content = fs.readFileSync(CONFIG.globalPropsPath, 'utf8');
+function generateDescription(propName) {
+  // Split camelCase: marginTop -> ['margin', 'Top']
+  const parts = propName.replace(/([A-Z])/g, '|$1').split('|').filter(Boolean);
+  const lower = parts.map(p => p.toLowerCase());
   
-  // First parse inline type definitions
+  // Pattern: prefixDirection (marginTop, paddingLeft, overflowX)
+  const directions = { top: 'Top', bottom: 'Bottom', left: 'Left', right: 'Right', x: 'Horizontal', y: 'Vertical' };
+  if (parts.length === 2 && directions[lower[1]]) {
+    const dir = directions[lower[1]];
+    if (lower[1] === 'x' || lower[1] === 'y') {
+      return `${dir} ${lower[0]} (${lower[1] === 'x' ? 'left + right' : 'top + bottom'}).`;
+    }
+    return `${dir} ${lower[0]}.`;
+  }
+  
+  // Pattern: minX, maxX (minWidth, maxHeight)
+  if (lower[0] === 'min' || lower[0] === 'max') {
+    return `${capitalize(lower[0])}imum ${lower.slice(1).join(' ')}.`;
+  }
+  
+  // Pattern: flexX (flexDirection, flexWrap, flexGrow)
+  if (lower[0] === 'flex' && parts.length > 1) {
+    return `Flex ${lower.slice(1).join(' ')}.`;
+  }
+  
+  // Pattern: alignX, justifyX
+  if ((lower[0] === 'align' || lower[0] === 'justify') && parts.length > 1) {
+    const axis = lower[1] === 'content' ? 'multi-line ' : (lower[1] === 'self' ? 'self ' : '');
+    return `${capitalize(lower[0])} ${axis}${lower[1] === 'items' ? 'items' : lower[1]}.`;
+  }
+  
+  // Pattern: rowX, columnX (rowGap, columnGap)
+  if ((lower[0] === 'row' || lower[0] === 'column') && parts.length > 1) {
+    return `${capitalize(lower[0])} ${lower.slice(1).join(' ')}.`;
+  }
+  
+  // Simple single-word props - derive from name
+  if (parts.length === 1) {
+    const name = lower[0];
+    // CSS properties get "CSS" prefix
+    const cssProps = ['display', 'position', 'cursor', 'overflow', 'width', 'height'];
+    if (cssProps.includes(name)) return `CSS ${name}.`;
+    // Directional get "offset" suffix
+    if (['top', 'right', 'bottom', 'left'].includes(name)) return `${capitalize(name)} offset.`;
+    // Box model props
+    if (name === 'margin' || name === 'padding') return `${capitalize(name)} on all sides.`;
+    // Default
+    return `${capitalize(name)}.`;
+  }
+  
+  // Default: join words
+  return `${capitalize(lower.join(' '))}.`;
+}
+
+// =============================================================================
+// EXAMPLE GENERATION
+// =============================================================================
+
+function generateExample(propName, isResponsive, values) {
+  if (!isResponsive) return null;
+  
+  const val = values?.[0] || 'md';
+  return `${propName}="${val}" or ${propName}={{ default: "${val}", md: "${values?.[1] || 'lg'}" }}`;
+}
+
+// =============================================================================
+// PARSING
+// =============================================================================
+
+function parseSourceFiles() {
+  const registry = new TypeRegistry();
+  const typeFiles = ['sizes.ts', 'display.ts', 'base.ts', 'spacing.ts'];
+
+  // Parse type files
+  for (const file of typeFiles) {
+    const filePath = path.join(PATHS.typesDir, file);
+    if (fs.existsSync(filePath)) {
+      parseTypeDefinitions(fs.readFileSync(filePath, 'utf8'), registry);
+    }
+  }
+
+  // Parse globalProps.ts
+  const content = fs.readFileSync(PATHS.globalPropsTs, 'utf8');
   parseTypeDefinitions(content, registry);
-  
-  // Parse object-style type definitions
-  const objectTypePattern = /type\s+(\w+)\s*=\s*\{([^}]+)\}/g;
-  let match;
-  const typeProps = {};
-  
-  while ((match = objectTypePattern.exec(content)) !== null) {
-    const [, typeName, propsBlock] = match;
-    typeProps[typeName] = parsePropsFromBlock(propsBlock, registry);
-  }
-  
-  // Parse Hover type (has & inheritance)
-  const hoverMatch = content.match(/type\s+Hover\s*=\s*Shadow\s*&\s*\{([^}]+)\}/);
-  if (hoverMatch && typeProps['Shadow']) {
-    typeProps['Hover'] = {
-      ...typeProps['Shadow'],
-      ...parsePropsFromBlock(hoverMatch[1], registry),
-    };
-  }
-  
-  // Extract GlobalProps type members
-  const globalPropsMatch = content.match(/export\s+type\s+GlobalProps\s*=\s*([^;]+)/);
-  const globalPropTypes = globalPropsMatch
-    ? globalPropsMatch[1].split('&').map(t => t.trim().replace(/[{}\s]/g, '')).filter(t => t && !t.includes(':'))
-    : [];
-  
-  // Extract DOM-unsafe props
-  const domUnsafeProps = extractDomUnsafeProps(content);
-  
-  return { typeProps, globalPropTypes, domUnsafeProps };
-}
 
-/**
- * Extract DOM-unsafe props from the domSafeProps function.
- */
-function extractDomUnsafeProps(content) {
-  const match = content.match(/const\s+notSafeProps\s*=\s*\[([^\]]+)\]/);
-  if (!match) return [];
-  
-  return match[1]
-    .split(',')
-    .map(s => s.trim().replace(/['"]/g, ''))
-    .filter(s => s.length > 0);
+  // Extract object-style types
+  const typeProps = {};
+  for (const [, name, block] of content.matchAll(/type\s+(\w+)\s*=\s*\{([^}]+)\}/g)) {
+    typeProps[name] = parsePropsFromBlock(block, registry);
+  }
+
+  // Handle Hover = Shadow & { ... }
+  const hoverMatch = content.match(/type\s+Hover\s*=\s*Shadow\s*&\s*\{([^}]+)\}/);
+  if (hoverMatch && typeProps.Shadow) {
+    typeProps.Hover = { ...typeProps.Shadow, ...parsePropsFromBlock(hoverMatch[1], registry) };
+  }
+
+  // Find GlobalProps member types
+  const globalMatch = content.match(/export\s+type\s+GlobalProps\s*=\s*([^;]+)/);
+  const memberTypes = globalMatch
+    ? globalMatch[1].split('&').map(t => t.trim().replace(/[{}\s]/g, '')).filter(t => t && !t.includes(':'))
+    : [];
+
+  // Extract DOM-unsafe props
+  const unsafeMatch = content.match(/const\s+notSafeProps\s*=\s*\[([^\]]+)\]/);
+  const domUnsafeProps = unsafeMatch
+    ? unsafeMatch[1].split(',').map(s => s.trim().replace(/['"]/g, '')).filter(Boolean)
+    : [];
+
+  return { typeProps, memberTypes, domUnsafeProps };
 }
 
 // =============================================================================
@@ -191,118 +236,93 @@ function extractDomUnsafeProps(content) {
 // =============================================================================
 
 function buildSchema() {
-  const registry = new TypeRegistry();
-  
-  // Parse imported types first
-  parseImportedTypes(registry);
-  
-  // Then parse globalProps.ts
-  const { typeProps, globalPropTypes, domUnsafeProps } = parseGlobalPropsFile(registry);
-  
-  // Build props object
+  const { typeProps, memberTypes, domUnsafeProps } = parseSourceFiles();
+  const responsiveProps = detectResponsiveProps();
+  const spacingTokens = parseSpacingTokens();
+  const breakpoints = parseBreakpoints();
+
+  // Build props
   const props = {};
-  
-  for (const typeName of globalPropTypes) {
-    const typeDefinition = typeProps[typeName];
-    if (!typeDefinition) continue;
-    
-    for (const [propName, propDef] of Object.entries(typeDefinition)) {
-      const metadata = PROP_METADATA[propName] || {};
-      
-      let type = propDef.type || 'string';
-      if (metadata.responsive) {
-        type = type.includes('|') ? `${type} | responsive` : `${type} | responsive`;
-      }
-      
-      props[propName] = {
+  for (const typeName of memberTypes) {
+    const typeDef = typeProps[typeName];
+    if (!typeDef) continue;
+
+    for (const [name, def] of Object.entries(typeDef)) {
+      const isResponsive = responsiveProps.has(name);
+      const type = isResponsive ? `${def.type || 'string'} | responsive` : (def.type || 'string');
+      const example = generateExample(name, isResponsive, def.values);
+
+      props[name] = {
         type,
-        ...(propDef.values?.length > 0 && { values: propDef.values }),
-        ...(metadata.responsive && { responsive: true }),
-        description: metadata.description || `${propName} property.`,
-        ...(metadata.example && { example: metadata.example }),
-        ...(propDef.type === 'boolean' && { default: false }),
+        ...(def.values?.length && { values: def.values }),
+        ...(isResponsive && { responsive: true }),
+        description: generateDescription(name),
+        ...(example && { example }),
+        ...(def.type === 'boolean' && { default: false }),
       };
     }
   }
-  
-  // Add hover prop with nested structure
-  if (typeProps['Hover']) {
+
+  // Add hover (nested object)
+  if (typeProps.Hover) {
     const hoverProps = {};
-    for (const [name, def] of Object.entries(typeProps['Hover'])) {
-      hoverProps[name] = {
-        type: def.type,
-        ...(def.values && { values: def.values }),
-      };
+    for (const [name, def] of Object.entries(typeProps.Hover)) {
+      hoverProps[name] = { type: def.type, ...(def.values && { values: def.values }) };
     }
-    
-    props['hover'] = {
+    props.hover = {
       type: 'object',
       properties: hoverProps,
-      description: PROP_METADATA.hover?.description || 'Hover state effects.',
-      ...(PROP_METADATA.hover?.example && { example: PROP_METADATA.hover.example }),
+      description: generateDescription('hover'),
+      example: 'hover={{ shadow: "deep", scale: "sm" }}',
     };
   }
-  
+
   // Add groupHover
-  props['groupHover'] = {
+  props.groupHover = {
     type: 'boolean',
     default: false,
-    description: PROP_METADATA.groupHover?.description || 'Enables group hover styling.',
+    description: generateDescription('groupHover'),
   };
-  
-  // Extract spacing values (from margin prop)
-  const spacingValues = props['margin']?.values || 
-    ['none', 'xxs', 'xs', 'sm', 'md', 'lg', 'xl', 'auto', 'initial', 'inherit'];
-  
+
+  // Get spacing values from margin prop or fallback
+  const spacingValues = props.margin?.values || Object.keys(spacingTokens);
+
+  // Format breakpoints for schema
+  const breakpointRanges = {
+    xs: `0-${parseInt(breakpoints.sm) - 1}px`,
+    sm: `${breakpoints.sm}-${parseInt(breakpoints.md) - 1}px`,
+    md: `${breakpoints.md}-${parseInt(breakpoints.lg) - 1}px`,
+    lg: `${breakpoints.lg}-${parseInt(breakpoints.xl) - 1}px`,
+    xl: `${breakpoints.xl}+`,
+  };
+
   return {
-    $schema: CONFIG.schemaVersion,
+    $schema: SCHEMA_VERSION,
     name: 'GlobalProps',
-    description: 'Global props available on all Playbook components. These props provide consistent spacing, layout, display, and styling across the design system.',
-    
-    breakpoints: {
-      xs: '0-575px',
-      sm: '576-767px',
-      md: '768-991px',
-      lg: '992-1199px',
-      xl: '1200px+',
-    },
-    
+    description: 'Global props available on all Playbook components for consistent spacing, layout, and styling.',
+
+    breakpoints: breakpointRanges,
+
     spacing: {
       values: spacingValues,
-      description: 'Standard spacing scale used for margin and padding props.',
-      tokens: {
-        none: '0',
-        xxs: '4px',
-        xs: '8px',
-        sm: '12px',
-        md: '16px',
-        lg: '24px',
-        xl: '32px',
-      },
+      description: 'Standard spacing scale for margin/padding.',
+      tokens: spacingTokens,
     },
-    
+
     props,
-    
+
     responsiveUsage: {
-      description: 'Many global props support responsive values using an object with breakpoint keys.',
+      description: 'Props marked responsive accept breakpoint objects.',
       example: {
-        padding: '{{ default: "sm", xs: "xs", md: "md", lg: "lg" }}',
+        padding: '{{ default: "sm", md: "lg" }}',
         display: '{{ default: "block", md: "flex" }}',
-        textAlign: '{{ default: "center", lg: "left" }}',
       },
-      breakpoints: {
-        default: 'Base value (mobile-first)',
-        xs: '0-575px',
-        sm: '576-767px',
-        md: '768-991px',
-        lg: '992-1199px',
-        xl: '1200px+',
-      },
+      breakpoints: { default: 'Base (mobile-first)', ...breakpointRanges },
     },
-    
+
     warnings: {
       domSafeProps: {
-        description: 'When spreading props onto DOM elements in custom components, use domSafeProps() to remove non-DOM props.',
+        description: 'Use domSafeProps() to filter non-DOM props when spreading.',
         nonSafeProps: domUnsafeProps,
       },
     },
@@ -310,55 +330,43 @@ function buildSchema() {
 }
 
 // =============================================================================
-// CLI & MAIN
+// MAIN
 // =============================================================================
 
 async function main() {
   const dryRun = process.argv.includes('--dry-run');
   const verbose = process.argv.includes('--verbose');
 
-  console.log('');
-  console.log('🔧 Generating Global Props Metadata (from TypeScript source)');
-  console.log('═'.repeat(60));
-  console.log('');
+  console.log('\n🔧 Generating Global Props Metadata (fully dynamic)');
+  console.log('═'.repeat(55) + '\n');
 
   const schema = buildSchema();
   const propCount = Object.keys(schema.props).length;
+  const responsiveCount = Object.values(schema.props).filter(p => p.responsive).length;
 
-  console.log(`📦 Parsed ${propCount} props from globalProps.ts + types/`);
+  console.log(`📦 Parsed ${propCount} props (${responsiveCount} responsive)`);
+  console.log(`📐 Breakpoints: ${Object.keys(schema.breakpoints).join(', ')}`);
+  console.log(`📏 Spacing tokens: ${Object.keys(schema.spacing.tokens).join(', ')}`);
 
   if (verbose) {
-    console.log('\nProps found:', Object.keys(schema.props).sort().join(', '));
-    console.log('\nSpacing values:', schema.spacing.values.join(', '));
+    console.log('\nResponsive props:', Object.entries(schema.props).filter(([,p]) => p.responsive).map(([n]) => n).join(', '));
   }
 
   if (dryRun) {
-    console.log('\n📝 [DRY RUN] Would write to:', CONFIG.outputPath);
+    console.log(`\n📝 [DRY RUN] Would write to: ${OUTPUT_PATH}`);
     if (verbose) {
-      console.log('\nSample props:');
-      const sampleProps = ['margin', 'display', 'flexDirection', 'borderRadius'];
-      for (const p of sampleProps) {
-        if (schema.props[p]) {
-          console.log(`  ${p}:`, JSON.stringify(schema.props[p]));
-        }
-      }
+      console.log('\nSample:');
+      ['margin', 'display', 'flexDirection'].forEach(p => {
+        if (schema.props[p]) console.log(`  ${p}:`, JSON.stringify(schema.props[p]));
+      });
     }
   } else {
-    const outputDir = path.dirname(CONFIG.outputPath);
-    if (!fs.existsSync(outputDir)) {
-      fs.mkdirSync(outputDir, { recursive: true });
-    }
-
-    fs.writeFileSync(CONFIG.outputPath, JSON.stringify(schema, null, 2) + '\n');
-    console.log(`✅ Written to: ${CONFIG.outputPath}`);
+    fs.mkdirSync(path.dirname(OUTPUT_PATH), { recursive: true });
+    fs.writeFileSync(OUTPUT_PATH, JSON.stringify(schema, null, 2) + '\n');
+    console.log(`\n✅ Written to: ${OUTPUT_PATH}`);
   }
 
-  console.log('');
-  console.log('✨ Done!');
-  console.log('');
+  console.log('\n✨ Done!\n');
 }
 
-main().catch(error => {
-  console.error('Fatal error:', error);
-  process.exit(1);
-});
+main().catch(e => { console.error('Fatal:', e); process.exit(1); });
