@@ -1,0 +1,12 @@
+{
+  "template": "<Dropdown options={options}{{props}} />",
+  "propTargets": {},
+  "defaults": {},
+  "scopeVars": {
+    "options": [
+      { "label": "United States", "value": "us" },
+      { "label": "Canada", "value": "ca" },
+      { "label": "Mexico", "value": "mx" }
+    ]
+  }
+}

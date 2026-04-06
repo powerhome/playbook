@@ -14,7 +14,7 @@ const config = {
     },
     warmup: {
       clientFiles: [
-        '../playbook/dist/playbook.css'
+        resolve(__dirname, '../playbook/dist/playbook.css')
       ]
     }
   },

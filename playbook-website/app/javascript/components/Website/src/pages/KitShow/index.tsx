@@ -9,11 +9,20 @@ import { DocsTab } from "./Tabs/DocsTab";
 import { PropsTab } from "./Tabs/PropsTab";
 import { BuildingBlocksTab } from "./Tabs/BuildingBlocksTab";
 import { ReferencesTab } from "./Tabs/ReferencesTab";
+import { PlaygroundTab } from "./Tabs/PlaygroundTab";
 
 const KitShow = () => {
   const { name } = useParams();
   const loaderData = useLoaderData() as any;
-  const { examples, kit_description, kit_sections, available_props } = loaderData;
+  const {
+    examples,
+    kit_description,
+    kit_sections,
+    available_props,
+    kit_schema,
+    global_props_schema,
+    playground_config,
+  } = loaderData;
 
   // Prepare example props for advanced_table examples
   const exampleProps = useMemo(() => {
@@ -59,6 +68,11 @@ const KitShow = () => {
         {/* Navigation Tabs */}
         <Nav orientation="horizontal" paddingX="xl">
           <NavItem
+            text="Playground"
+            active={activeTab === "playground"}
+            onClick={() => setActiveTab("playground")}
+          />
+          <NavItem
             text="Docs"
             active={activeTab === "docs"}
             onClick={() => setActiveTab("docs")}
@@ -80,6 +94,18 @@ const KitShow = () => {
           />
         </Nav>
         <SectionSeparator marginBottom="lg" />
+
+        {/* Playground Tab Content */}
+        {activeTab === "playground" && (
+          <PlaygroundTab
+            kitSchema={kit_schema}
+            globalPropsSchema={global_props_schema}
+            kitName={loaderData.kit || name || ""}
+            defaultExample={examples?.[0]}
+            playgroundConfig={playground_config}
+          />
+        )}
+
         {/* Docs Tab Content */}
         {activeTab === "docs" && (
           <DocsTab

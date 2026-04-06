@@ -1,0 +1,16 @@
+{
+  "template": "<Nav{{props}}>\n  <NavItem text=\"Home\"{{NavItem.props}} />\n  <NavItem text=\"About\" />\n  <NavItem text=\"Contact\" />\n</Nav>",
+  "propTargets": {
+    "orientation": "props",
+    "variant": "props",
+    "highlight": "props",
+    "text": "NavItem.props",
+    "active": "NavItem.props",
+    "link": "NavItem.props",
+    "iconLeft": "NavItem.props",
+    "iconRight": "NavItem.props"
+  },
+  "defaults": {
+    "text": "Home"
+  }
+}

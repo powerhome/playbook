@@ -81,7 +81,7 @@ class PagesController < ApplicationController
 
     # Get available props for React kits
     available_props = nil
-    if @type == "react"
+    if @type == "react" && @kit.present?
       begin
         kit_example = Playbook::PbDocs::KitExample.new(
           kit: @kit,
@@ -94,6 +94,11 @@ class PagesController < ApplicationController
         Rails.logger.error("Error fetching available props: #{e.message}")
       end
     end
+
+    # Get kit schema and global props schema for playground
+    kit_schema = read_kit_schema(@kit)
+    global_props_schema = read_global_props_schema
+    playground_config = read_playground_config(@kit)
 
     # first example from each kit
     examples = @examples.map do |example|
@@ -155,6 +160,9 @@ class PagesController < ApplicationController
           kit_description: kit_description,
           kit_sections: kit_sections,
           available_props: available_props,
+          kit_schema: kit_schema,
+          global_props_schema: global_props_schema,
+          playground_config: playground_config,
           params: @params,
           category: @category,
           css: @css,
@@ -661,6 +669,46 @@ private
       sections_data&.dig("sections")
     rescue => e
       Rails.logger.error("Error reading sections file: #{e.message}")
+      nil
+    end
+  end
+
+  def read_kit_schema(kit_name)
+    return nil unless kit_name.present?
+
+    schema_path = ::Playbook.kit_path(kit_name, "", "kit.schema.json")
+    return nil unless schema_path.exist?
+
+    begin
+      JSON.parse(schema_path.read)
+    rescue => e
+      Rails.logger.error("Error reading kit schema: #{e.message}")
+      nil
+    end
+  end
+
+  def read_global_props_schema
+    schema_path = Playbook::Engine.root.join("app/pb_kits/playbook/utilities/global-props.schema.json")
+    return nil unless File.exist?(schema_path)
+
+    begin
+      JSON.parse(File.read(schema_path))
+    rescue => e
+      Rails.logger.error("Error reading global props schema: #{e.message}")
+      nil
+    end
+  end
+
+  def read_playground_config(kit_name)
+    return nil unless kit_name.present?
+
+    config_path = ::Playbook.kit_path(kit_name, "docs", "_playground.json")
+    return nil unless config_path.exist?
+
+    begin
+      JSON.parse(config_path.read)
+    rescue => e
+      Rails.logger.error("Error reading playground config: #{e.message}")
       nil
     end
   end
