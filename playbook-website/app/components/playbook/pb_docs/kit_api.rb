@@ -39,7 +39,7 @@ module Playbook
       end
 
       def global_prop_names
-        @global_prop_names ||= (global_schema["props"] || {}).keys
+        @global_prop_names ||= (global_schema["props"] || {}).keys.map { |k| k.to_s.underscore }
       end
 
       def symbolize_props(props)

@@ -2,7 +2,7 @@
  * AUTO-GENERATED FILE - DO NOT EDIT
  * 
  * Generated from: playbook/app/pb_kits/playbook/utilities/global-props.schema.json
- * Run: cd playbook-website && yarn generate:global-props-values
+ * Run: yarn generate:global-props-values
  */
 
 const globalPropsValues = [
