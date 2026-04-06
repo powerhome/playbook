@@ -65,13 +65,13 @@
       ]
     },
     "isDragActive": {
-      "type": "boolean",
+      "type": "boolean;",
       "platforms": [
         "react"
       ]
     },
     "fileRejections": {
-      "type": "array",
+      "type": "readonly FileRejection[];",
       "platforms": [
         "react"
       ]

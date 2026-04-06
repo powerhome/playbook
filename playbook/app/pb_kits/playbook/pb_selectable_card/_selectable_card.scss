@@ -165,6 +165,10 @@ $pb_selectable_paddings: (
       padding: $space_sm;
     }
 
+    > label .pb_card_kit.dark.pb_card_kit_border_none {
+      border-width: 0;
+    }
+
     &.dark {
       .separator {
         background: $input_border_default_dark;
@@ -286,6 +290,41 @@ $pb_selectable_paddings: (
     border-color: $input_border_disabled_dark !important;
     color: $input_text_disabled_dark;
     background-color: $input_background_disabled_dark;
+  }
+}
+
+.pb_selectable_card_kit_disabled.display_input,
+.pb_selectable_card_kit_checked_disabled.display_input {
+  &:not(.dark) {
+    .separator {
+      background: $input_border_disabled !important;
+    }
+
+    .psuedo_separator {
+      background-color: $input_border_disabled !important;
+    }
+  }
+
+  > label > .pb_flex_kit {
+    align-items: stretch;
+
+    > .pb_flex_kit:first-child {
+      align-self: center;
+    }
+  }
+
+  > label .pb_card_kit {
+    flex: 1;
+    min-width: 0;
+    align-self: stretch;
+    background-color: $input_background_disabled !important;
+    border-width: 0 !important;
+    color: $input_text_disabled;
+  }
+
+  &.dark > label .pb_card_kit.dark {
+    background-color: $input_background_disabled_dark !important;
+    color: $input_text_disabled_dark;
   }
 }
 

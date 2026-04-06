@@ -8,7 +8,7 @@
   ],
   "props": {
     "borderless": {
-      "type": "boolean",
+      "type": "boolean;",
       "platforms": [
         "react",
         "rails"
@@ -16,7 +16,7 @@
       "default": false
     },
     "enableDrag": {
-      "type": "boolean",
+      "type": "boolean;",
       "platforms": [
         "react",
         "rails"
@@ -24,20 +24,20 @@
       "default": false
     },
     "layout": {
-      "type": "enum",
+      "type": "\"\" | \"left\" | \"right\";",
       "platforms": [
         "react",
         "rails"
       ],
       "values": [
-        "",
         "left",
-        "right"
+        "right",
+        ""
       ],
       "default": ""
     },
     "ordered": {
-      "type": "boolean",
+      "type": "boolean;",
       "platforms": [
         "react",
         "rails"
@@ -45,39 +45,39 @@
       "default": false
     },
     "role": {
-      "type": "string",
+      "type": "string;",
       "platforms": [
         "react",
         "rails"
       ]
     },
     "tabIndex": {
-      "type": "number",
+      "type": "number;",
       "platforms": [
         "react"
       ]
     },
     "text": {
-      "type": "string",
+      "type": "string;",
       "platforms": [
         "react"
       ]
     },
     "size": {
-      "type": "string",
+      "type": "string;",
       "platforms": [
         "react",
         "rails"
       ]
     },
     "variant": {
-      "type": "string",
+      "type": "string;",
       "platforms": [
         "react"
       ]
     },
     "xpadding": {
-      "type": "boolean",
+      "type": "boolean;",
       "platforms": [
         "react",
         "rails"
@@ -100,11 +100,11 @@
   "usage": {
     "react": {
       "import": "import { List } from 'playbook-ui'",
-      "example": "<List layout=\"\"></List>"
+      "example": "<List layout=\"left\"></List>"
     },
     "rails": {
       "import": null,
-      "example": "<%= pb_rails(\"list\", props: { layout: \"\" }) %>"
+      "example": "<%= pb_rails(\"list\", props: { layout: \"left\" }) %>"
     }
   }
 }

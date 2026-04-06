@@ -8,7 +8,7 @@
   ],
   "props": {
     "appendTo": {
-      "type": "string",
+      "type": "string;",
       "platforms": [
         "react",
         "rails"
@@ -16,12 +16,13 @@
       "default": "body"
     },
     "closeOnClick": {
-      "type": "enum",
+      "type": "\"outside\" | \"inside\" | \"any\";",
       "platforms": [
         "react",
         "rails"
       ],
       "values": [
+        "none",
         "outside",
         "inside",
         "any"
@@ -29,7 +30,7 @@
       "default": "none"
     },
     "offset": {
-      "type": "boolean",
+      "type": "boolean;",
       "platforms": [
         "react",
         "rails"
@@ -37,13 +38,13 @@
       "default": false
     },
     "reference": {
-      "type": "PopperReference & any",
+      "type": "PopperReference & any;",
       "platforms": [
         "react"
       ]
     },
     "show": {
-      "type": "boolean",
+      "type": "boolean;",
       "platforms": [
         "react"
       ],
@@ -71,11 +72,11 @@
   "usage": {
     "react": {
       "import": "import { Popover } from 'playbook-ui'",
-      "example": "<Popover closeOnClick=\"outside\"></Popover>"
+      "example": "<Popover closeOnClick=\"none\"></Popover>"
     },
     "rails": {
       "import": null,
-      "example": "<%= pb_rails(\"popover\", props: { close_on_click: \"outside\" }) %>"
+      "example": "<%= pb_rails(\"popover\", props: { close_on_click: \"none\" }) %>"
     }
   }
 }
