@@ -1,0 +1,98 @@
+{
+  "$schema": "https://playbook.powerapp.cloud/schemas/kit-schema.json",
+  "name": "Date",
+  "description": "Date component",
+  "platforms": [
+    "react",
+    "rails"
+  ],
+  "props": {
+    "alignment": {
+      "type": "\"left\" | \"center\" | \"right\";",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "left",
+        "center",
+        "right"
+      ],
+      "default": "left"
+    },
+    "showDayOfWeek": {
+      "type": "boolean;",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "showCurrentYear": {
+      "type": "boolean;",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "showIcon": {
+      "type": "boolean;",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "size": {
+      "type": "\"sm\" | \"md\" | \"lg\";",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "lg",
+        "md",
+        "sm",
+        "xs"
+      ],
+      "default": "md"
+    },
+    "unstyled": {
+      "type": "boolean;",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "value": {
+      "type": "Date;",
+      "platforms": [
+        "react"
+      ]
+    },
+    "date": {
+      "platforms": [
+        "rails"
+      ]
+    },
+    "timezone": {
+      "platforms": [
+        "rails"
+      ],
+      "default": "America/New_York"
+    }
+  },
+  "globalProps": true,
+  "usage": {
+    "react": {
+      "import": "import { Date } from 'playbook-ui'",
+      "example": "<Date alignment=\"left\" size=\"lg\"></Date>"
+    },
+    "rails": {
+      "import": null,
+      "example": "<%= pb_rails(\"date\", props: { alignment: \"left\", size: \"lg\" }) %>"
+    }
+  }
+}

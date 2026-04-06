@@ -1,0 +1,65 @@
+{
+  "$schema": "https://playbook.powerapp.cloud/schemas/kit-schema.json",
+  "name": "IconCircle",
+  "description": "IconCircle component",
+  "platforms": [
+    "react",
+    "rails"
+  ],
+  "props": {
+    "icon": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "size": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "base",
+        "xxs",
+        "xs",
+        "sm",
+        "md",
+        "lg",
+        "xl"
+      ],
+      "default": "md"
+    },
+    "variant": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        0,
+        "default"
+      ],
+      "default": "default"
+    },
+    "emoji": {
+      "platforms": [
+        "rails"
+      ],
+      "type": "string",
+      "default": ""
+    }
+  },
+  "globalProps": true,
+  "usage": {
+    "react": {
+      "import": "import { IconCircle } from 'playbook-ui'",
+      "example": "<IconCircle size=\"base\" variant=\"0\"></IconCircle>"
+    },
+    "rails": {
+      "import": null,
+      "example": "<%= pb_rails(\"icon_circle\", props: { size: \"base\", variant: \"0\" }) %>"
+    }
+  }
+}

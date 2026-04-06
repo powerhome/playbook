@@ -1,0 +1,94 @@
+{
+  "$schema": "https://playbook.powerapp.cloud/schemas/kit-schema.json",
+  "name": "CopyButton",
+  "description": "CopyButton component",
+  "platforms": [
+    "react",
+    "rails"
+  ],
+  "props": {
+    "from": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "text": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "tooltipPlacement": {
+      "type": "enum",
+      "platforms": [
+        "react"
+      ],
+      "values": [
+        "top",
+        "right",
+        "bottom",
+        "left"
+      ]
+    },
+    "tooltipText": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": "Copied!"
+    },
+    "value": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "variant": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "button",
+        "icon"
+      ],
+      "default": "icon"
+    },
+    "timeout": {
+      "type": "number",
+      "platforms": [
+        "react"
+      ]
+    },
+    "tooltipPosition": {
+      "platforms": [
+        "rails"
+      ],
+      "type": "enum",
+      "values": [
+        "top",
+        "right",
+        "bottom",
+        "left"
+      ],
+      "default": "top"
+    }
+  },
+  "globalProps": true,
+  "usage": {
+    "react": {
+      "import": "import { CopyButton } from 'playbook-ui'",
+      "example": "<CopyButton tooltipPlacement=\"top\" variant=\"button\"></CopyButton>"
+    },
+    "rails": {
+      "import": null,
+      "example": "<%= pb_rails(\"copy_button\", props: { tooltip_placement: \"top\", variant: \"button\" }) %>"
+    }
+  }
+}

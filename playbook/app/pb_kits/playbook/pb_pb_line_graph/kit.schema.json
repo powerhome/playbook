@@ -1,0 +1,29 @@
+{
+  "$schema": "https://playbook.powerapp.cloud/schemas/kit-schema.json",
+  "name": "PbLineGraph",
+  "description": "PbLineGraph component",
+  "platforms": [
+    "react",
+    "rails"
+  ],
+  "props": {
+    "options": {
+      "type": "Record<string, unknown>",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    }
+  },
+  "globalProps": true,
+  "usage": {
+    "react": {
+      "import": "import { PbLineGraph } from 'playbook-ui'",
+      "example": "<PbLineGraph></PbLineGraph>"
+    },
+    "rails": {
+      "import": null,
+      "example": "<%= pb_rails(\"pb_line_graph\", props: { text: \"Example\" }) %>"
+    }
+  }
+}

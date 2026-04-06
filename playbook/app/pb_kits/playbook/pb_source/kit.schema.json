@@ -1,0 +1,61 @@
+{
+  "$schema": "https://playbook.powerapp.cloud/schemas/kit-schema.json",
+  "name": "Source",
+  "description": "Source component",
+  "platforms": [
+    "react",
+    "rails"
+  ],
+  "props": {
+    "hideIcon": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "source": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "type": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "events",
+        "inbound",
+        "outbound",
+        "prospecting",
+        "referral",
+        "retail",
+        "user"
+      ],
+      "default": "inbound"
+    },
+    "user": {
+      "type": "AvatarProps",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    }
+  },
+  "globalProps": true,
+  "usage": {
+    "react": {
+      "import": "import { Source } from 'playbook-ui'",
+      "example": "<Source type=\"events\"></Source>"
+    },
+    "rails": {
+      "import": null,
+      "example": "<%= pb_rails(\"source\", props: { type: \"events\" }) %>"
+    }
+  }
+}

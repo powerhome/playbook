@@ -1,0 +1,61 @@
+{
+  "$schema": "https://playbook.powerapp.cloud/schemas/kit-schema.json",
+  "name": "TitleCount",
+  "description": "TitleCount component",
+  "platforms": [
+    "react",
+    "rails"
+  ],
+  "props": {
+    "align": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "center",
+        "left",
+        "right"
+      ],
+      "default": "left"
+    },
+    "count": {
+      "type": "number",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "title": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "size": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "lg",
+        "sm"
+      ],
+      "default": "sm"
+    }
+  },
+  "globalProps": true,
+  "usage": {
+    "react": {
+      "import": "import { TitleCount } from 'playbook-ui'",
+      "example": "<TitleCount align=\"center\" size=\"lg\"></TitleCount>"
+    },
+    "rails": {
+      "import": null,
+      "example": "<%= pb_rails(\"title_count\", props: { align: \"center\", size: \"lg\" }) %>"
+    }
+  }
+}

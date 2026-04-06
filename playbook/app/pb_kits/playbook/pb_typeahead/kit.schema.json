@@ -1,0 +1,279 @@
+{
+  "$schema": "https://playbook.powerapp.cloud/schemas/kit-schema.json",
+  "name": "Typeahead",
+  "description": "Typeahead component",
+  "platforms": [
+    "react",
+    "rails"
+  ],
+  "props": {
+    "async": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "components": {
+      "type": "GenericObject",
+      "platforms": [
+        "react"
+      ]
+    },
+    "createable": {
+      "type": "boolean",
+      "platforms": [
+        "react"
+      ]
+    },
+    "disabled": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "error": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": ""
+    },
+    "inputDisplay": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "pills",
+        "none"
+      ],
+      "default": "pills"
+    },
+    "label": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "loadOptions": {
+      "type": "string | Noop",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "getOptionLabel": {
+      "type": "string | (() => string)",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "getOptionValue": {
+      "type": "string | (() => string)",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "name": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "options": {
+      "type": "array",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "onChange": {
+      "type": "any",
+      "platforms": [
+        "react"
+      ]
+    },
+    "optionsByContext": {
+      "type": "Record<string, Array<{label: string; value?: string}>>",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "required": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "requiredIndicator": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "validation": {
+      "type": "object",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "searchContextSelector": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": null
+    },
+    "clearOnContextChange": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": true
+    },
+    "preserveSearchInput": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "defaultOptions": {
+      "platforms": [
+        "rails"
+      ],
+      "type": "array"
+    },
+    "inline": {
+      "platforms": [
+        "rails"
+      ],
+      "type": "boolean",
+      "default": false
+    },
+    "multiKit": {
+      "platforms": [
+        "rails"
+      ],
+      "type": "string",
+      "default": ""
+    },
+    "inputOptions": {
+      "platforms": [
+        "rails"
+      ],
+      "type": "string"
+    },
+    "isMulti": {
+      "platforms": [
+        "rails"
+      ],
+      "type": "boolean",
+      "default": true
+    },
+    "pills": {
+      "platforms": [
+        "rails"
+      ],
+      "type": "boolean",
+      "default": false
+    },
+    "placeholder": {
+      "platforms": [
+        "rails"
+      ]
+    },
+    "plusIcon": {
+      "platforms": [
+        "rails"
+      ],
+      "type": "boolean",
+      "default": false
+    },
+    "searchTermMinimumLength": {
+      "platforms": [
+        "rails"
+      ],
+      "default": 3
+    },
+    "searchDebounceTimeout": {
+      "platforms": [
+        "rails"
+      ],
+      "default": 250
+    },
+    "value": {
+      "platforms": [
+        "rails"
+      ]
+    },
+    "pillColor": {
+      "platforms": [
+        "rails"
+      ],
+      "type": "enum",
+      "values": [
+        "primary",
+        "neutral",
+        "success",
+        "warning",
+        "error",
+        "info",
+        "data_1",
+        "data_2",
+        "data_3",
+        "data_4",
+        "data_5",
+        "data_6",
+        "data_7",
+        "data_8",
+        "windows",
+        "siding",
+        "roofing",
+        "doors",
+        "gutters",
+        "solar",
+        "insulation",
+        "accessories"
+      ],
+      "default": "primary"
+    },
+    "wrapped": {
+      "platforms": [
+        "rails"
+      ],
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "globalProps": true,
+  "usage": {
+    "react": {
+      "import": "import { Typeahead } from 'playbook-ui'",
+      "example": "<Typeahead inputDisplay=\"pills\" pillColor=\"primary\"></Typeahead>"
+    },
+    "rails": {
+      "import": null,
+      "example": "<%= pb_rails(\"typeahead\", props: { input_display: \"pills\", pill_color: \"primary\" }) %>"
+    }
+  }
+}

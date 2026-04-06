@@ -1,0 +1,238 @@
+{
+  "$schema": "https://playbook.powerapp.cloud/schemas/kit-schema.json",
+  "name": "Table",
+  "description": "Table component",
+  "platforms": [
+    "react",
+    "rails"
+  ],
+  "props": {
+    "cardProps": {
+      "type": "object",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "collapse": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "sm",
+        "md",
+        "lg"
+      ],
+      "default": "sm"
+    },
+    "container": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": true
+    },
+    "dataTable": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "disableHover": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "filterProps": {
+      "type": "object",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "filterContent": {
+      "type": "any",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "headerStyle": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "default",
+        "borderless",
+        "floating"
+      ],
+      "default": "default"
+    },
+    "outerPadding": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "none",
+        "xxs",
+        "xs",
+        "sm",
+        "md",
+        "lg",
+        "xl"
+      ],
+      "default": null
+    },
+    "pagination": {
+      "type": "ReactNode",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "responsive": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "collapse",
+        "scroll",
+        "none"
+      ],
+      "default": "collapse"
+    },
+    "singleLine": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "size": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "sm",
+        "md",
+        "lg"
+      ],
+      "default": "md"
+    },
+    "sticky": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "stickyLeftColumn": {
+      "type": "array",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "stickyRightColumn": {
+      "type": "array",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "striped": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "tag": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "table",
+        "div"
+      ],
+      "default": "table"
+    },
+    "title": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": null
+    },
+    "titleProps": {
+      "type": "object",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "variant": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "default",
+        "withFilter"
+      ],
+      "default": "default"
+    },
+    "verticalBorder": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "text": {
+      "platforms": [
+        "rails"
+      ]
+    },
+    "filter": {
+      "platforms": [
+        "rails"
+      ]
+    }
+  },
+  "globalProps": true,
+  "usage": {
+    "react": {
+      "import": "import { Table } from 'playbook-ui'",
+      "example": "<Table collapse=\"sm\" headerStyle=\"default\"></Table>"
+    },
+    "rails": {
+      "import": null,
+      "example": "<%= pb_rails(\"table\", props: { collapse: \"sm\", header_style: \"default\" }) %>"
+    }
+  }
+}

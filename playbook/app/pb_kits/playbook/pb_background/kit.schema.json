@@ -1,0 +1,208 @@
+{
+  "$schema": "https://playbook.powerapp.cloud/schemas/kit-schema.json",
+  "name": "Background",
+  "description": "Background component",
+  "platforms": [
+    "react",
+    "rails"
+  ],
+  "props": {
+    "alt": {
+      "type": "string",
+      "platforms": [
+        "react"
+      ]
+    },
+    "backgroundColor": {
+      "type": "ResponsiveProp<BackgroundColors> | BackgroundColors",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "gradient",
+        "dark",
+        "light",
+        "white",
+        "success",
+        "warning",
+        "error",
+        "info",
+        "neutral",
+        "primary",
+        "shadow",
+        "category_1",
+        "category_2",
+        "category_3",
+        "category_4",
+        "category_5",
+        "category_6",
+        "category_7",
+        "category_8",
+        "category_9",
+        "category_10",
+        "category_11",
+        "category_12",
+        "category_13",
+        "category_14",
+        "category_15",
+        "category_16",
+        "category_17",
+        "category_18",
+        "category_19",
+        "category_20",
+        "category_21",
+        "success_secondary",
+        "error_secondary",
+        "info_secondary",
+        "warning_secondary",
+        "neutral_secondary",
+        "primary_secondary",
+        "text_lt_default",
+        "text_lt_light",
+        "text_lt_lighter",
+        "text_dk_default",
+        "text_dk_light",
+        "text_dk_lighter",
+        "card_light",
+        "card_dark",
+        "data_1",
+        "data_2",
+        "data_3",
+        "data_4",
+        "data_5",
+        "data_6",
+        "data_7",
+        "data_8",
+        "border_light",
+        "border_dark",
+        "success_subtle",
+        "warning_subtle",
+        "error_subtle",
+        "info_subtle",
+        "neutral_subtle"
+      ],
+      "default": "light"
+    },
+    "backgroundSize": {
+      "type": "ResponsiveProp<BackgroundSizes> | BackgroundSizes",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "contain",
+        "cover",
+        "auto"
+      ],
+      "default": "cover"
+    },
+    "backgroundPosition": {
+      "type": "ResponsiveProp<string> | string",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": null
+    },
+    "backgroundRepeat": {
+      "type": "ResponsiveProp<BackgroundRepeat> | BackgroundRepeat",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "repeat",
+        "repeat-x",
+        "repeat-y",
+        "no-repeat",
+        "space",
+        "round",
+        "initial",
+        "inherit"
+      ],
+      "default": "initial"
+    },
+    "imageUrl": {
+      "type": "ResponsiveProp<string> | string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "imageOverlay": {
+      "type": "enum",
+      "platforms": [
+        "react"
+      ],
+      "values": [
+        "opacity_1",
+        "opacity_2",
+        "opacity_3",
+        "opacity_4",
+        "opacity_5",
+        "opacity_6",
+        "opacity_7",
+        "opacity_8",
+        "opacity_9",
+        "opacity_10"
+      ]
+    },
+    "customColor": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": null
+    },
+    "tag": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "h1",
+        "h2",
+        "h3",
+        "h4",
+        "h5",
+        "h6",
+        "p",
+        "span",
+        "div",
+        "tr",
+        "th",
+        "td",
+        "thead",
+        "col"
+      ],
+      "default": "div"
+    },
+    "transition": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "fade",
+        "blur",
+        "scale"
+      ],
+      "default": null
+    }
+  },
+  "globalProps": true,
+  "usage": {
+    "react": {
+      "import": "import { Background } from 'playbook-ui'",
+      "example": "<Background backgroundColor=\"gradient\" backgroundSize=\"contain\"></Background>"
+    },
+    "rails": {
+      "import": null,
+      "example": "<%= pb_rails(\"background\", props: { background_color: \"gradient\", background_size: \"contain\" }) %>"
+    }
+  }
+}

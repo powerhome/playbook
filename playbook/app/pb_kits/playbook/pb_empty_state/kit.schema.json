@@ -1,0 +1,117 @@
+{
+  "$schema": "https://playbook.powerapp.cloud/schemas/kit-schema.json",
+  "name": "EmptyState",
+  "description": "EmptyState component",
+  "platforms": [
+    "react",
+    "rails"
+  ],
+  "props": {
+    "alignment": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "center",
+        "left",
+        "right"
+      ],
+      "default": "center"
+    },
+    "description": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "header": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "image": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "linkButton": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "onLinkButtonClick": {
+      "type": "function",
+      "platforms": [
+        "react"
+      ]
+    },
+    "onPrimaryButtonClick": {
+      "type": "function",
+      "platforms": [
+        "react"
+      ]
+    },
+    "orientation": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "horizontal",
+        "vertical"
+      ],
+      "default": "vertical"
+    },
+    "primaryButton": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "size": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "sm",
+        "md",
+        "lg"
+      ],
+      "default": "md"
+    },
+    "linkButtonUrl": {
+      "platforms": [
+        "rails"
+      ]
+    },
+    "primaryButtonUrl": {
+      "platforms": [
+        "rails"
+      ]
+    }
+  },
+  "globalProps": true,
+  "usage": {
+    "react": {
+      "import": "import { EmptyState } from 'playbook-ui'",
+      "example": "<EmptyState alignment=\"center\" orientation=\"horizontal\"></EmptyState>"
+    },
+    "rails": {
+      "import": null,
+      "example": "<%= pb_rails(\"empty_state\", props: { alignment: \"center\", orientation: \"horizontal\" }) %>"
+    }
+  }
+}

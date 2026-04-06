@@ -1,0 +1,117 @@
+{
+  "$schema": "https://playbook.powerapp.cloud/schemas/kit-schema.json",
+  "name": "CircleIconButton",
+  "description": "CircleIconButton component",
+  "platforms": [
+    "react",
+    "rails"
+  ],
+  "props": {
+    "disabled": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "icon": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "link": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "loading": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "onClick": {
+      "type": "ReactNode",
+      "platforms": [
+        "react"
+      ]
+    },
+    "newWindow": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "type": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "button",
+        "submit",
+        "reset"
+      ],
+      "default": "button"
+    },
+    "target": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "variant": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "primary",
+        "secondary",
+        "link"
+      ],
+      "default": "primary"
+    },
+    "size": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "default",
+        "sm"
+      ],
+      "default": "default"
+    },
+    "inputOptions": {
+      "platforms": [
+        "rails"
+      ],
+      "type": "string"
+    }
+  },
+  "globalProps": true,
+  "usage": {
+    "react": {
+      "import": "import { CircleIconButton } from 'playbook-ui'",
+      "example": "<CircleIconButton type=\"button\" variant=\"primary\"></CircleIconButton>"
+    },
+    "rails": {
+      "import": null,
+      "example": "<%= pb_rails(\"circle_icon_button\", props: { type: \"button\", variant: \"primary\" }) %>"
+    }
+  }
+}

@@ -1,0 +1,142 @@
+{
+  "$schema": "https://playbook.powerapp.cloud/schemas/kit-schema.json",
+  "name": "Currency",
+  "description": "Currency component",
+  "platforms": [
+    "react",
+    "rails"
+  ],
+  "props": {
+    "abbreviate": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "align": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "center",
+        "left",
+        "right"
+      ],
+      "default": "left"
+    },
+    "amount": {
+      "type": "string | number",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "decimals": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "default",
+        "matching"
+      ],
+      "default": "default"
+    },
+    "emphasized": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": true
+    },
+    "label": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": ""
+    },
+    "nullDisplay": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "size": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "sm",
+        "md",
+        "lg"
+      ],
+      "default": "md"
+    },
+    "symbol": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": "$"
+    },
+    "variant": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "default",
+        "light",
+        "bold"
+      ],
+      "default": "default"
+    },
+    "unit": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "unstyled": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "commaSeparator": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    }
+  },
+  "globalProps": true,
+  "usage": {
+    "react": {
+      "import": "import { Currency } from 'playbook-ui'",
+      "example": "<Currency align=\"center\" decimals=\"default\"></Currency>"
+    },
+    "rails": {
+      "import": null,
+      "example": "<%= pb_rails(\"currency\", props: { align: \"center\", decimals: \"default\" }) %>"
+    }
+  }
+}

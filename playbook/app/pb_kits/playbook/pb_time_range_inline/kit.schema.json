@@ -1,0 +1,77 @@
+{
+  "$schema": "https://playbook.powerapp.cloud/schemas/kit-schema.json",
+  "name": "TimeRangeInline",
+  "description": "TimeRangeInline component",
+  "platforms": [
+    "react",
+    "rails"
+  ],
+  "props": {
+    "alignment": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "left",
+        "center",
+        "vertical"
+      ],
+      "default": "left"
+    },
+    "size": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "sm",
+        "xs"
+      ],
+      "default": "sm"
+    },
+    "icon": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "timezone": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "startTime": {
+      "type": "Date",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "endTime": {
+      "type": "Date",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    }
+  },
+  "globalProps": true,
+  "usage": {
+    "react": {
+      "import": "import { TimeRangeInline } from 'playbook-ui'",
+      "example": "<TimeRangeInline alignment=\"left\" size=\"sm\"></TimeRangeInline>"
+    },
+    "rails": {
+      "import": null,
+      "example": "<%= pb_rails(\"time_range_inline\", props: { alignment: \"left\", size: \"sm\" }) %>"
+    }
+  }
+}

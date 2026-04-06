@@ -1,0 +1,36 @@
+{
+  "$schema": "https://playbook.powerapp.cloud/schemas/kit-schema.json",
+  "name": "DateRangeStacked",
+  "description": "DateRangeStacked component",
+  "platforms": [
+    "react",
+    "rails"
+  ],
+  "props": {
+    "endDate": {
+      "type": "Date",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "startDate": {
+      "type": "Date",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    }
+  },
+  "globalProps": true,
+  "usage": {
+    "react": {
+      "import": "import { DateRangeStacked } from 'playbook-ui'",
+      "example": "<DateRangeStacked></DateRangeStacked>"
+    },
+    "rails": {
+      "import": null,
+      "example": "<%= pb_rails(\"date_range_stacked\", props: { text: \"Example\" }) %>"
+    }
+  }
+}
