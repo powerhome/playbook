@@ -3,7 +3,7 @@
 library 'github.com/powerhome/ci-kubed@1c81d877a05417860bca4d369e088bca18fe640b'
 
 app.build(
-  buildCacheVolumeSize: '15Gi',
+  buildCacheVolumeSize: '20Gi',
   resources: [
     requestCpu: '2',
     requestMemory: '10Gi',
