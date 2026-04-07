@@ -10,13 +10,17 @@ type AvailablePropsType = {
 }
 
 const AvailableProps = ({ availableProps, darkMode }: AvailablePropsType) => {
-  const props = JSON.parse(availableProps)
+  const schema = JSON.parse(availableProps)
+  // Extract props from kit.schema.json format (schema has: $schema, name, props, etc.)
+  const allProps = schema.props && typeof schema.props === 'object' ? schema.props : schema
   const globalPropsNames = GlobalPropsValues.map(prop => prop.prop)
   const [showKitTab, setShowKitTab] = useState(true)
 
-  for(var propName in props) {
-    if(globalPropsNames.includes(propName)) {
-      delete props[propName]
+  // Filter out global props, create new object to avoid mutation
+  const props: Record<string, any> = {}
+  for (const propName in allProps) {
+    if (!globalPropsNames.includes(propName)) {
+      props[propName] = allProps[propName]
     }
   }
 
