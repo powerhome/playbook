@@ -31,6 +31,7 @@ module Playbook
             label: nil,
             placeholder: props[:placeholder],
             required: props[:required],
+            validation: props[:validation_message].present? ? { message: props[:validation_message] } : {},
           }
         )
 
