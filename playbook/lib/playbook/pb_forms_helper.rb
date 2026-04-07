@@ -48,28 +48,21 @@ module Playbook
         concat form_with(**options, &block)
         concat javascript_tag(<<~JS)
           (function() {
-            // PbFormValidation is now registered with PbKitRegistry and starts automatically
-            // when the playbook-rails bundle loads. This script provides a fallback for edge
-            // cases and ensures formHelper is called
-            var startValidation = function() {
-              if (typeof PbFormValidation !== 'undefined' && PbFormValidation.start) {
-                PbFormValidation.start();
-              }
+            // PbFormValidation is registered with PbKitRegistry and starts automatically
+            // when the playbook-rails bundle loads. The MutationObserver in PbKitRegistry
+            // handles dynamically added forms (including Turbo navigations).
+            // This inline script ensures formHelper runs for this form.
+            var initForm = function() {
               if (typeof formHelper === 'function') {
                 formHelper();
               }
             };
 
-            // Try immediately in case bundle already loaded
-            if (document.readyState !== 'loading') {
-              startValidation();
+            if (document.readyState === 'loading') {
+              document.addEventListener('DOMContentLoaded', initForm, { once: true });
             } else {
-              document.addEventListener('DOMContentLoaded', startValidation);
+              initForm();
             }
-
-            // Turbo support for dynamically loaded forms
-            document.addEventListener('turbo:load', startValidation);
-            document.addEventListener('turbo:frame-load', startValidation);
           })();
         JS
       end

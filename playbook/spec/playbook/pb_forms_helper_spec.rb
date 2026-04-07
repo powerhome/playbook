@@ -23,10 +23,9 @@ RSpec.describe Playbook::PbFormsHelper, type: :helper do
 
     it { is_expected.to have_tag("form[data-pb-form-validation=true]") }
 
-    it "includes form validation initialization script" do
-      expect(subject).to match(/PbFormValidation\.start\(\)/)
-      expect(subject).to match(/turbo:load/)
-      expect(subject).to match(/turbo:frame-load/)
+    it "includes form helper initialization script" do
+      expect(subject).to match(/formHelper\(\)/)
+      expect(subject).to match(/DOMContentLoaded/)
     end
   end
 
