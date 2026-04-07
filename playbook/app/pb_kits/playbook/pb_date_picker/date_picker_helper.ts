@@ -615,12 +615,21 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
   // Label click toggles calendar: stop pointer bubbling to document, then toggle (avoids flatpickr close + input-focus reopen).
   const datePickerLabel = document.querySelector(`label[for="${pickerId}"]`)
   if (datePickerLabel) {
+    type LabelHandlerRefs = { stopPointer?: (e: Event) => void, click?: (e: MouseEvent) => void }
+    const labelWithRefs = datePickerLabel as HTMLElement & { _pbDatePickerLabelHandlers?: LabelHandlerRefs }
+    const prev = labelWithRefs._pbDatePickerLabelHandlers
+    if (prev?.stopPointer) {
+      datePickerLabel.removeEventListener('mousedown', prev.stopPointer)
+      datePickerLabel.removeEventListener('touchstart', prev.stopPointer)
+    }
+    if (prev?.click) {
+      datePickerLabel.removeEventListener('click', prev.click)
+    }
+
     const stopPointerForFlatpickrDocClose = (e: Event) => {
       e.stopPropagation()
     }
-    datePickerLabel.addEventListener('mousedown', stopPointerForFlatpickrDocClose)
-    datePickerLabel.addEventListener('touchstart', stopPointerForFlatpickrDocClose, { passive: true })
-    datePickerLabel.addEventListener('click', (e: MouseEvent) => {
+    const onDatePickerLabelClick = (e: MouseEvent) => {
       e.preventDefault()
       e.stopPropagation()
       if (picker.input.disabled) return
@@ -628,7 +637,15 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
       if (picker.isOpen) {
         picker.input.focus()
       }
-    })
+    }
+    datePickerLabel.addEventListener('mousedown', stopPointerForFlatpickrDocClose)
+    datePickerLabel.addEventListener('touchstart', stopPointerForFlatpickrDocClose, { passive: true })
+    datePickerLabel.addEventListener('click', onDatePickerLabelClick)
+
+    labelWithRefs._pbDatePickerLabelHandlers = {
+      stopPointer: stopPointerForFlatpickrDocClose,
+      click: onDatePickerLabelClick,
+    }
   }
 
   // Adding dropdown icons to year and month select
