@@ -64,14 +64,12 @@ export const TableHeader = ({
   );
 
   const renderRegularTableHeader = () => (
-    <thead className={classes} 
+    <thead className={classes}
         id={id}
+        ref={headerRef}
     >
-      {table.getHeaderGroups().map((headerGroup: HeaderGroup<GenericObject>, index: number) => (
-        <tr 
-            key={`${headerGroup.id}-headerGroup`}
-            ref={index === 0 ? headerRef : null}
-        >
+      {table.getHeaderGroups().map((headerGroup: HeaderGroup<GenericObject>) => (
+        <tr key={`${headerGroup.id}-headerGroup`}>
           {!hasAnySubRows && selectableRows && (
             <th className={customCellClassnames}>
               <Checkbox
@@ -105,16 +103,16 @@ export const TableHeader = ({
   );
 
   const renderVirtualizedTableHeader = () => (
-    <thead 
-        className={classes} 
+    <thead
+        className={classes}
         data-virtualized="true"
         id={id}
+        ref={headerRef}
     >
-      {table.getHeaderGroups().map((headerGroup: HeaderGroup<GenericObject>, index: number) => (
-        <tr 
+      {table.getHeaderGroups().map((headerGroup: HeaderGroup<GenericObject>) => (
+        <tr
             className="virtualized-header-row-header"
             key={`${headerGroup.id}-headerGroup-virtualized`}
-            ref={index === 0 ? headerRef : null}
         >
           {!hasAnySubRows && selectableRows && (
             <th className={classnames(customCellClassnames, "virtualized-header-cell")}>

@@ -75,6 +75,7 @@ examples:
   - advanced_table_column_visibility_with_state: Column Visibility Control With State
   - advanced_table_column_visibility_custom: Column Visibility Control with Custom Dropdown
   - advanced_table_column_visibility_multi: Column Visibility Control with Multi-Header Columns
+  - advanced_table_grouped_headers_composition: Grouped headers, custom headers, sort, and pinned rows
   - advanced_table_scrollbar_none: Advanced Table Scrollbar None
   - advanced_table_row_styling: Row Styling
   - advanced_table_padding_control_per_row: Padding Control using Row Styling
