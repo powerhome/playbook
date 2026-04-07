@@ -192,6 +192,19 @@ module Playbook
         { name: component_name, props: component_props }
       end
 
+      # Flex justify for header cells: column_styling header_alignment when present (otherwisedefault by column/row index)
+      def header_flex_justify(cell, cell_index, row_index)
+        ha = cell[:header_alignment]
+        return header_alignment_to_justify(ha) if ha.present?
+
+        default_header_flex_justify(cell_index, row_index)
+      end
+
+      # Flex text_align from column_styling header_alignment (default is end)
+      def header_flex_text_align(cell)
+        (cell[:header_alignment].presence || "end").to_s
+      end
+
     private
 
       # Find the original column definition for a cell
@@ -349,6 +362,26 @@ module Playbook
           row.children
         elsif row.respond_to?(:[])
           row[:children] || row["children"]
+        end
+      end
+
+      # 2 header alignment helper methods
+      def header_alignment_to_justify(header_alignment)
+        case header_alignment.to_s
+        when "left" then "start"
+        when "center" then "center"
+        when "right" then "end"
+        else "end"
+        end
+      end
+
+      def default_header_flex_justify(cell_index, row_index)
+        if cell_index.zero?
+          "start"
+        elsif row_index == header_rows.size - 1
+          "end"
+        else
+          "center"
         end
       end
     end
