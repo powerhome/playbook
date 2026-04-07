@@ -47,8 +47,30 @@ module Playbook
       capture do
         concat form_with(**options, &block)
         concat javascript_tag(<<~JS)
-          window.addEventListener("DOMContentLoaded", function() { PbFormValidation.start() })
-          window.addEventListener("DOMContentLoaded", () => formHelper())
+          (function() {
+            // PbFormValidation is now registered with PbKitRegistry and starts automatically
+            // when the playbook-rails bundle loads. This script provides a fallback for edge
+            // cases and ensures formHelper is called
+            var startValidation = function() {
+              if (typeof PbFormValidation !== 'undefined' && PbFormValidation.start) {
+                PbFormValidation.start();
+              }
+              if (typeof formHelper === 'function') {
+                formHelper();
+              }
+            };
+
+            // Try immediately in case bundle already loaded
+            if (document.readyState !== 'loading') {
+              startValidation();
+            } else {
+              document.addEventListener('DOMContentLoaded', startValidation);
+            }
+
+            // Turbo support for dynamically loaded forms
+            document.addEventListener('turbo:load', startValidation);
+            document.addEventListener('turbo:frame-load', startValidation);
+          })();
         JS
       end
     end

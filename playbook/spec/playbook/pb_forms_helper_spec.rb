@@ -23,7 +23,11 @@ RSpec.describe Playbook::PbFormsHelper, type: :helper do
 
     it { is_expected.to have_tag("form[data-pb-form-validation=true]") }
 
-    it { is_expected.to match(/window.addEventListener\("DOMContentLoaded", function\(\) \{ PbFormValidation.start\(\) \}\)/) }
+    it "includes form validation initialization script" do
+      expect(subject).to match(/PbFormValidation\.start\(\)/)
+      expect(subject).to match(/turbo:load/)
+      expect(subject).to match(/turbo:frame-load/)
+    end
   end
 
   context "without validations" do
