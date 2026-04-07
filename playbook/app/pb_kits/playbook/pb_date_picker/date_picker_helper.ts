@@ -612,6 +612,24 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
   }
 // === End of Automatic Sync Logic ===
 
+  // Label click toggles calendar: stop pointer bubbling to document, then toggle (avoids flatpickr close + input-focus reopen).
+  const datePickerLabel = document.querySelector(`label[for="${pickerId}"]`)
+  if (datePickerLabel) {
+    const stopPointerForFlatpickrDocClose = (e: Event) => {
+      e.stopPropagation()
+    }
+    datePickerLabel.addEventListener('mousedown', stopPointerForFlatpickrDocClose)
+    datePickerLabel.addEventListener('touchstart', stopPointerForFlatpickrDocClose, { passive: true })
+    datePickerLabel.addEventListener('click', (e: MouseEvent) => {
+      e.preventDefault()
+      e.stopPropagation()
+      if (picker.input.disabled) return
+      picker.toggle()
+      if (picker.isOpen) {
+        picker.input.focus()
+      }
+    })
+  }
 
   // Adding dropdown icons to year and month select
   dropdown.insertAdjacentHTML('afterend', `<i class="year-dropdown-icon">${angleDown}</i>`)
