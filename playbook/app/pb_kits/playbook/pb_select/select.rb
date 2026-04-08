@@ -103,8 +103,8 @@ module Playbook
 
       def data_attributes
         data = attributes[:data] || {}
-        data["data-pb-select"] = true
-        data["data-validation-message"] = validation_message if validation_message.present?
+        data.merge!("data-pb-select" => true)
+        data.merge!("data-validation-message" => validation_message) if validation_message.present?
         data
       end
 
