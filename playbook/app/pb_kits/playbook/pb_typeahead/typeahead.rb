@@ -85,7 +85,7 @@ module Playbook
       end
 
       def is_react?
-        pills || !is_multi || wrapped || input_display == "none"
+        pills || !is_multi || wrapped || input_display == "none" || createable
       end
 
       def typeahead_react_options
