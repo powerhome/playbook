@@ -62,6 +62,8 @@ module Playbook
                                    default: false
       prop :required_indicator, type: Playbook::Props::Boolean,
                                 default: false
+      prop :createable, type: Playbook::Props::Boolean,
+                        default: false
       def classname
         default_margin_bottom = margin_bottom.present? ? "" : " mb_sm"
         generate_classname("pb_typeahead_kit") + default_margin_bottom
@@ -115,6 +117,7 @@ module Playbook
           clearOnContextChange: clear_on_context_change,
           disabled: disabled,
           preserveSearchInput: preserve_search_input,
+          createable: createable,
         }
 
         base_options[:getOptionLabel] = get_option_label if get_option_label.present?

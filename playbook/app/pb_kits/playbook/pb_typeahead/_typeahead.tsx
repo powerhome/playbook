@@ -516,18 +516,18 @@ const resolvedLoadOptions =
       }
 
       // Reset form submitted state when a selection is made (this is all for react rendered rails kit)
-      if (action === "select-option") {
+      if (action === "select-option" || action === "create-option") {
         setFormSubmitted(false)
         // Mark that user has made a selection to disable default value focus behavior
         setHasUserSelected(true)
       }
 
-      // If a value is selected and we're preserving input on blur, clear the input
-      if (action === "select-option" && preserveSearchInput) {
+      // If a value is selected/created and we're preserving input on blur, clear the input
+      if ((action === "select-option" || action === "create-option") && preserveSearchInput) {
         setInputValue("")
       }
 
-      if (action === "select-option") {
+      if (action === "select-option" || action === "create-option") {
         if (selectProps.onMultiValueClick && option)
           selectProps.onMultiValueClick(option)
         const multiValueClearEvent = new CustomEvent(

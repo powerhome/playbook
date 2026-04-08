@@ -24,8 +24,10 @@
     "createable": {
       "type": "boolean",
       "platforms": [
-        "react"
-      ]
+        "react",
+        "rails"
+      ],
+      "default": false
     },
     "disabled": {
       "type": "boolean",
