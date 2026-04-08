@@ -201,7 +201,7 @@ export const PlaygroundTab: React.FC<PlaygroundTabProps> = ({
   const globalPropEntries = Object.entries(globalProps);
 
   return (
-    <Flex paddingX="xl" gap="lg">
+    <Flex width="100%" paddingX="xl" gap="lg">
       {/* Left Panel - Preview and Code */}
       <Flex flexDirection="column" flex="1" minWidth="0">
         {/* Live Preview */}
@@ -254,7 +254,7 @@ export const PlaygroundTab: React.FC<PlaygroundTabProps> = ({
         flexDirection="column"
         htmlOptions={{ style: { width: "320px", minWidth: "320px" } }}
       >
-        <Card padding="sm" height="100%">
+        <Card padding="sm" height="100%" width="100%">
           <Flex justify="between" align="center" marginBottom="sm">
             <Title text="Props" size={4} />
             <Caption text={`${kitPropEntries.length} available`} />

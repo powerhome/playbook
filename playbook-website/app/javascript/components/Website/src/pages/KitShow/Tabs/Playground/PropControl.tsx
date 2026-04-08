@@ -6,11 +6,9 @@ import {
   Flex,
   Select,
   TextInput,
-  Body,
 } from "playbook-ui";
 import {
   PropControlProps,
-  PropValue,
   FUNCTION_PRESETS,
 } from "./types";
 
