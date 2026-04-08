@@ -7,7 +7,7 @@
       <% header_row.each_with_index do |cell, cell_index| %>
         <% header_component = object.header_component_info(cell, cell_index, row_index) %>
         <%= pb_rails(header_component[:name], props: header_component[:props]) do %>
-          <%= pb_rails("flex", props: { align: "center", justify: cell_index.zero? ? "start" : row_index === header_rows.size - 1 ? "end" : "center", text_align: (cell[:header_alignment] || "end") }) do %>
+          <%= pb_rails("flex", props: { align: "center", justify: object.header_flex_justify(cell, cell_index, row_index), text_align: object.header_flex_text_align(cell) }) do %>
             <% if cell_index.zero? && row_index === header_rows.size - 1 %>
               <% if object.selectable_rows && object.enable_toggle_expansion != "none" %>
                 <%= pb_rails("flex/flex_item", props: { padding_right: "xs" }) do %>

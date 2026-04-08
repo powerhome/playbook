@@ -1,0 +1,98 @@
+[
+  {
+    "id": "1",
+    "year": "2015",
+    "newEnrollments": "12",
+    "scheduledMeetings": "40",
+    "attendanceRate": "62%",
+    "classCompletionRate": "28%"
+  },
+  {
+    "id": "2",
+    "year": "2016",
+    "newEnrollments": "88",
+    "scheduledMeetings": "12",
+    "attendanceRate": "71%",
+    "classCompletionRate": "55%"
+  },
+  {
+    "id": "3",
+    "year": "2017",
+    "newEnrollments": "34",
+    "scheduledMeetings": "67",
+    "attendanceRate": "58%",
+    "classCompletionRate": "41%"
+  },
+  {
+    "id": "4",
+    "year": "2018",
+    "newEnrollments": "05",
+    "scheduledMeetings": "91",
+    "attendanceRate": "44%",
+    "classCompletionRate": "73%"
+  },
+  {
+    "id": "5",
+    "year": "2019",
+    "newEnrollments": "61",
+    "scheduledMeetings": "19",
+    "attendanceRate": "83%",
+    "classCompletionRate": "36%"
+  },
+  {
+    "id": "6",
+    "year": "2020",
+    "newEnrollments": "19",
+    "scheduledMeetings": "54",
+    "attendanceRate": "67%",
+    "classCompletionRate": "62%"
+  },
+  {
+    "id": "7",
+    "year": "2021",
+    "newEnrollments": "73",
+    "scheduledMeetings": "08",
+    "attendanceRate": "52%",
+    "classCompletionRate": "49%"
+  },
+  {
+    "id": "8",
+    "year": "2022",
+    "newEnrollments": "50",
+    "scheduledMeetings": "50",
+    "attendanceRate": "75%",
+    "classCompletionRate": "45%"
+  },
+  {
+    "id": "9",
+    "year": "2023",
+    "newEnrollments": "95",
+    "scheduledMeetings": "03",
+    "attendanceRate": "69%",
+    "classCompletionRate": "81%"
+  },
+  {
+    "id": "10",
+    "year": "2024",
+    "newEnrollments": "27",
+    "scheduledMeetings": "76",
+    "attendanceRate": "91%",
+    "classCompletionRate": "22%"
+  },
+  {
+    "id": "11",
+    "year": "2025",
+    "newEnrollments": "41",
+    "scheduledMeetings": "33",
+    "attendanceRate": "48%",
+    "classCompletionRate": "94%"
+  },
+  {
+    "id": "12",
+    "year": "2026",
+    "newEnrollments": "66",
+    "scheduledMeetings": "66",
+    "attendanceRate": "55%",
+    "classCompletionRate": "58%"
+  }
+]

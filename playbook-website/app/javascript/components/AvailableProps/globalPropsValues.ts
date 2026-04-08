@@ -1,35 +1,20 @@
+/**
+ * AUTO-GENERATED FILE - DO NOT EDIT
+ * 
+ * Generated from: playbook/app/pb_kits/playbook/utilities/global-props.schema.json
+ * Run: yarn generate:global-props-values
+ */
+
 const globalPropsValues = [
-  {
-    prop: "alignment",
-    type: "union",
-    values: '"start" | "end" | "center"'
-  },
   {
     prop: "alignContent",
     type: "union",
-    values: '"start" | "end" | "center" | "spaceBetween"'
+    values: '"start" | "end" | "center" | "spaceBetween" | "spaceAround" | "spaceEvenly"'
   },
   {
     prop: "alignItems",
     type: "union",
-    values:
-      '"start" | "end" | "center" | "flexStart" | "flexEnd" | "stretch" | "baseline"'
-  },
-  {
-    prop: "alignSelf",
-    type: "union",
-    values: '"start" | "end" | "center" | "auto" | "stretch" | "baseline"'
-  },
-  {
-    key: 5,
-    prop: "allSizes",
-    type: "union",
-    values: '"none" | "xxs" | "xs" | "sm" | "md" | "lg" | "xl"'
-  },
-  {
-    prop: "aria",
-    type: "string",
-    values: []
+    values: '"start" | "end" | "center"'
   },
   {
     prop: "borderRadius",
@@ -37,15 +22,19 @@ const globalPropsValues = [
     values: '"none" | "xs" | "sm" | "md" | "lg" | "xl" | "rounded"'
   },
   {
-    prop: "className",
+    prop: "bottom",
+    type: "union",
+    values: '"xxs" | "xs" | "sm" | "md" | "lg" | "xl" | "xxl"'
+  },
+  {
+    prop: "columnGap",
     type: "string",
     values: []
   },
   {
     prop: "cursor",
     type: "union",
-    values:
-      '"auto" | "default" | "none" | "contextMenu" | "help" | "pointer" | "progress" | "wait" | "cell" | crosshair" | "text" | "verticalText" | "alias" | "copy" | "move" | "noDrop" | "notAllowed" | "grab" | "grabbing" | "eResize" | "nResize" | "neResize" |"nwResize" | "sResize" | "seResize" | "swResize" | "wResize" | "ewResize" | "nsResize" | "neswResize" | "nwseResize" | "colResize" | "rowResize" | "allScroll" | "zoomIn" | "zoomOut"'
+    values: '"auto" | "default" | "none" | "contextMenu" | "help" | "pointer" | "progress" | "wait" | "cell"'
   },
   {
     prop: "dark",
@@ -55,23 +44,12 @@ const globalPropsValues = [
   {
     prop: "flex",
     type: "union",
-    values:
-      '"auto" | "initial" | "0" | "1" | "2" | 3" | "4" | "5" | "6" | "7" | "8" | "9" | "10" | "11" | "12" | "none"'
+    values: '"auto" | "initial" | "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9" | "10" | "11" | "12" | "none"'
   },
   {
     prop: "flexDirection",
     type: "union",
-    values: '"row" | "column" | "column" | "columnReverse"'
-  },
-  {
-    prop: "flexGrow",
-    type: "number",
-    values: "0 | 1"
-  },
-  {
-    prop: "flexShrink",
-    type: "number",
-    values: "0 | 1"
+    values: '"row" | "column" | "rowReverse" | "columnReverse"'
   },
   {
     prop: "flexWrap",
@@ -80,121 +58,158 @@ const globalPropsValues = [
   },
   {
     prop: "gap",
-    type: "union",
-    values: '"none" | "xxs" | "xs" | "sm" | "md" | "lg" | "xl"'
-  },
-  {
-    prop: "htmlOptions",
-    type: "object",
-    values: "{ [key: string]: string | number | boolean | (() => void); }"
-  },
-  {
-    prop: "id",
     type: "string",
+    values: []
+  },
+  {
+    prop: "groupHover",
+    type: "boolean",
+    values: []
+  },
+  {
+    prop: "height",
+    type: "string",
+    values: []
+  },
+  {
+    prop: "hover",
+    type: "object",
+    values: []
+  },
+  {
+    prop: "inset",
+    type: "boolean",
     values: []
   },
   {
     prop: "justifyContent",
     type: "union",
-    values:
-      '"start" | "end" | "center" | "spaceBetween" | "spaceAround" | "spaceEvenly"'
+    values: '"start" | "end" | "center" | "spaceBetween" | "spaceAround" | "spaceEvenly"'
   },
   {
-    prop: "justifySelf",
+    prop: "left",
     type: "union",
-    values: '"start" | "end" | "center" | "auto" | "stretch"'
+    values: '"xxs" | "xs" | "sm" | "md" | "lg" | "xl" | "xxl"'
   },
   {
     prop: "lineHeight",
     type: "union",
-    values:
-      '| "loosest" | "looser" | "loose" | "normal" | "tight" | "tighter" | "tightest"'
-  },
-  {
-    prop: "marginRight",
-    type: "union",
-    values: '"none" | "xxs" | "xs" | "sm" | "md" | "lg" | "xl" | "auto" | "initial" | "inherit"'
-  },
-  {
-    prop: "marginLeft",
-    type: "union",
-    values: '"none" | "xxs" | "xs" | "sm" | "md" | "lg" | "xl" | "auto" | "initial" | "inherit"'
-  },
-  {
-    prop: "marginTop",
-    type: "union",
-    values: '"none" | "xxs" | "xs" | "sm" | "md" | "lg" | "xl" | "auto" | "initial" | "inherit"'
-  },
-  {
-    prop: "marginBottom",
-    type: "union",
-    values: '"none" | "xxs" | "xs" | "sm" | "md" | "lg" | "xl" | "auto" | "initial" | "inherit"'
-  },
-  {
-    prop: "marginX",
-    type: "union",
-    values: '"none" | "xxs" | "xs" | "sm" | "md" | "lg" | "xl" | "auto" | "initial" | "inherit"'
-  },
-  {
-    prop: "marginY",
-    type: "union",
-    values: '"none" | "xxs" | "xs" | "sm" | "md" | "lg" | "xl" | "auto" | "initial" | "inherit"'
+    values: '"loosest" | "looser" | "loose" | "normal" | "tight" | "tighter" | "tightest"'
   },
   {
     prop: "margin",
     type: "union",
-    values: '"none" | "xxs" | "xs" | "sm" | "md" | "lg" | "xl" | "auto" | "initial" | "inherit"'
+    values: '"none" | "xxs" | "xs" | "sm" | "md" | "lg" | "xl" | "xxl" | "auto" | "initial" | "inherit"'
+  },
+  {
+    prop: "marginBottom",
+    type: "union",
+    values: '"none" | "xxs" | "xs" | "sm" | "md" | "lg" | "xl" | "xxl" | "auto" | "initial" | "inherit"'
+  },
+  {
+    prop: "marginLeft",
+    type: "union",
+    values: '"none" | "xxs" | "xs" | "sm" | "md" | "lg" | "xl" | "xxl" | "auto" | "initial" | "inherit"'
+  },
+  {
+    prop: "marginRight",
+    type: "union",
+    values: '"none" | "xxs" | "xs" | "sm" | "md" | "lg" | "xl" | "xxl" | "auto" | "initial" | "inherit"'
+  },
+  {
+    prop: "marginTop",
+    type: "union",
+    values: '"none" | "xxs" | "xs" | "sm" | "md" | "lg" | "xl" | "xxl" | "auto" | "initial" | "inherit"'
+  },
+  {
+    prop: "marginX",
+    type: "union",
+    values: '"none" | "xxs" | "xs" | "sm" | "md" | "lg" | "xl" | "xxl" | "auto" | "initial" | "inherit"'
+  },
+  {
+    prop: "marginY",
+    type: "union",
+    values: '"none" | "xxs" | "xs" | "sm" | "md" | "lg" | "xl" | "xxl" | "auto" | "initial" | "inherit"'
+  },
+  {
+    prop: "maxHeight",
+    type: "string",
+    values: []
   },
   {
     prop: "maxWidth",
-    type: "union",
-    values: '"xxs" | "xs" | "sm" | "md" | "lg" | "xl" | "xxl"',
+    type: "string",
+    values: []
+  },
+  {
+    prop: "minHeight",
+    type: "string",
+    values: []
+  },
+  {
+    prop: "minWidth",
+    type: "string",
+    values: []
   },
   {
     prop: "numberSpacing",
     type: "union",
-    values: "tabular"
+    values: '"tabular"'
   },
   {
     prop: "order",
     type: "union",
-    values:
-      '"none" | "first" | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12'
+    values: '"none" | "first" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9" | "10" | "11" | "12"'
   },
   {
-    prop: "paddingRight",
+    prop: "overflow",
     type: "union",
-    values: '"none" | "xxs" | "xs" | "sm" | "md" | "lg" | "xl" | "auto" | "initial" | "inherit"'
+    values: '"scroll" | "visible" | "hidden" | "auto"'
   },
   {
-    prop: "paddingLeft",
+    prop: "overflowX",
     type: "union",
-    values: '"none" | "xxs" | "xs" | "sm" | "md" | "lg" | "xl" | "auto" | "initial" | "inherit"'
+    values: '"scroll" | "visible" | "hidden" | "auto"'
   },
   {
-    prop: "paddingTop",
+    prop: "overflowY",
     type: "union",
-    values: '"none" | "xxs" | "xs" | "sm" | "md" | "lg" | "xl" | "auto" | "initial" | "inherit"'
-  },
-  {
-    prop: "paddingBottom",
-    type: "union",
-    values: '"none" | "xxs" | "xs" | "sm" | "md" | "lg" | "xl" | "auto" | "initial" | "inherit"'
-  },
-  {
-    prop: "paddingX",
-    type: "union",
-    values: '"none" | "xxs" | "xs" | "sm" | "md" | "lg" | "xl" | "auto" | "initial" | "inherit"'
-  },
-  {
-    prop: "paddingY",
-    type: "union",
-    values: '"none" | "xxs" | "xs" | "sm" | "md" | "lg" | "xl" | "auto" | "initial" | "inherit"'
+    values: '"scroll" | "visible" | "hidden" | "auto"'
   },
   {
     prop: "padding",
     type: "union",
-    values: '"none" | "xxs" | "xs" | "sm" | "md" | "lg" | "xl" | "auto" | "initial" | "inherit"'
+    values: '"none" | "xxs" | "xs" | "sm" | "md" | "lg" | "xl" | "xxl" | "auto" | "initial" | "inherit"'
+  },
+  {
+    prop: "paddingBottom",
+    type: "union",
+    values: '"none" | "xxs" | "xs" | "sm" | "md" | "lg" | "xl" | "xxl" | "auto" | "initial" | "inherit"'
+  },
+  {
+    prop: "paddingLeft",
+    type: "union",
+    values: '"none" | "xxs" | "xs" | "sm" | "md" | "lg" | "xl" | "xxl" | "auto" | "initial" | "inherit"'
+  },
+  {
+    prop: "paddingRight",
+    type: "union",
+    values: '"none" | "xxs" | "xs" | "sm" | "md" | "lg" | "xl" | "xxl" | "auto" | "initial" | "inherit"'
+  },
+  {
+    prop: "paddingTop",
+    type: "union",
+    values: '"none" | "xxs" | "xs" | "sm" | "md" | "lg" | "xl" | "xxl" | "auto" | "initial" | "inherit"'
+  },
+  {
+    prop: "paddingX",
+    type: "union",
+    values: '"none" | "xxs" | "xs" | "sm" | "md" | "lg" | "xl" | "xxl" | "auto" | "initial" | "inherit"'
+  },
+  {
+    prop: "paddingY",
+    type: "union",
+    values: '"none" | "xxs" | "xs" | "sm" | "md" | "lg" | "xl" | "xxl" | "auto" | "initial" | "inherit"'
   },
   {
     prop: "position",
@@ -202,19 +217,50 @@ const globalPropsValues = [
     values: '"relative" | "absolute" | "fixed" | "sticky" | "static"'
   },
   {
+    prop: "right",
+    type: "union",
+    values: '"xxs" | "xs" | "sm" | "md" | "lg" | "xl" | "xxl"'
+  },
+  {
+    prop: "rowGap",
+    type: "string",
+    values: []
+  },
+  {
     prop: "shadow",
     type: "union",
     values: '"none" | "deep" | "deeper" | "deepest"'
   },
   {
-    prop: "space",
+    prop: "textAlign",
     type: "union",
-    values: '"spaceBetween" | "spaceAround" | "spaceEvenly"'
+    values: '"start" | "end" | "left" | "right" | "center" | "justify" | "justifyAll" | "matchParent"'
+  },
+  {
+    prop: "top",
+    type: "union",
+    values: '"xxs" | "xs" | "sm" | "md" | "lg" | "xl" | "xxl"'
+  },
+  {
+    prop: "truncate",
+    type: "union",
+    values: '"none" | "1" | "2" | "3" | "4" | "5"'
+  },
+  {
+    prop: "verticalAlign",
+    type: "union",
+    values: '"baseline" | "super" | "top" | "middle" | "bottom" | "sub" | "text-top" | "text-bottom"'
+  },
+  {
+    prop: "width",
+    type: "string",
+    values: []
   },
   {
     prop: "zIndex",
-    type: "number",
-    values: "1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10"
+    type: "union",
+    values: '"1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9" | "10" | "max"'
   }
 ];
-export default globalPropsValues
+
+export default globalPropsValues;
