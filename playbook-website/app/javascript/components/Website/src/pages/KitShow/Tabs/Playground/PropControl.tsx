@@ -6,11 +6,17 @@ import {
   Flex,
   Select,
   TextInput,
+  Tooltip,
 } from "playbook-ui";
 import {
   PropControlProps,
   FUNCTION_PRESETS,
 } from "./types";
+
+export interface ExtendedPropControlProps extends PropControlProps {
+  disabled?: boolean;
+  disabledReason?: string;
+}
 
 const formatPropName = (name: string): string => {
   return name.replace(/([A-Z])/g, " $1").replace(/^./, (str) => str.toUpperCase());
@@ -20,7 +26,7 @@ const BooleanControl: React.FC<PropControlProps> = ({ name, value, onChange }) =
   const isEnabled = value?.enabled ?? false;
 
   return (
-    <Flex align="center" paddingY="xs">
+    <Flex align="center" padding="xs">
       <Checkbox
         checked={isEnabled}
         onChange={() => {
@@ -41,7 +47,7 @@ const EnumControl: React.FC<PropControlProps> = ({ name, definition, value, onCh
   const values = definition.values || [];
 
   return (
-    <Flex flexDirection="column" paddingY="xs">
+    <Flex flexDirection="column" padding="xs">
       <Checkbox
         checked={isEnabled}
         onChange={() => {
@@ -51,7 +57,6 @@ const EnumControl: React.FC<PropControlProps> = ({ name, definition, value, onCh
           });
         }}
         text={formatPropName(name)}
-        marginBottom="xs"
       />
       {isEnabled && values.length > 0 && (
         <Flex flexWrap="wrap" gap="xs" marginLeft="lg">
@@ -78,7 +83,7 @@ const StringControl: React.FC<PropControlProps> = ({ name, definition, value, on
   const currentValue = value?.value ?? "";
 
   return (
-    <Flex flexDirection="column" paddingY="xs">
+    <Flex flexDirection="column" padding="xs">
       <Checkbox
         checked={isEnabled}
         onChange={() => {
@@ -88,7 +93,6 @@ const StringControl: React.FC<PropControlProps> = ({ name, definition, value, on
           });
         }}
         text={formatPropName(name)}
-        marginBottom="xs"
       />
       {isEnabled && (
         <TextInput
@@ -109,7 +113,7 @@ const NumberControl: React.FC<PropControlProps> = ({ name, definition, value, on
   const currentValue = value?.value ?? 0;
 
   return (
-    <Flex flexDirection="column" paddingY="xs">
+    <Flex flexDirection="column" padding="xs">
       <Checkbox
         checked={isEnabled}
         onChange={() => {
@@ -119,7 +123,6 @@ const NumberControl: React.FC<PropControlProps> = ({ name, definition, value, on
           });
         }}
         text={formatPropName(name)}
-        marginBottom="xs"
       />
       {isEnabled && (
         <TextInput
@@ -146,7 +149,7 @@ const FunctionControl: React.FC<PropControlProps> = ({ name, value, onChange }) 
   }));
 
   return (
-    <Flex flexDirection="column" paddingY="xs">
+    <Flex flexDirection="column" padding="xs">
       <Checkbox
         checked={isEnabled}
         onChange={() => {
@@ -157,7 +160,6 @@ const FunctionControl: React.FC<PropControlProps> = ({ name, value, onChange }) 
           });
         }}
         text={formatPropName(name)}
-        marginBottom="xs"
       />
       {isEnabled && (
         <Select
@@ -182,7 +184,7 @@ const ReactNodeControl: React.FC<PropControlProps> = ({ name, value, onChange })
   const currentValue = value?.value ?? "";
 
   return (
-    <Flex flexDirection="column" paddingY="xs">
+    <Flex flexDirection="column" padding="xs">
       <Checkbox
         checked={isEnabled}
         onChange={() => {
@@ -192,7 +194,6 @@ const ReactNodeControl: React.FC<PropControlProps> = ({ name, value, onChange })
           });
         }}
         text={formatPropName(name)}
-        marginBottom="xs"
       />
       {isEnabled && (
         <TextInput
@@ -208,7 +209,7 @@ const ReactNodeControl: React.FC<PropControlProps> = ({ name, value, onChange })
   );
 };
 
-const ObjectControl: React.FC<PropControlProps> = ({ name, definition, value, onChange }) => {
+const ObjectControl: React.FC<PropControlProps> = ({ name, value, onChange }) => {
   const isEnabled = value?.enabled ?? false;
   const [inputValue, setInputValue] = useState(
     value?.value ? JSON.stringify(value.value, null, 2) : "{}"
@@ -225,7 +226,6 @@ const ObjectControl: React.FC<PropControlProps> = ({ name, definition, value, on
           });
         }}
         text={formatPropName(name)}
-        marginBottom="xs"
       />
       {isEnabled && (
         <Flex flexDirection="column" marginLeft="lg">
@@ -253,7 +253,7 @@ const normalizeType = (type: string): string => {
   return type.toLowerCase().replace(/;/g, "").trim();
 };
 
-const PropControl: React.FC<PropControlProps> = (props) => {
+const getControlForType = (props: PropControlProps) => {
   const { definition } = props;
   const rawType = definition.type || "";
   const propType = normalizeType(rawType);
@@ -295,6 +295,28 @@ const PropControl: React.FC<PropControlProps> = (props) => {
 
   // Default to string control for unknown types
   return <StringControl {...props} />;
+};
+
+const PropControl: React.FC<ExtendedPropControlProps> = (props) => {
+  const { disabled, disabledReason } = props;
+  
+  const control = getControlForType(props);
+  
+  if (disabled) {
+    return (
+      <Tooltip
+        placement="left"
+        text={disabledReason || "This prop is not available"}
+        zIndex={10}
+      >
+        <div style={{ opacity: 0.5, pointerEvents: "none" }}>
+          {control}
+        </div>
+      </Tooltip>
+    );
+  }
+  
+  return control;
 };
 
 export default PropControl;

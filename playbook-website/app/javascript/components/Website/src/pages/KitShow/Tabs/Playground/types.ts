@@ -92,9 +92,44 @@ export const REACT_NODE_PRESETS: ReactNodePreset[] = [
   { label: "Custom JSX", value: "custom" },
 ];
 
+export interface PlaygroundChildrenConfig {
+  editable: boolean;
+  default: string;
+  marker?: string;
+  hideWhenPropSet?: string[];
+}
+
+export interface PropCondition {
+  requires?: string | Record<string, any>;
+  showWhen?: string | Record<string, any>;
+}
+
+export interface PropGroup {
+  name: string;
+  props: string[];
+  collapsed?: boolean;
+}
+
+export interface PlaygroundPreset {
+  name: string;
+  props: Record<string, any>;
+  children?: string;
+}
+
+export interface PlaygroundHint {
+  when: Record<string, any>;
+  message: string;
+  type?: "info" | "warning" | "error";
+}
+
 export interface PlaygroundConfig {
   template: string;
   propTargets?: Record<string, string>;
   defaults?: Record<string, any>;
   scopeVars?: Record<string, any>;
+  children?: PlaygroundChildrenConfig;
+  conditionals?: Record<string, PropCondition>;
+  groups?: PropGroup[];
+  presets?: PlaygroundPreset[];
+  hints?: Record<string, PlaygroundHint>;
 }

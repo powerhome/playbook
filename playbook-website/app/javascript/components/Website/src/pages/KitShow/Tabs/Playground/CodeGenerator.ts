@@ -1,4 +1,4 @@
-import { PropValue, PropDefinition } from "./types";
+import { PropValue, PropDefinition, PlaygroundChildrenConfig } from "./types";
 
 interface GenerateCodeOptions {
   componentName: string;
@@ -14,6 +14,8 @@ interface GenerateFromTemplateOptions {
   propDefinitions: Record<string, PropDefinition>;
   propTargets?: Record<string, string>;
   defaults?: Record<string, any>;
+  children?: string;
+  childrenConfig?: PlaygroundChildrenConfig;
   includeImport?: boolean;
 }
 
@@ -207,6 +209,8 @@ export const generateFromTemplate = ({
   propDefinitions,
   propTargets = {},
   defaults = {},
+  children,
+  childrenConfig,
   includeImport = true,
 }: GenerateFromTemplateOptions): string => {
   // Group enabled props by their target marker
@@ -236,7 +240,7 @@ export const generateFromTemplate = ({
   // Replace all markers in the template
   let result = template;
   
-  // Find all markers like {{props}}, {{NavItem.props}}, etc.
+  // Find all markers like {{props}}, {{NavItem.props}}, {{children}}, etc.
   const markerRegex = /\{\{([^}]+)\}\}/g;
   const markers = new Set<string>();
   let match;
@@ -246,9 +250,15 @@ export const generateFromTemplate = ({
   
   // Replace each marker with its props (or empty string if no props)
   markers.forEach((marker) => {
-    const props = propsByTarget[marker] || [];
-    const propsString = props.length > 0 ? " " + props.join(" ") : "";
-    result = result.replace(new RegExp(`\\{\\{${marker.replace(".", "\\.")}\\}\\}`, "g"), propsString);
+    if (marker === "children") {
+      // Handle children marker
+      const childrenValue = children ?? childrenConfig?.default ?? "";
+      result = result.replace(/\{\{children\}\}/g, childrenValue);
+    } else {
+      const props = propsByTarget[marker] || [];
+      const propsString = props.length > 0 ? " " + props.join(" ") : "";
+      result = result.replace(new RegExp(`\\{\\{${marker.replace(".", "\\.")}\\}\\}`, "g"), propsString);
+    }
   });
   
   // Add import statement if needed
@@ -269,6 +279,8 @@ export const generateLiveFromTemplate = ({
   propDefinitions,
   propTargets = {},
   defaults = {},
+  children,
+  childrenConfig,
 }: Omit<GenerateFromTemplateOptions, "includeImport">): string => {
   const code = generateFromTemplate({
     template,
@@ -276,6 +288,8 @@ export const generateLiveFromTemplate = ({
     propDefinitions,
     propTargets,
     defaults,
+    children,
+    childrenConfig,
     includeImport: false,
   });
   

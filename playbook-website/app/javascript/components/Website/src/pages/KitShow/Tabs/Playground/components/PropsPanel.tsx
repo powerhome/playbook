@@ -1,0 +1,143 @@
+import React from "react";
+import {
+  Body,
+  Caption,
+  Card,
+  Flex,
+  SectionSeparator,
+  TextInput,
+  Title,
+} from "playbook-ui";
+import PropControl from "../PropControl";
+import { PropDefinition, PropValue } from "../types";
+
+interface PropsPanelProps {
+  totalProps: number;
+  showChildren: boolean;
+  children: string;
+  onChildrenChange: (value: string) => void;
+  groupedProps: Array<{ name: string; props: Array<[string, PropDefinition]> }>;
+  propValues: Record<string, PropValue>;
+  propDisabledState: Record<string, { disabled: boolean; reason: string }>;
+  onPropChange: (name: string, value: PropValue) => void;
+  globalProps: Record<string, PropDefinition>;
+  showGlobalProps: boolean;
+}
+
+export const PropsPanel: React.FC<PropsPanelProps> = ({
+  totalProps,
+  showChildren,
+  children,
+  onChildrenChange,
+  groupedProps,
+  propValues,
+  propDisabledState,
+  onPropChange,
+  globalProps,
+  showGlobalProps,
+}) => {
+  const globalPropEntries = Object.entries(globalProps);
+
+  return (
+    <Flex
+      flexDirection="column"
+      htmlOptions={{ style: { width: "320px", minWidth: "320px" } }}
+    >
+      <Card padding="sm" height="100%" width="100%">
+        <Flex justify="between" align="center" marginBottom="sm">
+          <Title text="Props" size={4} />
+          <Caption text={`${totalProps} available`} />
+        </Flex>
+
+        {showChildren && (
+          <>
+            <Caption text="Children" marginBottom="xs" />
+            <TextInput
+              placeholder="Enter children content..."
+              value={children}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                onChildrenChange(e.target.value)
+              }
+              marginBottom="sm"
+            />
+            <SectionSeparator marginY="sm" />
+          </>
+        )}
+
+        <Flex
+          flexDirection="column"
+          htmlOptions={{ style: { maxHeight: "400px", overflowY: "auto" } }}
+        >
+          {groupedProps.map((group, groupIndex) => (
+            <React.Fragment key={group.name || "ungrouped"}>
+              {group.name && (
+                <>
+                  {groupIndex > 0 && <SectionSeparator marginY="xs" />}
+                  <Flex
+                    justify="between"
+                    align="center"
+                    cursor="pointer"
+                    paddingY="xs"
+                  >
+                    <Caption text={group.name} bold />
+                  </Flex>
+                </>
+              )}
+
+              {group.props.length > 0 ? (
+                group.props.map(([name, definition]) => {
+                  const disabledState = propDisabledState[name];
+                  return (
+                    <PropControl
+                      key={name}
+                      name={name}
+                      definition={definition}
+                      value={propValues[name]}
+                      onChange={onPropChange}
+                      disabled={disabledState?.disabled}
+                      disabledReason={disabledState?.reason}
+                    />
+                  );
+                })
+              ) : (
+                <Body text="No props in this group." color="light" />
+              )}
+            </React.Fragment>
+          ))}
+
+          {totalProps === 0 && (
+            <Body text="No kit-specific props available." color="light" />
+          )}
+        </Flex>
+
+        {showGlobalProps && globalPropEntries.length > 0 && (
+          <>
+            <SectionSeparator marginY="sm" />
+            <Flex
+              justify="between"
+              align="center"
+              cursor="pointer"
+              paddingY="xs"
+            >
+              <Title text="Global Props" size={4} />
+            </Flex>
+            <Flex
+              flexDirection="column"
+              htmlOptions={{ style: { maxHeight: "300px", overflowY: "auto" } }}
+            >
+              {globalPropEntries.map(([name, definition]) => (
+                <PropControl
+                  key={name}
+                  name={name}
+                  definition={definition}
+                  value={propValues[name]}
+                  onChange={onPropChange}
+                />
+              ))}
+            </Flex>
+          </>
+        )}
+      </Card>
+    </Flex>
+  );
+};
