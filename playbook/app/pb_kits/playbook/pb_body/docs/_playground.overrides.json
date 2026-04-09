@@ -15,7 +15,7 @@
   "presets": [
     {
       "name": "Paragraph",
-      "props": { "tag": "p", "color": "default" },
+      "props": {},
       "children": "This is standard body copy in a paragraph element, ideal for articles, forms, and long-form content."
     },
     {
@@ -30,13 +30,8 @@
     },
     {
       "name": "Link style",
-      "props": { "variant": "link", "color": "link" },
-      "children": "Learn more about this feature"
-    },
-    {
-      "name": "Light on dark",
-      "props": { "color": "light" },
-      "children": "Contrast-friendly text for dark backgrounds, sidebars, and overlays."
+      "props": {},
+      "children": "<a href=\"#\">This text is using the <a> tag</a>"
     }
   ],
   "conditionals": {
