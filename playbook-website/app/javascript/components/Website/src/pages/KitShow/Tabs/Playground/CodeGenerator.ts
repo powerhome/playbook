@@ -57,7 +57,10 @@ const formatPropValue = (
     return `${name}={${value}}`;
   }
 
-  if (propType === "function" || propType.includes("=>")) {
+  // Check if value looks like a function expression (contains => or is "function")
+  const looksLikeFunction = typeof value === "string" && (value.includes("=>") || value.trim().startsWith("function"));
+  
+  if (propType === "function" || propType.includes("=>") || looksLikeFunction) {
     if (typeof value === "string" && value.trim()) {
       return `${name}={${value}}`;
     }

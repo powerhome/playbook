@@ -10,7 +10,7 @@
     },
     {
       "name": "Other",
-      "props": ["tabIndex", "removeOnClick"]
+      "props": ["tabIndex"]
     }
   ],
   "presets": [
@@ -35,23 +35,8 @@
       "children": ""
     },
     {
-      "name": "Info",
-      "props": { "variant": "info", "text": "Info" },
-      "children": ""
-    },
-    {
-      "name": "Neutral",
-      "props": { "variant": "neutral", "text": "Neutral" },
-      "children": ""
-    },
-    {
       "name": "Notification",
       "props": { "variant": "notification", "text": "3" },
-      "children": ""
-    },
-    {
-      "name": "Notification error",
-      "props": { "variant": "notificationError", "text": "!" },
       "children": ""
     },
     {
@@ -61,7 +46,7 @@
     },
     {
       "name": "Dismissible",
-      "props": { "variant": "neutral", "removeIcon": true, "text": "Removable" },
+      "props": { "variant": "neutral", "removeIcon": true, "text": "Removable", "removeOnClick": "() => console.log('dismissed')" },
       "children": ""
     }
   ],
