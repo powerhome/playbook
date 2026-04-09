@@ -1,0 +1,39 @@
+{
+  "template": "<Title{{props}}>{{children}}</Title>",
+  "propTargets": {},
+  "defaults": {
+    "bold": true,
+    "size": 3,
+    "tag": "h3"
+  },
+  "children": {
+    "editable": true,
+    "default": "Title content",
+    "hideWhenPropSet": [
+      "text"
+    ]
+  },
+  "groups": [
+    {
+      "name": "Props",
+      "props": [
+        "bold",
+        "color",
+        "size",
+        "displaySize",
+        "tag",
+        "text",
+        "variant"
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default",
+      "props": {},
+      "children": "Title content"
+    }
+  ],
+  "conditionals": {},
+  "hints": {}
+}

@@ -1,0 +1,25 @@
+{
+  "template": "<SelectableList{{props}} />",
+  "propTargets": {},
+  "defaults": {
+    "enableDrag": false,
+    "variant": "checkbox"
+  },
+  "groups": [
+    {
+      "name": "Props",
+      "props": [
+        "enableDrag",
+        "variant"
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default",
+      "props": {}
+    }
+  ],
+  "conditionals": {},
+  "hints": {}
+}

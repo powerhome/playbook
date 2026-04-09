@@ -1,0 +1,39 @@
+{
+  "template": "<Radio{{props}} />",
+  "propTargets": {},
+  "defaults": {
+    "alignment": "",
+    "checked": false,
+    "customChildren": false,
+    "disabled": false,
+    "error": false,
+    "name": "radio_name",
+    "value": "radio_text",
+    "text": "Radio Text"
+  },
+  "groups": [
+    {
+      "name": "Props",
+      "props": [
+        "alignment",
+        "checked",
+        "customChildren",
+        "disabled",
+        "error",
+        "label",
+        "name",
+        "value",
+        "text",
+        "onChange"
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default",
+      "props": {}
+    }
+  ],
+  "conditionals": {},
+  "hints": {}
+}

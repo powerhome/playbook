@@ -1,0 +1,27 @@
+{
+  "template": "<LoadingInline{{props}} />",
+  "propTargets": {},
+  "defaults": {
+    "align": "left",
+    "text": "Loading",
+    "variant": "dotted"
+  },
+  "groups": [
+    {
+      "name": "Props",
+      "props": [
+        "align",
+        "text",
+        "variant"
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default",
+      "props": {}
+    }
+  ],
+  "conditionals": {},
+  "hints": {}
+}

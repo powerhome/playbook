@@ -1,0 +1,33 @@
+{
+  "template": "<FileUpload{{props}} />",
+  "propTargets": {},
+  "defaults": {
+    "accept": ""
+  },
+  "groups": [
+    {
+      "name": "Props",
+      "props": [
+        "accept",
+        "customMessage",
+        "acceptedFilesDescription",
+        "maxSize",
+        "onFilesAccepted",
+        "onFilesRejected",
+        "error",
+        "getRootProps",
+        "getInputProps",
+        "isDragActive",
+        "fileRejections"
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default",
+      "props": {}
+    }
+  ],
+  "conditionals": {},
+  "hints": {}
+}

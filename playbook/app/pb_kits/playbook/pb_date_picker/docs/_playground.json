@@ -1,0 +1,77 @@
+{
+  "template": "<DatePicker{{props}} />",
+  "propTargets": {},
+  "defaults": {
+    "allowInput": false,
+    "defaultDate": "",
+    "disableInput": false,
+    "enableTime": false,
+    "format": "m/d/Y",
+    "hideIcon": false,
+    "hideLabel": false,
+    "label": "Date Picker",
+    "placeholder": "Select Date",
+    "requiredIndicator": false,
+    "selectionType": "none",
+    "showTimezone": false,
+    "staticPosition": true,
+    "thisRangesEndToday": false,
+    "controlsStartId": "",
+    "controlsEndId": "",
+    "syncStartWith": "",
+    "syncEndWith": ""
+  },
+  "groups": [
+    {
+      "name": "Props",
+      "props": [
+        "allowInput",
+        "customQuickPickDates",
+        "defaultDate",
+        "disableDate",
+        "disableInput",
+        "disableRange",
+        "disableWeekdays",
+        "enableTime",
+        "error",
+        "format",
+        "hideIcon",
+        "hideLabel",
+        "initializeOnce",
+        "inLine",
+        "inputAria",
+        "inputData",
+        "inputOnChange",
+        "inputValue",
+        "label",
+        "maxDate",
+        "minDate",
+        "name",
+        "pickerId",
+        "placeholder",
+        "positionElement",
+        "requiredIndicator",
+        "scrollContainer",
+        "selectionType",
+        "showTimezone",
+        "staticPosition",
+        "thisRangesEndToday",
+        "timeFormat",
+        "type",
+        "yearRange",
+        "controlsStartId",
+        "controlsEndId",
+        "syncStartWith",
+        "syncEndWith"
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default",
+      "props": {}
+    }
+  ],
+  "conditionals": {},
+  "hints": {}
+}

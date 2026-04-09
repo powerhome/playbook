@@ -1,0 +1,32 @@
+{
+  "template": "<DateStacked{{props}} />",
+  "propTargets": {},
+  "defaults": {
+    "align": "left",
+    "bold": false,
+    "size": "sm",
+    "reverse": false,
+    "showCurrentYear": false
+  },
+  "groups": [
+    {
+      "name": "Props",
+      "props": [
+        "align",
+        "bold",
+        "date",
+        "size",
+        "reverse",
+        "showCurrentYear"
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default",
+      "props": {}
+    }
+  ],
+  "conditionals": {},
+  "hints": {}
+}

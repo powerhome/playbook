@@ -1,0 +1,31 @@
+{
+  "template": "<Avatar{{props}} />",
+  "propTargets": {},
+  "defaults": {
+    "grayscale": false,
+    "imageAlt": "",
+    "name": "",
+    "size": "md"
+  },
+  "groups": [
+    {
+      "name": "Props",
+      "props": [
+        "grayscale",
+        "imageAlt",
+        "imageUrl",
+        "name",
+        "size",
+        "status"
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default",
+      "props": {}
+    }
+  ],
+  "conditionals": {},
+  "hints": {}
+}

@@ -1,0 +1,65 @@
+{
+  "template": "<AdvancedTable{{props}} />",
+  "propTargets": {},
+  "defaults": {
+    "columnGroupBorderColor": "none",
+    "enableToggleExpansion": "header",
+    "inlineRowLoading": false,
+    "loading": false,
+    "responsive": "scroll",
+    "scrollBarNone": false,
+    "selectableRows": false,
+    "showActionsBar": true,
+    "persistToggleExpansionButton": false
+  },
+  "groups": [
+    {
+      "name": "Props",
+      "props": [
+        "actions",
+        "cascadeCollapse",
+        "columnDefinitions",
+        "columnGroupBorderColor",
+        "columnVisibilityControl",
+        "customSort",
+        "enableToggleExpansion",
+        "enableSortingRemoval",
+        "expandedControl",
+        "expandByDepth",
+        "onExpandByDepthClick",
+        "initialLoadingRowsCount",
+        "inlineRowLoading",
+        "loading",
+        "onRowToggleClick",
+        "onToggleExpansionClick",
+        "pagination",
+        "paginationProps",
+        "responsive",
+        "rowStyling",
+        "scrollBarNone",
+        "selectableRows",
+        "showActionsBar",
+        "persistToggleExpansionButton",
+        "sortControl",
+        "sortParentOnly",
+        "tableData",
+        "tableOptions",
+        "tableProps",
+        "toggleExpansionIcon",
+        "onRowSelectionChange",
+        "onCustomSortClick",
+        "virtualizedRows",
+        "allowFullScreen",
+        "fullScreenControl"
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default",
+      "props": {}
+    }
+  ],
+  "conditionals": {},
+  "hints": {}
+}

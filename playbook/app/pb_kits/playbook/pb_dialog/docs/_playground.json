@@ -1,0 +1,53 @@
+{
+  "template": "<Dialog{{props}}>{{children}}</Dialog>",
+  "propTargets": {},
+  "defaults": {
+    "closeable": true,
+    "fullHeight": false,
+    "placement": "center",
+    "shouldCloseOnOverlayClick": true,
+    "size": "md",
+    "status": ""
+  },
+  "children": {
+    "editable": true,
+    "default": "Dialog content",
+    "hideWhenPropSet": [
+      "text"
+    ]
+  },
+  "groups": [
+    {
+      "name": "Props",
+      "props": [
+        "cancelButton",
+        "closeable",
+        "confirmButton",
+        "fullHeight",
+        "loading",
+        "onCancel",
+        "onChange",
+        "onClose",
+        "onConfirm",
+        "opened",
+        "portalClassName",
+        "placement",
+        "shouldCloseOnOverlayClick",
+        "size",
+        "status",
+        "text",
+        "title",
+        "trigger"
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default",
+      "props": {},
+      "children": "Dialog content"
+    }
+  ],
+  "conditionals": {},
+  "hints": {}
+}

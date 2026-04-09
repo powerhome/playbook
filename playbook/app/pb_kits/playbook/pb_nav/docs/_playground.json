@@ -1,16 +1,41 @@
 {
-  "template": "<Nav{{props}}>\n  <NavItem text=\"Home\"{{NavItem.props}} />\n  <NavItem text=\"About\" />\n  <NavItem text=\"Contact\" />\n</Nav>",
-  "propTargets": {
-    "orientation": "props",
-    "variant": "props",
-    "highlight": "props",
-    "text": "NavItem.props",
-    "active": "NavItem.props",
-    "link": "NavItem.props",
-    "iconLeft": "NavItem.props",
-    "iconRight": "NavItem.props"
-  },
+  "template": "<Nav{{props}}>{{children}}</Nav>",
+  "propTargets": {},
   "defaults": {
-    "text": "Home"
-  }
+    "borderless": false,
+    "extendedUnderline": false,
+    "highlight": true,
+    "orientation": "vertical",
+    "link": "#",
+    "variant": "normal"
+  },
+  "children": {
+    "editable": true,
+    "default": "Nav content"
+  },
+  "groups": [
+    {
+      "name": "Props",
+      "props": [
+        "borderless",
+        "extendedUnderline",
+        "highlight",
+        "onClick",
+        "orientation",
+        "link",
+        "title",
+        "variant",
+        "itemSpacing"
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default",
+      "props": {},
+      "children": "Nav content"
+    }
+  ],
+  "conditionals": {},
+  "hints": {}
 }

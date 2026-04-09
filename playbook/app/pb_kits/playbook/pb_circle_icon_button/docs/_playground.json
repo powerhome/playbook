@@ -1,0 +1,37 @@
+{
+  "template": "<CircleIconButton{{props}} />",
+  "propTargets": {},
+  "defaults": {
+    "disabled": false,
+    "loading": false,
+    "newWindow": false,
+    "type": "button",
+    "variant": "primary",
+    "size": "default"
+  },
+  "groups": [
+    {
+      "name": "Props",
+      "props": [
+        "disabled",
+        "icon",
+        "link",
+        "loading",
+        "onClick",
+        "newWindow",
+        "type",
+        "target",
+        "variant",
+        "size"
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default",
+      "props": {}
+    }
+  ],
+  "conditionals": {},
+  "hints": {}
+}

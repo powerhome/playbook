@@ -1,0 +1,26 @@
+{
+  "template": "<DateTimeStacked{{props}} />",
+  "propTargets": {},
+  "defaults": {
+    "showCurrentYear": false
+  },
+  "groups": [
+    {
+      "name": "Props",
+      "props": [
+        "date",
+        "datetime",
+        "timeZone",
+        "showCurrentYear"
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default",
+      "props": {}
+    }
+  ],
+  "conditionals": {},
+  "hints": {}
+}

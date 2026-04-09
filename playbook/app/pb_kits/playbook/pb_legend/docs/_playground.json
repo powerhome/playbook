@@ -1,0 +1,25 @@
+{
+  "template": "<Legend{{props}} />",
+  "propTargets": {},
+  "defaults": {
+    "color": "data_1"
+  },
+  "groups": [
+    {
+      "name": "Props",
+      "props": [
+        "color",
+        "prefixText",
+        "text"
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default",
+      "props": {}
+    }
+  ],
+  "conditionals": {},
+  "hints": {}
+}

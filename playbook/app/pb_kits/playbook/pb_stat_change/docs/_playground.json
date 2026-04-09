@@ -1,0 +1,25 @@
+{
+  "template": "<StatChange{{props}} />",
+  "propTargets": {},
+  "defaults": {
+    "change": "neutral"
+  },
+  "groups": [
+    {
+      "name": "Props",
+      "props": [
+        "change",
+        "icon",
+        "value"
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default",
+      "props": {}
+    }
+  ],
+  "conditionals": {},
+  "hints": {}
+}

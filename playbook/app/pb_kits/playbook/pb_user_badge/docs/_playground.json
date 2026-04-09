@@ -1,0 +1,25 @@
+{
+  "template": "<UserBadge{{props}} />",
+  "propTargets": {},
+  "defaults": {
+    "badge": "million-dollar",
+    "size": "md"
+  },
+  "groups": [
+    {
+      "name": "Props",
+      "props": [
+        "badge",
+        "size"
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default",
+      "props": {}
+    }
+  ],
+  "conditionals": {},
+  "hints": {}
+}

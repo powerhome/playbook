@@ -1,0 +1,29 @@
+{
+  "template": "<MultipleUsers{{props}} />",
+  "propTargets": {},
+  "defaults": {
+    "reverse": false,
+    "size": "xs",
+    "withTooltip": false
+  },
+  "groups": [
+    {
+      "name": "Props",
+      "props": [
+        "maxDisplayedUsers",
+        "reverse",
+        "size",
+        "withTooltip",
+        "users"
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default",
+      "props": {}
+    }
+  ],
+  "conditionals": {},
+  "hints": {}
+}

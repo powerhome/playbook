@@ -1,0 +1,24 @@
+{
+  "template": "<Draggable{{props}} />",
+  "propTargets": {},
+  "defaults": {
+    "dropZoneColor": "neutral"
+  },
+  "groups": [
+    {
+      "name": "Props",
+      "props": [
+        "dropZone",
+        "dropZoneColor"
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default",
+      "props": {}
+    }
+  ],
+  "conditionals": {},
+  "hints": {}
+}

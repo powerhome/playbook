@@ -1,0 +1,39 @@
+{
+  "template": "<SelectableCard{{props}} />",
+  "propTargets": {},
+  "defaults": {
+    "checked": false,
+    "disabled": false,
+    "error": false,
+    "icon": false,
+    "multi": true,
+    "variant": "default"
+  },
+  "groups": [
+    {
+      "name": "Props",
+      "props": [
+        "checked",
+        "customIcon",
+        "disabled",
+        "error",
+        "icon",
+        "inputId",
+        "multi",
+        "name",
+        "onChange",
+        "text",
+        "value",
+        "variant"
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default",
+      "props": {}
+    }
+  ],
+  "conditionals": {},
+  "hints": {}
+}

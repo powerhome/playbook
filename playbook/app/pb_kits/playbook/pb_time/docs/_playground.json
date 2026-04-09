@@ -1,0 +1,33 @@
+{
+  "template": "<Time{{props}} />",
+  "propTargets": {},
+  "defaults": {
+    "align": "left",
+    "showIcon": false,
+    "size": "sm",
+    "showTimezone": true,
+    "unstyled": false
+  },
+  "groups": [
+    {
+      "name": "Props",
+      "props": [
+        "align",
+        "date",
+        "showIcon",
+        "size",
+        "showTimezone",
+        "timeZone",
+        "unstyled"
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default",
+      "props": {}
+    }
+  ],
+  "conditionals": {},
+  "hints": {}
+}

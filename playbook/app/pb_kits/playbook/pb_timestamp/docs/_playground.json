@@ -1,0 +1,43 @@
+{
+  "template": "<Timestamp{{props}} />",
+  "propTargets": {},
+  "defaults": {
+    "align": "left",
+    "timezone": "America/New_York",
+    "showCurrentYear": false,
+    "showDate": true,
+    "showUser": false,
+    "hideUpdated": false,
+    "showTime": true,
+    "showTimezone": false,
+    "unstyled": false,
+    "variant": "default"
+  },
+  "groups": [
+    {
+      "name": "Props",
+      "props": [
+        "align",
+        "text",
+        "timestamp",
+        "timezone",
+        "showCurrentYear",
+        "showDate",
+        "showUser",
+        "hideUpdated",
+        "showTime",
+        "showTimezone",
+        "unstyled",
+        "variant"
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default",
+      "props": {}
+    }
+  ],
+  "conditionals": {},
+  "hints": {}
+}

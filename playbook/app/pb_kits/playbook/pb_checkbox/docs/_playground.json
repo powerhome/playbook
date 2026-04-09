@@ -1,0 +1,35 @@
+{
+  "template": "<Checkbox{{props}} />",
+  "propTargets": {},
+  "defaults": {
+    "checked": false,
+    "disabled": false,
+    "error": false,
+    "requiredIndicator": false
+  },
+  "groups": [
+    {
+      "name": "Props",
+      "props": [
+        "checked",
+        "disabled",
+        "error",
+        "indeterminate",
+        "name",
+        "onChange",
+        "requiredIndicator",
+        "tabIndex",
+        "text",
+        "value"
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default",
+      "props": {}
+    }
+  ],
+  "conditionals": {},
+  "hints": {}
+}

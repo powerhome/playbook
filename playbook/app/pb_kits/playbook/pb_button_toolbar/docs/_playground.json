@@ -1,0 +1,29 @@
+{
+  "template": "<ButtonToolbar{{props}} />",
+  "propTargets": {},
+  "defaults": {
+    "connected": false,
+    "orientation": "horizontal",
+    "variant": "primary"
+  },
+  "groups": [
+    {
+      "name": "Props",
+      "props": [
+        "connected",
+        "onClick",
+        "orientation",
+        "text",
+        "variant"
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default",
+      "props": {}
+    }
+  ],
+  "conditionals": {},
+  "hints": {}
+}

@@ -1,12 +1,54 @@
 {
-  "template": "<Dropdown options={options}{{props}} />",
+  "template": "<Dropdown{{props}} />",
   "propTargets": {},
-  "defaults": {},
-  "scopeVars": {
-    "options": [
-      { "label": "United States", "value": "us" },
-      { "label": "Canada", "value": "ca" },
-      { "label": "Mexico", "value": "mx" }
-    ]
-  }
+  "defaults": {
+    "autocomplete": false,
+    "blankSelection": "",
+    "clearable": true,
+    "closeOnClick": "any",
+    "constrainHeight": false,
+    "multiSelect": false,
+    "separators": true,
+    "variant": "default",
+    "rangeEndsToday": false,
+    "controlsStartId": "",
+    "controlsEndId": "",
+    "requiredIndicator": false
+  },
+  "groups": [
+    {
+      "name": "Props",
+      "props": [
+        "autocomplete",
+        "blankSelection",
+        "clearable",
+        "closeOnClick",
+        "constrainHeight",
+        "customQuickPickDates",
+        "formPillProps",
+        "defaultValue",
+        "error",
+        "isClosed",
+        "label",
+        "multiSelect",
+        "onSelect",
+        "options",
+        "placeholder",
+        "separators",
+        "variant",
+        "rangeEndsToday",
+        "controlsStartId",
+        "controlsEndId",
+        "requiredIndicator"
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default",
+      "props": {}
+    }
+  ],
+  "conditionals": {},
+  "hints": {}
 }

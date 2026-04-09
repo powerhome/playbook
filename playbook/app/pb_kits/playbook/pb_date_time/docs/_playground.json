@@ -1,0 +1,33 @@
+{
+  "template": "<DateTime{{props}} />",
+  "propTargets": {},
+  "defaults": {
+    "align": "left",
+    "size": "md",
+    "showCurrentYear": false,
+    "showDayOfWeek": false,
+    "showIcon": false
+  },
+  "groups": [
+    {
+      "name": "Props",
+      "props": [
+        "align",
+        "datetime",
+        "size",
+        "showCurrentYear",
+        "showDayOfWeek",
+        "showIcon",
+        "timeZone"
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default",
+      "props": {}
+    }
+  ],
+  "conditionals": {},
+  "hints": {}
+}

@@ -1,0 +1,30 @@
+{
+  "template": "<Toggle{{props}} />",
+  "propTargets": {},
+  "defaults": {
+    "checked": false,
+    "disabled": false,
+    "size": "sm"
+  },
+  "groups": [
+    {
+      "name": "Props",
+      "props": [
+        "checked",
+        "disabled",
+        "name",
+        "onChange",
+        "size",
+        "value"
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default",
+      "props": {}
+    }
+  ],
+  "conditionals": {},
+  "hints": {}
+}

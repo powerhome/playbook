@@ -1,0 +1,39 @@
+{
+  "template": "<Popover{{props}}>{{children}}</Popover>",
+  "propTargets": {},
+  "defaults": {
+    "appendTo": "body",
+    "closeOnClick": "none",
+    "offset": false,
+    "placement": "left",
+    "show": false,
+    "shouldClosePopover": "noop"
+  },
+  "children": {
+    "editable": true,
+    "default": "Popover content"
+  },
+  "groups": [
+    {
+      "name": "Props",
+      "props": [
+        "appendTo",
+        "closeOnClick",
+        "offset",
+        "placement",
+        "reference",
+        "show",
+        "shouldClosePopover"
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default",
+      "props": {},
+      "children": "Popover content"
+    }
+  ],
+  "conditionals": {},
+  "hints": {}
+}

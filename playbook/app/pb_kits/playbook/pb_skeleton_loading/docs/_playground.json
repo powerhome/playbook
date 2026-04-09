@@ -1,0 +1,25 @@
+{
+  "template": "<SkeletonLoading{{props}} />",
+  "propTargets": {},
+  "defaults": {
+    "stack": 1,
+    "color": "default"
+  },
+  "groups": [
+    {
+      "name": "Props",
+      "props": [
+        "stack",
+        "color"
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default",
+      "props": {}
+    }
+  ],
+  "conditionals": {},
+  "hints": {}
+}

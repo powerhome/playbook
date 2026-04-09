@@ -1,0 +1,34 @@
+{
+  "template": "<Collapsible{{props}}>{{children}}</Collapsible>",
+  "propTargets": {},
+  "defaults": {
+    "tag": "div"
+  },
+  "children": {
+    "editable": true,
+    "default": "Collapsible content"
+  },
+  "groups": [
+    {
+      "name": "Props",
+      "props": [
+        "collapsed",
+        "icon",
+        "iconColor",
+        "iconSize",
+        "onIconClick",
+        "onClick",
+        "tag"
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default",
+      "props": {},
+      "children": "Collapsible content"
+    }
+  ],
+  "conditionals": {},
+  "hints": {}
+}

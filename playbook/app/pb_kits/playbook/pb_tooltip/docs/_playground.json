@@ -1,0 +1,39 @@
+{
+  "template": "<Tooltip{{props}}>{{children}}</Tooltip>",
+  "propTargets": {},
+  "defaults": {
+    "useClickToOpen": false,
+    "interaction": false
+  },
+  "children": {
+    "editable": true,
+    "default": "Tooltip content",
+    "hideWhenPropSet": [
+      "text"
+    ]
+  },
+  "groups": [
+    {
+      "name": "Props",
+      "props": [
+        "useClickToOpen",
+        "delay",
+        "icon",
+        "interaction",
+        "placement",
+        "text",
+        "showTooltip",
+        "forceOpenTooltip"
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default",
+      "props": {},
+      "children": "Tooltip content"
+    }
+  ],
+  "conditionals": {},
+  "hints": {}
+}

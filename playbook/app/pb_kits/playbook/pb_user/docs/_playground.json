@@ -1,0 +1,42 @@
+{
+  "template": "<User{{props}} />",
+  "propTargets": {},
+  "defaults": {
+    "align": "left",
+    "avatar": false,
+    "bold": true,
+    "avatarGrayscale": false,
+    "nameStyle": "title",
+    "orientation": "horizontal",
+    "size": "sm",
+    "titleStyle": "body"
+  },
+  "groups": [
+    {
+      "name": "Props",
+      "props": [
+        "align",
+        "avatar",
+        "avatarUrl",
+        "bold",
+        "avatarGrayscale",
+        "name",
+        "nameStyle",
+        "orientation",
+        "size",
+        "subtitle",
+        "territory",
+        "title",
+        "titleStyle"
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default",
+      "props": {}
+    }
+  ],
+  "conditionals": {},
+  "hints": {}
+}

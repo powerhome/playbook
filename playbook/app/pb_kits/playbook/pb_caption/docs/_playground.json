@@ -1,0 +1,36 @@
+{
+  "template": "<Caption{{props}}>{{children}}</Caption>",
+  "propTargets": {},
+  "defaults": {
+    "size": "md",
+    "tag": "div"
+  },
+  "children": {
+    "editable": true,
+    "default": "Caption content",
+    "hideWhenPropSet": [
+      "text"
+    ]
+  },
+  "groups": [
+    {
+      "name": "Props",
+      "props": [
+        "color",
+        "size",
+        "tag",
+        "text",
+        "variant"
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default",
+      "props": {},
+      "children": "Caption content"
+    }
+  ],
+  "conditionals": {},
+  "hints": {}
+}

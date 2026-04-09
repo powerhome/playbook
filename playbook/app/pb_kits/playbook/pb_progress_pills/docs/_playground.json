@@ -1,0 +1,29 @@
+{
+  "template": "<ProgressPills{{props}} />",
+  "propTargets": {},
+  "defaults": {
+    "active": 0,
+    "fullWidthPill": false,
+    "steps": 3
+  },
+  "groups": [
+    {
+      "name": "Props",
+      "props": [
+        "active",
+        "fullWidthPill",
+        "steps",
+        "title",
+        "value"
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default",
+      "props": {}
+    }
+  ],
+  "conditionals": {},
+  "hints": {}
+}

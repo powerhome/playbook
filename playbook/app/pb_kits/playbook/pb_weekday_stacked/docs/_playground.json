@@ -1,0 +1,28 @@
+{
+  "template": "<WeekdayStacked{{props}} />",
+  "propTargets": {},
+  "defaults": {
+    "align": "left",
+    "variant": "month_day",
+    "compact": false
+  },
+  "groups": [
+    {
+      "name": "Props",
+      "props": [
+        "align",
+        "date",
+        "variant",
+        "compact"
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default",
+      "props": {}
+    }
+  ],
+  "conditionals": {},
+  "hints": {}
+}

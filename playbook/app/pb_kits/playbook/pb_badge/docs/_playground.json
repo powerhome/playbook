@@ -1,0 +1,37 @@
+{
+  "template": "<Badge{{props}}>{{children}}</Badge>",
+  "propTargets": {},
+  "defaults": {
+    "rounded": false,
+    "variant": "neutral"
+  },
+  "children": {
+    "editable": true,
+    "default": "Badge content",
+    "hideWhenPropSet": [
+      "text"
+    ]
+  },
+  "groups": [
+    {
+      "name": "Props",
+      "props": [
+        "removeIcon",
+        "removeOnClick",
+        "rounded",
+        "tabIndex",
+        "text",
+        "variant"
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default",
+      "props": {},
+      "children": "Badge content"
+    }
+  ],
+  "conditionals": {},
+  "hints": {}
+}

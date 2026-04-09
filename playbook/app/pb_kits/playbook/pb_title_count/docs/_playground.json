@@ -1,0 +1,27 @@
+{
+  "template": "<TitleCount{{props}} />",
+  "propTargets": {},
+  "defaults": {
+    "align": "left",
+    "size": "sm"
+  },
+  "groups": [
+    {
+      "name": "Props",
+      "props": [
+        "align",
+        "count",
+        "title",
+        "size"
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default",
+      "props": {}
+    }
+  ],
+  "conditionals": {},
+  "hints": {}
+}

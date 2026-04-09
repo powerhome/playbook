@@ -1,0 +1,31 @@
+{
+  "template": "<TimeRangeInline{{props}} />",
+  "propTargets": {},
+  "defaults": {
+    "alignment": "left",
+    "size": "sm",
+    "icon": false,
+    "timezone": false
+  },
+  "groups": [
+    {
+      "name": "Props",
+      "props": [
+        "alignment",
+        "size",
+        "icon",
+        "timezone",
+        "startTime",
+        "endTime"
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default",
+      "props": {}
+    }
+  ],
+  "conditionals": {},
+  "hints": {}
+}

@@ -1,0 +1,25 @@
+{
+  "template": "<IconValue{{props}} />",
+  "propTargets": {},
+  "defaults": {
+    "align": "left"
+  },
+  "groups": [
+    {
+      "name": "Props",
+      "props": [
+        "align",
+        "icon",
+        "text"
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default",
+      "props": {}
+    }
+  ],
+  "conditionals": {},
+  "hints": {}
+}

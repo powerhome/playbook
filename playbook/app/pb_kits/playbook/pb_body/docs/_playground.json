@@ -1,0 +1,40 @@
+{
+  "template": "<Body{{props}}>{{children}}</Body>",
+  "propTargets": {},
+  "defaults": {
+    "color": "default",
+    "highlighting": false,
+    "status": "neutral",
+    "tag": "div"
+  },
+  "children": {
+    "editable": true,
+    "default": "Body content",
+    "hideWhenPropSet": [
+      "text"
+    ]
+  },
+  "groups": [
+    {
+      "name": "Props",
+      "props": [
+        "color",
+        "highlightedText",
+        "highlighting",
+        "status",
+        "tag",
+        "text",
+        "variant"
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default",
+      "props": {},
+      "children": "Body content"
+    }
+  ],
+  "conditionals": {},
+  "hints": {}
+}

@@ -1,0 +1,28 @@
+{
+  "template": "<Contact{{props}} />",
+  "propTargets": {},
+  "defaults": {
+    "iconEnabled": true,
+    "unstyled": false
+  },
+  "groups": [
+    {
+      "name": "Props",
+      "props": [
+        "contactDetail",
+        "contactType",
+        "contactValue",
+        "iconEnabled",
+        "unstyled"
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default",
+      "props": {}
+    }
+  ],
+  "conditionals": {},
+  "hints": {}
+}

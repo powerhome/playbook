@@ -1,0 +1,30 @@
+{
+  "template": "<SectionSeparator{{props}} />",
+  "propTargets": {},
+  "defaults": {
+    "color": "default",
+    "lineStyle": "solid",
+    "orientation": "horizontal",
+    "variant": "card"
+  },
+  "groups": [
+    {
+      "name": "Props",
+      "props": [
+        "color",
+        "lineStyle",
+        "orientation",
+        "text",
+        "variant"
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default",
+      "props": {}
+    }
+  ],
+  "conditionals": {},
+  "hints": {}
+}

@@ -1,0 +1,37 @@
+{
+  "template": "<SelectableCardIcon{{props}} />",
+  "propTargets": {},
+  "defaults": {
+    "checked": false,
+    "checkmark": false,
+    "disabled": false,
+    "multi": true
+  },
+  "groups": [
+    {
+      "name": "Props",
+      "props": [
+        "checked",
+        "checkmark",
+        "customIcon",
+        "disabled",
+        "icon",
+        "inputId",
+        "multi",
+        "name",
+        "titleText",
+        "bodyText",
+        "value",
+        "onChange"
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default",
+      "props": {}
+    }
+  ],
+  "conditionals": {},
+  "hints": {}
+}

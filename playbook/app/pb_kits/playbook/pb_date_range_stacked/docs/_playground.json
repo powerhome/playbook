@@ -1,0 +1,22 @@
+{
+  "template": "<DateRangeStacked{{props}} />",
+  "propTargets": {},
+  "defaults": {},
+  "groups": [
+    {
+      "name": "Props",
+      "props": [
+        "endDate",
+        "startDate"
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default",
+      "props": {}
+    }
+  ],
+  "conditionals": {},
+  "hints": {}
+}

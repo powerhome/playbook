@@ -1,0 +1,34 @@
+{
+  "template": "<Pill{{props}}>{{children}}</Pill>",
+  "propTargets": {},
+  "defaults": {
+    "variant": "neutral",
+    "textTransform": "lowercase"
+  },
+  "children": {
+    "editable": true,
+    "default": "Pill content",
+    "hideWhenPropSet": [
+      "text"
+    ]
+  },
+  "groups": [
+    {
+      "name": "Props",
+      "props": [
+        "text",
+        "variant",
+        "textTransform"
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default",
+      "props": {},
+      "children": "Pill content"
+    }
+  ],
+  "conditionals": {},
+  "hints": {}
+}

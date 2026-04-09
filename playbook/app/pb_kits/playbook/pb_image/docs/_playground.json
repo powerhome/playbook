@@ -1,0 +1,29 @@
+{
+  "template": "<Image{{props}} />",
+  "propTargets": {},
+  "defaults": {
+    "rounded": false,
+    "size": "none",
+    "transition": "fade"
+  },
+  "groups": [
+    {
+      "name": "Props",
+      "props": [
+        "alt",
+        "rounded",
+        "size",
+        "transition",
+        "url"
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default",
+      "props": {}
+    }
+  ],
+  "conditionals": {},
+  "hints": {}
+}

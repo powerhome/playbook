@@ -1,0 +1,23 @@
+{
+  "template": "<PersonContact{{props}} />",
+  "propTargets": {},
+  "defaults": {},
+  "groups": [
+    {
+      "name": "Props",
+      "props": [
+        "firstName",
+        "lastName",
+        "contacts"
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default",
+      "props": {}
+    }
+  ],
+  "conditionals": {},
+  "hints": {}
+}

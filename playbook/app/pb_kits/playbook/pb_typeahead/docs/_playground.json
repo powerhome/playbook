@@ -1,0 +1,50 @@
+{
+  "template": "<Typeahead{{props}} />",
+  "propTargets": {},
+  "defaults": {
+    "async": false,
+    "createable": false,
+    "disabled": false,
+    "error": "",
+    "inputDisplay": "pills",
+    "required": false,
+    "requiredIndicator": false,
+    "clearOnContextChange": true,
+    "preserveSearchInput": false
+  },
+  "groups": [
+    {
+      "name": "Props",
+      "props": [
+        "async",
+        "components",
+        "createable",
+        "disabled",
+        "error",
+        "inputDisplay",
+        "label",
+        "loadOptions",
+        "getOptionLabel",
+        "getOptionValue",
+        "name",
+        "options",
+        "onChange",
+        "optionsByContext",
+        "required",
+        "requiredIndicator",
+        "validation",
+        "searchContextSelector",
+        "clearOnContextChange",
+        "preserveSearchInput"
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default",
+      "props": {}
+    }
+  ],
+  "conditionals": {},
+  "hints": {}
+}

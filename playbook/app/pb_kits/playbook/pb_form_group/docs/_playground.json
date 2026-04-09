@@ -1,0 +1,23 @@
+{
+  "template": "<FormGroup{{props}} />",
+  "propTargets": {},
+  "defaults": {
+    "fullWidth": false
+  },
+  "groups": [
+    {
+      "name": "Props",
+      "props": [
+        "fullWidth"
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default",
+      "props": {}
+    }
+  ],
+  "conditionals": {},
+  "hints": {}
+}

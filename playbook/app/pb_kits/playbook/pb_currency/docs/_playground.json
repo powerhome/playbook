@@ -1,0 +1,44 @@
+{
+  "template": "<Currency{{props}} />",
+  "propTargets": {},
+  "defaults": {
+    "abbreviate": false,
+    "align": "left",
+    "decimals": "default",
+    "emphasized": true,
+    "label": "",
+    "size": "md",
+    "symbol": "$",
+    "variant": "default",
+    "unstyled": false,
+    "commaSeparator": false
+  },
+  "groups": [
+    {
+      "name": "Props",
+      "props": [
+        "abbreviate",
+        "align",
+        "amount",
+        "decimals",
+        "emphasized",
+        "label",
+        "nullDisplay",
+        "size",
+        "symbol",
+        "variant",
+        "unit",
+        "unstyled",
+        "commaSeparator"
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default",
+      "props": {}
+    }
+  ],
+  "conditionals": {},
+  "hints": {}
+}

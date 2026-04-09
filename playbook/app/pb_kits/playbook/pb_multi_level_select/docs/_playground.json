@@ -1,0 +1,50 @@
+{
+  "template": "<MultiLevelSelect{{props}} />",
+  "propTargets": {},
+  "defaults": {
+    "disabled": false,
+    "error": "",
+    "inputDisplay": "pills",
+    "inputName": "",
+    "label": "",
+    "required": false,
+    "requiredIndicator": false,
+    "returnAllSelected": false,
+    "showCheckedChildren": true,
+    "placeholder": "Start typing...",
+    "variant": "multi",
+    "wrapped": false
+  },
+  "groups": [
+    {
+      "name": "Props",
+      "props": [
+        "disabled",
+        "error",
+        "inputDisplay",
+        "inputName",
+        "label",
+        "name",
+        "required",
+        "requiredIndicator",
+        "returnAllSelected",
+        "showCheckedChildren",
+        "treeData",
+        "onChange",
+        "onSelect",
+        "placeholder",
+        "selectedIds",
+        "variant",
+        "wrapped"
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default",
+      "props": {}
+    }
+  ],
+  "conditionals": {},
+  "hints": {}
+}

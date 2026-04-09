@@ -1,0 +1,27 @@
+{
+  "template": "<OnlineStatus{{props}} />",
+  "propTargets": {},
+  "defaults": {
+    "status": "offline",
+    "size": "sm",
+    "noBorder": false
+  },
+  "groups": [
+    {
+      "name": "Props",
+      "props": [
+        "status",
+        "size",
+        "noBorder"
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default",
+      "props": {}
+    }
+  ],
+  "conditionals": {},
+  "hints": {}
+}

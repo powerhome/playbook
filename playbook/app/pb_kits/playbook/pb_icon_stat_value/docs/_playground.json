@@ -1,0 +1,33 @@
+{
+  "template": "<IconStatValue{{props}} />",
+  "propTargets": {},
+  "defaults": {
+    "orientation": "horizontal",
+    "size": "sm",
+    "text": "",
+    "unit": "",
+    "variant": "default"
+  },
+  "groups": [
+    {
+      "name": "Props",
+      "props": [
+        "icon",
+        "orientation",
+        "size",
+        "text",
+        "unit",
+        "value",
+        "variant"
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default",
+      "props": {}
+    }
+  ],
+  "conditionals": {},
+  "hints": {}
+}

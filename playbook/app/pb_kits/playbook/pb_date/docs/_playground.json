@@ -1,0 +1,34 @@
+{
+  "template": "<Date{{props}} />",
+  "propTargets": {},
+  "defaults": {
+    "alignment": "left",
+    "showDayOfWeek": false,
+    "showCurrentYear": false,
+    "showIcon": false,
+    "size": "md",
+    "unstyled": false
+  },
+  "groups": [
+    {
+      "name": "Props",
+      "props": [
+        "alignment",
+        "showDayOfWeek",
+        "showCurrentYear",
+        "showIcon",
+        "size",
+        "unstyled",
+        "value"
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default",
+      "props": {}
+    }
+  ],
+  "conditionals": {},
+  "hints": {}
+}

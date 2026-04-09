@@ -1,0 +1,36 @@
+{
+  "template": "<FixedConfirmationToast{{props}} />",
+  "propTargets": {},
+  "defaults": {
+    "closeable": false,
+    "multiLine": false,
+    "navMarginTop": false,
+    "status": "neutral"
+  },
+  "groups": [
+    {
+      "name": "Props",
+      "props": [
+        "autoClose",
+        "closeable",
+        "horizontal",
+        "icon",
+        "multiLine",
+        "navMarginTop",
+        "onClose",
+        "open",
+        "status",
+        "text",
+        "vertical"
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default",
+      "props": {}
+    }
+  ],
+  "conditionals": {},
+  "hints": {}
+}

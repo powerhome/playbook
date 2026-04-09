@@ -1,0 +1,26 @@
+{
+  "template": "<TimeStacked{{props}} />",
+  "propTargets": {},
+  "defaults": {
+    "align": "left"
+  },
+  "groups": [
+    {
+      "name": "Props",
+      "props": [
+        "align",
+        "date",
+        "time",
+        "timeZone"
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default",
+      "props": {}
+    }
+  ],
+  "conditionals": {},
+  "hints": {}
+}

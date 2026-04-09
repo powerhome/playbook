@@ -1,0 +1,45 @@
+{
+  "template": "<Textarea{{props}} />",
+  "propTargets": {},
+  "defaults": {
+    "disabled": false,
+    "emojiMask": false,
+    "inline": false,
+    "requiredIndicator": false,
+    "rows": 4,
+    "resize": "none"
+  },
+  "groups": [
+    {
+      "name": "Props",
+      "props": [
+        "characterCount",
+        "disabled",
+        "emojiMask",
+        "error",
+        "inline",
+        "inputOptions",
+        "object",
+        "method",
+        "label",
+        "maxCharacters",
+        "placeholder",
+        "value",
+        "name",
+        "required",
+        "requiredIndicator",
+        "rows",
+        "resize",
+        "onChange"
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default",
+      "props": {}
+    }
+  ],
+  "conditionals": {},
+  "hints": {}
+}

@@ -8,7 +8,9 @@
   ],
   "props": {
     "alt": {
+      "type": "string",
       "platforms": [
+        "react",
         "rails"
       ]
     },
@@ -21,6 +23,7 @@
     },
     "rounded": {
       "platforms": [
+        "react",
         "rails"
       ],
       "type": "boolean",
@@ -28,6 +31,7 @@
     },
     "size": {
       "platforms": [
+        "react",
         "rails"
       ],
       "type": "enum",
@@ -43,6 +47,7 @@
     },
     "transition": {
       "platforms": [
+        "react",
         "rails"
       ],
       "type": "enum",
@@ -55,7 +60,9 @@
       "default": "fade"
     },
     "url": {
+      "type": "string",
       "platforms": [
+        "react",
         "rails"
       ]
     }

@@ -1,0 +1,39 @@
+{
+  "template": "<StarRating{{props}} />",
+  "propTargets": {},
+  "defaults": {
+    "layoutOption": "default",
+    "rating": 0,
+    "denominator": 5,
+    "colorOption": "yellow",
+    "backgroundType": "fill",
+    "size": "sm",
+    "variant": "display"
+  },
+  "groups": [
+    {
+      "name": "Props",
+      "props": [
+        "fixedWidth",
+        "layoutOption",
+        "icon",
+        "label",
+        "rating",
+        "denominator",
+        "colorOption",
+        "backgroundType",
+        "size",
+        "variant",
+        "onClick"
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default",
+      "props": {}
+    }
+  ],
+  "conditionals": {},
+  "hints": {}
+}

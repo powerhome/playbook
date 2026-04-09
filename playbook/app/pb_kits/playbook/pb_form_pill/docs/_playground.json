@@ -1,0 +1,35 @@
+{
+  "template": "<FormPill{{props}} />",
+  "propTargets": {},
+  "defaults": {
+    "textTransform": "none",
+    "color": "primary",
+    "wrapped": false
+  },
+  "groups": [
+    {
+      "name": "Props",
+      "props": [
+        "text",
+        "name",
+        "onClick",
+        "avatar",
+        "avatarUrl",
+        "size",
+        "textTransform",
+        "color",
+        "tabIndex",
+        "icon",
+        "wrapped"
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default",
+      "props": {}
+    }
+  ],
+  "conditionals": {},
+  "hints": {}
+}

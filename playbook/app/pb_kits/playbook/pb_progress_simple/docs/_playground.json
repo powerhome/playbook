@@ -1,0 +1,30 @@
+{
+  "template": "<ProgressSimple{{props}} />",
+  "propTargets": {},
+  "defaults": {
+    "align": "left",
+    "muted": false,
+    "variant": "default"
+  },
+  "groups": [
+    {
+      "name": "Props",
+      "props": [
+        "align",
+        "max",
+        "muted",
+        "percent",
+        "value",
+        "variant"
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default",
+      "props": {}
+    }
+  ],
+  "conditionals": {},
+  "hints": {}
+}

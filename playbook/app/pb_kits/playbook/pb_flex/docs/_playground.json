@@ -1,0 +1,46 @@
+{
+  "template": "<Flex{{props}}>{{children}}</Flex>",
+  "propTargets": {},
+  "defaults": {
+    "horizontal": "left",
+    "justify": "none",
+    "inline": false,
+    "orientation": "row",
+    "spacing": "none",
+    "reverse": false,
+    "vertical": "top",
+    "align": "none",
+    "wrap": false,
+    "alignSelf": "none"
+  },
+  "children": {
+    "editable": true,
+    "default": "Flex content"
+  },
+  "groups": [
+    {
+      "name": "Props",
+      "props": [
+        "horizontal",
+        "justify",
+        "inline",
+        "orientation",
+        "spacing",
+        "reverse",
+        "vertical",
+        "align",
+        "wrap",
+        "alignSelf"
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default",
+      "props": {},
+      "children": "Flex content"
+    }
+  ],
+  "conditionals": {},
+  "hints": {}
+}

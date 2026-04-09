@@ -1,0 +1,44 @@
+{
+  "template": "<TimePicker{{props}} />",
+  "propTargets": {},
+  "defaults": {
+    "disabled": false,
+    "label": "Time Picker",
+    "required": false,
+    "requiredIndicator": false,
+    "showTimezone": false,
+    "timeFormat": "AMPM",
+    "validationMessage": ""
+  },
+  "groups": [
+    {
+      "name": "Props",
+      "props": [
+        "defaultTime",
+        "disabled",
+        "error",
+        "inputOptions",
+        "label",
+        "maxTime",
+        "minTime",
+        "name",
+        "onChange",
+        "onClose",
+        "required",
+        "requiredIndicator",
+        "showTimezone",
+        "timeFormat",
+        "validationMessage",
+        "value"
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default",
+      "props": {}
+    }
+  ],
+  "conditionals": {},
+  "hints": {}
+}

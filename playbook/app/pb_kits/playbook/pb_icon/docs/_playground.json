@@ -1,0 +1,43 @@
+{
+  "template": "<Icon{{props}} />",
+  "propTargets": {},
+  "defaults": {
+    "border": false,
+    "fixedWidth": true,
+    "inverse": false,
+    "listItem": false,
+    "pulse": false,
+    "fontStyle": "far",
+    "spin": false
+  },
+  "groups": [
+    {
+      "name": "Props",
+      "props": [
+        "border",
+        "color",
+        "customIcon",
+        "fixedWidth",
+        "flip",
+        "icon",
+        "inverse",
+        "listItem",
+        "pull",
+        "pulse",
+        "rotation",
+        "size",
+        "fontStyle",
+        "spin",
+        "tabIndex"
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default",
+      "props": {}
+    }
+  ],
+  "conditionals": {},
+  "hints": {}
+}

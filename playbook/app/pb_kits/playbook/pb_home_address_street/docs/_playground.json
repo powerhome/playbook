@@ -1,0 +1,37 @@
+{
+  "template": "<HomeAddressStreet{{props}} />",
+  "propTargets": {},
+  "defaults": {
+    "preserveCase": false,
+    "emphasis": "street",
+    "newWindow": false
+  },
+  "groups": [
+    {
+      "name": "Props",
+      "props": [
+        "address",
+        "addressCont",
+        "city",
+        "preserveCase",
+        "emphasis",
+        "homeId",
+        "houseStyle",
+        "homeUrl",
+        "target",
+        "newWindow",
+        "state",
+        "zipcode",
+        "territory"
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default",
+      "props": {}
+    }
+  ],
+  "conditionals": {},
+  "hints": {}
+}

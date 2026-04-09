@@ -1,0 +1,26 @@
+{
+  "template": "<MultipleUsersStacked{{props}} />",
+  "propTargets": {},
+  "defaults": {
+    "size": "sm",
+    "variant": "default"
+  },
+  "groups": [
+    {
+      "name": "Props",
+      "props": [
+        "size",
+        "users",
+        "variant"
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default",
+      "props": {}
+    }
+  ],
+  "conditionals": {},
+  "hints": {}
+}

@@ -1,0 +1,25 @@
+{
+  "template": "<TitleDetail{{props}} />",
+  "propTargets": {},
+  "defaults": {
+    "align": "left"
+  },
+  "groups": [
+    {
+      "name": "Props",
+      "props": [
+        "align",
+        "detail",
+        "title"
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default",
+      "props": {}
+    }
+  ],
+  "conditionals": {},
+  "hints": {}
+}

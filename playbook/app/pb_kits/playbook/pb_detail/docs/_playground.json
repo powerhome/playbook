@@ -1,0 +1,36 @@
+{
+  "template": "<Detail{{props}}>{{children}}</Detail>",
+  "propTargets": {},
+  "defaults": {
+    "bold": false,
+    "color": "light",
+    "tag": "div"
+  },
+  "children": {
+    "editable": true,
+    "default": "Detail content",
+    "hideWhenPropSet": [
+      "text"
+    ]
+  },
+  "groups": [
+    {
+      "name": "Props",
+      "props": [
+        "bold",
+        "color",
+        "tag",
+        "text"
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default",
+      "props": {},
+      "children": "Detail content"
+    }
+  ],
+  "conditionals": {},
+  "hints": {}
+}

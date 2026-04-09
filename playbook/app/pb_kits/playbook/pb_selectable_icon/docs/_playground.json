@@ -1,0 +1,35 @@
+{
+  "template": "<SelectableIcon{{props}} />",
+  "propTargets": {},
+  "defaults": {
+    "checked": false,
+    "disabled": false,
+    "inputs": "enabled",
+    "multi": true
+  },
+  "groups": [
+    {
+      "name": "Props",
+      "props": [
+        "checked",
+        "customIcon",
+        "disabled",
+        "icon",
+        "inputId",
+        "inputs",
+        "multi",
+        "name",
+        "text",
+        "value"
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default",
+      "props": {}
+    }
+  ],
+  "conditionals": {},
+  "hints": {}
+}

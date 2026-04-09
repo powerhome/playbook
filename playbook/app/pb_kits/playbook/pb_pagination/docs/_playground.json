@@ -1,0 +1,24 @@
+{
+  "template": "<Pagination{{props}} />",
+  "propTargets": {},
+  "defaults": {},
+  "groups": [
+    {
+      "name": "Props",
+      "props": [
+        "current",
+        "onChange",
+        "range",
+        "total"
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default",
+      "props": {}
+    }
+  ],
+  "conditionals": {},
+  "hints": {}
+}

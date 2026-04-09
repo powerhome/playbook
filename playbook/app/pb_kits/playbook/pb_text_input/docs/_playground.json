@@ -1,0 +1,41 @@
+{
+  "template": "<TextInput{{props}} />",
+  "propTargets": {},
+  "defaults": {
+    "disabled": false,
+    "emojiMask": false,
+    "inline": false,
+    "required": false,
+    "requiredIndicator": false,
+    "type": "text"
+  },
+  "groups": [
+    {
+      "name": "Props",
+      "props": [
+        "disabled",
+        "emojiMask",
+        "error",
+        "inline",
+        "name",
+        "label",
+        "mask",
+        "onChange",
+        "placeholder",
+        "required",
+        "requiredIndicator",
+        "type",
+        "value",
+        "autoComplete"
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default",
+      "props": {}
+    }
+  ],
+  "conditionals": {},
+  "hints": {}
+}

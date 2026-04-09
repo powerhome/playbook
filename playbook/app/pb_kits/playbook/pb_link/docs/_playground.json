@@ -1,0 +1,43 @@
+{
+  "template": "<Link{{props}}>{{children}}</Link>",
+  "propTargets": {},
+  "defaults": {
+    "color": "default",
+    "disabled": false,
+    "tag": "a",
+    "underline": false
+  },
+  "children": {
+    "editable": true,
+    "default": "Link content",
+    "hideWhenPropSet": [
+      "text"
+    ]
+  },
+  "groups": [
+    {
+      "name": "Props",
+      "props": [
+        "color",
+        "disabled",
+        "href",
+        "icon",
+        "iconRight",
+        "tabIndex",
+        "tag",
+        "target",
+        "text",
+        "underline"
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default",
+      "props": {},
+      "children": "Link content"
+    }
+  ],
+  "conditionals": {},
+  "hints": {}
+}

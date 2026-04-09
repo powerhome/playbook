@@ -1,0 +1,40 @@
+{
+  "template": "<RichTextEditor{{props}} />",
+  "propTargets": {},
+  "defaults": {},
+  "groups": [
+    {
+      "name": "Props",
+      "props": [
+        "advancedEditor",
+        "advancedEditorToolbar",
+        "toolbarBottom",
+        "focus",
+        "inputOptions",
+        "inline",
+        "label",
+        "extensions",
+        "name",
+        "onChange",
+        "placeholder",
+        "inputHeight",
+        "inputMinHeight",
+        "requiredIndicator",
+        "simple",
+        "sticky",
+        "template",
+        "value",
+        "TrixEditor",
+        "trixInstance"
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default",
+      "props": {}
+    }
+  ],
+  "conditionals": {},
+  "hints": {}
+}

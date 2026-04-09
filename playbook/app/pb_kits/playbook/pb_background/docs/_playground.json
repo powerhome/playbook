@@ -1,0 +1,40 @@
+{
+  "template": "<Background{{props}}>{{children}}</Background>",
+  "propTargets": {},
+  "defaults": {
+    "backgroundColor": "light",
+    "backgroundSize": "cover",
+    "backgroundRepeat": "initial",
+    "tag": "div"
+  },
+  "children": {
+    "editable": true,
+    "default": "Background content"
+  },
+  "groups": [
+    {
+      "name": "Props",
+      "props": [
+        "alt",
+        "backgroundColor",
+        "backgroundSize",
+        "backgroundPosition",
+        "backgroundRepeat",
+        "imageUrl",
+        "imageOverlay",
+        "customColor",
+        "tag",
+        "transition"
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default",
+      "props": {},
+      "children": "Background content"
+    }
+  ],
+  "conditionals": {},
+  "hints": {}
+}

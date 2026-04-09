@@ -1,0 +1,30 @@
+{
+  "template": "<CopyButton{{props}} />",
+  "propTargets": {},
+  "defaults": {
+    "tooltipText": "Copied!",
+    "variant": "icon"
+  },
+  "groups": [
+    {
+      "name": "Props",
+      "props": [
+        "from",
+        "text",
+        "tooltipPlacement",
+        "tooltipText",
+        "value",
+        "variant",
+        "timeout"
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default",
+      "props": {}
+    }
+  ],
+  "conditionals": {},
+  "hints": {}
+}
