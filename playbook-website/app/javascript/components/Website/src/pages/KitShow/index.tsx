@@ -68,11 +68,6 @@ const KitShow = () => {
         {/* Navigation Tabs */}
         <Nav orientation="horizontal" paddingX="xl">
           <NavItem
-            text="Playground"
-            active={activeTab === "playground"}
-            onClick={() => setActiveTab("playground")}
-          />
-          <NavItem
             text="Docs"
             active={activeTab === "docs"}
             onClick={() => setActiveTab("docs")}
@@ -83,6 +78,13 @@ const KitShow = () => {
             onClick={() => setActiveTab("props")}
           />
           <NavItem
+            text="Playground"
+            active={activeTab === "playground"}
+            onClick={() => setActiveTab("playground")}
+          />
+
+          {/* Building Blocks and References tabs, commented out until building blocks and references are implemented */}
+          {/* <NavItem
             text="Building Blocks"
             active={activeTab === "building-blocks"}
             onClick={() => setActiveTab("building-blocks")}
@@ -91,7 +93,7 @@ const KitShow = () => {
             text="References"
             active={activeTab === "references"}
             onClick={() => setActiveTab("references")}
-          />
+          /> */}
         </Nav>
         <SectionSeparator marginBottom="lg" />
 
@@ -119,11 +121,11 @@ const KitShow = () => {
         {/* Props Tab Content */}
         {activeTab === "props" && <PropsTab availableProps={available_props} />}
 
-        {/* Building Blocks Tab Content */}
-        {activeTab === "building-blocks" && <BuildingBlocksTab />}
+        {/* Building Blocks Tab Content, commented out until building blocks are implemented */}
+        {/* {activeTab === "building-blocks" && <BuildingBlocksTab />} */}
 
-        {/* References Tab Content */}
-        {activeTab === "references" && <ReferencesTab />}
+        {/* References Tab Content, commented out until references are implemented */}
+        {/* {activeTab === "references" && <ReferencesTab />} */}
       </PageContainer>
     </>
   );

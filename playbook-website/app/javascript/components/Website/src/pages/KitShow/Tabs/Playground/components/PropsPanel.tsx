@@ -39,11 +39,13 @@ export const PropsPanel: React.FC<PropsPanelProps> = ({
   const globalPropEntries = Object.entries(globalProps);
 
   return (
-    <Flex
+    <Card
       flexDirection="column"
-      htmlOptions={{ style: { width: "320px", minWidth: "320px" } }}
+      width="320px"
+      minWidth="320px"
+      height="100vh"
+      overflowY="auto"
     >
-      <Card padding="sm" height="100%" width="100%">
         <Flex justify="between" align="center" marginBottom="sm">
           <Title text="Props" size={4} />
           <Caption text={`${totalProps} available`} />
@@ -66,7 +68,6 @@ export const PropsPanel: React.FC<PropsPanelProps> = ({
 
         <Flex
           flexDirection="column"
-          htmlOptions={{ style: { maxHeight: "400px", overflowY: "auto" } }}
         >
           {groupedProps.map((group, groupIndex) => (
             <React.Fragment key={group.name || "ungrouped"}>
@@ -123,7 +124,6 @@ export const PropsPanel: React.FC<PropsPanelProps> = ({
             </Flex>
             <Flex
               flexDirection="column"
-              htmlOptions={{ style: { maxHeight: "300px", overflowY: "auto" } }}
             >
               {globalPropEntries.map(([name, definition]) => (
                 <PropControl
@@ -137,7 +137,6 @@ export const PropsPanel: React.FC<PropsPanelProps> = ({
             </Flex>
           </>
         )}
-      </Card>
-    </Flex>
+    </Card>
   );
 };
