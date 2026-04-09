@@ -1,0 +1,60 @@
+{
+  "$schema": "https://playbook.powerapp.cloud/schemas/kit-schema.json",
+  "name": "TimeStacked",
+  "description": "TimeStacked component",
+  "platforms": [
+    "react",
+    "rails"
+  ],
+  "props": {
+    "align": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "left",
+        "center",
+        "right"
+      ],
+      "default": "left"
+    },
+    "date": {
+      "type": "Date",
+      "platforms": [
+        "react"
+      ]
+    },
+    "time": {
+      "type": "number | Date",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "timeZone": {
+      "type": "string",
+      "platforms": [
+        "react"
+      ]
+    },
+    "timezone": {
+      "platforms": [
+        "rails"
+      ],
+      "default": "America/New_York"
+    }
+  },
+  "globalProps": true,
+  "usage": {
+    "react": {
+      "import": "import { TimeStacked } from 'playbook-ui'",
+      "example": "<TimeStacked align=\"left\"></TimeStacked>"
+    },
+    "rails": {
+      "import": null,
+      "example": "<%= pb_rails(\"time_stacked\", props: { align: \"left\" }) %>"
+    }
+  }
+}

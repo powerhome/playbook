@@ -43,6 +43,11 @@ $pb_button_styles: (
       @include pb_circle_icon_button;
     }
   }
+
+  .pb_button_kit.pb_button_loading svg.loading-icon {
+    position: absolute;
+  }
+
   :first-child {
     &.pb_button_kit.pb_button_link {
       @include pb_circle_icon_button_active;

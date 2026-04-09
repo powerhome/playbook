@@ -42,6 +42,7 @@ export { default as AdvancedTableInfiniteScroll} from './_advanced_table_infinit
 export {default as AdvancedTableWithCustomHeader} from './_advanced_table_with_custom_header.jsx'
 export { default as AdvancedTableCustomSort } from './_advanced_table_custom_sort.jsx'
 export { default as AdvancedTableWithCustomHeaderMultiHeader } from './_advanced_table_with_custom_header_multi_header.jsx'
+export { default as AdvancedTableGroupedHeadersComposition } from './_advanced_table_grouped_headers_composition.jsx'
 export { default as AdvancedTableSortPerColumn } from './_advanced_table_sort_per_column.jsx'
 export { default as AdvancedTableSortPerColumnForMultiColumn } from './_advanced_table_sort_per_column_for_multi_column.jsx'
 export { default as AdvancedTablePaddingControl } from './_advanced_table_padding_control.jsx'
@@ -50,3 +51,4 @@ export { default as AdvancedTableColumnStylingBackground } from './_advanced_tab
 export { default as AdvancedTableColumnStylingBackgroundMulti } from './_advanced_table_column_styling_background_multi.jsx'
 export { default as AdvancedTableColumnStylingBackgroundCustom } from './_advanced_table_column_styling_background_custom.jsx'
 export { default as AdvancedTableCascadeCollapse } from './_advanced_table_cascade_collapse.jsx'
+export { default as AdvancedTableSortParentOnly } from './_advanced_table_sort_parent_only.jsx'

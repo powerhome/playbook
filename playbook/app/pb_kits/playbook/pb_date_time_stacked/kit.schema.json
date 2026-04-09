@@ -1,0 +1,62 @@
+{
+  "$schema": "https://playbook.powerapp.cloud/schemas/kit-schema.json",
+  "name": "DateTimeStacked",
+  "description": "DateTimeStacked component",
+  "platforms": [
+    "react",
+    "rails"
+  ],
+  "props": {
+    "date": {
+      "type": "Date",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "datetime": {
+      "type": "Date",
+      "platforms": [
+        "react"
+      ]
+    },
+    "timeZone": {
+      "type": "string",
+      "platforms": [
+        "react"
+      ]
+    },
+    "showCurrentYear": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "dateTime": {
+      "platforms": [
+        "rails"
+      ],
+      "type": "string"
+    },
+    "timezone": {
+      "platforms": [
+        "rails"
+      ],
+      "type": "string",
+      "default": "America/New_York"
+    }
+  },
+  "globalProps": true,
+  "usage": {
+    "react": {
+      "import": "import { DateTimeStacked } from 'playbook-ui'",
+      "example": "<DateTimeStacked></DateTimeStacked>"
+    },
+    "rails": {
+      "import": null,
+      "example": "<%= pb_rails(\"date_time_stacked\", props: { text: \"Example\" }) %>"
+    }
+  }
+}

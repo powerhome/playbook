@@ -1,3 +1,83 @@
+# Leaner, Faster, Smoother Rails! 💥
+##### April 03, 2026
+
+![release_image](https://github.com/user-attachments/assets/db119637-25e9-4157-9091-c5f7fdf034fc)
+
+We trimmed the fat and optimized the core for the base of our Rails kits: fewer allocations, faster classnames, and noticeably snappier renders!
+
+[16.5.0](https://github.com/powerhome/playbook/tree/16.5.0) full list of changes:
+
+**Kit Enhancements:**
+
+- Selectable Card Kit: Input Variant Style Updates [\#6002](https://github.com/powerhome/playbook/pull/6002) ([elisashapiro](https://github.com/elisashapiro))
+- Advanced Table: Pinned Rows Overlap Multi-header Rows [\#6001](https://github.com/powerhome/playbook/pull/6001) ([elisashapiro](https://github.com/elisashapiro))
+- Playbook Rails: Optimize Kit Base Rendering [\#5974](https://github.com/powerhome/playbook/pull/5974) ([terryfinn](https://github.com/terryfinn))
+- Global Props: Grouphover for All Hover Global Props [\#5973](https://github.com/powerhome/playbook/pull/5973) ([elisashapiro](https://github.com/elisashapiro))
+- Table Kit: External Filter Prop - Rails [\#5943](https://github.com/powerhome/playbook/pull/5943) ([kangaree](https://github.com/kangaree))
+- Multilevelselect: Placeholder Prop [\#5969](https://github.com/powerhome/playbook/pull/5969) ([elisashapiro](https://github.com/elisashapiro))
+- Advanced Table: Border Radius Remains [\#5964](https://github.com/powerhome/playbook/pull/5964) ([elisashapiro](https://github.com/elisashapiro))
+- List Kit: Border Token Revert, Keeping Selectable List Accessible [\#5944](https://github.com/powerhome/playbook/pull/5944) ([elisashapiro](https://github.com/elisashapiro))
+- Advanced Table Kit: Pinned Rows - Rails Only [\#5929](https://github.com/powerhome/playbook/pull/5929) ([kangaree](https://github.com/kangaree))
+
+
+**Fixed Bugs:**
+
+- Select Kit: Tie Labels With Ids - Rails [\#6000](https://github.com/powerhome/playbook/pull/6000) ([kangaree](https://github.com/kangaree))
+- Circle Icon Button: Loading Icon Misplacement - Rails [\#5961](https://github.com/powerhome/playbook/pull/5961) ([elisashapiro](https://github.com/elisashapiro))
+
+
+**Improvements:**
+
+- Update Dependency Trix to V2.1.16 (security) [\#5994](https://github.com/powerhome/playbook/pull/5994) ([renovate[bot]](https://github.com/apps/renovate))
+- Playbook Website: Document Advanced Table - Grouped Headers, Custom Headers, Sort, and Pinned Rows [\#5980](https://github.com/powerhome/playbook/pull/5980) ([kangaree](https://github.com/kangaree))
+- Playbook Website: Upgrades Playbook Icons [\#5993](https://github.com/powerhome/playbook/pull/5993) ([elisashapiro](https://github.com/elisashapiro))
+- Typeahead Docs: Better Way to Handle Highlighting Within Typeahead [\#5970](https://github.com/powerhome/playbook/pull/5970) ([nidaqg](https://github.com/nidaqg))
+- Playbook Website: Docs on Display Global Prop and Full Width Buttons [\#5968](https://github.com/powerhome/playbook/pull/5968) ([kangaree](https://github.com/kangaree))
+- Update Nokogiri and Dependencies [\#5937](https://github.com/powerhome/playbook/pull/5937) ([elisashapiro](https://github.com/elisashapiro))
+- Global Props: Update Position Global Prop Page to Display Inset [\#5930](https://github.com/powerhome/playbook/pull/5930) ([nickamantia](https://github.com/nickamantia))
+
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/v16.5.0-rc.5...16.5.0)
+
+# 🧠 Smarter Architecture, Faster UI
+##### March 17, 2026
+
+![release_image](https://github.com/user-attachments/assets/db119637-25e9-4157-9091-c5f7fdf034fc)
+
+This release tunes up React-rendered Rails kits and Enhanced Elements so everything runs a little faster and behaves a little nicer! Expect smoother mounting, more reliable interactions, and better flexibility for custom implementations
+
+[16.4.0](https://github.com/powerhome/playbook/tree/16.4.0) full list of changes:
+
+**Improvements:**
+
+- Popover Kit: Added Placement and Position Popover Docs [\#5936](https://github.com/powerhome/playbook/pull/5936) ([elisashapiro](https://github.com/elisashapiro))
+- Rich Text Editor: Make Trix an Optional Dependency in Playbook [\#5796](https://github.com/powerhome/playbook/pull/5796) ([nidaqg](https://github.com/nidaqg))
+
+
+**Kit Enhancements:**
+
+- Datepicker Kit: Guard Monthsdropdowncontainer Access In Datepicker Form Reset Handler [\#5920](https://github.com/powerhome/playbook/pull/5920) ([viniciusgama](https://github.com/viniciusgama))
+- React Rendered Rails Kits: Custom Events and Api Calls for Mounting and Unmounting [\#5919](https://github.com/powerhome/playbook/pull/5919) ([nidaqg](https://github.com/nidaqg))
+- Advanced Table: Sortparentonly - React [\#5905](https://github.com/powerhome/playbook/pull/5905) ([elisashapiro](https://github.com/elisashapiro))
+- Dropdown: Custom_event_type and Turbo/stimulus Docs [\#5896](https://github.com/powerhome/playbook/pull/5896) ([elisashapiro](https://github.com/elisashapiro))
+- Fixed Confirmation Toast: Navmargintop Boolean for Fcts Hidden by Top Navs [\#5893](https://github.com/powerhome/playbook/pull/5893) ([nickamantia](https://github.com/nickamantia))
+- Rich Text Editor: Add Deprecation Msg to Rails Rte [\#5903](https://github.com/powerhome/playbook/pull/5903) ([nidaqg](https://github.com/nidaqg))
+- Enhanced Element Kits: New Domhelper Utility [\#5891](https://github.com/powerhome/playbook/pull/5891) ([nidaqg](https://github.com/nidaqg))
+- Dropdown Kit: Close_on_click Prop - Rails [\#5878](https://github.com/powerhome/playbook/pull/5878) ([kangaree](https://github.com/kangaree))
+- Advanced Table: Cascading Collapse - React [\#5887](https://github.com/powerhome/playbook/pull/5887) ([elisashapiro](https://github.com/elisashapiro))
+- Table Kit: Cardprops and Titleprops for Withfilter Variant [\#5871](https://github.com/powerhome/playbook/pull/5871) ([nidaqg](https://github.com/nidaqg))
+
+
+**Fixed Bugs:**
+
+- Playbook Website: Doc Example Anchor Links & Copy Icon Not Working [\#5898](https://github.com/powerhome/playbook/pull/5898) ([elisashapiro](https://github.com/elisashapiro))
+- Multilevelselect: Fixes for Default Variant Not Retaining Selection [\#5897](https://github.com/powerhome/playbook/pull/5897) ([nidaqg](https://github.com/nidaqg))
+- Button Kit: Loading Button Scrolling Away When In Dialog [\#5892](https://github.com/powerhome/playbook/pull/5892) ([nidaqg](https://github.com/nidaqg))
+- React Rendered Rails Kits: Fixes for Async Typeahead and Mls Interaction Issue [\#5882](https://github.com/powerhome/playbook/pull/5882) ([nidaqg](https://github.com/nidaqg))
+
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/v16.4.0-rc.5...16.4.0)
+
 # 💥 Big Contrast Energy 💥
 ##### February 25, 2026
 

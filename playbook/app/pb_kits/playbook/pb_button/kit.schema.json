@@ -1,0 +1,207 @@
+{
+  "$schema": "https://playbook.powerapp.cloud/schemas/kit-schema.json",
+  "name": "Button",
+  "description": "Button component",
+  "platforms": [
+    "react",
+    "rails"
+  ],
+  "props": {
+    "count": {
+      "type": "number",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "disabled": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "fixedWidth": {
+      "type": "boolean",
+      "platforms": [
+        "react"
+      ]
+    },
+    "form": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": null
+    },
+    "fullWidth": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "highlight": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "icon": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "iconRight": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "link": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "loading": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "newWindow": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "onClick": {
+      "type": "function",
+      "platforms": [
+        "react"
+      ]
+    },
+    "tabIndex": {
+      "type": "number",
+      "platforms": [
+        "react"
+      ]
+    },
+    "size": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "sm",
+        "md",
+        "lg"
+      ],
+      "default": null
+    },
+    "target": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "text": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "type": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "inline"
+      ],
+      "default": "inline"
+    },
+    "htmlType": {
+      "type": "enum",
+      "platforms": [
+        "react"
+      ],
+      "values": [
+        "submit",
+        "reset",
+        "button"
+      ]
+    },
+    "value": {
+      "type": "string | null",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "variant": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "primary",
+        "secondary",
+        "link",
+        "danger",
+        "reaction"
+      ],
+      "default": "primary"
+    },
+    "wrapperClass": {
+      "type": "string",
+      "platforms": [
+        "react"
+      ]
+    },
+    "iconFontFamily": {
+      "platforms": [
+        "rails"
+      ],
+      "type": "enum",
+      "values": [
+        "far",
+        "fas",
+        "fab",
+        "fak"
+      ],
+      "default": "far"
+    }
+  },
+  "globalProps": true,
+  "usage": {
+    "react": {
+      "import": "import { Button } from 'playbook-ui'",
+      "example": "<Button size=\"sm\" type=\"inline\"></Button>"
+    },
+    "rails": {
+      "import": null,
+      "example": "<%= pb_rails(\"button\", props: { size: \"sm\", type: \"inline\" }) %>"
+    }
+  }
+}

@@ -1,0 +1,96 @@
+{
+  "$schema": "https://playbook.powerapp.cloud/schemas/kit-schema.json",
+  "name": "DateTime",
+  "description": "DateTime component",
+  "platforms": [
+    "react",
+    "rails"
+  ],
+  "props": {
+    "align": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "left",
+        "center",
+        "right"
+      ],
+      "default": "left"
+    },
+    "datetime": {
+      "type": "Date",
+      "platforms": [
+        "react"
+      ]
+    },
+    "size": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "sm",
+        "md"
+      ],
+      "default": "md"
+    },
+    "showCurrentYear": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "showDayOfWeek": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "showIcon": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "timeZone": {
+      "type": "string",
+      "platforms": [
+        "react"
+      ]
+    },
+    "date": {
+      "platforms": [
+        "rails"
+      ],
+      "type": "string"
+    },
+    "timezone": {
+      "platforms": [
+        "rails"
+      ],
+      "type": "string",
+      "default": "America/New_York"
+    }
+  },
+  "globalProps": true,
+  "usage": {
+    "react": {
+      "import": "import { DateTime } from 'playbook-ui'",
+      "example": "<DateTime align=\"left\" size=\"sm\"></DateTime>"
+    },
+    "rails": {
+      "import": null,
+      "example": "<%= pb_rails(\"date_time\", props: { align: \"left\", size: \"sm\" }) %>"
+    }
+  }
+}

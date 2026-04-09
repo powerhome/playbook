@@ -26,8 +26,9 @@ The Table kit automatically sets these Filter defaults (which you can override v
 - `min_width: "xs"`
 - `popover_props: { width: "350px" }`
 
+Alternatively, you can pass pre-rendered filter markup via the `filter` prop (e.g. for manual submission or custom filter helpers)—scroll down for that approach.
 
 **IMPORTANT NOTE**: 
 The purpose of this variant is to provide an easy way to set up a Table with a Filter with Design standards applied by default.
 
-If you are looking for more customization than this embedded variant provides, you may be better served by using the individual kits as demonstrating in our Table Filter Card Building Block as seen [here](https://playbook.powerapp.cloud/building_blocks/table_filter_card/rails).
+If you are looking for more customization than this embedded variant provides, you may be better served by using the individual kits as demonstrated in our Table Filter Card Building Block as seen [here](https://playbook.powerapp.cloud/building_blocks/table_filter_card/rails).

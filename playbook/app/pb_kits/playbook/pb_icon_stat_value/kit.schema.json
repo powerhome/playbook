@@ -1,0 +1,96 @@
+{
+  "$schema": "https://playbook.powerapp.cloud/schemas/kit-schema.json",
+  "name": "IconStatValue",
+  "description": "IconStatValue component",
+  "platforms": [
+    "react",
+    "rails"
+  ],
+  "props": {
+    "icon": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "orientation": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "vertical",
+        "horizontal"
+      ],
+      "default": "horizontal"
+    },
+    "size": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "sm",
+        "md",
+        "lg"
+      ],
+      "default": "sm"
+    },
+    "text": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": ""
+    },
+    "unit": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": ""
+    },
+    "value": {
+      "type": "number",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "variant": {
+      "type": "\"default\"",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "default",
+        "royal",
+        "blue",
+        "purple",
+        "teal",
+        "red",
+        "yellow",
+        "green",
+        "orange"
+      ],
+      "default": "default"
+    }
+  },
+  "globalProps": true,
+  "usage": {
+    "react": {
+      "import": "import { IconStatValue } from 'playbook-ui'",
+      "example": "<IconStatValue orientation=\"vertical\" size=\"sm\"></IconStatValue>"
+    },
+    "rails": {
+      "import": null,
+      "example": "<%= pb_rails(\"icon_stat_value\", props: { orientation: \"vertical\", size: \"sm\" }) %>"
+    }
+  }
+}

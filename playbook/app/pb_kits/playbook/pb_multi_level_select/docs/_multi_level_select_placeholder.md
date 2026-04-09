@@ -1,0 +1,1 @@
+Use the `placeholder` prop to customize the initial text shown in the input when nothing is selected. The default is `Start typing...`.

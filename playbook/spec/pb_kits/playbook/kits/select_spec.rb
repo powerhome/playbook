@@ -55,4 +55,36 @@ RSpec.describe Playbook::PbSelect::Select do
       expect(select.all_attributes[:id]).to eq "default-id"
     end
   end
+
+  describe "#select_input_id" do
+    it "matches the id applied to the select via top-level id" do
+      select = subject.new(id: "favorite-food", name: "food", input_options: {})
+
+      expect(select.select_input_id).to eq "favorite-food"
+    end
+
+    it "matches input_options id when present" do
+      select = subject.new(
+        id: "ignored",
+        input_options: { id: "from-input-options" }
+      )
+
+      expect(select.select_input_id).to eq "from-input-options"
+    end
+
+    it "matches id from attributes when merged into all_attributes" do
+      select = subject.new(
+        attributes: { id: "from-attributes" },
+        input_options: {}
+      )
+
+      expect(select.select_input_id).to eq "from-attributes"
+    end
+
+    it "returns nil when no id is set" do
+      select = subject.new(name: "food", input_options: {})
+
+      expect(select.select_input_id).to be_nil
+    end
+  end
 end

@@ -1,0 +1,118 @@
+{
+  "$schema": "https://playbook.powerapp.cloud/schemas/kit-schema.json",
+  "name": "FixedConfirmationToast",
+  "description": "FixedConfirmationToast component",
+  "platforms": [
+    "react",
+    "rails"
+  ],
+  "props": {
+    "autoClose": {
+      "type": "number;",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "closeable": {
+      "type": "boolean;",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "horizontal": {
+      "type": "\"right\" | \"left\" | \"center\";",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "right",
+        "left",
+        "center"
+      ],
+      "default": null
+    },
+    "icon": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "multiLine": {
+      "type": "boolean;",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "navMarginTop": {
+      "type": "boolean;",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "onClose": {
+      "type": "VoidCallback;",
+      "platforms": [
+        "react"
+      ]
+    },
+    "open": {
+      "type": "boolean;",
+      "platforms": [
+        "react"
+      ]
+    },
+    "status": {
+      "type": "\"success\" | \"error\" | \"neutral\" | \"tip\";",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "success",
+        "error",
+        "neutral",
+        "tip"
+      ],
+      "default": "neutral"
+    },
+    "text": {
+      "type": "string;",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "vertical": {
+      "type": "\"top\" | \"bottom\";",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "top",
+        "bottom"
+      ],
+      "default": null
+    }
+  },
+  "globalProps": true,
+  "usage": {
+    "react": {
+      "import": "import { FixedConfirmationToast } from 'playbook-ui'",
+      "example": "<FixedConfirmationToast horizontal=\"right\" status=\"success\"></FixedConfirmationToast>"
+    },
+    "rails": {
+      "import": null,
+      "example": "<%= pb_rails(\"fixed_confirmation_toast\", props: { horizontal: \"right\", status: \"success\" }) %>"
+    }
+  }
+}

@@ -130,6 +130,17 @@ const sizes = {
         }
       />
       </Card>
+
+      <Card marginTop="md">
+        <Caption text="Button full_width" />
+        <Body
+          marginBottom="sm"
+          text="The Button kit’s full_width prop sets layout styles that include display on the button element. If you also pass a responsive display object on that same Button, two different systems both set display on one node, which can cause incorrect visibility at some breakpoints."
+        />
+        <Body
+          text="Put responsive display on a parent (e.g. Flex) and keep full_width / fullWidth only on the inner Button. See the Button kit docs (Full Width) for Rails and React examples."
+        />
+      </Card>
     </ShowPage>
     </>
   );

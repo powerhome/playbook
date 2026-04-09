@@ -10,27 +10,23 @@ module Playbook
       base.prop :top
     end
 
+    TOP_VALUES = %w[0 xxs xs sm md lg xl auto initial inherit].freeze
+
     def top_values
-      %w[0 xxs xs sm md lg xl auto initial inherit]
+      TOP_VALUES
     end
 
     def top_options
-      {
-        top: "top",
-      }
+      { top: "top" }
     end
 
   private
 
     def top_props
-      selected_props = top_options.keys.select { |sk| try(sk) }
-      return nil unless selected_props.present?
+      value = top
+      return nil unless value
 
-      selected_props.map do |k|
-        value = send(k)
-        css = positioning_css("top", value) if top.present?
-        css
-      end.compact.join(" ")
+      positioning_css("top", value)
     end
   end
 end

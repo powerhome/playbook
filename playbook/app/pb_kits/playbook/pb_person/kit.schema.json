@@ -1,0 +1,36 @@
+{
+  "$schema": "https://playbook.powerapp.cloud/schemas/kit-schema.json",
+  "name": "Person",
+  "description": "Person component",
+  "platforms": [
+    "react",
+    "rails"
+  ],
+  "props": {
+    "firstName": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "lastName": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    }
+  },
+  "globalProps": true,
+  "usage": {
+    "react": {
+      "import": "import { Person } from 'playbook-ui'",
+      "example": "<Person></Person>"
+    },
+    "rails": {
+      "import": null,
+      "example": "<%= pb_rails(\"person\", props: { text: \"Example\" }) %>"
+    }
+  }
+}

@@ -6,24 +6,21 @@ module Playbook
       base.prop :truncate
     end
 
-    def truncate_props
-      selected_props = truncate_options.keys.select { |sk| try(sk) }
-      return nil unless selected_props.present?
+    TRUNCATE_VALUES = %w[1 2 3 4 5].freeze
 
-      selected_props.map do |k|
-        truncate_value = send(k).to_s
-        "truncate_#{truncate_value}" if truncate_values.include? truncate_value
-      end.compact.join(" ")
+    def truncate_props
+      value = truncate
+      return nil unless value
+
+      "truncate_#{value}" if TRUNCATE_VALUES.include?(value.to_s)
     end
 
     def truncate_options
-      {
-        truncate: "truncate",
-      }
+      { truncate: "truncate" }
     end
 
     def truncate_values
-      %w[1 2 3 4 5]
+      TRUNCATE_VALUES
     end
   end
 end

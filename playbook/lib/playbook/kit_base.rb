@@ -117,20 +117,24 @@ module Playbook
     # rubocop:enable Style/OptionalBooleanParameter
 
     def combined_html_options
+      ho = html_options
+      inline = dynamic_inline_props
+
+      # Fast path: no custom html_options and no inline styles (the common case)
+      return data_attributes if ho.empty? && inline.nil?
+
       merged = default_html_options.dup
 
-      html_options.each do |key, value|
+      ho.each do |key, value|
         if key == :style && value.is_a?(Hash)
-          # Convert style hash to CSS string
           merged[:style] = value.map { |k, v| "#{k.to_s.tr('_', '-')}: #{v}" }.join("; ")
         else
           merged[key] = value
         end
       end
 
-      inline_styles = dynamic_inline_props
-      if inline_styles.present?
-        merged[:style] = merged[:style].present? ? "#{merged[:style]}; #{inline_styles}" : inline_styles
+      if inline
+        merged[:style] = merged[:style] ? "#{merged[:style]}; #{inline}" : inline
       end
 
       merged.deep_merge(data_attributes)
@@ -157,12 +161,19 @@ module Playbook
       content_tag(:div, "", html_attrs)
     end
 
+    EMPTY_HASH = {}.freeze
+
     def global_inline_props
-      {
-        height: height,
-        min_height: min_height,
-        max_height: max_height,
-      }.compact
+      h = height
+      mh = min_height
+      xh = max_height
+      return EMPTY_HASH if h.nil? && mh.nil? && xh.nil?
+
+      r = {}
+      r[:height] = h if h
+      r[:min_height] = mh if mh
+      r[:max_height] = xh if xh
+      r
     end
 
   private
@@ -186,15 +197,21 @@ module Playbook
     end
 
     def data_attributes
-      {
-        data: data,
-        aria: aria,
-      }.transform_keys { |key| key.to_s.tr("_", "-").to_sym }
+      { data: data, aria: aria }
     end
 
     def dynamic_inline_props
-      styles = global_inline_props.map { |key, value| "#{key.to_s.tr('_', '-')}: #{value}" if inline_validator(key, value) }.compact
-      styles.join("; ").presence
+      return @dynamic_inline_props if defined?(@dynamic_inline_props)
+
+      @dynamic_inline_props = begin
+        gip = global_inline_props
+        if gip.empty?
+          nil
+        else
+          styles = gip.filter_map { |key, value| "#{key.to_s.tr('_', '-')}: #{value}" if inline_validator(key, value) }
+          styles.empty? ? nil : styles.join("; ")
+        end
+      end
     end
 
     def inline_validator(key, value)

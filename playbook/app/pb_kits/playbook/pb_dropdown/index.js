@@ -95,6 +95,25 @@ export default class PbDropdown extends PbEnhancedElement {
       this.clearBtn.addEventListener("click", this.clearBtnHandler);
     }
     this.updateClearButton();
+
+    // Listen for clear and select events from external source
+    this.handleClearEventBound = this.handleClearEvent.bind(this);
+    document.addEventListener("pb:dropdown:clear", this.handleClearEventBound);
+    this.handleSelectEventBound = this.handleSelectEvent.bind(this);
+    document.addEventListener("pb:dropdown:select", this.handleSelectEventBound);
+
+    // Listen for custom_event_type to clear on custom events
+    const customEventTypeString = this.element.dataset.customEventType;
+    if (customEventTypeString) {
+      this.customClearEventTypes = customEventTypeString
+        .split(",")
+        .map((e) => e.trim())
+        .filter(Boolean);
+      this.handleCustomClearBound = this.handleCustomClearEvent.bind(this);
+      this.customClearEventTypes.forEach((eventType) => {
+        document.addEventListener(eventType, this.handleCustomClearBound);
+      });
+    }
   }
 
   disconnect() {
@@ -145,6 +164,19 @@ export default class PbDropdown extends PbEnhancedElement {
     // Clean up clear button listener
     if (this.clearBtn && this.clearBtnHandler) {
       this.clearBtn.removeEventListener('click', this.clearBtnHandler)
+    }
+
+    // Clean up external clear/select listeners
+    if (this.handleClearEventBound) {
+      document.removeEventListener("pb:dropdown:clear", this.handleClearEventBound)
+    }
+    if (this.handleSelectEventBound) {
+      document.removeEventListener("pb:dropdown:select", this.handleSelectEventBound)
+    }
+    if (this.customClearEventTypes && this.handleCustomClearBound) {
+      this.customClearEventTypes.forEach((eventType) => {
+        document.removeEventListener(eventType, this.handleCustomClearBound)
+      })
     }
   }
 
@@ -353,6 +385,135 @@ export default class PbDropdown extends PbEnhancedElement {
       this.updateArrowDisplay(false);
     }
   }
+
+  // ----- External events handling section -----
+  // Handles pb:dropdown:clear - clear this dropdown when event.detail.dropdownId matches.
+  handleClearEvent(event) {
+    const targetId = event.detail?.dropdownId;
+    if (targetId && this.element.id === targetId) {
+      this.clearSelection();
+    }
+  }
+
+  // Handles custom_event_type events (e.g. turbo:submit-end) - clear when detail.dropdownId matches or is omitted.
+  handleCustomClearEvent(event) {
+    const targetId = event.detail?.dropdownId;
+    if (targetId == null || this.element.id === targetId) {
+      this.clearSelection();
+    }
+  }
+
+  // Handles pb:dropdown:select - set dropdown selection by option id(s).
+  // Single: detail: { dropdownId, optionId }. Multi: detail: { dropdownId, optionIds: ['id1', 'id2'] }.
+  handleSelectEvent(event) {
+    const targetId = event.detail?.dropdownId;
+    if (!targetId || this.element.id !== targetId) return;
+
+    const optionId = event.detail?.optionId;
+    const optionIds = event.detail?.optionIds;
+    if (optionId != null) {
+      this.setSelectionByOptionId(optionId);
+    } else if (Array.isArray(optionIds)) {
+      this.setSelectionByOptionIds(optionIds);
+    }
+  }
+
+  // Set single-select dropdown to the option with the given id. No-op if id not found.
+  setSelectionByOptionId(optionId) {
+    if (this.isMultiSelect) return;
+    const hiddenInput = this.baseInput;
+    const optionEls = Array.from(this.element.querySelectorAll(OPTION_SELECTOR));
+    const selectedOption = optionEls.find((opt) => {
+      try {
+        return JSON.parse(opt.dataset.dropdownOptionLabel).id === optionId;
+      } catch {
+        return false;
+      }
+    });
+    if (!selectedOption) return;
+
+    optionEls.forEach((opt) => opt.classList.remove("pb_dropdown_option_selected"));
+    selectedOption.classList.add("pb_dropdown_option_selected");
+    if (hiddenInput) hiddenInput.value = optionId;
+    const optionData = JSON.parse(selectedOption.dataset.dropdownOptionLabel);
+    const customDisplayElement = this.element.querySelector(
+      '[data-dropdown-trigger-custom-display]',
+    );
+    if (customDisplayElement) {
+      this.setTriggerElementText("");
+      customDisplayElement.style.display = "block";
+      customDisplayElement.style.paddingRight = "8px";
+    } else {
+      this.setTriggerElementText(optionData.label);
+    }
+    if (this.searchInput) {
+      this.searchInput.value = optionData.label;
+    }
+
+    if (optionData.formatted_start_date && optionData.formatted_end_date) {
+      const startDateId = this.element.dataset.startDateId;
+      const endDateId = this.element.dataset.endDateId;
+      const controlsStartId = this.element.dataset.controlsStartId;
+      const controlsEndId = this.element.dataset.controlsEndId;
+      if (startDateId) {
+        const startDateInput = document.getElementById(startDateId);
+        if (startDateInput) startDateInput.value = optionData.formatted_start_date;
+      }
+      if (endDateId) {
+        const endDateInput = document.getElementById(endDateId);
+        if (endDateInput) endDateInput.value = optionData.formatted_end_date;
+      }
+      const syncDatePickers = () => {
+        if (controlsStartId) {
+          const startPicker = document.querySelector(`#${CSS.escape(controlsStartId)}`)?._flatpickr;
+          if (startPicker) startPicker.setDate(optionData.formatted_start_date, true, "m/d/Y");
+        }
+        if (controlsEndId) {
+          const endPicker = document.querySelector(`#${CSS.escape(controlsEndId)}`)?._flatpickr;
+          if (endPicker) endPicker.setDate(optionData.formatted_end_date, true, "m/d/Y");
+        }
+      };
+      syncDatePickers();
+      setTimeout(syncDatePickers, 100);
+      setTimeout(syncDatePickers, 300);
+    }
+
+    this.updateClearButton();
+    this.emitSelectionChange();
+  }
+
+  // Set multi-select dropdown to the options with the given ids. Invalid ids are skipped.
+  setSelectionByOptionIds(optionIds) {
+    if (!this.isMultiSelect || !optionIds.length) return;
+    const optionEls = Array.from(this.element.querySelectorAll(OPTION_SELECTOR));
+    this.selectedOptions.clear();
+    optionEls.forEach((opt) => {
+      opt.classList.remove("pb_dropdown_option_selected");
+      opt.style.display = "";
+    });
+
+    optionIds.forEach((id) => {
+      const opt = optionEls.find((o) => {
+        try {
+          return JSON.parse(o.dataset.dropdownOptionLabel).id === id;
+        } catch {
+          return false;
+        }
+      });
+      if (opt) {
+        const raw = opt.dataset.dropdownOptionLabel;
+        this.selectedOptions.add(raw);
+        opt.style.display = "none";
+      }
+    });
+
+    this.updatePills();
+    this.updateClearButton();
+    this.adjustDropdownHeight();
+    this.syncHiddenInputs();
+    this.emitSelectionChange();
+  }
+  // ----- End External events handling section -----
 
   isClickOutside(event) {
     const label = event.target.closest(LABEL_SELECTOR);

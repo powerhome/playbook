@@ -34,12 +34,17 @@ const Position = () => {
 
   const PositionCard = () => {
       return (
-        <Flex gap="xs">
+        <Flex gap="xs" width="100%" wrap>
           <VisualGuideExample position="Static" positionSvg="staticSvg" />
           <VisualGuideExample position="Relative" positionSvg="relative" />
           <VisualGuideExample position="Absolute" positionSvg="absolute" />
           <VisualGuideExample position="Fixed" positionSvg="fixed" />
           <VisualGuideExample position="Sticky" positionSvg="sticky" />
+          <VisualGuideExample position="Top" positionSvg="top" />
+          <VisualGuideExample position="Top Inset" positionSvg="topInset" />
+          <VisualGuideExample position="Top & Bottom Inset" positionSvg="topBottomInset" />
+          <VisualGuideExample position="Top, Bottom & Left Inset" positionSvg="topBottomLeftInset" />
+          <VisualGuideExample position="Inset All Sides" positionSvg="insetAllSides" />
         </Flex>
       );
   };
@@ -85,6 +90,21 @@ const Position = () => {
       </Flex>
     );
   };
+
+  const BooleanValueCards = () => {
+    return (
+      <Flex gap="xs">
+        <ValueCardWithTooltip
+          key={"true"}
+          text={"true"}
+        />
+        <ValueCardWithTooltip
+          key={"false"}
+          text={"false"}
+        />
+      </Flex>
+    );
+  }
 
   return (
     <ShowPage
@@ -170,6 +190,32 @@ const Position = () => {
             <ExampleCodeCard
               id="right-react"
               text='right="sm"'
+            />,
+          ],
+            [
+            "Inset",
+            <ExampleCodeCard text="union" copyIcon={false} />,
+            <BooleanValueCards />,
+            <ExampleCodeCard
+              id="inset-rails"
+              text='top: { value: "sm", inset: true }'
+            />,
+            <ExampleCodeCard
+              id="inset-react"
+              text='top={{ value: "sm", inset: true }}'
+            />,
+          ],
+          [
+            "Inset On All Sides",
+            <ExampleCodeCard text="union" copyIcon={false} />,
+            <BooleanValueCards />,
+            <ExampleCodeCard
+              id="inset-all-rails"
+              text='top: { value: "sm", inset: true }, bottom: { value: "sm", inset: true }, left: { value: "sm", inset: true }, right: { value: "sm", inset: true }'
+            />,
+            <ExampleCodeCard
+              id="inset-all-react"
+              text='top={{ value: "sm", inset: true }}, bottom={{ value: "sm", inset: true }}, left={{ value: "sm", inset: true }}, right={{ value: "sm", inset: true }}'
             />,
           ],
         ]}

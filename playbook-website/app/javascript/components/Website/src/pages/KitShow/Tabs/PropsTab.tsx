@@ -3,7 +3,7 @@ import KitProps from "../../../../../AvailableProps/kitProps";
 import GlobalProps from "../../../../../AvailableProps/globalProps";
 import { useState } from "react";
 import { Nav, NavItem, SectionSeparator } from "playbook-ui";
-import GlobalPropsValues from "../../../../../AvailableProps/globalPropsValues";
+import globalPropsValues from "../../../../../AvailableProps/globalPropsValues";
 
 interface PropsTabProps {
   availableProps?: string;
@@ -20,13 +20,21 @@ export const PropsTab = ({ availableProps }: PropsTabProps) => {
     );
   }
 
-  const props = JSON.parse(availableProps);
-  const globalPropsNames = GlobalPropsValues.map((prop) => prop.prop);
+  // Parse the schema JSON
+  const schema = JSON.parse(availableProps);
+  
+  // Extract props from our kit.schema.json format
+  // Schema structure: { $schema, name, description, platforms, props: {...}, globalProps, usage }
+  const props = schema.props && typeof schema.props === 'object' ? schema.props : schema;
+  
+  // Get global prop names to filter them out
+  const globalPropsNames = globalPropsValues.map((prop: { prop: string }) => prop.prop);
 
-  // Remove global props from kit props
+  // Filter out global props, keeping only kit-specific props
+  const kitProps: Record<string, any> = {};
   for (const propName in props) {
-    if (globalPropsNames.includes(propName)) {
-      delete props[propName];
+    if (!globalPropsNames.includes(propName)) {
+      kitProps[propName] = props[propName];
     }
   }
 
@@ -50,7 +58,7 @@ export const PropsTab = ({ availableProps }: PropsTabProps) => {
           </Nav>
         </Card.Body>
         <SectionSeparator />
-        {showKitTab && <KitProps kitPropsValues={props} darkMode={false} />}
+        {showKitTab && <KitProps kitPropsValues={kitProps} darkMode={false} />}
         {!showKitTab && <GlobalProps darkMode={false} />}
       </Card>
     </Flex>

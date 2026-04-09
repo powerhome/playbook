@@ -1,0 +1,42 @@
+{
+  "$schema": "https://playbook.powerapp.cloud/schemas/kit-schema.json",
+  "name": "StatValue",
+  "description": "StatValue component",
+  "platforms": [
+    "react",
+    "rails"
+  ],
+  "props": {
+    "unit": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "value": {
+      "type": "string | number",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "precision": {
+      "platforms": [
+        "rails"
+      ],
+      "type": "string"
+    }
+  },
+  "globalProps": true,
+  "usage": {
+    "react": {
+      "import": "import { StatValue } from 'playbook-ui'",
+      "example": "<StatValue></StatValue>"
+    },
+    "rails": {
+      "import": null,
+      "example": "<%= pb_rails(\"stat_value\", props: { text: \"Example\" }) %>"
+    }
+  }
+}

@@ -55,6 +55,7 @@ sections:
       - table_with_clickable_rows
       - table_with_selectable_rows
       - table_with_filter_variant
+      - table_with_filter_variant_external_filter_rails
       - table_with_filter_variant_with_pagination
       - table_disable_hover
 

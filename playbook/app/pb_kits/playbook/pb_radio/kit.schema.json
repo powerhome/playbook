@@ -1,0 +1,104 @@
+{
+  "$schema": "https://playbook.powerapp.cloud/schemas/kit-schema.json",
+  "name": "Radio",
+  "description": "Radio component",
+  "platforms": [
+    "react",
+    "rails"
+  ],
+  "props": {
+    "alignment": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": ""
+    },
+    "checked": {
+      "type": "boolean, // removed default assignment here",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "customChildren": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "disabled": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "error": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "label": {
+      "type": "string",
+      "platforms": [
+        "react"
+      ]
+    },
+    "name": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": "radio_name"
+    },
+    "value": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": "radio_text"
+    },
+    "text": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": "Radio Text"
+    },
+    "onChange": {
+      "type": "(event: React.FormEvent<HTMLInputElement> | null) => void",
+      "platforms": [
+        "react"
+      ]
+    },
+    "inputOptions": {
+      "platforms": [
+        "rails"
+      ],
+      "type": "string"
+    }
+  },
+  "globalProps": true,
+  "usage": {
+    "react": {
+      "import": "import { Radio } from 'playbook-ui'",
+      "example": "<Radio></Radio>"
+    },
+    "rails": {
+      "import": null,
+      "example": "<%= pb_rails(\"radio\", props: { text: \"Example\" }) %>"
+    }
+  }
+}

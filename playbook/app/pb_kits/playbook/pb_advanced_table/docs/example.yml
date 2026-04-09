@@ -7,6 +7,7 @@ examples:
   - advanced_table_table_props: Table Props
   - advanced_table_sticky_header_rails: Sticky Header
   - advanced_table_table_props_sticky_header: Sticky Header for Responsive Table
+  - advanced_table_pinned_rows_rails: Pinned Rows
   - advanced_table_beta_sort: Enable Sorting
   - advanced_table_responsive: Responsive Tables
   - advanced_table_custom_cell_rails: Custom Components for Cells
@@ -39,6 +40,7 @@ examples:
   - advanced_table_sort_per_column: Enable Sort By Column
   - advanced_table_sort_per_column_for_multi_column: Enable Sort By Column (Multi-Column)
   - advanced_table_custom_sort: Custom Sort
+  - advanced_table_sort_parent_only: Sort Parent Only
   - advanced_table_expanded_control: Expanded Control
   - advanced_table_expand_by_depth: Expand by Depth
   - advanced_table_subrow_headers: SubRow Headers
@@ -73,6 +75,7 @@ examples:
   - advanced_table_column_visibility_with_state: Column Visibility Control With State
   - advanced_table_column_visibility_custom: Column Visibility Control with Custom Dropdown
   - advanced_table_column_visibility_multi: Column Visibility Control with Multi-Header Columns
+  - advanced_table_grouped_headers_composition: Grouped headers, custom headers, sort, and pinned rows
   - advanced_table_scrollbar_none: Advanced Table Scrollbar None
   - advanced_table_row_styling: Row Styling
   - advanced_table_padding_control_per_row: Padding Control using Row Styling

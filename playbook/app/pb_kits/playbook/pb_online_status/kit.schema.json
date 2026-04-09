@@ -1,0 +1,62 @@
+{
+  "$schema": "https://playbook.powerapp.cloud/schemas/kit-schema.json",
+  "name": "OnlineStatus",
+  "description": "OnlineStatus component",
+  "platforms": [
+    "react",
+    "rails"
+  ],
+  "props": {
+    "status": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "away",
+        "error",
+        "info",
+        "neutral",
+        "offline",
+        "online",
+        "primary",
+        "success",
+        "warning"
+      ],
+      "default": "offline"
+    },
+    "size": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "sm",
+        "md",
+        "lg"
+      ],
+      "default": "sm"
+    },
+    "noBorder": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    }
+  },
+  "globalProps": true,
+  "usage": {
+    "react": {
+      "import": "import { OnlineStatus } from 'playbook-ui'",
+      "example": "<OnlineStatus status=\"away\" size=\"sm\"></OnlineStatus>"
+    },
+    "rails": {
+      "import": null,
+      "example": "<%= pb_rails(\"online_status\", props: { status: \"away\", size: \"sm\" }) %>"
+    }
+  }
+}

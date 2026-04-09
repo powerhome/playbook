@@ -1,0 +1,29 @@
+{
+  "$schema": "https://playbook.powerapp.cloud/schemas/kit-schema.json",
+  "name": "PbBarGraph",
+  "description": "PbBarGraph component",
+  "platforms": [
+    "react",
+    "rails"
+  ],
+  "props": {
+    "options": {
+      "type": "Record<string, unknown>",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    }
+  },
+  "globalProps": true,
+  "usage": {
+    "react": {
+      "import": "import { PbBarGraph } from 'playbook-ui'",
+      "example": "<PbBarGraph></PbBarGraph>"
+    },
+    "rails": {
+      "import": null,
+      "example": "<%= pb_rails(\"pb_bar_graph\", props: { text: \"Example\" }) %>"
+    }
+  }
+}

@@ -1,0 +1,128 @@
+<%= pb_rails("flex", props: { justify: "around", margin_bottom: "sm", orientation: "row", wrap: true }) do %>
+    <%= pb_rails("button", props: { text: "Top", variant: "secondary", id: "placement-popover-top" }) %>
+    <%= pb_rails("popover", props: {
+      close_on_click: "outside",
+      trigger_element_id: "placement-popover-top",
+      tooltip_id: "placement-tooltip-top",
+      position: "top",
+      offset: true
+    }) do %>
+      Popover: top
+    <% end %>
+    <%= pb_rails("button", props: { text: "Top start", variant: "secondary", id: "placement-popover-top-start" }) %>
+    <%= pb_rails("popover", props: {
+      close_on_click: "outside",
+      trigger_element_id: "placement-popover-top-start",
+      tooltip_id: "placement-tooltip-top-start",
+      position: "top-start",
+      offset: true
+    }) do %>
+      Popover: top start
+    <% end %>
+    <%= pb_rails("button", props: { text: "Top end", variant: "secondary", id: "placement-popover-top-end" }) %>
+    <%= pb_rails("popover", props: {
+      close_on_click: "outside",
+      trigger_element_id: "placement-popover-top-end",
+      tooltip_id: "placement-tooltip-top-end",
+      position: "top-end",
+      offset: true
+    }) do %>
+      Popover: top end
+    <% end %>
+<% end %>
+<%= pb_rails("flex", props: { justify: "around", margin_bottom: "sm", orientation: "row", wrap: true }) do %>
+    <%= pb_rails("button", props: { text: "Bottom", variant: "secondary", id: "placement-popover-bottom" }) %>
+    <%= pb_rails("popover", props: {
+      close_on_click: "outside",
+      trigger_element_id: "placement-popover-bottom",
+      tooltip_id: "placement-tooltip-bottom",
+      position: "bottom",
+      offset: true
+    }) do %>
+      Popover: bottom
+    <% end %>
+    <%= pb_rails("button", props: { text: "Bottom start", variant: "secondary", id: "placement-popover-bottom-start" }) %>
+    <%= pb_rails("popover", props: {
+      close_on_click: "outside",
+      trigger_element_id: "placement-popover-bottom-start",
+      tooltip_id: "placement-tooltip-bottom-start",
+      position: "bottom-start",
+      offset: true
+    }) do %>
+      Popover: bottom start
+    <% end %>
+    <%= pb_rails("button", props: { text: "Bottom end", variant: "secondary", id: "placement-popover-bottom-end" }) %>
+    <%= pb_rails("popover", props: {
+      close_on_click: "outside",
+      trigger_element_id: "placement-popover-bottom-end",
+      tooltip_id: "placement-tooltip-bottom-end",
+      position: "bottom-end",
+      offset: true
+    }) do %>
+      Popover: bottom end
+    <% end %>
+<% end %>
+<%= pb_rails("flex", props: { justify: "around", margin_bottom: "sm", orientation: "row", wrap: true }) do %>
+    <%= pb_rails("button", props: { text: "Left", variant: "secondary", id: "placement-popover-left" }) %>
+    <%= pb_rails("popover", props: {
+      close_on_click: "outside",
+      trigger_element_id: "placement-popover-left",
+      tooltip_id: "placement-tooltip-left",
+      position: "left",
+      offset: true
+    }) do %>
+      Popover: left
+    <% end %>
+    <%= pb_rails("button", props: { text: "Left start", variant: "secondary", id: "placement-popover-left-start" }) %>
+    <%= pb_rails("popover", props: {
+      close_on_click: "outside",
+      trigger_element_id: "placement-popover-left-start",
+      tooltip_id: "placement-tooltip-left-start",
+      position: "left-start",
+      offset: true
+    }) do %>
+      Popover: left start
+    <% end %>
+    <%= pb_rails("button", props: { text: "Left end", variant: "secondary", id: "placement-popover-left-end" }) %>
+    <%= pb_rails("popover", props: {
+      close_on_click: "outside",
+      trigger_element_id: "placement-popover-left-end",
+      tooltip_id: "placement-tooltip-left-end",
+      position: "left-end",
+      offset: true
+    }) do %>
+      Popover: left end
+    <% end %>
+<% end %>
+<%= pb_rails("flex", props: { justify: "around", orientation: "row", wrap: true }) do %>
+    <%= pb_rails("button", props: { text: "Right", variant: "secondary", id: "placement-popover-right" }) %>
+    <%= pb_rails("popover", props: {
+      close_on_click: "outside",
+      trigger_element_id: "placement-popover-right",
+      tooltip_id: "placement-tooltip-right",
+      position: "right",
+      offset: true
+    }) do %>
+      Popover: right
+    <% end %>
+    <%= pb_rails("button", props: { text: "Right start", variant: "secondary", id: "placement-popover-right-start" }) %>
+    <%= pb_rails("popover", props: {
+      close_on_click: "outside",
+      trigger_element_id: "placement-popover-right-start",
+      tooltip_id: "placement-tooltip-right-start",
+      position: "right-start",
+      offset: true
+    }) do %>
+      Popover: right start
+    <% end %>
+    <%= pb_rails("button", props: { text: "Right end", variant: "secondary", id: "placement-popover-right-end" }) %>
+    <%= pb_rails("popover", props: {
+      close_on_click: "outside",
+      trigger_element_id: "placement-popover-right-end",
+      tooltip_id: "placement-tooltip-right-end",
+      position: "right-end",
+      offset: true
+    }) do %>
+      Popover: right end
+    <% end %>
+<% end %>

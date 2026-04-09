@@ -1,0 +1,42 @@
+{
+  "$schema": "https://playbook.powerapp.cloud/schemas/kit-schema.json",
+  "name": "DateYearStacked",
+  "description": "DateYearStacked component",
+  "platforms": [
+    "react",
+    "rails"
+  ],
+  "props": {
+    "align": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "left",
+        "center",
+        "right"
+      ],
+      "default": "left"
+    },
+    "date": {
+      "type": "Date",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    }
+  },
+  "globalProps": true,
+  "usage": {
+    "react": {
+      "import": "import { DateYearStacked } from 'playbook-ui'",
+      "example": "<DateYearStacked align=\"left\"></DateYearStacked>"
+    },
+    "rails": {
+      "import": null,
+      "example": "<%= pb_rails(\"date_year_stacked\", props: { align: \"left\" }) %>"
+    }
+  }
+}

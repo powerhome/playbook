@@ -79,20 +79,13 @@ class PagesController < ApplicationController
     # Read kit sections from _sections.yml file if it exists
     kit_sections = read_kit_sections
 
-    # Get available props for React kits
+    # Get available props from kit.schema.json
     available_props = nil
-    if @type == "react"
-      begin
-        kit_example = Playbook::PbDocs::KitExample.new(
-          kit: @kit,
-          example_title: "Default",
-          example_key: @kit,
-          type: "react"
-        )
-        available_props = kit_example.available_props
-      rescue => e
-        Rails.logger.error("Error fetching available props: #{e.message}")
-      end
+    begin
+      schema_path = Playbook::Engine.root.join("app/pb_kits/playbook/pb_#{@kit}/kit.schema.json")
+      available_props = File.read(schema_path) if File.exist?(schema_path)
+    rescue => e
+      Rails.logger.error("Error reading kit schema: #{e.message}")
     end
 
     # first example from each kit

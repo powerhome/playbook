@@ -29,7 +29,7 @@ module Playbook
         when nil
           nil
         else
-          "#{results} Results"
+          "#{number_with_delimiter(results)} Results"
         end
       end
 

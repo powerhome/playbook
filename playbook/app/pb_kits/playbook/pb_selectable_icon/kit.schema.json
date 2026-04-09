@@ -1,0 +1,103 @@
+{
+  "$schema": "https://playbook.powerapp.cloud/schemas/kit-schema.json",
+  "name": "SelectableIcon",
+  "description": "SelectableIcon component",
+  "platforms": [
+    "react",
+    "rails"
+  ],
+  "props": {
+    "checked": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "customIcon": {
+      "type": "ReactNode",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": null
+    },
+    "disabled": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "icon": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "inputId": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "inputs": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": "enabled"
+    },
+    "multi": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": true
+    },
+    "name": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "text": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "value": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "inputOptions": {
+      "platforms": [
+        "rails"
+      ],
+      "type": "string"
+    }
+  },
+  "globalProps": true,
+  "usage": {
+    "react": {
+      "import": "import { SelectableIcon } from 'playbook-ui'",
+      "example": "<SelectableIcon></SelectableIcon>"
+    },
+    "rails": {
+      "import": null,
+      "example": "<%= pb_rails(\"selectable_icon\", props: { text: \"Example\" }) %>"
+    }
+  }
+}

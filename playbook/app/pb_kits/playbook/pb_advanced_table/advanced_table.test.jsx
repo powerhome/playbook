@@ -495,7 +495,41 @@ test("sort button exists and sorts column data", () => {
 
   const row2 = kit.getElementsByTagName('tr')[2]
   expect(row2.id).toBe("0-0-0-row")
-}) 
+})
+
+test("sortParentOnly sorts only parent rows and keeps children grouped under parent", () => {
+  render(
+    <AdvancedTable
+        columnDefinitions={columnDefinitions}
+        data={{ testid: testId }}
+        sortParentOnly
+        tableData={MOCK_DATA}
+    >
+      <AdvancedTable.Header enableSorting />
+      <AdvancedTable.Body />
+    </AdvancedTable>
+  )
+
+  const kit = screen.getByTestId(testId)
+  const sortButton = kit.querySelector(".header-sort-button.pb_th_link")
+  expect(sortButton).toBeInTheDocument()
+
+  const tbody = kit.querySelector('tbody')
+  const rowsBefore = tbody.getElementsByTagName('tr')
+  expect(rowsBefore[0]).toHaveTextContent('2021')
+
+  sortButton.click()
+
+  const rowsAfter = tbody.getElementsByTagName('tr')
+  expect(rowsAfter[0]).toHaveTextContent('2022')
+
+  const expandButton = kit.querySelector(".gray-icon.expand-toggle-icon")
+  expandButton.click()
+
+  const rowsExpanded = tbody.getElementsByTagName('tr')
+  expect(rowsExpanded.length).toBeGreaterThan(1)
+  expect(rowsExpanded[1]).toHaveTextContent('Q1')
+})
 
 test("Generates Table.Header default + custom classname", () => {
   render(

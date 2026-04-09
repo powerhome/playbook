@@ -3,12 +3,47 @@
 // Sister file exists in playbook-website. Any changes here should be reflected there.
 import ComponentRegistry from './componentRegistry'
 
+// Export mount/unmount functions for direct use if needed
+// but in general we expect mounting to be triggered by events or MutationObserver
+const PB_REACT_MOUNT_EVENT = 'pb:react:mount'
+const PB_REACT_UNMOUNT_EVENT = 'pb:react:unmount'
+
 function mountComponents(root) {
   ComponentRegistry.mountComponents(root || document)
 }
-function unmountComponents() {
-  ComponentRegistry.unmountComponents()
+
+function unmountComponents(root) {
+  const isDomRoot =
+    root instanceof Element ||
+    root instanceof Document ||
+    root instanceof DocumentFragment
+
+  if (isDomRoot) {
+    ComponentRegistry.unmountWithin(root)
+  } else {
+    ComponentRegistry.unmountComponents()
+  }
 }
+
+// Public JS API (can be imported and used directly if needed)
+function mountPlaybookReactKitsWithin(root) {
+  mountComponents(root)
+}
+
+function unmountPlaybookReactKitsWithin(root) {
+  unmountComponents(root)
+}
+
+// Event API (for MutationObserver, Turbo frames, or custom events)
+document.addEventListener(PB_REACT_MOUNT_EVENT, (e) => {
+  const root = e.detail?.root instanceof Element ? e.detail.root : document
+  mountComponents(root)
+})
+
+document.addEventListener(PB_REACT_UNMOUNT_EVENT, (e) => {
+  const root = e.detail?.root instanceof Element ? e.detail.root : document
+  unmountComponents(root)
+})
 
  // Block MultiLevelSelect interaction while any PB Typeahead is loading async options
 // Requires Typeahead to set: data-pb-typeahead-loading="true" while loading
@@ -87,7 +122,9 @@ document.addEventListener('turbo:render', () => {
   installTypeaheadLoadingMlsGuard()
 })
 
-document.addEventListener('turbo:before-cache', unmountComponents)
+document.addEventListener('turbo:before-cache', () => {
+  unmountComponents()
+})
 
 document.addEventListener(
   'turbo:before-frame-render',
@@ -137,4 +174,11 @@ try {
   // no-op
 }
 
-export { mountComponents, unmountComponents }
+export {
+  PB_REACT_MOUNT_EVENT,
+  PB_REACT_UNMOUNT_EVENT,
+  mountComponents,
+  unmountComponents,
+  mountPlaybookReactKitsWithin,
+  unmountPlaybookReactKitsWithin,
+}

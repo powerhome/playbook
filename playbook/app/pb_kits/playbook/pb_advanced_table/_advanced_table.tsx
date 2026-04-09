@@ -66,6 +66,7 @@ type AdvancedTableProps = {
   showActionsBar?: boolean,
   persistToggleExpansionButton?: boolean,
   sortControl?: GenericObject
+  sortParentOnly?: boolean
   tableData: GenericObject[]
   tableOptions?: GenericObject
   tableProps?: GenericObject
@@ -114,6 +115,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
     selectableRows,
     persistToggleExpansionButton = false,
     sortControl,
+    sortParentOnly = false,
     stickyLeftColumn,
     tableData,
     tableOptions,
@@ -124,6 +126,8 @@ const AdvancedTable = (props: AdvancedTableProps) => {
     allowFullScreen = false,
     fullScreenControl,
   } = props;
+
+  const noTableCardContainer = tableProps?.container === false;
 
   // Component refs
   const tableWrapperRef = useRef<HTMLDivElement>(null);
@@ -159,7 +163,8 @@ const AdvancedTable = (props: AdvancedTableProps) => {
     columnVisibilityControl,
     pinnedRows,
     rowStyling,
-    inlineRowLoading
+    inlineRowLoading,
+    sortParentOnly
   });
 
   // Initialize table actions
@@ -278,6 +283,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
       'hidden-action-bar': (selectableRows || columnVisibilityControl) && !isActionBarVisible,
     },
     {'advanced-table-sticky-left-columns': stickyLeftColumn && stickyLeftColumn.length > 0},
+    { 'advanced-table-no-table-container': noTableCardContainer },
     columnGroupBorderColor ? `column-group-border-${columnGroupBorderColor}` : '',
     scrollBarNone ? 'advanced-table-hide-scrollbar' : '',
     globalProps(props),

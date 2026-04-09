@@ -1,0 +1,116 @@
+{
+  "$schema": "https://playbook.powerapp.cloud/schemas/kit-schema.json",
+  "name": "IconButton",
+  "description": "IconButton component",
+  "platforms": [
+    "react",
+    "rails"
+  ],
+  "props": {
+    "htmlType": {
+      "type": "enum",
+      "platforms": [
+        "react"
+      ],
+      "values": [
+        "submit",
+        "reset",
+        "button"
+      ]
+    },
+    "icon": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": "bars"
+    },
+    "link": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "newWindow": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "onClick": {
+      "type": "ReactNode",
+      "platforms": [
+        "react"
+      ]
+    },
+    "size": {
+      "type": "IconSizes",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "1x",
+        "2x",
+        "3x",
+        "4x",
+        "5x",
+        "6x",
+        "7x",
+        "8x",
+        "9x",
+        "10x",
+        "xs",
+        "sm",
+        "lg"
+      ],
+      "default": "2x"
+    },
+    "target": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "variant": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "default",
+        "link"
+      ],
+      "default": "default"
+    },
+    "type": {
+      "platforms": [
+        "rails"
+      ],
+      "type": "enum",
+      "values": [
+        "button",
+        "submit",
+        "reset"
+      ],
+      "default": "button"
+    }
+  },
+  "globalProps": true,
+  "usage": {
+    "react": {
+      "import": "import { IconButton } from 'playbook-ui'",
+      "example": "<IconButton htmlType=\"submit\" size=\"1x\"></IconButton>"
+    },
+    "rails": {
+      "import": null,
+      "example": "<%= pb_rails(\"icon_button\", props: { html_type: \"submit\", size: \"1x\" }) %>"
+    }
+  }
+}

@@ -3,6 +3,11 @@ import fixed from './fixed.svg';
 import relative from './relative.svg';
 import staticSvg from './static.svg';
 import sticky from './sticky.svg';
+import insetAllSides from './insetAllSides.svg'
+import top from './top.svg';
+import topBottomInset from './topBottomInset.svg';
+import topBottomLeftInset from './topBottomLeftInset.svg';
+import topInset from './topInset.svg';
 
 export {
   absolute,
@@ -10,5 +15,10 @@ export {
   relative,
   staticSvg,
   sticky,
+  insetAllSides,
+  top,
+  topBottomInset,
+  topBottomLeftInset,
+  topInset,
 };
 

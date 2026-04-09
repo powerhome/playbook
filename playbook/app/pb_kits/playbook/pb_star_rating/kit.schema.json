@@ -1,0 +1,152 @@
+{
+  "$schema": "https://playbook.powerapp.cloud/schemas/kit-schema.json",
+  "name": "StarRating",
+  "description": "StarRating component",
+  "platforms": [
+    "react",
+    "rails"
+  ],
+  "props": {
+    "fixedWidth": {
+      "type": "boolean",
+      "platforms": [
+        "react"
+      ]
+    },
+    "layoutOption": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "default",
+        "number",
+        "onestar"
+      ],
+      "default": "default"
+    },
+    "icon": {
+      "type": "string",
+      "platforms": [
+        "react"
+      ]
+    },
+    "label": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "rating": {
+      "type": "number",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": 0
+    },
+    "denominator": {
+      "type": "number",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": 5
+    },
+    "colorOption": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "yellow",
+        "primary",
+        "subtle",
+        "outline"
+      ],
+      "default": "yellow"
+    },
+    "backgroundType": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "fill",
+        "outline"
+      ],
+      "default": "fill"
+    },
+    "size": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "xs",
+        "sm",
+        "md",
+        "lg"
+      ],
+      "default": "sm"
+    },
+    "variant": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "display",
+        "interactive"
+      ],
+      "default": "display"
+    },
+    "onClick": {
+      "type": "function",
+      "platforms": [
+        "react"
+      ]
+    },
+    "name": {
+      "platforms": [
+        "rails"
+      ],
+      "type": "string"
+    },
+    "required": {
+      "platforms": [
+        "rails"
+      ],
+      "type": "boolean",
+      "default": false
+    },
+    "inputOptions": {
+      "platforms": [
+        "rails"
+      ],
+      "type": "string"
+    },
+    "defaultValue": {
+      "platforms": [
+        "rails"
+      ]
+    }
+  },
+  "globalProps": true,
+  "usage": {
+    "react": {
+      "import": "import { StarRating } from 'playbook-ui'",
+      "example": "<StarRating layoutOption=\"default\" colorOption=\"yellow\"></StarRating>"
+    },
+    "rails": {
+      "import": null,
+      "example": "<%= pb_rails(\"star_rating\", props: { layout_option: \"default\", color_option: \"yellow\" }) %>"
+    }
+  }
+}

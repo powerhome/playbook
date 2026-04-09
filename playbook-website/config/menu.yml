@@ -33,7 +33,7 @@ kits:
     enhanced_element_used: true
   - name: sorting
     parent: advanced_table
-    kit_section: ["Enable Sorting", "Sort Control", "Enable Sort By Column", "Enable Sort By Column (Multi-Column)", "Custom Sort"]
+    kit_section: ["Enable Sorting", "Sort Control", "Enable Sort By Column", "Enable Sort By Column (Multi-Column)", "Custom Sort", "Sort Parent Only"]
     platforms: *1
     status: stable
     icons_used: true
@@ -57,7 +57,7 @@ kits:
     enhanced_element_used: true
   - name: column_configuration
     parent: advanced_table
-    kit_section: ["Column Visibility Control", "Column Visibility Control With State", "Column Visibility Control with Custom Dropdown", "Column Visibility Control with Multi-Header Columns", "Multi-Header Columns", "Multi-Header Columns (Multiple Levels)", "Multi-Header Columns with Custom Cells", "Multi-Header Columns with Vertical Borders"]
+    kit_section: ["Column Visibility Control", "Column Visibility Control With State", "Column Visibility Control with Custom Dropdown", "Column Visibility Control with Multi-Header Columns", "Multi-Header Columns", "Multi-Header Columns (Multiple Levels)", "Multi-Header Columns with Custom Cells", "Multi-Header Columns with Vertical Borders", "Grouped headers, custom headers, sort, and pinned rows"]
     platforms: *1
     status: stable
     icons_used: true
@@ -88,15 +88,19 @@ kits:
     react_rendered: false
     enhanced_element_used: true
 - category: alerts_and_dialogs
-  description:
+  description: Components for displaying alerts, confirmations, and overlay content to users.
   components:
   - name: dialog
     platforms: *1
-    description:
+    description: Modal dialog for confirmations, forms, or focused content. Supports status icons for info, caution, delete, error, and success states.
     status: stable
     icons_used: true
     react_rendered: false
     enhanced_element_used: true
+    subcomponents:
+      - Dialog.Header
+      - Dialog.Body
+      - Dialog.Footer
   - name: fixed_confirmation_toast
     platforms: *1
     description: Fixed Confirmation Toast is used as an alert. Success is used when
@@ -118,7 +122,7 @@ kits:
     enhanced_element_used: true
   - name: tooltip
     platforms: *1
-    description:
+    description: Small overlay providing contextual information on hover or focus.
     status: stable
     icons_used: false
     react_rendered: false
@@ -130,7 +134,7 @@ kits:
   components:
   - name: button
     platforms: *1
-    description:
+    description: Interactive element for triggering actions. Primary variant for main CTAs, secondary for less prominent actions, danger for destructive actions.
     status: stable
     icons_used: true
     react_rendered: false
@@ -158,12 +162,13 @@ kits:
     enhanced_element_used: false
   - name: copy_button
     platforms: *1
+    description: Button that copies text to clipboard with visual feedback.
     status: stable
     icons_used: false
     react_rendered: false
     enhanced_element_used: true
 - category: data_visualization
-  description:
+  description: Components for displaying data in tables, lists, charts, and graphs.
   components:
   - name: map
     platforms: *2
@@ -180,6 +185,11 @@ kits:
     icons_used: false
     react_rendered: false
     enhanced_element_used: true
+    subcomponents:
+      - Table.Head
+      - Table.Body
+      - Table.Row
+      - Table.Cell
   - name: list
     platforms: *1
     description: Lists display a vertical set of related content.
@@ -214,6 +224,7 @@ kits:
     enhanced_element_used: false
   - name: pb_gauge_chart
     platforms: web
+    description: Circular gauge chart for displaying a single value within a range.
     status: stable
     icons_used: false
     react_rendered: true
@@ -228,18 +239,20 @@ kits:
     enhanced_element_used: false
   - name: pb_circle_chart
     platforms: web
+    description: Circular chart for displaying proportional data.
     status: stable
     icons_used: false
     react_rendered: true
     enhanced_element_used: false
   - name: pb_line_graph
     platforms: web
+    description: Line graph for displaying data trends over time.
     status: stable
     icons_used: false
     react_rendered: true
     enhanced_element_used: false
 - category: date_and_time_text_patterns
-  description: ''
+  description: Components for displaying dates and times in various formats.
   components:
   - name: date
     platforms: *1
@@ -259,7 +272,7 @@ kits:
     enhanced_element_used: false
   - name: date_range_stacked
     platforms: *1
-    description:
+    description: Displays a date range in a vertical stacked format.
     status: stable
     icons_used: true
     react_rendered: false
@@ -276,12 +289,13 @@ kits:
     platforms: *1
     description: Date Time is a composite kit that leverages the Date and Time kits.
       The Date Time kit is affected by time zones and defaults to "America/New_York".
+    status: stable
     icons_used: false
     react_rendered: false
     enhanced_element_used: false
   - name: date_time_stacked
     platforms: *1
-    description:
+    description: Displays date and time in a vertical stacked format.
     status: stable
     icons_used: false
     react_rendered: false
@@ -304,14 +318,14 @@ kits:
     enhanced_element_used: false
   - name: time_range_inline
     platforms: *1
-    description:
+    description: Displays a time range in an inline format.
     status: stable
     icons_used: true
     react_rendered: false
     enhanced_element_used: false
   - name: time_stacked
     platforms: *1
-    description:
+    description: Displays time in a vertical stacked format.
     status: stable
     icons_used: false
     react_rendered: false
@@ -326,13 +340,13 @@ kits:
     enhanced_element_used: false
   - name: weekday_stacked
     platforms: *1
-    description:
+    description: Displays day of week and date in a stacked format.
     status: stable
     icons_used: false
     react_rendered: false
     enhanced_element_used: false
 - category: form_and_dashboard_text_patterns
-  description: ''
+  description: Components for displaying structured data on forms and dashboards.
   components:
   - name: contact
     platforms: *1
@@ -437,11 +451,11 @@ kits:
     react_rendered: false
     enhanced_element_used: false
 - category: form_elements
-  description:
+  description: Form wrapper components and specialized form controls.
   components:
   - name: file_upload
     platforms: *1
-    description:
+    description: Allows users to upload files via drag-and-drop or file browser.
     status: stable
     icons_used: false
     react_rendered: false
@@ -456,7 +470,7 @@ kits:
     enhanced_element_used: false
   - name: form_pill
     platforms: *1
-    description:
+    description: Pill-shaped form elements for tags, selections, or filters.
     status: stable
     icons_used: true
     react_rendered: false
@@ -471,24 +485,24 @@ kits:
     enhanced_element_used: true
   - name: form_group
     platforms: *1
-    description:
+    description: Groups related form fields together with optional labels.
     status: stable
     icons_used: false
     react_rendered: false
     enhanced_element_used: false
 - category: form_input
-  description: ''
+  description: Components for text-based user input in forms.
   components:
   - name: passphrase
     platforms: *1
-    description:
+    description: Secure password input with strength indicator and show/hide toggle.
     status: stable
     icons_used: true
     react_rendered: true
     enhanced_element_used: false
   - name: phone_number_input
     platforms: *1
-    description:
+    description: International phone number input with country code selection and formatting.
     status: stable
     icons_used: false
     react_rendered: true
@@ -503,7 +517,7 @@ kits:
     enhanced_element_used: false
   - name: rich_text_editor
     platforms: *1
-    description:
+    description: Full-featured text editor with formatting options.
     status: stable
     platforms_status: { rails: deprecated }
     icons_used: true
@@ -526,7 +540,7 @@ kits:
     react_rendered: true
     enhanced_element_used: true
 - category: form_selection
-  description:
+  description: Components for selecting options, dates, and making choices in forms.
   components:
   - name: date_picker
     platforms: *1
@@ -539,11 +553,15 @@ kits:
     enhanced_element_used: false
   - name: dropdown
     platforms: *1
-    description: ''
+    description: Customizable dropdown menu with trigger element and various option configurations.
     status: stable
     icons_used: true
     react_rendered: false
     enhanced_element_used: true
+    subcomponents:
+      - Dropdown.Trigger
+      - Dropdown.Container
+      - Dropdown.Option
   - name: multi_level_select
     platforms: *1
     description: The MultiLevelSelect kit renders a multi leveled select dropdown
@@ -570,14 +588,14 @@ kits:
     enhanced_element_used: false
   - name: selectable_card_icon
     platforms: *1
-    description:
+    description: Selectable card variant with icon display for visual selection options.
     status: stable
     icons_used: false
     react_rendered: false
     enhanced_element_used: false
   - name: selectable_icon
     platforms: *1
-    description:
+    description: Icon-based selection input for compact visual choices.
     status: stable
     icons_used: true
     react_rendered: false
@@ -600,7 +618,7 @@ kits:
     enhanced_element_used: true
   - name: selectable_list
     platforms: *1
-    description:
+    description: List of items that can be selected, supporting single or multiple selection.
     status: stable
     icons_used: false
     react_rendered: false
@@ -613,7 +631,7 @@ kits:
     react_rendered: true
     enhanced_element_used: true
 - category: icons_and_images
-  description: ''
+  description: Components for displaying icons, images, and visual media.
   components:
   - name: icon
     platforms: *1
@@ -633,7 +651,7 @@ kits:
     enhanced_element_used: false
   - name: icon_stat_value
     platforms: *1
-    description:
+    description: Displays a statistic value with an associated icon.
     status: stable
     icons_used: true
     react_rendered: false
@@ -679,7 +697,7 @@ kits:
     react_rendered: false
     enhanced_element_used: true
 - category: layout_and_structure
-  description:
+  description: Components for structuring and organizing page layouts and content containers.
   components:
   - name: flex
     platforms: *1
@@ -698,11 +716,14 @@ kits:
     enhanced_element_used: false
   - name: card
     platforms: *3
-    description:
+    description: Content container with optional header, body sections, and various styling options.
     status: stable
     icons_used: true
     react_rendered: false
     enhanced_element_used: false
+    subcomponents:
+      - Card.Header
+      - Card.Body
   - name: section_separator
     platforms: *1
     description: Section separator is a divider line that compartmentalizes content,
@@ -721,26 +742,33 @@ kits:
     enhanced_element_used: false
   - name: collapsible
     platforms: *1
-    description:
+    description: Collapsible content that can be expanded or collapsed.
     status: stable
     icons_used: true
     react_rendered: false
     enhanced_element_used: true
+    subcomponents:
+      - Collapsible.Main
+      - Collapsible.Content
   - name: overlay
     platforms: *1
+    description: Full screen overlay for modals and dialogs.
     status: stable
     icons_used: false
     react_rendered: false
     enhanced_element_used: true
   - name: draggable
     platforms: *1
-    description:
+    description: Drag and drop functionality for reordering items.
     status: stable
     icons_used: false
     react_rendered: false
     enhanced_element_used: false
+    subcomponents:
+      - Draggable.Container
+      - Draggable.Item
 - category: message_text_patterns
-  description:
+  description: Components for displaying messages and highlighting content.
   components:
   - name: highlight
     platforms: *1
@@ -758,7 +786,7 @@ kits:
     react_rendered: false
     enhanced_element_used: false
 - category: navigation
-  description:
+  description: Components for navigation, breadcrumbs, and pagination.
   components:
   - name: bread_crumbs
     platforms: *1
@@ -776,15 +804,18 @@ kits:
     icons_used: true
     react_rendered: false
     enhanced_element_used: true
+    subcomponents:
+      - Nav.Item
   - name: pagination
     platforms: *4
-    description:
+    description: Pagination for navigating through multiple pages of content.
     status: stable
 - category: state_and_progress_indicators
-  description:
+  description: Components for showing loading states, progress, and timelines.
   components:
   - name: empty_state
     platforms: *2
+    description: Empty state placeholder for when no content is available.
     status: stable
     icons_used: false
     react_rendered: false
@@ -809,6 +840,7 @@ kits:
     platforms: *1
     description: Displays the current progress of an operation flow. User understanding
       increases when paired with labels or numbers.
+    status: stable
   - name: progress_step
     platforms: *1
     description: 'Progress step kit is used to show the progress of a process. There
@@ -817,6 +849,8 @@ kits:
     icons_used: true
     react_rendered: false
     enhanced_element_used: false
+    subcomponents:
+      - ProgressStep.Item
   - name: timeline
     platforms: *1
     description: The timeline kit can use two different line styles in the same timeline
@@ -825,14 +859,17 @@ kits:
     icons_used: true
     react_rendered: false
     enhanced_element_used: false
+    subcomponents:
+      - Timeline.Item
   - name: skeleton_loading
     platforms: *1
+    description: Placeholder loading state that mimics the shape of content.
     status: stable
     icons_used: false
     react_rendered: false
     enhanced_element_used: false
 - category: tags
-  description:
+  description: Components for tags, badges, pills, and status indicators.
   components:
   - name: badge
     platforms: *1
@@ -867,7 +904,7 @@ kits:
     react_rendered: false
     enhanced_element_used: false
 - category: typography
-  description: ''
+  description: Text components for consistent typography throughout the application.
   components:
   - name: body
     platforms: *1
@@ -905,12 +942,13 @@ kits:
     enhanced_element_used: false
   - name: link
     platforms: *1
+    description: Text link for navigation to other pages or sections.
     status: stable
     icons_used: false
     react_rendered: false
     enhanced_element_used: false
 - category: user
-  description:
+  description: Components for displaying user information, avatars, and user-related data.
   components:
   - name: avatar
     platforms: *3

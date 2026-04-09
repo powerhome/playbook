@@ -1,0 +1,56 @@
+{
+  "$schema": "https://playbook.powerapp.cloud/schemas/kit-schema.json",
+  "name": "Pagination",
+  "description": "Pagination component",
+  "platforms": [
+    "react",
+    "rails"
+  ],
+  "props": {
+    "current": {
+      "type": "number;",
+      "platforms": [
+        "react"
+      ]
+    },
+    "onChange": {
+      "type": "function",
+      "platforms": [
+        "react"
+      ]
+    },
+    "range": {
+      "type": "number;",
+      "platforms": [
+        "react"
+      ]
+    },
+    "total": {
+      "type": "number;",
+      "platforms": [
+        "react"
+      ]
+    },
+    "model": {
+      "platforms": [
+        "rails"
+      ]
+    },
+    "view": {
+      "platforms": [
+        "rails"
+      ]
+    }
+  },
+  "globalProps": true,
+  "usage": {
+    "react": {
+      "import": "import { Pagination } from 'playbook-ui'",
+      "example": "<Pagination></Pagination>"
+    },
+    "rails": {
+      "import": null,
+      "example": "<%= pb_rails(\"pagination\", props: { text: \"Example\" }) %>"
+    }
+  }
+}

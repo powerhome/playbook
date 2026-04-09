@@ -1,0 +1,53 @@
+{
+  "$schema": "https://playbook.powerapp.cloud/schemas/kit-schema.json",
+  "name": "Form",
+  "description": "Form component",
+  "platforms": [
+    "rails"
+  ],
+  "props": {
+    "formSystem": {
+      "platforms": [
+        "rails"
+      ],
+      "type": "string"
+    },
+    "formSystemOptions": {
+      "platforms": [
+        "rails"
+      ],
+      "type": "string"
+    },
+    "loading": {
+      "platforms": [
+        "rails"
+      ],
+      "type": "boolean",
+      "default": false
+    },
+    "options": {
+      "platforms": [
+        "rails"
+      ],
+      "type": "string"
+    },
+    "validate": {
+      "platforms": [
+        "rails"
+      ],
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "globalProps": true,
+  "usage": {
+    "react": {
+      "import": "import { Form } from 'playbook-ui'",
+      "example": "<Form></Form>"
+    },
+    "rails": {
+      "import": null,
+      "example": "<%= pb_rails(\"form\", props: { text: \"Example\" }) %>"
+    }
+  }
+}

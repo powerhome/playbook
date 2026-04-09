@@ -46,6 +46,11 @@ module Playbook
         }.merge(attributes).merge(input_options)
       end
 
+      # Same resolved id as the native +<select>+ (+all_attributes[:id]+) for label +for+.
+      def select_input_id
+        all_attributes[:id].presence
+      end
+
       def classname
         generate_classname("pb_select", select_margin_bottom, separator: " ")
       end
@@ -98,8 +103,8 @@ module Playbook
 
       def data_attributes
         data = attributes[:data] || {}
-        data.merge!("data-pb-select" => true)
-        data.merge!("data-validation-message" => validation_message) if validation_message.present?
+        data["data-pb-select"] = true
+        data["data-validation-message"] = validation_message if validation_message.present?
         data
       end
 

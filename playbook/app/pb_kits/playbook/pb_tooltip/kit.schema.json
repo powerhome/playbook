@@ -1,0 +1,110 @@
+{
+  "$schema": "https://playbook.powerapp.cloud/schemas/kit-schema.json",
+  "name": "Tooltip",
+  "description": "Tooltip component",
+  "platforms": [
+    "react",
+    "rails"
+  ],
+  "props": {
+    "useClickToOpen": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "delay": {
+      "type": "number | Partial<{open: number; close: number}>",
+      "platforms": [
+        "react"
+      ]
+    },
+    "icon": {
+      "type": "string",
+      "platforms": [
+        "react"
+      ]
+    },
+    "interaction": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "placement": {
+      "type": "Placement",
+      "platforms": [
+        "react"
+      ]
+    },
+    "text": {
+      "type": "string",
+      "platforms": [
+        "react"
+      ]
+    },
+    "showTooltip": {
+      "type": "boolean",
+      "platforms": [
+        "react"
+      ]
+    },
+    "forceOpenTooltip": {
+      "type": "boolean",
+      "platforms": [
+        "react"
+      ]
+    },
+    "delayOpen": {
+      "platforms": [
+        "rails"
+      ]
+    },
+    "delayClose": {
+      "platforms": [
+        "rails"
+      ]
+    },
+    "tooltipId": {
+      "platforms": [
+        "rails"
+      ]
+    },
+    "triggerElementSelector": {
+      "platforms": [
+        "rails"
+      ]
+    },
+    "triggerElementId": {
+      "platforms": [
+        "rails"
+      ]
+    },
+    "triggerMethod": {
+      "platforms": [
+        "rails"
+      ],
+      "type": "enum",
+      "values": [
+        "hover",
+        "click"
+      ],
+      "default": "hover"
+    }
+  },
+  "globalProps": true,
+  "usage": {
+    "react": {
+      "import": "import { Tooltip } from 'playbook-ui'",
+      "example": "<Tooltip triggerMethod=\"hover\"></Tooltip>"
+    },
+    "rails": {
+      "import": null,
+      "example": "<%= pb_rails(\"tooltip\", props: { trigger_method: \"hover\" }) %>"
+    }
+  }
+}
