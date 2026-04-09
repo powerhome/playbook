@@ -97,12 +97,6 @@ export const usePlaygroundState = ({
     setActivePresetIndex(null);
   }, []);
 
-  const handleReset = useCallback(() => {
-    setPropValues({});
-    setChildren(playgroundConfig?.children?.default ?? getDefaultChildren(kitName));
-    setActivePresetIndex(null);
-  }, [kitName, playgroundConfig]);
-
   const applyPreset = useCallback(
     (presetIndex: number) => {
       const preset = playgroundConfig?.presets?.[presetIndex];
@@ -292,7 +286,6 @@ export const usePlaygroundState = ({
     
     // Handlers
     handlePropChange,
-    handleReset,
     applyPreset,
     setChildren,
   };

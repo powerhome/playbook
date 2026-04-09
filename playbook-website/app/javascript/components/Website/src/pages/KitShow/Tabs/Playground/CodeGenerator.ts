@@ -30,6 +30,15 @@ const formatPropValue = (
 
   const propType = definition.type.toLowerCase();
 
+  // Check object types FIRST - before other type checks that might match substrings
+  // E.g., "{ component: string }" contains "string" but is an object type
+  if (propType.startsWith("{") || (typeof value === "object" && value !== null)) {
+    if (typeof value === "object" && value !== null) {
+      return `${name}={${JSON.stringify(value)}}`;
+    }
+    return null;
+  }
+
   if (propType === "boolean") {
     if (value === true) {
       return name;
@@ -70,7 +79,7 @@ const formatPropValue = (
   }
 
   if (propType === "object" || propType.includes("object")) {
-    if (typeof value === "object") {
+    if (typeof value === "object" && value !== null) {
       return `${name}={${JSON.stringify(value)}}`;
     }
     return null;
@@ -103,8 +112,7 @@ export const generateCode = ({
   Object.entries(propValues).forEach(([name, propValue]) => {
     if (!propValue.enabled) return;
 
-    const definition = propDefinitions[name];
-    if (!definition) return;
+    const definition = propDefinitions[name] || { type: "any", platforms: ["react"] as const };
 
     const formatted = formatPropValue(name, propValue.value, definition);
     if (formatted) {
@@ -146,8 +154,7 @@ export const generateLiveCode = ({
   Object.entries(propValues).forEach(([name, propValue]) => {
     if (!propValue.enabled) return;
 
-    const definition = propDefinitions[name];
-    if (!definition) return;
+    const definition = propDefinitions[name] || { type: "any", platforms: ["react"] as const };
 
     const formatted = formatPropValue(name, propValue.value, definition);
     if (formatted) {
@@ -222,8 +229,7 @@ export const generateFromTemplate = ({
     // Skip if this prop's value matches the default in the template
     if (defaults[name] !== undefined && defaults[name] === propValue.value) return;
     
-    const definition = propDefinitions[name];
-    if (!definition) return;
+    const definition = propDefinitions[name] || { type: "any", platforms: ["react"] as const };
     
     const formatted = formatPropValue(name, propValue.value, definition);
     if (!formatted) return;

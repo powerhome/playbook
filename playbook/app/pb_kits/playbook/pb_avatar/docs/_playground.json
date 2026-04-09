@@ -83,6 +83,20 @@
         "imageUrl": "https://randomuser.me/api/portraits/women/68.jpg",
         "grayscale": true
       }
+    },
+    {
+      "name": "Component overlay",
+      "props": {
+        "size": "lg",
+        "name": "Jordan Lee",
+        "imageUrl": "https://randomuser.me/api/portraits/women/68.jpg",
+        "componentOverlay": {
+          "component": "badge",
+          "placement": "top-right",
+          "text": "12",
+          "variant": "error"
+        }
+      }
     }
   ],
   "conditionals": {},

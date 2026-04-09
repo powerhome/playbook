@@ -50,7 +50,6 @@ export const PlaygroundTab: React.FC<PlaygroundTabProps> = ({
     previewCode,
     displayCode,
     handlePropChange,
-    handleReset,
     applyPreset,
     setChildren,
   } = usePlaygroundState({
@@ -100,7 +99,7 @@ export const PlaygroundTab: React.FC<PlaygroundTabProps> = ({
           <PlaygroundPreview code={previewCode} extraScope={playgroundConfig?.scopeVars} />
         </Card>
 
-        <CodePanel code={displayCode} hasModifiedProps={hasModifiedProps} onReset={handleReset} />
+        <CodePanel code={displayCode} />
       </Flex>
 
       {/* Right Panel - Props Controls */}
