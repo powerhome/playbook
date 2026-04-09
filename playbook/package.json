@@ -79,7 +79,7 @@
     "@testing-library/react": "11.2.7",
     "@types/flatpickr": "3.1.2",
     "@types/jest": "26.0.14",
-    "@types/react": "17.0.54",
+    "@types/react": "19.2.14",
     "@types/react-dom": "^18.0.11",
     "@types/react-highlight-words": "^0.20.0",
     "@types/react-modal": "3.16.1",
@@ -100,7 +100,7 @@
     "jest-axe": "4.1.0",
     "jest-fail-on-console": "3.2.0",
     "lazysizes": "^5.3.2",
-    "react": "^17.0.2",
+    "react": "^19.2.5",
     "react-dom": "^17.0.2",
     "react-dropzone": "^14.3.5",
     "react-highlight-words": "^0.20.0",
@@ -121,7 +121,7 @@
   "peerDependencies": {
     "highcharts": "^11.0.0",
     "highcharts-react-official": "^3.0.0",
-    "react": "^17.0.2",
+    "react": "^19.2.5",
     "react-dom": "^17.0.2",
     "react-is": "^17.0.2"
   },
@@ -140,7 +140,7 @@
     }
   },
   "resolutions": {
-    "react": "^17.0.2",
+    "react": "^19.2.5",
     "minimist": "1.2.7",
     "selfsigned": "^1.10.8",
     "set-value": "^2.0.1",
