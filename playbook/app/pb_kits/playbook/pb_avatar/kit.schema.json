@@ -7,6 +7,13 @@
     "rails"
   ],
   "props": {
+    "componentOverlay": {
+      "type": "{ component: \"badge\" | \"iconCircle\" placement: string size?: \"md\" | \"lg\" | \"sm\" | \"xl\" | \"xs\" | \"xxs\" text?: string variant?: string icon?: string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
     "grayscale": {
       "type": "boolean",
       "platforms": [
@@ -64,11 +71,6 @@
         "away",
         "offline",
         "online"
-      ]
-    },
-    "componentOverlay": {
-      "platforms": [
-        "rails"
       ]
     }
   },

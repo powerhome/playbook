@@ -84,6 +84,13 @@
       ],
       "default": true
     },
+    "highlight": {
+      "type": "{ position?: \"side\" | \"right_side\" | \"top\" color?: string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
     "length": {
       "type": "number",
       "platforms": [
@@ -129,12 +136,6 @@
         "react"
       ],
       "default": false
-    },
-    "highlight": {
-      "platforms": [
-        "rails"
-      ],
-      "type": "string"
     },
     "items": {
       "platforms": [

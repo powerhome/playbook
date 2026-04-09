@@ -133,9 +133,16 @@
       ]
     },
     "paginationProps": {
-      "type": "function",
+      "type": "GenericObject",
       "platforms": [
         "react"
+      ]
+    },
+    "pinnedRows": {
+      "type": "function",
+      "platforms": [
+        "react",
+        "rails"
       ]
     },
     "responsive": {
@@ -256,12 +263,6 @@
       "platforms": [
         "react"
       ]
-    },
-    "pinnedRows": {
-      "platforms": [
-        "rails"
-      ],
-      "type": "string"
     }
   },
   "globalProps": true,

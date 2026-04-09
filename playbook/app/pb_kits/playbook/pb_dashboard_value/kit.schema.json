@@ -20,24 +20,26 @@
       ],
       "default": "left"
     },
-    "statLabel": {
-      "type": "string statValue?: { unit?: string value?: string | number",
+    "statChange": {
+      "type": "{ change? : 'increase' | 'decrease' | 'neutral' value?: string | number",
       "platforms": [
         "react",
         "rails"
       ]
     },
-    "statChange": {
+    "statLabel": {
+      "type": "string",
       "platforms": [
+        "react",
         "rails"
-      ],
-      "type": "string"
+      ]
     },
     "statValue": {
+      "type": "{ unit?: string value?: string | number",
       "platforms": [
+        "react",
         "rails"
-      ],
-      "type": "string"
+      ]
     }
   },
   "globalProps": true,

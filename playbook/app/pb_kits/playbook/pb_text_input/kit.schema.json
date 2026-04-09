@@ -110,6 +110,13 @@
         "rails"
       ]
     },
+    "addOn": {
+      "type": "{ icon?: string alignment?: \"right\" | \"left\" border?: boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
     "autoComplete": {
       "type": "boolean | string",
       "platforms": [
@@ -129,12 +136,6 @@
       "type": "string"
     },
     "validation": {
-      "platforms": [
-        "rails"
-      ],
-      "type": "string"
-    },
-    "addOn": {
       "platforms": [
         "rails"
       ],

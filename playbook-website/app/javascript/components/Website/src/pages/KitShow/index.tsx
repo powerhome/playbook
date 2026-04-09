@@ -7,8 +7,8 @@ import { PageContainer } from "../../components/PageContainer";
 import { linkFormat } from "../../../../../utilities/website_sidebar_helper";
 import { DocsTab } from "./Tabs/DocsTab";
 import { PropsTab } from "./Tabs/PropsTab";
-import { BuildingBlocksTab } from "./Tabs/BuildingBlocksTab";
-import { ReferencesTab } from "./Tabs/ReferencesTab";
+// import { BuildingBlocksTab } from "./Tabs/BuildingBlocksTab";
+// import { ReferencesTab } from "./Tabs/ReferencesTab";
 import { PlaygroundTab } from "./Tabs/PlaygroundTab";
 
 const KitShow = () => {

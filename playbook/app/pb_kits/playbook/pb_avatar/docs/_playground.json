@@ -27,80 +27,44 @@
   ],
   "presets": [
     {
-      "name": "Medium initials",
+      "name": "Default",
       "props": {
         "size": "md",
-        "name": "Jane Doe"
-      }
-    },
-    {
-      "name": "Extra small",
-      "props": {
-        "size": "xxs",
-        "name": "AB"
+        "name": "Jane Doe",
+        "imageUrl": "https://randomuser.me/api/portraits/women/44.jpg"
       }
     },
     {
       "name": "Small",
       "props": {
         "size": "sm",
-        "name": "Alex Kim"
+        "name": "Alex Kim",
+        "imageUrl": "https://randomuser.me/api/portraits/men/32.jpg"
       }
     },
     {
-      "name": "Large",
-      "props": {
-        "size": "lg",
-        "name": "Sam Rivera"
-      }
-    },
-    {
-      "name": "Extra large",
-      "props": {
-        "size": "xl",
-        "name": "Taylor Chen"
-      }
-    },
-    {
-      "name": "With photo",
+      "name": "Initials only",
       "props": {
         "size": "md",
-        "name": "Jordan Lee",
-        "imageUrl": "https://unsplash.it/200/200",
-        "imageAlt": "Portrait"
-      }
-    },
-    {
-      "name": "Photo + online",
-      "props": {
-        "size": "lg",
-        "name": "Casey Morgan",
-        "imageUrl": "https://unsplash.it/200/200",
-        "status": "online"
+        "name": "Jordan Lee"
       }
     },
     {
       "name": "Online status",
       "props": {
         "size": "md",
-        "name": "Riley Park",
+        "name": "Jordan Lee",
+        "imageUrl": "https://randomuser.me/api/portraits/men/32.jpg",
         "status": "online"
       }
     },
     {
-      "name": "Away",
+      "name": "Status + Small",
       "props": {
-        "size": "md",
-        "name": "Riley Park",
+        "size": "sm",
+        "name": "Jordan Lee",
+        "imageUrl": "https://randomuser.me/api/portraits/men/32.jpg",
         "status": "away"
-      }
-    },
-    {
-      "name": "Offline",
-      "props": {
-        "size": "md",
-        "name": "Riley Park",
-        "status": "offline"
       }
     },
     {
@@ -116,7 +80,7 @@
       "props": {
         "size": "md",
         "name": "Photo user",
-        "imageUrl": "https://unsplash.it/200/200",
+        "imageUrl": "https://randomuser.me/api/portraits/women/68.jpg",
         "grayscale": true
       }
     }
@@ -127,7 +91,7 @@
       "when": {
         "status": "online"
       },
-      "message": "Status shows a dot when name or image is set; it does not appear when using component overlay mode (Rails-only).",
+      "message": "Status shows a dot when name or image is set; it does not appear when using component overlay mode.",
       "type": "info"
     },
     "image_fallback": {

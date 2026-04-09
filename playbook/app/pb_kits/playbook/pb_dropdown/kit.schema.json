@@ -159,12 +159,18 @@
       "default": ""
     },
     "controlsEndId": {
-      "type": "string; activeStyle?: { backgroundColor?: string; fontColor?: string;",
+      "type": "string;",
       "platforms": [
         "react",
         "rails"
       ],
       "default": ""
+    },
+    "activeStyle": {
+      "type": "object",
+      "platforms": [
+        "react"
+      ]
     },
     "requiredIndicator": {
       "type": "boolean;",
