@@ -10,25 +10,79 @@
   },
   "groups": [
     {
-      "name": "Props",
+      "name": "Content",
+      "props": [
+        "tag"
+      ]
+    },
+    {
+      "name": "State",
       "props": [
         "collapsed",
+        "onClick",
+        "onIconClick"
+      ]
+    },
+    {
+      "name": "Appearance",
+      "props": [
         "icon",
         "iconColor",
-        "iconSize",
-        "onIconClick",
-        "onClick",
-        "tag"
+        "iconSize"
       ]
     }
   ],
   "presets": [
     {
-      "name": "Default",
-      "props": {},
+      "name": "Collapsed",
+      "props": {
+        "collapsed": true,
+        "tag": "div"
+      },
+      "children": "Collapsible content"
+    },
+    {
+      "name": "Expanded",
+      "props": {
+        "collapsed": false,
+        "tag": "div"
+      },
+      "children": "Collapsible content"
+    },
+    {
+      "name": "With chevron icon",
+      "props": {
+        "collapsed": true,
+        "icon": "chevron-down",
+        "iconColor": "link"
+      },
+      "children": "Collapsible content"
+    },
+    {
+      "name": "Heading (h3)",
+      "props": {
+        "collapsed": true,
+        "tag": "h3",
+        "icon": "angle-down"
+      },
+      "children": "Collapsible content"
+    },
+    {
+      "name": "Success icon tone",
+      "props": {
+        "collapsed": false,
+        "icon": "check-circle",
+        "iconColor": "success"
+      },
       "children": "Collapsible content"
     }
   ],
   "conditionals": {},
-  "hints": {}
+  "hints": {
+    "structure_note": {
+      "when": {},
+      "message": "Use Collapsible.Main and Collapsible.Content as children in real usage; the preview uses placeholder body text.",
+      "type": "info"
+    }
+  }
 }

@@ -1,0 +1,44 @@
+{
+  "children": {
+    "default": "Figure 1 · Quarterly revenue by region"
+  },
+  "groups": [
+    {
+      "name": "Appearance",
+      "props": ["size", "color", "variant", "tag"]
+    },
+    {
+      "name": "Content",
+      "props": ["text"]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default",
+      "props": { "size": "md" },
+      "children": "Figure 1 · Quarterly revenue by region"
+    },
+    {
+      "name": "Small meta",
+      "props": { "size": "xs", "color": "light" },
+      "children": "Posted 3 days ago · 4 min read"
+    },
+    {
+      "name": "Table caption",
+      "props": { "tag": "caption", "size": "sm" },
+      "children": "Active users by plan type"
+    },
+    {
+      "name": "Success note",
+      "props": { "color": "success", "size": "sm" },
+      "children": "Free trial · 14 days remaining"
+    },
+    {
+      "name": "Error hint",
+      "props": { "color": "error", "size": "md" },
+      "children": "Required field"
+    }
+  ],
+  "conditionals": {},
+  "hints": {}
+}

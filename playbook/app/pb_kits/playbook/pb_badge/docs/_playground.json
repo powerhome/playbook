@@ -14,24 +14,123 @@
   },
   "groups": [
     {
-      "name": "Props",
+      "name": "Content",
       "props": [
-        "removeIcon",
-        "removeOnClick",
+        "text"
+      ]
+    },
+    {
+      "name": "Appearance",
+      "props": [
+        "variant",
         "rounded",
+        "removeIcon"
+      ]
+    },
+    {
+      "name": "Other",
+      "props": [
         "tabIndex",
-        "text",
-        "variant"
+        "removeOnClick"
       ]
     }
   ],
   "presets": [
     {
-      "name": "Default",
-      "props": {},
-      "children": "Badge content"
+      "name": "Primary",
+      "props": {
+        "variant": "primary",
+        "text": "Primary"
+      },
+      "children": ""
+    },
+    {
+      "name": "Success",
+      "props": {
+        "variant": "success",
+        "text": "Success"
+      },
+      "children": ""
+    },
+    {
+      "name": "Warning",
+      "props": {
+        "variant": "warning",
+        "text": "Warning"
+      },
+      "children": ""
+    },
+    {
+      "name": "Error",
+      "props": {
+        "variant": "error",
+        "text": "Error"
+      },
+      "children": ""
+    },
+    {
+      "name": "Info",
+      "props": {
+        "variant": "info",
+        "text": "Info"
+      },
+      "children": ""
+    },
+    {
+      "name": "Neutral",
+      "props": {
+        "variant": "neutral",
+        "text": "Neutral"
+      },
+      "children": ""
+    },
+    {
+      "name": "Notification",
+      "props": {
+        "variant": "notification",
+        "text": "3"
+      },
+      "children": ""
+    },
+    {
+      "name": "Notification error",
+      "props": {
+        "variant": "notificationError",
+        "text": "!"
+      },
+      "children": ""
+    },
+    {
+      "name": "Rounded primary",
+      "props": {
+        "variant": "primary",
+        "rounded": true,
+        "text": "New"
+      },
+      "children": ""
+    },
+    {
+      "name": "Dismissible",
+      "props": {
+        "variant": "neutral",
+        "removeIcon": true,
+        "text": "Removable"
+      },
+      "children": ""
     }
   ],
-  "conditionals": {},
-  "hints": {}
+  "conditionals": {
+    "removeOnClick": {
+      "requires": "removeIcon"
+    }
+  },
+  "hints": {
+    "dismissible": {
+      "when": {
+        "removeIcon": true
+      },
+      "message": "Wire removeOnClick in app code to handle dismissal; the playground only shows the icon.",
+      "type": "info"
+    }
+  }
 }

@@ -9,16 +9,16 @@ Generates `_playground.json` files for kits using a two-layer approach:
 
 ```bash
 # Generate for all kits (skips existing)
-node scripts/generate-playground-configs.js
+yarn generate:playground-configs.js
 
-# Regenerate all (overwrite existing)
-node scripts/generate-playground-configs.js --overwrite
+# Regenerate all (overwrite ALL existing)
+yarn generate:playground-configs.js --overwrite
 
-# Generate for a specific kit
-node scripts/generate-playground-configs.js --kit=button --overwrite
+# Generate for a specific kit (overwrite existing for ONLY listed kit)
+yarn generate:playground-configs.js --kit=button --overwrite
 
 # Generate base only (skip override loading, useful for debugging)
-node scripts/generate-playground-configs.js --kit=button --overwrite --base-only
+yarn generate:playground-configs.js --kit=button --overwrite --base-only
 ```
 
 ## Base Config (auto-generated)

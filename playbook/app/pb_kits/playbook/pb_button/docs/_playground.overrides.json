@@ -23,7 +23,7 @@
     { "name": "With Icon", "props": { "icon": "plus", "variant": "primary" }, "children": "Add Item" },
     { "name": "Loading", "props": { "loading": true, "variant": "primary" }, "children": "Saving..." },
     { "name": "Reaction", "props": { "variant": "reaction", "icon": "👍", "count": 5 }, "children": "" },
-    { "name": "Link Style", "props": { "variant": "link" }, "children": "Learn More" }
+    { "name": "Link Mode", "props": { "link": true }, "children": "Learn More" }
   ],
   "hints": {
     "reaction_info": {

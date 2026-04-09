@@ -1,0 +1,17 @@
+{
+  "defaults": {
+    "align": "left",
+    "statLabel": "Monthly recurring revenue"
+  },
+  "groups": [
+    { "name": "Content", "props": ["statLabel"] },
+    { "name": "Appearance", "props": ["align"] }
+  ],
+  "presets": [
+    { "name": "KPI label", "props": { "statLabel": "Monthly recurring revenue", "align": "left" } },
+    { "name": "Centered header", "props": { "statLabel": "Active accounts", "align": "center" } },
+    { "name": "Right-aligned block", "props": { "statLabel": "Conversion rate", "align": "right" } }
+  ],
+  "conditionals": {},
+  "hints": {}
+}

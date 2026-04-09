@@ -7,21 +7,29 @@
   },
   "children": {
     "editable": true,
-    "default": "Tooltip content",
-    "hideWhenPropSet": [
-      "text"
-    ]
+    "default": "Hover me",
+    "hideWhenPropSet": []
   },
   "groups": [
     {
-      "name": "Props",
+      "name": "Content",
       "props": [
-        "useClickToOpen",
-        "delay",
-        "icon",
-        "interaction",
-        "placement",
         "text",
+        "icon"
+      ]
+    },
+    {
+      "name": "Behavior",
+      "props": [
+        "placement",
+        "useClickToOpen",
+        "interaction",
+        "delay"
+      ]
+    },
+    {
+      "name": "Appearance",
+      "props": [
         "showTooltip",
         "forceOpenTooltip"
       ]
@@ -29,11 +37,55 @@
   ],
   "presets": [
     {
-      "name": "Default",
-      "props": {},
-      "children": "Tooltip content"
+      "name": "Top",
+      "props": {
+        "placement": "top",
+        "text": "Tooltip on top"
+      },
+      "children": "Hover me"
+    },
+    {
+      "name": "Bottom",
+      "props": {
+        "placement": "bottom",
+        "text": "Tooltip on bottom"
+      },
+      "children": "Hover me"
+    },
+    {
+      "name": "Left",
+      "props": {
+        "placement": "left",
+        "text": "Tooltip on the left"
+      },
+      "children": "Hover me"
+    },
+    {
+      "name": "Right",
+      "props": {
+        "placement": "right",
+        "text": "Tooltip on the right"
+      },
+      "children": "Hover me"
+    },
+    {
+      "name": "Click to open",
+      "props": {
+        "placement": "top",
+        "useClickToOpen": true,
+        "text": "Click toggles this tooltip"
+      },
+      "children": "Click me"
     }
   ],
   "conditionals": {},
-  "hints": {}
+  "hints": {
+    "click_to_open": {
+      "when": {
+        "useClickToOpen": true
+      },
+      "message": "When click to open is on, the tooltip toggles on click instead of hover.",
+      "type": "info"
+    }
+  }
 }

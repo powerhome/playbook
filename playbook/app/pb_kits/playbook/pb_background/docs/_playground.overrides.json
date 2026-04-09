@@ -1,0 +1,110 @@
+{
+  "children": {
+    "default": "Content on background"
+  },
+  "groups": [
+    {
+      "name": "Color",
+      "props": ["backgroundColor", "customColor"]
+    },
+    {
+      "name": "Image",
+      "props": ["imageUrl", "alt", "imageOverlay"]
+    },
+    {
+      "name": "Image layout",
+      "props": ["backgroundSize", "backgroundPosition", "backgroundRepeat"]
+    },
+    {
+      "name": "Other",
+      "props": ["tag", "transition"]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Light",
+      "props": {
+        "backgroundColor": "light"
+      },
+      "children": "Default light background"
+    },
+    {
+      "name": "White",
+      "props": {
+        "backgroundColor": "white"
+      },
+      "children": "White surface"
+    },
+    {
+      "name": "Dark",
+      "props": {
+        "backgroundColor": "dark"
+      },
+      "children": "Dark surface"
+    },
+    {
+      "name": "Primary",
+      "props": {
+        "backgroundColor": "primary"
+      },
+      "children": "Primary brand fill"
+    },
+    {
+      "name": "Gradient",
+      "props": {
+        "backgroundColor": "gradient"
+      },
+      "children": "Gradient background"
+    },
+    {
+      "name": "Category accent",
+      "props": {
+        "backgroundColor": "category_1"
+      },
+      "children": "Category color"
+    },
+    {
+      "name": "Success",
+      "props": {
+        "backgroundColor": "success"
+      },
+      "children": "Success state"
+    },
+    {
+      "name": "Warning",
+      "props": {
+        "backgroundColor": "warning"
+      },
+      "children": "Warning state"
+    },
+    {
+      "name": "Subtle neutral",
+      "props": {
+        "backgroundColor": "neutral_subtle"
+      },
+      "children": "Subtle neutral wash"
+    },
+    {
+      "name": "Card light",
+      "props": {
+        "backgroundColor": "card_light",
+        "padding": "md"
+      },
+      "children": "Card-style light panel"
+    }
+  ],
+  "conditionals": {
+    "alt": { "requires": "imageUrl" },
+    "imageOverlay": { "requires": "imageUrl" },
+    "backgroundSize": { "requires": "imageUrl" },
+    "backgroundPosition": { "requires": "imageUrl" },
+    "backgroundRepeat": { "requires": "imageUrl" }
+  },
+  "hints": {
+    "image_colors": {
+      "when": { "imageUrl": true },
+      "message": "With an image URL set, backgroundColor still applies behind or as tint depending on overlay and size.",
+      "type": "info"
+    }
+  }
+}

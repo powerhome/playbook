@@ -11,43 +11,111 @@
   },
   "children": {
     "editable": true,
-    "default": "Dialog content",
+    "default": "Custom dialog content goes here when you are not using the title and text props.",
     "hideWhenPropSet": [
       "text"
     ]
   },
   "groups": [
     {
-      "name": "Props",
+      "name": "Content",
       "props": [
+        "title",
+        "text",
         "cancelButton",
-        "closeable",
-        "confirmButton",
-        "fullHeight",
-        "loading",
-        "onCancel",
-        "onChange",
-        "onClose",
-        "onConfirm",
+        "confirmButton"
+      ]
+    },
+    {
+      "name": "Behavior",
+      "props": [
         "opened",
-        "portalClassName",
         "placement",
         "shouldCloseOnOverlayClick",
+        "closeable",
+        "loading",
+        "trigger",
+        "onClose",
+        "onCancel",
+        "onConfirm",
+        "onChange"
+      ]
+    },
+    {
+      "name": "Appearance",
+      "props": [
         "size",
         "status",
-        "text",
-        "title",
-        "trigger"
+        "fullHeight",
+        "portalClassName"
       ]
     }
   ],
   "presets": [
     {
-      "name": "Default",
-      "props": {},
-      "children": "Dialog content"
+      "name": "Small",
+      "props": {
+        "size": "sm",
+        "opened": true,
+        "title": "Small dialog",
+        "text": "Narrow width for short confirmations and alerts."
+      }
+    },
+    {
+      "name": "Medium",
+      "props": {
+        "size": "md",
+        "opened": true,
+        "title": "Medium dialog",
+        "text": "Default size for most forms and standard content."
+      }
+    },
+    {
+      "name": "Large",
+      "props": {
+        "size": "lg",
+        "opened": true,
+        "title": "Large dialog",
+        "text": "Wider layout for dense content or two-column layouts."
+      }
+    },
+    {
+      "name": "Extra large",
+      "props": {
+        "size": "xl",
+        "opened": true,
+        "title": "Extra large dialog",
+        "text": "Maximum width before full-screen patterns."
+      }
+    },
+    {
+      "name": "Content width",
+      "props": {
+        "size": "content",
+        "opened": true,
+        "title": "Content-sized dialog",
+        "text": "Width follows the content instead of fixed breakpoints."
+      }
+    },
+    {
+      "name": "Status size",
+      "props": {
+        "size": "status_size",
+        "opened": true,
+        "status": "success",
+        "title": "Success",
+        "text": "Compact status layout for confirmations and feedback."
+      }
     }
   ],
   "conditionals": {},
-  "hints": {}
+  "hints": {
+    "status_dialog": {
+      "when": {
+        "status": "success"
+      },
+      "message": "Status dialogs show an icon, title, and body copy in a centered layout.",
+      "type": "info"
+    }
+  }
 }

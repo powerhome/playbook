@@ -8,18 +8,57 @@
   },
   "groups": [
     {
-      "name": "Props",
+      "name": "Content",
       "props": [
-        "align",
-        "text",
+        "text"
+      ]
+    },
+    {
+      "name": "Behavior",
+      "props": [
+        "align"
+      ]
+    },
+    {
+      "name": "Appearance",
+      "props": [
         "variant"
       ]
     }
   ],
   "presets": [
     {
-      "name": "Default",
-      "props": {}
+      "name": "Align left",
+      "props": {
+        "align": "left"
+      }
+    },
+    {
+      "name": "Align center",
+      "props": {
+        "align": "center"
+      }
+    },
+    {
+      "name": "Align right",
+      "props": {
+        "align": "right"
+      }
+    },
+    {
+      "name": "Solid spinner",
+      "props": {
+        "align": "center",
+        "variant": "solid",
+        "text": " Loading"
+      }
+    },
+    {
+      "name": "Custom label",
+      "props": {
+        "align": "left",
+        "text": " Saving changes…"
+      }
     }
   ],
   "conditionals": {},

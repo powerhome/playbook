@@ -2,21 +2,44 @@
   "template": "<DashboardValue{{props}} />",
   "propTargets": {},
   "defaults": {
-    "align": "left"
+    "align": "left",
+    "statLabel": "Monthly recurring revenue"
   },
   "groups": [
     {
-      "name": "Props",
+      "name": "Content",
       "props": [
-        "align",
         "statLabel"
+      ]
+    },
+    {
+      "name": "Appearance",
+      "props": [
+        "align"
       ]
     }
   ],
   "presets": [
     {
-      "name": "Default",
-      "props": {}
+      "name": "KPI label",
+      "props": {
+        "statLabel": "Monthly recurring revenue",
+        "align": "left"
+      }
+    },
+    {
+      "name": "Centered header",
+      "props": {
+        "statLabel": "Active accounts",
+        "align": "center"
+      }
+    },
+    {
+      "name": "Right-aligned block",
+      "props": {
+        "statLabel": "Conversion rate",
+        "align": "right"
+      }
     }
   ],
   "conditionals": {},

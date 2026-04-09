@@ -1,10 +1,25 @@
 {
   "template": "<PersonContact{{props}} />",
   "propTargets": {},
-  "defaults": {},
+  "defaults": {
+    "firstName": "Anna",
+    "lastName": "Black",
+    "contacts": [
+      {
+        "contactType": "email",
+        "contactValue": "anna.black@example.com",
+        "contactDetail": "work"
+      },
+      {
+        "contactType": "work",
+        "contactValue": "2155550100",
+        "contactDetail": "ext. 42"
+      }
+    ]
+  },
   "groups": [
     {
-      "name": "Props",
+      "name": "Content",
       "props": [
         "firstName",
         "lastName",
@@ -14,8 +29,68 @@
   ],
   "presets": [
     {
-      "name": "Default",
-      "props": {}
+      "name": "Email & phone",
+      "props": {
+        "firstName": "Anna",
+        "lastName": "Black",
+        "contacts": [
+          {
+            "contactType": "email",
+            "contactValue": "anna.black@example.com",
+            "contactDetail": "work"
+          },
+          {
+            "contactType": "cell",
+            "contactValue": "2155550199",
+            "contactDetail": "mobile"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Email only",
+      "props": {
+        "firstName": "Anna",
+        "lastName": "Black",
+        "contacts": [
+          {
+            "contactType": "email",
+            "contactValue": "anna.black@example.com"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Work & home",
+      "props": {
+        "firstName": "Anna",
+        "lastName": "Black",
+        "contacts": [
+          {
+            "contactType": "work",
+            "contactValue": "2155550100",
+            "contactDetail": "desk"
+          },
+          {
+            "contactType": "home",
+            "contactValue": "2155550188"
+          }
+        ]
+      }
+    },
+    {
+      "name": "International",
+      "props": {
+        "firstName": "Anna",
+        "lastName": "Black",
+        "contacts": [
+          {
+            "contactType": "international",
+            "contactValue": "+44 7700 900461",
+            "contactDetail": "UK"
+          }
+        ]
+      }
     }
   ],
   "conditionals": {},

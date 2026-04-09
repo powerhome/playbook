@@ -9,32 +9,83 @@
   },
   "children": {
     "editable": true,
-    "default": "Body content",
+    "default": "Use body text for paragraphs, supporting copy, and readable blocks of content on the page.",
     "hideWhenPropSet": [
       "text"
     ]
   },
   "groups": [
     {
-      "name": "Props",
+      "name": "Appearance",
       "props": [
         "color",
-        "highlightedText",
-        "highlighting",
+        "variant",
         "status",
-        "tag",
+        "tag"
+      ]
+    },
+    {
+      "name": "Content",
+      "props": [
         "text",
-        "variant"
+        "highlighting",
+        "highlightedText"
       ]
     }
   ],
   "presets": [
     {
-      "name": "Default",
-      "props": {},
-      "children": "Body content"
+      "name": "Paragraph",
+      "props": {
+        "tag": "p",
+        "color": "default"
+      },
+      "children": "This is standard body copy in a paragraph element, ideal for articles, forms, and long-form content."
+    },
+    {
+      "name": "Success",
+      "props": {
+        "color": "success"
+      },
+      "children": "Your changes were saved successfully."
+    },
+    {
+      "name": "Error",
+      "props": {
+        "color": "error"
+      },
+      "children": "We could not process your request. Check the fields below and try again."
+    },
+    {
+      "name": "Link style",
+      "props": {
+        "variant": "link",
+        "color": "link"
+      },
+      "children": "Learn more about this feature"
+    },
+    {
+      "name": "Light on dark",
+      "props": {
+        "color": "light"
+      },
+      "children": "Contrast-friendly text for dark backgrounds, sidebars, and overlays."
     }
   ],
-  "conditionals": {},
-  "hints": {}
+  "conditionals": {
+    "highlightedText": {
+      "requires": {
+        "highlighting": true
+      }
+    }
+  },
+  "hints": {
+    "highlighting_info": {
+      "when": {
+        "highlighting": true
+      },
+      "message": "Set text and highlightedText to show highlighted substrings inside the body content.",
+      "type": "info"
+    }
+  }
 }

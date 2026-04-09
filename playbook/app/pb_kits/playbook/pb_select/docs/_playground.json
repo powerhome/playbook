@@ -12,33 +12,138 @@
   },
   "groups": [
     {
-      "name": "Props",
+      "name": "Content",
       "props": [
+        "label",
+        "name",
+        "value",
+        "options",
         "blankSelection",
-        "compact",
+        "includeBlank"
+      ]
+    },
+    {
+      "name": "State",
+      "props": [
         "disabled",
         "error",
-        "includeBlank",
-        "inline",
-        "inputOptions",
-        "label",
-        "multiple",
-        "name",
-        "onChange",
-        "options",
         "required",
-        "requiredIndicator",
+        "requiredIndicator"
+      ]
+    },
+    {
+      "name": "Appearance",
+      "props": [
+        "inline",
+        "compact",
         "showArrow",
-        "value"
+        "multiple"
       ]
     }
   ],
   "presets": [
     {
       "name": "Default",
-      "props": {}
+      "props": {
+        "label": "Country",
+        "name": "country",
+        "value": "us",
+        "options": [
+          {
+            "value": "us",
+            "text": "United States"
+          },
+          {
+            "value": "ca",
+            "text": "Canada"
+          },
+          {
+            "value": "uk",
+            "text": "United Kingdom"
+          },
+          {
+            "value": "au",
+            "text": "Australia"
+          }
+        ]
+      }
+    },
+    {
+      "name": "With Error",
+      "props": {
+        "label": "Department",
+        "name": "department",
+        "value": "",
+        "blankSelection": "Select a department",
+        "error": "Please choose a department.",
+        "options": [
+          {
+            "value": "eng",
+            "text": "Engineering"
+          },
+          {
+            "value": "design",
+            "text": "Design"
+          },
+          {
+            "value": "sales",
+            "text": "Sales"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Disabled",
+      "props": {
+        "label": "Role",
+        "name": "role",
+        "value": "member",
+        "disabled": true,
+        "options": [
+          {
+            "value": "admin",
+            "text": "Admin"
+          },
+          {
+            "value": "member",
+            "text": "Member"
+          },
+          {
+            "value": "guest",
+            "text": "Guest"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Required",
+      "props": {
+        "label": "Priority",
+        "name": "priority",
+        "value": "medium",
+        "required": true,
+        "requiredIndicator": true,
+        "options": [
+          {
+            "value": "low",
+            "text": "Low"
+          },
+          {
+            "value": "medium",
+            "text": "Medium"
+          },
+          {
+            "value": "high",
+            "text": "High"
+          }
+        ]
+      }
     }
   ],
-  "conditionals": {},
+  "conditionals": {
+    "requiredIndicator": {
+      "requires": "label"
+    }
+  },
   "hints": {}
 }

@@ -110,9 +110,9 @@
       "children": ""
     },
     {
-      "name": "Link Style",
+      "name": "Link Mode",
       "props": {
-        "variant": "link"
+        "link": true
       },
       "children": "Learn More"
     }

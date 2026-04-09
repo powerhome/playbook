@@ -15,16 +15,25 @@
   },
   "groups": [
     {
-      "name": "Props",
+      "name": "Content",
       "props": [
-        "borderless",
-        "extendedUnderline",
-        "highlight",
-        "onClick",
+        "title"
+      ]
+    },
+    {
+      "name": "Behavior",
+      "props": [
+        "link"
+      ]
+    },
+    {
+      "name": "Appearance",
+      "props": [
         "orientation",
-        "link",
-        "title",
         "variant",
+        "borderless",
+        "highlight",
+        "extendedUnderline",
         "itemSpacing"
       ]
     }
@@ -36,6 +45,21 @@
       "children": "Nav content"
     }
   ],
-  "conditionals": {},
-  "hints": {}
+  "conditionals": {
+    "extendedUnderline": {
+      "requires": {
+        "orientation": "horizontal",
+        "variant": "normal"
+      }
+    }
+  },
+  "hints": {
+    "extended_underline": {
+      "when": {
+        "orientation": "horizontal"
+      },
+      "message": "Extended underline applies to horizontal navigation in the normal variant.",
+      "type": "info"
+    }
+  }
 }

@@ -1,0 +1,30 @@
+{
+  "defaults": {
+    "amount": 2000,
+    "commaSeparator": true,
+    "label": "Balance",
+    "symbol": "$",
+    "size": "md",
+    "variant": "default"
+  },
+  "groups": [
+    { "name": "Content", "props": ["amount", "label", "unit", "nullDisplay", "symbol"] },
+    { "name": "Appearance", "props": ["align", "size", "variant", "emphasized", "abbreviate", "decimals", "commaSeparator", "unstyled"] }
+  ],
+  "presets": [
+    { "name": "USD (comma)", "props": { "amount": 2000, "commaSeparator": true, "label": "Balance", "symbol": "$" } },
+    { "name": "EUR compact", "props": { "amount": 1428.5, "symbol": "€", "label": "ARR", "size": "lg", "variant": "bold" } },
+    { "name": "GBP light", "props": { "amount": "2,000", "symbol": "£", "label": "MRR", "variant": "light", "commaSeparator": false } },
+    { "name": "Abbreviated", "props": { "amount": 1500000, "abbreviate": true, "label": "Volume", "symbol": "$" } },
+    { "name": "Matching decimals", "props": { "amount": 99.9, "decimals": "matching", "symbol": "$", "label": "Per seat" } },
+    { "name": "Right aligned", "props": { "amount": 1428, "align": "right", "label": "Total", "symbol": "$" } }
+  ],
+  "conditionals": {},
+  "hints": {
+    "unstyled_mode": {
+      "when": { "unstyled": true },
+      "message": "Unstyled mode uses plain divs for layout—useful when embedding in tables or custom typography.",
+      "type": "info"
+    }
+  }
+}

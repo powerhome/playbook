@@ -1,22 +1,56 @@
 {
   "template": "<StatValue{{props}} />",
   "propTargets": {},
-  "defaults": {},
+  "defaults": {
+    "value": 1428,
+    "unit": "hrs"
+  },
   "groups": [
     {
-      "name": "Props",
+      "name": "Content",
       "props": [
-        "unit",
-        "value"
+        "value",
+        "unit"
       ]
     }
   ],
   "presets": [
     {
       "name": "Default",
-      "props": {}
+      "props": {
+        "value": 1428,
+        "unit": "hrs"
+      }
+    },
+    {
+      "name": "Value only",
+      "props": {
+        "value": 1428
+      }
+    },
+    {
+      "name": "Formatted string",
+      "props": {
+        "value": "2,000",
+        "unit": "views"
+      }
+    },
+    {
+      "name": "Zero state",
+      "props": {
+        "value": 0,
+        "unit": "tasks"
+      }
     }
   ],
   "conditionals": {},
-  "hints": {}
+  "hints": {
+    "unit_hint": {
+      "when": {
+        "unit": true
+      },
+      "message": "When a unit is set, it renders smaller than the value, with a space between.",
+      "type": "info"
+    }
+  }
 }

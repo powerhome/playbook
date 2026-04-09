@@ -1,0 +1,90 @@
+{
+  "groups": [
+    {
+      "name": "Content",
+      "props": ["name", "imageUrl", "imageAlt"]
+    },
+    {
+      "name": "Appearance",
+      "props": ["size", "grayscale", "status"]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Medium initials",
+      "props": { "size": "md", "name": "Jane Doe" }
+    },
+    {
+      "name": "Extra small",
+      "props": { "size": "xxs", "name": "AB" }
+    },
+    {
+      "name": "Small",
+      "props": { "size": "sm", "name": "Alex Kim" }
+    },
+    {
+      "name": "Large",
+      "props": { "size": "lg", "name": "Sam Rivera" }
+    },
+    {
+      "name": "Extra large",
+      "props": { "size": "xl", "name": "Taylor Chen" }
+    },
+    {
+      "name": "With photo",
+      "props": {
+        "size": "md",
+        "name": "Jordan Lee",
+        "imageUrl": "https://unsplash.it/200/200",
+        "imageAlt": "Portrait"
+      }
+    },
+    {
+      "name": "Photo + online",
+      "props": {
+        "size": "lg",
+        "name": "Casey Morgan",
+        "imageUrl": "https://unsplash.it/200/200",
+        "status": "online"
+      }
+    },
+    {
+      "name": "Online status",
+      "props": { "size": "md", "name": "Riley Park", "status": "online" }
+    },
+    {
+      "name": "Away",
+      "props": { "size": "md", "name": "Riley Park", "status": "away" }
+    },
+    {
+      "name": "Offline",
+      "props": { "size": "md", "name": "Riley Park", "status": "offline" }
+    },
+    {
+      "name": "Initials + online",
+      "props": { "size": "md", "name": "Morgan Blake", "status": "online" }
+    },
+    {
+      "name": "Grayscale photo",
+      "props": {
+        "size": "md",
+        "name": "Photo user",
+        "imageUrl": "https://unsplash.it/200/200",
+        "grayscale": true
+      }
+    }
+  ],
+  "conditionals": {},
+  "hints": {
+    "status_indicator": {
+      "when": { "status": "online" },
+      "message": "Status shows a dot when name or image is set; it does not appear when using component overlay mode (Rails-only).",
+      "type": "info"
+    },
+    "image_fallback": {
+      "when": { "imageUrl": "https://unsplash.it/200/200" },
+      "message": "If the image fails to load, initials from name are shown instead.",
+      "type": "info"
+    }
+  }
+}

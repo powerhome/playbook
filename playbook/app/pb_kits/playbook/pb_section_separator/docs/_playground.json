@@ -1,5 +1,5 @@
 {
-  "template": "<SectionSeparator{{props}} />",
+  "template": "<SectionSeparator{{props}}>{{children}}</SectionSeparator>",
   "propTargets": {},
   "defaults": {
     "color": "default",
@@ -9,22 +9,120 @@
   },
   "groups": [
     {
-      "name": "Props",
+      "name": "Orientation & variant",
       "props": [
-        "color",
-        "lineStyle",
         "orientation",
-        "text",
         "variant"
+      ]
+    },
+    {
+      "name": "Line",
+      "props": [
+        "lineStyle",
+        "color"
+      ]
+    },
+    {
+      "name": "Label",
+      "props": [
+        "text"
       ]
     }
   ],
   "presets": [
     {
-      "name": "Default",
-      "props": {}
+      "name": "Horizontal line",
+      "props": {
+        "orientation": "horizontal",
+        "lineStyle": "solid",
+        "color": "default",
+        "variant": "card"
+      }
+    },
+    {
+      "name": "Vertical rule",
+      "props": {
+        "orientation": "vertical",
+        "lineStyle": "solid",
+        "color": "default",
+        "variant": "card",
+        "height": "120px"
+      }
+    },
+    {
+      "name": "With label",
+      "props": {
+        "orientation": "horizontal",
+        "lineStyle": "solid",
+        "text": "Section",
+        "variant": "card"
+      },
+      "children": ""
+    },
+    {
+      "name": "Primary accent",
+      "props": {
+        "orientation": "horizontal",
+        "lineStyle": "solid",
+        "color": "primary",
+        "variant": "card"
+      }
+    },
+    {
+      "name": "Dashed",
+      "props": {
+        "orientation": "horizontal",
+        "lineStyle": "dashed",
+        "color": "default",
+        "variant": "card"
+      }
+    },
+    {
+      "name": "Dashed vertical",
+      "props": {
+        "orientation": "vertical",
+        "lineStyle": "dashed",
+        "color": "default",
+        "variant": "card",
+        "height": "120px"
+      }
+    },
+    {
+      "name": "On background",
+      "props": {
+        "orientation": "horizontal",
+        "lineStyle": "solid",
+        "variant": "background",
+        "color": "default"
+      }
+    },
+    {
+      "name": "Primary on background",
+      "props": {
+        "orientation": "horizontal",
+        "lineStyle": "solid",
+        "variant": "background",
+        "color": "primary",
+        "text": "Divider"
+      },
+      "children": ""
     }
   ],
   "conditionals": {},
-  "hints": {}
+  "hints": {
+    "vertical_height": {
+      "when": {
+        "orientation": "vertical"
+      },
+      "message": "Vertical separators often need a height (global prop) so the line is visible.",
+      "type": "info"
+    }
+  },
+  "children": {
+    "default": "",
+    "editable": true,
+    "hideWhenPropSet": [
+      "text"
+    ]
+  }
 }

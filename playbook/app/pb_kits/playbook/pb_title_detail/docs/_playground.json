@@ -2,22 +2,57 @@
   "template": "<TitleDetail{{props}} />",
   "propTargets": {},
   "defaults": {
-    "align": "left"
+    "align": "left",
+    "title": "Revenue",
+    "detail": "$2,000 MRR · 15% vs last month"
   },
   "groups": [
     {
-      "name": "Props",
+      "name": "Content",
       "props": [
-        "align",
-        "detail",
-        "title"
+        "title",
+        "detail"
+      ]
+    },
+    {
+      "name": "Appearance",
+      "props": [
+        "align"
       ]
     }
   ],
   "presets": [
     {
       "name": "Default",
-      "props": {}
+      "props": {
+        "title": "Revenue",
+        "detail": "$2,000 MRR · 15% vs last month",
+        "align": "left"
+      }
+    },
+    {
+      "name": "KPI summary",
+      "props": {
+        "title": "Pipeline",
+        "detail": "1,428 qualified leads",
+        "align": "left"
+      }
+    },
+    {
+      "name": "Centered",
+      "props": {
+        "title": "Uptime",
+        "detail": "99.95% last 30 days",
+        "align": "center"
+      }
+    },
+    {
+      "name": "Right aligned",
+      "props": {
+        "title": "Spend",
+        "detail": "Within budget",
+        "align": "right"
+      }
     }
   ],
   "conditionals": {},

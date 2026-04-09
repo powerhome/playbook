@@ -8,9 +8,14 @@
   },
   "groups": [
     {
-      "name": "Props",
+      "name": "Content",
       "props": [
-        "status",
+        "status"
+      ]
+    },
+    {
+      "name": "Appearance",
+      "props": [
         "size",
         "noBorder"
       ]
@@ -18,8 +23,47 @@
   ],
   "presets": [
     {
-      "name": "Default",
-      "props": {}
+      "name": "Online",
+      "props": {
+        "status": "online",
+        "size": "md"
+      }
+    },
+    {
+      "name": "Offline",
+      "props": {
+        "status": "offline",
+        "size": "md"
+      }
+    },
+    {
+      "name": "Away",
+      "props": {
+        "status": "away",
+        "size": "md"
+      }
+    },
+    {
+      "name": "Online · sm",
+      "props": {
+        "status": "online",
+        "size": "sm"
+      }
+    },
+    {
+      "name": "Online · lg",
+      "props": {
+        "status": "online",
+        "size": "lg"
+      }
+    },
+    {
+      "name": "No border",
+      "props": {
+        "status": "online",
+        "size": "md",
+        "noBorder": true
+      }
     }
   ],
   "conditionals": {},

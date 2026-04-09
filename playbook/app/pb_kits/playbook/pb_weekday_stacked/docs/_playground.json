@@ -8,19 +8,55 @@
   },
   "groups": [
     {
-      "name": "Props",
+      "name": "Content",
       "props": [
-        "align",
         "date",
         "variant",
         "compact"
+      ]
+    },
+    {
+      "name": "Appearance",
+      "props": [
+        "align"
       ]
     }
   ],
   "presets": [
     {
       "name": "Default",
-      "props": {}
+      "props": {
+        "date": "2026-04-09T12:00:00.000Z"
+      }
+    },
+    {
+      "name": "Day only",
+      "props": {
+        "date": "2026-04-09T12:00:00.000Z",
+        "variant": "day_only"
+      }
+    },
+    {
+      "name": "Expanded",
+      "props": {
+        "date": "2026-04-09T12:00:00.000Z",
+        "variant": "expanded"
+      }
+    },
+    {
+      "name": "Compact weekday",
+      "props": {
+        "date": "2026-04-09T12:00:00.000Z",
+        "compact": true
+      }
+    },
+    {
+      "name": "Centered",
+      "props": {
+        "date": "2026-08-15T12:00:00.000Z",
+        "align": "center",
+        "variant": "month_day"
+      }
     }
   ],
   "conditionals": {},

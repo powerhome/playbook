@@ -12,28 +12,117 @@
   },
   "groups": [
     {
-      "name": "Props",
+      "name": "Content",
       "props": [
-        "fixedWidth",
-        "layoutOption",
-        "icon",
         "label",
+        "icon"
+      ]
+    },
+    {
+      "name": "Rating",
+      "props": [
         "rating",
         "denominator",
+        "variant",
+        "onClick"
+      ]
+    },
+    {
+      "name": "Appearance",
+      "props": [
+        "layoutOption",
         "colorOption",
         "backgroundType",
         "size",
-        "variant",
-        "onClick"
+        "fixedWidth"
       ]
     }
   ],
   "presets": [
     {
-      "name": "Default",
-      "props": {}
+      "name": "Empty",
+      "props": {
+        "rating": 0,
+        "denominator": 5,
+        "variant": "display"
+      }
+    },
+    {
+      "name": "Half / partial",
+      "props": {
+        "rating": 2.5,
+        "denominator": 5,
+        "variant": "display"
+      }
+    },
+    {
+      "name": "Full score",
+      "props": {
+        "rating": 5,
+        "denominator": 5,
+        "variant": "display"
+      }
+    },
+    {
+      "name": "Out of 10",
+      "props": {
+        "rating": 8,
+        "denominator": 10,
+        "variant": "display"
+      }
+    },
+    {
+      "name": "Number layout",
+      "props": {
+        "rating": 4.2,
+        "denominator": 5,
+        "layoutOption": "number",
+        "variant": "display",
+        "size": "md"
+      }
+    },
+    {
+      "name": "One star highlight",
+      "props": {
+        "rating": 1,
+        "denominator": 5,
+        "layoutOption": "onestar",
+        "variant": "display"
+      }
+    },
+    {
+      "name": "Primary color",
+      "props": {
+        "rating": 4,
+        "denominator": 5,
+        "colorOption": "primary",
+        "variant": "display"
+      }
+    },
+    {
+      "name": "Interactive",
+      "props": {
+        "rating": 0,
+        "denominator": 5,
+        "variant": "interactive",
+        "onClick": "(n) => {}"
+      }
     }
   ],
-  "conditionals": {},
-  "hints": {}
+  "conditionals": {
+    "onClick": {
+      "requires": {
+        "variant": "interactive"
+      }
+    }
+  },
+  "hints": {
+    "interactive_click": {
+      "when": {
+        "variant": "interactive"
+      },
+      "message": "Interactive mode calls onClick with the star index; rating is controlled by your handler.",
+      "type": "info"
+    }
+  }
 }

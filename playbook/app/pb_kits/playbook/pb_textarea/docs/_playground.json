@@ -11,35 +11,79 @@
   },
   "groups": [
     {
-      "name": "Props",
+      "name": "Content",
       "props": [
-        "characterCount",
-        "disabled",
-        "emojiMask",
-        "error",
-        "inline",
-        "inputOptions",
-        "object",
-        "method",
         "label",
-        "maxCharacters",
-        "placeholder",
-        "value",
         "name",
+        "placeholder",
+        "value"
+      ]
+    },
+    {
+      "name": "State",
+      "props": [
+        "disabled",
+        "error",
         "required",
-        "requiredIndicator",
-        "rows",
+        "requiredIndicator"
+      ]
+    },
+    {
+      "name": "Appearance",
+      "props": [
+        "inline",
         "resize",
-        "onChange"
+        "rows",
+        "emojiMask"
       ]
     }
   ],
   "presets": [
     {
       "name": "Default",
-      "props": {}
+      "props": {
+        "label": "Description",
+        "name": "description",
+        "placeholder": "Tell us more about your project…",
+        "value": ""
+      }
+    },
+    {
+      "name": "With Error",
+      "props": {
+        "label": "Description",
+        "name": "description",
+        "placeholder": "Minimum 50 characters",
+        "value": "Hi",
+        "error": "Description must be at least 50 characters."
+      }
+    },
+    {
+      "name": "Disabled",
+      "props": {
+        "label": "Notes",
+        "name": "notes",
+        "placeholder": "Internal notes",
+        "value": "Scheduled for next sprint.",
+        "disabled": true
+      }
+    },
+    {
+      "name": "Required",
+      "props": {
+        "label": "Description",
+        "name": "description",
+        "placeholder": "This field is required",
+        "value": "",
+        "required": true,
+        "requiredIndicator": true
+      }
     }
   ],
-  "conditionals": {},
+  "conditionals": {
+    "requiredIndicator": {
+      "requires": "label"
+    }
+  },
   "hints": {}
 }

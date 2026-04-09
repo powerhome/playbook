@@ -1,0 +1,96 @@
+{
+  "groups": [
+    {
+      "name": "Content",
+      "props": ["label", "name", "value", "defaultTime"]
+    },
+    {
+      "name": "Appearance",
+      "props": ["timeFormat", "showTimezone"]
+    },
+    {
+      "name": "Validation",
+      "props": [
+        "required",
+        "requiredIndicator",
+        "disabled",
+        "minTime",
+        "maxTime",
+        "error",
+        "validationMessage"
+      ]
+    },
+    {
+      "name": "Advanced",
+      "props": ["inputOptions", "onChange", "onClose"]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default",
+      "props": {
+        "label": "Start time",
+        "name": "start_time",
+        "defaultTime": "3:30 PM"
+      }
+    },
+    {
+      "name": "24-hour",
+      "props": {
+        "label": "Duration start",
+        "name": "duration_start",
+        "timeFormat": "24hour",
+        "defaultTime": "15:30"
+      }
+    },
+    {
+      "name": "With timezone",
+      "props": {
+        "label": "Meeting time",
+        "name": "meeting_time",
+        "defaultTime": "9:00 AM",
+        "showTimezone": true
+      }
+    },
+    {
+      "name": "Business hours",
+      "props": {
+        "label": "Callback window",
+        "name": "callback_time",
+        "minTime": "9:00 AM",
+        "maxTime": "5:00 PM",
+        "defaultTime": "2:00 PM"
+      }
+    },
+    {
+      "name": "Required field",
+      "props": {
+        "label": "Appointment",
+        "name": "appointment_time",
+        "required": true,
+        "requiredIndicator": true,
+        "defaultTime": "10:00 AM"
+      }
+    },
+    {
+      "name": "Disabled",
+      "props": {
+        "label": "Locked",
+        "name": "locked_time",
+        "disabled": true,
+        "defaultTime": "12:00 PM"
+      }
+    },
+    {
+      "name": "Error state",
+      "props": {
+        "label": "Invalid slot",
+        "name": "error_time",
+        "error": "Selected time is unavailable",
+        "defaultTime": "11:45 AM"
+      }
+    }
+  ],
+  "conditionals": {},
+  "hints": {}
+}

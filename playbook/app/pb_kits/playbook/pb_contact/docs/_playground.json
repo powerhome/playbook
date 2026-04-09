@@ -3,15 +3,22 @@
   "propTargets": {},
   "defaults": {
     "iconEnabled": true,
-    "unstyled": false
+    "unstyled": false,
+    "contactType": "email",
+    "contactValue": "anna.black@example.com"
   },
   "groups": [
     {
-      "name": "Props",
+      "name": "Content",
       "props": [
-        "contactDetail",
         "contactType",
         "contactValue",
+        "contactDetail"
+      ]
+    },
+    {
+      "name": "Appearance",
+      "props": [
         "iconEnabled",
         "unstyled"
       ]
@@ -19,8 +26,42 @@
   ],
   "presets": [
     {
-      "name": "Default",
-      "props": {}
+      "name": "Email",
+      "props": {
+        "contactType": "email",
+        "contactValue": "anna.black@example.com"
+      }
+    },
+    {
+      "name": "Cell with detail",
+      "props": {
+        "contactType": "cell",
+        "contactValue": "2155550100",
+        "contactDetail": "mobile"
+      }
+    },
+    {
+      "name": "Work phone",
+      "props": {
+        "contactType": "work",
+        "contactValue": "2155550199"
+      }
+    },
+    {
+      "name": "Unstyled",
+      "props": {
+        "contactType": "email",
+        "contactValue": "anna.black@example.com",
+        "unstyled": true
+      }
+    },
+    {
+      "name": "No icon",
+      "props": {
+        "contactType": "cell",
+        "contactValue": "2155550100",
+        "iconEnabled": false
+      }
     }
   ],
   "conditionals": {},

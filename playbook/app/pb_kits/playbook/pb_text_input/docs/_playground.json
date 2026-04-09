@@ -11,21 +11,30 @@
   },
   "groups": [
     {
-      "name": "Props",
+      "name": "Content",
+      "props": [
+        "label",
+        "name",
+        "placeholder",
+        "value"
+      ]
+    },
+    {
+      "name": "State",
       "props": [
         "disabled",
-        "emojiMask",
         "error",
-        "inline",
-        "name",
-        "label",
-        "mask",
-        "onChange",
-        "placeholder",
         "required",
-        "requiredIndicator",
+        "requiredIndicator"
+      ]
+    },
+    {
+      "name": "Appearance",
+      "props": [
+        "inline",
         "type",
-        "value",
+        "mask",
+        "emojiMask",
         "autoComplete"
       ]
     }
@@ -33,9 +42,49 @@
   "presets": [
     {
       "name": "Default",
-      "props": {}
+      "props": {
+        "label": "Email",
+        "name": "email",
+        "placeholder": "you@example.com",
+        "value": ""
+      }
+    },
+    {
+      "name": "With Error",
+      "props": {
+        "label": "Email",
+        "name": "email",
+        "placeholder": "you@example.com",
+        "value": "not-an-email",
+        "error": "Please enter a valid email address."
+      }
+    },
+    {
+      "name": "Disabled",
+      "props": {
+        "label": "First Name",
+        "name": "first_name",
+        "placeholder": "Jane",
+        "value": "",
+        "disabled": true
+      }
+    },
+    {
+      "name": "Required",
+      "props": {
+        "label": "Email",
+        "name": "email",
+        "placeholder": "you@example.com",
+        "value": "",
+        "required": true,
+        "requiredIndicator": true
+      }
     }
   ],
-  "conditionals": {},
+  "conditionals": {
+    "requiredIndicator": {
+      "requires": "label"
+    }
+  },
   "hints": {}
 }

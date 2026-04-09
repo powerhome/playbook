@@ -3,15 +3,22 @@
   "propTargets": {},
   "defaults": {
     "align": "left",
-    "size": "sm"
+    "size": "sm",
+    "count": 1428,
+    "title": "Active users"
   },
   "groups": [
     {
-      "name": "Props",
+      "name": "Content",
+      "props": [
+        "title",
+        "count"
+      ]
+    },
+    {
+      "name": "Appearance",
       "props": [
         "align",
-        "count",
-        "title",
         "size"
       ]
     }
@@ -19,7 +26,39 @@
   "presets": [
     {
       "name": "Default",
-      "props": {}
+      "props": {
+        "title": "Active users",
+        "count": 1428,
+        "align": "left",
+        "size": "sm"
+      }
+    },
+    {
+      "name": "Large headline",
+      "props": {
+        "title": "Subscriptions",
+        "count": 2000,
+        "size": "lg",
+        "align": "left"
+      }
+    },
+    {
+      "name": "Centered",
+      "props": {
+        "title": "Completion rate",
+        "count": 15,
+        "align": "center",
+        "size": "sm"
+      }
+    },
+    {
+      "name": "Right aligned",
+      "props": {
+        "title": "Open tickets",
+        "count": 99,
+        "align": "right",
+        "size": "sm"
+      }
     }
   ],
   "conditionals": {},

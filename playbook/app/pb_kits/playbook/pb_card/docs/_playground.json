@@ -17,18 +17,33 @@
   },
   "groups": [
     {
-      "name": "Props",
+      "name": "Appearance",
       "props": [
         "background",
         "borderNone",
-        "dragId",
-        "draggableItem",
-        "dragHandle",
-        "length",
-        "selected",
-        "tag",
+        "selected"
+      ]
+    },
+    {
+      "name": "Layout",
+      "props": [
+        "tag"
+      ]
+    },
+    {
+      "name": "Header",
+      "props": [
         "headerColor",
         "headerColorStriped"
+      ]
+    },
+    {
+      "name": "Draggable",
+      "props": [
+        "draggableItem",
+        "dragHandle",
+        "dragId",
+        "length"
       ]
     }
   ],
@@ -37,8 +52,86 @@
       "name": "Default",
       "props": {},
       "children": "Card content"
+    },
+    {
+      "name": "White surface",
+      "props": {
+        "background": "white",
+        "padding": "md",
+        "borderRadius": "md"
+      },
+      "children": "Padded white card"
+    },
+    {
+      "name": "Flush (no border)",
+      "props": {
+        "background": "white",
+        "borderNone": true,
+        "padding": "none"
+      },
+      "children": "Edge-to-edge content"
+    },
+    {
+      "name": "Rounded & spacious",
+      "props": {
+        "background": "light",
+        "padding": "lg",
+        "borderRadius": "lg"
+      },
+      "children": "Extra padding and large radius"
+    },
+    {
+      "name": "Subtle info",
+      "props": {
+        "background": "info_subtle",
+        "padding": "sm"
+      },
+      "children": "Informational panel"
+    },
+    {
+      "name": "Dark surface",
+      "props": {
+        "background": "dark",
+        "padding": "md"
+      },
+      "children": "Dark background"
+    },
+    {
+      "name": "Product accent",
+      "props": {
+        "background": "product_1_background",
+        "padding": "md"
+      },
+      "children": "Product-themed card"
+    },
+    {
+      "name": "Selected",
+      "props": {
+        "background": "white",
+        "selected": true,
+        "padding": "md"
+      },
+      "children": "Selected state"
     }
   ],
-  "conditionals": {},
-  "hints": {}
+  "conditionals": {
+    "dragId": {
+      "requires": "draggableItem"
+    },
+    "dragHandle": {
+      "requires": "draggableItem"
+    },
+    "length": {
+      "requires": "draggableItem"
+    }
+  },
+  "hints": {
+    "draggable_mode": {
+      "when": {
+        "draggableItem": true
+      },
+      "message": "When draggableItem is on, set dragId to match the Draggable container.",
+      "type": "info"
+    }
+  }
 }

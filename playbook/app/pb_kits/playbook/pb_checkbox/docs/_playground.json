@@ -9,27 +9,72 @@
   },
   "groups": [
     {
-      "name": "Props",
+      "name": "Content",
       "props": [
-        "checked",
+        "text",
+        "name",
+        "value"
+      ]
+    },
+    {
+      "name": "State",
+      "props": [
         "disabled",
         "error",
+        "checked",
         "indeterminate",
-        "name",
-        "onChange",
-        "requiredIndicator",
-        "tabIndex",
-        "text",
-        "value"
+        "requiredIndicator"
+      ]
+    },
+    {
+      "name": "Appearance",
+      "props": [
+        "tabIndex"
       ]
     }
   ],
   "presets": [
     {
       "name": "Default",
-      "props": {}
+      "props": {
+        "text": "Subscribe to product updates",
+        "name": "subscribe",
+        "value": "yes"
+      }
+    },
+    {
+      "name": "With Error",
+      "props": {
+        "text": "I agree to the Terms of Service",
+        "name": "terms",
+        "value": "accepted",
+        "error": true
+      }
+    },
+    {
+      "name": "Disabled",
+      "props": {
+        "text": "Enable email notifications",
+        "name": "email_notifications",
+        "value": "on",
+        "checked": true,
+        "disabled": true
+      }
+    },
+    {
+      "name": "Required",
+      "props": {
+        "text": "I agree to the Terms of Service",
+        "name": "terms",
+        "value": "accepted",
+        "requiredIndicator": true
+      }
     }
   ],
-  "conditionals": {},
+  "conditionals": {
+    "requiredIndicator": {
+      "requires": "text"
+    }
+  },
   "hints": {}
 }

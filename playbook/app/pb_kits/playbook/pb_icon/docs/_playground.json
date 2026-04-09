@@ -12,30 +12,102 @@
   },
   "groups": [
     {
-      "name": "Props",
+      "name": "Content",
       "props": [
-        "border",
+        "icon"
+      ]
+    },
+    {
+      "name": "Appearance",
+      "props": [
+        "size",
         "color",
-        "customIcon",
-        "fixedWidth",
+        "fontStyle",
+        "fixedWidth"
+      ]
+    },
+    {
+      "name": "Transform",
+      "props": [
         "flip",
-        "icon",
+        "rotation",
+        "spin",
+        "pulse",
+        "pull",
+        "border",
         "inverse",
         "listItem",
-        "pull",
-        "pulse",
-        "rotation",
-        "size",
-        "fontStyle",
-        "spin",
         "tabIndex"
       ]
     }
   ],
   "presets": [
     {
-      "name": "Default",
-      "props": {}
+      "name": "User",
+      "props": {
+        "icon": "user"
+      }
+    },
+    {
+      "name": "Check",
+      "props": {
+        "icon": "check",
+        "color": "primary"
+      }
+    },
+    {
+      "name": "Times",
+      "props": {
+        "icon": "times",
+        "color": "error"
+      }
+    },
+    {
+      "name": "Plus",
+      "props": {
+        "icon": "plus"
+      }
+    },
+    {
+      "name": "Search",
+      "props": {
+        "icon": "search"
+      }
+    },
+    {
+      "name": "Large",
+      "props": {
+        "icon": "user",
+        "size": "lg"
+      }
+    },
+    {
+      "name": "2x size",
+      "props": {
+        "icon": "check",
+        "size": "2x"
+      }
+    },
+    {
+      "name": "3x size",
+      "props": {
+        "icon": "search",
+        "size": "3x"
+      }
+    },
+    {
+      "name": "Solid (fas)",
+      "props": {
+        "icon": "star",
+        "fontStyle": "fas"
+      }
+    },
+    {
+      "name": "Spinning",
+      "props": {
+        "icon": "sync",
+        "spin": true
+      }
     }
   ],
   "conditionals": {},

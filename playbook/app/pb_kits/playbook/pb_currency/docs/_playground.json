@@ -6,39 +6,105 @@
     "align": "left",
     "decimals": "default",
     "emphasized": true,
-    "label": "",
+    "label": "Balance",
     "size": "md",
     "symbol": "$",
     "variant": "default",
     "unstyled": false,
-    "commaSeparator": false
+    "commaSeparator": true,
+    "amount": 2000
   },
   "groups": [
     {
-      "name": "Props",
+      "name": "Content",
       "props": [
-        "abbreviate",
-        "align",
         "amount",
-        "decimals",
-        "emphasized",
         "label",
-        "nullDisplay",
-        "size",
-        "symbol",
-        "variant",
         "unit",
-        "unstyled",
-        "commaSeparator"
+        "nullDisplay",
+        "symbol"
+      ]
+    },
+    {
+      "name": "Appearance",
+      "props": [
+        "align",
+        "size",
+        "variant",
+        "emphasized",
+        "abbreviate",
+        "decimals",
+        "commaSeparator",
+        "unstyled"
       ]
     }
   ],
   "presets": [
     {
-      "name": "Default",
-      "props": {}
+      "name": "USD (comma)",
+      "props": {
+        "amount": 2000,
+        "commaSeparator": true,
+        "label": "Balance",
+        "symbol": "$"
+      }
+    },
+    {
+      "name": "EUR compact",
+      "props": {
+        "amount": 1428.5,
+        "symbol": "€",
+        "label": "ARR",
+        "size": "lg",
+        "variant": "bold"
+      }
+    },
+    {
+      "name": "GBP light",
+      "props": {
+        "amount": "2,000",
+        "symbol": "£",
+        "label": "MRR",
+        "variant": "light",
+        "commaSeparator": false
+      }
+    },
+    {
+      "name": "Abbreviated",
+      "props": {
+        "amount": 1500000,
+        "abbreviate": true,
+        "label": "Volume",
+        "symbol": "$"
+      }
+    },
+    {
+      "name": "Matching decimals",
+      "props": {
+        "amount": 99.9,
+        "decimals": "matching",
+        "symbol": "$",
+        "label": "Per seat"
+      }
+    },
+    {
+      "name": "Right aligned",
+      "props": {
+        "amount": 1428,
+        "align": "right",
+        "label": "Total",
+        "symbol": "$"
+      }
     }
   ],
   "conditionals": {},
-  "hints": {}
+  "hints": {
+    "unstyled_mode": {
+      "when": {
+        "unstyled": true
+      },
+      "message": "Unstyled mode uses plain divs for layout—useful when embedding in tables or custom typography.",
+      "type": "info"
+    }
+  }
 }
