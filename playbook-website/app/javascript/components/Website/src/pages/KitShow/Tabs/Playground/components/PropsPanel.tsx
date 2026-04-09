@@ -41,8 +41,7 @@ export const PropsPanel: React.FC<PropsPanelProps> = ({
   return (
     <Card
       flexDirection="column"
-      width="320px"
-      minWidth="320px"
+      htmlOptions={{ style: { width: "320px" } }}
       height="100vh"
       overflowY="auto"
     >

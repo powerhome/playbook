@@ -24,73 +24,35 @@
     {
       "name": "Light",
       "props": {
-        "backgroundColor": "light"
+        "backgroundColor": "light",
+        "padding": "md"
       },
       "children": "Default light background"
     },
     {
       "name": "White",
       "props": {
-        "backgroundColor": "white"
+        "backgroundColor": "white",
+        "padding": "md"
       },
       "children": "White surface"
     },
     {
       "name": "Dark",
       "props": {
-        "backgroundColor": "dark"
-      },
-      "children": "Dark surface"
-    },
-    {
-      "name": "Primary",
-      "props": {
-        "backgroundColor": "primary"
-      },
-      "children": "Primary brand fill"
-    },
-    {
-      "name": "Gradient",
-      "props": {
-        "backgroundColor": "gradient"
-      },
-      "children": "Gradient background"
-    },
-    {
-      "name": "Category accent",
-      "props": {
-        "backgroundColor": "category_1"
-      },
-      "children": "Category color"
-    },
-    {
-      "name": "Success",
-      "props": {
-        "backgroundColor": "success"
-      },
-      "children": "Success state"
-    },
-    {
-      "name": "Warning",
-      "props": {
-        "backgroundColor": "warning"
-      },
-      "children": "Warning state"
-    },
-    {
-      "name": "Subtle neutral",
-      "props": {
-        "backgroundColor": "neutral_subtle"
-      },
-      "children": "Subtle neutral wash"
-    },
-    {
-      "name": "Card light",
-      "props": {
-        "backgroundColor": "card_light",
+        "backgroundColor": "dark",
         "padding": "md"
       },
-      "children": "Card-style light panel"
+      "children": "<Body text=\"Dark surface\" dark />"
+    },
+    {
+      "name": "Background Image",
+      "props": {
+        "imageUrl":"https://images.unsplash.com/photo-1528459801416-a9e53bbf4e17?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=80",
+        "padding": "md",
+        "transition": "fade"
+      },
+      "children": "<Body text=\"Background Image\" />"
     }
   ],
   "conditionals": {
