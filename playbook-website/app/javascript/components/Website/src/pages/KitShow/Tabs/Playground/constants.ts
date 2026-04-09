@@ -5,4 +5,5 @@ export const EXCLUDED_PROPS = [
   "data",
   "aria",
   "htmlOptions",
+  "reference",
 ];
