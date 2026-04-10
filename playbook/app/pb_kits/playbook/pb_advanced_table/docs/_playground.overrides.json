@@ -1,0 +1,291 @@
+{
+  "structureModes": {
+    "default": "implicit",
+    "modes": {
+      "implicit": {
+        "label": "Default",
+        "template": "<AdvancedTable\n  columnDefinitions={columnDefinitions}\n  tableData={tableData}\n{{props}}\n/>"
+      },
+      "explicit": {
+        "label": "Subcomponent Structure",
+        "template": "<AdvancedTable\n  columnDefinitions={columnDefinitions}\n  tableData={tableData}{{props}}\n>\n  <AdvancedTable.Header{{AdvancedTable.Header.props}} />\n  <AdvancedTable.Body\n{{AdvancedTable.Body.props}}\n  />\n</AdvancedTable>"
+      }
+    }
+  },
+  "propTargets": {
+    "enableSorting": "AdvancedTable.Header.props",
+    "sortIcon": "AdvancedTable.Header.props",
+    "collapsibleTrail": "AdvancedTable.Body.props",
+    "subRowHeaders": "AdvancedTable.Body.props"
+  },
+  "dataPresets": {
+    "presets": {
+      "flat_no_subrows": {
+        "label": "Flat rows (no sub-rows)",
+        "columnDefinitionsFile": "advanced_table_column_definitions_standard.json",
+        "tableDataFile": "advanced_table_mock_data_no_subrows.json"
+      },
+      "pagination": {
+        "label": "Pagination Example",
+        "columnDefinitionsFile": "advanced_table_column_definitions_standard.json",
+        "tableDataFile": "advanced_table_pagination_mock_data.json"
+      },
+      "with_ids": {
+        "label": "Data with row IDs",
+        "columnDefinitionsFile": "advanced_table_column_definitions_standard.json",
+        "tableDataFile": "advanced_table_mock_data_with_id.json"
+      },
+      "inline_loading": {
+        "label": "Inline row loading",
+        "columnDefinitionsFile": "advanced_table_column_definitions_standard.json",
+        "tableDataFile": "advanced_table_mock_data_inline_loading.json"
+      },
+      "grouped_headers": {
+        "label": "Grouped headers (nested columns)",
+        "columnDefinitionsFile": "advanced_table_column_definitions_grouped_simple.json",
+        "tableDataFile": "advanced_table_mock_data.json"
+      },
+      "grouped_headers_double_nested": {
+        "label": "Grouped headers (double nested columns)",
+        "columnDefinitionsFile": "advanced_table_column_definitions_grouped_triple.json",
+        "tableDataFile": "advanced_table_mock_data.json"
+      }
+    }
+  },
+  "requiredProps": {
+    "columnDefinitionsFile": "advanced_table_column_definitions_standard.json",
+    "tableDataFile": "advanced_table_mock_data.json"
+  },
+  "children": {
+    "editable": false,
+    "default": ""
+  },
+  "groups": [
+    {
+      "name": "Core Data",
+      "props": [
+        "columnDefinitions",
+        "tableData"
+      ]
+    },
+    {
+      "name": "Sorting",
+      "props": [
+        "enableSortingRemoval",
+        "sortControl",
+        "sortParentOnly",
+        "customSort",
+        "onCustomSortClick"
+      ]
+    },
+    {
+      "name": "Pagination & Loading",
+      "props": [
+        "pagination",
+        "paginationProps",
+        "loading",
+        "inlineRowLoading",
+        "initialLoadingRowsCount"
+      ]
+    },
+    {
+      "name": "Row Interaction",
+      "props": [
+        "enableToggleExpansion",
+        "expandedControl",
+        "expandByDepth",
+        "cascadeCollapse",
+        "selectableRows",
+        "pinnedRows",
+        "onRowToggleClick",
+        "onToggleExpansionClick",
+        "onRowSelectionChange",
+        "persistToggleExpansionButton",
+        "toggleExpansionIcon"
+      ]
+    },
+    {
+      "name": "Column Configuration",
+      "props": [
+        "columnVisibilityControl",
+        "columnGroupBorderColor"
+      ]
+    },
+    {
+      "name": "Layout",
+      "props": [
+        "responsive",
+        "scrollBarNone",
+        "virtualizedRows",
+        "allowFullScreen",
+        "fullScreenControl",
+        "tableProps"
+      ]
+    },
+    {
+      "name": "Styling",
+      "props": [
+        "rowStyling"
+      ]
+    },
+    {
+      "name": "Actions",
+      "props": [
+        "showActionsBar",
+        "actions"
+      ]
+    },
+    {
+      "name": "AdvancedTable.Header",
+      "props": [
+        "enableSorting",
+        "sortIcon"
+      ]
+    },
+    {
+      "name": "AdvancedTable.Body",
+      "props": [
+        "collapsibleTrail",
+        "subRowHeaders"
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default",
+      "props": {}
+    },
+    {
+      "name": "With Sorting",
+      "props": {
+        "enableSorting": true
+      }
+    },
+    {
+      "name": "With Pagination",
+      "props": {
+        "pagination": true
+      }
+    },
+    {
+      "name": "Selectable Rows",
+      "props": {
+        "selectableRows": true,
+        "showActionsBar": true
+      }
+    },
+    {
+      "name": "Fully Expanded",
+      "props": {
+        "enableToggleExpansion": "all"
+      }
+    },
+    {
+      "name": "Loading State",
+      "props": {
+        "loading": true,
+        "initialLoadingRowsCount": 5
+      }
+    },
+    {
+      "name": "No Scrollbar",
+      "props": {
+        "scrollBarNone": true,
+        "responsive": "none"
+      }
+    }
+  ],
+  "conditionals": {
+    "paginationProps": {
+      "requires": {
+        "pagination": true
+      }
+    },
+    "initialLoadingRowsCount": {
+      "requires": {
+        "loading": true
+      }
+    },
+    "inlineRowLoading": {
+      "requires": {
+        "loading": false
+      }
+    },
+    "onRowSelectionChange": {
+      "requires": {
+        "selectableRows": true
+      }
+    },
+    "actions": {
+      "requires": {
+        "selectableRows": true,
+        "showActionsBar": true
+      }
+    },
+    "enableSorting": {
+      "structureMode": "explicit"
+    },
+    "sortIcon": {
+      "structureMode": "explicit",
+      "requires": {
+        "enableSorting": true
+      }
+    },
+    "collapsibleTrail": {
+      "structureMode": "explicit"
+    },
+    "subRowHeaders": {
+      "structureMode": "explicit"
+    },
+    "onExpandByDepthClick": {
+      "requires": "expandByDepth"
+    },
+    "onCustomSortClick": {
+      "requires": {
+        "customSort": true
+      }
+    },
+    "fullScreenControl": {
+      "requires": {
+        "allowFullScreen": true
+      }
+    }
+  },
+  "hints": {
+    "sorting_info": {
+      "when": {
+        "enableSortingRemoval": true
+      },
+      "message": "Click column headers to sort. Click again to remove sorting.",
+      "type": "info"
+    },
+    "header_sorting_info": {
+      "when": {
+        "enableSorting": true
+      },
+      "message": "Header sorting UI is only applied in \"Subcomponent Structure\" mode (explicit Header and Body).",
+      "type": "info"
+    },
+    "pagination_info": {
+      "when": {
+        "pagination": true
+      },
+      "message": "Use paginationProps to customize page size and appearance.",
+      "type": "info"
+    },
+    "selectable_info": {
+      "when": {
+        "selectableRows": true
+      },
+      "message": "Use onRowSelectionChange to handle selection changes. showActionsBar controls the action bar visibility.",
+      "type": "info"
+    },
+    "loading_info": {
+      "when": {
+        "loading": true
+      },
+      "message": "Use state to control the loading state.",
+      "type": "info"
+    }
+  }
+}

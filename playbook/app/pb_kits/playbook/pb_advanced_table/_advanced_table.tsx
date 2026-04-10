@@ -78,6 +78,18 @@ type AdvancedTableProps = {
   fullScreenControl?: (controls: FullscreenControls) => void
 } & GlobalProps;
 
+/**
+ * Subcomponent props (AdvancedTable.Header / AdvancedTable.Body). Must be a plain `type NameProps = { ... }` block—
+ * `yarn generate-ai-metadata` only parses that shape in this file (not Omit<> / intersection).
+ * Not used on the root component; playground routes these via propTargets.
+ */
+type _AdvancedTableSubkitSchemaProps = {
+  enableSorting?: boolean
+  sortIcon?: string | string[]
+  collapsibleTrail?: boolean
+  subRowHeaders?: string[]
+}
+
 const AdvancedTable = (props: AdvancedTableProps) => {
   const {
     aria = {},

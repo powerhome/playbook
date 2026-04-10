@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { Body, Button, Caption, Card, Flex } from "playbook-ui";
 
 import {
@@ -9,6 +9,7 @@ import {
   CodePanel,
   PropsPanel,
   StructureModeSelector,
+  DataPresetSelector,
   KitSchema,
   GlobalPropsSchema,
   PlaygroundConfig,
@@ -41,6 +42,7 @@ export const PlaygroundTab: React.FC<PlaygroundTabProps> = ({
     children,
     activePresetIndex,
     activeStructureMode,
+    activeDataPresetKey,
     reactProps,
     globalProps,
     groupedProps,
@@ -52,10 +54,13 @@ export const PlaygroundTab: React.FC<PlaygroundTabProps> = ({
     previewCode,
     displayCode,
     availableStructureModes,
+    availableDataPresets,
+    requiredPropNames,
     handlePropChange,
     applyPreset,
     setChildren,
     handleStructureModeChange,
+    handleDataPresetChange,
     handleReset,
   } = usePlaygroundState({
     kitSchema,
@@ -79,6 +84,28 @@ export const PlaygroundTab: React.FC<PlaygroundTabProps> = ({
   const hasPresets =
     playgroundConfig?.presets && playgroundConfig.presets.length > 0;
   const hasStructureModes = availableStructureModes.length > 0;
+  const hasDataPresets = availableDataPresets.length > 0;
+
+  // Merge scopeVars with requiredProps values for the live preview
+  const previewScope = useMemo(() => {
+    const scope: Record<string, any> = {};
+    
+    // Add scopeVars from config
+    if (playgroundConfig?.scopeVars) {
+      Object.assign(scope, playgroundConfig.scopeVars);
+    }
+    
+    // Add requiredProps values (use current propValues for editability)
+    if (playgroundConfig?.requiredProps) {
+      Object.keys(playgroundConfig.requiredProps).forEach((propName) => {
+        // Use current value from propValues if available, otherwise use default
+        const currentValue = propValues[propName];
+        scope[propName] = currentValue?.value ?? playgroundConfig.requiredProps![propName];
+      });
+    }
+    
+    return scope;
+  }, [playgroundConfig?.scopeVars, playgroundConfig?.requiredProps, propValues]);
 
   return (
     <Flex width="100%" paddingX="xl" gap="lg">
@@ -97,6 +124,15 @@ export const PlaygroundTab: React.FC<PlaygroundTabProps> = ({
             modes={availableStructureModes}
             activeMode={activeStructureMode}
             onModeChange={handleStructureModeChange}
+          />
+        )}
+
+        {hasDataPresets && (
+          <DataPresetSelector
+            activeKey={activeDataPresetKey}
+            defaultLabel="Default (nested)"
+            presets={availableDataPresets}
+            onPresetChange={handleDataPresetChange}
           />
         )}
 
@@ -123,7 +159,7 @@ export const PlaygroundTab: React.FC<PlaygroundTabProps> = ({
           </Flex>
           <PlaygroundPreview
             code={previewCode}
-            extraScope={playgroundConfig?.scopeVars}
+            extraScope={previewScope}
           />
         </Card>
 
@@ -142,6 +178,7 @@ export const PlaygroundTab: React.FC<PlaygroundTabProps> = ({
         onPropChange={handlePropChange}
         globalProps={globalProps}
         showGlobalProps={Boolean(kitSchema.globalProps)}
+        requiredPropNames={requiredPropNames}
       />
     </Flex>
   );

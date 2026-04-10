@@ -16,6 +16,7 @@ import {
 export interface ExtendedPropControlProps extends PropControlProps {
   disabled?: boolean;
   disabledReason?: string;
+  isRequired?: boolean;
 }
 
 const formatPropName = (name: string): string => {
@@ -298,14 +299,162 @@ const ObjectControl: React.FC<PropControlProps> = ({ name, value, onChange }) =>
   );
 };
 
+const ArrayControl: React.FC<PropControlProps> = ({ name, value, onChange }) => {
+  const isEnabled = value?.enabled ?? false;
+  const [inputValue, setInputValue] = useState(
+    value?.value ? JSON.stringify(value.value, null, 2) : "[]"
+  );
+
+  return (
+    <Flex flexDirection="column" paddingY="xs">
+      <Checkbox
+        checked={isEnabled}
+        onChange={() => {
+          onChange(name, {
+            value: isEnabled ? null : [],
+            enabled: !isEnabled,
+          });
+        }}
+        text={formatPropName(name)}
+      />
+      {isEnabled && (
+        <Flex flexDirection="column" marginLeft="lg">
+          <Caption text="Enter JSON array:" marginBottom="xs" />
+          <textarea
+            placeholder="[]"
+            value={inputValue}
+            onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
+              setInputValue(e.target.value);
+              try {
+                const parsed = JSON.parse(e.target.value);
+                if (Array.isArray(parsed)) {
+                  onChange(name, { value: parsed, enabled: true });
+                }
+              } catch {
+                // Invalid JSON, keep input but don't update state
+              }
+            }}
+            style={{
+              width: "100%",
+              minHeight: "120px",
+              fontFamily: "monospace",
+              fontSize: "12px",
+              padding: "8px",
+              border: "1px solid #ddd",
+              borderRadius: "4px",
+              resize: "vertical",
+            }}
+          />
+        </Flex>
+      )}
+    </Flex>
+  );
+};
+
+const RequiredArrayControl: React.FC<PropControlProps> = ({ name, value, onChange }) => {
+  const [inputValue, setInputValue] = useState(
+    value?.value ? JSON.stringify(value.value, null, 2) : "[]"
+  );
+
+  return (
+    <Flex flexDirection="column" paddingY="xs">
+      <Flex align="center" gap="xs" marginBottom="xs">
+        <Caption text={formatPropName(name)} bold />
+        <Badge text="Required" variant="primary" />
+      </Flex>
+      <Flex flexDirection="column">
+        <Caption text="Enter JSON array:" marginBottom="xs" color="light" />
+        <textarea
+          placeholder="[]"
+          value={inputValue}
+          onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
+            setInputValue(e.target.value);
+            try {
+              const parsed = JSON.parse(e.target.value);
+              if (Array.isArray(parsed)) {
+                onChange(name, { value: parsed, enabled: true });
+              }
+            } catch {
+              // Invalid JSON, keep input but don't update state
+            }
+          }}
+          style={{
+            width: "100%",
+            minHeight: "120px",
+            fontFamily: "monospace",
+            fontSize: "12px",
+            padding: "8px",
+            border: "1px solid #ddd",
+            borderRadius: "4px",
+            resize: "vertical",
+          }}
+        />
+      </Flex>
+    </Flex>
+  );
+};
+
+const RequiredObjectControl: React.FC<PropControlProps> = ({ name, value, onChange }) => {
+  const [inputValue, setInputValue] = useState(
+    value?.value ? JSON.stringify(value.value, null, 2) : "{}"
+  );
+
+  return (
+    <Flex flexDirection="column" paddingY="xs">
+      <Flex align="center" gap="xs" marginBottom="xs">
+        <Caption text={formatPropName(name)} bold />
+        <Badge text="Required" variant="primary" />
+      </Flex>
+      <Flex flexDirection="column">
+        <Caption text="Enter JSON object:" marginBottom="xs" color="light" />
+        <textarea
+          placeholder="{}"
+          value={inputValue}
+          onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
+            setInputValue(e.target.value);
+            try {
+              const parsed = JSON.parse(e.target.value);
+              onChange(name, { value: parsed, enabled: true });
+            } catch {
+              // Invalid JSON, keep input but don't update state
+            }
+          }}
+          style={{
+            width: "100%",
+            minHeight: "120px",
+            fontFamily: "monospace",
+            fontSize: "12px",
+            padding: "8px",
+            border: "1px solid #ddd",
+            borderRadius: "4px",
+            resize: "vertical",
+          }}
+        />
+      </Flex>
+    </Flex>
+  );
+};
+
 const normalizeType = (type: string): string => {
   return type.toLowerCase().replace(/;/g, "").trim();
 };
 
-const getControlForType = (props: PropControlProps) => {
+const getControlForType = (props: PropControlProps, isRequired?: boolean) => {
   const { definition } = props;
   const rawType = definition.type || "";
   const propType = normalizeType(rawType);
+
+  // For required props, use special controls that don't allow toggling off
+  if (isRequired) {
+    // Array check for required props
+    if (propType === "array" || propType.endsWith("[]") || propType.startsWith("array")) {
+      return <RequiredArrayControl {...props} />;
+    }
+    // Default to required object control for complex types
+    if (propType.includes("object") || propType.includes("genericobject")) {
+      return <RequiredObjectControl {...props} />;
+    }
+  }
 
   // If it has enum values, treat as enum
   if (definition.values && definition.values.length > 0) {
@@ -337,6 +486,11 @@ const getControlForType = (props: PropControlProps) => {
     return <ReactNodeControl {...props} />;
   }
 
+  // Array check (for props like columnDefinitions, tableData)
+  if (propType === "array" || propType.endsWith("[]") || propType.startsWith("array")) {
+    return <ArrayControl {...props} />;
+  }
+
   // Object/GenericObject check
   if (propType.includes("object") || propType.includes("genericobject")) {
     return <ObjectControl {...props} />;
@@ -352,9 +506,9 @@ const getControlForType = (props: PropControlProps) => {
 };
 
 const PropControl: React.FC<ExtendedPropControlProps> = (props) => {
-  const { disabled, disabledReason } = props;
+  const { disabled, disabledReason, isRequired } = props;
   
-  const control = getControlForType(props);
+  const control = getControlForType(props, isRequired);
   
   if (disabled) {
     return (

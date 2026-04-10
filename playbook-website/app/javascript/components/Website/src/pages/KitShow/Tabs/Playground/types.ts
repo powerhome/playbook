@@ -102,6 +102,8 @@ export interface PlaygroundChildrenConfig {
 export interface PropCondition {
   requires?: string | Record<string, any>;
   showWhen?: string | Record<string, any>;
+  /** When set, the control is enabled only in this structure mode (e.g. `"explicit"`). */
+  structureMode?: string;
 }
 
 export interface PropGroup {
@@ -137,6 +139,17 @@ export interface StructureModesConfig {
   modes: Record<string, StructureMode>;
 }
 
+/** Named bundles of `columnDefinitions` + `tableData` for kits that need different sample data (e.g. Advanced Table). */
+export interface DataPreset {
+  label: string;
+  columnDefinitions: any[];
+  tableData: any[];
+}
+
+export interface DataPresetsConfig {
+  presets: Record<string, DataPreset>;
+}
+
 export interface PlaygroundConfig {
   template: string;
   propTargets?: Record<string, string>;
@@ -148,4 +161,7 @@ export interface PlaygroundConfig {
   presets?: PlaygroundPreset[];
   hints?: Record<string, PlaygroundHint>;
   structureModes?: StructureModesConfig;
+  /** Swap required table/column data without duplicating feature presets for each dataset. */
+  dataPresets?: DataPresetsConfig;
+  requiredProps?: Record<string, any>;
 }

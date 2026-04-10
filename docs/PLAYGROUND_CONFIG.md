@@ -84,6 +84,16 @@ Create `docs/_playground.overrides.json` to customize any field.
 | `conditionals` | object | Props that depend on other props |
 | `hints` | object | Contextual messages based on prop values |
 | `structureModes` | object | Toggle between different component structures (e.g., simple vs subcomponents) |
+| `dataPresets` | object | Named `columnDefinitions` + `tableData` bundles; shown as “Sample data” pills (Advanced Table, etc.) |
+
+### JSON file references (authoring `_playground.overrides.json`)
+
+Large table samples can stay in separate files next to the override (under the kit’s `docs/` folder). When you run `yarn generate:playground-configs`, the generator inlines them into `_playground.json`.
+
+- **`requiredProps`**: optional `columnDefinitionsFile` and `tableDataFile` (string filenames relative to `docs/`) are read and written out as `columnDefinitions` and `tableData`.
+- **`dataPresets.presets.\*`**: each preset may use `columnDefinitionsFile` / `tableDataFile` instead of embedding arrays. You can still mix inline `columnDefinitions` / `tableData` for small bundles.
+
+Paths cannot escape the kit `docs/` directory. Custom column `header` render props cannot be represented as JSON; use nested `columns` only for grouped-header demos.
 
 ### Conditionals Format
 
@@ -95,10 +105,15 @@ Create `docs/_playground.overrides.json` to customize any field.
     },
     "propName2": {
       "requires": { "variant": "specific-value" }
+    },
+    "subcomponentOnlyProp": {
+      "structureMode": "explicit"
     }
   }
 }
 ```
+
+Optional `structureMode` disables the control unless the playground’s active structure mode matches (same key as in `structureModes.modes`).
 
 ### Hints Format
 

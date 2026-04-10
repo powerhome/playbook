@@ -171,6 +171,74 @@ function loadOverrides(kitDir) {
   return null;
 }
 
+const PLAYGROUND_FILE_REF_KEYS = ['columnDefinitionsFile', 'tableDataFile'];
+
+function assertFileWithinDocs(docsDir, relativePath) {
+  const resolved = path.resolve(docsDir, relativePath);
+  const base = path.resolve(docsDir);
+  if (!resolved.startsWith(base + path.sep) && resolved !== base) {
+    throw new Error(`Playground file ref escapes docs directory: ${relativePath}`);
+  }
+}
+
+function loadJsonFromDocs(docsDir, relativePath) {
+  assertFileWithinDocs(docsDir, relativePath);
+  const fullPath = path.join(docsDir, relativePath);
+  if (!fs.existsSync(fullPath)) {
+    throw new Error(`Playground referenced file not found: ${relativePath}`);
+  }
+  return JSON.parse(fs.readFileSync(fullPath, 'utf8'));
+}
+
+/**
+ * Inline `columnDefinitionsFile` / `tableDataFile` into requiredProps for generated output.
+ */
+function resolveRequiredPropsFileRefs(requiredProps, docsDir) {
+  if (!requiredProps || typeof requiredProps !== 'object') return requiredProps;
+  const out = { ...requiredProps };
+  for (const key of PLAYGROUND_FILE_REF_KEYS) {
+    if (out[key] != null) {
+      const rel = out[key];
+      if (typeof rel !== 'string') {
+        throw new Error(`requiredProps.${key} must be a string path`);
+      }
+      const targetKey = key === 'columnDefinitionsFile' ? 'columnDefinitions' : 'tableData';
+      out[targetKey] = loadJsonFromDocs(docsDir, rel);
+      delete out[key];
+    }
+  }
+  return out;
+}
+
+/**
+ * Resolve file refs inside each data preset (generator output is always inlined JSON).
+ */
+function resolveDataPresetsFileRefs(dataPresets, docsDir) {
+  if (!dataPresets?.presets || typeof dataPresets.presets !== 'object') {
+    return dataPresets;
+  }
+  const presets = {};
+  for (const [presetKey, preset] of Object.entries(dataPresets.presets)) {
+    if (!preset || typeof preset !== 'object') {
+      presets[presetKey] = preset;
+      continue;
+    }
+    const next = { label: preset.label };
+    if (preset.columnDefinitionsFile) {
+      next.columnDefinitions = loadJsonFromDocs(docsDir, preset.columnDefinitionsFile);
+    } else if (preset.columnDefinitions !== undefined) {
+      next.columnDefinitions = preset.columnDefinitions;
+    }
+    if (preset.tableDataFile) {
+      next.tableData = loadJsonFromDocs(docsDir, preset.tableDataFile);
+    } else if (preset.tableData !== undefined) {
+      next.tableData = preset.tableData;
+    }
+    presets[presetKey] = next;
+  }
+  return { ...dataPresets, presets };
+}
+
 // ============================================================================
 // Main Generator
 // ============================================================================
@@ -207,6 +275,14 @@ function processKit(kitDir, options = {}) {
     let overrides = null;
     if (!options.baseOnly) {
       overrides = loadOverrides(kitDir);
+      if (overrides) {
+        if (overrides.requiredProps) {
+          overrides.requiredProps = resolveRequiredPropsFileRefs(overrides.requiredProps, docsDir);
+        }
+        if (overrides.dataPresets) {
+          overrides.dataPresets = resolveDataPresetsFileRefs(overrides.dataPresets, docsDir);
+        }
+      }
     }
     
     // 3. Merge overrides on top of base

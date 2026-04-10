@@ -19,6 +19,7 @@ interface GenerateFromTemplateOptions {
   includeImport?: boolean;
   customImports?: string[];
   wrapper?: string;
+  requiredProps?: Record<string, any>;
 }
 
 const formatPropValue = (
@@ -232,12 +233,16 @@ export const generateFromTemplate = ({
   includeImport = true,
   customImports = [],
   wrapper,
+  requiredProps = {},
 }: GenerateFromTemplateOptions): string => {
   // Group enabled props by their target marker
   const propsByTarget: Record<string, string[]> = {};
   
   Object.entries(propValues).forEach(([name, propValue]) => {
     if (!propValue.enabled) return;
+    
+    // Skip required props - they're handled separately as variable definitions
+    if (requiredProps[name] !== undefined) return;
     
     // Skip if this prop's value matches the default in the template
     if (defaults[name] !== undefined && defaults[name] === propValue.value) return;
@@ -281,7 +286,8 @@ export const generateFromTemplate = ({
     } else {
       const props = propsByTarget[marker] || [];
       const propsString = props.length > 0 ? " " + props.join(" ") : "";
-      result = result.replace(new RegExp(`\\{\\{${marker.replace(".", "\\.")}\\}\\}`, "g"), propsString);
+      const escapedMarker = marker.replace(/\./g, "\\.");
+      result = result.replace(new RegExp(`\\{\\{${escapedMarker}\\}\\}`, "g"), propsString);
     }
   });
   
@@ -292,6 +298,16 @@ export const generateFromTemplate = ({
   // Apply wrapper if provided (for hook patterns, etc.)
   if (wrapper) {
     result = wrapper.replace(/\{\{component\}\}/g, result);
+  }
+  
+  // Generate variable definitions for required props
+  let variableDefinitions = "";
+  if (Object.keys(requiredProps).length > 0) {
+    Object.entries(requiredProps).forEach(([name, defaultValue]) => {
+      // Use current value from propValues if available
+      const currentValue = propValues[name]?.value ?? defaultValue;
+      variableDefinitions += `const ${name} = ${JSON.stringify(currentValue, null, 2)};\n\n`;
+    });
   }
   
   // Add import statement if needed
@@ -306,7 +322,9 @@ export const generateFromTemplate = ({
       importItems = [...importItems, ...customImports];
     }
     const importStatement = `import { ${importItems.join(", ")} } from 'playbook-ui'\n\n`;
-    result = importStatement + result;
+    result = importStatement + variableDefinitions + result;
+  } else {
+    result = variableDefinitions + result;
   }
   
   return result;

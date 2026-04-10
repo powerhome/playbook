@@ -1,4 +1,49 @@
-import { PropValue, PropCondition } from "./types";
+import { PropValue, PropCondition, PlaygroundConfig } from "./types";
+
+/**
+ * Merge required props, optional data preset (columnDefinitions + tableData),
+ * structure mode defaults, and a feature preset into one prop map.
+ */
+export const buildPlaygroundPropValues = (
+  playgroundConfig: PlaygroundConfig | null | undefined,
+  requiredProps: Record<string, any>,
+  dataPresetKey: string | null,
+  structureModeKey: string | null,
+  presetIndex: number | null
+): Record<string, PropValue> => {
+  const baseLayer: Record<string, any> = { ...requiredProps };
+  if (dataPresetKey && playgroundConfig?.dataPresets?.presets?.[dataPresetKey]) {
+    const pack = playgroundConfig.dataPresets.presets[dataPresetKey];
+    baseLayer.columnDefinitions = pack.columnDefinitions;
+    baseLayer.tableData = pack.tableData;
+  }
+
+  const values: Record<string, PropValue> = {};
+  Object.entries(baseLayer).forEach(([name, value]) => {
+    values[name] = { value, enabled: true };
+  });
+
+  const mode = structureModeKey
+    ? playgroundConfig?.structureModes?.modes[structureModeKey]
+    : null;
+  if (mode?.props) {
+    Object.entries(mode.props).forEach(([name, value]) => {
+      values[name] = { value, enabled: true };
+    });
+  }
+
+  const preset =
+    presetIndex != null && playgroundConfig?.presets?.[presetIndex]
+      ? playgroundConfig.presets[presetIndex]
+      : null;
+  if (preset?.props) {
+    Object.entries(preset.props).forEach(([name, value]) => {
+      values[name] = { value, enabled: true };
+    });
+  }
+
+  return values;
+};
 
 export const prepareExampleCode = (source: string): string => {
   let code = source

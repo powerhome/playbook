@@ -16,7 +16,12 @@ import {
   getDefaultChildren,
   needsChildren,
 } from "../CodeGenerator";
-import { prepareExampleCode, checkCondition, checkHintCondition } from "../utils";
+import {
+  prepareExampleCode,
+  checkCondition,
+  checkHintCondition,
+  buildPlaygroundPropValues,
+} from "../utils";
 import { EXCLUDED_PROPS } from "../constants";
 
 interface Example {
@@ -44,38 +49,50 @@ export const usePlaygroundState = ({
   // Initialize with first preset if available
   const firstPreset = playgroundConfig?.presets?.[0];
   
-  const getInitialPropValues = (): Record<string, PropValue> => {
-    if (!firstPreset) return {};
-    const values: Record<string, PropValue> = {};
-    Object.entries(firstPreset.props).forEach(([propName, value]) => {
-      values[propName] = { value, enabled: true };
-    });
-    return values;
-  };
+  // Get required props (always enabled with default values)
+  const requiredProps = playgroundConfig?.requiredProps ?? {};
+  const requiredPropNames = useMemo(() => new Set(Object.keys(requiredProps)), [requiredProps]);
 
   const getInitialChildren = (): string => {
     if (firstPreset?.children !== undefined) return firstPreset.children;
     return playgroundConfig?.children?.default ?? getDefaultChildren(kitName);
   };
 
-  const [propValues, setPropValues] = useState<Record<string, PropValue>>(getInitialPropValues);
+  const defaultStructureMode = playgroundConfig?.structureModes?.default ?? null;
+
+  const [activeDataPresetKey, setActiveDataPresetKey] = useState<string | null>(null);
+  const [propValues, setPropValues] = useState<Record<string, PropValue>>(() =>
+    buildPlaygroundPropValues(
+      playgroundConfig,
+      requiredProps,
+      null,
+      defaultStructureMode,
+      playgroundConfig?.presets?.[0] ? 0 : null
+    )
+  );
   const [children, setChildren] = useState<string>(getInitialChildren);
   const [activePresetIndex, setActivePresetIndex] = useState<number | null>(
     firstPreset ? 0 : null
   );
-  
-  // Structure mode state
-  const defaultStructureMode = playgroundConfig?.structureModes?.default ?? null;
+
   const [activeStructureMode, setActiveStructureMode] = useState<string | null>(defaultStructureMode);
-  
+
   // Reset all state when kit changes
   useEffect(() => {
-    // Reset to initial values when navigating to a different kit
-    setPropValues(getInitialPropValues());
+    setActiveDataPresetKey(null);
+    setPropValues(
+      buildPlaygroundPropValues(
+        playgroundConfig,
+        requiredProps,
+        null,
+        playgroundConfig?.structureModes?.default ?? null,
+        playgroundConfig?.presets?.[0] ? 0 : null
+      )
+    );
     setChildren(getInitialChildren());
-    setActivePresetIndex(firstPreset ? 0 : null);
+    setActivePresetIndex(playgroundConfig?.presets?.[0] ? 0 : null);
     setActiveStructureMode(playgroundConfig?.structureModes?.default ?? null);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [kitName]);
   
   // Get current structure mode config
@@ -90,6 +107,15 @@ export const usePlaygroundState = ({
     return Object.entries(playgroundConfig.structureModes.modes).map(([key, mode]) => ({
       key,
       label: mode.label,
+    }));
+  }, [playgroundConfig]);
+
+  const availableDataPresets = useMemo(() => {
+    const presets = playgroundConfig?.dataPresets?.presets;
+    if (!presets) return [];
+    return Object.entries(presets).map(([key, preset]) => ({
+      key,
+      label: preset.label,
     }));
   }, [playgroundConfig]);
 
@@ -122,41 +148,64 @@ export const usePlaygroundState = ({
   );
 
   // Handlers
-  const handlePropChange = useCallback((name: string, value: PropValue) => {
-    setPropValues((prev) => ({ ...prev, [name]: value }));
-    setActivePresetIndex(null);
-  }, []);
+  const handlePropChange = useCallback(
+    (name: string, value: PropValue) => {
+      if (requiredPropNames.has(name) && !value.enabled) {
+        return;
+      }
+      if (
+        playgroundConfig?.dataPresets &&
+        (name === "columnDefinitions" || name === "tableData")
+      ) {
+        setActiveDataPresetKey(null);
+      }
+      setPropValues((prev) => ({ ...prev, [name]: value }));
+      setActivePresetIndex(null);
+    },
+    [requiredPropNames, playgroundConfig?.dataPresets]
+  );
 
   const applyPreset = useCallback(
     (presetIndex: number) => {
       const preset = playgroundConfig?.presets?.[presetIndex];
       if (!preset) return;
 
-      const newPropValues: Record<string, PropValue> = {};
-      
-      // First, apply current structure mode's default props (if any)
-      const modeKey = activeStructureMode;
-      if (modeKey) {
-        const mode = playgroundConfig?.structureModes?.modes[modeKey];
-        if (mode?.props) {
-          Object.entries(mode.props).forEach(([propName, value]) => {
-            newPropValues[propName] = { value, enabled: true };
-          });
-        }
-      }
-      
-      // Then apply preset props (can override structure mode props)
-      Object.entries(preset.props).forEach(([propName, value]) => {
-        newPropValues[propName] = { value, enabled: true };
-      });
-
-      setPropValues(newPropValues);
+      setPropValues(
+        buildPlaygroundPropValues(
+          playgroundConfig,
+          requiredProps,
+          activeDataPresetKey,
+          activeStructureMode,
+          presetIndex
+        )
+      );
       setActivePresetIndex(presetIndex);
       if (preset.children !== undefined) {
         setChildren(preset.children);
       }
     },
-    [playgroundConfig, activeStructureMode]
+    [
+      playgroundConfig,
+      requiredProps,
+      activeDataPresetKey,
+      activeStructureMode,
+    ]
+  );
+
+  const handleDataPresetChange = useCallback(
+    (dataPresetKey: string | null) => {
+      setActiveDataPresetKey(dataPresetKey);
+      setPropValues(
+        buildPlaygroundPropValues(
+          playgroundConfig,
+          requiredProps,
+          dataPresetKey,
+          activeStructureMode,
+          activePresetIndex
+        )
+      );
+    },
+    [playgroundConfig, requiredProps, activeStructureMode, activePresetIndex]
   );
 
   // Computed state
@@ -165,6 +214,20 @@ export const usePlaygroundState = ({
     const conditionals = playgroundConfig?.conditionals ?? {};
 
     Object.entries(conditionals).forEach(([propName, condition]) => {
+      if (
+        condition.structureMode != null &&
+        activeStructureMode !== condition.structureMode
+      ) {
+        const modeLabel =
+          playgroundConfig?.structureModes?.modes[condition.structureMode!]
+            ?.label ?? condition.structureMode;
+        state[propName] = {
+          disabled: true,
+          reason: `Switch structure mode to "${modeLabel}" to use this prop.`,
+        };
+        return;
+      }
+
       const requiresMet = checkCondition(condition.requires, propValues);
       const showWhenMet = checkCondition(condition.showWhen, propValues);
 
@@ -187,7 +250,23 @@ export const usePlaygroundState = ({
     });
 
     return state;
-  }, [playgroundConfig?.conditionals, propValues]);
+  }, [
+    playgroundConfig?.conditionals,
+    playgroundConfig?.structureModes?.modes,
+    propValues,
+    activeStructureMode,
+  ]);
+
+  // Props that fail conditionals must not appear in generated code (or live preview)
+  const propValuesForCodegen = useMemo(() => {
+    const out: Record<string, PropValue> = { ...propValues };
+    Object.entries(propDisabledState).forEach(([name, { disabled }]) => {
+      if (disabled && out[name]) {
+        out[name] = { ...out[name], enabled: false };
+      }
+    });
+    return out;
+  }, [propValues, propDisabledState]);
 
   const activeHints = useMemo(() => {
     const hints: Array<PlaygroundHint & { id: string }> = [];
@@ -264,7 +343,7 @@ export const usePlaygroundState = ({
     if (hasActiveTemplate && playgroundConfig) {
       return generateFromTemplate({
         template: activeTemplate!,
-        propValues,
+        propValues: propValuesForCodegen,
         propDefinitions: allPropDefinitions,
         propTargets: activePropTargets,
         defaults: playgroundConfig.defaults,
@@ -273,22 +352,23 @@ export const usePlaygroundState = ({
         includeImport: true,
         customImports: currentStructureMode?.imports,
         wrapper: currentStructureMode?.wrapper,
+        requiredProps,
       });
     }
     return generateCode({
       componentName: kitName,
-      propValues,
+      propValues: propValuesForCodegen,
       propDefinitions: allPropDefinitions,
       children: needsChildren(kitName) ? children : undefined,
       includeImport: true,
     });
-  }, [kitName, propValues, allPropDefinitions, children, hasActiveTemplate, activeTemplate, activePropTargets, playgroundConfig, currentStructureMode]);
+  }, [kitName, propValuesForCodegen, allPropDefinitions, children, hasActiveTemplate, activeTemplate, activePropTargets, playgroundConfig, currentStructureMode, requiredProps]);
 
   const generatedLiveCode = useMemo(() => {
     if (hasActiveTemplate && playgroundConfig) {
       return generateLiveFromTemplate({
         template: activeTemplate!,
-        propValues,
+        propValues: propValuesForCodegen,
         propDefinitions: allPropDefinitions,
         propTargets: activePropTargets,
         defaults: playgroundConfig.defaults,
@@ -300,11 +380,11 @@ export const usePlaygroundState = ({
     }
     return generateLiveCode({
       componentName: kitName,
-      propValues,
+      propValues: propValuesForCodegen,
       propDefinitions: allPropDefinitions,
       children: needsChildren(kitName) ? children : undefined,
     });
-  }, [kitName, propValues, allPropDefinitions, children, hasActiveTemplate, activeTemplate, activePropTargets, playgroundConfig, currentStructureMode]);
+  }, [kitName, propValuesForCodegen, allPropDefinitions, children, hasActiveTemplate, activeTemplate, activePropTargets, playgroundConfig, currentStructureMode]);
 
   const previewCode = useMemo(() => {
     if (hasActiveTemplate) return generatedLiveCode;
@@ -322,46 +402,51 @@ export const usePlaygroundState = ({
     return generatedDisplayCode;
   }, [hasActiveTemplate, hasModifiedProps, defaultExample, generatedDisplayCode]);
 
-  // Handler to change structure mode
-  const handleStructureModeChange = useCallback((modeKey: string) => {
-    setActiveStructureMode(modeKey);
-    const mode = playgroundConfig?.structureModes?.modes[modeKey];
-    if (mode) {
-      // Update children to match the new mode's default
-      if (mode.children) {
+  const handleStructureModeChange = useCallback(
+    (modeKey: string) => {
+      setActiveStructureMode(modeKey);
+      const mode = playgroundConfig?.structureModes?.modes[modeKey];
+      if (mode?.children) {
         setChildren(mode.children);
       }
-      // Apply the mode's default props
-      if (mode.props) {
-        setPropValues((prev) => {
-          const newValues = { ...prev };
-          Object.entries(mode.props!).forEach(([propName, value]) => {
-            newValues[propName] = { value, enabled: true };
-          });
-          return newValues;
-        });
-      }
-    }
-    setActivePresetIndex(null);
-  }, [playgroundConfig]);
+      setPropValues(
+        buildPlaygroundPropValues(
+          playgroundConfig,
+          requiredProps,
+          activeDataPresetKey,
+          modeKey,
+          null
+        )
+      );
+      setActivePresetIndex(null);
+    },
+    [playgroundConfig, requiredProps, activeDataPresetKey]
+  );
 
-  // Handler to reset all props to initial state
   const handleReset = useCallback(() => {
-    setPropValues(getInitialPropValues());
+    setActiveDataPresetKey(null);
+    setPropValues(
+      buildPlaygroundPropValues(
+        playgroundConfig,
+        requiredProps,
+        null,
+        playgroundConfig?.structureModes?.default ?? null,
+        firstPreset ? 0 : null
+      )
+    );
     setChildren(getInitialChildren());
     setActivePresetIndex(firstPreset ? 0 : null);
     setActiveStructureMode(playgroundConfig?.structureModes?.default ?? null);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [playgroundConfig, firstPreset]);
 
   return {
-    // State
     propValues,
     children,
     activePresetIndex,
     activeStructureMode,
-    
-    // Derived data
+    activeDataPresetKey,
+
     reactProps,
     globalProps,
     allPropDefinitions,
@@ -374,12 +459,14 @@ export const usePlaygroundState = ({
     previewCode,
     displayCode,
     availableStructureModes,
-    
-    // Handlers
+    availableDataPresets,
+    requiredPropNames,
+
     handlePropChange,
     applyPreset,
     setChildren,
     handleStructureModeChange,
+    handleDataPresetChange,
     handleReset,
   };
 };

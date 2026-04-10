@@ -22,6 +22,7 @@ interface PropsPanelProps {
   onPropChange: (name: string, value: PropValue) => void;
   globalProps: Record<string, PropDefinition>;
   showGlobalProps: boolean;
+  requiredPropNames?: Set<string>;
 }
 
 export const PropsPanel: React.FC<PropsPanelProps> = ({
@@ -35,6 +36,7 @@ export const PropsPanel: React.FC<PropsPanelProps> = ({
   onPropChange,
   globalProps,
   showGlobalProps,
+  requiredPropNames = new Set(),
 }) => {
   const globalPropEntries = Object.entries(globalProps);
 
@@ -96,6 +98,7 @@ export const PropsPanel: React.FC<PropsPanelProps> = ({
                       onChange={onPropChange}
                       disabled={disabledState?.disabled}
                       disabledReason={disabledState?.reason}
+                      isRequired={requiredPropNames.has(name)}
                     />
                   );
                 })
