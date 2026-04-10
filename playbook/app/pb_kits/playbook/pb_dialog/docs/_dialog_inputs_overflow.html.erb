@@ -1,0 +1,120 @@
+<% typeahead_options = [
+  { label: "United States", value: "unitedStates", id: "us" },
+  { label: "United Kingdom", value: "unitedKingdom", id: "gb" },
+  { label: "Canada", value: "canada", id: "ca" },
+  { label: "Australia", value: "australia", id: "au" },
+  { label: "Germany", value: "germany", id: "de" },
+  { label: "France", value: "france", id: "fr" },
+  { label: "Japan", value: "japan", id: "jp" },
+  { label: "Brazil", value: "brazil", id: "br" },
+  { label: "Mexico", value: "mx", id: "mx" },
+  { label: "Italy", value: "it", id: "it" },
+  { label: "Spain", value: "es", id: "es" },
+  { label: "Netherlands", value: "nl", id: "nl" },
+  { label: "Sweden", value: "se", id: "se" },
+  { label: "Norway", value: "no", id: "no" },
+  { label: "Denmark", value: "dk", id: "dk" },
+  { label: "Finland", value: "fi", id: "fi" },
+  { label: "Poland", value: "pl", id: "pl" },
+  { label: "Switzerland", value: "ch", id: "ch" },
+  { label: "Austria", value: "at", id: "at" },
+  { label: "Belgium", value: "be", id: "be" },
+  { label: "Ireland", value: "ie", id: "ie" },
+  { label: "Portugal", value: "pt", id: "pt" },
+  { label: "Greece", value: "gr", id: "gr" },
+  { label: "Czech Republic", value: "cz", id: "cz" },
+  { label: "Hungary", value: "hu", id: "hu" },
+  { label: "New Zealand", value: "nz", id: "nz" },
+  { label: "Singapore", value: "sg", id: "sg" },
+  { label: "South Korea", value: "kr", id: "kr" },
+  { label: "India", value: "in", id: "in" },
+  { label: "China", value: "cn", id: "cn" },
+] %>
+
+<% tree_data_inputs_overflow = [
+  {
+    label: "Power Home Remodeling",
+    value: "powerHomeRemodeling",
+    id: "powerhome1",
+    expanded: true,
+    children: [
+      {
+        label: "People",
+        value: "people",
+        id: "people1",
+        expanded: true,
+        children: [
+          { label: "Talent Acquisition", value: "talentAcquisition", id: "talent1" },
+          { label: "Business Affairs", value: "businessAffairs", id: "business1" },
+          { label: "People Experience", value: "peopleExperience", id: "experience1" },
+        ],
+      },
+      {
+        label: "Contact Center",
+        value: "contactCenter",
+        id: "contact1",
+        children: [
+          { label: "Appointment Management", value: "appointmentManagement", id: "appointment1" },
+          { label: "Customer Service", value: "customerService", id: "customer1" },
+          { label: "Energy", value: "energy", id: "energy1" },
+        ],
+      },
+    ],
+  },
+] %>
+
+<%= pb_rails("button", props: { text: "Open dialog (inputs overflow)", data: { open_dialog: "dialog-inputs-overflow" } }) %>
+
+<%= pb_rails("dialog", props: {
+  id: "dialog-inputs-overflow",
+  size: "lg",
+}) do %>
+  <%= pb_rails("dialog/dialog_header", props: { id: "dialog-inputs-overflow" }) do %>
+    <%= pb_rails("body", props: { text: "Form inside dialog" }) %>
+  <% end %>
+  <%= pb_rails("dialog/dialog_body") do %>
+    <%= pb_rails("flex", props: { orientation: "row", gap: "md" }) do %>
+      <%= pb_rails("typeahead", props: {
+        label: "Typeahead",
+        options: typeahead_options,
+        placeholder: "Search country…",
+        id: "inputs-overflow-typeahead-1",
+        is_multi: false,
+        margin_bottom: "none",
+      }) %>
+      <%= pb_rails("dropdown", props: {
+        id: "inputs-overflow-dialog-dropdown-rails",
+        label: "Dropdown",
+        options: typeahead_options,
+        placeholder: "Select a country…",
+        margin_bottom: "none",
+      }) %>
+      <%= pb_rails("multi_level_select", props: {
+        id: "inputs-overflow-dialog-mls-rails",
+        label: "Multi Level Select",
+        tree_data: tree_data_inputs_overflow,
+        margin_bottom: "none",
+      }) %>
+      <%= pb_rails("date_picker", props: {
+        label: "Date Picker",
+        name: "inputs_overflow_dialog_start",
+        picker_id: "inputs-overflow-dialog-start-rails",
+        min_date: "01/01/2000",
+        max_date: "12/31/2030",
+        margin_bottom: "none",
+        }) %>
+      <%= pb_rails("time_picker", props: {
+        label: "Time Picker",
+        name: "inputs_overflow_dialog_time",
+        id: "inputs-overflow-dialog-time-rails",
+        margin_bottom: "none",
+      }) %>
+    <% end %>
+  <% end %>
+  <%= pb_rails("dialog/dialog_footer", props: {
+    cancel_button: "Cancel",
+    confirm_button: "Save",
+    confirm_button_id: "confirm-inputs-overflow",
+    id: "dialog-inputs-overflow",
+  }) %>
+<% end %>
