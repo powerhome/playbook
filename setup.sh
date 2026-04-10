@@ -22,6 +22,9 @@ echo "Bundling website \n"
 echo "Generating AI metadata (kit schemas) \n"
 (cd playbook; yarn generate:all-ai-metadata)
 
+echo "Generating global props values \n"
+(cd playbook-website; yarn generate:global-props-values)
+
 echo "Compiling webpack bundle \n"
 rm -rf playbook/dist
 (cd playbook; yarn release)
