@@ -1,4 +1,5 @@
 {
+  "template": "<Card{{props}}>\n  {{children}}\n</Card>",
   "children": {
     "default": "Card content"
   },
@@ -27,22 +28,11 @@
       "children": "Card content"
     },
     {
-      "name": "White surface",
+      "name": "No borders",
       "props": {
-        "background": "white",
-        "padding": "md",
-        "borderRadius": "md"
+        "borderNone": true
       },
-      "children": "Padded white card"
-    },
-    {
-      "name": "Flush (no border)",
-      "props": {
-        "background": "white",
-        "borderNone": true,
-        "padding": "none"
-      },
-      "children": "Edge-to-edge content"
+      "children": "No borders"
     },
     {
       "name": "Rounded & spacious",
@@ -54,28 +44,12 @@
       "children": "Extra padding and large radius"
     },
     {
-      "name": "Subtle info",
-      "props": {
-        "background": "info_subtle",
-        "padding": "sm"
-      },
-      "children": "Informational panel"
-    },
-    {
       "name": "Dark surface",
       "props": {
         "background": "dark",
         "padding": "md"
       },
-      "children": "Dark background"
-    },
-    {
-      "name": "Product accent",
-      "props": {
-        "background": "product_1_background",
-        "padding": "md"
-      },
-      "children": "Product-themed card"
+      "children": "<Body dark text=\"Dark background\" />"
     },
     {
       "name": "Selected",
@@ -85,6 +59,21 @@
         "padding": "md"
       },
       "children": "Selected state"
+    },
+    {
+      "name": "Highlight",
+      "props": {
+        "highlight": {
+          "position": "side",
+          "color": "primary"
+        }
+      },
+      "children": "Highlighted card"
+    },
+    {
+      "name": "With Header",
+      "props": {"padding": "none"},
+      "children": "<Card.Header headerColor=\"primary\">Header</Card.Header>\n  <Card.Body>Body content here</Card.Body>"
     }
   ],
   "conditionals": {

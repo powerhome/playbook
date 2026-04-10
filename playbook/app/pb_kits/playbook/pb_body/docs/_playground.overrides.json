@@ -31,7 +31,7 @@
     {
       "name": "Link style",
       "props": {},
-      "children": "<a href=\"#\">This text is using the <a> tag</a>"
+      "children": "<a href=\"#\">This text is using the anchor tag</a>"
     }
   ],
   "conditionals": {

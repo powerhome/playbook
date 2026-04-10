@@ -257,11 +257,16 @@ export const generateFromTemplate = ({
     markers.add(match[1]);
   }
   
+  // Check if children should be hidden based on hideWhenPropSet
+  const shouldHideChildren = childrenConfig?.hideWhenPropSet?.some(
+    (propName) => propValues[propName]?.enabled && propValues[propName]?.value
+  ) ?? false;
+
   // Replace each marker with its props (or empty string if no props)
   markers.forEach((marker) => {
     if (marker === "children") {
-      // Handle children marker
-      const childrenValue = children ?? childrenConfig?.default ?? "";
+      // Handle children marker - hide if a hideWhenPropSet prop is enabled
+      const childrenValue = shouldHideChildren ? "" : (children ?? childrenConfig?.default ?? "");
       result = result.replace(/\{\{children\}\}/g, childrenValue);
     } else {
       const props = propsByTarget[marker] || [];
@@ -269,6 +274,10 @@ export const generateFromTemplate = ({
       result = result.replace(new RegExp(`\\{\\{${marker.replace(".", "\\.")}\\}\\}`, "g"), propsString);
     }
   });
+  
+  // Convert empty component bodies to self-closing tags
+  // Matches <Component ...>\n  \n</Component> or <Component ...></Component>
+  result = result.replace(/<([A-Z][A-Za-z.]*)((?:\s+[^>]*)?)>\s*<\/\1>/g, "<$1$2 />");
   
   // Add import statement if needed
   if (includeImport) {

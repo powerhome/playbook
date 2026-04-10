@@ -38,7 +38,7 @@
       "children": "Figure 1 · Quarterly revenue by region"
     },
     {
-      "name": "Small meta",
+      "name": "Small",
       "props": {
         "size": "xs",
         "color": "light"
@@ -46,28 +46,17 @@
       "children": "Posted 3 days ago · 4 min read"
     },
     {
-      "name": "Table caption",
-      "props": {
-        "tag": "caption",
-        "size": "sm"
-      },
-      "children": "Active users by plan type"
-    },
-    {
       "name": "Success note",
       "props": {
-        "color": "success",
-        "size": "sm"
+        "color": "success"
       },
-      "children": "Free trial · 14 days remaining"
+      "children": "You did it!"
     },
     {
-      "name": "Error hint",
+      "name": "Text only",
       "props": {
-        "color": "error",
-        "size": "md"
-      },
-      "children": "Required field"
+        "text": "I am a self-contained caption"
+      }
     }
   ],
   "conditionals": {},

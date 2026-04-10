@@ -29,18 +29,7 @@ echo "Compiling webpack bundle \n"
 rm -rf playbook/dist
 (cd playbook; yarn release)
 
-echo "Generating playground configs for touched kits \n"
-# Find kits with modified schema or override files
-TOUCHED_KITS=$(git status --porcelain 2>/dev/null | grep -E 'pb_[^/]+/(kit\.schema\.json|docs/_playground\.overrides\.json)' | sed -E 's/.*pb_([^/]+).*/\1/' | sort -u)
-
-if [ -n "$TOUCHED_KITS" ]; then
-  echo "Found touched kits: $TOUCHED_KITS"
-  for KIT in $TOUCHED_KITS; do
-    echo "  Regenerating playground config for: $KIT"
-    (cd playbook; yarn generate:playground-configs --kit="$KIT" --overwrite)
-  done
-else
-  echo "No schema or override changes detected, skipping playground config generation"
-fi
+echo "Generating playground configs \n"
+(cd playbook; yarn generate:playground-configs --overwrite)
 
 echo "\nSetup complete!"
