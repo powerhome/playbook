@@ -116,7 +116,12 @@ Create `docs/_playground.overrides.json` to customize any field.
 
 ### Structure Modes
 
-For components with subcomponents (e.g., `Card` with `Card.Header`, `Card.Body`), use `structureModes` to let users toggle between different structural layouts:
+Use `structureModes` to let users toggle between different usage patterns:
+
+1. **Subcomponent structures** (e.g., `Card` vs `Card.Header` + `Card.Body`)
+2. **Hook patterns** (e.g., basic usage vs `useCollapsible` hook)
+
+#### Example: Subcomponent Structure
 
 ```json
 {
@@ -142,19 +147,51 @@ For components with subcomponents (e.g., `Card` with `Card.Header`, `Card.Body`)
 }
 ```
 
+#### Example: Hook Pattern
+
+For components with associated hooks (like `useCollapsible`), show how to use the hook for programmatic control:
+
+```json
+{
+  "structureModes": {
+    "default": "basic",
+    "modes": {
+      "basic": {
+        "label": "Basic Usage",
+        "template": "<Collapsible{{props}}>\n  <Collapsible.Main>Title</Collapsible.Main>\n  <Collapsible.Content>{{children}}</Collapsible.Content>\n</Collapsible>",
+        "children": "Content here"
+      },
+      "with_hook": {
+        "label": "With useCollapsible Hook",
+        "template": "<Collapsible collapsed={collapsed}{{props}}>\n  <Collapsible.Main>Title</Collapsible.Main>\n  <Collapsible.Content>{{children}}</Collapsible.Content>\n</Collapsible>",
+        "children": "Hook-controlled content",
+        "imports": ["useCollapsible"],
+        "wrapper": "const Example = () => {\n  const [collapsed, toggle] = useCollapsible(true)\n\n  return (\n    <>\n      <Button onClick={toggle}>{collapsed ? 'Expand' : 'Collapse'}</Button>\n      {{component}}\n    </>\n  )\n}\n\n<Example />"
+      }
+    }
+  }
+}
+```
+
+#### Mode Configuration
+
 | Field | Description |
 |-------|-------------|
 | `structureModes.default` | Key of the default mode |
 | `structureModes.modes` | Object with mode configurations |
-| `mode.label` | Display label in the dropdown |
+| `mode.label` | Display label in the UI selector |
 | `mode.template` | JSX template for this mode |
 | `mode.children` | Default children content for this mode |
 | `mode.props` | Default props to apply when mode is selected |
 | `mode.propTargets` | Route props to subcomponent markers (e.g., `headerColor` → `Card.Header.props`) |
+| `mode.imports` | Additional imports to add (e.g., `["useCollapsible"]`) |
+| `mode.wrapper` | Code that wraps the component (use `{{component}}` marker) |
 
 **Subcomponent Props**: Use `propTargets` to route props to specific template markers. In the template, use markers like `{{Card.Header.props}}` and then in `propTargets`, map prop names to their target marker: `"headerColor": "Card.Header.props"`.
 
-When structure modes are defined, a dropdown appears in the playground UI allowing users to switch between different component structures.
+**Hook Patterns**: Use `imports` to add hooks to the import statement, and `wrapper` to wrap the generated component in a function component that demonstrates the hook usage. The `{{component}}` marker in the wrapper will be replaced with the generated component JSX.
+
+When structure modes are defined, a selector appears in the playground UI allowing users to switch between different usage patterns.
 
 ## Mental Model
 

@@ -17,6 +17,8 @@ interface GenerateFromTemplateOptions {
   children?: string;
   childrenConfig?: PlaygroundChildrenConfig;
   includeImport?: boolean;
+  customImports?: string[];
+  wrapper?: string;
 }
 
 const formatPropValue = (
@@ -228,6 +230,8 @@ export const generateFromTemplate = ({
   children,
   childrenConfig,
   includeImport = true,
+  customImports = [],
+  wrapper,
 }: GenerateFromTemplateOptions): string => {
   // Group enabled props by their target marker
   const propsByTarget: Record<string, string[]> = {};
@@ -285,12 +289,23 @@ export const generateFromTemplate = ({
   // Matches <Component ...>\n  \n</Component> or <Component ...></Component>
   result = result.replace(/<([A-Z][A-Za-z.]*)((?:\s+[^>]*)?)>\s*<\/\1>/g, "<$1$2 />");
   
+  // Apply wrapper if provided (for hook patterns, etc.)
+  if (wrapper) {
+    result = wrapper.replace(/\{\{component\}\}/g, result);
+  }
+  
   // Add import statement if needed
   if (includeImport) {
     // Extract all component names from the template for the import
     const componentMatches = result.match(/<([A-Z][A-Za-z]*)/g) || [];
     const components = [...new Set(componentMatches.map(m => m.slice(1)))];
-    const importStatement = `import { ${components.join(", ")} } from 'playbook-ui'\n\n`;
+    
+    // Build import statement with custom imports (hooks, etc.)
+    let importItems = [...components];
+    if (customImports.length > 0) {
+      importItems = [...importItems, ...customImports];
+    }
+    const importStatement = `import { ${importItems.join(", ")} } from 'playbook-ui'\n\n`;
     result = importStatement + result;
   }
   
@@ -305,6 +320,8 @@ export const generateLiveFromTemplate = ({
   defaults = {},
   children,
   childrenConfig,
+  customImports = [],
+  wrapper,
 }: Omit<GenerateFromTemplateOptions, "includeImport">): string => {
   const code = generateFromTemplate({
     template,
@@ -315,6 +332,8 @@ export const generateLiveFromTemplate = ({
     children,
     childrenConfig,
     includeImport: false,
+    customImports,
+    wrapper,
   });
   
   // Wrap in render() for react-live

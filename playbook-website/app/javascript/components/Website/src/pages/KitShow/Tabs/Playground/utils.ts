@@ -49,7 +49,11 @@ export const checkHintCondition = (
     }
 
     if (expectedValue === true) {
-      return propVal?.enabled && Boolean(propVal?.value);
+      return propVal?.enabled && propVal?.value === true;
+    }
+
+    if (expectedValue === false) {
+      return propVal?.enabled && propVal?.value === false;
     }
 
     if (propVal?.enabled) {

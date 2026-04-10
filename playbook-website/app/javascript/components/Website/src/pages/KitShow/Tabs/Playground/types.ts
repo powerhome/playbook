@@ -128,6 +128,8 @@ export interface StructureMode {
   children: string;
   props?: Record<string, any>;
   propTargets?: Record<string, string>;
+  imports?: string[];
+  wrapper?: string;
 }
 
 export interface StructureModesConfig {

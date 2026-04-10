@@ -271,6 +271,8 @@ export const usePlaygroundState = ({
         children,
         childrenConfig: playgroundConfig.children,
         includeImport: true,
+        customImports: currentStructureMode?.imports,
+        wrapper: currentStructureMode?.wrapper,
       });
     }
     return generateCode({
@@ -280,7 +282,7 @@ export const usePlaygroundState = ({
       children: needsChildren(kitName) ? children : undefined,
       includeImport: true,
     });
-  }, [kitName, propValues, allPropDefinitions, children, hasActiveTemplate, activeTemplate, activePropTargets, playgroundConfig]);
+  }, [kitName, propValues, allPropDefinitions, children, hasActiveTemplate, activeTemplate, activePropTargets, playgroundConfig, currentStructureMode]);
 
   const generatedLiveCode = useMemo(() => {
     if (hasActiveTemplate && playgroundConfig) {
@@ -292,6 +294,8 @@ export const usePlaygroundState = ({
         defaults: playgroundConfig.defaults,
         children,
         childrenConfig: playgroundConfig.children,
+        customImports: currentStructureMode?.imports,
+        wrapper: currentStructureMode?.wrapper,
       });
     }
     return generateLiveCode({
@@ -300,7 +304,7 @@ export const usePlaygroundState = ({
       propDefinitions: allPropDefinitions,
       children: needsChildren(kitName) ? children : undefined,
     });
-  }, [kitName, propValues, allPropDefinitions, children, hasActiveTemplate, activeTemplate, activePropTargets, playgroundConfig]);
+  }, [kitName, propValues, allPropDefinitions, children, hasActiveTemplate, activeTemplate, activePropTargets, playgroundConfig, currentStructureMode]);
 
   const previewCode = useMemo(() => {
     if (hasActiveTemplate) return generatedLiveCode;

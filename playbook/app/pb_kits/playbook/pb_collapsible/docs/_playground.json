@@ -1,5 +1,5 @@
 {
-  "template": "<Collapsible{{props}}>\n  <Collapsible.Main>\n    Main Section\n  </Collapsible.Main>\n  <Collapsible.Content>\n    {{children}}\n  </Collapsible.Content>\n</Collapsible>",
+  "template": "<Collapsible{{props}}>{{children}}</Collapsible>",
   "propTargets": {},
   "defaults": {
     "tag": "div"
@@ -9,12 +9,6 @@
     "default": "Expandable content goes here. This section is hidden when collapsed."
   },
   "groups": [
-    {
-      "name": "State",
-      "props": [
-        "collapsed"
-      ]
-    },
     {
       "name": "Appearance",
       "props": [
@@ -35,13 +29,19 @@
         "onClick",
         "onIconClick"
       ]
+    },
+    {
+      "name": "State",
+      "props": [
+        "collapsed"
+      ]
     }
   ],
   "presets": [
     {
       "name": "Default",
       "props": {},
-      "children": "Expandable content goes here. This section is hidden when collapsed."
+      "children": "Expandable content goes here."
     },
     {
       "name": "Expanded",
@@ -57,8 +57,46 @@
         "iconColor": "link"
       },
       "children": "Custom icon and color."
+    },
+    {
+      "name": "FontAwesome array",
+      "props": {
+        "icon": [
+          "far",
+          "fa-star"
+        ],
+        "iconColor": "warning"
+      },
+      "children": "Using FontAwesome array syntax for icon."
     }
   ],
   "conditionals": {},
-  "hints": {}
+  "hints": {
+    "expanded_state": {
+      "when": {
+        "collapsed": false
+      },
+      "message": "Set collapsed to false to render as open on first render. Use useCollapsible hook or state to control this for complex UI.",
+      "type": "info"
+    }
+  },
+  "structureModes": {
+    "default": "subcomponents",
+    "modes": {
+      "subcomponents": {
+        "label": "With Subcomponents",
+        "template": "<Collapsible{{props}}>\n  <Collapsible.Main>\n    Main Section\n  </Collapsible.Main>\n  <Collapsible.Content>\n    {{children}}\n  </Collapsible.Content>\n</Collapsible>",
+        "children": "Expandable content goes here."
+      },
+      "with_hook": {
+        "label": "With useCollapsible Hook",
+        "template": "<Collapsible collapsed={collapsed}{{props}}>\n  <Collapsible.Main>\n    Main Section\n  </Collapsible.Main>\n  <Collapsible.Content>\n    {{children}}\n  </Collapsible.Content>\n</Collapsible>",
+        "children": "Content controlled by the useCollapsible hook.",
+        "imports": [
+          "useCollapsible"
+        ],
+        "wrapper": "const CollapsibleExample = () => {\n  const [collapsed, toggle] = useCollapsible(true)\n\n  return (\n    <>\n      <Button onClick={toggle} marginBottom=\"sm\">\n        {collapsed ? 'Expand' : 'Collapse'}\n      </Button>\n      {{component}}\n    </>\n  )\n}\n\n<CollapsibleExample />"
+      }
+    }
+  }
 }
