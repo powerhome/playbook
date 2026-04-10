@@ -45,6 +45,34 @@ export const buildPlaygroundPropValues = (
   return values;
 };
 
+/** Resolve columnDefinitions + tableData for the current required + optional data preset (shared with sync logic). */
+export const getResolvedColumnAndTableData = (
+  playgroundConfig: PlaygroundConfig | null | undefined,
+  requiredProps: Record<string, any>,
+  dataPresetKey: string | null
+): { columnDefinitions: any; tableData: any } => {
+  const baseLayer: Record<string, any> = { ...requiredProps };
+  if (dataPresetKey && playgroundConfig?.dataPresets?.presets?.[dataPresetKey]) {
+    const pack = playgroundConfig.dataPresets.presets[dataPresetKey];
+    baseLayer.columnDefinitions = pack.columnDefinitions;
+    baseLayer.tableData = pack.tableData;
+  }
+  return {
+    columnDefinitions: baseLayer.columnDefinitions,
+    tableData: baseLayer.tableData,
+  };
+};
+
+/** True when the prop is on in a way that should trigger propSyncOnEnable (booleans, non-empty sortIcon, etc.). */
+export const shouldApplyPropSyncOnEnable = (value: PropValue | undefined): boolean => {
+  if (!value?.enabled) return false;
+  const v = value.value;
+  if (typeof v === "boolean") return v === true;
+  if (typeof v === "string") return v.trim().length > 0;
+  if (Array.isArray(v)) return v.length > 0;
+  return v !== undefined && v !== null && v !== "";
+};
+
 export const prepareExampleCode = (source: string): string => {
   let code = source
     .split("\n")

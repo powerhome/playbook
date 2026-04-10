@@ -21,6 +21,8 @@ import {
   checkCondition,
   checkHintCondition,
   buildPlaygroundPropValues,
+  getResolvedColumnAndTableData,
+  shouldApplyPropSyncOnEnable,
 } from "../utils";
 import { EXCLUDED_PROPS } from "../constants";
 
@@ -159,10 +161,50 @@ export const usePlaygroundState = ({
       ) {
         setActiveDataPresetKey(null);
       }
-      setPropValues((prev) => ({ ...prev, [name]: value }));
+
+      const syncRule = playgroundConfig?.propSyncOnEnable?.[name];
+      let nextDataPreset = activeDataPresetKey;
+      let nextStructureMode = activeStructureMode;
+      if (syncRule && shouldApplyPropSyncOnEnable(value)) {
+        if (syncRule.dataPreset) nextDataPreset = syncRule.dataPreset;
+        if (syncRule.structureMode) nextStructureMode = syncRule.structureMode;
+      }
+
+      const dataOrStructureChanged =
+        nextDataPreset !== activeDataPresetKey ||
+        nextStructureMode !== activeStructureMode;
+
+      if (dataOrStructureChanged) {
+        if (nextDataPreset !== activeDataPresetKey) {
+          setActiveDataPresetKey(nextDataPreset);
+        }
+        if (nextStructureMode !== activeStructureMode) {
+          setActiveStructureMode(nextStructureMode);
+        }
+      }
+
+      setPropValues((prev) => {
+        const merged: Record<string, PropValue> = { ...prev, [name]: value };
+        if (dataOrStructureChanged && nextDataPreset !== activeDataPresetKey) {
+          const { columnDefinitions, tableData } = getResolvedColumnAndTableData(
+            playgroundConfig,
+            requiredProps,
+            nextDataPreset
+          );
+          merged.columnDefinitions = { value: columnDefinitions, enabled: true };
+          merged.tableData = { value: tableData, enabled: true };
+        }
+        return merged;
+      });
       setActivePresetIndex(null);
     },
-    [requiredPropNames, playgroundConfig?.dataPresets]
+    [
+      requiredPropNames,
+      playgroundConfig,
+      requiredProps,
+      activeDataPresetKey,
+      activeStructureMode,
+    ]
   );
 
   const applyPreset = useCallback(
@@ -170,15 +212,50 @@ export const usePlaygroundState = ({
       const preset = playgroundConfig?.presets?.[presetIndex];
       if (!preset) return;
 
-      setPropValues(
-        buildPlaygroundPropValues(
-          playgroundConfig,
-          requiredProps,
-          activeDataPresetKey,
-          activeStructureMode,
-          presetIndex
-        )
+      let nextDataPreset = activeDataPresetKey;
+      let nextStructureMode = activeStructureMode;
+
+      const built = buildPlaygroundPropValues(
+        playgroundConfig,
+        requiredProps,
+        activeDataPresetKey,
+        activeStructureMode,
+        presetIndex
       );
+
+      const syncMap = playgroundConfig?.propSyncOnEnable;
+      if (syncMap) {
+        Object.entries(syncMap).forEach(([prop, rule]) => {
+          if (!shouldApplyPropSyncOnEnable(built[prop])) return;
+          if (rule.dataPreset) nextDataPreset = rule.dataPreset;
+          if (rule.structureMode) nextStructureMode = rule.structureMode;
+        });
+      }
+
+      const dataOrStructureChanged =
+        nextDataPreset !== activeDataPresetKey ||
+        nextStructureMode !== activeStructureMode;
+
+      if (dataOrStructureChanged) {
+        if (nextDataPreset !== activeDataPresetKey) {
+          setActiveDataPresetKey(nextDataPreset);
+        }
+        if (nextStructureMode !== activeStructureMode) {
+          setActiveStructureMode(nextStructureMode);
+        }
+        setPropValues(
+          buildPlaygroundPropValues(
+            playgroundConfig,
+            requiredProps,
+            nextDataPreset,
+            nextStructureMode,
+            presetIndex
+          )
+        );
+      } else {
+        setPropValues(built);
+      }
+
       setActivePresetIndex(presetIndex);
       if (preset.children !== undefined) {
         setChildren(preset.children);

@@ -150,6 +150,16 @@ export interface DataPresetsConfig {
   presets: Record<string, DataPreset>;
 }
 
+/** When a prop is turned on, optionally select matching sample data and/or structure mode (kits opt in). */
+export interface PropSyncOnEnableRule {
+  /** Key in `dataPresets.presets` */
+  dataPreset?: string;
+  /** Key in `structureModes.modes` */
+  structureMode?: string;
+}
+
+export type PropSyncOnEnable = Record<string, PropSyncOnEnableRule>;
+
 export interface PlaygroundConfig {
   template: string;
   propTargets?: Record<string, string>;
@@ -163,5 +173,7 @@ export interface PlaygroundConfig {
   structureModes?: StructureModesConfig;
   /** Swap required table/column data without duplicating feature presets for each dataset. */
   dataPresets?: DataPresetsConfig;
+  /** When a control is enabled, co-select sample data and/or structure mode (see Advanced Table). */
+  propSyncOnEnable?: PropSyncOnEnable;
   requiredProps?: Record<string, any>;
 }

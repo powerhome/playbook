@@ -56,6 +56,14 @@
     "columnDefinitionsFile": "advanced_table_column_definitions_standard.json",
     "tableDataFile": "advanced_table_mock_data.json"
   },
+  "propSyncOnEnable": {
+    "pagination": { "dataPreset": "pagination" },
+    "inlineRowLoading": { "dataPreset": "inline_loading" },
+    "enableSorting": { "structureMode": "explicit" },
+    "sortIcon": { "structureMode": "explicit" },
+    "collapsibleTrail": { "structureMode": "explicit" },
+    "subRowHeaders": { "structureMode": "explicit" }
+  },
   "children": {
     "editable": false,
     "default": ""
