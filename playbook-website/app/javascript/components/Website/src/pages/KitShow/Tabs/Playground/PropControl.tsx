@@ -209,6 +209,55 @@ const ReactNodeControl: React.FC<PropControlProps> = ({ name, value, onChange })
   );
 };
 
+// Control for props that accept string | string[] (like icon)
+const StringOrArrayControl: React.FC<PropControlProps> = ({ name, value, onChange }) => {
+  const isEnabled = value?.enabled ?? false;
+  const currentValue = value?.value ?? "";
+  const isArray = Array.isArray(currentValue);
+  
+  const [inputValue, setInputValue] = useState(() => {
+    if (isArray) return currentValue.join(", ");
+    return currentValue;
+  });
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const text = e.target.value;
+    setInputValue(text);
+    
+    // If contains comma, treat as array
+    if (text.includes(",")) {
+      const arr = text.split(",").map(s => s.trim()).filter(s => s);
+      onChange(name, { value: arr, enabled: true });
+    } else {
+      onChange(name, { value: text, enabled: true });
+    }
+  };
+
+  return (
+    <Flex flexDirection="column" padding="xs">
+      <Checkbox
+        checked={isEnabled}
+        onChange={() => {
+          onChange(name, {
+            value: isEnabled ? "" : "plus",
+            enabled: !isEnabled,
+          });
+        }}
+        text={formatPropName(name)}
+      />
+      {isEnabled && (
+        <Flex flexDirection="column" marginLeft="lg">
+          <TextInput
+            value={inputValue}
+            onChange={handleInputChange}
+          />
+          <Caption text="Comma-separated for array (e.g., plus, times)" color="light" marginTop="xs" />
+        </Flex>
+      )}
+    </Flex>
+  );
+};
+
 const ObjectControl: React.FC<PropControlProps> = ({ name, value, onChange }) => {
   const isEnabled = value?.enabled ?? false;
   const [inputValue, setInputValue] = useState(
@@ -271,6 +320,11 @@ const getControlForType = (props: PropControlProps) => {
   // Number check
   if (propType === "number" || propType.startsWith("number")) {
     return <NumberControl {...props} />;
+  }
+
+  // String or array check (for props that accept string | string[])
+  if (propType.includes("string[]") || (propType.includes("string |") && propType.includes("[]"))) {
+    return <StringOrArrayControl {...props} />;
   }
 
   // Function check

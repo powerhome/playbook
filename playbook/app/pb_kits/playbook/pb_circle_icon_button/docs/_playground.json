@@ -11,27 +11,103 @@
   },
   "groups": [
     {
-      "name": "Props",
+      "name": "Appearance",
       "props": [
-        "disabled",
-        "icon",
-        "link",
-        "loading",
-        "onClick",
-        "newWindow",
-        "type",
-        "target",
         "variant",
-        "size"
+        "size",
+        "disabled",
+        "loading"
+      ]
+    },
+    {
+      "name": "Content",
+      "props": [
+        "icon"
+      ]
+    },
+    {
+      "name": "Link",
+      "props": [
+        "link",
+        "target",
+        "newWindow"
+      ]
+    },
+    {
+      "name": "Form",
+      "props": [
+        "type",
+        "onClick"
       ]
     }
   ],
   "presets": [
     {
       "name": "Default",
-      "props": {}
+      "props": {
+        "icon": "plus",
+        "variant": "primary"
+      }
+    },
+    {
+      "name": "Secondary",
+      "props": {
+        "icon": "pen",
+        "variant": "secondary"
+      }
+    },
+    {
+      "name": "Link style",
+      "props": {
+        "icon": "arrow-right",
+        "variant": "link"
+      }
+    },
+    {
+      "name": "Small",
+      "props": {
+        "icon": "times",
+        "variant": "primary",
+        "size": "sm"
+      }
+    },
+    {
+      "name": "Disabled",
+      "props": {
+        "icon": "lock",
+        "variant": "primary",
+        "disabled": true
+      }
+    },
+    {
+      "name": "Loading",
+      "props": {
+        "icon": "refresh",
+        "variant": "primary",
+        "loading": true
+      }
     }
   ],
-  "conditionals": {},
-  "hints": {}
+  "conditionals": {
+    "target": {
+      "requires": "link"
+    },
+    "newWindow": {
+      "requires": "link"
+    }
+  },
+  "hints": {
+    "icon_required": {
+      "when": {},
+      "message": "The icon prop is required for CircleIconButton.",
+      "type": "info"
+    },
+    "link_mode": {
+      "when": {
+        "link": true
+      },
+      "message": "When link is set, the button renders as an anchor tag.",
+      "type": "info"
+    }
+  }
 }

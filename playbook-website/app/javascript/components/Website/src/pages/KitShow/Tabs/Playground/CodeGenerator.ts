@@ -30,6 +30,12 @@ const formatPropValue = (
 
   const propType = definition.type.toLowerCase();
 
+  // Handle arrays first (e.g., string[] or string | string[])
+  if (Array.isArray(value)) {
+    // For string arrays like icon={["far", "fa-star"]}
+    return `${name}={${JSON.stringify(value)}}`;
+  }
+
   // Check object types FIRST - before other type checks that might match substrings
   // E.g., "{ component: string }" contains "string" but is an object type
   if (propType.startsWith("{") || (typeof value === "object" && value !== null)) {

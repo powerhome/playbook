@@ -77,7 +77,7 @@
       "default": "normal"
     },
     "itemSpacing": {
-      "type": "SpacingObject",
+      "type": "object",
       "platforms": [
         "react"
       ]

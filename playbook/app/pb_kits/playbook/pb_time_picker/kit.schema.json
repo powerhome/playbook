@@ -102,7 +102,7 @@
       "default": false
     },
     "timeFormat": {
-      "type": "TimeFormat",
+      "type": "enum",
       "platforms": [
         "react",
         "rails"

@@ -110,7 +110,7 @@
       "default": null
     },
     "size": {
-      "type": "IconSizes",
+      "type": "enum",
       "platforms": [
         "react",
         "rails"
