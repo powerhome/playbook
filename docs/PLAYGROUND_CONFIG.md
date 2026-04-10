@@ -85,7 +85,7 @@ Create `docs/_playground.overrides.json` to customize any field.
 | `hints` | object | Contextual messages based on prop values |
 | `structureModes` | object | Toggle between different component structures (e.g., simple vs subcomponents) |
 | `dataPresets` | object | Named `columnDefinitions` + `tableData` bundles; shown as “Sample data” pills (Advanced Table, etc.) |
-| `propSyncOnEnable` | object | When a prop is turned on, optionally set `dataPreset` and/or `structureMode` (co-selects sample data / structure) |
+| `propSyncOnEnable` | object | When a prop is turned on, optionally set `dataPreset` and/or `structureMode` (co-selects sample data / structure). Matching props show a hint under the control in the Props panel. |
 
 ### JSON file references (authoring `_playground.overrides.json`)
 

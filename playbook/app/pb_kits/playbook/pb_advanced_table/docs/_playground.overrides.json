@@ -58,7 +58,11 @@
   },
   "propSyncOnEnable": {
     "pagination": { "dataPreset": "pagination" },
+    "paginationProps": { "dataPreset": "pagination" },
     "inlineRowLoading": { "dataPreset": "inline_loading" },
+    "customSort": { "dataPreset": "inline_loading" },
+    "selectableRows": { "dataPreset": "with_ids" },
+    "onRowSelectionChange": { "dataPreset": "with_ids" },
     "enableSorting": { "structureMode": "explicit" },
     "sortIcon": { "structureMode": "explicit" },
     "collapsibleTrail": { "structureMode": "explicit" },
@@ -214,11 +218,6 @@
         "loading": true
       }
     },
-    "inlineRowLoading": {
-      "requires": {
-        "loading": false
-      }
-    },
     "onRowSelectionChange": {
       "requires": {
         "selectableRows": true
@@ -228,6 +227,11 @@
       "requires": {
         "selectableRows": true,
         "showActionsBar": true
+      }
+    },
+    "showActionsBar": {
+      "requires": {
+        "selectableRows": true
       }
     },
     "enableSorting": {

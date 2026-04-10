@@ -23,6 +23,8 @@ interface PropsPanelProps {
   globalProps: Record<string, PropDefinition>;
   showGlobalProps: boolean;
   requiredPropNames?: Set<string>;
+  /** From `propSyncOnEnable` — what sample data / structure applies when the prop is turned on */
+  propSyncHints?: Record<string, string>;
 }
 
 export const PropsPanel: React.FC<PropsPanelProps> = ({
@@ -37,6 +39,7 @@ export const PropsPanel: React.FC<PropsPanelProps> = ({
   globalProps,
   showGlobalProps,
   requiredPropNames = new Set(),
+  propSyncHints = {},
 }) => {
   const globalPropEntries = Object.entries(globalProps);
 
@@ -89,17 +92,22 @@ export const PropsPanel: React.FC<PropsPanelProps> = ({
               {group.props.length > 0 ? (
                 group.props.map(([name, definition]) => {
                   const disabledState = propDisabledState[name];
+                  const syncHint = propSyncHints[name];
                   return (
-                    <PropControl
-                      key={name}
-                      name={name}
-                      definition={definition}
-                      value={propValues[name]}
-                      onChange={onPropChange}
-                      disabled={disabledState?.disabled}
-                      disabledReason={disabledState?.reason}
-                      isRequired={requiredPropNames.has(name)}
-                    />
+                    <Flex flexDirection="column" key={name} marginBottom="xs">
+                      <PropControl
+                        name={name}
+                        definition={definition}
+                        value={propValues[name]}
+                        onChange={onPropChange}
+                        disabled={disabledState?.disabled}
+                        disabledReason={disabledState?.reason}
+                        isRequired={requiredPropNames.has(name)}
+                      />
+                      {syncHint ? (
+                        <Caption color="lighter" marginLeft="md" marginTop="xxs" text={syncHint} />
+                      ) : null}
+                    </Flex>
                   );
                 })
               ) : (
@@ -127,15 +135,22 @@ export const PropsPanel: React.FC<PropsPanelProps> = ({
             <Flex
               flexDirection="column"
             >
-              {globalPropEntries.map(([name, definition]) => (
-                <PropControl
-                  key={name}
-                  name={name}
-                  definition={definition}
-                  value={propValues[name]}
-                  onChange={onPropChange}
-                />
-              ))}
+              {globalPropEntries.map(([name, definition]) => {
+                const syncHint = propSyncHints[name];
+                return (
+                  <Flex flexDirection="column" key={name} marginBottom="xs">
+                    <PropControl
+                      name={name}
+                      definition={definition}
+                      value={propValues[name]}
+                      onChange={onPropChange}
+                    />
+                    {syncHint ? (
+                      <Caption size="xs" color="lighter" marginLeft="md" marginTop="xxs" text={syncHint} />
+                    ) : null}
+                  </Flex>
+                );
+              })}
             </Flex>
           </>
         )}

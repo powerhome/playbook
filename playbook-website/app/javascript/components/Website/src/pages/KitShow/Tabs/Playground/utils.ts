@@ -70,7 +70,34 @@ export const shouldApplyPropSyncOnEnable = (value: PropValue | undefined): boole
   if (typeof v === "boolean") return v === true;
   if (typeof v === "string") return v.trim().length > 0;
   if (Array.isArray(v)) return v.length > 0;
+  if (typeof v === "object" && v !== null) {
+    return Object.keys(v as Record<string, unknown>).length > 0;
+  }
   return v !== undefined && v !== null && v !== "";
+};
+
+/** Short label for Props panel: what sample data / structure this prop expects when enabled. */
+export const getPropSyncContextHint = (
+  propName: string,
+  playgroundConfig: PlaygroundConfig | null | undefined
+): string | null => {
+  const rule = playgroundConfig?.propSyncOnEnable?.[propName];
+  if (!rule) return null;
+  const parts: string[] = [];
+  if (rule.dataPreset) {
+    const label =
+      playgroundConfig?.dataPresets?.presets?.[rule.dataPreset]?.label ??
+      rule.dataPreset;
+    parts.push(`sample data “${label}”`);
+  }
+  if (rule.structureMode) {
+    const label =
+      playgroundConfig?.structureModes?.modes?.[rule.structureMode]?.label ??
+      rule.structureMode;
+    parts.push(`structure “${label}”`);
+  }
+  if (parts.length === 0) return null;
+  return `To use this feature, enable: ${parts.join(" · ")}`;
 };
 
 export const prepareExampleCode = (source: string): string => {

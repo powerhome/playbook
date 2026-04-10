@@ -13,7 +13,8 @@
         "children": "Body content here",
         "props": { "padding": "none" },
         "propTargets": {
-          "headerColor": "Card.Header.props"
+          "headerColor": "Card.Header.props",
+          "headerColorStriped": "Card.Header.props"
         }
       },
       "full": {
@@ -22,10 +23,15 @@
         "children": "Body content here",
         "props": { "padding": "none" },
         "propTargets": {
-          "headerColor": "Card.Header.props"
+          "headerColor": "Card.Header.props",
+          "headerColorStriped": "Card.Header.props"
         }
       }
     }
+  },
+  "propTargets": {
+    "headerColor": "Card.Header.props",
+    "headerColorStriped": "Card.Header.props"
   },
   "children": {
     "default": "Card content"
@@ -41,7 +47,7 @@
     },
     {
       "name": "Card.Header",
-      "props": ["headerColor"]
+      "props": ["headerColor", "headerColorStriped"]
     },
     {
       "name": "Draggable",
@@ -96,11 +102,6 @@
         }
       },
       "children": "Highlighted card"
-    },
-    {
-      "name": "With Header",
-      "props": {"padding": "none"},
-      "children": "<Card.Header headerColor=\"primary\">Header</Card.Header>\n  <Card.Body>Body content here</Card.Body>"
     }
   ],
   "conditionals": {

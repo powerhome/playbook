@@ -1,6 +1,9 @@
 {
   "template": "<Card{{props}}>{{children}}</Card>",
-  "propTargets": {},
+  "propTargets": {
+    "headerColor": "Card.Header.props",
+    "headerColorStriped": "Card.Header.props"
+  },
   "defaults": {
     "background": "none",
     "borderNone": false,
@@ -33,7 +36,8 @@
     {
       "name": "Card.Header",
       "props": [
-        "headerColor"
+        "headerColor",
+        "headerColorStriped"
       ]
     },
     {
@@ -94,13 +98,6 @@
         }
       },
       "children": "Highlighted card"
-    },
-    {
-      "name": "With Header",
-      "props": {
-        "padding": "none"
-      },
-      "children": "<Card.Header headerColor=\"primary\">Header</Card.Header>\n  <Card.Body>Body content here</Card.Body>"
     }
   ],
   "conditionals": {
@@ -139,7 +136,8 @@
           "padding": "none"
         },
         "propTargets": {
-          "headerColor": "Card.Header.props"
+          "headerColor": "Card.Header.props",
+          "headerColorStriped": "Card.Header.props"
         }
       },
       "full": {
@@ -150,7 +148,8 @@
           "padding": "none"
         },
         "propTargets": {
-          "headerColor": "Card.Header.props"
+          "headerColor": "Card.Header.props",
+          "headerColorStriped": "Card.Header.props"
         }
       }
     }
