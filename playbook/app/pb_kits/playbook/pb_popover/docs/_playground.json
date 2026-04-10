@@ -5,7 +5,6 @@
     "appendTo": "body",
     "closeOnClick": "none",
     "offset": false,
-    "placement": "left",
     "show": false,
     "shouldClosePopover": "noop"
   },

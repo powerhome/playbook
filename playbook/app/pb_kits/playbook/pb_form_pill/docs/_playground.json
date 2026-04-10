@@ -20,7 +20,8 @@
         "color",
         "tabIndex",
         "icon",
-        "wrapped"
+        "wrapped",
+        "closeProps"
       ]
     }
   ],

@@ -34,6 +34,7 @@
         "onToggleExpansionClick",
         "pagination",
         "paginationProps",
+        "pinnedRows",
         "responsive",
         "rowStyling",
         "scrollBarNone",

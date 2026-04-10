@@ -121,7 +121,41 @@ Create `docs/_playground.overrides.json` to customize any field.
 
 ## Workflow
 
-1. Run generator to create base configs for all kits
-2. For kits needing customization, create `docs/_playground.overrides.json`
-3. Re-run generator to merge overrides
-4. Commit both `_playground.json` and `_playground.overrides.json`
+### Initial Setup
+Running `./setup.sh` automatically generates all AI metadata and playground configs. No separate steps needed.
+
+If you need to regenerate all playground configs manually:
+```bash
+cd playbook
+yarn generate:playground-configs --overwrite
+```
+
+### When Customizing a Kit's Playground
+1. Edit or create `docs/_playground.overrides.json` with groups, presets, conditionals, hints
+2. Stage and commit — the pre-commit hook will regenerate `_playground.json` automatically
+3. If the hook reports changes, stage the updated `_playground.json` and commit again
+
+### When Changing a Kit's Props (adding/removing/renaming)
+1. Update the component source (`.tsx` / `.rb`)
+2. Stage and commit — pre-commit hooks will:
+   - Regenerate `kit.schema.json` (VerifyAIMetadata hook)
+   - Regenerate `_playground.json` (VerifyPlaygroundConfigs hook)
+3. If hooks report changes, stage the updated files and commit again
+4. Update `_playground.overrides.json` if the override references changed props
+
+### Manual Regeneration (if needed)
+```bash
+# Single kit
+yarn generate:playground-configs --kit=<kitname> --overwrite
+
+# All kits
+yarn generate:playground-configs --overwrite
+```
+
+## Pre-commit Hooks
+
+The `VerifyPlaygroundConfigs` hook automatically regenerates playground configs when:
+- `kit.schema.json` changes (props added/removed/modified)
+- `_playground.overrides.json` changes (customizations updated)
+
+This ensures playground configs stay in sync without manual steps.

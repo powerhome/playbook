@@ -1,28 +1,7 @@
 {
   "template": "<Image{{props}} />",
   "propTargets": {},
-  "defaults": {
-    "rounded": false,
-    "size": "none",
-    "transition": "fade"
-  },
-  "groups": [
-    {
-      "name": "Content",
-      "props": [
-        "url",
-        "alt"
-      ]
-    },
-    {
-      "name": "Appearance",
-      "props": [
-        "size",
-        "rounded",
-        "transition"
-      ]
-    }
-  ],
+  "defaults": {},
   "presets": [
     {
       "name": "Sample photo",
@@ -101,5 +80,22 @@
       "message": "The kit uses lazyload classes; url is applied as src and data-src.",
       "type": "info"
     }
-  }
+  },
+  "groups": [
+    {
+      "name": "Content",
+      "props": [
+        "url",
+        "alt"
+      ]
+    },
+    {
+      "name": "Appearance",
+      "props": [
+        "size",
+        "rounded",
+        "transition"
+      ]
+    }
+  ]
 }
