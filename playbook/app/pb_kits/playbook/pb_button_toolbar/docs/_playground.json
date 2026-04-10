@@ -2,7 +2,6 @@
   "template": "<ButtonToolbar{{props}}>\n  {{children}}\n</ButtonToolbar>",
   "propTargets": {},
   "defaults": {
-    "connected": false,
     "orientation": "horizontal",
     "variant": "primary"
   },
@@ -10,8 +9,7 @@
     {
       "name": "Layout",
       "props": [
-        "orientation",
-        "connected"
+        "orientation"
       ]
     },
     {
@@ -53,18 +51,9 @@
       "children": "<Button text=\"Save\" variant=\"secondary\" />\n<Button text=\"Cancel\" variant=\"secondary\" />"
     },
     {
-      "name": "Connected",
-      "props": {
-        "orientation": "horizontal",
-        "variant": "primary",
-        "connected": true
-      },
-      "children": "<Button text=\"Left\" />\n<Button text=\"Center\" />\n<Button text=\"Right\" />"
-    },
-    {
       "name": "Icon Buttons",
       "props": {
-        "orientation": "horizontal",
+        "orientation": "vertical",
         "variant": "secondary"
       },
       "children": "<Button icon=\"bold\" variant=\"secondary\" />\n<Button icon=\"italic\" variant=\"secondary\" />\n<Button icon=\"underline\" variant=\"secondary\" />"
@@ -79,13 +68,6 @@
     "container_usage": {
       "when": {},
       "message": "ButtonToolbar is a container for Button components. Add Button children to create grouped actions.",
-      "type": "info"
-    },
-    "connected_mode": {
-      "when": {
-        "connected": true
-      },
-      "message": "Connected mode visually joins buttons together, useful for toggle groups or segmented controls.",
       "type": "info"
     }
   },
