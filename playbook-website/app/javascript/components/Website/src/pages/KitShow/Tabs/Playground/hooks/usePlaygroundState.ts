@@ -1,4 +1,4 @@
-import { useState, useMemo, useCallback } from "react";
+import { useState, useMemo, useCallback, useEffect } from "react";
 import {
   KitSchema,
   GlobalPropsSchema,
@@ -67,6 +67,16 @@ export const usePlaygroundState = ({
   // Structure mode state
   const defaultStructureMode = playgroundConfig?.structureModes?.default ?? null;
   const [activeStructureMode, setActiveStructureMode] = useState<string | null>(defaultStructureMode);
+  
+  // Reset all state when kit changes
+  useEffect(() => {
+    // Reset to initial values when navigating to a different kit
+    setPropValues(getInitialPropValues());
+    setChildren(getInitialChildren());
+    setActivePresetIndex(firstPreset ? 0 : null);
+    setActiveStructureMode(playgroundConfig?.structureModes?.default ?? null);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [kitName]);
   
   // Get current structure mode config
   const currentStructureMode: StructureMode | null = useMemo(() => {
@@ -331,6 +341,15 @@ export const usePlaygroundState = ({
     setActivePresetIndex(null);
   }, [playgroundConfig]);
 
+  // Handler to reset all props to initial state
+  const handleReset = useCallback(() => {
+    setPropValues(getInitialPropValues());
+    setChildren(getInitialChildren());
+    setActivePresetIndex(firstPreset ? 0 : null);
+    setActiveStructureMode(playgroundConfig?.structureModes?.default ?? null);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [playgroundConfig, firstPreset]);
+
   return {
     // State
     propValues,
@@ -357,5 +376,6 @@ export const usePlaygroundState = ({
     applyPreset,
     setChildren,
     handleStructureModeChange,
+    handleReset,
   };
 };

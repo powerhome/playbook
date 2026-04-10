@@ -1,5 +1,5 @@
 import React from "react";
-import { Body, Caption, Card, Flex } from "playbook-ui";
+import { Body, Button, Caption, Card, Flex } from "playbook-ui";
 
 import {
   PlaygroundPreview,
@@ -56,6 +56,7 @@ export const PlaygroundTab: React.FC<PlaygroundTabProps> = ({
     applyPreset,
     setChildren,
     handleStructureModeChange,
+    handleReset,
   } = usePlaygroundState({
     kitSchema,
     globalPropsSchema,
@@ -75,7 +76,8 @@ export const PlaygroundTab: React.FC<PlaygroundTabProps> = ({
   }
 
   const totalKitProps = Object.keys(reactProps).length;
-  const hasPresets = playgroundConfig?.presets && playgroundConfig.presets.length > 0;
+  const hasPresets =
+    playgroundConfig?.presets && playgroundConfig.presets.length > 0;
   const hasStructureModes = availableStructureModes.length > 0;
 
   return (
@@ -104,12 +106,25 @@ export const PlaygroundTab: React.FC<PlaygroundTabProps> = ({
         <Card marginBottom="md" padding="none" width="100%">
           <Flex justify="between" align="center" margin="md">
             <Caption text="Preview" color="lighter" />
-            {!hasModifiedProps && defaultExample && !hasTemplate && (
-              <Caption text="Default example" color="lighter" />
-            )}
-            {hasModifiedProps && <Caption text="With selected props" color="lighter" />}
+            <Flex align="center" gap="sm">
+              {!hasModifiedProps && defaultExample && !hasTemplate && (
+                <Caption text="Default example" color="lighter" />
+              )}
+              {hasModifiedProps && (
+                <Button
+                  icon="rotate-left"
+                  onClick={handleReset}
+                  size="sm"
+                  variant="secondary"
+                  text="Reset to Default Example"
+                />
+              )}
+            </Flex>
           </Flex>
-          <PlaygroundPreview code={previewCode} extraScope={playgroundConfig?.scopeVars} />
+          <PlaygroundPreview
+            code={previewCode}
+            extraScope={playgroundConfig?.scopeVars}
+          />
         </Card>
 
         <CodePanel code={displayCode} />
