@@ -1,1 +1,0 @@
-Quill kit — framework-agnostic editor with Snow theme. Content is synced to a hidden input for Rails form submission. Use `pb_rails("rich_text_editor_quill", props: { input_options: { id: "...", name: "..." }, value: "..." })`.

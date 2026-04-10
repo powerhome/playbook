@@ -1,8 +1,9 @@
 # frozen_string_literal: true
 
 module Playbook
-  module PbRichTextEditorQuill
-    class RichTextEditorQuill < Playbook::KitBase
+  module PbRichTextEditor
+    # Rails rich text editor: TipTap (vanilla JS), no React. Content syncs to a hidden input for form submission.
+    class RichTextEditor < Playbook::KitBase
       prop :value
       prop :placeholder
       prop :input_options, type: Playbook::Props::HashProp, default: {}
@@ -14,7 +15,7 @@ module Playbook
       end
 
       def input_id
-        input_options[:id].presence || (id.present? ? "#{id}-input" : "rich_text_editor_quill-input")
+        input_options[:id].presence || (id.present? ? "#{id}-input" : "rich_text_editor-input")
       end
 
       def input_name
@@ -22,15 +23,22 @@ module Playbook
       end
 
       def initial_html
-        value.present? ? value.to_s : "<p><br></p>"
+        raw = value.present? ? value.to_s.strip : ""
+        return "<p></p>" if raw.blank?
+
+        raw.start_with?("<") ? raw : "<p>#{raw}</p>"
       end
 
       def container_id
-        id.present? ? "rte-quill-#{id}" : "rte-quill-#{input_id.gsub(/[^a-z0-9_-]/i, '')}"
+        id.present? ? "rte-tiptap-#{id}" : "rte-tiptap-#{input_id.gsub(/[^a-z0-9_-]/i, '')}"
       end
 
       def editor_node_id
         "#{container_id}-editor"
+      end
+
+      def toolbar_id
+        "#{container_id}-toolbar"
       end
     end
   end

@@ -3,7 +3,8 @@
   "name": "RichTextEditor",
   "description": "RichTextEditor component",
   "platforms": [
-    "react"
+    "react",
+    "rails"
   ],
   "props": {
     "advancedEditor": {
@@ -145,7 +146,7 @@
     },
     "rails": {
       "import": null,
-      "example": "<%= pb_rails(\"rich_text_editor\", props: { input_height: \"sm\", input_min_height: \"sm\" }) %>"
+      "example": "<%= pb_rails(\"rich_text_editor\", props: { input_options: { id: \"body\", name: \"content\" }, value: \"<p></p>\" }) %>"
     }
   }
 }

@@ -1,0 +1,1 @@
+TipTap (vanilla JS) — the Playbook **Rails** rich text editor. No React; same editor core as the React TipTap variant. Content is synced to a hidden input for Rails form submission. Use `pb_rails("rich_text_editor", props: { input_options: { id: "...", name: "..." }, value: "..." })`.
