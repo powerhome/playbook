@@ -122,6 +122,19 @@ export interface PlaygroundHint {
   type?: "info" | "warning" | "error";
 }
 
+export interface StructureMode {
+  label: string;
+  template: string;
+  children: string;
+  props?: Record<string, any>;
+  propTargets?: Record<string, string>;
+}
+
+export interface StructureModesConfig {
+  default: string;
+  modes: Record<string, StructureMode>;
+}
+
 export interface PlaygroundConfig {
   template: string;
   propTargets?: Record<string, string>;
@@ -132,4 +145,5 @@ export interface PlaygroundConfig {
   groups?: PropGroup[];
   presets?: PlaygroundPreset[];
   hints?: Record<string, PlaygroundHint>;
+  structureModes?: StructureModesConfig;
 }

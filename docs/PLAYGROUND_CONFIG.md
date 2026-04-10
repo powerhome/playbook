@@ -83,6 +83,7 @@ Create `docs/_playground.overrides.json` to customize any field.
 | `presets` | array | Quick-apply prop combinations |
 | `conditionals` | object | Props that depend on other props |
 | `hints` | object | Contextual messages based on prop values |
+| `structureModes` | object | Toggle between different component structures (e.g., simple vs subcomponents) |
 
 ### Conditionals Format
 
@@ -112,6 +113,48 @@ Create `docs/_playground.overrides.json` to customize any field.
   }
 }
 ```
+
+### Structure Modes
+
+For components with subcomponents (e.g., `Card` with `Card.Header`, `Card.Body`), use `structureModes` to let users toggle between different structural layouts:
+
+```json
+{
+  "structureModes": {
+    "default": "simple",
+    "modes": {
+      "simple": {
+        "label": "Simple",
+        "template": "<Card{{props}}>\n  {{children}}\n</Card>",
+        "children": "Card content"
+      },
+      "header_body": {
+        "label": "Header + Body",
+        "template": "<Card{{props}}>\n  <Card.Header{{Card.Header.props}}>Header</Card.Header>\n  <Card.Body>{{children}}</Card.Body>\n</Card>",
+        "children": "Body content",
+        "props": { "padding": "none" },
+        "propTargets": {
+          "headerColor": "Card.Header.props"
+        }
+      }
+    }
+  }
+}
+```
+
+| Field | Description |
+|-------|-------------|
+| `structureModes.default` | Key of the default mode |
+| `structureModes.modes` | Object with mode configurations |
+| `mode.label` | Display label in the dropdown |
+| `mode.template` | JSX template for this mode |
+| `mode.children` | Default children content for this mode |
+| `mode.props` | Default props to apply when mode is selected |
+| `mode.propTargets` | Route props to subcomponent markers (e.g., `headerColor` → `Card.Header.props`) |
+
+**Subcomponent Props**: Use `propTargets` to route props to specific template markers. In the template, use markers like `{{Card.Header.props}}` and then in `propTargets`, map prop names to their target marker: `"headerColor": "Card.Header.props"`.
+
+When structure modes are defined, a dropdown appears in the playground UI allowing users to switch between different component structures.
 
 ## Mental Model
 

@@ -8,6 +8,7 @@ import {
   HintsDisplay,
   CodePanel,
   PropsPanel,
+  StructureModeSelector,
   KitSchema,
   GlobalPropsSchema,
   PlaygroundConfig,
@@ -39,6 +40,7 @@ export const PlaygroundTab: React.FC<PlaygroundTabProps> = ({
     propValues,
     children,
     activePresetIndex,
+    activeStructureMode,
     reactProps,
     globalProps,
     groupedProps,
@@ -49,9 +51,11 @@ export const PlaygroundTab: React.FC<PlaygroundTabProps> = ({
     showChildren,
     previewCode,
     displayCode,
+    availableStructureModes,
     handlePropChange,
     applyPreset,
     setChildren,
+    handleStructureModeChange,
   } = usePlaygroundState({
     kitSchema,
     globalPropsSchema,
@@ -72,6 +76,7 @@ export const PlaygroundTab: React.FC<PlaygroundTabProps> = ({
 
   const totalKitProps = Object.keys(reactProps).length;
   const hasPresets = playgroundConfig?.presets && playgroundConfig.presets.length > 0;
+  const hasStructureModes = availableStructureModes.length > 0;
 
   return (
     <Flex width="100%" paddingX="xl" gap="lg">
@@ -82,6 +87,14 @@ export const PlaygroundTab: React.FC<PlaygroundTabProps> = ({
             presets={playgroundConfig!.presets!}
             activePresetIndex={activePresetIndex}
             onPresetClick={applyPreset}
+          />
+        )}
+
+        {hasStructureModes && (
+          <StructureModeSelector
+            modes={availableStructureModes}
+            activeMode={activeStructureMode}
+            onModeChange={handleStructureModeChange}
           />
         )}
 

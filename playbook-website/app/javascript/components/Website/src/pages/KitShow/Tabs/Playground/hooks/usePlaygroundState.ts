@@ -6,6 +6,7 @@ import {
   PropDefinition,
   PlaygroundConfig,
   PlaygroundHint,
+  StructureMode,
 } from "../types";
 import {
   generateCode,
@@ -62,6 +63,25 @@ export const usePlaygroundState = ({
   const [activePresetIndex, setActivePresetIndex] = useState<number | null>(
     firstPreset ? 0 : null
   );
+  
+  // Structure mode state
+  const defaultStructureMode = playgroundConfig?.structureModes?.default ?? null;
+  const [activeStructureMode, setActiveStructureMode] = useState<string | null>(defaultStructureMode);
+  
+  // Get current structure mode config
+  const currentStructureMode: StructureMode | null = useMemo(() => {
+    if (!activeStructureMode || !playgroundConfig?.structureModes?.modes) return null;
+    return playgroundConfig.structureModes.modes[activeStructureMode] ?? null;
+  }, [activeStructureMode, playgroundConfig]);
+  
+  // Get available structure modes for UI
+  const availableStructureModes = useMemo(() => {
+    if (!playgroundConfig?.structureModes?.modes) return [];
+    return Object.entries(playgroundConfig.structureModes.modes).map(([key, mode]) => ({
+      key,
+      label: mode.label,
+    }));
+  }, [playgroundConfig]);
 
   // Filter props for React platform
   const reactProps = useMemo(() => {
@@ -103,6 +123,19 @@ export const usePlaygroundState = ({
       if (!preset) return;
 
       const newPropValues: Record<string, PropValue> = {};
+      
+      // First, apply current structure mode's default props (if any)
+      const modeKey = activeStructureMode;
+      if (modeKey) {
+        const mode = playgroundConfig?.structureModes?.modes[modeKey];
+        if (mode?.props) {
+          Object.entries(mode.props).forEach(([propName, value]) => {
+            newPropValues[propName] = { value, enabled: true };
+          });
+        }
+      }
+      
+      // Then apply preset props (can override structure mode props)
       Object.entries(preset.props).forEach(([propName, value]) => {
         newPropValues[propName] = { value, enabled: true };
       });
@@ -113,7 +146,7 @@ export const usePlaygroundState = ({
         setChildren(preset.children);
       }
     },
-    [playgroundConfig]
+    [playgroundConfig, activeStructureMode]
   );
 
   // Computed state
@@ -160,7 +193,6 @@ export const usePlaygroundState = ({
   }, [playgroundConfig?.hints, propValues]);
 
   const hasModifiedProps = Object.values(propValues).some((p) => p.enabled);
-  const hasTemplate = Boolean(playgroundConfig?.template);
 
   const showChildren = useMemo(() => {
     if (playgroundConfig?.children) {
@@ -206,14 +238,25 @@ export const usePlaygroundState = ({
     return result;
   }, [reactProps, playgroundConfig?.groups]);
 
+  // Resolve template and propTargets - structure mode takes precedence
+  const activeTemplate = currentStructureMode?.template ?? playgroundConfig?.template;
+  const hasActiveTemplate = Boolean(activeTemplate);
+  
+  // Merge propTargets: base config + structure mode overrides
+  const activePropTargets = useMemo(() => {
+    const base = playgroundConfig?.propTargets ?? {};
+    const modeTargets = currentStructureMode?.propTargets ?? {};
+    return { ...base, ...modeTargets };
+  }, [playgroundConfig?.propTargets, currentStructureMode?.propTargets]);
+
   // Code generation
   const generatedDisplayCode = useMemo(() => {
-    if (hasTemplate && playgroundConfig) {
+    if (hasActiveTemplate && playgroundConfig) {
       return generateFromTemplate({
-        template: playgroundConfig.template,
+        template: activeTemplate!,
         propValues,
         propDefinitions: allPropDefinitions,
-        propTargets: playgroundConfig.propTargets,
+        propTargets: activePropTargets,
         defaults: playgroundConfig.defaults,
         children,
         childrenConfig: playgroundConfig.children,
@@ -227,15 +270,15 @@ export const usePlaygroundState = ({
       children: needsChildren(kitName) ? children : undefined,
       includeImport: true,
     });
-  }, [kitName, propValues, allPropDefinitions, children, hasTemplate, playgroundConfig]);
+  }, [kitName, propValues, allPropDefinitions, children, hasActiveTemplate, activeTemplate, activePropTargets, playgroundConfig]);
 
   const generatedLiveCode = useMemo(() => {
-    if (hasTemplate && playgroundConfig) {
+    if (hasActiveTemplate && playgroundConfig) {
       return generateLiveFromTemplate({
-        template: playgroundConfig.template,
+        template: activeTemplate!,
         propValues,
         propDefinitions: allPropDefinitions,
-        propTargets: playgroundConfig.propTargets,
+        propTargets: activePropTargets,
         defaults: playgroundConfig.defaults,
         children,
         childrenConfig: playgroundConfig.children,
@@ -247,29 +290,53 @@ export const usePlaygroundState = ({
       propDefinitions: allPropDefinitions,
       children: needsChildren(kitName) ? children : undefined,
     });
-  }, [kitName, propValues, allPropDefinitions, children, hasTemplate, playgroundConfig]);
+  }, [kitName, propValues, allPropDefinitions, children, hasActiveTemplate, activeTemplate, activePropTargets, playgroundConfig]);
 
   const previewCode = useMemo(() => {
-    if (hasTemplate) return generatedLiveCode;
+    if (hasActiveTemplate) return generatedLiveCode;
     if (!hasModifiedProps && defaultExample?.source) {
       return prepareExampleCode(defaultExample.source);
     }
     return generatedLiveCode;
-  }, [hasTemplate, hasModifiedProps, defaultExample, generatedLiveCode]);
+  }, [hasActiveTemplate, hasModifiedProps, defaultExample, generatedLiveCode]);
 
   const displayCode = useMemo(() => {
-    if (hasTemplate) return generatedDisplayCode;
+    if (hasActiveTemplate) return generatedDisplayCode;
     if (!hasModifiedProps && defaultExample?.source) {
       return defaultExample.source;
     }
     return generatedDisplayCode;
-  }, [hasTemplate, hasModifiedProps, defaultExample, generatedDisplayCode]);
+  }, [hasActiveTemplate, hasModifiedProps, defaultExample, generatedDisplayCode]);
+
+  // Handler to change structure mode
+  const handleStructureModeChange = useCallback((modeKey: string) => {
+    setActiveStructureMode(modeKey);
+    const mode = playgroundConfig?.structureModes?.modes[modeKey];
+    if (mode) {
+      // Update children to match the new mode's default
+      if (mode.children) {
+        setChildren(mode.children);
+      }
+      // Apply the mode's default props
+      if (mode.props) {
+        setPropValues((prev) => {
+          const newValues = { ...prev };
+          Object.entries(mode.props!).forEach(([propName, value]) => {
+            newValues[propName] = { value, enabled: true };
+          });
+          return newValues;
+        });
+      }
+    }
+    setActivePresetIndex(null);
+  }, [playgroundConfig]);
 
   return {
     // State
     propValues,
     children,
     activePresetIndex,
+    activeStructureMode,
     
     // Derived data
     reactProps,
@@ -279,14 +346,16 @@ export const usePlaygroundState = ({
     propDisabledState,
     activeHints,
     hasModifiedProps,
-    hasTemplate,
+    hasTemplate: hasActiveTemplate,
     showChildren,
     previewCode,
     displayCode,
+    availableStructureModes,
     
     // Handlers
     handlePropChange,
     applyPreset,
     setChildren,
+    handleStructureModeChange,
   };
 };

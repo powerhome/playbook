@@ -1,5 +1,32 @@
 {
-  "template": "<Card{{props}}>\n  {{children}}\n</Card>",
+  "structureModes": {
+    "default": "simple",
+    "modes": {
+      "simple": {
+        "label": "Simple",
+        "template": "<Card{{props}}>\n  {{children}}\n</Card>",
+        "children": "Card content"
+      },
+      "header_body": {
+        "label": "Header + Body",
+        "template": "<Card{{props}}>\n  <Card.Header{{Card.Header.props}}>Header title</Card.Header>\n  <Card.Body>{{children}}</Card.Body>\n</Card>",
+        "children": "Body content here",
+        "props": { "padding": "none" },
+        "propTargets": {
+          "headerColor": "Card.Header.props"
+        }
+      },
+      "full": {
+        "label": "Header + Body + Footer",
+        "template": "<Card{{props}}>\n  <Card.Header{{Card.Header.props}}>Header title</Card.Header>\n  <Card.Body>{{children}}</Card.Body>\n  <Flex padding=\"sm\" justify=\"end\">\n    <Button text=\"Action\" />\n  </Flex>\n</Card>",
+        "children": "Body content here",
+        "props": { "padding": "none" },
+        "propTargets": {
+          "headerColor": "Card.Header.props"
+        }
+      }
+    }
+  },
   "children": {
     "default": "Card content"
   },
@@ -13,8 +40,8 @@
       "props": ["tag"]
     },
     {
-      "name": "Header",
-      "props": ["headerColor", "headerColorStriped"]
+      "name": "Card.Header",
+      "props": ["headerColor"]
     },
     {
       "name": "Draggable",
