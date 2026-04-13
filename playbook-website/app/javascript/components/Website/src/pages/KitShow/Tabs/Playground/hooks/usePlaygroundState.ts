@@ -232,11 +232,15 @@ export const usePlaygroundState = ({
       if (!preset) return;
 
       let nextDataPreset = activeDataPresetKey;
-      let nextStructureMode = activeStructureMode;
+      const structureModeForBuild =
+        preset.structureMode !== undefined && preset.structureMode !== null
+          ? preset.structureMode
+          : activeStructureMode;
+      let nextStructureMode = structureModeForBuild;
 
       const built = buildFullPropValues(
         activeDataPresetKey,
-        activeStructureMode,
+        structureModeForBuild,
         presetIndex
       );
 

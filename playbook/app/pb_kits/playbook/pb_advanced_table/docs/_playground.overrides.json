@@ -199,8 +199,9 @@
     },
     {
       "name": "Subrow Headers",
+      "structureMode": "explicit",
       "props": {
-        "subrowHeaders": ["Quarter", "Month", "Day"]
+        "subRowHeaders": ["Quarter", "Month", "Day"]
       }
     },
     {

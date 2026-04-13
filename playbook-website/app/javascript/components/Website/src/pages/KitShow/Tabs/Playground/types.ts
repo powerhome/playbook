@@ -116,6 +116,8 @@ export interface PlaygroundPreset {
   name: string;
   props: Record<string, any>;
   children?: string;
+  /** When set, applying this preset selects this `structureModes.modes` key (e.g. `"explicit"` for subcomponent templates). */
+  structureMode?: string;
 }
 
 export interface PlaygroundHint {
