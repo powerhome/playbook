@@ -54,14 +54,19 @@
         "columnDefinitionsFile": "advanced_table_column_definitions_grouped_triple.json",
         "tableDataFile": "advanced_table_mock_data.json"
       },
-      "with_ids_standard":{
+      "with_ids_standard": {
         "label": "Column definitions with IDs",
         "columnDefinitionsFile": "advanced_table_column_definitions_with_ids.json",
         "tableDataFile": "advanced_table_mock_data.json"
       }
     }
   },
-  "hiddenProps": ["sortControl", "fullScreenControl", "expandedControl", "allowFullScreen"],
+  "hiddenProps": [
+    "sortControl",
+    "fullScreenControl",
+    "expandedControl",
+    "allowFullScreen"
+  ],
   "requiredProps": {
     "columnDefinitionsFile": "advanced_table_column_definitions_standard.json",
     "tableDataFile": "advanced_table_mock_data.json"
@@ -76,22 +81,26 @@
     "sortIcon": { "structureMode": "explicit" },
     "collapsibleTrail": { "structureMode": "explicit" },
     "subRowHeaders": { "structureMode": "explicit" },
-    "columnVisibilityControl": { "dataPreset": "with_ids_standard" }
+    "columnVisibilityControl": { "dataPreset": "with_ids_standard" },
+    "rowStyling": { "dataPreset": "with_ids" }
   },
   "children": {
     "editable": false,
     "default": ""
   },
   "defaults": {
-    "collapsibleTrail": true
+    "collapsibleTrail": true,
+    "columnVisibilityControl": {
+      "default": true
+    },
+    "tableProps": {
+      "container": false
+    }
   },
   "groups": [
     {
       "name": "Core Data",
-      "props": [
-        "columnDefinitions",
-        "tableData"
-      ]
+      "props": ["columnDefinitions", "tableData"]
     },
     {
       "name": "Sorting",
@@ -130,17 +139,11 @@
     },
     {
       "name": "Column Configuration",
-      "props": [
-        "columnVisibilityControl",
-        "columnGroupBorderColor"
-      ]
+      "props": ["columnVisibilityControl", "columnGroupBorderColor"]
     },
     {
       "name": "Table engine",
-      "props": [
-        "tableOptions",
-        "tableProps"
-      ]
+      "props": ["tableOptions", "tableProps"]
     },
     {
       "name": "Layout",
@@ -153,9 +156,7 @@
     },
     {
       "name": "Styling",
-      "props": [
-        "rowStyling"
-      ]
+      "props": ["rowStyling"]
     },
     {
       "name": "Selection & Actions",
@@ -168,10 +169,7 @@
     },
     {
       "name": "AdvancedTable.Body",
-      "props": [
-        "collapsibleTrail",
-        "subRowHeaders"
-      ]
+      "props": ["collapsibleTrail", "subRowHeaders"]
     }
   ],
   "presets": [

@@ -280,3 +280,19 @@ export const checkHintCondition = (
     return false;
   });
 };
+
+/**
+ * Pretty-print for object prop textareas: `{ "default": true }` becomes `{ default: true }` style
+ * (unquoted keys where valid JS identifiers). Still parses via JSON.parse in PropControl.
+ */
+export function playgroundObjectToEditableLiteral(value: unknown): string {
+  if (value === null || typeof value !== "object") {
+    if (value === undefined) return "undefined";
+    if (value === null) return "null";
+    if (typeof value === "boolean" || typeof value === "number") return String(value);
+    if (typeof value === "string") return JSON.stringify(value);
+    return String(value);
+  }
+  const raw = JSON.stringify(value, null, 2);
+  return raw.replace(/^(\s*)"([a-zA-Z_$][a-zA-Z0-9_$]*)"\s*:/gm, "$1$2:");
+}

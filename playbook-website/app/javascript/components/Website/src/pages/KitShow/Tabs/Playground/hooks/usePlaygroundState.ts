@@ -58,7 +58,9 @@ export const usePlaygroundState = ({
 
   const getInitialChildren = (): string => {
     if (firstPreset?.children !== undefined) return firstPreset.children;
-    return playgroundConfig?.children?.default ?? getDefaultChildren(kitName);
+    const d = playgroundConfig?.children?.default;
+    if (d !== undefined && d !== null && d !== "") return d;
+    return getDefaultChildren(kitName);
   };
 
   const defaultStructureMode = playgroundConfig?.structureModes?.default ?? null;

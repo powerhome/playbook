@@ -12,7 +12,9 @@ import {
 import {
   PropControlProps,
   FUNCTION_PRESETS,
+  PropValue,
 } from "./types";
+import { playgroundObjectToEditableLiteral } from "./utils";
 
 export interface ExtendedPropControlProps extends PropControlProps {
   disabled?: boolean;
@@ -21,6 +23,23 @@ export interface ExtendedPropControlProps extends PropControlProps {
 }
 
 const formatPropName = (name: string): string => name;
+
+/** Plain object from prop state — used when enabling object controls so playground `defaults` survive the toggle. */
+function objectSeedFromPropValue(value: PropValue | undefined): Record<string, unknown> {
+  const v = value?.value;
+  if (v !== null && v !== undefined && typeof v === "object" && !Array.isArray(v)) {
+    return v as Record<string, unknown>;
+  }
+  return {};
+}
+
+function objectSyncFingerprint(value: PropValue | undefined): string {
+  const v = value?.value;
+  if (v !== null && v !== undefined && typeof v === "object" && !Array.isArray(v)) {
+    return JSON.stringify(v);
+  }
+  return "";
+}
 
 /**
  * Strict JSON first, then a parenthesized JS object literal so `{ default: true }`
@@ -338,16 +357,17 @@ const StringOrArrayControl: React.FC<PropControlProps> = ({ name, value, onChang
 const ObjectControl: React.FC<PropControlProps> = ({ name, value, onChange }) => {
   const isEnabled = value?.enabled ?? false;
   const [inputValue, setInputValue] = useState(
-    value?.value ? JSON.stringify(value.value, null, 2) : "{}"
+    value?.value ? playgroundObjectToEditableLiteral(value.value) : "{}"
   );
 
-  React.useEffect(() => {
-    if (!isEnabled) return;
+  const objectSyncKey = useMemo(() => objectSyncFingerprint(value), [value]);
+
+  useEffect(() => {
     const v = value?.value;
     if (v !== undefined && v !== null && typeof v === "object" && !Array.isArray(v)) {
-      setInputValue(JSON.stringify(v, null, 2));
+      setInputValue(playgroundObjectToEditableLiteral(v));
     }
-  }, [isEnabled, value?.value]);
+  }, [objectSyncKey]);
 
   return (
     <Flex flexDirection="column" paddingY="xs">
@@ -355,7 +375,7 @@ const ObjectControl: React.FC<PropControlProps> = ({ name, value, onChange }) =>
         checked={isEnabled}
         onChange={() => {
           onChange(name, {
-            value: isEnabled ? null : {},
+            value: isEnabled ? null : objectSeedFromPropValue(value),
             enabled: !isEnabled,
           });
         }}
@@ -420,8 +440,9 @@ const ArrayControl: React.FC<PropControlProps> = ({ name, value, onChange }) => 
       <Checkbox
         checked={isEnabled}
         onChange={() => {
+          const seed = value?.value;
           onChange(name, {
-            value: isEnabled ? null : [],
+            value: isEnabled ? null : Array.isArray(seed) ? seed : [],
             enabled: !isEnabled,
           });
         }}
@@ -520,8 +541,17 @@ const RequiredArrayControl: React.FC<PropControlProps> = ({ name, value, onChang
 
 const RequiredObjectControl: React.FC<PropControlProps> = ({ name, value, onChange }) => {
   const [inputValue, setInputValue] = useState(
-    value?.value ? JSON.stringify(value.value, null, 2) : "{}"
+    value?.value ? playgroundObjectToEditableLiteral(value.value) : "{}"
   );
+
+  const objectSyncKey = useMemo(() => objectSyncFingerprint(value), [value]);
+
+  useEffect(() => {
+    const v = value?.value;
+    if (v !== undefined && v !== null && typeof v === "object" && !Array.isArray(v)) {
+      setInputValue(playgroundObjectToEditableLiteral(v));
+    }
+  }, [objectSyncKey]);
 
   return (
     <Flex flexDirection="column" paddingY="xs">

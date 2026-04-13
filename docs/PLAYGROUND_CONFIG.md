@@ -86,12 +86,24 @@ Create `docs/_playground.overrides.json` to customize any field.
 | `structureModes` | object | Toggle between different component structures (e.g., simple vs subcomponents) |
 | `dataPresets` | object | Named `columnDefinitions` + `tableData` bundles; shown as “Sample data” pills (Advanced Table, etc.) |
 | `propSyncOnEnable` | object | When a prop is turned on, optionally set `dataPreset` and/or `structureMode` (co-selects sample data / structure). Matching props show a hint under the control in the Props panel. |
-| `defaults` | object | Optional per-kit defaults merged with `kit.schema.json` defaults. Used to seed implicit prop state (`value` set, `enabled: false`) so toggles and enums match runtime defaults until the author explicitly changes a prop. |
+| `defaults` | object | Optional per-kit defaults merged with `kit.schema.json` defaults. Used to seed implicit prop state (`value` set, `enabled: false`) so toggles and enums match runtime defaults until the author explicitly changes a prop. Supports nested objects/arrays for JSON-backed controls (e.g. `GenericObject` props). |
 | `hiddenProps` | string[] | Optional list of kit prop names to hide from the playground props panel. Props remain in `kit.schema.json`; only the controls are omitted. |
 
 ### Defaults and implicit props (playground UI)
 
 The website playground merges `defaults` from the override (and generated `_playground.json`) with each prop’s schema `default` into the props state as `{ value, enabled: false }` when a prop is not already set by required data, presets, or structure mode. That keeps boolean and enum controls aligned with component defaults (including booleans that default to `true`) without treating those props as “user modified” until `enabled` becomes true. Conditionals and hints resolve comparisons using the same effective values.
+
+**Prefilling object / array JSON editors:** Add a JSON object or array under `defaults` for that prop name. Optional props use a checkbox; when the author turns the prop on, the textarea is seeded from that value (not an empty `{}` / `[]`). Example for Advanced Table:
+
+```json
+"defaults": {
+  "columnVisibilityControl": { "default": true }
+}
+```
+
+After editing overrides, run `yarn generate:playground-configs --kit=<kit> --overwrite` so `_playground.json` includes the same `defaults`.
+
+In the website, object props are edited as **JavaScript-style literals** (unquoted keys when they are valid identifiers, e.g. `{ default: true }`). Strict JSON with quoted keys (`"default"`) still pastes and parses correctly.
 
 ### Hiding props from the panel
 

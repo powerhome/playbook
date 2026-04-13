@@ -1,4 +1,26 @@
-import { PropValue, PropDefinition, PlaygroundChildrenConfig } from "./types";
+import {
+  PropValue,
+  PropDefinition,
+  PlaygroundChildrenConfig,
+} from "./types";
+
+/**
+ * When playground `defaults` and `propValues[name].value` are the same reference (common after
+ * mergeImplicitDefaultPropValues), strict equality would skip emitting even though the user enabled
+ * the prop — the preview would miss it until the object was re-parsed. Only skip for primitives.
+ */
+function shouldSkipEmitWhenMatchesDefault(
+  defaults: Record<string, any>,
+  name: string,
+  propValue: PropValue
+): boolean {
+  const d = defaults[name];
+  if (d === undefined) return false;
+  if (d !== propValue.value) return false;
+  const v = propValue.value;
+  if (v !== null && typeof v === "object") return false;
+  return true;
+}
 
 interface GenerateCodeOptions {
   componentName: string;
@@ -314,8 +336,8 @@ export const generateFromTemplate = ({
     // Skip required props - they're handled separately as variable definitions
     if (requiredProps[name] !== undefined) return;
     
-    // Skip if this prop's value matches the default in the template
-    if (defaults[name] !== undefined && defaults[name] === propValue.value) return;
+    // Skip if this prop's value matches the template default (primitives only; see shouldSkipEmitWhenMatchesDefault)
+    if (shouldSkipEmitWhenMatchesDefault(defaults, name, propValue)) return;
     
     const definition = propDefinitions[name] || { type: "any", platforms: ["react"] as const };
     

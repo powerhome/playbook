@@ -16,7 +16,16 @@
     "selectableRows": false,
     "showActionsBar": true,
     "persistToggleExpansionButton": false,
-    "collapsibleTrail": true
+    "collapsibleTrail": true,
+    "columnVisibilityControl": {
+      "default": true
+    },
+    "tableProps": {
+      "container": false
+    },
+    "rowStyling": {
+      "dataPreset": "with_ids"
+    }
   },
   "groups": [
     {
@@ -7922,6 +7931,9 @@
     },
     "columnVisibilityControl": {
       "dataPreset": "with_ids_standard"
+    },
+    "rowStyling": {
+      "dataPreset": "with_ids"
     }
   },
   "children": {
