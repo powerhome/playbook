@@ -20,7 +20,6 @@ export interface ExtendedPropControlProps extends PropControlProps {
   isRequired?: boolean;
 }
 
-/** Labels use the kit prop identifier as authored (camelCase, no title-casing). */
 const formatPropName = (name: string): string => name;
 
 /**
@@ -55,42 +54,56 @@ function tryParseObjectLiteralInput(raw: string): Record<string, unknown> | null
 const BOOLEAN_PILLS: readonly boolean[] = [true, false];
 
 const BooleanControl: React.FC<PropControlProps> = ({ name, value, onChange, definition }) => {
+  const isEnabled = value?.enabled ?? false;
   const schemaDefault =
     typeof definition.default === "boolean" ? definition.default : undefined;
-  const explicit = value?.enabled ?? false;
   const raw = value?.value;
   const effectiveBool =
-    explicit && typeof raw === "boolean"
+    typeof raw === "boolean"
       ? raw
       : schemaDefault === true || schemaDefault === false
         ? schemaDefault
         : false;
 
+  const defaultWhenEnabling =
+    typeof schemaDefault === "boolean" ? schemaDefault : false;
+
   return (
     <Flex flexDirection="column" padding="xs">
-      <Body marginBottom="xs" text={name} />
-      <Flex flexWrap="wrap" gap="xs">
-        {BOOLEAN_PILLS.map((boolVal) => {
-          const label = String(boolVal);
-          return (
-            <div
-              key={label}
-              onClick={() => {
-                onChange(name, {
-                  value: boolVal,
-                  enabled: true,
-                });
-              }}
-              style={{ cursor: "pointer" }}
-            >
-              <Badge
-                text={label}
-                variant={effectiveBool === boolVal ? "primary" : "neutral"}
-              />
-            </div>
-          );
-        })}
-      </Flex>
+      <Checkbox
+        checked={isEnabled}
+        onChange={() => {
+          onChange(name, {
+            value: isEnabled ? false : defaultWhenEnabling,
+            enabled: !isEnabled,
+          });
+        }}
+        text={formatPropName(name)}
+      />
+      {isEnabled && (
+        <Flex flexWrap="wrap" gap="xs" marginLeft="lg">
+          {BOOLEAN_PILLS.map((boolVal) => {
+            const label = String(boolVal);
+            return (
+              <div
+                key={label}
+                onClick={() => {
+                  onChange(name, {
+                    value: boolVal,
+                    enabled: true,
+                  });
+                }}
+                style={{ cursor: "pointer" }}
+              >
+                <Badge
+                  text={label}
+                  variant={effectiveBool === boolVal ? "primary" : "neutral"}
+                />
+              </div>
+            );
+          })}
+        </Flex>
+      )}
     </Flex>
   );
 };
@@ -529,7 +542,8 @@ const normalizeType = (type: string): string => {
 const getControlForType = (props: PropControlProps, isRequired?: boolean) => {
   const { definition } = props;
   const rawType = definition.type || "";
-  const propType = rawType;
+  /** Lowercase so `GenericObject` matches object controls (schema uses PascalCase). */
+  const propType = normalizeType(rawType);
 
   // For required props, use special controls that don't allow toggling off
   if (isRequired) {
@@ -568,7 +582,7 @@ const getControlForType = (props: PropControlProps, isRequired?: boolean) => {
     return <FunctionControl {...props} />;
   }
 
-  // ReactNode check
+  // ReactNode check (schema may use "ReactNode")
   if (propType.includes("reactnode") || propType.includes("node") || propType.includes("element")) {
     return <ReactNodeControl {...props} />;
   }

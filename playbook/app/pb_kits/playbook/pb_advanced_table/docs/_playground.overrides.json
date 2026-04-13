@@ -53,6 +53,11 @@
         "label": "Grouped headers (double nested columns)",
         "columnDefinitionsFile": "advanced_table_column_definitions_grouped_triple.json",
         "tableDataFile": "advanced_table_mock_data.json"
+      },
+      "with_ids_standard":{
+        "label": "Column definitions with IDs",
+        "columnDefinitionsFile": "advanced_table_column_definitions_with_ids.json",
+        "tableDataFile": "advanced_table_mock_data.json"
       }
     }
   },
@@ -69,7 +74,8 @@
     "enableSorting": { "structureMode": "explicit" },
     "sortIcon": { "structureMode": "explicit" },
     "collapsibleTrail": { "structureMode": "explicit" },
-    "subRowHeaders": { "structureMode": "explicit" }
+    "subRowHeaders": { "structureMode": "explicit" },
+    "columnVisibilityControl": { "dataPreset": "with_ids_standard" }
   },
   "children": {
     "editable": false,

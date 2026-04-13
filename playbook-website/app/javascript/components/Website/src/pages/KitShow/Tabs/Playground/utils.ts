@@ -142,7 +142,7 @@ export const getPropSyncContextHint = (
     parts.push(`structure “${label}”`);
   }
   if (parts.length === 0) return null;
-  return `To use this feature, enable: ${parts.join(" · ")}`;
+  return `To use ${propName}, enable: ${parts.join(" · ")}`;
 };
 
 export const prepareExampleCode = (source: string): string => {
