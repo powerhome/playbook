@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import {
   Badge,
   Caption,
@@ -402,6 +402,19 @@ const ArrayControl: React.FC<PropControlProps> = ({ name, value, onChange }) => 
     value?.value ? JSON.stringify(value.value, null, 2) : "[]"
   );
 
+  const arraySyncKey = useMemo(() => {
+    const v = value?.value;
+    return Array.isArray(v) ? JSON.stringify(v) : "";
+  }, [value?.value]);
+
+  useEffect(() => {
+    if (!isEnabled) return;
+    const v = value?.value;
+    if (Array.isArray(v)) {
+      setInputValue(JSON.stringify(v, null, 2));
+    }
+  }, [isEnabled, arraySyncKey]);
+
   return (
     <Flex flexDirection="column" paddingY="xs">
       <Checkbox
@@ -452,6 +465,20 @@ const RequiredArrayControl: React.FC<PropControlProps> = ({ name, value, onChang
   const [inputValue, setInputValue] = useState(
     value?.value ? JSON.stringify(value.value, null, 2) : "[]"
   );
+
+  const arraySyncKey = useMemo(() => {
+    const v = value?.value;
+    return Array.isArray(v) ? JSON.stringify(v) : "";
+  }, [value?.value]);
+
+  useEffect(() => {
+    const v = value?.value;
+    if (Array.isArray(v)) {
+      setInputValue(JSON.stringify(v, null, 2));
+    } else {
+      setInputValue("[]");
+    }
+  }, [arraySyncKey]);
 
   return (
     <Flex flexDirection="column" paddingY="xs">
