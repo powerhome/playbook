@@ -61,6 +61,7 @@
       }
     }
   },
+  "hiddenProps": ["sortControl", "fullScreenControl", "expandedControl", "allowFullScreen"],
   "requiredProps": {
     "columnDefinitionsFile": "advanced_table_column_definitions_standard.json",
     "tableDataFile": "advanced_table_mock_data.json"
@@ -95,11 +96,12 @@
     {
       "name": "Sorting",
       "props": [
+        "enableSorting",
         "enableSortingRemoval",
-        "sortControl",
         "sortParentOnly",
         "customSort",
-        "onCustomSortClick"
+        "onCustomSortClick",
+        "sortIcon"
       ]
     },
     {
@@ -113,18 +115,15 @@
       ]
     },
     {
-      "name": "Row Interaction",
+      "name": "Expansion Controls",
       "props": [
         "enableToggleExpansion",
-        "expandedControl",
         "expandByDepth",
         "onExpandByDepthClick",
         "cascadeCollapse",
-        "selectableRows",
         "pinnedRows",
         "onRowToggleClick",
         "onToggleExpansionClick",
-        "onRowSelectionChange",
         "persistToggleExpansionButton",
         "toggleExpansionIcon"
       ]
@@ -139,7 +138,8 @@
     {
       "name": "Table engine",
       "props": [
-        "tableOptions"
+        "tableOptions",
+        "tableProps"
       ]
     },
     {
@@ -148,10 +148,7 @@
         "responsive",
         "scrollBarNone",
         "stickyLeftColumn",
-        "virtualizedRows",
-        "allowFullScreen",
-        "fullScreenControl",
-        "tableProps"
+        "virtualizedRows"
       ]
     },
     {
@@ -161,17 +158,12 @@
       ]
     },
     {
-      "name": "Actions",
+      "name": "Selection & Actions",
       "props": [
+        "selectableRows",
         "showActionsBar",
-        "actions"
-      ]
-    },
-    {
-      "name": "AdvancedTable.Header",
-      "props": [
-        "enableSorting",
-        "sortIcon"
+        "actions",
+        "onRowSelectionChange"
       ]
     },
     {
@@ -238,6 +230,11 @@
       }
     },
     "onRowSelectionChange": {
+      "requires": {
+        "selectableRows": true
+      }
+    },
+    "showActionsBar": {
       "requires": {
         "selectableRows": true
       }
