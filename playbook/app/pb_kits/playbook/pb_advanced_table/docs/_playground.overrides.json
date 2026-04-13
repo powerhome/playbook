@@ -269,6 +269,26 @@
       "requires": {
         "allowFullScreen": true
       }
+    },
+    "enableSortingRemoval": {
+      "requires": {
+        "enableSorting": true
+      }
+    },
+    "sortControl": {
+      "requires": {
+        "enableSorting": true
+      }
+    },
+    "customSort": {
+      "requires": {
+        "enableSorting": true
+      }
+    },
+    "sortParentOnly": {
+      "requires": {
+        "enableSorting": true
+      }
     }
   },
   "hints": {

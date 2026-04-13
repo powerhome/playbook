@@ -7,6 +7,7 @@ import {
   Select,
   TextInput,
   Tooltip,
+  Body
 } from "playbook-ui";
 import {
   PropControlProps,
@@ -19,9 +20,8 @@ export interface ExtendedPropControlProps extends PropControlProps {
   isRequired?: boolean;
 }
 
-const formatPropName = (name: string): string => {
-  return name.replace(/([A-Z])/g, " $1").replace(/^./, (str) => str.toUpperCase());
-};
+/** Labels use the kit prop identifier as authored (camelCase, no title-casing). */
+const formatPropName = (name: string): string => name;
 
 /**
  * Strict JSON first, then a parenthesized JS object literal so `{ default: true }`
@@ -68,7 +68,7 @@ const BooleanControl: React.FC<PropControlProps> = ({ name, value, onChange, def
 
   return (
     <Flex flexDirection="column" padding="xs">
-      <Caption bold marginBottom="xs" text={formatPropName(name)} />
+      <Body marginBottom="xs" text={name} />
       <Flex flexWrap="wrap" gap="xs">
         {BOOLEAN_PILLS.map((boolVal) => {
           const label = String(boolVal);
@@ -120,7 +120,7 @@ const EnumControl: React.FC<PropControlProps> = ({ name, definition, value, onCh
             enabled: !isEnabled,
           });
         }}
-        text={formatPropName(name)}
+        text={name}
       />
       {isEnabled && values.length > 0 && (
         <Flex flexWrap="wrap" gap="xs" marginLeft="lg">
@@ -443,7 +443,7 @@ const RequiredArrayControl: React.FC<PropControlProps> = ({ name, value, onChang
   return (
     <Flex flexDirection="column" paddingY="xs">
       <Flex align="center" gap="xs" marginBottom="xs">
-        <Caption text={formatPropName(name)} bold />
+        <Body text={name} />
         <Badge text="Required" variant="primary" />
       </Flex>
       <Flex flexDirection="column">
@@ -486,7 +486,7 @@ const RequiredObjectControl: React.FC<PropControlProps> = ({ name, value, onChan
   return (
     <Flex flexDirection="column" paddingY="xs">
       <Flex align="center" gap="xs" marginBottom="xs">
-        <Caption text={formatPropName(name)} bold />
+        <Body text={name} />
         <Badge text="Required" variant="primary" />
       </Flex>
       <Flex flexDirection="column">
@@ -529,7 +529,7 @@ const normalizeType = (type: string): string => {
 const getControlForType = (props: PropControlProps, isRequired?: boolean) => {
   const { definition } = props;
   const rawType = definition.type || "";
-  const propType = normalizeType(rawType);
+  const propType = rawType;
 
   // For required props, use special controls that don't allow toggling off
   if (isRequired) {
