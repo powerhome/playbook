@@ -58,6 +58,11 @@
         "label": "Column definitions with IDs",
         "columnDefinitionsFile": "advanced_table_column_definitions_with_ids.json",
         "tableDataFile": "advanced_table_mock_data.json"
+      },
+      "column_sort": {
+        "label": "Column Definitions with Sorting",
+        "columnDefinitionsFile": "advanced_table_column_definitions_standard_sort.json",
+        "tableDataFile": "advanced_table_mock_data.json"
       }
     }
   },
@@ -212,9 +217,11 @@
       }
     },
     {
-      "name": "No Scrollbar",
+      "name": "Sorting by Column",
+      "structureMode": "explicit",
+      "dataPreset": "column_sort",
       "props": {
-        "scrollBarNone": true
+        "enableSorting": true
       }
     }
   ],

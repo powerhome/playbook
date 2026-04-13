@@ -114,10 +114,13 @@ export interface PropGroup {
 
 export interface PlaygroundPreset {
   name: string;
-  props: Record<string, any>;
+  /** When omitted, preset applies no feature props (dataPreset / structureMode may still apply). */
+  props?: Record<string, any>;
   children?: string;
   /** When set, applying this preset selects this `structureModes.modes` key (e.g. `"explicit"` for subcomponent templates). */
   structureMode?: string;
+  /** Key in `dataPresets.presets` — loads that bundle’s `columnDefinitions` + `tableData`. */
+  dataPreset?: string | null;
 }
 
 export interface PlaygroundHint {

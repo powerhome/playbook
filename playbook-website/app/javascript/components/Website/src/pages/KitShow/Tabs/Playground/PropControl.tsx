@@ -476,7 +476,7 @@ const ArrayControl: React.FC<PropControlProps> = ({ name, value, onChange }) => 
           <Caption
             color="light"
             marginBottom="xs"
-            text='JSON or JS array literal. Quote hex colors: "#0056CF" not #0056CF.'
+            text='JSON or JS array literal'
           />
           <textarea
             placeholder="[]"
@@ -535,7 +535,7 @@ const RequiredArrayControl: React.FC<PropControlProps> = ({ name, value, onChang
         <Caption
           marginBottom="xs"
           color="light"
-          text='JSON or JS array literal. Quote hex colors: "#0056CF" not #0056CF.'
+          text='JSON or JS array literal.'
         />
         <textarea
           placeholder="[]"

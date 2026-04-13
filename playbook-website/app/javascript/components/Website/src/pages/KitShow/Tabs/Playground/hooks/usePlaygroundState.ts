@@ -231,7 +231,10 @@ export const usePlaygroundState = ({
       const preset = playgroundConfig?.presets?.[presetIndex];
       if (!preset) return;
 
-      let nextDataPreset = activeDataPresetKey;
+      let nextDataPreset =
+        preset.dataPreset !== undefined && preset.dataPreset !== null
+          ? preset.dataPreset
+          : activeDataPresetKey;
       const structureModeForBuild =
         preset.structureMode !== undefined && preset.structureMode !== null
           ? preset.structureMode
@@ -239,7 +242,7 @@ export const usePlaygroundState = ({
       let nextStructureMode = structureModeForBuild;
 
       const built = buildFullPropValues(
-        activeDataPresetKey,
+        nextDataPreset,
         structureModeForBuild,
         presetIndex
       );
