@@ -95,7 +95,8 @@
     },
     "tableProps": {
       "container": false
-    }
+    },
+    "rowStyling": [{ "rowId": "1", "backgroundColor": "#0056CF", "fontColor": "#FFFFFF", "expandButtonColor": "#FFFFFF" }]
   },
   "groups": [
     {

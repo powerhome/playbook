@@ -70,6 +70,29 @@ function tryParseObjectLiteralInput(raw: string): Record<string, unknown> | null
   }
 }
 
+/**
+ * Strict JSON first, then a parenthesized JS expression so `[{ rowId: "1" }]` works
+ * (JSON.parse requires quoted keys on nested objects).
+ */
+function tryParseArrayLiteralInput(raw: string): unknown[] | null {
+  const trimmed = raw.trim();
+  if (!trimmed) {
+    return [];
+  }
+  try {
+    const parsed = JSON.parse(trimmed);
+    return Array.isArray(parsed) ? parsed : null;
+  } catch {
+    // fall through
+  }
+  try {
+    const result = new Function(`return (${trimmed})`)();
+    return Array.isArray(result) ? result : null;
+  } catch {
+    return null;
+  }
+}
+
 const BOOLEAN_PILLS: readonly boolean[] = [true, false];
 
 const BooleanControl: React.FC<PropControlProps> = ({ name, value, onChange, definition }) => {
@@ -450,19 +473,20 @@ const ArrayControl: React.FC<PropControlProps> = ({ name, value, onChange }) => 
       />
       {isEnabled && (
         <Flex flexDirection="column" marginLeft="lg">
-          <Caption text="Enter JSON array:" marginBottom="xs" />
+          <Caption
+            color="light"
+            marginBottom="xs"
+            text='JSON or JS array literal. Quote hex colors: "#0056CF" not #0056CF.'
+          />
           <textarea
             placeholder="[]"
             value={inputValue}
             onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
-              setInputValue(e.target.value);
-              try {
-                const parsed = JSON.parse(e.target.value);
-                if (Array.isArray(parsed)) {
-                  onChange(name, { value: parsed, enabled: true });
-                }
-              } catch {
-                // Invalid JSON, keep input but don't update state
+              const text = e.target.value;
+              setInputValue(text);
+              const parsed = tryParseArrayLiteralInput(text);
+              if (parsed !== null) {
+                onChange(name, { value: parsed, enabled: true });
               }
             }}
             style={{
@@ -508,19 +532,20 @@ const RequiredArrayControl: React.FC<PropControlProps> = ({ name, value, onChang
         <Badge text="Required" variant="primary" />
       </Flex>
       <Flex flexDirection="column">
-        <Caption text="Enter JSON array:" marginBottom="xs" color="light" />
+        <Caption
+          marginBottom="xs"
+          color="light"
+          text='JSON or JS array literal. Quote hex colors: "#0056CF" not #0056CF.'
+        />
         <textarea
           placeholder="[]"
           value={inputValue}
           onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
-            setInputValue(e.target.value);
-            try {
-              const parsed = JSON.parse(e.target.value);
-              if (Array.isArray(parsed)) {
-                onChange(name, { value: parsed, enabled: true });
-              }
-            } catch {
-              // Invalid JSON, keep input but don't update state
+            const text = e.target.value;
+            setInputValue(text);
+            const parsed = tryParseArrayLiteralInput(text);
+            if (parsed !== null) {
+              onChange(name, { value: parsed, enabled: true });
             }
           }}
           style={{

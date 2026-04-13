@@ -114,7 +114,8 @@ export const shouldApplyPropSyncOnEnable = (value: PropValue | undefined): boole
   const v = value.value;
   if (typeof v === "boolean") return v === true;
   if (typeof v === "string") return v.trim().length > 0;
-  if (Array.isArray(v)) return v.length > 0;
+  // Empty [] still passes the prop (e.g. rowStyling); propSync may need to switch sample data (with_ids).
+  if (Array.isArray(v)) return true;
   if (typeof v === "object" && v !== null) {
     return Object.keys(v as Record<string, unknown>).length > 0;
   }

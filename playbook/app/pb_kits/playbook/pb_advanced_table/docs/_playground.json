@@ -23,9 +23,14 @@
     "tableProps": {
       "container": false
     },
-    "rowStyling": {
-      "dataPreset": "with_ids"
-    }
+    "rowStyling": [
+      {
+        "rowId": "1",
+        "backgroundColor": "#0056CF",
+        "fontColor": "#FFFFFF",
+        "expandButtonColor": "#FFFFFF"
+      }
+    ]
   },
   "groups": [
     {
