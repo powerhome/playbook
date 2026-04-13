@@ -113,6 +113,24 @@
       ],
       "default": "none"
     },
+    "gap": {
+      "type": "SizeType | SizeResponsiveType",
+      "platforms": [
+        "react"
+      ]
+    },
+    "rowGap": {
+      "type": "SizeType | SizeResponsiveType",
+      "platforms": [
+        "react"
+      ]
+    },
+    "columnGap": {
+      "type": "SizeType | SizeResponsiveType",
+      "platforms": [
+        "react"
+      ]
+    },
     "wrap": {
       "type": "boolean",
       "platforms": [

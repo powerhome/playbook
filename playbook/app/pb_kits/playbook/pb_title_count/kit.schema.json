@@ -27,6 +27,12 @@
         "rails"
       ]
     },
+    "dark": {
+      "type": "boolean",
+      "platforms": [
+        "react"
+      ]
+    },
     "title": {
       "type": "string",
       "platforms": [

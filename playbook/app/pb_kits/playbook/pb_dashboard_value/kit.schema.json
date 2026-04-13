@@ -21,7 +21,7 @@
       "default": "left"
     },
     "statChange": {
-      "type": "{ change? : 'increase' | 'decrease' | 'neutral' value?: string | number",
+      "type": "GenericObject",
       "platforms": [
         "react",
         "rails"
@@ -35,7 +35,7 @@
       ]
     },
     "statValue": {
-      "type": "{ unit?: string value?: string | number",
+      "type": "GenericObject",
       "platforms": [
         "react",
         "rails"

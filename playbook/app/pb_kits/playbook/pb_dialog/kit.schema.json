@@ -8,14 +8,14 @@
   ],
   "props": {
     "cancelButton": {
-      "type": "string;",
+      "type": "string",
       "platforms": [
         "react",
         "rails"
       ]
     },
     "closeable": {
-      "type": "boolean;",
+      "type": "boolean",
       "platforms": [
         "react",
         "rails"
@@ -23,14 +23,14 @@
       "default": true
     },
     "confirmButton": {
-      "type": "string;",
+      "type": "string",
       "platforms": [
         "react",
         "rails"
       ]
     },
     "fullHeight": {
-      "type": "boolean;",
+      "type": "boolean",
       "platforms": [
         "react",
         "rails"
@@ -38,7 +38,7 @@
       "default": false
     },
     "loading": {
-      "type": "boolean;",
+      "type": "boolean",
       "platforms": [
         "react",
         "rails"
@@ -69,32 +69,32 @@
       ]
     },
     "opened": {
-      "type": "boolean;",
+      "type": "boolean",
       "platforms": [
         "react"
       ]
     },
     "portalClassName": {
-      "type": "string;",
+      "type": "string",
       "platforms": [
         "react"
       ]
     },
     "placement": {
-      "type": "\"left\" | \"center\" | \"right\";",
+      "type": "enum",
       "platforms": [
         "react",
         "rails"
       ],
       "values": [
         "left",
-        "right",
-        "center"
+        "center",
+        "right"
       ],
       "default": "center"
     },
     "shouldCloseOnOverlayClick": {
-      "type": "boolean;",
+      "type": "boolean",
       "platforms": [
         "react",
         "rails"
@@ -102,7 +102,7 @@
       "default": true
     },
     "size": {
-      "type": "\"sm\" | \"md\" | \"lg\" | \"xl\" | \"status_size\" | \"content\";",
+      "type": "enum",
       "platforms": [
         "react",
         "rails"
@@ -118,7 +118,7 @@
       "default": "md"
     },
     "status": {
-      "type": "\"info\" | \"caution\" | \"delete\" | \"error\" | \"success\";",
+      "type": "enum",
       "platforms": [
         "react",
         "rails"
@@ -128,28 +128,26 @@
         "caution",
         "delete",
         "error",
-        "success",
-        "default",
-        ""
+        "success"
       ],
       "default": ""
     },
     "text": {
-      "type": "string;",
+      "type": "string",
       "platforms": [
         "react",
         "rails"
       ]
     },
     "title": {
-      "type": "string;",
+      "type": "string",
       "platforms": [
         "react",
         "rails"
       ]
     },
     "trigger": {
-      "type": "string;",
+      "type": "string",
       "platforms": [
         "react"
       ]

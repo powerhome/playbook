@@ -37,8 +37,7 @@ type AdvancedTableProps = {
   columnDefinitions: GenericObject[]
   columnGroupBorderColor?: "text_lt_default" | "text_lt_light" | "text_lt_lighter" | "text_dk_default" | "text_dk_light" | "text_dk_lighter"
   columnVisibilityControl?: GenericObject
-  customSort?:boolean;
-  dark?: boolean
+  customSort?: boolean
   data?: { [key: string]: string }
   enableToggleExpansion?: "all" | "header" | "none"
   enableSortingRemoval?: boolean
@@ -67,6 +66,7 @@ type AdvancedTableProps = {
   persistToggleExpansionButton?: boolean,
   sortControl?: GenericObject
   sortParentOnly?: boolean
+  stickyLeftColumn?: string[]
   tableData: GenericObject[]
   tableOptions?: GenericObject
   tableProps?: GenericObject

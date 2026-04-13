@@ -86,6 +86,16 @@ Create `docs/_playground.overrides.json` to customize any field.
 | `structureModes` | object | Toggle between different component structures (e.g., simple vs subcomponents) |
 | `dataPresets` | object | Named `columnDefinitions` + `tableData` bundles; shown as “Sample data” pills (Advanced Table, etc.) |
 | `propSyncOnEnable` | object | When a prop is turned on, optionally set `dataPreset` and/or `structureMode` (co-selects sample data / structure). Matching props show a hint under the control in the Props panel. |
+| `defaults` | object | Optional per-kit defaults merged with `kit.schema.json` defaults. Used to seed implicit prop state (`value` set, `enabled: false`) so toggles and enums match runtime defaults until the author explicitly changes a prop. |
+| `hiddenProps` | string[] | Optional list of kit prop names to hide from the playground props panel. Props remain in `kit.schema.json`; only the controls are omitted. |
+
+### Defaults and implicit props (playground UI)
+
+The website playground merges `defaults` from the override (and generated `_playground.json`) with each prop’s schema `default` into the props state as `{ value, enabled: false }` when a prop is not already set by required data, presets, or structure mode. That keeps boolean and enum controls aligned with component defaults (including booleans that default to `true`) without treating those props as “user modified” until `enabled` becomes true. Conditionals and hints resolve comparisons using the same effective values.
+
+### Hiding props from the panel
+
+Set `hiddenProps` to an array of camelCase prop names from `kit.schema.json` to exclude those controls from the kit props list and count. Use this for props that cannot be exercised in the live playground (for example, non-JSON callbacks) or to reduce noise.
 
 ### JSON file references (authoring `_playground.overrides.json`)
 

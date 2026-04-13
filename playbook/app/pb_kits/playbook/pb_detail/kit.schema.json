@@ -31,6 +31,12 @@
       ],
       "default": "light"
     },
+    "dark": {
+      "type": "boolean",
+      "platforms": [
+        "react"
+      ]
+    },
     "tag": {
       "type": "enum",
       "platforms": [

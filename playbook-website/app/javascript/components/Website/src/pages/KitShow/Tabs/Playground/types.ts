@@ -176,4 +176,6 @@ export interface PlaygroundConfig {
   /** When a control is enabled, co-select sample data and/or structure mode (see Advanced Table). */
   propSyncOnEnable?: PropSyncOnEnable;
   requiredProps?: Record<string, any>;
+  /** Kit prop names to omit from the playground props panel (still in kit.schema.json). */
+  hiddenProps?: string[];
 }

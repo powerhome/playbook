@@ -19,6 +19,12 @@
       ],
       "default": "default"
     },
+    "dark": {
+      "type": "boolean",
+      "platforms": [
+        "react"
+      ]
+    },
     "lineStyle": {
       "type": "enum",
       "platforms": [

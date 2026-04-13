@@ -22,6 +22,57 @@ interface GenerateFromTemplateOptions {
   requiredProps?: Record<string, any>;
 }
 
+/** Unquoted key when valid JS identifier; otherwise JSON-stringify the key. */
+function formatJsObjectKey(key: string): string {
+  return /^[a-zA-Z_$][a-zA-Z0-9_$]*$/.test(key) ? key : JSON.stringify(key);
+}
+
+/** Values inside JSX object literals / nested objects (not JSON.stringify for keys). */
+function formatJsExpressionValue(value: unknown): string {
+  if (value === null) {
+    return "null";
+  }
+  if (value === undefined) {
+    return "undefined";
+  }
+  if (typeof value === "boolean" || typeof value === "number") {
+    return String(value);
+  }
+  if (typeof value === "string") {
+    return JSON.stringify(value);
+  }
+  if (Array.isArray(value)) {
+    return `[${value.map((item) => formatJsExpressionValue(item)).join(", ")}]`;
+  }
+  if (typeof value === "object") {
+    const o = value as Record<string, unknown>;
+    const keys = Object.keys(o);
+    if (keys.length === 0) {
+      return "{}";
+    }
+    const inner = Object.entries(o)
+      .map(([k, v]) => `${formatJsObjectKey(k)}: ${formatJsExpressionValue(v)}`)
+      .join(", ");
+    return `{ ${inner} }`;
+  }
+  return JSON.stringify(value);
+}
+
+/**
+ * JSX `name={{ default: true }}` style — avoids JSON `{"default":true}` quoted keys in snippets.
+ */
+function formatJsxObjectProp(name: string, value: object): string {
+  const o = value as Record<string, unknown>;
+  const keys = Object.keys(o);
+  if (keys.length === 0) {
+    return `${name}={{}}`;
+  }
+  const inner = Object.entries(o)
+    .map(([k, v]) => `${formatJsObjectKey(k)}: ${formatJsExpressionValue(v)}`)
+    .join(", ");
+  return `${name}={{${inner}}}`;
+}
+
 const formatPropValue = (
   name: string,
   value: any,
@@ -41,14 +92,29 @@ const formatPropValue = (
 
   // Check object types FIRST - before other type checks that might match substrings
   // E.g., "{ component: string }" contains "string" but is an object type
-  if (propType.startsWith("{") || (typeof value === "object" && value !== null)) {
-    if (typeof value === "object" && value !== null) {
-      return `${name}={${JSON.stringify(value)}}`;
+  if (
+    propType.startsWith("{") ||
+    (typeof value === "object" && value !== null && !Array.isArray(value))
+  ) {
+    if (typeof value === "object" && value !== null && !Array.isArray(value)) {
+      return formatJsxObjectProp(name, value);
     }
     return null;
   }
 
   if (propType === "boolean") {
+    if (value === true) {
+      return name;
+    }
+    return `${name}={false}`;
+  }
+
+  // e.g. "boolean | string" — must not fall through to string-only handling (boolean true would emit nothing)
+  if (
+    propType.includes("boolean") &&
+    propType.includes("|") &&
+    typeof value === "boolean"
+  ) {
     if (value === true) {
       return name;
     }
@@ -91,14 +157,18 @@ const formatPropValue = (
   }
 
   if (propType === "object" || propType.includes("object")) {
-    if (typeof value === "object" && value !== null) {
-      return `${name}={${JSON.stringify(value)}}`;
+    if (typeof value === "object" && value !== null && !Array.isArray(value)) {
+      return formatJsxObjectProp(name, value);
     }
     return null;
   }
 
   if (typeof value === "string") {
     return `${name}="${value}"`;
+  }
+
+  if (typeof value === "object" && value !== null && !Array.isArray(value)) {
+    return formatJsxObjectProp(name, value);
   }
 
   return `${name}={${JSON.stringify(value)}}`;

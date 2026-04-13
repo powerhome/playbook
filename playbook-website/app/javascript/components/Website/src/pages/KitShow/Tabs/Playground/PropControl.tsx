@@ -23,28 +23,87 @@ const formatPropName = (name: string): string => {
   return name.replace(/([A-Z])/g, " $1").replace(/^./, (str) => str.toUpperCase());
 };
 
-const BooleanControl: React.FC<PropControlProps> = ({ name, value, onChange }) => {
-  const isEnabled = value?.enabled ?? false;
+/**
+ * Strict JSON first, then a parenthesized JS object literal so `{ default: true }`
+ * works without JSON double-quoted keys (avoids codegen staying at `{}` when JSON.parse failed).
+ */
+function tryParseObjectLiteralInput(raw: string): Record<string, unknown> | null {
+  const trimmed = raw.trim();
+  if (!trimmed) {
+    return {};
+  }
+  try {
+    const parsed = JSON.parse(trimmed);
+    if (parsed !== null && typeof parsed === "object" && !Array.isArray(parsed)) {
+      return parsed as Record<string, unknown>;
+    }
+    return null;
+  } catch {
+    // fall through
+  }
+  try {
+    const result = new Function(`return (${trimmed})`)();
+    if (result !== null && typeof result === "object" && !Array.isArray(result)) {
+      return result as Record<string, unknown>;
+    }
+    return null;
+  } catch {
+    return null;
+  }
+}
+
+const BOOLEAN_PILLS: readonly boolean[] = [true, false];
+
+const BooleanControl: React.FC<PropControlProps> = ({ name, value, onChange, definition }) => {
+  const schemaDefault =
+    typeof definition.default === "boolean" ? definition.default : undefined;
+  const explicit = value?.enabled ?? false;
+  const raw = value?.value;
+  const effectiveBool =
+    explicit && typeof raw === "boolean"
+      ? raw
+      : schemaDefault === true || schemaDefault === false
+        ? schemaDefault
+        : false;
 
   return (
-    <Flex align="center" padding="xs">
-      <Checkbox
-        checked={isEnabled}
-        onChange={() => {
-          onChange(name, {
-            value: true,
-            enabled: !isEnabled,
-          });
-        }}
-        text={formatPropName(name)}
-      />
+    <Flex flexDirection="column" padding="xs">
+      <Caption bold marginBottom="xs" text={formatPropName(name)} />
+      <Flex flexWrap="wrap" gap="xs">
+        {BOOLEAN_PILLS.map((boolVal) => {
+          const label = String(boolVal);
+          return (
+            <div
+              key={label}
+              onClick={() => {
+                onChange(name, {
+                  value: boolVal,
+                  enabled: true,
+                });
+              }}
+              style={{ cursor: "pointer" }}
+            >
+              <Badge
+                text={label}
+                variant={effectiveBool === boolVal ? "primary" : "neutral"}
+              />
+            </div>
+          );
+        })}
+      </Flex>
     </Flex>
   );
 };
 
 const EnumControl: React.FC<PropControlProps> = ({ name, definition, value, onChange }) => {
   const isEnabled = value?.enabled ?? false;
-  const currentValue = value?.value ?? "";
+  const schemaDefault =
+    typeof definition.default === "string" ? definition.default : undefined;
+  const currentValue =
+    value?.value ??
+    (schemaDefault && definition.values?.includes(schemaDefault)
+      ? schemaDefault
+      : "");
   const values = definition.values || [];
 
   return (
@@ -52,8 +111,12 @@ const EnumControl: React.FC<PropControlProps> = ({ name, definition, value, onCh
       <Checkbox
         checked={isEnabled}
         onChange={() => {
+          const first =
+            schemaDefault && values.includes(schemaDefault)
+              ? schemaDefault
+              : values[0] || "";
           onChange(name, {
-            value: isEnabled ? "" : values[0] || "",
+            value: isEnabled ? "" : first,
             enabled: !isEnabled,
           });
         }}
@@ -265,6 +328,14 @@ const ObjectControl: React.FC<PropControlProps> = ({ name, value, onChange }) =>
     value?.value ? JSON.stringify(value.value, null, 2) : "{}"
   );
 
+  React.useEffect(() => {
+    if (!isEnabled) return;
+    const v = value?.value;
+    if (v !== undefined && v !== null && typeof v === "object" && !Array.isArray(v)) {
+      setInputValue(JSON.stringify(v, null, 2));
+    }
+  }, [isEnabled, value?.value]);
+
   return (
     <Flex flexDirection="column" paddingY="xs">
       <Checkbox
@@ -279,18 +350,31 @@ const ObjectControl: React.FC<PropControlProps> = ({ name, value, onChange }) =>
       />
       {isEnabled && (
         <Flex flexDirection="column" marginLeft="lg">
-          <Caption text="Enter JSON object:" marginBottom="xs" />
-          <TextInput
+          <Caption
+            color="light"
+            marginBottom="xs"
+            text='JSON or object literal, e.g. {"default": true} or { default: true }'
+          />
+          <textarea
             placeholder="{}"
             value={inputValue}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-              setInputValue(e.target.value);
-              try {
-                const parsed = JSON.parse(e.target.value);
+            onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
+              const text = e.target.value;
+              setInputValue(text);
+              const parsed = tryParseObjectLiteralInput(text);
+              if (parsed !== null) {
                 onChange(name, { value: parsed, enabled: true });
-              } catch {
-                // Invalid JSON, keep input but don't update state
               }
+            }}
+            style={{
+              width: "100%",
+              minHeight: "100px",
+              fontFamily: "monospace",
+              fontSize: "12px",
+              padding: "8px",
+              border: "1px solid #ddd",
+              borderRadius: "4px",
+              resize: "vertical",
             }}
           />
         </Flex>
@@ -406,17 +490,20 @@ const RequiredObjectControl: React.FC<PropControlProps> = ({ name, value, onChan
         <Badge text="Required" variant="primary" />
       </Flex>
       <Flex flexDirection="column">
-        <Caption text="Enter JSON object:" marginBottom="xs" color="light" />
+        <Caption
+          color="light"
+          marginBottom="xs"
+          text='Object: JSON or JS literal, e.g. {"default": true} or { default: true }'
+        />
         <textarea
           placeholder="{}"
           value={inputValue}
           onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
-            setInputValue(e.target.value);
-            try {
-              const parsed = JSON.parse(e.target.value);
+            const text = e.target.value;
+            setInputValue(text);
+            const parsed = tryParseObjectLiteralInput(text);
+            if (parsed !== null) {
               onChange(name, { value: parsed, enabled: true });
-            } catch {
-              // Invalid JSON, keep input but don't update state
             }
           }}
           style={{

@@ -15,7 +15,8 @@
     "scrollBarNone": false,
     "selectableRows": false,
     "showActionsBar": true,
-    "persistToggleExpansionButton": false
+    "persistToggleExpansionButton": false,
+    "collapsibleTrail": true
   },
   "groups": [
     {
@@ -51,6 +52,7 @@
         "enableToggleExpansion",
         "expandedControl",
         "expandByDepth",
+        "onExpandByDepthClick",
         "cascadeCollapse",
         "selectableRows",
         "pinnedRows",
@@ -69,10 +71,17 @@
       ]
     },
     {
+      "name": "Table engine",
+      "props": [
+        "tableOptions"
+      ]
+    },
+    {
       "name": "Layout",
       "props": [
         "responsive",
         "scrollBarNone",
+        "stickyLeftColumn",
         "virtualizedRows",
         "allowFullScreen",
         "fullScreenControl",
@@ -132,9 +141,13 @@
       }
     },
     {
-      "name": "Fully Expanded",
+      "name": "Subrow Headers",
       "props": {
-        "enableToggleExpansion": "all"
+        "subrowHeaders": [
+          "Quarter",
+          "Month",
+          "Day"
+        ]
       }
     },
     {
@@ -147,8 +160,7 @@
     {
       "name": "No Scrollbar",
       "props": {
-        "scrollBarNone": true,
-        "responsive": "none"
+        "scrollBarNone": true
       }
     }
   ],
@@ -172,11 +184,6 @@
       "requires": {
         "selectableRows": true,
         "showActionsBar": true
-      }
-    },
-    "showActionsBar": {
-      "requires": {
-        "selectableRows": true
       }
     },
     "enableSorting": {
@@ -250,7 +257,11 @@
     "modes": {
       "implicit": {
         "label": "Default",
-        "template": "<AdvancedTable\n  columnDefinitions={columnDefinitions}\n  tableData={tableData}\n{{props}}\n/>"
+        "template": "<AdvancedTable\n  columnDefinitions={columnDefinitions}\n  tableData={tableData}\n{{props}}\n/>",
+        "propTargets": {
+          "collapsibleTrail": "props",
+          "subRowHeaders": "props"
+        }
       },
       "explicit": {
         "label": "Subcomponent Structure",
@@ -7544,9 +7555,6 @@
       "dataPreset": "pagination"
     },
     "inlineRowLoading": {
-      "dataPreset": "inline_loading"
-    },
-    "customSort": {
       "dataPreset": "inline_loading"
     },
     "selectableRows": {

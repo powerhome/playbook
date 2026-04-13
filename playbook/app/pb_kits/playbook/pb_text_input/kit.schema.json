@@ -7,6 +7,12 @@
     "rails"
   ],
   "props": {
+    "dark": {
+      "type": "boolean",
+      "platforms": [
+        "react"
+      ]
+    },
     "disabled": {
       "type": "boolean",
       "platforms": [
@@ -111,7 +117,7 @@
       ]
     },
     "addOn": {
-      "type": "{ icon?: string alignment?: \"right\" | \"left\" border?: boolean",
+      "type": "GenericObject",
       "platforms": [
         "react",
         "rails"

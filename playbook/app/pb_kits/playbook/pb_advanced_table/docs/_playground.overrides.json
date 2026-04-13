@@ -4,7 +4,11 @@
     "modes": {
       "implicit": {
         "label": "Default",
-        "template": "<AdvancedTable\n  columnDefinitions={columnDefinitions}\n  tableData={tableData}\n{{props}}\n/>"
+        "template": "<AdvancedTable\n  columnDefinitions={columnDefinitions}\n  tableData={tableData}\n{{props}}\n/>",
+        "propTargets": {
+          "collapsibleTrail": "props",
+          "subRowHeaders": "props"
+        }
       },
       "explicit": {
         "label": "Subcomponent Structure",
@@ -60,7 +64,6 @@
     "pagination": { "dataPreset": "pagination" },
     "paginationProps": { "dataPreset": "pagination" },
     "inlineRowLoading": { "dataPreset": "inline_loading" },
-    "customSort": { "dataPreset": "inline_loading" },
     "selectableRows": { "dataPreset": "with_ids" },
     "onRowSelectionChange": { "dataPreset": "with_ids" },
     "enableSorting": { "structureMode": "explicit" },
@@ -71,6 +74,9 @@
   "children": {
     "editable": false,
     "default": ""
+  },
+  "defaults": {
+    "collapsibleTrail": true
   },
   "groups": [
     {
@@ -106,6 +112,7 @@
         "enableToggleExpansion",
         "expandedControl",
         "expandByDepth",
+        "onExpandByDepthClick",
         "cascadeCollapse",
         "selectableRows",
         "pinnedRows",
@@ -124,10 +131,17 @@
       ]
     },
     {
+      "name": "Table engine",
+      "props": [
+        "tableOptions"
+      ]
+    },
+    {
       "name": "Layout",
       "props": [
         "responsive",
         "scrollBarNone",
+        "stickyLeftColumn",
         "virtualizedRows",
         "allowFullScreen",
         "fullScreenControl",
@@ -187,9 +201,9 @@
       }
     },
     {
-      "name": "Fully Expanded",
+      "name": "Subrow Headers",
       "props": {
-        "enableToggleExpansion": "all"
+        "subrowHeaders": ["Quarter", "Month", "Day"]
       }
     },
     {
@@ -202,8 +216,7 @@
     {
       "name": "No Scrollbar",
       "props": {
-        "scrollBarNone": true,
-        "responsive": "none"
+        "scrollBarNone": true
       }
     }
   ],
@@ -227,11 +240,6 @@
       "requires": {
         "selectableRows": true,
         "showActionsBar": true
-      }
-    },
-    "showActionsBar": {
-      "requires": {
-        "selectableRows": true
       }
     },
     "enableSorting": {

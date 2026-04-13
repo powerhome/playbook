@@ -43,6 +43,12 @@
       ],
       "default": true
     },
+    "dark": {
+      "type": "boolean",
+      "platforms": [
+        "react"
+      ]
+    },
     "avatarGrayscale": {
       "type": "boolean",
       "platforms": [

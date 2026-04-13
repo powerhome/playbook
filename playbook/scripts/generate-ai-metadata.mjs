@@ -43,6 +43,22 @@ const CONFIG = {
 const GLOBAL_PROPS = getGlobalPropNames();
 ['aria', 'data', 'htmlOptions', 'id', 'className', 'children', 'key', 'ref'].forEach(p => GLOBAL_PROPS.add(p));
 
+/**
+ * When parsing a kit `type XProps = { ... }` block, skip only structural globals that
+ * should not be duplicated into kit.schema.json. Do **not** use the full GLOBAL_PROPS set
+ * here — kits often redeclare names from `& GlobalProps` with a narrower type (e.g. maxHeight).
+ */
+const KIT_TYPE_BLOCK_SKIP_PROPS = new Set([
+  'aria',
+  'data',
+  'htmlOptions',
+  'id',
+  'className',
+  'children',
+  'key',
+  'ref',
+]);
+
 // =============================================================================
 // HELPERS
 // =============================================================================
@@ -234,7 +250,12 @@ function resolveImportedType(typeName, imports) {
  */
 function parseTypeString(typeStr, imports = new Map()) {
   if (!typeStr) return { type: 'any' };
-  typeStr = typeStr.replace(/\s+/g, ' ').trim();
+  typeStr = typeStr.replace(/\s+/g, ' ').trim().replace(/;+\s*$/, '');
+
+  // Object / record types (must run before `=>` — object shapes may contain callbacks)
+  if (typeStr.startsWith('{')) {
+    return { type: 'GenericObject' };
+  }
 
   // Union of literals: "a" | "b" | "c"
   if (typeStr.includes('|')) {
@@ -263,8 +284,7 @@ function parseTypeString(typeStr, imports = new Map()) {
     return { type: 'function' };
   }
   
-  // Objects/Arrays
-  if (typeStr.startsWith('{')) return { type: 'object' };
+  // Arrays
   if (typeStr.endsWith('[]') || typeStr.startsWith('Array')) return { type: 'array' };
 
   // Check if this is an imported type that we can resolve
@@ -296,7 +316,7 @@ function parseTypeBlock(block, imports = new Map()) {
     // Check for new prop BEFORE updating depth (so opening braces on same line don't block it)
     const match = trimmed.match(/^(\w+)\??:\s*(.*)$/);
     if (match && depth === 0) {
-      if (currentProp && currentType && !GLOBAL_PROPS.has(currentProp)) {
+      if (currentProp && currentType && !KIT_TYPE_BLOCK_SKIP_PROPS.has(currentProp)) {
         const typeInfo = parseTypeString(currentType.replace(/,\s*$/, '').trim(), imports);
         props[currentProp] = { type: typeInfo.type, platforms: ['react'], ...typeInfo.values && { values: typeInfo.values } };
       }
@@ -313,7 +333,7 @@ function parseTypeBlock(block, imports = new Map()) {
     }
   }
 
-  if (currentProp && currentType && !GLOBAL_PROPS.has(currentProp)) {
+  if (currentProp && currentType && !KIT_TYPE_BLOCK_SKIP_PROPS.has(currentProp)) {
     const typeInfo = parseTypeString(currentType.replace(/,\s*$/, '').trim(), imports);
     props[currentProp] = { type: typeInfo.type, platforms: ['react'], ...typeInfo.values && { values: typeInfo.values } };
   }

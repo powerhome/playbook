@@ -21,6 +21,7 @@ import {
   checkCondition,
   checkHintCondition,
   buildPlaygroundPropValues,
+  mergeImplicitDefaultPropValues,
   getResolvedColumnAndTableData,
   shouldApplyPropSyncOnEnable,
 } from "../utils";
@@ -62,15 +63,61 @@ export const usePlaygroundState = ({
 
   const defaultStructureMode = playgroundConfig?.structureModes?.default ?? null;
 
+  const hiddenPropNames = useMemo(
+    () => new Set(playgroundConfig?.hiddenProps ?? []),
+    [playgroundConfig?.hiddenProps]
+  );
+
+  const reactProps = useMemo(() => {
+    if (!kitSchema?.props) return {};
+
+    const filtered: Record<string, PropDefinition> = {};
+    Object.entries(kitSchema.props).forEach(([name, def]) => {
+      const isReactProp =
+        !def.platforms || def.platforms.length === 0 || def.platforms.includes("react");
+      const isExcluded =
+        EXCLUDED_PROPS.includes(name) || EXCLUDED_PROPS.includes(name.toLowerCase());
+
+      if (isReactProp && !isExcluded && !hiddenPropNames.has(name)) {
+        filtered[name] = def;
+      }
+    });
+    return filtered;
+  }, [kitSchema, hiddenPropNames]);
+
+  const globalProps = useMemo(() => {
+    if (!globalPropsSchema?.props || !kitSchema?.globalProps) return {};
+    return globalPropsSchema.props;
+  }, [globalPropsSchema, kitSchema]);
+
+  const allPropDefinitions = useMemo(
+    () => ({ ...reactProps, ...globalProps }),
+    [reactProps, globalProps]
+  );
+
+  const buildFullPropValues = useCallback(
+    (
+      dataPresetKey: string | null,
+      structureModeKey: string | null,
+      presetIndex: number | null
+    ) =>
+      mergeImplicitDefaultPropValues(
+        buildPlaygroundPropValues(
+          playgroundConfig,
+          requiredProps,
+          dataPresetKey,
+          structureModeKey,
+          presetIndex
+        ),
+        playgroundConfig,
+        allPropDefinitions
+      ),
+    [playgroundConfig, requiredProps, allPropDefinitions]
+  );
+
   const [activeDataPresetKey, setActiveDataPresetKey] = useState<string | null>(null);
   const [propValues, setPropValues] = useState<Record<string, PropValue>>(() =>
-    buildPlaygroundPropValues(
-      playgroundConfig,
-      requiredProps,
-      null,
-      defaultStructureMode,
-      playgroundConfig?.presets?.[0] ? 0 : null
-    )
+    buildFullPropValues(null, defaultStructureMode, playgroundConfig?.presets?.[0] ? 0 : null)
   );
   const [children, setChildren] = useState<string>(getInitialChildren);
   const [activePresetIndex, setActivePresetIndex] = useState<number | null>(
@@ -83,9 +130,7 @@ export const usePlaygroundState = ({
   useEffect(() => {
     setActiveDataPresetKey(null);
     setPropValues(
-      buildPlaygroundPropValues(
-        playgroundConfig,
-        requiredProps,
+      buildFullPropValues(
         null,
         playgroundConfig?.structureModes?.default ?? null,
         playgroundConfig?.presets?.[0] ? 0 : null
@@ -120,34 +165,6 @@ export const usePlaygroundState = ({
       label: preset.label,
     }));
   }, [playgroundConfig]);
-
-  // Filter props for React platform
-  const reactProps = useMemo(() => {
-    if (!kitSchema?.props) return {};
-
-    const filtered: Record<string, PropDefinition> = {};
-    Object.entries(kitSchema.props).forEach(([name, def]) => {
-      const isReactProp =
-        !def.platforms || def.platforms.length === 0 || def.platforms.includes("react");
-      const isExcluded =
-        EXCLUDED_PROPS.includes(name) || EXCLUDED_PROPS.includes(name.toLowerCase());
-
-      if (isReactProp && !isExcluded) {
-        filtered[name] = def;
-      }
-    });
-    return filtered;
-  }, [kitSchema]);
-
-  const globalProps = useMemo(() => {
-    if (!globalPropsSchema?.props || !kitSchema?.globalProps) return {};
-    return globalPropsSchema.props;
-  }, [globalPropsSchema, kitSchema]);
-
-  const allPropDefinitions = useMemo(
-    () => ({ ...reactProps, ...globalProps }),
-    [reactProps, globalProps]
-  );
 
   // Handlers
   const handlePropChange = useCallback(
@@ -215,9 +232,7 @@ export const usePlaygroundState = ({
       let nextDataPreset = activeDataPresetKey;
       let nextStructureMode = activeStructureMode;
 
-      const built = buildPlaygroundPropValues(
-        playgroundConfig,
-        requiredProps,
+      const built = buildFullPropValues(
         activeDataPresetKey,
         activeStructureMode,
         presetIndex
@@ -244,13 +259,7 @@ export const usePlaygroundState = ({
           setActiveStructureMode(nextStructureMode);
         }
         setPropValues(
-          buildPlaygroundPropValues(
-            playgroundConfig,
-            requiredProps,
-            nextDataPreset,
-            nextStructureMode,
-            presetIndex
-          )
+          buildFullPropValues(nextDataPreset, nextStructureMode, presetIndex)
         );
       } else {
         setPropValues(built);
@@ -262,8 +271,7 @@ export const usePlaygroundState = ({
       }
     },
     [
-      playgroundConfig,
-      requiredProps,
+      buildFullPropValues,
       activeDataPresetKey,
       activeStructureMode,
     ]
@@ -273,16 +281,10 @@ export const usePlaygroundState = ({
     (dataPresetKey: string | null) => {
       setActiveDataPresetKey(dataPresetKey);
       setPropValues(
-        buildPlaygroundPropValues(
-          playgroundConfig,
-          requiredProps,
-          dataPresetKey,
-          activeStructureMode,
-          activePresetIndex
-        )
+        buildFullPropValues(dataPresetKey, activeStructureMode, activePresetIndex)
       );
     },
-    [playgroundConfig, requiredProps, activeStructureMode, activePresetIndex]
+    [buildFullPropValues, activeStructureMode, activePresetIndex]
   );
 
   // Computed state
@@ -305,8 +307,20 @@ export const usePlaygroundState = ({
         return;
       }
 
-      const requiresMet = checkCondition(condition.requires, propValues);
-      const showWhenMet = checkCondition(condition.showWhen, propValues);
+      const conditionCtx = {
+        playgroundConfig,
+        propDefinitions: allPropDefinitions,
+      };
+      const requiresMet = checkCondition(
+        condition.requires,
+        propValues,
+        conditionCtx
+      );
+      const showWhenMet = checkCondition(
+        condition.showWhen,
+        propValues,
+        conditionCtx
+      );
 
       if (!requiresMet || !showWhenMet) {
         let reason = "This prop is not available in the current configuration";
@@ -332,6 +346,8 @@ export const usePlaygroundState = ({
     playgroundConfig?.structureModes?.modes,
     propValues,
     activeStructureMode,
+    playgroundConfig,
+    allPropDefinitions,
   ]);
 
   // Props that fail conditionals must not appear in generated code (or live preview)
@@ -349,16 +365,26 @@ export const usePlaygroundState = ({
     const hints: Array<PlaygroundHint & { id: string }> = [];
     const hintConfig = playgroundConfig?.hints ?? {};
 
+    const hintCtx = {
+      playgroundConfig,
+      propDefinitions: allPropDefinitions,
+    };
     Object.entries(hintConfig).forEach(([id, hint]) => {
-      if (checkHintCondition(hint.when, propValues)) {
+      if (checkHintCondition(hint.when, propValues, hintCtx)) {
         hints.push({ ...hint, id });
       }
     });
 
     return hints;
-  }, [playgroundConfig?.hints, propValues]);
+  }, [playgroundConfig?.hints, propValues, playgroundConfig, allPropDefinitions]);
 
-  const hasModifiedProps = Object.values(propValues).some((p) => p.enabled);
+  const hasModifiedProps = useMemo(
+    () =>
+      Object.entries(propValues).some(
+        ([name, p]) => p.enabled && !requiredPropNames.has(name)
+      ),
+    [propValues, requiredPropNames]
+  );
 
   const showChildren = useMemo(() => {
     if (playgroundConfig?.children) {
@@ -486,26 +512,16 @@ export const usePlaygroundState = ({
       if (mode?.children) {
         setChildren(mode.children);
       }
-      setPropValues(
-        buildPlaygroundPropValues(
-          playgroundConfig,
-          requiredProps,
-          activeDataPresetKey,
-          modeKey,
-          null
-        )
-      );
+      setPropValues(buildFullPropValues(activeDataPresetKey, modeKey, null));
       setActivePresetIndex(null);
     },
-    [playgroundConfig, requiredProps, activeDataPresetKey]
+    [buildFullPropValues, playgroundConfig, activeDataPresetKey]
   );
 
   const handleReset = useCallback(() => {
     setActiveDataPresetKey(null);
     setPropValues(
-      buildPlaygroundPropValues(
-        playgroundConfig,
-        requiredProps,
+      buildFullPropValues(
         null,
         playgroundConfig?.structureModes?.default ?? null,
         firstPreset ? 0 : null
@@ -515,7 +531,7 @@ export const usePlaygroundState = ({
     setActivePresetIndex(firstPreset ? 0 : null);
     setActiveStructureMode(playgroundConfig?.structureModes?.default ?? null);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [playgroundConfig, firstPreset]);
+  }, [buildFullPropValues, playgroundConfig, firstPreset]);
 
   return {
     propValues,

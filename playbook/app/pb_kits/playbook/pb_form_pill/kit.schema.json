@@ -113,7 +113,7 @@
       "default": false
     },
     "closeProps": {
-      "type": "ReactNode",
+      "type": "GenericObject",
       "platforms": [
         "react"
       ]

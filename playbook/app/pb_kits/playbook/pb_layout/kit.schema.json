@@ -22,6 +22,12 @@
       ],
       "default": "xs"
     },
+    "dark": {
+      "type": "boolean",
+      "platforms": [
+        "react"
+      ]
+    },
     "full": {
       "type": "boolean",
       "platforms": [
@@ -29,6 +35,16 @@
         "rails"
       ],
       "default": false
+    },
+    "position": {
+      "type": "enum",
+      "platforms": [
+        "react"
+      ],
+      "values": [
+        "left",
+        "right"
+      ]
     },
     "responsive": {
       "type": "boolean",
@@ -97,11 +113,11 @@
   "usage": {
     "react": {
       "import": "import { Layout } from 'playbook-ui'",
-      "example": "<Layout collapse=\"xs\" size=\"sm\"></Layout>"
+      "example": "<Layout collapse=\"xs\" position=\"left\"></Layout>"
     },
     "rails": {
       "import": null,
-      "example": "<%= pb_rails(\"layout\", props: { collapse: \"xs\", size: \"sm\" }) %>"
+      "example": "<%= pb_rails(\"layout\", props: { collapse: \"xs\", position: \"left\" }) %>"
     }
   }
 }

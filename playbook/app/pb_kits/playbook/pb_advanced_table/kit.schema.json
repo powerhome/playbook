@@ -50,7 +50,7 @@
       ]
     },
     "customSort": {
-      "type": "boolean;",
+      "type": "boolean",
       "platforms": [
         "react"
       ]
@@ -81,7 +81,7 @@
       ]
     },
     "expandByDepth": {
-      "type": "{ [key: string]: string | number }",
+      "type": "GenericObject",
       "platforms": [
         "react"
       ]
@@ -114,6 +114,22 @@
       ],
       "default": false
     },
+    "maxHeight": {
+      "type": "enum",
+      "platforms": [
+        "react"
+      ],
+      "values": [
+        "auto",
+        "xs",
+        "sm",
+        "md",
+        "lg",
+        "xl",
+        "xxl",
+        "xxxl"
+      ]
+    },
     "onRowToggleClick": {
       "type": "function",
       "platforms": [
@@ -139,7 +155,7 @@
       ]
     },
     "pinnedRows": {
-      "type": "function",
+      "type": "GenericObject",
       "platforms": [
         "react",
         "rails"
@@ -204,6 +220,12 @@
     },
     "sortParentOnly": {
       "type": "boolean",
+      "platforms": [
+        "react"
+      ]
+    },
+    "stickyLeftColumn": {
+      "type": "array",
       "platforms": [
         "react"
       ]

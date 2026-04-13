@@ -15,6 +15,12 @@
       ],
       "default": false
     },
+    "dark": {
+      "type": "boolean",
+      "platforms": [
+        "react"
+      ]
+    },
     "extendedUnderline": {
       "type": "boolean",
       "platforms": [
@@ -77,7 +83,7 @@
       "default": "normal"
     },
     "itemSpacing": {
-      "type": "object",
+      "type": "GenericObject",
       "platforms": [
         "react"
       ]
