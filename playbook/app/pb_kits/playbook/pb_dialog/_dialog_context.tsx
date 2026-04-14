@@ -1,3 +1,9 @@
-import React from 'react'
+import React from "react"
 
-export const DialogContext = React.createContext(null)
+export type DialogContextValue = {
+  onClose?: () => void
+  /** Mount point for Typeahead/Dropdown/etc. menus so they escape dialog scroll/overflow. */
+  selectMenuPortalTarget?: HTMLElement | null
+}
+
+export const DialogContext = React.createContext<DialogContextValue | null>(null)

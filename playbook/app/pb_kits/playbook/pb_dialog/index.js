@@ -2,6 +2,11 @@ import PbEnhancedElement from "../pb_enhanced_element";
 
 const DIALOG_WRAPPER_SELECTOR = "[data-pb-dialog-wrapper]";
 
+function dispatchDialogDidOpen(dialog) {
+  if (!dialog) return
+  dialog.dispatchEvent(new CustomEvent("pb:dialog:open", { bubbles: true }))
+}
+
 export default class PbDialog extends PbEnhancedElement {
   static get selector() {
     return DIALOG_WRAPPER_SELECTOR;
@@ -18,6 +23,10 @@ export default class PbDialog extends PbEnhancedElement {
     
     window.addEventListener("DOMContentLoaded", this.domContentLoadedHandler)
     window.addEventListener("turbo:frame-load", this.turboFrameLoadHandler)
+
+    if (document.readyState !== "loading") {
+      this.setupDialog()
+    }
 
     // Code for custom_event_type setup (can take multiple events in a string separated by commas)
     const customEventTypeString = this.element.dataset.customEventType
@@ -85,7 +94,10 @@ export default class PbDialog extends PbEnhancedElement {
     if (knownActions.includes(action)) {
       switch (action) {
         case 'open':
-          if (!dialog.open) dialog.showModal()
+          if (!dialog.open) {
+            dialog.showModal()
+            dispatchDialogDidOpen(dialog)
+          }
           break
         case 'close':
           if (dialog.open) dialog.close(event.detail?.returnValue)
@@ -160,7 +172,10 @@ export default class PbDialog extends PbEnhancedElement {
       open._openDialogClickHandler = () => {
         const openTriggerData = open.dataset.openDialog;
         const targetDialogOpen = document.getElementById(openTriggerData)
-        if (targetDialogOpen && !targetDialogOpen.open) targetDialogOpen.showModal()
+        if (targetDialogOpen && !targetDialogOpen.open) {
+          targetDialogOpen.showModal()
+          dispatchDialogDidOpen(targetDialogOpen)
+        }
       };
 
       open.addEventListener("click", open._openDialogClickHandler)

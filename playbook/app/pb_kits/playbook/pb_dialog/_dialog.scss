@@ -151,8 +151,30 @@
   border-radius: $border_radius_md;
   max-height: calc(100vh - #{$gutter * 2});
   max-width: calc(100vw - #{$gutter * 2});
-  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  overflow: visible;
   animation-name: modalFadeIn;
+
+  .pb_dialog_scroll_region {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .pb_dialog_floating_root {
+    flex: 0 0 auto;
+    min-height: 0;
+    pointer-events: none;
+    position: relative;
+    z-index: 1;
+  }
+
+  .pb_dialog_floating_root > * {
+    pointer-events: auto;
+  }
   animation-duration: $animation-duration;
   outline: none;
   animation-timing-function: $easeInOutQuint;
@@ -556,12 +578,41 @@
 
   // Fixes for stylesheets in nitro that were conflicting with our kit. DO NOT REMOVE.
   // Conflicts were only apparent in nitro, not in playbook local env
-  .pb_dialog_rails {
+  //
+  // Closed native <dialog> must stay display:none (UA default). Our flex layout must only
+  // apply when open; otherwise every dialog on the page appears "started open" on load.
+  dialog.pb_dialog_rails:not([open]) {
+    display: none !important;
+  }
+
+  .pb_dialog_rails[open] {
     position: fixed !important;
     top: 0 !important;
     padding: unset !important;
     margin: auto;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    overflow: visible;
+  }
 
+  .pb_dialog_scroll_region {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .pb_dialog_floating_root {
+    flex: 0 0 auto;
+    min-height: 0;
+    pointer-events: none;
+    position: relative;
+    z-index: 1;
+  }
+
+  .pb_dialog_floating_root > * {
+    pointer-events: auto;
   }
 
   // Overlay for rails kit

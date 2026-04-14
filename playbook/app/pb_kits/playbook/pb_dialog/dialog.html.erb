@@ -13,6 +13,7 @@
     <% end %>
 >
     <%= pb_content_tag(:dialog, role: "dialog", "aria-modal": "true", "aria-label": "Dialog") do %>
+            <div class="pb_dialog_scroll_region">
             <% if object.status === "" && object.title %>
                 <%= pb_rails("dialog/dialog_header", props: { title: object.title, id: object.id, closeable: object.closeable }) %>
             <% end %>
@@ -44,5 +45,8 @@
             <% end %>
 
             <%= content %>
+            </div>
+            <%# No aria-hidden: portaled kits (e.g. date picker) mount here and must remain interactive. %>
+            <div class="pb_dialog_floating_root" data-pb-dialog-floating-root="true"></div>
     <% end %>
 </div>
