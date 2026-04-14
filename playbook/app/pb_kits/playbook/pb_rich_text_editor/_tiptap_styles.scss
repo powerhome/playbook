@@ -8,7 +8,7 @@
 @import "../tokens/transition";
 @import "previewer_mixin";
 
-[class^="pb_rich_text_editor_kit"] {
+.pb_rich_text_editor_kit {
     &.inline {
         .toolbar {
           opacity: 0;
@@ -94,16 +94,110 @@
       align-items: center;
       gap: $space_xs;
     }
+
+    // Vertical section separators use ::before/::after with height: 100%. With
+    // align-items: center on .toolbar_block the kit’s cross size was 0, so the
+    // lines disappeared (master only had gap on .toolbar_block, default stretch).
+    .pb_section_separator_kit.pb_section_separator_vertical {
+      align-self: center;
+      flex-shrink: 0;
+      height: $space_xl;
+    }
+
+    // Match React ToolbarDropdown: secondary trigger flattened to text-style control.
     .editor-dropdown-button {
       background: transparent;
       border: none;
       color: $text_lt_light;
       cursor: pointer;
       font-weight: $light;
-      padding: ($space_xs - 1) 0px;
-      width: $space_xl * 3;
+      letter-spacing: normal;
+      line-height: 1;
+      min-height: unset;
+      min-width: $space_xl * 5;
+      padding: ($space_xs - 1) $space_xs;
+      width: auto;
+
+      // Undo Playbook .pb_button_kit defaults that throw off icon vs label (line-height 1.5, min-height 40px).
+      .pb_button_content {
+        align-items: center;
+        display: inline-flex;
+        line-height: 1;
+      }
+
+      // React: single Flex row inside the button.
+      .pb_button_content > .pb_flex_kit {
+        align-items: center;
+      }
+
+      // Rails: block-style trigger row (spans + icons).
+      .rte-block-style-trigger-inner {
+        align-items: center;
+      }
+
+      .rte-block-style-trigger-icon,
+      .rte-block-style-chevron {
+        display: inline-flex;
+        flex-shrink: 0;
+        line-height: 0;
+
+        .pb_icon_kit {
+          align-items: center;
+          display: flex;
+          line-height: 0;
+        }
+
+        svg {
+          display: block;
+        }
+      }
+
+      .rte-block-style-trigger-label {
+        align-items: center;
+        display: inline-flex;
+        line-height: 1.2;
+      }
+
       &:focus-visible {
         box-shadow: unset;
+      }
+    }
+
+    // Rails TipTap toolbar: mirror React Toolbar.tsx — <Flex paddingX="sm" paddingY="xxs" justify="between">.
+    &.rte-rails-toolbar-layout {
+      .rte-rails-toolbar-row {
+        align-items: center;
+        box-sizing: border-box;
+        column-gap: 0;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        padding: $space_xxs $space_sm;
+        row-gap: $space_xs;
+        width: 100%;
+      }
+
+      .rte-toolbar-left {
+        align-items: center;
+        display: flex;
+        flex: 1 1 auto;
+        flex-wrap: wrap;
+        gap: $space_xs;
+        min-width: 0;
+      }
+
+      .rte-toolbar-right {
+        align-items: center;
+        display: flex;
+        flex-shrink: 0;
+        gap: $space_xs;
+        margin-left: auto;
+      }
+
+      // Align dropdown trigger with icon row (React wraps Popover + SectionSeparator in one flex line).
+      .pb_popover_reference_wrapper {
+        align-items: center;
+        display: inline-flex;
       }
     }
   }
@@ -171,6 +265,17 @@
       @include preview_tiptap_ul;
     }
   }
+
+  // Toolbar + editor stack: toolbar keeps its border; editor has no top stroke (classic layout).
+  // Avoid relying on a wrapper-only frame — partial deploys then looked “borderless” because
+  // ProseMirror had been forced to border: none.
+  .pb_rich_text_editor_advanced_container.toolbar-active {
+    .ProseMirror {
+      border-top: none;
+      border-top-left-radius: initial;
+      border-top-right-radius: initial;
+    }
+  }
 }
 
 .pb_tiptap_toolbar_dropdown_list_item {
@@ -197,42 +302,51 @@
     }
   }
 }
-.pb_rich_text_editor_advanced_container {
-  transition: box-shadow 0.3s ease-in-out, border-radius 0.3s ease-in-out,
-    border-color 0.3s ease-in-out;
+
+// Rails RTE: block-style menu uses Nav (popover) instead of React NavItem class hook.
+.pb_rich_text_editor_kit .pb_popover_tooltip .pb_nav_list_item_link.is-active {
+  background-color: $bg_light;
+  border-radius: unset !important;
+  color: $primary;
+
+  .pb_nav_list_item_text,
+  .pb_nav_list_item_icon_left {
+    color: $primary !important;
+  }
+}
+
+.pb_rich_text_editor_kit .pb_popover_tooltip .pb_nav_list_kit_item:hover .pb_nav_list_item_link:not(.is-active) {
+  background-color: $neutral_subtle;
+  border-radius: unset !important;
+
+  .pb_nav_list_item_text,
+  .pb_nav_list_item_icon_left {
+    background-color: unset;
+    color: $text_lt_light !important;
+  }
+}
+
+// No toolbar: ring the whole control.
+.pb_rich_text_editor_advanced_container:not(.toolbar-active) {
+  transition: box-shadow 0.3s ease-in-out, border-radius 0.3s ease-in-out;
   &:focus-visible,
   &:focus-within {
-    outline: unset;
-    box-shadow: 0 0 0 1px $input_border_state;
     border-radius: $border_rad_heaviest;
+    box-shadow: 0 0 0 1px $input_border_state;
+    outline: unset;
     transition: box-shadow 0.3s ease-in-out, border-radius 0.3s ease-in-out;
   }
-  // Single outer frame (toolbar + editor): avoids inner ProseMirror border + focus ring looking like two bottoms.
-  &.toolbar-active {
-    border: 1px solid $input_border_default;
-    border-radius: $border_rad_heaviest;
-    overflow: hidden;
+}
 
-    &:focus-visible,
-    &:focus-within {
-      outline: unset;
-      box-shadow: none;
+// Toolbar + editor: use border color (not an outer box-shadow) so the bottom isn’t doubled.
+.pb_rich_text_editor_advanced_container.toolbar-active {
+  &:focus-within {
+    .toolbar {
       border-color: $input_border_state;
     }
 
-    .toolbar {
-      border: none;
-      border-bottom: 1px solid $input_border_default;
-      border-radius: 0;
-    }
-
-    &:focus-within .toolbar {
-      border-bottom-color: $input_border_state;
-    }
-
     .ProseMirror {
-      border: none;
-      border-radius: 0;
+      border-color: $input_border_state;
     }
   }
 }

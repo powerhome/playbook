@@ -10,6 +10,12 @@ module Playbook
       prop :label
       prop :required_indicator, type: Playbook::Props::Boolean, default: false
 
+      # Match React default (globalProps maxWidth "md").
+      def max_width
+        v = values[:max_width] || values["max_width"]
+        v.nil? || v == "" ? "md" : v
+      end
+
       def classname
         generate_classname("pb_rich_text_editor_kit", "rte-container")
       end
@@ -39,6 +45,15 @@ module Playbook
 
       def toolbar_id
         "#{container_id}-toolbar"
+      end
+
+      # Stable DOM ids for TipTap toolbar popover (used in ERB + module script; must be kit methods — not ERB locals).
+      def rte_block_style_trigger_id
+        "#{toolbar_id}-block-trigger"
+      end
+
+      def rte_block_style_tooltip_id
+        "#{toolbar_id}-block-tooltip"
       end
     end
   end

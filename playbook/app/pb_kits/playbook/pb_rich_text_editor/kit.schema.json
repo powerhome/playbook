@@ -34,7 +34,8 @@
     "inputOptions": {
       "type": "{ [key: string]: string | number | boolean | (() => void) }",
       "platforms": [
-        "react"
+        "react",
+        "rails"
       ]
     },
     "inline": {
@@ -46,7 +47,8 @@
     "label": {
       "type": "string",
       "platforms": [
-        "react"
+        "react",
+        "rails"
       ]
     },
     "extensions": {
@@ -70,7 +72,8 @@
     "placeholder": {
       "type": "string",
       "platforms": [
-        "react"
+        "react",
+        "rails"
       ]
     },
     "inputHeight": {
@@ -98,8 +101,10 @@
     "requiredIndicator": {
       "type": "boolean",
       "platforms": [
-        "react"
-      ]
+        "react",
+        "rails"
+      ],
+      "default": false
     },
     "simple": {
       "type": "boolean",
@@ -122,7 +127,8 @@
     "value": {
       "type": "string",
       "platforms": [
-        "react"
+        "react",
+        "rails"
       ]
     },
     "TrixEditor": {
@@ -146,7 +152,7 @@
     },
     "rails": {
       "import": null,
-      "example": "<%= pb_rails(\"rich_text_editor\", props: { input_options: { id: \"body\", name: \"content\" }, value: \"<p></p>\" }) %>"
+      "example": "<%= pb_rails(\"rich_text_editor\", props: { input_height: \"sm\", input_min_height: \"sm\" }) %>"
     }
   }
 }
