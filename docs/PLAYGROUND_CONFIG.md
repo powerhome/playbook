@@ -140,17 +140,30 @@ Optional `structureMode` disables the control unless the playground’s active s
 
 ### Hints Format
 
+Hints appear in a banner above the playground preview. Each hint can filter on **prop values** (`when`), on the active **feature preset** (`presetName` or `presetIndex`), or both.
+
 ```json
 {
   "hints": {
     "hint_id": {
-      "when": { "propName": "value" },
-      "message": "Displayed when condition is met",
-      "type": "info" | "warning" | "error"
+      "when": { "propName": true },
+      "presetName": "My Preset",
+      "message": "Displayed when this preset is active and props match",
+      "type": "info"
     }
   }
 }
 ```
+
+| Field | Description |
+|-------|-------------|
+| `when` | Optional. Compares **effective** prop values (including implicit `defaults`). Empty `{}` or omitted means “always true” for the prop side. |
+| `presetName` | Optional. Name of a row in `presets` (same string as `"name"`). Hint shows only when that preset is selected. |
+| `presetIndex` | Optional. 0-based index into the `presets` array. Use `presetName` if you reorder presets often. |
+| `message` | Text shown in the hint banner. |
+| `type` | Optional: `info` (default), `warning`, or `error`. |
+
+If both `presetName` / `presetIndex` and `when` are set, **all** of those conditions must pass.
 
 ### Structure Modes
 
@@ -277,3 +290,87 @@ The `VerifyPlaygroundConfigs` hook automatically regenerates playground configs 
 - `_playground.overrides.json` changes (customizations updated)
 
 This ensures playground configs stay in sync without manual steps.
+
+## FAQs
+
+### How do I add a data preset and link it to sample data?
+
+Add an entry under `dataPresets.presets` in `docs/_playground.overrides.json`. Each preset needs a **key** (used in code), a **label** (shown in the “Sample data” UI), and either:
+
+- **`columnDefinitionsFile` / `tableDataFile`**: filenames relative to the kit’s `docs/` folder (recommended for large tables), or  
+- **`columnDefinitions` / `tableData`**: inline JSON arrays for small samples.
+
+Run `yarn generate:playground-configs --kit=<kit> --overwrite` so the generator inlines file references into `_playground.json`.
+
+Example:
+
+```json
+"dataPresets": {
+  "presets": {
+    "my_dataset": {
+      "label": "My dataset",
+      "columnDefinitionsFile": "my_columns.json",
+      "tableDataFile": "my_table_data.json"
+    }
+  }
+}
+```
+
+### How do I connect a prop to sample data?
+
+Use **`propSyncOnEnable`**: when the author turns **on** a given prop in the props panel, the playground can automatically switch to a **`dataPreset`** and/or **`structureMode`**.
+
+```json
+"propSyncOnEnable": {
+  "pagination": { "dataPreset": "pagination" },
+  "enableSorting": { "structureMode": "explicit" }
+}
+```
+
+Keys are **camelCase prop names** from `kit.schema.json`. Values are the **`dataPresets.presets` key** and/or the **`structureModes.modes` key**. The props panel can show a short hint under those controls explaining which sample data or structure mode applies.
+
+A **feature preset** can also set `dataPreset` on the preset object so choosing that pill loads the right bundle:
+
+```json
+{ "name": "With Pagination", "dataPreset": "pagination", "props": { "pagination": true } }
+```
+
+### How do I add hints for props?
+
+Use the **`hints`** object with **`when`** comparing prop names to values. Comparisons use **effective** values (including `defaults` and schema defaults), not only toggles that are explicitly enabled.
+
+```json
+"hints": {
+  "pagination_tip": {
+    "when": { "pagination": true },
+    "message": "Use paginationProps to tune the pager.",
+    "type": "info"
+  }
+}
+```
+
+See **Hints Format** above for optional `type` and for combining with presets.
+
+### How do I add hints for presets?
+
+Add **`presetName`** (recommended) or **`presetIndex`** on that hint. The hint shows only when that **feature preset** (the pills next to the playground) is active. You can still add **`when`** if the message should also depend on props.
+
+```json
+"hints": {
+  "my_preset_tip": {
+    "presetName": "Column Styling",
+    "message": "This sample demonstrates columnStyling in column definitions.",
+    "type": "info"
+  }
+}
+```
+
+### What is “structure” (structure mode)?
+
+**Structure mode** is an alternate **JSX template** (and optional default props) for the same kit—used for patterns like “simple one-liner” vs “subcomponents” (`AdvancedTable` + `Header` / `Body`) or “basic” vs “with hook”. It is configured under **`structureModes`**: `default` picks the initial mode; each **`modes.<key>`** has a `label`, `template` (with `{{props}}`, `{{children}}`, and optional markers like `{{AdvancedTable.Header.props}}`), and optional `propTargets`, `imports`, `wrapper`, etc.
+
+Changing structure mode can change which props apply to which part of the template. **`conditionals`** may use **`"structureMode": "<key>"`** so a control is only enabled in a given mode.
+
+### Can I hide props from the list?
+
+Yes. Set **`hiddenProps`** to an array of **camelCase** prop names from `kit.schema.json`. Those props are omitted from the playground props panel (and count); they remain in the schema and in generated code if required elsewhere. Use this for callbacks that cannot be edited as JSON, or to reduce clutter.
