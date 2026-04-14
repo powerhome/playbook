@@ -77,9 +77,11 @@ import 'kits/pb_form/pb_form_validation'
 import formHelper from 'kits/pb_form/formHelper'
 window.formHelper = formHelper
 
-// Date picker helper
+// Date picker helper + shared portal host (Rails inline scripts + kits)
 import datePickerHelper from 'kits/pb_date_picker/date_picker_helper'
+import { resolveFloatingUIPortalHost } from 'kits/pb_dialog/_dialog_floating_portal'
 window.datePickerHelper = datePickerHelper
+window.playbookResolveFloatingUIPortalHost = resolveFloatingUIPortalHost
 
 // Third-party libraries
 import 'lazysizes'
