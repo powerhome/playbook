@@ -324,6 +324,7 @@ const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>(
         inputViewportRect: rect,
         menuEl,
         maxMenuHeightPx: maxH,
+        positionHost: portalHost,
       });
     }, [
       isDropdownClosed,
