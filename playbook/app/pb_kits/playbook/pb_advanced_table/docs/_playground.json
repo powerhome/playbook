@@ -413,11 +413,11 @@
       "message": "Use customSort to implement custom sorting logic. The customSort prop must be used in conjunction with the subRowHeaders prop. The customSort DOES NOT handle the sort logic, this must be handled on the frontend using the callback provided.",
       "type": "info"
     },
-    "sort_parent_only_info": {
+    "cascade_collapse_info": {
       "when": {
-        "sortParentOnly": true
+        "cascadeCollapse": true
       },
-      "message": "When sortParentOnly is true, the sort will only be applied to the parent row. The sort will not be applied to the child rows.",
+      "message": "When cascadeCollapse is true, collapsing any parent row itself or by using the toggle expansion buttons in any header or subheader row also collapses all descendants and clears their expansion state. Re-expanding then shows only direct children until the user expands deeper levels again.",
       "type": "info"
     }
   },

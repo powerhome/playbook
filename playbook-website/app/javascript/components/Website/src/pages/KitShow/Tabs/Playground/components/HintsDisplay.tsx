@@ -1,5 +1,5 @@
 import React from "react";
-import { Caption, Card, Flex, Icon } from "playbook-ui";
+import { Body, Card, Flex, Icon } from "playbook-ui";
 import { PlaygroundHint } from "../types";
 
 interface HintsDisplayProps {
@@ -36,7 +36,7 @@ export const HintsDisplay: React.FC<HintsDisplayProps> = ({ hints }) => {
       {hints.map((hint) => (
         <Flex key={hint.id} align="center" gap="xs" paddingY="xxs">
           <Icon icon={getHintIcon(hint.type)} color={getHintColor(hint.type)} size="sm" />
-          <Caption text={hint.message} />
+          <Body text={hint.message} />
         </Flex>
       ))}
     </Card>
