@@ -5,7 +5,13 @@
     "grayscale": false,
     "imageAlt": "",
     "name": "",
-    "size": "md"
+    "size": "md",
+    "componentOverlay": {
+      "component": "badge",
+      "placement": "top-right",
+      "text": "12",
+      "variant": "error"
+    }
   },
   "groups": [
     {
@@ -22,6 +28,12 @@
         "size",
         "grayscale",
         "status"
+      ]
+    },
+    {
+      "name": "Overlay",
+      "props": [
+        "componentOverlay"
       ]
     }
   ],
@@ -113,6 +125,11 @@
         "imageUrl": "https://unsplash.it/200/200"
       },
       "message": "If the image fails to load, initials from name are shown instead.",
+      "type": "info"
+    },
+    "component_overlay_info": {
+      "presetName": "Component overlay",
+      "message": "Use componentOverlay to add a badge or icon to the avatar. Click 'component overlay' to see an example.",
       "type": "info"
     }
   }

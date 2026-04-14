@@ -316,6 +316,41 @@ Example:
 }
 ```
 
+### How do I group props?
+
+Use the **`groups`** array in `docs/_playground.overrides.json`. Each entry has a **`name`** (heading in the props panel) and **`props`**: a list of **camelCase** prop names from `kit.schema.json` in the order you want.
+
+```json
+"groups": [
+  { "name": "Content", "props": ["name", "imageUrl", "imageAlt"] },
+  { "name": "Appearance", "props": ["size", "grayscale", "status"] }
+]
+```
+
+Any React props not listed in `groups` still appear under an **“Other”** section (if the kit exposes them and they are not in **`hiddenProps`**). Omit `groups` to use the generator’s default single “Props” group.
+
+### What are conditionals and how do I add them?
+
+**Conditionals** decide when a prop’s control is **enabled** in the playground. If a prop is listed under **`conditionals`**, it can be **disabled** (grayed out with a tooltip) until its rules pass—so you don’t expose options that don’t apply yet (e.g. `target` only when `link` is set).
+
+Add an entry keyed by **camelCase prop name**. Supported fields:
+
+| Field | Purpose |
+|-------|---------|
+| **`requires`** | Another prop must be “on” or match a value. Use a **string** for a single prop name (that prop must be truthy / non-empty when enabled), or an **object** for multiple checks, e.g. `{ "variant": "primary", "link": true }`. |
+| **`showWhen`** | Optional extra gate (same shapes as `requires`). Both `requires` and `showWhen` must pass when present. |
+| **`structureMode`** | Optional. Control is enabled only when the active **structure mode** key matches (see **Structure Modes**). |
+
+```json
+"conditionals": {
+  "iconRight": { "requires": "icon" },
+  "target": { "requires": "link" },
+  "sortIcon": { "structureMode": "explicit", "requires": { "enableSorting": true } }
+}
+```
+
+Regenerate `yarn generate:playground-configs --kit=<kit> --overwrite` after editing. See **Conditionals Format** above for the same schema in reference form.
+
 ### How do I connect a prop to sample data?
 
 Use **`propSyncOnEnable`**: when the author turns **on** a given prop in the props panel, the playground can automatically switch to a **`dataPreset`** and/or **`structureMode`**.
@@ -334,6 +369,24 @@ A **feature preset** can also set `dataPreset` on the preset object so choosing 
 ```json
 { "name": "With Pagination", "dataPreset": "pagination", "props": { "pagination": true } }
 ```
+
+### How do I set defaults for a prop that allows input?
+
+Use the **`defaults`** object in `docs/_playground.overrides.json`. Keys are **camelCase** prop names from `kit.schema.json`; values are whatever the live control should treat as the baseline (strings, numbers, booleans, enums, or nested JSON for object/array props).
+
+The playground merges **`defaults`** with each prop’s schema **`default`** (from `kit.schema.json`) into props state as **`{ value, enabled: false }`** until something else sets that prop (required data, a feature preset, structure mode, or the user). That means:
+
+- **Text, number, enum, boolean:** the control shows your default value; the author has not “turned the prop on” as an explicit override until they change it (for optional props that use a checkbox + editor, behavior follows the control type).
+- **Object / array props** (e.g. `columnVisibilityControl`, arrays of column defs): put the JSON shape under **`defaults.<propName>`**. When the author enables that optional prop, the textarea is **prefilled** with that value instead of `{}` or `[]`.
+
+```json
+"defaults": {
+  "size": "md",
+  "columnVisibilityControl": { "default": true }
+}
+```
+
+Regenerate after editing: `yarn generate:playground-configs --kit=<kit> --overwrite`. See **Defaults and implicit props (playground UI)** above for more detail.
 
 ### How do I add hints for props?
 
