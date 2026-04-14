@@ -1,5 +1,5 @@
 /* eslint-disable react/no-multi-comp */
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import ReactDOM from "react-dom";
 import {
   Popper,
@@ -20,6 +20,20 @@ import {
 import classnames from "classnames";
 import { globalProps, GlobalProps } from "../utilities/globalProps";
 import { uniqueId } from '../utilities/object';
+
+import { DialogContext, DialogContextValue } from "../pb_dialog/_dialog_context";
+
+/** Kits that portal menus to `document.body` still belong to the open popover for close-on-click. */
+function targetIsInsidePortaledFilterKit(target: HTMLElement): boolean {
+  return (
+    target.closest(".typeahead-kit-select__menu-portal") !== null ||
+    target.closest(".pb_multi_level_select_floating_shell") !== null ||
+    target.closest(".pb_time_picker_panel_portal") !== null ||
+    target.closest(".pb_dropdown_floating_shell") !== null ||
+    target.closest(".pb_dropdown_container") !== null ||
+    target.closest(".pb_date_picker_floating_shell") !== null
+  );
+}
 
 type ModifiedGlobalProps = Omit<GlobalProps, 'minWidth' | 'maxHeight' | 'minHeight'>
 
@@ -112,6 +126,17 @@ const Popover = (props: PbPopoverProps) => {
       : filteredGlobalProps
   const overflowHandling = maxHeight || maxWidth ? "overflow_handling" : "";
   const zIndexStyle = zIndex ? { zIndex: zIndex } : {};
+
+  const [selectMenuPortalTarget, setSelectMenuPortalTarget] =
+    useState<HTMLElement | null>(null);
+  const floatingRootRef = useCallback((node: HTMLElement | null) => {
+    setSelectMenuPortalTarget(node);
+  }, []);
+
+  const menuPortalApi: DialogContextValue = useMemo(
+    () => ({ selectMenuPortalTarget }),
+    [selectMenuPortalTarget],
+  );
   const widthHeightStyles = () => {
     return Object.assign(
       {},
@@ -152,17 +177,28 @@ const Popover = (props: PbPopoverProps) => {
             <div
                 className={classnames(`${buildCss("pb_popover_tooltip")} show`)}
             >
-              <div
-                  className={classnames(
-                    "pb_popover_body",
-                    popoverSpacing,
-                    overflowHandling
-                  )}
-                  id={targetId}
-                  style={widthHeightStyles()}
-              >
-                {children}
-              </div>
+            <div
+                className={classnames("pb_popover_body", popoverSpacing)}
+                id={targetId}
+                style={widthHeightStyles()}
+            >
+              <DialogContext.Provider value={menuPortalApi}>
+                <div
+                    className={classnames(
+                      "pb_popover_scroll_region",
+                      overflowHandling,
+                    )}
+                >
+                  {children}
+                </div>
+                <div
+                    aria-hidden="true"
+                    className="pb_popover_floating_root"
+                    data-pb-dialog-floating-root="true"
+                    ref={floatingRootRef}
+                />
+              </DialogContext.Provider>
+            </div>
             </div>
           </div>
         );
@@ -214,7 +250,8 @@ const PbReactPopover = (props: PbPopoverProps): React.ReactElement => {
       const target = e.target as HTMLElement
 
       const targetIsPopover =
-        target.closest("#" + targetId) !== null;
+        target.closest("#" + targetId) !== null ||
+        targetIsInsidePortaledFilterKit(target);
       const targetIsReference =
         target.closest("#reference-" + targetId) !== null;
 
@@ -287,7 +324,7 @@ const PbReactPopover = (props: PbPopoverProps): React.ReactElement => {
                 )}
             </>
           ) : (
-            { popoverComponent }
+            popoverComponent
           ))}
       </>
     </PopperManager>

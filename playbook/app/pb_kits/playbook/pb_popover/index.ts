@@ -3,6 +3,17 @@ import { createPopper, Instance, Placement } from '@popperjs/core'
 
 const POPOVER_OFFSET_Y = [0, 20]
 
+function targetIsInsidePortaledFilterKit(target: HTMLElement): boolean {
+  return (
+    target.closest('.typeahead-kit-select__menu-portal') !== null ||
+    target.closest('.pb_multi_level_select_floating_shell') !== null ||
+    target.closest('.pb_time_picker_panel_portal') !== null ||
+    target.closest('.pb_dropdown_floating_shell') !== null ||
+    target.closest('.pb_dropdown_container') !== null ||
+    target.closest('.pb_date_picker_floating_shell') !== null
+  )
+}
+
 export default class PbPopover extends PbEnhancedElement {
   popper: Instance
   _triggerElement: HTMLElement
@@ -61,17 +72,20 @@ export default class PbPopover extends PbEnhancedElement {
 
   checkCloseTooltip() {
     document.querySelector('body').addEventListener('click', ({ target } ) => {
-      const isTooltipElement = (target as HTMLElement).closest(`#${this.tooltipId}`) !== null
-      const isTriggerElement = (target as HTMLElement).closest(`#${this.triggerElementId}`) !== null
+      const t = target as HTMLElement
+      const isTooltipElement = t.closest(`#${this.tooltipId}`) !== null
+      const isTriggerElement = t.closest(`#${this.triggerElementId}`) !== null
+      const isPortaledKit = targetIsInsidePortaledFilterKit(t)
 
       switch (this.closeOnClick) {
       case 'any':
+        if (isPortaledKit) return
         if (isTooltipElement || !isTooltipElement && !isTriggerElement) {
           this.hideTooltip()
         }
         break
       case 'outside':
-        if (!isTooltipElement && !isTriggerElement) {
+        if (!isTooltipElement && !isTriggerElement && !isPortaledKit) {
           this.hideTooltip()
         }
         break
