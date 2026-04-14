@@ -1,0 +1,96 @@
+{
+  "structureModes": {
+    "default": "with_textarea",
+    "modes": {
+      "with_textarea": {
+        "label": "CopyButton + paste area",
+        "template": "<Flex flexDirection=\"column\" gap=\"sm\"><CopyButton{{props}} /><Textarea marginTop=\"sm\" placeholder=\"Paste copied text here\" rows={3} /></Flex>",
+        "children": "",
+        "imports": ["Flex", "Textarea"]
+      },
+      "copy_from_body": {
+        "label": "Copy from element (from)",
+        "template": "<Flex flexDirection=\"column\" gap=\"sm\"><Body id=\"body\">Copy this body text!</Body><CopyButton{{props}} /><Textarea marginTop=\"sm\" placeholder=\"Paste copied text here\" rows={3} /></Flex>",
+        "children": "",
+        "imports": ["Flex", "Body", "Textarea"]
+      },
+      "use_pbcopy_hook": {
+        "label": "usePBCopy hook",
+        "template": "<></>",
+        "children": "",
+        "imports": ["usePBCopy", "Tooltip", "Body", "Textarea"],
+        "wrapper": "const CopyButtonHook = ({...props}) => {\n  // This is how you can use the copy button hook to copy text to the clipboard\n  // eslint-disable-next-line no-unused-vars\n  const [copied, copyToClipboard] = usePBCopy({ from: 'hookbody' })\n  // I added a tooltip so it looks better in the ui\n  const [showTooltip, setShowTooltip] = useState(false)\n\n  const handleCopy = () => {\n    copyToClipboard()\n    setShowTooltip(true)\n    setTimeout(() => setShowTooltip(false), 1500)\n  }\n\n  useEffect(() => {\n    const el = document.getElementById('hookbody')\n    if (!el) return\n\n    el.addEventListener('click', handleCopy)\n    return () => {\n      el.removeEventListener('click', handleCopy)\n    }\n  }, [copyToClipboard])\n\n  return (\n    <div>\n      <Tooltip\n          delay={{ close: 1000 }}\n          forceOpenTooltip={showTooltip}\n          placement=\"top\"\n          showTooltip={false}\n          text=\"Copied!\"\n      >\n        <Body\n            cursor=\"pointer\"\n            id=\"hookbody\"\n            text=\"I'm a custom copy hook! Click this body to copy this text!\"\n        />\n      </Tooltip>\n\n      <Textarea\n          placeholder=\"Paste here\"\n      />\n    </div>\n  )\n}"
+      }
+    }
+  },
+  "defaults": {
+    "tooltipText": "Copied!",
+    "value": "Boo from Ghost Crew!"
+  },
+  "groups": [
+    {
+      "name": "Tooltip",
+      "props": ["tooltipPlacement", "tooltipText"]
+    },
+    {
+      "name": "Copy configs",
+      "props": ["value", "from"]
+    },
+    {
+      "name": "Appearance",
+      "props": ["variant", "timeout"]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default",
+      "props": {
+        "tooltipText": "Copied!",
+        "value": "Boo from Ghost Crew!"
+      }
+    },
+    {
+      "name": "Button variant",
+      "structureMode": "with_textarea",
+      "props": {
+        "variant": "button"
+      }
+    },
+    {
+      "name": "Copy from body",
+      "structureMode": "copy_from_body",
+      "props": {
+        "from": "body",
+        "marginBottom": "sm",
+        "text": "Copy Body text",
+        "tooltipPlacement": "right",
+        "tooltipText": "Body text copied!",
+        "variant": "button",
+        "value": ""
+      }
+    },
+    {
+      "name": "With Hook",
+      "props": {},
+      "structureMode": "use_pbcopy_hook"
+    }
+  ],
+  "conditionals": {},
+  "hints": {
+    "default_preset_info": {
+      "presetName": "Default",
+      "message": "Use CopyButton + paste area for the kit. Switch structure to usePBCopy hook for the docs example (Body + Tooltip + Textarea, copy via from: hookbody).",
+      "type": "info"
+    },
+    "copy_configs_info": {
+      "presetName": "Copy from body",
+      "message": "Body has id=\"body\"; CopyButton uses from=\"body\" to copy that element’s text (value is cleared so from is used).",
+      "type": "info"
+    },
+    "hook_info": {
+      "presetName": "With Hook",
+      "message": "Use the usePBCopy hook to copy text to the clipboard. This is a headless hook that you can use to copy text to the clipboard. It returns a boolean value that indicates if the text has been copied and a function to copy the text.",
+      "type": "info"
+    }
+  }
+}
