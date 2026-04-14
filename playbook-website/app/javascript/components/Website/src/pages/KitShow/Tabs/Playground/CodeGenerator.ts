@@ -105,7 +105,7 @@ const formatPropValue = (
     return null;
   }
 
-  const propType = definition.type.toLowerCase();
+  const propType = String(definition.type ?? "any").toLowerCase();
 
   // Handle arrays first (e.g., string[] or string | string[])
   if (Array.isArray(value)) {
