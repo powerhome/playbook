@@ -1,4 +1,12 @@
-import React, { useState, useEffect, useRef, useMemo } from 'react'
+import React, {
+  useState,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useMemo,
+  useContext,
+} from 'react'
+import { createPortal } from 'react-dom'
 import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
 import { globalProps, GlobalProps } from '../utilities/globalProps'
@@ -6,6 +14,11 @@ import Caption from '../pb_caption/_caption'
 import SelectableCard from '../pb_selectable_card/_selectable_card'
 import TextInput from '../pb_text_input/_text_input'
 import colors from '../tokens/exports/_colors.module.scss'
+import { DialogContext } from '../pb_dialog/_dialog_context'
+import {
+  positionDropdownPortalToWrapper,
+  resolveTimePickerPortalHost,
+} from '../pb_dialog/_dialog_floating_portal'
 
 import {
   parseTime,
@@ -91,10 +104,16 @@ const TimePicker = (props: TimePickerProps): JSX.Element => {
 
   const fieldName = name || `${uniqueId}-time`
 
+  const dialogCtx = useContext(DialogContext)
+  const timePickerPanelPortalRef = useRef<HTMLDivElement | null>(null)
+  const triggerWrapperRef = useRef<HTMLDivElement | null>(null)
+
   useEffect(() => {
     const handleInvalid = (event: Event) => {
       const target = event.target as HTMLInputElement
-      const timePickerContainer = target.closest('[data-pb-react-component="TimePicker"]')
+      const timePickerContainer =
+        target.closest(`[data-pb-time-picker-id="${uniqueId}"]`) ||
+        target.closest('[data-pb-react-component="TimePicker"]')
 
       if (timePickerContainer) {
         const invalidInputName = target.name || target.getAttribute('name')
@@ -108,7 +127,7 @@ const TimePicker = (props: TimePickerProps): JSX.Element => {
     return () => {
       document.removeEventListener('invalid', handleInvalid, true)
     }
-  }, [fieldName])
+  }, [fieldName, uniqueId])
 
   // Min/Max Time Range Validation
   const minTimeMinutes = parseTimeToMinutes(minTime)
@@ -183,31 +202,41 @@ const TimePicker = (props: TimePickerProps): JSX.Element => {
   const timePickerWrapperRef = useRef<HTMLDivElement>(null)
   const hourDropdownRef = useRef<HTMLDivElement>(null)
   const minuteDropdownRef = useRef<HTMLDivElement>(null)
+
   const [showDropdown, setShowDropdown] = useState(false)
   const [showHourDropdown, setShowHourDropdown] = useState(false)
   const [showMinuteDropdown, setShowMinuteDropdown] = useState(false)
 
-  // Clicking the clock add-on opens the dropdown
-  useEffect(() => {
+  // Clock add-on: scope to this kit root only. document.querySelector('#…') matches the first
+  // node in the whole document — duplicate ids (e.g. Turbo leaving orphans) stack handlers/UI.
+  useLayoutEffect(() => {
     if (disabled) return
 
-    const addOnCard = document.querySelector(`#${uniqueId}-input`)?.closest('.text_input_wrapper_add_on')?.querySelector('.add-on-card') as HTMLElement
-    const inputElement = document.getElementById(`${uniqueId}-input`) as HTMLInputElement
-    
-    if (addOnCard && inputElement) {
-      const handleAddOnClick = (e: Event) => {
-        e.preventDefault()
-        e.stopPropagation()
-        inputElement.focus()
-        setShowDropdown(true)
-      }
-      
-      addOnCard.addEventListener('click', handleAddOnClick)
-      addOnCard.style.cursor = 'pointer'
-      
-      return () => {
-        addOnCard.removeEventListener('click', handleAddOnClick)
-      }
+    const root = timePickerWrapperRef.current
+    if (!root) return
+
+    const inputElement = root.querySelector(
+      `[id="${uniqueId}-input"]`,
+    ) as HTMLInputElement | null
+    if (!inputElement) return
+
+    const addOnCard = inputElement
+      .closest('.text_input_wrapper_add_on')
+      ?.querySelector('.add-on-card') as HTMLElement | undefined
+    if (!addOnCard) return
+
+    const handleAddOnClick = (e: Event) => {
+      e.preventDefault()
+      e.stopPropagation()
+      inputElement.focus()
+      setShowDropdown(true)
+    }
+
+    addOnCard.addEventListener('click', handleAddOnClick)
+    addOnCard.style.cursor = 'pointer'
+
+    return () => {
+      addOnCard.removeEventListener('click', handleAddOnClick)
     }
   }, [uniqueId, disabled, setShowDropdown])
 
@@ -658,7 +687,14 @@ const TimePicker = (props: TimePickerProps): JSX.Element => {
   
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (timePickerWrapperRef.current && !timePickerWrapperRef.current.contains(event.target as Node)) {
+      const target = event.target as Node
+      const inKit =
+        timePickerWrapperRef.current?.contains(target) ||
+        timePickerPanelPortalRef.current?.contains(target) ||
+        (typeof Element !== "undefined" &&
+          target instanceof Element &&
+          target.closest(`[data-pb-time-picker-id="${uniqueId}"]`) !== null)
+      if (!inKit) {
         closeDropdown()
       }
     }
@@ -670,7 +706,7 @@ const TimePicker = (props: TimePickerProps): JSX.Element => {
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [showDropdown, hour, minute, meridiem, onClose, lastValidTime, minTime, maxTime])
+  }, [showDropdown, hour, minute, meridiem, onClose, lastValidTime, minTime, maxTime, uniqueId])
 
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
@@ -692,12 +728,243 @@ const TimePicker = (props: TimePickerProps): JSX.Element => {
   // Get hour constraints for the input
   const { maxHour, minHour } = getHourConstraints(timeFormat)
 
+  const timePickerContainerClass = classnames(
+    'pb_time_picker_container',
+    timeFormat === '24hour' && 'pb_time_picker_container_24hour',
+  )
+
+  const portaledPanelRootClass = classnames(
+    buildCss('pb_time_picker'),
+    'pb_time_picker_panel_portal',
+    errorDisplay ? 'error' : null,
+    disabled ? 'disabled' : null,
+    dark ? 'dark' : null,
+  )
+
+  const timeSelectionInner = (
+    <div className="pb_time_selection">
+      <div className="time_input_wrapper">
+        <label htmlFor={`${uniqueId}-hour`}>
+          <Caption
+              className="time_input_label"
+              color="lighter"
+              dark={dark}
+              size="sm"
+              text="Hour"
+          />
+        </label>
+        <input
+            className={`time_input time-hour ${hasSelectedTime && !isCurrentTimeValid(hour, minute, meridiem) ? 'invalid' : ''}`}
+            id={`${uniqueId}-hour`}
+            inputMode="numeric"
+            max={maxHour}
+            maxLength={2}
+            min={minHour}
+            name={`${uniqueId}-hour`}
+            onBlur={handleHourBlur}
+            onChange={handleHourChange}
+            onClick={() => { setShowHourDropdown(!showHourDropdown); setShowMinuteDropdown(false) }}
+            onFocus={handleHourFocus}
+            onKeyDown={handleHourKeyDown}
+            pattern="[0-9]*"
+            ref={hourInputRef}
+            step={1}
+            tabIndex={0}
+            type="number"
+            value={hourInputValue}
+        />
+        {showHourDropdown && (
+          <div
+              className="time_dropdown"
+              ref={hourDropdownRef}
+          >
+            {generateHourOptions(timeFormat).map((h) => (
+              <div
+                  className={`time_dropdown_option ${hour === h ? 'selected' : ''}`}
+                  key={h}
+                  onClick={() => handleHourOptionClick(h)}
+              >
+                {timeFormat === '24hour' ? h.toString().padStart(2, '0') : h}
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+      <span className="time-separator">{':'}</span>
+      <div className="time_input_wrapper">
+        <label htmlFor={`${uniqueId}-minute`}>
+          <Caption
+              className="time_input_label"
+              color="lighter"
+              dark={dark}
+              size="sm"
+              text="Minute"
+          />
+        </label>
+        <input
+            className={`time_input time-minute ${hasSelectedTime && !isCurrentTimeValid(hour, minute, meridiem) ? 'invalid' : ''}`}
+            id={`${uniqueId}-minute`}
+            inputMode="numeric"
+            max={59}
+            maxLength={2}
+            min={0}
+            name={`${uniqueId}-minute`}
+            onBlur={handleMinuteBlur}
+            onChange={handleMinuteChange}
+            onClick={() => { setShowMinuteDropdown(!showMinuteDropdown); setShowHourDropdown(false) }}
+            onFocus={handleMinuteFocus}
+            onKeyDown={handleMinuteKeyDown}
+            pattern="[0-9]*"
+            ref={minuteInputRef}
+            step={1}
+            tabIndex={0}
+            type="number"
+            value={minuteInputValue}
+        />
+        {showMinuteDropdown && (
+          <div
+              className="time_dropdown"
+              ref={minuteDropdownRef}
+          >
+            {generateMinuteOptions().map((m) => (
+              <div
+                  className={`time_dropdown_option ${minute === m ? 'selected' : ''}`}
+                  key={m}
+                  onClick={() => handleMinuteOptionClick(m)}
+              >
+                {m.toString().padStart(2, '0')}
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+      {timeFormat === 'AMPM' && (
+        <div className="meridiem">
+          <Caption
+              className="time_input_label"
+              color="lighter"
+              dark={dark}
+              size="sm"
+              text="Period"
+          />
+          <div className="pb_form_group_kit">
+            <SelectableCard
+                checked={meridiem === 'AM'}
+                className={!isAnyAMTimeValid() ? 'disabled_meridiem' : ''}
+                dark={dark}
+                disabled={!isAnyAMTimeValid()}
+                inputId={`${uniqueId}-am`}
+                multi={false}
+                name={`${uniqueId}-meridiem`}
+                onChange={() => handleMeridiemChange('AM')}
+                text="AM"
+                value="AM"
+            />
+            <SelectableCard
+                checked={meridiem === 'PM'}
+                className={!isAnyPMTimeValid() ? 'disabled_meridiem' : ''}
+                dark={dark}
+                disabled={!isAnyPMTimeValid()}
+                inputId={`${uniqueId}-pm`}
+                multi={false}
+                name={`${uniqueId}-meridiem`}
+                onChange={() => handleMeridiemChange('PM')}
+                text="PM"
+                value="PM"
+            />
+          </div>
+        </div>
+      )}
+      {hasSelectedTime && !isCurrentTimeValid(hour, minute, meridiem) && (
+        <div className="time_range_error">
+          <Caption
+              className="time_range_error_text"
+              dark={dark}
+              marginTop="sm"
+              size="xs"
+              text={getTimeRangeErrorMessage(minTime, maxTime, timeFormat)}
+          />
+        </div>
+      )}
+      {showTimezone && (
+        <Caption
+            color="lighter"
+            dark={dark}
+            lineHeight="tight"
+            marginTop="sm"
+            size="xs"
+            text={getTimezoneText()}
+        />
+      )}
+    </div>
+  )
+
+  // Same as pb_dropdown: portal target + createPortal (single React tree; no legacy ReactDOM.render).
+  const portaledMenuHost =
+    typeof document !== "undefined"
+      ? resolveTimePickerPortalHost(
+          timePickerWrapperRef.current,
+          dialogCtx?.selectMenuPortalTarget ?? null,
+        )
+      : null
+
+  useLayoutEffect(() => {
+    if (!showDropdown || disabled) return
+
+    const resolvedHost = resolveTimePickerPortalHost(
+      timePickerWrapperRef.current,
+      dialogCtx?.selectMenuPortalTarget ?? null,
+    )
+    if (!resolvedHost) return
+
+    const applyPortalPosition = () => {
+      const panel = timePickerPanelPortalRef.current
+      const wrap = triggerWrapperRef.current
+      if (!panel || !wrap) return
+
+      positionDropdownPortalToWrapper({
+        panel,
+        wrapperViewportRect: wrap.getBoundingClientRect(),
+        positionHost: resolvedHost,
+      })
+
+      const menu = panel.querySelector(".pb_time_selection") as HTMLElement | null
+      if (menu) {
+        const wr = wrap.getBoundingClientRect()
+        const maxH = Math.max(120, window.innerHeight - wr.bottom - 8)
+        menu.style.maxHeight = `${maxH}px`
+        menu.style.overflow = "auto"
+      }
+    }
+
+    applyPortalPosition()
+    const raf = window.requestAnimationFrame(applyPortalPosition)
+    window.addEventListener("resize", applyPortalPosition)
+    return () => {
+      window.cancelAnimationFrame(raf)
+      window.removeEventListener("resize", applyPortalPosition)
+    }
+  }, [
+    showDropdown,
+    disabled,
+    dialogCtx?.selectMenuPortalTarget,
+    showHourDropdown,
+    showMinuteDropdown,
+    hour,
+    minute,
+    meridiem,
+    timeFormat,
+    uniqueId,
+  ])
+
   return (
+    <>
     <div
         {...ariaProps}
         {...dataProps}
         {...htmlProps}
         className={classes}
+        data-pb-time-picker-id={uniqueId}
         id={uniqueId}
         ref={timePickerWrapperRef}
         style={{ position: 'relative' }}
@@ -726,7 +993,10 @@ const TimePicker = (props: TimePickerProps): JSX.Element => {
           )}
         </label>
       )}
-      <div className="time_picker_wrapper">
+      <div
+          className="time_picker_wrapper"
+          ref={triggerWrapperRef}
+      >
         <TextInput
             addOn={{ icon: 'clock', alignment: 'right', border: true }}
             cursor="pointer"
@@ -760,169 +1030,29 @@ const TimePicker = (props: TimePickerProps): JSX.Element => {
               {...inputHtmlProps}
           />
         </TextInput>
-        
-        {showDropdown && !disabled && (
-          <div className={`pb_time_picker_container ${timeFormat === '24hour' ? 'pb_time_picker_container_24hour' : ''}`}>
-            <div className="pb_time_selection">
-              <div className="time_input_wrapper">
-                <label htmlFor={`${uniqueId}-hour`}>
-                  <Caption
-                      className="time_input_label"
-                      color="lighter"
-                      dark={dark}
-                      size="sm"
-                      text="Hour"
-                  />
-                </label>
-                <input
-                    className={`time_input time-hour ${hasSelectedTime && !isCurrentTimeValid(hour, minute, meridiem) ? 'invalid' : ''}`}
-                    id={`${uniqueId}-hour`}
-                    inputMode="numeric"
-                    max={maxHour}
-                    maxLength={2}
-                    min={minHour}
-                    name={`${uniqueId}-hour`}
-                    onBlur={handleHourBlur}
-                    onChange={handleHourChange}
-                    onClick={() => { setShowHourDropdown(!showHourDropdown); setShowMinuteDropdown(false) }}
-                    onFocus={handleHourFocus}
-                    onKeyDown={handleHourKeyDown}
-                    pattern="[0-9]*"
-                    ref={hourInputRef}
-                    step={1}
-                    tabIndex={0}
-                    type="number"
-                    value={hourInputValue}
-                />
-                {showHourDropdown && (
-                  <div 
-                      className="time_dropdown"
-                      ref={hourDropdownRef}
-                  >
-                    {generateHourOptions(timeFormat).map((h) => (
-                      <div
-                          className={`time_dropdown_option ${hour === h ? 'selected' : ''}`}
-                          key={h}
-                          onClick={() => handleHourOptionClick(h)}
-                      >
-                        {timeFormat === '24hour' ? h.toString().padStart(2, '0') : h}
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </div>
-              <span className="time-separator">{':'}</span>
-              <div className="time_input_wrapper">
-                <label htmlFor={`${uniqueId}-minute`}>
-                  <Caption
-                      className="time_input_label"
-                      color="lighter"
-                      dark={dark}
-                      size="sm"
-                      text="Minute"
-                  />
-                </label>
-                <input
-                    className={`time_input time-minute ${hasSelectedTime && !isCurrentTimeValid(hour, minute, meridiem) ? 'invalid' : ''}`}
-                    id={`${uniqueId}-minute`}
-                    inputMode="numeric"
-                    max={59}
-                    maxLength={2}
-                    min={0}
-                    name={`${uniqueId}-minute`}
-                    onBlur={handleMinuteBlur}
-                    onChange={handleMinuteChange}
-                    onClick={() => { setShowMinuteDropdown(!showMinuteDropdown); setShowHourDropdown(false) }}
-                    onFocus={handleMinuteFocus}
-                    onKeyDown={handleMinuteKeyDown}
-                    pattern="[0-9]*"
-                    ref={minuteInputRef}
-                    step={1}
-                    tabIndex={0}
-                    type="number"
-                    value={minuteInputValue}
-                />
-                {showMinuteDropdown && (
-                  <div 
-                      className="time_dropdown"
-                      ref={minuteDropdownRef}
-                  >
-                    {generateMinuteOptions().map((m) => (
-                      <div
-                          className={`time_dropdown_option ${minute === m ? 'selected' : ''}`}
-                          key={m}
-                          onClick={() => handleMinuteOptionClick(m)}
-                      >
-                        {m.toString().padStart(2, '0')}
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </div>
-              {timeFormat === 'AMPM' && (
-                <div className="meridiem">
-                  <Caption
-                      className="time_input_label"
-                      color="lighter"
-                      dark={dark}
-                      size="sm"
-                      text="Period"
-                  />
-                  <div className="pb_form_group_kit">
-                    <SelectableCard
-                        checked={meridiem === 'AM'}
-                        className={!isAnyAMTimeValid() ? 'disabled_meridiem' : ''}
-                        dark={dark}
-                        disabled={!isAnyAMTimeValid()}
-                        inputId={`${uniqueId}-am`}
-                        multi={false}
-                        name={`${uniqueId}-meridiem`}
-                        onChange={() => handleMeridiemChange('AM')}
-                        text="AM"
-                        value="AM"
-                    />
-                    <SelectableCard
-                        checked={meridiem === 'PM'}
-                        className={!isAnyPMTimeValid() ? 'disabled_meridiem' : ''}
-                        dark={dark}
-                        disabled={!isAnyPMTimeValid()}
-                        inputId={`${uniqueId}-pm`}
-                        multi={false}
-                        name={`${uniqueId}-meridiem`}
-                        onChange={() => handleMeridiemChange('PM')}
-                        text="PM"
-                        value="PM"
-                    />
-                  </div>
-                </div>
-              )}
-              {/* Show validation error in dropdownwhen time is out of range */}
-              {hasSelectedTime && !isCurrentTimeValid(hour, minute, meridiem) && (
-                <div className="time_range_error">
-                  <Caption
-                      className="time_range_error_text"
-                      dark={dark}
-                      marginTop="sm"
-                      size="xs"
-                      text={getTimeRangeErrorMessage(minTime, maxTime, timeFormat)}
-                  />
-                </div>
-              )}
-              {showTimezone && (
-                <Caption
-                    color="lighter"
-                    dark={dark}
-                    lineHeight="tight"
-                    marginTop="sm"
-                    size="xs"
-                    text={getTimezoneText()}
-                />
-              )}
-            </div>
-          </div>
+
+        {showDropdown && !disabled && !portaledMenuHost && (
+          <div className={timePickerContainerClass}>{timeSelectionInner}</div>
         )}
       </div>
     </div>
+
+    {showDropdown && portaledMenuHost && !disabled
+      ? createPortal(
+          <div
+              className={portaledPanelRootClass}
+              data-pb-time-picker-id={uniqueId}
+              onMouseDown={(e) => {
+                e.stopPropagation()
+              }}
+              ref={timePickerPanelPortalRef}
+          >
+            <div className={timePickerContainerClass}>{timeSelectionInner}</div>
+          </div>,
+          portaledMenuHost,
+        )
+      : null}
+    </>
   )
 }
 
