@@ -3,13 +3,23 @@
   "propTargets": {},
   "defaults": {
     "align": "left",
-    "statLabel": "Monthly recurring revenue"
+    "statChange": {
+      "change": "decrease",
+      "value": "26.1"
+    },
+    "statLabel": "Decreased Value",
+    "statValue": {
+      "value": "1,428",
+      "unit": "appts"
+    }
   },
   "groups": [
     {
-      "name": "Content",
+      "name": "Value configs",
       "props": [
-        "statLabel"
+        "statLabel",
+        "statValue",
+        "statChange"
       ]
     },
     {
@@ -21,24 +31,54 @@
   ],
   "presets": [
     {
-      "name": "KPI label",
+      "name": "Default",
       "props": {
         "statLabel": "Monthly recurring revenue",
-        "align": "left"
+        "statValue": {
+          "value": "1,428",
+          "unit": "appts"
+        },
+        "statChange": {
+          "change": "decrease",
+          "value": "26.1"
+        }
       }
     },
     {
-      "name": "Centered header",
+      "name": "Increased Value",
       "props": {
         "statLabel": "Active accounts",
-        "align": "center"
+        "statValue": {
+          "value": "938",
+          "unit": "homes"
+        },
+        "statChange": {
+          "change": "increase",
+          "value": "56.1"
+        }
       }
     },
     {
-      "name": "Right-aligned block",
+      "name": "Neutral Value",
       "props": {
-        "statLabel": "Conversion rate",
-        "align": "right"
+        "statLabel": "Neutral Value",
+        "statValue": {
+          "value": "261",
+          "unit": "windows"
+        },
+        "statChange": {
+          "value": "86"
+        }
+      }
+    },
+    {
+      "name": "Pitch Rate",
+      "props": {
+        "statLabel": "Pitch Rate",
+        "statValue": {
+          "value": "90.9",
+          "unit": "%"
+        }
       }
     }
   ],
