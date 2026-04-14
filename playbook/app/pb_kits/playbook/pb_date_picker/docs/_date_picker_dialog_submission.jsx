@@ -3,7 +3,7 @@ import { Button, Dialog, DatePicker } from "playbook-ui";
 
 const DatePickerDialogSubmission = () => {
     const [isOpen, setIsOpen] = useState(false);
-    const [payoffDateFixed, setPayoffDateFixed] = useState("");
+    const [dateFixed, setDateFixed] = useState("");
     const [pickerInstance, setPickerInstance] = useState(0);
 
     const close = () => setIsOpen(false);
@@ -13,7 +13,7 @@ const DatePickerDialogSubmission = () => {
     };
 
     const handleSubmit = () => {
-        if (!payoffDateFixed.trim()) return;
+        if (!dateFixed.trim()) return;
         close();
     };
 
@@ -31,14 +31,13 @@ const DatePickerDialogSubmission = () => {
             >
                 <Dialog.Body>
                     <DatePicker
-                        defaultDate={payoffDateFixed || undefined}
+                        defaultDate={dateFixed || undefined}
                         key={`fixed-${pickerInstance}`}
-                        label="Payoff Date (fixed)"
-                        marginBottom="none"
-                        maxDate="4/17/2026"
+                        label="Date (fixed)"
+                        maxDate="4/12/2026"
                         minDate="3/17/2026"
-                        onChange={(dateStr) => setPayoffDateFixed(dateStr || "")}
-                        pickerId={`payoffStatementDatePickerFixed-${pickerInstance}`}
+                        onChange={(dateStr) => setDateFixed(dateStr || "")}
+                        pickerId={`datePickerFixed-${pickerInstance}`}
                         staticPosition={false}
                     />
                 </Dialog.Body>
