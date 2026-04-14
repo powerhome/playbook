@@ -373,19 +373,38 @@ export const usePlaygroundState = ({
   const activeHints = useMemo(() => {
     const hints: Array<PlaygroundHint & { id: string }> = [];
     const hintConfig = playgroundConfig?.hints ?? {};
+    const presets = playgroundConfig?.presets ?? [];
 
     const hintCtx = {
       playgroundConfig,
       propDefinitions: allPropDefinitions,
     };
     Object.entries(hintConfig).forEach(([id, hint]) => {
-      if (checkHintCondition(hint.when, propValues, hintCtx)) {
+      if (hint.presetName != null) {
+        const idx = presets.findIndex((p) => p.name === hint.presetName);
+        if (idx < 0 || activePresetIndex !== idx) {
+          return;
+        }
+      } else if (hint.presetIndex != null) {
+        if (activePresetIndex !== hint.presetIndex) {
+          return;
+        }
+      }
+
+      if (checkHintCondition(hint.when ?? {}, propValues, hintCtx)) {
         hints.push({ ...hint, id });
       }
     });
 
     return hints;
-  }, [playgroundConfig?.hints, propValues, playgroundConfig, allPropDefinitions]);
+  }, [
+    playgroundConfig?.hints,
+    playgroundConfig?.presets,
+    propValues,
+    playgroundConfig,
+    allPropDefinitions,
+    activePresetIndex,
+  ]);
 
   const hasModifiedProps = useMemo(
     () =>

@@ -141,7 +141,6 @@ export const PlaygroundTab: React.FC<PlaygroundTabProps> = ({
         {hasDataPresets && (
           <DataPresetSelector
             activeKey={activeDataPresetKey}
-            defaultLabel="Default (nested)"
             presets={availableDataPresets}
             onPresetChange={handleDataPresetChange}
           />

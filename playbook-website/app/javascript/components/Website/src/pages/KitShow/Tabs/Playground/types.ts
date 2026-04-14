@@ -124,9 +124,14 @@ export interface PlaygroundPreset {
 }
 
 export interface PlaygroundHint {
-  when: Record<string, any>;
+  /** Prop-based conditions (effective values). Omit or use `{}` for no prop checks. */
+  when?: Record<string, any>;
   message: string;
   type?: "info" | "warning" | "error";
+  /** Show only when the feature preset at this index is active (0-based `presets` array). */
+  presetIndex?: number;
+  /** Show only when a preset with this `name` is active (stable if presets reorder). */
+  presetName?: string;
 }
 
 export interface StructureMode {
