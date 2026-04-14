@@ -159,6 +159,12 @@
       ],
       "default": false
     },
+    "styles": {
+      "type": "StylesConfig",
+      "platforms": [
+        "react"
+      ]
+    },
     "defaultOptions": {
       "platforms": [
         "rails"
