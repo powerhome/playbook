@@ -1,0 +1,1 @@
+Use this pattern when a DatePicker lives inside a Dialog and needs to submit a selected value before closing. A unique `key` and `pickerId` will force the datePicker to remount each time the dialog opens.  
