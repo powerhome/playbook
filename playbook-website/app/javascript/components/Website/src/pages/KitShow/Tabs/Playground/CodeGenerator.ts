@@ -3,20 +3,22 @@ import {
   PropDefinition,
   PlaygroundChildrenConfig,
 } from "./types";
+import { resolveSchemaDefault } from "./utils";
 
 /**
- * When playground `defaults` and `propValues[name].value` are the same reference (common after
- * mergeImplicitDefaultPropValues), strict equality would skip emitting even though the user enabled
- * the prop — the preview would miss it until the object was re-parsed. Only skip for primitives.
+ * Omit emitting a prop when it matches the **schema** default only. Playground `defaults` in
+ * `_playground.json` seed implicit UI state but are not necessarily the component’s runtime default
+ * (e.g. Contact has no default for `contactType`); skipping against playground defaults would drop
+ * required-looking props from the preview and break rendering.
  */
-function shouldSkipEmitWhenMatchesDefault(
-  defaults: Record<string, any>,
+function shouldSkipEmitWhenMatchesSchemaDefault(
+  propDefinitions: Record<string, PropDefinition>,
   name: string,
   propValue: PropValue
 ): boolean {
-  const d = defaults[name];
-  if (d === undefined) return false;
-  if (d !== propValue.value) return false;
+  const schemaDefault = resolveSchemaDefault(propDefinitions[name]);
+  if (schemaDefault === undefined) return false;
+  if (propValue.value !== schemaDefault) return false;
   const v = propValue.value;
   if (v !== null && typeof v === "object") return false;
   return true;
@@ -35,7 +37,6 @@ interface GenerateFromTemplateOptions {
   propValues: Record<string, PropValue>;
   propDefinitions: Record<string, PropDefinition>;
   propTargets?: Record<string, string>;
-  defaults?: Record<string, any>;
   children?: string;
   childrenConfig?: PlaygroundChildrenConfig;
   includeImport?: boolean;
@@ -319,7 +320,6 @@ export const generateFromTemplate = ({
   propValues,
   propDefinitions,
   propTargets = {},
-  defaults = {},
   children,
   childrenConfig,
   includeImport = true,
@@ -336,8 +336,8 @@ export const generateFromTemplate = ({
     // Skip required props - they're handled separately as variable definitions
     if (requiredProps[name] !== undefined) return;
     
-    // Skip if this prop's value matches the template default (primitives only; see shouldSkipEmitWhenMatchesDefault)
-    if (shouldSkipEmitWhenMatchesDefault(defaults, name, propValue)) return;
+    // Skip only when value matches kit schema default (not playground-only defaults)
+    if (shouldSkipEmitWhenMatchesSchemaDefault(propDefinitions, name, propValue)) return;
     
     const definition = propDefinitions[name] || { type: "any", platforms: ["react"] as const };
     
@@ -427,7 +427,6 @@ export const generateLiveFromTemplate = ({
   propValues,
   propDefinitions,
   propTargets = {},
-  defaults = {},
   children,
   childrenConfig,
   customImports = [],
@@ -438,7 +437,6 @@ export const generateLiveFromTemplate = ({
     propValues,
     propDefinitions,
     propTargets,
-    defaults,
     children,
     childrenConfig,
     includeImport: false,

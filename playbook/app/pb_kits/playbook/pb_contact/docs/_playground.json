@@ -9,7 +9,7 @@
   },
   "groups": [
     {
-      "name": "Content",
+      "name": "Contact Info",
       "props": [
         "contactType",
         "contactValue",
