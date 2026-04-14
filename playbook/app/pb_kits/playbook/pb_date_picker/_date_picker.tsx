@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useContext, useLayoutEffect } from 'react'
 import classnames from 'classnames'
 
 import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
@@ -6,6 +6,7 @@ import { deprecatedProps, globalProps, GlobalProps } from '../utilities/globalPr
 import { getAllIcons } from "../utilities/icons/allicons"
 import { camelToSnakeCase } from '../utilities/text'
 
+import { DialogContext } from '../pb_dialog/_dialog_context'
 import datePickerHelper from './date_picker_helper'
 import Icon from '../pb_icon/_icon'
 import Caption from '../pb_caption/_caption'
@@ -112,6 +113,8 @@ const DatePicker = (props: DatePickerProps): React.ReactElement => {
     syncEndWith,
   } = props
 
+  const dialogCtx = useContext(DialogContext)
+
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
   const htmlProps = buildHtmlProps(htmlOptions)
@@ -132,7 +135,7 @@ const DatePicker = (props: DatePickerProps): React.ReactElement => {
     return 'pointer'
   }
 
-  useEffect(() => {
+  const initDatePicker = () => {
     datePickerHelper({
       allowInput,
       customQuickPickDates,
@@ -165,8 +168,24 @@ const DatePicker = (props: DatePickerProps): React.ReactElement => {
       syncStartWith,
       syncEndWith,
       required: false,
+      dialogPortalTarget: dialogCtx?.selectMenuPortalTarget ?? null,
+      inline: inLine,
     }, scrollContainer)
-  }, initializeOnce ? [] : undefined)
+  }
+
+  // useLayoutEffect (not useEffect): dialog floating root + portal host must exist in the DOM
+  // before Flatpickr runs (matches TimePicker / dropdown portal timing).
+  // When initializeOnce is false, keep prior behavior: re-init after every render so props stay in sync.
+  // eslint-disable-next-line react-hooks/exhaustive-deps -- intentional every-render init when initializeOnce is false (legacy)
+  useLayoutEffect(() => {
+    if (initializeOnce) return
+    initDatePicker()
+  })
+
+  useLayoutEffect(() => {
+    if (!initializeOnce) return
+    initDatePicker()
+  }, [initializeOnce, dialogCtx?.selectMenuPortalTarget, pickerId])
 
   const filteredProps = {...props}
   if (filteredProps.marginBottom === undefined) {

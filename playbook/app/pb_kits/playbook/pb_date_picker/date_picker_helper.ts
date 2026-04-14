@@ -5,7 +5,11 @@ import monthSelectPlugin from 'flatpickr/dist/plugins/monthSelect'
 import weekSelect from "flatpickr/dist/plugins/weekSelect/weekSelect"
 import timeSelectPlugin from './plugins/timeSelect'
 import quickPickPlugin from './plugins/quickPick'
-import { getAllIcons } from '../utilities/icons/allicons';
+import { getAllIcons } from '../utilities/icons/allicons'
+import {
+  positionDropdownPortalToWrapper,
+  resolvePortaledKitHost,
+} from '../pb_dialog/_dialog_floating_portal'
 
 const angleDown = getAllIcons().angleDown.string
 
@@ -37,7 +41,9 @@ type DatePickerConfig = {
     controlsEndId?: string,
     syncStartWith?: string,
     syncEndWith?: string,
-} & Pick<BaseOptions, "allowInput" | "defaultDate" | "enableTime" | "maxDate" | "minDate" | "mode" | "plugins" | "position" | "positionElement" >
+  /** React Dialog floating root; omit in Rails (DOM resolution only). */
+  dialogPortalTarget?: HTMLElement | null,
+} & Pick<BaseOptions, "allowInput" | "defaultDate" | "enableTime" | "maxDate" | "minDate" | "mode" | "plugins" | "position" | "positionElement" | "inline" >
 
 const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HTMLElement) => {
   const noop = () => {
@@ -75,7 +81,42 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
     controlsEndId,
     syncStartWith,
     syncEndWith,
+    dialogPortalTarget,
+    inline = false,
   } = config
+
+  const inputElForPortal =
+    typeof document !== "undefined"
+      ? document.querySelector<HTMLElement>(`#${String(pickerId)}`)
+      : null
+  const kitRootForPortal = inputElForPortal?.closest(".pb_date_picker_kit") as HTMLElement | null
+  const portalHost =
+    !inline && inputElForPortal
+      ? resolvePortaledKitHost(kitRootForPortal, dialogPortalTarget ?? null)
+      : null
+
+  const existingInput = document.querySelector(`#${String(pickerId)}`) as
+    | (HTMLElement & { _flatpickr?: Instance })
+    | null
+  if (existingInput?._flatpickr) {
+    existingInput._flatpickr.destroy()
+  }
+
+  let portalAppendShell: HTMLElement | undefined
+  if (portalHost) {
+    portalAppendShell =
+      (portalHost.querySelector(
+        "[data-pb-date-picker-floating-shell]",
+      ) as HTMLElement | null) ?? undefined
+    if (!portalAppendShell) {
+      portalAppendShell = document.createElement("div")
+      portalAppendShell.className = "pb_date_picker_floating_shell pb_date_picker_kit"
+      portalAppendShell.setAttribute("data-pb-date-picker-floating-shell", "")
+      portalHost.appendChild(portalAppendShell)
+    }
+  }
+
+  const effectiveStatic = portalAppendShell ? false : staticPosition
 
   // ===========================================================
   // |                   Hook Definitions                      |
@@ -170,9 +211,11 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
     return disabledArray
   }
   const calendarResizer = () => {
-    const cal = document.querySelector(`#cal-${pickerId}.open`) as HTMLElement
+    const cal = document.querySelector(`#cal-${pickerId}.open`) as HTMLElement | null
+    if (!cal) return
     const parentInput = cal.parentElement
-    if (cal?.getBoundingClientRect().right > window.innerWidth) {
+    if (!parentInput || parentInput === document.body) return
+    if (cal.getBoundingClientRect().right > window.innerWidth) {
       parentInput.style.display = 'flex'
       parentInput.style.justifyContent = 'center'
     }
@@ -183,6 +226,11 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
   }
 
   const positionCalendarIfNeeded = (fp: Instance) => {
+    if (portalAppendShell) {
+      fp._positionCalendar()
+      return
+    }
+
     const cal = document.querySelector(`#cal-${pickerId}`) as HTMLElement
     if (!cal) return
 
@@ -192,7 +240,7 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
     const spaceAbove = inputRect.top
 
     if (spaceBelow < h + 10 && spaceAbove >= h + 10) {
-      if (staticPosition) {
+      if (effectiveStatic) {
         cal.style.top = 'auto'
         cal.style.bottom = 'calc(100% + 5px)'
       } else {
@@ -200,7 +248,7 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
         cal.style.top = `${Math.max(10, inputRect.top - h - 5)}px`
         cal.style.left = `${inputRect.left}px`
       }
-    } else if (staticPosition) {
+    } else if (effectiveStatic) {
       cal.style.top = ''
       cal.style.bottom = ''
     } else {
@@ -234,9 +282,10 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
   }
 
   // Attach / detach to / from scroll events
-  const initialPicker = document.querySelector<HTMLElement & { [x: string]: any }>(`#${pickerId}`)._flatpickr
   const scrollEvent = () => {
-    initialPicker._positionCalendar()
+    const fp = document.querySelector<HTMLElement & { _flatpickr?: Instance }>(`#${pickerId}`)
+      ?._flatpickr
+    fp?._positionCalendar()
   }
   function attachToScroll(scrollParent: string | HTMLElement) {
     document.querySelectorAll(scrollParent as string)[0]?.addEventListener("scroll", scrollEvent, { passive: true })
@@ -348,7 +397,27 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
     : setMaxDate
   
   // End of Default Date + Min/Max Date Initialization Helper Functions section ----/
-  
+
+  // Same viewport math as TimePicker/dropdown: flatpickr's default positionCalendar mixes
+  // page scroll with getBoundingClientRect and breaks when appendTo is inside a dialog shell.
+  const portalPositionFn: ((self: Instance) => void) | undefined = portalAppendShell
+    ? (self: Instance) => {
+        const cal = self.calendarContainer
+        if (!cal) return
+        const wrap =
+          (self.input.closest(".date_picker_input_wrapper") as HTMLElement | null) ??
+          (self.input.closest(".pb_date_picker_kit") as HTMLElement | null)
+        const host = portalAppendShell!.parentElement as HTMLElement | null
+        if (!wrap || !host) return
+        positionDropdownPortalToWrapper({
+          panel: cal,
+          wrapperViewportRect: wrap.getBoundingClientRect(),
+          positionHost: host,
+          matchWrapperWidth: false,
+        })
+      }
+    : undefined
+
   flatpickr(`#${pickerId}`, {
     allowInput,
     closeOnSelect,
@@ -395,7 +464,7 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
         positionCalendarIfNeeded(fp)
       }
       window.addEventListener('resize', resizeRepositionHandlerRef)
-      if (!staticPosition && scrollContainer) attachToScroll(scrollContainer)
+      if (!effectiveStatic && scrollContainer) attachToScroll(scrollContainer)
       positionCalendarIfNeeded(fp)
     }],
     onClose: [(selectedDates, dateStr, fp) => {
@@ -403,7 +472,7 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
         window.removeEventListener('resize', resizeRepositionHandlerRef)
         resizeRepositionHandlerRef = null
       }
-      if (!staticPosition && scrollContainer) detachFromScroll(scrollContainer as HTMLElement)
+      if (!effectiveStatic && scrollContainer) detachFromScroll(scrollContainer as HTMLElement)
       
       // If defaultDate was out of range and no date was selected, preserve the default date
       if (hasOutOfRangeDefault && (!selectedDates || selectedDates.length === 0)) {
@@ -433,10 +502,11 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
       yearChangeHook(fp)
     }],
     plugins: setPlugins(thisRangesEndToday, customQuickPickDates),
-    position,
+    position: portalPositionFn ?? position,
     positionElement: getPositionElement(positionElement),
     prevArrow: '<i class="far fa-angle-left"></i>',
-    static: staticPosition,
+    static: effectiveStatic,
+    ...(portalAppendShell ? { appendTo: portalAppendShell } : {}),
   })
 
   // Assign dynamically sourced flatpickr instance to variable

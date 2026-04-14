@@ -54,6 +54,13 @@
 }
 
 
+// Calendar portaled to body / floating root: repeat kit class so nested selectors still apply.
+.pb_date_picker_floating_shell {
+  margin: 0;
+  padding: 0;
+  pointer-events: auto;
+}
+
 .pb_popover_reference_wrapper {
   display: unset !important
 }
