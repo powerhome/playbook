@@ -81,7 +81,7 @@
       ]
     },
     "expandByDepth": {
-      "type": "GenericObject",
+      "type": "array",
       "platforms": [
         "react"
       ]

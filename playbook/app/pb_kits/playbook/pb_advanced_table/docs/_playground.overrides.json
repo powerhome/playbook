@@ -101,7 +101,21 @@
     "tableProps": {
       "container": false
     },
-    "rowStyling": [{ "rowId": "1", "backgroundColor": "#0056CF", "fontColor": "#FFFFFF", "expandButtonColor": "#FFFFFF" }]
+    "rowStyling": [{ "rowId": "1", "backgroundColor": "#0056CF", "fontColor": "#FFFFFF", "expandButtonColor": "#FFFFFF" }],
+    "expandByDepth": [
+      {
+        "depth": 0,
+        "label": "Year"
+      },
+      {
+        "depth": 1,
+        "label": "Quarter"
+      },
+      {
+        "depth": 2,
+        "label": "Month"
+      }
+    ]
   },
   "groups": [
     {
@@ -181,39 +195,70 @@
   "presets": [
     {
       "name": "Default",
-      "props": {}
+      "props": {
+        "expandByDepth": [
+          { "depth": 0, "label": "Year" },
+          { "depth": 1, "label": "Quarter" },
+          { "depth": 2, "label": "Month" }
+        ]
+      }
     },
     {
       "name": "With Sorting",
       "props": {
-        "enableSorting": true
+        "enableSorting": true,
+        "expandByDepth": [
+          { "depth": 0, "label": "Year" },
+          { "depth": 1, "label": "Quarter" },
+          { "depth": 2, "label": "Month" }
+        ]
       }
     },
     {
       "name": "With Pagination",
       "props": {
-        "pagination": true
+        "pagination": true,
+        "expandByDepth": [
+          { "depth": 0, "label": "Year" },
+          { "depth": 1, "label": "Quarter" },
+          { "depth": 2, "label": "Month" }
+        ]
       }
     },
     {
       "name": "Selectable Rows",
       "props": {
         "selectableRows": true,
-        "showActionsBar": true
+        "showActionsBar": true,
+        "expandByDepth": [
+          { "depth": 0, "label": "Year" },
+          { "depth": 1, "label": "Quarter" },
+          { "depth": 2, "label": "Month" }
+        ]
       }
     },
     {
       "name": "Subrow Headers",
       "structureMode": "explicit",
       "props": {
-        "subRowHeaders": ["Quarter", "Month", "Day"]
+        "subRowHeaders": ["Quarter", "Month", "Day"],
+        "expandByDepth": [
+          { "depth": 0, "label": "Year" },
+          { "depth": 1, "label": "Quarter" },
+          { "depth": 2, "label": "Month" }
+        ]
       }
     },
     {
       "name": "Loading State",
       "props": {
         "loading": true,
-        "initialLoadingRowsCount": 5
+        "initialLoadingRowsCount": 5,
+        "expandByDepth": [
+          { "depth": 0, "label": "Year" },
+          { "depth": 1, "label": "Quarter" },
+          { "depth": 2, "label": "Month" }
+        ]
       }
     },
     {
@@ -221,7 +266,12 @@
       "structureMode": "explicit",
       "dataPreset": "column_sort",
       "props": {
-        "enableSorting": true
+        "enableSorting": true,
+        "expandByDepth": [
+          { "depth": 0, "label": "Year" },
+          { "depth": 1, "label": "Quarter" },
+          { "depth": 2, "label": "Month" }
+        ]
       }
     }
   ],
@@ -313,7 +363,7 @@
       "when": {
         "enableSorting": true
       },
-      "message": "Header sorting UI is only applied in \"Subcomponent Structure\" mode (explicit Header and Body).",
+      "message": "Header sorting UI is only applied in \"Subcomponent Structure\" mode (explicit Header and Body). For sorting by column, pass columnDefinitions with enableSort: true to the columnDefinitions array. Click 'sorting by column' to see an example.",
       "type": "info"
     },
     "pagination_info": {
@@ -335,6 +385,29 @@
         "loading": true
       },
       "message": "Use state to control the loading state.",
+      "type": "info"
+    },
+    "column_sort_info": {
+      "when": {
+        "columnDefinitions": {
+          "enableSort": true
+        }
+      },
+      "message": "For sorting by column, pass columnDefinitions with enableSort: true to the columnDefinitions array. Click 'sorting by column' to see an example.",
+      "type": "info"
+    },
+    "custom_sort_info": {
+      "when": {
+        "customSort": true
+      },
+      "message": "Use customSort to implement custom sorting logic. The customSort prop must be used in conjunction with the subRowHeaders prop. The customSort DOES NOT handle the sort logic, this must be handled on the frontend using the callback provided.",
+      "type": "info"
+    },
+    "sort_parent_only_info": {
+      "when": {
+        "sortParentOnly": true
+      },
+      "message": "When sortParentOnly is true, the sort will only be applied to the parent row. The sort will not be applied to the child rows.",
       "type": "info"
     }
   }

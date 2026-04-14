@@ -42,7 +42,7 @@ type AdvancedTableProps = {
   enableToggleExpansion?: "all" | "header" | "none"
   enableSortingRemoval?: boolean
   expandedControl?: GenericObject
-  expandByDepth?: { [key: string]: string | number }
+  expandByDepth?: GenericObject[]
   onExpandByDepthClick?: (arg: number, arg1: any) => void
   htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string
