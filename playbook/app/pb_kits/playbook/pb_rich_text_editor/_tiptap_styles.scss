@@ -88,11 +88,15 @@
     border-radius: $border_rad_heaviest $border_rad_heaviest 0 0;
     border: 1px solid $input_border_default;
     overflow-x: auto;
+    // Single horizontal row + scroll in narrow modals/sidebars (wrap used to stack controls vertically).
     &_block {
-      display: flex;
-      flex-wrap: wrap;
       align-items: center;
+      display: flex;
+      flex-wrap: nowrap;
       gap: $space_xs;
+      min-width: 0;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
     }
 
     // Vertical section separators use ::before/::after with height: 100%. With
@@ -114,6 +118,7 @@
       letter-spacing: normal;
       line-height: 1;
       min-height: unset;
+      max-width: 100%;
       min-width: $space_xl * 5;
       padding: ($space_xs - 1) $space_xs;
       width: auto;
@@ -170,10 +175,10 @@
         box-sizing: border-box;
         column-gap: 0;
         display: flex;
-        flex-wrap: wrap;
+        flex-wrap: nowrap;
         justify-content: flex-start;
         padding: $space_xxs $space_sm;
-        row-gap: $space_xs;
+        row-gap: 0;
         width: 100%;
       }
 
@@ -181,9 +186,11 @@
         align-items: center;
         display: flex;
         flex: 1 1 auto;
-        flex-wrap: wrap;
+        flex-wrap: nowrap;
         gap: $space_xs;
         min-width: 0;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
       }
 
       .rte-toolbar-right {
@@ -206,9 +213,10 @@
     background: $white;
     border: 1px solid $input_border_default;
     border-radius: $border_rad_heaviest;
+    box-sizing: border-box;
     height: 100%;
-    padding: 1rem 1.5rem 1.5rem 1.5rem;
     line-height: $lh_loose;
+    padding: 1.25rem 1.5rem 1.5rem 1.5rem;
     @include transition_default;
     :first-child {
       margin-top: 0;
