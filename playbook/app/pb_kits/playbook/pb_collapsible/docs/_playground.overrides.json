@@ -52,11 +52,6 @@
       "name": "Custom icon",
       "props": { "icon": "plus", "iconColor": "link" },
       "children": "Custom icon and color."
-    },
-    {
-      "name": "FontAwesome array",
-      "props": { "icon": ["far", "fa-star"], "iconColor": "warning" },
-      "children": "Using FontAwesome array syntax for icon."
     }
   ],
   "conditionals": {},
