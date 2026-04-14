@@ -145,8 +145,8 @@
       line-height: 1;
       min-height: unset;
       max-width: 100%;
-      // Cap min-width so a narrow modal toolbar can scroll internally instead of growing the dialog.
-      min-width: min(100%, #{$space_xl * 5});
+      // CSS min() — must be emitted as a string: SassC’s built-in min() only accepts compatible numbers.
+      min-width: unquote("min(100%, #{$space_xl * 5})");
       padding: ($space_xs - 1) $space_xs;
       width: auto;
 
