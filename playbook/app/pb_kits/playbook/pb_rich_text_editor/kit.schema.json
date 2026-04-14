@@ -109,8 +109,10 @@
     "simple": {
       "type": "boolean",
       "platforms": [
-        "react"
-      ]
+        "react",
+        "rails"
+      ],
+      "default": false
     },
     "sticky": {
       "type": "boolean",

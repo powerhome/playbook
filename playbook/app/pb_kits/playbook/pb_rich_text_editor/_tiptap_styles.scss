@@ -196,6 +196,12 @@
     }
 
     // Rails TipTap toolbar: mirror React Toolbar.tsx — <Flex paddingX="sm" paddingY="xxs" justify="between">.
+    &.rte-rails-toolbar-layout--simple {
+      .rte-toolbar-left {
+        overflow-x: visible;
+      }
+    }
+
     &.rte-rails-toolbar-layout {
       max-width: 100%;
       min-width: 0;

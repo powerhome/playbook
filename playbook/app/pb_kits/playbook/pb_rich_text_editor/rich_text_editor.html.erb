@@ -68,7 +68,38 @@
     </label>
   <% end %>
   <input type="hidden" name="<%= object.input_name %>" id="<%= object.input_id %>" value="" />
-  <div class="pb_rich_text_editor_advanced_container toolbar-active">
+  <div class="pb_rich_text_editor_advanced_container toolbar-active<%= " pb_rich_text_editor_rte--simple" if object.simple %>">
+    <% if object.simple %>
+    <%# Compact toolbar: Bold/Italic + Undo/Redo — no block-style Popover (avoids dialog positioning issues). %>
+    <div class="pb_background_kit pb_background_color_white toolbar rte-rails-toolbar-layout rte-rails-toolbar-layout--simple" id="<%= object.toolbar_id %>">
+      <div class="rte-rails-toolbar-row">
+        <div class="toolbar_block rte-toolbar-left">
+          <button type="button" class="toolbar_button" data-action="bold" title="Bold" role="button" tabindex="0">
+            <%= pb_rails("flex", props: { align: "center", justify: "center", classname: "toolbar_button_icon" }) do %>
+              <%= pb_rails("icon", props: { icon: "bold", size: "lg" }) %>
+            <% end %>
+          </button>
+          <button type="button" class="toolbar_button" data-action="italic" title="Italic" role="button" tabindex="0">
+            <%= pb_rails("flex", props: { align: "center", justify: "center", classname: "toolbar_button_icon" }) do %>
+              <%= pb_rails("icon", props: { icon: "italic", size: "lg" }) %>
+            <% end %>
+          </button>
+        </div>
+        <div class="toolbar_block rte-toolbar-right">
+          <button type="button" class="toolbar_button" data-action="undo" title="Undo" role="button" tabindex="0">
+            <%= pb_rails("flex", props: { align: "center", justify: "center", classname: "toolbar_button_icon" }) do %>
+              <%= pb_rails("icon", props: { icon: "undo", size: "lg" }) %>
+            <% end %>
+          </button>
+          <button type="button" class="toolbar_button" data-action="redo" title="Redo" role="button" tabindex="0">
+            <%= pb_rails("flex", props: { align: "center", justify: "center", classname: "toolbar_button_icon" }) do %>
+              <%= pb_rails("icon", props: { icon: "redo", size: "lg" }) %>
+            <% end %>
+          </button>
+        </div>
+      </div>
+    </div>
+    <% else %>
     <% block_style_options = [
       { value: "paragraph", text: "Paragraph", icon: "paragraph" },
       { value: "heading-1", text: "Heading 1", icon: "h1" },
@@ -174,6 +205,7 @@
         </span>
       <% end %>
     </div>
+    <% end %>
     <div class="rte-editor-wrap">
       <div id="<%= object.editor_node_id %>"></div>
     </div>
@@ -193,8 +225,9 @@
   const hiddenInput = document.getElementById(inputId);
   const editorNode = document.getElementById("<%= object.editor_node_id %>");
   const toolbar = document.getElementById("<%= object.toolbar_id %>");
+  const rteSimple = <%= object.simple ? "true" : "false" %> === "true";
   const blockTooltipId = "<%= object.rte_block_style_tooltip_id %>";
-  const iconTemplatesRoot = document.getElementById("<%= object.container_id %>-block-icon-templates");
+  const iconTemplatesRoot = rteSimple ? null : document.getElementById("<%= object.container_id %>-block-icon-templates");
   if (!editorNode || !hiddenInput || !toolbar) return;
 
   function syncToHiddenInput(editor) {
@@ -239,6 +272,7 @@
   }
 
   function syncBlockTrigger() {
+    if (rteSimple) return;
     const current = getCurrentBlockValue();
     const triggerRoot = toolbar.querySelector("[data-rte-block-trigger]");
     let tpl = iconTemplatesRoot && [...iconTemplatesRoot.children].find(
@@ -276,18 +310,20 @@
     else if (value === "blockquote") chain.toggleBlockquote().run();
   }
 
-  const blockStyleTooltip = document.getElementById(blockTooltipId);
-  if (blockStyleTooltip) {
-    blockStyleTooltip.addEventListener("click", (e) => {
-      const a = e.target.closest("a[href^='#']");
-      if (!a || !blockStyleTooltip.contains(a)) return;
-      e.preventDefault();
-      const href = a.getAttribute("href") || "";
-      const v = href.startsWith("#") ? href.slice(1) : "";
-      if (!v) return;
-      applyBlockType(v);
-      updateActiveStates();
-    });
+  if (!rteSimple) {
+    const blockStyleTooltip = document.getElementById(blockTooltipId);
+    if (blockStyleTooltip) {
+      blockStyleTooltip.addEventListener("click", (e) => {
+        const a = e.target.closest("a[href^='#']");
+        if (!a || !blockStyleTooltip.contains(a)) return;
+        e.preventDefault();
+        const href = a.getAttribute("href") || "";
+        const v = href.startsWith("#") ? href.slice(1) : "";
+        if (!v) return;
+        applyBlockType(v);
+        updateActiveStates();
+      });
+    }
   }
 
   function updateActiveStates() {
