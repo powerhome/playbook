@@ -6,7 +6,11 @@ const DatePickerDialogSubmission = () => {
     const [dateFixed, setDateFixed] = useState("");
     const [pickerInstance, setPickerInstance] = useState(0);
 
-    const close = () => setIsOpen(false);
+    const close = (clearDate = false) => {
+        if (clearDate) setDateFixed("");
+        setIsOpen(false);
+    };
+
     const open = () => {
         setPickerInstance((current) => current + 1);
         setIsOpen(true);
@@ -24,7 +28,7 @@ const DatePickerDialogSubmission = () => {
                 text="Open Dialog" 
             />
             <Dialog
-                onClose={close}
+                onClose={() => close(true)}
                 opened={isOpen}
                 size="md"
                 title="Date Picker: Dialog Submission Example"
@@ -33,7 +37,7 @@ const DatePickerDialogSubmission = () => {
                     <DatePicker
                         defaultDate={dateFixed || undefined}
                         key={`fixed-${pickerInstance}`}
-                        label="Date (fixed)"
+                        label="Date"
                         maxDate="4/12/2026"
                         minDate="3/17/2026"
                         onChange={(dateStr) => setDateFixed(dateStr || "")}
@@ -47,7 +51,7 @@ const DatePickerDialogSubmission = () => {
                         text="Submit"
                     />
                     <Button 
-                        onClick={close} 
+                        onClick={() => close(true)} 
                         text="Cancel" 
                         variant="link" 
                     />
