@@ -443,17 +443,30 @@ export const generateLiveFromTemplate = ({
     customImports,
     wrapper,
   });
-  
-  // Wrap in render() for react-live
-  // Check if it's a function component or direct JSX
-  if (code.includes("const ") || code.includes("function ")) {
-    // It's a component definition, need to render it
-    const componentMatch = code.match(/(?:const|function)\s+(\w+)/);
-    if (componentMatch) {
-      return `${code}\nrender(<${componentMatch[1]} />)`;
+
+  let body = code.trimEnd();
+
+  // Wrapper strings sometimes end with <MyComponent /> for display/copy snippets; react-live
+  // needs a single render(<MyComponent />). Strip the trailing tag so we do not duplicate.
+  const trailingInvocation = /\n<([A-Za-z_][\w.]*)\s*\/>\s*$/;
+  const trailing = body.match(trailingInvocation);
+  if (trailing) {
+    body = body.slice(0, -trailing[0].length).trimEnd();
+    return `${body}\nrender(<${trailing[1]} />)`;
+  }
+
+  // Wrap in render() for react-live (noInline). Prefer the last `const Name = (` / `function Name(`
+  // so requiredProps `const data = [...]` at the top does not steal the render target.
+  if (body.includes("const ") || body.includes("function ")) {
+    const arrowNames = [...body.matchAll(/\bconst\s+(\w+)\s*=\s*\(/g)].map((m) => m[1]);
+    const fnNames = [...body.matchAll(/\bfunction\s+(\w+)\s*\(/g)].map((m) => m[1]);
+    const componentName =
+      (arrowNames.length ? arrowNames[arrowNames.length - 1] : null) ??
+      (fnNames.length ? fnNames[fnNames.length - 1] : null);
+    if (componentName) {
+      return `${body}\nrender(<${componentName} />)`;
     }
   }
-  
-  // Direct JSX, just wrap in render
-  return `render(${code.trim()})`;
+
+  return `render(${body.trim()})`;
 };
