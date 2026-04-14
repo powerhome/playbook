@@ -38,8 +38,6 @@ const DatePickerDialogSubmission = () => {
                         defaultDate={dateFixed || undefined}
                         key={`fixed-${pickerInstance}`}
                         label="Date"
-                        maxDate="4/12/2026"
-                        minDate="3/17/2026"
                         onChange={(dateStr) => setDateFixed(dateStr || "")}
                         pickerId={`datePickerFixed-${pickerInstance}`}
                         staticPosition={false}
