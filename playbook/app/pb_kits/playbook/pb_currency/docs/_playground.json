@@ -11,12 +11,12 @@
     "symbol": "$",
     "variant": "default",
     "unstyled": false,
-    "commaSeparator": true,
-    "amount": 2000
+    "commaSeparator": false,
+    "amount": "2000"
   },
   "groups": [
     {
-      "name": "Content",
+      "name": "Currency configs",
       "props": [
         "amount",
         "label",
@@ -41,38 +41,31 @@
   ],
   "presets": [
     {
-      "name": "USD (comma)",
+      "name": "Default",
       "props": {
-        "amount": 2000,
+        "amount": "2000"
+      }
+    },
+    {
+      "name": "USD (comma separator)",
+      "props": {
+        "amount": "2000",
         "commaSeparator": true,
         "label": "Balance",
         "symbol": "$"
       }
     },
     {
-      "name": "EUR compact",
+      "name": "bold variant",
       "props": {
-        "amount": 1428.5,
-        "symbol": "€",
-        "label": "ARR",
-        "size": "lg",
-        "variant": "bold"
-      }
-    },
-    {
-      "name": "GBP light",
-      "props": {
-        "amount": "2,000",
-        "symbol": "£",
-        "label": "MRR",
-        "variant": "light",
-        "commaSeparator": false
+        "amount": "1428.5",
+        "label": "ARR"
       }
     },
     {
       "name": "Abbreviated",
       "props": {
-        "amount": 1500000,
+        "amount": "1500000",
         "abbreviate": true,
         "label": "Volume",
         "symbol": "$"
@@ -81,7 +74,7 @@
     {
       "name": "Matching decimals",
       "props": {
-        "amount": 99.9,
+        "amount": "99.9999",
         "decimals": "matching",
         "symbol": "$",
         "label": "Per seat"
@@ -90,7 +83,7 @@
     {
       "name": "Right aligned",
       "props": {
-        "amount": 1428,
+        "amount": "1428",
         "align": "right",
         "label": "Total",
         "symbol": "$"
@@ -104,6 +97,20 @@
         "unstyled": true
       },
       "message": "Unstyled mode uses plain divs for layout—useful when embedding in tables or custom typography.",
+      "type": "info"
+    },
+    "matching_decimals_info": {
+      "when": {
+        "decimals": "matching"
+      },
+      "message": "Matching decimals will show the number of decimals that match the amount. This is useful when you want to show the exact number of decimals that are in the amount.",
+      "type": "info"
+    },
+    "abbreviate_info": {
+      "when": {
+        "abbreviate": true
+      },
+      "message": "Abbreviate will show the amount in a compact format. This is useful when you want to show the amount in a shorter format.",
       "type": "info"
     }
   }
