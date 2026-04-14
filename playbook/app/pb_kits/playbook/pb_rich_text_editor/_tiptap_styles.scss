@@ -8,7 +8,21 @@
 @import "../tokens/transition";
 @import "previewer_mixin";
 
+// Rails TipTap root: flex/grid children default to min-width: auto, so the toolbar’s
+// intrinsic width can force horizontal page/dialog scroll. Pin the kit to the parent width.
+[data-pb-rte-tiptap="true"] {
+  box-sizing: border-box;
+  display: block;
+  max-width: 100%;
+  min-width: 0;
+  width: 100%;
+}
+
 .pb_rich_text_editor_kit {
+  box-sizing: border-box;
+  max-width: 100%;
+  min-width: 0;
+
     &.inline {
         .toolbar {
           opacity: 0;
@@ -84,6 +98,18 @@
     top: 0;
     z-index: 10;
   }
+
+  .rte-editor-wrap {
+    box-sizing: border-box;
+    max-width: 100%;
+    min-width: 0;
+  }
+
+  .pb_rich_text_editor_advanced_container {
+    max-width: 100%;
+    min-width: 0;
+  }
+
   .toolbar {
     border-radius: $border_rad_heaviest $border_rad_heaviest 0 0;
     border: 1px solid $input_border_default;
@@ -119,7 +145,8 @@
       line-height: 1;
       min-height: unset;
       max-width: 100%;
-      min-width: $space_xl * 5;
+      // Cap min-width so a narrow modal toolbar can scroll internally instead of growing the dialog.
+      min-width: min(100%, #{$space_xl * 5});
       padding: ($space_xs - 1) $space_xs;
       width: auto;
 
@@ -170,6 +197,9 @@
 
     // Rails TipTap toolbar: mirror React Toolbar.tsx — <Flex paddingX="sm" paddingY="xxs" justify="between">.
     &.rte-rails-toolbar-layout {
+      max-width: 100%;
+      min-width: 0;
+
       .rte-rails-toolbar-row {
         align-items: center;
         box-sizing: border-box;
@@ -177,6 +207,7 @@
         display: flex;
         flex-wrap: nowrap;
         justify-content: flex-start;
+        min-width: 0;
         padding: $space_xxs $space_sm;
         row-gap: 0;
         width: 100%;
@@ -216,7 +247,9 @@
     box-sizing: border-box;
     height: 100%;
     line-height: $lh_loose;
+    overflow-wrap: anywhere;
     padding: 1.25rem 1.5rem 1.5rem 1.5rem;
+    word-break: break-word;
     @include transition_default;
     :first-child {
       margin-top: 0;
