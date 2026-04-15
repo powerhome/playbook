@@ -23,37 +23,38 @@
   max-width: 100%;
   min-width: 0;
 
-    &.inline {
-        .toolbar {
-          opacity: 0;
-          transition: all 0.3s ease-in-out 0s;
-        }
-    
-        &:focus-within .toolbar {
-          opacity: 100;
-        }
-    
-        .ProseMirror {
-          border: 1px solid transparent;
-          transition: all 0.3s ease-in-out 0s;
-        }
-    
-        &:focus-within .ProseMirror {
-          border: 1px solid $input_border_default;
-          border-top: none;
-        }
-    
-        &:hover {
-          .toolbar {
-            opacity: 100;
-          }
-    
-          .ProseMirror {
-            border: 1px solid $input_border_default;
-            border-top: none;
-          }
-        }
+  &.inline {
+    .toolbar {
+      opacity: 0;
+      transition: all 0.3s ease-in-out 0s;
+    }
+
+    &:focus-within .toolbar {
+      opacity: 100;
+    }
+
+    .ProseMirror {
+      border: 1px solid transparent;
+      transition: all 0.3s ease-in-out 0s;
+    }
+
+    &:focus-within .ProseMirror {
+      border: 1px solid $input_border_default;
+      border-top: none;
+    }
+
+    &:hover {
+      .toolbar {
+        opacity: 100;
       }
+
+      .ProseMirror {
+        border: 1px solid $input_border_default;
+        border-top: none;
+      }
+    }
+  }
+
   .toolbar_button {
     display: flex;
     align-items: center;
@@ -125,10 +126,7 @@
       -webkit-overflow-scrolling: touch;
     }
 
-    // Toolbar row: avoid nested horizontal scroll on the main control cluster + history pinned with
-    // margin/space-between — that traps scroll in the left column. One scroll on .toolbar; history in flow.
-    // React: pb_flex_kit justify between + .toolbar_block overflow. Rails: .rte-toolbar-left overflow +
-    // .rte-toolbar-right margin-left auto.
+    // React: keep one horizontal scroll on .toolbar (avoid nested scroll + trailing history cluster).
     &:not(.rte-rails-toolbar-layout) {
       > .pb_flex_kit.pb_flex_kit_justify_content_between {
         box-sizing: border-box;
@@ -174,7 +172,6 @@
       }
     }
 
-    // Rails TipTap toolbar: same single-row scroll as React (see .toolbar_block / pb_flex rules above).
     &.rte-rails-toolbar-layout {
       max-width: 100%;
       min-width: 0;
@@ -188,7 +185,6 @@
         justify-content: flex-start;
         min-width: 100%;
         padding: $space_xxs $space_sm;
-        row-gap: 0;
         width: max-content;
       }
 
@@ -200,16 +196,13 @@
         gap: $space_xs;
         min-width: 0;
         overflow-x: visible;
-        -webkit-overflow-scrolling: auto;
       }
 
       .rte-toolbar-right {
         align-items: center;
         display: flex;
         flex: 0 0 auto;
-        flex-shrink: 0;
         gap: $space_xs;
-        margin-left: 0;
       }
 
       // Align dropdown trigger with icon row (React wraps Popover + SectionSeparator in one flex line).
