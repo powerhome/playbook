@@ -10,7 +10,3 @@ The Rails rich text editor is a TipTap surface with no React. The UI (toolbar, b
 
 - Same core: both use TipTap v2 on top of ProseMirror; styling lives in Playbook SCSS (`_tiptap_styles.scss`) so the editor chrome lines up between platforms.
 - Different shell: Rails uses ERB + Playbook Rails components + inline module script. React uses `RichTextEditor` / `_tiptap_editor.tsx` and TipTap wired through the bundled Playbook React package—see Advanced Default for that stack and when you need TipTap installed in your JavaScript bundle.
-
-### Simple toolbar (`simple: true`)
-
-**Bold**, **Italic**, **Undo**, and **Redo** only (no block dropdown / Popover). See the **Rails (TipTap — Simple toolbar)** example.
