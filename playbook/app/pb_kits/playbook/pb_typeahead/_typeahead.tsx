@@ -1,6 +1,6 @@
 import React, {useState, useEffect, useLayoutEffect, useMemo, forwardRef, useRef, useContext} from "react"
 import Select, {mergeStyles} from "react-select"
-import type {StylesConfig} from "react-select"
+import type {CSSObjectWithLabel} from "react-select/dist/declarations/src/types"
 import AsyncSelect from "react-select/async"
 import CreateableSelect from "react-select/creatable"
 import AsyncCreateableSelect from "react-select/async-creatable"
@@ -30,13 +30,15 @@ import {
 } from "../pb_dialog/_dialog_floating_portal"
 import {GenericObject, Noop} from "../types"
 
+type TypeaheadStylesConfig = Parameters<typeof mergeStyles>[0]
+
 /** Stack above filter popover ($z_9) when menu is portaled to `document.body`. */
-const typeaheadBodyPortalZIndexStyles: StylesConfig = {
-  menuPortal: (base) => ({
+const typeaheadBodyPortalZIndexStyles: TypeaheadStylesConfig = {
+  menuPortal: (base: CSSObjectWithLabel) => ({
     ...base,
     zIndex: Number(PB_FLOATING_UI_Z_INDEX),
   }),
-  menu: (base) => ({
+  menu: (base: CSSObjectWithLabel) => ({
     ...base,
     zIndex: Number(PB_FLOATING_UI_Z_INDEX),
   }),
@@ -101,7 +103,7 @@ type TypeaheadProps = {
   clearOnContextChange?: boolean
   preserveSearchInput?: boolean
   /** Passed through to react-select; merged when menu is portaled to `document.body` (e.g. filter popover). */
-  styles?: StylesConfig
+  styles?: TypeaheadStylesConfig
 } & GlobalProps
 
 export type SelectValueType = {

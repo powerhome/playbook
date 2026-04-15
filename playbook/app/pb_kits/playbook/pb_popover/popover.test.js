@@ -228,16 +228,23 @@ const PopoverTestAppendToSelector = () => {
     render(<PopoverTestZIndex data={{ testid: testId}}/>)
     const btn = screen.getByText(/click me/i)
     fireEvent.click(btn);
-    const kit = screen.getByText("Click Anywhere");
-    expect(kit).toHaveClass("pb_popover_body z_index_3");
+    const label = screen.getByText("Click Anywhere");
+    const kit = label.closest(".pb_popover_body");
+    expect(kit).not.toBeNull();
+    expect(kit).toHaveClass("pb_popover_body", "z_index_3");
   });
 
   test("renders Popover with max height and max width", () => {
     render(<PopoverTestHeight data={{ testid: testId}}/>)
     const btn = screen.getByText(/click me/i)
     fireEvent.click(btn);
-    const kit = screen.getByText("Click Anywhere");
-    expect(kit).toHaveClass("pb_popover_body p_sm overflow_handling");
+    const label = screen.getByText("Click Anywhere");
+    const body = label.closest(".pb_popover_body");
+    const scrollRegion = label.closest(".pb_popover_scroll_region");
+    expect(body).not.toBeNull();
+    expect(body).toHaveClass("pb_popover_body", "p_sm");
+    expect(scrollRegion).not.toBeNull();
+    expect(scrollRegion).toHaveClass("pb_popover_scroll_region", "overflow_handling");
   });
 
   test("closes Popover on click anywhere", async () => {
