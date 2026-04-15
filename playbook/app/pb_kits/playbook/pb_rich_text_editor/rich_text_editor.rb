@@ -24,11 +24,19 @@ module Playbook
       end
 
       def input_id
-        input_options[:id].presence || (id.present? ? "#{id}-input" : "rich_text_editor-input")
+        return input_options[:id].presence if input_options[:id].present?
+        return "#{id}-input" if id.present?
+
+        # Unique per kit instance — multiple editors without a kit `id` would otherwise share the same DOM id.
+        "rich_text_editor-input-#{object_id}"
       end
 
       def input_name
-        input_options[:name].presence || "content"
+        return input_options[:name].presence if input_options[:name].present?
+        return "#{id}_content" if id.present?
+
+        # Last-resort default; two editors with neither `id` nor `input_options[:name]` still collide — set one of them.
+        "content"
       end
 
       def initial_html
