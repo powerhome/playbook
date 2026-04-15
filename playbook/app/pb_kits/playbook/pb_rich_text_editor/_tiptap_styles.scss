@@ -125,6 +125,31 @@
       -webkit-overflow-scrolling: touch;
     }
 
+    // Toolbar row: avoid nested horizontal scroll on the main control cluster + history pinned with
+    // margin/space-between — that traps scroll in the left column. One scroll on .toolbar; history in flow.
+    // React: pb_flex_kit justify between + .toolbar_block overflow. Rails: .rte-toolbar-left overflow +
+    // .rte-toolbar-right margin-left auto.
+    &:not(.rte-rails-toolbar-layout) {
+      > .pb_flex_kit.pb_flex_kit_justify_content_between {
+        box-sizing: border-box;
+        column-gap: $space_sm;
+        flex-wrap: nowrap;
+        justify-content: flex-start;
+        min-width: 100%;
+        width: max-content;
+      }
+
+      > .pb_flex_kit > .pb_flex_item_kit.toolbar_block {
+        flex: 0 0 auto;
+        min-width: 0;
+        overflow-x: visible;
+      }
+
+      > .pb_flex_kit > .pb_flex_item_kit:last-child {
+        flex: 0 0 auto;
+      }
+    }
+
     // Vertical section separators use ::before/::after with height: 100%. With
     // align-items: center on .toolbar_block the kit’s cross size was 0, so the
     // lines disappeared (master only had gap on .toolbar_block, default stretch).
@@ -149,13 +174,7 @@
       }
     }
 
-    // Rails TipTap toolbar: mirror React Toolbar.tsx — <Flex paddingX="sm" paddingY="xxs" justify="between">.
-    &.rte-rails-toolbar-layout--simple {
-      .rte-toolbar-left {
-        overflow-x: visible;
-      }
-    }
-
+    // Rails TipTap toolbar: same single-row scroll as React (see .toolbar_block / pb_flex rules above).
     &.rte-rails-toolbar-layout {
       max-width: 100%;
       min-width: 0;
@@ -163,33 +182,34 @@
       .rte-rails-toolbar-row {
         align-items: center;
         box-sizing: border-box;
-        column-gap: 0;
+        column-gap: $space_sm;
         display: flex;
         flex-wrap: nowrap;
         justify-content: flex-start;
-        min-width: 0;
+        min-width: 100%;
         padding: $space_xxs $space_sm;
         row-gap: 0;
-        width: 100%;
+        width: max-content;
       }
 
       .rte-toolbar-left {
         align-items: center;
         display: flex;
-        flex: 1 1 auto;
+        flex: 0 0 auto;
         flex-wrap: nowrap;
         gap: $space_xs;
         min-width: 0;
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
+        overflow-x: visible;
+        -webkit-overflow-scrolling: auto;
       }
 
       .rte-toolbar-right {
         align-items: center;
         display: flex;
+        flex: 0 0 auto;
         flex-shrink: 0;
         gap: $space_xs;
-        margin-left: auto;
+        margin-left: 0;
       }
 
       // Align dropdown trigger with icon row (React wraps Popover + SectionSeparator in one flex line).
