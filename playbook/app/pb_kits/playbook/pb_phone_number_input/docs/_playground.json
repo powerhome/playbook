@@ -19,6 +19,7 @@
     {
       "name": "Props",
       "props": [
+        "dark",
         "disabled",
         "error",
         "hiddenInputs",

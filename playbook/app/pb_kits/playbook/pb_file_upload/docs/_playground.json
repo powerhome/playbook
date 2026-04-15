@@ -10,6 +10,7 @@
       "props": [
         "accept",
         "customMessage",
+        "dark",
         "acceptedFilesDescription",
         "maxSize",
         "onFilesAccepted",

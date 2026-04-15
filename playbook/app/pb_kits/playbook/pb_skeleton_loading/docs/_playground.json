@@ -9,8 +9,13 @@
     {
       "name": "Props",
       "props": [
+        "height",
+        "width",
+        "borderRadius",
+        "gap",
         "stack",
-        "color"
+        "color",
+        "dark"
       ]
     }
   ],

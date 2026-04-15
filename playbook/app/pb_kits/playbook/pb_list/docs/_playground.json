@@ -20,6 +20,7 @@
       "name": "Props",
       "props": [
         "borderless",
+        "dark",
         "enableDrag",
         "layout",
         "ordered",

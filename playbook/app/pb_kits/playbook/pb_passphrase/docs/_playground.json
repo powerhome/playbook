@@ -11,6 +11,7 @@
       "name": "Props",
       "props": [
         "confirmation",
+        "dark",
         "inputProps",
         "label",
         "onChange",

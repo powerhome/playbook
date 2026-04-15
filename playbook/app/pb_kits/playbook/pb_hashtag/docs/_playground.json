@@ -9,6 +9,7 @@
     {
       "name": "Props",
       "props": [
+        "dark",
         "newWindow",
         "rel",
         "target",

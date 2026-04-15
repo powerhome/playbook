@@ -11,6 +11,7 @@
       "name": "Props",
       "props": [
         "align",
+        "dark",
         "endDate",
         "icon",
         "size",

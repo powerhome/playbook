@@ -21,7 +21,8 @@
         "open",
         "status",
         "text",
-        "vertical"
+        "vertical",
+        "zIndex"
       ]
     }
   ],

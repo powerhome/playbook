@@ -6,6 +6,7 @@
     {
       "name": "Props",
       "props": [
+        "dark",
         "endDate",
         "startDate"
       ]

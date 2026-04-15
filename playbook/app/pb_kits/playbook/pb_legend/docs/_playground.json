@@ -9,6 +9,7 @@
       "name": "Props",
       "props": [
         "color",
+        "dark",
         "prefixText",
         "text"
       ]
