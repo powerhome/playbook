@@ -1,3 +1,34 @@
+# 16.6.0
+##### April 15, 2026
+
+![release_image](https://github.com/user-attachments/assets/db119637-25e9-4157-9091-c5f7fdf034fc)
+
+[16.6.0](https://github.com/powerhome/playbook/tree/16.6.0) full list of changes:
+
+**Improvements:**
+
+- Bump Ci-kubed to V10.0.0 [\#6008](https://github.com/powerhome/playbook/pull/6008) ([teamteatime](https://github.com/teamteatime))
+- Playbook Website: Custom Rendering for Kit Props and Global Props Tables [\#6021](https://github.com/powerhome/playbook/pull/6021) ([nidaqg](https://github.com/nidaqg))
+- Button Kit: Loading Variant Doc Update - Rails [\#6030](https://github.com/powerhome/playbook/pull/6030) ([nidaqg](https://github.com/nidaqg))
+- Make Playbook Machine-readable for Ai-driven UI Generation by Adding Metadata Per Kit + for Global Props [\#6009](https://github.com/powerhome/playbook/pull/6009) ([nidaqg](https://github.com/nidaqg))
+
+
+**Fixed Bugs:**
+
+- Datepicker Kit: Year Dropdown Goes Mia After Form Submission [\#6063](https://github.com/powerhome/playbook/pull/6063) ([nickamantia](https://github.com/nickamantia))
+- Rails Form Kits: Form Custom Validations Consistency + Select Validation\_message Broken [\#6037](https://github.com/powerhome/playbook/pull/6037) ([nidaqg](https://github.com/nidaqg))
+- Advanced Table: Adjust Header Alignment Prop for Larger Screens - Rails [\#6038](https://github.com/powerhome/playbook/pull/6038) ([elisashapiro](https://github.com/elisashapiro))
+- Date Picker Label Click Toggle Calendar Dropdown [\#6036](https://github.com/powerhome/playbook/pull/6036) ([elisashapiro](https://github.com/elisashapiro))
+
+
+**Kit Enhancements:**
+
+- Typeahead: Createable Prop for Rails [\#6044](https://github.com/powerhome/playbook/pull/6044) ([nidaqg](https://github.com/nidaqg))
+- Filter Kit: Format Filter Results For Single Filter [\#6010](https://github.com/powerhome/playbook/pull/6010) ([elisashapiro](https://github.com/elisashapiro))
+
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/v16.6.0-rc.3...16.6.0)
+
 # Leaner, Faster, Smoother Rails! 💥
 ##### April 03, 2026
 
