@@ -1,9 +1,4 @@
-<%# TipTap/ProseMirror import map (CDN); one per request when request is present. %>
-<% playbook_rte_importmap_key = "playbook.rich_text_editor.importmap" %>
-<% req = respond_to?(:request) ? request : nil %>
-<% emit_playbook_rte_importmap = !req&.respond_to?(:env) || !req.env[playbook_rte_importmap_key] %>
-<% req.env[playbook_rte_importmap_key] = true if req&.respond_to?(:env) && emit_playbook_rte_importmap %>
-<% if emit_playbook_rte_importmap %>
+<%# Import map must precede each kit's module script in the DOM; repeat per kit (browsers merge identical maps). %>
 <script type="importmap">
   {
     "imports": {
@@ -60,7 +55,6 @@
     }
   }
 </script>
-<% end %>
 <%= pb_content_tag(:div, id: object.container_id, class: object.classname, data: { pb_rte_tiptap: true, input_id: object.input_id, initial_html: object.initial_html }) do %>
   <div class="pb_rich_text_editor_kit">
   <% if object.label.present? %>
