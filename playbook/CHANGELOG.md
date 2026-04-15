@@ -1,7 +1,9 @@
-# 16.6.0
+# 🤖 Playbook, Decoded for Machines
 ##### April 15, 2026
 
 ![release_image](https://github.com/user-attachments/assets/db119637-25e9-4157-9091-c5f7fdf034fc)
+
+Playbook now ships JSON schemas for every kit and global prop! Prompt your UI in Copilot or Cursor and watch it actually get it right. Nitro rules hook AI into Playbook’s metadata so it builds like it’s been here all along.
 
 [16.6.0](https://github.com/powerhome/playbook/tree/16.6.0) full list of changes:
 
