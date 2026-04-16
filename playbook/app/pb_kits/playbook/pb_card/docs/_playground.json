@@ -1,0 +1,157 @@
+{
+  "template": "<Card{{props}}>{{children}}</Card>",
+  "propTargets": {
+    "headerColor": "Card.Header.props",
+    "headerColorStriped": "Card.Header.props"
+  },
+  "defaults": {
+    "background": "none",
+    "borderNone": false,
+    "draggableItem": false,
+    "dragHandle": true,
+    "selected": false,
+    "tag": "div",
+    "headerColor": "category_1",
+    "headerColorStriped": false
+  },
+  "children": {
+    "editable": true,
+    "default": "Card content"
+  },
+  "groups": [
+    {
+      "name": "Appearance",
+      "props": [
+        "background",
+        "borderNone",
+        "selected"
+      ]
+    },
+    {
+      "name": "Layout",
+      "props": [
+        "tag"
+      ]
+    },
+    {
+      "name": "Card.Header",
+      "props": [
+        "headerColor",
+        "headerColorStriped"
+      ]
+    },
+    {
+      "name": "Draggable",
+      "props": [
+        "draggableItem",
+        "dragHandle",
+        "dragId",
+        "length"
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default",
+      "props": {},
+      "children": "Card content"
+    },
+    {
+      "name": "No borders",
+      "props": {
+        "borderNone": true
+      },
+      "children": "No borders"
+    },
+    {
+      "name": "Rounded & spacious",
+      "props": {
+        "background": "light",
+        "padding": "lg",
+        "borderRadius": "lg"
+      },
+      "children": "Extra padding and large radius"
+    },
+    {
+      "name": "Dark surface",
+      "props": {
+        "background": "dark",
+        "padding": "md"
+      },
+      "children": "<Body dark text=\"Dark background\" />"
+    },
+    {
+      "name": "Selected",
+      "props": {
+        "background": "white",
+        "selected": true,
+        "padding": "md"
+      },
+      "children": "Selected state"
+    },
+    {
+      "name": "Highlight",
+      "props": {
+        "highlight": {
+          "position": "side",
+          "color": "primary"
+        }
+      },
+      "children": "Highlighted card"
+    }
+  ],
+  "conditionals": {
+    "dragId": {
+      "requires": "draggableItem"
+    },
+    "dragHandle": {
+      "requires": "draggableItem"
+    },
+    "length": {
+      "requires": "draggableItem"
+    }
+  },
+  "hints": {
+    "draggable_mode": {
+      "when": {
+        "draggableItem": true
+      },
+      "message": "When draggableItem is on, set dragId to match the Draggable container.",
+      "type": "info"
+    }
+  },
+  "structureModes": {
+    "default": "simple",
+    "modes": {
+      "simple": {
+        "label": "Simple",
+        "template": "<Card{{props}}>\n  {{children}}\n</Card>",
+        "children": "Card content"
+      },
+      "header_body": {
+        "label": "Header + Body",
+        "template": "<Card{{props}}>\n  <Card.Header{{Card.Header.props}}>Header title</Card.Header>\n  <Card.Body>{{children}}</Card.Body>\n</Card>",
+        "children": "Body content here",
+        "props": {
+          "padding": "none"
+        },
+        "propTargets": {
+          "headerColor": "Card.Header.props",
+          "headerColorStriped": "Card.Header.props"
+        }
+      },
+      "full": {
+        "label": "Header + Body + Footer",
+        "template": "<Card{{props}}>\n  <Card.Header{{Card.Header.props}}>Header title</Card.Header>\n  <Card.Body>{{children}}</Card.Body>\n  <Flex padding=\"sm\" justify=\"end\">\n    <Button text=\"Action\" />\n  </Flex>\n</Card>",
+        "children": "Body content here",
+        "props": {
+          "padding": "none"
+        },
+        "propTargets": {
+          "headerColor": "Card.Header.props",
+          "headerColorStriped": "Card.Header.props"
+        }
+      }
+    }
+  }
+}

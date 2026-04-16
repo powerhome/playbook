@@ -1,0 +1,34 @@
+{
+  "template": "<EmptyState{{props}} />",
+  "propTargets": {},
+  "defaults": {
+    "alignment": "center",
+    "orientation": "vertical",
+    "size": "md"
+  },
+  "groups": [
+    {
+      "name": "Props",
+      "props": [
+        "alignment",
+        "description",
+        "header",
+        "image",
+        "linkButton",
+        "onLinkButtonClick",
+        "onPrimaryButtonClick",
+        "orientation",
+        "primaryButton",
+        "size"
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default",
+      "props": {}
+    }
+  ],
+  "conditionals": {},
+  "hints": {}
+}

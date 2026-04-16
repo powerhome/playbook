@@ -1,0 +1,113 @@
+{
+  "template": "<SelectableIcon{{props}} />",
+  "propTargets": {},
+  "defaults": {
+    "checked": false,
+    "disabled": false,
+    "inputs": "enabled",
+    "multi": true
+  },
+  "groups": [
+    {
+      "name": "Content",
+      "props": [
+        "icon",
+        "text",
+        "name",
+        "value",
+        "inputId"
+      ]
+    },
+    {
+      "name": "State",
+      "props": [
+        "checked",
+        "disabled",
+        "multi",
+        "inputs"
+      ]
+    },
+    {
+      "name": "Appearance",
+      "props": [
+        "customIcon"
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Unchecked",
+      "props": {
+        "icon": "user",
+        "text": "Assignee",
+        "name": "assignee",
+        "inputId": "assignee_1",
+        "value": "user1",
+        "checked": false,
+        "multi": true,
+        "inputs": "enabled"
+      }
+    },
+    {
+      "name": "Checked",
+      "props": {
+        "icon": "check-circle",
+        "text": "Confirmed",
+        "name": "status",
+        "inputId": "status_1",
+        "value": "ok",
+        "checked": true,
+        "multi": true,
+        "inputs": "enabled"
+      }
+    },
+    {
+      "name": "Disabled",
+      "props": {
+        "icon": "bell",
+        "text": "Notifications",
+        "name": "notifications",
+        "inputId": "notifications_1",
+        "value": "off",
+        "checked": false,
+        "disabled": true,
+        "multi": true,
+        "inputs": "enabled"
+      }
+    },
+    {
+      "name": "Radio (single)",
+      "props": {
+        "icon": "circle",
+        "text": "Option A",
+        "name": "radio_demo",
+        "inputId": "radio_a",
+        "value": "a",
+        "checked": true,
+        "multi": false,
+        "inputs": "enabled"
+      }
+    },
+    {
+      "name": "Inputs hidden",
+      "props": {
+        "icon": "star",
+        "text": "Favorite",
+        "name": "fav",
+        "inputId": "fav_1",
+        "value": "fav",
+        "checked": false,
+        "inputs": "disabled",
+        "multi": true
+      }
+    }
+  ],
+  "conditionals": {},
+  "hints": {
+    "required_ids": {
+      "when": {},
+      "message": "icon, text, name, and inputId identify the control for forms and accessibility.",
+      "type": "info"
+    }
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "template": "<Hashtag{{props}} />",
+  "propTargets": {},
+  "defaults": {
+    "newWindow": false,
+    "type": "default"
+  },
+  "groups": [
+    {
+      "name": "Props",
+      "props": [
+        "dark",
+        "newWindow",
+        "rel",
+        "target",
+        "text",
+        "type",
+        "url"
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default",
+      "props": {}
+    }
+  ],
+  "conditionals": {},
+  "hints": {}
+}

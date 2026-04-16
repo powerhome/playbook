@@ -1,0 +1,22 @@
+{
+  "template": "<Highlight{{props}} />",
+  "propTargets": {},
+  "defaults": {},
+  "groups": [
+    {
+      "name": "Props",
+      "props": [
+        "text",
+        "highlightedText"
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default",
+      "props": {}
+    }
+  ],
+  "conditionals": {},
+  "hints": {}
+}

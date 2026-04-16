@@ -7,9 +7,10 @@ import globalPropsValues from "../../../../../AvailableProps/globalPropsValues";
 
 interface PropsTabProps {
   availableProps?: string;
+  platform?: "react" | "rails";
 }
 
-export const PropsTab = ({ availableProps }: PropsTabProps) => {
+export const PropsTab = ({ availableProps, platform = "react" }: PropsTabProps) => {
   const [showKitTab, setShowKitTab] = useState(true);
 
   if (!availableProps) {
@@ -30,11 +31,16 @@ export const PropsTab = ({ availableProps }: PropsTabProps) => {
   // Get global prop names to filter them out
   const globalPropsNames = globalPropsValues.map((prop: { prop: string }) => prop.prop);
 
-  // Filter out global props, keeping only kit-specific props
+  // Filter out global props and filter by platform
   const kitProps: Record<string, any> = {};
   for (const propName in props) {
-    if (!globalPropsNames.includes(propName)) {
-      kitProps[propName] = props[propName];
+    const prop = props[propName];
+    const isGlobalProp = globalPropsNames.includes(propName);
+    const platforms = prop.platforms || [];
+    const isForPlatform = platforms.length === 0 || platforms.includes(platform);
+    
+    if (!isGlobalProp && isForPlatform) {
+      kitProps[propName] = prop;
     }
   }
 

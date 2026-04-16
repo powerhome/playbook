@@ -1,0 +1,133 @@
+{
+  "template": "<Flex{{props}}>{{children}}</Flex>",
+  "propTargets": {},
+  "defaults": {
+    "horizontal": "left",
+    "justify": "none",
+    "inline": false,
+    "orientation": "row",
+    "spacing": "none",
+    "reverse": false,
+    "vertical": "top",
+    "align": "none",
+    "wrap": false,
+    "alignSelf": "none"
+  },
+  "children": {
+    "editable": true,
+    "default": "<Caption text=\"A\" /><Caption text=\"B\" /><Caption text=\"C\" />"
+  },
+  "groups": [
+    {
+      "name": "Direction & flow",
+      "props": [
+        "orientation",
+        "reverse",
+        "wrap",
+        "inline"
+      ]
+    },
+    {
+      "name": "Primary axis",
+      "props": [
+        "horizontal",
+        "justify",
+        "spacing"
+      ]
+    },
+    {
+      "name": "Cross axis",
+      "props": [
+        "vertical",
+        "align",
+        "alignSelf"
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Row (start)",
+      "props": {
+        "orientation": "row",
+        "justify": "none",
+        "horizontal": "left",
+        "vertical": "top"
+      },
+      "children": "<Caption text=\"A\" /><Caption text=\"B\" /><Caption text=\"C\" />"
+    },
+    {
+      "name": "Column",
+      "props": {
+        "orientation": "column",
+        "justify": "none",
+        "horizontal": "left",
+        "vertical": "top"
+      },
+      "children": "<Caption text=\"One\" /><Caption text=\"Two\" /><Caption text=\"Three\" />"
+    },
+    {
+      "name": "Centered",
+      "props": {
+        "orientation": "row",
+        "justify": "center",
+        "vertical": "center"
+      },
+      "children": "<Caption text=\"Centered\" />"
+    },
+    {
+      "name": "Space between",
+      "props": {
+        "orientation": "row",
+        "justify": "between",
+        "vertical": "center"
+      },
+      "children": "<Caption text=\"Left\" /><Caption text=\"Right\" />"
+    },
+    {
+      "name": "Space around",
+      "props": {
+        "orientation": "row",
+        "justify": "around",
+        "vertical": "center"
+      },
+      "children": "<Caption text=\"A\" /><Caption text=\"B\" /><Caption text=\"C\" />"
+    },
+    {
+      "name": "End aligned",
+      "props": {
+        "orientation": "row",
+        "justify": "end",
+        "vertical": "center"
+      },
+      "children": "<Caption text=\"Trailing\" />"
+    },
+    {
+      "name": "Wrap",
+      "props": {
+        "orientation": "row",
+        "wrap": true,
+        "justify": "start"
+      },
+      "children": "<Caption text=\"Item 1\" /><Caption text=\"Item 2\" /><Caption text=\"Item 3\" /><Caption text=\"Item 4\" />"
+    },
+    {
+      "name": "Inline flex",
+      "props": {
+        "inline": true,
+        "orientation": "row",
+        "vertical": "center"
+      },
+      "children": "<Caption text=\"Inline\" /> <Caption text=\"chips\" />"
+    },
+    {
+      "name": "Column (center items)",
+      "props": {
+        "orientation": "column",
+        "align": "center"
+      },
+      "children": "<Caption text=\"Stacked\" /><Caption text=\"centered\" />"
+    }
+  ],
+  "conditionals": {},
+  "hints": {}
+}

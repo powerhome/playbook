@@ -8,7 +8,7 @@
   ],
   "props": {
     "autocomplete": {
-      "type": "boolean;",
+      "type": "boolean",
       "platforms": [
         "react",
         "rails"
@@ -16,7 +16,7 @@
       "default": false
     },
     "blankSelection": {
-      "type": "string;",
+      "type": "string",
       "platforms": [
         "react",
         "rails"
@@ -24,7 +24,7 @@
       "default": ""
     },
     "clearable": {
-      "type": "boolean;",
+      "type": "boolean",
       "platforms": [
         "react",
         "rails"
@@ -32,7 +32,7 @@
       "default": true
     },
     "closeOnClick": {
-      "type": "\"outside\" | \"inside\" | \"any\";",
+      "type": "enum",
       "platforms": [
         "react",
         "rails"
@@ -45,7 +45,7 @@
       "default": "any"
     },
     "constrainHeight": {
-      "type": "boolean;",
+      "type": "boolean",
       "platforms": [
         "react",
         "rails"
@@ -53,48 +53,54 @@
       "default": false
     },
     "customQuickPickDates": {
-      "type": "CustomQuickPickDates;",
+      "type": "CustomQuickPickDates",
       "platforms": [
         "react",
         "rails"
       ]
     },
     "formPillProps": {
-      "type": "GenericObject;",
+      "type": "GenericObject",
       "platforms": [
         "react",
         "rails"
       ]
     },
+    "dark": {
+      "type": "boolean",
+      "platforms": [
+        "react"
+      ]
+    },
     "defaultValue": {
-      "type": "GenericObject;",
+      "type": "GenericObject",
       "platforms": [
         "react",
         "rails"
       ]
     },
     "error": {
-      "type": "string;",
+      "type": "string",
       "platforms": [
         "react",
         "rails"
       ]
     },
     "isClosed": {
-      "type": "boolean;",
+      "type": "boolean",
       "platforms": [
         "react"
       ]
     },
     "label": {
-      "type": "string;",
+      "type": "string",
       "platforms": [
         "react",
         "rails"
       ]
     },
     "multiSelect": {
-      "type": "boolean;",
+      "type": "boolean",
       "platforms": [
         "react",
         "rails"
@@ -108,21 +114,21 @@
       ]
     },
     "options": {
-      "type": "GenericObject;",
+      "type": "GenericObject",
       "platforms": [
         "react",
         "rails"
       ]
     },
     "placeholder": {
-      "type": "string;",
+      "type": "string",
       "platforms": [
         "react",
         "rails"
       ]
     },
     "separators": {
-      "type": "boolean;",
+      "type": "boolean",
       "platforms": [
         "react",
         "rails"
@@ -130,7 +136,7 @@
       "default": true
     },
     "variant": {
-      "type": "\"default\" | \"subtle\" | \"quickpick\";",
+      "type": "enum",
       "platforms": [
         "react",
         "rails"
@@ -143,7 +149,7 @@
       "default": "default"
     },
     "rangeEndsToday": {
-      "type": "boolean;",
+      "type": "boolean",
       "platforms": [
         "react",
         "rails"
@@ -151,7 +157,7 @@
       "default": false
     },
     "controlsStartId": {
-      "type": "string;",
+      "type": "string",
       "platforms": [
         "react",
         "rails"
@@ -159,15 +165,21 @@
       "default": ""
     },
     "controlsEndId": {
-      "type": "string; activeStyle?: { backgroundColor?: string; fontColor?: string;",
+      "type": "string",
       "platforms": [
         "react",
         "rails"
       ],
       "default": ""
     },
+    "activeStyle": {
+      "type": "GenericObject",
+      "platforms": [
+        "react"
+      ]
+    },
     "requiredIndicator": {
-      "type": "boolean;",
+      "type": "boolean",
       "platforms": [
         "react",
         "rails"

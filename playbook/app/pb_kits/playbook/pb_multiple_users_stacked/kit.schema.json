@@ -7,6 +7,12 @@
     "rails"
   ],
   "props": {
+    "dark": {
+      "type": "boolean",
+      "platforms": [
+        "react"
+      ]
+    },
     "size": {
       "type": "enum",
       "platforms": [

@@ -8,7 +8,7 @@
   ],
   "props": {
     "align": {
-      "type": "\"left\" | \"center\" | \"right\";",
+      "type": "enum",
       "platforms": [
         "react",
         "rails"
@@ -21,22 +21,28 @@
       "default": "left"
     },
     "bold": {
-      "type": "boolean;",
+      "type": "boolean",
       "platforms": [
         "react",
         "rails"
       ],
       "default": false
     },
+    "dark": {
+      "type": "boolean",
+      "platforms": [
+        "react"
+      ]
+    },
     "date": {
-      "type": "Date;",
+      "type": "Date",
       "platforms": [
         "react",
         "rails"
       ]
     },
     "size": {
-      "type": "\"sm\" | \"md\";",
+      "type": "enum",
       "platforms": [
         "react",
         "rails"
@@ -48,7 +54,7 @@
       "default": "sm"
     },
     "reverse": {
-      "type": "boolean;",
+      "type": "boolean",
       "platforms": [
         "react",
         "rails"
@@ -56,7 +62,7 @@
       "default": false
     },
     "showCurrentYear": {
-      "type": "boolean;",
+      "type": "boolean",
       "platforms": [
         "react",
         "rails"

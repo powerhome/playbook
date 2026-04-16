@@ -1,0 +1,34 @@
+{
+  "template": "<Passphrase{{props}} />",
+  "propTargets": {},
+  "defaults": {
+    "confirmation": false,
+    "requiredIndicator": false,
+    "showTipsBelow": "always"
+  },
+  "groups": [
+    {
+      "name": "Props",
+      "props": [
+        "confirmation",
+        "dark",
+        "inputProps",
+        "label",
+        "onChange",
+        "requiredIndicator",
+        "showTipsBelow",
+        "tips",
+        "uncontrolled",
+        "value"
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default",
+      "props": {}
+    }
+  ],
+  "conditionals": {},
+  "hints": {}
+}

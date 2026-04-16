@@ -16,7 +16,13 @@
       "default": false
     },
     "customIcon": {
-      "type": "ReactNode",
+      "type": "GenericObject",
+      "platforms": [
+        "react"
+      ]
+    },
+    "dark": {
+      "type": "boolean",
       "platforms": [
         "react"
       ]

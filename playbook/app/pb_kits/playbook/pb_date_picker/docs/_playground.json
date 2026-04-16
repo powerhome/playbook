@@ -1,0 +1,178 @@
+{
+  "template": "<DatePicker{{props}} />",
+  "propTargets": {},
+  "defaults": {
+    "allowInput": false,
+    "defaultDate": "",
+    "disableInput": false,
+    "enableTime": false,
+    "format": "m/d/Y",
+    "hideIcon": false,
+    "hideLabel": false,
+    "label": "Date Picker",
+    "placeholder": "Select Date",
+    "requiredIndicator": false,
+    "selectionType": "none",
+    "showTimezone": false,
+    "staticPosition": true,
+    "thisRangesEndToday": false,
+    "controlsStartId": "",
+    "controlsEndId": "",
+    "syncStartWith": "",
+    "syncEndWith": ""
+  },
+  "groups": [
+    {
+      "name": "Content",
+      "props": [
+        "label",
+        "placeholder",
+        "name",
+        "pickerId",
+        "defaultDate",
+        "format"
+      ]
+    },
+    {
+      "name": "Appearance",
+      "props": [
+        "hideIcon",
+        "hideLabel",
+        "inLine",
+        "staticPosition",
+        "selectionType"
+      ]
+    },
+    {
+      "name": "Behavior",
+      "props": [
+        "allowInput",
+        "enableTime",
+        "showTimezone",
+        "disableInput",
+        "initializeOnce"
+      ]
+    },
+    {
+      "name": "Validation & bounds",
+      "props": [
+        "minDate",
+        "maxDate",
+        "yearRange",
+        "disableDate",
+        "disableWeekdays",
+        "disableRange",
+        "error",
+        "requiredIndicator"
+      ]
+    },
+    {
+      "name": "Advanced",
+      "props": [
+        "customQuickPickDates",
+        "positionElement",
+        "scrollContainer",
+        "inputValue",
+        "inputOnChange",
+        "inputAria",
+        "inputData",
+        "type",
+        "timeFormat",
+        "thisRangesEndToday",
+        "controlsStartId",
+        "controlsEndId",
+        "syncStartWith",
+        "syncEndWith"
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default",
+      "props": {
+        "name": "event_date",
+        "pickerId": "playground-date-picker",
+        "label": "Event date",
+        "placeholder": "Select date",
+        "defaultDate": "04/09/2026",
+        "format": "m/d/Y"
+      }
+    },
+    {
+      "name": "Inline calendar",
+      "props": {
+        "name": "inline_date",
+        "pickerId": "playground-date-inline",
+        "label": "Inline",
+        "defaultDate": "04/09/2026",
+        "inLine": true,
+        "staticPosition": true
+      }
+    },
+    {
+      "name": "Date & time",
+      "props": {
+        "name": "starts_at",
+        "pickerId": "playground-datetime",
+        "label": "Starts at",
+        "defaultDate": "04/09/2026",
+        "enableTime": true,
+        "format": "m/d/Y H:i"
+      }
+    },
+    {
+      "name": "Allow typing",
+      "props": {
+        "name": "typed_date",
+        "pickerId": "playground-allow-input",
+        "label": "Start date",
+        "allowInput": true,
+        "defaultDate": "04/09/2026"
+      }
+    },
+    {
+      "name": "Month picker",
+      "props": {
+        "name": "month_only",
+        "pickerId": "playground-month",
+        "label": "Month",
+        "selectionType": "month",
+        "defaultDate": "04/01/2026"
+      }
+    },
+    {
+      "name": "Min / max range",
+      "props": {
+        "name": "bounded",
+        "pickerId": "playground-bounded",
+        "label": "Within range",
+        "defaultDate": "04/09/2026",
+        "minDate": "01/01/2026",
+        "maxDate": "12/31/2026"
+      }
+    },
+    {
+      "name": "Error state",
+      "props": {
+        "name": "invalid_date",
+        "pickerId": "playground-error",
+        "label": "Due date",
+        "error": "Please choose a valid date",
+        "defaultDate": ""
+      }
+    },
+    {
+      "name": "Minimal chrome",
+      "props": {
+        "name": "compact_date",
+        "pickerId": "playground-minimal",
+        "label": "",
+        "hideLabel": true,
+        "hideIcon": true,
+        "defaultDate": "04/09/2026"
+      }
+    }
+  ],
+  "conditionals": {},
+  "hints": {}
+}

@@ -34,9 +34,24 @@
       ]
     },
     "iconSize": {
-      "type": "IconSizes",
+      "type": "enum",
       "platforms": [
         "react"
+      ],
+      "values": [
+        "lg",
+        "xs",
+        "sm",
+        "1x",
+        "2x",
+        "3x",
+        "4x",
+        "5x",
+        "6x",
+        "7x",
+        "8x",
+        "9x",
+        "10x"
       ]
     },
     "onIconClick": {
@@ -80,11 +95,11 @@
   "usage": {
     "react": {
       "import": "import { Collapsible } from 'playbook-ui'",
-      "example": "<Collapsible iconColor=\"default\" tag=\"h1\"></Collapsible>"
+      "example": "<Collapsible iconColor=\"default\" iconSize=\"lg\"></Collapsible>"
     },
     "rails": {
       "import": null,
-      "example": "<%= pb_rails(\"collapsible\", props: { icon_color: \"default\", tag: \"h1\" }) %>"
+      "example": "<%= pb_rails(\"collapsible\", props: { icon_color: \"default\", icon_size: \"lg\" }) %>"
     }
   }
 }
