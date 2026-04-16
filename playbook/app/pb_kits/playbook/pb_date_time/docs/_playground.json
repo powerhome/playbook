@@ -80,7 +80,8 @@
   ],
   "conditionals": {},
   "hints": {
-    "Tokyo time": {
+    "tokyo_time": {
+      "presetName": "Tokyo time",
       "message": "Use the timeZone prop to display the time in a different timezone",
       "type": "info"
     }
