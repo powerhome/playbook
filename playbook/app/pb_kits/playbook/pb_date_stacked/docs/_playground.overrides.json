@@ -1,7 +1,7 @@
 {
   "groups": [
     {
-      "name": "Content",
+      "name": "Date Config",
       "props": ["date", "showCurrentYear", "reverse", "bold"]
     },
     {
