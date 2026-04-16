@@ -505,6 +505,7 @@ export const usePlaygroundState = ({
         childrenConfig: playgroundConfig.children,
         customImports: currentStructureMode?.imports,
         wrapper: currentStructureMode?.wrapper,
+        requiredProps,
       });
     }
     return generateLiveCode({
@@ -513,7 +514,7 @@ export const usePlaygroundState = ({
       propDefinitions: allPropDefinitions,
       children: needsChildren(kitName) ? children : undefined,
     });
-  }, [kitName, propValuesForCodegen, allPropDefinitions, children, hasActiveTemplate, activeTemplate, activePropTargets, playgroundConfig, currentStructureMode]);
+  }, [kitName, propValuesForCodegen, allPropDefinitions, children, hasActiveTemplate, activeTemplate, activePropTargets, playgroundConfig, currentStructureMode, requiredProps]);
 
   const previewCode = useMemo(() => {
     if (hasActiveTemplate) return generatedLiveCode;

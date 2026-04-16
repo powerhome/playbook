@@ -464,6 +464,7 @@ export const generateLiveFromTemplate = ({
   childrenConfig,
   customImports = [],
   wrapper,
+  requiredProps = {},
 }: Omit<GenerateFromTemplateOptions, "includeImport">): string => {
   const code = generateFromTemplate({
     template,
@@ -475,9 +476,28 @@ export const generateLiveFromTemplate = ({
     includeImport: false,
     customImports,
     wrapper,
+    requiredProps,
   });
 
   let body = code.trimEnd();
+
+  // requiredProps (e.g. `const pickerId = "..."`) must stay outside render(); do not wrap in render(const …)
+  let jsxStart = body.search(/\r?\n<[A-Z]/);
+  if (jsxStart !== -1) {
+    jsxStart += body.slice(jsxStart).indexOf("<");
+  } else {
+    const trimmed = body.replace(/^\s+/, "");
+    if (/^<[A-Z]/.test(trimmed)) {
+      jsxStart = body.length - trimmed.length;
+    }
+  }
+  if (jsxStart >= 0) {
+    const preamble = body.slice(0, jsxStart).trimEnd();
+    const jsx = body.slice(jsxStart).trim();
+    if (preamble.length > 0 && jsx.length > 0 && jsx.startsWith("<")) {
+      return `${preamble}\n\nrender(${jsx})`;
+    }
+  }
 
   // Wrapper strings sometimes end with <MyComponent /> for display/copy snippets; react-live
   // needs a single render(<MyComponent />). Strip the trailing tag so we do not duplicate.

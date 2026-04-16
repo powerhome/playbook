@@ -1,7 +1,21 @@
 {
+  "template": "<DatePicker {{props}} />",
+  "defaults": {
+    "customQuickPickDates": { "override": false, "dates": [] },
+    "pickerId": "playground-date-picker",
+    "disableDate": [],
+    "disableRange": [],
+    "disableWeekdays": [],
+    "yearRange": [1900, 2100]
+  },
+  "hiddenProps": [
+    "staticPosition",
+    "scrollContainer"
+
+  ],
   "groups": [
     {
-      "name": "Content",
+      "name": "Date Picker Config",
       "props": [
         "label",
         "placeholder",
@@ -14,10 +28,10 @@
     {
       "name": "Appearance",
       "props": [
+        "dark",
         "hideIcon",
         "hideLabel",
         "inLine",
-        "staticPosition",
         "selectionType"
       ]
     },
@@ -49,7 +63,6 @@
       "props": [
         "customQuickPickDates",
         "positionElement",
-        "scrollContainer",
         "inputValue",
         "inputOnChange",
         "inputAria",
@@ -71,20 +84,16 @@
         "name": "event_date",
         "pickerId": "playground-date-picker",
         "label": "Event date",
-        "placeholder": "Select date",
-        "defaultDate": "04/09/2026",
-        "format": "m/d/Y"
+        "placeholder": "Select date"
       }
     },
     {
-      "name": "Inline calendar",
+      "name": "Inline",
       "props": {
-        "name": "inline_date",
         "pickerId": "playground-date-inline",
         "label": "Inline",
-        "defaultDate": "04/09/2026",
         "inLine": true,
-        "staticPosition": true
+        "hideIcon": true
       }
     },
     {
@@ -119,6 +128,26 @@
       }
     },
     {
+      "name": "Week picker",
+      "props": {
+        "name": "week_only",
+        "pickerId": "playground-week",
+        "label": "Week",
+        "selectionType": "week",
+        "defaultDate": "04/09/2026"
+      }
+    },
+    {
+      "name": "Dark",
+      "props": {
+        "name": "dark_picker",
+        "pickerId": "playground-dark",
+        "label": "Event date",
+        "defaultDate": "04/09/2026",
+        "dark": true
+      }
+    },
+    {
       "name": "Min / max range",
       "props": {
         "name": "bounded",
@@ -138,19 +167,18 @@
         "error": "Please choose a valid date",
         "defaultDate": ""
       }
-    },
-    {
-      "name": "Minimal chrome",
-      "props": {
-        "name": "compact_date",
-        "pickerId": "playground-minimal",
-        "label": "",
-        "hideLabel": true,
-        "hideIcon": true,
-        "defaultDate": "04/09/2026"
-      }
     }
   ],
   "conditionals": {},
-  "hints": {}
+  "hints": {
+    "pickerId": {
+      "message": "The pickerId is used to identify the date picker in the DOM. It is required and must be unique.",
+      "type": "info"
+    },
+    "defaultDate": {
+      "when": { "defaultDate": "04/09/2026" },
+      "message": "The default date is the date that will be selected when the date picker is first rendered. It is required and must be a valid date.",
+      "type": "info"
+    }
+  }
 }
