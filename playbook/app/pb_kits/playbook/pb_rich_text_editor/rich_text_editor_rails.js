@@ -1,11 +1,8 @@
-/**
- * Rails TipTap editor bootstrap (import map + dynamic imports).
- * Idempotent per container via data-pb-rte-initialized / data-pb-rte-pending.
- *
- * Dynamic loads use global importShim from es-module-shims (see rich_text_editor.html.erb): Firefox
- * does not apply a second native import map when the host page already has one; import() would fail.
- */
-/* global importShim */
+// Rails TipTap: dynamic import() from esm.sh (no import map — avoids 2nd map ignored by Firefox vs Vite/host).
+// Idempotent: data-pb-rte-initialized / data-pb-rte-pending.
+
+const RTE_TIPTAP_VERSION = "2.8.0";
+const RTE_TIPTAP_ESM = (pkg) => `https://esm.sh/${pkg}@${RTE_TIPTAP_VERSION}`;
 
 async function initPlaybookRichTextEditorRails(container) {
   if (!container || container.dataset.pbRteInitialized || container.dataset.pbRtePending) return;
@@ -38,11 +35,9 @@ async function initPlaybookRichTextEditorRails(container) {
   }
 
   try {
-    const importTipTap = typeof importShim === "function" ? importShim : (u) => import(u);
-
-    const { Editor } = await importTipTap("@tiptap/core");
-    const { default: StarterKit } = await importTipTap("@tiptap/starter-kit");
-    const { default: Link } = await importTipTap("@tiptap/extension-link");
+    const { Editor } = await import(RTE_TIPTAP_ESM("@tiptap/core"));
+    const { default: StarterKit } = await import(RTE_TIPTAP_ESM("@tiptap/starter-kit"));
+    const { default: Link } = await import(RTE_TIPTAP_ESM("@tiptap/extension-link"));
 
     const editor = new Editor({
       element: editorNode,
