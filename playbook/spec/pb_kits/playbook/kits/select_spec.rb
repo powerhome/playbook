@@ -20,6 +20,7 @@ RSpec.describe Playbook::PbSelect::Select do
   it { is_expected.to define_boolean_prop(:show_arrow).with_default(false) }
   it { is_expected.to define_hash_prop(:input_options).with_default({}) }
   it { is_expected.to define_boolean_prop(:required_indicator).with_default(false) }
+  it { is_expected.to define_string_prop(:validation_message).with_default("") }
 
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
@@ -53,6 +54,50 @@ RSpec.describe Playbook::PbSelect::Select do
       select = subject.new(id: "default-id", input_options: {})
 
       expect(select.all_attributes[:id]).to eq "default-id"
+    end
+
+    it "includes validation_message as data-message attribute" do
+      select = subject.new(validation_message: "Please select an option")
+
+      expect(select.all_attributes[:data]).to eq({ message: "Please select an option" })
+    end
+
+    it "merges validation_message with existing input_options data" do
+      select = subject.new(
+        validation_message: "Required",
+        input_options: { data: { controller: "select" } }
+      )
+
+      expect(select.all_attributes[:data]).to eq({ controller: "select", message: "Required" })
+    end
+
+    it "does not include data-message when validation_message is blank" do
+      select = subject.new(validation_message: "")
+
+      expect(select.all_attributes[:data]).to eq({})
+    end
+  end
+
+  describe "#validation_data" do
+    it "returns hash with message when validation_message is present" do
+      select = subject.new(validation_message: "This field is required")
+
+      expect(select.validation_data).to eq({ message: "This field is required" })
+    end
+
+    it "returns empty hash when validation_message is blank" do
+      select = subject.new(validation_message: "")
+
+      expect(select.validation_data).to eq({})
+    end
+
+    it "merges with existing input_options data" do
+      select = subject.new(
+        validation_message: "Required",
+        input_options: { data: { custom: "value" } }
+      )
+
+      expect(select.validation_data).to eq({ custom: "value", message: "Required" })
     end
   end
 
