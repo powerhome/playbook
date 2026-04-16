@@ -1,3 +1,6 @@
+<%# es-module-shims: Firefox has no native support for multiple <script type="importmap"> blocks (Chrome 135+ does). %>
+<%# Nitro/layout may already define a map; our TipTap map is ignored in FF unless we use importShim() in rich_text_editor_rails.js. %>
+<script src="https://cdn.jsdelivr.net/npm/es-module-shims@1.10.0/dist/es-module-shims.js"></script>
 <%# Import map must precede each kit's module script in the DOM; repeat per kit (browsers merge identical maps). %>
 <script type="importmap">
   {
