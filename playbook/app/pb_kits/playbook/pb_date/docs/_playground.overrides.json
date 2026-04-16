@@ -1,7 +1,8 @@
 {
+  "template": "<FormattedDate{{props}} />",
   "groups": [
     {
-      "name": "Content",
+      "name": "Date Config",
       "props": ["value", "showDayOfWeek", "showCurrentYear", "showIcon"]
     },
     {
@@ -13,21 +14,20 @@
     {
       "name": "Default",
       "props": {
-        "value": "2026-04-09T15:30:00.000Z"
+        "value": "2026-04-09"
       }
     },
     {
-      "name": "Large & centered",
+      "name": "centered",
       "props": {
-        "value": "2026-04-09T15:30:00.000Z",
-        "size": "lg",
+        "value": "2026-04-09",
         "alignment": "center"
       }
     },
     {
       "name": "Small with weekday",
       "props": {
-        "value": "2026-06-18T10:00:00.000Z",
+        "value": "2026-06-18",
         "size": "sm",
         "showDayOfWeek": true
       }
@@ -35,20 +35,17 @@
     {
       "name": "With icon & year",
       "props": {
-        "value": "2024-11-02T09:00:00.000Z",
+        "value": "2024-11-02",
         "showIcon": true,
         "showCurrentYear": true
-      }
-    },
-    {
-      "name": "Unstyled",
-      "props": {
-        "value": "2026-04-09T15:30:00.000Z",
-        "unstyled": true,
-        "showDayOfWeek": true
       }
     }
   ],
   "conditionals": {},
-  "hints": {}
+  "hints": {
+    "default": {
+      "message": "Use as FormattedDate to avoid naming collisions with global Date object",
+      "type": "info"
+    }
+  }
 }

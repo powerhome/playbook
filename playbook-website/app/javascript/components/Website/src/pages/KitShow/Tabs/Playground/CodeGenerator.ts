@@ -113,13 +113,33 @@ const formatPropValue = (
     return `${name}={${JSON.stringify(value)}}`;
   }
 
+  // kit.schema `Date`: JSON presets are strings; emit `new Date(...)` so kits receive Date instances
+  if (propType === "date") {
+    if (value instanceof Date) {
+      return `${name}={new Date(${JSON.stringify(value.toISOString())})}`;
+    }
+    if (typeof value === "string" && value.trim()) {
+      return `${name}={new Date(${JSON.stringify(value)})}`;
+    }
+    return null;
+  }
+
   // Check object types FIRST - before other type checks that might match substrings
   // E.g., "{ component: string }" contains "string" but is an object type
+  // Exclude Date: typeof "object" but must not serialize as JSX object literal
   if (
     propType.startsWith("{") ||
-    (typeof value === "object" && value !== null && !Array.isArray(value))
+    (typeof value === "object" &&
+      value !== null &&
+      !Array.isArray(value) &&
+      !(value instanceof Date))
   ) {
-    if (typeof value === "object" && value !== null && !Array.isArray(value)) {
+    if (
+      typeof value === "object" &&
+      value !== null &&
+      !Array.isArray(value) &&
+      !(value instanceof Date)
+    ) {
       return formatJsxObjectProp(name, value);
     }
     return null;
@@ -190,8 +210,17 @@ const formatPropValue = (
     return `${name}="${value}"`;
   }
 
-  if (typeof value === "object" && value !== null && !Array.isArray(value)) {
+  if (
+    typeof value === "object" &&
+    value !== null &&
+    !Array.isArray(value) &&
+    !(value instanceof Date)
+  ) {
     return formatJsxObjectProp(name, value);
+  }
+
+  if (value instanceof Date) {
+    return `${name}={new Date(${JSON.stringify(value.toISOString())})}`;
   }
 
   return `${name}={${JSON.stringify(value)}}`;
@@ -407,9 +436,13 @@ export const generateFromTemplate = ({
     // Extract all component names from the template for the import
     const componentMatches = result.match(/<([A-Z][A-Za-z]*)/g) || [];
     const components = [...new Set(componentMatches.map(m => m.slice(1)))];
-    
+    // playbook-ui exports `Date`; alias matches docs / PlaygroundPreview (avoids shadowing global Date)
+    const importItemsFromComponents = components.map((c) =>
+      c === "FormattedDate" ? "Date as FormattedDate" : c
+    );
+
     // Build import statement with custom imports (hooks, etc.)
-    let importItems = [...components];
+    let importItems = [...importItemsFromComponents];
     if (customImports.length > 0) {
       importItems = [...importItems, ...customImports];
     }
