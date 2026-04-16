@@ -520,7 +520,7 @@ kits:
     description: Full-featured text editor with formatting options.
     status: stable
     icons_used: true
-    react_rendered: true
+    react_rendered: false
     enhanced_element_used: false
   - name: textarea
     platforms: *1
