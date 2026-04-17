@@ -8,7 +8,7 @@ module Playbook
       attr_reader :template
 
       def container_attributes
-        { class: "pb_paginate" }
+        { class: "pb_pagination" }
       end
 
       def prepare(collection, options, template)
@@ -30,8 +30,7 @@ module Playbook
         )
         mobile = mobile_pagination
 
-        inner = template.content_tag(:div, template.safe_join([desktop, mobile]), class: "pb_pagination rails-pagination-mobile")
-        template.content_tag(:div, inner, **container_attributes)
+        template.content_tag(:div, template.safe_join([desktop, mobile]), **container_attributes)
       end
 
       def desktop_items
@@ -67,9 +66,7 @@ module Playbook
         end
       end
 
-      def gap
-        template.raw("")
-      end
+      def gap; end
 
       def mobile_pagination
         content = template.safe_join([
