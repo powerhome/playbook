@@ -1,7 +1,7 @@
 import { Flex, Icon, Nav, NavItem } from "playbook-ui";
 import { ReactSVG } from "./ReactSVG";
 import { RailsSVG } from "./RailsSVG";
-import { SwiftSVG } from "./SwiftSVG";
+// import { SwiftSVG } from "./SwiftSVG";
 import "./styles.scss";
 
 type PlatformToggleProps = {
