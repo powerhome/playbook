@@ -9,11 +9,13 @@ type PlatformToggleProps = {
   setPlatform: (platform: string) => void;
 };
 
+// TODO: Add Swift back in when we have a Swift kit
 const platforms = [
   { name: "react", label: "React", Icon: ReactSVG },
   { name: "rails", label: "Rails", Icon: RailsSVG },
-  { name: "swift", label: "Swift", Icon: SwiftSVG },
+  // { name: "swift", label: "Swift", Icon: SwiftSVG },
 ];
+
 
 export const PlatformToggle = ({
   platform,
