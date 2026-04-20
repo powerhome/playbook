@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "base64"
+
 module Playbook
   module PbEmptyState
     class EmptyState < Playbook::KitBase
@@ -102,6 +104,47 @@ module Playbook
         svg      = File.read(svg_path)
         encoded  = ERB::Util.url_encode(svg)
         "data:image/svg+xml,#{encoded}"
+      end
+
+      def resolved_image_url
+        case image
+        when "default"
+          default_image_data_uri
+        when "this_is_fine"
+          svg_preset_data_uri("this_is_fine.svg")
+        when "travolta_lost"
+          gif_preset_data_uri("travolta_lost.gif")
+        when nil, ""
+          nil
+        else
+          image
+        end
+      end
+
+      def image_alt_text
+        case image
+        when "this_is_fine"
+          "This is fine illustration"
+        when "travolta_lost"
+          "Confused reaction illustration"
+        when "default"
+          "Empty state illustration"
+        else
+          "Empty state image"
+        end
+      end
+
+      def svg_preset_data_uri(filename)
+        path = File.join(__dir__, "docs", "default_image", filename)
+        svg = File.read(path)
+        "data:image/svg+xml,#{ERB::Util.url_encode(svg)}"
+      end
+
+      def gif_preset_data_uri(filename)
+        path = File.join(__dir__, "docs", "default_image", filename)
+        binary = File.binread(path)
+        b64 = Base64.strict_encode64(binary)
+        "data:image/gif;base64,#{b64}"
       end
 
       def padding_size

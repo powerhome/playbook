@@ -91,6 +91,7 @@ module.exports = {
   moduleNameMapper: {
     '.+\\.(css|scss)$': 'identity-obj-proxy',
     'playbook-ui': '<rootDir>/app/entrypoints/playbook.js',
+    '\\.(svg|gif)\\?url$': '<rootDir>/app/pb_kits/playbook/pb_empty_state/__mocks__/assetUrl.ts',
   },
 
   // An array of regexp pattern strings, matched against all module paths before considered 'visible' to the module loader

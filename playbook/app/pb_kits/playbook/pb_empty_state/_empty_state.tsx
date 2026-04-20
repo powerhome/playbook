@@ -12,6 +12,8 @@ import Flex from "../pb_flex/_flex"
 import FlexItem from "../pb_flex/_flex_item"
 import Image from "../pb_image/_image"
 import computer from "./docs/default_image/utils"
+import thisIsFineImageUrl from "./docs/default_image/this_is_fine.svg?url"
+import travoltaLostImageUrl from "./docs/default_image/travolta_lost.gif?url"
 
 type EventHandler = (React.MouseEventHandler<HTMLElement>)
 
@@ -23,6 +25,7 @@ type EmptyStateProps = {
   description?: string,
   header?: string,
   id?: string,
+  /** Built-in illustrations: `default`, `this_is_fine`, `travolta_lost`, or a custom image URL */
   image?: string,
   linkButton?: string,
   onLinkButtonClick?: EventHandler,
@@ -134,6 +137,22 @@ const EmptyState = (props: EmptyStateProps) => {
       return `data:image/svg+xml,${encodedSvg}`
     }
 
+    const resolvePresetImage = (): { alt: string, url: string } | null => {
+      if (!image) return null
+      if (image === "default") {
+        return { alt: "Empty state illustration", url: getSvgAsDataUrl() }
+      }
+      if (image === "this_is_fine") {
+        return { alt: "This is fine illustration", url: thisIsFineImageUrl }
+      }
+      if (image === "travolta_lost") {
+        return { alt: "Confused reaction illustration", url: travoltaLostImageUrl }
+      }
+      return { alt: "Empty state image", url: image }
+    }
+
+    const presetImage = resolvePresetImage()
+
     const layout = (
       <div {...ariaProps}
           {...dataProps}
@@ -148,17 +167,11 @@ const EmptyState = (props: EmptyStateProps) => {
             vertical="center"
         >
 
-          { image && image === 'default' ? (
+          { presetImage ? (
             <Image
-                alt="test"
+                alt={presetImage.alt}
                 htmlOptions={{ width: configs.imageWidth, height: "auto", alignment: "start" }}
-                url={getSvgAsDataUrl()}
-            />
-          ) : image && image ? (
-            <Image
-                alt="test"
-                htmlOptions={{ width: configs.imageWidth, height: "auto", alignment: "start" }}
-                url={image}
+                url={presetImage.url}
             />
           ) : null}
 

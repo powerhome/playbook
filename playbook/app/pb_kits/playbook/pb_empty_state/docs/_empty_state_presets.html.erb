@@ -1,0 +1,14 @@
+<%= pb_rails("flex", props: { align: "start", justify: "start", orientation: "column", gap: "xl" }) do %>
+  <%= pb_rails("empty_state", props: {
+    description: "This error was unexpected. Please try again in a moment.",
+    header: "Something went wrong",
+    image: "this_is_fine",
+    primary_button: "Back to home",
+  }) %>
+  <%= pb_rails("empty_state", props: {
+    description: "We could not load this resource. Check the URL or try again later.",
+    header: "We are not sure what happened",
+    image: "travolta_lost",
+    link_button: "Contact support",
+  }) %>
+<% end %>
