@@ -34,8 +34,8 @@ type IconsIndexProps = {
   iconsByCategory: IconsByCategory,
 }
 
-const DESCRIPTION_TEXT = 'Icons are a core part of Playbook’s visual language. Our custom icon set is designed to support clear, consistent, and accessible interfaces. Use them to enhance navigation, reinforce meaning, and improve communication across all digital products.'
-const DEFAULT_DROPDOWN_LABEL = 'Icon Categories'
+const descriptionText = 'Icons are a core part of Playbook’s visual language. Our custom icon set is designed to support clear, consistent, and accessible interfaces. Use them to enhance navigation, reinforce meaning, and improve communication across all digital products.'
+const dropdownLabel = 'Icon Categories'
 
 const IconsIndex = ({
   bannerImageUrl,
@@ -43,7 +43,7 @@ const IconsIndex = ({
   iconKitUrl,
   iconsByCategory,
 }: IconsIndexProps) => {
-  const [selectedCategoryLabel, setSelectedCategoryLabel] = useState(DEFAULT_DROPDOWN_LABEL)
+  const [selectedCategoryLabel, setSelectedCategoryLabel] = useState(dropdownLabel)
 
   const sortedSections = Object.entries(iconsByCategory).sort(([left], [right]) =>
     left.localeCompare(right)
@@ -59,7 +59,7 @@ const IconsIndex = ({
   const handleCategorySelect = (option: { label?: string, value?: string } | null) => {
     if (!option?.value) return null
 
-    setSelectedCategoryLabel(option.label || DEFAULT_DROPDOWN_LABEL)
+    setSelectedCategoryLabel(option.label || dropdownLabel)
 
     const target = document.getElementById(option.value)
     if (target) {
@@ -96,14 +96,14 @@ const IconsIndex = ({
               <Title size={{ xs: 3, sm: 2, md: 1, lg: 1, xl: 1 }} text="Icons" />
 
               <div className="description-default">
-                <Body paddingBottom="sm" text={DESCRIPTION_TEXT} />
+                <Body paddingBottom="sm" text={descriptionText} />
                 <a href={iconKitUrl} rel="noreferrer" target="_blank">
                   To use them in your project, check out our Icon kit.
                 </a>
               </div>
 
               <div className="description-mobile">
-                <Body paddingBottom="xs" text={DESCRIPTION_TEXT} />
+                <Body paddingBottom="xs" text={descriptionText} />
                 <a href={iconKitUrl} rel="noreferrer" target="_blank">
                   To use them in your project, check out our Icon kit.
                 </a>
