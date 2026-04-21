@@ -51,7 +51,7 @@ export const ComponentShowLoader = async ({ params, request }:any) => {
 
 export const CategoryLoader: (
   props: LoaderFunctionArgs
-) => Promise<ComponentTypes> = async ({ params }) => {
+) => Promise<CategoryTypes> = async ({ params }) => {
   const response = await fetch("/beta/kits.json");
   const { kits } = await response.json();
 
