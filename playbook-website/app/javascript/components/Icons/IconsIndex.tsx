@@ -1,12 +1,12 @@
+import { useState } from 'react'
+
 import {
   Background,
   Body,
   Button,
-  Card,
   Caption,
   Dropdown,
   Flex,
-  Icon,
   Nav,
   NavItem,
   SectionSeparator,
@@ -35,6 +35,7 @@ type IconsIndexProps = {
 }
 
 const DESCRIPTION_TEXT = 'Icons are a core part of Playbook’s visual language. Our custom icon set is designed to support clear, consistent, and accessible interfaces. Use them to enhance navigation, reinforce meaning, and improve communication across all digital products.'
+const DEFAULT_DROPDOWN_LABEL = 'Icon Categories'
 
 const IconsIndex = ({
   bannerImageUrl,
@@ -42,9 +43,32 @@ const IconsIndex = ({
   iconKitUrl,
   iconsByCategory,
 }: IconsIndexProps) => {
+  const [selectedCategoryLabel, setSelectedCategoryLabel] = useState(DEFAULT_DROPDOWN_LABEL)
+
   const sortedSections = Object.entries(iconsByCategory).sort(([left], [right]) =>
     left.localeCompare(right)
   )
+
+  const getCategoryId = (category: string) => {
+    return iconCategories.find((item) => item.text === category)?.value || category
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/(^-|-$)/g, '')
+  }
+
+  const handleCategorySelect = (option: { label?: string, value?: string } | null) => {
+    if (!option?.value) return null
+
+    setSelectedCategoryLabel(option.label || DEFAULT_DROPDOWN_LABEL)
+
+    const target = document.getElementById(option.value)
+    if (target) {
+      window.history.replaceState(null, '', `#${option.value}`)
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }
+
+    return null
+  }
 
   return (
     <div className="playbook_icons_index">
@@ -85,7 +109,7 @@ const IconsIndex = ({
                 </a>
               </div>
 
-              <Dropdown id="icon-category-dropdown" options={iconCategories}>
+              <Dropdown id="icon-category-dropdown" onSelect={handleCategorySelect} options={iconCategories}>
                 <Dropdown.Trigger>
                   <div data-dropdown-custom-trigger>
                     <Button
@@ -93,7 +117,7 @@ const IconsIndex = ({
                       icon="sort"
                       iconRight
                       id="icon-category-trigger-button"
-                      text="Icon Categories"
+                      text={selectedCategoryLabel}
                       variant="secondary"
                     />
                   </div>
@@ -115,6 +139,7 @@ const IconsIndex = ({
                   orientation="column" 
                   >
                   <Caption 
+                    id={getCategoryId(category)}
                     size="lg" 
                     text={category}
                   />
