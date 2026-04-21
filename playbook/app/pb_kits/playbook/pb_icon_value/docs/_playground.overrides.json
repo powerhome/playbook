@@ -1,0 +1,19 @@
+{
+  "defaults": {
+    "align": "left",
+    "icon": "chart-line",
+    "text": "1,428"
+  },
+  "groups": [
+    { "name": "Content", "props": ["icon", "text"] },
+    { "name": "Appearance", "props": ["align"] }
+  ],
+  "presets": [
+    { "name": "Metric", "props": { "icon": "chart-line", "text": "1,428", "align": "left" } },
+    { "name": "Users", "props": { "icon": "users", "text": "2,000", "align": "left" } },
+    { "name": "Centered", "props": { "icon": "heart", "text": "15%", "align": "center" } },
+    { "name": "Right aligned", "props": { "icon": "dollar-sign", "text": "$2,000", "align": "right" } }
+  ],
+  "conditionals": {},
+  "hints": {}
+}

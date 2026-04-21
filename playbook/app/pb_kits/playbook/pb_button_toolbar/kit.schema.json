@@ -7,14 +7,6 @@
     "rails"
   ],
   "props": {
-    "connected": {
-      "type": "boolean",
-      "platforms": [
-        "react",
-        "rails"
-      ],
-      "default": false
-    },
     "onClick": {
       "type": "ReactNode",
       "platforms": [
@@ -51,6 +43,13 @@
         "secondary"
       ],
       "default": "primary"
+    },
+    "connected": {
+      "platforms": [
+        "rails"
+      ],
+      "type": "boolean",
+      "default": false
     }
   },
   "globalProps": true,

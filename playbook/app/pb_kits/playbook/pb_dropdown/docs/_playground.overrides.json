@@ -1,0 +1,137 @@
+{
+  "groups": [
+    {
+      "name": "Content",
+      "props": [
+        "label",
+        "placeholder",
+        "options",
+        "blankSelection",
+        "error"
+      ]
+    },
+    {
+      "name": "Appearance",
+      "props": [
+        "variant",
+        "separators",
+        "constrainHeight",
+        "clearable",
+        "requiredIndicator"
+      ]
+    },
+    {
+      "name": "State & behavior",
+      "props": [
+        "isClosed",
+        "multiSelect",
+        "autocomplete",
+        "closeOnClick",
+        "onSelect"
+      ]
+    },
+    {
+      "name": "Quick pick",
+      "props": [
+        "customQuickPickDates",
+        "rangeEndsToday",
+        "controlsStartId",
+        "controlsEndId"
+      ]
+    },
+    {
+      "name": "Values & forms",
+      "props": ["defaultValue", "formPillProps"]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default trigger",
+      "props": {
+        "variant": "default",
+        "placeholder": "Select a country",
+        "options": [
+          { "label": "United States", "value": "unitedStates", "id": "us" },
+          { "label": "Canada", "value": "canada", "id": "ca" },
+          { "label": "Mexico", "value": "mexico", "id": "mx" }
+        ]
+      }
+    },
+    {
+      "name": "Subtle trigger",
+      "props": {
+        "variant": "subtle",
+        "placeholder": "Choose an option",
+        "options": [
+          { "label": "Alpha", "value": "alpha", "id": "a" },
+          { "label": "Beta", "value": "beta", "id": "b" },
+          { "label": "Gamma", "value": "gamma", "id": "g" }
+        ]
+      }
+    },
+    {
+      "name": "Quick pick",
+      "props": {
+        "variant": "quickpick",
+        "label": "Date range"
+      }
+    },
+    {
+      "name": "Multi-select",
+      "props": {
+        "variant": "default",
+        "multiSelect": true,
+        "placeholder": "Select regions",
+        "options": [
+          { "label": "North", "value": "north", "id": "n" },
+          { "label": "South", "value": "south", "id": "s" },
+          { "label": "East", "value": "east", "id": "e" },
+          { "label": "West", "value": "west", "id": "w" }
+        ]
+      }
+    },
+    {
+      "name": "With error",
+      "props": {
+        "variant": "default",
+        "placeholder": "Required field",
+        "error": "Please make a selection.",
+        "options": [
+          { "label": "Option A", "value": "a", "id": "a" },
+          { "label": "Option B", "value": "b", "id": "b" }
+        ]
+      }
+    },
+    {
+      "name": "Search (autocomplete)",
+      "props": {
+        "variant": "default",
+        "autocomplete": true,
+        "placeholder": "Search…",
+        "options": [
+          { "label": "Apple", "value": "apple", "id": "1" },
+          { "label": "Apricot", "value": "apricot", "id": "2" },
+          { "label": "Banana", "value": "banana", "id": "3" }
+        ]
+      }
+    }
+  ],
+  "conditionals": {
+    "rangeEndsToday": { "requires": { "variant": "quickpick" } },
+    "controlsStartId": { "requires": { "variant": "quickpick" } },
+    "controlsEndId": { "requires": { "variant": "quickpick" } },
+    "customQuickPickDates": { "requires": { "variant": "quickpick" } }
+  },
+  "hints": {
+    "quickpick_scope": {
+      "when": { "variant": "quickpick" },
+      "message": "Quick pick uses preset date-range options. Use custom quick pick dates or range controls to tailor the menu.",
+      "type": "info"
+    },
+    "multi_options": {
+      "when": { "multiSelect": true },
+      "message": "Multi-select shows selected values as pills when applicable; use clearable to allow resetting.",
+      "type": "info"
+    }
+  }
+}

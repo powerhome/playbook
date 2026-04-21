@@ -47,8 +47,23 @@ module Playbook
       capture do
         concat form_with(**options, &block)
         concat javascript_tag(<<~JS)
-          window.addEventListener("DOMContentLoaded", function() { PbFormValidation.start() })
-          window.addEventListener("DOMContentLoaded", () => formHelper())
+          (function() {
+            // PbFormValidation is registered with PbKitRegistry and starts automatically
+            // when the playbook-rails bundle loads. The MutationObserver in PbKitRegistry
+            // handles dynamically added forms (including Turbo navigations).
+            // This inline script ensures formHelper runs for this form.
+            var initForm = function() {
+              if (typeof formHelper === 'function') {
+                formHelper();
+              }
+            };
+
+            if (document.readyState === 'loading') {
+              document.addEventListener('DOMContentLoaded', initForm, { once: true });
+            } else {
+              initForm();
+            }
+          })();
         JS
       end
     end

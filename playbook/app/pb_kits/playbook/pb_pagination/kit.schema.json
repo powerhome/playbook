@@ -8,7 +8,7 @@
   ],
   "props": {
     "current": {
-      "type": "number;",
+      "type": "number",
       "platforms": [
         "react"
       ]
@@ -20,13 +20,13 @@
       ]
     },
     "range": {
-      "type": "number;",
+      "type": "number",
       "platforms": [
         "react"
       ]
     },
     "total": {
-      "type": "number;",
+      "type": "number",
       "platforms": [
         "react"
       ]

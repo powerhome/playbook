@@ -1,0 +1,126 @@
+{
+  "template": "<LabelValue{{props}} />",
+  "propTargets": {},
+  "defaults": {
+    "active": false,
+    "variant": "default",
+    "label": "Revenue",
+    "value": "1428"
+  },
+  "groups": [
+    {
+      "name": "Content",
+      "props": [
+        "label",
+        "value"
+      ]
+    },
+    {
+      "name": "Details & appearance",
+      "props": [
+        "variant",
+        "icon",
+        "description",
+        "title",
+        "active",
+        "date"
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Label + value",
+      "props": {
+        "label": "Revenue",
+        "value": "1428",
+        "variant": "default"
+      }
+    },
+    {
+      "name": "Amount + unit",
+      "props": {
+        "label": "Balance",
+        "value": "$2,000.00",
+        "variant": "default"
+      }
+    },
+    {
+      "name": "Percent",
+      "props": {
+        "label": "Growth",
+        "value": "15%",
+        "variant": "default"
+      }
+    },
+    {
+      "name": "Details row",
+      "props": {
+        "variant": "details",
+        "label": "Activity",
+        "icon": "dumbbell",
+        "description": "Q1 campaign",
+        "title": "Review budget",
+        "active": true
+      }
+    },
+    {
+      "name": "Details (inactive)",
+      "props": {
+        "variant": "details",
+        "label": "Snapshot",
+        "icon": "clipboard",
+        "description": "Draft",
+        "title": "FY report",
+        "active": false
+      }
+    }
+  ],
+  "conditionals": {
+    "icon": {
+      "requires": {
+        "variant": "details"
+      }
+    },
+    "description": {
+      "requires": {
+        "variant": "details"
+      }
+    },
+    "title": {
+      "requires": {
+        "variant": "details"
+      }
+    },
+    "date": {
+      "requires": {
+        "variant": "details"
+      }
+    },
+    "active": {
+      "requires": {
+        "variant": "details"
+      }
+    },
+    "value": {
+      "requires": {
+        "variant": "default"
+      }
+    }
+  },
+  "hints": {
+    "details_variant": {
+      "when": {
+        "variant": "details"
+      },
+      "message": "Details variant shows icon, description, and title/date in a row; the default variant shows label + body value only.",
+      "type": "info"
+    },
+    "active_links": {
+      "when": {
+        "active": true
+      },
+      "message": "When active is true, the title and date use the link title variant.",
+      "type": "info"
+    }
+  }
+}

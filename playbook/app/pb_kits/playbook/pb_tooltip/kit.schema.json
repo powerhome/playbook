@@ -21,6 +21,12 @@
         "react"
       ]
     },
+    "height": {
+      "type": "string",
+      "platforms": [
+        "react"
+      ]
+    },
     "icon": {
       "type": "string",
       "platforms": [
@@ -35,13 +41,53 @@
       ],
       "default": false
     },
+    "maxHeight": {
+      "type": "string",
+      "platforms": [
+        "react"
+      ]
+    },
+    "maxWidth": {
+      "type": "string",
+      "platforms": [
+        "react"
+      ]
+    },
+    "minHeight": {
+      "type": "string",
+      "platforms": [
+        "react"
+      ]
+    },
+    "minWidth": {
+      "type": "string",
+      "platforms": [
+        "react"
+      ]
+    },
     "placement": {
       "type": "Placement",
       "platforms": [
         "react"
       ]
     },
+    "position": {
+      "type": "enum",
+      "platforms": [
+        "react"
+      ],
+      "values": [
+        "absolute",
+        "fixed"
+      ]
+    },
     "text": {
+      "type": "string",
+      "platforms": [
+        "react"
+      ]
+    },
+    "width": {
       "type": "string",
       "platforms": [
         "react"
@@ -100,11 +146,11 @@
   "usage": {
     "react": {
       "import": "import { Tooltip } from 'playbook-ui'",
-      "example": "<Tooltip triggerMethod=\"hover\"></Tooltip>"
+      "example": "<Tooltip position=\"absolute\" triggerMethod=\"hover\"></Tooltip>"
     },
     "rails": {
       "import": null,
-      "example": "<%= pb_rails(\"tooltip\", props: { trigger_method: \"hover\" }) %>"
+      "example": "<%= pb_rails(\"tooltip\", props: { position: \"absolute\", trigger_method: \"hover\" }) %>"
     }
   }
 }

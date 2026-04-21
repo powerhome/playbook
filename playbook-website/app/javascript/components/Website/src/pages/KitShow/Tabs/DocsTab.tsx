@@ -2,6 +2,8 @@ import { useState } from "react";
 import { Body, Flex, Card, Button, Caption, Title } from "playbook-ui";
 import ReactMarkdown from "react-markdown";
 import LiveExample from "../../../components/LiveExamples/LiveExampleReact";
+import { SyntaxHighlightedCode } from "../../../components/SyntaxHighlightedCode";
+import { usePlatform } from "../../../contexts/PlatformContext";
 import RightSideNav from "../RightSideNav";
 
 interface Section {
@@ -22,6 +24,10 @@ export const DocsTab = ({
   name,
   sections,
 }: DocsTabProps) => {
+  const { platform } = usePlatform();
+  const codeLanguage =
+    platform === "rails" ? "markup" : platform === "swift" ? "swift" : "tsx";
+
   const [visibleCode, setVisibleCode] = useState<{ [key: string]: boolean }>(
     {},
   );
@@ -85,9 +91,10 @@ export const DocsTab = ({
 
           {visibleCode[example.example_key] && (
             <Card borderNone width="100%">
-              <pre className="highlight">
-                <code>{example.source}</code>
-              </pre>
+              <SyntaxHighlightedCode
+                code={example.source}
+                language={codeLanguage}
+              />
             </Card>
           )}
         </>

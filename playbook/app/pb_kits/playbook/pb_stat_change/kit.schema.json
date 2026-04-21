@@ -20,6 +20,12 @@
       ],
       "default": "neutral"
     },
+    "dark": {
+      "type": "boolean",
+      "platforms": [
+        "react"
+      ]
+    },
     "icon": {
       "type": "string",
       "platforms": [

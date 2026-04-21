@@ -1,0 +1,52 @@
+{
+  "template": "<PhoneNumberInput{{props}} />",
+  "propTargets": {},
+  "defaults": {
+    "disabled": false,
+    "error": "",
+    "hiddenInputs": false,
+    "initialCountry": "",
+    "label": "",
+    "name": "",
+    "required": false,
+    "requiredIndicator": false,
+    "value": "",
+    "formatAsYouType": false,
+    "strictMode": false,
+    "countrySearch": false
+  },
+  "groups": [
+    {
+      "name": "Props",
+      "props": [
+        "dark",
+        "disabled",
+        "error",
+        "hiddenInputs",
+        "initialCountry",
+        "isValid",
+        "label",
+        "name",
+        "onChange",
+        "onValidate",
+        "onlyCountries",
+        "excludeCountries",
+        "preferredCountries",
+        "required",
+        "requiredIndicator",
+        "value",
+        "formatAsYouType",
+        "strictMode",
+        "countrySearch"
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default",
+      "props": {}
+    }
+  ],
+  "conditionals": {},
+  "hints": {}
+}

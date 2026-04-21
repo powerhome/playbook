@@ -368,6 +368,26 @@ RSpec.describe Playbook::PbAdvancedTable::TableHeader do
     end
   end
 
+  describe "#header_flex_justify and #header_flex_text_align" do
+    let(:instance) { subject.new(column_definitions: [{ accessor: "a", label: "A" }, { accessor: "b", label: "B" }]) }
+
+    it "maps header_alignment to flex justify like React (left→start, center→center, right→end)" do
+      expect(instance.header_flex_justify({ header_alignment: "left" }, 1, 0)).to eq "start"
+      expect(instance.header_flex_justify({ header_alignment: "center" }, 1, 0)).to eq "center"
+      expect(instance.header_flex_justify({ header_alignment: "right" }, 1, 0)).to eq "end"
+    end
+
+    it "uses default row/column justify when header_alignment is absent" do
+      expect(instance.header_flex_justify({ label: "A" }, 0, 0)).to eq "start"
+      expect(instance.header_flex_justify({ label: "B" }, 1, 0)).to eq "end"
+    end
+
+    it "sets text_align from header_alignment or end" do
+      expect(instance.header_flex_text_align({ header_alignment: "left" })).to eq "left"
+      expect(instance.header_flex_text_align({ label: "x" })).to eq "end"
+    end
+  end
+
   describe "#has_custom_header_background_color?" do
     it "returns true when header_background_color is present" do
       instance = subject.new({})

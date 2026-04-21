@@ -31,6 +31,7 @@
       name: object.name,
       placeholder: object.placeholder,
       required: object.required,
+      validation: object.validation_message.present? ? { message: object.validation_message } : {},
     }) %>
     <% end %>
     <% if object.selection_type == "quickpick" %>

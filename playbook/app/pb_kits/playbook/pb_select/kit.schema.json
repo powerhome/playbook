@@ -53,7 +53,7 @@
       "default": false
     },
     "inputOptions": {
-      "type": "{[key: string]: string | number | boolean | (() => void)}",
+      "type": "GenericObject",
       "platforms": [
         "react",
         "rails"
@@ -64,6 +64,18 @@
       "platforms": [
         "react",
         "rails"
+      ]
+    },
+    "margin": {
+      "type": "string",
+      "platforms": [
+        "react"
+      ]
+    },
+    "marginBottom": {
+      "type": "string",
+      "platforms": [
+        "react"
       ]
     },
     "multiple": {

@@ -61,6 +61,21 @@
       ],
       "default": false
     },
+    "borderRadius": {
+      "type": "enum",
+      "platforms": [
+        "react"
+      ],
+      "values": [
+        "xs",
+        "sm",
+        "md",
+        "lg",
+        "xl",
+        "none",
+        "rounded"
+      ]
+    },
     "dragId": {
       "type": "string",
       "platforms": [
@@ -84,8 +99,21 @@
       ],
       "default": true
     },
+    "highlight": {
+      "type": "GenericObject",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
     "length": {
       "type": "number",
+      "platforms": [
+        "react"
+      ]
+    },
+    "padding": {
+      "type": "string",
       "platforms": [
         "react"
       ]
@@ -130,12 +158,6 @@
       ],
       "default": false
     },
-    "highlight": {
-      "platforms": [
-        "rails"
-      ],
-      "type": "string"
-    },
     "items": {
       "platforms": [
         "rails"
@@ -158,11 +180,11 @@
   "usage": {
     "react": {
       "import": "import { Card } from 'playbook-ui'",
-      "example": "<Card background=\"white\" tag=\"div\"></Card>"
+      "example": "<Card background=\"white\" borderRadius=\"xs\"></Card>"
     },
     "rails": {
       "import": null,
-      "example": "<%= pb_rails(\"card\", props: { background: \"white\", tag: \"div\" }) %>"
+      "example": "<%= pb_rails(\"card\", props: { background: \"white\", border_radius: \"xs\" }) %>"
     }
   }
 }

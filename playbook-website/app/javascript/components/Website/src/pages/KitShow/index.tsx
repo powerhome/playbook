@@ -7,13 +7,22 @@ import { PageContainer } from "../../components/PageContainer";
 import { linkFormat } from "../../../../../utilities/website_sidebar_helper";
 import { DocsTab } from "./Tabs/DocsTab";
 import { PropsTab } from "./Tabs/PropsTab";
-import { BuildingBlocksTab } from "./Tabs/BuildingBlocksTab";
-import { ReferencesTab } from "./Tabs/ReferencesTab";
+// import { BuildingBlocksTab } from "./Tabs/BuildingBlocksTab";
+// import { ReferencesTab } from "./Tabs/ReferencesTab";
+import { PlaygroundTab } from "./Tabs/PlaygroundTab";
 
 const KitShow = () => {
   const { name } = useParams();
   const loaderData = useLoaderData() as any;
-  const { examples, kit_description, kit_sections, available_props } = loaderData;
+  const {
+    examples,
+    kit_description,
+    kit_sections,
+    available_props,
+    kit_schema,
+    global_props_schema,
+    playground_config,
+  } = loaderData;
 
   // Prepare example props for advanced_table examples
   const exampleProps = useMemo(() => {
@@ -69,6 +78,13 @@ const KitShow = () => {
             onClick={() => setActiveTab("props")}
           />
           <NavItem
+            text="Playground"
+            active={activeTab === "playground"}
+            onClick={() => setActiveTab("playground")}
+          />
+
+          {/* Building Blocks and References tabs, commented out until building blocks and references are implemented */}
+          {/* <NavItem
             text="Building Blocks"
             active={activeTab === "building-blocks"}
             onClick={() => setActiveTab("building-blocks")}
@@ -77,9 +93,21 @@ const KitShow = () => {
             text="References"
             active={activeTab === "references"}
             onClick={() => setActiveTab("references")}
-          />
+          /> */}
         </Nav>
         <SectionSeparator marginBottom="lg" />
+
+        {/* Playground Tab Content */}
+        {activeTab === "playground" && (
+          <PlaygroundTab
+            kitSchema={kit_schema}
+            globalPropsSchema={global_props_schema}
+            kitName={loaderData.kit || name || ""}
+            defaultExample={examples?.[0]}
+            playgroundConfig={playground_config}
+          />
+        )}
+
         {/* Docs Tab Content */}
         {activeTab === "docs" && (
           <DocsTab
@@ -93,11 +121,11 @@ const KitShow = () => {
         {/* Props Tab Content */}
         {activeTab === "props" && <PropsTab availableProps={available_props} />}
 
-        {/* Building Blocks Tab Content */}
-        {activeTab === "building-blocks" && <BuildingBlocksTab />}
+        {/* Building Blocks Tab Content, commented out until building blocks are implemented */}
+        {/* {activeTab === "building-blocks" && <BuildingBlocksTab />} */}
 
-        {/* References Tab Content */}
-        {activeTab === "references" && <ReferencesTab />}
+        {/* References Tab Content, commented out until references are implemented */}
+        {/* {activeTab === "references" && <ReferencesTab />} */}
       </PageContainer>
     </>
   );

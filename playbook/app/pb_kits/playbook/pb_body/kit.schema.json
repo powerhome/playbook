@@ -23,6 +23,12 @@
       ],
       "default": "default"
     },
+    "dark": {
+      "type": "boolean",
+      "platforms": [
+        "react"
+      ]
+    },
     "highlightedText": {
       "type": "array",
       "platforms": [

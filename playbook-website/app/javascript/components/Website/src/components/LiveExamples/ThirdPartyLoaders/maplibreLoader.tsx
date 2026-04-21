@@ -5,7 +5,7 @@ function ensureMapLibreCSS() {
   if (document.querySelector('link[data-maplibre-css="1"]')) return
   const link = document.createElement("link")
   link.rel = "stylesheet"
-  link.href = "https://unpkg.com/maplibre-gl@3.6.2/dist/maplibre-gl.css"
+  link.href = "https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css"
   link.setAttribute("data-maplibre-css", "1")
   document.head.appendChild(link)
 }

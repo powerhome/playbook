@@ -156,6 +156,20 @@
       ],
       "default": null
     },
+    "padding": {
+      "type": "enum",
+      "platforms": [
+        "react"
+      ],
+      "values": [
+        "none",
+        "xs",
+        "sm",
+        "md",
+        "lg",
+        "xl"
+      ]
+    },
     "tag": {
       "type": "enum",
       "platforms": [
