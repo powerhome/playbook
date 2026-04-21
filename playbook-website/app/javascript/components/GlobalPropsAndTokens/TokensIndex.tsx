@@ -24,6 +24,7 @@ const Tokens = ({ linkPrefix = "" }: TokensProps) => {
       display="flex"
       justifyContent="center"
       alignItems="center"
+      height="100%"
     >
       <Background
         imageUrl={HeaderImage}
