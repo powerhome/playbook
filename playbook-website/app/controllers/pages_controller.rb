@@ -141,6 +141,17 @@ class PagesController < ApplicationController
       end
     end
 
+    icon_data = JSON.parse(File.read(Rails.root.join("app/assets/icons.json")))
+    icons_by_category = icon_data.group_by { |icon| icon["category"] }
+    icon_categories = icons_by_category.keys.sort.map do |category|
+      {
+        text: category,
+        link: "##{category.parameterize}",
+        value: category.parameterize,
+        label: category,
+      }
+    end
+
     respond_to do |format|
       format.html { render layout: "application_beta", inline: "" }
       format.json do
@@ -165,6 +176,10 @@ class PagesController < ApplicationController
           getting_started: DOCS[:getting_started],
           design_guidelines: DOCS[:design_guidelines],
           icons: DOCS[:icons],
+          icon_banner_image_url: view_context.vite_asset_path("images/icon-banner.svg"),
+          icon_categories: icon_categories,
+          icon_kit_url: "https://playbook.powerapp.cloud/kits/icon/react",
+          icons_by_category: icons_by_category,
           whats_new: DOCS[:whats_new],
           building_blocks: BUILDING_BLOCKS,
           global_props_and_tokens: GLOBAL_PROPS_AND_TOKENS,

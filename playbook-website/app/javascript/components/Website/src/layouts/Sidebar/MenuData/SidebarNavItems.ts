@@ -41,6 +41,13 @@ export const SideBarNavItems = [
         children: true,
         leftIcon:"palette"
     },
+    {
+        name: "Icons",
+        key: "top-nav-item-7",
+        link: "/icons",
+        children: false,
+        leftIcon:"icons"
+    },
     // {
     //     name: "Building Blocks",
     //     key: "top-nav-item-6",
@@ -48,11 +55,4 @@ export const SideBarNavItems = [
     //     children: true,
     //     leftIcon:"chalkboard-teacher"
     // },
-    // {
-    //     name: "Icons",
-    //     key: "top-nav-item-7",
-    //     link: "/playbook_icons",
-    //     children: false,
-    //     leftIcon:"icons"
-    // }
 ]

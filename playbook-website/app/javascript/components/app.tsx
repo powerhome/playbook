@@ -4,6 +4,7 @@ import {
   Navigate,
   Route,
   RouterProvider,
+    useLoaderData,
   useParams,
 } from 'react-router-dom'
 
@@ -11,7 +12,6 @@ import App from './Website'
 import ComponentList from './Website/src/pages/ComponentList'
 import CategoryShow from './Website/src/pages/CategoryShow'
 import KitShow from './Website/src/pages/KitShow'
-import IconList from './Website/src/pages/IconList'
 import Changelog from './Website/src/pages/Changelog'
 import GettingStarted from './Website/src/pages/GettingStarted'
 import DesignGuidelines from './Website/src/pages/DesignGuidelines'
@@ -25,6 +25,7 @@ import GlobalPropsIndex from './GlobalPropsAndTokens/GlobalPropsIndex'
 import GlobalPropsExamples from './GlobalPropsAndTokens/ExamplesPage/GlobalPropsExamplesIndex'
 import TokensIndex from './GlobalPropsAndTokens/TokensIndex'
 import TokensExamples from './GlobalPropsAndTokens/ExamplesPage/TokensExamplesIndex'
+import IconsIndex from './Icons/IconsIndex'
 
 function GlobalPropsShowPage() {
   const { name } = useParams()
@@ -34,6 +35,24 @@ function GlobalPropsShowPage() {
 function TokensShowPage() {
   const { name } = useParams()
   return <TokensExamples routeParamName={name} />
+}
+
+function BetaIconsPage() {
+    const {
+        icon_banner_image_url,
+        icon_categories,
+        icon_kit_url,
+        icons_by_category,
+    }: any = useLoaderData()
+
+    return (
+        <IconsIndex
+            bannerImageUrl={icon_banner_image_url}
+            iconCategories={icon_categories}
+            iconKitUrl={icon_kit_url}
+            iconsByCategory={icons_by_category}
+        />
+    )
 }
 
 const router = createBrowserRouter(
@@ -91,7 +110,8 @@ const router = createBrowserRouter(
           path="tokens/:name"
       />
       <Route
-          element={<IconList />}
+          element={<BetaIconsPage />}
+          loader={ComponentsLoader}
           path="icons"
       />
       <Route
