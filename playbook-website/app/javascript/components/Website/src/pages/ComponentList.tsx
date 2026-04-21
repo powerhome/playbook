@@ -60,22 +60,24 @@ export default function ComponentList() {
 
   const displayedKits = useMemo(() => {
     const q = searchQuery.trim()
-    if (!q) return kitsToShow
-    return kitsToShow
+    const stableByKit = kitsToShow
       .map((kit) => ({
         ...kit,
-        components: matchSorter(
-          kit.components.filter((c) => c.status === "stable"),
-          q,
-          { keys: ["name"] }
-        ),
+        components: kit.components.filter((c) => c.status === "stable"),
+      }))
+      .filter((kit) => kit.components.length > 0)
+
+    if (!q) return stableByKit
+
+    return stableByKit
+      .map((kit) => ({
+        ...kit,
+        components: matchSorter(kit.components, q, { keys: ["name"] }),
       }))
       .filter((kit) => kit.components.length > 0)
   }, [kitsToShow, searchQuery])
 
-  const hasVisibleKits = displayedKits.some((kit) =>
-    kit.components.some((c) => c.status === "stable")
-  )
+  const hasVisibleKits = displayedKits.length > 0
 
   return (
     <>
@@ -125,9 +127,7 @@ export default function ComponentList() {
                       <CategoryTitle category={category} />
                     </NavLink>
                     <KitGrid>
-                      {components
-                      .filter(component => component.status === "stable")
-                      .map(({ name, description, parent }, index) => (
+                      {components.map(({ name, description, parent }, index) => (
                         <KitCard
                           description={description}
                           name={name}
