@@ -12,6 +12,8 @@ type WelcomeProps = {
   titleSize?: number | string;
   buttonsFlexDirection?: string;
   buttonFullWidth?: string | boolean;
+  getStartedLink?: string;
+  exploreComponentsLink?: string;
 };
 
 const WelcomeComponent = ({
@@ -21,7 +23,9 @@ const WelcomeComponent = ({
   displayProps,
   titleSize,
   buttonsFlexDirection = "row",
-  buttonFullWidth
+  buttonFullWidth,
+  getStartedLink = "/guides/getting_started",
+  exploreComponentsLink = "/kits",
 }: WelcomeProps) => {
   return (
     <>
@@ -73,7 +77,7 @@ const WelcomeComponent = ({
               fullWidth={buttonFullWidth && true}
               icon="arrow-right"
               iconRight
-              link="/guides/getting_started"
+              link={getStartedLink}
               marginBottom="sm"
               marginRight="sm"
               tabIndex={0}
@@ -82,7 +86,7 @@ const WelcomeComponent = ({
             />
             <Button
               fullWidth={buttonFullWidth}
-              link="/kits"
+              link={exploreComponentsLink}
               tabIndex={0}
               text="Explore components"
               variant="secondary"

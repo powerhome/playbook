@@ -7,6 +7,7 @@ import {
 } from 'react-router-dom'
 
 import App from './Website'
+import BetaHome from './Website/src/pages/BetaHome'
 import ComponentList from './Website/src/pages/ComponentList'
 import CategoryShow from './Website/src/pages/CategoryShow'
 import KitShow from './Website/src/pages/KitShow'
@@ -25,21 +26,12 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <Route
         element={<App />}
+        errorElement={<Error />}
+        id="beta-site"
         loader={ComponentsLoader}
         path="/beta"
-        errorElement={<Error />}
     >
-      <Route
-          element={<ComponentList />}
-          loader={ComponentsLoader}
-          path="kits"
-      >
-        <Route
-            element={<Navigate to="react" />}
-            loader={ComponentShowLoader}
-            path=":name"
-        />
-      </Route>
+      <Route element={<BetaHome />} index />
       <Route
           element={<KitShow />}
           loader={ComponentShowLoader}
@@ -50,6 +42,13 @@ const router = createBrowserRouter(
           loader={ComponentShowLoader}
           path="kits/:name/:platform"
       />
+      <Route path="kits" element={<ComponentList />}>
+        <Route
+            element={<Navigate to="react" />}
+            loader={ComponentShowLoader}
+            path=":name"
+        />
+      </Route>
       <Route
           element={<CategoryShow />}
           loader={CategoryLoader}

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import { NavLink, Outlet, useLoaderData, useOutlet } from "react-router-dom"
+import { NavLink, Outlet, useOutlet, useRouteLoaderData } from "react-router-dom"
 import { Body, Flex } from 'playbook-ui'
 
 import { KitCard } from "../components/KitCard"
@@ -36,7 +36,8 @@ const description =
 
 export default function ComponentList() {
   const outlet = useOutlet()
-  const { kits } = useLoaderData()
+  // Index route has no loader; read shared data from parent /beta route (see app.tsx id="beta-site").
+  const { kits } = useRouteLoaderData("beta-site") as { kits: Kit[] }
   const [kitsToShow, setKitsToShow] = useState(kits)
   const { platform } = usePlatform()
 

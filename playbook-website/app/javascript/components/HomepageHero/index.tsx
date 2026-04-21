@@ -4,8 +4,18 @@ import MaxScreen from "./Pages/MaxScreen";
 import MediumScreen from "./Pages/MediumScreen";
 import SmallScreen from "./Pages/SmallScreen";
 import MobileScreen from "./Pages/MobileScreen";
+import {
+  betaHomepageHeroCTALinks,
+  defaultHomepageHeroCTALinks,
+} from "./ctaLinks";
 
-const HomepageHero = () => {
+export type HomepageHeroProps = {
+  /** When true, CTA buttons route into the beta docs app (/beta/kits, etc.). */
+  beta?: boolean;
+};
+
+const HomepageHero = ({ beta = false }: HomepageHeroProps) => {
+  const ctaLinks = beta ? betaHomepageHeroCTALinks : defaultHomepageHeroCTALinks;
   const [isMax, setIsMax] = useState(window.innerWidth > 1376);
   const [isMedium, setIsMedium] = useState(window.innerWidth > 1147);
   const [isMobile, setIsMobile] = useState(window.innerWidth > 575);
@@ -42,13 +52,13 @@ const HomepageHero = () => {
           width="xl"
       >
         {isMax ? (
-          <MaxScreen />
+          <MaxScreen ctaLinks={ctaLinks} />
         ) : isMedium ? (
-          <MediumScreen />
+          <MediumScreen ctaLinks={ctaLinks} />
         ) : isMobile ? (
-          <SmallScreen />
+          <SmallScreen ctaLinks={ctaLinks} />
         ) : (
-          <MobileScreen />
+          <MobileScreen ctaLinks={ctaLinks} />
         )}
       </Flex>
     </Background>

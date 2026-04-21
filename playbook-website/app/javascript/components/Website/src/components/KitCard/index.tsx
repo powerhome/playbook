@@ -1,4 +1,4 @@
-import { Link, useLoaderData } from "react-router-dom";
+import { Link, useRouteLoaderData } from "react-router-dom";
 import { Body, Card, Flex, Icon, Title } from "playbook-ui";
 
 import { linkFormat } from "../../../../../utilities/website_sidebar_helper";
@@ -13,7 +13,7 @@ type KitCardProps = {
 };
 
 export const KitCard = ({ description, name, platform, parent }: KitCardProps) => {
-  const { kits } = useLoaderData() as {
+  const { kits } = useRouteLoaderData("beta-site") as {
     kits: Array<{ category: string; components: Array<{ name: string }> }>;
   };
 

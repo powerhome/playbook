@@ -136,6 +136,8 @@ class PagesController < ApplicationController
       end
     end
 
+    landing_posts = extract_changelog_data(changelog_content)
+
     respond_to do |format|
       format.html { render layout: "application_beta", inline: "" }
       format.json do
@@ -174,7 +176,7 @@ class PagesController < ApplicationController
           table_data_no_subrows: @beta_table_data_no_subrows,
           table_data_pagination: @beta_table_data_pagination,
           table_data_infinite_scroll: @beta_table_data_infinite_scroll,
-
+          landing_posts: landing_posts,
         }
       end
     end
