@@ -4,6 +4,7 @@ import {
   Navigate,
   Route,
   RouterProvider,
+  useParams,
 } from 'react-router-dom'
 
 import App from './Website'
@@ -20,6 +21,20 @@ import Spacing from './Website/src/pages/DesignGuidelines/Spacing'
 import Typography from './Website/src/pages/DesignGuidelines/Typography'
 import Error from './Error'
 import { CategoryLoader, ComponentsLoader, ComponentShowLoader, GuidesLoader, GuidePageLoader } from './Website/src/hooks/loaders'
+import GlobalPropsIndex from './GlobalPropsAndTokens/GlobalPropsIndex'
+import GlobalPropsExamples from './GlobalPropsAndTokens/ExamplesPage/GlobalPropsExamplesIndex'
+import TokensIndex from './GlobalPropsAndTokens/TokensIndex'
+import TokensExamples from './GlobalPropsAndTokens/ExamplesPage/TokensExamplesIndex'
+
+function GlobalPropsShowPage() {
+  const { name } = useParams()
+  return <GlobalPropsExamples routeParamName={name} />
+}
+
+function TokensShowPage() {
+  const { name } = useParams()
+  return <TokensExamples routeParamName={name} />
+}
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -54,6 +69,26 @@ const router = createBrowserRouter(
           element={<CategoryShow />}
           loader={CategoryLoader}
           path="kit_category/:category"
+      />
+      <Route
+          element={<GlobalPropsIndex linkPrefix="/beta" />}
+          loader={ComponentsLoader}
+          path="global_props"
+      />
+      <Route
+          element={<GlobalPropsShowPage />}
+          loader={ComponentsLoader}
+          path="global_props/:name"
+      />
+      <Route
+          element={<TokensIndex linkPrefix="/beta" />}
+          loader={ComponentsLoader}
+          path="tokens"
+      />
+      <Route
+          element={<TokensShowPage />}
+          loader={ComponentsLoader}
+          path="tokens/:name"
       />
       <Route
           element={<IconList />}

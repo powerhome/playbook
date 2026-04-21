@@ -20,20 +20,20 @@ export const SideBarNavItems = [
         children: true,
         leftIcon:"grid-2"
     },
-    // {
-    //     name: "Global Props",
-    //     key: "top-nav-item-4",
-    //     link: "/global_props",
-    //     children: true,
-    //     leftIcon:"globe"
-    // },
-    // {
-    //     name: "Tokens",
-    //     key: "top-nav-item-8",
-    //     link: "/tokens",
-    //     children: true,
-    //     leftIcon:"shapes"
-    // },
+    {
+        name: "Global Props",
+        key: "top-nav-item-4",
+        link: "/global_props",
+        children: true,
+        leftIcon:"globe"
+    },
+    {
+        name: "Tokens",
+        key: "top-nav-item-8",
+        link: "/tokens",
+        children: true,
+        leftIcon:"shapes"
+    },
     {
         name: "Design Guidelines",
         key: "top-nav-item-5",

@@ -1,4 +1,5 @@
 import { Flex, Image, Badge, SectionSeparator, FlexItem } from "playbook-ui";
+import { useNavigate } from "react-router-dom";
 // @ts-ignore
 import PBLogo from "../../../../images/pb-logo.svg";
 import KitSearch from "../../../KitSearch";
@@ -23,6 +24,8 @@ const Header = ({
   platform,
   setPlatform,
 }: HeaderProps) => {
+  const navigate = useNavigate();
+
   return (
     <>
       <Flex 
@@ -77,9 +80,11 @@ const Header = ({
                 id="desktop-kit-search"
                 kits={search_list}
                 global_props_and_tokens={global_props_and_tokens}
+                beta={true}
+                onBetaNavigate={(path) => navigate(path)}
                 marginBottom="none"
               />
-              <DarkModeToggle initMode={dark} />
+              <DarkModeToggle initMode={JSON.stringify(!!dark)} />
             </Flex>
           </FlexItem>
           {/* End Search Bar + dark mode toggle */}
