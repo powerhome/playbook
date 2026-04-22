@@ -29,32 +29,40 @@ export const ComponentsLoader: () => Promise<CategoryTypes[]> = async () => {
   return data;
 };
 
-export const ComponentShowLoader = async ({ params, request }:any) => {
+export const ComponentShowLoader = async ({
+  params,
+  request,
+}: LoaderFunctionArgs) => {
   // Check if this is an advanced_table section route using the request URL
   const requestUrl = new URL(request.url);
-  const isAdvancedTableSection = requestUrl.pathname.includes('/kits/advanced_table/');
+  const isAdvancedTableSection = requestUrl.pathname.includes(
+    "/kits/advanced_table/",
+  );
   
   // Get platform from route params (react, rails, swift)
-  const platform = params.platform || 'react';
-  
-  let url;
+  const platform =
+    typeof params.platform === "string" && params.platform.length > 0
+      ? params.platform
+      : "react";
+
+  let url: string;
   if (isAdvancedTableSection) {
     // For advanced_table sections like /kits/advanced_table/default/react
     // params.name is the section name, fetch from advanced_table with section param
-    url = `/beta/kits/advanced_table.json?section=${params.name}&platform=${platform}`;
+    url = `/beta/kits/advanced_table/${params.name}/${platform}.json`;
   } else {
     // Normal kit route
-    url = `/beta/kits/${params.name}.json?platform=${platform}`;
+    url = `/beta/kits/${params.name}/${platform}.json`;
   }
-  
+
   const response = await fetch(url);
-  const data = await response.json();  
-  return data; 
+  const data = await response.json();
+  return data;
 };
 
 export const CategoryLoader: (
   props: LoaderFunctionArgs
-) => Promise<CategoryTypes> = async ({ params }) => {
+) => Promise<ComponentTypes> = async ({ params }) => {
   const response = await fetch("/beta/kits.json");
   const { kits } = await response.json();
 

@@ -26,8 +26,8 @@ export const DocsTab = ({
   sections,
 }: DocsTabProps) => {
   const { platform } = usePlatform();
-  const codeLanguage =
-    platform === "rails" ? "markup" : platform === "swift" ? "swift" : "tsx";
+  const codeLanguage: "erb" | "swift" | "tsx" =
+    platform === "rails" ? "erb" : platform === "swift" ? "swift" : "tsx";
 
   const [visibleCode, setVisibleCode] = useState<{ [key: string]: boolean }>(
     {},
@@ -63,7 +63,7 @@ export const DocsTab = ({
       <Card marginBottom="lg" padding="none" width="100%">
         <Caption text={example.title} color="lighter" margin="md" />
         {platform === "rails" ? (
-          <LiveExampleRails html={example.rendered} />
+          <LiveExampleRails html={example.rendered ?? ""} />
         ) : (
           <LiveExample code={example.source} exampleProps={exampleProps} />
         )}
@@ -97,8 +97,11 @@ export const DocsTab = ({
           {visibleCode[example.example_key] && (
             <Card borderNone width="100%">
               <SyntaxHighlightedCode
-                code={example.source}
+                code={example.source ?? ""}
                 language={codeLanguage}
+                rougeHtml={
+                  platform === "rails" ? example.highlighted_source : undefined
+                }
               />
             </Card>
           )}
