@@ -16,9 +16,10 @@ import BlurBackground from "./BlurBackground";
 
 type MediumScreenProps = {
   ctaLinks: HomepageHeroCTALinks;
+  onNavigate?: (path: string) => void;
 };
 
-const MediumScreen = ({ ctaLinks }: MediumScreenProps) => {
+const MediumScreen = ({ ctaLinks, onNavigate }: MediumScreenProps) => {
   return (
     <>
       <Background
@@ -41,6 +42,7 @@ const MediumScreen = ({ ctaLinks }: MediumScreenProps) => {
           fixedSize="963px"
           getStartedLink={ctaLinks.getStarted}
           headerAlign="center"
+          onNavigate={onNavigate}
         />
       </Background>
 

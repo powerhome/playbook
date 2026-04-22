@@ -15,9 +15,10 @@ import GridSmall from "../../../images/SmallBackgroundGrid.svg";
 
 type SmallScreenProps = {
   ctaLinks: HomepageHeroCTALinks;
+  onNavigate?: (path: string) => void;
 };
 
-const SmallScreen = ({ ctaLinks }: SmallScreenProps) => {
+const SmallScreen = ({ ctaLinks, onNavigate }: SmallScreenProps) => {
   return (
     <>
       <Background
@@ -41,6 +42,7 @@ const SmallScreen = ({ ctaLinks }: SmallScreenProps) => {
           fixedSize="599px"
           getStartedLink={ctaLinks.getStarted}
           headerAlign="center"
+          onNavigate={onNavigate}
         />
       </Background>
 

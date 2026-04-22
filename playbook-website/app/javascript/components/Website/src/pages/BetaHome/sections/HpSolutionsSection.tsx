@@ -1,4 +1,5 @@
-import React, { useLayoutEffect, useRef } from "react"
+import { useLayoutEffect, useRef } from "react"
+import { useNavigate } from "react-router-dom"
 import {
   Background,
   Body,
@@ -39,6 +40,7 @@ const captionHtml =
  * “Design, develop, deliver” solutions strip — ported from `HpSolutionsComponent`.
  */
 export default function HpSolutionsSection() {
+  const navigate = useNavigate()
   const containerRef = useRef<HTMLDivElement>(null)
   const codeCardRef = useRef<HTMLDivElement>(null)
 
@@ -207,7 +209,9 @@ export default function HpSolutionsSection() {
               <Button
                   icon="arrow-right"
                   iconRight
-                  link={GUIDE.explore}
+                  onClick={() => {
+                    navigate(GUIDE.explore)
+                  }}
                   size="lg"
                   text="Explore Playbook Solutions"
               />

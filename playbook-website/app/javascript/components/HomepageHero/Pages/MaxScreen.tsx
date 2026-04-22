@@ -18,9 +18,10 @@ import BlurBackground from "./BlurBackground";
 
 type MaxScreenProps = {
   ctaLinks: HomepageHeroCTALinks;
+  onNavigate?: (path: string) => void;
 };
 
-const MaxScreen = ({ ctaLinks }: MaxScreenProps) => {
+const MaxScreen = ({ ctaLinks, onNavigate }: MaxScreenProps) => {
   return (
     <>
       <Background
@@ -34,6 +35,7 @@ const MaxScreen = ({ ctaLinks }: MaxScreenProps) => {
           exploreComponentsLink={ctaLinks.exploreComponents}
           fixedSize="546px"
           getStartedLink={ctaLinks.getStarted}
+          onNavigate={onNavigate}
         />
       </Background>
 

@@ -14,6 +14,8 @@ type WelcomeProps = {
   buttonFullWidth?: string | boolean;
   getStartedLink?: string;
   exploreComponentsLink?: string;
+  /** When set (beta SPA), CTAs use client navigation instead of full-page anchor loads. */
+  onNavigate?: (path: string) => void;
 };
 
 const WelcomeComponent = ({
@@ -26,7 +28,24 @@ const WelcomeComponent = ({
   buttonFullWidth,
   getStartedLink = "/guides/getting_started",
   exploreComponentsLink = "/kits",
+  onNavigate,
 }: WelcomeProps) => {
+  const getStartedButtonProps = onNavigate
+    ? {
+        onClick: () => {
+          onNavigate(getStartedLink);
+        },
+      }
+    : { link: getStartedLink };
+
+  const exploreComponentsButtonProps = onNavigate
+    ? {
+        onClick: () => {
+          onNavigate(exploreComponentsLink);
+        },
+      }
+    : { link: exploreComponentsLink };
+
   return (
     <>
       <Flex className="welcome_component">
@@ -77,20 +96,20 @@ const WelcomeComponent = ({
               fullWidth={buttonFullWidth && true}
               icon="arrow-right"
               iconRight
-              link={getStartedLink}
               marginBottom="sm"
               marginRight="sm"
               tabIndex={0}
               text="Get started"
               zIndex={2}
+              {...getStartedButtonProps}
             />
             <Button
               fullWidth={buttonFullWidth}
-              link={exploreComponentsLink}
               tabIndex={0}
               text="Explore components"
               variant="secondary"
               zIndex={2}
+              {...exploreComponentsButtonProps}
             />
           </Flex>
         </FlexItem>

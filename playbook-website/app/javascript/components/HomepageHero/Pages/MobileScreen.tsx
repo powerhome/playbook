@@ -5,9 +5,10 @@ import WelcomeComponent from "./Welcome";
 
 type MobileScreenProps = {
   ctaLinks: HomepageHeroCTALinks;
+  onNavigate?: (path: string) => void;
 };
 
-const MobileScreen = ({ ctaLinks }: MobileScreenProps) => {
+const MobileScreen = ({ ctaLinks, onNavigate }: MobileScreenProps) => {
   return (
     <>
       <Background
@@ -31,6 +32,7 @@ const MobileScreen = ({ ctaLinks }: MobileScreenProps) => {
           fixedSize="374px"
           getStartedLink={ctaLinks.getStarted}
           headerAlign="center"
+          onNavigate={onNavigate}
           titleSize={3}
         />
       </Background>

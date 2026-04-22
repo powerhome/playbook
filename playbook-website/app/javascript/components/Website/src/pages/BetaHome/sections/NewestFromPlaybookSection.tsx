@@ -1,4 +1,4 @@
-import React from "react"
+import { Link } from "react-router-dom"
 import {
   Background,
   Body,
@@ -40,7 +40,9 @@ function PreviewCardRow({ index, post }: RowProps) {
         maxWidth="xl"
         padding="none"
       >
-        <a href={href} style={{ color: "inherit", textDecoration: "none" }}>
+        <Link style={{ color: "inherit", textDecoration: "none" }}
+            to={href}
+        >
           <Flex
             alignItems="stretch"
             flexDirection={{ xs: "column" }}
@@ -82,7 +84,7 @@ function PreviewCardRow({ index, post }: RowProps) {
               <Button icon="chevron-right" iconRight text="Read More" />
             </Flex>
           </Flex>
-        </a>
+        </Link>
       </Card>
     </Flex>
   )
