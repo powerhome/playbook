@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Body, Flex, Card, Button, Caption, Title } from "playbook-ui";
 import ReactMarkdown from "react-markdown";
 import LiveExample from "../../../components/LiveExamples/LiveExampleReact";
+import LiveExampleRails from "../../../components/LiveExamples/LiveExampleRails";
 import { SyntaxHighlightedCode } from "../../../components/SyntaxHighlightedCode";
 import { usePlatform } from "../../../contexts/PlatformContext";
 import RightSideNav from "../RightSideNav";
@@ -61,7 +62,11 @@ export const DocsTab = ({
     >
       <Card marginBottom="lg" padding="none" width="100%">
         <Caption text={example.title} color="lighter" margin="md" />
-        <LiveExample code={example.source} exampleProps={exampleProps} />
+        {platform === "rails" ? (
+          <LiveExampleRails html={example.rendered} />
+        ) : (
+          <LiveExample code={example.source} exampleProps={exampleProps} />
+        )}
         {example.description && example.description !== "" && (
           <Body margin="md">
             <ReactMarkdown>{example.description}</ReactMarkdown>

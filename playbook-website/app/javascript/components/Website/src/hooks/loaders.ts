@@ -34,14 +34,17 @@ export const ComponentShowLoader = async ({ params, request }:any) => {
   const requestUrl = new URL(request.url);
   const isAdvancedTableSection = requestUrl.pathname.includes('/kits/advanced_table/');
   
+  // Get platform from route params (react, rails, swift)
+  const platform = params.platform || 'react';
+  
   let url;
   if (isAdvancedTableSection) {
     // For advanced_table sections like /kits/advanced_table/default/react
     // params.name is the section name, fetch from advanced_table with section param
-    url = `/beta/kits/advanced_table.json?section=${params.name}`;
+    url = `/beta/kits/advanced_table.json?section=${params.name}&platform=${platform}`;
   } else {
     // Normal kit route
-    url = `/beta/kits/${params.name}.json`;
+    url = `/beta/kits/${params.name}.json?platform=${platform}`;
   }
   
   const response = await fetch(url);

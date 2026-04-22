@@ -103,6 +103,7 @@ class PagesController < ApplicationController
         title: example.values.first,
         source: source_code,
         description: description,
+        rendered: rendered_example(example_key),
       }
     end
 
@@ -422,7 +423,29 @@ class PagesController < ApplicationController
   end
 
   def get_source(example)
-    read_kit_file("_#{example}.jsx")
+    extension = case @type
+                when "rails"
+                  "html.erb"
+                when "swift"
+                  "swift"
+                else
+                  "jsx"
+                end
+    read_kit_file("_#{example}.#{extension}")
+  end
+
+  def rendered_example(example_key)
+    return nil unless @type == "rails"
+
+    kit_name = @kit_parent == "advanced_table" ? @kit_parent : @kit
+    example_path = ::Playbook.kit_path(kit_name, "docs", "_#{example_key}.html.erb")
+    return nil unless example_path.exist?
+
+    erb_content = example_path.read
+    view_context.render(inline: erb_content)
+  rescue => e
+    Rails.logger.error("Error rendering Rails example #{example_key}: #{e.message}")
+    nil
   end
 
   def get_description(example)

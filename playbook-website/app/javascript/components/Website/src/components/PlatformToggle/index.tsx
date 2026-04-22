@@ -21,15 +21,19 @@ export const PlatformToggle = ({
   platform,
   setPlatform,
 }: PlatformToggleProps) => {
+  const handlePlatformClick = (name: string) => {
+    setPlatform(name);
+  };
+
   return (
-    <Nav link="#" orientation="horizontal" variant="subtle">
+    <Nav orientation="horizontal" variant="subtle">
       {platforms.map(({ name, label, Icon: PlatformIcon }) => (
         <NavItem
           key={name}
           active={platform === name}
-          link="#"
-          onClick={() => setPlatform(name)}
+          cursor="pointer"
           className="platform-toggle-item"
+          onClick={() => handlePlatformClick(name)}
         >
           <Flex align="center" gap="xs">
             <Icon className="platformIcon" customIcon={<PlatformIcon active={platform === name} />} />
