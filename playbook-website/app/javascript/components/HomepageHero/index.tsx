@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { Background, Flex } from "playbook-ui";
 import MaxScreen from "./Pages/MaxScreen";
 import MediumScreen from "./Pages/MediumScreen";
@@ -14,7 +15,24 @@ export type HomepageHeroProps = {
   beta?: boolean;
 };
 
-const HomepageHero = ({ beta = false }: HomepageHeroProps) => {
+type HomepageHeroCoreProps = HomepageHeroProps & {
+  /** Client-side navigation (beta shell only; avoids full reload on CTA buttons). */
+  onNavigate?: (path: string) => void;
+};
+
+function HomepageHeroBeta() {
+  const navigate = useNavigate();
+  return (
+    <HomepageHeroCore
+      beta
+      onNavigate={(path) => {
+        navigate(path);
+      }}
+    />
+  );
+}
+
+function HomepageHeroCore({ beta = false, onNavigate }: HomepageHeroCoreProps) {
   const ctaLinks = beta ? betaHomepageHeroCTALinks : defaultHomepageHeroCTALinks;
   const [isMax, setIsMax] = useState(window.innerWidth > 1376);
   const [isMedium, setIsMedium] = useState(window.innerWidth > 1147);
@@ -52,17 +70,24 @@ const HomepageHero = ({ beta = false }: HomepageHeroProps) => {
           width="xl"
       >
         {isMax ? (
-          <MaxScreen ctaLinks={ctaLinks} />
+          <MaxScreen ctaLinks={ctaLinks} onNavigate={onNavigate} />
         ) : isMedium ? (
-          <MediumScreen ctaLinks={ctaLinks} />
+          <MediumScreen ctaLinks={ctaLinks} onNavigate={onNavigate} />
         ) : isMobile ? (
-          <SmallScreen ctaLinks={ctaLinks} />
+          <SmallScreen ctaLinks={ctaLinks} onNavigate={onNavigate} />
         ) : (
-          <MobileScreen ctaLinks={ctaLinks} />
+          <MobileScreen ctaLinks={ctaLinks} onNavigate={onNavigate} />
         )}
       </Flex>
     </Background>
   );
+}
+
+const HomepageHero = (props: HomepageHeroProps) => {
+  if (props.beta) {
+    return <HomepageHeroBeta />;
+  }
+  return <HomepageHeroCore {...props} />;
 };
 
 export default HomepageHero
