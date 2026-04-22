@@ -7,6 +7,12 @@
     "rails"
   ],
   "props": {
+    "dark": {
+      "type": "boolean",
+      "platforms": [
+        "react"
+      ]
+    },
     "disabled": {
       "type": "boolean",
       "platforms": [
@@ -110,6 +116,13 @@
         "rails"
       ]
     },
+    "addOn": {
+      "type": "GenericObject",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
     "autoComplete": {
       "type": "boolean | string",
       "platforms": [
@@ -129,12 +142,6 @@
       "type": "string"
     },
     "validation": {
-      "platforms": [
-        "rails"
-      ],
-      "type": "string"
-    },
-    "addOn": {
       "platforms": [
         "rails"
       ],

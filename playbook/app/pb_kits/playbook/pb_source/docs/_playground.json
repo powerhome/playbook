@@ -1,0 +1,27 @@
+{
+  "template": "<Source{{props}} />",
+  "propTargets": {},
+  "defaults": {
+    "hideIcon": false,
+    "type": "inbound"
+  },
+  "groups": [
+    {
+      "name": "Props",
+      "props": [
+        "hideIcon",
+        "source",
+        "type",
+        "user"
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default",
+      "props": {}
+    }
+  ],
+  "conditionals": {},
+  "hints": {}
+}

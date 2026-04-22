@@ -20,6 +20,12 @@
       ],
       "default": "left"
     },
+    "dark": {
+      "type": "boolean",
+      "platforms": [
+        "react"
+      ]
+    },
     "text": {
       "type": "string",
       "platforms": [

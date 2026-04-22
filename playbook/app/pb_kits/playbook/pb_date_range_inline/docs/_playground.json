@@ -1,0 +1,31 @@
+{
+  "template": "<DateRangeInline{{props}} />",
+  "propTargets": {},
+  "defaults": {
+    "align": "left",
+    "size": "sm",
+    "showCurrentYear": false
+  },
+  "groups": [
+    {
+      "name": "Props",
+      "props": [
+        "align",
+        "dark",
+        "endDate",
+        "icon",
+        "size",
+        "showCurrentYear",
+        "startDate"
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default",
+      "props": {}
+    }
+  ],
+  "conditionals": {},
+  "hints": {}
+}

@@ -14,6 +14,8 @@ type KitSearchProps = {
   id: string,
   global_props_and_tokens?: Record<string, any>,
   marginBottom?: string,
+  beta?: boolean,
+  onBetaNavigate?: (path: string) => void,
 }
 
 const combineKitsandVisualGuidelines = (
@@ -35,7 +37,7 @@ const combineKitsandVisualGuidelines = (
   return [...kits, ...globalPropsItems, ...tokensItems].sort((a, b) => a.label.localeCompare(b.label))
 }
 
-const KitSearch = ({ classname, id, kits, global_props_and_tokens, marginBottom }: KitSearchProps) => {
+const KitSearch = ({ classname, id, kits, global_props_and_tokens, marginBottom, beta, onBetaNavigate }: KitSearchProps) => {
   const kitsAndGuidelines = combineKitsandVisualGuidelines(kits, global_props_and_tokens)
 
   const [filteredKits, setFilteredKits] = useState(kitsAndGuidelines)
@@ -53,7 +55,12 @@ const KitSearch = ({ classname, id, kits, global_props_and_tokens, marginBottom 
 
   const handleChange = (selection: any) => {
     if (selection) {
-      window.location = selection.value
+      const path = beta ? `/beta${selection.value}` : selection.value
+      if (beta && onBetaNavigate) {
+        onBetaNavigate(path)
+      } else {
+        window.location.href = path
+      }
     }
   }
 

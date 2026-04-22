@@ -1,0 +1,182 @@
+{
+  "template": "<MultipleUsers{{props}} />",
+  "propTargets": {},
+  "defaults": {
+    "reverse": false,
+    "size": "sm",
+    "withTooltip": false,
+    "maxDisplayedUsers": 4,
+    "users": [
+      {
+        "name": "Anna Black",
+        "imageUrl": "https://randomuser.me/api/portraits/women/44.jpg",
+        "tooltip": "Anna Black · Engineer"
+      },
+      {
+        "name": "Jordan Lee",
+        "imageUrl": "https://randomuser.me/api/portraits/men/32.jpg",
+        "tooltip": "Jordan Lee · Designer"
+      },
+      {
+        "name": "Sam Rivera",
+        "imageUrl": "https://randomuser.me/api/portraits/women/68.jpg",
+        "tooltip": "Sam Rivera · PM"
+      },
+      {
+        "name": "Chris Patel",
+        "imageUrl": "https://randomuser.me/api/portraits/men/75.jpg",
+        "tooltip": "Chris Patel · Engineer"
+      }
+    ]
+  },
+  "groups": [
+    {
+      "name": "Content",
+      "props": [
+        "users",
+        "maxDisplayedUsers",
+        "withTooltip"
+      ]
+    },
+    {
+      "name": "Appearance",
+      "props": [
+        "size",
+        "reverse"
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Team · sm",
+      "props": {
+        "size": "sm",
+        "users": [
+          {
+            "name": "Anna Black",
+            "imageUrl": "https://randomuser.me/api/portraits/women/44.jpg"
+          },
+          {
+            "name": "Jordan Lee",
+            "imageUrl": "https://randomuser.me/api/portraits/men/32.jpg"
+          },
+          {
+            "name": "Sam Rivera",
+            "imageUrl": "https://randomuser.me/api/portraits/women/68.jpg"
+          },
+          {
+            "name": "Chris Patel",
+            "imageUrl": "https://randomuser.me/api/portraits/men/75.jpg"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Team · lg",
+      "props": {
+        "size": "lg",
+        "users": [
+          {
+            "name": "Anna Black",
+            "imageUrl": "https://randomuser.me/api/portraits/women/44.jpg"
+          },
+          {
+            "name": "Jordan Lee",
+            "imageUrl": "https://randomuser.me/api/portraits/men/32.jpg"
+          },
+          {
+            "name": "Sam Rivera",
+            "imageUrl": "https://randomuser.me/api/portraits/women/68.jpg"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Initials only",
+      "props": {
+        "size": "md",
+        "users": [
+          {
+            "name": "Anna Black"
+          },
+          {
+            "name": "Jordan Lee"
+          },
+          {
+            "name": "Sam Rivera"
+          }
+        ]
+      }
+    },
+    {
+      "name": "With tooltips",
+      "props": {
+        "withTooltip": true,
+        "users": [
+          {
+            "name": "Anna Black",
+            "imageUrl": "https://randomuser.me/api/portraits/women/44.jpg",
+            "tooltip": "Anna Black · Engineer"
+          },
+          {
+            "name": "Jordan Lee",
+            "imageUrl": "https://randomuser.me/api/portraits/men/32.jpg",
+            "tooltip": "Jordan Lee · Designer"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Reverse order",
+      "props": {
+        "reverse": true,
+        "size": "xs",
+        "users": [
+          {
+            "name": "Anna Black",
+            "imageUrl": "https://randomuser.me/api/portraits/women/44.jpg"
+          },
+          {
+            "name": "Jordan Lee",
+            "imageUrl": "https://randomuser.me/api/portraits/men/32.jpg"
+          },
+          {
+            "name": "Sam Rivera",
+            "imageUrl": "https://randomuser.me/api/portraits/women/68.jpg"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Overflow (+more)",
+      "props": {
+        "maxDisplayedUsers": 3,
+        "size": "sm",
+        "users": [
+          {
+            "name": "Anna Black",
+            "imageUrl": "https://randomuser.me/api/portraits/women/44.jpg"
+          },
+          {
+            "name": "Jordan Lee",
+            "imageUrl": "https://randomuser.me/api/portraits/men/32.jpg"
+          },
+          {
+            "name": "Sam Rivera",
+            "imageUrl": "https://randomuser.me/api/portraits/women/68.jpg"
+          },
+          {
+            "name": "Chris Patel",
+            "imageUrl": "https://randomuser.me/api/portraits/men/75.jpg"
+          },
+          {
+            "name": "Morgan Quinn",
+            "imageUrl": "https://randomuser.me/api/portraits/women/12.jpg"
+          }
+        ]
+      }
+    }
+  ],
+  "conditionals": {},
+  "hints": {}
+}

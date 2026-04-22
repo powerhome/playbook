@@ -1,0 +1,33 @@
+{
+  "template": "<IconButton{{props}} />",
+  "propTargets": {},
+  "defaults": {
+    "icon": "bars",
+    "newWindow": false,
+    "size": "2x",
+    "variant": "default"
+  },
+  "groups": [
+    {
+      "name": "Props",
+      "props": [
+        "htmlType",
+        "icon",
+        "link",
+        "newWindow",
+        "onClick",
+        "size",
+        "target",
+        "variant"
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default",
+      "props": {}
+    }
+  ],
+  "conditionals": {},
+  "hints": {}
+}

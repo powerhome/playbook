@@ -12,7 +12,11 @@ import {
 import HeaderImage from "../../images/getting-started.svg";
 import { TokenCards } from "./Data/TokenCards";
 
-const Tokens = () => {
+type TokensProps = {
+  linkPrefix?: string,
+}
+
+const Tokens = ({ linkPrefix = "" }: TokensProps) => {
   return (
     <Background
       flexDirection="column"
@@ -20,6 +24,7 @@ const Tokens = () => {
       display="flex"
       justifyContent="center"
       alignItems="center"
+      height="100%"
     >
       <Background
         imageUrl={HeaderImage}
@@ -43,7 +48,7 @@ const Tokens = () => {
           <Layout.Body>
             {TokenCards.sort((a, b) => a.title.localeCompare(b.title)).map(({ title, description, link, icon }) => {
               return (
-                <Link key={title} href={link}>
+                <Link key={title} href={`${linkPrefix}${link}`}>
                   <Card padding="none" hover={{ shadow: "deep" }} flex={1}>
                     <Background backgroundColor="light">
                       <Flex justify="center" padding="xl">

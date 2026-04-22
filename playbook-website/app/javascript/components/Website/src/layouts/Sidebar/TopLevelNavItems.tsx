@@ -75,6 +75,12 @@ export const TopLevelNavItem = ({
         // Active on the overview page but NOT on individual guide pages
         return currentURL === "/beta/guides/design_guidelines" || currentURL === "/beta/guides/design_guidelines?";
       }
+      if (link === "/global_props") {
+        return currentURL === "/beta/global_props" || currentURL === "/beta/global_props?";
+      }
+      if (link === "/tokens") {
+        return currentURL === "/beta/tokens" || currentURL === "/beta/tokens?";
+      }
       
       // For other items with children, only active on exact match
       return currentURL === betaLink || currentURL.startsWith(`${betaLink}?`);
@@ -99,6 +105,12 @@ export const TopLevelNavItem = ({
     }
     if (link === "/guides/design_guidelines") {
       return currentURL.startsWith("/beta/guides/design_guidelines");
+    }
+    if (link === "/global_props") {
+      return currentURL.startsWith("/beta/global_props");
+    }
+    if (link === "/tokens") {
+      return currentURL.startsWith("/beta/tokens");
     }
     
     return currentURL.startsWith(betaLink);

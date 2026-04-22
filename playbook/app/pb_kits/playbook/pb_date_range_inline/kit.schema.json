@@ -8,7 +8,7 @@
   ],
   "props": {
     "align": {
-      "type": "\"left\" | \"center\" | \"right\";",
+      "type": "enum",
       "platforms": [
         "react",
         "rails"
@@ -20,34 +20,40 @@
       ],
       "default": "left"
     },
+    "dark": {
+      "type": "boolean",
+      "platforms": [
+        "react"
+      ]
+    },
     "endDate": {
-      "type": "Date;",
+      "type": "Date",
       "platforms": [
         "react",
         "rails"
       ]
     },
     "icon": {
-      "type": "boolean;",
+      "type": "boolean",
       "platforms": [
         "react",
         "rails"
       ]
     },
     "size": {
-      "type": "\"sm\" | \"xs\";",
+      "type": "enum",
       "platforms": [
         "react",
         "rails"
       ],
       "values": [
-        "xs",
-        "sm"
+        "sm",
+        "xs"
       ],
       "default": "sm"
     },
     "showCurrentYear": {
-      "type": "boolean;",
+      "type": "boolean",
       "platforms": [
         "react",
         "rails"
@@ -55,7 +61,7 @@
       "default": false
     },
     "startDate": {
-      "type": "Date;",
+      "type": "Date",
       "platforms": [
         "react",
         "rails"
@@ -66,11 +72,11 @@
   "usage": {
     "react": {
       "import": "import { DateRangeInline } from 'playbook-ui'",
-      "example": "<DateRangeInline align=\"left\" size=\"xs\"></DateRangeInline>"
+      "example": "<DateRangeInline align=\"left\" size=\"sm\"></DateRangeInline>"
     },
     "rails": {
       "import": null,
-      "example": "<%= pb_rails(\"date_range_inline\", props: { align: \"left\", size: \"xs\" }) %>"
+      "example": "<%= pb_rails(\"date_range_inline\", props: { align: \"left\", size: \"sm\" }) %>"
     }
   }
 }

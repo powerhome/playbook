@@ -1,0 +1,45 @@
+{
+  "template": "<DateYearStacked{{props}} />",
+  "propTargets": {},
+  "defaults": {
+    "align": "left"
+  },
+  "groups": [
+    {
+      "name": "Content",
+      "props": [
+        "date"
+      ]
+    },
+    {
+      "name": "Appearance",
+      "props": [
+        "align"
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default",
+      "props": {
+        "date": "2026-04-09T12:00:00.000Z"
+      }
+    },
+    {
+      "name": "Centered",
+      "props": {
+        "date": "2026-04-09T12:00:00.000Z",
+        "align": "center"
+      }
+    },
+    {
+      "name": "Right aligned",
+      "props": {
+        "date": "2026-12-25T12:00:00.000Z",
+        "align": "right"
+      }
+    }
+  ],
+  "conditionals": {},
+  "hints": {}
+}

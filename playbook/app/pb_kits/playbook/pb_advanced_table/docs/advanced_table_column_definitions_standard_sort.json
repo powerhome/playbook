@@ -1,0 +1,37 @@
+[
+  {
+    "accessor": "year",
+    "label": "Year",
+    "cellAccessors": ["quarter", "month", "day"]
+  },
+  {
+    "accessor": "newEnrollments",
+    "label": "New Enrollments",
+    "enableSort": true
+  },
+  {
+    "accessor": "scheduledMeetings",
+    "label": "Scheduled Meetings",
+    "enableSort": true
+  },
+  {
+    "accessor": "attendanceRate",
+    "label": "Attendance Rate",
+    "enableSort": true
+  },
+  {
+    "accessor": "completedClasses",
+    "label": "Completed Classes",
+    "enableSort": true
+  },
+  {
+    "accessor": "classCompletionRate",
+    "label": "Class Completion Rate",
+    "enableSort": true
+  },
+  {
+    "accessor": "graduatedStudents",
+    "label": "Graduated Students",
+    "enableSort": true
+  }
+]

@@ -13,6 +13,15 @@
     justify-content: center;
     min-height: 192px;
   }
+
+  .pb_title_kit,
+  &-description {
+    hyphens: none;
+    -webkit-hyphens: none;
+    overflow-wrap: normal;
+    word-break: normal;
+  }
+
   &-description {
     @media screen and (max-width: $screen-xs-min) {
       display: none !important;

@@ -1,0 +1,28 @@
+{
+  "defaults": {
+    "firstName": "Anna",
+    "lastName": "Black"
+  },
+  "groups": [
+    {
+      "name": "Content",
+      "props": ["firstName", "lastName"]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Full name",
+      "props": { "firstName": "Anna", "lastName": "Black" }
+    },
+    {
+      "name": "First name only",
+      "props": { "firstName": "Anna", "lastName": "" }
+    },
+    {
+      "name": "Hyphenated last name",
+      "props": { "firstName": "Anna", "lastName": "Black-Smith" }
+    }
+  ],
+  "conditionals": {},
+  "hints": {}
+}

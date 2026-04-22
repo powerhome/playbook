@@ -1,0 +1,54 @@
+{
+  "groups": [
+    {
+      "name": "Content",
+      "props": ["date", "showTimezone", "timeZone", "showIcon"]
+    },
+    {
+      "name": "Appearance",
+      "props": ["size", "align", "unstyled"]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default",
+      "props": {
+        "date": "2026-04-09T15:30:00.000Z"
+      }
+    },
+    {
+      "name": "Medium & centered",
+      "props": {
+        "date": "2026-04-09T15:30:00.000Z",
+        "size": "md",
+        "align": "center"
+      }
+    },
+    {
+      "name": "With clock icon",
+      "props": {
+        "date": "2026-04-09T09:15:00.000Z",
+        "showIcon": true,
+        "size": "md"
+      }
+    },
+    {
+      "name": "Hide timezone label",
+      "props": {
+        "date": "2026-04-09T15:30:00.000Z",
+        "showTimezone": false
+      }
+    },
+    {
+      "name": "Pacific time",
+      "props": {
+        "date": "2026-04-09T15:30:00.000Z",
+        "timeZone": "America/Los_Angeles"
+      }
+    }
+  ],
+  "conditionals": {
+    "timeZone": { "requires": "showTimezone" }
+  },
+  "hints": {}
+}

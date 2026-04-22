@@ -1,0 +1,13 @@
+{
+  "template": "<Form{{props}} />",
+  "propTargets": {},
+  "defaults": {},
+  "presets": [
+    {
+      "name": "Default",
+      "props": {}
+    }
+  ],
+  "conditionals": {},
+  "hints": {}
+}

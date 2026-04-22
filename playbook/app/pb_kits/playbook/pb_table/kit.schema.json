@@ -8,7 +8,7 @@
   ],
   "props": {
     "cardProps": {
-      "type": "object",
+      "type": "GenericObject",
       "platforms": [
         "react",
         "rails"
@@ -35,6 +35,12 @@
       ],
       "default": true
     },
+    "dark": {
+      "type": "boolean",
+      "platforms": [
+        "react"
+      ]
+    },
     "dataTable": {
       "type": "boolean",
       "platforms": [
@@ -52,7 +58,7 @@
       "default": false
     },
     "filterProps": {
-      "type": "object",
+      "type": "GenericObject",
       "platforms": [
         "react",
         "rails"
@@ -187,7 +193,7 @@
       "default": null
     },
     "titleProps": {
-      "type": "object",
+      "type": "GenericObject",
       "platforms": [
         "react",
         "rails"
