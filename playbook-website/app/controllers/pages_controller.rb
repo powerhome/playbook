@@ -141,6 +141,7 @@ class PagesController < ApplicationController
       end
     end
 
+    landing_posts = extract_changelog_data(changelog_content)
     icon_data = JSON.parse(File.read(Rails.root.join("app/assets/icons.json")))
     icons_by_category = icon_data.group_by { |icon| icon["category"] }
     icon_categories = icons_by_category.keys.sort.map do |category|
@@ -197,7 +198,7 @@ class PagesController < ApplicationController
           table_data_no_subrows: @beta_table_data_no_subrows,
           table_data_pagination: @beta_table_data_pagination,
           table_data_infinite_scroll: @beta_table_data_infinite_scroll,
-
+          landing_posts: landing_posts,
         }
       end
     end

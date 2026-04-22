@@ -60,7 +60,7 @@ export const TopLevelNavItem = ({
     if (hasChildren) {
       // Top level items with children should be active ONLY on their exact main page
       if (link === "/kits") {
-        // Active on /beta/kits page but NOT on /beta/kits/something or /beta/kit_category
+        // Active on /beta/kits listing, not on /beta placeholder or kit detail pages
         return currentURL === "/beta/kits" || currentURL.startsWith("/beta/kits?");
       }
       if (link === "/changelog") {

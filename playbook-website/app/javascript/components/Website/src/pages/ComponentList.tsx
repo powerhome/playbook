@@ -1,7 +1,7 @@
 import { useState, useEffect, useMemo } from "react"
 import type { ChangeEvent } from "react"
-import { NavLink, Outlet, useLoaderData, useOutlet } from "react-router-dom"
-import { EmptyState, Flex, TextInput } from "playbook-ui"
+import { NavLink, Outlet, useOutlet, useRouteLoaderData } from "react-router-dom"
+import { EmptyState, Flex, TextInput, Body } from "playbook-ui"
 import { matchSorter } from "match-sorter"
 
 import { KitCard } from "../components/KitCard"
@@ -41,7 +41,8 @@ const description =
 
 export default function ComponentList() {
   const outlet = useOutlet()
-  const { kits } = useLoaderData() as { kits: Kit[]; }
+  // Index route has no loader; read shared data from parent /beta route (see app.tsx id="beta-site").
+  const { kits } = useRouteLoaderData("beta-site") as { kits: Kit[] }
   const [kitsToShow, setKitsToShow] = useState(kits)
   const [searchQuery, setSearchQuery] = useState("")
   const { platform } = usePlatform()

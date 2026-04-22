@@ -20,8 +20,25 @@
     height: calc(100vh - 89px);
   }
   
+  // Short marketing pages (e.g. /beta) left a white band under the footer when
+  // this was a fixed height: the main column stayed viewport-tall while the
+  // footer sat higher. Use min-height + flex so the dark footer can sit at the
+  // bottom of the column; see .landing-page .pb--page--footer { margin-top: auto }.
   .pb--page--content--main {
-    height: calc(100vh - 89px);
+    min-height: calc(100vh - 89px);
+    height: auto;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .landing-page {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .landing-page .pb--page--footer {
+    margin-top: auto;
   }
 }
 

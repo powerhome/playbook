@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   # Kits
 
   ## Beta View
+  get "beta", to: "pages#application_beta"
   get "beta/kits", to: "pages#application_beta"
   get "beta/kits/:name", to: "pages#application_beta"
   get "beta/kits/advanced_table/:name/:platform", to: "pages#application_beta"

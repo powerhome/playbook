@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom"
 import { Flex, Image, Badge, SectionSeparator, FlexItem } from "playbook-ui";
 import { useNavigate } from "react-router-dom";
 // @ts-ignore
@@ -45,9 +46,9 @@ const Header = ({
             paddingBottom="xxs"
             paddingX="md"
           >
-            <a href={"/"}>
+            <Link to="/beta">
               <Image alt="Playbook logo" url={PBLogo} />
-            </a>
+            </Link>
             <Badge
               text={PBversion}
               dark={dark}
