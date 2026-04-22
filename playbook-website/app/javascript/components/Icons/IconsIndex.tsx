@@ -1,4 +1,6 @@
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
+import type { ChangeEvent } from 'react'
+import { matchSorter, rankings } from 'match-sorter'
 
 import {
   Background,
@@ -6,12 +8,14 @@ import {
   Button,
   Caption,
   Dropdown,
+  EmptyState,
   Flex,
   Nav,
   NavItem,
   SectionSeparator,
   Title,
-  SelectableCardIcon
+  SelectableCardIcon,
+  TextInput,
 } from 'playbook-ui'
 
 type IconCategory = {
@@ -44,10 +48,27 @@ const IconsIndex = ({
   iconsByCategory,
 }: IconsIndexProps) => {
   const [selectedCategoryLabel, setSelectedCategoryLabel] = useState(dropdownLabel)
+  const [searchQuery, setSearchQuery] = useState('')
 
-  const sortedSections = Object.entries(iconsByCategory).sort(([left], [right]) =>
-    left.localeCompare(right)
-  )
+  const displayedSections = useMemo(() => {
+    const sorted = Object.entries(iconsByCategory).sort(([left], [right]) =>
+      left.localeCompare(right)
+    )
+    const q = searchQuery.trim()
+    if (!q) return sorted
+
+    return sorted
+      .map(([category, icons]) => [
+        category,
+        matchSorter(icons, q, {
+          keys: ['name'],
+          threshold: rankings.CONTAINS,
+        }),
+      ] as [string, IconData[]])
+      .filter(([, icons]) => icons.length > 0)
+  }, [iconsByCategory, searchQuery])
+
+  const hasVisibleIcons = displayedSections.some(([, icons]) => icons.length > 0)
 
   const getCategoryId = (category: string) => {
     return iconCategories.find((item) => item.text === category)?.value || category
@@ -56,7 +77,7 @@ const IconsIndex = ({
       .replace(/(^-|-$)/g, '')
   }
 
-  const handleCategorySelect = (option: { label?: string, value?: string } | null) => {
+  const handleCategorySelect = (option: { label?: string, value?: string } | null): null => {
     if (!option?.value) return null
 
     setSelectedCategoryLabel(option.label || dropdownLabel)
@@ -109,52 +130,81 @@ const IconsIndex = ({
                 </a>
               </div>
 
-              <Dropdown id="icon-category-dropdown" onSelect={handleCategorySelect} options={iconCategories}>
-                <Dropdown.Trigger>
-                  <div data-dropdown-custom-trigger>
-                    <Button
-                      fullWidth
-                      icon="sort"
-                      iconRight
-                      id="icon-category-trigger-button"
-                      text={selectedCategoryLabel}
-                      variant="secondary"
-                    />
-                  </div>
-                </Dropdown.Trigger>
-                <Dropdown.Container maxWidth="xs">
-                  {iconCategories.map((option) => (
-                    <Dropdown.Option key={option.value} option={option}>
-                      <Body size="sm" text={option.label} />
-                    </Dropdown.Option>
-                  ))}
-                </Dropdown.Container>
-              </Dropdown>
-
-              {sortedSections.map(([category, icons]) => (
-                <Flex alignSelf="stretch" 
-                  alignItems="stretch"
-                  gap="sm"
-                  key={category}
-                  orientation="column" 
-                  >
-                  <Caption 
-                    id={getCategoryId(category)}
-                    size="lg" 
-                    text={category}
+              <div className="icons-index-toolbar">
+                <div className="icons-index-search">
+                  <TextInput
+                    marginBottom="none"
+                    name="icons_index_search"
+                    onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                      setSearchQuery(e.target.value)
+                    }
+                    placeholder="Search for icons..."
+                    value={searchQuery}
+                    width="100%"
                   />
-                  <div className="pb_layout_kit_collection icon-grid">
-                    <div className="layout_body">
-                      {icons
-                        .slice()
-                        .sort((left, right) => left.name.localeCompare(right.name))
-                        .map((icon) => (
-                          <SelectableCardIcon className="icon-card" icon={icon.name} titleText={icon.name} key={`${category}-${icon.name}`}/>
-                        ))}
+                </div>
+
+                <Dropdown id="icon-category-dropdown" onSelect={handleCategorySelect} options={iconCategories}>
+                  <Dropdown.Trigger>
+                    <div data-dropdown-custom-trigger>
+                      <Button
+                        icon="sort"
+                        iconRight
+                        id="icon-category-trigger-button"
+                        text={selectedCategoryLabel}
+                        variant="secondary"
+                      />
                     </div>
-                  </div>
+                  </Dropdown.Trigger>
+                  <Dropdown.Container maxWidth="xs">
+                    {iconCategories.map((option) => (
+                      <Dropdown.Option key={option.value} option={option}>
+                        <Body size="sm" text={option.label} />
+                      </Dropdown.Option>
+                    ))}
+                  </Dropdown.Container>
+                </Dropdown>
+              </div>
+
+              {!hasVisibleIcons ? (
+                <Flex justify="center" width="100%">
+                  <EmptyState
+                    header="No results"
+                    image="default"
+                    size="lg"
+                  />
                 </Flex>
-              ))}
+              ) : (
+                displayedSections.map(([category, icons]) => (
+                  <Flex alignSelf="stretch"
+                    alignItems="stretch"
+                    gap="sm"
+                    key={category}
+                    orientation="column"
+                  >
+                    <Caption
+                      id={getCategoryId(category)}
+                      size="lg"
+                      text={category}
+                    />
+                    <div className="pb_layout_kit_collection icon-grid">
+                      <div className="layout_body">
+                        {icons
+                          .slice()
+                          .sort((left, right) => left.name.localeCompare(right.name))
+                          .map((icon) => (
+                            <SelectableCardIcon
+                              className="icon-card"
+                              icon={icon.name}
+                              key={`${category}-${icon.name}`}
+                              titleText={icon.name}
+                            />
+                          ))}
+                      </div>
+                    </div>
+                  </Flex>
+                ))
+              )}
             </Flex>
           </div>
 
