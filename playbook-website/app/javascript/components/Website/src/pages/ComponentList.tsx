@@ -1,7 +1,7 @@
 import { useState, useEffect, useMemo } from "react"
 import type { ChangeEvent } from "react"
 import { NavLink, Outlet, useOutlet, useRouteLoaderData } from "react-router-dom"
-import { EmptyState, Flex, TextInput, Body } from "playbook-ui"
+import { EmptyState, Flex, TextInput } from "playbook-ui"
 import { matchSorter } from "match-sorter"
 
 import { KitCard } from "../components/KitCard"
