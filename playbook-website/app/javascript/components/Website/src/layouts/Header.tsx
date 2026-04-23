@@ -1,6 +1,5 @@
-import { Link } from "react-router-dom"
+import { Link, useLocation, useNavigate } from "react-router-dom"
 import { Flex, Image, Badge, SectionSeparator, FlexItem } from "playbook-ui";
-import { useNavigate } from "react-router-dom";
 // @ts-ignore
 import PBLogo from "../../../../images/pb-logo.svg";
 import KitSearch from "../../../KitSearch";
@@ -26,6 +25,7 @@ const Header = ({
   setPlatform,
 }: HeaderProps) => {
   const navigate = useNavigate();
+  const location = useLocation();
 
   return (
     <>
@@ -77,6 +77,7 @@ const Header = ({
               gap="md"
             >
               <KitSearch
+                betaSearchResetKey={`${location.pathname}${location.search}`}
                 classname="desktop-kit-search-new"
                 id="desktop-kit-search"
                 kits={search_list}

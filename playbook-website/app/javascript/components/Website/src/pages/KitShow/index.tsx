@@ -4,6 +4,7 @@ import { useState, useMemo } from "react";
 import ReactMarkdown from "react-markdown";
 
 import { PageContainer } from "../../components/PageContainer";
+import { usePlatform } from "../../contexts/PlatformContext";
 import { linkFormat } from "../../../../../utilities/website_sidebar_helper";
 import { DocsTab } from "./Tabs/DocsTab";
 import { PropsTab } from "./Tabs/PropsTab";
@@ -13,6 +14,7 @@ import { PlaygroundTab } from "./Tabs/PlaygroundTab";
 
 const KitShow = () => {
   const { name } = useParams();
+  const { platform } = usePlatform();
   const loaderData = useLoaderData() as any;
   const {
     examples,
@@ -40,6 +42,9 @@ const KitShow = () => {
   }, [loaderData]);
 
   const [activeTab, setActiveTab] = useState<string>("docs");
+  const showPlayground = platform !== "rails";
+  const displayTab =
+    activeTab === "playground" && !showPlayground ? "docs" : activeTab;
 
   return (
     <>
@@ -69,19 +74,21 @@ const KitShow = () => {
         <Nav orientation="horizontal" paddingX="xl">
           <NavItem
             text="Docs"
-            active={activeTab === "docs"}
+            active={displayTab === "docs"}
             onClick={() => setActiveTab("docs")}
           />
           <NavItem
             text="Props"
-            active={activeTab === "props"}
+            active={displayTab === "props"}
             onClick={() => setActiveTab("props")}
           />
-          <NavItem
-            text="Playground"
-            active={activeTab === "playground"}
-            onClick={() => setActiveTab("playground")}
-          />
+          {showPlayground && (
+            <NavItem
+              text="Playground"
+              active={displayTab === "playground"}
+              onClick={() => setActiveTab("playground")}
+            />
+          )}
 
           {/* Building Blocks and References tabs, commented out until building blocks and references are implemented */}
           {/* <NavItem
@@ -97,8 +104,8 @@ const KitShow = () => {
         </Nav>
         <SectionSeparator marginBottom="lg" />
 
-        {/* Playground Tab Content */}
-        {activeTab === "playground" && (
+        {/* Playground Tab Content (React-only for now; hidden on Rails) */}
+        {showPlayground && displayTab === "playground" && (
           <PlaygroundTab
             kitSchema={kit_schema}
             globalPropsSchema={global_props_schema}
@@ -109,7 +116,7 @@ const KitShow = () => {
         )}
 
         {/* Docs Tab Content */}
-        {activeTab === "docs" && (
+        {displayTab === "docs" && (
           <DocsTab
             examples={examples}
             exampleProps={exampleProps}
@@ -119,7 +126,7 @@ const KitShow = () => {
         )}
 
         {/* Props Tab Content */}
-        {activeTab === "props" && <PropsTab availableProps={available_props} />}
+        {displayTab === "props" && <PropsTab availableProps={available_props} />}
 
         {/* Building Blocks Tab Content, commented out until building blocks are implemented */}
         {/* {activeTab === "building-blocks" && <BuildingBlocksTab />} */}

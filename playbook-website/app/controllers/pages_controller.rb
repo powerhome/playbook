@@ -54,13 +54,6 @@ class PagesController < ApplicationController
           @examples = all_examples.select do |example|
             @kit_section.include?(example.values.first)
           end
-
-          # Load mock data for advanced_table (beta only: use separate variables)
-          @beta_table_data = advanced_table_mock_data_beta
-          @beta_table_data_with_id = advanced_table_mock_data_with_id_beta
-          @beta_table_data_no_subrows = advanced_table_mock_data_no_subrows_beta
-          @beta_table_data_pagination = advanced_table_pagination_mock_data
-          @beta_table_data_infinite_scroll = advanced_table_infinite_scroll_mock_data
         else
           @examples = pb_doc_kit_examples(@kit, @type)
         end
@@ -70,6 +63,8 @@ class PagesController < ApplicationController
     else
       @examples = pb_doc_kit_examples(@kit, @type)
     end
+
+    assign_advanced_table_doc_mocks
 
     @css = view_context.vite_asset_path("site_styles/main.scss")
 
@@ -806,6 +801,28 @@ private
     puts "Active Variants: #{@variants.inspect}"
 
     render template: "pages/kit_variants_collection", layout: "layouts/fullscreen"
+  end
+
+  # Beta JSON + Rails prerendered examples: ERB under pb_advanced_table/docs expects @table_data (OpenStruct),
+  # while the SPA passes plain JSON via @beta_table_* keys in the kit payload.
+  def assign_advanced_table_doc_mocks
+    return unless @kit.to_s == "advanced_table" || @kit_parent.to_s == "advanced_table"
+
+    @beta_table_data = advanced_table_mock_data_beta if @beta_table_data.nil?
+    @beta_table_data_with_id = advanced_table_mock_data_with_id_beta if @beta_table_data_with_id.nil?
+    @beta_table_data_no_subrows = advanced_table_mock_data_no_subrows_beta if @beta_table_data_no_subrows.nil?
+    @beta_table_data_pagination = advanced_table_pagination_mock_data if @beta_table_data_pagination.nil?
+    @beta_table_data_infinite_scroll = advanced_table_infinite_scroll_mock_data if @beta_table_data_infinite_scroll.nil?
+
+    return unless @type.to_s == "rails"
+
+    @table_data = advanced_table_mock_data if @table_data.nil?
+    @table_data_with_id = advanced_table_mock_data_with_id if @table_data_with_id.nil?
+    @table_data_no_subrows = advanced_table_mock_data_no_subrows if @table_data_no_subrows.nil?
+    @table_data_pagination = advanced_table_pagination_mock_data if @table_data_pagination.nil?
+    @table_data_infinite_scroll = advanced_table_infinite_scroll_mock_data if @table_data_infinite_scroll.nil?
+    @table_data_inline_loading = advanced_table_mock_data_inline_loading if @table_data_inline_loading.nil?
+    @table_data_inline_loading_empty_children = advanced_table_mock_data_inline_loading_empty_children if @table_data_inline_loading_empty_children.nil?
   end
 
   def advanced_table_mock_data

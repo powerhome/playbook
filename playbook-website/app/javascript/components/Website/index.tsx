@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useMemo, useState } from "react";
 import { Layout } from "playbook-ui";
 import Sidebar from "./src/layouts/Sidebar";
 import LayoutRight from "./src/layouts/LayoutRight";
@@ -27,23 +27,16 @@ function Website() {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const [platform, setPlatform] = useState(type || 'react');
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const normalizedPath = location.pathname.replace(/\/+$/, "") || "/";
 
-  useEffect(() => {
+  const platform = useMemo(() => {
     const pathPlatform = normalizedPath.match(/\/(react|rails|swift)$/)?.[1];
     const queryPlatform = new URLSearchParams(location.search).get("type");
-    const nextPlatform = pathPlatform || queryPlatform || "react";
-
-    if (nextPlatform !== platform) {
-      setPlatform(nextPlatform);
-    }
-  }, [normalizedPath, location.search, platform]);
+    return pathPlatform || queryPlatform || type || "react";
+  }, [normalizedPath, location.search, type]);
 
   const handlePlatformChange = (nextPlatform: string) => {
-    setPlatform(nextPlatform);
-
     const isKitDetailRoute =
       /^\/beta\/kits\/advanced_table\/[^/]+\/(react|rails|swift)$/.test(normalizedPath) ||
       /^\/beta\/kits\/[^/]+\/(react|rails|swift)$/.test(normalizedPath);
