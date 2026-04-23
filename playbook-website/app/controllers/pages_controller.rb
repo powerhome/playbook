@@ -104,6 +104,7 @@ class PagesController < ApplicationController
         source: source_code,
         description: description,
         rendered: rendered_example(example_key),
+        highlighted_source: (@type == "rails" ? render_code(source_code, "erb") : nil),
       }
     end
 
