@@ -109,8 +109,6 @@ export const DocsTab = ({
       </Card>
     </div>
   );
-console.log(codeLanguage)
-console.log(platform)
   // Organize examples by sections or show all if no sections
   const renderExamples = () => {
     if (sections && sections.length > 0) {
