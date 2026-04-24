@@ -41,18 +41,14 @@ const COMPONENT_MAP = {
   z_index: ZIndex,
 };
 
-type TokensExamplesProps = {
-  routeParamName?: string,
-}
-
-const TokensExamples = ({ routeParamName }: TokensExamplesProps = {}) => {
+const TokensExamples = () => {
+  // extract the tokens example needed from the URL path
   function getTokensExample(pathname: string): string | null {
     const parts: string[] = pathname.split("/").filter(Boolean);
-    const idx = parts.indexOf("tokens");
-    return idx >= 0 ? parts[idx + 1] ?? null : null;
+    return parts[0] === "tokens" ? parts[1] : null;
   }
 
-  const key = routeParamName ?? getTokensExample(window.location.pathname);
+  const key = getTokensExample(window.location.pathname);
   type ComponentKey = keyof typeof COMPONENT_MAP;
 
   const ExampleComponent = COMPONENT_MAP[key as ComponentKey] || null;

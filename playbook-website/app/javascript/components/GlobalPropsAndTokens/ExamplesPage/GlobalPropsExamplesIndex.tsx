@@ -61,18 +61,14 @@ const COMPONENT_MAP = {
   shadow: ShadowGlobalProps,
 };
 
-type GlobalPropsExamplesProps = {
-  routeParamName?: string,
-}
-
-const GlobalPropsExamples = ({ routeParamName }: GlobalPropsExamplesProps = {}) => {
+const GlobalPropsExamples = () => {
+  // extract the global props example needed from the URL path
   function getGlobalPropsExample(pathname: string): string | null {
     const parts: string[] = pathname.split("/").filter(Boolean);
-    const idx = parts.indexOf("global_props");
-    return idx >= 0 ? parts[idx + 1] ?? null : null;
+    return parts[0] === "global_props" ? parts[1] : null;
   }
 
-  const key = routeParamName ?? getGlobalPropsExample(window.location.pathname);
+  const key = getGlobalPropsExample(window.location.pathname);
   type ComponentKey = keyof typeof COMPONENT_MAP;
 
   const ExampleComponent = COMPONENT_MAP[key as ComponentKey] || null;

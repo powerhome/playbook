@@ -20,26 +20,24 @@
       ],
       "default": "left"
     },
-    "statChange": {
-      "type": "GenericObject",
+    "statLabel": {
+      "type": "string statValue?: { unit?: string value?: string | number",
       "platforms": [
         "react",
         "rails"
       ]
     },
-    "statLabel": {
-      "type": "string",
+    "statChange": {
       "platforms": [
-        "react",
         "rails"
-      ]
+      ],
+      "type": "string"
     },
     "statValue": {
-      "type": "GenericObject",
       "platforms": [
-        "react",
         "rails"
-      ]
+      ],
+      "type": "string"
     }
   },
   "globalProps": true,

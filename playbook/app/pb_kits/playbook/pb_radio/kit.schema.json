@@ -31,12 +31,6 @@
       ],
       "default": false
     },
-    "dark": {
-      "type": "boolean",
-      "platforms": [
-        "react"
-      ]
-    },
     "disabled": {
       "type": "boolean",
       "platforms": [

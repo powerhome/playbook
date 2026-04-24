@@ -15,12 +15,6 @@
       ],
       "default": 0
     },
-    "dark": {
-      "type": "boolean",
-      "platforms": [
-        "react"
-      ]
-    },
     "fullWidthPill": {
       "type": "boolean",
       "platforms": [

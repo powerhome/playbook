@@ -7,19 +7,6 @@
     "rails"
   ],
   "props": {
-    "componentOverlay": {
-      "type": "GenericObject",
-      "platforms": [
-        "react",
-        "rails"
-      ]
-    },
-    "dark": {
-      "type": "boolean",
-      "platforms": [
-        "react"
-      ]
-    },
     "grayscale": {
       "type": "boolean",
       "platforms": [
@@ -77,6 +64,11 @@
         "away",
         "offline",
         "online"
+      ]
+    },
+    "componentOverlay": {
+      "platforms": [
+        "rails"
       ]
     }
   },

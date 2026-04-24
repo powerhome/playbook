@@ -50,7 +50,7 @@
       ]
     },
     "customSort": {
-      "type": "boolean",
+      "type": "boolean;",
       "platforms": [
         "react"
       ]
@@ -81,7 +81,7 @@
       ]
     },
     "expandByDepth": {
-      "type": "array",
+      "type": "{ [key: string]: string | number }",
       "platforms": [
         "react"
       ]
@@ -114,22 +114,6 @@
       ],
       "default": false
     },
-    "maxHeight": {
-      "type": "enum",
-      "platforms": [
-        "react"
-      ],
-      "values": [
-        "auto",
-        "xs",
-        "sm",
-        "md",
-        "lg",
-        "xl",
-        "xxl",
-        "xxxl"
-      ]
-    },
     "onRowToggleClick": {
       "type": "function",
       "platforms": [
@@ -149,16 +133,9 @@
       ]
     },
     "paginationProps": {
-      "type": "GenericObject",
+      "type": "function",
       "platforms": [
         "react"
-      ]
-    },
-    "pinnedRows": {
-      "type": "GenericObject",
-      "platforms": [
-        "react",
-        "rails"
       ]
     },
     "responsive": {
@@ -224,12 +201,6 @@
         "react"
       ]
     },
-    "stickyLeftColumn": {
-      "type": "array",
-      "platforms": [
-        "react"
-      ]
-    },
     "tableData": {
       "type": "array",
       "platforms": [
@@ -286,29 +257,11 @@
         "react"
       ]
     },
-    "enableSorting": {
-      "type": "boolean",
+    "pinnedRows": {
       "platforms": [
-        "react"
-      ]
-    },
-    "sortIcon": {
-      "type": "string | string[]",
-      "platforms": [
-        "react"
-      ]
-    },
-    "collapsibleTrail": {
-      "type": "boolean",
-      "platforms": [
-        "react"
-      ]
-    },
-    "subRowHeaders": {
-      "type": "array",
-      "platforms": [
-        "react"
-      ]
+        "rails"
+      ],
+      "type": "string"
     }
   },
   "globalProps": true,

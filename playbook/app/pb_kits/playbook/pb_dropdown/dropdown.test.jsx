@@ -1,7 +1,8 @@
 import React, { useState } from "react"
-import { render, screen, fireEvent } from "../utilities/test-utils"
+import { render, screen, fireEvent, waitFor } from "../utilities/test-utils"
 
 import { Dropdown, Icon, IconCircle } from 'playbook-ui'
+import DateTime from "../pb_kit/dateTime.ts"
 
 
 const testId = 'dropdown'
@@ -778,3 +779,52 @@ test("requiredIndicator prop renders asterisk when true", () => {
   expect(label).toBeInTheDocument();
   expect(kit).toHaveTextContent("*");
 });
+
+describe("quickpick Last Month range when current month is shorter than the previous month", () => {
+  const quickpickTestId = "dropdown-quickpick-last-month-march"
+
+  const formatDate = (date) => {
+    const month = (date.getMonth() + 1).toString().padStart(2, "0")
+    const day = date.getDate().toString().padStart(2, "0")
+    const year = date.getFullYear()
+    return `${month}/${day}/${year}`
+  }
+
+  beforeEach(() => {
+    jest.setSystemTime(new Date(2026, 3, 15, 12, 0, 0))
+  })
+
+  afterEach(() => {
+    jest.setSystemTime()
+  })
+
+  test("selecting Last Month matches DateTime previous-month range (full March when today is in April)", async () => {
+    const onSelect = jest.fn()
+    const now = new Date()
+
+    render(
+      <Dropdown
+          data={{ testid: quickpickTestId }}
+          onSelect={onSelect}
+          variant="quickpick"
+      />
+    )
+
+    const kit = screen.getByTestId(quickpickTestId)
+    const lastMonthOption = Array.from(kit.querySelectorAll(".pb_dropdown_option_list")).find(
+      (el) => el.textContent === "Last Month"
+    )
+
+    expect(lastMonthOption).toBeTruthy()
+    fireEvent.click(lastMonthOption)
+
+    await waitFor(() => {
+      expect(onSelect).toHaveBeenCalled()
+    })
+
+    const [startDate, endDate] = onSelect.mock.calls[0][0].value
+
+    expect(formatDate(startDate)).toBe(formatDate(DateTime.getPreviousMonthStartDate(now)))
+    expect(formatDate(endDate)).toBe(formatDate(DateTime.getPreviousMonthEndDate(now)))
+  })
+})

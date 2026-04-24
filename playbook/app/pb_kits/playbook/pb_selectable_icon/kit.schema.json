@@ -16,18 +16,12 @@
       "default": false
     },
     "customIcon": {
-      "type": "GenericObject",
+      "type": "ReactNode",
       "platforms": [
         "react",
         "rails"
       ],
       "default": null
-    },
-    "dark": {
-      "type": "boolean",
-      "platforms": [
-        "react"
-      ]
     },
     "disabled": {
       "type": "boolean",

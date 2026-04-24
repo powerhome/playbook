@@ -9,6 +9,7 @@ type ButtonToolbarProps = {
   aria?: {[key: string]: string},
   children?: React.ReactChild[] | React.ReactChild,
   className?: string,
+  connected?: boolean,
   data?: {[key: string]: string},
   htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,

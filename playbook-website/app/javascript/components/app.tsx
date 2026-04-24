@@ -4,15 +4,13 @@ import {
   Navigate,
   Route,
   RouterProvider,
-    useLoaderData,
-  useParams,
 } from 'react-router-dom'
 
 import App from './Website'
-import BetaHome from './Website/src/pages/BetaHome'
 import ComponentList from './Website/src/pages/ComponentList'
 import CategoryShow from './Website/src/pages/CategoryShow'
 import KitShow from './Website/src/pages/KitShow'
+import IconList from './Website/src/pages/IconList'
 import Changelog from './Website/src/pages/Changelog'
 import GettingStarted from './Website/src/pages/GettingStarted'
 import DesignGuidelines from './Website/src/pages/DesignGuidelines'
@@ -22,50 +20,26 @@ import Spacing from './Website/src/pages/DesignGuidelines/Spacing'
 import Typography from './Website/src/pages/DesignGuidelines/Typography'
 import Error from './Error'
 import { CategoryLoader, ComponentsLoader, ComponentShowLoader, GuidesLoader, GuidePageLoader } from './Website/src/hooks/loaders'
-import GlobalPropsIndex from './GlobalPropsAndTokens/GlobalPropsIndex'
-import GlobalPropsExamples from './GlobalPropsAndTokens/ExamplesPage/GlobalPropsExamplesIndex'
-import TokensIndex from './GlobalPropsAndTokens/TokensIndex'
-import TokensExamples from './GlobalPropsAndTokens/ExamplesPage/TokensExamplesIndex'
-import IconsIndex from './Icons/IconsIndex'
-
-function GlobalPropsShowPage() {
-  const { name } = useParams()
-  return <GlobalPropsExamples routeParamName={name} />
-}
-
-function TokensShowPage() {
-  const { name } = useParams()
-  return <TokensExamples routeParamName={name} />
-}
-
-function BetaIconsPage() {
-    const {
-        icon_banner_image_url,
-        icon_categories,
-        icon_kit_url,
-        icons_by_category,
-    }: any = useLoaderData()
-
-    return (
-        <IconsIndex
-            bannerImageUrl={icon_banner_image_url}
-            iconCategories={icon_categories}
-            iconKitUrl={icon_kit_url}
-            iconsByCategory={icons_by_category}
-        />
-    )
-}
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route
         element={<App />}
-        errorElement={<Error />}
-        id="beta-site"
         loader={ComponentsLoader}
         path="/beta"
+        errorElement={<Error />}
     >
-      <Route element={<BetaHome />} index />
+      <Route
+          element={<ComponentList />}
+          loader={ComponentsLoader}
+          path="kits"
+      >
+        <Route
+            element={<Navigate to="react" />}
+            loader={ComponentShowLoader}
+            path=":name"
+        />
+      </Route>
       <Route
           element={<KitShow />}
           loader={ComponentShowLoader}
@@ -76,41 +50,13 @@ const router = createBrowserRouter(
           loader={ComponentShowLoader}
           path="kits/:name/:platform"
       />
-      <Route path="kits" element={<ComponentList />}>
-        <Route
-            element={<Navigate to="react" />}
-            loader={ComponentShowLoader}
-            path=":name"
-        />
-      </Route>
       <Route
           element={<CategoryShow />}
           loader={CategoryLoader}
           path="kit_category/:category"
       />
       <Route
-          element={<GlobalPropsIndex linkPrefix="/beta" />}
-          loader={ComponentsLoader}
-          path="global_props"
-      />
-      <Route
-          element={<GlobalPropsShowPage />}
-          loader={ComponentsLoader}
-          path="global_props/:name"
-      />
-      <Route
-          element={<TokensIndex linkPrefix="/beta" />}
-          loader={ComponentsLoader}
-          path="tokens"
-      />
-      <Route
-          element={<TokensShowPage />}
-          loader={ComponentsLoader}
-          path="tokens/:name"
-      />
-      <Route
-          element={<BetaIconsPage />}
-          loader={ComponentsLoader}
+          element={<IconList />}
           path="icons"
       />
       <Route

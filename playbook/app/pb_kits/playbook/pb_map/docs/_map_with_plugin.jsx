@@ -4,12 +4,6 @@ import mapTheme from '../../pb_map/pbMapTheme'
 import maplibregl from 'maplibre-gl'
 import MapboxDraw from "@mapbox/mapbox-gl-draw";
 
-// MapLibre 3+ uses maplibregl-* classes; mapbox-gl-draw still defaults to mapboxgl-*. These overrides allow Plugin to work with MapLibre 4.7.1.
-MapboxDraw.constants.classes.CONTROL_BASE = "maplibregl-ctrl"
-MapboxDraw.constants.classes.CONTROL_PREFIX = "maplibregl-ctrl-"
-MapboxDraw.constants.classes.CONTROL_GROUP = "maplibregl-ctrl-group"
-MapboxDraw.constants.classes.ATTRIBUTION = "maplibregl-ctrl-attrib"
-
 const MapWithPlugin = (props) => {
     //set Map instance to access from outside useEffect
     const [mapInstance, setMapInstance] = useState(null)

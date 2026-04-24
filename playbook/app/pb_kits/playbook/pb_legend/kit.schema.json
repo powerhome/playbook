@@ -15,12 +15,6 @@
       ],
       "default": "data_1"
     },
-    "dark": {
-      "type": "boolean",
-      "platforms": [
-        "react"
-      ]
-    },
     "prefixText": {
       "type": "string",
       "platforms": [

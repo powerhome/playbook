@@ -105,18 +105,12 @@
       ]
     },
     "wrapped": {
-      "type": "boolean",
+      "type": "ReactNode",
       "platforms": [
         "react",
         "rails"
       ],
       "default": false
-    },
-    "closeProps": {
-      "type": "GenericObject",
-      "platforms": [
-        "react"
-      ]
     },
     "tabindex": {
       "platforms": [

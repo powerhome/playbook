@@ -8,42 +8,36 @@
   ],
   "props": {
     "active": {
-      "type": "boolean",
+      "type": "boolean;",
       "platforms": [
         "react",
         "rails"
       ],
       "default": false
     },
-    "dark": {
-      "type": "boolean",
-      "platforms": [
-        "react"
-      ]
-    },
     "date": {
-      "type": "Date",
+      "type": "Date;",
       "platforms": [
         "react",
         "rails"
       ]
     },
     "label": {
-      "type": "string",
+      "type": "string;",
       "platforms": [
         "react",
         "rails"
       ]
     },
     "value": {
-      "type": "string",
+      "type": "string;",
       "platforms": [
         "react",
         "rails"
       ]
     },
     "variant": {
-      "type": "enum",
+      "type": "\"default\" | \"details\";",
       "platforms": [
         "react",
         "rails"
@@ -55,21 +49,21 @@
       "default": "default"
     },
     "icon": {
-      "type": "string",
+      "type": "string;",
       "platforms": [
         "react",
         "rails"
       ]
     },
     "description": {
-      "type": "string",
+      "type": "string;",
       "platforms": [
         "react",
         "rails"
       ]
     },
     "title": {
-      "type": "string",
+      "type": "string;",
       "platforms": [
         "react",
         "rails"

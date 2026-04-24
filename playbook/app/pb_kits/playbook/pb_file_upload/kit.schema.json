@@ -21,12 +21,6 @@
         "react"
       ]
     },
-    "dark": {
-      "type": "boolean",
-      "platforms": [
-        "react"
-      ]
-    },
     "acceptedFilesDescription": {
       "type": "string",
       "platforms": [
@@ -71,13 +65,13 @@
       ]
     },
     "isDragActive": {
-      "type": "boolean",
+      "type": "boolean;",
       "platforms": [
         "react"
       ]
     },
     "fileRejections": {
-      "type": "array",
+      "type": "readonly FileRejection[];",
       "platforms": [
         "react"
       ]

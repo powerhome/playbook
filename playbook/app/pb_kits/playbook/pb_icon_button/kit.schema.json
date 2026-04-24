@@ -48,15 +48,12 @@
       ]
     },
     "size": {
-      "type": "enum",
+      "type": "IconSizes",
       "platforms": [
         "react",
         "rails"
       ],
       "values": [
-        "lg",
-        "xs",
-        "sm",
         "1x",
         "2x",
         "3x",
@@ -66,7 +63,10 @@
         "7x",
         "8x",
         "9x",
-        "10x"
+        "10x",
+        "xs",
+        "sm",
+        "lg"
       ],
       "default": "2x"
     },
@@ -106,11 +106,11 @@
   "usage": {
     "react": {
       "import": "import { IconButton } from 'playbook-ui'",
-      "example": "<IconButton htmlType=\"submit\" size=\"lg\"></IconButton>"
+      "example": "<IconButton htmlType=\"submit\" size=\"1x\"></IconButton>"
     },
     "rails": {
       "import": null,
-      "example": "<%= pb_rails(\"icon_button\", props: { html_type: \"submit\", size: \"lg\" }) %>"
+      "example": "<%= pb_rails(\"icon_button\", props: { html_type: \"submit\", size: \"1x\" }) %>"
     }
   }
 }

@@ -17,7 +17,6 @@ Rails.application.routes.draw do
   # Kits
 
   ## Beta View
-  get "beta", to: "pages#application_beta"
   get "beta/kits", to: "pages#application_beta"
   get "beta/kits/:name", to: "pages#application_beta"
   get "beta/kits/advanced_table/:name/:platform", to: "pages#application_beta"
@@ -30,10 +29,6 @@ Rails.application.routes.draw do
   get "beta/guides/getting_started/:page", to: "pages#application_beta"
   get "beta/guides/design_guidelines", to: "pages#application_beta"
   get "beta/guides/design_guidelines/:page", to: "pages#application_beta"
-  get "beta/global_props", to: "pages#application_beta"
-  get "beta/global_props/:name", to: "pages#application_beta"
-  get "beta/tokens", to: "pages#application_beta"
-  get "beta/tokens/:name", to: "pages#application_beta"
 
   # Legacy View
   get "kits", to: "pages#kits"

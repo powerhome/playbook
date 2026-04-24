@@ -12,11 +12,7 @@ import {
 import HeaderImage from "../../images/getting-started.svg";
 import { GlobalPropsCards } from "./Data/GlobalPropsCards";
 
-type GlobalPropsProps = {
-  linkPrefix?: string,
-}
-
-const GlobalProps = ({ linkPrefix = "" }: GlobalPropsProps) => {
+const GlobalProps = () => {
   return (
     <Background
       flexDirection="column"
@@ -24,7 +20,6 @@ const GlobalProps = ({ linkPrefix = "" }: GlobalPropsProps) => {
       display="flex"
       justifyContent="center"
       alignItems="center"
-      height="100%"
     >
       <Background
         imageUrl={HeaderImage}
@@ -48,7 +43,7 @@ const GlobalProps = ({ linkPrefix = "" }: GlobalPropsProps) => {
           <Layout.Body>
             {GlobalPropsCards.sort((a, b) => a.title.localeCompare(b.title)).map(({ title, description, link, icon }) => {
               return (
-                <Link key={title} href={`${linkPrefix}${link}`}>
+                <Link key={title} href={link}>
                   <Card padding="none" hover={{ shadow: "deep" }} flex={1} minHeight="300px">
                     <Background backgroundColor="light">
                       <Flex justify="center" padding="xl">

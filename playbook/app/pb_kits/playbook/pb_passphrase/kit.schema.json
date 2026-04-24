@@ -15,12 +15,6 @@
       ],
       "default": false
     },
-    "dark": {
-      "type": "boolean",
-      "platforms": [
-        "react"
-      ]
-    },
     "inputProps": {
       "type": "GenericObject",
       "platforms": [

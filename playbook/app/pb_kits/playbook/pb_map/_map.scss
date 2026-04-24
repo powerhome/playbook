@@ -105,36 +105,6 @@
     }
   }
 
-  // mapbox-gl-draw cursor overrides for 4.7.1 upgrade.
-  .maplibregl-map.mouse-pointer .maplibregl-canvas-container.maplibregl-interactive {
-    cursor: pointer;
-  }
-  .maplibregl-map.mouse-move .maplibregl-canvas-container.maplibregl-interactive {
-    cursor: move;
-  }
-  .maplibregl-map.mouse-add .maplibregl-canvas-container.maplibregl-interactive {
-    cursor: crosshair;
-  }
-  .maplibregl-map.mouse-move.mode-direct_select .maplibregl-canvas-container.maplibregl-interactive {
-    cursor: grab;
-    cursor: -moz-grab;
-    cursor: -webkit-grab;
-  }
-  .maplibregl-map.mode-direct_select.feature-vertex.mouse-move .maplibregl-canvas-container.maplibregl-interactive {
-    cursor: move;
-  }
-  .maplibregl-map.mode-direct_select.feature-midpoint.mouse-pointer .maplibregl-canvas-container.maplibregl-interactive {
-    cursor: cell;
-  }
-  .maplibregl-map.mode-direct_select.feature-feature.mouse-move .maplibregl-canvas-container.maplibregl-interactive {
-    cursor: move;
-  }
-  .maplibregl-map.mode-static.mouse-pointer .maplibregl-canvas-container.maplibregl-interactive {
-    cursor: grab;
-    cursor: -moz-grab;
-    cursor: -webkit-grab;
-  }
-
   .mapboxgl-popup-anchor-bottom .mapboxgl-popup-tip,
   .maplibregl-popup-anchor-bottom .maplibregl-popup-tip {
     margin-top: -1px;

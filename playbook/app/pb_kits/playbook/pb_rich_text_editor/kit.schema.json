@@ -31,7 +31,7 @@
       ]
     },
     "inputOptions": {
-      "type": "GenericObject",
+      "type": "{ [key: string]: string | number | boolean | (() => void) }",
       "platforms": [
         "react"
       ]
@@ -49,7 +49,7 @@
       ]
     },
     "extensions": {
-      "type": "GenericObject",
+      "type": "object",
       "platforms": [
         "react"
       ]
@@ -119,12 +119,6 @@
       ]
     },
     "value": {
-      "type": "string",
-      "platforms": [
-        "react"
-      ]
-    },
-    "maxWidth": {
       "type": "string",
       "platforms": [
         "react"

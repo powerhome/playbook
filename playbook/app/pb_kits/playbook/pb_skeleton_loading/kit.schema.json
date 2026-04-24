@@ -7,30 +7,6 @@
     "rails"
   ],
   "props": {
-    "height": {
-      "type": "string",
-      "platforms": [
-        "react"
-      ]
-    },
-    "width": {
-      "type": "string",
-      "platforms": [
-        "react"
-      ]
-    },
-    "borderRadius": {
-      "type": "string",
-      "platforms": [
-        "react"
-      ]
-    },
-    "gap": {
-      "type": "Sizes | \"none\"",
-      "platforms": [
-        "react"
-      ]
-    },
     "stack": {
       "type": "number",
       "platforms": [
@@ -50,12 +26,6 @@
         "white"
       ],
       "default": "default"
-    },
-    "dark": {
-      "type": "boolean",
-      "platforms": [
-        "react"
-      ]
     }
   },
   "globalProps": true,

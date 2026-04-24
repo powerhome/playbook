@@ -32,12 +32,6 @@
       ],
       "default": "sm"
     },
-    "dark": {
-      "type": "boolean",
-      "platforms": [
-        "react"
-      ]
-    },
     "icon": {
       "type": "boolean",
       "platforms": [

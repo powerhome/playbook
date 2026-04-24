@@ -1,6 +1,5 @@
 import React from "react";
 import { Background, Image } from "playbook-ui";
-import type { HomepageHeroCTALinks } from "../ctaLinks";
 import WelcomeComponent from "./Welcome";
 import {
   ConnectedDevicesCard,
@@ -14,12 +13,7 @@ import {
 import GridMedium from "../../../images/MediumBackgroundGrid.svg";
 import BlurBackground from "./BlurBackground";
 
-type MediumScreenProps = {
-  ctaLinks: HomepageHeroCTALinks;
-  onNavigate?: (path: string) => void;
-};
-
-const MediumScreen = ({ ctaLinks, onNavigate }: MediumScreenProps) => {
+const MediumScreen = () => {
   return (
     <>
       <Background
@@ -32,17 +26,14 @@ const MediumScreen = ({ ctaLinks, onNavigate }: MediumScreenProps) => {
         paddingBottom="sm"
       >
         <WelcomeComponent
+          fixedSize="963px"
+          headerAlign="center"
           buttonsAlignment="center"
           displayProps={{
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
           }}
-          exploreComponentsLink={ctaLinks.exploreComponents}
-          fixedSize="963px"
-          getStartedLink={ctaLinks.getStarted}
-          headerAlign="center"
-          onNavigate={onNavigate}
         />
       </Background>
 

@@ -23,7 +23,7 @@
       ]
     },
     "customIcon": {
-      "type": "GenericObject",
+      "type": "ReactNode",
       "platforms": [
         "react",
         "rails"
@@ -110,7 +110,7 @@
       "default": null
     },
     "size": {
-      "type": "enum",
+      "type": "IconSizes",
       "platforms": [
         "react",
         "rails"

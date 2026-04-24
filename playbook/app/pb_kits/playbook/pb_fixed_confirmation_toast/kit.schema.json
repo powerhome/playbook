@@ -8,14 +8,14 @@
   ],
   "props": {
     "autoClose": {
-      "type": "number",
+      "type": "number;",
       "platforms": [
         "react",
         "rails"
       ]
     },
     "closeable": {
-      "type": "boolean",
+      "type": "boolean;",
       "platforms": [
         "react",
         "rails"
@@ -23,7 +23,7 @@
       "default": false
     },
     "horizontal": {
-      "type": "enum",
+      "type": "\"right\" | \"left\" | \"center\";",
       "platforms": [
         "react",
         "rails"
@@ -43,7 +43,7 @@
       ]
     },
     "multiLine": {
-      "type": "boolean",
+      "type": "boolean;",
       "platforms": [
         "react",
         "rails"
@@ -51,7 +51,7 @@
       "default": false
     },
     "navMarginTop": {
-      "type": "boolean",
+      "type": "boolean;",
       "platforms": [
         "react",
         "rails"
@@ -59,19 +59,19 @@
       "default": false
     },
     "onClose": {
-      "type": "VoidCallback",
+      "type": "VoidCallback;",
       "platforms": [
         "react"
       ]
     },
     "open": {
-      "type": "boolean",
+      "type": "boolean;",
       "platforms": [
         "react"
       ]
     },
     "status": {
-      "type": "enum",
+      "type": "\"success\" | \"error\" | \"neutral\" | \"tip\";",
       "platforms": [
         "react",
         "rails"
@@ -85,14 +85,14 @@
       "default": "neutral"
     },
     "text": {
-      "type": "string",
+      "type": "string;",
       "platforms": [
         "react",
         "rails"
       ]
     },
     "vertical": {
-      "type": "enum",
+      "type": "\"top\" | \"bottom\";",
       "platforms": [
         "react",
         "rails"
@@ -102,12 +102,6 @@
         "bottom"
       ],
       "default": null
-    },
-    "zIndex": {
-      "type": "number | string",
-      "platforms": [
-        "react"
-      ]
     }
   },
   "globalProps": true,

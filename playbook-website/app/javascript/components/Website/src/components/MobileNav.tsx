@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import { Flex, Image, Icon } from "playbook-ui";
 // @ts-ignore
 import PBLogoMobile from "../../../../images/pb-logo-mobile.svg";
@@ -11,9 +10,7 @@ const MobileNav = () => {
       className="pb--page--mobileNav"
       shadow="deep"
     >
-      <Link to="/beta">
-        <Image alt="Playbook logo" url={PBLogoMobile} />
-      </Link>
+      <Image alt="Playbook logo" url={PBLogoMobile} />
     </Flex>
   );
 };

@@ -43,22 +43,6 @@ const CONFIG = {
 const GLOBAL_PROPS = getGlobalPropNames();
 ['aria', 'data', 'htmlOptions', 'id', 'className', 'children', 'key', 'ref'].forEach(p => GLOBAL_PROPS.add(p));
 
-/**
- * When parsing a kit `type XProps = { ... }` block, skip only structural globals that
- * should not be duplicated into kit.schema.json. Do **not** use the full GLOBAL_PROPS set
- * here — kits often redeclare names from `& GlobalProps` with a narrower type (e.g. maxHeight).
- */
-const KIT_TYPE_BLOCK_SKIP_PROPS = new Set([
-  'aria',
-  'data',
-  'htmlOptions',
-  'id',
-  'className',
-  'children',
-  'key',
-  'ref',
-]);
-
 // =============================================================================
 // HELPERS
 // =============================================================================
@@ -103,170 +87,23 @@ function extractBracedContent(content, startIndex) {
 // TYPESCRIPT PARSING
 // =============================================================================
 
-// Cache for resolved imported types
-const importedTypesCache = new Map();
-
-/**
- * Resolve a file path, handling directories (index.ts) and missing extensions.
- */
-function resolveFilePath(basePath) {
-  // If path exists as-is, return it
-  if (fs.existsSync(basePath) && fs.statSync(basePath).isFile()) {
-    return basePath;
-  }
-  
-  // If it's a directory, look for index file
-  if (fs.existsSync(basePath) && fs.statSync(basePath).isDirectory()) {
-    for (const indexFile of ['index.tsx', 'index.ts', 'index.js']) {
-      const indexPath = path.join(basePath, indexFile);
-      if (fs.existsSync(indexPath)) {
-        return indexPath;
-      }
-    }
-    return null; // Directory without index file
-  }
-  
-  // Try common extensions
-  for (const ext of ['.tsx', '.ts', '.js']) {
-    if (fs.existsSync(basePath + ext)) {
-      return basePath + ext;
-    }
-  }
-  
-  return null;
-}
-
-/**
- * Extract imports from a TypeScript file.
- * Returns a map of typeName -> { file, exportName }
- */
-function extractImports(content, currentFilePath) {
-  const imports = new Map();
-  const currentDir = path.dirname(currentFilePath);
-  
-  // Match: import { TypeName } from "./path" or import { TypeName as Alias } from "./path"
-  const importRegex = /import\s*\{([^}]+)\}\s*from\s*["']([^"']+)["']/g;
-  
-  for (const match of content.matchAll(importRegex)) {
-    const importedNames = match[1];
-    const importPath = match[2];
-    
-    // Skip non-relative imports (node_modules, etc.)
-    if (!importPath.startsWith('.')) continue;
-    
-    // Resolve relative path
-    const basePath = path.resolve(currentDir, importPath);
-    const resolvedPath = resolveFilePath(basePath);
-    
-    // Skip if we couldn't resolve the path
-    if (!resolvedPath) continue;
-    
-    // Parse individual imports: Type1, Type2 as Alias, Type3
-    for (const item of importedNames.split(',')) {
-      const trimmed = item.trim();
-      if (!trimmed) continue;
-      
-      const asMatch = trimmed.match(/(\w+)\s+as\s+(\w+)/);
-      if (asMatch) {
-        imports.set(asMatch[2], { file: resolvedPath, exportName: asMatch[1] });
-      } else {
-        imports.set(trimmed, { file: resolvedPath, exportName: trimmed });
-      }
-    }
-  }
-  
-  return imports;
-}
-
-/**
- * Resolve a type alias from an imported file.
- * Returns the parsed type info if found, null otherwise.
- */
-function resolveImportedType(typeName, imports) {
-  // Check cache first
-  if (importedTypesCache.has(typeName)) {
-    return importedTypesCache.get(typeName);
-  }
-  
-  const importInfo = imports.get(typeName);
-  if (!importInfo || !fs.existsSync(importInfo.file)) {
-    return null;
-  }
-  
-  const content = readFile(importInfo.file);
-  if (!content) return null;
-  
-  // Look for: export type TypeName = "value1" | "value2" | ...
-  // Match until we hit a line that doesn't start with | or is a new declaration
-  const typeRegex = new RegExp(
-    `export\\s+type\\s+${importInfo.exportName}\\s*=\\s*`,
-    'g'
-  );
-  
-  const match = typeRegex.exec(content);
-  if (!match) return null;
-  
-  // Extract the type definition by collecting lines until we hit something that's not part of the union
-  const startIndex = match.index + match[0].length;
-  const lines = content.slice(startIndex).split('\n');
-  let typeDefinition = '';
-  
-  for (const line of lines) {
-    const trimmed = line.trim();
-    // Stop if we hit an empty line followed by non-union content, or a new declaration
-    if (!trimmed) break;
-    if (/^(export|type|const|let|var|function|class|interface)\s/.test(trimmed)) break;
-    
-    // Add this line to the type definition
-    typeDefinition += ' ' + trimmed;
-    
-    // If the line doesn't end with | and isn't followed by |, we're done
-    if (!trimmed.endsWith('|') && !trimmed.startsWith('|')) {
-      // Check if next meaningful line starts with |
-      const nextLineIndex = lines.indexOf(line) + 1;
-      if (nextLineIndex < lines.length) {
-        const nextTrimmed = lines[nextLineIndex].trim();
-        if (!nextTrimmed.startsWith('|')) break;
-      } else {
-        break;
-      }
-    }
-  }
-  
-  typeDefinition = typeDefinition.trim();
-  
-  // Clean up the definition - remove trailing semicolons and extra whitespace
-  typeDefinition = typeDefinition.replace(/;\s*$/, '').replace(/\s+/g, ' ').trim();
-  
-  const result = parseTypeString(typeDefinition);
-  importedTypesCache.set(typeName, result);
-  return result;
-}
-
 /**
  * Parse TypeScript type string into schema format.
- * @param {string} typeStr - The type string to parse
- * @param {Map} imports - Map of imported types for resolution
  */
-function parseTypeString(typeStr, imports = new Map()) {
+function parseTypeString(typeStr) {
   if (!typeStr) return { type: 'any' };
-  typeStr = typeStr.replace(/\s+/g, ' ').trim().replace(/;+\s*$/, '');
-
-  // Object / record types (must run before `=>` — object shapes may contain callbacks)
-  if (typeStr.startsWith('{')) {
-    return { type: 'GenericObject' };
-  }
+  typeStr = typeStr.replace(/\s+/g, ' ').trim();
 
   // Union of literals: "a" | "b" | "c"
   if (typeStr.includes('|')) {
     const parts = typeStr.split('|').map(p => p.trim());
     const isAllLiterals = parts.every(p => 
-      isQuoted(p) || p === 'null' || p === 'undefined' || !isNaN(Number(p)) || p === '""'
+      isQuoted(p) || p === 'null' || p === 'undefined' || !isNaN(Number(p))
     );
     
     if (isAllLiterals) {
       const values = parts
-        .filter(p => p !== 'null' && p !== 'undefined' && p !== '""')
+        .filter(p => p !== 'null' && p !== 'undefined')
         .map(p => isQuoted(p) ? stripQuotes(p) : Number(p));
       return { type: 'enum', values };
     }
@@ -284,26 +121,17 @@ function parseTypeString(typeStr, imports = new Map()) {
     return { type: 'function' };
   }
   
-  // Arrays
+  // Objects/Arrays
+  if (typeStr.startsWith('{')) return { type: 'object' };
   if (typeStr.endsWith('[]') || typeStr.startsWith('Array')) return { type: 'array' };
-
-  // Check if this is an imported type that we can resolve
-  if (imports.size > 0 && /^[A-Z]\w*$/.test(typeStr)) {
-    const resolved = resolveImportedType(typeStr, imports);
-    if (resolved) {
-      return resolved;
-    }
-  }
 
   return { type: typeStr };
 }
 
 /**
  * Parse props from a TypeScript type block.
- * @param {string} block - The type block content
- * @param {Map} imports - Map of imported types for resolution
  */
-function parseTypeBlock(block, imports = new Map()) {
+function parseTypeBlock(block) {
   const props = {};
   let currentProp = null;
   let currentType = '';
@@ -313,28 +141,24 @@ function parseTypeBlock(block, imports = new Map()) {
     const trimmed = line.trim();
     if (!trimmed || trimmed.startsWith('//') || trimmed.startsWith('/*')) continue;
 
-    // Check for new prop BEFORE updating depth (so opening braces on same line don't block it)
+    depth += (trimmed.match(/\{/g) || []).length - (trimmed.match(/\}/g) || []).length;
+
     const match = trimmed.match(/^(\w+)\??:\s*(.*)$/);
-    if (match && depth === 0) {
-      if (currentProp && currentType && !KIT_TYPE_BLOCK_SKIP_PROPS.has(currentProp)) {
-        const typeInfo = parseTypeString(currentType.replace(/,\s*$/, '').trim(), imports);
+    if (match && depth <= 0) {
+      if (currentProp && currentType && !GLOBAL_PROPS.has(currentProp)) {
+        const typeInfo = parseTypeString(currentType.replace(/,\s*$/, '').trim());
         props[currentProp] = { type: typeInfo.type, platforms: ['react'], ...typeInfo.values && { values: typeInfo.values } };
       }
       currentProp = match[1];
       currentType = match[2].replace(/,\s*$/, '');
-      // Reset depth tracking for this prop's type
-      depth = (currentType.match(/\{/g) || []).length - (currentType.match(/\}/g) || []).length;
-    } else {
-      // Update depth for continuation lines
-      depth += (trimmed.match(/\{/g) || []).length - (trimmed.match(/\}/g) || []).length;
-      if (currentProp && depth > 0) {
-        currentType += ' ' + trimmed.replace(/,\s*$/, '');
-      }
+      if (!currentType.includes('{') || currentType.includes('}')) depth = 0;
+    } else if (currentProp && depth > 0) {
+      currentType += ' ' + trimmed.replace(/,\s*$/, '');
     }
   }
 
-  if (currentProp && currentType && !KIT_TYPE_BLOCK_SKIP_PROPS.has(currentProp)) {
-    const typeInfo = parseTypeString(currentType.replace(/,\s*$/, '').trim(), imports);
+  if (currentProp && currentType && !GLOBAL_PROPS.has(currentProp)) {
+    const typeInfo = parseTypeString(currentType.replace(/,\s*$/, '').trim());
     props[currentProp] = { type: typeInfo.type, platforms: ['react'], ...typeInfo.values && { values: typeInfo.values } };
   }
 
@@ -360,15 +184,12 @@ function parseTypeScript(filePath) {
   const content = readFile(filePath);
   if (!content) return {};
 
-  // Extract imports for resolving type aliases
-  const imports = extractImports(content, filePath);
-
   const props = {};
   const typeRegex = /type\s+(\w*(?:Props|PropTypes))\s*=\s*\{/g;
   
   for (const match of content.matchAll(typeRegex)) {
     const block = extractBracedContent(content, match.index + match[0].length);
-    Object.assign(props, parseTypeBlock(block, imports));
+    Object.assign(props, parseTypeBlock(block));
   }
 
   extractDefaults(content, props);

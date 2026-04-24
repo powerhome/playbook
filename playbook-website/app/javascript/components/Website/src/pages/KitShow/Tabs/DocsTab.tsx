@@ -2,9 +2,6 @@ import { useState } from "react";
 import { Body, Flex, Card, Button, Caption, Title } from "playbook-ui";
 import ReactMarkdown from "react-markdown";
 import LiveExample from "../../../components/LiveExamples/LiveExampleReact";
-import LiveExampleRails from "../../../components/LiveExamples/LiveExampleRails";
-import { SyntaxHighlightedCode } from "../../../components/SyntaxHighlightedCode";
-import { usePlatform } from "../../../contexts/PlatformContext";
 import RightSideNav from "../RightSideNav";
 
 interface Section {
@@ -25,10 +22,6 @@ export const DocsTab = ({
   name,
   sections,
 }: DocsTabProps) => {
-  const { platform } = usePlatform();
-  const codeLanguage: "erb" | "swift" | "tsx" =
-    platform === "rails" ? "erb" : platform === "swift" ? "swift" : "tsx";
-
   const [visibleCode, setVisibleCode] = useState<{ [key: string]: boolean }>(
     {},
   );
@@ -62,11 +55,7 @@ export const DocsTab = ({
     >
       <Card marginBottom="lg" padding="none" width="100%">
         <Caption text={example.title} color="lighter" margin="md" />
-        {platform === "rails" ? (
-          <LiveExampleRails html={example.rendered ?? ""} />
-        ) : (
-          <LiveExample code={example.source} exampleProps={exampleProps} />
-        )}
+        <LiveExample code={example.source} exampleProps={exampleProps} />
         {example.description && example.description !== "" && (
           <Body margin="md">
             <ReactMarkdown>{example.description}</ReactMarkdown>
@@ -96,13 +85,9 @@ export const DocsTab = ({
 
           {visibleCode[example.example_key] && (
             <Card borderNone width="100%">
-              <SyntaxHighlightedCode
-                code={example.source ?? ""}
-                language={codeLanguage}
-                rougeHtml={
-                  platform === "rails" ? example.highlighted_source : undefined
-                }
-              />
+              <pre className="highlight">
+                <code>{example.source}</code>
+              </pre>
             </Card>
           )}
         </>

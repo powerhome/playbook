@@ -1,42 +1,14 @@
 @import "playbook-tokens/colors";
-@import "playbook-tokens/line_height";
 @import "playbook-tokens/screen_sizes";
 @import "playbook-tokens/shadows";
 @import "playbook-tokens/typography";
 @import "playbook-tokens/animation-curves";
 @import "playbook-tokens/transition";
 
-.kit-card-link {
-  color: inherit;
-  display: block;
-  height: 100%;
-  text-decoration: none;
-}
-
 .kit-card {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  min-height: 180px;
-  overflow: hidden;
-
   @media screen and (min-width: $screen-xs-min) {
-    min-height: 220px;
+    min-height: 138px;
   }
-
-  // TODO: update this once kit images are added, this provides gray placeholder
-  .kit-card-media {
-    background-color: $bg_light;
-    flex: 2 1 0;
-    min-height: 0;
-  }
-
-  .kit-card-content {
-    flex: 1 1 0;
-    justify-content: flex-start;
-    min-height: 0;
-  }
-
   .icon {
     visibility: hidden;
     opacity: 0;
@@ -60,15 +32,7 @@
     height: 40px;
   }
   &-description {
-    flex-shrink: 0;
-    font-size: $text_small !important;
-    hyphens: none;
-    -webkit-hyphens: none;
-    overflow-wrap: normal;
-    word-break: normal;
-    @media screen and (min-width: $screen-xs-min) {
-      min-height: $text_small * $lh_tight * 2;
-    }
+    font-size: $text-small !important;
     @media screen and (max-width: $screen-xs-min) {
       display: none;
     }

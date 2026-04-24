@@ -1,6 +1,5 @@
 import React from "react";
 import { Background, Image } from "playbook-ui";
-import type { HomepageHeroCTALinks } from "../ctaLinks";
 import WelcomeComponent from "./Welcome";
 import BlurBackground from "./BlurBackground";
 import {
@@ -13,12 +12,7 @@ import {
 // @ts-ignore
 import GridSmall from "../../../images/SmallBackgroundGrid.svg";
 
-type SmallScreenProps = {
-  ctaLinks: HomepageHeroCTALinks;
-  onNavigate?: (path: string) => void;
-};
-
-const SmallScreen = ({ ctaLinks, onNavigate }: SmallScreenProps) => {
+const SmallScreen = () => {
   return (
     <>
       <Background
@@ -32,17 +26,14 @@ const SmallScreen = ({ ctaLinks, onNavigate }: SmallScreenProps) => {
         width="xl"
       >
         <WelcomeComponent
+          fixedSize="599px"
+          headerAlign="center"
           buttonsAlignment="center"
           displayProps={{
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
           }}
-          exploreComponentsLink={ctaLinks.exploreComponents}
-          fixedSize="599px"
-          getStartedLink={ctaLinks.getStarted}
-          headerAlign="center"
-          onNavigate={onNavigate}
         />
       </Background>
 

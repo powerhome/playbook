@@ -21,7 +21,6 @@ module Playbook
         html_options[:id] = props[:input_options][:id]
         html_options[:class] = props[:input_options][:class] if props[:input_options][:class]
         html_options[:data] = (html_options[:data] || {}).merge(props[:input_options][:data] || {})
-        html_options[:data][:message] = props[:validation_message] if props[:validation_message].present?
 
         input = super(name, collection, value_method, text_method, options, html_options)
 

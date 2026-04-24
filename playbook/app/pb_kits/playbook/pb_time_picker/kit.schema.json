@@ -7,12 +7,6 @@
     "rails"
   ],
   "props": {
-    "dark": {
-      "type": "boolean",
-      "platforms": [
-        "react"
-      ]
-    },
     "defaultTime": {
       "type": "string",
       "platforms": [
@@ -36,7 +30,7 @@
       ]
     },
     "inputOptions": {
-      "type": "GenericObject",
+      "type": "{ [key: string]: string | number | boolean | (() => void) | ((arg?: Event) => void) }",
       "platforms": [
         "react",
         "rails"
@@ -108,7 +102,7 @@
       "default": false
     },
     "timeFormat": {
-      "type": "enum",
+      "type": "TimeFormat",
       "platforms": [
         "react",
         "rails"

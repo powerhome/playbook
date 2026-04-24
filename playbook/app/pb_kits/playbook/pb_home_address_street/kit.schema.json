@@ -28,12 +28,6 @@
         "rails"
       ]
     },
-    "dark": {
-      "type": "boolean",
-      "platforms": [
-        "react"
-      ]
-    },
     "preserveCase": {
       "type": "boolean",
       "platforms": [

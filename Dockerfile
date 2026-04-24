@@ -3,12 +3,10 @@ FROM phusion/passenger-customizable:1.0.19 AS base
 
 RUN --mount=type=cache,id=playbook-apt-cache,target=/var/cache/apt,sharing=locked \
     --mount=type=cache,id=playbook-apt-lib,target=/var/lib/apt,sharing=locked \
-    mv /etc/apt/sources.list.d /etc/apt/sources.list.d.bak && \
     apt-get update -y && \
-    apt-get install -y ca-certificates curl gnupg && \
-    curl -fsSL https://oss-binaries.phusionpassenger.com/auto-software-signing-gpg-key-2025.txt | gpg --dearmor -o /etc/apt/trusted.gpg.d/phusion-passenger.gpg && \
-    mv /etc/apt/sources.list.d.bak /etc/apt/sources.list.d && \
-    apt-get update -y
+    mv /etc/apt/sources.list.d /etc/apt/sources.list.d.bak && \
+    apt update && apt install -y ca-certificates && \
+    mv /etc/apt/sources.list.d.bak /etc/apt/sources.list.d
 
 RUN bash -lc 'rvm remove all --force && rvm install ruby-3.3.0 && rvm --default use ruby-3.3.0 && gem install bundler -v 2.5.3'
 RUN --mount=type=cache,id=playbook-apt-cache,target=/var/cache/apt,sharing=locked \
@@ -32,8 +30,7 @@ RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/$NVM_VERSION/insta
     && npm install -g npm@$NPM_VERSION yarn@$YARN_VERSION
 
 RUN --mount=type=cache,id=playbook-apt-cache,target=/var/cache/apt,sharing=locked \
-    --mount=type=cache,id=playbook-apt-lib,target=/var/lib/apt,sharing=locked \
-    apt-get update -y \
+    --mount=type=cache,id=playbook-apt-lib,target=/var/lib/apt,sharing=locked \apt-get update -y \
     && apt-get install -y shared-mime-info=1.15-1
 
 RUN bundle config --global silence_root_warning 1

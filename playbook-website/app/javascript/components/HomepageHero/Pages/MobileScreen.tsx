@@ -1,14 +1,8 @@
 import React from "react";
 import { Background } from "playbook-ui";
-import type { HomepageHeroCTALinks } from "../ctaLinks";
 import WelcomeComponent from "./Welcome";
 
-type MobileScreenProps = {
-  ctaLinks: HomepageHeroCTALinks;
-  onNavigate?: (path: string) => void;
-};
-
-const MobileScreen = ({ ctaLinks, onNavigate }: MobileScreenProps) => {
+const MobileScreen = () => {
   return (
     <>
       <Background
@@ -28,11 +22,8 @@ const MobileScreen = ({ ctaLinks, onNavigate }: MobileScreenProps) => {
             flexDirection: "column",
             alignItems: "center",
           }}
-          exploreComponentsLink={ctaLinks.exploreComponents}
           fixedSize="374px"
-          getStartedLink={ctaLinks.getStarted}
           headerAlign="center"
-          onNavigate={onNavigate}
           titleSize={3}
         />
       </Background>

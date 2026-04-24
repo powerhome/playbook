@@ -28,7 +28,6 @@ import PbMultiLevelSelect from 'kits/pb_multi_level_select'
 import PbCheckbox from 'kits/pb_checkbox'
 import PbButton from 'kits/pb_button'
 import PbTimePicker from 'kits/pb_time_picker'
-import PbFormValidation from 'kits/pb_form/pb_form_validation'
 
 // Register all kits with the global registry
 // Please note: the order of this array determines the order of kit initialization, which can be important for kits that depend on others (e.g., a kit that enhances a text input should be registered after PbTextInput)
@@ -57,7 +56,6 @@ const kits = [
   PbCheckbox,
   PbButton,
   PbTimePicker,
-  PbFormValidation,
 ]
 
 // Register all kits (this just stores them, doesn't initialize yet)
@@ -74,9 +72,8 @@ PbKitRegistry.start()
 // Copy Button
 addCopyEventListeners()
 
-// Form utilities - PbFormValidation is registered with PbKitRegistry above
-// so it starts automatically. We also expose it on window for legacy support.
-window.PbFormValidation = PbFormValidation
+// Form utilities
+import 'kits/pb_form/pb_form_validation'
 import formHelper from 'kits/pb_form/formHelper'
 window.formHelper = formHelper
 

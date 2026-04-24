@@ -29,4 +29,3 @@ export { default as DatePickerQuickPickDefaultDate } from './_date_picker_quick_
 export { default as DatePickerRangePattern } from './_date_picker_range_pattern'
 export { default as DatePickerAndDropdownRange } from './_date_picker_and_dropdown_range.jsx'
 export { default as DatePickerRequiredIndicator } from "./_date_picker_required_indicator.jsx";
-export { default as DatePickerDialogSubmission } from "./_date_picker_dialog_submission.jsx";

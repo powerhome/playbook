@@ -35,12 +35,6 @@
         "rails"
       ]
     },
-    "dark": {
-      "type": "boolean",
-      "platforms": [
-        "react"
-      ]
-    },
     "decimals": {
       "type": "enum",
       "platforms": [

@@ -15,6 +15,7 @@ type BreadCrumbsProps = {
   data?: {[key: string]: string},
   htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
+  text?: string,
   children?: React.ReactChild[] | React.ReactNode,
 }
 const BreadCrumbs = (props: BreadCrumbsProps): React.ReactElement => {

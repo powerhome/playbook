@@ -14,10 +14,6 @@ type KitSearchProps = {
   id: string,
   global_props_and_tokens?: Record<string, any>,
   marginBottom?: string,
-  beta?: boolean,
-  onBetaNavigate?: (path: string) => void,
-  /** When set with `beta`, remounts Typeahead on navigation so query/selection clears (e.g. pathname+search from useLocation). */
-  betaSearchResetKey?: string,
 }
 
 const combineKitsandVisualGuidelines = (
@@ -39,7 +35,7 @@ const combineKitsandVisualGuidelines = (
   return [...kits, ...globalPropsItems, ...tokensItems].sort((a, b) => a.label.localeCompare(b.label))
 }
 
-const KitSearch = ({ classname, id, kits, global_props_and_tokens, marginBottom, beta, onBetaNavigate, betaSearchResetKey }: KitSearchProps) => {
+const KitSearch = ({ classname, id, kits, global_props_and_tokens, marginBottom }: KitSearchProps) => {
   const kitsAndGuidelines = combineKitsandVisualGuidelines(kits, global_props_and_tokens)
 
   const [filteredKits, setFilteredKits] = useState(kitsAndGuidelines)
@@ -57,12 +53,7 @@ const KitSearch = ({ classname, id, kits, global_props_and_tokens, marginBottom,
 
   const handleChange = (selection: any) => {
     if (selection) {
-      const path = beta ? `/beta${selection.value}` : selection.value
-      if (beta && onBetaNavigate) {
-        onBetaNavigate(path)
-      } else {
-        window.location.href = path
-      }
+      window.location = selection.value
     }
   }
 
@@ -87,11 +78,8 @@ const KitSearch = ({ classname, id, kits, global_props_and_tokens, marginBottom,
     </Flex>
   )
 
-  const typeaheadKey = beta ? `${id}__${betaSearchResetKey ?? ''}` : id
-
   return (
       <Typeahead
-        key={typeaheadKey}
         className={classname}
         dark={document.cookie.split("; ").includes("dark_mode=true")}
         id={id}

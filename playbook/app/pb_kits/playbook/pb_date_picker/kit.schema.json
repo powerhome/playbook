@@ -16,16 +16,10 @@
       "default": false
     },
     "customQuickPickDates": {
-      "type": "GenericObject",
+      "type": "object",
       "platforms": [
         "react",
         "rails"
-      ]
-    },
-    "dark": {
-      "type": "boolean",
-      "platforms": [
-        "react"
       ]
     },
     "defaultDate": {
@@ -117,14 +111,14 @@
       ]
     },
     "inputAria": {
-      "type": "GenericObject",
+      "type": "object",
       "platforms": [
         "react",
         "rails"
       ]
     },
     "inputData": {
-      "type": "GenericObject",
+      "type": "object",
       "platforms": [
         "react",
         "rails"

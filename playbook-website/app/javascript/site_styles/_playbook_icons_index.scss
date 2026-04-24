@@ -1,119 +1,8 @@
 @import "playbook-tokens/colors";
-@import "playbook-tokens/container";
 @import "playbook-tokens/spacing";
 @import "playbook-tokens/screen_sizes";
 
 .playbook_icons_index{
-    .icons-index-toolbar {
-        box-sizing: border-box;
-        display: flex;
-        flex-direction: column;
-        align-items: stretch;
-        gap: $space_md;
-        margin-bottom: $space_md;
-        width: 100%;
-
-        .icons-index-search {
-            box-sizing: border-box;
-            margin-left: auto;
-            margin-right: auto;
-            width: 100%;
-            max-width: min(100%, $container_xxs);
-
-            @include break_on($screen-sm-min) {
-                max-width: min(100%, $container_sm);
-            }
-
-            @include break_on($screen-lg-min) {
-                max-width: min(100%, $container_md);
-            }
-
-            .pb_text_input_kit {
-                max-width: 100%;
-            }
-        }
-
-        @media screen and (max-width: $screen-md-max) {
-            align-items: stretch;
-
-            .icons-index-search {
-                align-self: center;
-                max-width: 100%;
-                width: 100%;
-            }
-
-            #icon-category-dropdown {
-                align-self: stretch;
-                max-width: 100%;
-                width: 100% !important;
-            }
-
-            #icon-category-dropdown .dropdown_wrapper {
-                width: 100%;
-            }
-
-            #icon-category-dropdown_trigger {
-                box-sizing: border-box;
-                display: block !important;
-                width: 100% !important;
-            }
-
-            .pb_dropdown_trigger {
-                width: 100%;
-            }
-
-            [data-dropdown-custom-trigger] {
-                display: block;
-                width: 100%;
-            }
-
-            [data-dropdown-custom-trigger] .pb_button_kit {
-                box-sizing: border-box;
-                width: 100% !important;
-            }
-        }
-
-        @media screen and (min-width: $screen-md-min) and (max-width: 1071px) {
-            flex-direction: row;
-            align-items: center;
-            justify-content: flex-start;
-            gap: $space_md;
-
-            .icons-index-search {
-                flex: 1 1 auto;
-                margin-left: 0;
-                margin-right: 0;
-                max-width: none;
-                min-width: 0;
-                width: auto;
-            }
-
-            [data-dropdown-custom-trigger],
-            #icon-category-dropdown {
-                flex: 0 0 auto;
-                width: auto !important;
-                max-width: none;
-                min-width: auto;
-            }
-
-            [data-dropdown-custom-trigger] .pb_button_kit {
-                flex-shrink: 0;
-                max-width: none;
-                white-space: nowrap;
-                width: max-content;
-            }
-        }
-
-        [data-dropdown-custom-trigger],
-        #icon-category-dropdown {
-            display: block;
-
-            @media screen and (min-width: 1072px) {
-                display: none;
-            }
-        }
-    }
-
     .content-wrapper {
         padding: $space_md;
         background-color: $white;
@@ -164,6 +53,16 @@
         display: block;
 
         @media screen and (max-width: 1072px) {
+          display: none;
+        }
+    }
+    
+    [data-dropdown-custom-trigger], 
+    #icon-category-dropdown {
+        display: block;
+        width: 100%;
+
+        @media screen and (min-width: 1072px) {
           display: none;
         }
     }

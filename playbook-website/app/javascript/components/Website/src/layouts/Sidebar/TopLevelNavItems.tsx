@@ -60,7 +60,7 @@ export const TopLevelNavItem = ({
     if (hasChildren) {
       // Top level items with children should be active ONLY on their exact main page
       if (link === "/kits") {
-        // Active on /beta/kits listing, not on /beta placeholder or kit detail pages
+        // Active on /beta/kits page but NOT on /beta/kits/something or /beta/kit_category
         return currentURL === "/beta/kits" || currentURL.startsWith("/beta/kits?");
       }
       if (link === "/changelog") {
@@ -74,12 +74,6 @@ export const TopLevelNavItem = ({
       if (link === "/guides/design_guidelines") {
         // Active on the overview page but NOT on individual guide pages
         return currentURL === "/beta/guides/design_guidelines" || currentURL === "/beta/guides/design_guidelines?";
-      }
-      if (link === "/global_props") {
-        return currentURL === "/beta/global_props" || currentURL === "/beta/global_props?";
-      }
-      if (link === "/tokens") {
-        return currentURL === "/beta/tokens" || currentURL === "/beta/tokens?";
       }
       
       // For other items with children, only active on exact match
@@ -105,12 +99,6 @@ export const TopLevelNavItem = ({
     }
     if (link === "/guides/design_guidelines") {
       return currentURL.startsWith("/beta/guides/design_guidelines");
-    }
-    if (link === "/global_props") {
-      return currentURL.startsWith("/beta/global_props");
-    }
-    if (link === "/tokens") {
-      return currentURL.startsWith("/beta/tokens");
     }
     
     return currentURL.startsWith(betaLink);

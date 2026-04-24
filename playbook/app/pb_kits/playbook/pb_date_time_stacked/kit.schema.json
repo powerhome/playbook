@@ -20,12 +20,6 @@
         "react"
       ]
     },
-    "dark": {
-      "type": "boolean",
-      "platforms": [
-        "react"
-      ]
-    },
     "timeZone": {
       "type": "string",
       "platforms": [

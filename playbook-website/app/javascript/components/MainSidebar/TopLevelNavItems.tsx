@@ -31,7 +31,7 @@ export const TopLevelNavItem = ({
   //logic to make it so no navigation if already on that page(prevent unneeded rerenders)
   const TopLevelLink = (link) => {
     if (link === "/kits") {
-      const kitsLink = beta ? `/beta/kits${kitsType(type) ? `?type=${kitsType(type)}` : ""}` : `/kits${kitsType(type) ? `?type=${kitsType(type)}` : ""}`;
+      const kitsLink = beta ? "/beta/kits" : `/kits${kitsType(type) ? `?type=${kitsType(type)}` : ""}`;
       return currentURL === kitsLink ? "" : kitsLink;
     } else {
       const finalLink = beta && !link.startsWith("/beta") ? `/beta${link}` : link;

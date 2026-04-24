@@ -4,27 +4,16 @@ import { useState, useMemo } from "react";
 import ReactMarkdown from "react-markdown";
 
 import { PageContainer } from "../../components/PageContainer";
-import { usePlatform } from "../../contexts/PlatformContext";
 import { linkFormat } from "../../../../../utilities/website_sidebar_helper";
 import { DocsTab } from "./Tabs/DocsTab";
 import { PropsTab } from "./Tabs/PropsTab";
-// import { BuildingBlocksTab } from "./Tabs/BuildingBlocksTab";
-// import { ReferencesTab } from "./Tabs/ReferencesTab";
-import { PlaygroundTab } from "./Tabs/PlaygroundTab";
+import { BuildingBlocksTab } from "./Tabs/BuildingBlocksTab";
+import { ReferencesTab } from "./Tabs/ReferencesTab";
 
 const KitShow = () => {
   const { name } = useParams();
-  const { platform } = usePlatform();
   const loaderData = useLoaderData() as any;
-  const {
-    examples,
-    kit_description,
-    kit_sections,
-    available_props,
-    kit_schema,
-    global_props_schema,
-    playground_config,
-  } = loaderData;
+  const { examples, kit_description, kit_sections, available_props } = loaderData;
 
   // Prepare example props for advanced_table examples
   const exampleProps = useMemo(() => {
@@ -42,9 +31,6 @@ const KitShow = () => {
   }, [loaderData]);
 
   const [activeTab, setActiveTab] = useState<string>("docs");
-  const showPlayground = platform !== "rails";
-  const displayTab =
-    activeTab === "playground" && !showPlayground ? "docs" : activeTab;
 
   return (
     <>
@@ -74,24 +60,15 @@ const KitShow = () => {
         <Nav orientation="horizontal" paddingX="xl">
           <NavItem
             text="Docs"
-            active={displayTab === "docs"}
+            active={activeTab === "docs"}
             onClick={() => setActiveTab("docs")}
           />
           <NavItem
             text="Props"
-            active={displayTab === "props"}
+            active={activeTab === "props"}
             onClick={() => setActiveTab("props")}
           />
-          {showPlayground && (
-            <NavItem
-              text="Playground"
-              active={displayTab === "playground"}
-              onClick={() => setActiveTab("playground")}
-            />
-          )}
-
-          {/* Building Blocks and References tabs, commented out until building blocks and references are implemented */}
-          {/* <NavItem
+          <NavItem
             text="Building Blocks"
             active={activeTab === "building-blocks"}
             onClick={() => setActiveTab("building-blocks")}
@@ -100,23 +77,11 @@ const KitShow = () => {
             text="References"
             active={activeTab === "references"}
             onClick={() => setActiveTab("references")}
-          /> */}
+          />
         </Nav>
         <SectionSeparator marginBottom="lg" />
-
-        {/* Playground Tab Content (React-only for now; hidden on Rails) */}
-        {showPlayground && displayTab === "playground" && (
-          <PlaygroundTab
-            kitSchema={kit_schema}
-            globalPropsSchema={global_props_schema}
-            kitName={loaderData.kit || name || ""}
-            defaultExample={examples?.[0]}
-            playgroundConfig={playground_config}
-          />
-        )}
-
         {/* Docs Tab Content */}
-        {displayTab === "docs" && (
+        {activeTab === "docs" && (
           <DocsTab
             examples={examples}
             exampleProps={exampleProps}
@@ -126,13 +91,13 @@ const KitShow = () => {
         )}
 
         {/* Props Tab Content */}
-        {displayTab === "props" && <PropsTab availableProps={available_props} />}
+        {activeTab === "props" && <PropsTab availableProps={available_props} />}
 
-        {/* Building Blocks Tab Content, commented out until building blocks are implemented */}
-        {/* {activeTab === "building-blocks" && <BuildingBlocksTab />} */}
+        {/* Building Blocks Tab Content */}
+        {activeTab === "building-blocks" && <BuildingBlocksTab />}
 
-        {/* References Tab Content, commented out until references are implemented */}
-        {/* {activeTab === "references" && <ReferencesTab />} */}
+        {/* References Tab Content */}
+        {activeTab === "references" && <ReferencesTab />}
       </PageContainer>
     </>
   );
