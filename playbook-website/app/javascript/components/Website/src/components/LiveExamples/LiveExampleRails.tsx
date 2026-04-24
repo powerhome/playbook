@@ -48,6 +48,16 @@ const LiveExampleRails: React.FC<LiveExampleRailsProps> = ({ html }) => {
 
     const container = containerRef.current;
 
+    // Prevent anchor links with href="#" from causing scroll/navigation issues
+    const preventHashNavigation = (e: Event) => {
+      const target = e.target as HTMLElement;
+      const anchor = target.closest('a[href="#"]');
+      if (anchor) {
+        e.preventDefault();
+      }
+    };
+    container.addEventListener('click', preventHashNavigation);
+
     // Dispatch turbo:frame-load first to trigger Playbook component initialization
     window.dispatchEvent(new Event("turbo:frame-load"));
 
@@ -74,6 +84,7 @@ const LiveExampleRails: React.FC<LiveExampleRailsProps> = ({ html }) => {
     return () => {
       clearTimeout(scriptTimeout);
       clearTimeout(turboTimeout);
+      container.removeEventListener('click', preventHashNavigation);
     };
   }, [html]);
 
