@@ -162,6 +162,7 @@ const LiveExample: React.FC<LiveExampleProps> = ({ code, exampleProps = {} }) =>
         useMemo: React.useMemo,
         useCallback: React.useCallback,
         useLayoutEffect: React.useLayoutEffect,
+        forwardRef: React.forwardRef,
         Fragment: React.Fragment,
         // PropTypes for runtime type checking
         PropTypes,

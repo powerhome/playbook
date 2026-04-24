@@ -16,13 +16,13 @@ function transformScriptForLiveExecution(scriptContent: string): string {
   
   if (usesDOMContentLoaded) {
     // Replace DOMContentLoaded listener with setTimeout
-    // This handles: window.addEventListener("DOMContentLoaded", () => { ... })
-    // And: window.addEventListener('DOMContentLoaded', function() { ... })
+    // This handles both window.addEventListener and document.addEventListener
     let transformed = scriptContent;
     
     // Replace the addEventListener pattern with setTimeout
+    // Match both window.addEventListener and document.addEventListener
     transformed = transformed.replace(
-      /window\.addEventListener\s*\(\s*["']DOMContentLoaded["']\s*,\s*/g,
+      /(window|document)\.addEventListener\s*\(\s*["']DOMContentLoaded["']\s*,\s*/g,
       "setTimeout("
     );
     
