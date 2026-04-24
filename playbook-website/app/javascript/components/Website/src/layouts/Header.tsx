@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom"
 import { Flex, Image, Badge, SectionSeparator, FlexItem } from "playbook-ui";
 // @ts-ignore
@@ -25,13 +26,19 @@ const Header = ({
 }: HeaderProps) => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { darkMode } = useDarkMode();
+  const { darkMode, setDarkMode } = useDarkMode();
 
   const isKitShowPage = /^\/beta\/kits\/[^/]+\/(react|rails|swift)$/.test(location.pathname) ||
     /^\/beta\/kits\/advanced_table\/[^/]+\/(react|rails|swift)$/.test(location.pathname);
 
   const isKitsPage = location.pathname === "/beta/kits";
   const isKitsCategoryPage = /^\/beta\/kit_category\/[^/]+$/.test(location.pathname);
+
+  useEffect(() => {
+    if (!isKitShowPage && darkMode) {
+      setDarkMode(false);
+    }
+  }, [isKitShowPage, darkMode, setDarkMode]);
   return (
     <>
       <Flex 
