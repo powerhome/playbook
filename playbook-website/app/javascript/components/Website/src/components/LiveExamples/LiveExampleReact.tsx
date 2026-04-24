@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo, useState } from "react"
+import PropTypes from "prop-types"
 import { LoadingInline, Card, colors, Flex } from "playbook-ui"
 import { LiveProvider, LivePreview, LiveError } from "react-live"
 // All third party loaders should live in separate files and get imported here
@@ -162,6 +163,8 @@ const LiveExample: React.FC<LiveExampleProps> = ({ code, exampleProps = {} }) =>
         useCallback: React.useCallback,
         useLayoutEffect: React.useLayoutEffect,
         Fragment: React.Fragment,
+        // PropTypes for runtime type checking
+        PropTypes,
         // All Playbook components (except Date which is below this as FormattedDate)
         ...PBrest,
         FormattedDate,
