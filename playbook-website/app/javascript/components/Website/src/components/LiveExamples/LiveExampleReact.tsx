@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef, useState } from "react"
+import React, { useCallback, useEffect, useMemo, useState } from "react"
 import PropTypes from "prop-types"
 import { LoadingInline, Card, colors, Flex } from "playbook-ui"
 import { LiveProvider, LivePreview, LiveError } from "react-live"
@@ -183,25 +183,12 @@ const LiveExample: React.FC<LiveExampleProps> = ({ code, exampleProps = {} }) =>
     [thirdParty, exampleProps, PBrest, FormattedDate, dateAlias],
   )
 
-  // Ref for the container to prevent href="#" navigation
-  const containerRef = useRef<HTMLDivElement>(null)
-
-  // Prevent anchor links with href="#" from causing scroll/navigation issues
-  useEffect(() => {
-    const container = containerRef.current
-    if (!container) return
-
-    const preventHashNavigation = (e: MouseEvent) => {
-      const target = e.target as HTMLElement
-      const anchor = target.closest('a[href="#"]')
-      if (anchor) {
-        e.preventDefault()
-      }
-    }
-    container.addEventListener('click', preventHashNavigation)
-
-    return () => {
-      container.removeEventListener('click', preventHashNavigation)
+  // Handle clicks to prevent href="#" navigation (only preventDefault, not stopPropagation)
+  const handleContainerClick = useCallback((e: React.MouseEvent) => {
+    const target = e.target as HTMLElement
+    const anchor = target.closest('a[href="#"]')
+    if (anchor) {
+      e.preventDefault()
     }
   }, [])
 
@@ -214,7 +201,7 @@ const LiveExample: React.FC<LiveExampleProps> = ({ code, exampleProps = {} }) =>
   }
 
   return (
-    <div ref={containerRef}>
+    <div onClickCapture={handleContainerClick}>
       <LiveProvider key={libsKey} code={prepared} scope={scope} noInline>
         <Card borderNone padding="md">
           <LivePreview />
