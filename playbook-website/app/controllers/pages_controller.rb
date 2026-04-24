@@ -66,6 +66,9 @@ class PagesController < ApplicationController
 
     assign_advanced_table_doc_mocks
 
+    # Set @users for pagination examples
+    @users = Array.new(9) { Faker::Name.name }.paginate(page: params[:page], per_page: 2)
+
     @css = view_context.vite_asset_path("site_styles/main.scss")
 
     # Read kit description from _description.md file
