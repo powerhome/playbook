@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Body, Flex, Card, Button, Caption, Title } from "playbook-ui";
+import { Body, Flex, Card, Button, Caption, Title, EmptyState } from "playbook-ui";
 import ReactMarkdown from "react-markdown";
 import LiveExample from "../../../components/LiveExamples/LiveExampleReact";
 import LiveExampleRails from "../../../components/LiveExamples/LiveExampleRails";
@@ -109,7 +109,8 @@ export const DocsTab = ({
       </Card>
     </div>
   );
-
+console.log(codeLanguage)
+console.log(platform)
   // Organize examples by sections or show all if no sections
   const renderExamples = () => {
     if (sections && sections.length > 0) {
@@ -144,6 +145,21 @@ export const DocsTab = ({
     }
   };
 
+  const emptyMessage = () => {
+    if (examples && examples.length === 0) {
+      return (
+        <Flex justify="center" width="100%">
+          <EmptyState
+            header="No Docs Found"
+            description={`This component is not available in ${platform.toUpperCase()}, please refer to ${platform === "rails" ? "REACT" : "RAILS"} documentation for more information.`}
+            image="default"
+            size="lg"
+          />
+        </Flex>
+      )
+    }
+    return null;
+  }
   return (
     <Flex
       paddingRight={{ xs: "xl", sm: "xl", md: "xl", lg: "xl", xl: "md" }}
@@ -153,9 +169,7 @@ export const DocsTab = ({
         {examples && examples.length > 0 ? (
           <>{renderExamples()}</>
         ) : (
-          <Card padding="md">
-            <Body text={`No examples found for ${name} component.`} />
-          </Card>
+          emptyMessage()
         )}
       </Flex>
       <RightSideNav examples={examples} sections={sections} />
