@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useState } from "react"
 import { LoadingInline, Card, colors, Flex } from "playbook-ui"
 import { LiveProvider, LivePreview, LiveError } from "react-live"
 // All third party loaders should live in separate files and get imported here
-import { highchartsLoader, maplibreLoader, tiptapLoader, ThirdPartyLoader, ThirdPartyScope } from "./ThirdPartyLoaders"
+import { highchartsLoader, mapboxDrawLoader, maplibreLoader, tiptapLoader, ThirdPartyLoader, ThirdPartyScope } from "./ThirdPartyLoaders"
 // Pull in all Playbook React exports so we don't have to specify individual imports
 import * as PB from "playbook-ui" 
 
@@ -72,6 +72,7 @@ if (typeof render === 'function') { render(<React.Fragment />) }
 // Lib loaders array
 const LIB_LOADERS: ThirdPartyLoader[] = [
   highchartsLoader,
+  mapboxDrawLoader,
   maplibreLoader,
   tiptapLoader,
 ]

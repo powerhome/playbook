@@ -1,4 +1,5 @@
 export { highchartsLoader } from "./highchartsLoader"
+export { mapboxDrawLoader } from "./mapboxDrawLoader"
 export { maplibreLoader } from "./maplibreLoader" 
 export { tiptapLoader } from "./tiptapLoader"
 export * from "./utilities"
