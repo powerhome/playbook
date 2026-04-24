@@ -6,11 +6,11 @@ import Header from "./src/layouts/Header";
 import MobileNav, { MobileHamburger } from "./src/components/MobileNav";
 import { useLoaderData, useLocation, useNavigate } from "react-router-dom";
 import { PlatformContext } from "./src/contexts/PlatformContext";
+import { DarkModeProvider, useDarkMode } from "./src/contexts/DarkModeContext";
 
-function Website() {
+function WebsiteContent() {
   const { 
     kits, 
-    dark, 
     type, 
     kit, 
     kits_with_status, 
@@ -26,6 +26,7 @@ function Website() {
   }: any = useLoaderData();
   const location = useLocation();
   const navigate = useNavigate();
+  const { darkMode } = useDarkMode();
 
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const normalizedPath = location.pathname.replace(/\/+$/, "") || "/";
@@ -61,42 +62,53 @@ function Website() {
 
   return (
     <PlatformContext.Provider value={{ platform, setPlatform: handlePlatformChange }}>
-      <MobileNav 
-        isOpen={mobileNavOpen}
-        onToggle={() => setMobileNavOpen(!mobileNavOpen)}
-      />
-      <Header 
-        dark={dark}
-        PBversion={PBversion || "Latest"}
-        search_list={search_list || []}
-        global_props_and_tokens={global_props_and_tokens || []}
-        platform={platform}
-        setPlatform={handlePlatformChange}
-      />
-      <Layout className="pb--page--content pb--website--new" dark={dark}>
-        <MobileHamburger 
+      <div className={darkMode ? "dark" : ""}>
+        <MobileNav 
           isOpen={mobileNavOpen}
           onToggle={() => setMobileNavOpen(!mobileNavOpen)}
         />
-        <Layout.Side className="pb--page--sideNav">
-          <Sidebar
-            building_blocks={building_blocks || []}
-            dark={dark}
-            type={platform || "react"}
-            category={category}
-            kit={kit}
-            kits_with_status={kits_with_status || kits}
-            getting_started={getting_started || { pages: [] }}
-            global_props_and_tokens={global_props_and_tokens || []}
-            design_guidelines={design_guidelines || { pages: [] }}
-            icons={icons || []}
-            whats_new={whats_new || { pages: [] }}
-            beta={true}
+        <Header 
+          PBversion={PBversion || "Latest"}
+          search_list={search_list || []}
+          global_props_and_tokens={global_props_and_tokens || []}
+          platform={platform}
+          setPlatform={handlePlatformChange}
+        />
+        <Layout className="pb--page--content pb--website--new" dark={darkMode}>
+          <MobileHamburger 
+            isOpen={mobileNavOpen}
+            onToggle={() => setMobileNavOpen(!mobileNavOpen)}
           />
-        </Layout.Side>
-        {kits.length > 0 && <LayoutRight dark={dark} />}
-      </Layout>
+          <Layout.Side className="pb--page--sideNav">
+            <Sidebar
+              building_blocks={building_blocks || []}
+              dark={darkMode}
+              type={platform || "react"}
+              category={category}
+              kit={kit}
+              kits_with_status={kits_with_status || kits}
+              getting_started={getting_started || { pages: [] }}
+              global_props_and_tokens={global_props_and_tokens || []}
+              design_guidelines={design_guidelines || { pages: [] }}
+              icons={icons || []}
+              whats_new={whats_new || { pages: [] }}
+              beta={true}
+            />
+          </Layout.Side>
+          {kits.length > 0 && <LayoutRight dark={darkMode} />}
+        </Layout>
+      </div>
     </PlatformContext.Provider>
+  );
+}
+
+function Website() {
+  const { dark }: any = useLoaderData();
+
+  return (
+    <DarkModeProvider initialDarkMode={!!dark}>
+      <WebsiteContent />
+    </DarkModeProvider>
   );
 }
 
