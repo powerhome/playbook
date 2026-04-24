@@ -6,7 +6,7 @@ import LiveExampleRails from "../../../components/LiveExamples/LiveExampleRails"
 import { SyntaxHighlightedCode } from "../../../components/SyntaxHighlightedCode";
 import { usePlatform } from "../../../contexts/PlatformContext";
 import RightSideNav from "../RightSideNav";
-
+import { useDarkMode } from "../../../contexts/DarkModeContext";
 interface Section {
   title: string;
   examples: string[];
@@ -22,13 +22,12 @@ interface DocsTabProps {
 export const DocsTab = ({
   examples,
   exampleProps,
-  name,
   sections,
 }: DocsTabProps) => {
   const { platform } = usePlatform();
   const codeLanguage: "erb" | "swift" | "tsx" =
     platform === "rails" ? "erb" : platform === "swift" ? "swift" : "tsx";
-
+  const { darkMode } = useDarkMode();
   const [visibleCode, setVisibleCode] = useState<{ [key: string]: boolean }>(
     {},
   );
@@ -60,15 +59,15 @@ export const DocsTab = ({
       key={example.example_key}
       style={{ width: "100%" }}
     >
-      <Card marginBottom="lg" padding="none" width="100%">
-        <Caption text={example.title} color="lighter" margin="md" />
+      <Card marginBottom="lg" padding="none" width="100%" dark={darkMode}>
+        <Caption text={example.title} color="lighter" margin="md" dark={darkMode} />
         {platform === "rails" ? (
           <LiveExampleRails html={example.rendered ?? ""} />
         ) : (
           <LiveExample code={example.source} exampleProps={exampleProps} />
         )}
         {example.description && example.description !== "" && (
-          <Body margin="md">
+          <Body margin="md" dark={darkMode}>
             <ReactMarkdown>{example.description}</ReactMarkdown>
           </Body>
         )}
@@ -82,6 +81,7 @@ export const DocsTab = ({
               icon="copy"
               onClick={() => copyCode(example.source, example.example_key)}
               marginRight="sm"
+              dark={darkMode}
             />
             <Button
               text={
@@ -91,11 +91,12 @@ export const DocsTab = ({
               size="sm"
               icon="code"
               onClick={() => toggleCode(example.example_key)}
+              dark={darkMode}
             />
           </Flex>
 
           {visibleCode[example.example_key] && (
-            <Card borderNone width="100%">
+            <Card borderNone width="100%" dark={darkMode}>
               <SyntaxHighlightedCode
                 code={example.source ?? ""}
                 language={codeLanguage}

@@ -4,7 +4,7 @@ import GlobalProps from "../../../../../AvailableProps/globalProps";
 import { useState } from "react";
 import { Nav, NavItem, SectionSeparator } from "playbook-ui";
 import globalPropsValues from "../../../../../AvailableProps/globalPropsValues";
-
+import { useDarkMode } from "../../../contexts/DarkModeContext";
 interface PropsTabProps {
   availableProps?: string;
   platform?: "react" | "rails";
@@ -12,7 +12,7 @@ interface PropsTabProps {
 
 export const PropsTab = ({ availableProps, platform = "react" }: PropsTabProps) => {
   const [showKitTab, setShowKitTab] = useState(true);
-
+  const { darkMode } = useDarkMode();
   if (!availableProps) {
     return (
       <Card padding="md">
@@ -46,26 +46,28 @@ export const PropsTab = ({ availableProps, platform = "react" }: PropsTabProps) 
 
   return (
     <Flex paddingX="xl" width="100%">
-      <Card padding="none" width="100%">
+      <Card padding="none" width="100%" dark={darkMode}>
         <Card.Body padding="sm">
-          <Nav orientation="horizontal" variant="subtle">
+          <Nav orientation="horizontal" variant="subtle" dark={darkMode}>
             <NavItem
               text="Kit Props"
               active={showKitTab}
               onClick={() => setShowKitTab(true)}
               cursor="pointer"
+              dark={darkMode}
             />
             <NavItem
               text="Global Props"
               active={!showKitTab}
               onClick={() => setShowKitTab(false)}
               cursor="pointer"
+              dark={darkMode}
             />
           </Nav>
         </Card.Body>
-        <SectionSeparator />
-        {showKitTab && <KitProps kitPropsValues={kitProps} darkMode={false} />}
-        {!showKitTab && <GlobalProps darkMode={false} />}
+        <SectionSeparator dark={darkMode} />
+        {showKitTab && <KitProps kitPropsValues={kitProps} darkMode={darkMode} />}
+        {!showKitTab && <GlobalProps darkMode={darkMode} />}
       </Card>
     </Flex>
   );

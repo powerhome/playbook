@@ -2,6 +2,7 @@ import { useLoaderData, useParams } from "react-router-dom";
 import { Body, Title, Nav, NavItem, Flex, SectionSeparator } from "playbook-ui";
 import { useState, useMemo } from "react";
 import ReactMarkdown from "react-markdown";
+import { useDarkMode } from "../../contexts/DarkModeContext";
 
 import { PageContainer } from "../../components/PageContainer";
 import { usePlatform } from "../../contexts/PlatformContext";
@@ -25,7 +26,7 @@ const KitShow = () => {
     global_props_schema,
     playground_config,
   } = loaderData;
-
+  const { darkMode } = useDarkMode();
   // Prepare example props for advanced_table examples
   const exampleProps = useMemo(() => {
     const isAdvancedTable = loaderData?.kit === "advanced_table";
@@ -56,11 +57,12 @@ const KitShow = () => {
           size={1}
           marginBottom={kit_description ? undefined : "md"}
           paddingX="xl"
+          dark={darkMode}
         />
         {kit_description && kit_description !== "" && (
           <Flex paddingX="xl">
             <Flex flex={1} minWidth={0}>
-              <Body marginTop="sm" marginBottom="md">
+              <Body marginTop="sm" marginBottom="md" dark={darkMode}>
                 <ReactMarkdown>{kit_description}</ReactMarkdown>
               </Body>
             </Flex>
@@ -73,22 +75,25 @@ const KitShow = () => {
         )}
 
         {/* Navigation Tabs */}
-        <Nav orientation="horizontal" paddingX="xl">
+        <Nav orientation="horizontal" paddingX="xl" dark={darkMode}>
           <NavItem
             text="Docs"
             active={displayTab === "docs"}
             onClick={() => setActiveTab("docs")}
+            dark={darkMode}
           />
           <NavItem
             text="Props"
             active={displayTab === "props"}
             onClick={() => setActiveTab("props")}
+            dark={darkMode}
           />
           {showPlayground && (
             <NavItem
               text="Playground"
               active={displayTab === "playground"}
               onClick={() => setActiveTab("playground")}
+              dark={darkMode}
             />
           )}
 
@@ -104,7 +109,7 @@ const KitShow = () => {
             onClick={() => setActiveTab("references")}
           /> */}
         </Nav>
-        <SectionSeparator marginBottom="lg" />
+        <SectionSeparator marginBottom="lg" dark={darkMode} />
 
         {/* Playground Tab Content (React-only for now; hidden on Rails) */}
         {showPlayground && displayTab === "playground" && (

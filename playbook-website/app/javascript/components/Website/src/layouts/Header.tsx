@@ -98,7 +98,7 @@ const Header = ({
           {/* End Search Bar + dark mode toggle */}
         </Flex>
       </Flex>
-      <SectionSeparator width="100%" />
+      <SectionSeparator width="100%" dark={darkMode} />
     </>
   );
 };
