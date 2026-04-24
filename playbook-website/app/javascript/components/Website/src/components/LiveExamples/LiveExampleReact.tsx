@@ -40,6 +40,12 @@ function parseDefaultImports(raw: string): DefaultImport[] {
   return matches.map((m) => ({ local: m[1], source: m[2] }))
 }
 
+// Parse Date import aliases (e.g., "Date as DateKit" -> "DateKit")
+function parseDateAlias(raw: string): string | null {
+  const match = raw.match(/import\s+\{[^}]*\bDate\s+as\s+([A-Za-z0-9_$]+)[^}]*\}\s+from\s+['"]playbook-ui['"]/)
+  return match?.[1] || null
+}
+
 // prepare the snippet for react-live
 function prepareCode(raw: string) {
   let code = raw
@@ -94,6 +100,9 @@ const LiveExample: React.FC<LiveExampleProps> = ({ code, exampleProps = {} }) =>
   // prevent Date kit from shadowing the global Date constructor. Do FormattedDate like we do in the docs
   const { Date: FormattedDate, ...PBrest } = PB as any
 
+  // Check if Date is imported with an alias (e.g., "Date as DateKit")
+  const dateAlias = useMemo(() => parseDateAlias(code), [code])
+
   // Determine if any third-party lib is needed
   const needsThirdParty = useMemo(() => {
     const defaults = parseDefaultImports(code)
@@ -140,25 +149,32 @@ const LiveExample: React.FC<LiveExampleProps> = ({ code, exampleProps = {} }) =>
   }, [libsReady, libsKey])
 
   const scope = useMemo(
-    () => ({
-      // React + hooks (so stripped imports still work)
-      React,
-      useState: React.useState,
-      useEffect: React.useEffect,
-      useRef: React.useRef,
-      useMemo: React.useMemo,
-      useCallback: React.useCallback,
-      useLayoutEffect: React.useLayoutEffect,
-      Fragment: React.Fragment,
-      // All Playbook components (except Date which is below this as FormattedDate)
-      ...PBrest,
-      FormattedDate,
-      // Third-party libs injected here (Highcharts*, maplibregl, etc.)
-      ...thirdParty,
-      // Spread exampleProps so MOCK_DATA etc. are top-level variables
-      ...exampleProps,
-    }),
-    [thirdParty, exampleProps, PBrest, FormattedDate],
+    () => {
+      const baseScope: Record<string, any> = {
+        // React + hooks (so stripped imports still work)
+        React,
+        useState: React.useState,
+        useEffect: React.useEffect,
+        useRef: React.useRef,
+        useMemo: React.useMemo,
+        useCallback: React.useCallback,
+        useLayoutEffect: React.useLayoutEffect,
+        Fragment: React.Fragment,
+        // All Playbook components (except Date which is below this as FormattedDate)
+        ...PBrest,
+        FormattedDate,
+        // Third-party libs injected here (Highcharts*, maplibregl, etc.)
+        ...thirdParty,
+        // Spread exampleProps so MOCK_DATA etc. are top-level variables
+        ...exampleProps,
+      }
+      // Add Date alias if present (e.g., "Date as DateKit" -> DateKit = FormattedDate)
+      if (dateAlias) {
+        baseScope[dateAlias] = FormattedDate
+      }
+      return baseScope
+    },
+    [thirdParty, exampleProps, PBrest, FormattedDate, dateAlias],
   )
 
   if (!libsReady || isRendering) {
