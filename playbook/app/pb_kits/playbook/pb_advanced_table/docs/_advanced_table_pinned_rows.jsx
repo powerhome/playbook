@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import AdvancedTable from '../_advanced_table'
-import MOCK_DATA from "./advanced_table_mock_data_with_id.json"
+import MOCK_DATA_WITH_ID from "./advanced_table_mock_data_with_id.json"
 
 const AdvancedTableRowPinning = (props) => {
   const columnDefinitions = [
@@ -43,7 +43,7 @@ const AdvancedTableRowPinning = (props) => {
           columnDefinitions={columnDefinitions}
           maxHeight="xs"
           pinnedRows={{value: pinnedRows, onChange: setPinnedRows}}
-          tableData={MOCK_DATA}
+          tableData={MOCK_DATA_WITH_ID}
           tableProps={{sticky: true}}
           {...props}
       >

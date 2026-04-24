@@ -38,6 +38,8 @@ const KitShow = () => {
       MOCK_DATA_NO_SUBROWS: loaderData.table_data_no_subrows || [],
       PAGINATION_MOCK_DATA: loaderData.table_data_pagination || [],
       INFINITE_SCROLL_MOCK_DATA: loaderData.table_data_infinite_scroll || [],
+      MOCK_DATA_INLINE_LOADING: loaderData.table_data_inline_loading || [],
+      MOCK_DATA_INLINE_LOADING_EMPTY_CHILDREN: loaderData.table_data_inline_loading_empty_children || [],
     };
   }, [loaderData]);
 
