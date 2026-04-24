@@ -30,6 +30,7 @@ Without a loader, you'll see a `ReferenceError: <LibraryName> is not defined` in
 | `highchartsLoader` | `highcharts`, `highcharts/*`, `highcharts-react-official` | Highcharts, HighchartsReact, and modules like highcharts-more, solid-gauge |
 | `mapboxDrawLoader` | `@mapbox/mapbox-gl-draw` | MapboxDraw + CSS |
 | `maplibreLoader` | `maplibre-gl` | maplibregl + CSS |
+| `playbookChartsLoader` | `_pb_bar_graph`, `_pb_circle_chart`, `_pb_gauge_chart`, `_pb_line_graph` | PbBarGraph, PbCircleChart, PbGaugeChart, PbLineGraph |
 | `tiptapLoader` | `@tiptap/react`, `@tiptap/starter-kit`, `@tiptap/extension-*` | useEditor, EditorContent, StarterKit, Link, etc. |
 
 ### How to Add a New Loader

@@ -1,5 +1,6 @@
 export { highchartsLoader } from "./highchartsLoader"
 export { mapboxDrawLoader } from "./mapboxDrawLoader"
-export { maplibreLoader } from "./maplibreLoader" 
+export { maplibreLoader } from "./maplibreLoader"
+export { playbookChartsLoader } from "./playbookChartsLoader"
 export { tiptapLoader } from "./tiptapLoader"
 export * from "./utilities"
