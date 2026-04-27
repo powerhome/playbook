@@ -1,4 +1,9 @@
 @import "playbook-tokens/colors";
+@import "playbook-tokens/screen_sizes";
+@import "playbook-tokens/border_radius";
+@import "playbook-tokens/shadows";
+
+$beta_nav_breakpoint: breakpoint("lg");
 
 .pb--website--new {
   pre.highlight {
@@ -25,6 +30,26 @@
 
   .pb--page--content--main {
     height: calc(100dvh - var(--beta-header-height, 89px));
+  }
+
+  .pb--page--sideNav {
+    @include break_at($beta_nav_breakpoint) {
+      position: absolute;
+      transform-origin: 0% 0%;
+      transform: translate(-110%, 0);
+      transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
+      border-radius: $border_rad_heavier;
+      box-shadow: $shadow_deepest;
+      top: 89px;
+      left: 0;
+      min-width: 200px;
+      width: auto !important;
+      z-index: 1000;
+
+      &.mobile-open {
+        transform: translate(10%, 0);
+      }
+    }
   }
 }
 
