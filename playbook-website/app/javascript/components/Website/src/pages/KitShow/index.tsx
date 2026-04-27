@@ -26,7 +26,7 @@ const KitShow = () => {
     global_props_schema,
     playground_config,
   } = loaderData;
-  const { darkMode } = useDarkMode();
+  const { darkMode, setDarkMode } = useDarkMode();
   // Prepare example props for advanced_table examples
   const exampleProps = useMemo(() => {
     const isAdvancedTable = loaderData?.kit === "advanced_table";
@@ -48,6 +48,14 @@ const KitShow = () => {
   const showPlayground = platform !== "rails";
   const displayTab =
     activeTab === "playground" && !showPlayground ? "docs" : activeTab;
+
+  const handleTabChange = (tab: string) => {
+    if (tab === "playground") {
+      setDarkMode(false);
+    }
+
+    setActiveTab(tab);
+  };
 
   return (
     <>
@@ -79,20 +87,20 @@ const KitShow = () => {
           <NavItem
             text="Docs"
             active={displayTab === "docs"}
-            onClick={() => setActiveTab("docs")}
+            onClick={() => handleTabChange("docs")}
             dark={darkMode}
           />
           <NavItem
             text="Props"
             active={displayTab === "props"}
-            onClick={() => setActiveTab("props")}
+            onClick={() => handleTabChange("props")}
             dark={darkMode}
           />
           {showPlayground && (
             <NavItem
               text="Playground"
               active={displayTab === "playground"}
-              onClick={() => setActiveTab("playground")}
+              onClick={() => handleTabChange("playground")}
               dark={darkMode}
             />
           )}
