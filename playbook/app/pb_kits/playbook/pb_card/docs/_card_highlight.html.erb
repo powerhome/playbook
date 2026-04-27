@@ -1,12 +1,460 @@
-<%= pb_rails("card", props: {highlight: {position: "side", color:"product_6_highlight"}, margin_bottom: "sm"}) do %>
-  Side Position & Product 6 Highlight Color
+<%= pb_rails("title", props: { text: "Global border — kits N–Z", size: 4, margin_bottom: "md", tag: "h4" }) %>
+<%= pb_rails("caption", props: { text: "Each kit uses border: \"default\" (or a Body fallback). Kits A–M / N–Z.", margin_bottom: "lg" }) %>
+
+<%= pb_rails("caption", props: { text: "nav", margin_bottom: "xxs" }) %>
+<%= pb_rails("nav", props: { border: "default", title: "Menu", link: "#"}) do %>
+  <%= pb_rails("nav/item", props: { text: "Photos", link: "#" }) %>
+  <%= pb_rails("nav/item", props: { text: "Music", link: "#" }) %>
+  <%= pb_rails("nav/item", props: { text: "Video", link: "#", active: true }) %>
+  <%= pb_rails("nav/item", props: { text: "Files", link: "#" }) %>
 <% end %>
-<%= pb_rails("card", props: {highlight: {position: "top", color:"warning"}, margin_bottom: "sm"}) do %>
-  Top Position & Warning Color
+
+<%= pb_rails("caption", props: { text: "online_status", margin_bottom: "xxs" }) %>
+<%= pb_rails("online_status", props: { border: "default",  status: "offline", margin_y: "xs" }) %>
+
+<%= pb_rails("caption", props: { text: "overlay", margin_bottom: "xxs" }) %>
+<%= pb_rails("overlay") do %>
+    <%= pb_rails("table", props: { border: "default",  size: "sm" }) do %>
+        <thead>
+            <tr>
+                <th>Column 1</th>
+                <th>Column 2</th>
+                <th>Column 3</th>
+                <th>Column 4</th>
+                <th>Column 5</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% 7.times do %>
+                <tr>
+                    <td>Value 1</td>
+                    <td>Value 2</td>
+                    <td>Value 3</td>
+                    <td>Value 4</td>
+                    <td>Value 5</td>
+                </tr>
+            <% end %>   
+        </tbody>
+    <% end %>
 <% end %>
-<%= pb_rails("card", props: {highlight: {position: "right_side", color:"product_5_highlight"}, margin_bottom: "sm"}) do %>
-  Right Side Position & Product 5 Highlight Color
+
+<%= pb_rails("caption", props: { text: "pagination", margin_bottom: "xxs" }) %>
+<%= pb_rails("pagination", props: { border: "default",  model: @users, view: self}) %>
+
+<%= pb_rails("caption", props: { text: "passphrase", margin_bottom: "xxs" }) %>
+<%= pb_rails("passphrase", props: { border: "default",  label: "Passphrase", classname: "passphrase_breached" }) %>
+
+<%= pb_rails("caption", props: { text: "person", margin_bottom: "xxs" }) %>
+<%= pb_rails("person", 
+    props: { border: "default",  
+      first_name: "Kyle", 
+      last_name: "Fadigan" 
+      }) %>
+
+<%= pb_rails("caption", props: { text: "person_contact", margin_bottom: "xxs" }) %>
+<%= pb_rails("person_contact", props: { border: "default", 
+  first_name: "Pauline",
+  last_name: "Smith",
+  contacts: [
+    {
+      contact_type: "email",
+      contact_value: "email@example.com"
+    },
+    {
+      contact_value: 5555555555
+    },
+    {
+      contact_type: "work",
+      contact_value: "3245627482"
+    }
+  ]
+}) %>
+
+<%= pb_rails("caption", props: { text: "phone_number_input", margin_bottom: "xxs" }) %>
+<%= pb_rails("phone_number_input", props: { border: "default", 
+    country_search: true, 
+    id: "country-search",
+}) %>
+
+<%= pb_rails("caption", props: { text: "pill", margin_bottom: "xxs" }) %>
+<%= pb_rails("pill", props: { border: "default",  text: "Default" }) %>
+
+<%= pb_rails("caption", props: { text: "popover", margin_bottom: "xxs" }) %>
+<%= pb_rails("flex", props: { border: "default", 
+    dark: true,
+    orientation: "row",
+    vertical: "center"
+    }) do %>
+    <%= pb_rails("body", props: { text: "Click info for more details" }) %>
+    &nbsp;
+    <%= pb_rails("circle_icon_button", props: {
+        # variant: "secondary",
+        icon: "info",
+        id: "actionable-popover-1"
+    }) %>
+    <%= pb_rails("popover", props: {
+        close_on_click: "any",
+        trigger_element_id: "actionable-popover-1",
+        tooltip_id: "actionable-tooltip-1",
+        offset: true,
+        position: "top"
+    }) do %>
+        <%= pb_rails("button", props: { id: "actionable-tooltip-button", text: "Learn more" }) %>
+    <% end %>
 <% end %>
-<%= pb_rails("card", props: {highlight: {position: "side", color:"category_2"}, margin_bottom: "sm"}) do %>
-  Side Position & Category 2 Color
+
+<%= pb_rails("caption", props: { text: "progress_pills", margin_bottom: "xxs" }) %>
+<%= pb_rails("progress_pills", props: { border: "default",  aria: { label: "2 out of 3 steps complete" }, steps: 3, active: 2 }) %>
+
+<%= pb_rails("caption", props: { text: "progress_simple", margin_bottom: "xxs" }) %>
+<%= pb_rails("progress_simple", props: { border: "default",  percent: 64.9, width: "100px" }) %>
+
+<%= pb_rails("caption", props: { text: "progress_step", margin_bottom: "xxs" }) %>
+<%= pb_rails("progress_step",props: { border: "default",  variant:"tracker", icon:true, color: "info"}) do %>
+  <%= pb_rails("progress_step/progress_step_item", props: {status: "complete"}) do %>
+      <%= pb_rails("caption", props:{text: "Ordered"})%>
+  <% end %>
+  <%= pb_rails("progress_step/progress_step_item", props: {status: "active"}) do %>
+      <%= pb_rails("caption", props:{text: "Shipped"})%>
+  <% end %>
+  <%= pb_rails("progress_step/progress_step_item", props: {status: "inactive"}) do %>
+      <%= pb_rails("caption", props:{text: "Delivered"})%>
+  <% end %>
 <% end %>
+
+<%= pb_rails("caption", props: { text: "radio", margin_bottom: "xxs" }) %>
+<%= pb_rails("flex") do %>
+  <%= pb_rails("radio", props: { border: "default", 
+    alignment: "vertical",
+    text: "Power",
+    input_options: {
+      tabindex: 0
+    },
+    margin_right: "sm",
+    name: "group 1",
+    value: "Power"
+  }) %>
+
+  <%= pb_rails("radio", props: {
+    alignment: "vertical",
+    text: "Nitro",
+    margin_right: "sm",
+    name: "group 1",
+    value: "Nitro"
+  }) %>
+
+  <%= pb_rails("radio", props: {
+    alignment: "vertical",
+    text: "Google",
+    name: "group 1",
+    value: "Google"
+  }) %>
+<% end %>
+
+<%= pb_rails("caption", props: { text: "section_separator", margin_bottom: "xxs" }) %>
+<%= pb_rails("section_separator", props: { border: "default",  line_style: "dashed" }) do %>
+    <%= pb_rails("card", props: {
+        border_radius: "rounded",
+        justify_content: "center",
+        padding: "none"
+    })  do %>
+        <%= pb_rails("caption", props: {
+            text: "TODAY",
+            size: "xs",
+            padding_left: "xs",
+            padding_right: "xs" 
+        }) %>
+    <% end %>
+<% end %>
+
+<%= pb_rails("caption", props: { text: "select", margin_bottom: "xxs" }) %>
+<%= pb_rails("select", props: { border: "default", 
+  id: "select-food-attributes",
+  attributes: {
+    data: { options: "data_attribute" },
+  },
+  label: "Favorite Food",
+  name: "food",
+  options: [
+    {
+      value: "1",
+      value_text: "Burgers",
+    },
+    {
+      value: "2",
+      selected: true,
+      value_text: "Pizza",
+    },
+    {
+      value: "3",
+      value_text: "Tacos",
+    },
+    {
+      value: "4",
+      value_text: "BBQ",
+    },
+  ]
+}) %>
+
+<%= pb_rails("caption", props: { text: "selectable_card", margin_bottom: "xxs" }) %>
+<%= pb_rails("selectable_card", props: { border: "default", 
+    input_id: "block",
+    name: "block",
+    value: "block",
+    checked: true
+  }) do %>
+    <%= pb_rails("title", props: { text: "Block", size: 4 }) %>
+    <%= pb_rails("body", props: { tag: "span"}) do %>
+      This uses block
+    <% end %>
+  <% end %>
+
+<%= pb_rails("caption", props: { text: "selectable_card_icon", margin_bottom: "xxs" }) %>
+<%= pb_rails("selectable_card_icon", props: { border: "default", 
+    icon: "hat-cowboy", 
+    title_text: "Cowboy", 
+    body_text: "Howdy partner.",
+    input_id: 4,
+    checked: true,
+    checkmark: true
+  }) %>
+
+<%= pb_rails("caption", props: { text: "selectable_icon", margin_bottom: "xxs" }) %>
+<%= pb_rails("selectable_icon", props: { border: "default", 
+    icon: "dollar-sign", 
+    input_id: 1, 
+    checked: true, 
+    text: "US Dollar" 
+  }) %>
+
+<%= pb_rails("caption", props: { text: "selectable_list", margin_bottom: "xxs" }) %>
+<%= pb_rails("selectable_list",
+        props: { border: "default", 
+          variant: "checkbox",
+          items: [
+            { text: "Mild",
+              input_options: {
+                value: "1",
+                name: "checkbox-name-1",
+              }
+            },
+            { text: "Medium",
+              checked: true,
+              input_options: {
+                value: "2",
+                name: "checkbox-name-2",
+              }
+            },
+            { text: "Hot",
+              input_options: {
+                value: "3",
+                name: "checkbox-name-3",
+              }
+            }
+          ]
+        }
+    )
+%>
+
+<%= pb_rails("caption", props: { text: "skeleton_loading", margin_bottom: "xxs" }) %>
+<%= pb_rails("flex", props: { border: "default",  justify: "evenly" }) do %>
+    <%= pb_rails("skeleton_loading", props: { border_radius: "rounded", height: "50px", width: "100px"}) %>
+    <%= pb_rails("skeleton_loading", props: { border_radius: "xl", height: "50px", width: "100px"}) %>
+    <%= pb_rails("skeleton_loading", props: { border_radius: "lg", height: "50px", width: "100px"}) %>
+    <%= pb_rails("skeleton_loading", props: { border_radius: "md", height: "50px", width: "100px"}) %>
+    <%= pb_rails("skeleton_loading", props: { height: "50px", width: "100px"}) %>
+    <%= pb_rails("skeleton_loading", props: { border_radius: "xs", height: "50px", width: "100px"}) %>
+    <%= pb_rails("skeleton_loading", props: { border_radius: "none", height: "50px", width: "100px"}) %>
+<% end %>
+
+<%= pb_rails("caption", props: { text: "source", margin_bottom: "xxs" }) %>
+<%= pb_rails("source", props: { border: "default", 
+  source: "BJ's Johnston-208",
+  type: "retail"
+}) %>
+
+<%= pb_rails("caption", props: { text: "star_rating", margin_bottom: "xxs" }) %>
+<%= pb_rails("star_rating", props: { border: "default",  rating: 3, background_type: "fill", padding_bottom: "xs" }) %>
+
+<%= pb_rails("caption", props: { text: "stat_change", margin_bottom: "xxs" }) %>
+<%= pb_rails("stat_change", props: { border: "default", 
+  change: "increase",
+  value: 28.4,
+}) %>
+
+<%= pb_rails("caption", props: { text: "stat_value", margin_bottom: "xxs" }) %>
+<%= pb_rails("stat_value", props: { border: "default",  value: 1048 }) %>
+
+<%= pb_rails("caption", props: { text: "table", margin_bottom: "xxs" }) %>
+<%= pb_rails("table", props: { border: "default",  size: "sm" }) do %>
+  <thead>
+    <tr>
+      <th>Column 1</th>
+      <th>Column 2</th>
+      <th>Column 3</th>
+      <th>Column 4</th>
+      <th>Column 5</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Value 1</td>
+      <td>Value 2</td>
+      <td><%= pb_rails("button", props: { text: "Action", variant: "link", padding_left: "none" }) %></td>
+      <td>Value 4</td>
+      <td>Value 5</td>
+    </tr>
+    <tr>
+      <td>Value 1</td>
+      <td>Value 2</td>
+      <td><%= pb_rails("button", props: { text: "Action", variant: "link", padding_left: "none" }) %></td>
+      <td>Value 4</td>
+      <td>Value 5</td>
+    </tr>
+    <tr>
+      <td>Value 1</td>
+      <td>Value 2</td>
+      <td><%= pb_rails("button", props: { text: "Action", variant: "link", padding_left: "none" }) %></td>
+      <td>Value 4</td>
+      <td>Value 5</td>
+    </tr>
+  </tbody>
+<% end %>
+
+<%= pb_rails("caption", props: { text: "text_input", margin_bottom: "xxs" }) %>
+<%= pb_rails("text_input", props: { border: "default", 
+  label: "Add On With Defaults",
+  add_on: { icon: "bat" }
+}) %>
+
+<%= pb_rails("caption", props: { text: "textarea", margin_bottom: "xxs" }) %>
+<%= pb_rails("textarea", props: { border: "default", 
+  character_count: 0,
+  id: "text-area-1",
+  label: "Count Only",
+  onkeyup: "handleChange1(event)",
+}) %>
+
+<%= pb_rails("caption", props: { text: "time", margin_bottom: "xxs" }) %>
+<%= pb_rails("time", props: { border: "default", 
+  time: DateTime.now,
+  align: "left"
+}) %>
+
+<%= pb_rails("caption", props: { text: "time_picker", margin_bottom: "xxs" }) %>
+<%= pb_rails("time_picker", props: { border: "default",  id: "time-picker-24-hour", label: "24-Hour Format", time_format: "24hour" }) %>
+
+<%= pb_rails("caption", props: { text: "time_range_inline", margin_bottom: "xxs" }) %>
+<%= pb_rails("time_range_inline", props: { border: "default", 
+    start_time: "2012-08-02T15:49:29Z",
+    end_time: "2012-08-02T17:49:29Z",
+    size: "xs"
+}) %>
+
+<%= pb_rails("caption", props: { text: "time_stacked", margin_bottom: "xxs" }) %>
+<%= pb_rails("time_stacked", props: { border: "default", 
+  time: DateTime.now,
+  align: "left",
+}) %>
+
+<%= pb_rails("caption", props: { text: "timeline", margin_bottom: "xxs" }) %>
+<%= pb_rails("timeline") do %>
+    <%= pb_rails("timeline/item", props: { border: "default", icon: "user", icon_color: "royal"}) do %>
+        <%= pb_rails("body", props: {
+            text: "Conversation started",
+            color: "light"
+        }) %>
+    <% end %>
+    <%= pb_rails("timeline/item", props: {icon: "check", icon_color: "teal"}) do %>
+        <%= pb_rails("body", props: {
+            text: "Trip #12422",
+            color: "light"
+        }) %>
+    <% end %>
+    <%= pb_rails("timeline/item", props: {icon: "credit-card", icon_color: "red"}) do %>
+        <%= pb_rails("body", props: {
+            text: "Refund issue #12422",
+            color: "light"
+        }) %>
+    <% end %>
+    <%= pb_rails("timeline/item", props: {icon: "smile", icon_color: "green"}) do %>
+        <%= pb_rails("body", props: {
+            text: "Conversation resolved",
+            color: "light"
+    }) %>
+    <% end %>
+<% end %>
+
+<%= pb_rails("caption", props: { text: "timestamp", margin_bottom: "xxs" }) %>
+<%= pb_rails("timestamp", props: { border: "default", 
+  timestamp: DateTime.now,
+  show_date: false,
+  align: "left"
+}) %>
+
+<%= pb_rails("caption", props: { text: "title", margin_bottom: "xxs" }) %>
+<%= pb_rails("title", props: { border: "default",  text: "Default Color", tag: "h1", size: 3 }) %>
+
+<%= pb_rails("caption", props: { text: "title_count", margin_bottom: "xxs" }) %>
+<%= pb_rails("title_count", props: { border: "default", 
+  title: "Remodeling Consultants",
+  count: 527
+}) %>
+
+<%= pb_rails("caption", props: { text: "title_detail", margin_bottom: "xxs" }) %>
+<%= pb_rails("title_detail", props: { border: "default", 
+  title: "Email Notifications",
+  detail: "Commits data and history"
+}) %>
+
+<%= pb_rails("caption", props: { text: "toggle", margin_bottom: "xxs" }) %>
+<%= pb_rails("toggle", props: { border: "default",  size: "sm" }) do %>
+  <input class="my_custom_input" type="checkbox" name="custom_checkbox" value="ABC" />
+<% end %>
+
+<%= pb_rails("caption", props: { text: "tooltip", margin_bottom: "xxs" }) %>
+<%= pb_rails("tooltip", props: { border: "default", 
+  trigger_element_selector: "#click-tooltip-trigger-1",
+  tooltip_id: "click-tooltip-1",
+  position: "top",
+  use_click_to_open: true
+}) do %>
+  Tooltip opened by click! Click trigger again to close.
+<% end %>
+
+<%= pb_rails("caption", props: { text: "typeahead", margin_bottom: "xxs" }) %>
+<%= pb_rails("typeahead", props: { border: "default", 
+    id: "typeahead-creatable",
+    placeholder: "All Colors",
+    # options: options,
+    label: "Colors",
+    name: :foo,
+    createable: true,
+    pills: true,
+  })
+%>
+
+<%= pb_rails("caption", props: { text: "user", margin_bottom: "xxs" }) %>
+<%= pb_rails("user", props: { border: "default", 
+    align: "left",
+    avatar_url: "https://randomuser.me/api/portraits/women/44.jpg",
+    name: "Anna Black",
+    orientation: "horizontal",
+    size: "md",
+    territory: "PHL",
+    title: "Remodeling Consultant"
+  }) do %>
+    <%= pb_rails("flex", props: { align: "center" }) do %>
+      <%= pb_rails("icon", props: { icon: "users" }) %>
+      <%= pb_rails("caption", props: { padding_left: "xs", text: "Admin" }) %>
+    <% end %>
+  <% end %>
+
+<%= pb_rails("caption", props: { text: "user_badge", margin_bottom: "xxs" }) %>
+<%= pb_rails("user_badge", props: { border: "default", 
+  badge: "veteran",
+  size: "md"
+}) %>
+
+<%= pb_rails("caption", props: { text: "weekday_stacked", margin_bottom: "xxs" }) %>
+<%= pb_rails("weekday_stacked", props: { border: "default", variant: "expanded", compact: true}) %>

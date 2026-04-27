@@ -1,4 +1,175 @@
-<%= pb_rails("card", props: {
-})  do %>
-  Card content
+<%
+  dropdown_options = [
+    { label: "United States", value: "us", id: "us" },
+    { label: "Canada", value: "ca", id: "ca" },
+  ]
+  typeahead_options = [
+    { label: "Orange", value: "#FFA500" },
+    { label: "Blue", value: "#0000FF" },
+  ]
+%>
+
+<%= pb_rails("title", props: { text: "Border global prop — Cards", size: 4, margin_bottom: "sm" }) %>
+<%= pb_rails("flex", props: { orientation: "column", gap: "md", margin_bottom: "xl" }) do %>
+  <%= pb_rails("caption", props: { text: "border: default (full)", margin_bottom: "xs" }) %>
+  <%= pb_rails("card", props: { border: "default" }) do %>Full default border<% end %>
+
+  <%= pb_rails("caption", props: { text: "border: none", margin_bottom: "xs" }) %>
+  <%= pb_rails("card", props: { border: "none" }) do %>border none<% end %>
+
+  <%= pb_rails("caption", props: { text: "border_top + border_x (all default)", margin_bottom: "xs" }) %>
+  <%= pb_rails("card", props: { border_top: "default", border_x: "default", padding: "md" }) do %>Top + left/right default borders<% end %>
 <% end %>
+
+<%= pb_rails("title", props: { text: "border + border_radius on Flex & Caption (no card chrome)", size: 4, margin_bottom: "sm" }) %>
+<%= pb_rails("caption", props: { text: "Flex with border default + border_radius lg — outline matches radius", margin_bottom: "xs" }) %>
+<%= pb_rails("flex", props: { border: "default", border_radius: "lg", padding: "md", gap: "sm", orientation: "column" }) do %>
+  <%= pb_rails("body", props: { text: "Plain flex box; border utilities stack with border_radius." }) %>
+<% end %>
+
+<%= pb_rails("caption", props: { text: "Caption inside a rounded flex wrapper", margin_bottom: "xs" }) %>
+<%= pb_rails("flex", props: { border: "default", border_radius: "rounded", padding: "sm" }) do %>
+  <%= pb_rails("caption", props: { text: "Caption text inside rounded border" }) %>
+<% end %>
+
+<%= pb_rails("title", props: { text: "Other kits (light)", size: 4, margin_top: "xl", margin_bottom: "sm" }) %>
+<%= pb_rails("flex", props: { orientation: "column", gap: "lg" }) do %>
+  <%= pb_rails("caption", props: { text: "Button (utility border beats transparent variant border-color)", margin_bottom: "xs" }) %>
+  <%= pb_rails("background", props: { background_color: "neutral_subtle", padding: "md", border_radius: "md" }) do %>
+    <%= pb_rails("flex", props: { wrap: true, gap: "sm", align: "center" }) do %>
+      <%= pb_rails("button", props: { text: "primary + border", border: "default", padding_x: "sm" }) %>
+      <%= pb_rails("button", props: { text: "secondary + border", border: "default", padding_x: "sm", variant: "secondary" }) %>
+      <%= pb_rails("button", props: { text: "border_top only", border_top: "default", variant: "secondary" }) %>
+    <% end %>
+  <% end %>
+
+  <%= pb_rails("caption", props: { text: "Flex container", margin_bottom: "xs" }) %>
+  <%= pb_rails("flex", props: { border: "default", padding: "sm", gap: "sm" }) do %>
+    <%= pb_rails("body", props: { text: "Item A" }) %>
+    <%= pb_rails("body", props: { text: "Item B" }) %>
+  <% end %>
+
+  <%= pb_rails("caption", props: { text: "Table (2×2, border on wrapper)", margin_bottom: "xs" }) %>
+  <%= pb_rails("background", props: { background_color: "neutral_subtle", padding: "sm", border_radius: "md" }) do %>
+    <%= pb_rails("table", props: { size: "sm", responsive: "none", border: "default" }) do %>
+      <%= pb_rails("table/table_head") do %>
+        <%= pb_rails("table/table_row") do %>
+          <%= pb_rails("table/table_header", props: { text: "Col A" }) %>
+          <%= pb_rails("table/table_header", props: { text: "Col B" }) %>
+        <% end %>
+      <% end %>
+      <%= pb_rails("table/table_body") do %>
+        <%= pb_rails("table/table_row") do %>
+          <%= pb_rails("table/table_cell", props: { text: "1a" }) %>
+          <%= pb_rails("table/table_cell", props: { text: "1b" }) %>
+        <% end %>
+        <%= pb_rails("table/table_row") do %>
+          <%= pb_rails("table/table_cell", props: { text: "2a" }) %>
+          <%= pb_rails("table/table_cell", props: { text: "2b" }) %>
+        <% end %>
+      <% end %>
+    <% end %>
+  <% end %>
+
+  <%= pb_rails("caption", props: { text: "Dropdown", margin_bottom: "xs" }) %>
+  <%= pb_rails("dropdown", props: { options: dropdown_options, border: "default" }) %>
+
+  <%= pb_rails("caption", props: { text: "Typeahead", margin_bottom: "xs" }) %>
+  <%= pb_rails("typeahead", props: {
+    id: "card-light-typeahead",
+    label: "Color",
+    name: :card_light_ta,
+    options: typeahead_options,
+    placeholder: "Pick",
+    border: "default",
+  }) %>
+
+  <%= pb_rails("caption", props: { text: "Date picker", margin_bottom: "xs" }) %>
+  <%= pb_rails("date_picker", props: {
+    picker_id: "card-light-dp",
+    name: "card_light_date",
+    label: "Date",
+    border: "default",
+  }) %>
+
+  <%= pb_rails("caption", props: { text: "Body", margin_bottom: "xs" }) %>
+  <%= pb_rails("background", props: { background_color: "neutral_subtle", padding: "sm", border_radius: "sm" }) do %>
+    <%= pb_rails("body", props: { text: "Body with border default", border: "default", padding: "sm" }) %>
+  <% end %>
+
+  <%= pb_rails("caption", props: { text: "Caption", margin_bottom: "xs" }) %>
+  <%= pb_rails("caption", props: { text: "Caption + border_x default", border_x: "default", padding_x: "sm" }) %>
+
+  <%= pb_rails("caption", props: { text: "Icon", margin_bottom: "xs" }) %>
+  <%= pb_rails("background", props: { background_color: "neutral_subtle", padding: "sm", border_radius: "sm" }) do %>
+    <%= pb_rails("icon", props: { icon: "user", fixed_width: true, border: "default", padding: "xs" }) %>
+  <% end %>
+<% end %>
+
+<%= pb_rails("title", props: { text: "Dark surface (nested .dark)", size: 4, margin_top: "xl", margin_bottom: "sm" }) %>
+<div class="dark" style="padding: 24px; border-radius: 8px; background: #0a0f1a;">
+  <%= pb_rails("flex", props: { orientation: "column", gap: "lg" }) do %>
+    <%= pb_rails("caption", props: { text: "Card", color: "light", margin_bottom: "xs" }) %>
+    <%= pb_rails("card", props: { dark: true, border: "default" }) do %>Dark card + border default<% end %>
+
+    <%= pb_rails("caption", props: { text: "Buttons", color: "light", margin_bottom: "xs" }) %>
+    <%= pb_rails("flex", props: { wrap: true, gap: "sm", align: "center" }) do %>
+      <%= pb_rails("button", props: { dark: true, text: "primary + border", border: "default", padding_x: "sm" }) %>
+      <%= pb_rails("button", props: { dark: true, text: "secondary + border", border: "default", padding_x: "sm", variant: "secondary" }) %>
+      <%= pb_rails("button", props: { dark: true, text: "border_top", border_top: "default", variant: "secondary" }) %>
+    <% end %>
+
+    <%= pb_rails("caption", props: { text: "Flex + border_radius", color: "light", margin_bottom: "xs" }) %>
+    <%= pb_rails("flex", props: { dark: true, border: "default", border_radius: "lg", padding: "md", gap: "xs", orientation: "column" }) do %>
+      <%= pb_rails("body", props: { dark: true, text: "Dark flex with border + radius" }) %>
+    <% end %>
+
+    <%= pb_rails("caption", props: { text: "Body", color: "light", margin_bottom: "xs" }) %>
+    <%= pb_rails("body", props: { dark: true, border: "default", padding: "sm", text: "Body with border on dark" }) %>
+
+    <%= pb_rails("caption", props: { text: "Caption", color: "light", margin_bottom: "xs" }) %>
+    <%= pb_rails("caption", props: { dark: true, color: "light", text: "Caption + border_x", border_x: "default", padding_x: "sm" }) %>
+
+    <%= pb_rails("caption", props: { text: "Icon", color: "light", margin_bottom: "xs" }) %>
+    <%= pb_rails("icon", props: { dark: true, icon: "user", fixed_width: true, border: "default", padding: "xs" }) %>
+
+    <%= pb_rails("caption", props: { text: "Table", color: "light", margin_bottom: "xs" }) %>
+    <%= pb_rails("table", props: { dark: true, size: "sm", responsive: "none", border: "default" }) do %>
+      <%= pb_rails("table/table_head") do %>
+        <%= pb_rails("table/table_row") do %>
+          <%= pb_rails("table/table_header", props: { text: "A" }) %>
+          <%= pb_rails("table/table_header", props: { text: "B" }) %>
+        <% end %>
+      <% end %>
+      <%= pb_rails("table/table_body") do %>
+        <%= pb_rails("table/table_row") do %>
+          <%= pb_rails("table/table_cell", props: { text: "1" }) %>
+          <%= pb_rails("table/table_cell", props: { text: "2" }) %>
+        <% end %>
+      <% end %>
+    <% end %>
+
+    <%= pb_rails("caption", props: { text: "Dropdown", color: "light", margin_bottom: "xs" }) %>
+    <%= pb_rails("dropdown", props: { dark: true, options: dropdown_options, border: "default" }) %>
+
+    <%= pb_rails("caption", props: { text: "Typeahead", color: "light", margin_bottom: "xs" }) %>
+    <%= pb_rails("typeahead", props: {
+      dark: true,
+      id: "card-light-typeahead-dark",
+      label: "Color",
+      name: :card_light_ta_dark,
+      options: typeahead_options,
+      placeholder: "Pick",
+      border: "default",
+    }) %>
+
+    <%= pb_rails("caption", props: { text: "Date picker", color: "light", margin_bottom: "xs" }) %>
+    <%= pb_rails("date_picker", props: {
+      dark: true,
+      picker_id: "card-light-dp-dark",
+      name: "card_light_date_dark",
+      label: "Date",
+      border: "default",
+    }) %>
+  <% end %>
+</div>

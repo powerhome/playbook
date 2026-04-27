@@ -1,64 +1,546 @@
-<%= pb_rails("title", props: { text: "Card Colors", tag: "h4", size: 4, margin_bottom: "sm" }) %>
+<%= pb_rails("title", props: { text: "Border Global Prop on kits A–M", size: 4, margin_bottom: "md", tag: "h4" }) %>
+<%= pb_rails("body", props: { text: "Not RTE, Graphs, Form" }) %>
+<%
+  column_definitions = [
+    { accessor: "year", label: "Year", cellAccessors: ["quarter", "month", "day"] },
+    { accessor: "newEnrollments", label: "New Enrollments" },
+    { accessor: "scheduledMeetings", label: "Scheduled Meetings" },
+    { accessor: "attendanceRate", label: "Attendance Rate" },
+    { accessor: "completedClasses", label: "Completed Classes" },
+    { accessor: "classCompletionRate", label: "Class Completion Rate" },
+    { accessor: "graduatedStudents", label: "Graduated Students" },
+  ]
+  table_data = [
+    {
+      "year" => "2021",
+      "quarter" => nil,
+      "month" => nil,
+      "day" => nil,
+      "newEnrollments" => "20",
+      "scheduledMeetings" => "10",
+      "attendanceRate" => "51%",
+      "completedClasses" => "3",
+      "classCompletionRate" => "33%",
+      "graduatedStudents" => "19",
+    },
+  ]
+  initial_items = [
+    { id: "1", url: "https://unsplash.it/500/400/?image=633" },
+    { id: "2", url: "https://unsplash.it/500/400/?image=634" },
+    { id: "3", url: "https://unsplash.it/500/400/?image=637" },
+  ]
+  options = [
+    { label: "United States", value: "unitedStates", id: "us" },
+    { label: "Canada", value: "canada", id: "ca" },
+    { label: "Pakistan", value: "pakistan", id: "pk" },
+  ]
+  treeData = [{
+    label: "Power Home Remodeling",
+    value: "powerHomeRemodeling",
+    id: "100",
+    expanded: true,
+    children: [
+      { label: "People", value: "people", id: "101", expanded: true, children: [
+        { label: "Talent Acquisition", value: "talentAcquisition", id: "102" },
+        { label: "Business Affairs", value: "businessAffairs", id: "103" },
+      ]},
+    ],
+  }]
+%>
 
-<%= pb_rails("card", props: { background: "dark", dark: true, margin_bottom: "sm" })  do %>
+<%= pb_rails("caption", props: { text: "advanced_table", margin_bottom: "xxs" }) %>
+<%= pb_rails("advanced_table", props: { border: "default", id: "background-control", table_data: table_data, column_definitions: column_definitions }) do %>
+  <%= pb_rails("advanced_table/table_header", props: { table_id: "background-control", column_definitions: column_definitions }) %>
+  <%= pb_rails("advanced_table/table_body", props: { table_id: "background-control", table_data: table_data, column_definitions: column_definitions }) %>
+<% end %>
+
+<%= pb_rails("caption", props: { text: "avatar", margin_bottom: "xxs" }) %>
+<%= pb_rails("avatar", props: { border: "default", 
+      component_overlay: {
+          component: "badge",
+          text: "12",
+          placement: "bottom-right"
+      },
+      name: "Terry Johnson",
+      size: "sm",
+      image_url: "https://randomuser.me/api/portraits/men/44.jpg",
+      margin_bottom: "sm"
+    }) %>
+
+<%= pb_rails("caption", props: { text: "background", margin_bottom: "xxs" }) %>
+<%= pb_rails("background", props: { border: "default",  background_color: "category_1", padding: "xl" }) do %>
+  <%= pb_rails("body", props: { text: "Background kit" }) %>
+<% end %>
+
+<%= pb_rails("caption", props: { text: "badge", margin_bottom: "xxs" }) %>
+<%= pb_rails("badge", props: { border: "default", 
+    text: "+1",
+    variant: "primary",
+    rounded: true
+  }) %>
+
+<%= pb_rails("caption", props: { text: "body", margin_bottom: "xxs" }) %>
+<%= pb_rails("body", props: { border: "default", 
+  line_height: "loose",
+  max_width: "md"
+}) do %>
+    <p>Infuse your life with action. Don't wait for it to happen. Make it happen. Make your own future. Make your own hope. Make your own love. And whatever your beliefs, honor your creator, not by passively waiting for grace to come down from upon high, but by doing what you can to make grace happen... yourself, right now, right down here on Earth.</p>
+    <br />
+    <p>- Bradley Whitford</p>
+<% end %>
+
+<%= pb_rails("caption", props: { text: "bread_crumbs", margin_bottom: "xxs" }) %>
+<%= pb_rails("bread_crumbs", props: { border: "default", aria: { label: "Breadcrumb Navigation" } }) do %>
+  <%= pb_rails("icon", props: { icon: "home", color: "link" }) %>
+  <%= pb_rails("bread_crumbs/bread_crumb_item", props: { link: "/" }) do %>
+    <%= pb_rails("title", props: { size: 4, text: "Home", tag: "span", color: "link" }) %>
+  <% end %>
+  <%= pb_rails("icon", props: { icon: "users", color: "link" }) %>
+  <%= pb_rails("bread_crumbs/bread_crumb_item", props: { link: "/users" }) do %>
+    <%= pb_rails("title", props: { size: 4, text: "Users", tag: "span", color: "link" }) %>
+  <% end %>
+  <%= pb_rails("icon", props: { icon: "user" }) %>
+  <%= pb_rails("bread_crumbs/bread_crumb_item") do %>
+    <%= pb_rails("title", props: { size: 4, text: "User", tag: "span" }) %>
+  <% end %>
+<% end %>
+
+<%= pb_rails("caption", props: { text: "button", margin_bottom: "xxs" }) %>
+<%= pb_rails("button", props: { border: "default",  text: "Button with ARIA", aria: {label: "Go to Google"}, tag: "a", link: "http://google.com"}) %>
+
+<%= pb_rails("caption", props: { text: "button_toolbar", margin_bottom: "xxs" }) %>
+<%= pb_rails("button_toolbar", props: { border: "default",  orientation: "vertical" }) do %>
+    <%= pb_rails("button", props: { text: "Create" }) %>
+    <%= pb_rails("button", props: { text: "Edit"}) %>
+    <%= pb_rails("button", props: { text: "Copy"}) %>
+    <%= pb_rails("button", props: { text: "Cut"}) %>
+  <% end %>
+
+<%= pb_rails("caption", props: { text: "caption", margin_bottom: "xxs" }) %>
+<%= pb_rails("caption", props: { border: "default" }) do %>
+  Block
+<% end %>
+
+<%= pb_rails("caption", props: { text: "card", margin_bottom: "xxs" }) %>
+<%= pb_rails("card", props: { border: "default", background: "dark", dark: true, margin_bottom: "sm" })  do %>
   <%= pb_rails("body", props: {
   text: "Dark",
   dark: true 
 }) %>
 <% end %>
 
-<%= pb_rails("card", props: { margin_bottom: "sm" })  do %>
-  <%= pb_rails("body", props: {
-  text: "White / Default"
+<%= pb_rails("caption", props: { text: "checkbox", margin_bottom: "xxs" }) %>
+<%= pb_rails("checkbox" , props: { border: "default", 
+  text: "Checked Checkbox",
+  value: "checkbox-value",
+  checked: true,
+  name: "checkbox-name"
 }) %>
+
+<%= pb_rails("caption", props: { text: "circle_icon_button", margin_bottom: "xxs" }) %>
+<%= pb_rails("circle_icon_button", props: { border: "default", 
+  variant: "primary",
+  icon: "plus"
+}) %>
+
+<%= pb_rails("caption", props: { text: "collapsible", margin_bottom: "xxs" }) %>
+<%= pb_rails("collapsible", props: { border: "default",  name: "default-example", margin_bottom: "xs" }) do %>
+  <%= pb_rails("collapsible/collapsible_main", props: { padding: "md", name: "default-main", color: "default"}) do %>
+    <%= pb_rails("body", props: { text: "Default Section"}) %>
+  <% end %>
+  <%= pb_rails("collapsible/collapsible_content", props: { padding: "md" }) do %>
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec iaculis, risus a fringilla luctus, sapien eros sodales ex, quis molestie est nulla non turpis. Vestibulum aliquet at ipsum eget posuere. Morbi sed laoreet erat. Sed commodo posuere lectus, at porta nulla ornare a. Suspendisse quam est, sollicitudin ut enim sit amet, commodo placerat enim. Donec laoreet metus ac mauris pellentesque mattis. Pellentesque luctus vel mauris non aliquam. Mauris hendrerit mattis porttitor. Curabitur vehicula justo non ex consectetur commodo. Quisque posuere aliquet quam. Maecenas malesuada magna mauris, ac tempor metus euismod at.
+    <br><br>
+    Cras ornare fermentum magna mollis efficitur. Sed vitae nulla vel purus ultrices mollis. Maecenas id nulla id libero faucibus feugiat quis sit amet turpis. In commodo pellentesque risus at fringilla. Integer non interdum leo, non commodo ante. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut mi augue, dignissim at orci vel, egestas aliquam mi. Proin finibus aliquet tempor. Integer cursus, ex quis gravida rhoncus, nisi elit viverra ipsum, non efficitur est ex ac tortor. Praesent vitae odio massa.
+  <% end %>
 <% end %>
 
-<%= pb_rails("card", props: { background: "light", margin_bottom: "sm" })  do %>
-  <%= pb_rails("body", props: {
-    text: "Light",
-    dark: false
+<%= pb_rails("caption", props: { text: "contact", margin_bottom: "xxs" }) %>
+<%= pb_rails("contact", props: { border: "default", 
+  contact_type: "cell",
+  contact_value: "349-185-9988",
+}) %>
+
+<%= pb_rails("caption", props: { text: "copy_button", margin_bottom: "xxs" }) %>
+<%= pb_rails("copy_button", props: { border: "default", 
+  text: "Copy Text",
+  tooltip_position: "right",
+  tooltip_text: "Text copied!",
+  value: "Playbook makes it easy to support bleeding edge, or legacy systems. Use Playbook's 200+ components and end-to-end design language to create simple, intuitive and beautiful experiences with ease.",
+  variant: "button",
+}) %>
+
+<%= pb_rails("caption", props: { text: "currency", margin_bottom: "xxs" }) %>
+<%= pb_rails("currency", props: { border: "default", 
+  abbreviate: true,
+  amount: "2,200.50",
+  label: "Thousands (with Unit)",
+  margin_bottom: "md",
+  unit: "/mo",
+}) %>
+
+<%= pb_rails("caption", props: { text: "dashboard_value", margin_bottom: "xxs" }) %>
+<%= pb_rails("dashboard_value", props: { border: "default", 
+  stat_label: "Top Title Value",
+  stat_value: {value: 1428, unit: "appts"},
+  stat_change: {change: "decrease", value: 26.1}
+}) %>
+
+<%= pb_rails("caption", props: { text: "date", margin_bottom: "xxs" }) %>
+<%= pb_rails("date", props: { border: "default", 
+    date: DateTime.now,
+    show_icon: true,
+    show_day_of_week: true
   }) %>
+
+<%= pb_rails("caption", props: { text: "date_picker", margin_bottom: "xxs" }) %>
+<%= pb_rails("date_picker", props: { border: "default",  allow_input: true, picker_id: "date-picker-allow-input"}) %>
+
+<%= pb_rails("caption", props: { text: "date_range_inline", margin_bottom: "xxs" }) %>
+<%= pb_rails("date_range_inline", props: { border: "default",  start_date: Date.new(2019, 06, 18), end_date: Date.new(2020, 03, 20), size: "xs" }) %>
+
+<%= pb_rails("caption", props: { text: "date_range_stacked", margin_bottom: "xxs" }) %>
+<%= pb_rails("date_range_stacked", props: { border: "default",  start_date: Date.new(2019, 06, 18), end_date: Date.new(2020, 03, 20) }) %>
+
+<%= pb_rails("caption", props: { text: "date_stacked", margin_bottom: "xxs" }) %>
+<%= pb_rails("date_stacked", props: { border: "default",  date: DateTime.now }) %>
+
+<%= pb_rails("caption", props: { text: "date_time", margin_bottom: "xxs" }) %>
+<%= pb_rails("date_time", props: { border: "default", 
+    date: DateTime.now
+}) %>
+
+<%= pb_rails("caption", props: { text: "date_time_stacked", margin_bottom: "xxs" }) %>
+<%= pb_rails("date_time_stacked", props: { border: "default",  date_time: DateTime.now }) %>
+
+<%= pb_rails("caption", props: { text: "date_year_stacked", margin_bottom: "xxs" }) %>
+<%= pb_rails("flex", props: { border: "default", orientation: "column", gap: "sm" }) do %>
+  <%= pb_rails("date_year_stacked", props: { border: "default", date: Date.today }) %>
+  <%= pb_rails("date_year_stacked", props: { border: "default", date: Date.today, align: "center" }) %>
+  <%= pb_rails("date_year_stacked", props: { border: "default", date: Date.today, align: "right" }) %>
 <% end %>
 
-<%= pb_rails("title", props: { text: "Product Colors", tag: "h4", size: 4, margin_bottom: "sm" }) %>
+<%= pb_rails("caption", props: { text: "detail", margin_bottom: "xxs" }) %>
+<%= pb_rails("detail", props: { border: "default", 
+  bold: true,
+  text: "I am a bold detail kit"
+}) %>
 
-<%= pb_rails("card", props: { background: "product_1_background", dark: true, margin_bottom: "sm" })  do %>
-  <%= pb_rails("body", props: {
-    text: "Product 1 Background",
-    dark: true
+<%= pb_rails("caption", props: { text: "dialog", margin_bottom: "xxs" }) %>
+<%= pb_rails("button", props: { text: "Open Dialog", data: {"open-dialog": "dialog-simple"}, margin_bottom: "sm" }) %>
+<%= pb_rails("dialog", props: { border: "default",  
+    id:"dialog-simple", 
+    size: "sm", 
+    title: "Header Title is the Title Prop", 
+    text: "Hello Body Text, Nice to meet ya.", 
+    cancel_button: "Cancel Button", 
+    closeable: false,
+    confirm_button: "Okay", 
+    confirm_button_id: "confirm-button-simple"
+}) %>
+
+<%= pb_rails("caption", props: { text: "distribution_bar", margin_bottom: "xxs" }) %>
+<%= pb_rails("distribution_bar", props: { border: "default", 
+  widths: [4,5,3],
+  colors: ["data_7", "data_1", "neutral"]
+}) %>
+
+<%= pb_rails("caption", props: { text: "draggable", margin_bottom: "xxs" }) %>
+<%= pb_rails("draggable", props: { border: "default", initial_items: initial_items}) do %>
+  <%= pb_rails("draggable/draggable_container") do %>
+    <%= pb_rails("flex") do %>
+      <% initial_items.each do |item| %>
+        <%= pb_rails("draggable/draggable_item", props:{drag_id: item[:id]}) do %>
+          <%= pb_rails("image", props: { alt: item[:id], size: "md", url: item[:url], margin: "xs" }) %>
+        <% end %>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>
+
+<%= pb_rails("caption", props: { text: "dropdown", margin_bottom: "xxs" }) %>
+<%= pb_rails("dropdown", props: { border: "default",  blank_selection: "Select One...", options: options }) %>
+
+<%= pb_rails("caption", props: { text: "empty_state", margin_bottom: "xxs" }) %>
+<%= pb_rails("empty_state", props: {
+  border: "default",
+  description: "Body text goes into detail with possible steps for user to take",
+  header: "Title Explains",
+  image: "default",
+}) %>
+
+<%= pb_rails("caption", props: { text: "file_upload", margin_bottom: "xxs" }) %>
+<%= pb_rails("file_upload", props: { border: "default", id: "import_file"}) do %>
+  <input
+    id="import_file"
+    type="file"
+    name="import_file"
+  />
+<% end %>
+
+<%= pb_rails("caption", props: { text: "filter", margin_bottom: "xxs" }) %>
+<%=
+  pb_rails("filter", props: {
+    border: "default",
+    min_width: "360px",
+    id: "card-border-filter",
+    filters: [
+      { name: "name", value: "John Wick" }
+    ],
+    sort_menu: [
+      { item: "Popularity", link: "#", active: true, direction: "desc" },
+      { item: "Manager's Title", link: "#", active: false },
+      { item: "Manager's Name", link: "#", active: false },
+    ],
+    results: 546,
+    template: "single"
+  }) do
+%>
+  <%
+   card_border_filter_collection = [
+      OpenStruct.new(name: "USA", value: 1),
+      OpenStruct.new(name: "Canada", value: 2),
+      OpenStruct.new(name: "Brazil", value: 3),
+      OpenStruct.new(name: "Philippines", value: 4),
+      OpenStruct.new(name: "A galaxy far far away...", value: 5)
+    ]
+  %>
+
+  <%= pb_rails("form", props: { form_system_options: { scope: :card_border_filter, method: :get } }) do |form| %>
+    <%= form.text_field :example_text_field, props: { label: true } %>
+    <%= form.collection_select :example_collection_select, card_border_filter_collection, :value, :name, props: { label: true } %>
+
+    <%= form.actions do |action| %>
+      <%= action.submit props: {
+        text: "Apply",
+        data: {
+          disable_with: "pb_rails('icon', props: { icon: 'spinner', spin: true, fixed_width: true })Searching...".html_safe
+      },}%>
+      <%= action.button props: { type: "reset", text: "Clear", variant: "secondary" } %>
+    <% end %>
+  <% end %>
+<% end %>
+
+<%= pb_rails("caption", props: { text: "fixed_confirmation_toast", margin_bottom: "xxs" }) %>
+<%= pb_rails("fixed_confirmation_toast", props: { 
+  border: "default", 
+  text: "Error Message",
+  status: "error",
+}) %>
+
+<%= pb_rails("caption", props: { text: "flex", margin_bottom: "xxs" }) %>
+<%= pb_rails("flex", props: { border: "default",  align: "start" }) do %>
+    <%= pb_rails("flex/flex_item") do %>1<% end %>
+    <%= pb_rails("flex/flex_item", props:{padding:"none"}) do %>2<% end %>
+    <%= pb_rails("flex/flex_item", props:{padding:"xl"}) do %>3<% end %>
+    <%= pb_rails("flex/flex_item", props:{padding:"sm"}) do %>4<% end %>
+  <% end %>
+
+<%= pb_rails("caption", props: { text: "form_group", margin_bottom: "xxs" }) %>
+<%= pb_rails("form_group") do %>
+    <%= pb_rails("text_input", props: { border: "default",  label: "with label", placeholder: "Search", id: "search-with-label" }) %>
+    <%= pb_rails("button", props: { text: "Submit", variant: "secondary" }) %>
+  <% end %>
+
+<%= pb_rails("caption", props: { text: "form_pill", margin_bottom: "xxs" }) %>
+<%= pb_rails("form_pill", props: { border: "default", 
+    text: "Primary",
+    tabindex: 0,
+}) %>
+
+<%= pb_rails("caption", props: { text: "hashtag", margin_bottom: "xxs" }) %>
+<%= pb_rails("hashtag", props: { border: "default", text: "470297", url: "https://google.com", type: "project"}) %>
+
+<%= pb_rails("caption", props: { text: "highlight", margin_bottom: "xxs" }) %>
+<%= pb_rails("body", props: { border: "default" }) do %>
+    This is the <%= pb_rails("highlight") do %>Highlight Kit<% end %>.
+<% end %>
+
+<%= pb_rails("caption", props: { text: "home_address_street", margin_bottom: "xxs" }) %>
+<%= pb_rails("home_address_street", props: { border: "default", 
+  address: "70 Prospect Ave",
+  address_cont: "Apt M18",
+  city: "West Chester",
+  home_id: 8250263,
+  home_url: "https://powerhrg.com/",
+  house_style: "Colonial",
+  state: "PA",
+  zipcode: "19382",
+  territory: "PHL",
+}) %>
+
+<%= pb_rails("caption", props: { text: "icon", margin_bottom: "xxs" }) %>
+<%= pb_rails("icon", props: { border: "default",  icon: "spinner", spin: true, fixed_width: true, size: "2x" }) %>
+
+<%= pb_rails("caption", props: { text: "icon_button", margin_bottom: "xxs" }) %>
+<%= pb_rails("icon_button", props: { border: "default", icon: "user" }) %>
+
+<%= pb_rails("caption", props: { text: "icon_circle", margin_bottom: "xxs" }) %>
+<%= pb_rails("icon_circle", props: { border: "default", 
+  icon: "rocket",
+  variant: "royal",
+  size: "sm"
+}) %>
+
+<%= pb_rails("caption", props: { text: "icon_stat_value", margin_bottom: "xxs" }) %>
+<%= pb_rails("icon_stat_value", props: { border: "default",  icon: "globe-europe",
+                                          text: "Mercury",
+                                          unit: "AU",
+                                          value: 0.39,
+                                          variant:"royal"
+ }) %>
+
+<%= pb_rails("caption", props: { text: "icon_value", margin_bottom: "xxs" }) %>
+<%= pb_rails("icon_value", props: { border: "default", 
+  icon: "heart",
+  text: "93"
+}) %>
+
+<%= pb_rails("caption", props: { text: "image", margin_bottom: "xxs" }) %>
+<%= pb_rails("image", props: { border: "default",  alt: "picture of a misty forest", size: "xs", url: "https://unsplash.it/500/400/?image=634" }) %>
+
+<%= pb_rails("caption", props: { text: "label_pill", margin_bottom: "xxs" }) %>
+<%= pb_rails("label_pill", props: { border: "default", 
+  label: "Service Needed",
+  pill_value: "76",
+}) %>
+
+<%= pb_rails("caption", props: { text: "label_value", margin_bottom: "xxs" }) %>
+<%= pb_rails("label_value", props: { border: "default", 
+  label: "Role",
+  value: "Administrator, Moderator"
+}) %>
+
+<%= pb_rails("caption", props: { text: "layout", margin_bottom: "xxs" }) %>
+<%= pb_rails("layout", props: { border: "default", layout: "collection"}) do %>
+  <%= pb_rails("layout/body") do %>
+
+ <%= pb_rails("card" ) do %>
+      Card content
+    <% end %>
+     <%= pb_rails("card") do %>
+   <%= pb_rails("title", props: { text: "Title 4", tag: "h4", size: 4 }) %>
+<%= pb_rails("title", props: { text: "Title 3", tag: "h3", size: 3 }) %>
+
+    <% end %>
+     <%= pb_rails("card" ) do %>
+        <%= pb_rails("user", props: {
+      name: "Anna Black",
+      title: "Remodeling Consultant",
+      orientation: "vertical",
+      align: "center",
+      size: "lg",
+      avatar_url: "https://randomuser.me/api/portraits/women/44.jpg"
+      }) %>
+    <% end %>
+     <%= pb_rails("card" ) do %>
+<%= pb_rails("title", props: { text: "Title 4", tag: "h4", size: 4 }) %>
+
+<%= pb_rails("title", props: { text: "Title 2", tag: "h2", size: 2 }) %>
+<%= pb_rails("title", props: { text: "Title 1", tag: "h1", size: 1 }) %>
+    <% end %>
+     <%= pb_rails("card" ) do %>
+      Card content
+    <% end %>
+     <%= pb_rails("card") do %>
+      Card content
+    <% end %>
+      <%= pb_rails("user", props: {
+      name: "Anna Black",
+      title: "Remodeling Consultant",
+      orientation: "vertical",
+      align: "center",
+      size: "lg",
+      avatar_url: "https://randomuser.me/api/portraits/women/44.jpg"
+      }) %>
+     <%= pb_rails("card" ) do %>
+      Card content
+    <% end %>
+     <%= pb_rails("card" ) do %>
+     <%= pb_rails("title", props: { text: "Title 4", tag: "h4", size: 4 }) %>
+<%= pb_rails("title", props: { text: "Title 3", tag: "h3", size: 3 }) %>
+<%= pb_rails("title", props: { text: "Title 2", tag: "h2", size: 2 }) %>
+<%= pb_rails("title", props: { text: "Title 1", tag: "h1", size: 1 }) %>
+    <% end %>
+
+
+  <% end %>
+<% end %>
+
+<%= pb_rails("caption", props: { text: "legend", margin_bottom: "xxs" }) %>
+<%= pb_rails("legend", props: { border: "default",  color: "data_8", text: "Data 8" }) %>
+
+<%= pb_rails("caption", props: { text: "link", margin_bottom: "xxs" }) %>
+<%= pb_rails("link", props: { border: "default", 
+    text: "link example",
+    href: "https://www.google.com/search?q=playbook+design+system",
   }) %>
+
+<%= pb_rails("caption", props: { text: "list", margin_bottom: "xxs" }) %>
+<%= pb_rails("list", props: { border: "default", ordered: false, dark: false, borderless: true}) do %>
+<%= pb_rails("list/item") do %> List Item <% end %>
+<%= pb_rails("list/item") do %> List Item <% end %>
+<%= pb_rails("list/item") do %> List Item <% end %>
+<%= pb_rails("list/item") do %> List Item <% end %>
+<%= pb_rails("list/item") do %> List Item <% end %>
 <% end %>
 
-<%= pb_rails("card", props: { background: "product_7_highlight", margin_bottom: "sm" })  do %>
-  <%= pb_rails("body", props: {
-    text: "Product 7 Highlight",
-    dark: true
-  }) %>
-<% end %>
+<%= pb_rails("caption", props: { text: "loading_inline", margin_bottom: "xxs" }) %>
+<%= pb_rails("loading_inline", props: { border: "default", 
+    text: "Saving"
+}) %>
 
-<%= pb_rails("card", props: { background: "product_2_background", margin_bottom: "sm" })  do %>
-  <%= pb_rails("body", props: {
-    text: "Product 2 Highlight",
-    dark: true
-  }) %>
-<% end %>
+<%= pb_rails("caption", props: { text: "message", margin_bottom: "xxs" }) %>
+<%= pb_rails("message", props: { border: "default", 
+  label: "Anna Black",
+  message: "How can we assist you today?",
+  timestamp: "20 seconds ago",
+  avatar_name: "Mike Bishop",
+  avatar_url: "https://randomuser.me/api/portraits/men/50.jpg",
+  avatar_status: "online"
+}) %>
 
-<%= pb_rails("title", props: { text: "Subtle Status Colors", tag: "h4", size: 4, margin_bottom: "sm" }) %>
+<%= pb_rails("caption", props: { text: "multi_level_select", margin_bottom: "xxs" }) %>
+<%= pb_rails("multi_level_select", props: { border: "default", 
+    id: "multi-level-select-default-rails",
+    name: "my_array",
+    tree_data: treeData,
+    pill_color: "neutral"
+}) %>
 
-<%= pb_rails("card", props: { background: "success_subtle", margin_bottom: "sm" })  do %>
-  <%= pb_rails("body", props: {
-    text: "Success Subtle"
-  }) %>
-<% end %>
+<%= pb_rails("caption", props: { text: "multiple_users", margin_bottom: "xxs" }) %>
+<%= pb_rails("multiple_users", props: { border: "default", 
+  users: [
+    {
+      name: "Patrick Welch",
+      image_url: "https://randomuser.me/api/portraits/men/9.jpg",
+    },
+    {
+      name: "Lucille Sanchez",
+      image_url: "https://randomuser.me/api/portraits/women/6.jpg",
+    },
+    {
+      name: "Beverly Reyes",
+      image_url: "https://randomuser.me/api/portraits/women/74.jpg",
+    },
+    {
+      name: "Keith Craig",
+      image_url: "https://randomuser.me/api/portraits/men/40.jpg",
+    },
+    {
+      name: "Alicia Cooper",
+      image_url: "https://randomuser.me/api/portraits/women/46.jpg",
+    }
+  ]
+}) %>
 
-<%= pb_rails("card", props: { background: "warning_subtle", margin_bottom: "sm" })  do %>
-  <%= pb_rails("body", props: {
-    text: "Warning Subtle"
-  }) %>
-<% end %>
-
-<%= pb_rails("card", props: { background: "info_subtle", margin_bottom: "sm" })  do %>
-  <%= pb_rails("body", props: {
-    text: "Info Subtle"
-  }) %>
-<% end %>
+<%= pb_rails("caption", props: { text: "multiple_users_stacked", margin_bottom: "xxs" }) %>
+<%= pb_rails("multiple_users_stacked", props: { border: "default", 
+  variant: "bubble",
+  users: [
+    {
+      name: "Patrick Welch",
+      image_url: "https://randomuser.me/api/portraits/men/9.jpg",
+    }
+  ]
+}) %>
