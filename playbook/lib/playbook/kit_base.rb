@@ -22,6 +22,7 @@ require "playbook/order"
 require "playbook/position"
 require "playbook/hover"
 require "playbook/border_radius"
+require "playbook/border"
 require "playbook/text_align"
 require "playbook/overflow"
 require "playbook/truncate"
@@ -62,6 +63,7 @@ module Playbook
     include Playbook::Position
     include Playbook::Hover
     include Playbook::BorderRadius
+    include Playbook::Border
     include Playbook::TextAlign
     include Playbook::Overflow
     include Playbook::Truncate

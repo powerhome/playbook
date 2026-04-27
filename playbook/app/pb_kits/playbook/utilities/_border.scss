@@ -1,0 +1,240 @@
+@import "../tokens/colors";
+
+$pb-border-util-width: 1px;
+
+@mixin pb-border-default-dark-context {
+  border-color: $border_light;
+
+  .dark &,
+  &.dark {
+    border-color: $border_dark;
+  }
+}
+
+.border_default {
+  border-width: $pb-border-util-width;
+  border-style: solid;
+  @include pb-border-default-dark-context;
+}
+
+.border_top_default {
+  border-top-width: $pb-border-util-width;
+  border-top-style: solid;
+  border-top-color: $border_light;
+
+  .dark &,
+  &.dark {
+    border-top-color: $border_dark;
+  }
+}
+
+.border_bottom_default {
+  border-bottom-width: $pb-border-util-width;
+  border-bottom-style: solid;
+  border-bottom-color: $border_light;
+
+  .dark &,
+  &.dark {
+    border-bottom-color: $border_dark;
+  }
+}
+
+.border_left_default {
+  border-left-width: $pb-border-util-width;
+  border-left-style: solid;
+  border-left-color: $border_light;
+
+  .dark &,
+  &.dark {
+    border-left-color: $border_dark;
+  }
+}
+
+.border_right_default {
+  border-right-width: $pb-border-util-width;
+  border-right-style: solid;
+  border-right-color: $border_light;
+
+  .dark &,
+  &.dark {
+    border-right-color: $border_dark;
+  }
+}
+
+.border_x_default {
+  border-left-width: $pb-border-util-width;
+  border-right-width: $pb-border-util-width;
+  border-left-style: solid;
+  border-right-style: solid;
+  border-left-color: $border_light;
+  border-right-color: $border_light;
+
+  .dark &,
+  &.dark {
+    border-left-color: $border_dark;
+    border-right-color: $border_dark;
+  }
+}
+
+.border_y_default {
+  border-top-width: $pb-border-util-width;
+  border-bottom-width: $pb-border-util-width;
+  border-top-style: solid;
+  border-bottom-style: solid;
+  border-top-color: $border_light;
+  border-bottom-color: $border_light;
+
+  .dark &,
+  &.dark {
+    border-top-color: $border_dark;
+    border-bottom-color: $border_dark;
+  }
+}
+
+.border_none {
+  border-top-width: 0;
+  border-right-width: 0;
+  border-bottom-width: 0;
+  border-left-width: 0;
+}
+
+.border_top_none {
+  border-top-width: 0;
+}
+
+.border_bottom_none {
+  border-bottom-width: 0;
+}
+
+.border_left_none {
+  border-left-width: 0;
+}
+
+.border_right_none {
+  border-right-width: 0;
+}
+
+.border_x_none {
+  border-left-width: 0;
+  border-right-width: 0;
+}
+
+.border_y_none {
+  border-top-width: 0;
+  border-bottom-width: 0;
+}
+
+// Specific kit overrides:
+// Buttons need additional css because pb_button_variant sets border-color transparent and base uses border-width 0.
+.pb_button_kit.border_default {
+  border-width: $pb-border-util-width;
+  border-style: solid;
+  @include pb-border-default-dark-context;
+}
+
+.pb_button_kit.border_top_default {
+  border-top-width: $pb-border-util-width;
+  border-top-style: solid;
+  border-top-color: $border_light;
+
+  .dark &,
+  &.dark {
+    border-top-color: $border_dark;
+  }
+}
+
+.pb_button_kit.border_bottom_default {
+  border-bottom-width: $pb-border-util-width;
+  border-bottom-style: solid;
+  border-bottom-color: $border_light;
+
+  .dark &,
+  &.dark {
+    border-bottom-color: $border_dark;
+  }
+}
+
+.pb_button_kit.border_left_default {
+  border-left-width: $pb-border-util-width;
+  border-left-style: solid;
+  border-left-color: $border_light;
+
+  .dark &,
+  &.dark {
+    border-left-color: $border_dark;
+  }
+}
+
+.pb_button_kit.border_right_default {
+  border-right-width: $pb-border-util-width;
+  border-right-style: solid;
+  border-right-color: $border_light;
+
+  .dark &,
+  &.dark {
+    border-right-color: $border_dark;
+  }
+}
+
+.pb_button_kit.border_x_default {
+  border-left-width: $pb-border-util-width;
+  border-right-width: $pb-border-util-width;
+  border-left-style: solid;
+  border-right-style: solid;
+  border-left-color: $border_light;
+  border-right-color: $border_light;
+
+  .dark &,
+  &.dark {
+    border-left-color: $border_dark;
+    border-right-color: $border_dark;
+  }
+}
+
+.pb_button_kit.border_y_default {
+  border-top-width: $pb-border-util-width;
+  border-bottom-width: $pb-border-util-width;
+  border-top-style: solid;
+  border-bottom-style: solid;
+  border-top-color: $border_light;
+  border-bottom-color: $border_light;
+
+  .dark &,
+  &.dark {
+    border-top-color: $border_dark;
+    border-bottom-color: $border_dark;
+  }
+}
+
+.pb_button_kit.border_none {
+  border-top-width: 0;
+  border-right-width: 0;
+  border-bottom-width: 0;
+  border-left-width: 0;
+}
+
+.pb_button_kit.border_top_none {
+  border-top-width: 0;
+}
+
+.pb_button_kit.border_bottom_none {
+  border-bottom-width: 0;
+}
+
+.pb_button_kit.border_left_none {
+  border-left-width: 0;
+}
+
+.pb_button_kit.border_right_none {
+  border-right-width: 0;
+}
+
+.pb_button_kit.border_x_none {
+  border-left-width: 0;
+  border-right-width: 0;
+}
+
+.pb_button_kit.border_y_none {
+  border-top-width: 0;
+  border-bottom-width: 0;
+}

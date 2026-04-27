@@ -48,6 +48,7 @@ module Playbook
       append_classname(css, position_props)
       append_classname(css, hover_props)
       append_classname(css, border_radius_props)
+      append_classname(css, border_props)
       append_classname(css, text_align_props)
       append_classname(css, overflow_props)
       append_classname(css, truncate_props)

@@ -29,6 +29,18 @@ type BorderRadius = {
   borderRadius?: "none" | "xs" | "sm" | "md" | "lg" | "xl" | "rounded",
 }
 
+type BorderPropValue = "none" | "default"
+
+type BorderProp = {
+  border?: BorderPropValue,
+  borderTop?: BorderPropValue,
+  borderBottom?: BorderPropValue,
+  borderLeft?: BorderPropValue,
+  borderRight?: BorderPropValue,
+  borderX?: BorderPropValue,
+  borderY?: BorderPropValue,
+}
+
 type Cursor = {
   cursor?: "auto" | "default" | "none" | "contextMenu" | "help" | "pointer" | "progress" | "wait" | "cell" |
   "crosshair" | "text" | "verticalText" | "alias" | "copy" | "move" | "noDrop" | "notAllowed" | "grab" |
@@ -206,7 +218,7 @@ type MinHeight = {
 
 // keep this as the last type definition
 export type GlobalProps = AlignContent & AlignItems & AlignSelf &
-  BorderRadius & Cursor & Dark & Display & DisplaySizes & Flex & FlexDirection &
+  BorderProp & BorderRadius & Cursor & Dark & Display & DisplaySizes & Flex & FlexDirection &
   FlexGrow & FlexShrink & FlexWrap & JustifyContent & JustifySelf &
   LineHeight & Margin & Width & MinWidth & MaxWidth & Gap & ColumnGap & RowGap & NumberSpacing & Order & Overflow & Padding &
   Position & Shadow & TextAlign & Truncate & VerticalAlign & ZIndex & { hover?: string } & Top & Right & Bottom & Left & Height & MaxHeight & MinHeight;
@@ -253,6 +265,28 @@ const filterClassName = (value: string): string => {
     return value;
   }
 };
+
+const BORDER_PROP_VALUES: BorderPropValue[] = ["none", "default"]
+
+const borderUtilityClass = (propKey: keyof BorderProp, value: BorderPropValue): string => {
+  if (!BORDER_PROP_VALUES.includes(value)) return ""
+  const sideByProp: Record<keyof BorderProp, string> = {
+    border: "",
+    borderTop: "top",
+    borderBottom: "bottom",
+    borderLeft: "left",
+    borderRight: "right",
+    borderX: "x",
+    borderY: "y",
+  }
+  const side = sideByProp[propKey]
+  if (value === "none") {
+    if (side === "") return "border_none"
+    return `border_${side}_none`
+  }
+  if (side === "") return `border_${value}`
+  return `border_${side}_${value}`
+}
 
 // Prop categories
 const PROP_CATEGORIES: {[key:string]: (props: {[key: string]: any}) => string} = {
@@ -357,6 +391,32 @@ const PROP_CATEGORIES: {[key:string]: (props: {[key: string]: any}) => string} =
       }
     });
     return css.trim();
+  },
+  borderProps: ({
+    border,
+    borderTop,
+    borderBottom,
+    borderLeft,
+    borderRight,
+    borderX,
+    borderY,
+  }: BorderProp) => {
+    let css = ""
+    const entries: [keyof BorderProp, BorderPropValue | undefined][] = [
+      ["border", border],
+      ["borderTop", borderTop],
+      ["borderBottom", borderBottom],
+      ["borderLeft", borderLeft],
+      ["borderRight", borderRight],
+      ["borderX", borderX],
+      ["borderY", borderY],
+    ]
+    entries.forEach(([key, val]) => {
+      if (val && typeof val === "string") {
+        css += `${borderUtilityClass(key, val)} `
+      }
+    })
+    return css.trim()
   },
   borderRadiusProps: ({ borderRadius }: BorderRadius) => {
     let css = ''
@@ -668,6 +728,13 @@ export const domSafeProps = (props: {[key: string]: string}): {[key: string]: st
     'paddingX',
     'paddingY',
     'padding',
+    'border',
+    'borderTop',
+    'borderBottom',
+    'borderLeft',
+    'borderRight',
+    'borderX',
+    'borderY',
     'dark',
     'enableDrag',
     'requiredIndicator',

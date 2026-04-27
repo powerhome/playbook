@@ -60,6 +60,62 @@
       "description": "Align items.",
       "example": "alignItems=\"start\" or alignItems={{ default: \"start\", md: \"end\" }}"
     },
+    "border": {
+      "type": "enum",
+      "values": [
+        "none",
+        "default"
+      ],
+      "description": "Border."
+    },
+    "borderTop": {
+      "type": "enum",
+      "values": [
+        "none",
+        "default"
+      ],
+      "description": "Top border."
+    },
+    "borderBottom": {
+      "type": "enum",
+      "values": [
+        "none",
+        "default"
+      ],
+      "description": "Bottom border."
+    },
+    "borderLeft": {
+      "type": "enum",
+      "values": [
+        "none",
+        "default"
+      ],
+      "description": "Left border."
+    },
+    "borderRight": {
+      "type": "enum",
+      "values": [
+        "none",
+        "default"
+      ],
+      "description": "Right border."
+    },
+    "borderX": {
+      "type": "enum",
+      "values": [
+        "none",
+        "default"
+      ],
+      "description": "Horizontal border (left + right)."
+    },
+    "borderY": {
+      "type": "enum",
+      "values": [
+        "none",
+        "default"
+      ],
+      "description": "Vertical border (top + bottom)."
+    },
     "borderRadius": {
       "type": "enum",
       "values": [
@@ -750,6 +806,13 @@
         "paddingX",
         "paddingY",
         "padding",
+        "border",
+        "borderTop",
+        "borderBottom",
+        "borderLeft",
+        "borderRight",
+        "borderX",
+        "borderY",
         "dark",
         "enableDrag",
         "requiredIndicator"

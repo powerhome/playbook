@@ -17,9 +17,44 @@ const globalPropsValues = [
     values: '"start" | "end" | "center"'
   },
   {
+    prop: "border",
+    type: "union",
+    values: '"none" | "default"'
+  },
+  {
+    prop: "borderBottom",
+    type: "union",
+    values: '"none" | "default"'
+  },
+  {
+    prop: "borderLeft",
+    type: "union",
+    values: '"none" | "default"'
+  },
+  {
     prop: "borderRadius",
     type: "union",
     values: '"none" | "xs" | "sm" | "md" | "lg" | "xl" | "rounded"'
+  },
+  {
+    prop: "borderRight",
+    type: "union",
+    values: '"none" | "default"'
+  },
+  {
+    prop: "borderTop",
+    type: "union",
+    values: '"none" | "default"'
+  },
+  {
+    prop: "borderX",
+    type: "union",
+    values: '"none" | "default"'
+  },
+  {
+    prop: "borderY",
+    type: "union",
+    values: '"none" | "default"'
   },
   {
     prop: "bottom",
