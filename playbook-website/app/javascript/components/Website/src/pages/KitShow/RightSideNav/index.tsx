@@ -1,5 +1,6 @@
 import { Caption, Flex, colors } from "playbook-ui";
 import { useState, useEffect, useRef } from "react";
+import { useDarkMode } from "../../../contexts/DarkModeContext";
 import "./styles.scss";
 
 interface Section {
@@ -16,7 +17,7 @@ const RightSideNav = ({ examples, sections }: RightSideNavProps) => {
   const [activeId, setActiveId] = useState<string>("");
   const navItemsRef = useRef<{ [key: string]: HTMLDivElement | null }>({});
   const isManualScrollRef = useRef(false);
-
+  const { darkMode } = useDarkMode();
   // Scroll active nav item into view if the nav is too long to fit the page
   useEffect(() => {
     if (activeId && navItemsRef.current[activeId] && !isManualScrollRef.current) {
@@ -87,6 +88,7 @@ const RightSideNav = ({ examples, sections }: RightSideNavProps) => {
                 cursor="pointer"
                 text={section.title}
                 marginBottom="xxs"
+                dark={darkMode}
               />
             </div>
             {sectionExamples.map((example: any) => (
@@ -106,6 +108,7 @@ const RightSideNav = ({ examples, sections }: RightSideNavProps) => {
                   text={example.title}
                   color={activeId === example.example_key ? "link" : "light"}
                   cursor="pointer"
+                  dark={darkMode}
                 />
               </div>
             ))}
@@ -131,6 +134,7 @@ const RightSideNav = ({ examples, sections }: RightSideNavProps) => {
             text={example.title} 
             color={activeId === example.example_key ? "link" : "light"}
             cursor="pointer" 
+            dark={darkMode}
           />
         </div>
       ));
