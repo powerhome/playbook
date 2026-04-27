@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Body, Flex, Card, Button, Caption, Title, EmptyState } from "playbook-ui";
-import ReactMarkdown from "react-markdown";
+import { MarkdownContent } from "../../../components/MarkdownContent";
 import LiveExample from "../../../components/LiveExamples/LiveExampleReact";
 import LiveExampleRails from "../../../components/LiveExamples/LiveExampleRails";
 import { SyntaxHighlightedCode } from "../../../components/SyntaxHighlightedCode";
@@ -68,7 +68,7 @@ export const DocsTab = ({
         )}
         {example.description && example.description !== "" && (
           <Body margin="md" dark={darkMode}>
-            <ReactMarkdown>{example.description}</ReactMarkdown>
+            <MarkdownContent>{example.description}</MarkdownContent>
           </Body>
         )}
         {/* Code Section */}

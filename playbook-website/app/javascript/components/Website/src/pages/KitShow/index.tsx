@@ -1,10 +1,10 @@
 import { useLoaderData, useParams } from "react-router-dom";
 import { Body, Title, Nav, NavItem, Flex, SectionSeparator } from "playbook-ui";
 import { useState, useMemo } from "react";
-import ReactMarkdown from "react-markdown";
 import { useDarkMode } from "../../contexts/DarkModeContext";
 
 import { PageContainer } from "../../components/PageContainer";
+import { MarkdownContent } from "../../components/MarkdownContent";
 import { usePlatform } from "../../contexts/PlatformContext";
 import { linkFormat } from "../../../../../utilities/website_sidebar_helper";
 import { DocsTab } from "./Tabs/DocsTab";
@@ -63,7 +63,7 @@ const KitShow = () => {
           <Flex paddingX="xl">
             <Flex flex={1} minWidth={0}>
               <Body marginTop="sm" marginBottom="md" dark={darkMode}>
-                <ReactMarkdown>{kit_description}</ReactMarkdown>
+                <MarkdownContent>{kit_description}</MarkdownContent>
               </Body>
             </Flex>
             <Flex
