@@ -127,7 +127,7 @@ function WebsiteContent() {
               beta={true}
             />
           </Layout.Side>
-          {kits.length > 0 && <LayoutRight dark={darkMode} />}
+          {kits.length > 0 && <LayoutRight />}
         </Layout>
       </div>
     </PlatformContext.Provider>

@@ -1,9 +1,9 @@
 import { Outlet, useLocation } from "react-router-dom"
 import { useEffect } from "react"
 import { useDarkMode } from "../contexts/DarkModeContext"
-import { Background, Button, Flex } from "playbook-ui"
+import { Button, Flex } from "playbook-ui"
 
-export default function LayoutRight({ dark }: { dark: string }) {
+export default function LayoutRight() {
   const location = useLocation()
   const { darkMode } = useDarkMode();
   // Scroll to top when route changes
@@ -18,11 +18,7 @@ export default function LayoutRight({ dark }: { dark: string }) {
   }, [location.pathname])
   
   return (
-    <Background
-        backgroundColor={dark ? "dark" : "white"}
-        className="pb--page--content--main"
-        dark={darkMode}
-    >
+    <div className={`pb--page--content--main ${darkMode ? "dark" : ""}`.trim()}>
       <Flex
           display={{ xs: "none", sm: "none", md: "none", default: "none", lg: "flex" }}
           spacing='between'
@@ -43,6 +39,6 @@ export default function LayoutRight({ dark }: { dark: string }) {
         />
       </Flex>
       <Outlet />
-    </Background>
+    </div>
   )
 }
