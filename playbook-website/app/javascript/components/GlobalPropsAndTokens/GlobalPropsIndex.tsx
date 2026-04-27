@@ -9,6 +9,7 @@ import {
   Link,
   IconCircle,
 } from "playbook-ui";
+import { Link as RouterLink } from "react-router-dom";
 import HeaderImage from "../../images/getting-started.svg";
 import { GlobalPropsCards } from "./Data/GlobalPropsCards";
 
@@ -16,7 +17,15 @@ type GlobalPropsProps = {
   linkPrefix?: string,
 }
 
+const betaClientNavLinkStyle: React.CSSProperties = {
+  textDecoration: "none",
+  color: "inherit",
+  display: "block",
+};
+
 const GlobalProps = ({ linkPrefix = "" }: GlobalPropsProps) => {
+  const useClientNav = linkPrefix === "/beta";
+
   return (
     <Background
       flexDirection="column"
@@ -47,32 +56,41 @@ const GlobalProps = ({ linkPrefix = "" }: GlobalPropsProps) => {
         <Layout layout="collection" marginY="xl" paddingBottom="xl">
           <Layout.Body>
             {GlobalPropsCards.sort((a, b) => a.title.localeCompare(b.title)).map(({ title, description, link, icon }) => {
-              return (
-                <Link key={title} href={`${linkPrefix}${link}`}>
-                  <Card padding="none" hover={{ shadow: "deep" }} flex={1} minHeight="300px">
-                    <Background backgroundColor="light">
-                      <Flex justify="center" padding="xl">
-                        <IconCircle icon={icon} variant="royal" />
-                      </Flex>
-                    </Background>
-
-                    <Flex justify="between" align="center" padding="sm">
-                      <Title size={4} color="link" text={title} />
-                      <Icon
-                          aria={{ hidden: true }} 
-                          color="link" 
-                          icon="arrow-right-long" 
-                      />
+              const href = `${linkPrefix}${link}`;
+              const card = (
+                <Card padding="none" hover={{ shadow: "deep" }} flex={1} minHeight="300px">
+                  <Background backgroundColor="light">
+                    <Flex justify="center" padding="xl">
+                      <IconCircle icon={icon} variant="royal" />
                     </Flex>
+                  </Background>
 
-                    <Body
-                      text={description}
-                      truncate="4"
-                      color="light"
-                      marginX="sm"
-                      marginBottom="sm"
+                  <Flex justify="between" align="center" padding="sm">
+                    <Title size={4} color="link" text={title} />
+                    <Icon
+                        aria={{ hidden: true }} 
+                        color="link" 
+                        icon="arrow-right-long" 
                     />
-                  </Card>
+                  </Flex>
+
+                  <Body
+                    text={description}
+                    truncate="4"
+                    color="light"
+                    marginX="sm"
+                    marginBottom="sm"
+                  />
+                </Card>
+              );
+
+              return useClientNav ? (
+                <RouterLink key={title} to={href} style={betaClientNavLinkStyle}>
+                  {card}
+                </RouterLink>
+              ) : (
+                <Link key={title} href={href}>
+                  {card}
                 </Link>
               );
             })}
