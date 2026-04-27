@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import { Card } from "playbook-ui";
+import { useDarkMode } from "../../contexts/DarkModeContext";
 
 type LiveExampleRailsProps = {
   html: string;
@@ -42,7 +43,7 @@ function transformScriptForLiveExecution(scriptContent: string): string {
 
 const LiveExampleRails: React.FC<LiveExampleRailsProps> = ({ html }) => {
   const containerRef = useRef<HTMLDivElement>(null);
-
+  const { darkMode } = useDarkMode();
   useEffect(() => {
     if (!containerRef.current || !html) return;
 
@@ -91,7 +92,7 @@ const LiveExampleRails: React.FC<LiveExampleRailsProps> = ({ html }) => {
   if (!html) return null;
 
   return (
-    <Card borderNone padding="md">
+    <Card borderNone padding="md" dark={darkMode} htmlOptions={{ style: { border: 'none' } }}>
       <div
         ref={containerRef}
         dangerouslySetInnerHTML={{ __html: html }}
