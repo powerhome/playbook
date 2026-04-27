@@ -141,7 +141,7 @@ const KitShow = () => {
         )}
 
         {/* Props Tab Content */}
-        {displayTab === "props" && <PropsTab availableProps={available_props} />}
+        {displayTab === "props" && <PropsTab availableProps={available_props} platform={platform} />}
 
         {/* Building Blocks Tab Content, commented out until building blocks are implemented */}
         {/* {activeTab === "building-blocks" && <BuildingBlocksTab />} */}

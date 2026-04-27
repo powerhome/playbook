@@ -7,7 +7,7 @@ import globalPropsValues from "../../../../../AvailableProps/globalPropsValues";
 import { useDarkMode } from "../../../contexts/DarkModeContext";
 interface PropsTabProps {
   availableProps?: string;
-  platform?: "react" | "rails";
+  platform?: string;
 }
 
 export const PropsTab = ({ availableProps, platform = "react" }: PropsTabProps) => {
@@ -23,6 +23,14 @@ export const PropsTab = ({ availableProps, platform = "react" }: PropsTabProps) 
 
   // Parse the schema JSON
   const schema = JSON.parse(availableProps);
+
+  const formatPropName = (propName: string) =>
+    platform === "rails"
+      ? propName
+          .replace(/([a-z0-9])([A-Z])/g, "$1_$2")
+          .replace(/-/g, "_")
+          .toLowerCase()
+      : propName;
   
   // Extract props from our kit.schema.json format
   // Schema structure: { $schema, name, description, platforms, props: {...}, globalProps, usage }
@@ -40,7 +48,7 @@ export const PropsTab = ({ availableProps, platform = "react" }: PropsTabProps) 
     const isForPlatform = platforms.length === 0 || platforms.includes(platform);
     
     if (!isGlobalProp && isForPlatform) {
-      kitProps[propName] = prop;
+      kitProps[formatPropName(propName)] = prop;
     }
   }
 
