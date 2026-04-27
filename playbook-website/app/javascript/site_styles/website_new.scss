@@ -14,17 +14,17 @@
   &.pb--page--content {
     min-height: auto;
   }
-  
-  // Adjust heights for sticky header (header takes ~89px)
+
+  // Use dynamic viewport units so the panes track the real visible viewport.
   .pb--page--sideNav {
-    height: calc(100vh - 89px);
+    height: calc(100dvh - var(--beta-header-height, 89px));
     &.dark {
       border-color: #3b3752;
     }
   }
-  
+
   .pb--page--content--main {
-    height: calc(100vh - 89px);
+    height: calc(100dvh - var(--beta-header-height, 89px));
   }
 }
 

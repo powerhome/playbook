@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState, type CSSProperties } from "react";
 import { Layout } from "playbook-ui";
 import Sidebar from "./src/layouts/Sidebar";
 import LayoutRight from "./src/layouts/LayoutRight";
@@ -29,7 +29,37 @@ function WebsiteContent() {
   const { darkMode } = useDarkMode();
 
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
+  const [headerHeight, setHeaderHeight] = useState(89);
+  const headerRef = useRef<HTMLDivElement | null>(null);
   const normalizedPath = location.pathname.replace(/\/+$/, "") || "/";
+
+  useEffect(() => {
+    const headerElement = headerRef.current;
+
+    if (!headerElement) return;
+
+    const measureHeader = () => {
+      const nextHeight = Math.round(headerElement.getBoundingClientRect().height);
+      setHeaderHeight(nextHeight || 89);
+    };
+
+    measureHeader();
+
+    const observer =
+      typeof ResizeObserver !== "undefined" ? new ResizeObserver(measureHeader) : null;
+
+    observer?.observe(headerElement);
+    window.addEventListener("resize", measureHeader);
+
+    return () => {
+      observer?.disconnect();
+      window.removeEventListener("resize", measureHeader);
+    };
+  }, []);
+
+  const websiteStyle = {
+    "--beta-header-height": `${headerHeight}px`,
+  } as CSSProperties;
 
   const platform = useMemo(() => {
     const pathPlatform = normalizedPath.match(/\/(react|rails|swift)$/)?.[1];
@@ -62,18 +92,20 @@ function WebsiteContent() {
 
   return (
     <PlatformContext.Provider value={{ platform, setPlatform: handlePlatformChange }}>
-      <div className={darkMode ? "dark" : ""}>
+      <div className={darkMode ? "dark" : ""} style={websiteStyle}>
         <MobileNav 
           isOpen={mobileNavOpen}
           onToggle={() => setMobileNavOpen(!mobileNavOpen)}
         />
-        <Header 
-          PBversion={PBversion || "Latest"}
-          search_list={search_list || []}
-          global_props_and_tokens={global_props_and_tokens || []}
-          platform={platform}
-          setPlatform={handlePlatformChange}
-        />
+        <div ref={headerRef}>
+          <Header 
+            PBversion={PBversion || "Latest"}
+            search_list={search_list || []}
+            global_props_and_tokens={global_props_and_tokens || []}
+            platform={platform}
+            setPlatform={handlePlatformChange}
+          />
+        </div>
         <Layout className="pb--page--content pb--website--new" dark={darkMode}>
           <MobileHamburger 
             isOpen={mobileNavOpen}
