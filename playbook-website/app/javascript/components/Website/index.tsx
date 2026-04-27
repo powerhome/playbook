@@ -79,7 +79,7 @@ function WebsiteContent() {
             isOpen={mobileNavOpen}
             onToggle={() => setMobileNavOpen(!mobileNavOpen)}
           />
-          <Layout.Side className="pb--page--sideNav">
+          <Layout.Side className={`pb--page--sideNav ${darkMode ? 'dark' : ''}`}>
             <Sidebar
               building_blocks={building_blocks || []}
               dark={darkMode}

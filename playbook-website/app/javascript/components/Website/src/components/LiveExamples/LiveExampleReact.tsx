@@ -138,6 +138,10 @@ const LiveExample: React.FC<LiveExampleProps> = ({
   const [libsKey, setLibsKey] = useState("");
   const [libsReady, setLibsReady] = useState(!needsThirdParty);
   const [isRendering, setIsRendering] = useState(true);
+  const mergedExampleProps = useMemo(
+    () => ({ ...exampleProps, dark: darkMode, darkMode }),
+    [exampleProps, darkMode],
+  );
 
   useEffect(() => {
     let cancelled = false;
@@ -191,15 +195,19 @@ const LiveExample: React.FC<LiveExampleProps> = ({
       FormattedDate,
       // Third-party libs injected here (Highcharts*, maplibregl, etc.)
       ...thirdParty,
+      // Expose dark mode in both direct scope vars and props for exported examples
+      dark: darkMode,
+      darkMode,
+      exampleProps: mergedExampleProps,
       // Spread exampleProps so MOCK_DATA etc. are top-level variables
-      ...exampleProps,
+      ...mergedExampleProps,
     };
     // Add Date alias if present (e.g., "Date as DateKit" -> DateKit = FormattedDate)
     if (dateAlias) {
       baseScope[dateAlias] = FormattedDate;
     }
     return baseScope;
-  }, [thirdParty, exampleProps, PBrest, FormattedDate, dateAlias]);
+  }, [thirdParty, mergedExampleProps, PBrest, FormattedDate, dateAlias, darkMode]);
 
   // Handle clicks to prevent href="#" navigation (only preventDefault, not stopPropagation)
   const handleContainerClick = useCallback((e: React.MouseEvent) => {

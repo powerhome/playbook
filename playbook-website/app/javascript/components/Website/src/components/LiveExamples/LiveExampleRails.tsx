@@ -41,6 +41,21 @@ function transformScriptForLiveExecution(scriptContent: string): string {
   return scriptContent;
 }
 
+function applyDarkModeToRenderedRoots(container: HTMLDivElement, darkMode: boolean) {
+  const renderedRoots = Array.from(container.children) as HTMLElement[];
+
+  renderedRoots.forEach((element) => {
+    element.dataset.darkMode = String(darkMode);
+    element.dataset.dark = String(darkMode);
+
+    if (darkMode) {
+      element.classList.add("dark");
+    } else {
+      element.classList.remove("dark");
+    }
+  });
+}
+
 const LiveExampleRails: React.FC<LiveExampleRailsProps> = ({ html }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const { darkMode } = useDarkMode();
@@ -48,6 +63,7 @@ const LiveExampleRails: React.FC<LiveExampleRailsProps> = ({ html }) => {
     if (!containerRef.current || !html) return;
 
     const container = containerRef.current;
+    applyDarkModeToRenderedRoots(container, darkMode);
 
     // Prevent anchor links with href="#" from causing scroll/navigation issues
     const preventHashNavigation = (e: Event) => {
@@ -87,7 +103,7 @@ const LiveExampleRails: React.FC<LiveExampleRailsProps> = ({ html }) => {
       clearTimeout(turboTimeout);
       container.removeEventListener('click', preventHashNavigation);
     };
-  }, [html]);
+  }, [html, darkMode]);
 
   if (!html) return null;
 

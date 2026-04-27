@@ -42,7 +42,11 @@ const combineKitsandVisualGuidelines = (
 
 const KitSearch = ({ classname, id, kits, global_props_and_tokens, marginBottom, beta, onBetaNavigate, betaSearchResetKey }: KitSearchProps) => {
   const kitsAndGuidelines = combineKitsandVisualGuidelines(kits, global_props_and_tokens)
-  const { darkMode } = useDarkMode();
+  let darkMode = false
+  if (beta) {
+    const { darkMode: betaDarkMode } = useDarkMode()
+    darkMode = betaDarkMode
+  }
   const [filteredKits, setFilteredKits] = useState(kitsAndGuidelines)
 
   useEffect(() => {
