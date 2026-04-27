@@ -19,9 +19,10 @@ export type IconSizes = "lg"
 | "10x"
 | ""
 
-type IconProps = {
+type IconOwnProps = {
   aria?: { [key: string]: string | boolean }
-  border?: string,
+  /** `true` = Font Awesome `fa-border`. Strings = global border utility classes. */
+  border?: boolean | 'none' | 'default',
   className?: string,
   color?: string,
   customIcon?: {[key: string] :SVGElement},
@@ -40,7 +41,9 @@ type IconProps = {
   fontStyle?: 'far' | 'fas' | 'fab' | 'fak',
   spin?: boolean,
   tabIndex?: number,
-} & GlobalProps
+}
+
+type IconProps = IconOwnProps & Omit<GlobalProps, 'border'>
 
 const flipMap = {
   fa: {
@@ -121,7 +124,7 @@ declare global {
 const Icon = (props: IconProps) => {
   const {
     aria = {},
-    border = false,
+    border: borderProp = false,
     className,
     color,
     customIcon,
@@ -142,10 +145,17 @@ const Icon = (props: IconProps) => {
     tabIndex,
   } = props
 
+  const faBorder = borderProp === true
+  const globalPropsForCss = (
+    typeof borderProp === 'boolean'
+      ? { ...props, border: undefined }
+      : props
+  ) as GlobalProps
+
   let iconElement: ReactSVGElement | null = typeof(icon) === "object" ? icon : null
 
-  const faClasses = {
-    'fa-border': border,
+  const faClasses: Record<string, unknown> = {
+    'fa-border': faBorder,
     'fa-fw': fixedWidth,
     'fa-inverse': inverse,
     'fa-li': listItem,
@@ -163,7 +173,7 @@ const Icon = (props: IconProps) => {
     if (PowerIcon) {
       iconElement = <PowerIcon /> as ReactSVGElement
     } else {
-      faClasses[`fa-${icon}`] = icon as string
+      faClasses[`fa-${icon as string}`] = true
     }
   }
 
@@ -174,7 +184,7 @@ const Icon = (props: IconProps) => {
     (iconElement || customIcon) ? 'pb_custom_icon' : fontStyle,
     iconElement ? 'svg-inline--fa' : '',
     color ? `color_${color}` : '',
-    globalProps(props),
+    globalProps(globalPropsForCss),
     className
   )
 
@@ -184,7 +194,7 @@ const Icon = (props: IconProps) => {
     rotation ? rotateMap[isFA ? 'fa' : 'svg'][rotation] : null,
     spin ? spinMap[isFA ? 'fa' : 'svg'] : null,
     size ? sizeMap[isFA ? 'fa' : 'svg'][size] : null,
-    border ? isFA ? 'fa-border' : 'svg_border' : null,
+    faBorder ? isFA ? 'fa-border' : 'svg_border' : null,
     fixedWidth ? isFA ? 'fa-fw' : 'svg_fw' : null,
     inverse ? isFA ? 'fa-inverse' : 'svg_inverse' : null,
     listItem ? isFA ? 'fa-li' : 'svg_li' : null,
@@ -193,20 +203,20 @@ const Icon = (props: IconProps) => {
   classes += ` ${transformClasses}`
 
   if (isFA) {
-    const faClassList = {
-      'fa-border': border,
+    const faClassList: Record<string, unknown> = {
+      'fa-border': faBorder,
       'fa-inverse': inverse,
       'fa-li': listItem,
       [`fa-${size}`]: size,
       [`fa-pull-${pull}`]: pull,
     }
-    faClassList[`fa-${icon}`] = icon as string
+    faClassList[`fa-${icon as string}`] = true
     classes += ` ${classnames(faClassList)}`
   }
 
   const classesEmoji = classnames(
     'pb_icon_kit_emoji',
-    globalProps(props),
+    globalProps(globalPropsForCss),
     className
   )
 

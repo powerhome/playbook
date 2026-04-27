@@ -10,7 +10,8 @@ module Playbook
       ICON_PATH_DEV_CACHE_TTL_SECONDS = 2
       ICON_PATH_PROD_CACHE_TTL_SECONDS = 60
 
-      prop :border, type: Playbook::Props::Boolean,
+      prop :border, type: Playbook::Props::Enum,
+                    values: [false, true, "none", "default"],
                     default: false
       prop :fixed_width, type: Playbook::Props::Boolean,
                          default: true
@@ -319,8 +320,10 @@ module Playbook
       end
 
       def border_class
+        return nil if border.is_a?(String)
+
         prefix = is_svg? ? "svg_border" : "fa-border"
-        border ? prefix : nil
+        border == true ? prefix : nil
       end
 
       def fixed_width_class
