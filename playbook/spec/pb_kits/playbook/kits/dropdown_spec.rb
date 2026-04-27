@@ -257,6 +257,24 @@ RSpec.describe Playbook::PbDropdown::Dropdown do
       expect(this_month_option[:formatted_end_date]).to eq(Date.today.strftime("%m/%d/%Y"))
     end
 
+    it "last month quickpick spans the full previous month when the current month has fewer days" do
+      allow(Date).to receive(:today).and_return(Date.new(2026, 4, 15))
+
+      dropdown = subject.new(variant: "quickpick")
+      last_month = dropdown.send(:quickpick_options).find { |opt| opt[:label] == "Last Month" }
+      expect(last_month[:formatted_start_date]).to eq("03/01/2026")
+      expect(last_month[:formatted_end_date]).to eq("03/31/2026")
+    end
+
+    it "last quarter quickpick aligns to the previous calendar quarter boundaries" do
+      allow(Date).to receive(:today).and_return(Date.new(2026, 4, 10))
+
+      dropdown = subject.new(variant: "quickpick")
+      last_quarter = dropdown.send(:quickpick_options).find { |opt| opt[:label] == "Last Quarter" }
+      expect(last_quarter[:formatted_start_date]).to eq("01/01/2026")
+      expect(last_quarter[:formatted_end_date]).to eq("03/31/2026")
+    end
+
     it "supports blank_selection with quickpick to clear date inputs" do
       dropdown = subject.new(
         variant: "quickpick",
