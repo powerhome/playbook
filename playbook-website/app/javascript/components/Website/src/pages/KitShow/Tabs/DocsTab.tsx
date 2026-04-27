@@ -7,6 +7,7 @@ import { SyntaxHighlightedCode } from "../../../components/SyntaxHighlightedCode
 import { usePlatform } from "../../../contexts/PlatformContext";
 import RightSideNav from "../RightSideNav";
 import { useDarkMode } from "../../../contexts/DarkModeContext";
+import { formatReactSnippet } from "./formatReactSnippet";
 interface Section {
   title: string;
   examples: string[];
@@ -33,6 +34,9 @@ export const DocsTab = ({
   );
   const [copyState, setCopyState] = useState<{ [key: string]: boolean }>({});
 
+  const getDisplayCode = (source: string) =>
+    platform === "react" ? formatReactSnippet(source ?? "", darkMode) : source ?? "";
+
   const toggleCode = (exampleKey: string) => {
     setVisibleCode((prev) => ({
       ...prev,
@@ -53,12 +57,15 @@ export const DocsTab = ({
   };
 
   // Helper function to render an example card
-  const renderExampleCard = (example: any) => (
-    <div
-      id={example.example_key}
-      key={example.example_key}
-      style={{ width: "100%" }}
-    >
+  const renderExampleCard = (example: any) => {
+    const displayCode = getDisplayCode(example.source);
+
+    return (
+      <div
+        id={example.example_key}
+        key={example.example_key}
+        style={{ width: "100%" }}
+      >
       <Card marginBottom="lg" padding="none" width="100%" dark={darkMode}>
         <Caption text={example.title} color="lighter" margin="md" dark={darkMode} />
         {platform === "rails" ? (
@@ -79,7 +86,7 @@ export const DocsTab = ({
               variant="link"
               size="sm"
               icon="copy"
-              onClick={() => copyCode(example.source, example.example_key)}
+              onClick={() => copyCode(displayCode, example.example_key)}
               marginRight="sm"
               dark={darkMode}
             />
@@ -98,7 +105,7 @@ export const DocsTab = ({
           {visibleCode[example.example_key] && (
             <Card borderNone width="100%" dark={darkMode}>
               <SyntaxHighlightedCode
-                code={example.source ?? ""}
+                code={displayCode}
                 language={codeLanguage}
                 rougeHtml={
                   platform === "rails" ? example.highlighted_source : undefined
@@ -108,8 +115,9 @@ export const DocsTab = ({
           )}
         </>
       </Card>
-    </div>
-  );
+      </div>
+    );
+  };
   // Organize examples by sections or show all if no sections
   const renderExamples = () => {
     if (sections && sections.length > 0) {
