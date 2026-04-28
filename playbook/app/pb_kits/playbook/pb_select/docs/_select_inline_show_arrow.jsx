@@ -23,7 +23,7 @@ const SelectInlineShowArrow = (props) => {
       <Select
           inline
           label="Favorite Food"
-          name="food"
+          name="food-inline-show-arrow"
           options={options}
           showArrow
           {...props}
