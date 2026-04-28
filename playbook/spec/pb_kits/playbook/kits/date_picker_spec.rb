@@ -42,6 +42,19 @@ RSpec.describe Playbook::PbDatePicker::DatePicker do
     end
   end
 
+  describe "#date_picker_config" do
+    it "includes selectionType and mode for range quickpick so React can compute quick pick ranges" do
+      picker = subject.new(
+        picker_id: "spec-quickpick",
+        mode: "range",
+        selection_type: "quickpick"
+      )
+      config = JSON.parse(picker.date_picker_config)
+      expect(config["selectionType"]).to eq("quickpick")
+      expect(config["mode"]).to eq("range")
+    end
+  end
+
   it "raises an error when not given a picker_id" do
     expect { subject.new {} }.to raise_error(Playbook::Props::Error)
   end

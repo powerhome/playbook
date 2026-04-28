@@ -68,6 +68,7 @@ class PagesController < ApplicationController
 
     # Set @users for pagination examples (params[:page] is also the guide slug on beta/guides/* routes)
     @users = Array.new(9) { Faker::Name.name }.paginate(page: will_paginate_page, per_page: 2)
+    @extra_users = Array.new(2000) { Faker::Name.name }.paginate(page: will_paginate_page, per_page: 2)
 
     @css = view_context.vite_asset_path("site_styles/main.scss")
 
@@ -329,6 +330,7 @@ class PagesController < ApplicationController
     params[:type] ||= "react"
     @type = params[:type]
     @users = Array.new(9) { Faker::Name.name }.paginate(page: will_paginate_page, per_page: 2)
+    @extra_users = Array.new(2000) { Faker::Name.name }.paginate(page: will_paginate_page, per_page: 2)
     @table_data = advanced_table_mock_data
     @table_data_with_id = advanced_table_mock_data_with_id
     @table_data_no_subrows = advanced_table_mock_data_no_subrows
@@ -355,6 +357,7 @@ class PagesController < ApplicationController
   def kit_show_rails
     @type = "rails"
     @users = Array.new(9) { Faker::Name.name }.paginate(page: will_paginate_page, per_page: 2)
+    @extra_users = Array.new(2000) { Faker::Name.name }.paginate(page: will_paginate_page, per_page: 2)
     @table_data = advanced_table_mock_data if @kit == "advanced_table" || @kit_parent == "advanced_table"
     @table_data_with_id = advanced_table_mock_data_with_id if @kit == "advanced_table" || @kit_parent == "advanced_table"
     @table_data_no_subrows = advanced_table_mock_data_no_subrows if @kit == "advanced_table" || @kit_parent == "advanced_table"

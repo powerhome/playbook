@@ -28,7 +28,7 @@ const SelectError = (props) => {
       <Select
           error={error}
           label="Favorite Food"
-          name="food"
+          name="food-error"
           options={options}
           value="2"
           {...props}
