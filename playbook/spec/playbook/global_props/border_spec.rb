@@ -14,7 +14,17 @@ RSpec.describe Playbook::Flex do
 
   test_global_prop(
     :border,
-    %w[none default],
+    %w[
+      none
+      default
+      error
+      default_dashed
+      error_dashed
+      default_thick
+      error_thick
+      default_dashed_thick
+      error_dashed_thick
+    ],
     ->(v) { v == "none" ? "border_none" : "border_#{v}" },
     test_subjects: [
       Playbook::PbBody::Body,

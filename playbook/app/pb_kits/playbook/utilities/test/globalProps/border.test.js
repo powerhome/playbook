@@ -11,9 +11,21 @@ import Badge from '../../../pb_badge/_badge'
 
 const borderClass = (v) => (v === 'none' ? 'border_none' : `border_${v}`)
 
+const borderValidValues = [
+  'none',
+  'default',
+  'error',
+  'default_dashed',
+  'error_dashed',
+  'default_thick',
+  'error_thick',
+  'default_dashed_thick',
+  'error_dashed_thick',
+]
+
 testGlobalProp(
   'border',
-  ['none', 'default'],
+  borderValidValues,
   borderClass,
   null,
   [Body, Button, Card, Title, Flex, Link, Badge]

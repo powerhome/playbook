@@ -64,7 +64,14 @@
       "type": "enum",
       "values": [
         "none",
-        "default"
+        "default",
+        "error",
+        "default_dashed",
+        "error_dashed",
+        "default_thick",
+        "error_thick",
+        "default_dashed_thick",
+        "error_dashed_thick"
       ],
       "description": "Border."
     },
@@ -72,7 +79,14 @@
       "type": "enum",
       "values": [
         "none",
-        "default"
+        "default",
+        "error",
+        "default_dashed",
+        "error_dashed",
+        "default_thick",
+        "error_thick",
+        "default_dashed_thick",
+        "error_dashed_thick"
       ],
       "description": "Top border."
     },
@@ -80,7 +94,14 @@
       "type": "enum",
       "values": [
         "none",
-        "default"
+        "default",
+        "error",
+        "default_dashed",
+        "error_dashed",
+        "default_thick",
+        "error_thick",
+        "default_dashed_thick",
+        "error_dashed_thick"
       ],
       "description": "Bottom border."
     },
@@ -88,7 +109,14 @@
       "type": "enum",
       "values": [
         "none",
-        "default"
+        "default",
+        "error",
+        "default_dashed",
+        "error_dashed",
+        "default_thick",
+        "error_thick",
+        "default_dashed_thick",
+        "error_dashed_thick"
       ],
       "description": "Left border."
     },
@@ -96,7 +124,14 @@
       "type": "enum",
       "values": [
         "none",
-        "default"
+        "default",
+        "error",
+        "default_dashed",
+        "error_dashed",
+        "default_thick",
+        "error_thick",
+        "default_dashed_thick",
+        "error_dashed_thick"
       ],
       "description": "Right border."
     },
@@ -104,7 +139,14 @@
       "type": "enum",
       "values": [
         "none",
-        "default"
+        "default",
+        "error",
+        "default_dashed",
+        "error_dashed",
+        "default_thick",
+        "error_thick",
+        "default_dashed_thick",
+        "error_dashed_thick"
       ],
       "description": "Horizontal border (left + right)."
     },
@@ -112,7 +154,14 @@
       "type": "enum",
       "values": [
         "none",
-        "default"
+        "default",
+        "error",
+        "default_dashed",
+        "error_dashed",
+        "default_thick",
+        "error_thick",
+        "default_dashed_thick",
+        "error_dashed_thick"
       ],
       "description": "Vertical border (top + bottom)."
     },

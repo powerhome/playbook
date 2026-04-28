@@ -19,17 +19,17 @@ const globalPropsValues = [
   {
     prop: "border",
     type: "union",
-    values: '"none" | "default"'
+    values: '"none" | "default" | "error" | "default_dashed" | "error_dashed" | "default_thick" | "error_thick" | "default_dashed_thick" | "error_dashed_thick"'
   },
   {
     prop: "borderBottom",
     type: "union",
-    values: '"none" | "default"'
+    values: '"none" | "default" | "error" | "default_dashed" | "error_dashed" | "default_thick" | "error_thick" | "default_dashed_thick" | "error_dashed_thick"'
   },
   {
     prop: "borderLeft",
     type: "union",
-    values: '"none" | "default"'
+    values: '"none" | "default" | "error" | "default_dashed" | "error_dashed" | "default_thick" | "error_thick" | "default_dashed_thick" | "error_dashed_thick"'
   },
   {
     prop: "borderRadius",
@@ -39,22 +39,22 @@ const globalPropsValues = [
   {
     prop: "borderRight",
     type: "union",
-    values: '"none" | "default"'
+    values: '"none" | "default" | "error" | "default_dashed" | "error_dashed" | "default_thick" | "error_thick" | "default_dashed_thick" | "error_dashed_thick"'
   },
   {
     prop: "borderTop",
     type: "union",
-    values: '"none" | "default"'
+    values: '"none" | "default" | "error" | "default_dashed" | "error_dashed" | "default_thick" | "error_thick" | "default_dashed_thick" | "error_dashed_thick"'
   },
   {
     prop: "borderX",
     type: "union",
-    values: '"none" | "default"'
+    values: '"none" | "default" | "error" | "default_dashed" | "error_dashed" | "default_thick" | "error_thick" | "default_dashed_thick" | "error_dashed_thick"'
   },
   {
     prop: "borderY",
     type: "union",
-    values: '"none" | "default"'
+    values: '"none" | "default" | "error" | "default_dashed" | "error_dashed" | "default_thick" | "error_thick" | "default_dashed_thick" | "error_dashed_thick"'
   },
   {
     prop: "bottom",

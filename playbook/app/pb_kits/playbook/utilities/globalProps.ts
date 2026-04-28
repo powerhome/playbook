@@ -29,7 +29,16 @@ type BorderRadius = {
   borderRadius?: "none" | "xs" | "sm" | "md" | "lg" | "xl" | "rounded",
 }
 
-type BorderPropValue = "none" | "default"
+export type BorderPropValue =
+  | "none"
+  | "default"
+  | "error"
+  | "default_dashed"
+  | "error_dashed"
+  | "default_thick"
+  | "error_thick"
+  | "default_dashed_thick"
+  | "error_dashed_thick"
 
 type BorderProp = {
   border?: BorderPropValue,
@@ -266,7 +275,17 @@ const filterClassName = (value: string): string => {
   }
 };
 
-const BORDER_PROP_VALUES: BorderPropValue[] = ["none", "default"]
+const BORDER_PROP_VALUES: BorderPropValue[] = [
+  "none",
+  "default",
+  "error",
+  "default_dashed",
+  "error_dashed",
+  "default_thick",
+  "error_thick",
+  "default_dashed_thick",
+  "error_dashed_thick",
+]
 
 const borderUtilityClass = (propKey: keyof BorderProp, value: BorderPropValue): string => {
   if (!BORDER_PROP_VALUES.includes(value)) return ""

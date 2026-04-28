@@ -12,7 +12,17 @@ module Playbook
       base.prop :border_y
     end
 
-    BORDER_VALUES = %w[none default].freeze
+    BORDER_VALUES = %w[
+      none
+      default
+      error
+      default_dashed
+      error_dashed
+      default_thick
+      error_thick
+      default_dashed_thick
+      error_dashed_thick
+    ].freeze
 
     BORDER_PROP_MAP = {
       border: "",
