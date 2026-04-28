@@ -341,7 +341,8 @@ class PagesController < ApplicationController
   def kit_category_show_rails
     params[:type] ||= "rails"
     @type = params[:type]
-    @users = Array.new(9) { Faker::Name.name }.paginate(page: will_paginate_page, per_page: 2)
+    @users = Array.new(9) { Faker::Name.name }.paginate(page: params[:page], per_page: 2)
+    @extra_users = Array.new(2000) { Faker::Name.name }.paginate(page: params[:page], per_page: 2)
     @table_data = advanced_table_mock_data
     @table_data_with_id = advanced_table_mock_data_with_id
     @table_data_no_subrows = advanced_table_mock_data_no_subrows
@@ -379,7 +380,8 @@ class PagesController < ApplicationController
   end
 
   def kit_collection_show_rails
-    @users = Array.new(9) { Faker::Name.name }.paginate(page: will_paginate_page, per_page: 2)
+    @users = Array.new(9) { Faker::Name.name }.paginate(page: params[:page], per_page: 2)
+    @extra_users = Array.new(2000) { Faker::Name.name }.paginate(page: params[:page], per_page: 2)
     handle_kit_collection("rails")
   end
 
@@ -388,7 +390,8 @@ class PagesController < ApplicationController
   end
 
   def kit_variants_collection_show_rails
-    @users = Array.new(9) { Faker::Name.name }.paginate(page: will_paginate_page, per_page: 2)
+    @users = Array.new(9) { Faker::Name.name }.paginate(page: params[:page], per_page: 2)
+    @extra_users = Array.new(2000) { Faker::Name.name }.paginate(page: params[:page], per_page: 2)
     handle_kit_variants_collection("rails")
   end
 
