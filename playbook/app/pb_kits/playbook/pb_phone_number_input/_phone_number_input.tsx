@@ -102,6 +102,11 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.Ref<unknown>
     showPlaceholder = false,
   } = props
 
+  const showPlaceholderRef = useRef(showPlaceholder)
+  showPlaceholderRef.current = showPlaceholder
+
+  const placeholderTemplateRef = useRef<string | null>(null)
+
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
   const htmlProps = buildHtmlProps(htmlOptions)
@@ -478,7 +483,7 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.Ref<unknown>
       countryOrder: preferredCountries,
       allowDropdown: !disabled,
       autoInsertDialCode: false,
-      autoPlaceholder: showPlaceholder ? "polite" : "off",
+      autoPlaceholder: showPlaceholderRef.current ? "polite" : "off",
       initialCountry: initialCountry || fallbackCountry,
       onlyCountries,
       excludeCountries,
@@ -500,6 +505,17 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.Ref<unknown>
         setSelectedData(phoneNumberData)
         onChange(phoneNumberData)
         validateErrors()
+
+        if (showPlaceholderRef.current) {
+          const el = inputRef.current
+          if (el && document.activeElement === el) {
+            const newPlaceholder = el.getAttribute("placeholder") || el.placeholder || ""
+            placeholderTemplateRef.current = newPlaceholder
+            if (!el.value) {
+              el.setAttribute("placeholder", "")
+            }
+          }
+        }
       })
 
       inputRef.current.addEventListener("open:countrydropdown", () => setDropDownIsOpen(true))
@@ -541,7 +557,23 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.Ref<unknown>
     id,
     label,
     name,
+    onFocus: () => {
+      if (!showPlaceholder) return
+      const el = inputRef.current
+      if (!el || el.value) return
+      placeholderTemplateRef.current = el.getAttribute("placeholder") || el.placeholder || ""
+      el.setAttribute("placeholder", "")
+    },
     onBlur: () => {
+      if (showPlaceholder) {
+        const el = inputRef.current
+        if (el && !el.value) {
+          const ph = placeholderTemplateRef.current
+          if (ph != null) {
+            el.setAttribute("placeholder", ph)
+          }
+        }
+      }
       hasBlurredRef.current = true
       setHasBlurred(true)
       validateErrors()

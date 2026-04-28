@@ -1,5 +1,5 @@
 import React from "react";
-import { render, screen, act, within, waitFor } from "../utilities/test-utils";
+import { render, screen, act, within, waitFor, fireEvent } from "../utilities/test-utils";
 import PhoneNumberInput from "./_phone_number_input";
 
 const testId = "phoneNumberInput";
@@ -203,7 +203,7 @@ test("has no intl-tel example placeholder by default (showPlaceholder false)", a
     expect(!input.getAttribute("placeholder") || input.getAttribute("placeholder") === "").toBe(true);
 });
 
-test("optionally shows example placeholder when showPlaceholder is true (library default behavior)", async () => {
+test("optionally shows example placeholder when showPlaceholder is true; hides on focus and returns on blur if empty", async () => {
     const props = {
         id: testId,
         initialCountry: "us",
@@ -218,4 +218,16 @@ test("optionally shows example placeholder when showPlaceholder is true (library
     await waitFor(() => {
         expect((input.getAttribute("placeholder") || "").length).toBeGreaterThan(0);
     });
+
+    const whenIdle = input.getAttribute("placeholder");
+
+    act(() => {
+        fireEvent.focus(input);
+    });
+    expect(input.getAttribute("placeholder") || "").toBe("");
+
+    act(() => {
+        fireEvent.blur(input);
+    });
+    expect(input.getAttribute("placeholder")).toBe(whenIdle);
 });  
