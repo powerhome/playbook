@@ -41,6 +41,7 @@ type PhoneNumberInputProps = {
   formatAsYouType?: boolean,
   strictMode?: boolean,
   countrySearch?: boolean,
+  showPlaceholder?: boolean,
 }
 
 enum ValidationError {
@@ -98,6 +99,7 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.Ref<unknown>
     formatAsYouType = false,
     strictMode = false,
     countrySearch = false,
+    showPlaceholder = false,
   } = props
 
   const ariaProps = buildAriaProps(aria)
@@ -476,6 +478,7 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.Ref<unknown>
       countryOrder: preferredCountries,
       allowDropdown: !disabled,
       autoInsertDialCode: false,
+      autoPlaceholder: showPlaceholder ? "polite" : "off",
       initialCountry: initialCountry || fallbackCountry,
       onlyCountries,
       excludeCountries,

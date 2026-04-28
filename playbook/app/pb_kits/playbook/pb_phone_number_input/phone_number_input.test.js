@@ -1,5 +1,5 @@
 import React from "react";
-import { render, screen, act, within } from "../utilities/test-utils";
+import { render, screen, act, within, waitFor } from "../utilities/test-utils";
 import PhoneNumberInput from "./_phone_number_input";
 
 const testId = "phoneNumberInput";
@@ -188,4 +188,34 @@ test("does not render required indicator asterisk when requiredIndicator is fals
     const label = within(kit).getByText(/Phone Number/);
     expect(label).toBeInTheDocument();
     expect(kit).not.toHaveTextContent("*");
+});
+
+test("has no intl-tel example placeholder by default (showPlaceholder false)", async () => {
+    const props = {
+        id: testId,
+        initialCountry: "us",
+    };
+    render(<PhoneNumberInput {...props} />);
+    const input = screen.getByRole("textbox");
+    await waitFor(() => {
+        expect(input.closest(".iti")).toBeTruthy();
+    });
+    expect(!input.getAttribute("placeholder") || input.getAttribute("placeholder") === "").toBe(true);
+});
+
+test("optionally shows example placeholder when showPlaceholder is true (library default behavior)", async () => {
+    const props = {
+        id: testId,
+        initialCountry: "us",
+        showPlaceholder: true,
+    };
+    render(<PhoneNumberInput {...props} />);
+    const input = screen.getByRole("textbox");
+
+    await waitFor(() => {
+        expect(input.closest(".iti")).toBeTruthy();
+    });
+    await waitFor(() => {
+        expect((input.getAttribute("placeholder") || "").length).toBeGreaterThan(0);
+    });
 });  

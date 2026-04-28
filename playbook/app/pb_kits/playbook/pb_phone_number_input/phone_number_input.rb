@@ -35,6 +35,8 @@ module Playbook
                            default: false
       prop :country_search, type: Playbook::Props::Boolean,
                             default: false
+      prop :show_placeholder, type: Playbook::Props::Boolean,
+                              default: false
 
       def classname
         generate_classname("pb_phone_number_input")
@@ -59,6 +61,7 @@ module Playbook
           requiredIndicator: required_indicator,
           value: value,
           countrySearch: country_search,
+          showPlaceholder: show_placeholder,
         }
       end
     end
