@@ -193,6 +193,37 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.Ref<unknown>
     return formattedNumber.replace(/\D/g, "")
   }
 
+  const readInputPlaceholder = (element: HTMLInputElement) => {
+    return element.getAttribute("placeholder") || element.placeholder || ""
+  }
+
+  const cachePlaceholderTemplate = (element: HTMLInputElement) => {
+    const placeholder = readInputPlaceholder(element)
+    if (placeholder) {
+      placeholderTemplateRef.current = placeholder
+    }
+  }
+
+  const hidePlaceholderIfFocusedAndEmpty = (element: HTMLInputElement) => {
+    if (document.activeElement === element && !element.value) {
+      element.setAttribute("placeholder", "")
+      return true
+    }
+    return false
+  }
+
+  const hidePlaceholderIfEmpty = (element: HTMLInputElement) => {
+    if (!element.value) {
+      element.setAttribute("placeholder", "")
+    }
+  }
+
+  const restorePlaceholderIfEmpty = (element: HTMLInputElement) => {
+    if (!element.value && placeholderTemplateRef.current) {
+      element.setAttribute("placeholder", placeholderTemplateRef.current)
+    }
+  }
+
   const showFormattedError = (reason = '') => {
     const countryName = itiRef.current.getSelectedCountryData().name
     const reasonText = reason.length > 0 ? ` (${reason})` : ''
@@ -507,14 +538,19 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.Ref<unknown>
         validateErrors()
 
         if (showPlaceholderRef.current) {
-          const el = inputRef.current
-          if (el && document.activeElement === el) {
-            const newPlaceholder = el.getAttribute("placeholder") || el.placeholder || ""
-            placeholderTemplateRef.current = newPlaceholder
-            if (!el.value) {
-              el.setAttribute("placeholder", "")
-            }
+          const syncPlaceholderState = () => {
+            const el = inputRef.current
+            if (!el) return
+
+            cachePlaceholderTemplate(el)
+            if (hidePlaceholderIfFocusedAndEmpty(el)) return
+            restorePlaceholderIfEmpty(el)
           }
+
+          // Run immediately, then once on the next tick in case intl-tel-input
+          // updates the placeholder asynchronously after countrychange.
+          syncPlaceholderState()
+          setTimeout(syncPlaceholderState, 0)
         }
       })
 
@@ -561,17 +597,14 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.Ref<unknown>
       if (!showPlaceholder) return
       const el = inputRef.current
       if (!el || el.value) return
-      placeholderTemplateRef.current = el.getAttribute("placeholder") || el.placeholder || ""
-      el.setAttribute("placeholder", "")
+      cachePlaceholderTemplate(el)
+      hidePlaceholderIfEmpty(el)
     },
     onBlur: () => {
       if (showPlaceholder) {
         const el = inputRef.current
         if (el && !el.value) {
-          const ph = placeholderTemplateRef.current
-          if (ph != null) {
-            el.setAttribute("placeholder", ph)
-          }
+          restorePlaceholderIfEmpty(el)
         }
       }
       hasBlurredRef.current = true

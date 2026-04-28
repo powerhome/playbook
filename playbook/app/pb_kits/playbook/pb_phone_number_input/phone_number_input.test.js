@@ -230,4 +230,39 @@ test("optionally shows example placeholder when showPlaceholder is true; hides o
         fireEvent.blur(input);
     });
     expect(input.getAttribute("placeholder")).toBe(whenIdle);
-});  
+});
+
+test("restores latest placeholder on blur after country change", async () => {
+    const props = {
+        id: testId,
+        initialCountry: "us",
+        showPlaceholder: true,
+    };
+
+    render(<PhoneNumberInput {...props} />);
+    const input = screen.getByRole("textbox");
+
+    await waitFor(() => {
+        expect(input.closest(".iti")).toBeTruthy();
+    });
+
+    // Simulate focus behavior
+    act(() => {
+        fireEvent.focus(input);
+    });
+    expect(input.getAttribute("placeholder") || "").toBe("");
+
+    // Simulate library updating placeholder due to country change while focused.
+    input.setAttribute("placeholder", "+93 123 456 7890");
+    act(() => {
+        input.dispatchEvent(new Event("countrychange", { bubbles: true }));
+    });
+
+    // Blur should restore the latest country placeholder.
+    act(() => {
+        fireEvent.blur(input);
+    });
+    await waitFor(() => {
+        expect(input.getAttribute("placeholder")).toBe("+93 123 456 7890");
+    });
+});
