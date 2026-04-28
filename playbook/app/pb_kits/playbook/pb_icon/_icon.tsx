@@ -1,6 +1,7 @@
 import React, { ReactSVGElement } from 'react'
 import classnames from 'classnames'
 import { buildAriaProps, buildDataProps, buildHtmlProps } from '../utilities/props'
+import type { BorderPropValue } from '../utilities/globalProps'
 import { GlobalProps, globalProps } from '../utilities/globalProps'
 import { isValidEmoji } from '../utilities/validEmojiChecker'
 
@@ -22,7 +23,7 @@ export type IconSizes = "lg"
 type IconOwnProps = {
   aria?: { [key: string]: string | boolean }
   /** `true` = Font Awesome `fa-border`. Strings = global border utility classes. */
-  border?: boolean | 'none' | 'default',
+  border?: boolean | BorderPropValue,
   className?: string,
   color?: string,
   customIcon?: {[key: string] :SVGElement},

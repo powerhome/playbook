@@ -11,7 +11,8 @@ module Playbook
       ICON_PATH_PROD_CACHE_TTL_SECONDS = 60
 
       prop :border, type: Playbook::Props::Enum,
-                    values: [false, true, "none", "default"],
+                    values: [false, true, "none", "default", "error", "default_dashed", "error_dashed",
+                             "default_thick", "error_thick", "default_dashed_thick", "error_dashed_thick"],
                     default: false
       prop :fixed_width, type: Playbook::Props::Boolean,
                          default: true

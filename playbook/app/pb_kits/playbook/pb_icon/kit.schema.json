@@ -8,7 +8,7 @@
   ],
   "props": {
     "border": {
-      "type": "boolean | 'none' | 'default'",
+      "type": "boolean | BorderPropValue",
       "platforms": [
         "react"
       ]
