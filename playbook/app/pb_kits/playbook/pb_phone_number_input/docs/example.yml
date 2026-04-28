@@ -13,6 +13,7 @@ examples:
   - phone_number_input_strict_mode: Strict Mode
   - phone_number_input_country_search: Country Search
   - phone_number_input_required_indicator: Required Indicator
+  - phone_number_input_show_placeholder: Show Placeholder
 
   rails:
   - phone_number_input_default: Default
@@ -26,3 +27,4 @@ examples:
   - phone_number_input_hidden_inputs: Hidden Inputs
   - phone_number_input_country_search: Country Search
   - phone_number_input_required_indicator: Required Indicator
+  - phone_number_input_show_placeholder: Show Placeholder
