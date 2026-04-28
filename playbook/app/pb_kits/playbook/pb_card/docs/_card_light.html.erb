@@ -19,6 +19,15 @@
 
   <%= pb_rails("caption", props: { text: "border_top + border_x (all default)", margin_bottom: "xs" }) %>
   <%= pb_rails("card", props: { border_top: "default", border_x: "default", padding: "md" }) do %>Top + left/right default borders<% end %>
+
+  <%= pb_rails("caption", props: { text: "Border variants — error, dashed, thick (combine color × style × width)", margin_bottom: "xs", margin_top: "sm" }) %>
+  <%= pb_rails("card", props: { border: "error", margin_bottom: "sm", padding: "md" }) do %>error (1px solid, error / error_dark)<% end %>
+  <%= pb_rails("card", props: { border: "default_dashed", margin_bottom: "sm", padding: "md" }) do %>default_dashed (1px dashed)<% end %>
+  <%= pb_rails("card", props: { border: "error_dashed", margin_bottom: "sm", padding: "md" }) do %>error_dashed (1px dashed)<% end %>
+  <%= pb_rails("card", props: { border: "default_thick", margin_bottom: "sm", padding: "md" }) do %>default_thick (4px solid)<% end %>
+  <%= pb_rails("card", props: { border: "error_thick", margin_bottom: "sm", padding: "md" }) do %>error_thick (4px solid)<% end %>
+  <%= pb_rails("card", props: { border: "default_dashed_thick", margin_bottom: "sm", padding: "md" }) do %>default_dashed_thick (4px dashed)<% end %>
+  <%= pb_rails("card", props: { border: "error_dashed_thick", padding: "md" }) do %>error_dashed_thick (4px dashed)<% end %>
 <% end %>
 
 <%= pb_rails("title", props: { text: "border + border_radius on Flex & Caption (no card chrome)", size: 4, margin_bottom: "sm" }) %>
@@ -104,6 +113,79 @@
   <%= pb_rails("background", props: { background_color: "neutral_subtle", padding: "sm", border_radius: "sm" }) do %>
     <%= pb_rails("icon", props: { icon: "user", fixed_width: true, border: "default", padding: "xs" }) %>
   <% end %>
+
+  <%= pb_rails("caption", props: { text: "error / dashed / thick — Flex, Button, inputs (light)", margin_bottom: "xs", margin_top: "lg" }) %>
+  <%= pb_rails("caption", props: { text: "Flex · error_dashed + border_radius", margin_bottom: "xxs" }) %>
+  <%= pb_rails("flex", props: { border: "error_dashed", border_radius: "md", padding: "md", gap: "sm", orientation: "column" }) do %>
+    <%= pb_rails("body", props: { text: "Outline uses error tokens; dashed style + radius stack." }) %>
+  <% end %>
+
+  <%= pb_rails("caption", props: { text: "Buttons · error, default_dashed, error_thick", margin_bottom: "xs", margin_top: "md" }) %>
+  <%= pb_rails("background", props: { background_color: "neutral_subtle", padding: "md", border_radius: "md" }) do %>
+    <%= pb_rails("flex", props: { wrap: true, gap: "sm", align: "center" }) do %>
+      <%= pb_rails("button", props: { text: "error", border: "error", padding_x: "sm" }) %>
+      <%= pb_rails("button", props: { text: "default_dashed", border: "default_dashed", padding_x: "sm", variant: "secondary" }) %>
+      <%= pb_rails("button", props: { text: "error_thick", border: "error_thick", padding_x: "sm", variant: "secondary" }) %>
+    <% end %>
+  <% end %>
+
+  <%= pb_rails("caption", props: { text: "Flex · default_thick", margin_bottom: "xs", margin_top: "md" }) %>
+  <%= pb_rails("flex", props: { border: "default_thick", padding: "sm", gap: "sm" }) do %>
+    <%= pb_rails("body", props: { text: "Item A" }) %>
+    <%= pb_rails("body", props: { text: "Item B" }) %>
+  <% end %>
+
+  <%= pb_rails("caption", props: { text: "Dropdown · default_dashed", margin_bottom: "xs", margin_top: "md" }) %>
+  <%= pb_rails("dropdown", props: { options: dropdown_options, border: "default_dashed" }) %>
+
+  <%= pb_rails("caption", props: { text: "Typeahead · error", margin_bottom: "xs" }) %>
+  <%= pb_rails("typeahead", props: {
+    id: "card-light-typeahead-error",
+    label: "Color",
+    name: :card_light_ta_error,
+    options: typeahead_options,
+    placeholder: "Pick",
+    border: "error",
+  }) %>
+
+  <%= pb_rails("caption", props: { text: "Date picker · error_dashed", margin_bottom: "xs" }) %>
+  <%= pb_rails("date_picker", props: {
+    picker_id: "card-light-dp-error-dash",
+    name: "card_light_date_error_dash",
+    label: "Date",
+    border: "error_dashed",
+  }) %>
+
+  <%= pb_rails("caption", props: { text: "Body · error_thick", margin_bottom: "xs", margin_top: "md" }) %>
+  <%= pb_rails("background", props: { background_color: "neutral_subtle", padding: "sm", border_radius: "sm" }) do %>
+    <%= pb_rails("body", props: { text: "Body with error_thick border", border: "error_thick", padding: "sm" }) %>
+  <% end %>
+
+  <%= pb_rails("caption", props: { text: "Caption · border_x error_dashed", margin_bottom: "xs" }) %>
+  <%= pb_rails("caption", props: { text: "Caption + border_x error_dashed", border_x: "error_dashed", padding_x: "sm" }) %>
+
+  <%= pb_rails("caption", props: { text: "Icon · default_thick", margin_bottom: "xs" }) %>
+  <%= pb_rails("background", props: { background_color: "neutral_subtle", padding: "sm", border_radius: "sm" }) do %>
+    <%= pb_rails("icon", props: { icon: "user", fixed_width: true, border: "default_thick", padding: "xs" }) %>
+  <% end %>
+
+  <%= pb_rails("caption", props: { text: "Table · error (wrapper)", margin_bottom: "xs", margin_top: "md" }) %>
+  <%= pb_rails("background", props: { background_color: "neutral_subtle", padding: "sm", border_radius: "md" }) do %>
+    <%= pb_rails("table", props: { size: "sm", responsive: "none", border: "error" }) do %>
+      <%= pb_rails("table/table_head") do %>
+        <%= pb_rails("table/table_row") do %>
+          <%= pb_rails("table/table_header", props: { text: "A" }) %>
+          <%= pb_rails("table/table_header", props: { text: "B" }) %>
+        <% end %>
+      <% end %>
+      <%= pb_rails("table/table_body") do %>
+        <%= pb_rails("table/table_row") do %>
+          <%= pb_rails("table/table_cell", props: { text: "1" }) %>
+          <%= pb_rails("table/table_cell", props: { text: "2" }) %>
+        <% end %>
+      <% end %>
+    <% end %>
+  <% end %>
 <% end %>
 
 <%= pb_rails("title", props: { text: "Dark surface (nested .dark)", size: 4, margin_top: "xl", margin_bottom: "sm" }) %>
@@ -171,5 +253,75 @@
       label: "Date",
       border: "default",
     }) %>
+
+    <%= pb_rails("caption", props: { text: "error / dashed / thick — same kits (dark)", color: "light", margin_bottom: "xs", margin_top: "lg" }) %>
+    <%= pb_rails("caption", props: { text: "Card · error", color: "light", margin_bottom: "xxs" }) %>
+    <%= pb_rails("card", props: { dark: true, border: "error", padding: "md" }) do %>Dark card + border error<% end %>
+
+    <%= pb_rails("caption", props: { text: "Flex · error_dashed + border_radius", color: "light", margin_bottom: "xxs", margin_top: "md" }) %>
+    <%= pb_rails("flex", props: { dark: true, border: "error_dashed", border_radius: "md", padding: "md", gap: "sm", orientation: "column" }) do %>
+      <%= pb_rails("body", props: { dark: true, text: "Dark flex · error_dashed" }) %>
+    <% end %>
+
+    <%= pb_rails("caption", props: { text: "Buttons · error, default_dashed, error_thick", color: "light", margin_bottom: "xs", margin_top: "md" }) %>
+    <%= pb_rails("flex", props: { wrap: true, gap: "sm", align: "center" }) do %>
+      <%= pb_rails("button", props: { dark: true, text: "error", border: "error", padding_x: "sm" }) %>
+      <%= pb_rails("button", props: { dark: true, text: "default_dashed", border: "default_dashed", padding_x: "sm", variant: "secondary" }) %>
+      <%= pb_rails("button", props: { dark: true, text: "error_thick", border: "error_thick", padding_x: "sm", variant: "secondary" }) %>
+    <% end %>
+
+    <%= pb_rails("caption", props: { text: "Flex · default_thick", color: "light", margin_bottom: "xxs", margin_top: "md" }) %>
+    <%= pb_rails("flex", props: { dark: true, border: "default_thick", padding: "sm", gap: "sm" }) do %>
+      <%= pb_rails("body", props: { dark: true, text: "A" }) %>
+      <%= pb_rails("body", props: { dark: true, text: "B" }) %>
+    <% end %>
+
+    <%= pb_rails("caption", props: { text: "Dropdown · default_dashed", color: "light", margin_bottom: "xs" }) %>
+    <%= pb_rails("dropdown", props: { dark: true, options: dropdown_options, border: "default_dashed" }) %>
+
+    <%= pb_rails("caption", props: { text: "Typeahead · error", color: "light", margin_bottom: "xs" }) %>
+    <%= pb_rails("typeahead", props: {
+      dark: true,
+      id: "card-light-typeahead-error-dark",
+      label: "Color",
+      name: :card_light_ta_error_dark,
+      options: typeahead_options,
+      placeholder: "Pick",
+      border: "error",
+    }) %>
+
+    <%= pb_rails("caption", props: { text: "Date picker · error_dashed", color: "light", margin_bottom: "xs" }) %>
+    <%= pb_rails("date_picker", props: {
+      dark: true,
+      picker_id: "card-light-dp-error-dash-dark",
+      name: "card_light_date_error_dash_dark",
+      label: "Date",
+      border: "error_dashed",
+    }) %>
+
+    <%= pb_rails("caption", props: { text: "Body · error_thick", color: "light", margin_bottom: "xs" }) %>
+    <%= pb_rails("body", props: { dark: true, border: "error_thick", padding: "sm", text: "Body · error_thick on dark" }) %>
+
+    <%= pb_rails("caption", props: { text: "Caption · border_x error_dashed", color: "light", margin_bottom: "xs" }) %>
+    <%= pb_rails("caption", props: { dark: true, color: "light", text: "Caption + border_x error_dashed", border_x: "error_dashed", padding_x: "sm" }) %>
+
+    <%= pb_rails("caption", props: { text: "Icon · default_thick", color: "light", margin_bottom: "xs" }) %>
+    <%= pb_rails("icon", props: { dark: true, icon: "user", fixed_width: true, border: "default_thick", padding: "xs" }) %>
+
+    <%= pb_rails("caption", props: { text: "Table · error", color: "light", margin_bottom: "xs" }) %>
+    <%= pb_rails("table", props: { dark: true, size: "sm", responsive: "none", border: "error" }) do %>
+      <%= pb_rails("table/table_head") do %>
+        <%= pb_rails("table/table_row") do %>
+          <%= pb_rails("table/table_header", props: { text: "A" }) %>
+          <%= pb_rails("table/table_header", props: { text: "B" }) %>
+        <% end %>
+      <% end %>
+      <%= pb_rails("table/table_body") do %>
+        <%= pb_rails("table/table_row") do %>
+          <%= pb_rails("table/table_cell", props: { text: "1" }) %>
+          <%= pb_rails("table/table_cell", props: { text: "2" }) %>
+        <% end %>
+      <% end %>
+    <% end %>
   <% end %>
 </div>

@@ -54,6 +54,52 @@ const CardLight = (props) => (
       >
         {"Top + left/right default borders"}
       </Card>
+
+      <Caption marginBottom="xs"
+          marginTop="sm"
+          text="Border variants — error, dashed, thick (combine color × style × width)"
+      />
+      <Card border="error"
+          marginBottom="sm"
+          padding="md"
+      >
+        {"error (1px solid, error / error_dark)"}
+      </Card>
+      <Card border="default_dashed"
+          marginBottom="sm"
+          padding="md"
+      >
+        {"default_dashed (1px dashed)"}
+      </Card>
+      <Card border="error_dashed"
+          marginBottom="sm"
+          padding="md"
+      >
+        {"error_dashed (1px dashed)"}
+      </Card>
+      <Card border="default_thick"
+          marginBottom="sm"
+          padding="md"
+      >
+        {"default_thick (4px solid)"}
+      </Card>
+      <Card border="error_thick"
+          marginBottom="sm"
+          padding="md"
+      >
+        {"error_thick (4px solid)"}
+      </Card>
+      <Card border="default_dashed_thick"
+          marginBottom="sm"
+          padding="md"
+      >
+        {"default_dashed_thick (4px dashed)"}
+      </Card>
+      <Card border="error_dashed_thick"
+          padding="md"
+      >
+        {"error_dashed_thick (4px dashed)"}
+      </Card>
     </Flex>
 
     <Title marginBottom="sm"
@@ -200,6 +246,156 @@ const CardLight = (props) => (
             icon="user"
             padding="xs"
         />
+      </Background>
+
+      <Caption marginBottom="xs"
+          marginTop="lg"
+          text="error / dashed / thick — Flex, Button, inputs (light)"
+      />
+      <Caption marginBottom="xxs"
+          text="Flex · error_dashed + borderRadius"
+      />
+      <Flex border="error_dashed"
+          borderRadius="md"
+          gap="sm"
+          orientation="column"
+          padding="md"
+      >
+        <Body text="Outline uses error tokens; dashed style + radius stack." />
+      </Flex>
+
+      <Caption marginBottom="xs"
+          marginTop="md"
+          text="Buttons · error, default_dashed, error_thick"
+      />
+      <Background backgroundColor="neutral_subtle"
+          borderRadius="md"
+          padding="md"
+      >
+        <Flex align="center"
+            gap="sm"
+            wrap
+        >
+          <Button border="error"
+              paddingX="sm"
+              text="error"
+          />
+          <Button border="default_dashed"
+              paddingX="sm"
+              text="default_dashed"
+              variant="secondary"
+          />
+          <Button border="error_thick"
+              paddingX="sm"
+              text="error_thick"
+              variant="secondary"
+          />
+        </Flex>
+      </Background>
+
+      <Caption marginBottom="xs"
+          marginTop="md"
+          text="Flex · default_thick"
+      />
+      <Flex border="default_thick"
+          gap="sm"
+          padding="sm"
+      >
+        <Body text="Item A" />
+        <Body text="Item B" />
+      </Flex>
+
+      <Caption marginBottom="xs"
+          marginTop="md"
+          text="Dropdown · default_dashed"
+      />
+      <Dropdown border="default_dashed"
+          options={dropdownOptions}
+      />
+
+      <Caption marginBottom="xs"
+          text="Typeahead · error"
+      />
+      <Typeahead
+          border="error"
+          id="card-light-typeahead-error-react"
+          label="Color"
+          name="card_light_ta_error_react"
+          options={typeaheadOptions}
+          placeholder="Pick"
+      />
+
+      <Caption marginBottom="xs"
+          text="Date picker · error_dashed"
+      />
+      <DatePicker
+          border="error_dashed"
+          label="Date"
+          name="card_light_date_error_dash_react"
+          pickerId="card-light-dp-error-dash-react"
+      />
+
+      <Caption marginBottom="xs"
+          marginTop="md"
+          text="Body · error_thick"
+      />
+      <Background backgroundColor="neutral_subtle"
+          borderRadius="sm"
+          padding="sm"
+      >
+        <Body border="error_thick"
+            padding="sm"
+            text="Body with error_thick border"
+        />
+      </Background>
+
+      <Caption marginBottom="xs"
+          text="Caption · border_x error_dashed"
+      />
+      <Caption borderX="error_dashed"
+          paddingX="sm"
+          text="Caption + border_x error_dashed"
+      />
+
+      <Caption marginBottom="xs"
+          text="Icon · default_thick"
+      />
+      <Background backgroundColor="neutral_subtle"
+          borderRadius="sm"
+          padding="sm"
+      >
+        <Icon border="default_thick"
+            fixedWidth
+            icon="user"
+            padding="xs"
+        />
+      </Background>
+
+      <Caption marginBottom="xs"
+          marginTop="md"
+          text="Table · error (wrapper)"
+      />
+      <Background backgroundColor="neutral_subtle"
+          borderRadius="md"
+          padding="sm"
+      >
+        <Table border="error"
+            responsive="none"
+            size="sm"
+        >
+          <Table.Head>
+            <Table.Row>
+              <Table.Header>{'A'}</Table.Header>
+              <Table.Header>{'B'}</Table.Header>
+            </Table.Row>
+          </Table.Head>
+          <Table.Body>
+            <Table.Row>
+              <Table.Cell>{'1'}</Table.Cell>
+              <Table.Cell>{'2'}</Table.Cell>
+            </Table.Row>
+          </Table.Body>
+        </Table>
       </Background>
     </Flex>
 
@@ -355,6 +551,175 @@ const CardLight = (props) => (
             name="card_light_date_dark_react"
             pickerId="card-light-dp-dark-react"
         />
+
+        <Caption color="light"
+            marginBottom="xs"
+            marginTop="lg"
+            text="error / dashed / thick — same kits (dark)"
+        />
+        <Caption color="light"
+            marginBottom="xxs"
+            text="Card · error"
+        />
+        <Card border="error"
+            dark
+            padding="md"
+        >
+          {"Dark card + border error"}
+        </Card>
+
+        <Caption color="light"
+            marginBottom="xxs"
+            marginTop="md"
+            text="Flex · error_dashed + borderRadius"
+        />
+        <Flex border="error_dashed"
+            borderRadius="md"
+            dark
+            gap="sm"
+            orientation="column"
+            padding="md"
+        >
+          <Body dark
+              text="Dark flex · error_dashed"
+          />
+        </Flex>
+
+        <Caption color="light"
+            marginBottom="xs"
+            marginTop="md"
+            text="Buttons · error, default_dashed, error_thick"
+        />
+        <Flex align="center"
+            gap="sm"
+            wrap
+        >
+          <Button border="error"
+              dark
+              paddingX="sm"
+              text="error"
+          />
+          <Button border="default_dashed"
+              dark
+              paddingX="sm"
+              text="default_dashed"
+              variant="secondary"
+          />
+          <Button border="error_thick"
+              dark
+              paddingX="sm"
+              text="error_thick"
+              variant="secondary"
+          />
+        </Flex>
+
+        <Caption color="light"
+            marginBottom="xxs"
+            marginTop="md"
+            text="Flex · default_thick"
+        />
+        <Flex border="default_thick"
+            dark
+            gap="sm"
+            padding="sm"
+        >
+          <Body dark
+              text="A"
+          />
+          <Body dark
+              text="B"
+          />
+        </Flex>
+
+        <Caption color="light"
+            marginBottom="xs"
+            text="Dropdown · default_dashed"
+        />
+        <Dropdown border="default_dashed"
+            dark
+            options={dropdownOptions}
+        />
+
+        <Caption color="light"
+            marginBottom="xs"
+            text="Typeahead · error"
+        />
+        <Typeahead
+            border="error"
+            dark
+            id="card-light-typeahead-error-dark-react"
+            label="Color"
+            name="card_light_ta_error_dark_react"
+            options={typeaheadOptions}
+            placeholder="Pick"
+        />
+
+        <Caption color="light"
+            marginBottom="xs"
+            text="Date picker · error_dashed"
+        />
+        <DatePicker
+            border="error_dashed"
+            dark
+            label="Date"
+            name="card_light_date_error_dash_dark_react"
+            pickerId="card-light-dp-error-dash-dark-react"
+        />
+
+        <Caption color="light"
+            marginBottom="xs"
+            text="Body · error_thick"
+        />
+        <Body border="error_thick"
+            dark
+            padding="sm"
+            text="Body · error_thick on dark"
+        />
+
+        <Caption color="light"
+            marginBottom="xs"
+            text="Caption · border_x error_dashed"
+        />
+        <Caption borderX="error_dashed"
+            color="light"
+            dark
+            paddingX="sm"
+            text="Caption + border_x error_dashed"
+        />
+
+        <Caption color="light"
+            marginBottom="xs"
+            text="Icon · default_thick"
+        />
+        <Icon border="default_thick"
+            dark
+            fixedWidth
+            icon="user"
+            padding="xs"
+        />
+
+        <Caption color="light"
+            marginBottom="xs"
+            text="Table · error"
+        />
+        <Table border="error"
+            dark
+            responsive="none"
+            size="sm"
+        >
+          <Table.Head>
+            <Table.Row>
+              <Table.Header>{'A'}</Table.Header>
+              <Table.Header>{'B'}</Table.Header>
+            </Table.Row>
+          </Table.Head>
+          <Table.Body>
+            <Table.Row>
+              <Table.Cell>{'1'}</Table.Cell>
+              <Table.Cell>{'2'}</Table.Cell>
+            </Table.Row>
+          </Table.Body>
+        </Table>
       </Flex>
     </div>
   </Flex>
