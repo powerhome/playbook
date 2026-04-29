@@ -1,39 +1,26 @@
 {
   "template": "<Flex align=\"center\" orientation=\"column\">\n  <EmptyState{{props}} />\n</Flex>",
-  "propTargets": {},
+  "imports": ["Flex"],
   "defaults": {
     "alignment": "center",
-    "orientation": "vertical",
-    "size": "md",
     "description": "Body text goes into detail with possible steps for user to take",
     "header": "Title Explains",
-    "image": "default"
+    "image": "default",
+    "orientation": "vertical",
+    "size": "md"
   },
   "groups": [
     {
       "name": "Layout",
-      "props": [
-        "alignment",
-        "orientation",
-        "size"
-      ]
+      "props": ["alignment", "orientation", "size"]
     },
     {
       "name": "Content",
-      "props": [
-        "header",
-        "description",
-        "image"
-      ]
+      "props": ["header", "description", "image"]
     },
     {
       "name": "Actions",
-      "props": [
-        "primaryButton",
-        "linkButton",
-        "onLinkButtonClick",
-        "onPrimaryButtonClick"
-      ]
+      "props": ["primaryButton", "linkButton", "onLinkButtonClick", "onPrimaryButtonClick"]
     }
   ],
   "presets": [
@@ -85,15 +72,8 @@
     }
   ],
   "conditionals": {
-    "onLinkButtonClick": {
-      "requires": "linkButton"
-    },
-    "onPrimaryButtonClick": {
-      "requires": "primaryButton"
-    }
+    "onLinkButtonClick": { "requires": "linkButton" },
+    "onPrimaryButtonClick": { "requires": "primaryButton" }
   },
-  "hints": {},
-  "imports": [
-    "Flex"
-  ]
+  "hints": {}
 }
