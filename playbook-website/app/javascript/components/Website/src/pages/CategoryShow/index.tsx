@@ -49,7 +49,7 @@ export default function CategoryShow() {
         <Flex
           align="center"
           className="category-breadcrumb"
-          marginBottom="md"
+          marginBottom="xs"
           paddingX="xl"
         >
           <NavLink to="/beta/kits">

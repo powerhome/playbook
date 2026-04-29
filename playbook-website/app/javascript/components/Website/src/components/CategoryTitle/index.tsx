@@ -12,7 +12,7 @@ type CategoryTitleProps = {
 export const CategoryTitle = ({ category }: CategoryTitleProps): React.ReactElement => {
   
   return (
-    <Flex align="center" className="category-title" gap="xs" marginBottom="md">
+    <Flex align="center" className="category-title" gap="xs" marginBottom="md" marginLeft="xl">
       <Title size={{ xs: 3, sm: 2, md: 2, lg: 2, xl: 2 }} tag="h1" text={linkFormat(category)} />
       <Icon className="icon mobile" icon="circle-arrow-right" size="sm" />
       <Icon className="icon desktop" icon="circle-arrow-right" size="xl" />
