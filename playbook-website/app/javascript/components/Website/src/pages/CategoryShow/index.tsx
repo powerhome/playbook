@@ -65,6 +65,8 @@ export default function CategoryShow() {
         <Hero
           description={description ?? ""}
           title={linkFormat(category)}
+          height="157px"
+          backgroundPosition="center right"
         />
 
         {!kitsToShow.length && (

@@ -109,6 +109,12 @@ const RightSideNav = ({ examples, sections }: RightSideNavProps) => {
                   color={activeId === example.example_key ? "link" : "light"}
                   cursor="pointer"
                   dark={darkMode}
+                  htmlOptions={{
+                    style: {
+                      paddingTop: "2px",
+                      paddingBottom: "2px",
+                    },
+                  }}
                 />
               </div>
             ))}

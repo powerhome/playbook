@@ -84,7 +84,7 @@ export default function ComponentList() {
     <>
       {!outlet && (
         <>
-          <Hero description={description} title="Components" />
+          <Hero description={description} title="Components" minHeight="245px" />
 
           <PageContainer>
             <Flex orientation="column" width="100%">

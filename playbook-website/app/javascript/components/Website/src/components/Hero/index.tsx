@@ -8,9 +8,13 @@ import "./styles.scss";
 type HeroProps = {
   title: string;
   description: string;
+  height?: string;
+  backgroundPosition?: string;
+  minHeight?: string;
 };
 
-export function Hero({ title, description }: HeroProps) {
+export function Hero({ title, description, height, backgroundPosition, minHeight }: HeroProps) {
+  const backgroundPositionValue = backgroundPosition || "right bottom";
   return (
     <Background
       alt="background with blue colors fading to darker blue"
@@ -26,10 +30,10 @@ export function Hero({ title, description }: HeroProps) {
         sm: "1320px 245px",
       }}
       backgroundPosition={{
-        default: "right bottom",
+        default: backgroundPositionValue,
         xs: "center top",
-        sm: "right bottom",
-        md: "right bottom",
+        sm: backgroundPositionValue,
+        md: backgroundPositionValue,
       }}
       backgroundColor="dark"
       backgroundRepeat="no-repeat"
@@ -39,6 +43,8 @@ export function Hero({ title, description }: HeroProps) {
         sm: HeaderDesktop,
         md: HeaderDesktop,
       }}
+      height={height}
+      minHeight={minHeight}
     >
       <Title
         size={{ xs: 3, sm: 3, md: 2, lg: 2, xl: 2 }}
