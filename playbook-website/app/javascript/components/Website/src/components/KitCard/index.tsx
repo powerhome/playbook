@@ -43,6 +43,9 @@ export const KitCard = ({
         category: kitCategory?.category,
         parent,
       })}
+        style={{
+          maxWidth: "364px",
+        }}
     >
       <Card className="kit-card" padding="none" borderRadius="lg">
         <div aria-hidden className="kit-card-media" />

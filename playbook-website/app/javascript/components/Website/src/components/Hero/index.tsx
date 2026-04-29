@@ -46,22 +46,24 @@ export function Hero({ title, description, height, backgroundPosition, minHeight
       height={height}
       minHeight={minHeight}
     >
-      <Title
-        size={{ xs: 3, sm: 3, md: 2, lg: 2, xl: 2 }}
-        paddingTop={{ xs: "none", sm: "xl", md: "none" }}
-        paddingBottom={{ xs: "none", default: "sm" }}
-        text={title}
-        marginBottom={{ xs: "none", md: "xs" }}
-        dark
-      />
-      <Body
-        className="hero-description"
-        maxWidth="sm"
-        lineHeight="loose"
-        dark
-        text={description}
-        truncate="4"
-      />
+      <div className="hero-content-well">
+        <Title
+          size={{ xs: 3, sm: 3, md: 2, lg: 2, xl: 2 }}
+          paddingTop={{ xs: "none", sm: "xl", md: "none" }}
+          paddingBottom={{ xs: "none", default: "sm" }}
+          text={title}
+          marginBottom={{ xs: "none", md: "xs" }}
+          dark
+        />
+        <Body
+          className="hero-description"
+          maxWidth="sm"
+          lineHeight="loose"
+          dark
+          text={description}
+          truncate="4"
+        />
+      </div>
     </Background>
   );
 }

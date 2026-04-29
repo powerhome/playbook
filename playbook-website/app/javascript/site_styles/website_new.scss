@@ -1,9 +1,27 @@
 @import "playbook-tokens/colors";
+@import "playbook-tokens/container";
 @import "playbook-tokens/screen_sizes";
+@import "playbook-tokens/spacing";
 @import "playbook-tokens/border_radius";
 @import "playbook-tokens/shadows";
 
 $beta_nav_breakpoint: breakpoint("lg");
+
+// Hero / kit listing: same horizontal gutter + centered xl content track.
+@mixin website-page-gutter-padding {
+  padding-inline: $space_xl;
+
+  @media (min-width: $screen-lg-min) {
+    padding-inline: $space_sm + $space_xl;
+  }
+}
+
+@mixin website-content-well {
+  box-sizing: border-box;
+  margin-inline: auto;
+  max-width: $container_xl;
+  width: 100%;
+}
 
 .pb--website--new {
   pre.highlight {
@@ -50,6 +68,20 @@ $beta_nav_breakpoint: breakpoint("lg");
         transform: translate(10%, 0);
       }
     }
+  }
+
+  .kit-grid-shell {
+    @include website-page-gutter-padding;
+    box-sizing: border-box;
+    width: 100%;
+  }
+
+  .kit-grid-layout {
+    @include website-content-well;
+  }
+
+  .hero-content-well {
+    @include website-content-well;
   }
 }
 

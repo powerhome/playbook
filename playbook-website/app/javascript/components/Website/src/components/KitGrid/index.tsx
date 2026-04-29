@@ -9,8 +9,10 @@ type KitGridProps = {
 
 export const KitGrid = ({ children }: KitGridProps) => {
   return (
-    <Layout width="100%" layout="collection" paddingX="xl">
-      <Layout.Body className="kit-container">{children}</Layout.Body>
-    </Layout>
+    <div className="kit-grid-shell">
+      <Layout className="kit-grid-layout" layout="collection" width="100%">
+        <Layout.Body className="kit-container">{children}</Layout.Body>
+      </Layout>
+    </div>
   );
 };
