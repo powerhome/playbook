@@ -12,14 +12,19 @@ type KitCardProps = {
   parent?: string;
 };
 
-export const KitCard = ({ description, name, platform, parent }: KitCardProps) => {
+export const KitCard = ({
+  description,
+  name,
+  platform,
+  parent,
+}: KitCardProps) => {
   const { kits } = useRouteLoaderData("beta-site") as {
     kits: Array<{ category: string; components: Array<{ name: string }> }>;
   };
 
   // Find which category this kit belongs to
   const kitCategory = kits?.find((category: { components: any[] }) =>
-    category.components?.some((component) => component.name === name)
+    category.components?.some((component) => component.name === name),
   );
 
   const generateLink = ({ componentName, platform, parent }: any) => {
@@ -31,7 +36,7 @@ export const KitCard = ({ description, name, platform, parent }: KitCardProps) =
 
   return (
     <Link
-      className="kit-card-link"
+      className="kit-card-link border_radius_lg"
       to={generateLink({
         componentName: name,
         platform,
@@ -44,17 +49,14 @@ export const KitCard = ({ description, name, platform, parent }: KitCardProps) =
         <Flex
           className="kit-card-content"
           orientation="column"
-          paddingBottom={{ xs: "xxs", default: "sm" }}
-          paddingTop={{ xs: "xxs", default: "sm" }}
-          paddingX={{
-            xs: "sm",
-            sm: "md",
-            md: "md",
-            lg: "md",
-            xl: "md",
-          }}
+          padding={{ xs: "xxs", default: "sm" }}
         >
-          <Flex align="center" className="kit-card-header" justify="between">
+          <Flex
+            align="center"
+            className="kit-card-header"
+            width="100%"
+            justify="between"
+          >
             <Title text={linkFormat(name)} size={4} truncate="1" />
             <Icon
               className="icon mobile"
@@ -66,7 +68,7 @@ export const KitCard = ({ description, name, platform, parent }: KitCardProps) =
               className="icon desktop"
               fixedWidth
               icon="angle-right"
-              size="2x"
+              size="1x"
             />
           </Flex>
           <Body

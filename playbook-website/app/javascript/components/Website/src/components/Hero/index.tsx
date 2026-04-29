@@ -1,4 +1,3 @@
-import React from "react";
 import { Background, Title, Body } from "playbook-ui";
 
 import HeaderMobile from "../../../../../images/pb-hero-mobile.svg";
