@@ -1,5 +1,6 @@
 import React from "react";
 import { Background, Image } from "playbook-ui";
+import type { HomepageHeroCTALinks } from "../ctaLinks";
 import WelcomeComponent from "./Welcome";
 import {
   ConnectedDevicesCard,
@@ -15,7 +16,12 @@ import {
 import GridLarge from "../../../images/LargeBackgroundGrid.svg";
 import BlurBackground from "./BlurBackground";
 
-const MaxScreen = () => {
+type MaxScreenProps = {
+  ctaLinks: HomepageHeroCTALinks;
+  onNavigate?: (path: string) => void;
+};
+
+const MaxScreen = ({ ctaLinks, onNavigate }: MaxScreenProps) => {
   return (
     <>
       <Background
@@ -25,7 +31,12 @@ const MaxScreen = () => {
         flexDirection="column"
         paddingTop="xl"
       >
-        <WelcomeComponent fixedSize="546px" />
+        <WelcomeComponent
+          exploreComponentsLink={ctaLinks.exploreComponents}
+          fixedSize="546px"
+          getStartedLink={ctaLinks.getStarted}
+          onNavigate={onNavigate}
+        />
       </Background>
 
       <Background className="homepage_hero_container_cards" position="absolute">

@@ -1,0 +1,23 @@
+@import "playbook-tokens/container";
+@import "playbook-tokens/screen_sizes";
+
+.component-list-search {
+  box-sizing: border-box;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+
+  max-width: min(100%, $container_xxs);
+
+  @include break_on($screen-sm-min) {
+    max-width: min(100%, $container_sm);
+  }
+
+  @include break_on($screen-lg-min) {
+    max-width: min(100%, $container_md);
+  }
+
+  .pb_text_input_kit {
+    max-width: 100%;
+  }
+}

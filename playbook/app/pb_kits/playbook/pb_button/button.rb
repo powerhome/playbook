@@ -73,8 +73,10 @@ module Playbook
         emoji_regex.match?(icon)
       end
 
+      # Icon-only = icon with no label. Label may come from `text` or from a block (e.g. CopyButton);
+      # block content must not be treated as icon-only when `text` is unset.
       def icon_only?
-        icon.present? && text.blank? && variant != "reaction"
+        icon.present? && text.blank? && children.blank? && variant != "reaction"
       end
 
       def classname

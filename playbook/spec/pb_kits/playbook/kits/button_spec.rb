@@ -164,6 +164,10 @@ RSpec.describe Playbook::PbButton::Button do
       expect(subject.new(icon: "bars", text: "").icon_only?).to be true
     end
 
+    it "returns false when a block provides the label (text prop may still be blank)" do
+      expect(subject.new(icon: "plus") { "Copy Text" }.icon_only?).to be false
+    end
+
     it "returns false when text is present", :aggregate_failures do
       expect(subject.new(icon: "plus", text: "Click me").icon_only?).to be false
       expect(subject.new(icon: "user", text: "Button").icon_only?).to be false
@@ -192,6 +196,10 @@ RSpec.describe Playbook::PbButton::Button do
     it "does not include pb_button_icon_only when text is present", :aggregate_failures do
       expect(subject.new(icon: "plus", text: "Click me").classname).to_not include("pb_button_icon_only")
       expect(subject.new(icon: "user", text: "Button").classname).to_not include("pb_button_icon_only")
+    end
+
+    it "does not include pb_button_icon_only when a block provides the label" do
+      expect(subject.new(icon: "copy") { "Copy Text" }.classname).to_not include("pb_button_icon_only")
     end
 
     it "does not include pb_button_icon_only when variant is reaction", :aggregate_failures do

@@ -1,4 +1,4 @@
-import { Link, useLoaderData } from "react-router-dom";
+import { Link, useRouteLoaderData } from "react-router-dom";
 import { Body, Card, Flex, Icon, Title } from "playbook-ui";
 
 import { linkFormat } from "../../../../../utilities/website_sidebar_helper";
@@ -13,7 +13,7 @@ type KitCardProps = {
 };
 
 export const KitCard = ({ description, name, platform, parent }: KitCardProps) => {
-  const { kits } = useLoaderData() as {
+  const { kits } = useRouteLoaderData("beta-site") as {
     kits: Array<{ category: string; components: Array<{ name: string }> }>;
   };
 
@@ -31,6 +31,7 @@ export const KitCard = ({ description, name, platform, parent }: KitCardProps) =
 
   return (
     <Link
+      className="kit-card-link"
       to={generateLink({
         componentName: name,
         platform,
@@ -38,40 +39,43 @@ export const KitCard = ({ description, name, platform, parent }: KitCardProps) =
         parent,
       })}
     >
-      <Card
-        className="kit-card"
-        paddingX={{
-          xs: "sm",
-          sm: "md",
-          md: "md",
-          lg: "md",
-          xl: "md",
-        }}
-        paddingTop={{ xs: "xxs", default: "md" }}
-        paddingBottom={{ xs: "xxs", default: "md" }}
-        borderRadius="lg"
-      >
-        <Flex align="center" className="kit-card-header" justify="between">
-          <Title text={linkFormat(name)} size={4} truncate="1" />
-          <Icon
-            className="icon mobile"
-            fixedWidth
-            icon="angle-right"
-            size="sm"
-          />
-          <Icon
-            className="icon desktop"
-            fixedWidth
-            icon="angle-right"
-            size="2x"
+      <Card className="kit-card" padding="none" borderRadius="lg">
+        <div aria-hidden className="kit-card-media" />
+        <Flex
+          className="kit-card-content"
+          orientation="column"
+          paddingBottom={{ xs: "xxs", default: "sm" }}
+          paddingTop={{ xs: "xxs", default: "sm" }}
+          paddingX={{
+            xs: "sm",
+            sm: "md",
+            md: "md",
+            lg: "md",
+            xl: "md",
+          }}
+        >
+          <Flex align="center" className="kit-card-header" justify="between">
+            <Title text={linkFormat(name)} size={4} truncate="1" />
+            <Icon
+              className="icon mobile"
+              fixedWidth
+              icon="angle-right"
+              size="sm"
+            />
+            <Icon
+              className="icon desktop"
+              fixedWidth
+              icon="angle-right"
+              size="2x"
+            />
+          </Flex>
+          <Body
+            className="kit-card-description"
+            color="light"
+            truncate="2"
+            text={description}
           />
         </Flex>
-        <Body
-          className="kit-card-description"
-          color="light"
-          truncate="2"
-          text={description}
-        />
       </Card>
     </Link>
   );

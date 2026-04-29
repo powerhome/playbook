@@ -1,3 +1,4 @@
+import { Link, useLocation, useNavigate } from "react-router-dom"
 import { Flex, Image, Badge, SectionSeparator, FlexItem } from "playbook-ui";
 // @ts-ignore
 import PBLogo from "../../../../images/pb-logo.svg";
@@ -23,6 +24,9 @@ const Header = ({
   platform,
   setPlatform,
 }: HeaderProps) => {
+  const navigate = useNavigate();
+  const location = useLocation();
+
   return (
     <>
       <Flex 
@@ -42,9 +46,9 @@ const Header = ({
             paddingBottom="xxs"
             paddingX="md"
           >
-            <a href={"/"}>
+            <Link to="/beta">
               <Image alt="Playbook logo" url={PBLogo} />
-            </a>
+            </Link>
             <Badge
               text={PBversion}
               dark={dark}
@@ -73,13 +77,16 @@ const Header = ({
               gap="md"
             >
               <KitSearch
+                betaSearchResetKey={`${location.pathname}${location.search}`}
                 classname="desktop-kit-search-new"
                 id="desktop-kit-search"
                 kits={search_list}
                 global_props_and_tokens={global_props_and_tokens}
+                beta={true}
+                onBetaNavigate={(path) => navigate(path)}
                 marginBottom="none"
               />
-              <DarkModeToggle initMode={dark} />
+              <DarkModeToggle initMode={JSON.stringify(!!dark)} />
             </Flex>
           </FlexItem>
           {/* End Search Bar + dark mode toggle */}

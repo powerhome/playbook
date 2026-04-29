@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Button, Caption, Card, Flex } from "playbook-ui";
+import { SyntaxHighlightedCode } from "../../../../../components/SyntaxHighlightedCode";
 
 interface CodePanelProps {
   code: string;
@@ -31,9 +32,7 @@ export const CodePanel: React.FC<CodePanelProps> = ({ code }) => {
           />
       </Flex>
       <Card borderNone background="light">
-        <pre className="highlight" style={{ margin: 0, padding: "16px", overflow: "auto" }}>
-          <code>{code}</code>
-        </pre>
+        <SyntaxHighlightedCode code={code} language="tsx" />
       </Card>
     </Card>
   );

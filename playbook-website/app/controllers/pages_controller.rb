@@ -54,13 +54,6 @@ class PagesController < ApplicationController
           @examples = all_examples.select do |example|
             @kit_section.include?(example.values.first)
           end
-
-          # Load mock data for advanced_table (beta only: use separate variables)
-          @beta_table_data = advanced_table_mock_data_beta
-          @beta_table_data_with_id = advanced_table_mock_data_with_id_beta
-          @beta_table_data_no_subrows = advanced_table_mock_data_no_subrows_beta
-          @beta_table_data_pagination = advanced_table_pagination_mock_data
-          @beta_table_data_infinite_scroll = advanced_table_infinite_scroll_mock_data
         else
           @examples = pb_doc_kit_examples(@kit, @type)
         end
@@ -70,6 +63,8 @@ class PagesController < ApplicationController
     else
       @examples = pb_doc_kit_examples(@kit, @type)
     end
+
+    assign_advanced_table_doc_mocks
 
     @css = view_context.vite_asset_path("site_styles/main.scss")
 
@@ -103,6 +98,8 @@ class PagesController < ApplicationController
         title: example.values.first,
         source: source_code,
         description: description,
+        rendered: rendered_example(example_key),
+        highlighted_source: (@type == "rails" ? render_code(source_code, "erb") : nil),
       }
     end
 
@@ -141,6 +138,18 @@ class PagesController < ApplicationController
       end
     end
 
+    landing_posts = extract_changelog_data(changelog_content)
+    icon_data = JSON.parse(File.read(Rails.root.join("app/assets/icons.json")))
+    icons_by_category = icon_data.group_by { |icon| icon["category"] }
+    icon_categories = icons_by_category.keys.sort.map do |category|
+      {
+        text: category,
+        link: "##{category.parameterize}",
+        value: category.parameterize,
+        label: category,
+      }
+    end
+
     respond_to do |format|
       format.html { render layout: "application_beta", inline: "" }
       format.json do
@@ -165,6 +174,10 @@ class PagesController < ApplicationController
           getting_started: DOCS[:getting_started],
           design_guidelines: DOCS[:design_guidelines],
           icons: DOCS[:icons],
+          icon_banner_image_url: view_context.vite_asset_path("images/icon-banner.svg"),
+          icon_categories: icon_categories,
+          icon_kit_url: "https://playbook.powerapp.cloud/kits/icon/react",
+          icons_by_category: icons_by_category,
           whats_new: DOCS[:whats_new],
           building_blocks: BUILDING_BLOCKS,
           global_props_and_tokens: GLOBAL_PROPS_AND_TOKENS,
@@ -182,7 +195,7 @@ class PagesController < ApplicationController
           table_data_no_subrows: @beta_table_data_no_subrows,
           table_data_pagination: @beta_table_data_pagination,
           table_data_infinite_scroll: @beta_table_data_infinite_scroll,
-
+          landing_posts: landing_posts,
         }
       end
     end
@@ -311,6 +324,7 @@ class PagesController < ApplicationController
     params[:type] ||= "react"
     @type = params[:type]
     @users = Array.new(9) { Faker::Name.name }.paginate(page: params[:page], per_page: 2)
+    @extra_users = Array.new(2000) { Faker::Name.name }.paginate(page: params[:page], per_page: 2)
     @table_data = advanced_table_mock_data
     @table_data_with_id = advanced_table_mock_data_with_id
     @table_data_no_subrows = advanced_table_mock_data_no_subrows
@@ -322,6 +336,7 @@ class PagesController < ApplicationController
     params[:type] ||= "rails"
     @type = params[:type]
     @users = Array.new(9) { Faker::Name.name }.paginate(page: params[:page], per_page: 2)
+    @extra_users = Array.new(2000) { Faker::Name.name }.paginate(page: params[:page], per_page: 2)
     @table_data = advanced_table_mock_data
     @table_data_with_id = advanced_table_mock_data_with_id
     @table_data_no_subrows = advanced_table_mock_data_no_subrows
@@ -337,6 +352,7 @@ class PagesController < ApplicationController
   def kit_show_rails
     @type = "rails"
     @users = Array.new(9) { Faker::Name.name }.paginate(page: params[:page], per_page: 2)
+    @extra_users = Array.new(2000) { Faker::Name.name }.paginate(page: params[:page], per_page: 2)
     @table_data = advanced_table_mock_data if @kit == "advanced_table" || @kit_parent == "advanced_table"
     @table_data_with_id = advanced_table_mock_data_with_id if @kit == "advanced_table" || @kit_parent == "advanced_table"
     @table_data_no_subrows = advanced_table_mock_data_no_subrows if @kit == "advanced_table" || @kit_parent == "advanced_table"
@@ -359,6 +375,7 @@ class PagesController < ApplicationController
 
   def kit_collection_show_rails
     @users = Array.new(9) { Faker::Name.name }.paginate(page: params[:page], per_page: 2)
+    @extra_users = Array.new(2000) { Faker::Name.name }.paginate(page: params[:page], per_page: 2)
     handle_kit_collection("rails")
   end
 
@@ -368,6 +385,7 @@ class PagesController < ApplicationController
 
   def kit_variants_collection_show_rails
     @users = Array.new(9) { Faker::Name.name }.paginate(page: params[:page], per_page: 2)
+    @extra_users = Array.new(2000) { Faker::Name.name }.paginate(page: params[:page], per_page: 2)
     handle_kit_variants_collection("rails")
   end
 
@@ -406,7 +424,29 @@ class PagesController < ApplicationController
   end
 
   def get_source(example)
-    read_kit_file("_#{example}.jsx")
+    extension = case @type
+                when "rails"
+                  "html.erb"
+                when "swift"
+                  "swift"
+                else
+                  "jsx"
+                end
+    read_kit_file("_#{example}.#{extension}")
+  end
+
+  def rendered_example(example_key)
+    return nil unless @type == "rails"
+
+    kit_name = @kit_parent == "advanced_table" ? @kit_parent : @kit
+    example_path = ::Playbook.kit_path(kit_name, "docs", "_#{example_key}.html.erb")
+    return nil unless example_path.exist?
+
+    erb_content = example_path.read
+    view_context.render(inline: erb_content)
+  rescue => e
+    Rails.logger.error("Error rendering Rails example #{example_key}: #{e.message}")
+    nil
   end
 
   def get_description(example)
@@ -766,6 +806,28 @@ private
     puts "Active Variants: #{@variants.inspect}"
 
     render template: "pages/kit_variants_collection", layout: "layouts/fullscreen"
+  end
+
+  # Beta JSON + Rails prerendered examples: ERB under pb_advanced_table/docs expects @table_data (OpenStruct),
+  # while the SPA passes plain JSON via @beta_table_* keys in the kit payload.
+  def assign_advanced_table_doc_mocks
+    return unless @kit.to_s == "advanced_table" || @kit_parent.to_s == "advanced_table"
+
+    @beta_table_data = advanced_table_mock_data_beta if @beta_table_data.nil?
+    @beta_table_data_with_id = advanced_table_mock_data_with_id_beta if @beta_table_data_with_id.nil?
+    @beta_table_data_no_subrows = advanced_table_mock_data_no_subrows_beta if @beta_table_data_no_subrows.nil?
+    @beta_table_data_pagination = advanced_table_pagination_mock_data if @beta_table_data_pagination.nil?
+    @beta_table_data_infinite_scroll = advanced_table_infinite_scroll_mock_data if @beta_table_data_infinite_scroll.nil?
+
+    return unless @type.to_s == "rails"
+
+    @table_data = advanced_table_mock_data if @table_data.nil?
+    @table_data_with_id = advanced_table_mock_data_with_id if @table_data_with_id.nil?
+    @table_data_no_subrows = advanced_table_mock_data_no_subrows if @table_data_no_subrows.nil?
+    @table_data_pagination = advanced_table_pagination_mock_data if @table_data_pagination.nil?
+    @table_data_infinite_scroll = advanced_table_infinite_scroll_mock_data if @table_data_infinite_scroll.nil?
+    @table_data_inline_loading = advanced_table_mock_data_inline_loading if @table_data_inline_loading.nil?
+    @table_data_inline_loading_empty_children = advanced_table_mock_data_inline_loading_empty_children if @table_data_inline_loading_empty_children.nil?
   end
 
   def advanced_table_mock_data
