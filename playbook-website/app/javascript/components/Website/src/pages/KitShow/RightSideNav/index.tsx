@@ -29,33 +29,69 @@ const RightSideNav = ({ examples, sections }: RightSideNavProps) => {
     }
   }, [activeId]);
 
-  // Set up IntersectionObserver to track which example is in view to render 'active' state.
+  // Keep the active state aligned with scroll position and force the last
+  // example active when the page reaches the bottom.
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (isManualScrollRef.current) return;
+    const scrollContainer = document.querySelector(
+      ".pb--page--content--main"
+    ) as HTMLElement | null;
 
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveId(entry.target.id);
-          }
-        });
-      },
-      {
-        rootMargin: "-10% 0px -80% 0px",
-        threshold: 0,
-      }
-    );
+    const updateActiveId = () => {
+      if (isManualScrollRef.current || examples.length === 0) return;
 
-    examples.forEach((example) => {
-      const element = document.getElementById(example.example_key);
-      if (element) {
-        observer.observe(element);
+      const viewportHeight = scrollContainer?.clientHeight ?? window.innerHeight;
+      const scrollTop = scrollContainer?.scrollTop ?? window.scrollY;
+      const scrollHeight =
+        scrollContainer?.scrollHeight ?? document.documentElement.scrollHeight;
+      const scrolledToBottom =
+        scrollTop + viewportHeight >= scrollHeight - 8;
+
+      if (scrolledToBottom) {
+        const lastExampleId = examples[examples.length - 1]?.example_key;
+
+        if (lastExampleId) {
+          setActiveId((currentActiveId) =>
+            currentActiveId === lastExampleId ? currentActiveId : lastExampleId
+          );
+        }
+
+        return;
       }
-    });
+
+      const containerTop = scrollContainer?.getBoundingClientRect().top ?? 0;
+      const activationLine = containerTop + viewportHeight * 0.2;
+      let nextActiveId = examples[0]?.example_key ?? "";
+
+      for (let i = 0; i < examples.length; i++) {
+        const element = document.getElementById(examples[i].example_key);
+        if (!element) continue;
+
+        const rect = element.getBoundingClientRect();
+
+        if (rect.top <= activationLine) {
+          nextActiveId = examples[i].example_key;
+        } else {
+          break;
+        }
+      }
+
+      if (nextActiveId) {
+        setActiveId((currentActiveId) =>
+          currentActiveId === nextActiveId ? currentActiveId : nextActiveId
+        );
+      }
+    };
+
+    updateActiveId();
+
+    const scrollTarget = scrollContainer ?? window;
+
+    scrollTarget.addEventListener("scroll", updateActiveId, { passive: true });
+    window.addEventListener("resize", updateActiveId);
 
     return () => {
-      observer.disconnect();
+      scrollTarget.removeEventListener("scroll", updateActiveId);
+      window.removeEventListener("resize", updateActiveId);
     };
   }, [examples]);
 
@@ -71,54 +107,6 @@ const RightSideNav = ({ examples, sections }: RightSideNavProps) => {
       isManualScrollRef.current = false;
     }, 1000);
   };
-
-  // Near the bottom of the page, relax the activation line so the final examples
-  // can still become active even if their top never reaches the usual observer zone.
-  useEffect(() => {
-    const handleScroll = () => {
-      if (isManualScrollRef.current || examples.length === 0) return;
-
-      const distanceFromBottom =
-        document.documentElement.scrollHeight -
-        (window.innerHeight + window.scrollY);
-      const nearBottomRange = Math.min(window.innerHeight * 0.75, 500);
-
-      if (distanceFromBottom > nearBottomRange) return;
-
-      const progressToBottom = Math.max(
-        0,
-        Math.min(1, (nearBottomRange - distanceFromBottom) / nearBottomRange)
-      );
-      const activationLine =
-        window.innerHeight * (0.2 + progressToBottom * 0.55);
-
-      for (let i = examples.length - 1; i >= 0; i--) {
-        const element = document.getElementById(examples[i].example_key);
-        if (!element) continue;
-
-        const rect = element.getBoundingClientRect();
-        const hasReachedActivationLine =
-          rect.top <= activationLine && rect.bottom > 0;
-
-        if (hasReachedActivationLine) {
-          setActiveId((currentActiveId) =>
-            currentActiveId === examples[i].example_key
-              ? currentActiveId
-              : examples[i].example_key
-          );
-          break;
-        }
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    window.addEventListener("resize", handleScroll);
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-      window.removeEventListener("resize", handleScroll);
-    };
-  }, [examples]);
 
   // Render nav items organized by sections or show all if no sections
   const renderNavItems = () => {
