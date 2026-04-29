@@ -158,7 +158,7 @@ export const PlaygroundTab: React.FC<PlaygroundTabProps> = ({
               )}
               {hasModifiedProps && (
                 <Button
-                  icon="rotate-left"
+                  icon="undo"
                   onClick={handleReset}
                   size="sm"
                   variant="secondary"
