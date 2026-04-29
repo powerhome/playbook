@@ -1,4 +1,4 @@
-/* eslint-disable react/jsx-max-props-per-line, react/jsx-no-literals, react/no-multi-comp -- generated kit border showcase */
+/* eslint-disable react/jsx-max-props-per-line, react/jsx-no-literals, react/no-multi-comp */
 import React, { useState } from 'react'
 import Flex from '../../pb_flex/_flex'
 import Title from '../../pb_title/_title'
