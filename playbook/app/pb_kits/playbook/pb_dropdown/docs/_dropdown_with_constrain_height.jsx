@@ -26,6 +26,24 @@ const DropdownWithConstrainHeight = (props) => {
           options={options}
           {...props}
       />
+
+    <br />
+
+      <Dropdown
+          label="Sub Component With Constrain Height"
+          options={options}
+          {...props}
+      >
+        <Dropdown.Trigger />
+        <Dropdown.Container constrainHeight>
+          {options.map((option) => (
+            <Dropdown.Option
+                key={option.id}
+                option={option}
+            />
+          ))}
+        </Dropdown.Container>
+      </Dropdown>
     </>
   )
 }
