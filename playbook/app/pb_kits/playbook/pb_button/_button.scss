@@ -124,8 +124,7 @@ $pb_button_icon_only_dimensions: (
   // Rails: .pb_button_icon_only; React: class or :has(...) when label is empty.
   // Rails uses a truly empty .pb_button_content; React wraps text in a child span (may be empty).
   &.pb_button_icon_only,
-  &:has(.pb_button_content:empty),
-  &:has(.pb_button_content > span:empty) {
+  &:has(.pb_button_content:empty) {
     aspect-ratio: 1;
     box-sizing: border-box;
     $pb_button_icon_only_default: map-get($pb_button_icon_only_dimensions, "md");
