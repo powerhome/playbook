@@ -37,9 +37,6 @@ import IconsIndex from 'components/Icons/IconsIndex'
 
 Turbo.session.drive = false
 
-// Icons from playbook-icons-react for testing
-import * as icons from "@powerhome/playbook-icons-react"
-
 window.PB_ICONS = {}
 
 function pascalToKebabCase(str) {
@@ -50,10 +47,6 @@ function pascalToKebabCase(str) {
     .toLowerCase(); 
 }
 
-Object.entries(icons).forEach(([key, value]) => {
-  const iconName = pascalToKebabCase(key)
-  window.PB_ICONS[iconName] = value
-})
 
 document.addEventListener('DOMContentLoaded', () => {
   const anchors = new AnchorJS()

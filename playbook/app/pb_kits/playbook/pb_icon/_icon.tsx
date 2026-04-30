@@ -3,6 +3,7 @@ import classnames from 'classnames'
 import { buildAriaProps, buildDataProps, buildHtmlProps } from '../utilities/props'
 import { GlobalProps, globalProps } from '../utilities/globalProps'
 import { isValidEmoji } from '../utilities/validEmojiChecker'
+import { getPlaybookIconClassName, supportsPlaybookIcon } from '../utilities/icons/playbookIconResolver'
 
 export type IconSizes = "lg"
 | "xs"
@@ -143,6 +144,10 @@ const Icon = (props: IconProps) => {
   } = props
 
   let iconElement: ReactSVGElement | null = typeof(icon) === "object" ? icon : null
+  const iconName = typeof(icon) === "string" ? icon : ""
+  const legacyPowerIcon = !customIcon && !iconElement && window.PB_ICONS ? window.PB_ICONS[iconName] : null
+  const hasBuiltInPlaybookIcon = !legacyPowerIcon && !customIcon && !iconElement && Boolean(iconName) && supportsPlaybookIcon(iconName)
+  const playbookIconClassName = hasBuiltInPlaybookIcon ? getPlaybookIconClassName(iconName) : null
 
   const faClasses = {
     'fa-border': border,
@@ -156,23 +161,23 @@ const Icon = (props: IconProps) => {
     [`fa-rotate-${rotation}`]: rotation,
   }
 
-  if (!customIcon && !iconElement) {
-    const PowerIcon: React.FunctionComponent<any> | undefined =
-      window.PB_ICONS ? window.PB_ICONS[icon as string] : null
-
-    if (PowerIcon) {
-      iconElement = <PowerIcon /> as ReactSVGElement
+  if (!customIcon && !iconElement && !hasBuiltInPlaybookIcon) {
+    if (legacyPowerIcon) {
+      const LegacyPowerIcon = legacyPowerIcon
+      iconElement = <LegacyPowerIcon /> as ReactSVGElement
     } else {
       faClasses[`fa-${icon}`] = icon as string
-    }
+      }
   }
 
-  const isFA = !iconElement && !customIcon 
+  const isFA = !iconElement && !customIcon && !hasBuiltInPlaybookIcon
 
   let classes = classnames(
-    (!iconElement && !customIcon) ? 'pb_icon_kit' : '',
-    (iconElement || customIcon) ? 'pb_custom_icon' : fontStyle,
-    iconElement ? 'svg-inline--fa' : '',
+    (!iconElement && !customIcon && !hasBuiltInPlaybookIcon) ? 'pb_icon_kit' : '',
+    (iconElement || customIcon || hasBuiltInPlaybookIcon) ? 'pb_custom_icon' : fontStyle,
+    (iconElement || hasBuiltInPlaybookIcon) ? 'svg-inline--fa' : '',
+    hasBuiltInPlaybookIcon ? 'pb_playbook_icon' : '',
+    playbookIconClassName,
     color ? `color_${color}` : '',
     globalProps(props),
     className
@@ -218,14 +223,25 @@ const Icon = (props: IconProps) => {
       typeof value === "boolean" ? String(value) : value,
     ])
   )
-  
+
   const ariaProps = buildAriaProps(normalizedAria)
   const dataProps: {[key: string]: any} = buildDataProps(data)
   const htmlProps = buildHtmlProps(htmlOptions)
 
   // Add a conditional here to show only the SVG if custom
   const displaySVG = (customIcon: any) => {
-    if (iconElement || customIcon)
+    if (hasBuiltInPlaybookIcon)
+      return (
+        <i
+            {...ariaProps}
+            {...dataProps}
+            {...htmlProps}
+            className={classes}
+            id={id}
+            {...(props.tabIndex !== undefined && { tabIndex })}
+        />
+      )
+    else if (iconElement || customIcon)
       return (
         <>
           {

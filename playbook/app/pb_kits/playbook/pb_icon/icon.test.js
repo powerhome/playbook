@@ -2,10 +2,45 @@ import React from 'react'
 import { render, screen, cleanup } from '../utilities/test-utils'
 
 import Icon from './_icon'
+import { resetPlaybookIconResolverCache } from '../utilities/icons/playbookIconResolver'
 
 const testId = "icon-kit"
+const originalPBIcons = window.PB_ICONS
+const originalGetComputedStyle = window.getComputedStyle
+
+const mockPlaybookIconsStyles = () => {
+    window.getComputedStyle = jest.fn((element, pseudoElement) => {
+        if (pseudoElement === "::before" && element?.className?.includes("playbook-user")) {
+            return {
+                getPropertyValue: (property) => {
+                    if (property === "content") return '" "'
+                    if (property === "mask-image" || property === "-webkit-mask-image") return "url(mock-user)"
+                    return ""
+                },
+            }
+        }
+
+        if (pseudoElement === "::before" && element?.className?.includes("playbook-house")) {
+            return {
+                getPropertyValue: (property) => {
+                    if (property === "content") return '" "'
+                    if (property === "mask-image" || property === "-webkit-mask-image") return "url(mock-house)"
+                    return ""
+                },
+            }
+        }
+
+        return originalGetComputedStyle(element, pseudoElement)
+    })
+}
 
 describe("Icon Kit", () => {
+    afterEach(() => {
+        window.PB_ICONS = originalPBIcons
+        window.getComputedStyle = originalGetComputedStyle
+        resetPlaybookIconResolverCache()
+    })
+
     test("renders Icon classname", () => {
         render(
             <Icon
@@ -163,6 +198,40 @@ describe("Icon Kit", () => {
 
         const kit = screen.getByTestId(testId)
         expect(kit).toHaveClass("color_primary")
+    })
+
+    test("renders playbook string icons without window.PB_ICONS", () => {
+        window.PB_ICONS = {}
+        mockPlaybookIconsStyles()
+
+        render(
+            <Icon
+                data={{ testid: testId }}
+                fixedWidth
+                icon="user"
+            />
+        )
+
+        const kit = screen.getByTestId(testId)
+        expect(kit.tagName.toLowerCase()).toBe("i")
+        expect(kit).toHaveClass("pb_custom_icon svg-inline--fa svg_fw pb_playbook_icon playbook-user")
+    })
+
+    test("resolves aliased playbook icons without window.PB_ICONS", () => {
+        window.PB_ICONS = {}
+        mockPlaybookIconsStyles()
+
+        render(
+            <Icon
+                data={{ testid: testId }}
+                fixedWidth
+                icon="home"
+            />
+        )
+
+        const kit = screen.getByTestId(testId)
+        expect(kit.tagName.toLowerCase()).toBe("i")
+        expect(kit).toHaveClass("pb_custom_icon svg-inline--fa svg_fw pb_playbook_icon playbook-house")
     })
 
 })
