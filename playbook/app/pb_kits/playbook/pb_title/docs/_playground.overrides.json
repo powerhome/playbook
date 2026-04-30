@@ -1,6 +1,12 @@
 {
   "children": {
-    "default": "Section heading"
+    "default": "Title"
+  },
+  "defaults": {
+    "bold": true,
+    "size": 3,
+    "tag": "h3",
+    "text": "Title"
   },
   "groups": [
     {
@@ -14,31 +20,89 @@
   ],
   "presets": [
     {
-      "name": "Page title",
-      "props": { "size": 1, "tag": "h1" },
-      "children": "Customer insights dashboard"
+      "name": "Default",
+      "props": {
+        "size": 3,
+        "tag": "h3",
+        "text": "Section heading"
+      }
     },
     {
-      "name": "Section",
-      "props": { "size": 3, "tag": "h3" },
-      "children": "Recent activity"
+      "name": "Title 1",
+      "props": {
+        "size": 1,
+        "tag": "h1",
+        "text": "Customer insights dashboard"
+      }
     },
     {
-      "name": "Subtitle",
-      "props": { "size": 4, "bold": false, "tag": "h4" },
-      "children": "Last updated 2 hours ago"
+      "name": "Title 4",
+      "props": {
+        "size": 4,
+        "text": "Title 4"
+      }
     },
     {
-      "name": "Success",
-      "props": { "color": "success", "size": 3 },
-      "children": "Payment confirmed"
+      "name": "Subtle title",
+      "props": {
+        "size": 4,
+        "bold": false,
+        "tag": "h4",
+        "text": "Last updated 2 hours ago"
+      }
+    },
+    {
+      "name": "Success state",
+      "props": {
+        "color": "success",
+        "size": 3,
+        "text": "Payment confirmed"
+      }
     },
     {
       "name": "Display size",
-      "props": { "displaySize": "lg", "tag": "h2" },
-      "children": "Hero headline"
+      "props": {
+        "displaySize": "lg",
+        "tag": "h1",
+        "text": "Hero headline"
+      }
+    },
+    {
+      "name": "Link title",
+      "props": {
+        "variant": "link",
+        "color": "link",
+        "size": 3,
+        "tag": "h3",
+        "text": "View all invoices"
+      }
+    },
+    {
+      "name": "Light weight",
+      "props": {
+        "bold": false,
+        "size": 2,
+        "tag": "h2",
+        "text": "Lightweight heading"
+      }
     }
   ],
   "conditionals": {},
-  "hints": {}
+  "hints": {
+    "display_size_info": {
+      "when": { "displaySize": "lg" },
+      "message": "displaySize gives you oversized display typography while the tag still controls document semantics.",
+      "type": "info"
+    },
+    "link_variant_info": {
+      "when": { "variant": "link" },
+      "message": "variant=\"link\" styles Title like an interactive heading. Use tag to keep the right semantic level.",
+      "type": "info"
+    },
+    "light_weight_info": {
+      "when": { "bold": false },
+      "message": "Turn bold off for lighter subheadings, timestamps, and supporting section labels.",
+      "type": "info"
+    }
+  }
 }

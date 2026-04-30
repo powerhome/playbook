@@ -5,7 +5,9 @@
     "color": "default",
     "disabled": false,
     "tag": "a",
-    "underline": false
+    "underline": false,
+    "href": "#link-example",
+    "text": "Link text"
   },
   "children": {
     "editable": true,
@@ -28,6 +30,7 @@
       "props": [
         "href",
         "target",
+        "disabled",
         "tabIndex"
       ]
     },
@@ -36,78 +39,95 @@
       "props": [
         "color",
         "underline",
-        "disabled",
-        "tag"
+        "tag",
+        "dark"
       ]
     }
   ],
   "presets": [
     {
       "name": "Default",
-      "props": {},
-      "children": "Link text"
+      "props": {
+        "href": "#link-example",
+        "text": "Link text"
+      }
+    },
+    {
+      "name": "Body color",
+      "props": {
+        "color": "body",
+        "href": "#body-link",
+        "text": "Inline body link"
+      }
     },
     {
       "name": "Muted underline",
       "props": {
         "color": "muted",
-        "underline": true
-      },
-      "children": "Secondary link"
-    },
-    {
-      "name": "Body color",
-      "props": {
-        "color": "body"
-      },
-      "children": "Inline body link"
+        "href": "#secondary-link",
+        "underline": true,
+        "text": "Secondary link"
+      }
     },
     {
       "name": "Destructive",
       "props": {
-        "color": "destructive"
-      },
-      "children": "Delete account"
+        "color": "destructive",
+        "href": "#delete-account",
+        "text": "Delete account"
+      }
     },
     {
-      "name": "With icon",
+      "name": "Leading icon",
       "props": {
         "color": "default",
-        "icon": "arrow-up-right-from-square"
-      },
-      "children": "Continue"
+        "href": "#continue",
+        "icon": "arrow-up-right-from-square",
+        "text": "Continue"
+      }
     },
     {
-      "name": "Icon both sides",
+      "name": "Trailing icon",
       "props": {
+        "href": "#details",
         "icon": "plus",
-        "iconRight": "chevron-right"
-      },
-      "children": "Open document"
+        "iconRight": "chevron-right",
+        "text": "Open document"
+      }
     },
     {
-      "name": "As heading tag",
+      "name": "Disabled",
       "props": {
-        "tag": "span"
-      },
-      "children": "Styled as link"
+        "disabled": true,
+        "href": "#disabled",
+        "text": "Disabled link"
+      }
     },
     {
-      "name": "With href",
+      "name": "Heading tag",
       "props": {
-        "href": "/dashboard",
-        "color": "default"
-      },
-      "children": "Go to dashboard"
+        "href": "#heading-link",
+        "icon": "arrow-up-right-from-square",
+        "tag": "h3",
+        "text": "Heading link"
+      }
     },
     {
       "name": "External new tab",
       "props": {
         "href": "https://example.com",
         "target": "_blank",
-        "icon": "arrow-up-right-from-square"
-      },
-      "children": "Example.com"
+        "icon": "arrow-up-right-from-square",
+        "text": "Example.com"
+      }
+    },
+    {
+      "name": "Span tag",
+      "props": {
+        "href": "#span-link",
+        "tag": "span",
+        "text": "Span link example"
+      }
     }
   ],
   "conditionals": {
@@ -119,11 +139,32 @@
     }
   },
   "hints": {
-    "target_needs_href": {
+    "external_target_info": {
       "when": {
-        "target": true
+        "target": "_blank"
       },
-      "message": "The target attribute only applies when href is set.",
+      "message": "Use target=\"_blank\" for external destinations that should open in a new tab.",
+      "type": "info"
+    },
+    "icon_pairing_info": {
+      "when": {
+        "iconRight": "chevron-right"
+      },
+      "message": "iconRight is available only when icon is also set, so the link can render a balanced icon treatment.",
+      "type": "info"
+    },
+    "disabled_info": {
+      "when": {
+        "disabled": true
+      },
+      "message": "Disabled links keep their visual treatment but should not be the only way to reach important actions.",
+      "type": "info"
+    },
+    "tag_semantics_info": {
+      "when": {
+        "tag": "h3"
+      },
+      "message": "Use tag to borrow link styling on semantic headings or inline text, but keep href when the element should still navigate.",
       "type": "info"
     }
   }
