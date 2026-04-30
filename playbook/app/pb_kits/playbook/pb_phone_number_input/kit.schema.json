@@ -147,6 +147,14 @@
         "rails"
       ],
       "default": false
+    },
+    "showPlaceholder": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
     }
   },
   "globalProps": true,
