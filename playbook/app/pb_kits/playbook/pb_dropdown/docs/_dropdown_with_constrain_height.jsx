@@ -30,7 +30,7 @@ const DropdownWithConstrainHeight = (props) => {
     <br />
 
       <Dropdown
-          label="Sub Component With Constrain Height"
+          label="Subcomponent With Constrain Height"
           options={options}
           {...props}
       >
