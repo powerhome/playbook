@@ -84,7 +84,7 @@ export default function ComponentList() {
     <>
       {!outlet && (
         <>
-          <Hero description={description} title="Components" />
+          <Hero description={description} title="Components" minHeight="245px" />
 
           <PageContainer>
             <Flex orientation="column" width="100%">
@@ -119,10 +119,9 @@ export default function ComponentList() {
               ) : (
                 displayedKits.map(({ category, components }: Kit, index: number) => (
                   <section
-                    className="category mb_xl"
+                    className="category mb_xl width_100_percent"
                     key={`${category}-${index}`}
                     id={category}
-                    style={{ marginLeft: "40px" }}
                   >
                     <NavLink to={`/beta/kit_category/${category}`}>
                       <CategoryTitle category={category} />

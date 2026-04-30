@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Typeahead, Badge, Flex } from 'playbook-ui'
 import { matchSorter } from 'match-sorter'
+import { useDarkMode } from './Website/src/contexts/DarkModeContext'
 
 type Kit = {
   label: string,
@@ -41,7 +42,11 @@ const combineKitsandVisualGuidelines = (
 
 const KitSearch = ({ classname, id, kits, global_props_and_tokens, marginBottom, beta, onBetaNavigate, betaSearchResetKey }: KitSearchProps) => {
   const kitsAndGuidelines = combineKitsandVisualGuidelines(kits, global_props_and_tokens)
-
+  let darkMode = false
+  if (beta) {
+    const { darkMode: betaDarkMode } = useDarkMode()
+    darkMode = betaDarkMode
+  }
   const [filteredKits, setFilteredKits] = useState(kitsAndGuidelines)
 
   useEffect(() => {
@@ -79,7 +84,7 @@ const KitSearch = ({ classname, id, kits, global_props_and_tokens, marginBottom,
     <Flex alignItems="center" justify="between">
         {labelLeft}
         <Badge
-          dark
+          dark={darkMode}
           margin="xs"
           text={type === 'global_prop' ? 'Global Prop' : 'Token'}
           variant="primary"
@@ -93,7 +98,7 @@ const KitSearch = ({ classname, id, kits, global_props_and_tokens, marginBottom,
       <Typeahead
         key={typeaheadKey}
         className={classname}
-        dark={document.cookie.split("; ").includes("dark_mode=true")}
+        dark={beta ? darkMode : document.cookie.split("; ").includes("dark_mode=true")}
         id={id}
         marginBottom={marginBottom || 'sm'}
         onChange={handleChange}

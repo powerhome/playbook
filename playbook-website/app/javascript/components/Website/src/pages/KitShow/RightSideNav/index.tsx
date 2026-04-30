@@ -1,5 +1,6 @@
 import { Caption, Flex, colors } from "playbook-ui";
 import { useState, useEffect, useRef } from "react";
+import { useDarkMode } from "../../../contexts/DarkModeContext";
 import "./styles.scss";
 
 interface Section {
@@ -16,6 +17,7 @@ const RightSideNav = ({ examples, sections }: RightSideNavProps) => {
   const [activeId, setActiveId] = useState<string>("");
   const navItemsRef = useRef<{ [key: string]: HTMLDivElement | null }>({});
   const isManualScrollRef = useRef(false);
+  const { darkMode } = useDarkMode();
 
   // Scroll active nav item into view if the nav is too long to fit the page
   useEffect(() => {
@@ -27,37 +29,75 @@ const RightSideNav = ({ examples, sections }: RightSideNavProps) => {
     }
   }, [activeId]);
 
-  // Set up IntersectionObserver to track which example is in view to render 'active' state
+  // Keep the active state aligned with scroll position and force the last
+  // example active when the page reaches the bottom.
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveId(entry.target.id);
-          }
-        });
-      },
-      {
-        rootMargin: "-10% 0px -80% 0px",
-        threshold: 0,
-      }
-    );
+    const scrollContainer = document.querySelector(
+      ".pb--page--content--main"
+    ) as HTMLElement | null;
 
-    // Observe all example elements to know which is in view
-    examples.forEach((example) => {
-      const element = document.getElementById(example.example_key);
-      if (element) {
-        observer.observe(element);
+    const updateActiveId = () => {
+      if (isManualScrollRef.current || examples.length === 0) return;
+
+      const viewportHeight = scrollContainer?.clientHeight ?? window.innerHeight;
+      const scrollTop = scrollContainer?.scrollTop ?? window.scrollY;
+      const scrollHeight =
+        scrollContainer?.scrollHeight ?? document.documentElement.scrollHeight;
+      const scrolledToBottom =
+        scrollTop + viewportHeight >= scrollHeight - 8;
+
+      if (scrolledToBottom) {
+        const lastExampleId = examples[examples.length - 1]?.example_key;
+
+        if (lastExampleId) {
+          setActiveId((currentActiveId) =>
+            currentActiveId === lastExampleId ? currentActiveId : lastExampleId
+          );
+        }
+
+        return;
       }
-    });
+
+      const containerTop = scrollContainer?.getBoundingClientRect().top ?? 0;
+      const activationLine = containerTop + viewportHeight * 0.2;
+      let nextActiveId = examples[0]?.example_key ?? "";
+
+      for (let i = 0; i < examples.length; i++) {
+        const element = document.getElementById(examples[i].example_key);
+        if (!element) continue;
+
+        const rect = element.getBoundingClientRect();
+
+        if (rect.top <= activationLine) {
+          nextActiveId = examples[i].example_key;
+        } else {
+          break;
+        }
+      }
+
+      if (nextActiveId) {
+        setActiveId((currentActiveId) =>
+          currentActiveId === nextActiveId ? currentActiveId : nextActiveId
+        );
+      }
+    };
+
+    updateActiveId();
+
+    const scrollTarget = scrollContainer ?? window;
+
+    scrollTarget.addEventListener("scroll", updateActiveId, { passive: true });
+    window.addEventListener("resize", updateActiveId);
 
     return () => {
-      observer.disconnect();
+      scrollTarget.removeEventListener("scroll", updateActiveId);
+      window.removeEventListener("resize", updateActiveId);
     };
   }, [examples]);
 
   const handleClick = (id: string) => {
     isManualScrollRef.current = true;
+    setActiveId(id);
     const element = document.getElementById(id);
     if (element) {
       element.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -87,6 +127,7 @@ const RightSideNav = ({ examples, sections }: RightSideNavProps) => {
                 cursor="pointer"
                 text={section.title}
                 marginBottom="xxs"
+                dark={darkMode}
               />
             </div>
             {sectionExamples.map((example: any) => (
@@ -106,6 +147,13 @@ const RightSideNav = ({ examples, sections }: RightSideNavProps) => {
                   text={example.title}
                   color={activeId === example.example_key ? "link" : "light"}
                   cursor="pointer"
+                  dark={darkMode}
+                  htmlOptions={{
+                    style: {
+                      paddingTop: "2px",
+                      paddingBottom: "2px",
+                    },
+                  }}
                 />
               </div>
             ))}
@@ -131,6 +179,7 @@ const RightSideNav = ({ examples, sections }: RightSideNavProps) => {
             text={example.title} 
             color={activeId === example.example_key ? "link" : "light"}
             cursor="pointer" 
+            dark={darkMode}
           />
         </div>
       ));

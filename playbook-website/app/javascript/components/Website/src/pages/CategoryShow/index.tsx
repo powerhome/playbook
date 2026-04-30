@@ -49,8 +49,7 @@ export default function CategoryShow() {
         <Flex
           align="center"
           className="category-breadcrumb"
-          marginBottom="md"
-          paddingX="xl"
+          paddingX="sm"
         >
           <NavLink to="/beta/kits">
             <Body className="previous-route" color="link">
@@ -66,6 +65,8 @@ export default function CategoryShow() {
         <Hero
           description={description ?? ""}
           title={linkFormat(category)}
+          height="157px"
+          backgroundPosition="center right"
         />
 
         {!kitsToShow.length && (

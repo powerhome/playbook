@@ -4,6 +4,7 @@
 @import "playbook-tokens/border_radius";
 @import "playbook-tokens/shadows";
 @import "playbook-tokens/typography";
+@import "playbook-tokens/positioning";
 
 $selector: ".pb--page";
 $nav_breakpoint: breakpoint("lg");
@@ -248,7 +249,7 @@ body {
     right: 0;
     background-color: $white;
     text-align: center;
-    z-index: 3;
+    z-index: $z_1;
   }
 
 }

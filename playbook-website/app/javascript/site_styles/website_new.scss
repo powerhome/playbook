@@ -1,4 +1,27 @@
 @import "playbook-tokens/colors";
+@import "playbook-tokens/container";
+@import "playbook-tokens/screen_sizes";
+@import "playbook-tokens/spacing";
+@import "playbook-tokens/border_radius";
+@import "playbook-tokens/shadows";
+
+$beta_nav_breakpoint: breakpoint("lg");
+
+// Hero / kit listing: same horizontal gutter + centered xl content track.
+@mixin website-page-gutter-padding {
+  padding-inline: $space_xl;
+
+  @media (min-width: $screen-lg-min) {
+    padding-inline: $space_sm + $space_xl;
+  }
+}
+
+@mixin website-content-well {
+  box-sizing: border-box;
+  margin-inline: auto;
+  max-width: $container_xl;
+  width: 100%;
+}
 
 .pb--website--new {
   pre.highlight {
@@ -14,14 +37,51 @@
   &.pb--page--content {
     min-height: auto;
   }
-  
-  // Adjust heights for sticky header (header takes ~89px)
+
+  // Use dynamic viewport units so the panes track the real visible viewport.
   .pb--page--sideNav {
-    height: calc(100vh - 89px);
+    height: calc(100dvh - var(--beta-header-height, 89px));
+    &.dark {
+      border-color: #3b3752;
+    }
   }
-  
+
   .pb--page--content--main {
-    height: calc(100vh - 89px);
+    height: calc(100dvh - var(--beta-header-height, 89px));
+  }
+
+  .pb--page--sideNav {
+    @include break_at($beta_nav_breakpoint) {
+      position: absolute;
+      transform-origin: 0% 0%;
+      transform: translate(-110%, 0);
+      transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
+      border-radius: $border_rad_heavier;
+      box-shadow: $shadow_deepest;
+      top: 89px;
+      left: 0;
+      min-width: 200px;
+      width: auto !important;
+      z-index: 1000;
+
+      &.mobile-open {
+        transform: translate(10%, 0);
+      }
+    }
+  }
+
+  .kit-grid-shell {
+    @include website-page-gutter-padding;
+    box-sizing: border-box;
+    width: 100%;
+  }
+
+  .kit-grid-layout {
+    @include website-content-well;
+  }
+
+  .hero-content-well {
+    @include website-content-well;
   }
 }
 

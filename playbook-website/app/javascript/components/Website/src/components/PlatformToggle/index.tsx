@@ -2,6 +2,7 @@ import { Flex, Icon, Nav, NavItem } from "playbook-ui";
 import { ReactSVG } from "./ReactSVG";
 import { RailsSVG } from "./RailsSVG";
 // import { SwiftSVG } from "./SwiftSVG";
+import { useDarkMode } from "../../contexts/DarkModeContext";
 import "./styles.scss";
 
 type PlatformToggleProps = {
@@ -25,8 +26,10 @@ export const PlatformToggle = ({
     setPlatform(name);
   };
 
+  const { darkMode } = useDarkMode();
+
   return (
-    <Nav orientation="horizontal" variant="subtle">
+    <Nav orientation="horizontal" variant="subtle" dark={darkMode}>
       {platforms.map(({ name, label, Icon: PlatformIcon }) => (
         <NavItem
           key={name}
@@ -34,9 +37,10 @@ export const PlatformToggle = ({
           cursor="pointer"
           className="platform-toggle-item"
           onClick={() => handlePlatformClick(name)}
+          dark={darkMode}
         >
           <Flex align="center" gap="xs">
-            <Icon className="platformIcon" customIcon={<PlatformIcon active={platform === name} />} />
+            <Icon dark={darkMode} className="platformIcon" customIcon={<PlatformIcon active={platform === name} />} />
             <span className="pb_nav_list_item_text">{label}</span>
           </Flex>
         </NavItem>

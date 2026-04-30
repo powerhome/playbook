@@ -1,9 +1,10 @@
 import { useLoaderData, useParams } from "react-router-dom";
 import { Body, Title, Nav, NavItem, Flex, SectionSeparator } from "playbook-ui";
 import { useState, useMemo } from "react";
-import ReactMarkdown from "react-markdown";
+import { useDarkMode } from "../../contexts/DarkModeContext";
 
 import { PageContainer } from "../../components/PageContainer";
+import { MarkdownContent } from "../../components/MarkdownContent";
 import { usePlatform } from "../../contexts/PlatformContext";
 import { linkFormat } from "../../../../../utilities/website_sidebar_helper";
 import { DocsTab } from "./Tabs/DocsTab";
@@ -25,7 +26,7 @@ const KitShow = () => {
     global_props_schema,
     playground_config,
   } = loaderData;
-
+  const { darkMode, setDarkMode } = useDarkMode();
   // Prepare example props for advanced_table examples
   const exampleProps = useMemo(() => {
     const isAdvancedTable = loaderData?.kit === "advanced_table";
@@ -38,6 +39,8 @@ const KitShow = () => {
       MOCK_DATA_NO_SUBROWS: loaderData.table_data_no_subrows || [],
       PAGINATION_MOCK_DATA: loaderData.table_data_pagination || [],
       INFINITE_SCROLL_MOCK_DATA: loaderData.table_data_infinite_scroll || [],
+      MOCK_DATA_INLINE_LOADING: loaderData.table_data_inline_loading || [],
+      MOCK_DATA_INLINE_LOADING_EMPTY_CHILDREN: loaderData.table_data_inline_loading_empty_children || [],
     };
   }, [loaderData]);
 
@@ -45,6 +48,14 @@ const KitShow = () => {
   const showPlayground = platform !== "rails";
   const displayTab =
     activeTab === "playground" && !showPlayground ? "docs" : activeTab;
+
+  const handleTabChange = (tab: string) => {
+    if (tab === "playground") {
+      setDarkMode(false);
+    }
+
+    setActiveTab(tab);
+  };
 
   return (
     <>
@@ -54,12 +65,13 @@ const KitShow = () => {
           size={1}
           marginBottom={kit_description ? undefined : "md"}
           paddingX="xl"
+          dark={darkMode}
         />
         {kit_description && kit_description !== "" && (
           <Flex paddingX="xl">
             <Flex flex={1} minWidth={0}>
-              <Body marginTop="sm" marginBottom="md">
-                <ReactMarkdown>{kit_description}</ReactMarkdown>
+              <Body marginTop="sm" marginBottom="md" dark={darkMode}>
+                <MarkdownContent>{kit_description}</MarkdownContent>
               </Body>
             </Flex>
             <Flex
@@ -71,22 +83,25 @@ const KitShow = () => {
         )}
 
         {/* Navigation Tabs */}
-        <Nav orientation="horizontal" paddingX="xl">
+        <Nav orientation="horizontal" paddingX="xl" dark={darkMode}>
           <NavItem
             text="Docs"
             active={displayTab === "docs"}
-            onClick={() => setActiveTab("docs")}
+            onClick={() => handleTabChange("docs")}
+            dark={darkMode}
           />
           <NavItem
             text="Props"
             active={displayTab === "props"}
-            onClick={() => setActiveTab("props")}
+            onClick={() => handleTabChange("props")}
+            dark={darkMode}
           />
           {showPlayground && (
             <NavItem
               text="Playground"
               active={displayTab === "playground"}
-              onClick={() => setActiveTab("playground")}
+              onClick={() => handleTabChange("playground")}
+              dark={darkMode}
             />
           )}
 
@@ -102,7 +117,7 @@ const KitShow = () => {
             onClick={() => setActiveTab("references")}
           /> */}
         </Nav>
-        <SectionSeparator marginBottom="lg" />
+        <SectionSeparator marginBottom="lg" dark={darkMode} />
 
         {/* Playground Tab Content (React-only for now; hidden on Rails) */}
         {showPlayground && displayTab === "playground" && (
@@ -126,7 +141,7 @@ const KitShow = () => {
         )}
 
         {/* Props Tab Content */}
-        {displayTab === "props" && <PropsTab availableProps={available_props} />}
+        {displayTab === "props" && <PropsTab availableProps={available_props} platform={platform} />}
 
         {/* Building Blocks Tab Content, commented out until building blocks are implemented */}
         {/* {activeTab === "building-blocks" && <BuildingBlocksTab />} */}

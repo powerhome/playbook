@@ -4,15 +4,15 @@ import GlobalProps from "../../../../../AvailableProps/globalProps";
 import { useState } from "react";
 import { Nav, NavItem, SectionSeparator } from "playbook-ui";
 import globalPropsValues from "../../../../../AvailableProps/globalPropsValues";
-
+import { useDarkMode } from "../../../contexts/DarkModeContext";
 interface PropsTabProps {
   availableProps?: string;
-  platform?: "react" | "rails";
+  platform?: string;
 }
 
 export const PropsTab = ({ availableProps, platform = "react" }: PropsTabProps) => {
   const [showKitTab, setShowKitTab] = useState(true);
-
+  const { darkMode } = useDarkMode();
   if (!availableProps) {
     return (
       <Card padding="md">
@@ -23,6 +23,14 @@ export const PropsTab = ({ availableProps, platform = "react" }: PropsTabProps) 
 
   // Parse the schema JSON
   const schema = JSON.parse(availableProps);
+
+  const formatPropName = (propName: string) =>
+    platform === "rails"
+      ? propName
+          .replace(/([a-z0-9])([A-Z])/g, "$1_$2")
+          .replace(/-/g, "_")
+          .toLowerCase()
+      : propName;
   
   // Extract props from our kit.schema.json format
   // Schema structure: { $schema, name, description, platforms, props: {...}, globalProps, usage }
@@ -40,32 +48,34 @@ export const PropsTab = ({ availableProps, platform = "react" }: PropsTabProps) 
     const isForPlatform = platforms.length === 0 || platforms.includes(platform);
     
     if (!isGlobalProp && isForPlatform) {
-      kitProps[propName] = prop;
+      kitProps[formatPropName(propName)] = prop;
     }
   }
 
   return (
     <Flex paddingX="xl" width="100%">
-      <Card padding="none" width="100%">
+      <Card padding="none" width="100%" dark={darkMode}>
         <Card.Body padding="sm">
-          <Nav orientation="horizontal" variant="subtle">
+          <Nav orientation="horizontal" variant="subtle" dark={darkMode}>
             <NavItem
               text="Kit Props"
               active={showKitTab}
               onClick={() => setShowKitTab(true)}
               cursor="pointer"
+              dark={darkMode}
             />
             <NavItem
               text="Global Props"
               active={!showKitTab}
               onClick={() => setShowKitTab(false)}
               cursor="pointer"
+              dark={darkMode}
             />
           </Nav>
         </Card.Body>
-        <SectionSeparator />
-        {showKitTab && <KitProps kitPropsValues={kitProps} darkMode={false} />}
-        {!showKitTab && <GlobalProps darkMode={false} />}
+        <SectionSeparator dark={darkMode} />
+        {showKitTab && <KitProps kitPropsValues={kitProps} darkMode={darkMode} />}
+        {!showKitTab && <GlobalProps darkMode={darkMode} />}
       </Card>
     </Flex>
   );

@@ -1,43 +1,66 @@
-import React, { useEffect, useMemo, useState } from "react"
-import { LoadingInline, Card, colors, Flex } from "playbook-ui"
-import { LiveProvider, LivePreview, LiveError } from "react-live"
+import React, { useCallback, useEffect, useMemo, useState } from "react";
+import PropTypes from "prop-types";
+import { useDarkMode } from "../../contexts/DarkModeContext";
+import { LoadingInline, Card, colors, Flex } from "playbook-ui";
+import { LiveProvider, LivePreview, LiveError, LiveContext } from "react-live";
 // All third party loaders should live in separate files and get imported here
-import { highchartsLoader, maplibreLoader, tiptapLoader, ThirdPartyLoader, ThirdPartyScope } from "./ThirdPartyLoaders"
+import {
+  highchartsLoader,
+  mapboxDrawLoader,
+  maplibreLoader,
+  playbookChartsLoader,
+  reactHookFormLoader,
+  tiptapLoader,
+  trixLoader,
+  ThirdPartyLoader,
+  ThirdPartyScope,
+} from "./ThirdPartyLoaders";
 // Pull in all Playbook React exports so we don't have to specify individual imports
-import * as PB from "playbook-ui" 
-
+import * as PB from "playbook-ui";
 
 /**
  * NOTE:
  * This component renders a live code example using react-live.
  * We pull in all Playbook React exports so we don't have to specify individual imports.
  * We have to do the Date kit as FormattedDate as the only one that requires special handling.
- * We also need to add in third party imports if used in examples. For Example: Highcharts, etc. 
+ * We also need to add in third party imports if used in examples. For Example: Highcharts, etc.
  */
 type LiveExampleProps = {
-  code: string
-  exampleProps?: Record<string, unknown>
-}
+  code: string;
+  exampleProps?: Record<string, unknown>;
+};
 
 // imports helper
-type DefaultImport = { local: string; source: string }
+type DefaultImport = { local: string; source: string };
 
 function extractImportSources(raw: string) {
-  const lines = raw.split("\n")
-  const importLines = lines.filter((l) => /^\s*import\s+/.test(l))
+  const lines = raw.split("\n");
+  const importLines = lines.filter((l) => /^\s*import\s+/.test(l));
   const sources = importLines
     .map((l) => {
-      const m = l.match(/from\s+['"]([^'"]+)['"]/)
-      return m?.[1] || null
+      const m = l.match(/from\s+['"]([^'"]+)['"]/);
+      return m?.[1] || null;
     })
-    .filter(Boolean) as string[]
-  return { importLines, sources }
+    .filter(Boolean) as string[];
+  return { importLines, sources };
 }
 
 // This is needed for preserving default imports (e.g. HighchartsMore, SolidGauge)
 function parseDefaultImports(raw: string): DefaultImport[] {
-  const matches = [...raw.matchAll(/^\s*import\s+([A-Za-z0-9_$]+)\s+from\s+['"]([^'"]+)['"]\s*;?\s*$/gm)]
-  return matches.map((m) => ({ local: m[1], source: m[2] }))
+  const matches = [
+    ...raw.matchAll(
+      /^\s*import\s+([A-Za-z0-9_$]+)\s+from\s+['"]([^'"]+)['"]\s*;?\s*$/gm,
+    ),
+  ];
+  return matches.map((m) => ({ local: m[1], source: m[2] }));
+}
+
+// Parse Date import aliases (e.g., "Date as DateKit" -> "DateKit")
+function parseDateAlias(raw: string): string | null {
+  const match = raw.match(
+    /import\s+\{[^}]*\bDate\s+as\s+([A-Za-z0-9_$]+)[^}]*\}\s+from\s+['"]playbook-ui['"]/,
+  );
+  return match?.[1] || null;
 }
 
 // prepare the snippet for react-live
@@ -45,21 +68,21 @@ function prepareCode(raw: string) {
   let code = raw
     .split("\n")
     .filter((l) => !l.trim().startsWith("import "))
-    .join("\n")
+    .join("\n");
 
-  const defaultExportRegex = /export\s+default\s+([A-Za-z0-9_]+)/
+  const defaultExportRegex = /export\s+default\s+([A-Za-z0-9_]+)/;
 
   if (defaultExportRegex.test(code)) {
-    code = code.replace(defaultExportRegex, "const __Exported = $1")
+    code = code.replace(defaultExportRegex, "const __Exported = $1");
     code += `
 render(<__Exported {...(typeof exampleProps !== 'undefined' ? exampleProps : {})} />)
-`
+`;
   } else {
     code += `
 if (typeof render === 'function') { render(<React.Fragment />) }
-`
+`;
   }
-  return code
+  return code;
 }
 
 /**
@@ -72,73 +95,89 @@ if (typeof render === 'function') { render(<React.Fragment />) }
 // Lib loaders array
 const LIB_LOADERS: ThirdPartyLoader[] = [
   highchartsLoader,
+  mapboxDrawLoader,
   maplibreLoader,
+  playbookChartsLoader,
+  reactHookFormLoader,
   tiptapLoader,
-]
+  trixLoader,
+];
 
 async function loadThirdPartyLibs(raw: string): Promise<ThirdPartyScope> {
-  const defaults = parseDefaultImports(raw)
-  const { sources } = extractImportSources(raw)
-  const active = LIB_LOADERS.filter((l) => l.detect(raw, defaults, sources))
-  if (active.length === 0) return {}
-  const scopes = await Promise.all(active.map((l) => l.load(raw, defaults, sources)))
-  return Object.assign({}, ...scopes)
+  const defaults = parseDefaultImports(raw);
+  const { sources } = extractImportSources(raw);
+  const active = LIB_LOADERS.filter((l) => l.detect(raw, defaults, sources));
+  if (active.length === 0) return {};
+  const scopes = await Promise.all(
+    active.map((l) => l.load(raw, defaults, sources)),
+  );
+  return Object.assign({}, ...scopes);
 }
 
 // Main Component
-const LiveExample: React.FC<LiveExampleProps> = ({ code, exampleProps = {} }) => {
-  const prepared = useMemo(() => prepareCode(code), [code])
-
+const LiveExample: React.FC<LiveExampleProps> = ({
+  code,
+  exampleProps = {},
+}) => {
+  const prepared = useMemo(() => prepareCode(code), [code]);
+  const { darkMode } = useDarkMode();
   // prevent Date kit from shadowing the global Date constructor. Do FormattedDate like we do in the docs
-  const { Date: FormattedDate, ...PBrest } = PB as any
+  const { Date: FormattedDate, ...PBrest } = PB as any;
+
+  // Check if Date is imported with an alias (e.g., "Date as DateKit")
+  const dateAlias = useMemo(() => parseDateAlias(code), [code]);
 
   // Determine if any third-party lib is needed
   const needsThirdParty = useMemo(() => {
-    const defaults = parseDefaultImports(code)
-    const { sources } = extractImportSources(code)
-    return LIB_LOADERS.some((l) => l.detect(code, defaults, sources))
-  }, [code])
+    const defaults = parseDefaultImports(code);
+    const { sources } = extractImportSources(code);
+    return LIB_LOADERS.some((l) => l.detect(code, defaults, sources));
+  }, [code]);
 
-  const [thirdParty, setThirdParty] = useState<ThirdPartyScope>({})
-  const [libsKey, setLibsKey] = useState("")
-  const [libsReady, setLibsReady] = useState(!needsThirdParty)
-  const [isRendering, setIsRendering] = useState(true)
+  const [thirdParty, setThirdParty] = useState<ThirdPartyScope>({});
+  const [libsKey, setLibsKey] = useState("");
+  const [libsReady, setLibsReady] = useState(!needsThirdParty);
+  const [isRendering, setIsRendering] = useState(true);
+  const mergedExampleProps = useMemo(
+    () => ({ ...exampleProps, dark: darkMode, darkMode }),
+    [exampleProps, darkMode],
+  );
 
   useEffect(() => {
-    let cancelled = false
+    let cancelled = false;
     if (!needsThirdParty) {
-      setThirdParty({})
-      setLibsKey("")
-      setLibsReady(true)
-      return
+      setThirdParty({});
+      setLibsKey("");
+      setLibsReady(true);
+      return;
     }
-    setLibsReady(false)
-    ;(async () => {
-      const scope = await loadThirdPartyLibs(code)
+    setLibsReady(false);
+    (async () => {
+      const scope = await loadThirdPartyLibs(code);
       if (!cancelled) {
-        setThirdParty(scope)
-        setLibsKey(Object.keys(scope).sort().join("|"))
-        setLibsReady(true)
+        setThirdParty(scope);
+        setLibsKey(Object.keys(scope).sort().join("|"));
+        setLibsReady(true);
       }
-    })()
+    })();
     return () => {
-      cancelled = true
-    }
-  }, [code, needsThirdParty])
+      cancelled = true;
+    };
+  }, [code, needsThirdParty]);
 
   useEffect(() => {
     if (libsReady) {
-      setIsRendering(true)
+      setIsRendering(true);
       // Give LivePreview time to render
       const timer = setTimeout(() => {
-        setIsRendering(false)
-      }, 300)
-      return () => clearTimeout(timer)
+        setIsRendering(false);
+      }, 300);
+      return () => clearTimeout(timer);
     }
-  }, [libsReady, libsKey])
+  }, [libsReady, libsKey]);
 
-  const scope = useMemo(
-    () => ({
+  const scope = useMemo(() => {
+    const baseScope: Record<string, any> = {
       // React + hooks (so stripped imports still work)
       React,
       useState: React.useState,
@@ -147,36 +186,69 @@ const LiveExample: React.FC<LiveExampleProps> = ({ code, exampleProps = {} }) =>
       useMemo: React.useMemo,
       useCallback: React.useCallback,
       useLayoutEffect: React.useLayoutEffect,
+      forwardRef: React.forwardRef,
       Fragment: React.Fragment,
+      // PropTypes for runtime type checking
+      PropTypes,
       // All Playbook components (except Date which is below this as FormattedDate)
       ...PBrest,
       FormattedDate,
       // Third-party libs injected here (Highcharts*, maplibregl, etc.)
       ...thirdParty,
+      // Expose dark mode in both direct scope vars and props for exported examples
+      dark: darkMode,
+      darkMode,
+      exampleProps: mergedExampleProps,
       // Spread exampleProps so MOCK_DATA etc. are top-level variables
-      ...exampleProps,
-    }),
-    [thirdParty, exampleProps, PBrest, FormattedDate],
-  )
+      ...mergedExampleProps,
+    };
+    // Add Date alias if present (e.g., "Date as DateKit" -> DateKit = FormattedDate)
+    if (dateAlias) {
+      baseScope[dateAlias] = FormattedDate;
+    }
+    return baseScope;
+  }, [thirdParty, mergedExampleProps, PBrest, FormattedDate, dateAlias, darkMode]);
+
+  // Handle clicks to prevent href="#" navigation (only preventDefault, not stopPropagation)
+  const handleContainerClick = useCallback((e: React.MouseEvent) => {
+    const target = e.target as HTMLElement;
+    const anchor = target.closest('a[href="#"]');
+    if (anchor) {
+      e.preventDefault();
+    }
+  }, []);
 
   if (!libsReady || isRendering) {
     return (
       <Flex textAlign="center" justify="center" padding="md">
-        <LoadingInline />
+        <LoadingInline dark={darkMode} />
       </Flex>
-    )
+    );
   }
 
   return (
-    <LiveProvider key={libsKey} code={prepared} scope={scope} noInline>
-      <Card borderNone padding="md">
-        <LivePreview />
-      </Card>
-      <Card borderNone padding="md" htmlOptions={{ style:{color: colors.error }}}>
-        <LiveError />
-      </Card>
-    </LiveProvider>
-  )
-}
+    <div onClickCapture={handleContainerClick}>
+      <LiveProvider key={libsKey} code={prepared} scope={scope} noInline>
+        <Card borderNone padding="md" dark={darkMode} htmlOptions={{ style: { border: 'none' } }}>
+          <LivePreview />
+        </Card>
+        <LiveContext.Consumer>
+          {({ error }) =>
+            error ? (
+              <Card
+                borderNone
+                padding="md"
+                htmlOptions={{ style: { color: colors.error } }}
+                dark={darkMode}
+              >
+                <LiveError />
+              </Card>
+            ) : null
+          }
+        </LiveContext.Consumer>
+      </LiveProvider>
+    </div>
+  );
+};
 
-export default LiveExample
+export default LiveExample;

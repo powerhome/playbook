@@ -56,7 +56,7 @@ const KitProps = ({ kitPropsValues, darkMode }: KitPropsType) => {
             </tr>
           </thead>
           <tbody>
-            {Object.entries(kitPropsValues).map(([propName, propValue]) => (
+            {Object.entries(kitPropsValues).sort(([a], [b]) => a.localeCompare(b)).map(([propName, propValue]) => (
               <tr key={propName}>
                 <td>
                   <Title
