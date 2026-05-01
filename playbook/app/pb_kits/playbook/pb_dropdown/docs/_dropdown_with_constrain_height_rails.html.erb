@@ -18,3 +18,14 @@
   constrain_height: true,
   label: "With Constrain Height"
 }) %>
+
+<br>
+
+<%= pb_rails("dropdown", props: {options: options, label: "Subcomponent With Constrain Height"}) do %>
+  <%= pb_rails("dropdown/dropdown_trigger") %>
+  <%= pb_rails("dropdown/dropdown_container", props: { constrain_height: true }) do %>
+    <% options.each do |option| %>
+      <%= pb_rails("dropdown/dropdown_option", props: {option: option}) %>
+    <% end %>
+  <% end %>
+<% end %>
