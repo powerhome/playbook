@@ -12,6 +12,7 @@ module Playbook
     end
 
     config.view_component.render_monkey_patch_enabled = false
+    config.view_component.capture_compatibility_patch_enabled = true
 
     if config.respond_to?(:assets)
       config.assets.paths ||= []

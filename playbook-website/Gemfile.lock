@@ -5,7 +5,7 @@ PATH
       actionpack (>= 5.2.4.5)
       actionview (>= 5.2.4.5)
       activesupport (>= 5.2.4.5)
-      view_component (= 2.83.0)
+      view_component (= 3.8.0)
       vite_rails
 
 GEM
@@ -302,7 +302,7 @@ GEM
       tzinfo (>= 1.0.0)
     unicode-display_width (2.5.0)
     useragent (0.16.11)
-    view_component (2.83.0)
+    view_component (3.8.0)
       activesupport (>= 5.2.0, < 8.0)
       concurrent-ruby (~> 1.0)
       method_source (~> 1.0)
