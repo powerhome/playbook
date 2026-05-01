@@ -1,9 +1,14 @@
-import React, { ReactSVGElement } from 'react'
+import React, { ReactSVGElement, useEffect, useState } from 'react'
 import classnames from 'classnames'
 import { buildAriaProps, buildDataProps, buildHtmlProps } from '../utilities/props'
 import { GlobalProps, globalProps } from '../utilities/globalProps'
 import { isValidEmoji } from '../utilities/validEmojiChecker'
-import { getPlaybookIconClassName, supportsPlaybookIcon } from '../utilities/icons/playbookIconResolver'
+import {
+  getPlaybookIconClassName,
+  loadPlaybookIconSvg,
+  supportsPlaybookIcon,
+  supportsPlaybookIconFetch,
+} from '../utilities/icons/playbookIconResolver'
 
 export type IconSizes = "lg"
 | "xs"
@@ -119,6 +124,38 @@ declare global {
   var PB_ICONS: {[key: string]: React.FunctionComponent<any>}
 }
 
+const svgAttributeMap: {[key: string]: string} = {
+  'clip-path': 'clipPath',
+  'clip-rule': 'clipRule',
+  'fill-rule': 'fillRule',
+  'stroke-linecap': 'strokeLinecap',
+  'stroke-linejoin': 'strokeLinejoin',
+  'stroke-width': 'strokeWidth',
+  'xmlns:xlink': 'xmlnsXlink',
+  'xlink:href': 'xlinkHref',
+}
+
+const convertAttributeName = (attributeName: string) => {
+  return svgAttributeMap[attributeName] || attributeName.replace(/-([a-z])/g, (_match, letter) => letter.toUpperCase())
+}
+
+const parseSvgAttributes = (attributeSource: string) => {
+  const attributes: {[key: string]: string} = {}
+  const attributePattern = /([:@a-zA-Z0-9-]+)="([^"]*)"/g
+  let match = attributePattern.exec(attributeSource)
+
+  while (match) {
+    attributes[convertAttributeName(match[1])] = match[2]
+    match = attributePattern.exec(attributeSource)
+  }
+
+  return attributes
+}
+
+const normalizeSvgInnerMarkup = (innerMarkup: string, fillColor: string) => {
+  return innerMarkup.replace(/<(path)\b([^>]*)fill="[^"]*"/gi, `<$1$2fill="${fillColor}"`)
+}
+
 const Icon = (props: IconProps) => {
   const {
     aria = {},
@@ -145,9 +182,35 @@ const Icon = (props: IconProps) => {
 
   let iconElement: ReactSVGElement | null = typeof(icon) === "object" ? icon : null
   const iconName = typeof(icon) === "string" ? icon : ""
-  const legacyPowerIcon = !customIcon && !iconElement && window.PB_ICONS ? window.PB_ICONS[iconName] : null
-  const hasBuiltInPlaybookIcon = !legacyPowerIcon && !customIcon && !iconElement && Boolean(iconName) && supportsPlaybookIcon(iconName)
-  const playbookIconClassName = hasBuiltInPlaybookIcon ? getPlaybookIconClassName(iconName) : null
+  const shouldLoadInlinePlaybookIcon = !customIcon && !iconElement && Boolean(iconName) && supportsPlaybookIconFetch(iconName)
+  const [inlinePlaybookSvgMarkup, setInlinePlaybookSvgMarkup] = useState<string | null | undefined>(undefined)
+
+  useEffect(() => {
+    let isActive = true
+
+    if (!shouldLoadInlinePlaybookIcon) {
+      setInlinePlaybookSvgMarkup(undefined)
+      return () => {
+        isActive = false
+      }
+    }
+
+    setInlinePlaybookSvgMarkup(undefined)
+
+    loadPlaybookIconSvg(iconName).then((markup) => {
+      if (isActive) setInlinePlaybookSvgMarkup(markup)
+    })
+
+    return () => {
+      isActive = false
+    }
+  }, [iconName, shouldLoadInlinePlaybookIcon])
+
+  const inlinePlaybookSvgReady = Boolean(inlinePlaybookSvgMarkup)
+  const inlinePlaybookSvgFailed = shouldLoadInlinePlaybookIcon && inlinePlaybookSvgMarkup === null
+  const legacyPowerIcon = !customIcon && !iconElement && (!shouldLoadInlinePlaybookIcon || inlinePlaybookSvgFailed) && window.PB_ICONS ? window.PB_ICONS[iconName] : null
+  const hasClassBasedPlaybookIcon = !inlinePlaybookSvgReady && !legacyPowerIcon && !customIcon && !iconElement && !shouldLoadInlinePlaybookIcon && Boolean(iconName) && supportsPlaybookIcon(iconName)
+  const playbookIconClassName = hasClassBasedPlaybookIcon ? getPlaybookIconClassName(iconName) : null
 
   const faClasses = {
     'fa-border': border,
@@ -161,7 +224,7 @@ const Icon = (props: IconProps) => {
     [`fa-rotate-${rotation}`]: rotation,
   }
 
-  if (!customIcon && !iconElement && !hasBuiltInPlaybookIcon) {
+  if (!customIcon && !iconElement && !inlinePlaybookSvgReady && !hasClassBasedPlaybookIcon) {
     if (legacyPowerIcon) {
       const LegacyPowerIcon = legacyPowerIcon
       iconElement = <LegacyPowerIcon /> as ReactSVGElement
@@ -170,13 +233,13 @@ const Icon = (props: IconProps) => {
       }
   }
 
-  const isFA = !iconElement && !customIcon && !hasBuiltInPlaybookIcon
+  const isFA = !iconElement && !customIcon && !inlinePlaybookSvgReady && !hasClassBasedPlaybookIcon && !shouldLoadInlinePlaybookIcon
 
   let classes = classnames(
-    (!iconElement && !customIcon && !hasBuiltInPlaybookIcon) ? 'pb_icon_kit' : '',
-    (iconElement || customIcon || hasBuiltInPlaybookIcon) ? 'pb_custom_icon' : fontStyle,
-    (iconElement || hasBuiltInPlaybookIcon) ? 'svg-inline--fa' : '',
-    hasBuiltInPlaybookIcon ? 'pb_playbook_icon' : '',
+    (!iconElement && !customIcon && !inlinePlaybookSvgReady && !hasClassBasedPlaybookIcon) ? 'pb_icon_kit' : '',
+    (iconElement || customIcon || inlinePlaybookSvgReady || hasClassBasedPlaybookIcon) ? 'pb_custom_icon' : fontStyle,
+    (iconElement || inlinePlaybookSvgReady || hasClassBasedPlaybookIcon) ? 'svg-inline--fa' : '',
+    hasClassBasedPlaybookIcon ? 'pb_playbook_icon' : '',
     playbookIconClassName,
     color ? `color_${color}` : '',
     globalProps(props),
@@ -230,7 +293,29 @@ const Icon = (props: IconProps) => {
 
   // Add a conditional here to show only the SVG if custom
   const displaySVG = (customIcon: any) => {
-    if (hasBuiltInPlaybookIcon)
+    if (inlinePlaybookSvgReady) {
+      const svgMatch = inlinePlaybookSvgMarkup?.match(/<svg([^>]*)>([\s\S]*)<\/svg>/i)
+      if (!svgMatch) return null
+
+      const [, rawAttributes, innerMarkup] = svgMatch
+      const svgAttributes = parseSvgAttributes(rawAttributes)
+
+      return (
+        <svg
+            {...svgAttributes}
+            {...ariaProps}
+            {...dataProps}
+            {...htmlProps}
+            className={classes}
+            color={color || 'currentColor'}
+            dangerouslySetInnerHTML={{ __html: normalizeSvgInnerMarkup(innerMarkup.trim(), color || 'currentColor') }}
+            height="auto"
+            id={id}
+            width="auto"
+            {...(props.tabIndex !== undefined && { tabIndex })}
+        />
+      )
+    } else if (hasClassBasedPlaybookIcon)
       return (
         <i
             {...ariaProps}
@@ -272,6 +357,8 @@ const Icon = (props: IconProps) => {
           </span>
         </>
       )
+    else if (shouldLoadInlinePlaybookIcon)
+      return null
     else
       return (
         <>

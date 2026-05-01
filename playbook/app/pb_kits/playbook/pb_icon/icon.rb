@@ -156,6 +156,28 @@ module Playbook
       class << self
         @cache_mutex = Mutex.new
 
+        def resolved_icon_name(icon_name)
+          return icon_name unless icon_alias_map
+          return icon_name if icon_name.nil?
+
+          aliases = icon_alias_map[icon_name]
+          return icon_name unless aliases
+
+          if aliases.is_a?(Array)
+            aliases.find { |alias_name| icon_path_index.key?(alias_name) } || icon_name
+          else
+            aliases
+          end
+        end
+
+        def resolved_icon_path(icon_name)
+          return nil unless Rails.application.config.respond_to?(:icon_path)
+
+          resolved_name = resolved_icon_name(icon_name)
+          path = icon_path_index[resolved_name]
+          path if path && File.exist?(path)
+        end
+
         # Cache aliases.json across the process, but invalidate when the file changes (dev-safe)
         def icon_alias_map
           return @icon_alias_map if alias_cache_fresh?
@@ -296,17 +318,7 @@ module Playbook
     private
 
       def resolve_alias(icon)
-        return icon unless icon_alias_map
-        return icon if icon.nil?
-
-        aliases = icon_alias_map[icon]
-        return icon unless aliases
-
-        if aliases.is_a?(Array)
-          aliases.find { |alias_name| file_exists?(alias_name) } || icon
-        else
-          aliases
-        end
+        self.class.resolved_icon_name(icon)
       end
 
       def file_exists?(alias_name)

@@ -129,6 +129,11 @@
         .layout_body {
             grid-column-gap: $space_lg !important;
             grid-template-columns: repeat(4, 1fr) !important;
+
+            .icon-grid-placeholder {
+                grid-column: 1 / -1;
+                width: 100%;
+            }
         
             @media screen and (max-width: 1072px) {
                 grid-template-columns: repeat(3, 1fr) !important;

@@ -25,5 +25,11 @@ module Playbook
       config.sass.load_paths << Playbook::Engine.root.join("dist")
       config.sass.load_paths << Playbook::Engine.root.join("app/pb_kits/playbook")
     end
+
+    initializer "playbook.icon_routes" do |app|
+      app.routes.prepend do
+        get "/playbook/icons/:icon_name", to: "playbook/icons#show", defaults: { format: :svg }
+      end
+    end
   end
 end
