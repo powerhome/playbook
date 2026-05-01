@@ -1,7 +1,9 @@
-# 16.7.0
+# 📲 What If Phones, But Too Much?
 ##### May 01, 2026
 
 ![release_image](https://github.com/user-attachments/assets/db119637-25e9-4157-9091-c5f7fdf034fc)
+
+We may have overcommitted to phones. Mobile pagination is live and the Phone Number Input got better! And the new Playbook website is getting closer to its final form, stay tuned for more!
 
 [16.7.0](https://github.com/powerhome/playbook/tree/16.7.0) full list of changes:
 
