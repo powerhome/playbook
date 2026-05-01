@@ -13,7 +13,8 @@
     "value": "",
     "formatAsYouType": false,
     "strictMode": false,
-    "countrySearch": false
+    "countrySearch": false,
+    "showPlaceholder": false
   },
   "groups": [
     {
@@ -37,7 +38,8 @@
         "value",
         "formatAsYouType",
         "strictMode",
-        "countrySearch"
+        "countrySearch",
+        "showPlaceholder"
       ]
     }
   ],
