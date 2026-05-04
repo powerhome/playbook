@@ -14,31 +14,32 @@
   ],
   "presets": [
     {
-      "name": "Metadata",
-      "props": { "color": "light", "bold": false },
-      "children": "Updated Apr 9, 2026"
+      "name": "Default",
+      "props": { },
+      "children": "I am a detail kit"
     },
     {
       "name": "Emphasis",
-      "props": { "color": "default", "bold": true },
+      "props": { "bold": true },
       "children": "Order #48291 · Processing"
     },
     {
-      "name": "Link",
+      "name": "Link color",
       "props": { "color": "link" },
       "children": "View documentation"
     },
     {
       "name": "Error status",
       "props": { "color": "error", "bold": true },
-      "children": "Payment failed — card expired"
-    },
-    {
-      "name": "Inline label",
-      "props": { "tag": "span", "color": "lighter" },
-      "children": "Optional"
+      "children": "Payment failed"
     }
   ],
   "conditionals": {},
-  "hints": {}
+  "hints": {
+    "link_color": {
+      "presetName": "Link color",
+      "message": "Use the color prop to change the color of the detail kit",
+      "type": "info"
+    }
+  }
 }

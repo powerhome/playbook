@@ -10,7 +10,7 @@
   },
   "groups": [
     {
-      "name": "Content",
+      "name": "Date Config",
       "props": [
         "datetime",
         "showDayOfWeek",
@@ -49,7 +49,7 @@
       }
     },
     {
-      "name": "With calendar icon",
+      "name": "With icon",
       "props": {
         "datetime": "2026-04-09T15:30:00.000Z",
         "showIcon": true,
@@ -69,8 +69,21 @@
         "datetime": "2026-04-09T15:30:00.000Z",
         "timeZone": "Asia/Tokyo"
       }
+    },
+    {
+      "name": "Always show year",
+      "props": {
+        "datetime": "2026-04-09T15:30:00.000Z",
+        "showCurrentYear": true
+      }
     }
   ],
   "conditionals": {},
-  "hints": {}
+  "hints": {
+    "tokyo_time": {
+      "presetName": "Tokyo time",
+      "message": "Use the timeZone prop to display the time in a different timezone",
+      "type": "info"
+    }
+  }
 }

@@ -6,7 +6,7 @@
   },
   "groups": [
     {
-      "name": "Content",
+      "name": "Date Config",
       "props": [
         "datetime",
         "timeZone",
@@ -24,34 +24,30 @@
     {
       "name": "Default",
       "props": {
-        "datetime": "2026-04-09T15:30:00.000Z",
-        "dark": false
+        "datetime": "2026-04-09T15:30:00.000Z"
       }
     },
     {
-      "name": "With year",
+      "name": "Always show year",
       "props": {
         "datetime": "2024-10-31T18:45:00.000Z",
-        "dark": false,
         "showCurrentYear": true
       }
     },
     {
-      "name": "Dark",
+      "name": "Paris time",
       "props": {
         "datetime": "2026-04-09T15:30:00.000Z",
-        "dark": true
-      }
-    },
-    {
-      "name": "Paris",
-      "props": {
-        "datetime": "2026-04-09T15:30:00.000Z",
-        "dark": false,
         "timeZone": "Europe/Paris"
       }
     }
   ],
   "conditionals": {},
-  "hints": {}
+  "hints": {
+    "paris_time": {
+      "presetName": "Paris time",
+      "message": "Use the timeZone prop to display the time in a different timezone",
+      "type": "info"
+    }
+  }
 }

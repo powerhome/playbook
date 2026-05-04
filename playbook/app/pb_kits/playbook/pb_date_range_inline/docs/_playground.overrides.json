@@ -1,28 +1,12 @@
 {
-  "template": "<DateRangeInline{{props}} />",
-  "propTargets": {},
-  "defaults": {
-    "align": "left",
-    "size": "sm",
-    "showCurrentYear": false
-  },
   "groups": [
     {
       "name": "Content",
-      "props": [
-        "startDate",
-        "endDate",
-        "icon",
-        "showCurrentYear"
-      ]
+      "props": ["startDate", "endDate", "icon", "showCurrentYear"]
     },
     {
       "name": "Appearance",
-      "props": [
-        "align",
-        "size",
-        "dark"
-      ]
+      "props": ["align", "size", "dark"]
     }
   ],
   "presets": [

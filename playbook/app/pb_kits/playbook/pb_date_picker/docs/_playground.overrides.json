@@ -1,7 +1,25 @@
 {
+  "template": "<DatePicker {{props}} />",
+  "defaults": {
+    "customQuickPickDates": { "override": false, "dates": [] },
+    "pickerId": "playground-date-picker",
+    "disableDate": [],
+    "disableRange": [],
+    "disableWeekdays": [],
+    "yearRange": [1900, 2100]
+  },
+  "hiddenProps": [
+    "staticPosition",
+    "scrollContainer",
+    "controlsStartId",
+    "controlsEndId",
+    "syncStartWith",
+    "syncEndWith",
+    "positionElement"
+  ],
   "groups": [
     {
-      "name": "Content",
+      "name": "Date Picker Config",
       "props": [
         "label",
         "placeholder",
@@ -13,13 +31,11 @@
     },
     {
       "name": "Appearance",
-      "props": [
-        "hideIcon",
-        "hideLabel",
-        "inLine",
-        "staticPosition",
-        "selectionType"
-      ]
+      "props": ["dark", "hideIcon", "hideLabel", "inLine"]
+    },
+    {
+      "name": "Quick pick",
+      "props": ["selectionType", "customQuickPickDates", "thisRangesEndToday"]
     },
     {
       "name": "Behavior",
@@ -47,20 +63,12 @@
     {
       "name": "Advanced",
       "props": [
-        "customQuickPickDates",
-        "positionElement",
-        "scrollContainer",
         "inputValue",
         "inputOnChange",
         "inputAria",
         "inputData",
         "type",
-        "timeFormat",
-        "thisRangesEndToday",
-        "controlsStartId",
-        "controlsEndId",
-        "syncStartWith",
-        "syncEndWith"
+        "timeFormat"
       ]
     }
   ],
@@ -71,20 +79,53 @@
         "name": "event_date",
         "pickerId": "playground-date-picker",
         "label": "Event date",
-        "placeholder": "Select date",
-        "defaultDate": "04/09/2026",
-        "format": "m/d/Y"
+        "placeholder": "Select date"
       }
     },
     {
-      "name": "Inline calendar",
+      "name": "Inline",
       "props": {
         "name": "inline_date",
         "pickerId": "playground-date-inline",
         "label": "Inline",
-        "defaultDate": "04/09/2026",
+        "className": "inline-date-picker",
         "inLine": true,
-        "staticPosition": true
+        "hideIcon": true
+      }
+    },
+    {
+      "name": "Quick pick",
+      "props": {
+        "name": "quickpick_range",
+        "pickerId": "playground-quickpick",
+        "label": "Date range",
+        "placeholder": "mm/dd/yyyy to mm/dd/yyyy",
+        "allowInput": true,
+        "selectionType": "quickpick"
+      }
+    },
+    {
+      "name": "Quick pick with Custom Dates",
+      "props": {
+        "name": "quickpick_range",
+        "pickerId": "playground-quickpick",
+        "label": "Date range",
+        "placeholder": "mm/dd/yyyy to mm/dd/yyyy",
+        "allowInput": true,
+        "selectionType": "quickpick",
+        "customQuickPickDates": {
+          "override": false,
+          "dates": [
+            {
+              "label": "Last 15 months",
+              "value": { "timePeriod": "months", "amount": 15 }
+            },
+            {
+              "label": "First week of June 2022",
+              "value": ["06/01/2022", "06/07/2022"]
+            }
+          ]
+        }
       }
     },
     {
@@ -93,7 +134,6 @@
         "name": "starts_at",
         "pickerId": "playground-datetime",
         "label": "Starts at",
-        "defaultDate": "04/09/2026",
         "enableTime": true,
         "format": "m/d/Y H:i"
       }
@@ -104,8 +144,7 @@
         "name": "typed_date",
         "pickerId": "playground-allow-input",
         "label": "Start date",
-        "allowInput": true,
-        "defaultDate": "04/09/2026"
+        "allowInput": true
       }
     },
     {
@@ -114,8 +153,25 @@
         "name": "month_only",
         "pickerId": "playground-month",
         "label": "Month",
-        "selectionType": "month",
-        "defaultDate": "04/01/2026"
+        "selectionType": "month"
+      }
+    },
+    {
+      "name": "Week picker",
+      "props": {
+        "name": "week_only",
+        "pickerId": "playground-week",
+        "label": "Week",
+        "selectionType": "week"
+      }
+    },
+    {
+      "name": "Dark",
+      "props": {
+        "name": "dark_picker",
+        "pickerId": "playground-dark",
+        "label": "Event date",
+        "dark": true
       }
     },
     {
@@ -124,7 +180,6 @@
         "name": "bounded",
         "pickerId": "playground-bounded",
         "label": "Within range",
-        "defaultDate": "04/09/2026",
         "minDate": "01/01/2026",
         "maxDate": "12/31/2026"
       }
@@ -135,22 +190,37 @@
         "name": "invalid_date",
         "pickerId": "playground-error",
         "label": "Due date",
-        "error": "Please choose a valid date",
-        "defaultDate": ""
-      }
-    },
-    {
-      "name": "Minimal chrome",
-      "props": {
-        "name": "compact_date",
-        "pickerId": "playground-minimal",
-        "label": "",
-        "hideLabel": true,
-        "hideIcon": true,
-        "defaultDate": "04/09/2026"
+        "error": "Please choose a valid date"
       }
     }
   ],
-  "conditionals": {},
-  "hints": {}
+  "conditionals": {
+    "customQuickPickDates": {
+      "requires": { "selectionType": "quickpick" }
+    },
+    "thisRangesEndToday": {
+      "requires": { "selectionType": "quickpick" }
+    }
+  },
+  "hints": {
+    "pickerId": {
+      "message": "The pickerId is used to identify the date picker in the DOM. It is required and must be unique.",
+      "type": "info"
+    },
+    "defaultDate": {
+      "when": { "defaultDate": "04/09/2026" },
+      "message": "The default date is the date that will be selected when the date picker is first rendered. It is required and must be a valid date.",
+      "type": "info"
+    },
+    "quickPick": {
+      "when": { "selectionType": "quickpick" },
+      "message": "Quick pick shows preset ranges (relative periods or explicit date pairs). Use thisRangesEndToday when the plugin should treat ranges as ending today.",
+      "type": "info"
+    },
+    "customQuickPickDates": {
+      "presetName": "Quick pick with Custom Dates",
+      "message": "Custom quick pick dates are used to override the default quick pick dates. It must be an object with a dates array.",
+      "type": "info"
+    }
+  }
 }
