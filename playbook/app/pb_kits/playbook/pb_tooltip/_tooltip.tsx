@@ -86,7 +86,7 @@ const Tooltip = forwardRef((props: TooltipProps, ref: ForwardedRef<unknown>): Re
 
   const {
     context,
-    middlewareData: { arrow: { x: arrowX, y: arrowY } = {},  },
+    middlewareData: { arrow: { centerOffset = 0, x: arrowX, y: arrowY } = {},  },
     placement,
     refs,
     strategy,
@@ -143,8 +143,8 @@ const Tooltip = forwardRef((props: TooltipProps, ref: ForwardedRef<unknown>): Re
     right: "left",
     top: "bottom",
   }[placement.split("-")[0]]
-  const basePlacement = placement.split("-")[0]
   const arrowPlacementStyle = staticSide ? { [staticSide]: "-5px" } : {}
+  const shouldHideArrow = centerOffset !== 0
 
   const tooltipSizing = () => {
     return Object.assign(
@@ -185,11 +185,10 @@ const Tooltip = forwardRef((props: TooltipProps, ref: ForwardedRef<unknown>): Re
       {(open || forceOpenTooltip) && (
         <FloatingPortal>
           <div
+              data-dark={rest.dark ? "true" : undefined}
               data-placement={placement}
               {...getFloatingProps({
-                className: classnames(`tooltip_tooltip tooltip_tooltip_${basePlacement} visible`, {
-                  dark: rest.dark,
-                }),
+                className: `tooltip_tooltip ${placement} visible`,
                 ref: refs.setFloating,
                 role: "tooltip",
                 style: {
@@ -217,6 +216,7 @@ const Tooltip = forwardRef((props: TooltipProps, ref: ForwardedRef<unknown>): Re
                 className="arrow_bg"
                 ref={arrowRef}
                 style={{
+                  opacity: shouldHideArrow ? 0 : 1,
                   position: "absolute",
                   left: arrowX != null ? `${arrowX}px` : "",
                   top: arrowY != null ? `${arrowY}px` : "",

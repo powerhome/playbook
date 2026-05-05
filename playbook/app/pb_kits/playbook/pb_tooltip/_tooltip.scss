@@ -66,15 +66,6 @@ $tooltip_shadow: rgba(60, 106, 172, 0.18);
     &.visible {
       color: $white;
       background-color: rgba($black, $opacity_9);
-      &.tooltip_tooltip_right {
-        box-shadow: -8px 0 28px 0 $tooltip_shadow;
-      }
-      &.tooltip_tooltip_bottom {
-        box-shadow: 0 -12px 28px 0 $tooltip_shadow;
-      }
-      &.tooltip_tooltip_left {
-        box-shadow: 8px 0 28px 0 $tooltip_shadow;
-      }
       // react arrow
       .arrow_bg {
         width: 10px;
@@ -103,7 +94,7 @@ $tooltip_shadow: rgba(60, 106, 172, 0.18);
     }
 }
 
-.tooltip_tooltip.dark,
+.tooltip_tooltip[data-dark="true"],
 .pb_tooltip_kit.dark ~ .tooltip_tooltip,
 .pb_tooltip_kit.dark .tooltip_tooltip {
   //react
