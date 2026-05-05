@@ -22,9 +22,9 @@ $tooltip_shadow: rgba(60, 106, 172, 0.18);
   }
 }
 
-.pb_tooltip_kit {
-  ~ .tooltip_tooltip,
-  .tooltip_tooltip {
+.tooltip_tooltip,
+.pb_tooltip_kit ~ .tooltip_tooltip,
+.pb_tooltip_kit .tooltip_tooltip {
     display: block;
     opacity: 0;
     position: absolute;
@@ -66,13 +66,13 @@ $tooltip_shadow: rgba(60, 106, 172, 0.18);
     &.visible {
       color: $white;
       background-color: rgba($black, $opacity_9);
-      &.right {
+      &.tooltip_tooltip_right {
         box-shadow: -8px 0 28px 0 $tooltip_shadow;
       }
-      &.bottom {
+      &.tooltip_tooltip_bottom {
         box-shadow: 0 -12px 28px 0 $tooltip_shadow;
       }
-      &.left {
+      &.tooltip_tooltip_left {
         box-shadow: 8px 0 28px 0 $tooltip_shadow;
       }
       // react arrow
@@ -101,44 +101,45 @@ $tooltip_shadow: rgba(60, 106, 172, 0.18);
         opacity: $opacity_9;
       }
     }
-  }
+}
 
-  &.dark {
-    ~.tooltip_tooltip,
-    .tooltip_tooltip {
-      //react
-      &.visible {
-        color: $charcoal;
-        background-color: $white;
-      }
-      //rails
-      &.show {
-        color: $charcoal;
-        background-color: $white;
-      }
-      .arrow {
-        border-color: $white transparent transparent transparent;
-        opacity: $opacity_10;
-      }
-      // react arrow
-      .arrow_bg {
-        background-color: $white;
-      }
-      &.flipped {
-        .arrow {
-          border-color: transparent transparent $black transparent;
-          opacity: $opacity_9;
-        }
-      }
+.tooltip_tooltip.dark,
+.pb_tooltip_kit.dark ~ .tooltip_tooltip,
+.pb_tooltip_kit.dark .tooltip_tooltip {
+  //react
+  &.visible {
+    color: $charcoal;
+    background-color: $white;
+  }
+  //rails
+  &.show {
+    color: $charcoal;
+    background-color: $white;
+  }
+  .arrow {
+    border-color: $white transparent transparent transparent;
+    opacity: $opacity_10;
+  }
+  // react arrow
+  .arrow_bg {
+    background-color: $white;
+  }
+  &.flipped {
+    .arrow {
+      border-color: transparent transparent $black transparent;
+      opacity: $opacity_9;
     }
   }
 }
 
 // Right
+.tooltip_tooltip,
 .pb_tooltip_kit .tooltip_tooltip {
   $arrow_vertical_offset: calc(50% - #{$space_xs * 1.2});
 
-  &[data-popper-placement="right"] {
+  &[data-placement="right"],
+  &[data-placement="right-start"],
+  &[data-placement="right-end"] {
     box-shadow: -8px 0 28px 0 $tooltip_shadow;
     .arrow {
       left: -18px;
@@ -152,7 +153,9 @@ $tooltip_shadow: rgba(60, 106, 172, 0.18);
     }
   }
 
-  &[data-popper-placement="bottom"] {
+  &[data-placement="bottom"],
+  &[data-placement="bottom-start"],
+  &[data-placement="bottom-end"] {
     box-shadow: 0 -12px 28px 0 $tooltip_shadow;
     .arrow {
       top: -18px;
@@ -164,7 +167,9 @@ $tooltip_shadow: rgba(60, 106, 172, 0.18);
     }
   }
 
-  &[data-popper-placement="left"] {
+  &[data-placement="left"],
+  &[data-placement="left-start"],
+  &[data-placement="left-end"] {
     box-shadow: 8px 0 28px 0 $tooltip_shadow;
     .arrow {
       margin-bottom: 0;

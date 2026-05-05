@@ -36,6 +36,7 @@ test("opens on mouseenter", async () => {
   fireEvent.mouseEnter(screen.getByRole("tooltip_trigger"));
   await waitFor(() => {
     expect(screen.queryByRole("tooltip")).toBeInTheDocument();
+    expect(screen.queryByRole("tooltip")?.parentElement).toBe(document.body);
     cleanup();
   })
 });
@@ -72,6 +73,7 @@ test("has default position absolute", async () => {
   fireEvent.mouseEnter(screen.getByRole("tooltip_trigger"));
   await waitFor(() => {
     expect(screen.queryByRole("tooltip")).toHaveStyle({"position": "absolute"});
+    expect(screen.queryByRole("tooltip")).not.toHaveStyle({"z-index": "0"});
     cleanup();
   })
 
