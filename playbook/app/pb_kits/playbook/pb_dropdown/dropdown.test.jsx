@@ -51,6 +51,7 @@ test('generated default kit and classname', () => {
   const kit = screen.getByTestId(testId)
   expect(kit).toBeInTheDocument()
   expect(kit).toHaveClass('pb_dropdown_default')
+  expect(kit).not.toHaveAttribute('data-default-value')
 })
 
 test('generated default Trigger and Container when none passed in', () => {
@@ -439,6 +440,7 @@ test("defaultValue works with multiSelect", () => {
       />
     )
     const kit = screen.getByTestId(testId)
+    expect(kit).toHaveAttribute("data-default-value", "United-states,pakistan")
     expect(kit.querySelectorAll(".pb_form_pill_kit.pb_form_pill_primary")).toHaveLength(2)
     const option2 = Array.from(kit.querySelectorAll(".pb_dropdown_option_list"));
     const firstOpt = options[0].label
@@ -499,6 +501,7 @@ test("quickpick variant accepts string defaultValue", () => {
   const trigger = kit.querySelector('.pb_dropdown_trigger')
   
   expect(trigger).toHaveTextContent("This Month")
+  expect(kit).toHaveAttribute("data-default-value", "quickpick-this-month")
 })
 
 test("quickpick attaches _dropdownRef to DOM element when id is provided", () => {

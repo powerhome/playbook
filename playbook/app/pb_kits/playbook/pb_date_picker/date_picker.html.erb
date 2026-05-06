@@ -1,8 +1,11 @@
-<%= pb_content_tag(:div,
-    class: object.classname + object.error_class,
-    'data-pb-date-picker' => true,
-    'data-validation-message' => object.validation_message,
-      ) do %>
+<% date_picker_root_attrs = {
+  class: object.classname + object.error_class,
+  'data-pb-date-picker' => true,
+  'data-validation-message' => object.validation_message,
+}
+  date_picker_root_attrs['data-default-value'] = object.serialized_default_date_for_dom if object.serialized_default_date_for_dom.present?
+%>
+<%= pb_content_tag(:div, date_picker_root_attrs) do %>
   <div class="input_wrapper">
     <% if !object.hide_label && object.label %>
       <label for="<%= object.picker_id %>">

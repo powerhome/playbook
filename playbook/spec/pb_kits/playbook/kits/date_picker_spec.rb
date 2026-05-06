@@ -58,4 +58,19 @@ RSpec.describe Playbook::PbDatePicker::DatePicker do
   it "raises an error when not given a picker_id" do
     expect { subject.new {} }.to raise_error(Playbook::Props::Error)
   end
+
+  describe "#serialized_default_date_for_dom" do
+    it "returns nil when default_date is blank" do
+      picker = subject.new(picker_id: "p1", default_date: "")
+      expect(picker.serialized_default_date_for_dom).to be_nil
+    end
+
+    it "returns the default_date string for quick pick and ISO values" do
+      quick = subject.new(picker_id: "p2", default_date: "This quarter")
+      expect(quick.serialized_default_date_for_dom).to eq("This quarter")
+
+      iso = subject.new(picker_id: "p3", default_date: "2020-07-25T00:00:00Z")
+      expect(iso.serialized_default_date_for_dom).to eq("2020-07-25T00:00:00Z")
+    end
+  end
 end

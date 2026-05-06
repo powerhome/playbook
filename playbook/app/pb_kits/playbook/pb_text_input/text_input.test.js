@@ -413,3 +413,35 @@ test('allows accented characters when emojiMask is enabled', () => {
   fireEvent.change(input, { target: { value: 'àëǒüñ' } })
   expect(input.value).toBe('àëǒüñ')
 })
+
+test('exposes data-default-value on the input when value is set', () => {
+  render(
+    <TextInput
+        data={{ testid: testId }}
+        label="City"
+        name="city"
+        onChange={() => {}}
+        placeholder="City"
+        value="Philadelphia"
+    />
+  )
+  const kit = screen.getByTestId(testId)
+  const input = within(kit).getByRole('textbox')
+  expect(input).toHaveAttribute('data-default-value', 'Philadelphia')
+})
+
+test('omits data-default-value when value is empty', () => {
+  render(
+    <TextInput
+        data={{ testid: testId }}
+        label="City"
+        name="city"
+        onChange={() => {}}
+        placeholder="City"
+        value=""
+    />
+  )
+  const kit = screen.getByTestId(testId)
+  const input = within(kit).getByRole('textbox')
+  expect(input).not.toHaveAttribute('data-default-value')
+})

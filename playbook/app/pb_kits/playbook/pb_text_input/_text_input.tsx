@@ -182,6 +182,9 @@ const TextInput = (props: TextInputProps, ref: React.LegacyRef<HTMLInputElement>
   // Filter out emojiMask from props passed to DOM element
   const { emojiMask: _emojiMask, ...domProps } = props
 
+  const filterResetDefaultValue =
+    value !== '' && value !== undefined && value !== null ? String(value) : undefined
+
   const textInput = (
     childInput ? React.cloneElement(children, { className: "text_input" }) :
     (<input
@@ -191,6 +194,7 @@ const TextInput = (props: TextInputProps, ref: React.LegacyRef<HTMLInputElement>
         autoComplete={typeof autoComplete === "string" ? autoComplete : ( autoComplete ? undefined : "off" )}
         className="text_input"
         disabled={disabled}
+        {...(filterResetDefaultValue !== undefined ? { 'data-default-value': filterResetDefaultValue } : {})}
         id={id}
         key={id}
         name={name}

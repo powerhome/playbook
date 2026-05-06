@@ -100,6 +100,15 @@ const Select = ({
   const selectWrapperClass = classnames(buildCss('pb_select_kit_wrapper'), { error }, className)
   const selectId = (inputOptions?.id as string) || name
 
+  const filterResetDefaultValue = (() => {
+    if (value === undefined || value === null || value === '') return undefined
+    if (Array.isArray(value)) {
+      const joined = value.filter((v) => v !== '' && v != null).join(',')
+      return joined || undefined
+    }
+    return String(value)
+  })()
+
   const selectBody =(() =>{
     if (children) return children
     return (
@@ -108,6 +117,7 @@ const Select = ({
           {...domSafeProps(props)}
           {...inputOptions}
           disabled={disabled}
+          {...(filterResetDefaultValue !== undefined ? { 'data-default-value': filterResetDefaultValue } : {})}
           id={selectId}
           multiple={multiple}
           name={name}
