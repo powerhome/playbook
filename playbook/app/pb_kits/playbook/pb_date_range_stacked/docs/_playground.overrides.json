@@ -1,20 +1,12 @@
 {
-  "template": "<DateRangeStacked{{props}} />",
-  "propTargets": {},
-  "defaults": {},
   "groups": [
     {
       "name": "Content",
-      "props": [
-        "startDate",
-        "endDate"
-      ]
+      "props": ["startDate", "endDate"]
     },
     {
       "name": "Appearance",
-      "props": [
-        "dark"
-      ]
+      "props": ["dark"]
     }
   ],
   "presets": [

@@ -1676,6 +1676,10 @@
     "category": "Power Products"
   },
   {
+    "name": "circle-product-estimate-photos",
+    "category": "Power Products"
+  },
+  {
     "name": "circle-product-gutters",
     "category": "Power Products"
   },
@@ -1689,6 +1693,10 @@
   },
   {
     "name": "circle-product-solar",
+    "category": "Power Products"
+  },
+  {
+    "name": "circle-product-trim",
     "category": "Power Products"
   },
   {
@@ -1708,6 +1716,10 @@
     "category": "Power Products"
   },
   {
+    "name": "product-estimate-photos",
+    "category": "Power Products"
+  },
+  {
     "name": "product-gutters",
     "category": "Power Products"
   },
@@ -1721,6 +1733,10 @@
   },
   {
     "name": "product-solar",
+    "category": "Power Products"
+  },
+  {
+    "name": "product-trim",
     "category": "Power Products"
   },
   {
