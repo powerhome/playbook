@@ -54,7 +54,7 @@
     "react-simple-code-editor": "^0.13.1",
     "sass": "^1.77.6",
     "vite": "6.3.5",
-    "vite-plugin-ruby": "^5.0.0",
+    "vite-plugin-ruby": "^5.2.2",
     "zxcvbn": "^4.4.2"
   },
   "resolutions": {
