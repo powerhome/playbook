@@ -35,8 +35,10 @@ test("opens on mouseenter", async () => {
 
   fireEvent.mouseEnter(screen.getByRole("tooltip_trigger"));
   await waitFor(() => {
-    expect(screen.queryByRole("tooltip")).toBeInTheDocument();
-    expect(screen.queryByRole("tooltip")?.parentElement).toBe(document.body);
+    const tooltip = screen.queryByRole("tooltip");
+
+    expect(tooltip).toBeInTheDocument();
+    expect(tooltip?.closest("[data-floating-ui-portal]")).toBeInTheDocument();
     cleanup();
   })
 });
