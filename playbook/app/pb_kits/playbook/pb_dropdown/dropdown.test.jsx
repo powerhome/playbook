@@ -434,7 +434,10 @@ test("defaultValue works with multiSelect", () => {
     render(
       <Dropdown
           data={{ testid: testId }}
-          defaultValue={[options[0], options[2]]}
+          defaultValue={[
+            { label: options[0].label, value: options[0].value },
+            { label: options[2].label, value: options[2].value },
+          ]}
           multiSelect
           options={options}
       />

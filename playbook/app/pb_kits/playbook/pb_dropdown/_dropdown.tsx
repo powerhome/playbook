@@ -30,6 +30,20 @@ function serializeDropdownFilterResetDefault(
     const optionList: GenericObject[] = Array.isArray(dropdownOptions)
         ? dropdownOptions
         : [];
+    const optionDefaultId = (option: GenericObject | undefined): string | undefined => {
+        if (!option) return undefined;
+
+        const id = option.id;
+        if (id != null && id !== "") return String(id);
+
+        const matched = optionList.find((listOption: GenericObject) => (
+            (option.value != null && listOption.value === option.value) ||
+            (option.label != null && listOption.label === option.label)
+        ));
+
+        if (matched?.id != null && matched.id !== "") return String(matched.id);
+        return undefined;
+    };
 
     if (variant === "quickpick") {
         if (typeof defaultValue === "string" && defaultValue) {
@@ -48,13 +62,13 @@ function serializeDropdownFilterResetDefault(
                 : [];
         if (!arr.length) return undefined;
         const ids = arr
-            .map((v) => (v as GenericObject)?.id)
+            .map((v) => optionDefaultId(v as GenericObject))
             .filter((id) => id != null && id !== "");
         return ids.length ? ids.join(",") : undefined;
     }
     if (defaultValue && typeof defaultValue === "object" && !Array.isArray(defaultValue)) {
-        const id = (defaultValue as GenericObject).id;
-        if (id != null && id !== "") return String(id);
+        const id = optionDefaultId(defaultValue as GenericObject);
+        if (id) return id;
     }
     return undefined;
 }
