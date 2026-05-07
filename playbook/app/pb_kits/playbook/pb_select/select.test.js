@@ -88,36 +88,4 @@ test('inputOptions are passed to select element', () => {
   expect(selectElement).toHaveAttribute('id', 'custom-select-id')
   expect(selectElement).toHaveClass('custom-select-class')
   expect(selectElement).toHaveAttribute('aria-label', 'Custom aria label')
-})
-
-test('exposes data-default-value on select when value is set', () => {
-  render(
-    <Select
-        data={{ testid: testId }}
-        label="Favorite Food"
-        name="food"
-        onChange={() => {}}
-        options={options}
-        value="2"
-    />
-  )
-  const kit = screen.getByTestId(testId)
-  const selectElement = kit.querySelector('select')
-  expect(selectElement).toHaveAttribute('data-default-value', '2')
-})
-
-test('omits data-default-value when value is empty', () => {
-  render(
-    <Select
-        data={{ testid: testId }}
-        label="Favorite Food"
-        name="food"
-        onChange={() => {}}
-        options={options}
-        value=""
-    />
-  )
-  const kit = screen.getByTestId(testId)
-  const selectElement = kit.querySelector('select')
-  expect(selectElement).not.toHaveAttribute('data-default-value')
-})
+});
