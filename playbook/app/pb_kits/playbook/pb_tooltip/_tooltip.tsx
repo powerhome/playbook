@@ -86,7 +86,7 @@ const Tooltip = forwardRef((props: TooltipProps, ref: ForwardedRef<unknown>): Re
 
   const {
     context,
-    middlewareData: { arrow: { centerOffset = 0, x: arrowX, y: arrowY } = {},  },
+    middlewareData: { arrow: { x: arrowX, y: arrowY } = {},  },
     placement,
     refs,
     strategy,
@@ -144,7 +144,6 @@ const Tooltip = forwardRef((props: TooltipProps, ref: ForwardedRef<unknown>): Re
     top: "bottom",
   }[placement.split("-")[0]]
   const arrowPlacementStyle = staticSide ? { [staticSide]: "-5px" } : {}
-  const shouldHideArrow = centerOffset !== 0
 
   const tooltipSizing = () => {
     return Object.assign(
@@ -217,7 +216,6 @@ const Tooltip = forwardRef((props: TooltipProps, ref: ForwardedRef<unknown>): Re
                 className="arrow_bg"
                 ref={arrowRef}
                 style={{
-                  opacity: shouldHideArrow ? 0 : 1,
                   position: "absolute",
                   left: arrowX != null ? `${arrowX}px` : "",
                   top: arrowY != null ? `${arrowY}px` : "",
