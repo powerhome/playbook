@@ -186,7 +186,7 @@ const Tooltip = forwardRef((props: TooltipProps, ref: ForwardedRef<unknown>): Re
           <div
               data-placement={placement}
               {...getFloatingProps({
-                className: classnames("pb_tooltip_kit", `tooltip_tooltip ${placement} visible`, {
+                className: classnames(`tooltip_tooltip ${placement} visible`, {
                   dark: rest.dark,
                 }),
                 ref: refs.setFloating,
