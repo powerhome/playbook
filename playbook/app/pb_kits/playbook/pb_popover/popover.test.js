@@ -1,6 +1,11 @@
 import React from "react";
 import { render, screen, fireEvent } from "../utilities/test-utils";
 import { Button, PbReactPopover } from "playbook-ui";
+import {
+  resolveDialogFloatingPortalHost,
+  resolveTypeaheadMenuPortalHost,
+  targetIsInsidePortaledFloatingKit,
+} from "../utilities/floatingPortalHosts";
 
 const testId = "popover-kit";
 
@@ -228,16 +233,23 @@ const PopoverTestAppendToSelector = () => {
     render(<PopoverTestZIndex data={{ testid: testId}}/>)
     const btn = screen.getByText(/click me/i)
     fireEvent.click(btn);
-    const kit = screen.getByText("Click Anywhere");
-    expect(kit).toHaveClass("pb_popover_body z_index_3");
+    const label = screen.getByText("Click Anywhere");
+    const kit = label.closest(".pb_popover_body");
+    expect(kit).not.toBeNull();
+    expect(kit).toHaveClass("pb_popover_body", "z_index_3");
   });
 
   test("renders Popover with max height and max width", () => {
     render(<PopoverTestHeight data={{ testid: testId}}/>)
     const btn = screen.getByText(/click me/i)
     fireEvent.click(btn);
-    const kit = screen.getByText("Click Anywhere");
-    expect(kit).toHaveClass("pb_popover_body p_sm overflow_handling");
+    const label = screen.getByText("Click Anywhere");
+    const body = label.closest(".pb_popover_body");
+    const scrollRegion = label.closest(".pb_popover_scroll_region");
+    expect(body).not.toBeNull();
+    expect(body).toHaveClass("pb_popover_body", "p_sm");
+    expect(scrollRegion).not.toBeNull();
+    expect(scrollRegion).toHaveClass("pb_popover_scroll_region", "overflow_handling");
   });
 
   test("closes Popover on click anywhere", async () => {
@@ -298,3 +310,45 @@ const PopoverTestAppendToSelector = () => {
     const customContainer = screen.getByTestId("custom-container");
     expect(customContainer).toContainElement(kit);
   });
+
+describe("Popover Typeahead portal host", () => {
+  beforeEach(() => {
+    document.body.innerHTML = "";
+  });
+
+  test("resolveDialogFloatingPortalHost returns floating root inside popover tooltip", () => {
+    const pop = document.createElement("div");
+    pop.className = "pb_popover_tooltip";
+    const floating = document.createElement("div");
+    floating.setAttribute("data-pb-dialog-floating-root", "true");
+    const inner = document.createElement("div");
+    pop.appendChild(floating);
+    pop.appendChild(inner);
+    document.body.appendChild(pop);
+
+    expect(resolveDialogFloatingPortalHost(inner)).toBe(floating);
+  });
+
+  test("resolveTypeaheadMenuPortalHost uses document.body when kit is in popover tooltip", () => {
+    const pop = document.createElement("div");
+    pop.className = "pb_popover_tooltip show";
+    const kit = document.createElement("div");
+    pop.appendChild(kit);
+    document.body.appendChild(pop);
+
+    expect(resolveTypeaheadMenuPortalHost(kit, null)).toBe(document.body);
+  });
+
+  test("targetIsInsidePortaledFloatingKit is true inside typeahead menu portal", () => {
+    const portal = document.createElement("div");
+    portal.className = "typeahead-kit-select__menu-portal";
+    const option = document.createElement("div");
+    portal.appendChild(option);
+    document.body.appendChild(portal);
+
+    expect(targetIsInsidePortaledFloatingKit(option)).toBe(true);
+    expect(targetIsInsidePortaledFloatingKit(document.createElement("button"))).toBe(
+      false,
+    );
+  });
+});
