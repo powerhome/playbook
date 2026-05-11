@@ -58,7 +58,7 @@ $arrow_vertical_offset: calc(50% - #{$space_xs * 1.2});
 
     &.visible,
     &.show {
-      z-index: $z_9;
+      z-index: 15000;
       padding: $space_xs $space_sm;
       box-shadow: $shadow_deeper;
       border-radius: $border_rad_light;
@@ -160,7 +160,7 @@ $arrow_vertical_offset: calc(50% - #{$space_xs * 1.2});
 
   &.visible,
   &.show {
-    z-index: $z_9;
+    z-index: 15000;
     padding: $space_xs $space_sm;
     box-shadow: $shadow_deeper;
     border-radius: $border_rad_light;
