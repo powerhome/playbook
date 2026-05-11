@@ -204,6 +204,18 @@ type MinHeight = {
   minHeight?: string
 }
 
+type gridAutoFlow = {
+  gridAutoFlow?: "row" | "column" | "dense" | "row dense" | "column dense"
+}
+
+type gridAutoColumns = {
+  gridAutoColumns?: "auto" | "max-content" | "min-content"
+}
+
+type gridAutoRows = {
+  gridAutoRows?: "auto" | "max-content" | "min-content"
+}
+
 // keep this as the last type definition
 export type GlobalProps = AlignContent & AlignItems & AlignSelf &
   BorderRadius & Cursor & Dark & Display & DisplaySizes & Flex & FlexDirection &
@@ -606,6 +618,27 @@ const PROP_CATEGORIES: {[key:string]: (props: {[key: string]: any}) => string} =
       return verticalAlign ? `vertical_align_${verticalAlign} ` : ''
     }
   },
+  gridAutoFlowProps: ({ gridAutoFlow }: gridAutoFlow) => {
+    if (typeof gridAutoFlow === 'object') {
+      return getResponsivePropClasses(gridAutoFlow, 'grid_auto_flow')
+    } else {
+      return gridAutoFlow ? `grid_auto_flow_${camelToSnakeCase(gridAutoFlow)}` : ''
+    }
+  },
+  gridAutoColumnsProps: ({ gridAutoColumns }: gridAutoColumns) => {
+    if (typeof gridAutoColumns === 'object') {
+      return getResponsivePropClasses(gridAutoColumns, 'grid_auto_columns')
+    } else {
+      return gridAutoColumns ? `grid_auto_columns_${camelToSnakeCase(gridAutoColumns)}` : ''
+    }
+  },
+  gridAutoRowsProps: ({ gridAutoRows }: gridAutoRows) => {
+    if (typeof gridAutoRows === 'object') {
+      return getResponsivePropClasses(gridAutoRows, 'grid_auto_rows')
+    } else {
+      return gridAutoRows ? `grid_auto_rows_${camelToSnakeCase(gridAutoRows)}` : ''
+    }
+  },
 
 }
 
@@ -622,6 +655,7 @@ const PROP_INLINE_CATEGORIES: {[key:string]: (props: {[key: string]: any}) => {[
     return minHeight ? { minHeight } : {};
   },
 }
+
 
 type DefaultProps = {[key: string]: string} | Record<string, unknown>
 

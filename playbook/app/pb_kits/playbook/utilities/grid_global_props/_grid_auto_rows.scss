@@ -1,0 +1,9 @@
+$grid_auto_rows_values: (
+    row: row,
+    column: column,
+    dense: dense,
+    row_dense: row dense,
+    column_dense: column dense
+);  
+
+@include global_props_responsive_css($grid_auto_rows_values, 'grid_auto_rows', 'grid-auto-rows');

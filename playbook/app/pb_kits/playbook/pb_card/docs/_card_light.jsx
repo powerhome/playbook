@@ -4,7 +4,15 @@ import Card from '../_card'
 const CardLight = (props) => {
   return (
     <div>
-      <Card {...props}>{'Card content'}</Card>
+      <Card 
+          display="grid"
+          gridAutoRows="column"
+          {...props}
+      >
+        <Card {...props}>{'Card content'}</Card>
+        <Card {...props}>{'Card content'}</Card>
+      </Card>
+      
     </div>
   )
 }

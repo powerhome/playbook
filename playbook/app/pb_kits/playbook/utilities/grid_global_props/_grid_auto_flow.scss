@@ -1,0 +1,9 @@
+$grid_auto_flow_values: (
+    row: row,
+    column: column,
+    dense: dense,
+    row_dense: row dense,
+    column_dense: column dense
+);
+
+@include global_props_responsive_css($grid_auto_flow_values, 'grid_auto_flow', 'grid-auto-flow');

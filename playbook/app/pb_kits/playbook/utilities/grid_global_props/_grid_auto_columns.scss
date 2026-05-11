@@ -1,0 +1,7 @@
+$grid_auto_columns_values: (
+    auto: auto,
+    max_content: max-content,
+    min_content: min-content,
+);
+
+@include global_props_responsive_css($grid_auto_columns_values, 'grid_auto_columns', 'grid-auto-columns');
