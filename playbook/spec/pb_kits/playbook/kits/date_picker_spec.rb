@@ -39,6 +39,7 @@ RSpec.describe Playbook::PbDatePicker::DatePicker do
       expect(subject.new({ picker_id: "spec-test" }).classname).to eq "pb_date_picker_kit cursor_pointer mb_sm"
       expect(subject.new({ classname: "additional_class", picker_id: "spec-test" }).classname).to eq "pb_date_picker_kit additional_class cursor_pointer mb_sm"
       expect(subject.new({ classname: "dark", picker_id: "spec-test" }).classname).to eq "pb_date_picker_kit dark cursor_pointer mb_sm"
+      expect(subject.new({ picker_id: "spec-test", inline: true }).classname).to eq "pb_date_picker_kit cursor_pointer mb_sm inline-date-picker"
     end
   end
 
