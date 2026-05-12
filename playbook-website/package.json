@@ -22,7 +22,7 @@
     "react-syntax-highlighter": "^15.6.1",
     "react-hook-form": "^7.28.1",
     "react-trix": "0.10.1",
-    "trix": "2.1.16"
+    "trix": "2.1.19"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.24.8",
