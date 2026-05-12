@@ -25,4 +25,5 @@ examples:
   - filter_placement: Filter Placement
   - filter_popover_props: Popover Props
   - filter_sidebar: Sidebar
+  - filter_interactive: Interactive Applied Filters (POC)
 
