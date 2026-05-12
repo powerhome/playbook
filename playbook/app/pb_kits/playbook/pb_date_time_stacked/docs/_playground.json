@@ -1,0 +1,53 @@
+{
+  "template": "<DateTimeStacked{{props}} />",
+  "propTargets": {},
+  "defaults": {
+    "showCurrentYear": false
+  },
+  "groups": [
+    {
+      "name": "Date Config",
+      "props": [
+        "datetime",
+        "timeZone",
+        "showCurrentYear"
+      ]
+    },
+    {
+      "name": "Appearance",
+      "props": [
+        "dark"
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default",
+      "props": {
+        "datetime": "2026-04-09T15:30:00.000Z"
+      }
+    },
+    {
+      "name": "Always show year",
+      "props": {
+        "datetime": "2024-10-31T18:45:00.000Z",
+        "showCurrentYear": true
+      }
+    },
+    {
+      "name": "Paris time",
+      "props": {
+        "datetime": "2026-04-09T15:30:00.000Z",
+        "timeZone": "Europe/Paris"
+      }
+    }
+  ],
+  "conditionals": {},
+  "hints": {
+    "paris_time": {
+      "presetName": "Paris time",
+      "message": "Use the timeZone prop to display the time in a different timezone",
+      "type": "info"
+    }
+  }
+}

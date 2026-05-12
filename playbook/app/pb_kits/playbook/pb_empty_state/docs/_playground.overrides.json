@@ -1,0 +1,79 @@
+{
+  "template": "<Flex align=\"center\" orientation=\"column\">\n  <EmptyState{{props}} />\n</Flex>",
+  "imports": ["Flex"],
+  "defaults": {
+    "alignment": "center",
+    "description": "Body text goes into detail with possible steps for user to take",
+    "header": "Title Explains",
+    "image": "default",
+    "orientation": "vertical",
+    "size": "md"
+  },
+  "groups": [
+    {
+      "name": "Layout",
+      "props": ["alignment", "orientation", "size"]
+    },
+    {
+      "name": "Content",
+      "props": ["header", "description", "image"]
+    },
+    {
+      "name": "Actions",
+      "props": ["primaryButton", "linkButton", "onLinkButtonClick", "onPrimaryButtonClick"]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default",
+      "props": {
+        "description": "Body text goes into detail with possible steps for user to take",
+        "header": "Title Explains",
+        "image": "default"
+      }
+    },
+    {
+      "name": "With Primary Action",
+      "props": {
+        "description": "Body text goes into detail with possible steps for user to take",
+        "header": "Title Explains",
+        "image": "default",
+        "primaryButton": "Next Action"
+      }
+    },
+    {
+      "name": "With Two Actions",
+      "props": {
+        "description": "Body text goes into detail with possible steps for user to take",
+        "header": "Title Explains",
+        "image": "default",
+        "linkButton": "Alt Action",
+        "primaryButton": "Next Action"
+      }
+    },
+    {
+      "name": "Horizontal",
+      "props": {
+        "alignment": "left",
+        "description": "Body text goes into detail with possible steps for user to take",
+        "header": "Title Explains",
+        "image": "default",
+        "orientation": "horizontal"
+      }
+    },
+    {
+      "name": "Small",
+      "props": {
+        "description": "Body text.",
+        "header": "Title Explains",
+        "image": "default",
+        "size": "sm"
+      }
+    }
+  ],
+  "conditionals": {
+    "onLinkButtonClick": { "requires": "linkButton" },
+    "onPrimaryButtonClick": { "requires": "primaryButton" }
+  },
+  "hints": {}
+}

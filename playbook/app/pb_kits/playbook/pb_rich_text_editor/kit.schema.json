@@ -32,7 +32,7 @@
       ]
     },
     "inputOptions": {
-      "type": "{ [key: string]: string | number | boolean | (() => void) }",
+      "type": "GenericObject",
       "platforms": [
         "react",
         "rails"
@@ -52,7 +52,7 @@
       ]
     },
     "extensions": {
-      "type": "object",
+      "type": "GenericObject",
       "platforms": [
         "react"
       ]
@@ -131,6 +131,12 @@
       "platforms": [
         "react",
         "rails"
+      ]
+    },
+    "maxWidth": {
+      "type": "string",
+      "platforms": [
+        "react"
       ]
     },
     "TrixEditor": {

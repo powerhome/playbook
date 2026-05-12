@@ -44,6 +44,15 @@ PreCommit:
       - 'playbook/app/pb_kits/playbook/tokens/_spacing.scss'
       - 'playbook/app/pb_kits/playbook/tokens/_screen_sizes.scss'
 
+  VerifyPlaygroundConfigs:
+    enabled: true
+    description: 'Verify playground configs are in sync with schemas and overrides'
+    required_executable: 'bash'
+    command: ['bash', '.git-hooks/pre_commit/verify_playground_configs.sh']
+    include:
+      - 'playbook/app/pb_kits/playbook/pb_*/kit.schema.json'
+      - 'playbook/app/pb_kits/playbook/pb_*/docs/_playground.overrides.json'
+
 CommitMsg:
   CapitalizedSubject:
     enabled: false

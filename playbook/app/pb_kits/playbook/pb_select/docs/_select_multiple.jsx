@@ -17,19 +17,19 @@ const SelectMultiple = (props) => {
       text: 'Tacos',
     },
     {
-      value: '3',
+      value: '4',
       text: 'BBQ',
     },
     {
-      value: '3',
+      value: '5',
       text: 'Sushi',
     },
     {
-      value: '3',
+      value: '6',
       text: 'Chinese',
     },
     {
-      value: '3',
+      value: '7',
       text: 'Hot Dogs',
     },
   ]
@@ -39,7 +39,7 @@ const SelectMultiple = (props) => {
       <Select
           label="Favorite Food"
           multiple
-          name="food"
+          name="food-multiple"
           options={options}
           {...props}
       />

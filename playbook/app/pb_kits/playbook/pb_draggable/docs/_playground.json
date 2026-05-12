@@ -1,0 +1,54 @@
+{
+  "template": "<Draggable{{props}} />",
+  "propTargets": {},
+  "defaults": {
+    "dropZoneColor": "neutral"
+  },
+  "groups": [
+    {
+      "name": "Appearance",
+      "props": [
+        "dropZone",
+        "dropZoneColor"
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Ghost (neutral)",
+      "props": {
+        "dropZone": "ghost",
+        "dropZoneColor": "neutral"
+      }
+    },
+    {
+      "name": "Outline (primary)",
+      "props": {
+        "dropZone": "outline",
+        "dropZoneColor": "primary"
+      }
+    },
+    {
+      "name": "Shadow (purple)",
+      "props": {
+        "dropZone": "shadow",
+        "dropZoneColor": "purple"
+      }
+    },
+    {
+      "name": "Line (neutral)",
+      "props": {
+        "dropZone": "line",
+        "dropZoneColor": "neutral"
+      }
+    }
+  ],
+  "conditionals": {},
+  "hints": {
+    "children_note": {
+      "when": {},
+      "message": "Compose Draggable.Container and Draggable.Item as children to build a sortable list.",
+      "type": "info"
+    }
+  }
+}

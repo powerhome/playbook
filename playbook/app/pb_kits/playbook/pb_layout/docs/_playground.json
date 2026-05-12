@@ -1,0 +1,40 @@
+{
+  "template": "<Layout{{props}} />",
+  "propTargets": {},
+  "defaults": {
+    "collapse": "xs",
+    "full": false,
+    "responsive": false,
+    "size": {
+      "react": "sm",
+      "rails": "md"
+    },
+    "variant": "light",
+    "transparent": false,
+    "layout": "sidebar"
+  },
+  "groups": [
+    {
+      "name": "Props",
+      "props": [
+        "collapse",
+        "dark",
+        "full",
+        "position",
+        "responsive",
+        "size",
+        "variant",
+        "transparent",
+        "layout"
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default",
+      "props": {}
+    }
+  ],
+  "conditionals": {},
+  "hints": {}
+}

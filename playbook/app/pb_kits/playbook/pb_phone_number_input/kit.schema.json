@@ -7,6 +7,12 @@
     "rails"
   ],
   "props": {
+    "dark": {
+      "type": "boolean",
+      "platforms": [
+        "react"
+      ]
+    },
     "disabled": {
       "type": "boolean",
       "platforms": [
@@ -135,6 +141,14 @@
       "default": false
     },
     "countrySearch": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "showPlaceholder": {
       "type": "boolean",
       "platforms": [
         "react",

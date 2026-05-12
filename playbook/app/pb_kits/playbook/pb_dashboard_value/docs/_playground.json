@@ -1,0 +1,87 @@
+{
+  "template": "<DashboardValue{{props}} />",
+  "propTargets": {},
+  "defaults": {
+    "align": "left",
+    "statChange": {
+      "change": "decrease",
+      "value": "26.1"
+    },
+    "statLabel": "Decreased Value",
+    "statValue": {
+      "value": "1,428",
+      "unit": "appts"
+    }
+  },
+  "groups": [
+    {
+      "name": "Value configs",
+      "props": [
+        "statLabel",
+        "statValue",
+        "statChange"
+      ]
+    },
+    {
+      "name": "Appearance",
+      "props": [
+        "align"
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default",
+      "props": {
+        "statLabel": "Monthly recurring revenue",
+        "statValue": {
+          "value": "1,428",
+          "unit": "appts"
+        },
+        "statChange": {
+          "change": "decrease",
+          "value": "26.1"
+        }
+      }
+    },
+    {
+      "name": "Increased Value",
+      "props": {
+        "statLabel": "Active accounts",
+        "statValue": {
+          "value": "938",
+          "unit": "homes"
+        },
+        "statChange": {
+          "change": "increase",
+          "value": "56.1"
+        }
+      }
+    },
+    {
+      "name": "Neutral Value",
+      "props": {
+        "statLabel": "Neutral Value",
+        "statValue": {
+          "value": "261",
+          "unit": "windows"
+        },
+        "statChange": {
+          "value": "86"
+        }
+      }
+    },
+    {
+      "name": "Pitch Rate",
+      "props": {
+        "statLabel": "Pitch Rate",
+        "statValue": {
+          "value": "90.9",
+          "unit": "%"
+        }
+      }
+    }
+  ],
+  "conditionals": {},
+  "hints": {}
+}

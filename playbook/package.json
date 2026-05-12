@@ -1,6 +1,6 @@
 {
   "name": "playbook-ui",
-  "version": "16.6.0",
+  "version": "16.7.0",
   "description": "Nitro's Design System",
   "main": "./dist/playbook.js",
   "types": "./dist/types/index.d.ts",
@@ -33,6 +33,7 @@
     "release": "rm -rf dist; npx vite build && yarn build:ai:full",
     "watch": "npx vite build --watch",
     "generate:tokens": "node scripts/generate-tokens.js",
+    "generate:playground-configs": "node scripts/generate-playground-configs.js",
     "generate:ai-metadata": "node scripts/generate-ai-metadata.mjs",
     "generate:ai-metadata:dry-run": "node scripts/generate-ai-metadata.mjs --dry-run --verbose",
     "generate:global-props-metadata": "node scripts/generate-global-props-metadata.mjs",

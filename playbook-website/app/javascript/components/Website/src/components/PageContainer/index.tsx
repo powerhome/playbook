@@ -11,7 +11,8 @@ export const PageContainer = ({ children }: PageContainerProps) => {
       maxWidth="xxl"
       marginX="auto"
       orientation="column"
-      marginY="lg"
+      marginBottom="lg"
+      marginTop="sm"
     >
       {children}
     </Flex>

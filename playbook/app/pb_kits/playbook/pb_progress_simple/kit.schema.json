@@ -20,6 +20,12 @@
       ],
       "default": "left"
     },
+    "dark": {
+      "type": "boolean",
+      "platforms": [
+        "react"
+      ]
+    },
     "max": {
       "type": "number",
       "platforms": [
@@ -62,6 +68,12 @@
         "warning"
       ],
       "default": "default"
+    },
+    "width": {
+      "type": "string",
+      "platforms": [
+        "react"
+      ]
     }
   },
   "globalProps": true,

@@ -50,7 +50,16 @@ module Playbook
       def validation_data
         fields = input_options[:data] || {}
         fields[:message] = validation_message unless validation_message.blank?
+        dv = filter_reset_default_value
+        fields[:default_value] = dv if dv.present?
         fields
+      end
+
+      def filter_reset_default_value
+        s = selected
+        return if s.blank?
+
+        s.join(",")
       end
 
       # Same resolved id as the native +<select>+ (+all_attributes[:id]+) for label +for+.

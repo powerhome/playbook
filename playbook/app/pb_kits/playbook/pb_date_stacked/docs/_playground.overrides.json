@@ -1,0 +1,51 @@
+{
+  "groups": [
+    {
+      "name": "Date Config",
+      "props": ["date", "showCurrentYear", "reverse", "bold"]
+    },
+    {
+      "name": "Appearance",
+      "props": ["size", "align"]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default",
+      "props": {
+        "date": "2026-04-09T12:00:00.000Z"
+      }
+    },
+    {
+      "name": "Medium & centered",
+      "props": {
+        "date": "2026-04-09T12:00:00.000Z",
+        "size": "md",
+        "align": "center"
+      }
+    },
+    {
+      "name": "Bold layout",
+      "props": {
+        "date": "2026-07-20T12:00:00.000Z",
+        "bold": true
+      }
+    },
+    {
+      "name": "Reverse order",
+      "props": {
+        "date": "2026-12-01T12:00:00.000Z",
+        "reverse": true
+      }
+    },
+    {
+      "name": "Always show year",
+      "props": {
+        "date": "2024-03-15T12:00:00.000Z",
+        "showCurrentYear": true
+      }
+    }
+  ],
+  "conditionals": {},
+  "hints": {}
+}

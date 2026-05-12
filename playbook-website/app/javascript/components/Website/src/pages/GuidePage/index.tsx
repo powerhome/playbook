@@ -1,5 +1,5 @@
 import { useLoaderData } from "react-router-dom";
-import ReactMarkdown from "react-markdown";
+import { MarkdownContent } from "../../components/MarkdownContent";
 import {
   Flex,
   FlexItem,
@@ -61,7 +61,7 @@ const GuidePage = () => {
         <Background maxWidth="md" backgroundColor="white">
           <Title text={loaderData.title} size={1} />
           <div className="markdown-content">
-            <ReactMarkdown>{contentWithoutFrontmatter}</ReactMarkdown>
+            <MarkdownContent>{contentWithoutFrontmatter}</MarkdownContent>
           </div>
         </Background>
       </Background>

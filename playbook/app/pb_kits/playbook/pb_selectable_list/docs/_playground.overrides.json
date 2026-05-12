@@ -1,0 +1,34 @@
+{
+  "groups": [
+    {
+      "name": "State",
+      "props": ["variant"]
+    },
+    {
+      "name": "Behavior",
+      "props": ["enableDrag"]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Checkbox list",
+      "props": { "variant": "checkbox", "enableDrag": false }
+    },
+    {
+      "name": "Radio list",
+      "props": { "variant": "radio", "enableDrag": false }
+    },
+    {
+      "name": "Checkbox + drag",
+      "props": { "variant": "checkbox", "enableDrag": true }
+    }
+  ],
+  "conditionals": {},
+  "hints": {
+    "items_note": {
+      "when": {},
+      "message": "Add SelectableList.Item rows as children; enableDrag defers to List for reordering.",
+      "type": "info"
+    }
+  }
+}

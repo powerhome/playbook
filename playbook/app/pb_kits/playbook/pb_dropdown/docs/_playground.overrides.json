@@ -1,0 +1,310 @@
+{
+  "structureModes": {
+    "default": "simple",
+    "modes": {
+      "simple": {
+        "label": "Simple",
+        "template": "<Dropdown{{props}} />",
+        "children": ""
+      },
+      "subcomponents": {
+        "label": "With Subcomponents",
+        "template": "<Dropdown{{props}}>\n  <Dropdown.Trigger />\n  <Dropdown.Container>\n    <Dropdown.Option option={({ label: 'United States', value: 'unitedStates', id: 'us' })} />\n    <Dropdown.Option option={({ label: 'Canada', value: 'canada', id: 'ca' })} />\n    <Dropdown.Option option={({ label: 'Pakistan', value: 'pakistan', id: 'pk' })} />\n  </Dropdown.Container>\n</Dropdown>",
+        "children": "",
+        "props": {
+          "options": [
+            { "label": "United States", "value": "unitedStates", "id": "us" },
+            { "label": "Canada", "value": "canada", "id": "ca" },
+            { "label": "Pakistan", "value": "pakistan", "id": "pk" }
+          ]
+        }
+      }
+    }
+  },
+  "defaults": {
+    "autocomplete": false,
+    "blankSelection": "",
+    "clearable": true,
+    "closeOnClick": "any",
+    "constrainHeight": false,
+    "dark": false,
+    "label": "Select a Country",
+    "multiSelect": false,
+    "options": [
+      { "label": "United States", "value": "unitedStates", "id": "us" },
+      { "label": "Canada", "value": "canada", "id": "ca" },
+      { "label": "Pakistan", "value": "pakistan", "id": "pk" }
+    ],
+    "placeholder": "Select a country",
+    "requiredIndicator": false,
+    "separators": true,
+    "variant": "default"
+  },
+  "groups": [
+    {
+      "name": "Content",
+      "props": [
+        "label",
+        "placeholder",
+        "options",
+        "defaultValue",
+        "blankSelection",
+        "error"
+      ]
+    },
+    {
+      "name": "Behavior",
+      "props": [
+        "variant",
+        "multiSelect",
+        "autocomplete",
+        "clearable",
+        "closeOnClick",
+        "constrainHeight",
+        "isClosed",
+        "requiredIndicator"
+      ]
+    },
+    {
+      "name": "Quick pick",
+      "props": [
+        "customQuickPickDates",
+        "rangeEndsToday",
+        "controlsStartId",
+        "controlsEndId"
+      ]
+    },
+    {
+      "name": "Display",
+      "props": [
+        "separators",
+        "formPillProps",
+        "activeStyle",
+        "dark"
+      ]
+    },
+    {
+      "name": "Events",
+      "props": ["onSelect"]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default trigger",
+      "props": {
+        "variant": "default",
+        "placeholder": "Select a country",
+        "options": [
+          { "label": "United States", "value": "unitedStates", "id": "us" },
+          { "label": "Canada", "value": "canada", "id": "ca" },
+          { "label": "Mexico", "value": "mexico", "id": "mx" }
+        ]
+      }
+    },
+    {
+      "name": "With label",
+      "props": {
+        "label": "Select a Country",
+        "placeholder": "Choose a country",
+        "options": [
+          { "label": "United States", "value": "unitedStates", "id": "us" },
+          { "label": "Canada", "value": "canada", "id": "ca" },
+          { "label": "Pakistan", "value": "pakistan", "id": "pk" }
+        ]
+      }
+    },
+    {
+      "name": "Subtle Variant",
+      "props": {
+        "variant": "subtle",
+        "separators": false,
+        "options": [
+          { "label": "Alpha", "value": "alpha", "id": "a" },
+          { "label": "Beta", "value": "beta", "id": "b" },
+          { "label": "Gamma", "value": "gamma", "id": "g" }
+        ]
+      }
+    },
+    {
+      "name": "Quick pick",
+      "props": {
+        "variant": "quickpick",
+        "label": "Date Range",
+        "placeholder": "Select a Date Range"
+      }
+    },
+    {
+      "name": "Quick pick custom",
+      "props": {
+        "variant": "quickpick",
+        "label": "Date Range",
+        "customQuickPickDates": {
+          "dates": [
+            {
+              "label": "Last 15 months",
+              "value": {
+                "timePeriod": "months",
+                "amount": 15
+              }
+            },
+            {
+              "label": "First Week of June 2022",
+              "value": ["06/01/2022", "06/07/2022"]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Quick pick append defaults",
+      "props": {
+        "variant": "quickpick",
+        "label": "Date Range",
+        "customQuickPickDates": {
+          "dates": [
+            {
+              "label": "Last 15 months",
+              "value": {
+                "timePeriod": "months",
+                "amount": 15
+              }
+            },
+            {
+              "label": "First Week of June 2022",
+              "value": ["06/01/2022", "06/07/2022"]
+            }
+          ],
+          "override": false
+        }
+      }
+    },
+    {
+      "name": "Multi-select",
+      "props": {
+        "variant": "default",
+        "multiSelect": true,
+        "placeholder": "Select regions",
+        "options": [
+          { "label": "North", "value": "north", "id": "n" },
+          { "label": "South", "value": "south", "id": "s" },
+          { "label": "East", "value": "east", "id": "e" },
+          { "label": "West", "value": "west", "id": "w" }
+        ]
+      }
+    },
+    {
+      "name": "Multi-select with pills",
+      "props": {
+        "variant": "default",
+        "multiSelect": true,
+        "placeholder": "Select countries",
+        "formPillProps": { "size": "small", "color": "neutral" },
+        "defaultValue": [
+          { "label": "United States", "value": "unitedStates" },
+          { "label": "Italy", "value": "italy" }
+        ],
+        "options": [
+          { "label": "United States", "value": "unitedStates", "id": "us" },
+          { "label": "United Kingdom", "value": "unitedKingdom", "id": "gb" },
+          { "label": "Canada", "value": "canada", "id": "ca" },
+          { "label": "Pakistan", "value": "pakistan", "id": "pk" },
+          { "label": "India", "value": "india", "id": "in" },
+          { "label": "Australia", "value": "australia", "id": "au" },
+          { "label": "New Zealand", "value": "newZealand", "id": "nz" },
+          { "label": "Italy", "value": "italy", "id": "it" }
+        ]
+      }
+    },
+    {
+      "name": "With error",
+      "props": {
+        "variant": "default",
+        "label": "Required field",
+        "placeholder": "Required field",
+        "error": "Please make a selection.",
+        "options": [
+          { "label": "Option A", "value": "a", "id": "a" },
+          { "label": "Option B", "value": "b", "id": "b" }
+        ]
+      }
+    },
+    {
+      "name": "Search (autocomplete)",
+      "props": {
+        "variant": "default",
+        "autocomplete": true,
+        "placeholder": "Search…",
+        "options": [
+          { "label": "Apple", "value": "apple", "id": "1" },
+          { "label": "Apricot", "value": "apricot", "id": "2" },
+          { "label": "Banana", "value": "banana", "id": "3" }
+        ]
+      }
+    },
+    {
+      "name": "Constrained height",
+      "props": {
+        "label": "Choose an Option",
+        "constrainHeight": true,
+        "options": [
+          { "label": "Option 1", "value": "option_1", "id": "opt_1" },
+          { "label": "Option 2", "value": "option_2", "id": "opt_2" },
+          { "label": "Option 3", "value": "option_3", "id": "opt_3" },
+          { "label": "Option 4", "value": "option_4", "id": "opt_4" },
+          { "label": "Option 5", "value": "option_5", "id": "opt_5" },
+          { "label": "Option 6", "value": "option_6", "id": "opt_6" },
+          { "label": "Option 7", "value": "option_7", "id": "opt_7" },
+          { "label": "Option 8", "value": "option_8", "id": "opt_8" },
+          { "label": "Option 9", "value": "option_9", "id": "opt_9" },
+          { "label": "Option 10", "value": "option_10", "id": "opt_10" },
+          { "label": "Option 11", "value": "option_11", "id": "opt_11" },
+          { "label": "Option 12", "value": "option_12", "id": "opt_12" }
+        ]
+      }
+    }
+  ],
+  "conditionals": {
+    "requiredIndicator": { "requires": "label" },
+    "formPillProps": { "requires": "multiSelect" },
+    "rangeEndsToday": { "requires": { "variant": "quickpick" } },
+    "controlsStartId": { "requires": { "variant": "quickpick" } },
+    "controlsEndId": { "requires": { "variant": "quickpick" } },
+    "customQuickPickDates": { "requires": { "variant": "quickpick" } }
+  },
+  "hints": {
+    "quickpick_scope": {
+      "when": { "variant": "quickpick" },
+      "message": "Quick pick uses preset date-range options. Use customQuickPickDates to replace or extend them, and pair controlsStartId / controlsEndId with DatePicker when you need synced date inputs.",
+      "type": "info"
+    },
+    "multi_options": {
+      "when": { "multiSelect": true },
+      "message": "Multi-select returns arrays of selected options. Use formPillProps to adjust the selected-pill appearance and clearable to let users reset the selection.",
+      "type": "info"
+    },
+    "autocomplete_info": {
+      "when": { "autocomplete": true },
+      "message": "Autocomplete filters the provided options list in place. It works especially well with longer option sets.",
+      "type": "info"
+    },
+    "quickpick_custom_info": {
+      "presetName": "Quick pick custom",
+      "message": "When override is omitted or true, customQuickPickDates replaces the default quick-pick menu.",
+      "type": "info"
+    },
+    "quickpick_append_info": {
+      "presetName": "Quick pick append defaults",
+      "message": "Set customQuickPickDates.override to false to append your custom ranges to the built-in quick-pick options.",
+      "type": "info"
+    },
+    "constrained_height_info": {
+      "presetName": "Constrained height",
+      "message": "constrainHeight restricts the height of the dropdown menu and enables vertical scrolling when the content exceeds this height. This prevents long dropdown lists from rendering off-screen.",
+      "type": "info"
+    },
+    "subcomponent_structure_info": {
+      "message": "Switch Structure to “With Subcomponents” to see the explicit Dropdown.Trigger, Dropdown.Container, and Dropdown.Option composition API.",
+      "type": "info"
+    }
+  }
+}

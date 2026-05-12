@@ -92,7 +92,8 @@ module Playbook
 
       def classname
         default_margin_bottom = margin_bottom.present? ? "" : " mb_sm"
-        generate_classname("pb_date_picker_kit") + default_margin_bottom
+        inline_class = inline ? " inline-date-picker" : ""
+        generate_classname("pb_date_picker_kit") + default_margin_bottom + inline_class
       end
 
       def date_picker_config
@@ -143,6 +144,18 @@ module Playbook
 
       def angle_down_path
         "app/pb_kits/playbook/utilities/icons/angle-down.svg"
+      end
+
+      # Serialized business default for opt-in smart filter reset (Nitro / data-default-value).
+      def serialized_default_date_for_dom
+        case default_date
+        when nil, ""
+          nil
+        when Array
+          default_date.compact_blank.map(&:to_s).join(",")
+        else
+          default_date.to_s.presence
+        end
       end
     end
   end

@@ -1,0 +1,112 @@
+{
+  "template": "<Badge{{props}}>{{children}}</Badge>",
+  "propTargets": {},
+  "defaults": {
+    "rounded": false,
+    "variant": "neutral"
+  },
+  "children": {
+    "editable": true,
+    "default": "Badge content",
+    "hideWhenPropSet": [
+      "text"
+    ]
+  },
+  "groups": [
+    {
+      "name": "Content",
+      "props": [
+        "text"
+      ]
+    },
+    {
+      "name": "Appearance",
+      "props": [
+        "variant",
+        "rounded",
+        "removeIcon"
+      ]
+    },
+    {
+      "name": "Other",
+      "props": [
+        "tabIndex"
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Primary",
+      "props": {
+        "variant": "primary",
+        "text": "Primary"
+      },
+      "children": ""
+    },
+    {
+      "name": "Success",
+      "props": {
+        "variant": "success",
+        "text": "Success"
+      },
+      "children": ""
+    },
+    {
+      "name": "Warning",
+      "props": {
+        "variant": "warning",
+        "text": "Warning"
+      },
+      "children": ""
+    },
+    {
+      "name": "Error",
+      "props": {
+        "variant": "error",
+        "text": "Error"
+      },
+      "children": ""
+    },
+    {
+      "name": "Notification",
+      "props": {
+        "variant": "notification",
+        "text": "3"
+      },
+      "children": ""
+    },
+    {
+      "name": "Rounded primary",
+      "props": {
+        "variant": "primary",
+        "rounded": true,
+        "text": "New"
+      },
+      "children": ""
+    },
+    {
+      "name": "Dismissible",
+      "props": {
+        "variant": "neutral",
+        "removeIcon": true,
+        "text": "Removable",
+        "removeOnClick": "() => console.log('dismissed')"
+      },
+      "children": ""
+    }
+  ],
+  "conditionals": {
+    "removeOnClick": {
+      "requires": "removeIcon"
+    }
+  },
+  "hints": {
+    "dismissible": {
+      "when": {
+        "removeIcon": true
+      },
+      "message": "Wire removeOnClick in app code to handle dismissal; the playground only shows the icon.",
+      "type": "info"
+    }
+  }
+}

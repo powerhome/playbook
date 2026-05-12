@@ -131,6 +131,7 @@ dist/ai/
 | `yarn build:ai` | Clean and copy schemas to dist/ai/ (default clean) |
 | `yarn build:ai --no-clean` | Incremental build without cleaning |
 | `yarn build:ai:full` | Generate + build (full rebuild) |
+| `yarn generate:ai-metadata --verbose` | Verbose flag to show more info for debugging|
 | `yarn release` | Full release build (includes AI metadata) |
 
 ## How It Works

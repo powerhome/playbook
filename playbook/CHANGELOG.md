@@ -1,3 +1,47 @@
+# 📲 What If Phones, But Too Much?
+##### May 01, 2026
+
+![release_image](https://github.com/user-attachments/assets/db119637-25e9-4157-9091-c5f7fdf034fc)
+
+We may have overcommitted to phones. Mobile pagination is live and the Phone Number Input got better! And the new Playbook website is getting closer to its final form, stay tuned for more!
+
+[16.7.0](https://github.com/powerhome/playbook/tree/16.7.0) full list of changes:
+
+**Kit Enhancements:**
+
+- Phone Number Kit: Showplaceholder Prop (defaults to False) [\#6113](https://github.com/powerhome/playbook/pull/6113) ([kangaree](https://github.com/kangaree))
+- Mobile Pagination Patterns for Playbook Components - Rails [\#6071](https://github.com/powerhome/playbook/pull/6071) ([elisashapiro](https://github.com/elisashapiro))
+
+
+**Fixed Bugs:**
+
+- Button Kit: Fix Font Awesome Icons [\#6125](https://github.com/powerhome/playbook/pull/6125) ([kangaree](https://github.com/kangaree))
+- Playbook Website: Pagination Data Model for All Kits and Category Pages [\#6119](https://github.com/powerhome/playbook/pull/6119) ([nidaqg](https://github.com/nidaqg))
+- Quickpick: Update Last Quickpick Logic Without Verification Issue [\#6108](https://github.com/powerhome/playbook/pull/6108) ([elisashapiro](https://github.com/elisashapiro), [umeshshimpi](https://github.com/umeshshimpi))
+- Button Kit: Match Icon-only Button Height With Icon-less Button Height [\#6106](https://github.com/powerhome/playbook/pull/6106) ([kangaree](https://github.com/kangaree))
+- Playbook Website: Beta- Remove Scss That Causes Scroll Hijack [\#6093](https://github.com/powerhome/playbook/pull/6093) ([kangaree](https://github.com/kangaree))
+
+**Improvements:**
+
+- Dropdown: Constrainheight Prop With Subcomponent Structure [\#6128](https://github.com/powerhome/playbook/pull/6128) ([nickamantia](https://github.com/nickamantia))
+- Global Props: Change Background Color for Border Radius Global Prop Examples [\#6120](https://github.com/powerhome/playbook/pull/6120) ([elisashapiro](https://github.com/elisashapiro))
+- Playbook Website: Design Feedback for Beta Website [\#6107](https://github.com/powerhome/playbook/pull/6107) ([nidaqg](https://github.com/nidaqg))
+- Select: Minor Clean Up Of Select Docs [\#6112](https://github.com/powerhome/playbook/pull/6112) ([elisashapiro](https://github.com/elisashapiro))
+- Playbook Website: AT on Rails Side + Playground Tab Only on React [\#6095](https://github.com/powerhome/playbook/pull/6095) ([nidaqg](https://github.com/nidaqg))
+- Playbook Website: Format Rails Code Examples on Beta [\#6094](https://github.com/powerhome/playbook/pull/6094) ([elisashapiro](https://github.com/elisashapiro))
+- Playbook Website: Rails Docs on Beta [\#6092](https://github.com/powerhome/playbook/pull/6092) ([nidaqg](https://github.com/nidaqg))
+- Playbook Website: Adding Search to Beta Website Icons Page [\#6090](https://github.com/powerhome/playbook/pull/6090) ([elisashapiro](https://github.com/elisashapiro))
+- Playbook Website: Show Homepage on /beta [\#6084](https://github.com/powerhome/playbook/pull/6084) ([kangaree](https://github.com/kangaree))
+- Playbook Website: Beta All Kits Search, Kit Category Hero, Kit Card Placeholder [\#6083](https://github.com/powerhome/playbook/pull/6083) ([elisashapiro](https://github.com/elisashapiro))
+- Playbook Website: Convert Icon Page to React [\#6082](https://github.com/powerhome/playbook/pull/6082) ([nickamantia](https://github.com/nickamantia))
+- Playbook Website: React-syntax-highlighter to Format Code on Beta Website [\#6081](https://github.com/powerhome/playbook/pull/6081) ([elisashapiro](https://github.com/elisashapiro))
+- Playbook Website: Global Props and Tokens Pages + Search on Beta [\#6079](https://github.com/powerhome/playbook/pull/6079) ([nidaqg](https://github.com/nidaqg))
+- Update Maplibre-gl Dependencies [\#6068](https://github.com/powerhome/playbook/pull/6068) ([elisashapiro](https://github.com/elisashapiro))
+- Playbook Website: Beta Playground [\#6029](https://github.com/powerhome/playbook/pull/6029) ([nidaqg](https://github.com/nidaqg))
+
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/v16.7.0-rc.1...16.7.0)
+
 # 🤖 Playbook, Decoded for Machines
 ##### April 15, 2026
 

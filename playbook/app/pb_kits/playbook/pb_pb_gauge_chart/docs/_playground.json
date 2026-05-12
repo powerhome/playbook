@@ -1,0 +1,21 @@
+{
+  "template": "<PbGaugeChart{{props}} />",
+  "propTargets": {},
+  "defaults": {},
+  "groups": [
+    {
+      "name": "Props",
+      "props": [
+        "options"
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default",
+      "props": {}
+    }
+  ],
+  "conditionals": {},
+  "hints": {}
+}

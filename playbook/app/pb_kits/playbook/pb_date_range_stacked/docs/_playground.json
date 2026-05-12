@@ -1,0 +1,46 @@
+{
+  "template": "<DateRangeStacked{{props}} />",
+  "propTargets": {},
+  "defaults": {},
+  "groups": [
+    {
+      "name": "Date Config",
+      "props": [
+        "startDate",
+        "endDate"
+      ]
+    },
+    {
+      "name": "Appearance",
+      "props": [
+        "dark"
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default",
+      "props": {
+        "startDate": "2019-06-18",
+        "endDate": "2020-03-20"
+      }
+    },
+    {
+      "name": "Dark",
+      "props": {
+        "startDate": "2019-06-18",
+        "endDate": "2020-03-20",
+        "dark": true
+      }
+    },
+    {
+      "name": "Same calendar year",
+      "props": {
+        "startDate": "2026-01-15",
+        "endDate": "2026-08-15"
+      }
+    }
+  ],
+  "conditionals": {},
+  "hints": {}
+}

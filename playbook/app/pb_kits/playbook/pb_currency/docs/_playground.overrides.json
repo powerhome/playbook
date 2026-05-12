@@ -1,0 +1,98 @@
+{
+  "defaults": {
+    "amount": "2000",
+    "label": "Balance"
+  },
+  "groups": [
+    {
+      "name": "Currency configs",
+      "props": ["amount", "label", "unit", "nullDisplay", "symbol"]
+    },
+    {
+      "name": "Appearance",
+      "props": [
+        "align",
+        "size",
+        "variant",
+        "emphasized",
+        "abbreviate",
+        "decimals",
+        "commaSeparator",
+        "unstyled"
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default",
+      "props": {
+        "amount": "2000"
+      }
+    },
+    {
+      "name": "USD (comma separator)",
+      "props": {
+        "amount": "2000",
+        "commaSeparator": true,
+        "label": "Balance",
+        "symbol": "$"
+      }
+    },
+    {
+      "name": "bold variant",
+      "props": {
+        "amount": "1428.5",
+        "label": "ARR"
+      }
+    },
+    {
+      "name": "Abbreviated",
+      "props": {
+        "amount": "1500000",
+        "abbreviate": true,
+        "label": "Volume",
+        "symbol": "$"
+      }
+    },
+    {
+      "name": "Matching decimals",
+      "props": {
+        "amount": "99.9999",
+        "decimals": "matching",
+        "symbol": "$",
+        "label": "Per seat"
+      }
+    },
+    {
+      "name": "Right aligned",
+      "props": {
+        "amount": "1428",
+        "align": "right",
+        "label": "Total",
+        "symbol": "$"
+      }
+    }
+  ],
+  "conditionals": {},
+  "hints": {
+    "unstyled_mode": {
+      "when": { "unstyled": true },
+      "message": "Unstyled mode uses plain divs for layout—useful when embedding in tables or custom typography.",
+      "type": "info"
+    },
+    "matching_decimals_info": {
+      "when": {
+        "decimals": "matching"
+      },
+      "message": "Matching decimals will show the number of decimals that match the amount. This is useful when you want to show the exact number of decimals that are in the amount.",
+      "type": "info"
+    },
+    "abbreviate_info": {
+      "when": {
+        "abbreviate": true
+      },
+      "message": "Abbreviate will show the amount in a compact format. This is useful when you want to show the amount in a shorter format.",
+      "type": "info"
+    }
+  }
+}

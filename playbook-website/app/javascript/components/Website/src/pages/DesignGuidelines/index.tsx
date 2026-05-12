@@ -1,5 +1,5 @@
 import { useLoaderData, Link } from "react-router-dom"
-import ReactMarkdown from 'react-markdown'
+import { MarkdownContent } from "../../components/MarkdownContent"
 import { Flex, Background, Title, Layout, Card, IconCircle, Body, Icon } from "playbook-ui"
 import HeaderImage from "../../../../../images/getting-started.svg"
 
@@ -38,7 +38,7 @@ const DesignGuidelines = () => {
       >
         <Title size={1} text="Design Guidelines" marginBottom="sm" />
         <div className="markdown-content">
-          <ReactMarkdown>{contentWithoutFrontmatter}</ReactMarkdown>
+          <MarkdownContent>{contentWithoutFrontmatter}</MarkdownContent>
         </div>
         
         {/* Render card grid of sub-pages */}

@@ -1,0 +1,45 @@
+{
+  "children": {
+    "default": "SKU · 12 units in stock"
+  },
+  "groups": [
+    {
+      "name": "Appearance",
+      "props": ["color", "bold", "tag"]
+    },
+    {
+      "name": "Content",
+      "props": ["text"]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default",
+      "props": { },
+      "children": "I am a detail kit"
+    },
+    {
+      "name": "Emphasis",
+      "props": { "bold": true },
+      "children": "Order #48291 · Processing"
+    },
+    {
+      "name": "Link color",
+      "props": { "color": "link" },
+      "children": "View documentation"
+    },
+    {
+      "name": "Error status",
+      "props": { "color": "error", "bold": true },
+      "children": "Payment failed"
+    }
+  ],
+  "conditionals": {},
+  "hints": {
+    "link_color": {
+      "presetName": "Link color",
+      "message": "Use the color prop to change the color of the detail kit",
+      "type": "info"
+    }
+  }
+}

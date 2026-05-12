@@ -1,8 +1,8 @@
 import React, { useState } from "react"
-import { render, screen, fireEvent } from "../utilities/test-utils"
+import { render, screen, fireEvent, waitFor } from "../utilities/test-utils"
 
 import { Dropdown, Icon, IconCircle } from 'playbook-ui'
-
+import DateTime from "../pb_kit/dateTime.ts"
 
 const testId = 'dropdown'
 
@@ -51,6 +51,7 @@ test('generated default kit and classname', () => {
   const kit = screen.getByTestId(testId)
   expect(kit).toBeInTheDocument()
   expect(kit).toHaveClass('pb_dropdown_default')
+  expect(kit).not.toHaveAttribute('data-default-value')
 })
 
 test('generated default Trigger and Container when none passed in', () => {
@@ -433,12 +434,16 @@ test("defaultValue works with multiSelect", () => {
     render(
       <Dropdown
           data={{ testid: testId }}
-          defaultValue={[options[0], options[2]]}
+          defaultValue={[
+            { label: options[0].label, value: options[0].value },
+            { label: options[2].label, value: options[2].value },
+          ]}
           multiSelect
           options={options}
       />
     )
     const kit = screen.getByTestId(testId)
+    expect(kit).toHaveAttribute("data-default-value", "United-states,pakistan")
     expect(kit.querySelectorAll(".pb_form_pill_kit.pb_form_pill_primary")).toHaveLength(2)
     const option2 = Array.from(kit.querySelectorAll(".pb_dropdown_option_list"));
     const firstOpt = options[0].label
@@ -499,6 +504,7 @@ test("quickpick variant accepts string defaultValue", () => {
   const trigger = kit.querySelector('.pb_dropdown_trigger')
   
   expect(trigger).toHaveTextContent("This Month")
+  expect(kit).toHaveAttribute("data-default-value", "quickpick-this-month")
 })
 
 test("quickpick attaches _dropdownRef to DOM element when id is provided", () => {
@@ -778,3 +784,52 @@ test("requiredIndicator prop renders asterisk when true", () => {
   expect(label).toBeInTheDocument();
   expect(kit).toHaveTextContent("*");
 });
+
+describe("quickpick Last Month range when current month is shorter than the previous month", () => {
+  const quickpickTestId = "dropdown-quickpick-last-month-march"
+
+  const formatDate = (date) => {
+    const month = (date.getMonth() + 1).toString().padStart(2, "0")
+    const day = date.getDate().toString().padStart(2, "0")
+    const year = date.getFullYear()
+    return `${month}/${day}/${year}`
+  }
+
+  beforeEach(() => {
+    jest.setSystemTime(new Date(2026, 3, 15, 12, 0, 0))
+  })
+
+  afterEach(() => {
+    jest.setSystemTime()
+  })
+
+  test("selecting Last Month matches DateTime previous-month range (full March when today is in April)", async () => {
+    const onSelect = jest.fn()
+    const now = new Date()
+
+    render(
+      <Dropdown
+          data={{ testid: quickpickTestId }}
+          onSelect={onSelect}
+          variant="quickpick"
+      />
+    )
+
+    const kit = screen.getByTestId(quickpickTestId)
+    const lastMonthOption = Array.from(kit.querySelectorAll(".pb_dropdown_option_list")).find(
+      (el) => el.textContent === "Last Month"
+    )
+
+    expect(lastMonthOption).toBeTruthy()
+    fireEvent.click(lastMonthOption)
+
+    await waitFor(() => {
+      expect(onSelect).toHaveBeenCalled()
+    })
+
+    const [startDate, endDate] = onSelect.mock.calls[0][0].value
+
+    expect(formatDate(startDate)).toBe(formatDate(DateTime.getPreviousMonthStartDate(now)))
+    expect(formatDate(endDate)).toBe(formatDate(DateTime.getPreviousMonthEndDate(now)))
+  })
+})

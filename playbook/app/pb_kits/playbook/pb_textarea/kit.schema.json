@@ -46,7 +46,7 @@
       "default": false
     },
     "inputOptions": {
-      "type": "object",
+      "type": "GenericObject",
       "platforms": [
         "react",
         "rails"

@@ -1,0 +1,54 @@
+{
+  "template": "<BreadCrumbs{{props}}>{{children}}</BreadCrumbs>",
+  "propTargets": {},
+  "defaults": {},
+  "groups": [
+    {
+      "name": "Content",
+      "props": [
+        "text"
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default",
+      "props": {},
+      "children": "<BreadCrumbItem href=\"/\">Home</BreadCrumbItem><BreadCrumbItem component=\"span\">Settings</BreadCrumbItem>"
+    },
+    {
+      "name": "Three levels",
+      "props": {},
+      "children": "<BreadCrumbItem href=\"/app\">App</BreadCrumbItem><BreadCrumbItem href=\"/app/users\">Users</BreadCrumbItem><BreadCrumbItem component=\"span\">Edit</BreadCrumbItem>"
+    },
+    {
+      "name": "Links only",
+      "props": {},
+      "children": "<BreadCrumbItem href=\"/docs\">Docs</BreadCrumbItem><BreadCrumbItem href=\"/docs/guides\">Guides</BreadCrumbItem><BreadCrumbItem href=\"/docs/guides/start\">Getting started</BreadCrumbItem>"
+    },
+    {
+      "name": "With text prop",
+      "props": {
+        "text": "Breadcrumb"
+      },
+      "children": ""
+    }
+  ],
+  "conditionals": {},
+  "hints": {
+    "breadcrumb_structure": {
+      "when": {
+        "text": null
+      },
+      "message": "Compose the trail with BreadCrumbItem children; use component=\"span\" for the current page when it has no URL.",
+      "type": "info"
+    }
+  },
+  "children": {
+    "editable": true,
+    "default": "<BreadCrumbItem href=\"/products\">Products</BreadCrumbItem><BreadCrumbItem component=\"span\">Details</BreadCrumbItem>",
+    "hideWhenPropSet": [
+      "text"
+    ]
+  }
+}

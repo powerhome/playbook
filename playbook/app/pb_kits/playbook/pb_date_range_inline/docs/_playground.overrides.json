@@ -1,0 +1,57 @@
+{
+  "groups": [
+    {
+      "name": "Content",
+      "props": ["startDate", "endDate", "icon", "showCurrentYear"]
+    },
+    {
+      "name": "Appearance",
+      "props": ["align", "size", "dark"]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default",
+      "props": {
+        "startDate": "2013-06-18",
+        "endDate": "2015-03-20"
+      }
+    },
+    {
+      "name": "Extra small",
+      "props": {
+        "startDate": "2013-06-18",
+        "endDate": "2015-03-20",
+        "size": "xs"
+      }
+    },
+    {
+      "name": "Center with icon",
+      "props": {
+        "align": "center",
+        "startDate": "2026-01-15",
+        "endDate": "2026-08-15",
+        "icon": true
+      }
+    },
+    {
+      "name": "Right with icon",
+      "props": {
+        "align": "right",
+        "startDate": "2026-01-15",
+        "endDate": "2026-08-15",
+        "icon": true
+      }
+    },
+    {
+      "name": "Always show year",
+      "props": {
+        "startDate": "2013-06-18",
+        "endDate": "2015-03-20",
+        "showCurrentYear": true
+      }
+    }
+  ],
+  "conditionals": {},
+  "hints": {}
+}

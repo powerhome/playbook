@@ -39,6 +39,12 @@
         "react"
       ]
     },
+    "position": {
+      "type": "string",
+      "platforms": [
+        "react"
+      ]
+    },
     "size": {
       "type": "string",
       "platforms": [
@@ -60,7 +66,7 @@
       ]
     },
     "layout": {
-      "type": "object",
+      "type": "GenericObject",
       "platforms": [
         "react",
         "rails"

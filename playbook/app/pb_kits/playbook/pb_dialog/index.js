@@ -16,7 +16,12 @@ export default class PbDialog extends PbEnhancedElement {
     this.domContentLoadedHandler = () => this.setupDialog()
     this.turboFrameLoadHandler = () => this.setupDialog()
     
-    window.addEventListener("DOMContentLoaded", this.domContentLoadedHandler)
+    // If DOM is already loaded, setup immediately; otherwise wait for DOMContentLoaded
+    if (document.readyState === "loading") {
+      window.addEventListener("DOMContentLoaded", this.domContentLoadedHandler)
+    } else {
+      this.setupDialog()
+    }
     window.addEventListener("turbo:frame-load", this.turboFrameLoadHandler)
 
     // Code for custom_event_type setup (can take multiple events in a string separated by commas)
