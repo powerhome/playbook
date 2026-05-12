@@ -10,7 +10,7 @@ RUN --mount=type=cache,id=playbook-apt-cache,target=/var/cache/apt,sharing=locke
     mv /etc/apt/sources.list.d.bak /etc/apt/sources.list.d && \
     apt-get update -y
 
-RUN bash -lc 'rvm remove all --force && rvm install ruby-3.3.11 && rvm --default use ruby-3.3.11 && gem install bundler -v 2.5.9'
+RUN bash -lc 'rvm install ruby-3.3.11 && rvm --default use ruby-3.3.11 && gem install bundler -v 2.5.9'
 RUN --mount=type=cache,id=playbook-apt-cache,target=/var/cache/apt,sharing=locked \
     --mount=type=cache,id=playbook-apt-lib,target=/var/lib/apt,sharing=locked \
     /pd_build/ruby_support/install_ruby_utils.sh
