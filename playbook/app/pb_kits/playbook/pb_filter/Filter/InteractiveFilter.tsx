@@ -140,13 +140,16 @@ const InteractiveFilter = ({
     switch (config.type) {
       case 'select':
       case 'dropdown': {
-        const options = config.options.map((opt) => ({
-          value: opt.value,
-          label:
-            config.type === 'dropdown'
-              ? opt.label
-              : opt.text || opt.value,
-        }))
+        const options =
+          config.type === 'dropdown'
+            ? config.options.map((opt) => ({
+                value: opt.value,
+                label: opt.label,
+              }))
+            : config.options.map((opt) => ({
+                value: opt.value,
+                label: opt.text || opt.value,
+              }))
         return (
           <ul
               className="pb_interactive_filter_options"

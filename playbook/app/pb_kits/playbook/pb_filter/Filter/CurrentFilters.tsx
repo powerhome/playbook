@@ -71,7 +71,7 @@ const CurrentFilters = ({
                     <InteractiveFilter
                         config={interactiveConfig}
                         dark={dark}
-                        name={name}
+                        name={String(name)}
                         value={value === true ? '' : (value as string)}
                     /> :
                     value === true ?
