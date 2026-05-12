@@ -1,5 +1,5 @@
 # syntax = docker/dockerfile:1.8.1
-FROM phusion/passenger-customizable:1.0.19 AS base
+FROM --platform=linux/amd64 phusion/passenger-customizable:1.0.19 AS base
 
 RUN --mount=type=cache,id=playbook-apt-cache,target=/var/cache/apt,sharing=locked \
     --mount=type=cache,id=playbook-apt-lib,target=/var/lib/apt,sharing=locked \
@@ -10,11 +10,12 @@ RUN --mount=type=cache,id=playbook-apt-cache,target=/var/cache/apt,sharing=locke
     mv /etc/apt/sources.list.d.bak /etc/apt/sources.list.d && \
     apt-get update -y
 
-RUN bash -lc 'rvm install ruby-3.3.11 && rvm --default use ruby-3.3.11 && gem install bundler -v 2.5.9'
+RUN bash -lc 'rvm remove all --force && rvm install ruby-3.3.11 && rvm --default use ruby-3.3.11 && gem install bundler -v 2.5.9'
 RUN --mount=type=cache,id=playbook-apt-cache,target=/var/cache/apt,sharing=locked \
     --mount=type=cache,id=playbook-apt-lib,target=/var/lib/apt,sharing=locked \
     /pd_build/ruby_support/install_ruby_utils.sh
 RUN /pd_build/ruby_support/finalize.sh
+RUN bash -lc 'rvm --default use ruby-3.3.11 && gem install bundler -v 2.5.9'
 
 ENV BUNDLE_TO /usr/local/rvm/gems
 ENV NVM_VERSION v0.33.8
