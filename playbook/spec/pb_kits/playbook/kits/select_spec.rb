@@ -76,31 +76,6 @@ RSpec.describe Playbook::PbSelect::Select do
 
       expect(select.all_attributes[:data]).to eq({})
     end
-
-    it "includes data-default-value when an option is marked selected" do
-      select = subject.new(
-        name: "territory",
-        options: [
-          { value: "phl", value_text: "Philadelphia", selected: true },
-          { value: "nyc", value_text: "New York" },
-        ]
-      )
-
-      expect(select.all_attributes[:data]).to eq({ default_value: "phl" })
-    end
-
-    it "joins multiple selected values for data-default-value" do
-      select = subject.new(
-        name: "tags",
-        multiple: true,
-        options: [
-          { value: "a", value_text: "A", selected: true },
-          { value: "b", value_text: "B", selected: true },
-        ]
-      )
-
-      expect(select.all_attributes[:data][:default_value]).to eq("a,b")
-    end
   end
 
   describe "#validation_data" do

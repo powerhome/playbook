@@ -121,16 +121,7 @@ module Playbook
         fields[:message] = validation_message unless validation_message.blank?
         fields[:pb_input_mask] = true if mask
         fields[:pb_emoji_mask] = true if emoji_mask
-        dv = filter_reset_default_value
-        fields[:default_value] = dv if dv.present?
         fields
-      end
-
-      def filter_reset_default_value
-        return if value.nil?
-        return if value.is_a?(String) && value.empty?
-
-        value.to_s
       end
 
       def error_class
