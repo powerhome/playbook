@@ -11,7 +11,7 @@ RUN --mount=type=cache,id=playbook-apt-cache,target=/var/cache/apt,sharing=locke
     apt-get update -y
 
 RUN --mount=type=cache,id=playbook-rvm-archives,target=/usr/local/rvm/archives \
-    bash -lc 'rvm remove all --force && RUBY_CONFIGURE_OPTS="--disable-install-doc" rvm install ruby-3.3.11 -j "$(nproc)" && rvm --default use ruby-3.3.11 && gem install bundler -v 2.5.9'
+    bash -lc 'rvm remove all --force && RUBY_CONFIGURE_OPTS="--disable-install-doc" rvm install ruby-3.3.11 -j "$(nproc)" && rvm --default use ruby-3.3.11 && gem install bundler -v 2.7.2'
 RUN --mount=type=cache,id=playbook-apt-cache,target=/var/cache/apt,sharing=locked \
     --mount=type=cache,id=playbook-apt-lib,target=/var/lib/apt,sharing=locked \
     /pd_build/ruby_support/install_ruby_utils.sh
