@@ -126,13 +126,13 @@
       -webkit-overflow-scrolling: touch;
     }
 
-    // React: keep one horizontal scroll on .toolbar (avoid nested scroll + trailing history cluster).
+    // React: full-width row with history on the far right; horizontal scroll stays on .toolbar.
     &:not(.rte-rails-toolbar-layout) {
       > .pb_flex_kit.pb_flex_kit_justify_content_between {
         box-sizing: border-box;
         column-gap: $space_sm;
         flex-wrap: nowrap;
-        justify-content: flex-start;
+        justify-content: space-between;
         min-width: 100%;
         width: max-content;
       }
@@ -182,7 +182,7 @@
         column-gap: $space_sm;
         display: flex;
         flex-wrap: nowrap;
-        justify-content: flex-start;
+        justify-content: space-between;
         min-width: 100%;
         padding: $space_xxs $space_sm;
         width: max-content;
