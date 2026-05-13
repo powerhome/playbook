@@ -1,28 +1,32 @@
 # syntax = docker/dockerfile:1.8.1
-FROM phusion/passenger-customizable:1.0.19 AS base
+FROM --platform=linux/amd64 ruby:3.3.11-bookworm@sha256:ce11b66eb29db7f53214d37e2f475e156f30631c34ee4d540802270f1fd97d33 AS base
 
-RUN --mount=type=cache,id=playbook-apt-cache,target=/var/cache/apt,sharing=locked \
-    --mount=type=cache,id=playbook-apt-lib,target=/var/lib/apt,sharing=locked \
-    mv /etc/apt/sources.list.d /etc/apt/sources.list.d.bak && \
-    apt-get update -y && \
-    apt-get install -y ca-certificates curl gnupg && \
-    curl -fsSL https://oss-binaries.phusionpassenger.com/auto-software-signing-gpg-key-2025.txt | gpg --dearmor -o /etc/apt/trusted.gpg.d/phusion-passenger.gpg && \
-    mv /etc/apt/sources.list.d.bak /etc/apt/sources.list.d && \
-    apt-get update -y
+ENV TZ=America/New_York
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
-RUN bash -lc 'rvm remove all --force && rvm install ruby-3.3.11 && rvm --default use ruby-3.3.11 && gem install bundler -v 2.5.3'
-RUN --mount=type=cache,id=playbook-apt-cache,target=/var/cache/apt,sharing=locked \
-    --mount=type=cache,id=playbook-apt-lib,target=/var/lib/apt,sharing=locked \
-    /pd_build/ruby_support/install_ruby_utils.sh
-RUN /pd_build/ruby_support/finalize.sh
+RUN rm -f /etc/apt/apt.conf.d/docker-clean; echo 'Binary::apt::APT::Keep-Downloaded-Packages "true";' > /etc/apt/apt.conf.d/keep-cache
 
-ENV BUNDLE_TO /usr/local/rvm/gems
-ENV NVM_VERSION v0.33.8
-ENV NODE_VERSION v22.15.1
-ENV NPM_VERSION 6.14.10
-ENV YARN_VERSION 1.22.19
-ENV NVM_DIR /home/app/.nvm
-ENV PATH $NVM_DIR/versions/node/$NODE_VERSION/bin:$PATH
+ARG APP_PATH=/home/app/src
+ARG APP_USER=app
+ARG APP_GROUP=app
+ARG APP_USER_UID=9999
+ARG APP_GROUP_GID=9999
+
+RUN addgroup --gid $APP_GROUP_GID $APP_GROUP && \
+    adduser --uid $APP_USER_UID --ingroup $APP_GROUP --disabled-password $APP_USER && \
+    mkdir -p $APP_PATH && \
+    chown $APP_USER:$APP_GROUP $APP_PATH
+
+ENV BUNDLER_VERSION=2.5.9
+ENV BUNDLE_TO=/usr/local/bundle
+ENV NVM_VERSION=v0.33.8
+ENV NODE_VERSION=v22.15.1
+ENV NPM_VERSION=8.19.3
+ENV YARN_VERSION=1.22.19
+ENV NVM_DIR=/home/app/.nvm
+ENV PATH=$NVM_DIR/versions/node/$NODE_VERSION/bin:$PATH
+
+RUN gem install bundler -v $BUNDLER_VERSION
 
 RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/$NVM_VERSION/install.sh | bash \
     && . $NVM_DIR/nvm.sh \
@@ -33,16 +37,23 @@ RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/$NVM_VERSION/insta
 
 RUN --mount=type=cache,id=playbook-apt-cache,target=/var/cache/apt,sharing=locked \
     --mount=type=cache,id=playbook-apt-lib,target=/var/lib/apt,sharing=locked \
-    apt-get update -y \
-    && apt-get install -y shared-mime-info=1.15-1
+    apt-get update -y && apt-get install -y --no-install-recommends \
+    build-essential \
+    ca-certificates \
+    default-libmysqlclient-dev \
+    git \
+    libpq-dev \
+    libsqlite3-dev \
+    libxml2-dev \
+    libxslt1-dev \
+    pkg-config \
+    shared-mime-info \
+    zlib1g-dev \
+    && rm -rf /var/lib/apt/lists/*
 
 RUN bundle config --global silence_root_warning 1
 
-# Setup service
-COPY --link playbook-website/services/puma.sh /home/app/src/playbook-website/services/puma.sh
-RUN chmod +x /home/app/src/playbook-website/services/puma.sh
-RUN mkdir /etc/service/puma && ln -s /home/app/src/playbook-website/services/puma.sh /etc/service/puma/run
-WORKDIR /home/app/src
+WORKDIR $APP_PATH
 
 FROM base as rubypackages
 RUN --mount=type=bind,target=/tmp/src \
@@ -97,3 +108,6 @@ RUN rm -rf /home/app/src/temp-icons
 COPY --link --from=release /home/app/src/node_modules/@powerhome/playbook-icons/aliases.json /home/app/src/aliases.json
 RUN cp /home/app/src/aliases.json /home/app/src/playbook-website/app/javascript/aliases.json
 RUN rm /home/app/src/aliases.json
+
+WORKDIR /home/app/src/playbook-website
+CMD ["/home/app/src/playbook-website/bin/rails", "server", "-b", "0.0.0.0"]
