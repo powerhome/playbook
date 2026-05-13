@@ -4,7 +4,7 @@
   "defaults": {},
   "groups": [
     {
-      "name": "Date Config",
+      "name": "Content",
       "props": [
         "startDate",
         "endDate"

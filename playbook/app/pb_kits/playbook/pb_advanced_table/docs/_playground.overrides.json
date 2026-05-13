@@ -34,11 +34,6 @@
         "columnDefinitionsFile": "advanced_table_column_definitions_standard.json",
         "tableDataFile": "advanced_table_mock_data_no_subrows.json"
       },
-      "pagination": {
-        "label": "Pagination Example",
-        "columnDefinitionsFile": "advanced_table_column_definitions_standard.json",
-        "tableDataFile": "advanced_table_pagination_mock_data.json"
-      },
       "with_ids": {
         "label": "Data with row IDs",
         "columnDefinitionsFile": "advanced_table_column_definitions_standard.json",
@@ -80,15 +75,15 @@
     "sortControl",
     "fullScreenControl",
     "expandedControl",
-    "allowFullScreen"
+    "allowFullScreen",
+    "pagination",
+    "paginationProps"
   ],
   "requiredProps": {
     "columnDefinitionsFile": "advanced_table_column_definitions_standard.json",
     "tableDataFile": "advanced_table_mock_data.json"
   },
   "propSyncOnEnable": {
-    "pagination": { "dataPreset": "pagination" },
-    "paginationProps": { "dataPreset": "pagination" },
     "inlineRowLoading": { "dataPreset": "inline_loading" },
     "selectableRows": { "dataPreset": "with_ids" },
     "onRowSelectionChange": { "dataPreset": "with_ids" },
@@ -144,10 +139,8 @@
       ]
     },
     {
-      "name": "Pagination & Loading",
+      "name": "Loading",
       "props": [
-        "pagination",
-        "paginationProps",
         "loading",
         "inlineRowLoading",
         "initialLoadingRowsCount"
@@ -216,12 +209,6 @@
       }
     },
     {
-      "name": "With Pagination",
-      "props": {
-        "pagination": true
-      }
-    },
-    {
       "name": "Selectable Rows",
       "props": {
         "selectableRows": true,
@@ -260,11 +247,6 @@
     }
   ],
   "conditionals": {
-    "paginationProps": {
-      "requires": {
-        "pagination": true
-      }
-    },
     "initialLoadingRowsCount": {
       "requires": {
         "loading": true
@@ -348,13 +330,6 @@
         "enableSorting": true
       },
       "message": "Header sorting UI is only applied in \"Subcomponent Structure\" mode (explicit Header and Body). For sorting by column, pass columnDefinitions with enableSort: true to the columnDefinitions array. Click 'sorting by column' to see an example.",
-      "type": "info"
-    },
-    "pagination_info": {
-      "when": {
-        "pagination": true
-      },
-      "message": "Use paginationProps to customize page size and appearance.",
       "type": "info"
     },
     "selectable_info": {
