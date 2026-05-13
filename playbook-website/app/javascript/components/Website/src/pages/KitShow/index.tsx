@@ -27,9 +27,11 @@ const KitShow = () => {
     playground_config,
   } = loaderData;
   const { darkMode, setDarkMode } = useDarkMode();
+  const currentKit = loaderData.kit || name || "";
+
   // Prepare example props for advanced_table examples
   const exampleProps = useMemo(() => {
-    const isAdvancedTable = loaderData?.kit === "advanced_table";
+    const isAdvancedTable = currentKit === "advanced_table";
     if (!isAdvancedTable) return {};
 
     return {
@@ -44,8 +46,44 @@ const KitShow = () => {
     };
   }, [loaderData]);
 
+  // TODO: Remove this allowlist once playground is ready for all kits
+  const PLAYGROUND_ENABLED_KITS = [
+    "advanced_table",
+    "avatar",
+    "background",
+    "badge",
+    "body",
+    "bread_crumbs",
+    "button",
+    "button_toolbar",
+    "caption",
+    "card",
+    "checkbox",
+    "circle_icon_button",
+    "collapsible",
+    "contact",
+    "copy_button",
+    "currency",
+    "dashboard_value",
+    "date",
+    "date_picker",
+    "date_range_inline",
+    "date_range_stacked",
+    "date_stacked",
+    "date_time",
+    "date_time_stacked",
+    "date_year_stacked",
+    "detail",
+    "dialog",
+    "distribution_bar",
+    "draggable",
+    "dropdown",
+    "empty_state",
+    "file_upload",
+  ];
+
   const [activeTab, setActiveTab] = useState<string>("docs");
-  const showPlayground = platform !== "rails";
+  const showPlayground = platform !== "rails" && PLAYGROUND_ENABLED_KITS.includes(currentKit);
   const displayTab =
     activeTab === "playground" && !showPlayground ? "docs" : activeTab;
 
@@ -124,7 +162,7 @@ const KitShow = () => {
           <PlaygroundTab
             kitSchema={kit_schema}
             globalPropsSchema={global_props_schema}
-            kitName={loaderData.kit || name || ""}
+            kitName={currentKit}
             defaultExample={examples?.[0]}
             playgroundConfig={playground_config}
           />
