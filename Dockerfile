@@ -16,7 +16,10 @@ RUN --mount=type=cache,id=playbook-apt-cache,target=/var/cache/apt,sharing=locke
     --mount=type=cache,id=playbook-apt-lib,target=/var/lib/apt,sharing=locked \
     /pd_build/ruby_support/install_ruby_utils.sh
 RUN /pd_build/ruby_support/finalize.sh
-RUN bash -lc 'rvm --default use ruby-3.3.11 && gem install bundler -v 2.5.9'
+RUN bash -lc 'rvm --default use ruby-3.3.11'
+
+ENV PATH="/usr/local/rvm/gems/ruby-3.3.11/bin:/usr/local/rvm/gems/ruby-3.3.11@global/bin:/usr/local/rvm/rubies/ruby-3.3.11/bin:/usr/local/rvm/bin:${PATH}"
+SHELL ["/bin/bash", "-lc"]
 
 ENV BUNDLE_TO /usr/local/rvm/gems
 ENV NVM_VERSION v0.33.8
