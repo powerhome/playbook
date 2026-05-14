@@ -3,7 +3,7 @@ import { render, cleanup, waitFor, fireEvent, screen } from "../utilities/test-u
 import { Dialog, Button } from 'playbook-ui'
 import {
   resolveDialogFloatingPortalHost,
-  resolveTypeaheadMenuPortalHost,
+  resolvePortaledKitHost,
 } from "../utilities/floatingPortalHosts"
 
 const text="Hello Body Text, Nice to meet ya."
@@ -165,7 +165,7 @@ test('renders dialog without close button when closeable is false', async () => 
   cleanup()
 })
 
-describe('Dialog floating portal host (Typeahead)', () => {
+describe('Dialog floating portal host (portaled kits)', () => {
   beforeEach(() => {
     document.body.innerHTML = ''
   })
@@ -213,7 +213,7 @@ describe('Dialog floating portal host (Typeahead)', () => {
     expect(resolveDialogFloatingPortalHost(inner)).toBe(floating)
   })
 
-  test('resolveTypeaheadMenuPortalHost uses dialog floating root when inside dialog', () => {
+  test('resolvePortaledKitHost uses dialog floating root when inside dialog', () => {
     const dialog = document.createElement('dialog')
     const floating = document.createElement('div')
     floating.setAttribute('data-pb-dialog-floating-root', 'true')
@@ -222,14 +222,14 @@ describe('Dialog floating portal host (Typeahead)', () => {
     dialog.appendChild(kit)
     document.body.appendChild(dialog)
 
-    expect(resolveTypeaheadMenuPortalHost(kit, null)).toBe(floating)
+    expect(resolvePortaledKitHost(kit, null)).toBe(floating)
   })
 
-  test('resolveTypeaheadMenuPortalHost uses context target when host not in tree', () => {
+  test('resolvePortaledKitHost uses context target when host not in tree', () => {
     const host = document.createElement('div')
     const kit = document.createElement('div')
     document.body.appendChild(kit)
 
-    expect(resolveTypeaheadMenuPortalHost(kit, host)).toBe(host)
+    expect(resolvePortaledKitHost(kit, host)).toBe(host)
   })
 })

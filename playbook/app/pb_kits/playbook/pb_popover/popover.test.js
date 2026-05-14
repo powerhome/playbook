@@ -3,7 +3,7 @@ import { render, screen, fireEvent } from "../utilities/test-utils";
 import { Button, PbReactPopover } from "playbook-ui";
 import {
   resolveDialogFloatingPortalHost,
-  resolveTypeaheadMenuPortalHost,
+  resolvePortaledKitHost,
   targetIsInsidePortaledFloatingKit,
 } from "../utilities/floatingPortalHosts";
 
@@ -311,7 +311,7 @@ const PopoverTestAppendToSelector = () => {
     expect(customContainer).toContainElement(kit);
   });
 
-describe("Popover Typeahead portal host", () => {
+describe("Popover portaled kit portal host", () => {
   beforeEach(() => {
     document.body.innerHTML = "";
   });
@@ -329,14 +329,14 @@ describe("Popover Typeahead portal host", () => {
     expect(resolveDialogFloatingPortalHost(inner)).toBe(floating);
   });
 
-  test("resolveTypeaheadMenuPortalHost uses document.body when kit is in popover tooltip", () => {
+  test("resolvePortaledKitHost uses document.body when kit is in popover tooltip", () => {
     const pop = document.createElement("div");
     pop.className = "pb_popover_tooltip show";
     const kit = document.createElement("div");
     pop.appendChild(kit);
     document.body.appendChild(pop);
 
-    expect(resolveTypeaheadMenuPortalHost(kit, null)).toBe(document.body);
+    expect(resolvePortaledKitHost(kit, null)).toBe(document.body);
   });
 
   test("targetIsInsidePortaledFloatingKit is true inside typeahead menu portal", () => {

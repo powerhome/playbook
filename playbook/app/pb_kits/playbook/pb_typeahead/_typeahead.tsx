@@ -24,7 +24,7 @@ import * as kitComponents from "./components"
 import {noop, buildDataProps, buildHtmlProps} from "../utilities/props"
 import {
   PB_FLOATING_UI_Z_INDEX,
-  resolveTypeaheadMenuPortalHost,
+  resolvePortaledKitHost,
 } from "../utilities/floatingPortalHosts"
 import {DialogContext} from "../pb_dialog/_dialog_context"
 import {GenericObject, Noop} from "../types"
@@ -229,7 +229,7 @@ const Typeahead = forwardRef<HTMLInputElement, TypeaheadProps>(
     useLayoutEffect(() => {
       const el = kitContainerRef.current
       setMenuPortalHost(
-        resolveTypeaheadMenuPortalHost(
+        resolvePortaledKitHost(
           el,
           dialogCtx?.selectMenuPortalTarget ?? null,
         ),
