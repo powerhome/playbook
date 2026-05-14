@@ -2,10 +2,10 @@ import React, { useEffect, useMemo, useRef, useState } from 'react'
 import flatpickr from 'flatpickr'
 import { Instance } from 'flatpickr/dist/types/instance'
 
+import Body from '../../pb_body/_body'
 import Caption from '../../pb_caption/_caption'
 import Icon from '../../pb_icon/_icon'
 import PbReactPopover from '../../pb_popover/_popover'
-import Title from '../../pb_title/_title'
 import { uniqueId } from '../../utilities/object'
 
 export type SelectInteractiveConfig = {
@@ -76,10 +76,10 @@ const ChipVisual = ({
         text={name}
     />
     <div className="pb_interactive_filter_value">
-      <Title
+      <Body
+          className="pb_interactive_filter_value_text"
           dark={dark}
-          size={4}
-          tag="h4"
+          tag="span"
           text={displayValue || '—'}
       />
       <Icon

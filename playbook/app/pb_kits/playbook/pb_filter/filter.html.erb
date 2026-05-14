@@ -18,80 +18,91 @@
                 </div>
               <% end %>
               <% object.filters&.each do |filter| %>
-                <% if filter[:name].present? %>
-                  <% interactive_config = object.interactive_config_for(filter[:name]) %>
-                  <% if interactive_config.present? %>
-                    <% chip_id = "pb-interactive-filter-#{object.id || 'kit'}-#{filter[:name].to_s.parameterize}" %>
-                    <% popover_id = "#{chip_id}-popover" %>
-                    <% interactive_type = object.interactive_value(interactive_config, :type).to_s %>
-                    <% display_value = object.interactive_display_value(interactive_config, filter[:value]) %>
-                    <div class="filter interactive">
-                      <button
-                          type="button"
-                          class="pb_interactive_filter_trigger"
-                          id="<%= chip_id %>"
-                          data-pb-interactive-filter="true"
-                          data-pb-filter-name="<%= filter[:name] %>"
-                          data-pb-filter-type="<%= interactive_type %>"
-                          data-pb-filter-popover-id="<%= popover_id %>"
-                          data-pb-filter-target="<%= object.interactive_value(interactive_config, :target_input) %>"
-                          data-pb-filter-value="<%= filter[:value] %>"
-                          data-pb-filter-date-format="<%= object.interactive_value(interactive_config, :format) %>"
-                          data-pb-filter-date-mode="<%= object.interactive_value(interactive_config, :mode) %>"
-                          data-pb-filter-date-min="<%= object.interactive_value(interactive_config, :min_date) %>"
-                          data-pb-filter-date-max="<%= object.interactive_value(interactive_config, :max_date) %>"
-                          data-pb-filter-auto-submit="<%= object.interactive_value(interactive_config, :auto_submit) %>"
-                        >
-                        <div class="pb_interactive_filter_text">
-                          <%= pb_rails("caption", props: { text: filter[:name] }) %>
-                          <div class="pb_interactive_filter_value">
-                            <%= pb_rails("title", props: {
-                              size: 4,
-                              tag: "h4",
-                              text: display_value.presence || "—",
-                              classname: "pb_interactive_filter_value_text",
-                              data: { "pb-filter-value-display" => true }
-                            }) %>
-                            <%= pb_rails("icon", props: { icon: "angle-down", fixed_width: true, size: "xs", classname: "pb_interactive_filter_caret" }) %>
-                          </div>
-                        </div>
-                      </button>
+                <% next unless filter[:name].present? %>
+                <% interactive_config = object.interactive_config_for(filter[:name]) %>
+                <% if interactive_config.present? %>
+                  <%
+                    chip_id        = "pb-interactive-filter-#{object.id || 'kit'}-#{filter[:name].to_s.parameterize}"
+                    popover_id     = "#{chip_id}-popover"
+                    type           = object.interactive_value(interactive_config, :type).to_s
+                    display_value  = object.interactive_display_value(interactive_config, filter[:value])
+                    is_date_picker = type == "date-picker"
+                    is_options     = %w[select dropdown].include?(type)
 
-                      <div class="pb_popover_tooltip hide pb_interactive_filter_editor pb_interactive_filter_editor--<%= interactive_type %>" id="<%= popover_id %>" role="tooltip">
-                        <div class="pb_popover_body">
-                          <% case interactive_type %>
-                          <% when "select", "dropdown" %>
-                            <ul class="pb_interactive_filter_options" role="listbox">
-                              <% Array(object.interactive_value(interactive_config, :options)).each do |opt| %>
-                                <% opt_value = opt[:value] || opt["value"] %>
-                                <% is_active = opt_value.to_s == filter[:value].to_s %>
-                                <% label = opt[:label] || opt["label"] || opt[:text] || opt["text"] || opt_value %>
-                                <li
-                                    class="pb_interactive_filter_option<%= ' active' if is_active %>"
-                                    role="option"
-                                    aria-selected="<%= is_active %>"
-                                    data-pb-filter-option-value="<%= opt_value %>"
-                                    data-pb-filter-option-label="<%= label %>"
-                                  >
-                                  <span><%= label %></span>
-                                  <% if is_active %>
-                                    <%= pb_rails("icon", props: { icon: "check", fixed_width: true, size: "xs" }) %>
-                                  <% end %>
-                                </li>
-                              <% end %>
-                            </ul>
-                          <% when "date-picker" %>
-                            <div data-pb-filter-date-mount></div>
-                          <% end %>
+                    chip_data_attrs = {
+                      "pb-interactive-filter" => "true",
+                      "pb-filter-name"        => filter[:name],
+                      "pb-filter-type"        => type,
+                      "pb-filter-popover-id"  => popover_id,
+                      "pb-filter-target"      => object.interactive_value(interactive_config, :target_input),
+                      "pb-filter-value"       => filter[:value],
+                      "pb-filter-auto-submit" => object.interactive_value(interactive_config, :auto_submit),
+                    }
+                    if is_date_picker
+                      chip_data_attrs.merge!(
+                        "pb-filter-date-format" => object.interactive_value(interactive_config, :format),
+                        "pb-filter-date-mode"   => object.interactive_value(interactive_config, :mode),
+                        "pb-filter-date-min"    => object.interactive_value(interactive_config, :min_date),
+                        "pb-filter-date-max"    => object.interactive_value(interactive_config, :max_date),
+                      )
+                    end
+                  %>
+                  <div class="filter interactive">
+                    <button type="button"
+                            class="pb_interactive_filter_trigger"
+                            id="<%= chip_id %>"
+                            <%= chip_data_attrs.compact_blank.map { |k, v| "data-#{k}=\"#{ERB::Util.html_escape(v)}\"" }.join(" ").html_safe %>>
+                      <div class="pb_interactive_filter_text">
+                        <%= pb_rails("caption", props: { text: filter[:name] }) %>
+                        <div class="pb_interactive_filter_value">
+                          <%= pb_rails("body", props: {
+                            tag: "span",
+                            text: display_value.presence || "—",
+                            classname: "pb_interactive_filter_value_text",
+                            data: { "pb-filter-value-display" => true },
+                          }) %>
+                          <%= pb_rails("icon", props: { icon: "angle-down", fixed_width: true, size: "xs", classname: "pb_interactive_filter_caret" }) %>
                         </div>
                       </div>
+                    </button>
+
+                    <%# Popover tooltip is moved to <body> in index.ts (connect)
+                        to escape the filter row's overflow-x clipping. We
+                        reuse pb_popover's CSS classes for visual consistency
+                        rather than using the popover kit directly because
+                        that kit doesn't portal its tooltip out of its DOM
+                        parent. %>
+                    <div class="pb_popover_tooltip hide pb_interactive_filter_editor pb_interactive_filter_editor--<%= type %>" id="<%= popover_id %>" role="tooltip">
+                      <div class="pb_popover_body">
+                        <% if is_options %>
+                          <ul class="pb_interactive_filter_options" role="listbox">
+                            <% Array(object.interactive_value(interactive_config, :options)).each do |opt| %>
+                              <% opt_value = opt[:value] || opt["value"] %>
+                              <% is_active = opt_value.to_s == filter[:value].to_s %>
+                              <% opt_label = opt[:label] || opt["label"] || opt[:text] || opt["text"] || opt_value %>
+                              <li class="pb_interactive_filter_option<%= ' active' if is_active %>"
+                                  role="option"
+                                  aria-selected="<%= is_active %>"
+                                  data-pb-filter-option-value="<%= opt_value %>"
+                                  data-pb-filter-option-label="<%= opt_label %>">
+                                <span><%= opt_label %></span>
+                                <% if is_active %>
+                                  <%= pb_rails("icon", props: { icon: "check", fixed_width: true, size: "xs" }) %>
+                                <% end %>
+                              </li>
+                            <% end %>
+                          </ul>
+                        <% elsif is_date_picker %>
+                          <div data-pb-filter-date-mount></div>
+                        <% end %>
+                      </div>
                     </div>
-                  <% else %>
-                    <div class="filter">
-                      <%= pb_rails("caption", props: { text: filter[:name]}) %>
-                      <%= pb_rails("title", props: { size: 4, tag:"h4", text: filter[:value]}) %>
-                    </div>
-                  <% end %>
+                  </div>
+                <% else %>
+                  <div class="filter">
+                    <%= pb_rails("caption", props: { text: filter[:name] }) %>
+                    <%= pb_rails("title", props: { size: 4, tag: "h4", text: filter[:value] }) %>
+                  </div>
                 <% end %>
               <% end %>
               <div class="right_gradient"></div>

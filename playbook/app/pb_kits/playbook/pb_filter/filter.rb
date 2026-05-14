@@ -17,42 +17,30 @@ module Playbook
                        default: "bottom-start"
       prop :popover_props, type: Playbook::Props::HashProp,
                            default: {}
-      prop :interactive_filters, type: Playbook::Props::HashArray, default: [{}]
+      prop :interactive_filters, type: Playbook::Props::HashArray, default: []
 
       def classname
         generate_classname("pb_filter_kit").rstrip
       end
 
       def interactive_config_for(filter_name)
-        target = filter_name.to_s
-        Array(interactive_filters).each do |entry|
-          next unless entry.is_a?(Hash)
-
-          name_val = (entry[:name] || entry["name"]).to_s
-          return entry if name_val == target
-        end
-        nil
+        interactive_filters_index[filter_name.to_s]
       end
 
       def interactive_value(config, key)
         return nil if config.nil?
 
-        config[key] || config[key.to_s]
+        config[key]
       end
 
       def interactive_display_value(config, raw_value)
         return raw_value if config.nil?
+        return raw_value unless %w[select dropdown].include?(config[:type].to_s)
 
-        type = interactive_value(config, :type).to_s
-        return raw_value unless %w[select dropdown].include?(type)
-
-        options = Array(interactive_value(config, :options))
-        match = options.find do |opt|
-          (opt[:value] || opt["value"]).to_s == raw_value.to_s
-        end
+        match = Array(config[:options]).find { |opt| opt[:value].to_s == raw_value.to_s }
         return raw_value unless match
 
-        match[:label] || match["label"] || match[:text] || match["text"] || match[:value] || match["value"]
+        match[:label] || match[:text] || match[:value]
       end
 
       def result_text
@@ -82,6 +70,18 @@ module Playbook
           "arrow-down-wide-short"
         else
           ""
+        end
+      end
+
+    private
+
+      def interactive_filters_index
+        @interactive_filters_index ||= Array(interactive_filters).each_with_object({}) do |entry, acc|
+          next unless entry.is_a?(Hash)
+
+          config = entry.with_indifferent_access
+          name = config[:name].to_s
+          acc[name] = config if name.present?
         end
       end
     end
