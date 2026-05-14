@@ -6,7 +6,8 @@ const CardLight = (props) => {
     <div>
       <Card 
           display="grid"
-          gridAutoRows="column"
+          // gridAutoFlow="column"
+          gridAutoRows="50px"
           {...props}
       >
         <Card {...props}>{'Card content'}</Card>

@@ -204,16 +204,28 @@ type MinHeight = {
   minHeight?: string
 }
 
+type ResponsiveProp<T> = {
+  default?: T,
+  xs?: T,
+  sm?: T,
+  md?: T,
+  lg?: T,
+  xl?: T,
+}
+
+type GridAutoFlowValue = "row" | "column" | "dense" | "row dense" | "column dense"
+type GridTrackSizeValue = "auto" | "max-content" | "min-content"
+
 type gridAutoFlow = {
-  gridAutoFlow?: "row" | "column" | "dense" | "row dense" | "column dense"
+  gridAutoFlow?: GridAutoFlowValue | ResponsiveProp<GridAutoFlowValue>
 }
 
 type gridAutoColumns = {
-  gridAutoColumns?: "auto" | "max-content" | "min-content"
+  gridAutoColumns?: GridTrackSizeValue | ResponsiveProp<GridTrackSizeValue>
 }
 
 type gridAutoRows = {
-  gridAutoRows?: "auto" | "max-content" | "min-content"
+  gridAutoRows?: GridTrackSizeValue | ResponsiveProp<GridTrackSizeValue> | string
 }
 
 // keep this as the last type definition
@@ -221,7 +233,18 @@ export type GlobalProps = AlignContent & AlignItems & AlignSelf &
   BorderRadius & Cursor & Dark & Display & DisplaySizes & Flex & FlexDirection &
   FlexGrow & FlexShrink & FlexWrap & JustifyContent & JustifySelf &
   LineHeight & Margin & Width & MinWidth & MaxWidth & Gap & ColumnGap & RowGap & NumberSpacing & Order & Overflow & Padding &
-  Position & Shadow & TextAlign & Truncate & VerticalAlign & ZIndex & { hover?: string } & Top & Right & Bottom & Left & Height & MaxHeight & MinHeight;
+  Position & Shadow & TextAlign & Truncate & VerticalAlign & ZIndex & { hover?: string } & Top & Right & Bottom & Left & Height & MaxHeight & MinHeight &
+  gridAutoFlow & gridAutoColumns & gridAutoRows;
+
+const GRID_AUTO_ROWS_CLASS_VALUES: GridTrackSizeValue[] = ["auto", "max-content", "min-content"]
+
+const isGridAutoRowsClassValue = (value: string): value is GridTrackSizeValue => {
+  return GRID_AUTO_ROWS_CLASS_VALUES.includes(value as GridTrackSizeValue)
+}
+
+const normalizeGridTrackClassValue = (value: string) => {
+  return camelToSnakeCase(value).replace(/-/g, '_')
+}
 
 const getResponsivePropClasses = (prop: {[key: string]: string}, classPrefix: string) => {
   const keys: string[] = Object.keys(prop)
@@ -627,16 +650,28 @@ const PROP_CATEGORIES: {[key:string]: (props: {[key: string]: any}) => string} =
   },
   gridAutoColumnsProps: ({ gridAutoColumns }: gridAutoColumns) => {
     if (typeof gridAutoColumns === 'object') {
-      return getResponsivePropClasses(gridAutoColumns, 'grid_auto_columns')
+      const responsiveObj: {[key: string]: string} = {}
+
+      Object.entries(gridAutoColumns).forEach(([key, value]) => {
+        responsiveObj[key] = normalizeGridTrackClassValue(value)
+      })
+
+      return getResponsivePropClasses(responsiveObj, 'grid_auto_columns')
     } else {
-      return gridAutoColumns ? `grid_auto_columns_${camelToSnakeCase(gridAutoColumns)}` : ''
+      return gridAutoColumns ? `grid_auto_columns_${normalizeGridTrackClassValue(gridAutoColumns)}` : ''
     }
   },
   gridAutoRowsProps: ({ gridAutoRows }: gridAutoRows) => {
     if (typeof gridAutoRows === 'object') {
-      return getResponsivePropClasses(gridAutoRows, 'grid_auto_rows')
+      const responsiveObj: {[key: string]: string} = {}
+
+      Object.entries(gridAutoRows).forEach(([key, value]) => {
+        responsiveObj[key] = normalizeGridTrackClassValue(value)
+      })
+
+      return getResponsivePropClasses(responsiveObj, 'grid_auto_rows')
     } else {
-      return gridAutoRows ? `grid_auto_rows_${camelToSnakeCase(gridAutoRows)}` : ''
+      return typeof gridAutoRows === 'string' && isGridAutoRowsClassValue(gridAutoRows) ? `grid_auto_rows_${normalizeGridTrackClassValue(gridAutoRows)}` : ''
     }
   },
 
@@ -653,6 +688,14 @@ const PROP_INLINE_CATEGORIES: {[key:string]: (props: {[key: string]: any}) => {[
 
   minHeightProps: ({ minHeight }: MinHeight) => {
     return minHeight ? { minHeight } : {};
+  },
+
+  gridAutoRowsProps: ({ gridAutoRows }: gridAutoRows) => {
+    if (typeof gridAutoRows === 'string' && !isGridAutoRowsClassValue(gridAutoRows)) {
+      return { gridAutoRows };
+    }
+
+    return {};
   },
 }
 
