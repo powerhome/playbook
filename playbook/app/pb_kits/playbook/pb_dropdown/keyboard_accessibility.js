@@ -6,7 +6,7 @@ export class PbDropdownKeyboard {
     this.dropdown = dropdown;
     this.dropdownElement = dropdown.element;
     this.options = Array.from(
-      this.dropdownElement.querySelectorAll(OPTION_SELECTOR)
+      (dropdown.target || this.dropdownElement).querySelectorAll(OPTION_SELECTOR),
     );
     this.focusedOptionIndex = -1;
     this.searchInput = this.dropdownElement.querySelector(
@@ -45,9 +45,10 @@ export class PbDropdownKeyboard {
 
   getVisibleOptions() {
     // We only want to return the options that are visible
-    return Array.from(
-      this.dropdownElement.querySelectorAll(OPTION_SELECTOR)
-    ).filter((opt) => opt.style.display !== "none");
+    const scope = this.dropdown.target || this.dropdownElement;
+    return Array.from(scope.querySelectorAll(OPTION_SELECTOR)).filter(
+      (opt) => opt.style.display !== "none",
+    );
   }
 
   openDropdownIfClosed() {
@@ -105,9 +106,8 @@ export class PbDropdownKeyboard {
   }
 
 moveFocus(direction) {
-    const allOptions = Array.from(
-      this.dropdownElement.querySelectorAll(OPTION_SELECTOR)
-    );
+    const scope = this.dropdown.target || this.dropdownElement;
+    const allOptions = Array.from(scope.querySelectorAll(OPTION_SELECTOR));
     const visible = this.getVisibleOptions();
     if (!visible.length) return;
 
@@ -133,9 +133,8 @@ moveFocus(direction) {
 
 
   selectOption() {
-    const allOptions = Array.from(
-      this.dropdownElement.querySelectorAll(OPTION_SELECTOR)
-    );
+    const scope = this.dropdown.target || this.dropdownElement;
+    const allOptions = Array.from(scope.querySelectorAll(OPTION_SELECTOR));
     if (this.focusedOptionIndex < 0) return;
 
     const optionEl = allOptions[this.focusedOptionIndex];

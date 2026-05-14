@@ -380,3 +380,11 @@
     }
   }
 }
+
+// Menu portaled to body / floating root: outer shell repeats kit classes + `.dropdown_wrapper`
+// so existing `.pb_dropdown_* .dropdown_wrapper .pb_dropdown_container` rules still apply.
+.pb_dropdown_floating_shell {
+  margin: 0;
+  padding: 0;
+  pointer-events: auto;
+}

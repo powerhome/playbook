@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, forwardRef, useImperativeHandle, useMemo } from "react";
+import React, { useState, useRef, useEffect, useLayoutEffect, forwardRef, useImperativeHandle, useMemo, useContext } from "react";
 import classnames from "classnames";
 import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from "../utilities/props";
 import { globalProps } from "../utilities/globalProps";
@@ -20,6 +20,12 @@ import {
     prepareSubcomponents,
     handleClickOutside,
 } from "./utilities";
+
+import { DialogContext } from "../pb_dialog/_dialog_context";
+import {
+    resolvePortaledKitHost,
+    positionDropdownPortalToWrapper,
+} from "../utilities/floatingPortalHosts";
 
 type CustomQuickPickDate = {
     label: string;
@@ -115,6 +121,12 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
         globalProps(props),
         className
     );
+
+    const floatingShellClasses = useMemo(
+        () => classnames(classes, "pb_dropdown_floating_shell"),
+        [classes],
+    );
+
     // ------------- Quick Pick ---------------------------------
     // Use QuickPick options when variant is "quickpick"
     const dropdownOptions = variant === "quickpick" 
@@ -168,6 +180,19 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
     const inputRef = useRef<HTMLInputElement>(null);
     const inputWrapperRef = useRef<HTMLDivElement | null>(null);
     const dropdownContainerRef = useRef(null);
+    const outerDivRef = useRef<HTMLDivElement>(null);
+
+    const dialogCtx = useContext(DialogContext);
+    const [portalHost, setPortalHost] = useState<HTMLElement | null>(null);
+
+    useLayoutEffect(() => {
+        setPortalHost(
+            resolvePortaledKitHost(
+                outerDivRef.current,
+                dialogCtx?.selectMenuPortalTarget ?? null,
+            ),
+        );
+    }, [dialogCtx?.selectMenuPortalTarget]);
 
     const handleLabelClick = (e: React.MouseEvent) => {
       e.stopPropagation();
@@ -243,33 +268,56 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
         }
     }, [isDropDownClosed]);
 
-    // Auto-position dropdown above/below based on available space
-    useEffect(() => {
-        if (!isDropDownClosed && dropdownContainerRef.current) {
-            const container = dropdownContainerRef.current;
-            const wrapper = container.closest('.dropdown_wrapper') as HTMLElement;
-            if (!wrapper) return;
-
-            const wrapperRect = wrapper.getBoundingClientRect();
-            const h = container.getBoundingClientRect().height || container.scrollHeight;
-            const spaceBelow = window.innerHeight - wrapperRect.bottom;
-            const spaceAbove = wrapperRect.top;
-
-            // If not enough space below but enough space above, position above
-            if (spaceBelow < h + 10 && spaceAbove >= h + 10) {
-                container.style.top = "auto";
-                container.style.bottom = "calc(100% + 5px)";
-                container.style.marginTop = "0";
-                container.style.marginBottom = "0";
-            } else {
-                // Default: position below
-                container.style.top = "";
-                container.style.bottom = "";
-                container.style.marginTop = "";
-                container.style.marginBottom = "";
-            }
+    // Auto-position dropdown above/below based on available space or fixed/absolute when portaled to body / floating root
+    useLayoutEffect(() => {
+        if (isDropDownClosed || !dropdownContainerRef.current || !dropdownRef.current) {
+            return;
         }
-    }, [isDropDownClosed, dropdownContainerRef]);
+
+        const container = dropdownContainerRef.current as HTMLElement;
+        const wrapper = dropdownRef.current as HTMLElement;
+
+        if (portalHost) {
+            const applyPortalPosition = () => {
+                const panel = dropdownContainerRef.current as HTMLElement | null;
+                const wrap = dropdownRef.current as HTMLElement | null;
+                if (!panel || !wrap) {
+                    return;
+                }
+                positionDropdownPortalToWrapper({
+                    panel,
+                    wrapperViewportRect: wrap.getBoundingClientRect(),
+                    positionHost: portalHost,
+                });
+            };
+            applyPortalPosition();
+            const raf = window.requestAnimationFrame(applyPortalPosition);
+            return () => window.cancelAnimationFrame(raf);
+        }
+
+        const wrapperRect = wrapper.getBoundingClientRect();
+        const h = container.getBoundingClientRect().height || container.scrollHeight;
+        const spaceBelow = window.innerHeight - wrapperRect.bottom;
+        const spaceAbove = wrapperRect.top;
+
+        if (spaceBelow < h + 10 && spaceAbove >= h + 10) {
+            container.style.top = "auto";
+            container.style.bottom = "calc(100% + 5px)";
+            container.style.marginTop = "0";
+            container.style.marginBottom = "0";
+        } else {
+            container.style.top = "";
+            container.style.bottom = "";
+            container.style.marginTop = "";
+            container.style.marginBottom = "";
+        }
+    }, [
+        isDropDownClosed,
+        portalHost,
+        filteredOptions,
+        constrainHeight,
+        filterItem,
+    ]);
 
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -394,9 +442,6 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
 
     useImperativeHandle(ref, () => imperativeRef.current);
 
-    // Create a ref to the outer div to attach the dropdown ref for DatePicker sync
-    const outerDivRef = useRef<HTMLDivElement>(null);
-    
     useEffect(() => {
       // Attach the ref to the DOM element so DatePicker can access it
       if (outerDivRef.current && variant === "quickpick" && id) {
@@ -459,6 +504,8 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
                     inputWrapperRef,
                     isDropDownClosed,
                     isInputFocused,
+                    floatingShellClasses,
+                    portalHost,
                     selectId,
                     multiSelect,
                     onSelect,
@@ -501,7 +548,15 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
                     onBlur={() => {
                         // Debounce to delay the execution to prevent jumpiness in Focus state
                         setTimeout(() => {
-                            if (!dropdownRef.current.contains(document.activeElement)) {
+                            const active = document.activeElement;
+                            if (!active) {
+                                setIsInputFocused(false);
+                                return;
+                            }
+                            const inTrigger = dropdownRef.current?.contains(active);
+                            const inMenu =
+                                dropdownContainerRef.current?.contains(active);
+                            if (!inTrigger && !inMenu) {
                                 setIsInputFocused(false);
                             }
                         }, 0);
