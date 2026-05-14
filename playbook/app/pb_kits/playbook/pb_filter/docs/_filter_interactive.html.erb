@@ -37,18 +37,21 @@
         type: "select",
         options: territory_options,
         target_input: "filter-interactive-territory",
+        auto_submit: true,
       },
       {
         name: "Status",
         type: "dropdown",
         options: status_options,
         target_input: "filter-interactive-status",
+        auto_submit: true,
       },
       {
         name: "Start date",
         type: "date-picker",
         target_input: "filter-interactive-start",
         format: "m/d/Y",
+        auto_submit: true,
       },
     ],
     sort_menu: [
@@ -65,6 +68,14 @@
       options: territory_options.map { |o| { value: o[:value], text: o[:label] } },
       value: current_territory,
       input_options: { id: "filter-interactive-territory" }
+    }) %>
+
+    <%= pb_rails("select", props: {
+      label: "Status",
+      name: "status",
+      options: status_options.map { |o| { value: o[:value], text: o[:label] } },
+      value: current_status,
+      input_options: { id: "filter-interactive-status" }
     }) %>
 
     <%= pb_rails("date_picker", props: {

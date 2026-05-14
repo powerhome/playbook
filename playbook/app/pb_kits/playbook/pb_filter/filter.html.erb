@@ -40,6 +40,7 @@
                           data-pb-filter-date-mode="<%= object.interactive_value(interactive_config, :mode) %>"
                           data-pb-filter-date-min="<%= object.interactive_value(interactive_config, :min_date) %>"
                           data-pb-filter-date-max="<%= object.interactive_value(interactive_config, :max_date) %>"
+                          data-pb-filter-auto-submit="<%= object.interactive_value(interactive_config, :auto_submit) %>"
                         >
                         <div class="pb_interactive_filter_text">
                           <%= pb_rails("caption", props: { text: filter[:name] }) %>

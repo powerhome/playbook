@@ -223,6 +223,11 @@ export default class PbFilter extends PbEnhancedElement {
         | HTMLInputElement
         | HTMLSelectElement
         | null;
+      if (!input) {
+        console.warn(
+          `[PbFilter] target_input "${targetId}" not found in the DOM — verify the ID matches a form field.`
+        );
+      }
       if (input) {
         input.value = value;
         input.dispatchEvent(new Event("change", { bubbles: true }));
@@ -232,6 +237,19 @@ export default class PbFilter extends PbEnhancedElement {
           typeof fpHost._flatpickr.setDate === "function"
         ) {
           fpHost._flatpickr.setDate(value, false);
+        }
+
+        if (this.element.dataset.pbFilterAutoSubmit === "true") {
+          const form = input.closest("form");
+          if (form) {
+            form.requestSubmit();
+          } else {
+            console.warn(
+              "[PbFilter] auto_submit: no <form> ancestor found for target input",
+              input,
+              "— verify target_input points to a field inside a <form> element."
+            );
+          }
         }
       }
     }
