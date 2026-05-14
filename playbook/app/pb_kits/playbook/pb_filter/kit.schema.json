@@ -71,6 +71,12 @@
         "rails"
       ],
       "type": "string"
+    },
+    "interactiveFilters": {
+      "platforms": [
+        "rails"
+      ],
+      "type": "array"
     }
   },
   "globalProps": true,

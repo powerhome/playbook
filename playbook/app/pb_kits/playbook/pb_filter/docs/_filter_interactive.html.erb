@@ -1,0 +1,81 @@
+<%
+  territory_options = [
+    { value: "USA", label: "USA" },
+    { value: "Canada", label: "Canada" },
+    { value: "Brazil", label: "Brazil" },
+    { value: "Philippines", label: "Philippines" },
+  ]
+
+  status_options = [
+    { value: "open", label: "Open" },
+    { value: "in_progress", label: "In progress" },
+    { value: "resolved", label: "Resolved" },
+    { value: "closed", label: "Closed" },
+  ]
+
+  current_territory = "USA"
+  current_status    = "open"
+  current_start     = "05/01/2026"
+%>
+
+<%=
+  pb_rails("filter", props: {
+    id: "filter-interactive-demo",
+    min_width: "360px",
+    margin_bottom: "xl",
+    template: "default",
+    results: 546,
+    filters: [
+      { name: "Full Name",  value: "John Wick" },
+      { name: "Territory",  value: current_territory },
+      { name: "Status",     value: current_status },
+      { name: "Start date", value: current_start },
+    ],
+    interactive_filters: [
+      {
+        name: "Territory",
+        type: "select",
+        options: territory_options,
+        target_input: "filter-interactive-territory",
+      },
+      {
+        name: "Status",
+        type: "dropdown",
+        options: status_options,
+        target_input: "filter-interactive-status",
+      },
+      {
+        name: "Start date",
+        type: "date-picker",
+        target_input: "filter-interactive-start",
+        format: "m/d/Y",
+      },
+    ],
+    sort_menu: [
+      { item: "Popularity", link: "?q[sorts]=managers_popularity+asc", active: true, direction: "desc" },
+    ],
+  }) do
+%>
+  <%= pb_rails("form", props: { form_system_options: { scope: :example, method: :get } }) do |form| %>
+    <%= form.text_field :full_name, props: { label: "Full Name" } %>
+
+    <%= pb_rails("select", props: {
+      label: "Territory",
+      name: "territory",
+      options: territory_options.map { |o| { value: o[:value], text: o[:label] } },
+      value: current_territory,
+      input_options: { id: "filter-interactive-territory" }
+    }) %>
+
+    <%= pb_rails("date_picker", props: {
+      label: "Start date",
+      picker_id: "filter-interactive-start",
+      default_date: current_start,
+    }) %>
+
+    <%= form.actions do |action| %>
+      <%= action.submit props: { text: "Apply" } %>
+      <%= action.button props: { type: "reset", text: "Clear", variant: "secondary" } %>
+    <% end %>
+  <% end %>
+<% end %>
