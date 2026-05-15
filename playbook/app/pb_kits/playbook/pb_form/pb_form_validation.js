@@ -122,3 +122,5 @@ class PbFormValidation extends PbEnhancedElement {
 }
 
 window.PbFormValidation = PbFormValidation
+
+export default PbFormValidation

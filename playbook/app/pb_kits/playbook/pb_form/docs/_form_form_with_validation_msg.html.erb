@@ -1,0 +1,90 @@
+<%
+  example_collection = [
+    OpenStruct.new(name: "Alabama", value: 1),
+    OpenStruct.new(name: "Alaska", value: 2),
+    OpenStruct.new(name: "Arizona", value: 3),
+    OpenStruct.new(name: "Arkansas", value: 4),
+    OpenStruct.new(name: "California", value: 5),
+    OpenStruct.new(name: "Colorado", value: 6),
+    OpenStruct.new(name: "Connecticut", value: 7),
+    OpenStruct.new(name: "Delaware", value: 8),
+    OpenStruct.new(name: "Florida", value: 9),
+    OpenStruct.new(name: "Georgia", value: 10),
+  ]
+%>
+
+
+<%
+  example_typeahead_options = [
+    { label: 'Orange', value: '#FFA500' },
+    { label: 'Red', value: '#FF0000' },
+    { label: 'Green', value: '#00FF00' },
+    { label: 'Blue', value: '#0000FF' },
+  ]
+%>
+
+
+<%= pb_form_with(scope: :example, method: :get, url: "", validate: true) do |form| %>
+  <%= form.text_field :example_text_field_validation_msg, props: { label: "Text Field With Validation Message", required: true, validation: { message: "I am a custom validation message for text field." } } %>
+  <%= form.typeahead :example_typeahead_validation_msg, props: { data: { typeahead_example_msg: true, user: {} }, label: "Typeahead With Validation Message", placeholder: "Search for a user", required: true, validation: { message: "I am a custom validation message for typeahead." } } %>
+  <%= form.typeahead :example_typeahead_validation_react_msg, props: { options: example_typeahead_options, pills: true, label: "Typeahead With Validation Message (React Rendered)", placeholder: "Search for a color", required: true, validation: { message: "I am a custom validation message for React typeahead." } } %>
+  <%= form.select :example_select_validation_msg, [ ["Yes", 1], ["No", 2] ], props: { label: true, blank_selection: "Select One...", required: true, validation_message: "I am a custom validation message for select." } %>
+  <%= form.collection_select :example_collection_select_validation_msg, example_collection, :value, :name, props: { label: "Collection Select With Validation Message", blank_selection: "Select a State...", required: true, validation_message: "I am a custom validation message for collection select." } %>
+  <%= form.date_picker :example_date_picker_validation_msg, props: { label: "Date Picker With Validation Message", required: true, validation_message: "I am a custom validation message for date picker.", allow_input: true } %>
+  <%= form.time_picker :example_time_picker_validation_msg, props: { label: "Time Picker With Validation Message", required: true, validation_message: "I am a custom validation message for time picker." } %>
+
+  <%= form.actions do |action| %>
+    <%= action.submit %>
+    <%= action.button props: { type: "reset", text: "Cancel", variant: "secondary" } %>
+  <% end %>
+<% end %>
+
+<!-- form.typeahead user results example template -->
+<template data-typeahead-example-result-option>
+  <%= pb_rails("user", props: {
+    name: tag(:slot, name: "name"),
+    orientation: "horizontal",
+    align: "left",
+    avatar_url: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR4nGP6zwAAAgcBApocMXEAAAAASUVORK5CYII=",
+    avatar: true
+    }) %>
+</template>
+
+<!-- form.typeahead JS example implementation -->
+<%= javascript_tag defer: "defer" do %>
+  document.addEventListener("pb-typeahead-kit-search", function(event) {
+    if (!event.target.dataset || !event.target.dataset.typeaheadExampleMsg) return
+
+    fetch(`https://api.github.com/search/users?q=${encodeURIComponent(event.detail.searchingFor)}`)
+      .then(response => response.json())
+      .then((result) => {
+        const resultOptionTemplate = document.querySelector("[data-typeahead-example-result-option]")
+
+        event.detail.setResults((result.items || []).map((user) => {
+          const wrapper = resultOptionTemplate.content.cloneNode(true)
+          wrapper.children[0].dataset.user = JSON.stringify(user)
+          wrapper.querySelector('slot[name="name"]').replaceWith(user.login)
+          wrapper.querySelector('img').dataset.src = user.avatar_url
+          return wrapper
+        }))
+      })
+  })
+
+
+  document.addEventListener("pb-typeahead-kit-result-option-selected", function(event) {
+    if (!event.target.dataset.typeaheadExampleMsg) return
+
+    const selectedUserJSON = event.detail.selected.firstElementChild.dataset.user
+    const selectedUserData = JSON.parse(selectedUserJSON)
+
+    // set the input field's value
+    event.target.querySelector('input[name=example_typeahead_validation_msg]').value = selectedUserData.login
+
+    // log the selected option's dataset
+    console.log('The selected user data:')
+    console.dir(selectedUserData)
+
+    // do even more with the data later - TBD
+    event.target.dataset.user = selectedUserJSON
+  })
+<% end %>
