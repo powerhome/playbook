@@ -53,7 +53,7 @@ body {
       .pb--kits,
       .pb--kit-show,
       .kit-show-wrapper {
-        padding: 0 ($space_xl + $space_md) 0;
+        padding: 0 ($space_xl);
         @include break_at($nav_breakpoint) {
           padding: $space-lg;
         }
