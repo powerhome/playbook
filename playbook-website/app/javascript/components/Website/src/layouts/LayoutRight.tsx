@@ -1,24 +1,22 @@
 import { Outlet, useLocation } from "react-router-dom"
-import { useEffect } from "react"
+import { useEffect, useRef } from "react"
 import { useDarkMode } from "../contexts/DarkModeContext"
 import { Button, Flex } from "playbook-ui"
 
 export default function LayoutRight() {
   const location = useLocation()
-  const { darkMode } = useDarkMode();
-  // Scroll to top when route changes
+  const { darkMode } = useDarkMode()
+  const mainRef = useRef<HTMLDivElement>(null)
+
   useEffect(() => {
-    // Scroll the main content area
-    const mainContent = document.querySelector('.pb--page--content--main')
-    if (mainContent) {
-      mainContent.scrollTop = 0
-    }
-    // Also scroll window as fallback
-    window.scrollTo({ top: 0, behavior: 'smooth' })
+    mainRef.current?.scrollTo({ top: 0 })
   }, [location.pathname])
-  
+
   return (
-    <div className={`pb--page--content--main ${darkMode ? "dark" : ""}`.trim()}>
+    <div
+      ref={mainRef}
+      className={`layout_body pb--page--content--main ${darkMode ? "dark" : ""}`.trim()}
+    >
       <Flex
           display={{ xs: "none", sm: "none", md: "none", default: "none", lg: "flex" }}
           spacing='between'

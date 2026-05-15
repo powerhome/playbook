@@ -8,7 +8,10 @@
   <body class="<%= @body_class %> <%= controller_name %> <%= action_name%>">
     <div class="pb--page--dark-mode-toggle-mobile">
     </div>
-      <%= react_component("Website") %>
+    <%# Flex chain for beta scroll containment — see `website_new.scss` (`.pb--website-beta-root`) %>
+    <div class="pb--website-beta-root">
+      <%= react_component("Website", {}, { class: "pb--website-beta-react-host" }) %>
+    </div>
   </body>
 
 </html>

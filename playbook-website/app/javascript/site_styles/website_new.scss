@@ -7,6 +7,50 @@
 
 $beta_nav_breakpoint: breakpoint("lg");
 
+// Beta layout (`pages#application_beta`): `_site-style.scss` sets `.pb--page--content--main { height: 100vh }`,
+// which is taller than the region below the header and produces nested scrolling. Lock the document height,
+// then use flex children with `min-height: 0` so only `.pb--page--content--main` scrolls.
+
+@mixin website-beta-shell-fill {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 0;
+  min-height: 0;
+  min-width: 0;
+  overflow: hidden;
+}
+
+html:has(body.pages.application_beta) {
+  height: 100%;
+  overflow: hidden;
+}
+
+body.pages.application_beta {
+  box-sizing: border-box;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+}
+
+// `application_beta.html.erb`: outer flex child of `body`, inner host is from `react_helper#react_component`.
+body.pages.application_beta .pb--website-beta-root,
+body.pages.application_beta .pb--website-beta-react-host {
+  @include website-beta-shell-fill;
+}
+
+.pb--website-shell {
+  @include website-beta-shell-fill;
+}
+
+.pb--website-shell > .pb--page--content.pb--website--new {
+  flex: 1 1 0;
+  min-height: 0 !important; // override `.pb--page--content { min-height: … }` in _site-style.scss
+  min-width: 0;
+  overflow: hidden;
+  grid-template-rows: minmax(0, 1fr);
+}
+
 // Hero / kit listing: same horizontal gutter + centered xl content track.
 @mixin website-page-gutter-padding {
   padding-inline: $space_xl;
@@ -32,33 +76,28 @@ $beta_nav_breakpoint: breakpoint("lg");
     background: $bg_dark;
     color: $white;
   }
-  
-  // Override the min-height since header is now sticky and takes space in flow
-  &.pb--page--content {
-    min-height: auto;
-  }
 
-  // Use dynamic viewport units so the panes track the real visible viewport.
   .pb--page--sideNav {
-    height: calc(100dvh - var(--beta-header-height, 89px));
+    box-sizing: border-box;
+    height: 100%;
+    min-height: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    overscroll-behavior-y: contain;
+
     &.dark {
       border-color: #3b3752;
     }
-  }
 
-  .pb--page--content--main {
-    height: calc(100dvh - var(--beta-header-height, 89px));
-  }
-
-  .pb--page--sideNav {
     @include break_at($beta_nav_breakpoint) {
+      height: calc(100dvh - var(--beta-header-height, 89px));
       position: absolute;
       transform-origin: 0% 0%;
       transform: translate(-110%, 0);
-      transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
+      transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1);
       border-radius: $border_rad_heavier;
       box-shadow: $shadow_deepest;
-      top: 89px;
+      top: var(--beta-header-height, 89px);
       left: 0;
       min-width: 200px;
       width: auto !important;
@@ -70,14 +109,38 @@ $beta_nav_breakpoint: breakpoint("lg");
     }
   }
 
+  .pb--page--content--main {
+    box-sizing: border-box;
+    height: 100% !important; // override `_site-style.scss` `height: 100vh` on this selector
+    min-height: 0;
+    min-width: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    overscroll-behavior-y: contain;
+  }
+
   .kit-grid-shell {
     @include website-page-gutter-padding;
     box-sizing: border-box;
     width: 100%;
   }
 
+  .component-list-category-header {
+    @include website-page-gutter-padding;
+    width: 100%;
+  }
+
+  .component-list-category-header-content {
+    @include website-content-well;
+  }
+
   .kit-grid-layout {
     @include website-content-well;
+  }
+
+  .kit-grid-shell .pb_layout_kit_collection.kit-grid-layout div.layout_body {
+    grid-column-gap: $space_md;
+    grid-row-gap: $space_md;
   }
 
   .hero-content-well {
@@ -91,7 +154,7 @@ $beta_nav_breakpoint: breakpoint("lg");
   top: 0;
   z-index: 100;
   background: $white;
-  
+
   &.dark {
     background: tint(#0a0527, 10);
   }
