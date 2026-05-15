@@ -60,9 +60,21 @@ export const DocsTab = ({
       <div
         id={example.example_key}
         key={example.example_key}
-        style={{ width: "100%" }}
+        style={{ boxSizing: "border-box", width: "100%", maxWidth: "100%", minWidth: 0 }}
       >
-      <Card marginBottom="lg" padding="none" width="100%" dark={darkMode}>
+      <Card
+        marginBottom="lg"
+        padding="none"
+        width="100%"
+        dark={darkMode}
+        htmlOptions={{
+          style: {
+            boxSizing: "border-box",
+            maxWidth: "100%",
+            minWidth: 0,
+          },
+        }}
+      >
         <Caption text={example.title} color="lighter" margin="md" dark={darkMode} />
         {platform === "rails" ? (
           <LiveExampleRails html={example.rendered ?? ""} />
@@ -129,7 +141,7 @@ export const DocsTab = ({
           <div
             key={section.title}
             id={section.title.toLowerCase().replace(/\s+/g, "-")}
-            style={{ width: "100%" }}
+            style={{ boxSizing: "border-box", width: "100%", maxWidth: "100%", minWidth: 0 }}
           >
             <Title
               color="light"
@@ -165,10 +177,35 @@ export const DocsTab = ({
   }
   return (
     <Flex
-      paddingRight={{ xs: "xl", sm: "xl", md: "xl", lg: "xl", xl: "md" }}
-      paddingLeft="xl"
+      align="stretch"
+      minWidth={0}
+      width="100%"
+      htmlOptions={{
+        style: {
+          boxSizing: "border-box",
+          maxWidth: "100%",
+          minWidth: 0,
+        },
+      }}
     >
-      <Flex flexDirection="column" flex={1} minWidth={0} overflow="auto">
+      {/*
+        Keep horizontal overflow clipping on the examples column only. `overflow-x: hidden` on an
+        ancestor of `position: sticky` breaks sticking to the main scrollport (see RightSideNav).
+      */}
+      <Flex
+        flexDirection="column"
+        flex={1}
+        minWidth={0}
+        width="100%"
+        htmlOptions={{
+          style: {
+            boxSizing: "border-box",
+            maxWidth: "100%",
+            minWidth: 0,
+            overflowX: "hidden",
+          },
+        }}
+      >
         {examples && examples.length > 0 ? (
           <>{renderExamples()}</>
         ) : (
