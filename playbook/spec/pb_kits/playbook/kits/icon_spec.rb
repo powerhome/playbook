@@ -68,6 +68,41 @@ RSpec.describe Playbook::PbIcon::Icon do
     end
   end
 
+  describe "#fa_fallback_data" do
+    it "includes the fallback marker and icon name in test/debug environments" do
+      icon = "not-a-playbook-icon"
+
+      expect(subject.new(icon: icon).fa_fallback_data).to eq(
+        {
+          pb_icon_fa_fallback: true,
+          pb_icon_fa_fallback_icon: icon,
+        }
+      )
+    end
+
+    it "can be enabled explicitly with PB_ICON_FA_FALLBACK_DEBUG" do
+      allow(Rails.env).to receive(:production?).and_return(true)
+      allow(Rails.env).to receive(:development?).and_return(false)
+      allow(Rails.env).to receive(:test?).and_return(false)
+      allow(ENV).to receive(:[]).and_call_original
+      allow(ENV).to receive(:[]).with("PB_ICON_FA_FALLBACK_DEBUG").and_return("true")
+
+      expect(subject.new(icon: "debug-fallback-icon").fa_fallback_data).to include(
+        pb_icon_fa_fallback_icon: "debug-fallback-icon"
+      )
+    end
+
+    it "stays disabled in production unless debug is explicitly enabled" do
+      allow(Rails.env).to receive(:production?).and_return(true)
+      allow(Rails.env).to receive(:development?).and_return(false)
+      allow(Rails.env).to receive(:test?).and_return(false)
+      allow(ENV).to receive(:[]).and_call_original
+      allow(ENV).to receive(:[]).with("PB_ICON_FA_FALLBACK_DEBUG").and_return(nil)
+
+      expect(subject.new(icon: "production-fallback-icon").fa_fallback_data).to eq({})
+    end
+  end
+
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
       icon = "user"

@@ -5,7 +5,7 @@
     <%= object.icon.html_safe %>
   </span>
 <% else %>
-  <%= pb_content_tag(:i) do %>
+  <%= pb_content_tag(:i, data: object.data.merge(object.fa_fallback_data)) do %>
   <% end %>
   <%= content_tag(:span, nil,
       aria: { label: "#{object.icon} icon" }.merge(object.aria),

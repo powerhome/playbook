@@ -48,6 +48,21 @@ module Playbook
         emoji_regex.match?(icon)
       end
 
+      def fa_fallback_debug_enabled?
+        return false if Rails.env.production? && ENV["PB_ICON_FA_FALLBACK_DEBUG"] != "true"
+
+        Rails.env.development? || Rails.env.test? || ENV["PB_ICON_FA_FALLBACK_DEBUG"] == "true"
+      end
+
+      def fa_fallback_data
+        return {} unless fa_fallback_debug_enabled?
+
+        {
+          pb_icon_fa_fallback: true,
+          pb_icon_fa_fallback_icon: icon,
+        }
+      end
+
       def classname
         generate_classname(
           "pb_icon_kit",

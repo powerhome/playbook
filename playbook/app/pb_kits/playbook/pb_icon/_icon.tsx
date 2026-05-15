@@ -1,4 +1,4 @@
-import React, { ReactSVGElement } from 'react'
+import React, { ReactSVGElement, useEffect } from 'react'
 import classnames from 'classnames'
 import { buildAriaProps, buildDataProps, buildHtmlProps } from '../utilities/props'
 import { GlobalProps, globalProps } from '../utilities/globalProps'
@@ -116,6 +116,44 @@ const sizeMap = {
 declare global {
   // eslint-disable-next-line no-var
   var PB_ICONS: {[key: string]: React.FunctionComponent<any>}
+  interface Window {
+    PB_ICON_FA_FALLBACK_DEBUG?: boolean
+    PB_ICON_FA_FALLBACKS?: {
+      icons: { [key: string]: number },
+      entries: Array<{ icon: string, fontStyle: string }>
+    }
+  }
+}
+
+const isFaFallbackDebugEnabled = (): boolean => {
+  if (typeof window !== 'undefined' && window.PB_ICON_FA_FALLBACK_DEBUG) return true
+  if (typeof process !== 'undefined' && process.env?.NODE_ENV !== 'production') return true
+
+  return false
+}
+
+const faFallbackDataProps = (icon: string) => (
+  isFaFallbackDebugEnabled()
+    ? {
+      'data-pb-icon-fa-fallback': 'true',
+      'data-pb-icon-fa-fallback-icon': icon,
+    }
+    : {}
+)
+
+const recordFaFallback = (icon: string, fontStyle: string): void => {
+  if (!isFaFallbackDebugEnabled() || typeof window === 'undefined') return
+
+  window.PB_ICON_FA_FALLBACKS ||= { icons: {}, entries: [] }
+  window.PB_ICON_FA_FALLBACKS.icons[icon] = (window.PB_ICON_FA_FALLBACKS.icons[icon] || 0) + 1
+  window.PB_ICON_FA_FALLBACKS.entries.push({ icon, fontStyle })
+  window.dispatchEvent(new CustomEvent('pb:icon-fa-fallback', {
+    detail: {
+      icon,
+      fontStyle,
+      count: window.PB_ICON_FA_FALLBACKS.icons[icon],
+    },
+  }))
 }
 
 const Icon = (props: IconProps) => {
@@ -168,6 +206,11 @@ const Icon = (props: IconProps) => {
   }
 
   const isFA = !iconElement && !customIcon 
+  const iconName = icon as string
+
+  useEffect(() => {
+    if (isFA) recordFaFallback(iconName, fontStyle)
+  }, [fontStyle, iconName, isFA])
 
   let classes = classnames(
     (!iconElement && !customIcon) ? 'pb_icon_kit' : '',
@@ -263,6 +306,7 @@ const Icon = (props: IconProps) => {
               {...ariaProps}
               {...dataProps}
               {...htmlProps}
+              {...faFallbackDataProps(iconName)}
               className={classes}
               id={id}
           />
