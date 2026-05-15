@@ -115,6 +115,7 @@ body.pages.application_beta .pb--website-react-host {
     height: 100% !important; // override `_site-style.scss` `height: 100vh` on this selector
     min-height: 0;
     min-width: 0;
+    // Wide kit examples scroll inside their own preview/code regions, not the main column.
     overflow-x: hidden;
     overflow-y: auto;
     overscroll-behavior-y: contain;
