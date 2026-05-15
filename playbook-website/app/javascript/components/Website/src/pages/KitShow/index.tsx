@@ -101,7 +101,6 @@ const KitShow = () => {
           align="stretch"
           minWidth={0}
           orientation="column"
-          marginTop="sm"
           width="100%"
         >
           <Title

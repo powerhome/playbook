@@ -117,6 +117,10 @@ body.pages.application_beta .pb--website-react-host {
 
     .pb--kit-show {
       padding-bottom: 0;
+
+      @include break_at($website_sidebar_collapse) {
+        padding-top: 0;
+      }
     }
 
     .kit-show-wrapper {

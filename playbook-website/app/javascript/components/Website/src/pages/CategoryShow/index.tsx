@@ -50,6 +50,8 @@ export default function CategoryShow() {
           align="center"
           className="category-breadcrumb"
           paddingX="sm"
+          marginBottom={{ xs: "sm", sm: "sm", md: "sm", lg: "none" }}
+          marginTop="sm"
         >
           <NavLink to="/beta/kits">
             <Body className="previous-route" color="link">

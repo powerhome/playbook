@@ -86,7 +86,7 @@ export default function ComponentList() {
         <>
           <Hero description={description} title="Components" minHeight="245px" />
 
-          <PageContainer>
+          <PageContainer marginTop="sm">
             <Flex orientation="column" width="100%">
               <Flex
                 justify="center"

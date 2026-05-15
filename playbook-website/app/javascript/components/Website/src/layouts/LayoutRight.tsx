@@ -18,7 +18,7 @@ export default function LayoutRight() {
       className={`layout_body pb--page--content--main ${darkMode ? "dark" : ""}`.trim()}
     >
       <Flex
-          display={{ xs: "none", sm: "none", md: "none", default: "none", lg: "flex" }}
+          display={{ xs: "none", sm: "none", md: "none", default: "none" }}
           spacing='between'
           vertical='center'
       >
