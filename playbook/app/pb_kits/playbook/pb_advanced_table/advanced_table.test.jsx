@@ -774,6 +774,82 @@ test("columnStyling.cellPadding sets cell padding", () => {
   expect(firstEnrollmentCell).toHaveClass('p_none')
 });
 
+test("columnStyling minWidth, width, and maxWidth apply to header and body cells", () => {
+  const styledColumnDefs = [
+    {
+      accessor: "year",
+      label: "Year",
+      cellAccessors: ["quarter", "month", "day"],
+      columnStyling: { minWidth: 240, width: 260, maxWidth: 400 },
+    },
+    {
+      accessor: "newEnrollments",
+      label: "New Enrollments",
+    },
+    {
+      accessor: "scheduledMeetings",
+      label: "Scheduled Meetings",
+    },
+  ];
+
+  render(
+    <AdvancedTable
+        columnDefinitions={styledColumnDefs}
+        data={{ testid: testId }}
+        tableData={MOCK_DATA}
+    />
+  );
+
+  const yearHeader = screen.getByText("Year").closest("th");
+  expect(yearHeader).toHaveStyle({ minWidth: "240px", width: "260px", maxWidth: "400px" });
+
+  const yearCell = screen.getAllByText("2021")[0].closest("td");
+  expect(yearCell).toHaveStyle({ minWidth: "240px", width: "260px", maxWidth: "400px" });
+});
+
+test("columnDefinitions size, minSize, and maxSize apply layout styles", () => {
+  const styledColumnDefs = [
+    {
+      accessor: "year",
+      label: "Year",
+      cellAccessors: ["quarter", "month", "day"],
+    },
+    {
+      accessor: "newEnrollments",
+      label: "New Enrollments",
+      size: 180,
+      minSize: 160,
+      maxSize: 320,
+    },
+    {
+      accessor: "scheduledMeetings",
+      label: "Scheduled Meetings",
+    },
+  ];
+
+  render(
+    <AdvancedTable
+        columnDefinitions={styledColumnDefs}
+        data={{ testid: testId }}
+        tableData={MOCK_DATA}
+    />
+  );
+
+  const enrollmentsHeader = screen.getByText("New Enrollments").closest("th");
+  expect(enrollmentsHeader).toHaveStyle({
+    width: "180px",
+    minWidth: "160px",
+    maxWidth: "320px",
+  });
+
+  const enrollmentsCell = screen.getAllByText("20")[0].closest("td");
+  expect(enrollmentsCell).toHaveStyle({
+    width: "180px",
+    minWidth: "160px",
+    maxWidth: "320px",
+  });
+});
+
 test("columnStyling.fontColor sets cell font color", () => {
   const styledColumnDefs = [
     {

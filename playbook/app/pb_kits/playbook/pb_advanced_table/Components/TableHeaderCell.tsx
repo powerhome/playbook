@@ -16,6 +16,7 @@ import { SortIconButton } from "./SortIconButton"
 import { ToggleIconButton } from "./ToggleIconButton"
 import { displayIcon } from "../Utilities/IconHelpers"
 import { findColumnDefByAccessor } from "../Utilities/ColumnStylingHelper"
+import { playbookColumnLayoutStylesFromMeta } from "../Utilities/ColumnLayoutHelper"
 import { updateExpandAndCollapseState } from "../Utilities/ExpansionControlHelpers"
 
 import { isChrome } from "../Utilities/BrowserCheck"
@@ -198,6 +199,7 @@ const isToggleExpansionEnabled =
         id={cellId}
         key={`${header?.id}-header`}
         style={{
+          ...playbookColumnLayoutStylesFromMeta(header?.column?.columnDef),
           backgroundColor: headerBackgroundColor,
           color: headerFontColor,
           left: isPinnedLeft
