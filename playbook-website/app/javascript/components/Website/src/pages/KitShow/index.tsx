@@ -126,7 +126,7 @@ const KitShow = () => {
           )}
 
           {/* Navigation Tabs */}
-          <Nav orientation="horizontal" dark={darkMode}>
+          <Nav orientation="horizontal" dark={darkMode} marginBottom="none">
             <NavItem
               text="Docs"
               active={displayTab === "docs"}
@@ -162,7 +162,7 @@ const KitShow = () => {
           </Nav>
         </Flex>
       </div>
-      <SectionSeparator marginBottom="lg" dark={darkMode} />
+      <SectionSeparator marginTop="none" marginBottom="lg" dark={darkMode} />
 
       <div className="kit-show-wrapper">
         <Flex align="stretch" minWidth={0} orientation="column" marginBottom="lg" width="100%">

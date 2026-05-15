@@ -106,7 +106,11 @@ function WebsiteContent() {
             setPlatform={handlePlatformChange}
           />
         </div>
-        <Layout className="pb--page--content pb--website--new" dark={darkMode}>
+        <Layout
+          className="pb--page--content pb--website--new"
+          collapse="lg"
+          dark={darkMode}
+        >
           <MobileHamburger 
             isOpen={mobileNavOpen}
             onToggle={() => setMobileNavOpen(!mobileNavOpen)}

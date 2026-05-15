@@ -7,11 +7,6 @@
 
 $website_sidebar_collapse: breakpoint("lg");
 
-// Website SPA (`pages#application_beta` / `application_beta.html.erb`): `_site-style.scss` sets
-// `.pb--page--content--main { height: 100vh }`, which is taller than the region below the header and
-// produces nested scrolling. Lock the document height, then use flex children with `min-height: 0`
-// so only `.pb--page--content--main` scrolls.
-
 @mixin website-shell-fill {
   box-sizing: border-box;
   display: flex;
@@ -34,7 +29,6 @@ body.pages.application_beta {
   overflow: hidden;
 }
 
-// `application_beta.html.erb`: outer flex child of `body`, inner host is from `react_helper#react_component`.
 body.pages.application_beta .pb--website-layout-root,
 body.pages.application_beta .pb--website-react-host {
   @include website-shell-fill;
@@ -46,13 +40,15 @@ body.pages.application_beta .pb--website-react-host {
 
 .pb--website-shell > .pb--page--content.pb--website--new {
   flex: 1 1 0;
-  min-height: 0 !important; // override `.pb--page--content { min-height: … }` in _site-style.scss
+  min-height: 0 !important;
   min-width: 0;
   overflow: hidden;
-  grid-template-rows: minmax(0, 1fr);
+
+  @media screen and (min-width: #{$screen-lg-min + 1}) {
+    grid-template-rows: minmax(0, 1fr);
+  }
 }
 
-// Hero / kit listing: same horizontal gutter + centered xl content track.
 @mixin website-page-gutter-padding {
   padding-inline: $space_xl;
 
@@ -112,13 +108,22 @@ body.pages.application_beta .pb--website-react-host {
 
   .pb--page--content--main {
     box-sizing: border-box;
-    height: 100% !important; // override `_site-style.scss` `height: 100vh` on this selector
+    height: 100% !important;
     min-height: 0;
     min-width: 0;
-    // Wide kit examples scroll inside their own preview/code regions, not the main column.
     overflow-x: hidden;
     overflow-y: auto;
     overscroll-behavior-y: contain;
+
+    .pb--kit-show {
+      padding-bottom: 0;
+    }
+
+    .kit-show-wrapper {
+      @include break_at($website_sidebar_collapse) {
+        padding-top: 0;
+      }
+    }
   }
 
   .kit-grid-shell {
@@ -150,7 +155,6 @@ body.pages.application_beta .pb--website-react-host {
   }
 }
 
-// Fix header to stay at top of viewport
 .pb--page--header--new {
   position: sticky;
   top: 0;
