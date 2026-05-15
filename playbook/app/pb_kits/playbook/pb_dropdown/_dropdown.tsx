@@ -25,6 +25,7 @@ import { DialogContext } from "../pb_dialog/_dialog_context";
 import {
     resolvePortaledKitHost,
     positionDropdownPortalToWrapper,
+    subscribeFloatingKitReposition,
 } from "../utilities/floatingPortalHosts";
 
 type CustomQuickPickDate = {
@@ -292,7 +293,11 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
             };
             applyPortalPosition();
             const raf = window.requestAnimationFrame(applyPortalPosition);
-            return () => window.cancelAnimationFrame(raf);
+            const unsubscribeReposition = subscribeFloatingKitReposition(applyPortalPosition);
+            return () => {
+                window.cancelAnimationFrame(raf);
+                unsubscribeReposition();
+            };
         }
 
         const wrapperRect = wrapper.getBoundingClientRect();

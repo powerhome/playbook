@@ -38,6 +38,7 @@ import { DialogContext } from "../pb_dialog/_dialog_context";
 import {
   positionFloatingShellToInput,
   resolvePortaledKitHost,
+  subscribeFloatingKitReposition,
 } from "../utilities/floatingPortalHosts";
 
 interface MultiLevelSelectComponent extends React.ForwardRefExoticComponent<
@@ -313,19 +314,31 @@ const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>(
       ) {
         return;
       }
-      const menuEl = mlsFloatingShellRef.current.querySelector(
-        ".dropdown_menu",
-      ) as HTMLElement | null;
-      if (!menuEl) return;
-      const rect = (dropdownRef.current as HTMLElement).getBoundingClientRect();
-      const maxH = Math.max(120, window.innerHeight - rect.bottom - 8);
-      positionFloatingShellToInput({
-        shell: mlsFloatingShellRef.current,
-        inputViewportRect: rect,
-        menuEl,
-        maxMenuHeightPx: maxH,
-        positionHost: portalHost,
-      });
+      const shell = mlsFloatingShellRef.current;
+      const inputEl = dropdownRef.current as HTMLElement;
+
+      const reposition = () => {
+        if (!shell || !inputEl) return;
+        const menuEl = shell.querySelector(".dropdown_menu") as HTMLElement | null;
+        if (!menuEl) return;
+        const rect = inputEl.getBoundingClientRect();
+        const maxH = Math.max(120, window.innerHeight - rect.bottom - 8);
+        positionFloatingShellToInput({
+          shell,
+          inputViewportRect: rect,
+          menuEl,
+          maxMenuHeightPx: maxH,
+          positionHost: portalHost,
+        });
+      };
+
+      reposition();
+      const raf = window.requestAnimationFrame(reposition);
+      const unsubscribeReposition = subscribeFloatingKitReposition(reposition);
+      return () => {
+        window.cancelAnimationFrame(raf);
+        unsubscribeReposition();
+      };
     }, [
       isDropdownClosed,
       portalHost,

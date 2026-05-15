@@ -162,3 +162,33 @@ export function targetIsInsidePortaledFloatingKit(target: HTMLElement): boolean 
     target.closest(".pb_dropdown_container") !== null
   )
 }
+
+/** Re-run positioning while a portaled menu is open for Dropdown and Multi Level Select. */
+export function subscribeFloatingKitReposition(reposition: () => void): () => void {
+  if (typeof window === "undefined" || typeof document === "undefined") {
+    return () => undefined
+  }
+
+  const scrollOpts: AddEventListenerOptions = { capture: true, passive: true }
+  const run = () => reposition()
+
+  window.addEventListener("scroll", run, scrollOpts)
+  document.addEventListener("scroll", run, scrollOpts)
+  window.addEventListener("resize", run)
+
+  const vv = window.visualViewport
+  if (vv) {
+    vv.addEventListener("scroll", run)
+    vv.addEventListener("resize", run)
+  }
+
+  return () => {
+    window.removeEventListener("scroll", run, scrollOpts)
+    document.removeEventListener("scroll", run, scrollOpts)
+    window.removeEventListener("resize", run)
+    if (vv) {
+      vv.removeEventListener("scroll", run)
+      vv.removeEventListener("resize", run)
+    }
+  }
+}
