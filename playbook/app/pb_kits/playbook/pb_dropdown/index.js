@@ -1,6 +1,7 @@
 import PbEnhancedElement from "../pb_enhanced_element";
 import { PbDropdownKeyboard } from "./keyboard_accessibility";
 import { setArrowVisibility, toggleVisibility } from "../utilities/domHelpers";
+import { subscribeFloatingKitReposition } from "../utilities/floatingPortalHosts";
 
 const DROPDOWN_SELECTOR = "[data-pb-dropdown]";
 const TRIGGER_SELECTOR = "[data-dropdown-trigger]";
@@ -434,6 +435,10 @@ export default class PbDropdown extends PbEnhancedElement {
   }
 
   unmountPortalMenu() {
+    if (this._unsubscribePortalReposition) {
+      this._unsubscribePortalReposition();
+      this._unsubscribePortalReposition = null;
+    }
     if (this.boundApplyPortalPosition) {
       window.removeEventListener("resize", this.boundApplyPortalPosition);
     }
@@ -900,6 +905,13 @@ export default class PbDropdown extends PbEnhancedElement {
       this.applyPortalPosition();
       window.removeEventListener("resize", this.boundApplyPortalPosition);
       window.addEventListener("resize", this.boundApplyPortalPosition);
+      if (this._unsubscribePortalReposition) {
+        this._unsubscribePortalReposition();
+        this._unsubscribePortalReposition = null;
+      }
+      this._unsubscribePortalReposition = subscribeFloatingKitReposition(
+        this.boundApplyPortalPosition,
+      );
       window.requestAnimationFrame(() => this.applyPortalPosition());
     } else {
       this.adjustDropdownPosition(elem);

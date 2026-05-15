@@ -1,6 +1,9 @@
 import PbEnhancedElement from '../pb_enhanced_element'
 import { createPopper, Instance, Placement } from '@popperjs/core'
-import { targetIsInsidePortaledFloatingKit } from '../utilities/floatingPortalHosts'
+import {
+  subscribeFloatingKitReposition,
+  targetIsInsidePortaledFloatingKit,
+} from '../utilities/floatingPortalHosts'
 
 const POPOVER_OFFSET_Y = [0, 20]
 
@@ -9,6 +12,7 @@ export default class PbPopover extends PbEnhancedElement {
   _triggerElement: HTMLElement
   _tooltip: HTMLElement
   element: HTMLElement
+  _unsubscribeFloatingReposition: (() => void) | null = null
   static get selector() {
     return '[data-pb-popover-kit]'
   }
@@ -45,6 +49,14 @@ export default class PbPopover extends PbEnhancedElement {
       ],
     })
 
+    this._unsubscribeFloatingReposition = subscribeFloatingKitReposition(
+      () => {
+        if (this.tooltip?.classList.contains('show')) {
+          void this.popper?.update()
+        }
+      },
+    )
+
     this.triggerElement.addEventListener('click', (event: Event) => {
       event.preventDefault()
       event.stopPropagation()
@@ -58,6 +70,12 @@ export default class PbPopover extends PbEnhancedElement {
         this.popper.update()
       }, 0)
     })
+  }
+
+  disconnect(): void {
+    this._unsubscribeFloatingReposition?.()
+    this._unsubscribeFloatingReposition = null
+    this.popper?.destroy()
   }
 
   checkCloseTooltip() {
