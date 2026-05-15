@@ -1,0 +1,31 @@
+<%
+  example_collection = [
+    OpenStruct.new(name: "Alabama", value: 1),
+    OpenStruct.new(name: "Alaska", value: 2),
+    OpenStruct.new(name: "Arizona", value: 3),
+    OpenStruct.new(name: "Arkansas", value: 4),
+    OpenStruct.new(name: "California", value: 5),
+    OpenStruct.new(name: "Colorado", value: 6),
+    OpenStruct.new(name: "Connecticut", value: 7),
+    OpenStruct.new(name: "Delaware", value: 8),
+    OpenStruct.new(name: "Florida", value: 9),
+    OpenStruct.new(name: "Georgia", value: 10),
+  ]
+%>
+
+<%= pb_form_with(scope: :example, url: "", method: :get) do |form| %>
+  <%= form.select :example_select, [ ["Yes", 1], ["No", 2], ["Maybe", 3] ], props: { label: "Select Default" } %>
+  <%= form.select :example_select_2, [ ["Yes", 1], ["No", 2], ["Maybe", 3] ], props: { label: "Select with Blank Selection", blank_selection: "Blank selection..." } %>
+  <%= form.select :example_select_3, [ ["Yes", 1], ["No", 2], ["Maybe", 3] ], { include_blank: "Include blank..." }, {}, props: { label: "Select with Include Blank" } %>
+  <%= form.collection_select :example_collection_select, example_collection, :value, :name, props: { label: "Collection Select Default" } %>
+  <%= form.collection_select :example_collection_select_2, example_collection, :value, :name, props: { label: "Collection Select with Blank Selection", blank_selection: "Blank selection..." } %>
+  <%= form.collection_select :example_collection_select_3, example_collection, :value, :name, { include_blank: "Include blank..." }, {}, props: { label: "Collection Select with Include Blank" } %>
+  <%= form.time_zone_select_field :example_time_zone_select, ActiveSupport::TimeZone.us_zones, props: { label: "Time Zone Select Default" } %>
+  <%= form.time_zone_select_field :example_time_zone_select_2, ActiveSupport::TimeZone.us_zones, { default: "Eastern Time (US & Canada)" }, props: { label: "Time Zone Select with a Default Selection" } %>
+  <%= form.time_zone_select_field :example_time_zone_select_3, ActiveSupport::TimeZone.us_zones, props: { label: "Time Zone Select with Blank Selection", blank_selection: "Blank selection..." }  %>
+  <%= form.time_zone_select_field :example_time_zone_select_4, ActiveSupport::TimeZone.us_zones, { include_blank: "Include blank..." }, {}, props: { label: "Time Zone Select with Include Blank" } %>
+  <%= form.actions do |action| %>
+    <%= action.submit %>
+    <%= action.button props: { type: "reset", text: "Cancel", variant: "secondary" } %>
+  <% end %>
+<% end %>
