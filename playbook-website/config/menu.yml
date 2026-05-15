@@ -519,9 +519,8 @@ kits:
     platforms: *1
     description: Full-featured text editor with formatting options.
     status: stable
-    platforms_status: { rails: deprecated }
     icons_used: true
-    react_rendered: true
+    react_rendered: false
     enhanced_element_used: false
   - name: textarea
     platforms: *1
