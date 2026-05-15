@@ -63,6 +63,8 @@ export default function CategoryShow() {
         </Flex>
 
         <Hero
+          key={category}
+          compact
           description={description ?? ""}
           title={linkFormat(category)}
           height="157px"
