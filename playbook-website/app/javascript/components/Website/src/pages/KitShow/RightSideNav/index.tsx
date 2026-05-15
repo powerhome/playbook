@@ -36,6 +36,9 @@ function examplesForSection(
 // Main scroll column for the website shell (`website_new.scss` / `LayoutRight`).
 const MAIN_CONTENT_SCROLL_SELECTOR = ".pb--page--content--main";
 
+/** Fixed rail width; keep in sync with `htmlOptions.style.width` / `minWidth` / `maxWidth` below. */
+const DOC_RIGHT_NAV_WIDTH_PX = 206;
+
 /**
  * Same vertical order as `DocsTab` `renderExamples`: walk sections in order, append each
  * section's examples in `examples` array order. Raw `examples` alone is not reliable when
@@ -242,18 +245,21 @@ const RightSideNav = ({ examples, sections }: RightSideNavProps) => {
     <Flex
       display={{ xs: "none", sm: "none", md: "none", lg: "none", xl: "flex" }}
       flexDirection="column"
+      flexGrow={0}
+      flexShrink={0}
       marginLeft="xl"
       position="sticky"
       alignSelf="flex-start"
       htmlOptions={{
         style: {
-          width: "206px",
+          width: `${DOC_RIGHT_NAV_WIDTH_PX}px`,
+          minWidth: `${DOC_RIGHT_NAV_WIDTH_PX}px`,
+          maxWidth: `${DOC_RIGHT_NAV_WIDTH_PX}px`,
           top: "20px",
           maxHeight: "calc(100vh - 120px)",
           overflowY: "auto",
         },
       }}
-      shrink
     >
       {examples.length > 0 ? renderNavItems() : null}
     </Flex>
