@@ -5,13 +5,14 @@
 @import "playbook-tokens/border_radius";
 @import "playbook-tokens/shadows";
 
-$beta_nav_breakpoint: breakpoint("lg");
+$website_sidebar_collapse: breakpoint("lg");
 
-// Beta layout (`pages#application_beta`): `_site-style.scss` sets `.pb--page--content--main { height: 100vh }`,
-// which is taller than the region below the header and produces nested scrolling. Lock the document height,
-// then use flex children with `min-height: 0` so only `.pb--page--content--main` scrolls.
+// Website SPA (`pages#application_beta` / `application_beta.html.erb`): `_site-style.scss` sets
+// `.pb--page--content--main { height: 100vh }`, which is taller than the region below the header and
+// produces nested scrolling. Lock the document height, then use flex children with `min-height: 0`
+// so only `.pb--page--content--main` scrolls.
 
-@mixin website-beta-shell-fill {
+@mixin website-shell-fill {
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -34,13 +35,13 @@ body.pages.application_beta {
 }
 
 // `application_beta.html.erb`: outer flex child of `body`, inner host is from `react_helper#react_component`.
-body.pages.application_beta .pb--website-beta-root,
-body.pages.application_beta .pb--website-beta-react-host {
-  @include website-beta-shell-fill;
+body.pages.application_beta .pb--website-layout-root,
+body.pages.application_beta .pb--website-react-host {
+  @include website-shell-fill;
 }
 
 .pb--website-shell {
-  @include website-beta-shell-fill;
+  @include website-shell-fill;
 }
 
 .pb--website-shell > .pb--page--content.pb--website--new {
@@ -89,15 +90,15 @@ body.pages.application_beta .pb--website-beta-react-host {
       border-color: #3b3752;
     }
 
-    @include break_at($beta_nav_breakpoint) {
-      height: calc(100dvh - var(--beta-header-height, 89px));
+    @include break_at($website_sidebar_collapse) {
+      height: calc(100dvh - var(--website-header-height, 89px));
       position: absolute;
       transform-origin: 0% 0%;
       transform: translate(-110%, 0);
       transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1);
       border-radius: $border_rad_heavier;
       box-shadow: $shadow_deepest;
-      top: var(--beta-header-height, 89px);
+      top: var(--website-header-height, 89px);
       left: 0;
       min-width: 200px;
       width: auto !important;

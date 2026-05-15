@@ -8,9 +8,9 @@
   <body class="<%= @body_class %> <%= controller_name %> <%= action_name%>">
     <div class="pb--page--dark-mode-toggle-mobile">
     </div>
-    <%# Flex chain for beta scroll containment — see `website_new.scss` (`.pb--website-beta-root`) %>
-    <div class="pb--website-beta-root">
-      <%= react_component("Website", {}, { class: "pb--website-beta-react-host" }) %>
+    <%# Flex chain for main-column scroll — see `website_new.scss` (`.pb--website-layout-root`) %>
+    <div class="pb--website-layout-root">
+      <%= react_component("Website", {}, { class: "pb--website-react-host" }) %>
     </div>
   </body>
 

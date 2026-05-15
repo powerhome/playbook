@@ -58,7 +58,7 @@ function WebsiteContent() {
   }, []);
 
   const websiteStyle = {
-    "--beta-header-height": `${headerHeight}px`,
+    "--website-header-height": `${headerHeight}px`,
   } as CSSProperties;
 
   const platform = useMemo(() => {
