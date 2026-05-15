@@ -90,7 +90,9 @@ export default function ComponentList() {
             <Flex orientation="column" width="100%">
               <Flex
                 justify="center"
-                marginBottom="lg"
+                marginX="auto"
+                marginBottom="xl"
+                maxWidth="sm"
                 paddingX={{ xs: "md", sm: "lg", xl: "none" }}
                 width="100%"
               >
@@ -119,14 +121,18 @@ export default function ComponentList() {
               ) : (
                 displayedKits.map(({ category, components }: Kit, index: number) => (
                   <section
-                    className="category mb_xl width_100_percent"
+                    className="component-list-category mb_xl width_100_percent"
                     key={`${category}-${index}`}
                     id={category}
                   >
-                    <NavLink to={`/beta/kit_category/${category}`}>
-                      <CategoryTitle category={category} />
-                    </NavLink>
-                    <KitGrid>
+                    <div className="component-list-category-header">
+                      <div className="component-list-category-header-content component-list-category-content-well">
+                        <NavLink to={`/beta/kit_category/${category}`}>
+                          <CategoryTitle category={category} />
+                        </NavLink>
+                      </div>
+                    </div>
+                    <KitGrid layoutClassName="component-list-category-content-well">
                       {components.map(({ name, description, parent }, index) => (
                         <KitCard
                           description={description}
