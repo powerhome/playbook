@@ -69,7 +69,6 @@ export function Hero({
       <div className="hero-content-well">
         <Title
           size={{ xs: 3, sm: 3, md: 2, lg: 2, xl: 2 }}
-          paddingTop={compact ? "none" : { xs: "none", sm: "xl", md: "none" }}
           paddingBottom={{ xs: "none", default: "sm" }}
           text={title}
           marginBottom={{ xs: "none", md: "xs" }}
