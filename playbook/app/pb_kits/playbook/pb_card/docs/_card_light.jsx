@@ -6,7 +6,8 @@ const CardLight = (props) => {
     <div>
       <Card 
           display="grid"
-          // gridAutoFlow="column"
+     
+          gridAutoColumns="max-content"
           gridAutoRows="50px"
           {...props}
       >

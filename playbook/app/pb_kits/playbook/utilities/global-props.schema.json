@@ -675,6 +675,35 @@
       "type": "string",
       "description": "Minimum height."
     },
+    "gridAutoFlow": {
+      "type": "enum",
+      "values": [
+        "row",
+        "column",
+        "dense",
+        "row dense",
+        "column dense"
+      ],
+      "description": "Grid auto flow."
+    },
+    "gridAutoColumns": {
+      "type": "enum",
+      "values": [
+        "auto",
+        "max-content",
+        "min-content"
+      ],
+      "description": "Grid auto columns."
+    },
+    "gridAutoRows": {
+      "type": "enum",
+      "values": [
+        "auto",
+        "max-content",
+        "min-content"
+      ],
+      "description": "Grid auto rows."
+    },
     "hover": {
       "type": "object",
       "properties": {

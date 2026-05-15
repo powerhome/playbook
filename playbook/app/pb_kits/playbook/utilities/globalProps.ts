@@ -204,28 +204,20 @@ type MinHeight = {
   minHeight?: string
 }
 
-type ResponsiveProp<T> = {
-  default?: T,
-  xs?: T,
-  sm?: T,
-  md?: T,
-  lg?: T,
-  xl?: T,
-}
 
 type GridAutoFlowValue = "row" | "column" | "dense" | "row dense" | "column dense"
 type GridTrackSizeValue = "auto" | "max-content" | "min-content"
 
 type gridAutoFlow = {
-  gridAutoFlow?: GridAutoFlowValue | ResponsiveProp<GridAutoFlowValue>
+  gridAutoFlow?: GridAutoFlowValue 
 }
 
 type gridAutoColumns = {
-  gridAutoColumns?: GridTrackSizeValue | ResponsiveProp<GridTrackSizeValue>
+  gridAutoColumns?: GridTrackSizeValue 
 }
 
 type gridAutoRows = {
-  gridAutoRows?: GridTrackSizeValue | ResponsiveProp<GridTrackSizeValue> | string
+  gridAutoRows?: GridTrackSizeValue
 }
 
 // keep this as the last type definition

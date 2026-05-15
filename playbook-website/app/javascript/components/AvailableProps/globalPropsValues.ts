@@ -62,6 +62,21 @@ const globalPropsValues = [
     values: []
   },
   {
+    prop: "gridAutoColumns",
+    type: "union",
+    values: '"auto" | "max-content" | "min-content"'
+  },
+  {
+    prop: "gridAutoFlow",
+    type: "union",
+    values: '"row" | "column" | "dense" | "row dense" | "column dense"'
+  },
+  {
+    prop: "gridAutoRows",
+    type: "union",
+    values: '"auto" | "max-content" | "min-content"'
+  },
+  {
     prop: "groupHover",
     type: "boolean",
     values: []
