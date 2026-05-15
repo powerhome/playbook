@@ -1,3 +1,121 @@
+# 📲 What If Phones, But Too Much?
+##### May 01, 2026
+
+![release_image](https://github.com/user-attachments/assets/db119637-25e9-4157-9091-c5f7fdf034fc)
+
+We may have overcommitted to phones. Mobile pagination is live and the Phone Number Input got better! And the new Playbook website is getting closer to its final form, stay tuned for more!
+
+[16.7.0](https://github.com/powerhome/playbook/tree/16.7.0) full list of changes:
+
+**Kit Enhancements:**
+
+- Phone Number Kit: Showplaceholder Prop (defaults to False) [\#6113](https://github.com/powerhome/playbook/pull/6113) ([kangaree](https://github.com/kangaree))
+- Mobile Pagination Patterns for Playbook Components - Rails [\#6071](https://github.com/powerhome/playbook/pull/6071) ([elisashapiro](https://github.com/elisashapiro))
+
+
+**Fixed Bugs:**
+
+- Button Kit: Fix Font Awesome Icons [\#6125](https://github.com/powerhome/playbook/pull/6125) ([kangaree](https://github.com/kangaree))
+- Playbook Website: Pagination Data Model for All Kits and Category Pages [\#6119](https://github.com/powerhome/playbook/pull/6119) ([nidaqg](https://github.com/nidaqg))
+- Quickpick: Update Last Quickpick Logic Without Verification Issue [\#6108](https://github.com/powerhome/playbook/pull/6108) ([elisashapiro](https://github.com/elisashapiro), [umeshshimpi](https://github.com/umeshshimpi))
+- Button Kit: Match Icon-only Button Height With Icon-less Button Height [\#6106](https://github.com/powerhome/playbook/pull/6106) ([kangaree](https://github.com/kangaree))
+- Playbook Website: Beta- Remove Scss That Causes Scroll Hijack [\#6093](https://github.com/powerhome/playbook/pull/6093) ([kangaree](https://github.com/kangaree))
+
+**Improvements:**
+
+- Dropdown: Constrainheight Prop With Subcomponent Structure [\#6128](https://github.com/powerhome/playbook/pull/6128) ([nickamantia](https://github.com/nickamantia))
+- Global Props: Change Background Color for Border Radius Global Prop Examples [\#6120](https://github.com/powerhome/playbook/pull/6120) ([elisashapiro](https://github.com/elisashapiro))
+- Playbook Website: Design Feedback for Beta Website [\#6107](https://github.com/powerhome/playbook/pull/6107) ([nidaqg](https://github.com/nidaqg))
+- Select: Minor Clean Up Of Select Docs [\#6112](https://github.com/powerhome/playbook/pull/6112) ([elisashapiro](https://github.com/elisashapiro))
+- Playbook Website: AT on Rails Side + Playground Tab Only on React [\#6095](https://github.com/powerhome/playbook/pull/6095) ([nidaqg](https://github.com/nidaqg))
+- Playbook Website: Format Rails Code Examples on Beta [\#6094](https://github.com/powerhome/playbook/pull/6094) ([elisashapiro](https://github.com/elisashapiro))
+- Playbook Website: Rails Docs on Beta [\#6092](https://github.com/powerhome/playbook/pull/6092) ([nidaqg](https://github.com/nidaqg))
+- Playbook Website: Adding Search to Beta Website Icons Page [\#6090](https://github.com/powerhome/playbook/pull/6090) ([elisashapiro](https://github.com/elisashapiro))
+- Playbook Website: Show Homepage on /beta [\#6084](https://github.com/powerhome/playbook/pull/6084) ([kangaree](https://github.com/kangaree))
+- Playbook Website: Beta All Kits Search, Kit Category Hero, Kit Card Placeholder [\#6083](https://github.com/powerhome/playbook/pull/6083) ([elisashapiro](https://github.com/elisashapiro))
+- Playbook Website: Convert Icon Page to React [\#6082](https://github.com/powerhome/playbook/pull/6082) ([nickamantia](https://github.com/nickamantia))
+- Playbook Website: React-syntax-highlighter to Format Code on Beta Website [\#6081](https://github.com/powerhome/playbook/pull/6081) ([elisashapiro](https://github.com/elisashapiro))
+- Playbook Website: Global Props and Tokens Pages + Search on Beta [\#6079](https://github.com/powerhome/playbook/pull/6079) ([nidaqg](https://github.com/nidaqg))
+- Update Maplibre-gl Dependencies [\#6068](https://github.com/powerhome/playbook/pull/6068) ([elisashapiro](https://github.com/elisashapiro))
+- Playbook Website: Beta Playground [\#6029](https://github.com/powerhome/playbook/pull/6029) ([nidaqg](https://github.com/nidaqg))
+
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/v16.7.0-rc.1...16.7.0)
+
+# 🤖 Playbook, Decoded for Machines
+##### April 15, 2026
+
+![release_image](https://github.com/user-attachments/assets/db119637-25e9-4157-9091-c5f7fdf034fc)
+
+Playbook now ships JSON schemas for every kit and global prop! Prompt your UI in Copilot or Cursor and watch it actually get it right. Nitro rules hook AI into Playbook’s metadata so it builds like it’s been here all along.
+
+[16.6.0](https://github.com/powerhome/playbook/tree/16.6.0) full list of changes:
+
+**Improvements:**
+
+- Bump Ci-kubed to V10.0.0 [\#6008](https://github.com/powerhome/playbook/pull/6008) ([teamteatime](https://github.com/teamteatime))
+- Playbook Website: Custom Rendering for Kit Props and Global Props Tables [\#6021](https://github.com/powerhome/playbook/pull/6021) ([nidaqg](https://github.com/nidaqg))
+- Button Kit: Loading Variant Doc Update - Rails [\#6030](https://github.com/powerhome/playbook/pull/6030) ([nidaqg](https://github.com/nidaqg))
+- Make Playbook Machine-readable for Ai-driven UI Generation by Adding Metadata Per Kit + for Global Props [\#6009](https://github.com/powerhome/playbook/pull/6009) ([nidaqg](https://github.com/nidaqg))
+
+
+**Fixed Bugs:**
+
+- Datepicker Kit: Year Dropdown Goes Mia After Form Submission [\#6063](https://github.com/powerhome/playbook/pull/6063) ([nickamantia](https://github.com/nickamantia))
+- Rails Form Kits: Form Custom Validations Consistency + Select Validation\_message Broken [\#6037](https://github.com/powerhome/playbook/pull/6037) ([nidaqg](https://github.com/nidaqg))
+- Advanced Table: Adjust Header Alignment Prop for Larger Screens - Rails [\#6038](https://github.com/powerhome/playbook/pull/6038) ([elisashapiro](https://github.com/elisashapiro))
+- Date Picker Label Click Toggle Calendar Dropdown [\#6036](https://github.com/powerhome/playbook/pull/6036) ([elisashapiro](https://github.com/elisashapiro))
+
+
+**Kit Enhancements:**
+
+- Typeahead: Createable Prop for Rails [\#6044](https://github.com/powerhome/playbook/pull/6044) ([nidaqg](https://github.com/nidaqg))
+- Filter Kit: Format Filter Results For Single Filter [\#6010](https://github.com/powerhome/playbook/pull/6010) ([elisashapiro](https://github.com/elisashapiro))
+
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/v16.6.0-rc.3...16.6.0)
+
+# Leaner, Faster, Smoother Rails! 💥
+##### April 03, 2026
+
+![release_image](https://github.com/user-attachments/assets/db119637-25e9-4157-9091-c5f7fdf034fc)
+
+We trimmed the fat and optimized the core for the base of our Rails kits: fewer allocations, faster classnames, and noticeably snappier renders!
+
+[16.5.0](https://github.com/powerhome/playbook/tree/16.5.0) full list of changes:
+
+**Kit Enhancements:**
+
+- Selectable Card Kit: Input Variant Style Updates [\#6002](https://github.com/powerhome/playbook/pull/6002) ([elisashapiro](https://github.com/elisashapiro))
+- Advanced Table: Pinned Rows Overlap Multi-header Rows [\#6001](https://github.com/powerhome/playbook/pull/6001) ([elisashapiro](https://github.com/elisashapiro))
+- Playbook Rails: Optimize Kit Base Rendering [\#5974](https://github.com/powerhome/playbook/pull/5974) ([terryfinn](https://github.com/terryfinn))
+- Global Props: Grouphover for All Hover Global Props [\#5973](https://github.com/powerhome/playbook/pull/5973) ([elisashapiro](https://github.com/elisashapiro))
+- Table Kit: External Filter Prop - Rails [\#5943](https://github.com/powerhome/playbook/pull/5943) ([kangaree](https://github.com/kangaree))
+- Multilevelselect: Placeholder Prop [\#5969](https://github.com/powerhome/playbook/pull/5969) ([elisashapiro](https://github.com/elisashapiro))
+- Advanced Table: Border Radius Remains [\#5964](https://github.com/powerhome/playbook/pull/5964) ([elisashapiro](https://github.com/elisashapiro))
+- List Kit: Border Token Revert, Keeping Selectable List Accessible [\#5944](https://github.com/powerhome/playbook/pull/5944) ([elisashapiro](https://github.com/elisashapiro))
+- Advanced Table Kit: Pinned Rows - Rails Only [\#5929](https://github.com/powerhome/playbook/pull/5929) ([kangaree](https://github.com/kangaree))
+
+
+**Fixed Bugs:**
+
+- Select Kit: Tie Labels With Ids - Rails [\#6000](https://github.com/powerhome/playbook/pull/6000) ([kangaree](https://github.com/kangaree))
+- Circle Icon Button: Loading Icon Misplacement - Rails [\#5961](https://github.com/powerhome/playbook/pull/5961) ([elisashapiro](https://github.com/elisashapiro))
+
+
+**Improvements:**
+
+- Update Dependency Trix to V2.1.16 (security) [\#5994](https://github.com/powerhome/playbook/pull/5994) ([renovate[bot]](https://github.com/apps/renovate))
+- Playbook Website: Document Advanced Table - Grouped Headers, Custom Headers, Sort, and Pinned Rows [\#5980](https://github.com/powerhome/playbook/pull/5980) ([kangaree](https://github.com/kangaree))
+- Playbook Website: Upgrades Playbook Icons [\#5993](https://github.com/powerhome/playbook/pull/5993) ([elisashapiro](https://github.com/elisashapiro))
+- Typeahead Docs: Better Way to Handle Highlighting Within Typeahead [\#5970](https://github.com/powerhome/playbook/pull/5970) ([nidaqg](https://github.com/nidaqg))
+- Playbook Website: Docs on Display Global Prop and Full Width Buttons [\#5968](https://github.com/powerhome/playbook/pull/5968) ([kangaree](https://github.com/kangaree))
+- Update Nokogiri and Dependencies [\#5937](https://github.com/powerhome/playbook/pull/5937) ([elisashapiro](https://github.com/elisashapiro))
+- Global Props: Update Position Global Prop Page to Display Inset [\#5930](https://github.com/powerhome/playbook/pull/5930) ([nickamantia](https://github.com/nickamantia))
+
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/v16.5.0-rc.5...16.5.0)
+
 # 🧠 Smarter Architecture, Faster UI
 ##### March 17, 2026
 

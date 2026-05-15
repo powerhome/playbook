@@ -1,0 +1,82 @@
+{
+  "$schema": "https://playbook.powerapp.cloud/schemas/kit-schema.json",
+  "name": "DateRangeInline",
+  "description": "DateRangeInline component",
+  "platforms": [
+    "react",
+    "rails"
+  ],
+  "props": {
+    "align": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "left",
+        "center",
+        "right"
+      ],
+      "default": "left"
+    },
+    "dark": {
+      "type": "boolean",
+      "platforms": [
+        "react"
+      ]
+    },
+    "endDate": {
+      "type": "Date",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "icon": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "size": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "sm",
+        "xs"
+      ],
+      "default": "sm"
+    },
+    "showCurrentYear": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "startDate": {
+      "type": "Date",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    }
+  },
+  "globalProps": true,
+  "usage": {
+    "react": {
+      "import": "import { DateRangeInline } from 'playbook-ui'",
+      "example": "<DateRangeInline align=\"left\" size=\"sm\"></DateRangeInline>"
+    },
+    "rails": {
+      "import": null,
+      "example": "<%= pb_rails(\"date_range_inline\", props: { align: \"left\", size: \"sm\" }) %>"
+    }
+  }
+}

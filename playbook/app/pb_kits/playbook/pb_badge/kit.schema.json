@@ -1,0 +1,79 @@
+{
+  "$schema": "https://playbook.powerapp.cloud/schemas/kit-schema.json",
+  "name": "Badge",
+  "description": "Badge component",
+  "platforms": [
+    "react",
+    "rails"
+  ],
+  "props": {
+    "closeProps": {
+      "type": "GenericObject",
+      "platforms": [
+        "react"
+      ]
+    },
+    "removeIcon": {
+      "type": "boolean",
+      "platforms": [
+        "react"
+      ]
+    },
+    "removeOnClick": {
+      "type": "ReactNode",
+      "platforms": [
+        "react"
+      ]
+    },
+    "rounded": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "tabIndex": {
+      "type": "number",
+      "platforms": [
+        "react"
+      ]
+    },
+    "text": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "variant": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "error",
+        "info",
+        "neutral",
+        "notification",
+        "notificationError",
+        "primary",
+        "success",
+        "warning"
+      ],
+      "default": "neutral"
+    }
+  },
+  "globalProps": true,
+  "usage": {
+    "react": {
+      "import": "import { Badge } from 'playbook-ui'",
+      "example": "<Badge variant=\"error\"></Badge>"
+    },
+    "rails": {
+      "import": null,
+      "example": "<%= pb_rails(\"badge\", props: { variant: \"error\" }) %>"
+    }
+  }
+}

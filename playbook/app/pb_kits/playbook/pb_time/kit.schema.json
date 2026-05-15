@@ -1,0 +1,100 @@
+{
+  "$schema": "https://playbook.powerapp.cloud/schemas/kit-schema.json",
+  "name": "Time",
+  "description": "Time component",
+  "platforms": [
+    "react",
+    "rails"
+  ],
+  "props": {
+    "align": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "left",
+        "center",
+        "right"
+      ],
+      "default": "left"
+    },
+    "date": {
+      "type": "Date",
+      "platforms": [
+        "react"
+      ]
+    },
+    "dark": {
+      "type": "boolean",
+      "platforms": [
+        "react"
+      ]
+    },
+    "showIcon": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "size": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "md",
+        "sm"
+      ],
+      "default": "sm"
+    },
+    "showTimezone": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": true
+    },
+    "timeZone": {
+      "type": "string",
+      "platforms": [
+        "react"
+      ]
+    },
+    "unstyled": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "time": {
+      "platforms": [
+        "rails"
+      ]
+    },
+    "timezone": {
+      "platforms": [
+        "rails"
+      ],
+      "default": "America/New_York"
+    }
+  },
+  "globalProps": true,
+  "usage": {
+    "react": {
+      "import": "import { Time } from 'playbook-ui'",
+      "example": "<Time align=\"left\" size=\"md\"></Time>"
+    },
+    "rails": {
+      "import": null,
+      "example": "<%= pb_rails(\"time\", props: { align: \"left\", size: \"md\" }) %>"
+    }
+  }
+}

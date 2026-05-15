@@ -1,0 +1,29 @@
+{
+  "defaults": {
+    "change": "increase",
+    "value": "15"
+  },
+  "groups": [
+    { "name": "Content", "props": ["value", "icon"] },
+    { "name": "Appearance", "props": ["change"] }
+  ],
+  "presets": [
+    { "name": "Increase", "props": { "change": "increase", "value": "15" } },
+    { "name": "Decrease", "props": { "change": "decrease", "value": "8" } },
+    { "name": "Neutral", "props": { "change": "neutral", "value": "0" } },
+    { "name": "Custom icon", "props": { "change": "increase", "value": "12", "icon": "chart-line" } }
+  ],
+  "conditionals": {},
+  "hints": {
+    "value_required": {
+      "when": { "value": null },
+      "message": "Nothing renders until value is set—the component appends \"%\" after the value (do not include \"%\" in the value).",
+      "type": "info"
+    },
+    "custom_icon": {
+      "when": { "icon": true },
+      "message": "Increase and decrease use arrow icons by default; set icon to override the arrow.",
+      "type": "info"
+    }
+  }
+}

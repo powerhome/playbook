@@ -1,0 +1,3308 @@
+{
+  "template": "<AdvancedTable{{props}} />",
+  "propTargets": {
+    "enableSorting": "AdvancedTable.Header.props",
+    "sortIcon": "AdvancedTable.Header.props",
+    "collapsibleTrail": "AdvancedTable.Body.props",
+    "subRowHeaders": "AdvancedTable.Body.props"
+  },
+  "defaults": {
+    "columnGroupBorderColor": "none",
+    "enableToggleExpansion": "header",
+    "inlineRowLoading": false,
+    "loading": false,
+    "responsive": "scroll",
+    "scrollBarNone": false,
+    "selectableRows": false,
+    "showActionsBar": true,
+    "persistToggleExpansionButton": false,
+    "collapsibleTrail": true,
+    "columnVisibilityControl": {
+      "default": true
+    },
+    "tableProps": {
+      "container": false
+    },
+    "rowStyling": [
+      {
+        "rowId": "1",
+        "backgroundColor": "#0056CF",
+        "fontColor": "#FFFFFF",
+        "expandButtonColor": "#FFFFFF"
+      }
+    ],
+    "expandByDepth": [
+      {
+        "depth": 0,
+        "label": "Year"
+      },
+      {
+        "depth": 1,
+        "label": "Quarter"
+      },
+      {
+        "depth": 2,
+        "label": "Month"
+      }
+    ]
+  },
+  "groups": [
+    {
+      "name": "Core Data",
+      "props": [
+        "columnDefinitions",
+        "tableData"
+      ]
+    },
+    {
+      "name": "Sorting",
+      "props": [
+        "enableSorting",
+        "enableSortingRemoval",
+        "sortParentOnly",
+        "customSort",
+        "onCustomSortClick",
+        "sortIcon"
+      ]
+    },
+    {
+      "name": "Loading",
+      "props": [
+        "loading",
+        "inlineRowLoading",
+        "initialLoadingRowsCount"
+      ]
+    },
+    {
+      "name": "Expansion Controls",
+      "props": [
+        "enableToggleExpansion",
+        "expandByDepth",
+        "onExpandByDepthClick",
+        "cascadeCollapse",
+        "pinnedRows",
+        "onRowToggleClick",
+        "onToggleExpansionClick",
+        "persistToggleExpansionButton",
+        "toggleExpansionIcon"
+      ]
+    },
+    {
+      "name": "Column Configuration",
+      "props": [
+        "columnVisibilityControl",
+        "columnGroupBorderColor"
+      ]
+    },
+    {
+      "name": "Table engine",
+      "props": [
+        "tableOptions",
+        "tableProps"
+      ]
+    },
+    {
+      "name": "Layout",
+      "props": [
+        "responsive",
+        "scrollBarNone",
+        "stickyLeftColumn",
+        "virtualizedRows"
+      ]
+    },
+    {
+      "name": "Styling",
+      "props": [
+        "rowStyling"
+      ]
+    },
+    {
+      "name": "Selection & Actions",
+      "props": [
+        "selectableRows",
+        "showActionsBar",
+        "actions",
+        "onRowSelectionChange"
+      ]
+    },
+    {
+      "name": "AdvancedTable.Body",
+      "props": [
+        "collapsibleTrail",
+        "subRowHeaders"
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default",
+      "dataPreset": "default",
+      "props": {}
+    },
+    {
+      "name": "With Sorting",
+      "dataPreset": "default",
+      "props": {
+        "enableSorting": true
+      }
+    },
+    {
+      "name": "Selectable Rows",
+      "props": {
+        "selectableRows": true,
+        "showActionsBar": true
+      }
+    },
+    {
+      "name": "Subrow Headers",
+      "structureMode": "explicit",
+      "dataPreset": "default",
+      "props": {
+        "subRowHeaders": [
+          "Quarter",
+          "Month",
+          "Day"
+        ]
+      }
+    },
+    {
+      "name": "Loading State",
+      "dataPreset": "default",
+      "props": {
+        "loading": true,
+        "initialLoadingRowsCount": 5
+      }
+    },
+    {
+      "name": "Sorting by Column",
+      "structureMode": "explicit",
+      "dataPreset": "column_sort",
+      "props": {
+        "enableSorting": true
+      }
+    },
+    {
+      "name": "Column Styling",
+      "structureMode": "explicit",
+      "dataPreset": "column_styling",
+      "props": {}
+    }
+  ],
+  "conditionals": {
+    "initialLoadingRowsCount": {
+      "requires": {
+        "loading": true
+      }
+    },
+    "onRowSelectionChange": {
+      "requires": {
+        "selectableRows": true
+      }
+    },
+    "showActionsBar": {
+      "requires": {
+        "selectableRows": true
+      }
+    },
+    "actions": {
+      "requires": {
+        "selectableRows": true,
+        "showActionsBar": true
+      }
+    },
+    "enableSorting": {
+      "structureMode": "explicit"
+    },
+    "sortIcon": {
+      "structureMode": "explicit",
+      "requires": {
+        "enableSorting": true
+      }
+    },
+    "collapsibleTrail": {
+      "structureMode": "explicit"
+    },
+    "subRowHeaders": {
+      "structureMode": "explicit"
+    },
+    "onExpandByDepthClick": {
+      "requires": "expandByDepth"
+    },
+    "onCustomSortClick": {
+      "requires": {
+        "customSort": true
+      }
+    },
+    "fullScreenControl": {
+      "requires": {
+        "allowFullScreen": true
+      }
+    },
+    "enableSortingRemoval": {
+      "requires": {
+        "enableSorting": true
+      }
+    },
+    "sortControl": {
+      "requires": {
+        "enableSorting": true
+      }
+    },
+    "customSort": {
+      "requires": {
+        "enableSorting": true
+      }
+    },
+    "sortParentOnly": {
+      "requires": {
+        "enableSorting": true
+      }
+    }
+  },
+  "hints": {
+    "sorting_info": {
+      "when": {
+        "enableSortingRemoval": true
+      },
+      "message": "Click column headers to sort. Click again to remove sorting.",
+      "type": "info"
+    },
+    "header_sorting_info": {
+      "when": {
+        "enableSorting": true
+      },
+      "message": "Header sorting UI is only applied in \"Subcomponent Structure\" mode (explicit Header and Body). For sorting by column, pass columnDefinitions with enableSort: true to the columnDefinitions array. Click 'sorting by column' to see an example.",
+      "type": "info"
+    },
+    "selectable_info": {
+      "when": {
+        "selectableRows": true
+      },
+      "message": "Use onRowSelectionChange to handle selection changes. showActionsBar controls the action bar visibility.",
+      "type": "info"
+    },
+    "loading_info": {
+      "when": {
+        "loading": true
+      },
+      "message": "Use state to control the loading state.",
+      "type": "info"
+    },
+    "column_sort_info": {
+      "when": {
+        "columnDefinitions": {
+          "enableSort": true
+        }
+      },
+      "message": "For sorting by column, pass columnDefinitions with enableSort: true to the columnDefinitions array. Click 'sorting by column' to see an example.",
+      "type": "info"
+    },
+    "custom_sort_info": {
+      "when": {
+        "customSort": true
+      },
+      "message": "Use customSort to implement custom sorting logic. The customSort prop must be used in conjunction with the subRowHeaders prop. The customSort DOES NOT handle the sort logic, this must be handled on the frontend using the callback provided.",
+      "type": "info"
+    },
+    "cascade_collapse_info": {
+      "when": {
+        "cascadeCollapse": true
+      },
+      "message": "When cascadeCollapse is true, collapsing any parent row itself or by using the toggle expansion buttons in any header or subheader row also collapses all descendants and clears their expansion state. Re-expanding then shows only direct children until the user expands deeper levels again.",
+      "type": "info"
+    },
+    "column_styling_info": {
+      "presetName": "Column Styling",
+      "message": "This sample uses columnStyling on column definitions. You can style headers and cells for the whole table or per column.",
+      "type": "info"
+    }
+  },
+  "structureModes": {
+    "default": "implicit",
+    "modes": {
+      "implicit": {
+        "label": "Default",
+        "template": "<AdvancedTable\n  columnDefinitions={columnDefinitions}\n  tableData={tableData}\n{{props}}\n/>",
+        "propTargets": {
+          "collapsibleTrail": "props",
+          "subRowHeaders": "props"
+        }
+      },
+      "explicit": {
+        "label": "Subcomponent Structure",
+        "template": "<AdvancedTable\n  columnDefinitions={columnDefinitions}\n  tableData={tableData}{{props}}\n>\n  <AdvancedTable.Header{{AdvancedTable.Header.props}} />\n  <AdvancedTable.Body\n{{AdvancedTable.Body.props}}\n  />\n</AdvancedTable>"
+      }
+    }
+  },
+  "dataPresets": {
+    "presets": {
+      "default": {
+        "label": "Default",
+        "columnDefinitions": [
+          {
+            "accessor": "year",
+            "label": "Year",
+            "cellAccessors": [
+              "quarter",
+              "month",
+              "day"
+            ]
+          },
+          {
+            "accessor": "newEnrollments",
+            "label": "New Enrollments"
+          },
+          {
+            "accessor": "scheduledMeetings",
+            "label": "Scheduled Meetings"
+          },
+          {
+            "accessor": "attendanceRate",
+            "label": "Attendance Rate"
+          },
+          {
+            "accessor": "completedClasses",
+            "label": "Completed Classes"
+          },
+          {
+            "accessor": "classCompletionRate",
+            "label": "Class Completion Rate"
+          },
+          {
+            "accessor": "graduatedStudents",
+            "label": "Graduated Students"
+          }
+        ],
+        "tableData": [
+          {
+            "year": "2021",
+            "quarter": null,
+            "month": null,
+            "day": null,
+            "newEnrollments": "20",
+            "scheduledMeetings": "10",
+            "attendanceRate": "51%",
+            "completedClasses": "3",
+            "classCompletionRate": "33%",
+            "graduatedStudents": "19",
+            "children": [
+              {
+                "year": "2021",
+                "quarter": "Q1",
+                "month": null,
+                "day": null,
+                "newEnrollments": "2",
+                "scheduledMeetings": "35",
+                "attendanceRate": "32%",
+                "completedClasses": "15",
+                "classCompletionRate": "52%",
+                "graduatedStudents": "36",
+                "children": [
+                  {
+                    "year": "2021",
+                    "quarter": "Q1",
+                    "month": "January",
+                    "day": null,
+                    "newEnrollments": "16",
+                    "scheduledMeetings": "20",
+                    "attendanceRate": "11%",
+                    "completedClasses": "13",
+                    "classCompletionRate": "47%",
+                    "graduatedStudents": "28",
+                    "children": [
+                      {
+                        "year": "2021",
+                        "quarter": "Q1",
+                        "month": "January",
+                        "day": "10",
+                        "newEnrollments": "34",
+                        "scheduledMeetings": "28",
+                        "attendanceRate": "97%",
+                        "completedClasses": "20",
+                        "classCompletionRate": "15%",
+                        "graduatedStudents": "17"
+                      },
+                      {
+                        "year": "2021",
+                        "quarter": "Q1",
+                        "month": "January",
+                        "day": "20",
+                        "newEnrollments": "43",
+                        "scheduledMeetings": "23",
+                        "attendanceRate": "66%",
+                        "completedClasses": "26",
+                        "classCompletionRate": "47%",
+                        "graduatedStudents": "9"
+                      }
+                    ]
+                  },
+                  {
+                    "year": "2021",
+                    "quarter": "Q1",
+                    "month": "February",
+                    "day": null,
+                    "newEnrollments": "20",
+                    "scheduledMeetings": "41",
+                    "attendanceRate": "95%",
+                    "completedClasses": "26",
+                    "classCompletionRate": "83%",
+                    "graduatedStudents": "43",
+                    "children": [
+                      {
+                        "year": "2021",
+                        "quarter": "Q1",
+                        "month": "February",
+                        "day": "15",
+                        "newEnrollments": "19",
+                        "scheduledMeetings": "35",
+                        "attendanceRate": "69%",
+                        "completedClasses": "8",
+                        "classCompletionRate": "75%",
+                        "graduatedStudents": "23"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "year": "2022",
+            "quarter": null,
+            "month": null,
+            "day": null,
+            "newEnrollments": "25",
+            "scheduledMeetings": "17",
+            "attendanceRate": "75%",
+            "completedClasses": "5",
+            "classCompletionRate": "45%",
+            "graduatedStudents": "32",
+            "children": [
+              {
+                "year": "2022",
+                "quarter": "Q1",
+                "month": null,
+                "day": null,
+                "newEnrollments": "2",
+                "scheduledMeetings": "35",
+                "attendanceRate": "32%",
+                "completedClasses": "15",
+                "classCompletionRate": "52%",
+                "graduatedStudents": "36",
+                "children": [
+                  {
+                    "year": "2022",
+                    "quarter": "Q1",
+                    "month": "January",
+                    "day": null,
+                    "newEnrollments": "16",
+                    "scheduledMeetings": "20",
+                    "attendanceRate": "11%",
+                    "completedClasses": "13",
+                    "classCompletionRate": "47%",
+                    "graduatedStudents": "28",
+                    "children": [
+                      {
+                        "year": "2022",
+                        "quarter": "Q1",
+                        "month": "January",
+                        "day": "15",
+                        "newEnrollments": "34",
+                        "scheduledMeetings": "28",
+                        "attendanceRate": "97%",
+                        "completedClasses": "20",
+                        "classCompletionRate": "15%",
+                        "graduatedStudents": "17"
+                      },
+                      {
+                        "year": "2022",
+                        "quarter": "Q1",
+                        "month": "January",
+                        "day": "25",
+                        "newEnrollments": "43",
+                        "scheduledMeetings": "23",
+                        "attendanceRate": "66%",
+                        "completedClasses": "26",
+                        "classCompletionRate": "47%",
+                        "graduatedStudents": "9"
+                      }
+                    ]
+                  },
+                  {
+                    "year": "2022",
+                    "quarter": "Q1",
+                    "month": "May",
+                    "day": null,
+                    "newEnrollments": "20",
+                    "scheduledMeetings": "41",
+                    "attendanceRate": "95%",
+                    "completedClasses": "26",
+                    "classCompletionRate": "83%",
+                    "graduatedStudents": "43",
+                    "children": [
+                      {
+                        "year": "2022",
+                        "quarter": "Q1",
+                        "month": "May",
+                        "day": "2",
+                        "newEnrollments": "19",
+                        "scheduledMeetings": "35",
+                        "attendanceRate": "69%",
+                        "completedClasses": "8",
+                        "classCompletionRate": "75%",
+                        "graduatedStudents": "23"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "year": "2023",
+            "quarter": null,
+            "month": null,
+            "day": null,
+            "newEnrollments": "10",
+            "scheduledMeetings": "15",
+            "attendanceRate": "65%",
+            "completedClasses": "4",
+            "classCompletionRate": "49%",
+            "graduatedStudents": "29",
+            "children": [
+              {
+                "year": "2023",
+                "quarter": "Q1",
+                "month": null,
+                "day": null,
+                "newEnrollments": "2",
+                "scheduledMeetings": "35",
+                "attendanceRate": "32%",
+                "completedClasses": "15",
+                "classCompletionRate": "52%",
+                "graduatedStudents": "36",
+                "children": [
+                  {
+                    "year": "2023",
+                    "quarter": "Q1",
+                    "month": "March",
+                    "day": null,
+                    "newEnrollments": "16",
+                    "scheduledMeetings": "20",
+                    "attendanceRate": "11%",
+                    "completedClasses": "13",
+                    "classCompletionRate": "47%",
+                    "graduatedStudents": "28",
+                    "children": [
+                      {
+                        "year": "2023",
+                        "quarter": "Q1",
+                        "month": "March",
+                        "day": "10",
+                        "newEnrollments": "34",
+                        "scheduledMeetings": "28",
+                        "attendanceRate": "97%",
+                        "completedClasses": "20",
+                        "classCompletionRate": "15%",
+                        "graduatedStudents": "17"
+                      },
+                      {
+                        "year": "2023",
+                        "quarter": "Q1",
+                        "month": "March",
+                        "day": "11",
+                        "newEnrollments": "43",
+                        "scheduledMeetings": "23",
+                        "attendanceRate": "66%",
+                        "completedClasses": "26",
+                        "classCompletionRate": "47%",
+                        "graduatedStudents": "9"
+                      }
+                    ]
+                  },
+                  {
+                    "year": "2023",
+                    "quarter": "Q1",
+                    "month": "April",
+                    "day": null,
+                    "newEnrollments": "20",
+                    "scheduledMeetings": "41",
+                    "attendanceRate": "95%",
+                    "completedClasses": "26",
+                    "classCompletionRate": "83%",
+                    "graduatedStudents": "43",
+                    "children": [
+                      {
+                        "year": "2023",
+                        "quarter": "Q1",
+                        "month": "April",
+                        "day": "15",
+                        "newEnrollments": "19",
+                        "scheduledMeetings": "35",
+                        "attendanceRate": "69%",
+                        "completedClasses": "8",
+                        "classCompletionRate": "75%",
+                        "graduatedStudents": "23"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "flat_no_subrows": {
+        "label": "Flat rows (no sub-rows)",
+        "columnDefinitions": [
+          {
+            "accessor": "year",
+            "label": "Year",
+            "cellAccessors": [
+              "quarter",
+              "month",
+              "day"
+            ]
+          },
+          {
+            "accessor": "newEnrollments",
+            "label": "New Enrollments"
+          },
+          {
+            "accessor": "scheduledMeetings",
+            "label": "Scheduled Meetings"
+          },
+          {
+            "accessor": "attendanceRate",
+            "label": "Attendance Rate"
+          },
+          {
+            "accessor": "completedClasses",
+            "label": "Completed Classes"
+          },
+          {
+            "accessor": "classCompletionRate",
+            "label": "Class Completion Rate"
+          },
+          {
+            "accessor": "graduatedStudents",
+            "label": "Graduated Students"
+          }
+        ],
+        "tableData": [
+          {
+            "year": "2021",
+            "id": "1",
+            "newEnrollments": "20",
+            "scheduledMeetings": "10",
+            "attendanceRate": "51%",
+            "completedClasses": "3",
+            "classCompletionRate": "33%",
+            "graduatedStudents": "19"
+          },
+          {
+            "year": "2022",
+            "id": "8",
+            "newEnrollments": "25",
+            "scheduledMeetings": "17",
+            "attendanceRate": "75%",
+            "completedClasses": "5",
+            "classCompletionRate": "45%",
+            "graduatedStudents": "32"
+          },
+          {
+            "year": "2023",
+            "id": "15",
+            "newEnrollments": "10",
+            "scheduledMeetings": "15",
+            "attendanceRate": "65%",
+            "completedClasses": "4",
+            "classCompletionRate": "49%",
+            "graduatedStudents": "29"
+          },
+          {
+            "year": "2024",
+            "id": "14",
+            "newEnrollments": "15",
+            "scheduledMeetings": "34",
+            "attendanceRate": "32%",
+            "completedClasses": "6",
+            "classCompletionRate": "67%",
+            "graduatedStudents": "65"
+          }
+        ]
+      },
+      "with_ids": {
+        "label": "Data with row IDs",
+        "columnDefinitions": [
+          {
+            "accessor": "year",
+            "label": "Year",
+            "cellAccessors": [
+              "quarter",
+              "month",
+              "day"
+            ]
+          },
+          {
+            "accessor": "newEnrollments",
+            "label": "New Enrollments"
+          },
+          {
+            "accessor": "scheduledMeetings",
+            "label": "Scheduled Meetings"
+          },
+          {
+            "accessor": "attendanceRate",
+            "label": "Attendance Rate"
+          },
+          {
+            "accessor": "completedClasses",
+            "label": "Completed Classes"
+          },
+          {
+            "accessor": "classCompletionRate",
+            "label": "Class Completion Rate"
+          },
+          {
+            "accessor": "graduatedStudents",
+            "label": "Graduated Students"
+          }
+        ],
+        "tableData": [
+          {
+            "year": "2021",
+            "id": "1",
+            "quarter": null,
+            "month": null,
+            "day": null,
+            "newEnrollments": "20",
+            "scheduledMeetings": "10",
+            "attendanceRate": "51%",
+            "completedClasses": "3",
+            "classCompletionRate": "33%",
+            "graduatedStudents": "19",
+            "children": [
+              {
+                "year": "2021",
+                "id": "2",
+                "quarter": "Q1",
+                "month": null,
+                "day": null,
+                "newEnrollments": "2",
+                "scheduledMeetings": "35",
+                "attendanceRate": "32%",
+                "completedClasses": "15",
+                "classCompletionRate": "52%",
+                "graduatedStudents": "36",
+                "children": [
+                  {
+                    "year": "2021",
+                    "id": "3",
+                    "quarter": "Q1",
+                    "month": "January",
+                    "day": null,
+                    "newEnrollments": "16",
+                    "scheduledMeetings": "20",
+                    "attendanceRate": "11%",
+                    "completedClasses": "13",
+                    "classCompletionRate": "47%",
+                    "graduatedStudents": "28",
+                    "children": [
+                      {
+                        "year": "2021",
+                        "id": "4",
+                        "quarter": "Q1",
+                        "month": "January",
+                        "day": "10",
+                        "newEnrollments": "34",
+                        "scheduledMeetings": "28",
+                        "attendanceRate": "97%",
+                        "completedClasses": "20",
+                        "classCompletionRate": "15%",
+                        "graduatedStudents": "17"
+                      },
+                      {
+                        "year": "2021",
+                        "id": "5",
+                        "quarter": "Q1",
+                        "month": "January",
+                        "day": "20",
+                        "newEnrollments": "43",
+                        "scheduledMeetings": "23",
+                        "attendanceRate": "66%",
+                        "completedClasses": "26",
+                        "classCompletionRate": "47%",
+                        "graduatedStudents": "9"
+                      }
+                    ]
+                  },
+                  {
+                    "year": "2021",
+                    "id": "6",
+                    "quarter": "Q1",
+                    "month": "February",
+                    "day": null,
+                    "newEnrollments": "20",
+                    "scheduledMeetings": "41",
+                    "attendanceRate": "95%",
+                    "completedClasses": "26",
+                    "classCompletionRate": "83%",
+                    "graduatedStudents": "43",
+                    "children": [
+                      {
+                        "year": "2021",
+                        "id": "7",
+                        "quarter": "Q1",
+                        "month": "February",
+                        "day": "15",
+                        "newEnrollments": "19",
+                        "scheduledMeetings": "35",
+                        "attendanceRate": "69%",
+                        "completedClasses": "8",
+                        "classCompletionRate": "75%",
+                        "graduatedStudents": "23"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "year": "2022",
+            "id": "8",
+            "quarter": null,
+            "month": null,
+            "day": null,
+            "newEnrollments": "25",
+            "scheduledMeetings": "17",
+            "attendanceRate": "75%",
+            "completedClasses": "5",
+            "classCompletionRate": "45%",
+            "graduatedStudents": "32",
+            "children": [
+              {
+                "year": "2022",
+                "id": "9",
+                "quarter": "Q1",
+                "month": null,
+                "day": null,
+                "newEnrollments": "2",
+                "scheduledMeetings": "35",
+                "attendanceRate": "32%",
+                "completedClasses": "15",
+                "classCompletionRate": "52%",
+                "graduatedStudents": "36",
+                "children": [
+                  {
+                    "year": "2022",
+                    "id": "10",
+                    "quarter": "Q1",
+                    "month": "January",
+                    "day": null,
+                    "newEnrollments": "16",
+                    "scheduledMeetings": "20",
+                    "attendanceRate": "11%",
+                    "completedClasses": "13",
+                    "classCompletionRate": "47%",
+                    "graduatedStudents": "28",
+                    "children": [
+                      {
+                        "year": "2022",
+                        "id": "11",
+                        "quarter": "Q1",
+                        "month": "January",
+                        "day": "15",
+                        "newEnrollments": "34",
+                        "scheduledMeetings": "28",
+                        "attendanceRate": "97%",
+                        "completedClasses": "20",
+                        "classCompletionRate": "15%",
+                        "graduatedStudents": "17"
+                      },
+                      {
+                        "year": "2022",
+                        "id": "12",
+                        "quarter": "Q1",
+                        "month": "January",
+                        "day": "25",
+                        "newEnrollments": "43",
+                        "scheduledMeetings": "23",
+                        "attendanceRate": "66%",
+                        "completedClasses": "26",
+                        "classCompletionRate": "47%",
+                        "graduatedStudents": "9"
+                      }
+                    ]
+                  },
+                  {
+                    "year": "2022",
+                    "id": "13",
+                    "quarter": "Q1",
+                    "month": "May",
+                    "day": null,
+                    "newEnrollments": "20",
+                    "scheduledMeetings": "41",
+                    "attendanceRate": "95%",
+                    "completedClasses": "26",
+                    "classCompletionRate": "83%",
+                    "graduatedStudents": "43",
+                    "children": [
+                      {
+                        "year": "2022",
+                        "id": "14",
+                        "quarter": "Q1",
+                        "month": "May",
+                        "day": "2",
+                        "newEnrollments": "19",
+                        "scheduledMeetings": "35",
+                        "attendanceRate": "69%",
+                        "completedClasses": "8",
+                        "classCompletionRate": "75%",
+                        "graduatedStudents": "23"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "year": "2023",
+            "id": "15",
+            "quarter": null,
+            "month": null,
+            "day": null,
+            "newEnrollments": "10",
+            "scheduledMeetings": "15",
+            "attendanceRate": "65%",
+            "completedClasses": "4",
+            "classCompletionRate": "49%",
+            "graduatedStudents": "29",
+            "children": [
+              {
+                "year": "2023",
+                "id": "16",
+                "quarter": "Q1",
+                "month": null,
+                "day": null,
+                "newEnrollments": "2",
+                "scheduledMeetings": "35",
+                "attendanceRate": "32%",
+                "completedClasses": "15",
+                "classCompletionRate": "52%",
+                "graduatedStudents": "36",
+                "children": [
+                  {
+                    "year": "2023",
+                    "id": "17",
+                    "quarter": "Q1",
+                    "month": "March",
+                    "day": null,
+                    "newEnrollments": "16",
+                    "scheduledMeetings": "20",
+                    "attendanceRate": "11%",
+                    "completedClasses": "13",
+                    "classCompletionRate": "47%",
+                    "graduatedStudents": "28",
+                    "children": [
+                      {
+                        "year": "2023",
+                        "id": "18",
+                        "quarter": "Q1",
+                        "month": "March",
+                        "day": "10",
+                        "newEnrollments": "34",
+                        "scheduledMeetings": "28",
+                        "attendanceRate": "97%",
+                        "completedClasses": "20",
+                        "classCompletionRate": "15%",
+                        "graduatedStudents": "17"
+                      },
+                      {
+                        "year": "2023",
+                        "id": "19",
+                        "quarter": "Q1",
+                        "month": "March",
+                        "day": "11",
+                        "newEnrollments": "43",
+                        "scheduledMeetings": "23",
+                        "attendanceRate": "66%",
+                        "completedClasses": "26",
+                        "classCompletionRate": "47%",
+                        "graduatedStudents": "9"
+                      }
+                    ]
+                  },
+                  {
+                    "year": "2023",
+                    "id": "20",
+                    "quarter": "Q1",
+                    "month": "April",
+                    "day": null,
+                    "newEnrollments": "20",
+                    "scheduledMeetings": "41",
+                    "attendanceRate": "95%",
+                    "completedClasses": "26",
+                    "classCompletionRate": "83%",
+                    "graduatedStudents": "43",
+                    "children": [
+                      {
+                        "year": "2023",
+                        "id": "21",
+                        "quarter": "Q1",
+                        "month": "April",
+                        "day": "15",
+                        "newEnrollments": "19",
+                        "scheduledMeetings": "35",
+                        "attendanceRate": "69%",
+                        "completedClasses": "8",
+                        "classCompletionRate": "75%",
+                        "graduatedStudents": "23"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "inline_loading": {
+        "label": "Inline row loading",
+        "columnDefinitions": [
+          {
+            "accessor": "year",
+            "label": "Year",
+            "cellAccessors": [
+              "quarter",
+              "month",
+              "day"
+            ]
+          },
+          {
+            "accessor": "newEnrollments",
+            "label": "New Enrollments"
+          },
+          {
+            "accessor": "scheduledMeetings",
+            "label": "Scheduled Meetings"
+          },
+          {
+            "accessor": "attendanceRate",
+            "label": "Attendance Rate"
+          },
+          {
+            "accessor": "completedClasses",
+            "label": "Completed Classes"
+          },
+          {
+            "accessor": "classCompletionRate",
+            "label": "Class Completion Rate"
+          },
+          {
+            "accessor": "graduatedStudents",
+            "label": "Graduated Students"
+          }
+        ],
+        "tableData": [
+          {
+            "year": "2021",
+            "quarter": null,
+            "month": null,
+            "day": null,
+            "newEnrollments": "20",
+            "scheduledMeetings": "10",
+            "attendanceRate": "51%",
+            "completedClasses": "3",
+            "classCompletionRate": "33%",
+            "graduatedStudents": "19",
+            "children": []
+          },
+          {
+            "year": "2022",
+            "quarter": null,
+            "month": null,
+            "day": null,
+            "newEnrollments": "25",
+            "scheduledMeetings": "17",
+            "attendanceRate": "75%",
+            "completedClasses": "5",
+            "classCompletionRate": "45%",
+            "graduatedStudents": "32",
+            "children": [
+              {
+                "year": "2022",
+                "quarter": "Q1",
+                "month": null,
+                "day": null,
+                "newEnrollments": "2",
+                "scheduledMeetings": "35",
+                "attendanceRate": "32%",
+                "completedClasses": "15",
+                "classCompletionRate": "52%",
+                "graduatedStudents": "36",
+                "children": [
+                  {
+                    "year": "2022",
+                    "quarter": "Q1",
+                    "month": "January",
+                    "day": null,
+                    "newEnrollments": "16",
+                    "scheduledMeetings": "20",
+                    "attendanceRate": "11%",
+                    "completedClasses": "13",
+                    "classCompletionRate": "47%",
+                    "graduatedStudents": "28",
+                    "children": [
+                      {
+                        "year": "2022",
+                        "quarter": "Q1",
+                        "month": "January",
+                        "day": "15",
+                        "newEnrollments": "34",
+                        "scheduledMeetings": "28",
+                        "attendanceRate": "97%",
+                        "completedClasses": "20",
+                        "classCompletionRate": "15%",
+                        "graduatedStudents": "17"
+                      },
+                      {
+                        "year": "2022",
+                        "quarter": "Q1",
+                        "month": "January",
+                        "day": "25",
+                        "newEnrollments": "43",
+                        "scheduledMeetings": "23",
+                        "attendanceRate": "66%",
+                        "completedClasses": "26",
+                        "classCompletionRate": "47%",
+                        "graduatedStudents": "9"
+                      }
+                    ]
+                  },
+                  {
+                    "year": "2022",
+                    "quarter": "Q1",
+                    "month": "May",
+                    "day": null,
+                    "newEnrollments": "20",
+                    "scheduledMeetings": "41",
+                    "attendanceRate": "95%",
+                    "completedClasses": "26",
+                    "classCompletionRate": "83%",
+                    "graduatedStudents": "43",
+                    "children": [
+                      {
+                        "year": "2011",
+                        "quarter": "Q1",
+                        "month": "May",
+                        "day": "2",
+                        "newEnrollments": "19",
+                        "scheduledMeetings": "35",
+                        "attendanceRate": "69%",
+                        "completedClasses": "8",
+                        "classCompletionRate": "75%",
+                        "graduatedStudents": "23"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "year": "2023",
+            "quarter": null,
+            "month": null,
+            "day": null,
+            "newEnrollments": "10",
+            "scheduledMeetings": "15",
+            "attendanceRate": "65%",
+            "completedClasses": "4",
+            "classCompletionRate": "49%",
+            "graduatedStudents": "29",
+            "children": [
+              {
+                "year": "2023",
+                "quarter": "Q1",
+                "month": null,
+                "day": null,
+                "newEnrollments": "2",
+                "scheduledMeetings": "35",
+                "attendanceRate": "32%",
+                "completedClasses": "15",
+                "classCompletionRate": "52%",
+                "graduatedStudents": "36",
+                "children": [
+                  {
+                    "year": "2023",
+                    "quarter": "Q1",
+                    "month": "March",
+                    "day": null,
+                    "newEnrollments": "16",
+                    "scheduledMeetings": "20",
+                    "attendanceRate": "11%",
+                    "completedClasses": "13",
+                    "classCompletionRate": "47%",
+                    "graduatedStudents": "28",
+                    "children": [
+                      {
+                        "year": "2023",
+                        "quarter": "Q1",
+                        "month": "March",
+                        "day": "10",
+                        "newEnrollments": "34",
+                        "scheduledMeetings": "28",
+                        "attendanceRate": "97%",
+                        "completedClasses": "20",
+                        "classCompletionRate": "15%",
+                        "graduatedStudents": "17"
+                      },
+                      {
+                        "year": "2023",
+                        "quarter": "Q1",
+                        "month": "March",
+                        "day": "11",
+                        "newEnrollments": "43",
+                        "scheduledMeetings": "23",
+                        "attendanceRate": "66%",
+                        "completedClasses": "26",
+                        "classCompletionRate": "47%",
+                        "graduatedStudents": "9"
+                      }
+                    ]
+                  },
+                  {
+                    "year": "2023",
+                    "quarter": "Q1",
+                    "month": "April",
+                    "day": null,
+                    "newEnrollments": "20",
+                    "scheduledMeetings": "41",
+                    "attendanceRate": "95%",
+                    "completedClasses": "26",
+                    "classCompletionRate": "83%",
+                    "graduatedStudents": "43",
+                    "children": [
+                      {
+                        "year": "2023",
+                        "quarter": "Q1",
+                        "month": "April",
+                        "day": "15",
+                        "newEnrollments": "19",
+                        "scheduledMeetings": "35",
+                        "attendanceRate": "69%",
+                        "completedClasses": "8",
+                        "classCompletionRate": "75%",
+                        "graduatedStudents": "23"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "grouped_headers": {
+        "label": "Grouped headers (nested columns)",
+        "columnDefinitions": [
+          {
+            "accessor": "year",
+            "label": "Year",
+            "cellAccessors": [
+              "quarter",
+              "month",
+              "day"
+            ]
+          },
+          {
+            "label": "Enrollment Data",
+            "columns": [
+              {
+                "accessor": "newEnrollments",
+                "label": "New Enrollments"
+              },
+              {
+                "accessor": "scheduledMeetings",
+                "label": "Scheduled Meetings"
+              }
+            ]
+          },
+          {
+            "label": "Performance Data",
+            "columns": [
+              {
+                "accessor": "attendanceRate",
+                "label": "Attendance Rate"
+              },
+              {
+                "accessor": "completedClasses",
+                "label": "Completed Classes"
+              },
+              {
+                "accessor": "classCompletionRate",
+                "label": "Class Completion Rate"
+              },
+              {
+                "accessor": "graduatedStudents",
+                "label": "Graduated Students"
+              }
+            ]
+          }
+        ],
+        "tableData": [
+          {
+            "year": "2021",
+            "quarter": null,
+            "month": null,
+            "day": null,
+            "newEnrollments": "20",
+            "scheduledMeetings": "10",
+            "attendanceRate": "51%",
+            "completedClasses": "3",
+            "classCompletionRate": "33%",
+            "graduatedStudents": "19",
+            "children": [
+              {
+                "year": "2021",
+                "quarter": "Q1",
+                "month": null,
+                "day": null,
+                "newEnrollments": "2",
+                "scheduledMeetings": "35",
+                "attendanceRate": "32%",
+                "completedClasses": "15",
+                "classCompletionRate": "52%",
+                "graduatedStudents": "36",
+                "children": [
+                  {
+                    "year": "2021",
+                    "quarter": "Q1",
+                    "month": "January",
+                    "day": null,
+                    "newEnrollments": "16",
+                    "scheduledMeetings": "20",
+                    "attendanceRate": "11%",
+                    "completedClasses": "13",
+                    "classCompletionRate": "47%",
+                    "graduatedStudents": "28",
+                    "children": [
+                      {
+                        "year": "2021",
+                        "quarter": "Q1",
+                        "month": "January",
+                        "day": "10",
+                        "newEnrollments": "34",
+                        "scheduledMeetings": "28",
+                        "attendanceRate": "97%",
+                        "completedClasses": "20",
+                        "classCompletionRate": "15%",
+                        "graduatedStudents": "17"
+                      },
+                      {
+                        "year": "2021",
+                        "quarter": "Q1",
+                        "month": "January",
+                        "day": "20",
+                        "newEnrollments": "43",
+                        "scheduledMeetings": "23",
+                        "attendanceRate": "66%",
+                        "completedClasses": "26",
+                        "classCompletionRate": "47%",
+                        "graduatedStudents": "9"
+                      }
+                    ]
+                  },
+                  {
+                    "year": "2021",
+                    "quarter": "Q1",
+                    "month": "February",
+                    "day": null,
+                    "newEnrollments": "20",
+                    "scheduledMeetings": "41",
+                    "attendanceRate": "95%",
+                    "completedClasses": "26",
+                    "classCompletionRate": "83%",
+                    "graduatedStudents": "43",
+                    "children": [
+                      {
+                        "year": "2021",
+                        "quarter": "Q1",
+                        "month": "February",
+                        "day": "15",
+                        "newEnrollments": "19",
+                        "scheduledMeetings": "35",
+                        "attendanceRate": "69%",
+                        "completedClasses": "8",
+                        "classCompletionRate": "75%",
+                        "graduatedStudents": "23"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "year": "2022",
+            "quarter": null,
+            "month": null,
+            "day": null,
+            "newEnrollments": "25",
+            "scheduledMeetings": "17",
+            "attendanceRate": "75%",
+            "completedClasses": "5",
+            "classCompletionRate": "45%",
+            "graduatedStudents": "32",
+            "children": [
+              {
+                "year": "2022",
+                "quarter": "Q1",
+                "month": null,
+                "day": null,
+                "newEnrollments": "2",
+                "scheduledMeetings": "35",
+                "attendanceRate": "32%",
+                "completedClasses": "15",
+                "classCompletionRate": "52%",
+                "graduatedStudents": "36",
+                "children": [
+                  {
+                    "year": "2022",
+                    "quarter": "Q1",
+                    "month": "January",
+                    "day": null,
+                    "newEnrollments": "16",
+                    "scheduledMeetings": "20",
+                    "attendanceRate": "11%",
+                    "completedClasses": "13",
+                    "classCompletionRate": "47%",
+                    "graduatedStudents": "28",
+                    "children": [
+                      {
+                        "year": "2022",
+                        "quarter": "Q1",
+                        "month": "January",
+                        "day": "15",
+                        "newEnrollments": "34",
+                        "scheduledMeetings": "28",
+                        "attendanceRate": "97%",
+                        "completedClasses": "20",
+                        "classCompletionRate": "15%",
+                        "graduatedStudents": "17"
+                      },
+                      {
+                        "year": "2022",
+                        "quarter": "Q1",
+                        "month": "January",
+                        "day": "25",
+                        "newEnrollments": "43",
+                        "scheduledMeetings": "23",
+                        "attendanceRate": "66%",
+                        "completedClasses": "26",
+                        "classCompletionRate": "47%",
+                        "graduatedStudents": "9"
+                      }
+                    ]
+                  },
+                  {
+                    "year": "2022",
+                    "quarter": "Q1",
+                    "month": "May",
+                    "day": null,
+                    "newEnrollments": "20",
+                    "scheduledMeetings": "41",
+                    "attendanceRate": "95%",
+                    "completedClasses": "26",
+                    "classCompletionRate": "83%",
+                    "graduatedStudents": "43",
+                    "children": [
+                      {
+                        "year": "2022",
+                        "quarter": "Q1",
+                        "month": "May",
+                        "day": "2",
+                        "newEnrollments": "19",
+                        "scheduledMeetings": "35",
+                        "attendanceRate": "69%",
+                        "completedClasses": "8",
+                        "classCompletionRate": "75%",
+                        "graduatedStudents": "23"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "year": "2023",
+            "quarter": null,
+            "month": null,
+            "day": null,
+            "newEnrollments": "10",
+            "scheduledMeetings": "15",
+            "attendanceRate": "65%",
+            "completedClasses": "4",
+            "classCompletionRate": "49%",
+            "graduatedStudents": "29",
+            "children": [
+              {
+                "year": "2023",
+                "quarter": "Q1",
+                "month": null,
+                "day": null,
+                "newEnrollments": "2",
+                "scheduledMeetings": "35",
+                "attendanceRate": "32%",
+                "completedClasses": "15",
+                "classCompletionRate": "52%",
+                "graduatedStudents": "36",
+                "children": [
+                  {
+                    "year": "2023",
+                    "quarter": "Q1",
+                    "month": "March",
+                    "day": null,
+                    "newEnrollments": "16",
+                    "scheduledMeetings": "20",
+                    "attendanceRate": "11%",
+                    "completedClasses": "13",
+                    "classCompletionRate": "47%",
+                    "graduatedStudents": "28",
+                    "children": [
+                      {
+                        "year": "2023",
+                        "quarter": "Q1",
+                        "month": "March",
+                        "day": "10",
+                        "newEnrollments": "34",
+                        "scheduledMeetings": "28",
+                        "attendanceRate": "97%",
+                        "completedClasses": "20",
+                        "classCompletionRate": "15%",
+                        "graduatedStudents": "17"
+                      },
+                      {
+                        "year": "2023",
+                        "quarter": "Q1",
+                        "month": "March",
+                        "day": "11",
+                        "newEnrollments": "43",
+                        "scheduledMeetings": "23",
+                        "attendanceRate": "66%",
+                        "completedClasses": "26",
+                        "classCompletionRate": "47%",
+                        "graduatedStudents": "9"
+                      }
+                    ]
+                  },
+                  {
+                    "year": "2023",
+                    "quarter": "Q1",
+                    "month": "April",
+                    "day": null,
+                    "newEnrollments": "20",
+                    "scheduledMeetings": "41",
+                    "attendanceRate": "95%",
+                    "completedClasses": "26",
+                    "classCompletionRate": "83%",
+                    "graduatedStudents": "43",
+                    "children": [
+                      {
+                        "year": "2023",
+                        "quarter": "Q1",
+                        "month": "April",
+                        "day": "15",
+                        "newEnrollments": "19",
+                        "scheduledMeetings": "35",
+                        "attendanceRate": "69%",
+                        "completedClasses": "8",
+                        "classCompletionRate": "75%",
+                        "graduatedStudents": "23"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "grouped_headers_double_nested": {
+        "label": "Grouped headers (double nested columns)",
+        "columnDefinitions": [
+          {
+            "accessor": "year",
+            "label": "Year",
+            "cellAccessors": [
+              "quarter",
+              "month",
+              "day"
+            ]
+          },
+          {
+            "label": "Enrollment Data",
+            "columns": [
+              {
+                "label": "Enrollment Stats",
+                "columns": [
+                  {
+                    "accessor": "newEnrollments",
+                    "label": "New Enrollments"
+                  },
+                  {
+                    "accessor": "scheduledMeetings",
+                    "label": "Scheduled Meetings"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "label": "Performance Data",
+            "columns": [
+              {
+                "label": "Completion Metrics",
+                "columns": [
+                  {
+                    "accessor": "completedClasses",
+                    "label": "Completed Classes"
+                  },
+                  {
+                    "accessor": "classCompletionRate",
+                    "label": "Class Completion Rate"
+                  }
+                ]
+              },
+              {
+                "label": "Attendance",
+                "columns": [
+                  {
+                    "accessor": "attendanceRate",
+                    "label": "Attendance Rate"
+                  },
+                  {
+                    "accessor": "scheduledMeetings",
+                    "label": "Scheduled Meetings"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "tableData": [
+          {
+            "year": "2021",
+            "quarter": null,
+            "month": null,
+            "day": null,
+            "newEnrollments": "20",
+            "scheduledMeetings": "10",
+            "attendanceRate": "51%",
+            "completedClasses": "3",
+            "classCompletionRate": "33%",
+            "graduatedStudents": "19",
+            "children": [
+              {
+                "year": "2021",
+                "quarter": "Q1",
+                "month": null,
+                "day": null,
+                "newEnrollments": "2",
+                "scheduledMeetings": "35",
+                "attendanceRate": "32%",
+                "completedClasses": "15",
+                "classCompletionRate": "52%",
+                "graduatedStudents": "36",
+                "children": [
+                  {
+                    "year": "2021",
+                    "quarter": "Q1",
+                    "month": "January",
+                    "day": null,
+                    "newEnrollments": "16",
+                    "scheduledMeetings": "20",
+                    "attendanceRate": "11%",
+                    "completedClasses": "13",
+                    "classCompletionRate": "47%",
+                    "graduatedStudents": "28",
+                    "children": [
+                      {
+                        "year": "2021",
+                        "quarter": "Q1",
+                        "month": "January",
+                        "day": "10",
+                        "newEnrollments": "34",
+                        "scheduledMeetings": "28",
+                        "attendanceRate": "97%",
+                        "completedClasses": "20",
+                        "classCompletionRate": "15%",
+                        "graduatedStudents": "17"
+                      },
+                      {
+                        "year": "2021",
+                        "quarter": "Q1",
+                        "month": "January",
+                        "day": "20",
+                        "newEnrollments": "43",
+                        "scheduledMeetings": "23",
+                        "attendanceRate": "66%",
+                        "completedClasses": "26",
+                        "classCompletionRate": "47%",
+                        "graduatedStudents": "9"
+                      }
+                    ]
+                  },
+                  {
+                    "year": "2021",
+                    "quarter": "Q1",
+                    "month": "February",
+                    "day": null,
+                    "newEnrollments": "20",
+                    "scheduledMeetings": "41",
+                    "attendanceRate": "95%",
+                    "completedClasses": "26",
+                    "classCompletionRate": "83%",
+                    "graduatedStudents": "43",
+                    "children": [
+                      {
+                        "year": "2021",
+                        "quarter": "Q1",
+                        "month": "February",
+                        "day": "15",
+                        "newEnrollments": "19",
+                        "scheduledMeetings": "35",
+                        "attendanceRate": "69%",
+                        "completedClasses": "8",
+                        "classCompletionRate": "75%",
+                        "graduatedStudents": "23"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "year": "2022",
+            "quarter": null,
+            "month": null,
+            "day": null,
+            "newEnrollments": "25",
+            "scheduledMeetings": "17",
+            "attendanceRate": "75%",
+            "completedClasses": "5",
+            "classCompletionRate": "45%",
+            "graduatedStudents": "32",
+            "children": [
+              {
+                "year": "2022",
+                "quarter": "Q1",
+                "month": null,
+                "day": null,
+                "newEnrollments": "2",
+                "scheduledMeetings": "35",
+                "attendanceRate": "32%",
+                "completedClasses": "15",
+                "classCompletionRate": "52%",
+                "graduatedStudents": "36",
+                "children": [
+                  {
+                    "year": "2022",
+                    "quarter": "Q1",
+                    "month": "January",
+                    "day": null,
+                    "newEnrollments": "16",
+                    "scheduledMeetings": "20",
+                    "attendanceRate": "11%",
+                    "completedClasses": "13",
+                    "classCompletionRate": "47%",
+                    "graduatedStudents": "28",
+                    "children": [
+                      {
+                        "year": "2022",
+                        "quarter": "Q1",
+                        "month": "January",
+                        "day": "15",
+                        "newEnrollments": "34",
+                        "scheduledMeetings": "28",
+                        "attendanceRate": "97%",
+                        "completedClasses": "20",
+                        "classCompletionRate": "15%",
+                        "graduatedStudents": "17"
+                      },
+                      {
+                        "year": "2022",
+                        "quarter": "Q1",
+                        "month": "January",
+                        "day": "25",
+                        "newEnrollments": "43",
+                        "scheduledMeetings": "23",
+                        "attendanceRate": "66%",
+                        "completedClasses": "26",
+                        "classCompletionRate": "47%",
+                        "graduatedStudents": "9"
+                      }
+                    ]
+                  },
+                  {
+                    "year": "2022",
+                    "quarter": "Q1",
+                    "month": "May",
+                    "day": null,
+                    "newEnrollments": "20",
+                    "scheduledMeetings": "41",
+                    "attendanceRate": "95%",
+                    "completedClasses": "26",
+                    "classCompletionRate": "83%",
+                    "graduatedStudents": "43",
+                    "children": [
+                      {
+                        "year": "2022",
+                        "quarter": "Q1",
+                        "month": "May",
+                        "day": "2",
+                        "newEnrollments": "19",
+                        "scheduledMeetings": "35",
+                        "attendanceRate": "69%",
+                        "completedClasses": "8",
+                        "classCompletionRate": "75%",
+                        "graduatedStudents": "23"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "year": "2023",
+            "quarter": null,
+            "month": null,
+            "day": null,
+            "newEnrollments": "10",
+            "scheduledMeetings": "15",
+            "attendanceRate": "65%",
+            "completedClasses": "4",
+            "classCompletionRate": "49%",
+            "graduatedStudents": "29",
+            "children": [
+              {
+                "year": "2023",
+                "quarter": "Q1",
+                "month": null,
+                "day": null,
+                "newEnrollments": "2",
+                "scheduledMeetings": "35",
+                "attendanceRate": "32%",
+                "completedClasses": "15",
+                "classCompletionRate": "52%",
+                "graduatedStudents": "36",
+                "children": [
+                  {
+                    "year": "2023",
+                    "quarter": "Q1",
+                    "month": "March",
+                    "day": null,
+                    "newEnrollments": "16",
+                    "scheduledMeetings": "20",
+                    "attendanceRate": "11%",
+                    "completedClasses": "13",
+                    "classCompletionRate": "47%",
+                    "graduatedStudents": "28",
+                    "children": [
+                      {
+                        "year": "2023",
+                        "quarter": "Q1",
+                        "month": "March",
+                        "day": "10",
+                        "newEnrollments": "34",
+                        "scheduledMeetings": "28",
+                        "attendanceRate": "97%",
+                        "completedClasses": "20",
+                        "classCompletionRate": "15%",
+                        "graduatedStudents": "17"
+                      },
+                      {
+                        "year": "2023",
+                        "quarter": "Q1",
+                        "month": "March",
+                        "day": "11",
+                        "newEnrollments": "43",
+                        "scheduledMeetings": "23",
+                        "attendanceRate": "66%",
+                        "completedClasses": "26",
+                        "classCompletionRate": "47%",
+                        "graduatedStudents": "9"
+                      }
+                    ]
+                  },
+                  {
+                    "year": "2023",
+                    "quarter": "Q1",
+                    "month": "April",
+                    "day": null,
+                    "newEnrollments": "20",
+                    "scheduledMeetings": "41",
+                    "attendanceRate": "95%",
+                    "completedClasses": "26",
+                    "classCompletionRate": "83%",
+                    "graduatedStudents": "43",
+                    "children": [
+                      {
+                        "year": "2023",
+                        "quarter": "Q1",
+                        "month": "April",
+                        "day": "15",
+                        "newEnrollments": "19",
+                        "scheduledMeetings": "35",
+                        "attendanceRate": "69%",
+                        "completedClasses": "8",
+                        "classCompletionRate": "75%",
+                        "graduatedStudents": "23"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "with_ids_standard": {
+        "label": "Column definitions with IDs",
+        "columnDefinitions": [
+          {
+            "accessor": "year",
+            "label": "Year",
+            "id": "year",
+            "cellAccessors": [
+              "quarter",
+              "month",
+              "day"
+            ]
+          },
+          {
+            "accessor": "newEnrollments",
+            "label": "New Enrollments",
+            "id": "newEnrollments"
+          },
+          {
+            "accessor": "scheduledMeetings",
+            "label": "Scheduled Meetings",
+            "id": "scheduledMeetings"
+          },
+          {
+            "accessor": "attendanceRate",
+            "label": "Attendance Rate",
+            "id": "attendanceRate"
+          },
+          {
+            "accessor": "completedClasses",
+            "label": "Completed Classes",
+            "id": "completedClasses"
+          },
+          {
+            "accessor": "classCompletionRate",
+            "label": "Class Completion Rate",
+            "id": "classCompletionRate"
+          },
+          {
+            "accessor": "graduatedStudents",
+            "label": "Graduated Students",
+            "id": "graduatedStudents"
+          }
+        ],
+        "tableData": [
+          {
+            "year": "2021",
+            "quarter": null,
+            "month": null,
+            "day": null,
+            "newEnrollments": "20",
+            "scheduledMeetings": "10",
+            "attendanceRate": "51%",
+            "completedClasses": "3",
+            "classCompletionRate": "33%",
+            "graduatedStudents": "19",
+            "children": [
+              {
+                "year": "2021",
+                "quarter": "Q1",
+                "month": null,
+                "day": null,
+                "newEnrollments": "2",
+                "scheduledMeetings": "35",
+                "attendanceRate": "32%",
+                "completedClasses": "15",
+                "classCompletionRate": "52%",
+                "graduatedStudents": "36",
+                "children": [
+                  {
+                    "year": "2021",
+                    "quarter": "Q1",
+                    "month": "January",
+                    "day": null,
+                    "newEnrollments": "16",
+                    "scheduledMeetings": "20",
+                    "attendanceRate": "11%",
+                    "completedClasses": "13",
+                    "classCompletionRate": "47%",
+                    "graduatedStudents": "28",
+                    "children": [
+                      {
+                        "year": "2021",
+                        "quarter": "Q1",
+                        "month": "January",
+                        "day": "10",
+                        "newEnrollments": "34",
+                        "scheduledMeetings": "28",
+                        "attendanceRate": "97%",
+                        "completedClasses": "20",
+                        "classCompletionRate": "15%",
+                        "graduatedStudents": "17"
+                      },
+                      {
+                        "year": "2021",
+                        "quarter": "Q1",
+                        "month": "January",
+                        "day": "20",
+                        "newEnrollments": "43",
+                        "scheduledMeetings": "23",
+                        "attendanceRate": "66%",
+                        "completedClasses": "26",
+                        "classCompletionRate": "47%",
+                        "graduatedStudents": "9"
+                      }
+                    ]
+                  },
+                  {
+                    "year": "2021",
+                    "quarter": "Q1",
+                    "month": "February",
+                    "day": null,
+                    "newEnrollments": "20",
+                    "scheduledMeetings": "41",
+                    "attendanceRate": "95%",
+                    "completedClasses": "26",
+                    "classCompletionRate": "83%",
+                    "graduatedStudents": "43",
+                    "children": [
+                      {
+                        "year": "2021",
+                        "quarter": "Q1",
+                        "month": "February",
+                        "day": "15",
+                        "newEnrollments": "19",
+                        "scheduledMeetings": "35",
+                        "attendanceRate": "69%",
+                        "completedClasses": "8",
+                        "classCompletionRate": "75%",
+                        "graduatedStudents": "23"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "year": "2022",
+            "quarter": null,
+            "month": null,
+            "day": null,
+            "newEnrollments": "25",
+            "scheduledMeetings": "17",
+            "attendanceRate": "75%",
+            "completedClasses": "5",
+            "classCompletionRate": "45%",
+            "graduatedStudents": "32",
+            "children": [
+              {
+                "year": "2022",
+                "quarter": "Q1",
+                "month": null,
+                "day": null,
+                "newEnrollments": "2",
+                "scheduledMeetings": "35",
+                "attendanceRate": "32%",
+                "completedClasses": "15",
+                "classCompletionRate": "52%",
+                "graduatedStudents": "36",
+                "children": [
+                  {
+                    "year": "2022",
+                    "quarter": "Q1",
+                    "month": "January",
+                    "day": null,
+                    "newEnrollments": "16",
+                    "scheduledMeetings": "20",
+                    "attendanceRate": "11%",
+                    "completedClasses": "13",
+                    "classCompletionRate": "47%",
+                    "graduatedStudents": "28",
+                    "children": [
+                      {
+                        "year": "2022",
+                        "quarter": "Q1",
+                        "month": "January",
+                        "day": "15",
+                        "newEnrollments": "34",
+                        "scheduledMeetings": "28",
+                        "attendanceRate": "97%",
+                        "completedClasses": "20",
+                        "classCompletionRate": "15%",
+                        "graduatedStudents": "17"
+                      },
+                      {
+                        "year": "2022",
+                        "quarter": "Q1",
+                        "month": "January",
+                        "day": "25",
+                        "newEnrollments": "43",
+                        "scheduledMeetings": "23",
+                        "attendanceRate": "66%",
+                        "completedClasses": "26",
+                        "classCompletionRate": "47%",
+                        "graduatedStudents": "9"
+                      }
+                    ]
+                  },
+                  {
+                    "year": "2022",
+                    "quarter": "Q1",
+                    "month": "May",
+                    "day": null,
+                    "newEnrollments": "20",
+                    "scheduledMeetings": "41",
+                    "attendanceRate": "95%",
+                    "completedClasses": "26",
+                    "classCompletionRate": "83%",
+                    "graduatedStudents": "43",
+                    "children": [
+                      {
+                        "year": "2022",
+                        "quarter": "Q1",
+                        "month": "May",
+                        "day": "2",
+                        "newEnrollments": "19",
+                        "scheduledMeetings": "35",
+                        "attendanceRate": "69%",
+                        "completedClasses": "8",
+                        "classCompletionRate": "75%",
+                        "graduatedStudents": "23"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "year": "2023",
+            "quarter": null,
+            "month": null,
+            "day": null,
+            "newEnrollments": "10",
+            "scheduledMeetings": "15",
+            "attendanceRate": "65%",
+            "completedClasses": "4",
+            "classCompletionRate": "49%",
+            "graduatedStudents": "29",
+            "children": [
+              {
+                "year": "2023",
+                "quarter": "Q1",
+                "month": null,
+                "day": null,
+                "newEnrollments": "2",
+                "scheduledMeetings": "35",
+                "attendanceRate": "32%",
+                "completedClasses": "15",
+                "classCompletionRate": "52%",
+                "graduatedStudents": "36",
+                "children": [
+                  {
+                    "year": "2023",
+                    "quarter": "Q1",
+                    "month": "March",
+                    "day": null,
+                    "newEnrollments": "16",
+                    "scheduledMeetings": "20",
+                    "attendanceRate": "11%",
+                    "completedClasses": "13",
+                    "classCompletionRate": "47%",
+                    "graduatedStudents": "28",
+                    "children": [
+                      {
+                        "year": "2023",
+                        "quarter": "Q1",
+                        "month": "March",
+                        "day": "10",
+                        "newEnrollments": "34",
+                        "scheduledMeetings": "28",
+                        "attendanceRate": "97%",
+                        "completedClasses": "20",
+                        "classCompletionRate": "15%",
+                        "graduatedStudents": "17"
+                      },
+                      {
+                        "year": "2023",
+                        "quarter": "Q1",
+                        "month": "March",
+                        "day": "11",
+                        "newEnrollments": "43",
+                        "scheduledMeetings": "23",
+                        "attendanceRate": "66%",
+                        "completedClasses": "26",
+                        "classCompletionRate": "47%",
+                        "graduatedStudents": "9"
+                      }
+                    ]
+                  },
+                  {
+                    "year": "2023",
+                    "quarter": "Q1",
+                    "month": "April",
+                    "day": null,
+                    "newEnrollments": "20",
+                    "scheduledMeetings": "41",
+                    "attendanceRate": "95%",
+                    "completedClasses": "26",
+                    "classCompletionRate": "83%",
+                    "graduatedStudents": "43",
+                    "children": [
+                      {
+                        "year": "2023",
+                        "quarter": "Q1",
+                        "month": "April",
+                        "day": "15",
+                        "newEnrollments": "19",
+                        "scheduledMeetings": "35",
+                        "attendanceRate": "69%",
+                        "completedClasses": "8",
+                        "classCompletionRate": "75%",
+                        "graduatedStudents": "23"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "column_sort": {
+        "label": "Column Definitions with Sorting",
+        "columnDefinitions": [
+          {
+            "accessor": "year",
+            "label": "Year",
+            "cellAccessors": [
+              "quarter",
+              "month",
+              "day"
+            ]
+          },
+          {
+            "accessor": "newEnrollments",
+            "label": "New Enrollments",
+            "enableSort": true
+          },
+          {
+            "accessor": "scheduledMeetings",
+            "label": "Scheduled Meetings",
+            "enableSort": true
+          },
+          {
+            "accessor": "attendanceRate",
+            "label": "Attendance Rate",
+            "enableSort": true
+          },
+          {
+            "accessor": "completedClasses",
+            "label": "Completed Classes",
+            "enableSort": true
+          },
+          {
+            "accessor": "classCompletionRate",
+            "label": "Class Completion Rate",
+            "enableSort": true
+          },
+          {
+            "accessor": "graduatedStudents",
+            "label": "Graduated Students",
+            "enableSort": true
+          }
+        ],
+        "tableData": [
+          {
+            "year": "2021",
+            "quarter": null,
+            "month": null,
+            "day": null,
+            "newEnrollments": "20",
+            "scheduledMeetings": "10",
+            "attendanceRate": "51%",
+            "completedClasses": "3",
+            "classCompletionRate": "33%",
+            "graduatedStudents": "19",
+            "children": [
+              {
+                "year": "2021",
+                "quarter": "Q1",
+                "month": null,
+                "day": null,
+                "newEnrollments": "2",
+                "scheduledMeetings": "35",
+                "attendanceRate": "32%",
+                "completedClasses": "15",
+                "classCompletionRate": "52%",
+                "graduatedStudents": "36",
+                "children": [
+                  {
+                    "year": "2021",
+                    "quarter": "Q1",
+                    "month": "January",
+                    "day": null,
+                    "newEnrollments": "16",
+                    "scheduledMeetings": "20",
+                    "attendanceRate": "11%",
+                    "completedClasses": "13",
+                    "classCompletionRate": "47%",
+                    "graduatedStudents": "28",
+                    "children": [
+                      {
+                        "year": "2021",
+                        "quarter": "Q1",
+                        "month": "January",
+                        "day": "10",
+                        "newEnrollments": "34",
+                        "scheduledMeetings": "28",
+                        "attendanceRate": "97%",
+                        "completedClasses": "20",
+                        "classCompletionRate": "15%",
+                        "graduatedStudents": "17"
+                      },
+                      {
+                        "year": "2021",
+                        "quarter": "Q1",
+                        "month": "January",
+                        "day": "20",
+                        "newEnrollments": "43",
+                        "scheduledMeetings": "23",
+                        "attendanceRate": "66%",
+                        "completedClasses": "26",
+                        "classCompletionRate": "47%",
+                        "graduatedStudents": "9"
+                      }
+                    ]
+                  },
+                  {
+                    "year": "2021",
+                    "quarter": "Q1",
+                    "month": "February",
+                    "day": null,
+                    "newEnrollments": "20",
+                    "scheduledMeetings": "41",
+                    "attendanceRate": "95%",
+                    "completedClasses": "26",
+                    "classCompletionRate": "83%",
+                    "graduatedStudents": "43",
+                    "children": [
+                      {
+                        "year": "2021",
+                        "quarter": "Q1",
+                        "month": "February",
+                        "day": "15",
+                        "newEnrollments": "19",
+                        "scheduledMeetings": "35",
+                        "attendanceRate": "69%",
+                        "completedClasses": "8",
+                        "classCompletionRate": "75%",
+                        "graduatedStudents": "23"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "year": "2022",
+            "quarter": null,
+            "month": null,
+            "day": null,
+            "newEnrollments": "25",
+            "scheduledMeetings": "17",
+            "attendanceRate": "75%",
+            "completedClasses": "5",
+            "classCompletionRate": "45%",
+            "graduatedStudents": "32",
+            "children": [
+              {
+                "year": "2022",
+                "quarter": "Q1",
+                "month": null,
+                "day": null,
+                "newEnrollments": "2",
+                "scheduledMeetings": "35",
+                "attendanceRate": "32%",
+                "completedClasses": "15",
+                "classCompletionRate": "52%",
+                "graduatedStudents": "36",
+                "children": [
+                  {
+                    "year": "2022",
+                    "quarter": "Q1",
+                    "month": "January",
+                    "day": null,
+                    "newEnrollments": "16",
+                    "scheduledMeetings": "20",
+                    "attendanceRate": "11%",
+                    "completedClasses": "13",
+                    "classCompletionRate": "47%",
+                    "graduatedStudents": "28",
+                    "children": [
+                      {
+                        "year": "2022",
+                        "quarter": "Q1",
+                        "month": "January",
+                        "day": "15",
+                        "newEnrollments": "34",
+                        "scheduledMeetings": "28",
+                        "attendanceRate": "97%",
+                        "completedClasses": "20",
+                        "classCompletionRate": "15%",
+                        "graduatedStudents": "17"
+                      },
+                      {
+                        "year": "2022",
+                        "quarter": "Q1",
+                        "month": "January",
+                        "day": "25",
+                        "newEnrollments": "43",
+                        "scheduledMeetings": "23",
+                        "attendanceRate": "66%",
+                        "completedClasses": "26",
+                        "classCompletionRate": "47%",
+                        "graduatedStudents": "9"
+                      }
+                    ]
+                  },
+                  {
+                    "year": "2022",
+                    "quarter": "Q1",
+                    "month": "May",
+                    "day": null,
+                    "newEnrollments": "20",
+                    "scheduledMeetings": "41",
+                    "attendanceRate": "95%",
+                    "completedClasses": "26",
+                    "classCompletionRate": "83%",
+                    "graduatedStudents": "43",
+                    "children": [
+                      {
+                        "year": "2022",
+                        "quarter": "Q1",
+                        "month": "May",
+                        "day": "2",
+                        "newEnrollments": "19",
+                        "scheduledMeetings": "35",
+                        "attendanceRate": "69%",
+                        "completedClasses": "8",
+                        "classCompletionRate": "75%",
+                        "graduatedStudents": "23"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "year": "2023",
+            "quarter": null,
+            "month": null,
+            "day": null,
+            "newEnrollments": "10",
+            "scheduledMeetings": "15",
+            "attendanceRate": "65%",
+            "completedClasses": "4",
+            "classCompletionRate": "49%",
+            "graduatedStudents": "29",
+            "children": [
+              {
+                "year": "2023",
+                "quarter": "Q1",
+                "month": null,
+                "day": null,
+                "newEnrollments": "2",
+                "scheduledMeetings": "35",
+                "attendanceRate": "32%",
+                "completedClasses": "15",
+                "classCompletionRate": "52%",
+                "graduatedStudents": "36",
+                "children": [
+                  {
+                    "year": "2023",
+                    "quarter": "Q1",
+                    "month": "March",
+                    "day": null,
+                    "newEnrollments": "16",
+                    "scheduledMeetings": "20",
+                    "attendanceRate": "11%",
+                    "completedClasses": "13",
+                    "classCompletionRate": "47%",
+                    "graduatedStudents": "28",
+                    "children": [
+                      {
+                        "year": "2023",
+                        "quarter": "Q1",
+                        "month": "March",
+                        "day": "10",
+                        "newEnrollments": "34",
+                        "scheduledMeetings": "28",
+                        "attendanceRate": "97%",
+                        "completedClasses": "20",
+                        "classCompletionRate": "15%",
+                        "graduatedStudents": "17"
+                      },
+                      {
+                        "year": "2023",
+                        "quarter": "Q1",
+                        "month": "March",
+                        "day": "11",
+                        "newEnrollments": "43",
+                        "scheduledMeetings": "23",
+                        "attendanceRate": "66%",
+                        "completedClasses": "26",
+                        "classCompletionRate": "47%",
+                        "graduatedStudents": "9"
+                      }
+                    ]
+                  },
+                  {
+                    "year": "2023",
+                    "quarter": "Q1",
+                    "month": "April",
+                    "day": null,
+                    "newEnrollments": "20",
+                    "scheduledMeetings": "41",
+                    "attendanceRate": "95%",
+                    "completedClasses": "26",
+                    "classCompletionRate": "83%",
+                    "graduatedStudents": "43",
+                    "children": [
+                      {
+                        "year": "2023",
+                        "quarter": "Q1",
+                        "month": "April",
+                        "day": "15",
+                        "newEnrollments": "19",
+                        "scheduledMeetings": "35",
+                        "attendanceRate": "69%",
+                        "completedClasses": "8",
+                        "classCompletionRate": "75%",
+                        "graduatedStudents": "23"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "column_styling": {
+        "label": "Column Styling",
+        "columnDefinitions": [
+          {
+            "accessor": "year",
+            "label": "Year",
+            "cellAccessors": [
+              "quarter",
+              "month",
+              "day"
+            ]
+          },
+          {
+            "accessor": "newEnrollments",
+            "label": "New Enrollments",
+            "columnStyling": {
+              "cellBackgroundColor": "#00C4D7",
+              "headerBackgroundColor": "#00C4D7"
+            }
+          },
+          {
+            "accessor": "scheduledMeetings",
+            "label": "Scheduled Meetings",
+            "columnStyling": {
+              "cellBackgroundColor": "#F9BB00"
+            }
+          },
+          {
+            "accessor": "attendanceRate",
+            "label": "Attendance Rate",
+            "columnStyling": {
+              "cellBackgroundColor": "#0056CF",
+              "headerBackgroundColor": "#0056CF",
+              "fontColor": "#FFFFFF",
+              "headerFontColor": "#FFFFFF"
+            }
+          },
+          {
+            "accessor": "completedClasses",
+            "label": "Completed Classes"
+          },
+          {
+            "accessor": "classCompletionRate",
+            "label": "Class Completion Rate"
+          },
+          {
+            "accessor": "graduatedStudents",
+            "label": "Graduated Students"
+          }
+        ],
+        "tableData": [
+          {
+            "year": "2021",
+            "quarter": null,
+            "month": null,
+            "day": null,
+            "newEnrollments": "20",
+            "scheduledMeetings": "10",
+            "attendanceRate": "51%",
+            "completedClasses": "3",
+            "classCompletionRate": "33%",
+            "graduatedStudents": "19",
+            "children": [
+              {
+                "year": "2021",
+                "quarter": "Q1",
+                "month": null,
+                "day": null,
+                "newEnrollments": "2",
+                "scheduledMeetings": "35",
+                "attendanceRate": "32%",
+                "completedClasses": "15",
+                "classCompletionRate": "52%",
+                "graduatedStudents": "36",
+                "children": [
+                  {
+                    "year": "2021",
+                    "quarter": "Q1",
+                    "month": "January",
+                    "day": null,
+                    "newEnrollments": "16",
+                    "scheduledMeetings": "20",
+                    "attendanceRate": "11%",
+                    "completedClasses": "13",
+                    "classCompletionRate": "47%",
+                    "graduatedStudents": "28",
+                    "children": [
+                      {
+                        "year": "2021",
+                        "quarter": "Q1",
+                        "month": "January",
+                        "day": "10",
+                        "newEnrollments": "34",
+                        "scheduledMeetings": "28",
+                        "attendanceRate": "97%",
+                        "completedClasses": "20",
+                        "classCompletionRate": "15%",
+                        "graduatedStudents": "17"
+                      },
+                      {
+                        "year": "2021",
+                        "quarter": "Q1",
+                        "month": "January",
+                        "day": "20",
+                        "newEnrollments": "43",
+                        "scheduledMeetings": "23",
+                        "attendanceRate": "66%",
+                        "completedClasses": "26",
+                        "classCompletionRate": "47%",
+                        "graduatedStudents": "9"
+                      }
+                    ]
+                  },
+                  {
+                    "year": "2021",
+                    "quarter": "Q1",
+                    "month": "February",
+                    "day": null,
+                    "newEnrollments": "20",
+                    "scheduledMeetings": "41",
+                    "attendanceRate": "95%",
+                    "completedClasses": "26",
+                    "classCompletionRate": "83%",
+                    "graduatedStudents": "43",
+                    "children": [
+                      {
+                        "year": "2021",
+                        "quarter": "Q1",
+                        "month": "February",
+                        "day": "15",
+                        "newEnrollments": "19",
+                        "scheduledMeetings": "35",
+                        "attendanceRate": "69%",
+                        "completedClasses": "8",
+                        "classCompletionRate": "75%",
+                        "graduatedStudents": "23"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "year": "2022",
+            "quarter": null,
+            "month": null,
+            "day": null,
+            "newEnrollments": "25",
+            "scheduledMeetings": "17",
+            "attendanceRate": "75%",
+            "completedClasses": "5",
+            "classCompletionRate": "45%",
+            "graduatedStudents": "32",
+            "children": [
+              {
+                "year": "2022",
+                "quarter": "Q1",
+                "month": null,
+                "day": null,
+                "newEnrollments": "2",
+                "scheduledMeetings": "35",
+                "attendanceRate": "32%",
+                "completedClasses": "15",
+                "classCompletionRate": "52%",
+                "graduatedStudents": "36",
+                "children": [
+                  {
+                    "year": "2022",
+                    "quarter": "Q1",
+                    "month": "January",
+                    "day": null,
+                    "newEnrollments": "16",
+                    "scheduledMeetings": "20",
+                    "attendanceRate": "11%",
+                    "completedClasses": "13",
+                    "classCompletionRate": "47%",
+                    "graduatedStudents": "28",
+                    "children": [
+                      {
+                        "year": "2022",
+                        "quarter": "Q1",
+                        "month": "January",
+                        "day": "15",
+                        "newEnrollments": "34",
+                        "scheduledMeetings": "28",
+                        "attendanceRate": "97%",
+                        "completedClasses": "20",
+                        "classCompletionRate": "15%",
+                        "graduatedStudents": "17"
+                      },
+                      {
+                        "year": "2022",
+                        "quarter": "Q1",
+                        "month": "January",
+                        "day": "25",
+                        "newEnrollments": "43",
+                        "scheduledMeetings": "23",
+                        "attendanceRate": "66%",
+                        "completedClasses": "26",
+                        "classCompletionRate": "47%",
+                        "graduatedStudents": "9"
+                      }
+                    ]
+                  },
+                  {
+                    "year": "2022",
+                    "quarter": "Q1",
+                    "month": "May",
+                    "day": null,
+                    "newEnrollments": "20",
+                    "scheduledMeetings": "41",
+                    "attendanceRate": "95%",
+                    "completedClasses": "26",
+                    "classCompletionRate": "83%",
+                    "graduatedStudents": "43",
+                    "children": [
+                      {
+                        "year": "2022",
+                        "quarter": "Q1",
+                        "month": "May",
+                        "day": "2",
+                        "newEnrollments": "19",
+                        "scheduledMeetings": "35",
+                        "attendanceRate": "69%",
+                        "completedClasses": "8",
+                        "classCompletionRate": "75%",
+                        "graduatedStudents": "23"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "year": "2023",
+            "quarter": null,
+            "month": null,
+            "day": null,
+            "newEnrollments": "10",
+            "scheduledMeetings": "15",
+            "attendanceRate": "65%",
+            "completedClasses": "4",
+            "classCompletionRate": "49%",
+            "graduatedStudents": "29",
+            "children": [
+              {
+                "year": "2023",
+                "quarter": "Q1",
+                "month": null,
+                "day": null,
+                "newEnrollments": "2",
+                "scheduledMeetings": "35",
+                "attendanceRate": "32%",
+                "completedClasses": "15",
+                "classCompletionRate": "52%",
+                "graduatedStudents": "36",
+                "children": [
+                  {
+                    "year": "2023",
+                    "quarter": "Q1",
+                    "month": "March",
+                    "day": null,
+                    "newEnrollments": "16",
+                    "scheduledMeetings": "20",
+                    "attendanceRate": "11%",
+                    "completedClasses": "13",
+                    "classCompletionRate": "47%",
+                    "graduatedStudents": "28",
+                    "children": [
+                      {
+                        "year": "2023",
+                        "quarter": "Q1",
+                        "month": "March",
+                        "day": "10",
+                        "newEnrollments": "34",
+                        "scheduledMeetings": "28",
+                        "attendanceRate": "97%",
+                        "completedClasses": "20",
+                        "classCompletionRate": "15%",
+                        "graduatedStudents": "17"
+                      },
+                      {
+                        "year": "2023",
+                        "quarter": "Q1",
+                        "month": "March",
+                        "day": "11",
+                        "newEnrollments": "43",
+                        "scheduledMeetings": "23",
+                        "attendanceRate": "66%",
+                        "completedClasses": "26",
+                        "classCompletionRate": "47%",
+                        "graduatedStudents": "9"
+                      }
+                    ]
+                  },
+                  {
+                    "year": "2023",
+                    "quarter": "Q1",
+                    "month": "April",
+                    "day": null,
+                    "newEnrollments": "20",
+                    "scheduledMeetings": "41",
+                    "attendanceRate": "95%",
+                    "completedClasses": "26",
+                    "classCompletionRate": "83%",
+                    "graduatedStudents": "43",
+                    "children": [
+                      {
+                        "year": "2023",
+                        "quarter": "Q1",
+                        "month": "April",
+                        "day": "15",
+                        "newEnrollments": "19",
+                        "scheduledMeetings": "35",
+                        "attendanceRate": "69%",
+                        "completedClasses": "8",
+                        "classCompletionRate": "75%",
+                        "graduatedStudents": "23"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "hiddenProps": [
+    "sortControl",
+    "fullScreenControl",
+    "expandedControl",
+    "allowFullScreen",
+    "pagination",
+    "paginationProps"
+  ],
+  "requiredProps": {
+    "columnDefinitions": [
+      {
+        "accessor": "year",
+        "label": "Year",
+        "cellAccessors": [
+          "quarter",
+          "month",
+          "day"
+        ]
+      },
+      {
+        "accessor": "newEnrollments",
+        "label": "New Enrollments"
+      },
+      {
+        "accessor": "scheduledMeetings",
+        "label": "Scheduled Meetings"
+      },
+      {
+        "accessor": "attendanceRate",
+        "label": "Attendance Rate"
+      },
+      {
+        "accessor": "completedClasses",
+        "label": "Completed Classes"
+      },
+      {
+        "accessor": "classCompletionRate",
+        "label": "Class Completion Rate"
+      },
+      {
+        "accessor": "graduatedStudents",
+        "label": "Graduated Students"
+      }
+    ],
+    "tableData": [
+      {
+        "year": "2021",
+        "quarter": null,
+        "month": null,
+        "day": null,
+        "newEnrollments": "20",
+        "scheduledMeetings": "10",
+        "attendanceRate": "51%",
+        "completedClasses": "3",
+        "classCompletionRate": "33%",
+        "graduatedStudents": "19",
+        "children": [
+          {
+            "year": "2021",
+            "quarter": "Q1",
+            "month": null,
+            "day": null,
+            "newEnrollments": "2",
+            "scheduledMeetings": "35",
+            "attendanceRate": "32%",
+            "completedClasses": "15",
+            "classCompletionRate": "52%",
+            "graduatedStudents": "36",
+            "children": [
+              {
+                "year": "2021",
+                "quarter": "Q1",
+                "month": "January",
+                "day": null,
+                "newEnrollments": "16",
+                "scheduledMeetings": "20",
+                "attendanceRate": "11%",
+                "completedClasses": "13",
+                "classCompletionRate": "47%",
+                "graduatedStudents": "28",
+                "children": [
+                  {
+                    "year": "2021",
+                    "quarter": "Q1",
+                    "month": "January",
+                    "day": "10",
+                    "newEnrollments": "34",
+                    "scheduledMeetings": "28",
+                    "attendanceRate": "97%",
+                    "completedClasses": "20",
+                    "classCompletionRate": "15%",
+                    "graduatedStudents": "17"
+                  },
+                  {
+                    "year": "2021",
+                    "quarter": "Q1",
+                    "month": "January",
+                    "day": "20",
+                    "newEnrollments": "43",
+                    "scheduledMeetings": "23",
+                    "attendanceRate": "66%",
+                    "completedClasses": "26",
+                    "classCompletionRate": "47%",
+                    "graduatedStudents": "9"
+                  }
+                ]
+              },
+              {
+                "year": "2021",
+                "quarter": "Q1",
+                "month": "February",
+                "day": null,
+                "newEnrollments": "20",
+                "scheduledMeetings": "41",
+                "attendanceRate": "95%",
+                "completedClasses": "26",
+                "classCompletionRate": "83%",
+                "graduatedStudents": "43",
+                "children": [
+                  {
+                    "year": "2021",
+                    "quarter": "Q1",
+                    "month": "February",
+                    "day": "15",
+                    "newEnrollments": "19",
+                    "scheduledMeetings": "35",
+                    "attendanceRate": "69%",
+                    "completedClasses": "8",
+                    "classCompletionRate": "75%",
+                    "graduatedStudents": "23"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "year": "2022",
+        "quarter": null,
+        "month": null,
+        "day": null,
+        "newEnrollments": "25",
+        "scheduledMeetings": "17",
+        "attendanceRate": "75%",
+        "completedClasses": "5",
+        "classCompletionRate": "45%",
+        "graduatedStudents": "32",
+        "children": [
+          {
+            "year": "2022",
+            "quarter": "Q1",
+            "month": null,
+            "day": null,
+            "newEnrollments": "2",
+            "scheduledMeetings": "35",
+            "attendanceRate": "32%",
+            "completedClasses": "15",
+            "classCompletionRate": "52%",
+            "graduatedStudents": "36",
+            "children": [
+              {
+                "year": "2022",
+                "quarter": "Q1",
+                "month": "January",
+                "day": null,
+                "newEnrollments": "16",
+                "scheduledMeetings": "20",
+                "attendanceRate": "11%",
+                "completedClasses": "13",
+                "classCompletionRate": "47%",
+                "graduatedStudents": "28",
+                "children": [
+                  {
+                    "year": "2022",
+                    "quarter": "Q1",
+                    "month": "January",
+                    "day": "15",
+                    "newEnrollments": "34",
+                    "scheduledMeetings": "28",
+                    "attendanceRate": "97%",
+                    "completedClasses": "20",
+                    "classCompletionRate": "15%",
+                    "graduatedStudents": "17"
+                  },
+                  {
+                    "year": "2022",
+                    "quarter": "Q1",
+                    "month": "January",
+                    "day": "25",
+                    "newEnrollments": "43",
+                    "scheduledMeetings": "23",
+                    "attendanceRate": "66%",
+                    "completedClasses": "26",
+                    "classCompletionRate": "47%",
+                    "graduatedStudents": "9"
+                  }
+                ]
+              },
+              {
+                "year": "2022",
+                "quarter": "Q1",
+                "month": "May",
+                "day": null,
+                "newEnrollments": "20",
+                "scheduledMeetings": "41",
+                "attendanceRate": "95%",
+                "completedClasses": "26",
+                "classCompletionRate": "83%",
+                "graduatedStudents": "43",
+                "children": [
+                  {
+                    "year": "2022",
+                    "quarter": "Q1",
+                    "month": "May",
+                    "day": "2",
+                    "newEnrollments": "19",
+                    "scheduledMeetings": "35",
+                    "attendanceRate": "69%",
+                    "completedClasses": "8",
+                    "classCompletionRate": "75%",
+                    "graduatedStudents": "23"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "year": "2023",
+        "quarter": null,
+        "month": null,
+        "day": null,
+        "newEnrollments": "10",
+        "scheduledMeetings": "15",
+        "attendanceRate": "65%",
+        "completedClasses": "4",
+        "classCompletionRate": "49%",
+        "graduatedStudents": "29",
+        "children": [
+          {
+            "year": "2023",
+            "quarter": "Q1",
+            "month": null,
+            "day": null,
+            "newEnrollments": "2",
+            "scheduledMeetings": "35",
+            "attendanceRate": "32%",
+            "completedClasses": "15",
+            "classCompletionRate": "52%",
+            "graduatedStudents": "36",
+            "children": [
+              {
+                "year": "2023",
+                "quarter": "Q1",
+                "month": "March",
+                "day": null,
+                "newEnrollments": "16",
+                "scheduledMeetings": "20",
+                "attendanceRate": "11%",
+                "completedClasses": "13",
+                "classCompletionRate": "47%",
+                "graduatedStudents": "28",
+                "children": [
+                  {
+                    "year": "2023",
+                    "quarter": "Q1",
+                    "month": "March",
+                    "day": "10",
+                    "newEnrollments": "34",
+                    "scheduledMeetings": "28",
+                    "attendanceRate": "97%",
+                    "completedClasses": "20",
+                    "classCompletionRate": "15%",
+                    "graduatedStudents": "17"
+                  },
+                  {
+                    "year": "2023",
+                    "quarter": "Q1",
+                    "month": "March",
+                    "day": "11",
+                    "newEnrollments": "43",
+                    "scheduledMeetings": "23",
+                    "attendanceRate": "66%",
+                    "completedClasses": "26",
+                    "classCompletionRate": "47%",
+                    "graduatedStudents": "9"
+                  }
+                ]
+              },
+              {
+                "year": "2023",
+                "quarter": "Q1",
+                "month": "April",
+                "day": null,
+                "newEnrollments": "20",
+                "scheduledMeetings": "41",
+                "attendanceRate": "95%",
+                "completedClasses": "26",
+                "classCompletionRate": "83%",
+                "graduatedStudents": "43",
+                "children": [
+                  {
+                    "year": "2023",
+                    "quarter": "Q1",
+                    "month": "April",
+                    "day": "15",
+                    "newEnrollments": "19",
+                    "scheduledMeetings": "35",
+                    "attendanceRate": "69%",
+                    "completedClasses": "8",
+                    "classCompletionRate": "75%",
+                    "graduatedStudents": "23"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "propSyncOnEnable": {
+    "inlineRowLoading": {
+      "dataPreset": "inline_loading"
+    },
+    "selectableRows": {
+      "dataPreset": "with_ids"
+    },
+    "onRowSelectionChange": {
+      "dataPreset": "with_ids"
+    },
+    "enableSorting": {
+      "structureMode": "explicit"
+    },
+    "sortIcon": {
+      "structureMode": "explicit"
+    },
+    "collapsibleTrail": {
+      "structureMode": "explicit"
+    },
+    "subRowHeaders": {
+      "structureMode": "explicit"
+    },
+    "columnVisibilityControl": {
+      "dataPreset": "with_ids_standard"
+    },
+    "rowStyling": {
+      "dataPreset": "with_ids"
+    }
+  },
+  "children": {
+    "editable": false,
+    "default": ""
+  }
+}

@@ -43,7 +43,19 @@ module Playbook
           multiple: multiple,
           onchange: onchange,
           include_blank: include_blank,
+          data: validation_data,
         }.merge(attributes).merge(input_options)
+      end
+
+      def validation_data
+        fields = input_options[:data] || {}
+        fields[:message] = validation_message unless validation_message.blank?
+        fields
+      end
+
+      # Same resolved id as the native +<select>+ (+all_attributes[:id]+) for label +for+.
+      def select_input_id
+        all_attributes[:id].presence
       end
 
       def classname

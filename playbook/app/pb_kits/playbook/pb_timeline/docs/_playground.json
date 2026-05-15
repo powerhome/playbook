@@ -1,0 +1,27 @@
+{
+  "template": "<Timeline{{props}} />",
+  "propTargets": {},
+  "defaults": {
+    "orientation": "horizontal",
+    "showDate": false,
+    "itemGap": "none"
+  },
+  "groups": [
+    {
+      "name": "Props",
+      "props": [
+        "orientation",
+        "showDate",
+        "itemGap"
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default",
+      "props": {}
+    }
+  ],
+  "conditionals": {},
+  "hints": {}
+}

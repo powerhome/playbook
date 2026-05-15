@@ -1,0 +1,163 @@
+{
+  "$schema": "https://playbook.powerapp.cloud/schemas/kit-schema.json",
+  "name": "Textarea",
+  "description": "Textarea component",
+  "platforms": [
+    "react",
+    "rails"
+  ],
+  "props": {
+    "characterCount": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "disabled": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "emojiMask": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "error": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "inline": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "inputOptions": {
+      "type": "GenericObject",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "object": {
+      "type": "string",
+      "platforms": [
+        "react"
+      ]
+    },
+    "method": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "label": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "maxCharacters": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "placeholder": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "value": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "name": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "required": {
+      "type": "boolean",
+      "platforms": [
+        "react"
+      ]
+    },
+    "requiredIndicator": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "rows": {
+      "type": "number",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": 4
+    },
+    "resize": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "none",
+        "both",
+        "horizontal",
+        "vertical",
+        "auto"
+      ],
+      "default": "none"
+    },
+    "onChange": {
+      "type": "ReactNode",
+      "platforms": [
+        "react"
+      ]
+    },
+    "onkeyup": {
+      "platforms": [
+        "rails"
+      ]
+    }
+  },
+  "globalProps": true,
+  "usage": {
+    "react": {
+      "import": "import { Textarea } from 'playbook-ui'",
+      "example": "<Textarea resize=\"none\"></Textarea>"
+    },
+    "rails": {
+      "import": null,
+      "example": "<%= pb_rails(\"textarea\", props: { resize: \"none\" }) %>"
+    }
+  }
+}

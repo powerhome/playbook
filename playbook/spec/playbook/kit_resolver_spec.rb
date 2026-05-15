@@ -15,5 +15,9 @@ RSpec.describe ::Playbook::KitResolver do
     it "it resolves sub kit names to playbook kit classes" do
       expect(Playbook::KitResolver.resolve("table/table_row")).to be Playbook::PbTable::TableRow
     end
+
+    it "resolves rich_text_editor to the Rails TipTap kit" do
+      expect(Playbook::KitResolver.resolve("rich_text_editor")).to be Playbook::PbRichTextEditor::RichTextEditor
+    end
   end
 end

@@ -31,6 +31,7 @@
       name: object.name,
       placeholder: object.placeholder,
       required: object.required,
+      validation: object.validation_message.present? ? { message: object.validation_message } : {},
     }) %>
     <% end %>
     <% if object.selection_type == "quickpick" %>
@@ -38,7 +39,7 @@
       <input type="hidden" id="<%= "#{object.end_date_id}" %>" name="<%= "#{object.end_date_name}" %>">
     <% end %>
 
-    <% if !object.hide_icon %>
+    <% if !object.hide_icon && !object.inline %>
       <div
           class="<%= object.icon_wrapper_class %>"
           id="cal-icon-<%= object.picker_id %>"
@@ -51,7 +52,7 @@
     <% end %>
 
     <!-- Inline -->
-    <% if object.hide_icon && object.inline %>
+    <% if object.inline %>
       <!-- Plus Icon -->
       <div
           class="<%= object.icon_wrapper_class %> date-picker-inline-icon-plus"

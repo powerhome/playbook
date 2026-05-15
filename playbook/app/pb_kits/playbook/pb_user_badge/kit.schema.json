@@ -1,0 +1,47 @@
+{
+  "$schema": "https://playbook.powerapp.cloud/schemas/kit-schema.json",
+  "name": "UserBadge",
+  "description": "UserBadge component",
+  "platforms": [
+    "react",
+    "rails"
+  ],
+  "props": {
+    "badge": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "million-dollar",
+        "veteran"
+      ],
+      "default": "million-dollar"
+    },
+    "size": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "sm",
+        "md",
+        "lg"
+      ],
+      "default": "md"
+    }
+  },
+  "globalProps": true,
+  "usage": {
+    "react": {
+      "import": "import { UserBadge } from 'playbook-ui'",
+      "example": "<UserBadge badge=\"million-dollar\" size=\"sm\"></UserBadge>"
+    },
+    "rails": {
+      "import": null,
+      "example": "<%= pb_rails(\"user_badge\", props: { badge: \"million-dollar\", size: \"sm\" }) %>"
+    }
+  }
+}

@@ -1,0 +1,145 @@
+{
+  "template": "<SelectableCard{{props}} />",
+  "propTargets": {},
+  "defaults": {
+    "checked": false,
+    "disabled": false,
+    "error": false,
+    "icon": false,
+    "multi": true,
+    "variant": "default"
+  },
+  "groups": [
+    {
+      "name": "Content",
+      "props": [
+        "text",
+        "value",
+        "name",
+        "inputId"
+      ]
+    },
+    {
+      "name": "State",
+      "props": [
+        "checked",
+        "disabled",
+        "error",
+        "multi"
+      ]
+    },
+    {
+      "name": "Appearance",
+      "props": [
+        "variant",
+        "icon",
+        "customIcon"
+      ]
+    },
+    {
+      "name": "Events",
+      "props": [
+        "onChange"
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Unselected",
+      "props": {
+        "checked": false,
+        "text": "Option label",
+        "name": "selectable_card_demo",
+        "value": "opt1",
+        "variant": "default",
+        "multi": true,
+        "onChange": "() => {}"
+      }
+    },
+    {
+      "name": "Selected",
+      "props": {
+        "checked": true,
+        "text": "Selected option",
+        "name": "selectable_card_demo",
+        "value": "opt1",
+        "variant": "default",
+        "multi": true,
+        "onChange": "() => {}"
+      }
+    },
+    {
+      "name": "Disabled",
+      "props": {
+        "checked": false,
+        "disabled": true,
+        "text": "Unavailable",
+        "name": "selectable_card_demo",
+        "value": "opt2",
+        "variant": "default",
+        "onChange": "() => {}"
+      }
+    },
+    {
+      "name": "With check icon",
+      "props": {
+        "checked": true,
+        "icon": true,
+        "text": "With icon",
+        "name": "selectable_card_demo",
+        "value": "opt3",
+        "variant": "default",
+        "onChange": "() => {}"
+      }
+    },
+    {
+      "name": "Radio (single)",
+      "props": {
+        "checked": false,
+        "multi": false,
+        "text": "Plan A",
+        "name": "plan",
+        "value": "a",
+        "variant": "default",
+        "onChange": "() => {}"
+      }
+    },
+    {
+      "name": "Display input variant",
+      "props": {
+        "checked": false,
+        "variant": "displayInput",
+        "text": "Display style",
+        "name": "selectable_card_demo",
+        "value": "disp1",
+        "onChange": "() => {}"
+      }
+    },
+    {
+      "name": "Error state",
+      "props": {
+        "checked": false,
+        "error": true,
+        "text": "Invalid choice",
+        "name": "selectable_card_demo",
+        "value": "err1",
+        "variant": "default",
+        "onChange": "() => {}"
+      }
+    }
+  ],
+  "conditionals": {
+    "customIcon": {
+      "requires": {
+        "icon": true
+      }
+    }
+  },
+  "hints": {
+    "onchange_note": {
+      "when": {},
+      "message": "onChange receives the input change event; wire it to your form state in real usage.",
+      "type": "info"
+    }
+  }
+}

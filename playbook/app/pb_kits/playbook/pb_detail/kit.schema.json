@@ -1,0 +1,78 @@
+{
+  "$schema": "https://playbook.powerapp.cloud/schemas/kit-schema.json",
+  "name": "Detail",
+  "description": "Detail component",
+  "platforms": [
+    "react",
+    "rails"
+  ],
+  "props": {
+    "bold": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "color": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "light",
+        "default",
+        "lighter",
+        "link",
+        "error",
+        "success"
+      ],
+      "default": "light"
+    },
+    "dark": {
+      "type": "boolean",
+      "platforms": [
+        "react"
+      ]
+    },
+    "tag": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "h1",
+        "h2",
+        "h3",
+        "h4",
+        "h5",
+        "h6",
+        "p",
+        "span",
+        "div"
+      ],
+      "default": "div"
+    },
+    "text": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    }
+  },
+  "globalProps": true,
+  "usage": {
+    "react": {
+      "import": "import { Detail } from 'playbook-ui'",
+      "example": "<Detail color=\"light\" tag=\"h1\"></Detail>"
+    },
+    "rails": {
+      "import": null,
+      "example": "<%= pb_rails(\"detail\", props: { color: \"light\", tag: \"h1\" }) %>"
+    }
+  }
+}

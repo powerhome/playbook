@@ -10,27 +10,23 @@ module Playbook
       base.prop :bottom
     end
 
+    BOTTOM_VALUES = %w[0 xxs xs sm md lg xl auto initial inherit].freeze
+
     def bottom_values
-      %w[0 xxs xs sm md lg xl auto initial inherit]
+      BOTTOM_VALUES
     end
 
     def bottom_options
-      {
-        bottom: "bottom",
-      }
+      { bottom: "bottom" }
     end
 
   private
 
     def bottom_props
-      selected_props = bottom_options.keys.select { |sk| try(sk) }
-      return nil unless selected_props.present?
+      value = bottom
+      return nil unless value
 
-      selected_props.map do |k|
-        value = send(k)
-        css = positioning_css("bottom", value) if bottom.present?
-        css
-      end.compact.join(" ")
+      positioning_css("bottom", value)
     end
   end
 end

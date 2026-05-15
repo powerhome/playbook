@@ -1,0 +1,83 @@
+{
+  "template": "<DistributionBar{{props}} />",
+  "propTargets": {},
+  "defaults": {
+    "size": "lg",
+    "colors": [
+      "data_7",
+      "data_1",
+      "neutral"
+    ]
+  },
+  "groups": [
+    {
+      "name": "Data",
+      "props": [
+        "widths",
+        "colors"
+      ]
+    },
+    {
+      "name": "Appearance",
+      "props": [
+        "size"
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default",
+      "props": {
+        "widths": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          3,
+          3,
+          7
+        ]
+      }
+    },
+    {
+      "name": "Small",
+      "props": {
+        "widths": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          3,
+          3,
+          7
+        ],
+        "size": "sm"
+      }
+    },
+    {
+      "name": "Custom colors",
+      "props": {
+        "colors": [
+          "data_7",
+          "data_1",
+          "neutral"
+        ],
+        "widths": [
+          4,
+          5,
+          3
+        ]
+      }
+    }
+  ],
+  "conditionals": {},
+  "hints": {
+    "custom_colors": {
+      "presetName": "Custom colors",
+      "message": "Use the colors prop to change the colors of the distribution bar. Currently only the data and status colors will work for DistributionBar.",
+      "type": "info"
+    }
+  }
+}

@@ -1,0 +1,180 @@
+{
+  "$schema": "https://playbook.powerapp.cloud/schemas/kit-schema.json",
+  "name": "Icon",
+  "description": "Icon component",
+  "platforms": [
+    "react",
+    "rails"
+  ],
+  "props": {
+    "border": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "color": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "customIcon": {
+      "type": "GenericObject",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": null
+    },
+    "fixedWidth": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": true
+    },
+    "flip": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "horizontal",
+        "vertical",
+        "both",
+        "none"
+      ],
+      "default": null
+    },
+    "icon": {
+      "type": "string | ReactSVGElement",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "inverse": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "listItem": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "pull": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "left",
+        "right",
+        "none"
+      ],
+      "default": null
+    },
+    "pulse": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "rotation": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        90,
+        180,
+        270
+      ],
+      "default": null
+    },
+    "size": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "lg",
+        "xs",
+        "sm",
+        "1x",
+        "2x",
+        "3x",
+        "4x",
+        "5x",
+        "6x",
+        "7x",
+        "8x",
+        "9x",
+        "10x"
+      ],
+      "default": null
+    },
+    "fontStyle": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "far",
+        "fas",
+        "fab",
+        "fak"
+      ],
+      "default": "far"
+    },
+    "spin": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "tabIndex": {
+      "type": "number",
+      "platforms": [
+        "react"
+      ]
+    },
+    "tabindex": {
+      "platforms": [
+        "rails"
+      ]
+    }
+  },
+  "globalProps": true,
+  "usage": {
+    "react": {
+      "import": "import { Icon } from 'playbook-ui'",
+      "example": "<Icon flip=\"horizontal\" pull=\"left\"></Icon>"
+    },
+    "rails": {
+      "import": null,
+      "example": "<%= pb_rails(\"icon\", props: { flip: \"horizontal\", pull: \"left\" }) %>"
+    }
+  }
+}

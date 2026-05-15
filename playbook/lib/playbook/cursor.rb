@@ -6,24 +6,21 @@ module Playbook
       base.prop :cursor
     end
 
-    def cursor_props
-      selected_props = cursor_options.keys.select { |sk| try(sk) }
-      return nil unless selected_props.present?
+    CURSOR_VALUES = %w[auto default none contextMenu help pointer progress wait cell crosshair text verticalText alias copy move noDrop notAllowed grab grabbing eResize nResize neResize nwResize sResize seResize swResize wResize ewResize nsResize neswResize nwseResize colResize rowResize allScroll zoomIn zoomOut].freeze
 
-      selected_props.map do |k|
-        cursor_value = send(k)
-        "cursor_#{cursor_value.underscore}" if cursor_values.include? cursor_value
-      end.compact.join(" ")
+    def cursor_props
+      value = cursor
+      return nil unless value
+
+      "cursor_#{value.underscore}" if CURSOR_VALUES.include?(value)
     end
 
     def cursor_options
-      {
-        cursor: "cursor",
-      }
+      { cursor: "cursor" }
     end
 
     def cursor_values
-      %w[auto default none contextMenu help pointer progress wait cell crosshair text verticalText alias copy move noDrop notAllowed grab grabbing eResize nResize neResize nwResize sResize seResize swResize wResize ewResize nsResize neswResize nwseResize colResize rowResize allScroll zoomIn zoomOut]
+      CURSOR_VALUES
     end
   end
 end

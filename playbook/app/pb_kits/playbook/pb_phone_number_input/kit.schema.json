@@ -1,0 +1,171 @@
+{
+  "$schema": "https://playbook.powerapp.cloud/schemas/kit-schema.json",
+  "name": "PhoneNumberInput",
+  "description": "PhoneNumberInput component",
+  "platforms": [
+    "react",
+    "rails"
+  ],
+  "props": {
+    "dark": {
+      "type": "boolean",
+      "platforms": [
+        "react"
+      ]
+    },
+    "disabled": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "error": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": ""
+    },
+    "hiddenInputs": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "initialCountry": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": ""
+    },
+    "isValid": {
+      "type": "function",
+      "platforms": [
+        "react"
+      ]
+    },
+    "label": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": ""
+    },
+    "name": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": ""
+    },
+    "onChange": {
+      "type": "ReactNode",
+      "platforms": [
+        "react"
+      ]
+    },
+    "onValidate": {
+      "type": "Callback<boolean, void>",
+      "platforms": [
+        "react"
+      ]
+    },
+    "onlyCountries": {
+      "type": "array",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "excludeCountries": {
+      "type": "array",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "preferredCountries": {
+      "type": "array",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "required": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "requiredIndicator": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "value": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": ""
+    },
+    "formatAsYouType": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "strictMode": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "countrySearch": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "showPlaceholder": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    }
+  },
+  "globalProps": true,
+  "usage": {
+    "react": {
+      "import": "import { PhoneNumberInput } from 'playbook-ui'",
+      "example": "<PhoneNumberInput></PhoneNumberInput>"
+    },
+    "rails": {
+      "import": null,
+      "example": "<%= pb_rails(\"phone_number_input\", props: { text: \"Example\" }) %>"
+    }
+  }
+}

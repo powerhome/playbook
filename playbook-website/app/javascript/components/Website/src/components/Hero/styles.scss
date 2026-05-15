@@ -2,7 +2,6 @@
 @import "playbook-tokens/border_radius";
 
 .hero {
-  min-height: 245px;
   border-radius: $border_radius_lg;
   @media screen and (max-width: $screen-lg-min) {
     border-radius: 0;
@@ -13,6 +12,15 @@
     justify-content: center;
     min-height: 192px;
   }
+
+  .pb_title_kit,
+  &-description {
+    hyphens: none;
+    -webkit-hyphens: none;
+    overflow-wrap: normal;
+    word-break: normal;
+  }
+
   &-description {
     @media screen and (max-width: $screen-xs-min) {
       display: none !important;

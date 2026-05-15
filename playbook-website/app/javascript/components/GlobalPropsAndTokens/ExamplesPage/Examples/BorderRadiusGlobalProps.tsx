@@ -22,7 +22,7 @@ const BorderRadiusGlobalProps = () => {
         {borderRadiusOptions.map((option) => (
           <Flex key={option.value} flexDirection="column" align="center" gap="xs">
             <Card 
-              background="light"
+              background="info_subtle"
               borderRadius={option.value as any}
               className="visual_guide_card_border_radius"
               padding="xs" 

@@ -1,0 +1,187 @@
+{
+  "template": "<Dialog{{props}}>{{children}}</Dialog>",
+  "propTargets": {},
+  "defaults": {
+    "closeable": true,
+    "fullHeight": false,
+    "placement": "center",
+    "shouldCloseOnOverlayClick": true,
+    "size": "md",
+    "status": "",
+    "title": "Header Title is the Title Prop",
+    "text": "Hello Body Text, Nice to meet ya."
+  },
+  "children": {
+    "editable": true,
+    "default": "Custom dialog content goes here when you are not using the title and text props.",
+    "hideWhenPropSet": [
+      "text"
+    ]
+  },
+  "groups": [
+    {
+      "name": "Content",
+      "props": [
+        "title",
+        "text",
+        "cancelButton",
+        "confirmButton",
+        "onCancel",
+        "onClose",
+        "onConfirm",
+        "opened",
+        "onChange"
+      ]
+    },
+    {
+      "name": "Behavior",
+      "props": [
+        "placement",
+        "shouldCloseOnOverlayClick",
+        "closeable",
+        "loading"
+      ]
+    },
+    {
+      "name": "Appearance",
+      "props": [
+        "size",
+        "status",
+        "fullHeight"
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default",
+      "props": {
+        "size": "md",
+        "title": "Header Title is the Title Prop",
+        "text": "Hello Body Text, Nice to meet ya.",
+        "cancelButton": "Cancel Button",
+        "confirmButton": "Okay"
+      }
+    },
+    {
+      "name": "Small",
+      "props": {
+        "size": "sm",
+        "title": "Small dialog",
+        "text": "Narrow width for short confirmations and alerts."
+      }
+    },
+    {
+      "name": "Large",
+      "props": {
+        "size": "lg",
+        "title": "Large dialog",
+        "text": "Wider layout for dense content or two-column layouts."
+      }
+    },
+    {
+      "name": "Status Alert",
+      "props": {
+        "size": "status_size",
+        "status": "success",
+        "title": "Success",
+        "text": "Compact status layout for confirmations and feedback."
+      }
+    },
+    {
+      "name": "Compound components",
+      "structureMode": "subcomponents",
+      "props": {
+        "size": "sm"
+      },
+      "children": "Hello Body Text, Nice to meet ya."
+    },
+    {
+      "name": "Full height compound",
+      "structureMode": "subcomponents",
+      "props": {
+        "fullHeight": true,
+        "size": "lg"
+      },
+      "children": "Custom dialog content goes here when you need more vertical space."
+    }
+  ],
+  "conditionals": {
+    "title": {
+      "structureMode": "simple"
+    },
+    "text": {
+      "structureMode": "simple"
+    },
+    "cancelButton": {
+      "structureMode": "simple"
+    },
+    "confirmButton": {
+      "structureMode": "simple"
+    },
+    "onCancel": {
+      "structureMode": "simple"
+    },
+    "onClose": {
+      "structureMode": "simple"
+    },
+    "onConfirm": {
+      "structureMode": "simple"
+    },
+    "opened": {
+      "structureMode": "simple"
+    }
+  },
+  "hints": {
+    "status_dialog": {
+      "when": {
+        "status": "success"
+      },
+      "message": "Status dialogs show an icon, title, and body copy in a centered layout.",
+      "type": "info"
+    },
+    "compound_components_info": {
+      "presetName": "Compound components",
+      "message": "Use Compound Components when you need custom header, body, or footer content instead of the simple title/text/button props API.",
+      "type": "info"
+    },
+    "full_height_info": {
+      "presetName": "Full height compound",
+      "message": "fullHeight is most useful with the compound structure when the dialog contains richer or scrollable content.",
+      "type": "info"
+    }
+  },
+  "structureModes": {
+    "default": "simple",
+    "modes": {
+      "simple": {
+        "label": "Simple",
+        "template": "<Dialog opened={dialogOpen} onCancel={closeDialog} onClose={closeDialog} onConfirm={closeDialog}{{props}} />",
+        "children": "",
+        "props": {
+          "size": "md",
+          "title": "Header Title is the Title Prop",
+          "text": "Hello Body Text, Nice to meet ya.",
+          "cancelButton": "Cancel Button",
+          "confirmButton": "Okay"
+        },
+        "imports": [
+          "Button"
+        ],
+        "wrapper": "const DialogPlaygroundExample = () => {\n  const [dialogOpen, setDialogOpen] = useState(false)\n  const openDialog = () => setDialogOpen(true)\n  const closeDialog = () => setDialogOpen(false)\n\n  return (\n    <>\n      <Button marginBottom=\"sm\" onClick={openDialog}>\n        Open Dialog\n      </Button>\n      {{component}}\n    </>\n  )\n}\n\n<DialogPlaygroundExample />"
+      },
+      "subcomponents": {
+        "label": "Compound Components",
+        "template": "<Dialog opened={dialogOpen} onClose={closeDialog}{{props}}>\n  <Dialog.Header>Header Title inside Dialog.Header</Dialog.Header>\n  <Dialog.Body>{{children}}</Dialog.Body>\n  <Dialog.Footer>\n    <Button onClick={closeDialog}>Okay</Button>\n    <Button onClick={closeDialog} variant=\"link\">Cancel Button</Button>\n  </Dialog.Footer>\n</Dialog>",
+        "children": "Hello Body Text, Nice to meet ya.",
+        "imports": [
+          "Button"
+        ],
+        "wrapper": "const DialogPlaygroundExample = () => {\n  const [dialogOpen, setDialogOpen] = useState(false)\n  const openDialog = () => setDialogOpen(true)\n  const closeDialog = () => setDialogOpen(false)\n\n  return (\n    <>\n      <Button marginBottom=\"sm\" onClick={openDialog}>\n        Open Dialog\n      </Button>\n      {{component}}\n    </>\n  )\n}\n\n<DialogPlaygroundExample />"
+      }
+    }
+  },
+  "hiddenProps": [
+    "trigger",
+    "portalClassName"
+  ]
+}

@@ -1,0 +1,122 @@
+{
+  "$schema": "https://playbook.powerapp.cloud/schemas/kit-schema.json",
+  "name": "SelectableCardIcon",
+  "description": "SelectableCardIcon component",
+  "platforms": [
+    "react",
+    "rails"
+  ],
+  "props": {
+    "checked": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "checkmark": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "customIcon": {
+      "type": "GenericObject",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": null
+    },
+    "dark": {
+      "type": "boolean",
+      "platforms": [
+        "react"
+      ]
+    },
+    "disabled": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "icon": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "inputId": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "multi": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": true
+    },
+    "name": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "titleText": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "bodyText": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "value": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "onChange": {
+      "type": "ReactNode",
+      "platforms": [
+        "react"
+      ]
+    },
+    "inputOptions": {
+      "platforms": [
+        "rails"
+      ],
+      "type": "string"
+    }
+  },
+  "globalProps": true,
+  "usage": {
+    "react": {
+      "import": "import { SelectableCardIcon } from 'playbook-ui'",
+      "example": "<SelectableCardIcon></SelectableCardIcon>"
+    },
+    "rails": {
+      "import": null,
+      "example": "<%= pb_rails(\"selectable_card_icon\", props: { text: \"Example\" }) %>"
+    }
+  }
+}

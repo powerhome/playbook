@@ -10,27 +10,23 @@ module Playbook
       base.prop :right
     end
 
+    RIGHT_VALUES = %w[0 xxs xs sm md lg xl auto initial inherit].freeze
+
     def right_values
-      %w[0 xxs xs sm md lg xl auto initial inherit]
+      RIGHT_VALUES
     end
 
     def right_options
-      {
-        right: "right",
-      }
+      { right: "right" }
     end
 
   private
 
     def right_props
-      selected_props = right_options.keys.select { |sk| try(sk) }
-      return nil unless selected_props.present?
+      value = right
+      return nil unless value
 
-      selected_props.map do |k|
-        value = send(k)
-        css = positioning_css("right", value) if right.present?
-        css
-      end.compact.join(" ")
+      positioning_css("right", value)
     end
   end
 end

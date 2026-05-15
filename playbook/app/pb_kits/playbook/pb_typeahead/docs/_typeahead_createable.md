@@ -1,0 +1,1 @@
+The `createable` prop allows users to create new options by typing a value that doesn't exist in the options list. 

@@ -37,13 +37,12 @@ type AdvancedTableProps = {
   columnDefinitions: GenericObject[]
   columnGroupBorderColor?: "text_lt_default" | "text_lt_light" | "text_lt_lighter" | "text_dk_default" | "text_dk_light" | "text_dk_lighter"
   columnVisibilityControl?: GenericObject
-  customSort?:boolean;
-  dark?: boolean
+  customSort?: boolean
   data?: { [key: string]: string }
   enableToggleExpansion?: "all" | "header" | "none"
   enableSortingRemoval?: boolean
   expandedControl?: GenericObject
-  expandByDepth?: { [key: string]: string | number }
+  expandByDepth?: GenericObject[]
   onExpandByDepthClick?: (arg: number, arg1: any) => void
   htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string
@@ -67,6 +66,7 @@ type AdvancedTableProps = {
   persistToggleExpansionButton?: boolean,
   sortControl?: GenericObject
   sortParentOnly?: boolean
+  stickyLeftColumn?: string[]
   tableData: GenericObject[]
   tableOptions?: GenericObject
   tableProps?: GenericObject
@@ -77,6 +77,18 @@ type AdvancedTableProps = {
   allowFullScreen?: boolean
   fullScreenControl?: (controls: FullscreenControls) => void
 } & GlobalProps;
+
+/**
+ * Subcomponent props (AdvancedTable.Header / AdvancedTable.Body). Must be a plain `type NameProps = { ... }` block—
+ * `yarn generate-ai-metadata` only parses that shape in this file (not Omit<> / intersection).
+ * Not used on the root component; playground routes these via propTargets.
+ */
+type _AdvancedTableSubkitSchemaProps = {
+  enableSorting?: boolean
+  sortIcon?: string | string[]
+  collapsibleTrail?: boolean
+  subRowHeaders?: string[]
+}
 
 const AdvancedTable = (props: AdvancedTableProps) => {
   const {

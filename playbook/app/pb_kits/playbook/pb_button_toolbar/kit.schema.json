@@ -1,0 +1,66 @@
+{
+  "$schema": "https://playbook.powerapp.cloud/schemas/kit-schema.json",
+  "name": "ButtonToolbar",
+  "description": "ButtonToolbar component",
+  "platforms": [
+    "react",
+    "rails"
+  ],
+  "props": {
+    "onClick": {
+      "type": "ReactNode",
+      "platforms": [
+        "react"
+      ]
+    },
+    "orientation": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "horizontal",
+        "vertical"
+      ],
+      "default": "horizontal"
+    },
+    "text": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "variant": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "primary",
+        "secondary"
+      ],
+      "default": "primary"
+    },
+    "connected": {
+      "platforms": [
+        "rails"
+      ],
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "globalProps": true,
+  "usage": {
+    "react": {
+      "import": "import { ButtonToolbar } from 'playbook-ui'",
+      "example": "<ButtonToolbar orientation=\"horizontal\" variant=\"primary\"></ButtonToolbar>"
+    },
+    "rails": {
+      "import": null,
+      "example": "<%= pb_rails(\"button_toolbar\", props: { orientation: \"horizontal\", variant: \"primary\" }) %>"
+    }
+  }
+}

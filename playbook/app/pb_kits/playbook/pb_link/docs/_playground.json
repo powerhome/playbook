@@ -1,0 +1,171 @@
+{
+  "template": "<Link{{props}}>{{children}}</Link>",
+  "propTargets": {},
+  "defaults": {
+    "color": "default",
+    "disabled": false,
+    "tag": "a",
+    "underline": false,
+    "href": "#link-example",
+    "text": "Link text"
+  },
+  "children": {
+    "editable": true,
+    "default": "Link text",
+    "hideWhenPropSet": [
+      "text"
+    ]
+  },
+  "groups": [
+    {
+      "name": "Content",
+      "props": [
+        "text",
+        "icon",
+        "iconRight"
+      ]
+    },
+    {
+      "name": "Behavior",
+      "props": [
+        "href",
+        "target",
+        "disabled",
+        "tabIndex"
+      ]
+    },
+    {
+      "name": "Appearance",
+      "props": [
+        "color",
+        "underline",
+        "tag",
+        "dark"
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default",
+      "props": {
+        "href": "#link-example",
+        "text": "Link text"
+      }
+    },
+    {
+      "name": "Body color",
+      "props": {
+        "color": "body",
+        "href": "#body-link",
+        "text": "Inline body link"
+      }
+    },
+    {
+      "name": "Muted underline",
+      "props": {
+        "color": "muted",
+        "href": "#secondary-link",
+        "underline": true,
+        "text": "Secondary link"
+      }
+    },
+    {
+      "name": "Destructive",
+      "props": {
+        "color": "destructive",
+        "href": "#delete-account",
+        "text": "Delete account"
+      }
+    },
+    {
+      "name": "Leading icon",
+      "props": {
+        "color": "default",
+        "href": "#continue",
+        "icon": "arrow-up-right-from-square",
+        "text": "Continue"
+      }
+    },
+    {
+      "name": "Trailing icon",
+      "props": {
+        "href": "#details",
+        "icon": "plus",
+        "iconRight": "chevron-right",
+        "text": "Open document"
+      }
+    },
+    {
+      "name": "Disabled",
+      "props": {
+        "disabled": true,
+        "href": "#disabled",
+        "text": "Disabled link"
+      }
+    },
+    {
+      "name": "Heading tag",
+      "props": {
+        "href": "#heading-link",
+        "icon": "arrow-up-right-from-square",
+        "tag": "h3",
+        "text": "Heading link"
+      }
+    },
+    {
+      "name": "External new tab",
+      "props": {
+        "href": "https://example.com",
+        "target": "_blank",
+        "icon": "arrow-up-right-from-square",
+        "text": "Example.com"
+      }
+    },
+    {
+      "name": "Span tag",
+      "props": {
+        "href": "#span-link",
+        "tag": "span",
+        "text": "Span link example"
+      }
+    }
+  ],
+  "conditionals": {
+    "target": {
+      "requires": "href"
+    },
+    "iconRight": {
+      "requires": "icon"
+    }
+  },
+  "hints": {
+    "external_target_info": {
+      "when": {
+        "target": "_blank"
+      },
+      "message": "Use target=\"_blank\" for external destinations that should open in a new tab.",
+      "type": "info"
+    },
+    "icon_pairing_info": {
+      "when": {
+        "iconRight": "chevron-right"
+      },
+      "message": "iconRight is available only when icon is also set, so the link can render a balanced icon treatment.",
+      "type": "info"
+    },
+    "disabled_info": {
+      "when": {
+        "disabled": true
+      },
+      "message": "Disabled links keep their visual treatment but should not be the only way to reach important actions.",
+      "type": "info"
+    },
+    "tag_semantics_info": {
+      "when": {
+        "tag": "h3"
+      },
+      "message": "Use tag to borrow link styling on semantic headings or inline text, but keep href when the element should still navigate.",
+      "type": "info"
+    }
+  }
+}

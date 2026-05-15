@@ -5,6 +5,8 @@ import TitleCount from '../../pb_title_count/_title_count'
 
 const resultsText = (results: number): string => results == 1 ? 'Result' : 'Results'
 
+const formatResultsCount = (n: number): string => n.toLocaleString()
+
 type ResultsCountProps = {
   dark?: boolean,
   results?: number | null,
@@ -31,7 +33,7 @@ const ResultsCount = ({ dark, results, title }: ResultsCountProps): React.ReactE
           className="filter-results"
           dark={dark}
           size="xs"
-          text={`${results} ${resultsText(results)}`}
+          text={`${formatResultsCount(results)} ${resultsText(results)}`}
       />
     )
   }

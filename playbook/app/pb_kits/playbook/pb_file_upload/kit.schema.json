@@ -1,0 +1,130 @@
+{
+  "$schema": "https://playbook.powerapp.cloud/schemas/kit-schema.json",
+  "name": "FileUpload",
+  "description": "FileUpload component",
+  "platforms": [
+    "react",
+    "rails"
+  ],
+  "props": {
+    "accept": {
+      "type": "Record<string, string[]>",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": ""
+    },
+    "customMessage": {
+      "type": "string",
+      "platforms": [
+        "react"
+      ]
+    },
+    "dark": {
+      "type": "boolean",
+      "platforms": [
+        "react"
+      ]
+    },
+    "acceptedFilesDescription": {
+      "type": "string",
+      "platforms": [
+        "react"
+      ]
+    },
+    "maxSize": {
+      "type": "number",
+      "platforms": [
+        "react"
+      ]
+    },
+    "onFilesAccepted": {
+      "type": "Callback<File, File>",
+      "platforms": [
+        "react"
+      ]
+    },
+    "onFilesRejected": {
+      "type": "function",
+      "platforms": [
+        "react"
+      ]
+    },
+    "error": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "getRootProps": {
+      "type": "function",
+      "platforms": [
+        "react"
+      ]
+    },
+    "getInputProps": {
+      "type": "function",
+      "platforms": [
+        "react"
+      ]
+    },
+    "isDragActive": {
+      "type": "boolean",
+      "platforms": [
+        "react"
+      ]
+    },
+    "fileRejections": {
+      "type": "array",
+      "platforms": [
+        "react"
+      ]
+    },
+    "files": {
+      "platforms": [
+        "rails"
+      ],
+      "type": "array"
+    },
+    "label": {
+      "platforms": [
+        "rails"
+      ],
+      "type": "string",
+      "default": "Upload File"
+    },
+    "placeholder": {
+      "platforms": [
+        "rails"
+      ],
+      "type": "string",
+      "default": "No file"
+    },
+    "fullWidth": {
+      "platforms": [
+        "rails"
+      ],
+      "type": "boolean",
+      "default": false
+    },
+    "inputOptions": {
+      "platforms": [
+        "rails"
+      ],
+      "type": "string"
+    }
+  },
+  "globalProps": true,
+  "usage": {
+    "react": {
+      "import": "import { FileUpload } from 'playbook-ui'",
+      "example": "<FileUpload></FileUpload>"
+    },
+    "rails": {
+      "import": null,
+      "example": "<%= pb_rails(\"file_upload\", props: { text: \"Example\" }) %>"
+    }
+  }
+}

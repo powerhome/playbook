@@ -17,7 +17,7 @@ const languages = [
   { label: 'PHP', value: '1995', category: 'Web Development' },
 ]
 
-const colors = [
+const colorOptions = [
   { label: 'Orange', value: '#FFA500' },
   { label: 'Red', value: '#FF0000' },
   { label: 'Green', value: '#00FF00' },
@@ -51,7 +51,7 @@ const TypeaheadReactHook = (props) => {
       <Typeahead
           label="Colors"
           marginTop="lg"
-          options={colors}
+          options={colorOptions}
           {...props}
           {...register('color')}
       />

@@ -25,56 +25,71 @@ module Playbook
       base.prop :padding_y
     end
 
+    MAX_WIDTH_VALUES = %w[0% xs sm md lg xl xxl 0 none 100%].freeze
+    MIN_WIDTH_VALUES = %w[0% xs sm md lg xl xxl 0 none 100%].freeze
+    WIDTH_VALUES = %w[0% xs sm md lg xl xxl 0 none 100%].freeze
+    GAP_VALUES = %w[none xxs xs sm md lg xl].freeze
+    SPACING_VALUES = %w[none xxs xs sm md lg xl auto initial inherit].freeze
+    SCREEN_SIZE_VALUES = %w[xs sm md lg xl default].freeze
+    BREAK_METHOD_VALUES = %w[on at].freeze
+    SCREEN_SIZES = %w[xs sm md lg xl].freeze
+    SPACING_HASH_SKIP_KEYS = %i[default break].freeze
+
+    SPACING_PROP_MAP = {
+      margin: "m",
+      margin_bottom: "mb",
+      margin_left: "ml",
+      margin_right: "mr",
+      margin_top: "mt",
+      margin_x: "mx",
+      margin_y: "my",
+      padding: "p",
+      padding_bottom: "pb",
+      padding_left: "pl",
+      padding_right: "pr",
+      padding_top: "pt",
+      padding_x: "px",
+      padding_y: "py",
+    }.freeze
+
     def max_width_options
-      {
-        max_width: "mw",
-      }
+      { max_width: "mw" }
     end
 
     def min_width_options
-      {
-        min_width: "minw",
-      }
+      { min_width: "minw" }
     end
 
     def width_options
-      {
-        width: "w",
-      }
+      { width: "w" }
     end
 
     def max_width_values
-      %w[0% xs sm md lg xl xxl 0 none 100%]
+      MAX_WIDTH_VALUES
     end
 
     def min_width_values
-      %w[0% xs sm md lg xl xxl 0 none 100%]
+      MIN_WIDTH_VALUES
     end
 
     def width_values
-      %w[0% xs sm md lg xl xxl 0 none 100%]
+      WIDTH_VALUES
     end
 
     def gap_values
-      %w[none xxs xs sm md lg xl]
+      GAP_VALUES
     end
 
     def gap_options
-      {
-        gap: "gap",
-      }
+      { gap: "gap" }
     end
 
     def column_gap_options
-      {
-        column_gap: "column_gap",
-      }
+      { column_gap: "column_gap" }
     end
 
     def row_gap_options
-      {
-        row_gap: "row_gap",
-      }
+      { row_gap: "row_gap" }
     end
 
     def spacing_options
@@ -97,41 +112,37 @@ module Playbook
     end
 
     def spacing_values
-      %w[none xxs xs sm md lg xl auto initial inherit]
+      SPACING_VALUES
     end
 
     def screen_size_values
-      %w[xs sm md lg xl default]
+      SCREEN_SIZE_VALUES
     end
 
     def break_method_values
-      %w[on at]
+      BREAK_METHOD_VALUES
     end
 
     def spacing_props
-      selected_props = spacing_options.keys.select { |sk| try(sk) }
-      return nil unless selected_props.present?
+      css = +""
+      SPACING_PROP_MAP.each do |prop_name, prefix|
+        spacing_value = send(prop_name)
+        next unless spacing_value
 
-      css = ""
-      selected_props.each do |prop|
-        responsive = try(prop).is_a?(::Hash)
-        spacing_value = send(prop)
-        prefix = spacing_options[prop]
-
-        if responsive
-          default_value = spacing_value.delete(:default) || nil
-          break_value = spacing_value.delete(:break) || break_method_values.first
+        if spacing_value.is_a?(::Hash)
+          default_value = spacing_value[:default]
+          break_value = spacing_value[:break] || BREAK_METHOD_VALUES.first
           spacing_value.each do |key, value|
-            css += "break_#{break_value}_#{key}\:#{prefix}_#{value} " if screen_size_values.include?(key.to_s) && spacing_values.include?(value.to_s)
-          end
+            next if SPACING_HASH_SKIP_KEYS.include?(key)
 
-          css += "#{prefix}_#{default_value} " if spacing_values.include?(default_value)
-        elsif spacing_values.include?(spacing_value)
-          css += "#{prefix}_#{spacing_value} "
+            css << "break_#{break_value}_#{key}\:#{prefix}_#{value} " if SCREEN_SIZE_VALUES.include?(key.to_s) && SPACING_VALUES.include?(value.to_s)
+          end
+          css << "#{prefix}_#{default_value} " if SPACING_VALUES.include?(default_value)
+        elsif SPACING_VALUES.include?(spacing_value)
+          css << "#{prefix}_#{spacing_value} "
         end
       end
-
-      css.strip unless css.blank?
+      css.strip unless css.empty?
     end
 
     def filter_classname(value)
@@ -143,111 +154,72 @@ module Playbook
     end
 
     def min_width_props
-      selected_minw_props = min_width_options.keys.select { |sk| try(sk) }
-      return nil unless selected_minw_props.present?
+      value = min_width
+      return nil unless value
 
-      selected_minw_props.map do |k|
-        width_value = send(k)
-        "min_width_#{filter_classname(width_value)}" if min_width_values.include? width_value
-      end.compact.join(" ")
+      "min_width_#{filter_classname(value)}" if MIN_WIDTH_VALUES.include?(value)
     end
 
     def max_width_props
-      selected_mw_props = max_width_options.keys.select { |sk| try(sk) }
-      return nil unless selected_mw_props.present?
+      value = max_width
+      return nil unless value
 
-      selected_mw_props.map do |k|
-        width_value = send(k)
-        "max_width_#{filter_classname(width_value)}" if max_width_values.include? width_value
-      end.compact.join(" ")
+      "max_width_#{filter_classname(value)}" if MAX_WIDTH_VALUES.include?(value)
     end
 
     def width_props
-      selected_w_props = width_options.keys.select { |sk| try(sk) }
-      return nil unless selected_w_props.present?
+      value = width
+      return nil unless value
 
-      selected_w_props.map do |k|
-        width_value = send(k)
-        "width_#{filter_classname(width_value)}" if width_values.include? width_value
-      end.compact.join(" ")
+      "width_#{filter_classname(value)}" if WIDTH_VALUES.include?(value)
     end
 
     def gap_props
-      selected_gap_props = gap_options.keys.select { |sk| try(sk) }
-      return nil unless selected_gap_props.present?
+      value = gap
+      return nil unless value
 
-      screen_size_values = %w[xs sm md lg xl]
-
-      selected_gap_props.map do |k|
-        gap_value = send(k)
-        if gap_value.is_a?(Hash)
-          class_result = []
-
-          # Handle default value separately (generates base class without size prefix)
-          class_result << "gap_#{gap_value[:default].underscore}" if gap_value.key?(:default) && gap_values.include?(gap_value[:default].to_s)
-
-          # Handle responsive sizes (generates classes with size prefix)
-          gap_value.each do |media_size, gap_spacing_value|
-            class_result << "gap_#{media_size}_#{gap_spacing_value.underscore}" if screen_size_values.include?(media_size.to_s) && gap_values.include?(gap_spacing_value.to_s)
-          end
-
-          class_result
-        elsif gap_values.include?(gap_value.to_s)
-          "gap_#{gap_value.underscore}"
+      if value.is_a?(::Hash)
+        css = +""
+        css << "gap_#{value[:default].underscore} " if value.key?(:default) && GAP_VALUES.include?(value[:default].to_s)
+        value.each do |media_size, gap_spacing_value|
+          css << "gap_#{media_size}_#{gap_spacing_value.underscore} " if SCREEN_SIZES.include?(media_size.to_s) && GAP_VALUES.include?(gap_spacing_value.to_s)
         end
-      end.flatten.compact.join(" ")
+        css.strip unless css.empty?
+      elsif GAP_VALUES.include?(value.to_s)
+        "gap_#{value.underscore}"
+      end
     end
 
     def column_gap_props
-      selected_column_gap_props = column_gap_options.keys.select { |sk| try(sk) }
-      return nil unless selected_column_gap_props.present?
+      value = column_gap
+      return nil unless value
 
-      screen_size_values = %w[xs sm md lg xl]
-
-      selected_column_gap_props.map do |k|
-        column_gap_value = send(k)
-        if column_gap_value.is_a?(Hash)
-          class_result = []
-
-          # Handle default value separately (generates base class without size prefix)
-          class_result << "column_gap_#{column_gap_value[:default].underscore}" if column_gap_value.key?(:default) && gap_values.include?(column_gap_value[:default].to_s)
-
-          # Handle responsive sizes (generates classes with size prefix)
-          column_gap_value.each do |media_size, column_gap_spacing_value|
-            class_result << "column_gap_#{media_size}_#{column_gap_spacing_value.underscore}" if screen_size_values.include?(media_size.to_s) && gap_values.include?(column_gap_spacing_value.to_s)
-          end
-
-          class_result
-        elsif gap_values.include?(column_gap_value.to_s)
-          "column_gap_#{column_gap_value.underscore}"
+      if value.is_a?(::Hash)
+        css = +""
+        css << "column_gap_#{value[:default].underscore} " if value.key?(:default) && GAP_VALUES.include?(value[:default].to_s)
+        value.each do |media_size, column_gap_spacing_value|
+          css << "column_gap_#{media_size}_#{column_gap_spacing_value.underscore} " if SCREEN_SIZES.include?(media_size.to_s) && GAP_VALUES.include?(column_gap_spacing_value.to_s)
         end
-      end.flatten.compact.join(" ")
+        css.strip unless css.empty?
+      elsif GAP_VALUES.include?(value.to_s)
+        "column_gap_#{value.underscore}"
+      end
     end
 
     def row_gap_props
-      selected_row_gap_props = row_gap_options.keys.select { |sk| try(sk) }
-      return nil unless selected_row_gap_props.present?
+      value = row_gap
+      return nil unless value
 
-      screen_size_values = %w[xs sm md lg xl]
-
-      selected_row_gap_props.map do |k|
-        row_gap_value = send(k)
-        if row_gap_value.is_a?(Hash)
-          class_result = []
-
-          # Handle default value separately (generates base class without size prefix)
-          class_result << "row_gap_#{row_gap_value[:default].underscore}" if row_gap_value.key?(:default) && gap_values.include?(row_gap_value[:default].to_s)
-
-          # Handle responsive sizes (generates classes with size prefix)
-          row_gap_value.each do |media_size, row_gap_spacing_value|
-            class_result << "row_gap_#{media_size}_#{row_gap_spacing_value.underscore}" if screen_size_values.include?(media_size.to_s) && gap_values.include?(row_gap_spacing_value.to_s)
-          end
-
-          class_result
-        elsif gap_values.include?(row_gap_value.to_s)
-          "row_gap_#{row_gap_value.underscore}"
+      if value.is_a?(::Hash)
+        css = +""
+        css << "row_gap_#{value[:default].underscore} " if value.key?(:default) && GAP_VALUES.include?(value[:default].to_s)
+        value.each do |media_size, row_gap_spacing_value|
+          css << "row_gap_#{media_size}_#{row_gap_spacing_value.underscore} " if SCREEN_SIZES.include?(media_size.to_s) && GAP_VALUES.include?(row_gap_spacing_value.to_s)
         end
-      end.flatten.compact.join(" ")
+        css.strip unless css.empty?
+      elsif GAP_VALUES.include?(value.to_s)
+        "row_gap_#{value.underscore}"
+      end
     end
   end
 end

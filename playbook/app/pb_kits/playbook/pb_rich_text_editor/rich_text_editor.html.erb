@@ -1,0 +1,162 @@
+<%# TipTap loads via full URL dynamic import() in rich_text_editor_rails.js (esm.sh) — no import map, so no clash with Vite/host maps. %>
+<%= pb_content_tag(:div, id: object.container_id, class: object.classname, data: { pb_rte_tiptap: true, input_id: object.input_id, initial_html: object.initial_html, rte_simple: object.simple }) do %>
+  <div class="pb_rich_text_editor_kit">
+  <% if object.label.present? %>
+    <label for="<%= object.input_id %>">
+      <% if object.required_indicator %>
+        <%= pb_rails("caption", props: { color: "lighter", text: object.label, dark: object.dark }) %><span style="color: #DA0014;"> *</span>
+      <% else %>
+        <%= pb_rails("caption", props: { color: "lighter", text: object.label, dark: object.dark }) %>
+      <% end %>
+    </label>
+  <% end %>
+  <input type="hidden" name="<%= object.input_name %>" id="<%= object.input_id %>" value="" />
+  <div class="pb_rich_text_editor_advanced_container toolbar-active<%= " pb_rich_text_editor_rte--simple" if object.simple %>">
+    <% if object.simple %>
+    <%# Compact toolbar: Bold/Italic + Undo/Redo — no block-style Popover (avoids dialog positioning issues). %>
+    <div class="pb_background_kit pb_background_color_white toolbar rte-rails-toolbar-layout rte-rails-toolbar-layout--simple" id="<%= object.toolbar_id %>">
+      <div class="rte-rails-toolbar-row">
+        <div class="toolbar_block rte-toolbar-left">
+          <button type="button" class="toolbar_button" data-action="bold" title="Bold" role="button" tabindex="0">
+            <%= pb_rails("flex", props: { align: "center", justify: "center", classname: "toolbar_button_icon" }) do %>
+              <%= pb_rails("icon", props: { icon: "bold", size: "lg" }) %>
+            <% end %>
+          </button>
+          <button type="button" class="toolbar_button" data-action="italic" title="Italic" role="button" tabindex="0">
+            <%= pb_rails("flex", props: { align: "center", justify: "center", classname: "toolbar_button_icon" }) do %>
+              <%= pb_rails("icon", props: { icon: "italic", size: "lg" }) %>
+            <% end %>
+          </button>
+        </div>
+        <div class="toolbar_block rte-toolbar-right">
+          <button type="button" class="toolbar_button" data-action="undo" title="Undo" role="button" tabindex="0">
+            <%= pb_rails("flex", props: { align: "center", justify: "center", classname: "toolbar_button_icon" }) do %>
+              <%= pb_rails("icon", props: { icon: "undo", size: "lg" }) %>
+            <% end %>
+          </button>
+          <button type="button" class="toolbar_button" data-action="redo" title="Redo" role="button" tabindex="0">
+            <%= pb_rails("flex", props: { align: "center", justify: "center", classname: "toolbar_button_icon" }) do %>
+              <%= pb_rails("icon", props: { icon: "redo", size: "lg" }) %>
+            <% end %>
+          </button>
+        </div>
+      </div>
+    </div>
+    <% else %>
+    <% block_style_options = [
+      { value: "paragraph", text: "Paragraph", icon: "paragraph" },
+      { value: "heading-1", text: "Heading 1", icon: "h1" },
+      { value: "heading-2", text: "Heading 2", icon: "h2" },
+      { value: "heading-3", text: "Heading 3", icon: "h3" },
+      { value: "bulletList", text: "Bullet List", icon: "list" },
+      { value: "orderedList", text: "Ordered List", icon: "list-ol" },
+      { value: "blockquote", text: "Block Quote", icon: "block-quote" },
+    ] %>
+    <div class="pb_background_kit pb_background_color_white toolbar rte-rails-toolbar-layout" id="<%= object.toolbar_id %>">
+      <div class="rte-rails-toolbar-row">
+        <div class="toolbar_block rte-toolbar-left">
+          <span class="pb_popover_reference_wrapper">
+            <%# Button kit wraps content in <span class="pb_button_content"> — block <div>s inside are invalid and break layout. Single <span> row + JS sync from templates. %>
+            <%= pb_rails("button", props: {
+              id: object.rte_block_style_trigger_id,
+              variant: "secondary",
+              classname: "editor-dropdown-button",
+              html_options: {
+                type: "button",
+                "aria-label": "Text style",
+                "aria-haspopup": "true",
+              },
+            }) do %>
+              <span class="pb_flex_kit pb_flex_kit_orientation_row pb_flex_kit_justify_content_left pb_flex_kit_align_items_center pb_flex_kit_spacing_none pb_flex_kit_gap_xs gap_xs rte-block-style-trigger-inner" data-rte-block-trigger>
+                <span class="rte-block-style-trigger-icon">
+                  <%= pb_rails("icon", props: { icon: "paragraph", size: "lg" }) %>
+                </span>
+                <span class="rte-block-style-trigger-label">Paragraph</span>
+                <span class="display_inline_flex rte-block-style-chevron">
+                  <%= pb_rails("icon", props: { icon: "chevron-down", fixed_width: true }) %>
+                </span>
+              </span>
+            <% end %>
+          </span>
+          <%= pb_rails("popover", props: {
+            trigger_element_id: object.rte_block_style_trigger_id,
+            tooltip_id: object.rte_block_style_tooltip_id,
+            position: "bottom",
+            padding: "none",
+            close_on_click: "any",
+            offset: true,
+          }) do %>
+            <%= pb_rails("nav", props: { variant: "subtle", padding_top: "xs", padding_bottom: "xs" }) do %>
+              <% block_style_options.each do |opt| %>
+                <%= pb_rails("nav/item", props: {
+                  link: "##{opt[:value]}",
+                  text: opt[:text],
+                  icon_left: opt[:icon],
+                  margin: "none",
+                  padding_top: "xxs",
+                  padding_bottom: "xxs",
+                }) %>
+              <% end %>
+            <% end %>
+          <% end %>
+          <%= pb_rails("section_separator", props: { orientation: "vertical" }) %>
+          <button type="button" class="toolbar_button" data-action="bold" title="Bold" role="button" tabindex="0">
+            <%= pb_rails("flex", props: { align: "center", justify: "center", classname: "toolbar_button_icon" }) do %>
+              <%= pb_rails("icon", props: { icon: "bold", size: "lg" }) %>
+            <% end %>
+          </button>
+          <button type="button" class="toolbar_button" data-action="italic" title="Italic" role="button" tabindex="0">
+            <%= pb_rails("flex", props: { align: "center", justify: "center", classname: "toolbar_button_icon" }) do %>
+              <%= pb_rails("icon", props: { icon: "italic", size: "lg" }) %>
+            <% end %>
+          </button>
+          <button type="button" class="toolbar_button" data-action="strike" title="Strikethrough" role="button" tabindex="0">
+            <%= pb_rails("flex", props: { align: "center", justify: "center", classname: "toolbar_button_icon" }) do %>
+              <%= pb_rails("icon", props: { icon: "strikethrough", size: "lg" }) %>
+            <% end %>
+          </button>
+          <%= pb_rails("section_separator", props: { orientation: "vertical" }) %>
+          <button type="button" class="toolbar_button" data-action="codeBlock" title="Code block" role="button" tabindex="0">
+            <%= pb_rails("flex", props: { align: "center", justify: "center", classname: "toolbar_button_icon" }) do %>
+              <%= pb_rails("icon", props: { icon: "code", size: "lg" }) %>
+            <% end %>
+          </button>
+          <button type="button" class="toolbar_button" data-action="link" title="Link" role="button" tabindex="0">
+            <%= pb_rails("flex", props: { align: "center", justify: "center", classname: "toolbar_button_icon" }) do %>
+              <%= pb_rails("icon", props: { icon: "link", size: "lg" }) %>
+            <% end %>
+          </button>
+        </div>
+        <div class="toolbar_block rte-toolbar-right">
+          <button type="button" class="toolbar_button" data-action="undo" title="Undo" role="button" tabindex="0">
+            <%= pb_rails("flex", props: { align: "center", justify: "center", classname: "toolbar_button_icon" }) do %>
+              <%= pb_rails("icon", props: { icon: "undo", size: "lg" }) %>
+            <% end %>
+          </button>
+          <button type="button" class="toolbar_button" data-action="redo" title="Redo" role="button" tabindex="0">
+            <%= pb_rails("flex", props: { align: "center", justify: "center", classname: "toolbar_button_icon" }) do %>
+              <%= pb_rails("icon", props: { icon: "redo", size: "lg" }) %>
+            <% end %>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div id="<%= object.container_id %>-block-icon-templates" hidden aria-hidden="true">
+      <% block_style_options.each do |opt| %>
+        <span data-block-template-for="<%= opt[:value] %>" data-label="<%= opt[:text] %>">
+          <%= pb_rails("icon", props: { icon: opt[:icon], size: "lg" }) %>
+        </span>
+      <% end %>
+    </div>
+    <% end %>
+    <div class="rte-editor-wrap">
+      <div id="<%= object.editor_node_id %>"></div>
+    </div>
+  </div>
+  </div>
+<% end %>
+
+<%# Module script: rich_text_editor_rails.js %>
+<script type="module">
+<%= File.read(Playbook.kit_path("rich_text_editor", "rich_text_editor_rails.js")).html_safe %>
+</script>

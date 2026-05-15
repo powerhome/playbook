@@ -6,42 +6,31 @@ module Playbook
       base.prop :flex_wrap
     end
 
-    # rubocop:disable Style/IfInsideElse
+    FLEX_WRAP_VALUES = %w[wrap nowrap wrapReverse].freeze
+    SCREEN_SIZES = %w[xs sm md lg xl].freeze
+
     def flex_wrap_props
-      selected_props = flex_wrap_options.keys.select { |sk| try(sk) }
-      return nil unless selected_props.present?
+      value = flex_wrap
+      return nil unless value
 
-      screen_size_values = %w[xs sm md lg xl]
-
-      selected_props.map do |k|
-        flex_wrap_value = send(k)
-        if flex_wrap_value.is_a?(Hash)
-          class_result = []
-
-          # Handle default value separately (generates base class without size prefix)
-          class_result << "flex_wrap_#{flex_wrap_value[:default].underscore}" if flex_wrap_value.key?(:default) && flex_wrap_values.include?(flex_wrap_value[:default])
-
-          # Handle responsive sizes (generates classes with size prefix)
-          flex_wrap_value.each do |media_size, wrap_value|
-            class_result << "flex_wrap_#{media_size}_#{wrap_value.underscore}" if screen_size_values.include?(media_size.to_s) && flex_wrap_values.include?(wrap_value)
-          end
-
-          class_result
-        else
-          "flex_wrap_#{flex_wrap_value}" if flex_wrap_values.include? flex_wrap_value
+      if value.is_a?(::Hash)
+        css = +""
+        css << "flex_wrap_#{value[:default].underscore} " if value.key?(:default) && FLEX_WRAP_VALUES.include?(value[:default])
+        value.each do |media_size, wrap_value|
+          css << "flex_wrap_#{media_size}_#{wrap_value.underscore} " if SCREEN_SIZES.include?(media_size.to_s) && FLEX_WRAP_VALUES.include?(wrap_value)
         end
-      end.flatten.compact.join(" ")
+        css.strip unless css.empty?
+      elsif FLEX_WRAP_VALUES.include?(value)
+        "flex_wrap_#{value}"
+      end
     end
-    # rubocop:enable Style/IfInsideElse
 
     def flex_wrap_options
-      {
-        flex_wrap: "flex_wrap",
-      }
+      { flex_wrap: "flex_wrap" }
     end
 
     def flex_wrap_values
-      %w[wrap nowrap wrapReverse]
+      FLEX_WRAP_VALUES
     end
   end
 end

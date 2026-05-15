@@ -1,0 +1,74 @@
+{
+  "$schema": "https://playbook.powerapp.cloud/schemas/kit-schema.json",
+  "name": "Image",
+  "description": "Image component",
+  "platforms": [
+    "react",
+    "rails"
+  ],
+  "props": {
+    "alt": {
+      "platforms": [
+        "rails"
+      ]
+    },
+    "onError": {
+      "platforms": [
+        "rails"
+      ],
+      "type": "string",
+      "default": null
+    },
+    "rounded": {
+      "platforms": [
+        "rails"
+      ],
+      "type": "boolean",
+      "default": false
+    },
+    "size": {
+      "platforms": [
+        "rails"
+      ],
+      "type": "enum",
+      "values": [
+        "xs",
+        "sm",
+        "md",
+        "lg",
+        "xl",
+        "none"
+      ],
+      "default": "none"
+    },
+    "transition": {
+      "platforms": [
+        "rails"
+      ],
+      "type": "enum",
+      "values": [
+        "blur",
+        "fade",
+        "scale",
+        "none"
+      ],
+      "default": "fade"
+    },
+    "url": {
+      "platforms": [
+        "rails"
+      ]
+    }
+  },
+  "globalProps": true,
+  "usage": {
+    "react": {
+      "import": "import { Image } from 'playbook-ui'",
+      "example": "<Image size=\"xs\" transition=\"blur\"></Image>"
+    },
+    "rails": {
+      "import": null,
+      "example": "<%= pb_rails(\"image\", props: { size: \"xs\", transition: \"blur\" }) %>"
+    }
+  }
+}

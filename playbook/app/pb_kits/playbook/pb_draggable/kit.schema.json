@@ -1,0 +1,66 @@
+{
+  "$schema": "https://playbook.powerapp.cloud/schemas/kit-schema.json",
+  "name": "Draggable",
+  "description": "Draggable component",
+  "platforms": [
+    "react",
+    "rails"
+  ],
+  "props": {
+    "dropZone": {
+      "type": "enum",
+      "platforms": [
+        "react"
+      ],
+      "values": [
+        "ghost",
+        "outline",
+        "shadow",
+        "line"
+      ]
+    },
+    "dropZoneColor": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "primary",
+        "neutral",
+        "purple"
+      ],
+      "default": "neutral"
+    },
+    "initialItems": {
+      "platforms": [
+        "rails"
+      ],
+      "type": "array"
+    },
+    "dropZoneType": {
+      "platforms": [
+        "rails"
+      ],
+      "type": "enum",
+      "values": [
+        "ghost",
+        "shadow",
+        "outline",
+        "line"
+      ],
+      "default": "ghost"
+    }
+  },
+  "globalProps": true,
+  "usage": {
+    "react": {
+      "import": "import { Draggable } from 'playbook-ui'",
+      "example": "<Draggable dropZone=\"ghost\" dropZoneColor=\"primary\"></Draggable>"
+    },
+    "rails": {
+      "import": null,
+      "example": "<%= pb_rails(\"draggable\", props: { drop_zone: \"ghost\", drop_zone_color: \"primary\" }) %>"
+    }
+  }
+}

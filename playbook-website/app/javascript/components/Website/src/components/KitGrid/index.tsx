@@ -1,4 +1,4 @@
-import React, { ReactElement } from "react";
+import { ReactElement } from "react";
 import { Layout } from "playbook-ui";
 
 import "./styles.scss";
@@ -9,8 +9,10 @@ type KitGridProps = {
 
 export const KitGrid = ({ children }: KitGridProps) => {
   return (
-    <Layout layout="collection" paddingX="xl">
-      <Layout.Body className="kit-container">{children}</Layout.Body>
-    </Layout>
+    <div className="kit-grid-shell">
+      <Layout className="kit-grid-layout" layout="collection" width="100%">
+        <Layout.Body className="kit-container">{children}</Layout.Body>
+      </Layout>
+    </div>
   );
 };

@@ -6,28 +6,23 @@ module Playbook
       base.prop :position
     end
 
+    POSITION_VALUES = %w[relative absolute fixed sticky].freeze
+
     def position_values
-      %w[relative absolute fixed sticky]
+      POSITION_VALUES
     end
 
     def position_options
-      {
-        position: "position",
-      }
+      { position: "position" }
     end
 
   private
 
     def position_props
-      selected_props = position_options.keys.select { |sk| try(sk) }
-      return nil unless selected_props.present?
+      value = position
+      return nil unless value
 
-      selected_props.map do |k|
-        value = send(k)
-        return nil unless position_values.include? value
-
-        "position_#{value}"
-      end.compact.join(" ")
+      "position_#{value}" if POSITION_VALUES.include?(value)
     end
   end
 end

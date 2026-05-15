@@ -33,6 +33,7 @@ import TokensExamples from 'components/GlobalPropsAndTokens/ExamplesPage/TokensE
 import AnchorJS from 'anchor-js'
 import { Website } from 'components/app'
 import { Turbo } from "@hotwired/turbo-rails"
+import IconsIndex from 'components/Icons/IconsIndex'
 
 Turbo.session.drive = false
 
@@ -78,4 +79,5 @@ ComponentRegistry.registerComponents({
   HomepageHero,
   Tokens,
   TokensExamples,
+  IconsIndex,
 })

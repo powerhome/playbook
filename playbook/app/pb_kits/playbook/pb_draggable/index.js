@@ -22,7 +22,12 @@ export default class PbDraggable extends PbEnhancedElement {
     this.dragZoneType  = "";
     this.dragZoneColor = "";
 
-    document.addEventListener("DOMContentLoaded", () => this.bindEventListeners());
+    // If DOM is already loaded, bind immediately; otherwise wait for DOMContentLoaded
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", () => this.bindEventListeners());
+    } else {
+      this.bindEventListeners();
+    }
   }
 
   setState(newState) {

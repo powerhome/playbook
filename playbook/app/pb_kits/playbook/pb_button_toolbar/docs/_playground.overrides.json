@@ -1,0 +1,54 @@
+{
+  "template": "<ButtonToolbar{{props}}>\n  {{children}}\n</ButtonToolbar>",
+  "children": {
+    "editable": true,
+    "default": "<Button text=\"Create\" />\n<Button text=\"Edit\" />\n<Button text=\"Delete\" />",
+    "hideWhenPropSet": ["text"]
+  },
+  "groups": [
+    {
+      "name": "Layout",
+      "props": ["orientation"]
+    },
+    {
+      "name": "Appearance",
+      "props": ["variant"]
+    },
+    {
+      "name": "Content",
+      "props": ["text"]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default",
+      "props": { "orientation": "horizontal", "variant": "primary" },
+      "children": "<Button text=\"Create\" />\n<Button text=\"Edit\" />\n<Button text=\"Delete\" />"
+    },
+    {
+      "name": "Vertical",
+      "props": { "orientation": "vertical", "variant": "primary" },
+      "children": "<Button text=\"Create\" />\n<Button text=\"Edit\" />\n<Button text=\"Copy\" />\n<Button text=\"Cut\" />"
+    },
+    {
+      "name": "Secondary",
+      "props": { "orientation": "horizontal", "variant": "secondary" },
+      "children": "<Button text=\"Save\" variant=\"secondary\" />\n<Button text=\"Cancel\" variant=\"secondary\" />"
+    },
+    {
+      "name": "Icon Buttons",
+      "props": { "orientation": "vertical", "variant": "secondary" },
+      "children": "<Button icon=\"bold\" variant=\"secondary\" />\n<Button icon=\"italic\" variant=\"secondary\" />\n<Button icon=\"underline\" variant=\"secondary\" />"
+    }
+  ],
+  "conditionals": {
+    "text": { "hides": "children" }
+  },
+  "hints": {
+    "container_usage": {
+      "when": {},
+      "message": "ButtonToolbar is a container for Button components. Add Button children to create grouped actions.",
+      "type": "info"
+    }
+  }
+}

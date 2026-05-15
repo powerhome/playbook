@@ -1,5 +1,5 @@
 import { useLoaderData, Link } from "react-router-dom";
-import ReactMarkdown from "react-markdown";
+import { MarkdownContent } from "../../components/MarkdownContent";
 import {
   Flex,
   Background,
@@ -45,7 +45,7 @@ const GettingStarted = () => {
       >
         <Title text="Getting Started" tag="h1" size={1} />
         <div className="markdown-content">
-          <ReactMarkdown>{contentWithoutFrontmatter}</ReactMarkdown>
+          <MarkdownContent>{contentWithoutFrontmatter}</MarkdownContent>
         </div>
 
         {/* Render card grid of sub-pages */}

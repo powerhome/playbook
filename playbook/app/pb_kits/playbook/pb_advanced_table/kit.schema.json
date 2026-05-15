@@ -1,0 +1,325 @@
+{
+  "$schema": "https://playbook.powerapp.cloud/schemas/kit-schema.json",
+  "name": "AdvancedTable",
+  "description": "AdvancedTable component",
+  "platforms": [
+    "react",
+    "rails"
+  ],
+  "props": {
+    "actions": {
+      "type": "React.ReactNode[] | React.ReactNode",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "cascadeCollapse": {
+      "type": "boolean",
+      "platforms": [
+        "react"
+      ]
+    },
+    "columnDefinitions": {
+      "type": "array",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "columnGroupBorderColor": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "text_lt_default",
+        "text_lt_light",
+        "text_lt_lighter",
+        "text_dk_default",
+        "text_dk_light",
+        "text_dk_lighter"
+      ],
+      "default": "none"
+    },
+    "columnVisibilityControl": {
+      "type": "GenericObject",
+      "platforms": [
+        "react"
+      ]
+    },
+    "customSort": {
+      "type": "boolean",
+      "platforms": [
+        "react"
+      ]
+    },
+    "enableToggleExpansion": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "all",
+        "header",
+        "none"
+      ],
+      "default": "header"
+    },
+    "enableSortingRemoval": {
+      "type": "boolean",
+      "platforms": [
+        "react"
+      ]
+    },
+    "expandedControl": {
+      "type": "GenericObject",
+      "platforms": [
+        "react"
+      ]
+    },
+    "expandByDepth": {
+      "type": "array",
+      "platforms": [
+        "react"
+      ]
+    },
+    "onExpandByDepthClick": {
+      "type": "function",
+      "platforms": [
+        "react"
+      ]
+    },
+    "initialLoadingRowsCount": {
+      "type": "number",
+      "platforms": [
+        "react"
+      ]
+    },
+    "inlineRowLoading": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "loading": {
+      "type": "boolean | string",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "maxHeight": {
+      "type": "enum",
+      "platforms": [
+        "react"
+      ],
+      "values": [
+        "auto",
+        "xs",
+        "sm",
+        "md",
+        "lg",
+        "xl",
+        "xxl",
+        "xxxl"
+      ]
+    },
+    "onRowToggleClick": {
+      "type": "function",
+      "platforms": [
+        "react"
+      ]
+    },
+    "onToggleExpansionClick": {
+      "type": "function",
+      "platforms": [
+        "react"
+      ]
+    },
+    "pagination": {
+      "type": "boolean",
+      "platforms": [
+        "react"
+      ]
+    },
+    "paginationProps": {
+      "type": "GenericObject",
+      "platforms": [
+        "react"
+      ]
+    },
+    "pinnedRows": {
+      "type": "GenericObject",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "responsive": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "scroll",
+        "none"
+      ],
+      "default": "scroll"
+    },
+    "rowStyling": {
+      "type": "array",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "scrollBarNone": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "selectableRows": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "showActionsBar": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": true
+    },
+    "persistToggleExpansionButton": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "sortControl": {
+      "type": "GenericObject",
+      "platforms": [
+        "react"
+      ]
+    },
+    "sortParentOnly": {
+      "type": "boolean",
+      "platforms": [
+        "react"
+      ]
+    },
+    "stickyLeftColumn": {
+      "type": "array",
+      "platforms": [
+        "react"
+      ]
+    },
+    "tableData": {
+      "type": "array",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "tableOptions": {
+      "type": "GenericObject",
+      "platforms": [
+        "react"
+      ]
+    },
+    "tableProps": {
+      "type": "GenericObject",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "toggleExpansionIcon": {
+      "type": "string | string[]",
+      "platforms": [
+        "react"
+      ]
+    },
+    "onRowSelectionChange": {
+      "type": "function",
+      "platforms": [
+        "react"
+      ]
+    },
+    "onCustomSortClick": {
+      "type": "function",
+      "platforms": [
+        "react"
+      ]
+    },
+    "virtualizedRows": {
+      "type": "boolean",
+      "platforms": [
+        "react"
+      ]
+    },
+    "allowFullScreen": {
+      "type": "boolean",
+      "platforms": [
+        "react"
+      ]
+    },
+    "fullScreenControl": {
+      "type": "function",
+      "platforms": [
+        "react"
+      ]
+    },
+    "enableSorting": {
+      "type": "boolean",
+      "platforms": [
+        "react"
+      ]
+    },
+    "sortIcon": {
+      "type": "string | string[]",
+      "platforms": [
+        "react"
+      ]
+    },
+    "collapsibleTrail": {
+      "type": "boolean",
+      "platforms": [
+        "react"
+      ]
+    },
+    "subRowHeaders": {
+      "type": "array",
+      "platforms": [
+        "react"
+      ]
+    }
+  },
+  "globalProps": true,
+  "usage": {
+    "react": {
+      "import": "import { AdvancedTable } from 'playbook-ui'",
+      "example": "<AdvancedTable columnGroupBorderColor=\"text_lt_default\" enableToggleExpansion=\"all\"></AdvancedTable>"
+    },
+    "rails": {
+      "import": null,
+      "example": "<%= pb_rails(\"advanced_table\", props: { column_group_border_color: \"text_lt_default\", enable_toggle_expansion: \"all\" }) %>"
+    }
+  }
+}

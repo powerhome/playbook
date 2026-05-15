@@ -1,0 +1,30 @@
+{
+  "$schema": "https://playbook.powerapp.cloud/schemas/kit-schema.json",
+  "name": "FormGroup",
+  "description": "FormGroup component",
+  "platforms": [
+    "react",
+    "rails"
+  ],
+  "props": {
+    "fullWidth": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    }
+  },
+  "globalProps": true,
+  "usage": {
+    "react": {
+      "import": "import { FormGroup } from 'playbook-ui'",
+      "example": "<FormGroup></FormGroup>"
+    },
+    "rails": {
+      "import": null,
+      "example": "<%= pb_rails(\"form_group\", props: { text: \"Example\" }) %>"
+    }
+  }
+}

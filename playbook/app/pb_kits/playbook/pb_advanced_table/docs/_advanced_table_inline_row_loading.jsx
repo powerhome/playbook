@@ -1,8 +1,8 @@
 import React from "react"
 import AdvancedTable from '../../pb_advanced_table/_advanced_table'
 import Caption from '../../pb_caption/_caption'
-import { MOCK_DATA_INLINE_LOADING } from "./_mock_data_inline_loading"
-import { MOCK_DATA_INLINE_LOADING_EMPTY_CHILDREN } from "./_mock_data_inline_loading_empty_children"
+import MOCK_DATA_INLINE_LOADING from "./advanced_table_mock_data_inline_loading.json"
+import MOCK_DATA_INLINE_LOADING_EMPTY_CHILDREN from "./advanced_table_mock_data_inline_loading_empty_children.json"
 
 const AdvancedTableInlineRowLoading = (props) => {
   const columnDefinitions = [

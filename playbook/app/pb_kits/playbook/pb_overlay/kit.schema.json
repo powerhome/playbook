@@ -1,0 +1,105 @@
+{
+  "$schema": "https://playbook.powerapp.cloud/schemas/kit-schema.json",
+  "name": "Overlay",
+  "description": "Overlay component",
+  "platforms": [
+    "react",
+    "rails"
+  ],
+  "props": {
+    "color": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "card_light",
+        "bg_light",
+        "card_dark",
+        "bg_dark",
+        "black",
+        "white",
+        "success",
+        "error"
+      ],
+      "default": "card_light"
+    },
+    "dynamic": {
+      "type": "false",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "gradient": {
+      "type": "boolean",
+      "platforms": [
+        "react"
+      ]
+    },
+    "position": {
+      "type": "string",
+      "platforms": [
+        "react"
+      ]
+    },
+    "size": {
+      "type": "string",
+      "platforms": [
+        "react"
+      ]
+    },
+    "scrollBarNone": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "fullScreen": {
+      "type": "boolean",
+      "platforms": [
+        "react"
+      ]
+    },
+    "layout": {
+      "type": "GenericObject",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "opacity": {
+      "type": "enum",
+      "platforms": [
+        "react"
+      ],
+      "values": [
+        "opacity_1",
+        "opacity_2",
+        "opacity_3",
+        "opacity_4",
+        "opacity_5",
+        "opacity_6",
+        "opacity_7",
+        "opacity_8",
+        "opacity_9",
+        "opacity_10"
+      ]
+    }
+  },
+  "globalProps": true,
+  "usage": {
+    "react": {
+      "import": "import { Overlay } from 'playbook-ui'",
+      "example": "<Overlay color=\"card_light\" opacity=\"opacity_1\"></Overlay>"
+    },
+    "rails": {
+      "import": null,
+      "example": "<%= pb_rails(\"overlay\", props: { color: \"card_light\", opacity: \"opacity_1\" }) %>"
+    }
+  }
+}
