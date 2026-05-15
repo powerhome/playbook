@@ -3,7 +3,6 @@ import { Body, Title, Nav, NavItem, Flex, SectionSeparator } from "playbook-ui";
 import { useState, useMemo } from "react";
 import { useDarkMode } from "../../contexts/DarkModeContext";
 
-import { PageContainer } from "../../components/PageContainer";
 import { MarkdownContent } from "../../components/MarkdownContent";
 import { usePlatform } from "../../contexts/PlatformContext";
 import { linkFormat } from "../../../../../utilities/website_sidebar_helper";
@@ -97,7 +96,13 @@ const KitShow = () => {
 
   return (
     <>
-      <PageContainer>
+      <Flex
+        align="stretch"
+        maxWidth="xxl"
+        marginX="auto"
+        orientation="column"
+        marginTop="sm"
+      >
         <Title
           text={`${linkFormat(name)}`}
           size={1}
@@ -155,8 +160,16 @@ const KitShow = () => {
             onClick={() => setActiveTab("references")}
           /> */}
         </Nav>
-        <SectionSeparator marginBottom="lg" dark={darkMode} />
+      </Flex>
+      <SectionSeparator marginBottom="lg" dark={darkMode} />
 
+      <Flex
+        align="stretch"
+        maxWidth="xxl"
+        marginX="auto"
+        orientation="column"
+        marginBottom="lg"
+      >
         {/* Playground Tab Content (React-only for now; hidden on Rails) */}
         {showPlayground && displayTab === "playground" && (
           <PlaygroundTab
@@ -186,7 +199,7 @@ const KitShow = () => {
 
         {/* References Tab Content, commented out until references are implemented */}
         {/* {activeTab === "references" && <ReferencesTab />} */}
-      </PageContainer>
+      </Flex>
     </>
   );
 };
