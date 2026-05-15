@@ -5,19 +5,15 @@ import LiveExample from "../../../components/LiveExamples/LiveExampleReact";
 import LiveExampleRails from "../../../components/LiveExamples/LiveExampleRails";
 import { SyntaxHighlightedCode } from "../../../components/SyntaxHighlightedCode";
 import { usePlatform } from "../../../contexts/PlatformContext";
-import RightSideNav from "../RightSideNav";
+import RightSideNav, { type KitDocSection } from "../RightSideNav";
 import { useDarkMode } from "../../../contexts/DarkModeContext";
 import { formatReactSnippet } from "./formatReactSnippet";
-interface Section {
-  title: string;
-  examples: string[];
-}
 
 interface DocsTabProps {
   examples: any[];
   exampleProps: any;
   name?: string;
-  sections?: Section[];
+  sections?: KitDocSection[];
 }
 
 export const DocsTab = ({
