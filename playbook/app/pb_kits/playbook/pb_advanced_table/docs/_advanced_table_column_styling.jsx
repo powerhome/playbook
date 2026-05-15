@@ -10,6 +10,8 @@ const AdvancedTableColumnStyling = (props) => {
       accessor: "year",
       label: "Year",
       cellAccessors: ["quarter", "month", "day"],
+      // Keeps the hierarchy column narrow and stable when rows expand (see kit docs).
+      columnStyling: { minWidth: 108, width: 124, maxWidth: 168 },
     },
     {
       accessor: "newEnrollments",

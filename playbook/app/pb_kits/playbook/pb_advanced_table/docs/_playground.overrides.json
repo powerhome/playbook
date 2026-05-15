@@ -371,7 +371,7 @@
     },
     "column_styling_info": {
       "presetName": "Column Styling",
-      "message": "This sample uses columnStyling on column definitions. You can style headers and cells for the whole table or per column.",
+      "message": "This sample uses columnStyling on column definitions. The Year column uses minWidth, width, and maxWidth for a compact, stable first column; other columns show background colors on headers and cells.",
       "type": "info"
     }
   }
