@@ -1,7 +1,11 @@
-# 16.8.0
+# 🧹 We Removed Some Ancient Curses
 ##### May 18, 2026
 
 ![release_image](https://github.com/user-attachments/assets/db119637-25e9-4157-9091-c5f7fdf034fc)
+
+The Rails Rich Text editor is now TipTap powered ✨ Everything feels faster, cleaner, and significantly less cursed.
+
+[16.8.0](https://github.com/powerhome/playbook/tree/16.8.0) full list of changes:
 
 **Kit Enhancements:**
 
