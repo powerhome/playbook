@@ -254,7 +254,7 @@ kits:
   components:
   - name: date
     platforms: *1
-    description: Use to display the date. Year will not display if it is the current year.
+    description: Use to display the date. Year will not display by default if it is the current year.
     status: stable
     icons_used: true
     react_rendered: false
