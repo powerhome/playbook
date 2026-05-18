@@ -644,7 +644,7 @@ const PROP_CATEGORIES: {[key:string]: (props: {[key: string]: any}) => string} =
     if (typeof gridAutoColumns === 'object') {
       const responsiveObj: {[key: string]: string} = {}
 
-      Object.entries(gridAutoColumns).forEach(([key, value]) => {
+      Object.entries(gridAutoColumns as Record<string, string>).forEach(([key, value]) => {
         responsiveObj[key] = normalizeGridTrackClassValue(value)
       })
 
@@ -657,7 +657,7 @@ const PROP_CATEGORIES: {[key:string]: (props: {[key: string]: any}) => string} =
     if (typeof gridAutoRows === 'object') {
       const responsiveObj: {[key: string]: string} = {}
 
-      Object.entries(gridAutoRows).forEach(([key, value]) => {
+      Object.entries(gridAutoRows as Record<string, string>).forEach(([key, value]) => {
         responsiveObj[key] = normalizeGridTrackClassValue(value)
       })
 

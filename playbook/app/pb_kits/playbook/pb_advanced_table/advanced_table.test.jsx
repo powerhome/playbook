@@ -646,7 +646,18 @@ test("customRenderer prop functions as expected", () => {
   expect(pill).toBeInTheDocument()
 })
 
+test("allowFullScreen prop adds fullscreen class", () => {
+  render(
+    <AdvancedTable
+        allowFullScreen
+        columnDefinitions={columnDefinitions}
+        tableData={MOCK_DATA}
+    />
+  )
 
+  const tableContainer = screen.getByRole("table").closest("div")
+  expect(tableContainer).toHaveClass("advanced-table-allow-fullscreen")
+})
 
 test("pinnedRows prop renders pinned rows at top", () => {
   const pinnedRowsControl = {
