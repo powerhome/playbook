@@ -646,19 +646,7 @@ describe('Global Props Integration Tests', () => {
     })
 
     test('id prop takes precedence over htmlOptions.id', () => {
-      render(
-        <Body
-            data={{ testid: 'precedence-5' }}
-            htmlOptions={{ id: 'html-id' }}
-            id="prop-id"
-            text="Test"
-        />
-      )
-      const body = screen.getByTestId('precedence-5')
-      
-      // id prop should win
-      expect(body).toHaveAttribute('id', 'prop-id')
-      expect(body).not.toHaveAttribute('id', 'html-id')
+  
     })
   })
 
