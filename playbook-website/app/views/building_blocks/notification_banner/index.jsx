@@ -1,13 +1,14 @@
 import React from "react";
 import { Body, Card, Flex, Icon, Title } from "playbook-ui";
 
-const AlertBanner = (props) => {
+const NotificationBanner = (props) => {
 
   return (
     <>
     <Flex orientation="column" gap="md">
       {/* Card #1 - Success */}
       <Card
+          background="success_subtle"
           highlight={{ color: 'success', position: 'side' }}
           padding="xs"
           paddingRight="sm"
@@ -18,11 +19,9 @@ const AlertBanner = (props) => {
         >
           <Flex
               paddingRight="xs"
-              paddingTop="xs"
           >
             <Icon
-                color="success"
-                icon="check-circle"
+                icon="check"
                 size="lg"
             /> 
           </Flex>
@@ -40,6 +39,7 @@ const AlertBanner = (props) => {
       </Card>
       {/* Card #2 - Error */}
       <Card
+          background="error_subtle"
           highlight={{ color: 'error', position: 'side' }}
           padding="xs"
           paddingRight="sm"
@@ -50,10 +50,8 @@ const AlertBanner = (props) => {
         >
           <Flex
               paddingRight="xs"
-              paddingTop="xs"
           >
             <Icon
-                color="error"
                 icon="exclamation-circle"
                 size="lg"
             /> 
@@ -72,6 +70,7 @@ const AlertBanner = (props) => {
       </Card>
       {/* Card #3 - Warning */}
       <Card
+          background="warning_subtle"
           highlight={{ color: 'warning', position: 'side' }}
           padding="xs"
           paddingRight="sm"
@@ -82,10 +81,8 @@ const AlertBanner = (props) => {
         >
           <Flex
               paddingRight="xs"
-              paddingTop="xs"
           >
             <Icon
-                color="warning"
                 icon="exclamation-triangle"
                 size="lg"
             /> 
@@ -104,6 +101,7 @@ const AlertBanner = (props) => {
       </Card>
       {/* Card #4 - Neutral */}
       <Card
+          background="neutral_subtle"
           highlight={{ color: 'neutral', position: 'side' }}
           padding="xs"
           paddingRight="sm"
@@ -114,10 +112,8 @@ const AlertBanner = (props) => {
         >
           <Flex
               paddingRight="xs"
-              paddingTop="xs"
           >
             <Icon
-                color="neutral"
                 icon="info-circle"
                 size="lg"
             /> 
@@ -136,6 +132,7 @@ const AlertBanner = (props) => {
       </Card>
       {/* Card #5 - Info: Showing Long Text with No Width Restriction */}
       <Card
+          background="info_subtle"
           highlight={{ color: 'info', position: 'side' }}
           padding="xs"
           paddingRight="sm"
@@ -146,10 +143,8 @@ const AlertBanner = (props) => {
         >
           <Flex
               paddingRight="xs"
-              paddingTop="xs"
           >
             <Icon
-                color="info"
                 icon="info-circle"
                 size="lg"
             /> 
@@ -166,43 +161,10 @@ const AlertBanner = (props) => {
           </Flex>
         </Flex>
       </Card>
-      {/* Card #6 - Primary: Showing Long Text with Width Restriction */}
-      <Card
-          highlight={{ color: 'primary', position: 'side' }}
-          padding="xs"
-          paddingRight="sm"
-          width="sm"
-      >
-        <Flex
-            paddingLeft="xxs"
-            paddingTop="xxs"
-        >
-          <Flex
-              paddingRight="xs"
-              paddingTop="xs"
-          >
-            <Icon
-                color="primary"
-                icon="info-circle"
-                size="lg"
-            /> 
-          </Flex>
-          <Flex
-              gap="xxs"
-              orientation="column"
-          >
-            <Title
-                size={4}
-                text="Some information!"
-            />
-            <Body text="This is body text explaining something for you that is long and wraps to the next line because the card has a width restriction in place" />
-          </Flex>
-        </Flex>
-      </Card>
       {/* End of example stop here if copy+pasting */}
     </Flex>
     </>
   );
 }
 
-export default AlertBanner;
+export default NotificationBanner;
