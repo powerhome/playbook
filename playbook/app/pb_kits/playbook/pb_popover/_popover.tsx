@@ -21,7 +21,10 @@ import classnames from "classnames";
 import { globalProps, GlobalProps } from "../utilities/globalProps";
 import { uniqueId } from '../utilities/object';
 import { DialogContext, DialogContextValue } from "../pb_dialog/_dialog_context";
-import { targetIsInsidePortaledFloatingKit } from "../utilities/floatingPortalHosts";
+import {
+  PB_FLOATING_OWNER_ATTR,
+  targetIsInsidePortaledFloatingKit,
+} from "../utilities/floatingPortalHosts";
 
 type ModifiedGlobalProps = Omit<GlobalProps, 'minWidth' | 'maxHeight' | 'minHeight'>
 
@@ -169,6 +172,7 @@ const Popover = (props: PbPopoverProps) => {
                 className={classnames("pb_popover_body", popoverSpacing)}
                 id={targetId}
                 style={widthHeightStyles()}
+                {...(targetId ? { [PB_FLOATING_OWNER_ATTR]: targetId } : {})}
             >
               <DialogContext.Provider value={menuPortalApi}>
                 <div
@@ -183,6 +187,7 @@ const Popover = (props: PbPopoverProps) => {
                     aria-hidden="true"
                     className="pb_popover_floating_root"
                     data-pb-dialog-floating-root="true"
+                    {...(targetId ? { [PB_FLOATING_OWNER_ATTR]: targetId } : {})}
                     ref={floatingRootRef}
                 />
               </DialogContext.Provider>
@@ -239,7 +244,7 @@ const PbReactPopover = (props: PbPopoverProps): React.ReactElement => {
 
       const targetIsPopover =
         target.closest("#" + targetId) !== null ||
-        targetIsInsidePortaledFloatingKit(target);
+        targetIsInsidePortaledFloatingKit(target, targetId);
       const targetIsReference =
         target.closest("#reference-" + targetId) !== null;
 
@@ -252,11 +257,11 @@ const PbReactPopover = (props: PbPopoverProps): React.ReactElement => {
           if (!targetIsPopover && !targetIsReference) shouldClose();
           break;
         case "inside":
-          if (targetIsInsidePortaledFloatingKit(target)) return
+          if (targetIsInsidePortaledFloatingKit(target, targetId)) return
           if (targetIsPopover) shouldClose();
           break;
         case "any":
-          if (targetIsInsidePortaledFloatingKit(target)) return
+          if (targetIsInsidePortaledFloatingKit(target, targetId)) return
           if (targetIsPopover || !targetIsPopover && !targetIsReference) shouldClose();
           break;
       }

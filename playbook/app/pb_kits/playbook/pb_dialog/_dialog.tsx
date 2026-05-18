@@ -17,6 +17,7 @@ import Flex from "../pb_flex/_flex";
 import IconCircle from "../pb_icon_circle/_icon_circle";
 import Title from "../pb_title/_title";
 import { DialogContext, DialogContextValue } from "./_dialog_context";
+import { PB_FLOATING_OWNER_ATTR } from "../utilities/floatingPortalHosts";
 
 type DialogProps = {
   aria?: { [key: string]: string };
@@ -251,6 +252,7 @@ const Dialog = (props: DialogProps): React.ReactElement => {
           <div
               className="pb_dialog_floating_root"
               data-pb-dialog-floating-root="true"
+              {...(id ? { [PB_FLOATING_OWNER_ATTR]: id } : {})}
               ref={floatingRootRefCallback}
           />
         </Modal>

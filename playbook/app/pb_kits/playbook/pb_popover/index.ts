@@ -83,7 +83,7 @@ export default class PbPopover extends PbEnhancedElement {
       const t = target as HTMLElement
       const isTooltipElement = t.closest(`#${this.tooltipId}`) !== null
       const isTriggerElement = t.closest(`#${this.triggerElementId}`) !== null
-      const isPortaledKit = targetIsInsidePortaledFloatingKit(t)
+      const isPortaledKit = targetIsInsidePortaledFloatingKit(t, this.tooltipId)
 
       switch (this.closeOnClick) {
       case 'any':

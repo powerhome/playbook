@@ -20,7 +20,19 @@ const LABEL_SELECTOR = '[data-dropdown="pb-dropdown-label"]';
 
 // Portal host + positioning (parity with utilities/floatingPortalHosts.ts + React Dropdown).
 const PB_DIALOG_FLOATING_ROOT = "[data-pb-dialog-floating-root]";
+const PB_FLOATING_OWNER_ATTR = "data-pb-floating-owner";
 const PB_FLOATING_UI_Z_INDEX = "100100";
+
+function resolveFloatingOwnerId(fromElement) {
+  if (!fromElement) return null;
+  const marked = fromElement.closest(`[${PB_FLOATING_OWNER_ATTR}]`);
+  if (marked) return marked.getAttribute(PB_FLOATING_OWNER_ATTR);
+  const popoverEl = fromElement.closest(".pb_popover_tooltip");
+  if (popoverEl?.id) return popoverEl.id;
+  const dialogEl = fromElement.closest("dialog, .pb_dialog");
+  if (dialogEl?.id) return dialogEl.id;
+  return null;
+}
 
 function resolveDialogFloatingPortalHost(fromElement) {
   if (!fromElement) return null;
@@ -154,8 +166,10 @@ export default class PbDropdown extends PbEnhancedElement {
     this.element._pbDropdownInstance = this;
     this.cacheElements();
 
-    this.portalHost = resolvePortaledKitHost(this.element, null);
-    this.useMenuPortal = Boolean(this.portalHost);
+    this.portalHost = null;
+    this.useMenuPortal = false;
+    this.floatingOwnerId = null;
+    this._floatingResolved = false;
     this.portalShell = null;
     this._portalParent = null;
     this._portalNext = null;
@@ -404,6 +418,14 @@ export default class PbDropdown extends PbEnhancedElement {
     }
   }
 
+  ensureFloatingPortalConfig() {
+    if (this._floatingResolved) return;
+    this.portalHost = resolvePortaledKitHost(this.element, null);
+    this.floatingOwnerId = resolveFloatingOwnerId(this.element);
+    this.useMenuPortal = Boolean(this.portalHost);
+    this._floatingResolved = true;
+  }
+
   mountPortalMenu(container) {
     if (!this.useMenuPortal || !this.portalHost) return;
     if (container.dataset.pbDropdownPortaled === "true") return;
@@ -413,6 +435,9 @@ export default class PbDropdown extends PbEnhancedElement {
 
     const shell = document.createElement("div");
     shell.className = `${this.element.className} pb_dropdown_floating_shell`.trim();
+    if (this.floatingOwnerId) {
+      shell.setAttribute(PB_FLOATING_OWNER_ATTR, this.floatingOwnerId);
+    }
 
     const innerWrap = document.createElement("div");
     const hasError = this.dropdownWrapper?.classList.contains("error");
@@ -882,6 +907,7 @@ export default class PbDropdown extends PbEnhancedElement {
   }
 
   showElement(elem) {
+    this.ensureFloatingPortalConfig();
     if (this.useMenuPortal) {
       this.mountPortalMenu(elem);
     }

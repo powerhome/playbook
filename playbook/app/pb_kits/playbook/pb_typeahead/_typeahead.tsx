@@ -23,7 +23,10 @@ import * as kitComponents from "./components"
 
 import {noop, buildDataProps, buildHtmlProps} from "../utilities/props"
 import {
+  PB_FLOATING_OWNER_ATTR,
   PB_FLOATING_UI_Z_INDEX,
+  kitRequiresPortaledFloatingUi,
+  resolveFloatingOwnerId,
   resolvePortaledKitHost,
 } from "../utilities/floatingPortalHosts"
 import {DialogContext} from "../pb_dialog/_dialog_context"
@@ -222,19 +225,36 @@ const Typeahead = forwardRef<HTMLInputElement, TypeaheadProps>(
     const dialogCtx = useContext(DialogContext)
 
     const kitContainerRef = useRef<HTMLDivElement>(null)
+    const floatingOwnerIdRef = useRef<string | null>(null)
     const [menuPortalHost, setMenuPortalHost] = useState<HTMLElement | null>(
       null,
     )
+    const [menuIsOpen, setMenuIsOpen] = useState(false)
 
     useLayoutEffect(() => {
+      if (!menuIsOpen) return
       const el = kitContainerRef.current
+      floatingOwnerIdRef.current = resolveFloatingOwnerId(el)
       setMenuPortalHost(
         resolvePortaledKitHost(
           el,
           dialogCtx?.selectMenuPortalTarget ?? null,
         ),
       )
-    }, [dialogCtx?.selectMenuPortalTarget])
+    }, [menuIsOpen, dialogCtx?.selectMenuPortalTarget])
+
+    useLayoutEffect(() => {
+      if (!menuIsOpen || !floatingOwnerIdRef.current) return
+      const menuPortal = selectRef.current?.menuListRef?.closest(
+        ".typeahead-kit-select__menu-portal",
+      ) as HTMLElement | null
+      if (menuPortal) {
+        menuPortal.setAttribute(
+          PB_FLOATING_OWNER_ATTR,
+          floatingOwnerIdRef.current,
+        )
+      }
+    }, [menuIsOpen, menuPortalHost])
 
     const mergedSelectStyles = useMemo(() => {
       if (menuPortalHost !== document.body) return stylesProp
@@ -253,8 +273,20 @@ const Typeahead = forwardRef<HTMLInputElement, TypeaheadProps>(
       }, [])
     }
 
+    const handleMenuClose = () => {
+      setMenuIsOpen(false)
+      setMenuPortalHost(null)
+      floatingOwnerIdRef.current = null
+      if (props.onMenuClose) {
+        props.onMenuClose()
+      }
+    }
+
     // Configure focus on selected option using React Select's API
     const handleMenuOpen = () => {
+      if (kitRequiresPortaledFloatingUi(kitContainerRef.current)) {
+        setMenuIsOpen(true)
+      }
       setTimeout(() => {
         let currentValue = props.value || props.defaultValue
 
@@ -443,10 +475,17 @@ const resolvedLoadOptions =
       ...(preserveSearchInput ? {inputValue} : {}),
       onInputChange: handleInputChange,
       onBlur: handleBlur,
-      onMenuOpen: handleMenuOpen,
       required,
       requiredIndicator: requiredIndicator,
       ...props,
+      onMenuClose: () => {
+        handleMenuClose()
+        props.onMenuClose?.()
+      },
+      onMenuOpen: () => {
+        handleMenuOpen()
+        props.onMenuOpen?.()
+      },
       ...(menuPortalHost
         ? {
             menuPortalTarget: menuPortalHost,

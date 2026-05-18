@@ -23,6 +23,7 @@ import {
 
 import { DialogContext } from "../pb_dialog/_dialog_context";
 import {
+    resolveFloatingOwnerId,
     resolvePortaledKitHost,
     positionDropdownPortalToWrapper,
     subscribeFloatingKitReposition,
@@ -185,15 +186,23 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
 
     const dialogCtx = useContext(DialogContext);
     const [portalHost, setPortalHost] = useState<HTMLElement | null>(null);
+    const [floatingOwnerId, setFloatingOwnerId] = useState<string | null>(null);
 
     useLayoutEffect(() => {
+        if (isDropDownClosed) {
+            setPortalHost(null);
+            setFloatingOwnerId(null);
+            return;
+        }
+        const root = outerDivRef.current;
+        setFloatingOwnerId(resolveFloatingOwnerId(root));
         setPortalHost(
             resolvePortaledKitHost(
-                outerDivRef.current,
+                root,
                 dialogCtx?.selectMenuPortalTarget ?? null,
             ),
         );
-    }, [dialogCtx?.selectMenuPortalTarget]);
+    }, [isDropDownClosed, dialogCtx?.selectMenuPortalTarget]);
 
     const handleLabelClick = (e: React.MouseEvent) => {
       e.stopPropagation();
@@ -509,6 +518,7 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
                     inputWrapperRef,
                     isDropDownClosed,
                     isInputFocused,
+                    floatingOwnerId,
                     floatingShellClasses,
                     portalHost,
                     selectId,

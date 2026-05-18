@@ -37,7 +37,9 @@ import {
 import { DialogContext } from "../pb_dialog/_dialog_context";
 import {
   positionFloatingShellToInput,
+  resolveFloatingOwnerId,
   resolvePortaledKitHost,
+  setFloatingOwnerAttribute,
   subscribeFloatingKitReposition,
 } from "../utilities/floatingPortalHosts";
 
@@ -145,6 +147,7 @@ const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>(
     const mlsFloatingShellRef = useRef<HTMLDivElement>(null);
     const dialogCtx = useContext(DialogContext);
     const [portalHost, setPortalHost] = useState<HTMLElement | null>(null);
+    const [floatingOwnerId, setFloatingOwnerId] = useState<string | null>(null);
 
     // State for whether dropdown is open or closed
     const [isDropdownClosed, setIsDropdownClosed] = useState(true);
@@ -297,13 +300,20 @@ const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>(
     }, [formattedData]);
 
     useLayoutEffect(() => {
+      if (isDropdownClosed) {
+        setPortalHost(null);
+        setFloatingOwnerId(null);
+        return;
+      }
+      const root = kitRootRef.current;
+      setFloatingOwnerId(resolveFloatingOwnerId(root));
       setPortalHost(
         resolvePortaledKitHost(
-          kitRootRef.current,
+          root,
           dialogCtx?.selectMenuPortalTarget ?? null,
         ),
       );
-    }, [dialogCtx?.selectMenuPortalTarget]);
+    }, [isDropdownClosed, dialogCtx?.selectMenuPortalTarget]);
 
     useLayoutEffect(() => {
       if (
@@ -790,7 +800,10 @@ const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>(
               ? createPortal(
                   <div
                       className={floatingShellClasses}
-                      ref={mlsFloatingShellRef}
+                      ref={(node) => {
+                        mlsFloatingShellRef.current = node;
+                        setFloatingOwnerAttribute(node, floatingOwnerId);
+                      }}
                       style={{ margin: 0 }}
                   >
                     <div

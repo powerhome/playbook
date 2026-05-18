@@ -339,15 +339,22 @@ describe("Popover portaled kit portal host", () => {
     expect(resolvePortaledKitHost(kit, null)).toBe(document.body);
   });
 
-  test("targetIsInsidePortaledFloatingKit is true inside typeahead menu portal", () => {
-    const portal = document.createElement("div");
-    portal.className = "typeahead-kit-select__menu-portal";
-    const option = document.createElement("div");
-    portal.appendChild(option);
-    document.body.appendChild(portal);
+  test("targetIsInsidePortaledFloatingKit is scoped to owner id", () => {
+    const portalA = document.createElement("div");
+    portalA.className = "typeahead-kit-select__menu-portal";
+    portalA.setAttribute("data-pb-floating-owner", "filter-a");
+    const optionA = document.createElement("div");
+    portalA.appendChild(optionA);
 
-    expect(targetIsInsidePortaledFloatingKit(option)).toBe(true);
-    expect(targetIsInsidePortaledFloatingKit(document.createElement("button"))).toBe(
+    const portalB = document.createElement("div");
+    portalB.className = "typeahead-kit-select__menu-portal";
+    portalB.setAttribute("data-pb-floating-owner", "filter-b");
+    document.body.appendChild(portalA);
+    document.body.appendChild(portalB);
+
+    expect(targetIsInsidePortaledFloatingKit(optionA, "filter-a")).toBe(true);
+    expect(targetIsInsidePortaledFloatingKit(optionA, "filter-b")).toBe(false);
+    expect(targetIsInsidePortaledFloatingKit(document.createElement("button"), "filter-a")).toBe(
       false,
     );
   });

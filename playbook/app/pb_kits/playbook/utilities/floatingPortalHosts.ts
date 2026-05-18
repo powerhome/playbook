@@ -8,6 +8,9 @@
 /** Prefer mounting here (sibling to scroll region) so menus are not clipped. */
 export const PB_DIALOG_FLOATING_ROOT_SELECTOR = "[data-pb-dialog-floating-root]"
 
+/** Scopes portaled menus to the Dialog / Filter popover that opened them (close-on-click). */
+export const PB_FLOATING_OWNER_ATTR = "data-pb-floating-owner"
+
 export function resolveDialogFloatingPortalHost(
   fromElement: Element | null | undefined,
 ): HTMLElement | null {
@@ -57,6 +60,81 @@ export function resolvePortaledKitHost(
   return (
     resolveDialogFloatingPortalHost(kitRoot) ?? dialogCtxTarget ?? null
   )
+}
+
+/** True when the kit may need a portaled menu (dialog / filter popover). Cheap `closest` only to skip on plain forms */
+export function kitRequiresPortaledFloatingUi(
+  kitRoot: HTMLElement | null | undefined,
+): boolean {
+  if (!kitRoot) return false
+  return (
+    kitRoot.closest(".pb_popover_tooltip") !== null ||
+    kitRoot.closest("dialog") !== null ||
+    kitRoot.closest(".pb_dialog") !== null
+  )
+}
+
+/** Owner id for portaled menus (filter tooltip id, dialog id, React popover targetId) - explicit `data-pb-floating-owner` on the floating root / popover surface */
+ export function resolveFloatingOwnerId(
+  kitRoot: HTMLElement | null | undefined,
+): string | null {
+  if (!kitRoot) return null
+
+  const marked = kitRoot.closest(`[${PB_FLOATING_OWNER_ATTR}]`)
+  if (marked) {
+    return marked.getAttribute(PB_FLOATING_OWNER_ATTR)
+  }
+
+  const popoverTooltip = kitRoot.closest(".pb_popover_tooltip")
+  if (popoverTooltip?.id) {
+    return popoverTooltip.id
+  }
+
+  const dialogShell = kitRoot.closest("dialog, .pb_dialog")
+  if (dialogShell?.id) {
+    return dialogShell.id
+  }
+
+  return null
+}
+
+export function setFloatingOwnerAttribute(
+  element: HTMLElement | null | undefined,
+  ownerId: string | null | undefined,
+): void {
+  if (!element) return
+  if (ownerId) {
+    element.setAttribute(PB_FLOATING_OWNER_ATTR, ownerId)
+  } else {
+    element.removeAttribute(PB_FLOATING_OWNER_ATTR)
+  }
+}
+
+function isPortaledFloatingMenuNode(target: HTMLElement): boolean {
+  return (
+    target.closest(".typeahead-kit-select__menu-portal") !== null ||
+    target.closest(".pb_multi_level_select_floating_shell") !== null ||
+    target.closest(".pb_dropdown_floating_shell") !== null
+  )
+}
+
+/**
+ * Kits that portal menus to `document.body` still belong to the open popover for close-on-click.
+ * When `ownerId` is passed, only menus tagged for that surface count (not other open popovers).
+ */
+export function targetIsInsidePortaledFloatingKit(
+  target: HTMLElement,
+  ownerId?: string | null,
+): boolean {
+  if (!isPortaledFloatingMenuNode(target)) {
+    return false
+  }
+
+  if (!ownerId) {
+    return true
+  }
+
+  return target.closest(`[${PB_FLOATING_OWNER_ATTR}="${ownerId}"]`) !== null
 }
 
 /** Above popover ($z_9), dialogs ($z_10), below $z_max. */
@@ -150,17 +228,6 @@ export function positionDropdownPortalToWrapper(args: {
     panel.style.left = `${Math.round(wr.left - hr.left)}px`
     panel.style.top = `${Math.round(topPx - hr.top)}px`
   }
-}
-
-
-/** Kits that portal menus to `document.body` still belong to the open popover for close-on-click. */
-export function targetIsInsidePortaledFloatingKit(target: HTMLElement): boolean {
-  return (
-    target.closest(".typeahead-kit-select__menu-portal") !== null ||
-    target.closest(".pb_multi_level_select_floating_shell") !== null ||
-    target.closest(".pb_dropdown_floating_shell") !== null ||
-    target.closest(".pb_dropdown_container") !== null
-  )
 }
 
 /** Re-run positioning while a portaled menu is open for Dropdown and Multi Level Select. */

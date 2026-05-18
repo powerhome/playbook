@@ -10,6 +10,7 @@ import {
 import { globalProps, GlobalProps } from "../../utilities/globalProps";
 
 import DropdownContext from "../context";
+import { setFloatingOwnerAttribute } from "../../utilities/floatingPortalHosts";
 
 import List from "../../pb_list/_list";
 import ListItem from "../../pb_list/_list_item";
@@ -46,6 +47,7 @@ const DropdownContainer = (props: DropdownContainerProps) => {
     error,
     filteredOptions,
     filterItem,
+    floatingOwnerId,
     floatingShellClasses,
     handleChange,
     inputRef,
@@ -117,7 +119,10 @@ const DropdownContainer = (props: DropdownContainerProps) => {
       return null;
     }
     return createPortal(
-      <div className={floatingShellClasses}>
+      <div
+          className={floatingShellClasses}
+          ref={(node) => setFloatingOwnerAttribute(node, floatingOwnerId)}
+      >
         <div
             className={classnames("dropdown_wrapper", error && "error")}
             style={{
