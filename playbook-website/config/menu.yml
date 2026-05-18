@@ -261,7 +261,7 @@ kits:
     enhanced_element_used: false
   - name: date_range_inline
     platforms: *1
-    description: Use to display a date range. Year will not show if it is the current year.
+    description: Use to display a date range. Year will not show by default if it is the current year.
     status: stable
     icons_used: true
     react_rendered: false
