@@ -1,3 +1,34 @@
+# 🧹 We Removed Some Ancient Curses
+##### May 18, 2026
+
+![release_image](https://github.com/user-attachments/assets/db119637-25e9-4157-9091-c5f7fdf034fc)
+
+The Rails Rich Text editor is now TipTap powered ✨ Everything feels faster, cleaner, and significantly less cursed.
+
+[16.8.0](https://github.com/powerhome/playbook/tree/16.8.0) full list of changes:
+
+**Kit Enhancements:**
+
+- Rich Text Editor: Tiptap - Rails [\#6157](https://github.com/powerhome/playbook/pull/6157) ([kangaree](https://github.com/kangaree))
+- Datepicker: Inline Prop Works By Itself [\#6150](https://github.com/powerhome/playbook/pull/6150) ([elisashapiro](https://github.com/elisashapiro))
+
+
+**Fixed Bugs:**
+
+- Tooltip: Misalignment and Incorrect Placement In Advanced Table Header [\#6135](https://github.com/powerhome/playbook/pull/6135) ([nickamantia](https://github.com/nickamantia))
+
+
+**Improvements:**
+
+- Playgrounds: Advanced Table + Hide Incomplete Playgrounds [\#6172](https://github.com/powerhome/playbook/pull/6172) ([nidaqg](https://github.com/nidaqg))
+- Upgrades Playbook Icons [\#6156](https://github.com/powerhome/playbook/pull/6156) ([elisashapiro](https://github.com/elisashapiro))
+- Playbook Icons Release 2.0.0 [\#6148](https://github.com/powerhome/playbook/pull/6148) ([nidaqg](https://github.com/nidaqg))
+- Upgrades Playbook Icons [\#6136](https://github.com/powerhome/playbook/pull/6136) ([elisashapiro](https://github.com/elisashapiro))
+- Playbook Website: Beta Playground Continued [\#6072](https://github.com/powerhome/playbook/pull/6072) ([nidaqg](https://github.com/nidaqg))
+
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/v16.8.0-rc.2...16.8.0)
+
 # 📲 What If Phones, But Too Much?
 ##### May 01, 2026
 
