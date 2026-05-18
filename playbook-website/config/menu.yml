@@ -689,7 +689,7 @@ kits:
       - Card.Body
   - name: section_separator
     platforms: *1
-    description: Horizontal divider that splits sections, especially on cards or light backgrounds.
+    description: A divider line that visually separates and organizes content into distinct sections.
     status: stable
     icons_used: false
     react_rendered: false
@@ -807,7 +807,7 @@ kits:
       - ProgressStep.Item
   - name: timeline
     platforms: *1
-    description: Vertical timeline with solid or dotted connectors to show phases or gaps in time.
+    description: A timeline with solid or dotted connectors to show sequences, phases, or gaps in time.
     status: stable
     icons_used: true
     react_rendered: false
