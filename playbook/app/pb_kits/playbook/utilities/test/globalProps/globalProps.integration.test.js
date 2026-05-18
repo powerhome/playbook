@@ -645,9 +645,7 @@ describe('Global Props Integration Tests', () => {
       expect(button).toHaveClass('m_md')
     })
 
-    test('id prop takes precedence over htmlOptions.id', () => {
-  
-    })
+ 
   })
 
   describe('Accessibility integration', () => {
