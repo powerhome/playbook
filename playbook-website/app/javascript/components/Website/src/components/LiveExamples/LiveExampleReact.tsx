@@ -229,8 +229,30 @@ const LiveExample: React.FC<LiveExampleProps> = ({
   return (
     <div onClickCapture={handleContainerClick}>
       <LiveProvider key={libsKey} code={prepared} scope={scope} noInline>
-        <Card borderNone padding="md" dark={darkMode} htmlOptions={{ style: { border: 'none' } }}>
-          <LivePreview />
+        <Card
+          borderNone
+          padding="md"
+          dark={darkMode}
+          htmlOptions={{
+            style: {
+              border: "none",
+              boxSizing: "border-box",
+              maxWidth: "100%",
+              minWidth: 0,
+            },
+          }}
+        >
+          <div
+            style={{
+              boxSizing: "border-box",
+              width: "100%",
+              maxWidth: "100%",
+              minWidth: 0,
+              overflowX: "auto",
+            }}
+          >
+            <LivePreview />
+          </div>
         </Card>
         <LiveContext.Consumer>
           {({ error }) =>

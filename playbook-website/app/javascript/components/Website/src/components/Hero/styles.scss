@@ -3,6 +3,13 @@
 
 .hero {
   border-radius: $border_radius_lg;
+
+  &.hero-compact {
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+  }
+
   @media screen and (max-width: $screen-lg-min) {
     border-radius: 0;
   }
@@ -11,6 +18,14 @@
     align-items: flex-end;
     justify-content: center;
     min-height: 192px;
+  }
+
+  &.hero-compact {
+    @media screen and (max-width: $screen-xs-min) {
+      align-items: center;
+      justify-content: flex-start;
+      min-height: unset;
+    }
   }
 
   .pb_title_kit,

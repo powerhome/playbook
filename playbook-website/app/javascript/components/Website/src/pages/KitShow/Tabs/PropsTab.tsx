@@ -53,7 +53,7 @@ export const PropsTab = ({ availableProps, platform = "react" }: PropsTabProps) 
   }
 
   return (
-    <Flex paddingX="xl" width="100%">
+    <Flex width="100%">
       <Card padding="none" width="100%" dark={darkMode}>
         <Card.Body padding="sm">
           <Nav orientation="horizontal" variant="subtle" dark={darkMode}>
