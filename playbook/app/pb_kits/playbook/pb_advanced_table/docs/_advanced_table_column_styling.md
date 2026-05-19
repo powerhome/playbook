@@ -6,14 +6,10 @@ The `columnStyling` prop is an optional item that can be used within `columnDefi
 
 3) `fontColor`: This will allow you to control the font color for a given column.
 
-4) **Column width (layout stability)** — optional keys on `columnStyling` (numbers are treated as **pixels**; you may also use CSS length strings such as `"12rem"` or `"200px"`):
+4) Column width: optional keys on `columnStyling` are `minWidth`, `width`, and `maxWidth` (numbers = pixels; CSS strings allowed). This example sets `minWidth` on Year so the hierarchy column does not shrink when rows expand.
 
-- `minWidth`: minimum width for the column’s header and body cells (helps prevent horizontal “jump” when row content or expansion depth changes on tables using fixed layout).
-- `width`: preferred column width.
-- `maxWidth`: maximum column width.
+Fixed width: pass `width` only (or TanStack `size` only) and Playbook sets min and max to the same value automatically — you do not need all three for an exact width.
 
-The live example below narrows the **Year** column (`minWidth` / `width` / `maxWidth`) so the first column stays compact while leaving room for expand and sort controls.
-
-The same sizing can be expressed with TanStack `ColumnDef` fields on each column definition object (merged into the underlying table model): `size` (width), `minSize`, and `maxSize` (numbers, pixels). If both are present for the same axis, **`columnStyling` string values take precedence**; otherwise `columnStyling` numeric/string values override TanStack numbers when only one source sets that axis. **Grouped columns:** apply width controls on **leaf** column definitions (the columns that have an `accessor`).
+See [Column Styling: Width](https://playbook.powerapp.cloud/kits/advanced_table/react#column-styling-width) for the full guide (Playbook ↔ TanStack mapping, floor-only vs bands, and when to use one vs three values).
 
 `columnStyling` can be used within the columnDefinition of all the columns or some of them, as shown. Each column has its own individual control in this way. 

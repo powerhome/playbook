@@ -313,7 +313,7 @@
     },
     "column_styling_info": {
       "presetName": "Column Styling",
-      "message": "This sample uses columnStyling on column definitions. The Year column uses minWidth, width, and maxWidth for a compact, stable first column; other columns show background colors on headers and cells.",
+      "message": "This sample uses columnStyling on column definitions. Year uses minWidth for a stable hierarchy column; other columns show background colors. See the Column Styling Width doc for fixed width and min/pref/max bands.",
       "type": "info"
     }
   },
@@ -2630,9 +2630,7 @@
               "day"
             ],
             "columnStyling": {
-              "minWidth": 108,
-              "width": 124,
-              "maxWidth": 168
+              "minWidth": 124
             }
           },
           {

@@ -807,6 +807,74 @@ test("columnStyling minWidth, width, and maxWidth apply to header and body cells
   expect(yearCell).toHaveStyle({ minWidth: "240px", width: "260px", maxWidth: "400px" });
 });
 
+test("columnStyling width only locks minWidth and maxWidth to the same value", () => {
+  const styledColumnDefs = [
+    {
+      accessor: "year",
+      label: "Year",
+      cellAccessors: ["quarter", "month", "day"],
+      columnStyling: { width: 128 },
+    },
+    {
+      accessor: "newEnrollments",
+      label: "New Enrollments",
+    },
+    {
+      accessor: "scheduledMeetings",
+      label: "Scheduled Meetings",
+    },
+  ];
+
+  render(
+    <AdvancedTable
+        columnDefinitions={styledColumnDefs}
+        data={{ testid: testId }}
+        tableData={MOCK_DATA}
+    />
+  );
+
+  const yearHeader = screen.getByText("Year").closest("th");
+  expect(yearHeader).toHaveStyle({
+    width: "128px",
+    minWidth: "128px",
+    maxWidth: "128px",
+  });
+});
+
+test("columnDefinitions size only locks minSize and maxSize to the same value", () => {
+  const styledColumnDefs = [
+    {
+      accessor: "year",
+      label: "Year",
+      cellAccessors: ["quarter", "month", "day"],
+    },
+    {
+      accessor: "newEnrollments",
+      label: "New Enrollments",
+      size: 200,
+    },
+    {
+      accessor: "scheduledMeetings",
+      label: "Scheduled Meetings",
+    },
+  ];
+
+  render(
+    <AdvancedTable
+        columnDefinitions={styledColumnDefs}
+        data={{ testid: testId }}
+        tableData={MOCK_DATA}
+    />
+  );
+
+  const enrollmentsHeader = screen.getByText("New Enrollments").closest("th");
+  expect(enrollmentsHeader).toHaveStyle({
+    width: "200px",
+    minWidth: "200px",
+    maxWidth: "200px",
+  });
+});
+
 test("columnDefinitions size, minSize, and maxSize apply layout styles", () => {
   const styledColumnDefs = [
     {

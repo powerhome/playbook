@@ -64,6 +64,12 @@ export function buildTanStackSizingFromColumn(
     if (typeof w === "number" && Number.isFinite(w)) out.maxSize = w
   }
 
+  // width/size only → fixed column (min and max match preferred)
+  if (out.size !== undefined && out.minSize === undefined && out.maxSize === undefined) {
+    out.minSize = out.size
+    out.maxSize = out.size
+  }
+
   return out
 }
 
@@ -80,37 +86,46 @@ export function buildPlaybookColumnLayoutStyles(
   const styling = columnStylingKeys(column)
   const styles: CSSProperties = {}
 
-  const widthFromStyling = cssLength(
-    readStylingLength(styling, "width") as string | number | undefined
-  )
-  const minFromStyling = cssLength(
-    readStylingLength(styling, "minWidth", "min_width") as string | number | undefined
-  )
-  const maxFromStyling = cssLength(
-    readStylingLength(styling, "maxWidth", "max_width") as string | number | undefined
-  )
+  const stylingWidth = readStylingLength(styling, "width")
+  const stylingMin = readStylingLength(styling, "minWidth", "min_width")
+  const stylingMax = readStylingLength(styling, "maxWidth", "max_width")
 
-  const widthFromTanStack =
-    tanStackSizing.size !== undefined
-      ? cssLength(tanStackSizing.size)
-      : undefined
-  const minFromTanStack =
-    tanStackSizing.minSize !== undefined
-      ? cssLength(tanStackSizing.minSize)
-      : undefined
-  const maxFromTanStack =
-    tanStackSizing.maxSize !== undefined
-      ? cssLength(tanStackSizing.maxSize)
-      : undefined
+  const hasStylingWidth = stylingWidth !== undefined && stylingWidth !== ""
+  const hasStylingMin = stylingMin !== undefined && stylingMin !== ""
+  const hasStylingMax = stylingMax !== undefined && stylingMax !== ""
 
-  if (widthFromStyling !== undefined) styles.width = widthFromStyling
-  else if (widthFromTanStack !== undefined) styles.width = widthFromTanStack
+  let widthValue: string | number | undefined = hasStylingWidth
+    ? stylingWidth
+    : tanStackSizing.size
+  let minValue: string | number | undefined = hasStylingMin
+    ? stylingMin
+    : tanStackSizing.minSize
+  let maxValue: string | number | undefined = hasStylingMax
+    ? stylingMax
+    : tanStackSizing.maxSize
 
-  if (minFromStyling !== undefined) styles.minWidth = minFromStyling
-  else if (minFromTanStack !== undefined) styles.minWidth = minFromTanStack
+  const preferredForLock = hasStylingWidth ? stylingWidth : tanStackSizing.size
+  const explicitMin = hasStylingMin || tanStackSizing.minSize !== undefined
+  const explicitMax = hasStylingMax || tanStackSizing.maxSize !== undefined
 
-  if (maxFromStyling !== undefined) styles.maxWidth = maxFromStyling
-  else if (maxFromTanStack !== undefined) styles.maxWidth = maxFromTanStack
+  if (
+    preferredForLock !== undefined &&
+    preferredForLock !== "" &&
+    !explicitMin &&
+    !explicitMax
+  ) {
+    minValue = preferredForLock
+    maxValue = preferredForLock
+    widthValue = preferredForLock
+  }
+
+  const widthCss = cssLength(widthValue)
+  const minCss = cssLength(minValue)
+  const maxCss = cssLength(maxValue)
+
+  if (widthCss !== undefined) styles.width = widthCss
+  if (minCss !== undefined) styles.minWidth = minCss
+  if (maxCss !== undefined) styles.maxWidth = maxCss
 
   return styles
 }
