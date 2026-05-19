@@ -46,20 +46,20 @@
       <% end %>
       <%= pb_rails("flex", props: { gap: "xxs", orientation: "column" }) do %>
         <%= pb_rails("title", props: { size: 4, text: "Some information" }) %>
-        <%= pb_rails("body", props: { text: "This is body text explaining something for you" }) %>
+        <%= pb_rails("body", props: { text: "This is body text explaining something for you that is long but has no width restriction so will span the width of the page!" }) %>
       <% end %>
     <% end %>
   <% end %>
 
   <%# Card #5 - Info: Showing Long Text with No Width Restriction %>
-  <%= pb_rails("card", props: { background: "info_subtle", highlight: { color: 'info', position: 'side' }, padding: "xs", padding_right: "sm" }) do %>
+  <%= pb_rails("card", props: { background: "info_subtle", highlight: { color: 'info', position: 'side' }, padding: "xs", padding_right: "sm", width: "sm" }) do %>
     <%= pb_rails("flex", props: { padding_left: "xxs", padding_top: "xxs" }) do %>
       <%= pb_rails("flex", props: { padding_right: "xs" }) do %>
         <%= pb_rails("icon", props: { icon: "info-circle", size: "lg" }) %>
       <% end %>
       <%= pb_rails("flex", props: { gap: "xxs", orientation: "column" }) do %>
         <%= pb_rails("title", props: { size: 4, text: "Some information!" }) %>
-        <%= pb_rails("body", props: { text: "This is body text explaining something for you that is long but has no width restriction so will span the width of the page!" }) %>
+        <%= pb_rails("body", props: { text: "This is body text explaining something for you that is long and wraps to the next line because the card has a width restriction in place." }) %>
       <% end %>
     <% end %>
   <% end %>

@@ -126,7 +126,7 @@ const NotificationBanner = (props) => {
                 size={4}
                 text="Some information"
             />
-            <Body text="This is body text explaining something for you" />
+            <Body text="This is body text explaining something for you that is long but has no width restriction so will span the width of the page!" />
           </Flex>
         </Flex>
       </Card>
@@ -136,6 +136,7 @@ const NotificationBanner = (props) => {
           highlight={{ color: 'info', position: 'side' }}
           padding="xs"
           paddingRight="sm"
+          width="sm"
       >
         <Flex
             paddingLeft="xxs"
@@ -157,7 +158,7 @@ const NotificationBanner = (props) => {
                 size={4}
                 text="Some information!"
             />
-            <Body text="This is body text explaining something for you that is long but has no width restriction so will span the width of the page!" />
+            <Body text="This is body text explaining something for you that is long and wraps to the next line because the card has a width restriction in place." />
           </Flex>
         </Flex>
       </Card>
