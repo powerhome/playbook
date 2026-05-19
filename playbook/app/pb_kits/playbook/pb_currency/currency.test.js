@@ -178,5 +178,36 @@ test('handles numeric amounts correctly', () => {
   expect(screen.getByTestId('test-numeric-no-symbol')).toHaveTextContent('400.50')
   expect(screen.getByTestId('test-numeric-medium-size')).toHaveTextContent('$500.55')
   expect(screen.getByTestId('test-numeric-negative')).toHaveTextContent('-$600.70')
-  expect(screen.getByTestId('test-numeric-null')).toHaveTextContent('$.00')
+  expect(screen.getByTestId('test-numeric-null')).toHaveTextContent('$0.00')
+})
+
+test('renders zero values with leading digit', () => {
+  render(
+    <>
+      <Currency
+          amount="0"
+          data={{ testid: 'test-string-zero' }}
+      />
+      <Currency
+          amount={0}
+          data={{ testid: 'test-numeric-zero' }}
+      />
+    </>
+  )
+
+  expect(screen.getByTestId('test-string-zero')).toHaveTextContent('$0.00')
+  expect(screen.getByTestId('test-numeric-zero')).toHaveTextContent('$0.00')
+})
+
+test('nullDisplay only applies when amount is empty', () => {
+  render(
+    <Currency
+        amount="-.53"
+        data={{ testid: 'test-null-display-negative' }}
+        nullDisplay="$0.00"
+    />
+  )
+
+  expect(screen.getByTestId('test-null-display-negative')).toHaveTextContent('-$')
+  expect(screen.getByTestId('test-null-display-negative')).not.toHaveTextContent('$0.00')
 })
