@@ -23,3 +23,4 @@ examples:
   - draggable_drop_zones_line: Draggable Drop Zones Line
   - draggable_event_listeners: Draggable Event Listeners
   - draggable_multiple_containers: Dragging Across Multiple Containers
+  - draggable_shift_preferences: Shift Preferences (Mobile Drag Mockup)
