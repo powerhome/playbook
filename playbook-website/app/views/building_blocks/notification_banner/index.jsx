@@ -99,7 +99,7 @@ const NotificationBanner = (props) => {
           </Flex>
         </Flex>
       </Card>
-      {/* Card #4 - Neutral */}
+      {/* Card #4 - Neutral: Showing Long Text with No Width Restriction  */}
       <Card
           background="neutral_subtle"
           highlight={{ color: 'neutral', position: 'side' }}
@@ -130,7 +130,7 @@ const NotificationBanner = (props) => {
           </Flex>
         </Flex>
       </Card>
-      {/* Card #5 - Info: Showing Long Text with No Width Restriction */}
+      {/* Card #5 - Info: Showing Long Text with Width Restriction  */}
       <Card
           background="info_subtle"
           highlight={{ color: 'info', position: 'side' }}
