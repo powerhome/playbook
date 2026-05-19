@@ -199,6 +199,18 @@ test('renders zero values with leading digit', () => {
   expect(screen.getByTestId('test-numeric-zero')).toHaveTextContent('$0.00')
 })
 
+test('normalizes string zero with single decimal digit to .00', () => {
+  render(
+    <Currency
+        amount="0.0"
+        commaSeparator
+        data={{ testid: 'test-string-zero-single-decimal' }}
+    />
+  )
+
+  expect(screen.getByTestId('test-string-zero-single-decimal')).toHaveTextContent('$0.00')
+})
+
 test('nullDisplay only applies when amount is empty', () => {
   render(
     <Currency

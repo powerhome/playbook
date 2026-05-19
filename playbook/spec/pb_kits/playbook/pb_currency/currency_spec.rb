@@ -172,5 +172,12 @@ RSpec.describe Playbook::PbCurrency::Currency do
       expect(num.title_props[:text]).to eq "0"
       expect(num.body_props[:text]).to eq ".00"
     end
+
+    it "normalizes string zero with single decimal digit to .00" do
+      num = subject.new(comma_separator: true, amount: "0.0")
+
+      expect(num.title_props[:text]).to eq "0"
+      expect(num.body_props[:text]).to eq ".00"
+    end
   end
 end

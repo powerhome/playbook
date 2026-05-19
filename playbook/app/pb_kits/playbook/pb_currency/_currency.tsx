@@ -82,7 +82,8 @@ const Currency = (props: CurrencyProps): React.ReactElement => {
     variantClass = '_bold'
   }
 
-  const [wholePart, decimal = '00'] = currencyAmount ? currencyAmount.split('.') : ['', '00']
+  const [wholePart, decimalPart = '00'] = currencyAmount ? currencyAmount.split('.') : ['', '00']
+  const decimal = (decimalPart || '00').padEnd(2, '0').slice(0, 2)
   const whole = currencyAmount === '' ? '' : (wholePart === '' ? '0' : wholePart)
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)

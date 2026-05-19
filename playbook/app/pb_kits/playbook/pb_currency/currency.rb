@@ -125,7 +125,7 @@ module Playbook
       # Convert numeric input to string format
       def convert_amount(input)
         if input.is_a?(Numeric)
-          format("%.2f", input)
+          Kernel.format("%.2f", input)
         else
           input.to_s
         end
@@ -146,7 +146,8 @@ module Playbook
       def decimal_value
         return "00" if currency_amount.blank?
 
-        currency_amount.split(".")[1] || "00"
+        fraction = currency_amount.split(".")[1] || "00"
+        fraction.ljust(2, "0")[0, 2]
       end
 
       def units_element
