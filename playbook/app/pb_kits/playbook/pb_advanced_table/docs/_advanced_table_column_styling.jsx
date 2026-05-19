@@ -10,8 +10,7 @@ const AdvancedTableColumnStyling = (props) => {
       accessor: "year",
       label: "Year",
       cellAccessors: ["quarter", "month", "day"],
-      // Floor only — see "Column Styling: Width" doc for fixed width and min/pref/max bands.
-      columnStyling: { minWidth: 124 },
+      columnStyling: { width: 124 },
     },
     {
       accessor: "newEnrollments",

@@ -4,7 +4,7 @@
     "label": "Year",
     "cellAccessors": ["quarter", "month", "day"],
     "columnStyling": {
-      "minWidth": 124
+      "width": 124
     }
   },
   {

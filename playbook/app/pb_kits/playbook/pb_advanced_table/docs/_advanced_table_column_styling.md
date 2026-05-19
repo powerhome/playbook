@@ -6,7 +6,7 @@ The `columnStyling` prop is an optional item that can be used within `columnDefi
 
 3) `fontColor`: This will allow you to control the font color for a given column.
 
-4) Column width: optional keys on `columnStyling` are `minWidth`, `width`, and `maxWidth` (numbers = pixels; CSS strings allowed). This example sets `minWidth` on Year so the hierarchy column does not shrink when rows expand.
+4) Column width: optional keys on `columnStyling` are `minWidth`, `width`, and `maxWidth` (numbers = pixels; CSS strings allowed). This example sets `width` on Year for a fixed hierarchy column (see the width doc for `minWidth` and bands).
 
 Fixed width: pass `width` only (or TanStack `size` only) and Playbook sets min and max to the same value automatically — you do not need all three for an exact width.
 
