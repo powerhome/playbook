@@ -868,14 +868,9 @@ export default class PbDropdown extends PbEnhancedElement {
       this.emitSelectionChange();
     }
 
-    const customTrigger = this.customTrigger;
     const shouldCloseOnOptionSelect =
       this.closeOnClick === "any" || this.closeOnClick === "inside";
-    if (
-      customTrigger &&
-      shouldCloseOnOptionSelect &&
-      this.target.classList.contains("open")
-    ) {
+    if (shouldCloseOnOptionSelect && this.target.classList.contains("open")) {
       this.hideElement(this.target);
       this.updateArrowDisplay(false);
     }

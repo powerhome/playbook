@@ -1,5 +1,5 @@
-import React, {useState, useEffect, useLayoutEffect, useMemo, forwardRef, useRef, useContext} from "react"
-import Select, {mergeStyles} from "react-select"
+import React, {useState, useEffect, useLayoutEffect, useMemo, useCallback, forwardRef, useRef, useContext} from "react"
+import Select, {components as selectComponents, mergeStyles} from "react-select"
 import AsyncSelect from "react-select/async"
 import CreateableSelect from "react-select/creatable"
 import AsyncCreateableSelect from "react-select/async-creatable"
@@ -225,36 +225,51 @@ const Typeahead = forwardRef<HTMLInputElement, TypeaheadProps>(
     const dialogCtx = useContext(DialogContext)
 
     const kitContainerRef = useRef<HTMLDivElement>(null)
-    const floatingOwnerIdRef = useRef<string | null>(null)
     const [menuPortalHost, setMenuPortalHost] = useState<HTMLElement | null>(
       null,
     )
+    const [floatingOwnerId, setFloatingOwnerId] = useState<string | null>(null)
     const [menuIsOpen, setMenuIsOpen] = useState(false)
 
-    useLayoutEffect(() => {
-      if (!menuIsOpen) return
+    const resolveMenuPortalConfig = useCallback(() => {
       const el = kitContainerRef.current
-      floatingOwnerIdRef.current = resolveFloatingOwnerId(el)
+      setFloatingOwnerId(resolveFloatingOwnerId(el))
       setMenuPortalHost(
         resolvePortaledKitHost(
           el,
           dialogCtx?.selectMenuPortalTarget ?? null,
         ),
       )
-    }, [menuIsOpen, dialogCtx?.selectMenuPortalTarget])
+    }, [dialogCtx?.selectMenuPortalTarget])
 
     useLayoutEffect(() => {
-      if (!menuIsOpen || !floatingOwnerIdRef.current) return
-      const menuPortal = selectRef.current?.menuListRef?.closest(
-        ".typeahead-kit-select__menu-portal",
-      ) as HTMLElement | null
-      if (menuPortal) {
-        menuPortal.setAttribute(
-          PB_FLOATING_OWNER_ATTR,
-          floatingOwnerIdRef.current,
-        )
+      if (!menuIsOpen) {
+        setFloatingOwnerId(null)
+        setMenuPortalHost(null)
+        return
       }
-    }, [menuIsOpen, menuPortalHost])
+      resolveMenuPortalConfig()
+    }, [menuIsOpen, resolveMenuPortalConfig])
+
+    const MenuPortalWithOwner = useMemo(
+      () =>
+        function TypeaheadMenuPortal(
+          portalProps: React.ComponentProps<typeof selectComponents.MenuPortal>,
+        ) {
+          return (
+            <selectComponents.MenuPortal
+                {...portalProps}
+                innerProps={{
+                  ...portalProps.innerProps,
+                  ...(floatingOwnerId
+                    ? {[PB_FLOATING_OWNER_ATTR]: floatingOwnerId}
+                    : {}),
+                }}
+            />
+          )
+        },
+      [floatingOwnerId],
+    )
 
     const mergedSelectStyles = useMemo(() => {
       if (menuPortalHost !== document.body) return stylesProp
@@ -276,7 +291,7 @@ const Typeahead = forwardRef<HTMLInputElement, TypeaheadProps>(
     const handleMenuClose = () => {
       setMenuIsOpen(false)
       setMenuPortalHost(null)
-      floatingOwnerIdRef.current = null
+      setFloatingOwnerId(null)
       if (props.onMenuClose) {
         props.onMenuClose()
       }
@@ -285,6 +300,7 @@ const Typeahead = forwardRef<HTMLInputElement, TypeaheadProps>(
     // Configure focus on selected option using React Select's API
     const handleMenuOpen = () => {
       if (kitRequiresPortaledFloatingUi(kitContainerRef.current)) {
+        resolveMenuPortalConfig()
         setMenuIsOpen(true)
       }
       setTimeout(() => {
@@ -448,6 +464,7 @@ const resolvedLoadOptions =
         Option,
         Placeholder,
         ValueContainer,
+        ...(menuPortalHost ? {MenuPortal: MenuPortalWithOwner} : {}),
         ...components,
       },
       loadOptions: wrappedLoadOptions,
