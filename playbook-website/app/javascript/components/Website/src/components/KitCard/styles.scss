@@ -26,15 +26,21 @@
 
   // TODO: update this once kit images are added, this provides gray placeholder
   .kit-card-media {
+    aspect-ratio: 16 / 7;
     background-color: $bg_light;
-    flex: 2 1 0;
-    min-height: 0;
+    flex: 0 0 auto;
+    overflow: hidden;
+    width: 100%;
+  }
+
+  .kit-card-media-image {
+    display: block;
+    object-fit: contain;
+    width: 100%;
   }
 
   .kit-card-content {
-    flex: 1 1 0;
-    justify-content: flex-start;
-    min-height: 0;
+    flex: 1 1 auto;
   }
 
   .icon {
@@ -55,9 +61,6 @@
         display: none;
       }
     }
-  }
-  &-header {
-    height: 40px;
   }
   &-description {
     flex-shrink: 0;

@@ -1,23 +1,75 @@
 import { Caption, Flex, colors } from "playbook-ui";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useMemo } from "react";
 import { useDarkMode } from "../../../contexts/DarkModeContext";
 import "./styles.scss";
 
-interface Section {
+/** Matches `DocsTab` / kit YAML `sections` entries. */
+export interface KitDocSection {
   title: string;
   examples: string[];
 }
 
+/** Fields this nav reads from each docs example (see `DocsTab.tsx`). */
+export interface KitDocExample {
+  example_key: string;
+  title: string;
+}
+
 interface RightSideNavProps {
-  examples: any[];
-  sections?: Section[];
+  examples: KitDocExample[];
+  sections?: KitDocSection[];
+}
+
+/** Pixel tolerance so "scrolled to bottom" still counts with rounding and scrollbars. */
+const SCROLL_END_SLOP_PX = 24;
+
+/** Active item follows headings that cross this line (ratio of main scrollport height from its top). */
+const ACTIVATION_LINE_VIEWPORT_RATIO = 0.2;
+
+function examplesForSection(
+  examples: KitDocExample[],
+  section: KitDocSection,
+): KitDocExample[] {
+  return examples.filter((ex) => section.examples.includes(ex.example_key));
+}
+
+// Main scroll column for the website shell (`website_new.scss` / `LayoutRight`).
+const MAIN_CONTENT_SCROLL_SELECTOR = ".pb--page--content--main";
+
+/** Fixed rail width; keep in sync with `htmlOptions.style.width` / `minWidth` / `maxWidth` below. */
+const DOC_RIGHT_NAV_WIDTH_PX = 206;
+
+/**
+ * Same vertical order as `DocsTab` `renderExamples`: walk sections in order, append each
+ * section's examples in `examples` array order. Raw `examples` alone is not reliable when
+ * sections reorder rows vs the kit's default list.
+ */
+function examplesInDocsTabOrder(
+  examples: KitDocExample[],
+  sections: KitDocSection[] | undefined,
+): KitDocExample[] {
+  if (!sections?.length) {
+    return examples;
+  }
+
+  const ordered: KitDocExample[] = [];
+  for (const section of sections) {
+    ordered.push(...examplesForSection(examples, section));
+  }
+
+  return ordered.length > 0 ? ordered : examples;
 }
 
 const RightSideNav = ({ examples, sections }: RightSideNavProps) => {
   const [activeId, setActiveId] = useState<string>("");
-  const navItemsRef = useRef<{ [key: string]: HTMLDivElement | null }>({});
-  const isManualScrollRef = useRef(false);
+  const navItemsRef = useRef<Record<string, HTMLDivElement | null>>({});
+  const isManualScrollRef = useRef<boolean>(false);
   const { darkMode } = useDarkMode();
+
+  const examplesInDocumentOrder = useMemo(
+    () => examplesInDocsTabOrder(examples, sections),
+    [examples, sections],
+  );
 
   // Scroll active nav item into view if the nav is too long to fit the page
   useEffect(() => {
@@ -29,63 +81,61 @@ const RightSideNav = ({ examples, sections }: RightSideNavProps) => {
     }
   }, [activeId]);
 
-  // Keep the active state aligned with scroll position and force the last
-  // example active when the page reaches the bottom.
+  // Scroll-spy listens on the main content column (not `window`); class matches `LayoutRight`.
   useEffect(() => {
-    const scrollContainer = document.querySelector(
-      ".pb--page--content--main"
-    ) as HTMLElement | null;
+    const scrollContainer = document.querySelector<HTMLElement>(
+      MAIN_CONTENT_SCROLL_SELECTOR,
+    );
 
     const updateActiveId = () => {
-      if (isManualScrollRef.current || examples.length === 0) return;
+      if (isManualScrollRef.current || examplesInDocumentOrder.length === 0) {
+        return;
+      }
 
       const viewportHeight = scrollContainer?.clientHeight ?? window.innerHeight;
       const scrollTop = scrollContainer?.scrollTop ?? window.scrollY;
       const scrollHeight =
         scrollContainer?.scrollHeight ?? document.documentElement.scrollHeight;
       const scrolledToBottom =
-        scrollTop + viewportHeight >= scrollHeight - 8;
+        scrollTop + viewportHeight >= scrollHeight - SCROLL_END_SLOP_PX;
 
       if (scrolledToBottom) {
-        const lastExampleId = examples[examples.length - 1]?.example_key;
+        const lastExampleId =
+          examplesInDocumentOrder[examplesInDocumentOrder.length - 1]?.example_key;
 
         if (lastExampleId) {
-          setActiveId((currentActiveId) =>
-            currentActiveId === lastExampleId ? currentActiveId : lastExampleId
+          setActiveId((current) =>
+            current === lastExampleId ? current : lastExampleId,
           );
         }
-
         return;
       }
 
       const containerTop = scrollContainer?.getBoundingClientRect().top ?? 0;
-      const activationLine = containerTop + viewportHeight * 0.2;
-      let nextActiveId = examples[0]?.example_key ?? "";
+      const activationLine =
+        containerTop + viewportHeight * ACTIVATION_LINE_VIEWPORT_RATIO;
+      let nextActiveId = examplesInDocumentOrder[0]?.example_key ?? "";
 
-      for (let i = 0; i < examples.length; i++) {
-        const element = document.getElementById(examples[i].example_key);
+      for (const ex of examplesInDocumentOrder) {
+        const element = document.getElementById(ex.example_key);
         if (!element) continue;
 
         const rect = element.getBoundingClientRect();
-
         if (rect.top <= activationLine) {
-          nextActiveId = examples[i].example_key;
+          nextActiveId = ex.example_key;
         } else {
           break;
         }
       }
 
       if (nextActiveId) {
-        setActiveId((currentActiveId) =>
-          currentActiveId === nextActiveId ? currentActiveId : nextActiveId
-        );
+        setActiveId((current) => (current === nextActiveId ? current : nextActiveId));
       }
     };
 
     updateActiveId();
 
-    const scrollTarget = scrollContainer ?? window;
-
+    const scrollTarget: HTMLElement | Window = scrollContainer ?? window;
     scrollTarget.addEventListener("scroll", updateActiveId, { passive: true });
     window.addEventListener("resize", updateActiveId);
 
@@ -93,7 +143,7 @@ const RightSideNav = ({ examples, sections }: RightSideNavProps) => {
       scrollTarget.removeEventListener("scroll", updateActiveId);
       window.removeEventListener("resize", updateActiveId);
     };
-  }, [examples]);
+  }, [examplesInDocumentOrder]);
 
   const handleClick = (id: string) => {
     isManualScrollRef.current = true;
@@ -102,19 +152,15 @@ const RightSideNav = ({ examples, sections }: RightSideNavProps) => {
     if (element) {
       element.scrollIntoView({ behavior: "smooth", block: "start" });
     }
-    // Reset the flag after scroll completes
     setTimeout(() => {
       isManualScrollRef.current = false;
     }, 1000);
   };
 
-  // Render nav items organized by sections or show all if no sections
   const renderNavItems = () => {
     if (sections && sections.length > 0) {
       return sections.map((section) => {
-        const sectionExamples = examples.filter((example) =>
-          section.examples.includes(example.example_key)
-        );
+        const sectionExamples = examplesForSection(examples, section);
 
         if (sectionExamples.length === 0) return null;
 
@@ -130,16 +176,18 @@ const RightSideNav = ({ examples, sections }: RightSideNavProps) => {
                 dark={darkMode}
               />
             </div>
-            {sectionExamples.map((example: any) => (
+            {sectionExamples.map((example) => (
               <div
                 key={example.example_key}
-                ref={(el) => (navItemsRef.current[example.example_key] = el)}
+                ref={(el) => {
+                  navItemsRef.current[example.example_key] = el;
+                }}
                 onClick={() => handleClick(example.example_key)}
                 className="category-nav-item"
                 style={{
                   borderLeft: `3px solid ${
                     activeId === example.example_key ? colors.primary : colors.border_light
-                  }`
+                  }`,
                 }}
               >
                 <Caption
@@ -160,50 +208,60 @@ const RightSideNav = ({ examples, sections }: RightSideNavProps) => {
           </div>
         );
       });
-    } else {
-      // No sections, render all examples without section headers
-      return examples.map((example: any) => (
-        <div
-          key={example.example_key}
-          ref={(el) => (navItemsRef.current[example.example_key] = el)}
-          onClick={() => handleClick(example.example_key)}
-          className="category-nav-item"
-          style={{
-            borderLeft: `3px solid ${
-              activeId === example.example_key ? colors.primary : colors.border_light
-            }`
-          }}
-        >
-          <Caption 
-            size="xs" 
-            text={example.title} 
-            color={activeId === example.example_key ? "link" : "light"}
-            cursor="pointer" 
-            dark={darkMode}
-          />
-        </div>
-      ));
     }
+
+    return examples.map((example) => (
+      <div
+        key={example.example_key}
+        ref={(el) => {
+          navItemsRef.current[example.example_key] = el;
+        }}
+        onClick={() => handleClick(example.example_key)}
+        className="category-nav-item"
+        style={{
+          borderLeft: `3px solid ${
+            activeId === example.example_key ? colors.primary : colors.border_light
+          }`,
+        }}
+      >
+        <Caption
+          size="xs"
+          text={example.title}
+          color={activeId === example.example_key ? "link" : "light"}
+          cursor="pointer"
+          dark={darkMode}
+          htmlOptions={{
+            style: {
+              paddingTop: "2px",
+              paddingBottom: "2px",
+            },
+          }}
+        />
+      </div>
+    ));
   };
 
   return (
     <Flex
       display={{ xs: "none", sm: "none", md: "none", lg: "none", xl: "flex" }}
       flexDirection="column"
+      flexGrow={0}
+      flexShrink={0}
       marginLeft="xl"
       position="sticky"
       alignSelf="flex-start"
       htmlOptions={{
         style: {
-          width: "206px",
+          width: `${DOC_RIGHT_NAV_WIDTH_PX}px`,
+          minWidth: `${DOC_RIGHT_NAV_WIDTH_PX}px`,
+          maxWidth: `${DOC_RIGHT_NAV_WIDTH_PX}px`,
           top: "20px",
           maxHeight: "calc(100vh - 120px)",
           overflowY: "auto",
         },
       }}
-      shrink
     >
-      {examples && renderNavItems()}
+      {examples.length > 0 ? renderNavItems() : null}
     </Flex>
   );
 };

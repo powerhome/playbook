@@ -1,8 +1,15 @@
 @import "playbook-tokens/screen_sizes";
 
 .kit-container {
-  grid-template-columns: repeat(3, 1fr) !important;
-  @media screen and (min-width: $screen-md-min) and (max-width: $screen-xl-max) {
-    grid-template-columns: repeat(3, 1fr) !important;
+  grid-template-columns: minmax(0, 1fr) !important;
+
+  @media screen and (min-width: $screen-sm-min) {
+    grid-template-columns: repeat(2, minmax(0, 364px)) !important;
+    justify-content: center;
+  }
+
+  @media screen and (min-width: $screen-xl-min) {
+    grid-template-columns: repeat(3, minmax(0, 364px)) !important;
+    justify-content: center;
   }
 }

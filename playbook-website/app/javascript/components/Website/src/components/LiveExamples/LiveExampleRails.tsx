@@ -108,11 +108,30 @@ const LiveExampleRails: React.FC<LiveExampleRailsProps> = ({ html }) => {
   if (!html) return null;
 
   return (
-    <Card borderNone padding="md" dark={darkMode} htmlOptions={{ style: { border: 'none' } }}>
+    <Card
+      borderNone
+      padding="md"
+      dark={darkMode}
+      htmlOptions={{
+        style: {
+          border: "none",
+          boxSizing: "border-box",
+          maxWidth: "100%",
+          minWidth: 0,
+        },
+      }}
+    >
       <div
-        ref={containerRef}
-        dangerouslySetInnerHTML={{ __html: html }}
-      />
+        style={{
+          boxSizing: "border-box",
+          width: "100%",
+          maxWidth: "100%",
+          minWidth: 0,
+          overflowX: "auto",
+        }}
+      >
+        <div ref={containerRef} dangerouslySetInnerHTML={{ __html: html }} />
+      </div>
     </Card>
   );
 };

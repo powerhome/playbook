@@ -1,5 +1,11 @@
 @import "playbook-tokens/container";
 @import "playbook-tokens/screen_sizes";
+@import "playbook-tokens/spacing";
+
+$kit-card-column-width: 364px;
+$kit-grid-column-gap: $space_sm;
+$kit-grid-two-column-track-width: calc((#{$kit-card-column-width} * 2) + #{$kit-grid-column-gap});
+$kit-grid-three-column-track-width: calc((#{$kit-card-column-width} * 3) + (#{$kit-grid-column-gap} * 2));
 
 .component-list-search {
   box-sizing: border-box;
@@ -19,5 +25,29 @@
 
   .pb_text_input_kit {
     max-width: 100%;
+  }
+}
+
+.pb--website--new {
+  .component-list-category {
+    // Keep category titles aligned to the centered card track width.
+    .component-list-category-content-well {
+      box-sizing: border-box;
+      margin-inline: auto;
+      max-width: 100%;
+      width: 100%;
+    }
+
+    @include break_on($screen-sm-min) {
+      .component-list-category-content-well {
+        max-width: min(100%, $kit-grid-two-column-track-width);
+      }
+    }
+
+    @include break_on($screen-xl-min) {
+      .component-list-category-content-well {
+        max-width: min(100%, $kit-grid-three-column-track-width);
+      }
+    }
   }
 }
