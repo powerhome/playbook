@@ -18,6 +18,7 @@
 ] %>
 
 <% total = data.sum { |point| point[:y] } %>
+<% subtitle_rows = data.map { |point| "#{point[:name]}: #{point[:y]}%" }.join("<br>") %>
 
 <% chart_options = {
   chart: {
@@ -36,7 +37,7 @@
     y: 8,
   },
   subtitle: {
-    text: "Total<br><strong>#{total.round(1)}</strong>",
+    text: "Total<br><strong>#{total.round(1)}</strong><br><br>#{subtitle_rows}",
     useHTML: true,
     floating: true,
     align: "center",
