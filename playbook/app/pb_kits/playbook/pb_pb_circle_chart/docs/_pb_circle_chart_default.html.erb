@@ -1,22 +1,87 @@
+<% data = [
+  {
+    name: "EV",
+    y: 23.9,
+  },
+  {
+    name: "Hybrids",
+    y: 12.6,
+  },
+  {
+    name: "Diesel",
+    y: 37.0,
+  },
+  {
+    name: "Petrol",
+    y: 26.4,
+  },
+] %>
+
+<% total = data.sum { |point| point[:y] } %>
+
 <% chart_options = {
-  series: [
-    {
-      data: [
+  chart: {
+    type: "pie",
+  },
+  accessibility: {
+    point: {
+      valueSuffix: "%",
+    },
+  },
+  title: {
+    text: "2023 Norway car registrations",
+  },
+  subtitle: {
+    text: 'Source: <a href="https://www.ssb.no/transport-og-reiseliv/faktaside/bil-og-transport">SSB</a>',
+  },
+  tooltip: {
+    pointFormat: "{series.name}: <b>{point.percentage:.0f}%</b>",
+  },
+  legend: {
+    enabled: false,
+  },
+  plotOptions: {
+    series: {
+      allowPointSelect: true,
+      cursor: "pointer",
+      borderRadius: 8,
+      dataLabels: [
         {
-          name: "Waiting for Calls",
-          y: 41,
+          enabled: true,
+          distance: 20,
+          format: "{point.name}",
         },
         {
-          name: "On Call",
-          y: 49,
-        },
-        {
-          name: "After Call",
-          y: 10,
+          enabled: true,
+          distance: -15,
+          format: "{point.percentage:.0f}%",
+          style: {
+            fontSize: "0.9em",
+          },
         },
       ],
+      showInLegend: true,
+    },
+  },
+  series: [
+    {
+      name: "Registrations",
+      colorByPoint: true,
+      innerSize: "75%",
+      data: data,
     },
   ],
 } %>
 
-<%= pb_rails("pb_circle_chart", props: { options: chart_options }) %>
+<div style="position: relative;">
+  <%= pb_rails("pb_circle_chart", props: { options: chart_options }) %>
+
+  <div
+    style="position: absolute; inset: 0; display: flex; justify-content: center; align-items: center; z-index: 1; text-align: center; pointer-events: none;"
+  >
+    <div>
+      <%= pb_rails("body", props: { text: "Total", color: "light" }) %>
+      <%= pb_rails("title", props: { size: 3, tag: "div", text: total.round(1).to_s }) %>
+    </div>
+  </div>
+</div>
