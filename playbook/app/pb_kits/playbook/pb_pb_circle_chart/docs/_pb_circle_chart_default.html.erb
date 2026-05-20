@@ -29,10 +29,24 @@
     },
   },
   title: {
-    text: "2023 Norway car registrations",
+    text: "Total<br><strong>#{total.round(1)}</strong>",
+    useHTML: true,
+    floating: true,
+    align: "center",
+    verticalAlign: "middle",
+    y: 8,
+    style: {
+      textAlign: "center",
+    },
   },
   subtitle: {
+    text: "2023 Norway car registrations",
+    align: "center",
+    x: 0,
+  },
+  caption: {
     text: 'Source: <a href="https://www.ssb.no/transport-og-reiseliv/faktaside/bil-og-transport">SSB</a>',
+    useHTML: true,
   },
   tooltip: {
     pointFormat: "{series.name}: <b>{point.percentage:.0f}%</b>",
@@ -67,21 +81,11 @@
     {
       name: "Registrations",
       colorByPoint: true,
+      center: ["50%", "50%"],
       innerSize: "75%",
       data: data,
     },
   ],
 } %>
 
-<div style="position: relative;">
-  <%= pb_rails("pb_circle_chart", props: { options: chart_options }) %>
-
-  <div
-    style="position: absolute; inset: 0; display: flex; justify-content: center; align-items: center; z-index: 1; text-align: center; pointer-events: none;"
-  >
-    <div>
-      <%= pb_rails("body", props: { text: "Total", color: "light" }) %>
-      <%= pb_rails("title", props: { size: 3, tag: "div", text: total.round(1).to_s }) %>
-    </div>
-  </div>
-</div>
+<%= pb_rails("pb_circle_chart", props: { options: chart_options }) %>
