@@ -1,5 +1,5 @@
 import distributionBar from "./distribution_bar.svg";
-import filter from "./filter.svg";
+import filter from "./kit_filter.svg";
 import legend from "./legend.svg";
 import list from "./list.svg";
 import map from "./map.svg";
