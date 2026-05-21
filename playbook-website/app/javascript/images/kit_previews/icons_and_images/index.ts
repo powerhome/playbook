@@ -1,4 +1,4 @@
-import icon from "./icon.svg";
+import icon from "./kit_icon.svg";
 import iconCircle from "./icon_circle.svg";
 import iconStatValue from "./icon_stat_value.svg";
 import iconValue from "./icon_value.svg";
