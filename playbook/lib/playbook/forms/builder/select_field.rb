@@ -16,7 +16,7 @@ module Playbook
         end
 
         options[:skip_default_ids] = false unless options.key?(:skip_default_ids)
-        options[:prompt] = props[:blank_selection] if props.key?(:blank_selection)
+        options[:prompt] = props[:blank_selection] || ""
         html_options[:required] = "required" if props[:required]
         html_options[:id] = props[:input_options][:id]
         html_options[:class] = props[:input_options][:class] if props[:input_options][:class]
