@@ -1,0 +1,90 @@
+<% data = [
+  {
+    name: "EV",
+    y: 23.9,
+  },
+  {
+    name: "Hybrids",
+    y: 12.6,
+  },
+  {
+    name: "Diesel",
+    y: 37.0,
+  },
+  {
+    name: "Petrol",
+    y: 26.4,
+  },
+] %>
+
+<% total = data.sum { |point| point[:y] } %>
+<% subtitle_rows = data.map { |point| "#{point[:name]}: #{point[:y]}%" }.join("<br>") %>
+
+<% chart_options = {
+  chart: {
+    type: "pie",
+  },
+  accessibility: {
+    point: {
+      valueSuffix: "%",
+    },
+  },
+  title: {
+    text: "2023 Norway car registrations",
+    floating: true,
+    align: "center",
+    verticalAlign: "top",
+    y: 8,
+  },
+  subtitle: {
+    text: "Total<br><strong>#{total.round(1)}</strong><br><br>#{subtitle_rows}",
+    useHTML: true,
+    floating: true,
+    align: "center",
+    verticalAlign: "middle",
+    y: 8,
+    style: {
+      textAlign: "center",
+    },
+  },
+  tooltip: {
+    pointFormat: "{series.name}: <b>{point.percentage:.0f}%</b>",
+  },
+  legend: {
+    enabled: false,
+  },
+  plotOptions: {
+    series: {
+      allowPointSelect: true,
+      cursor: "pointer",
+      borderRadius: 8,
+      dataLabels: [
+        {
+          enabled: true,
+          distance: 20,
+          format: "{point.name}",
+        },
+        {
+          enabled: true,
+          distance: -15,
+          format: "{point.percentage:.0f}%",
+          style: {
+            fontSize: "0.9em",
+          },
+        },
+      ],
+      showInLegend: true,
+    },
+  },
+  series: [
+    {
+      name: "Registrations",
+      colorByPoint: true,
+      center: ["50%", "50%"],
+      innerSize: "75%",
+      data: data,
+    },
+  ],
+} %>
+
+<%= pb_rails("pb_circle_chart", props: { options: chart_options }) %>

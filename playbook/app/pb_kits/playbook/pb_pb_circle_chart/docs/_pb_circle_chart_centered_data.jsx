@@ -1,7 +1,5 @@
 import React from "react";
 import PbCircleChart from "../_pb_circle_chart";
-import Body from "../../pb_body/_body";
-import Title from "../../pb_title/_title";
 
 const data = [
   {
@@ -23,6 +21,7 @@ const data = [
 ];
 
 const total = data.reduce((sum, point) => sum + point.y, 0);
+const subtitleRows = data.map((point) => `${point.name}: ${point.y}%`).join("<br>");
 
 const chartOptions = {
   chart: {
@@ -35,9 +34,21 @@ const chartOptions = {
   },
   title: {
     text: "2023 Norway car registrations",
+    floating: true,
+    align: "center",
+    verticalAlign: "top",
+    y: 8,
   },
   subtitle: {
-    text: 'Source: <a href="https://www.ssb.no/transport-og-reiseliv/faktaside/bil-og-transport">SSB</a>',
+    text: `Total<br><strong>${total.toFixed(1)}</strong><br><br>${subtitleRows}`,
+    useHTML: true,
+    floating: true,
+    align: "center",
+    verticalAlign: "middle",
+    y: 8,
+    style: {
+      textAlign: "center",
+    },
   },
   tooltip: {
     pointFormat: "{series.name}: <b>{point.percentage:.0f}%</b>",
@@ -72,44 +83,18 @@ const chartOptions = {
     {
       name: "Registrations",
       colorByPoint: true,
+      center: ["50%", "50%"],
       innerSize: "75%",
       data,
     },
   ],
 };
 
-const PbCircleChartDefault = (props) => (
-  <div style={{ position: "relative" }}>
-    <PbCircleChart
-        options={chartOptions}
-        {...props}
-    />
-    <div
-        style={{
-          position: "absolute",
-          inset: 0,
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          zIndex: 1,
-          textAlign: "center",
-          pointerEvents: "none",
-        }}
-    >
-      <div>
-        <Body
-            color="light"
-            text="Total"
-        />
-        <Title
-            size={3}
-            tag="div"
-        >
-          {total.toFixed(1)}
-        </Title>
-      </div>
-    </div>
-  </div>
+const PbCircleChartCenteredData = (props) => (
+  <PbCircleChart
+      options={chartOptions}
+      {...props}
+  />
 );
 
-export default PbCircleChartDefault;
+export default PbCircleChartCenteredData;
