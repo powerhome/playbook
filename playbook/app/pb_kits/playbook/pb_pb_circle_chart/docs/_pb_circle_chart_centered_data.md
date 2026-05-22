@@ -1,1 +1,1 @@
-This example shows how to achieve centered data. This data will remain in the on all screen sizes.
+This example shows how to achieve centered data. This data will remain in the center of all screen sizes.
