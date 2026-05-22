@@ -3463,10 +3463,10 @@
   resolved "https://npm.powerapp.cloud/@tiptap/extension-heading/-/extension-heading-2.11.7.tgz#0e29db2a5dcd3456c7ab1a40817b56b926a073ec"
   integrity sha512-8kWh7y4Rd2fwxfWOhFFWncHdkDkMC1Z60yzIZWjIu72+6yQxvo8w3yeb7LI7jER4kffbMmadgcfhCHC/fkObBA==
 
-"@tiptap/extension-highlight@^2.11.7":
-  version "2.11.7"
-  resolved "https://npm.powerapp.cloud/@tiptap/extension-highlight/-/extension-highlight-2.11.7.tgz#2c92a6b8de96edfbdb2d3cdbd9eb8cf9c8011da8"
-  integrity sha512-c/NH4kIpNOWCUQv8RkFNDyOcgt+2pYFpDf0QBJmzhAuv4BIeS2bDmDtuNS7VgoWRZH+xxCNXfvm2BG+kjtipEg==
+"@tiptap/extension-highlight@^3.23.6":
+  version "3.23.6"
+  resolved "https://npm.powerapp.cloud/@tiptap/extension-highlight/-/extension-highlight-3.23.6.tgz#7c29ea0023aaf7614f8f4d864597c5a733c20d46"
+  integrity sha512-GWv6R4iZzVrNeB33qtJDBt/BfVjuc5S/sUF/VDFAtK8h86bg4cEm1tGLEsui4T3+vij/t+P+eoGhkzF6NGogdg==
 
 "@tiptap/extension-history@^2.11.7":
   version "2.11.7"
