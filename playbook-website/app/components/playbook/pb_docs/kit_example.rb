@@ -70,7 +70,6 @@ module Playbook
                                            .gsub("'../..'", "'playbook-ui'")
                                            .gsub(%r{from "../.*}, "from 'playbook-ui'")
                                            .gsub(%r{from '../.*}, "from 'playbook-ui'")
-                                           .gsub("'../../../../../../playbook-website/app/javascript/scripts/custom-icons'", "'your-directory/custom-icons.js'")
         stringified_code = stringified_code.gsub(/import\s+(\w+)\s+from\s+['"]playbook-ui['"]/) do
           "import { #{::Regexp.last_match(1)} } from 'playbook-ui'"
         end

@@ -1,3 +1,12 @@
+/**
+ * NOT FUNCTIONAL on the Playbook website — illustrative only.
+ *
+ * Kept so the Icon kit "Font Awesome Kit" doc example can show a real custom-icons.js
+ * export shape. In your app, replace this with the file from your Font Awesome Kit and
+ * load Font Awesome as documented in our icon integration guides.
+ *
+ * @see https://fontawesome.com/v6/docs/web/setup/use-kit#add-custom-icons
+ */
 /* eslint-disable */
 (function () {
   'use strict';

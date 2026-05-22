@@ -7,11 +7,7 @@ export function formatReactSnippet(source: string, darkMode: boolean): string {
     .replace(/'\.\.\/\.\.\/'/g, "'playbook-ui'")
     .replace(/'\.\.\/\.\.'/g, "'playbook-ui'")
     .replace(/from "..\/.*$/gm, "from 'playbook-ui'")
-    .replace(/from '\.\.\/.*$/gm, "from 'playbook-ui'")
-    .replace(
-      /'\.\.\/\.\.\/\.\.\/\.\.\/\.\.\/\.\.\/playbook-website\/app\/javascript\/scripts\/custom-icons'/g,
-      "'your-directory/custom-icons.js'",
-    );
+    .replace(/from '\.\.\/.*$/gm, "from 'playbook-ui'");
 
   formatted = formatted.replace(
     /import\s+(\w+)\s+from\s+['"]playbook-ui['"]/g,
