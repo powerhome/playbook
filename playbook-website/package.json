@@ -8,7 +8,6 @@
     "generate:global-props-values": "node scripts/generate-global-props-values.mjs"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-pro": "6.2.1",
     "@mapbox/mapbox-gl-draw": "^1.4.1",
     "@powerhome/playbook-icons": "2.1.0",
     "@powerhome/playbook-icons-react": "2.1.0",
