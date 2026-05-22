@@ -9,6 +9,7 @@ import {
 import { globalProps } from "../../utilities/globalProps";
 import { DraggableContext } from "../context";
 import { noop } from '../../utilities/object'
+import { bindTouchDrag, isTouchDragDevice } from "../utilities/touchDrag";
 
 type DraggableItemProps = {
   aria?: { [key: string]: string };
@@ -54,12 +55,76 @@ const DraggableItem = (props: DraggableItemProps) => {
     handleDragStart,
     handleDragEnter,
     handleDragEnd,
+    handleDrop,
+    handleDragOver,
     dropZone = 'ghost',
     dropZoneColor = 'neutral',
     direction = 'horizontal'
   } = DraggableContext();
 
   const itemRef = React.useRef<HTMLElement>(null);
+  const [useTouchDrag, setUseTouchDrag] = React.useState(false);
+  const handlersRef = React.useRef({
+    handleDragStart,
+    handleDragEnter,
+    handleDragEnd,
+    handleDrop,
+    handleDragOver,
+    onDragStart,
+    onDragEnter,
+    onDragOver,
+    onDrop,
+    onDragEnd,
+  });
+
+  handlersRef.current = {
+    handleDragStart,
+    handleDragEnter,
+    handleDragEnd,
+    handleDrop,
+    handleDragOver,
+    onDragStart,
+    onDragEnter,
+    onDragOver,
+    onDrop,
+    onDragEnd,
+  };
+
+  React.useEffect(() => {
+    setUseTouchDrag(isTouchDragDevice());
+  }, []);
+
+  React.useEffect(() => {
+    if (!useTouchDrag || !itemRef.current || !dragId) return;
+
+    return bindTouchDrag({
+      dragId,
+      container,
+      itemElement: itemRef.current,
+      handlers: {
+        onDragStart: (id, itemContainer) => {
+          handlersRef.current.handleDragStart(id, itemContainer);
+          handlersRef.current.onDragStart();
+        },
+        onDragEnter: (targetDragId, targetContainer) => {
+          handlersRef.current.handleDragEnter(targetDragId, targetContainer);
+          handlersRef.current.onDragEnter();
+        },
+        onDragOver: (event, targetContainer) => {
+          handlersRef.current.handleDragOver(event, targetContainer);
+          handlersRef.current.onDragOver();
+        },
+        onDrop: (dropContainer) => {
+          handlersRef.current.handleDrop(dropContainer);
+          handlersRef.current.onDrop();
+        },
+        onDragEnd: () => {
+          handlersRef.current.handleDragEnd();
+          handlersRef.current.onDragEnd();
+        },
+      },
+    });
+  }, [useTouchDrag, dragId, container]);
 
   const ariaProps = buildAriaProps(aria);
   const dataProps = buildDataProps(data);
@@ -122,7 +187,8 @@ const DraggableItem = (props: DraggableItemProps) => {
         {...dataProps}
         {...htmlProps}
         className={classes}
-        draggable
+        data-pb-drag-id={dragId}
+        draggable={!useTouchDrag}
         id={id}
         key={dragId}
         onDrag={onDrag}
