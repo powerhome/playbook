@@ -10,6 +10,7 @@ const AdvancedTableColumnStyling = (props) => {
       accessor: "year",
       label: "Year",
       cellAccessors: ["quarter", "month", "day"],
+      columnStyling: { width: 124 },
     },
     {
       accessor: "newEnrollments",

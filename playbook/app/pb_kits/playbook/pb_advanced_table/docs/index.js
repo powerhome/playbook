@@ -37,6 +37,7 @@ export { default as AdvancedTablePinnedRows } from './_advanced_table_pinned_row
 export { default as AdvancedTableScrollbarNone} from './_advanced_table_scrollbar_none.jsx'
 export { default as AdvancedTableRowStyling } from './_advanced_table_row_styling.jsx'
 export { default as AdvancedTableColumnStyling } from './_advanced_table_column_styling.jsx'
+export { default as AdvancedTableColumnStylingWidth } from './_advanced_table_column_styling_width.jsx'
 export { default as AdvancedTableColumnStylingColumnHeaders } from './_advanced_table_column_styling_column_headers.jsx'
 export { default as AdvancedTableInfiniteScroll} from './_advanced_table_infinite_scroll.jsx'
 export {default as AdvancedTableWithCustomHeader} from './_advanced_table_with_custom_header.jsx'

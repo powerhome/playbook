@@ -5,6 +5,7 @@ import { flexRender, Row, Cell } from "@tanstack/react-table"
 import { GenericObject } from "../../types"
 import { isChrome } from "../Utilities/BrowserCheck"
 import { findColumnDefByAccessor } from "../Utilities/ColumnStylingHelper"
+import { playbookColumnLayoutStylesFromMeta } from "../Utilities/ColumnLayoutHelper"
 import { getRowColorClass, shouldShowLoadingIndicator } from "../Utilities/RowUtils"
 
 import LoadingInline from "../../pb_loading_inline/_loading_inline"
@@ -94,6 +95,7 @@ const TableCellRenderer = ({
               )}
               key={`${cell.id}-data`}
               style={{
+                ...playbookColumnLayoutStylesFromMeta(column.columnDef),
                 left: isPinnedLeft
                   ? i === 1 // Accounting for set min-width for first column
                     ? '180px'
