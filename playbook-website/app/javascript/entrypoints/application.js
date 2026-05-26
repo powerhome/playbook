@@ -12,10 +12,6 @@ import '../../../../playbook/app/javascript/playbook-doc.js'
 
 import '../site_styles/main.scss'
 
-import copyContent from 'components/copyCode'
-window.copyContent = copyContent
-
-import AnchorJS from 'anchor-js'
 import { Website } from 'components/app'
 import { Turbo } from "@hotwired/turbo-rails"
 
@@ -38,16 +34,6 @@ Object.entries(icons).forEach(([key, value]) => {
 })
 
 Turbo.session.drive = false
-
-document.addEventListener('DOMContentLoaded', () => {
-  const anchors = new AnchorJS()
-  anchors.add('.pb--kit-example > .pb_caption_kit_md_lighter:first-child')
-  const propsTableAnchors = new AnchorJS()
-  propsTableAnchors.options = {
-    class: 'props-table-anchor',
-  }
-  propsTableAnchors.add('.pb--propsTable > .pb_title_kit_3')
-})
 
 ComponentRegistry.registerComponents({
   Website,
