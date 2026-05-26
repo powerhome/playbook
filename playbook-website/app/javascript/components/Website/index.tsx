@@ -1,9 +1,10 @@
 import { useEffect, useMemo, useRef, useState, type CSSProperties } from "react";
-import { Layout } from "playbook-ui";
+import { Flex, Layout, SectionSeparator } from "playbook-ui";
 import Sidebar from "./src/layouts/Sidebar";
 import LayoutRight from "./src/layouts/LayoutRight";
 import Header from "./src/layouts/Header";
 import MobileNav, { MobileHamburger } from "./src/components/MobileNav";
+import { PlatformToggle } from "./src/components/PlatformToggle";
 import { useLoaderData, useLocation, useNavigate } from "react-router-dom";
 import { PlatformContext } from "./src/contexts/PlatformContext";
 import { DarkModeProvider, useDarkMode } from "./src/contexts/DarkModeContext";
@@ -95,6 +96,12 @@ function WebsiteContent() {
     }
   };
 
+  const isKitShowPage = /^\/kits\/[^/]+\/(react|rails|swift)$/.test(normalizedPath) ||
+    /^\/kits\/advanced_table\/[^/]+\/(react|rails|swift)$/.test(normalizedPath);
+  const isKitsPage = normalizedPath === "/kits";
+  const isKitsCategoryPage = /^\/kit_category\/[^/]+$/.test(normalizedPath);
+  const showPlatformToggle = isKitsPage || isKitsCategoryPage || isKitShowPage;
+
   return (
     <PlatformContext.Provider value={{ platform, setPlatform: handlePlatformChange }}>
       <div
@@ -102,6 +109,22 @@ function WebsiteContent() {
         style={websiteStyle}
       >
         <MobileNav />
+        {showPlatformToggle && (
+          <Flex
+            align="center"
+            dark={darkMode}
+            display={{ xs: "flex", sm: "flex", md: "flex", lg: "none", xl: "none" }}
+            paddingX="sm"
+            paddingY="xs"
+          >
+            <PlatformToggle platform={platform} setPlatform={handlePlatformChange} />
+          </Flex>
+        )}
+        <SectionSeparator
+          dark={darkMode}
+          display={{ xs: "block", sm: "block", md: "block", lg: "none", xl: "none" }}
+          width="100%"
+        />
         <div ref={headerRef}>
           <Header 
             PBversion={PBversion || "Latest"}
