@@ -1,4 +1,5 @@
 import { ReactNode } from "react";
+import { Link } from "react-router-dom";
 import {
   Title,
   Flex,
@@ -39,20 +40,24 @@ const ShowPage = ({
         gap="md"
       >
         <BreadCrumbs>
-          <BreadCrumbItem href={`/${pageType}`}>
-            <Detail color="link">{pageType === "tokens" ? "Tokens" : "Global Props"}</Detail>
+          <BreadCrumbItem>
+            <Link to={`/${pageType}`}>
+              <Detail color="link">{pageType === "tokens" ? "Tokens" : "Global Props"}</Detail>
+            </Link>
           </BreadCrumbItem>
           {isFlex ? (
             <>
-              <BreadCrumbItem href="/global_props/flex_box">
-                <Detail color="link">Flex Box</Detail>
+              <BreadCrumbItem>
+                <Link to="/global_props/flex_box">
+                  <Detail color="link">Flex Box</Detail>
+                </Link>
               </BreadCrumbItem>
-              <BreadCrumbItem href="#">
+              <BreadCrumbItem>
                 <Detail color="link">{title}</Detail>
               </BreadCrumbItem>
             </>
           ) :
-            <BreadCrumbItem href="#">
+            <BreadCrumbItem>
               <Detail color="default">{title}</Detail>
             </BreadCrumbItem>
           }
