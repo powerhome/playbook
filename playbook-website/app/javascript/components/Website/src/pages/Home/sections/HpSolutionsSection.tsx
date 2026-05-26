@@ -20,11 +20,11 @@ import { USER_SOLUTIONS_SNIPPET } from "../userSolutionsSnippet"
 import LanguageStack from "./LanguageStack"
 
 const GUIDE = {
-  explore: "/beta/guides/getting_started",
-  htmlCss: "/beta/guides/getting_started/HTML&_CSS",
-  rails: "/beta/guides/getting_started/ruby_on_rails_setup",
-  react: "/beta/guides/getting_started/react_setup",
-  swift: "/beta/guides/getting_started/swift_setup",
+  explore: "/guides/getting_started",
+  htmlCss: "/guides/getting_started/HTML&_CSS",
+  rails: "/guides/getting_started/ruby_on_rails_setup",
+  react: "/guides/getting_started/react_setup",
+  swift: "/guides/getting_started/swift_setup",
 }
 
 const captionReact =

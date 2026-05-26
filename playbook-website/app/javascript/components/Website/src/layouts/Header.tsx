@@ -5,7 +5,7 @@ import { Flex, Image, Badge, SectionSeparator, FlexItem } from "playbook-ui";
 import PBLogo from "../../../../images/pb-logo.svg";
 import KitSearch from "../../../KitSearch";
 import { PlatformToggle } from "../components/PlatformToggle";
-import BetaDarkModeToggle from "../components/BetaDarkModeToggle";
+import DarkModeToggle from "../components/DarkModeToggle";
 import { useDarkMode } from "../contexts/DarkModeContext";
 import "./header.scss";
 
@@ -28,11 +28,11 @@ const Header = ({
   const location = useLocation();
   const { darkMode, setDarkMode } = useDarkMode();
 
-  const isKitShowPage = /^\/beta\/kits\/[^/]+\/(react|rails|swift)$/.test(location.pathname) ||
-    /^\/beta\/kits\/advanced_table\/[^/]+\/(react|rails|swift)$/.test(location.pathname);
+  const isKitShowPage = /^\/kits\/[^/]+\/(react|rails|swift)$/.test(location.pathname) ||
+    /^\/kits\/advanced_table\/[^/]+\/(react|rails|swift)$/.test(location.pathname);
 
-  const isKitsPage = location.pathname === "/beta/kits";
-  const isKitsCategoryPage = /^\/beta\/kit_category\/[^/]+$/.test(location.pathname);
+  const isKitsPage = location.pathname === "/kits";
+  const isKitsCategoryPage = /^\/kit_category\/[^/]+$/.test(location.pathname);
 
   useEffect(() => {
     if (!isKitShowPage && darkMode) {
@@ -58,7 +58,7 @@ const Header = ({
             paddingBottom="xxs"
             paddingX="md"
           >
-            <Link to="/beta">
+            <Link to="/">
               <Image alt="Playbook logo" url={PBLogo} />
             </Link>
             <Badge
@@ -90,16 +90,15 @@ const Header = ({
               gap="md"
             >
               <KitSearch
-                betaSearchResetKey={`${location.pathname}${location.search}`}
+                searchResetKey={`${location.pathname}${location.search}`}
                 classname="desktop-kit-search-new"
                 id="desktop-kit-search"
                 kits={search_list}
                 global_props_and_tokens={global_props_and_tokens}
-                beta={true}
-                onBetaNavigate={(path) => navigate(path)}
+                onNavigate={(path) => navigate(path)}
                 marginBottom="none"
               />
-              {isKitShowPage && <BetaDarkModeToggle />}
+              {isKitShowPage && <DarkModeToggle />}
             </Flex>
           </FlexItem>
           {/* End Search Bar + dark mode toggle */}

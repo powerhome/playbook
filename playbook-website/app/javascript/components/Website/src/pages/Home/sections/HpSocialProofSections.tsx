@@ -93,7 +93,7 @@ function LgSocialProof() {
                     dark
                     icon="chevron-right"
                     iconRight
-                    link="/beta/kits"
+                    link="/kits"
                     padding="none"
                     text={EXPLORE}
                     variant="link"
@@ -178,7 +178,7 @@ function MdSocialProof() {
                     dark
                     icon="chevron-right"
                     iconRight
-                    link="/beta/kits"
+                    link="/kits"
                     text={EXPLORE}
                     variant="link"
                 />

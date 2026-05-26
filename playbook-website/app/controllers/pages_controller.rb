@@ -9,12 +9,6 @@ class PagesController < ApplicationController
   include ::ViteRails::TagHelpers
   rescue_from ActionView::MissingTemplate, :with => :page_not_found
 
-  before_action :set_kit, only: %i[kit_show_rails kit_show_react kit_show_swift]
-  before_action :ensure_kit_type_exists, only: %i[kit_show_rails kit_show_react kit_show_swift]
-  before_action :set_category, only: %i[kit_category_show_rails kit_category_show_react kit_category_show_swift]
-  before_action :delete_dark_mode_cookie, only: %i[home getting_started global_props global_props_show tokens tokens_show]
-  before_action :set_show_sidebar, only: %i[kits kit_category_show_rails kit_category_show_react kit_category_show_swift kit_show_react kit_show_rails kit_show_swift rails_in_react kit_show_demo home]
-
   def application_beta
     @kits = MENU["kits"]
     @dark = cookies[:dark_mode] == "true"
@@ -66,7 +60,7 @@ class PagesController < ApplicationController
 
     assign_advanced_table_doc_mocks
 
-    # Set @users for pagination examples (params[:page] is also the guide slug on beta/guides/* routes)
+    # Set @users for pagination examples (params[:page] is also the guide slug on guides/* routes)
     @users = Array.new(9) { Faker::Name.name }.paginate(page: will_paginate_page, per_page: 2)
     @extra_users = Array.new(2000) { Faker::Name.name }.paginate(page: will_paginate_page, per_page: 2)
 
@@ -107,7 +101,7 @@ class PagesController < ApplicationController
       }
     end
 
-    # Read markdown content for beta pages
+    # Read markdown content for pages
     changelog_content = Playbook::Engine.root.join("CHANGELOG.md").read
     changelog_releases = Rails.cache.fetch("changelog_releases") do
       paginate_changelog(changelog_content)
@@ -207,228 +201,6 @@ class PagesController < ApplicationController
     end
   end
 
-  def disable_dark_mode
-    cookies[:dark_mode] = {
-      value: "false",
-    }
-    redirect_back(fallback_location: root_path)
-  end
-
-  def enable_dark_mode
-    cookies[:dark_mode] = {
-      value: "true",
-    }
-    redirect_back(fallback_location: root_path)
-  end
-
-  def home
-    @data = Playbook::Engine.root.join("CHANGELOG.md").read
-    @structured_data = extract_changelog_data(@data)
-  end
-
-  def changelog_web
-    @page_title = "What's New"
-    @page = "changelog_web"
-    @show_sidebar = true
-    @link_extension = "https://github.com/powerhome/playbook/blob/master/playbook/CHANGELOG.md"
-
-    @releases = Rails.cache.fetch("changelog_releases") do
-      data = Playbook::Engine.root.join("CHANGELOG.md").read
-      paginate_changelog(data)
-    end
-
-    @releases = @releases.paginate(page: will_paginate_page, per_page: 10)
-
-    render layout: "changelog"
-  end
-
-  def changelog_swift
-    @data = Playbook::Engine.root.join("SWIFT_CHANGELOG.md").read
-    @page_title = "What's New"
-    @page = "changelog_swift"
-    @show_sidebar = true
-    @link_extension = "https://github.com/powerhome/playbook/blob/master/playbook/SWIFT_CHANGELOG.md"
-    render layout: "changelog"
-  end
-
-  def changelog_figma
-    @data = Playbook::Engine.root.join("FIGMA_CHANGELOG.md").read
-    @page_title = "What's New"
-    @page = "changelog_figma"
-    @show_sidebar = true
-    @link_extension = "https://github.com/powerhome/playbook/blob/master/playbook/FIGMA_CHANGELOG.md"
-    render layout: "changelog"
-  end
-
-  def changelog; end
-
-  def global_props
-    @page_title = "Global Props"
-    @show_sidebar = true
-    render layout: "global_props_page"
-  end
-
-  def global_props_show
-    name = params[:name]
-
-    redirect_to root_path and return unless GLOBAL_PROPS_AND_TOKENS["global_props"]&.include?(name)
-
-    @page_title = "Global Props - #{name.titleize}"
-    @show_sidebar = true
-    render layout: "global_props_page"
-  end
-
-  def tokens
-    @page_title = "Tokens"
-    @show_sidebar = true
-    render layout: "global_props_page"
-  end
-
-  def tokens_show
-    name = params[:name]
-
-    redirect_to root_path and return unless GLOBAL_PROPS_AND_TOKENS["tokens"]&.include?(name)
-
-    @page_title = "Tokens - #{name.titleize}"
-    @show_sidebar = true
-    render layout: "global_props_page"
-  end
-
-  def icons
-    @data = Playbook::Engine.root.join("../playbook-website/app/views/guides/getting_started/icons.md").read
-    @page_title = "Icon Integration"
-    @show_sidebar = true
-    @link_extension = "https://github.com/powerhome/playbook/blob/master/playbook-website/app/views/guides/getting_started/icons.md"
-    render layout: "icons"
-  end
-
-  def icons_font_awesome
-    @data = Playbook::Engine.root.join("../playbook-website/app/views/guides/getting_started/icons/font_awesome.md").read
-    @page_title = "Icon Integration"
-    @show_sidebar = true
-    @link_extension = "https://github.com/powerhome/playbook/blob/master/playbook-website/app/views/guides/getting_started/icons/font_awesome.md"
-    render layout: "icons"
-  end
-
-  def icons_playbook
-    @data = Playbook::Engine.root.join("../playbook-website/app/views/guides/getting_started/icons/playbook.md").read
-    @page_title = "Icon Integration"
-    @show_sidebar = true
-    @link_extension = "https://github.com/powerhome/playbook/blob/master/playbook-website/app/views/guides/getting_started/icons/playbook.md"
-    render layout: "icons"
-  end
-
-  def icons_custom
-    @data = Playbook::Engine.root.join("../playbook-website/app/views/guides/getting_started/icons/custom.md").read
-    @page_title = "Icon Integration"
-    @show_sidebar = true
-    @link_extension = "https://github.com/powerhome/playbook/blob/master/playbook-website/app/views/guides/getting_started/icons/custom.md"
-    render layout: "icons"
-  end
-
-  def kits
-    params[:type] ||= "react"
-    @type = params[:type]
-    @users = Array.new(9) { Faker::Name.name }.paginate(page: will_paginate_page, per_page: 2)
-    @extra_users = Array.new(2000) { Faker::Name.name }.paginate(page: will_paginate_page, per_page: 2)
-    @table_data = advanced_table_mock_data
-    @table_data_with_id = advanced_table_mock_data_with_id
-    @table_data_no_subrows = advanced_table_mock_data_no_subrows
-    @table_data_inline_loading = advanced_table_mock_data_inline_loading
-    @table_data_inline_loading_empty_children = advanced_table_mock_data_inline_loading_empty_children
-  end
-
-  def kit_category_show_rails
-    params[:type] ||= "rails"
-    @type = params[:type]
-    @users = Array.new(9) { Faker::Name.name }.paginate(page: params[:page], per_page: 2)
-    @extra_users = Array.new(2000) { Faker::Name.name }.paginate(page: params[:page], per_page: 2)
-    @table_data = advanced_table_mock_data
-    @table_data_with_id = advanced_table_mock_data_with_id
-    @table_data_no_subrows = advanced_table_mock_data_no_subrows
-    @table_data_inline_loading = advanced_table_mock_data_inline_loading
-    @table_data_inline_loading_empty_children = advanced_table_mock_data_inline_loading_empty_children
-    render template: "pages/kit_category_show"
-  end
-
-  def kit_category_show_react
-    render template: "pages/kit_category_show"
-  end
-
-  def kit_show_rails
-    @type = "rails"
-    @users = Array.new(9) { Faker::Name.name }.paginate(page: will_paginate_page, per_page: 2)
-    @extra_users = Array.new(2000) { Faker::Name.name }.paginate(page: will_paginate_page, per_page: 2)
-    @table_data = advanced_table_mock_data if @kit == "advanced_table" || @kit_parent == "advanced_table"
-    @table_data_with_id = advanced_table_mock_data_with_id if @kit == "advanced_table" || @kit_parent == "advanced_table"
-    @table_data_no_subrows = advanced_table_mock_data_no_subrows if @kit == "advanced_table" || @kit_parent == "advanced_table"
-    @table_data_pagination = advanced_table_pagination_mock_data if @kit == "advanced_table" || @kit_parent == "advanced_table"
-    @table_data_infinite_scroll = advanced_table_infinite_scroll_mock_data if @kit == "advanced_table" || @kit_parent == "advanced_table"
-    @table_data_inline_loading = advanced_table_mock_data_inline_loading if @kit == "advanced_table" || @kit_parent == "advanced_table"
-    @table_data_inline_loading_empty_children = advanced_table_mock_data_inline_loading_empty_children if @kit == "advanced_table" || @kit_parent == "advanced_table"
-    render "pages/kit_show"
-  end
-
-  def kit_show_react
-    @type = "react"
-    render template: "pages/kit_show"
-  end
-
-  def kit_show_swift
-    @type = "swift"
-    render "pages/kit_show"
-  end
-
-  def kit_collection_show_rails
-    @users = Array.new(9) { Faker::Name.name }.paginate(page: params[:page], per_page: 2)
-    @extra_users = Array.new(2000) { Faker::Name.name }.paginate(page: params[:page], per_page: 2)
-    handle_kit_collection("rails")
-  end
-
-  def kit_collection_show_react
-    handle_kit_collection("react")
-  end
-
-  def kit_variants_collection_show_rails
-    @users = Array.new(9) { Faker::Name.name }.paginate(page: params[:page], per_page: 2)
-    @extra_users = Array.new(2000) { Faker::Name.name }.paginate(page: params[:page], per_page: 2)
-    handle_kit_variants_collection("rails")
-  end
-
-  def kit_variants_collection_show_react
-    handle_kit_variants_collection("react")
-  end
-
-  def rails_in_react
-    @kit = params[:name]
-    @examples = pb_doc_kit_examples(@kit, "rails")
-    @raw_example = view_context.pb_rails("docs/kit_example", props: {
-                                           kit: @kit,
-                                           example_title: @examples.first.values.first,
-                                           example_key: @examples.first.keys.first,
-                                           show_code: false,
-                                           type: "rails",
-                                           dark: false,
-                                           show_raw: true,
-                                         })
-    render "pages/rails_in_react"
-  end
-
-  def rails_raw
-    @kit = params[:name]
-    example = pb_doc_kit_examples(@kit, "rails").first
-    raw_example = view_context.pb_rails("docs/kit_example", props: {
-                                          kit: @kit,
-                                          example_title: example.values.first,
-                                          example_key: example.keys.first,
-                                          show_code: false,
-                                          type: "rails",
-                                          dark: false,
-                                          show_raw: true,
-                                        })
-    render inline: raw_example, layout: false
-  end
-
   def get_source(example)
     extension = case @type
                 when "rails"
@@ -463,7 +235,7 @@ class PagesController < ApplicationController
 
 private
 
-  # will_paginate expects a numeric page; beta guide routes use params[:page] for the markdown slug.
+  # will_paginate expects a numeric page; guide routes use params[:page] for the markdown slug.
   def will_paginate_page
     p = params[:page]
     return 1 if p.blank?
@@ -471,24 +243,8 @@ private
     p.to_s.match?(/\A\d+\z/) ? p.to_i : 1
   end
 
-  def missing_rails_kit?
-    helpers.pb_doc_has_kit_type?(params[:name], "rails") == false
-  end
-
-  def missing_react_kit?
-    helpers.pb_doc_has_kit_type?(params[:name], "react") == false
-  end
-
-  def missing_swift_kit?
-    helpers.pb_doc_has_kit_type?(params[:name], "swift") == false
-  end
-
   def aggregate_kits
     MENU["kits"]
-  end
-
-  def categories
-    aggregate_kits.map { |item| item["category"] }
   end
 
   def all_kits
@@ -508,97 +264,6 @@ private
       end)
     end
     group_components.flatten
-  end
-
-  def set_category
-    @category = params[:category]
-    if categories.include?(@category) && helpers.category_has_kits?(category_kits: @category === "advanced_table" ? ["advanced_table"] : kit_categories, type: params[:type])
-      @category_kits = @category === "advanced_table" ? ["advanced_table"] : kit_categories
-      @kits = params[:name]
-    else
-      redirect_to root_path, flash: { error: "That kit does not exist" }
-    end
-  end
-
-  def kit_categories
-    @category = params[:category]
-    components = aggregate_kits.find { |item| item["category"] == @category }["components"]
-    filter_kits_by_status(components, status: "beta").map { |component| component["name"] }
-  end
-
-  def filter_kits_by_status(components, status: nil)
-    components.reject { |component| status && component["status"] == status }
-  end
-
-  # Get the status for the current platform
-  # Falls back to kit-level status if platform-specific status is not defined
-  def current_platform_status
-    return @kit_status unless @kit_platforms_status
-
-    platform_status = @kit_platforms_status[@type] || @kit_platforms_status[@type.to_sym]
-    platform_status || @kit_status
-  end
-
-  # Check if the status is platform-specific (different from overall kit status)
-  def platform_specific_status?
-    return false unless @kit_platforms_status
-
-    current_status = current_platform_status
-    # If platforms_status exists and the current platform has a different status than the kit-level status
-    (@kit_platforms_status[@type] || @kit_platforms_status[@type.to_sym]) &&
-      current_status != @kit_status
-  end
-
-  # Get platform display name
-  def platform_display_name
-    case @type
-    when "rails" then "Rails"
-    when "react" then "React"
-    when "swift" then "Swift"
-    else @type.capitalize
-    end
-  end
-
-  helper_method :current_platform_status, :platform_specific_status?, :platform_display_name
-
-  def set_kit
-    matching_kit = if params[:section].present?
-                     all_kits.find do |kit|
-                       kit[:parent] == params[:name] && kit[:name] == params[:section]
-                     end
-                   else
-                     all_kits.find do |kit|
-                       kit[:name] == params[:name] || kit[:parent] == params[:name]
-                     end
-                   end
-
-    if matching_kit
-      @kit = matching_kit[:name]
-      @kit_parent = matching_kit[:parent]
-      @kit_section = matching_kit[:kit_section]
-      @kit_status = matching_kit[:status]
-      @kit_platforms_status = matching_kit[:platforms_status]
-      @icons_used = matching_kit[:icons_used]
-      @react_rendered = matching_kit[:react_rendered]
-      @enhanced_element_used = matching_kit[:enhanced_element_used]
-    else
-      redirect_to root_path, flash: { error: "That kit does not exist" }
-    end
-  end
-
-  def set_show_sidebar
-    @show_sidebar = true
-  end
-
-  def ensure_kit_type_exists
-    if action_name === "kit_show_rails"
-      redirect_to action: "kit_show_react" if missing_rails_kit? && missing_react_kit? == false
-    elsif action_name === "kit_show_react"
-      redirect_to action: "kit_show_rails" if missing_react_kit? && missing_rails_kit? == false
-      redirect_to action: "kit_show_swift" if missing_react_kit? && missing_rails_kit? && missing_swift_kit? == false
-    elsif action_name === "kit_show_swift"
-      redirect_to action: "kit_show_react" if missing_swift_kit?
-    end
   end
 
   def pb_doc_kit_path(kit, *args)
@@ -689,14 +354,6 @@ private
     releases
   end
 
-  def kit_examples
-    pb_doc_kit_examples(params[:name], "rails")
-  end
-
-  def erb_code_params
-    params.require(:erb_code)
-  end
-
   def read_kit_file(*args)
     # For advanced_table sections, read from the parent kit directory
     kit_name = @kit_parent == "advanced_table" ? @kit_parent : @kit
@@ -760,70 +417,8 @@ private
     end
   end
 
-  def handle_kit_collection(type)
-    @kits = params[:names].split("%26")
-    @kits_array = @kits.first.split("&")
-    params[:name] ||= @kits_array[0]
-    @selected_kit = params[:name]
-    @variants = params[:variants].present? ? params[:variants].split("&") : []
-    @type = type
-
-    render template: "pages/kit_collection", layout: "layouts/fullscreen"
-  end
-
-  def handle_kit_variants_collection(type)
-    @kits = params[:names].split("%26")
-    @kits_array = @kits.first.split("&")
-    params[:name] ||= @kits_array[0]
-    @selected_kit = params[:name]
-
-    @variant_mappings = {}
-
-    @kits_array.each do |kit|
-      @variant_mappings[kit] = {
-        url_to_key: {}, # map from URL names (values from example.yml) to internal keys (keys from example.yml)
-        key_to_url: {}, # map from internal keys (keys from example.yml) to URL names (values from example.yml)
-      }
-
-      examples = pb_doc_kit_examples(kit, type)
-      examples.each do |example|
-        variant_key = example.keys.first.to_s
-        variant_title = example.values.first.to_s
-        url_friendly_title = variant_title.downcase.gsub(/\s+/, "-")
-
-        @variant_mappings[kit][:url_to_key][url_friendly_title] = variant_key
-        @variant_mappings[kit][:key_to_url][variant_key] = url_friendly_title
-      end
-    end
-
-    @all_kit_variants = {}
-
-    if params[:kit_variants].present?
-      kit_variant_pairs = params[:kit_variants].split("&")
-
-      kit_variant_pairs.each do |pair|
-        kit, variants = pair.split(":")
-        next unless kit && variants.present?
-
-        url_variant_names = variants.split(";")
-        @all_kit_variants[kit] = url_variant_names.map do |url_name|
-          @variant_mappings.dig(kit, :url_to_key, url_name) || url_name
-        end.compact
-      end
-    end
-
-    @variants = @all_kit_variants[@selected_kit] || []
-
-    @type = type
-    puts "Selected Kit: #{@selected_kit}"
-    puts "All Kit Variants: #{@all_kit_variants.inspect}"
-    puts "Active Variants: #{@variants.inspect}"
-
-    render template: "pages/kit_variants_collection", layout: "layouts/fullscreen"
-  end
-
-  # Beta JSON + Rails prerendered examples: ERB under pb_advanced_table/docs expects @table_data (OpenStruct),
-  # while the SPA passes plain JSON via @beta_table_* keys in the kit payload.
+  # application_beta JSON + Rails prerendered examples: ERB under pb_advanced_table/docs expects
+  # @table_data (OpenStruct), while the SPA passes plain JSON via @beta_table_* keys.
   def assign_advanced_table_doc_mocks
     return unless @kit.to_s == "advanced_table" || @kit_parent.to_s == "advanced_table"
 
@@ -861,7 +456,6 @@ private
     JSON.parse(advanced_table_mock_data_no_subrows, object_class: OpenStruct)
   end
 
-  # Beta versions - return plain JSON for React
   def advanced_table_mock_data_beta
     advanced_table_mock_data = File.read(Rails.root.join("app/components/playbook/pb_docs/advanced_table_mock_data.json"))
     JSON.parse(advanced_table_mock_data)

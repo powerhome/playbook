@@ -27,11 +27,10 @@ export const TopLevelNavItem = ({
   //logic to make it so no navigation if already on that page(prevent unneeded rerenders)
   const TopLevelLink = (link) => {
     if (link === "/kits") {
-      const kitsLink = `/beta/kits${kitsType(type) ? `?type=${kitsType(type)}` : ""}`;
+      const kitsLink = `/kits${kitsType(type) ? `?type=${kitsType(type)}` : ""}`;
       return currentURL === kitsLink ? "" : kitsLink;
     } else {
-      const finalLink = !link.startsWith("/beta") ? `/beta${link}` : link;
-      return currentURL === finalLink ? "" : finalLink;
+      return currentURL === link ? "" : link;
     }
   };
 
@@ -54,66 +53,58 @@ export const TopLevelNavItem = ({
   };
 
   const activeTopLevel = (link, hasChildren) => {
-    const betaLink = !link.startsWith("/beta") ? `/beta${link}` : link;
-    
     // Special handling for items with children
     if (hasChildren) {
       // Top level items with children should be active ONLY on their exact main page
       if (link === "/kits") {
-        // Active on /beta/kits listing, not on /beta placeholder or kit detail pages
-        return currentURL === "/beta/kits" || currentURL.startsWith("/beta/kits?");
+        return currentURL === "/kits" || currentURL.startsWith("/kits?");
       }
       if (link === "/changelog") {
-        // Active on /beta/changelog page but NOT on /beta/changelog/web etc
-        return currentURL === "/beta/changelog" || currentURL === "/beta/changelog?";
+        return currentURL === "/changelog" || currentURL === "/changelog?";
       }
       if (link === "/guides/getting_started") {
-        // Active on the overview page but NOT on individual guide pages
-        return currentURL === "/beta/guides/getting_started" || currentURL === "/beta/guides/getting_started?";
+        return currentURL === "/guides/getting_started" || currentURL === "/guides/getting_started?";
       }
       if (link === "/guides/design_guidelines") {
-        // Active on the overview page but NOT on individual guide pages
-        return currentURL === "/beta/guides/design_guidelines" || currentURL === "/beta/guides/design_guidelines?";
+        return currentURL === "/guides/design_guidelines" || currentURL === "/guides/design_guidelines?";
       }
       if (link === "/global_props") {
-        return currentURL === "/beta/global_props" || currentURL === "/beta/global_props?";
+        return currentURL === "/global_props" || currentURL === "/global_props?";
       }
       if (link === "/tokens") {
-        return currentURL === "/beta/tokens" || currentURL === "/beta/tokens?";
+        return currentURL === "/tokens" || currentURL === "/tokens?";
       }
       
       // For other items with children, only active on exact match
-      return currentURL === betaLink || currentURL.startsWith(`${betaLink}?`);
+      return currentURL === link || currentURL.startsWith(`${link}?`);
     }
     
     // Items without children can use startsWith
-    return currentURL.startsWith(betaLink);
+    return currentURL.startsWith(link);
   };
   
   const shouldExpandTopLevel = (link) => {
-    const betaLink = !link.startsWith("/beta") ? `/beta${link}` : link;
-    
     // Expand if current URL is under this section
     if (link === "/kits") {
-      return currentURL.startsWith("/beta/kits") || currentURL.startsWith("/beta/kit_category");
+      return currentURL.startsWith("/kits") || currentURL.startsWith("/kit_category");
     }
     if (link === "/changelog") {
-      return currentURL.startsWith("/beta/changelog");
+      return currentURL.startsWith("/changelog");
     }
     if (link === "/guides/getting_started") {
-      return currentURL.startsWith("/beta/guides/getting_started");
+      return currentURL.startsWith("/guides/getting_started");
     }
     if (link === "/guides/design_guidelines") {
-      return currentURL.startsWith("/beta/guides/design_guidelines");
+      return currentURL.startsWith("/guides/design_guidelines");
     }
     if (link === "/global_props") {
-      return currentURL.startsWith("/beta/global_props");
+      return currentURL.startsWith("/global_props");
     }
     if (link === "/tokens") {
-      return currentURL.startsWith("/beta/tokens");
+      return currentURL.startsWith("/tokens");
     }
     
-    return currentURL.startsWith(betaLink);
+    return currentURL.startsWith(link);
   };
 
   //extract render logic out of return for better performance

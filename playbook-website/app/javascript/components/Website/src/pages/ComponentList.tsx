@@ -41,8 +41,8 @@ const description =
 
 export default function ComponentList() {
   const outlet = useOutlet()
-  // Index route has no loader; read shared data from parent /beta route (see app.tsx id="beta-site").
-  const { kits } = useRouteLoaderData("beta-site") as { kits: Kit[] }
+  // Index route has no loader; read shared data from parent route (see app.tsx id="site").
+  const { kits } = useRouteLoaderData("site") as { kits: Kit[] }
   const [kitsToShow, setKitsToShow] = useState(kits)
   const [searchQuery, setSearchQuery] = useState("")
   const { platform } = usePlatform()
@@ -127,7 +127,7 @@ export default function ComponentList() {
                   >
                     <div className="component-list-category-header">
                       <div className="component-list-category-header-content component-list-category-content-well">
-                        <NavLink to={`/beta/kit_category/${category}`}>
+                        <NavLink to={`/kit_category/${category}`}>
                           <CategoryTitle category={category} />
                         </NavLink>
                       </div>

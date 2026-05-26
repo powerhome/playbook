@@ -15,10 +15,8 @@ type KitSearchProps = {
   id: string,
   global_props_and_tokens?: Record<string, any>,
   marginBottom?: string,
-  beta?: boolean,
-  onBetaNavigate?: (path: string) => void,
-  /** When set with `beta`, remounts Typeahead on navigation so query/selection clears (e.g. pathname+search from useLocation). */
-  betaSearchResetKey?: string,
+  onNavigate?: (path: string) => void,
+  searchResetKey?: string,
 }
 
 const combineKitsandVisualGuidelines = (
@@ -40,13 +38,9 @@ const combineKitsandVisualGuidelines = (
   return [...kits, ...globalPropsItems, ...tokensItems].sort((a, b) => a.label.localeCompare(b.label))
 }
 
-const KitSearch = ({ classname, id, kits, global_props_and_tokens, marginBottom, beta, onBetaNavigate, betaSearchResetKey }: KitSearchProps) => {
+const KitSearch = ({ classname, id, kits, global_props_and_tokens, marginBottom, onNavigate, searchResetKey }: KitSearchProps) => {
   const kitsAndGuidelines = combineKitsandVisualGuidelines(kits, global_props_and_tokens)
-  let darkMode = false
-  if (beta) {
-    const { darkMode: betaDarkMode } = useDarkMode()
-    darkMode = betaDarkMode
-  }
+  const { darkMode } = useDarkMode()
   const [filteredKits, setFilteredKits] = useState(kitsAndGuidelines)
 
   useEffect(() => {
@@ -62,11 +56,10 @@ const KitSearch = ({ classname, id, kits, global_props_and_tokens, marginBottom,
 
   const handleChange = (selection: any) => {
     if (selection) {
-      const path = beta ? `/beta${selection.value}` : selection.value
-      if (beta && onBetaNavigate) {
-        onBetaNavigate(path)
+      if (onNavigate) {
+        onNavigate(selection.value)
       } else {
-        window.location.href = path
+        window.location.href = selection.value
       }
     }
   }
@@ -92,13 +85,11 @@ const KitSearch = ({ classname, id, kits, global_props_and_tokens, marginBottom,
     </Flex>
   )
 
-  const typeaheadKey = beta ? `${id}__${betaSearchResetKey ?? ''}` : id
-
   return (
       <Typeahead
-        key={typeaheadKey}
+        key={`${id}__${searchResetKey ?? ''}`}
         className={classname}
-        dark={beta ? darkMode : document.cookie.split("; ").includes("dark_mode=true")}
+        dark={darkMode}
         id={id}
         marginBottom={marginBottom || 'sm'}
         onChange={handleChange}

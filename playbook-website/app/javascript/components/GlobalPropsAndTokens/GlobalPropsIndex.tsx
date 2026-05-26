@@ -6,26 +6,19 @@ import {
   Flex,
   Title,
   Body,
-  Link,
   IconCircle,
 } from "playbook-ui";
 import { Link as RouterLink } from "react-router-dom";
 import HeaderImage from "../../images/getting-started.svg";
 import { GlobalPropsCards } from "./Data/GlobalPropsCards";
 
-type GlobalPropsProps = {
-  linkPrefix?: string,
-}
-
-const betaClientNavLinkStyle: React.CSSProperties = {
+const linkStyle: React.CSSProperties = {
   textDecoration: "none",
   color: "inherit",
   display: "block",
 };
 
-const GlobalProps = ({ linkPrefix = "" }: GlobalPropsProps) => {
-  const useClientNav = linkPrefix === "/beta";
-
+const GlobalProps = () => {
   return (
     <Background
       flexDirection="column"
@@ -55,9 +48,8 @@ const GlobalProps = ({ linkPrefix = "" }: GlobalPropsProps) => {
         <Body text="Global Props are universal settings that apply to all components in our design system. They use Token values to control aspects like spacing, colors, and typography, ensuring consistent design and behavior across your application." />
         <Layout layout="collection" marginY="xl" paddingBottom="xl">
           <Layout.Body>
-            {GlobalPropsCards.sort((a, b) => a.title.localeCompare(b.title)).map(({ title, description, link, icon }) => {
-              const href = `${linkPrefix}${link}`;
-              const card = (
+            {GlobalPropsCards.sort((a, b) => a.title.localeCompare(b.title)).map(({ title, description, link, icon }) => (
+              <RouterLink key={title} to={link} style={linkStyle}>
                 <Card padding="none" hover={{ shadow: "deep" }} flex={1} minHeight="300px">
                   <Background backgroundColor="light">
                     <Flex justify="center" padding="xl">
@@ -82,18 +74,8 @@ const GlobalProps = ({ linkPrefix = "" }: GlobalPropsProps) => {
                     marginBottom="sm"
                   />
                 </Card>
-              );
-
-              return useClientNav ? (
-                <RouterLink key={title} to={href} style={betaClientNavLinkStyle}>
-                  {card}
-                </RouterLink>
-              ) : (
-                <Link key={title} href={href}>
-                  {card}
-                </Link>
-              );
-            })}
+              </RouterLink>
+            ))}
           </Layout.Body>
         </Layout>
       </Background>

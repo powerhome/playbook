@@ -21,7 +21,7 @@ const sortComponentsByName = (kitCategory: CategoryTypes) => {
 };
 
 export const ComponentsLoader: () => Promise<CategoryTypes[]> = async () => {
-  const response = await fetch("/beta/kits.json");
+  const response = await fetch("/kits.json");
   const data = await response.json();
 
   data.kits.forEach(sortComponentsByName);
@@ -49,10 +49,10 @@ export const ComponentShowLoader = async ({
   if (isAdvancedTableSection) {
     // For advanced_table sections like /kits/advanced_table/default/react
     // params.name is the section name, fetch from advanced_table with section param
-    url = `/beta/kits/advanced_table/${params.name}/${platform}.json`;
+    url = `/kits/advanced_table/${params.name}/${platform}.json`;
   } else {
     // Normal kit route
-    url = `/beta/kits/${params.name}/${platform}.json`;
+    url = `/kits/${params.name}/${platform}.json`;
   }
 
   const response = await fetch(url);
@@ -63,7 +63,7 @@ export const ComponentShowLoader = async ({
 export const CategoryLoader: (
   props: LoaderFunctionArgs
 ) => Promise<ComponentTypes> = async ({ params }) => {
-  const response = await fetch("/beta/kits.json");
+  const response = await fetch("/kits.json");
   const { kits } = await response.json();
 
   const filteredData = kits.find(
@@ -76,7 +76,7 @@ export const CategoryLoader: (
 };
 
 export const GuidesLoader = async () => {
-  const response = await fetch("/beta/kits.json");
+  const response = await fetch("/kits.json");
   const data = await response.json();
   return data;
 };
@@ -84,7 +84,7 @@ export const GuidesLoader = async () => {
 export const GuidePageLoader = async ({ params }: any) => {
   const guidePath = params.page;
   const guideType = window.location.pathname.includes('getting_started') ? 'getting_started' : 'design_guidelines';
-  const response = await fetch(`/beta/guides/${guideType}/${guidePath}.json`);
+  const response = await fetch(`/guides/${guideType}/${guidePath}.json`);
   const data = await response.json();
   return data;
 };

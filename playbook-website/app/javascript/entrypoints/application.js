@@ -15,24 +15,9 @@ import '../site_styles/main.scss'
 import copyContent from 'components/copyCode'
 window.copyContent = copyContent
 
-import DarkModeToggle from 'components/Website/src/components/DarkModeToggle'
-import KitSearch from 'components/KitSearch'
-import SnippetToggle from 'components/SnippetToggle'
-import PbKitReact from 'components/PbKitReact'
-import PbKitFetch from 'components/PbKitFetch'
-import AvailableProps from 'components/AvailableProps'
-import MainSidebar from 'components/MainSidebar'
-import HomepageHero from 'components/HomepageHero'
-import GlobalProps from 'components/GlobalPropsAndTokens/GlobalPropsIndex'
-import GlobalPropsExample from 'components/GlobalPropsAndTokens/ExamplesPage/GlobalPropsExamplesIndex'
-import Tokens from 'components/GlobalPropsAndTokens/TokensIndex'
-import TokensExamples from 'components/GlobalPropsAndTokens/ExamplesPage/TokensExamplesIndex'
 import AnchorJS from 'anchor-js'
 import { Website } from 'components/app'
 import { Turbo } from "@hotwired/turbo-rails"
-import IconsIndex from 'components/Icons/IconsIndex'
-
-Turbo.session.drive = false
 
 // Icons from playbook-icons-react for testing
 import * as icons from "@powerhome/playbook-icons-react"
@@ -52,6 +37,8 @@ Object.entries(icons).forEach(([key, value]) => {
   window.PB_ICONS[iconName] = value
 })
 
+Turbo.session.drive = false
+
 document.addEventListener('DOMContentLoaded', () => {
   const anchors = new AnchorJS()
   anchors.add('.pb--kit-example > .pb_caption_kit_md_lighter:first-child')
@@ -63,18 +50,5 @@ document.addEventListener('DOMContentLoaded', () => {
 })
 
 ComponentRegistry.registerComponents({
-  AvailableProps,
-  DarkModeToggle,
-  KitSearch,
-  SnippetToggle,
-  PbKitReact,
-  PbKitFetch,
-  MainSidebar,
   Website,
-  GlobalProps,
-  GlobalPropsExample,
-  HomepageHero,
-  Tokens,
-  TokensExamples,
-  IconsIndex,
 })

@@ -18,12 +18,7 @@ export const OtherNavItems = ({
   const location = useLocation();
   const currentURL = location.pathname + location.search;
   
-  const createLink = (path: string) => {
-    if (!path.startsWith("/beta")) {
-      return `/beta${path}`;
-    }
-    return path;
-  };
+  const createLink = (path: string) => path;
 
   const buildingBlocksMenu = building_blocks?.BuildingBlocks?.map((item) => ({
     name: item.name,
@@ -95,7 +90,7 @@ export const OtherNavItems = ({
 
   const activeForItems = (link, i) => {
     // Special case for icon integration
-    if (currentURL.startsWith("/beta/guides/getting_started/icons") && link.name === "Icon Integration") {
+    if (currentURL.startsWith("/guides/getting_started/icons") && link.name === "Icon Integration") {
       return true;
     }
   
@@ -131,7 +126,7 @@ export const OtherNavItems = ({
   });
   
   // Expand flex_box if we're on it or any of its children
-  const shouldExpandFlexBox = currentURL.startsWith('/beta/global_props/flex_box');
+  const shouldExpandFlexBox = currentURL.startsWith('/global_props/flex_box');
   
   const [flexBoxCollapsed, setFlexBoxCollapsed] = useState(!shouldExpandFlexBox);
   

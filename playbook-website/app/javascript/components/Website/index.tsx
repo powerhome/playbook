@@ -69,8 +69,8 @@ function WebsiteContent() {
 
   const handlePlatformChange = (nextPlatform: string) => {
     const isKitDetailRoute =
-      /^\/beta\/kits\/advanced_table\/[^/]+\/(react|rails|swift)$/.test(normalizedPath) ||
-      /^\/beta\/kits\/[^/]+\/(react|rails|swift)$/.test(normalizedPath);
+      /^\/kits\/advanced_table\/[^/]+\/(react|rails|swift)$/.test(normalizedPath) ||
+      /^\/kits\/[^/]+\/(react|rails|swift)$/.test(normalizedPath);
 
     if (isKitDetailRoute) {
       const nextPath = normalizedPath.replace(/\/(react|rails|swift)$/, `/${nextPlatform}`);
@@ -81,7 +81,7 @@ function WebsiteContent() {
     }
 
     const isCategoryOrKitsIndex =
-      normalizedPath === "/beta/kits" || /^\/beta\/kit_category\/[^/]+$/.test(normalizedPath);
+      normalizedPath === "/kits" || /^\/kit_category\/[^/]+$/.test(normalizedPath);
 
     if (isCategoryOrKitsIndex) {
       const params = new URLSearchParams(location.search);

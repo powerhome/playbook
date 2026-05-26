@@ -6,26 +6,19 @@ import {
   Flex,
   Title,
   Body,
-  Link,
   IconCircle,
 } from "playbook-ui";
 import { Link as RouterLink } from "react-router-dom";
 import HeaderImage from "../../images/getting-started.svg";
 import { TokenCards } from "./Data/TokenCards";
 
-type TokensProps = {
-  linkPrefix?: string,
-}
-
-const betaClientNavLinkStyle: React.CSSProperties = {
+const linkStyle: React.CSSProperties = {
   textDecoration: "none",
   color: "inherit",
   display: "block",
 };
 
-const Tokens = ({ linkPrefix = "" }: TokensProps) => {
-  const useClientNav = linkPrefix === "/beta";
-
+const Tokens = () => {
   return (
     <Background
       flexDirection="column"
@@ -55,9 +48,8 @@ const Tokens = ({ linkPrefix = "" }: TokensProps) => {
         <Body text="Tokens are reusable values that define core design elements like colors, typography, and spacing. They provide consistency across components and Global Props, ensuring scalable and cohesive design throughout the application." />
         <Layout layout="collection" marginY="xl" paddingBottom="xl">
           <Layout.Body>
-            {TokenCards.sort((a, b) => a.title.localeCompare(b.title)).map(({ title, description, link, icon }) => {
-              const href = `${linkPrefix}${link}`;
-              const card = (
+            {TokenCards.sort((a, b) => a.title.localeCompare(b.title)).map(({ title, description, link, icon }) => (
+              <RouterLink key={title} to={link} style={linkStyle}>
                 <Card padding="none" hover={{ shadow: "deep" }} flex={1}>
                   <Background backgroundColor="light">
                     <Flex justify="center" padding="xl">
@@ -82,18 +74,8 @@ const Tokens = ({ linkPrefix = "" }: TokensProps) => {
                     marginBottom="sm"
                   />
                 </Card>
-              );
-
-              return useClientNav ? (
-                <RouterLink key={title} to={href} style={betaClientNavLinkStyle}>
-                  {card}
-                </RouterLink>
-              ) : (
-                <Link key={title} href={href}>
-                  {card}
-                </Link>
-              );
-            })}
+              </RouterLink>
+            ))}
           </Layout.Body>
         </Layout>
       </Background>

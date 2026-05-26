@@ -9,7 +9,7 @@ import {
 } from 'react-router-dom'
 
 import App from './Website'
-import BetaHome from './Website/src/pages/BetaHome'
+import Home from './Website/src/pages/Home'
 import ComponentList from './Website/src/pages/ComponentList'
 import CategoryShow from './Website/src/pages/CategoryShow'
 import KitShow from './Website/src/pages/KitShow'
@@ -38,7 +38,7 @@ function TokensShowPage() {
   return <TokensExamples routeParamName={name} />
 }
 
-function BetaIconsPage() {
+function IconsPage() {
     const {
         icon_banner_image_url,
         icon_categories,
@@ -61,11 +61,11 @@ const router = createBrowserRouter(
     <Route
         element={<App />}
         errorElement={<Error />}
-        id="beta-site"
+        id="site"
         loader={ComponentsLoader}
-        path="/beta"
+        path="/"
     >
-      <Route element={<BetaHome />} index />
+      <Route element={<Home />} index />
       <Route
           element={<KitShow />}
           loader={ComponentShowLoader}
@@ -89,7 +89,7 @@ const router = createBrowserRouter(
           path="kit_category/:category"
       />
       <Route
-          element={<GlobalPropsIndex linkPrefix="/beta" />}
+          element={<GlobalPropsIndex />}
           loader={ComponentsLoader}
           path="global_props"
       />
@@ -99,7 +99,7 @@ const router = createBrowserRouter(
           path="global_props/:name"
       />
       <Route
-          element={<TokensIndex linkPrefix="/beta" />}
+          element={<TokensIndex />}
           loader={ComponentsLoader}
           path="tokens"
       />
@@ -109,7 +109,7 @@ const router = createBrowserRouter(
           path="tokens/:name"
       />
       <Route
-          element={<BetaIconsPage />}
+          element={<IconsPage />}
           loader={ComponentsLoader}
           path="icons"
       />

@@ -8,19 +8,16 @@ import HpSocialProofSections from "./sections/HpSocialProofSections"
 import NewestFromPlaybookSection from "./sections/NewestFromPlaybookSection"
 import type { LandingPost } from "./sections/NewestFromPlaybookSection"
 
-type BetaLoaderData = {
+type LoaderData = {
   landing_posts?: LandingPost[]
 }
 
-/**
- * Beta shell home: marketing sections aligned with `/` (`home.html.erb`).
- */
-export default function BetaHome() {
-  const { landing_posts = [] } = useRouteLoaderData("beta-site") as BetaLoaderData
+export default function Home() {
+  const { landing_posts = [] } = useRouteLoaderData("site") as LoaderData
 
   return (
     <div className="landing-page">
-      <HomepageHero beta />
+      <HomepageHero />
       <HpSolutionsSection />
       <HpSocialProofSections />
       <NewestFromPlaybookSection posts={landing_posts} />

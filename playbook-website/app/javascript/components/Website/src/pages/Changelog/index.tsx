@@ -56,13 +56,13 @@ const Changelog = () => {
           <Background maxWidth="md" backgroundColor="white">
             <Title text="What's New" tag="h1" size={1} />
             <Nav orientation="horizontal">
-              <NavLink to="/beta/changelog/web">
+              <NavLink to="/changelog/web">
                 <NavItem text="Web" active={activeVariant === 'web'} />
               </NavLink>
-              <NavLink to="/beta/changelog/swift">
+              <NavLink to="/changelog/swift">
                 <NavItem text="Swift" active={activeVariant === 'swift'} />
               </NavLink>
-              <NavLink to="/beta/changelog/figma">
+              <NavLink to="/changelog/figma">
                 <NavItem text="Figma" active={activeVariant === 'figma'} />
               </NavLink>
             </Nav>

@@ -24,7 +24,7 @@ type RowProps = {
 }
 
 function PreviewCardRow({ index, post }: RowProps) {
-  const href = `/beta/changelog/web#${post.link}`
+  const href = `/changelog/web#${post.link}`
 
   return (
     <Flex
