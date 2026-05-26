@@ -68,7 +68,7 @@ export default function HpSolutionsSection() {
     >
       <Flex
           className="solutionsFlexContainer width-full"
-          flexDirection={{ xs: "column", xl: "row" }}
+          flexDirection={{ default: "column", xl: "row" }}
           marginY="xl"
           maxWidth="xxl"
       >
