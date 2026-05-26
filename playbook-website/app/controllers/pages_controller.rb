@@ -108,7 +108,9 @@ class PagesController < ApplicationController
     on_icons     = request.path.include?("icons")
     on_home      = !@kit.present? && !on_changelog && !on_guides && !on_icons
 
-    # Changelog — only read/parse on the changelog page or home page (landing posts).
+    # Changelog — needed on changelog page AND as part of the general /kits.json payload
+    # (the Changelog React component loads via ComponentsLoader which fetches /kits.json).
+    # File reads are wrapped in Rails.cache so the disk I/O only happens once per boot.
     changelog_content          = nil
     changelog_releases         = nil
     swift_changelog_content    = nil
@@ -116,19 +118,24 @@ class PagesController < ApplicationController
     figma_changelog_content    = nil
     figma_changelog_releases   = nil
 
-    changelog_content = Playbook::Engine.root.join("CHANGELOG.md").read if on_changelog || on_home
-
-    if on_changelog
+    if on_changelog || on_home
+      changelog_content = Rails.cache.fetch("changelog_file_content") do
+        Playbook::Engine.root.join("CHANGELOG.md").read
+      end
       changelog_releases = Rails.cache.fetch("changelog_releases") do
         paginate_changelog(changelog_content)
       end
 
-      swift_changelog_content  = Playbook::Engine.root.join("SWIFT_CHANGELOG.md").read
+      swift_changelog_content = Rails.cache.fetch("swift_changelog_file_content") do
+        Playbook::Engine.root.join("SWIFT_CHANGELOG.md").read
+      end
       swift_changelog_releases = Rails.cache.fetch("swift_changelog_releases") do
         paginate_changelog(swift_changelog_content)
       end
 
-      figma_changelog_content  = Playbook::Engine.root.join("FIGMA_CHANGELOG.md").read
+      figma_changelog_content = Rails.cache.fetch("figma_changelog_file_content") do
+        Playbook::Engine.root.join("FIGMA_CHANGELOG.md").read
+      end
       figma_changelog_releases = Rails.cache.fetch("figma_changelog_releases") do
         paginate_changelog(figma_changelog_content)
       end
@@ -158,7 +165,7 @@ class PagesController < ApplicationController
       end
     end
 
-    # Landing posts for the home page hero.
+    # Landing posts for the home page hero (changelog_content already read above when on_home).
     landing_posts = on_home ? extract_changelog_data(changelog_content) : nil
 
     # Icon data — only parse on the icons page.
