@@ -21,7 +21,7 @@ import Color from './Website/src/pages/DesignGuidelines/Color'
 import Spacing from './Website/src/pages/DesignGuidelines/Spacing'
 import Typography from './Website/src/pages/DesignGuidelines/Typography'
 import Error from './Error'
-import { CategoryLoader, ComponentsLoader, ComponentShowLoader, GuidesLoader, GuidePageLoader } from './Website/src/hooks/loaders'
+import { CategoryLoader, ComponentsLoader, ComponentShowLoader, GuidesLoader, GuidePageLoader, IconsLoader } from './Website/src/hooks/loaders'
 import GlobalPropsIndex from './GlobalPropsAndTokens/GlobalPropsIndex'
 import GlobalPropsExamples from './GlobalPropsAndTokens/ExamplesPage/GlobalPropsExamplesIndex'
 import TokensIndex from './GlobalPropsAndTokens/TokensIndex'
@@ -110,7 +110,7 @@ const router = createBrowserRouter(
       />
       <Route
           element={<IconsPage />}
-          loader={ComponentsLoader}
+          loader={IconsLoader}
           path="icons"
       />
       <Route

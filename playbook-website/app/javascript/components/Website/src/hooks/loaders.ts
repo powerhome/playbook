@@ -92,3 +92,9 @@ export const GuidePageLoader = async ({ params }: any) => {
   const data = await response.json();
   return data;
 };
+
+export const IconsLoader = async () => {
+  const response = await fetch("/icons.json");
+  const data = await response.json();
+  return data;
+};
