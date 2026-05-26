@@ -1,29 +1,29 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  root to: "pages#application_beta"
+  root to: "pages#application"
 
   # Legacy /beta/* redirects (301)
   get "beta",       to: redirect("/")
   get "beta/*path", to: redirect("/%<path>s")
 
   # SPA routes — all served by the React app
-  get "kits",                                to: "pages#application_beta"
-  get "kits/advanced_table/:name/:platform", to: "pages#application_beta"
-  get "kits/:name/:platform",                to: "pages#application_beta"
-  get "kits/:name",                          to: "pages#application_beta"
-  get "kit_category/:category",              to: "pages#application_beta"
-  get "icons",                               to: "pages#application_beta"
-  get "changelog/:variant",                  to: "pages#application_beta"
-  get "changelog",                           to: "pages#application_beta"
-  get "guides/getting_started/:page",        to: "pages#application_beta"
-  get "guides/getting_started",              to: "pages#application_beta"
-  get "guides/design_guidelines/:page",      to: "pages#application_beta"
-  get "guides/design_guidelines",            to: "pages#application_beta"
-  get "global_props/:name",                  to: "pages#application_beta"
-  get "global_props",                        to: "pages#application_beta"
-  get "tokens/:name",                        to: "pages#application_beta"
-  get "tokens",                              to: "pages#application_beta"
+  get "kits",                                to: "pages#application"
+  get "kits/advanced_table/:name/:platform", to: "pages#application"
+  get "kits/:name/:platform",                to: "pages#application"
+  get "kits/:name",                          to: "pages#application"
+  get "kit_category/:category",              to: "pages#application"
+  get "icons",                               to: "pages#application"
+  get "changelog/:variant",                  to: "pages#application"
+  get "changelog",                           to: "pages#application"
+  get "guides/getting_started/:page",        to: "pages#application"
+  get "guides/getting_started",              to: "pages#application"
+  get "guides/design_guidelines/:page",      to: "pages#application"
+  get "guides/design_guidelines",            to: "pages#application"
+  get "global_props/:name",                  to: "pages#application"
+  get "global_props",                        to: "pages#application"
+  get "tokens/:name",                        to: "pages#application"
+  get "tokens",                              to: "pages#application"
 
   # Building Blocks (kept as legacy standalone)
   get "building_blocks",        to: "building_blocks#index"

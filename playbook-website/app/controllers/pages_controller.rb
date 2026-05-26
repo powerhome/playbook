@@ -9,7 +9,7 @@ class PagesController < ApplicationController
   include ::ViteRails::TagHelpers
   rescue_from ActionView::MissingTemplate, :with => :page_not_found
 
-  def application_beta
+  def application
     @kits = MENU["kits"]
     @dark = cookies[:dark_mode] == "true"
     @type = params[:platform] || params[:type] || "react"
@@ -188,7 +188,7 @@ class PagesController < ApplicationController
     end
 
     respond_to do |format|
-      format.html { render layout: "application_beta", inline: "" }
+      format.html { render layout: "application", inline: "" }
       format.json do
         render json: {
           kits: @kits,
@@ -456,7 +456,7 @@ private
     end
   end
 
-  # application_beta JSON + Rails prerendered examples: ERB under pb_advanced_table/docs expects
+  # JSON + Rails prerendered examples: ERB under pb_advanced_table/docs expects
   # @table_data (OpenStruct), while the SPA passes plain JSON via @beta_table_* keys.
   def assign_advanced_table_doc_mocks
     return unless @kit.to_s == "advanced_table" || @kit_parent.to_s == "advanced_table"

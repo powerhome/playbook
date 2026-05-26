@@ -17,20 +17,20 @@ $website_sidebar_collapse: breakpoint("lg");
   overflow: hidden;
 }
 
-html:has(body.pages.application_beta) {
+html:has(body.pages.application) {
   height: 100%;
   overflow: hidden;
 }
 
-body.pages.application_beta {
+body.pages.application {
   box-sizing: border-box;
   height: 100%;
   margin: 0;
   overflow: hidden;
 }
 
-body.pages.application_beta .pb--website-layout-root,
-body.pages.application_beta .pb--website-react-host {
+body.pages.application .pb--website-layout-root,
+body.pages.application .pb--website-react-host {
   @include website-shell-fill;
 }
 

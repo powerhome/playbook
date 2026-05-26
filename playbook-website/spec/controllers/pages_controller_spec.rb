@@ -4,14 +4,14 @@
 require "rails_helper"
 
 RSpec.describe PagesController, type: :controller do
-  describe "GET #application_beta" do
+  describe "GET #application" do
     it "responds successfully" do
-      get :application_beta
+      get :application
       expect(response).to be_successful
     end
 
     it "assigns variables" do
-      get :application_beta
+      get :application
       expect(assigns(:kits)).to be_present
       expect(assigns(:dark)).to be_in([true, false])
       expect(assigns(:type)).to eq("react")
@@ -19,8 +19,8 @@ RSpec.describe PagesController, type: :controller do
     end
 
     it "renders the correct template" do
-      get :application_beta
-      expect(response).to render_template("application_beta")
+      get :application
+      expect(response).to render_template("application")
     end
   end
 end
