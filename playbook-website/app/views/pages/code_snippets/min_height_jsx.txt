@@ -1,8 +1,0 @@
-<Background minHeight="xs">
-  <Title>
-    XS 
-  </Title>
-  <Detail>
-    320px min
-  </Detail>
-</Background>

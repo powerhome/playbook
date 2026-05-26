@@ -1,6 +1,0 @@
-@import "tokens/typography";
-
-.selector {
-    font-size: $heading_1;
-    letter-spacing: $lspace_tight;
-}
