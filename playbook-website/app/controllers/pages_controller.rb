@@ -60,9 +60,11 @@ class PagesController < ApplicationController
 
     assign_advanced_table_doc_mocks
 
-    # Set @users for pagination examples (params[:page] is also the guide slug on guides/* routes)
-    @users = Array.new(9) { Faker::Name.name }.paginate(page: will_paginate_page, per_page: 2)
-    @extra_users = Array.new(2000) { Faker::Name.name }.paginate(page: will_paginate_page, per_page: 2)
+    # Pagination data is only used when rendering Rails ERB examples inline.
+    if @type == "rails"
+      @users = Array.new(9) { Faker::Name.name }.paginate(page: will_paginate_page, per_page: 2)
+      @extra_users = Array.new(2000) { Faker::Name.name }.paginate(page: will_paginate_page, per_page: 2)
+    end
 
     @css = view_context.vite_asset_path("site_styles/main.scss")
 
@@ -101,51 +103,81 @@ class PagesController < ApplicationController
       }
     end
 
-    # Read markdown content for pages
-    changelog_content = Playbook::Engine.root.join("CHANGELOG.md").read
-    changelog_releases = Rails.cache.fetch("changelog_releases") do
-      paginate_changelog(changelog_content)
-    end
+    on_changelog = request.path.include?("changelog")
+    on_guides    = request.path.include?("guides")
+    on_icons     = request.path.include?("icons")
+    on_home      = !@kit.present? && !on_changelog && !on_guides && !on_icons
 
-    swift_changelog_content = Playbook::Engine.root.join("SWIFT_CHANGELOG.md").read
-    swift_changelog_releases = Rails.cache.fetch("swift_changelog_releases") do
-      paginate_changelog(swift_changelog_content)
-    end
+    # Changelog — only read/parse on the changelog page or home page (landing posts).
+    changelog_content          = nil
+    changelog_releases         = nil
+    swift_changelog_content    = nil
+    swift_changelog_releases   = nil
+    figma_changelog_content    = nil
+    figma_changelog_releases   = nil
 
-    figma_changelog_content = Playbook::Engine.root.join("FIGMA_CHANGELOG.md").read
-    figma_changelog_releases = Rails.cache.fetch("figma_changelog_releases") do
-      paginate_changelog(figma_changelog_content)
-    end
+    changelog_content = Playbook::Engine.root.join("CHANGELOG.md").read if on_changelog || on_home
 
-    getting_started_content = File.read(Rails.root.join("app/views/guides/getting_started.html.md"))
-    design_guidelines_content = File.read(Rails.root.join("app/views/guides/design_guidelines.md"))
+    if on_changelog
+      changelog_releases = Rails.cache.fetch("changelog_releases") do
+        paginate_changelog(changelog_content)
+      end
 
-    # Read individual guide page if requested
-    guide_page_content = nil
-    if params[:page].present?
-      parent = if request.path.include?("getting_started")
-                 "getting_started"
-               elsif request.path.include?("design_guidelines")
-                 "design_guidelines"
-               end
+      swift_changelog_content  = Playbook::Engine.root.join("SWIFT_CHANGELOG.md").read
+      swift_changelog_releases = Rails.cache.fetch("swift_changelog_releases") do
+        paginate_changelog(swift_changelog_content)
+      end
 
-      if parent
-        search_path = File.join(Rails.root, "/app/views/guides/#{parent}")
-        file_path = Dir.glob("#{search_path}/#{params[:page]}*.md").first
-        guide_page_content = File.read(file_path) if file_path && File.exist?(file_path)
+      figma_changelog_content  = Playbook::Engine.root.join("FIGMA_CHANGELOG.md").read
+      figma_changelog_releases = Rails.cache.fetch("figma_changelog_releases") do
+        paginate_changelog(figma_changelog_content)
       end
     end
 
-    landing_posts = extract_changelog_data(changelog_content)
-    icon_data = JSON.parse(File.read(Rails.root.join("app/assets/icons.json")))
-    icons_by_category = icon_data.group_by { |icon| icon["category"] }
-    icon_categories = icons_by_category.keys.sort.map do |category|
-      {
-        text: category,
-        link: "##{category.parameterize}",
-        value: category.parameterize,
-        label: category,
-      }
+    # Guide content — only read on guides pages.
+    getting_started_content    = nil
+    design_guidelines_content  = nil
+    guide_page_content         = nil
+
+    if on_guides
+      getting_started_content   = File.read(Rails.root.join("app/views/guides/getting_started.html.md"))
+      design_guidelines_content = File.read(Rails.root.join("app/views/guides/design_guidelines.md"))
+
+      if params[:page].present?
+        parent = if request.path.include?("getting_started")
+                   "getting_started"
+                 elsif request.path.include?("design_guidelines")
+                   "design_guidelines"
+                 end
+
+        if parent
+          search_path = File.join(Rails.root, "/app/views/guides/#{parent}")
+          file_path   = Dir.glob("#{search_path}/#{params[:page]}*.md").first
+          guide_page_content = File.read(file_path) if file_path && File.exist?(file_path)
+        end
+      end
+    end
+
+    # Landing posts for the home page hero.
+    landing_posts = on_home ? extract_changelog_data(changelog_content) : nil
+
+    # Icon data — only parse on the icons page.
+    icon_banner_image_url = nil
+    icon_categories       = nil
+    icons_by_category     = nil
+
+    if on_icons
+      icon_data             = JSON.parse(File.read(Rails.root.join("app/assets/icons.json")))
+      icons_by_category     = icon_data.group_by { |icon| icon["category"] }
+      icon_categories       = icons_by_category.keys.sort.map do |category|
+        {
+          text: category,
+          link: "##{category.parameterize}",
+          value: category.parameterize,
+          label: category,
+        }
+      end
+      icon_banner_image_url = view_context.vite_asset_path("images/icon-banner.svg")
     end
 
     respond_to do |format|
@@ -172,7 +204,7 @@ class PagesController < ApplicationController
           getting_started: DOCS[:getting_started],
           design_guidelines: DOCS[:design_guidelines],
           icons: DOCS[:icons],
-          icon_banner_image_url: view_context.vite_asset_path("images/icon-banner.svg"),
+          icon_banner_image_url: icon_banner_image_url,
           icon_categories: icon_categories,
           icon_kit_url: "https://playbook.powerapp.cloud/kits/icon/react",
           icons_by_category: icons_by_category,

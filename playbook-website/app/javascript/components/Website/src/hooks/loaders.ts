@@ -20,13 +20,20 @@ const sortComponentsByName = (kitCategory: CategoryTypes) => {
   kitCategory.components.sort(sortByName);
 };
 
-export const ComponentsLoader: () => Promise<CategoryTypes[]> = async () => {
+// Module-level cache — fetched once per page session, reused on every navigation.
+let kitsCache: any = null;
+
+async function fetchKits() {
+  if (kitsCache) return kitsCache;
   const response = await fetch("/kits.json");
   const data = await response.json();
-
   data.kits.forEach(sortComponentsByName);
-
+  kitsCache = data;
   return data;
+}
+
+export const ComponentsLoader: () => Promise<CategoryTypes[]> = async () => {
+  return fetchKits();
 };
 
 export const ComponentShowLoader = async ({
@@ -63,8 +70,7 @@ export const ComponentShowLoader = async ({
 export const CategoryLoader: (
   props: LoaderFunctionArgs
 ) => Promise<ComponentTypes> = async ({ params }) => {
-  const response = await fetch("/kits.json");
-  const { kits } = await response.json();
+  const { kits } = await fetchKits();
 
   const filteredData = kits.find(
     (kit: CategoryTypes) => kit.category === params.category
@@ -76,9 +82,7 @@ export const CategoryLoader: (
 };
 
 export const GuidesLoader = async () => {
-  const response = await fetch("/kits.json");
-  const data = await response.json();
-  return data;
+  return fetchKits();
 };
 
 export const GuidePageLoader = async ({ params }: any) => {
