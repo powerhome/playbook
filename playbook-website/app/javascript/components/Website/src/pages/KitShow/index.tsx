@@ -189,14 +189,13 @@ const KitShow = () => {
               padding="sm"
             >
               <Flex align="center">
-                <Body color="light">
+                <FlexItem paddingRight="xs">
                   <Icon
                     icon={kitStatus === "beta" ? "info-circle" : "warning"}
                     fixedWidth
-                    paddingRight="xs"
                     color={kitStatus === "beta" ? "warning" : "product_5_highlight"}
                   />
-                </Body>
+                </FlexItem>
                 <FlexItem>
                   <Title
                     text={kitStatus === "beta" ? "Beta" : "Deprecated"}
