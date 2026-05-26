@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import type { ChangeEvent } from 'react'
 import { matchSorter, rankings } from 'match-sorter'
 
@@ -40,6 +40,31 @@ type IconsIndexProps = {
 
 const descriptionText = 'Icons are a core part of Playbook’s visual language. Our custom icon set is designed to support clear, consistent, and accessible interfaces. Use them to enhance navigation, reinforce meaning, and improve communication across all digital products.'
 const dropdownLabel = 'Icon Categories'
+
+// Renders children only once the section scrolls near the viewport.
+// A placeholder div reserves approximate space to prevent layout shift.
+// to speed up the initial render
+const LazySection = ({ children, estimatedHeight = '200px' }: { children: React.ReactNode, estimatedHeight?: string }) => {
+  const ref = useRef<HTMLDivElement>(null)
+  const [visible, setVisible] = useState(false)
+
+  useEffect(() => {
+    const el = ref.current
+    if (!el) return
+    const observer = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) { setVisible(true); observer.disconnect() } },
+      { rootMargin: '300px' }
+    )
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [])
+
+  return (
+    <div ref={ref} style={{ minHeight: visible ? undefined : estimatedHeight }}>
+      {visible ? children : null}
+    </div>
+  )
+}
 
 const IconsIndex = ({
   bannerImageUrl,
@@ -187,8 +212,9 @@ const IconsIndex = ({
                       size="lg"
                       text={category}
                     />
-                    <div className="pb_layout_kit_collection icon-grid">
-                      <div className="layout_body">
+                    <LazySection estimatedHeight="150px">
+                      <div className="pb_layout_kit_collection icon-grid">
+                        <div className="layout_body">
                         {icons
                           .slice()
                           .sort((left, right) => left.name.localeCompare(right.name))
@@ -200,8 +226,9 @@ const IconsIndex = ({
                               titleText={icon.name}
                             />
                           ))}
+                        </div>
                       </div>
-                    </div>
+                    </LazySection>
                   </Flex>
                 ))
               )}
