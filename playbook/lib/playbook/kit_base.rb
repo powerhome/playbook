@@ -35,9 +35,9 @@ require "playbook/min_height"
 require "playbook/max_height"
 
 module Playbook
-  include ActionView::Helpers
-
   class KitBase < ViewComponent::Base
+    include ActionView::Helpers
+
     include Playbook::PbKitHelper
     include Playbook::Props
     include Playbook::Classnames
