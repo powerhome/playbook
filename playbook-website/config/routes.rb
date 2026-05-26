@@ -31,7 +31,4 @@ Rails.application.routes.draw do
   get "building_blocks/:name(/:type)", to: "building_blocks#show",
                                        as: "building_blocks_show",
                                        defaults: { type: "rails" }
-
-  # Icons (standalone)
-  get "playbook_icons", to: "playbook_icons#index"
 end
