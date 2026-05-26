@@ -93,8 +93,12 @@ export const GuidePageLoader = async ({ params }: any) => {
   return data;
 };
 
+let iconsCache: any = null;
+
 export const IconsLoader = async () => {
+  if (iconsCache) return iconsCache;
   const response = await fetch("/icons.json");
   const data = await response.json();
+  iconsCache = data;
   return data;
 };

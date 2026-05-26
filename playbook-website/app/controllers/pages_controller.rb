@@ -169,14 +169,11 @@ class PagesController < ApplicationController
     landing_posts = on_home ? extract_changelog_data(changelog_content) : nil
 
     # Icon data — only parse on the icons page.
-    icon_banner_image_url = nil
-    icon_categories       = nil
-    icons_by_category     = nil
-
-    if on_icons
-      icon_data             = JSON.parse(File.read(Rails.root.join("app/assets/icons.json")))
-      icons_by_category     = icon_data.group_by { |icon| icon["category"] }
-      icon_categories       = icons_by_category.keys.sort.map do |category|
+    # Early-return a slim JSON response so the icons page skips all the kit/example work.
+    if on_icons && request.format.json?
+      icon_data         = Rails.cache.fetch("icons_json") { JSON.parse(File.read(Rails.root.join("app/assets/icons.json"))) }
+      icons_by_category = icon_data.group_by { |icon| icon["category"] }
+      icon_categories   = icons_by_category.keys.sort.map do |category|
         {
           text: category,
           link: "##{category.parameterize}",
@@ -184,8 +181,19 @@ class PagesController < ApplicationController
           label: category,
         }
       end
-      icon_banner_image_url = view_context.vite_asset_path("images/icon-banner.svg")
+
+      render json: {
+        icon_banner_image_url: view_context.vite_asset_path("images/icon-banner.svg"),
+        icon_categories: icon_categories,
+        icon_kit_url: "https://playbook.powerapp.cloud/kits/icon/react",
+        icons_by_category: icons_by_category,
+      }
+      return
     end
+
+    icon_banner_image_url = nil
+    icon_categories       = nil
+    icons_by_category     = nil
 
     respond_to do |format|
       format.html { render layout: "application", inline: "" }

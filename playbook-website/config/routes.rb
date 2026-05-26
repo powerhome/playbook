@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   get "beta",       to: redirect("/")
   get "beta/*path", to: redirect("/%<path>s")
 
-  # SPA routes — all served by the React app
+  # SPA routes: all served by the React app
   get "kits",                                to: "pages#application"
   get "kits/advanced_table/:name/:platform", to: "pages#application"
   get "kits/:name/:platform",                to: "pages#application"
@@ -25,7 +25,7 @@ Rails.application.routes.draw do
   get "tokens/:name",                        to: "pages#application"
   get "tokens",                              to: "pages#application"
 
-  # Building Blocks (kept as legacy standalone)
+  # Building Blocks (kept as legacy standalone till new pages designed/built)
   get "building_blocks",        to: "building_blocks#index"
   get "building_blocks/icons",  to: "building_blocks#icons"
   get "building_blocks/:name(/:type)", to: "building_blocks#show",
