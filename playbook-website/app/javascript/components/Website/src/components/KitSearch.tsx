@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Typeahead, Badge, Flex } from 'playbook-ui'
 import { matchSorter } from 'match-sorter'
-import { useDarkMode } from './Website/src/contexts/DarkModeContext'
+import { useDarkMode } from '../contexts/DarkModeContext'
 
 type Kit = {
   label: string,

@@ -3,7 +3,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom"
 import { Flex, Image, Badge, SectionSeparator, FlexItem } from "playbook-ui";
 // @ts-ignore
 import PBLogo from "../../../../images/pb-logo.svg";
-import KitSearch from "../../../KitSearch";
+import KitSearch from "../components/KitSearch";
 import { PlatformToggle } from "../components/PlatformToggle";
 import DarkModeToggle from "../components/DarkModeToggle";
 import { useDarkMode } from "../contexts/DarkModeContext";

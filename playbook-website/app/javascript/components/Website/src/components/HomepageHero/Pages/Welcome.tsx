@@ -2,7 +2,7 @@ import React from "react";
 import { Title, Body, Flex, FlexItem, Image, Button } from "playbook-ui";
 import { Logos } from "../ComponentData/LogosData";
 // @ts-ignore
-import Underline from "../../../images/PurpleUnderline.svg";
+import Underline from "images/PurpleUnderline.svg";
 
 type WelcomeProps = {
   fixedSize?: string;

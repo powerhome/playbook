@@ -1,7 +1,7 @@
 import React from "react"
 import { useRouteLoaderData } from "react-router-dom"
 
-import HomepageHero from "components/HomepageHero"
+import HomepageHero from "../../components/HomepageHero"
 import Footer from "../../layouts/Footer"
 import HpSolutionsSection from "./sections/HpSolutionsSection"
 import HpSocialProofSections from "./sections/HpSocialProofSections"

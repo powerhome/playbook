@@ -2,24 +2,23 @@ import React from "react";
 import { Background, Image } from "playbook-ui";
 import type { HomepageHeroCTALinks } from "../ctaLinks";
 import WelcomeComponent from "./Welcome";
+import BlurBackground from "./BlurBackground";
 import {
   ConnectedDevicesCard,
   OrderDetailsCard,
-  SelectPlanCard,
   SubscribeToggleCard,
   TicketsChartCard,
-  NotificationsSmallCard,
 } from "../HeroComponents";
-// @ts-ignore
-import GridMedium from "../../../images/MediumBackgroundGrid.svg";
-import BlurBackground from "./BlurBackground";
 
-type MediumScreenProps = {
+// @ts-ignore
+import GridSmall from "images/SmallBackgroundGrid.svg";
+
+type SmallScreenProps = {
   ctaLinks: HomepageHeroCTALinks;
   onNavigate?: (path: string) => void;
 };
 
-const MediumScreen = ({ ctaLinks, onNavigate }: MediumScreenProps) => {
+const SmallScreen = ({ ctaLinks, onNavigate }: SmallScreenProps) => {
   return (
     <>
       <Background
@@ -30,6 +29,7 @@ const MediumScreen = ({ ctaLinks, onNavigate }: MediumScreenProps) => {
         justifyContent="center"
         paddingTop="xl"
         paddingBottom="sm"
+        width="xl"
       >
         <WelcomeComponent
           buttonsAlignment="center"
@@ -39,7 +39,7 @@ const MediumScreen = ({ ctaLinks, onNavigate }: MediumScreenProps) => {
             alignItems: "center",
           }}
           exploreComponentsLink={ctaLinks.exploreComponents}
-          fixedSize="963px"
+          fixedSize="599px"
           getStartedLink={ctaLinks.getStarted}
           headerAlign="center"
           onNavigate={onNavigate}
@@ -54,24 +54,26 @@ const MediumScreen = ({ ctaLinks, onNavigate }: MediumScreenProps) => {
         alignItems="center"
         position="relative"
       >
-        <Image url={GridMedium} />
-        <BlurBackground
-          firstBlurClass="blur_3"
-          firstBlurHeight="138.544px"
-          firstBlurWidth="184.867px"
-          secondBlurClass="blur_4"
-          secondBlurHeight="359.581px"
-          secondBlurWidth="479.808px"
+        <Image
+          url={GridSmall}
+          className="homepage_hero_container_cards_grid3"
         />
-        <TicketsChartCard />
+        <BlurBackground
+          firstBlurClass="blur_5"
+          firstBlurHeight="129px"
+          firstBlurWidth="128px"
+          secondBlurClass="blur_6"
+          secondBlurHeight="160px"
+          secondBlurWidth="252px"
+        />
+
         <ConnectedDevicesCard />
-        <NotificationsSmallCard />
         <OrderDetailsCard />
-        <SelectPlanCard />
         <SubscribeToggleCard />
+        <TicketsChartCard />
       </Background>
     </>
   );
 };
 
-export default MediumScreen;
+export default SmallScreen;

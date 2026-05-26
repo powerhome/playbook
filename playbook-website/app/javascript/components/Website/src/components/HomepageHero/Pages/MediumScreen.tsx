@@ -2,23 +2,24 @@ import React from "react";
 import { Background, Image } from "playbook-ui";
 import type { HomepageHeroCTALinks } from "../ctaLinks";
 import WelcomeComponent from "./Welcome";
-import BlurBackground from "./BlurBackground";
 import {
   ConnectedDevicesCard,
   OrderDetailsCard,
+  SelectPlanCard,
   SubscribeToggleCard,
   TicketsChartCard,
+  NotificationsSmallCard,
 } from "../HeroComponents";
-
 // @ts-ignore
-import GridSmall from "../../../images/SmallBackgroundGrid.svg";
+import GridMedium from "images/MediumBackgroundGrid.svg";
+import BlurBackground from "./BlurBackground";
 
-type SmallScreenProps = {
+type MediumScreenProps = {
   ctaLinks: HomepageHeroCTALinks;
   onNavigate?: (path: string) => void;
 };
 
-const SmallScreen = ({ ctaLinks, onNavigate }: SmallScreenProps) => {
+const MediumScreen = ({ ctaLinks, onNavigate }: MediumScreenProps) => {
   return (
     <>
       <Background
@@ -29,7 +30,6 @@ const SmallScreen = ({ ctaLinks, onNavigate }: SmallScreenProps) => {
         justifyContent="center"
         paddingTop="xl"
         paddingBottom="sm"
-        width="xl"
       >
         <WelcomeComponent
           buttonsAlignment="center"
@@ -39,7 +39,7 @@ const SmallScreen = ({ ctaLinks, onNavigate }: SmallScreenProps) => {
             alignItems: "center",
           }}
           exploreComponentsLink={ctaLinks.exploreComponents}
-          fixedSize="599px"
+          fixedSize="963px"
           getStartedLink={ctaLinks.getStarted}
           headerAlign="center"
           onNavigate={onNavigate}
@@ -54,26 +54,24 @@ const SmallScreen = ({ ctaLinks, onNavigate }: SmallScreenProps) => {
         alignItems="center"
         position="relative"
       >
-        <Image
-          url={GridSmall}
-          className="homepage_hero_container_cards_grid3"
-        />
+        <Image url={GridMedium} />
         <BlurBackground
-          firstBlurClass="blur_5"
-          firstBlurHeight="129px"
-          firstBlurWidth="128px"
-          secondBlurClass="blur_6"
-          secondBlurHeight="160px"
-          secondBlurWidth="252px"
+          firstBlurClass="blur_3"
+          firstBlurHeight="138.544px"
+          firstBlurWidth="184.867px"
+          secondBlurClass="blur_4"
+          secondBlurHeight="359.581px"
+          secondBlurWidth="479.808px"
         />
-
-        <ConnectedDevicesCard />
-        <OrderDetailsCard />
-        <SubscribeToggleCard />
         <TicketsChartCard />
+        <ConnectedDevicesCard />
+        <NotificationsSmallCard />
+        <OrderDetailsCard />
+        <SelectPlanCard />
+        <SubscribeToggleCard />
       </Background>
     </>
   );
 };
 
-export default SmallScreen;
+export default MediumScreen;

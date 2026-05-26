@@ -9,8 +9,8 @@ import {
   IconCircle,
 } from "playbook-ui";
 import { Link as RouterLink } from "react-router-dom";
-import HeaderImage from "../../images/getting-started.svg";
-import { TokenCards } from "./Data/TokenCards";
+import HeaderImage from "images/getting-started.svg";
+import { GlobalPropsCards } from "./Data/GlobalPropsCards";
 
 const linkStyle: React.CSSProperties = {
   textDecoration: "none",
@@ -18,7 +18,7 @@ const linkStyle: React.CSSProperties = {
   display: "block",
 };
 
-const Tokens = () => {
+const GlobalProps = () => {
   return (
     <Background
       flexDirection="column"
@@ -44,13 +44,13 @@ const Tokens = () => {
         backgroundColor="white"
         maxWidth="lg"
       >
-        <Title size={1} text="Tokens" marginBottom="sm" />
-        <Body text="Tokens are reusable values that define core design elements like colors, typography, and spacing. They provide consistency across components and Global Props, ensuring scalable and cohesive design throughout the application." />
+        <Title size={1} text="Global Props" marginBottom="sm" />
+        <Body text="Global Props are universal settings that apply to all components in our design system. They use Token values to control aspects like spacing, colors, and typography, ensuring consistent design and behavior across your application." />
         <Layout layout="collection" marginY="xl" paddingBottom="xl">
           <Layout.Body>
-            {TokenCards.sort((a, b) => a.title.localeCompare(b.title)).map(({ title, description, link, icon }) => (
+            {GlobalPropsCards.sort((a, b) => a.title.localeCompare(b.title)).map(({ title, description, link, icon }) => (
               <RouterLink key={title} to={link} style={linkStyle}>
-                <Card padding="none" hover={{ shadow: "deep" }} flex={1}>
+                <Card padding="none" hover={{ shadow: "deep" }} flex={1} minHeight="300px">
                   <Background backgroundColor="light">
                     <Flex justify="center" padding="xl">
                       <IconCircle icon={icon} variant="royal" />
@@ -59,8 +59,8 @@ const Tokens = () => {
 
                   <Flex justify="between" align="center" padding="sm">
                     <Title size={4} color="link" text={title} />
-                    <Icon 
-                        aria={{ hidden: true }}
+                    <Icon
+                        aria={{ hidden: true }} 
                         color="link" 
                         icon="arrow-right-long" 
                     />
@@ -68,7 +68,7 @@ const Tokens = () => {
 
                   <Body
                     text={description}
-                    truncate="3"
+                    truncate="4"
                     color="light"
                     marginX="sm"
                     marginBottom="sm"
@@ -83,4 +83,4 @@ const Tokens = () => {
   );
 };
 
-export default Tokens;
+export default GlobalProps;

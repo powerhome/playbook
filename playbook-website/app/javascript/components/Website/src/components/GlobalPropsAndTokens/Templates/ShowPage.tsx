@@ -30,8 +30,11 @@ const ShowPage = ({
   children,
   pageType = "global_props",
 }: ShowPageTypes) => {
+  const pageClassName =
+    pageType === "tokens" ? "tokens_show_page" : "global_props_page";
+
   return (
-    <Flex justifyContent="center">
+    <Flex className={pageClassName} justifyContent="center">
       <Flex
         maxWidth="lg"
         paddingY="xl"

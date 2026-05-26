@@ -10,4 +10,4 @@ See the READMEs of all the sub-folders:
 - [layouts](./src/layouts/README.md)
 - [pages](./src/pages/README.md)
 
-The routes are located at: `packs/app.js`.
+The router is defined in [`src/app.tsx`](./src/app.tsx) and registered from `entrypoints/application.js`.

@@ -12,7 +12,7 @@ import '../../../../playbook/app/javascript/playbook-doc.js'
 
 import '../site_styles/main.scss'
 
-import { Website } from 'components/app'
+import { Website } from 'website/src/app'
 import { Turbo } from "@hotwired/turbo-rails"
 
 // Icons from playbook-icons-react for testing

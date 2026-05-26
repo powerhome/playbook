@@ -13,7 +13,7 @@ import {
   TicketsChartCard,
 } from "../HeroComponents";
 // @ts-ignore
-import GridLarge from "../../../images/LargeBackgroundGrid.svg";
+import GridLarge from "images/LargeBackgroundGrid.svg";
 import BlurBackground from "./BlurBackground";
 
 type MaxScreenProps = {
