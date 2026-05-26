@@ -30,6 +30,11 @@ function WebsiteContent() {
 
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const [headerHeight, setHeaderHeight] = useState(89);
+
+  // Close sidebar on route change
+  useEffect(() => {
+    setMobileNavOpen(false);
+  }, [location.pathname]);
   const headerRef = useRef<HTMLDivElement | null>(null);
   const normalizedPath = location.pathname.replace(/\/+$/, "") || "/";
 
@@ -115,6 +120,16 @@ function WebsiteContent() {
             isOpen={mobileNavOpen}
             onToggle={() => setMobileNavOpen(!mobileNavOpen)}
           />
+          {mobileNavOpen && (
+            <div
+              onClick={() => setMobileNavOpen(false)}
+              style={{
+                position: "fixed",
+                inset: 0,
+                zIndex: 99,
+              }}
+            />
+          )}
           <Layout.Side className={`pb--page--sideNav ${darkMode ? 'dark' : ''} ${mobileNavOpen ? 'mobile-open' : ''}`.trim()}>
             <Sidebar
               building_blocks={building_blocks || []}
