@@ -21,9 +21,9 @@ const KitShow = () => {
     kit_description,
     kit_sections,
     available_props,
-    kit_schema,
-    global_props_schema,
-    playground_config,
+    // kit_schema,
+    // global_props_schema,
+    // playground_config,
   } = loaderData;
   const { darkMode, setDarkMode } = useDarkMode();
   const currentKit = loaderData.kit || name || "";
@@ -102,6 +102,7 @@ const KitShow = () => {
           minWidth={0}
           orientation="column"
           width="100%"
+          paddingTop="lg"
         >
           <Title
             text={`${linkFormat(name)}`}
@@ -138,14 +139,15 @@ const KitShow = () => {
               onClick={() => handleTabChange("props")}
               dark={darkMode}
             />
-            {showPlayground && (
+            {/* TODO: Add playground back in when we have final designs */}
+            {/* {showPlayground && (
               <NavItem
                 text="Playground"
                 active={displayTab === "playground"}
                 onClick={() => handleTabChange("playground")}
                 dark={darkMode}
               />
-            )}
+            )} */}
 
             {/* Building Blocks and References tabs, commented out until building blocks and references are implemented */}
             {/* <NavItem
@@ -166,7 +168,8 @@ const KitShow = () => {
       <div className="kit-show-wrapper">
         <Flex align="stretch" minWidth={0} orientation="column" marginBottom="lg" width="100%">
           {/* Playground Tab Content (React-only for now; hidden on Rails) */}
-          {showPlayground && displayTab === "playground" && (
+          {/* TODO: Add playground back in when we have final designs */}
+          {/* {showPlayground && displayTab === "playground" && (
             <PlaygroundTab
               kitSchema={kit_schema}
               globalPropsSchema={global_props_schema}
@@ -174,7 +177,7 @@ const KitShow = () => {
               defaultExample={examples?.[0]}
               playgroundConfig={playground_config}
             />
-          )}
+          )} */}
 
           {/* Docs Tab Content */}
           {displayTab === "docs" && (
