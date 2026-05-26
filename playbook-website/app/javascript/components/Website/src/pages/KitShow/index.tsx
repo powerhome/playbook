@@ -1,5 +1,5 @@
 import { useLoaderData, useParams } from "react-router-dom";
-import { Body, Title, Nav, NavItem, Flex, SectionSeparator } from "playbook-ui";
+import { Body, Card, Detail, Flex, FlexItem, Icon, Nav, NavItem, SectionSeparator, Title } from "playbook-ui";
 import { useState, useMemo } from "react";
 import { useDarkMode } from "../../contexts/DarkModeContext";
 
@@ -10,7 +10,7 @@ import { DocsTab } from "./Tabs/DocsTab";
 import { PropsTab } from "./Tabs/PropsTab";
 // import { BuildingBlocksTab } from "./Tabs/BuildingBlocksTab";
 // import { ReferencesTab } from "./Tabs/ReferencesTab";
-import { PlaygroundTab } from "./Tabs/PlaygroundTab";
+// import { PlaygroundTab } from "./Tabs/PlaygroundTab";
 
 const KitShow = () => {
   const { name } = useParams();
@@ -21,12 +21,55 @@ const KitShow = () => {
     kit_description,
     kit_sections,
     available_props,
+    kits_with_status,
     // kit_schema,
     // global_props_schema,
     // playground_config,
   } = loaderData;
   const { darkMode, setDarkMode } = useDarkMode();
   const currentKit = loaderData.kit || name || "";
+
+  // Find the kit entry (by name or parent) and extract platform status.
+  const kitMeta = useMemo(() => {
+    if (!kits_with_status || !currentKit) return null;
+    for (const categoryObj of kits_with_status) {
+      const components: any[] = Object.values(categoryObj)[0] as any[];
+      const match = components?.find(
+        (c: any) => c.name === currentKit || c.parent === currentKit
+      );
+      if (match) return match;
+    }
+    return null;
+  }, [kits_with_status, currentKit]);
+
+  const kitStatus = useMemo(() => {
+    if (!kitMeta) return null;
+    const { platforms_status, status } = kitMeta;
+    return (platforms_status && platforms_status[platform]) || status || null;
+  }, [kitMeta, platform]);
+
+  const kitPlatformSpecificStatus = useMemo(() => {
+    if (!kitMeta) return false;
+    const { platforms_status, status } = kitMeta;
+    return platforms_status && platforms_status[platform] && platforms_status[platform] !== status;
+  }, [kitMeta, platform]);
+
+  const platformLabel = platform === "rails" ? "Rails" : platform === "swift" ? "Swift" : "React";
+
+  const statusWarningMessage = useMemo(() => {
+    if (!kitStatus) return "";
+    const componentName = kitPlatformSpecificStatus
+      ? `${platformLabel} side of the ${linkFormat(currentKit)} kit`
+      : `${linkFormat(currentKit)} kit`;
+    if (kitStatus === "beta") {
+      return kitPlatformSpecificStatus
+        ? `The ${componentName} is functional and supported, but may still be undergoing changes. Use with caution.`
+        : "Functional and supported, but may still be undergoing changes. Use with caution.";
+    }
+    return kitPlatformSpecificStatus
+      ? `Please avoid using the ${componentName}. This will be removed in future versions.`
+      : "Please avoid using. This component is deprecated and will be removed in future versions.";
+  }, [kitStatus, kitPlatformSpecificStatus, platformLabel, currentKit]);
 
   // Prepare example props for advanced_table examples
   const exampleProps = useMemo(() => {
@@ -94,6 +137,8 @@ const KitShow = () => {
     setActiveTab(tab);
   };
 
+  const showStatusBadge = kitStatus === "beta" || kitStatus === "deprecated";
+
   return (
     <>
       <div className={`pb--kit-show ${currentKit}-kit`}>
@@ -104,25 +149,66 @@ const KitShow = () => {
           width="100%"
           paddingTop="lg"
         >
-          <Title
-            text={`${linkFormat(name)}`}
-            size={1}
-            marginBottom={kit_description ? undefined : "md"}
-            dark={darkMode}
-          />
+          {/* Title row with inline status badge */}
+          <Flex orientation="row" alignItems="center" marginBottom={kit_description ? undefined : "md"}>
+            <Title
+              text={`${linkFormat(name)}`}
+              size={1}
+              dark={darkMode}
+            />
+            {showStatusBadge && (
+              <Card
+                background={kitStatus === "beta" ? "product_9_background" : "product_5_highlight"}
+                marginX="xs"
+                padding="xxs"
+                borderNone
+              >
+                <Detail
+                  bold
+                  color="default"
+                  dark
+                  paddingX="xxs"
+                  text={kitStatus === "beta" ? "Beta" : "Deprecated"}
+                />
+              </Card>
+            )}
+          </Flex>
+
           {kit_description && kit_description !== "" && (
-            <Flex>
-              <Flex flex={1} minWidth={0}>
-                <Body marginTop="sm" marginBottom="md" dark={darkMode}>
-                  <MarkdownContent>{kit_description}</MarkdownContent>
+            <Body marginTop="sm" marginBottom="md" dark={darkMode}>
+              <MarkdownContent>{kit_description}</MarkdownContent>
+            </Body>
+          )}
+
+          {/* Status warning card */}
+          {showStatusBadge && (
+            <Card
+              background={kitStatus === "beta" ? "warning_subtle" : "error_subtle"}
+              highlight={{ position: "side", color: kitStatus === "beta" ? "warning" : "product_5_highlight", shadow: "deep" }}
+              marginBottom="md"
+              padding="sm"
+            >
+              <Flex align="center">
+                <Body color="light">
+                  <Icon
+                    icon={kitStatus === "beta" ? "info-circle" : "warning"}
+                    fixedWidth
+                    paddingRight="xs"
+                    color={kitStatus === "beta" ? "warning" : "product_5_highlight"}
+                  />
                 </Body>
+                <FlexItem>
+                  <Title
+                    text={kitStatus === "beta" ? "Beta" : "Deprecated"}
+                    tag="h4"
+                    size={4}
+                    paddingBottom="xxs"
+                    dark={darkMode}
+                  />
+                  <Body text={statusWarningMessage} dark={darkMode} />
+                </FlexItem>
               </Flex>
-              <Flex
-                display={{ xs: "none", sm: "none", md: "none", lg: "none", xl: "flex" }}
-                shrink
-                htmlOptions={{ style: { width: "228px"} }}
-              />
-            </Flex>
+            </Card>
           )}
 
           {/* Navigation Tabs */}
