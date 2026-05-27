@@ -12,20 +12,6 @@ import Caption from '../pb_caption/_caption'
 import Body from '../pb_body/_body'
 import colors from "../tokens/exports/_colors.module.scss"
 
-function serializeDefaultDateForFilterReset(defaultDate: unknown): string | undefined {
-  if (defaultDate === '' || defaultDate == null) return undefined
-  if (Array.isArray(defaultDate)) {
-    const parts = defaultDate.map((d) => {
-      if (d == null || d === '') return ''
-      if (d instanceof Date) return d.toISOString()
-      return String(d)
-    }).filter(Boolean)
-    return parts.length ? parts.join(',') : undefined
-  }
-  if (defaultDate instanceof Date) return defaultDate.toISOString()
-  return String(defaultDate)
-}
-
 type DatePickerProps = {
   allowInput?: boolean,
   aria?: { [key: string]: string },
@@ -127,11 +113,7 @@ const DatePicker = (props: DatePickerProps): React.ReactElement => {
   } = props
 
   const ariaProps = buildAriaProps(aria)
-  const filterResetDefaultSerialized = serializeDefaultDateForFilterReset(defaultDate)
-  const dataProps = buildDataProps({
-    ...data,
-    ...(filterResetDefaultSerialized ? { 'default-value': filterResetDefaultSerialized } : {}),
-  })
+  const dataProps = buildDataProps(data)
   const htmlProps = buildHtmlProps(htmlOptions)
   const inputAriaProps = buildAriaProps(inputAria)
   const inputDataProps = buildDataProps(inputData)
