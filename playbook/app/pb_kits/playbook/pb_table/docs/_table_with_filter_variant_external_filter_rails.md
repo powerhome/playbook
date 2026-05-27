@@ -36,4 +36,4 @@ When `filter` is present, `filter_content` and `filter_props` are ignored.
 <% end %>
 ```
 
-For Nitro apps that use a shared search/filter pattern, reference the example on Alpha for implementation details.
+For Nitro apps that use a shared search/filter pattern, reference the [example on Alpha](https://github.com/powerhome/nitro-web/pull/56859/changes/aa2afcdc97d39d74beb65cf53eb3bb2517eb2181) for implementation details.
