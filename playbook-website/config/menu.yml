@@ -80,7 +80,7 @@ kits:
   - name: layout_&_positioning
     description: Scroll, sticky headers/columns, responsive layout, fullscreen modes.
     parent: advanced_table
-    kit_section: ["Sticky Header", "Sticky Header for Responsive Table", "Sticky Columns", "Sticky Columns with Sticky Header", "Responsive Tables", "Fullscreen", "Advanced Table Scrollbar None"]
+    kit_section: ["Sticky Header", "Sticky Header for Responsive Table", "Sticky Columns", "Sticky Columns with Sticky Header", "Sticky Header and Column Scroll Limitation", "Responsive Tables", "Fullscreen", "Advanced Table Scrollbar None"]
     platforms: *1
     status: stable
     icons_used: true

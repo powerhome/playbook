@@ -52,6 +52,7 @@ examples:
   - advanced_table_table_props_sticky_header: Sticky Header for Responsive Table
   - advanced_table_sticky_columns: Sticky Columns
   - advanced_table_sticky_columns_and_header: Sticky Columns with Sticky Header
+  - advanced_table_sticky_scroll_limitation: Sticky Header and Column Scroll Limitation
   - advanced_table_responsive: Responsive Tables
   - advanced_table_custom_cell: Custom Components for Cells
   - advanced_table_with_custom_header: Custom Header Cell
