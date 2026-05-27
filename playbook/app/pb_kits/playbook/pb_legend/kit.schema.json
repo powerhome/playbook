@@ -1,0 +1,50 @@
+{
+  "$schema": "https://playbook.powerapp.cloud/schemas/kit-schema.json",
+  "name": "Legend",
+  "description": "Legend component",
+  "platforms": [
+    "react",
+    "rails"
+  ],
+  "props": {
+    "color": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": "data_1"
+    },
+    "dark": {
+      "type": "boolean",
+      "platforms": [
+        "react"
+      ]
+    },
+    "prefixText": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "text": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    }
+  },
+  "globalProps": true,
+  "usage": {
+    "react": {
+      "import": "import { Legend } from 'playbook-ui'",
+      "example": "<Legend></Legend>"
+    },
+    "rails": {
+      "import": null,
+      "example": "<%= pb_rails(\"legend\", props: { text: \"Example\" }) %>"
+    }
+  }
+}

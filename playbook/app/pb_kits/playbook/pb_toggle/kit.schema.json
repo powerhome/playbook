@@ -1,0 +1,76 @@
+{
+  "$schema": "https://playbook.powerapp.cloud/schemas/kit-schema.json",
+  "name": "Toggle",
+  "description": "Toggle component",
+  "platforms": [
+    "react",
+    "rails"
+  ],
+  "props": {
+    "checked": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "disabled": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "name": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "onChange": {
+      "type": "ReactNode",
+      "platforms": [
+        "react"
+      ]
+    },
+    "size": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "sm",
+        "md"
+      ],
+      "default": "sm"
+    },
+    "value": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "inputOptions": {
+      "platforms": [
+        "rails"
+      ],
+      "type": "string"
+    }
+  },
+  "globalProps": true,
+  "usage": {
+    "react": {
+      "import": "import { Toggle } from 'playbook-ui'",
+      "example": "<Toggle size=\"sm\"></Toggle>"
+    },
+    "rails": {
+      "import": null,
+      "example": "<%= pb_rails(\"toggle\", props: { size: \"sm\" }) %>"
+    }
+  }
+}

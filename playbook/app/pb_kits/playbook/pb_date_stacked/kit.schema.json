@@ -1,0 +1,84 @@
+{
+  "$schema": "https://playbook.powerapp.cloud/schemas/kit-schema.json",
+  "name": "DateStacked",
+  "description": "DateStacked component",
+  "platforms": [
+    "react",
+    "rails"
+  ],
+  "props": {
+    "align": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "left",
+        "center",
+        "right"
+      ],
+      "default": "left"
+    },
+    "bold": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "dark": {
+      "type": "boolean",
+      "platforms": [
+        "react"
+      ]
+    },
+    "date": {
+      "type": "Date",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "size": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "sm",
+        "md"
+      ],
+      "default": "sm"
+    },
+    "reverse": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "showCurrentYear": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    }
+  },
+  "globalProps": true,
+  "usage": {
+    "react": {
+      "import": "import { DateStacked } from 'playbook-ui'",
+      "example": "<DateStacked align=\"left\" size=\"sm\"></DateStacked>"
+    },
+    "rails": {
+      "import": null,
+      "example": "<%= pb_rails(\"date_stacked\", props: { align: \"left\", size: \"sm\" }) %>"
+    }
+  }
+}

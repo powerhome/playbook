@@ -1,6 +1,6 @@
 import { useLoaderData, useParams, NavLink } from "react-router-dom"
 import { useState, useEffect } from "react"
-import ReactMarkdown from 'react-markdown'
+import { MarkdownContent } from "../../components/MarkdownContent"
 import { Flex, FlexItem, Background, Title, Nav, NavItem, SectionSeparator, Pagination } from "playbook-ui"
 
 const Changelog = () => {
@@ -69,7 +69,7 @@ const Changelog = () => {
             <SectionSeparator flexGrow={1} />
             <div className="markdown-content">
               {paginatedReleases.map((release: any, index: number) => (
-                <ReactMarkdown key={index}>{release.content || ''}</ReactMarkdown>
+                <MarkdownContent key={index}>{release.content || ""}</MarkdownContent>
               ))}
             </div>
             {totalPages > 1 && (

@@ -39,6 +39,20 @@ RSpec.describe Playbook::PbDatePicker::DatePicker do
       expect(subject.new({ picker_id: "spec-test" }).classname).to eq "pb_date_picker_kit cursor_pointer mb_sm"
       expect(subject.new({ classname: "additional_class", picker_id: "spec-test" }).classname).to eq "pb_date_picker_kit additional_class cursor_pointer mb_sm"
       expect(subject.new({ classname: "dark", picker_id: "spec-test" }).classname).to eq "pb_date_picker_kit dark cursor_pointer mb_sm"
+      expect(subject.new({ picker_id: "spec-test", inline: true }).classname).to eq "pb_date_picker_kit cursor_pointer mb_sm inline-date-picker"
+    end
+  end
+
+  describe "#date_picker_config" do
+    it "includes selectionType and mode for range quickpick so React can compute quick pick ranges" do
+      picker = subject.new(
+        picker_id: "spec-quickpick",
+        mode: "range",
+        selection_type: "quickpick"
+      )
+      config = JSON.parse(picker.date_picker_config)
+      expect(config["selectionType"]).to eq("quickpick")
+      expect(config["mode"]).to eq("range")
     end
   end
 

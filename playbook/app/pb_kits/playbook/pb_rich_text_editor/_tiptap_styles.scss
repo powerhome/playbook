@@ -8,38 +8,53 @@
 @import "../tokens/transition";
 @import "previewer_mixin";
 
-[class^="pb_rich_text_editor_kit"] {
-    &.inline {
-        .toolbar {
-          opacity: 0;
-          transition: all 0.3s ease-in-out 0s;
-        }
-    
-        &:focus-within .toolbar {
-          opacity: 100;
-        }
-    
-        .ProseMirror {
-          border: 1px solid transparent;
-          transition: all 0.3s ease-in-out 0s;
-        }
-    
-        &:focus-within .ProseMirror {
-          border: 1px solid $border_light;
-          border-top: none;
-        }
-    
-        &:hover {
-          .toolbar {
-            opacity: 100;
-          }
-    
-          .ProseMirror {
-            border: 1px solid $border_light;
-            border-top: none;
-          }
-        }
+// Rails TipTap root: flex/grid children default to min-width: auto, so the toolbar’s
+// intrinsic width can force horizontal page/dialog scroll. Pin the kit to the parent width.
+[data-pb-rte-tiptap="true"] {
+  box-sizing: border-box;
+  display: block;
+  max-width: 100%;
+  min-width: 0;
+  width: 100%;
+}
+
+.pb_rich_text_editor_kit {
+  box-sizing: border-box;
+  max-width: 100%;
+  min-width: 0;
+
+  &.inline {
+    .toolbar {
+      opacity: 0;
+      transition: all 0.3s ease-in-out 0s;
+    }
+
+    &:focus-within .toolbar {
+      opacity: 100;
+    }
+
+    .ProseMirror {
+      border: 1px solid transparent;
+      transition: all 0.3s ease-in-out 0s;
+    }
+
+    &:focus-within .ProseMirror {
+      border: 1px solid $input_border_default;
+      border-top: none;
+    }
+
+    &:hover {
+      .toolbar {
+        opacity: 100;
       }
+
+      .ProseMirror {
+        border: 1px solid $input_border_default;
+        border-top: none;
+      }
+    }
+  }
+
   .toolbar_button {
     display: flex;
     align-items: center;
@@ -73,18 +88,76 @@
     }
   }
 
+  // Active state for toolbar (Rails kit uses pb_button_kit pb_button_link; override link variant when active)
+  .toolbar button.pb_button_kit.is-active {
+    color: $primary;
+    background-color: $bg_light;
+  }
+
   .pb_rich_text_editor_tiptap_toolbar_sticky {
     position: sticky;
     top: 0;
     z-index: 10;
   }
+
+  .rte-editor-wrap {
+    box-sizing: border-box;
+    max-width: 100%;
+    min-width: 0;
+  }
+
+  .pb_rich_text_editor_advanced_container {
+    max-width: 100%;
+    min-width: 0;
+  }
+
   .toolbar {
     border-radius: $border_rad_heaviest $border_rad_heaviest 0 0;
-    border: 1px solid $border_light;
+    border: 1px solid $input_border_default;
     overflow-x: auto;
+    // Single horizontal row + scroll in narrow modals/sidebars (wrap used to stack controls vertically).
     &_block {
+      align-items: center;
+      display: flex;
+      flex-wrap: nowrap;
       gap: $space_xs;
+      min-width: 0;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
     }
+
+    // React: full-width row with history on the far right; horizontal scroll stays on .toolbar.
+    &:not(.rte-rails-toolbar-layout) {
+      > .pb_flex_kit.pb_flex_kit_justify_content_between {
+        box-sizing: border-box;
+        column-gap: $space_sm;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+        min-width: 100%;
+        width: max-content;
+      }
+
+      > .pb_flex_kit > .pb_flex_item_kit.toolbar_block {
+        flex: 0 0 auto;
+        min-width: 0;
+        overflow-x: visible;
+      }
+
+      > .pb_flex_kit > .pb_flex_item_kit:last-child {
+        flex: 0 0 auto;
+      }
+    }
+
+    // Vertical section separators use ::before/::after with height: 100%. With
+    // align-items: center on .toolbar_block the kit’s cross size was 0, so the
+    // lines disappeared (master only had gap on .toolbar_block, default stretch).
+    .pb_section_separator_kit.pb_section_separator_vertical {
+      align-self: center;
+      flex-shrink: 0;
+      height: $space_xl;
+    }
+
+    // React ToolbarDropdown — match master (fixed width trigger; prod playbook.cloud).
     .editor-dropdown-button {
       background: transparent;
       border: none;
@@ -93,23 +166,115 @@
       font-weight: $light;
       padding: ($space_xs - 1) 0px;
       width: $space_xl * 3;
+
       &:focus-visible {
         box-shadow: unset;
       }
     }
+
+    &.rte-rails-toolbar-layout {
+      max-width: 100%;
+      min-width: 0;
+
+      .rte-rails-toolbar-row {
+        align-items: center;
+        box-sizing: border-box;
+        column-gap: $space_sm;
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+        min-width: 100%;
+        padding: $space_xxs $space_sm;
+        width: max-content;
+      }
+
+      .rte-toolbar-left {
+        align-items: center;
+        display: flex;
+        flex: 0 0 auto;
+        flex-wrap: nowrap;
+        gap: $space_xs;
+        min-width: 0;
+        overflow-x: visible;
+      }
+
+      .rte-toolbar-right {
+        align-items: center;
+        display: flex;
+        flex: 0 0 auto;
+        gap: $space_xs;
+      }
+
+      // Align dropdown trigger with icon row (React wraps Popover + SectionSeparator in one flex line).
+      .pb_popover_reference_wrapper {
+        align-items: center;
+        display: inline-flex;
+      }
+
+      // Override master’s fixed-width React trigger: Rails block-style label + icons needs flexible width.
+      .editor-dropdown-button {
+        justify-content: flex-start;
+        letter-spacing: normal;
+        line-height: 1;
+        max-width: 100%;
+        min-height: unset;
+        padding: ($space_xs - 1) $space_xs;
+        text-align: left;
+        width: auto;
+
+        .pb_button_content {
+          align-items: center;
+          display: inline-flex;
+          line-height: 1;
+        }
+
+        .pb_button_content > .pb_flex_kit {
+          align-items: center;
+        }
+
+        .rte-block-style-trigger-inner {
+          align-items: center;
+        }
+
+        .rte-block-style-trigger-icon,
+        .rte-block-style-chevron {
+          display: inline-flex;
+          flex-shrink: 0;
+          line-height: 0;
+
+          .pb_icon_kit {
+            align-items: center;
+            display: flex;
+            line-height: 0;
+          }
+
+          svg {
+            display: block;
+          }
+        }
+
+        .rte-block-style-trigger-label {
+          align-items: center;
+          display: inline-flex;
+          line-height: 1.2;
+        }
+
+        &:focus-visible {
+          box-shadow: unset;
+        }
+      }
+    }
   }
 
+  // TipTap content — match master (prod playbook React tab).
   .ProseMirror {
     background: $white;
-    border: 1px solid $border_light;
+    border: 1px solid $input_border_default;
     border-radius: $border_rad_heaviest;
     height: 100%;
-    padding: 1rem 1.5rem 1.5rem 1.5rem;
     line-height: $lh_loose;
+    padding: 1rem 1.5rem 1.5rem 1.5rem;
     @include transition_default;
-    :first-child {
-      margin-top: 0;
-    }
 
     h4,
     h5,
@@ -161,7 +326,30 @@
     ul {
       @include preview_tiptap_ul;
     }
+
+    // After heading mixins: first block should not pick up extra top margin (wins over `p { margin-top: 1rem }`).
+    > :first-child {
+      margin-top: 0;
+    }
   }
+
+  // Toolbar + editor stack: toolbar keeps its border; editor has no top stroke (classic layout).
+  // Avoid relying on a wrapper-only frame — partial deploys then looked “borderless” because
+  // ProseMirror had been forced to border: none.
+  .pb_rich_text_editor_advanced_container.toolbar-active {
+    .ProseMirror {
+      border-top: none;
+      border-top-left-radius: initial;
+      border-top-right-radius: initial;
+    }
+  }
+}
+
+// Rails-only: outer kit sets `data-pb-rte-tiptap` — roomier padding + wrapping for vanilla TipTap in forms/dialogs.
+[data-pb-rte-tiptap="true"] .pb_rich_text_editor_kit .ProseMirror {
+  overflow-wrap: anywhere;
+  padding: 1.25rem 1.5rem 1.5rem 1.5rem;
+  word-break: break-word;
 }
 
 .pb_tiptap_toolbar_dropdown_list_item {
@@ -188,20 +376,51 @@
     }
   }
 }
-.pb_rich_text_editor_advanced_container {
+
+// Rails RTE: block-style menu uses Nav (popover) instead of React NavItem class hook.
+.pb_rich_text_editor_kit .pb_popover_tooltip .pb_nav_list_item_link.is-active {
+  background-color: $bg_light;
+  border-radius: unset !important;
+  color: $primary;
+
+  .pb_nav_list_item_text,
+  .pb_nav_list_item_icon_left {
+    color: $primary !important;
+  }
+}
+
+.pb_rich_text_editor_kit .pb_popover_tooltip .pb_nav_list_kit_item:hover .pb_nav_list_item_link:not(.is-active) {
+  background-color: $neutral_subtle;
+  border-radius: unset !important;
+
+  .pb_nav_list_item_text,
+  .pb_nav_list_item_icon_left {
+    background-color: unset;
+    color: $text_lt_light !important;
+  }
+}
+
+// No toolbar: ring the whole control.
+.pb_rich_text_editor_advanced_container:not(.toolbar-active) {
   transition: box-shadow 0.3s ease-in-out, border-radius 0.3s ease-in-out;
   &:focus-visible,
   &:focus-within {
-    outline: unset;
-    box-shadow: 0 0 0 1px $primary;
     border-radius: $border_rad_heaviest;
+    box-shadow: 0 0 0 1px $input_border_state;
+    outline: unset;
     transition: box-shadow 0.3s ease-in-out, border-radius 0.3s ease-in-out;
   }
-  &.toolbar-active {
-    .ProseMirror { 
-      border-top: none;
-      border-top-left-radius: initial;
-      border-top-right-radius: initial;
+}
+
+// Toolbar + editor: use border color (not an outer box-shadow) so the bottom isn’t doubled.
+.pb_rich_text_editor_advanced_container.toolbar-active {
+  &:focus-within {
+    .toolbar {
+      border-color: $input_border_state;
+    }
+
+    .ProseMirror {
+      border-color: $input_border_state;
     }
   }
 }

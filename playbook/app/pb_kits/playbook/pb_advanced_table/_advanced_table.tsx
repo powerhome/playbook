@@ -31,18 +31,18 @@ type FullscreenControls = {
 type AdvancedTableProps = {
   aria?: { [key: string]: string }
   actions?: React.ReactNode[] | React.ReactNode
+  cascadeCollapse?: boolean
   children?: React.ReactNode | React.ReactNode[]
   className?: string
   columnDefinitions: GenericObject[]
   columnGroupBorderColor?: "text_lt_default" | "text_lt_light" | "text_lt_lighter" | "text_dk_default" | "text_dk_light" | "text_dk_lighter"
   columnVisibilityControl?: GenericObject
-  customSort?:boolean;
-  dark?: boolean
+  customSort?: boolean
   data?: { [key: string]: string }
   enableToggleExpansion?: "all" | "header" | "none"
   enableSortingRemoval?: boolean
   expandedControl?: GenericObject
-  expandByDepth?: { [key: string]: string | number }
+  expandByDepth?: GenericObject[]
   onExpandByDepthClick?: (arg: number, arg1: any) => void
   htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string
@@ -65,6 +65,8 @@ type AdvancedTableProps = {
   showActionsBar?: boolean,
   persistToggleExpansionButton?: boolean,
   sortControl?: GenericObject
+  sortParentOnly?: boolean
+  stickyLeftColumn?: string[]
   tableData: GenericObject[]
   tableOptions?: GenericObject
   tableProps?: GenericObject
@@ -76,10 +78,23 @@ type AdvancedTableProps = {
   fullScreenControl?: (controls: FullscreenControls) => void
 } & GlobalProps;
 
+/**
+ * Subcomponent props (AdvancedTable.Header / AdvancedTable.Body). Must be a plain `type NameProps = { ... }` block—
+ * `yarn generate-ai-metadata` only parses that shape in this file (not Omit<> / intersection).
+ * Not used on the root component; playground routes these via propTargets.
+ */
+type _AdvancedTableSubkitSchemaProps = {
+  enableSorting?: boolean
+  sortIcon?: string | string[]
+  collapsibleTrail?: boolean
+  subRowHeaders?: string[]
+}
+
 const AdvancedTable = (props: AdvancedTableProps) => {
   const {
     aria = {},
     actions,
+    cascadeCollapse = false,
     children,
     className,
     columnDefinitions,
@@ -112,6 +127,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
     selectableRows,
     persistToggleExpansionButton = false,
     sortControl,
+    sortParentOnly = false,
     stickyLeftColumn,
     tableData,
     tableOptions,
@@ -122,6 +138,8 @@ const AdvancedTable = (props: AdvancedTableProps) => {
     allowFullScreen = false,
     fullScreenControl,
   } = props;
+
+  const noTableCardContainer = tableProps?.container === false;
 
   // Component refs
   const tableWrapperRef = useRef<HTMLDivElement>(null);
@@ -157,7 +175,8 @@ const AdvancedTable = (props: AdvancedTableProps) => {
     columnVisibilityControl,
     pinnedRows,
     rowStyling,
-    inlineRowLoading
+    inlineRowLoading,
+    sortParentOnly
   });
 
   // Initialize table actions
@@ -173,7 +192,8 @@ const AdvancedTable = (props: AdvancedTableProps) => {
     onRowSelectionChange,
     inlineRowLoading,
     localPagination,
-    setLocalPagination
+    setLocalPagination,
+    cascadeCollapse
   });
 
   // Set table row count for loading state
@@ -275,6 +295,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
       'hidden-action-bar': (selectableRows || columnVisibilityControl) && !isActionBarVisible,
     },
     {'advanced-table-sticky-left-columns': stickyLeftColumn && stickyLeftColumn.length > 0},
+    { 'advanced-table-no-table-container': noTableCardContainer },
     columnGroupBorderColor ? `column-group-border-${columnGroupBorderColor}` : '',
     scrollBarNone ? 'advanced-table-hide-scrollbar' : '',
     globalProps(props),
@@ -339,6 +360,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
       >
         {renderFullscreenHeader()}
         <AdvancedTableProvider
+            cascadeCollapse={cascadeCollapse}
             columnDefinitions={columnDefinitions}
             columnGroupBorderColor={columnGroupBorderColor}
             columnVisibilityControl={columnVisibilityControl}

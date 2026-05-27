@@ -12,6 +12,7 @@ interface UseTableActionsProps {
   inlineRowLoading?: boolean;
   localPagination?: { pageIndex: number; pageSize: number };
   setLocalPagination?: (pagination: { pageIndex: number; pageSize: number }) => void;
+  cascadeCollapse?: boolean;
 }
 
 export function useTableActions({
@@ -22,7 +23,8 @@ export function useTableActions({
   onRowSelectionChange,
   inlineRowLoading = false,
   localPagination,
-  setLocalPagination
+  setLocalPagination,
+  cascadeCollapse = false
 }: UseTableActionsProps) {
 
   // State to achieve 1 second delay before fetching more rows
@@ -32,15 +34,25 @@ export function useTableActions({
   // Handle expand/collapse
   const handleExpandOrCollapse = useCallback(async (row: Row<GenericObject>) => {
     if (onToggleExpansionClick) onToggleExpansionClick(row)
-      const updatedExpandedState = await updateExpandAndCollapseState(
-        table.getRowModel(),
-        expanded,
-        row?.parentId,
-        undefined
-      )
 
-      setExpanded(updatedExpandedState)
-  }, [expanded, setExpanded, onToggleExpansionClick, table]);
+    const anyTopLevelExpanded = table.getRowModel().rows.some((r: Row<GenericObject>) => r.getIsExpanded())
+    const isHeaderCollapseAll = row == null && anyTopLevelExpanded
+
+    if (cascadeCollapse && isHeaderCollapseAll) {
+      setExpanded({})
+      return
+    }
+
+    const updatedExpandedState = await updateExpandAndCollapseState(
+      table.getRowModel(),
+      expanded,
+      row?.parentId,
+      undefined,
+      cascadeCollapse
+    )
+
+    setExpanded(updatedExpandedState)
+  }, [expanded, setExpanded, onToggleExpansionClick, table, cascadeCollapse]);
 
   // Handle pagination
   const onPageChange = useCallback((page: number) => {

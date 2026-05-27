@@ -1,0 +1,83 @@
+{
+  "$schema": "https://playbook.powerapp.cloud/schemas/kit-schema.json",
+  "name": "SectionSeparator",
+  "description": "SectionSeparator component",
+  "platforms": [
+    "react",
+    "rails"
+  ],
+  "props": {
+    "color": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "default",
+        "primary"
+      ],
+      "default": "default"
+    },
+    "dark": {
+      "type": "boolean",
+      "platforms": [
+        "react"
+      ]
+    },
+    "lineStyle": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "solid",
+        "dashed"
+      ],
+      "default": "solid"
+    },
+    "orientation": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "horizontal",
+        "vertical"
+      ],
+      "default": "horizontal"
+    },
+    "text": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "variant": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "card",
+        "background"
+      ],
+      "default": "card"
+    }
+  },
+  "globalProps": true,
+  "usage": {
+    "react": {
+      "import": "import { SectionSeparator } from 'playbook-ui'",
+      "example": "<SectionSeparator color=\"default\" lineStyle=\"solid\"></SectionSeparator>"
+    },
+    "rails": {
+      "import": null,
+      "example": "<%= pb_rails(\"section_separator\", props: { color: \"default\", line_style: \"solid\" }) %>"
+    }
+  }
+}

@@ -92,7 +92,8 @@ module Playbook
 
       def classname
         default_margin_bottom = margin_bottom.present? ? "" : " mb_sm"
-        generate_classname("pb_date_picker_kit") + default_margin_bottom
+        inline_class = inline ? " inline-date-picker" : ""
+        generate_classname("pb_date_picker_kit") + default_margin_bottom + inline_class
       end
 
       def date_picker_config
@@ -136,6 +137,7 @@ module Playbook
         class_string = "cal_icon_wrapper"
         class_string += " dark" if dark
         class_string += " no_label_shift" if hide_label
+        class_string += " disabled" if disable_input
         class_string += error_class
         class_string
       end

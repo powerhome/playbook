@@ -1,3 +1,5 @@
-<%= pb_content_tag(object.tag) do %>
+<%= pb_content_tag(object.tag, {
+  "data-pb-drag-container": object.container.presence
+}) do %>
     <%= content.presence %>
   <% end %>

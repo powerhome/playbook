@@ -4,7 +4,7 @@ import Icon from "../../pb_icon/_icon"
 import Title from "../../pb_title/_title"
 import BreadCrumbItem from '../_bread_crumb_item'
 
-const Link = (props) => <BreadCrumbItem {...props} />
+const LinkSection = (props) => <BreadCrumbItem {...props} />
 const BreadCrumbsDefault = (props) => {
   return (
     <BreadCrumbs
@@ -35,7 +35,7 @@ const BreadCrumbsDefault = (props) => {
           size="1x"
           {...props}
       />
-      <Link
+      <LinkSection
           {...props}
           href="/users"
       >
@@ -46,20 +46,20 @@ const BreadCrumbsDefault = (props) => {
             text="Users"
             {...props}
         />
-      </Link>
+      </LinkSection>
       <Icon
           icon="user"
           size="1x"
           {...props}
       />
-      <Link {...props}>
+      <LinkSection {...props}>
         <Title
             size="4"
             tag="span"
             text="User"
             {...props}
         />
-      </Link>
+      </LinkSection>
     </BreadCrumbs>
   )
 }

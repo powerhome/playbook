@@ -5,28 +5,36 @@
   position: absolute;
   top: $space_md + 2;
   right: 0;
-  border-left: 1px solid $border_light;
+  border-left: 1px solid $input_border_default;
   width: $space_xl + $space_xs;
   height: $space_xl + 5;
   display: flex;
   flex-direction: column;
   justify-content: center;
   padding-left: $space_sm - 1;
-  color: $text_lt_light;
+  color: $input_text_default;
   @media (hover: hover) {
     &:hover{
       background-color: rgba($focus_input_light,$opacity_5);
     }
   }
   &.dark {
-    color: $white;
-    border-color: $border_dark;
+    color: $input_text_default_dark;
+    border-left: 1px solid $input_border_default_dark;
   }
   &.no_label_shift {
     top: 0;
   }
   &.error {
-    border-left-color: $error;
+    border-left: 1px solid $input_border_error;
+  }
+  &.disabled {
+    border-left: 1px solid $input_border_disabled;
+    color: $input_text_disabled;
+  }
+  &.dark.disabled {
+    border-left: 1px solid $input_border_disabled_dark;
+    color: $input_text_disabled_dark;
   }
 }
 .cal_icon {

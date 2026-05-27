@@ -1,0 +1,66 @@
+{
+  "$schema": "https://playbook.powerapp.cloud/schemas/kit-schema.json",
+  "name": "ProgressPills",
+  "description": "ProgressPills component",
+  "platforms": [
+    "react",
+    "rails"
+  ],
+  "props": {
+    "active": {
+      "type": "number",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": 0
+    },
+    "dark": {
+      "type": "boolean",
+      "platforms": [
+        "react"
+      ]
+    },
+    "fullWidthPill": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "steps": {
+      "type": "number",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": 3
+    },
+    "title": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "value": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    }
+  },
+  "globalProps": true,
+  "usage": {
+    "react": {
+      "import": "import { ProgressPills } from 'playbook-ui'",
+      "example": "<ProgressPills></ProgressPills>"
+    },
+    "rails": {
+      "import": null,
+      "example": "<%= pb_rails(\"progress_pills\", props: { text: \"Example\" }) %>"
+    }
+  }
+}

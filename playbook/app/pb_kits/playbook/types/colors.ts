@@ -33,8 +33,8 @@ export type FocusInputColors = 'focus_input_light' | 'focus_input_dark' | 'focus
 export type StatusTextColors = 'success' | 'success_sm' | 'warning' | 'error' | 'info' | 'neutral' | 'primary'
 
 /* Accessible color token types — from tokens/_colors_accessible.scss */
-export type AccessibleTextColors = 'text_default' | 'text_light' | 'text_lighter' | 'text_success' | 'text_error' | 'text_link' |
-    'text_default_dark' | 'text_light_dark' | 'text_lighter_dark' | 'text_success_dark' | 'text_error_dark' | 'text_link_dark'
+export type AccessibleTextColors = 'text_default' | 'text_light' | 'text_lighter' | 'text_success' | 'text_error' | 'text_link' | 'text_disabled' |
+    'text_default_dark' | 'text_light_dark' | 'text_lighter_dark' | 'text_success_dark' | 'text_error_dark' | 'text_link_dark' | 'text_disabled_dark'
 export type AccessibleInputTextColors = 'input_text_default' | 'input_text_active' | 'input_text_disabled' | 'input_text_error' |
     'input_text_default_dark' | 'input_text_state_active' | 'input_text_disabled_dark' | 'input_text_error_dark'
 export type AccessibleInputBackgroundColors = 'input_background_default' | 'input_background_state' | 'input_background_disabled' |

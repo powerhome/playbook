@@ -1,0 +1,57 @@
+{
+  "$schema": "https://playbook.powerapp.cloud/schemas/kit-schema.json",
+  "name": "Timeline",
+  "description": "Timeline component",
+  "platforms": [
+    "react",
+    "rails"
+  ],
+  "props": {
+    "orientation": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "vertical",
+        "horizontal"
+      ],
+      "default": "horizontal"
+    },
+    "showDate": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "itemGap": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "xs",
+        "sm",
+        "md",
+        "lg",
+        "none"
+      ],
+      "default": "none"
+    }
+  },
+  "globalProps": true,
+  "usage": {
+    "react": {
+      "import": "import { Timeline } from 'playbook-ui'",
+      "example": "<Timeline orientation=\"vertical\" itemGap=\"xs\"></Timeline>"
+    },
+    "rails": {
+      "import": null,
+      "example": "<%= pb_rails(\"timeline\", props: { orientation: \"vertical\", item_gap: \"xs\" }) %>"
+    }
+  }
+}

@@ -21,6 +21,8 @@ module Playbook
                       default: nil
       prop :auto_close, type: Playbook::Props::Number
       prop :icon, type: Playbook::Props::String
+      prop :nav_margin_top, type: Playbook::Props::Boolean,
+                            default: false
 
       def show_text?
         text.present?
@@ -46,6 +48,10 @@ module Playbook
         Hash(prop(:data)).merge(auto_close_attribute)
       end
 
+      def nav_margin_top_class
+        nav_margin_top.present? ? " nav_margin_top" : ""
+      end
+
       def icon_value
         icon || case status
                 when "success"
@@ -65,7 +71,7 @@ module Playbook
 
       def classname
         default_z_index = z_index.present? ? "" : " z_index_max"
-        generate_classname("pb_fixed_confirmation_toast_kit", status, multi_line_class) + close_class + position_class + icon_class + default_z_index
+        generate_classname("pb_fixed_confirmation_toast_kit", status, multi_line_class) + close_class + position_class + icon_class + nav_margin_top_class + default_z_index
       end
     end
   end

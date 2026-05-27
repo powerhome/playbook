@@ -16,6 +16,7 @@ import { SortIconButton } from "./SortIconButton"
 import { ToggleIconButton } from "./ToggleIconButton"
 import { displayIcon } from "../Utilities/IconHelpers"
 import { findColumnDefByAccessor } from "../Utilities/ColumnStylingHelper"
+import { playbookColumnLayoutStylesFromMeta } from "../Utilities/ColumnLayoutHelper"
 import { updateExpandAndCollapseState } from "../Utilities/ExpansionControlHelpers"
 
 import { isChrome } from "../Utilities/BrowserCheck"
@@ -63,6 +64,7 @@ export const TableHeaderCell = ({
     stickyLeftColumn,
     inlineRowLoading,
     isActionBarVisible,
+    cascadeCollapse,
   } = useContext(AdvancedTableContext);
 
   type justifyTypes = "none" | "center" | "start" | "end" | "between" | "around" | "evenly"
@@ -182,7 +184,8 @@ const isToggleExpansionEnabled =
       table.getRowModel(),
       expanded,
       undefined,
-      depth
+      depth,
+      cascadeCollapse
     )
     setExpanded(updated)
   }
@@ -196,6 +199,7 @@ const isToggleExpansionEnabled =
         id={cellId}
         key={`${header?.id}-header`}
         style={{
+          ...playbookColumnLayoutStylesFromMeta(header?.column?.columnDef),
           backgroundColor: headerBackgroundColor,
           color: headerFontColor,
           left: isPinnedLeft

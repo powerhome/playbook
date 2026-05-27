@@ -6,41 +6,35 @@ module Playbook
       base.prop :display
     end
 
+    DISPLAY_VALUES = %w[block inline_block inline flex inline_flex none grid].freeze
+    DISPLAY_SIZE_VALUES = %w[xs sm md lg xl].freeze
+
     def display_props
-      selected_props = display_options.keys.select { |sk| try(sk) }
-      responsive = selected_props.present? && try(:display).is_a?(::Hash)
-      css = ""
-      if responsive
-        display_value = send(:display)
+      value = display
+      return nil unless value
 
-        # Handle default value separately (generates base class without size prefix)
-        css += "display_#{display_value[:default]} " if display_value.key?(:default) && display_values.include?(display_value[:default].to_s)
-
-        # Handle responsive sizes (generates classes with size prefix)
-        display_value.each do |key, value|
-          css += "display_#{key}_#{value} " if display_size_values.include?(key.to_s) && display_values.include?(value.to_s)
+      if value.is_a?(::Hash)
+        css = +""
+        css << "display_#{value[:default]} " if value.key?(:default) && DISPLAY_VALUES.include?(value[:default].to_s)
+        value.each do |key, val|
+          css << "display_#{key}_#{val} " if DISPLAY_SIZE_VALUES.include?(key.to_s) && DISPLAY_VALUES.include?(val.to_s)
         end
-      else
-        selected_props.each do |k|
-          display_value = send(k)
-          css += "display_#{display_value}" if display_values.include?(display_value)
-        end
+        css.strip unless css.empty?
+      elsif DISPLAY_VALUES.include?(value)
+        "display_#{value}"
       end
-      css unless css.blank?
     end
 
     def display_options
-      {
-        display: "display",
-      }
+      { display: "display" }
     end
 
     def display_size_values
-      %w[xs sm md lg xl]
+      DISPLAY_SIZE_VALUES
     end
 
     def display_values
-      %w[block inline_block inline flex inline_flex none grid]
+      DISPLAY_VALUES
     end
   end
 end

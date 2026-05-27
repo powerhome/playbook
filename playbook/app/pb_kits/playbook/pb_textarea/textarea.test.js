@@ -149,7 +149,7 @@ describe("TextArea Kit Props", () => {
     )
 
     const kit = screen.getByTestId(testId)
-    const error = kit.querySelector(".pb_caption_kit_md")
+    const error = kit.querySelector(".pb_caption_kit_md_lighter")
 
     expect(error.innerHTML).toBe("Test Label")
   })
@@ -281,5 +281,138 @@ describe("Textarea Emoji Mask", () => {
 
     expect(label).toBeInTheDocument()
     expect(kit).toHaveTextContent('*')
+  })
+})
+
+describe("Textarea Input Options", () => {
+  test("should apply inputOptions.id to textarea element", () => {
+    render(<Textarea data={{ testid: testId }}
+        inputOptions={{ id: "custom-textarea-id" }}
+           />)
+
+    const kit = screen.getByTestId(testId)
+    const textarea = kit.querySelector("textarea")
+
+    expect(textarea).toHaveAttribute("id", "custom-textarea-id")
+  })
+
+  test("should apply id prop to container and inputOptions.id to textarea", () => {
+    render(
+      <Textarea data={{ testid: testId }}
+          id="wrapper-id"
+          inputOptions={{ id: "textarea-id" }}
+      />
+    )
+
+    const kit = screen.getByTestId(testId)
+    const textarea = kit.querySelector("textarea")
+
+    expect(kit).toHaveAttribute("id", "wrapper-id")
+    expect(textarea).toHaveAttribute("id", "textarea-id")
+  })
+
+  test("should apply id prop to container and derived id to textarea when only id passed", () => {
+    render(
+      <Textarea data={{ testid: testId }}
+          id="wrapper-id"
+          label="Label"
+      />
+    )
+
+    const kit = screen.getByTestId(testId)
+    const textarea = kit.querySelector("textarea")
+    const label = kit.querySelector("label")
+
+    expect(kit).toHaveAttribute("id", "wrapper-id")
+    expect(textarea).toHaveAttribute("id", "wrapper-id-input")
+    expect(label).toHaveAttribute("for", "wrapper-id-input")
+  })
+
+  test("should apply inputOptions.data as data-* attributes", () => {
+    render(
+      <Textarea
+          data={{ testid: testId }}
+          inputOptions={{
+          data: { controller: "textarea", action: "focus->handleFocus" }
+        }}
+      />
+    )
+
+    const kit = screen.getByTestId(testId)
+    const textarea = kit.querySelector("textarea")
+
+    expect(textarea).toHaveAttribute("data-controller", "textarea")
+    expect(textarea).toHaveAttribute("data-action", "focus->handleFocus")
+  })
+
+  test("should apply multiple inputOptions attributes to textarea", () => {
+    render(
+      <Textarea
+          data={{ testid: testId }}
+          inputOptions={{
+          id: "textarea-id",
+          className: "custom-class",
+          data: { controller: "textarea" }
+        }}
+      />
+    )
+
+    const kit = screen.getByTestId(testId)
+    const textarea = kit.querySelector("textarea")
+
+    expect(textarea).toHaveAttribute("id", "textarea-id")
+    expect(textarea).toHaveAttribute("class", "custom-class")
+    expect(textarea).toHaveAttribute("data-controller", "textarea")
+  })
+
+  test("should merge aria-describedby from error and inputOptions", () => {
+    render(
+      <Textarea
+          data={{ testid: testId }}
+          error="This is an error"
+          inputOptions={{
+            id: "describedby-textarea",
+            "aria-describedby": "custom-help-text"
+          }}
+      />
+    )
+
+    const kit = screen.getByTestId(testId)
+    const textarea = kit.querySelector("textarea")
+
+    // Should contain both the error ID and custom ID
+    expect(textarea).toHaveAttribute("aria-describedby", expect.stringContaining("-error"))
+    expect(textarea).toHaveAttribute(
+      "aria-describedby",
+      expect.stringContaining("custom-help-text")
+    )
+  })
+
+  test("should allow inputOptions aria-invalid to override error state", () => {
+    render(
+      <Textarea
+          data={{ testid: testId }}
+          error="This is an error"
+          inputOptions={{
+          "aria-invalid": false
+        }}
+      />
+    )
+
+    const kit = screen.getByTestId(testId)
+    const textarea = kit.querySelector("textarea")
+
+    expect(textarea).toHaveAttribute("aria-invalid", "false")
+  })
+
+  test("should default aria-invalid to error state when not provided in inputOptions", () => {
+    render(<Textarea data={{ testid: testId }}
+        error="This is an error"
+           />)
+
+    const kit = screen.getByTestId(testId)
+    const textarea = kit.querySelector("textarea")
+
+    expect(textarea).toHaveAttribute("aria-invalid", "true")
   })
 })

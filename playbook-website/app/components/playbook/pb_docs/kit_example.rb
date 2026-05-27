@@ -48,51 +48,17 @@ module Playbook
         read_kit_file("", "_#{example_key}.tsx")
       end
 
-      def available_props
-        target_kit_path = ::Playbook.kit_path(kit, "", "_#{example_key}.tsx")
-        if File.exist?(cached_kit_target)
-          puts "AvailableProps: Using cached JSON for #{target_kit_path}"
-          return cached_kit_json
-        end
-
-        exec_in_fork do
-          `node scripts/react-docgen.mjs #{target_kit_path}`
-        end
-      end
-
       def full_screen
         full_screen_kits = %w[multi_level_select]
         full_screen_kits.include?(kit)
       end
 
+      def available_props
+        schema_path = Playbook::Engine.root.join("app/pb_kits/playbook/pb_#{kit}/kit.schema.json")
+        File.exist?(schema_path) ? File.read(schema_path) : "{}"
+      end
+
     private
-
-      def exec_in_fork
-        read, write = IO.pipe
-
-        pid = fork do
-          read.close
-          result = yield
-          write.write(result)
-          write.close
-          exit!(0)
-        end
-
-        write.close
-        result = read.read
-        read.close
-        Process.wait(pid)
-
-        result
-      end
-
-      def cached_kit_json
-        File.read(cached_kit_target)
-      end
-
-      def cached_kit_target
-        Rails.root.join("public", "cache", "playbook", "_#{example_key}.json")
-      end
 
       def sanitize_code(stringified_code)
         # Chart components that should import from playbook-ui/charts
@@ -104,7 +70,6 @@ module Playbook
                                            .gsub("'../..'", "'playbook-ui'")
                                            .gsub(%r{from "../.*}, "from 'playbook-ui'")
                                            .gsub(%r{from '../.*}, "from 'playbook-ui'")
-                                           .gsub("'../../../../../../playbook-website/app/javascript/scripts/custom-icons'", "'your-directory/custom-icons.js'")
         stringified_code = stringified_code.gsub(/import\s+(\w+)\s+from\s+['"]playbook-ui['"]/) do
           "import { #{::Regexp.last_match(1)} } from 'playbook-ui'"
         end

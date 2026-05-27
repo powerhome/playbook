@@ -1,0 +1,52 @@
+{
+  "$schema": "https://playbook.powerapp.cloud/schemas/kit-schema.json",
+  "name": "LabelPill",
+  "description": "LabelPill component",
+  "platforms": [
+    "react",
+    "rails"
+  ],
+  "props": {
+    "label": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "pillValue": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "variant": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "error",
+        "info",
+        "neutral",
+        "primary",
+        "success",
+        "warning"
+      ],
+      "default": "neutral"
+    }
+  },
+  "globalProps": true,
+  "usage": {
+    "react": {
+      "import": "import { LabelPill } from 'playbook-ui'",
+      "example": "<LabelPill variant=\"error\"></LabelPill>"
+    },
+    "rails": {
+      "import": null,
+      "example": "<%= pb_rails(\"label_pill\", props: { variant: \"error\" }) %>"
+    }
+  }
+}

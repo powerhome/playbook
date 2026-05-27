@@ -11,6 +11,7 @@ examples:
   - pb_circle_chart_with_title: With Title
   - pb_circle_chart_inner_sizes: Inner Circle Size Options
   - pb_circle_chart_custom_tooltip: Tooltip Customization
+  - pb_circle_chart_centered_data: Centered Data
 
   
   react:
@@ -25,5 +26,6 @@ examples:
   - pb_circle_chart_with_title: With Title
   - pb_circle_chart_inner_sizes: Inner Circle Size Options
   - pb_circle_chart_custom_tooltip: Tooltip Customization
+  - pb_circle_chart_centered_data: Centered Data
   
   

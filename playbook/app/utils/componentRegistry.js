@@ -27,11 +27,31 @@ class ComponentRegistry {
     return this.components.get(name)
   }
 
-  // Mount all PB components on the page
-mountComponents(root = document) {
-    const nodes = root.querySelectorAll('[data-pb-react-component]')
-    nodes.forEach((el) => {
+  // Mount PB components within a given root element (root itself + descendants).
+  // This is intentionally scoped so callers (MutationObserver, Turbo frames) can mount only what changed.
+  mountComponents(root = document) {
+    if (!root) return
+
+    const mountPoints = []
+
+    // Include root itself if it's a mount point
+    if (root.nodeType === 1 && root.matches?.('[data-pb-react-component]')) {
+      mountPoints.push(root)
+    }
+
+    // Include descendants
+    const nodes = root.querySelectorAll?.('[data-pb-react-component]')
+    if (nodes && nodes.length) mountPoints.push(...nodes)
+
+    mountPoints.forEach((el) => {
+      // If marked mounted but registry lost track (edge case), allow re-mount by clearing marker.
+      if (el.getAttribute('data-pb-react-mounted') === 'true' && !this.mountedComponents.has(el)) {
+        el.removeAttribute('data-pb-react-mounted')
+      }
+
+      // Skip if already mounted
       if (this.mountedComponents.has(el)) return
+      if (el.getAttribute('data-pb-react-mounted') === 'true') return
 
       const name = el.getAttribute('data-pb-react-component')
       if (!name) return
@@ -64,10 +84,15 @@ mountComponents(root = document) {
   }
 
   _tryRender(el, Comp, entry) {
-    if (!el.isConnected) return
+    if (!el || !el.isConnected) return
+
     try {
       const props = this.extractProps(el)
       ReactDOM.render(React.createElement(Comp, props), el)
+
+      // Mark as mounted for observer + moved-node stability
+      el.setAttribute('data-pb-react-mounted', 'true')
+
       this.mountedComponents.add(el)
       entry.retries = 0
     } catch (err) {
@@ -101,15 +126,22 @@ mountComponents(root = document) {
   }
 
   _safeUnmount(el) {
-    if (!el || !el.isConnected) {
-      this.mountedComponents.delete(el)
-      return
-    }
+    if (!el) return
+
     try {
+      // IMPORTANT:
+      // Always attempt to unmount, even if the node is detached.
+      // During DOM swaps the mount point can be disconnected skipping unmount leaks
+      // effects/portals/listeners and causes intermittent breakage, especially when using Turbo
       ReactDOM.unmountComponentAtNode(el)
     } catch (err) {
       // eslint-disable-next-line no-console
       console.warn('[PB] Unmount warning:', err)
+    }
+
+    // Clean marker + tracking regardless
+    try { el.removeAttribute?.('data-pb-react-mounted') } catch (_) {
+      // Ignore errors if element is already detached or invalid
     }
     this.mountedComponents.delete(el)
   }
@@ -118,8 +150,12 @@ mountComponents(root = document) {
     const props = {}
     const blob = el.getAttribute('data-pb-react-props')
     if (blob) {
-      try { Object.assign(props, JSON.parse(blob)) }
-      catch (e) { console.warn('[PB] Failed to parse data-pb-react-props JSON:', e) }
+      try {
+        Object.assign(props, JSON.parse(blob))
+      } catch (e) {
+        // eslint-disable-next-line no-console
+        console.warn('[PB] Failed to parse data-pb-react-props JSON:', e)
+      }
     }
     Array.from(el.attributes).forEach((attr) => {
       const name = attr.name

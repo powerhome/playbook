@@ -1,0 +1,138 @@
+{
+  "$schema": "https://playbook.powerapp.cloud/schemas/kit-schema.json",
+  "name": "FormPill",
+  "description": "FormPill component",
+  "platforms": [
+    "react",
+    "rails"
+  ],
+  "props": {
+    "text": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "name": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "onClick": {
+      "type": "ReactNode",
+      "platforms": [
+        "react"
+      ]
+    },
+    "avatar": {
+      "type": "boolean",
+      "platforms": [
+        "react"
+      ]
+    },
+    "avatarUrl": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "size": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "textTransform": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "none",
+        "lowercase"
+      ],
+      "default": "none"
+    },
+    "color": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "primary",
+        "neutral",
+        "success",
+        "warning",
+        "error",
+        "info",
+        "data_1",
+        "data_2",
+        "data_3",
+        "data_4",
+        "data_5",
+        "data_6",
+        "data_7",
+        "data_8",
+        "windows",
+        "siding",
+        "roofing",
+        "doors",
+        "gutters",
+        "solar",
+        "insulation",
+        "accessories"
+      ],
+      "default": "primary"
+    },
+    "tabIndex": {
+      "type": "number",
+      "platforms": [
+        "react"
+      ]
+    },
+    "icon": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "wrapped": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "closeProps": {
+      "type": "GenericObject",
+      "platforms": [
+        "react"
+      ]
+    },
+    "tabindex": {
+      "platforms": [
+        "rails"
+      ]
+    }
+  },
+  "globalProps": true,
+  "usage": {
+    "react": {
+      "import": "import { FormPill } from 'playbook-ui'",
+      "example": "<FormPill textTransform=\"none\" color=\"primary\"></FormPill>"
+    },
+    "rails": {
+      "import": null,
+      "example": "<%= pb_rails(\"form_pill\", props: { text_transform: \"none\", color: \"primary\" }) %>"
+    }
+  }
+}

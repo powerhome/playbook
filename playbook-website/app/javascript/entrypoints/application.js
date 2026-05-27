@@ -9,9 +9,6 @@ window.zxcvbn = zxcvbn
 import 'playbook-ui/dist/playbook-rails.js'
 import 'playbook-ui/dist/playbook-rails-charts.js'
 import '../../../../playbook/app/javascript/playbook-doc.js'
-import '@fortawesome/fontawesome-pro/js/fontawesome.min.js'
-import '@fortawesome/fontawesome-pro/js/regular.min.js'
-import '@fortawesome/fontawesome-pro/js/brands.min.js'
 
 import '../site_styles/main.scss'
 
@@ -33,6 +30,7 @@ import TokensExamples from 'components/GlobalPropsAndTokens/ExamplesPage/TokensE
 import AnchorJS from 'anchor-js'
 import { Website } from 'components/app'
 import { Turbo } from "@hotwired/turbo-rails"
+import IconsIndex from 'components/Icons/IconsIndex'
 
 Turbo.session.drive = false
 
@@ -56,7 +54,7 @@ Object.entries(icons).forEach(([key, value]) => {
 
 document.addEventListener('DOMContentLoaded', () => {
   const anchors = new AnchorJS()
-  anchors.add('.pb--kit-example > .pb_caption_kit_md:first-child')
+  anchors.add('.pb--kit-example > .pb_caption_kit_md_lighter:first-child')
   const propsTableAnchors = new AnchorJS()
   propsTableAnchors.options = {
     class: 'props-table-anchor',
@@ -78,4 +76,5 @@ ComponentRegistry.registerComponents({
   HomepageHero,
   Tokens,
   TokensExamples,
+  IconsIndex,
 })

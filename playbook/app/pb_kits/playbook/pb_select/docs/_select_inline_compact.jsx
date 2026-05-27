@@ -24,7 +24,7 @@ const SelectInlineCompact = (props) => {
           compact
           inline
           label="Favorite Food"
-          name="food"
+          name="food-inline-compact"
           options={options}
           {...props}
       />

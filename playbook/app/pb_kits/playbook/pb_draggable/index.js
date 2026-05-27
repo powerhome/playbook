@@ -2,7 +2,32 @@ import PbEnhancedElement from "../pb_enhanced_element";
 
 const DRAGGABLE_SELECTOR  = "[data-pb-draggable]";
 const DRAGGABLE_CONTAINER = ".pb_draggable_container";
+const DRAG_HANDLE_SELECTOR = ".pb_draggable_handle, .card_draggable_handle";
 const NEEDS_CLONE         = ["shadow", "outline", "line"];   // clone only for these types
+const DRAG_THRESHOLD_PX   = 5;
+
+const isTouchDragDevice = () => {
+  const hasTouch = "ontouchstart" in window;
+  const hasCoarsePointer =
+    typeof window.matchMedia === "function" &&
+    window.matchMedia("(hover: none) and (pointer: coarse)").matches;
+
+  return hasTouch || hasCoarsePointer;
+};
+
+const getDragIdFromElement = (element) => {
+  const item = element?.closest(".pb_draggable_item");
+  if (!item) return null;
+
+  return item.getAttribute("data-pb-drag-id") || item.id;
+};
+
+const getContainerFromElement = (element) => {
+  const container = element?.closest(DRAGGABLE_CONTAINER);
+  if (!container) return null;
+
+  return container.getAttribute("data-pb-drag-container") || container.id;
+};
 
 export default class PbDraggable extends PbEnhancedElement {
   static get selector() { return DRAGGABLE_SELECTOR; }
@@ -21,8 +46,15 @@ export default class PbDraggable extends PbEnhancedElement {
     this.hasMultipleContainers = false;
     this.dragZoneType  = "";
     this.dragZoneColor = "";
+    this.useTouchDrag = isTouchDragDevice();
+    this.touchCleanups = [];
 
-    document.addEventListener("DOMContentLoaded", () => this.bindEventListeners());
+    // If DOM is already loaded, bind immediately; otherwise wait for DOMContentLoaded
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", () => this.bindEventListeners());
+    } else {
+      this.bindEventListeners();
+    }
   }
 
   setState(newState) {
@@ -49,9 +81,14 @@ export default class PbDraggable extends PbEnhancedElement {
 
     this.element.querySelectorAll(".pb_draggable_item")
       .forEach(item => {
-        item.addEventListener("dragstart", this.handleDragStart.bind(this));
-        item.addEventListener("dragend",   this.handleDragEnd.bind(this));
-        item.addEventListener("dragenter", this.handleDragEnter.bind(this));
+        if (this.useTouchDrag) {
+          item.setAttribute("draggable", "false");
+          this.touchCleanups.push(this.bindTouchDragForItem(item));
+        } else {
+          item.addEventListener("dragstart", this.handleDragStart.bind(this));
+          item.addEventListener("dragend",   this.handleDragEnd.bind(this));
+          item.addEventListener("dragenter", this.handleDragEnter.bind(this));
+        }
       });
 
     containers.forEach(c => {
@@ -60,8 +97,118 @@ export default class PbDraggable extends PbEnhancedElement {
     });
   }
 
+  bindTouchDragForItem(item) {
+    const handle = item.querySelector(DRAG_HANDLE_SELECTOR);
+    const dragTarget = handle || item;
+    const state = {
+      active: false,
+      dragging: false,
+      startX: 0,
+      startY: 0,
+      lastTargetDragId: null,
+    };
+
+    const resetState = () => {
+      state.active = false;
+      state.dragging = false;
+      state.lastTargetDragId = null;
+      item.classList.remove("is_touch_active");
+    };
+
+    const pointerEventFromTouch = (touch, target) => ({
+      target,
+      clientX: touch.clientX,
+      clientY: touch.clientY,
+      preventDefault: () => undefined,
+      stopPropagation: () => undefined,
+    });
+
+    const onTouchStart = (event) => {
+      if (handle && !handle.contains(event.target)) return;
+
+      const touch = event.touches[0];
+      if (!touch) return;
+
+      state.active = true;
+      state.startX = touch.clientX;
+      state.startY = touch.clientY;
+      item.classList.add("is_touch_active");
+    };
+
+    const onTouchMove = (event) => {
+      if (!state.active) return;
+
+      const touch = event.touches[0];
+      if (!touch) return;
+
+      if (!state.dragging) {
+        const deltaX = touch.clientX - state.startX;
+        const deltaY = touch.clientY - state.startY;
+
+        if (Math.hypot(deltaX, deltaY) < DRAG_THRESHOLD_PX) return;
+
+        state.dragging = true;
+        this.handleDragStart(pointerEventFromTouch(touch, item));
+      }
+
+      event.preventDefault();
+
+      const elementBelow = document.elementFromPoint(touch.clientX, touch.clientY);
+      const targetItem = elementBelow?.closest(".pb_draggable_item");
+      const targetDragId = getDragIdFromElement(elementBelow);
+
+      if (targetItem && targetItem !== item && targetDragId !== state.lastTargetDragId) {
+        state.lastTargetDragId = targetDragId;
+        this.handleDragEnter(pointerEventFromTouch(touch, targetItem));
+      }
+
+      const targetContainer = getContainerFromElement(elementBelow);
+      if (targetContainer) {
+        const containerElement = elementBelow.closest(DRAGGABLE_CONTAINER);
+        if (containerElement) {
+          this.handleDragOver(pointerEventFromTouch(touch, containerElement));
+        }
+      }
+    };
+
+    const finishTouchDrag = (touch) => {
+      if (!state.active) return;
+
+      if (state.dragging && touch) {
+        const elementBelow = document.elementFromPoint(touch.clientX, touch.clientY);
+        const containerElement = elementBelow?.closest(DRAGGABLE_CONTAINER);
+
+        if (containerElement) {
+          this.handleDrop(pointerEventFromTouch(touch, containerElement));
+        }
+
+        this.handleDragEnd({ target: item });
+      }
+
+      resetState();
+    };
+
+    const onTouchEnd = (event) => finishTouchDrag(event.changedTouches[0]);
+    const onTouchCancel = (event) => finishTouchDrag(event.changedTouches[0]);
+
+    dragTarget.addEventListener("touchstart", onTouchStart, { passive: true });
+    dragTarget.addEventListener("touchmove", onTouchMove, { passive: false });
+    dragTarget.addEventListener("touchend", onTouchEnd, { passive: true });
+    dragTarget.addEventListener("touchcancel", onTouchCancel, { passive: true });
+
+    return () => {
+      dragTarget.removeEventListener("touchstart", onTouchStart);
+      dragTarget.removeEventListener("touchmove", onTouchMove);
+      dragTarget.removeEventListener("touchend", onTouchEnd);
+      dragTarget.removeEventListener("touchcancel", onTouchCancel);
+    };
+  }
+
   /* ---------------- DRAG START ---------------- */
   handleDragStart(event) {
+    const item = event.target.closest(".pb_draggable_item");
+    if (!item) return;
+
     // Needed to prevent images within draggable items from being independently draggable
     // Needed if using Image kit in draggable items
     if (event.target.tagName.toLowerCase() === "img") {
@@ -69,9 +216,9 @@ export default class PbDraggable extends PbEnhancedElement {
       return;
     }
 
-    const container    = event.target.closest(DRAGGABLE_CONTAINER);
-    this.draggedItem   = event.target;
-    this.draggedItemId = event.target.id;
+    const container    = item.closest(DRAGGABLE_CONTAINER);
+    this.draggedItem   = item;
+    this.draggedItemId = getDragIdFromElement(item);
     this.dragZoneType  = this.element.dataset.dropZoneType  || "";
     this.dragZoneColor = this.element.dataset.dropZoneColor || "";
 
@@ -117,7 +264,7 @@ export default class PbDraggable extends PbEnhancedElement {
     }
 
     if (this.dragZoneType !== "line") {
-      requestAnimationFrame(() => (event.target.style.opacity = "0.5"));
+      requestAnimationFrame(() => (item.style.opacity = "0.5"));
     }
   }
 

@@ -1,6 +1,6 @@
 import React from "react"
 import AdvancedTable from '../_advanced_table'
-import MOCK_DATA from "./advanced_table_mock_data_infinite_scroll.json"
+import INFINITE_SCROLL_MOCK_DATA from "./advanced_table_mock_data_infinite_scroll.json"
 
 const AdvancedTableInfiniteScroll = (props) => {
   const columnDefinitions = [
@@ -39,7 +39,7 @@ const AdvancedTableInfiniteScroll = (props) => {
     <div>
       <AdvancedTable
           columnDefinitions={columnDefinitions}
-          tableData={MOCK_DATA}
+          tableData={INFINITE_SCROLL_MOCK_DATA}
           virtualizedRows
           {...props}
       />

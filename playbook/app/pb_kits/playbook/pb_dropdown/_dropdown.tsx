@@ -441,6 +441,7 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
                 value={{
                     activeStyle,
                     autocomplete,
+                    blankSelection,
                     clearable,
                     dropdownContainerRef,
                     error,
@@ -479,6 +480,7 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
                     {requiredIndicator ? (
                       <Caption
                           className="pb_dropdown_kit_label"
+                          color="lighter"
                           dark={dark}
                           marginBottom="xs"
                       >
@@ -487,6 +489,7 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
                     ) : (
                       <Caption
                           className="pb_dropdown_kit_label"
+                          color="lighter"
                           dark={dark}
                           marginBottom="xs"
                           text={label}

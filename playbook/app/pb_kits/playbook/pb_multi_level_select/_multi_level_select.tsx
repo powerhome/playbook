@@ -15,7 +15,6 @@ import Body from "../pb_body/_body";
 import Caption from "../pb_caption/_caption";
 import MultiLevelSelectOptions from "./multi_level_select_options";
 import MultiLevelSelectContext from "./context";
-import colors from "../tokens/exports/_colors.module.scss"
 
 import {
   getAncestorsOfUnchecked,
@@ -52,6 +51,7 @@ type MultiLevelSelectProps = {
   treeData?: { [key: string]: string }[] | any;
   onChange?: (event: { target: { name?: string; value: any } }) => void;
   onSelect?: (prop: { [key: string]: any }) => void;
+  placeholder?: string;
   selectedIds?: string[] | any;
   variant?: "multi" | "single";
   wrapped?: boolean;
@@ -101,6 +101,7 @@ const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>(
       treeData,
       onChange = () => null,
       onSelect = () => null,
+      placeholder: placeholderText = "Start typing...",
       selectedIds,
       variant = "multi",
       wrapped,
@@ -180,6 +181,7 @@ const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>(
       parent_id: string | null = null,
       depth = 0,
       parentDisabled = false,
+      ancestorChecked = false
     ) => {
       if (!Array.isArray(treeData)) {
         return;
@@ -189,28 +191,36 @@ const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>(
         const isDisabled =
           item.disabled || (parentDisabled && !returnAllSelected);
 
+          const explicitlySelected = Boolean(
+            selectedIds && selectedIds?.length && selectedIds.includes(item.id)
+          );
+
+          const checked =
+          !isDisabled &&
+          (explicitlySelected || (ancestorChecked && !returnAllSelected && variant !== "single"))
+
         const newItem = {
           ...item,
-          checked: Boolean(
-            selectedIds && selectedIds.length && selectedIds.includes(item.id),
-          ),
+          checked: checked,
           parent_id,
           depth,
           disabled: isDisabled,
         };
         if (newItem.children && newItem.children.length > 0) {
-          const children =
-            item.checked && !returnAllSelected
-              ? modifyRecursive(item.children, true)
-              : item.children;
-          newItem.children = addCheckedAndParentProperty(
-            children,
-            selectedIds,
-            newItem.id,
-            depth + 1,
-            isDisabled,
-          );
-        }
+        // if this node is checked (by explicit selection or ancestor cascade),
+        // and we're in default, cascade to descendants
+        const cascadeToChildren =
+        checked && !returnAllSelected && variant !== "single"
+
+        newItem.children = addCheckedAndParentProperty(
+          newItem.children,
+          selectedIds,
+          newItem.id,
+          depth + 1,
+          isDisabled,
+          cascadeToChildren
+        )
+      }
         return newItem;
       });
     };
@@ -533,13 +543,15 @@ const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>(
           {requiredIndicator ? (
             <Caption
                 className="pb_multi_level_select_kit_label"
+                color="lighter"
                 marginBottom="xs"
             >
-              {label} <span style={{ color: `${colors.error}` }}>*</span>
+              {label} <span className="required_indicator">*</span>
             </Caption>
           ) : (
             <Caption
                 className="pb_multi_level_select_kit_label"
+                color="lighter"
                 marginBottom="xs"
                 text={label}
             />
@@ -665,7 +677,7 @@ const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>(
                       ? `${itemsSelectedLength()} ${
                           itemsSelectedLength() === 1 ? "item" : "items"
                         } selected`
-                      : "Start typing..."
+                      : placeholderText
                   }
                     required={required}
                     value={singleSelectedItem.value || filterItem}

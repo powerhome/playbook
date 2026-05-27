@@ -1,0 +1,64 @@
+{
+  "template": "<WeekdayStacked{{props}} />",
+  "propTargets": {},
+  "defaults": {
+    "align": "left",
+    "variant": "month_day",
+    "compact": false
+  },
+  "groups": [
+    {
+      "name": "Content",
+      "props": [
+        "date",
+        "variant",
+        "compact"
+      ]
+    },
+    {
+      "name": "Appearance",
+      "props": [
+        "align"
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default",
+      "props": {
+        "date": "2026-04-09T12:00:00.000Z"
+      }
+    },
+    {
+      "name": "Day only",
+      "props": {
+        "date": "2026-04-09T12:00:00.000Z",
+        "variant": "day_only"
+      }
+    },
+    {
+      "name": "Expanded",
+      "props": {
+        "date": "2026-04-09T12:00:00.000Z",
+        "variant": "expanded"
+      }
+    },
+    {
+      "name": "Compact weekday",
+      "props": {
+        "date": "2026-04-09T12:00:00.000Z",
+        "compact": true
+      }
+    },
+    {
+      "name": "Centered",
+      "props": {
+        "date": "2026-08-15T12:00:00.000Z",
+        "align": "center",
+        "variant": "month_day"
+      }
+    }
+  ],
+  "conditionals": {},
+  "hints": {}
+}

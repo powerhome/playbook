@@ -1,0 +1,101 @@
+{
+  "template": "<Image{{props}} />",
+  "propTargets": {},
+  "defaults": {},
+  "presets": [
+    {
+      "name": "Sample photo",
+      "props": {
+        "url": "https://unsplash.it/500/400",
+        "alt": "Sample image"
+      }
+    },
+    {
+      "name": "Small",
+      "props": {
+        "url": "https://unsplash.it/500/400",
+        "alt": "Small",
+        "size": "sm"
+      }
+    },
+    {
+      "name": "Medium",
+      "props": {
+        "url": "https://unsplash.it/500/400",
+        "alt": "Medium",
+        "size": "md"
+      }
+    },
+    {
+      "name": "Large",
+      "props": {
+        "url": "https://unsplash.it/500/400",
+        "alt": "Large",
+        "size": "lg"
+      }
+    },
+    {
+      "name": "Rounded",
+      "props": {
+        "url": "https://unsplash.it/500/400",
+        "alt": "Rounded",
+        "rounded": true,
+        "size": "md"
+      }
+    },
+    {
+      "name": "Blur transition",
+      "props": {
+        "url": "https://unsplash.it/500/400",
+        "alt": "Blur",
+        "transition": "blur",
+        "size": "md"
+      }
+    },
+    {
+      "name": "Scale transition",
+      "props": {
+        "url": "https://unsplash.it/500/400",
+        "alt": "Scale",
+        "transition": "scale",
+        "size": "md"
+      }
+    },
+    {
+      "name": "Fade transition",
+      "props": {
+        "url": "https://unsplash.it/500/400",
+        "alt": "Fade",
+        "transition": "fade",
+        "size": "md"
+      }
+    }
+  ],
+  "conditionals": {},
+  "hints": {
+    "lazyload": {
+      "when": {
+        "url": "https://unsplash.it/500/400"
+      },
+      "message": "The kit uses lazyload classes; url is applied as src and data-src.",
+      "type": "info"
+    }
+  },
+  "groups": [
+    {
+      "name": "Content",
+      "props": [
+        "url",
+        "alt"
+      ]
+    },
+    {
+      "name": "Appearance",
+      "props": [
+        "size",
+        "rounded",
+        "transition"
+      ]
+    }
+  ]
+}

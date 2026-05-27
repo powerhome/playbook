@@ -1,0 +1,123 @@
+{
+  "$schema": "https://playbook.powerapp.cloud/schemas/kit-schema.json",
+  "name": "Layout",
+  "description": "Layout component",
+  "platforms": [
+    "react",
+    "rails"
+  ],
+  "props": {
+    "collapse": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "xs",
+        "sm",
+        "md",
+        "lg",
+        "xl"
+      ],
+      "default": "xs"
+    },
+    "dark": {
+      "type": "boolean",
+      "platforms": [
+        "react"
+      ]
+    },
+    "full": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "position": {
+      "type": "enum",
+      "platforms": [
+        "react"
+      ],
+      "values": [
+        "left",
+        "right"
+      ]
+    },
+    "responsive": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "size": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "sm",
+        "md",
+        "lg"
+      ],
+      "default": {
+        "react": "sm",
+        "rails": "md"
+      }
+    },
+    "variant": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "light",
+        "dark",
+        "gradient"
+      ],
+      "default": "light"
+    },
+    "transparent": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "layout": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "sidebar",
+        "collection",
+        "collection_detail",
+        "kanban",
+        "content",
+        "masonry",
+        "bracket"
+      ],
+      "default": "sidebar"
+    }
+  },
+  "globalProps": true,
+  "usage": {
+    "react": {
+      "import": "import { Layout } from 'playbook-ui'",
+      "example": "<Layout collapse=\"xs\" position=\"left\"></Layout>"
+    },
+    "rails": {
+      "import": null,
+      "example": "<%= pb_rails(\"layout\", props: { collapse: \"xs\", position: \"left\" }) %>"
+    }
+  }
+}

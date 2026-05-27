@@ -29,6 +29,7 @@ type TextareaProps = {
   htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
   id?: string,
   inline?: boolean,
+  inputOptions?: { [k: string]: any },
   object?: string,
   method?: string,
   label?: string,
@@ -54,6 +55,7 @@ const Textarea = ({
   htmlOptions = {},
   id,
   inline = false,
+  inputOptions = {},
   resize = 'none',
   error,
   label,
@@ -74,6 +76,9 @@ const Textarea = ({
       PbTextarea.addMatch(ref.current)
     }
   })
+
+  const containerId = id
+  const textareaId = inputOptions?.id ?? (id ? `${id}-input` : undefined)
 
   const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     // Apply emoji mask if enabled using centralized helper
@@ -114,13 +119,40 @@ const Textarea = ({
   const ariaProps: {[key: string]: string} = buildAriaProps(aria)
   const dataProps: {[key: string]: string} = buildDataProps(data)
   const htmlProps = buildHtmlProps(htmlOptions)
+
+  const {
+    "aria-describedby": customAriaDescribedBy,
+    "aria-invalid": customAriaInvalid,
+    data: inputOptionsData,
+    ...inputOptionsWithoutAriaAndData
+  } = inputOptions || {}
+
+  const textareaDataProps = buildDataProps(inputOptionsData || {})
+  const errorId = error ? (containerId ? `${containerId}-error` : (textareaId ? `${textareaId}-error` : undefined)) : undefined
+  const ariaDescribedBy = [errorId, customAriaDescribedBy].filter(Boolean).join(" ")
+
+  const textareaAttrs = {
+    ...(textareaId ? { id: textareaId } : {}),
+    "aria-describedby": ariaDescribedBy || undefined,
+    "aria-invalid": customAriaInvalid !== undefined ? customAriaInvalid : !!error,
+    name,
+    rows,
+    placeholder,
+    value,
+    disabled,
+    required,
+    onChange: emojiMask ? handleChange : onChange,
+    onPaste: emojiMask ? handlePaste : undefined,
+    ...inputOptionsWithoutAriaAndData,
+    ...textareaDataProps
+  }
+
   const checkIfZero = (characterCount: string | number) => {
     return characterCount == 0 ? characterCount.toString() : characterCount
   }
   const characterCounter = () => {
     return maxCharacters && characterCount ? `${checkIfZero(characterCount)} / ${maxCharacters}` : `${checkIfZero(characterCount)}`
   }
-  const errorId = error ? `${id}-error` : undefined
 
   return (
     <div
@@ -128,39 +160,29 @@ const Textarea = ({
         {...dataProps}
         {...htmlProps}
         className={classes}
+        id={containerId}
     >
     {label && (
-      <label htmlFor={id}>
+      <label {...(textareaId ? { htmlFor: textareaId } : {})}>
       {
         requiredIndicator ? (
-          <Caption className="pb_text_input_kit_label">
-            {label} <span style={{ color: `${colors.error}` }}>*</span>
+          <Caption className="pb_text_input_kit_label"
+              color="lighter"
+          >
+            {label} <span style={{ color: `${colors.text_error}` }}>{"*"}</span>
           </Caption>
         ) : (
           <Caption  className="pb_text_input_kit_label"
+              color="lighter"
               text={label}
           />
         )
       }
       </label>
     )}
-      {children || (
-        <textarea
-            aria-describedby={errorId}
-            aria-invalid={!!error}
-            disabled={disabled}
-            id={id}
-            name={name}
-            onChange={emojiMask ? handleChange : onChange}
-            onPaste={emojiMask ? handlePaste : undefined}
-            placeholder={placeholder}
-            ref={ref}
-            required={required}
-            rows={rows}
-            value={value}
-            {...props}
-        />
-      )}
+      {children || <textarea ref={ref}
+          {...textareaAttrs}
+                   />}
 
       {error ? (
         <>

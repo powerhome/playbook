@@ -1,8 +1,9 @@
 #!/usr/bin/env groovy
 
-library 'github.com/powerhome/ci-kubed@v9.8.0'
+library 'github.com/powerhome/ci-kubed@v10.2.0'
 
 app.build(
+  buildCacheVolumeSize: '20Gi',
   resources: [
     requestCpu: '2',
     requestMemory: '10Gi',
@@ -15,20 +16,7 @@ app.build(
     files: ["docker-compose.yml", "docker-compose.ci.yml"]
   ) { compose ->
     stage('Image Build') {
-      compose.bake(bakeFiles: ['docker-bake.hcl'], remoteConfig: [
-        resourceQuota: [
-            requests: [
-                cpu: '2',
-                memory: '10Gi',
-            ],
-            limits: [
-                memory: '10Gi',
-            ]
-        ],
-        storageConfig: [
-          size: '15Gi',
-        ],
-      ])
+      compose.bake(bakeFiles: ['docker-bake.hcl'])
     }
 
     stage('Test') {

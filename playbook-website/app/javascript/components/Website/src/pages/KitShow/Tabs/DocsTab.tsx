@@ -1,31 +1,37 @@
 import { useState } from "react";
-import { Body, Flex, Card, Button, Caption, Title } from "playbook-ui";
-import ReactMarkdown from "react-markdown";
+import { Body, Flex, Card, Button, Caption, Title, EmptyState } from "playbook-ui";
+import { MarkdownContent } from "../../../components/MarkdownContent";
 import LiveExample from "../../../components/LiveExamples/LiveExampleReact";
-import RightSideNav from "../RightSideNav";
-
-interface Section {
-  title: string;
-  examples: string[];
-}
+import LiveExampleRails from "../../../components/LiveExamples/LiveExampleRails";
+import { SyntaxHighlightedCode } from "../../../components/SyntaxHighlightedCode";
+import { usePlatform } from "../../../contexts/PlatformContext";
+import RightSideNav, { type KitDocSection } from "../RightSideNav";
+import { useDarkMode } from "../../../contexts/DarkModeContext";
+import { formatReactSnippet } from "./formatReactSnippet";
 
 interface DocsTabProps {
   examples: any[];
   exampleProps: any;
   name?: string;
-  sections?: Section[];
+  sections?: KitDocSection[];
 }
 
 export const DocsTab = ({
   examples,
   exampleProps,
-  name,
   sections,
 }: DocsTabProps) => {
+  const { platform } = usePlatform();
+  const codeLanguage: "erb" | "swift" | "tsx" =
+    platform === "rails" ? "erb" : platform === "swift" ? "swift" : "tsx";
+  const { darkMode } = useDarkMode();
   const [visibleCode, setVisibleCode] = useState<{ [key: string]: boolean }>(
     {},
   );
   const [copyState, setCopyState] = useState<{ [key: string]: boolean }>({});
+
+  const getDisplayCode = (source: string) =>
+    platform === "react" ? formatReactSnippet(source ?? "", darkMode) : source ?? "";
 
   const toggleCode = (exampleKey: string) => {
     setVisibleCode((prev) => ({
@@ -47,18 +53,37 @@ export const DocsTab = ({
   };
 
   // Helper function to render an example card
-  const renderExampleCard = (example: any) => (
-    <div
-      id={example.example_key}
-      key={example.example_key}
-      style={{ width: "100%" }}
-    >
-      <Card marginBottom="lg" padding="none" width="100%">
-        <Caption text={example.title} margin="md" />
-        <LiveExample code={example.source} exampleProps={exampleProps} />
+  const renderExampleCard = (example: any) => {
+    const displayCode = getDisplayCode(example.source);
+
+    return (
+      <div
+        id={example.example_key}
+        key={example.example_key}
+        style={{ boxSizing: "border-box", width: "100%", maxWidth: "100%", minWidth: 0 }}
+      >
+      <Card
+        marginBottom="lg"
+        padding="none"
+        width="100%"
+        dark={darkMode}
+        htmlOptions={{
+          style: {
+            boxSizing: "border-box",
+            maxWidth: "100%",
+            minWidth: 0,
+          },
+        }}
+      >
+        <Caption text={example.title} color="lighter" margin="md" dark={darkMode} />
+        {platform === "rails" ? (
+          <LiveExampleRails html={example.rendered ?? ""} />
+        ) : (
+          <LiveExample code={example.source} exampleProps={exampleProps} />
+        )}
         {example.description && example.description !== "" && (
-          <Body margin="md">
-            <ReactMarkdown>{example.description}</ReactMarkdown>
+          <Body margin="md" dark={darkMode}>
+            <MarkdownContent>{example.description}</MarkdownContent>
           </Body>
         )}
         {/* Code Section */}
@@ -69,8 +94,9 @@ export const DocsTab = ({
               variant="link"
               size="sm"
               icon="copy"
-              onClick={() => copyCode(example.source, example.example_key)}
+              onClick={() => copyCode(displayCode, example.example_key)}
               marginRight="sm"
+              dark={darkMode}
             />
             <Button
               text={
@@ -80,21 +106,26 @@ export const DocsTab = ({
               size="sm"
               icon="code"
               onClick={() => toggleCode(example.example_key)}
+              dark={darkMode}
             />
           </Flex>
 
           {visibleCode[example.example_key] && (
-            <Card borderNone width="100%">
-              <pre className="highlight">
-                <code>{example.source}</code>
-              </pre>
+            <Card borderNone width="100%" dark={darkMode}>
+              <SyntaxHighlightedCode
+                code={displayCode}
+                language={codeLanguage}
+                rougeHtml={
+                  platform === "rails" ? example.highlighted_source : undefined
+                }
+              />
             </Card>
           )}
         </>
       </Card>
-    </div>
-  );
-
+      </div>
+    );
+  };
   // Organize examples by sections or show all if no sections
   const renderExamples = () => {
     if (sections && sections.length > 0) {
@@ -110,7 +141,7 @@ export const DocsTab = ({
           <div
             key={section.title}
             id={section.title.toLowerCase().replace(/\s+/g, "-")}
-            style={{ width: "100%" }}
+            style={{ boxSizing: "border-box", width: "100%", maxWidth: "100%", minWidth: 0 }}
           >
             <Title
               color="light"
@@ -129,18 +160,56 @@ export const DocsTab = ({
     }
   };
 
+  const emptyMessage = () => {
+    if (examples && examples.length === 0) {
+      return (
+        <Flex justify="center" width="100%">
+          <EmptyState
+            header="No Docs Found"
+            description={`This component is not available in ${platform.toUpperCase()}, please refer to ${platform === "rails" ? "REACT" : "RAILS"} documentation for more information.`}
+            image="default"
+            size="lg"
+          />
+        </Flex>
+      )
+    }
+    return null;
+  }
   return (
     <Flex
-      paddingRight={{ xs: "xl", sm: "xl", md: "xl", lg: "xl", xl: "md" }}
-      paddingLeft="xl"
+      align="stretch"
+      minWidth={0}
+      width="100%"
+      htmlOptions={{
+        style: {
+          boxSizing: "border-box",
+          maxWidth: "100%",
+          minWidth: 0,
+        },
+      }}
     >
-      <Flex flexDirection="column" flex={1} minWidth={0} overflow="auto">
+      {/*
+        Keep horizontal overflow clipping on the examples column only. `overflow-x: hidden` on an
+        ancestor of `position: sticky` breaks sticking to the main scrollport (see RightSideNav).
+      */}
+      <Flex
+        flexDirection="column"
+        flex={1}
+        minWidth={0}
+        width="100%"
+        htmlOptions={{
+          style: {
+            boxSizing: "border-box",
+            maxWidth: "100%",
+            minWidth: 0,
+            overflowX: "hidden",
+          },
+        }}
+      >
         {examples && examples.length > 0 ? (
           <>{renderExamples()}</>
         ) : (
-          <Card padding="md">
-            <Body text={`No examples found for ${name} component.`} />
-          </Card>
+          emptyMessage()
         )}
       </Flex>
       <RightSideNav examples={examples} sections={sections} />

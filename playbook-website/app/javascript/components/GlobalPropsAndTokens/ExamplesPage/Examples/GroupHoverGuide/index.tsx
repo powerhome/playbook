@@ -31,6 +31,11 @@ const GroupHoverGuide = () => {
               />
             </Flex>
           </Flex>
+          <Caption
+            size="xs"
+            text="Hello!"
+            textAlign="center"
+          />
         </Card>
         <Caption textAlign="center" size="xs" marginTop="xs">
           False
@@ -57,6 +62,8 @@ const GroupHoverGuide = () => {
               />
               <User
                 align="center"
+                groupHover
+                hover={{ shadow: "deep", background: "success_subtle" }}
                 name="Anna Black"
                 orientation="horizontal"
                 size="md"
@@ -64,13 +71,20 @@ const GroupHoverGuide = () => {
               />
             </Flex>
             <IconCircle
+              groupHover
+              hover={{ visible: true }}
               icon="👻"
               size="md"
               variant="royal"
-              groupHover
-              hover={{ visible: true }}
             />
           </Flex>
+          <Caption
+            groupHover
+            hover={{ color: "error", underline: true }}
+            size="xs"
+            text="Hello!"
+            textAlign="center"
+          />
         </Card>
         <Caption textAlign="center" size="xs" marginTop="xs">
           True

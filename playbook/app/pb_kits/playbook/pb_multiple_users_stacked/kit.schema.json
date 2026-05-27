@@ -1,0 +1,61 @@
+{
+  "$schema": "https://playbook.powerapp.cloud/schemas/kit-schema.json",
+  "name": "MultipleUsersStacked",
+  "description": "MultipleUsersStacked component",
+  "platforms": [
+    "react",
+    "rails"
+  ],
+  "props": {
+    "dark": {
+      "type": "boolean",
+      "platforms": [
+        "react"
+      ]
+    },
+    "size": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "md",
+        "lg",
+        "sm",
+        "xl"
+      ],
+      "default": "sm"
+    },
+    "users": {
+      "type": "array",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "variant": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "default",
+        "bubble"
+      ],
+      "default": "default"
+    }
+  },
+  "globalProps": true,
+  "usage": {
+    "react": {
+      "import": "import { MultipleUsersStacked } from 'playbook-ui'",
+      "example": "<MultipleUsersStacked size=\"md\" variant=\"default\"></MultipleUsersStacked>"
+    },
+    "rails": {
+      "import": null,
+      "example": "<%= pb_rails(\"multiple_users_stacked\", props: { size: \"md\", variant: \"default\" }) %>"
+    }
+  }
+}

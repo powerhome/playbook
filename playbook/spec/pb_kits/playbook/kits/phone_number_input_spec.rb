@@ -6,6 +6,7 @@ RSpec.describe Playbook::PbPhoneNumberInput do
   subject { Playbook::PbPhoneNumberInput::PhoneNumberInput }
 
   it { is_expected.to define_boolean_prop(:disabled).with_default(false) }
+  it { is_expected.to define_boolean_prop(:dark).with_default(false) }
   it { is_expected.to define_boolean_prop(:required).with_default(false) }
   it { is_expected.to define_prop(:initial_country).with_default("") }
   it { is_expected.to define_prop(:label).with_default("") }

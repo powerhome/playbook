@@ -3,38 +3,38 @@
 @import "../tokens/typography";
 
 $pb_body_colors: (
-  default: $text_lt_default,
-  light: $text_lt_light,
-  lighter: $text_lt_lighter,
-  link: $primary,
-  error: $error,
-  success: $text_lt_success_sm,
+  default: $text_default_color,
+  light: $text_light,
+  lighter: $text_lighter,
+  link: $text_link,
+  error: $text_error,
+  success: $text_success,
 );
 
 $pb_dark_body_colors: (
-  default: $text_dk_default,
-  light: $text_dk_light,
-  lighter: $text_dk_lighter,
-  link: $active_dark,
-  error: $error,
-  success: $text_dk_success_sm,
+  default: $text_default_dark,
+  light: $text_light_dark,
+  lighter: $text_lighter_dark,
+  link: $text_link_dark,
+  error: $text_error_dark,
+  success: $text_success_dark,
 );
 
 // Order is important here!
 $pb_body_status: (
-  default: $text_lt_default,
-  negative: $error,
-  dark_error: $error_dark_body,
-  positive: $text_lt_success_sm,
+  default: $text_default_color,
+  negative: $text_error,
+  dark_error: $text_error_dark,
+  positive: $text_success,
 );
 
 $pb_dark_body_status: (
-  default: $text_dk_default,
-  negative: $error_dark,
-  positive: $text_dk_success_sm,
+  default: $text_default_dark,
+  negative: $text_error_dark,
+  positive: $text_success_dark,
 );
 
-@mixin pb_body($color: $text_lt_default) {
+@mixin pb_body($color: $text_default_color) {
   line-height: $lh_tight;
   color: $color;
   font-size: $text_default;
@@ -44,34 +44,34 @@ $pb_dark_body_status: (
 
 // Colors ======================
 @mixin pb_body_light {
-  @include pb_body($text_lt_light);
+  @include pb_body($text_light);
 }
 
 @mixin pb_body_lighter {
-  @include pb_body($text_lt_lighter);
+  @include pb_body($text_lighter);
 }
 
 @mixin pb_body_dark {
-  @include pb_body($text_dk_default);
+  @include pb_body($text_default_dark);
 }
 
 @mixin pb_body_light_dark {
-  @include pb_body($text_dk_light);
+  @include pb_body($text_light_dark);
 }
 
 @mixin pb_body_lighter_dark {
-  @include pb_body($text_dk_lighter);
+  @include pb_body($text_lighter_dark);
 }
 
 // Statuses =====================
 @mixin pb_body_negative {
-  @include pb_body($error);
+  @include pb_body($text_error);
 }
 
 @mixin pb_body_dark_error {
-  @include pb_body($error_dark_body);
+  @include pb_body($text_error_dark);
 }
 
 @mixin pb_body_positive {
-  @include pb_body($success);
+  @include pb_body($text_success);
 }

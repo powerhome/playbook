@@ -327,3 +327,36 @@ test("renders default variant without Card wrapper", () => {
   expect(table).toBeInTheDocument()
   expect(table.closest('.pb_card_kit')).not.toBeInTheDocument()
 })
+
+test("renders withFilter variant with cardProps and titleProps", () => {
+   const { container } = render(
+    <Table
+        cardProps={{ margin: "lg" }}
+        data={{testid: "with-filter-table-props"}}
+        title="Filter Table"
+        titleProps={{ paddingLeft: "lg" }}
+        variant="withFilter"
+    >
+      <Table.Head>
+        <Table.Row>
+          <Table.Header>{"Column 1"}</Table.Header>
+        </Table.Row>
+      </Table.Head>
+      <Table.Body>
+        <Table.Row>
+          <Table.Cell>{"Value 1"}</Table.Cell>
+        </Table.Row>
+      </Table.Body>
+    </Table>
+  )
+
+  const table = screen.getByTestId("with-filter-table-props")
+  expect(table).toBeInTheDocument()
+  const card = container.querySelector('.pb_card_kit')
+  expect(card).toBeInTheDocument()
+  expect(card).toHaveClass("m_lg")
+
+  const title = container.querySelector('.pb_title_kit')
+  expect(title).toBeInTheDocument()
+  expect(title).toHaveClass("pl_lg")
+})

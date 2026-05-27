@@ -1,0 +1,99 @@
+{
+  "defaults": {
+    "accept": {},
+    "dark": false
+  },
+  "hiddenProps": [
+    "fileRejections",
+    "getInputProps",
+    "getRootProps",
+    "isDragActive",
+    "onFilesAccepted",
+    "onFilesRejected"
+  ],
+  "groups": [
+    {
+      "name": "Guidance",
+      "props": ["customMessage", "accept", "acceptedFilesDescription", "maxSize"]
+    },
+    {
+      "name": "State",
+      "props": ["error", "dark"]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default",
+      "props": {}
+    },
+    {
+      "name": "Accepted Types",
+      "props": {
+        "accept": {
+          "image/svg+xml": [".svg", ".xml"]
+        }
+      }
+    },
+    {
+      "name": "Custom Description",
+      "props": {
+        "accept": {
+          "application/pdf": [".pdf"],
+          "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet": [".xlsx"]
+        },
+        "acceptedFilesDescription": "Adobe (.pdf) and Microsoft (.xlsx)"
+      }
+    },
+    {
+      "name": "Custom Message",
+      "props": {
+        "customMessage": "Playbook is awesome!"
+      }
+    },
+    {
+      "name": "Max File Size",
+      "props": {
+        "accept": {
+          "application/pdf": [".pdf"]
+        },
+        "maxSize": 1000000
+      }
+    },
+    {
+      "name": "Error State",
+      "props": {
+        "error": "Please upload a valid file"
+      }
+    }
+  ],
+  "conditionals": {
+    "acceptedFilesDescription": { "requires": "accept" }
+  },
+  "hints": {
+    "accepted_types_info": {
+      "presetName": "Accepted Types",
+      "message": "Use MIME-type keys with extension arrays for accept, for example { image/svg+xml: ['.svg', '.xml'] }.",
+      "type": "info"
+    },
+    "custom_description_info": {
+      "presetName": "Custom Description",
+      "message": "acceptedFilesDescription only changes the helper copy. File validation still comes from the accept object.",
+      "type": "info"
+    },
+    "custom_message_info": {
+      "presetName": "Custom Message",
+      "message": "customMessage replaces the built-in guidance, including accepted types and max file size text.",
+      "type": "info"
+    },
+    "max_size_info": {
+      "presetName": "Max File Size",
+      "message": "maxSize is measured in bytes. In app code, pair it with onFilesRejected to surface rejection details.",
+      "type": "warning"
+    },
+    "error_state_info": {
+      "presetName": "Error State",
+      "message": "Use the error prop for validation or server feedback below the dropzone.",
+      "type": "info"
+    }
+  }
+}

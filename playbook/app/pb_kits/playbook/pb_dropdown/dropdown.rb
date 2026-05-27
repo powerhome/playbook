@@ -39,6 +39,9 @@ module Playbook
                                default: ""
       prop :clearable, type: Playbook::Props::Boolean,
                        default: true
+      prop :close_on_click, type: Playbook::Props::Enum,
+                            values: %w[outside inside any],
+                            default: "any"
       prop :start_date_id, type: Playbook::Props::String,
                            default: "start_date_id"
       prop :start_date_name, type: Playbook::Props::String,
@@ -52,6 +55,8 @@ module Playbook
                               default: false
       prop :required_indicator, type: Playbook::Props::Boolean,
                                 default: false
+      prop :custom_event_type, type: Playbook::Props::String,
+                               default: ""
 
       def data
         Hash(prop(:data)).merge(
@@ -59,11 +64,13 @@ module Playbook
           pb_dropdown_multi_select: multi_select,
           pb_dropdown_variant: variant,
           pb_dropdown_clearable: clearable,
+          pb_dropdown_close_on_click: close_on_click,
           form_pill_props: form_pill_props.to_json,
           start_date_id: variant == "quickpick" ? start_date_id : nil,
           end_date_id: variant == "quickpick" ? end_date_id : nil,
           controls_start_id: variant == "quickpick" && controls_start_id.present? ? controls_start_id : nil,
-          controls_end_id: variant == "quickpick" && controls_end_id.present? ? controls_end_id : nil
+          controls_end_id: variant == "quickpick" && controls_end_id.present? ? controls_end_id : nil,
+          custom_event_type: custom_event_type.presence
         ).compact
       end
 

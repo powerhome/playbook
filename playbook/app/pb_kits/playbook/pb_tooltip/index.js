@@ -11,11 +11,14 @@ export default class PbTooltip extends PbEnhancedElement {
   }
 
   connect() {
+    this.triggerHandlers = new Map()
+    
     if (this.tooltipInteraction) {
-      document.addEventListener('mousemove', (e) => {
+      this.mouseMoveHandler = (e) => {
         this.lastMouseX = e.clientX
         this.lastMouseY = e.clientY
-      })
+      }
+      document.addEventListener('mousemove', this.mouseMoveHandler)
     }
     
     this.triggerElements.forEach((trigger) => {
@@ -23,7 +26,7 @@ export default class PbTooltip extends PbEnhancedElement {
       const interactionEnabled = this.tooltipInteraction
 
       if (method === 'click') {
-        trigger.addEventListener('click', (e) => {
+        const clickHandler = (e) => {
           if (this.useClickToOpen) {
             e.preventDefault()
             if (this.isTooltipVisible()) {
@@ -34,10 +37,12 @@ export default class PbTooltip extends PbEnhancedElement {
           } else {
             this.showTooltip(trigger)
           }
-        })
+        }
+        trigger.addEventListener('click', clickHandler)
+        this.triggerHandlers.set(trigger, { click: clickHandler })
       } else {
         if (!this.useClickToOpen) {
-          trigger.addEventListener('mouseenter', () => {
+          const mouseenterHandler = () => {
             clearSafeZoneListener(this)
             clearTimeout(this.mouseleaveTimeout)
             this.currentTrigger = trigger
@@ -48,9 +53,9 @@ export default class PbTooltip extends PbEnhancedElement {
                 this.checkCloseTooltip(trigger)
               }
             }, delayOpen)
-          })
+          }
 
-          trigger.addEventListener('mouseleave', () => {
+          const mouseleaveHandler = () => {
             clearTimeout(this.mouseenterTimeout)
             if (this.delayClose) {
               const delayClose = parseInt(this.delayClose)
@@ -68,20 +73,60 @@ export default class PbTooltip extends PbEnhancedElement {
                 this.hideTooltip()
               }
             }
-          })
+          }
+
+          trigger.addEventListener('mouseenter', mouseenterHandler)
+          trigger.addEventListener('mouseleave', mouseleaveHandler)
+          this.triggerHandlers.set(trigger, { mouseenter: mouseenterHandler, mouseleave: mouseleaveHandler })
 
           if (interactionEnabled) {
-            this.tooltip.addEventListener('mouseenter', () => {
-              clearSafeZoneListener(this)
-            })
-
-            this.tooltip.addEventListener('mouseleave', () => {
-              this.attachSafeZoneListener()
-            })
+            if (!this.tooltipMouseenterHandler) {
+              this.tooltipMouseenterHandler = () => {
+                clearSafeZoneListener(this)
+              }
+              this.tooltipMouseleaveHandler = () => {
+                this.attachSafeZoneListener()
+              }
+              this.tooltip.addEventListener('mouseenter', this.tooltipMouseenterHandler)
+              this.tooltip.addEventListener('mouseleave', this.tooltipMouseleaveHandler)
+            }
           }
         }
       }
     })
+  }
+
+  disconnect() {
+    // Clean up timers
+    clearTimeout(this.mouseenterTimeout)
+    clearTimeout(this.mouseleaveTimeout)
+    clearTimeout(this.autoHideTimeout)
+    clearSafeZoneListener(this)
+
+    // Clean up autoUpdate
+    if (this.cleanup) {
+      this.cleanup()
+      this.cleanup = null
+    }
+
+    // Clean up document mousemove listener
+    if (this.mouseMoveHandler) {
+      document.removeEventListener('mousemove', this.mouseMoveHandler)
+    }
+
+    // Clean up trigger element listeners
+    this.triggerHandlers.forEach((handlers, trigger) => {
+      Object.entries(handlers).forEach(([event, handler]) => {
+        trigger.removeEventListener(event, handler)
+      })
+    })
+    this.triggerHandlers.clear()
+
+    // Clean up tooltip listeners
+    if (this.tooltipMouseenterHandler) {
+      this.tooltip.removeEventListener('mouseenter', this.tooltipMouseenterHandler)
+      this.tooltip.removeEventListener('mouseleave', this.tooltipMouseleaveHandler)
+    }
   }
 
   isTooltipVisible() {

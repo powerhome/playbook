@@ -1,0 +1,1 @@
+`cascadeCollapse` is an optional prop that is set to 'false' by default. If set to 'true', collapsing any parent row itself or by using the toggle exapansion buttons in any header or subheader row also collapses all descendants and clears their expansion state. Re-expanding then shows only direct children until the user expands deeper levels again.

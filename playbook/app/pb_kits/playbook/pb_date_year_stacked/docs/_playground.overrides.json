@@ -1,0 +1,36 @@
+{
+  "groups": [
+    {
+      "name": "Date Config",
+      "props": ["date"]
+    },
+    {
+      "name": "Appearance",
+      "props": ["align"]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default",
+      "props": {
+        "date": "2026-04-09"
+      }
+    },
+    {
+      "name": "Centered",
+      "props": {
+        "date": "2026-04-09",
+        "align": "center"
+      }
+    },
+    {
+      "name": "Right aligned",
+      "props": {
+        "date": "2026-12-25",
+        "align": "right"
+      }
+    }
+  ],
+  "conditionals": {},
+  "hints": {}
+}

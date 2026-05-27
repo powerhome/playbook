@@ -50,7 +50,10 @@
       cursor: pointer;
       @media (hover:hover) {
         &:hover .pb_body_kit_light {
-          color: $primary;
+          color: $input_text_active;
+          &.dark {
+            color: $input_text_state_active;
+          }
         }
       }
 
@@ -75,6 +78,16 @@
     .passphrase-popover {
       position: relative;
       left: -($space_xs * 1.5);
+    }
+  }
+
+  .required_indicator {
+    color: $text_error;
+  }
+
+  &.dark {
+    .required_indicator {
+      color: $text_error_dark;
     }
   }
 }

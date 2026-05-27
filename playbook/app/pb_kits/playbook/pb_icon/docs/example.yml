@@ -8,7 +8,6 @@ examples:
   - icon_border: Icon Border
   - icon_sizes: Icon Sizes
   - icon_custom: Icon Custom
-  - icon_fa_kit: Icon with FontAwesome Kit
   - icon_color: Icon Color
 
   react:
@@ -20,7 +19,6 @@ examples:
   - icon_border: Icon Border
   - icon_sizes: Icon Sizes
   - icon_custom: Icon Custom
-  - icon_fa_kit: Icon with FontAwesome Kit
   - icon_color: Icon Color
 
   swift:

@@ -1,0 +1,105 @@
+{
+  "$schema": "https://playbook.powerapp.cloud/schemas/kit-schema.json",
+  "name": "Collapsible",
+  "description": "Collapsible component",
+  "platforms": [
+    "react",
+    "rails"
+  ],
+  "props": {
+    "collapsed": {
+      "type": "boolean",
+      "platforms": [
+        "react"
+      ]
+    },
+    "icon": {
+      "type": "string | string[]",
+      "platforms": [
+        "react"
+      ]
+    },
+    "iconColor": {
+      "type": "enum",
+      "platforms": [
+        "react"
+      ],
+      "values": [
+        "default",
+        "light",
+        "lighter",
+        "link",
+        "error",
+        "success"
+      ]
+    },
+    "iconSize": {
+      "type": "enum",
+      "platforms": [
+        "react"
+      ],
+      "values": [
+        "lg",
+        "xs",
+        "sm",
+        "1x",
+        "2x",
+        "3x",
+        "4x",
+        "5x",
+        "6x",
+        "7x",
+        "8x",
+        "9x",
+        "10x"
+      ]
+    },
+    "onIconClick": {
+      "type": "function",
+      "platforms": [
+        "react"
+      ]
+    },
+    "onClick": {
+      "type": "function",
+      "platforms": [
+        "react"
+      ]
+    },
+    "tag": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "h1",
+        "h2",
+        "h3",
+        "h4",
+        "h5",
+        "h6",
+        "p",
+        "span",
+        "div",
+        "tr",
+        "th",
+        "td",
+        "thead",
+        "col"
+      ],
+      "default": "div"
+    }
+  },
+  "globalProps": true,
+  "usage": {
+    "react": {
+      "import": "import { Collapsible } from 'playbook-ui'",
+      "example": "<Collapsible iconColor=\"default\" iconSize=\"lg\"></Collapsible>"
+    },
+    "rails": {
+      "import": null,
+      "example": "<%= pb_rails(\"collapsible\", props: { icon_color: \"default\", icon_size: \"lg\" }) %>"
+    }
+  }
+}

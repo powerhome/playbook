@@ -1,0 +1,16 @@
+<%
+  options = [
+    { label: "United States", value: "unitedStates", id: "us" },
+    { label: "Canada", value: "canada", id: "ca" },
+    { label: "Pakistan", value: "pakistan", id: "pk" },
+  ]
+%>
+
+<%= pb_rails("caption", props: { margin_bottom: "xs", text: "Any" }) %>
+<%= pb_rails("dropdown", props: { options: options, close_on_click: "any", margin_bottom: "md" }) %>
+
+<%= pb_rails("caption", props: { margin_bottom: "xs", text: "Outside" }) %>
+<%= pb_rails("dropdown", props: { options: options, close_on_click: "outside", margin_bottom: "md" }) %>
+
+<%= pb_rails("caption", props: { margin_bottom: "xs", text: "Inside" }) %>
+<%= pb_rails("dropdown", props: { options: options, close_on_click: "inside" }) %>

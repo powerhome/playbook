@@ -1,0 +1,61 @@
+{
+  "defaults": {
+    "current": 1,
+    "range": 5,
+    "total": 10
+  },
+  "groups": [
+    {
+      "name": "Paging",
+      "props": ["current", "total", "range"]
+    },
+    {
+      "name": "Events",
+      "props": ["onChange"]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default",
+      "props": {
+        "current": 1,
+        "total": 10,
+        "range": 5
+      }
+    },
+    {
+      "name": "Few pages",
+      "props": {
+        "current": 2,
+        "total": 4,
+        "range": 5
+      }
+    },
+    {
+      "name": "Middle of many",
+      "props": {
+        "current": 10,
+        "total": 24,
+        "range": 5
+      }
+    },
+    {
+      "name": "Last page",
+      "props": {
+        "current": 12,
+        "total": 12,
+        "range": 5
+      }
+    },
+    {
+      "name": "Wide window",
+      "props": {
+        "current": 25,
+        "total": 50,
+        "range": 9
+      }
+    }
+  ],
+  "conditionals": {},
+  "hints": {}
+}

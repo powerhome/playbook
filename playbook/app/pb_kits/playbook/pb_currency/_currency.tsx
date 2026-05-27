@@ -59,12 +59,13 @@ const Currency = (props: CurrencyProps): React.ReactElement => {
     commaSeparator = false,
   } = props
 
+  const isAmountEmpty = (value: string | number): boolean => (
+    value === '' || value == null || (typeof value === 'string' && value.trim() === '')
+  )
+
   // Convert numeric input to string format
   const convertAmount = (input: string | number): string => {
     if (typeof input === 'number') {
-      if (input === 0 && !nullDisplay) {
-        return ""
-      }
       return input.toFixed(2)
     }
     return input
@@ -81,7 +82,9 @@ const Currency = (props: CurrencyProps): React.ReactElement => {
     variantClass = '_bold'
   }
 
-  const [whole, decimal = '00'] = currencyAmount.split('.')
+  const [wholePart, decimalPart = '00'] = currencyAmount ? currencyAmount.split('.') : ['', '00']
+  const decimal = (decimalPart || '00').padEnd(2, '0').slice(0, 2)
+  const whole = currencyAmount === '' ? '' : (wholePart === '' ? '0' : wholePart)
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
   const htmlProps = buildHtmlProps(htmlOptions)
@@ -135,7 +138,7 @@ const Currency = (props: CurrencyProps): React.ReactElement => {
       <Caption dark={dark}>{label}</Caption>
       <div className={`pb_currency_wrapper${variantClass || emphasizedClass}`}>
         {unstyled ? (
-          nullDisplay && !amount ? (
+          nullDisplay && isAmountEmpty(amount) ? (
             <div>{nullDisplay}</div>
           ) : (
             <>
@@ -148,7 +151,7 @@ const Currency = (props: CurrencyProps): React.ReactElement => {
             </>
           )
         ) : (
-          nullDisplay && !amount ? (
+          nullDisplay && isAmountEmpty(amount) ? (
             <Title
                 className="pb_currency_value"
                 dark={dark}

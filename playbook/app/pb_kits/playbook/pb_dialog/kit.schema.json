@@ -1,0 +1,184 @@
+{
+  "$schema": "https://playbook.powerapp.cloud/schemas/kit-schema.json",
+  "name": "Dialog",
+  "description": "Dialog component",
+  "platforms": [
+    "react",
+    "rails"
+  ],
+  "props": {
+    "cancelButton": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "closeable": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": true
+    },
+    "confirmButton": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "fullHeight": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "loading": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "onCancel": {
+      "type": "function",
+      "platforms": [
+        "react"
+      ]
+    },
+    "onChange": {
+      "type": "function",
+      "platforms": [
+        "react"
+      ]
+    },
+    "onClose": {
+      "type": "function",
+      "platforms": [
+        "react"
+      ]
+    },
+    "onConfirm": {
+      "type": "function",
+      "platforms": [
+        "react"
+      ]
+    },
+    "opened": {
+      "type": "boolean",
+      "platforms": [
+        "react"
+      ]
+    },
+    "portalClassName": {
+      "type": "string",
+      "platforms": [
+        "react"
+      ]
+    },
+    "placement": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "left",
+        "center",
+        "right"
+      ],
+      "default": "center"
+    },
+    "shouldCloseOnOverlayClick": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": true
+    },
+    "size": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "sm",
+        "md",
+        "lg",
+        "xl",
+        "status_size",
+        "content"
+      ],
+      "default": "md"
+    },
+    "status": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "info",
+        "caution",
+        "delete",
+        "error",
+        "success"
+      ],
+      "default": ""
+    },
+    "text": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "title": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "trigger": {
+      "type": "string",
+      "platforms": [
+        "react"
+      ]
+    },
+    "confirmButtonId": {
+      "platforms": [
+        "rails"
+      ]
+    },
+    "cancelButtonId": {
+      "platforms": [
+        "rails"
+      ]
+    },
+    "customEventType": {
+      "platforms": [
+        "rails"
+      ],
+      "type": "string",
+      "default": ""
+    }
+  },
+  "globalProps": true,
+  "usage": {
+    "react": {
+      "import": "import { Dialog } from 'playbook-ui'",
+      "example": "<Dialog placement=\"left\" size=\"sm\"></Dialog>"
+    },
+    "rails": {
+      "import": null,
+      "example": "<%= pb_rails(\"dialog\", props: { placement: \"left\", size: \"sm\" }) %>"
+    }
+  }
+}

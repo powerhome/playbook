@@ -4,6 +4,7 @@
 @import "playbook-tokens/border_radius";
 @import "playbook-tokens/shadows";
 @import "playbook-tokens/typography";
+@import "playbook-tokens/positioning";
 
 $selector: ".pb--page";
 $nav_breakpoint: breakpoint("lg");
@@ -36,8 +37,10 @@ body {
   }
   &--content {
     min-height: calc(100vh - 89px);
-    @include break_at($nav_breakpoint) {
-      grid-template-columns: auto !important;
+    &:not(.pb--website--new) {
+      @include break_at($nav_breakpoint) {
+        grid-template-columns: auto !important;
+      }
     }
     &.no-sidebar {
       grid-template-columns: 0 auto !important;
@@ -52,7 +55,7 @@ body {
       .pb--kits,
       .pb--kit-show,
       .kit-show-wrapper {
-        padding: 0 ($space_xl + $space_md) 0;
+        padding: 0 $space_xl 0;
         @include break_at($nav_breakpoint) {
           padding: $space-lg;
         }
@@ -248,7 +251,7 @@ body {
     right: 0;
     background-color: $white;
     text-align: center;
-    z-index: 3;
+    z-index: $z_1;
   }
 
 }

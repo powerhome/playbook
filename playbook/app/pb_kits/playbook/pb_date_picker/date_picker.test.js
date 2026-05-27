@@ -40,6 +40,37 @@ describe('DatePicker Kit', () => {
     expect(kit).toHaveClass('pb_date_picker_kit mb_sm')
   })
 
+  test('inLine alone adds inline-date-picker class and inline control icons, not the calendar icon', () => {
+    const testId = 'datepicker-inline-only'
+    render(
+      <DatePicker
+          data={{ testid: testId }}
+          inLine
+          pickerId="date-picker-inline-only"
+      />
+    )
+
+    const kit = screen.getByTestId(testId)
+    expect(kit).toHaveClass('inline-date-picker')
+    expect(kit.querySelector('#cal-icon-date-picker-inline-only')).not.toBeInTheDocument()
+    expect(kit.querySelector('#date-picker-inline-only-icon-plus')).toBeInTheDocument()
+    expect(kit.querySelector('#date-picker-inline-only-angle-down')).toBeInTheDocument()
+  })
+
+  test('hideIcon without inLine does not render inline control icons', () => {
+    const testId = 'datepicker-hide-icon-only'
+    render(
+      <DatePicker
+          data={{ testid: testId }}
+          hideIcon
+          pickerId="date-picker-hide-icon-only"
+      />
+    )
+
+    const kit = screen.getByTestId(testId)
+    expect(kit.querySelector('#date-picker-hide-icon-only-icon-plus')).not.toBeInTheDocument()
+  })
+
   test('shows DatePicker date format m/d/Y', async () => {
     const testId = 'datepicker-date'
     render(
@@ -309,5 +340,35 @@ describe('DatePicker Kit', () => {
     const label = within(kit).getByText(/Optional Date/)
     expect(label).toBeInTheDocument()
     expect(kit).not.toHaveTextContent("*")
+  })
+
+  test('Last month quickpick includes the correct last day of previous month', async () => {
+    const testId = 'datepicker-last-month'
+    render(
+      <DatePicker
+          allowInput
+          data={{ testid: testId }}
+          mode="range"
+          pickerId="date-picker-last-month"
+          placeholder="mm/dd/yyyy to mm/dd/yyyy"
+          selectionType="quickpick"
+      />
+    )
+  
+    const kit = screen.getByTestId(testId)
+    const input = within(kit).getByPlaceholderText('mm/dd/yyyy to mm/dd/yyyy')
+  
+    fireEvent(input, new MouseEvent('click', { bubbles: true, cancelable: true }))
+  
+    const lastMonth = within(kit).getByText('Last month')
+    fireEvent(lastMonth, new MouseEvent('click', { bubbles: true, cancelable: true }))
+  
+    await waitFor(() => {
+      expect(input).toHaveValue(
+        DateTime.getPreviousMonthStartDate(new Date()).formatDate() +
+        " to " +
+        DateTime.getPreviousMonthEndDate(new Date()).formatDate()
+      )
+    })
   })
 })

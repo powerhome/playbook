@@ -47,11 +47,11 @@
 }
 
 @mixin preview_tiptap_a {
-    color: $primary;
-    border-bottom: 1px solid $primary;
+    color: $text_link;
+    border-bottom: 1px solid $text_link;
     &:hover {
-      color: $text_lt_default;
-      border-bottom: 1px solid $text_lt_default;
+      color: $text_default_color;
+      border-bottom: 1px solid $text_default_color;
     }
 }
 
@@ -105,8 +105,8 @@
     border-bottom: 1px solid $transparent;
     height: 1px;
     padding: 0;
-    background-color: $border_light;
-    border: 0; 
+    background-color: $input_border_default;
+    border: 0;
 }
 
 @mixin preview_tiptap_ol {

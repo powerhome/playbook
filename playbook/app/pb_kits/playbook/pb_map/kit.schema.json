@@ -1,0 +1,51 @@
+{
+  "$schema": "https://playbook.powerapp.cloud/schemas/kit-schema.json",
+  "name": "Map",
+  "description": "Map component",
+  "platforms": [
+    "react"
+  ],
+  "props": {
+    "zoomBtns": {
+      "type": "boolean",
+      "platforms": [
+        "react"
+      ]
+    },
+    "flyTo": {
+      "type": "boolean",
+      "platforms": [
+        "react"
+      ]
+    },
+    "zoomInClick": {
+      "type": "function",
+      "platforms": [
+        "react"
+      ]
+    },
+    "zoomOutClick": {
+      "type": "function",
+      "platforms": [
+        "react"
+      ]
+    },
+    "flyToClick": {
+      "type": "function",
+      "platforms": [
+        "react"
+      ]
+    }
+  },
+  "globalProps": true,
+  "usage": {
+    "react": {
+      "import": "import { Map } from 'playbook-ui'",
+      "example": "<Map></Map>"
+    },
+    "rails": {
+      "import": null,
+      "example": "<%= pb_rails(\"map\", props: { text: \"Example\" }) %>"
+    }
+  }
+}

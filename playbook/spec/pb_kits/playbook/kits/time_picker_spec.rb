@@ -30,6 +30,16 @@ RSpec.describe Playbook::PbTimePicker::TimePicker do
       instance = subject.new({ disabled: false })
       expect(instance.classname).not_to include("disabled")
     end
+
+    it "includes dark class when dark is true" do
+      instance = subject.new({ dark: true })
+      expect(instance.classname).to include("dark")
+    end
+
+    it "does not include dark class when dark is false" do
+      instance = subject.new({ dark: false })
+      expect(instance.classname).not_to include("dark")
+    end
   end
 
   describe "#time_picker_react_props" do
@@ -43,6 +53,7 @@ RSpec.describe Playbook::PbTimePicker::TimePicker do
       expect(props[:showTimezone]).to eq(false)
       expect(props[:required]).to eq(false)
       expect(props[:disabled]).to eq(false)
+      expect(props[:dark]).to eq(false)
       expect(props[:requiredIndicator]).to eq(false)
     end
 
@@ -58,6 +69,13 @@ RSpec.describe Playbook::PbTimePicker::TimePicker do
       props = instance.time_picker_react_props
 
       expect(props[:disabled]).to eq(true)
+    end
+
+    it "includes dark when true" do
+      instance = subject.new({ dark: true })
+      props = instance.time_picker_react_props
+
+      expect(props[:dark]).to eq(true)
     end
 
     it "includes defaultTime when provided" do

@@ -7,7 +7,6 @@ import { globalProps } from "../utilities/globalProps"
 import Body from '../pb_body/_body'
 import Caption from '../pb_caption/_caption'
 import CircleIconButton from '../pb_circle_icon_button/_circle_icon_button'
-import colors from '../tokens/exports/_colors.module.scss'
 import Flex from '../pb_flex/_flex'
 import Icon from '../pb_icon/_icon'
 import PbReactPopover from '../pb_popover/_popover'
@@ -120,12 +119,14 @@ const Passphrase = (props: PassphraseProps): React.ReactElement => {
           {hasLabel && (requiredIndicator ? (
             <Caption
                 className="passphrase-label"
+                color="lighter"
             >
-              {label} <span style={{ color: `${colors.error}` }}>*</span>
+              {label} <span className="required_indicator">*</span>
             </Caption>
           ) : (
             <Caption
                 className="passphrase-label"
+                color="lighter"
                 text={label}
             />
           ))}
@@ -143,12 +144,14 @@ const Passphrase = (props: PassphraseProps): React.ReactElement => {
                   orientation="column"
               >
                 <Caption
+                    color="lighter"
                     marginBottom="xs"
                     text="Tips for a good passphrase"
                 />
                 <div>
                   {tips.map((tip, i) => (
                     <Caption
+                        color="lighter"
                         key={i}
                         marginBottom="xs"
                         size="xs"

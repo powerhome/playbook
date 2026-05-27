@@ -1,0 +1,61 @@
+{
+  "$schema": "https://playbook.powerapp.cloud/schemas/kit-schema.json",
+  "name": "LoadingInline",
+  "description": "LoadingInline component",
+  "platforms": [
+    "react",
+    "rails"
+  ],
+  "props": {
+    "align": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "left",
+        "center",
+        "right"
+      ],
+      "default": "left"
+    },
+    "dark": {
+      "type": "boolean",
+      "platforms": [
+        "react"
+      ]
+    },
+    "text": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": "Loading"
+    },
+    "variant": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "dotted",
+        "solid"
+      ],
+      "default": "dotted"
+    }
+  },
+  "globalProps": true,
+  "usage": {
+    "react": {
+      "import": "import { LoadingInline } from 'playbook-ui'",
+      "example": "<LoadingInline align=\"left\" variant=\"dotted\"></LoadingInline>"
+    },
+    "rails": {
+      "import": null,
+      "example": "<%= pb_rails(\"loading_inline\", props: { align: \"left\", variant: \"dotted\" }) %>"
+    }
+  }
+}

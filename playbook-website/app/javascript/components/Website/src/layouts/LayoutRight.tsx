@@ -1,29 +1,24 @@
 import { Outlet, useLocation } from "react-router-dom"
-import { useEffect } from "react"
+import { useEffect, useRef } from "react"
+import { useDarkMode } from "../contexts/DarkModeContext"
+import { Button, Flex } from "playbook-ui"
 
-import { Background, Button, Flex } from "playbook-ui"
-
-export default function LayoutRight({ dark }: { dark: string }) {
+export default function LayoutRight() {
   const location = useLocation()
-  
-  // Scroll to top when route changes
+  const { darkMode } = useDarkMode()
+  const mainRef = useRef<HTMLDivElement>(null)
+
   useEffect(() => {
-    // Scroll the main content area
-    const mainContent = document.querySelector('.pb--page--content--main')
-    if (mainContent) {
-      mainContent.scrollTop = 0
-    }
-    // Also scroll window as fallback
-    window.scrollTo({ top: 0, behavior: 'smooth' })
+    mainRef.current?.scrollTo({ top: 0 })
   }, [location.pathname])
-  
+
   return (
-    <Background
-        backgroundColor={dark ? "dark" : "white"}
-        className="pb--page--content--main"
+    <div
+      ref={mainRef}
+      className={`layout_body pb--page--content--main ${darkMode ? "dark" : ""}`.trim()}
     >
       <Flex
-          display={{ xs: "none", sm: "none", md: "none", default: "none", lg: "flex" }}
+          display={{ xs: "none", sm: "none", md: "none", default: "none" }}
           spacing='between'
           vertical='center'
       >
@@ -38,9 +33,10 @@ export default function LayoutRight({ dark }: { dark: string }) {
             tag='h1'
             text='Back to Legacy View'
             variant='link'
+            dark={darkMode}
         />
       </Flex>
       <Outlet />
-    </Background>
+    </div>
   )
 }

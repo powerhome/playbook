@@ -1,0 +1,256 @@
+{
+  "$schema": "https://playbook.powerapp.cloud/schemas/kit-schema.json",
+  "name": "Dropdown",
+  "description": "Dropdown component",
+  "platforms": [
+    "react",
+    "rails"
+  ],
+  "props": {
+    "autocomplete": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "blankSelection": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": ""
+    },
+    "clearable": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": true
+    },
+    "closeOnClick": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "outside",
+        "inside",
+        "any"
+      ],
+      "default": "any"
+    },
+    "constrainHeight": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "customQuickPickDates": {
+      "type": "CustomQuickPickDates",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "formPillProps": {
+      "type": "GenericObject",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "dark": {
+      "type": "boolean",
+      "platforms": [
+        "react"
+      ]
+    },
+    "defaultValue": {
+      "type": "GenericObject",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "error": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "isClosed": {
+      "type": "boolean",
+      "platforms": [
+        "react"
+      ]
+    },
+    "label": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "multiSelect": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "onSelect": {
+      "type": "function",
+      "platforms": [
+        "react"
+      ]
+    },
+    "options": {
+      "type": "GenericObject",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "placeholder": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "separators": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": true
+    },
+    "variant": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "default",
+        "subtle",
+        "quickpick"
+      ],
+      "default": "default"
+    },
+    "rangeEndsToday": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "controlsStartId": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": ""
+    },
+    "controlsEndId": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": ""
+    },
+    "activeStyle": {
+      "type": "GenericObject",
+      "platforms": [
+        "react"
+      ]
+    },
+    "requiredIndicator": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "name": {
+      "platforms": [
+        "rails"
+      ],
+      "type": "string"
+    },
+    "required": {
+      "platforms": [
+        "rails"
+      ],
+      "type": "boolean",
+      "default": false
+    },
+    "searchbar": {
+      "platforms": [
+        "rails"
+      ],
+      "type": "boolean",
+      "default": false
+    },
+    "startDateId": {
+      "platforms": [
+        "rails"
+      ],
+      "type": "string",
+      "default": "start_date_id"
+    },
+    "startDateName": {
+      "platforms": [
+        "rails"
+      ],
+      "type": "string",
+      "default": "start_date_name"
+    },
+    "endDateId": {
+      "platforms": [
+        "rails"
+      ],
+      "type": "string",
+      "default": "end_date_id"
+    },
+    "endDateName": {
+      "platforms": [
+        "rails"
+      ],
+      "type": "string",
+      "default": "end_date_name"
+    },
+    "customEventType": {
+      "platforms": [
+        "rails"
+      ],
+      "type": "string",
+      "default": ""
+    }
+  },
+  "globalProps": true,
+  "usage": {
+    "react": {
+      "import": "import { Dropdown } from 'playbook-ui'",
+      "example": "<Dropdown closeOnClick=\"outside\" variant=\"default\"></Dropdown>"
+    },
+    "rails": {
+      "import": null,
+      "example": "<%= pb_rails(\"dropdown\", props: { close_on_click: \"outside\", variant: \"default\" }) %>"
+    }
+  }
+}

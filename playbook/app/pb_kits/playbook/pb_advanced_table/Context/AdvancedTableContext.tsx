@@ -33,7 +33,8 @@ export const AdvancedTableProvider = ({ children, ...props }: {
 
   const measureHeights = useCallback(() => {
     if (headerRef.current) {
-      const headerRect = headerRef.current.getBoundingClientRect();
+      const headerElement = headerRef.current as HTMLElement;
+      const headerRect = headerElement.getBoundingClientRect();
       if (headerRect.height > 0) {
         setHeaderHeight(headerRect.height);
       }
@@ -67,9 +68,11 @@ export const AdvancedTableProvider = ({ children, ...props }: {
     };
   }, [measureHeights]);
 
+  const headerGroupCount = table?.getHeaderGroups()?.length ?? 0;
+
   useEffect(() => {
     measureHeights();
-  }, [table?.getRowModel().rows.length, measureHeights]);
+  }, [table?.getRowModel().rows.length, headerGroupCount, measureHeights]);
 
 
   // Create a flattened data array that includes ALL components for virtualization

@@ -11,6 +11,13 @@ $pb_button_sizes: (
   "lg":   ($font_large - 2px),
 );
 
+// Icon-only: fixed square hit targets (not derived from font padding).
+$pb_button_icon_only_dimensions: (
+  "sm": 35px,
+  "md": 40px,
+  "lg": 45px,
+);
+
 // Base button class
 .pb_button_kit {
   @include pb_button;
@@ -113,31 +120,26 @@ $pb_button_sizes: (
     }
   }
 
-  // Icon-only button (icon prop set, no text) - square with equal padding
-  // Rails: uses .pb_button_icon_only class
-  // React: detects when pb_button_content has an empty text span
+  // Icon-only button (icon prop set, no text) — fixed squares; icon scales via font-size from size prop.
+  // Rails: .pb_button_icon_only; React: class or :has(...) when label is empty.
+  // Rails uses a truly empty .pb_button_content; React wraps text in a child span (may be empty).
   &.pb_button_icon_only,
-  &:has(.pb_button_content > span:empty) {
+  &:has(.pb_button_content:empty) {
     aspect-ratio: 1;
-    min-width: auto;
-    width: auto;
-    height: auto;
-    padding: $pb_button_v_padding !important;
-    min-height: ($pb_button_v_padding * 2) + $font_small;
-    
-    &.pb_button_size_sm {
-      padding: $font_smaller !important;
-      min-height: ($font_smaller * 2) + $font_smaller;
-    }
-    
-    &.pb_button_size_md {
-      padding: $font_small !important;
-      min-height: ($font_small * 2) + $font_small;
-    }
-    
-    &.pb_button_size_lg {
-      padding: ($font_large - 2px) !important;
-      min-height: (($font_large - 2px) * 2) + ($font_large - 2px);
+    box-sizing: border-box;
+    $pb_button_icon_only_default: map-get($pb_button_icon_only_dimensions, "md");
+    width: $pb_button_icon_only_default;
+    min-width: $pb_button_icon_only_default;
+    height: $pb_button_icon_only_default;
+    min-height: $pb_button_icon_only_default;
+    padding: 0 !important;
+    @each $name, $dim in $pb_button_icon_only_dimensions {
+      &.pb_button_size_#{$name} {
+        width: $dim;
+        min-width: $dim;
+        height: $dim;
+        min-height: $dim;
+      }
     }
 
     // Remove margins from icons

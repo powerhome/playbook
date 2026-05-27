@@ -111,6 +111,21 @@ RSpec.describe Playbook::PbCurrency::Currency do
     end
   end
 
+  describe "when null_display is set" do
+    it "renders null_display only when amount is blank" do
+      num = subject.new(amount: "", null_display: "$0.00", size: "sm")
+
+      expect(num.title_props[:text]).to eq "$0.00"
+    end
+
+    it "does not render null_display for negative amounts" do
+      num = subject.new(amount: "-.53", null_display: "$0.00", size: "sm")
+
+      expect(num.title_props[:text]).not_to eq "$0.00"
+      expect(num.body_props[:text]).to eq ".53"
+    end
+  end
+
   describe "when given a numeric value" do
     it "show correct amount with numeric value" do
       num = subject.new(amount: 32)
@@ -137,10 +152,31 @@ RSpec.describe Playbook::PbCurrency::Currency do
       expect(num.title_props[:text]).to eq "1,234,567,890"
     end
 
-    it "show empty string when numeric amount is equal to 0" do
+    it "renders zero with leading digit when numeric amount is equal to 0" do
       num = subject.new(comma_separator: true, amount: 0.00)
 
-      expect(num.title_props[:text]).to eq ""
+      expect(num.title_props[:text]).to eq "0"
+      expect(num.body_props[:text]).to eq ".00"
+    end
+
+    it "renders string zero as 0" do
+      num = subject.new(amount: "0", size: "sm")
+
+      expect(num.title_props[:text]).to eq "0"
+      expect(num.body_props[:text]).to eq ".00"
+    end
+
+    it "renders numeric zero as 0" do
+      num = subject.new(amount: 0, size: "sm")
+
+      expect(num.title_props[:text]).to eq "0"
+      expect(num.body_props[:text]).to eq ".00"
+    end
+
+    it "normalizes string zero with single decimal digit to .00" do
+      num = subject.new(comma_separator: true, amount: "0.0")
+
+      expect(num.title_props[:text]).to eq "0"
       expect(num.body_props[:text]).to eq ".00"
     end
   end

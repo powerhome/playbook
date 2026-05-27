@@ -7,12 +7,12 @@ import Button from "../../pb_button/_button"
 const SelectReactHook = (props) => {
   const { register, handleSubmit, formState: { errors } } = useForm({
     defaultValues: {
-      food: '',
+      "food-react-hook": '',
     },
   })
 
   const [submittedData, setSubmittedData] = useState({
-    food: '',
+    "food-react-hook": '',
   })
 
   const onSubmit = (data) => {
@@ -39,8 +39,8 @@ const SelectReactHook = (props) => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <Select
             {...props}
-            {...register("food", { required: true })}
-            error={errors.food ? "Please select a food." : null}
+            {...register("food-react-hook", { required: true })}
+            error={errors["food-react-hook"] ? "Please select a food." : null}
             label="Favorite Food"
             options={options}
         />
@@ -51,7 +51,7 @@ const SelectReactHook = (props) => {
           />
       </form>
       <Body padding="xs"
-          text={`Food: ${submittedData.food}`}
+          text={`Food: ${submittedData["food-react-hook"]}`}
       />
     </>
   )

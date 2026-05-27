@@ -1,5 +1,5 @@
 import React from "react";
-import { render, screen, act, within } from "../utilities/test-utils";
+import { render, screen, act, within, waitFor, fireEvent } from "../utilities/test-utils";
 import PhoneNumberInput from "./_phone_number_input";
 
 const testId = "phoneNumberInput";
@@ -188,4 +188,81 @@ test("does not render required indicator asterisk when requiredIndicator is fals
     const label = within(kit).getByText(/Phone Number/);
     expect(label).toBeInTheDocument();
     expect(kit).not.toHaveTextContent("*");
-});  
+});
+
+test("has no intl-tel example placeholder by default (showPlaceholder false)", async () => {
+    const props = {
+        id: testId,
+        initialCountry: "us",
+    };
+    render(<PhoneNumberInput {...props} />);
+    const input = screen.getByRole("textbox");
+    await waitFor(() => {
+        expect(input.closest(".iti")).toBeTruthy();
+    });
+    expect(!input.getAttribute("placeholder") || input.getAttribute("placeholder") === "").toBe(true);
+});
+
+test("optionally shows example placeholder when showPlaceholder is true; hides on focus and returns on blur if empty", async () => {
+    const props = {
+        id: testId,
+        initialCountry: "us",
+        showPlaceholder: true,
+    };
+    render(<PhoneNumberInput {...props} />);
+    const input = screen.getByRole("textbox");
+
+    await waitFor(() => {
+        expect(input.closest(".iti")).toBeTruthy();
+    });
+    await waitFor(() => {
+        expect((input.getAttribute("placeholder") || "").length).toBeGreaterThan(0);
+    });
+
+    const whenIdle = input.getAttribute("placeholder");
+
+    act(() => {
+        fireEvent.focus(input);
+    });
+    expect(input.getAttribute("placeholder") || "").toBe("");
+
+    act(() => {
+        fireEvent.blur(input);
+    });
+    expect(input.getAttribute("placeholder")).toBe(whenIdle);
+});
+
+test("restores latest placeholder on blur after country change", async () => {
+    const props = {
+        id: testId,
+        initialCountry: "us",
+        showPlaceholder: true,
+    };
+
+    render(<PhoneNumberInput {...props} />);
+    const input = screen.getByRole("textbox");
+
+    await waitFor(() => {
+        expect(input.closest(".iti")).toBeTruthy();
+    });
+
+    // Simulate focus behavior
+    act(() => {
+        fireEvent.focus(input);
+    });
+    expect(input.getAttribute("placeholder") || "").toBe("");
+
+    // Simulate library updating placeholder due to country change while focused.
+    input.setAttribute("placeholder", "+93 123 456 7890");
+    act(() => {
+        input.dispatchEvent(new Event("countrychange", { bubbles: true }));
+    });
+
+    // Blur should restore the latest country placeholder.
+    act(() => {
+        fireEvent.blur(input);
+    });
+    await waitFor(() => {
+        expect(input.getAttribute("placeholder")).toBe("+93 123 456 7890");
+    });
+});

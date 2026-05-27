@@ -41,6 +41,7 @@ type PhoneNumberInputProps = {
   formatAsYouType?: boolean,
   strictMode?: boolean,
   countrySearch?: boolean,
+  showPlaceholder?: boolean,
 }
 
 enum ValidationError {
@@ -98,7 +99,13 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.Ref<unknown>
     formatAsYouType = false,
     strictMode = false,
     countrySearch = false,
+    showPlaceholder = false,
   } = props
+
+  const showPlaceholderRef = useRef(showPlaceholder)
+  showPlaceholderRef.current = showPlaceholder
+
+  const placeholderTemplateRef = useRef<string | null>(null)
 
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
@@ -184,6 +191,37 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.Ref<unknown>
 
   const unformatNumber = (formattedNumber: any) => {
     return formattedNumber.replace(/\D/g, "")
+  }
+
+  const readInputPlaceholder = (element: HTMLInputElement) => {
+    return element.getAttribute("placeholder") || element.placeholder || ""
+  }
+
+  const cachePlaceholderTemplate = (element: HTMLInputElement) => {
+    const placeholder = readInputPlaceholder(element)
+    if (placeholder) {
+      placeholderTemplateRef.current = placeholder
+    }
+  }
+
+  const hidePlaceholderIfFocusedAndEmpty = (element: HTMLInputElement) => {
+    if (document.activeElement === element && !element.value) {
+      element.setAttribute("placeholder", "")
+      return true
+    }
+    return false
+  }
+
+  const hidePlaceholderIfEmpty = (element: HTMLInputElement) => {
+    if (!element.value) {
+      element.setAttribute("placeholder", "")
+    }
+  }
+
+  const restorePlaceholderIfEmpty = (element: HTMLInputElement) => {
+    if (!element.value && placeholderTemplateRef.current) {
+      element.setAttribute("placeholder", placeholderTemplateRef.current)
+    }
   }
 
   const showFormattedError = (reason = '') => {
@@ -476,6 +514,7 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.Ref<unknown>
       countryOrder: preferredCountries,
       allowDropdown: !disabled,
       autoInsertDialCode: false,
+      autoPlaceholder: showPlaceholderRef.current ? "polite" : "off",
       initialCountry: initialCountry || fallbackCountry,
       onlyCountries,
       excludeCountries,
@@ -497,6 +536,22 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.Ref<unknown>
         setSelectedData(phoneNumberData)
         onChange(phoneNumberData)
         validateErrors()
+
+        if (showPlaceholderRef.current) {
+          const syncPlaceholderState = () => {
+            const el = inputRef.current
+            if (!el) return
+
+            cachePlaceholderTemplate(el)
+            if (hidePlaceholderIfFocusedAndEmpty(el)) return
+            restorePlaceholderIfEmpty(el)
+          }
+
+          // Run immediately, then once on the next tick in case intl-tel-input
+          // updates the placeholder asynchronously after countrychange.
+          syncPlaceholderState()
+          setTimeout(syncPlaceholderState, 0)
+        }
       })
 
       inputRef.current.addEventListener("open:countrydropdown", () => setDropDownIsOpen(true))
@@ -538,7 +593,20 @@ const PhoneNumberInput = (props: PhoneNumberInputProps, ref?: React.Ref<unknown>
     id,
     label,
     name,
+    onFocus: () => {
+      if (!showPlaceholder) return
+      const el = inputRef.current
+      if (!el || el.value) return
+      cachePlaceholderTemplate(el)
+      hidePlaceholderIfEmpty(el)
+    },
     onBlur: () => {
+      if (showPlaceholder) {
+        const el = inputRef.current
+        if (el && !el.value) {
+          restorePlaceholderIfEmpty(el)
+        }
+      }
       hasBlurredRef.current = true
       setHasBlurred(true)
       validateErrors()

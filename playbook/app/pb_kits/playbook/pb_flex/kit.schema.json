@@ -1,0 +1,169 @@
+{
+  "$schema": "https://playbook.powerapp.cloud/schemas/kit-schema.json",
+  "name": "Flex",
+  "description": "Flex component",
+  "platforms": [
+    "react",
+    "rails"
+  ],
+  "props": {
+    "horizontal": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "left",
+        "center",
+        "right",
+        "stretch",
+        "none"
+      ],
+      "default": "left"
+    },
+    "justify": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "start",
+        "center",
+        "end",
+        "around",
+        "between",
+        "evenly",
+        "none"
+      ],
+      "default": "none"
+    },
+    "inline": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "orientation": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "row",
+        "column"
+      ],
+      "default": "row"
+    },
+    "spacing": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "around",
+        "between",
+        "evenly",
+        "none"
+      ],
+      "default": "none"
+    },
+    "reverse": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "vertical": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "top",
+        "center",
+        "bottom",
+        "stretch",
+        "baseline",
+        "none"
+      ],
+      "default": "top"
+    },
+    "align": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "start",
+        "center",
+        "end",
+        "stretch",
+        "baseline",
+        "none"
+      ],
+      "default": "none"
+    },
+    "gap": {
+      "type": "SizeType | SizeResponsiveType",
+      "platforms": [
+        "react"
+      ]
+    },
+    "rowGap": {
+      "type": "SizeType | SizeResponsiveType",
+      "platforms": [
+        "react"
+      ]
+    },
+    "columnGap": {
+      "type": "SizeType | SizeResponsiveType",
+      "platforms": [
+        "react"
+      ]
+    },
+    "wrap": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "alignSelf": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "start",
+        "end",
+        "center",
+        "stretch",
+        "none"
+      ],
+      "default": "none"
+    }
+  },
+  "globalProps": true,
+  "usage": {
+    "react": {
+      "import": "import { Flex } from 'playbook-ui'",
+      "example": "<Flex horizontal=\"left\" justify=\"start\"></Flex>"
+    },
+    "rails": {
+      "import": null,
+      "example": "<%= pb_rails(\"flex\", props: { horizontal: \"left\", justify: \"start\" }) %>"
+    }
+  }
+}

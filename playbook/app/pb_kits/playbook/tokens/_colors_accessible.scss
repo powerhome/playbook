@@ -11,6 +11,7 @@ $text_lighter:       #617290 !default;
 $text_success:       #158149 !default;
 $text_error:         #DA0014 !default;
 $text_link:          #0056CF !default;
+$text_disabled:      #B0BDC7 !default;
 
 $text_default_dark:  #FFFFFF !default;
 $text_light_dark:    #B4B2BE !default;
@@ -18,6 +19,7 @@ $text_lighter_dark:  #8A879A !default;
 $text_success_dark:  #00CA74 !default;
 $text_error_dark:    #FF1A1A !default;
 $text_link_dark:     #0E89FF !default;
+$text_disabled_dark: #656576 !default;
 
 $accessible_text_colors: (
   text_default:        $text_default_color,
@@ -26,12 +28,14 @@ $accessible_text_colors: (
   text_success:        $text_success,
   text_error:          $text_error,
   text_link:           $text_link,
+  text_disabled:       $text_disabled,
   text_default_dark:   $text_default_dark,
   text_light_dark:     $text_light_dark,
   text_lighter_dark:   $text_lighter_dark,
   text_success_dark:   $text_success_dark,
   text_error_dark:     $text_error_dark,
-  text_link_dark:      $text_link_dark
+  text_link_dark:      $text_link_dark,
+  text_disabled_dark:  $text_disabled_dark
 );
 
 /* Input Text & Icon Colors ----------------------*/

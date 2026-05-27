@@ -54,6 +54,7 @@ const StarRatingInteractive = (props: StarRatingInteractiveProps) => {
             {label &&
                 <Caption
                     className="pb_star_rating_kit_label"
+                    color="lighter"
                     marginBottom="xs"
                     text={label} 
                 />

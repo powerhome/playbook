@@ -17,7 +17,7 @@ module Playbook
         input = super(name, options, checked_value, unchecked_value)
 
         if props[:label]
-          @template.pb_rails("caption", props: { text: label_text, margin_bottom: "xs" }) +
+          @template.pb_rails("caption", props: { color: "lighter", text: label_text, margin_bottom: "xs" }) +
             @template.pb_rails("checkbox", props: props) do
               input
             end

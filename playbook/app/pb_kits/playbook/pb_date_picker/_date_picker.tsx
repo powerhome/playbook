@@ -180,6 +180,7 @@ const DatePicker = (props: DatePickerProps): React.ReactElement => {
     //@ts-ignore
     globalProps(filteredProps),
     error ? 'error' : null,
+    inLine && 'inline-date-picker',
     className
   )
 
@@ -193,6 +194,9 @@ const DatePicker = (props: DatePickerProps): React.ReactElement => {
     }
     if (error) {
       base += ' error'
+    }
+    if (disableInput) {
+      base += ' disabled'
     }
     return base
   }
@@ -218,11 +222,14 @@ const DatePicker = (props: DatePickerProps): React.ReactElement => {
         {!hideLabel && (
            <label htmlFor={pickerId}>
             {requiredIndicator ? (
-              <Caption className="pb_date_picker_kit_label">
+              <Caption className="pb_date_picker_kit_label"
+                  color="lighter"
+              >
                 {label} <span style={{ color: `${colors.error}` }}>*</span>
               </Caption>
             ) : (
               <Caption className="pb_date_picker_kit_label"
+                  color="lighter"
                   text={label}
               />
             )}
@@ -256,7 +263,7 @@ const DatePicker = (props: DatePickerProps): React.ReactElement => {
               }
             </div>
 
-            {!hideIcon &&
+            {!hideIcon && !inLine &&
               <div
                   className={iconWrapperClass()}
                   id={`cal-icon-${pickerId}`}
@@ -268,7 +275,7 @@ const DatePicker = (props: DatePickerProps): React.ReactElement => {
               </div>
             }
 
-            {hideIcon && inLine ?
+            {inLine ?
               <div>
                 <div
                     className={`${iconWrapperClass()} date-picker-inline-icon-plus`}

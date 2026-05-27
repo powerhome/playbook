@@ -1,0 +1,169 @@
+{
+  "$schema": "https://playbook.powerapp.cloud/schemas/kit-schema.json",
+  "name": "Select",
+  "description": "Select component",
+  "platforms": [
+    "react",
+    "rails"
+  ],
+  "props": {
+    "blankSelection": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "compact": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "disabled": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "error": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "includeBlank": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "inline": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "inputOptions": {
+      "type": "GenericObject",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "label": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "margin": {
+      "type": "string",
+      "platforms": [
+        "react"
+      ]
+    },
+    "marginBottom": {
+      "type": "string",
+      "platforms": [
+        "react"
+      ]
+    },
+    "multiple": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "name": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "onChange": {
+      "type": "ReactNode",
+      "platforms": [
+        "react"
+      ]
+    },
+    "options": {
+      "type": "array",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "required": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "requiredIndicator": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "showArrow": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "value": {
+      "type": "string",
+      "platforms": [
+        "react"
+      ]
+    },
+    "attributes": {
+      "platforms": [
+        "rails"
+      ],
+      "type": "string"
+    },
+    "onchange": {
+      "platforms": [
+        "rails"
+      ]
+    },
+    "validationMessage": {
+      "platforms": [
+        "rails"
+      ],
+      "type": "string",
+      "default": ""
+    }
+  },
+  "globalProps": true,
+  "usage": {
+    "react": {
+      "import": "import { Select } from 'playbook-ui'",
+      "example": "<Select></Select>"
+    },
+    "rails": {
+      "import": null,
+      "example": "<%= pb_rails(\"select\", props: { text: \"Example\" }) %>"
+    }
+  }
+}

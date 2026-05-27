@@ -52,15 +52,15 @@
     }
   }
   &:focus-within,
-  &:focus{
+  &:focus {
     .trix-button-row, trix-editor {
-      background-color: $focus_input_light;
-      border-color: $primary;
+      background-color: $input_background_state;
+      border-color: $input_border_state;
     }
   }
   .trix-dialog.trix-dialog--link {
-      background-color: $white ;
-      border: 1px solid $border_light;
+      background-color: $white;
+      border: 1px solid $input_border_default;
       box-shadow: none;
       margin-top: $space_sm;
       margin-left: $space_sm;
@@ -78,7 +78,7 @@
     border-top-left-radius: 0;
     border-top-right-radius: 0;
     &:empty:not(:focus)::before {
-      color: $text_lt_light;
+      color: $input_text_default;
     }
     a {
       cursor: pointer;
@@ -102,7 +102,7 @@
     }
     .trix-button-row {
       background: $white;
-      border: 1px solid #E4E8F0;
+      border: 1px solid $input_border_default;
       border-bottom: none;
       padding: $space_xs / 2;
       border-top-left-radius: $border_rad_heavier;
@@ -119,7 +119,7 @@
       }
     }
     button.trix-button.trix-button--icon.trix-button {
-      &:hover{
+      &:hover {
         background-color: rgba($border_light, 0.50);
       }
     }
@@ -172,25 +172,25 @@
     }
     // Dark Mode Placeholder
     trix-editor:empty:not(:focus)::before {
-      color: rgba(255, 255, 255, .15);
+      color: $input_text_default_dark;
     }
     trix-editor {
-      background-color: rgba($white, 0.1);
-      border-color: rgba($white, 0.15);
+      background-color: $input_background_default_dark;
+      border-color: $input_border_default_dark;
       border-top-left-radius: 0;
       border-top-right-radius: 0;
-      color: $text_dk_default;
+      color: $text_default_dark;
     }
     trix-toolbar {
       .trix-button-row {
-        background-color: rgba($white, 0.1);
-        border: 1px solid rgba($white, 0.15);
+        background-color: $input_background_default_dark;
+        border: 1px solid $input_border_default_dark;
         border-bottom: 0;
       }
       .trix-active {
         background: $active_dark !important;
       }
-      button.trix-button.trix-button--icon.trix-button{
+      button.trix-button.trix-button--icon.trix-button {
         &:hover {
           background-color: rgba($white, 0.15);
         }
@@ -199,18 +199,18 @@
         }
       }
       &:focus {
-        border-color: $active_dark;
+        border-color: $input_border_state_dark;
       }
     }
     &:focus-within {
       .trix-button-row, trix-editor {
-        background-color: rgba($white, 0.03);
-        border-color: $active_dark !important;
+        background-color: $input_background_state_dark;
+        border-color: $input_border_state_dark !important;
       }
     }
     &.error {
       trix-editor {
-        border-color: $error_dark;
+        border-color: $input_border_error_dark;
       }
     }
     &.sticky {
@@ -220,7 +220,7 @@
     }
     .trix-dialog.trix-dialog--link.trix-active {
       background-color: tint($bg_dark, 10%) !important;
-      border: 1px solid rgba($white, 0.1);
+      border: 1px solid $input_border_default_dark;
       box-shadow: none;
       margin-top: $space_sm;
       margin-left: $space_sm;
@@ -241,7 +241,7 @@
       border-top: none;
       border-top-left-radius: 0;
       border-top-right-radius: 0;
-      border-bottom: 1px solid $border_light;
+      border-bottom: 1px solid $input_border_default;
       border-bottom-left-radius: 6px;
       border-bottom-right-radius: 6px;
     }
@@ -251,7 +251,7 @@
     &:focus, &:focus-within {
       trix-toolbar .trix-button-row {
         @include transition_default;
-        border-color: $primary;
+        border-color: $input_border_state;
       }
     }
   }
@@ -269,15 +269,14 @@
       }
       trix-editor {
         @include transition_default;
-        border-color: $border_light;
+        border-color: $input_border_default;
         background-color: $white;
       }
-      // This fixes the border color when the link dialog input is focused
       &:focus-within {
         trix-editor {
           @include transition_default;
-          border-color: $primary;
-          background-color: $focus_input_light;
+          border-color: $input_border_state;
+          background-color: $input_background_state;
         }
       }
     }
@@ -287,22 +286,22 @@
       background-color: transparent;
       &:focus {
         @include transition_default;
-        border-color: $primary;
-        background-color: $focus_input_light;
+        border-color: $input_border_state;
+        background-color: $input_background_state;
       }
     }
     &.dark:hover {
       .trix-button-row,
       trix-editor {
-        background-color: rgba($white, 0.1);
-        border-color: rgba($white, 0.15);
+        background-color: $input_background_default_dark;
+        border-color: $input_border_default_dark;
       }
     }
     &.dark:focus-within {
       .trix-button-row,
       trix-editor {
-        background-color: rgba($white, 0.03);
-        border-color: $active_dark !important;
+        background-color: $input_background_state_dark;
+        border-color: $input_border_state_dark !important;
       }
     }
   }

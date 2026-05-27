@@ -1,0 +1,110 @@
+{
+  "template": "<User{{props}} />",
+  "propTargets": {},
+  "defaults": {
+    "align": "left",
+    "avatar": true,
+    "bold": true,
+    "avatarGrayscale": false,
+    "nameStyle": "title",
+    "orientation": "horizontal",
+    "size": "md",
+    "titleStyle": "body",
+    "name": "Anna Black",
+    "title": "Engineer",
+    "subtitle": "Product team",
+    "avatarUrl": "https://randomuser.me/api/portraits/women/44.jpg"
+  },
+  "groups": [
+    {
+      "name": "Content",
+      "props": [
+        "name",
+        "title",
+        "subtitle",
+        "territory",
+        "avatar",
+        "avatarUrl"
+      ]
+    },
+    {
+      "name": "Appearance",
+      "props": [
+        "size",
+        "orientation",
+        "align",
+        "nameStyle",
+        "titleStyle",
+        "bold",
+        "avatarGrayscale"
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "With avatar",
+      "props": {
+        "name": "Anna Black",
+        "title": "Engineer",
+        "avatar": true,
+        "avatarUrl": "https://randomuser.me/api/portraits/women/44.jpg",
+        "size": "md",
+        "orientation": "horizontal"
+      }
+    },
+    {
+      "name": "Text only",
+      "props": {
+        "name": "Anna Black",
+        "title": "Engineer",
+        "avatar": false,
+        "avatarUrl": "",
+        "size": "sm"
+      }
+    },
+    {
+      "name": "Large",
+      "props": {
+        "name": "Anna Black",
+        "title": "Engineer",
+        "subtitle": "San Francisco",
+        "avatar": true,
+        "avatarUrl": "https://randomuser.me/api/portraits/women/44.jpg",
+        "size": "lg"
+      }
+    },
+    {
+      "name": "Small",
+      "props": {
+        "name": "Anna Black",
+        "title": "Engineer",
+        "avatar": true,
+        "avatarUrl": "https://randomuser.me/api/portraits/women/44.jpg",
+        "size": "sm"
+      }
+    },
+    {
+      "name": "Vertical",
+      "props": {
+        "name": "Anna Black",
+        "title": "Engineer",
+        "avatar": true,
+        "avatarUrl": "https://randomuser.me/api/portraits/women/44.jpg",
+        "orientation": "vertical",
+        "size": "md"
+      }
+    },
+    {
+      "name": "With territory",
+      "props": {
+        "name": "Anna Black",
+        "territory": "West",
+        "title": "Engineer",
+        "avatar": true,
+        "avatarUrl": "https://randomuser.me/api/portraits/women/44.jpg"
+      }
+    }
+  ],
+  "conditionals": {},
+  "hints": {}
+}

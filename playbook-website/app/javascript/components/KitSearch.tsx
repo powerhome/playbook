@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Typeahead, Badge, Flex } from 'playbook-ui'
 import { matchSorter } from 'match-sorter'
+import { useDarkMode } from './Website/src/contexts/DarkModeContext'
 
 type Kit = {
   label: string,
@@ -14,6 +15,10 @@ type KitSearchProps = {
   id: string,
   global_props_and_tokens?: Record<string, any>,
   marginBottom?: string,
+  beta?: boolean,
+  onBetaNavigate?: (path: string) => void,
+  /** When set with `beta`, remounts Typeahead on navigation so query/selection clears (e.g. pathname+search from useLocation). */
+  betaSearchResetKey?: string,
 }
 
 const combineKitsandVisualGuidelines = (
@@ -35,9 +40,13 @@ const combineKitsandVisualGuidelines = (
   return [...kits, ...globalPropsItems, ...tokensItems].sort((a, b) => a.label.localeCompare(b.label))
 }
 
-const KitSearch = ({ classname, id, kits, global_props_and_tokens, marginBottom }: KitSearchProps) => {
+const KitSearch = ({ classname, id, kits, global_props_and_tokens, marginBottom, beta, onBetaNavigate, betaSearchResetKey }: KitSearchProps) => {
   const kitsAndGuidelines = combineKitsandVisualGuidelines(kits, global_props_and_tokens)
-
+  let darkMode = false
+  if (beta) {
+    const { darkMode: betaDarkMode } = useDarkMode()
+    darkMode = betaDarkMode
+  }
   const [filteredKits, setFilteredKits] = useState(kitsAndGuidelines)
 
   useEffect(() => {
@@ -53,7 +62,12 @@ const KitSearch = ({ classname, id, kits, global_props_and_tokens, marginBottom 
 
   const handleChange = (selection: any) => {
     if (selection) {
-      window.location = selection.value
+      const path = beta ? `/beta${selection.value}` : selection.value
+      if (beta && onBetaNavigate) {
+        onBetaNavigate(path)
+      } else {
+        window.location.href = path
+      }
     }
   }
 
@@ -70,7 +84,7 @@ const KitSearch = ({ classname, id, kits, global_props_and_tokens, marginBottom 
     <Flex alignItems="center" justify="between">
         {labelLeft}
         <Badge
-          dark
+          dark={darkMode}
           margin="xs"
           text={type === 'global_prop' ? 'Global Prop' : 'Token'}
           variant="primary"
@@ -78,10 +92,13 @@ const KitSearch = ({ classname, id, kits, global_props_and_tokens, marginBottom 
     </Flex>
   )
 
+  const typeaheadKey = beta ? `${id}__${betaSearchResetKey ?? ''}` : id
+
   return (
       <Typeahead
+        key={typeaheadKey}
         className={classname}
-        dark={document.cookie.split("; ").includes("dark_mode=true")}
+        dark={beta ? darkMode : document.cookie.split("; ").includes("dark_mode=true")}
         id={id}
         marginBottom={marginBottom || 'sm'}
         onChange={handleChange}

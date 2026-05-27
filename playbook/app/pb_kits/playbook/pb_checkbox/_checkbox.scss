@@ -26,7 +26,7 @@ $transition: $transition_cubic;
   .pb_checkbox_checkmark,
   .pb_checkbox_indeterminate {
     align-items: center;
-    border: solid $border_light 2px;
+    border: solid $input_border_default 2px;
     border-radius: $border_rad_light;
     height: 22px;
     transition: background $transition_default ease, box-shadow $transition_default ease;
@@ -62,16 +62,16 @@ $transition: $transition_cubic;
     left: $offscreen;
 
     &:focus ~ .pb_checkbox_checkmark {
-        box-shadow: 0px 0px 0px 2px $white, 0px 0px 0px 4px $primary;
+        box-shadow: 0px 0px 0px 2px $white, 0px 0px 0px 4px $input_border_state;
     }
     &:checked ~ .pb_checkbox_checkmark,
     & ~ .pb_checkbox_indeterminate {
       background-color: $primary_action;
-      border-color: $primary_action;
+      border-color: $input_border_state;
 
       &:hover {
         background-color: $primary_action;
-        border-color: $primary_action;
+        border-color: $input_border_state;
       }
     }
     &:checked ~ .pb_checkbox_checkmark,
@@ -86,47 +86,47 @@ $transition: $transition_cubic;
     &:disabled ~ .pb_checkbox_checkmark {
       cursor: not-allowed;
       background-color: mix($charcoal, $white, 5%);
-      border-color: $border_light;
+      border-color: $input_border_disabled;
 
       & ~ .pb_checkbox_label {
         cursor: not-allowed;
-        color: $text_lt_light;
+        color: $text_light;
       }
       & ~ .pb_checkbox_label .pb_body_kit {
         cursor: not-allowed;
-        color: $text_lt_light;
+        color: $text_light;
       }
     }
 
     &:disabled:checked ~ .pb_checkbox_checkmark {
       background-color: $neutral;
-      border-color: $neutral;
+      border-color: $input_border_disabled;
     }
 
     &:disabled:checked:hover ~ .pb_checkbox_checkmark {
       background-color: $neutral;
-      border-color: $neutral;
+      border-color: $input_border_disabled;
     }
   }
 
   &.dark {
     input {
       &:focus ~ .pb_checkbox_checkmark {
-        box-shadow: 0px 0px 0px 2px $bg_dark_card, 0px 0px 0px 4px $primary;      
+        box-shadow: 0px 0px 0px 2px $bg_dark_card, 0px 0px 0px 4px $input_border_state_dark;      
       }
 
       &:disabled ~ .pb_checkbox_checkmark {
         cursor: not-allowed;
         background-color: mix($charcoal, $white, 80%);
-        border: 2px solid $border_dark;
+        border: 2px solid $input_border_disabled_dark;
 
         & ~ .pb_checkbox_label {
           cursor: not-allowed;
-          color: $text_dk_light;
+          color: $text_light_dark;
         }
         & ~ .pb_checkbox_label .pb_body_kit {
           cursor: not-allowed;
-          color: $text_dk_light;
+          color: $text_light_dark;
         }
       }
 
@@ -136,7 +136,7 @@ $transition: $transition_cubic;
 
       &:disabled:checked:hover ~ .pb_checkbox_checkmark {
         background-color: $border_dark;
-        border-color: $border_dark;
+        border-color: $input_border_disabled_dark;
       }
     }
     
@@ -148,15 +148,15 @@ $transition: $transition_cubic;
 
     &.pb_checkbox_kit_error {
       > .pb_checkbox_checkmark {
-        border-color: $error_dark;
+        border-color: $input_border_error_dark;
        }
 
        input {
         &:checked ~ .pb_checkbox_checkmark,
         & ~ .pb_checkbox_indeterminate {
-          border-color: $primary;
+          border-color: $input_border_state_dark;
           &:hover {
-            border-color: $primary;
+            border-color: $input_border_state_dark;
           }
         }
       }
@@ -165,7 +165,7 @@ $transition: $transition_cubic;
 
   &.pb_checkbox_kit_error {
     > .pb_checkbox_checkmark {
-      border-color: $error;
+      border-color: $input_border_error;
     }
   }
 }

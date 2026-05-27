@@ -1,0 +1,90 @@
+{
+  "$schema": "https://playbook.powerapp.cloud/schemas/kit-schema.json",
+  "name": "ProgressSimple",
+  "description": "ProgressSimple component",
+  "platforms": [
+    "react",
+    "rails"
+  ],
+  "props": {
+    "align": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "left",
+        "center",
+        "right"
+      ],
+      "default": "left"
+    },
+    "dark": {
+      "type": "boolean",
+      "platforms": [
+        "react"
+      ]
+    },
+    "max": {
+      "type": "number",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "muted": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "percent": {
+      "type": "string",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "value": {
+      "type": "number",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "variant": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "default",
+        "positive",
+        "negative",
+        "warning"
+      ],
+      "default": "default"
+    },
+    "width": {
+      "type": "string",
+      "platforms": [
+        "react"
+      ]
+    }
+  },
+  "globalProps": true,
+  "usage": {
+    "react": {
+      "import": "import { ProgressSimple } from 'playbook-ui'",
+      "example": "<ProgressSimple align=\"left\" variant=\"default\"></ProgressSimple>"
+    },
+    "rails": {
+      "import": null,
+      "example": "<%= pb_rails(\"progress_simple\", props: { align: \"left\", variant: \"default\" }) %>"
+    }
+  }
+}

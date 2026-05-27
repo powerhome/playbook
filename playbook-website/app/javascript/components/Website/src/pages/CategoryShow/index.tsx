@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import { NavLink, useLoaderData } from "react-router-dom";
-import { Body, Flex, Title } from "playbook-ui";
+import { Body, Flex } from "playbook-ui";
 
+import { Hero } from "../../components/Hero";
 import { KitCard } from "../../components/KitCard";
 import { KitGrid } from "../../components/KitGrid";
 import { PageContainer } from "../../components/PageContainer";
@@ -21,10 +22,11 @@ interface Component {
 type LoaderData = {
   components: Component[];
   category: string;
+  description: string;
 };
 
 export default function CategoryShow() {
-  const { components, category } = useLoaderData() as LoaderData;
+  const { components, category, description } = useLoaderData() as LoaderData;
   const [kitsToShow, setKitsToShow] = useState(components);
   const { platform } = usePlatform();
 
@@ -43,23 +45,17 @@ export default function CategoryShow() {
 
   return (
     <>
-      <Title
-        marginLeft="lg"
-        marginTop="lg"
-        size={1}
-        text={linkFormat(category)}
-      />
-
       <PageContainer>
         <Flex
           align="center"
           className="category-breadcrumb"
-          marginBottom="md"
-          paddingX="xl"
+          paddingX="sm"
+          marginBottom={{ xs: "sm", sm: "sm", md: "sm", lg: "none" }}
+          marginTop="sm"
         >
           <NavLink to="/beta/kits">
             <Body className="previous-route" color="link">
-              <b>Components</b>
+              <b>All Components</b>
             </Body>
           </NavLink>
           <Body marginX="xxs" text="/" />
@@ -67,6 +63,15 @@ export default function CategoryShow() {
             <b>{linkFormat(category)}</b>
           </Body>
         </Flex>
+
+        <Hero
+          key={category}
+          compact
+          description={description ?? ""}
+          title={linkFormat(category)}
+          height="157px"
+          backgroundPosition="center right"
+        />
 
         {!kitsToShow.length && (
           <Flex justify="center" orientation="row">

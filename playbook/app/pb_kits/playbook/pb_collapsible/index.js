@@ -1,4 +1,5 @@
 import PbEnhancedElement from '../pb_enhanced_element'
+import { getElementHeight, setArrowVisibility, toggleVisibility } from '../utilities/domHelpers'
 
 const MAIN_SELECTOR = '[data-collapsible-main]'
 const CONTENT_SELECTOR = '[data-collapsible-content]'
@@ -11,9 +12,11 @@ export default class PbCollapsible extends PbEnhancedElement {
   }
 
   connect() {
-    this.element.addEventListener('click', () => {
+    this.clickHandler = () => {
       this.toggleElement(this.target)
-    })
+    }
+    this.element.addEventListener('click', this.clickHandler)
+    
      // Check the initial state of the collapsible content and set the arrow accordingly
      if (this.target.classList.contains('is-visible')) {
       this.displayUpArrow()
@@ -21,9 +24,19 @@ export default class PbCollapsible extends PbEnhancedElement {
       this.displayDownArrow()
     }
     // Listen for a custom event to toggle the collapsible
-    document.addEventListener(`${this.target.id}`, () => {
+    this.customEventHandler = () => {
       this.toggleElement(this.target)
-    })
+    }
+    document.addEventListener(`${this.target.id}`, this.customEventHandler)
+  }
+
+  disconnect() {
+    if (this.clickHandler) {
+      this.element.removeEventListener('click', this.clickHandler)
+    }
+    if (this.customEventHandler && this.target) {
+      document.removeEventListener(`${this.target.id}`, this.customEventHandler)
+    }
   }
 
   get target() {
@@ -31,15 +44,7 @@ export default class PbCollapsible extends PbEnhancedElement {
   }
 
   showElement(elem) {
-  // Get the natural height of the element
-    const getHeight = () => {
-      elem.style.display = 'block'
-      const height = elem.scrollHeight + 'px' // Get it's height
-      elem.style.display = '' //  Hide it again
-      return height
-    }
-
-    const height = getHeight()
+    const height = getElementHeight(elem)
     elem.classList.add('is-visible')
     elem.style.height = height // Update the max-height
     elem.style.overflow = "hidden"
@@ -70,26 +75,22 @@ export default class PbCollapsible extends PbEnhancedElement {
   }
 
   toggleElement(elem) {
-    if (elem.classList.contains('is-visible')) {
-      this.hideElement(elem)
-      this.displayDownArrow()
-      return
-    }
-    // Otherwise, show it
-    this.showElement(elem)
-    this.displayUpArrow()
+    const isExpanded = toggleVisibility({
+      isVisible: elem.classList.contains('is-visible'),
+      onHide: () => this.hideElement(elem),
+      onShow: () => this.showElement(elem),
+    })
+
+    isExpanded ? this.displayUpArrow() : this.displayDownArrow()
   }
 
   toggleArrows(showDownArrow) {
-    const downArrow = this.element.querySelector(DOWN_ARROW_SELECTOR);
-    const upArrow = this.element.querySelector(UP_ARROW_SELECTOR);
-  
-    if (downArrow) {
-      downArrow.style.display = showDownArrow ? 'inline-block' : 'none';
-    }
-    if (upArrow) {
-      upArrow.style.display = showDownArrow ? 'none' : 'inline-block';
-    }
+    setArrowVisibility({
+      rootElement: this.element,
+      downSelector: DOWN_ARROW_SELECTOR,
+      upSelector: UP_ARROW_SELECTOR,
+      showDownArrow,
+    })
   }
   
   displayDownArrow() {

@@ -10,27 +10,23 @@ module Playbook
       base.prop :left
     end
 
+    LEFT_VALUES = %w[0 xxs xs sm md lg xl auto initial inherit].freeze
+
     def left_values
-      %w[0 xxs xs sm md lg xl auto initial inherit]
+      LEFT_VALUES
     end
 
     def left_options
-      {
-        left: "left",
-      }
+      { left: "left" }
     end
 
   private
 
     def left_props
-      selected_props = left_options.keys.select { |sk| try(sk) }
-      return nil unless selected_props.present?
+      value = left
+      return nil unless value
 
-      selected_props.map do |k|
-        value = send(k)
-        css = positioning_css("left", value) if left.present?
-        css
-      end.compact.join(" ")
+      positioning_css("left", value)
     end
   end
 end

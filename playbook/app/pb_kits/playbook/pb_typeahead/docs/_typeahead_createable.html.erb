@@ -1,0 +1,29 @@
+<%
+  options = [
+    { label: 'Orange', value: '#FFA500' },
+    { label: 'Red', value: '#FF0000' },
+    { label: 'Green', value: '#00FF00' },
+    { label: 'Blue', value: '#0000FF' },
+  ]
+%>
+
+<%= pb_rails("typeahead", props: {
+    id: "typeahead-creatable",
+    placeholder: "All Colors",
+    options: options,
+    label: "Colors",
+    name: :foo,
+    createable: true,
+    pills: true,
+  })
+%>
+
+<%= javascript_tag defer: "defer" do %>
+  document.addEventListener("pb-typeahead-kit-typeahead-creatable-result-option-select", function(event) {
+    console.log('Single Option selected')
+    console.dir(event.detail)
+  })
+  document.addEventListener("pb-typeahead-kit-typeahead-creatable-result-clear", function() {
+    console.log('All options cleared')
+  })
+<% end %>

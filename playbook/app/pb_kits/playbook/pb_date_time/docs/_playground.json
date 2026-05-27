@@ -1,0 +1,89 @@
+{
+  "template": "<DateTime{{props}} />",
+  "propTargets": {},
+  "defaults": {
+    "align": "left",
+    "size": "md",
+    "showCurrentYear": false,
+    "showDayOfWeek": false,
+    "showIcon": false
+  },
+  "groups": [
+    {
+      "name": "Date Config",
+      "props": [
+        "datetime",
+        "showDayOfWeek",
+        "showCurrentYear",
+        "showIcon",
+        "timeZone"
+      ]
+    },
+    {
+      "name": "Appearance",
+      "props": [
+        "size",
+        "align"
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default",
+      "props": {
+        "datetime": "2026-04-09T15:30:00.000Z"
+      }
+    },
+    {
+      "name": "Small",
+      "props": {
+        "datetime": "2026-04-09T15:30:00.000Z",
+        "size": "sm"
+      }
+    },
+    {
+      "name": "With weekday",
+      "props": {
+        "datetime": "2026-06-12T11:00:00.000Z",
+        "showDayOfWeek": true
+      }
+    },
+    {
+      "name": "With icon",
+      "props": {
+        "datetime": "2026-04-09T15:30:00.000Z",
+        "showIcon": true,
+        "size": "md"
+      }
+    },
+    {
+      "name": "Centered",
+      "props": {
+        "datetime": "2026-04-09T15:30:00.000Z",
+        "align": "center"
+      }
+    },
+    {
+      "name": "Tokyo time",
+      "props": {
+        "datetime": "2026-04-09T15:30:00.000Z",
+        "timeZone": "Asia/Tokyo"
+      }
+    },
+    {
+      "name": "Always show year",
+      "props": {
+        "datetime": "2026-04-09T15:30:00.000Z",
+        "showCurrentYear": true
+      }
+    }
+  ],
+  "conditionals": {},
+  "hints": {
+    "tokyo_time": {
+      "presetName": "Tokyo time",
+      "message": "Use the timeZone prop to display the time in a different timezone",
+      "type": "info"
+    }
+  }
+}

@@ -68,7 +68,7 @@ module Playbook
       end
 
       def title_text
-        if null_display
+        if null_display && amount.blank?
           null_display
         elsif swap_negative
           absolute_amount(abbr_or_format_amount)
@@ -125,14 +125,7 @@ module Playbook
       # Convert numeric input to string format
       def convert_amount(input)
         if input.is_a?(Numeric)
-          if input.zero? && null_display.nil?
-            ""
-          else
-            format("%.2f", input)
-          end
-        # Handle string representations of zero
-        elsif input.to_s.strip.match?(/^-?0+(\.0+)?$/) && null_display.nil?
-          ""
+          Kernel.format("%.2f", input)
         else
           input.to_s
         end
@@ -142,6 +135,7 @@ module Playbook
         return "" if currency_amount.blank?
 
         value = currency_amount.split(".").first
+        value = "0" if value.blank?
         if comma_separator
           number_with_delimiter(value.gsub(",", ""))
         else
@@ -152,7 +146,8 @@ module Playbook
       def decimal_value
         return "00" if currency_amount.blank?
 
-        currency_amount.split(".")[1] || "00"
+        fraction = currency_amount.split(".")[1] || "00"
+        fraction.ljust(2, "0")[0, 2]
       end
 
       def units_element

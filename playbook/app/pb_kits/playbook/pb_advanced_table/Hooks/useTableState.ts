@@ -12,6 +12,11 @@ import {
 import { GenericObject } from "../../types";
 import { createColumnHelper } from "@tanstack/react-table";
 import { createCellFunction } from "../Utilities/CellRendererUtils";
+import {
+  buildPlaybookColumnLayoutStyles,
+  buildTanStackSizingFromColumn,
+} from "../Utilities/ColumnLayoutHelper";
+import { getParentOnlySortedRowModel } from "../Utilities/RowModelUtils";
 
 interface UseTableStateProps {
   tableData: GenericObject[];
@@ -36,6 +41,7 @@ interface UseTableStateProps {
   columnVisibilityControl?: GenericObject;
   rowStyling?: GenericObject;
   inlineRowLoading?: boolean;
+  sortParentOnly?: boolean;
 }
 
 export function useTableState({
@@ -55,7 +61,8 @@ export function useTableState({
   columnVisibilityControl,
   pinnedRows,
   rowStyling,
-  inlineRowLoading = false
+  inlineRowLoading = false,
+  sortParentOnly = false
 }: UseTableStateProps) {
 
   // Create a local state for expanded and setExpanded if expandedControl not used
@@ -102,11 +109,31 @@ export function useTableState({
           columns: buildColumns(column.columns, false),
         };
       }
+      const tanStackSizing = buildTanStackSizingFromColumn(column);
+      const layoutStyles = buildPlaybookColumnLayoutStyles(column, tanStackSizing);
+      const userMeta =
+        column.meta &&
+        typeof column.meta === "object" &&
+        !Array.isArray(column.meta)
+          ? column.meta
+          : {};
+      const hasLayoutStyles =
+        layoutStyles.width !== undefined ||
+        layoutStyles.minWidth !== undefined ||
+        layoutStyles.maxWidth !== undefined;
+
       // Define the base column structure
       const columnStructure = {
         ...columnHelper.accessor(column.accessor, {
           header: column.header ?? column.label ?? "",
           enableSorting: isFirstColumn || column.enableSort === true,
+          ...tanStackSizing,
+          meta: {
+            ...userMeta,
+            ...(hasLayoutStyles
+              ? { playbookColumnLayoutStyles: layoutStyles }
+              : {}),
+          },
         }),
       };
 
@@ -190,7 +217,7 @@ export function useTableState({
     getSubRows: (row: GenericObject) => row.children,
     getCoreRowModel: getCoreRowModel(),
     getExpandedRowModel: getExpandedRowModel(),
-    getSortedRowModel: getSortedRowModel(),
+    getSortedRowModel: sortParentOnly ? getParentOnlySortedRowModel() : getSortedRowModel(),
     enableSortingRemoval: enableSortingRemoval,
     sortDescFirst: true,
     onRowSelectionChange: setRowSelection,

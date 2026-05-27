@@ -4,23 +4,33 @@ import Caption from "../../pb_caption/_caption"
 const CaptionColors = (props) => {
   return (
     <div>
+      <Caption 
+          text="Caption light"
+          {...props}
+      />
       <Caption
-          text="Test colors"
+          color="default"
+          text="Caption default"
+          {...props}
+      />
+      <Caption
+          color="lighter"
+          text="Caption lighter"
           {...props}
       />
       <Caption
           color="success"
-          text="Test colors"
+          text="Caption success"
           {...props}
       />
       <Caption
           color="error"
-          text="Test colors"
+          text="Caption error"
           {...props}
       />
       <Caption
           color="link"
-          text="Test colors"
+          text="Caption link"
           {...props}
       />
     </div>

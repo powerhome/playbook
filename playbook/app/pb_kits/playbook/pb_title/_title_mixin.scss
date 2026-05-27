@@ -1,21 +1,21 @@
 @import "../tokens/titles";
 
 $pb_title_colors: (
-  default: $text_lt_default,
-  light: $text_lt_light,
-  lighter: $text_lt_lighter,
-  success: $success,
-  error: $error,
-  link: $primary
+  default:  $text_default_color,
+  light:    $text_light,
+  lighter:  $text_lighter,
+  success:  $text_success,
+  error:    $text_error,
+  link:     $text_link,
 );
 
 $pb_dark_title_colors: (
-  default: $text_dk_default,
-  light: $text_dk_light,
-  lighter: $text_dk_lighter,
-  success: $success,
-  error: $error_dark,
-  link: $active_dark
+  default:  $text_default_dark,
+  light:    $text_light_dark,
+  lighter:  $text_lighter_dark,
+  success:  $text_success_dark,
+  error:    $text_error_dark,
+  link:     $text_link_dark,
 );
 
 @mixin title_colors {
@@ -27,5 +27,5 @@ $pb_dark_title_colors: (
 }
 
 @mixin title_dark {
-  color: $text_dk_default;
+  color: $text_default_dark;
 }
