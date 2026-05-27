@@ -278,7 +278,9 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
   // Default Date + Min/Max Date Initialization Helper Functions section ----/
   const toDateObject = (dateValue: any): Date | null => {
     if (!dateValue) return null
-    if (dateValue instanceof Date) return dateValue
+    if (dateValue instanceof Date) {
+      return isNaN(dateValue.getTime()) ? null : dateValue
+    }
     if (typeof dateValue === 'string') {
       const parsed = new Date(dateValue)
       return isNaN(parsed.getTime()) ? null : parsed

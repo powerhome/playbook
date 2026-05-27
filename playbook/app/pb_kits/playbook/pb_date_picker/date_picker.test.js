@@ -66,6 +66,40 @@ describe('DatePicker Kit', () => {
     expect(kit).not.toHaveAttribute('data-default-value')
   })
 
+  test('renders without error when defaultDate is an invalid Date', () => {
+    const testId = 'datepicker-invalid-date'
+    const invalidDate = new Date('UndefinedT00:00')
+
+    expect(() => {
+      render(
+        <DatePicker
+            data={{ testid: testId }}
+            defaultDate={invalidDate}
+            pickerId="date-picker-invalid-date"
+        />
+      )
+    }).not.toThrow()
+
+    const kit = screen.getByTestId(testId)
+    expect(kit).not.toHaveAttribute('data-default-value')
+  })
+
+  test('omits data-default-value when defaultDate is constructed from undefined', () => {
+    const testId = 'datepicker-undefined-date'
+    const invalidDate = new Date(undefined + 'T00:00')
+
+    render(
+      <DatePicker
+          data={{ testid: testId }}
+          defaultDate={invalidDate}
+          pickerId="date-picker-undefined-date"
+      />
+    )
+
+    const kit = screen.getByTestId(testId)
+    expect(kit).not.toHaveAttribute('data-default-value')
+  })
+
   test('inLine alone adds inline-date-picker class and inline control icons, not the calendar icon', () => {
     const testId = 'datepicker-inline-only'
     render(
