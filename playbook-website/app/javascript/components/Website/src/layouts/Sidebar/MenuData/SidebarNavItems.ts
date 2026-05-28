@@ -48,11 +48,4 @@ export const SideBarNavItems = [
         children: false,
         leftIcon:"icons"
     },
-    // {
-    //     name: "Building Blocks",
-    //     key: "top-nav-item-6",
-    //     link: "/building_blocks",
-    //     children: true,
-    //     leftIcon:"chalkboard-teacher"
-    // },
 ]

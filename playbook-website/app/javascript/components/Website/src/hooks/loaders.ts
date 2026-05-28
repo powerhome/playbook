@@ -20,13 +20,20 @@ const sortComponentsByName = (kitCategory: CategoryTypes) => {
   kitCategory.components.sort(sortByName);
 };
 
-export const ComponentsLoader: () => Promise<CategoryTypes[]> = async () => {
-  const response = await fetch("/beta/kits.json");
+// Module-level cache — fetched once per page session, reused on every navigation.
+let kitsCache: any = null;
+
+async function fetchKits() {
+  if (kitsCache) return kitsCache;
+  const response = await fetch("/kits.json");
   const data = await response.json();
-
   data.kits.forEach(sortComponentsByName);
-
+  kitsCache = data;
   return data;
+}
+
+export const ComponentsLoader: () => Promise<CategoryTypes[]> = async () => {
+  return fetchKits();
 };
 
 export const ComponentShowLoader = async ({
@@ -49,10 +56,10 @@ export const ComponentShowLoader = async ({
   if (isAdvancedTableSection) {
     // For advanced_table sections like /kits/advanced_table/default/react
     // params.name is the section name, fetch from advanced_table with section param
-    url = `/beta/kits/advanced_table/${params.name}/${platform}.json`;
+    url = `/kits/advanced_table/${params.name}/${platform}.json`;
   } else {
     // Normal kit route
-    url = `/beta/kits/${params.name}/${platform}.json`;
+    url = `/kits/${params.name}/${platform}.json`;
   }
 
   const response = await fetch(url);
@@ -63,8 +70,7 @@ export const ComponentShowLoader = async ({
 export const CategoryLoader: (
   props: LoaderFunctionArgs
 ) => Promise<ComponentTypes> = async ({ params }) => {
-  const response = await fetch("/beta/kits.json");
-  const { kits } = await response.json();
+  const { kits } = await fetchKits();
 
   const filteredData = kits.find(
     (kit: CategoryTypes) => kit.category === params.category
@@ -76,15 +82,24 @@ export const CategoryLoader: (
 };
 
 export const GuidesLoader = async () => {
-  const response = await fetch("/beta/kits.json");
+  return fetchKits();
+};
+
+export const GuidePageLoader = async ({ params, request }: LoaderFunctionArgs) => {
+  const guidePath = params.page;
+  const { pathname } = new URL(request.url);
+  const guideType = pathname.includes('getting_started') ? 'getting_started' : 'design_guidelines';
+  const response = await fetch(`/guides/${guideType}/${guidePath}.json`);
   const data = await response.json();
   return data;
 };
 
-export const GuidePageLoader = async ({ params }: any) => {
-  const guidePath = params.page;
-  const guideType = window.location.pathname.includes('getting_started') ? 'getting_started' : 'design_guidelines';
-  const response = await fetch(`/beta/guides/${guideType}/${guidePath}.json`);
+let iconsCache: any = null;
+
+export const IconsLoader = async () => {
+  if (iconsCache) return iconsCache;
+  const response = await fetch("/icons.json");
   const data = await response.json();
+  iconsCache = data;
   return data;
 };

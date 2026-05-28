@@ -13,7 +13,7 @@ const MobileNav = () => {
       className={`pb--page--mobileNav ${darkMode ? 'dark' : ''}`}
       shadow="deep"
     >
-      <Link to="/beta">
+      <Link to="/">
         <Image alt="Playbook logo" url={PBLogoMobile} />
       </Link>
     </Flex>
