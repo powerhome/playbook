@@ -71,7 +71,7 @@ navigation[:whats_new] = {
 }
 
 # Move these pages to the end of the Getting Started page
-page_names = ["HTML&_CSS", "figma_setup", "how_to_theme", "dependencies", "icons"]
+page_names = ["HTML&_CSS", "figma_setup", "how_to_theme", "dependencies"]
 
 move_pages = navigation[:getting_started][:pages].select { |page| page_names.include?(page[:page_id]) }
 navigation[:getting_started][:pages].reject! { |page| page_names.include?(page[:page_id]) }

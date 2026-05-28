@@ -81,19 +81,14 @@ export const OtherNavItems = ({
     menuItems = whatsNewNavItems
   }
 
-  const handleItemClick = (link, i) => {
+  const handleItemClick = (link) => {
     if (navigate) {
       navigate(link.link);
     }
     updateTopLevelNav(parentIndex);
   }
 
-  const activeForItems = (link, i) => {
-    // Special case for icon integration
-    if (currentURL.startsWith("/guides/getting_started/icons") && link.name === "Icon Integration") {
-      return true;
-    }
-  
+  const activeForItems = (link) => {
     // Strip /react or /rails from the end of currentURL before comparing
     const normalizedCurrentURL = currentURL.replace(/\/(react|rails)$/, '');
     return link.link === currentURL || link.link === normalizedCurrentURL;
@@ -185,14 +180,14 @@ export const OtherNavItems = ({
             >
               {flexBoxChildren.map((child: any, childIndex: number) => (
                 <NavItem
-                  active={activeForItems(child, childIndex)}
+                  active={activeForItems(child)}
                   cursor="pointer"
                   dark={dark}
                   fontSize="small"
                   key={`${child.link}-${childIndex}`}
                   marginBottom="none"
                   marginTop="xxs"
-                  onClick={() => handleItemClick(child, childIndex)}
+                  onClick={() => handleItemClick(child)}
                   paddingY="xxs"
                   text={child.name}
                 />
@@ -203,14 +198,14 @@ export const OtherNavItems = ({
         
         return (
           <NavItem
-            active={activeForItems(link, i)}
+            active={activeForItems(link)}
             cursor="pointer"
             dark={dark}
             fontSize="small"
             key={`${link.link}-${i}`}
             marginBottom="none"
             marginTop="xxs"
-            onClick={() => handleItemClick(link, i)}
+            onClick={() => handleItemClick(link)}
             paddingY="xxs"
             text={link.name}
           />

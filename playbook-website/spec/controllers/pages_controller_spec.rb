@@ -23,13 +23,13 @@ RSpec.describe PagesController, type: :controller do
       expect(response).to render_template("application")
     end
 
-    it "returns guide content for getting started icons guide" do
-      @request.env["PATH_INFO"] = "/guides/getting_started/icons"
-      get :application, params: { page: "icons" }, format: :json
+    it "returns guide content for getting started dependencies guide" do
+      @request.env["PATH_INFO"] = "/guides/getting_started/dependencies"
+      get :application, params: { page: "dependencies" }, format: :json
 
       json = JSON.parse(response.body)
       expect(json["guide_page_content"]).to be_present
-      expect(json["guide_page_content"]).to include("Icon")
+      expect(json["guide_page_content"]).to include("Dependencies")
       expect(json["icons_by_category"]).to be_nil
     end
 
