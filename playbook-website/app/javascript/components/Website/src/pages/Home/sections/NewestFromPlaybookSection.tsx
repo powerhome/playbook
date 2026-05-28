@@ -28,7 +28,7 @@ function PreviewCardRow({ index, post }: RowProps) {
 
   return (
     <Flex
-      align="baseline"
+      alignItems="stretch"
       justify="center"
       paddingBottom={index === 1 ? "lg" : undefined}
       paddingTop="md"
@@ -37,7 +37,7 @@ function PreviewCardRow({ index, post }: RowProps) {
         borderRadius="lg"
         hover={{ shadow: "deepest" }}
         marginX="md"
-        maxWidth="xl"
+        width="100%"
         padding="none"
       >
         <Link style={{ color: "inherit", textDecoration: "none" }}
