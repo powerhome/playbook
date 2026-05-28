@@ -34,19 +34,29 @@ function resolveFloatingOwnerId(fromElement) {
   return null;
 }
 
+const DIALOG_DIRECT_FLOATING_ROOT = `:scope > ${PB_DIALOG_FLOATING_ROOT}`;
+const POPOVER_FLOATING_ROOT = `:scope > .pb_popover_body > ${PB_DIALOG_FLOATING_ROOT}`;
+
 function resolveDialogFloatingPortalHost(fromElement) {
   if (!fromElement) return null;
   const dialogEl = fromElement.closest("dialog");
   if (dialogEl) {
-    return dialogEl.querySelector(PB_DIALOG_FLOATING_ROOT) || dialogEl;
+    return dialogEl.querySelector(DIALOG_DIRECT_FLOATING_ROOT) || dialogEl;
   }
   const reactModalShell = fromElement.closest(".pb_dialog");
   if (reactModalShell) {
-    return reactModalShell.querySelector(PB_DIALOG_FLOATING_ROOT) || reactModalShell;
+    return (
+      reactModalShell.querySelector(DIALOG_DIRECT_FLOATING_ROOT) ||
+      reactModalShell
+    );
   }
   const popoverEl = fromElement.closest(".pb_popover_tooltip");
   if (popoverEl) {
-    return popoverEl.querySelector(PB_DIALOG_FLOATING_ROOT) || popoverEl;
+    return (
+      popoverEl.querySelector(POPOVER_FLOATING_ROOT) ||
+      popoverEl.querySelector(PB_DIALOG_FLOATING_ROOT) ||
+      popoverEl
+    );
   }
   return null;
 }

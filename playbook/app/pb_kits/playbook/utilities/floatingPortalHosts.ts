@@ -11,13 +11,19 @@ export const PB_DIALOG_FLOATING_ROOT_SELECTOR = "[data-pb-dialog-floating-root]"
 /** Scopes portaled menus to the Dialog / Filter popover that opened them (close-on-click). */
 export const PB_FLOATING_OWNER_ATTR = "data-pb-floating-owner"
 
+/** Direct-child floating root on dialog / React modal shells (excludes nested `<dialog>` roots). */
+const DIALOG_DIRECT_FLOATING_ROOT = `:scope > ${PB_DIALOG_FLOATING_ROOT_SELECTOR}`
+
+/** Popover floating root lives under `.pb_popover_body`, not on the tooltip root. */
+const POPOVER_FLOATING_ROOT = `:scope > .pb_popover_body > ${PB_DIALOG_FLOATING_ROOT_SELECTOR}`
+
 export function resolveDialogFloatingPortalHost(
   fromElement: Element | null | undefined,
 ): HTMLElement | null {
   const dialogEl = fromElement?.closest("dialog")
   if (dialogEl) {
     return (
-      dialogEl.querySelector<HTMLElement>(PB_DIALOG_FLOATING_ROOT_SELECTOR) ??
+      dialogEl.querySelector<HTMLElement>(DIALOG_DIRECT_FLOATING_ROOT) ??
       dialogEl
     )
   }
@@ -25,13 +31,14 @@ export function resolveDialogFloatingPortalHost(
   const reactModalShell = fromElement?.closest(".pb_dialog")
   if (reactModalShell) {
     return (
-      reactModalShell.querySelector<HTMLElement>(PB_DIALOG_FLOATING_ROOT_SELECTOR) ??
+      reactModalShell.querySelector<HTMLElement>(DIALOG_DIRECT_FLOATING_ROOT) ??
       (reactModalShell as HTMLElement)
     )
   }
   const popoverEl = fromElement?.closest(".pb_popover_tooltip")
   if (popoverEl) {
     return (
+      popoverEl.querySelector<HTMLElement>(POPOVER_FLOATING_ROOT) ??
       popoverEl.querySelector<HTMLElement>(PB_DIALOG_FLOATING_ROOT_SELECTOR) ??
       (popoverEl as HTMLElement)
     )
