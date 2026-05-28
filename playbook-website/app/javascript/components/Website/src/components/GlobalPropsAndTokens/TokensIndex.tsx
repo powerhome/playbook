@@ -21,6 +21,7 @@ const linkStyle: React.CSSProperties = {
 const Tokens = () => {
   return (
     <Background
+      className="global-props-tokens-landing"
       flexDirection="column"
       backgroundColor="white"
       display="flex"
@@ -32,7 +33,7 @@ const Tokens = () => {
         imageUrl={HeaderImage}
         width="100%"
         display={{ xs: "none", sm: "none", md: "none" }}
-        height="250px"
+        minHeight="250px"
         backgroundColor="dark"
         backgroundSize="contain"
         backgroundPosition="center"

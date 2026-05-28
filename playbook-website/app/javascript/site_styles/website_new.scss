@@ -157,6 +157,12 @@ body.pages.application .pb--website-react-host {
   .hero-content-well {
     @include website-content-well;
   }
+
+  .global-props-tokens-landing {
+    @media screen and (min-width: #{$screen-lg-min + 1}) {
+      padding-top: 90px;
+    }
+  }
 }
 
 .pb--page--header--new {
