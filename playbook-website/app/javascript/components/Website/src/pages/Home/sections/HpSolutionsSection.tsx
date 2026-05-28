@@ -1,4 +1,4 @@
-import { useLayoutEffect, useRef } from "react"
+import { useCallback, useLayoutEffect, useRef, type PointerEvent } from "react"
 import { useNavigate } from "react-router-dom"
 import {
   Background,
@@ -43,6 +43,44 @@ export default function HpSolutionsSection() {
   const navigate = useNavigate()
   const containerRef = useRef<HTMLDivElement>(null)
   const codeCardRef = useRef<HTMLDivElement>(null)
+  const isDraggingRef = useRef(false)
+
+  const moveCodePanel = useCallback((clientX: number) => {
+    const container = containerRef.current
+    const codeCard = codeCardRef.current
+    if (!container || !codeCard) return
+
+    const containerRect = container.getBoundingClientRect()
+    const minX = 5
+    const maxX = Math.max(minX, containerRect.width - 5)
+    const nextX = Math.min(
+      maxX,
+      Math.max(minX, clientX - containerRect.left),
+    )
+
+    codeCard.style.transform = `translateX(${nextX}px) translateY(0)`
+    codeCard.style.transition = "none"
+  }, [])
+
+  const startDragging = (event: PointerEvent<HTMLDivElement>) => {
+    isDraggingRef.current = true
+    event.currentTarget.setPointerCapture(event.pointerId)
+    moveCodePanel(event.clientX)
+  }
+
+  const dragCodePanel = (event: PointerEvent<HTMLDivElement>) => {
+    if (!isDraggingRef.current) return
+
+    event.preventDefault()
+    moveCodePanel(event.clientX)
+  }
+
+  const stopDragging = (event: PointerEvent<HTMLDivElement>) => {
+    isDraggingRef.current = false
+    if (event.currentTarget.hasPointerCapture(event.pointerId)) {
+      event.currentTarget.releasePointerCapture(event.pointerId)
+    }
+  }
 
   useLayoutEffect(() => {
     const positionCodePanel = () => {
@@ -112,7 +150,15 @@ export default function HpSolutionsSection() {
                   padding="none"
                   shadow="deeper"
               >
-                <div className="vertical-bar">
+                <div
+                    className="vertical-bar"
+                    onPointerCancel={stopDragging}
+                    onPointerDown={startDragging}
+                    onPointerMove={dragCodePanel}
+                    onPointerUp={stopDragging}
+                    role="presentation"
+                    style={{ touchAction: "none" }}
+                >
                   <Icon icon="grip-lines-vertical" />
                 </div>
                 <div className="pb--codeCopy">
@@ -140,14 +186,6 @@ export default function HpSolutionsSection() {
 
             <FlexItem marginTop="sm">
               <Title
-                  display={{ xs: "flex", sm: "none" }}
-                  marginBottom="lg"
-                  size={3}
-                  tag="h3"
-                  text="Solutions written in multiple languages."
-                  textAlign="center"
-              />
-              <Title
                   display={{ xs: "none", sm: "flex" }}
                   marginBottom={{ md: "sm", xl: "lg" }}
                   size={2}
@@ -157,16 +195,9 @@ export default function HpSolutionsSection() {
               />
             </FlexItem>
 
-            <FlexItem marginBottom={{ md: "none", xs: "lg" }}>
+            <FlexItem marginBottom={{ md: "none", xs: "lg", default: "none" }}>
               <Body
                   color="light"
-                  display={{ xs: "flex", sm: "none" }}
-                  text="Playbook gives designers and developers the frameworks they need to create engaging product experiences."
-                  textAlign={{ xs: "center", sm: "start" }}
-              />
-              <Body
-                  color="light"
-                  display={{ xs: "none", sm: "flex" }}
                   text="Playbook was created for Power by Power. Playbook is an open-source, cross-platform design system that gives designers and developers the frameworks they need to create engaging product experiences—accessibility, internationalization, and performance included."
                   textAlign={{ xs: "center", sm: "start" }}
               />
@@ -177,7 +208,7 @@ export default function HpSolutionsSection() {
                 display={{ xs: "none", default: "flex" }}
                 gap="md"
                 justify="between"
-                marginY={{ md: "xl", xl: "sm" }}
+                marginY={{ md: "xl", xl: "sm", default: "xl" }}
             >
               <LanguageStack caption={captionReact}
                   href={GUIDE.react}

@@ -18,8 +18,8 @@ export default function Home() {
   return (
     <div className="landing-page">
       <HomepageHero />
-      <HpSolutionsSection />
       <HpSocialProofSections />
+      <HpSolutionsSection />
       <NewestFromPlaybookSection posts={landing_posts} />
       <Footer />
     </div>
