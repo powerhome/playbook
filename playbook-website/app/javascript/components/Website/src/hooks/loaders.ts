@@ -85,9 +85,10 @@ export const GuidesLoader = async () => {
   return fetchKits();
 };
 
-export const GuidePageLoader = async ({ params }: any) => {
+export const GuidePageLoader = async ({ params, request }: LoaderFunctionArgs) => {
   const guidePath = params.page;
-  const guideType = window.location.pathname.includes('getting_started') ? 'getting_started' : 'design_guidelines';
+  const { pathname } = new URL(request.url);
+  const guideType = pathname.includes('getting_started') ? 'getting_started' : 'design_guidelines';
   const response = await fetch(`/guides/${guideType}/${guidePath}.json`);
   const data = await response.json();
   return data;
