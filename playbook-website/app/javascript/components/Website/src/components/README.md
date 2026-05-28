@@ -1,5 +1,32 @@
 # Components Folder
 
-The `components` folder contains all shared React components for the website (e.g. `HomepageHero`, `GlobalPropsAndTokens`, `Icons`, `AvailableProps`, `KitSearch`). Each component is a reusable and self-contained element with its own logic. Components can range from small UI elements like buttons and inputs to complex parts of the app like user profile cards, navigation bars, etc. When placing something inside of this folder, the question you can ask yourself is will it be used in multiple places? If the answer is yes, then it should be a component and live in this folder. 
+The `components` folder contains shared React components used across website
+pages. Examples include `HomepageHero`, `GlobalPropsAndTokens`, `Icons`,
+`AvailableProps`, `KitSearch`, `PlatformToggle`, `MobileNav`, and the shared
+markdown/live-example renderers.
 
-If a component needs multiple files, a folder can also be built inside of this components folder containing an index.tsx and any relevant files that encapsulate that complex component. 
+Use this folder for UI that is reused across multiple pages or represents a
+self-contained shared surface. If a component needs supporting files, prefer a
+folder with an `index.tsx` and colocated styles/data/helpers.
+
+## MarkdownContent
+
+[`MarkdownContent.tsx`](./MarkdownContent.tsx) is the shared renderer for guide
+copy, changelog entries, kit descriptions, and doc-example descriptions. It uses
+`react-markdown`, with local normalization for the HTML that appears in Playbook
+docs content:
+
+- Raw `<img>` tags are converted to markdown images so changelog images render.
+- `<br>`, paragraph tags, basic emphasis tags, and links are normalized.
+- Pipe-style markdown tables are rendered as real `<table>` elements.
+- Table cells still run through markdown rendering so links, bold text, and line
+  breaks work inside cells.
+
+Keep new markdown behavior centralized there so changelog, guide, and kit-doc
+copy stay consistent.
+
+## Live Examples
+
+Interactive docs examples live in [`LiveExamples`](./LiveExamples/README.md).
+`LiveExampleReact` evaluates React examples with `react-live`, while
+`LiveExampleRails` renders pre-rendered Rails examples.
