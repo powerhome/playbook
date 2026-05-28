@@ -8,7 +8,6 @@ const Sidebar = ({
   category,
   kit,
   kits_with_status,
-  building_blocks,
   getting_started,
   design_guidelines,
   whats_new,
@@ -67,7 +66,6 @@ const Sidebar = ({
           kit={kit}
           category={category}
           collapsibles={collapsibles}
-          building_blocks={building_blocks}
           getting_started={getting_started}
           design_guidelines={design_guidelines}
           whats_new={whats_new}

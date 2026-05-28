@@ -24,11 +24,4 @@ Rails.application.routes.draw do
   get "global_props",                        to: "pages#application"
   get "tokens/:name",                        to: "pages#application"
   get "tokens",                              to: "pages#application"
-
-  # Building Blocks (kept as legacy standalone till new pages designed/built)
-  get "building_blocks",        to: "building_blocks#index"
-  get "building_blocks/icons",  to: "building_blocks#icons"
-  get "building_blocks/:name(/:type)", to: "building_blocks#show",
-                                       as: "building_blocks_show",
-                                       defaults: { type: "rails" }
 end

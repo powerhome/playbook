@@ -22,7 +22,6 @@ function WebsiteContent() {
     icons, 
     whats_new,
     category,
-    building_blocks,
     global_props_and_tokens
   }: any = useLoaderData();
   const location = useLocation();
@@ -155,7 +154,6 @@ function WebsiteContent() {
           )}
           <Layout.Side className={`pb--page--sideNav ${darkMode ? 'dark' : ''} ${mobileNavOpen ? 'mobile-open' : ''}`.trim()}>
             <Sidebar
-              building_blocks={building_blocks || []}
               dark={darkMode}
               type={platform || "react"}
               category={category}

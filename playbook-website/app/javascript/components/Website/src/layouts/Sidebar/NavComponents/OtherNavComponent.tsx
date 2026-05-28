@@ -5,7 +5,6 @@ import { useNavigate, useLocation } from "react-router-dom";
 export const OtherNavItems = ({
   name,
   dark,
-  building_blocks,
   updateTopLevelNav,
   parentIndex,
   getting_started,
@@ -19,11 +18,6 @@ export const OtherNavItems = ({
   const currentURL = location.pathname + location.search;
   
   const createLink = (path: string) => path;
-
-  const buildingBlocksMenu = building_blocks?.BuildingBlocks?.map((item) => ({
-    name: item.name,
-    link: createLink(`/building_blocks/${item.link}`),
-  })) || []
 
   let menuItems: { [key: string]: string }[] | string[] = []
 
@@ -71,8 +65,6 @@ export const OtherNavItems = ({
     menuItems = globalPropsMenu
   } else if (name === "Tokens") {
     menuItems = tokensMenu
-  } else if (name === "Building Blocks" && building_blocks) {
-    menuItems = buildingBlocksMenu
   } else if (name === "Getting Started") {
     menuItems = guidesNavItems
   } else if (name === "Design Guidelines") {

@@ -224,7 +224,6 @@ class PagesController < ApplicationController
           icon_kit_url: "https://playbook.powerapp.cloud/kits/icon/react",
           icons_by_category: icons_by_category,
           whats_new: DOCS[:whats_new],
-          building_blocks: BUILDING_BLOCKS,
           global_props_and_tokens: GLOBAL_PROPS_AND_TOKENS,
           changelog_content: changelog_content,
           changelog_releases: changelog_releases,

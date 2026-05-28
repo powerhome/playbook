@@ -6,7 +6,6 @@ class ApplicationController < ActionController::Base
   include PlaybookWebsite::Markdown::Helper
 
   helper ApplicationHelper
-  helper BuildingBlocksHelper
 
   def set_app_js
     @application_js = %w[application]
