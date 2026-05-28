@@ -56,9 +56,28 @@ function applyDarkModeToRenderedRoots(container: HTMLDivElement, darkMode: boole
   });
 }
 
+function resetExampleOverflow(element: HTMLElement) {
+  element.style.overflowX = "auto";
+  element.style.removeProperty("overflow-y");
+}
+
+function showExampleOverflow(event: React.SyntheticEvent<HTMLDivElement>) {
+  event.currentTarget.style.overflowX = "visible";
+  event.currentTarget.style.overflowY = "visible";
+}
+
 const LiveExampleRails: React.FC<LiveExampleRailsProps> = ({ html }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const { darkMode } = useDarkMode();
+
+  const handleBlurCapture = (event: React.FocusEvent<HTMLDivElement>) => {
+    const nextTarget = event.relatedTarget as Node | null;
+
+    if (!nextTarget || !event.currentTarget.contains(nextTarget)) {
+      resetExampleOverflow(event.currentTarget);
+    }
+  };
+
   useEffect(() => {
     if (!containerRef.current || !html) return;
 
@@ -122,6 +141,9 @@ const LiveExampleRails: React.FC<LiveExampleRailsProps> = ({ html }) => {
       }}
     >
       <div
+        onBlurCapture={handleBlurCapture}
+        onFocusCapture={showExampleOverflow}
+        onPointerDownCapture={showExampleOverflow}
         style={{
           boxSizing: "border-box",
           width: "100%",

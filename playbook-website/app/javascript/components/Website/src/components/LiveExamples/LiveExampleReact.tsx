@@ -114,6 +114,16 @@ async function loadThirdPartyLibs(raw: string): Promise<ThirdPartyScope> {
   return Object.assign({}, ...scopes);
 }
 
+function resetExampleOverflow(element: HTMLElement) {
+  element.style.overflowX = "auto";
+  element.style.removeProperty("overflow-y");
+}
+
+function showExampleOverflow(event: React.SyntheticEvent<HTMLDivElement>) {
+  event.currentTarget.style.overflowX = "visible";
+  event.currentTarget.style.overflowY = "visible";
+}
+
 // Main Component
 const LiveExample: React.FC<LiveExampleProps> = ({
   code,
@@ -142,6 +152,14 @@ const LiveExample: React.FC<LiveExampleProps> = ({
     () => ({ ...exampleProps, dark: darkMode, darkMode }),
     [exampleProps, darkMode],
   );
+
+  const handleBlurCapture = (event: React.FocusEvent<HTMLDivElement>) => {
+    const nextTarget = event.relatedTarget as Node | null;
+
+    if (!nextTarget || !event.currentTarget.contains(nextTarget)) {
+      resetExampleOverflow(event.currentTarget);
+    }
+  };
 
   useEffect(() => {
     let cancelled = false;
@@ -243,6 +261,9 @@ const LiveExample: React.FC<LiveExampleProps> = ({
           }}
         >
           <div
+            onBlurCapture={handleBlurCapture}
+            onFocusCapture={showExampleOverflow}
+            onPointerDownCapture={showExampleOverflow}
             style={{
               boxSizing: "border-box",
               width: "100%",

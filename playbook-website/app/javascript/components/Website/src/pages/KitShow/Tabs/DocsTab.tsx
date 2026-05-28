@@ -309,8 +309,8 @@ export const DocsTab = ({ examples, exampleProps, sections }: DocsTabProps) => {
       }}
     >
       {/*
-        Keep horizontal overflow clipping on the examples column only. `overflow-x: hidden` on an
-        ancestor of `position: sticky` breaks sticking to the main scrollport (see RightSideNav).
+        Keep horizontal overflow clipping on the examples column only. `overflow-x: hidden` also
+        clips vertical popups, so use `clip` to avoid creating a scroll container.
       */}
       <Flex
         flexDirection="column"
@@ -322,7 +322,8 @@ export const DocsTab = ({ examples, exampleProps, sections }: DocsTabProps) => {
             boxSizing: "border-box",
             maxWidth: "100%",
             minWidth: 0,
-            overflowX: "hidden",
+            overflowX: "clip",
+            overflowY: "visible",
           },
         }}
       >
