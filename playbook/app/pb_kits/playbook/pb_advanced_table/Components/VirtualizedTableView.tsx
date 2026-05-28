@@ -19,6 +19,7 @@ import { LoadingCell } from "../Components/LoadingCell"
 import { renderCollapsibleTrail } from "../Components/CollapsibleTrail"
 
 import AdvancedTableContext from "../Context/AdvancedTableContext"
+import { playbookColumnLayoutStylesFromMeta } from "../Utilities/ColumnLayoutHelper"
 
 type VirtualizedTableViewProps = {
   collapsibleTrail?: boolean
@@ -224,7 +225,10 @@ export const VirtualizedTableView = ({
                         isLastCell && 'last-cell',
                       )}
                       key={`${cell.id}-data`}
-                      style={{ width: cellWidth }}
+                      style={{
+                        ...playbookColumnLayoutStylesFromMeta(cell.column.columnDef),
+                        width: cellWidth,
+                      }}
                   >
                     {collapsibleTrail && i === 0 && row.depth > 0 && renderCollapsibleTrail(row.depth)}
                     <span id={`${cell.id}-span`}>

@@ -12,6 +12,10 @@ import {
 import { GenericObject } from "../../types";
 import { createColumnHelper } from "@tanstack/react-table";
 import { createCellFunction } from "../Utilities/CellRendererUtils";
+import {
+  buildPlaybookColumnLayoutStyles,
+  buildTanStackSizingFromColumn,
+} from "../Utilities/ColumnLayoutHelper";
 import { getParentOnlySortedRowModel } from "../Utilities/RowModelUtils";
 
 interface UseTableStateProps {
@@ -105,11 +109,31 @@ export function useTableState({
           columns: buildColumns(column.columns, false),
         };
       }
+      const tanStackSizing = buildTanStackSizingFromColumn(column);
+      const layoutStyles = buildPlaybookColumnLayoutStyles(column, tanStackSizing);
+      const userMeta =
+        column.meta &&
+        typeof column.meta === "object" &&
+        !Array.isArray(column.meta)
+          ? column.meta
+          : {};
+      const hasLayoutStyles =
+        layoutStyles.width !== undefined ||
+        layoutStyles.minWidth !== undefined ||
+        layoutStyles.maxWidth !== undefined;
+
       // Define the base column structure
       const columnStructure = {
         ...columnHelper.accessor(column.accessor, {
           header: column.header ?? column.label ?? "",
           enableSorting: isFirstColumn || column.enableSort === true,
+          ...tanStackSizing,
+          meta: {
+            ...userMeta,
+            ...(hasLayoutStyles
+              ? { playbookColumnLayoutStyles: layoutStyles }
+              : {}),
+          },
         }),
       };
 

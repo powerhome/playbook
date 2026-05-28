@@ -58,7 +58,10 @@ const ListItem = (props: ListItemProps) => {
         >
           {
             dragHandle && (
-              <span style={{verticalAlign: 'middle'}}>
+              <span
+                  className="pb_draggable_handle"
+                  style={{verticalAlign: 'middle'}}
+              >
                 <Body color="light">
                 <Icon 
                     icon="grip-dots-vertical"

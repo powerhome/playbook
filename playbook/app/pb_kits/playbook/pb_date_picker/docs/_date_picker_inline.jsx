@@ -6,8 +6,6 @@ const DatePickerInline = (props) => {
   return (
     <div>
       <DatePicker
-          className="inline-date-picker"
-          hideIcon
           inLine
           pickerId="date-picker-inline"
           {...props}

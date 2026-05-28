@@ -464,8 +464,13 @@ export const generateLiveFromTemplate = ({
   childrenConfig,
   customImports = [],
   wrapper,
-  requiredProps = {},
+  requiredProps: _requiredProps = {},
 }: Omit<GenerateFromTemplateOptions, "includeImport">): string => {
+  // Do NOT pass requiredProps here. PlaygroundPreview injects them as scope variables
+  // (via previewScope → extraScope). Generating `const columnDefinitions = …` in the
+  // live code string would (a) duplicate the scope parameter name → SyntaxError in
+  // react-live's strict-mode function, and (b) serialize potentially huge datasets via
+  // JSON.stringify, causing Babel/browser to hang.
   const code = generateFromTemplate({
     template,
     propValues,
@@ -476,12 +481,12 @@ export const generateLiveFromTemplate = ({
     includeImport: false,
     customImports,
     wrapper,
-    requiredProps,
+    requiredProps: {},
   });
 
   let body = code.trimEnd();
 
-  // requiredProps (e.g. `const pickerId = "..."`) must stay outside render(); do not wrap in render(const …)
+  // Non-requiredProps preamble (e.g. wrapper const declarations) must stay outside render()
   let jsxStart = body.search(/\r?\n<[A-Z]/);
   if (jsxStart !== -1) {
     jsxStart += body.slice(jsxStart).indexOf("<");

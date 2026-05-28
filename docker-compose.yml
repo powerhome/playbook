@@ -16,7 +16,8 @@ services:
         - image-registry.powerapp.cloud/playbook/playbook:main
     volumes:
       - .:/home/app/src
-      - bundle:/usr/local/rvm/gems
+      - bundle:/usr/local/bundle
+    command: ["bin/rails", "server", "-b", "0.0.0.0"]
     ports:
       - "8089:3000"
     depends_on:

@@ -8,6 +8,25 @@
       cursor: grab;
     }
 
+    &.is_touch_active {
+      .pb_draggable_handle,
+      .card_draggable_handle {
+        color: $text_lt_default;
+      }
+    }
+
+    .pb_draggable_handle,
+    .card_draggable_handle {
+      touch-action: none;
+      -webkit-touch-callout: none;
+      user-select: none;
+      cursor: grab;
+
+      &:active {
+        color: $text_lt_default;
+      }
+    }
+
     &.is_dragging {
       position: relative;
 

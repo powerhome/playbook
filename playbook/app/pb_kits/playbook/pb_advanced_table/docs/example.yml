@@ -52,6 +52,7 @@ examples:
   - advanced_table_table_props_sticky_header: Sticky Header for Responsive Table
   - advanced_table_sticky_columns: Sticky Columns
   - advanced_table_sticky_columns_and_header: Sticky Columns with Sticky Header
+  - advanced_table_sticky_scroll_limitation: Sticky Header and Column Scroll Limitation
   - advanced_table_responsive: Responsive Tables
   - advanced_table_custom_cell: Custom Components for Cells
   - advanced_table_with_custom_header: Custom Header Cell
@@ -80,6 +81,7 @@ examples:
   - advanced_table_row_styling: Row Styling
   - advanced_table_padding_control_per_row: Padding Control using Row Styling
   - advanced_table_column_styling: Column Styling
+  - advanced_table_column_styling_width: Column Styling Width
   - advanced_table_column_styling_column_headers: Column Styling with Multiple Headers
   - advanced_table_column_styling_background: Column Styling Background Color
   - advanced_table_column_styling_background_custom: Column Styling Background Color (Custom)

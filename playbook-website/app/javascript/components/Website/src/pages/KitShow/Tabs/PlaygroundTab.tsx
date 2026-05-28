@@ -73,7 +73,7 @@ export const PlaygroundTab: React.FC<PlaygroundTabProps> = ({
 
   if (!kitSchema) {
     return (
-      <Flex paddingX="xl">
+      <Flex width="100%">
         <Card padding="md" width="100%">
           <Body text="No schema available for this component. The playground requires kit.schema.json to be generated." />
         </Card>
@@ -119,7 +119,7 @@ export const PlaygroundTab: React.FC<PlaygroundTabProps> = ({
   }, [playgroundConfig?.scopeVars, playgroundConfig?.requiredProps, propValues]);
 
   return (
-    <Flex width="100%" paddingX="xl" gap="lg">
+    <Flex width="100%" gap="lg">
       {/* Left Panel - Preview and Code */}
       <Flex flexDirection="column" flex="1" minWidth="0">
         {hasPresets && (

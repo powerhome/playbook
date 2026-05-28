@@ -17,12 +17,7 @@ template:
       - name: task-runner
         image: "image-registry.powerapp.cloud/playbook/playbook:<%= image_tag %>"
         imagePullPolicy: IfNotPresent
-        command:
-          - /sbin/my_init
-        args:
-          - --
-          - sleep
-          - "10800"
+        command: ["sleep", "10800"]
         env:
           - name: PORT
             value: "3000"
