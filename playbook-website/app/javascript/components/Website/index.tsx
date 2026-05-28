@@ -58,7 +58,7 @@ function WebsiteContent() {
   }, []);
 
   const websiteStyle = {
-    "--beta-header-height": `${headerHeight}px`,
+    "--website-header-height": `${headerHeight}px`,
   } as CSSProperties;
 
   const platform = useMemo(() => {
@@ -92,11 +92,11 @@ function WebsiteContent() {
 
   return (
     <PlatformContext.Provider value={{ platform, setPlatform: handlePlatformChange }}>
-      <div className={darkMode ? "dark" : ""} style={websiteStyle}>
-        <MobileNav 
-          isOpen={mobileNavOpen}
-          onToggle={() => setMobileNavOpen(!mobileNavOpen)}
-        />
+      <div
+        className={`pb--website-shell ${darkMode ? "dark" : ""}`.trim()}
+        style={websiteStyle}
+      >
+        <MobileNav />
         <div ref={headerRef}>
           <Header 
             PBversion={PBversion || "Latest"}
@@ -106,7 +106,11 @@ function WebsiteContent() {
             setPlatform={handlePlatformChange}
           />
         </div>
-        <Layout className="pb--page--content pb--website--new" dark={darkMode}>
+        <Layout
+          className="pb--page--content pb--website--new"
+          collapse="lg"
+          dark={darkMode}
+        >
           <MobileHamburger 
             isOpen={mobileNavOpen}
             onToggle={() => setMobileNavOpen(!mobileNavOpen)}

@@ -162,7 +162,7 @@ const Card = (props: CardPropTypes): React.ReactElement => {
           {
             dragHandle ? (
               <Flex>
-                <span className="card_draggable_handle">
+                <span className="card_draggable_handle pb_draggable_handle">
                   <Icon
                       icon="grip-dots-vertical"
                       paddingRight="xs"

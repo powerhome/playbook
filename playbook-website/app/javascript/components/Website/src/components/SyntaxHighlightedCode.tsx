@@ -31,6 +31,10 @@ export const SyntaxHighlightedCode = ({
           borderRadius: 6,
           fontSize: 13,
           lineHeight: 1.5,
+          boxSizing: "border-box",
+          width: "100%",
+          maxWidth: "100%",
+          minWidth: 0,
         }}
       >
         <div className="pb--codeCopy">
@@ -58,6 +62,10 @@ export const SyntaxHighlightedCode = ({
         borderRadius: 6,
         fontSize: 13,
         lineHeight: 1.5,
+        boxSizing: "border-box",
+        width: "100%",
+        maxWidth: "100%",
+        minWidth: 0,
       }}
     >
       <SyntaxHighlighter

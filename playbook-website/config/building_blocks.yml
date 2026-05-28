@@ -15,8 +15,8 @@ BuildingBlocks:
     tags:
       - Table, Filter
     link: "table_filter_card"
-  - name: "Alert Banner"
-    description: "Use alert banners to communicate important information to users."
+  - name: "Notification Banner"
+    description: "Use notification banners to communicate important information to users."
     tags:
       - Card
-    link: "alert_banner"
+    link: "notification_banner"

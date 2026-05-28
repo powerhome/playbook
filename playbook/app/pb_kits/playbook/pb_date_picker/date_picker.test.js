@@ -40,6 +40,37 @@ describe('DatePicker Kit', () => {
     expect(kit).toHaveClass('pb_date_picker_kit mb_sm')
   })
 
+  test('inLine alone adds inline-date-picker class and inline control icons, not the calendar icon', () => {
+    const testId = 'datepicker-inline-only'
+    render(
+      <DatePicker
+          data={{ testid: testId }}
+          inLine
+          pickerId="date-picker-inline-only"
+      />
+    )
+
+    const kit = screen.getByTestId(testId)
+    expect(kit).toHaveClass('inline-date-picker')
+    expect(kit.querySelector('#cal-icon-date-picker-inline-only')).not.toBeInTheDocument()
+    expect(kit.querySelector('#date-picker-inline-only-icon-plus')).toBeInTheDocument()
+    expect(kit.querySelector('#date-picker-inline-only-angle-down')).toBeInTheDocument()
+  })
+
+  test('hideIcon without inLine does not render inline control icons', () => {
+    const testId = 'datepicker-hide-icon-only'
+    render(
+      <DatePicker
+          data={{ testid: testId }}
+          hideIcon
+          pickerId="date-picker-hide-icon-only"
+      />
+    )
+
+    const kit = screen.getByTestId(testId)
+    expect(kit.querySelector('#date-picker-hide-icon-only-icon-plus')).not.toBeInTheDocument()
+  })
+
   test('shows DatePicker date format m/d/Y', async () => {
     const testId = 'datepicker-date'
     render(

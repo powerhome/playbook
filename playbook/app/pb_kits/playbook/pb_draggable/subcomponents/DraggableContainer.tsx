@@ -54,6 +54,7 @@ const DraggableContainer = (props: DraggableContainerProps) => {
         {...dataProps}
         {...htmlProps}
         className={classes}
+        data-pb-drag-container={container}
         id={id}
         key={container}
         onDragOver={(e: Event) => handleDragOver(e, container)}

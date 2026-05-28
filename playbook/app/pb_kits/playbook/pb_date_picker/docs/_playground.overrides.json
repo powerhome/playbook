@@ -88,9 +88,7 @@
         "name": "inline_date",
         "pickerId": "playground-date-inline",
         "label": "Inline",
-        "className": "inline-date-picker",
-        "inLine": true,
-        "hideIcon": true
+        "inLine": true
       }
     },
     {

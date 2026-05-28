@@ -211,6 +211,14 @@ test("Attached draggable HTML attributes", () => {
   expect(item).toHaveAttribute("draggable");
 });
 
+test("draggable items expose data-pb-drag-id for touch reordering", () => {
+  render(<DefaultDraggableKit />);
+  const kit = screen.getByTestId(testId);
+
+  const item = kit.querySelector(".pb_draggable_item");
+  expect(item).toHaveAttribute("data-pb-drag-id", "1");
+});
+
 test("generated dragHandle with List", () => {
   render(<DraggableKitWithList />);
   const kit = screen.getByTestId(testId);
@@ -301,6 +309,14 @@ const DraggableMultipleContainers = () => {
     </div>
   );
 };
+
+test("draggable containers expose data-pb-drag-container when provided", () => {
+  render(<DraggableMultipleContainers />);
+  const kit = screen.getByTestId(testId);
+
+  const container = kit.querySelector('[data-testid="container-To Do"]');
+  expect(container).toHaveAttribute("data-pb-drag-container", "To Do");
+});
 
 test("renders multiple containers with correct items", () => {
   render(<DraggableMultipleContainers />);

@@ -8,7 +8,10 @@
   <body class="<%= @body_class %> <%= controller_name %> <%= action_name%>">
     <div class="pb--page--dark-mode-toggle-mobile">
     </div>
-      <%= react_component("Website") %>
+    <%# Flex chain for main-column scroll — see `website_new.scss` (`.pb--website-layout-root`) %>
+    <div class="pb--website-layout-root">
+      <%= react_component("Website", {}, { class: "pb--website-react-host" }) %>
+    </div>
   </body>
 
 </html>

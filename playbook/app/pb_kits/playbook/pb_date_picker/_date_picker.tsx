@@ -180,6 +180,7 @@ const DatePicker = (props: DatePickerProps): React.ReactElement => {
     //@ts-ignore
     globalProps(filteredProps),
     error ? 'error' : null,
+    inLine && 'inline-date-picker',
     className
   )
 
@@ -262,7 +263,7 @@ const DatePicker = (props: DatePickerProps): React.ReactElement => {
               }
             </div>
 
-            {!hideIcon &&
+            {!hideIcon && !inLine &&
               <div
                   className={iconWrapperClass()}
                   id={`cal-icon-${pickerId}`}
@@ -274,7 +275,7 @@ const DatePicker = (props: DatePickerProps): React.ReactElement => {
               </div>
             }
 
-            {hideIcon && inLine ?
+            {inLine ?
               <div>
                 <div
                     className={`${iconWrapperClass()} date-picker-inline-icon-plus`}
