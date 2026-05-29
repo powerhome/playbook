@@ -49,6 +49,19 @@
       ],
       "default": false
     },
+    "required": {
+      "type": "boolean",
+      "platforms": [
+        "rails"
+      ],
+      "default": false
+    },
+    "minLength": {
+      "type": "number",
+      "platforms": [
+        "rails"
+      ]
+    },
     "showTipsBelow": {
       "type": "enum",
       "platforms": [
