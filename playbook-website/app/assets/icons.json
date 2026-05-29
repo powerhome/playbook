@@ -1220,6 +1220,10 @@
     "category": "Interface Core"
   },
   {
+    "name": "distribute-spacing-horizontal",
+    "category": "Interface Core"
+  },
+  {
     "name": "dot-circle",
     "category": "Interface Core"
   },
@@ -1333,6 +1337,10 @@
   },
   {
     "name": "object-group",
+    "category": "Interface Core"
+  },
+  {
+    "name": "object-intersect",
     "category": "Interface Core"
   },
   {
@@ -2124,6 +2132,10 @@
     "category": "Technology"
   },
   {
+    "name": "mobile-rotate",
+    "category": "Technology"
+  },
+  {
     "name": "mouse",
     "category": "Technology"
   },
@@ -2328,6 +2340,10 @@
     "category": "Tools"
   },
   {
+    "name": "atom",
+    "category": "Tools"
+  },
+  {
     "name": "binoculars",
     "category": "Tools"
   },
@@ -2352,6 +2368,10 @@
     "category": "Tools"
   },
   {
+    "name": "gem",
+    "category": "Tools"
+  },
+  {
     "name": "hammer",
     "category": "Tools"
   },
@@ -2365,6 +2385,10 @@
   },
   {
     "name": "pen-line",
+    "category": "Tools"
+  },
+  {
+    "name": "pen-ruler",
     "category": "Tools"
   },
   {
