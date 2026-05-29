@@ -58,6 +58,9 @@
   min-height: 0;
   overflow: auto;
   -webkit-overflow-scrolling: touch;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
 }
 
 .pb_popover_floating_root {
