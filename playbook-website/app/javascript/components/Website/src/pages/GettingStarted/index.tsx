@@ -16,14 +16,12 @@ const GettingStarted = () => {
   const loaderData = useLoaderData() as any;
   const { getting_started_content, getting_started } = loaderData;
 
-  //------- remove once legacy website is gone --------------
   let contentWithoutFrontmatter =
     getting_started_content?.replace(/^---[\s\S]*?---\n/, "") || "";
   contentWithoutFrontmatter = contentWithoutFrontmatter.replace(
     /<div>\s*<%=[\s\S]*?%>\s*<\/div>/g,
     ""
   );
-  //------- remove once legacy website is gone --------------
 
   return (
     <Flex flexDirection="column" justifyContent="center" alignItems="center">
@@ -55,11 +53,7 @@ const GettingStarted = () => {
               {getting_started.pages.map((page: any) => {
                 const icon = page.frontmatter?.icon || "files";
                 const description = page.frontmatter?.description || "";
-                // Convert legacy URL to beta URL
-                const betaUrl = page.url.replace(
-                  "guides/getting_started/",
-                  "/beta/guides/getting_started/"
-                );
+                const betaUrl = `/${page.url}`;
 
                 return (
                   <Link

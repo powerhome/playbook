@@ -1,5 +1,0 @@
-@import "token/positioning"
-
-.selector {
-     position: $absolute;
-}

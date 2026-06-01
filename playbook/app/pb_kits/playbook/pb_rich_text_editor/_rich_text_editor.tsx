@@ -142,7 +142,7 @@ const RichTextEditor = (props: RichTextEditorProps): React.ReactElement => {
   // Determine if toolbar should be shown
   const shouldShowToolbar = focus && advancedEditor ? showToolbarOnFocus : advancedEditorToolbar
 
-  const labelFor = advancedEditor ? fieldId : (id ? id : (inputOptions.id ? `${inputOptions.id}_trix` : undefined))
+  const labelFor = advancedEditor ? fieldId : (id ? id : (inputOptions?.id ? `${inputOptions.id}_trix` : undefined))
 
   return (
     <div

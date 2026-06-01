@@ -100,6 +100,29 @@
         color: $input_text_disabled_dark;
       }
     }
+
+    .text_input_wrapper_add_on {
+      &:has(input:disabled),
+      &:has(.text_input:disabled) {
+        .add-on-card,
+        .add-on-card-dark {
+          border-color: $input_border_disabled_dark;
+          background-color: $input_background_disabled_dark;
+        }
+
+        .add-on-icon {
+          color: $input_text_disabled_dark;
+        }
+
+        .text_input:focus ~ .add-on-card-dark,
+        input:focus ~ .add-on-card-dark {
+          background-color: $input_background_disabled_dark;
+          border-color: $input_border_disabled_dark;
+          border-width: 1px;
+        }
+      }
+    }
+
     &.error {
       .text_input_wrapper {
         // The `:not` here prevents error styling from affecting the country search input in the Phone Number Input Kit.
@@ -192,6 +215,20 @@
       }
     }
   }
+  &:not(.dark) .text_input_wrapper_add_on {
+    &:has(input:disabled),
+    &:has(.text_input:disabled) {
+      .add-on-card {
+        border-color: $input_border_disabled;
+        background-color: $input_background_disabled;
+      }
+
+      .add-on-icon {
+        color: $input_text_disabled;
+      }
+    }
+  }
+
   &.inline {
     .text_input_wrapper input::placeholder,
     .text_input_wrapper .text_input .placeholder {

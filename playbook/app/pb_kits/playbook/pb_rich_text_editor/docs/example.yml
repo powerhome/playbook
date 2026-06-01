@@ -1,6 +1,8 @@
 examples:
 
   rails:
+  - rich_text_editor_rails_default: "Rails (TipTap)"
+  - rich_text_editor_rails_simple: "Rails (TipTap — Simple toolbar)"
 
   react:
   - rich_text_editor_advanced_default: Advanced Default

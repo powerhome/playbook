@@ -50,8 +50,10 @@ export default function CategoryShow() {
           align="center"
           className="category-breadcrumb"
           paddingX="sm"
+          marginBottom={{ xs: "sm", sm: "sm", md: "sm", lg: "none" }}
+          marginTop="sm"
         >
-          <NavLink to="/beta/kits">
+          <NavLink to="/kits">
             <Body className="previous-route" color="link">
               <b>All Components</b>
             </Body>
@@ -63,6 +65,8 @@ export default function CategoryShow() {
         </Flex>
 
         <Hero
+          key={category}
+          compact
           description={description ?? ""}
           title={linkFormat(category)}
           height="157px"

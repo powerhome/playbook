@@ -5,9 +5,50 @@
 @import "playbook-tokens/border_radius";
 @import "playbook-tokens/shadows";
 
-$beta_nav_breakpoint: breakpoint("lg");
+$website_sidebar_collapse: breakpoint("lg");
 
-// Hero / kit listing: same horizontal gutter + centered xl content track.
+@mixin website-shell-fill {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 0;
+  min-height: 0;
+  min-width: 0;
+  overflow: hidden;
+}
+
+html:has(body.pages.application) {
+  height: 100%;
+  overflow: hidden;
+}
+
+body.pages.application {
+  box-sizing: border-box;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+}
+
+body.pages.application .pb--website-layout-root,
+body.pages.application .pb--website-react-host {
+  @include website-shell-fill;
+}
+
+.pb--website-shell {
+  @include website-shell-fill;
+}
+
+.pb--website-shell > .pb--page--content.pb--website--new {
+  flex: 1 1 0;
+  min-height: 0 !important;
+  min-width: 0;
+  overflow: hidden;
+
+  @media screen and (min-width: #{$screen-lg-min + 1}) {
+    grid-template-rows: minmax(0, 1fr);
+  }
+}
+
 @mixin website-page-gutter-padding {
   padding-inline: $space_xl;
 
@@ -32,33 +73,28 @@ $beta_nav_breakpoint: breakpoint("lg");
     background: $bg_dark;
     color: $white;
   }
-  
-  // Override the min-height since header is now sticky and takes space in flow
-  &.pb--page--content {
-    min-height: auto;
-  }
 
-  // Use dynamic viewport units so the panes track the real visible viewport.
   .pb--page--sideNav {
-    height: calc(100dvh - var(--beta-header-height, 89px));
+    box-sizing: border-box;
+    height: 100%;
+    min-height: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    overscroll-behavior-y: contain;
+
     &.dark {
       border-color: #3b3752;
     }
-  }
 
-  .pb--page--content--main {
-    height: calc(100dvh - var(--beta-header-height, 89px));
-  }
-
-  .pb--page--sideNav {
-    @include break_at($beta_nav_breakpoint) {
+    @include break_at($website_sidebar_collapse) {
+      height: calc(100dvh - var(--website-header-height, 89px));
       position: absolute;
       transform-origin: 0% 0%;
       transform: translate(-110%, 0);
-      transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
+      transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1);
       border-radius: $border_rad_heavier;
       box-shadow: $shadow_deepest;
-      top: 89px;
+      top: var(--website-header-height, 89px);
       left: 0;
       min-width: 200px;
       width: auto !important;
@@ -70,28 +106,71 @@ $beta_nav_breakpoint: breakpoint("lg");
     }
   }
 
+  .pb--page--content--main {
+    box-sizing: border-box;
+    height: 100% !important;
+    min-height: 0;
+    min-width: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    overscroll-behavior-y: contain;
+
+    .pb--kit-show {
+      padding-bottom: 0;
+
+      @include break_at($website_sidebar_collapse) {
+        padding-top: 0;
+      }
+    }
+
+    .kit-show-wrapper {
+      @include break_at($website_sidebar_collapse) {
+        padding-top: 0;
+      }
+    }
+  }
+
   .kit-grid-shell {
     @include website-page-gutter-padding;
     box-sizing: border-box;
     width: 100%;
   }
 
+  .component-list-category-header {
+    @include website-page-gutter-padding;
+    width: 100%;
+  }
+
+  .component-list-category-header-content {
+    @include website-content-well;
+  }
+
   .kit-grid-layout {
     @include website-content-well;
+  }
+
+  .kit-grid-shell .pb_layout_kit_collection.kit-grid-layout div.layout_body {
+    grid-column-gap: $space_md;
+    grid-row-gap: $space_md;
   }
 
   .hero-content-well {
     @include website-content-well;
   }
+
+  .global-props-tokens-landing {
+    @media screen and (min-width: #{$screen-lg-min + 1}) {
+      padding-top: 90px;
+    }
+  }
 }
 
-// Fix header to stay at top of viewport
 .pb--page--header--new {
   position: sticky;
   top: 0;
   z-index: 100;
   background: $white;
-  
+
   &.dark {
     background: tint(#0a0527, 10);
   }

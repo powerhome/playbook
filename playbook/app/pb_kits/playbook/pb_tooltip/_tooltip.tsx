@@ -1,7 +1,9 @@
 import React, { useRef, useState, forwardRef, ForwardedRef } from "react"
 
 import {
+  autoUpdate,
   arrow,
+  FloatingPortal,
   flip,
   offset,
   Placement,
@@ -42,6 +44,8 @@ type TooltipProps = {
   showTooltip?: boolean,
   forceOpenTooltip?: boolean,
 } & GlobalProps
+
+const TOOLTIP_BOUNDARY_PADDING = 8
 
 const Tooltip = forwardRef((props: TooltipProps, ref: ForwardedRef<unknown>): React.ReactElement => {
   const {
@@ -90,17 +94,20 @@ const Tooltip = forwardRef((props: TooltipProps, ref: ForwardedRef<unknown>): Re
     y,
   } = useFloating({
     strategy: position,
+    whileElementsMounted: autoUpdate,
     middleware: [
-      arrow({
-        element: arrowRef,
-      }),
+      offset(10),
       flip({
         fallbackPlacements: ["top", "right", "bottom", "left"],
         fallbackStrategy: "initialPlacement",
         flipAlignment: false,
+        padding: TOOLTIP_BOUNDARY_PADDING,
       }),
-      offset(10),
-      shift()
+      shift({ padding: TOOLTIP_BOUNDARY_PADDING }),
+      arrow({
+        element: arrowRef,
+        padding: TOOLTIP_BOUNDARY_PADDING,
+      }),
     ],
     open,
     onOpenChange(open) {
@@ -136,6 +143,7 @@ const Tooltip = forwardRef((props: TooltipProps, ref: ForwardedRef<unknown>): Re
     right: "left",
     top: "bottom",
   }[placement.split("-")[0]]
+  const arrowPlacementStyle = staticSide ? { [staticSide]: "-5px" } : {}
 
   const tooltipSizing = () => {
     return Object.assign(
@@ -174,43 +182,48 @@ const Tooltip = forwardRef((props: TooltipProps, ref: ForwardedRef<unknown>): Re
         {children}
       </div>
       {(open || forceOpenTooltip) && (
-        <div
-            {...getFloatingProps({
-              className: `tooltip_tooltip ${placement} visible`,
-              ref: refs.setFloating,
-              role: "tooltip",
-              style: {
-                ...tooltipSizing(),
-                position: strategy,
-                top: y ?? 0,
-                left: x ?? 0,
-                zIndex: zIndex ?? 0,
-              },
-            })}
-        >
-          <Flex
-              align="center"
-              gap="xs"
-          >
-            {icon && (
-            <i className={`pb_icon_kit`}>
-              <Icon
-                  icon={icon}
-              />
-            </i>)}
-            {text}
-          </Flex>
+        <FloatingPortal>
           <div
-              className="arrow_bg"
-              ref={arrowRef}
-              style={{
-                position: "absolute",
-                left: arrowX != null ? `${arrowX}px` : "",
-                top: arrowY != null ? `${arrowY}px` : "",
-                [staticSide]: "-5px",
-              }}
-          />
-        </div>
+              data-placement={placement}
+              {...getFloatingProps({
+                className: classnames(`tooltip_tooltip ${placement} visible`, {
+                  dark: rest.dark,
+                }),
+                ref: refs.setFloating,
+                role: "tooltip",
+                style: {
+                  ...tooltipSizing(),
+                  position: strategy,
+                  top: y ?? 0,
+                  left: x ?? 0,
+                  ...(zIndex ? { zIndex } : {}),
+                },
+              })}
+          >
+            <Flex
+                align="center"
+                gap="xs"
+            >
+              {icon && (
+              <i className={`pb_icon_kit`}>
+                <Icon
+                    icon={icon}
+                />
+              </i>)}
+              {text}
+            </Flex>
+            <div
+                className="arrow_bg"
+                ref={arrowRef}
+                style={{
+                  position: "absolute",
+                  left: arrowX != null ? `${arrowX}px` : "",
+                  top: arrowY != null ? `${arrowY}px` : "",
+                  ...arrowPlacementStyle,
+                }}
+            />
+          </div>
+        </FloatingPortal>
       )}
     </>
   )

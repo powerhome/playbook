@@ -114,6 +114,16 @@ async function loadThirdPartyLibs(raw: string): Promise<ThirdPartyScope> {
   return Object.assign({}, ...scopes);
 }
 
+function resetExampleOverflow(element: HTMLElement) {
+  element.style.overflowX = "auto";
+  element.style.removeProperty("overflow-y");
+}
+
+function showExampleOverflow(event: React.SyntheticEvent<HTMLDivElement>) {
+  event.currentTarget.style.overflowX = "visible";
+  event.currentTarget.style.overflowY = "visible";
+}
+
 // Main Component
 const LiveExample: React.FC<LiveExampleProps> = ({
   code,
@@ -142,6 +152,23 @@ const LiveExample: React.FC<LiveExampleProps> = ({
     () => ({ ...exampleProps, dark: darkMode, darkMode }),
     [exampleProps, darkMode],
   );
+
+  const handleBlurCapture = (event: React.FocusEvent<HTMLDivElement>) => {
+    const nextTarget = event.relatedTarget as Node | null;
+
+    if (nextTarget && event.currentTarget.contains(nextTarget)) {
+      return;
+    }
+
+    const wrapper = event.currentTarget;
+    setTimeout(() => {
+      const hasOpenPopup = wrapper.querySelector(
+        ".pb_dropdown_container.open, .pb_multi_level_select .dropdown_menu.open, .pb_time_picker .pb_time_picker_container",
+      );
+      if (hasOpenPopup) return;
+      resetExampleOverflow(wrapper);
+    }, 0);
+  };
 
   useEffect(() => {
     let cancelled = false;
@@ -229,8 +256,33 @@ const LiveExample: React.FC<LiveExampleProps> = ({
   return (
     <div onClickCapture={handleContainerClick}>
       <LiveProvider key={libsKey} code={prepared} scope={scope} noInline>
-        <Card borderNone padding="md" dark={darkMode} htmlOptions={{ style: { border: 'none' } }}>
-          <LivePreview />
+        <Card
+          borderNone
+          padding="md"
+          dark={darkMode}
+          htmlOptions={{
+            style: {
+              border: "none",
+              boxSizing: "border-box",
+              maxWidth: "100%",
+              minWidth: 0,
+            },
+          }}
+        >
+          <div
+            onBlurCapture={handleBlurCapture}
+            onFocusCapture={showExampleOverflow}
+            onPointerDownCapture={showExampleOverflow}
+            style={{
+              boxSizing: "border-box",
+              width: "100%",
+              maxWidth: "100%",
+              minWidth: 0,
+              overflowX: "auto",
+            }}
+          >
+            <LivePreview />
+          </div>
         </Card>
         <LiveContext.Consumer>
           {({ error }) =>

@@ -9,3 +9,4 @@ export { default as PbCircleChartDataLegendPosition } from './_pb_circle_chart_d
 export { default as PbCircleChartWithTitle } from './_pb_circle_chart_with_title.jsx'
 export { default as PbCircleChartInnerSizes } from './_pb_circle_chart_inner_sizes.jsx'
 export { default as PbCircleChartCustomTooltip } from './_pb_circle_chart_custom_tooltip.jsx'
+export { default as PbCircleChartCenteredData } from './_pb_circle_chart_centered_data.jsx'

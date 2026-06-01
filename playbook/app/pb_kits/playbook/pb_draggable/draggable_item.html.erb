@@ -1,5 +1,6 @@
 <%= pb_content_tag(object.tag, {
 id: "item_#{object.drag_id}",
+"data-pb-drag-id": object.drag_id,
 draggable: true
 }) do %>
     <%= content.presence %>

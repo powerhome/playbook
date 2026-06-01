@@ -15,7 +15,7 @@ import { fileURLToPath } from 'url';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const SCHEMA_PATH = path.resolve(__dirname, '../../playbook/app/pb_kits/playbook/utilities/global-props.schema.json');
-const OUTPUT_PATH = path.resolve(__dirname, '../app/javascript/components/AvailableProps/globalPropsValues.ts');
+const OUTPUT_PATH = path.resolve(__dirname, '../app/javascript/components/Website/src/components/AvailableProps/globalPropsValues.ts');
 
 function getTypeFromSchema(prop) {
   const type = prop.type || '';

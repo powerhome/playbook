@@ -1,1 +1,0 @@
-<Pill text="pointer" cursor="pointer" />

@@ -5,7 +5,6 @@ import { useNavigate, useLocation } from "react-router-dom";
 export const OtherNavItems = ({
   name,
   dark,
-  building_blocks,
   updateTopLevelNav,
   parentIndex,
   getting_started,
@@ -18,17 +17,7 @@ export const OtherNavItems = ({
   const location = useLocation();
   const currentURL = location.pathname + location.search;
   
-  const createLink = (path: string) => {
-    if (!path.startsWith("/beta")) {
-      return `/beta${path}`;
-    }
-    return path;
-  };
-
-  const buildingBlocksMenu = building_blocks?.BuildingBlocks?.map((item) => ({
-    name: item.name,
-    link: createLink(`/building_blocks/${item.link}`),
-  })) || []
+  const createLink = (path: string) => path;
 
   let menuItems: { [key: string]: string }[] | string[] = []
 
@@ -76,8 +65,6 @@ export const OtherNavItems = ({
     menuItems = globalPropsMenu
   } else if (name === "Tokens") {
     menuItems = tokensMenu
-  } else if (name === "Building Blocks" && building_blocks) {
-    menuItems = buildingBlocksMenu
   } else if (name === "Getting Started") {
     menuItems = guidesNavItems
   } else if (name === "Design Guidelines") {
@@ -86,19 +73,14 @@ export const OtherNavItems = ({
     menuItems = whatsNewNavItems
   }
 
-  const handleItemClick = (link, i) => {
+  const handleItemClick = (link) => {
     if (navigate) {
       navigate(link.link);
     }
     updateTopLevelNav(parentIndex);
   }
 
-  const activeForItems = (link, i) => {
-    // Special case for icon integration
-    if (currentURL.startsWith("/beta/guides/getting_started/icons") && link.name === "Icon Integration") {
-      return true;
-    }
-  
+  const activeForItems = (link) => {
     // Strip /react or /rails from the end of currentURL before comparing
     const normalizedCurrentURL = currentURL.replace(/\/(react|rails)$/, '');
     return link.link === currentURL || link.link === normalizedCurrentURL;
@@ -131,7 +113,7 @@ export const OtherNavItems = ({
   });
   
   // Expand flex_box if we're on it or any of its children
-  const shouldExpandFlexBox = currentURL.startsWith('/beta/global_props/flex_box');
+  const shouldExpandFlexBox = currentURL.startsWith('/global_props/flex_box');
   
   const [flexBoxCollapsed, setFlexBoxCollapsed] = useState(!shouldExpandFlexBox);
   
@@ -190,14 +172,14 @@ export const OtherNavItems = ({
             >
               {flexBoxChildren.map((child: any, childIndex: number) => (
                 <NavItem
-                  active={activeForItems(child, childIndex)}
+                  active={activeForItems(child)}
                   cursor="pointer"
                   dark={dark}
                   fontSize="small"
                   key={`${child.link}-${childIndex}`}
                   marginBottom="none"
                   marginTop="xxs"
-                  onClick={() => handleItemClick(child, childIndex)}
+                  onClick={() => handleItemClick(child)}
                   paddingY="xxs"
                   text={child.name}
                 />
@@ -208,14 +190,14 @@ export const OtherNavItems = ({
         
         return (
           <NavItem
-            active={activeForItems(link, i)}
+            active={activeForItems(link)}
             cursor="pointer"
             dark={dark}
             fontSize="small"
             key={`${link.link}-${i}`}
             marginBottom="none"
             marginTop="xxs"
-            onClick={() => handleItemClick(link, i)}
+            onClick={() => handleItemClick(link)}
             paddingY="xxs"
             text={link.name}
           />
