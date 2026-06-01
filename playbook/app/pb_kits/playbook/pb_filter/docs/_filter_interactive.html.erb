@@ -13,9 +13,16 @@
     { value: "closed", label: "Closed", id: "closed" },
   ]
 
-  current_territory = "USA"
-  current_status    = "open"
-  current_start     = "05/01/2026"
+  raw_example = params[:example]
+  example_params =
+    if raw_example.respond_to?(:permit)
+      raw_example.permit(:territory, :status, :start_date)
+    else
+      raw_example || {}
+    end
+  current_territory = example_params[:territory].presence || "USA"
+  current_status    = example_params[:status].presence || "open"
+  current_start     = example_params[:start_date].presence || "05/01/2026"
   status_default    = status_options.find { |o| o[:value] == current_status }
 %>
 
@@ -37,18 +44,21 @@
         type: "select",
         options: territory_options,
         target_input: "filter-interactive-territory",
+        auto_submit: true,
       },
       {
         name: "Status",
         type: "dropdown",
         options: status_options,
         target_input: "filter-interactive-status",
+        auto_submit: true,
       },
       {
         name: "Start date",
         type: "date-picker",
         target_input: "filter-interactive-start",
         format: "m/d/Y",
+        auto_submit: true,
       },
     ],
     sort_menu: [
@@ -75,6 +85,7 @@
 
     <%= pb_rails("date_picker", props: {
       label: "Start date",
+      name: "start_date",
       picker_id: "filter-interactive-start",
       default_date: current_start,
     }) %>

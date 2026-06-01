@@ -2,16 +2,19 @@ import React, { useEffect, useMemo, useRef, useState } from 'react'
 import flatpickr from 'flatpickr'
 import { Instance } from 'flatpickr/dist/types/instance'
 
-import Body from '../../pb_body/_body'
+import Flex from '../../pb_flex/_flex'
 import Caption from '../../pb_caption/_caption'
 import Icon from '../../pb_icon/_icon'
 import PbReactPopover from '../../pb_popover/_popover'
 import { uniqueId } from '../../utilities/object'
+import Title from '../../pb_title/_title'
 
 export type SelectInteractiveConfig = {
   type: 'select',
   options: { value: string, text?: string }[],
   value?: string,
+  /** Draft value for the inline editor active state (chip label uses `value`). */
+  editorValue?: string,
   onChange: (value: string) => void,
 }
 
@@ -19,12 +22,14 @@ export type DropdownInteractiveConfig = {
   type: 'dropdown',
   options: { value: string, label: string }[],
   value?: string,
+  editorValue?: string,
   onChange: (value: string) => void,
 }
 
 export type DatePickerInteractiveConfig = {
   type: 'date-picker',
   value?: string,
+  editorValue?: string,
   onChange: (value: string) => void,
   format?: string,
   minDate?: string,
@@ -41,6 +46,7 @@ type InteractiveFilterProps = {
   dark?: boolean,
   name: string,
   value: string,
+  editorValue?: string,
   config: InteractiveFilterConfig,
 }
 
@@ -70,34 +76,38 @@ const ChipVisual = ({
   name,
   displayValue,
 }: ChipVisualProps): React.ReactElement => (
-  <div className="pb_interactive_filter_text">
+  <div className="pb_interactive_filter_container">
     <Caption
         dark={dark}
         text={name}
     />
-    <div className="pb_interactive_filter_value">
-      <Body
-          className="pb_interactive_filter_value_text"
+    <Flex
+        alignItems="center"
+        gap="xxs"
+    >
+      <Title
           dark={dark}
-          tag="span"
+          size={4}
           text={displayValue || '—'}
       />
       <Icon
-          className="pb_interactive_filter_caret"
+          color="primary"
           fixedWidth
           icon="angle-down"
           size="xs"
       />
-    </div>
+    </Flex>
   </div>
 )
 
 type InlineCalendarProps = {
+  calendarValue: string,
   config: DatePickerInteractiveConfig,
   onSinglePick: () => void,
 }
 
 const InlineCalendar = ({
+  calendarValue,
   config,
   onSinglePick,
 }: InlineCalendarProps): React.ReactElement => {
@@ -107,7 +117,7 @@ const InlineCalendar = ({
     if (!containerRef.current) return
     const fp = flatpickr(containerRef.current, {
       inline: true,
-      defaultDate: config.value || undefined,
+      defaultDate: calendarValue || undefined,
       mode: config.mode || 'single',
       dateFormat: config.format || 'm/d/Y',
       minDate: config.minDate,
@@ -121,7 +131,7 @@ const InlineCalendar = ({
     }) as Instance
     return () => fp.destroy()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [calendarValue])
 
   return <div ref={containerRef} />
 }
@@ -130,11 +140,16 @@ const InteractiveFilter = ({
   dark = false,
   name,
   value,
+  editorValue,
   config,
 }: InteractiveFilterProps): React.ReactElement => {
   const [open, setOpen] = useState(false)
   const pickerId = useMemo(() => uniqueId('interactive-filter-date-'), [])
   const displayValue = labelFor(config, value)
+  const activeValue =
+    editorValue ??
+    config.editorValue ??
+    value
 
   const renderEditor = () => {
     switch (config.type) {
@@ -156,7 +171,7 @@ const InteractiveFilter = ({
               role="listbox"
           >
             {options.map((option) => {
-              const isActive = option.value === value
+              const isActive = option.value === activeValue
               return (
                 <li
                     aria-selected={isActive}
@@ -168,7 +183,15 @@ const InteractiveFilter = ({
                       config.onChange(option.value)
                       setOpen(false)
                     }}
+                    onKeyDown={(event) => {
+                      if (event.key === 'Enter' || event.key === ' ') {
+                        event.preventDefault()
+                        config.onChange(option.value)
+                        setOpen(false)
+                      }
+                    }}
                     role="option"
+                    tabIndex={0}
                 >
                   <span>{option.label}</span>
                   {isActive && (
@@ -188,6 +211,7 @@ const InteractiveFilter = ({
       case 'date-picker':
         return (
           <InlineCalendar
+              calendarValue={activeValue}
               config={config}
               onSinglePick={() => setOpen(false)}
           />

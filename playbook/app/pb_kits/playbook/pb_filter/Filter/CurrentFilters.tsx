@@ -71,6 +71,7 @@ const CurrentFilters = ({
                     <InteractiveFilter
                         config={interactiveConfig}
                         dark={dark}
+                        editorValue={interactiveConfig.editorValue}
                         name={String(name)}
                         value={
                           interactiveConfig.value !== undefined

@@ -13,17 +13,11 @@ const INTERACTIVE_FILTER_SELECTOR = "[data-pb-interactive-filter]";
  *   - click → popover open/close + popper positioning
  *   - option-click handling (select/dropdown editors)
  *   - flatpickr initialization (date-picker editor)
- *   - syncing the chosen value back to a target form input (draft only)
+ *   - syncing the chosen value back to a target form input
  *   - optional auto-submit of the parent form
  *
- * Applied chip labels are server-rendered and only change after the
- * filter form is submitted. Inline chip edits update the linked form
- * field in the filter popover, not the chip display.
- *
- * The tooltip uses pb_popover's CSS classes for visual consistency, but is
- * teleported to <body> at connect() time so it escapes the filter row's
- * `overflow-x: auto` clipping context. We don't delegate to pb_popover here
- * because that kit doesn't portal its tooltip out of its DOM parent.
+ * The tooltip is teleported to <body> at connect() so it escapes the filter
+ * row's overflow clipping (see _filter.scss for position:fixed).
  */
 export default class PbFilter extends PbEnhancedElement {
   _popper: PopperInstance | null = null;
@@ -33,8 +27,6 @@ export default class PbFilter extends PbEnhancedElement {
   _optionClickHandler: ((e: MouseEvent) => void) | null = null;
   _isOpen = false;
 
-  // Cached dataset reads — chip data attributes are stable for the
-  // lifetime of the element, so resolve them once.
   _type: string | undefined;
   _popoverId: string | undefined;
   _targetInputId: string | undefined;
@@ -57,10 +49,10 @@ export default class PbFilter extends PbEnhancedElement {
       this.toggle();
     });
 
-    // Teleport tooltip to <body> immediately. pb_popover_tooltip uses
-    // visibility:hidden (not display:none), so leaving it inline would add
-    // height to the filter row; in <body> without position:fixed it stacks
-    // at the page bottom until Popper runs on first open (see _filter.scss).
+    if (this._type === "select" || this._type === "dropdown") {
+      this.bindOptionClicks();
+    }
+
     const tooltip = this.tooltip;
     if (tooltip && tooltip.parentElement !== document.body) {
       document.body.appendChild(tooltip);
@@ -68,10 +60,6 @@ export default class PbFilter extends PbEnhancedElement {
       tooltip.style.top = "0";
       tooltip.style.left = "0";
       tooltip.style.margin = "0";
-    }
-
-    if (this._type === "select" || this._type === "dropdown") {
-      this.bindOptionClicks();
     }
   }
 
@@ -87,8 +75,8 @@ export default class PbFilter extends PbEnhancedElement {
       this._bodyClickHandler = null;
     }
 
-    if (this._optionClickHandler && this._tooltip) {
-      this._tooltip.removeEventListener("click", this._optionClickHandler);
+    if (this._optionClickHandler) {
+      document.removeEventListener("click", this._optionClickHandler);
       this._optionClickHandler = null;
     }
 
@@ -97,8 +85,6 @@ export default class PbFilter extends PbEnhancedElement {
     }
     this._tooltip = null;
   }
-
-  /* ---------------- show / hide ---------------- */
 
   get tooltip(): HTMLElement | null {
     if (this._tooltip) return this._tooltip;
@@ -114,6 +100,14 @@ export default class PbFilter extends PbEnhancedElement {
   show() {
     const tooltip = this.tooltip;
     if (!tooltip) return;
+
+    if (tooltip.parentElement !== document.body) {
+      document.body.appendChild(tooltip);
+      tooltip.style.position = "fixed";
+      tooltip.style.top = "0";
+      tooltip.style.left = "0";
+      tooltip.style.margin = "0";
+    }
 
     tooltip.classList.remove("hide");
     tooltip.classList.add("show");
@@ -159,8 +153,6 @@ export default class PbFilter extends PbEnhancedElement {
       this.hide();
     };
 
-    // Defer until after the click that opened us has finished propagating,
-    // so we don't immediately close ourselves.
     setTimeout(() => {
       if (this._bodyClickHandler) {
         document.addEventListener("click", this._bodyClickHandler, true);
@@ -168,28 +160,31 @@ export default class PbFilter extends PbEnhancedElement {
     }, 0);
   }
 
-  /* ---------------- select / dropdown ---------------- */
-
   bindOptionClicks() {
-    const tooltip = this.tooltip;
-    if (!tooltip) return;
+    if (this._optionClickHandler || !this._popoverId) return;
+
+    const popoverId = this._popoverId;
 
     this._optionClickHandler = (event: MouseEvent) => {
-      const option = (event.target as HTMLElement).closest(
+      const target = event.target as HTMLElement;
+      const option = target.closest(
         "[data-pb-filter-option-value]"
       ) as HTMLElement | null;
       if (!option) return;
 
+      const popover = document.getElementById(popoverId);
+      if (!popover || !popover.contains(option)) return;
+
       const value = option.dataset.pbFilterOptionValue;
+      const label = option.dataset.pbFilterOptionLabel || value;
       if (value === undefined) return;
 
-      this.syncFormTarget(value, { autoSubmit: this._autoSubmit });
+      this.applyChange(value, label);
       this.hide();
     };
-    tooltip.addEventListener("click", this._optionClickHandler);
-  }
 
-  /* ---------------- date-picker ---------------- */
+    document.addEventListener("click", this._optionClickHandler);
+  }
 
   initFlatpickr() {
     const tooltip = this.tooltip;
@@ -215,18 +210,21 @@ export default class PbFilter extends PbEnhancedElement {
       nextArrow: '<i class="far fa-angle-right"></i>',
       prevArrow: '<i class="far fa-angle-left"></i>',
       onChange: (_dates: Date[], dateStr: string) => {
-        this.syncFormTarget(dateStr, { autoSubmit: this._autoSubmit });
+        this.applyChange(dateStr, dateStr);
         if (mode === "single") this.hide();
       },
     });
   }
 
-  /* ---------------- form sync (draft only) ---------------- */
+  applyChange(value: string, label: string) {
+    const display = this.element.querySelector(
+      "[data-pb-filter-value-display]"
+    ) as HTMLElement | null;
+    if (display) display.textContent = label || "—";
 
-  syncFormTarget(
-    value: string,
-    { autoSubmit = false }: { autoSubmit?: boolean } = {}
-  ) {
+    this.element.dataset.pbFilterValue = value;
+    this.updateChipOptionActiveStates(value);
+
     if (!this._targetInputId) return;
 
     const target = document.getElementById(this._targetInputId) as
@@ -239,13 +237,15 @@ export default class PbFilter extends PbEnhancedElement {
       return;
     }
 
-    if (!value) {
-      this.clearFormTarget(target);
-      if (autoSubmit) this.maybeAutoSubmit(target);
+    const syncTarget =
+      this._type === "dropdown"
+        ? this.resolveDropdownRoot(target) || target
+        : target;
+
+    if (this.syncDropdownTarget(syncTarget, value)) {
+      if (this._autoSubmit) this.maybeAutoSubmit(target);
       return;
     }
-
-    if (this.syncDropdownTarget(target, value, autoSubmit)) return;
 
     const input = target as HTMLInputElement | HTMLSelectElement;
     input.value = value;
@@ -256,81 +256,79 @@ export default class PbFilter extends PbEnhancedElement {
       fpHost._flatpickr.setDate(value, false);
     }
 
-    if (autoSubmit) this.maybeAutoSubmit(input);
+    if (this._autoSubmit) this.maybeAutoSubmit(input);
   }
 
-  clearFormTarget(target: HTMLElement) {
-    const dropdownRoot =
-      target.dataset.pbDropdown !== undefined
-        ? target
-        : (target.closest("[data-pb-dropdown]") as HTMLElement | null);
+  updateChipOptionActiveStates(value: string) {
+    const tooltip = this.tooltip;
+    if (!tooltip) return;
 
-    if (dropdownRoot) {
-      this.clearDropdownTarget(dropdownRoot);
-      return;
-    }
+    tooltip
+      .querySelectorAll("[data-pb-filter-option-value]")
+      .forEach((optionEl) => {
+        const option = optionEl as HTMLElement;
+        const isActive = option.dataset.pbFilterOptionValue === value;
+        option.classList.toggle("active", isActive);
+        option.setAttribute("aria-selected", String(isActive));
 
-    const input = target as HTMLInputElement | HTMLSelectElement;
-    input.value = "";
-    input.dispatchEvent(new Event("change", { bubbles: true }));
-
-    const fpHost = input as HTMLInputElement & { _flatpickr?: any };
-    if (fpHost._flatpickr?.clear) {
-      fpHost._flatpickr.clear();
-    }
+        const checkIcon = option.querySelector(
+          ".pb_icon_kit, .pb_icon_kit_xs, [class*='fa-check']"
+        );
+        if (isActive && !checkIcon) {
+          const icon = document.createElement("i");
+          icon.className = "far fa-check fa-fw fa-xs";
+          option.appendChild(icon);
+        } else if (!isActive && checkIcon) {
+          checkIcon.remove();
+        }
+      });
   }
 
-  clearDropdownTarget(dropdownRoot: HTMLElement) {
-    const instance = (
-      dropdownRoot as HTMLElement & {
-        _pbDropdownInstance?: { clearSelection: () => void },
-      }
-    )._pbDropdownInstance;
-
-    if (instance?.clearSelection) {
-      instance.clearSelection();
-      return;
-    }
-
-    document.dispatchEvent(
-      new CustomEvent("pb:dropdown:clear", {
-        detail: { dropdownId: dropdownRoot.id },
-      })
-    );
+  resolveDropdownRoot(target: HTMLElement): HTMLElement | null {
+    if (target.matches("[data-pb-dropdown]")) return target;
+    return target.closest("[data-pb-dropdown]") as HTMLElement | null;
   }
 
-  syncDropdownTarget(
-    target: HTMLElement,
-    value: string,
-    autoSubmit = false
-  ): boolean {
-    const dropdownRoot = target.dataset.pbDropdown !== undefined
-      ? target
-      : target.closest("[data-pb-dropdown]") as HTMLElement | null;
-
+  syncDropdownTarget(target: HTMLElement, value: string): boolean {
+    const dropdownRoot = this.resolveDropdownRoot(target);
     if (!dropdownRoot) return false;
 
-    if (!value) return true;
+    const dropdownId = dropdownRoot.id;
+    const applySelection = () => {
+      const instance = (
+        dropdownRoot as HTMLElement & {
+          _pbDropdownInstance?: {
+            setSelectionByOptionId: (id: string) => void,
+          },
+        }
+      )._pbDropdownInstance;
 
-    const instance = (dropdownRoot as HTMLElement & {
-      _pbDropdownInstance?: { setSelectionByOptionId: (id: string) => void },
-    })._pbDropdownInstance;
+      if (instance?.setSelectionByOptionId) {
+        instance.setSelectionByOptionId(value);
+        return true;
+      }
+      return false;
+    };
 
-    if (instance?.setSelectionByOptionId) {
-      instance.setSelectionByOptionId(value);
-    } else {
+    if (!applySelection() && dropdownId) {
       document.dispatchEvent(
         new CustomEvent("pb:dropdown:select", {
-          detail: { dropdownId: dropdownRoot.id, optionId: value },
+          detail: { dropdownId, optionId: value },
         })
       );
+    }
+
+    if (!applySelection()) {
+      requestAnimationFrame(() => applySelection());
     }
 
     const hiddenInput = dropdownRoot.querySelector(
       "[data-dropdown-selected-option]"
     ) as HTMLInputElement | null;
+    if (hiddenInput && hiddenInput.value !== value) {
+      hiddenInput.value = value;
+    }
     hiddenInput?.dispatchEvent(new Event("change", { bubbles: true }));
-    if (autoSubmit) this.maybeAutoSubmit(hiddenInput || dropdownRoot);
     return true;
   }
 

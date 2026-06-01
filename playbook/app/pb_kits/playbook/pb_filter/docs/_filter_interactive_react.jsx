@@ -34,45 +34,40 @@ const statusOptionForValue = (value) =>
     : undefined;
 
 const FilterInteractive = (props) => {
-  const [applied, setApplied] = useState(INITIAL_FILTERS);
-  const [draft, setDraft] = useState(INITIAL_FILTERS);
+  const [filters, setFilters] = useState(INITIAL_FILTERS);
 
-  const updateDraft = (key) => (value) =>
-    setDraft((prev) => ({ ...prev, [key]: value }));
-
-  const handleApply = (closePopover) => {
-    setApplied(draft);
-    closePopover();
-  };
+  const updateFilter = (key) => (value) =>
+    setFilters((prev) => ({ ...prev, [key]: value }));
 
   const handleClear = () => {
-    setDraft(applied);
+    setFilters(INITIAL_FILTERS);
   };
 
   return (
     <Filter
+        {...props}
         filters={{
-          Territory: applied.territory,
-          Status: applied.status,
-          "Start date": applied.startDate,
+          Territory: filters.territory,
+          Status: filters.status,
+          "Start date": filters.startDate,
         }}
         interactiveFilters={{
           Territory: {
             type: "select",
             options: territorySelectOptions,
-            value: applied.territory,
-            onChange: updateDraft("territory"),
+            value: filters.territory,
+            onChange: updateFilter("territory"),
           },
           Status: {
             type: "dropdown",
             options: statusDropdownOptions,
-            value: applied.status,
-            onChange: updateDraft("status"),
+            value: filters.status,
+            onChange: updateFilter("status"),
           },
           "Start date": {
             type: "date-picker",
-            value: applied.startDate,
-            onChange: updateDraft("startDate"),
+            value: filters.startDate,
+            onChange: updateFilter("startDate"),
             format: "m/d/Y",
           },
         }}
@@ -82,50 +77,51 @@ const FilterInteractive = (props) => {
           popularity: "Popularity",
         }}
         sortValue={[{ name: "popularity", dir: "desc" }]}
-        {...props}
     >
       {({ closePopover }) => (
         <form>
           <Select
+              {...props}
               label="Territory"
               name="location"
-              onChange={(e) => updateDraft("territory")(e.target.value)}
+              onChange={(e) => updateFilter("territory")(e.target.value)}
               options={territorySelectOptions}
-              value={draft.territory}
-              {...props}
+              value={filters.territory}
           />
           <Dropdown
+              {...props}
               blankSelection="Select status..."
-              defaultValue={statusOptionForValue(draft.status)}
-              key={draft.status || "cleared"}
+              defaultValue={statusOptionForValue(filters.status)}
+              key={filters.status || "cleared"}
               label="Status"
               onSelect={(option) =>
-                updateDraft("status")(option ? option.value : "")
+                updateFilter("status")(option ? option.value : "")
               }
               options={statusDropdownOptions}
           />
 
           <DatePicker
-              inputValue={draft.startDate}
+              {...props}
+              inputValue={filters.startDate}
               label="Start date"
-              onChange={updateDraft("startDate")}
+              onChange={updateFilter("startDate")}
               pickerId="filter-panel-start-date"
           />
 
           <Flex
-              spacing="between"
               {...props}
+              spacing="between"
           >
             <Button
-                onClick={() => handleApply(closePopover)}
-                text="Apply"
                 {...props}
+                onClick={closePopover}
+                text="Apply"
             />
             <Button
+                {...props}
                 onClick={handleClear}
                 text="Clear"
                 variant="secondary"
-                {...props}
             />
           </Flex>
         </form>

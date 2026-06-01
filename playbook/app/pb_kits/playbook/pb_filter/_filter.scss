@@ -90,22 +90,6 @@
       outline: $primary solid 2px;
       outline-offset: -1px;
     }
-
-    .pb_interactive_filter_value {
-      display: inline-flex;
-      align-items: center;
-      gap: $space_xs;
-
-      .pb_interactive_filter_caret {
-        color: $primary;
-      }
-    }
-
-    &.dark {
-      .pb_interactive_filter_value .pb_interactive_filter_caret {
-        color: $primary_action_dark;
-      }
-    }
   }
 
   .maskContainer::after {
