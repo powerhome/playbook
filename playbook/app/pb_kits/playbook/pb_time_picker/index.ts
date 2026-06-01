@@ -203,7 +203,10 @@ export default class PbTimePicker extends PbEnhancedElement {
       option.className = 'time_dropdown_option'
       option.dataset.hour = h.toString()
       option.textContent = this.timeFormat === '24hour' ? h.toString().padStart(2, '0') : h.toString()
-      option.addEventListener('click', () => this.handleHourOptionClick(h))
+      option.addEventListener('mousedown', (e) => {
+        e.preventDefault()
+        this.handleHourOptionClick(h)
+      })
       this.hourDropdown.appendChild(option)
     })
 
@@ -213,7 +216,10 @@ export default class PbTimePicker extends PbEnhancedElement {
       option.className = 'time_dropdown_option'
       option.dataset.minute = m.toString()
       option.textContent = m.toString().padStart(2, '0')
-      option.addEventListener('click', () => this.handleMinuteOptionClick(m))
+      option.addEventListener('mousedown', (e) => {
+        e.preventDefault()
+        this.handleMinuteOptionClick(m)
+      })
       this.minuteDropdown.appendChild(option)
     })
   }
@@ -311,12 +317,16 @@ export default class PbTimePicker extends PbEnhancedElement {
       this.removeValidationErrorMessage()
     }
 
-    if (this.showHourDropdown) {
-      requestAnimationFrame(() => this.scrollDropdownToSelected(this.hourDropdown))
-    }
-    if (this.showMinuteDropdown) {
-      requestAnimationFrame(() => this.scrollDropdownToSelected(this.minuteDropdown))
-    }
+  }
+
+  private scrollHourDropdownToSelected(): void {
+    if (!this.showHourDropdown) return
+    requestAnimationFrame(() => this.scrollDropdownToSelected(this.hourDropdown))
+  }
+
+  private scrollMinuteDropdownToSelected(): void {
+    if (!this.showMinuteDropdown) return
+    requestAnimationFrame(() => this.scrollDropdownToSelected(this.minuteDropdown))
   }
 
   private bindEvents(): void {
@@ -341,12 +351,14 @@ export default class PbTimePicker extends PbEnhancedElement {
     this.hourInput.addEventListener('focus', this.handleHourFocus)
     this.hourInput.addEventListener('keydown', this.handleHourKeyDown)
     this.hourInput.addEventListener('click', this.handleHourInputClick)
+    this.hourInput.addEventListener('wheel', this.handleHourInputWheel, { passive: false })
 
     this.minuteInput.addEventListener('input', this.handleMinuteChange)
     this.minuteInput.addEventListener('blur', this.handleMinuteBlur)
     this.minuteInput.addEventListener('focus', this.handleMinuteFocus)
     this.minuteInput.addEventListener('keydown', this.handleMinuteKeyDown)
     this.minuteInput.addEventListener('click', this.handleMinuteInputClick)
+    this.minuteInput.addEventListener('wheel', this.handleMinuteInputWheel, { passive: false })
 
     this.amRadio?.addEventListener('change', this.handleAmRadioChange)
     this.pmRadio?.addEventListener('change', this.handlePmRadioChange)
@@ -369,11 +381,13 @@ export default class PbTimePicker extends PbEnhancedElement {
     this.hourInput?.removeEventListener('focus', this.handleHourFocus)
     this.hourInput?.removeEventListener('keydown', this.handleHourKeyDown)
     this.hourInput?.removeEventListener('click', this.handleHourInputClick)
+    this.hourInput?.removeEventListener('wheel', this.handleHourInputWheel)
     this.minuteInput?.removeEventListener('input', this.handleMinuteChange)
     this.minuteInput?.removeEventListener('blur', this.handleMinuteBlur)
     this.minuteInput?.removeEventListener('focus', this.handleMinuteFocus)
     this.minuteInput?.removeEventListener('keydown', this.handleMinuteKeyDown)
     this.minuteInput?.removeEventListener('click', this.handleMinuteInputClick)
+    this.minuteInput?.removeEventListener('wheel', this.handleMinuteInputWheel)
     this.amRadio?.removeEventListener('change', this.handleAmRadioChange)
     this.pmRadio?.removeEventListener('change', this.handlePmRadioChange)
   }
@@ -582,10 +596,20 @@ export default class PbTimePicker extends PbEnhancedElement {
     this.updateUI()
   }
 
+  private handleHourInputWheel = (e: WheelEvent): void => {
+    if (this.showHourDropdown) e.preventDefault()
+  }
+
+  private handleMinuteInputWheel = (e: WheelEvent): void => {
+    if (this.showMinuteDropdown) e.preventDefault()
+  }
+
   private handleHourInputClick = (): void => {
-    this.showHourDropdown = !this.showHourDropdown
+    const opening = !this.showHourDropdown
+    this.showHourDropdown = opening
     this.showMinuteDropdown = false
     this.updateUI()
+    if (opening) this.scrollHourDropdownToSelected()
   }
 
   private handleHourOptionClick(h: number): void {
@@ -622,9 +646,11 @@ export default class PbTimePicker extends PbEnhancedElement {
   }
 
   private handleMinuteInputClick = (): void => {
-    this.showMinuteDropdown = !this.showMinuteDropdown
+    const opening = !this.showMinuteDropdown
+    this.showMinuteDropdown = opening
     this.showHourDropdown = false
     this.updateUI()
+    if (opening) this.scrollMinuteDropdownToSelected()
   }
 
   private handleMinuteOptionClick(m: number): void {
@@ -682,6 +708,7 @@ export default class PbTimePicker extends PbEnhancedElement {
     this.hasSelectedTime = true
     this.dispatchChange(this.get24HourTimeString())
     this.updateUI()
+    this.scrollHourDropdownToSelected()
   }
 
   private handleMinuteKeyDown = (e: KeyboardEvent): void => {
@@ -721,6 +748,7 @@ export default class PbTimePicker extends PbEnhancedElement {
     this.hasSelectedTime = true
     this.dispatchChange(this.get24HourTimeString())
     this.updateUI()
+    this.scrollMinuteDropdownToSelected()
   }
 
   private handleMeridiemKeyDown(e: KeyboardEvent): void {

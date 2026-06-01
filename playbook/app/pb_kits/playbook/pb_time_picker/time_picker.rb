@@ -91,21 +91,6 @@ module Playbook
         merged
       end
 
-      # Flatten nested data/aria hashes for the main input element
-      def formatted_input_options
-        result = {}
-        input_options.each do |key, value|
-          if key.to_s == "data" && value.is_a?(Hash)
-            value.each { |k, v| result["data-#{k.to_s.dasherize}"] = v }
-          elsif key.to_s == "aria" && value.is_a?(Hash)
-            value.each { |k, v| result["aria-#{k.to_s.dasherize}"] = v }
-          else
-            result[key] = value
-          end
-        end
-        result
-      end
-
     private
 
       def default_picker_id

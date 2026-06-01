@@ -112,24 +112,4 @@ RSpec.describe Playbook::PbTimePicker::TimePicker do
       expect(instance.field_name).to eq("test-picker-time")
     end
   end
-
-  describe "#formatted_input_options" do
-    it "flattens nested data and aria hashes" do
-      instance = subject.new(
-        {
-          input_options: {
-            data: { custom: "value" },
-            aria: { describedby: "hint" },
-            tabindex: "0",
-          },
-        }
-      )
-
-      expect(instance.formatted_input_options).to eq(
-        "data-custom" => "value",
-        "aria-describedby" => "hint",
-        tabindex: "0"
-      )
-    end
-  end
 end
