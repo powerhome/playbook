@@ -36,10 +36,10 @@ const DatePickerDialogSubmission = () => {
                 <Dialog.Body>
                     <DatePicker
                         defaultDate={dateFixed || undefined}
-                        key={`fixed-${pickerInstance}`}
+                        key={"fixed-" + pickerInstance}
                         label="Date"
                         onChange={(dateStr) => setDateFixed(dateStr || "")}
-                        pickerId={`datePickerFixed-${pickerInstance}`}
+                        pickerId={"datePickerFixed-" + pickerInstance}
                         staticPosition={false}
                     />
                 </Dialog.Body>

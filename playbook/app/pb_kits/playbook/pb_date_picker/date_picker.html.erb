@@ -79,42 +79,57 @@
 
   <%= javascript_tag do %>
     (function() {
-      const loadDatePicker = () => {
-        const input = document.getElementById("<%= object.picker_id %>");
-        if (input && !input._flatpickr) {
-          datePickerHelper(<%= object.date_picker_config %>, "<%= object.scroll_container %>")
+      const initQuickPickChangeListener = (input) => {
+        if (!<%= object.selection_type == "quickpick" %>) return
+        if (input.dataset.quickpickInitialized) return
 
-          if (<%= object.selection_type == "quickpick" %>) {
-            document.getElementById("<%= object.picker_id %>").addEventListener("change", ({ target }) => {
-              const startDate = document.getElementById("<%= object.start_date_id %>")
-              const endDate = document.getElementById("<%= object.end_date_id %>")
-              const splittedValue = target.value.split(" to ")
-              startDate.value = splittedValue[0]
-              endDate.value = splittedValue[1] ? splittedValue[1] : splittedValue[0]
-            })
-          }
+        input.dataset.quickpickInitialized = "true"
+        input.addEventListener("change", ({ target }) => {
+          const startDate = document.getElementById("<%= object.start_date_id %>")
+          const endDate = document.getElementById("<%= object.end_date_id %>")
+          const splittedValue = target.value.split(" to ")
+          startDate.value = splittedValue[0]
+          endDate.value = splittedValue[1] ? splittedValue[1] : splittedValue[0]
+        })
+      }
+
+      const loadDatePicker = () => {
+        const input = document.getElementById("<%= object.picker_id %>")
+
+        if (!input || input._flatpickr) return true
+        if (typeof window.datePickerHelper !== "function") return false
+
+        window.datePickerHelper(<%= object.date_picker_config %>, "<%= object.scroll_container %>")
+        initQuickPickChangeListener(input)
+
+        return true
+      }
+
+      let attempts = 0
+      const retryLoad = () => {
+        if (loadDatePicker()) return
+
+        if (attempts++ < 20) {
+          setTimeout(retryLoad, 100)
         }
       }
 
-      // Try to initialize immediately if DOM is ready
       if (document.readyState === "loading") {
-        window.addEventListener("DOMContentLoaded", loadDatePicker)
+        window.addEventListener("DOMContentLoaded", retryLoad)
       } else {
-        loadDatePicker()
+        retryLoad()
       }
 
       // For dynamically added content (modals, etc.), check again after a brief delay
       setTimeout(() => {
-        const input = document.getElementById("<%= object.picker_id %>");
+        const input = document.getElementById("<%= object.picker_id %>")
         if (input && !input._flatpickr) {
-          loadDatePicker();
+          retryLoad()
         }
-      }, 100);
+      }, 100)
 
       if (<%= !object.custom_event_type.empty? %>) {
-        window.addEventListener("<%= object.custom_event_type %>", () => {
-          loadDatePicker()
-        })
+        window.addEventListener("<%= object.custom_event_type %>", retryLoad)
       }
     })()
   <% end %>
