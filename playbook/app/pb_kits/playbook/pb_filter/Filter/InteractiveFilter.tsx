@@ -194,13 +194,6 @@ const InteractiveFilter = ({
                     tabIndex={0}
                 >
                   <span>{option.label}</span>
-                  {isActive && (
-                    <Icon
-                        fixedWidth
-                        icon="check"
-                        size="xs"
-                    />
-                  )}
                 </li>
               )
             })}

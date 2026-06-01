@@ -1,5 +1,6 @@
 @import "../tokens/spacing";
 @import "../tokens/colors";
+@import "../tokens/border_radius";
 
 .pb_filter_sort_menu {
   li {
@@ -147,6 +148,8 @@
     list-style: none;
     margin: 0;
     padding: 0;
+    border-radius: $border_rad_heavier;
+    border: 1px solid $border_light;
     max-height: 280px;
     overflow-y: auto;
   }
@@ -156,20 +159,23 @@
     align-items: center;
     justify-content: space-between;
     gap: $space_xs;
-    padding: $space_xs;
+    padding: $space_xs $space_sm;
     cursor: pointer;
-    border-radius: 4px;
     font-size: $font_base;
     color: $text_lt_default;
     transition: background-color 0.15s ease;
+    border-bottom: 1px solid $border_light;
+    &:last-child {
+      border-bottom: none;
+    }
 
     &:hover {
       background-color: rgba($primary, 0.08);
     }
 
     &.active {
-      color: $primary;
-      font-weight: 600;
+      background-color: $primary;
+      color: $white;
     }
   }
 
