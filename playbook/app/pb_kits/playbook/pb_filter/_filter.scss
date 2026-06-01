@@ -141,6 +141,13 @@
   }
 }
 
+.pb_popover_tooltip.pb_interactive_filter_editor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  margin: 0;
+}
+
 // Popover contents for an interactive filter.
 .pb_interactive_filter_editor {
   min-width: 220px;

@@ -1,117 +1,137 @@
-import React, { useState } from 'react'
+import React, { useState } from "react";
 
-import Filter from '../_filter'
+import Filter from "../_filter";
 
-import Button from '../../pb_button/_button'
-import DatePicker from '../../pb_date_picker/_date_picker'
-import Flex from '../../pb_flex/_flex'
-import Select from '../../pb_select/_select'
-import TextInput from '../../pb_text_input/_text_input'
+import Button from "../../pb_button/_button";
+import DatePicker from "../../pb_date_picker/_date_picker";
+import Dropdown from "../../pb_dropdown/_dropdown";
+import Flex from "../../pb_flex/_flex";
+import Select from "../../pb_select/_select";
 
 const territorySelectOptions = [
-  { value: 'USA' },
-  { value: 'Canada' },
-  { value: 'Brazil' },
-  { value: 'Philippines' },
-]
+  { value: "USA" },
+  { value: "Canada" },
+  { value: "Brazil" },
+  { value: "Philippines" },
+];
 
 const statusDropdownOptions = [
-  { label: 'Open', value: 'open' },
-  { label: 'In progress', value: 'in_progress' },
-  { label: 'Resolved', value: 'resolved' },
-  { label: 'Closed', value: 'closed' },
-]
+  { id: "open", label: "Open", value: "open" },
+  { id: "in_progress", label: "In progress", value: "in_progress" },
+  { id: "resolved", label: "Resolved", value: "resolved" },
+  { id: "closed", label: "Closed", value: "closed" },
+];
+
+const INITIAL_FILTERS = {
+  territory: "USA",
+  status: "open",
+  startDate: "05/01/2026",
+};
+
+const statusOptionForValue = (value) =>
+  value
+    ? statusDropdownOptions.find((opt) => opt.value === value)
+    : undefined;
 
 const FilterInteractive = (props) => {
-  const [territory, setTerritory] = useState('USA')
-  const [status, setStatus] = useState('open')
-  const [startDate, setStartDate] = useState('05/01/2026')
-  const [fullName, setFullName] = useState('John Wick')
+  const [applied, setApplied] = useState(INITIAL_FILTERS);
+  const [draft, setDraft] = useState(INITIAL_FILTERS);
 
-  const statusLabel =
-    statusDropdownOptions.find((opt) => opt.value === status)?.label || status
+  const updateDraft = (key) => (value) =>
+    setDraft((prev) => ({ ...prev, [key]: value }));
+
+  const handleApply = (closePopover) => {
+    setApplied(draft);
+    closePopover();
+  };
+
+  const handleClear = () => {
+    setDraft(applied);
+  };
 
   return (
     <Filter
         filters={{
-          'Full Name': fullName,
-          'Territory': territory,
-          'Status': statusLabel,
-          'Start date': startDate,
+          Territory: applied.territory,
+          Status: applied.status,
+          "Start date": applied.startDate,
         }}
         interactiveFilters={{
-          'Territory': {
-            type: 'select',
+          Territory: {
+            type: "select",
             options: territorySelectOptions,
-            value: territory,
-            onChange: setTerritory,
+            value: applied.territory,
+            onChange: updateDraft("territory"),
           },
-          'Status': {
-            type: 'dropdown',
+          Status: {
+            type: "dropdown",
             options: statusDropdownOptions,
-            value: status,
-            onChange: setStatus,
+            value: applied.status,
+            onChange: updateDraft("status"),
           },
-          'Start date': {
-            type: 'date-picker',
-            value: startDate,
-            onChange: setStartDate,
-            format: 'm/d/Y',
+          "Start date": {
+            type: "date-picker",
+            value: applied.startDate,
+            onChange: updateDraft("startDate"),
+            format: "m/d/Y",
           },
         }}
         minWidth="360px"
         results={546}
         sortOptions={{
-          popularity: 'Popularity',
+          popularity: "Popularity",
         }}
-        sortValue={[{ name: 'popularity', dir: 'desc' }]}
+        sortValue={[{ name: "popularity", dir: "desc" }]}
         {...props}
     >
-    {({ closePopover }) => (
-      <form>
-        <TextInput
-            label="Full Name"
-            onChange={(e) => setFullName(e.target.value)}
-            placeholder="Enter name"
-            value={fullName}
-            {...props}
-        />
-
-        <Select
-            label="Territory"
-            name="location"
-            onChange={(e) => setTerritory(e.target.value)}
-            options={territorySelectOptions}
-            value={territory}
-            {...props}
-        />
-
-        <DatePicker
-            inputValue={startDate}
-            label="Start date"
-            onChange={(dateStr) => setStartDate(dateStr)}
-            pickerId="filter-panel-start-date"
-        />
-
-        <Flex
-            spacing="between"
-            {...props}
-        >
-          <Button
-              onClick={closePopover}
-              text="Apply"
+      {({ closePopover }) => (
+        <form>
+          <Select
+              label="Territory"
+              name="location"
+              onChange={(e) => updateDraft("territory")(e.target.value)}
+              options={territorySelectOptions}
+              value={draft.territory}
               {...props}
           />
-          <Button
-              text="Clear"
-              variant="secondary"
-              {...props}
+          <Dropdown
+              blankSelection="Select status..."
+              defaultValue={statusOptionForValue(draft.status)}
+              key={draft.status || "cleared"}
+              label="Status"
+              onSelect={(option) =>
+                updateDraft("status")(option ? option.value : "")
+              }
+              options={statusDropdownOptions}
           />
-        </Flex>
-      </form>
-    )}
+
+          <DatePicker
+              inputValue={draft.startDate}
+              label="Start date"
+              onChange={updateDraft("startDate")}
+              pickerId="filter-panel-start-date"
+          />
+
+          <Flex
+              spacing="between"
+              {...props}
+          >
+            <Button
+                onClick={() => handleApply(closePopover)}
+                text="Apply"
+                {...props}
+            />
+            <Button
+                onClick={handleClear}
+                text="Clear"
+                variant="secondary"
+                {...props}
+            />
+          </Flex>
+        </form>
+      )}
     </Filter>
-  )
-}
+  );
+};
 
-export default FilterInteractive
+export default FilterInteractive;

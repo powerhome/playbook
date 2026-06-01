@@ -13,8 +13,12 @@ const INTERACTIVE_FILTER_SELECTOR = "[data-pb-interactive-filter]";
  *   - click → popover open/close + popper positioning
  *   - option-click handling (select/dropdown editors)
  *   - flatpickr initialization (date-picker editor)
- *   - syncing the chosen value back to a target form input
+ *   - syncing the chosen value back to a target form input (draft only)
  *   - optional auto-submit of the parent form
+ *
+ * Applied chip labels are server-rendered and only change after the
+ * filter form is submitted. Inline chip edits update the linked form
+ * field in the filter popover, not the chip display.
  *
  * The tooltip uses pb_popover's CSS classes for visual consistency, but is
  * teleported to <body> at connect() time so it escapes the filter row's
@@ -55,10 +59,15 @@ export default class PbFilter extends PbEnhancedElement {
 
     // Teleport tooltip to <body> immediately. pb_popover_tooltip uses
     // visibility:hidden (not display:none), so leaving it inline would add
-    // height to the filter row before the user has even interacted.
+    // height to the filter row; in <body> without position:fixed it stacks
+    // at the page bottom until Popper runs on first open (see _filter.scss).
     const tooltip = this.tooltip;
     if (tooltip && tooltip.parentElement !== document.body) {
       document.body.appendChild(tooltip);
+      tooltip.style.position = "fixed";
+      tooltip.style.top = "0";
+      tooltip.style.left = "0";
+      tooltip.style.margin = "0";
     }
 
     if (this._type === "select" || this._type === "dropdown") {
@@ -172,10 +181,9 @@ export default class PbFilter extends PbEnhancedElement {
       if (!option) return;
 
       const value = option.dataset.pbFilterOptionValue;
-      const label = option.dataset.pbFilterOptionLabel || value;
       if (value === undefined) return;
 
-      this.applyChange(value, label as string);
+      this.syncFormTarget(value, { autoSubmit: this._autoSubmit });
       this.hide();
     };
     tooltip.addEventListener("click", this._optionClickHandler);
@@ -207,44 +215,126 @@ export default class PbFilter extends PbEnhancedElement {
       nextArrow: '<i class="far fa-angle-right"></i>',
       prevArrow: '<i class="far fa-angle-left"></i>',
       onChange: (_dates: Date[], dateStr: string) => {
-        this.applyChange(dateStr, dateStr);
+        this.syncFormTarget(dateStr, { autoSubmit: this._autoSubmit });
         if (mode === "single") this.hide();
       },
     });
   }
 
-  /* ---------------- shared ---------------- */
+  /* ---------------- form sync (draft only) ---------------- */
 
-  applyChange(value: string, label: string) {
-    const display = this.element.querySelector(
-      "[data-pb-filter-value-display]"
-    ) as HTMLElement | null;
-    if (display) display.textContent = label || "—";
-
-    this.element.dataset.pbFilterValue = value;
-
+  syncFormTarget(
+    value: string,
+    { autoSubmit = false }: { autoSubmit?: boolean } = {}
+  ) {
     if (!this._targetInputId) return;
 
-    const input = document.getElementById(this._targetInputId) as
-      | HTMLInputElement
-      | HTMLSelectElement
+    const target = document.getElementById(this._targetInputId) as
+      | HTMLElement
       | null;
-    if (!input) {
+    if (!target) {
       console.warn(
-        `[PbFilter] target_input "${this._targetInputId}" not found in the DOM — verify the ID matches a form field.`
+        `[PbFilter] target_input "${this._targetInputId}" not found in the DOM — verify the ID matches a form field or dropdown.`
       );
       return;
     }
 
+    if (!value) {
+      this.clearFormTarget(target);
+      if (autoSubmit) this.maybeAutoSubmit(target);
+      return;
+    }
+
+    if (this.syncDropdownTarget(target, value, autoSubmit)) return;
+
+    const input = target as HTMLInputElement | HTMLSelectElement;
     input.value = value;
     input.dispatchEvent(new Event("change", { bubbles: true }));
 
-    // If the input is itself a flatpickr-enhanced field, sync its picker UI.
     const fpHost = input as HTMLInputElement & { _flatpickr?: any };
     if (fpHost._flatpickr?.setDate) {
       fpHost._flatpickr.setDate(value, false);
     }
 
+    if (autoSubmit) this.maybeAutoSubmit(input);
+  }
+
+  clearFormTarget(target: HTMLElement) {
+    const dropdownRoot =
+      target.dataset.pbDropdown !== undefined
+        ? target
+        : (target.closest("[data-pb-dropdown]") as HTMLElement | null);
+
+    if (dropdownRoot) {
+      this.clearDropdownTarget(dropdownRoot);
+      return;
+    }
+
+    const input = target as HTMLInputElement | HTMLSelectElement;
+    input.value = "";
+    input.dispatchEvent(new Event("change", { bubbles: true }));
+
+    const fpHost = input as HTMLInputElement & { _flatpickr?: any };
+    if (fpHost._flatpickr?.clear) {
+      fpHost._flatpickr.clear();
+    }
+  }
+
+  clearDropdownTarget(dropdownRoot: HTMLElement) {
+    const instance = (
+      dropdownRoot as HTMLElement & {
+        _pbDropdownInstance?: { clearSelection: () => void },
+      }
+    )._pbDropdownInstance;
+
+    if (instance?.clearSelection) {
+      instance.clearSelection();
+      return;
+    }
+
+    document.dispatchEvent(
+      new CustomEvent("pb:dropdown:clear", {
+        detail: { dropdownId: dropdownRoot.id },
+      })
+    );
+  }
+
+  syncDropdownTarget(
+    target: HTMLElement,
+    value: string,
+    autoSubmit = false
+  ): boolean {
+    const dropdownRoot = target.dataset.pbDropdown !== undefined
+      ? target
+      : target.closest("[data-pb-dropdown]") as HTMLElement | null;
+
+    if (!dropdownRoot) return false;
+
+    if (!value) return true;
+
+    const instance = (dropdownRoot as HTMLElement & {
+      _pbDropdownInstance?: { setSelectionByOptionId: (id: string) => void },
+    })._pbDropdownInstance;
+
+    if (instance?.setSelectionByOptionId) {
+      instance.setSelectionByOptionId(value);
+    } else {
+      document.dispatchEvent(
+        new CustomEvent("pb:dropdown:select", {
+          detail: { dropdownId: dropdownRoot.id, optionId: value },
+        })
+      );
+    }
+
+    const hiddenInput = dropdownRoot.querySelector(
+      "[data-dropdown-selected-option]"
+    ) as HTMLInputElement | null;
+    hiddenInput?.dispatchEvent(new Event("change", { bubbles: true }));
+    if (autoSubmit) this.maybeAutoSubmit(hiddenInput || dropdownRoot);
+    return true;
+  }
+
+  maybeAutoSubmit(input: HTMLElement) {
     if (!this._autoSubmit) return;
 
     const form = input.closest("form");

@@ -7,15 +7,16 @@
   ]
 
   status_options = [
-    { value: "open", label: "Open" },
-    { value: "in_progress", label: "In progress" },
-    { value: "resolved", label: "Resolved" },
-    { value: "closed", label: "Closed" },
+    { value: "open", label: "Open", id: "open" },
+    { value: "in_progress", label: "In progress", id: "in_progress" },
+    { value: "resolved", label: "Resolved", id: "resolved" },
+    { value: "closed", label: "Closed", id: "closed" },
   ]
 
   current_territory = "USA"
   current_status    = "open"
   current_start     = "05/01/2026"
+  status_default    = status_options.find { |o| o[:value] == current_status }
 %>
 
 <%=
@@ -26,7 +27,6 @@
     template: "default",
     results: 546,
     filters: [
-      { name: "Full Name",  value: "John Wick" },
       { name: "Territory",  value: current_territory },
       { name: "Status",     value: current_status },
       { name: "Start date", value: current_start },
@@ -37,21 +37,18 @@
         type: "select",
         options: territory_options,
         target_input: "filter-interactive-territory",
-        auto_submit: true,
       },
       {
         name: "Status",
         type: "dropdown",
         options: status_options,
         target_input: "filter-interactive-status",
-        auto_submit: true,
       },
       {
         name: "Start date",
         type: "date-picker",
         target_input: "filter-interactive-start",
         format: "m/d/Y",
-        auto_submit: true,
       },
     ],
     sort_menu: [
@@ -60,8 +57,6 @@
   }) do
 %>
   <%= pb_rails("form", props: { form_system_options: { scope: :example, method: :get } }) do |form| %>
-    <%= form.text_field :full_name, props: { label: "Full Name" } %>
-
     <%= pb_rails("select", props: {
       label: "Territory",
       name: "territory",
@@ -70,12 +65,12 @@
       input_options: { id: "filter-interactive-territory" }
     }) %>
 
-    <%= pb_rails("select", props: {
+    <%= pb_rails("dropdown", props: {
+      id: "filter-interactive-status",
       label: "Status",
       name: "status",
-      options: status_options.map { |o| { value: o[:value], text: o[:label] } },
-      value: current_status,
-      input_options: { id: "filter-interactive-status" }
+      options: status_options,
+      default_value: status_default,
     }) %>
 
     <%= pb_rails("date_picker", props: {

@@ -3,7 +3,8 @@ Click an applied filter chip to open an inline editor. Three types are supported
 - `type: 'select'` / `'dropdown'`: pick from an options list.
 - `type: 'date-picker'`: inline calendar. Supports `format`, `min_date`, `max_date`, and `mode`.
 
-Each entry requires a `target_input` matching the `id` of a field inside the filter form. Selecting a chip value updates that field and dispatches a `change` event.
+Each entry requires a `target_input` matching a field inside the filter form. For `select` and `date-picker`, use the input's `id`. For `dropdown`, use the dropdown kit's `id` and give each option an `id` (usually the same as `value`).
 
-To auto-submit the form when a chip value is picked (without an Apply button), add `auto_submit: true` to the entry. This calls `requestSubmit()` on the nearest `<form>` ancestor of the target input (compatible with both Turbo and standard form submissions).
+Inline chip edits update the linked control in the filter popover only (draft state). **Applied chip labels stay as-is until the filter form is submitted** (e.g. Apply), at which point the page re-renders with new `filters` values.
 
+To skip Apply and submit immediately when a chip value is picked, add `auto_submit: true` to the entry. This calls `requestSubmit()` on the nearest `<form>` ancestor of the target input.
