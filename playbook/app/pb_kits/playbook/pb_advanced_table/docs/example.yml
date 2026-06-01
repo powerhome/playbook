@@ -3,6 +3,7 @@ examples:
   - advanced_table_beta: Default (Required Props)
   - advanced_table_loading: Loading State
   - advanced_table_beta_subrow_headers: SubRow Headers
+  - advanced_table_enable_toggle_expansion_rails: Enable Toggle Expansion
   - advanced_table_collapsible_trail_rails: Collapsible Trail
   - advanced_table_table_props: Table Props
   - advanced_table_sticky_header_rails: Sticky Header
