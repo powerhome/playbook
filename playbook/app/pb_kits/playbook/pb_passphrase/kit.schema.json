@@ -49,19 +49,6 @@
       ],
       "default": false
     },
-    "required": {
-      "type": "boolean",
-      "platforms": [
-        "rails"
-      ],
-      "default": false
-    },
-    "minLength": {
-      "type": "number",
-      "platforms": [
-        "rails"
-      ]
-    },
     "showTipsBelow": {
       "type": "enum",
       "platforms": [
@@ -97,6 +84,19 @@
         "react",
         "rails"
       ]
+    },
+    "required": {
+      "platforms": [
+        "rails"
+      ],
+      "type": "boolean",
+      "default": false
+    },
+    "minLength": {
+      "platforms": [
+        "rails"
+      ],
+      "type": "number"
     }
   },
   "globalProps": true,
