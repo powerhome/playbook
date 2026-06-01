@@ -54,15 +54,14 @@
                             <%= chip_data_attrs.compact_blank.map { |k, v| "data-#{k}=\"#{ERB::Util.html_escape(v)}\"" }.join(" ").html_safe %>>
                       <div class="pb_interactive_filter_text">
                         <%= pb_rails("caption", props: { text: filter[:name] }) %>
-                        <div class="pb_interactive_filter_value">
-                          <%= pb_rails("body", props: {
-                            tag: "span",
+                        <%= pb_rails("flex", props: { align_items: "center", gap: "xxs" }) do %>
+                          <%= pb_rails("title", props: {
                             text: display_value.presence || "—",
-                            classname: "pb_interactive_filter_value_text",
+                            size: 4,
                             data: { "pb-filter-value-display" => true },
                           }) %>
-                          <%= pb_rails("icon", props: { icon: "angle-down", fixed_width: true, size: "xs", classname: "pb_interactive_filter_caret" }) %>
-                        </div>
+                          <%= pb_rails("icon", props: { icon: "angle-down", fixed_width: true, size: "xs", color: "primary" }) %>
+                        <% end %>
                       </div>
                     </button>
 
@@ -86,9 +85,6 @@
                                   data-pb-filter-option-value="<%= opt_value %>"
                                   data-pb-filter-option-label="<%= opt_label %>">
                                 <span><%= opt_label %></span>
-                                <% if is_active %>
-                                  <%= pb_rails("icon", props: { icon: "check", fixed_width: true, size: "xs" }) %>
-                                <% end %>
                               </li>
                             <% end %>
                           </ul>
