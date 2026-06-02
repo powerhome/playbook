@@ -1,9 +1,15 @@
-import React, { useEffect, useRef } from "react";
+import React, { useLayoutEffect, useRef } from "react";
 import { Card } from "playbook-ui";
 import { useDarkMode } from "../../contexts/DarkModeContext";
 
 type LiveExampleRailsProps = {
   html: string;
+};
+
+type ScriptSnapshot = {
+  attributes: { name: string; value: string }[];
+  content: string;
+  element: HTMLScriptElement;
 };
 
 /**
@@ -87,11 +93,23 @@ const LiveExampleRails: React.FC<LiveExampleRailsProps> = ({ html }) => {
     }, 0);
   };
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (!containerRef.current || !html) return;
 
     const container = containerRef.current;
     applyDarkModeToRenderedRoots(container, darkMode);
+
+    // Snapshot scripts before Playbook kits can portal popovers out of this container.
+    const scriptsToExecute: ScriptSnapshot[] = Array.from(
+      container.querySelectorAll("script"),
+    ).map((script) => ({
+      attributes: Array.from(script.attributes).map((attr) => ({
+        name: attr.name,
+        value: attr.value,
+      })),
+      content: script.textContent || "",
+      element: script,
+    }));
 
     // Prevent anchor links with href="#" from causing scroll/navigation issues
     const preventHashNavigation = (e: Event) => {
@@ -108,16 +126,19 @@ const LiveExampleRails: React.FC<LiveExampleRailsProps> = ({ html }) => {
 
     // Wait for components to initialize, then execute scripts
     const scriptTimeout = setTimeout(() => {
-      const scripts = container.querySelectorAll("script");
-      scripts.forEach((oldScript) => {
+      scriptsToExecute.forEach(({ attributes, content, element }) => {
         const newScript = document.createElement("script");
-        Array.from(oldScript.attributes).forEach((attr) => {
+        attributes.forEach((attr) => {
           newScript.setAttribute(attr.name, attr.value);
         });
         // Transform script to handle DOMContentLoaded
-        const originalContent = oldScript.textContent || "";
-        newScript.textContent = transformScriptForLiveExecution(originalContent);
-        oldScript.parentNode?.replaceChild(newScript, oldScript);
+        newScript.textContent = transformScriptForLiveExecution(content);
+
+        if (element.parentNode) {
+          element.parentNode.replaceChild(newScript, element);
+        } else {
+          container.appendChild(newScript);
+        }
       });
     }, 100);
 
