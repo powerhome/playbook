@@ -108,4 +108,21 @@ RSpec.describe Playbook::PbTextInput::TextInput do
       end
     end
   end
+
+  describe "filter reset integration (data-default-value)" do
+    it "adds data-default-value on the input when value is present" do
+      text_input = subject.new(value: "Philadelphia", name: "city")
+      expect(text_input.input_tag).to include('data-default-value="Philadelphia"')
+    end
+
+    it "omits data-default-value when value is nil or empty string" do
+      expect(subject.new(value: nil, name: "city").input_tag).not_to include("data-default-value")
+      expect(subject.new(value: "", name: "city").input_tag).not_to include("data-default-value")
+    end
+
+    it "serializes numeric value for data-default-value" do
+      text_input = subject.new(value: 0, name: "count")
+      expect(text_input.input_tag).to include('data-default-value="0"')
+    end
+  end
 end
