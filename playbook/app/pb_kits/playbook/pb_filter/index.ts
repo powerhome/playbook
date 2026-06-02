@@ -5,6 +5,7 @@ import { createPopper, Instance as PopperInstance } from "@popperjs/core";
 import flatpickr from "flatpickr";
 
 const INTERACTIVE_FILTER_SELECTOR = "[data-pb-interactive-filter]";
+const INTERACTIVE_FILTER_BREAKPOINT = 960;
 
 /**
  * Rails-side enhanced behavior for interactive applied-filter chips.
@@ -94,6 +95,8 @@ export default class PbFilter extends PbEnhancedElement {
   }
 
   toggle() {
+    if (window.innerWidth < INTERACTIVE_FILTER_BREAKPOINT) return;
+
     this._isOpen ? this.hide() : this.show();
   }
 

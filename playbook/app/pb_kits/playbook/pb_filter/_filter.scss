@@ -2,6 +2,8 @@
 @import "../tokens/colors";
 @import "../tokens/border_radius";
 
+$interactive_filter_breakpoint: 960px;
+
 .pb_filter_sort_menu {
   li {
     padding: 0 $space_sm !important;
@@ -76,6 +78,10 @@
       padding-top: 2px;
       padding-bottom: 2px;
     }
+
+    .pb_interactive_filter_mobile_static {
+      display: none;
+    }
   }
 
   // Interactive filter chip: clickable button that opens a popover whose
@@ -122,6 +128,20 @@
     }
     .maskContainer::after {
       opacity:0;
+    }
+  }
+}
+
+@media screen and (max-width: ($interactive_filter_breakpoint - 1px)) {
+  .pb_filter_kit {
+    .filters {
+      .pb_interactive_filter_desktop {
+        display: none;
+      }
+
+      .pb_interactive_filter_mobile_static {
+        display: block;
+      }
     }
   }
 }

@@ -50,7 +50,7 @@ type InteractiveFilterProps = {
   config: InteractiveFilterConfig,
 }
 
-const labelFor = (
+export const labelFor = (
   config: InteractiveFilterConfig,
   value: string
 ): string => {
