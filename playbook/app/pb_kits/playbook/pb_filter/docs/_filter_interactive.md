@@ -1,12 +1,14 @@
-Click an applied filter chip to open an inline editor. Three types are supported via `interactive_filters`:
+Click an applied filter chip to edit it inline. `interactive_filters` supports:
 
-- `type: 'select'` / `'dropdown'`: pick from an options list.
+- `type: 'select'` / `'dropdown'`: pick from a list of options.
 - `type: 'date-picker'`: inline calendar. Supports `format`, `min_date`, `max_date`, and `mode`.
 
-Each entry requires a `target_input` matching a field inside the filter form. For `select` and `date-picker`, use the input's `id`. For `dropdown`, use the dropdown kit's `id` and give each option an `id` (usually the same as `value`).
+Each entry needs a `target_input` that points to the form control it updates. For `select` and `date-picker`, use the input's `id`. For `dropdown`, use the Dropdown kit's `id`.
 
-Chip inline edits update the linked control in the filter popover (draft). Click **Apply** on the filter form to submit; your view should read the submitted params and pass new values into `filters` so chips re-render.
+For date ranges, use `type: 'dropdown'` with `variant: 'quickpick'`. The Filter kit generates the same quickpick options as Dropdown, so no `options` are needed. Values are quickpick ids, such as `quickpick-this-week`.
+
+Chip edits update the linked control inside the filter popover. Click **Apply** to submit, then pass the submitted values back into `filters` so chips re-render with the latest labels.
 
 To preserve space for results and sort controls, only the first four applied filters are interactive at `lg` screen sizes (`960px`) and larger. Below `960px`, applied filters render as static chips; edit values from the filter popover instead.
 
-Optional `auto_submit: true` on a chip entry submits the form immediately when a chip value is picked.
+Use `auto_submit: true` to submit the form immediately after a chip value is picked.

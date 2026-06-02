@@ -82,5 +82,30 @@ RSpec.describe Playbook::PbFilter::Filter do
 
       expect(filter.interactive_display_value(config, "unknown")).to eq "unknown"
     end
+
+    it "uses generated quickpick labels without explicit options" do
+      filter = subject.new({})
+      config = { type: "dropdown", variant: "quickpick" }.with_indifferent_access
+
+      expect(filter.interactive_display_value(config, "quickpick-this-week")).to eq "This Week"
+    end
+  end
+
+  describe "#interactive_options" do
+    it "generates quickpick options when a dropdown interactive filter has the quickpick variant" do
+      filter = subject.new({})
+      config = { type: "dropdown", variant: "quickpick" }.with_indifferent_access
+      options = filter.interactive_options(config)
+
+      expect(options.map { |option| option[:id] }).to include("quickpick-this-week", "quickpick-last-month")
+    end
+
+    it "prefers dropdown option ids for interactive option values" do
+      filter = subject.new({})
+      config = { type: "dropdown" }.with_indifferent_access
+      option = { id: "option-id", value: "submitted-value", label: "Submitted Value" }
+
+      expect(filter.interactive_option_value(config, option)).to eq "option-id"
+    end
   end
 end

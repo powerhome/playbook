@@ -150,6 +150,37 @@ test("calls onChange and closes editor when an interactive option is selected", 
   expect(screen.queryByRole("option", { name: "Closed" })).not.toBeInTheDocument();
 });
 
+test("generates quickpick options for interactive dropdown filters", () => {
+  mockMatchMedia(true);
+  const handleChange = jest.fn();
+
+  render(
+    <FilterTest
+        filters={{
+          "Date range": "quickpick-this-week",
+        }}
+        interactiveFilters={{
+          "Date range": {
+            type: "dropdown",
+            variant: "quickpick",
+            onChange: handleChange,
+          },
+        }}
+    />
+  );
+
+  expect(screen.getByText("This Week")).toBeInTheDocument();
+
+  const interactiveButton = screen
+    .getAllByRole("button")
+    .find((button) => button.getAttribute("aria-haspopup") === "dialog");
+
+  fireEvent.click(interactiveButton);
+  fireEvent.click(screen.getByRole("option", { name: "Last Month" }));
+
+  expect(handleChange).toHaveBeenCalledWith("quickpick-last-month");
+});
+
 test("renders interactive filters as static labels below 960px", () => {
   mockMatchMedia(false);
 

@@ -25,6 +25,7 @@ const statusDropdownOptions = [
 const INITIAL_FILTERS = {
   territory: "USA",
   status: "open",
+  dateRange: "quickpick-this-week",
   startDate: "05/01/2026",
 };
 
@@ -49,6 +50,7 @@ const FilterInteractive = (props) => {
         filters={{
           Territory: filters.territory,
           Status: filters.status,
+          "Date range": filters.dateRange,
           "Start date": filters.startDate,
         }}
         interactiveFilters={{
@@ -63,6 +65,12 @@ const FilterInteractive = (props) => {
             options: statusDropdownOptions,
             value: filters.status,
             onChange: updateFilter("status"),
+          },
+          "Date range": {
+            type: "dropdown",
+            variant: "quickpick",
+            value: filters.dateRange,
+            onChange: updateFilter("dateRange"),
           },
           "Start date": {
             type: "date-picker",
@@ -99,6 +107,17 @@ const FilterInteractive = (props) => {
                 updateFilter("status")(option ? option.value : "")
               }
               options={statusDropdownOptions}
+          />
+
+          <Dropdown
+              {...props}
+              key={filters.dateRange || "cleared"}
+              label="Date range"
+              marginBottom="sm"
+              onSelect={(option) =>
+                updateFilter("dateRange")(option ? option.id : "")
+              }
+              variant="quickpick"
           />
 
           <DatePicker

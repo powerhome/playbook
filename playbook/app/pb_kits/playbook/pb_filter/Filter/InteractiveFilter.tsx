@@ -6,6 +6,7 @@ import Flex from '../../pb_flex/_flex'
 import Caption from '../../pb_caption/_caption'
 import Icon from '../../pb_icon/_icon'
 import PbReactPopover from '../../pb_popover/_popover'
+import getQuickPickOptions from '../../pb_dropdown/quickpick'
 import { uniqueId } from '../../utilities/object'
 import Title from '../../pb_title/_title'
 
@@ -20,7 +21,16 @@ export type SelectInteractiveConfig = {
 
 export type DropdownInteractiveConfig = {
   type: 'dropdown',
-  options: { value: string, label: string }[],
+  options?: { value?: string, label: string, id?: string }[],
+  variant?: 'default' | 'quickpick',
+  rangeEndsToday?: boolean,
+  customQuickPickDates?: {
+    override?: boolean,
+    dates: {
+      label: string,
+      value: string[] | { timePeriod: string, amount: number },
+    }[],
+  },
   value?: string,
   editorValue?: string,
   onChange: (value: string) => void,
@@ -42,6 +52,25 @@ export type InteractiveFilterConfig =
   | DropdownInteractiveConfig
   | DatePickerInteractiveConfig
 
+const dropdownOptionsFor = (
+  config: DropdownInteractiveConfig
+): { value: string, label: string }[] => {
+  if (config.variant === 'quickpick' && !config.options?.length) {
+    return getQuickPickOptions(
+      config.rangeEndsToday,
+      config.customQuickPickDates
+    ).map((opt) => ({
+      value: opt.id || opt.label,
+      label: opt.label,
+    }))
+  }
+
+  return (config.options || []).map((opt) => ({
+    value: opt.id || opt.value || opt.label,
+    label: opt.label,
+  }))
+}
+
 type InteractiveFilterProps = {
   dark?: boolean,
   name: string,
@@ -59,7 +88,7 @@ export const labelFor = (
     if (match) return match.text || match.value
   }
   if (config.type === 'dropdown') {
-    const match = config.options.find((opt) => opt.value === value)
+    const match = dropdownOptionsFor(config).find((opt) => opt.value === value)
     if (match) return match.label || match.value
   }
   return value
@@ -157,10 +186,7 @@ const InteractiveFilter = ({
       case 'dropdown': {
         const options =
           config.type === 'dropdown'
-            ? config.options.map((opt) => ({
-                value: opt.value,
-                label: opt.label,
-              }))
+            ? dropdownOptionsFor(config)
             : config.options.map((opt) => ({
                 value: opt.value,
                 label: opt.text || opt.value,

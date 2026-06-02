@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative "../pb_dropdown/quickpick_helper"
+
 module Playbook
   module PbFilter
     class Filter < Playbook::KitBase
@@ -33,14 +35,46 @@ module Playbook
         config[key]
       end
 
+      def interactive_options(config)
+        return [] if config.nil?
+
+        config = config.with_indifferent_access
+        if interactive_quickpick?(config) && Array(config[:options]).blank?
+          return Playbook::PbDropdown::QuickpickHelper.get_quickpick_options(
+            range_ends_today: config[:range_ends_today] || false,
+            custom_quick_pick_dates: config[:custom_quick_pick_dates] || {}
+          )
+        end
+
+        Array(config[:options])
+      end
+
+      def interactive_option_value(config, option)
+        config = config.with_indifferent_access
+        option = option.with_indifferent_access
+
+        if config[:type].to_s == "dropdown"
+          option[:id] || option[:value] || option[:label]
+        else
+          option[:value] || option[:text] || option[:label]
+        end
+      end
+
+      def interactive_option_label(option, fallback = nil)
+        option = option.with_indifferent_access
+        option[:label] || option[:text] || fallback
+      end
+
       def interactive_display_value(config, raw_value)
         return raw_value if config.nil?
         return raw_value unless %w[select dropdown].include?(config[:type].to_s)
 
-        match = Array(config[:options]).find { |opt| opt[:value].to_s == raw_value.to_s }
+        match = interactive_options(config).find do |opt|
+          interactive_option_value(config, opt).to_s == raw_value.to_s
+        end
         return raw_value unless match
 
-        match[:label] || match[:text] || match[:value]
+        interactive_option_label(match, raw_value)
       end
 
       def result_text
@@ -83,6 +117,10 @@ module Playbook
           name = config[:name].to_s
           acc[name] = config if name.present?
         end
+      end
+
+      def interactive_quickpick?(config)
+        config[:type].to_s == "dropdown" && config[:variant].to_s == "quickpick"
       end
     end
   end

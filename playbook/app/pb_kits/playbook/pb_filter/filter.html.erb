@@ -77,10 +77,10 @@
                       <div class="pb_popover_body">
                         <% if is_options %>
                           <ul class="pb_interactive_filter_options" role="listbox">
-                            <% Array(object.interactive_value(interactive_config, :options)).each do |opt| %>
-                              <% opt_value = opt[:value] || opt["value"] %>
+                            <% object.interactive_options(interactive_config).each do |opt| %>
+                              <% opt_value = object.interactive_option_value(interactive_config, opt) %>
                               <% is_active = opt_value.to_s == filter[:value].to_s %>
-                              <% opt_label = opt[:label] || opt["label"] || opt[:text] || opt["text"] || opt_value %>
+                              <% opt_label = object.interactive_option_label(opt, opt_value) %>
                               <li class="pb_interactive_filter_option<%= ' active' if is_active %>"
                                   role="option"
                                   aria-selected="<%= is_active %>"

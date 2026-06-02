@@ -16,12 +16,13 @@
   raw_example = params[:example]
   example_params =
     if raw_example.respond_to?(:permit)
-      raw_example.permit(:territory, :status, :start_date)
+      raw_example.permit(:territory, :status, :date_range, :start_date)
     else
       raw_example || {}
     end
   current_territory = example_params[:territory].presence || "USA"
   current_status    = example_params[:status].presence || "open"
+  current_date_range = example_params[:date_range].presence || "quickpick-this-week"
   current_start     = example_params[:start_date].presence || "05/01/2026"
   status_default    = status_options.find { |o| o[:value] == current_status }
 %>
@@ -36,6 +37,7 @@
     filters: [
       { name: "Territory",  value: current_territory },
       { name: "Status",     value: current_status },
+      { name: "Date range", value: current_date_range },
       { name: "Start date", value: current_start },
     ],
     interactive_filters: [
@@ -51,6 +53,13 @@
         type: "dropdown",
         options: status_options,
         target_input: "filter-interactive-status",
+        auto_submit: true,
+      },
+      {
+        name: "Date range",
+        type: "dropdown",
+        variant: "quickpick",
+        target_input: "filter-interactive-date-range",
         auto_submit: true,
       },
       {
@@ -81,6 +90,14 @@
       name: "status",
       options: status_options,
       default_value: status_default,
+      margin_bottom: "sm",
+    }) %>
+
+    <%= pb_rails("dropdown", props: {
+      id: "filter-interactive-date-range",
+      label: "Date range",
+      name: "date_range",
+      variant: "quickpick",
       margin_bottom: "sm",
     }) %>
 
