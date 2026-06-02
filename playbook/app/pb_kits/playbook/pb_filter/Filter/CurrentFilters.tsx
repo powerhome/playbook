@@ -43,21 +43,6 @@ const CurrentFilters = ({
   )
 
   useEffect(() => {
-    if (process.env.NODE_ENV === 'production') return
-    const orphans = Object.keys(interactiveFilters).filter(
-      (name) => !filters || !(name in filters)
-    )
-    if (orphans.length) {
-      // eslint-disable-next-line no-console
-      console.warn(
-        `[pb_filter] interactiveFilters entries ignored — not present in \`filters\`: ${orphans
-          .map((n) => `"${n}"`)
-          .join(', ')}. A filter must exist in \`filters\` before it can be made interactive.`
-      )
-    }
-  }, [filters, interactiveFilters])
-
-  useEffect(() => {
     if (typeof window.matchMedia !== 'function') return
 
     const mediaQuery = window.matchMedia(
