@@ -94,6 +94,7 @@ const FilterInteractive = (props) => {
               defaultValue={statusOptionForValue(filters.status)}
               key={filters.status || "cleared"}
               label="Status"
+              marginBottom="sm"
               onSelect={(option) =>
                 updateFilter("status")(option ? option.value : "")
               }
