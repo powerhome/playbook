@@ -12,42 +12,54 @@ type ScriptSnapshot = {
   element: HTMLScriptElement;
 };
 
-/**
- * Transform script content to handle DOMContentLoaded listeners.
- * Since the page has already loaded when we render these examples,
- * we need to execute callbacks after a short delay to allow components to initialize.
- */
-function transformScriptForLiveExecution(scriptContent: string): string {
-  // Check if script uses DOMContentLoaded
+const RAILS_EXAMPLE_CARD_HTML_OPTIONS = {
+  style: {
+    border: "none",
+    boxSizing: "border-box",
+    maxWidth: "100%",
+    minWidth: 0,
+  },
+};
+
+const RAILS_EXAMPLE_WRAPPER_STYLE: React.CSSProperties = {
+  boxSizing: "border-box",
+  maxWidth: "100%",
+  minWidth: 0,
+  overflowX: "auto",
+  width: "100%",
+};
+
+const EXECUTE_SCRIPT_DELAY_MS = 100;
+const REINITIALIZE_DELAY_MS = 200;
+
+const transformScriptForLiveExecution = (scriptContent: string): string => {
+  // Rails examples are injected after the page has already loaded, so
+  // DOMContentLoaded callbacks need to run on a short timer instead.
   const usesDOMContentLoaded = /DOMContentLoaded/.test(scriptContent);
-  
+
   if (usesDOMContentLoaded) {
-    // Replace DOMContentLoaded listener with setTimeout
-    // This handles both window.addEventListener and document.addEventListener
     let transformed = scriptContent;
-    
-    // Replace the addEventListener pattern with setTimeout
-    // Match both window.addEventListener and document.addEventListener
+
     transformed = transformed.replace(
       /(window|document)\.addEventListener\s*\(\s*["']DOMContentLoaded["']\s*,\s*/g,
-      "setTimeout("
+      "setTimeout(",
     );
-    
-    // The closing `) ` of addEventListener becomes `, 50)` for setTimeout
-    // We need to add the delay parameter before the final closing paren
-    // Find pattern like `})` or `});` at the end and add delay
+
     transformed = transformed.replace(
       /\}\s*\)\s*;?\s*$/,
-      "}, 50);"
+      "}, 50);",
     );
-    
+
     return transformed;
   }
-  
-  return scriptContent;
-}
 
-function applyDarkModeToRenderedRoots(container: HTMLDivElement, darkMode: boolean) {
+  return scriptContent;
+};
+
+const applyDarkModeToRenderedRoots = (
+  container: HTMLDivElement,
+  darkMode: boolean,
+): void => {
   const renderedRoots = Array.from(container.children) as HTMLElement[];
 
   renderedRoots.forEach((element) => {
@@ -60,17 +72,68 @@ function applyDarkModeToRenderedRoots(container: HTMLDivElement, darkMode: boole
       element.classList.remove("dark");
     }
   });
-}
+};
 
-function resetExampleOverflow(element: HTMLElement) {
+const resetExampleOverflow = (element: HTMLElement): void => {
   element.style.overflowX = "auto";
   element.style.removeProperty("overflow-y");
-}
+};
 
-function showExampleOverflow(event: React.SyntheticEvent<HTMLDivElement>) {
+const showExampleOverflow = (
+  event: React.SyntheticEvent<HTMLDivElement>,
+): void => {
   event.currentTarget.style.overflowX = "visible";
   event.currentTarget.style.overflowY = "visible";
-}
+};
+
+// Flatpickr stores its instance on the input and owns calendar DOM outside
+// React. Destroying it first keeps tab switches from leaving hidden calendars.
+const destroyFlatpickrInstances = (element: HTMLElement): void => {
+  const flatpickrInputs = Array.from(
+    element.querySelectorAll<HTMLInputElement>("input"),
+  );
+
+  flatpickrInputs.forEach((input) => {
+    const flatpickrInstance = (input as HTMLInputElement & {
+      _flatpickr?: { destroy?: () => void };
+    })._flatpickr;
+
+    if (typeof flatpickrInstance?.destroy === "function") {
+      flatpickrInstance.destroy();
+    }
+  });
+};
+
+// Rails Popover moves its tooltip into body. Capture the ids while the popover
+// wrappers are still inside the live example so cleanup can find them later.
+const collectPopoverTooltipIds = (container: HTMLElement): string[] => {
+  const popoverElements = Array.from(
+    container.querySelectorAll<HTMLElement>("[data-pb-popover-tooltip-id]"),
+  );
+
+  return popoverElements
+    .map((element) => element.dataset.pbPopoverTooltipId)
+    .filter((id): id is string => Boolean(id));
+};
+
+const removePortaledPopovers = (
+  container: HTMLElement,
+  tooltipIds: string[],
+): void => {
+  if (!tooltipIds.length) return;
+
+  const tooltipIdSet = new Set(tooltipIds);
+  const matchingTooltips = Array.from(
+    document.body.querySelectorAll<HTMLElement>("[id]"),
+  ).filter((element) => tooltipIdSet.has(element.id));
+
+  matchingTooltips.forEach((tooltip) => {
+    if (container.contains(tooltip)) return;
+
+    destroyFlatpickrInstances(tooltip);
+    tooltip.remove();
+  });
+};
 
 const LiveExampleRails: React.FC<LiveExampleRailsProps> = ({ html }) => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -96,10 +159,17 @@ const LiveExampleRails: React.FC<LiveExampleRailsProps> = ({ html }) => {
   useLayoutEffect(() => {
     if (!containerRef.current || !html) return;
 
-    const container = containerRef.current;
-    applyDarkModeToRenderedRoots(container, darkMode);
+    applyDarkModeToRenderedRoots(containerRef.current, darkMode);
+  }, [html, darkMode]);
 
-    // Snapshot scripts before Playbook kits can portal popovers out of this container.
+  useLayoutEffect(() => {
+    if (!containerRef.current || !html) return;
+
+    const container = containerRef.current;
+    const portaledTooltipIds = collectPopoverTooltipIds(container);
+
+    // Keep a copy of inline scripts before Playbook popovers move their
+    // tooltip content out of this live example and into document.body.
     const scriptsToExecute: ScriptSnapshot[] = Array.from(
       container.querySelectorAll("script"),
     ).map((script) => ({
@@ -111,7 +181,10 @@ const LiveExampleRails: React.FC<LiveExampleRailsProps> = ({ html }) => {
       element: script,
     }));
 
-    // Prevent anchor links with href="#" from causing scroll/navigation issues
+    // Returning from React to Rails can leave an older Rails tooltip in body.
+    // Removing it prevents duplicate ids like filter-form... / filter-default.
+    removePortaledPopovers(container, portaledTooltipIds);
+
     const preventHashNavigation = (e: Event) => {
       const target = e.target as HTMLElement;
       const anchor = target.closest('a[href="#"]');
@@ -121,17 +194,17 @@ const LiveExampleRails: React.FC<LiveExampleRailsProps> = ({ html }) => {
     };
     container.addEventListener('click', preventHashNavigation);
 
-    // Dispatch turbo:frame-load first to trigger Playbook component initialization
+    // First pass wires up enhanced Rails kits such as Popover.
     window.dispatchEvent(new Event("turbo:frame-load"));
 
-    // Wait for components to initialize, then execute scripts
+    // Then run the example's inline scripts, including date picker setup.
     const scriptTimeout = setTimeout(() => {
       scriptsToExecute.forEach(({ attributes, content, element }) => {
         const newScript = document.createElement("script");
         attributes.forEach((attr) => {
           newScript.setAttribute(attr.name, attr.value);
         });
-        // Transform script to handle DOMContentLoaded
+
         newScript.textContent = transformScriptForLiveExecution(content);
 
         if (element.parentNode) {
@@ -140,49 +213,42 @@ const LiveExampleRails: React.FC<LiveExampleRailsProps> = ({ html }) => {
           container.appendChild(newScript);
         }
       });
-    }, 100);
+    }, EXECUTE_SCRIPT_DELAY_MS);
 
-    // Additional turbo:frame-load after scripts execute
+    // One final pass catches any Rails kits inserted or moved by inline scripts.
     const turboTimeout = setTimeout(() => {
       window.dispatchEvent(new Event("turbo:frame-load"));
-    }, 200);
+    }, REINITIALIZE_DELAY_MS);
 
     return () => {
       clearTimeout(scriptTimeout);
       clearTimeout(turboTimeout);
+      // Popovers and flatpickr calendars can own body-level DOM. Clean them
+      // before the React tree drops this live example.
+      destroyFlatpickrInstances(container);
+      removePortaledPopovers(container, portaledTooltipIds);
       container.removeEventListener('click', preventHashNavigation);
     };
-  }, [html, darkMode]);
+  }, [html]);
 
   if (!html) return null;
 
   return (
     <Card
-      borderNone
-      padding="md"
-      dark={darkMode}
-      htmlOptions={{
-        style: {
-          border: "none",
-          boxSizing: "border-box",
-          maxWidth: "100%",
-          minWidth: 0,
-        },
-      }}
+        borderNone
+        dark={darkMode}
+        htmlOptions={RAILS_EXAMPLE_CARD_HTML_OPTIONS}
+        padding="md"
     >
       <div
-        onBlurCapture={handleBlurCapture}
-        onFocusCapture={showExampleOverflow}
-        onPointerDownCapture={showExampleOverflow}
-        style={{
-          boxSizing: "border-box",
-          width: "100%",
-          maxWidth: "100%",
-          minWidth: 0,
-          overflowX: "auto",
-        }}
+          onBlurCapture={handleBlurCapture}
+          onFocusCapture={showExampleOverflow}
+          onPointerDownCapture={showExampleOverflow}
+          style={RAILS_EXAMPLE_WRAPPER_STYLE}
       >
-        <div ref={containerRef} dangerouslySetInnerHTML={{ __html: html }} />
+        <div dangerouslySetInnerHTML={{ __html: html }}
+            ref={containerRef}
+        />
       </div>
     </Card>
   );
