@@ -598,7 +598,7 @@ kits:
     description: A time picker component that allows users to select a time independently of the date.
     status: stable
     icons_used: true
-    react_rendered: true
+    react_rendered: false
     enhanced_element_used: true
 - category: icons_and_images
   description: Components for displaying icons, images, and visual media.

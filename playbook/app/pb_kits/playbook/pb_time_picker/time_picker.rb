@@ -30,7 +30,8 @@ module Playbook
       prop :value, type: Playbook::Props::String
 
       def classname
-        generate_classname("pb_time_picker") + error_class + disabled_class + dark_class
+        default_margin_bottom = margin_bottom.present? ? "" : " mb_sm"
+        generate_classname("pb_time_picker") + default_margin_bottom + error_class + disabled_class + dark_class
       end
 
       def error_class
@@ -45,45 +46,59 @@ module Playbook
         dark ? " dark" : ""
       end
 
-      # Flatten nested data/aria hashes for React compatibility
-      # Rails tag helpers do this automatically, but React needs flat attributes
-      def formatted_input_options
-        result = {}
-        input_options.each do |key, value|
-          if key.to_s == "data" && value.is_a?(Hash)
-            value.each { |k, v| result["data-#{k.to_s.dasherize}"] = v }
-          elsif key.to_s == "aria" && value.is_a?(Hash)
-            value.each { |k, v| result["aria-#{k.to_s.dasherize}"] = v }
-          else
-            result[key] = value
-          end
-        end
-        result
+      def data
+        Hash(prop(:data)).merge(
+          pb_time_picker: true,
+          validation_message: validation_message.presence,
+          time_format: time_format,
+          default_time: default_time,
+          value: value,
+          min_time: min_time,
+          max_time: max_time,
+          required: required ? "true" : nil,
+          disabled: disabled ? "true" : nil,
+          show_timezone: show_timezone ? "true" : nil,
+          field_name: field_name
+        ).compact
       end
 
-      def time_picker_react_props
-        props = {
-          className: classname,
-          data: data,
-          dark: dark,
-          defaultTime: default_time,
-          disabled: disabled,
-          error: error,
-          htmlOptions: html_options,
-          id: id,
-          inputOptions: formatted_input_options,
-          label: label,
-          maxTime: max_time,
-          minTime: min_time,
-          name: name,
-          required: required,
-          requiredIndicator: required_indicator,
-          showTimezone: show_timezone,
-          timeFormat: time_format,
-          validationMessage: validation_message,
-          value: value,
-        }
-        props.compact
+      def picker_id
+        id.presence || default_picker_id
+      end
+
+      def input_id
+        "#{picker_id}-input"
+      end
+
+      def field_name
+        name.presence || "#{picker_id}-time"
+      end
+
+      def container_class
+        base = "pb_time_picker_container"
+        time_format == "24hour" ? "#{base} pb_time_picker_container_24hour" : base
+      end
+
+      def meridiem_section?
+        time_format == "AMPM"
+      end
+
+      def main_input_options
+        merged = input_options.deep_dup
+        merged[:autocomplete] = "off" unless merged.key?(:autocomplete)
+        caret_style = "caret-color: transparent"
+        merged[:style] = merged[:style].present? ? "#{merged[:style]}; #{caret_style}" : caret_style
+        merged
+      end
+
+    private
+
+      def default_picker_id
+        if label.present?
+          label.downcase.gsub(/\s+/, "_").gsub(/[^a-z0-9_]/, "")
+        else
+          "time-picker"
+        end
       end
     end
   end
