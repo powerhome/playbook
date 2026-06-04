@@ -89,6 +89,8 @@ module Playbook
                            default: ""
       prop :cursor, type: Playbook::Props::String,
                     default: "pointer"
+      prop :year_ascending, type: Playbook::Props::Boolean,
+                            default: false
 
       def classname
         default_margin_bottom = margin_bottom.present? ? "" : " mb_sm"
@@ -122,6 +124,7 @@ module Playbook
           staticPosition: static_position,
           thisRangesEndToday: this_ranges_end_today,
           yearRange: year_range,
+          yearAscending: year_ascending,
           controlsStartId: controls_start_id,
           controlsEndId: controls_end_id,
           syncStartWith: sync_start_with,

@@ -32,6 +32,7 @@ type DatePickerConfig = {
   thisRangesEndToday?: boolean,
   timeCaption?: string,
   timeFormat?: string,
+  yearAscending?: boolean,
   yearRange: number[],
   controlsStartId?: string,
     controlsEndId?: string,
@@ -70,6 +71,7 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
     thisRangesEndToday = false,
     timeCaption = 'Select Time',
     timeFormat = 'at h:i K',
+    yearAscending,
     yearRange,
     controlsStartId,
     controlsEndId,
@@ -515,8 +517,14 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
 
   // create html option tags for desired years
   let years = ''
-  for (let year = setMaxYear; year >= setMinYear; year--) {
-    years += `<option value="${year}">${year}</option>`
+  if (yearAscending) {
+    for (let year = setMinYear; year <= setMaxYear; year++) {
+      years += `<option value="${year}">${year}</option>`
+    }
+  } else {
+    for (let year = setMaxYear; year >= setMinYear; year--) {
+      years += `<option value="${year}">${year}</option>`
+    }
   }
 
   // variablize each dropdown selector

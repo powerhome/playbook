@@ -1,0 +1,1 @@
+`yearAscending`/`year_ascending` is a boolean prop that if set to true, will render the years in the year dropdown in chronological (ascending) order. This prop is set to false by default. 
