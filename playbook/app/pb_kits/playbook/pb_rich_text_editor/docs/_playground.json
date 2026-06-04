@@ -1,7 +1,10 @@
 {
   "template": "<RichTextEditor{{props}} />",
   "propTargets": {},
-  "defaults": {},
+  "defaults": {
+    "requiredIndicator": false,
+    "simple": false
+  },
   "groups": [
     {
       "name": "Props",

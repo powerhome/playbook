@@ -7,7 +7,10 @@ import timeSelectPlugin from './plugins/timeSelect'
 import quickPickPlugin from './plugins/quickPick'
 import { getAllIcons } from '../utilities/icons/allicons';
 
-const angleDown = getAllIcons().angleDown.string
+const { angleDown, angleLeft, angleRight } = getAllIcons()
+const angleDownString = angleDown.string
+const angleLeftString = angleLeft.string
+const angleRightString = angleRight.string
 
 const getPositionElement = (element: string | Element) => {
   return (typeof element === 'string') ? document.querySelectorAll(element)[0] : element
@@ -365,7 +368,7 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
     maxDate: effectiveMaxDate,
     minDate: effectiveMinDate,
     mode,
-    nextArrow: '<i class="far fa-angle-right"></i>',
+    nextArrow: `<div style="height: 14px;">${angleRightString}</div>`,
     onOpen: [(_selectedDates, _dateStr, fp) => {
       // If defaultDate was out of range of a dev set min/max date, restore it when calendar opens (in situation where the input was manually cleared or the calendar was closed without selection)
       if (hasOutOfRangeDefault) {
@@ -437,7 +440,7 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
     plugins: setPlugins(thisRangesEndToday, customQuickPickDates),
     position,
     positionElement: getPositionElement(positionElement),
-    prevArrow: '<i class="far fa-angle-left"></i>',
+    prevArrow: `<div style="height: 14px;">${angleLeftString}</div>`,
     static: staticPosition,
   })
 
@@ -651,12 +654,9 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
   }
 
   // Adding dropdown icons to year and month select
-  dropdown.insertAdjacentHTML('afterend', `<i class="year-dropdown-icon">${angleDown}</i>`)
+  dropdown.insertAdjacentHTML('afterend', `<i class="year-dropdown-icon">${angleDownString}</i>`)
   if (picker.monthElements[0].parentElement) {
-    return picker.monthElements[0].insertAdjacentHTML('afterend', `<i class="month-dropdown-icon">${angleDown}</i>`)}
-  // if (picker.weekElements[0].parentElement){
-  //   return  picker.weekElements[0].insertAdjacentHTML('afterend', '<i class="far fa-angle-down year-dropdown-icon" id="test-id"></i>')
-  // }
+    return picker.monthElements[0].insertAdjacentHTML('afterend', `<i class="month-dropdown-icon">${angleDownString}</i>`)}
 
   // Remove readonly attribute for validation and or text input
   if (allowInput){

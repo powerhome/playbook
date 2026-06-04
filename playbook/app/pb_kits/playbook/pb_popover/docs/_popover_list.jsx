@@ -19,18 +19,16 @@ const PopoverWithButton = (props) => {
         onClick={handleTogglePopover}
         variant="secondary"
     >
-      <Flex align="center">
+      <Flex 
+          align="center"
+          gap="xs" 
+      >
         {"Filter By"}
-        <Flex
-            className={showPopover ? "fa-flip-vertical" : ""}
-            display="inline_flex"
-        >
-          <Icon
-              fixedWidth
-              icon="angle-down"
-              margin-left="xxs"
-          />
-        </Flex>
+        <Icon
+            fixedWidth
+            flip={showPopover ? "vertical" : "none"}
+            icon="angle-down"
+        />
       </Flex>
     </Button>
   )
