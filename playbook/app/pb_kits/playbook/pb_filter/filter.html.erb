@@ -80,6 +80,7 @@
                               <% is_active = opt_value.to_s == filter[:value].to_s %>
                               <% opt_label = object.interactive_option_label(opt, opt_value) %>
                               <li class="pb_interactive_filter_option<%= ' active' if is_active %>"
+                                  tabindex="0"
                                   role="option"
                                   aria-selected="<%= is_active %>"
                                   data-pb-filter-option-value="<%= opt_value %>"

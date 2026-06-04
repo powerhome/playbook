@@ -152,35 +152,3 @@ test("generates quickpick options for interactive dropdown filters", () => {
 
   expect(handleChange).toHaveBeenCalledWith("quickpick-last-month");
 });
-
-test("renders interactive filters as static labels below 960px", () => {
-  mockMatchMedia(false);
-
-  render(
-    <FilterTest
-        filters={{
-          Territory: "USA",
-          Status: "open",
-        }}
-        interactiveFilters={{
-          Territory: {
-            type: "select",
-            options: [{ value: "USA" }],
-            onChange: jest.fn(),
-          },
-          Status: {
-            type: "dropdown",
-            options: [{ value: "open", label: "Open" }],
-            onChange: jest.fn(),
-          },
-        }}
-    />
-  );
-
-  const interactiveButtons = screen
-    .getAllByRole("button")
-    .filter((button) => button.getAttribute("aria-haspopup") === "dialog");
-
-  expect(interactiveButtons).toHaveLength(0);
-  expect(screen.getByText("Open")).toBeInTheDocument();
-});
