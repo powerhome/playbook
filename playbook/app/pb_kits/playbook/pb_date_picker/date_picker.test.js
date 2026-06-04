@@ -40,6 +40,66 @@ describe('DatePicker Kit', () => {
     expect(kit).toHaveClass('pb_date_picker_kit mb_sm')
   })
 
+  test('exposes data-default-value on kit root when defaultDate is set', () => {
+    const testId = 'datepicker-def-attr'
+    render(
+      <DatePicker
+          data={{ testid: testId }}
+          defaultDate={DEFAULT_DATE}
+          pickerId="date-picker-def-attr"
+      />
+    )
+    const kit = screen.getByTestId(testId)
+    expect(kit).toHaveAttribute('data-default-value', DEFAULT_DATE.toISOString())
+  })
+
+  test('omits data-default-value when defaultDate is empty', () => {
+    const testId = 'datepicker-no-def-attr'
+    render(
+      <DatePicker
+          data={{ testid: testId }}
+          defaultDate=""
+          pickerId="date-picker-no-def-attr"
+      />
+    )
+    const kit = screen.getByTestId(testId)
+    expect(kit).not.toHaveAttribute('data-default-value')
+  })
+
+  test('renders without error when defaultDate is an invalid Date', () => {
+    const testId = 'datepicker-invalid-date'
+    const invalidDate = new Date('UndefinedT00:00')
+
+    expect(() => {
+      render(
+        <DatePicker
+            data={{ testid: testId }}
+            defaultDate={invalidDate}
+            pickerId="date-picker-invalid-date"
+        />
+      )
+    }).not.toThrow()
+
+    const kit = screen.getByTestId(testId)
+    expect(kit).not.toHaveAttribute('data-default-value')
+  })
+
+  test('omits data-default-value when defaultDate is constructed from undefined', () => {
+    const testId = 'datepicker-undefined-date'
+    const invalidDate = new Date(undefined + 'T00:00')
+
+    render(
+      <DatePicker
+          data={{ testid: testId }}
+          defaultDate={invalidDate}
+          pickerId="date-picker-undefined-date"
+      />
+    )
+
+    const kit = screen.getByTestId(testId)
+    expect(kit).not.toHaveAttribute('data-default-value')
+  })
+
   test('inLine alone adds inline-date-picker class and inline control icons, not the calendar icon', () => {
     const testId = 'datepicker-inline-only'
     render(
