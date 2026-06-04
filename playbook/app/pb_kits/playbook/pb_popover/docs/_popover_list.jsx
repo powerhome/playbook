@@ -21,7 +21,7 @@ const PopoverWithButton = (props) => {
     >
       <Flex 
           align="center"
-          gap="xs" 
+          gap="xxs" 
       >
         {"Filter By"}
         <Icon
