@@ -6,7 +6,6 @@
           <div class="maskContainer">
             <div class="filters">
               <div class="left_gradient"></div>
-              <% interactive_filters_rendered = 0 %>
               <% if object.filters&.none? { |filter| filter[:name].present? } %>
                 <div>
                   <%= pb_rails("body", props: {
@@ -21,9 +20,8 @@
               <% object.filters&.each do |filter| %>
                 <% next unless filter[:name].present? %>
                 <% interactive_config = object.interactive_config_for(filter[:name]) %>
-                <% if interactive_config.present? && interactive_filters_rendered < 4 %>
+                <% if interactive_config.present? %>
                   <%
-                    interactive_filters_rendered += 1
                     chip_id        = "pb-interactive-filter-#{object.id || 'kit'}-#{filter[:name].to_s.parameterize}"
                     popover_id     = "#{chip_id}-popover"
                     type           = object.interactive_value(interactive_config, :type).to_s
@@ -49,7 +47,7 @@
                       )
                     end
                   %>
-                  <div class="filter interactive pb_interactive_filter_desktop">
+                  <div class="filter interactive">
                     <button type="button"
                             class="pb_interactive_filter_trigger"
                             id="<%= chip_id %>"
@@ -96,14 +94,10 @@
                       </div>
                     </div>
                   </div>
-                  <div class="filter pb_interactive_filter_mobile_static">
-                    <%= pb_rails("caption", props: { text: filter[:name] }) %>
-                    <%= pb_rails("title", props: { size: 4, tag: "h4", text: display_value }) %>
-                  </div>
                 <% else %>
                   <div class="filter">
                     <%= pb_rails("caption", props: { text: filter[:name] }) %>
-                    <%= pb_rails("title", props: { size: 4, tag: "h4", text: interactive_config.present? ? object.interactive_display_value(interactive_config, filter[:value]) : filter[:value] }) %>
+                    <%= pb_rails("title", props: { size: 4, tag: "h4", text: filter[:value] }) %>
                   </div>
                 <% end %>
               <% end %>

@@ -1,13 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { isEmpty, omitBy, map } from '../../utilities/object'
 
 import Body from '../../pb_body/_body'
 import Caption from '../../pb_caption/_caption'
 import Title from '../../pb_title/_title'
-import InteractiveFilter, {
-  InteractiveFilterConfig,
-  labelFor,
-} from './InteractiveFilter'
+import InteractiveFilter, { InteractiveFilterConfig } from './InteractiveFilter'
 
 export type FilterDescription = {
   [key: string]: string | null | boolean,
@@ -24,13 +21,6 @@ export type CurrentFiltersProps = {
 }
 
 const hiddenFilters = (value: any) => isEmpty(value) && value !== true
-const INTERACTIVE_FILTER_BREAKPOINT = 960
-const MAX_INTERACTIVE_FILTERS = 4
-
-const supportsInteractiveFilters = () =>
-  typeof window === 'undefined' ||
-  typeof window.matchMedia !== 'function' ||
-  window.matchMedia(`(min-width: ${INTERACTIVE_FILTER_BREAKPOINT}px)`).matches
 
 const CurrentFilters = ({
   dark,
@@ -38,28 +28,6 @@ const CurrentFilters = ({
   interactiveFilters = {},
 }: CurrentFiltersProps): React.ReactElement => {
   const displayableFilters = omitBy(filters, hiddenFilters)
-  const [interactiveFiltersEnabled, setInteractiveFiltersEnabled] = useState(
-    supportsInteractiveFilters
-  )
-
-  useEffect(() => {
-    if (typeof window.matchMedia !== 'function') return
-
-    const mediaQuery = window.matchMedia(
-      `(min-width: ${INTERACTIVE_FILTER_BREAKPOINT}px)`
-    )
-    const handleChange = () => setInteractiveFiltersEnabled(mediaQuery.matches)
-
-    handleChange()
-
-    if (mediaQuery.addEventListener) {
-      mediaQuery.addEventListener('change', handleChange)
-      return () => mediaQuery.removeEventListener('change', handleChange)
-    }
-
-    mediaQuery.addListener(handleChange)
-    return () => mediaQuery.removeListener(handleChange)
-  }, [])
 
   return (
     <div className="maskContainer">
@@ -77,41 +45,28 @@ const CurrentFilters = ({
       { !isEmpty(filters) &&
         <div className="filters">
           <div className="left_gradient" />
-            {map(displayableFilters, (value, name, collection) => {
+            {map(displayableFilters, (value, name) => {
               const interactiveConfig = interactiveFilters[name]
-              const filterNames = Object.keys(collection)
-              const currentFilterIndex = filterNames.indexOf(String(name))
-              const filterValue = value === true ? '' : String(value)
-              const interactiveValue =
-                interactiveConfig?.value !== undefined
-                  ? interactiveConfig.value
-                  : filterValue
-              const displayValue = interactiveConfig
-                ? labelFor(interactiveConfig, interactiveValue)
-                : value
-              const interactiveFilterIndex = filterNames
-                .slice(0, currentFilterIndex + 1)
-                .filter((key) => interactiveFilters[key]).length - 1
-              const isInteractive = Boolean(
-                interactiveFiltersEnabled &&
-                interactiveConfig &&
-                interactiveFilterIndex < MAX_INTERACTIVE_FILTERS
-              )
-
               return (
                 <div
-                    className={`filter${isInteractive ? ' interactive' : ''}`}
+                    className={`filter${interactiveConfig ? ' interactive' : ''}`}
                     key={`filter-${name}`}
                 >
-                  { isInteractive ?
+                  { interactiveConfig ?
                     <InteractiveFilter
                         config={interactiveConfig}
                         dark={dark}
                         editorValue={interactiveConfig.editorValue}
                         name={String(name)}
-                        value={interactiveValue}
+                        value={
+                          interactiveConfig.value !== undefined
+                            ? interactiveConfig.value
+                            : value === true
+                              ? ''
+                              : (value as string)
+                        }
                     /> :
-                    displayValue === true ?
+                    value === true ?
                     <Title
                         dark={dark}
                         size={4}
@@ -127,7 +82,7 @@ const CurrentFilters = ({
                           dark={dark}
                           size={4}
                           tag="h4"
-                          text={displayValue}
+                          text={value}
                       />
                     </div>
                   }

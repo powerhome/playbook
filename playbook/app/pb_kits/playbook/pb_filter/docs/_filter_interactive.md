@@ -9,6 +9,4 @@ For date ranges, use `type: 'dropdown'` with `variant: 'quickpick'`. The Filter 
 
 Chip edits update the linked control inside the filter popover. Click **Apply** to submit, then pass the submitted values back into `filters` so chips re-render with the latest labels.
 
-To preserve space for results and sort controls, only the first four applied filters are interactive at `lg` screen sizes (`960px`) and larger. Below `960px`, applied filters render as static chips; edit values from the filter popover instead.
-
-Use `auto_submit: true` to submit the form immediately after a chip value is picked.
+Optional `auto_submit: true` on a chip entry submits the form immediately when a chip value is picked.

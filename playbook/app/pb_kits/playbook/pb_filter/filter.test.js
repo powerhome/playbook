@@ -88,34 +88,6 @@ test("triggers popover on filter button click", () => {
 
 });
 
-test("limits interactive filters to four at desktop sizes", () => {
-  mockMatchMedia(true);
-
-  render(
-    <FilterTest
-        filters={{
-          One: "1",
-          Two: "2",
-          Three: "3",
-          Four: "4",
-          Five: "5",
-        }}
-        interactiveFilters={{
-          One: { type: "select", options: [{ value: "1" }], onChange: jest.fn() },
-          Two: { type: "select", options: [{ value: "2" }], onChange: jest.fn() },
-          Three: { type: "select", options: [{ value: "3" }], onChange: jest.fn() },
-          Four: { type: "select", options: [{ value: "4" }], onChange: jest.fn() },
-          Five: { type: "select", options: [{ value: "5" }], onChange: jest.fn() },
-        }}
-    />
-  );
-
-  const interactiveButtons = screen
-    .getAllByRole("button")
-    .filter((button) => button.getAttribute("aria-haspopup") === "dialog");
-
-  expect(interactiveButtons).toHaveLength(4);
-});
 
 test("calls onChange and closes editor when an interactive option is selected", () => {
   mockMatchMedia(true);
