@@ -462,7 +462,11 @@ export const usePlaygroundState = ({
   );
 
   const showChildren = useMemo(() => {
+    const template = currentStructureMode?.template ?? playgroundConfig?.template;
+
     if (playgroundConfig?.children) {
+      if (template && !template.includes("{{children}}")) return false;
+
       if (playgroundConfig.children.hideWhenPropSet) {
         const shouldHide = playgroundConfig.children.hideWhenPropSet.some(
           (propName) => propValues[propName]?.enabled && propValues[propName]?.value
@@ -472,7 +476,7 @@ export const usePlaygroundState = ({
       return playgroundConfig.children.editable;
     }
     return needsChildren(kitName);
-  }, [kitName, playgroundConfig, propValues]);
+  }, [kitName, playgroundConfig, propValues, currentStructureMode?.template]);
 
   // Grouped props
   const groupedProps = useMemo(() => {

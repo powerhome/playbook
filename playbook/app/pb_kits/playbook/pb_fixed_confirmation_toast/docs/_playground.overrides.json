@@ -1,14 +1,54 @@
 {
-  "template": "<FixedConfirmationToast{{props}} />",
-  "propTargets": {},
+  "structureModes": {
+    "default": "toast",
+    "modes": {
+      "toast": {
+        "label": "Toast",
+        "template": "<FixedConfirmationToast{{props}} />",
+        "children": "",
+        "props": {
+          "open": true
+        }
+      },
+      "with_children": {
+        "label": "Children",
+        "template": "<FixedConfirmationToast{{props}}>\n  {{children}}\n</FixedConfirmationToast>",
+        "children": "<Title\n      dark\n      marginLeft=\"md\"\n      size={4}\n      text=\"Design & Handoff Process was moved to UX Designer Learning Track.\"\n  />\n  <Button\n      dark\n      onClick={() => alert(\"Undo clicked\")}\n      paddingRight=\"none\"\n      text=\"Undo\"\n      variant=\"link\"\n  />",
+        "props": {
+          "paddingY": "none",
+          "status": "success",
+          "text": null
+        }
+      },
+      "positioned": {
+        "label": "Positioned",
+        "template": "<FixedConfirmationToast\n    horizontal={horizontal}\n    onClose={() => setOpen(false)}\n    open={open}\n    text={`${vertical} ${horizontal}`}\n    vertical={vertical}{{props}}\n/>",
+        "children": "",
+        "props": {
+          "closeable": true,
+          "horizontal": null,
+          "onClose": null,
+          "open": null,
+          "status": "neutral",
+          "text": null,
+          "vertical": null
+        },
+        "wrapper": "const FixedConfirmationToastPositionedExample = () => {\n  const [open, setOpen] = useState(true)\n  const [vertical, setVertical] = useState('top')\n  const [horizontal, setHorizontal] = useState('center')\n\n  return (\n    <>\n      <Button\n          marginRight=\"xs\"\n          onClick={() => {\n            setVertical('top')\n            setHorizontal('center')\n            setOpen(true)\n          }}\n          text=\"Top Center\"\n          variant=\"secondary\"\n      />\n      <Button\n          marginRight=\"xs\"\n          onClick={() => {\n            setVertical('top')\n            setHorizontal('right')\n            setOpen(true)\n          }}\n          text=\"Top Right\"\n          variant=\"secondary\"\n      />\n      <Button\n          onClick={() => {\n            setVertical('bottom')\n            setHorizontal('right')\n            setOpen(true)\n          }}\n          text=\"Bottom Right\"\n          variant=\"secondary\"\n      />\n      {{component}}\n    </>\n  )\n}\n\n<FixedConfirmationToastPositionedExample />"
+      }
+    }
+  },
+  "children": {
+    "editable": true,
+    "default": ""
+  },
   "defaults": {
+    "autoClose": 0,
     "closeable": false,
     "multiLine": false,
     "navMarginTop": false,
-    "status": "success",
-    "autoClose": 0,
     "onClose": "() => {}",
     "open": true,
+    "status": "success",
     "text": "Items Successfully Moved",
     "zIndex": "max"
   },
@@ -187,47 +227,5 @@
       "message": "Positioned Controls keeps open, onClose, vertical, and horizontal in wrapper state so the buttons can reopen and move the toast.",
       "type": "info"
     }
-  },
-  "structureModes": {
-    "default": "toast",
-    "modes": {
-      "toast": {
-        "label": "Toast",
-        "template": "<FixedConfirmationToast{{props}} />",
-        "children": "",
-        "props": {
-          "open": true
-        }
-      },
-      "with_children": {
-        "label": "Children",
-        "template": "<FixedConfirmationToast{{props}}>\n  {{children}}\n</FixedConfirmationToast>",
-        "children": "<Title\n      dark\n      marginLeft=\"md\"\n      size={4}\n      text=\"Design & Handoff Process was moved to UX Designer Learning Track.\"\n  />\n  <Button\n      dark\n      onClick={() => alert(\"Undo clicked\")}\n      paddingRight=\"none\"\n      text=\"Undo\"\n      variant=\"link\"\n  />",
-        "props": {
-          "paddingY": "none",
-          "status": "success",
-          "text": null
-        }
-      },
-      "positioned": {
-        "label": "Positioned",
-        "template": "<FixedConfirmationToast\n    horizontal={horizontal}\n    onClose={() => setOpen(false)}\n    open={open}\n    text={`${vertical} ${horizontal}`}\n    vertical={vertical}{{props}}\n/>",
-        "children": "",
-        "props": {
-          "closeable": true,
-          "horizontal": null,
-          "onClose": null,
-          "open": null,
-          "status": "neutral",
-          "text": null,
-          "vertical": null
-        },
-        "wrapper": "const FixedConfirmationToastPositionedExample = () => {\n  const [open, setOpen] = useState(true)\n  const [vertical, setVertical] = useState('top')\n  const [horizontal, setHorizontal] = useState('center')\n\n  return (\n    <>\n      <Button\n          marginRight=\"xs\"\n          onClick={() => {\n            setVertical('top')\n            setHorizontal('center')\n            setOpen(true)\n          }}\n          text=\"Top Center\"\n          variant=\"secondary\"\n      />\n      <Button\n          marginRight=\"xs\"\n          onClick={() => {\n            setVertical('top')\n            setHorizontal('right')\n            setOpen(true)\n          }}\n          text=\"Top Right\"\n          variant=\"secondary\"\n      />\n      <Button\n          onClick={() => {\n            setVertical('bottom')\n            setHorizontal('right')\n            setOpen(true)\n          }}\n          text=\"Bottom Right\"\n          variant=\"secondary\"\n      />\n      {{component}}\n    </>\n  )\n}\n\n<FixedConfirmationToastPositionedExample />"
-      }
-    }
-  },
-  "children": {
-    "editable": true,
-    "default": ""
   }
 }

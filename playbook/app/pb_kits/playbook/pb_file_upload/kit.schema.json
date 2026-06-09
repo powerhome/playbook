@@ -40,7 +40,7 @@
       ]
     },
     "onFilesAccepted": {
-      "type": "Callback<File, File>",
+      "type": "function",
       "platforms": [
         "react"
       ]

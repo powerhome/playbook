@@ -74,7 +74,7 @@
       ]
     },
     "onValidate": {
-      "type": "Callback<boolean, void>",
+      "type": "function",
       "platforms": [
         "react"
       ]

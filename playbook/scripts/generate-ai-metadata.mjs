@@ -280,7 +280,12 @@ function parseTypeString(typeStr, imports = new Map()) {
   if (/React|Node|Element/.test(typeStr)) return { type: 'ReactNode' };
   
   // Functions
-  if (typeStr.includes('=>') || typeStr.startsWith('(') || typeStr.includes('Handler')) {
+  if (
+    typeStr.includes('=>') ||
+    typeStr.startsWith('(') ||
+    typeStr.includes('Handler') ||
+    typeStr.includes('Callback')
+  ) {
     return { type: 'function' };
   }
   

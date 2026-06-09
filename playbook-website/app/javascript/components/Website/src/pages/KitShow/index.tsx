@@ -123,6 +123,7 @@ const KitShow = () => {
     "empty_state",
     "file_upload",
     "filter",
+    "fixed_confirmation_toast",
     "link",
     "title",
     "title_detail",

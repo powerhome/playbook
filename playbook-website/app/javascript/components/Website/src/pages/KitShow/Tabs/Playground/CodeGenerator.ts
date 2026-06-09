@@ -435,7 +435,15 @@ export const generateFromTemplate = ({
   if (includeImport) {
     // Extract all component names from the template for the import
     const componentMatches = result.match(/<([A-Z][A-Za-z]*)/g) || [];
-    const components = [...new Set(componentMatches.map(m => m.slice(1)))];
+    const localComponents = new Set(
+      [
+        ...result.matchAll(/\bconst\s+([A-Z][A-Za-z0-9]*)\s*=/g),
+        ...result.matchAll(/\bfunction\s+([A-Z][A-Za-z0-9]*)\s*\(/g),
+      ].map((m) => m[1])
+    );
+    const components = [
+      ...new Set(componentMatches.map((m) => m.slice(1))),
+    ].filter((component) => !localComponents.has(component));
     // playbook-ui exports `Date`; alias matches docs / PlaygroundPreview (avoids shadowing global Date)
     const importItemsFromComponents = components.map((c) =>
       c === "FormattedDate" ? "Date as FormattedDate" : c

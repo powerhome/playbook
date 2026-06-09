@@ -59,7 +59,7 @@
       "default": false
     },
     "onClose": {
-      "type": "VoidCallback",
+      "type": "function",
       "platforms": [
         "react"
       ]
