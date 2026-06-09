@@ -122,6 +122,11 @@ const KitShow = () => {
     "dropdown",
     "empty_state",
     "file_upload",
+    "filter",
+    "link",
+    "title",
+    "title_detail",
+    "title_count",
   ];
 
   const [activeTab, setActiveTab] = useState<string>("docs");

@@ -253,7 +253,7 @@ function parseTypeString(typeStr, imports = new Map()) {
   typeStr = typeStr.replace(/\s+/g, ' ').trim().replace(/;+\s*$/, '');
 
   // Object / record types (must run before `=>` — object shapes may contain callbacks)
-  if (typeStr.startsWith('{')) {
+  if (typeStr.startsWith('{') || typeStr.startsWith('Record<')) {
     return { type: 'GenericObject' };
   }
 
