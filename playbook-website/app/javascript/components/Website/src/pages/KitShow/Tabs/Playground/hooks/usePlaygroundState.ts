@@ -125,9 +125,14 @@ export const usePlaygroundState = ({
     return globalPropsSchema.props;
   }, [globalPropsSchema, kitSchema]);
 
+  const playgroundProps = useMemo(
+    () => ({ ...reactProps, ...(playgroundConfig?.customProps ?? {}) }),
+    [reactProps, playgroundConfig?.customProps]
+  );
+
   const allPropDefinitions = useMemo(
-    () => ({ ...reactProps, ...globalProps }),
-    [reactProps, globalProps]
+    () => ({ ...playgroundProps, ...globalProps }),
+    [playgroundProps, globalProps]
   );
 
   const buildFullPropValues = useCallback(
@@ -482,7 +487,7 @@ export const usePlaygroundState = ({
   const groupedProps = useMemo(() => {
     const groups = playgroundConfig?.groups;
     if (!groups || groups.length === 0) {
-      return [{ name: "", props: Object.entries(reactProps) }];
+      return [{ name: "", props: Object.entries(playgroundProps) }];
     }
 
     const result: Array<{ name: string; props: Array<[string, PropDefinition]> }> = [];
@@ -491,8 +496,8 @@ export const usePlaygroundState = ({
     groups.forEach((group) => {
       const groupProps: Array<[string, PropDefinition]> = [];
       group.props.forEach((propName) => {
-        if (reactProps[propName]) {
-          groupProps.push([propName, reactProps[propName]]);
+        if (playgroundProps[propName]) {
+          groupProps.push([propName, playgroundProps[propName]]);
           assignedProps.add(propName);
         }
       });
@@ -501,13 +506,13 @@ export const usePlaygroundState = ({
       }
     });
 
-    const otherProps = Object.entries(reactProps).filter(([name]) => !assignedProps.has(name));
+    const otherProps = Object.entries(playgroundProps).filter(([name]) => !assignedProps.has(name));
     if (otherProps.length > 0) {
       result.push({ name: "Other", props: otherProps });
     }
 
     return result;
-  }, [reactProps, playgroundConfig?.groups]);
+  }, [playgroundProps, playgroundConfig?.groups]);
 
   // Resolve template and propTargets - structure mode takes precedence
   const activeTemplate = currentStructureMode?.template ?? playgroundConfig?.template;
@@ -520,6 +525,12 @@ export const usePlaygroundState = ({
     return { ...base, ...modeTargets };
   }, [playgroundConfig?.propTargets, currentStructureMode?.propTargets]);
 
+  const activePropAliases = useMemo(() => {
+    const base = playgroundConfig?.propAliases ?? {};
+    const modeAliases = currentStructureMode?.propAliases ?? {};
+    return { ...base, ...modeAliases };
+  }, [playgroundConfig?.propAliases, currentStructureMode?.propAliases]);
+
   // Code generation
   const generatedDisplayCode = useMemo(() => {
     if (hasActiveTemplate && playgroundConfig) {
@@ -528,6 +539,7 @@ export const usePlaygroundState = ({
         propValues: propValuesForCodegen,
         propDefinitions: allPropDefinitions,
         propTargets: activePropTargets,
+        propAliases: activePropAliases,
         children,
         childrenConfig: playgroundConfig.children,
         includeImport: true,
@@ -543,7 +555,7 @@ export const usePlaygroundState = ({
       children: needsChildren(kitName) ? children : undefined,
       includeImport: true,
     });
-  }, [kitName, propValuesForCodegen, allPropDefinitions, children, hasActiveTemplate, activeTemplate, activePropTargets, playgroundConfig, currentStructureMode, requiredProps]);
+  }, [kitName, propValuesForCodegen, allPropDefinitions, children, hasActiveTemplate, activeTemplate, activePropTargets, activePropAliases, playgroundConfig, currentStructureMode, requiredProps]);
 
   const generatedLiveCode = useMemo(() => {
     if (hasActiveTemplate && playgroundConfig) {
@@ -552,6 +564,7 @@ export const usePlaygroundState = ({
         propValues: propValuesForCodegen,
         propDefinitions: allPropDefinitions,
         propTargets: activePropTargets,
+        propAliases: activePropAliases,
         children,
         childrenConfig: playgroundConfig.children,
         customImports: currentStructureMode?.imports,
@@ -565,7 +578,7 @@ export const usePlaygroundState = ({
       propDefinitions: allPropDefinitions,
       children: needsChildren(kitName) ? children : undefined,
     });
-  }, [kitName, propValuesForCodegen, allPropDefinitions, children, hasActiveTemplate, activeTemplate, activePropTargets, playgroundConfig, currentStructureMode, requiredProps]);
+  }, [kitName, propValuesForCodegen, allPropDefinitions, children, hasActiveTemplate, activeTemplate, activePropTargets, activePropAliases, playgroundConfig, currentStructureMode, requiredProps]);
 
   const previewCode = useMemo(() => {
     if (hasActiveTemplate) return generatedLiveCode;
@@ -663,7 +676,7 @@ export const usePlaygroundState = ({
     activeStructureMode,
     activeDataPresetKey,
 
-    reactProps,
+    reactProps: playgroundProps,
     globalProps,
     allPropDefinitions,
     groupedProps,

@@ -140,6 +140,7 @@ export interface StructureMode {
   children: string;
   props?: Record<string, any>;
   propTargets?: Record<string, string>;
+  propAliases?: Record<string, string>;
   imports?: string[];
   wrapper?: string;
 }
@@ -173,6 +174,8 @@ export type PropSyncOnEnable = Record<string, PropSyncOnEnableRule>;
 export interface PlaygroundConfig {
   template: string;
   propTargets?: Record<string, string>;
+  propAliases?: Record<string, string>;
+  customProps?: Record<string, PropDefinition>;
   defaults?: Record<string, any>;
   scopeVars?: Record<string, any>;
   children?: PlaygroundChildrenConfig;

@@ -37,6 +37,7 @@ interface GenerateFromTemplateOptions {
   propValues: Record<string, PropValue>;
   propDefinitions: Record<string, PropDefinition>;
   propTargets?: Record<string, string>;
+  propAliases?: Record<string, string>;
   children?: string;
   childrenConfig?: PlaygroundChildrenConfig;
   includeImport?: boolean;
@@ -349,6 +350,7 @@ export const generateFromTemplate = ({
   propValues,
   propDefinitions,
   propTargets = {},
+  propAliases = {},
   children,
   childrenConfig,
   includeImport = true,
@@ -370,7 +372,11 @@ export const generateFromTemplate = ({
     
     const definition = propDefinitions[name] || { type: "any", platforms: ["react"] as const };
     
-    const formatted = formatPropValue(name, propValue.value, definition);
+    const formatted = formatPropValue(
+      propAliases[name] ?? name,
+      propValue.value,
+      definition
+    );
     if (!formatted) return;
     
     // Determine which marker this prop belongs to
@@ -468,6 +474,7 @@ export const generateLiveFromTemplate = ({
   propValues,
   propDefinitions,
   propTargets = {},
+  propAliases = {},
   children,
   childrenConfig,
   customImports = [],
@@ -484,6 +491,7 @@ export const generateLiveFromTemplate = ({
     propValues,
     propDefinitions,
     propTargets,
+    propAliases,
     children,
     childrenConfig,
     includeImport: false,
