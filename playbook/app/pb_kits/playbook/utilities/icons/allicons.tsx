@@ -147,6 +147,36 @@ const angleDown = (
   </svg>
 )
 
+const angleLeft = (
+  <svg
+      fill="none"
+      height="25"
+      viewBox="0 0 31 25"
+      width="31"
+      xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+        d="M10.6074 11.3086L18.1074 3.85547C18.5293 3.38672 19.2324 3.38672 19.7012 3.85547C20.123 4.27734 20.123 4.98047 19.7012 5.40234L12.9512 12.1055L19.6543 18.8555C20.123 19.2773 20.123 19.9805 19.6543 20.4023C19.2324 20.8711 18.5293 20.8711 18.1074 20.4023L10.6074 12.9023C10.1387 12.4805 10.1387 11.7773 10.6074 11.3086Z"
+        fill="#242B42"
+    />
+  </svg>
+)
+
+const angleRight = (
+  <svg
+      fill="none"
+      height="25"
+      viewBox="0 0 31 25"
+      width="31"
+      xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+        d="M21.2012 11.3086C21.623 11.7773 21.623 12.4805 21.2012 12.9023L13.7012 20.4023C13.2324 20.8711 12.5293 20.8711 12.1074 20.4023C11.6387 19.9805 11.6387 19.2773 12.1074 18.8555L18.8105 12.1523L12.1074 5.40234C11.6387 4.98047 11.6387 4.27734 12.1074 3.85547C12.5293 3.38672 13.2324 3.38672 13.6543 3.85547L21.2012 11.3086Z"
+        fill="#242B42"
+    />
+  </svg>
+)
+
 export const getAllIcons = () => {
 
     return {
@@ -177,6 +207,14 @@ export const getAllIcons = () => {
         angleDown: {
             icon: angleDown,
             string: ReactDOMServer.renderToStaticMarkup(angleDown)
+        },
+        angleLeft: {
+            icon: angleLeft,
+            string: ReactDOMServer.renderToStaticMarkup(angleLeft)
+        },
+        angleRight: {
+            icon: angleRight,
+            string: ReactDOMServer.renderToStaticMarkup(angleRight)
         }
     }
 }
