@@ -8,7 +8,7 @@
   ],
   "props": {
     "accept": {
-      "type": "Record<string, string[]>",
+      "type": "GenericObject",
       "platforms": [
         "react",
         "rails"
