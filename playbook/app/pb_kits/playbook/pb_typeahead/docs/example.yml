@@ -21,6 +21,7 @@ examples:
     - typeahead_disabled: Disabled
     - typeahead_preserve_input: Preserve Search Input
     - typeahead_required_indicator: Required Indicator
+    - typeahead_draggable_pills: Draggable Pills
 
   react:
     - typeahead_default: Default
@@ -45,3 +46,4 @@ examples:
     - typeahead_disabled: Disabled
     - typeahead_preserve_input: Preserve Search Input
     - typeahead_required_indicator: Required Indicator
+    - typeahead_draggable_pills: Draggable Pills

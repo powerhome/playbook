@@ -1,0 +1,55 @@
+<%
+  options = [
+    { label: 'Year', value: 'year' },
+    { label: 'Territory', value: 'territory' },
+    { label: 'Branch', value: 'branch' },
+    { label: 'Product', value: 'product' },
+  ]
+%>
+
+<%= pb_rails("body", props: { text: "Select services, then drag the pills to reorder them.", margin_bottom: "xs" }) %>
+
+<%= pb_rails("typeahead", props: {
+  id: "typeahead-draggable-pills-example",
+  default_options: [options[0], options[1], options[2]],
+  enable_pill_reorder: true,
+  show_pill_index: true,
+  is_multi: true,
+  label: "Services",
+  name: :services,
+  options: options,
+  pills: true,
+  placeholder: "Add services...",
+}) %>
+
+<%= pb_rails("body", props: {
+  id: "typeahead-draggable-order",
+  color: "lighter",
+  margin_top: "xs",
+  text: "Current order: Year -> Territory -> Branch",
+}) %>
+
+<%= pb_rails("button", props: { id: "typeahead-draggable-reset", margin_top: "sm", text: "Reset", variant: "secondary" }) %>
+
+<%= javascript_tag defer: "defer" do %>
+  const defaultOrder = [
+    { label: 'Year', value: 'year' },
+    { label: 'Territory', value: 'territory' },
+    { label: 'Branch', value: 'branch' },
+  ];
+
+  const updateOrderText = (items) => {
+    const orderText = items.map((item) => item.label).join(' -> ');
+    const orderElement = document.querySelector('#typeahead-draggable-order');
+    if (orderElement) orderElement.textContent = `Current order: ${orderText}`;
+  };
+
+  document.addEventListener('pb-typeahead-kit-typeahead-draggable-pills-example-result-option-reorder', function(event) {
+    updateOrderText(event.detail);
+  });
+
+  document.querySelector('#typeahead-draggable-reset')?.addEventListener('click', function() {
+    document.dispatchEvent(new CustomEvent('pb-typeahead-kit-typeahead-draggable-pills-example:clear'));
+    updateOrderText(defaultOrder);
+  });
+<% end %>

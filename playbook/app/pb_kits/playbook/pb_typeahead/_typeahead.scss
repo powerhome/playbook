@@ -190,6 +190,49 @@
     outline-offset: -1px;
   }
 
+  .pb_typeahead_draggable_value_container {
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .pb_typeahead_draggable_pills {
+    display: inline-flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0;
+
+    .pb_draggable_item {
+      display: inline-flex;
+      align-items: center;
+
+      &:hover {
+        cursor: grab;
+      }
+
+      &.is_dragging {
+        cursor: grabbing;
+      }
+    }
+  }
+
+  .pb_typeahead_pill_with_handle {
+    display: inline-flex;
+    align-items: center;
+    gap: $space_xxs;
+  }
+
+  .pb_typeahead_pill_drag_handle {
+    display: inline-flex;
+    align-items: center;
+    flex-shrink: 0;
+    cursor: grab;
+    user-select: none;
+
+    &:active {
+      cursor: grabbing;
+    }
+  }
+
   &.inline {
     &:not(:hover) {
       .text_input {

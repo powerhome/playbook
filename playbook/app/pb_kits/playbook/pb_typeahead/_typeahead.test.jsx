@@ -342,3 +342,126 @@ test('typeahead with pills that use name instead of label', () => {
   expect(pill).toBeInTheDocument()
   expect(pill).toHaveTextContent("Nihar")
 })
+
+test('enablePillReorder false does not render drag handles', () => {
+  render(
+    <Typeahead
+        data={{ testid: 'no-reorder-test' }}
+        defaultValue={[options[0], options[1]]}
+        enablePillReorder={false}
+        isMulti
+        options={options}
+    />
+  )
+
+  const kit = screen.getByTestId('no-reorder-test')
+  expect(kit.querySelector('.pb_typeahead_pill_drag_handle')).not.toBeInTheDocument()
+})
+
+test('enablePillReorder renders drag handles and numbered pills', () => {
+  render(
+    <Typeahead
+        data={{ testid: 'reorder-test' }}
+        defaultValue={[options[0], options[1], options[2]]}
+        enablePillReorder
+        isMulti
+        options={options}
+        showPillIndex
+    />
+  )
+
+  const kit = screen.getByTestId('reorder-test')
+  const handles = kit.querySelectorAll('.pb_typeahead_pill_drag_handle')
+  const pills = kit.querySelectorAll('.pb_form_pill_kit.pb_form_pill_primary')
+
+  expect(handles.length).toBe(3)
+  expect(pills.length).toBe(3)
+  expect(pills[0]).toHaveTextContent('1. Orange')
+  expect(pills[1]).toHaveTextContent('2. Red')
+  expect(pills[2]).toHaveTextContent('3. Green')
+})
+
+test('keyboard reorder moves pill position when enablePillReorder is true', () => {
+  const handleChange = jest.fn()
+
+  render(
+    <Typeahead
+        data={{ testid: 'keyboard-reorder-test' }}
+        enablePillReorder
+        isMulti
+        onChange={handleChange}
+        options={options}
+        showPillIndex
+        value={[options[0], options[1], options[2]]}
+    />
+  )
+
+  const kit = screen.getByTestId('keyboard-reorder-test')
+  const pills = kit.querySelectorAll('.pb_form_pill_kit.pb_form_pill_primary')
+
+  pills[1].focus()
+  fireEvent.keyDown(pills[1], { key: 'ArrowLeft', ctrlKey: true, shiftKey: true })
+
+  expect(handleChange).toHaveBeenCalled()
+  const reorderedValue = handleChange.mock.calls[0][0]
+  expect(reorderedValue[0].label).toBe('Red')
+  expect(reorderedValue[1].label).toBe('Orange')
+})
+
+test('remove still works when enablePillReorder is true', () => {
+  const handleChange = jest.fn()
+
+  render(
+    <Typeahead
+        data={{ testid: 'remove-reorder-test' }}
+        enablePillReorder
+        isMulti
+        onChange={handleChange}
+        options={options}
+        value={[options[0], options[1]]}
+    />
+  )
+
+  const kit = screen.getByTestId('remove-reorder-test')
+  const removeButton = kit.querySelector('.pb_form_pill_close')
+
+  fireEvent.click(removeButton)
+
+  expect(handleChange).toHaveBeenCalled()
+  const updatedValue = handleChange.mock.calls[0][0]
+  expect(updatedValue.length).toBe(1)
+})
+
+test('pill reorder commit dispatches custom event on drop', () => {
+  const reorderHandler = jest.fn()
+
+  render(
+    <Typeahead
+        data={{ testid: 'reorder-event-test' }}
+        enablePillReorder
+        id="reorder-event-typeahead"
+        isMulti
+        options={options}
+        value={[options[0], options[1], options[2]]}
+    />
+  )
+
+  document.addEventListener(
+    'pb-typeahead-kit-reorder-event-typeahead-result-option-reorder',
+    reorderHandler,
+  )
+
+  const kit = screen.getByTestId('reorder-event-test')
+  const draggableItems = kit.querySelectorAll('.pb_draggable_item')
+
+  fireEvent.dragStart(draggableItems[2])
+  fireEvent.dragEnter(draggableItems[0])
+  fireEvent.dragEnd(draggableItems[2])
+
+  expect(reorderHandler).toHaveBeenCalled()
+
+  document.removeEventListener(
+    'pb-typeahead-kit-reorder-event-typeahead-result-option-reorder',
+    reorderHandler,
+  )
+})

@@ -9,7 +9,7 @@ import {
 import { globalProps } from "../../utilities/globalProps";
 import { DraggableContext } from "../context";
 import { noop } from '../../utilities/object'
-import { bindTouchDrag, isTouchDragDevice } from "../utilities/touchDrag";
+import { bindMouseHandleDrag, bindTouchDrag, isTouchDragDevice } from "../utilities/touchDrag";
 
 type DraggableItemProps = {
   aria?: { [key: string]: string };
@@ -59,11 +59,11 @@ const DraggableItem = (props: DraggableItemProps) => {
     handleDragOver,
     dropZone = 'ghost',
     dropZoneColor = 'neutral',
-    direction = 'horizontal'
   } = DraggableContext();
 
   const itemRef = React.useRef<HTMLElement>(null);
   const [useTouchDrag, setUseTouchDrag] = React.useState(false);
+  const [useHandleMouseDrag, setUseHandleMouseDrag] = React.useState(false);
   const handlersRef = React.useRef({
     handleDragStart,
     handleDragEnter,
@@ -90,9 +90,36 @@ const DraggableItem = (props: DraggableItemProps) => {
     onDragEnd,
   };
 
-  React.useEffect(() => {
-    setUseTouchDrag(isTouchDragDevice());
-  }, []);
+  const dragHandlers = React.useMemo(() => ({
+    onDragStart: (id: string, itemContainer?: string) => {
+      handlersRef.current.handleDragStart(id, itemContainer);
+      handlersRef.current.onDragStart();
+    },
+    onDragEnter: (targetDragId: string, targetContainer?: string) => {
+      handlersRef.current.handleDragEnter(targetDragId, targetContainer);
+      handlersRef.current.onDragEnter();
+    },
+    onDragOver: (event: Event, targetContainer?: string) => {
+      handlersRef.current.handleDragOver(event, targetContainer);
+      handlersRef.current.onDragOver();
+    },
+    onDrop: (dropContainer?: string) => {
+      handlersRef.current.handleDrop(dropContainer);
+      handlersRef.current.onDrop();
+    },
+    onDragEnd: () => {
+      handlersRef.current.handleDragEnd();
+      handlersRef.current.onDragEnd();
+    },
+  }), []);
+
+  React.useLayoutEffect(() => {
+    const touchMode = isTouchDragDevice();
+    const hasHandle = Boolean(itemRef.current?.querySelector('.pb_draggable_handle, .card_draggable_handle'));
+
+    setUseTouchDrag(touchMode);
+    setUseHandleMouseDrag(hasHandle && !touchMode);
+  }, [dragId, container, children]);
 
   React.useEffect(() => {
     if (!useTouchDrag || !itemRef.current || !dragId) return;
@@ -101,30 +128,20 @@ const DraggableItem = (props: DraggableItemProps) => {
       dragId,
       container,
       itemElement: itemRef.current,
-      handlers: {
-        onDragStart: (id, itemContainer) => {
-          handlersRef.current.handleDragStart(id, itemContainer);
-          handlersRef.current.onDragStart();
-        },
-        onDragEnter: (targetDragId, targetContainer) => {
-          handlersRef.current.handleDragEnter(targetDragId, targetContainer);
-          handlersRef.current.onDragEnter();
-        },
-        onDragOver: (event, targetContainer) => {
-          handlersRef.current.handleDragOver(event, targetContainer);
-          handlersRef.current.onDragOver();
-        },
-        onDrop: (dropContainer) => {
-          handlersRef.current.handleDrop(dropContainer);
-          handlersRef.current.onDrop();
-        },
-        onDragEnd: () => {
-          handlersRef.current.handleDragEnd();
-          handlersRef.current.onDragEnd();
-        },
-      },
+      handlers: dragHandlers,
     });
-  }, [useTouchDrag, dragId, container]);
+  }, [useTouchDrag, dragId, container, dragHandlers]);
+
+  React.useEffect(() => {
+    if (!useHandleMouseDrag || !itemRef.current || !dragId) return;
+
+    return bindMouseHandleDrag({
+      dragId,
+      container,
+      itemElement: itemRef.current,
+      handlers: dragHandlers,
+    });
+  }, [useHandleMouseDrag, dragId, container, dragHandlers]);
 
   const ariaProps = buildAriaProps(aria);
   const dataProps = buildDataProps(data);
@@ -142,6 +159,11 @@ const DraggableItem = (props: DraggableItemProps) => {
 
   // Enhanced drag start handler that preserves dimensions
   const handleDragStartWithCustom = (e: React.DragEvent) => {
+    if (e.dataTransfer && dragId) {
+      e.dataTransfer.setData('text/plain', dragId)
+      e.dataTransfer.effectAllowed = 'move'
+    }
+
     if (dropZone !== 'ghost' && itemRef.current) {
       // Create a clone for the drag image
       const clone = itemRef.current.cloneNode(true) as HTMLElement;
@@ -188,7 +210,7 @@ const DraggableItem = (props: DraggableItemProps) => {
         {...htmlProps}
         className={classes}
         data-pb-drag-id={dragId}
-        draggable={!useTouchDrag}
+        draggable={!useTouchDrag && !useHandleMouseDrag}
         id={id}
         key={dragId}
         onDrag={onDrag}

@@ -5,12 +5,14 @@ const DRAG_THRESHOLD_PX = 5;
 export const isTouchDragDevice = (): boolean => {
   if (typeof window === 'undefined') return false;
 
-  const hasTouch = 'ontouchstart' in window;
+  // Only treat true touch-primary devices as touch-drag targets.
+  // `ontouchstart` alone is true on many desktops (e.g. macOS trackpads) and
+  // must not disable HTML5 mouse dragging.
   const hasCoarsePointer =
     typeof window.matchMedia === 'function' &&
     window.matchMedia('(hover: none) and (pointer: coarse)').matches;
 
-  return hasTouch || hasCoarsePointer;
+  return hasCoarsePointer;
 };
 
 export const getDragIdFromElement = (element: Element | null): string | null => {
@@ -42,7 +44,7 @@ type TouchDragOptions = {
   handlers: TouchDragHandlers;
 };
 
-type TouchDragState = {
+type DragPointerState = {
   active: boolean;
   dragging: boolean;
   startX: number;
@@ -55,18 +57,85 @@ const createPreventableEvent = (): Event => ({
   preventDefault: () => undefined,
 } as Event);
 
+const runDragPointerMove = (
+  state: DragPointerState,
+  clientX: number,
+  clientY: number,
+  dragId: string,
+  container: string | undefined,
+  handlers: TouchDragHandlers,
+) => {
+  if (!state.dragging) {
+    const deltaX = clientX - state.startX;
+    const deltaY = clientY - state.startY;
+
+    if (Math.hypot(deltaX, deltaY) < DRAG_THRESHOLD_PX) return false;
+
+    state.dragging = true;
+    handlers.onDragStart(dragId, container);
+  }
+
+  const elementBelow = document.elementFromPoint(clientX, clientY);
+  const targetDragId = getDragIdFromElement(elementBelow);
+  const targetContainer = getContainerFromElement(elementBelow);
+
+  if (targetDragId && targetDragId !== dragId && targetDragId !== state.lastTargetDragId) {
+    state.lastTargetDragId = targetDragId;
+    handlers.onDragEnter(targetDragId, targetContainer ?? container);
+  }
+
+  if (targetContainer && targetContainer !== state.lastContainer) {
+    state.lastContainer = targetContainer;
+    handlers.onDragOver(createPreventableEvent(), targetContainer);
+  } else if (targetContainer) {
+    handlers.onDragOver(createPreventableEvent(), targetContainer);
+  }
+
+  return true;
+};
+
+const finishDragPointer = (
+  state: DragPointerState,
+  clientX: number | null,
+  clientY: number | null,
+  container: string | undefined,
+  handlers: TouchDragHandlers,
+  itemElement: HTMLElement,
+) => {
+  if (!state.active) return;
+
+  if (state.dragging && clientX !== null && clientY !== null) {
+    const elementBelow = document.elementFromPoint(clientX, clientY);
+    const dropContainer = getContainerFromElement(elementBelow) ?? container;
+
+    if (dropContainer) {
+      handlers.onDrop(dropContainer);
+    }
+
+    handlers.onDragEnd();
+  }
+
+  state.active = false;
+  state.dragging = false;
+  state.lastTargetDragId = null;
+  state.lastContainer = undefined;
+  itemElement.classList.remove('is_touch_active');
+};
+
 export const bindTouchDrag = ({
   dragId,
   container,
   itemElement,
   handlers,
 }: TouchDragOptions): (() => void) => {
-  if (!isTouchDragDevice()) return () => undefined;
+  if (!isTouchDragDevice()) {
+    return () => undefined;
+  }
 
   const handle = itemElement.querySelector(DRAG_HANDLE_SELECTOR) as HTMLElement | null;
   const dragTarget = handle || itemElement;
 
-  const state: TouchDragState = {
+  const state: DragPointerState = {
     active: false,
     dragging: false,
     startX: 0,
@@ -75,16 +144,10 @@ export const bindTouchDrag = ({
     lastContainer: undefined,
   };
 
-  const resetState = () => {
-    state.active = false;
-    state.dragging = false;
-    state.lastTargetDragId = null;
-    state.lastContainer = undefined;
-    itemElement.classList.remove('is_touch_active');
-  };
-
   const handleTouchStart = (event: TouchEvent) => {
-    if (handle && !handle.contains(event.target as Node)) return;
+    if (handle && !handle.contains(event.target as Node)) {
+      return;
+    }
 
     const touch = event.touches[0];
     if (!touch) return;
@@ -101,50 +164,20 @@ export const bindTouchDrag = ({
     const touch = event.touches[0];
     if (!touch) return;
 
-    if (!state.dragging) {
-      const deltaX = touch.clientX - state.startX;
-      const deltaY = touch.clientY - state.startY;
-
-      if (Math.hypot(deltaX, deltaY) < DRAG_THRESHOLD_PX) return;
-
-      state.dragging = true;
-      handlers.onDragStart(dragId, container);
-    }
-
-    event.preventDefault();
-
-    const elementBelow = document.elementFromPoint(touch.clientX, touch.clientY);
-    const targetDragId = getDragIdFromElement(elementBelow);
-    const targetContainer = getContainerFromElement(elementBelow);
-
-    if (targetDragId && targetDragId !== dragId && targetDragId !== state.lastTargetDragId) {
-      state.lastTargetDragId = targetDragId;
-      handlers.onDragEnter(targetDragId, targetContainer ?? container);
-    }
-
-    if (targetContainer && targetContainer !== state.lastContainer) {
-      state.lastContainer = targetContainer;
-      handlers.onDragOver(createPreventableEvent(), targetContainer);
-    } else if (targetContainer) {
-      handlers.onDragOver(createPreventableEvent(), targetContainer);
+    if (runDragPointerMove(state, touch.clientX, touch.clientY, dragId, container, handlers)) {
+      event.preventDefault();
     }
   };
 
   const finishDrag = (touch: Touch | null) => {
-    if (!state.active) return;
-
-    if (state.dragging && touch) {
-      const elementBelow = document.elementFromPoint(touch.clientX, touch.clientY);
-      const dropContainer = getContainerFromElement(elementBelow) ?? container;
-
-      if (dropContainer) {
-        handlers.onDrop(dropContainer);
-      }
-
-      handlers.onDragEnd();
-    }
-
-    resetState();
+    finishDragPointer(
+      state,
+      touch?.clientX ?? null,
+      touch?.clientY ?? null,
+      container,
+      handlers,
+      itemElement,
+    );
   };
 
   const handleTouchEnd = (event: TouchEvent) => {
@@ -169,5 +202,73 @@ export const bindTouchDrag = ({
     dragTarget.removeEventListener('touchmove', handleTouchMove);
     dragTarget.removeEventListener('touchend', handleTouchEnd);
     dragTarget.removeEventListener('touchcancel', handleTouchCancel);
+  };
+};
+
+const isHandleEventTarget = (target: EventTarget | null): boolean => {
+  return Boolean((target as Element | null)?.closest(DRAG_HANDLE_SELECTOR));
+};
+
+export const bindMouseHandleDrag = ({
+  dragId,
+  container,
+  itemElement,
+  handlers,
+}: TouchDragOptions): (() => void) => {
+  const hasHandle = Boolean(itemElement.querySelector(DRAG_HANDLE_SELECTOR));
+  if (!hasHandle) {
+    return () => undefined;
+  }
+
+  const state: DragPointerState = {
+    active: false,
+    dragging: false,
+    startX: 0,
+    startY: 0,
+    lastTargetDragId: null,
+    lastContainer: undefined,
+  };
+
+  const handleMouseDown = (event: MouseEvent) => {
+    if (event.button !== 0) return;
+    if (!isHandleEventTarget(event.target)) return;
+
+    // stopPropagation only — preventDefault here blocks HTML5 drag on ancestors
+    event.stopPropagation();
+
+    state.active = true;
+    state.startX = event.clientX;
+    state.startY = event.clientY;
+    itemElement.classList.add('is_touch_active');
+  };
+
+  const handleMouseMove = (event: MouseEvent) => {
+    if (!state.active) return;
+
+    if (runDragPointerMove(state, event.clientX, event.clientY, dragId, container, handlers)) {
+      event.preventDefault();
+    }
+  };
+
+  const handleMouseUp = (event: MouseEvent) => {
+    finishDragPointer(
+      state,
+      event.clientX,
+      event.clientY,
+      container,
+      handlers,
+      itemElement,
+    );
+  };
+
+  // Delegate on the stable draggable item element so re-rendered handles stay wired
+  itemElement.addEventListener('mousedown', handleMouseDown);
+  document.addEventListener('mousemove', handleMouseMove);
+  document.addEventListener('mouseup', handleMouseUp);
+
+  return () => {
+    itemElement.removeEventListener('mousedown', handleMouseDown);
+    document.removeEventListener('mousemove', handleMouseMove);
+    document.removeEventListener('mouseup', handleMouseUp);
   };
 };

@@ -180,6 +180,30 @@
       ],
       "default": false
     },
+    "enablePillReorder": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "showPillIndex": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "pillDragHandle": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": true
+    },
     "defaultOptions": {
       "platforms": [
         "rails"

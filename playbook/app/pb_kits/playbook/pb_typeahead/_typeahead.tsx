@@ -23,7 +23,6 @@ import * as kitComponents from "./components"
 
 import {noop, buildDataProps, buildHtmlProps} from "../utilities/props"
 import {GenericObject, Noop} from "../types"
-
 /**
  * @typedef {object} Props
  * @prop {boolean} async - whether Typeahead should fetch data from
@@ -82,6 +81,9 @@ type TypeaheadProps = {
   searchContextSelector?: string
   clearOnContextChange?: boolean
   preserveSearchInput?: boolean
+  enablePillReorder?: boolean
+  showPillIndex?: boolean
+  pillDragHandle?: boolean
 } & GlobalProps
 
 export type SelectValueType = {
@@ -129,6 +131,9 @@ const Typeahead = forwardRef<HTMLInputElement, TypeaheadProps>(
     validation,
     clearOnContextChange = false,
     preserveSearchInput = false, // Default to false to maintain backward compatibility
+    enablePillReorder = false,
+    showPillIndex = false,
+    pillDragHandle = true,
     ...props
   }: TypeaheadProps) => {
     // State to manage the input value when preserveSearchInput is true
@@ -502,6 +507,14 @@ const resolvedLoadOptions =
         ? AsyncSelect
         : Select
 
+    const dispatchReorderEvent = (reorderedValues: SelectValueType[]) => {
+      const reorderEvent = new CustomEvent(
+        `pb-typeahead-kit-${selectProps.id}-result-option-reorder`,
+        {detail: reorderedValues},
+      )
+      document.dispatchEvent(reorderEvent)
+    }
+
     const handleOnChange = (
       _data: SelectValueType,
       {action, option, removedValue}: TagOnChangeValues,
@@ -553,7 +566,14 @@ const resolvedLoadOptions =
           setInputValue("")
         }
       }
+      if (action === "set-value" && Array.isArray(_data)) {
+        dispatchReorderEvent(_data)
+      }
     }
+
+    const isPillReorderEnabled = Boolean(
+      enablePillReorder && props.isMulti && inputDisplay === 'pills'
+    )
 
     const filteredProps: TypeaheadProps = {...props}
     delete filteredProps.truncate
@@ -586,12 +606,15 @@ const resolvedLoadOptions =
         data-pb-typeahead-loading={asyncLoading ? "true" : "false"}
     >
       <Tag
+          {...selectProps}
           classNamePrefix="typeahead-kit-select"
+          enablePillReorder={isPillReorderEnabled}
           error={errorDisplay}
           isDisabled={disabled}
           onChange={handleOnChange}
+          pillDragHandle={pillDragHandle}
           ref={selectRef}
-          {...selectProps}
+          showPillIndex={showPillIndex}
       />
     </div>
     )
