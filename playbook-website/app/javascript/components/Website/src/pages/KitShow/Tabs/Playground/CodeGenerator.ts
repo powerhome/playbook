@@ -493,16 +493,18 @@ export const generateLiveFromTemplate = ({
   });
 
   let body = code.trimEnd();
+  const trimmedBody = body.trimStart();
+
+  if (trimmedBody.startsWith("<")) {
+    return `render(${trimmedBody})`;
+  }
 
   // Non-requiredProps preamble (e.g. wrapper const declarations) must stay outside render()
   let jsxStart = body.search(/\r?\n<[A-Z]/);
   if (jsxStart !== -1) {
     jsxStart += body.slice(jsxStart).indexOf("<");
   } else {
-    const trimmed = body.replace(/^\s+/, "");
-    if (/^<[A-Z]/.test(trimmed)) {
-      jsxStart = body.length - trimmed.length;
-    }
+    jsxStart = -1;
   }
   if (jsxStart >= 0) {
     const preamble = body.slice(0, jsxStart).trimEnd();

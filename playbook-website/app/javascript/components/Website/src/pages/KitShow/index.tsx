@@ -124,6 +124,7 @@ const KitShow = () => {
     "file_upload",
     "filter",
     "fixed_confirmation_toast",
+    "flex",
     "link",
     "title",
     "title_detail",

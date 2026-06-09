@@ -1,105 +1,252 @@
 {
+  "structureModes": {
+    "default": "basic",
+    "modes": {
+      "basic": {
+        "label": "Basic",
+        "template": "<div className=\"flex-doc-example\">\n  <Flex{{props}}>\n    {{children}}\n  </Flex>\n</div>",
+        "children": "<Caption text=\"A\" />\n<Caption text=\"B\" />\n<Caption text=\"C\" />"
+      },
+      "flex_items": {
+        "label": "FlexItem",
+        "template": "<div className=\"flex-doc-example\">\n  <Flex{{props}}>\n    {{children}}\n  </Flex>\n</div>",
+        "children": "<FlexItem>\n  {'1'}\n</FlexItem>\n<FlexItem>\n  {'2'}\n</FlexItem>\n<FlexItem>\n  {'3'}\n</FlexItem>\n<FlexItem>\n  {'4'}\n</FlexItem>",
+        "props": {
+          "gap": "xs"
+        }
+      },
+      "display_flex_item": {
+        "label": "Display FlexItem",
+        "template": "<div className=\"flex-doc-example\">\n  <Flex{{props}}>\n    <FlexItem\n        displayFlex\n        gap=\"xs\"\n        padding=\"xs\"\n    >\n      {{children}}\n    </FlexItem>\n  </Flex>\n</div>",
+        "children": "<FlexItem>\n  {'We'}\n</FlexItem>\n<FlexItem>\n  {'Are'}\n</FlexItem>\n<FlexItem>\n  {'Being'}\n</FlexItem>\n<FlexItem>\n  {'Flexed'}\n</FlexItem>",
+        "props": {
+          "align": "start",
+          "gap": "xs"
+        }
+      }
+    }
+  },
   "children": {
-    "default": "<Caption text=\"A\" /><Caption text=\"B\" /><Caption text=\"C\" />"
+    "editable": true,
+    "default": "<Caption text=\"A\" />\n<Caption text=\"B\" />\n<Caption text=\"C\" />"
   },
   "groups": [
     {
-      "name": "Direction & flow",
-      "props": ["orientation", "reverse", "wrap", "inline"]
+      "name": "Direction & Flow",
+      "props": [
+        "orientation",
+        "reverse",
+        "wrap",
+        "inline"
+      ]
     },
     {
-      "name": "Primary axis",
-      "props": ["horizontal", "justify", "spacing"]
+      "name": "Primary Axis",
+      "props": [
+        "horizontal",
+        "justify",
+        "spacing"
+      ]
     },
     {
-      "name": "Cross axis",
-      "props": ["vertical", "align", "alignSelf"]
+      "name": "Cross Axis",
+      "props": [
+        "vertical",
+        "align",
+        "alignSelf"
+      ]
+    },
+    {
+      "name": "Gap",
+      "props": [
+        "gap",
+        "rowGap",
+        "columnGap"
+      ]
     }
   ],
   "presets": [
     {
-      "name": "Row (start)",
+      "name": "Row",
+      "structureMode": "basic",
       "props": {
-        "orientation": "row",
-        "justify": "none",
         "horizontal": "left",
+        "justify": "none",
+        "orientation": "row",
         "vertical": "top"
       },
-      "children": "<Caption text=\"A\" /><Caption text=\"B\" /><Caption text=\"C\" />"
+      "children": "<Caption text=\"A\" />\n<Caption text=\"B\" />\n<Caption text=\"C\" />"
     },
     {
       "name": "Column",
+      "structureMode": "basic",
       "props": {
-        "orientation": "column",
-        "justify": "none",
         "horizontal": "left",
+        "justify": "none",
+        "orientation": "column",
         "vertical": "top"
       },
-      "children": "<Caption text=\"One\" /><Caption text=\"Two\" /><Caption text=\"Three\" />"
+      "children": "<Caption text=\"One\" />\n<Caption text=\"Two\" />\n<Caption text=\"Three\" />"
     },
     {
       "name": "Centered",
+      "structureMode": "basic",
       "props": {
-        "orientation": "row",
         "justify": "center",
+        "orientation": "row",
         "vertical": "center"
       },
       "children": "<Caption text=\"Centered\" />"
     },
     {
-      "name": "Space between",
+      "name": "Space Between",
+      "structureMode": "basic",
       "props": {
-        "orientation": "row",
         "justify": "between",
-        "vertical": "center"
-      },
-      "children": "<Caption text=\"Left\" /><Caption text=\"Right\" />"
-    },
-    {
-      "name": "Space around",
-      "props": {
         "orientation": "row",
-        "justify": "around",
         "vertical": "center"
       },
-      "children": "<Caption text=\"A\" /><Caption text=\"B\" /><Caption text=\"C\" />"
-    },
-    {
-      "name": "End aligned",
-      "props": {
-        "orientation": "row",
-        "justify": "end",
-        "vertical": "center"
-      },
-      "children": "<Caption text=\"Trailing\" />"
+      "children": "<Caption text=\"Left\" />\n<Caption text=\"Right\" />"
     },
     {
       "name": "Wrap",
+      "structureMode": "flex_items",
       "props": {
+        "gap": "xs",
+        "justify": "start",
         "orientation": "row",
-        "wrap": true,
-        "justify": "start"
+        "wrap": true
       },
-      "children": "<Caption text=\"Item 1\" /><Caption text=\"Item 2\" /><Caption text=\"Item 3\" /><Caption text=\"Item 4\" />"
+      "children": "<FlexItem fixedSize=\"160px\">\n  {'Item 1'}\n</FlexItem>\n<FlexItem fixedSize=\"160px\">\n  {'Item 2'}\n</FlexItem>\n<FlexItem fixedSize=\"160px\">\n  {'Item 3'}\n</FlexItem>\n<FlexItem fixedSize=\"160px\">\n  {'Item 4'}\n</FlexItem>\n<FlexItem fixedSize=\"160px\">\n  {'Item 5'}\n</FlexItem>"
     },
     {
-      "name": "Inline flex",
+      "name": "Gap",
+      "structureMode": "flex_items",
       "props": {
-        "inline": true,
+        "gap": "sm",
         "orientation": "row",
-        "vertical": "center"
+        "wrap": true
       },
-      "children": "<Caption text=\"Inline\" /> <Caption text=\"chips\" />"
+      "children": "<FlexItem>{'1'}</FlexItem>\n<FlexItem>{'2'}</FlexItem>\n<FlexItem>{'3'}</FlexItem>\n<FlexItem>{'4'}</FlexItem>"
     },
     {
-      "name": "Column (center items)",
+      "name": "Responsive Gap",
+      "structureMode": "flex_items",
       "props": {
-        "orientation": "column",
-        "align": "center"
+        "gap": {
+          "xs": "none",
+          "sm": "sm",
+          "md": "md",
+          "lg": "lg",
+          "xl": "xl"
+        },
+        "orientation": "row",
+        "wrap": true
       },
-      "children": "<Caption text=\"Stacked\" /><Caption text=\"centered\" />"
+      "children": "<FlexItem fixedSize=\"96px\">{'1'}</FlexItem>\n<FlexItem fixedSize=\"96px\">{'2'}</FlexItem>\n<FlexItem fixedSize=\"96px\">{'3'}</FlexItem>\n<FlexItem fixedSize=\"96px\">{'4'}</FlexItem>"
+    },
+    {
+      "name": "FlexItem Grow",
+      "structureMode": "flex_items",
+      "props": {
+        "gap": "xs"
+      },
+      "children": "<FlexItem grow>\n  {'I grow'}\n</FlexItem>\n<FlexItem>\n  {'2'}\n</FlexItem>\n<FlexItem>\n  {'3'}\n</FlexItem>"
+    },
+    {
+      "name": "FlexItem Fixed Size",
+      "structureMode": "flex_items",
+      "props": {
+        "gap": "xs"
+      },
+      "children": "<FlexItem fixedSize=\"240px\">\n  {'240px'}\n</FlexItem>\n<FlexItem flex={1}>\n  {'flex 1'}\n</FlexItem>\n<FlexItem flex={1}>\n  {'flex 1'}\n</FlexItem>"
+    },
+    {
+      "name": "FlexItem Order",
+      "structureMode": "flex_items",
+      "props": {
+        "gap": "xs"
+      },
+      "children": "<FlexItem order={4}>{'1'}</FlexItem>\n<FlexItem order={2}>{'2'}</FlexItem>\n<FlexItem order={1}>{'3'}</FlexItem>\n<FlexItem order={3}>{'4'}</FlexItem>"
+    },
+    {
+      "name": "FlexItem Align Self",
+      "structureMode": "flex_items",
+      "props": {
+        "gap": "xs",
+        "vertical": "stretch"
+      },
+      "children": "<FlexItem alignSelf=\"start\" padding=\"sm\">\n  {'start'}\n</FlexItem>\n<FlexItem alignSelf=\"center\" padding=\"sm\">\n  {'center'}\n</FlexItem>\n<FlexItem alignSelf=\"end\" padding=\"sm\">\n  {'end'}\n</FlexItem>"
+    },
+    {
+      "name": "Display FlexItem",
+      "structureMode": "display_flex_item",
+      "props": {
+        "gap": "xs"
+      }
     }
   ],
   "conditionals": {},
-  "hints": {}
+  "hints": {
+    "row": {
+      "presetName": "Row",
+      "message": "Row is the default Flex direction and keeps editable children as direct children of Flex.",
+      "type": "info"
+    },
+    "column": {
+      "presetName": "Column",
+      "message": "Column stacks the same editable children vertically.",
+      "type": "info"
+    },
+    "centered": {
+      "presetName": "Centered",
+      "message": "Centered combines justify=\"center\" with vertical=\"center\" for centered row content.",
+      "type": "info"
+    },
+    "space_between": {
+      "presetName": "Space Between",
+      "message": "Space Between spreads the first and last children across the primary axis.",
+      "type": "info"
+    },
+    "wrap": {
+      "presetName": "Wrap",
+      "message": "Wrap uses fixed-size FlexItem children so wrapping behavior is visible as the preview width changes.",
+      "type": "info"
+    },
+    "gap": {
+      "presetName": "Gap",
+      "message": "Gap applies spacing between FlexItem children without adding margins to the child content.",
+      "type": "info"
+    },
+    "responsive_gap": {
+      "presetName": "Responsive Gap",
+      "message": "Responsive Gap passes a breakpoint object to gap for different spacing at different viewport widths.",
+      "type": "info"
+    },
+    "flexitem_grow": {
+      "presetName": "FlexItem Grow",
+      "message": "FlexItem Grow demonstrates the grow prop on an individual FlexItem while keeping its JSX editable.",
+      "type": "info"
+    },
+    "flexitem_fixed_size": {
+      "presetName": "FlexItem Fixed Size",
+      "message": "FlexItem Fixed Size combines a fixedSize item with flexible siblings.",
+      "type": "info"
+    },
+    "flexitem_order": {
+      "presetName": "FlexItem Order",
+      "message": "FlexItem Order shows how individual FlexItem children can control visual ordering.",
+      "type": "info"
+    },
+    "flexitem_align_self": {
+      "presetName": "FlexItem Align Self",
+      "message": "FlexItem Align Self applies cross-axis alignment on individual FlexItem children.",
+      "type": "info"
+    },
+    "display_flexitem": {
+      "presetName": "Display FlexItem",
+      "message": "Display FlexItem makes a FlexItem act as a flex container for its own editable children.",
+      "type": "info"
+    }
+  }
 }
