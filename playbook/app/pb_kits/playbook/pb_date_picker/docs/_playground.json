@@ -16,6 +16,7 @@
     "showTimezone": false,
     "staticPosition": true,
     "thisRangesEndToday": false,
+    "yearAscending": false,
     "controlsStartId": "",
     "controlsEndId": "",
     "syncStartWith": "",
