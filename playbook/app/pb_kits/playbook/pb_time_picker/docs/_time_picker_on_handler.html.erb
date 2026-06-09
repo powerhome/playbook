@@ -1,0 +1,24 @@
+<%= pb_rails("flex", props: { margin_bottom: "sm", orientation: "column" }) do %>
+  <%= pb_rails("body", props: { id: "time-picker-on-change-output", text: "" }) %>
+  <%= pb_rails("body", props: { id: "time-picker-on-close-output", text: "" }) %>
+<% end %>
+
+<%= pb_rails("time_picker", props: { id: "time-picker-on-handler" }) %>
+
+<script>
+  (function() {
+    var picker = document.getElementById("time-picker-on-handler");
+    var changeOutput = document.getElementById("time-picker-on-change-output");
+    var closeOutput = document.getElementById("time-picker-on-close-output");
+
+    if (!picker) return;
+
+    picker.addEventListener("pb-time-picker-change", function(event) {
+      changeOutput.textContent = "onChange: " + (event.detail.time || "");
+    });
+
+    picker.addEventListener("pb-time-picker-close", function(event) {
+      closeOutput.textContent = "onClose: " + (event.detail.time || "");
+    });
+  })();
+</script>

@@ -69,9 +69,10 @@ svg {
       transform: scaleX(-1) scaleY(-1);
     }
     &.svg-inline--fa {
+      box-sizing: content-box;
       height: 1em;
       overflow: visible;
-      vertical-align: -.125em
+      vertical-align: -.125em;
     }
     &.svg_inverse {
       color: #fff;

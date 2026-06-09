@@ -53,7 +53,7 @@ kits:
   - name: row_interaction
     description: Select, expand, subrows, pinning; row highlights and bulk actions.
     parent: advanced_table
-    kit_section: ["Expanded Control", "Expand by Depth", "SubRow Headers", "Cascade Collapse", "Pinned Rows", "Selectable Rows", "Selectable Rows (No Subrows)", "Selectable Rows (With Actions)", "Selectable Rows (No Actions Bar)"]
+    kit_section: ["Expanded Control", "Expand by Depth", "SubRow Headers", "Enable Toggle Expansion", "Cascade Collapse", "Pinned Rows", "Selectable Rows", "Selectable Rows (No Subrows)", "Selectable Rows (With Actions)", "Selectable Rows (No Actions Bar)"]
     platforms: *1
     status: stable
     icons_used: true
@@ -598,7 +598,7 @@ kits:
     description: A time picker component that allows users to select a time independently of the date.
     status: stable
     icons_used: true
-    react_rendered: true
+    react_rendered: false
     enhanced_element_used: true
 - category: icons_and_images
   description: Components for displaying icons, images, and visual media.

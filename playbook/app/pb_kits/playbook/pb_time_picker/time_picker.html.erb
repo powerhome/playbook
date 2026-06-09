@@ -1,1 +1,168 @@
-<%= react_component("TimePicker", object.time_picker_react_props, 'data-pb-time-picker': true, 'data-validation-message': object.validation_message) %>
+<%= pb_content_tag(:div, id: object.picker_id, style: { position: "relative" }) do %>
+  <% if object.label.present? %>
+    <label for="<%= object.input_id %>">
+      <% if object.required_indicator %>
+        <%= pb_rails("caption", props: {
+          classname: "pb_time_picker_kit_label",
+          color: "lighter",
+          dark: object.dark,
+          margin_bottom: "xs",
+          size: "md",
+        }) do %>
+          <%= object.label %><span style="color: #DA0014;"> *</span>
+        <% end %>
+      <% else %>
+        <%= pb_rails("caption", props: {
+          text: object.label,
+          classname: "pb_time_picker_kit_label",
+          color: "lighter",
+          dark: object.dark,
+          margin_bottom: "xs",
+          size: "md",
+        }) %>
+      <% end %>
+    </label>
+  <% end %>
+
+  <div class="time_picker_wrapper">
+    <%= pb_rails("text_input", props: {
+      add_on: { icon: "clock", alignment: "right", border: true },
+      cursor: "pointer",
+      dark: object.dark,
+      disabled: object.disabled,
+      error: object.error,
+      id: object.input_id,
+      input_options: object.main_input_options,
+      label: "",
+      margin_bottom: "none",
+      name: object.field_name,
+      placeholder: "Select Time",
+      required: object.required,
+      validation: object.validation_message.present? ? { message: object.validation_message } : {},
+    }) %>
+
+    <div
+      class="<%= object.container_class %>"
+      data-pb-time-picker-dropdown
+      hidden
+    >
+      <div class="pb_time_selection">
+        <div class="time_input_wrapper">
+          <label for="<%= object.picker_id %>-hour">
+            <%= pb_rails("caption", props: {
+              classname: "time_input_label",
+              color: "lighter",
+              dark: object.dark,
+              size: "sm",
+              text: "Hour",
+            }) %>
+          </label>
+          <input
+            class="time_input time-hour"
+            data-pb-time-picker-hour-input
+            id="<%= object.picker_id %>-hour"
+            inputmode="numeric"
+            max="<%= object.time_format == '24hour' ? 23 : 12 %>"
+            maxlength="2"
+            min="<%= object.time_format == '24hour' ? 0 : 1 %>"
+            name="<%= object.picker_id %>-hour"
+            pattern="[0-9]*"
+            step="1"
+            type="number"
+            value=""
+          />
+          <div class="time_dropdown" data-pb-time-picker-hour-dropdown hidden></div>
+        </div>
+
+        <span class="time-separator">:</span>
+
+        <div class="time_input_wrapper">
+          <label for="<%= object.picker_id %>-minute">
+            <%= pb_rails("caption", props: {
+              classname: "time_input_label",
+              color: "lighter",
+              dark: object.dark,
+              size: "sm",
+              text: "Minute",
+            }) %>
+          </label>
+          <input
+            class="time_input time-minute"
+            data-pb-time-picker-minute-input
+            id="<%= object.picker_id %>-minute"
+            inputmode="numeric"
+            max="59"
+            maxlength="2"
+            min="0"
+            name="<%= object.picker_id %>-minute"
+            pattern="[0-9]*"
+            step="1"
+            type="number"
+            value=""
+          />
+          <div class="time_dropdown" data-pb-time-picker-minute-dropdown hidden></div>
+        </div>
+
+        <% if object.meridiem_section? %>
+          <div class="meridiem" data-pb-time-picker-meridiem>
+            <%= pb_rails("caption", props: {
+              classname: "time_input_label",
+              color: "lighter",
+              dark: object.dark,
+              size: "sm",
+              text: "Period",
+            }) %>
+            <div class="pb_form_group_kit">
+              <%= pb_rails("selectable_card", props: {
+                checked: false,
+                classname: "pb_time_picker_meridiem_am",
+                dark: object.dark,
+                disabled: false,
+                input_id: "#{object.picker_id}-am",
+                multi: false,
+                name: "#{object.picker_id}-meridiem",
+                text: "AM",
+                value: "AM",
+              }) %>
+              <%= pb_rails("selectable_card", props: {
+                checked: false,
+                classname: "pb_time_picker_meridiem_pm",
+                dark: object.dark,
+                disabled: false,
+                input_id: "#{object.picker_id}-pm",
+                multi: false,
+                name: "#{object.picker_id}-meridiem",
+                text: "PM",
+                value: "PM",
+              }) %>
+            </div>
+          </div>
+        <% end %>
+
+        <div class="time_range_error" data-pb-time-picker-range-error hidden>
+          <%= pb_rails("caption", props: {
+            classname: "time_range_error_text",
+            dark: object.dark,
+            data: { pb_time_picker_range_error_text: true },
+            margin_top: "sm",
+            size: "xs",
+            text: "",
+          }) %>
+        </div>
+
+        <% if object.show_timezone %>
+          <%= pb_rails("caption", props: {
+            classname: "pb_time_picker_timezone_text",
+            color: "lighter",
+            dark: object.dark,
+            data: { pb_time_picker_timezone_text: true },
+            line_height: "tight",
+            margin_top: "sm",
+            size: "xs",
+            text: "",
+          }) %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+<% end %>

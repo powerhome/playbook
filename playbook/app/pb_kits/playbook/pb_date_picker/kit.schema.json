@@ -257,6 +257,14 @@
         "react"
       ]
     },
+    "yearAscending": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
     "yearRange": {
       "type": "array",
       "platforms": [

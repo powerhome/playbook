@@ -1,9 +1,10 @@
 import { useEffect, useMemo, useRef, useState, type CSSProperties } from "react";
-import { Layout } from "playbook-ui";
+import { Flex, Layout, SectionSeparator } from "playbook-ui";
 import Sidebar from "./src/layouts/Sidebar";
 import LayoutRight from "./src/layouts/LayoutRight";
 import Header from "./src/layouts/Header";
 import MobileNav, { MobileHamburger } from "./src/components/MobileNav";
+import { PlatformToggle } from "./src/components/PlatformToggle";
 import { useLoaderData, useLocation, useNavigate } from "react-router-dom";
 import { PlatformContext } from "./src/contexts/PlatformContext";
 import { DarkModeProvider, useDarkMode } from "./src/contexts/DarkModeContext";
@@ -21,7 +22,6 @@ function WebsiteContent() {
     icons, 
     whats_new,
     category,
-    building_blocks,
     global_props_and_tokens
   }: any = useLoaderData();
   const location = useLocation();
@@ -30,6 +30,11 @@ function WebsiteContent() {
 
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const [headerHeight, setHeaderHeight] = useState(89);
+
+  // Close sidebar on route change
+  useEffect(() => {
+    setMobileNavOpen(false);
+  }, [location.pathname]);
   const headerRef = useRef<HTMLDivElement | null>(null);
   const normalizedPath = location.pathname.replace(/\/+$/, "") || "/";
 
@@ -69,8 +74,8 @@ function WebsiteContent() {
 
   const handlePlatformChange = (nextPlatform: string) => {
     const isKitDetailRoute =
-      /^\/beta\/kits\/advanced_table\/[^/]+\/(react|rails|swift)$/.test(normalizedPath) ||
-      /^\/beta\/kits\/[^/]+\/(react|rails|swift)$/.test(normalizedPath);
+      /^\/kits\/advanced_table\/[^/]+\/(react|rails|swift)$/.test(normalizedPath) ||
+      /^\/kits\/[^/]+\/(react|rails|swift)$/.test(normalizedPath);
 
     if (isKitDetailRoute) {
       const nextPath = normalizedPath.replace(/\/(react|rails|swift)$/, `/${nextPlatform}`);
@@ -81,7 +86,7 @@ function WebsiteContent() {
     }
 
     const isCategoryOrKitsIndex =
-      normalizedPath === "/beta/kits" || /^\/beta\/kit_category\/[^/]+$/.test(normalizedPath);
+      normalizedPath === "/kits" || /^\/kit_category\/[^/]+$/.test(normalizedPath);
 
     if (isCategoryOrKitsIndex) {
       const params = new URLSearchParams(location.search);
@@ -90,6 +95,12 @@ function WebsiteContent() {
     }
   };
 
+  const isKitShowPage = /^\/kits\/[^/]+\/(react|rails|swift)$/.test(normalizedPath) ||
+    /^\/kits\/advanced_table\/[^/]+\/(react|rails|swift)$/.test(normalizedPath);
+  const isKitsPage = normalizedPath === "/kits";
+  const isKitsCategoryPage = /^\/kit_category\/[^/]+$/.test(normalizedPath);
+  const showPlatformToggle = isKitsPage || isKitsCategoryPage || isKitShowPage;
+
   return (
     <PlatformContext.Provider value={{ platform, setPlatform: handlePlatformChange }}>
       <div
@@ -97,6 +108,22 @@ function WebsiteContent() {
         style={websiteStyle}
       >
         <MobileNav />
+        {showPlatformToggle && (
+          <Flex
+            align="center"
+            dark={darkMode}
+            display={{ xs: "flex", sm: "flex", md: "flex", lg: "none", xl: "none" }}
+            paddingX="sm"
+            paddingY="xs"
+          >
+            <PlatformToggle platform={platform} setPlatform={handlePlatformChange} />
+          </Flex>
+        )}
+        <SectionSeparator
+          dark={darkMode}
+          display={{ xs: "block", sm: "block", md: "block", lg: "none", xl: "none" }}
+          width="100%"
+        />
         <div ref={headerRef}>
           <Header 
             PBversion={PBversion || "Latest"}
@@ -115,9 +142,18 @@ function WebsiteContent() {
             isOpen={mobileNavOpen}
             onToggle={() => setMobileNavOpen(!mobileNavOpen)}
           />
+          {mobileNavOpen && (
+            <div
+              onClick={() => setMobileNavOpen(false)}
+              style={{
+                position: "fixed",
+                inset: 0,
+                zIndex: 99,
+              }}
+            />
+          )}
           <Layout.Side className={`pb--page--sideNav ${darkMode ? 'dark' : ''} ${mobileNavOpen ? 'mobile-open' : ''}`.trim()}>
             <Sidebar
-              building_blocks={building_blocks || []}
               dark={darkMode}
               type={platform || "react"}
               category={category}

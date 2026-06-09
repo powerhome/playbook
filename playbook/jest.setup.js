@@ -17,7 +17,9 @@ function pascalToKebabCase(str) {
     .replace(/([a-z])([A-Z])/g, '$1-$2')
     .replace(/([a-zA-Z])([0-9])/g, '$1-$2')
     .replace(/([0-9])([a-zA-Z])/g, '$1-$2')
-    .toLowerCase(); 
+    .toLowerCase()
+    // Heading icons export as H1..H6 but icon props use h1..h6 (no hyphen)
+    .replace(/^h-(\d)$/, 'h$1')
 }
 
 Object.entries(icons).forEach(([key, value]) => {

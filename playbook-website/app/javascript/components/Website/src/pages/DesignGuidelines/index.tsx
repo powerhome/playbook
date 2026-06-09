@@ -7,10 +7,8 @@ const DesignGuidelines = () => {
   const loaderData = useLoaderData() as any
   const { design_guidelines_content, design_guidelines } = loaderData
 
-  //------- remove once legacy website is gone --------------
   let contentWithoutFrontmatter = design_guidelines_content?.replace(/^---[\s\S]*?---\n/, '') || ''
   contentWithoutFrontmatter = contentWithoutFrontmatter.replace(/<div>\s*<%=[\s\S]*?%>\s*<\/div>/g, '')
-  //------- remove once legacy website is gone --------------
 
   return (
     <Background
@@ -48,8 +46,7 @@ const DesignGuidelines = () => {
               {design_guidelines.pages.map((page: any) => {
                 const icon = page.frontmatter?.icon || 'files'
                 const description = page.frontmatter?.description || ''
-                // Convert legacy URL to beta URL
-                const betaUrl = page.url.replace('guides/design_guidelines/', '/beta/guides/design_guidelines/')
+                const betaUrl = `/${page.url}`
                 
                 return (
                   <Link 

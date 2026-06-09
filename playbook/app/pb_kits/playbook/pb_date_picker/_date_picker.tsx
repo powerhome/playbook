@@ -12,6 +12,41 @@ import Caption from '../pb_caption/_caption'
 import Body from '../pb_body/_body'
 import colors from "../tokens/exports/_colors.module.scss"
 
+function isValidDateInstance(value: Date): boolean {
+  return !Number.isNaN(value.getTime())
+}
+
+function normalizeDefaultDate<T>(defaultDate: T): T {
+  if (defaultDate instanceof Date) {
+    return (isValidDateInstance(defaultDate) ? defaultDate : '') as unknown as T
+  }
+  if (Array.isArray(defaultDate)) {
+    const normalized = defaultDate.filter(
+      (d) => !(d instanceof Date) || isValidDateInstance(d)
+    )
+    return (normalized.length ? normalized : '') as unknown as T
+  }
+  return defaultDate
+}
+
+function serializeDefaultDateForFilterReset(defaultDate: unknown): string | undefined {
+  if (defaultDate === '' || defaultDate == null) return undefined
+  if (Array.isArray(defaultDate)) {
+    const parts = defaultDate.map((d) => {
+      if (d == null || d === '') return ''
+      if (d instanceof Date) {
+        return isValidDateInstance(d) ? d.toISOString() : ''
+      }
+      return String(d)
+    }).filter(Boolean)
+    return parts.length ? parts.join(',') : undefined
+  }
+  if (defaultDate instanceof Date) {
+    return isValidDateInstance(defaultDate) ? defaultDate.toISOString() : undefined
+  }
+  return String(defaultDate)
+}
+
 type DatePickerProps = {
   allowInput?: boolean,
   aria?: { [key: string]: string },
@@ -52,6 +87,7 @@ type DatePickerProps = {
   thisRangesEndToday?: boolean,
   timeFormat?: string,
   type?: string,
+  yearAscending?: boolean,
   yearRange?: number[],
   controlsStartId?: string,
     controlsEndId?: string,
@@ -105,6 +141,7 @@ const DatePicker = (props: DatePickerProps): React.ReactElement => {
     showTimezone = false,
     staticPosition = true,
     thisRangesEndToday = false,
+    yearAscending = false,
     yearRange = [1900, 2100],
     controlsStartId,
     controlsEndId,
@@ -113,7 +150,12 @@ const DatePicker = (props: DatePickerProps): React.ReactElement => {
   } = props
 
   const ariaProps = buildAriaProps(aria)
-  const dataProps = buildDataProps(data)
+  const normalizedDefaultDate = normalizeDefaultDate(defaultDate)
+  const filterResetDefaultSerialized = serializeDefaultDateForFilterReset(normalizedDefaultDate)
+  const dataProps = buildDataProps({
+    ...data,
+    ...(filterResetDefaultSerialized ? { 'default-value': filterResetDefaultSerialized } : {}),
+  })
   const htmlProps = buildHtmlProps(htmlOptions)
   const inputAriaProps = buildAriaProps(inputAria)
   const inputDataProps = buildDataProps(inputData)
@@ -136,7 +178,7 @@ const DatePicker = (props: DatePickerProps): React.ReactElement => {
     datePickerHelper({
       allowInput,
       customQuickPickDates,
-      defaultDate,
+      defaultDate: normalizedDefaultDate,
       disableDate,
       disableRange,
       disableWeekdays,
@@ -159,6 +201,7 @@ const DatePicker = (props: DatePickerProps): React.ReactElement => {
       showTimezone,
       staticPosition,
       thisRangesEndToday,
+      yearAscending,
       yearRange,
       controlsStartId,
       controlsEndId,

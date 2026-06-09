@@ -70,13 +70,20 @@
     }
   }
 
-  .text_input_wrapper_add_on .add-on-right .text_input {
+  .text_input_wrapper_add_on .add-on-right .text_input,
+  .text_input_wrapper_add_on input.text_input {
     cursor: pointer;
   }
 
   &.error {
-    .text_input_wrapper_add_on .add-on-card {
+    .text_input_wrapper_add_on .add-on-right .text_input,
+    .text_input_wrapper_add_on input.text_input {
       border-color: $input_border_error;
+    }
+
+    .text_input_wrapper_add_on .add-on-right .add-on-card {
+      border: 1px solid $input_border_error;
+      border-left: 0;
     }
 
     &:focus,
@@ -86,6 +93,18 @@
         transition: background-color 0.3s ease-in-out 0s, border-color 0.15s ease-in-out 0s;
         border-color: $input_border_error;
       }
+    }
+  }
+
+  &.dark.error {
+    .text_input_wrapper_add_on .add-on-right .text_input,
+    .text_input_wrapper_add_on input.text_input {
+      border-color: $input_border_error_dark;
+    }
+
+    .text_input_wrapper_add_on .add-on-right .add-on-card {
+      border: 1px solid $input_border_error_dark;
+      border-left: 0;
     }
   }
 
@@ -266,7 +285,7 @@
           color: $input_border_error;
         }
       }
-      .pb_caption_kit_xs {
+      .pb_time_picker_timezone_text {
         clear: both;
         display: block;
         width: 100%;
@@ -337,6 +356,10 @@
           justify-content: center;
           font-weight: $bolder;
           color: $input_text_active;
+
+          .pb_body_kit {
+            font-weight: $bolder;
+          }
         }
 
         .disabled_meridiem > label,
