@@ -1,0 +1,12 @@
+{
+  "ignored_warnings": [
+    {
+      "warning_type": "Unmaintained Dependency",
+      "warning_code": 122,
+      "fingerprint": "21ab0fe00fdd5899ffc405cff75aadb91b805ee996a614f7e27b08a287e9062d",
+      "note": "Rails 7.2 dev dependency required for ViewComponent 4. General support until 2026-08-09."
+    }
+  ],
+  "updated": "2026-05-26 00:00:00 +0000",
+  "brakeman_version": "7.0.0"
+}
