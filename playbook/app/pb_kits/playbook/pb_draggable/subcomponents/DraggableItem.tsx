@@ -27,7 +27,10 @@ type DraggableItemProps = {
   onDragStart?: () => void,
   onDrop?: () => void,
   dragId?: string;
+  /** Whole-item pointer drag (e.g. Typeahead pills without a grip). Disables HTML5 drag. */
   pointerDrag?: boolean;
+  /** Handle-only pointer drag (e.g. Typeahead pills with a grip). Disables HTML5 drag. */
+  handlePointerDrag?: boolean;
   tag?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'span' | 'div' | 'tr' | 'th' | 'td' | 'thead' | 'col' | 'tbody',
 };
 
@@ -50,6 +53,7 @@ const DraggableItem = (props: DraggableItemProps) => {
     onDragStart = noop,
     onDrop = noop,
     pointerDrag = false,
+    handlePointerDrag = false,
   } = props;
 
   const {
@@ -117,11 +121,11 @@ const DraggableItem = (props: DraggableItemProps) => {
 
   React.useLayoutEffect(() => {
     const touchMode = isTouchDragDevice();
-    const hasHandle = Boolean(itemRef.current?.querySelector('.pb_draggable_handle, .card_draggable_handle'));
 
     setUseTouchDrag(touchMode);
-    setUsePointerMouseDrag(!touchMode && (hasHandle || pointerDrag));
-  }, [dragId, container, children, pointerDrag]);
+    // Pointer drag is opt-in only — regular Draggable items keep HTML5 drag on the whole item.
+    setUsePointerMouseDrag(!touchMode && (pointerDrag || handlePointerDrag));
+  }, [dragId, container, children, pointerDrag, handlePointerDrag]);
 
   React.useEffect(() => {
     if (!useTouchDrag || !itemRef.current || !dragId) return;
@@ -137,14 +141,12 @@ const DraggableItem = (props: DraggableItemProps) => {
   React.useEffect(() => {
     if (!usePointerMouseDrag || !itemRef.current || !dragId) return;
 
-    const hasHandle = Boolean(itemRef.current.querySelector('.pb_draggable_handle, .card_draggable_handle'));
-
     return bindMousePointerDrag({
       dragId,
       container,
       itemElement: itemRef.current,
       handlers: dragHandlers,
-      allowWholeItem: pointerDrag && !hasHandle,
+      allowWholeItem: pointerDrag,
     });
   }, [usePointerMouseDrag, dragId, container, dragHandlers, pointerDrag]);
 

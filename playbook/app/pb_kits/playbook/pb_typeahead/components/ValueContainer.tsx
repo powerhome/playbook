@@ -93,6 +93,7 @@ const DraggablePillList = ({
         <Draggable.Item
             container="typeahead-pills"
             dragId={item.value}
+            handlePointerDrag={Boolean((selectProps as any)?.pillDragHandle)}
             key={item.value}
             pointerDrag={!(selectProps as any)?.pillDragHandle}
             tag="span"
