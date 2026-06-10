@@ -1,33 +1,94 @@
 {
   "defaults": {
-    "label": "Revenue",
-    "value": "1428",
-    "variant": "default"
+    "label": "Role",
+    "value": "Administrator, Moderator",
+    "variant": "default",
+    "active": false,
+    "dark": false
   },
   "groups": [
-    { "name": "Content", "props": ["label", "value"] },
-    { "name": "Details & appearance", "props": ["variant", "icon", "description", "title", "active", "date"] }
+    {
+      "name": "Content",
+      "props": [
+        "label",
+        "value"
+      ]
+    },
+    {
+      "name": "Details",
+      "props": [
+        "variant",
+        "icon",
+        "description",
+        "title",
+        "date",
+        "active"
+      ]
+    },
+    {
+      "name": "Appearance",
+      "props": [
+        "dark"
+      ]
+    }
   ],
   "presets": [
-    { "name": "Label + value", "props": { "label": "Revenue", "value": "1428", "variant": "default" } },
-    { "name": "Amount + unit", "props": { "label": "Balance", "value": "$2,000.00", "variant": "default" } },
-    { "name": "Percent", "props": { "label": "Growth", "value": "15%", "variant": "default" } },
-    { "name": "Details row", "props": {
-      "variant": "details",
-      "label": "Activity",
-      "icon": "dumbbell",
-      "description": "Q1 campaign",
-      "title": "Review budget",
-      "active": true
-    } },
-    { "name": "Details (inactive)", "props": {
-      "variant": "details",
-      "label": "Snapshot",
-      "icon": "clipboard",
-      "description": "Draft",
-      "title": "FY report",
-      "active": false
-    } }
+    {
+      "name": "Role",
+      "props": {
+        "label": "Role",
+        "value": "Administrator, Moderator",
+        "variant": "default"
+      }
+    },
+    {
+      "name": "Email",
+      "props": {
+        "label": "Email",
+        "value": "anna.black@powerhrg.com",
+        "variant": "default"
+      }
+    },
+    {
+      "name": "Long Bio",
+      "props": {
+        "label": "Bio",
+        "value": "Proin pulvinar feugiat massa in luctus. Donec urna nulla, elementum sit amet tincidunt nec, mattis nec urna.",
+        "variant": "default"
+      }
+    },
+    {
+      "name": "Details Row",
+      "props": {
+        "variant": "details",
+        "label": "Project",
+        "icon": "home",
+        "description": "33-12345",
+        "title": "Jefferson-Smith"
+      }
+    },
+    {
+      "name": "Details With Date",
+      "props": {
+        "variant": "details",
+        "label": "Project",
+        "icon": "home",
+        "description": "33-12345",
+        "title": "Jefferson-Smith",
+        "date": "2019-11-18T00:00:00.000Z"
+      }
+    },
+    {
+      "name": "Active Details",
+      "props": {
+        "variant": "details",
+        "label": "Chest",
+        "icon": "dumbbell",
+        "description": "6 sets - 8 reps - 40-100 kg",
+        "title": "Bench Press",
+        "active": true
+      }
+    }
   ],
   "conditionals": {
     "icon": { "requires": { "variant": "details" } },
@@ -38,14 +99,24 @@
     "value": { "requires": { "variant": "default" } }
   },
   "hints": {
-    "details_variant": {
-      "when": { "variant": "details" },
-      "message": "Details variant shows icon, description, and title/date in a row; the default variant shows label + body value only.",
+    "role": {
+      "presetName": "Role",
+      "message": "Use the label and value props to render a label and value.",
       "type": "info"
     },
-    "active_links": {
-      "when": { "active": true },
-      "message": "When active is true, the title and date use the link title variant.",
+    "details_row": {
+      "presetName": "Details Row",
+      "message": "Use the variant prop to change the style of the label value.",
+      "type": "info"
+    },
+    "details_with_date": {
+      "presetName": "Details With Date",
+      "message": "Use the date prop to pass a date object.",
+      "type": "info"
+    },
+    "active_details": {
+      "presetName": "Active Details",
+      "message": "Use the active prop to change the style of the label value.",
       "type": "info"
     }
   }

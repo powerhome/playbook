@@ -1,10 +1,8 @@
 {
-  "template": "<LabelPill{{props}} />",
-  "propTargets": {},
   "defaults": {
-    "variant": "neutral",
     "label": "Service Needed",
-    "pillValue": "76"
+    "pillValue": "76",
+    "variant": "neutral"
   },
   "groups": [
     {
