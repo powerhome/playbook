@@ -6,7 +6,7 @@ const IconDefault = (props) => {
     <div>
       <Icon
           fixedWidth
-          icon="user"
+          icon="frog"
           {...props}
       />
     </div>
