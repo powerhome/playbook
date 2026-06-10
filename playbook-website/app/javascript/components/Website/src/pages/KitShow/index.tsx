@@ -126,6 +126,7 @@ const KitShow = () => {
     "fixed_confirmation_toast",
     "flex",
     "form_pill",
+    "hashtag",
     "link",
     "title",
     "title_detail",

@@ -1,35 +1,27 @@
 {
-  "template": "<Hashtag{{props}} />",
-  "propTargets": {},
+  "children": {
+    "editable": false,
+    "default": ""
+  },
   "defaults": {
-    "newWindow": false,
-    "type": "project",
     "text": "470297",
+    "type": "project",
     "url": "https://google.com",
+    "newWindow": false,
     "dark": false
   },
   "groups": [
     {
       "name": "Content",
-      "props": [
-        "text",
-        "type"
-      ]
+      "props": ["text", "type"]
     },
     {
       "name": "Link",
-      "props": [
-        "url",
-        "target",
-        "newWindow",
-        "rel"
-      ]
+      "props": ["url", "target", "newWindow", "rel"]
     },
     {
       "name": "Appearance",
-      "props": [
-        "dark"
-      ]
+      "props": ["dark"]
     }
   ],
   "presets": [
@@ -76,16 +68,8 @@
     }
   ],
   "conditionals": {
-    "target": {
-      "requires": "url"
-    },
-    "rel": {
-      "requires": "url"
-    }
+    "target": { "requires": "url" },
+    "rel": { "requires": "url" }
   },
-  "hints": {},
-  "children": {
-    "editable": false,
-    "default": ""
-  }
+  "hints": {}
 }
