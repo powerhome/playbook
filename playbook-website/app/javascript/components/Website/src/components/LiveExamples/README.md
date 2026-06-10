@@ -7,6 +7,10 @@ This folder contains components for rendering live, interactive code examples in
 - **LiveExampleReact.tsx** - Renders React code examples using [react-live](https://github.com/FormidableLabs/react-live). Strips imports, injects Playbook components and third-party libraries into scope, and renders the component live.
 - **LiveExampleRails.tsx** - Renders pre-rendered Rails/ERB examples as static HTML.
 
+Both renderers guard against doc examples that contain placeholder
+`href="#"` links so those examples do not unexpectedly change the website
+scroll position.
+
 ## ThirdPartyLoaders
 
 The `ThirdPartyLoaders/` folder contains dynamic loaders for third-party libraries used in doc examples. Since `react-live` executes code in a sandboxed scope, external imports don't work directly. Instead, we detect which libraries an example needs and dynamically load them into the scope.

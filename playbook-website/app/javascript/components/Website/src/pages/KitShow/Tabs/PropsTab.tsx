@@ -1,9 +1,9 @@
 import { Body, Card, Flex } from "playbook-ui";
-import KitProps from "../../../../../AvailableProps/kitProps";
-import GlobalProps from "../../../../../AvailableProps/globalProps";
+import KitProps from "../../../components/AvailableProps/kitProps";
+import GlobalProps from "../../../components/AvailableProps/globalProps";
 import { useState } from "react";
 import { Nav, NavItem, SectionSeparator } from "playbook-ui";
-import globalPropsValues from "../../../../../AvailableProps/globalPropsValues";
+import globalPropsValues from "../../../components/AvailableProps/globalPropsValues";
 import { useDarkMode } from "../../../contexts/DarkModeContext";
 interface PropsTabProps {
   availableProps?: string;

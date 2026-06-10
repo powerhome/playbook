@@ -1,3 +1,53 @@
+#  🪄 Forms With Better Memory
+##### June 04, 2026
+
+![release_image](https://github.com/user-attachments/assets/db119637-25e9-4157-9091-c5f7fdf034fc)
+
+Resetting forms just got a little smarter.
+
+Rails Text Input, Select, Date Picker, and Dropdown kits now emit default value metadata that Nitro can use to restore initial values after reset actions. Support for nitro_search_playbook_filter coming soon as well! React Date Picker and Dropdown have been aligned with the same behavior!
+
+[16.9.0](https://github.com/powerhome/playbook/tree/16.9.0) full list of changes:
+
+**Improvements:**
+
+- Update Deployer Image Tag to One That Exists [\#6258](https://github.com/powerhome/playbook/pull/6258) ([c-gerke](https://github.com/c-gerke))
+- Playbook Website: Sticky Header Docs W/ New Site Layout [\#6232](https://github.com/powerhome/playbook/pull/6232) ([kangaree](https://github.com/kangaree))
+- Upgrades Playbook Icons [\#6231](https://github.com/powerhome/playbook/pull/6231) ([elisashapiro](https://github.com/elisashapiro))
+- Advanced Table: Docs for Enable Toggle Expansion [\#6229](https://github.com/powerhome/playbook/pull/6229) ([nidaqg](https://github.com/nidaqg))
+- Playbook Website: Fix Small Expand-all and Sort Icons In Rails Advanced Table Header [\#6222](https://github.com/powerhome/playbook/pull/6222) ([elisashapiro](https://github.com/elisashapiro))
+- Pb Website: Add Link to Alpha Commit Testing Implementation to Markdown [\#6221](https://github.com/powerhome/playbook/pull/6221) ([elisashapiro](https://github.com/elisashapiro))
+- Playbook Website: Remove Legacy Views [\#6212](https://github.com/powerhome/playbook/pull/6212) ([nidaqg](https://github.com/nidaqg))
+- Playbook Website: Advanced Table Doc: Sticky Header and Column Scroll Limitation [\#6210](https://github.com/powerhome/playbook/pull/6210) ([kangaree](https://github.com/kangaree))
+- Pb Website: Remove Fa from Playbook Website [\#6209](https://github.com/powerhome/playbook/pull/6209) ([elisashapiro](https://github.com/elisashapiro))
+- Circle Chart: Centered Subtitle Pattern Doc Example [\#6201](https://github.com/powerhome/playbook/pull/6201) ([nickamantia](https://github.com/nickamantia))
+- Playbook Website: Kit Svg Vs Icon Collisions [\#6203](https://github.com/powerhome/playbook/pull/6203) ([elisashapiro](https://github.com/elisashapiro))
+- Pb Website: Rename Alert Banner Building Block to Notification Banner [\#6186](https://github.com/powerhome/playbook/pull/6186) ([edwardsaleeby](https://github.com/edwardsaleeby))
+- Advanced Table Kit: Column Styling Width Props - React [\#6182](https://github.com/powerhome/playbook/pull/6182) ([kangaree](https://github.com/kangaree))
+- Updated Ci-kubed to V10.2.0 [\#6192](https://github.com/powerhome/playbook/pull/6192) ([nidaqg](https://github.com/nidaqg))
+- Pb Website: Kit & Category Browsing Layout, Thumbnails, and Kit Show Page Side Nav Scroll [\#6181](https://github.com/powerhome/playbook/pull/6181) ([edwardsaleeby](https://github.com/edwardsaleeby))
+- Ruby 3.3.11 Upgrade [\#6171](https://github.com/powerhome/playbook/pull/6171) ([elisashapiro](https://github.com/elisashapiro))
+
+**Kit Enhancements:**
+
+- Message: Message Mentions Are Smaller to Avoid Overlaps [\#6246](https://github.com/powerhome/playbook/pull/6246) ([elisashapiro](https://github.com/elisashapiro))
+- Date Picker: Expose Data-default-value for Smart Filter Reset \(part 2\) - React & Rails [\#6220](https://github.com/powerhome/playbook/pull/6220) ([kangaree](https://github.com/kangaree))
+- Timepicker: Rails Refactored to Enhanced Element [\#6238](https://github.com/powerhome/playbook/pull/6238) ([elisashapiro](https://github.com/elisashapiro))
+- Input Kits: Expose Data-default-value for Smart Filter Reset \(part 1\) - React & Rails [\#6219](https://github.com/powerhome/playbook/pull/6219) ([kangaree](https://github.com/kangaree))
+- Draggable Kit: Optimize for Mobile Interactions - React and Rails [\#6193](https://github.com/powerhome/playbook/pull/6193) ([kangaree](https://github.com/kangaree))
+
+**Fixed Bugs:**
+
+- Playbook Ci/cd: Bump Up Powerhome/ci-kubed For Versioned Tags [\#6247](https://github.com/powerhome/playbook/pull/6247) ([kangaree](https://github.com/kangaree))
+- Playbook Website: Fix Datepicker Rendering In Rails Filter Docs [\#6245](https://github.com/powerhome/playbook/pull/6245) ([nidaqg](https://github.com/nidaqg))
+- Playbook Website: Fix Dropdown and Popup Clipping In Playbook Website Documentation Examples [\#6230](https://github.com/powerhome/playbook/pull/6230) ([nidaqg](https://github.com/nidaqg))
+- Datepicker: Resolve Datepickerhelper Is Not Defined Console Error [\#6211](https://github.com/powerhome/playbook/pull/6211) ([elisashapiro](https://github.com/elisashapiro))
+- Textinput: Update Textinput Addon Styles for Consistent Disabled State [\#6200](https://github.com/powerhome/playbook/pull/6200) ([elisashapiro](https://github.com/elisashapiro))
+- Currency Kit: Display Updates for Leading Zeros, Null Display, and Negative Numbers [\#6194](https://github.com/powerhome/playbook/pull/6194) ([elisashapiro](https://github.com/elisashapiro))
+
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/v16.9.0-rc.5...16.9.0)
+
 # 🧹 We Removed Some Ancient Curses
 ##### May 18, 2026
 

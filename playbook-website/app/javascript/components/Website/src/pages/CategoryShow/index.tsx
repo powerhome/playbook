@@ -53,7 +53,7 @@ export default function CategoryShow() {
           marginBottom={{ xs: "sm", sm: "sm", md: "sm", lg: "none" }}
           marginTop="sm"
         >
-          <NavLink to="/beta/kits">
+          <NavLink to="/kits">
             <Body className="previous-route" color="link">
               <b>All Components</b>
             </Body>

@@ -2,7 +2,9 @@ React: Use `sticky` on a table to allow the table header to be fixed in place wh
 
 Rails: Pass `sticky: true` to props.
 
-If the table header is not sticking in the right place you will need to pass a inline `top` style to the `thead`.
+The live example uses a scroll container so sticky behavior is visible in the docs. Scroll inside the preview to see it.
+
+If the table header is not sticking in the right place you will need to pass an inline `top` style to the `thead`. This is often needed when a parent adds padding above the table.
 React Example: `<thead style={{ top: "-16px" }}>`
 Rails Example: `<thead style="top: -16px">`
 

@@ -28,6 +28,58 @@ import {
     positionDropdownPortalToWrapper,
     subscribeFloatingKitReposition,
 } from "../utilities/floatingPortalHosts";
+        
+function serializeDropdownFilterResetDefault(
+    variant: "default" | "subtle" | "quickpick" | undefined,
+    multiSelect: boolean,
+    defaultValue: GenericObject | GenericObject[] | string | undefined,
+    dropdownOptions: GenericObject[] | GenericObject | undefined,
+): string | undefined {
+    const optionList: GenericObject[] = Array.isArray(dropdownOptions)
+        ? dropdownOptions
+        : [];
+    const optionDefaultId = (option: GenericObject | undefined): string | undefined => {
+        if (!option) return undefined;
+
+        const id = option.id;
+        if (id != null && id !== "") return String(id);
+
+        const matched = optionList.find((listOption: GenericObject) => (
+            (option.value != null && listOption.value === option.value) ||
+            (option.label != null && listOption.label === option.label)
+        ));
+
+        if (matched?.id != null && matched.id !== "") return String(matched.id);
+        return undefined;
+    };
+
+    if (variant === "quickpick") {
+        if (typeof defaultValue === "string" && defaultValue) {
+            const matched = optionList.find(
+                (opt: GenericObject) => opt.label?.toLowerCase() === defaultValue.toLowerCase()
+            );
+            if (matched?.id != null && matched.id !== "") return String(matched.id);
+        }
+        return undefined;
+    }
+    if (multiSelect) {
+        const arr = Array.isArray(defaultValue)
+            ? defaultValue
+            : defaultValue && typeof defaultValue === "object" && Object.keys(defaultValue).length
+                ? [defaultValue as GenericObject]
+                : [];
+        if (!arr.length) return undefined;
+        const ids = arr
+            .map((v) => optionDefaultId(v as GenericObject))
+            .filter((id) => id != null && id !== "");
+        return ids.length ? ids.join(",") : undefined;
+    }
+    if (defaultValue && typeof defaultValue === "object" && !Array.isArray(defaultValue)) {
+        const id = optionDefaultId(defaultValue as GenericObject);
+        if (id) return id;
+    }
+    return undefined;
+}
 
 type CustomQuickPickDate = {
     label: string;
@@ -169,6 +221,11 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
 
     const [selected, setSelected] = useState<GenericObject | GenericObject[]>(
       initialSelected
+    );
+
+    const filterResetDefaultSerialized = useMemo(
+        () => serializeDropdownFilterResetDefault(variant, multiSelect, defaultValue, dropdownOptions),
+        [variant, multiSelect, defaultValue, dropdownOptions]
     );
 
     const [isInputFocused, setIsInputFocused] = useState(false);
@@ -491,6 +548,7 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
         <div {...ariaProps}
             {...dataProps}
             {...htmlProps}
+            {...(filterResetDefaultSerialized ? { "data-default-value": filterResetDefaultSerialized } : {})}
             className={classes}
             id={id}
             ref={outerDivRef}

@@ -9,10 +9,13 @@ module Playbook
         html_id = "#{prefix}_#{name}"
 
         if props[:label] == true
-          props[:label] = name.to_s.humanize
-        elsif props[:label].nil?
-          props[:label] = "Time Picker"
+          props[:label] = if @object && @object.class.respond_to?(:human_attribute_name)
+                            @object.class.human_attribute_name(name)
+                          else
+                            name.to_s.humanize
+                          end
         end
+        props[:label] = "Time Picker" if props[:label].nil?
 
         props[:name] = html_attribute_name
         props[:id] = html_id

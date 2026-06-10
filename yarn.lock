@@ -3170,15 +3170,15 @@
   resolved "https://npm.powerapp.cloud/@powerhome/eslint-config/-/eslint-config-0.1.0.tgz#f1e1151481f51421186ba8caad99fadb24b1fe51"
   integrity sha512-8e5DRgnKPbJ+ofAtqjUPZTxcgHg/TVf52WeNqAGBUXSS4QWHemL6fj1n/YHfAIvx3aMUhFwrw2lUNofUocgK3A==
 
-"@powerhome/playbook-icons-react@2.1.0":
-  version "2.1.0"
-  resolved "https://npm.powerapp.cloud/@powerhome/playbook-icons-react/-/4977fa273a6b6b882370a3c67c667b32b4d0e5ac#4977fa273a6b6b882370a3c67c667b32b4d0e5ac"
-  integrity sha512-O29A6HNzjg+MT+afZkOjQ40LDiJjMC4axwXNM5iivcwAOvnPa9cu4lzrGereEI8LigtTxSLqfzfKhkuYRcDzWQ==
+"@powerhome/playbook-icons-react@2.3.0":
+  version "2.3.0"
+  resolved "https://npm.powerapp.cloud/@powerhome/playbook-icons-react/-/42482e741e797d3dac4f5822547f0d60a1f0f08d#42482e741e797d3dac4f5822547f0d60a1f0f08d"
+  integrity sha512-Y4h7AXK7oKu0vQNCPPnk6pHcFrhqkQsEWGJ/DVyQSgk0C2Yug6FwHVQI/rYz3b5KBakDV0LPNuIk59WAb9CUHw==
 
-"@powerhome/playbook-icons@2.1.0":
-  version "2.1.0"
-  resolved "https://npm.powerapp.cloud/@powerhome/playbook-icons/-/f3cd9f00a21a910ad1850ae28ccaf941cc30ff4a#f3cd9f00a21a910ad1850ae28ccaf941cc30ff4a"
-  integrity sha512-2PLmXoGeRW+fgFIroUz31FUQTm4laPg1Si3YwjVd5PRFwhKGI5gy+wRVeH0adAcxwTT5xIQK1bAC6xGW9B+PYw==
+"@powerhome/playbook-icons@2.3.0":
+  version "2.3.0"
+  resolved "https://npm.powerapp.cloud/@powerhome/playbook-icons/-/79b343cdacdb02fba7a1f25a835e3b6386a77549#79b343cdacdb02fba7a1f25a835e3b6386a77549"
+  integrity sha512-VBBWr7ZS47SD97Zg0LYlQOjWufFaaZ5eMJxKlAulSYqJ7GwKgvhYigR6fe8T0x/hyF5k6K72dVLxlBYVkIHSuQ==
 
 "@powerhome/power-fonts@0.0.1":
   version "0.0.1"
@@ -4215,11 +4215,6 @@ ajv@^6.10.0, ajv@^6.10.2, ajv@^6.12.5:
     fast-json-stable-stringify "^2.0.0"
     json-schema-traverse "^0.4.1"
     uri-js "^4.2.2"
-
-anchor-js@^5.0.0:
-  version "5.0.0"
-  resolved "https://npm.powerapp.cloud/anchor-js/-/anchor-js-5.0.0.tgz#e096bb1c6b76c31b41f8ff0966289af26fae87e7"
-  integrity sha512-2bOqCsBIXAYhjAN3iI4QevoAJtB2gRWAiY9P3P7CVW8lIjA3Dl6ldhDlWeeQvCHif+V5vIndfLOag/5I8tzTzA==
 
 ansi-colors@^4.1.1:
   version "4.1.3"

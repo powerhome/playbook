@@ -89,6 +89,8 @@ module Playbook
                            default: ""
       prop :cursor, type: Playbook::Props::String,
                     default: "pointer"
+      prop :year_ascending, type: Playbook::Props::Boolean,
+                            default: false
 
       def classname
         default_margin_bottom = margin_bottom.present? ? "" : " mb_sm"
@@ -122,6 +124,7 @@ module Playbook
           staticPosition: static_position,
           thisRangesEndToday: this_ranges_end_today,
           yearRange: year_range,
+          yearAscending: year_ascending,
           controlsStartId: controls_start_id,
           controlsEndId: controls_end_id,
           syncStartWith: sync_start_with,
@@ -144,6 +147,18 @@ module Playbook
 
       def angle_down_path
         "app/pb_kits/playbook/utilities/icons/angle-down.svg"
+      end
+
+      # Serialized business default for opt-in smart filter reset (Nitro / data-default-value).
+      def serialized_default_date_for_dom
+        case default_date
+        when nil, ""
+          nil
+        when Array
+          default_date.compact_blank.map(&:to_s).join(",")
+        else
+          default_date.to_s.presence
+        end
       end
     end
   end

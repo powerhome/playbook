@@ -1,6 +1,7 @@
 import { Caption, Flex, colors } from "playbook-ui";
 import { useState, useEffect, useRef, useMemo } from "react";
 import { useDarkMode } from "../../../contexts/DarkModeContext";
+import { MAIN_CONTENT_SCROLL_SELECTOR, scrollToAnchor } from "../anchors";
 import "./styles.scss";
 
 /** Matches `DocsTab` / kit YAML `sections` entries. */
@@ -32,9 +33,6 @@ function examplesForSection(
 ): KitDocExample[] {
   return examples.filter((ex) => section.examples.includes(ex.example_key));
 }
-
-// Main scroll column for the website shell (`website_new.scss` / `LayoutRight`).
-const MAIN_CONTENT_SCROLL_SELECTOR = ".pb--page--content--main";
 
 /** Fixed rail width; keep in sync with `htmlOptions.style.width` / `minWidth` / `maxWidth` below. */
 const DOC_RIGHT_NAV_WIDTH_PX = 206;
@@ -148,10 +146,7 @@ const RightSideNav = ({ examples, sections }: RightSideNavProps) => {
   const handleClick = (id: string) => {
     isManualScrollRef.current = true;
     setActiveId(id);
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
+    scrollToAnchor(id);
     setTimeout(() => {
       isManualScrollRef.current = false;
     }, 1000);

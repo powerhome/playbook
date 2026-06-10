@@ -131,23 +131,24 @@
 %>
 
 <%= pb_form_with(scope: :example, url: "", method: :get, validate: true) do |form| %>
-  <%= form.typeahead :example_typeahead_field, props: { label: true, required: true, required_indicator: true } %>
-  <%= form.text_field :example_text_field, props: { label: true, required: true, required_indicator: true } %>
-  <%= form.text_field :example_text_field_2, props: { label: "Text Field Custom Label", required: true, required_indicator: true } %>
-  <%= form.phone_number_field :example_phone_number_field, props: { label: true, required: true, required_indicator: true } %>
-  <%= form.email_field :example_email_field, props: { label: true, required: true, required_indicator: true } %>
-  <%= form.number_field :example_number_field, props: { label: true, required: true, required_indicator: true } %>
-  <%= form.search_field :example_search_field, props: { label: true, required: true, required_indicator: true } %>
-  <%= form.password_field :example_password_field, props: { label: true, required: true, required_indicator: true } %>
-  <%= form.url_field :example_url_field, props: { label: true, required: true, required_indicator: true } %>
-  <%= form.text_area :example_text_area, props: { label: true, required: true, required_indicator: true } %>
-  <%= form.text_area :example_text_area_2, props: { label: "Textarea Custom Label", required: true, required_indicator: true } %>
-  <%# form.check_box :example_checkbox, props: { label: true, text: "Checkbox Label", required: true, required_indicator: true } %>
-  <%= form.time_picker :example_time_picker_required_indicator, props: { label: true, required: true, required_indicator: true } %>
-  <%= form.date_picker :example_date_picker_required_indicator, props: { label: true, required: true, required_indicator: true } %>
-  <%= form.date_picker :example_date_picker_required_indicator_custom, props: { label: "Custom Date Picker Label", required: true, required_indicator: true } %>
+  <%= form.typeahead :example_typeahead_required_indicator, props: { label: true, required: true, required_indicator: true } %>
+  <%= form.text_field :example_text_field_required_indicator, props: { label: true, required: true, required_indicator: true } %>
+  <%= form.text_field :example_text_field_required_indicator_custom, props: { label: "Text Field Custom Label", required: true, required_indicator: true } %>
+  <%= form.phone_number_field :example_phone_number_field_required_indicator, props: { label: true, required: true, required_indicator: true } %>
+  <%= form.email_field :example_email_field_required_indicator, props: { label: true, required: true, required_indicator: true } %>
+  <%= form.number_field :example_number_field_required_indicator, props: { label: true, required: true, required_indicator: true } %>
+  <%= form.search_field :example_search_field_required_indicator, props: { label: true, required: true, required_indicator: true } %>
+  <%= form.password_field :example_password_field_required_indicator, props: { label: true, required: true, required_indicator: true } %>
+  <%= form.url_field :example_url_field_required_indicator, props: { label: true, required: true, required_indicator: true } %>
+  <%= form.text_area :example_text_area_required_indicator, props: { label: true, required: true, required_indicator: true } %>
+  <%= form.text_area :example_text_area_required_indicator_custom, props: { label: "Textarea Custom Label", required: true, required_indicator: true } %>
+  <%= form.dropdown_field :example_dropdown_required_indicator, props: { label: true, options: example_dropdown_options, required: true, required_indicator: true } %>
+  <%= form.dropdown_field :example_dropdown_required_indicator_multi, props: { label: "Dropdown Custom Label", options: example_dropdown_options, multi_select: true, required: true, required_indicator: true } %>
   <%= form.select :example_select_required_indicator, [["Yes", 1], ["No", 2]], props: { label: true, required: true, required_indicator: true } %>
-  <%= form.select :example_select_required_indicator_2, [["Yes", 1], ["No", 2]], props: { label: "Example Select Field", required: true, required_indicator: true } %>
+  <%= form.select :example_select_required_indicator_custom, [["Yes", 1], ["No", 2]], props: { label: "Example Select Field", required: true, required_indicator: true } %>
+  <%# form.check_box :example_checkbox_required_indicator, props: { label: true, text: "Checkbox Label", required: true, required_indicator: true } %>
+  <%= form.date_picker :example_date_picker_required_indicator, props: { label: true, required: true, required_indicator: true } %>
+  <%= form.date_picker :example_date_picker_required_indicator_custom, props: { label: "Date Picker Custom Label", required: true, required_indicator: true } %>
   <%= form.multi_level_select :example_multi_level_select_required_indicator, props: {
     label: true,
     margin_y: 'sm',
@@ -156,14 +157,14 @@
     tree_data: tree_data
   } %>
   <%= form.multi_level_select :example_multi_level_select_required_indicator_custom, props: {
-    label: "Custom Multi Level Select Label",
+    label: "Multi Level Select Custom Label",
     margin_y: 'sm',
     required: true,
     required_indicator: true,
     tree_data: tree_data
   } %>
-  <%= form.dropdown_field :example_dropdown, props: { label: true, options: example_dropdown_options, required: true, required_indicator: true } %>
-  <%= form.dropdown_field :example_dropdown_2, props: { label: "Dropdown Custom Label", options: example_dropdown_options, required: true, required_indicator: true } %>
+  <%= form.time_picker :example_time_picker_required_indicator, props: { label: true, required: true, required_indicator: true } %>
+  <%= form.time_picker :example_time_picker_required_indicator_custom, props: { label: "Time Picker Custom Label", required: true, required_indicator: true } %>
 
   <%= form.actions do |action| %>
     <%= action.submit %>

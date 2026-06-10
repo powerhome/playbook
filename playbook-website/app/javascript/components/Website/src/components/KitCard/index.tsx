@@ -24,7 +24,7 @@ export const KitCard = ({
   platform,
   parent,
 }: KitCardProps) => {
-  const { kits } = useRouteLoaderData("beta-site") as {
+  const { kits } = useRouteLoaderData("site") as {
     kits: KitCategory[];
   };
 
@@ -43,9 +43,9 @@ export const KitCard = ({
     parent?: string;
   }) => {
     if (parent && parent === "advanced_table") {
-      return `/beta/kits/advanced_table/${componentName}/${platform}`;
+      return `/kits/advanced_table/${componentName}/${platform}`;
     }
-    return `/beta/kits/${componentName}/${platform}`;
+    return `/kits/${componentName}/${platform}`;
   };
   const previewSrc = getKitPreview({
     category: kitCategory?.category,
