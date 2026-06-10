@@ -1,38 +1,29 @@
 {
-  "template": "<FormPill{{props}} />",
-  "propTargets": {},
+  "children": {
+    "editable": false,
+    "default": ""
+  },
   "defaults": {
-    "textTransform": "none",
-    "color": "primary",
-    "wrapped": false,
     "text": "This is a tag",
+    "color": "primary",
+    "textTransform": "none",
+    "wrapped": false,
     "tabIndex": 0,
     "onClick": "() => alert('Click!')"
   },
+  "hiddenProps": ["onClick", "closeProps", "avatar"],
   "groups": [
     {
       "name": "Content",
-      "props": [
-        "text",
-        "name",
-        "icon",
-        "avatarUrl"
-      ]
+      "props": ["text", "name", "icon", "avatarUrl"]
     },
     {
       "name": "Appearance",
-      "props": [
-        "color",
-        "size",
-        "textTransform",
-        "wrapped"
-      ]
+      "props": ["color", "size", "textTransform", "wrapped"]
     },
     {
       "name": "Interaction",
-      "props": [
-        "tabIndex"
-      ]
+      "props": ["tabIndex"]
     }
   ],
   "presets": [
@@ -119,9 +110,7 @@
     }
   ],
   "conditionals": {
-    "avatarUrl": {
-      "requires": "name"
-    }
+    "avatarUrl": { "requires": "name" }
   },
   "hints": {
     "close_button": {
@@ -130,48 +119,29 @@
       "type": "info"
     },
     "wrapped_text": {
-      "when": {
-        "wrapped": true
-      },
+      "when": { "wrapped": true },
       "message": "Wrapped pills expand to multiple lines instead of truncating long labels.",
       "type": "info"
     },
     "user_with_avatar": {
-      "when": {
-        "avatarUrl": "https://randomuser.me/api/portraits/women/44.jpg"
-      },
+      "when": { "avatarUrl": "https://randomuser.me/api/portraits/women/44.jpg" },
       "message": "The avatar is displayed when the avatarUrl is set. Name is required for avatar display.",
       "type": "info"
     },
     "user_without_avatar": {
-      "when": {
-        "avatarUrl": ""
-      },
+      "when": { "avatarUrl": "" },
       "message": "The name is displayed when the avatarUrl is not set.",
       "type": "info"
     },
     "lowercase": {
-      "when": {
-        "textTransform": "lowercase"
-      },
+      "when": { "textTransform": "lowercase" },
       "message": "The text is displayed in lowercase when the textTransform is set to lowercase.",
       "type": "info"
     },
     "success": {
-      "when": {
-        "color": "success"
-      },
+      "when": { "color": "success" },
       "message": "The pill is displayed in success color when the color is set to success. See the color variants section for more information on colors available.",
       "type": "info"
     }
-  },
-  "children": {
-    "editable": false,
-    "default": ""
-  },
-  "hiddenProps": [
-    "onClick",
-    "closeProps",
-    "avatar"
-  ]
+  }
 }
