@@ -261,6 +261,7 @@ export const DocsTab = ({ examples, exampleProps, sections }: DocsTabProps) => {
               width: "100%",
               maxWidth: "100%",
               minWidth: 0,
+              overflowX: "visible", 
             }}
           >
             <Title
@@ -305,6 +306,7 @@ export const DocsTab = ({ examples, exampleProps, sections }: DocsTabProps) => {
           boxSizing: "border-box",
           maxWidth: "100%",
           minWidth: 0,
+          
         },
       }}
     >

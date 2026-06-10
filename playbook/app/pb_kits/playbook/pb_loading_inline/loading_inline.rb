@@ -6,6 +6,9 @@ module Playbook
       prop :align, type: Playbook::Props::Enum,
                    values: %w[left center right],
                    default: "left"
+      prop :color, type: Playbook::Props::Enum,
+                   values: %w[default light lighter link error success],
+                   default: "light"
       prop :dark, type: Playbook::Props::Boolean, default: false
       prop :text, type: Playbook::Props::String, default: "Loading"
       prop :variant, type: Playbook::Props::Enum,

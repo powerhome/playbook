@@ -4,6 +4,7 @@ examples:
   - loading_inline_default: Default
   - loading_inline_custom: Custom Text
   - loading_inline_variant: Variant
+  - loading_inline_color: Color
 
   
   
@@ -11,3 +12,4 @@ examples:
   - loading_inline_default: Default
   - loading_inline_custom: Custom Text
   - loading_inline_variant: Variant
+  - loading_inline_color: Color
