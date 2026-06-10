@@ -1,12 +1,7 @@
 {
-  "template": "<Highlight{{props}} />",
-  "propTargets": {},
   "defaults": {
     "text": "Use Highlight to call attention to important words in a sentence.",
-    "highlightedText": [
-      "Highlight",
-      "important"
-    ]
+    "highlightedText": ["Highlight", "important"]
   },
   "groups": [
     {
@@ -22,48 +17,35 @@
       "name": "Default",
       "props": {
         "text": "Use Highlight to call attention to important words in a sentence.",
-        "highlightedText": [
-          "Highlight",
-          "important"
-        ]
+        "highlightedText": ["Highlight", "important"]
       }
     },
     {
       "name": "Multiple Words",
       "props": {
         "text": "Search results can highlight owner, address, and status matches at the same time.",
-        "highlightedText": [
-          "owner",
-          "address",
-          "status"
-        ]
+        "highlightedText": ["owner", "address", "status"]
       }
     },
     {
       "name": "Phrase Match",
       "props": {
         "text": "The highlight kit can match a complete phrase inside longer text.",
-        "highlightedText": [
-          "complete phrase"
-        ]
+        "highlightedText": ["complete phrase"]
       }
     },
     {
       "name": "Repeated Term",
       "props": {
         "text": "Highlight repeats highlight matches wherever highlight appears.",
-        "highlightedText": [
-          "highlight"
-        ]
+        "highlightedText": ["highlight"]
       }
     },
     {
       "name": "No Match",
       "props": {
         "text": "This sentence renders without any highlighted text.",
-        "highlightedText": [
-          "missing"
-        ]
+        "highlightedText": ["missing"]
       }
     }
   ],

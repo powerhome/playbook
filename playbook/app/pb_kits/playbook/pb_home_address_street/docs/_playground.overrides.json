@@ -1,10 +1,5 @@
 {
-  "template": "<HomeAddressStreet{{props}} />",
-  "propTargets": {},
   "defaults": {
-    "preserveCase": false,
-    "emphasis": "street",
-    "newWindow": false,
     "address": "70 Prospect Ave",
     "addressCont": "Apt M18",
     "city": "West Chester",
@@ -13,7 +8,10 @@
     "territory": "PHL",
     "houseStyle": "Colonial",
     "homeId": "8250263",
-    "homeUrl": "https://powerhrg.com/"
+    "homeUrl": "https://powerhrg.com/",
+    "emphasis": "street",
+    "preserveCase": false,
+    "newWindow": false
   },
   "groups": [
     {
