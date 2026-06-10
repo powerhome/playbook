@@ -1,11 +1,28 @@
 {
-  "template": "<IconCircle{{props}} />",
-  "propTargets": {},
   "defaults": {
+    "icon": "rocket",
     "size": "md",
     "variant": "default",
-    "icon": "rocket",
     "dark": false
+  },
+  "customProps": {
+    "variant": {
+      "type": "enum",
+      "platforms": ["react"],
+      "values": [
+        "default",
+        "royal",
+        "blue",
+        "purple",
+        "teal",
+        "red",
+        "yellow",
+        "orange",
+        "green",
+        "lighter"
+      ],
+      "default": "default"
+    }
   },
   "groups": [
     {
@@ -86,27 +103,6 @@
       "presetName": "Emoji",
       "message": "Use the icon prop to render an emoji as well.",
       "type": "info"
-    }
-  },
-  "customProps": {
-    "variant": {
-      "type": "enum",
-      "platforms": [
-        "react"
-      ],
-      "values": [
-        "default",
-        "royal",
-        "blue",
-        "purple",
-        "teal",
-        "red",
-        "yellow",
-        "orange",
-        "green",
-        "lighter"
-      ],
-      "default": "default"
     }
   }
 }

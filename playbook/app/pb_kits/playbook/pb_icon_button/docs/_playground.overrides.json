@@ -1,12 +1,16 @@
 {
-  "template": "<IconButton{{props}} />",
-  "propTargets": {},
   "defaults": {
     "icon": "bars",
-    "newWindow": false,
     "size": "2x",
     "variant": "default",
-    "htmlType": "button"
+    "htmlType": "button",
+    "newWindow": false
+  },
+  "customProps": {
+    "onClick": {
+      "type": "function",
+      "platforms": ["react"]
+    }
   },
   "groups": [
     {
@@ -122,14 +126,6 @@
       "presetName": "Submit",
       "message": "htmlType controls the native button type for form use cases.",
       "type": "info"
-    }
-  },
-  "customProps": {
-    "onClick": {
-      "type": "function",
-      "platforms": [
-        "react"
-      ]
     }
   }
 }
