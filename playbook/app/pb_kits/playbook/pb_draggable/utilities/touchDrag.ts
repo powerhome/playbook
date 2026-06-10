@@ -205,18 +205,30 @@ export const bindTouchDrag = ({
   };
 };
 
+const DRAG_INTERACTION_EXCLUDE_SELECTOR = '.pb_form_pill_close';
+
 const isHandleEventTarget = (target: EventTarget | null): boolean => {
   return Boolean((target as Element | null)?.closest(DRAG_HANDLE_SELECTOR));
 };
 
-export const bindMouseHandleDrag = ({
+const isExcludedDragTarget = (target: EventTarget | null): boolean => {
+  return Boolean((target as Element | null)?.closest(DRAG_INTERACTION_EXCLUDE_SELECTOR));
+};
+
+type MousePointerDragOptions = TouchDragOptions & {
+  allowWholeItem?: boolean;
+};
+
+export const bindMousePointerDrag = ({
   dragId,
   container,
   itemElement,
   handlers,
-}: TouchDragOptions): (() => void) => {
+  allowWholeItem = false,
+}: MousePointerDragOptions): (() => void) => {
   const hasHandle = Boolean(itemElement.querySelector(DRAG_HANDLE_SELECTOR));
-  if (!hasHandle) {
+
+  if (!hasHandle && !allowWholeItem) {
     return () => undefined;
   }
 
@@ -231,7 +243,13 @@ export const bindMouseHandleDrag = ({
 
   const handleMouseDown = (event: MouseEvent) => {
     if (event.button !== 0) return;
-    if (!isHandleEventTarget(event.target)) return;
+    if (isExcludedDragTarget(event.target)) return;
+
+    if (hasHandle) {
+      if (!isHandleEventTarget(event.target)) return;
+    } else if (!itemElement.contains(event.target as Node)) {
+      return;
+    }
 
     // stopPropagation only — preventDefault here blocks HTML5 drag on ancestors
     event.stopPropagation();
@@ -272,3 +290,5 @@ export const bindMouseHandleDrag = ({
     document.removeEventListener('mouseup', handleMouseUp);
   };
 };
+
+export const bindMouseHandleDrag = bindMousePointerDrag;

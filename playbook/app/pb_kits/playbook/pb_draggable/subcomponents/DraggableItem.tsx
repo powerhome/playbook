@@ -9,7 +9,7 @@ import {
 import { globalProps } from "../../utilities/globalProps";
 import { DraggableContext } from "../context";
 import { noop } from '../../utilities/object'
-import { bindMouseHandleDrag, bindTouchDrag, isTouchDragDevice } from "../utilities/touchDrag";
+import { bindMousePointerDrag, bindTouchDrag, isTouchDragDevice } from "../utilities/touchDrag";
 
 type DraggableItemProps = {
   aria?: { [key: string]: string };
@@ -27,6 +27,7 @@ type DraggableItemProps = {
   onDragStart?: () => void,
   onDrop?: () => void,
   dragId?: string;
+  pointerDrag?: boolean;
   tag?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'span' | 'div' | 'tr' | 'th' | 'td' | 'thead' | 'col' | 'tbody',
 };
 
@@ -48,6 +49,7 @@ const DraggableItem = (props: DraggableItemProps) => {
     onDragOver = noop,
     onDragStart = noop,
     onDrop = noop,
+    pointerDrag = false,
   } = props;
 
   const {
@@ -63,7 +65,7 @@ const DraggableItem = (props: DraggableItemProps) => {
 
   const itemRef = React.useRef<HTMLElement>(null);
   const [useTouchDrag, setUseTouchDrag] = React.useState(false);
-  const [useHandleMouseDrag, setUseHandleMouseDrag] = React.useState(false);
+  const [usePointerMouseDrag, setUsePointerMouseDrag] = React.useState(false);
   const handlersRef = React.useRef({
     handleDragStart,
     handleDragEnter,
@@ -118,8 +120,8 @@ const DraggableItem = (props: DraggableItemProps) => {
     const hasHandle = Boolean(itemRef.current?.querySelector('.pb_draggable_handle, .card_draggable_handle'));
 
     setUseTouchDrag(touchMode);
-    setUseHandleMouseDrag(hasHandle && !touchMode);
-  }, [dragId, container, children]);
+    setUsePointerMouseDrag(!touchMode && (hasHandle || pointerDrag));
+  }, [dragId, container, children, pointerDrag]);
 
   React.useEffect(() => {
     if (!useTouchDrag || !itemRef.current || !dragId) return;
@@ -133,15 +135,18 @@ const DraggableItem = (props: DraggableItemProps) => {
   }, [useTouchDrag, dragId, container, dragHandlers]);
 
   React.useEffect(() => {
-    if (!useHandleMouseDrag || !itemRef.current || !dragId) return;
+    if (!usePointerMouseDrag || !itemRef.current || !dragId) return;
 
-    return bindMouseHandleDrag({
+    const hasHandle = Boolean(itemRef.current.querySelector('.pb_draggable_handle, .card_draggable_handle'));
+
+    return bindMousePointerDrag({
       dragId,
       container,
       itemElement: itemRef.current,
       handlers: dragHandlers,
+      allowWholeItem: pointerDrag && !hasHandle,
     });
-  }, [useHandleMouseDrag, dragId, container, dragHandlers]);
+  }, [usePointerMouseDrag, dragId, container, dragHandlers, pointerDrag]);
 
   const ariaProps = buildAriaProps(aria);
   const dataProps = buildDataProps(data);
@@ -210,7 +215,7 @@ const DraggableItem = (props: DraggableItemProps) => {
         {...htmlProps}
         className={classes}
         data-pb-drag-id={dragId}
-        draggable={!useTouchDrag && !useHandleMouseDrag}
+        draggable={!useTouchDrag && !usePointerMouseDrag}
         id={id}
         key={dragId}
         onDrag={onDrag}

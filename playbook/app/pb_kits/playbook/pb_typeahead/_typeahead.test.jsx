@@ -432,6 +432,27 @@ test('remove still works when enablePillReorder is true', () => {
   expect(updatedValue.length).toBe(1)
 })
 
+test('pillDragHandle false hides grip and enables whole-pill pointer drag', () => {
+  render(
+    <Typeahead
+        data={{ testid: 'no-handle-reorder-test' }}
+        enablePillReorder
+        isMulti
+        options={options}
+        pillDragHandle={false}
+        value={[options[0], options[1], options[2]]}
+    />
+  )
+
+  const kit = screen.getByTestId('no-handle-reorder-test')
+  expect(kit.querySelector('.pb_typeahead_pill_drag_handle')).not.toBeInTheDocument()
+
+  const draggableItems = kit.querySelectorAll('.pb_draggable_item')
+  draggableItems.forEach((item) => {
+    expect(item.getAttribute('draggable')).toBe('false')
+  })
+})
+
 test('pill reorder commit dispatches custom event on drop', () => {
   const reorderHandler = jest.fn()
 

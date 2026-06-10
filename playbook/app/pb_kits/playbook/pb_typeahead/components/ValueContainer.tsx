@@ -39,11 +39,26 @@ type DraggablePillListProps = {
   value: SelectValueType[]
 }
 
-const isDragHandleTarget = (target: EventTarget | null): boolean => {
+const isPillCloseTarget = (target: EventTarget | null): boolean => {
+  return Boolean((target as HTMLElement | null)?.closest('.pb_form_pill_close'))
+}
+
+const shouldBlockPillMouseDown = (
+  target: EventTarget | null,
+  pillDragHandle: boolean,
+): boolean => {
+  if (isPillCloseTarget(target)) return false
+
+  if (pillDragHandle) {
+    return Boolean(
+      (target as HTMLElement | null)?.closest(
+        '.pb_typeahead_pill_drag_handle, .pb_draggable_handle',
+      ),
+    )
+  }
+
   return Boolean(
-    (target as HTMLElement | null)?.closest(
-      '.pb_typeahead_pill_drag_handle, .pb_draggable_handle',
-    ),
+    (target as HTMLElement | null)?.closest('.pb_typeahead_draggable_pills .pb_draggable_item'),
   )
 }
 
@@ -79,6 +94,7 @@ const DraggablePillList = ({
             container="typeahead-pills"
             dragId={item.value}
             key={item.value}
+            pointerDrag={!(selectProps as any)?.pillDragHandle}
             tag="span"
         >
           <PillRenderer
@@ -187,18 +203,20 @@ const ValueContainer = (props: ValueContainerProps | any): React.ReactElement =>
     setValue(newValue, 'remove-value')
   }, [getValue, setValue])
 
+  const pillDragHandle = Boolean((selectProps as any)?.pillDragHandle)
+
   const valueContainerInnerProps = useMemo(() => ({
     ...innerProps,
     // Bubble phase only — capture-phase stopPropagation blocks mousedown from
-    // reaching the grip handle and its drag listeners.
+    // reaching pill drag listeners.
     onMouseDown: (event: React.MouseEvent) => {
-      if (isDragHandleTarget(event.target)) {
+      if (shouldBlockPillMouseDown(event.target, pillDragHandle)) {
         event.stopPropagation()
         return
       }
       innerProps?.onMouseDown?.(event)
     },
-  }), [innerProps])
+  }), [innerProps, pillDragHandle])
 
   if (isPillReorderActive(selectProps) && hasValue) {
     return (
