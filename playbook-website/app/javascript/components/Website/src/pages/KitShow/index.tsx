@@ -137,6 +137,7 @@ const KitShow = () => {
     "image",
     "label_pill",
     "label_value",
+    "legend",
     "link",
     "title",
     "title_detail",

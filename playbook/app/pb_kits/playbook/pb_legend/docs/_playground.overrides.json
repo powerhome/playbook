@@ -1,9 +1,7 @@
 {
-  "template": "<Legend{{props}} />",
-  "propTargets": {},
   "defaults": {
-    "color": "data_1",
     "text": "Revenue",
+    "color": "data_1",
     "dark": false
   },
   "groups": [
