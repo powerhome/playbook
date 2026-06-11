@@ -18,7 +18,6 @@ const RAILS_EXAMPLE_CARD_HTML_OPTIONS = {
     boxSizing: "border-box",
     maxWidth: "100%",
     minWidth: 0,
-
   },
 };
 
@@ -28,7 +27,6 @@ const RAILS_EXAMPLE_WRAPPER_STYLE: React.CSSProperties = {
   minWidth: 0,
   overflowX: "visible",
   width: "100%",
-  
 };
 
 const EXECUTE_SCRIPT_DELAY_MS = 100;

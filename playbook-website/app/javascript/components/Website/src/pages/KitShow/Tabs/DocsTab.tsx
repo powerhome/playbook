@@ -306,7 +306,6 @@ export const DocsTab = ({ examples, exampleProps, sections }: DocsTabProps) => {
           boxSizing: "border-box",
           maxWidth: "100%",
           minWidth: 0,
-          
         },
       }}
     >
