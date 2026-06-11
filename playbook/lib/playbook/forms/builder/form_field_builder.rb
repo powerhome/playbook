@@ -52,6 +52,8 @@ module Playbook
 
             input_id = input[/\bid="([^"]+)"/, 1] || "#{@object_name}_#{name}"
 
+            props[:input_options] = (props[:input_options] || {}).merge(id: input_id)
+
             if props[:label] == true
               # If using required_indicator, extract just the text and let the template handle rendering
               props[:label] = if props[:required_indicator]

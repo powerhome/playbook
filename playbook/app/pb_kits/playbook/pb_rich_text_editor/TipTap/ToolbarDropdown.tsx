@@ -1,7 +1,5 @@
 import React, { useState } from 'react'
 
-import { getAllIcons } from "../../utilities/icons/allicons"
-
 import Flex from '../../pb_flex/_flex'
 import PbReactPopover from '../../pb_popover/_popover'
 import Button from '../../pb_button/_button'
@@ -67,8 +65,6 @@ const toolbarDropdownItems = [
     },
 ]
 
-  const angleDown = getAllIcons()["angleDown"].icon as unknown as { [key: string]: SVGElement }
-
   const handleTogglePopover = () => {
     setShowPopover(!showPopover)
   }
@@ -92,16 +88,12 @@ for (const { text, isActive, icon } of toolbarDropdownItems) {
             size="lg"
         />
         <div>{text}</div>
-        <Flex className={showPopover ? "fa-flip-vertical" : ""}
-            display="inline_flex"
-        >
-          <Icon 
-              className="svg-inline--fa"
-              customIcon={angleDown}
-              fixedWidth
-              margin-left="xs"
-          />
-        </Flex>
+        <Icon
+            fixedWidth
+            flip={showPopover ? "vertical" : "none"}
+            icon="angle-down"
+            margin-left="xs"
+        />
       </Flex>
     );
   }
@@ -127,16 +119,12 @@ const popoverReference = (
                 size="lg"
             />
             <div>Paragraph</div>
-            <Flex className={showPopover ? "fa-flip-vertical" : ""}
-                display="inline_flex"
-            >
-              <Icon 
-                  className="svg-inline--fa"
-                  customIcon={angleDown}
-                  fixedWidth
-                  margin-left="xs"
-              />
-            </Flex>
+            <Icon
+                fixedWidth
+                flip={showPopover ? "vertical" : "none"}
+                icon="angle-down"
+                margin-left="xs"
+            />
           </Flex>
         )
        )
