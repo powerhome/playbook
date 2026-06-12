@@ -1,6 +1,8 @@
 {
   "template": "<PbGaugeChart{{props}} />",
-  "propTargets": {},
+  "externalImports": [
+    "import { PbGaugeChart } from 'playbook-ui/charts'"
+  ],
   "defaults": {
     "options": {
       "series": [
@@ -18,9 +20,7 @@
   "groups": [
     {
       "name": "Chart",
-      "props": [
-        "options"
-      ]
+      "props": ["options"]
     }
   ],
   "presets": [
@@ -132,7 +132,6 @@
       }
     }
   ],
-  "conditionals": {},
   "hints": {
     "charts_import": {
       "when": {},
@@ -159,8 +158,5 @@
       "message": "Use options.yAxis.min and options.yAxis.max to change the gauge scale.",
       "type": "info"
     }
-  },
-  "externalImports": [
-    "import { PbGaugeChart } from 'playbook-ui/charts'"
-  ]
+  }
 }

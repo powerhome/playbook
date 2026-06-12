@@ -1,6 +1,8 @@
 {
   "template": "<PbCircleChart{{props}} />",
-  "propTargets": {},
+  "externalImports": [
+    "import { PbCircleChart } from 'playbook-ui/charts'"
+  ],
   "defaults": {
     "options": {
       "series": [
@@ -26,9 +28,7 @@
   "groups": [
     {
       "name": "Chart",
-      "props": [
-        "options"
-      ]
+      "props": ["options"]
     }
   ],
   "presets": [
@@ -187,18 +187,13 @@
           ],
           "plotOptions": {
             "pie": {
-              "colors": [
-                "#144075",
-                "#005a8b",
-                "#f9b115"
-              ]
+              "colors": ["#144075", "#005a8b", "#f9b115"]
             }
           }
         }
       }
     }
   ],
-  "conditionals": {},
   "hints": {
     "charts_import": {
       "when": {},
@@ -225,8 +220,5 @@
       "message": "Use options.plotOptions.pie.colors to set individual slice colors.",
       "type": "info"
     }
-  },
-  "externalImports": [
-    "import { PbCircleChart } from 'playbook-ui/charts'"
-  ]
+  }
 }

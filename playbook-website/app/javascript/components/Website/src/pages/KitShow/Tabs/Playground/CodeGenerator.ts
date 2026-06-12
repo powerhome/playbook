@@ -83,6 +83,35 @@ function formatJsExpressionValue(value: unknown): string {
   return JSON.stringify(value);
 }
 
+function getLocallyImportedNames(importStatements: string[]): Set<string> {
+  const importedNames = new Set<string>();
+
+  importStatements.forEach((statement) => {
+    const namedImportMatch = statement.match(/import\s*\{([^}]+)\}\s*from/);
+    if (namedImportMatch) {
+      namedImportMatch[1].split(",").forEach((item) => {
+        const parts = item.trim().split(/\s+as\s+/);
+        const localName = (parts[1] || parts[0] || "").trim();
+        if (localName) importedNames.add(localName);
+      });
+    }
+
+    const namespaceImportMatch = statement.match(
+      /import\s+\*\s+as\s+([A-Za-z_$][\w$]*)\s+from/
+    );
+    if (namespaceImportMatch) {
+      importedNames.add(namespaceImportMatch[1]);
+    }
+
+    const defaultImportMatch = statement.match(/import\s+([A-Za-z_$][\w$]*)\s+from/);
+    if (defaultImportMatch) {
+      importedNames.add(defaultImportMatch[1]);
+    }
+  });
+
+  return importedNames;
+}
+
 /**
  * JSX `name={{ default: true }}` style — avoids JSON `{"default":true}` quoted keys in snippets.
  */
@@ -449,9 +478,13 @@ export const generateFromTemplate = ({
         ...result.matchAll(/\bfunction\s+([A-Z][A-Za-z0-9]*)\s*\(/g),
       ].map((m) => m[1])
     );
+    const externallyImportedNames = getLocallyImportedNames(externalImports);
     const components = [
       ...new Set(componentMatches.map((m) => m.slice(1))),
-    ].filter((component) => !localComponents.has(component));
+    ].filter(
+      (component) =>
+        !localComponents.has(component) && !externallyImportedNames.has(component)
+    );
     // playbook-ui exports `Date`; alias matches docs / PlaygroundPreview (avoids shadowing global Date)
     const importItemsFromComponents = components.map((c) =>
       c === "FormattedDate" ? "Date as FormattedDate" : c
@@ -464,7 +497,7 @@ export const generateFromTemplate = ({
     }
     const externalImportStatement =
       externalImports.length > 0 ? `${externalImports.join("\n")}\n` : "";
-    const importStatement = `import { ${importItems.join(", ")} } from 'playbook-ui'\n\n`;
+    const importStatement = importItems.length > 0 ? `import { ${importItems.join(", ")} } from 'playbook-ui'\n\n` : "";
     result = externalImportStatement + importStatement + variableDefinitions + result;
   } else {
     result = variableDefinitions + result;

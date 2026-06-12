@@ -1,58 +1,30 @@
 {
   "template": "<PbBarGraph{{props}} />",
-  "propTargets": {},
+  "externalImports": [
+    "import { PbBarGraph } from 'playbook-ui/charts'"
+  ],
   "defaults": {
     "options": {
       "series": [
         {
           "name": "Installation",
-          "data": [
-            1475,
-            200,
-            3000,
-            654,
-            656
-          ]
+          "data": [1475, 200, 3000, 654, 656]
         },
         {
           "name": "Manufacturing",
-          "data": [
-            4434,
-            524,
-            2320,
-            440,
-            500
-          ]
+          "data": [4434, 524, 2320, 440, 500]
         },
         {
           "name": "Sales & Distribution",
-          "data": [
-            3387,
-            743,
-            1344,
-            434,
-            440
-          ]
+          "data": [3387, 743, 1344, 434, 440]
         },
         {
           "name": "Project Development",
-          "data": [
-            3227,
-            878,
-            999,
-            780,
-            1000
-          ]
+          "data": [3227, 878, 999, 780, 1000]
         },
         {
           "name": "Other",
-          "data": [
-            1111,
-            677,
-            3245,
-            500,
-            200
-          ]
+          "data": [1111, 677, 3245, 500, 200]
         }
       ],
       "title": {
@@ -62,13 +34,7 @@
         "text": "Source: thesolarfoundation.com"
       },
       "xAxis": {
-        "categories": [
-          "Jan",
-          "Feb",
-          "Mar",
-          "Apr",
-          "May"
-        ]
+        "categories": ["Jan", "Feb", "Mar", "Apr", "May"]
       },
       "yAxis": {
         "title": {
@@ -80,9 +46,7 @@
   "groups": [
     {
       "name": "Chart",
-      "props": [
-        "options"
-      ]
+      "props": ["options"]
     }
   ],
   "presets": [
@@ -93,53 +57,23 @@
           "series": [
             {
               "name": "Installation",
-              "data": [
-                1475,
-                200,
-                3000,
-                654,
-                656
-              ]
+              "data": [1475, 200, 3000, 654, 656]
             },
             {
               "name": "Manufacturing",
-              "data": [
-                4434,
-                524,
-                2320,
-                440,
-                500
-              ]
+              "data": [4434, 524, 2320, 440, 500]
             },
             {
               "name": "Sales & Distribution",
-              "data": [
-                3387,
-                743,
-                1344,
-                434,
-                440
-              ]
+              "data": [3387, 743, 1344, 434, 440]
             },
             {
               "name": "Project Development",
-              "data": [
-                3227,
-                878,
-                999,
-                780,
-                1000
-              ]
+              "data": [3227, 878, 999, 780, 1000]
             },
             {
               "name": "Other",
-              "data": [
-                1111,
-                677,
-                3245,
-                500,
-                200
-              ]
+              "data": [1111, 677, 3245, 500, 200]
             }
           ],
           "title": {
@@ -149,13 +83,7 @@
             "text": "Source: thesolarfoundation.com"
           },
           "xAxis": {
-            "categories": [
-              "Jan",
-              "Feb",
-              "Mar",
-              "Apr",
-              "May"
-            ]
+            "categories": ["Jan", "Feb", "Mar", "Apr", "May"]
           },
           "yAxis": {
             "title": {
@@ -181,12 +109,7 @@
             "align": "left"
           },
           "xAxis": {
-            "categories": [
-              "Africa",
-              "America",
-              "Asia",
-              "Europe"
-            ],
+            "categories": ["Africa", "America", "Asia", "Europe"],
             "lineWidth": 0
           },
           "yAxis": {
@@ -208,30 +131,15 @@
           "series": [
             {
               "name": "Year 1990",
-              "data": [
-                631,
-                727,
-                3202,
-                721
-              ]
+              "data": [631, 727, 3202, 721]
             },
             {
               "name": "Year 2000",
-              "data": [
-                814,
-                841,
-                3714,
-                726
-              ]
+              "data": [814, 841, 3714, 726]
             },
             {
               "name": "Year 2018",
-              "data": [
-                1276,
-                1007,
-                4561,
-                746
-              ]
+              "data": [1276, 1007, 4561, 746]
             }
           ]
         }
@@ -244,46 +152,22 @@
           "series": [
             {
               "name": "Installation",
-              "data": [
-                1475,
-                200,
-                3000,
-                654,
-                656
-              ]
+              "data": [1475, 200, 3000, 654, 656]
             },
             {
               "name": "Manufacturing",
-              "data": [
-                1270,
-                800,
-                200,
-                454,
-                956
-              ]
+              "data": [1270, 800, 200, 454, 956]
             },
             {
               "name": "Sales & Distribution",
-              "data": [
-                975,
-                1600,
-                1500,
-                924,
-                500
-              ]
+              "data": [975, 1600, 1500, 924, 500]
             }
           ],
           "title": {
             "text": "Bar Graph with Stacked Columns"
           },
           "xAxis": {
-            "categories": [
-              "Jan",
-              "Feb",
-              "Mar",
-              "Apr",
-              "May"
-            ]
+            "categories": ["Jan", "Feb", "Mar", "Apr", "May"]
           },
           "yAxis": {
             "title": {
@@ -309,64 +193,33 @@
           "series": [
             {
               "name": "Installation",
-              "data": [
-                1475,
-                200,
-                3000,
-                654,
-                656
-              ]
+              "data": [1475, 200, 3000, 654, 656]
             },
             {
               "name": "Manufacturing",
-              "data": [
-                4434,
-                524,
-                2320,
-                440,
-                500
-              ]
+              "data": [4434, 524, 2320, 440, 500]
             },
             {
               "name": "Sales & Distribution",
-              "data": [
-                3387,
-                743,
-                1344,
-                434,
-                440
-              ]
+              "data": [3387, 743, 1344, 434, 440]
             }
           ],
           "title": {
             "text": "Bar Graph with Custom Data Colors"
           },
           "xAxis": {
-            "categories": [
-              "Jan",
-              "Feb",
-              "Mar",
-              "Apr",
-              "May"
-            ]
+            "categories": ["Jan", "Feb", "Mar", "Apr", "May"]
           },
           "yAxis": {
             "title": {
               "text": "Number of Employees"
             }
           },
-          "colors": [
-            "#144075",
-            "#005a8b",
-            "#00a4b4",
-            "#f9b115",
-            "#e87511"
-          ]
+          "colors": ["#144075", "#005a8b", "#00a4b4", "#f9b115", "#e87511"]
         }
       }
     }
   ],
-  "conditionals": {},
   "hints": {
     "charts_import": {
       "when": {},
@@ -388,8 +241,5 @@
       "message": "Use options.colors to override the Highcharts series color palette.",
       "type": "info"
     }
-  },
-  "externalImports": [
-    "import { PbBarGraph } from 'playbook-ui/charts'"
-  ]
+  }
 }
