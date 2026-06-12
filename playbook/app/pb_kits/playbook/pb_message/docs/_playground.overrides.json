@@ -1,17 +1,16 @@
 {
   "template": "<Message{{props}}>{{children}}</Message>",
-  "propTargets": {},
-  "defaults": {
-    "avatarGrayscale": false,
-    "timezone": "America/New_York",
-    "alignTimestamp": "right"
-  },
   "children": {
     "editable": true,
     "default": "",
     "hideWhenPropSet": [
       "message"
     ]
+  },
+  "defaults": {
+    "alignTimestamp": "right",
+    "avatarGrayscale": false,
+    "timezone": "America/New_York"
   },
   "groups": [
     {

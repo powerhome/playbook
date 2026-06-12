@@ -1,18 +1,50 @@
 {
-  "template": "<List{{props}}>{{children}}</List>",
-  "propTargets": {},
-  "defaults": {
-    "borderless": false,
-    "enableDrag": false,
-    "layout": "",
-    "ordered": false,
-    "xpadding": false,
-    "size": ""
+  "structureModes": {
+    "default": "default",
+    "modes": {
+      "default": {
+        "label": "List",
+        "template": "<List{{props}}>\n  {{children}}\n</List>",
+        "children": "<ListItem>Item 1</ListItem>\n<ListItem>Item 2</ListItem>\n<ListItem>Item 3</ListItem>"
+      },
+      "draggable": {
+        "label": "Draggable List",
+        "template": "<DraggableProvider\n    initialItems={initialItems}\n    onReorder={setItems}\n>\n  <List{{props}}>\n    {items.map(({ id, text }) => (\n      <ListItem\n          dragId={id}\n          key={id}\n      >\n        {text}\n      </ListItem>\n    ))}\n  </List>\n</DraggableProvider>",
+        "children": "",
+        "props": {
+          "enableDrag": true
+        },
+        "wrapper": "const initialItems = [\n  { id: 'list-item-1', text: 'Confirm scope' },\n  { id: 'list-item-2', text: 'Design states' },\n  { id: 'list-item-3', text: 'Ship playground' },\n]\n\nconst ListPlaygroundExample = () => {\n  const [items, setItems] = useState(initialItems)\n\n  return {{component}}\n}\n\n<ListPlaygroundExample />"
+      }
+    }
   },
   "children": {
     "editable": true,
     "default": "<ListItem>Item 1</ListItem>\n<ListItem>Item 2</ListItem>\n<ListItem>Item 3</ListItem>",
     "hideWhenPropSet": []
+  },
+  "hiddenProps": [
+    "text",
+    "variant"
+  ],
+  "customProps": {
+    "size": {
+      "type": "enum",
+      "platforms": [
+        "react"
+      ],
+      "values": [
+        "large"
+      ]
+    }
+  },
+  "defaults": {
+    "borderless": false,
+    "enableDrag": false,
+    "layout": "",
+    "ordered": false,
+    "size": "",
+    "xpadding": false
   },
   "groups": [
     {
@@ -109,6 +141,11 @@
     }
   ],
   "conditionals": {},
+  "propSyncOnEnable": {
+    "enableDrag": {
+      "structureMode": "draggable"
+    }
+  },
   "hints": {
     "default": {
       "presetName": "Default",
@@ -149,45 +186,6 @@
       "presetName": "Draggable",
       "message": "Draggable wraps List in DraggableProvider and gives each ListItem a dragId.",
       "type": "info"
-    }
-  },
-  "structureModes": {
-    "default": "default",
-    "modes": {
-      "default": {
-        "label": "List",
-        "template": "<List{{props}}>\n  {{children}}\n</List>",
-        "children": "<ListItem>Item 1</ListItem>\n<ListItem>Item 2</ListItem>\n<ListItem>Item 3</ListItem>"
-      },
-      "draggable": {
-        "label": "Draggable List",
-        "template": "<DraggableProvider\n    initialItems={initialItems}\n    onReorder={setItems}\n>\n  <List{{props}}>\n    {items.map(({ id, text }) => (\n      <ListItem\n          dragId={id}\n          key={id}\n      >\n        {text}\n      </ListItem>\n    ))}\n  </List>\n</DraggableProvider>",
-        "children": "",
-        "props": {
-          "enableDrag": true
-        },
-        "wrapper": "const initialItems = [\n  { id: 'list-item-1', text: 'Confirm scope' },\n  { id: 'list-item-2', text: 'Design states' },\n  { id: 'list-item-3', text: 'Ship playground' },\n]\n\nconst ListPlaygroundExample = () => {\n  const [items, setItems] = useState(initialItems)\n\n  return {{component}}\n}\n\n<ListPlaygroundExample />"
-      }
-    }
-  },
-  "hiddenProps": [
-    "text",
-    "variant"
-  ],
-  "customProps": {
-    "size": {
-      "type": "enum",
-      "platforms": [
-        "react"
-      ],
-      "values": [
-        "large"
-      ]
-    }
-  },
-  "propSyncOnEnable": {
-    "enableDrag": {
-      "structureMode": "draggable"
     }
   }
 }
