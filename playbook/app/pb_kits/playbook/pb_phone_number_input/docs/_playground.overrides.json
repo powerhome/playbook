@@ -1,33 +1,26 @@
 {
   "template": "<PhoneNumberInput{{props}} />",
-  "propTargets": {},
+  "customProps": {
+    "id": {
+      "type": "string",
+      "platforms": ["react"],
+      "default": "phone-number-playground"
+    }
+  },
+  "hiddenProps": [
+    "isValid",
+    "onValidate"
+  ],
   "defaults": {
-    "disabled": false,
-    "error": "",
-    "hiddenInputs": false,
+    "id": "phone-number-playground",
     "initialCountry": "us",
     "label": "Phone Number",
-    "name": "phone_number",
-    "required": false,
-    "requiredIndicator": false,
-    "value": "",
-    "formatAsYouType": false,
-    "strictMode": false,
-    "countrySearch": false,
-    "showPlaceholder": false,
-    "id": "phone-number-playground"
+    "name": "phone_number"
   },
   "groups": [
     {
       "name": "Input",
-      "props": [
-        "id",
-        "label",
-        "name",
-        "value",
-        "disabled",
-        "onChange"
-      ]
+      "props": ["id", "label", "name", "value", "disabled","onChange"]
     },
     {
       "name": "Country",
@@ -83,12 +76,7 @@
         "initialCountry": "us",
         "label": "Preferred Countries",
         "name": "preferred_phone_number",
-        "preferredCountries": [
-          "us",
-          "br",
-          "ph",
-          "gb"
-        ]
+        "preferredCountries": ["us", "br", "ph", "gb"]
       }
     },
     {
@@ -98,21 +86,14 @@
         "initialCountry": "us",
         "label": "North America",
         "name": "north_america_phone_number",
-        "onlyCountries": [
-          "us",
-          "ca",
-          "mx"
-        ]
+        "onlyCountries": ["us", "ca", "mx"]
       }
     },
     {
       "name": "Exclude Countries",
       "props": {
         "id": "phone-number-exclude-countries",
-        "excludeCountries": [
-          "cn",
-          "ru"
-        ],
+        "excludeCountries": ["cn", "ru"],
         "initialCountry": "us",
         "label": "Filtered Countries",
         "name": "filtered_phone_number"
@@ -195,18 +176,5 @@
       "message": "countrySearch allows users to search for a specific Country within the dropdown. If the range of countries has been limited, only the selected countries will be searchable.",
       "type": "info"
     }
-  },
-  "customProps": {
-    "id": {
-      "type": "string",
-      "platforms": [
-        "react"
-      ],
-      "default": "phone-number-playground"
-    }
-  },
-  "hiddenProps": [
-    "isValid",
-    "onValidate"
-  ]
+  }
 }

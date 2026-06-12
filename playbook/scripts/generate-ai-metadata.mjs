@@ -275,11 +275,8 @@ function parseTypeString(typeStr, imports = new Map()) {
 
   // Primitives
   if (['string', 'number', 'boolean'].includes(typeStr)) return { type: typeStr };
-  
-  // React types
-  if (/React|Node|Element/.test(typeStr)) return { type: 'ReactNode' };
-  
-  // Functions
+
+  // Functions (before React types — callbacks often use React.FormEvent, etc.)
   if (
     typeStr.includes('=>') ||
     typeStr.startsWith('(') ||
@@ -288,6 +285,9 @@ function parseTypeString(typeStr, imports = new Map()) {
   ) {
     return { type: 'function' };
   }
+
+  // React types
+  if (/React|Node|Element/.test(typeStr)) return { type: 'ReactNode' };
   
   // Arrays
   if (typeStr.endsWith('[]') || typeStr.startsWith('Array')) return { type: 'array' };
