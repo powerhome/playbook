@@ -1,0 +1,1 @@
+The Loading Inline kit will use `light` color by default. Other available colors are: `default` `lighter` `success` `error` `link`.

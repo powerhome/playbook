@@ -4,18 +4,19 @@ import LoadingInline from '../_loading_inline'
 const LoadingInlineColor = (props) => (
     <div>
         <LoadingInline 
+            text=" Light" 
+            {...props} 
+        />
+        
+            <br/>
+
+        <LoadingInline 
             color="default"
             text=" Default" 
             {...props} 
         />
 
-        <br/>
 
-        <LoadingInline 
-            color="light"
-            text=" Light" 
-            {...props} 
-        />
 
         <br/>
 
