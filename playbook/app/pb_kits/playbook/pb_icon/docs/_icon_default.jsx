@@ -5,7 +5,7 @@ const IconDefault = (props) => {
   return (
     <div>
       <Icon
-          fixedWidth
+          fixedWidth 
           icon="user"
           {...props}
       />
