@@ -29,6 +29,99 @@ export const getContainerFromElement = (element: Element | null): string | undef
   return container.getAttribute('data-pb-drag-container') || undefined;
 };
 
+type SortedDragItem = {
+  id: string;
+  rect: DOMRect;
+};
+
+const getSortedDragItems = (containerElement: Element): SortedDragItem[] => (
+  Array.from(containerElement.querySelectorAll('.pb_draggable_item[data-pb-drag-id]'))
+    .map((element) => ({
+      id: element.getAttribute('data-pb-drag-id') as string,
+      rect: element.getBoundingClientRect(),
+    }))
+    .sort((a, b) => a.rect.left - b.rect.left)
+);
+
+const getDragIdFromElementsAtPoint = (
+  clientX: number,
+  clientY: number,
+  dragId: string,
+): string | null => {
+  if (typeof document.elementsFromPoint !== 'function') return null;
+
+  return document.elementsFromPoint(clientX, clientY)
+    .map((element) => getDragIdFromElement(element))
+    .find((id) => id && id !== dragId) ?? null;
+};
+
+// When the pointer stays on the dragged item, use sibling midpoints (not the
+// dragged pill's own rect) to decide which slot the cursor is in.
+const getTargetWhenPointerOnDraggedItem = (
+  containerElement: Element,
+  clientX: number,
+  dragId: string,
+): string | null => {
+  const items = getSortedDragItems(containerElement);
+  const currentIndex = items.findIndex((item) => item.id === dragId);
+  if (currentIndex === -1) return null;
+
+  const others = items.filter((item) => item.id !== dragId);
+  if (!others.length) return null;
+
+  let slot = 0;
+  others.forEach((item, index) => {
+    const midpoint = item.rect.left + item.rect.width / 2;
+    if (clientX > midpoint) {
+      slot = index + 1;
+    }
+  });
+
+  const desiredIndex = Math.min(slot, items.length - 1);
+  if (desiredIndex === currentIndex) return null;
+
+  const targetItem = items[desiredIndex];
+  if (!targetItem || targetItem.id === dragId) return null;
+
+  return targetItem.id;
+};
+
+export const resolvePointerDragTarget = (
+  clientX: number,
+  clientY: number,
+  dragId: string,
+): { targetDragId: string | null; targetContainer: string | undefined } => {
+  const elementBelow = typeof document.elementFromPoint === 'function'
+    ? document.elementFromPoint(clientX, clientY)
+    : null;
+  const hitId = getDragIdFromElement(elementBelow);
+
+  if (hitId && hitId !== dragId) {
+    return {
+      targetDragId: hitId,
+      targetContainer: getContainerFromElement(elementBelow),
+    };
+  }
+
+  const stackId = getDragIdFromElementsAtPoint(clientX, clientY, dragId);
+  if (stackId) {
+    return {
+      targetDragId: stackId,
+      targetContainer: getContainerFromElement(elementBelow),
+    };
+  }
+
+  const containerElement = elementBelow?.closest('.pb_draggable_container');
+  if (!containerElement) {
+    return { targetDragId: null, targetContainer: undefined };
+  }
+
+  return {
+    targetDragId: getTargetWhenPointerOnDraggedItem(containerElement, clientX, dragId),
+    targetContainer: getContainerFromElement(containerElement),
+  };
+};
+
 type TouchDragHandlers = {
   onDragStart: (dragId: string, container?: string) => void;
   onDragEnter: (targetDragId: string, container?: string) => void;
@@ -75,11 +168,11 @@ const runDragPointerMove = (
     handlers.onDragStart(dragId, container);
   }
 
-  const elementBelow = document.elementFromPoint(clientX, clientY);
-  const targetDragId = getDragIdFromElement(elementBelow);
-  const targetContainer = getContainerFromElement(elementBelow);
+  const { targetDragId, targetContainer } = resolvePointerDragTarget(clientX, clientY, dragId);
 
-  if (targetDragId && targetDragId !== dragId && targetDragId !== state.lastTargetDragId) {
+  if (!targetDragId || targetDragId === dragId) {
+    state.lastTargetDragId = null;
+  } else if (targetDragId !== state.lastTargetDragId) {
     state.lastTargetDragId = targetDragId;
     handlers.onDragEnter(targetDragId, targetContainer ?? container);
   }
