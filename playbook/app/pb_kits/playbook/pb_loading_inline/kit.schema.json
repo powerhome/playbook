@@ -20,6 +20,22 @@
       ],
       "default": "left"
     },
+    "color": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "default",
+        "light",
+        "lighter",
+        "link",
+        "error",
+        "success"
+      ],
+      "default": "light"
+    },
     "dark": {
       "type": "boolean",
       "platforms": [
@@ -51,11 +67,11 @@
   "usage": {
     "react": {
       "import": "import { LoadingInline } from 'playbook-ui'",
-      "example": "<LoadingInline align=\"left\" variant=\"dotted\"></LoadingInline>"
+      "example": "<LoadingInline align=\"left\" color=\"default\"></LoadingInline>"
     },
     "rails": {
       "import": null,
-      "example": "<%= pb_rails(\"loading_inline\", props: { align: \"left\", variant: \"dotted\" }) %>"
+      "example": "<%= pb_rails(\"loading_inline\", props: { align: \"left\", color: \"default\" }) %>"
     }
   }
 }

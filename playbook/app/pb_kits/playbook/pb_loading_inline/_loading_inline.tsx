@@ -11,6 +11,7 @@ type LoadingInlineProps = {
   align?: "left" | "center" | "right",
   aria?: { [key: string]: string },
   className?: string,
+  color?: 'default' | 'light' | 'lighter' | 'link' | 'error' | 'success',
   data?: { [key: string]: string },
   dark?: boolean,
   htmlOptions?: {[key: string]: string | number | boolean | (() => void)},
@@ -24,6 +25,7 @@ const LoadingInline = (props: LoadingInlineProps) => {
     align = 'left',
     aria = {},
     className,
+    color = 'light',
     data = {},
     dark = false,
     htmlOptions = {},
@@ -50,7 +52,7 @@ const LoadingInline = (props: LoadingInlineProps) => {
         id={id}
     >
       <Body
-          color="light"
+          color={color}
           dark={dark}
       >
         <Icon
