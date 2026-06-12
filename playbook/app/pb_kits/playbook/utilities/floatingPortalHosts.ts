@@ -2,7 +2,7 @@
  * Portal host resolution and positioning for kits whose floating UI (menus, panels)
  * renders outside overflow/scroll regions (Dialog, Filter Popover, React Modal).
  *
- * Used by Typeahead, Dropdown, MultiLevelSelect; extend for DatePicker & TimePicker as needed.
+ * Used by Typeahead, Dropdown, MultiLevelSelect, DatePicker, and TimePicker.
  */
 
 /** Prefer mounting here (sibling to scroll region) so menus are not clipped. */
@@ -117,12 +117,102 @@ export function setFloatingOwnerAttribute(
   }
 }
 
+function ownerScopeSelector(ownerId: string): string {
+  return `[${PB_FLOATING_OWNER_ATTR}="${CSS.escape(ownerId)}"]`
+}
+
 function isPortaledFloatingMenuNode(target: HTMLElement): boolean {
   return (
     target.closest(".typeahead-kit-select__menu-portal") !== null ||
     target.closest(".pb_multi_level_select_floating_shell") !== null ||
-    target.closest(".pb_dropdown_floating_shell") !== null
+    target.closest(".pb_dropdown_floating_shell") !== null ||
+    target.closest(".pb_date_picker_floating_shell") !== null ||
+    target.closest(".flatpickr-calendar") !== null ||
+    target.closest(".pb_time_picker_floating_shell") !== null ||
+    target.closest(".pb_time_picker_panel_portal") !== null ||
+    target.closest(".pb_time_picker_container") !== null ||
+    target.closest(".time_dropdown") !== null ||
+    target.closest(".time_dropdown_option") !== null
   )
+}
+
+const PORTAL_OWNER_HIT_TEST_SELECTORS = [
+  ".typeahead-kit-select__menu-portal",
+  ".pb_multi_level_select_floating_shell",
+  ".pb_dropdown_floating_shell",
+  ".pb_date_picker_floating_shell",
+  ".flatpickr-calendar",
+  ".pb_time_picker_floating_shell",
+  ".pb_time_picker_panel_portal",
+  ".pb_time_picker_container",
+  ".time_dropdown",
+  ".time_dropdown_option",
+].join(", ")
+
+function pointInVisibleRect(
+  x: number,
+  y: number,
+  rect: DOMRectReadOnly,
+): boolean {
+  return (
+    rect.width > 0 &&
+    rect.height > 0 &&
+    x >= rect.left &&
+    x <= rect.right &&
+    y >= rect.top &&
+    y <= rect.bottom
+  )
+}
+
+/** Bounding-rect hit test for portaled menus (fixed children can leave a 0×0 shell). */
+export function portaledFloatingOwnerMenusAtPoint(
+  x: number,
+  y: number,
+  ownerId: string,
+): boolean {
+  if (typeof document === "undefined") {
+    return false
+  }
+
+  const roots = document.querySelectorAll<HTMLElement>(
+    ownerScopeSelector(ownerId),
+  )
+
+  for (const root of roots) {
+    if (
+      root.classList.contains("pb_popover_tooltip") ||
+      root.classList.contains("pb_popover_body") ||
+      root.classList.contains("pb_popover_floating_root")
+    ) {
+      continue
+    }
+
+    const candidates: HTMLElement[] = [root]
+    root
+      .querySelectorAll<HTMLElement>(PORTAL_OWNER_HIT_TEST_SELECTORS)
+      .forEach((node) => {
+        candidates.push(node)
+      })
+
+    for (const node of candidates) {
+      if (pointInVisibleRect(x, y, node.getBoundingClientRect())) {
+        return true
+      }
+    }
+  }
+
+  return false
+}
+
+export function eventTargetAsElement(
+  target: EventTarget | null,
+): HTMLElement | null {
+  if (!target) return null
+  if (target instanceof HTMLElement) return target
+  if (target instanceof Node) {
+    return target.parentElement
+  }
+  return null
 }
 
 /**
@@ -141,11 +231,144 @@ export function targetIsInsidePortaledFloatingKit(
     return true
   }
 
-  return target.closest(`[${PB_FLOATING_OWNER_ATTR}="${ownerId}"]`) !== null
+  return target.closest(ownerScopeSelector(ownerId)) !== null
+}
+
+/** Hit-test the full stacking context stack (covers overflow / fixed descendants). */
+export function portaledFloatingKitAtPoint(
+  x: number,
+  y: number,
+  ownerId?: string | null,
+): boolean {
+  if (typeof document === "undefined") {
+    return false
+  }
+
+  try {
+    if (typeof document.elementsFromPoint === "function") {
+      return document.elementsFromPoint(x, y).some((el) => {
+        if (!(el instanceof HTMLElement)) return false
+        return targetIsInsidePortaledFloatingKit(el, ownerId)
+      })
+    }
+
+    if (typeof document.elementFromPoint === "function") {
+      const el = document.elementFromPoint(x, y)
+      return (
+        el instanceof HTMLElement &&
+        targetIsInsidePortaledFloatingKit(el, ownerId)
+      )
+    }
+  } catch {
+    return false
+  }
+
+  return false
+}
+
+type PortaledMenuPointerDown = {
+  ownerId: string
+  x: number
+  y: number
+  at: number
+}
+
+let portaledMenuPointerDown: PortaledMenuPointerDown | null = null
+
+/** Record mousedown on a portaled menu so the following click still counts as in-menu. */
+export function recordPortaledMenuPointerDown(
+  ownerId: string,
+  x: number,
+  y: number,
+): void {
+  portaledMenuPointerDown = { ownerId, x, y, at: Date.now() }
+}
+
+export function matchesPortaledMenuPointerDown(
+  ownerId: string,
+  x: number,
+  y: number,
+  maxAgeMs = 750,
+): boolean {
+  const rec = portaledMenuPointerDown
+  if (!rec || rec.ownerId !== ownerId) return false
+  if (Date.now() - rec.at > maxAgeMs) return false
+  return Math.abs(rec.x - x) <= 2 && Math.abs(rec.y - y) <= 2
+}
+
+export function isPortaledFloatingKitInteraction(
+  target: EventTarget | null,
+  ownerId?: string | null,
+  clientX?: number,
+  clientY?: number,
+): boolean {
+  const el = eventTargetAsElement(target)
+  if (el && targetIsInsidePortaledFloatingKit(el, ownerId)) {
+    return true
+  }
+
+  if (clientX == null || clientY == null) {
+    return false
+  }
+
+  if (
+    ownerId &&
+    matchesPortaledMenuPointerDown(ownerId, clientX, clientY)
+  ) {
+    return true
+  }
+
+  if (ownerId && portaledFloatingOwnerMenusAtPoint(clientX, clientY, ownerId)) {
+    return true
+  }
+
+  return portaledFloatingKitAtPoint(clientX, clientY, ownerId)
 }
 
 /** Above popover ($z_9), dialogs ($z_10), below $z_max. */
 export const PB_FLOATING_UI_Z_INDEX = "100100"
+
+let floatingZIndexSeq = Number(PB_FLOATING_UI_Z_INDEX)
+
+/** Monotonic z-index so the most recently opened portaled panel stacks above others. */
+export function nextFloatingUiZIndex(): string {
+  floatingZIndexSeq += 1
+  return String(floatingZIndexSeq)
+}
+
+export const PB_FLOATING_KIT_OPEN_EVENT = "pb-floating-kit-open"
+
+export type FloatingKitOpenDetail = {
+  kitKind: string
+  ownerId?: string | null
+}
+
+export function announceFloatingKitOpen(
+  kitKind: string,
+  ownerId?: string | null,
+): void {
+  if (typeof document === "undefined") return
+  document.dispatchEvent(
+    new CustomEvent<FloatingKitOpenDetail>(PB_FLOATING_KIT_OPEN_EVENT, {
+      detail: { kitKind, ownerId },
+    }),
+  )
+}
+
+export function subscribeFloatingKitOpen(
+  handler: (detail: FloatingKitOpenDetail) => void,
+): () => void {
+  if (typeof document === "undefined") {
+    return () => undefined
+  }
+
+  const listener = (event: Event) => {
+    handler((event as CustomEvent<FloatingKitOpenDetail>).detail)
+  }
+
+  document.addEventListener(PB_FLOATING_KIT_OPEN_EVENT, listener)
+  return () => document.removeEventListener(PB_FLOATING_KIT_OPEN_EVENT, listener)
+}
 
 /** Use instead of `=== document.body` (iframes / identity quirks). */
 export function isPortalCoordinateRootBody(el: Element | null | undefined): boolean {
@@ -196,9 +419,13 @@ export function positionDropdownPortalToWrapper(args: {
   positionHost: HTMLElement
   marginPx?: number
   matchWrapperWidth?: boolean
+  /** When true, always place below the wrapper (no flip above when panel is tall). */
+  preferBelow?: boolean
+  zIndex?: string
 }): void {
   const margin = args.marginPx ?? 5
   const matchWrapperWidth = args.matchWrapperWidth ?? true
+  const preferBelow = args.preferBelow ?? false
   const { panel, wrapperViewportRect: wr, positionHost } = args
 
   const h =
@@ -210,7 +437,12 @@ export function positionDropdownPortalToWrapper(args: {
   const spaceAbove = wr.top
 
   let topPx: number
-  if (h > 0 && spaceBelow < h + 10 && spaceAbove >= h + 10) {
+  if (
+    !preferBelow &&
+    h > 0 &&
+    spaceBelow < h + 10 &&
+    spaceAbove >= h + 10
+  ) {
     topPx = wr.top - h - margin
   } else {
     topPx = wr.bottom + margin
@@ -218,7 +450,7 @@ export function positionDropdownPortalToWrapper(args: {
 
   panel.style.margin = "0"
   panel.style.pointerEvents = "auto"
-  panel.style.zIndex = PB_FLOATING_UI_Z_INDEX
+  panel.style.zIndex = args.zIndex ?? PB_FLOATING_UI_Z_INDEX
   if (matchWrapperWidth) {
     panel.style.width = `${Math.round(wr.width)}px`
   } else {

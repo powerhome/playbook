@@ -23,7 +23,7 @@ import { uniqueId } from '../utilities/object';
 import { DialogContext, DialogContextValue } from "../pb_dialog/_dialog_context";
 import {
   PB_FLOATING_OWNER_ATTR,
-  targetIsInsidePortaledFloatingKit,
+  isPortaledFloatingKitInteraction,
 } from "../utilities/floatingPortalHosts";
 
 type ModifiedGlobalProps = Omit<GlobalProps, 'minWidth' | 'maxHeight' | 'minHeight'>
@@ -240,13 +240,14 @@ const PbReactPopover = (props: PbPopoverProps): React.ReactElement => {
     // that the old listener is removed and the new listener is
     // updated with the targetId.
     const handleClick = (e: MouseEvent) => {
-      const target = e.target as HTMLElement
+      const targetEl =
+        e.target instanceof Element ? (e.target as HTMLElement) : null
 
       const targetIsPopover =
-        target.closest("#" + targetId) !== null ||
-        targetIsInsidePortaledFloatingKit(target, targetId);
+        (targetEl?.closest("#" + targetId) !== null) ||
+        isPortaledFloatingKitInteraction(e.target, targetId, e.clientX, e.clientY);
       const targetIsReference =
-        target.closest("#reference-" + targetId) !== null;
+        targetEl?.closest("#reference-" + targetId) !== null;
 
       const shouldClose = () => {
         setTimeout(() => shouldClosePopoverRef.current(true), 0);
@@ -257,11 +258,11 @@ const PbReactPopover = (props: PbPopoverProps): React.ReactElement => {
           if (!targetIsPopover && !targetIsReference) shouldClose();
           break;
         case "inside":
-          if (targetIsInsidePortaledFloatingKit(target, targetId)) return
+          if (isPortaledFloatingKitInteraction(e.target, targetId, e.clientX, e.clientY)) return
           if (targetIsPopover) shouldClose();
           break;
         case "any":
-          if (targetIsInsidePortaledFloatingKit(target, targetId)) return
+          if (isPortaledFloatingKitInteraction(e.target, targetId, e.clientX, e.clientY)) return
           if (targetIsPopover || !targetIsPopover && !targetIsReference) shouldClose();
           break;
       }

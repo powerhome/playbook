@@ -1,4 +1,5 @@
 import PbEnhancedElement from "../pb_enhanced_element";
+import { targetIsInsidePortaledFloatingKit } from "../utilities/floatingPortalHosts";
 
 const DIALOG_WRAPPER_SELECTOR = "[data-pb-dialog-wrapper]";
 
@@ -194,7 +195,12 @@ export default class PbDialog extends PbEnhancedElement {
         const dialogParentDataset = dialogElement.parentElement.dataset
         if (dialogParentDataset.overlayClick === "overlay_close") return
 
-        const dialogModal = event.target.getBoundingClientRect()
+        const target = event.target
+        if (targetIsInsidePortaledFloatingKit(target, dialogElement.id)) return
+
+        const dialogContent =
+          dialogElement.querySelector(".pb_dialog_scroll_region") || dialogElement
+        const dialogModal = dialogContent.getBoundingClientRect()
         const clickedOutsideDialogModal = event.clientX < dialogModal.left ||
           event.clientX > dialogModal.right ||
           event.clientY < dialogModal.top ||

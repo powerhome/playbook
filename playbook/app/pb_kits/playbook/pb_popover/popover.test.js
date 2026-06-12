@@ -4,6 +4,11 @@ import { Button, PbReactPopover } from "playbook-ui";
 import {
   resolveDialogFloatingPortalHost,
   resolvePortaledKitHost,
+  isPortaledFloatingKitInteraction,
+  matchesPortaledMenuPointerDown,
+  portaledFloatingOwnerMenusAtPoint,
+  recordPortaledMenuPointerDown,
+  portaledFloatingKitAtPoint,
   targetIsInsidePortaledFloatingKit,
 } from "../utilities/floatingPortalHosts";
 
@@ -389,6 +394,74 @@ describe("Popover portaled kit portal host", () => {
     expect(targetIsInsidePortaledFloatingKit(optionA, "filter-b")).toBe(false);
     expect(targetIsInsidePortaledFloatingKit(document.createElement("button"), "filter-a")).toBe(
       false,
+    );
+  });
+
+  test("isPortaledFloatingKitInteraction falls back to point hit-test when available", () => {
+    const portal = document.createElement("div");
+    portal.className = "pb_time_picker_floating_shell";
+    portal.setAttribute("data-pb-floating-owner", "filter-a");
+    const option = document.createElement("div");
+    option.className = "time_dropdown_option";
+    portal.appendChild(option);
+    document.body.appendChild(portal);
+
+    expect(isPortaledFloatingKitInteraction(option, "filter-a")).toBe(true);
+    expect(isPortaledFloatingKitInteraction(option, "filter-b")).toBe(false);
+
+    const elementsFromPoint = jest
+      .spyOn(document, "elementsFromPoint")
+      .mockReturnValue([option]);
+
+    expect(isPortaledFloatingKitInteraction(document.body, "filter-a", 10, 20)).toBe(
+      true,
+    );
+    expect(portaledFloatingKitAtPoint(10, 20, "filter-b")).toBe(false);
+
+    elementsFromPoint.mockRestore();
+  });
+
+  test("portaledFloatingOwnerMenusAtPoint hit-tests owned menu bounding rects", () => {
+    const shell = document.createElement("div");
+    shell.className = "pb_time_picker_floating_shell";
+    shell.setAttribute("data-pb-floating-owner", "filter-a");
+    const dropdown = document.createElement("div");
+    dropdown.className = "time_dropdown";
+    shell.appendChild(dropdown);
+    document.body.appendChild(shell);
+
+    dropdown.getBoundingClientRect = () => ({
+      left: 5,
+      top: 10,
+      right: 65,
+      bottom: 210,
+      width: 60,
+      height: 200,
+      x: 5,
+      y: 10,
+      toJSON: () => ({}),
+    });
+
+    const elementsFromPoint = jest
+      .spyOn(document, "elementsFromPoint")
+      .mockReturnValue([document.body]);
+
+    expect(portaledFloatingOwnerMenusAtPoint(30, 100, "filter-a")).toBe(true);
+    expect(portaledFloatingOwnerMenusAtPoint(30, 100, "filter-b")).toBe(false);
+    expect(isPortaledFloatingKitInteraction(document.body, "filter-a", 30, 100)).toBe(
+      true,
+    );
+
+    elementsFromPoint.mockRestore();
+  });
+
+  test("isPortaledFloatingKitInteraction matches portaled menu mousedown before click", () => {
+    recordPortaledMenuPointerDown("filter-a", 30, 100);
+
+    expect(matchesPortaledMenuPointerDown("filter-a", 30, 100)).toBe(true);
+    expect(matchesPortaledMenuPointerDown("filter-b", 30, 100)).toBe(false);
+    expect(isPortaledFloatingKitInteraction(document.body, "filter-a", 30, 100)).toBe(
+      true,
     );
   });
 });

@@ -1,8 +1,8 @@
 import PbEnhancedElement from '../pb_enhanced_element'
 import { createPopper, Instance, Placement } from '@popperjs/core'
 import {
+  isPortaledFloatingKitInteraction,
   subscribeFloatingKitReposition,
-  targetIsInsidePortaledFloatingKit,
 } from '../utilities/floatingPortalHosts'
 
 const POPOVER_OFFSET_Y = [0, 20]
@@ -79,11 +79,20 @@ export default class PbPopover extends PbEnhancedElement {
   }
 
   checkCloseTooltip() {
-    document.querySelector('body').addEventListener('click', ({ target } ) => {
-      const t = target as HTMLElement
-      const isTooltipElement = t.closest(`#${this.tooltipId}`) !== null
-      const isTriggerElement = t.closest(`#${this.triggerElementId}`) !== null
-      const isPortaledKit = targetIsInsidePortaledFloatingKit(t, this.tooltipId)
+    document.querySelector('body').addEventListener('click', (event) => {
+      const t = event.target
+      const isTooltipElement =
+        event.target instanceof Element &&
+        event.target.closest(`#${this.tooltipId}`) !== null
+      const isTriggerElement =
+        event.target instanceof Element &&
+        event.target.closest(`#${this.triggerElementId}`) !== null
+      const isPortaledKit = isPortaledFloatingKitInteraction(
+        t,
+        this.tooltipId,
+        event.clientX,
+        event.clientY,
+      )
 
       switch (this.closeOnClick) {
       case 'any':
