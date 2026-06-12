@@ -146,6 +146,7 @@ const KitShow = () => {
     "multi_level_select",
     "multiple_users",
     "multiple_users_stacked",
+    "nav",
     "title",
     "title_detail",
     "title_count",
