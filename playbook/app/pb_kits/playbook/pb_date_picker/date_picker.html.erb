@@ -102,15 +102,45 @@
         if (!input || input._flatpickr) return true
         if (typeof window.datePickerHelper !== "function") return false
 
+        const popoverTooltip = input.closest(".pb_popover_tooltip")
+        if (popoverTooltip && !popoverTooltip.classList.contains("show")) {
+          return false
+        }
+
         window.datePickerHelper(<%= object.date_picker_config %>, "<%= object.scroll_container %>")
         initQuickPickChangeListener(input)
 
         return true
       }
 
+      const watchPopoverVisibility = () => {
+        const input = document.getElementById("<%= object.picker_id %>")
+        if (!input || input.dataset.pbDatePickerPopoverWatch) return
+
+        const popoverTooltip = input.closest(".pb_popover_tooltip")
+        if (!popoverTooltip) return
+
+        input.dataset.pbDatePickerPopoverWatch = "true"
+        const tryInitWhenVisible = () => {
+          if (popoverTooltip.classList.contains("show")) {
+            loadDatePicker()
+          }
+        }
+
+        const observer = new MutationObserver(tryInitWhenVisible)
+        observer.observe(popoverTooltip, { attributes: true, attributeFilter: ["class"] })
+        tryInitWhenVisible()
+      }
+
       let attempts = 0
       const retryLoad = () => {
         if (loadDatePicker()) return
+
+        const input = document.getElementById("<%= object.picker_id %>")
+        if (input?.closest(".pb_popover_tooltip")) {
+          watchPopoverVisibility()
+          return
+        }
 
         if (attempts++ < 20) {
           setTimeout(retryLoad, 100)
