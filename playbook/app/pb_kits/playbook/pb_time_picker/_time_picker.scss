@@ -508,3 +508,15 @@
     pointer-events: auto;
   }
 }
+
+// Rails dialog / filter portal: shell is positioned via JS; keep it out of flex layout.
+.pb_time_picker_floating_shell {
+  pointer-events: none;
+
+  .pb_time_picker_container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin-top: 0;
+  }
+}

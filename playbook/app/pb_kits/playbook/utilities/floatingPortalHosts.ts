@@ -82,7 +82,7 @@ export function kitRequiresPortaledFloatingUi(
 }
 
 /** Owner id for portaled menus (filter tooltip id, dialog id, React popover targetId) - explicit `data-pb-floating-owner` on the floating root / popover surface */
- export function resolveFloatingOwnerId(
+export function resolveFloatingOwnerId(
   kitRoot: HTMLElement | null | undefined,
 ): string | null {
   if (!kitRoot) return null
@@ -325,15 +325,32 @@ export function isPortaledFloatingKitInteraction(
   return portaledFloatingKitAtPoint(clientX, clientY, ownerId)
 }
 
-/** Above popover ($z_9), dialogs ($z_10), below $z_max. */
-export const PB_FLOATING_UI_Z_INDEX = "100100"
+/**
+ * Unified z-index for all portaled floating UI (filter popover on `document.body`
+ * and dialog/modal floating roots). Above popover (900–1001), below typical app
+ * nav (10010). Dialog menus only stack within the modal; the same cap applies.
+ */
+export const PB_PORTALED_FLOATING_Z_INDEX = "1002"
+export const PB_PORTALED_FLOATING_Z_INDEX_MAX = 10009
 
-let floatingZIndexSeq = Number(PB_FLOATING_UI_Z_INDEX)
+let portaledFloatingZIndexSeq = Number(PB_PORTALED_FLOATING_Z_INDEX)
 
-/** Monotonic z-index so the most recently opened portaled panel stacks above others. */
-export function nextFloatingUiZIndex(): string {
-  floatingZIndexSeq += 1
-  return String(floatingZIndexSeq)
+/** Monotonic z-index for any portaled menu/panel. Capped at 10009. */
+export function nextPortaledFloatingZIndex(): string {
+  portaledFloatingZIndexSeq = Math.min(
+    portaledFloatingZIndexSeq + 1,
+    PB_PORTALED_FLOATING_Z_INDEX_MAX,
+  )
+  return String(portaledFloatingZIndexSeq)
+}
+
+/** Caps any portaled host at 10009 (body and dialog use the same range). */
+export function resolvePortaledFloatingZIndex(
+  _portalHost: HTMLElement,
+  preferred?: string,
+): string {
+  const z = Number(preferred ?? PB_PORTALED_FLOATING_Z_INDEX)
+  return String(Math.min(z, PB_PORTALED_FLOATING_Z_INDEX_MAX))
 }
 
 export const PB_FLOATING_KIT_OPEN_EVENT = "pb-floating-kit-open"
@@ -382,23 +399,28 @@ export function positionFloatingShellToInput(args: {
   maxMenuHeightPx: number
   positionHost?: HTMLElement | null
   styleTarget?: HTMLElement | null
+  zIndex?: string
 }): void {
   const { shell, inputViewportRect, menuEl, maxMenuHeightPx, positionHost, styleTarget } = args
   const coordHost = positionHost ?? shell.parentElement
   if (!coordHost) return
 
   const box = styleTarget ?? shell
+  const coordTopPx = inputViewportRect.bottom + 4
 
   box.style.margin = "0"
   box.style.padding = "0"
   box.style.pointerEvents = "auto"
-  box.style.zIndex = PB_FLOATING_UI_Z_INDEX
+  box.style.zIndex = resolvePortaledFloatingZIndex(
+    coordHost as HTMLElement,
+    args.zIndex ?? PB_PORTALED_FLOATING_Z_INDEX,
+  )
   box.style.width = `${Math.round(inputViewportRect.width)}px`
 
   if (isPortalCoordinateRootBody(coordHost)) {
     box.style.position = "fixed"
     box.style.left = `${Math.round(inputViewportRect.left)}px`
-    box.style.top = `${Math.round(inputViewportRect.bottom + 4)}px`
+    box.style.top = `${Math.round(coordTopPx)}px`
   } else {
     const hr = coordHost.getBoundingClientRect()
     box.style.position = "absolute"
@@ -450,7 +472,10 @@ export function positionDropdownPortalToWrapper(args: {
 
   panel.style.margin = "0"
   panel.style.pointerEvents = "auto"
-  panel.style.zIndex = args.zIndex ?? PB_FLOATING_UI_Z_INDEX
+  panel.style.zIndex = resolvePortaledFloatingZIndex(
+    positionHost,
+    args.zIndex ?? PB_PORTALED_FLOATING_Z_INDEX,
+  )
   if (matchWrapperWidth) {
     panel.style.width = `${Math.round(wr.width)}px`
   } else {

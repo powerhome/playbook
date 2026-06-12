@@ -10,6 +10,8 @@ import {
   recordPortaledMenuPointerDown,
   portaledFloatingKitAtPoint,
   targetIsInsidePortaledFloatingKit,
+  resolvePortaledFloatingZIndex,
+  PB_PORTALED_FLOATING_Z_INDEX_MAX,
 } from "../utilities/floatingPortalHosts";
 
 const testId = "popover-kit";
@@ -463,5 +465,18 @@ describe("Popover portaled kit portal host", () => {
     expect(isPortaledFloatingKitInteraction(document.body, "filter-a", 30, 100)).toBe(
       true,
     );
+  });
+
+  test("resolvePortaledFloatingZIndex caps all portaled hosts below 10010", () => {
+    expect(resolvePortaledFloatingZIndex(document.body, "100100")).toBe(
+      String(PB_PORTALED_FLOATING_Z_INDEX_MAX),
+    );
+    expect(resolvePortaledFloatingZIndex(document.body, "1002")).toBe("1002");
+
+    const dialogHost = document.createElement("div");
+    expect(resolvePortaledFloatingZIndex(dialogHost, "100100")).toBe(
+      String(PB_PORTALED_FLOATING_Z_INDEX_MAX),
+    );
+    expect(resolvePortaledFloatingZIndex(dialogHost, "1005")).toBe("1005");
   });
 });

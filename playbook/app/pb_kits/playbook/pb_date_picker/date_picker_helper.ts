@@ -8,9 +8,10 @@ import quickPickPlugin from './plugins/quickPick'
 import { getAllIcons } from '../utilities/icons/allicons';
 import {
   announceFloatingKitOpen,
-  nextFloatingUiZIndex,
+  nextPortaledFloatingZIndex,
   positionDropdownPortalToWrapper,
   resolveFloatingOwnerId,
+  resolvePortaledFloatingZIndex,
   resolvePortaledKitHost,
   kitRequiresPortaledFloatingUi,
   setFloatingOwnerAttribute,
@@ -547,7 +548,12 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
     mode,
     nextArrow: `<div style="height: 14px;">${angleRightString}</div>`,
     onOpen: [(_selectedDates, _dateStr, fp) => {
-      activePortalZIndex = nextFloatingUiZIndex()
+      activePortalZIndex = portalHost
+        ? resolvePortaledFloatingZIndex(
+            portalHost,
+            nextPortaledFloatingZIndex(),
+          )
+        : undefined
       if (portalHost) {
         mountCalendarInPortalShell(fp)
       }

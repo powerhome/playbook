@@ -1,11 +1,12 @@
 import PbEnhancedElement from '../pb_enhanced_element'
 import {
   announceFloatingKitOpen,
-  nextFloatingUiZIndex,
+  nextPortaledFloatingZIndex,
   PB_FLOATING_OWNER_ATTR,
   positionDropdownPortalToWrapper,
   recordPortaledMenuPointerDown,
   resolveFloatingOwnerId,
+  resolvePortaledFloatingZIndex,
   resolvePortaledKitHost,
   subscribeFloatingKitOpen,
   subscribeFloatingKitReposition,
@@ -571,7 +572,15 @@ export default class PbTimePicker extends PbEnhancedElement {
     this._portalNext = container.nextSibling
 
     const shell = document.createElement('div')
-    shell.className = `${this.element.className} pb_time_picker_floating_shell pb_time_picker_panel_portal`.trim()
+    const shellClasses = [
+      'pb_time_picker',
+      'pb_time_picker_floating_shell',
+      'pb_time_picker_panel_portal',
+      this.element.classList.contains('error') ? 'error' : '',
+      this.element.classList.contains('disabled') ? 'disabled' : '',
+      this.element.classList.contains('dark') ? 'dark' : '',
+    ].filter(Boolean)
+    shell.className = shellClasses.join(' ')
     const ownerId = this.floatingOwnerId ?? resolveFloatingOwnerId(this.element as HTMLElement)
     if (ownerId) {
       shell.setAttribute(PB_FLOATING_OWNER_ATTR, ownerId)
@@ -579,8 +588,6 @@ export default class PbTimePicker extends PbEnhancedElement {
       this.hourDropdown?.setAttribute(PB_FLOATING_OWNER_ATTR, ownerId)
       this.minuteDropdown?.setAttribute(PB_FLOATING_OWNER_ATTR, ownerId)
     }
-
-    shell.style.pointerEvents = 'auto'
 
     shell.appendChild(container)
     this.portalHost.appendChild(shell)
@@ -666,26 +673,33 @@ export default class PbTimePicker extends PbEnhancedElement {
   }
 
   private applyPortalPosition(): void {
-    if (!this.useMenuPortal || !this.portalHost || !this.dropdownContainer || !this.timePickerWrapper) {
+    if (
+      !this.useMenuPortal ||
+      !this.portalHost ||
+      !this.portalShell ||
+      !this.timePickerWrapper
+    ) {
       return
     }
 
     positionDropdownPortalToWrapper({
-      panel: this.dropdownContainer,
+      panel: this.portalShell,
       wrapperViewportRect: this.timePickerWrapper.getBoundingClientRect(),
       positionHost: this.portalHost,
       preferBelow: true,
       matchWrapperWidth: false,
       zIndex: this._activePortalZIndex,
     })
-    if (this.portalShell && this._activePortalZIndex) {
-      this.portalShell.style.zIndex = this._activePortalZIndex
-    }
   }
 
   private openDropdown(): void {
     this.ensureFloatingPortalConfig()
-    this._activePortalZIndex = nextFloatingUiZIndex()
+    this._activePortalZIndex = this.portalHost
+      ? resolvePortaledFloatingZIndex(
+          this.portalHost,
+          nextPortaledFloatingZIndex(),
+        )
+      : undefined
     announceFloatingKitOpen('time-picker', this.floatingOwnerId)
     if (this.useMenuPortal) {
       this.mountPortalMenu()

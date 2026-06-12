@@ -24,27 +24,15 @@ import * as kitComponents from "./components"
 import {noop, buildDataProps, buildHtmlProps} from "../utilities/props"
 import {
   PB_FLOATING_OWNER_ATTR,
-  PB_FLOATING_UI_Z_INDEX,
   kitRequiresPortaledFloatingUi,
   resolveFloatingOwnerId,
+  resolvePortaledFloatingZIndex,
   resolvePortaledKitHost,
 } from "../utilities/floatingPortalHosts"
 import {DialogContext} from "../pb_dialog/_dialog_context"
 import {GenericObject, Noop} from "../types"
 
 type TypeaheadStylesConfig = Parameters<typeof mergeStyles>[0]
-
-// Stack above filter popover ($z_9) when menu is portaled to `document.body`.
-const typeaheadBodyPortalZIndexStyles = {
-  menuPortal: (base: Record<string, unknown>) => ({
-    ...base,
-    zIndex: Number(PB_FLOATING_UI_Z_INDEX),
-  }),
-  menu: (base: Record<string, unknown>) => ({
-    ...base,
-    zIndex: Number(PB_FLOATING_UI_Z_INDEX),
-  }),
-} as TypeaheadStylesConfig
 
 /**
  * @typedef {object} Props
@@ -273,7 +261,17 @@ const Typeahead = forwardRef<HTMLInputElement, TypeaheadProps>(
 
     const mergedSelectStyles = useMemo(() => {
       if (menuPortalHost !== document.body) return stylesProp
-      return mergeStyles(stylesProp ?? {}, typeaheadBodyPortalZIndexStyles)
+      const zIndex = Number(resolvePortaledFloatingZIndex(document.body))
+      return mergeStyles(stylesProp ?? {}, {
+        menuPortal: (base: Record<string, unknown>) => ({
+          ...base,
+          zIndex,
+        }),
+        menu: (base: Record<string, unknown>) => ({
+          ...base,
+          zIndex,
+        }),
+      } as TypeaheadStylesConfig)
     }, [menuPortalHost, stylesProp])
 
     // Helper function to flatten grouped options if custom groups are used

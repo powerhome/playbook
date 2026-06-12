@@ -1,7 +1,7 @@
 import PbEnhancedElement from "../pb_enhanced_element";
 import { PbDropdownKeyboard } from "./keyboard_accessibility";
 import { setArrowVisibility, toggleVisibility } from "../utilities/domHelpers";
-import { subscribeFloatingKitReposition } from "../utilities/floatingPortalHosts";
+import { subscribeFloatingKitReposition, positionDropdownPortalToWrapper } from "../utilities/floatingPortalHosts";
 
 const DROPDOWN_SELECTOR = "[data-pb-dropdown]";
 const TRIGGER_SELECTOR = "[data-dropdown-trigger]";
@@ -21,7 +21,6 @@ const LABEL_SELECTOR = '[data-dropdown="pb-dropdown-label"]';
 // Portal host + positioning (parity with utilities/floatingPortalHosts.ts + React Dropdown).
 const PB_DIALOG_FLOATING_ROOT = "[data-pb-dialog-floating-root]";
 const PB_FLOATING_OWNER_ATTR = "data-pb-floating-owner";
-const PB_FLOATING_UI_Z_INDEX = "100100";
 
 function resolveFloatingOwnerId(fromElement) {
   if (!fromElement) return null;
@@ -69,42 +68,6 @@ function resolvePortaledKitHost(kitRoot, dialogCtxTarget) {
   return (
     resolveDialogFloatingPortalHost(kitRoot) || dialogCtxTarget || null
   );
-}
-
-function positionDropdownPortalToWrapper(
-  panel,
-  wrapperEl,
-  positionHost,
-  marginPx = 5,
-) {
-  const wr = wrapperEl.getBoundingClientRect();
-  const h =
-    panel.getBoundingClientRect().height || panel.scrollHeight || 0;
-  const spaceBelow = window.innerHeight - wr.bottom;
-  const spaceAbove = wr.top;
-
-  let topPx;
-  if (h > 0 && spaceBelow < h + 10 && spaceAbove >= h + 10) {
-    topPx = wr.top - h - marginPx;
-  } else {
-    topPx = wr.bottom + marginPx;
-  }
-
-  panel.style.margin = "0";
-  panel.style.pointerEvents = "auto";
-  panel.style.zIndex = PB_FLOATING_UI_Z_INDEX;
-  panel.style.width = `${Math.round(wr.width)}px`;
-
-  if (positionHost === document.body) {
-    panel.style.position = "fixed";
-    panel.style.left = `${Math.round(wr.left)}px`;
-    panel.style.top = `${Math.round(topPx)}px`;
-  } else {
-    const hr = positionHost.getBoundingClientRect();
-    panel.style.position = "absolute";
-    panel.style.left = `${Math.round(wr.left - hr.left)}px`;
-    panel.style.top = `${Math.round(topPx - hr.top)}px`;
-  }
 }
 
 function clearDropdownPortalPanelStyles(panel) {
@@ -503,11 +466,11 @@ export default class PbDropdown extends PbEnhancedElement {
     if (!this.useMenuPortal || !this.portalHost || !this.target || !this.dropdownWrapper) {
       return;
     }
-    positionDropdownPortalToWrapper(
-      this.target,
-      this.dropdownWrapper,
-      this.portalHost,
-    );
+    positionDropdownPortalToWrapper({
+      panel: this.target,
+      wrapperViewportRect: this.dropdownWrapper.getBoundingClientRect(),
+      positionHost: this.portalHost,
+    });
   }
 
   handleSearch(term = "") {

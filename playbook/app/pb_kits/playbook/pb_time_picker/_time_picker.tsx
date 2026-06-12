@@ -17,9 +17,10 @@ import colors from '../tokens/exports/_colors.module.scss'
 import { DialogContext } from '../pb_dialog/_dialog_context'
 import {
   announceFloatingKitOpen,
-  nextFloatingUiZIndex,
+  nextPortaledFloatingZIndex,
   positionDropdownPortalToWrapper,
   resolveFloatingOwnerId,
+  resolvePortaledFloatingZIndex,
   resolvePortaledKitHost,
   setFloatingOwnerAttribute,
   subscribeFloatingKitOpen,
@@ -692,12 +693,20 @@ const TimePicker = (props: TimePickerProps): JSX.Element => {
 
   useEffect(() => {
     if (!showDropdown || disabled) return
-    activePortalZIndexRef.current = nextFloatingUiZIndex()
+    const host = resolvePortaledKitHost(
+      timePickerWrapperRef.current,
+      dialogCtx?.selectMenuPortalTarget ?? null,
+    )
+    if (!host) return
+    activePortalZIndexRef.current = resolvePortaledFloatingZIndex(
+      host,
+      nextPortaledFloatingZIndex(),
+    )
     announceFloatingKitOpen(
       'time-picker',
       resolveFloatingOwnerId(timePickerWrapperRef.current),
     )
-  }, [showDropdown, disabled])
+  }, [showDropdown, disabled, dialogCtx?.selectMenuPortalTarget])
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
