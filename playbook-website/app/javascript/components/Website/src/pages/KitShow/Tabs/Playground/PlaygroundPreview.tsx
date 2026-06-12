@@ -2,6 +2,7 @@ import React, { useMemo } from "react";
 import { LiveProvider, LivePreview, LiveError } from "react-live";
 import { Card, colors, Flex } from "playbook-ui";
 import * as PB from "playbook-ui";
+import maplibreglModule from "maplibre-gl";
 
 interface PlaygroundPreviewProps {
   code: string;
@@ -22,6 +23,7 @@ const PlaygroundPreview: React.FC<PlaygroundPreviewProps> = ({ code, extraScope 
     Fragment: React.Fragment,
     ...PBrest,
     FormattedDate,
+    maplibregl: (maplibreglModule as any).default || maplibreglModule,
     ...extraScope,
   }), [extraScope, PBrest, FormattedDate]);
 

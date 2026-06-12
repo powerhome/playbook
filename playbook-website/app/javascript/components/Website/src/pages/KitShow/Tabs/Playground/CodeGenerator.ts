@@ -42,6 +42,7 @@ interface GenerateFromTemplateOptions {
   childrenConfig?: PlaygroundChildrenConfig;
   includeImport?: boolean;
   customImports?: string[];
+  externalImports?: string[];
   wrapper?: string;
   requiredProps?: Record<string, any>;
 }
@@ -355,6 +356,7 @@ export const generateFromTemplate = ({
   childrenConfig,
   includeImport = true,
   customImports = [],
+  externalImports = [],
   wrapper,
   requiredProps = {},
 }: GenerateFromTemplateOptions): string => {
@@ -460,8 +462,10 @@ export const generateFromTemplate = ({
     if (customImports.length > 0) {
       importItems = [...importItems, ...customImports];
     }
+    const externalImportStatement =
+      externalImports.length > 0 ? `${externalImports.join("\n")}\n` : "";
     const importStatement = `import { ${importItems.join(", ")} } from 'playbook-ui'\n\n`;
-    result = importStatement + variableDefinitions + result;
+    result = externalImportStatement + importStatement + variableDefinitions + result;
   } else {
     result = variableDefinitions + result;
   }
@@ -478,6 +482,7 @@ export const generateLiveFromTemplate = ({
   children,
   childrenConfig,
   customImports = [],
+  externalImports = [],
   wrapper,
   requiredProps: _requiredProps = {},
 }: Omit<GenerateFromTemplateOptions, "includeImport">): string => {
@@ -496,6 +501,7 @@ export const generateLiveFromTemplate = ({
     childrenConfig,
     includeImport: false,
     customImports,
+    externalImports,
     wrapper,
     requiredProps: {},
   });

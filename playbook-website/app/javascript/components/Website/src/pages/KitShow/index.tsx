@@ -141,6 +141,7 @@ const KitShow = () => {
     "list",
     "loading_inline",
     "link",
+    "map",
     "message",
     "multiple_users",
     "multiple_users_stacked",

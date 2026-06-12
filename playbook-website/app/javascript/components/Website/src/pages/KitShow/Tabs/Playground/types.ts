@@ -142,6 +142,7 @@ export interface StructureMode {
   propTargets?: Record<string, string>;
   propAliases?: Record<string, string>;
   imports?: string[];
+  externalImports?: string[];
   wrapper?: string;
 }
 
@@ -191,4 +192,5 @@ export interface PlaygroundConfig {
   requiredProps?: Record<string, any>;
   /** Kit prop names to omit from the playground props panel (still in kit.schema.json). */
   hiddenProps?: string[];
+  externalImports?: string[];
 }

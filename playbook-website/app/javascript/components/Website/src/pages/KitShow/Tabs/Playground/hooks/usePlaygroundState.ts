@@ -531,6 +531,14 @@ export const usePlaygroundState = ({
     return { ...base, ...modeAliases };
   }, [playgroundConfig?.propAliases, currentStructureMode?.propAliases]);
 
+  const activeExternalImports = useMemo(
+    () => [
+      ...(playgroundConfig?.externalImports ?? []),
+      ...(currentStructureMode?.externalImports ?? []),
+    ],
+    [playgroundConfig?.externalImports, currentStructureMode?.externalImports]
+  );
+
   // Code generation
   const generatedDisplayCode = useMemo(() => {
     if (hasActiveTemplate && playgroundConfig) {
@@ -544,6 +552,7 @@ export const usePlaygroundState = ({
         childrenConfig: playgroundConfig.children,
         includeImport: true,
         customImports: currentStructureMode?.imports,
+        externalImports: activeExternalImports,
         wrapper: currentStructureMode?.wrapper,
         requiredProps,
       });
@@ -555,7 +564,7 @@ export const usePlaygroundState = ({
       children: needsChildren(kitName) ? children : undefined,
       includeImport: true,
     });
-  }, [kitName, propValuesForCodegen, allPropDefinitions, children, hasActiveTemplate, activeTemplate, activePropTargets, activePropAliases, playgroundConfig, currentStructureMode, requiredProps]);
+  }, [kitName, propValuesForCodegen, allPropDefinitions, children, hasActiveTemplate, activeTemplate, activePropTargets, activePropAliases, playgroundConfig, currentStructureMode, activeExternalImports, requiredProps]);
 
   const generatedLiveCode = useMemo(() => {
     if (hasActiveTemplate && playgroundConfig) {
@@ -568,6 +577,7 @@ export const usePlaygroundState = ({
         children,
         childrenConfig: playgroundConfig.children,
         customImports: currentStructureMode?.imports,
+        externalImports: activeExternalImports,
         wrapper: currentStructureMode?.wrapper,
         requiredProps,
       });
@@ -578,7 +588,7 @@ export const usePlaygroundState = ({
       propDefinitions: allPropDefinitions,
       children: needsChildren(kitName) ? children : undefined,
     });
-  }, [kitName, propValuesForCodegen, allPropDefinitions, children, hasActiveTemplate, activeTemplate, activePropTargets, activePropAliases, playgroundConfig, currentStructureMode, requiredProps]);
+  }, [kitName, propValuesForCodegen, allPropDefinitions, children, hasActiveTemplate, activeTemplate, activePropTargets, activePropAliases, playgroundConfig, currentStructureMode, activeExternalImports, requiredProps]);
 
   const previewCode = useMemo(() => {
     if (hasActiveTemplate) return generatedLiveCode;
