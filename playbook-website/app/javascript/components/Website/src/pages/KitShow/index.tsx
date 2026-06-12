@@ -143,6 +143,7 @@ const KitShow = () => {
     "link",
     "map",
     "message",
+    "multi_level_select",
     "multiple_users",
     "multiple_users_stacked",
     "title",
