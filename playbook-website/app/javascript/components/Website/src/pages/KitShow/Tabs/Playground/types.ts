@@ -185,6 +185,7 @@ export interface PlaygroundConfig {
   presets?: PlaygroundPreset[];
   hints?: Record<string, PlaygroundHint>;
   structureModes?: StructureModesConfig;
+  wrapper?: string;
   /** Swap required table/column data without duplicating feature presets for each dataset. */
   dataPresets?: DataPresetsConfig;
   /** When a control is enabled, co-select sample data and/or structure mode (see Advanced Table). */

@@ -1,14 +1,21 @@
 {
   "template": "<Passphrase\n  onChange={(event) => setInput(event.target.value)}\n  value={input}{{props}}\n/>",
-  "propTargets": {},
+  "wrapper": "const PassphrasePlayground = () => {\n  const [input, setInput] = useState('')\n\n  return {{component}}\n}\n\n<PassphrasePlayground />",
+  "externalImports": [
+    "import React, { useState } from 'react'"
+  ],
+  "hiddenProps": [
+    "onChange",
+    "value"
+  ],
   "defaults": {
     "confirmation": false,
-    "requiredIndicator": false,
-    "showTipsBelow": "always",
     "inputProps": {
       "name": "passphrase"
     },
     "label": "Passphrase",
+    "requiredIndicator": false,
+    "showTipsBelow": "always",
     "tips": [
       "Use a longer phrase.",
       "Avoid common words.",
@@ -137,13 +144,5 @@
       "message": "uncontrolled lets Passphrase manage the typed value internally instead of relying on the value prop.",
       "type": "info"
     }
-  },
-  "wrapper": "const PassphrasePlayground = () => {\n  const [input, setInput] = useState('')\n\n  return {{component}}\n}\n\n<PassphrasePlayground />",
-  "externalImports": [
-    "import React, { useState } from 'react'"
-  ],
-  "hiddenProps": [
-    "onChange",
-    "value"
-  ]
+  }
 }

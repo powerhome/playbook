@@ -1,20 +1,39 @@
 {
-  "template": "<Overlay{{props}}>{{children}}</Overlay>",
-  "propTargets": {},
+  "structureModes": {
+    "default": "standard",
+    "modes": {
+      "standard": {
+        "label": "Standard",
+        "template": "<Overlay{{props}}>\n  {{children}}\n</Overlay>"
+      },
+      "fullscreen": {
+        "label": "Fullscreen",
+        "template": "<>\n  <Button\n      onClick={() => setOpen(true)}\n      text=\"Open Fullscreen Overlay\"\n      variant=\"secondary\"\n  />\n  {open && (\n    <Overlay{{props}}>\n      {{children}}\n    </Overlay>\n  )}\n</>",
+        "wrapper": "const FullscreenOverlayExample = () => {\n  const [open, setOpen] = useState(true)\n  const handleClose = () => setOpen(false)\n\n  return {{component}}\n}\n\n<FullscreenOverlayExample />",
+        "externalImports": [
+          "import React, { useState } from 'react'"
+        ]
+      }
+    }
+  },
+  "children": {
+    "editable": true,
+    "default": "<Card padding=\"md\">\n  <Body text=\"Overlay content\" />\n</Card>"
+  },
+  "hiddenProps": [
+    "dynamic",
+    "position",
+    "size"
+  ],
   "defaults": {
     "color": "card_light",
-    "dynamic": false,
-    "scrollBarNone": false,
     "gradient": true,
     "layout": {
       "bottom": "full"
     },
     "opacity": "opacity_6",
+    "scrollBarNone": false,
     "fullScreen": false
-  },
-  "children": {
-    "editable": true,
-    "default": "<Card padding=\"md\">\n  <Body text=\"Overlay content\" />\n</Card>"
   },
   "groups": [
     {
@@ -131,27 +150,5 @@
       "message": "scrollBarNone hides the scrollbar while preserving scrollable overflow content.",
       "type": "info"
     }
-  },
-  "structureModes": {
-    "default": "standard",
-    "modes": {
-      "standard": {
-        "label": "Standard",
-        "template": "<Overlay{{props}}>\n  {{children}}\n</Overlay>"
-      },
-      "fullscreen": {
-        "label": "Fullscreen",
-        "template": "<>\n  <Button\n      onClick={() => setOpen(true)}\n      text=\"Open Fullscreen Overlay\"\n      variant=\"secondary\"\n  />\n  {open && (\n    <Overlay{{props}}>\n      {{children}}\n    </Overlay>\n  )}\n</>",
-        "wrapper": "const FullscreenOverlayExample = () => {\n  const [open, setOpen] = useState(true)\n  const handleClose = () => setOpen(false)\n\n  return {{component}}\n}\n\n<FullscreenOverlayExample />",
-        "externalImports": [
-          "import React, { useState } from 'react'"
-        ]
-      }
-    }
-  },
-  "hiddenProps": [
-    "dynamic",
-    "position",
-    "size"
-  ]
+  }
 }
