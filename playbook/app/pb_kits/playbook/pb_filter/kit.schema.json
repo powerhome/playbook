@@ -130,6 +130,12 @@
         "sort_only"
       ],
       "default": "default"
+    },
+    "interactiveFilters": {
+      "platforms": [
+        "rails"
+      ],
+      "type": "array"
     }
   },
   "globalProps": true,

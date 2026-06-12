@@ -3,6 +3,7 @@
   "propTargets": {},
   "defaults": {
     "align": "left",
+    "color": "light",
     "text": "Loading",
     "variant": "dotted"
   },

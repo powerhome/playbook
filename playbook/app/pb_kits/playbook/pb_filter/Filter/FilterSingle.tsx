@@ -3,7 +3,7 @@ import { isEmpty } from '../../utilities/object'
 
 import Flex from '../../pb_flex/_flex'
 
-import CurrentFilters, { FilterDescription } from './CurrentFilters'
+import CurrentFilters, { FilterDescription, InteractiveFilters } from './CurrentFilters'
 import FilterBackground, { FilterBackgroundProps } from './FilterBackground'
 import FiltersPopover from './FiltersPopover'
 import ResultsCount from './ResultsCount'
@@ -16,6 +16,7 @@ import SortMenu, {
 export type FilterSingleProps = {
   children?: React.ReactChild[] | React.ReactChild,
   filters?: FilterDescription,
+  interactiveFilters?: InteractiveFilters,
   onSortChange?: SortingChangeCallback,
   results?: number,
   sortOptions?: SortOptions,
@@ -27,6 +28,7 @@ const FilterSingle = ({
   sortOptions,
   sortValue,
   filters,
+  interactiveFilters,
   results,
   children,
   dark,
@@ -60,6 +62,7 @@ const FilterSingle = ({
             <CurrentFilters
                 dark={dark}
                 filters={filters}
+                interactiveFilters={interactiveFilters}
             />
           </>
         }

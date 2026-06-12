@@ -12,6 +12,7 @@ examples:
   - filter_placement: Filter Placement
   - filter_popover_props: Popover Props
   - filter_within_turbo_frames: Within Turbo Frames
+  - filter_interactive: Interactive Applied Filters
 
   react:
   - filter_default: Default
@@ -25,4 +26,5 @@ examples:
   - filter_placement: Filter Placement
   - filter_popover_props: Popover Props
   - filter_sidebar: Sidebar
+  - filter_interactive_react: Interactive Applied Filters
 
