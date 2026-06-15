@@ -30,27 +30,10 @@
   text: "Current order: Year -> Territory -> Branch",
 }) %>
 
-<%= pb_rails("button", props: { id: "typeahead-draggable-reset", margin_top: "sm", text: "Reset", variant: "secondary" }) %>
-
 <%= javascript_tag defer: "defer" do %>
-  const defaultOrder = [
-    { label: 'Year', value: 'year' },
-    { label: 'Territory', value: 'territory' },
-    { label: 'Branch', value: 'branch' },
-  ];
-
-  const updateOrderText = (items) => {
-    const orderText = items.map((item) => item.label).join(' -> ');
+  document.addEventListener('pb-typeahead-kit-typeahead-draggable-pills-example-result-option-reorder', function(event) {
+    const orderText = event.detail.map((item) => item.label).join(' -> ');
     const orderElement = document.querySelector('#typeahead-draggable-order');
     if (orderElement) orderElement.textContent = `Current order: ${orderText}`;
-  };
-
-  document.addEventListener('pb-typeahead-kit-typeahead-draggable-pills-example-result-option-reorder', function(event) {
-    updateOrderText(event.detail);
-  });
-
-  document.querySelector('#typeahead-draggable-reset')?.addEventListener('click', function() {
-    document.dispatchEvent(new CustomEvent('pb-typeahead-kit-typeahead-draggable-pills-example:clear'));
-    updateOrderText(defaultOrder);
   });
 <% end %>
