@@ -1,6 +1,11 @@
 import PbEnhancedElement from "../pb_enhanced_element";
 import { updateSelectionActionBar } from "./advanced_table_action_bar";
 import { setArrowVisibility, toggleVisibility } from "../utilities/domHelpers";
+import {
+  updateStickyActionBarHeight as measureStickyActionBarHeight,
+  updateStickyHeaderRowHeights as measureStickyHeaderRowHeights,
+  updateStickyLayoutHeights,
+} from "./Utilities/StickyLayoutHelper";
 
 const ADVANCED_TABLE_SELECTOR = "[data-advanced-table]";
 const DOWN_ARROW_SELECTOR = "#advanced-table_open_icon";
@@ -196,7 +201,7 @@ export default class PbAdvancedTable extends PbEnhancedElement {
     if (table.dataset.pbAdvancedTableInitialized) return;
     table.dataset.pbAdvancedTableInitialized = "true";
 
-    // Measure header height so pinned rows don't overlap when header wraps (e.g. mobile)
+    // Measure header/action bar height so sticky offsets stay accurate.
     if (mainTable) {
       PbAdvancedTable.updateStickyHeaderRowHeights(mainTable);
       const resizeObserver = new ResizeObserver(() => {
@@ -204,6 +209,12 @@ export default class PbAdvancedTable extends PbEnhancedElement {
         PbAdvancedTable.updatePinnedRowsStickyTops(mainTable);
       });
       resizeObserver.observe(table);
+
+      const actionBar = mainTable.querySelector(".row-selection-actions-card");
+      if (actionBar) {
+        resizeObserver.observe(actionBar);
+      }
+
       mainTable._advancedTableHeaderResizeObserver = resizeObserver;
     }
 
@@ -337,32 +348,11 @@ export default class PbAdvancedTable extends PbEnhancedElement {
    * multi-row sticky headers use the correct offset. Re-run when header wraps (e.g. mobile).
    */
   static updateStickyHeaderRowHeights(advancedTableWrapper) {
-    if (!advancedTableWrapper) return;
-    const table = advancedTableWrapper.querySelector("table.pb_table");
-    const thead = table?.querySelector("thead");
-    if (!thead) return;
+    measureStickyHeaderRowHeights(advancedTableWrapper);
+  }
 
-    const rows = Array.from(thead.querySelectorAll("tr"));
-    let totalHeight = 0;
-    rows.forEach((tr, index) => {
-      const h = tr.offsetHeight;
-      if (index === 0) {
-        advancedTableWrapper.style.setProperty(
-          "--advanced-table-header-row-0-height",
-          `${h}px`
-        );
-      } else if (index === 1) {
-        advancedTableWrapper.style.setProperty(
-          "--advanced-table-header-row-1-height",
-          `${h}px`
-        );
-      }
-      totalHeight += h;
-    });
-    advancedTableWrapper.style.setProperty(
-      "--advanced-table-header-height",
-      `${totalHeight}px`
-    );
+  static updateStickyActionBarHeight(advancedTableWrapper) {
+    return measureStickyActionBarHeight(advancedTableWrapper);
   }
 
   /**
@@ -378,7 +368,8 @@ export default class PbAdvancedTable extends PbEnhancedElement {
       (tr) => tr.style.display !== "none" && tr.offsetParent !== null
     );
 
-    const headerOffset = "var(--advanced-table-header-height, 44px)";
+    const headerOffset =
+      "calc(var(--advanced-table-header-height, 44px) + var(--advanced-table-action-bar-height, 0px))";
     visibleRows.forEach((tr, index) => {
       tr.style.top = `calc(${headerOffset} + 2.5em * ${index})`;
     });
@@ -589,7 +580,7 @@ window.expandAllSubRows = (element, rowDepth) => {
 // Fix header height and pinned row sticky tops on load (header wrap + collapsed rows)
 function updateAllAdvancedTableStickyHeights() {
   document.querySelectorAll(".pb_advanced_table").forEach((wrapper) => {
-    PbAdvancedTable.updateStickyHeaderRowHeights(wrapper);
+    updateStickyLayoutHeights(wrapper);
     PbAdvancedTable.updatePinnedRowsStickyTops(wrapper);
   });
 }
