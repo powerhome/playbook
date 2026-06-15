@@ -1,4 +1,4 @@
-import React, { useContext, useLayoutEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
 import classnames from 'classnames'
 
 import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
@@ -177,7 +177,7 @@ const DatePicker = (props: DatePickerProps): React.ReactElement => {
     return 'pointer'
   }
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     datePickerHelper({
       allowInput,
       customQuickPickDates,
@@ -214,6 +214,15 @@ const DatePicker = (props: DatePickerProps): React.ReactElement => {
       required: false,
       dialogPortalTarget: dialogCtx?.selectMenuPortalTarget ?? null,
     }, scrollContainer)
+
+    return () => {
+      const input = document.getElementById(String(pickerId)) as
+        | (HTMLElement & { _flatpickr?: { destroy: () => void }; _pbDatePickerOpenUnsub?: () => void })
+        | null
+      input?._pbDatePickerOpenUnsub?.()
+      delete input?._pbDatePickerOpenUnsub
+      input?._flatpickr?.destroy()
+    }
   }, initializeOnce ? [initializeOnce, dialogCtx?.selectMenuPortalTarget, pickerId] : undefined)
 
   const filteredProps = {...props}

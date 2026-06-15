@@ -12,6 +12,7 @@ import {
   targetIsInsidePortaledFloatingKit,
   resolvePortaledFloatingZIndex,
   PB_PORTALED_FLOATING_Z_INDEX_MAX,
+  subscribeFloatingKitReposition,
 } from "../utilities/floatingPortalHosts";
 
 const testId = "popover-kit";
@@ -478,5 +479,29 @@ describe("Popover portaled kit portal host", () => {
       String(PB_PORTALED_FLOATING_Z_INDEX_MAX),
     );
     expect(resolvePortaledFloatingZIndex(dialogHost, "1005")).toBe("1005");
+  });
+
+  test("subscribeFloatingKitReposition coalesces scroll events to one rAF per frame", () => {
+    const rafCallbacks = [];
+    const rafSpy = jest
+      .spyOn(window, "requestAnimationFrame")
+      .mockImplementation((cb) => {
+        rafCallbacks.push(cb);
+        return rafCallbacks.length;
+      });
+
+    const reposition = jest.fn();
+    const unsubscribe = subscribeFloatingKitReposition(reposition);
+
+    window.dispatchEvent(new Event("scroll"));
+    window.dispatchEvent(new Event("scroll"));
+    expect(reposition).not.toHaveBeenCalled();
+    expect(rafSpy).toHaveBeenCalledTimes(1);
+
+    rafCallbacks[0]();
+    expect(reposition).toHaveBeenCalledTimes(1);
+
+    unsubscribe();
+    rafSpy.mockRestore();
   });
 });

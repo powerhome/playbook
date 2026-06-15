@@ -501,7 +501,16 @@ export function subscribeFloatingKitReposition(reposition: () => void): () => vo
   }
 
   const scrollOpts: AddEventListenerOptions = { capture: true, passive: true }
-  const run = () => reposition()
+  let rafId: number | null = null
+
+  // Coalesce burst scroll/resize events to one layout read + style write per frame.
+  const run = () => {
+    if (rafId != null) return
+    rafId = requestAnimationFrame(() => {
+      rafId = null
+      reposition()
+    })
+  }
 
   window.addEventListener("scroll", run, scrollOpts)
   document.addEventListener("scroll", run, scrollOpts)
@@ -514,6 +523,10 @@ export function subscribeFloatingKitReposition(reposition: () => void): () => vo
   }
 
   return () => {
+    if (rafId != null) {
+      cancelAnimationFrame(rafId)
+      rafId = null
+    }
     window.removeEventListener("scroll", run, scrollOpts)
     document.removeEventListener("scroll", run, scrollOpts)
     window.removeEventListener("resize", run)

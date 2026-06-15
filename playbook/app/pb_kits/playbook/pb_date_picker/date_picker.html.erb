@@ -96,10 +96,24 @@
         })
       }
 
+      const disconnectPopoverWatch = (input) => {
+        if (!input) return
+
+        if (input._pbDatePickerPopoverObserver) {
+          input._pbDatePickerPopoverObserver.disconnect()
+          delete input._pbDatePickerPopoverObserver
+        }
+
+        delete input.dataset.pbDatePickerPopoverWatch
+      }
+
       const loadDatePicker = () => {
         const input = document.getElementById("<%= object.picker_id %>")
 
-        if (!input || input._flatpickr) return true
+        if (!input || input._flatpickr) {
+          disconnectPopoverWatch(input)
+          return true
+        }
         if (typeof window.datePickerHelper !== "function") return false
 
         const popoverTooltip = input.closest(".pb_popover_tooltip")
@@ -109,6 +123,7 @@
 
         window.datePickerHelper(<%= object.date_picker_config %>, "<%= object.scroll_container %>")
         initQuickPickChangeListener(input)
+        disconnectPopoverWatch(input)
 
         return true
       }
@@ -122,12 +137,18 @@
 
         input.dataset.pbDatePickerPopoverWatch = "true"
         const tryInitWhenVisible = () => {
+          if (!input.isConnected || !popoverTooltip.isConnected) {
+            disconnectPopoverWatch(input)
+            return
+          }
+
           if (popoverTooltip.classList.contains("show")) {
             loadDatePicker()
           }
         }
 
         const observer = new MutationObserver(tryInitWhenVisible)
+        input._pbDatePickerPopoverObserver = observer
         observer.observe(popoverTooltip, { attributes: true, attributeFilter: ["class"] })
         tryInitWhenVisible()
       }
@@ -164,6 +185,12 @@
       if (<%= !object.custom_event_type.empty? %>) {
         window.addEventListener("<%= object.custom_event_type %>", retryLoad)
       }
+
+      document.addEventListener("turbo:before-cache", () => {
+        const input = document.getElementById("<%= object.picker_id %>")
+        disconnectPopoverWatch(input)
+        input?._flatpickr?.destroy()
+      })
     })()
   <% end %>
 <% end %>

@@ -127,6 +127,19 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
 
   let portalAppendShell: HTMLElement | undefined
 
+  const removePortalShell = (): void => {
+    if (!portalHost) return
+
+    const shellSelector = `[data-pb-date-picker-floating-shell="${String(pickerId)}"]`
+    const shell =
+      portalAppendShell?.isConnected
+        ? portalAppendShell
+        : (portalHost.querySelector(shellSelector) as HTMLElement | undefined)
+
+    shell?.remove()
+    portalAppendShell = undefined
+  }
+
   const ensurePortalShell = (): HTMLElement | undefined => {
     if (!portalHost) return undefined
     if (portalAppendShell?.isConnected) return portalAppendShell
@@ -606,6 +619,17 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
       assignCalendarId(fp)
       setupYearMonthDropdowns(fp)
       positionCalendarIfNeeded(fp)
+    }],
+    onDestroy: [() => {
+      if (unsubscribeFloatingReposition) {
+        unsubscribeFloatingReposition()
+        unsubscribeFloatingReposition = null
+      }
+      if (resizeRepositionHandlerRef) {
+        window.removeEventListener('resize', resizeRepositionHandlerRef)
+        resizeRepositionHandlerRef = null
+      }
+      removePortalShell()
     }],
     onClose: [(selectedDates, dateStr, fp) => {
       if (unsubscribeFloatingReposition) {
