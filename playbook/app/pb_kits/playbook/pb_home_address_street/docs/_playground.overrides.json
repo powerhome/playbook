@@ -1,0 +1,162 @@
+{
+  "defaults": {
+    "address": "70 Prospect Ave",
+    "addressCont": "Apt M18",
+    "city": "West Chester",
+    "state": "PA",
+    "zipcode": "19382",
+    "territory": "PHL",
+    "houseStyle": "Colonial",
+    "homeId": "8250263",
+    "homeUrl": "https://powerhrg.com/",
+    "emphasis": "street",
+    "preserveCase": false,
+    "newWindow": false
+  },
+  "groups": [
+    {
+      "name": "Address",
+      "props": [
+        "address",
+        "addressCont",
+        "city",
+        "state",
+        "zipcode",
+        "territory",
+        "houseStyle",
+        "homeId"
+      ]
+    },
+    {
+      "name": "Display",
+      "props": [
+        "emphasis",
+        "preserveCase"
+      ]
+    },
+    {
+      "name": "Link",
+      "props": [
+        "homeUrl",
+        "target",
+        "newWindow"
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Street Emphasis",
+      "props": {
+        "address": "70 Prospect Ave",
+        "addressCont": "Apt M18",
+        "city": "West Chester",
+        "state": "PA",
+        "zipcode": "19382",
+        "territory": "PHL",
+        "houseStyle": "Colonial",
+        "homeId": "8250263",
+        "homeUrl": "https://powerhrg.com/",
+        "emphasis": "street"
+      }
+    },
+    {
+      "name": "City Emphasis",
+      "props": {
+        "address": "70 Prospect Ave",
+        "addressCont": "Apt M18",
+        "city": "West Chester",
+        "state": "PA",
+        "zipcode": "19382",
+        "territory": "PHL",
+        "houseStyle": "Colonial",
+        "homeId": "8250263",
+        "homeUrl": "https://powerhrg.com/",
+        "emphasis": "city"
+      }
+    },
+    {
+      "name": "No Emphasis",
+      "props": {
+        "address": "70 Prospect Ave",
+        "addressCont": "Apt M18",
+        "city": "West Chester",
+        "state": "PA",
+        "zipcode": "19382",
+        "territory": "PHL",
+        "houseStyle": "Colonial",
+        "homeId": "8250263",
+        "homeUrl": "https://powerhrg.com/",
+        "emphasis": "none"
+      }
+    },
+    {
+      "name": "Linked Home",
+      "props": {
+        "address": "70 Prospect Ave",
+        "addressCont": "Apt M18",
+        "city": "West Chester",
+        "state": "PA",
+        "zipcode": "19382",
+        "territory": "PHL",
+        "houseStyle": "Colonial",
+        "homeId": "8250263",
+        "homeUrl": "https://powerhrg.com/",
+        "target": "_blank",
+        "emphasis": "street"
+      }
+    },
+    {
+      "name": "Preserve Case",
+      "props": {
+        "address": "70 prospect AVE",
+        "addressCont": "apt M18",
+        "city": "West Chester",
+        "state": "PA",
+        "zipcode": "19382",
+        "territory": "PHL",
+        "houseStyle": "Colonial",
+        "homeId": "8250263",
+        "homeUrl": "https://powerhrg.com/",
+        "preserveCase": true,
+        "emphasis": "street"
+      }
+    },
+    {
+      "name": "Empty Fallback",
+      "props": {}
+    }
+  ],
+  "conditionals": {},
+  "hints": {
+    "street_emphasis": {
+      "presetName": "Street Emphasis",
+      "message": "Street Emphasis makes the street line the primary title and renders city/state details below.",
+      "type": "info"
+    },
+    "city_emphasis": {
+      "presetName": "City Emphasis",
+      "message": "City Emphasis shifts the visual title treatment to the city/state line.",
+      "type": "info"
+    },
+    "no_emphasis": {
+      "presetName": "No Emphasis",
+      "message": "No Emphasis keeps the address compact by rendering all address lines as body text.",
+      "type": "info"
+    },
+    "linked_home": {
+      "presetName": "Linked Home",
+      "message": "When homeId is present, the kit renders it as a home hashtag and uses homeUrl as the link target.",
+      "type": "info"
+    },
+    "preserve_case": {
+      "presetName": "Preserve Case",
+      "message": "preserveCase keeps the street address casing exactly as provided instead of titleizing it.",
+      "type": "info"
+    },
+    "empty_fallback": {
+      "presetName": "Empty Fallback",
+      "message": "When every address field is blank, HomeAddressStreet renders an em dash fallback.",
+      "type": "info"
+    }
+  }
+}

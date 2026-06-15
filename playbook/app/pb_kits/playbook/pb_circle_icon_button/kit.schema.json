@@ -44,7 +44,7 @@
       "default": false
     },
     "onClick": {
-      "type": "ReactNode",
+      "type": "function",
       "platforms": [
         "react"
       ]

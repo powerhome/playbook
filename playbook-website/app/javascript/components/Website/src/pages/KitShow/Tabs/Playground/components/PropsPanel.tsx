@@ -5,7 +5,6 @@ import {
   Card,
   Flex,
   SectionSeparator,
-  TextInput,
   Title,
 } from "playbook-ui";
 import PropControl from "../PropControl";
@@ -61,13 +60,22 @@ export const PropsPanel: React.FC<PropsPanelProps> = ({
       {showChildren && (
         <>
           <Caption text="Children" marginBottom="xs" />
-          <TextInput
+          <textarea
             placeholder="Enter children content..."
             value={children}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
               onChildrenChange(e.target.value)
             }
-            marginBottom="sm"
+            style={{
+              width: "100%",
+              minHeight: "140px",
+              fontFamily: "monospace",
+              fontSize: "12px",
+              padding: "8px",
+              border: "1px solid #ddd",
+              borderRadius: "4px",
+              resize: "vertical",
+            }}
           />
           <SectionSeparator marginY="sm" />
         </>

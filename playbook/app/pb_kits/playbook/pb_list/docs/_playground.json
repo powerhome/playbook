@@ -6,40 +6,188 @@
     "enableDrag": false,
     "layout": "",
     "ordered": false,
-    "xpadding": false
+    "xpadding": false,
+    "size": ""
   },
   "children": {
     "editable": true,
-    "default": "List content",
-    "hideWhenPropSet": [
-      "text"
-    ]
+    "default": "<ListItem>Item 1</ListItem>\n<ListItem>Item 2</ListItem>\n<ListItem>Item 3</ListItem>",
+    "hideWhenPropSet": []
   },
   "groups": [
     {
-      "name": "Props",
+      "name": "Layout",
+      "props": [
+        "layout",
+        "size",
+        "ordered"
+      ]
+    },
+    {
+      "name": "Appearance",
       "props": [
         "borderless",
-        "dark",
-        "enableDrag",
-        "layout",
-        "ordered",
+        "xpadding",
+        "dark"
+      ]
+    },
+    {
+      "name": "Behavior",
+      "props": [
+        "enableDrag"
+      ]
+    },
+    {
+      "name": "Accessibility",
+      "props": [
         "role",
-        "tabIndex",
-        "text",
-        "size",
-        "variant",
-        "xpadding"
+        "tabIndex"
       ]
     }
   ],
   "presets": [
     {
       "name": "Default",
+      "structureMode": "default",
       "props": {},
-      "children": "List content"
+      "children": "<ListItem>Item 1</ListItem>\n<ListItem>Item 2</ListItem>\n<ListItem>Item 3</ListItem>"
+    },
+    {
+      "name": "Ordered",
+      "structureMode": "default",
+      "props": {
+        "ordered": true
+      },
+      "children": "<ListItem>Step 1</ListItem>\n<ListItem>Step 2</ListItem>\n<ListItem>Step 3</ListItem>"
+    },
+    {
+      "name": "Borderless",
+      "structureMode": "default",
+      "props": {
+        "borderless": true
+      },
+      "children": "<ListItem>Discovery</ListItem>\n<ListItem>Design</ListItem>\n<ListItem>Build</ListItem>"
+    },
+    {
+      "name": "Large",
+      "structureMode": "default",
+      "props": {
+        "size": "large"
+      },
+      "children": "<ListItem>Large item 1</ListItem>\n<ListItem>Large item 2</ListItem>\n<ListItem>Large item 3</ListItem>"
+    },
+    {
+      "name": "Extra Padding",
+      "structureMode": "default",
+      "props": {
+        "xpadding": true
+      },
+      "children": "<ListItem>Spaced item 1</ListItem>\n<ListItem>Spaced item 2</ListItem>\n<ListItem>Spaced item 3</ListItem>"
+    },
+    {
+      "name": "Layout Left",
+      "structureMode": "default",
+      "props": {
+        "layout": "left"
+      },
+      "children": "<ListItem><Title size={4} text=\"Label\" /><Currency amount=\"2,000.50\" label=\"Caption\" size=\"sm\" /></ListItem>\n<ListItem><Title size={4} text=\"Label\" /><Currency amount=\"1,425.00\" label=\"Caption\" size=\"sm\" /></ListItem>"
+    },
+    {
+      "name": "Layout Right",
+      "structureMode": "default",
+      "props": {
+        "layout": "right"
+      },
+      "children": "<ListItem><Title size={4} text=\"Label\" /><Currency amount=\"2,000.50\" label=\"Caption\" size=\"sm\" /></ListItem>\n<ListItem><Title size={4} text=\"Label\" /><Currency amount=\"1,425.00\" label=\"Caption\" size=\"sm\" /></ListItem>"
+    },
+    {
+      "name": "Draggable",
+      "structureMode": "draggable",
+      "props": {
+        "enableDrag": true
+      }
     }
   ],
   "conditionals": {},
-  "hints": {}
+  "hints": {
+    "default": {
+      "presetName": "Default",
+      "message": "List is composed with ListItem children; edit children to change the rows.",
+      "type": "info"
+    },
+    "ordered": {
+      "presetName": "Ordered",
+      "message": "Ordered switches the underlying list from ul to ol while keeping ListItem children.",
+      "type": "info"
+    },
+    "borderless": {
+      "presetName": "Borderless",
+      "message": "Borderless removes the item dividers for a quieter list treatment.",
+      "type": "info"
+    },
+    "large": {
+      "presetName": "Large",
+      "message": "Large applies the list size class so each row has the larger spacing treatment.",
+      "type": "info"
+    },
+    "extra_padding": {
+      "presetName": "Extra Padding",
+      "message": "Extra Padding adds horizontal item padding through the xpadding prop.",
+      "type": "info"
+    },
+    "layout_left": {
+      "presetName": "Layout Left",
+      "message": "Layout Left aligns composed item content using the list layout_left treatment.",
+      "type": "info"
+    },
+    "layout_right": {
+      "presetName": "Layout Right",
+      "message": "Layout Right mirrors the composed item layout for right-aligned supporting content.",
+      "type": "info"
+    },
+    "draggable": {
+      "presetName": "Draggable",
+      "message": "Draggable wraps List in DraggableProvider and gives each ListItem a dragId.",
+      "type": "info"
+    }
+  },
+  "structureModes": {
+    "default": "default",
+    "modes": {
+      "default": {
+        "label": "List",
+        "template": "<List{{props}}>\n  {{children}}\n</List>",
+        "children": "<ListItem>Item 1</ListItem>\n<ListItem>Item 2</ListItem>\n<ListItem>Item 3</ListItem>"
+      },
+      "draggable": {
+        "label": "Draggable List",
+        "template": "<DraggableProvider\n    initialItems={initialItems}\n    onReorder={setItems}\n>\n  <List{{props}}>\n    {items.map(({ id, text }) => (\n      <ListItem\n          dragId={id}\n          key={id}\n      >\n        {text}\n      </ListItem>\n    ))}\n  </List>\n</DraggableProvider>",
+        "children": "",
+        "props": {
+          "enableDrag": true
+        },
+        "wrapper": "const initialItems = [\n  { id: 'list-item-1', text: 'Confirm scope' },\n  { id: 'list-item-2', text: 'Design states' },\n  { id: 'list-item-3', text: 'Ship playground' },\n]\n\nconst ListPlaygroundExample = () => {\n  const [items, setItems] = useState(initialItems)\n\n  return {{component}}\n}\n\n<ListPlaygroundExample />"
+      }
+    }
+  },
+  "hiddenProps": [
+    "text",
+    "variant"
+  ],
+  "customProps": {
+    "size": {
+      "type": "enum",
+      "platforms": [
+        "react"
+      ],
+      "values": [
+        "large"
+      ]
+    }
+  },
+  "propSyncOnEnable": {
+    "enableDrag": {
+      "structureMode": "draggable"
+    }
+  }
 }

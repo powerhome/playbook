@@ -398,7 +398,7 @@ const ObjectControl: React.FC<PropControlProps> = ({ name, value, onChange }) =>
         checked={isEnabled}
         onChange={() => {
           onChange(name, {
-            value: isEnabled ? null : objectSeedFromPropValue(value),
+            value: objectSeedFromPropValue(value),
             enabled: !isEnabled,
           });
         }}
@@ -465,7 +465,7 @@ const ArrayControl: React.FC<PropControlProps> = ({ name, value, onChange }) => 
         onChange={() => {
           const seed = value?.value;
           onChange(name, {
-            value: isEnabled ? null : Array.isArray(seed) ? seed : [],
+            value: Array.isArray(seed) ? seed : [],
             enabled: !isEnabled,
           });
         }}
