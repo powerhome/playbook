@@ -334,6 +334,28 @@ export const bindMousePointerDrag = ({
     lastContainer: undefined,
   };
 
+  const handleMouseMove = (event: MouseEvent) => {
+    if (!state.active) return;
+
+    if (runDragPointerMove(state, event.clientX, event.clientY, dragId, container, handlers)) {
+      event.preventDefault();
+    }
+  };
+
+  const handleMouseUp = (event: MouseEvent) => {
+    document.removeEventListener('mousemove', handleMouseMove);
+    document.removeEventListener('mouseup', handleMouseUp);
+
+    finishDragPointer(
+      state,
+      event.clientX,
+      event.clientY,
+      container,
+      handlers,
+      itemElement,
+    );
+  };
+
   const handleMouseDown = (event: MouseEvent) => {
     if (event.button !== 0) return;
     if (isExcludedDragTarget(event.target)) return;
@@ -351,31 +373,12 @@ export const bindMousePointerDrag = ({
     state.startX = event.clientX;
     state.startY = event.clientY;
     itemElement.classList.add('is_touch_active');
-  };
-
-  const handleMouseMove = (event: MouseEvent) => {
-    if (!state.active) return;
-
-    if (runDragPointerMove(state, event.clientX, event.clientY, dragId, container, handlers)) {
-      event.preventDefault();
-    }
-  };
-
-  const handleMouseUp = (event: MouseEvent) => {
-    finishDragPointer(
-      state,
-      event.clientX,
-      event.clientY,
-      container,
-      handlers,
-      itemElement,
-    );
+    document.addEventListener('mousemove', handleMouseMove);
+    document.addEventListener('mouseup', handleMouseUp);
   };
 
   // Delegate on the stable draggable item element so re-rendered handles stay wired
   itemElement.addEventListener('mousedown', handleMouseDown);
-  document.addEventListener('mousemove', handleMouseMove);
-  document.addEventListener('mouseup', handleMouseUp);
 
   return () => {
     itemElement.removeEventListener('mousedown', handleMouseDown);
