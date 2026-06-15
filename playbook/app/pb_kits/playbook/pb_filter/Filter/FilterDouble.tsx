@@ -1,6 +1,6 @@
 import React from 'react'
 
-import CurrentFilters, { FilterDescription } from './CurrentFilters'
+import CurrentFilters, { FilterDescription, InteractiveFilters } from './CurrentFilters'
 import FilterBackground, { FilterBackgroundProps } from './FilterBackground'
 import FiltersPopover from './FiltersPopover'
 import ResultsCount from './ResultsCount'
@@ -17,6 +17,7 @@ import SectionSeparator from '../../pb_section_separator/_section_separator'
 export type FilterDoubleProps = {
   children?: React.ReactChild[] | React.ReactChild,
   filters?: FilterDescription,
+  interactiveFilters?: InteractiveFilters,
   onSortChange?: SortingChangeCallback,
   results?: number,
   sortOptions?: SortOptions,
@@ -28,6 +29,7 @@ const FilterDouble = ({
   sortOptions,
   sortValue,
   filters,
+  interactiveFilters,
   results,
   children,
   dark,
@@ -57,6 +59,7 @@ const FilterDouble = ({
       <CurrentFilters
           dark={dark}
           filters={filters}
+          interactiveFilters={interactiveFilters}
       />
     </Flex>
     <SectionSeparator dark={dark} />

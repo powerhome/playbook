@@ -25,7 +25,7 @@ const RAILS_EXAMPLE_WRAPPER_STYLE: React.CSSProperties = {
   boxSizing: "border-box",
   maxWidth: "100%",
   minWidth: 0,
-  overflowX: "auto",
+  overflowX: "visible",
   width: "100%",
 };
 

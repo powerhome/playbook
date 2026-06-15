@@ -1,5 +1,6 @@
 @import "../tokens/spacing";
 @import "../tokens/colors";
+@import "../tokens/border_radius";
 
 .pb_filter_sort_menu {
   li {
@@ -70,6 +71,26 @@
       padding-right: $space_xs;
       border-right: 1px solid $border_light !important;
     }
+
+    .filter.interactive {
+      padding-top: 2px;
+      padding-bottom: 2px;
+    }
+  }
+
+  // Interactive filter chip: clickable button that opens a popover whose
+  // contents are the editor for that filter type.
+  .pb_interactive_filter_trigger {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    text-align: left;
+
+    &:focus-visible {
+      outline: $primary solid 2px;
+      outline-offset: -1px;
+    }
   }
 
   .maskContainer::after {
@@ -101,6 +122,72 @@
     }
     .maskContainer::after {
       opacity:0;
+    }
+  }
+}
+
+.pb_popover_tooltip.pb_interactive_filter_editor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  margin: 0;
+}
+
+// Popover contents for an interactive filter.
+.pb_interactive_filter_editor {
+  min-width: 220px;
+
+  .pb_date_picker_kit {
+    margin-bottom: 0 !important;
+  }
+
+  // Select editor: option list. (Native HTML <select> can't be auto-opened
+  // without a user gesture in modern browsers, so we render options
+  // directly — one click on the chip = options visible.)
+  .pb_interactive_filter_options {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border-radius: $border_rad_heavier;
+    border: 1px solid $border_light;
+    max-height: 280px;
+    overflow-y: auto;
+  }
+
+  .pb_interactive_filter_option {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: $space_xs;
+    padding: $space_xs $space_sm;
+    cursor: pointer;
+    font-size: $font_base;
+    color: $text_lt_default;
+    transition: background-color 0.15s ease;
+    border-bottom: 1px solid $border_light;
+    &:last-child {
+      border-bottom: none;
+    }
+
+    &:hover {
+      background-color: rgba($primary, 0.08);
+    }
+
+    &.active {
+      background-color: $primary;
+      color: $white;
+    }
+  }
+
+  &.pb_interactive_filter_editor--date-picker {
+    // flatpickr inline mode renders directly into our wrapper; suppress its
+    // own shadow since the popover already provides the floating surface.
+    .flatpickr-calendar {
+      box-shadow: none;
+    }
+    .flatpickr-calendar.inline {
+      position: static;
+      top: 0;
     }
   }
 }
