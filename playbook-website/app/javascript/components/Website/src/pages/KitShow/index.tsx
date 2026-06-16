@@ -10,7 +10,7 @@ import { DocsTab } from "./Tabs/DocsTab";
 import { PropsTab } from "./Tabs/PropsTab";
 // import { BuildingBlocksTab } from "./Tabs/BuildingBlocksTab";
 // import { ReferencesTab } from "./Tabs/ReferencesTab";
-// import { PlaygroundTab } from "./Tabs/PlaygroundTab"; <---- uncomment to add playground back in
+import { PlaygroundTab } from "./Tabs/PlaygroundTab";
 
 const KitShow = () => {
   const { name } = useParams();
@@ -22,9 +22,9 @@ const KitShow = () => {
     kit_sections,
     available_props,
     kits_with_status,
-    // kit_schema, <---- uncomment to add playground back in
-    // global_props_schema, <---- uncomment to add playground back in
-    // playground_config, <---- uncomment to add playground back in
+    kit_schema, 
+    global_props_schema, 
+    playground_config,
   } = loaderData;
   const { darkMode, setDarkMode } = useDarkMode();
   const currentKit = loaderData.kit || name || "";
@@ -266,7 +266,6 @@ const KitShow = () => {
               dark={darkMode}
             />
             {/* TODO: Add playground back in when we have final designs */}
-            {/* <---- uncomment to add playground back in
             {showPlayground && (
               <NavItem
                 text="Playground"
@@ -274,7 +273,7 @@ const KitShow = () => {
                 onClick={() => handleTabChange("playground")}
                 dark={darkMode}
               />
-            )} */}
+            )}
 
             {/* Building Blocks and References tabs, commented out until building blocks and references are implemented */}
             {/* <NavItem
@@ -296,8 +295,7 @@ const KitShow = () => {
         <Flex align="stretch" minWidth={0} orientation="column" marginBottom="lg" width="100%">
           {/* Playground Tab Content (React-only for now; hidden on Rails) */}
           {/* TODO: Add playground back in when we have final designs */}
-          {/* <---- uncomment to add playground back in
-          {/* {showPlayground && displayTab === "playground" && (
+           {showPlayground && displayTab === "playground" && (
             <PlaygroundTab
               kitSchema={kit_schema}
               globalPropsSchema={global_props_schema}
@@ -305,7 +303,7 @@ const KitShow = () => {
               defaultExample={examples?.[0]}
               playgroundConfig={playground_config}
             />
-          )} */}
+          )}
 
           {/* Docs Tab Content */}
           {displayTab === "docs" && (
