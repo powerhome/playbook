@@ -1,32 +1,46 @@
 <% column_definitions = [
-    {
-      accessor: "year",
-      label: "Year",
-    },
-    {
-      accessor: "newEnrollments",
-      label: "New Enrollments",
-    },
-    {
-      accessor: "scheduledMeetings",
-      label: "Scheduled Meetings",
-    },
-    {
-      accessor: "attendanceRate",
-      label: "Attendance Rate",
-    },
-    {
-      accessor: "completedClasses",
-      label: "Completed Classes",
-    },
-    {
-      accessor: "classCompletionRate",
-      label: "Class Completion Rate",
-    },
-    {
-      accessor: "graduatedStudents",
-      label: "Graduated Students",
-    }
+  { accessor: "year", label: "Year" },
+  { accessor: "newEnrollments", label: "New Enrollments" },
+  { accessor: "scheduledMeetings", label: "Scheduled Meetings" },
+  { accessor: "attendanceRate", label: "Attendance Rate" },
+  { accessor: "completedClasses", label: "Completed Classes" },
+  { accessor: "classCompletionRate", label: "Class Completion Rate" },
+  { accessor: "graduatedStudents", label: "Graduated Students" },
+] %>
+
+<% multi_header_selectable_column_definitions = [
+  { accessor: "year", label: "Year" },
+  {
+    label: "Enrollment Data",
+    columns: [
+      {
+        label: "Enrollment Stats",
+        columns: [
+          { accessor: "newEnrollments", label: "New Enrollments" },
+          { accessor: "scheduledMeetings", label: "Scheduled Meetings" },
+        ],
+      },
+    ],
+  },
+  {
+    label: "Performance Data",
+    columns: [
+      {
+        label: "Completion Metrics",
+        columns: [
+          { accessor: "completedClasses", label: "Completed Classes" },
+          { accessor: "classCompletionRate", label: "Class Completion Rate" },
+        ],
+      },
+      {
+        label: "Attendance",
+        columns: [
+          { accessor: "attendanceRate", label: "Attendance Rate" },
+          { accessor: "graduatedStudents", label: "Graduated Students" },
+        ],
+      },
+    ],
+  },
 ] %>
 
 <% table_data = 15.times.map do |index|
@@ -42,6 +56,166 @@
   }
 end %>
 
-<div style="max-height: 320px; overflow-y: auto;">
-  <%= pb_rails("advanced_table", props: { id: "sticky_header_table", table_data: table_data, column_definitions: column_definitions, responsive: "none", table_props: { sticky: true }}) %>
-</div>
+<% selectable_table_data = table_data %>
+
+<% actions = [
+  pb_rails("circle_icon_button", props: {
+    icon: "file-csv",
+    variant: "link",
+    data: { action_type: "export" },
+  }),
+  pb_rails("circle_icon_button", props: {
+    icon: "trash-alt",
+    variant: "link",
+    data: { action_type: "delete" },
+  }),
+] %>
+
+<% sticky_examples = [
+  {
+    id_prefix: "sticky_header_default",
+    caption: "Sticky header (default)",
+    props: {
+      table_data: table_data,
+      column_definitions: column_definitions,
+    },
+  },
+  {
+    id_prefix: "sticky_header_selectable_rows",
+    caption: "Sticky header with selectable rows",
+    props: {
+      table_data: selectable_table_data,
+      column_definitions: column_definitions,
+      selectable_rows: true,
+      enable_toggle_expansion: "none",
+    },
+  },
+  {
+    id_prefix: "sticky_header_selectable_rows_multi_header",
+    caption: "Sticky header with selectable rows (multi-header columns)",
+    props: {
+      table_data: selectable_table_data,
+      column_definitions: multi_header_selectable_column_definitions,
+      selectable_rows: true,
+      enable_toggle_expansion: "none",
+    },
+  },
+  {
+    id_prefix: "sticky_header_selectable_rows_actions",
+    caption: "Sticky header with selectable rows and action bar",
+    props: {
+      table_data: selectable_table_data,
+      column_definitions: column_definitions,
+      selectable_rows: true,
+      enable_toggle_expansion: "none",
+      actions: actions,
+    },
+    action_bar: true,
+  },
+  {
+    id_prefix: "sticky_header_selectable_rows_actions_multi_header",
+    caption: "Sticky header with selectable rows and action bar (multi-header columns)",
+    props: {
+      table_data: selectable_table_data,
+      column_definitions: multi_header_selectable_column_definitions,
+      selectable_rows: true,
+      enable_toggle_expansion: "none",
+      actions: actions,
+    },
+    action_bar: true,
+  },
+] %>
+
+<% responsive_sections = [
+  { key: "none", label: "Non Responsive" },
+  { key: "scroll", label: "Responsive" },
+] %>
+
+<% action_bar_table_ids = [] %>
+
+<% responsive_sections.each_with_index do |section, section_index| %>
+  <%= pb_rails("title", props: {
+    margin_bottom: "sm",
+    margin_top: section_index.zero? ? nil : "xl",
+    size: 4,
+    tag: "h4",
+    text: section[:label],
+  }) %>
+
+  <% sticky_examples.each_with_index do |example, example_index| %>
+    <% table_id = "#{example[:id_prefix]}_#{section[:key]}" %>
+    <% action_bar_table_ids << table_id if example[:action_bar] %>
+
+    <%= pb_rails("caption", props: {
+      margin_top: example_index.zero? ? nil : "md",
+      text: "#{example[:caption]} — #{section[:label]}",
+    }) %>
+
+    <% table_props = {
+      id: table_id,
+      responsive: section[:key],
+      table_props: { sticky: true },
+    } %>
+    <% table_props[:max_height] = "xs" if section[:key] == "scroll" %>
+
+    <% if section[:key] == "scroll" %>
+      <%= pb_rails("advanced_table", props: example[:props].merge(table_props)) %>
+    <% else %>
+      <div style="max-height: 320px; overflow-y: auto;">
+        <%= pb_rails("advanced_table", props: example[:props].merge(table_props)) %>
+      </div>
+    <% end %>
+  <% end %>
+<% end %>
+
+<script>
+  window.handleStickyHeaderActionClick = function(tableId, actionType) {
+    const tableContainer = document.getElementById(tableId);
+    if (!tableContainer) return;
+
+    const selectedRowsJSON = tableContainer.getAttribute('data-selected-rows');
+    let selectedRowIds = [];
+
+    try {
+      if (selectedRowsJSON) {
+        selectedRowIds = JSON.parse(selectedRowsJSON);
+      }
+    } catch (e) {
+      const checkboxes = tableContainer.querySelectorAll('input[type="checkbox"]:checked');
+      const selectedCheckboxes = Array.from(checkboxes).filter(checkbox =>
+        checkbox.id !== 'select-all-rows' &&
+        !checkbox.closest('#select-all-rows')
+      );
+      selectedRowIds = selectedCheckboxes.map(checkbox => checkbox.id);
+    }
+
+    if (!selectedRowIds || selectedRowIds.length === 0) {
+      alert('No Selection Made');
+    } else {
+      const selectedRowsString = selectedRowIds.join(', ');
+      if (actionType === 'export') {
+        alert('Row ids ' + selectedRowsString + ' will be exported!');
+      } else if (actionType === 'delete') {
+        alert('Row ids ' + selectedRowsString + ' will be deleted!');
+      }
+    }
+  };
+
+  document.addEventListener('DOMContentLoaded', function() {
+    <%= action_bar_table_ids.map { |id| "'#{id}'" }.join(", ").html_safe %>.forEach(function(tableId) {
+      const tableContainer = document.getElementById(tableId);
+      if (!tableContainer) return;
+
+      const actionBar = tableContainer.querySelector('.row-selection-actions-card');
+      if (!actionBar) return;
+
+      actionBar.addEventListener('click', function(e) {
+        const button = e.target.closest('[data-action-type]');
+        if (!button) return;
+
+        e.preventDefault();
+        window.handleStickyHeaderActionClick(tableId, button.dataset.actionType);
+      });
+    });
+  });
+</script>
