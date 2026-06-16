@@ -355,10 +355,23 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
     document.querySelectorAll(scrollParent as string)[0]?.removeEventListener("scroll", scrollEvent)
   }
 
+  const yearSelectId = `year-${pickerId}`
+
+  const yearDropdownFromCalendar = (fp: Instance): HTMLSelectElement | null => {
+    return fp.calendarContainer?.querySelector<HTMLSelectElement>(`#${yearSelectId}`) ?? null
+  }
+
+  const yearDropdownIsReady = (fp: Instance): boolean => {
+    const dropdown = yearDropdownFromCalendar(fp)
+    return dropdown !== null && dropdown.options.length > 0
+  }
+
   // two way binding
   const yearChangeHook = (fp: Instance) => {
-      const yearInput = document.querySelector(`#year-${fp.input.id}`) as HTMLInputElement
+    const yearInput = yearDropdownFromCalendar(fp)
+    if (yearInput) {
       yearInput.value = fp.currentYear?.toString()
+    }
   }
 
   const handleDatePickerChange = (fp: Instance, selectedDates: Date[]) => {
@@ -488,12 +501,10 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
       }
     : undefined
 
-  let yearDropdownSetupDone = false
   const setupYearMonthDropdowns = (fp: Instance) => {
-    if (yearDropdownSetupDone || !fp.yearElements?.[0]?.parentElement) return
+    if (yearDropdownIsReady(fp) || !fp.yearElements?.[0]?.parentElement) return
 
-    yearDropdownSetupDone = true
-    fp.yearElements[0].parentElement.innerHTML = `<select class="numInput cur-year" type="number" tabIndex="-1" aria-label="Year" id="year-${pickerId}"></select>`
+    fp.yearElements[0].parentElement.innerHTML = `<select class="numInput cur-year" type="number" tabIndex="-1" aria-label="Year" id="${yearSelectId}"></select>`
 
     let years = ''
     if (yearAscending) {
@@ -506,7 +517,7 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
       }
     }
 
-    const dropdown = document.querySelector<HTMLElement & { [x: string]: any }>(`#year-${pickerId}`)
+    const dropdown = yearDropdownFromCalendar(fp)
     if (!dropdown) return
 
     dropdown.innerHTML = years
@@ -532,8 +543,13 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
       })
     }
 
-    dropdown.insertAdjacentHTML('afterend', `<i class="year-dropdown-icon">${angleDownString}</i>`)
-    if (fp.monthElements[0]?.parentElement) {
+    if (!dropdown.nextElementSibling?.classList.contains('year-dropdown-icon')) {
+      dropdown.insertAdjacentHTML('afterend', `<i class="year-dropdown-icon">${angleDownString}</i>`)
+    }
+    if (
+      fp.monthElements[0]?.parentElement &&
+      !fp.calendarContainer?.querySelector('.month-dropdown-icon')
+    ) {
       fp.monthElements[0].insertAdjacentHTML('afterend', `<i class="month-dropdown-icon">${angleDownString}</i>`)
     }
   }
@@ -617,8 +633,8 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
         })
       }
       assignCalendarId(fp)
-      setupYearMonthDropdowns(fp)
       positionCalendarIfNeeded(fp)
+      setupYearMonthDropdowns(fp)
     }],
     onDestroy: [() => {
       if (unsubscribeFloatingReposition) {
