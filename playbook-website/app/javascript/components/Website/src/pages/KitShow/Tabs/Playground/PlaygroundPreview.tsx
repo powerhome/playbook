@@ -6,11 +6,16 @@ import * as PBCharts from "playbook-ui/charts";
 import maplibreglModule from "maplibre-gl";
 
 interface PlaygroundPreviewProps {
+  bare?: boolean;
   code: string;
   extraScope?: Record<string, any>;
 }
 
-const PlaygroundPreview: React.FC<PlaygroundPreviewProps> = ({ code, extraScope = {} }) => {
+const PlaygroundPreview: React.FC<PlaygroundPreviewProps> = ({
+  bare = false,
+  code,
+  extraScope = {},
+}) => {
   // Rename Date to FormattedDate to avoid shadowing global Date
   const { Date: FormattedDate, ...PBrest } = PB as any;
 
@@ -31,10 +36,14 @@ const PlaygroundPreview: React.FC<PlaygroundPreviewProps> = ({ code, extraScope 
 
   return (
     <LiveProvider code={code} scope={scope} noInline>
-      <Card borderNone padding="md">
+      {bare ? (
         <LivePreview />
-      </Card>
-      <Flex padding="sm">
+      ) : (
+        <Card borderNone padding="md">
+          <LivePreview />
+        </Card>
+      )}
+      <Flex padding={bare ? "none" : "sm"}>
         <LiveError style={{ color: colors.error, fontSize: "12px", margin: 0 }} />
       </Flex>
     </LiveProvider>

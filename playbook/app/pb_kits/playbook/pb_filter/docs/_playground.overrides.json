@@ -117,6 +117,13 @@
     "isCollapsed",
     "onCollapse"
   ],
+  "requiredCodeProps": [
+    "filters",
+    "results",
+    "sortOptions",
+    "sortValue",
+    "onSortChange"
+  ],
   "presets": [
     {
       "name": "Single Filter",

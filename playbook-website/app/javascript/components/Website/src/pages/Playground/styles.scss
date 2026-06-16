@@ -1,0 +1,209 @@
+@import "playbook-tokens/colors";
+@import "playbook-tokens/screen_sizes";
+@import "playbook-tokens/spacing";
+
+.full-playground {
+  box-sizing: border-box;
+  gap: $space_lg;
+  padding-bottom: $space_xl;
+}
+
+.full-playground-heading,
+.full-playground-workbench {
+  width: 100%;
+}
+
+.full-playground-heading {
+  align-items: flex-start;
+
+  @include break_on($screen-md-min) {
+    align-items: flex-end;
+  }
+}
+
+.full-playground-workbench {
+  align-items: start;
+  display: grid;
+  gap: $space_lg;
+  grid-template-columns: minmax(0, 1fr);
+  width: 100%;
+
+  @include break_on($screen-xl-min) {
+    grid-template-columns: minmax(240px, 300px) minmax(0, 1fr) minmax(300px, 360px);
+  }
+}
+
+.full-playground-left,
+.full-playground-center,
+.full-playground-right {
+  display: flex;
+  flex-direction: column;
+  gap: $space_md;
+  min-width: 0;
+  width: 100%;
+}
+
+.builder-field,
+.builder-prop-toggle,
+.builder-checkbox-row {
+  display: flex;
+  gap: $space_xs;
+}
+
+.builder-field {
+  flex-direction: column;
+  margin-bottom: $space_sm;
+
+  span {
+    color: $text_lt_light;
+    font-size: 12px;
+    font-weight: 600;
+  }
+}
+
+.builder-field select,
+.builder-prop-row input[type="text"],
+.builder-prop-row input[type="number"],
+.builder-prop-row select,
+.builder-prop-row textarea {
+  border: 1px solid $border_light;
+  border-radius: 6px;
+  box-sizing: border-box;
+  font: inherit;
+  min-height: 36px;
+  padding: $space_xs;
+  width: 100%;
+}
+
+.builder-prop-row textarea {
+  min-height: 88px;
+  resize: vertical;
+}
+
+.builder-kit-list,
+.builder-prop-list {
+  display: flex;
+  flex-direction: column;
+  gap: $space_xs;
+}
+
+.builder-prop-group {
+  display: flex;
+  flex-direction: column;
+  gap: $space_xxs;
+
+  & + & {
+    border-top: 1px solid $border_light;
+    margin-top: $space_sm;
+    padding-top: $space_sm;
+  }
+}
+
+.builder-kit-list {
+  max-height: 520px;
+  overflow: auto;
+  padding-right: $space_xxs;
+}
+
+.builder-kit-button,
+.builder-instance {
+  border-radius: 6px;
+  cursor: pointer;
+  font: inherit;
+  text-align: left;
+}
+
+.builder-kit-button {
+  appearance: none;
+  background: $white;
+  border: 1px solid $border_light;
+  margin-bottom: $space_xxs;
+  padding: $space_xs;
+  width: 100%;
+
+  &:hover {
+    border-color: $primary;
+  }
+}
+
+.full-playground-canvas {
+  overflow: hidden;
+}
+
+.builder-stage {
+  background: $bg_light;
+  border: 1px dashed $border_light;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: $space_sm;
+  min-height: 360px;
+  min-width: 0;
+  padding: $space_sm;
+}
+
+.builder-empty-canvas {
+  align-items: center;
+  color: $text_lt_light;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: $space_xs;
+  justify-content: center;
+  min-height: 300px;
+  padding: $space_sm;
+  text-align: center;
+  width: 100%;
+}
+
+.builder-instance {
+  display: block;
+  min-width: 0;
+  outline: 1px solid transparent;
+  width: 100%;
+
+  &.is-selected {
+    outline-color: $primary;
+    outline-offset: 2px;
+  }
+
+  &.is-empty-container {
+    border: 1px dashed $border_light;
+    // min-height: 48px;
+  }
+}
+
+.builder-instance-render {
+  min-width: 0;
+}
+
+.builder-prop-row {
+  border: 1px solid $border_light;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: $space_xs;
+  padding: $space_sm;
+}
+
+.builder-prop-toggle,
+.builder-checkbox-row {
+  align-items: center;
+}
+
+.full-playground-code-panel {
+  min-width: 0;
+  width: 100%;
+
+  .pb_card_kit,
+  .pb--card,
+  [class*="pb_card"] {
+    max-width: 100%;
+    min-width: 0;
+  }
+
+  pre,
+  code {
+    max-width: 100%;
+  }
+}
