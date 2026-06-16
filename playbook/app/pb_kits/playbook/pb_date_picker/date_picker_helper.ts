@@ -495,7 +495,7 @@ const datePickerHelper = (config: DatePickerConfig, scrollContainer: string | HT
           panel: cal,
           wrapperViewportRect: wrap.getBoundingClientRect(),
           positionHost: host,
-          matchWrapperWidth: false,
+          matchWrapperWidth: selectionType === "quickpick",
           zIndex: activePortalZIndex,
         })
       }
