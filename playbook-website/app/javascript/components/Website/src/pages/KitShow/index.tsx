@@ -11,6 +11,7 @@ import { PropsTab } from "./Tabs/PropsTab";
 // import { BuildingBlocksTab } from "./Tabs/BuildingBlocksTab";
 // import { ReferencesTab } from "./Tabs/ReferencesTab";
 import { PlaygroundTab } from "./Tabs/PlaygroundTab";
+import { PLAYGROUND_ENABLED_KITS } from "./playgroundEnabledKits";
 
 const KitShow = () => {
   const { name } = useParams();
@@ -87,83 +88,6 @@ const KitShow = () => {
       MOCK_DATA_INLINE_LOADING_EMPTY_CHILDREN: loaderData.table_data_inline_loading_empty_children || [],
     };
   }, [loaderData]);
-
-  // TODO: Remove this allowlist once playground is ready for all kits
-  const PLAYGROUND_ENABLED_KITS = [
-    "advanced_table",
-    "avatar",
-    "background",
-    "badge",
-    "body",
-    "bread_crumbs",
-    "button_toolbar",
-    "button",
-    "caption",
-    "card",
-    "checkbox",
-    "circle_icon_button",
-    "collapsible",
-    "contact",
-    "copy_button",
-    "currency",
-    "dashboard_value",
-    "date_picker",
-    "date_range_inline",
-    "date_range_stacked",
-    "date_stacked",
-    "date_time_stacked",
-    "date_time",
-    "date_year_stacked",
-    "date",
-    "detail",
-    "dialog",
-    "distribution_bar",
-    "draggable",
-    "dropdown",
-    "empty_state",
-    "file_upload",
-    "filter",
-    "fixed_confirmation_toast",
-    "flex",
-    "form_pill",
-    "hashtag",
-    "highlight",
-    "home_address_street",
-    "icon_button",
-    "icon_circle",
-    "icon_stat_value",
-    "icon_value",
-    "icon",
-    "image",
-    "label_pill",
-    "label_value",
-    "legend",
-    "link",
-    "list",
-    "loading_inline",
-    "map",
-    "message",
-    "multi_level_select",
-    "multiple_users_stacked",
-    "multiple_users",
-    "nav",
-    "online_status",
-    "overlay",
-    "pagination",
-    "passphrase",
-    "person_contact",
-    "person",
-    "phone_number_input",
-    "pill",
-    "pb_bar_graph",
-    "pb_circle_chart",
-    "pb_gauge_chart",
-    "pb_line_graph",
-    "popover",
-    "title_count",
-    "title_detail",
-    "title",
-  ];
 
   const [activeTab, setActiveTab] = useState<string>("docs");
   const showPlayground = platform !== "rails" && PLAYGROUND_ENABLED_KITS.includes(currentKit);

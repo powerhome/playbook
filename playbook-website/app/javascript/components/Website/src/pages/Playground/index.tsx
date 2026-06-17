@@ -23,6 +23,7 @@ import {
   PropControl,
   PropValue,
 } from "../KitShow/Tabs/Playground";
+import { PLAYGROUND_ENABLED_KITS } from "../KitShow/playgroundEnabledKits";
 import { linkFormat } from "../../../../../utilities/website_sidebar_helper";
 
 import "./styles.scss";
@@ -64,6 +65,13 @@ type PlaygroundKit = {
       props: string[];
     }>;
     hiddenProps?: string[];
+    presets?: Array<{
+      name: string;
+      props?: Record<string, any>;
+      children?: string;
+      dataPreset?: string | null;
+      structureMode?: string;
+    }>;
     propAliases?: Record<string, string>;
     propSyncOnEnable?: Record<string, {
       dataPreset?: string;
@@ -104,6 +112,7 @@ type BuilderInstance = {
   kitName: string;
   structureMode: string | null;
   dataPresetKey: string | null;
+  configuredChildren: string | null;
   props: Record<string, any>;
   enabledProps: Record<string, boolean>;
   children: BuilderInstance[];
@@ -128,17 +137,6 @@ const EXCLUDED_PROPS = new Set([
   "ref",
 ]);
 
-const STARTER_VALUES: Record<string, any> = {
-  label: "Label",
-  name: "Playbook User",
-  placeholder: "Enter text",
-  subtitle: "Supporting detail",
-  text: "Text",
-  title: "Title",
-  unit: "%",
-  value: "42",
-};
-
 const CHILD_CAPABLE_KITS = new Set([
   "badge",
   "body",
@@ -152,16 +150,6 @@ const CHILD_CAPABLE_KITS = new Set([
   "navitem",
   "popover",
   "title",
-  "tooltip",
-]);
-
-const TEMPLATE_PREVIEW_KITS = new Set([
-  "advanced_table",
-  "collapsible",
-  "dialog",
-  "dropdown",
-  "overlay",
-  "popover",
   "tooltip",
 ]);
 
@@ -257,27 +245,34 @@ const getGlobalProps = (
   globalProps?: Record<string, PropDefinition>
 ) => (kit?.kit_schema?.globalProps ? globalProps ?? {} : {});
 
-const getStarterValue = (name: string, definition: PropDefinition) => {
-  if (definition.default !== undefined) return definition.default;
-  if (STARTER_VALUES[name] !== undefined) return STARTER_VALUES[name];
-
-  const type = displayPropType(definition);
-  if (definition.values?.length) return definition.values[0];
-  if (type.includes("boolean")) return true;
-  if (type.includes("number")) return 0;
-  if (type.includes("array")) return [];
-  if (type.includes("object") || type.includes("{")) return {};
-  if (type.includes("function") || type.includes("=>")) return "() => undefined";
-  return "";
-};
-
-const getDefaultDataPresetKey = (kit: PlaygroundKit) => {
-  const presetKeys = Object.keys(kit.playground_config?.dataPresets?.presets ?? {});
-  return presetKeys[0] ?? null;
+const getSchemaDefault = (definition?: PropDefinition) => {
+  if (!definition || definition.default === undefined) return undefined;
+  const defaultValue = definition.default;
+  if (
+    defaultValue !== null &&
+    typeof defaultValue === "object" &&
+    !Array.isArray(defaultValue) &&
+    defaultValue.react !== undefined
+  ) {
+    return defaultValue.react;
+  }
+  return defaultValue;
 };
 
 const getDefaultStructureMode = (kit: PlaygroundKit) =>
   kit.playground_config?.structureModes?.default ?? null;
+
+const getFirstPreset = (kit: PlaygroundKit) => kit.playground_config?.presets?.[0] ?? null;
+
+const getInitialDataPresetKey = (kit: PlaygroundKit) => {
+  const preset = getFirstPreset(kit);
+  return preset?.dataPreset !== undefined ? preset.dataPreset : null;
+};
+
+const getInitialStructureMode = (kit: PlaygroundKit) => {
+  const preset = getFirstPreset(kit);
+  return preset?.structureMode ?? getDefaultStructureMode(kit);
+};
 
 const getStructureModeConfig = (kit?: PlaygroundKit, structureMode?: string | null) =>
   structureMode ? kit?.playground_config?.structureModes?.modes?.[structureMode] : null;
@@ -327,37 +322,65 @@ const isRuntimeProp = (
   }[name] !== undefined;
 };
 
-const getStarterProps = (
+const getConfiguredChildren = (
   kit: PlaygroundKit,
-  dataPresetKey: string | null,
-  structureMode: string | null
+  structureMode: string | null,
+  preset = getFirstPreset(kit)
 ) => {
-  const props: Record<string, any> = {
-    ...(kit.playground_config?.defaults ?? {}),
-    ...getRuntimeProps(kit, dataPresetKey),
-    ...getStructureModeProps(kit, structureMode),
-  };
-
-  getEditableProps(kit).forEach(([name, definition]) => {
-    if (props[name] === undefined) {
-      props[name] = getStarterValue(name, definition);
-    }
-  });
-
-  return props;
+  if (preset?.children !== undefined) return preset.children;
+  const mode = getStructureModeConfig(kit, structureMode);
+  if (mode?.children !== undefined) return mode.children;
+  return kit.playground_config?.children?.default ?? null;
 };
 
-const createInstance = (kit: PlaygroundKit): BuilderInstance => {
-  const dataPresetKey = getDefaultDataPresetKey(kit);
-  const structureMode = getDefaultStructureMode(kit);
+const getInitialInstanceState = (
+  kit: PlaygroundKit,
+  dataPresetKey: string | null,
+  structureMode: string | null,
+  globalProps?: Record<string, PropDefinition>
+) => {
+  const preset = getFirstPreset(kit);
+  const explicitProps: Record<string, any> = {
+    ...getRuntimeProps(kit, dataPresetKey),
+    ...getStructureModeProps(kit, structureMode),
+    ...(preset?.props ?? {}),
+  };
+  const props: Record<string, any> = { ...explicitProps };
+  const enabledProps = Object.keys(explicitProps).reduce<Record<string, boolean>>(
+    (enabled, name) => {
+      enabled[name] = true;
+      return enabled;
+    },
+    {}
+  );
+  const defaults = kit.playground_config?.defaults ?? {};
+  const propDefinitions = getAllPropDefinitionsWithGlobals(kit, globalProps);
+
+  Object.entries(propDefinitions).forEach(([name, definition]) => {
+    if (props[name] !== undefined) return;
+    const value = defaults[name] !== undefined ? defaults[name] : getSchemaDefault(definition);
+    if (value !== undefined) props[name] = value;
+  });
+
+  return { enabledProps, props };
+};
+
+const createInstance = (
+  kit: PlaygroundKit,
+  globalProps?: Record<string, PropDefinition>
+): BuilderInstance => {
+  const dataPresetKey = getInitialDataPresetKey(kit);
+  const structureMode = getInitialStructureMode(kit);
+  const initialState = getInitialInstanceState(kit, dataPresetKey, structureMode, globalProps);
 
   return {
     id: `${kit.name}-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
     kitName: kit.name,
     structureMode,
     dataPresetKey,
-    props: getStarterProps(kit, dataPresetKey, structureMode),
-    enabledProps: {},
+    configuredChildren: getConfiguredChildren(kit, structureMode),
+    props: initialState.props,
+    enabledProps: initialState.enabledProps,
     children: [],
   };
 };
@@ -460,21 +483,29 @@ const getTemplateChildren = (
   instance: BuilderInstance,
   kit: PlaygroundKit | undefined,
   kitsByName: Record<string, PlaygroundKit>,
-  globalProps?: Record<string, PropDefinition>
+  globalProps?: Record<string, PropDefinition>,
+  context?: CodeRenderContext
 ) => {
   if (instance.children.length > 0) {
     return instance.children
-      .map((child) => renderInstanceCode(child, kitsByName, 0, globalProps))
+      .map((child) => renderInstanceCode(child, kitsByName, 0, globalProps, context))
       .join("\n");
   }
 
   const mode = getStructureModeConfig(kit, instance.structureMode);
-  return mode?.children ?? kit?.playground_config?.children?.default ?? "";
+  return instance.configuredChildren ?? mode?.children ?? kit?.playground_config?.children?.default ?? "";
 };
 
 const getActiveTemplate = (instance: BuilderInstance, kit?: PlaygroundKit) => {
   const mode = getStructureModeConfig(kit, instance.structureMode);
-  return mode?.template ?? kit?.playground_config?.template;
+  const template = mode?.template ?? kit?.playground_config?.template;
+  if (!template) return template;
+
+  const wrapperMatch = template
+    .trim()
+    .match(/^<div className="flex-doc-example">\s*([\s\S]*?)\s*<\/div>$/);
+
+  return wrapperMatch ? wrapperMatch[1] : template;
 };
 
 const getActivePropTargets = (instance: BuilderInstance, kit?: PlaygroundKit) => {
@@ -511,14 +542,30 @@ const getActiveWrapper = (instance: BuilderInstance, kit?: PlaygroundKit) => {
   return mode?.wrapper ?? kit?.playground_config?.wrapper;
 };
 
-const getRuntimeScope = (instance: BuilderInstance, kit?: PlaygroundKit) =>
-  Object.entries(getRequiredCodeProps(kit, instance)).reduce<Record<string, any>>(
-    (scope, [name, value]) => {
-      scope[name] = instance.props[name] ?? value;
-      return scope;
+const getRuntimeScope = (
+  instance: BuilderInstance,
+  kit: PlaygroundKit | undefined,
+  kitsByName: Record<string, PlaygroundKit>
+) => {
+  const propValues = kit ? getInstancePropValues(instance, kit) : {};
+  const requiredProps = getRequiredCodeProps(kit, instance);
+  const ownScope = kit
+    ? getTemplateVariableValues(kit, instance, propValues, requiredProps)
+    : requiredProps;
+  const scope = Object.entries(ownScope).reduce<Record<string, any>>(
+    (scopedValues, [name, value]) => {
+      scopedValues[name] = instance.props[name] ?? propValues[name]?.value ?? value;
+      return scopedValues;
     },
     {}
   );
+
+  instance.children.forEach((child) => {
+    Object.assign(scope, getRuntimeScope(child, kitsByName[child.kitName], kitsByName));
+  });
+
+  return scope;
+};
 
 const shouldApplySyncValue = (value: any) => {
   if (typeof value === "boolean") return value;
@@ -562,10 +609,7 @@ const getPropValue = (
 };
 
 const shouldUseTemplatePreview = (instance: BuilderInstance, kit?: PlaygroundKit) =>
-  Boolean(
-    getActiveTemplate(instance, kit) &&
-    (TEMPLATE_PREVIEW_KITS.has(instance.kitName) || getActiveWrapper(instance, kit))
-  );
+  Boolean(getActiveTemplate(instance, kit));
 
 const getLivePreviewCode = (
   instance: BuilderInstance,
@@ -601,69 +645,355 @@ const collectImportNames = (
   return names;
 };
 
+type CodeRenderContext = {
+  setupSnippets: string[];
+  usedSetupNames: Set<string>;
+};
+
+const escapeRegExp = (value: string) => value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+
+const findTopLevelJsxStart = (code: string) => {
+  let braceDepth = 0;
+  let bracketDepth = 0;
+  let parenDepth = 0;
+  let quote: "'" | "\"" | "`" | null = null;
+  let escaped = false;
+  let lineComment = false;
+  let blockComment = false;
+
+  for (let index = 0; index < code.length; index += 1) {
+    const char = code[index];
+    const next = code[index + 1];
+
+    if (lineComment) {
+      if (char === "\n") lineComment = false;
+      continue;
+    }
+
+    if (blockComment) {
+      if (char === "*" && next === "/") {
+        blockComment = false;
+        index += 1;
+      }
+      continue;
+    }
+
+    if (quote) {
+      if (escaped) {
+        escaped = false;
+      } else if (char === "\\") {
+        escaped = true;
+      } else if (char === quote) {
+        quote = null;
+      }
+      continue;
+    }
+
+    if (char === "/" && next === "/") {
+      lineComment = true;
+      index += 1;
+      continue;
+    }
+
+    if (char === "/" && next === "*") {
+      blockComment = true;
+      index += 1;
+      continue;
+    }
+
+    if (char === "'" || char === "\"" || char === "`") {
+      quote = char;
+      continue;
+    }
+
+    if (char === "{") braceDepth += 1;
+    if (char === "}") braceDepth = Math.max(0, braceDepth - 1);
+    if (char === "[") bracketDepth += 1;
+    if (char === "]") bracketDepth = Math.max(0, bracketDepth - 1);
+    if (char === "(") parenDepth += 1;
+    if (char === ")") parenDepth = Math.max(0, parenDepth - 1);
+
+    if (
+      char === "<" &&
+      braceDepth === 0 &&
+      bracketDepth === 0 &&
+      parenDepth === 0 &&
+      next &&
+      /[A-Za-z]/.test(next)
+    ) {
+      return index;
+    }
+  }
+
+  return -1;
+};
+
+const splitSetupFromRenderableCode = (code: string) => {
+  const trimmed = code.trim();
+  const jsxStart = findTopLevelJsxStart(trimmed);
+
+  if (jsxStart < 0) {
+    return { setup: trimmed, renderable: "" };
+  }
+
+  return {
+    setup: trimmed.slice(0, jsxStart).trim(),
+    renderable: trimmed.slice(jsxStart).trim(),
+  };
+};
+
+const getTopLevelDeclarationNames = (code: string) =>
+  [
+    ...code.matchAll(/^(?:const|let|var|function)\s+([A-Za-z_$][\w$]*)/gm),
+  ].map((match) => match[1]);
+
+const makeSetupDeclarationsUnique = (
+  setup: string,
+  renderable: string,
+  context: CodeRenderContext
+) => {
+  let nextSetup = setup;
+  let nextRenderable = renderable;
+
+  getTopLevelDeclarationNames(setup).forEach((name) => {
+    let nextName = name;
+    let suffix = 2;
+
+    while (context.usedSetupNames.has(nextName)) {
+      nextName = `${name}${suffix}`;
+      suffix += 1;
+    }
+
+    context.usedSetupNames.add(nextName);
+
+    if (nextName === name) return;
+
+    const namePattern = new RegExp(`\\b${escapeRegExp(name)}\\b`, "g");
+    nextSetup = nextSetup.replace(namePattern, nextName);
+    nextRenderable = nextRenderable.replace(namePattern, nextName);
+  });
+
+  return { setup: nextSetup, renderable: nextRenderable };
+};
+
+const appendSetupSnippet = (
+  code: string,
+  context?: CodeRenderContext
+) => {
+  if (!context) return splitSetupFromRenderableCode(code);
+
+  const split = splitSetupFromRenderableCode(code);
+  if (!split.setup) return split;
+
+  const unique = makeSetupDeclarationsUnique(split.setup, split.renderable, context);
+  if (unique.setup) context.setupSnippets.push(unique.setup);
+
+  return { setup: "", renderable: unique.renderable };
+};
+
+const templateReferencesName = (template: string | undefined, name: string) =>
+  Boolean(template && new RegExp(`\\b${escapeRegExp(name)}\\b`).test(template));
+
+const hasTopLevelDeclaration = (code: string, name: string) =>
+  new RegExp(`^(?:const|let|var|function)\\s+${escapeRegExp(name)}\\b`, "m").test(code);
+
+const buildRequiredVariableDefinitions = (
+  variableValues: Record<string, any>,
+  propValues: Record<string, PropValue>,
+  template: string | undefined,
+  wrapper: string | undefined,
+  existingSetup: string
+) => {
+  const source = `${template ?? ""}\n${wrapper ?? ""}`;
+
+  return Object.entries(variableValues)
+    .filter(([name]) => templateReferencesName(source, name))
+    .filter(([name]) => !hasTopLevelDeclaration(existingSetup, name))
+    .map(([name, value]) => {
+      const currentValue = propValues[name]?.value ?? value;
+      return `const ${name} = ${JSON.stringify(currentValue, null, 2)};`;
+    })
+    .join("\n\n");
+};
+
+const getTemplateVariableValues = (
+  kit: PlaygroundKit,
+  instance: BuilderInstance,
+  propValues: Record<string, PropValue>,
+  requiredProps: Record<string, any>
+) => {
+  const activeDataPresetProps = getDataPresetProps(kit, instance.dataPresetKey);
+  const fallbackDataPresetProps = Object.keys(activeDataPresetProps).length > 0
+    ? {}
+    : getDataPresetProps(kit, getInitialDataPresetKey(kit));
+  const values: Record<string, any> = {
+    ...(kit.playground_config?.requiredProps ?? {}),
+    ...fallbackDataPresetProps,
+    ...activeDataPresetProps,
+    ...requiredProps,
+  };
+
+  Object.entries(propValues).forEach(([name, propValue]) => {
+    if (values[name] === undefined) values[name] = propValue.value;
+  });
+
+  Object.entries(instance.props).forEach(([name, value]) => {
+    if (values[name] === undefined) values[name] = value;
+  });
+
+  return values;
+};
+
 const renderInstanceCode = (
   instance: BuilderInstance,
   kitsByName: Record<string, PlaygroundKit>,
   depth: number,
-  globalProps?: Record<string, PropDefinition>
+  globalProps?: Record<string, PropDefinition>,
+  context?: CodeRenderContext
 ): string => {
   const kit = kitsByName[instance.kitName];
+  if (kit && getActiveTemplate(instance, kit)) {
+    const template = getActiveTemplate(instance, kit)!;
+    const propValues = getInstancePropValues(instance, kit);
+    const wrapper = getActiveWrapper(instance, kit);
+    const requiredProps = getRequiredCodeProps(kit, instance);
+    const rendered = generateFromTemplate({
+      template,
+      propValues,
+      propDefinitions: getAllPropDefinitionsWithGlobals(kit, globalProps) as any,
+      propTargets: getActivePropTargets(instance, kit),
+      propAliases: getActivePropAliases(instance, kit),
+      children: getTemplateChildren(instance, kit, kitsByName, globalProps, context),
+      childrenConfig: kit.playground_config?.children,
+      includeImport: false,
+      customImports: getActiveImports(instance, kit),
+      externalImports: getActiveExternalImports(instance, kit),
+      wrapper,
+      requiredProps,
+    });
+
+    const split = splitSetupFromRenderableCode(rendered);
+    let renderable = split.renderable;
+    const requiredVariableDefinitions = buildRequiredVariableDefinitions(
+      getTemplateVariableValues(kit, instance, propValues, requiredProps),
+      propValues,
+      template,
+      wrapper,
+      split.setup
+    );
+    const setup = [requiredVariableDefinitions, split.setup].filter(Boolean).join("\n\n");
+
+    if (context && setup) {
+      const unique = makeSetupDeclarationsUnique(setup, renderable, context);
+      context.setupSnippets.push(unique.setup);
+      renderable = unique.renderable;
+    } else if (!context) {
+      renderable = appendSetupSnippet(rendered, context).renderable;
+    }
+
+    const pad = "  ".repeat(depth);
+    return renderable
+      .split("\n")
+      .map((line) => (line ? `${pad}${line}` : line))
+      .join("\n");
+  }
+
   const componentName = kit?.kit_schema?.name ?? "Card";
   const props = renderCodeProps(instance, kit, globalProps);
   const propString = props ? ` ${props}` : "";
   const pad = "  ".repeat(depth);
+  const configuredChildren = instance.configuredChildren?.trim();
 
-  if (instance.children.length === 0) {
+  if (instance.children.length === 0 && !configuredChildren) {
     return `${pad}<${componentName}${propString} />`;
   }
 
-  const children = instance.children
-    .map((child) => renderInstanceCode(child, kitsByName, depth + 1, globalProps))
-    .join("\n");
+  const children =
+    instance.children.length > 0
+      ? instance.children
+          .map((child) => renderInstanceCode(child, kitsByName, depth + 1, globalProps, context))
+          .join("\n")
+      : configuredChildren!
+          .split("\n")
+          .map((line) => `${"  ".repeat(depth + 1)}${line}`)
+          .join("\n");
 
   return `${pad}<${componentName}${propString}>\n${children}\n${pad}</${componentName}>`;
 };
 
-const hasTemplateBackedInstance = (
+const collectActivePlaybookImports = (
   instances: BuilderInstance[],
-  kitsByName: Record<string, PlaygroundKit>
-): boolean =>
-  instances.some((instance) => {
+  kitsByName: Record<string, PlaygroundKit>,
+  names = new Set<string>()
+) => {
+  instances.forEach((instance) => {
     const kit = kitsByName[instance.kitName];
-    return (
-      Boolean(kit && shouldUseTemplatePreview(instance, kit)) ||
-      hasTemplateBackedInstance(instance.children, kitsByName)
-    );
+    getActiveImports(instance, kit).forEach((name) => names.add(name));
+    collectActivePlaybookImports(instance.children, kitsByName, names);
   });
 
-const renderDisplayInstanceCode = (
-  instance: BuilderInstance,
+  return names;
+};
+
+const collectExternalImportStatements = (
+  instances: BuilderInstance[],
   kitsByName: Record<string, PlaygroundKit>,
-  globalProps?: Record<string, PropDefinition>
+  statements = new Set<string>()
 ) => {
-  const kit = kitsByName[instance.kitName];
+  instances.forEach((instance) => {
+    const kit = kitsByName[instance.kitName];
+    getActiveExternalImports(instance, kit).forEach((statement) => statements.add(statement));
+    collectExternalImportStatements(instance.children, kitsByName, statements);
+  });
 
-  if (kit && shouldUseTemplatePreview(instance, kit)) {
-    return generateFromTemplate({
-      template: getActiveTemplate(instance, kit)!,
-      propValues: getInstancePropValues(instance, kit),
-      propDefinitions: getAllPropDefinitionsWithGlobals(kit, globalProps) as any,
-      propTargets: getActivePropTargets(instance, kit),
-      propAliases: getActivePropAliases(instance, kit),
-      children: getTemplateChildren(instance, kit, kitsByName, globalProps),
-      childrenConfig: kit.playground_config?.children,
-      includeImport: true,
-      customImports: getActiveImports(instance, kit),
-      externalImports: getActiveExternalImports(instance, kit),
-      wrapper: getActiveWrapper(instance, kit),
-      requiredProps: getRequiredCodeProps(kit, instance),
-    });
-  }
+  return statements;
+};
 
-  const imports = Array.from(collectImportNames([instance], kitsByName)).sort();
-  return `import { ${imports.length ? imports.join(", ") : "Card"} } from "playbook-ui";
+const collectLocalDeclarationNames = (code: string) =>
+  new Set(getTopLevelDeclarationNames(code));
 
-${renderInstanceCode(instance, kitsByName, 0, globalProps)}`;
+const collectComponentNamesFromCode = (code: string) =>
+  [...code.matchAll(/<([A-Z][A-Za-z0-9.]*)/g)].map((match) => match[1].split(".")[0]);
+
+const formatPlaybookImportName = (name: string) =>
+  name === "FormattedDate" ? "Date as FormattedDate" : name;
+
+const REACT_HOOK_IMPORTS = [
+  "useCallback",
+  "useEffect",
+  "useMemo",
+  "useRef",
+  "useState",
+];
+
+const buildReactImport = (source: string) => {
+  const hooks = REACT_HOOK_IMPORTS.filter((hook) =>
+    new RegExp(`\\b${hook}\\b`).test(source)
+  );
+
+  return hooks.length > 0
+    ? `import React, { ${hooks.join(", ")} } from "react";`
+    : `import React from "react";`;
+};
+
+const buildPlaybookImport = (
+  instances: BuilderInstance[],
+  kitsByName: Record<string, PlaygroundKit>,
+  source: string
+) => {
+  const localNames = collectLocalDeclarationNames(source);
+  const names = new Set<string>();
+
+  collectImportNames(instances, kitsByName).forEach((name) => names.add(name));
+  collectActivePlaybookImports(instances, kitsByName).forEach((name) => names.add(name));
+  collectComponentNamesFromCode(source).forEach((name) => names.add(name));
+
+  const importNames = Array.from(names)
+    .filter((name) => !localNames.has(name))
+    .map(formatPlaybookImportName)
+    .sort();
+
+  return `import { ${importNames.length ? importNames.join(", ") : "Card"} } from "playbook-ui";`;
 };
 
 const generateCode = (
@@ -671,27 +1001,32 @@ const generateCode = (
   kitsByName: Record<string, PlaygroundKit>,
   globalProps?: Record<string, PropDefinition>
 ) => {
-  if (hasTemplateBackedInstance(instances, kitsByName)) {
-    return instances.length === 0
-      ? "/* Add kits to start composing. */"
-      : instances.map((instance) => renderDisplayInstanceCode(instance, kitsByName, globalProps)).join("\n\n");
-  }
-
-  const imports = Array.from(collectImportNames(instances, kitsByName)).sort();
+  const context: CodeRenderContext = {
+    setupSnippets: [],
+    usedSetupNames: new Set(),
+  };
   const renderedInstances = instances.length === 0
     ? "    {/* Add kits to start composing. */}"
     : instances
-        .map((instance) => renderInstanceCode(instance, kitsByName, 2, globalProps))
+        .map((instance) => renderInstanceCode(instance, kitsByName, 2, globalProps, context))
         .join("\n");
-
-  return `import React from "react";
-import { ${imports.length ? imports.join(", ") : "Card"} } from "playbook-ui";
-
-export const PlaygroundComposition = () => (
+  const setupCode = context.setupSnippets.join("\n\n");
+  const componentCode = `export const PlaygroundComposition = () => (
   <div className="playground-composition">
 ${renderedInstances}
   </div>
 );`;
+  const source = [setupCode, componentCode].filter(Boolean).join("\n\n");
+  const externalImports = Array.from(collectExternalImportStatements(instances, kitsByName));
+  const imports = [
+    buildReactImport(source),
+    ...externalImports,
+    buildPlaybookImport(instances, kitsByName, source),
+  ].filter(Boolean);
+
+  return `${imports.join("\n")}
+
+${source}`;
 };
 
 const countInstances = (instances: BuilderInstance[]): number =>
@@ -908,12 +1243,14 @@ const BuilderPreviewItem = ({
     />
   ));
   const canRenderChildren = acceptsChildren(kit);
+  const configuredChildren = instance.configuredChildren?.trim();
+  const directChildren = childNodes.length > 0 ? childNodes : configuredChildren || undefined;
 
   const rendered = kit && shouldUseTemplatePreview(instance, kit) ? (
     <PlaygroundPreview
       bare
       code={getLivePreviewCode(instance, kit, kitsByName, globalProps)}
-      extraScope={getRuntimeScope(instance, kit)}
+      extraScope={getRuntimeScope(instance, kit, kitsByName)}
     />
   ) : Component ? (
     <RenderBoundary
@@ -926,7 +1263,7 @@ const BuilderPreviewItem = ({
       {React.createElement(
         Component,
         getRenderableProps(instance, kit, globalProps),
-        canRenderChildren && childNodes.length > 0 ? childNodes : undefined
+        canRenderChildren ? directChildren : undefined
       )}
     </RenderBoundary>
   ) : (
@@ -1068,23 +1405,28 @@ export default function Playground() {
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [addTargetId, setAddTargetId] = useState(ROOT_TARGET_ID);
 
+  const enabledPlaygroundKits = useMemo(
+    () => playground_kits.filter((kit) => PLAYGROUND_ENABLED_KITS.includes(kit.name)),
+    [playground_kits]
+  );
+
   const kitsByName = useMemo(() => {
-    return playground_kits.reduce<Record<string, PlaygroundKit>>((acc, kit) => {
+    return enabledPlaygroundKits.reduce<Record<string, PlaygroundKit>>((acc, kit) => {
       acc[kit.name] = kit;
       return acc;
     }, {});
-  }, [playground_kits]);
+  }, [enabledPlaygroundKits]);
 
   const filteredKits = useMemo(() => {
     const query = searchQuery.trim().toLowerCase();
-    if (!query) return playground_kits;
+    if (!query) return enabledPlaygroundKits;
 
-    return playground_kits.filter((kit) =>
+    return enabledPlaygroundKits.filter((kit) =>
       [kit.name, kit.label, kit.category]
         .filter(Boolean)
         .some((value) => value.toLowerCase().includes(query))
     );
-  }, [playground_kits, searchQuery]);
+  }, [enabledPlaygroundKits, searchQuery]);
 
   const kitsByCategory = useMemo(() => {
     return filteredKits.reduce<Record<string, PlaygroundKit[]>>((acc, kit) => {
@@ -1132,7 +1474,7 @@ export default function Playground() {
   };
 
   const addKit = (kit: PlaygroundKit) => {
-    const nextInstance = createInstance(kit);
+    const nextInstance = createInstance(kit, global_props_schema?.props);
 
     if (activeAddTargetId === ROOT_TARGET_ID) {
       setInstances((current) => [...current, nextInstance]);
@@ -1182,6 +1524,10 @@ export default function Playground() {
         ...instance,
         dataPresetKey,
         structureMode,
+        configuredChildren:
+          shouldSync && syncRule?.structureMode
+            ? getConfiguredChildren(selectedKit, structureMode, null)
+            : instance.configuredChildren,
         props: {
           ...instance.props,
           ...(shouldSync ? getRuntimeProps(selectedKit, dataPresetKey) : {}),
@@ -1201,7 +1547,7 @@ export default function Playground() {
       <Flex className="full-playground" orientation="column" width="100%">
         <Flex className="full-playground-heading" justify="between" align="end" gap="md">
           <Flex orientation="column" gap="xs">
-            <Caption color="lighter" text={`${playground_kits.length} configured playground kits`} />
+            <Caption color="lighter" text={`${enabledPlaygroundKits.length} configured playground kits`} />
             <Title size={1} text="Playground" />
             <Body
               color="light"
@@ -1401,6 +1747,11 @@ export default function Playground() {
                           updateInstance(selectedInstance.id, (instance) => ({
                             ...instance,
                             structureMode,
+                            configuredChildren: getConfiguredChildren(
+                              selectedKit,
+                              structureMode,
+                              null
+                            ),
                             props: {
                               ...instance.props,
                               ...getStructureModeProps(selectedKit, structureMode),
