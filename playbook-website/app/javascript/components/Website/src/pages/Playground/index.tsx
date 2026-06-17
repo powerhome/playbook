@@ -82,22 +82,17 @@ export default function Playground() {
 
   const filteredKits = useMemo(() => {
     const query = searchQuery.trim().toLowerCase();
-    if (!query) return enabledPlaygroundKits;
 
-    return enabledPlaygroundKits.filter((kit) =>
-      [kit.name, kit.label, kit.category]
-        .filter(Boolean)
-        .some((value) => value.toLowerCase().includes(query)),
-    );
+    return [...enabledPlaygroundKits]
+      .filter((kit) => {
+        if (!query) return true;
+
+        return [kit.name, kit.label, kit.category]
+          .filter(Boolean)
+          .some((value) => value.toLowerCase().includes(query));
+      })
+      .sort((a, b) => formatKitName(a.name).localeCompare(formatKitName(b.name)));
   }, [enabledPlaygroundKits, searchQuery]);
-
-  const kitsByCategory = useMemo(() => {
-    return filteredKits.reduce<Record<string, PlaygroundKit[]>>((acc, kit) => {
-      if (!acc[kit.category]) acc[kit.category] = [];
-      acc[kit.category].push(kit);
-      return acc;
-    }, {});
-  }, [filteredKits]);
 
   const selectedInstance = findInstance(instances, selectedId);
   const selectedKit = selectedInstance
@@ -300,29 +295,21 @@ export default function Playground() {
                 overflow="auto"
                 paddingRight="xxs"
               >
-                {Object.entries(kitsByCategory).map(([category, kits]) => (
-                  <Flex key={category} orientation="column">
-                    <Caption color="lighter" text={category} />
-                    {kits.map((kit) => (
-                      <button
-                        className="builder-kit-button"
-                        key={kit.name}
-                        onClick={() => addKit(kit)}
-                        type="button"
-                      >
-                        <Flex align="center" gap="sm">
-                          <Icon icon="plus" />
-                          <Flex orientation="column" align="start">
-                            <Body text={kit.label} />
-                            <Caption
-                              color="lighter"
-                              text={formatKitName(kit.name)}
-                            />
-                          </Flex>
-                        </Flex>
-                      </button>
-                    ))}
-                  </Flex>
+                {filteredKits.map((kit) => (
+                  <button
+                    className="builder-kit-button"
+                    key={kit.name}
+                    onClick={() => addKit(kit)}
+                    type="button"
+                  >
+                    <Flex align="center" gap="sm" width="100%">
+                      <Icon icon="plus" />
+                      <Caption
+                        color="lighter"
+                        text={formatKitName(kit.name)}
+                      />
+                    </Flex>
+                  </button>
                 ))}
               </Flex>
             </Card>
