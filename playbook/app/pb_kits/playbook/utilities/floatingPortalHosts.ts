@@ -216,6 +216,33 @@ export function eventTargetAsElement(
 }
 
 /**
+ * Native `<select>` menus are OS-rendered (not in the DOM). Firefox may fire
+ * mousedown on the dialog/backdrop while picking an option — treat focused or
+ * in-dialog selects as an in-menu interaction so the dialog does not close.
+ */
+export function isNativeSelectMenuInteraction(
+  dialogElement: HTMLElement,
+  target: EventTarget | null,
+): boolean {
+  const el = eventTargetAsElement(target)
+  const selectFromTarget =
+    el instanceof HTMLSelectElement ? el : el?.closest("select") ?? null
+
+  if (
+    selectFromTarget instanceof HTMLSelectElement &&
+    dialogElement.contains(selectFromTarget)
+  ) {
+    return true
+  }
+
+  const active = document.activeElement
+  return (
+    active instanceof HTMLSelectElement &&
+    dialogElement.contains(active)
+  )
+}
+
+/**
  * Kits that portal menus to `document.body` still belong to the open popover for close-on-click.
  * When `ownerId` is passed, only menus tagged for that surface count (not other open popovers).
  */

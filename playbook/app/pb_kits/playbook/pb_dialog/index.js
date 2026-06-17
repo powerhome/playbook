@@ -1,5 +1,8 @@
 import PbEnhancedElement from "../pb_enhanced_element";
-import { targetIsInsidePortaledFloatingKit } from "../utilities/floatingPortalHosts";
+import {
+  isNativeSelectMenuInteraction,
+  targetIsInsidePortaledFloatingKit,
+} from "../utilities/floatingPortalHosts";
 
 const DIALOG_WRAPPER_SELECTOR = "[data-pb-dialog-wrapper]";
 
@@ -197,6 +200,7 @@ export default class PbDialog extends PbEnhancedElement {
 
         const target = event.target
         if (targetIsInsidePortaledFloatingKit(target, dialogElement.id)) return
+        if (isNativeSelectMenuInteraction(dialogElement, target)) return
 
         const dialogContent =
           dialogElement.querySelector(".pb_dialog_scroll_region") || dialogElement

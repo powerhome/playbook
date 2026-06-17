@@ -2,6 +2,7 @@ import React, {useState} from 'react'
 import { render, cleanup, waitFor, fireEvent, screen } from "../utilities/test-utils";
 import { Dialog, Button } from 'playbook-ui'
 import {
+  isNativeSelectMenuInteraction,
   resolveDialogFloatingPortalHost,
   resolvePortaledKitHost,
 } from "../utilities/floatingPortalHosts"
@@ -231,5 +232,39 @@ describe('Dialog floating portal host (portaled kits)', () => {
     document.body.appendChild(kit)
 
     expect(resolvePortaledKitHost(kit, host)).toBe(host)
+  })
+})
+
+describe('isNativeSelectMenuInteraction', () => {
+  beforeEach(() => {
+    document.body.innerHTML = ''
+  })
+
+  test('returns true when mousedown target is a select inside the dialog', () => {
+    const dialog = document.createElement('dialog')
+    const select = document.createElement('select')
+    dialog.appendChild(select)
+    document.body.appendChild(dialog)
+
+    expect(isNativeSelectMenuInteraction(dialog, select)).toBe(true)
+  })
+
+  test('returns true when a select inside the dialog is focused (Firefox OS menu pick)', () => {
+    const dialog = document.createElement('dialog')
+    const select = document.createElement('select')
+    dialog.appendChild(select)
+    document.body.appendChild(dialog)
+    select.focus()
+
+    expect(isNativeSelectMenuInteraction(dialog, dialog)).toBe(true)
+  })
+
+  test('returns false when the select is outside the dialog', () => {
+    const dialog = document.createElement('dialog')
+    const select = document.createElement('select')
+    document.body.appendChild(dialog)
+    document.body.appendChild(select)
+
+    expect(isNativeSelectMenuInteraction(dialog, select)).toBe(false)
   })
 })
