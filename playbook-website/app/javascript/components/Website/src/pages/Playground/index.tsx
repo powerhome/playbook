@@ -8,10 +8,12 @@ import {
   Caption,
   Card,
   Detail,
+  Dropdown,
   Flex,
   Icon,
   TextInput,
   Title,
+  Tooltip,
 } from "playbook-ui";
 
 import { PageContainer } from "../../components/PageContainer";
@@ -91,7 +93,9 @@ export default function Playground() {
           .filter(Boolean)
           .some((value) => value.toLowerCase().includes(query));
       })
-      .sort((a, b) => formatKitName(a.name).localeCompare(formatKitName(b.name)));
+      .sort((a, b) =>
+        formatKitName(a.name).localeCompare(formatKitName(b.name)),
+      );
   }, [enabledPlaygroundKits, searchQuery]);
 
   const selectedInstance = findInstance(instances, selectedId);
@@ -124,6 +128,18 @@ export default function Playground() {
   )
     ? addTargetId
     : ROOT_TARGET_ID;
+  const addTargetOptions = useMemo(
+    () =>
+      targetOptions.map((option) => ({
+        id: option.id,
+        label: option.label,
+        value: option.id,
+      })),
+    [targetOptions],
+  );
+  const activeAddTargetOption =
+    addTargetOptions.find((option) => option.value === activeAddTargetId) ??
+    addTargetOptions[0];
   const generatedCode = generateCode(
     instances,
     kitsByName,
@@ -265,19 +281,27 @@ export default function Playground() {
           >
             <Card padding="md" width="100%">
               <Title marginBottom="sm" size={4} text="Add Kits" />
-              <label className="builder-field">
-                <span>Add to</span>
-                <select
-                  onChange={(event) => setAddTargetId(event.target.value)}
-                  value={activeAddTargetId}
-                >
-                  {targetOptions.map((option) => (
-                    <option key={option.id} value={option.id}>
-                      {option.label}
-                    </option>
-                  ))}
-                </select>
-              </label>
+              <Flex className="builder-field" orientation="column">
+                <Flex align="center" gap="xs">
+                  <Caption color="lighter" text="Where to add the kit" />
+                  <Tooltip text="Once you add a kit that accepts children, you can add more kits inside it">
+                    <Icon icon="circle-info" size="xs" color="lighter" />
+                  </Tooltip>
+                </Flex>
+                <Dropdown
+                  clearable={false}
+                  defaultValue={activeAddTargetOption}
+                  id="playground-add-target-dropdown"
+                  key={activeAddTargetId}
+                  onSelect={(option: { value: string }): null => {
+                    setAddTargetId(option.value);
+                    return null;
+                  }}
+                  options={addTargetOptions}
+                  placeholder="Main canvas"
+                  width="100%"
+                />
+              </Flex>
               <TextInput
                 label="Search kits"
                 name="playgroundKitSearch"
@@ -304,10 +328,7 @@ export default function Playground() {
                   >
                     <Flex align="center" gap="sm" width="100%">
                       <Icon icon="plus" />
-                      <Caption
-                        color="lighter"
-                        text={formatKitName(kit.name)}
-                      />
+                      <Caption color="lighter" text={formatKitName(kit.name)} />
                     </Flex>
                   </button>
                 ))}

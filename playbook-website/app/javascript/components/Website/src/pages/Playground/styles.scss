@@ -37,15 +37,9 @@
 .builder-field {
   flex-direction: column;
   margin-bottom: $space_sm;
-
-  span {
-    color: $text_lt_light;
-    font-size: 12px;
-    font-weight: 600;
-  }
 }
 
-.builder-field select,
+.builder-native-select,
 .builder-prop-row input[type="text"],
 .builder-prop-row input[type="number"],
 .builder-prop-row select,
