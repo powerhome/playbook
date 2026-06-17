@@ -1,6 +1,7 @@
 import React, { useMemo, useState } from "react";
 import { useLoaderData } from "react-router-dom";
 import {
+  Background,
   Badge,
   Body,
   Button,
@@ -14,10 +15,7 @@ import {
 } from "playbook-ui";
 
 import { PageContainer } from "../../components/PageContainer";
-import {
-  CodePanel,
-  PropControl,
-} from "../KitShow/Tabs/Playground";
+import { CodePanel, PropControl } from "../KitShow/Tabs/Playground";
 import type { PropValue } from "../KitShow/Tabs/Playground";
 import { PLAYGROUND_ENABLED_KITS } from "../KitShow/playgroundEnabledKits";
 import { BuilderPreviewItem } from "./BuilderPreviewItem";
@@ -52,32 +50,34 @@ import type {
   PlaygroundKit,
   PlaygroundLoaderData,
 } from "./types";
-import {
-  ROOT_TARGET_ID,
-} from "./types";
+import { ROOT_TARGET_ID } from "./types";
 
 import "./styles.scss";
 
 export default function Playground() {
-  const {
-    global_props_schema,
-    playground_kits = [],
-  } = useLoaderData() as PlaygroundLoaderData;
+  const { global_props_schema, playground_kits = [] } =
+    useLoaderData() as PlaygroundLoaderData;
   const [instances, setInstances] = useState<BuilderInstance[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [addTargetId, setAddTargetId] = useState(ROOT_TARGET_ID);
 
   const enabledPlaygroundKits = useMemo(
-    () => playground_kits.filter((kit) => PLAYGROUND_ENABLED_KITS.includes(kit.name)),
-    [playground_kits]
+    () =>
+      playground_kits.filter((kit) =>
+        PLAYGROUND_ENABLED_KITS.includes(kit.name),
+      ),
+    [playground_kits],
   );
 
   const kitsByName = useMemo(() => {
-    return enabledPlaygroundKits.reduce<Record<string, PlaygroundKit>>((acc, kit) => {
-      acc[kit.name] = kit;
-      return acc;
-    }, {});
+    return enabledPlaygroundKits.reduce<Record<string, PlaygroundKit>>(
+      (acc, kit) => {
+        acc[kit.name] = kit;
+        return acc;
+      },
+      {},
+    );
   }, [enabledPlaygroundKits]);
 
   const filteredKits = useMemo(() => {
@@ -87,7 +87,7 @@ export default function Playground() {
     return enabledPlaygroundKits.filter((kit) =>
       [kit.name, kit.label, kit.category]
         .filter(Boolean)
-        .some((value) => value.toLowerCase().includes(query))
+        .some((value) => value.toLowerCase().includes(query)),
     );
   }, [enabledPlaygroundKits, searchQuery]);
 
@@ -100,29 +100,46 @@ export default function Playground() {
   }, [filteredKits]);
 
   const selectedInstance = findInstance(instances, selectedId);
-  const selectedKit = selectedInstance ? kitsByName[selectedInstance.kitName] : undefined;
+  const selectedKit = selectedInstance
+    ? kitsByName[selectedInstance.kitName]
+    : undefined;
   const selectedDataPresetOptions = getDataPresetOptions(selectedKit);
   const selectedStructureModeOptions = getStructureModeOptions(selectedKit);
-  const selectedGlobalProps = getGlobalProps(selectedKit, global_props_schema?.props);
-  const selectedRequiredPropNames = getRequiredPropNames(selectedKit, selectedInstance);
+  const selectedGlobalProps = getGlobalProps(
+    selectedKit,
+    global_props_schema?.props,
+  );
+  const selectedRequiredPropNames = getRequiredPropNames(
+    selectedKit,
+    selectedInstance,
+  );
   const targetOptions = useMemo(
     () => [
       { id: ROOT_TARGET_ID, label: "Main canvas" },
       ...buildTargetOptions(instances, kitsByName),
     ],
-    [instances, kitsByName]
+    [instances, kitsByName],
   );
   const instanceOptions = useMemo(
     () => buildInstanceOptions(instances, kitsByName),
-    [instances, kitsByName]
+    [instances, kitsByName],
   );
-  const activeAddTargetId = targetOptions.some((option) => option.id === addTargetId)
+  const activeAddTargetId = targetOptions.some(
+    (option) => option.id === addTargetId,
+  )
     ? addTargetId
     : ROOT_TARGET_ID;
-  const generatedCode = generateCode(instances, kitsByName, global_props_schema?.props);
+  const generatedCode = generateCode(
+    instances,
+    kitsByName,
+    global_props_schema?.props,
+  );
   const instanceCount = countInstances(instances);
 
-  const updateInstance = (id: string, updater: (instance: BuilderInstance) => BuilderInstance) => {
+  const updateInstance = (
+    id: string,
+    updater: (instance: BuilderInstance) => BuilderInstance,
+  ) => {
     setInstances((current) => updateInstanceInTree(current, id, updater));
   };
 
@@ -146,7 +163,7 @@ export default function Playground() {
         updateInstanceInTree(current, activeAddTargetId, (instance) => ({
           ...instance,
           children: [...instance.children, nextInstance],
-        }))
+        })),
       );
     }
 
@@ -159,27 +176,32 @@ export default function Playground() {
   const removeSelected = () => {
     if (!selectedInstance) return;
 
-    setInstances((current) => removeInstanceFromTree(current, selectedInstance.id));
+    setInstances((current) =>
+      removeInstanceFromTree(current, selectedInstance.id),
+    );
     setSelectedId(null);
     if (addTargetId === selectedInstance.id) setAddTargetId(ROOT_TARGET_ID);
   };
 
   const moveSelected = (direction: -1 | 1) => {
     if (!selectedInstance) return;
-    setInstances((current) => moveInstanceInTree(current, selectedInstance.id, direction));
+    setInstances((current) =>
+      moveInstanceInTree(current, selectedInstance.id, direction),
+    );
   };
 
   const handlePropChange = (name: string, value: PropValue) => {
     if (!selectedInstance || !selectedKit) return;
     const syncRule = selectedKit.playground_config?.propSyncOnEnable?.[name];
-    const shouldSync = value.enabled && syncRule && shouldApplySyncValue(value.value);
+    const shouldSync =
+      value.enabled && syncRule && shouldApplySyncValue(value.value);
 
     updateInstance(selectedInstance.id, (instance) => {
       const dataPresetKey = shouldSync
-        ? syncRule?.dataPreset ?? instance.dataPresetKey
+        ? (syncRule?.dataPreset ?? instance.dataPresetKey)
         : instance.dataPresetKey;
       const structureMode = shouldSync
-        ? syncRule?.structureMode ?? instance.structureMode
+        ? (syncRule?.structureMode ?? instance.structureMode)
         : instance.structureMode;
       const requiredProp = isRuntimeProp(selectedKit, instance, name);
 
@@ -194,7 +216,9 @@ export default function Playground() {
         props: {
           ...instance.props,
           ...(shouldSync ? getRuntimeProps(selectedKit, dataPresetKey) : {}),
-          ...(shouldSync ? getStructureModeProps(selectedKit, structureMode) : {}),
+          ...(shouldSync
+            ? getStructureModeProps(selectedKit, structureMode)
+            : {}),
           [name]: value.value,
         },
         enabledProps: {
@@ -207,10 +231,18 @@ export default function Playground() {
 
   return (
     <PageContainer marginTop="md">
-      <Flex className="full-playground" orientation="column" width="100%">
-        <Flex className="full-playground-heading" justify="between" align="end" gap="md">
+      <Flex gap="lg" orientation="column" paddingBottom="xl" width="100%">
+        <Flex
+          className="full-playground-heading"
+          justify="between"
+          align="end"
+          gap="md"
+        >
           <Flex orientation="column" gap="xs">
-            <Caption color="lighter" text={`${enabledPlaygroundKits.length} configured playground kits`} />
+            <Caption
+              color="lighter"
+              text={`${enabledPlaygroundKits.length} configured playground kits`}
+            />
             <Title size={1} text="Playground" />
             <Body
               color="light"
@@ -230,8 +262,13 @@ export default function Playground() {
         </Flex>
 
         <div className="full-playground-workbench">
-          <div className="full-playground-left">
-            <Card padding="md">
+          <Flex
+            gap="md"
+            htmlOptions={{ style: { minWidth: "0" } }}
+            orientation="column"
+            width="100%"
+          >
+            <Card padding="md" width="100%">
               <Title marginBottom="sm" size={4} text="Add Kits" />
               <label className="builder-field">
                 <span>Add to</span>
@@ -255,9 +292,16 @@ export default function Playground() {
                 placeholder="Search configured kits"
                 value={searchQuery}
               />
-              <div className="builder-kit-list">
+              <Flex
+                className="builder-kit-list"
+                gap="xs"
+                htmlOptions={{ style: { maxHeight: "520px" } }}
+                orientation="column"
+                overflow="auto"
+                paddingRight="xxs"
+              >
                 {Object.entries(kitsByCategory).map(([category, kits]) => (
-                  <div key={category}>
+                  <Flex key={category} orientation="column">
                     <Caption color="lighter" text={category} />
                     {kits.map((kit) => (
                       <button
@@ -270,29 +314,56 @@ export default function Playground() {
                           <Icon icon="plus" />
                           <Flex orientation="column" align="start">
                             <Body text={kit.label} />
-                            <Caption color="lighter" text={formatKitName(kit.name)} />
+                            <Caption
+                              color="lighter"
+                              text={formatKitName(kit.name)}
+                            />
                           </Flex>
                         </Flex>
                       </button>
                     ))}
-                  </div>
+                  </Flex>
                 ))}
-              </div>
+              </Flex>
             </Card>
-          </div>
+          </Flex>
 
-          <div className="full-playground-center">
-            <Card className="full-playground-canvas" padding="md">
+          <Flex gap="md" minWidth="0" orientation="column" width="100%">
+            <Card overflow="hidden" padding="md" width="100%">
               <Flex justify="between" align="center" marginBottom="md">
                 <Title size={3} text="Demo" />
                 <Badge text={`${instanceCount} kits`} variant="primary" />
               </Flex>
-              <div className="builder-stage" onClick={() => setSelectedId(null)}>
+              <Background
+                backgroundColor="light"
+                borderRadius="md"
+                className="builder-stage"
+                display="flex"
+                flexDirection="column"
+                gap="sm"
+                htmlOptions={{
+                  onClick: () => setSelectedId(null),
+                  style: { minWidth: "0" },
+                }}
+                minHeight="360px"
+                padding="sm"
+              >
                 {instances.length === 0 ? (
-                  <div className="builder-empty-canvas">
+                  <Flex
+                    align="center"
+                    className="builder-empty-canvas"
+                    flex={1}
+                    gap="xs"
+                    justify="center"
+                    minHeight="300px"
+                    orientation="column"
+                    padding="sm"
+                    textAlign="center"
+                    width="100%"
+                  >
                     <Icon icon="plus" />
                     <Body color="light" text="Add a kit to start composing." />
-                  </div>
+                  </Flex>
                 ) : (
                   instances.map((instance) => (
                     <BuilderPreviewItem
@@ -306,15 +377,20 @@ export default function Playground() {
                     />
                   ))
                 )}
-              </div>
+              </Background>
             </Card>
 
-            <div className="full-playground-code-panel">
+            <Flex
+              className="full-playground-code-panel"
+              minWidth="0"
+              orientation="column"
+              width="100%"
+            >
               <CodePanel code={generatedCode} />
-            </div>
-          </div>
+            </Flex>
+          </Flex>
 
-          <div className="full-playground-right">
+          <Flex gap="md" minWidth="0" orientation="column" width="100%">
             <Card padding="md">
               <Title marginBottom="sm" size={4} text="Inspector" />
               {instanceOptions.length > 0 && (
@@ -413,11 +489,14 @@ export default function Playground() {
                             configuredChildren: getConfiguredChildren(
                               selectedKit,
                               structureMode,
-                              null
+                              null,
                             ),
                             props: {
                               ...instance.props,
-                              ...getStructureModeProps(selectedKit, structureMode),
+                              ...getStructureModeProps(
+                                selectedKit,
+                                structureMode,
+                              ),
                             },
                           }));
                         }}
@@ -449,9 +528,14 @@ export default function Playground() {
                     />
                   </Flex>
 
-                  <div className="builder-prop-list">
+                  <Flex gap="xs" orientation="column">
                     {getGroupedEditableProps(selectedKit).map((group) => (
-                      <div className="builder-prop-group" key={group.name || "props"}>
+                      <Flex
+                        className="builder-prop-group"
+                        gap="xxs"
+                        key={group.name || "props"}
+                        orientation="column"
+                      >
                         {group.name && <Title size={4} text={group.name} />}
                         {group.props.map(([name, definition]) => (
                           <PropControl
@@ -460,31 +544,45 @@ export default function Playground() {
                             key={name}
                             name={name}
                             onChange={handlePropChange}
-                            value={getPropValue(selectedInstance, selectedKit, name)}
+                            value={getPropValue(
+                              selectedInstance,
+                              selectedKit,
+                              name,
+                            )}
                           />
                         ))}
-                      </div>
+                      </Flex>
                     ))}
 
                     {Object.keys(selectedGlobalProps).length > 0 && (
-                      <div className="builder-prop-group">
+                      <Flex
+                        className="builder-prop-group"
+                        gap="xxs"
+                        orientation="column"
+                      >
                         <Title size={4} text="Global Props" />
-                        {Object.entries(selectedGlobalProps).map(([name, definition]) => (
-                          <PropControl
-                            definition={definition as any}
-                            key={name}
-                            name={name}
-                            onChange={handlePropChange}
-                            value={getPropValue(selectedInstance, selectedKit, name)}
-                          />
-                        ))}
-                      </div>
+                        {Object.entries(selectedGlobalProps).map(
+                          ([name, definition]) => (
+                            <PropControl
+                              definition={definition as any}
+                              key={name}
+                              name={name}
+                              onChange={handlePropChange}
+                              value={getPropValue(
+                                selectedInstance,
+                                selectedKit,
+                                name,
+                              )}
+                            />
+                          ),
+                        )}
+                      </Flex>
                     )}
-                  </div>
+                  </Flex>
                 </Flex>
               )}
             </Card>
-          </div>
+          </Flex>
         </div>
       </Flex>
     </PageContainer>
