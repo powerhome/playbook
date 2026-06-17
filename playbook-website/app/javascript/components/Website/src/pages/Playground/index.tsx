@@ -616,20 +616,29 @@ const getLivePreviewCode = (
   kit: PlaygroundKit,
   kitsByName: Record<string, PlaygroundKit>,
   globalProps?: Record<string, PropDefinition>
-) =>
-  generateLiveFromTemplate({
+) => {
+  const context: CodeRenderContext = {
+    includeRequiredVariableDefinitions: false,
+    setupSnippets: [],
+    usedSetupNames: new Set(),
+  };
+  const liveCode = generateLiveFromTemplate({
     template: getActiveTemplate(instance, kit)!,
     propValues: getInstancePropValues(instance, kit),
     propDefinitions: getAllPropDefinitionsWithGlobals(kit, globalProps) as any,
     propTargets: getActivePropTargets(instance, kit),
     propAliases: getActivePropAliases(instance, kit),
-    children: getTemplateChildren(instance, kit, kitsByName, globalProps),
+    children: getTemplateChildren(instance, kit, kitsByName, globalProps, context),
     childrenConfig: kit.playground_config?.children,
     customImports: getActiveImports(instance, kit),
     externalImports: getActiveExternalImports(instance, kit),
     wrapper: getActiveWrapper(instance, kit),
     requiredProps: getRequiredCodeProps(kit, instance),
   });
+  const setupCode = context.setupSnippets.join("\n\n");
+
+  return [setupCode, liveCode].filter(Boolean).join("\n\n");
+};
 
 const collectImportNames = (
   instances: BuilderInstance[],
@@ -646,6 +655,7 @@ const collectImportNames = (
 };
 
 type CodeRenderContext = {
+  includeRequiredVariableDefinitions?: boolean;
   setupSnippets: string[];
   usedSetupNames: Set<string>;
 };
@@ -730,6 +740,15 @@ const findTopLevelJsxStart = (code: string) => {
 
 const splitSetupFromRenderableCode = (code: string) => {
   const trimmed = code.trim();
+  const trailingInvocation = trimmed.match(/\n(<[A-Za-z_][\w.]*\s*\/>)\s*$/);
+
+  if (trailingInvocation?.index !== undefined) {
+    return {
+      setup: trimmed.slice(0, trailingInvocation.index).trim(),
+      renderable: trailingInvocation[1].trim(),
+    };
+  }
+
   const jsxStart = findTopLevelJsxStart(trimmed);
 
   if (jsxStart < 0) {
@@ -792,7 +811,7 @@ const appendSetupSnippet = (
 };
 
 const templateReferencesName = (template: string | undefined, name: string) =>
-  Boolean(template && new RegExp(`\\b${escapeRegExp(name)}\\b`).test(template));
+  Boolean(template && new RegExp(`\\b${escapeRegExp(name)}\\b(?!\\s*=)`).test(template));
 
 const hasTopLevelDeclaration = (code: string, name: string) =>
   new RegExp(`^(?:const|let|var|function)\\s+${escapeRegExp(name)}\\b`, "m").test(code);
@@ -844,6 +863,27 @@ const getTemplateVariableValues = (
   return values;
 };
 
+const getLiveTemplatePropValues = (
+  propValues: Record<string, PropValue>,
+  requiredProps: Record<string, any>,
+  template: string | undefined,
+  wrapper: string | undefined
+) => {
+  const requiredVariableNames = new Set(
+    Object.keys(requiredProps).filter((name) =>
+      templateReferencesName(`${template ?? ""}\n${wrapper ?? ""}`, name)
+    )
+  );
+
+  return Object.entries(propValues).reduce<Record<string, PropValue>>(
+    (values, [name, propValue]) => {
+      if (!requiredVariableNames.has(name)) values[name] = propValue;
+      return values;
+    },
+    {}
+  );
+};
+
 const renderInstanceCode = (
   instance: BuilderInstance,
   kitsByName: Record<string, PlaygroundKit>,
@@ -857,9 +897,12 @@ const renderInstanceCode = (
     const propValues = getInstancePropValues(instance, kit);
     const wrapper = getActiveWrapper(instance, kit);
     const requiredProps = getRequiredCodeProps(kit, instance);
+    const isLivePreviewRender = context?.includeRequiredVariableDefinitions === false;
     const rendered = generateFromTemplate({
       template,
-      propValues,
+      propValues: isLivePreviewRender
+        ? getLiveTemplatePropValues(propValues, requiredProps, template, wrapper)
+        : propValues,
       propDefinitions: getAllPropDefinitionsWithGlobals(kit, globalProps) as any,
       propTargets: getActivePropTargets(instance, kit),
       propAliases: getActivePropAliases(instance, kit),
@@ -869,18 +912,20 @@ const renderInstanceCode = (
       customImports: getActiveImports(instance, kit),
       externalImports: getActiveExternalImports(instance, kit),
       wrapper,
-      requiredProps,
+      requiredProps: isLivePreviewRender ? {} : requiredProps,
     });
 
     const split = splitSetupFromRenderableCode(rendered);
     let renderable = split.renderable;
-    const requiredVariableDefinitions = buildRequiredVariableDefinitions(
-      getTemplateVariableValues(kit, instance, propValues, requiredProps),
-      propValues,
-      template,
-      wrapper,
-      split.setup
-    );
+    const requiredVariableDefinitions = isLivePreviewRender
+      ? ""
+      : buildRequiredVariableDefinitions(
+          getTemplateVariableValues(kit, instance, propValues, requiredProps),
+          propValues,
+          template,
+          wrapper,
+          split.setup
+        );
     const setup = [requiredVariableDefinitions, split.setup].filter(Boolean).join("\n\n");
 
     if (context && setup) {
@@ -942,7 +987,9 @@ const collectExternalImportStatements = (
 ) => {
   instances.forEach((instance) => {
     const kit = kitsByName[instance.kitName];
-    getActiveExternalImports(instance, kit).forEach((statement) => statements.add(statement));
+    getActiveExternalImports(instance, kit).forEach((statement) => {
+      if (!/^import\s+React\b/.test(statement.trim())) statements.add(statement);
+    });
     collectExternalImportStatements(instance.children, kitsByName, statements);
   });
 

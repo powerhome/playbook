@@ -72,4 +72,5 @@ export const PLAYGROUND_ENABLED_KITS = [
   "title_count",
   "title_detail",
   "title",
+  "section_separator",
 ];
