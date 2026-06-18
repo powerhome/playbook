@@ -21,13 +21,6 @@ export const SideBarNavItems = [
         leftIcon:"grid-2"
     },
     {
-        name: "Playground",
-        key: "top-nav-item-9",
-        link: "/playground",
-        children: false,
-        leftIcon:"code"
-    },
-    {
         name: "Global Props",
         key: "top-nav-item-4",
         link: "/global_props",
@@ -55,4 +48,11 @@ export const SideBarNavItems = [
         children: false,
         leftIcon:"icons"
     },
+    {
+        name: "Playground",
+        key: "top-nav-item-9",
+        link: "/playground",
+        children: false,
+        leftIcon:"code"
+    }
 ]
