@@ -643,16 +643,18 @@ export const generateCode = (
     usedSetupNames: new Set(),
   };
   const renderedInstances = instances.length === 0
-    ? "    {/* Add kits to start composing. */}"
+    ? "      {/* Add kits to start composing. */}"
     : instances
-        .map((instance) => renderInstanceCode(instance, kitsByName, 2, globalProps, context))
+        .map((instance) => renderInstanceCode(instance, kitsByName, 3, globalProps, context))
         .join("\n");
   const setupCode = context.setupSnippets.join("\n\n");
-  const componentCode = `export const PlaygroundComposition = () => (
-  <div className="playground-composition">
+  const componentCode = `export const PlaygroundComposition = () => {
+  return (
+    <div className="playground-composition">
 ${renderedInstances}
-  </div>
-);`;
+    </div>
+  );
+};`;
   const source = [setupCode, componentCode].filter(Boolean).join("\n\n");
   const externalImports = Array.from(collectExternalImportStatements(instances, kitsByName));
   const imports = [
