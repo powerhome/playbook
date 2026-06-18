@@ -134,8 +134,9 @@ export default function Playground() {
     [instanceOptions],
   );
   const activeSelectedInstanceOption =
-    selectedInstanceOptions.find((option) => option.value === (selectedId ?? "")) ??
-    selectedInstanceOptions[0];
+    selectedInstanceOptions.find(
+      (option) => option.value === (selectedId ?? ""),
+    ) ?? selectedInstanceOptions[0];
   const activeAddTargetId = targetOptions.some(
     (option) => option.id === addTargetId,
   )
@@ -162,11 +163,13 @@ export default function Playground() {
     dataPresetDropdownOptions.find(
       (option) => option.value === (selectedInstance?.dataPresetKey ?? ""),
     ) ?? dataPresetDropdownOptions[0];
-  const structureModeDropdownOptions = selectedStructureModeOptions.map((option) => ({
-    id: option.key,
-    label: option.label,
-    value: option.key,
-  }));
+  const structureModeDropdownOptions = selectedStructureModeOptions.map(
+    (option) => ({
+      id: option.key,
+      label: option.label,
+      value: option.key,
+    }),
+  );
   const activeStructureModeOption =
     structureModeDropdownOptions.find(
       (option) => option.value === (selectedInstance?.structureMode ?? ""),
@@ -464,20 +467,13 @@ export default function Playground() {
                 />
               ) : (
                 <Flex orientation="column" gap="sm" width="100%">
-                  <Flex justify="between" gap="xs" align="center" width="100%">
-                    <Flex orientation="column" width="100%">
-                      <Caption color="lighter" text="Currediting" />
-                      <Body text={selectedKit.label} />
-                    </Flex>
-                    <Button
-                      icon="trash"
-                      onClick={removeSelected}
-                      size="sm"
-                      text="Remove"
-                      variant="secondary"
-                    />
-                  </Flex>
-
+                  <Button
+                    icon="trash"
+                    onClick={removeSelected}
+                    text="Remove Selected Kit"
+                    variant="secondary"
+                    fullWidth
+                  />
                   {acceptsChildren(selectedKit) && (
                     <Button
                       icon="plus"
@@ -489,7 +485,11 @@ export default function Playground() {
                   )}
 
                   {selectedDataPresetOptions.length > 0 && (
-                    <Flex className="builder-field" orientation="column" width="100%">
+                    <Flex
+                      className="builder-field"
+                      orientation="column"
+                      width="100%"
+                    >
                       <Caption text="Data" />
                       <Dropdown
                         clearable={false}
@@ -516,7 +516,11 @@ export default function Playground() {
                   )}
 
                   {selectedStructureModeOptions.length > 1 && (
-                    <Flex className="builder-field" orientation="column" width="100%">
+                    <Flex
+                      className="builder-field"
+                      orientation="column"
+                      width="100%"
+                    >
                       <Caption text="Structure" />
                       <Dropdown
                         clearable={false}
@@ -574,6 +578,7 @@ export default function Playground() {
                         gap="xxs"
                         key={group.name || "props"}
                         orientation="column"
+                        width="100%"
                       >
                         {group.name && <Title size={4} text={group.name} />}
                         {group.props.map(([name, definition]) => (
@@ -598,6 +603,7 @@ export default function Playground() {
                         className="builder-prop-group"
                         gap="xxs"
                         orientation="column"
+                        width="100%"
                       >
                         <Title size={4} text="Global Props" />
                         {Object.entries(selectedGlobalProps).map(
