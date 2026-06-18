@@ -2,6 +2,11 @@
 @import "playbook-tokens/screen_sizes";
 @import "playbook-tokens/spacing";
 
+.full-playground-shell {
+  box-sizing: border-box;
+  min-height: 100%;
+}
+
 .full-playground-heading,
 .full-playground-workbench {
   width: 100%;
@@ -18,7 +23,7 @@
 .full-playground-workbench {
   align-items: start;
   display: grid;
-  gap: $space_lg;
+  gap: $space_md;
   grid-template-columns: minmax(0, 1fr);
   width: 100%;
 
