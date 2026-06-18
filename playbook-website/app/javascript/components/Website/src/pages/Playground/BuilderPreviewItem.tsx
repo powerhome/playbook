@@ -90,7 +90,6 @@ const getRenderableProps = (
 type BuilderPreviewItemProps = {
   canDropIntoTarget?: (targetId: string) => boolean;
   dragOverTargetId?: string | null;
-  dragSourceId?: string | null;
   draggingInstanceId?: string | null;
   globalProps?: Record<string, PropDefinition>;
   instance: BuilderInstance;
@@ -103,7 +102,7 @@ type BuilderPreviewItemProps = {
     event?: React.DragEvent<HTMLElement>
   ) => void;
   onDragStartInstance?: (id: string) => void;
-  onDragSourceChange?: (id: string | null) => void;
+  onDragSourceChange?: (element: HTMLElement | null) => void;
   onHoverDragTarget?: (
     id: string,
     label: string,
@@ -119,7 +118,6 @@ type BuilderPreviewItemProps = {
 export const BuilderPreviewItem = ({
   canDropIntoTarget,
   dragOverTargetId,
-  dragSourceId,
   draggingInstanceId,
   globalProps,
   instance,
@@ -144,7 +142,6 @@ export const BuilderPreviewItem = ({
     <BuilderPreviewItem
       canDropIntoTarget={canDropIntoTarget}
       dragOverTargetId={dragOverTargetId}
-      dragSourceId={dragSourceId}
       draggingInstanceId={draggingInstanceId}
       globalProps={globalProps}
       instance={child}
@@ -217,7 +214,7 @@ export const BuilderPreviewItem = ({
         canAcceptDrop && dragOverTargetId === instance.id ? "is-drop-target" : ""
       }`}
       data-builder-instance-id={instance.id}
-      draggable={dragSourceId === instance.id}
+      draggable={false}
       onDragEnd={(event) => {
         event.stopPropagation();
         onDragEndDrag?.();
@@ -250,12 +247,12 @@ export const BuilderPreviewItem = ({
       }}
       onMouseMove={(event) => {
         if (!isInnermostEventTarget(event)) return;
-        onDragSourceChange?.(instance.id);
+        onDragSourceChange?.(event.currentTarget);
         onHoverDragTarget?.(instance.id, targetLabel, event);
       }}
       onPointerDown={(event) => {
         if (!isInnermostEventTarget(event)) return;
-        onDragSourceChange?.(instance.id);
+        onDragSourceChange?.(event.currentTarget);
       }}
       onDrop={(event) => {
         if (!canAcceptDrop) return;

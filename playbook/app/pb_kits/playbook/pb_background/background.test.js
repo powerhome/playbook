@@ -1,4 +1,5 @@
-import { ensureAccessible, renderKit } from '../utilities/test-utils'
+import React from 'react'
+import { ensureAccessible, render, renderKit, screen } from '../utilities/test-utils'
 
 import Background from './_background'
 
@@ -46,3 +47,25 @@ test('Sets backgroundColor to light as default when no backgroundColor prop is p
   const kit = renderKit(Background, props);
   expect(kit).toHaveClass('pb_background_color_light');
 });
+
+test('updates backgroundColor when props change', () => {
+  const { rerender } = render(
+    <Background
+        {...props}
+        backgroundColor="light"
+    />
+  )
+  const kit = screen.getByTestId(props.data.testid)
+
+  expect(kit).toHaveClass('pb_background_color_light')
+
+  rerender(
+    <Background
+        {...props}
+        backgroundColor="dark"
+    />
+  )
+
+  expect(kit).toHaveClass('pb_background_color_dark')
+  expect(kit).not.toHaveClass('pb_background_color_light')
+})

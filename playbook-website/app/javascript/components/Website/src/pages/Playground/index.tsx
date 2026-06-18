@@ -64,9 +64,9 @@ export default function Playground() {
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [addTargetId, setAddTargetId] = useState(ROOT_TARGET_ID);
   const [dragOverTargetId, setDragOverTargetId] = useState<string | null>(null);
-  const [dragSourceId, setDragSourceId] = useState<string | null>(null);
   const [draggedKitName, setDraggedKitName] = useState<string | null>(null);
   const [draggingInstanceId, setDraggingInstanceId] = useState<string | null>(null);
+  const dragSourceElementRef = useRef<HTMLElement | null>(null);
   const dragOverTargetRef = useRef<string | null>(null);
   const dragTooltipRef = useRef<HTMLDivElement | null>(null);
   const draggingInstanceIdRef = useRef<string | null>(null);
@@ -270,8 +270,11 @@ export default function Playground() {
 
   const clearDragState = () => {
     setDraggedKitName(null);
-    setDragSourceId(null);
     setDraggingInstanceId(null);
+    if (dragSourceElementRef.current) {
+      dragSourceElementRef.current.draggable = false;
+      dragSourceElementRef.current = null;
+    }
     draggingInstanceIdRef.current = null;
     hoverDragTargetRef.current = null;
 
@@ -312,8 +315,15 @@ export default function Playground() {
     showDragTooltip(`Drag ${label}`, event);
   };
 
-  const handleDragSourceChange = (sourceId: string | null) => {
-    setDragSourceId((current) => (current === sourceId ? current : sourceId));
+  const handleDragSourceChange = (sourceElement: HTMLElement | null) => {
+    if (dragSourceElementRef.current === sourceElement) return;
+
+    if (dragSourceElementRef.current) {
+      dragSourceElementRef.current.draggable = false;
+    }
+
+    dragSourceElementRef.current = sourceElement;
+    if (sourceElement) sourceElement.draggable = true;
   };
 
   const handleLeaveDragTarget = (targetId: string) => {
@@ -585,7 +595,6 @@ export default function Playground() {
                   <BuilderPreviewItem
                     canDropIntoTarget={canDropIntoTarget}
                     dragOverTargetId={dragOverTargetId}
-                    dragSourceId={dragSourceId}
                     draggingInstanceId={draggingInstanceId}
                     globalProps={global_props_schema?.props}
                     instance={instance}
