@@ -82,6 +82,7 @@
   appearance: none;
   background: $white;
   border: 1px solid $border_light;
+  cursor: grab;
   margin-bottom: $space_xxs;
   padding: $space_xs;
   width: 100%;
@@ -89,10 +90,24 @@
   &:hover {
     border-color: $primary;
   }
+
+  &:active {
+    cursor: grabbing;
+  }
+
+  &.is-dragging {
+    border-color: $primary;
+    opacity: 0.65;
+  }
 }
 
 .builder-stage {
   border: 1px dashed $border_light;
+
+  &.is-drop-target {
+    border-color: $primary;
+    box-shadow: inset 0 0 0 1px $primary;
+  }
 }
 
 .builder-empty-canvas {
@@ -100,20 +115,43 @@
 }
 
 .builder-instance {
+  cursor: pointer;
   display: block;
   min-width: 0;
   outline: 1px solid transparent;
+  position: relative;
   width: 100%;
+
+  &[draggable="true"] {
+    cursor: grab;
+  }
+
+  &[draggable="true"]:active {
+    cursor: grabbing;
+  }
+
+  &.is-dragging {
+    opacity: 0.55;
+  }
 
   &.is-selected {
     outline-color: $primary;
     outline-offset: 2px;
   }
 
+  &.is-drop-target {
+    outline-color: $primary;
+    outline-offset: 4px;
+  }
+
   &.is-empty-container {
     border: 1px dashed $border_light;
     // min-height: 48px;
   }
+}
+
+.builder-instance-render img {
+  -webkit-user-drag: none;
 }
 
 .builder-prop-row {
@@ -128,6 +166,23 @@
 .builder-prop-toggle,
 .builder-checkbox-row {
   align-items: center;
+}
+
+.builder-drag-tooltip {
+  background: $text_lt_default;
+  border-radius: 6px;
+  color: $white;
+  display: none;
+  font-size: 12px;
+  left: 0;
+  line-height: 1;
+  padding: $space_xs;
+  pointer-events: none;
+  position: fixed;
+  top: 0;
+  transform: translate3d(0, 0, 0);
+  will-change: transform;
+  z-index: 10000;
 }
 
 .full-playground-code-panel {

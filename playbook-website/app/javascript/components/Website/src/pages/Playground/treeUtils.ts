@@ -1,5 +1,6 @@
 import { acceptsChildren } from "./kitUtils";
 import type { BuilderInstance, PlaygroundKit, TargetOption } from "./types";
+import { ROOT_TARGET_ID } from "./types";
 
 export const countInstances = (instances: BuilderInstance[]): number =>
   instances.reduce((count, instance) => count + 1 + countInstances(instance.children), 0);
@@ -43,6 +44,65 @@ export const removeInstanceFromTree = (
       ...instance,
       children: removeInstanceFromTree(instance.children, id),
     }));
+
+const extractInstanceFromTree = (
+  instances: BuilderInstance[],
+  id: string
+): { instances: BuilderInstance[]; moved?: BuilderInstance } => {
+  let moved: BuilderInstance | undefined;
+
+  const nextInstances = instances.reduce<BuilderInstance[]>((acc, instance) => {
+    if (instance.id === id) {
+      moved = instance;
+      return acc;
+    }
+
+    const childResult = extractInstanceFromTree(instance.children, id);
+    if (childResult.moved) {
+      moved = childResult.moved;
+      acc.push({ ...instance, children: childResult.instances });
+      return acc;
+    }
+
+    acc.push(instance);
+    return acc;
+  }, []);
+
+  return { instances: nextInstances, moved };
+};
+
+export const instanceContainsTarget = (
+  instances: BuilderInstance[],
+  sourceId: string,
+  targetId: string
+): boolean => {
+  const source = findInstance(instances, sourceId);
+  return Boolean(source && findInstance(source.children, targetId));
+};
+
+export const moveInstanceToTarget = (
+  instances: BuilderInstance[],
+  sourceId: string,
+  targetId: string
+): BuilderInstance[] => {
+  if (sourceId === targetId || instanceContainsTarget(instances, sourceId, targetId)) {
+    return instances;
+  }
+
+  const { instances: instancesWithoutSource, moved } = extractInstanceFromTree(instances, sourceId);
+  if (!moved) return instances;
+
+  if (targetId === ROOT_TARGET_ID) {
+    return [...instancesWithoutSource, moved];
+  }
+
+  if (!findInstance(instancesWithoutSource, targetId)) return instances;
+
+  return updateInstanceInTree(instancesWithoutSource, targetId, (instance) => ({
+    ...instance,
+    children: [...instance.children, moved],
+  }));
+};
 
 export const moveInstanceInTree = (
   instances: BuilderInstance[],

@@ -199,7 +199,7 @@ export const getRuntimeScope = (
 };
 
 export const shouldUseTemplatePreview = (instance: BuilderInstance, kit?: PlaygroundKit) =>
-  Boolean(getActiveTemplate(instance, kit));
+  instance.children.length === 0 && Boolean(getActiveTemplate(instance, kit));
 
 export const getLivePreviewCode = (
   instance: BuilderInstance,

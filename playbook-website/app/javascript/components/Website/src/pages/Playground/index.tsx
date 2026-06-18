@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useMemo, useRef, useState } from "react";
 import { useLoaderData } from "react-router-dom";
 import {
   Background,
@@ -41,7 +41,9 @@ import {
   buildTargetOptions,
   countInstances,
   findInstance,
+  instanceContainsTarget,
   moveInstanceInTree,
+  moveInstanceToTarget,
   removeInstanceFromTree,
   updateInstanceInTree,
 } from "./treeUtils";
@@ -61,6 +63,14 @@ export default function Playground() {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [addTargetId, setAddTargetId] = useState(ROOT_TARGET_ID);
+  const [dragOverTargetId, setDragOverTargetId] = useState<string | null>(null);
+  const [dragSourceId, setDragSourceId] = useState<string | null>(null);
+  const [draggedKitName, setDraggedKitName] = useState<string | null>(null);
+  const [draggingInstanceId, setDraggingInstanceId] = useState<string | null>(null);
+  const dragOverTargetRef = useRef<string | null>(null);
+  const dragTooltipRef = useRef<HTMLDivElement | null>(null);
+  const draggingInstanceIdRef = useRef<string | null>(null);
+  const hoverDragTargetRef = useRef<string | null>(null);
 
   const enabledPlaygroundKits = useMemo(
     () =>
@@ -197,14 +207,14 @@ export default function Playground() {
     }
   };
 
-  const addKit = (kit: PlaygroundKit) => {
+  const addKit = (kit: PlaygroundKit, targetId = activeAddTargetId) => {
     const nextInstance = createInstance(kit, global_props_schema?.props);
 
-    if (activeAddTargetId === ROOT_TARGET_ID) {
+    if (targetId === ROOT_TARGET_ID) {
       setInstances((current) => [...current, nextInstance]);
     } else {
       setInstances((current) =>
-        updateInstanceInTree(current, activeAddTargetId, (instance) => ({
+        updateInstanceInTree(current, targetId, (instance) => ({
           ...instance,
           children: [...instance.children, nextInstance],
         })),
@@ -215,6 +225,115 @@ export default function Playground() {
     if (acceptsChildren(kit)) {
       setAddTargetId(nextInstance.id);
     }
+  };
+
+  const handleDropKit = (kitName: string, targetId: string) => {
+    const kit = kitsByName[kitName];
+    if (!kit) return;
+
+    addKit(kit, targetId);
+  };
+
+  const canDropIntoTarget = (targetId: string) => {
+    const instanceId = draggingInstanceIdRef.current ?? draggingInstanceId;
+    if (!instanceId) return true;
+
+    return (
+      instanceId !== targetId &&
+      !instanceContainsTarget(instances, instanceId, targetId)
+    );
+  };
+
+  const hideDragTooltip = () => {
+    if (!dragTooltipRef.current) return;
+
+    dragTooltipRef.current.style.display = "none";
+  };
+
+  const showDragTooltip = (
+    text: string,
+    event: React.DragEvent<HTMLElement> | React.MouseEvent<HTMLElement>,
+  ) => {
+    if (!dragTooltipRef.current) return;
+
+    const tooltip = dragTooltipRef.current;
+
+    if (tooltip.textContent !== text) {
+      tooltip.textContent = text;
+    }
+
+    tooltip.style.display = "block";
+    tooltip.style.transform = `translate3d(${event.clientX + 12}px, ${
+      event.clientY + 12
+    }px, 0)`;
+  };
+
+  const clearDragState = () => {
+    setDraggedKitName(null);
+    setDragSourceId(null);
+    setDraggingInstanceId(null);
+    draggingInstanceIdRef.current = null;
+    hoverDragTargetRef.current = null;
+
+    if (dragOverTargetRef.current !== null) {
+      dragOverTargetRef.current = null;
+      setDragOverTargetId(null);
+    }
+
+    hideDragTooltip();
+  };
+
+  const handleDragOverTarget = (
+    targetId: string | null,
+    label?: string,
+    event?: React.DragEvent<HTMLElement>,
+  ) => {
+    if (dragOverTargetRef.current !== targetId) {
+      dragOverTargetRef.current = targetId;
+      setDragOverTargetId(targetId);
+    }
+
+    if (!targetId || !label || !event || !dragTooltipRef.current) {
+      hideDragTooltip();
+      return;
+    }
+
+    showDragTooltip(`Drop into ${label}`, event);
+  };
+
+  const handleHoverDragTarget = (
+    targetId: string,
+    label: string,
+    event: React.MouseEvent<HTMLElement>,
+  ) => {
+    if (draggingInstanceIdRef.current || dragOverTargetRef.current) return;
+
+    hoverDragTargetRef.current = targetId;
+    showDragTooltip(`Drag ${label}`, event);
+  };
+
+  const handleDragSourceChange = (sourceId: string | null) => {
+    setDragSourceId((current) => (current === sourceId ? current : sourceId));
+  };
+
+  const handleLeaveDragTarget = (targetId: string) => {
+    if (hoverDragTargetRef.current !== targetId) return;
+
+    hoverDragTargetRef.current = null;
+    if (!draggingInstanceIdRef.current && !dragOverTargetRef.current) {
+      hideDragTooltip();
+    }
+  };
+
+  const handleMoveInstance = (instanceId: string, targetId: string) => {
+    if (targetId !== ROOT_TARGET_ID && !canDropIntoTarget(targetId)) return;
+
+    const movedInstance = findInstance(instances, instanceId);
+    const movedKit = movedInstance ? kitsByName[movedInstance.kitName] : undefined;
+
+    setInstances((current) => moveInstanceToTarget(current, instanceId, targetId));
+    setSelectedId(instanceId);
+    if (acceptsChildren(movedKit)) setAddTargetId(instanceId);
   };
 
   const removeSelected = () => {
@@ -359,8 +478,23 @@ export default function Playground() {
             >
               {filteredKits.map((kit) => (
                 <button
-                  className="builder-kit-button"
+                  className={`builder-kit-button ${
+                    draggedKitName === kit.name ? "is-dragging" : ""
+                  }`}
+                  draggable
                   key={kit.name}
+                  onDragEnd={clearDragState}
+                  onDragStart={(event) => {
+                    event.dataTransfer.effectAllowed = "copy";
+                    event.dataTransfer.setData(
+                      "application/playbook-kit",
+                      kit.name,
+                    );
+                    event.dataTransfer.setData("text/plain", kit.name);
+                    setDraggedKitName(kit.name);
+                    draggingInstanceIdRef.current = null;
+                    setDraggingInstanceId(null);
+                  }}
                   onClick={() => addKit(kit)}
                   type="button"
                 >
@@ -383,12 +517,48 @@ export default function Playground() {
             <Background
               backgroundColor="light"
               borderRadius="md"
-              className="builder-stage"
+              className={`builder-stage ${
+                dragOverTargetId === ROOT_TARGET_ID ? "is-drop-target" : ""
+              }`}
               display="flex"
               flexDirection="column"
               gap="sm"
               htmlOptions={{
                 onClick: () => setSelectedId(null),
+                onDragLeave: (event: React.DragEvent<HTMLElement>) => {
+                  if (
+                    !event.currentTarget.contains(
+                      event.relatedTarget as Node | null,
+                    )
+                  ) {
+                    handleDragOverTarget(null);
+                  }
+                },
+                onDragOver: (event: React.DragEvent<HTMLElement>) => {
+                  event.preventDefault();
+                  event.dataTransfer.dropEffect = draggingInstanceIdRef.current
+                    ? "move"
+                    : "copy";
+                  handleDragOverTarget(ROOT_TARGET_ID, "Main canvas", event);
+                },
+                onDrop: (event: React.DragEvent<HTMLElement>) => {
+                  event.preventDefault();
+                  const plainValue = event.dataTransfer.getData("text/plain");
+                  const instanceId =
+                    event.dataTransfer.getData(
+                      "application/playbook-instance",
+                    ) ||
+                    (draggingInstanceIdRef.current === plainValue
+                      ? draggingInstanceIdRef.current
+                      : "");
+                  const kitName =
+                    event.dataTransfer.getData("application/playbook-kit") ||
+                    (instanceId ? "" : plainValue);
+
+                  clearDragState();
+                  if (instanceId) handleMoveInstance(instanceId, ROOT_TARGET_ID);
+                  else if (kitName) handleDropKit(kitName, ROOT_TARGET_ID);
+                },
                 style: { minWidth: "0" },
               }}
               minHeight="360px"
@@ -413,11 +583,35 @@ export default function Playground() {
               ) : (
                 instances.map((instance) => (
                   <BuilderPreviewItem
+                    canDropIntoTarget={canDropIntoTarget}
+                    dragOverTargetId={dragOverTargetId}
+                    dragSourceId={dragSourceId}
+                    draggingInstanceId={draggingInstanceId}
                     globalProps={global_props_schema?.props}
                     instance={instance}
                     isSelected={instance.id === selectedId}
                     key={instance.id}
                     kitsByName={kitsByName}
+                    onDragEndDrag={clearDragState}
+                    onDragOverTarget={handleDragOverTarget}
+                    onDragStartInstance={(id) => {
+                      draggingInstanceIdRef.current = id;
+                      hoverDragTargetRef.current = null;
+                      hideDragTooltip();
+                      setDraggingInstanceId(id);
+                      setDraggedKitName(null);
+                    }}
+                    onDragSourceChange={handleDragSourceChange}
+                    onHoverDragTarget={handleHoverDragTarget}
+                    onLeaveDragTarget={handleLeaveDragTarget}
+                    onDropKit={(kitName, targetId) => {
+                      clearDragState();
+                      handleDropKit(kitName, targetId);
+                    }}
+                    onMoveInstance={(instanceId, targetId) => {
+                      clearDragState();
+                      handleMoveInstance(instanceId, targetId);
+                    }}
                     onSelect={handleSelectInstance}
                     selectedId={selectedId}
                   />
@@ -633,6 +827,11 @@ export default function Playground() {
           </Card>
         </Flex>
       </div>
+      <div
+        aria-hidden
+        className="builder-drag-tooltip"
+        ref={dragTooltipRef}
+      />
     </Flex>
   );
 }
