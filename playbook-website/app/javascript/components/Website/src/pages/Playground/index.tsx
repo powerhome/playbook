@@ -7,7 +7,6 @@ import {
   Button,
   Caption,
   Card,
-  Detail,
   Dropdown,
   Flex,
   Icon,
@@ -123,6 +122,20 @@ export default function Playground() {
     () => buildInstanceOptions(instances, kitsByName),
     [instances, kitsByName],
   );
+  const selectedInstanceOptions = useMemo(
+    () => [
+      { id: "none", label: "Choose a placed kit", value: "" },
+      ...instanceOptions.map((option) => ({
+        id: option.id,
+        label: option.label,
+        value: option.id,
+      })),
+    ],
+    [instanceOptions],
+  );
+  const activeSelectedInstanceOption =
+    selectedInstanceOptions.find((option) => option.value === (selectedId ?? "")) ??
+    selectedInstanceOptions[0];
   const activeAddTargetId = targetOptions.some(
     (option) => option.id === addTargetId,
   )
@@ -140,6 +153,24 @@ export default function Playground() {
   const activeAddTargetOption =
     addTargetOptions.find((option) => option.value === activeAddTargetId) ??
     addTargetOptions[0];
+  const dataPresetDropdownOptions = selectedDataPresetOptions.map((option) => ({
+    id: option.key,
+    label: option.label,
+    value: option.key,
+  }));
+  const activeDataPresetOption =
+    dataPresetDropdownOptions.find(
+      (option) => option.value === (selectedInstance?.dataPresetKey ?? ""),
+    ) ?? dataPresetDropdownOptions[0];
+  const structureModeDropdownOptions = selectedStructureModeOptions.map((option) => ({
+    id: option.key,
+    label: option.label,
+    value: option.key,
+  }));
+  const activeStructureModeOption =
+    structureModeDropdownOptions.find(
+      (option) => option.value === (selectedInstance?.structureMode ?? ""),
+    ) ?? structureModeDropdownOptions[0];
   const generatedCode = generateCode(
     instances,
     kitsByName,
@@ -402,24 +433,24 @@ export default function Playground() {
             <Card padding="md">
               <Title marginBottom="sm" size={4} text="Inspector" />
               {instanceOptions.length > 0 && (
-                <label className="builder-field">
-                  <span>Selected kit</span>
-                  <select
-                    onChange={(event) => {
-                      const id = event.target.value;
+                <Flex className="builder-field" orientation="column">
+                  <Caption text="Selected kit" />
+                  <Dropdown
+                    clearable={false}
+                    defaultValue={activeSelectedInstanceOption}
+                    id="playground-selected-kit-dropdown"
+                    key={selectedId ?? "none"}
+                    onSelect={(option: { value: string } | null): null => {
+                      const id = option?.value ?? "";
                       if (id) handleSelectInstance(id);
                       else setSelectedId(null);
+                      return null;
                     }}
-                    value={selectedId ?? ""}
-                  >
-                    <option value="">Choose a placed kit</option>
-                    {instanceOptions.map((option) => (
-                      <option key={option.id} value={option.id}>
-                        {option.label}
-                      </option>
-                    ))}
-                  </select>
-                </label>
+                    options={selectedInstanceOptions}
+                    placeholder="Choose a placed kit"
+                    width="100%"
+                  />
+                </Flex>
               )}
 
               {!selectedInstance || !selectedKit ? (
@@ -432,10 +463,10 @@ export default function Playground() {
                   }
                 />
               ) : (
-                <Flex orientation="column" gap="sm">
-                  <Flex justify="between" align="center">
-                    <Flex orientation="column">
-                      <Detail color="light" text="Editing" />
+                <Flex orientation="column" gap="sm" width="100%">
+                  <Flex justify="between" gap="xs" align="center" width="100%">
+                    <Flex orientation="column" width="100%">
+                      <Caption color="lighter" text="Currediting" />
                       <Body text={selectedKit.label} />
                     </Flex>
                     <Button
@@ -458,11 +489,15 @@ export default function Playground() {
                   )}
 
                   {selectedDataPresetOptions.length > 0 && (
-                    <label className="builder-field">
-                      <span>Data</span>
-                      <select
-                        onChange={(event) => {
-                          const dataPresetKey = event.target.value || null;
+                    <Flex className="builder-field" orientation="column" width="100%">
+                      <Caption text="Data" />
+                      <Dropdown
+                        clearable={false}
+                        defaultValue={activeDataPresetOption}
+                        id="playground-data-preset-dropdown"
+                        key={`${selectedInstance.id}-data-${selectedInstance.dataPresetKey ?? ""}`}
+                        onSelect={(option: { value: string } | null): null => {
+                          const dataPresetKey = option?.value || null;
 
                           updateInstance(selectedInstance.id, (instance) => ({
                             ...instance,
@@ -472,24 +507,24 @@ export default function Playground() {
                               ...getRuntimeProps(selectedKit, dataPresetKey),
                             },
                           }));
+                          return null;
                         }}
-                        value={selectedInstance.dataPresetKey ?? ""}
-                      >
-                        {selectedDataPresetOptions.map((option) => (
-                          <option key={option.key} value={option.key}>
-                            {option.label}
-                          </option>
-                        ))}
-                      </select>
-                    </label>
+                        options={dataPresetDropdownOptions}
+                        width="100%"
+                      />
+                    </Flex>
                   )}
 
                   {selectedStructureModeOptions.length > 1 && (
-                    <label className="builder-field">
-                      <span>Structure</span>
-                      <select
-                        onChange={(event) => {
-                          const structureMode = event.target.value || null;
+                    <Flex className="builder-field" orientation="column" width="100%">
+                      <Caption text="Structure" />
+                      <Dropdown
+                        clearable={false}
+                        defaultValue={activeStructureModeOption}
+                        id="playground-structure-mode-dropdown"
+                        key={`${selectedInstance.id}-structure-${selectedInstance.structureMode ?? ""}`}
+                        onSelect={(option: { value: string } | null): null => {
+                          const structureMode = option?.value || null;
 
                           updateInstance(selectedInstance.id, (instance) => ({
                             ...instance,
@@ -507,16 +542,12 @@ export default function Playground() {
                               ),
                             },
                           }));
+                          return null;
                         }}
-                        value={selectedInstance.structureMode ?? ""}
-                      >
-                        {selectedStructureModeOptions.map((option) => (
-                          <option key={option.key} value={option.key}>
-                            {option.label}
-                          </option>
-                        ))}
-                      </select>
-                    </label>
+                        options={structureModeDropdownOptions}
+                        width="100%"
+                      />
+                    </Flex>
                   )}
 
                   <Flex gap="xs">
