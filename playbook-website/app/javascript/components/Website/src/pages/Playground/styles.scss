@@ -23,7 +23,7 @@
   width: 100%;
 
   @include break_on($screen-xl-min) {
-    grid-template-columns: minmax(240px, 300px) minmax(0, 1fr) minmax(300px, 360px);
+    grid-template-columns: minmax(200px, 240px) minmax(0, 1fr) minmax(240px, 300px);
   }
 }
 
