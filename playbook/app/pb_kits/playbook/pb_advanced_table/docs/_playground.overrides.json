@@ -73,9 +73,7 @@
   },
   "hiddenProps": [
     "sortControl",
-    "fullScreenControl",
     "expandedControl",
-    "allowFullScreen",
     "pagination",
     "paginationProps"
   ],
@@ -289,11 +287,6 @@
     "onCustomSortClick": {
       "requires": {
         "customSort": true
-      }
-    },
-    "fullScreenControl": {
-      "requires": {
-        "allowFullScreen": true
       }
     },
     "enableSortingRemoval": {
