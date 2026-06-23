@@ -1,15 +1,21 @@
-import React from "react";
+import React, { useCallback, useRef, useState, type PointerEvent } from "react";
 import {
   Body,
   Caption,
   Card,
   Collapsible,
   Flex,
+  Icon,
   SectionSeparator,
   Title,
 } from "playbook-ui";
 import PropControl from "../PropControl";
 import { PropDefinition, PropValue } from "../types";
+import "./PropsPanel.scss";
+
+const PROPS_PANEL_MIN_WIDTH = 330;
+const PROPS_PANEL_MAX_WIDTH = 600;
+const PROPS_PANEL_DEFAULT_WIDTH = 330;
 
 interface PropsPanelProps {
   totalProps: number;
@@ -42,6 +48,41 @@ export const PropsPanel: React.FC<PropsPanelProps> = ({
   propSyncHints = {},
 }) => {
   const globalPropEntries = Object.entries(globalProps);
+  const [panelWidth, setPanelWidth] = useState(PROPS_PANEL_DEFAULT_WIDTH);
+  const isDraggingRef = useRef(false);
+  const dragStartRef = useRef({ x: 0, width: PROPS_PANEL_DEFAULT_WIDTH });
+
+  const clampWidth = useCallback((width: number) => {
+    return Math.min(
+      PROPS_PANEL_MAX_WIDTH,
+      Math.max(PROPS_PANEL_MIN_WIDTH, width),
+    );
+  }, []);
+
+  const startDragging = (event: PointerEvent<HTMLDivElement>) => {
+    isDraggingRef.current = true;
+    dragStartRef.current = { x: event.clientX, width: panelWidth };
+    event.currentTarget.setPointerCapture(event.pointerId);
+    document.body.style.cursor = "ew-resize";
+    document.body.style.userSelect = "none";
+  };
+
+  const dragPanel = (event: PointerEvent<HTMLDivElement>) => {
+    if (!isDraggingRef.current) return;
+
+    event.preventDefault();
+    const delta = dragStartRef.current.x - event.clientX;
+    setPanelWidth(clampWidth(dragStartRef.current.width + delta));
+  };
+
+  const stopDragging = (event: PointerEvent<HTMLDivElement>) => {
+    isDraggingRef.current = false;
+    if (event.currentTarget.hasPointerCapture(event.pointerId)) {
+      event.currentTarget.releasePointerCapture(event.pointerId);
+    }
+    document.body.style.cursor = "";
+    document.body.style.userSelect = "";
+  };
 
   const renderGroupProps = (props: Array<[string, PropDefinition]>) => {
     if (props.length === 0) {
@@ -77,19 +118,29 @@ export const PropsPanel: React.FC<PropsPanelProps> = ({
 
   return (
     <Card
+      className="props-panel"
       flexDirection="column"
-      htmlOptions={{ style: { width: "330px" } }}
       height="100vh"
-      overflowY="auto"
+      htmlOptions={{ style: { width: `${panelWidth}px` } }}
       padding="none"
     >
-      <Card.Header headerColor="white">
+      <div
+        className="props-panel__resize-handle"
+        onPointerCancel={stopDragging}
+        onPointerDown={startDragging}
+        onPointerMove={dragPanel}
+        onPointerUp={stopDragging}
+        role="presentation"
+      >
+        <Icon icon="grip-lines-vertical" size="xs" />
+      </div>
+      <Card.Header headerColor="neutral_subtle">
         <Flex justify="between" align="center">
           <Title text="Props" size={4} />
           <Caption text={`${totalProps} available`} size="xs" color="light" />
         </Flex>
       </Card.Header>
-      <Card.Body padding="sm">
+      <Card.Body className="props-panel__body" padding="sm">
         {showChildren && (
           <>
             <Caption text="Children" marginBottom="xs" />
@@ -129,7 +180,13 @@ export const PropsPanel: React.FC<PropsPanelProps> = ({
                 {groupIndex > 0 && (
                   <SectionSeparator width="100%" marginY="xs" />
                 )}
-                <Collapsible collapsed={false} padding="none" marginBottom="xs" width="100%" icon={["plus", "minus"]}>
+                <Collapsible
+                  collapsed={false}
+                  padding="none"
+                  marginBottom="xs"
+                  width="100%"
+                  icon={["plus", "minus"]}
+                >
                   <Collapsible.Main paddingX="none" paddingY="xxs">
                     <Caption text={group.name} />
                   </Collapsible.Main>
