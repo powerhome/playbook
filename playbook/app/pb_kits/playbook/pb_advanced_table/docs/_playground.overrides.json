@@ -106,7 +106,7 @@
     "tableProps": {
       "container": false
     },
-    "rowStyling": [{ "rowId": "1", "backgroundColor": "#0056CF", "fontColor": "#FFFFFF", "expandButtonColor": "#FFFFFF" }],
+    "rowStyling": [{ "rowId": "1", "backgroundColor": "#0056CF", "fontColor": "#FFFFFF", "expandButtonColor": "#FFFFFF", "fontWeight": "bold" }],
     "expandByDepth": [
       {
         "depth": 0,

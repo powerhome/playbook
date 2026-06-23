@@ -28,7 +28,8 @@
         "rowId": "1",
         "backgroundColor": "#0056CF",
         "fontColor": "#FFFFFF",
-        "expandButtonColor": "#FFFFFF"
+        "expandButtonColor": "#FFFFFF",
+        "fontWeight": "bold"
       }
     ],
     "expandByDepth": [
