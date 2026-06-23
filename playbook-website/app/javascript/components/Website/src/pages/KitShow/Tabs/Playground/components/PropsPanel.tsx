@@ -8,6 +8,7 @@ import {
   Icon,
   SectionSeparator,
   Title,
+  Detail,
 } from "playbook-ui";
 import PropControl from "../PropControl";
 import { PropDefinition, PropValue } from "../types";
@@ -143,26 +144,19 @@ export const PropsPanel: React.FC<PropsPanelProps> = ({
       <Card.Body className="props-panel__body" padding="sm">
         {showChildren && (
           <>
-            <Caption text="Children" marginBottom="xs" />
+          <Flex alignItems="start" className="props-panel__children-field" gap="xs">
+            <Detail text="Children" />
             <textarea
               placeholder="Enter children content..."
               value={children}
               onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
                 onChildrenChange(e.target.value)
               }
-              style={{
-                width: "100%",
-                minHeight: "140px",
-                fontFamily: "monospace",
-                fontSize: "12px",
-                padding: "8px",
-                border: "1px solid #ddd",
-                borderRadius: "4px",
-                resize: "vertical",
-              }}
             />
-            <SectionSeparator marginY="sm" />
+          </Flex>
+          <SectionSeparator marginY="sm" />
           </>
+
         )}
 
         <Flex flexDirection="column">
