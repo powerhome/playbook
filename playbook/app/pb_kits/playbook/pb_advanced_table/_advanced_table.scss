@@ -364,6 +364,34 @@
     }
   }
 
+  &.advanced-table-sticky-header {
+    .row-selection-actions-card.show-action-card,
+    .row-selection-actions-card.is-visible {
+      background-color: $white;
+      left: 0;
+      position: sticky;
+      top: 0;
+      z-index: 5;
+    }
+
+    .pb_table.sticky-header {
+      thead,
+      .pb_advanced_table_header {
+        top: var(--advanced-table-action-bar-height, 0px);
+        z-index: 3;
+      }
+    }
+
+    &.hidden-action-bar {
+      .pb_table.sticky-header {
+        thead,
+        .pb_advanced_table_header {
+          top: 0;
+        }
+      }
+    }
+  }
+
   // Max height overflow - the below prevents expansion from overflowing container at full screen for responsive and nonresponsive tables
   &.advanced-table-max-height-xs {
     max-height: 320px;
@@ -434,7 +462,7 @@
       thead,
       .pb_advanced_table_header {
         position: sticky !important;
-        top: 44px !important;
+        top: calc(44px + var(--advanced-table-action-bar-height, 0px)) !important;
         z-index: $z_10;
       }
     }
@@ -985,6 +1013,13 @@
 
     .sticky-header {
       background-color: $bg_dark_card;
+    }
+
+    &.advanced-table-sticky-header {
+      .row-selection-actions-card.show-action-card,
+      .row-selection-actions-card.is-visible {
+        background-color: $bg_dark_card;
+      }
     }
 
     .loading-toggle-icon,

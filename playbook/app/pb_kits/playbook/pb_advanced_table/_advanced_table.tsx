@@ -18,6 +18,7 @@ import TableActionBar from "./Components/TableActionBar";
 
 import { useTableState } from "./Hooks/useTableState";
 import { useTableActions } from "./Hooks/useTableActions";
+import { updateStickyLayoutHeights, scheduleStickyActionBarHeightUpdate } from "./Utilities/StickyLayoutHelper";
 
 import Card from "../pb_card/_card"
 import Flex from "../pb_flex/_flex"
@@ -283,6 +284,33 @@ const AdvancedTable = (props: AdvancedTableProps) => {
 
   // Visibility flag for action bar
   const isActionBarVisible = (selectableRows && showActionsBar && selectedRowsLength > 0) || columnVisibilityControl;
+  const isStickyHeader = Boolean(tableProps?.sticky);
+
+  useEffect(() => {
+    if (!isStickyHeader || !tableWrapperRef.current) return;
+
+    const wrapper = tableWrapperRef.current;
+    const updateHeights = () => updateStickyLayoutHeights(wrapper);
+
+    updateHeights();
+    scheduleStickyActionBarHeightUpdate(wrapper);
+
+    const resizeObserver = new ResizeObserver(updateHeights);
+    resizeObserver.observe(wrapper);
+
+    const actionBar = wrapper.querySelector(".row-selection-actions-card");
+    if (actionBar) {
+      resizeObserver.observe(actionBar);
+    }
+
+    const table = wrapper.querySelector("table.pb_table");
+    const thead = table?.querySelector("thead");
+    if (thead) {
+      resizeObserver.observe(thead);
+    }
+
+    return () => resizeObserver.disconnect();
+  }, [isStickyHeader, isActionBarVisible, columnDefinitions, tableData]);
 
   const classes = classnames(
     buildCss("pb_advanced_table"),
@@ -295,6 +323,7 @@ const AdvancedTable = (props: AdvancedTableProps) => {
       'hidden-action-bar': (selectableRows || columnVisibilityControl) && !isActionBarVisible,
     },
     {'advanced-table-sticky-left-columns': stickyLeftColumn && stickyLeftColumn.length > 0},
+    { 'advanced-table-sticky-header': isStickyHeader },
     { 'advanced-table-no-table-container': noTableCardContainer },
     columnGroupBorderColor ? `column-group-border-${columnGroupBorderColor}` : '',
     scrollBarNone ? 'advanced-table-hide-scrollbar' : '',
