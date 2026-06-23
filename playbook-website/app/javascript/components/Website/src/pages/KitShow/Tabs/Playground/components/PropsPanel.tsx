@@ -3,6 +3,7 @@ import {
   Body,
   Caption,
   Card,
+  Collapsible,
   Flex,
   SectionSeparator,
   Title,
@@ -41,6 +42,38 @@ export const PropsPanel: React.FC<PropsPanelProps> = ({
   propSyncHints = {},
 }) => {
   const globalPropEntries = Object.entries(globalProps);
+
+  const renderGroupProps = (props: Array<[string, PropDefinition]>) => {
+    if (props.length === 0) {
+      return <Body text="No props in this group." color="light" />;
+    }
+
+    return props.map(([name, definition]) => {
+      const disabledState = propDisabledState[name];
+      const syncHint = propSyncHints[name];
+      return (
+        <Flex flexDirection="column" key={name} marginBottom="xs">
+          <PropControl
+            name={name}
+            definition={definition}
+            value={propValues[name]}
+            onChange={onPropChange}
+            disabled={disabledState?.disabled}
+            disabledReason={disabledState?.reason}
+            isRequired={requiredPropNames.has(name)}
+          />
+          {syncHint ? (
+            <Body
+              color="lighter"
+              marginLeft="md"
+              marginTop="xxs"
+              text={syncHint}
+            />
+          ) : null}
+        </Flex>
+      );
+    });
+  };
 
   return (
     <Card
@@ -82,55 +115,33 @@ export const PropsPanel: React.FC<PropsPanelProps> = ({
         )}
 
         <Flex flexDirection="column">
-          {groupedProps.map((group, groupIndex) => (
-            <React.Fragment key={group.name || "ungrouped"}>
-              {group.name && (
-                <>
-                  {groupIndex > 0 && (
-                    <SectionSeparator width="100%" marginY="xs" />
-                  )}
-                  <Flex
-                    justify="between"
-                    align="center"
-                    cursor="pointer"
-                    paddingY="xs"
-                  >
-                    <Caption text={group.name} />
-                  </Flex>
-                </>
-              )}
+          {groupedProps.map((group, groupIndex) => {
+            if (!group.name) {
+              return (
+                <React.Fragment key="ungrouped">
+                  {renderGroupProps(group.props)}
+                </React.Fragment>
+              );
+            }
 
-              {group.props.length > 0 ? (
-                group.props.map(([name, definition]) => {
-                  const disabledState = propDisabledState[name];
-                  const syncHint = propSyncHints[name];
-                  return (
-                    <Flex flexDirection="column" key={name} marginBottom="xs">
-                      <PropControl
-                        name={name}
-                        definition={definition}
-                        value={propValues[name]}
-                        onChange={onPropChange}
-                        disabled={disabledState?.disabled}
-                        disabledReason={disabledState?.reason}
-                        isRequired={requiredPropNames.has(name)}
-                      />
-                      {syncHint ? (
-                        <Body
-                          color="lighter"
-                          marginLeft="md"
-                          marginTop="xxs"
-                          text={syncHint}
-                        />
-                      ) : null}
+            return (
+              <React.Fragment key={group.name}>
+                {groupIndex > 0 && (
+                  <SectionSeparator width="100%" marginY="xs" />
+                )}
+                <Collapsible collapsed={false} padding="none" marginBottom="xs" width="100%" icon={["plus", "minus"]}>
+                  <Collapsible.Main paddingX="none" paddingY="xxs">
+                    <Caption text={group.name} />
+                  </Collapsible.Main>
+                  <Collapsible.Content padding="none">
+                    <Flex flexDirection="column">
+                      {renderGroupProps(group.props)}
                     </Flex>
-                  );
-                })
-              ) : (
-                <Body text="No props in this group." color="light" />
-              )}
-            </React.Fragment>
-          ))}
+                  </Collapsible.Content>
+                </Collapsible>
+              </React.Fragment>
+            );
+          })}
 
           {totalProps === 0 && (
             <Body text="No kit-specific props available." color="light" />
