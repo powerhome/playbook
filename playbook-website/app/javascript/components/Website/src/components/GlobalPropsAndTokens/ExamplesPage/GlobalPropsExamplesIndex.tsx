@@ -23,6 +23,7 @@ import MaxHeight from "./Examples/MaxHeight";
 import MinHeight from "./Examples/MinHeight";
 import NumberSpacing from "./Examples/NumberSpacing";
 import Padding from "./Examples/Padding";
+import BorderGlobalProps from "./Examples/BorderGlobalProps";
 import BorderRadiusGlobalProps from "./Examples/BorderRadiusGlobalProps";
 import GroupHover from "./Examples/GroupHover";
 import FlexBoxAlignGlobalProps from "./Examples/FlexBoxAlignGlobalProps";
@@ -49,6 +50,7 @@ const COMPONENT_MAP = {
   min_width: MinWidth,
   number_spacing: NumberSpacing,
   padding: Padding,
+  border: BorderGlobalProps,
   position: Position,
   text_align: TextAlign,
   overflow: Overflow,
