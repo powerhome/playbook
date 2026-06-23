@@ -16,6 +16,7 @@ export const TopLevelNavItem = ({
   design_guidelines,
   whats_new,
   global_props_and_tokens,
+  sidebarCollapsed = false,
 }: any) => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -156,24 +157,24 @@ export const TopLevelNavItem = ({
 
     return (
       <NavItem
-        active={activeTopLevel(link, children)}
-        collapsed={children && toggleTopNav}
-        collapsible={children}
-        collapsibleTrail={children}
+        active={sidebarCollapsed ? shouldExpandTopLevel(link) : activeTopLevel(link, children)}
+        collapsed={!sidebarCollapsed && children && toggleTopNav}
+        collapsible={!sidebarCollapsed && children}
+        collapsibleTrail={!sidebarCollapsed && children}
         cursor="pointer"
         dark={dark}
         fontSize="small"
         fontWeight="bolder"
         iconLeft={leftIcon}
-        iconRight={children && ["plus", "minus"]}
+        iconRight={!sidebarCollapsed && children && ["plus", "minus"]}
         key={key}
         marginY="none"
         onClick={() => handleComponentsClick(key, i)}
-        onIconRightClick={children && (() => handleComponentsIconClick(i))}
+        onIconRightClick={!sidebarCollapsed && children && (() => handleComponentsIconClick(i))}
         paddingY="xxs"
         text={name}
       >
-        {children && (
+        {children && !sidebarCollapsed && (
           <>
             {name === "Components" ? (
               <>
