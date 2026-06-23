@@ -131,6 +131,15 @@
     width: 100%;
   }
 
+  .props-panel-control-label {
+    min-width: 0;
+    overflow: hidden;
+
+    .pb_flex_item_kit_grow {
+      min-width: 0;
+    }
+  }
+
   .props-panel-control--filled {
     .pb_text_input_kit {
       .text_input_wrapper input,

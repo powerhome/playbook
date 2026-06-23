@@ -16,7 +16,7 @@ import { PropDefinition, PropValue } from "../types";
 import "./PropsPanel.scss";
 
 const PROPS_PANEL_MIN_WIDTH = 330;
-const PROPS_PANEL_MAX_WIDTH = 600;
+const PROPS_PANEL_MAX_WIDTH = 500;
 const PROPS_PANEL_DEFAULT_WIDTH = 330;
 
 interface PropsPanelProps {
@@ -145,8 +145,8 @@ export const PropsPanel: React.FC<PropsPanelProps> = ({
             padding="xs"
             width="100%"
           >
-            <FlexItem fixedSize="40%">
-              <Detail text="Children" />
+            <FlexItem className="props-panel-control-label" fixedSize="40%">
+              <Detail text="Children" truncate={1} width="100%" />
             </FlexItem>
             <FlexItem
               className={

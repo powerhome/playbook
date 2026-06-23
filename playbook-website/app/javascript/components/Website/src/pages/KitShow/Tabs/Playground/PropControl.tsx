@@ -1,8 +1,8 @@
 import React, { useEffect, useMemo, useState } from "react";
 import {
-  Badge,
   Caption,
   Checkbox,
+  colors,
   Detail,
   Dropdown,
   Flex,
@@ -28,6 +28,26 @@ const propsPanelDropdownClassName = (filled: boolean) =>
 
 const formatPropName = (name: string): string => name;
 
+const PropControlLabel: React.FC<{ name: string; required?: boolean }> = ({
+  name,
+  required = false,
+}) => {
+  const detail = (
+    <Detail text={formatPropName(name)} truncate={1} />
+  );
+
+  if (!required) return detail;
+
+  return (
+    <Flex align="center" gap="xxs" width="100%">
+      <FlexItem>{detail}</FlexItem>
+      <span aria-hidden="true" style={{ color: colors.error, flexShrink: 0 }}>
+        *
+      </span>
+    </Flex>
+  );
+};
+
 type PropControlRowProps = {
   label: React.ReactNode;
   children: React.ReactNode;
@@ -48,7 +68,9 @@ const PropControlRow: React.FC<PropControlRowProps> = ({
     padding="xs"
     width="100%"
   >
-    <FlexItem fixedSize="40%">{label}</FlexItem>
+    <FlexItem className="props-panel-control-label" fixedSize="40%">
+      {label}
+    </FlexItem>
     <FlexItem
       className={filled ? "props-panel-control--filled" : undefined}
       fixedSize="60%"
@@ -213,7 +235,7 @@ const BooleanControl: React.FC<PropControlProps> = ({
   const isChecked = getEffectiveBoolean(value, schemaDefault);
 
   return (
-    <PropControlRow label={<Detail text={formatPropName(name)} />}>
+    <PropControlRow label={<PropControlLabel name={name} />}>
       <Checkbox
         checked={isChecked}
         onChange={() => {
@@ -263,7 +285,7 @@ const EnumControl: React.FC<PropControlProps> = ({
   if (values.length === 0) return null;
 
   return (
-    <PropControlRow filled={!!displayValue} label={<Detail text={name} />}>
+    <PropControlRow filled={!!displayValue} label={<PropControlLabel name={name} />}>
       <Dropdown
         className={propsPanelDropdownClassName(!!displayValue)}
         defaultValue={activeOption}
@@ -296,7 +318,7 @@ const StringControl: React.FC<PropControlProps> = ({
   return (
     <PropControlRow
       filled={isFilledDisplayValue(displayValue)}
-      label={<Detail text={formatPropName(name)} />}
+      label={<PropControlLabel name={name} />}
     >
       <TextInput
         placeholder={`Enter ${name}...`}
@@ -322,7 +344,7 @@ const NumberControl: React.FC<PropControlProps> = ({
   return (
     <PropControlRow
       filled={isFilledDisplayValue(displayValue)}
-      label={<Detail text={formatPropName(name)} />}
+      label={<PropControlLabel name={name} />}
     >
       <TextInput
         type="number"
@@ -360,7 +382,7 @@ const FunctionControl: React.FC<PropControlProps> = ({
   return (
     <PropControlRow
       filled={isFilledDisplayValue(currentValue)}
-      label={<Detail text={formatPropName(name)} />}
+      label={<PropControlLabel name={name} />}
     >
       <Dropdown
         className={propsPanelDropdownClassName(isFilledDisplayValue(currentValue))}
@@ -397,7 +419,7 @@ const ReactNodeControl: React.FC<PropControlProps> = ({
   return (
     <PropControlRow
       filled={isFilledDisplayValue(displayValue)}
-      label={<Detail text={formatPropName(name)} />}
+      label={<PropControlLabel name={name} />}
     >
       <TextInput
         placeholder={`Enter content for ${name}...`}
@@ -453,7 +475,7 @@ const StringOrArrayControl: React.FC<PropControlProps> = ({
     <PropControlRow
       alignItems="start"
       filled={isFilledDisplayValue(displayValue)}
-      label={<Detail text={formatPropName(name)} />}
+      label={<PropControlLabel name={name} />}
     >
       <Flex flexDirection="column" width="100%">
         <TextInput value={inputValue} onChange={handleInputChange} width="100%" />
@@ -500,7 +522,7 @@ const ObjectControl: React.FC<PropControlProps> = ({
     <PropControlRow
       alignItems="start"
       filled={isFilledDisplayValue(displayValue)}
-      label={<Detail text={formatPropName(name)} />}
+      label={<PropControlLabel name={name} />}
     >
       <Flex flexDirection="column" width="100%">
         <Caption
@@ -553,7 +575,7 @@ const ArrayControl: React.FC<PropControlProps> = ({
     <PropControlRow
       alignItems="start"
       filled={isFilledDisplayValue(displayValue)}
-      label={<Detail text={formatPropName(name)} />}
+      label={<PropControlLabel name={name} />}
     >
       <Flex flexDirection="column" width="100%">
         <Caption
@@ -606,12 +628,7 @@ const RequiredArrayControl: React.FC<PropControlProps> = ({
     <PropControlRow
       alignItems="start"
       filled={isFilledDisplayValue(value?.value ?? [])}
-      label={
-        <Flex align="center" gap="xs" wrap>
-          <Detail text={name} />
-          <Badge text="Required" variant="primary" />
-        </Flex>
-      }
+      label={<PropControlLabel name={name} required />}
     >
       <Flex flexDirection="column" width="100%">
         <Caption
@@ -663,12 +680,7 @@ const RequiredObjectControl: React.FC<PropControlProps> = ({
     <PropControlRow
       alignItems="start"
       filled={isFilledDisplayValue(value?.value ?? {})}
-      label={
-        <Flex align="center" gap="xs" wrap>
-          <Detail text={name} />
-          <Badge text="Required" variant="primary" />
-        </Flex>
-      }
+      label={<PropControlLabel name={name} required />}
     >
       <Flex flexDirection="column" width="100%">
         <Caption
