@@ -158,7 +158,7 @@ export const PlaygroundTab: React.FC<PlaygroundTabProps> = ({
         {/* Live Preview */}
         <Card marginBottom="md" padding="none" width="100%">
           <Flex justify="between" align="center" margin="md">
-            <Caption text="Preview" color="lighter" />
+            <Caption text="Preview" />
             <Flex align="center" gap="sm">
               {!hasModifiedProps && defaultExample && !hasTemplate && (
                 <Caption text="Default example" color="lighter" />
