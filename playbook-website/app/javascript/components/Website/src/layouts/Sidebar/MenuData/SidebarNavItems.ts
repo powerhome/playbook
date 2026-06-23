@@ -48,11 +48,11 @@ export const SideBarNavItems = [
         children: false,
         leftIcon:"icons"
     },
-    {
-        name: "Playground",
-        key: "top-nav-item-9",
-        link: "/playground",
-        children: false,
-        leftIcon:"code"
-    }
+    // {
+    //     name: "Playground",
+    //     key: "top-nav-item-9",
+    //     link: "/playground",
+    //     children: false,
+    //     leftIcon:"code"
+    // }
 ]
