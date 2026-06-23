@@ -109,8 +109,6 @@ const Background = (props: BackgroundProps): React.ReactElement => {
         imageUrl: getResponsiveValue(imageUrl),
       });
     };
-
-    updateResponsiveProps();
     window.addEventListener('resize', updateResponsiveProps);
     return () => window.removeEventListener('resize', updateResponsiveProps);
   }, [backgroundSize, backgroundPosition, backgroundRepeat, backgroundColor, imageUrl]);
