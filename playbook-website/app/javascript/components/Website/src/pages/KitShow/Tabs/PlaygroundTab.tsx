@@ -1,6 +1,8 @@
 import React, { useMemo } from "react";
 import { Body, Button, Caption, Card, Flex } from "playbook-ui";
 
+import { linkFormat } from "../../../../../../utilities/website_sidebar_helper";
+
 import {
   PlaygroundPreview,
   usePlaygroundState,
@@ -118,10 +120,14 @@ export const PlaygroundTab: React.FC<PlaygroundTabProps> = ({
     return scope;
   }, [playgroundConfig?.scopeVars, playgroundConfig?.requiredProps, propValues]);
 
+  const displayKitName = linkFormat(kitName);
+
   return (
     <Flex width="100%" gap="lg">
       {/* Left Panel - Preview and Code */}
       <Flex flexDirection="column" flex="1" minWidth="0">
+       <Card marginBottom="md" width="100%">
+        <Caption text={`${displayKitName} Setup`} />
         {hasPresets && (
           <PresetsBar
             presets={playgroundConfig!.presets!}
@@ -147,6 +153,7 @@ export const PlaygroundTab: React.FC<PlaygroundTabProps> = ({
         )}
 
         <HintsDisplay hints={activeHints} />
+        </Card>
 
         {/* Live Preview */}
         <Card marginBottom="md" padding="none" width="100%">

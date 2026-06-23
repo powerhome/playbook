@@ -32,10 +32,16 @@ export const HintsDisplay: React.FC<HintsDisplayProps> = ({ hints }) => {
   if (hints.length === 0) return null;
 
   return (
-    <Card marginBottom="md" padding="sm" width="100%" background="light">
+    <Card
+      marginTop="md"
+      highlight={{ position: "side", color: "primary" }}
+      paddingY="xs"
+      paddingX="sm"
+      width="100%"
+      background="light"
+    >
       {hints.map((hint) => (
         <Flex key={hint.id} align="center" gap="xs" paddingY="xxs">
-          <Icon icon={getHintIcon(hint.type)} color={getHintColor(hint.type)} size="sm" />
           <Body text={hint.message} />
         </Flex>
       ))}

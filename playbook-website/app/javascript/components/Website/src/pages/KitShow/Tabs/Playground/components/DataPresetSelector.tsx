@@ -1,5 +1,5 @@
 import React from "react";
-import { Pill, Caption, Card, Flex } from "playbook-ui";
+import { Pill, Detail, Flex, FlexItem } from "playbook-ui";
 
 export interface DataPresetOption {
   key: string;
@@ -20,22 +20,27 @@ export const DataPresetSelector: React.FC<DataPresetSelectorProps> = ({
   if (presets.length === 0) return null;
 
   return (
-    <Card marginBottom="md" padding="sm" width="100%">
-      <Flex alignItems="center" justifyContent="center" gap="sm" wrap>
-        <Caption text="Sample data:" color="lighter" />
-        {presets.map((preset) => (
-          <div
-            key={preset.key}
-            onClick={() => onPresetChange(preset.key)}
-            style={{ cursor: "pointer" }}
-          >
-            <Pill
-              text={preset.label}
-              variant={activeKey === preset.key ? "primary" : "neutral"}
-            />
-          </div>
-        ))}
-      </Flex>
-    </Card>
+    <Flex orientation="column" marginTop="lg" wrap>
+      <FlexItem marginBottom="xs">
+        <Detail text="Sample data" />
+      </FlexItem>
+      <FlexItem>
+        <Flex gap="xs" wrap>
+          {presets.map((preset) => (
+            <div
+              key={preset.key}
+              onClick={() => onPresetChange(preset.key)}
+              style={{ cursor: "pointer" }}
+            >
+              <Pill
+                text={preset.label}
+                variant={activeKey === preset.key ? "primary" : "neutral"}
+                textTransform="none"
+              />
+            </div>
+          ))}
+        </Flex>
+      </FlexItem>
+    </Flex>
   );
 };

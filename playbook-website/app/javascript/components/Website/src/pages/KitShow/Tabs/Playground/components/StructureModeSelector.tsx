@@ -1,5 +1,5 @@
 import React from "react";
-import { Pill, Caption, Card, Flex } from "playbook-ui";
+import { Pill, Detail, Flex, FlexItem } from "playbook-ui";
 
 interface StructureMode {
   key: string;
@@ -20,22 +20,27 @@ export const StructureModeSelector: React.FC<StructureModeSelectorProps> = ({
   if (modes.length === 0) return null;
 
   return (
-    <Card marginBottom="md" padding="sm" width="100%">
-      <Flex alignItems="center" justifyContent="center" gap="sm" wrap>
-        <Caption text="Structure:" color="lighter" />
-        {modes.map((mode) => (
-          <div
-            key={mode.key}
-            onClick={() => onModeChange(mode.key)}
-            style={{ cursor: "pointer" }}
-          >
-            <Pill
-              text={mode.label}
-              variant={activeMode === mode.key ? "primary" : "neutral"}
-            />
-          </div>
-        ))}
-      </Flex>
-    </Card>
+    <Flex orientation="column" marginTop="lg" wrap>
+      <FlexItem marginBottom="xs">
+        <Detail text="Structure" />
+      </FlexItem>
+      <FlexItem>
+        <Flex gap="xs" wrap>
+          {modes.map((mode) => (
+            <div
+              key={mode.key}
+              onClick={() => onModeChange(mode.key)}
+              style={{ cursor: "pointer" }}
+            >
+              <Pill
+                text={mode.label}
+                variant={activeMode === mode.key ? "primary" : "neutral"}
+                textTransform="none"
+              />
+            </div>
+          ))}
+        </Flex>
+      </FlexItem>
+    </Flex>
   );
 };
