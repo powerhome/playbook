@@ -20,7 +20,52 @@ export interface ExtendedPropControlProps extends PropControlProps {
   isRequired?: boolean;
 }
 
+const PROPS_PANEL_DROPDOWN_CLASS = "props-panel-dropdown";
+const propsPanelDropdownClassName = (filled: boolean) =>
+  filled
+    ? `${PROPS_PANEL_DROPDOWN_CLASS} ${PROPS_PANEL_DROPDOWN_CLASS}--filled`
+    : PROPS_PANEL_DROPDOWN_CLASS;
+
 const formatPropName = (name: string): string => name;
+
+type PropControlRowProps = {
+  label: React.ReactNode;
+  children: React.ReactNode;
+  alignItems?: "center" | "start";
+  filled?: boolean;
+};
+
+const PropControlRow: React.FC<PropControlRowProps> = ({
+  label,
+  children,
+  alignItems = "center",
+  filled = false,
+}) => (
+  <Flex
+    alignItems={alignItems}
+    flexDirection="row"
+    gap="xs"
+    padding="xs"
+    width="100%"
+  >
+    <FlexItem fixedSize="40%">{label}</FlexItem>
+    <FlexItem
+      className={filled ? "props-panel-control--filled" : undefined}
+      fixedSize="60%"
+    >
+      {children}
+    </FlexItem>
+  </Flex>
+);
+
+export const PropControlHint: React.FC<{ text: string }> = ({ text }) => (
+  <Flex flexDirection="row" gap="xs" paddingX="xs" width="100%">
+    <FlexItem fixedSize="40%" />
+    <FlexItem fixedSize="60%">
+      <Body color="lighter" marginTop="xxs" text={text} />
+    </FlexItem>
+  </Flex>
+);
 
 const propValueOnDropdownClear = (
   definition: PropDefinition,
@@ -53,6 +98,33 @@ const getEffectiveBoolean = (
   const raw = value?.value;
   if (typeof raw === "boolean") return raw;
   return schemaDefault === true;
+};
+
+const getEffectiveDisplayValue = (
+  value: PropValue | undefined,
+  definition: PropDefinition,
+  fallback?: unknown,
+): unknown => {
+  if (value?.enabled) {
+    return value.value ?? fallback;
+  }
+  if (value?.value !== undefined && value.value !== null && value.value !== "") {
+    return value.value;
+  }
+  const schemaDefault = resolveSchemaDefault(definition);
+  if (schemaDefault !== undefined) return schemaDefault;
+  return fallback;
+};
+
+const isFilledDisplayValue = (displayValue: unknown): boolean => {
+  if (displayValue === undefined || displayValue === null || displayValue === "") {
+    return false;
+  }
+  if (typeof displayValue === "object") {
+    if (Array.isArray(displayValue)) return displayValue.length > 0;
+    return Object.keys(displayValue as Record<string, unknown>).length > 0;
+  }
+  return true;
 };
 
 function objectSyncFingerprint(value: PropValue | undefined): string {
@@ -141,29 +213,18 @@ const BooleanControl: React.FC<PropControlProps> = ({
   const isChecked = getEffectiveBoolean(value, schemaDefault);
 
   return (
-    <Flex
-      flexDirection="row"
-      alignItems="center"
-      gap="xs"
-      padding="xs"
-      width="100%"
-    >
-      <FlexItem fixedSize="40%">
-        <Detail text={formatPropName(name)} />
-      </FlexItem>
-      <FlexItem fixedSize="60%">
-        <Checkbox
-          checked={isChecked}
-          onChange={() => {
-            onChange(name, {
-              value: !isChecked,
-              enabled: true,
-            });
-          }}
-          text=""
-        />
-      </FlexItem>
-    </Flex>
+    <PropControlRow label={<Detail text={formatPropName(name)} />}>
+      <Checkbox
+        checked={isChecked}
+        onChange={() => {
+          onChange(name, {
+            value: !isChecked,
+            enabled: true,
+          });
+        }}
+        text=""
+      />
+    </PropControlRow>
   );
 };
 
@@ -202,34 +263,24 @@ const EnumControl: React.FC<PropControlProps> = ({
   if (values.length === 0) return null;
 
   return (
-    <Flex
-      flexDirection="row"
-      alignItems="center"
-      gap="xs"
-      padding="xs"
-      width="100%"
-    >
-      <FlexItem fixedSize="40%">
-        <Detail marginBottom="xs" text={name} />
-      </FlexItem>
-      <FlexItem fixedSize="60%">
-        <Dropdown
-          defaultValue={activeOption}
-          id={`prop-${name}-enum-dropdown`}
-          key={`${value?.enabled}-${String(displayValue ?? "")}`}
-          onSelect={(option: { value: string } | null): null => {
-            if (option?.value) {
-              onChange(name, { value: option.value, enabled: true });
-            } else {
-              onChange(name, propValueOnDropdownClear(definition, values));
-            }
-            return null;
-          }}
-          options={enumOptions}
-          width="100%"
-        />
-      </FlexItem>
-    </Flex>
+    <PropControlRow filled={!!displayValue} label={<Detail text={name} />}>
+      <Dropdown
+        className={propsPanelDropdownClassName(!!displayValue)}
+        defaultValue={activeOption}
+        id={`prop-${name}-enum-dropdown`}
+        key={`${value?.enabled}-${String(displayValue ?? "")}`}
+        onSelect={(option: { value: string } | null): null => {
+          if (option?.value) {
+            onChange(name, { value: option.value, enabled: true });
+          } else {
+            onChange(name, propValueOnDropdownClear(definition, values));
+          }
+          return null;
+        }}
+        options={enumOptions}
+        width="100%"
+      />
+    </PropControlRow>
   );
 };
 
@@ -239,19 +290,23 @@ const StringControl: React.FC<PropControlProps> = ({
   value,
   onChange,
 }) => {
-  const currentValue = value?.value ?? definition.default ?? "";
+  const displayValue = getEffectiveDisplayValue(value, definition, "");
+  const currentValue = String(displayValue ?? "");
 
   return (
-    <Flex flexDirection="column" padding="xs" width="100%">
-      <Detail marginBottom="xs" text={formatPropName(name)} />
+    <PropControlRow
+      filled={isFilledDisplayValue(displayValue)}
+      label={<Detail text={formatPropName(name)} />}
+    >
       <TextInput
         placeholder={`Enter ${name}...`}
-        value={String(currentValue ?? "")}
+        value={currentValue}
         onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
           onChange(name, { value: e.target.value, enabled: true });
         }}
+        width="100%"
       />
-    </Flex>
+    </PropControlRow>
   );
 };
 
@@ -261,11 +316,14 @@ const NumberControl: React.FC<PropControlProps> = ({
   value,
   onChange,
 }) => {
-  const currentValue = value?.value ?? definition.default ?? 0;
+  const displayValue = getEffectiveDisplayValue(value, definition, 0);
+  const currentValue = displayValue ?? 0;
 
   return (
-    <Flex flexDirection="column" padding="xs" width="100%">
-      <Detail marginBottom="xs" text={formatPropName(name)} />
+    <PropControlRow
+      filled={isFilledDisplayValue(displayValue)}
+      label={<Detail text={formatPropName(name)} />}
+    >
       <TextInput
         type="number"
         placeholder={`Enter ${name}...`}
@@ -273,8 +331,9 @@ const NumberControl: React.FC<PropControlProps> = ({
         onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
           onChange(name, { value: Number(e.target.value), enabled: true });
         }}
+        width="100%"
       />
-    </Flex>
+    </PropControlRow>
   );
 };
 
@@ -282,8 +341,10 @@ const FunctionControl: React.FC<PropControlProps> = ({
   name,
   value,
   onChange,
+  definition,
 }) => {
-  const currentValue = value?.value ?? "";
+  const displayValue = getEffectiveDisplayValue(value, definition, "");
+  const currentValue = String(displayValue ?? "");
   const functionOptions = FUNCTION_PRESETS.map((preset) => ({
     id: preset.value || "none",
     label: preset.label,
@@ -297,9 +358,12 @@ const FunctionControl: React.FC<PropControlProps> = ({
     ) ?? functionOptions[0];
 
   return (
-    <Flex flexDirection="column" padding="xs" width="100%">
-      <Detail marginBottom="xs" text={formatPropName(name)} />
+    <PropControlRow
+      filled={isFilledDisplayValue(currentValue)}
+      label={<Detail text={formatPropName(name)} />}
+    >
       <Dropdown
+        className={propsPanelDropdownClassName(isFilledDisplayValue(currentValue))}
         clearable={false}
         defaultValue={activeOption}
         id={`prop-${name}-function-dropdown`}
@@ -317,7 +381,7 @@ const FunctionControl: React.FC<PropControlProps> = ({
         options={functionOptions}
         width="100%"
       />
-    </Flex>
+    </PropControlRow>
   );
 };
 
@@ -325,20 +389,25 @@ const ReactNodeControl: React.FC<PropControlProps> = ({
   name,
   value,
   onChange,
+  definition,
 }) => {
-  const currentValue = value?.value ?? "";
+  const displayValue = getEffectiveDisplayValue(value, definition, "");
+  const currentValue = String(displayValue ?? "");
 
   return (
-    <Flex flexDirection="column" padding="xs" width="100%">
-      <Detail marginBottom="xs" text={formatPropName(name)} />
+    <PropControlRow
+      filled={isFilledDisplayValue(displayValue)}
+      label={<Detail text={formatPropName(name)} />}
+    >
       <TextInput
         placeholder={`Enter content for ${name}...`}
         value={currentValue}
         onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
           onChange(name, { value: e.target.value, enabled: true });
         }}
+        width="100%"
       />
-    </Flex>
+    </PropControlRow>
   );
 };
 
@@ -346,14 +415,23 @@ const StringOrArrayControl: React.FC<PropControlProps> = ({
   name,
   value,
   onChange,
+  definition,
 }) => {
-  const currentValue = value?.value ?? "plus";
-  const isArray = Array.isArray(currentValue);
+  const displayValue = getEffectiveDisplayValue(value, definition, "plus");
+  const isArray = Array.isArray(displayValue);
 
   const [inputValue, setInputValue] = useState(() => {
-    if (isArray) return currentValue.join(", ");
-    return String(currentValue);
+    if (isArray) return displayValue.join(", ");
+    return String(displayValue);
   });
+
+  useEffect(() => {
+    if (isArray) {
+      setInputValue(displayValue.join(", "));
+    } else {
+      setInputValue(String(displayValue));
+    }
+  }, [displayValue, isArray]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const text = e.target.value;
@@ -372,15 +450,20 @@ const StringOrArrayControl: React.FC<PropControlProps> = ({
   };
 
   return (
-    <Flex flexDirection="column" padding="xs" width="100%">
-      <Detail marginBottom="xs" text={formatPropName(name)} />
-      <TextInput value={inputValue} onChange={handleInputChange} />
-      <Caption
-        text="Comma-separated for array (e.g., plus, times)"
-        color="light"
-        marginTop="xs"
-      />
-    </Flex>
+    <PropControlRow
+      alignItems="start"
+      filled={isFilledDisplayValue(displayValue)}
+      label={<Detail text={formatPropName(name)} />}
+    >
+      <Flex flexDirection="column" width="100%">
+        <TextInput value={inputValue} onChange={handleInputChange} width="100%" />
+        <Caption
+          text="Comma-separated for array (e.g., plus, times)"
+          color="light"
+          marginTop="xs"
+        />
+      </Flex>
+    </PropControlRow>
   );
 };
 
@@ -388,46 +471,57 @@ const ObjectControl: React.FC<PropControlProps> = ({
   name,
   value,
   onChange,
+  definition,
 }) => {
-  const [inputValue, setInputValue] = useState(
-    value?.value ? playgroundObjectToEditableLiteral(value.value) : "{}",
+  const displayValue = getEffectiveDisplayValue(value, definition, {});
+  const [inputValue, setInputValue] = useState(() =>
+    isFilledDisplayValue(displayValue)
+      ? playgroundObjectToEditableLiteral(displayValue)
+      : "{}",
   );
 
-  const objectSyncKey = useMemo(() => objectSyncFingerprint(value), [value]);
+  const objectSyncKey = useMemo(
+    () => objectSyncFingerprint({ value: displayValue, enabled: value?.enabled ?? false }),
+    [displayValue, value?.enabled],
+  );
 
   useEffect(() => {
-    const v = value?.value;
     if (
-      v !== undefined &&
-      v !== null &&
-      typeof v === "object" &&
-      !Array.isArray(v)
+      displayValue !== undefined &&
+      displayValue !== null &&
+      typeof displayValue === "object" &&
+      !Array.isArray(displayValue)
     ) {
-      setInputValue(playgroundObjectToEditableLiteral(v));
+      setInputValue(playgroundObjectToEditableLiteral(displayValue));
     }
-  }, [objectSyncKey]);
+  }, [objectSyncKey, displayValue]);
 
   return (
-    <Flex flexDirection="column" paddingY="xs" width="100%">
-      <Detail marginBottom="xs" text={formatPropName(name)} />
-      <Caption
-        color="light"
-        marginBottom="xs"
-        text='JSON or object literal, e.g. {"default": true} or { default: true }'
-      />
-      <textarea
-        placeholder="{}"
-        value={inputValue}
-        onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
-          const text = e.target.value;
-          setInputValue(text);
-          const parsed = tryParseObjectLiteralInput(text);
-          if (parsed !== null) {
-            onChange(name, { value: parsed, enabled: true });
-          }
-        }}
-      />
-    </Flex>
+    <PropControlRow
+      alignItems="start"
+      filled={isFilledDisplayValue(displayValue)}
+      label={<Detail text={formatPropName(name)} />}
+    >
+      <Flex flexDirection="column" width="100%">
+        <Caption
+          color="light"
+          marginBottom="xs"
+          text='JSON or object literal, e.g. {"default": true} or { default: true }'
+        />
+        <textarea
+          placeholder="{}"
+          value={inputValue}
+          onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
+            const text = e.target.value;
+            setInputValue(text);
+            const parsed = tryParseObjectLiteralInput(text);
+            if (parsed !== null) {
+              onChange(name, { value: parsed, enabled: true });
+            }
+          }}
+        />
+      </Flex>
+    </PropControlRow>
   );
 };
 
@@ -435,45 +529,53 @@ const ArrayControl: React.FC<PropControlProps> = ({
   name,
   value,
   onChange,
+  definition,
 }) => {
-  const [inputValue, setInputValue] = useState(
-    value?.value ? JSON.stringify(value.value, null, 2) : "[]",
+  const displayValue = getEffectiveDisplayValue(value, definition, []);
+  const [inputValue, setInputValue] = useState(() =>
+    Array.isArray(displayValue) && displayValue.length > 0
+      ? JSON.stringify(displayValue, null, 2)
+      : "[]",
   );
 
-  const arraySyncKey = useMemo(() => {
-    const v = value?.value;
-    return Array.isArray(v) ? JSON.stringify(v) : "";
-  }, [value?.value]);
+  const arraySyncKey = useMemo(
+    () => (Array.isArray(displayValue) ? JSON.stringify(displayValue) : ""),
+    [displayValue],
+  );
 
   useEffect(() => {
-    const v = value?.value;
-    if (Array.isArray(v)) {
-      setInputValue(JSON.stringify(v, null, 2));
+    if (Array.isArray(displayValue)) {
+      setInputValue(JSON.stringify(displayValue, null, 2));
     }
-  }, [arraySyncKey]);
+  }, [arraySyncKey, displayValue]);
 
   return (
-    <Flex flexDirection="column" paddingY="xs" width="100%">
-      <Detail marginBottom="xs" text={formatPropName(name)} />
-      <Caption
-        color="light"
-        marginBottom="xs"
-        text="JSON or JS array literal"
-      />
-      <textarea
-        placeholder="[]"
-        value={inputValue}
-        onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
-          const text = e.target.value;
-          setInputValue(text);
-          const parsed = tryParseArrayLiteralInput(text);
-          if (parsed !== null) {
-            onChange(name, { value: parsed, enabled: true });
-          }
-        }}
-        style={{ minHeight: "120px" }}
-      />
-    </Flex>
+    <PropControlRow
+      alignItems="start"
+      filled={isFilledDisplayValue(displayValue)}
+      label={<Detail text={formatPropName(name)} />}
+    >
+      <Flex flexDirection="column" width="100%">
+        <Caption
+          color="light"
+          marginBottom="xs"
+          text="JSON or JS array literal"
+        />
+        <textarea
+          placeholder="[]"
+          value={inputValue}
+          onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
+            const text = e.target.value;
+            setInputValue(text);
+            const parsed = tryParseArrayLiteralInput(text);
+            if (parsed !== null) {
+              onChange(name, { value: parsed, enabled: true });
+            }
+          }}
+          style={{ minHeight: "120px" }}
+        />
+      </Flex>
+    </PropControlRow>
   );
 };
 
@@ -501,11 +603,16 @@ const RequiredArrayControl: React.FC<PropControlProps> = ({
   }, [arraySyncKey]);
 
   return (
-    <Flex flexDirection="column" paddingY="xs" width="100%">
-      <Flex align="center" gap="xs" marginBottom="xs">
-        <Body text={name} />
-        <Badge text="Required" variant="primary" />
-      </Flex>
+    <PropControlRow
+      alignItems="start"
+      filled={isFilledDisplayValue(value?.value ?? [])}
+      label={
+        <Flex align="center" gap="xs" wrap>
+          <Detail text={name} />
+          <Badge text="Required" variant="primary" />
+        </Flex>
+      }
+    >
       <Flex flexDirection="column" width="100%">
         <Caption
           marginBottom="xs"
@@ -525,7 +632,7 @@ const RequiredArrayControl: React.FC<PropControlProps> = ({
           }}
         />
       </Flex>
-    </Flex>
+    </PropControlRow>
   );
 };
 
@@ -553,11 +660,16 @@ const RequiredObjectControl: React.FC<PropControlProps> = ({
   }, [objectSyncKey]);
 
   return (
-    <Flex flexDirection="column" paddingY="xs" width="100%">
-      <Flex align="center" gap="xs" marginBottom="xs">
-        <Body text={name} />
-        <Badge text="Required" variant="primary" />
-      </Flex>
+    <PropControlRow
+      alignItems="start"
+      filled={isFilledDisplayValue(value?.value ?? {})}
+      label={
+        <Flex align="center" gap="xs" wrap>
+          <Detail text={name} />
+          <Badge text="Required" variant="primary" />
+        </Flex>
+      }
+    >
       <Flex flexDirection="column" width="100%">
         <Caption
           color="light"
@@ -577,7 +689,7 @@ const RequiredObjectControl: React.FC<PropControlProps> = ({
           }}
         />
       </Flex>
-    </Flex>
+    </PropControlRow>
   );
 };
 
@@ -683,7 +795,9 @@ const PropControl: React.FC<ExtendedPropControlProps> = (props) => {
         text={disabledReason || "This prop is not available"}
         zIndex={10}
       >
-        <div style={{ opacity: 0.5, pointerEvents: "none" }}>{control}</div>
+        <Flex className="props-panel-control--disabled" width="100%">
+          {control}
+        </Flex>
       </Tooltip>
     );
   }

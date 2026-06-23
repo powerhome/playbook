@@ -1,5 +1,49 @@
 @import "playbook-tokens/colors";
 @import "playbook-tokens/spacing";
+@import "playbook-tokens/border_radius";
+
+// Shared trigger selectors — Playbook merges trigger state into one class token
+// (e.g. dropdown_trigger_wrapper_select_only) and applies px_sm/py_xs with !important.
+@mixin props-panel-dropdown-trigger {
+  .dropdown_trigger_wrapper,
+  .dropdown_trigger_wrapper_focus,
+  .dropdown_trigger_wrapper_focus_select_only,
+  .dropdown_trigger_wrapper_select_only,
+  [class*="dropdown_trigger_wrapper"] {
+    box-sizing: border-box !important;
+    min-height: 30px !important;
+    padding: 4px 8px !important;
+    border-radius: $border_radius_sm;
+  }
+}
+
+@mixin props-panel-dropdown-trigger-filled {
+  .dropdown_trigger_wrapper,
+  .dropdown_trigger_wrapper_focus,
+  .dropdown_trigger_wrapper_focus_select_only,
+  .dropdown_trigger_wrapper_select_only,
+  [class*="dropdown_trigger_wrapper"] {
+    background-color: $bg_light !important;
+
+    .dropdown_input {
+      background-color: $bg_light !important;
+      box-shadow: none;
+    }
+
+    @media (hover: hover) {
+      &:hover,
+      &:active,
+      &:focus,
+      &:focus-within {
+        background-color: $bg_light !important;
+
+        input {
+          background-color: $bg_light !important;
+        }
+      }
+    }
+  }
+}
 
 .props-panel {
   display: flex;
@@ -35,10 +79,21 @@
     min-height: 30px;
     font-family: monospace;
     font-size: 12px;
-    padding: 8px;
+    padding: 4px 8px;
     border: 1px solid $border_light;
-    border-radius: 4px;
+    border-radius: $border_radius_sm;
     resize: none;
+    box-sizing: border-box;
+  }
+
+  .pb_text_input_kit {
+    .text_input_wrapper input,
+    .text_input_wrapper .text_input {
+      box-sizing: border-box;
+      min-height: 30px;
+      padding: 4px 8px;
+      border-radius: $border_radius_sm;
+    }
   }
 
   &__body {
@@ -46,9 +101,52 @@
     min-height: 0;
     overflow-y: auto;
     padding-left: calc(#{$space_sm} + 4px) !important;
+
+    .props-panel-dropdown,
+    [class*="pb_dropdown"] {
+      width: 100%;
+
+      .dropdown_wrapper {
+        width: 100%;
+        @include props-panel-dropdown-trigger;
+      }
+    }
+
+    .props-panel-dropdown--filled,
+    .props-panel-control--filled .props-panel-dropdown,
+    .props-panel-control--filled [class*="pb_dropdown"] {
+      .dropdown_wrapper {
+        @include props-panel-dropdown-trigger-filled;
+      }
+    }
   }
 
   .pb_card_header_kit {
     padding-left: calc(#{$space_sm} + 4px);
+  }
+
+  // Tooltip trigger defaults to inline-block, which breaks 40/60 prop rows
+  .pb_tooltip_kit {
+    display: block;
+    width: 100%;
+  }
+
+  .props-panel-control--filled {
+    .pb_text_input_kit {
+      .text_input_wrapper input,
+      .text_input_wrapper .text_input {
+        background-color: $bg_light;
+      }
+    }
+
+    textarea {
+      background-color: $bg_light;
+    }
+  }
+
+  .props-panel-control--disabled {
+    opacity: 0.5;
+    pointer-events: none;
+    width: 100%;
   }
 }

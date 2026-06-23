@@ -5,12 +5,13 @@ import {
   Card,
   Collapsible,
   Flex,
+  FlexItem,
   Icon,
   SectionSeparator,
   Title,
   Detail,
 } from "playbook-ui";
-import PropControl from "../PropControl";
+import PropControl, { PropControlHint } from "../PropControl";
 import { PropDefinition, PropValue } from "../types";
 import "./PropsPanel.scss";
 
@@ -94,7 +95,7 @@ export const PropsPanel: React.FC<PropsPanelProps> = ({
       const disabledState = propDisabledState[name];
       const syncHint = propSyncHints[name];
       return (
-        <Flex flexDirection="column" key={name} marginBottom="xs" width="100%">
+        <Flex flexDirection="column" key={name} width="100%">
           <PropControl
             name={name}
             definition={definition}
@@ -104,14 +105,7 @@ export const PropsPanel: React.FC<PropsPanelProps> = ({
             disabledReason={disabledState?.reason}
             isRequired={requiredPropNames.has(name)}
           />
-          {syncHint ? (
-            <Body
-              color="lighter"
-              marginLeft="md"
-              marginTop="xxs"
-              text={syncHint}
-            />
-          ) : null}
+          {syncHint ? <PropControlHint text={syncHint} /> : null}
         </Flex>
       );
     });
@@ -144,15 +138,32 @@ export const PropsPanel: React.FC<PropsPanelProps> = ({
       <Card.Body className="props-panel__body" padding="sm">
         {showChildren && (
           <>
-          <Flex alignItems="start" className="props-panel__children-field" gap="xs">
-            <Detail text="Children" />
-            <textarea
-              placeholder="Enter children content..."
-              value={children}
-              onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
-                onChildrenChange(e.target.value)
+          <Flex
+            alignItems="start"
+            flexDirection="row"
+            gap="xs"
+            padding="xs"
+            width="100%"
+          >
+            <FlexItem fixedSize="40%">
+              <Detail text="Children" />
+            </FlexItem>
+            <FlexItem
+              className={
+                children.trim().length > 0
+                  ? "props-panel-control--filled"
+                  : undefined
               }
-            />
+              fixedSize="60%"
+            >
+              <textarea
+                placeholder="Enter children content..."
+                value={children}
+                onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
+                  onChildrenChange(e.target.value)
+                }
+              />
+            </FlexItem>
           </Flex>
           <SectionSeparator marginY="sm" />
           </>
@@ -214,21 +225,14 @@ export const PropsPanel: React.FC<PropsPanelProps> = ({
               {globalPropEntries.map(([name, definition]) => {
                 const syncHint = propSyncHints[name];
                 return (
-                  <Flex flexDirection="column" key={name} marginBottom="xs">
+                  <Flex flexDirection="column" key={name} width="100%">
                     <PropControl
                       name={name}
                       definition={definition}
                       value={propValues[name]}
                       onChange={onPropChange}
                     />
-                    {syncHint ? (
-                      <Body
-                        color="lighter"
-                        marginLeft="md"
-                        marginTop="xxs"
-                        text={syncHint}
-                      />
-                    ) : null}
+                    {syncHint ? <PropControlHint text={syncHint} /> : null}
                   </Flex>
                 );
               })}

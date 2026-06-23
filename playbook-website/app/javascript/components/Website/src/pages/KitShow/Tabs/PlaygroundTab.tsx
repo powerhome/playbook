@@ -42,6 +42,7 @@ export const PlaygroundTab: React.FC<PlaygroundTabProps> = ({
 }) => {
   const {
     propValues,
+    displayPropValues,
     children,
     activePresetIndex,
     activeStructureMode,
@@ -190,7 +191,7 @@ export const PlaygroundTab: React.FC<PlaygroundTabProps> = ({
         children={children}
         onChildrenChange={setChildren}
         groupedProps={groupedProps}
-        propValues={propValues}
+        propValues={displayPropValues}
         propDisabledState={propDisabledState}
         onPropChange={handlePropChange}
         globalProps={globalProps}

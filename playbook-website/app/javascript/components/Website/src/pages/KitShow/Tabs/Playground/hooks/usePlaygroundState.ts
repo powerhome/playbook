@@ -422,6 +422,16 @@ export const usePlaygroundState = ({
     return out;
   }, [propValues, propDisabledState]);
 
+  const displayPropValues = useMemo(
+    () =>
+      mergeImplicitDefaultPropValues(
+        propValues,
+        playgroundConfig,
+        allPropDefinitions,
+      ),
+    [propValues, playgroundConfig, allPropDefinitions],
+  );
+
   const activeHints = useMemo(() => {
     const hints: Array<PlaygroundHint & { id: string }> = [];
     const hintConfig = playgroundConfig?.hints ?? {};
@@ -683,6 +693,7 @@ export const usePlaygroundState = ({
 
   return {
     propValues,
+    displayPropValues,
     children,
     activePresetIndex,
     activeStructureMode,
