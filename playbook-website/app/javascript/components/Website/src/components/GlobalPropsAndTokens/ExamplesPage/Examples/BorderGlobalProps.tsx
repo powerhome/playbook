@@ -1,5 +1,4 @@
-import type { ElementType } from "react";
-import { Body, Card, Caption, Flex, Title } from "playbook-ui";
+import { Card, Caption, Flex, Title } from "playbook-ui";
 
 import ShowPage from "../../Templates/ShowPage";
 import PropsExamplesTable from "../../Templates/Subcomponents/PropsExamplesTable";
@@ -12,8 +11,8 @@ type BorderValue =
   | "default"
   | "active"
   | "default_thick"
-  | "default_thicker"
   | "active_thick"
+  | "default_thicker"
   | "active_thicker";
 
 type BorderPropExample = {
@@ -22,14 +21,14 @@ type BorderPropExample = {
   reactProp: string;
 };
 
-const borderValues: { name: BorderValue; description: string }[] = [
-  { name: "none", description: "no border" },
-  { name: "default", description: "1px default" },
-  { name: "active", description: "1px active" },
-  { name: "default_thick", description: "2px default" },
-  { name: "default_thicker", description: "4px default" },
-  { name: "active_thick", description: "2px active" },
-  { name: "active_thicker", description: "4px active" },
+const borderValues: { label: string; name: BorderValue; description: string }[] = [
+  { label: "None", name: "none", description: "no border" },
+  { label: "Default", name: "default", description: "1px default" },
+  { label: "Active", name: "active", description: "1px active" },
+  { label: "Default Thick", name: "default_thick", description: "2px default" },
+  { label: "Active Thickn", name: "active_thick", description: "2px active" },
+  { label: "Default Thicker", name: "default_thicker", description: "4px default" },
+  { label: "Active Thicker", name: "active_thicker", description: "4px active" },
 ];
 
 const borderProps: BorderPropExample[] = [
@@ -41,8 +40,6 @@ const borderProps: BorderPropExample[] = [
   { label: "Border X", railsProp: "border_x", reactProp: "borderX" },
   { label: "Border Y", railsProp: "border_y", reactProp: "borderY" },
 ];
-
-const BorderCard = Card as ElementType;
 
 const ValuesCards = () => (
   <Flex gap="xs" wrap>
@@ -56,22 +53,20 @@ const ValuesCards = () => (
   </Flex>
 );
 
-const VariantExample = ({ value }: { value: BorderValue }) => (
+const VariantExample = ({ value, label }: { value: BorderValue; label: string }) => (
   <Flex align="center" flexDirection="column" gap="xs">
-    <BorderCard
+    <Card
       alignItems="center"
-      background="white"
+      background="light"
       border={value}
       borderRadius="md"
+      className="visual_guide_card_border_value"
       display="flex"
       justifyContent="center"
       minHeight="96px"
       padding="sm"
-      width="180px"
-    >
-      <Body text={value} />
-    </BorderCard>
-    <Caption size="xs" text={value} />
+    />
+    <Caption size="xs" text={label} />
   </Flex>
 );
 
@@ -83,16 +78,14 @@ const DirectionalExample = ({
   props: Record<string, BorderValue>;
 }) => (
   <Flex align="center" flexDirection="column" gap="xs">
-    <BorderCard
-      background="white"
-      borderNone
+    <Card
+      background="light"
       borderRadius="none"
+      className="visual_guide_card_border_direction"
       minHeight="96px"
       padding="sm"
       {...props}
-    >
-      <Body text={label} />
-    </BorderCard>
+    />
     <Caption size="xs" text={label} />
   </Flex>
 );
@@ -102,19 +95,19 @@ const VisualGuideCard = () => (
     <Flex flexDirection="column" gap="sm">
       <Title size={4} text="Border Values" />
       <Flex gap="sm" wrap>
-        {borderValues.map(({ name }) => (
-          <VariantExample key={name} value={name} />
+        {borderValues.map(({ name, label }) => (
+          <VariantExample key={name} value={name} label={label} />
         ))}
       </Flex>
     </Flex>
     <Flex flexDirection="column" gap="sm">
       <Title size={4} text="Directional Border Props" />
-      <Flex gap="xl" wrap>
-        <DirectionalExample label="Top" props={{ borderTop: "default" }} />
+      <Flex gap="sm" wrap>
+        <DirectionalExample label="Top" props={{ borderTop: "default_thick" }} />
         <DirectionalExample label="Bottom" props={{ borderBottom: "default_thick" }} />
-        <DirectionalExample label="Left" props={{ borderLeft: "default_thicker" }} />
-        <DirectionalExample label="Right" props={{ borderRight: "active" }} />
-        <DirectionalExample label="X Axis" props={{ borderX: "active_thick" }} />
+        <DirectionalExample label="Left" props={{ borderLeft: "active_thicker" }} />
+        <DirectionalExample label="Right" props={{ borderRight: "default_thick" }} />
+        <DirectionalExample label="X Axis" props={{ borderX: "default_thick" }} />
         <DirectionalExample label="Y Axis" props={{ borderY: "active_thicker" }} />
       </Flex>
     </Flex>
