@@ -4,7 +4,6 @@ examples:
   - draggable_with_list: Draggable with List Kit
   - draggable_with_selectable_list: Draggable with SelectableList Kit
   - draggable_with_cards: Draggable with Cards
-  - draggable_independent_containers: Independent Draggable Containers
   - draggable_with_table: Draggable with Table
   - draggable_drop_zones: Draggable Drop Zones
   - draggable_drop_zones_colors: Draggable Drop Zones Colors

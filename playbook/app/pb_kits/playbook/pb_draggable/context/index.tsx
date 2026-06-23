@@ -606,14 +606,6 @@ export const DraggableProvider = ({
   }), [state, dropZoneType, dropZoneColor, dropZoneDirection]);
 
   return (
-    <DragContext.Provider value={contextValue}>
-      <div
-          data-pb-draggable-root
-          style={{ display: "contents" }}
-      >
-        {children}
-      </div>
-    </DragContext.Provider>
+    <DragContext.Provider value={contextValue}>{children}</DragContext.Provider>
   );
 };
-
