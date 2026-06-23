@@ -55,7 +55,7 @@ type PropControlRowProps = {
   filled?: boolean;
 };
 
-const PropControlRow: React.FC<PropControlRowProps> = ({
+export const PropControlRow: React.FC<PropControlRowProps> = ({
   label,
   children,
   alignItems = "center",
@@ -88,6 +88,18 @@ export const PropControlHint: React.FC<{ text: string }> = ({ text }) => (
     </FlexItem>
   </Flex>
 );
+
+export type PropListSharedProps = {
+  propValues: Record<string, PropValue>;
+  propDisabledState: Record<string, { disabled: boolean; reason: string }>;
+  onPropChange: (name: string, value: PropValue) => void;
+  requiredPropNames?: Set<string>;
+  propSyncHints?: Record<string, string>;
+};
+
+export type PropControlFieldProps = ExtendedPropControlProps & {
+  syncHint?: string;
+};
 
 const propValueOnDropdownClear = (
   definition: PropDefinition,
@@ -816,5 +828,15 @@ const PropControl: React.FC<ExtendedPropControlProps> = (props) => {
 
   return control;
 };
+
+export const PropControlField: React.FC<PropControlFieldProps> = ({
+  syncHint,
+  ...propControlProps
+}) => (
+  <Flex flexDirection="column" width="100%">
+    <PropControl {...propControlProps} />
+    {syncHint ? <PropControlHint text={syncHint} /> : null}
+  </Flex>
+);
 
 export default PropControl;
