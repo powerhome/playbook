@@ -424,7 +424,7 @@ export default function Playground() {
           <Title size={1} text="Playground" />
           <Body
             color="light"
-            text="Build a UI by adding kits to the canvas, nesting kits inside children, and editing props."
+            text="Build a UI by adding kits to the canvas, nesting kits inside children, and editing props. Copy the produced code snippet in the Code section to save and share your work."
           />
         </Flex>
         <Button
