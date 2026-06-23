@@ -10,7 +10,7 @@ import { DocsTab } from "./Tabs/DocsTab";
 import { PropsTab } from "./Tabs/PropsTab";
 // import { BuildingBlocksTab } from "./Tabs/BuildingBlocksTab";
 // import { ReferencesTab } from "./Tabs/ReferencesTab";
-// import { PlaygroundTab } from "./Tabs/PlaygroundTab";
+// import { PlaygroundTab } from "./Tabs/PlaygroundTab"; <---- uncomment to add playground back in
 
 const KitShow = () => {
   const { name } = useParams();
@@ -22,9 +22,9 @@ const KitShow = () => {
     kit_sections,
     available_props,
     kits_with_status,
-    // kit_schema,
-    // global_props_schema,
-    // playground_config,
+    // kit_schema, <---- uncomment to add playground back in
+    // global_props_schema, <---- uncomment to add playground back in
+    // playground_config, <---- uncomment to add playground back in
   } = loaderData;
   const { darkMode, setDarkMode } = useDarkMode();
   const currentKit = loaderData.kit || name || "";
@@ -96,8 +96,8 @@ const KitShow = () => {
     "badge",
     "body",
     "bread_crumbs",
-    "button",
     "button_toolbar",
+    "button",
     "caption",
     "card",
     "checkbox",
@@ -107,14 +107,14 @@ const KitShow = () => {
     "copy_button",
     "currency",
     "dashboard_value",
-    "date",
     "date_picker",
     "date_range_inline",
     "date_range_stacked",
     "date_stacked",
-    "date_time",
     "date_time_stacked",
+    "date_time",
     "date_year_stacked",
+    "date",
     "detail",
     "dialog",
     "distribution_bar",
@@ -122,6 +122,47 @@ const KitShow = () => {
     "dropdown",
     "empty_state",
     "file_upload",
+    "filter",
+    "fixed_confirmation_toast",
+    "flex",
+    "form_pill",
+    "hashtag",
+    "highlight",
+    "home_address_street",
+    "icon_button",
+    "icon_circle",
+    "icon_stat_value",
+    "icon_value",
+    "icon",
+    "image",
+    "label_pill",
+    "label_value",
+    "legend",
+    "link",
+    "list",
+    "loading_inline",
+    "map",
+    "message",
+    "multi_level_select",
+    "multiple_users_stacked",
+    "multiple_users",
+    "nav",
+    "online_status",
+    "overlay",
+    "pagination",
+    "passphrase",
+    "person_contact",
+    "person",
+    "phone_number_input",
+    "pill",
+    "pb_bar_graph",
+    "pb_circle_chart",
+    "pb_gauge_chart",
+    "pb_line_graph",
+    "popover",
+    "title_count",
+    "title_detail",
+    "title",
   ];
 
   const [activeTab, setActiveTab] = useState<string>("docs");
@@ -225,7 +266,8 @@ const KitShow = () => {
               dark={darkMode}
             />
             {/* TODO: Add playground back in when we have final designs */}
-            {/* {showPlayground && (
+            {/* <---- uncomment to add playground back in
+            {showPlayground && (
               <NavItem
                 text="Playground"
                 active={displayTab === "playground"}
@@ -254,6 +296,7 @@ const KitShow = () => {
         <Flex align="stretch" minWidth={0} orientation="column" marginBottom="lg" width="100%">
           {/* Playground Tab Content (React-only for now; hidden on Rails) */}
           {/* TODO: Add playground back in when we have final designs */}
+          {/* <---- uncomment to add playground back in
           {/* {showPlayground && displayTab === "playground" && (
             <PlaygroundTab
               kitSchema={kit_schema}

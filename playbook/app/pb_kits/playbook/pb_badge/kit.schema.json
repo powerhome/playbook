@@ -20,7 +20,7 @@
       ]
     },
     "removeOnClick": {
-      "type": "ReactNode",
+      "type": "function",
       "platforms": [
         "react"
       ]

@@ -7,49 +7,63 @@
     "rails"
   ],
   "props": {
-    "filters": {
-      "platforms": [
-        "rails"
-      ],
-      "type": "array"
-    },
-    "sortMenu": {
-      "platforms": [
-        "rails"
-      ],
-      "type": "array"
-    },
-    "results": {
-      "platforms": [
-        "rails"
-      ],
-      "type": "string"
-    },
-    "template": {
-      "platforms": [
-        "rails"
-      ],
-      "type": "enum",
-      "values": [
-        "default",
-        "single",
-        "filter_only",
-        "sort_only"
-      ],
-      "default": "default"
-    },
     "background": {
+      "type": "boolean",
       "platforms": [
+        "react",
         "rails"
       ],
-      "type": "boolean",
       "default": true
     },
-    "placement": {
+    "double": {
+      "type": "boolean",
       "platforms": [
+        "react"
+      ]
+    },
+    "filters": {
+      "type": "GenericObject",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "isCollapsed": {
+      "type": "boolean",
+      "platforms": [
+        "react"
+      ]
+    },
+    "maxHeight": {
+      "type": "string",
+      "platforms": [
+        "react"
+      ]
+    },
+    "minWidth": {
+      "type": "string",
+      "platforms": [
+        "react"
+      ]
+    },
+    "onCollapse": {
+      "type": "function",
+      "platforms": [
+        "react"
+      ]
+    },
+    "onSortChange": {
+      "type": "function",
+      "platforms": [
+        "react"
+      ]
+    },
+    "placement": {
+      "type": "enum",
+      "platforms": [
+        "react",
         "rails"
       ],
-      "type": "enum",
       "values": [
         "top",
         "bottom",
@@ -67,21 +81,72 @@
       "default": "bottom-start"
     },
     "popoverProps": {
+      "type": "GenericObject",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "results": {
+      "type": "number",
+      "platforms": [
+        "react",
+        "rails"
+      ]
+    },
+    "sortOptions": {
+      "type": "GenericObject",
+      "platforms": [
+        "react"
+      ]
+    },
+    "sortValue": {
+      "type": "array",
+      "platforms": [
+        "react"
+      ]
+    },
+    "variant": {
+      "type": "string",
+      "platforms": [
+        "react"
+      ]
+    },
+    "sortMenu": {
       "platforms": [
         "rails"
       ],
-      "type": "string"
+      "type": "array"
+    },
+    "template": {
+      "platforms": [
+        "rails"
+      ],
+      "type": "enum",
+      "values": [
+        "default",
+        "single",
+        "filter_only",
+        "sort_only"
+      ],
+      "default": "default"
+    },
+    "interactiveFilters": {
+      "platforms": [
+        "rails"
+      ],
+      "type": "array"
     }
   },
   "globalProps": true,
   "usage": {
     "react": {
       "import": "import { Filter } from 'playbook-ui'",
-      "example": "<Filter template=\"default\" placement=\"top\"></Filter>"
+      "example": "<Filter placement=\"top\" template=\"default\"></Filter>"
     },
     "rails": {
       "import": null,
-      "example": "<%= pb_rails(\"filter\", props: { template: \"default\", placement: \"top\" }) %>"
+      "example": "<%= pb_rails(\"filter\", props: { placement: \"top\", template: \"default\" }) %>"
     }
   }
 }

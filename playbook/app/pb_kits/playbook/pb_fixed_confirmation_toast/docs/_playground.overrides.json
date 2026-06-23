@@ -1,0 +1,231 @@
+{
+  "structureModes": {
+    "default": "toast",
+    "modes": {
+      "toast": {
+        "label": "Toast",
+        "template": "<FixedConfirmationToast{{props}} />",
+        "children": "",
+        "props": {
+          "open": true
+        }
+      },
+      "with_children": {
+        "label": "Children",
+        "template": "<FixedConfirmationToast{{props}}>\n  {{children}}\n</FixedConfirmationToast>",
+        "children": "<Title\n      dark\n      marginLeft=\"md\"\n      size={4}\n      text=\"Design & Handoff Process was moved to UX Designer Learning Track.\"\n  />\n  <Button\n      dark\n      onClick={() => alert(\"Undo clicked\")}\n      paddingRight=\"none\"\n      text=\"Undo\"\n      variant=\"link\"\n  />",
+        "props": {
+          "paddingY": "none",
+          "status": "success",
+          "text": null
+        }
+      },
+      "positioned": {
+        "label": "Positioned",
+        "template": "<FixedConfirmationToast\n    horizontal={horizontal}\n    onClose={() => setOpen(false)}\n    open={open}\n    text={`${vertical} ${horizontal}`}\n    vertical={vertical}{{props}}\n/>",
+        "children": "",
+        "props": {
+          "closeable": true,
+          "horizontal": null,
+          "onClose": null,
+          "open": null,
+          "status": "neutral",
+          "text": null,
+          "vertical": null
+        },
+        "wrapper": "const FixedConfirmationToastPositionedExample = () => {\n  const [open, setOpen] = useState(true)\n  const [vertical, setVertical] = useState('top')\n  const [horizontal, setHorizontal] = useState('center')\n\n  return (\n    <>\n      <Button\n          marginRight=\"xs\"\n          onClick={() => {\n            setVertical('top')\n            setHorizontal('center')\n            setOpen(true)\n          }}\n          text=\"Top Center\"\n          variant=\"secondary\"\n      />\n      <Button\n          marginRight=\"xs\"\n          onClick={() => {\n            setVertical('top')\n            setHorizontal('right')\n            setOpen(true)\n          }}\n          text=\"Top Right\"\n          variant=\"secondary\"\n      />\n      <Button\n          onClick={() => {\n            setVertical('bottom')\n            setHorizontal('right')\n            setOpen(true)\n          }}\n          text=\"Bottom Right\"\n          variant=\"secondary\"\n      />\n      {{component}}\n    </>\n  )\n}\n\n<FixedConfirmationToastPositionedExample />"
+      }
+    }
+  },
+  "children": {
+    "editable": true,
+    "default": ""
+  },
+  "defaults": {
+    "autoClose": 0,
+    "closeable": false,
+    "multiLine": false,
+    "navMarginTop": false,
+    "onClose": "() => {}",
+    "open": true,
+    "status": "success",
+    "text": "Items Successfully Moved",
+    "zIndex": "max"
+  },
+  "groups": [
+    {
+      "name": "Content",
+      "props": [
+        "status",
+        "text",
+        "icon"
+      ]
+    },
+    {
+      "name": "Behavior",
+      "props": [
+        "open",
+        "closeable",
+        "autoClose",
+        "onClose"
+      ]
+    },
+    {
+      "name": "Position",
+      "props": [
+        "vertical",
+        "horizontal",
+        "navMarginTop",
+        "zIndex"
+      ]
+    },
+    {
+      "name": "Layout",
+      "props": [
+        "multiLine"
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Success",
+      "structureMode": "toast",
+      "props": {
+        "status": "success",
+        "text": "Items Successfully Moved"
+      }
+    },
+    {
+      "name": "Closeable",
+      "structureMode": "toast",
+      "props": {
+        "closeable": true,
+        "text": "I am a closeable toast"
+      }
+    },
+    {
+      "name": "Positioned",
+      "structureMode": "toast",
+      "props": {
+        "closeable": true,
+        "horizontal": "center",
+        "text": "I am a positioned toast",
+        "vertical": "top"
+      }
+    },
+    {
+      "name": "Custom Icon",
+      "structureMode": "toast",
+      "props": {
+        "icon": "file-pdf",
+        "status": "neutral",
+        "text": "Saved as PDF"
+      }
+    },
+    {
+      "name": "No Icon",
+      "structureMode": "toast",
+      "props": {
+        "icon": "none",
+        "status": "success",
+        "text": "Items Successfully Moved"
+      }
+    },
+    {
+      "name": "Multi Line",
+      "structureMode": "toast",
+      "props": {
+        "closeable": true,
+        "horizontal": "center",
+        "multiLine": true,
+        "status": "tip",
+        "text": "Multi-line is used when the given text will not fit on one line. Resize the screen to see the toast wrap the text.",
+        "vertical": "top"
+      }
+    },
+    {
+      "name": "Auto Close",
+      "structureMode": "toast",
+      "props": {
+        "autoClose": 3000,
+        "horizontal": "center",
+        "status": "tip",
+        "text": "I will disappear in 3 seconds.",
+        "vertical": "top"
+      }
+    },
+    {
+      "name": "With children",
+      "structureMode": "with_children",
+      "props": {
+        "status": "success",
+        "text": null
+      }
+    },
+    {
+      "name": "Positioned Controls",
+      "structureMode": "positioned",
+      "props": {
+        "closeable": true,
+        "status": "neutral"
+      }
+    }
+  ],
+  "conditionals": {
+    "horizontal": {
+      "requires": "vertical"
+    },
+    "navMarginTop": {
+      "requires": {
+        "vertical": "top"
+      }
+    }
+  },
+  "hints": {
+    "success": {
+      "presetName": "Success",
+      "message": "Success is the default confirmation toast pattern for completed actions.",
+      "type": "info"
+    },
+    "error_closeable": {
+      "presetName": "Closeable",
+      "message": "Closeable shows the dismiss icon and lets the user close the toast.",
+      "type": "info"
+    },
+    "neutral": {
+      "presetName": "Positioned",
+      "message": "Positioned sets both vertical and horizontal, which are both needed for fixed placement.",
+      "type": "info"
+    },
+    "custom_icon": {
+      "presetName": "Custom Icon",
+      "message": "Custom Icon replaces the default status icon while keeping the toast status styling.",
+      "type": "info"
+    },
+    "no_icon": {
+      "presetName": "No Icon",
+      "message": "No Icon uses icon=\"none\" to render text without any leading icon.",
+      "type": "info"
+    },
+    "multi_line": {
+      "presetName": "Multi Line",
+      "message": "Multi Line allows longer toast messages to wrap instead of staying on one line.",
+      "type": "info"
+    },
+    "auto_close": {
+      "presetName": "Auto Close",
+      "message": "Auto Close dismisses the toast after the configured duration in milliseconds.",
+      "type": "info"
+    },
+    "children": {
+      "presetName": "With children",
+      "message": "Children mode replaces text with composed content, matching the docs example with a title and Undo action.",
+      "type": "info"
+    },
+    "positioned_controls": {
+      "presetName": "Positioned Controls",
+      "message": "Positioned Controls keeps open, onClose, vertical, and horizontal in wrapper state so the buttons can reopen and move the toast.",
+      "type": "info"
+    }
+  }
+}

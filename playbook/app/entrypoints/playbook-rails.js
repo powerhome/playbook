@@ -25,6 +25,7 @@ import PbOverlay from 'kits/pb_overlay'
 import PbSelect from 'kits/pb_select'
 import PbDialog from 'kits/pb_dialog'
 import PbDatePicker from 'kits/pb_date_picker'
+import PbFilter from 'kits/pb_filter'
 import PbMultiLevelSelect from 'kits/pb_multi_level_select'
 import PbCheckbox from 'kits/pb_checkbox'
 import PbButton from 'kits/pb_button'
@@ -55,6 +56,7 @@ const kits = [
   PbSelect,
   PbDialog,
   PbDatePicker,
+  PbFilter,
   PbMultiLevelSelect,
   PbCheckbox,
   PbButton,

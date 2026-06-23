@@ -39,7 +39,7 @@
   ],
   "presets": [
     {
-      "name": "Team · sm",
+      "name": "Size sm",
       "props": {
         "size": "sm",
         "users": [
@@ -63,7 +63,7 @@
       }
     },
     {
-      "name": "Team · lg",
+      "name": "Size lg",
       "props": {
         "size": "lg",
         "users": [
@@ -115,7 +115,6 @@
       "name": "Reverse order",
       "props": {
         "reverse": true,
-        "size": "xs",
         "users": [
           {
             "name": "Anna Black",
@@ -133,10 +132,9 @@
       }
     },
     {
-      "name": "Overflow (+more)",
+      "name": "Max displayed users",
       "props": {
         "maxDisplayedUsers": 3,
-        "size": "sm",
         "users": [
           {
             "name": "Anna Black",
@@ -163,5 +161,36 @@
     }
   ],
   "conditionals": {},
-  "hints": {}
+  "hints": {
+    "size_sm": {
+      "presetName": "Size sm",
+      "message": "Size sm shows the standard overlapping avatar group at the small size.",
+      "type": "info"
+    },
+    "size_lg": {
+      "presetName": "Size lg",
+      "message": "Size lg increases the avatar size while preserving the overlapping group layout.",
+      "type": "info"
+    },
+    "initials_only": {
+      "presetName": "Initials only",
+      "message": "Initials only omits imageUrl so Avatar falls back to initials from each user name.",
+      "type": "info"
+    },
+    "with_tooltips": {
+      "presetName": "With tooltips",
+      "message": "With tooltips enables Tooltip wrappers and reads tooltip text from each user object.",
+      "type": "info"
+    },
+    "reverse_order": {
+      "presetName": "Reverse order",
+      "message": "Reverse order flips the overlap direction for the displayed users.",
+      "type": "info"
+    },
+    "max_displayed_users": {
+      "presetName": "Max displayed users",
+      "message": "Max displayed users uses maxDisplayedUsers to collapse extra people into the remaining count badge.",
+      "type": "info"
+    }
+  }
 }

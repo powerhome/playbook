@@ -12,7 +12,9 @@
     <% end %>
     <div class="dropdown_wrapper<%= error_class %>" style="position: relative">
         <input
+            <% if input_default_value.present? %>
             data-default-value="<%= input_default_value %>"
+            <% end %>
             data-dropdown-selected-option
             name="<%= object.name %><%= '[]' if object.multi_select %>"
             style="display: none"

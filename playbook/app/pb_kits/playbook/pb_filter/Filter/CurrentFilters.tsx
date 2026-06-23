@@ -1,22 +1,32 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { isEmpty, omitBy, map } from '../../utilities/object'
 
 import Body from '../../pb_body/_body'
 import Caption from '../../pb_caption/_caption'
 import Title from '../../pb_title/_title'
+import InteractiveFilter, { InteractiveFilterConfig } from './InteractiveFilter'
 
 export type FilterDescription = {
   [key: string]: string | null | boolean,
 }
 
+export type InteractiveFilters = {
+  [key: string]: InteractiveFilterConfig,
+}
+
 export type CurrentFiltersProps = {
   dark: boolean,
   filters: FilterDescription,
+  interactiveFilters?: InteractiveFilters,
 }
 
 const hiddenFilters = (value: any) => isEmpty(value) && value !== true
 
-const CurrentFilters = ({ dark, filters }: CurrentFiltersProps): React.ReactElement => {
+const CurrentFilters = ({
+  dark,
+  filters,
+  interactiveFilters = {},
+}: CurrentFiltersProps): React.ReactElement => {
   const displayableFilters = omitBy(filters, hiddenFilters)
 
   return (
@@ -35,33 +45,50 @@ const CurrentFilters = ({ dark, filters }: CurrentFiltersProps): React.ReactElem
       { !isEmpty(filters) &&
         <div className="filters">
           <div className="left_gradient" />
-            {map(displayableFilters, (value, name) => (
-              <div
-                  className="filter"
-                  key={`filter-${name}`}
-              >
-                { value === true ?
-                <Title
-                    dark={dark}
-                    size={4}
-                    tag="h4"
-                    text={`${name}`}
-                /> :
-                <div>
-                  <Caption
-                      dark={dark}
-                      text={`${name}`}
-                  />
-                  <Title
-                      dark={dark}
-                      size={4}
-                      tag="h4"
-                      text={value}
-                  />
+            {map(displayableFilters, (value, name) => {
+              const interactiveConfig = interactiveFilters[name]
+              return (
+                <div
+                    className={`filter${interactiveConfig ? ' interactive' : ''}`}
+                    key={`filter-${name}`}
+                >
+                  { interactiveConfig ?
+                    <InteractiveFilter
+                        config={interactiveConfig}
+                        dark={dark}
+                        editorValue={interactiveConfig.editorValue}
+                        name={String(name)}
+                        value={
+                          interactiveConfig.value !== undefined
+                            ? interactiveConfig.value
+                            : value === true
+                              ? ''
+                              : (value as string)
+                        }
+                    /> :
+                    value === true ?
+                    <Title
+                        dark={dark}
+                        size={4}
+                        tag="h4"
+                        text={`${name}`}
+                    /> :
+                    <div>
+                      <Caption
+                          dark={dark}
+                          text={`${name}`}
+                      />
+                      <Title
+                          dark={dark}
+                          size={4}
+                          tag="h4"
+                          text={value}
+                      />
+                    </div>
+                  }
                 </div>
-                }
-              </div>
-            ))}
+              )
+            })}
           <div className="right_gradient" />
         </div>
       }

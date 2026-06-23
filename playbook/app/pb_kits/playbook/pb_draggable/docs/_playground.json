@@ -1,54 +1,295 @@
 {
   "template": "<Draggable{{props}} />",
-  "propTargets": {},
+  "propTargets": {
+    "dropZone": "Provider.props",
+    "providerId": "Provider.props",
+    "enableCrossContainerPreview": "Provider.props",
+    "htmlOptions": "Container.props",
+    "tag": "Container.props",
+    "onDragStart": "Item.props",
+    "onDragEnd": "Item.props",
+    "onDrop": "Item.props"
+  },
   "defaults": {
-    "dropZoneColor": "neutral"
+    "dropZoneColor": "neutral",
+    "dropZone": {
+      "type": "ghost",
+      "color": "neutral",
+      "direction": "vertical"
+    },
+    "providerId": "draggable-playground",
+    "enableCrossContainerPreview": false
   },
   "groups": [
     {
-      "name": "Appearance",
+      "name": "Provider",
       "props": [
         "dropZone",
-        "dropZoneColor"
+        "providerId",
+        "enableCrossContainerPreview"
+      ]
+    },
+    {
+      "name": "Container",
+      "props": [
+        "tag"
+      ]
+    },
+    {
+      "name": "Item",
+      "props": [
+        "onDragStart",
+        "onDragEnd",
+        "onDrop"
       ]
     }
   ],
   "presets": [
     {
-      "name": "Ghost (neutral)",
+      "name": "Single List",
+      "structureMode": "single_container",
       "props": {
-        "dropZone": "ghost",
-        "dropZoneColor": "neutral"
+        "dropZone": {
+          "type": "ghost",
+          "color": "neutral",
+          "direction": "vertical"
+        }
       }
     },
     {
-      "name": "Outline (primary)",
+      "name": "Outline Drop Zone",
+      "structureMode": "single_container",
       "props": {
-        "dropZone": "outline",
-        "dropZoneColor": "primary"
+        "dropZone": {
+          "type": "outline",
+          "color": "primary",
+          "direction": "vertical"
+        }
       }
     },
     {
-      "name": "Shadow (purple)",
+      "name": "Shadow Drop Zone",
+      "structureMode": "single_container",
       "props": {
-        "dropZone": "shadow",
-        "dropZoneColor": "purple"
+        "dropZone": {
+          "type": "shadow",
+          "color": "purple",
+          "direction": "vertical"
+        }
       }
     },
     {
-      "name": "Line (neutral)",
+      "name": "Line Vertical",
+      "structureMode": "single_container",
       "props": {
-        "dropZone": "line",
-        "dropZoneColor": "neutral"
+        "dropZone": {
+          "type": "line",
+          "color": "primary",
+          "direction": "vertical"
+        }
+      }
+    },
+    {
+      "name": "Line Horizontal",
+      "structureMode": "single_container_horizontal",
+      "props": {
+        "dropZone": {
+          "type": "line",
+          "color": "primary",
+          "direction": "horizontal"
+        }
+      }
+    },
+    {
+      "name": "Multiple Containers",
+      "structureMode": "multiple_containers",
+      "props": {
+        "dropZone": {
+          "type": "ghost",
+          "color": "neutral",
+          "direction": "vertical"
+        }
+      }
+    },
+    {
+      "name": "Cross Container Preview",
+      "structureMode": "multiple_containers",
+      "props": {
+        "enableCrossContainerPreview": true,
+        "dropZone": {
+          "type": "outline",
+          "color": "primary",
+          "direction": "vertical"
+        }
+      }
+    },
+    {
+      "name": "Event Listeners",
+      "structureMode": "single_container",
+      "props": {
+        "onDragEnd": "() => console.log('drag end')",
+        "onDragStart": "() => console.log('drag start')",
+        "onDrop": "() => console.log('drop')",
+        "dropZone": {
+          "type": "ghost",
+          "color": "neutral",
+          "direction": "vertical"
+        }
       }
     }
   ],
   "conditionals": {},
   "hints": {
-    "children_note": {
-      "when": {},
-      "message": "Compose Draggable.Container and Draggable.Item as children to build a sortable list.",
+    "single_list": {
+      "presetName": "Single List",
+      "message": "Single List wraps Draggable.Container and Draggable.Item children in DraggableProvider with initialItems and onReorder.",
       "type": "info"
+    },
+    "outline_drop_zone": {
+      "presetName": "Outline Drop Zone",
+      "message": "Outline Drop Zone passes a dropZone object to DraggableProvider so the dragged item uses the outline treatment.",
+      "type": "info"
+    },
+    "shadow_drop_zone": {
+      "presetName": "Shadow Drop Zone",
+      "message": "Shadow Drop Zone uses the provider dropZone color and type to preview the shadow treatment while dragging.",
+      "type": "info"
+    },
+    "line_vertical": {
+      "presetName": "Line Vertical",
+      "message": "Line Vertical uses dropZone.direction=\"vertical\" for between-row placement.",
+      "type": "info"
+    },
+    "line_horizontal": {
+      "presetName": "Line Horizontal",
+      "message": "Line Horizontal uses dropZone.direction=\"horizontal\" for between-column placement.",
+      "type": "info"
+    },
+    "multiple_containers": {
+      "presetName": "Multiple Containers",
+      "message": "Multiple Containers maps items into Draggable.Container columns by their container value.",
+      "type": "info"
+    },
+    "cross_container_preview": {
+      "presetName": "Cross Container Preview",
+      "message": "Cross Container Preview enables provider-managed movement previews between containers before drop.",
+      "type": "info"
+    },
+    "event_listeners": {
+      "presetName": "Event Listeners",
+      "message": "Event Listeners routes item callbacks through Draggable.Item props so drag events can be handled by app code.",
+      "type": "info"
+    }
+  },
+  "structureModes": {
+    "default": "single_container",
+    "modes": {
+      "single_container": {
+        "label": "Single Container",
+        "template": "<DraggableProvider\n    initialItems={initialItems}\n    onReorder={setItems}{{Provider.props}}\n>\n  <Draggable{{props}}>\n    <Draggable.Container\n        container=\"tasks\"{{Container.props}}\n    >\n      <Flex\n          gap=\"xs\"\n          orientation=\"column\"\n      >\n        {items.map(({ id, text }) => (\n          <Draggable.Item\n              container=\"tasks\"\n              dragId={id}\n              key={id}{{Item.props}}\n          >\n            <Card padding=\"xs\">\n              <Body text={text} />\n            </Card>\n          </Draggable.Item>\n        ))}\n      </Flex>\n    </Draggable.Container>\n  </Draggable>\n</DraggableProvider>",
+        "children": "",
+        "props": {
+          "dropZone": {
+            "type": "ghost",
+            "color": "neutral",
+            "direction": "vertical"
+          }
+        },
+        "wrapper": "const initialItems = [\n  { id: 'task-1', container: 'tasks', text: 'Confirm scope' },\n  { id: 'task-2', container: 'tasks', text: 'Design states' },\n  { id: 'task-3', container: 'tasks', text: 'Ship playground' },\n]\n\nconst DraggablePlaygroundExample = () => {\n  const [items, setItems] = useState(initialItems)\n\n  return {{component}}\n}\n\n<DraggablePlaygroundExample />"
+      },
+      "single_container_horizontal": {
+        "label": "Single Container Horizontal",
+        "template": "<Flex>\n  <DraggableProvider\n      initialItems={initialItems}\n      onReorder={setItems}{{Provider.props}}\n  >\n    <Draggable.Container{{Container.props}}>\n      <Flex\n          alignItems=\"stretch\"\n          flexDirection=\"row\"\n          height=\"110px\"\n      >\n        {items.map(({ id, url }) => (\n          <Draggable.Item\n              dragId={id}\n              key={id}\n              marginRight=\"sm\"{{Item.props}}\n          >\n            <Image\n                alt={id}\n                size=\"md\"\n                url={url}\n            />\n          </Draggable.Item>\n        ))}\n      </Flex>\n    </Draggable.Container>\n  </DraggableProvider>\n</Flex>",
+        "children": "",
+        "props": {
+          "dropZone": {
+            "type": "line",
+            "color": "primary",
+            "direction": "horizontal"
+          },
+          "htmlOptions": {
+            "style": {
+              "width": "420px"
+            }
+          }
+        },
+        "wrapper": "const initialItems = [\n  { id: 'image-1', url: 'https://unsplash.it/500/400/?image=633' },\n  { id: 'image-2', url: 'https://unsplash.it/500/400/?image=634' },\n  { id: 'image-3', url: 'https://unsplash.it/500/400/?image=637' },\n]\n\nconst DraggablePlaygroundExample = () => {\n  const [items, setItems] = useState(initialItems)\n\n  return {{component}}\n}\n\n<DraggablePlaygroundExample />"
+      },
+      "multiple_containers": {
+        "label": "Multiple Containers",
+        "template": "<DraggableProvider\n    initialItems={initialItems}\n    onReorder={setItems}{{Provider.props}}\n>\n  <Draggable{{props}}>\n    <Flex\n        align=\"start\"\n        gap=\"sm\"\n        wrap\n    >\n      {containers.map((container) => (\n        <Draggable.Container\n            container={container}\n            key={container}\n            minWidth=\"220px\"{{Container.props}}\n        >\n          <Card padding=\"sm\">\n            <Title\n                marginBottom=\"xs\"\n                size={4}\n                text={container}\n            />\n            <Flex\n                gap=\"xs\"\n                orientation=\"column\"\n            >\n              {items\n                .filter((item) => item.container === container)\n                .map(({ id, text }) => (\n                  <Draggable.Item\n                      container={container}\n                      dragId={id}\n                      key={id}{{Item.props}}\n                  >\n                    <Card padding=\"xs\">\n                      <Body text={text} />\n                    </Card>\n                  </Draggable.Item>\n                ))}\n            </Flex>\n          </Card>\n        </Draggable.Container>\n      ))}\n    </Flex>\n  </Draggable>\n</DraggableProvider>",
+        "children": "",
+        "props": {
+          "dropZone": {
+            "type": "ghost",
+            "color": "neutral",
+            "direction": "vertical"
+          }
+        },
+        "wrapper": "const containers = ['To Do', 'In Progress', 'Done']\nconst initialItems = [\n  { id: 'task-1', container: 'To Do', text: 'Confirm scope' },\n  { id: 'task-2', container: 'To Do', text: 'Design states' },\n  { id: 'task-3', container: 'In Progress', text: 'Ship playground' },\n  { id: 'task-4', container: 'Done', text: 'Write docs' },\n]\n\nconst DraggablePlaygroundExample = () => {\n  const [items, setItems] = useState(initialItems)\n\n  return {{component}}\n}\n\n<DraggablePlaygroundExample />"
+      }
+    }
+  },
+  "children": {
+    "editable": false,
+    "default": ""
+  },
+  "customProps": {
+    "dropZone": {
+      "type": "object",
+      "platforms": [
+        "react"
+      ]
+    },
+    "providerId": {
+      "type": "string",
+      "platforms": [
+        "react"
+      ]
+    },
+    "enableCrossContainerPreview": {
+      "type": "boolean",
+      "platforms": [
+        "react"
+      ],
+      "default": false
+    },
+    "tag": {
+      "type": "enum",
+      "platforms": [
+        "react"
+      ],
+      "values": [
+        "div",
+        "span",
+        "p",
+        "tr",
+        "td",
+        "tbody"
+      ]
+    },
+    "onDragStart": {
+      "type": "function",
+      "platforms": [
+        "react"
+      ]
+    },
+    "onDragEnd": {
+      "type": "function",
+      "platforms": [
+        "react"
+      ]
+    },
+    "onDrop": {
+      "type": "function",
+      "platforms": [
+        "react"
+      ]
+    }
+  },
+  "propSyncOnEnable": {
+    "enableCrossContainerPreview": {
+      "structureMode": "multiple_containers"
     }
   }
 }

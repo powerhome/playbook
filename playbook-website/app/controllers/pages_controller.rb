@@ -274,7 +274,12 @@ class PagesController < ApplicationController
   end
 
   def get_description(example)
-    read_kit_file("_#{example}.md")
+    base_file = "_#{example}.md"
+    content = read_kit_file(base_file)
+    return content if content.present?
+
+    platform_suffix = @type == "rails" ? "_rails" : "_react"
+    read_kit_file("_#{example}#{platform_suffix}.md")
   end
 
   helper_method :get_source, :get_description

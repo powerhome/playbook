@@ -140,7 +140,9 @@ export interface StructureMode {
   children: string;
   props?: Record<string, any>;
   propTargets?: Record<string, string>;
+  propAliases?: Record<string, string>;
   imports?: string[];
+  externalImports?: string[];
   wrapper?: string;
 }
 
@@ -173,6 +175,8 @@ export type PropSyncOnEnable = Record<string, PropSyncOnEnableRule>;
 export interface PlaygroundConfig {
   template: string;
   propTargets?: Record<string, string>;
+  propAliases?: Record<string, string>;
+  customProps?: Record<string, PropDefinition>;
   defaults?: Record<string, any>;
   scopeVars?: Record<string, any>;
   children?: PlaygroundChildrenConfig;
@@ -181,6 +185,7 @@ export interface PlaygroundConfig {
   presets?: PlaygroundPreset[];
   hints?: Record<string, PlaygroundHint>;
   structureModes?: StructureModesConfig;
+  wrapper?: string;
   /** Swap required table/column data without duplicating feature presets for each dataset. */
   dataPresets?: DataPresetsConfig;
   /** When a control is enabled, co-select sample data and/or structure mode (see Advanced Table). */
@@ -188,4 +193,5 @@ export interface PlaygroundConfig {
   requiredProps?: Record<string, any>;
   /** Kit prop names to omit from the playground props panel (still in kit.schema.json). */
   hiddenProps?: string[];
+  externalImports?: string[];
 }

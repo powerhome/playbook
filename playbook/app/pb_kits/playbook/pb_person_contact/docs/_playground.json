@@ -2,53 +2,82 @@
   "template": "<PersonContact{{props}} />",
   "propTargets": {},
   "defaults": {
-    "firstName": "Anna",
-    "lastName": "Black",
+    "firstName": "Pauline",
+    "lastName": "Smith",
     "contacts": [
       {
         "contactType": "email",
-        "contactValue": "anna.black@example.com",
-        "contactDetail": "work"
+        "contactValue": "email@example.com"
+      },
+      {
+        "contactValue": "5555555555"
       },
       {
         "contactType": "work",
-        "contactValue": "2155550100",
-        "contactDetail": "ext. 42"
+        "contactValue": "3245627482"
       }
     ]
   },
   "groups": [
     {
-      "name": "Content",
+      "name": "Person",
       "props": [
         "firstName",
-        "lastName",
+        "lastName"
+      ]
+    },
+    {
+      "name": "Contacts",
+      "props": [
         "contacts"
       ]
     }
   ],
   "presets": [
     {
-      "name": "Email & phone",
+      "name": "Email and Phone",
       "props": {
-        "firstName": "Anna",
-        "lastName": "Black",
+        "firstName": "Pauline",
+        "lastName": "Smith",
         "contacts": [
           {
             "contactType": "email",
-            "contactValue": "anna.black@example.com",
-            "contactDetail": "work"
+            "contactValue": "email@example.com"
           },
           {
-            "contactType": "cell",
-            "contactValue": "2155550199",
-            "contactDetail": "mobile"
+            "contactValue": "5555555555"
+          },
+          {
+            "contactType": "work",
+            "contactValue": "3245627482"
           }
         ]
       }
     },
     {
-      "name": "Email only",
+      "name": "With Detail",
+      "props": {
+        "firstName": "Harvey",
+        "lastName": "Walters",
+        "contacts": [
+          {
+            "contactType": "email",
+            "contactValue": "email@example.com"
+          },
+          {
+            "contactValue": "5555555555",
+            "contactDetail": "Home"
+          },
+          {
+            "contactType": "work",
+            "contactValue": "3245627482",
+            "contactDetail": "Work"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Email Only",
       "props": {
         "firstName": "Anna",
         "lastName": "Black",
@@ -61,7 +90,7 @@
       }
     },
     {
-      "name": "Work & home",
+      "name": "Work and Home",
       "props": {
         "firstName": "Anna",
         "lastName": "Black",
@@ -69,11 +98,12 @@
           {
             "contactType": "work",
             "contactValue": "2155550100",
-            "contactDetail": "desk"
+            "contactDetail": "Desk"
           },
           {
             "contactType": "home",
-            "contactValue": "2155550188"
+            "contactValue": "2155550188",
+            "contactDetail": "Home"
           }
         ]
       }
@@ -94,5 +124,26 @@
     }
   ],
   "conditionals": {},
-  "hints": {}
+  "hints": {
+    "contacts_shape": {
+      "when": {},
+      "message": "contacts is an array of contact objects. Use contactType, contactValue, and optional contactDetail for each row.",
+      "type": "info"
+    },
+    "with_detail": {
+      "presetName": "With Detail",
+      "message": "contactDetail adds the secondary label next to the contact value.",
+      "type": "info"
+    },
+    "email_only": {
+      "presetName": "Email Only",
+      "message": "PersonContact can render a single contact item when only one method is available.",
+      "type": "info"
+    },
+    "international": {
+      "presetName": "International",
+      "message": "Use contactType international when the value already includes an international dialing prefix.",
+      "type": "info"
+    }
+  }
 }

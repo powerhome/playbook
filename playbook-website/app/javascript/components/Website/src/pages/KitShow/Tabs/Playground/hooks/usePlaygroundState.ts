@@ -51,19 +51,52 @@ export const usePlaygroundState = ({
 }: UsePlaygroundStateProps) => {
   // Initialize with first preset if available
   const firstPreset = playgroundConfig?.presets?.[0];
+  const firstPresetIndex = firstPreset ? 0 : null;
   
   // Get required props (always enabled with default values)
-  const requiredProps = playgroundConfig?.requiredProps ?? {};
+  const requiredProps = useMemo(
+    () => playgroundConfig?.requiredProps ?? {},
+    [playgroundConfig?.requiredProps]
+  );
   const requiredPropNames = useMemo(() => new Set(Object.keys(requiredProps)), [requiredProps]);
 
-  const getInitialChildren = (): string => {
-    if (firstPreset?.children !== undefined) return firstPreset.children;
+  const defaultStructureMode = playgroundConfig?.structureModes?.default ?? null;
+
+  const getStructureModeForPreset = useCallback((presetIndex: number | null, fallback: string | null): string | null => {
+    const preset =
+      presetIndex != null && playgroundConfig?.presets?.[presetIndex]
+        ? playgroundConfig.presets[presetIndex]
+        : null;
+    return preset?.structureMode ?? fallback;
+  }, [playgroundConfig]);
+
+  const getDataPresetForPreset = useCallback((presetIndex: number | null, fallback: string | null): string | null => {
+    const preset =
+      presetIndex != null && playgroundConfig?.presets?.[presetIndex]
+        ? playgroundConfig.presets[presetIndex]
+        : null;
+    return preset?.dataPreset !== undefined ? preset.dataPreset : fallback;
+  }, [playgroundConfig]);
+
+  const getChildrenForState = useCallback((presetIndex: number | null, structureModeKey: string | null): string => {
+    const preset =
+      presetIndex != null && playgroundConfig?.presets?.[presetIndex]
+        ? playgroundConfig.presets[presetIndex]
+        : null;
+    if (preset?.children !== undefined) return preset.children;
+
+    const mode = structureModeKey
+      ? playgroundConfig?.structureModes?.modes?.[structureModeKey]
+      : null;
+    if (mode?.children !== undefined) return mode.children;
+
     const d = playgroundConfig?.children?.default;
     if (d !== undefined && d !== null && d !== "") return d;
     return getDefaultChildren(kitName);
-  };
+  }, [kitName, playgroundConfig]);
 
-  const defaultStructureMode = playgroundConfig?.structureModes?.default ?? null;
+  const initialStructureMode = getStructureModeForPreset(firstPresetIndex, defaultStructureMode);
+  const initialDataPresetKey = getDataPresetForPreset(firstPresetIndex, null);
 
   const hiddenPropNames = useMemo(
     () => new Set(playgroundConfig?.hiddenProps ?? []),
@@ -92,9 +125,14 @@ export const usePlaygroundState = ({
     return globalPropsSchema.props;
   }, [globalPropsSchema, kitSchema]);
 
+  const playgroundProps = useMemo(
+    () => ({ ...reactProps, ...(playgroundConfig?.customProps ?? {}) }),
+    [reactProps, playgroundConfig?.customProps]
+  );
+
   const allPropDefinitions = useMemo(
-    () => ({ ...reactProps, ...globalProps }),
-    [reactProps, globalProps]
+    () => ({ ...playgroundProps, ...globalProps }),
+    [playgroundProps, globalProps]
   );
 
   const buildFullPropValues = useCallback(
@@ -117,30 +155,44 @@ export const usePlaygroundState = ({
     [playgroundConfig, requiredProps, allPropDefinitions]
   );
 
-  const [activeDataPresetKey, setActiveDataPresetKey] = useState<string | null>(null);
+  const [activeDataPresetKey, setActiveDataPresetKey] = useState<string | null>(initialDataPresetKey);
   const [propValues, setPropValues] = useState<Record<string, PropValue>>(() =>
-    buildFullPropValues(null, defaultStructureMode, playgroundConfig?.presets?.[0] ? 0 : null)
+    buildFullPropValues(initialDataPresetKey, initialStructureMode, firstPresetIndex)
   );
-  const [children, setChildren] = useState<string>(getInitialChildren);
+  const [children, setChildren] = useState<string>(() =>
+    getChildrenForState(firstPresetIndex, initialStructureMode)
+  );
   const [activePresetIndex, setActivePresetIndex] = useState<number | null>(
-    firstPreset ? 0 : null
+    firstPresetIndex
   );
 
-  const [activeStructureMode, setActiveStructureMode] = useState<string | null>(defaultStructureMode);
+  const [activeStructureMode, setActiveStructureMode] = useState<string | null>(initialStructureMode);
 
   // Reset all state when kit changes
   useEffect(() => {
-    setActiveDataPresetKey(null);
+    const nextPresetIndex = playgroundConfig?.presets?.[0] ? 0 : null;
+    const nextStructureMode = getStructureModeForPreset(
+      nextPresetIndex,
+      playgroundConfig?.structureModes?.default ?? null
+    );
+    const nextDataPresetKey = getDataPresetForPreset(nextPresetIndex, null);
+
+    setActiveDataPresetKey(nextDataPresetKey);
     setPropValues(
       buildFullPropValues(
-        null,
-        playgroundConfig?.structureModes?.default ?? null,
-        playgroundConfig?.presets?.[0] ? 0 : null
+        nextDataPresetKey,
+        nextStructureMode,
+        nextPresetIndex
       )
     );
-    setChildren(getInitialChildren());
-    setActivePresetIndex(playgroundConfig?.presets?.[0] ? 0 : null);
-    setActiveStructureMode(playgroundConfig?.structureModes?.default ?? null);
+    setChildren(
+      getChildrenForState(
+        nextPresetIndex,
+        nextStructureMode
+      )
+    );
+    setActivePresetIndex(nextPresetIndex);
+    setActiveStructureMode(nextStructureMode);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [kitName]);
   
@@ -199,6 +251,7 @@ export const usePlaygroundState = ({
         }
         if (nextStructureMode !== activeStructureMode) {
           setActiveStructureMode(nextStructureMode);
+          setChildren(getChildrenForState(null, nextStructureMode));
         }
       }
 
@@ -223,6 +276,7 @@ export const usePlaygroundState = ({
       requiredProps,
       activeDataPresetKey,
       activeStructureMode,
+      getChildrenForState,
     ]
   );
 
@@ -232,13 +286,10 @@ export const usePlaygroundState = ({
       if (!preset) return;
 
       let nextDataPreset =
-        preset.dataPreset !== undefined && preset.dataPreset !== null
+        preset.dataPreset !== undefined
           ? preset.dataPreset
           : activeDataPresetKey;
-      const structureModeForBuild =
-        preset.structureMode !== undefined && preset.structureMode !== null
-          ? preset.structureMode
-          : activeStructureMode;
+      const structureModeForBuild = getStructureModeForPreset(presetIndex, activeStructureMode);
       let nextStructureMode = structureModeForBuild;
 
       const built = buildFullPropValues(
@@ -275,14 +326,15 @@ export const usePlaygroundState = ({
       }
 
       setActivePresetIndex(presetIndex);
-      if (preset.children !== undefined) {
-        setChildren(preset.children);
-      }
+      setChildren(getChildrenForState(presetIndex, nextStructureMode));
     },
     [
       buildFullPropValues,
       activeDataPresetKey,
       activeStructureMode,
+      getStructureModeForPreset,
+      getChildrenForState,
+      playgroundConfig,
     ]
   );
 
@@ -415,7 +467,11 @@ export const usePlaygroundState = ({
   );
 
   const showChildren = useMemo(() => {
+    const template = currentStructureMode?.template ?? playgroundConfig?.template;
+
     if (playgroundConfig?.children) {
+      if (template && !template.includes("{{children}}")) return false;
+
       if (playgroundConfig.children.hideWhenPropSet) {
         const shouldHide = playgroundConfig.children.hideWhenPropSet.some(
           (propName) => propValues[propName]?.enabled && propValues[propName]?.value
@@ -425,13 +481,13 @@ export const usePlaygroundState = ({
       return playgroundConfig.children.editable;
     }
     return needsChildren(kitName);
-  }, [kitName, playgroundConfig, propValues]);
+  }, [kitName, playgroundConfig, propValues, currentStructureMode?.template]);
 
   // Grouped props
   const groupedProps = useMemo(() => {
     const groups = playgroundConfig?.groups;
     if (!groups || groups.length === 0) {
-      return [{ name: "", props: Object.entries(reactProps) }];
+      return [{ name: "", props: Object.entries(playgroundProps) }];
     }
 
     const result: Array<{ name: string; props: Array<[string, PropDefinition]> }> = [];
@@ -440,8 +496,8 @@ export const usePlaygroundState = ({
     groups.forEach((group) => {
       const groupProps: Array<[string, PropDefinition]> = [];
       group.props.forEach((propName) => {
-        if (reactProps[propName]) {
-          groupProps.push([propName, reactProps[propName]]);
+        if (playgroundProps[propName]) {
+          groupProps.push([propName, playgroundProps[propName]]);
           assignedProps.add(propName);
         }
       });
@@ -450,13 +506,13 @@ export const usePlaygroundState = ({
       }
     });
 
-    const otherProps = Object.entries(reactProps).filter(([name]) => !assignedProps.has(name));
+    const otherProps = Object.entries(playgroundProps).filter(([name]) => !assignedProps.has(name));
     if (otherProps.length > 0) {
       result.push({ name: "Other", props: otherProps });
     }
 
     return result;
-  }, [reactProps, playgroundConfig?.groups]);
+  }, [playgroundProps, playgroundConfig?.groups]);
 
   // Resolve template and propTargets - structure mode takes precedence
   const activeTemplate = currentStructureMode?.template ?? playgroundConfig?.template;
@@ -469,6 +525,22 @@ export const usePlaygroundState = ({
     return { ...base, ...modeTargets };
   }, [playgroundConfig?.propTargets, currentStructureMode?.propTargets]);
 
+  const activePropAliases = useMemo(() => {
+    const base = playgroundConfig?.propAliases ?? {};
+    const modeAliases = currentStructureMode?.propAliases ?? {};
+    return { ...base, ...modeAliases };
+  }, [playgroundConfig?.propAliases, currentStructureMode?.propAliases]);
+
+  const activeExternalImports = useMemo(
+    () => [
+      ...(playgroundConfig?.externalImports ?? []),
+      ...(currentStructureMode?.externalImports ?? []),
+    ],
+    [playgroundConfig?.externalImports, currentStructureMode?.externalImports]
+  );
+
+  const activeWrapper = currentStructureMode?.wrapper ?? playgroundConfig?.wrapper;
+
   // Code generation
   const generatedDisplayCode = useMemo(() => {
     if (hasActiveTemplate && playgroundConfig) {
@@ -477,11 +549,13 @@ export const usePlaygroundState = ({
         propValues: propValuesForCodegen,
         propDefinitions: allPropDefinitions,
         propTargets: activePropTargets,
+        propAliases: activePropAliases,
         children,
         childrenConfig: playgroundConfig.children,
         includeImport: true,
         customImports: currentStructureMode?.imports,
-        wrapper: currentStructureMode?.wrapper,
+        externalImports: activeExternalImports,
+        wrapper: activeWrapper,
         requiredProps,
       });
     }
@@ -492,7 +566,7 @@ export const usePlaygroundState = ({
       children: needsChildren(kitName) ? children : undefined,
       includeImport: true,
     });
-  }, [kitName, propValuesForCodegen, allPropDefinitions, children, hasActiveTemplate, activeTemplate, activePropTargets, playgroundConfig, currentStructureMode, requiredProps]);
+  }, [kitName, propValuesForCodegen, allPropDefinitions, children, hasActiveTemplate, activeTemplate, activePropTargets, activePropAliases, playgroundConfig, currentStructureMode, activeExternalImports, activeWrapper, requiredProps]);
 
   const generatedLiveCode = useMemo(() => {
     if (hasActiveTemplate && playgroundConfig) {
@@ -501,10 +575,12 @@ export const usePlaygroundState = ({
         propValues: propValuesForCodegen,
         propDefinitions: allPropDefinitions,
         propTargets: activePropTargets,
+        propAliases: activePropAliases,
         children,
         childrenConfig: playgroundConfig.children,
         customImports: currentStructureMode?.imports,
-        wrapper: currentStructureMode?.wrapper,
+        externalImports: activeExternalImports,
+        wrapper: activeWrapper,
         requiredProps,
       });
     }
@@ -514,7 +590,7 @@ export const usePlaygroundState = ({
       propDefinitions: allPropDefinitions,
       children: needsChildren(kitName) ? children : undefined,
     });
-  }, [kitName, propValuesForCodegen, allPropDefinitions, children, hasActiveTemplate, activeTemplate, activePropTargets, playgroundConfig, currentStructureMode, requiredProps]);
+  }, [kitName, propValuesForCodegen, allPropDefinitions, children, hasActiveTemplate, activeTemplate, activePropTargets, activePropAliases, playgroundConfig, currentStructureMode, activeExternalImports, activeWrapper, requiredProps]);
 
   const previewCode = useMemo(() => {
     if (hasActiveTemplate) return generatedLiveCode;
@@ -535,30 +611,75 @@ export const usePlaygroundState = ({
   const handleStructureModeChange = useCallback(
     (modeKey: string) => {
       setActiveStructureMode(modeKey);
-      const mode = playgroundConfig?.structureModes?.modes[modeKey];
-      if (mode?.children) {
-        setChildren(mode.children);
-      }
-      setPropValues(buildFullPropValues(activeDataPresetKey, modeKey, null));
+      setChildren(getChildrenForState(null, modeKey));
+      setPropValues((prev) => {
+        const preservedEnabledProps: Record<string, PropValue> = {};
+        Object.entries(prev).forEach(([name, value]) => {
+          if (value.enabled) {
+            preservedEnabledProps[name] = value;
+          }
+        });
+
+        const modePropValues = buildPlaygroundPropValues(
+          playgroundConfig,
+          requiredProps,
+          activeDataPresetKey,
+          modeKey,
+          null
+        );
+
+        return mergeImplicitDefaultPropValues(
+          {
+            ...preservedEnabledProps,
+            ...modePropValues,
+          },
+          playgroundConfig,
+          allPropDefinitions
+        );
+      });
       setActivePresetIndex(null);
     },
-    [buildFullPropValues, playgroundConfig, activeDataPresetKey]
+    [
+      activeDataPresetKey,
+      allPropDefinitions,
+      getChildrenForState,
+      playgroundConfig,
+      requiredProps,
+    ]
   );
 
   const handleReset = useCallback(() => {
-    setActiveDataPresetKey(null);
+    const nextStructureMode = getStructureModeForPreset(
+      firstPresetIndex,
+      playgroundConfig?.structureModes?.default ?? null
+    );
+    const nextDataPresetKey = getDataPresetForPreset(firstPresetIndex, null);
+
+    setActiveDataPresetKey(nextDataPresetKey);
     setPropValues(
       buildFullPropValues(
-        null,
-        playgroundConfig?.structureModes?.default ?? null,
-        firstPreset ? 0 : null
+        nextDataPresetKey,
+        nextStructureMode,
+        firstPresetIndex
       )
     );
-    setChildren(getInitialChildren());
-    setActivePresetIndex(firstPreset ? 0 : null);
-    setActiveStructureMode(playgroundConfig?.structureModes?.default ?? null);
+    setChildren(
+      getChildrenForState(
+        firstPresetIndex,
+        nextStructureMode
+      )
+    );
+    setActivePresetIndex(firstPresetIndex);
+    setActiveStructureMode(nextStructureMode);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [buildFullPropValues, playgroundConfig, firstPreset]);
+  }, [
+    buildFullPropValues,
+    getChildrenForState,
+    getDataPresetForPreset,
+    getStructureModeForPreset,
+    playgroundConfig,
+    firstPresetIndex,
+  ]);
 
   return {
     propValues,
@@ -567,7 +688,7 @@ export const usePlaygroundState = ({
     activeStructureMode,
     activeDataPresetKey,
 
-    reactProps,
+    reactProps: playgroundProps,
     globalProps,
     allPropDefinitions,
     groupedProps,

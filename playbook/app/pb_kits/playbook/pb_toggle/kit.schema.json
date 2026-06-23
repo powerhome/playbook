@@ -31,7 +31,7 @@
       ]
     },
     "onChange": {
-      "type": "ReactNode",
+      "type": "function",
       "platforms": [
         "react"
       ]

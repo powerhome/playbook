@@ -131,7 +131,7 @@
       ]
     },
     "inputOnChange": {
-      "type": "ReactNode",
+      "type": "function",
       "platforms": [
         "react"
       ]
@@ -256,6 +256,14 @@
       "platforms": [
         "react"
       ]
+    },
+    "yearAscending": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
     },
     "yearRange": {
       "type": "array",
