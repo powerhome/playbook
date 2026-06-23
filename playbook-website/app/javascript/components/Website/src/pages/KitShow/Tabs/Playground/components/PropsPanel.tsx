@@ -94,7 +94,7 @@ export const PropsPanel: React.FC<PropsPanelProps> = ({
       const disabledState = propDisabledState[name];
       const syncHint = propSyncHints[name];
       return (
-        <Flex flexDirection="column" key={name} marginBottom="xs">
+        <Flex flexDirection="column" key={name} marginBottom="xs" width="100%">
           <PropControl
             name={name}
             definition={definition}

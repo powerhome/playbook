@@ -6,16 +6,13 @@ import {
   Detail,
   Dropdown,
   Flex,
+  FlexItem,
   TextInput,
   Tooltip,
-  Body
+  Body,
 } from "playbook-ui";
-import {
-  PropControlProps,
-  FUNCTION_PRESETS,
-  PropValue,
-} from "./types";
-import { playgroundObjectToEditableLiteral } from "./utils";
+import { PropControlProps, FUNCTION_PRESETS, PropValue, PropDefinition } from "./types";
+import { playgroundObjectToEditableLiteral, resolveSchemaDefault } from "./utils";
 
 export interface ExtendedPropControlProps extends PropControlProps {
   disabled?: boolean;
@@ -24,6 +21,29 @@ export interface ExtendedPropControlProps extends PropControlProps {
 }
 
 const formatPropName = (name: string): string => name;
+
+const propValueOnDropdownClear = (
+  definition: PropDefinition,
+  enumValues?: string[],
+): PropValue => {
+  const schemaDefault = resolveSchemaDefault(definition);
+
+  if (enumValues) {
+    if (
+      typeof schemaDefault === "string" &&
+      enumValues.includes(schemaDefault)
+    ) {
+      return { value: schemaDefault, enabled: false };
+    }
+    return { value: "", enabled: false };
+  }
+
+  if (schemaDefault !== undefined) {
+    return { value: schemaDefault, enabled: false };
+  }
+
+  return { value: "", enabled: false };
+};
 
 const getEffectiveBoolean = (
   value: PropValue | undefined,
@@ -37,7 +57,12 @@ const getEffectiveBoolean = (
 
 function objectSyncFingerprint(value: PropValue | undefined): string {
   const v = value?.value;
-  if (v !== null && v !== undefined && typeof v === "object" && !Array.isArray(v)) {
+  if (
+    v !== null &&
+    v !== undefined &&
+    typeof v === "object" &&
+    !Array.isArray(v)
+  ) {
     return JSON.stringify(v);
   }
   return "";
@@ -47,14 +72,20 @@ function objectSyncFingerprint(value: PropValue | undefined): string {
  * Strict JSON first, then a parenthesized JS object literal so `{ default: true }`
  * works without JSON double-quoted keys (avoids codegen staying at `{}` when JSON.parse failed).
  */
-function tryParseObjectLiteralInput(raw: string): Record<string, unknown> | null {
+function tryParseObjectLiteralInput(
+  raw: string,
+): Record<string, unknown> | null {
   const trimmed = raw.trim();
   if (!trimmed) {
     return {};
   }
   try {
     const parsed = JSON.parse(trimmed);
-    if (parsed !== null && typeof parsed === "object" && !Array.isArray(parsed)) {
+    if (
+      parsed !== null &&
+      typeof parsed === "object" &&
+      !Array.isArray(parsed)
+    ) {
       return parsed as Record<string, unknown>;
     }
     return null;
@@ -63,7 +94,11 @@ function tryParseObjectLiteralInput(raw: string): Record<string, unknown> | null
   }
   try {
     const result = new Function(`return (${trimmed})`)();
-    if (result !== null && typeof result === "object" && !Array.isArray(result)) {
+    if (
+      result !== null &&
+      typeof result === "object" &&
+      !Array.isArray(result)
+    ) {
       return result as Record<string, unknown>;
     }
     return null;
@@ -95,69 +130,115 @@ function tryParseArrayLiteralInput(raw: string): unknown[] | null {
   }
 }
 
-const BooleanControl: React.FC<PropControlProps> = ({ name, value, onChange, definition }) => {
+const BooleanControl: React.FC<PropControlProps> = ({
+  name,
+  value,
+  onChange,
+  definition,
+}) => {
   const schemaDefault =
     typeof definition.default === "boolean" ? definition.default : undefined;
   const isChecked = getEffectiveBoolean(value, schemaDefault);
 
   return (
-    <Flex flexDirection="column" padding="xs">
-      <Checkbox
-        checked={isChecked}
-        onChange={() => {
-          onChange(name, {
-            value: !isChecked,
-            enabled: true,
-          });
-        }}
-        text={formatPropName(name)}
-      />
+    <Flex
+      flexDirection="row"
+      alignItems="center"
+      gap="xs"
+      padding="xs"
+      width="100%"
+    >
+      <FlexItem fixedSize="40%">
+        <Detail text={formatPropName(name)} />
+      </FlexItem>
+      <FlexItem fixedSize="60%">
+        <Checkbox
+          checked={isChecked}
+          onChange={() => {
+            onChange(name, {
+              value: !isChecked,
+              enabled: true,
+            });
+          }}
+          text=""
+        />
+      </FlexItem>
     </Flex>
   );
 };
 
-const EnumControl: React.FC<PropControlProps> = ({ name, definition, value, onChange }) => {
-  const schemaDefault =
-    typeof definition.default === "string" ? definition.default : undefined;
-  const currentValue =
-    value?.value ??
-    (schemaDefault && definition.values?.includes(schemaDefault)
-      ? schemaDefault
-      : "");
+const EnumControl: React.FC<PropControlProps> = ({
+  name,
+  definition,
+  value,
+  onChange,
+}) => {
   const values = definition.values || [];
   const enumOptions = values.map((val) => ({
     id: val,
     label: val,
     value: val,
   }));
-  const activeOption =
-    enumOptions.find((option) => option.value === currentValue) ??
-    enumOptions[0];
+  const schemaDefault = resolveSchemaDefault(definition);
+  const schemaDefaultValue =
+    typeof schemaDefault === "string" && values.includes(schemaDefault)
+      ? schemaDefault
+      : undefined;
+  const displayValue = (() => {
+    if (value?.enabled) {
+      return value.value != null && value.value !== ""
+        ? String(value.value)
+        : null;
+    }
+    if (value?.value != null && value.value !== "") {
+      return String(value.value);
+    }
+    return schemaDefaultValue ?? null;
+  })();
+  const activeOption = displayValue
+    ? enumOptions.find((option) => option.value === displayValue)
+    : undefined;
 
   if (values.length === 0) return null;
 
   return (
-    <Flex flexDirection="column" padding="xs" width="100%">
-      <Detail marginBottom="xs" text={name} />
-      <Dropdown
-        clearable={false}
-        defaultValue={activeOption}
-        id={`prop-${name}-enum-dropdown`}
-        key={currentValue}
-        onSelect={(option: { value: string } | null): null => {
-          if (option?.value) {
-            onChange(name, { value: option.value, enabled: true });
-          }
-          return null;
-        }}
-        options={enumOptions}
-        width="100%"
-      />
+    <Flex
+      flexDirection="row"
+      alignItems="center"
+      gap="xs"
+      padding="xs"
+      width="100%"
+    >
+      <FlexItem fixedSize="40%">
+        <Detail marginBottom="xs" text={name} />
+      </FlexItem>
+      <FlexItem fixedSize="60%">
+        <Dropdown
+          defaultValue={activeOption}
+          id={`prop-${name}-enum-dropdown`}
+          key={`${value?.enabled}-${String(displayValue ?? "")}`}
+          onSelect={(option: { value: string } | null): null => {
+            if (option?.value) {
+              onChange(name, { value: option.value, enabled: true });
+            } else {
+              onChange(name, propValueOnDropdownClear(definition, values));
+            }
+            return null;
+          }}
+          options={enumOptions}
+          width="100%"
+        />
+      </FlexItem>
     </Flex>
   );
 };
 
-const StringControl: React.FC<PropControlProps> = ({ name, definition, value, onChange }) => {
+const StringControl: React.FC<PropControlProps> = ({
+  name,
+  definition,
+  value,
+  onChange,
+}) => {
   const currentValue = value?.value ?? definition.default ?? "";
 
   return (
@@ -174,7 +255,12 @@ const StringControl: React.FC<PropControlProps> = ({ name, definition, value, on
   );
 };
 
-const NumberControl: React.FC<PropControlProps> = ({ name, definition, value, onChange }) => {
+const NumberControl: React.FC<PropControlProps> = ({
+  name,
+  definition,
+  value,
+  onChange,
+}) => {
   const currentValue = value?.value ?? definition.default ?? 0;
 
   return (
@@ -192,7 +278,11 @@ const NumberControl: React.FC<PropControlProps> = ({ name, definition, value, on
   );
 };
 
-const FunctionControl: React.FC<PropControlProps> = ({ name, value, onChange }) => {
+const FunctionControl: React.FC<PropControlProps> = ({
+  name,
+  value,
+  onChange,
+}) => {
   const currentValue = value?.value ?? "";
   const functionOptions = FUNCTION_PRESETS.map((preset) => ({
     id: preset.value || "none",
@@ -202,8 +292,8 @@ const FunctionControl: React.FC<PropControlProps> = ({ name, value, onChange }) 
   const activeOption =
     functionOptions.find(
       (option) =>
-        FUNCTION_PRESETS.find((preset) => preset.value === option.value)?.code ===
-        currentValue,
+        FUNCTION_PRESETS.find((preset) => preset.value === option.value)
+          ?.code === currentValue,
     ) ?? functionOptions[0];
 
   return (
@@ -215,7 +305,9 @@ const FunctionControl: React.FC<PropControlProps> = ({ name, value, onChange }) 
         id={`prop-${name}-function-dropdown`}
         key={currentValue}
         onSelect={(option: { value: string } | null): null => {
-          const preset = FUNCTION_PRESETS.find((p) => p.value === option?.value);
+          const preset = FUNCTION_PRESETS.find(
+            (p) => p.value === option?.value,
+          );
           onChange(name, {
             value: preset?.code ?? currentValue,
             enabled: true,
@@ -229,7 +321,11 @@ const FunctionControl: React.FC<PropControlProps> = ({ name, value, onChange }) 
   );
 };
 
-const ReactNodeControl: React.FC<PropControlProps> = ({ name, value, onChange }) => {
+const ReactNodeControl: React.FC<PropControlProps> = ({
+  name,
+  value,
+  onChange,
+}) => {
   const currentValue = value?.value ?? "";
 
   return (
@@ -246,10 +342,14 @@ const ReactNodeControl: React.FC<PropControlProps> = ({ name, value, onChange })
   );
 };
 
-const StringOrArrayControl: React.FC<PropControlProps> = ({ name, value, onChange }) => {
+const StringOrArrayControl: React.FC<PropControlProps> = ({
+  name,
+  value,
+  onChange,
+}) => {
   const currentValue = value?.value ?? "plus";
   const isArray = Array.isArray(currentValue);
-  
+
   const [inputValue, setInputValue] = useState(() => {
     if (isArray) return currentValue.join(", ");
     return String(currentValue);
@@ -258,10 +358,13 @@ const StringOrArrayControl: React.FC<PropControlProps> = ({ name, value, onChang
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const text = e.target.value;
     setInputValue(text);
-    
+
     // If contains comma, treat as array
     if (text.includes(",")) {
-      const arr = text.split(",").map(s => s.trim()).filter(s => s);
+      const arr = text
+        .split(",")
+        .map((s) => s.trim())
+        .filter((s) => s);
       onChange(name, { value: arr, enabled: true });
     } else {
       onChange(name, { value: text, enabled: true });
@@ -271,25 +374,35 @@ const StringOrArrayControl: React.FC<PropControlProps> = ({ name, value, onChang
   return (
     <Flex flexDirection="column" padding="xs" width="100%">
       <Detail marginBottom="xs" text={formatPropName(name)} />
-      <TextInput
-        value={inputValue}
-        onChange={handleInputChange}
+      <TextInput value={inputValue} onChange={handleInputChange} />
+      <Caption
+        text="Comma-separated for array (e.g., plus, times)"
+        color="light"
+        marginTop="xs"
       />
-      <Caption text="Comma-separated for array (e.g., plus, times)" color="light" marginTop="xs" />
     </Flex>
   );
 };
 
-const ObjectControl: React.FC<PropControlProps> = ({ name, value, onChange }) => {
+const ObjectControl: React.FC<PropControlProps> = ({
+  name,
+  value,
+  onChange,
+}) => {
   const [inputValue, setInputValue] = useState(
-    value?.value ? playgroundObjectToEditableLiteral(value.value) : "{}"
+    value?.value ? playgroundObjectToEditableLiteral(value.value) : "{}",
   );
 
   const objectSyncKey = useMemo(() => objectSyncFingerprint(value), [value]);
 
   useEffect(() => {
     const v = value?.value;
-    if (v !== undefined && v !== null && typeof v === "object" && !Array.isArray(v)) {
+    if (
+      v !== undefined &&
+      v !== null &&
+      typeof v === "object" &&
+      !Array.isArray(v)
+    ) {
       setInputValue(playgroundObjectToEditableLiteral(v));
     }
   }, [objectSyncKey]);
@@ -318,9 +431,13 @@ const ObjectControl: React.FC<PropControlProps> = ({ name, value, onChange }) =>
   );
 };
 
-const ArrayControl: React.FC<PropControlProps> = ({ name, value, onChange }) => {
+const ArrayControl: React.FC<PropControlProps> = ({
+  name,
+  value,
+  onChange,
+}) => {
   const [inputValue, setInputValue] = useState(
-    value?.value ? JSON.stringify(value.value, null, 2) : "[]"
+    value?.value ? JSON.stringify(value.value, null, 2) : "[]",
   );
 
   const arraySyncKey = useMemo(() => {
@@ -360,9 +477,13 @@ const ArrayControl: React.FC<PropControlProps> = ({ name, value, onChange }) => 
   );
 };
 
-const RequiredArrayControl: React.FC<PropControlProps> = ({ name, value, onChange }) => {
+const RequiredArrayControl: React.FC<PropControlProps> = ({
+  name,
+  value,
+  onChange,
+}) => {
   const [inputValue, setInputValue] = useState(
-    value?.value ? JSON.stringify(value.value, null, 2) : "[]"
+    value?.value ? JSON.stringify(value.value, null, 2) : "[]",
   );
 
   const arraySyncKey = useMemo(() => {
@@ -389,7 +510,7 @@ const RequiredArrayControl: React.FC<PropControlProps> = ({ name, value, onChang
         <Caption
           marginBottom="xs"
           color="light"
-          text='JSON or JS array literal.'
+          text="JSON or JS array literal."
         />
         <textarea
           placeholder="[]"
@@ -408,16 +529,25 @@ const RequiredArrayControl: React.FC<PropControlProps> = ({ name, value, onChang
   );
 };
 
-const RequiredObjectControl: React.FC<PropControlProps> = ({ name, value, onChange }) => {
+const RequiredObjectControl: React.FC<PropControlProps> = ({
+  name,
+  value,
+  onChange,
+}) => {
   const [inputValue, setInputValue] = useState(
-    value?.value ? playgroundObjectToEditableLiteral(value.value) : "{}"
+    value?.value ? playgroundObjectToEditableLiteral(value.value) : "{}",
   );
 
   const objectSyncKey = useMemo(() => objectSyncFingerprint(value), [value]);
 
   useEffect(() => {
     const v = value?.value;
-    if (v !== undefined && v !== null && typeof v === "object" && !Array.isArray(v)) {
+    if (
+      v !== undefined &&
+      v !== null &&
+      typeof v === "object" &&
+      !Array.isArray(v)
+    ) {
       setInputValue(playgroundObjectToEditableLiteral(v));
     }
   }, [objectSyncKey]);
@@ -464,7 +594,11 @@ const getControlForType = (props: PropControlProps, isRequired?: boolean) => {
   // For required props, use special controls that don't allow toggling off
   if (isRequired) {
     // Array check for required props
-    if (propType === "array" || propType.endsWith("[]") || propType.startsWith("array")) {
+    if (
+      propType === "array" ||
+      propType.endsWith("[]") ||
+      propType.startsWith("array")
+    ) {
       return <RequiredArrayControl {...props} />;
     }
     // Default to required object control for complex types
@@ -489,22 +623,37 @@ const getControlForType = (props: PropControlProps, isRequired?: boolean) => {
   }
 
   // String or array check (for props that accept string | string[])
-  if (propType.includes("string[]") || (propType.includes("string |") && propType.includes("[]"))) {
+  if (
+    propType.includes("string[]") ||
+    (propType.includes("string |") && propType.includes("[]"))
+  ) {
     return <StringOrArrayControl {...props} />;
   }
 
   // Function check
-  if (propType === "function" || propType.includes("=>") || propType.includes("function")) {
+  if (
+    propType === "function" ||
+    propType.includes("=>") ||
+    propType.includes("function")
+  ) {
     return <FunctionControl {...props} />;
   }
 
   // ReactNode check (schema may use "ReactNode")
-  if (propType.includes("reactnode") || propType.includes("node") || propType.includes("element")) {
+  if (
+    propType.includes("reactnode") ||
+    propType.includes("node") ||
+    propType.includes("element")
+  ) {
     return <ReactNodeControl {...props} />;
   }
 
   // Array check (for props like columnDefinitions, tableData)
-  if (propType === "array" || propType.endsWith("[]") || propType.startsWith("array")) {
+  if (
+    propType === "array" ||
+    propType.endsWith("[]") ||
+    propType.startsWith("array")
+  ) {
     return <ArrayControl {...props} />;
   }
 
@@ -524,9 +673,9 @@ const getControlForType = (props: PropControlProps, isRequired?: boolean) => {
 
 const PropControl: React.FC<ExtendedPropControlProps> = (props) => {
   const { disabled, disabledReason, isRequired } = props;
-  
+
   const control = getControlForType(props, isRequired);
-  
+
   if (disabled) {
     return (
       <Tooltip
@@ -534,13 +683,11 @@ const PropControl: React.FC<ExtendedPropControlProps> = (props) => {
         text={disabledReason || "This prop is not available"}
         zIndex={10}
       >
-        <div style={{ opacity: 0.5, pointerEvents: "none" }}>
-          {control}
-        </div>
+        <div style={{ opacity: 0.5, pointerEvents: "none" }}>{control}</div>
       </Tooltip>
     );
   }
-  
+
   return control;
 };
 
