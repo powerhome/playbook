@@ -3,6 +3,7 @@
   button_color = row_style&.[](:expand_button_color)
   bg_color = row_style&.[](:background_color)
   font_color = row_style&.[](:font_color)
+  font_weight = row_style&.[](:font_weight)
   tr_options = (object.html_options || {}).stringify_keys
   tr_options["class"] = [tr_options["class"], object.classname].reject(&:blank?).join(" ")
 %>
@@ -14,7 +15,7 @@
     <% end %>
     <% object.column_definitions.each_with_index do |column, index| %>
         <% next unless column[:accessor].present? %>
-        <% component_info = object.cell_component_info(column, index, bg_color, font_color) %>
+        <% component_info = object.cell_component_info(column, index, bg_color, font_color, font_weight) %>
         <%= pb_rails(component_info[:name], props: component_info[:props]) do %>
             <%= pb_rails("flex", props:{ align: "center", justify: object.justify_for(column, index), classname: object.loading ? "loading-cell" : "" }) do %>
                 <% if collapsible_trail && index.zero? %>
