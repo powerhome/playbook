@@ -8,8 +8,8 @@ import { usePlatform } from "../../contexts/PlatformContext";
 import { linkFormat } from "../../../../../utilities/website_sidebar_helper";
 import { DocsTab } from "./Tabs/DocsTab";
 import { PropsTab } from "./Tabs/PropsTab";
-import { BuildingBlocksTab } from "./Tabs/BuildingBlocksTab";
-import { ReferencesTab } from "./Tabs/ReferencesTab";
+// import { BuildingBlocksTab } from "./Tabs/BuildingBlocksTab";
+// import { ReferencesTab } from "./Tabs/ReferencesTab";
 import { PlaygroundTab } from "./Tabs/PlaygroundTab";
 import { PLAYGROUND_ENABLED_KITS } from "./playgroundEnabledKits";
 

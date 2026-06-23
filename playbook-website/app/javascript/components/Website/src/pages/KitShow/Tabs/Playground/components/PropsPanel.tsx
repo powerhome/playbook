@@ -45,62 +45,111 @@ export const PropsPanel: React.FC<PropsPanelProps> = ({
   return (
     <Card
       flexDirection="column"
-      htmlOptions={{ style: { width: "320px" } }}
+      htmlOptions={{ style: { width: "330px" } }}
       height="100vh"
       overflowY="auto"
       padding="none"
     >
       <Card.Header headerColor="white">
-        <Flex justify="between" align="center" marginBottom="sm">
+        <Flex justify="between" align="center">
           <Title text="Props" size={4} />
-          <Caption text={`${totalProps} available`} />
+          <Caption text={`${totalProps} available`} size="xs" color="light" />
         </Flex>
       </Card.Header>
       <Card.Body padding="sm">
-      {showChildren && (
-        <>
-          <Caption text="Children" marginBottom="xs" />
-          <textarea
-            placeholder="Enter children content..."
-            value={children}
-            onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
-              onChildrenChange(e.target.value)
-            }
-            style={{
-              width: "100%",
-              minHeight: "140px",
-              fontFamily: "monospace",
-              fontSize: "12px",
-              padding: "8px",
-              border: "1px solid #ddd",
-              borderRadius: "4px",
-              resize: "vertical",
-            }}
-          />
-          <SectionSeparator marginY="sm" />
-        </>
-      )}
+        {showChildren && (
+          <>
+            <Caption text="Children" marginBottom="xs" />
+            <textarea
+              placeholder="Enter children content..."
+              value={children}
+              onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
+                onChildrenChange(e.target.value)
+              }
+              style={{
+                width: "100%",
+                minHeight: "140px",
+                fontFamily: "monospace",
+                fontSize: "12px",
+                padding: "8px",
+                border: "1px solid #ddd",
+                borderRadius: "4px",
+                resize: "vertical",
+              }}
+            />
+            <SectionSeparator marginY="sm" />
+          </>
+        )}
 
-      <Flex flexDirection="column">
-        {groupedProps.map((group, groupIndex) => (
-          <React.Fragment key={group.name || "ungrouped"}>
-            {group.name && (
-              <>
-                {groupIndex > 0 && <SectionSeparator width="100%" marginY="xs" />}
-                <Flex
-                  justify="between"
-                  align="center"
-                  cursor="pointer"
-                  paddingY="xs"
-                >
-                  <Title text={group.name} size={4} />
-                </Flex>
-              </>
-            )}
+        <Flex flexDirection="column">
+          {groupedProps.map((group, groupIndex) => (
+            <React.Fragment key={group.name || "ungrouped"}>
+              {group.name && (
+                <>
+                  {groupIndex > 0 && (
+                    <SectionSeparator width="100%" marginY="xs" />
+                  )}
+                  <Flex
+                    justify="between"
+                    align="center"
+                    cursor="pointer"
+                    paddingY="xs"
+                  >
+                    <Caption text={group.name} />
+                  </Flex>
+                </>
+              )}
 
-            {group.props.length > 0 ? (
-              group.props.map(([name, definition]) => {
-                const disabledState = propDisabledState[name];
+              {group.props.length > 0 ? (
+                group.props.map(([name, definition]) => {
+                  const disabledState = propDisabledState[name];
+                  const syncHint = propSyncHints[name];
+                  return (
+                    <Flex flexDirection="column" key={name} marginBottom="xs">
+                      <PropControl
+                        name={name}
+                        definition={definition}
+                        value={propValues[name]}
+                        onChange={onPropChange}
+                        disabled={disabledState?.disabled}
+                        disabledReason={disabledState?.reason}
+                        isRequired={requiredPropNames.has(name)}
+                      />
+                      {syncHint ? (
+                        <Body
+                          color="lighter"
+                          marginLeft="md"
+                          marginTop="xxs"
+                          text={syncHint}
+                        />
+                      ) : null}
+                    </Flex>
+                  );
+                })
+              ) : (
+                <Body text="No props in this group." color="light" />
+              )}
+            </React.Fragment>
+          ))}
+
+          {totalProps === 0 && (
+            <Body text="No kit-specific props available." color="light" />
+          )}
+        </Flex>
+
+        {showGlobalProps && globalPropEntries.length > 0 && (
+          <>
+            <SectionSeparator marginY="sm" />
+            <Flex
+              justify="between"
+              align="center"
+              cursor="pointer"
+              paddingY="xs"
+            >
+              <Title text="Global Props" size={4} />
+            </Flex>
+            <Flex flexDirection="column">
+              {globalPropEntries.map(([name, definition]) => {
                 const syncHint = propSyncHints[name];
                 return (
                   <Flex flexDirection="column" key={name} marginBottom="xs">
@@ -109,9 +158,6 @@ export const PropsPanel: React.FC<PropsPanelProps> = ({
                       definition={definition}
                       value={propValues[name]}
                       onChange={onPropChange}
-                      disabled={disabledState?.disabled}
-                      disabledReason={disabledState?.reason}
-                      isRequired={requiredPropNames.has(name)}
                     />
                     {syncHint ? (
                       <Body
@@ -123,49 +169,10 @@ export const PropsPanel: React.FC<PropsPanelProps> = ({
                     ) : null}
                   </Flex>
                 );
-              })
-            ) : (
-              <Body text="No props in this group." color="light" />
-            )}
-          </React.Fragment>
-        ))}
-
-        {totalProps === 0 && (
-          <Body text="No kit-specific props available." color="light" />
+              })}
+            </Flex>
+          </>
         )}
-      </Flex>
-
-      {showGlobalProps && globalPropEntries.length > 0 && (
-        <>
-          <SectionSeparator marginY="sm" />
-          <Flex justify="between" align="center" cursor="pointer" paddingY="xs">
-            <Title text="Global Props" size={4} />
-          </Flex>
-          <Flex flexDirection="column">
-            {globalPropEntries.map(([name, definition]) => {
-              const syncHint = propSyncHints[name];
-              return (
-                <Flex flexDirection="column" key={name} marginBottom="xs">
-                  <PropControl
-                    name={name}
-                    definition={definition}
-                    value={propValues[name]}
-                    onChange={onPropChange}
-                  />
-                  {syncHint ? (
-                    <Body
-                      color="lighter"
-                      marginLeft="md"
-                      marginTop="xxs"
-                      text={syncHint}
-                    />
-                  ) : null}
-                </Flex>
-              );
-            })}
-          </Flex>
-        </>
-      )}
       </Card.Body>
     </Card>
   );
