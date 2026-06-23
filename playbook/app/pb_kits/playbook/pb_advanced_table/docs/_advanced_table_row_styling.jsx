@@ -1,6 +1,6 @@
 import React from "react"
 import AdvancedTable from '../_advanced_table'
-import MOCK_DATA from "./advanced_table_mock_data_with_id.json"
+import MOCK_DATA_WITH_ID from "./advanced_table_mock_data_with_id.json"
 import colors from '../../tokens/exports/_colors.module.scss'
 
 
@@ -55,7 +55,7 @@ const rowStyling = [
       <AdvancedTable
           columnDefinitions={columnDefinitions}
           rowStyling={rowStyling}
-          tableData={MOCK_DATA}
+          tableData={MOCK_DATA_WITH_ID}
           {...props}
       />
     </div>
