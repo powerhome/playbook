@@ -94,6 +94,14 @@ const KitShow = () => {
   const displayTab =
     activeTab === "playground" && !showPlayground ? "docs" : activeTab;
 
+  const kitShowTitle = useMemo(() => {
+    const sectionSlug = name ?? "";
+    if (currentKit === "advanced_table" && sectionSlug) {
+      return `${linkFormat("advanced_table")} - ${linkFormat(sectionSlug)}`;
+    }
+    return linkFormat(sectionSlug || currentKit);
+  }, [currentKit, name]);
+
   const handleTabChange = (tab: string) => {
     if (tab === "playground") {
       setDarkMode(false);
@@ -117,7 +125,7 @@ const KitShow = () => {
           {/* Title row with inline status badge */}
           <Flex orientation="row" alignItems="center" marginBottom={kit_description ? undefined : "md"}>
             <Title
-              text={`${linkFormat(name)}`}
+              text={kitShowTitle}
               size={1}
               dark={darkMode}
             />
