@@ -78,16 +78,15 @@ export const PropGroupList: React.FC<PropGroupListProps> = ({
         return (
           <React.Fragment key={group.name}>
             {groupIndex > 0 && (
-              <SectionSeparator width="100%" marginY="xs" />
+              <SectionSeparator width="100%" marginY="none" />
             )}
             <Collapsible
               collapsed={false}
               padding="none"
-              marginBottom="xs"
               width="100%"
               icon={["plus", "minus"]}
             >
-              <Collapsible.Main paddingX="none" paddingY="xxs">
+              <Collapsible.Main paddingX="none" paddingY="sm">
                 <Caption text={group.name} />
               </Collapsible.Main>
               <Collapsible.Content padding="none">

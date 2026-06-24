@@ -107,7 +107,7 @@
     flex: 1;
     min-height: 0;
     overflow-y: auto;
-    padding-left: calc(#{$space_sm} + 4px) !important;
+    padding-left: 12px !important;
 
     .props-panel-dropdown,
     [class*="pb_dropdown"] {

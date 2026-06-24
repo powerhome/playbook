@@ -114,7 +114,8 @@ export const PropControlRow: React.FC<PropControlRowProps> = ({
     alignItems={alignItems}
     flexDirection="row"
     gap="xs"
-    padding="xs"
+    paddingX="xs"
+    paddingBottom="sm"
     width="100%"
   >
     <FlexItem className="props-panel-control-label" fixedSize="40%">
