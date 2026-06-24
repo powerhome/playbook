@@ -158,6 +158,7 @@ const Select = ({
               className="pb_select_kit_caret svg-inline--fa"
               customIcon={angleDown}
               fixedWidth
+              size="sm"
          />
          : 
          null
