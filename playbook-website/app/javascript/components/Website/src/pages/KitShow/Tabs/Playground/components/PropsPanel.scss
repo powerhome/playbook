@@ -86,6 +86,10 @@
     box-sizing: border-box;
   }
 
+  .pb_checkbox_label {
+    padding-left: 0;
+  }
+
   .pb_text_input_kit {
     .text_input_wrapper input,
     .text_input_wrapper .text_input {

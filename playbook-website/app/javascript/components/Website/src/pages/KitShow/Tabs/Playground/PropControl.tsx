@@ -1,24 +1,72 @@
 import React, { useEffect, useMemo, useState } from "react";
 import {
-  Caption,
+  Body,
   Checkbox,
+  Icon,
   colors,
   Detail,
   Dropdown,
   Flex,
   FlexItem,
+  PbReactPopover,
   TextInput,
   Tooltip,
-  Body,
 } from "playbook-ui";
-import { PropControlProps, FUNCTION_PRESETS, PropValue, PropDefinition } from "./types";
-import { playgroundObjectToEditableLiteral, resolveSchemaDefault } from "./utils";
+import {
+  PropControlProps,
+  FUNCTION_PRESETS,
+  PropValue,
+  PropDefinition,
+} from "./types";
+import {
+  playgroundObjectToEditableLiteral,
+  resolveSchemaDefault,
+} from "./utils";
 
 export interface ExtendedPropControlProps extends PropControlProps {
   disabled?: boolean;
   disabledReason?: string;
   isRequired?: boolean;
+  info?: string;
 }
+
+const PropControlInfoPopover: React.FC<{ text: string }> = ({ text }) => {
+  const [showPopover, setShowPopover] = useState(false);
+
+  const togglePopover = () => setShowPopover((open) => !open);
+  const handleShouldClosePopover = (shouldClose: boolean) => {
+    setShowPopover(!shouldClose);
+  };
+
+  return (
+    <PbReactPopover
+      closeOnClick="any"
+      offset
+      placement="top"
+      reference={
+        <Icon
+          aria={{ label: "More information" }}
+          icon="info-circle"
+          htmlOptions={{ onClick: togglePopover }}
+          size="xs"
+          cursor="pointer"
+        />
+      }
+      shouldClosePopover={handleShouldClosePopover}
+      show={showPopover}
+      zIndex={10}
+    >
+      <Body color="light" text={text} padding="xs" />
+    </PbReactPopover>
+  );
+};
+
+const mergeInfoText = (
+  ...parts: Array<string | undefined>
+): string | undefined => {
+  const merged = parts.filter(Boolean).join("\n\n");
+  return merged || undefined;
+};
 
 const PROPS_PANEL_DROPDOWN_CLASS = "props-panel-dropdown";
 const propsPanelDropdownClassName = (filled: boolean) =>
@@ -32,9 +80,7 @@ const PropControlLabel: React.FC<{ name: string; required?: boolean }> = ({
   name,
   required = false,
 }) => {
-  const detail = (
-    <Detail text={formatPropName(name)} truncate={1} />
-  );
+  const detail = <Detail text={formatPropName(name)} truncate={1} />;
 
   if (!required) return detail;
 
@@ -53,6 +99,7 @@ type PropControlRowProps = {
   children: React.ReactNode;
   alignItems?: "center" | "start";
   filled?: boolean;
+  info?: string;
 };
 
 export const PropControlRow: React.FC<PropControlRowProps> = ({
@@ -60,6 +107,7 @@ export const PropControlRow: React.FC<PropControlRowProps> = ({
   children,
   alignItems = "center",
   filled = false,
+  info,
 }) => (
   <Flex
     alignItems={alignItems}
@@ -75,16 +123,16 @@ export const PropControlRow: React.FC<PropControlRowProps> = ({
       className={filled ? "props-panel-control--filled" : undefined}
       fixedSize="60%"
     >
-      {children}
-    </FlexItem>
-  </Flex>
-);
-
-export const PropControlHint: React.FC<{ text: string }> = ({ text }) => (
-  <Flex flexDirection="row" gap="xs" paddingX="xs" width="100%">
-    <FlexItem fixedSize="40%" />
-    <FlexItem fixedSize="60%">
-      <Body color="lighter" marginTop="xxs" text={text} />
+      {info ? (
+        <Flex alignItems="center" gap="xxs" width="100%">
+          <FlexItem>{children}</FlexItem>
+          <FlexItem>
+            <PropControlInfoPopover text={info} />
+          </FlexItem>
+        </Flex>
+      ) : (
+        children
+      )}
     </FlexItem>
   </Flex>
 );
@@ -142,7 +190,11 @@ const getEffectiveDisplayValue = (
   if (value?.enabled) {
     return value.value ?? fallback;
   }
-  if (value?.value !== undefined && value.value !== null && value.value !== "") {
+  if (
+    value?.value !== undefined &&
+    value.value !== null &&
+    value.value !== ""
+  ) {
     return value.value;
   }
   const schemaDefault = resolveSchemaDefault(definition);
@@ -151,7 +203,11 @@ const getEffectiveDisplayValue = (
 };
 
 const isFilledDisplayValue = (displayValue: unknown): boolean => {
-  if (displayValue === undefined || displayValue === null || displayValue === "") {
+  if (
+    displayValue === undefined ||
+    displayValue === null ||
+    displayValue === ""
+  ) {
     return false;
   }
   if (typeof displayValue === "object") {
@@ -236,18 +292,27 @@ function tryParseArrayLiteralInput(raw: string): unknown[] | null {
   }
 }
 
-const BooleanControl: React.FC<PropControlProps> = ({
+const STRING_OR_ARRAY_INFO = "Comma-separated for array (e.g., plus, times)";
+const OBJECT_INFO =
+  'JSON or object literal, e.g. {"default": true} or { default: true }';
+const ARRAY_INFO = "JSON or JS array literal";
+const REQUIRED_ARRAY_INFO = "JSON or JS array literal.";
+const REQUIRED_OBJECT_INFO =
+  'Object: JSON or JS literal, e.g. {"default": true} or { default: true }';
+
+const BooleanControl: React.FC<ExtendedPropControlProps> = ({
   name,
   value,
   onChange,
   definition,
+  info,
 }) => {
   const schemaDefault =
     typeof definition.default === "boolean" ? definition.default : undefined;
   const isChecked = getEffectiveBoolean(value, schemaDefault);
 
   return (
-    <PropControlRow label={<PropControlLabel name={name} />}>
+    <PropControlRow info={info} label={<PropControlLabel name={name} />}>
       <Checkbox
         checked={isChecked}
         onChange={() => {
@@ -262,11 +327,12 @@ const BooleanControl: React.FC<PropControlProps> = ({
   );
 };
 
-const EnumControl: React.FC<PropControlProps> = ({
+const EnumControl: React.FC<ExtendedPropControlProps> = ({
   name,
   definition,
   value,
   onChange,
+  info,
 }) => {
   const values = definition.values || [];
   const enumOptions = values.map((val) => ({
@@ -297,7 +363,11 @@ const EnumControl: React.FC<PropControlProps> = ({
   if (values.length === 0) return null;
 
   return (
-    <PropControlRow filled={!!displayValue} label={<PropControlLabel name={name} />}>
+    <PropControlRow
+      filled={!!displayValue}
+      info={info}
+      label={<PropControlLabel name={name} />}
+    >
       <Dropdown
         className={propsPanelDropdownClassName(!!displayValue)}
         defaultValue={activeOption}
@@ -318,11 +388,12 @@ const EnumControl: React.FC<PropControlProps> = ({
   );
 };
 
-const StringControl: React.FC<PropControlProps> = ({
+const StringControl: React.FC<ExtendedPropControlProps> = ({
   name,
   definition,
   value,
   onChange,
+  info,
 }) => {
   const displayValue = getEffectiveDisplayValue(value, definition, "");
   const currentValue = String(displayValue ?? "");
@@ -330,6 +401,7 @@ const StringControl: React.FC<PropControlProps> = ({
   return (
     <PropControlRow
       filled={isFilledDisplayValue(displayValue)}
+      info={info}
       label={<PropControlLabel name={name} />}
     >
       <TextInput
@@ -339,16 +411,18 @@ const StringControl: React.FC<PropControlProps> = ({
           onChange(name, { value: e.target.value, enabled: true });
         }}
         width="100%"
+        marginBottom="none"
       />
     </PropControlRow>
   );
 };
 
-const NumberControl: React.FC<PropControlProps> = ({
+const NumberControl: React.FC<ExtendedPropControlProps> = ({
   name,
   definition,
   value,
   onChange,
+  info,
 }) => {
   const displayValue = getEffectiveDisplayValue(value, definition, 0);
   const currentValue = displayValue ?? 0;
@@ -356,6 +430,7 @@ const NumberControl: React.FC<PropControlProps> = ({
   return (
     <PropControlRow
       filled={isFilledDisplayValue(displayValue)}
+      info={info}
       label={<PropControlLabel name={name} />}
     >
       <TextInput
@@ -366,16 +441,18 @@ const NumberControl: React.FC<PropControlProps> = ({
           onChange(name, { value: Number(e.target.value), enabled: true });
         }}
         width="100%"
+        marginBottom="none"
       />
     </PropControlRow>
   );
 };
 
-const FunctionControl: React.FC<PropControlProps> = ({
+const FunctionControl: React.FC<ExtendedPropControlProps> = ({
   name,
   value,
   onChange,
   definition,
+  info,
 }) => {
   const displayValue = getEffectiveDisplayValue(value, definition, "");
   const currentValue = String(displayValue ?? "");
@@ -394,10 +471,13 @@ const FunctionControl: React.FC<PropControlProps> = ({
   return (
     <PropControlRow
       filled={isFilledDisplayValue(currentValue)}
+      info={info}
       label={<PropControlLabel name={name} />}
     >
       <Dropdown
-        className={propsPanelDropdownClassName(isFilledDisplayValue(currentValue))}
+        className={propsPanelDropdownClassName(
+          isFilledDisplayValue(currentValue),
+        )}
         clearable={false}
         defaultValue={activeOption}
         id={`prop-${name}-function-dropdown`}
@@ -419,11 +499,12 @@ const FunctionControl: React.FC<PropControlProps> = ({
   );
 };
 
-const ReactNodeControl: React.FC<PropControlProps> = ({
+const ReactNodeControl: React.FC<ExtendedPropControlProps> = ({
   name,
   value,
   onChange,
   definition,
+  info,
 }) => {
   const displayValue = getEffectiveDisplayValue(value, definition, "");
   const currentValue = String(displayValue ?? "");
@@ -431,6 +512,7 @@ const ReactNodeControl: React.FC<PropControlProps> = ({
   return (
     <PropControlRow
       filled={isFilledDisplayValue(displayValue)}
+      info={info}
       label={<PropControlLabel name={name} />}
     >
       <TextInput
@@ -440,16 +522,18 @@ const ReactNodeControl: React.FC<PropControlProps> = ({
           onChange(name, { value: e.target.value, enabled: true });
         }}
         width="100%"
+        marginBottom="none"
       />
     </PropControlRow>
   );
 };
 
-const StringOrArrayControl: React.FC<PropControlProps> = ({
+const StringOrArrayControl: React.FC<ExtendedPropControlProps> = ({
   name,
   value,
   onChange,
   definition,
+  info,
 }) => {
   const displayValue = getEffectiveDisplayValue(value, definition, "plus");
   const isArray = Array.isArray(displayValue);
@@ -485,27 +569,26 @@ const StringOrArrayControl: React.FC<PropControlProps> = ({
 
   return (
     <PropControlRow
-      alignItems="start"
       filled={isFilledDisplayValue(displayValue)}
+      info={mergeInfoText(STRING_OR_ARRAY_INFO, info)}
       label={<PropControlLabel name={name} />}
     >
-      <Flex flexDirection="column" width="100%">
-        <TextInput value={inputValue} onChange={handleInputChange} width="100%" />
-        <Caption
-          text="Comma-separated for array (e.g., plus, times)"
-          color="light"
-          marginTop="xs"
-        />
-      </Flex>
+      <TextInput
+        value={inputValue}
+        onChange={handleInputChange}
+        width="100%"
+        marginBottom="none"
+      />
     </PropControlRow>
   );
 };
 
-const ObjectControl: React.FC<PropControlProps> = ({
+const ObjectControl: React.FC<ExtendedPropControlProps> = ({
   name,
   value,
   onChange,
   definition,
+  info,
 }) => {
   const displayValue = getEffectiveDisplayValue(value, definition, {});
   const [inputValue, setInputValue] = useState(() =>
@@ -515,7 +598,11 @@ const ObjectControl: React.FC<PropControlProps> = ({
   );
 
   const objectSyncKey = useMemo(
-    () => objectSyncFingerprint({ value: displayValue, enabled: value?.enabled ?? false }),
+    () =>
+      objectSyncFingerprint({
+        value: displayValue,
+        enabled: value?.enabled ?? false,
+      }),
     [displayValue, value?.enabled],
   );
 
@@ -534,36 +621,31 @@ const ObjectControl: React.FC<PropControlProps> = ({
     <PropControlRow
       alignItems="start"
       filled={isFilledDisplayValue(displayValue)}
+      info={mergeInfoText(OBJECT_INFO, info)}
       label={<PropControlLabel name={name} />}
     >
-      <Flex flexDirection="column" width="100%">
-        <Caption
-          color="light"
-          marginBottom="xs"
-          text='JSON or object literal, e.g. {"default": true} or { default: true }'
-        />
-        <textarea
-          placeholder="{}"
-          value={inputValue}
-          onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
-            const text = e.target.value;
-            setInputValue(text);
-            const parsed = tryParseObjectLiteralInput(text);
-            if (parsed !== null) {
-              onChange(name, { value: parsed, enabled: true });
-            }
-          }}
-        />
-      </Flex>
+      <textarea
+        placeholder="{}"
+        value={inputValue}
+        onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
+          const text = e.target.value;
+          setInputValue(text);
+          const parsed = tryParseObjectLiteralInput(text);
+          if (parsed !== null) {
+            onChange(name, { value: parsed, enabled: true });
+          }
+        }}
+      />
     </PropControlRow>
   );
 };
 
-const ArrayControl: React.FC<PropControlProps> = ({
+const ArrayControl: React.FC<ExtendedPropControlProps> = ({
   name,
   value,
   onChange,
   definition,
+  info,
 }) => {
   const displayValue = getEffectiveDisplayValue(value, definition, []);
   const [inputValue, setInputValue] = useState(() =>
@@ -587,36 +669,31 @@ const ArrayControl: React.FC<PropControlProps> = ({
     <PropControlRow
       alignItems="start"
       filled={isFilledDisplayValue(displayValue)}
+      info={mergeInfoText(ARRAY_INFO, info)}
       label={<PropControlLabel name={name} />}
     >
-      <Flex flexDirection="column" width="100%">
-        <Caption
-          color="light"
-          marginBottom="xs"
-          text="JSON or JS array literal"
-        />
-        <textarea
-          placeholder="[]"
-          value={inputValue}
-          onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
-            const text = e.target.value;
-            setInputValue(text);
-            const parsed = tryParseArrayLiteralInput(text);
-            if (parsed !== null) {
-              onChange(name, { value: parsed, enabled: true });
-            }
-          }}
-          style={{ minHeight: "120px" }}
-        />
-      </Flex>
+      <textarea
+        placeholder="[]"
+        value={inputValue}
+        onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
+          const text = e.target.value;
+          setInputValue(text);
+          const parsed = tryParseArrayLiteralInput(text);
+          if (parsed !== null) {
+            onChange(name, { value: parsed, enabled: true });
+          }
+        }}
+        style={{ minHeight: "120px" }}
+      />
     </PropControlRow>
   );
 };
 
-const RequiredArrayControl: React.FC<PropControlProps> = ({
+const RequiredArrayControl: React.FC<ExtendedPropControlProps> = ({
   name,
   value,
   onChange,
+  info,
 }) => {
   const [inputValue, setInputValue] = useState(
     value?.value ? JSON.stringify(value.value, null, 2) : "[]",
@@ -640,35 +717,30 @@ const RequiredArrayControl: React.FC<PropControlProps> = ({
     <PropControlRow
       alignItems="start"
       filled={isFilledDisplayValue(value?.value ?? [])}
+      info={mergeInfoText(REQUIRED_ARRAY_INFO, info)}
       label={<PropControlLabel name={name} required />}
     >
-      <Flex flexDirection="column" width="100%">
-        <Caption
-          marginBottom="xs"
-          color="light"
-          text="JSON or JS array literal."
-        />
-        <textarea
-          placeholder="[]"
-          value={inputValue}
-          onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
-            const text = e.target.value;
-            setInputValue(text);
-            const parsed = tryParseArrayLiteralInput(text);
-            if (parsed !== null) {
-              onChange(name, { value: parsed, enabled: true });
-            }
-          }}
-        />
-      </Flex>
+      <textarea
+        placeholder="[]"
+        value={inputValue}
+        onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
+          const text = e.target.value;
+          setInputValue(text);
+          const parsed = tryParseArrayLiteralInput(text);
+          if (parsed !== null) {
+            onChange(name, { value: parsed, enabled: true });
+          }
+        }}
+      />
     </PropControlRow>
   );
 };
 
-const RequiredObjectControl: React.FC<PropControlProps> = ({
+const RequiredObjectControl: React.FC<ExtendedPropControlProps> = ({
   name,
   value,
   onChange,
+  info,
 }) => {
   const [inputValue, setInputValue] = useState(
     value?.value ? playgroundObjectToEditableLiteral(value.value) : "{}",
@@ -692,27 +764,21 @@ const RequiredObjectControl: React.FC<PropControlProps> = ({
     <PropControlRow
       alignItems="start"
       filled={isFilledDisplayValue(value?.value ?? {})}
+      info={mergeInfoText(REQUIRED_OBJECT_INFO, info)}
       label={<PropControlLabel name={name} required />}
     >
-      <Flex flexDirection="column" width="100%">
-        <Caption
-          color="light"
-          marginBottom="xs"
-          text='Object: JSON or JS literal, e.g. {"default": true} or { default: true }'
-        />
-        <textarea
-          placeholder="{}"
-          value={inputValue}
-          onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
-            const text = e.target.value;
-            setInputValue(text);
-            const parsed = tryParseObjectLiteralInput(text);
-            if (parsed !== null) {
-              onChange(name, { value: parsed, enabled: true });
-            }
-          }}
-        />
-      </Flex>
+      <textarea
+        placeholder="{}"
+        value={inputValue}
+        onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
+          const text = e.target.value;
+          setInputValue(text);
+          const parsed = tryParseObjectLiteralInput(text);
+          if (parsed !== null) {
+            onChange(name, { value: parsed, enabled: true });
+          }
+        }}
+      />
     </PropControlRow>
   );
 };
@@ -721,7 +787,10 @@ const normalizeType = (type: string): string => {
   return type.toLowerCase().replace(/;/g, "").trim();
 };
 
-const getControlForType = (props: PropControlProps, isRequired?: boolean) => {
+const getControlForType = (
+  props: ExtendedPropControlProps,
+  isRequired?: boolean,
+) => {
   const { definition } = props;
   const rawType = definition.type || "";
   /** Lowercase so `GenericObject` matches object controls (schema uses PascalCase). */
@@ -832,11 +901,6 @@ const PropControl: React.FC<ExtendedPropControlProps> = (props) => {
 export const PropControlField: React.FC<PropControlFieldProps> = ({
   syncHint,
   ...propControlProps
-}) => (
-  <Flex flexDirection="column" width="100%">
-    <PropControl {...propControlProps} />
-    {syncHint ? <PropControlHint text={syncHint} /> : null}
-  </Flex>
-);
+}) => <PropControl {...propControlProps} info={syncHint} />;
 
 export default PropControl;
