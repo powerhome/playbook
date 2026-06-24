@@ -469,6 +469,15 @@
     padding: 2px;
   }
 
+  // Keep control icons visually consistent across host apps,
+  // even when global svg defaults differ.
+  .toggle-all-icon .pb_custom_icon,
+  .expand-toggle-icon .pb_custom_icon,
+  .sort-button-icon .pb_custom_icon,
+  .fullscreen-icon .pb_custom_icon {
+    font-size: 1.25em;
+  }
+
   .header-sort-secondary-columns {
     color: $primary !important;
 
