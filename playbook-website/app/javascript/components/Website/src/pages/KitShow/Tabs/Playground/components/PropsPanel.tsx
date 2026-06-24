@@ -16,6 +16,7 @@ import {
 import { PropDefinition } from "../types";
 import { usePanelResize } from "../hooks/usePanelResize";
 import { PropGroupList } from "./PropGroupList";
+import { PropsPanelTextarea } from "./PropsPanelTextarea";
 import "./PropsPanel.scss";
 
 const PROPS_PANEL_MIN_WIDTH = 330;
@@ -90,7 +91,8 @@ export const PropsPanel: React.FC<PropsPanelProps> = ({
               filled={children.trim().length > 0}
               label={<Detail text="Children" truncate={1} width="100%" />}
             >
-              <textarea
+              <PropsPanelTextarea
+                dialogTitle="Children"
                 placeholder="Enter children content..."
                 value={children}
                 onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>

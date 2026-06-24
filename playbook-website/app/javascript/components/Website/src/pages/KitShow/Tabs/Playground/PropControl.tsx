@@ -22,6 +22,7 @@ import {
   playgroundObjectToEditableLiteral,
   resolveSchemaDefault,
 } from "./utils";
+import { PropsPanelTextarea } from "./components/PropsPanelTextarea";
 
 export interface ExtendedPropControlProps extends PropControlProps {
   disabled?: boolean;
@@ -624,7 +625,8 @@ const ObjectControl: React.FC<ExtendedPropControlProps> = ({
       info={mergeInfoText(OBJECT_INFO, info)}
       label={<PropControlLabel name={name} />}
     >
-      <textarea
+      <PropsPanelTextarea
+        dialogTitle={formatPropName(name)}
         placeholder="{}"
         value={inputValue}
         onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -672,7 +674,8 @@ const ArrayControl: React.FC<ExtendedPropControlProps> = ({
       info={mergeInfoText(ARRAY_INFO, info)}
       label={<PropControlLabel name={name} />}
     >
-      <textarea
+      <PropsPanelTextarea
+        dialogTitle={formatPropName(name)}
         placeholder="[]"
         value={inputValue}
         onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -683,7 +686,6 @@ const ArrayControl: React.FC<ExtendedPropControlProps> = ({
             onChange(name, { value: parsed, enabled: true });
           }
         }}
-        style={{ minHeight: "120px" }}
       />
     </PropControlRow>
   );
@@ -720,7 +722,8 @@ const RequiredArrayControl: React.FC<ExtendedPropControlProps> = ({
       info={mergeInfoText(REQUIRED_ARRAY_INFO, info)}
       label={<PropControlLabel name={name} required />}
     >
-      <textarea
+      <PropsPanelTextarea
+        dialogTitle={formatPropName(name)}
         placeholder="[]"
         value={inputValue}
         onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -767,7 +770,8 @@ const RequiredObjectControl: React.FC<ExtendedPropControlProps> = ({
       info={mergeInfoText(REQUIRED_OBJECT_INFO, info)}
       label={<PropControlLabel name={name} required />}
     >
-      <textarea
+      <PropsPanelTextarea
+        dialogTitle={formatPropName(name)}
         placeholder="{}"
         value={inputValue}
         onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
