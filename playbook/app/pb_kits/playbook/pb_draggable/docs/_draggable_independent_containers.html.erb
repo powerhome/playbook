@@ -1,0 +1,35 @@
+<% lists = [
+  {
+    title: "Morning Crew",
+    items: [
+      { id: "m1", name: "Alice Chen" },
+      { id: "m2", name: "Ben Ortiz" },
+      { id: "m3", name: "Cara Kim" },
+    ],
+  },
+  {
+    title: "Afternoon Crew",
+    items: [
+      { id: "a1", name: "Diana Patel" },
+      { id: "a2", name: "Evan Brooks" },
+      { id: "a3", name: "Fiona Lee" },
+    ],
+  },
+] %>
+
+<%= pb_rails("flex", props: { gap: "md", justify_content: "center", wrap: true }) do %>
+  <% lists.each do |list| %>
+    <%= pb_rails("flex/flex_item", props: { fixed_size: "220px" }) do %>
+      <%= pb_rails("caption", props: { text: list[:title], text_align: "center", margin_bottom: "xs" }) %>
+      <%= pb_rails("draggable", props: { initial_items: list[:items] }) do %>
+        <%= pb_rails("draggable/draggable_container", props: { padding: "sm" }) do %>
+          <% list[:items].each do |item| %>
+            <%= pb_rails("draggable/draggable_item", props: { drag_id: item[:id], margin_bottom: "xs" }) do %>
+              <%= pb_rails("body", props: { text: item[:name] }) %>
+            <% end %>
+          <% end %>
+        <% end %>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>
