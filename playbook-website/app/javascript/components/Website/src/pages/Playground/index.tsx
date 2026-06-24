@@ -15,7 +15,7 @@ import {
   Tooltip,
 } from "playbook-ui";
 
-import { CodePanel, PropControl } from "../KitShow/Tabs/Playground";
+import { CodePanel, PropsPanel } from "../KitShow/Tabs/Playground";
 import type { PropValue } from "../KitShow/Tabs/Playground";
 import { PLAYGROUND_ENABLED_KITS } from "../KitShow/playgroundEnabledKits";
 import { BuilderPreviewItem } from "./BuilderPreviewItem";
@@ -26,16 +26,13 @@ import {
   formatKitName,
   getConfiguredChildren,
   getDataPresetOptions,
-  getGlobalProps,
-  getGroupedEditableProps,
-  getPropValue,
-  getRequiredPropNames,
   getRuntimeProps,
   getStructureModeOptions,
   getStructureModeProps,
   isRuntimeProp,
   shouldApplySyncValue,
 } from "./kitUtils";
+import { useBuilderPropsPanel, type BuilderPropsPanelState } from "./useBuilderPropsPanel";
 import {
   buildInstanceOptions,
   buildTargetOptions,
@@ -112,13 +109,10 @@ export default function Playground() {
     : undefined;
   const selectedDataPresetOptions = getDataPresetOptions(selectedKit);
   const selectedStructureModeOptions = getStructureModeOptions(selectedKit);
-  const selectedGlobalProps = getGlobalProps(
-    selectedKit,
-    global_props_schema?.props,
-  );
-  const selectedRequiredPropNames = getRequiredPropNames(
-    selectedKit,
+  const builderPropsPanel: BuilderPropsPanelState = useBuilderPropsPanel(
     selectedInstance,
+    selectedKit,
+    global_props_schema,
   );
   const targetOptions = useMemo(
     () => [
@@ -363,6 +357,15 @@ export default function Playground() {
     );
   };
 
+  const handleChildrenChange = (value: string) => {
+    if (!selectedInstance) return;
+
+    updateInstance(selectedInstance.id, (instance) => ({
+      ...instance,
+      configuredChildren: value,
+    }));
+  };
+
   const handlePropChange = (name: string, value: PropValue) => {
     if (!selectedInstance || !selectedKit) return;
     const syncRule = selectedKit.playground_config?.propSyncOnEnable?.[name];
@@ -441,6 +444,7 @@ export default function Playground() {
 
       <div className="full-playground-workbench">
         <Flex
+          className="full-playground-sidebar"
           gap="md"
           htmlOptions={{ style: { minWidth: "0" } }}
           orientation="column"
@@ -518,7 +522,13 @@ export default function Playground() {
           </Card>
         </Flex>
 
-        <Flex gap="md" minWidth="0" orientation="column" width="100%">
+        <Flex
+          className="full-playground-demo"
+          gap="md"
+          minWidth="0"
+          orientation="column"
+          width="100%"
+        >
           <Card overflow="hidden" padding="md" width="100%">
             <Flex justify="between" align="center" marginBottom="md">
               <Title size={3} text="Demo" />
@@ -639,7 +649,12 @@ export default function Playground() {
           </Flex>
         </Flex>
 
-        <Flex gap="md" minWidth="0" orientation="column" width="100%">
+        <Flex
+          className="full-playground-inspector"
+          gap="md"
+          minWidth="0"
+          orientation="column"
+        >
           <Card padding="md">
             <Title marginBottom="sm" size={4} text="Inspector" />
             {instanceOptions.length > 0 && (
@@ -777,63 +792,28 @@ export default function Playground() {
                     variant="secondary"
                   />
                 </Flex>
-
-                <Flex gap="xs" orientation="column">
-                  {getGroupedEditableProps(selectedKit).map((group) => (
-                    <Flex
-                      className="builder-prop-group"
-                      gap="xxs"
-                      key={group.name || "props"}
-                      orientation="column"
-                      width="100%"
-                    >
-                      {group.name && <Title size={4} text={group.name} />}
-                      {group.props.map(([name, definition]) => (
-                        <PropControl
-                          definition={definition as any}
-                          isRequired={selectedRequiredPropNames.has(name)}
-                          key={name}
-                          name={name}
-                          onChange={handlePropChange}
-                          value={getPropValue(
-                            selectedInstance,
-                            selectedKit,
-                            name,
-                          )}
-                        />
-                      ))}
-                    </Flex>
-                  ))}
-
-                  {Object.keys(selectedGlobalProps).length > 0 && (
-                    <Flex
-                      className="builder-prop-group"
-                      gap="xxs"
-                      orientation="column"
-                      width="100%"
-                    >
-                      <Title size={4} text="Global Props" />
-                      {Object.entries(selectedGlobalProps).map(
-                        ([name, definition]) => (
-                          <PropControl
-                            definition={definition as any}
-                            key={name}
-                            name={name}
-                            onChange={handlePropChange}
-                            value={getPropValue(
-                              selectedInstance,
-                              selectedKit,
-                              name,
-                            )}
-                          />
-                        ),
-                      )}
-                    </Flex>
-                  )}
-                </Flex>
               </Flex>
             )}
           </Card>
+
+          {selectedInstance && selectedKit && (
+            <PropsPanel
+              children={builderPropsPanel.children}
+              groupedGlobalProps={builderPropsPanel.groupedGlobalProps}
+              groupedProps={builderPropsPanel.groupedProps}
+              globalProps={builderPropsPanel.globalProps}
+              onChildrenChange={handleChildrenChange}
+              onPropChange={handlePropChange}
+              playgroundConfig={builderPropsPanel.playgroundConfig}
+              propDisabledState={builderPropsPanel.propDisabledState}
+              propSyncHints={builderPropsPanel.propSyncHints}
+              propValues={builderPropsPanel.displayPropValues}
+              requiredPropNames={builderPropsPanel.requiredPropNames}
+              showChildren={builderPropsPanel.showChildren}
+              showGlobalProps={builderPropsPanel.showGlobalProps}
+              totalProps={builderPropsPanel.totalProps}
+            />
+          )}
         </Flex>
       </div>
       <div

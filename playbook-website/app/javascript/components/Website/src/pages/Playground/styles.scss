@@ -28,7 +28,34 @@
   width: 100%;
 
   @include break_on($screen-xl-min) {
-    grid-template-columns: minmax(200px, 240px) minmax(0, 1fr) minmax(240px, 300px);
+    // Sidebar + inspector size to content; demo takes all remaining space.
+    grid-template-columns: minmax(180px, 200px) minmax(0, 1fr) auto;
+  }
+}
+
+.full-playground-sidebar {
+  min-width: 0;
+}
+
+.full-playground-demo {
+  min-width: 0;
+  width: 100%;
+}
+
+.full-playground-inspector {
+  align-self: start;
+  justify-self: stretch;
+  max-width: 500px;
+  min-width: 0;
+  width: auto;
+
+  .props-panel {
+    max-width: 100%;
+  }
+
+  > .pb_card_kit,
+  > [class*="pb_card"] {
+    width: 100%;
   }
 }
 
