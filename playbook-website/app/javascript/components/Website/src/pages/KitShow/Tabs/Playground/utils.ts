@@ -54,6 +54,43 @@ export function getPlaygroundPropExampleValue(
   return resolveSchemaDefault(definition);
 }
 
+export type PropGroup = {
+  name: string;
+  props: Array<[string, PropDefinition]>;
+};
+
+/** Group prop definitions by named sections; unassigned props land in `otherGroupName`. */
+export function groupPropDefinitions(
+  propDefinitions: Record<string, PropDefinition>,
+  groups: Array<{ name: string; props: string[] }>,
+  otherGroupName = "Other",
+): PropGroup[] {
+  const result: PropGroup[] = [];
+  const assignedProps = new Set<string>();
+
+  groups.forEach((group) => {
+    const groupProps: Array<[string, PropDefinition]> = [];
+    group.props.forEach((propName) => {
+      if (propDefinitions[propName]) {
+        groupProps.push([propName, propDefinitions[propName]]);
+        assignedProps.add(propName);
+      }
+    });
+    if (groupProps.length > 0) {
+      result.push({ name: group.name, props: groupProps });
+    }
+  });
+
+  const otherProps = Object.entries(propDefinitions).filter(
+    ([name]) => !assignedProps.has(name),
+  );
+  if (otherProps.length > 0) {
+    result.push({ name: otherGroupName, props: otherProps });
+  }
+
+  return result;
+}
+
 /**
  * Fill missing optional props with `{ value: default, enabled: false }` from
  * `playgroundConfig.defaults` and schema `default`, so controls can reflect

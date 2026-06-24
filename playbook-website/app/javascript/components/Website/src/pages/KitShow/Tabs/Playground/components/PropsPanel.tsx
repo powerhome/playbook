@@ -10,7 +10,6 @@ import {
   spacing,
 } from "playbook-ui";
 import {
-  PropControlField,
   PropControlRow,
   type PropListSharedProps,
 } from "../PropControl";
@@ -30,6 +29,7 @@ interface PropsPanelProps extends PropListSharedProps {
   children: string;
   onChildrenChange: (value: string) => void;
   groupedProps: Array<{ name: string; props: Array<[string, PropDefinition]> }>;
+  groupedGlobalProps: Array<{ name: string; props: Array<[string, PropDefinition]> }>;
   globalProps: Record<string, PropDefinition>;
   showGlobalProps: boolean;
 }
@@ -40,6 +40,7 @@ export const PropsPanel: React.FC<PropsPanelProps> = ({
   children,
   onChildrenChange,
   groupedProps,
+  groupedGlobalProps,
   propValues,
   propDisabledState,
   onPropChange,
@@ -49,7 +50,7 @@ export const PropsPanel: React.FC<PropsPanelProps> = ({
   propSyncHints = {},
   playgroundConfig,
 }) => {
-  const globalPropEntries = Object.entries(globalProps);
+  const globalPropCount = Object.keys(globalProps).length;
   const { width: panelWidth, resizeHandleProps } = usePanelResize({
     defaultWidth: PROPS_PANEL_DEFAULT_WIDTH,
     minWidth: PROPS_PANEL_MIN_WIDTH,
@@ -114,7 +115,7 @@ export const PropsPanel: React.FC<PropsPanelProps> = ({
             noKitProps={totalProps === 0}
           />
         </div>
-        {showGlobalProps && globalPropEntries.length > 0 && (
+        {showGlobalProps && globalPropCount > 0 && (
           <>
             <SectionSeparator marginY="none" />
             <Card.Header headerColor="neutral_subtle">
@@ -126,18 +127,12 @@ export const PropsPanel: React.FC<PropsPanelProps> = ({
               />
             </Card.Header>
             <div style={{ padding: spacing.space_sm }}>
-              <Flex flexDirection="column">
-                {globalPropEntries.map(([name, definition]) => (
-                  <PropControlField
-                    key={name}
-                    name={name}
-                    definition={definition}
-                    value={propValues[name]}
-                    onChange={onPropChange}
-                    syncHint={propSyncHints[name]}
-                  />
-                ))}
-              </Flex>
+              <PropGroupList
+                {...propListShared}
+                groups={groupedGlobalProps}
+                emptyMessage="No global props in this group."
+                collapsedInitial={true}
+              />
             </div>
           </>
         )}

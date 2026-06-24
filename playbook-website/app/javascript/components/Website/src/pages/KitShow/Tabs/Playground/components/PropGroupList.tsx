@@ -12,6 +12,7 @@ type PropGroupListProps = PropListSharedProps & {
   groups: PropGroup[];
   emptyMessage?: string;
   noKitProps?: boolean;
+  collapsedInitial?: boolean;
 };
 
 const PropGroupItems: React.FC<
@@ -60,6 +61,7 @@ export const PropGroupList: React.FC<PropGroupListProps> = ({
   groups,
   emptyMessage = "No props in this group.",
   noKitProps = false,
+  collapsedInitial = false,
   ...shared
 }) => {
   return (
@@ -83,7 +85,7 @@ export const PropGroupList: React.FC<PropGroupListProps> = ({
               <SectionSeparator width="100%" marginY="none" />
             )}
             <Collapsible
-              collapsed={false}
+              collapsed={collapsedInitial}
               padding="none"
               width="100%"
               icon={["plus", "minus"]}

@@ -50,6 +50,7 @@ export const PlaygroundTab: React.FC<PlaygroundTabProps> = ({
     reactProps,
     globalProps,
     groupedProps,
+    groupedGlobalProps,
     propDisabledState,
     activeHints,
     hasModifiedProps,
@@ -191,6 +192,7 @@ export const PlaygroundTab: React.FC<PlaygroundTabProps> = ({
         children={children}
         onChildrenChange={setChildren}
         groupedProps={groupedProps}
+        groupedGlobalProps={groupedGlobalProps}
         propValues={displayPropValues}
         propDisabledState={propDisabledState}
         onPropChange={handlePropChange}

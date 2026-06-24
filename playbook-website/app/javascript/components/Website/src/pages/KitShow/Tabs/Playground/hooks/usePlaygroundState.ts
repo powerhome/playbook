@@ -24,8 +24,9 @@ import {
   mergeImplicitDefaultPropValues,
   getResolvedColumnAndTableData,
   shouldApplyPropSyncOnEnable,
+  groupPropDefinitions,
 } from "../utils";
-import { EXCLUDED_PROPS } from "../constants";
+import { EXCLUDED_PROPS, GLOBAL_PROP_GROUPS } from "../constants";
 
 interface Example {
   example_key: string;
@@ -499,30 +500,13 @@ export const usePlaygroundState = ({
     if (!groups || groups.length === 0) {
       return [{ name: "", props: Object.entries(playgroundProps) }];
     }
-
-    const result: Array<{ name: string; props: Array<[string, PropDefinition]> }> = [];
-    const assignedProps = new Set<string>();
-
-    groups.forEach((group) => {
-      const groupProps: Array<[string, PropDefinition]> = [];
-      group.props.forEach((propName) => {
-        if (playgroundProps[propName]) {
-          groupProps.push([propName, playgroundProps[propName]]);
-          assignedProps.add(propName);
-        }
-      });
-      if (groupProps.length > 0) {
-        result.push({ name: group.name, props: groupProps });
-      }
-    });
-
-    const otherProps = Object.entries(playgroundProps).filter(([name]) => !assignedProps.has(name));
-    if (otherProps.length > 0) {
-      result.push({ name: "Other", props: otherProps });
-    }
-
-    return result;
+    return groupPropDefinitions(playgroundProps, groups);
   }, [playgroundProps, playgroundConfig?.groups]);
+
+  const groupedGlobalProps = useMemo(
+    () => groupPropDefinitions(globalProps, GLOBAL_PROP_GROUPS),
+    [globalProps],
+  );
 
   // Resolve template and propTargets - structure mode takes precedence
   const activeTemplate = currentStructureMode?.template ?? playgroundConfig?.template;
@@ -701,6 +685,7 @@ export const usePlaygroundState = ({
 
     reactProps: playgroundProps,
     globalProps,
+    groupedGlobalProps,
     allPropDefinitions,
     groupedProps,
     propDisabledState,
