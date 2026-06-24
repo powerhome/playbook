@@ -27,6 +27,7 @@ const PropGroupItems: React.FC<
   onPropChange,
   requiredPropNames,
   propSyncHints,
+  playgroundConfig,
 }) => {
   if (props.length === 0) {
     return <Body text={emptyMessage} color="light" />;
@@ -47,6 +48,7 @@ const PropGroupItems: React.FC<
             disabledReason={disabledState?.reason}
             isRequired={requiredPropNames?.has(name)}
             syncHint={propSyncHints?.[name]}
+            playgroundConfig={playgroundConfig}
           />
         );
       })}

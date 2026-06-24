@@ -47,6 +47,7 @@ export const PropsPanel: React.FC<PropsPanelProps> = ({
   showGlobalProps,
   requiredPropNames = new Set(),
   propSyncHints = {},
+  playgroundConfig,
 }) => {
   const globalPropEntries = Object.entries(globalProps);
   const { width: panelWidth, resizeHandleProps } = usePanelResize({
@@ -61,6 +62,7 @@ export const PropsPanel: React.FC<PropsPanelProps> = ({
     onPropChange,
     requiredPropNames,
     propSyncHints,
+    playgroundConfig,
   };
 
   return (

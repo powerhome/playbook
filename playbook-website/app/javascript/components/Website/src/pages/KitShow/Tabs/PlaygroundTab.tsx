@@ -198,6 +198,7 @@ export const PlaygroundTab: React.FC<PlaygroundTabProps> = ({
         showGlobalProps={Boolean(kitSchema.globalProps)}
         requiredPropNames={requiredPropNames}
         propSyncHints={propSyncHints}
+        playgroundConfig={playgroundConfig}
       />
     </Flex>
   );

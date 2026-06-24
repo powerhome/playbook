@@ -17,8 +17,10 @@ import {
   FUNCTION_PRESETS,
   PropValue,
   PropDefinition,
+  PlaygroundConfig,
 } from "./types";
 import {
+  getPlaygroundPropExampleValue,
   playgroundObjectToEditableLiteral,
   resolveSchemaDefault,
 } from "./utils";
@@ -29,6 +31,7 @@ export interface ExtendedPropControlProps extends PropControlProps {
   disabledReason?: string;
   isRequired?: boolean;
   info?: string;
+  playgroundConfig?: PlaygroundConfig | null;
 }
 
 const PropControlInfoPopover: React.FC<{ text: string }> = ({ text }) => {
@@ -145,6 +148,7 @@ export type PropListSharedProps = {
   onPropChange: (name: string, value: PropValue) => void;
   requiredPropNames?: Set<string>;
   propSyncHints?: Record<string, string>;
+  playgroundConfig?: PlaygroundConfig | null;
 };
 
 export type PropControlFieldProps = ExtendedPropControlProps & {
@@ -301,6 +305,78 @@ const ARRAY_INFO = "JSON or JS array literal";
 const REQUIRED_ARRAY_INFO = "JSON or JS array literal.";
 const REQUIRED_OBJECT_INFO =
   'Object: JSON or JS literal, e.g. {"default": true} or { default: true }';
+
+const OBJECT_EXAMPLE_FALLBACK = "{ default: true }";
+const ARRAY_EXAMPLE_FALLBACK = "[]";
+
+const formatObjectExampleFormat = (
+  name: string,
+  definition: PropDefinition,
+  value: PropValue | undefined,
+  playgroundConfig?: PlaygroundConfig | null,
+): string => {
+  const exampleValue = getPlaygroundPropExampleValue(
+    name,
+    definition,
+    value,
+    playgroundConfig,
+  );
+  if (
+    exampleValue !== undefined &&
+    typeof exampleValue === "object" &&
+    exampleValue !== null &&
+    !Array.isArray(exampleValue) &&
+    Object.keys(exampleValue as Record<string, unknown>).length > 0
+  ) {
+    return playgroundObjectToEditableLiteral(exampleValue);
+  }
+  return OBJECT_EXAMPLE_FALLBACK;
+};
+
+const formatArrayExampleFormat = (
+  name: string,
+  definition: PropDefinition,
+  value: PropValue | undefined,
+  playgroundConfig?: PlaygroundConfig | null,
+): string => {
+  const exampleValue = getPlaygroundPropExampleValue(
+    name,
+    definition,
+    value,
+    playgroundConfig,
+  );
+  if (Array.isArray(exampleValue) && exampleValue.length > 0) {
+    return JSON.stringify(exampleValue, null, 2);
+  }
+  return ARRAY_EXAMPLE_FALLBACK;
+};
+
+const formatObjectInputValue = (
+  value: PropValue | undefined,
+  displayValue: unknown,
+): string => {
+  if (!value?.enabled) return "";
+  if (
+    displayValue !== undefined &&
+    displayValue !== null &&
+    typeof displayValue === "object" &&
+    !Array.isArray(displayValue)
+  ) {
+    return playgroundObjectToEditableLiteral(displayValue);
+  }
+  return "";
+};
+
+const formatArrayInputValue = (
+  value: PropValue | undefined,
+  displayValue: unknown,
+): string => {
+  if (!value?.enabled) return "";
+  if (Array.isArray(displayValue)) {
+    return JSON.stringify(displayValue, null, 2);
+  }
+  return "";
+};
 
 const BooleanControl: React.FC<ExtendedPropControlProps> = ({
   name,
@@ -591,48 +667,66 @@ const ObjectControl: React.FC<ExtendedPropControlProps> = ({
   onChange,
   definition,
   info,
+  playgroundConfig,
 }) => {
   const displayValue = getEffectiveDisplayValue(value, definition, {});
+  const exampleFormat = useMemo(
+    () =>
+      formatObjectExampleFormat(name, definition, value, playgroundConfig),
+    [name, definition, value, playgroundConfig],
+  );
   const [inputValue, setInputValue] = useState(() =>
-    isFilledDisplayValue(displayValue)
-      ? playgroundObjectToEditableLiteral(displayValue)
-      : "{}",
+    formatObjectInputValue(value, value?.enabled ? value.value : undefined),
   );
 
   const objectSyncKey = useMemo(
     () =>
       objectSyncFingerprint({
-        value: displayValue,
+        value: value?.enabled ? value.value : undefined,
         enabled: value?.enabled ?? false,
       }),
-    [displayValue, value?.enabled],
+    [value?.enabled, value?.value],
   );
 
   useEffect(() => {
-    if (
-      displayValue !== undefined &&
-      displayValue !== null &&
-      typeof displayValue === "object" &&
-      !Array.isArray(displayValue)
-    ) {
-      setInputValue(playgroundObjectToEditableLiteral(displayValue));
+    if (!value?.enabled) {
+      setInputValue("");
+      return;
     }
-  }, [objectSyncKey, displayValue]);
+
+    const activeValue = value.value ?? displayValue;
+    if (
+      activeValue !== undefined &&
+      activeValue !== null &&
+      typeof activeValue === "object" &&
+      !Array.isArray(activeValue)
+    ) {
+      setInputValue(playgroundObjectToEditableLiteral(activeValue));
+    }
+  }, [objectSyncKey, value?.enabled, value?.value, displayValue]);
 
   return (
     <PropControlRow
       alignItems="start"
-      filled={isFilledDisplayValue(displayValue)}
+      filled={Boolean(value?.enabled && isFilledDisplayValue(value.value))}
       info={mergeInfoText(OBJECT_INFO, info)}
       label={<PropControlLabel name={name} />}
     >
       <PropsPanelTextarea
         dialogTitle={formatPropName(name)}
+        exampleFormat={exampleFormat}
+        exampleLanguage="jsx"
         placeholder="{}"
         value={inputValue}
         onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
           const text = e.target.value;
           setInputValue(text);
+
+          if (!text.trim()) {
+            onChange(name, { value: {}, enabled: false });
+            return;
+          }
+
           const parsed = tryParseObjectLiteralInput(text);
           if (parsed !== null) {
             onChange(name, { value: parsed, enabled: true });
@@ -649,39 +743,59 @@ const ArrayControl: React.FC<ExtendedPropControlProps> = ({
   onChange,
   definition,
   info,
+  playgroundConfig,
 }) => {
   const displayValue = getEffectiveDisplayValue(value, definition, []);
+  const exampleFormat = useMemo(
+    () =>
+      formatArrayExampleFormat(name, definition, value, playgroundConfig),
+    [name, definition, value, playgroundConfig],
+  );
   const [inputValue, setInputValue] = useState(() =>
-    Array.isArray(displayValue) && displayValue.length > 0
-      ? JSON.stringify(displayValue, null, 2)
-      : "[]",
+    formatArrayInputValue(value, value?.enabled ? value.value : undefined),
   );
 
   const arraySyncKey = useMemo(
-    () => (Array.isArray(displayValue) ? JSON.stringify(displayValue) : ""),
-    [displayValue],
+    () =>
+      value?.enabled && Array.isArray(value.value)
+        ? JSON.stringify(value.value)
+        : "",
+    [value?.enabled, value?.value],
   );
 
   useEffect(() => {
-    if (Array.isArray(displayValue)) {
-      setInputValue(JSON.stringify(displayValue, null, 2));
+    if (!value?.enabled) {
+      setInputValue("");
+      return;
     }
-  }, [arraySyncKey, displayValue]);
+
+    const activeValue = value.value ?? displayValue;
+    if (Array.isArray(activeValue)) {
+      setInputValue(JSON.stringify(activeValue, null, 2));
+    }
+  }, [arraySyncKey, value?.enabled, value?.value, displayValue]);
 
   return (
     <PropControlRow
       alignItems="start"
-      filled={isFilledDisplayValue(displayValue)}
+      filled={Boolean(value?.enabled && isFilledDisplayValue(value.value))}
       info={mergeInfoText(ARRAY_INFO, info)}
       label={<PropControlLabel name={name} />}
     >
       <PropsPanelTextarea
         dialogTitle={formatPropName(name)}
+        exampleFormat={exampleFormat}
         placeholder="[]"
         value={inputValue}
         onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
           const text = e.target.value;
           setInputValue(text);
+
+          if (!text.trim()) {
+            onChange(name, { value: [], enabled: false });
+            return;
+          }
+
           const parsed = tryParseArrayLiteralInput(text);
           if (parsed !== null) {
             onChange(name, { value: parsed, enabled: true });
@@ -905,7 +1019,14 @@ const PropControl: React.FC<ExtendedPropControlProps> = (props) => {
 
 export const PropControlField: React.FC<PropControlFieldProps> = ({
   syncHint,
+  playgroundConfig,
   ...propControlProps
-}) => <PropControl {...propControlProps} info={syncHint} />;
+}) => (
+  <PropControl
+    {...propControlProps}
+    info={syncHint}
+    playgroundConfig={playgroundConfig}
+  />
+);
 
 export default PropControl;

@@ -21,6 +21,39 @@ export function resolveSchemaDefault(def?: PropDefinition): unknown {
   return def.default;
 }
 
+/** Example value for object/array prop dialogs — prefers playground config defaults over schema. */
+export function getPlaygroundPropExampleValue(
+  name: string,
+  definition: PropDefinition,
+  displayPropValue: PropValue | undefined,
+  playgroundConfig?: PlaygroundConfig | null,
+): unknown {
+  if (playgroundConfig?.defaults?.[name] !== undefined) {
+    return playgroundConfig.defaults[name];
+  }
+
+  if (
+    displayPropValue?.value !== undefined &&
+    displayPropValue.value !== null &&
+    displayPropValue.value !== ""
+  ) {
+    const v = displayPropValue.value;
+    if (typeof v === "object") {
+      if (Array.isArray(v) && v.length > 0) return v;
+      if (
+        !Array.isArray(v) &&
+        Object.keys(v as Record<string, unknown>).length > 0
+      ) {
+        return v;
+      }
+    } else {
+      return v;
+    }
+  }
+
+  return resolveSchemaDefault(definition);
+}
+
 /**
  * Fill missing optional props with `{ value: default, enabled: false }` from
  * `playgroundConfig.defaults` and schema `default`, so controls can reflect
