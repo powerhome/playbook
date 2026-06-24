@@ -124,7 +124,7 @@ export const PlaygroundTab: React.FC<PlaygroundTabProps> = ({
   const displayKitName = linkFormat(kitName);
 
   return (
-    <Flex width="100%" gap="lg">
+    <Flex alignItems="start" gap="lg" width="100%">
       {/* Left Panel - Preview and Code */}
       <Flex flexDirection="column" flex="1" minWidth="0">
        <Card marginBottom="md" width="100%">

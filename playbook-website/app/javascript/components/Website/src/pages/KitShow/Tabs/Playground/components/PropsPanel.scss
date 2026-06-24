@@ -49,9 +49,12 @@
   display: flex;
   flex-direction: column;
   flex-shrink: 0;
-  height: 100vh;
+  position: sticky;
+  top: $space_md;
+  align-self: flex-start;
+  max-height: calc(100vh - #{$space_md * 2});
+  height: calc(100vh - #{$space_md * 2});
   overflow: hidden;
-  position: relative;
 
   &__resize-handle {
     align-items: center;

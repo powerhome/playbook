@@ -66,7 +66,6 @@ export const PropsPanel: React.FC<PropsPanelProps> = ({
     <Card
       className="props-panel"
       flexDirection="column"
-      height="100vh"
       htmlOptions={{ style: { width: `${panelWidth}px` } }}
       padding="none"
     >
