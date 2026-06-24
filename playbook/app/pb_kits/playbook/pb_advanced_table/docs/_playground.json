@@ -233,11 +233,6 @@
         "customSort": true
       }
     },
-    "fullScreenControl": {
-      "requires": {
-        "allowFullScreen": true
-      }
-    },
     "enableSortingRemoval": {
       "requires": {
         "enableSorting": true
@@ -2954,9 +2949,7 @@
   },
   "hiddenProps": [
     "sortControl",
-    "fullScreenControl",
     "expandedControl",
-    "allowFullScreen",
     "pagination",
     "paginationProps"
   ],
