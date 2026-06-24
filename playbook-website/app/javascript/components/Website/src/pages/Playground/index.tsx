@@ -15,7 +15,7 @@ import {
   Tooltip,
 } from "playbook-ui";
 
-import { CodePanel, PropsPanel } from "../KitShow/Tabs/Playground";
+import { CodePanel, PropsPanel, ResponsivePreviewFrame } from "../KitShow/Tabs/Playground";
 import type { PropValue } from "../KitShow/Tabs/Playground";
 import { PLAYGROUND_ENABLED_KITS } from "../KitShow/playgroundEnabledKits";
 import { BuilderPreviewItem } from "./BuilderPreviewItem";
@@ -529,114 +529,121 @@ export default function Playground() {
           orientation="column"
           width="100%"
         >
-          <Card overflow="hidden" padding="md" width="100%">
+          <Card
+            className="playground-preview-card"
+            overflow="hidden"
+            padding="md"
+            width="100%"
+          >
             <Flex justify="between" align="center" marginBottom="md">
               <Title size={3} text="Demo" />
               <Badge text={`${instanceCount} kits`} variant="primary" />
             </Flex>
-            <Background
-              backgroundColor="light"
-              borderRadius="md"
-              className={`builder-stage ${
-                dragOverTargetId === ROOT_TARGET_ID ? "is-drop-target" : ""
-              }`}
-              display="flex"
-              flexDirection="column"
-              gap="sm"
-              htmlOptions={{
-                onClick: () => setSelectedId(null),
-                onDragLeave: (event: React.DragEvent<HTMLElement>) => {
-                  if (
-                    !event.currentTarget.contains(
-                      event.relatedTarget as Node | null,
-                    )
-                  ) {
-                    handleDragOverTarget(null);
-                  }
-                },
-                onDragOver: (event: React.DragEvent<HTMLElement>) => {
-                  event.preventDefault();
-                  event.dataTransfer.dropEffect = draggingInstanceIdRef.current
-                    ? "move"
-                    : "copy";
-                  handleDragOverTarget(ROOT_TARGET_ID, "Main canvas", event);
-                },
-                onDrop: (event: React.DragEvent<HTMLElement>) => {
-                  event.preventDefault();
-                  const plainValue = event.dataTransfer.getData("text/plain");
-                  const instanceId =
-                    event.dataTransfer.getData(
-                      "application/playbook-instance",
-                    ) ||
-                    (draggingInstanceIdRef.current === plainValue
-                      ? draggingInstanceIdRef.current
-                      : "");
-                  const kitName =
-                    event.dataTransfer.getData("application/playbook-kit") ||
-                    (instanceId ? "" : plainValue);
+            <ResponsivePreviewFrame showDragHint>
+              <Background
+                backgroundColor="light"
+                borderRadius="md"
+                className={`builder-stage playground-preview-container ${
+                  dragOverTargetId === ROOT_TARGET_ID ? "is-drop-target" : ""
+                }`}
+                display="flex"
+                flexDirection="column"
+                gap="sm"
+                htmlOptions={{
+                  onClick: () => setSelectedId(null),
+                  onDragLeave: (event: React.DragEvent<HTMLElement>) => {
+                    if (
+                      !event.currentTarget.contains(
+                        event.relatedTarget as Node | null,
+                      )
+                    ) {
+                      handleDragOverTarget(null);
+                    }
+                  },
+                  onDragOver: (event: React.DragEvent<HTMLElement>) => {
+                    event.preventDefault();
+                    event.dataTransfer.dropEffect = draggingInstanceIdRef.current
+                      ? "move"
+                      : "copy";
+                    handleDragOverTarget(ROOT_TARGET_ID, "Main canvas", event);
+                  },
+                  onDrop: (event: React.DragEvent<HTMLElement>) => {
+                    event.preventDefault();
+                    const plainValue = event.dataTransfer.getData("text/plain");
+                    const instanceId =
+                      event.dataTransfer.getData(
+                        "application/playbook-instance",
+                      ) ||
+                      (draggingInstanceIdRef.current === plainValue
+                        ? draggingInstanceIdRef.current
+                        : "");
+                    const kitName =
+                      event.dataTransfer.getData("application/playbook-kit") ||
+                      (instanceId ? "" : plainValue);
 
-                  clearDragState();
-                  if (instanceId) handleMoveInstance(instanceId, ROOT_TARGET_ID);
-                  else if (kitName) handleDropKit(kitName, ROOT_TARGET_ID);
-                },
-                style: { minWidth: "0" },
-              }}
-              minHeight="360px"
-              padding="sm"
-            >
-              {instances.length === 0 ? (
-                <Flex
-                  align="center"
-                  className="builder-empty-canvas"
-                  flex={1}
-                  gap="xs"
-                  justify="center"
-                  minHeight="300px"
-                  orientation="column"
-                  padding="sm"
-                  textAlign="center"
-                  width="100%"
-                >
-                  <Icon icon="plus" />
-                  <Body color="light" text="Add a kit to start composing." />
-                </Flex>
-              ) : (
-                instances.map((instance) => (
-                  <BuilderPreviewItem
-                    canDropIntoTarget={canDropIntoTarget}
-                    dragOverTargetId={dragOverTargetId}
-                    draggingInstanceId={draggingInstanceId}
-                    globalProps={global_props_schema?.props}
-                    instance={instance}
-                    isSelected={instance.id === selectedId}
-                    key={instance.id}
-                    kitsByName={kitsByName}
-                    onDragEndDrag={clearDragState}
-                    onDragOverTarget={handleDragOverTarget}
-                    onDragStartInstance={(id) => {
-                      draggingInstanceIdRef.current = id;
-                      hoverDragTargetRef.current = null;
-                      hideDragTooltip();
-                      setDraggingInstanceId(id);
-                      setDraggedKitName(null);
-                    }}
-                    onDragSourceChange={handleDragSourceChange}
-                    onHoverDragTarget={handleHoverDragTarget}
-                    onLeaveDragTarget={handleLeaveDragTarget}
-                    onDropKit={(kitName, targetId) => {
-                      clearDragState();
-                      handleDropKit(kitName, targetId);
-                    }}
-                    onMoveInstance={(instanceId, targetId) => {
-                      clearDragState();
-                      handleMoveInstance(instanceId, targetId);
-                    }}
-                    onSelect={handleSelectInstance}
-                    selectedId={selectedId}
-                  />
-                ))
-              )}
-            </Background>
+                    clearDragState();
+                    if (instanceId) handleMoveInstance(instanceId, ROOT_TARGET_ID);
+                    else if (kitName) handleDropKit(kitName, ROOT_TARGET_ID);
+                  },
+                  style: { minWidth: "0" },
+                }}
+                minHeight="360px"
+                padding="sm"
+              >
+                {instances.length === 0 ? (
+                  <Flex
+                    align="center"
+                    className="builder-empty-canvas"
+                    flex={1}
+                    gap="xs"
+                    justify="center"
+                    minHeight="300px"
+                    orientation="column"
+                    padding="sm"
+                    textAlign="center"
+                    width="100%"
+                  >
+                    <Icon icon="plus" />
+                    <Body color="light" text="Add a kit to start composing." />
+                  </Flex>
+                ) : (
+                  instances.map((instance) => (
+                    <BuilderPreviewItem
+                      canDropIntoTarget={canDropIntoTarget}
+                      dragOverTargetId={dragOverTargetId}
+                      draggingInstanceId={draggingInstanceId}
+                      globalProps={global_props_schema?.props}
+                      instance={instance}
+                      isSelected={instance.id === selectedId}
+                      key={instance.id}
+                      kitsByName={kitsByName}
+                      onDragEndDrag={clearDragState}
+                      onDragOverTarget={handleDragOverTarget}
+                      onDragStartInstance={(id) => {
+                        draggingInstanceIdRef.current = id;
+                        hoverDragTargetRef.current = null;
+                        hideDragTooltip();
+                        setDraggingInstanceId(id);
+                        setDraggedKitName(null);
+                      }}
+                      onDragSourceChange={handleDragSourceChange}
+                      onHoverDragTarget={handleHoverDragTarget}
+                      onLeaveDragTarget={handleLeaveDragTarget}
+                      onDropKit={(kitName, targetId) => {
+                        clearDragState();
+                        handleDropKit(kitName, targetId);
+                      }}
+                      onMoveInstance={(instanceId, targetId) => {
+                        clearDragState();
+                        handleMoveInstance(instanceId, targetId);
+                      }}
+                      onSelect={handleSelectInstance}
+                      selectedId={selectedId}
+                    />
+                  ))
+                )}
+              </Background>
+            </ResponsivePreviewFrame>
           </Card>
 
           <Flex

@@ -1,6 +1,7 @@
 @import "playbook-tokens/colors";
 @import "playbook-tokens/screen_sizes";
 @import "playbook-tokens/spacing";
+@import "../KitShow/Tabs/Playground/PlaygroundPreview.scss";
 
 .full-playground-shell {
   box-sizing: border-box;
@@ -141,6 +142,10 @@
 
 .builder-stage {
   border: 1px dashed $border_light;
+  box-sizing: border-box;
+  max-width: 100%;
+  min-width: 0;
+  width: 100%;
 
   &.is-drop-target {
     border-color: $primary;

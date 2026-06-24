@@ -4,6 +4,7 @@ import { Card, colors, Flex } from "playbook-ui";
 import * as PB from "playbook-ui";
 import * as PBCharts from "playbook-ui/charts";
 import maplibreglModule from "maplibre-gl";
+import "./PlaygroundPreview.scss";
 
 interface PlaygroundPreviewProps {
   bare?: boolean;
@@ -36,16 +37,26 @@ const PlaygroundPreview: React.FC<PlaygroundPreviewProps> = ({
 
   return (
     <LiveProvider code={code} scope={scope} noInline>
-      {bare ? (
-        <LivePreview />
-      ) : (
-        <Card borderNone padding="md">
-          <LivePreview />
-        </Card>
-      )}
-      <Flex padding={bare ? "none" : "sm"}>
-        <LiveError style={{ color: colors.error, fontSize: "12px", margin: 0 }} />
-      </Flex>
+      <div className="playground-preview-container">
+        {bare ? (
+          <div className="playground-preview-content">
+            <LivePreview />
+          </div>
+        ) : (
+          <Card
+            borderNone
+            className="playground-preview-content"
+            padding="md"
+          >
+            <LivePreview />
+          </Card>
+        )}
+        <Flex padding={bare ? "none" : "sm"}>
+          <LiveError
+            style={{ color: colors.error, fontSize: "12px", margin: 0 }}
+          />
+        </Flex>
+      </div>
     </LiveProvider>
   );
 };

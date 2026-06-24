@@ -1,0 +1,39 @@
+@import "playbook-tokens/spacing";
+
+// Preview / demo card — bounds kit output (e.g. Advanced Table) to the card width.
+.playground-preview-card {
+  box-sizing: border-box;
+  max-width: 100%;
+  min-width: 0;
+  overflow: hidden;
+
+  .responsive-preview {
+    padding: 0 $space_sm $space_sm;
+  }
+}
+
+.playground-preview-container {
+  box-sizing: border-box;
+  max-width: 100%;
+  min-width: 0;
+  overflow: auto;
+  width: 100%;
+
+  .playground-preview-content {
+    box-sizing: border-box;
+    max-width: 100%;
+    min-width: 0;
+    width: 100%;
+  }
+
+  .builder-instance,
+  .builder-instance-render {
+    max-width: 100%;
+    min-width: 0;
+  }
+
+  .pb_advanced_table_kit,
+  [class*="advanced_table"] {
+    max-width: 100%;
+  }
+}
