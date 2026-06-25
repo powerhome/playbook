@@ -83,7 +83,7 @@ export const PropsPanel: React.FC<PropsPanelProps> = ({
       >
         <Icon icon="grip-lines-vertical" size="xs" />
       </div>
-      <Card.Header headerColor="neutral_subtle">
+      <Card.Header className="props-panel__header" headerColor="neutral_subtle">
         <Flex justify="between" align="center">
           <Title text="Props" size={4} />
           <Caption text={`${totalProps} available`} size="xs" color="light" />

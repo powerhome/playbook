@@ -3,9 +3,13 @@
 @import "playbook-tokens/border_radius";
 @import "./playgroundPanelControls";
 
+$props-panel-resize-width: 12px;
+
 .props-panel {
-  display: flex;
-  flex-direction: column;
+  display: grid !important;
+  flex-direction: unset !important;
+  grid-template-columns: $props-panel-resize-width minmax(0, 1fr);
+  grid-template-rows: auto minmax(0, 1fr);
   flex-shrink: 0;
   position: sticky;
   top: $space_md;
@@ -16,23 +20,27 @@
 
   &__resize-handle {
     align-items: center;
+    align-self: stretch;
     background-color: $neutral_subtle;
     border-right: 1px solid $border_light;
     cursor: ew-resize;
     display: flex;
-    height: 100%;
+    grid-column: 1;
+    grid-row: 1 / -1;
     justify-content: center;
-    left: 0;
-    position: absolute;
-    top: 0;
     touch-action: none;
     user-select: none;
-    width: 12px;
+    width: $props-panel-resize-width;
     z-index: 1;
 
     svg {
       color: $text_lt_light;
     }
+  }
+
+  &__header {
+    grid-column: 2;
+    grid-row: 1;
   }
 
   textarea {
@@ -62,16 +70,35 @@
   }
 
   &__body {
-    flex: 1;
+    grid-column: 2;
+    grid-row: 2;
     min-height: 0;
     overflow-y: auto;
-    padding-left: 12px !important;
+    scrollbar-color: rgba($text_lt_lighter, 0.45) transparent;
+    scrollbar-width: thin;
 
     @include playground-panel-form-control-styles("props-panel-dropdown");
+
+    &::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: rgba($text_lt_lighter, 0.45);
+      border-radius: 3px;
+
+      &:hover {
+        background-color: rgba($text_lt_lighter, 0.65);
+      }
+    }
   }
 
   .pb_card_header_kit {
-    padding-left: calc(#{$space_sm} + 4px);
+    padding-left: $space_sm;
   }
 
   // Tooltip trigger defaults to inline-block, which breaks 40/60 prop rows
