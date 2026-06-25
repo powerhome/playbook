@@ -2,6 +2,7 @@ import React from "react";
 import { Row, Getter } from "@tanstack/react-table";
 import { GenericObject } from "../../types";
 import { CustomCell } from "../Components/CustomCell";
+import { getRowStyle } from "./RowUtils";
 
 /**
  * Creates a cell render function for table columns
@@ -18,7 +19,7 @@ export const createCellFunction = (
   isFirstColumn?: boolean,
   onRowToggleClick?: (row: Row<GenericObject>) => void,
   selectableRows?: boolean,
-  rowStyling?: GenericObject
+  rowStyling?: GenericObject[]
 ) => {
   // Add display name to the returned function
   const cellRenderer = ({
@@ -29,7 +30,7 @@ export const createCellFunction = (
     getValue: Getter<string>
   }) => {
     const rowData = row.original;
-    const customStyle = rowStyling?.length > 0 && rowStyling?.find((s:GenericObject) => s?.rowId === row.id);
+    const customStyle = getRowStyle(rowStyling, row);
 
     if (isFirstColumn) {
       switch (row.depth) {
@@ -52,6 +53,7 @@ export const createCellFunction = (
           return accessorValue ? (
             <CustomCell
                 customRenderer={customRenderer}
+                customStyle={customStyle}
                 onRowToggleClick={onRowToggleClick}
                 row={row}
                 selectableRows={selectableRows}
