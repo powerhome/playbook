@@ -5,7 +5,12 @@
     "checked": false,
     "disabled": false,
     "inputs": "enabled",
-    "multi": true
+    "multi": true,
+    "icon": "user",
+    "inputId": "assignee_1",
+    "name": "assignee",
+    "text": "Assignee",
+    "value": "user1"
   },
   "groups": [
     {
@@ -30,7 +35,7 @@
     {
       "name": "Appearance",
       "props": [
-        "customIcon"
+        "dark"
       ]
     }
   ],
@@ -57,20 +62,6 @@
         "inputId": "status_1",
         "value": "ok",
         "checked": true,
-        "multi": true,
-        "inputs": "enabled"
-      }
-    },
-    {
-      "name": "Disabled",
-      "props": {
-        "icon": "bell",
-        "text": "Notifications",
-        "name": "notifications",
-        "inputId": "notifications_1",
-        "value": "off",
-        "checked": false,
-        "disabled": true,
         "multi": true,
         "inputs": "enabled"
       }
@@ -104,10 +95,28 @@
   ],
   "conditionals": {},
   "hints": {
-    "required_ids": {
-      "when": {},
-      "message": "icon, text, name, and inputId identify the control for forms and accessibility.",
+    "unchecked": {
+      "presetName": "Unchecked",
+      "message": "Unchecked shows the default selectable icon with a visible checkbox input.",
+      "type": "info"
+    },
+    "checked": {
+      "presetName": "Checked",
+      "message": "Checked applies the selected visual state while keeping inputs enabled.",
+      "type": "info"
+    },
+    "radio": {
+      "presetName": "Radio (single)",
+      "message": "Radio (single) sets multi to false so the rendered input is a radio.",
+      "type": "info"
+    },
+    "inputs_hidden": {
+      "presetName": "Inputs hidden",
+      "message": "Inputs hidden renders the icon and title without a visible form input.",
       "type": "info"
     }
-  }
+  },
+  "hiddenProps": [
+    "customIcon"
+  ]
 }

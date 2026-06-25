@@ -1,44 +1,29 @@
 {
-  "template": "<SelectableCardIcon{{props}} />",
-  "propTargets": {},
   "defaults": {
+    "bodyText": "Export",
     "checked": false,
     "checkmark": false,
     "disabled": false,
-    "multi": true,
-    "bodyText": "Export",
     "icon": "chart-line",
     "inputId": "report_quarterly",
+    "multi": true,
     "name": "report_type",
     "titleText": "Quarterly Report",
     "value": "quarterly"
   },
+  "hiddenProps": ["customIcon", "onChange"],
   "groups": [
     {
       "name": "Content",
-      "props": [
-        "titleText",
-        "bodyText",
-        "icon",
-        "name",
-        "value",
-        "inputId"
-      ]
+      "props": ["titleText", "bodyText", "icon", "name", "value", "inputId"]
     },
     {
       "name": "State",
-      "props": [
-        "checked",
-        "disabled",
-        "multi"
-      ]
+      "props": ["checked", "disabled", "multi"]
     },
     {
       "name": "Appearance",
-      "props": [
-        "checkmark",
-        "dark"
-      ]
+      "props": ["checkmark", "dark"]
     }
   ],
   "presets": [
@@ -113,9 +98,5 @@
       "message": "Radio (single) sets multi to false so the hidden input uses radio semantics.",
       "type": "info"
     }
-  },
-  "hiddenProps": [
-    "customIcon",
-    "onChange"
-  ]
+  }
 }
