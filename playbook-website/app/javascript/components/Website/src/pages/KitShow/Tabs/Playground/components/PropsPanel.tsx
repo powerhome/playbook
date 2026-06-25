@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import {
   Card,
   Caption,
@@ -51,10 +51,12 @@ export const PropsPanel: React.FC<PropsPanelProps> = ({
   playgroundConfig,
 }) => {
   const globalPropCount = Object.keys(globalProps).length;
+  const panelRef = useRef<HTMLDivElement>(null);
   const { width: panelWidth, resizeHandleProps } = usePanelResize({
     defaultWidth: PROPS_PANEL_DEFAULT_WIDTH,
     minWidth: PROPS_PANEL_MIN_WIDTH,
     maxWidth: PROPS_PANEL_MAX_WIDTH,
+    panelRef,
   });
 
   const propListShared: PropListSharedProps = {
@@ -70,7 +72,7 @@ export const PropsPanel: React.FC<PropsPanelProps> = ({
     <Card
       className="props-panel"
       flexDirection="column"
-      htmlOptions={{ style: { width: `${panelWidth}px` } }}
+      htmlOptions={{ ref: panelRef, style: { width: `${panelWidth}px` } }}
       padding="none"
       marginBottom="sm"
     >

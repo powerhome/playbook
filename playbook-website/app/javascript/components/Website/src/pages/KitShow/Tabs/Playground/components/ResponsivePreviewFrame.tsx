@@ -27,6 +27,7 @@ export const ResponsivePreviewFrame: React.FC<ResponsivePreviewFrameProps> = ({
   showDragHint = false,
 }) => {
   const canvasRef = useRef<HTMLDivElement>(null);
+  const frameRef = useRef<HTMLDivElement>(null);
   const {
     activePreset,
     customWidth,
@@ -34,7 +35,7 @@ export const ResponsivePreviewFrame: React.FC<ResponsivePreviewFrameProps> = ({
     isFullWidth,
     resizeHandleProps,
     selectPreset,
-  } = useResponsivePreviewWidth({ containerRef: canvasRef });
+  } = useResponsivePreviewWidth({ containerRef: canvasRef, frameRef });
 
   const sizeLabel = isFullWidth
     ? "Full width · matches browser"
@@ -105,6 +106,7 @@ export const ResponsivePreviewFrame: React.FC<ResponsivePreviewFrameProps> = ({
             className="responsive-preview__frame"
             flexDirection="column"
             htmlOptions={{
+              ref: frameRef,
               style: {
                 width: `${frameWidth}px`,
                 maxWidth: "100%",
