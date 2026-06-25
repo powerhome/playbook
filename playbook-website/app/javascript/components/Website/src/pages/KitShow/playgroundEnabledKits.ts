@@ -75,5 +75,7 @@ export const PLAYGROUND_ENABLED_KITS = [
   "section_separator",
   "progress_simple",
   "progress_step",
-  "progress_pills"
+  "progress_pills",
+  "radio",
+  "rich_text_editor"
 ];

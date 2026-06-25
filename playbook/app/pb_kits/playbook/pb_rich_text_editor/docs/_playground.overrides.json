@@ -1,48 +1,57 @@
 {
-  "template": "<RichTextEditor{{props}} />",
-  "propTargets": {},
+  "structureModes": {
+    "default": "advanced",
+    "modes": {
+      "advanced": {
+        "label": "Advanced",
+        "template": "<RichTextEditor\n  advancedEditor={editor}{{props}}\n>\n  <EditorContent editor={editor} />\n</RichTextEditor>",
+        "children": "",
+        "wrapper": "const RichTextEditorPlayground = () => {\n  const editor = useEditor({\n    extensions: [StarterKit, TipTapLink],\n    content: 'Add your text here. You can format your text, add links, quotes, and bullets.',\n  })\n\n  if (!editor) return null\n\n  return {{component}}\n}\n\n<RichTextEditorPlayground />",
+        "externalImports": [
+          "import { useEditor, EditorContent } from '@tiptap/react'",
+          "import StarterKit from '@tiptap/starter-kit'",
+          "import TipTapLink from '@tiptap/extension-link'"
+        ]
+      }
+    }
+  },
   "defaults": {
-    "requiredIndicator": false,
-    "simple": false,
     "advancedEditorToolbar": true,
     "inputHeight": "md",
     "inputMinHeight": "sm",
     "label": "Description",
     "maxWidth": "md",
     "name": "description",
-    "placeholder": "Add your text here."
+    "placeholder": "Add your text here.",
+    "requiredIndicator": false,
+    "simple": false
   },
+  "hiddenProps": [
+    "advancedEditor",
+    "extensions",
+    "inputOptions",
+    "onChange",
+    "template",
+    "TrixEditor",
+    "trixInstance",
+    "value"
+  ],
   "groups": [
     {
       "name": "Content",
-      "props": [
-        "label",
-        "name",
-        "placeholder"
-      ]
+      "props": ["label", "name", "placeholder"]
     },
     {
       "name": "Toolbar",
-      "props": [
-        "advancedEditorToolbar",
-        "simple",
-        "focus",
-        "sticky"
-      ]
+      "props": ["advancedEditorToolbar", "simple", "focus", "sticky"]
     },
     {
       "name": "Sizing",
-      "props": [
-        "inputHeight",
-        "inputMinHeight",
-        "maxWidth"
-      ]
+      "props": ["inputHeight", "inputMinHeight", "maxWidth"]
     },
     {
       "name": "State",
-      "props": [
-        "requiredIndicator"
-      ]
+      "props": ["requiredIndicator"]
     }
   ],
   "presets": [
@@ -116,46 +125,6 @@
       "structureMode": "advanced"
     }
   },
-  "hints": {
-    "advanced": {
-      "presetName": "Default",
-      "message": "The Advanced structure wraps RichTextEditor with TipTap useEditor and EditorContent.",
-      "type": "info"
-    },
-    "focus": {
-      "when": {
-        "focus": true
-      },
-      "message": "Focus Toolbar shows the toolbar when the advanced editor receives focus.",
-      "type": "info"
-    }
-  },
-  "structureModes": {
-    "default": "advanced",
-    "modes": {
-      "advanced": {
-        "label": "Advanced",
-        "template": "<RichTextEditor\n  advancedEditor={editor}{{props}}\n>\n  <EditorContent editor={editor} />\n</RichTextEditor>",
-        "children": "",
-        "wrapper": "const RichTextEditorPlayground = () => {\n  const editor = useEditor({\n    extensions: [StarterKit, TipTapLink],\n    content: 'Add your text here. You can format your text, add links, quotes, and bullets.',\n  })\n\n  if (!editor) return null\n\n  return {{component}}\n}\n\n<RichTextEditorPlayground />",
-        "externalImports": [
-          "import { useEditor, EditorContent } from '@tiptap/react'",
-          "import StarterKit from '@tiptap/starter-kit'",
-          "import TipTapLink from '@tiptap/extension-link'"
-        ]
-      }
-    }
-  },
-  "hiddenProps": [
-    "advancedEditor",
-    "extensions",
-    "inputOptions",
-    "onChange",
-    "template",
-    "TrixEditor",
-    "trixInstance",
-    "value"
-  ],
   "propSyncOnEnable": {
     "advancedEditorToolbar": {
       "structureMode": "advanced"
@@ -168,6 +137,18 @@
     },
     "sticky": {
       "structureMode": "advanced"
+    }
+  },
+  "hints": {
+    "advanced": {
+      "presetName": "Default",
+      "message": "The Advanced structure wraps RichTextEditor with TipTap useEditor and EditorContent.",
+      "type": "info"
+    },
+    "focus": {
+      "when": { "focus": true },
+      "message": "Focus Toolbar shows the toolbar when the advanced editor receives focus.",
+      "type": "info"
     }
   }
 }
