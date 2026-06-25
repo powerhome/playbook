@@ -1,41 +1,232 @@
 import React, { useEffect, useMemo, useState } from "react";
 import {
-  Badge,
-  Caption,
+  Body,
   Checkbox,
+  Icon,
+  colors,
+  Detail,
+  Dropdown,
   Flex,
-  Select,
+  FlexItem,
+  PbReactPopover,
   TextInput,
   Tooltip,
-  Body
 } from "playbook-ui";
 import {
   PropControlProps,
   FUNCTION_PRESETS,
   PropValue,
+  PropDefinition,
+  PlaygroundConfig,
 } from "./types";
-import { playgroundObjectToEditableLiteral } from "./utils";
+import { panelDropdownClassName } from "./playgroundPanelControls";
+import {
+  getPlaygroundPropExampleValue,
+  playgroundObjectToEditableLiteral,
+  resolveSchemaDefault,
+} from "./utils";
+import { PropsPanelTextarea } from "./components/PropsPanelTextarea";
 
 export interface ExtendedPropControlProps extends PropControlProps {
   disabled?: boolean;
   disabledReason?: string;
   isRequired?: boolean;
+  info?: string;
+  playgroundConfig?: PlaygroundConfig | null;
 }
+
+const PropControlInfoPopover: React.FC<{ text: string }> = ({ text }) => {
+  const [showPopover, setShowPopover] = useState(false);
+
+  const togglePopover = () => setShowPopover((open) => !open);
+  const handleShouldClosePopover = (shouldClose: boolean) => {
+    setShowPopover(!shouldClose);
+  };
+
+  return (
+    <PbReactPopover
+      className="props-panel-info-popover"
+      closeOnClick="any"
+      maxWidth="240px"
+      offset
+      placement="top-end"
+      reference={
+        <Icon
+          aria={{ label: "More information" }}
+          icon="info-circle"
+          htmlOptions={{ onClick: togglePopover }}
+          size="xs"
+          cursor="pointer"
+        />
+      }
+      shouldClosePopover={handleShouldClosePopover}
+      show={showPopover}
+      zIndex={10}
+    >
+      <Body
+        className="props-panel-info-popover__text"
+        color="light"
+        padding="xs"
+        text={text}
+      />
+    </PbReactPopover>
+  );
+};
+
+const mergeInfoText = (
+  ...parts: Array<string | undefined>
+): string | undefined => {
+  const merged = parts.filter(Boolean).join("\n\n");
+  return merged || undefined;
+};
 
 const formatPropName = (name: string): string => name;
 
-/** Plain object from prop state — used when enabling object controls so playground `defaults` survive the toggle. */
-function objectSeedFromPropValue(value: PropValue | undefined): Record<string, unknown> {
-  const v = value?.value;
-  if (v !== null && v !== undefined && typeof v === "object" && !Array.isArray(v)) {
-    return v as Record<string, unknown>;
+const PropControlLabel: React.FC<{ name: string; required?: boolean }> = ({
+  name,
+  required = false,
+}) => {
+  const detail = <Detail text={formatPropName(name)} truncate={1} />;
+
+  if (!required) return detail;
+
+  return (
+    <Flex align="center" gap="xxs" width="100%">
+      <FlexItem>{detail}</FlexItem>
+      <span aria-hidden="true" style={{ color: colors.error, flexShrink: 0 }}>
+        *
+      </span>
+    </Flex>
+  );
+};
+
+type PropControlRowProps = {
+  label: React.ReactNode;
+  children: React.ReactNode;
+  alignItems?: "center" | "start";
+  filled?: boolean;
+  info?: string;
+};
+
+export const PropControlRow: React.FC<PropControlRowProps> = ({
+  label,
+  children,
+  alignItems = "center",
+  filled = false,
+  info,
+}) => (
+  <Flex
+    alignItems={alignItems}
+    flexDirection="row"
+    gap="xs"
+    paddingX="xs"
+    paddingBottom="sm"
+    width="100%"
+  >
+    <FlexItem className="props-panel-control-label" fixedSize="40%">
+      {label}
+    </FlexItem>
+    <FlexItem
+      className={filled ? "props-panel-control--filled" : undefined}
+      fixedSize="60%"
+    >
+      {info ? (
+        <Flex alignItems="center" gap="xxs" width="100%">
+          <FlexItem>{children}</FlexItem>
+          <FlexItem>
+            <PropControlInfoPopover text={info} />
+          </FlexItem>
+        </Flex>
+      ) : (
+        children
+      )}
+    </FlexItem>
+  </Flex>
+);
+
+export type PropListSharedProps = {
+  propValues: Record<string, PropValue>;
+  propDisabledState: Record<string, { disabled: boolean; reason: string }>;
+  onPropChange: (name: string, value: PropValue) => void;
+  requiredPropNames?: Set<string>;
+  propSyncHints?: Record<string, string>;
+  playgroundConfig?: PlaygroundConfig | null;
+};
+
+export type PropControlFieldProps = ExtendedPropControlProps & {
+  syncHint?: string;
+};
+
+const propValueOnDropdownClear = (
+  definition: PropDefinition,
+  enumValues?: string[],
+): PropValue => {
+  const schemaDefault = resolveSchemaDefault(definition);
+
+  if (enumValues) {
+    return { value: "", enabled: false };
   }
-  return {};
-}
+
+  if (schemaDefault !== undefined) {
+    return { value: schemaDefault, enabled: false };
+  }
+
+  return { value: "", enabled: false };
+};
+
+const getEffectiveBoolean = (
+  value: PropValue | undefined,
+  schemaDefault: boolean | undefined,
+): boolean => {
+  if (value?.enabled) return value.value === true;
+  const raw = value?.value;
+  if (typeof raw === "boolean") return raw;
+  return schemaDefault === true;
+};
+
+const getEffectiveDisplayValue = (
+  value: PropValue | undefined,
+  definition: PropDefinition,
+  fallback?: unknown,
+): unknown => {
+  if (value?.enabled) {
+    return value.value ?? fallback;
+  }
+  if (
+    value?.value !== undefined &&
+    value.value !== null &&
+    value.value !== ""
+  ) {
+    return value.value;
+  }
+  const schemaDefault = resolveSchemaDefault(definition);
+  if (schemaDefault !== undefined) return schemaDefault;
+  return fallback;
+};
+
+const isFilledDisplayValue = (displayValue: unknown): boolean => {
+  if (
+    displayValue === undefined ||
+    displayValue === null ||
+    displayValue === ""
+  ) {
+    return false;
+  }
+  if (typeof displayValue === "object") {
+    if (Array.isArray(displayValue)) return displayValue.length > 0;
+    return Object.keys(displayValue as Record<string, unknown>).length > 0;
+  }
+  return true;
+};
 
 function objectSyncFingerprint(value: PropValue | undefined): string {
   const v = value?.value;
-  if (v !== null && v !== undefined && typeof v === "object" && !Array.isArray(v)) {
+  if (
+    v !== null &&
+    v !== undefined &&
+    typeof v === "object" &&
+    !Array.isArray(v)
+  ) {
     return JSON.stringify(v);
   }
   return "";
@@ -45,14 +236,20 @@ function objectSyncFingerprint(value: PropValue | undefined): string {
  * Strict JSON first, then a parenthesized JS object literal so `{ default: true }`
  * works without JSON double-quoted keys (avoids codegen staying at `{}` when JSON.parse failed).
  */
-function tryParseObjectLiteralInput(raw: string): Record<string, unknown> | null {
+function tryParseObjectLiteralInput(
+  raw: string,
+): Record<string, unknown> | null {
   const trimmed = raw.trim();
   if (!trimmed) {
     return {};
   }
   try {
     const parsed = JSON.parse(trimmed);
-    if (parsed !== null && typeof parsed === "object" && !Array.isArray(parsed)) {
+    if (
+      parsed !== null &&
+      typeof parsed === "object" &&
+      !Array.isArray(parsed)
+    ) {
       return parsed as Record<string, unknown>;
     }
     return null;
@@ -61,7 +258,11 @@ function tryParseObjectLiteralInput(raw: string): Record<string, unknown> | null
   }
   try {
     const result = new Function(`return (${trimmed})`)();
-    if (result !== null && typeof result === "object" && !Array.isArray(result)) {
+    if (
+      result !== null &&
+      typeof result === "object" &&
+      !Array.isArray(result)
+    ) {
       return result as Record<string, unknown>;
     }
     return null;
@@ -93,259 +294,354 @@ function tryParseArrayLiteralInput(raw: string): unknown[] | null {
   }
 }
 
-const BOOLEAN_PILLS: readonly boolean[] = [true, false];
+const STRING_OR_ARRAY_INFO = "Comma-separated for array (e.g., plus, times)";
+const OBJECT_INFO =
+  'JSON or object literal, e.g. {"default": true} or { default: true }';
+const ARRAY_INFO = "JSON or JS array literal";
+const REQUIRED_ARRAY_INFO = "JSON or JS array literal.";
+const REQUIRED_OBJECT_INFO =
+  'Object: JSON or JS literal, e.g. {"default": true} or { default: true }';
 
-const BooleanControl: React.FC<PropControlProps> = ({ name, value, onChange, definition }) => {
-  const isEnabled = value?.enabled ?? false;
+const OBJECT_EXAMPLE_FALLBACK = "{ default: true }";
+const ARRAY_EXAMPLE_FALLBACK = "[]";
+
+const formatObjectExampleFormat = (
+  name: string,
+  definition: PropDefinition,
+  value: PropValue | undefined,
+  playgroundConfig?: PlaygroundConfig | null,
+): string => {
+  const exampleValue = getPlaygroundPropExampleValue(
+    name,
+    definition,
+    value,
+    playgroundConfig,
+  );
+  if (
+    exampleValue !== undefined &&
+    typeof exampleValue === "object" &&
+    exampleValue !== null &&
+    !Array.isArray(exampleValue) &&
+    Object.keys(exampleValue as Record<string, unknown>).length > 0
+  ) {
+    return playgroundObjectToEditableLiteral(exampleValue);
+  }
+  return OBJECT_EXAMPLE_FALLBACK;
+};
+
+const formatArrayExampleFormat = (
+  name: string,
+  definition: PropDefinition,
+  value: PropValue | undefined,
+  playgroundConfig?: PlaygroundConfig | null,
+): string => {
+  const exampleValue = getPlaygroundPropExampleValue(
+    name,
+    definition,
+    value,
+    playgroundConfig,
+  );
+  if (Array.isArray(exampleValue) && exampleValue.length > 0) {
+    return JSON.stringify(exampleValue, null, 2);
+  }
+  return ARRAY_EXAMPLE_FALLBACK;
+};
+
+const formatObjectInputValue = (
+  value: PropValue | undefined,
+  displayValue: unknown,
+): string => {
+  if (!value?.enabled) return "";
+  if (
+    displayValue !== undefined &&
+    displayValue !== null &&
+    typeof displayValue === "object" &&
+    !Array.isArray(displayValue)
+  ) {
+    return playgroundObjectToEditableLiteral(displayValue);
+  }
+  return "";
+};
+
+const formatArrayInputValue = (
+  value: PropValue | undefined,
+  displayValue: unknown,
+): string => {
+  if (!value?.enabled) return "";
+  if (Array.isArray(displayValue)) {
+    return JSON.stringify(displayValue, null, 2);
+  }
+  return "";
+};
+
+const BooleanControl: React.FC<ExtendedPropControlProps> = ({
+  name,
+  value,
+  onChange,
+  definition,
+  info,
+}) => {
   const schemaDefault =
     typeof definition.default === "boolean" ? definition.default : undefined;
-  const raw = value?.value;
-  const effectiveBool =
-    typeof raw === "boolean"
-      ? raw
-      : schemaDefault === true || schemaDefault === false
-        ? schemaDefault
-        : false;
-
-  const defaultWhenEnabling =
-    typeof schemaDefault === "boolean" ? schemaDefault : false;
+  const isChecked = getEffectiveBoolean(value, schemaDefault);
 
   return (
-    <Flex flexDirection="column" padding="xs">
+    <PropControlRow info={info} label={<PropControlLabel name={name} />}>
       <Checkbox
-        checked={isEnabled}
+        checked={isChecked}
         onChange={() => {
           onChange(name, {
-            value: isEnabled ? false : defaultWhenEnabling,
-            enabled: !isEnabled,
+            value: !isChecked,
+            enabled: true,
           });
         }}
-        text={formatPropName(name)}
+        text=""
       />
-      {isEnabled && (
-        <Flex flexWrap="wrap" gap="xs" marginLeft="lg">
-          {BOOLEAN_PILLS.map((boolVal) => {
-            const label = String(boolVal);
-            return (
-              <div
-                key={label}
-                onClick={() => {
-                  onChange(name, {
-                    value: boolVal,
-                    enabled: true,
-                  });
-                }}
-                style={{ cursor: "pointer" }}
-              >
-                <Badge
-                  text={label}
-                  variant={effectiveBool === boolVal ? "primary" : "neutral"}
-                />
-              </div>
-            );
-          })}
-        </Flex>
-      )}
-    </Flex>
+    </PropControlRow>
   );
 };
 
-const EnumControl: React.FC<PropControlProps> = ({ name, definition, value, onChange }) => {
-  const isEnabled = value?.enabled ?? false;
-  const schemaDefault =
-    typeof definition.default === "string" ? definition.default : undefined;
-  const currentValue =
-    value?.value ??
-    (schemaDefault && definition.values?.includes(schemaDefault)
-      ? schemaDefault
-      : "");
+const EnumControl: React.FC<ExtendedPropControlProps> = ({
+  name,
+  definition,
+  value,
+  onChange,
+  info,
+}) => {
   const values = definition.values || [];
+  const enumOptions = values.map((val) => ({
+    id: val,
+    label: val,
+    value: val,
+  }));
+  const schemaDefault = resolveSchemaDefault(definition);
+  const schemaDefaultValue =
+    typeof schemaDefault === "string" && values.includes(schemaDefault)
+      ? schemaDefault
+      : undefined;
+  const isExplicitlyCleared =
+    value !== undefined && value.value === "" && !value.enabled;
+  const displayValue = (() => {
+    if (value?.enabled) {
+      return value.value != null && value.value !== ""
+        ? String(value.value)
+        : null;
+    }
+    if (value?.value != null && value.value !== "") {
+      return String(value.value);
+    }
+    if (isExplicitlyCleared) {
+      return null;
+    }
+    return schemaDefaultValue ?? null;
+  })();
+  const activeOption = displayValue
+    ? enumOptions.find((option) => option.value === displayValue)
+    : undefined;
+  const isDropdownFilled = activeOption != null;
+
+  if (values.length === 0) return null;
 
   return (
-    <Flex flexDirection="column" padding="xs">
-      <Checkbox
-        checked={isEnabled}
-        onChange={() => {
-          const first =
-            schemaDefault && values.includes(schemaDefault)
-              ? schemaDefault
-              : values[0] || "";
-          onChange(name, {
-            value: isEnabled ? "" : first,
-            enabled: !isEnabled,
-          });
+    <PropControlRow
+      filled={isDropdownFilled}
+      info={info}
+      label={<PropControlLabel name={name} />}
+    >
+      <Dropdown
+        className={panelDropdownClassName("props-panel", isDropdownFilled)}
+        defaultValue={activeOption}
+        id={`prop-${name}-enum-dropdown`}
+        key={`${value?.enabled}-${String(displayValue ?? "")}`}
+        onSelect={(option: { value: string } | null): null => {
+          if (option?.value) {
+            onChange(name, { value: option.value, enabled: true });
+          } else {
+            onChange(name, propValueOnDropdownClear(definition, values));
+          }
+          return null;
         }}
-        text={name}
+        options={enumOptions}
+        width="100%"
       />
-      {isEnabled && values.length > 0 && (
-        <Flex flexWrap="wrap" gap="xs" marginLeft="lg">
-          {values.map((val) => (
-            <div
-              key={val}
-              onClick={() => onChange(name, { value: val, enabled: true })}
-              style={{ cursor: "pointer" }}
-            >
-              <Badge
-                text={val}
-                variant={currentValue === val ? "primary" : "neutral"}
-              />
-            </div>
-          ))}
-        </Flex>
-      )}
-    </Flex>
+    </PropControlRow>
   );
 };
 
-const StringControl: React.FC<PropControlProps> = ({ name, definition, value, onChange }) => {
-  const isEnabled = value?.enabled ?? false;
-  const currentValue = value?.value ?? "";
+const StringControl: React.FC<ExtendedPropControlProps> = ({
+  name,
+  definition,
+  value,
+  onChange,
+  info,
+}) => {
+  const displayValue = getEffectiveDisplayValue(value, definition, "");
+  const currentValue = String(displayValue ?? "");
 
   return (
-    <Flex flexDirection="column" padding="xs">
-      <Checkbox
-        checked={isEnabled}
-        onChange={() => {
-          onChange(name, {
-            value: isEnabled ? "" : definition.default || "",
-            enabled: !isEnabled,
-          });
+    <PropControlRow
+      filled={isFilledDisplayValue(displayValue)}
+      info={info}
+      label={<PropControlLabel name={name} />}
+    >
+      <TextInput
+        placeholder={`Enter ${name}...`}
+        value={currentValue}
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+          onChange(name, { value: e.target.value, enabled: true });
         }}
-        text={formatPropName(name)}
+        width="100%"
+        marginBottom="none"
       />
-      {isEnabled && (
-        <TextInput
-          marginLeft="lg"
-          placeholder={`Enter ${name}...`}
-          value={currentValue}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-            onChange(name, { value: e.target.value, enabled: true });
-          }}
-        />
-      )}
-    </Flex>
+    </PropControlRow>
   );
 };
 
-const NumberControl: React.FC<PropControlProps> = ({ name, definition, value, onChange }) => {
-  const isEnabled = value?.enabled ?? false;
-  const currentValue = value?.value ?? 0;
+const NumberControl: React.FC<ExtendedPropControlProps> = ({
+  name,
+  definition,
+  value,
+  onChange,
+  info,
+}) => {
+  const displayValue = getEffectiveDisplayValue(value, definition, 0);
+  const currentValue = displayValue ?? 0;
 
   return (
-    <Flex flexDirection="column" padding="xs">
-      <Checkbox
-        checked={isEnabled}
-        onChange={() => {
-          onChange(name, {
-            value: isEnabled ? 0 : definition.default || 0,
-            enabled: !isEnabled,
-          });
+    <PropControlRow
+      filled={isFilledDisplayValue(displayValue)}
+      info={info}
+      label={<PropControlLabel name={name} />}
+    >
+      <TextInput
+        type="number"
+        placeholder={`Enter ${name}...`}
+        value={String(currentValue)}
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+          onChange(name, { value: Number(e.target.value), enabled: true });
         }}
-        text={formatPropName(name)}
+        width="100%"
+        marginBottom="none"
       />
-      {isEnabled && (
-        <TextInput
-          marginLeft="lg"
-          type="number"
-          placeholder={`Enter ${name}...`}
-          value={String(currentValue)}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-            onChange(name, { value: Number(e.target.value), enabled: true });
-          }}
-        />
-      )}
-    </Flex>
+    </PropControlRow>
   );
 };
 
-const FunctionControl: React.FC<PropControlProps> = ({ name, value, onChange }) => {
-  const isEnabled = value?.enabled ?? false;
-  const currentValue = value?.value ?? "";
-
-  const options = FUNCTION_PRESETS.map((preset) => ({
+const FunctionControl: React.FC<ExtendedPropControlProps> = ({
+  name,
+  value,
+  onChange,
+  definition,
+  info,
+}) => {
+  const displayValue = getEffectiveDisplayValue(value, definition, "");
+  const currentValue = String(displayValue ?? "");
+  const functionOptions = FUNCTION_PRESETS.map((preset) => ({
+    id: preset.value || "none",
     label: preset.label,
     value: preset.value,
   }));
+  const activeOption =
+    functionOptions.find(
+      (option) =>
+        FUNCTION_PRESETS.find((preset) => preset.value === option.value)
+          ?.code === currentValue,
+    ) ?? functionOptions[0];
 
   return (
-    <Flex flexDirection="column" padding="xs">
-      <Checkbox
-        checked={isEnabled}
-        onChange={() => {
-          const defaultPreset = FUNCTION_PRESETS[1];
+    <PropControlRow
+      filled={isFilledDisplayValue(currentValue)}
+      info={info}
+      label={<PropControlLabel name={name} />}
+    >
+      <Dropdown
+        className={panelDropdownClassName(
+          "props-panel",
+          isFilledDisplayValue(currentValue),
+        )}
+        clearable={false}
+        defaultValue={activeOption}
+        id={`prop-${name}-function-dropdown`}
+        key={currentValue}
+        onSelect={(option: { value: string } | null): null => {
+          const preset = FUNCTION_PRESETS.find(
+            (p) => p.value === option?.value,
+          );
           onChange(name, {
-            value: isEnabled ? "" : defaultPreset.code,
-            enabled: !isEnabled,
+            value: preset?.code ?? currentValue,
+            enabled: true,
           });
+          return null;
         }}
-        text={formatPropName(name)}
+        options={functionOptions}
+        width="100%"
       />
-      {isEnabled && (
-        <Select
-          marginLeft="lg"
-          options={options}
-          value={FUNCTION_PRESETS.find((p) => p.code === currentValue)?.value || "custom"}
-          onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
-            const preset = FUNCTION_PRESETS.find((p) => p.value === e.target.value);
-            onChange(name, {
-              value: preset?.code || currentValue,
-              enabled: true,
-            });
-          }}
-        />
-      )}
-    </Flex>
+    </PropControlRow>
   );
 };
 
-const ReactNodeControl: React.FC<PropControlProps> = ({ name, value, onChange }) => {
-  const isEnabled = value?.enabled ?? false;
-  const currentValue = value?.value ?? "";
+const ReactNodeControl: React.FC<ExtendedPropControlProps> = ({
+  name,
+  value,
+  onChange,
+  definition,
+  info,
+}) => {
+  const displayValue = getEffectiveDisplayValue(value, definition, "");
+  const currentValue = String(displayValue ?? "");
 
   return (
-    <Flex flexDirection="column" padding="xs">
-      <Checkbox
-        checked={isEnabled}
-        onChange={() => {
-          onChange(name, {
-            value: isEnabled ? "" : "Content",
-            enabled: !isEnabled,
-          });
+    <PropControlRow
+      filled={isFilledDisplayValue(displayValue)}
+      info={info}
+      label={<PropControlLabel name={name} />}
+    >
+      <TextInput
+        placeholder={`Enter content for ${name}...`}
+        value={currentValue}
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+          onChange(name, { value: e.target.value, enabled: true });
         }}
-        text={formatPropName(name)}
+        width="100%"
+        marginBottom="none"
       />
-      {isEnabled && (
-        <TextInput
-          marginLeft="lg"
-          placeholder={`Enter content for ${name}...`}
-          value={currentValue}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-            onChange(name, { value: e.target.value, enabled: true });
-          }}
-        />
-      )}
-    </Flex>
+    </PropControlRow>
   );
 };
 
-// Control for props that accept string | string[] (like icon)
-const StringOrArrayControl: React.FC<PropControlProps> = ({ name, value, onChange }) => {
-  const isEnabled = value?.enabled ?? false;
-  const currentValue = value?.value ?? "";
-  const isArray = Array.isArray(currentValue);
-  
+const StringOrArrayControl: React.FC<ExtendedPropControlProps> = ({
+  name,
+  value,
+  onChange,
+  definition,
+  info,
+}) => {
+  const displayValue = getEffectiveDisplayValue(value, definition, "plus");
+  const isArray = Array.isArray(displayValue);
+
   const [inputValue, setInputValue] = useState(() => {
-    if (isArray) return currentValue.join(", ");
-    return currentValue;
+    if (isArray) return displayValue.join(", ");
+    return String(displayValue);
   });
+
+  useEffect(() => {
+    if (isArray) {
+      setInputValue(displayValue.join(", "));
+    } else {
+      setInputValue(String(displayValue));
+    }
+  }, [displayValue, isArray]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const text = e.target.value;
     setInputValue(text);
-    
+
     // If contains comma, treat as array
     if (text.includes(",")) {
-      const arr = text.split(",").map(s => s.trim()).filter(s => s);
+      const arr = text
+        .split(",")
+        .map((s) => s.trim())
+        .filter((s) => s);
       onChange(name, { value: arr, enabled: true });
     } else {
       onChange(name, { value: text, enabled: true });
@@ -353,162 +649,174 @@ const StringOrArrayControl: React.FC<PropControlProps> = ({ name, value, onChang
   };
 
   return (
-    <Flex flexDirection="column" padding="xs">
-      <Checkbox
-        checked={isEnabled}
-        onChange={() => {
-          onChange(name, {
-            value: isEnabled ? "" : "plus",
-            enabled: !isEnabled,
-          });
-        }}
-        text={formatPropName(name)}
+    <PropControlRow
+      filled={isFilledDisplayValue(displayValue)}
+      info={mergeInfoText(STRING_OR_ARRAY_INFO, info)}
+      label={<PropControlLabel name={name} />}
+    >
+      <TextInput
+        value={inputValue}
+        onChange={handleInputChange}
+        width="100%"
+        marginBottom="none"
       />
-      {isEnabled && (
-        <Flex flexDirection="column" marginLeft="lg">
-          <TextInput
-            value={inputValue}
-            onChange={handleInputChange}
-          />
-          <Caption text="Comma-separated for array (e.g., plus, times)" color="light" marginTop="xs" />
-        </Flex>
-      )}
-    </Flex>
+    </PropControlRow>
   );
 };
 
-const ObjectControl: React.FC<PropControlProps> = ({ name, value, onChange }) => {
-  const isEnabled = value?.enabled ?? false;
-  const [inputValue, setInputValue] = useState(
-    value?.value ? playgroundObjectToEditableLiteral(value.value) : "{}"
+const ObjectControl: React.FC<ExtendedPropControlProps> = ({
+  name,
+  value,
+  onChange,
+  definition,
+  info,
+  playgroundConfig,
+}) => {
+  const displayValue = getEffectiveDisplayValue(value, definition, {});
+  const exampleFormat = useMemo(
+    () =>
+      formatObjectExampleFormat(name, definition, value, playgroundConfig),
+    [name, definition, value, playgroundConfig],
+  );
+  const [inputValue, setInputValue] = useState(() =>
+    formatObjectInputValue(value, value?.enabled ? value.value : undefined),
   );
 
-  const objectSyncKey = useMemo(() => objectSyncFingerprint(value), [value]);
+  const objectSyncKey = useMemo(
+    () =>
+      objectSyncFingerprint({
+        value: value?.enabled ? value.value : undefined,
+        enabled: value?.enabled ?? false,
+      }),
+    [value?.enabled, value?.value],
+  );
 
   useEffect(() => {
-    const v = value?.value;
-    if (v !== undefined && v !== null && typeof v === "object" && !Array.isArray(v)) {
-      setInputValue(playgroundObjectToEditableLiteral(v));
+    if (!value?.enabled) {
+      setInputValue("");
+      return;
     }
-  }, [objectSyncKey]);
+
+    const activeValue = value.value ?? displayValue;
+    if (
+      activeValue !== undefined &&
+      activeValue !== null &&
+      typeof activeValue === "object" &&
+      !Array.isArray(activeValue)
+    ) {
+      setInputValue(playgroundObjectToEditableLiteral(activeValue));
+    }
+  }, [objectSyncKey, value?.enabled, value?.value, displayValue]);
 
   return (
-    <Flex flexDirection="column" paddingY="xs" width="100%">
-      <Checkbox
-        checked={isEnabled}
-        onChange={() => {
-          onChange(name, {
-            value: objectSeedFromPropValue(value),
-            enabled: !isEnabled,
-          });
+    <PropControlRow
+      alignItems="start"
+      filled={Boolean(value?.enabled && isFilledDisplayValue(value.value))}
+      info={mergeInfoText(OBJECT_INFO, info)}
+      label={<PropControlLabel name={name} />}
+    >
+      <PropsPanelTextarea
+        dialogTitle={formatPropName(name)}
+        exampleFormat={exampleFormat}
+        exampleLanguage="jsx"
+        placeholder="{}"
+        value={inputValue}
+        onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
+          const text = e.target.value;
+          setInputValue(text);
+
+          if (!text.trim()) {
+            onChange(name, { value: {}, enabled: false });
+            return;
+          }
+
+          const parsed = tryParseObjectLiteralInput(text);
+          if (parsed !== null) {
+            onChange(name, { value: parsed, enabled: true });
+          }
         }}
-        text={formatPropName(name)}
       />
-      {isEnabled && (
-        <Flex flexDirection="column" marginLeft="lg" width="100%">
-          <Caption
-            color="light"
-            marginBottom="xs"
-            text='JSON or object literal, e.g. {"default": true} or { default: true }'
-          />
-          <textarea
-            placeholder="{}"
-            value={inputValue}
-            onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
-              const text = e.target.value;
-              setInputValue(text);
-              const parsed = tryParseObjectLiteralInput(text);
-              if (parsed !== null) {
-                onChange(name, { value: parsed, enabled: true });
-              }
-            }}
-            style={{
-              width: "100%",
-              minHeight: "100px",
-              fontFamily: "monospace",
-              fontSize: "12px",
-              padding: "8px",
-              border: "1px solid #ddd",
-              borderRadius: "4px",
-              resize: "vertical",
-            }}
-          />
-        </Flex>
-      )}
-    </Flex>
+    </PropControlRow>
   );
 };
 
-const ArrayControl: React.FC<PropControlProps> = ({ name, value, onChange }) => {
-  const isEnabled = value?.enabled ?? false;
-  const [inputValue, setInputValue] = useState(
-    value?.value ? JSON.stringify(value.value, null, 2) : "[]"
+const ArrayControl: React.FC<ExtendedPropControlProps> = ({
+  name,
+  value,
+  onChange,
+  definition,
+  info,
+  playgroundConfig,
+}) => {
+  const displayValue = getEffectiveDisplayValue(value, definition, []);
+  const exampleFormat = useMemo(
+    () =>
+      formatArrayExampleFormat(name, definition, value, playgroundConfig),
+    [name, definition, value, playgroundConfig],
+  );
+  const [inputValue, setInputValue] = useState(() =>
+    formatArrayInputValue(value, value?.enabled ? value.value : undefined),
   );
 
-  const arraySyncKey = useMemo(() => {
-    const v = value?.value;
-    return Array.isArray(v) ? JSON.stringify(v) : "";
-  }, [value?.value]);
+  const arraySyncKey = useMemo(
+    () =>
+      value?.enabled && Array.isArray(value.value)
+        ? JSON.stringify(value.value)
+        : "",
+    [value?.enabled, value?.value],
+  );
 
   useEffect(() => {
-    if (!isEnabled) return;
-    const v = value?.value;
-    if (Array.isArray(v)) {
-      setInputValue(JSON.stringify(v, null, 2));
+    if (!value?.enabled) {
+      setInputValue("");
+      return;
     }
-  }, [isEnabled, arraySyncKey]);
+
+    const activeValue = value.value ?? displayValue;
+    if (Array.isArray(activeValue)) {
+      setInputValue(JSON.stringify(activeValue, null, 2));
+    }
+  }, [arraySyncKey, value?.enabled, value?.value, displayValue]);
 
   return (
-    <Flex flexDirection="column" paddingY="xs" width="100%">
-      <Checkbox
-        checked={isEnabled}
-        onChange={() => {
-          const seed = value?.value;
-          onChange(name, {
-            value: Array.isArray(seed) ? seed : [],
-            enabled: !isEnabled,
-          });
+    <PropControlRow
+      alignItems="start"
+      filled={Boolean(value?.enabled && isFilledDisplayValue(value.value))}
+      info={mergeInfoText(ARRAY_INFO, info)}
+      label={<PropControlLabel name={name} />}
+    >
+      <PropsPanelTextarea
+        dialogTitle={formatPropName(name)}
+        exampleFormat={exampleFormat}
+        placeholder="[]"
+        value={inputValue}
+        onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
+          const text = e.target.value;
+          setInputValue(text);
+
+          if (!text.trim()) {
+            onChange(name, { value: [], enabled: false });
+            return;
+          }
+
+          const parsed = tryParseArrayLiteralInput(text);
+          if (parsed !== null) {
+            onChange(name, { value: parsed, enabled: true });
+          }
         }}
-        text={formatPropName(name)}
       />
-      {isEnabled && (
-        <Flex flexDirection="column" marginLeft="lg" width="100%">
-          <Caption
-            color="light"
-            marginBottom="xs"
-            text='JSON or JS array literal'
-          />
-          <textarea
-            placeholder="[]"
-            value={inputValue}
-            onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
-              const text = e.target.value;
-              setInputValue(text);
-              const parsed = tryParseArrayLiteralInput(text);
-              if (parsed !== null) {
-                onChange(name, { value: parsed, enabled: true });
-              }
-            }}
-            style={{
-              width: "100%",
-              minHeight: "120px",
-              fontFamily: "monospace",
-              fontSize: "12px",
-              padding: "8px",
-              border: "1px solid #ddd",
-              borderRadius: "4px",
-              resize: "vertical",
-            }}
-          />
-        </Flex>
-      )}
-    </Flex>
+    </PropControlRow>
   );
 };
 
-const RequiredArrayControl: React.FC<PropControlProps> = ({ name, value, onChange }) => {
+const RequiredArrayControl: React.FC<ExtendedPropControlProps> = ({
+  name,
+  value,
+  onChange,
+  info,
+}) => {
   const [inputValue, setInputValue] = useState(
-    value?.value ? JSON.stringify(value.value, null, 2) : "[]"
+    value?.value ? JSON.stringify(value.value, null, 2) : "[]",
   );
 
   const arraySyncKey = useMemo(() => {
@@ -526,94 +834,74 @@ const RequiredArrayControl: React.FC<PropControlProps> = ({ name, value, onChang
   }, [arraySyncKey]);
 
   return (
-    <Flex flexDirection="column" paddingY="xs" width="100%">
-      <Flex align="center" gap="xs" marginBottom="xs">
-        <Body text={name} />
-        <Badge text="Required" variant="primary" />
-      </Flex>
-      <Flex flexDirection="column" width="100%">
-        <Caption
-          marginBottom="xs"
-          color="light"
-          text='JSON or JS array literal.'
-        />
-        <textarea
-          placeholder="[]"
-          value={inputValue}
-          onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
-            const text = e.target.value;
-            setInputValue(text);
-            const parsed = tryParseArrayLiteralInput(text);
-            if (parsed !== null) {
-              onChange(name, { value: parsed, enabled: true });
-            }
-          }}
-          style={{
-            width: "100%",
-            minHeight: "120px",
-            fontFamily: "monospace",
-            fontSize: "12px",
-            padding: "8px",
-            border: "1px solid #ddd",
-            borderRadius: "4px",
-            resize: "vertical",
-          }}
-        />
-      </Flex>
-    </Flex>
+    <PropControlRow
+      alignItems="start"
+      filled={isFilledDisplayValue(value?.value ?? [])}
+      info={mergeInfoText(REQUIRED_ARRAY_INFO, info)}
+      label={<PropControlLabel name={name} required />}
+    >
+      <PropsPanelTextarea
+        dialogTitle={formatPropName(name)}
+        placeholder="[]"
+        value={inputValue}
+        onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
+          const text = e.target.value;
+          setInputValue(text);
+          const parsed = tryParseArrayLiteralInput(text);
+          if (parsed !== null) {
+            onChange(name, { value: parsed, enabled: true });
+          }
+        }}
+      />
+    </PropControlRow>
   );
 };
 
-const RequiredObjectControl: React.FC<PropControlProps> = ({ name, value, onChange }) => {
+const RequiredObjectControl: React.FC<ExtendedPropControlProps> = ({
+  name,
+  value,
+  onChange,
+  info,
+}) => {
   const [inputValue, setInputValue] = useState(
-    value?.value ? playgroundObjectToEditableLiteral(value.value) : "{}"
+    value?.value ? playgroundObjectToEditableLiteral(value.value) : "{}",
   );
 
   const objectSyncKey = useMemo(() => objectSyncFingerprint(value), [value]);
 
   useEffect(() => {
     const v = value?.value;
-    if (v !== undefined && v !== null && typeof v === "object" && !Array.isArray(v)) {
+    if (
+      v !== undefined &&
+      v !== null &&
+      typeof v === "object" &&
+      !Array.isArray(v)
+    ) {
       setInputValue(playgroundObjectToEditableLiteral(v));
     }
   }, [objectSyncKey]);
 
   return (
-    <Flex flexDirection="column" paddingY="xs">
-      <Flex align="center" gap="xs" marginBottom="xs">
-        <Body text={name} />
-        <Badge text="Required" variant="primary" />
-      </Flex>
-      <Flex flexDirection="column">
-        <Caption
-          color="light"
-          marginBottom="xs"
-          text='Object: JSON or JS literal, e.g. {"default": true} or { default: true }'
-        />
-        <textarea
-          placeholder="{}"
-          value={inputValue}
-          onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
-            const text = e.target.value;
-            setInputValue(text);
-            const parsed = tryParseObjectLiteralInput(text);
-            if (parsed !== null) {
-              onChange(name, { value: parsed, enabled: true });
-            }
-          }}
-          style={{
-            width: "100%",
-            minHeight: "120px",
-            fontFamily: "monospace",
-            fontSize: "12px",
-            padding: "8px",
-            border: "1px solid #ddd",
-            borderRadius: "4px",
-            resize: "vertical",
-          }}
-        />
-      </Flex>
-    </Flex>
+    <PropControlRow
+      alignItems="start"
+      filled={isFilledDisplayValue(value?.value ?? {})}
+      info={mergeInfoText(REQUIRED_OBJECT_INFO, info)}
+      label={<PropControlLabel name={name} required />}
+    >
+      <PropsPanelTextarea
+        dialogTitle={formatPropName(name)}
+        placeholder="{}"
+        value={inputValue}
+        onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
+          const text = e.target.value;
+          setInputValue(text);
+          const parsed = tryParseObjectLiteralInput(text);
+          if (parsed !== null) {
+            onChange(name, { value: parsed, enabled: true });
+          }
+        }}
+      />
+    </PropControlRow>
   );
 };
 
@@ -621,7 +909,10 @@ const normalizeType = (type: string): string => {
   return type.toLowerCase().replace(/;/g, "").trim();
 };
 
-const getControlForType = (props: PropControlProps, isRequired?: boolean) => {
+const getControlForType = (
+  props: ExtendedPropControlProps,
+  isRequired?: boolean,
+) => {
   const { definition } = props;
   const rawType = definition.type || "";
   /** Lowercase so `GenericObject` matches object controls (schema uses PascalCase). */
@@ -630,7 +921,11 @@ const getControlForType = (props: PropControlProps, isRequired?: boolean) => {
   // For required props, use special controls that don't allow toggling off
   if (isRequired) {
     // Array check for required props
-    if (propType === "array" || propType.endsWith("[]") || propType.startsWith("array")) {
+    if (
+      propType === "array" ||
+      propType.endsWith("[]") ||
+      propType.startsWith("array")
+    ) {
       return <RequiredArrayControl {...props} />;
     }
     // Default to required object control for complex types
@@ -655,22 +950,37 @@ const getControlForType = (props: PropControlProps, isRequired?: boolean) => {
   }
 
   // String or array check (for props that accept string | string[])
-  if (propType.includes("string[]") || (propType.includes("string |") && propType.includes("[]"))) {
+  if (
+    propType.includes("string[]") ||
+    (propType.includes("string |") && propType.includes("[]"))
+  ) {
     return <StringOrArrayControl {...props} />;
   }
 
   // Function check
-  if (propType === "function" || propType.includes("=>") || propType.includes("function")) {
+  if (
+    propType === "function" ||
+    propType.includes("=>") ||
+    propType.includes("function")
+  ) {
     return <FunctionControl {...props} />;
   }
 
   // ReactNode check (schema may use "ReactNode")
-  if (propType.includes("reactnode") || propType.includes("node") || propType.includes("element")) {
+  if (
+    propType.includes("reactnode") ||
+    propType.includes("node") ||
+    propType.includes("element")
+  ) {
     return <ReactNodeControl {...props} />;
   }
 
   // Array check (for props like columnDefinitions, tableData)
-  if (propType === "array" || propType.endsWith("[]") || propType.startsWith("array")) {
+  if (
+    propType === "array" ||
+    propType.endsWith("[]") ||
+    propType.startsWith("array")
+  ) {
     return <ArrayControl {...props} />;
   }
 
@@ -690,9 +1000,9 @@ const getControlForType = (props: PropControlProps, isRequired?: boolean) => {
 
 const PropControl: React.FC<ExtendedPropControlProps> = (props) => {
   const { disabled, disabledReason, isRequired } = props;
-  
+
   const control = getControlForType(props, isRequired);
-  
+
   if (disabled) {
     return (
       <Tooltip
@@ -700,14 +1010,26 @@ const PropControl: React.FC<ExtendedPropControlProps> = (props) => {
         text={disabledReason || "This prop is not available"}
         zIndex={10}
       >
-        <div style={{ opacity: 0.5, pointerEvents: "none" }}>
+        <Flex className="props-panel-control--disabled" width="100%">
           {control}
-        </div>
+        </Flex>
       </Tooltip>
     );
   }
-  
+
   return control;
 };
+
+export const PropControlField: React.FC<PropControlFieldProps> = ({
+  syncHint,
+  playgroundConfig,
+  ...propControlProps
+}) => (
+  <PropControl
+    {...propControlProps}
+    info={syncHint}
+    playgroundConfig={playgroundConfig}
+  />
+);
 
 export default PropControl;

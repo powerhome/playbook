@@ -21,6 +21,76 @@ export function resolveSchemaDefault(def?: PropDefinition): unknown {
   return def.default;
 }
 
+/** Example value for object/array prop dialogs — prefers playground config defaults over schema. */
+export function getPlaygroundPropExampleValue(
+  name: string,
+  definition: PropDefinition,
+  displayPropValue: PropValue | undefined,
+  playgroundConfig?: PlaygroundConfig | null,
+): unknown {
+  if (playgroundConfig?.defaults?.[name] !== undefined) {
+    return playgroundConfig.defaults[name];
+  }
+
+  if (
+    displayPropValue?.value !== undefined &&
+    displayPropValue.value !== null &&
+    displayPropValue.value !== ""
+  ) {
+    const v = displayPropValue.value;
+    if (typeof v === "object") {
+      if (Array.isArray(v) && v.length > 0) return v;
+      if (
+        !Array.isArray(v) &&
+        Object.keys(v as Record<string, unknown>).length > 0
+      ) {
+        return v;
+      }
+    } else {
+      return v;
+    }
+  }
+
+  return resolveSchemaDefault(definition);
+}
+
+export type ResolvedPropGroup = {
+  name: string;
+  props: Array<[string, PropDefinition]>;
+};
+
+/** Group prop definitions by named sections; unassigned props land in `otherGroupName`. */
+export function groupPropDefinitions(
+  propDefinitions: Record<string, PropDefinition>,
+  groups: Array<{ name: string; props: string[] }>,
+  otherGroupName = "Other",
+): ResolvedPropGroup[] {
+  const result: ResolvedPropGroup[] = [];
+  const assignedProps = new Set<string>();
+
+  groups.forEach((group) => {
+    const groupProps: Array<[string, PropDefinition]> = [];
+    group.props.forEach((propName) => {
+      if (propDefinitions[propName]) {
+        groupProps.push([propName, propDefinitions[propName]]);
+        assignedProps.add(propName);
+      }
+    });
+    if (groupProps.length > 0) {
+      result.push({ name: group.name, props: groupProps });
+    }
+  });
+
+  const otherProps = Object.entries(propDefinitions).filter(
+    ([name]) => !assignedProps.has(name),
+  );
+  if (otherProps.length > 0) {
+    result.push({ name: otherGroupName, props: otherProps });
+  }
+
+  return result;
+}
+
 /**
  * Fill missing optional props with `{ value: default, enabled: false }` from
  * `playgroundConfig.defaults` and schema `default`, so controls can reflect
@@ -144,6 +214,89 @@ export const getPropSyncContextHint = (
   }
   if (parts.length === 0) return null;
   return `To use ${propName}, enable: ${parts.join(" · ")}`;
+};
+
+export type PropDisabledState = Record<
+  string,
+  { disabled: boolean; reason: string }
+>;
+
+export function buildPropDisabledState({
+  allPropDefinitions,
+  playgroundConfig,
+  propValues,
+  structureMode,
+}: {
+  allPropDefinitions: Record<string, PropDefinition>;
+  playgroundConfig: PlaygroundConfig | null | undefined;
+  propValues: Record<string, PropValue>;
+  structureMode: string | null | undefined;
+}): PropDisabledState {
+  const state: PropDisabledState = {};
+  const conditionals = playgroundConfig?.conditionals ?? {};
+
+  Object.entries(conditionals).forEach(([propName, condition]) => {
+    if (
+      condition.structureMode != null &&
+      structureMode !== condition.structureMode
+    ) {
+      const modeLabel =
+        playgroundConfig?.structureModes?.modes?.[condition.structureMode]
+          ?.label ?? condition.structureMode;
+      state[propName] = {
+        disabled: true,
+        reason: `Switch structure mode to "${modeLabel}" to use this prop.`,
+      };
+      return;
+    }
+
+    const conditionCtx = {
+      playgroundConfig,
+      propDefinitions: allPropDefinitions,
+    };
+    const requiresMet = checkCondition(
+      condition.requires,
+      propValues,
+      conditionCtx,
+    );
+    const showWhenMet = checkCondition(
+      condition.showWhen,
+      propValues,
+      conditionCtx,
+    );
+
+    if (!requiresMet || !showWhenMet) {
+      let reason = "This prop is not available in the current configuration";
+
+      if (condition.requires) {
+        if (typeof condition.requires === "string") {
+          reason = `Requires "${condition.requires}" to be set`;
+        } else if (typeof condition.requires === "object") {
+          const conditions = Object.entries(condition.requires)
+            .map(([key, value]) => `${key}="${value}"`)
+            .join(" and ");
+          reason = `Requires ${conditions}`;
+        }
+      }
+
+      state[propName] = { disabled: true, reason };
+    }
+  });
+
+  return state;
+}
+
+export function buildPropSyncHints(
+  playgroundConfig: PlaygroundConfig | null | undefined,
+): Record<string, string> {
+  if (!playgroundConfig?.propSyncOnEnable) return {};
+
+  const hints: Record<string, string> = {};
+  Object.keys(playgroundConfig.propSyncOnEnable).forEach((name) => {
+    const hint = getPropSyncContextHint(name, playgroundConfig);
+    if (hint) hints[name] = hint;
+  });
+  return hints;
 };
 
 export const prepareExampleCode = (source: string): string => {

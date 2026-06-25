@@ -17,15 +17,17 @@ import {
   needsChildren,
 } from "../CodeGenerator";
 import {
-  prepareExampleCode,
-  checkCondition,
-  checkHintCondition,
   buildPlaygroundPropValues,
+  buildPropDisabledState,
+  buildPropSyncHints,
+  checkHintCondition,
   mergeImplicitDefaultPropValues,
   getResolvedColumnAndTableData,
+  prepareExampleCode,
   shouldApplyPropSyncOnEnable,
+  groupPropDefinitions,
 } from "../utils";
-import { EXCLUDED_PROPS } from "../constants";
+import { EXCLUDED_PROPS, GLOBAL_PROP_GROUPS } from "../constants";
 
 interface Example {
   example_key: string;
@@ -349,67 +351,26 @@ export const usePlaygroundState = ({
   );
 
   // Computed state
-  const propDisabledState = useMemo(() => {
-    const state: Record<string, { disabled: boolean; reason: string }> = {};
-    const conditionals = playgroundConfig?.conditionals ?? {};
-
-    Object.entries(conditionals).forEach(([propName, condition]) => {
-      if (
-        condition.structureMode != null &&
-        activeStructureMode !== condition.structureMode
-      ) {
-        const modeLabel =
-          playgroundConfig?.structureModes?.modes[condition.structureMode!]
-            ?.label ?? condition.structureMode;
-        state[propName] = {
-          disabled: true,
-          reason: `Switch structure mode to "${modeLabel}" to use this prop.`,
-        };
-        return;
-      }
-
-      const conditionCtx = {
+  const propDisabledState = useMemo(
+    () =>
+      buildPropDisabledState({
+        allPropDefinitions,
         playgroundConfig,
-        propDefinitions: allPropDefinitions,
-      };
-      const requiresMet = checkCondition(
-        condition.requires,
         propValues,
-        conditionCtx
-      );
-      const showWhenMet = checkCondition(
-        condition.showWhen,
-        propValues,
-        conditionCtx
-      );
+        structureMode: activeStructureMode,
+      }),
+    [
+      playgroundConfig,
+      propValues,
+      activeStructureMode,
+      allPropDefinitions,
+    ],
+  );
 
-      if (!requiresMet || !showWhenMet) {
-        let reason = "This prop is not available in the current configuration";
-
-        if (condition.requires) {
-          if (typeof condition.requires === "string") {
-            reason = `Requires "${condition.requires}" to be set`;
-          } else if (typeof condition.requires === "object") {
-            const conditions = Object.entries(condition.requires)
-              .map(([k, v]) => `${k}="${v}"`)
-              .join(" and ");
-            reason = `Requires ${conditions}`;
-          }
-        }
-
-        state[propName] = { disabled: true, reason };
-      }
-    });
-
-    return state;
-  }, [
-    playgroundConfig?.conditionals,
-    playgroundConfig?.structureModes?.modes,
-    propValues,
-    activeStructureMode,
-    playgroundConfig,
-    allPropDefinitions,
-  ]);
+  const propSyncHints = useMemo(
+    () => buildPropSyncHints(playgroundConfig),
+    [playgroundConfig],
+  );
 
   // Props that fail conditionals must not appear in generated code (or live preview)
   const propValuesForCodegen = useMemo(() => {
@@ -421,6 +382,16 @@ export const usePlaygroundState = ({
     });
     return out;
   }, [propValues, propDisabledState]);
+
+  const displayPropValues = useMemo(
+    () =>
+      mergeImplicitDefaultPropValues(
+        propValues,
+        playgroundConfig,
+        allPropDefinitions,
+      ),
+    [propValues, playgroundConfig, allPropDefinitions],
+  );
 
   const activeHints = useMemo(() => {
     const hints: Array<PlaygroundHint & { id: string }> = [];
@@ -489,30 +460,13 @@ export const usePlaygroundState = ({
     if (!groups || groups.length === 0) {
       return [{ name: "", props: Object.entries(playgroundProps) }];
     }
-
-    const result: Array<{ name: string; props: Array<[string, PropDefinition]> }> = [];
-    const assignedProps = new Set<string>();
-
-    groups.forEach((group) => {
-      const groupProps: Array<[string, PropDefinition]> = [];
-      group.props.forEach((propName) => {
-        if (playgroundProps[propName]) {
-          groupProps.push([propName, playgroundProps[propName]]);
-          assignedProps.add(propName);
-        }
-      });
-      if (groupProps.length > 0) {
-        result.push({ name: group.name, props: groupProps });
-      }
-    });
-
-    const otherProps = Object.entries(playgroundProps).filter(([name]) => !assignedProps.has(name));
-    if (otherProps.length > 0) {
-      result.push({ name: "Other", props: otherProps });
-    }
-
-    return result;
+    return groupPropDefinitions(playgroundProps, groups);
   }, [playgroundProps, playgroundConfig?.groups]);
+
+  const groupedGlobalProps = useMemo(
+    () => groupPropDefinitions(globalProps, GLOBAL_PROP_GROUPS),
+    [globalProps],
+  );
 
   // Resolve template and propTargets - structure mode takes precedence
   const activeTemplate = currentStructureMode?.template ?? playgroundConfig?.template;
@@ -683,6 +637,7 @@ export const usePlaygroundState = ({
 
   return {
     propValues,
+    displayPropValues,
     children,
     activePresetIndex,
     activeStructureMode,
@@ -690,9 +645,11 @@ export const usePlaygroundState = ({
 
     reactProps: playgroundProps,
     globalProps,
+    groupedGlobalProps,
     allPropDefinitions,
     groupedProps,
     propDisabledState,
+    propSyncHints,
     activeHints,
     hasModifiedProps,
     hasTemplate: hasActiveTemplate,
