@@ -469,15 +469,6 @@
     padding: 2px;
   }
 
-  // Keep control icons visually consistent across host apps,
-  // even when global svg defaults differ.
-  .toggle-all-icon .pb_custom_icon,
-  .expand-toggle-icon .pb_custom_icon,
-  .sort-button-icon .pb_custom_icon,
-  .fullscreen-icon .pb_custom_icon {
-    font-size: 1.25em;
-  }
-
   .header-sort-secondary-columns {
     color: $primary !important;
 
@@ -505,6 +496,12 @@
     width: 18px;
     height: 18px;
     border-radius: 50%;
+
+    // Stabilise circle-play icon size across consumer apps
+    // (previously relied on invalid width/height="auto" attrs)
+    .pb_custom_icon {
+      font-size: 13.328px;
+    }
   }
 
   .header-sort-button {
