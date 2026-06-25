@@ -47,6 +47,15 @@ interface GenerateFromTemplateOptions {
   requiredProps?: Record<string, any>;
 }
 
+function templateUsesRequiredPropVariable(
+  template: string,
+  wrapper: string | undefined,
+  name: string
+): boolean {
+  const source = `${template}\n${wrapper ?? ""}`;
+  return new RegExp(`\\b${name.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}\\b`).test(source);
+}
+
 /** Unquoted key when valid JS identifier; otherwise JSON-stringify the key. */
 function formatJsObjectKey(key: string): string {
   return /^[a-zA-Z_$][a-zA-Z0-9_$]*$/.test(key) ? key : JSON.stringify(key);
@@ -391,12 +400,18 @@ export const generateFromTemplate = ({
 }: GenerateFromTemplateOptions): string => {
   // Group enabled props by their target marker
   const propsByTarget: Record<string, string[]> = {};
+  const requiredPropVariableNames = new Set(
+    Object.keys(requiredProps).filter((name) =>
+      templateUsesRequiredPropVariable(template, wrapper, name)
+    )
+  );
   
   Object.entries(propValues).forEach(([name, propValue]) => {
     if (!propValue.enabled) return;
     
-    // Skip required props - they're handled separately as variable definitions
-    if (requiredProps[name] !== undefined) return;
+    // Skip required props only when the template already references them as variables.
+    // Otherwise they should be emitted as ordinary JSX props in the copyable snippet.
+    if (requiredPropVariableNames.has(name)) return;
     
     // Skip only when value matches kit schema default (not playground-only defaults)
     if (shouldSkipEmitWhenMatchesSchemaDefault(propDefinitions, name, propValue)) return;
@@ -460,8 +475,9 @@ export const generateFromTemplate = ({
   
   // Generate variable definitions for required props
   let variableDefinitions = "";
-  if (Object.keys(requiredProps).length > 0) {
+  if (requiredPropVariableNames.size > 0) {
     Object.entries(requiredProps).forEach(([name, defaultValue]) => {
+      if (!requiredPropVariableNames.has(name)) return;
       // Use current value from propValues if available
       const currentValue = propValues[name]?.value ?? defaultValue;
       variableDefinitions += `const ${name} = ${JSON.stringify(currentValue, null, 2)};\n\n`;

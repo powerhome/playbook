@@ -191,6 +191,8 @@ export interface PlaygroundConfig {
   /** When a control is enabled, co-select sample data and/or structure mode (see Advanced Table). */
   propSyncOnEnable?: PropSyncOnEnable;
   requiredProps?: Record<string, any>;
+  /** Default/state props that must be emitted in copied code, but do not need template variables. */
+  requiredCodeProps?: string[];
   /** Kit prop names to omit from the playground props panel (still in kit.schema.json). */
   hiddenProps?: string[];
   externalImports?: string[];

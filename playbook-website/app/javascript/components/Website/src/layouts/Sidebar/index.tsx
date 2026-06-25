@@ -4,6 +4,7 @@ import FlyingGhosts from "./FlyingGhosts";
 
 const Sidebar = ({
   dark,
+  collapsed = false,
   type,
   category,
   kit,
@@ -61,6 +62,7 @@ const Sidebar = ({
       <Nav dark={dark} variant="bold" paddingTop="md">
         <TopLevelNavItem
           dark={dark}
+          sidebarCollapsed={collapsed}
           type={type}
           kits={kits}
           kit={kit}

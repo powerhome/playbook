@@ -364,6 +364,34 @@
     }
   }
 
+  &.advanced-table-sticky-header {
+    .row-selection-actions-card.show-action-card,
+    .row-selection-actions-card.is-visible {
+      background-color: $white;
+      left: 0;
+      position: sticky;
+      top: 0;
+      z-index: 5;
+    }
+
+    .pb_table.sticky-header {
+      thead,
+      .pb_advanced_table_header {
+        top: var(--advanced-table-action-bar-height, 0px);
+        z-index: 3;
+      }
+    }
+
+    &.hidden-action-bar {
+      .pb_table.sticky-header {
+        thead,
+        .pb_advanced_table_header {
+          top: 0;
+        }
+      }
+    }
+  }
+
   // Max height overflow - the below prevents expansion from overflowing container at full screen for responsive and nonresponsive tables
   &.advanced-table-max-height-xs {
     max-height: 320px;
@@ -399,55 +427,6 @@
     max-height: 1920px;
     overflow-y: auto;
     @include scrollbar-styling;
-  }
-
-  // Fullscreen
-  &.advanced-table-allow-fullscreen {
-    transition: all 0.3s ease;
-  }
-
-  &.advanced-table-fullscreen {
-    background-color: $bg_light;
-    box-sizing: border-box;
-    height: 100vh;
-    left: 0;
-    overflow: auto;
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: $z_10;
-
-    .pb_table {
-      th,
-      td,
-      div,
-      button {
-        font-size: calc(100%);
-      }
-      box-sizing: border-box;
-      margin: $space_lg;
-      max-width: calc(100% - 64px);
-      width: calc(100% - 64px);
-    }
-
-    .pb_table.sticky-header {
-      thead,
-      .pb_advanced_table_header {
-        position: sticky !important;
-        top: 44px !important;
-        z-index: $z_10;
-      }
-    }
-  }
-
-  .advanced-table-fullscreen-header {
-    background-color: $white;
-    height: 44px;
-    padding: 13px 20px;
-    position: sticky;
-    top: 0;
-    width: 100%;
-    z-index: $z_10;
   }
 
   // Icons
@@ -504,16 +483,6 @@
 
     &:focus-visible {
       border-radius: $border_rad_heavier;
-    }
-  }
-
-  .fullscreen-icon {
-    @extend .button-icon;
-    @extend %primary-color-pseudo;
-    padding: 2px 0;
-
-    &:focus-visible {
-      border-radius: $border_rad_lighter;
     }
   }
 
@@ -987,6 +956,13 @@
       background-color: $bg_dark_card;
     }
 
+    &.advanced-table-sticky-header {
+      .row-selection-actions-card.show-action-card,
+      .row-selection-actions-card.is-visible {
+        background-color: $bg_dark_card;
+      }
+    }
+
     .loading-toggle-icon,
     .loading-cell {
       &::after {
@@ -1000,18 +976,6 @@
           $bg_dark 100%
         ) !important;
       }
-    }
-
-    // Fullscreen
-    &.advanced-table-fullscreen {
-      background: $bg_dark;
-    }
-
-    .advanced-table-fullscreen-header {
-      background-color: $bg_dark_card;
-      position: sticky;
-      top: 0;
-      z-index: $z_10;
     }
 
     &[class*="advanced-table-sticky-left-columns"] {
