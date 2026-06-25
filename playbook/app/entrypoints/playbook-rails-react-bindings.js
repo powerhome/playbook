@@ -5,14 +5,12 @@ import '../utils/mountComponent'
 
 import DistributionBar from 'kits/pb_distribution_bar/_distribution_bar'
 import MultiLevelSelect from 'kits/pb_multi_level_select/_multi_level_select'
-import Passphrase from 'kits/pb_passphrase/_passphrase'
 import Typeahead from 'kits/pb_typeahead/_typeahead'
 import PhoneNumberInput from 'kits/pb_phone_number_input/_phone_number_input'
 
 ComponentRegistry.registerComponents({
   DistributionBar,
   MultiLevelSelect,
-  Passphrase,
   Typeahead,
   PhoneNumberInput,
 })
