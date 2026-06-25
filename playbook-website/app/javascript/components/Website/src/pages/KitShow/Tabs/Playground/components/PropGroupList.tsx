@@ -2,14 +2,10 @@ import React from "react";
 import { Body, Caption, Collapsible, Flex, SectionSeparator } from "playbook-ui";
 import { PropControlField, type PropListSharedProps } from "../PropControl";
 import { PropDefinition } from "../types";
-
-type PropGroup = {
-  name: string;
-  props: Array<[string, PropDefinition]>;
-};
+import type { ResolvedPropGroup } from "../utils";
 
 type PropGroupListProps = PropListSharedProps & {
-  groups: PropGroup[];
+  groups: ResolvedPropGroup[];
   emptyMessage?: string;
   noKitProps?: boolean;
   collapsedInitial?: boolean;

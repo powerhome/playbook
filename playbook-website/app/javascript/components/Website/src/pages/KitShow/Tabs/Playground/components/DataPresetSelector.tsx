@@ -1,5 +1,5 @@
-import React from "react";
-import { Pill, Detail, Flex, FlexItem } from "playbook-ui";
+import React, { useMemo } from "react";
+import { PlaygroundPillSelector } from "./PlaygroundPillSelector";
 
 export interface DataPresetOption {
   key: string;
@@ -17,30 +17,17 @@ export const DataPresetSelector: React.FC<DataPresetSelectorProps> = ({
   activeKey,
   onPresetChange,
 }) => {
-  if (presets.length === 0) return null;
+  const options = useMemo(
+    () => presets.map((preset) => ({ key: preset.key, label: preset.label })),
+    [presets],
+  );
 
   return (
-    <Flex orientation="column" marginTop="lg" wrap>
-      <FlexItem marginBottom="xs">
-        <Detail text="Sample data" />
-      </FlexItem>
-      <FlexItem>
-        <Flex gap="xs" wrap>
-          {presets.map((preset) => (
-            <div
-              key={preset.key}
-              onClick={() => onPresetChange(preset.key)}
-              style={{ cursor: "pointer" }}
-            >
-              <Pill
-                text={preset.label}
-                variant={activeKey === preset.key ? "primary" : "neutral"}
-                textTransform="none"
-              />
-            </div>
-          ))}
-        </Flex>
-      </FlexItem>
-    </Flex>
+    <PlaygroundPillSelector
+      activeKey={activeKey}
+      label="Sample data"
+      onSelect={onPresetChange}
+      options={options}
+    />
   );
 };

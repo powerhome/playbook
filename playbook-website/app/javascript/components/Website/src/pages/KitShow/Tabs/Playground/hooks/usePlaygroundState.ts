@@ -17,12 +17,13 @@ import {
   needsChildren,
 } from "../CodeGenerator";
 import {
-  prepareExampleCode,
-  checkCondition,
-  checkHintCondition,
   buildPlaygroundPropValues,
+  buildPropDisabledState,
+  buildPropSyncHints,
+  checkHintCondition,
   mergeImplicitDefaultPropValues,
   getResolvedColumnAndTableData,
+  prepareExampleCode,
   shouldApplyPropSyncOnEnable,
   groupPropDefinitions,
 } from "../utils";
@@ -350,67 +351,26 @@ export const usePlaygroundState = ({
   );
 
   // Computed state
-  const propDisabledState = useMemo(() => {
-    const state: Record<string, { disabled: boolean; reason: string }> = {};
-    const conditionals = playgroundConfig?.conditionals ?? {};
-
-    Object.entries(conditionals).forEach(([propName, condition]) => {
-      if (
-        condition.structureMode != null &&
-        activeStructureMode !== condition.structureMode
-      ) {
-        const modeLabel =
-          playgroundConfig?.structureModes?.modes[condition.structureMode!]
-            ?.label ?? condition.structureMode;
-        state[propName] = {
-          disabled: true,
-          reason: `Switch structure mode to "${modeLabel}" to use this prop.`,
-        };
-        return;
-      }
-
-      const conditionCtx = {
+  const propDisabledState = useMemo(
+    () =>
+      buildPropDisabledState({
+        allPropDefinitions,
         playgroundConfig,
-        propDefinitions: allPropDefinitions,
-      };
-      const requiresMet = checkCondition(
-        condition.requires,
         propValues,
-        conditionCtx
-      );
-      const showWhenMet = checkCondition(
-        condition.showWhen,
-        propValues,
-        conditionCtx
-      );
+        structureMode: activeStructureMode,
+      }),
+    [
+      playgroundConfig,
+      propValues,
+      activeStructureMode,
+      allPropDefinitions,
+    ],
+  );
 
-      if (!requiresMet || !showWhenMet) {
-        let reason = "This prop is not available in the current configuration";
-
-        if (condition.requires) {
-          if (typeof condition.requires === "string") {
-            reason = `Requires "${condition.requires}" to be set`;
-          } else if (typeof condition.requires === "object") {
-            const conditions = Object.entries(condition.requires)
-              .map(([k, v]) => `${k}="${v}"`)
-              .join(" and ");
-            reason = `Requires ${conditions}`;
-          }
-        }
-
-        state[propName] = { disabled: true, reason };
-      }
-    });
-
-    return state;
-  }, [
-    playgroundConfig?.conditionals,
-    playgroundConfig?.structureModes?.modes,
-    propValues,
-    activeStructureMode,
-    playgroundConfig,
-    allPropDefinitions,
-  ]);
+  const propSyncHints = useMemo(
+    () => buildPropSyncHints(playgroundConfig),
+    [playgroundConfig],
+  );
 
   // Props that fail conditionals must not appear in generated code (or live preview)
   const propValuesForCodegen = useMemo(() => {
@@ -689,6 +649,7 @@ export const usePlaygroundState = ({
     allPropDefinitions,
     groupedProps,
     propDisabledState,
+    propSyncHints,
     activeHints,
     hasModifiedProps,
     hasTemplate: hasActiveTemplate,

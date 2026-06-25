@@ -15,7 +15,6 @@ import {
   KitSchema,
   GlobalPropsSchema,
   PlaygroundConfig,
-  getPropSyncContextHint,
 } from "./Playground";
 
 interface Example {
@@ -52,6 +51,7 @@ export const PlaygroundTab: React.FC<PlaygroundTabProps> = ({
     groupedProps,
     groupedGlobalProps,
     propDisabledState,
+    propSyncHints,
     activeHints,
     hasModifiedProps,
     hasTemplate,
@@ -90,16 +90,6 @@ export const PlaygroundTab: React.FC<PlaygroundTabProps> = ({
     playgroundConfig?.presets && playgroundConfig.presets.length > 0;
   const hasStructureModes = availableStructureModes.length > 0;
   const hasDataPresets = availableDataPresets.length > 0;
-
-  const propSyncHints = useMemo(() => {
-    if (!playgroundConfig?.propSyncOnEnable) return {};
-    const out: Record<string, string> = {};
-    Object.keys(playgroundConfig.propSyncOnEnable).forEach((name) => {
-      const h = getPropSyncContextHint(name, playgroundConfig);
-      if (h) out[name] = h;
-    });
-    return out;
-  }, [playgroundConfig]);
 
   // Merge scopeVars with requiredProps values for the live preview
   const previewScope = useMemo(() => {

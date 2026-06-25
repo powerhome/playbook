@@ -6,12 +6,12 @@ import type {
 } from "../KitShow/Tabs/Playground/types";
 import { GLOBAL_PROP_GROUPS } from "../KitShow/Tabs/Playground/constants";
 import {
-  checkCondition,
-  getPropSyncContextHint,
+  buildPropDisabledState,
+  buildPropSyncHints,
   groupPropDefinitions,
   mergeImplicitDefaultPropValues,
 } from "../KitShow/Tabs/Playground/utils";
-import type { PropGroup } from "../KitShow/Tabs/Playground/utils";
+import type { ResolvedPropGroup } from "../KitShow/Tabs/Playground/utils";
 import {
   getAllPropDefinitionsWithGlobals,
   getGlobalProps,
@@ -27,8 +27,8 @@ type GlobalPropsSchema = {
 };
 
 export type BuilderPropsPanelState = {
-  groupedProps: PropGroup[];
-  groupedGlobalProps: PropGroup[];
+  groupedProps: ResolvedPropGroup[];
+  groupedGlobalProps: ResolvedPropGroup[];
   displayPropValues: Record<string, PropValue>;
   propDisabledState: Record<string, { disabled: boolean; reason: string }>;
   propSyncHints: Record<string, string>;
@@ -99,76 +99,26 @@ export function useBuilderPropsPanel(
     [propValues, playgroundConfig, allPropDefinitions],
   );
 
-  const propDisabledState = useMemo(() => {
-    const state: Record<string, { disabled: boolean; reason: string }> = {};
-    const conditionals = playgroundConfig?.conditionals ?? {};
-
-    Object.entries(conditionals).forEach(([propName, condition]) => {
-      if (
-        condition.structureMode != null &&
-        selectedInstance?.structureMode !== condition.structureMode
-      ) {
-        const modeLabel =
-          playgroundConfig?.structureModes?.modes?.[condition.structureMode]
-            ?.label ?? condition.structureMode;
-        state[propName] = {
-          disabled: true,
-          reason: `Switch structure mode to "${modeLabel}" to use this prop.`,
-        };
-        return;
-      }
-
-      const conditionCtx = {
+  const propDisabledState = useMemo(
+    () =>
+      buildPropDisabledState({
+        allPropDefinitions,
         playgroundConfig,
-        propDefinitions: allPropDefinitions,
-      };
-      const requiresMet = checkCondition(
-        condition.requires,
         propValues,
-        conditionCtx,
-      );
-      const showWhenMet = checkCondition(
-        condition.showWhen,
-        propValues,
-        conditionCtx,
-      );
+        structureMode: selectedInstance?.structureMode,
+      }),
+    [
+      playgroundConfig,
+      selectedInstance?.structureMode,
+      propValues,
+      allPropDefinitions,
+    ],
+  );
 
-      if (!requiresMet || !showWhenMet) {
-        let reason = "This prop is not available in the current configuration";
-
-        if (condition.requires) {
-          if (typeof condition.requires === "string") {
-            reason = `Requires "${condition.requires}" to be set`;
-          } else if (typeof condition.requires === "object") {
-            const conditions = Object.entries(condition.requires)
-              .map(([key, value]) => `${key}="${value}"`)
-              .join(" and ");
-            reason = `Requires ${conditions}`;
-          }
-        }
-
-        state[propName] = { disabled: true, reason };
-      }
-    });
-
-    return state;
-  }, [
-    playgroundConfig,
-    selectedInstance?.structureMode,
-    propValues,
-    allPropDefinitions,
-  ]);
-
-  const propSyncHints = useMemo(() => {
-    if (!playgroundConfig?.propSyncOnEnable) return {};
-
-    const hints: Record<string, string> = {};
-    Object.keys(playgroundConfig.propSyncOnEnable).forEach((name) => {
-      const hint = getPropSyncContextHint(name, playgroundConfig);
-      if (hint) hints[name] = hint;
-    });
-    return hints;
-  }, [playgroundConfig]);
+  const propSyncHints = useMemo(
+    () => buildPropSyncHints(playgroundConfig),
+    [playgroundConfig],
+  );
 
   const requiredPropNames = useMemo(
     () => getRequiredPropNames(selectedKit, selectedInstance),
@@ -192,8 +142,8 @@ export function useBuilderPropsPanel(
   const children = selectedInstance?.configuredChildren ?? "";
 
   return {
-    groupedProps: groupedProps as PropGroup[],
-    groupedGlobalProps: groupedGlobalProps as PropGroup[],
+    groupedProps: groupedProps as ResolvedPropGroup[],
+    groupedGlobalProps: groupedGlobalProps as ResolvedPropGroup[],
     displayPropValues,
     propDisabledState,
     propSyncHints,

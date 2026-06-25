@@ -19,6 +19,7 @@ import {
   PropDefinition,
   PlaygroundConfig,
 } from "./types";
+import { panelDropdownClassName } from "./playgroundPanelControls";
 import {
   getPlaygroundPropExampleValue,
   playgroundObjectToEditableLiteral,
@@ -78,12 +79,6 @@ const mergeInfoText = (
   const merged = parts.filter(Boolean).join("\n\n");
   return merged || undefined;
 };
-
-const PROPS_PANEL_DROPDOWN_CLASS = "props-panel-dropdown";
-const propsPanelDropdownClassName = (filled: boolean) =>
-  filled
-    ? `${PROPS_PANEL_DROPDOWN_CLASS} ${PROPS_PANEL_DROPDOWN_CLASS}--filled`
-    : PROPS_PANEL_DROPDOWN_CLASS;
 
 const formatPropName = (name: string): string => name;
 
@@ -454,7 +449,7 @@ const EnumControl: React.FC<ExtendedPropControlProps> = ({
       label={<PropControlLabel name={name} />}
     >
       <Dropdown
-        className={propsPanelDropdownClassName(isDropdownFilled)}
+        className={panelDropdownClassName("props-panel", isDropdownFilled)}
         defaultValue={activeOption}
         id={`prop-${name}-enum-dropdown`}
         key={`${value?.enabled}-${String(displayValue ?? "")}`}
@@ -560,7 +555,8 @@ const FunctionControl: React.FC<ExtendedPropControlProps> = ({
       label={<PropControlLabel name={name} />}
     >
       <Dropdown
-        className={propsPanelDropdownClassName(
+        className={panelDropdownClassName(
+          "props-panel",
           isFilledDisplayValue(currentValue),
         )}
         clearable={false}

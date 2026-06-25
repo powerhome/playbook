@@ -17,6 +17,7 @@ import {
 
 import { CodePanel, PropsPanel, ResponsivePreviewFrame } from "../KitShow/Tabs/Playground";
 import type { PropValue } from "../KitShow/Tabs/Playground";
+import { panelDropdownClassName } from "../KitShow/Tabs/Playground/playgroundPanelControls";
 import { PLAYGROUND_ENABLED_KITS } from "../KitShow/playgroundEnabledKits";
 import { BuilderPreviewItem } from "./BuilderPreviewItem";
 import { generateCode } from "./codeGeneration";
@@ -52,12 +53,6 @@ import type {
 import { ROOT_TARGET_ID } from "./types";
 
 import "./styles.scss";
-
-const PLAYGROUND_PANEL_DROPDOWN_CLASS = "playground-panel-dropdown";
-const playgroundPanelDropdownClassName = (filled: boolean) =>
-  filled
-    ? `${PLAYGROUND_PANEL_DROPDOWN_CLASS} ${PLAYGROUND_PANEL_DROPDOWN_CLASS}--filled`
-    : PLAYGROUND_PANEL_DROPDOWN_CLASS;
 
 export default function Playground() {
   const { global_props_schema, playground_kits = [] } =
@@ -466,7 +461,7 @@ export default function Playground() {
                 </Tooltip>
               </Flex>
               <Dropdown
-                className={playgroundPanelDropdownClassName(true)}
+                className={panelDropdownClassName("playground-panel", true)}
                 clearable={false}
                 defaultValue={activeAddTargetOption}
                 id="playground-add-target-dropdown"
@@ -685,7 +680,7 @@ export default function Playground() {
               <Flex className="builder-field" orientation="column">
                 <Caption text="Selected kit" />
                 <Dropdown
-                  className={playgroundPanelDropdownClassName(!!selectedId)}
+                  className={panelDropdownClassName("playground-panel", !!selectedId)}
                   clearable={false}
                   defaultValue={activeSelectedInstanceOption}
                   id="playground-selected-kit-dropdown"
@@ -739,7 +734,8 @@ export default function Playground() {
                   >
                     <Caption text="Data" />
                     <Dropdown
-                      className={playgroundPanelDropdownClassName(
+                      className={panelDropdownClassName(
+                        "playground-panel",
                         !!selectedInstance.dataPresetKey,
                       )}
                       clearable={false}
@@ -773,7 +769,8 @@ export default function Playground() {
                   >
                     <Caption text="Structure" />
                     <Dropdown
-                      className={playgroundPanelDropdownClassName(
+                      className={panelDropdownClassName(
+                        "playground-panel",
                         !!selectedInstance.structureMode,
                       )}
                       clearable={false}
