@@ -11,12 +11,19 @@ $props-panel-resize-width: 12px;
   grid-template-columns: $props-panel-resize-width minmax(0, 1fr);
   grid-template-rows: auto minmax(0, 1fr);
   flex-shrink: 0;
+  align-self: flex-start;
+  box-sizing: border-box;
+  height: var(
+    --props-panel-max-height,
+    calc(100dvh - var(--website-header-height, 89px) - #{$space_md * 2})
+  );
+  max-height: var(
+    --props-panel-max-height,
+    calc(100dvh - var(--website-header-height, 89px) - #{$space_md * 2})
+  );
+  overflow: hidden;
   position: sticky;
   top: $space_md;
-  align-self: flex-start;
-  max-height: calc(100vh - #{$space_md * 2});
-  height: calc(100vh - #{$space_md * 2});
-  overflow: hidden;
 
   &__resize-handle {
     align-items: center;

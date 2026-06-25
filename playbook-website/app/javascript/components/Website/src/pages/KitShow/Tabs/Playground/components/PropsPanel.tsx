@@ -15,6 +15,7 @@ import {
 } from "../PropControl";
 import { PropDefinition } from "../types";
 import { usePanelResize } from "../hooks/usePanelResize";
+import { useStickyPanelMaxHeight } from "../hooks/useStickyPanelMaxHeight";
 import { PropGroupList } from "./PropGroupList";
 import { PropsPanelTextarea } from "./PropsPanelTextarea";
 import "./PropsPanel.scss";
@@ -52,6 +53,7 @@ export const PropsPanel: React.FC<PropsPanelProps> = ({
 }) => {
   const globalPropCount = Object.keys(globalProps).length;
   const panelRef = useRef<HTMLDivElement>(null);
+  useStickyPanelMaxHeight(panelRef);
   const { width: panelWidth, resizeHandleProps } = usePanelResize({
     defaultWidth: PROPS_PANEL_DEFAULT_WIDTH,
     minWidth: PROPS_PANEL_MIN_WIDTH,
