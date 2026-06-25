@@ -752,6 +752,14 @@
     "category": "Communication"
   },
   {
+    "name": "phone-arrow-down-left",
+    "category": "Communication"
+  },
+  {
+    "name": "phone-arrow-up-right",
+    "category": "Communication"
+  },
+  {
     "name": "phone-office",
     "category": "Communication"
   },
@@ -1896,6 +1904,10 @@
     "category": "Power Products"
   },
   {
+    "name": "circle-product-hardboard-siding",
+    "category": "Power Products"
+  },
+  {
     "name": "circle-product-roofing",
     "category": "Power Products"
   },
@@ -1933,6 +1945,10 @@
   },
   {
     "name": "product-gutters",
+    "category": "Power Products"
+  },
+  {
+    "name": "product-hardboard-siding",
     "category": "Power Products"
   },
   {
