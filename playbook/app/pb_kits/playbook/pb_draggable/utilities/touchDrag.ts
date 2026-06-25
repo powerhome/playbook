@@ -366,7 +366,8 @@ export const bindMousePointerDrag = ({
       return;
     }
 
-    // stopPropagation only — preventDefault here blocks HTML5 drag on ancestors
+    // Pointer drag only — HTML5 drag is disabled on these items. preventDefault stops text selection.
+    event.preventDefault();
     event.stopPropagation();
 
     state.active = true;

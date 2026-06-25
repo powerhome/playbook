@@ -204,6 +204,8 @@
     .pb_draggable_item {
       display: inline-flex;
       align-items: center;
+      user-select: none;
+      -webkit-user-select: none;
 
       &:hover {
         cursor: grab;
