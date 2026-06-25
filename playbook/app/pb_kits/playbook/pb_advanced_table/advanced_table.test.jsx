@@ -418,6 +418,56 @@ test("tableProps prop functions as expected", () => {
   const kit = screen.getByTestId(testId)
   const table = kit.querySelector('table')
   expect(table).toHaveClass("pb_table table-sm table-responsive-none data_table sticky-header ns_tabular")
+  expect(kit).toHaveClass("advanced-table-sticky-header")
+})
+
+test("sticky header with column visibility control offsets layout heights", async () => {
+  const columnDefsWithIds = columnDefinitions.map((col) => ({
+    ...col,
+    id: col.accessor,
+  }))
+
+  render(
+    <AdvancedTable
+        columnDefinitions={columnDefsWithIds}
+        columnVisibilityControl={{ default: true }}
+        data={{ testid: testId }}
+        responsive="none"
+        tableData={MOCK_DATA}
+        tableProps={{ sticky: true }}
+    />
+  )
+
+  const kit = screen.getByTestId(testId)
+  expect(kit).toHaveClass("advanced-table-sticky-header")
+  expect(kit).not.toHaveClass("hidden-action-bar")
+
+  const actionBar = kit.querySelector(".row-selection-actions-card.show-action-card")
+  expect(actionBar).toBeInTheDocument()
+
+  await waitFor(() => {
+    expect(kit.style.getPropertyValue("--advanced-table-action-bar-height")).toMatch(/^\d+px$/)
+  })
+})
+
+test("sticky header without column visibility control keeps zero action bar offset", async () => {
+  render(
+    <AdvancedTable
+        columnDefinitions={columnDefinitions}
+        data={{ testid: testId }}
+        responsive="none"
+        tableData={MOCK_DATA}
+        tableProps={{ sticky: true }}
+    />
+  )
+
+  const kit = screen.getByTestId(testId)
+  expect(kit).toHaveClass("advanced-table-sticky-header")
+  expect(kit).not.toHaveClass("hidden-action-bar")
+
+  await waitFor(() => {
+    expect(kit.style.getPropertyValue("--advanced-table-action-bar-height")).toBe("0px")
+  })
 })
 
 test("enableExpansionIcon changes icon", () => {

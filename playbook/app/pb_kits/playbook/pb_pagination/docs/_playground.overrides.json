@@ -1,8 +1,26 @@
 {
+  "structureModes": {
+    "default": "static",
+    "modes": {
+      "static": {
+        "label": "Static",
+        "template": "<Pagination{{props}} />"
+      },
+      "controlled": {
+        "label": "Controlled",
+        "template": "<Pagination\n  current={currentPage}\n  onChange={setCurrentPage}{{props}}\n/>",
+        "wrapper": "const PaginationPlayground = () => {\n  const [currentPage, setCurrentPage] = useState(1)\n\n  return {{component}}\n}\n\n<PaginationPlayground />",
+        "externalImports": [
+          "import React, { useState } from 'react'"
+        ]
+      }
+    }
+  },
   "defaults": {
     "current": 1,
     "range": 5,
-    "total": 10
+    "total": 10,
+    "onChange": "(page) => console.log('Page changed', page)"
   },
   "groups": [
     {
@@ -40,22 +58,25 @@
       }
     },
     {
-      "name": "Last page",
+      "name": "Controlled",
+      "structureMode": "controlled",
       "props": {
-        "current": 12,
-        "total": 12,
-        "range": 5
-      }
-    },
-    {
-      "name": "Wide window",
-      "props": {
-        "current": 25,
-        "total": 50,
-        "range": 9
+        "range": 5,
+        "total": 10
       }
     }
   ],
   "conditionals": {},
-  "hints": {}
+  "hints": {
+    "range": {
+      "when": {},
+      "message": "range controls how many page numbers appear around the current page before first/last shortcuts are added.",
+      "type": "info"
+    },
+    "controlled": {
+      "presetName": "Controlled",
+      "message": "For React-controlled pagination, keep current in state and update it from onChange.",
+      "type": "info"
+    }
+  }
 }

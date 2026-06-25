@@ -106,7 +106,8 @@ class PagesController < ApplicationController
     on_changelog = request.path.include?("changelog")
     on_guides    = request.path.include?("guides")
     on_icons     = request.path.include?("icons")
-    on_home      = !@kit.present? && !on_changelog && !on_guides && !on_icons
+    on_playground = request.path.include?("playground")
+    on_home = !@kit.present? && !on_changelog && !on_guides && !on_icons && !on_playground
 
     # Changelog — needed on changelog page AND as part of the general /kits.json payload
     # (the Changelog React component loads via ComponentsLoader which fetches /kits.json).
@@ -187,6 +188,14 @@ class PagesController < ApplicationController
         icon_categories: icon_categories,
         icon_kit_url: "https://playbook.powerapp.cloud/kits/icon/react",
         icons_by_category: icons_by_category,
+      }
+      return
+    end
+
+    if on_playground && request.format.json?
+      render json: {
+        playground_kits: playground_kits,
+        global_props_schema: global_props_schema,
       }
       return
     end
@@ -458,13 +467,103 @@ private
     return nil unless kit_name.present?
 
     config_path = ::Playbook.kit_path(kit_name, "docs", "_playground.json")
-    return nil unless config_path.exist?
+    override_path = ::Playbook.kit_path(kit_name, "docs", "_playground.overrides.json")
+    return nil unless config_path.exist? || override_path.exist?
 
     begin
-      JSON.parse(config_path.read)
+      config = config_path.exist? ? parse_playground_config_file(config_path) : {}
+      overrides = override_path.exist? ? parse_playground_config_file(override_path) : {}
+      docs_dir = ::Playbook.kit_path(kit_name, "docs", "")
+
+      resolve_playground_file_refs(config.deep_merge(overrides), docs_dir)
     rescue => e
       Rails.logger.error("Error reading playground config: #{e.message}")
       nil
+    end
+  end
+
+  def parse_playground_config_file(path)
+    parsed = JSON.parse(path.read)
+    parsed.is_a?(Hash) ? parsed : {}
+  end
+
+  def resolve_playground_file_refs(config, docs_dir)
+    required_props = config["requiredProps"]
+    config["requiredProps"] = resolve_playground_required_prop_refs(required_props, docs_dir) if required_props.is_a?(Hash)
+
+    data_presets = config.dig("dataPresets", "presets")
+    if data_presets.is_a?(Hash)
+      data_presets.each do |_key, preset|
+        next unless preset.is_a?(Hash)
+
+        preset["columnDefinitions"] = read_playground_docs_json(docs_dir, preset.delete("columnDefinitionsFile")) if preset["columnDefinitionsFile"].present?
+
+        preset["tableData"] = read_playground_docs_json(docs_dir, preset.delete("tableDataFile")) if preset["tableDataFile"].present?
+      end
+    end
+
+    config
+  end
+
+  def resolve_playground_required_prop_refs(required_props, docs_dir)
+    refs = {
+      "columnDefinitionsFile" => "columnDefinitions",
+      "tableDataFile" => "tableData",
+    }
+    props = required_props.deep_dup
+
+    refs.each do |file_key, target_key|
+      next unless props[file_key].present?
+
+      props[target_key] = read_playground_docs_json(docs_dir, props.delete(file_key))
+    end
+
+    props
+  end
+
+  def read_playground_docs_json(docs_dir, relative_path)
+    docs_root = docs_dir.expand_path
+    path = docs_dir.join(relative_path).expand_path
+    raise "Playground file ref escapes docs directory: #{relative_path}" unless path.to_s.start_with?(docs_root.to_s)
+    raise "Playground referenced file not found: #{relative_path}" unless path.exist?
+
+    JSON.parse(path.read)
+  end
+
+  def playground_kits
+    Rails.cache.fetch("playground_kits_builder_v4") do
+      seen = Set.new
+
+      MENU["kits"].flat_map do |category|
+        category["components"].filter_map do |component|
+          kit_name = component["parent"].presence || component["name"]
+          next if seen.include?(kit_name)
+
+          seen.add(kit_name)
+
+          schema = read_kit_schema(kit_name)
+          config = read_playground_config(kit_name)
+          next unless schema.present? && config.present?
+          next unless Array(schema["platforms"]).include?("react")
+
+          {
+            name: kit_name,
+            label: schema["name"].presence || kit_name.to_s.titleize,
+            category: category["category"],
+            description: schema["description"],
+            status: component["status"],
+            platforms_status: component["platforms_status"],
+            preset_count: Array(config["presets"]).length,
+            structure_mode_count: config.dig("structureModes", "modes")&.keys&.length || 0,
+            kit_schema: {
+              name: schema["name"],
+              props: schema["props"] || {},
+              globalProps: schema["globalProps"],
+            },
+            playground_config: config,
+          }
+        end
+      end
     end
   end
 

@@ -1,33 +1,56 @@
 {
   "template": "<Nav{{props}}>{{children}}</Nav>",
-  "propTargets": {},
+  "propTargets": {
+    "navItemText": "NavItem.props",
+    "navItemLink": "NavItem.props",
+    "navItemActive": "NavItem.props",
+    "navItemDisabled": "NavItem.props",
+    "navItemIconLeft": "NavItem.props",
+    "navItemIconRight": "NavItem.props",
+    "navItemImageUrl": "NavItem.props",
+    "navItemTarget": "NavItem.props",
+    "navItemFontSize": "NavItem.props",
+    "navItemFontWeight": "NavItem.props",
+    "navItemCollapsible": "NavItem.props",
+    "navItemCollapsed": "NavItem.props",
+    "navItemCollapsibleTrail": "NavItem.props",
+    "navItemHighlightedBorder": "NavItem.props",
+    "navItemMargin": "NavItem.props",
+    "navItemMarginY": "NavItem.props",
+    "navItemPaddingY": "NavItem.props",
+    "navItemOnClick": "NavItem.props"
+  },
   "defaults": {
     "borderless": false,
     "extendedUnderline": false,
     "highlight": true,
     "orientation": "vertical",
     "link": "#",
-    "variant": "normal"
+    "variant": "normal",
+    "navItemText": "Photos",
+    "navItemLink": "#",
+    "navItemActive": false,
+    "navItemDisabled": false,
+    "navItemCollapsible": false,
+    "navItemCollapsed": true,
+    "navItemCollapsibleTrail": false,
+    "navItemHighlightedBorder": true,
+    "navItemOnClick": "() => console.log('Nav item clicked')"
   },
   "children": {
     "editable": true,
-    "default": "Nav content"
+    "default": "<NavItem link=\"#\" text=\"Photos\" />\n<NavItem link=\"#\" text=\"Music\" />\n<NavItem active link=\"#\" text=\"Video\" />\n<NavItem link=\"#\" text=\"Files\" />"
   },
   "groups": [
     {
-      "name": "Content",
+      "name": "Nav Content",
       "props": [
-        "title"
-      ]
-    },
-    {
-      "name": "Behavior",
-      "props": [
+        "title",
         "link"
       ]
     },
     {
-      "name": "Appearance",
+      "name": "Nav Appearance",
       "props": [
         "orientation",
         "variant",
@@ -36,13 +59,188 @@
         "extendedUnderline",
         "itemSpacing"
       ]
+    },
+    {
+      "name": "Nav Events",
+      "props": [
+        "onClick"
+      ]
+    },
+    {
+      "name": "NavItem Content",
+      "props": [
+        "navItemText",
+        "navItemLink",
+        "navItemIconLeft",
+        "navItemIconRight",
+        "navItemImageUrl",
+        "navItemTarget"
+      ]
+    },
+    {
+      "name": "NavItem State",
+      "props": [
+        "navItemActive",
+        "navItemDisabled",
+        "navItemHighlightedBorder"
+      ]
+    },
+    {
+      "name": "NavItem Typography",
+      "props": [
+        "navItemFontSize",
+        "navItemFontWeight"
+      ]
+    },
+    {
+      "name": "NavItem Collapsible",
+      "props": [
+        "navItemCollapsible",
+        "navItemCollapsed",
+        "navItemCollapsibleTrail"
+      ]
+    },
+    {
+      "name": "NavItem Spacing",
+      "props": [
+        "navItemMargin",
+        "navItemMarginY",
+        "navItemPaddingY"
+      ]
+    },
+    {
+      "name": "NavItem Events",
+      "props": [
+        "navItemOnClick"
+      ]
     }
   ],
   "presets": [
     {
-      "name": "Default",
-      "props": {},
-      "children": "Nav content"
+      "name": "Vertical",
+      "structureMode": "standard",
+      "props": {
+        "orientation": "vertical",
+        "title": "Menu",
+        "link": "#"
+      },
+      "children": "<NavItem link=\"#\" text=\"Photos\" />\n<NavItem link=\"#\" text=\"Music\" />\n<NavItem active link=\"#\" text=\"Video\" />\n<NavItem link=\"#\" text=\"Files\" />"
+    },
+    {
+      "name": "Horizontal",
+      "structureMode": "standard",
+      "props": {
+        "orientation": "horizontal",
+        "link": "#"
+      },
+      "children": "<NavItem link=\"#\" text=\"About\" />\n<NavItem active link=\"#\" text=\"Case Studies\" />\n<NavItem link=\"#\" text=\"Service\" />\n<NavItem link=\"#\" text=\"Contacts\" />"
+    },
+    {
+      "name": "Subtle",
+      "structureMode": "standard",
+      "props": {
+        "orientation": "vertical",
+        "variant": "subtle",
+        "title": "Browse"
+      },
+      "children": "<NavItem link=\"#\" text=\"Photos\" />\n<NavItem active link=\"#\" text=\"Music\" />\n<NavItem link=\"#\" text=\"Video\" />\n<NavItem link=\"#\" text=\"Files\" />"
+    },
+    {
+      "name": "Borderless",
+      "structureMode": "standard",
+      "props": {
+        "borderless": true,
+        "orientation": "vertical",
+        "title": "Menu"
+      },
+      "children": "<NavItem link=\"#\" text=\"Photos\" />\n<NavItem active link=\"#\" text=\"Music\" />\n<NavItem link=\"#\" text=\"Video\" />"
+    },
+    {
+      "name": "No Highlight",
+      "structureMode": "standard",
+      "props": {
+        "highlight": false,
+        "orientation": "vertical",
+        "title": "Menu"
+      },
+      "children": "<NavItem link=\"#\" text=\"Photos\" />\n<NavItem active link=\"#\" text=\"Music\" />\n<NavItem link=\"#\" text=\"Video\" />"
+    },
+    {
+      "name": "Extended Underline",
+      "structureMode": "standard",
+      "props": {
+        "extendedUnderline": true,
+        "orientation": "horizontal",
+        "variant": "normal"
+      },
+      "children": "<NavItem link=\"#\" text=\"About\" />\n<NavItem active link=\"#\" text=\"Case Studies\" />\n<NavItem link=\"#\" text=\"Service\" />\n<NavItem link=\"#\" text=\"Contacts\" />"
+    },
+    {
+      "name": "NavItem Icons",
+      "structureMode": "nav_item_props",
+      "props": {
+        "title": "Browse",
+        "navItemActive": true,
+        "navItemIconLeft": "comments-alt",
+        "navItemIconRight": "angle-down",
+        "navItemLink": "#",
+        "navItemText": "Messages"
+      }
+    },
+    {
+      "name": "NavItem Disabled",
+      "structureMode": "nav_item_props",
+      "props": {
+        "navItemDisabled": true,
+        "navItemLink": "#",
+        "navItemText": "Disabled item"
+      }
+    },
+    {
+      "name": "NavItem Typography",
+      "structureMode": "nav_item_props",
+      "props": {
+        "navItemFontSize": "small",
+        "navItemFontWeight": "bolder",
+        "navItemLink": "#",
+        "navItemText": "Small bolder item"
+      }
+    },
+    {
+      "name": "NavItem Spacing",
+      "structureMode": "nav_item_props",
+      "props": {
+        "navItemLink": "#",
+        "navItemMargin": "none",
+        "navItemPaddingY": "xxs",
+        "navItemText": "Tight item"
+      }
+    },
+    {
+      "name": "Collapsible",
+      "structureMode": "collapsible",
+      "props": {
+        "navItemActive": true,
+        "navItemCollapsed": false,
+        "navItemCollapsible": true,
+        "navItemIconLeft": "city",
+        "navItemIconRight": "angle-down",
+        "navItemLink": "#",
+        "navItemText": "Overview"
+      }
+    },
+    {
+      "name": "Collapsible Trail",
+      "structureMode": "collapsible",
+      "props": {
+        "navItemCollapsible": true,
+        "navItemCollapsibleTrail": true,
+        "navItemFontWeight": "bolder",
+        "navItemIconLeft": "city",
+        "navItemIconRight": "angle-down",
+        "navItemLink": "#",
+        "navItemText": "Overview"
+      }
     }
   ],
   "conditionals": {
@@ -51,15 +249,345 @@
         "orientation": "horizontal",
         "variant": "normal"
       }
+    },
+    "navItemCollapsed": {
+      "requires": "navItemCollapsible",
+      "structureMode": "collapsible"
+    },
+    "navItemCollapsibleTrail": {
+      "requires": "navItemCollapsible",
+      "structureMode": "collapsible"
     }
   },
   "hints": {
-    "extended_underline": {
-      "when": {
-        "orientation": "horizontal"
-      },
-      "message": "Extended underline applies to horizontal navigation in the normal variant.",
+    "vertical": {
+      "presetName": "Vertical",
+      "message": "Vertical Nav uses editable NavItem children and can include a title link above the item list.",
       "type": "info"
+    },
+    "horizontal": {
+      "presetName": "Horizontal",
+      "message": "Horizontal Nav keeps the same NavItem children but changes layout with orientation=\"horizontal\".",
+      "type": "info"
+    },
+    "subtle": {
+      "presetName": "Subtle",
+      "message": "variant=\"subtle\" changes the Nav visual treatment while Nav passes orientation and variant down to each NavItem.",
+      "type": "info"
+    },
+    "borderless": {
+      "presetName": "Borderless",
+      "message": "borderless removes item borders from the Nav list.",
+      "type": "info"
+    },
+    "no_highlight": {
+      "presetName": "No Highlight",
+      "message": "highlight={false} removes the active item highlight styling.",
+      "type": "info"
+    },
+    "extended_underline": {
+      "presetName": "Extended Underline",
+      "message": "extendedUnderline applies only when orientation=\"horizontal\" and variant=\"normal\".",
+      "type": "info"
+    },
+    "nav_item_icons": {
+      "presetName": "NavItem Icons",
+      "message": "NavItem iconLeft and iconRight add icons around the item text.",
+      "type": "info"
+    },
+    "nav_item_disabled": {
+      "presetName": "NavItem Disabled",
+      "message": "disabled makes the NavItem non-interactive and removes link navigation.",
+      "type": "info"
+    },
+    "nav_item_typography": {
+      "presetName": "NavItem Typography",
+      "message": "NavItem fontSize and fontWeight control item label styling.",
+      "type": "info"
+    },
+    "nav_item_spacing": {
+      "presetName": "NavItem Spacing",
+      "message": "NavItem spacing props can tighten or expand individual item layout.",
+      "type": "info"
+    },
+    "collapsible": {
+      "presetName": "Collapsible",
+      "message": "collapsible turns a NavItem into a parent item with nested NavItems inside Collapsible.Content.",
+      "type": "info"
+    },
+    "collapsible_trail": {
+      "presetName": "Collapsible Trail",
+      "message": "collapsibleTrail adds the nested trail styling for collapsible Nav groups.",
+      "type": "info"
+    }
+  },
+  "structureModes": {
+    "default": "standard",
+    "modes": {
+      "standard": {
+        "label": "Standard",
+        "template": "<Nav{{props}}>\n  {{children}}\n</Nav>",
+        "children": "<NavItem link=\"#\" text=\"Photos\" />\n<NavItem link=\"#\" text=\"Music\" />\n<NavItem active link=\"#\" text=\"Video\" />\n<NavItem link=\"#\" text=\"Files\" />"
+      },
+      "nav_item_props": {
+        "label": "NavItem Props",
+        "template": "<Nav{{props}}>\n  <NavItem{{NavItem.props}} />\n  {{children}}\n</Nav>",
+        "children": "<NavItem link=\"#\" text=\"Music\" />\n<NavItem active link=\"#\" text=\"Video\" />\n<NavItem link=\"#\" text=\"Files\" />",
+        "props": {
+          "navItemLink": "#",
+          "navItemText": "Primary Item"
+        }
+      },
+      "collapsible": {
+        "label": "Collapsible NavItem",
+        "template": "<Nav{{props}}>\n  <NavItem{{NavItem.props}}>\n    {{children}}\n    {null}\n  </NavItem>\n</Nav>",
+        "children": "<NavItem link=\"#\" text=\"City\" />\n<NavItem link=\"#\" text=\"People\" />\n<NavItem link=\"#\" text=\"Business\" />",
+        "props": {
+          "navItemActive": true,
+          "navItemCollapsed": false,
+          "navItemCollapsible": true,
+          "navItemIconLeft": "city",
+          "navItemIconRight": "angle-down",
+          "navItemLink": "#",
+          "navItemText": "Overview"
+        }
+      }
+    }
+  },
+  "customProps": {
+    "navItemText": {
+      "type": "string",
+      "platforms": [
+        "react"
+      ],
+      "default": "Photos"
+    },
+    "navItemLink": {
+      "type": "string",
+      "platforms": [
+        "react"
+      ],
+      "default": "#"
+    },
+    "navItemActive": {
+      "type": "boolean",
+      "platforms": [
+        "react"
+      ],
+      "default": false
+    },
+    "navItemDisabled": {
+      "type": "boolean",
+      "platforms": [
+        "react"
+      ],
+      "default": false
+    },
+    "navItemIconLeft": {
+      "type": "string",
+      "platforms": [
+        "react"
+      ]
+    },
+    "navItemIconRight": {
+      "type": "string",
+      "platforms": [
+        "react"
+      ]
+    },
+    "navItemImageUrl": {
+      "type": "string",
+      "platforms": [
+        "react"
+      ]
+    },
+    "navItemTarget": {
+      "type": "enum",
+      "platforms": [
+        "react"
+      ],
+      "values": [
+        "_blank",
+        "_self",
+        "_parent",
+        "_top"
+      ]
+    },
+    "navItemFontSize": {
+      "type": "enum",
+      "platforms": [
+        "react"
+      ],
+      "values": [
+        "normal",
+        "small"
+      ]
+    },
+    "navItemFontWeight": {
+      "type": "enum",
+      "platforms": [
+        "react"
+      ],
+      "values": [
+        "regular",
+        "bold",
+        "bolder"
+      ]
+    },
+    "navItemCollapsible": {
+      "type": "boolean",
+      "platforms": [
+        "react"
+      ],
+      "default": false
+    },
+    "navItemCollapsed": {
+      "type": "boolean",
+      "platforms": [
+        "react"
+      ],
+      "default": true
+    },
+    "navItemCollapsibleTrail": {
+      "type": "boolean",
+      "platforms": [
+        "react"
+      ],
+      "default": false
+    },
+    "navItemHighlightedBorder": {
+      "type": "boolean",
+      "platforms": [
+        "react"
+      ],
+      "default": true
+    },
+    "navItemMargin": {
+      "type": "enum",
+      "platforms": [
+        "react"
+      ],
+      "values": [
+        "none",
+        "xxs",
+        "xs",
+        "sm",
+        "md",
+        "lg",
+        "xl"
+      ]
+    },
+    "navItemMarginY": {
+      "type": "enum",
+      "platforms": [
+        "react"
+      ],
+      "values": [
+        "none",
+        "xxs",
+        "xs",
+        "sm",
+        "md",
+        "lg",
+        "xl"
+      ]
+    },
+    "navItemPaddingY": {
+      "type": "enum",
+      "platforms": [
+        "react"
+      ],
+      "values": [
+        "none",
+        "xxs",
+        "xs",
+        "sm",
+        "md",
+        "lg",
+        "xl"
+      ]
+    },
+    "navItemOnClick": {
+      "type": "function",
+      "platforms": [
+        "react"
+      ]
+    }
+  },
+  "propAliases": {
+    "navItemText": "text",
+    "navItemLink": "link",
+    "navItemActive": "active",
+    "navItemDisabled": "disabled",
+    "navItemIconLeft": "iconLeft",
+    "navItemIconRight": "iconRight",
+    "navItemImageUrl": "imageUrl",
+    "navItemTarget": "target",
+    "navItemFontSize": "fontSize",
+    "navItemFontWeight": "fontWeight",
+    "navItemCollapsible": "collapsible",
+    "navItemCollapsed": "collapsed",
+    "navItemCollapsibleTrail": "collapsibleTrail",
+    "navItemHighlightedBorder": "highlighted_border",
+    "navItemMargin": "margin",
+    "navItemMarginY": "marginY",
+    "navItemPaddingY": "paddingY",
+    "navItemOnClick": "onClick"
+  },
+  "propSyncOnEnable": {
+    "navItemText": {
+      "structureMode": "nav_item_props"
+    },
+    "navItemLink": {
+      "structureMode": "nav_item_props"
+    },
+    "navItemActive": {
+      "structureMode": "nav_item_props"
+    },
+    "navItemDisabled": {
+      "structureMode": "nav_item_props"
+    },
+    "navItemIconLeft": {
+      "structureMode": "nav_item_props"
+    },
+    "navItemIconRight": {
+      "structureMode": "nav_item_props"
+    },
+    "navItemImageUrl": {
+      "structureMode": "nav_item_props"
+    },
+    "navItemTarget": {
+      "structureMode": "nav_item_props"
+    },
+    "navItemFontSize": {
+      "structureMode": "nav_item_props"
+    },
+    "navItemFontWeight": {
+      "structureMode": "nav_item_props"
+    },
+    "navItemCollapsible": {
+      "structureMode": "collapsible"
+    },
+    "navItemCollapsed": {
+      "structureMode": "collapsible"
+    },
+    "navItemCollapsibleTrail": {
+      "structureMode": "collapsible"
+    },
+    "navItemHighlightedBorder": {
+      "structureMode": "nav_item_props"
+    },
+    "navItemMargin": {
+      "structureMode": "nav_item_props"
+    },
+    "navItemMarginY": {
+      "structureMode": "nav_item_props"
+    },
+    "navItemPaddingY": {
+      "structureMode": "nav_item_props"
+    },
+    "navItemOnClick": {
+      "structureMode": "nav_item_props"
     }
   }
 }

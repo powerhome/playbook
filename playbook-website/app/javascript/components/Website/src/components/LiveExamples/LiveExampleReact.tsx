@@ -278,7 +278,7 @@ const LiveExample: React.FC<LiveExampleProps> = ({
               width: "100%",
               maxWidth: "100%",
               minWidth: 0,
-              overflowX: "auto",
+              overflowX: "visible",
             }}
           >
             <LivePreview />

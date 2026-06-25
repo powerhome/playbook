@@ -3,6 +3,7 @@
   "propTargets": {},
   "defaults": {
     "align": "left",
+    "color": "light",
     "text": "Loading",
     "variant": "dotted"
   },
@@ -62,5 +63,31 @@
     }
   ],
   "conditionals": {},
-  "hints": {}
+  "hints": {
+    "align_left": {
+      "presetName": "Align left",
+      "message": "Align left uses the default left-aligned inline loading treatment.",
+      "type": "info"
+    },
+    "align_center": {
+      "presetName": "Align center",
+      "message": "Align center centers the spinner and loading text in the available width.",
+      "type": "info"
+    },
+    "align_right": {
+      "presetName": "Align right",
+      "message": "Align right pushes the inline loading indicator to the right edge.",
+      "type": "info"
+    },
+    "solid_spinner": {
+      "presetName": "Solid spinner",
+      "message": "Solid spinner switches the icon from the dotted spinner to the solid circle-notch variant.",
+      "type": "info"
+    },
+    "custom_label": {
+      "presetName": "Custom label",
+      "message": "Custom label changes the text displayed next to the loading icon.",
+      "type": "info"
+    }
+  }
 }

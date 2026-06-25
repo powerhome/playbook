@@ -17,6 +17,7 @@ import {
   showActionBar,
   hideActionBar,
 } from "../Utilities/ActionBarAnimationHelper";
+import { scheduleStickyActionBarHeightUpdate } from "../Utilities/StickyLayoutHelper";
 import { GenericObject } from "../../types";
 
 interface TableActionBarProps {
@@ -39,7 +40,7 @@ const TableActionBar: React.FC<TableActionBarProps> = ({
   type = "row-selection",
 }) => {
   const cardRef = useRef(null);
-  const { table, columnVisibilityControl, columnDefinitions } =
+  const { table, columnVisibilityControl, columnDefinitions, tableContainerRef } =
     useContext(AdvancedTableContext);
 
   // ----------- Column visibility logic -----------
@@ -131,8 +132,10 @@ const TableActionBar: React.FC<TableActionBarProps> = ({
       } else {
         hideActionBar(cardRef.current);
       }
+
+      scheduleStickyActionBarHeightUpdate(tableContainerRef?.current ?? null);
     }
-  }, [isVisible, type]);
+  }, [isVisible, type, tableContainerRef]);
 
   const [showPopover, setShowPopover] = useState(false)
 

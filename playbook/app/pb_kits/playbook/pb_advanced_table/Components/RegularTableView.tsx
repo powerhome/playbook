@@ -136,6 +136,7 @@ export const RegularTableView = ({
     pinnedRows,
     headerHeight,
     rowHeight,
+    actionBarHeight,
     rowStyling = [],
     sampleRowRef,
   } = useContext(AdvancedTableContext)
@@ -172,7 +173,7 @@ export const RegularTableView = ({
             position: 'sticky',
             top:
               row.getIsPinned() === 'top'
-                  ? `${row.getPinnedIndex() * rowHeight + headerHeight}px`
+                  ? `${row.getPinnedIndex() * rowHeight + headerHeight + actionBarHeight}px`
                   : undefined,
             zIndex: '3'
           }}

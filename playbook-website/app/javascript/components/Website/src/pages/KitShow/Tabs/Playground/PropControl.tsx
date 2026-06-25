@@ -393,19 +393,19 @@ const ObjectControl: React.FC<PropControlProps> = ({ name, value, onChange }) =>
   }, [objectSyncKey]);
 
   return (
-    <Flex flexDirection="column" paddingY="xs">
+    <Flex flexDirection="column" paddingY="xs" width="100%">
       <Checkbox
         checked={isEnabled}
         onChange={() => {
           onChange(name, {
-            value: isEnabled ? null : objectSeedFromPropValue(value),
+            value: objectSeedFromPropValue(value),
             enabled: !isEnabled,
           });
         }}
         text={formatPropName(name)}
       />
       {isEnabled && (
-        <Flex flexDirection="column" marginLeft="lg">
+        <Flex flexDirection="column" marginLeft="lg" width="100%">
           <Caption
             color="light"
             marginBottom="xs"
@@ -459,20 +459,20 @@ const ArrayControl: React.FC<PropControlProps> = ({ name, value, onChange }) => 
   }, [isEnabled, arraySyncKey]);
 
   return (
-    <Flex flexDirection="column" paddingY="xs">
+    <Flex flexDirection="column" paddingY="xs" width="100%">
       <Checkbox
         checked={isEnabled}
         onChange={() => {
           const seed = value?.value;
           onChange(name, {
-            value: isEnabled ? null : Array.isArray(seed) ? seed : [],
+            value: Array.isArray(seed) ? seed : [],
             enabled: !isEnabled,
           });
         }}
         text={formatPropName(name)}
       />
       {isEnabled && (
-        <Flex flexDirection="column" marginLeft="lg">
+        <Flex flexDirection="column" marginLeft="lg" width="100%">
           <Caption
             color="light"
             marginBottom="xs"
@@ -526,12 +526,12 @@ const RequiredArrayControl: React.FC<PropControlProps> = ({ name, value, onChang
   }, [arraySyncKey]);
 
   return (
-    <Flex flexDirection="column" paddingY="xs">
+    <Flex flexDirection="column" paddingY="xs" width="100%">
       <Flex align="center" gap="xs" marginBottom="xs">
         <Body text={name} />
         <Badge text="Required" variant="primary" />
       </Flex>
-      <Flex flexDirection="column">
+      <Flex flexDirection="column" width="100%">
         <Caption
           marginBottom="xs"
           color="light"

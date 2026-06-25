@@ -1,4 +1,9 @@
 {
+  "defaults": {
+    "text": "neutral",
+    "variant": "neutral",
+    "textTransform": "lowercase"
+  },
   "groups": [
     {
       "name": "Content",
@@ -12,45 +17,43 @@
   "presets": [
     {
       "name": "Neutral",
-      "props": { "text": "neutral", "variant": "neutral", "textTransform": "lowercase" },
+      "props": {
+        "text": "neutral",
+        "variant": "neutral",
+        "textTransform": "lowercase"
+      },
       "children": ""
     },
     {
       "name": "Primary",
-      "props": { "text": "Primary", "variant": "primary", "textTransform": "none" },
+      "props": {
+        "text": "Primary",
+        "variant": "primary",
+        "textTransform": "none"
+      },
       "children": ""
     },
     {
-      "name": "Success",
-      "props": { "text": "Success", "variant": "success", "textTransform": "none" },
-      "children": ""
-    },
-    {
-      "name": "Warning",
-      "props": { "text": "Warning", "variant": "warning", "textTransform": "none" },
-      "children": ""
-    },
-    {
-      "name": "Error",
-      "props": { "text": "Error", "variant": "error", "textTransform": "none" },
-      "children": ""
-    },
-    {
-      "name": "Info",
-      "props": { "text": "Info", "variant": "info", "textTransform": "none" },
-      "children": ""
-    },
-    {
-      "name": "Lowercase label",
-      "props": { "text": "draft", "variant": "neutral", "textTransform": "lowercase" },
-      "children": ""
-    },
-    {
-      "name": "Preserve casing",
-      "props": { "text": "v2.4.0", "variant": "primary", "textTransform": "none" },
+      "name": "Preserve Casing",
+      "props": {
+        "text": "DRAFT",
+        "variant": "neutral",
+        "textTransform": "none"
+      },
       "children": ""
     }
   ],
   "conditionals": {},
-  "hints": {}
+  "hints": {
+    "variant": {
+      "when": {},
+      "message": "variant controls the visual color for the pill.",
+      "type": "info"
+    },
+    "text_transform": {
+      "presetName": "Preserve Casing",
+      "message": "Set textTransform to none when the label includes meaningful casing, versions, or abbreviations.",
+      "type": "info"
+    }
+  }
 }

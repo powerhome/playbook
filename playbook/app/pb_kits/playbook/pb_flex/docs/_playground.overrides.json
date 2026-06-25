@@ -1,105 +1,365 @@
 {
+  "structureModes": {
+    "default": "basic",
+    "modes": {
+      "basic": {
+        "label": "Basic",
+        "template": "<div className=\"flex-doc-example\">\n  <Flex{{props}}>\n    {{children}}\n  </Flex>\n</div>",
+        "children": "<Caption text=\"A\" />\n<Caption text=\"B\" />\n<Caption text=\"C\" />"
+      },
+      "flex_items": {
+        "label": "FlexItem Children",
+        "template": "<div className=\"flex-doc-example\">\n  <Flex{{props}}>\n    {{children}}\n  </Flex>\n</div>",
+        "children": "<FlexItem>\n  {'1'}\n</FlexItem>\n<FlexItem>\n  {'2'}\n</FlexItem>\n<FlexItem>\n  {'3'}\n</FlexItem>\n<FlexItem>\n  {'4'}\n</FlexItem>",
+        "props": {
+          "gap": "xs"
+        }
+      },
+      "controlled_flex_item": {
+        "label": "FlexItem Props",
+        "template": "<div className=\"flex-doc-example\">\n  <Flex{{props}}>\n    <FlexItem{{FlexItem.props}}>\n      {{children}}\n    </FlexItem>\n    <FlexItem>\n      {'2'}\n    </FlexItem>\n    <FlexItem>\n      {'3'}\n    </FlexItem>\n  </Flex>\n</div>",
+        "children": "{'1'}",
+        "props": {
+          "gap": "xs"
+        }
+      }
+    }
+  },
   "children": {
-    "default": "<Caption text=\"A\" /><Caption text=\"B\" /><Caption text=\"C\" />"
+    "editable": true,
+    "default": "<Caption text=\"A\" />\n<Caption text=\"B\" />\n<Caption text=\"C\" />"
+  },
+  "customProps": {
+    "flexItemFixedSize": {
+      "type": "string",
+      "platforms": ["react"]
+    },
+    "flexItemGrow": {
+      "type": "boolean",
+      "platforms": ["react"],
+      "default": false
+    },
+    "flexItemShrink": {
+      "type": "boolean",
+      "platforms": ["react"],
+      "default": false
+    },
+    "flexItemFlex": {
+      "type": "number",
+      "platforms": ["react"]
+    },
+    "flexItemOrder": {
+      "type": "enum",
+      "platforms": ["react"],
+      "values": [
+        "first",
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "10",
+        "11",
+        "12"
+      ]
+    },
+    "flexItemAlignSelf": {
+      "type": "enum",
+      "platforms": ["react"],
+      "values": [
+        "start",
+        "end",
+        "center",
+        "stretch"
+      ]
+    },
+    "flexItemDisplayFlex": {
+      "type": "boolean",
+      "platforms": ["react"],
+      "default": false
+    }
+  },
+  "propTargets": {
+    "flexItemFixedSize": "FlexItem.props",
+    "flexItemGrow": "FlexItem.props",
+    "flexItemShrink": "FlexItem.props",
+    "flexItemFlex": "FlexItem.props",
+    "flexItemOrder": "FlexItem.props",
+    "flexItemAlignSelf": "FlexItem.props",
+    "flexItemDisplayFlex": "FlexItem.props"
+  },
+  "propAliases": {
+    "flexItemFixedSize": "fixedSize",
+    "flexItemGrow": "grow",
+    "flexItemShrink": "shrink",
+    "flexItemFlex": "flex",
+    "flexItemOrder": "order",
+    "flexItemAlignSelf": "alignSelf",
+    "flexItemDisplayFlex": "displayFlex"
   },
   "groups": [
     {
-      "name": "Direction & flow",
-      "props": ["orientation", "reverse", "wrap", "inline"]
+      "name": "Direction & Flow",
+      "props": [
+        "orientation",
+        "reverse",
+        "wrap",
+        "inline"
+      ]
     },
     {
-      "name": "Primary axis",
-      "props": ["horizontal", "justify", "spacing"]
+      "name": "Primary Axis",
+      "props": [
+        "horizontal",
+        "justify",
+        "spacing"
+      ]
     },
     {
-      "name": "Cross axis",
-      "props": ["vertical", "align", "alignSelf"]
+      "name": "Cross Axis",
+      "props": [
+        "vertical",
+        "align",
+        "alignSelf"
+      ]
+    },
+    {
+      "name": "Gap",
+      "props": [
+        "gap",
+        "rowGap",
+        "columnGap"
+      ]
+    },
+    {
+      "name": "FlexItem Props",
+      "props": [
+        "flexItemFixedSize",
+        "flexItemGrow",
+        "flexItemShrink",
+        "flexItemFlex",
+        "flexItemOrder",
+        "flexItemAlignSelf",
+        "flexItemDisplayFlex"
+      ]
     }
   ],
   "presets": [
     {
-      "name": "Row (start)",
+      "name": "Row",
+      "structureMode": "basic",
       "props": {
-        "orientation": "row",
-        "justify": "none",
         "horizontal": "left",
+        "justify": "none",
+        "orientation": "row",
         "vertical": "top"
       },
-      "children": "<Caption text=\"A\" /><Caption text=\"B\" /><Caption text=\"C\" />"
+      "children": "<Caption text=\"A\" />\n<Caption text=\"B\" />\n<Caption text=\"C\" />"
     },
     {
       "name": "Column",
+      "structureMode": "basic",
       "props": {
-        "orientation": "column",
-        "justify": "none",
         "horizontal": "left",
+        "justify": "none",
+        "orientation": "column",
         "vertical": "top"
       },
-      "children": "<Caption text=\"One\" /><Caption text=\"Two\" /><Caption text=\"Three\" />"
+      "children": "<Caption text=\"One\" />\n<Caption text=\"Two\" />\n<Caption text=\"Three\" />"
     },
     {
       "name": "Centered",
+      "structureMode": "basic",
       "props": {
-        "orientation": "row",
         "justify": "center",
+        "orientation": "row",
         "vertical": "center"
       },
       "children": "<Caption text=\"Centered\" />"
     },
     {
-      "name": "Space between",
+      "name": "Space Between",
+      "structureMode": "basic",
       "props": {
-        "orientation": "row",
         "justify": "between",
-        "vertical": "center"
-      },
-      "children": "<Caption text=\"Left\" /><Caption text=\"Right\" />"
-    },
-    {
-      "name": "Space around",
-      "props": {
         "orientation": "row",
-        "justify": "around",
         "vertical": "center"
       },
-      "children": "<Caption text=\"A\" /><Caption text=\"B\" /><Caption text=\"C\" />"
-    },
-    {
-      "name": "End aligned",
-      "props": {
-        "orientation": "row",
-        "justify": "end",
-        "vertical": "center"
-      },
-      "children": "<Caption text=\"Trailing\" />"
+      "children": "<Caption text=\"Left\" />\n<Caption text=\"Right\" />"
     },
     {
       "name": "Wrap",
+      "structureMode": "flex_items",
       "props": {
+        "gap": "xs",
+        "justify": "start",
         "orientation": "row",
-        "wrap": true,
-        "justify": "start"
+        "wrap": true
       },
-      "children": "<Caption text=\"Item 1\" /><Caption text=\"Item 2\" /><Caption text=\"Item 3\" /><Caption text=\"Item 4\" />"
+      "children": "<FlexItem fixedSize=\"160px\">\n  {'Item 1'}\n</FlexItem>\n<FlexItem fixedSize=\"160px\">\n  {'Item 2'}\n</FlexItem>\n<FlexItem fixedSize=\"160px\">\n  {'Item 3'}\n</FlexItem>\n<FlexItem fixedSize=\"160px\">\n  {'Item 4'}\n</FlexItem>\n<FlexItem fixedSize=\"160px\">\n  {'Item 5'}\n</FlexItem>"
     },
     {
-      "name": "Inline flex",
+      "name": "Gap",
+      "structureMode": "flex_items",
       "props": {
-        "inline": true,
+        "gap": "sm",
         "orientation": "row",
-        "vertical": "center"
+        "wrap": true
       },
-      "children": "<Caption text=\"Inline\" /> <Caption text=\"chips\" />"
+      "children": "<FlexItem>{'1'}</FlexItem>\n<FlexItem>{'2'}</FlexItem>\n<FlexItem>{'3'}</FlexItem>\n<FlexItem>{'4'}</FlexItem>"
     },
     {
-      "name": "Column (center items)",
+      "name": "Responsive Gap",
+      "structureMode": "flex_items",
       "props": {
-        "orientation": "column",
-        "align": "center"
+        "gap": {
+          "xs": "none",
+          "sm": "sm",
+          "md": "md",
+          "lg": "lg",
+          "xl": "xl"
+        },
+        "orientation": "row",
+        "wrap": true
       },
-      "children": "<Caption text=\"Stacked\" /><Caption text=\"centered\" />"
+      "children": "<FlexItem fixedSize=\"96px\">{'1'}</FlexItem>\n<FlexItem fixedSize=\"96px\">{'2'}</FlexItem>\n<FlexItem fixedSize=\"96px\">{'3'}</FlexItem>\n<FlexItem fixedSize=\"96px\">{'4'}</FlexItem>"
+    },
+    {
+      "name": "FlexItem Grow",
+      "structureMode": "controlled_flex_item",
+      "props": {
+        "flexItemGrow": true,
+        "gap": "xs"
+      },
+      "children": "{'I grow'}"
+    },
+    {
+      "name": "FlexItem Fixed Size",
+      "structureMode": "controlled_flex_item",
+      "props": {
+        "flexItemFixedSize": "240px",
+        "gap": "xs"
+      },
+      "children": "{'240px'}"
+    },
+    {
+      "name": "FlexItem Order",
+      "structureMode": "controlled_flex_item",
+      "props": {
+        "flexItemOrder": "4",
+        "gap": "xs"
+      },
+      "children": "{'1'}"
+    },
+    {
+      "name": "FlexItem Align Self",
+      "structureMode": "controlled_flex_item",
+      "props": {
+        "flexItemAlignSelf": "center",
+        "gap": "xs",
+        "vertical": "stretch"
+      },
+      "children": "{'center'}"
+    },
+    {
+      "name": "Display FlexItem",
+      "structureMode": "controlled_flex_item",
+      "props": {
+        "flexItemDisplayFlex": true,
+        "gap": "xs"
+      },
+      "children": "<FlexItem>\n  {'We'}\n</FlexItem>\n<FlexItem>\n  {'Are'}\n</FlexItem>\n<FlexItem>\n  {'Being'}\n</FlexItem>\n<FlexItem>\n  {'Flexed'}\n</FlexItem>"
     }
   ],
   "conditionals": {},
-  "hints": {}
+  "propSyncOnEnable": {
+    "flexItemFixedSize": {
+      "structureMode": "controlled_flex_item"
+    },
+    "flexItemGrow": {
+      "structureMode": "controlled_flex_item"
+    },
+    "flexItemShrink": {
+      "structureMode": "controlled_flex_item"
+    },
+    "flexItemFlex": {
+      "structureMode": "controlled_flex_item"
+    },
+    "flexItemOrder": {
+      "structureMode": "controlled_flex_item"
+    },
+    "flexItemAlignSelf": {
+      "structureMode": "controlled_flex_item"
+    },
+    "flexItemDisplayFlex": {
+      "structureMode": "controlled_flex_item"
+    }
+  },
+  "hints": {
+    "row": {
+      "presetName": "Row",
+      "message": "Row is the default Flex direction and keeps editable children as direct children of Flex.",
+      "type": "info"
+    },
+    "column": {
+      "presetName": "Column",
+      "message": "Column stacks the same editable children vertically.",
+      "type": "info"
+    },
+    "centered": {
+      "presetName": "Centered",
+      "message": "Centered combines justify=\"center\" with vertical=\"center\" for centered row content.",
+      "type": "info"
+    },
+    "space_between": {
+      "presetName": "Space Between",
+      "message": "Space Between spreads the first and last children across the primary axis.",
+      "type": "info"
+    },
+    "wrap": {
+      "presetName": "Wrap",
+      "message": "Wrap uses fixed-size FlexItem children so wrapping behavior is visible as the preview width changes.",
+      "type": "info"
+    },
+    "gap": {
+      "presetName": "Gap",
+      "message": "Gap applies spacing between FlexItem children without adding margins to the child content.",
+      "type": "info"
+    },
+    "responsive_gap": {
+      "presetName": "Responsive Gap",
+      "message": "Responsive Gap passes a breakpoint object to gap for different spacing at different viewport widths.",
+      "type": "info"
+    },
+    "flexitem_grow": {
+      "presetName": "FlexItem Grow",
+      "message": "FlexItem Grow toggles the first FlexItem's grow prop through the FlexItem Props controls.",
+      "type": "info"
+    },
+    "flexitem_fixed_size": {
+      "presetName": "FlexItem Fixed Size",
+      "message": "FlexItem Fixed Size applies fixedSize to the first FlexItem through the FlexItem Props controls.",
+      "type": "info"
+    },
+    "flexitem_order": {
+      "presetName": "FlexItem Order",
+      "message": "FlexItem Order applies visual ordering to the first FlexItem through the FlexItem Props controls.",
+      "type": "info"
+    },
+    "flexitem_align_self": {
+      "presetName": "FlexItem Align Self",
+      "message": "FlexItem Align Self applies cross-axis alignment to the first FlexItem through the FlexItem Props controls.",
+      "type": "info"
+    },
+    "display_flexitem": {
+      "presetName": "Display FlexItem",
+      "message": "Display FlexItem makes the first FlexItem act as a flex container for its editable children.",
+      "type": "info"
+    }
+  }
 }

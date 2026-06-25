@@ -8,18 +8,31 @@
   },
   "children": {
     "editable": true,
-    "default": "Message content"
+    "default": "",
+    "hideWhenPropSet": [
+      "message"
+    ]
   },
   "groups": [
     {
-      "name": "Props",
+      "name": "Avatar",
       "props": [
-        "avatarGrayscale",
         "avatarName",
-        "avatarStatus",
         "avatarUrl",
+        "avatarStatus",
+        "avatarGrayscale"
+      ]
+    },
+    {
+      "name": "Content",
+      "props": [
         "label",
-        "message",
+        "message"
+      ]
+    },
+    {
+      "name": "Time",
+      "props": [
         "timestamp",
         "timestampObject",
         "timezone",
@@ -30,10 +43,103 @@
   "presets": [
     {
       "name": "Default",
-      "props": {},
-      "children": "Message content"
+      "props": {
+        "avatarName": "Mike Bishop",
+        "avatarStatus": "online",
+        "avatarUrl": "https://randomuser.me/api/portraits/men/50.jpg",
+        "label": "Anna Black",
+        "message": "How can we assist you today?",
+        "timestamp": "20 seconds ago"
+      }
+    },
+    {
+      "name": "No Avatar",
+      "props": {
+        "label": "Keith Craig",
+        "message": "Please hold for one moment, I will check with my manager.",
+        "timestamp": "2 days ago"
+      }
+    },
+    {
+      "name": "Grayscale",
+      "props": {
+        "avatarGrayscale": true,
+        "avatarName": "Mike Bishop",
+        "avatarStatus": "offline",
+        "avatarUrl": "https://randomuser.me/api/portraits/men/50.jpg",
+        "label": "Mike Bishop",
+        "message": "So long, and thanks for all the fish!",
+        "timestamp": "3 months ago"
+      }
+    },
+    {
+      "name": "Timestamp Object",
+      "props": {
+        "alignTimestamp": "left",
+        "avatarName": "Wade Winningham",
+        "avatarUrl": "https://randomuser.me/api/portraits/men/14.jpg",
+        "label": "Becca Jacobs",
+        "message": "Application for Kate Smith is waiting for your approval.",
+        "timestamp": "12:20p",
+        "timestampObject": "2026-06-12T12:20:00-04:00"
+      }
+    },
+    {
+      "name": "Hover",
+      "props": {
+        "avatarName": "Mike Bishop",
+        "avatarStatus": "online",
+        "avatarUrl": "https://randomuser.me/api/portraits/men/50.jpg",
+        "borderRadius": "rounded",
+        "hover": {
+          "background": "success_subtle"
+        },
+        "label": "Anna Black",
+        "message": "How can we assist you today?",
+        "padding": "xs"
+      }
+    },
+    {
+      "name": "Mentions",
+      "props": {
+        "avatarName": "Keith Craig",
+        "label": "Keith Craig",
+        "timestamp": "2 days ago"
+      },
+      "children": "<Message.Mention variant=\"user\">@all</Message.Mention>{' please welcome '}<Message.Mention variant=\"self\">@Lucille Sanchez</Message.Mention>{' to the team this week!'}"
     }
   ],
   "conditionals": {},
-  "hints": {}
+  "hints": {
+    "default": {
+      "presetName": "Default",
+      "message": "Default renders an avatar, label, message body, and relative timestamp.",
+      "type": "info"
+    },
+    "no_avatar": {
+      "presetName": "No Avatar",
+      "message": "When avatarName and avatarUrl are omitted, Message uses the compact non-avatar layout.",
+      "type": "info"
+    },
+    "grayscale": {
+      "presetName": "Grayscale",
+      "message": "avatarGrayscale desaturates the avatar while keeping avatar status visible.",
+      "type": "info"
+    },
+    "timestamp_object": {
+      "presetName": "Timestamp Object",
+      "message": "timestampObject emits a Date instance in generated JSX for humanized timestamp behavior.",
+      "type": "info"
+    },
+    "hover": {
+      "presetName": "Hover",
+      "message": "Hover uses global hover and spacing props alongside the Message-specific props.",
+      "type": "info"
+    },
+    "mentions": {
+      "presetName": "Mentions",
+      "message": "Mentions are composed as Message.Mention children with user and self variants.",
+      "type": "info"
+    }
+  }
 }

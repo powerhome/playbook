@@ -3,8 +3,9 @@
   "propTargets": {},
   "defaults": {
     "align": "left",
-    "icon": "chart-line",
-    "text": "1,428"
+    "icon": "clipboard",
+    "text": "33-123456",
+    "dark": false
   },
   "groups": [
     {
@@ -17,37 +18,30 @@
     {
       "name": "Appearance",
       "props": [
-        "align"
+        "align",
+        "dark"
       ]
     }
   ],
   "presets": [
     {
-      "name": "Metric",
+      "name": "Heart",
       "props": {
-        "icon": "chart-line",
-        "text": "1,428",
-        "align": "left"
-      }
-    },
-    {
-      "name": "Users",
-      "props": {
-        "icon": "users",
-        "text": "2,000",
+        "icon": "heart",
+        "text": "93",
         "align": "left"
       }
     },
     {
       "name": "Centered",
       "props": {
-        "icon": "heart",
-        "text": "15%",
+        "icon": "comment",
+        "text": "5 comments",
         "align": "center"
       }
     },
     {
-      "name": "Right aligned",
+      "name": "Right Aligned",
       "props": {
         "icon": "dollar-sign",
         "text": "$2,000",
@@ -56,5 +50,21 @@
     }
   ],
   "conditionals": {},
-  "hints": {}
+  "hints": {
+    "heart": {
+      "presetName": "Heart",
+      "message": "Use the icon prop to render any icon you want.",
+      "type": "info"
+    },
+    "centered": {
+      "presetName": "Centered",
+      "message": "Use the align prop to change the alignment of the icon and text.",
+      "type": "info"
+    },
+    "right_aligned": {
+      "presetName": "Right Aligned",
+      "message": "Use the align prop to right align the icon and text.",
+      "type": "info"
+    }
+  }
 }

@@ -1,0 +1,224 @@
+{
+  "template": "<PbCircleChart{{props}} />",
+  "externalImports": [
+    "import { PbCircleChart } from 'playbook-ui/charts'"
+  ],
+  "defaults": {
+    "options": {
+      "series": [
+        {
+          "data": [
+            {
+              "name": "Waiting for Calls",
+              "y": 41
+            },
+            {
+              "name": "On Call",
+              "y": 49
+            },
+            {
+              "name": "After Call",
+              "y": 10
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "groups": [
+    {
+      "name": "Chart",
+      "props": ["options"]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default",
+      "props": {
+        "options": {
+          "series": [
+            {
+              "data": [
+                {
+                  "name": "Waiting for Calls",
+                  "y": 41
+                },
+                {
+                  "name": "On Call",
+                  "y": 49
+                },
+                {
+                  "name": "After Call",
+                  "y": 10
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "With Title",
+      "props": {
+        "options": {
+          "title": {
+            "text": "Active Users on Social Media"
+          },
+          "series": [
+            {
+              "data": [
+                {
+                  "name": "Facebook",
+                  "y": 2498
+                },
+                {
+                  "name": "YouTube",
+                  "y": 2000
+                },
+                {
+                  "name": "WhatsApp",
+                  "y": 2000
+                },
+                {
+                  "name": "Instagram",
+                  "y": 1000
+                },
+                {
+                  "name": "Tik Tok",
+                  "y": 800
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Legend",
+      "props": {
+        "options": {
+          "series": [
+            {
+              "data": [
+                {
+                  "name": "Bugs",
+                  "y": 8
+                },
+                {
+                  "name": "Chores",
+                  "y": 1
+                },
+                {
+                  "name": "Stories",
+                  "y": 12
+                }
+              ]
+            }
+          ],
+          "plotOptions": {
+            "pie": {
+              "showInLegend": true
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "Labels",
+      "props": {
+        "options": {
+          "series": [
+            {
+              "data": [
+                {
+                  "name": "Facebook",
+                  "y": 2498
+                },
+                {
+                  "name": "YouTube",
+                  "y": 2000
+                },
+                {
+                  "name": "WhatsApp",
+                  "y": 2000
+                },
+                {
+                  "name": "Instagram",
+                  "y": 1000
+                },
+                {
+                  "name": "Tik Tok",
+                  "y": 800
+                }
+              ]
+            }
+          ],
+          "plotOptions": {
+            "pie": {
+              "dataLabels": {
+                "enabled": true
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "Custom Colors",
+      "props": {
+        "options": {
+          "series": [
+            {
+              "data": [
+                {
+                  "name": "Waiting for Calls",
+                  "y": 41
+                },
+                {
+                  "name": "On Call",
+                  "y": 49
+                },
+                {
+                  "name": "After Call",
+                  "y": 10
+                }
+              ]
+            }
+          ],
+          "plotOptions": {
+            "pie": {
+              "colors": ["#144075", "#005a8b", "#f9b115"]
+            }
+          }
+        }
+      }
+    }
+  ],
+  "hints": {
+    "charts_import": {
+      "when": {},
+      "message": "Highcharts kits are imported from playbook-ui/charts so apps can load the chart bundle only when needed.",
+      "type": "info"
+    },
+    "with_title": {
+      "presetName": "With Title",
+      "message": "Add options.title.text when the chart needs a visible Highcharts title.",
+      "type": "info"
+    },
+    "legend": {
+      "presetName": "Legend",
+      "message": "Circle chart legends are controlled through options.plotOptions.pie.showInLegend.",
+      "type": "info"
+    },
+    "labels": {
+      "presetName": "Labels",
+      "message": "Data labels are enabled through options.plotOptions.pie.dataLabels.enabled.",
+      "type": "info"
+    },
+    "colors": {
+      "presetName": "Custom Colors",
+      "message": "Use options.plotOptions.pie.colors to set individual slice colors.",
+      "type": "info"
+    }
+  }
+}

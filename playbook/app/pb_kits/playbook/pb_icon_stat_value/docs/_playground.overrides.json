@@ -9,20 +9,93 @@
     "variant": "default"
   },
   "groups": [
-    { "name": "Content", "props": ["icon", "value", "unit", "text"] },
-    { "name": "Appearance", "props": ["orientation", "size", "variant"] }
+    {
+      "name": "Content",
+      "props": [
+        "icon",
+        "value",
+        "unit",
+        "text"
+      ]
+    },
+    {
+      "name": "Appearance",
+      "props": [
+        "orientation",
+        "size",
+        "variant",
+        "dark"
+      ]
+    }
   ],
   "presets": [
-    { "name": "Default", "props": { "icon": "chart-line", "value": 1428, "unit": "hrs", "text": "Avg. session", "orientation": "horizontal", "size": "md" } },
-    { "name": "Vertical", "props": { "icon": "users", "value": 2000, "unit": "", "text": "Active users", "orientation": "vertical", "size": "lg", "variant": "royal" } },
-    { "name": "Teal accent", "props": { "icon": "chart-line", "value": 15, "unit": "%", "text": "QoQ growth", "variant": "teal", "size": "sm" } },
-    { "name": "Orange stat", "props": { "icon": "lightbulb-on", "value": 99, "unit": "/mo", "text": "Plan tier", "variant": "orange", "size": "md" } }
+    {
+      "name": "Default",
+      "props": {
+        "icon": "chart-line",
+        "value": 1428,
+        "unit": "hrs",
+        "text": "Avg. session",
+        "orientation": "horizontal",
+        "size": "md",
+        "variant": "default"
+      }
+    },
+    {
+      "name": "Vertical",
+      "props": {
+        "icon": "broadcast-tower",
+        "value": 102.5,
+        "unit": "wkz",
+        "text": "Radio",
+        "orientation": "vertical",
+        "variant": "royal"
+      }
+    },
+    {
+      "name": "Small Size",
+      "props": {
+        "icon": "chart-line",
+        "value": 15,
+        "unit": "%",
+        "text": "QoQ growth",
+        "orientation": "horizontal",
+        "size": "sm",
+        "variant": "teal"
+      }
+    },
+    {
+      "name": "Orange Variant",
+      "props": {
+        "icon": "lightbulb-on",
+        "value": 99,
+        "unit": "/mo",
+        "text": "Plan tier",
+        "orientation": "horizontal",
+        "variant": "orange"
+      }
+    }
   ],
   "conditionals": {},
   "hints": {
-    "vertical_layout": {
-      "when": { "orientation": "vertical" },
+    "default": {
+      "presetName": "Default",
+      "message": "Use the icon, value, unit, and text props to render an icon stat value.",
+      "type": "info"
+    },
+    "vertical": {
+      "presetName": "Vertical",
       "message": "Vertical orientation stacks the icon above the value; horizontal places the icon to the left.",
+      "type": "info"
+    },
+    "small_size": {
+      "presetName": "Small Size",
+      "message": "Use the size prop to change the size of the icon stat value.",
+      "type": "info"
+    },
+    "orange_variant": {
+      "presetName": "Orange Variant",
+      "message": "Use the variant prop to change the color of the icon stat value.",
       "type": "info"
     }
   }

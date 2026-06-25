@@ -11,6 +11,7 @@ import { PropsTab } from "./Tabs/PropsTab";
 // import { BuildingBlocksTab } from "./Tabs/BuildingBlocksTab";
 // import { ReferencesTab } from "./Tabs/ReferencesTab";
 // import { PlaygroundTab } from "./Tabs/PlaygroundTab";
+import { PLAYGROUND_ENABLED_KITS } from "./playgroundEnabledKits";
 
 const KitShow = () => {
   const { name } = useParams();
@@ -22,8 +23,8 @@ const KitShow = () => {
     kit_sections,
     available_props,
     kits_with_status,
-    // kit_schema,
-    // global_props_schema,
+    // kit_schema, 
+    // global_props_schema, 
     // playground_config,
   } = loaderData;
   const { darkMode, setDarkMode } = useDarkMode();
@@ -87,42 +88,6 @@ const KitShow = () => {
       MOCK_DATA_INLINE_LOADING_EMPTY_CHILDREN: loaderData.table_data_inline_loading_empty_children || [],
     };
   }, [loaderData]);
-
-  // TODO: Remove this allowlist once playground is ready for all kits
-  const PLAYGROUND_ENABLED_KITS = [
-    "advanced_table",
-    "avatar",
-    "background",
-    "badge",
-    "body",
-    "bread_crumbs",
-    "button",
-    "button_toolbar",
-    "caption",
-    "card",
-    "checkbox",
-    "circle_icon_button",
-    "collapsible",
-    "contact",
-    "copy_button",
-    "currency",
-    "dashboard_value",
-    "date",
-    "date_picker",
-    "date_range_inline",
-    "date_range_stacked",
-    "date_stacked",
-    "date_time",
-    "date_time_stacked",
-    "date_year_stacked",
-    "detail",
-    "dialog",
-    "distribution_bar",
-    "draggable",
-    "dropdown",
-    "empty_state",
-    "file_upload",
-  ];
 
   const [activeTab, setActiveTab] = useState<string>("docs");
   const showPlayground = platform !== "rails" && PLAYGROUND_ENABLED_KITS.includes(currentKit);
@@ -254,7 +219,7 @@ const KitShow = () => {
         <Flex align="stretch" minWidth={0} orientation="column" marginBottom="lg" width="100%">
           {/* Playground Tab Content (React-only for now; hidden on Rails) */}
           {/* TODO: Add playground back in when we have final designs */}
-          {/* {showPlayground && displayTab === "playground" && (
+           {/* {showPlayground && displayTab === "playground" && (
             <PlaygroundTab
               kitSchema={kit_schema}
               globalPropsSchema={global_props_schema}
