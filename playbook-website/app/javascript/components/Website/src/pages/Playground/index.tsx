@@ -53,6 +53,12 @@ import { ROOT_TARGET_ID } from "./types";
 
 import "./styles.scss";
 
+const PLAYGROUND_PANEL_DROPDOWN_CLASS = "playground-panel-dropdown";
+const playgroundPanelDropdownClassName = (filled: boolean) =>
+  filled
+    ? `${PLAYGROUND_PANEL_DROPDOWN_CLASS} ${PLAYGROUND_PANEL_DROPDOWN_CLASS}--filled`
+    : PLAYGROUND_PANEL_DROPDOWN_CLASS;
+
 export default function Playground() {
   const { global_props_schema, playground_kits = [] } =
     useLoaderData() as PlaygroundLoaderData;
@@ -450,7 +456,7 @@ export default function Playground() {
           orientation="column"
           width="100%"
         >
-          <Card padding="md" width="100%">
+          <Card className="playground-panel-controls" padding="md" width="100%">
             <Title marginBottom="sm" size={4} text="Add Kits" />
             <Flex className="builder-field" orientation="column">
               <Flex align="center" gap="xs">
@@ -460,6 +466,7 @@ export default function Playground() {
                 </Tooltip>
               </Flex>
               <Dropdown
+                className={playgroundPanelDropdownClassName(true)}
                 clearable={false}
                 defaultValue={activeAddTargetOption}
                 id="playground-add-target-dropdown"
@@ -473,15 +480,25 @@ export default function Playground() {
                 width="100%"
               />
             </Flex>
-            <TextInput
-              label="Search kits"
-              name="playgroundKitSearch"
-              onChange={(event: React.FormEvent<HTMLInputElement>) =>
-                setSearchQuery((event.target as HTMLInputElement).value)
+            <Flex
+              className={
+                searchQuery.trim()
+                  ? "playground-panel-control--filled"
+                  : undefined
               }
-              placeholder="Search configured kits"
-              value={searchQuery}
-            />
+              orientation="column"
+              width="100%"
+            >
+              <TextInput
+                label="Search kits"
+                name="playgroundKitSearch"
+                onChange={(event: React.FormEvent<HTMLInputElement>) =>
+                  setSearchQuery((event.target as HTMLInputElement).value)
+                }
+                placeholder="Search configured kits"
+                value={searchQuery}
+              />
+            </Flex>
             <Flex
               className="builder-kit-list"
               gap="xs"
@@ -662,12 +679,13 @@ export default function Playground() {
           minWidth="0"
           orientation="column"
         >
-          <Card padding="md">
+          <Card className="playground-panel-controls" padding="md">
             <Title marginBottom="sm" size={4} text="Inspector" />
             {instanceOptions.length > 0 && (
               <Flex className="builder-field" orientation="column">
                 <Caption text="Selected kit" />
                 <Dropdown
+                  className={playgroundPanelDropdownClassName(!!selectedId)}
                   clearable={false}
                   defaultValue={activeSelectedInstanceOption}
                   id="playground-selected-kit-dropdown"
@@ -721,6 +739,9 @@ export default function Playground() {
                   >
                     <Caption text="Data" />
                     <Dropdown
+                      className={playgroundPanelDropdownClassName(
+                        !!selectedInstance.dataPresetKey,
+                      )}
                       clearable={false}
                       defaultValue={activeDataPresetOption}
                       id="playground-data-preset-dropdown"
@@ -752,6 +773,9 @@ export default function Playground() {
                   >
                     <Caption text="Structure" />
                     <Dropdown
+                      className={playgroundPanelDropdownClassName(
+                        !!selectedInstance.structureMode,
+                      )}
                       clearable={false}
                       defaultValue={activeStructureModeOption}
                       id="playground-structure-mode-dropdown"

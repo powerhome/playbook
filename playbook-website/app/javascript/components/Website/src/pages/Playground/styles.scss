@@ -2,6 +2,14 @@
 @import "playbook-tokens/screen_sizes";
 @import "playbook-tokens/spacing";
 @import "../KitShow/Tabs/Playground/PlaygroundPreview.scss";
+@import "../KitShow/Tabs/Playground/components/playgroundPanelControls";
+
+.full-playground-sidebar,
+.full-playground-inspector {
+  .playground-panel-controls {
+    @include playground-panel-form-control-styles("playground-panel-dropdown");
+  }
+}
 
 .full-playground-shell {
   box-sizing: border-box;
