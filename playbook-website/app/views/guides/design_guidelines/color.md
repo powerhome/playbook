@@ -104,13 +104,13 @@ These eight tokens are Playbook’s core set of data visualization colors. Desig
 
 #### Product Colors
 
-Playbook's offers a set of ten product tokens, useful for grouping reoccurring items with a consistent color assignment.
+Playbook's offers a set of eleven product tokens, useful for grouping reoccurring items with a consistent color assignment.
 Each product color is accompanied by corresponding background and highlight token, providing flexibility in design implementation. Background tokens are ideal for accommodating text, while highlight tokens stand out independently, perfect for icons or emphasis within design elements.
 
 | Product Colors                                                                                                    | Name & Token                                                                                    | Usage                                                                                       |
 | ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
-| ![Product Background](https://github.com/powerhome/playbook/assets/89551222/9729ae41-c614-4436-a79d-c2962e804bde) | <small> PRODUCT BACKGROUND 1 - 10 <br/> $product_1_background - $product_10_background </small> | Used as a background color and text color for a grouping of reoccurring items               |
-| ![Product Highlight](https://github.com/powerhome/playbook/assets/89551222/43b5012c-c27d-4587-9e72-5fff35785c82)  | <small> PRODUCT HIGHLIGHT 1 - 10 <br/> $product_1_highlight - $product_10_highlight </small>    | Used as a highlight color perfect for icons or emphasis for a grouping of reoccurring items |
+| ![Product Background](https://github.com/powerhome/playbook/assets/89551222/9729ae41-c614-4436-a79d-c2962e804bde) | <small> PRODUCT BACKGROUND 1 - 11 <br/> $product_1_background - $product_11_background </small> | Used as a background color and text color for a grouping of reoccurring items               |
+| ![Product Highlight](https://github.com/powerhome/playbook/assets/89551222/43b5012c-c27d-4587-9e72-5fff35785c82)  | <small> PRODUCT HIGHLIGHT 1 - 11 <br/> $product_1_highlight - $product_11_highlight </small>    | Used as a highlight color perfect for icons or emphasis for a grouping of reoccurring items |
 
 #### Category Colors
 
