@@ -1,0 +1,128 @@
+@import "playbook-tokens/colors";
+@import "playbook-tokens/spacing";
+@import "playbook-tokens/border_radius";
+
+// Shared trigger selectors — Playbook merges trigger state into one class token
+// (e.g. dropdown_trigger_wrapper_select_only) and applies px_sm/py_xs with !important.
+@mixin playground-panel-dropdown-trigger {
+  .dropdown_trigger_wrapper,
+  .dropdown_trigger_wrapper_focus,
+  .dropdown_trigger_wrapper_focus_select_only,
+  .dropdown_trigger_wrapper_select_only,
+  [class*="dropdown_trigger_wrapper"] {
+    box-sizing: border-box !important;
+    min-height: 30px !important;
+    padding: 4px 8px !important;
+    border-radius: $border_radius_sm;
+  }
+}
+
+@mixin playground-panel-dropdown-trigger-empty {
+  .dropdown_trigger_wrapper,
+  .dropdown_trigger_wrapper_focus,
+  .dropdown_trigger_wrapper_focus_select_only,
+  .dropdown_trigger_wrapper_select_only,
+  [class*="dropdown_trigger_wrapper"] {
+    background-color: $white !important;
+    box-shadow: none !important;
+
+    .dropdown_input {
+      background-color: $white !important;
+    }
+
+    @media (hover: hover) {
+      &:hover,
+      &:active,
+      &:focus,
+      &:focus-within {
+        background-color: $bg_light !important;
+
+        input {
+          background-color: $bg_light !important;
+        }
+      }
+    }
+  }
+}
+
+@mixin playground-panel-dropdown-trigger-filled {
+  .dropdown_trigger_wrapper,
+  .dropdown_trigger_wrapper_focus,
+  .dropdown_trigger_wrapper_focus_select_only,
+  .dropdown_trigger_wrapper_select_only,
+  [class*="dropdown_trigger_wrapper"] {
+    background-color: $bg_light !important;
+
+    .dropdown_input {
+      background-color: $bg_light !important;
+      box-shadow: none;
+    }
+
+    @media (hover: hover) {
+      &:hover,
+      &:active,
+      &:focus,
+      &:focus-within {
+        background-color: $bg_light !important;
+
+        input {
+          background-color: $bg_light !important;
+        }
+      }
+    }
+  }
+}
+
+@mixin playground-panel-form-control-styles($dropdown-class) {
+  .pb_text_input_kit {
+    .text_input_wrapper input,
+    .text_input_wrapper .text_input {
+      box-sizing: border-box;
+      min-height: 30px;
+      padding: 4px 8px;
+      border-radius: $border_radius_sm;
+    }
+  }
+
+  .#{$dropdown-class},
+  [class*="pb_dropdown"] {
+    width: 100%;
+
+    .dropdown_wrapper {
+      width: 100%;
+      @include playground-panel-dropdown-trigger;
+    }
+
+    &:not(.#{$dropdown-class}--filled) {
+      .dropdown_wrapper {
+        @include playground-panel-dropdown-trigger-empty;
+      }
+    }
+  }
+
+  .#{$dropdown-class}--filled,
+  .playground-panel-control--filled .#{$dropdown-class}.#{$dropdown-class}--filled,
+  .props-panel-control--filled .#{$dropdown-class}.#{$dropdown-class}--filled {
+    .dropdown_wrapper {
+      @include playground-panel-dropdown-trigger-filled;
+    }
+  }
+
+  // Legacy: filled row without explicit dropdown class (avoid styling empty dropdowns in info rows)
+  .playground-panel-control--filled [class*="pb_dropdown"]:not(.playground-panel-dropdown--filled),
+  .props-panel-control--filled [class*="pb_dropdown"]:not(.props-panel-dropdown--filled) {
+    .dropdown_wrapper {
+      @include playground-panel-dropdown-trigger-empty;
+    }
+  }
+
+  .playground-panel-control--filled,
+  .props-panel-control--filled {
+    .pb_text_input_kit {
+      .text_input_wrapper input,
+      .text_input_wrapper .text_input {
+        background-color: $bg_light;
+      }
+    }
+  }
+}

@@ -94,6 +94,14 @@ const KitShow = () => {
   const displayTab =
     activeTab === "playground" && !showPlayground ? "docs" : activeTab;
 
+  const kitShowTitle = useMemo(() => {
+    const sectionSlug = name ?? "";
+    if (currentKit === "advanced_table" && sectionSlug) {
+      return `${linkFormat("advanced_table")} - ${linkFormat(sectionSlug)}`;
+    }
+    return linkFormat(sectionSlug || currentKit);
+  }, [currentKit, name]);
+
   const handleTabChange = (tab: string) => {
     if (tab === "playground") {
       setDarkMode(false);
@@ -117,7 +125,7 @@ const KitShow = () => {
           {/* Title row with inline status badge */}
           <Flex orientation="row" alignItems="center" marginBottom={kit_description ? undefined : "md"}>
             <Title
-              text={`${linkFormat(name)}`}
+              text={kitShowTitle}
               size={1}
               dark={darkMode}
             />
@@ -189,7 +197,6 @@ const KitShow = () => {
               onClick={() => handleTabChange("props")}
               dark={darkMode}
             />
-            {/* TODO: Add playground back in when we have final designs */}
             {showPlayground && (
               <NavItem
                 text="Playground"
@@ -218,7 +225,6 @@ const KitShow = () => {
       <div className="kit-show-wrapper">
         <Flex align="stretch" minWidth={0} orientation="column" marginBottom="lg" width="100%">
           {/* Playground Tab Content (React-only for now; hidden on Rails) */}
-          {/* TODO: Add playground back in when we have final designs */}
            {showPlayground && displayTab === "playground" && (
             <PlaygroundTab
               kitSchema={kit_schema}

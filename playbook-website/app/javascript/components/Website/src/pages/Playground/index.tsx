@@ -15,8 +15,9 @@ import {
   Tooltip,
 } from "playbook-ui";
 
-import { CodePanel, PropControl } from "../KitShow/Tabs/Playground";
+import { CodePanel, PropsPanel, ResponsivePreviewFrame } from "../KitShow/Tabs/Playground";
 import type { PropValue } from "../KitShow/Tabs/Playground";
+import { panelDropdownClassName } from "../KitShow/Tabs/Playground/playgroundPanelControls";
 import { PLAYGROUND_ENABLED_KITS } from "../KitShow/playgroundEnabledKits";
 import { BuilderPreviewItem } from "./BuilderPreviewItem";
 import { generateCode } from "./codeGeneration";
@@ -26,16 +27,13 @@ import {
   formatKitName,
   getConfiguredChildren,
   getDataPresetOptions,
-  getGlobalProps,
-  getGroupedEditableProps,
-  getPropValue,
-  getRequiredPropNames,
   getRuntimeProps,
   getStructureModeOptions,
   getStructureModeProps,
   isRuntimeProp,
   shouldApplySyncValue,
 } from "./kitUtils";
+import { useBuilderPropsPanel, type BuilderPropsPanelState } from "./useBuilderPropsPanel";
 import {
   buildInstanceOptions,
   buildTargetOptions,
@@ -112,13 +110,10 @@ export default function Playground() {
     : undefined;
   const selectedDataPresetOptions = getDataPresetOptions(selectedKit);
   const selectedStructureModeOptions = getStructureModeOptions(selectedKit);
-  const selectedGlobalProps = getGlobalProps(
-    selectedKit,
-    global_props_schema?.props,
-  );
-  const selectedRequiredPropNames = getRequiredPropNames(
-    selectedKit,
+  const builderPropsPanel: BuilderPropsPanelState = useBuilderPropsPanel(
     selectedInstance,
+    selectedKit,
+    global_props_schema,
   );
   const targetOptions = useMemo(
     () => [
@@ -363,6 +358,15 @@ export default function Playground() {
     );
   };
 
+  const handleChildrenChange = (value: string) => {
+    if (!selectedInstance) return;
+
+    updateInstance(selectedInstance.id, (instance) => ({
+      ...instance,
+      configuredChildren: value,
+    }));
+  };
+
   const handlePropChange = (name: string, value: PropValue) => {
     if (!selectedInstance || !selectedKit) return;
     const syncRule = selectedKit.playground_config?.propSyncOnEnable?.[name];
@@ -441,12 +445,13 @@ export default function Playground() {
 
       <div className="full-playground-workbench">
         <Flex
+          className="full-playground-sidebar"
           gap="md"
           htmlOptions={{ style: { minWidth: "0" } }}
           orientation="column"
           width="100%"
         >
-          <Card padding="md" width="100%">
+          <Card className="playground-panel-controls" padding="md" width="100%">
             <Title marginBottom="sm" size={4} text="Add Kits" />
             <Flex className="builder-field" orientation="column">
               <Flex align="center" gap="xs">
@@ -456,6 +461,7 @@ export default function Playground() {
                 </Tooltip>
               </Flex>
               <Dropdown
+                className={panelDropdownClassName("playground-panel", true)}
                 clearable={false}
                 defaultValue={activeAddTargetOption}
                 id="playground-add-target-dropdown"
@@ -469,15 +475,25 @@ export default function Playground() {
                 width="100%"
               />
             </Flex>
-            <TextInput
-              label="Search kits"
-              name="playgroundKitSearch"
-              onChange={(event: React.FormEvent<HTMLInputElement>) =>
-                setSearchQuery((event.target as HTMLInputElement).value)
+            <Flex
+              className={
+                searchQuery.trim()
+                  ? "playground-panel-control--filled"
+                  : undefined
               }
-              placeholder="Search configured kits"
-              value={searchQuery}
-            />
+              orientation="column"
+              width="100%"
+            >
+              <TextInput
+                label="Search kits"
+                name="playgroundKitSearch"
+                onChange={(event: React.FormEvent<HTMLInputElement>) =>
+                  setSearchQuery((event.target as HTMLInputElement).value)
+                }
+                placeholder="Search configured kits"
+                value={searchQuery}
+              />
+            </Flex>
             <Flex
               className="builder-kit-list"
               gap="xs"
@@ -518,115 +534,128 @@ export default function Playground() {
           </Card>
         </Flex>
 
-        <Flex gap="md" minWidth="0" orientation="column" width="100%">
-          <Card overflow="hidden" padding="md" width="100%">
+        <Flex
+          className="full-playground-demo"
+          gap="md"
+          minWidth="0"
+          orientation="column"
+          width="100%"
+        >
+          <Card
+            className="playground-preview-card"
+            overflow="hidden"
+            padding="md"
+            width="100%"
+          >
             <Flex justify="between" align="center" marginBottom="md">
               <Title size={3} text="Demo" />
               <Badge text={`${instanceCount} kits`} variant="primary" />
             </Flex>
-            <Background
-              backgroundColor="light"
-              borderRadius="md"
-              className={`builder-stage ${
-                dragOverTargetId === ROOT_TARGET_ID ? "is-drop-target" : ""
-              }`}
-              display="flex"
-              flexDirection="column"
-              gap="sm"
-              htmlOptions={{
-                onClick: () => setSelectedId(null),
-                onDragLeave: (event: React.DragEvent<HTMLElement>) => {
-                  if (
-                    !event.currentTarget.contains(
-                      event.relatedTarget as Node | null,
-                    )
-                  ) {
-                    handleDragOverTarget(null);
-                  }
-                },
-                onDragOver: (event: React.DragEvent<HTMLElement>) => {
-                  event.preventDefault();
-                  event.dataTransfer.dropEffect = draggingInstanceIdRef.current
-                    ? "move"
-                    : "copy";
-                  handleDragOverTarget(ROOT_TARGET_ID, "Main canvas", event);
-                },
-                onDrop: (event: React.DragEvent<HTMLElement>) => {
-                  event.preventDefault();
-                  const plainValue = event.dataTransfer.getData("text/plain");
-                  const instanceId =
-                    event.dataTransfer.getData(
-                      "application/playbook-instance",
-                    ) ||
-                    (draggingInstanceIdRef.current === plainValue
-                      ? draggingInstanceIdRef.current
-                      : "");
-                  const kitName =
-                    event.dataTransfer.getData("application/playbook-kit") ||
-                    (instanceId ? "" : plainValue);
+            <ResponsivePreviewFrame showDragHint>
+              <Background
+                backgroundColor="light"
+                borderRadius="md"
+                className={`builder-stage playground-preview-container ${
+                  dragOverTargetId === ROOT_TARGET_ID ? "is-drop-target" : ""
+                }`}
+                display="flex"
+                flexDirection="column"
+                gap="sm"
+                htmlOptions={{
+                  onClick: () => setSelectedId(null),
+                  onDragLeave: (event: React.DragEvent<HTMLElement>) => {
+                    if (
+                      !event.currentTarget.contains(
+                        event.relatedTarget as Node | null,
+                      )
+                    ) {
+                      handleDragOverTarget(null);
+                    }
+                  },
+                  onDragOver: (event: React.DragEvent<HTMLElement>) => {
+                    event.preventDefault();
+                    event.dataTransfer.dropEffect = draggingInstanceIdRef.current
+                      ? "move"
+                      : "copy";
+                    handleDragOverTarget(ROOT_TARGET_ID, "Main canvas", event);
+                  },
+                  onDrop: (event: React.DragEvent<HTMLElement>) => {
+                    event.preventDefault();
+                    const plainValue = event.dataTransfer.getData("text/plain");
+                    const instanceId =
+                      event.dataTransfer.getData(
+                        "application/playbook-instance",
+                      ) ||
+                      (draggingInstanceIdRef.current === plainValue
+                        ? draggingInstanceIdRef.current
+                        : "");
+                    const kitName =
+                      event.dataTransfer.getData("application/playbook-kit") ||
+                      (instanceId ? "" : plainValue);
 
-                  clearDragState();
-                  if (instanceId) handleMoveInstance(instanceId, ROOT_TARGET_ID);
-                  else if (kitName) handleDropKit(kitName, ROOT_TARGET_ID);
-                },
-                style: { minWidth: "0" },
-              }}
-              minHeight="360px"
-              padding="sm"
-            >
-              {instances.length === 0 ? (
-                <Flex
-                  align="center"
-                  className="builder-empty-canvas"
-                  flex={1}
-                  gap="xs"
-                  justify="center"
-                  minHeight="300px"
-                  orientation="column"
-                  padding="sm"
-                  textAlign="center"
-                  width="100%"
-                >
-                  <Icon icon="plus" />
-                  <Body color="light" text="Add a kit to start composing." />
-                </Flex>
-              ) : (
-                instances.map((instance) => (
-                  <BuilderPreviewItem
-                    canDropIntoTarget={canDropIntoTarget}
-                    dragOverTargetId={dragOverTargetId}
-                    draggingInstanceId={draggingInstanceId}
-                    globalProps={global_props_schema?.props}
-                    instance={instance}
-                    isSelected={instance.id === selectedId}
-                    key={instance.id}
-                    kitsByName={kitsByName}
-                    onDragEndDrag={clearDragState}
-                    onDragOverTarget={handleDragOverTarget}
-                    onDragStartInstance={(id) => {
-                      draggingInstanceIdRef.current = id;
-                      hoverDragTargetRef.current = null;
-                      hideDragTooltip();
-                      setDraggingInstanceId(id);
-                      setDraggedKitName(null);
-                    }}
-                    onDragSourceChange={handleDragSourceChange}
-                    onHoverDragTarget={handleHoverDragTarget}
-                    onLeaveDragTarget={handleLeaveDragTarget}
-                    onDropKit={(kitName, targetId) => {
-                      clearDragState();
-                      handleDropKit(kitName, targetId);
-                    }}
-                    onMoveInstance={(instanceId, targetId) => {
-                      clearDragState();
-                      handleMoveInstance(instanceId, targetId);
-                    }}
-                    onSelect={handleSelectInstance}
-                    selectedId={selectedId}
-                  />
-                ))
-              )}
-            </Background>
+                    clearDragState();
+                    if (instanceId) handleMoveInstance(instanceId, ROOT_TARGET_ID);
+                    else if (kitName) handleDropKit(kitName, ROOT_TARGET_ID);
+                  },
+                  style: { minWidth: "0" },
+                }}
+                minHeight="360px"
+                padding="sm"
+              >
+                {instances.length === 0 ? (
+                  <Flex
+                    align="center"
+                    className="builder-empty-canvas"
+                    flex={1}
+                    gap="xs"
+                    justify="center"
+                    minHeight="300px"
+                    orientation="column"
+                    padding="sm"
+                    textAlign="center"
+                    width="100%"
+                  >
+                    <Icon icon="plus" />
+                    <Body color="light" text="Add a kit to start composing." />
+                  </Flex>
+                ) : (
+                  instances.map((instance) => (
+                    <BuilderPreviewItem
+                      canDropIntoTarget={canDropIntoTarget}
+                      dragOverTargetId={dragOverTargetId}
+                      draggingInstanceId={draggingInstanceId}
+                      globalProps={global_props_schema?.props}
+                      instance={instance}
+                      isSelected={instance.id === selectedId}
+                      key={instance.id}
+                      kitsByName={kitsByName}
+                      onDragEndDrag={clearDragState}
+                      onDragOverTarget={handleDragOverTarget}
+                      onDragStartInstance={(id) => {
+                        draggingInstanceIdRef.current = id;
+                        hoverDragTargetRef.current = null;
+                        hideDragTooltip();
+                        setDraggingInstanceId(id);
+                        setDraggedKitName(null);
+                      }}
+                      onDragSourceChange={handleDragSourceChange}
+                      onHoverDragTarget={handleHoverDragTarget}
+                      onLeaveDragTarget={handleLeaveDragTarget}
+                      onDropKit={(kitName, targetId) => {
+                        clearDragState();
+                        handleDropKit(kitName, targetId);
+                      }}
+                      onMoveInstance={(instanceId, targetId) => {
+                        clearDragState();
+                        handleMoveInstance(instanceId, targetId);
+                      }}
+                      onSelect={handleSelectInstance}
+                      selectedId={selectedId}
+                    />
+                  ))
+                )}
+              </Background>
+            </ResponsivePreviewFrame>
           </Card>
 
           <Flex
@@ -639,13 +668,19 @@ export default function Playground() {
           </Flex>
         </Flex>
 
-        <Flex gap="md" minWidth="0" orientation="column" width="100%">
-          <Card padding="md">
+        <Flex
+          className="full-playground-inspector"
+          gap="md"
+          minWidth="0"
+          orientation="column"
+        >
+          <Card className="playground-panel-controls" padding="md">
             <Title marginBottom="sm" size={4} text="Inspector" />
             {instanceOptions.length > 0 && (
               <Flex className="builder-field" orientation="column">
                 <Caption text="Selected kit" />
                 <Dropdown
+                  className={panelDropdownClassName("playground-panel", !!selectedId)}
                   clearable={false}
                   defaultValue={activeSelectedInstanceOption}
                   id="playground-selected-kit-dropdown"
@@ -699,6 +734,10 @@ export default function Playground() {
                   >
                     <Caption text="Data" />
                     <Dropdown
+                      className={panelDropdownClassName(
+                        "playground-panel",
+                        !!selectedInstance.dataPresetKey,
+                      )}
                       clearable={false}
                       defaultValue={activeDataPresetOption}
                       id="playground-data-preset-dropdown"
@@ -730,6 +769,10 @@ export default function Playground() {
                   >
                     <Caption text="Structure" />
                     <Dropdown
+                      className={panelDropdownClassName(
+                        "playground-panel",
+                        !!selectedInstance.structureMode,
+                      )}
                       clearable={false}
                       defaultValue={activeStructureModeOption}
                       id="playground-structure-mode-dropdown"
@@ -777,63 +820,28 @@ export default function Playground() {
                     variant="secondary"
                   />
                 </Flex>
-
-                <Flex gap="xs" orientation="column">
-                  {getGroupedEditableProps(selectedKit).map((group) => (
-                    <Flex
-                      className="builder-prop-group"
-                      gap="xxs"
-                      key={group.name || "props"}
-                      orientation="column"
-                      width="100%"
-                    >
-                      {group.name && <Title size={4} text={group.name} />}
-                      {group.props.map(([name, definition]) => (
-                        <PropControl
-                          definition={definition as any}
-                          isRequired={selectedRequiredPropNames.has(name)}
-                          key={name}
-                          name={name}
-                          onChange={handlePropChange}
-                          value={getPropValue(
-                            selectedInstance,
-                            selectedKit,
-                            name,
-                          )}
-                        />
-                      ))}
-                    </Flex>
-                  ))}
-
-                  {Object.keys(selectedGlobalProps).length > 0 && (
-                    <Flex
-                      className="builder-prop-group"
-                      gap="xxs"
-                      orientation="column"
-                      width="100%"
-                    >
-                      <Title size={4} text="Global Props" />
-                      {Object.entries(selectedGlobalProps).map(
-                        ([name, definition]) => (
-                          <PropControl
-                            definition={definition as any}
-                            key={name}
-                            name={name}
-                            onChange={handlePropChange}
-                            value={getPropValue(
-                              selectedInstance,
-                              selectedKit,
-                              name,
-                            )}
-                          />
-                        ),
-                      )}
-                    </Flex>
-                  )}
-                </Flex>
               </Flex>
             )}
           </Card>
+
+          {selectedInstance && selectedKit && (
+            <PropsPanel
+              children={builderPropsPanel.children}
+              groupedGlobalProps={builderPropsPanel.groupedGlobalProps}
+              groupedProps={builderPropsPanel.groupedProps}
+              globalProps={builderPropsPanel.globalProps}
+              onChildrenChange={handleChildrenChange}
+              onPropChange={handlePropChange}
+              playgroundConfig={builderPropsPanel.playgroundConfig}
+              propDisabledState={builderPropsPanel.propDisabledState}
+              propSyncHints={builderPropsPanel.propSyncHints}
+              propValues={builderPropsPanel.displayPropValues}
+              requiredPropNames={builderPropsPanel.requiredPropNames}
+              showChildren={builderPropsPanel.showChildren}
+              showGlobalProps={builderPropsPanel.showGlobalProps}
+              totalProps={builderPropsPanel.totalProps}
+            />
+          )}
         </Flex>
       </div>
       <div

@@ -284,7 +284,9 @@ export const BuilderPreviewItem = ({
       role="button"
       tabIndex={0}
     >
-      <div className="builder-instance-render">{rendered}</div>
+      <div className="builder-instance-render playground-preview-content">
+        {rendered}
+      </div>
     </div>
   );
 };

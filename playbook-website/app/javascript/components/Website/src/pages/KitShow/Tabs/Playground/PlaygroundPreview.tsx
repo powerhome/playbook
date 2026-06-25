@@ -7,6 +7,7 @@ import maplibreglModule from "maplibre-gl";
 import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import TipTapLink from "@tiptap/extension-link";
+import "./PlaygroundPreview.scss";
 
 interface PlaygroundPreviewProps {
   bare?: boolean;
@@ -43,16 +44,26 @@ const PlaygroundPreview: React.FC<PlaygroundPreviewProps> = ({
 
   return (
     <LiveProvider code={code} scope={scope} noInline>
-      {bare ? (
-        <LivePreview />
-      ) : (
-        <Card borderNone padding="md">
-          <LivePreview />
-        </Card>
-      )}
-      <Flex padding={bare ? "none" : "sm"}>
-        <LiveError style={{ color: colors.error, fontSize: "12px", margin: 0 }} />
-      </Flex>
+      <div className="playground-preview-container">
+        {bare ? (
+          <div className="playground-preview-content">
+            <LivePreview />
+          </div>
+        ) : (
+          <Card
+            borderNone
+            className="playground-preview-content"
+            padding="md"
+          >
+            <LivePreview />
+          </Card>
+        )}
+        <Flex padding={bare ? "none" : "sm"}>
+          <LiveError
+            style={{ color: colors.error, fontSize: "12px", margin: 0 }}
+          />
+        </Flex>
+      </div>
     </LiveProvider>
   );
 };

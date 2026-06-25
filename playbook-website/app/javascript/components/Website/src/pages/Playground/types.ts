@@ -35,6 +35,14 @@ export type PlaygroundKit = {
       props: string[];
     }>;
     hiddenProps?: string[];
+    conditionals?: Record<
+      string,
+      {
+        requires?: string | Record<string, string>;
+        showWhen?: string | Record<string, string>;
+        structureMode?: string;
+      }
+    >;
     presets?: Array<{
       name: string;
       props?: Record<string, any>;
