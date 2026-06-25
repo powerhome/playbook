@@ -73,4 +73,7 @@ export const PLAYGROUND_ENABLED_KITS = [
   "title_detail",
   "title",
   "section_separator",
+  "progress_simple",
+  "progress_step",
+  "progress_pills"
 ];
