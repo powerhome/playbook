@@ -1,25 +1,18 @@
 {
-  "template": "<Source{{props}} />",
-  "propTargets": {},
   "defaults": {
     "hideIcon": false,
-    "type": "inbound",
-    "source": "Website lead"
+    "source": "Website lead",
+    "type": "inbound"
   },
+  "hiddenProps": [],
   "groups": [
     {
       "name": "Content",
-      "props": [
-        "source",
-        "type",
-        "user"
-      ]
+      "props": ["source", "type", "user"]
     },
     {
       "name": "Appearance",
-      "props": [
-        "hideIcon"
-      ]
+      "props": ["hideIcon"]
     }
   ],
   "presets": [
@@ -83,6 +76,5 @@
       "message": "No Icon hides the leading source icon while keeping the text stack.",
       "type": "info"
     }
-  },
-  "hiddenProps": []
+  }
 }

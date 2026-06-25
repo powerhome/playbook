@@ -82,4 +82,8 @@ export const PLAYGROUND_ENABLED_KITS = [
   "title_count",
   "title_detail",
   "title",
+  "selectable_list",
+  "skeleton_loading",
+  "source",
+  "star_rating",
 ];
