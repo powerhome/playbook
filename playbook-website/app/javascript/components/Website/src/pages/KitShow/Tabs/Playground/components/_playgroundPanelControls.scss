@@ -17,6 +17,34 @@
   }
 }
 
+@mixin playground-panel-dropdown-trigger-empty {
+  .dropdown_trigger_wrapper,
+  .dropdown_trigger_wrapper_focus,
+  .dropdown_trigger_wrapper_focus_select_only,
+  .dropdown_trigger_wrapper_select_only,
+  [class*="dropdown_trigger_wrapper"] {
+    background-color: $white !important;
+    box-shadow: none !important;
+
+    .dropdown_input {
+      background-color: $white !important;
+    }
+
+    @media (hover: hover) {
+      &:hover,
+      &:active,
+      &:focus,
+      &:focus-within {
+        background-color: $bg_light !important;
+
+        input {
+          background-color: $bg_light !important;
+        }
+      }
+    }
+  }
+}
+
 @mixin playground-panel-dropdown-trigger-filled {
   .dropdown_trigger_wrapper,
   .dropdown_trigger_wrapper_focus,
@@ -64,15 +92,27 @@
       width: 100%;
       @include playground-panel-dropdown-trigger;
     }
+
+    &:not(.#{$dropdown-class}--filled) {
+      .dropdown_wrapper {
+        @include playground-panel-dropdown-trigger-empty;
+      }
+    }
   }
 
   .#{$dropdown-class}--filled,
-  .playground-panel-control--filled .#{$dropdown-class},
-  .playground-panel-control--filled [class*="pb_dropdown"],
-  .props-panel-control--filled .#{$dropdown-class},
-  .props-panel-control--filled [class*="pb_dropdown"] {
+  .playground-panel-control--filled .#{$dropdown-class}.#{$dropdown-class}--filled,
+  .props-panel-control--filled .#{$dropdown-class}.#{$dropdown-class}--filled {
     .dropdown_wrapper {
       @include playground-panel-dropdown-trigger-filled;
+    }
+  }
+
+  // Legacy: filled row without explicit dropdown class (avoid styling empty dropdowns in info rows)
+  .playground-panel-control--filled [class*="pb_dropdown"]:not(.playground-panel-dropdown--filled),
+  .props-panel-control--filled [class*="pb_dropdown"]:not(.props-panel-dropdown--filled) {
+    .dropdown_wrapper {
+      @include playground-panel-dropdown-trigger-empty;
     }
   }
 

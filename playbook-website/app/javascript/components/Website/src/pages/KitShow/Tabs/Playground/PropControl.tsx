@@ -44,9 +44,11 @@ const PropControlInfoPopover: React.FC<{ text: string }> = ({ text }) => {
 
   return (
     <PbReactPopover
+      className="props-panel-info-popover"
       closeOnClick="any"
+      maxWidth="240px"
       offset
-      placement="top"
+      placement="top-end"
       reference={
         <Icon
           aria={{ label: "More information" }}
@@ -60,7 +62,12 @@ const PropControlInfoPopover: React.FC<{ text: string }> = ({ text }) => {
       show={showPopover}
       zIndex={10}
     >
-      <Body color="light" text={text} padding="xs" />
+      <Body
+        className="props-panel-info-popover__text"
+        color="light"
+        padding="xs"
+        text={text}
+      />
     </PbReactPopover>
   );
 };
@@ -162,12 +169,6 @@ const propValueOnDropdownClear = (
   const schemaDefault = resolveSchemaDefault(definition);
 
   if (enumValues) {
-    if (
-      typeof schemaDefault === "string" &&
-      enumValues.includes(schemaDefault)
-    ) {
-      return { value: schemaDefault, enabled: false };
-    }
     return { value: "", enabled: false };
   }
 
@@ -423,6 +424,8 @@ const EnumControl: React.FC<ExtendedPropControlProps> = ({
     typeof schemaDefault === "string" && values.includes(schemaDefault)
       ? schemaDefault
       : undefined;
+  const isExplicitlyCleared =
+    value !== undefined && value.value === "" && !value.enabled;
   const displayValue = (() => {
     if (value?.enabled) {
       return value.value != null && value.value !== ""
@@ -432,22 +435,26 @@ const EnumControl: React.FC<ExtendedPropControlProps> = ({
     if (value?.value != null && value.value !== "") {
       return String(value.value);
     }
+    if (isExplicitlyCleared) {
+      return null;
+    }
     return schemaDefaultValue ?? null;
   })();
   const activeOption = displayValue
     ? enumOptions.find((option) => option.value === displayValue)
     : undefined;
+  const isDropdownFilled = activeOption != null;
 
   if (values.length === 0) return null;
 
   return (
     <PropControlRow
-      filled={!!displayValue}
+      filled={isDropdownFilled}
       info={info}
       label={<PropControlLabel name={name} />}
     >
       <Dropdown
-        className={propsPanelDropdownClassName(!!displayValue)}
+        className={propsPanelDropdownClassName(isDropdownFilled)}
         defaultValue={activeOption}
         id={`prop-${name}-enum-dropdown`}
         key={`${value?.enabled}-${String(displayValue ?? "")}`}

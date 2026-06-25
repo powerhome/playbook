@@ -128,3 +128,8 @@ $props-panel-resize-width: 12px;
     width: 100%;
   }
 }
+
+.props-panel-info-popover__text {
+  white-space: pre-wrap;
+  word-break: break-word;
+}
