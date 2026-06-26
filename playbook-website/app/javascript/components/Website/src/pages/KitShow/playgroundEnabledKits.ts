@@ -93,5 +93,9 @@ export const PLAYGROUND_ENABLED_KITS = [
   "time",
   "time_picker",
   "time_range_inline",
-  "time_stacked"
+  "time_stacked",
+  "timeline",
+  "timestamp",
+  "toggle",
+  "tooltip"
 ];

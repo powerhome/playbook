@@ -1,4 +1,5 @@
 {
+  "hiddenProps": ["inputOptions", "onChange"],
   "groups": [
     {
       "name": "Content",
@@ -6,7 +7,7 @@
     },
     {
       "name": "State",
-      "props": ["disabled", "checked"]
+      "props": ["checked", "disabled"]
     },
     {
       "name": "Appearance",
@@ -22,10 +23,19 @@
       }
     },
     {
-      "name": "With Error",
+      "name": "Checked",
       "props": {
         "name": "dark_mode",
         "value": "theme",
+        "checked": true
+      }
+    },
+    {
+      "name": "Large",
+      "props": {
+        "name": "notifications",
+        "value": "push",
+        "size": "md",
         "checked": true
       }
     },
@@ -37,17 +47,29 @@
         "checked": true,
         "disabled": true
       }
-    },
-    {
-      "name": "Required",
-      "props": {
-        "name": "notifications",
-        "value": "push",
-        "size": "md",
-        "checked": true
-      }
     }
   ],
   "conditionals": {},
-  "hints": {}
+  "hints": {
+    "default": {
+      "presetName": "Default",
+      "message": "Default renders an unchecked small toggle with name and value for forms.",
+      "type": "info"
+    },
+    "checked": {
+      "presetName": "Checked",
+      "message": "Checked initializes the toggle in the on state.",
+      "type": "info"
+    },
+    "large": {
+      "presetName": "Large",
+      "message": "Large switches size to md for a more prominent control.",
+      "type": "info"
+    },
+    "disabled": {
+      "presetName": "Disabled",
+      "message": "Disabled keeps the selected state visible while preventing changes.",
+      "type": "info"
+    }
+  }
 }
