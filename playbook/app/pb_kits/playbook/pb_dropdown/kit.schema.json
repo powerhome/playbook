@@ -59,6 +59,14 @@
         "rails"
       ]
     },
+    "disabled": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
     "formPillProps": {
       "type": "GenericObject",
       "platforms": [
