@@ -89,5 +89,9 @@ export const PLAYGROUND_ENABLED_KITS = [
   "stat_change",
   "stat_value",
   "textarea",
-  "text_input"
+  "text_input",
+  "time",
+  "time_picker",
+  "time_range_inline",
+  "time_stacked"
 ];
