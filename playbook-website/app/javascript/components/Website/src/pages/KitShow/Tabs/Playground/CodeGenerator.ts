@@ -62,8 +62,27 @@ function formatJsObjectKey(key: string): string {
   return /^[a-zA-Z_$][a-zA-Z0-9_$]*$/.test(key) ? key : JSON.stringify(key);
 }
 
+function getRawJsExpression(value: unknown): string | null {
+  if (
+    value !== null &&
+    typeof value === "object" &&
+    !Array.isArray(value) &&
+    typeof (value as Record<string, unknown>).__playgroundCode === "string"
+  ) {
+    const expression = (value as Record<string, string>).__playgroundCode.trim();
+    return expression.length > 0 ? expression : null;
+  }
+
+  return null;
+}
+
 /** Values inside JSX object literals / nested objects (not JSON.stringify for keys). */
 function formatJsExpressionValue(value: unknown): string {
+  const rawExpression = getRawJsExpression(value);
+  if (rawExpression) {
+    return rawExpression;
+  }
+
   if (value === null) {
     return "null";
   }
@@ -126,6 +145,11 @@ function getLocallyImportedNames(importStatements: string[]): Set<string> {
  * JSX `name={{ default: true }}` style — avoids JSON `{"default":true}` quoted keys in snippets.
  */
 function formatJsxObjectProp(name: string, value: object): string {
+  const rawExpression = getRawJsExpression(value);
+  if (rawExpression) {
+    return `${name}={${rawExpression}}`;
+  }
+
   const o = value as Record<string, unknown>;
   const keys = Object.keys(o);
   if (keys.length === 0) {
@@ -147,6 +171,11 @@ const formatPropValue = (
   }
 
   const propType = String(definition.type ?? "any").toLowerCase();
+  const rawExpression = getRawJsExpression(value);
+  if (rawExpression) {
+    return `${name}={${rawExpression}}`;
+  }
+  const looksLikeFunction = typeof value === "string" && (value.includes("=>") || value.trim().startsWith("function"));
 
   // Handle arrays first (e.g., string[] or string | string[])
   if (Array.isArray(value)) {
@@ -209,6 +238,13 @@ const formatPropValue = (
     return `${name}={${value}}`;
   }
 
+  if (propType === "function" || propType.includes("=>") || looksLikeFunction) {
+    if (typeof value === "string" && value.trim()) {
+      return `${name}={${value}}`;
+    }
+    return null;
+  }
+
   if (propType === "string" || propType.includes("string")) {
     if (typeof value === "string" && value.trim()) {
       return `${name}="${value}"`;
@@ -218,16 +254,6 @@ const formatPropValue = (
 
   if (propType === "number") {
     return `${name}={${value}}`;
-  }
-
-  // Check if value looks like a function expression (contains => or is "function")
-  const looksLikeFunction = typeof value === "string" && (value.includes("=>") || value.trim().startsWith("function"));
-  
-  if (propType === "function" || propType.includes("=>") || looksLikeFunction) {
-    if (typeof value === "string" && value.trim()) {
-      return `${name}={${value}}`;
-    }
-    return null;
   }
 
   if (propType === "reactnode" || propType.includes("reactnode") || propType.includes("node")) {

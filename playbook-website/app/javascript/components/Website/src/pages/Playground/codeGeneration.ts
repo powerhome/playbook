@@ -19,7 +19,24 @@ import type { BuilderInstance, PlaygroundKit, PropDefinition } from "./types";
 const formatJsObjectKey = (key: string) =>
   /^[a-zA-Z_$][a-zA-Z0-9_$]*$/.test(key) ? key : JSON.stringify(key);
 
+const getRawJsExpression = (value: any): string | null => {
+  if (
+    value !== null &&
+    typeof value === "object" &&
+    !Array.isArray(value) &&
+    typeof value.__playgroundCode === "string"
+  ) {
+    const expression = value.__playgroundCode.trim();
+    return expression.length > 0 ? expression : null;
+  }
+
+  return null;
+};
+
 const formatCodeValue = (value: any, definition?: PropDefinition): string => {
+  const rawExpression = getRawJsExpression(value);
+  if (rawExpression) return rawExpression;
+
   const type = displayPropType(definition);
 
   if (type.includes("function") || type.includes("=>")) {

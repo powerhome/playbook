@@ -97,5 +97,9 @@ export const PLAYGROUND_ENABLED_KITS = [
   "timeline",
   "timestamp",
   "toggle",
-  "tooltip"
+  "tooltip",
+  "typeahead",
+  "user",
+  "user_badge",
+  "weekday_stacked"
 ];
