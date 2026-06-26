@@ -3,7 +3,7 @@
   "propTargets": {},
   "defaults": {
     "layoutOption": "default",
-    "rating": 0,
+    "rating": 4,
     "denominator": 5,
     "colorOption": "yellow",
     "backgroundType": "fill",
@@ -23,8 +23,7 @@
       "props": [
         "rating",
         "denominator",
-        "variant",
-        "onClick"
+        "variant"
       ]
     },
     {
@@ -40,34 +39,10 @@
   ],
   "presets": [
     {
-      "name": "Empty",
+      "name": "Default",
       "props": {
-        "rating": 0,
+        "rating": 4,
         "denominator": 5,
-        "variant": "display"
-      }
-    },
-    {
-      "name": "Half / partial",
-      "props": {
-        "rating": 2.5,
-        "denominator": 5,
-        "variant": "display"
-      }
-    },
-    {
-      "name": "Full score",
-      "props": {
-        "rating": 5,
-        "denominator": 5,
-        "variant": "display"
-      }
-    },
-    {
-      "name": "Out of 10",
-      "props": {
-        "rating": 8,
-        "denominator": 10,
         "variant": "display"
       }
     },
@@ -91,38 +66,38 @@
       }
     },
     {
-      "name": "Primary color",
-      "props": {
-        "rating": 4,
-        "denominator": 5,
-        "colorOption": "primary",
-        "variant": "display"
-      }
-    },
-    {
       "name": "Interactive",
       "props": {
         "rating": 0,
         "denominator": 5,
-        "variant": "interactive",
-        "onClick": "(n) => {}"
+        "variant": "interactive"
       }
     }
   ],
-  "conditionals": {
-    "onClick": {
-      "requires": {
-        "variant": "interactive"
-      }
-    }
-  },
+  "conditionals": {},
   "hints": {
-    "interactive_click": {
-      "when": {
-        "variant": "interactive"
-      },
-      "message": "Interactive mode calls onClick with the star index; rating is controlled by your handler.",
+    "default": {
+      "presetName": "Default",
+      "message": "Default shows the common five-star display rating.",
+      "type": "info"
+    },
+    "number": {
+      "presetName": "Number layout",
+      "message": "Number layout displays the numeric rating beside the stars.",
+      "type": "info"
+    },
+    "one_star": {
+      "presetName": "One star highlight",
+      "message": "One star highlight uses the compact one-star layout for summary scores.",
+      "type": "info"
+    },
+    "interactive": {
+      "presetName": "Interactive",
+      "message": "Interactive mode is ready for a click handler in product code; the playground keeps it visual.",
       "type": "info"
     }
-  }
+  },
+  "hiddenProps": [
+    "onClick"
+  ]
 }

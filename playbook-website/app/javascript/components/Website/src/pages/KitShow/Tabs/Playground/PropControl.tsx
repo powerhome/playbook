@@ -267,6 +267,9 @@ function tryParseObjectLiteralInput(
     }
     return null;
   } catch {
+    if (/^\{[\s\S]*\}$/.test(trimmed) && /[A-Za-z_$][\w$]*/.test(trimmed)) {
+      return { __playgroundCode: trimmed };
+    }
     return null;
   }
 }

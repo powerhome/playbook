@@ -7,7 +7,11 @@
     "error": false,
     "icon": false,
     "multi": true,
-    "variant": "default"
+    "variant": "default",
+    "inputId": "selectable_card_plan",
+    "name": "selectable_card_demo",
+    "text": "Standard plan",
+    "value": "standard"
   },
   "groups": [
     {
@@ -33,113 +37,102 @@
       "props": [
         "variant",
         "icon",
-        "customIcon"
-      ]
-    },
-    {
-      "name": "Events",
-      "props": [
-        "onChange"
+        "dark"
       ]
     }
   ],
   "presets": [
     {
-      "name": "Unselected",
+      "name": "Default",
+      "structureMode": "normal",
       "props": {
         "checked": false,
-        "text": "Option label",
+        "inputId": "plan_standard",
         "name": "selectable_card_demo",
-        "value": "opt1",
-        "variant": "default",
+        "text": "Standard plan",
+        "value": "standard",
         "multi": true,
-        "onChange": "() => {}"
+        "variant": "default"
       }
     },
     {
-      "name": "Selected",
-      "props": {
-        "checked": true,
-        "text": "Selected option",
-        "name": "selectable_card_demo",
-        "value": "opt1",
-        "variant": "default",
-        "multi": true,
-        "onChange": "() => {}"
-      }
-    },
-    {
-      "name": "Disabled",
-      "props": {
-        "checked": false,
-        "disabled": true,
-        "text": "Unavailable",
-        "name": "selectable_card_demo",
-        "value": "opt2",
-        "variant": "default",
-        "onChange": "() => {}"
-      }
-    },
-    {
-      "name": "With check icon",
+      "name": "Nested Content",
+      "structureMode": "nested",
       "props": {
         "checked": true,
         "icon": true,
-        "text": "With icon",
+        "inputId": "plan_pro",
         "name": "selectable_card_demo",
-        "value": "opt3",
-        "variant": "default",
-        "onChange": "() => {}"
-      }
+        "value": "pro",
+        "multi": true,
+        "variant": "default"
+      },
+      "children": "<Title size={4} text=\"Pro plan\" />\n<Body color=\"light\" text=\"Includes advanced reporting.\" />"
     },
     {
-      "name": "Radio (single)",
+      "name": "Input Variant",
+      "structureMode": "nested",
       "props": {
-        "checked": false,
-        "multi": false,
-        "text": "Plan A",
-        "name": "plan",
-        "value": "a",
-        "variant": "default",
-        "onChange": "() => {}"
-      }
-    },
-    {
-      "name": "Display input variant",
-      "props": {
-        "checked": false,
-        "variant": "displayInput",
-        "text": "Display style",
+        "checked": true,
+        "inputId": "plan_display",
         "name": "selectable_card_demo",
-        "value": "disp1",
-        "onChange": "() => {}"
-      }
-    },
-    {
-      "name": "Error state",
-      "props": {
-        "checked": false,
-        "error": true,
-        "text": "Invalid choice",
-        "name": "selectable_card_demo",
-        "value": "err1",
-        "variant": "default",
-        "onChange": "() => {}"
-      }
+        "value": "display",
+        "variant": "displayInput"
+      },
+      "children": "<Body text=\"Display input style\" />"
     }
   ],
-  "conditionals": {
-    "customIcon": {
-      "requires": {
-        "icon": true
+  "conditionals": {},
+  "hints": {
+    "default": {
+      "presetName": "Default",
+      "message": "Default renders a checkbox-style selectable card with state-backed checked behavior in the preview.",
+      "type": "info"
+    },
+    "nested_content": {
+      "presetName": "Nested Content",
+      "message": "Nested Content uses child JSX inside SelectableCard for richer card content.",
+      "type": "info"
+    },
+    "radio": {
+      "presetName": "Radio (single)",
+      "message": "Radio (single) sets multi to false so the card behaves like a radio option.",
+      "type": "info"
+    },
+    "input_variant": {
+      "presetName": "Input Variant",
+      "message": "Input Variant uses the displayInput treatment with nested content beside the visible input.",
+      "type": "info"
+    }
+  },
+  "structureModes": {
+    "default": "normal",
+    "modes": {
+      "normal": {
+        "label": "Normal",
+        "template": "<SelectableCard checked={isChecked} onChange={handleChange}{{props}} />",
+        "children": ""
+      },
+      "nested": {
+        "label": "Nested",
+        "template": "<SelectableCard checked={isChecked} onChange={handleChange}{{props}}>\n  {{children}}\n</SelectableCard>",
+        "children": "<Title size={4} text=\"Pro plan\" />\n<Body color=\"light\" text=\"Includes advanced reporting.\" />"
       }
     }
   },
-  "hints": {
-    "onchange_note": {
-      "when": {},
-      "message": "onChange receives the input change event; wire it to your form state in real usage.",
-      "type": "info"
-    }
-  }
+  "wrapper": "const SelectableCardPlayground = () => {\n  const [isChecked, setIsChecked] = useState(checked)\n  const handleChange = ({ target }) => setIsChecked(target.checked)\n\n  return {{component}}\n}\n\n<SelectableCardPlayground />",
+  "externalImports": [
+    "import React, { useState } from 'react'"
+  ],
+  "statefulProps": [
+    "checked"
+  ],
+  "children": {
+    "editable": true,
+    "default": "<Title size={4} text=\"Pro plan\" />\n<Body color=\"light\" text=\"Includes advanced reporting.\" />"
+  },
+  "hiddenProps": [
+    "customIcon",
+    "onChange"
+  ]
 }
