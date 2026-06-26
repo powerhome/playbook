@@ -1,5 +1,5 @@
 {
-  "template": "<Timestamp{{props}} />",
+  "template": "<Timestamp timezone={timezone}{{props}} />",
   "propTargets": {},
   "defaults": {
     "align": "left",
@@ -112,5 +112,8 @@
       "message": "Last updated uses the updated variant and showUser to include the user text.",
       "type": "info"
     }
+  },
+  "requiredProps": {
+    "timezone": "America/New_York"
   }
 }

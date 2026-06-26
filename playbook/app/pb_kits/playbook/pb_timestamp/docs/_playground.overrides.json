@@ -1,4 +1,8 @@
 {
+  "template": "<Timestamp timezone={timezone}{{props}} />",
+  "requiredProps": {
+    "timezone": "America/New_York"
+  },
   "groups": [
     {
       "name": "Content",
