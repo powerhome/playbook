@@ -9,16 +9,14 @@
     "inputMinHeight": "sm",
     "label": "Description",
     "maxWidth": "md",
-    "name": "description",
-    "placeholder": "Add your text here."
+    "name": "description"
   },
   "groups": [
     {
       "name": "Content",
       "props": [
         "label",
-        "name",
-        "placeholder"
+        "name"
       ]
     },
     {
@@ -52,8 +50,7 @@
       "props": {
         "advancedEditorToolbar": true,
         "label": "Description",
-        "name": "description",
-        "placeholder": "Add your text here."
+        "name": "description"
       }
     },
     {
@@ -154,7 +151,8 @@
     "template",
     "TrixEditor",
     "trixInstance",
-    "value"
+    "value",
+    "placeholder"
   ],
   "propSyncOnEnable": {
     "advancedEditorToolbar": {

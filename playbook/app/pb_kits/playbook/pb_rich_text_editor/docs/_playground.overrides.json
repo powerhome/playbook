@@ -22,7 +22,6 @@
     "label": "Description",
     "maxWidth": "md",
     "name": "description",
-    "placeholder": "Add your text here.",
     "requiredIndicator": false,
     "simple": false
   },
@@ -34,12 +33,13 @@
     "template",
     "TrixEditor",
     "trixInstance",
-    "value"
+    "value",
+    "placeholder"
   ],
   "groups": [
     {
       "name": "Content",
-      "props": ["label", "name", "placeholder"]
+      "props": ["label", "name"]
     },
     {
       "name": "Toolbar",
@@ -61,8 +61,7 @@
       "props": {
         "advancedEditorToolbar": true,
         "label": "Description",
-        "name": "description",
-        "placeholder": "Add your text here."
+        "name": "description"
       }
     },
     {
