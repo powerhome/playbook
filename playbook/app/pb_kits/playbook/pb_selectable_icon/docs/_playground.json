@@ -1,5 +1,5 @@
 {
-  "template": "<SelectableIcon{{props}} />",
+  "template": "<div onClick={handleWrapperClick}>\n  <SelectableIcon checked={isChecked} onChange={handleChange}{{props}} />\n</div>",
   "propTargets": {},
   "defaults": {
     "checked": false,
@@ -97,7 +97,7 @@
   "hints": {
     "unchecked": {
       "presetName": "Unchecked",
-      "message": "Unchecked shows the default selectable icon with a visible checkbox input.",
+      "message": "Unchecked shows the default selectable icon with a visible checkbox input and state-backed preview toggling.",
       "type": "info"
     },
     "checked": {
@@ -112,10 +112,17 @@
     },
     "inputs_hidden": {
       "presetName": "Inputs hidden",
-      "message": "Inputs hidden renders the icon and title without a visible form input.",
+      "message": "Inputs hidden renders without a visible form input; the playground wrapper still toggles the preview state when clicked.",
       "type": "info"
     }
   },
+  "wrapper": "const SelectableIconPlayground = () => {\n  const [isChecked, setIsChecked] = useState(checked)\n  const handleChange = ({ target }) => setIsChecked(target.checked)\n  const handleWrapperClick = ({ target }) => {\n    if (target.closest('input, label')) return\n    setIsChecked((current) => !current)\n  }\n\n  return {{component}}\n}\n\n<SelectableIconPlayground />",
+  "externalImports": [
+    "import React, { useState } from 'react'"
+  ],
+  "statefulProps": [
+    "checked"
+  ],
   "hiddenProps": [
     "customIcon"
   ]

@@ -4,16 +4,19 @@
     "modes": {
       "normal": {
         "label": "Normal",
-        "template": "<SelectableCard{{props}} />",
+        "template": "<SelectableCard checked={isChecked} onChange={handleChange}{{props}} />",
         "children": ""
       },
       "nested": {
         "label": "Nested",
-        "template": "<SelectableCard{{props}}>\n  {{children}}\n</SelectableCard>",
+        "template": "<SelectableCard checked={isChecked} onChange={handleChange}{{props}}>\n  {{children}}\n</SelectableCard>",
         "children": "<Title size={4} text=\"Pro plan\" />\n<Body color=\"light\" text=\"Includes advanced reporting.\" />"
       }
     }
   },
+  "wrapper": "const SelectableCardPlayground = () => {\n  const [isChecked, setIsChecked] = useState(checked)\n  const handleChange = ({ target }) => setIsChecked(target.checked)\n\n  return {{component}}\n}\n\n<SelectableCardPlayground />",
+  "externalImports": ["import React, { useState } from 'react'"],
+  "statefulProps": ["checked"],
   "children": {
     "editable": true,
     "default": "<Title size={4} text=\"Pro plan\" />\n<Body color=\"light\" text=\"Includes advanced reporting.\" />"
@@ -90,7 +93,7 @@
   "hints": {
     "default": {
       "presetName": "Default",
-      "message": "Default renders a checkbox-style selectable card with simple text content.",
+      "message": "Default renders a checkbox-style selectable card with state-backed checked behavior in the preview.",
       "type": "info"
     },
     "nested_content": {

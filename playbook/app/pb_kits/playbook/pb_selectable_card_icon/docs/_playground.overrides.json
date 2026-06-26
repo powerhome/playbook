@@ -1,4 +1,8 @@
 {
+  "template": "<SelectableCardIcon checked={isChecked} onChange={handleChange}{{props}} />",
+  "wrapper": "const SelectableCardIconPlayground = () => {\n  const [isChecked, setIsChecked] = useState(checked)\n  const handleChange = ({ target }) => setIsChecked(target.checked)\n\n  return {{component}}\n}\n\n<SelectableCardIconPlayground />",
+  "externalImports": ["import React, { useState } from 'react'"],
+  "statefulProps": ["checked"],
   "defaults": {
     "bodyText": "Export",
     "checked": false,
@@ -80,7 +84,7 @@
   "hints": {
     "default": {
       "presetName": "Default",
-      "message": "Default combines a SelectableCard shell with an icon, title, and supporting body text.",
+      "message": "Default combines a SelectableCard shell with an icon, title, supporting body text, and state-backed preview selection.",
       "type": "info"
     },
     "selected": {
