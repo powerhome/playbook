@@ -47,7 +47,31 @@
   background-color: $white;
   border: 0;
   box-shadow: $shadow_deeper;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  max-height: inherit;
 }
+
+.pb_popover_scroll_region {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.pb_popover_floating_root {
+  flex: 0 0 auto;
+  min-height: 0;
+  pointer-events: none;
+  position: relative;
+  z-index: 1;
+}
+
+.pb_popover_floating_root > * {
+  pointer-events: auto;
+}
+
 .overflow_handling {
   overflow: auto;
 }
