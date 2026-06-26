@@ -1,8 +1,11 @@
-# 16.10.0
+# 🌱 Passphrase: Another Step Toward React-Free Rails
 ##### June 26, 2026
 
 ![release_image](https://github.com/user-attachments/assets/db119637-25e9-4157-9091-c5f7fdf034fc)
 
+We’ve evicted React from another Rails kit. 🏡 The Rails Passphrase kit has officially ditched its React wrapper and is now an actual Rails kit! We’re steadily checking React-rendered Rails kits off the list, continuing our mission to make React optional, not required, for Rails-only applications!
+
+[16.10.0](https://github.com/powerhome/playbook/tree/16.10.0) full list of changes:
 
 **Kit Enhancements:**
 
