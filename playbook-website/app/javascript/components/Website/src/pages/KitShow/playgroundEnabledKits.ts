@@ -88,6 +88,7 @@ export const PLAYGROUND_ENABLED_KITS = [
   "star_rating",
   "stat_change",
   "stat_value",
+  "table",
   "textarea",
   "text_input",
   "time",
