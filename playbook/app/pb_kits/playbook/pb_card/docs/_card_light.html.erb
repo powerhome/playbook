@@ -1,4 +1,339 @@
-<%= pb_rails("card", props: {
-})  do %>
-  Card content
+<%
+dropdown_options = [
+  { label: "Option 1", value: "1", id: "1" },
+  { label: "Option 2", value: "2", id: "2" },
+  { label: "Option 3", value: "3", id: "3" },
+]
+typeahead_options = [
+    { label: "Orange", value: "#FFA500" },
+    { label: "Blue", value: "#0000FF" },
+  ]
+%>
+
+<%= pb_rails("title", props: {
+  text: "Border Utilities",
+  size: 3,
+  margin_bottom: "md"
+}) %>
+
+<%= pb_rails("title", props: {
+  text: "Border Variants",
+  size: 4,
+  margin_bottom: "sm"
+}) %>
+
+<%= pb_rails("flex", props: { gap: "md", wrap: true }) do %>
+  <%= pb_rails("card", props: { border: "default", padding: "sm" }) do %>
+    default
+  <% end %>
+
+  <%= pb_rails("card", props: { border: "active", padding: "sm" }) do %>
+    active
+  <% end %>
+
+  <%= pb_rails("card", props: { border: "default_thick", padding: "sm" }) do %>
+    default_thick
+  <% end %>
+
+  <%= pb_rails("card", props: { border: "active_thick", padding: "sm" }) do %>
+    active_thick
+  <% end %>
+
+  <%= pb_rails("card", props: { border: "default_thicker", padding: "sm" }) do %>
+    default_thicker
+  <% end %>
+
+  <%= pb_rails("card", props: { border: "active_thicker", padding: "sm" }) do %>
+    active_thicker
+  <% end %>
+<% end %>
+
+<%= pb_rails("title", props: {
+  text: "Border Width Comparison",
+  size: 4,
+  margin_top: "md",
+  margin_bottom: "sm"
+}) %>
+
+<%= pb_rails("flex", props: { gap: "md", wrap: true }) do %>
+  <%= pb_rails("card", props: { border: "default", padding: "sm" }) do %>
+    1px
+  <% end %>
+
+  <%= pb_rails("card", props: { border: "default_thick", padding: "sm" }) do %>
+    2px
+  <% end %>
+
+  <%= pb_rails("card", props: { border: "default_thicker", padding: "sm" }) do %>
+    4px
+  <% end %>
+<% end %>
+
+<%= pb_rails("title", props: {
+  text: "Directional Borders",
+  size: 4,
+  margin_top: "md",
+  margin_bottom: "sm"
+}) %>
+
+<%= pb_rails("flex", props: { gap: "md", wrap: true }) do %>
+  <%= pb_rails("card", props: { border_top: "active", padding: "sm" }) do %>
+    Top
+  <% end %>
+
+  <%= pb_rails("card", props: { border_bottom: "active", padding: "sm" }) do %>
+    Bottom
+  <% end %>
+
+  <%= pb_rails("card", props: { border_left: "active", padding: "sm" }) do %>
+    Left
+  <% end %>
+
+  <%= pb_rails("card", props: { border_right: "active", padding: "sm" }) do %>
+    Right
+  <% end %>
+
+  <%= pb_rails("card", props: { border_x: "active_thick", padding: "sm" }) do %>
+    X Axis
+  <% end %>
+
+  <%= pb_rails("card", props: { border_y: "active_thicker", padding: "sm" }) do %>
+    Y Axis
+  <% end %>
+<% end %>
+
+<%= pb_rails("title", props: {
+  text: "Border + Radius",
+  size: 4,
+  margin_top: "md",
+  margin_bottom: "sm"
+}) %>
+
+<%= pb_rails("flex", props: { gap: "md", wrap: true }) do %>
+  <%= pb_rails("flex", props: {
+    border: "default",
+    border_radius: "none",
+    padding: "md"
+  }) do %>
+    radius="none"
+  <% end %>
+
+  <%= pb_rails("flex", props: {
+    border: "active",
+    border_radius: "md",
+    padding: "md"
+  }) do %>
+    radius="md"
+  <% end %>
+
+  <%= pb_rails("flex", props: {
+    border: "default_thick",
+    border_radius: "lg",
+    padding: "md"
+  }) do %>
+    radius="lg"
+  <% end %>
+
+  <%= pb_rails("flex", props: {
+    border: "active_thicker",
+    border_radius: "rounded",
+    padding: "md"
+  }) do %>
+    radius="rounded"
+  <% end %>
+<% end %>
+
+<%= pb_rails("title", props: {
+  text: "Buttons & Icons",
+  size: 4,
+  margin_top: "md",
+  margin_bottom: "sm"
+}) %>
+
+<%= pb_rails("flex", props: {
+  gap: "md",
+  wrap: true,
+}) do %>
+
+  <%= pb_rails("button", props: {
+    border: "default",
+    text: "Default",
+    variant: "secondary"
+  }) %>
+
+  <%= pb_rails("button", props: {
+    border: "active",
+    text: "Active",
+    variant: "secondary"
+  }) %>
+
+  <%= pb_rails("button", props: {
+    border: "default_thick",
+    text: "Thick",
+    variant: "secondary"
+  }) %>
+
+  <%= pb_rails("button", props: {
+    border: "active_thicker",
+    text: "Thicker",
+    variant: "secondary"
+  }) %>
+
+  <%= pb_rails("circle_icon_button", props: {
+    icon: "star",
+    border: "active",
+    variant: "secondary"
+  }) %>
+
+  <%= pb_rails("icon", props: {
+    icon: "user",
+    border: "default"
+  }) %>
+
+  <%= pb_rails("icon", props: {
+    icon: "user",
+    border: "active"
+  }) %>
+
+  <%= pb_rails("icon", props: {
+    icon: "user",
+    border: "default_thick"
+  }) %>
+
+  <%= pb_rails("icon", props: {
+    icon: "user",
+    border: "active_thick"
+  }) %>
+
+  <%= pb_rails("icon", props: {
+    icon: "user",
+    border: "default_thicker"
+  }) %>
+
+  <%= pb_rails("icon", props: {
+    icon: "user",
+    border: "active_thicker"
+  }) %>
+
+<%= pb_rails("icon", props: {
+    icon: "rocket",
+    border: true
+  }) %>
+<% end %>
+
+<%= pb_rails("title", props: {
+  text: "Form Components",
+  size: 4,
+  margin_top: "md",
+  margin_bottom: "sm"
+}) %>
+
+<%= pb_rails("flex", props: {
+  gap: "lg",
+  wrap: true
+}) do %>
+
+  <%= pb_rails("dropdown", props: {
+    label: "Dropdown",
+    options: dropdown_options,
+    border: "default"
+  }) %>
+
+  <%= pb_rails("typeahead", props: {
+    id: "border-utils-typeahead",
+    label: "Typeahead",
+    options: typeahead_options,
+    border: "active",
+    is_multi: false
+  }) %>
+
+  <%= pb_rails("date_picker", props: {
+    picker_id: "border-utils-datepicker",
+    name: "border_utils_date",
+    label: "Date Picker",
+    border: "active_thick"
+  }) %>
+
+<% end %>
+
+
+<%= pb_rails("title", props: {
+  text: "Containers",
+  size: 4,
+  margin_top: "md",
+  margin_bottom: "sm"
+}) %>
+
+<%= pb_rails("flex", props: {
+  gap: "md",
+  wrap: true
+}) do %>
+
+  <%= pb_rails("background", props: {
+    background_color: "neutral_subtle",
+    border: "default",
+    border_radius: "md",
+    padding: "md"
+  }) do %>
+    Default Border
+  <% end %>
+
+  <%= pb_rails("background", props: {
+    background_color: "neutral_subtle",
+    border: "active_thick",
+    border_radius: "lg",
+    padding: "md"
+  }) do %>
+    Active Thick Border
+  <% end %>
+
+<% end %>
+
+<%= pb_rails("title", props: {
+  text: "Dark Mode",
+  size: 4,
+  margin_top: "md",
+  margin_bottom: "sm"
+}) %>
+
+<%= pb_rails("background", props: {
+  background_color: "dark",
+  padding: "lg"
+}) do %>
+
+  <%= pb_rails("flex", props: {
+    gap: "md"
+  }) do %>
+
+    <%= pb_rails("card", props: {
+      dark: true,
+      border: "default",
+      padding: "sm"
+    }) do %>
+      default
+    <% end %>
+
+    <%= pb_rails("card", props: {
+      dark: true,
+      border: "active",
+      padding: "sm"
+    }) do %>
+      active
+    <% end %>
+
+    <%= pb_rails("flex", props: {
+      border: "default_thicker",
+      border_radius: "lg",
+      padding: "md"
+    }) do %>
+      default_thicker + radius
+    <% end %>
+
+    <%= pb_rails("button", props: {
+      border: "active_thick",
+      text: "Button",
+      variant: "secondary"
+    }) %>
+  <% end %>
+
 <% end %>
