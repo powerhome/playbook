@@ -1,5 +1,5 @@
 /* eslint-disable react/no-multi-comp */
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import ReactDOM from "react-dom";
 import {
   Popper,
@@ -20,6 +20,11 @@ import {
 import classnames from "classnames";
 import { globalProps, GlobalProps } from "../utilities/globalProps";
 import { uniqueId } from '../utilities/object';
+import { DialogContext, DialogContextValue } from "../pb_dialog/_dialog_context";
+import {
+  PB_FLOATING_OWNER_ATTR,
+  targetIsInsidePortaledFloatingKit,
+} from "../utilities/floatingPortalHosts";
 
 type ModifiedGlobalProps = Omit<GlobalProps, 'minWidth' | 'maxHeight' | 'minHeight'>
 
@@ -112,6 +117,17 @@ const Popover = (props: PbPopoverProps) => {
       : filteredGlobalProps
   const overflowHandling = maxHeight || maxWidth ? "overflow_handling" : "";
   const zIndexStyle = zIndex ? { zIndex: zIndex } : {};
+
+  const [selectMenuPortalTarget, setSelectMenuPortalTarget] =
+    useState<HTMLElement | null>(null);
+  const floatingRootRef = useCallback((node: HTMLElement | null) => {
+    setSelectMenuPortalTarget(node);
+  }, []);
+
+  const menuPortalApi: DialogContextValue = useMemo(
+    () => ({ selectMenuPortalTarget }),
+    [selectMenuPortalTarget],
+  );
   const widthHeightStyles = () => {
     return Object.assign(
       {},
@@ -152,17 +168,30 @@ const Popover = (props: PbPopoverProps) => {
             <div
                 className={classnames(`${buildCss("pb_popover_tooltip")} show`)}
             >
-              <div
-                  className={classnames(
-                    "pb_popover_body",
-                    popoverSpacing,
-                    overflowHandling
-                  )}
-                  id={targetId}
-                  style={widthHeightStyles()}
-              >
-                {children}
-              </div>
+            <div
+                className={classnames("pb_popover_body", popoverSpacing)}
+                id={targetId}
+                style={widthHeightStyles()}
+                {...(targetId ? { [PB_FLOATING_OWNER_ATTR]: targetId } : {})}
+            >
+              <DialogContext.Provider value={menuPortalApi}>
+                <div
+                    className={classnames(
+                      "pb_popover_scroll_region",
+                      overflowHandling,
+                    )}
+                >
+                  {children}
+                </div>
+                <div
+                    aria-hidden="true"
+                    className="pb_popover_floating_root"
+                    data-pb-dialog-floating-root="true"
+                    {...(targetId ? { [PB_FLOATING_OWNER_ATTR]: targetId } : {})}
+                    ref={floatingRootRef}
+                />
+              </DialogContext.Provider>
+            </div>
             </div>
           </div>
         );
@@ -214,7 +243,8 @@ const PbReactPopover = (props: PbPopoverProps): React.ReactElement => {
       const target = e.target as HTMLElement
 
       const targetIsPopover =
-        target.closest("#" + targetId) !== null;
+        target.closest("#" + targetId) !== null ||
+        targetIsInsidePortaledFloatingKit(target, targetId);
       const targetIsReference =
         target.closest("#reference-" + targetId) !== null;
 
@@ -227,9 +257,11 @@ const PbReactPopover = (props: PbPopoverProps): React.ReactElement => {
           if (!targetIsPopover && !targetIsReference) shouldClose();
           break;
         case "inside":
+          if (targetIsInsidePortaledFloatingKit(target, targetId)) return
           if (targetIsPopover) shouldClose();
           break;
         case "any":
+          if (targetIsInsidePortaledFloatingKit(target, targetId)) return
           if (targetIsPopover || !targetIsPopover && !targetIsReference) shouldClose();
           break;
       }
@@ -287,7 +319,7 @@ const PbReactPopover = (props: PbPopoverProps): React.ReactElement => {
                 )}
             </>
           ) : (
-            { popoverComponent }
+            popoverComponent
           ))}
       </>
     </PopperManager>

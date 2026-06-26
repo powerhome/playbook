@@ -1,5 +1,5 @@
-import React, {useState, useEffect, forwardRef, useRef} from "react"
-import Select from "react-select"
+import React, {useState, useEffect, useLayoutEffect, useMemo, useCallback, forwardRef, useRef, useContext} from "react"
+import Select, {components as selectComponents, mergeStyles} from "react-select"
 import AsyncSelect from "react-select/async"
 import CreateableSelect from "react-select/creatable"
 import AsyncCreateableSelect from "react-select/async-creatable"
@@ -22,7 +22,29 @@ import {
 import * as kitComponents from "./components"
 
 import {noop, buildDataProps, buildHtmlProps} from "../utilities/props"
+import {
+  PB_FLOATING_OWNER_ATTR,
+  PB_FLOATING_UI_Z_INDEX,
+  kitRequiresPortaledFloatingUi,
+  resolveFloatingOwnerId,
+  resolvePortaledKitHost,
+} from "../utilities/floatingPortalHosts"
+import {DialogContext} from "../pb_dialog/_dialog_context"
 import {GenericObject, Noop} from "../types"
+
+type TypeaheadStylesConfig = Parameters<typeof mergeStyles>[0]
+
+// Stack above filter popover ($z_9) when menu is portaled to `document.body`.
+const typeaheadBodyPortalZIndexStyles = {
+  menuPortal: (base: Record<string, unknown>) => ({
+    ...base,
+    zIndex: Number(PB_FLOATING_UI_Z_INDEX),
+  }),
+  menu: (base: Record<string, unknown>) => ({
+    ...base,
+    zIndex: Number(PB_FLOATING_UI_Z_INDEX),
+  }),
+} as TypeaheadStylesConfig
 
 /**
  * @typedef {object} Props
@@ -82,6 +104,8 @@ type TypeaheadProps = {
   searchContextSelector?: string
   clearOnContextChange?: boolean
   preserveSearchInput?: boolean
+  // Passed through to react-select; merged when menu is portaled to `document.body`.
+  styles?: TypeaheadStylesConfig
 } & GlobalProps
 
 export type SelectValueType = {
@@ -129,6 +153,7 @@ const Typeahead = forwardRef<HTMLInputElement, TypeaheadProps>(
     validation,
     clearOnContextChange = false,
     preserveSearchInput = false, // Default to false to maintain backward compatibility
+    styles: stylesProp,
     ...props
   }: TypeaheadProps) => {
     // State to manage the input value when preserveSearchInput is true
@@ -197,6 +222,60 @@ const Typeahead = forwardRef<HTMLInputElement, TypeaheadProps>(
     // Create a ref to access React Select instance
     const selectRef = useRef<any>(null)
 
+    const dialogCtx = useContext(DialogContext)
+
+    const kitContainerRef = useRef<HTMLDivElement>(null)
+    const [menuPortalHost, setMenuPortalHost] = useState<HTMLElement | null>(
+      null,
+    )
+    const [floatingOwnerId, setFloatingOwnerId] = useState<string | null>(null)
+    const [menuIsOpen, setMenuIsOpen] = useState(false)
+
+    const resolveMenuPortalConfig = useCallback(() => {
+      const el = kitContainerRef.current
+      setFloatingOwnerId(resolveFloatingOwnerId(el))
+      setMenuPortalHost(
+        resolvePortaledKitHost(
+          el,
+          dialogCtx?.selectMenuPortalTarget ?? null,
+        ),
+      )
+    }, [dialogCtx?.selectMenuPortalTarget])
+
+    useLayoutEffect(() => {
+      if (!menuIsOpen) {
+        setFloatingOwnerId(null)
+        setMenuPortalHost(null)
+        return
+      }
+      resolveMenuPortalConfig()
+    }, [menuIsOpen, resolveMenuPortalConfig])
+
+    const MenuPortalWithOwner = useMemo(
+      () =>
+        function TypeaheadMenuPortal(
+          portalProps: React.ComponentProps<typeof selectComponents.MenuPortal>,
+        ) {
+          return (
+            <selectComponents.MenuPortal
+                {...portalProps}
+                innerProps={{
+                  ...portalProps.innerProps,
+                  ...(floatingOwnerId
+                    ? {[PB_FLOATING_OWNER_ATTR]: floatingOwnerId}
+                    : {}),
+                }}
+            />
+          )
+        },
+      [floatingOwnerId],
+    )
+
+    const mergedSelectStyles = useMemo(() => {
+      if (menuPortalHost !== document.body) return stylesProp
+      return mergeStyles(stylesProp ?? {}, typeaheadBodyPortalZIndexStyles)
+    }, [menuPortalHost, stylesProp])
+
     // Helper function to flatten grouped options if custom groups are used
     const flattenOptions = (options: any[]): any[] => {
       if (!options) return []
@@ -209,8 +288,21 @@ const Typeahead = forwardRef<HTMLInputElement, TypeaheadProps>(
       }, [])
     }
 
+    const handleMenuClose = () => {
+      setMenuIsOpen(false)
+      setMenuPortalHost(null)
+      setFloatingOwnerId(null)
+      if (props.onMenuClose) {
+        props.onMenuClose()
+      }
+    }
+
     // Configure focus on selected option using React Select's API
     const handleMenuOpen = () => {
+      if (kitRequiresPortaledFloatingUi(kitContainerRef.current)) {
+        resolveMenuPortalConfig()
+        setMenuIsOpen(true)
+      }
       setTimeout(() => {
         let currentValue = props.value || props.defaultValue
 
@@ -372,6 +464,7 @@ const resolvedLoadOptions =
         Option,
         Placeholder,
         ValueContainer,
+        ...(menuPortalHost ? {MenuPortal: MenuPortalWithOwner} : {}),
         ...components,
       },
       loadOptions: wrappedLoadOptions,
@@ -399,10 +492,24 @@ const resolvedLoadOptions =
       ...(preserveSearchInput ? {inputValue} : {}),
       onInputChange: handleInputChange,
       onBlur: handleBlur,
-      onMenuOpen: handleMenuOpen,
       required,
       requiredIndicator: requiredIndicator,
       ...props,
+      onMenuClose: () => {
+        handleMenuClose()
+        props.onMenuClose?.()
+      },
+      onMenuOpen: () => {
+        handleMenuOpen()
+        props.onMenuOpen?.()
+      },
+      ...(menuPortalHost
+        ? {
+            menuPortalTarget: menuPortalHost,
+            menuPosition: "fixed" as const,
+          }
+        : {}),
+      styles: mergedSelectStyles,
     }
 
     const [contextValue, setContextValue] = useState("")
@@ -579,6 +686,7 @@ const resolvedLoadOptions =
 
     return (
     <div
+        ref={kitContainerRef}
         {...dataProps}
         {...htmlProps}
         aria-busy={asyncLoading ? "true" : "false"}

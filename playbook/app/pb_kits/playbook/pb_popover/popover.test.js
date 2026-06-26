@@ -1,6 +1,11 @@
 import React from "react";
 import { render, screen, fireEvent } from "../utilities/test-utils";
 import { Button, PbReactPopover } from "playbook-ui";
+import {
+  resolveDialogFloatingPortalHost,
+  resolvePortaledKitHost,
+  targetIsInsidePortaledFloatingKit,
+} from "../utilities/floatingPortalHosts";
 
 const testId = "popover-kit";
 
@@ -228,16 +233,23 @@ const PopoverTestAppendToSelector = () => {
     render(<PopoverTestZIndex data={{ testid: testId}}/>)
     const btn = screen.getByText(/click me/i)
     fireEvent.click(btn);
-    const kit = screen.getByText("Click Anywhere");
-    expect(kit).toHaveClass("pb_popover_body z_index_3");
+    const label = screen.getByText("Click Anywhere");
+    const kit = label.closest(".pb_popover_body");
+    expect(kit).not.toBeNull();
+    expect(kit).toHaveClass("pb_popover_body", "z_index_3");
   });
 
   test("renders Popover with max height and max width", () => {
     render(<PopoverTestHeight data={{ testid: testId}}/>)
     const btn = screen.getByText(/click me/i)
     fireEvent.click(btn);
-    const kit = screen.getByText("Click Anywhere");
-    expect(kit).toHaveClass("pb_popover_body p_sm overflow_handling");
+    const label = screen.getByText("Click Anywhere");
+    const body = label.closest(".pb_popover_body");
+    const scrollRegion = label.closest(".pb_popover_scroll_region");
+    expect(body).not.toBeNull();
+    expect(body).toHaveClass("pb_popover_body", "p_sm");
+    expect(scrollRegion).not.toBeNull();
+    expect(scrollRegion).toHaveClass("pb_popover_scroll_region", "overflow_handling");
   });
 
   test("closes Popover on click anywhere", async () => {
@@ -298,3 +310,85 @@ const PopoverTestAppendToSelector = () => {
     const customContainer = screen.getByTestId("custom-container");
     expect(customContainer).toContainElement(kit);
   });
+
+describe("Popover portaled kit portal host", () => {
+  beforeEach(() => {
+    document.body.innerHTML = "";
+  });
+
+  test("resolveDialogFloatingPortalHost returns floating root inside popover tooltip", () => {
+    const pop = document.createElement("div");
+    pop.className = "pb_popover_tooltip";
+    const body = document.createElement("div");
+    body.className = "pb_popover_body";
+    const floating = document.createElement("div");
+    floating.setAttribute("data-pb-dialog-floating-root", "true");
+    const inner = document.createElement("div");
+    body.appendChild(floating);
+    body.appendChild(inner);
+    pop.appendChild(body);
+    document.body.appendChild(pop);
+
+    expect(resolveDialogFloatingPortalHost(inner)).toBe(floating);
+  });
+
+  test("resolveDialogFloatingPortalHost ignores nested dialog floating roots", () => {
+    const outerDialog = document.createElement("dialog");
+    outerDialog.id = "bulk-update-dialog";
+    const scroll = document.createElement("div");
+    scroll.className = "pb_dialog_scroll_region";
+    const nestedDialog = document.createElement("dialog");
+    nestedDialog.setAttribute("data-confirmation-modal", "true");
+    const nestedScroll = document.createElement("div");
+    nestedScroll.className = "pb_dialog_scroll_region";
+    const nestedFloating = document.createElement("div");
+    nestedFloating.className = "pb_dialog_floating_root";
+    nestedFloating.setAttribute("data-pb-dialog-floating-root", "true");
+    nestedDialog.appendChild(nestedScroll);
+    nestedDialog.appendChild(nestedFloating);
+    const kit = document.createElement("div");
+    kit.className = "pb_multi_level_select";
+    scroll.appendChild(nestedDialog);
+    scroll.appendChild(kit);
+    const outerFloating = document.createElement("div");
+    outerFloating.className = "pb_dialog_floating_root";
+    outerFloating.setAttribute("data-pb-dialog-floating-root", "true");
+    outerFloating.setAttribute("data-pb-floating-owner", "bulk-update-dialog");
+    outerDialog.appendChild(scroll);
+    outerDialog.appendChild(outerFloating);
+    document.body.appendChild(outerDialog);
+
+    expect(resolveDialogFloatingPortalHost(kit)).toBe(outerFloating);
+    expect(resolvePortaledKitHost(kit, null)).toBe(outerFloating);
+  });
+
+  test("resolvePortaledKitHost uses document.body when kit is in popover tooltip", () => {
+    const pop = document.createElement("div");
+    pop.className = "pb_popover_tooltip show";
+    const kit = document.createElement("div");
+    pop.appendChild(kit);
+    document.body.appendChild(pop);
+
+    expect(resolvePortaledKitHost(kit, null)).toBe(document.body);
+  });
+
+  test("targetIsInsidePortaledFloatingKit is scoped to owner id", () => {
+    const portalA = document.createElement("div");
+    portalA.className = "typeahead-kit-select__menu-portal";
+    portalA.setAttribute("data-pb-floating-owner", "filter-a");
+    const optionA = document.createElement("div");
+    portalA.appendChild(optionA);
+
+    const portalB = document.createElement("div");
+    portalB.className = "typeahead-kit-select__menu-portal";
+    portalB.setAttribute("data-pb-floating-owner", "filter-b");
+    document.body.appendChild(portalA);
+    document.body.appendChild(portalB);
+
+    expect(targetIsInsidePortaledFloatingKit(optionA, "filter-a")).toBe(true);
+    expect(targetIsInsidePortaledFloatingKit(optionA, "filter-b")).toBe(false);
+    expect(targetIsInsidePortaledFloatingKit(document.createElement("button"), "filter-a")).toBe(
+      false,
+    );
+  });
+});
