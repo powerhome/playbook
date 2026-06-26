@@ -1,3 +1,41 @@
+# 16.10.0
+##### June 26, 2026
+
+![release_image](https://github.com/user-attachments/assets/db119637-25e9-4157-9091-c5f7fdf034fc)
+
+
+**Kit Enhancements:**
+
+- Advanced Table: Add Fontweight Support to Advanced Table Rowstyling [\#6327](https://github.com/powerhome/playbook/pull/6327) ([elisashapiro](https://github.com/elisashapiro))
+- Passphrase: Rails-only Passphrase Kit [\#6237](https://github.com/powerhome/playbook/pull/6237) ([kangaree](https://github.com/kangaree))
+- UI Consistency: Select and Multilevelselect Chevrons [\#6331](https://github.com/powerhome/playbook/pull/6331) ([elisashapiro](https://github.com/elisashapiro))
+- Draggable Kit: Fix Mobile Drag-and-drop Allowing Cross-container Moves - Rails [\#6326](https://github.com/powerhome/playbook/pull/6326) ([kangaree](https://github.com/kangaree))
+- Advanced Table: Sticky Header With Columnvisibilitycontrol or Selectablerows/actionbar [\#6299](https://github.com/powerhome/playbook/pull/6299) ([elisashapiro](https://github.com/elisashapiro))
+- Inline Loading: Add A Color Prop [\#6281](https://github.com/powerhome/playbook/pull/6281) ([nickamantia](https://github.com/nickamantia))
+- Date Picker: New Yearascending Prop \(react and Rails\) [\#6256](https://github.com/powerhome/playbook/pull/6256) ([nidaqg](https://github.com/nidaqg))
+
+**Improvements:**
+
+- Add New Siding Color Tokens to Product Colors [\#6335](https://github.com/powerhome/playbook/pull/6335) ([elisashapiro](https://github.com/elisashapiro))
+- Upgrades Playbook Icons [\#6333](https://github.com/powerhome/playbook/pull/6333) ([elisashapiro](https://github.com/elisashapiro))
+- Playbook Website: Playgrounds [\#6325](https://github.com/powerhome/playbook/pull/6325) ([nidaqg](https://github.com/nidaqg))
+- Fix React Advanced Table Row Styling Data Import [\#6324](https://github.com/powerhome/playbook/pull/6324) ([elisashapiro](https://github.com/elisashapiro))
+- Advanced Table: Remove Internal Fullscreen Prop Code [\#6313](https://github.com/powerhome/playbook/pull/6313) ([nickamantia](https://github.com/nickamantia))
+- Playbook Website: Build Beta UI Playground for Multi-kit Composition [\#6300](https://github.com/powerhome/playbook/pull/6300) ([nidaqg](https://github.com/nidaqg))
+- Playbook Website: Playgrounds Continued [\#6274](https://github.com/powerhome/playbook/pull/6274) ([nidaqg](https://github.com/nidaqg))
+- Draggable: Update Drag Event Listeners Docs for Mobile Support [\#6273](https://github.com/powerhome/playbook/pull/6273) ([debborafernandess](https://github.com/debborafernandess))
+- Upgrades Playbook Icons [\#6282](https://github.com/powerhome/playbook/pull/6282) ([elisashapiro](https://github.com/elisashapiro))
+- Playbook-icons Upgrade to V2.3.0 [\#6279](https://github.com/powerhome/playbook/pull/6279) ([nidaqg](https://github.com/nidaqg))
+- Remove Remaining FA References from Kits and Website [\#6257](https://github.com/powerhome/playbook/pull/6257) ([nidaqg](https://github.com/nidaqg))
+
+**Fixed Bugs:**
+
+- Formbuilder Required Indicator Update [\#6240](https://github.com/powerhome/playbook/pull/6240) ([elisashapiro](https://github.com/elisashapiro))
+
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/v16.10.0-rc.3...16.10.0)
+
+
 #  🪄 Forms With Better Memory
 ##### June 04, 2026
 
