@@ -51,6 +51,8 @@ export class PbDropdownKeyboard {
   }
 
   openDropdownIfClosed() {
+    if (this.dropdown.isDisabled) return;
+
     if (!this.dropdown.target.classList.contains("open")) {
       this.dropdown.showElement(this.dropdown.target);
       this.dropdown.updateArrowDisplay(true);
@@ -58,6 +60,8 @@ export class PbDropdownKeyboard {
   }
 
   handleKeyDown(event) {
+    if (this.dropdown.isDisabled) return;
+
     switch (event.key) {
       case "ArrowDown":
         event.preventDefault();
@@ -133,6 +137,8 @@ moveFocus(direction) {
 
 
   selectOption() {
+    if (this.dropdown.isDisabled) return;
+
     const allOptions = Array.from(
       this.dropdownElement.querySelectorAll(OPTION_SELECTOR)
     );

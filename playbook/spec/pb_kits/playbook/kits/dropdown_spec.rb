@@ -26,6 +26,7 @@ RSpec.describe Playbook::PbDropdown::Dropdown do
   it { is_expected.to define_string_prop(:end_date_id).with_default("end_date_id") }
   it { is_expected.to define_string_prop(:end_date_name).with_default("end_date_name") }
   it { is_expected.to define_hash_prop(:custom_quick_pick_dates).with_default({}) }
+  it { is_expected.to define_boolean_prop(:disabled).with_default(false) }
   it { is_expected.to define_boolean_prop(:clearable).with_default(true) }
   it { is_expected.to define_enum_prop(:close_on_click).with_values("outside", "inside", "any").with_default("any") }
   it { is_expected.to define_boolean_prop(:constrain_height).with_default(false) }
@@ -38,6 +39,7 @@ RSpec.describe Playbook::PbDropdown::Dropdown do
       expect(subject.new(dark: true).classname).to eq "pb_dropdown_default dark"
       expect(subject.new(margin: "lg").classname).to eq "pb_dropdown_default m_lg"
       expect(subject.new(classname: "additional_class").classname).to eq "pb_dropdown_default additional_class"
+      expect(subject.new(disabled: true).classname).to eq "pb_dropdown_default disabled"
     end
   end
 
@@ -463,6 +465,13 @@ RSpec.describe Playbook::PbDropdown::Dropdown do
     it "omits custom_event_type from data when not passed" do
       dropdown = subject.new({})
       expect(dropdown.data).not_to have_key(:custom_event_type)
+    end
+  end
+
+  describe "#disabled" do
+    it "includes disabled state in data when true" do
+      dropdown = subject.new(disabled: true)
+      expect(dropdown.data).to include(pb_dropdown_disabled: true)
     end
   end
 end

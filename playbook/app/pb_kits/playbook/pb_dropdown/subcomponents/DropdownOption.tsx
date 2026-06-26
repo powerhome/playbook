@@ -42,6 +42,7 @@ const DropdownOption = (props: DropdownOptionProps) => {
 
   const {
     activeStyle,
+    disabled,
     filteredOptions,
     filterItem,
     focusedOptionIndex,
@@ -101,10 +102,10 @@ const DropdownOption = (props: DropdownOptionProps) => {
         className={classes}
         id={id}
         key={key}
-        onClick= {() => handleOptionClick(option)}
+        onClick= {() => !disabled && handleOptionClick(option)}
     >
       <ListItem
-          cursor="pointer"
+          cursor={disabled ? "default" : "pointer"}
           dark={dark}
           data-name={option?.value}
           key={option?.label}
