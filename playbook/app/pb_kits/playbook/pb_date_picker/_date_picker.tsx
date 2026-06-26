@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
 import classnames from 'classnames'
 
 import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
@@ -6,6 +6,7 @@ import { deprecatedProps, globalProps, GlobalProps } from '../utilities/globalPr
 import { getAllIcons } from "../utilities/icons/allicons"
 import { camelToSnakeCase } from '../utilities/text'
 
+import { DialogContext } from '../pb_dialog/_dialog_context'
 import datePickerHelper from './date_picker_helper'
 import Icon from '../pb_icon/_icon'
 import Caption from '../pb_caption/_caption'
@@ -149,6 +150,8 @@ const DatePicker = (props: DatePickerProps): React.ReactElement => {
     syncEndWith,
   } = props
 
+  const dialogCtx = useContext(DialogContext)
+
   const ariaProps = buildAriaProps(aria)
   const normalizedDefaultDate = normalizeDefaultDate(defaultDate)
   const filterResetDefaultSerialized = serializeDefaultDateForFilterReset(normalizedDefaultDate)
@@ -186,6 +189,7 @@ const DatePicker = (props: DatePickerProps): React.ReactElement => {
       format,
       hideIcon,
       inLine,
+      inline: inLine,
       maxDate,
       minDate,
       mode,
@@ -208,8 +212,18 @@ const DatePicker = (props: DatePickerProps): React.ReactElement => {
       syncStartWith,
       syncEndWith,
       required: false,
+      dialogPortalTarget: dialogCtx?.selectMenuPortalTarget ?? null,
     }, scrollContainer)
-  }, initializeOnce ? [] : undefined)
+
+    return () => {
+      const input = document.getElementById(String(pickerId)) as
+        | (HTMLElement & { _flatpickr?: { destroy: () => void }; _pbDatePickerOpenUnsub?: () => void })
+        | null
+      input?._pbDatePickerOpenUnsub?.()
+      delete input?._pbDatePickerOpenUnsub
+      input?._flatpickr?.destroy()
+    }
+  }, initializeOnce ? [initializeOnce, dialogCtx?.selectMenuPortalTarget, pickerId] : undefined)
 
   const filteredProps = {...props}
   if (filteredProps.marginBottom === undefined) {

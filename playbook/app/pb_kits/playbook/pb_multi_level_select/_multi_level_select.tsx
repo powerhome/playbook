@@ -1,4 +1,12 @@
-import React, { useState, useEffect, useRef, forwardRef } from "react";
+import React, {
+  useState,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  forwardRef,
+  useContext,
+} from "react";
+import { createPortal } from "react-dom";
 import classnames from "classnames";
 import { globalProps, GlobalProps } from "../utilities/globalProps";
 import {
@@ -25,6 +33,15 @@ import {
   recursiveCheckParent,
   getExpandedItems,
 } from "./_helper_functions";
+
+import { DialogContext } from "../pb_dialog/_dialog_context";
+import {
+  positionFloatingShellToInput,
+  resolveFloatingOwnerId,
+  resolvePortaledKitHost,
+  setFloatingOwnerAttribute,
+  subscribeFloatingKitReposition,
+} from "../utilities/floatingPortalHosts";
 
 interface MultiLevelSelectComponent extends React.ForwardRefExoticComponent<
   MultiLevelSelectProps & React.RefAttributes<HTMLInputElement>
@@ -118,7 +135,19 @@ const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>(
       className
     );
 
+    /** Re-scope SCSS for `.dropdown_menu` / `.close` when the menu is portaled outside the kit root. */
+    const floatingShellClasses = classnames(
+      buildCss("pb_multi_level_select"),
+      globalProps(props),
+      "pb_multi_level_select_floating_shell",
+    );
+
     const dropdownRef = useRef(null);
+    const kitRootRef = useRef<HTMLDivElement>(null);
+    const mlsFloatingShellRef = useRef<HTMLDivElement>(null);
+    const dialogCtx = useContext(DialogContext);
+    const [portalHost, setPortalHost] = useState<HTMLElement | null>(null);
+    const [floatingOwnerId, setFloatingOwnerId] = useState<string | null>(null);
 
     // State for whether dropdown is open or closed
     const [isDropdownClosed, setIsDropdownClosed] = useState(true);
@@ -270,6 +299,63 @@ const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>(
       }
     }, [formattedData]);
 
+    useLayoutEffect(() => {
+      if (isDropdownClosed) {
+        setPortalHost(null);
+        setFloatingOwnerId(null);
+        return;
+      }
+      const root = kitRootRef.current;
+      setFloatingOwnerId(resolveFloatingOwnerId(root));
+      setPortalHost(
+        resolvePortaledKitHost(
+          root,
+          dialogCtx?.selectMenuPortalTarget ?? null,
+        ),
+      );
+    }, [isDropdownClosed, dialogCtx?.selectMenuPortalTarget]);
+
+    useLayoutEffect(() => {
+      if (
+        isDropdownClosed ||
+        !portalHost ||
+        !mlsFloatingShellRef.current ||
+        !dropdownRef.current
+      ) {
+        return;
+      }
+      const shell = mlsFloatingShellRef.current;
+      const inputEl = dropdownRef.current as HTMLElement;
+
+      const reposition = () => {
+        if (!shell || !inputEl) return;
+        const menuEl = shell.querySelector(".dropdown_menu") as HTMLElement | null;
+        if (!menuEl) return;
+        const rect = inputEl.getBoundingClientRect();
+        const maxH = Math.max(120, window.innerHeight - rect.bottom - 8);
+        positionFloatingShellToInput({
+          shell,
+          inputViewportRect: rect,
+          menuEl,
+          maxMenuHeightPx: maxH,
+          positionHost: portalHost,
+        });
+      };
+
+      reposition();
+      const raf = window.requestAnimationFrame(reposition);
+      const unsubscribeReposition = subscribeFloatingKitReposition(reposition);
+      return () => {
+        window.cancelAnimationFrame(raf);
+        unsubscribeReposition();
+      };
+    }, [
+      isDropdownClosed,
+      portalHost,
+      formattedData,
+      filterItem,
+    ]);
+
     useEffect(() => {
       // Function to handle clicks outside the dropdown
       const handleClickOutside = (event: any) => {
@@ -277,9 +363,13 @@ const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>(
         const labelEl = document.querySelector(`label[for="${labelForId}"]`);
         if (labelEl?.contains(event.target)) return;
 
+        const inPortaledMenu =
+          mlsFloatingShellRef.current?.contains(event.target as Node) ?? false;
+
         if (
           dropdownRef.current &&
           !dropdownRef.current.contains(event.target) &&
+          !inPortaledMenu &&
           event.target.id !== arrowDownElementId &&
           event.target.id !== arrowUpElementId
         ) {
@@ -530,6 +620,7 @@ const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>(
 
     return (
       <div
+          ref={kitRootRef}
           {...ariaProps}
           {...dataProps}
           {...htmlProps}
@@ -705,15 +796,39 @@ const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>(
               )}
             </div>
 
-            <div
-                className={`dropdown_menu ${isDropdownClosed ? "close" : "open"}`}
-            >
-              {renderNestedOptions(
-                filterItem
-                  ? findByFilter(formattedData, filterItem)
-                  : formattedData,
-              )}
-            </div>
+            {portalHost
+              ? createPortal(
+                  <div
+                      className={floatingShellClasses}
+                      ref={(node) => {
+                        mlsFloatingShellRef.current = node;
+                        setFloatingOwnerAttribute(node, floatingOwnerId);
+                      }}
+                      style={{ margin: 0 }}
+                  >
+                    <div
+                        className={`dropdown_menu ${isDropdownClosed ? "close" : "open"}`}
+                    >
+                      {renderNestedOptions(
+                        filterItem
+                          ? findByFilter(formattedData, filterItem)
+                          : formattedData,
+                      )}
+                    </div>
+                  </div>,
+                  portalHost,
+                )
+              : (
+                  <div
+                      className={`dropdown_menu ${isDropdownClosed ? "close" : "open"}`}
+                  >
+                    {renderNestedOptions(
+                      filterItem
+                        ? findByFilter(formattedData, filterItem)
+                        : formattedData,
+                    )}
+                  </div>
+                )}
           </div>
         </MultiLevelSelectContext.Provider>
         {error && (

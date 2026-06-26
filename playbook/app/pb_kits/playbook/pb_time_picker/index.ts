@@ -1,5 +1,17 @@
 import PbEnhancedElement from '../pb_enhanced_element'
 import {
+  announceFloatingKitOpen,
+  nextPortaledFloatingZIndex,
+  PB_FLOATING_OWNER_ATTR,
+  positionDropdownPortalToWrapper,
+  recordPortaledMenuPointerDown,
+  resolveFloatingOwnerId,
+  resolvePortaledFloatingZIndex,
+  resolvePortaledKitHost,
+  subscribeFloatingKitOpen,
+  subscribeFloatingKitReposition,
+} from '../utilities/floatingPortalHosts'
+import {
   parseTime,
   parseTimeToMinutes,
   isTimeInRange as isTimeInRangeHelper,
@@ -80,6 +92,20 @@ export default class PbTimePicker extends PbEnhancedElement {
   private formElement: HTMLFormElement | null = null
   private initialized = false
 
+  private portalHost: HTMLElement | null = null
+  private floatingOwnerId: string | null = null
+  private useMenuPortal = false
+  private portalShell: HTMLElement | null = null
+  private _portalParent: Node | null = null
+  private _portalNext: ChildNode | null = null
+  private _floatingResolved = false
+  private _unsubscribePortalReposition: (() => void) | null = null
+  private boundApplyPortalPosition: (() => void) | null = null
+  private timePickerWrapper: HTMLElement | null = null
+  private _popoverObserver: MutationObserver | null = null
+  private _unsubscribeKitOpen: (() => void) | null = null
+  private _activePortalZIndex: string | undefined
+
   private initializeState(): void {
     if (this.initialized) return
     this.initialized = true
@@ -131,6 +157,8 @@ export default class PbTimePicker extends PbEnhancedElement {
     this.amCard = element.querySelector('.pb_time_picker_meridiem_am') as HTMLElement | null
     this.pmCard = element.querySelector('.pb_time_picker_meridiem_pm') as HTMLElement | null
 
+    this.timePickerWrapper = element.querySelector('.time_picker_wrapper')
+
     this.handleInvalidBound = this.handleInvalid.bind(this)
     this.handleClickOutsideBound = this.handleClickOutside.bind(this)
     this.handleMeridiemKeyDownBound = this.handleMeridiemKeyDown.bind(this)
@@ -146,13 +174,24 @@ export default class PbTimePicker extends PbEnhancedElement {
     this.updateUI()
     this.bindEvents()
     this.bindFormValidation()
+    this.bindPopoverHideClose()
+    this._unsubscribeKitOpen = subscribeFloatingKitOpen(({ kitKind }) => {
+      if (kitKind !== 'time-picker' && this.showDropdown) {
+        this.closeDropdown(true)
+      }
+    })
     document.addEventListener('invalid', this.handleInvalidBound, true)
   }
 
   disconnect(): void {
+    this._unsubscribeKitOpen?.()
+    this._unsubscribeKitOpen = null
+    this._popoverObserver?.disconnect()
+    this._popoverObserver = null
+    this.unmountPortalMenu()
     this.formElement?.removeEventListener('submit', this.handleFormSubmitBound, true)
     document.removeEventListener('invalid', this.handleInvalidBound, true)
-    document.removeEventListener('mousedown', this.handleClickOutsideBound)
+    document.removeEventListener('mousedown', this.handleClickOutsideBound, true)
     this.amRadio?.removeEventListener('keydown', this.handleMeridiemKeyDownBound)
     this.pmRadio?.removeEventListener('keydown', this.handleMeridiemKeyDownBound)
     this.unbindMainInputEvents()
@@ -204,7 +243,11 @@ export default class PbTimePicker extends PbEnhancedElement {
       option.dataset.hour = h.toString()
       option.textContent = this.timeFormat === '24hour' ? h.toString().padStart(2, '0') : h.toString()
       option.addEventListener('mousedown', (e) => {
-        e.preventDefault()
+        e.stopPropagation()
+        this.recordPortaledMenuPointer(e)
+      })
+      option.addEventListener('click', (e) => {
+        e.stopPropagation()
         this.handleHourOptionClick(h)
       })
       this.hourDropdown.appendChild(option)
@@ -217,7 +260,11 @@ export default class PbTimePicker extends PbEnhancedElement {
       option.dataset.minute = m.toString()
       option.textContent = m.toString().padStart(2, '0')
       option.addEventListener('mousedown', (e) => {
-        e.preventDefault()
+        e.stopPropagation()
+        this.recordPortaledMenuPointer(e)
+      })
+      option.addEventListener('click', (e) => {
+        e.stopPropagation()
         this.handleMinuteOptionClick(m)
       })
       this.minuteDropdown.appendChild(option)
@@ -263,9 +310,31 @@ export default class PbTimePicker extends PbEnhancedElement {
     this.hourInput.classList.toggle('invalid', invalidSelection)
     this.minuteInput.classList.toggle('invalid', invalidSelection)
 
-    this.dropdownContainer.hidden = !this.showDropdown || this.disabled
+    const isPortaled = this.dropdownContainer.dataset.pbTimePickerPortaled === 'true'
+    if (!isPortaled) {
+      this.dropdownContainer.hidden = !this.showDropdown || this.disabled
+    } else if (!this.showDropdown || this.disabled) {
+      this.dropdownContainer.hidden = true
+    } else {
+      this.dropdownContainer.hidden = false
+    }
+
     this.hourDropdown.hidden = !this.showHourDropdown
     this.minuteDropdown.hidden = !this.showMinuteDropdown
+
+    if (isPortaled && this._activePortalZIndex) {
+      const portalZIndex = this._activePortalZIndex
+      if (this.showHourDropdown) {
+        this.hourDropdown.style.zIndex = portalZIndex
+      } else {
+        this.hourDropdown.style.removeProperty('z-index')
+      }
+      if (this.showMinuteDropdown) {
+        this.minuteDropdown.style.zIndex = portalZIndex
+      } else {
+        this.minuteDropdown.style.removeProperty('z-index')
+      }
+    }
 
     this.hourDropdown.querySelectorAll('.time_dropdown_option').forEach((el) => {
       const option = el as HTMLElement
@@ -317,6 +386,13 @@ export default class PbTimePicker extends PbEnhancedElement {
       this.removeValidationErrorMessage()
     }
 
+    if (
+      this.showDropdown &&
+      this.useMenuPortal &&
+      this.dropdownContainer.dataset.pbTimePickerPortaled === 'true'
+    ) {
+      requestAnimationFrame(() => this.applyPortalPosition())
+    }
   }
 
   private scrollHourDropdownToSelected(): void {
@@ -469,19 +545,191 @@ export default class PbTimePicker extends PbEnhancedElement {
     this.element.querySelector(VALIDATION_ERROR_SELECTOR)?.remove()
   }
 
+  private recordPortaledMenuPointer(event: MouseEvent): void {
+    if (!this.useMenuPortal || !this.floatingOwnerId) return
+    recordPortaledMenuPointerDown(
+      this.floatingOwnerId,
+      event.clientX,
+      event.clientY,
+    )
+  }
+
+  private ensureFloatingPortalConfig(): void {
+    if (!this._floatingResolved) {
+      this.portalHost = resolvePortaledKitHost(this.element as HTMLElement, null)
+      this.useMenuPortal = Boolean(this.portalHost)
+      this._floatingResolved = true
+    }
+    this.floatingOwnerId = resolveFloatingOwnerId(this.element as HTMLElement)
+  }
+
+  private mountPortalMenu(): void {
+    if (!this.useMenuPortal || !this.portalHost) return
+    const container = this.dropdownContainer
+    if (container.dataset.pbTimePickerPortaled === 'true') return
+
+    this._portalParent = container.parentNode
+    this._portalNext = container.nextSibling
+
+    const shell = document.createElement('div')
+    const shellClasses = [
+      'pb_time_picker',
+      'pb_time_picker_floating_shell',
+      'pb_time_picker_panel_portal',
+      this.element.classList.contains('error') ? 'error' : '',
+      this.element.classList.contains('disabled') ? 'disabled' : '',
+      this.element.classList.contains('dark') ? 'dark' : '',
+    ].filter(Boolean)
+    shell.className = shellClasses.join(' ')
+    const ownerId = this.floatingOwnerId ?? resolveFloatingOwnerId(this.element as HTMLElement)
+    if (ownerId) {
+      shell.setAttribute(PB_FLOATING_OWNER_ATTR, ownerId)
+      container.setAttribute(PB_FLOATING_OWNER_ATTR, ownerId)
+      this.hourDropdown?.setAttribute(PB_FLOATING_OWNER_ATTR, ownerId)
+      this.minuteDropdown?.setAttribute(PB_FLOATING_OWNER_ATTR, ownerId)
+    }
+
+    shell.appendChild(container)
+    this.portalHost.appendChild(shell)
+    this.portalShell = shell
+    container.dataset.pbTimePickerPortaled = 'true'
+  }
+
+  private clearPortalPanelStyles(panel: HTMLElement): void {
+    panel.style.removeProperty('position')
+    panel.style.removeProperty('left')
+    panel.style.removeProperty('top')
+    panel.style.removeProperty('width')
+    panel.style.removeProperty('margin')
+    panel.style.removeProperty('pointer-events')
+    panel.style.removeProperty('z-index')
+
+    const selection = panel.querySelector('.pb_time_selection') as HTMLElement | null
+    if (selection) {
+      selection.style.removeProperty('max-height')
+      selection.style.removeProperty('overflow')
+    }
+  }
+
+  private closeHourMinuteDropdowns(): void {
+    this.showHourDropdown = false
+    this.showMinuteDropdown = false
+    if (this.hourDropdown) this.hourDropdown.hidden = true
+    if (this.minuteDropdown) this.minuteDropdown.hidden = true
+  }
+
+  private unmountPortalMenu(): void {
+    if (this._unsubscribePortalReposition) {
+      this._unsubscribePortalReposition()
+      this._unsubscribePortalReposition = null
+    }
+    if (this.boundApplyPortalPosition) {
+      window.removeEventListener('resize', this.boundApplyPortalPosition)
+      this.boundApplyPortalPosition = null
+    }
+
+    const container = this.dropdownContainer
+    if (!container || container.dataset.pbTimePickerPortaled !== 'true') {
+      return
+    }
+
+    this.closeHourMinuteDropdowns()
+
+    delete container.dataset.pbTimePickerPortaled
+    container.removeAttribute(PB_FLOATING_OWNER_ATTR)
+    this.hourDropdown?.removeAttribute(PB_FLOATING_OWNER_ATTR)
+    this.minuteDropdown?.removeAttribute(PB_FLOATING_OWNER_ATTR)
+    this.clearPortalPanelStyles(container)
+
+    if (container.parentNode === this.portalShell && this._portalParent) {
+      if (this._portalNext && this._portalNext.parentNode === this._portalParent) {
+        this._portalParent.insertBefore(container, this._portalNext)
+      } else {
+        this._portalParent.appendChild(container)
+      }
+    }
+    this._portalParent = null
+    this._portalNext = null
+
+    if (this.portalShell) {
+      this.portalShell.remove()
+    }
+    this.portalShell = null
+  }
+
+  private bindPopoverHideClose(): void {
+    const tooltip = this.element.closest('.pb_popover_tooltip') as HTMLElement | null
+    if (!tooltip) return
+
+    this._popoverObserver = new MutationObserver(() => {
+      if (!tooltip.classList.contains('show') && (this.showDropdown || this.portalShell)) {
+        this.showDropdown = false
+        document.removeEventListener('mousedown', this.handleClickOutsideBound, true)
+        this.unmountPortalMenu()
+        this.updateUI()
+      }
+    })
+    this._popoverObserver.observe(tooltip, { attributes: true, attributeFilter: ['class'] })
+  }
+
+  private applyPortalPosition(): void {
+    if (
+      !this.useMenuPortal ||
+      !this.portalHost ||
+      !this.portalShell ||
+      !this.timePickerWrapper
+    ) {
+      return
+    }
+
+    positionDropdownPortalToWrapper({
+      panel: this.portalShell,
+      wrapperViewportRect: this.timePickerWrapper.getBoundingClientRect(),
+      positionHost: this.portalHost,
+      preferBelow: true,
+      matchWrapperWidth: false,
+      zIndex: this._activePortalZIndex,
+    })
+  }
+
   private openDropdown(): void {
+    this.ensureFloatingPortalConfig()
+    this._activePortalZIndex = this.portalHost
+      ? resolvePortaledFloatingZIndex(
+          this.portalHost,
+          nextPortaledFloatingZIndex(),
+        )
+      : undefined
+    announceFloatingKitOpen('time-picker', this.floatingOwnerId)
+    if (this.useMenuPortal) {
+      this.mountPortalMenu()
+    }
+
     this.showDropdown = true
-    document.addEventListener('mousedown', this.handleClickOutsideBound)
+    document.addEventListener('mousedown', this.handleClickOutsideBound, true)
     this.updateUI()
+
+    if (this.useMenuPortal) {
+      this.applyPortalPosition()
+      this.boundApplyPortalPosition = this.applyPortalPosition.bind(this)
+      window.addEventListener('resize', this.boundApplyPortalPosition)
+      if (this._unsubscribePortalReposition) {
+        this._unsubscribePortalReposition()
+      }
+      this._unsubscribePortalReposition = subscribeFloatingKitReposition(
+        this.boundApplyPortalPosition,
+      )
+      window.requestAnimationFrame(() => this.applyPortalPosition())
+    }
   }
 
   private closeDropdown(skipValidation = false): void {
-    this.showHourDropdown = false
-    this.showMinuteDropdown = false
-    document.removeEventListener('mousedown', this.handleClickOutsideBound)
+    this.closeHourMinuteDropdowns()
+    document.removeEventListener('mousedown', this.handleClickOutsideBound, true)
 
     if (!this.hasSelectedTime) {
       this.showDropdown = false
+      this.unmountPortalMenu()
       this.updateUI()
       return
     }
@@ -520,6 +768,9 @@ export default class PbTimePicker extends PbEnhancedElement {
       this.showDropdown = false
     }
 
+    if (!this.showDropdown) {
+      this.unmountPortalMenu()
+    }
     this.updateUI()
   }
 
@@ -546,9 +797,10 @@ export default class PbTimePicker extends PbEnhancedElement {
   }
 
   private handleClickOutside(event: MouseEvent): void {
-    if (!this.element.contains(event.target as Node)) {
-      this.closeDropdown()
-    }
+    const target = event.target as Node
+    if (this.element.contains(target)) return
+    if (this.portalShell?.contains(target)) return
+    this.closeDropdown()
   }
 
   private handleInputKeyDown = (e: KeyboardEvent): void => {
