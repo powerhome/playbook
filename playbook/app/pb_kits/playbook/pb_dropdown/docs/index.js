@@ -33,3 +33,4 @@ export { default as DropdownWithClearable } from './_dropdown_with_clearable.jsx
 export { default as DropdownWithConstrainHeight } from './_dropdown_with_constrain_height.jsx'
 export { default as DropdownClosingOptions } from './_dropdown_closing_options.jsx'
 export { default as DropdownRequiredIndicator } from "./_dropdown_required_indicator.jsx";
+export { default as DropdownDisabled } from "./_dropdown_disabled.jsx";
