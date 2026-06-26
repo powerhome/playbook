@@ -235,8 +235,6 @@ const Icon = (props: IconProps) => {
               ...htmlProps,
               className: classes,
               id,
-              width: "1.25em",
-              height: "1em",
               ...(props.tabIndex !== undefined && { tabIndex }),
             })
           }
