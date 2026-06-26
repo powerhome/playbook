@@ -275,7 +275,7 @@ test('disabled custom option does not select and marks child wrapper disabled', 
 
   expect(onSelect).not.toHaveBeenCalled()
   expect(disabledChild.parentElement).toHaveClass('dropdown_option_wrapper', 'disabled')
-  expect(disabledChild.closest('.disabled')).toHaveAttribute('aria-disabled', 'true')
+  expect(disabledChild.closest('[aria-disabled="true"]')).toBeInTheDocument()
 })
 
 test('generated custom Trigger', () => {
