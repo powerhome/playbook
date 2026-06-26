@@ -47,6 +47,7 @@ export const PLAYGROUND_ENABLED_KITS = [
   "label_pill",
   "label_value",
   "legend",
+  "layout",
   "link",
   "list",
   "loading_inline",
