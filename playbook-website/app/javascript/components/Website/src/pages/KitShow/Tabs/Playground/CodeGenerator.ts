@@ -45,6 +45,7 @@ interface GenerateFromTemplateOptions {
   externalImports?: string[];
   wrapper?: string;
   requiredProps?: Record<string, any>;
+  statefulProps?: string[];
 }
 
 function templateUsesRequiredPropVariable(
@@ -202,6 +203,10 @@ const formatPropValue = (
       return name;
     }
     return `${name}={false}`;
+  }
+
+  if (propType.includes("number") && typeof value === "number") {
+    return `${name}={${value}}`;
   }
 
   if (propType === "string" || propType.includes("string")) {
@@ -397,6 +402,7 @@ export const generateFromTemplate = ({
   externalImports = [],
   wrapper,
   requiredProps = {},
+  statefulProps = [],
 }: GenerateFromTemplateOptions): string => {
   // Group enabled props by their target marker
   const propsByTarget: Record<string, string[]> = {};
@@ -405,13 +411,22 @@ export const generateFromTemplate = ({
       templateUsesRequiredPropVariable(template, wrapper, name)
     )
   );
+  const statefulPropVariableNames = new Set(
+    statefulProps.filter((name) =>
+      templateUsesRequiredPropVariable(template, wrapper, name)
+    )
+  );
+  const templateVariableNames = new Set([
+    ...requiredPropVariableNames,
+    ...statefulPropVariableNames,
+  ]);
   
   Object.entries(propValues).forEach(([name, propValue]) => {
     if (!propValue.enabled) return;
     
-    // Skip required props only when the template already references them as variables.
+    // Skip props only when the template/wrapper already references them as variables.
     // Otherwise they should be emitted as ordinary JSX props in the copyable snippet.
-    if (requiredPropVariableNames.has(name)) return;
+    if (templateVariableNames.has(name)) return;
     
     // Skip only when value matches kit schema default (not playground-only defaults)
     if (shouldSkipEmitWhenMatchesSchemaDefault(propDefinitions, name, propValue)) return;
@@ -473,13 +488,19 @@ export const generateFromTemplate = ({
     result = wrapper.replace(/\{\{component\}\}/g, result);
   }
   
-  // Generate variable definitions for required props
+  // Generate variable definitions for required/stateful props
   let variableDefinitions = "";
   if (requiredPropVariableNames.size > 0) {
     Object.entries(requiredProps).forEach(([name, defaultValue]) => {
       if (!requiredPropVariableNames.has(name)) return;
       // Use current value from propValues if available
       const currentValue = propValues[name]?.value ?? defaultValue;
+      variableDefinitions += `const ${name} = ${JSON.stringify(currentValue, null, 2)};\n\n`;
+    });
+  }
+  if (statefulPropVariableNames.size > 0) {
+    statefulPropVariableNames.forEach((name) => {
+      const currentValue = propValues[name]?.value;
       variableDefinitions += `const ${name} = ${JSON.stringify(currentValue, null, 2)};\n\n`;
     });
   }
@@ -534,6 +555,7 @@ export const generateLiveFromTemplate = ({
   externalImports = [],
   wrapper,
   requiredProps: _requiredProps = {},
+  statefulProps = [],
 }: Omit<GenerateFromTemplateOptions, "includeImport">): string => {
   // Do NOT pass requiredProps here. PlaygroundPreview injects them as scope variables
   // (via previewScope → extraScope). Generating `const columnDefinitions = …` in the
@@ -553,6 +575,7 @@ export const generateLiveFromTemplate = ({
     externalImports,
     wrapper,
     requiredProps: {},
+    statefulProps,
   });
 
   let body = code.trimEnd();
