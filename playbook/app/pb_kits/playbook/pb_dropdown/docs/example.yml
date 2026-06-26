@@ -1,5 +1,7 @@
 examples:
   rails:
+  - dropdown_disabled_option: Disabled Option
+  - dropdown_custom_display_disabled_option: Custom Display Disabled Option
   - dropdown_default_rails: Default
   - dropdown_with_autocomplete: Autocomplete
   - dropdown_multi_select_rails: Multi Select
@@ -36,6 +38,8 @@ examples:
   - dropdown_custom_event_type: Custom Event Type
 
   react:
+  - dropdown_disabled_option: Disabled Option
+  - dropdown_custom_display_disabled_option: Custom Display Disabled Option
   - dropdown_default: Default
   - dropdown_with_autocomplete: Autocomplete
   - dropdown_multi_select: Multi Select

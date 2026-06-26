@@ -348,6 +348,8 @@ export default class PbDropdown extends PbEnhancedElement {
     const hiddenInput = this.baseInput;
 
     if (option) {
+      if (option.dataset.dropdownOptionDisabled === "true") return;
+
       const value = option.dataset.dropdownOptionLabel;
       if (this.isMultiSelect) {
         const alreadySelected = this.selectedOptions.has(value);

@@ -238,6 +238,46 @@ test('generated custom option', () => {
   expect(customOption).toBeInTheDocument()
 })
 
+test('disabled custom option does not select and marks child wrapper disabled', () => {
+  const onSelect = jest.fn()
+  const disabledOptions = [
+    {
+      label: 'Enabled',
+      value: 'enabled',
+      id: 'enabled',
+    },
+    {
+      label: 'Disabled',
+      value: 'disabled',
+      id: 'disabled',
+      disabled: true,
+    },
+  ]
+
+  render(
+    <Dropdown
+        data={{ testid: testId }}
+        onSelect={onSelect}
+        options={disabledOptions}
+    >
+      {disabledOptions.map((option) => (
+        <Dropdown.Option key={option.id}
+            option={option}
+        >
+          <span>{option.label}</span>
+        </Dropdown.Option>
+      ))}
+    </Dropdown>
+  )
+
+  const disabledChild = screen.getByText('Disabled')
+  fireEvent.click(disabledChild)
+
+  expect(onSelect).not.toHaveBeenCalled()
+  expect(disabledChild.parentElement).toHaveClass('dropdown_option_wrapper', 'disabled')
+  expect(disabledChild.closest('.disabled')).toHaveAttribute('aria-disabled', 'true')
+})
+
 test('generated custom Trigger', () => {
   render (
     <Dropdown
