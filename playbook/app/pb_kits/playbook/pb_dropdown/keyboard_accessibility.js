@@ -47,7 +47,9 @@ export class PbDropdownKeyboard {
     // We only want to return the options that are visible
     return Array.from(
       this.dropdownElement.querySelectorAll(OPTION_SELECTOR)
-    ).filter((opt) => opt.style.display !== "none");
+    ).filter(
+      (opt) => opt.style.display !== "none" && opt.dataset.dropdownOptionDisabled !== "true"
+    );
   }
 
   openDropdownIfClosed() {
@@ -139,6 +141,8 @@ moveFocus(direction) {
     if (this.focusedOptionIndex < 0) return;
 
     const optionEl = allOptions[this.focusedOptionIndex];
+    if (optionEl.dataset.dropdownOptionDisabled === "true") return;
+
     this.dropdown.handleOptionClick({ target: optionEl });
     this.dropdown.toggleElement(this.dropdown.target);
     this.dropdown.updateClearButton();

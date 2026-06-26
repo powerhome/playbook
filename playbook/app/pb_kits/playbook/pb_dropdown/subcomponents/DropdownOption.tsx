@@ -60,13 +60,15 @@ const DropdownOption = (props: DropdownOptionProps) => {
    ? selected.some((item) => item.label === option?.label)
    : (selected as GenericObject)?.label === option?.label;
 
+  const isDisabled = option?.disabled === true;
+
   if (!isItemMatchingFilter(option) || (multiSelect && isSelected)) {
     return null;
   }
   const isFocused =
     focusedOptionIndex >= 0 &&
     filteredOptions[focusedOptionIndex].label === option?.label;
-  const focusedClass = isFocused && "focused";
+  const focusedClass = isFocused ? "focused" : "";
 
   const selectedClass = isSelected ? "selected" : "list";
 
@@ -87,10 +89,15 @@ const DropdownOption = (props: DropdownOptionProps) => {
       selectedClass,
       focusedClass,
     ),
+    isDisabled && "disabled",
     bgTokenClass, 
     fontTokenClass,
     globalProps(props),
     className
+  );
+  const optionWrapperClass = classnames(
+    "dropdown_option_wrapper",
+    isDisabled && "disabled"
   );
 
   return (
@@ -98,10 +105,11 @@ const DropdownOption = (props: DropdownOptionProps) => {
         {...ariaProps}
         {...dataProps}
         {...htmlProps}
+        aria-disabled={isDisabled}
         className={classes}
         id={id}
         key={key}
-        onClick= {() => handleOptionClick(option)}
+        onClick={!isDisabled ? () => handleOptionClick(option) : undefined}
     >
       <ListItem
           cursor="pointer"
@@ -111,7 +119,7 @@ const DropdownOption = (props: DropdownOptionProps) => {
           padding="none"
       >
           {children ? 
-          <div className="dropdown_option_wrapper">{children}</div> :
+          <div className={optionWrapperClass}>{children}</div> :
               <Body dark={dark} 
                   text={option?.label} 
               />
