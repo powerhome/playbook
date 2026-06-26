@@ -42,6 +42,7 @@ const DropdownOption = (props: DropdownOptionProps) => {
 
   const {
     activeStyle,
+    disabled,
     filteredOptions,
     filterItem,
     focusedOptionIndex,
@@ -60,7 +61,9 @@ const DropdownOption = (props: DropdownOptionProps) => {
    ? selected.some((item) => item.label === option?.label)
    : (selected as GenericObject)?.label === option?.label;
 
-  const isDisabled = option?.disabled === true;
+
+  const isOptionDisabled = option?.disabled === true;
+  const isDisabled = disabled || isOptionDisabled;
 
   if (!isItemMatchingFilter(option) || (multiSelect && isSelected)) {
     return null;
@@ -109,10 +112,10 @@ const DropdownOption = (props: DropdownOptionProps) => {
         className={classes}
         id={id}
         key={key}
-        onClick={!isDisabled ? () => handleOptionClick(option) : undefined}
+        onClick={isDisabled ? undefined : () => handleOptionClick(option)}
     >
       <ListItem
-          cursor="pointer"
+          cursor={disabled ? "default" : "pointer"}
           dark={dark}
           data-name={option?.value}
           key={option?.label}

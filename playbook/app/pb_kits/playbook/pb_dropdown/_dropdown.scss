@@ -105,6 +105,17 @@
           color: $input_text_default;
         }
       }
+
+      .dropdown_input:disabled {
+        background-color: $input_background_disabled;
+        color: $input_text_disabled;
+        cursor: default;
+      }
+
+      .dropdown_input:disabled::placeholder {
+        color: $input_text_disabled;
+      }
+
       &:focus {
         box-shadow: 0px 0px 0 1px $status_border_primary !important;
         outline: unset;
@@ -457,6 +468,27 @@
           &:focus {
             background-color: $input_background_disabled_dark;
           }
+        }
+      }
+    }
+  }
+
+  &.disabled {
+    .dropdown_wrapper {
+      .dropdown_trigger_wrapper,
+      .dropdown_trigger_wrapper_focus,
+      .dropdown_trigger_wrapper_focus_select_only,
+      .dropdown_trigger_wrapper_select_only {
+        background-color: $input_background_disabled;
+        box-shadow: none !important;
+        cursor: default !important;
+        opacity: 0.5;
+        pointer-events: none;
+
+        input {
+          background-color: $input_background_disabled;
+          color: $input_text_disabled;
+          cursor: default !important;
         }
       }
     }

@@ -873,3 +873,59 @@ describe("quickpick Last Month range when current month is shorter than the prev
     expect(formatDate(endDate)).toBe(formatDate(DateTime.getPreviousMonthEndDate(now)))
   })
 })
+
+test('disabled prop prevents dropdown from opening', () => {
+  render(
+    <Dropdown
+        data={{ testid: testId }}
+        disabled
+        options={options}
+    />
+  )
+
+  const kit = screen.getByTestId(testId)
+  expect(kit).toHaveClass('disabled')
+
+  const trigger = kit.querySelector('.dropdown_trigger_wrapper_select_only')
+  const container = kit.querySelector('.pb_dropdown_container')
+
+  fireEvent.click(trigger)
+
+  expect(container).toHaveClass('close')
+  expect(container).not.toHaveClass('open')
+})
+
+test('disabled prop prevents dropdown from opening with keyboard', () => {
+  render(
+    <Dropdown
+        data={{ testid: testId }}
+        disabled
+        options={options}
+    />
+  )
+
+  const kit = screen.getByTestId(testId)
+  const trigger = kit.querySelector('.dropdown_trigger_wrapper_select_only')
+  const container = kit.querySelector('.pb_dropdown_container')
+
+  fireEvent.keyDown(trigger, { key: 'Enter' })
+
+  expect(container).toHaveClass('close')
+  expect(container).not.toHaveClass('open')
+})
+
+test('disabled prop disables autocomplete input', () => {
+  render(
+    <Dropdown
+        autocomplete
+        data={{ testid: testId }}
+        disabled
+        options={options}
+    />
+  )
+
+  const kit = screen.getByTestId(testId)
+  const input = kit.querySelector('.dropdown_input')
+
+  expect(input).toBeDisabled()
+})
