@@ -34,6 +34,7 @@ export const PLAYGROUND_ENABLED_KITS = [
   "filter",
   "fixed_confirmation_toast",
   "flex",
+  "form_group",
   "form_pill",
   "hashtag",
   "highlight",

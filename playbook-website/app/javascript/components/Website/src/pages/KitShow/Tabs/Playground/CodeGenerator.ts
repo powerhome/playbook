@@ -611,7 +611,16 @@ export const generateLiveFromTemplate = ({
     return `render(${trimmedBody})`;
   }
 
-  // Non-requiredProps preamble (e.g. wrapper const declarations) must stay outside render()
+  // Wrapper strings sometimes end with <MyComponent /> for display/copy snippets; react-live
+  // needs a single render(<MyComponent />). Strip the trailing tag so we do not duplicate.
+  const trailingInvocation = /\n<([A-Za-z_][\w.]*)\s*\/>\s*$/;
+  const trailing = body.match(trailingInvocation);
+  if (trailing) {
+    body = body.slice(0, -trailing[0].length).trimEnd();
+    return `${body}\nrender(<${trailing[1]} />)`;
+  }
+
+  // Non-requiredProps preamble (e.g. const data = [...]) must stay outside render().
   let jsxStart = body.search(/\r?\n<[A-Z]/);
   if (jsxStart !== -1) {
     jsxStart += body.slice(jsxStart).indexOf("<");
@@ -624,15 +633,6 @@ export const generateLiveFromTemplate = ({
     if (preamble.length > 0 && jsx.length > 0 && jsx.startsWith("<")) {
       return `${preamble}\n\nrender(${jsx})`;
     }
-  }
-
-  // Wrapper strings sometimes end with <MyComponent /> for display/copy snippets; react-live
-  // needs a single render(<MyComponent />). Strip the trailing tag so we do not duplicate.
-  const trailingInvocation = /\n<([A-Za-z_][\w.]*)\s*\/>\s*$/;
-  const trailing = body.match(trailingInvocation);
-  if (trailing) {
-    body = body.slice(0, -trailing[0].length).trimEnd();
-    return `${body}\nrender(<${trailing[1]} />)`;
   }
 
   // Wrap in render() for react-live (noInline). Prefer the last `const Name = (` / `function Name(`

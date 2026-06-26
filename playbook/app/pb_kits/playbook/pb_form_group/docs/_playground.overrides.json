@@ -1,15 +1,15 @@
 {
   "template": "<FormGroup{{props}}>\n{{children}}\n</FormGroup>",
-  "propTargets": {},
-  "defaults": {
-    "fullWidth": false
+  "wrapper": "const FormGroupPlayground = () => {\n  const [formFields, setFormFields] = useState({\n    firstName: \"Jane\",\n    middleInitial: \"Q\",\n    lastName: \"Doe\",\n    search: \"\",\n    eventName: \"Planning session\",\n    animal: \"cat\"\n  })\n\n  const handleFieldChange = ({ target }) => {\n    setFormFields({ ...formFields, [target.name]: target.value })\n  }\n\n  const handleAnimalChange = ({ target }) => {\n    setFormFields({ ...formFields, animal: target.value })\n  }\n\n  return {{component}}\n}\n\n<FormGroupPlayground />",
+  "externalImports": ["import React, { useState } from 'react'"],
+  "children": {
+    "editable": true,
+    "default": "<TextInput\n    id=\"first-name\"\n    label=\"First Name\"\n    name=\"firstName\"\n    onChange={handleFieldChange}\n    placeholder=\"Enter first name\"\n    value={formFields.firstName}\n/>\n<TextInput\n    id=\"middle-initial\"\n    label=\"Middle Initial\"\n    name=\"middleInitial\"\n    onChange={handleFieldChange}\n    placeholder=\"Enter middle initial\"\n    value={formFields.middleInitial}\n/>\n<TextInput\n    id=\"last-name\"\n    label=\"Last Name\"\n    name=\"lastName\"\n    onChange={handleFieldChange}\n    placeholder=\"Enter last name\"\n    value={formFields.lastName}\n/>"
   },
   "groups": [
     {
       "name": "Layout",
-      "props": [
-        "fullWidth"
-      ]
+      "props": ["fullWidth"]
     }
   ],
   "presets": [
@@ -51,7 +51,6 @@
       "children": "<SelectableCard\n    checked={formFields.animal === \"cat\"}\n    inputId=\"cat-option\"\n    multi={false}\n    name=\"animal\"\n    onChange={handleAnimalChange}\n    value=\"cat\"\n>\n  Cat\n</SelectableCard>\n<SelectableCard\n    checked={formFields.animal === \"dog\"}\n    inputId=\"dog-option\"\n    multi={false}\n    name=\"animal\"\n    onChange={handleAnimalChange}\n    value=\"dog\"\n>\n  Dog\n</SelectableCard>"
     }
   ],
-  "conditionals": {},
   "hints": {
     "text_inputs": {
       "presetName": "Text Inputs",
@@ -88,13 +87,5 @@
       "message": "Selectable Cards keeps both card options in children so each option can be edited together.",
       "type": "info"
     }
-  },
-  "wrapper": "const FormGroupPlayground = () => {\n  const [formFields, setFormFields] = useState({\n    firstName: \"Jane\",\n    middleInitial: \"Q\",\n    lastName: \"Doe\",\n    search: \"\",\n    eventName: \"Planning session\",\n    animal: \"cat\"\n  })\n\n  const handleFieldChange = ({ target }) => {\n    setFormFields({ ...formFields, [target.name]: target.value })\n  }\n\n  const handleAnimalChange = ({ target }) => {\n    setFormFields({ ...formFields, animal: target.value })\n  }\n\n  return {{component}}\n}\n\n<FormGroupPlayground />",
-  "externalImports": [
-    "import React, { useState } from 'react'"
-  ],
-  "children": {
-    "editable": true,
-    "default": "<TextInput\n    id=\"first-name\"\n    label=\"First Name\"\n    name=\"firstName\"\n    onChange={handleFieldChange}\n    placeholder=\"Enter first name\"\n    value={formFields.firstName}\n/>\n<TextInput\n    id=\"middle-initial\"\n    label=\"Middle Initial\"\n    name=\"middleInitial\"\n    onChange={handleFieldChange}\n    placeholder=\"Enter middle initial\"\n    value={formFields.middleInitial}\n/>\n<TextInput\n    id=\"last-name\"\n    label=\"Last Name\"\n    name=\"lastName\"\n    onChange={handleFieldChange}\n    placeholder=\"Enter last name\"\n    value={formFields.lastName}\n/>"
   }
 }
