@@ -45,15 +45,6 @@
       }
     },
     {
-      "name": "Large",
-      "props": {
-        "name": "notifications",
-        "value": "push",
-        "size": "md",
-        "checked": true
-      }
-    },
-    {
       "name": "Disabled",
       "props": {
         "name": "auto_save",
@@ -73,11 +64,6 @@
     "checked": {
       "presetName": "Checked",
       "message": "Checked initializes the toggle in the on state.",
-      "type": "info"
-    },
-    "large": {
-      "presetName": "Large",
-      "message": "Large switches size to md for a more prominent control.",
       "type": "info"
     },
     "disabled": {
