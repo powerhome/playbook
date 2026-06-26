@@ -55,7 +55,7 @@ module Playbook
 
       def available_props
         schema_path = Playbook::Engine.root.join("app/pb_kits/playbook/pb_#{kit}/kit.schema.json")
-        File.exist?(schema_path) ? File.read(schema_path) : "{}"
+        ::File.exist?(schema_path) ? ::File.read(schema_path) : "{}"
       end
 
     private
