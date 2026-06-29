@@ -144,6 +144,7 @@ export interface StructureMode {
   imports?: string[];
   externalImports?: string[];
   wrapper?: string;
+  statefulProps?: string[];
 }
 
 export interface StructureModesConfig {
@@ -193,6 +194,8 @@ export interface PlaygroundConfig {
   requiredProps?: Record<string, any>;
   /** Default/state props that must be emitted in copied code, but do not need template variables. */
   requiredCodeProps?: string[];
+  /** Props consumed by the template/wrapper as variables instead of emitted through `{{props}}`. */
+  statefulProps?: string[];
   /** Kit prop names to omit from the playground props panel (still in kit.schema.json). */
   hiddenProps?: string[];
   externalImports?: string[];

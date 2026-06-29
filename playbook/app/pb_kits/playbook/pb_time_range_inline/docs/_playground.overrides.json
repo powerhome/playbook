@@ -1,29 +1,12 @@
 {
-  "template": "<TimeRangeInline{{props}} />",
-  "propTargets": {},
-  "defaults": {
-    "alignment": "left",
-    "size": "sm",
-    "icon": false,
-    "timezone": false
-  },
   "groups": [
     {
       "name": "Content",
-      "props": [
-        "startTime",
-        "endTime",
-        "timezone"
-      ]
+      "props": ["startTime", "endTime", "timezone"]
     },
     {
       "name": "Appearance",
-      "props": [
-        "icon",
-        "size",
-        "alignment",
-        "dark"
-      ]
+      "props": ["icon", "size", "alignment", "dark"]
     }
   ],
   "presets": [

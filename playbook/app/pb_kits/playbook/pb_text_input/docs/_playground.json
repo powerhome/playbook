@@ -1,5 +1,5 @@
 {
-  "template": "<TextInput{{props}} />",
+  "template": "<TextInput{{props}} value={textInputValue} onChange={({ target }) => setTextInputValue(target.value)} />",
   "propTargets": {},
   "defaults": {
     "disabled": false,
@@ -7,7 +7,12 @@
     "inline": false,
     "required": false,
     "requiredIndicator": false,
-    "type": "text"
+    "type": "text",
+    "addOn": {
+      "icon": "user",
+      "alignment": "left",
+      "border": true
+    }
   },
   "groups": [
     {
@@ -25,7 +30,8 @@
         "disabled",
         "error",
         "required",
-        "requiredIndicator"
+        "requiredIndicator",
+        "onChange"
       ]
     },
     {
@@ -35,7 +41,8 @@
         "type",
         "mask",
         "emojiMask",
-        "autoComplete"
+        "autoComplete",
+        "addOn"
       ]
     }
   ],
@@ -86,5 +93,37 @@
       "requires": "label"
     }
   },
-  "hints": {}
+  "hints": {
+    "controlled_state": {
+      "message": "TextInput is controlled when value is set, so the snippet uses useState and onChange to keep the field editable.",
+      "type": "info"
+    },
+    "default": {
+      "presetName": "Default",
+      "message": "Default shows the common labeled input setup with name, placeholder, and state-backed value.",
+      "type": "info"
+    },
+    "with_error": {
+      "presetName": "With Error",
+      "message": "With Error displays validation copy below the field while preserving the entered value.",
+      "type": "info"
+    },
+    "disabled": {
+      "presetName": "Disabled",
+      "message": "Disabled keeps the label and placeholder visible while preventing edits.",
+      "type": "info"
+    },
+    "required": {
+      "presetName": "Required",
+      "message": "Required combines required with requiredIndicator so the label communicates the requirement.",
+      "type": "info"
+    }
+  },
+  "wrapper": "const TextInputPlayground = () => {\n  const [textInputValue, setTextInputValue] = useState(value)\n\n  return {{component}}\n}\n\n<TextInputPlayground />",
+  "statefulProps": [
+    "value"
+  ],
+  "externalImports": [
+    "import React, { useState } from 'react'"
+  ]
 }

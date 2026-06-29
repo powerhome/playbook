@@ -440,6 +440,15 @@ export const checkHintCondition = (
  * (unquoted keys where valid JS identifiers). Still parses via JSON.parse in PropControl.
  */
 export function playgroundObjectToEditableLiteral(value: unknown): string {
+  if (
+    value !== null &&
+    typeof value === "object" &&
+    !Array.isArray(value) &&
+    typeof (value as Record<string, unknown>).__playgroundCode === "string"
+  ) {
+    return (value as Record<string, string>).__playgroundCode;
+  }
+
   if (value === null || typeof value !== "object") {
     if (value === undefined) return "undefined";
     if (value === null) return "null";

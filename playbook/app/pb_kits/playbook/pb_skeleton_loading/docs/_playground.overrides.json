@@ -1,36 +1,24 @@
 {
-  "template": "<SkeletonLoading{{props}} />",
-  "propTargets": {},
   "defaults": {
-    "stack": 1,
-    "color": "default",
     "borderRadius": "sm",
+    "color": "default",
     "gap": "xxs",
     "height": "16px",
+    "stack": 1,
     "width": "100%"
   },
   "groups": [
     {
       "name": "Shape",
-      "props": [
-        "height",
-        "width",
-        "borderRadius"
-      ]
+      "props": ["height", "width", "borderRadius"]
     },
     {
       "name": "Stack",
-      "props": [
-        "stack",
-        "gap"
-      ]
+      "props": ["stack", "gap"]
     },
     {
       "name": "Appearance",
-      "props": [
-        "color",
-        "dark"
-      ]
+      "props": ["color", "dark"]
     }
   ],
   "presets": [

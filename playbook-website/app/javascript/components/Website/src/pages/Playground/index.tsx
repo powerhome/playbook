@@ -543,7 +543,6 @@ export default function Playground() {
         >
           <Card
             className="playground-preview-card"
-            overflow="hidden"
             padding="md"
             width="100%"
           >

@@ -2,6 +2,12 @@
 @import "playbook-tokens/spacing";
 @import "playbook-tokens/border_radius";
 
+// Keep in sync with PlaygroundPreview.scss — allows overlays to escape vertically.
+@mixin playground-preview-overlay-overflow {
+  overflow-x: clip;
+  overflow-y: visible;
+}
+
 // Match builder-stage min height on the full Playground demo canvas.
 $responsive-preview-min-height: 360px;
 
@@ -18,7 +24,7 @@ $responsive-preview-min-height: 360px;
     max-width: 100%;
     min-height: $responsive-preview-min-height;
     min-width: 0;
-    overflow: auto;
+    @include playground-preview-overlay-overflow;
   }
 
   &__frame {
@@ -37,7 +43,7 @@ $responsive-preview-min-height: 360px;
     flex-direction: column;
     min-height: 0;
     min-width: 0;
-    overflow: hidden;
+    @include playground-preview-overlay-overflow;
   }
 
   &__content {

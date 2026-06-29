@@ -1,42 +1,60 @@
 {
-  "template": "<Layout{{props}} />",
-  "propTargets": {},
-  "defaults": {
-    "collapse": "xs",
-    "full": false,
-    "responsive": false,
-    "size": {
-      "react": "sm",
-      "rails": "md"
-    },
-    "variant": "light",
-    "transparent": false,
-    "layout": "sidebar"
+  "structureModes": {
+    "default": "sidebar",
+    "modes": {
+      "sidebar": {
+        "label": "Sidebar",
+        "template": "<Layout{{props}}>\n{{children}}\n</Layout>",
+        "children": "<Layout.Side>\n  Side\n</Layout.Side>\n<Layout.Body>\n  Body\n</Layout.Body>"
+      },
+      "collection": {
+        "label": "Collection",
+        "template": "<Layout{{props}}>\n{{children}}\n</Layout>",
+        "children": "<Layout.Body>\n  <Card>Card content</Card>\n  <Card>Card content</Card>\n  <Card>Card content</Card>\n  <Card>Card content</Card>\n  <Card>Card content</Card>\n  <Card>Card content</Card>\n</Layout.Body>"
+      },
+      "collection_detail": {
+        "label": "Collection detail",
+        "template": "<Layout{{props}}>\n{{children}}\n</Layout>",
+        "children": "<Card padding=\"none\">\n  <Nav link=\"#\" orientation=\"vertical\" title=\"Menu\">\n    <NavItem link=\"#\" text=\"Overview\" />\n    <NavItem active link=\"#\" text=\"Activity\" />\n    <NavItem link=\"#\" text=\"Files\" />\n  </Nav>\n</Card>\n<Layout.Body>\n  <Card>Card content</Card>\n  <Card>Card content</Card>\n  <Card>Card content</Card>\n  <Card>Card content</Card>\n</Layout.Body>"
+      },
+      "content": {
+        "label": "Content",
+        "template": "<Layout{{props}}>\n{{children}}\n</Layout>",
+        "children": "<Layout.Header>\n  <Card padding=\"sm\"><Title size={4} text=\"Header\" /></Card>\n</Layout.Header>\n<Layout.Side>\n  <Card padding=\"sm\"><Body text=\"Supporting navigation or metadata.\" /></Card>\n</Layout.Side>\n<Layout.Body>\n  <Card padding=\"md\"><Title size={3} text=\"Article Content\" /><Body text=\"Main content area with a longer reading surface.\" /></Card>\n</Layout.Body>\n<Layout.Footer>\n  <Card padding=\"sm\"><Body text=\"Footer content\" /></Card>\n</Layout.Footer>"
+      },
+      "kanban": {
+        "label": "Kanban",
+        "template": "<Layout{{props}}>\n{{children}}\n</Layout>",
+        "children": "<Layout.Body>\n  <Caption text=\"Queue\" />\n  <Card padding=\"sm\"><Title size={4} text=\"Design Homepage\" /><Body text=\"Owner: Ada\" /></Card>\n  <Card padding=\"sm\"><Title size={4} text=\"Update Icons\" /><Body text=\"Owner: Grace\" /></Card>\n</Layout.Body>\n<Layout.Body>\n  <Caption text=\"In Progress\" />\n  <Card padding=\"sm\"><Title size={4} text=\"Dashboard Updates\" /><Body text=\"Owner: Katherine\" /></Card>\n</Layout.Body>\n<Layout.Body>\n  <Caption text=\"Done\" />\n  <Card padding=\"sm\"><Title size={4} text=\"QA Review\" /><Body text=\"Owner: Margaret\" /></Card>\n</Layout.Body>"
+      },
+      "masonry": {
+        "label": "Masonry",
+        "template": "<Layout{{props}}>\n{{children}}\n</Layout>",
+        "children": "<Layout.Body>\n  <Layout.Item>\n    <Image url=\"https://unsplash.it/500/400/?image=634\" />\n  </Layout.Item>\n  <Layout.Item size=\"md\">\n    <Image url=\"https://unsplash.it/500/600/?image=635\" />\n  </Layout.Item>\n  <Layout.Item size=\"lg\">\n    <Image url=\"https://unsplash.it/500/700/?image=636\" />\n  </Layout.Item>\n</Layout.Body>"
+      },
+      "bracket": {
+        "label": "Bracket",
+        "template": "<Layout{{props}}>\n{{children}}\n</Layout>",
+        "children": "<Layout.RoundLabel>\n  <Caption text=\"Semifinal\" />\n  <SectionSeparator marginY=\"sm\" />\n</Layout.RoundLabel>\n<Layout.Round>\n  <Layout.Game>\n    <Layout.Participant name=\"Eagles\" points=\"22\" rank=\"#1\" territory=\"PHI\" winner />\n    <Layout.Participant name=\"Packers\" points=\"10\" rank=\"#3\" territory=\"GB\" />\n  </Layout.Game>\n  <Layout.Game>\n    <Layout.Participant name=\"Rams\" points=\"27\" rank=\"#1\" territory=\"LAR\" winner />\n    <Layout.Participant name=\"Vikings\" points=\"9\" rank=\"#2\" territory=\"MIN\" />\n  </Layout.Game>\n</Layout.Round>\n<Layout.RoundLabel>\n  <Caption text=\"Final\" />\n  <SectionSeparator marginY=\"sm\" />\n</Layout.RoundLabel>\n<Layout.Round>\n  <Layout.Game>\n    <Layout.Participant name=\"Eagles\" points=\"24\" rank=\"#1\" self territory=\"PHI\" winner />\n    <Layout.Participant name=\"Rams\" points=\"17\" rank=\"#1\" territory=\"LAR\" />\n  </Layout.Game>\n</Layout.Round>"
+      }
+    }
+  },
+  "children": {
+    "editable": true,
+    "default": "<Layout.Side>\n  Side\n</Layout.Side>\n<Layout.Body>\n  Body\n</Layout.Body>"
   },
   "groups": [
     {
       "name": "Layout",
-      "props": [
-        "layout",
-        "responsive"
-      ]
+      "props": ["layout", "responsive"]
     },
     {
       "name": "Sidebar",
-      "props": [
-        "position",
-        "collapse",
-        "size",
-        "full"
-      ]
+      "props": ["position", "collapse", "size", "full"]
     },
     {
       "name": "Appearance",
-      "props": [
-        "variant",
-        "transparent",
-        "dark"
-      ]
+      "props": ["variant", "transparent", "dark"]
     }
   ],
   "presets": [
@@ -116,46 +134,14 @@
     }
   ],
   "conditionals": {
-    "position": {
-      "requires": {
-        "layout": "sidebar"
-      }
-    },
-    "collapse": {
-      "requires": {
-        "layout": "sidebar"
-      }
-    },
-    "size": {
-      "requires": {
-        "layout": "sidebar"
-      }
-    },
-    "full": {
-      "requires": {
-        "layout": "sidebar"
-      }
-    },
-    "variant": {
-      "requires": {
-        "layout": "sidebar"
-      }
-    },
-    "transparent": {
-      "requires": {
-        "layout": "sidebar"
-      }
-    },
-    "dark": {
-      "requires": {
-        "layout": "sidebar"
-      }
-    },
-    "responsive": {
-      "requires": {
-        "layout": "kanban"
-      }
-    }
+    "position": { "requires": { "layout": "sidebar" } },
+    "collapse": { "requires": { "layout": "sidebar" } },
+    "size": { "requires": { "layout": "sidebar" } },
+    "full": { "requires": { "layout": "sidebar" } },
+    "variant": { "requires": { "layout": "sidebar" } },
+    "transparent": { "requires": { "layout": "sidebar" } },
+    "dark": { "requires": { "layout": "sidebar" } },
+    "responsive": { "requires": { "layout": "kanban" } }
   },
   "hints": {
     "sidebar": {
@@ -198,49 +184,5 @@
       "message": "Bracket uses Layout.RoundLabel, Layout.Round, Layout.Game, and Layout.Participant.",
       "type": "info"
     }
-  },
-  "structureModes": {
-    "default": "sidebar",
-    "modes": {
-      "sidebar": {
-        "label": "Sidebar",
-        "template": "<Layout{{props}}>\n{{children}}\n</Layout>",
-        "children": "<Layout.Side>\n  Side\n</Layout.Side>\n<Layout.Body>\n  Body\n</Layout.Body>"
-      },
-      "collection": {
-        "label": "Collection",
-        "template": "<Layout{{props}}>\n{{children}}\n</Layout>",
-        "children": "<Layout.Body>\n  <Card>Card content</Card>\n  <Card>Card content</Card>\n  <Card>Card content</Card>\n  <Card>Card content</Card>\n  <Card>Card content</Card>\n  <Card>Card content</Card>\n</Layout.Body>"
-      },
-      "collection_detail": {
-        "label": "Collection detail",
-        "template": "<Layout{{props}}>\n{{children}}\n</Layout>",
-        "children": "<Card padding=\"none\">\n  <Nav link=\"#\" orientation=\"vertical\" title=\"Menu\">\n    <NavItem link=\"#\" text=\"Overview\" />\n    <NavItem active link=\"#\" text=\"Activity\" />\n    <NavItem link=\"#\" text=\"Files\" />\n  </Nav>\n</Card>\n<Layout.Body>\n  <Card>Card content</Card>\n  <Card>Card content</Card>\n  <Card>Card content</Card>\n  <Card>Card content</Card>\n</Layout.Body>"
-      },
-      "content": {
-        "label": "Content",
-        "template": "<Layout{{props}}>\n{{children}}\n</Layout>",
-        "children": "<Layout.Header>\n  <Card padding=\"sm\"><Title size={4} text=\"Header\" /></Card>\n</Layout.Header>\n<Layout.Side>\n  <Card padding=\"sm\"><Body text=\"Supporting navigation or metadata.\" /></Card>\n</Layout.Side>\n<Layout.Body>\n  <Card padding=\"md\"><Title size={3} text=\"Article Content\" /><Body text=\"Main content area with a longer reading surface.\" /></Card>\n</Layout.Body>\n<Layout.Footer>\n  <Card padding=\"sm\"><Body text=\"Footer content\" /></Card>\n</Layout.Footer>"
-      },
-      "kanban": {
-        "label": "Kanban",
-        "template": "<Layout{{props}}>\n{{children}}\n</Layout>",
-        "children": "<Layout.Body>\n  <Caption text=\"Queue\" />\n  <Card padding=\"sm\"><Title size={4} text=\"Design Homepage\" /><Body text=\"Owner: Ada\" /></Card>\n  <Card padding=\"sm\"><Title size={4} text=\"Update Icons\" /><Body text=\"Owner: Grace\" /></Card>\n</Layout.Body>\n<Layout.Body>\n  <Caption text=\"In Progress\" />\n  <Card padding=\"sm\"><Title size={4} text=\"Dashboard Updates\" /><Body text=\"Owner: Katherine\" /></Card>\n</Layout.Body>\n<Layout.Body>\n  <Caption text=\"Done\" />\n  <Card padding=\"sm\"><Title size={4} text=\"QA Review\" /><Body text=\"Owner: Margaret\" /></Card>\n</Layout.Body>"
-      },
-      "masonry": {
-        "label": "Masonry",
-        "template": "<Layout{{props}}>\n{{children}}\n</Layout>",
-        "children": "<Layout.Body>\n  <Layout.Item>\n    <Image url=\"https://unsplash.it/500/400/?image=634\" />\n  </Layout.Item>\n  <Layout.Item size=\"md\">\n    <Image url=\"https://unsplash.it/500/600/?image=635\" />\n  </Layout.Item>\n  <Layout.Item size=\"lg\">\n    <Image url=\"https://unsplash.it/500/700/?image=636\" />\n  </Layout.Item>\n</Layout.Body>"
-      },
-      "bracket": {
-        "label": "Bracket",
-        "template": "<Layout{{props}}>\n{{children}}\n</Layout>",
-        "children": "<Layout.RoundLabel>\n  <Caption text=\"Semifinal\" />\n  <SectionSeparator marginY=\"sm\" />\n</Layout.RoundLabel>\n<Layout.Round>\n  <Layout.Game>\n    <Layout.Participant name=\"Eagles\" points=\"22\" rank=\"#1\" territory=\"PHI\" winner />\n    <Layout.Participant name=\"Packers\" points=\"10\" rank=\"#3\" territory=\"GB\" />\n  </Layout.Game>\n  <Layout.Game>\n    <Layout.Participant name=\"Rams\" points=\"27\" rank=\"#1\" territory=\"LAR\" winner />\n    <Layout.Participant name=\"Vikings\" points=\"9\" rank=\"#2\" territory=\"MIN\" />\n  </Layout.Game>\n</Layout.Round>\n<Layout.RoundLabel>\n  <Caption text=\"Final\" />\n  <SectionSeparator marginY=\"sm\" />\n</Layout.RoundLabel>\n<Layout.Round>\n  <Layout.Game>\n    <Layout.Participant name=\"Eagles\" points=\"24\" rank=\"#1\" self territory=\"PHI\" winner />\n    <Layout.Participant name=\"Rams\" points=\"17\" rank=\"#1\" territory=\"LAR\" />\n  </Layout.Game>\n</Layout.Round>"
-      }
-    }
-  },
-  "children": {
-    "editable": true,
-    "default": "<Layout.Side>\n  Side\n</Layout.Side>\n<Layout.Body>\n  Body\n</Layout.Body>"
   }
 }
