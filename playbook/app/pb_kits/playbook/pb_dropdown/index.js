@@ -433,6 +433,7 @@ export default class PbDropdown extends PbEnhancedElement {
       }
     });
     if (!selectedOption) return;
+    if (selectedOption.dataset.dropdownOptionDisabled === "true") return;
 
     optionEls.forEach((opt) => opt.classList.remove("pb_dropdown_option_selected"));
     selectedOption.classList.add("pb_dropdown_option_selected");
@@ -503,6 +504,8 @@ export default class PbDropdown extends PbEnhancedElement {
         }
       });
       if (opt) {
+        if (opt.dataset.dropdownOptionDisabled === "true") return;
+
         const raw = opt.dataset.dropdownOptionLabel;
         this.selectedOptions.add(raw);
         opt.style.display = "none";
