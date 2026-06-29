@@ -569,8 +569,11 @@ private
 
   # JSON + Rails prerendered examples: ERB under pb_advanced_table/docs expects
   # @table_data (OpenStruct), while the SPA passes plain JSON via @beta_table_* keys.
+  # Full Screen React docs also render AdvancedTable examples, so they need the
+  # same plain JSON datasets in the SPA payload.
   def assign_advanced_table_doc_mocks
-    return unless @kit.to_s == "advanced_table" || @kit_parent.to_s == "advanced_table"
+    uses_advanced_table_data = %w[advanced_table full_screen].include?(@kit.to_s) || @kit_parent.to_s == "advanced_table"
+    return unless uses_advanced_table_data
 
     @beta_table_data = advanced_table_mock_data_beta if @beta_table_data.nil?
     @beta_table_data_with_id = advanced_table_mock_data_with_id_beta if @beta_table_data_with_id.nil?

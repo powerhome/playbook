@@ -1,7 +1,7 @@
 import React from 'react'
 import { render, screen } from '../utilities/test-utils'
 
-import { FullScreen } from 'playbook-ui'
+import { FullScreenView } from 'playbook-ui'
 
 /* See these resources for more testing info:
   - https://github.com/testing-library/jest-dom#usage for useage and examples
@@ -13,6 +13,6 @@ test('generated scaffold test - update me', () => {
     data: { testid: 'default' }
   }
 
-  render(<FullScreen {...props} />)
+  render(<FullScreenView {...props} />)
     expect(screen.getByTestId('default')).toBeInTheDocument()
 })

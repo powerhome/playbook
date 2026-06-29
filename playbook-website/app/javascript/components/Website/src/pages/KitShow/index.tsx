@@ -72,10 +72,12 @@ const KitShow = () => {
       : "Please avoid using. This component is deprecated and will be removed in future versions.";
   }, [kitStatus, kitPlatformSpecificStatus, platformLabel, currentKit]);
 
-  // Prepare example props for advanced_table examples
+  // Prepare example props for examples that use advanced_table mock datasets.
   const exampleProps = useMemo(() => {
-    const isAdvancedTable = currentKit === "advanced_table";
-    if (!isAdvancedTable) return {};
+    const usesAdvancedTableMockData = ["advanced_table", "full_screen"].includes(
+      currentKit,
+    );
+    if (!usesAdvancedTableMockData) return {};
 
     return {
       // Provide datasets to examples under expected variable names
@@ -87,7 +89,7 @@ const KitShow = () => {
       MOCK_DATA_INLINE_LOADING: loaderData.table_data_inline_loading || [],
       MOCK_DATA_INLINE_LOADING_EMPTY_CHILDREN: loaderData.table_data_inline_loading_empty_children || [],
     };
-  }, [loaderData]);
+  }, [currentKit, loaderData]);
 
   const [activeTab, setActiveTab] = useState<string>("docs");
   const showPlayground = platform !== "rails" && PLAYGROUND_ENABLED_KITS.includes(currentKit);
