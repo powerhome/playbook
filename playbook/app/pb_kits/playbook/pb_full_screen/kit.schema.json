@@ -7,10 +7,20 @@
     "rails"
   ],
   "props": {
-    "title": {
+    "headerText": {
       "type": "string",
       "platforms": [
         "react"
+      ]
+    },
+    "headerTextStyling": {
+      "type": "enum",
+      "platforms": [
+        "react"
+      ],
+      "values": [
+        "title_4",
+        "body"
       ]
     },
     "onOpen": {
@@ -36,23 +46,17 @@
       "platforms": [
         "react"
       ]
-    },
-    "customHeader": {
-      "type": "ReactNode",
-      "platforms": [
-        "react"
-      ]
     }
   },
   "globalProps": true,
   "usage": {
     "react": {
       "import": "import { FullScreen } from 'playbook-ui'",
-      "example": "<FullScreen></FullScreen>"
+      "example": "<FullScreen headerTextStyling=\"title_4\"></FullScreen>"
     },
     "rails": {
       "import": null,
-      "example": "<%= pb_rails(\"full_screen\", props: { text: \"Example\" }) %>"
+      "example": "<%= pb_rails(\"full_screen\", props: { header_text_styling: \"title_4\" }) %>"
     }
   }
 }

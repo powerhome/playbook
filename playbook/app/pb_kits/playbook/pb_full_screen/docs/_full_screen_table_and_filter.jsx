@@ -46,7 +46,7 @@ const FullScreenTableAndFilter = (props) => {
 
   return (
     <FullScreen
-        title="Fullscreen Table"
+        headerText="Fullscreen Table"
         trigger={({ onClick, isOpen }) => (
           <Button
               marginBottom="md"

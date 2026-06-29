@@ -8,6 +8,7 @@ import useFullscreen from './useFullScreen'
 import Flex from '../pb_flex/_flex'
 import Icon from '../pb_icon/_icon'
 import Title from '../pb_title/_title'
+import Body from '../pb_body/_body'
 
 
 type FullScreenViewProps = {
@@ -17,12 +18,12 @@ type FullScreenViewProps = {
   data?: { [key: string]: string },
   htmlOptions?: { [key: string]: string | number | boolean | (() => void) | ((arg?: Event) => void) },
   id?: string,
-  title?: string
+  headerText?: string
+  headerTextStyling?: "title_4" | "body"
   onOpen?: () => void
   onClose?: () => void
   trigger?: (props: { onClick: () => void; isOpen: boolean }) => React.ReactNode
   escToExit?: boolean
-  customHeader?: React.ReactNode
 
 }
 
@@ -34,12 +35,12 @@ const FullScreenView = (props: FullScreenViewProps) => {
   data = {},
   htmlOptions = {},
   id,
-  title,
+  headerText,
+  headerTextStyling = "title_4",
   onOpen,
   onClose,
   trigger,
   escToExit = true,
-  customHeader,
   } = props
 
   const ariaProps = buildAriaProps(aria)
@@ -55,20 +56,33 @@ const FullScreenView = (props: FullScreenViewProps) => {
 
   const defaultHeader = (
     <div className="fullscreen-header">
-      <Flex justify="between">
-        {title && (
+      <Flex
+          align="center"
+          justify="between"
+          paddingLeft="sm"
+          paddingRight="xxs"
+          paddingY="xs"
+      >
+        {headerText && (
+          headerTextStyling === "title_4" ? (
           <Title
               size={4}
-              text={title}
+              text={headerText}
           />
+          ) : (
+            <Body text={headerText} />
+          )
         )}
         <button
             className="fullscreen-close-button"
             onClick={toggle}
         >
           <Icon
+              color="link"
               fixedWidth
-              icon="arrow-down-left-and-arrow-up-right-to-center"
+              icon="close"
+              padding="xxs"
+              size="1x"
           />
         </button>
       </Flex>
@@ -84,7 +98,7 @@ const FullScreenView = (props: FullScreenViewProps) => {
     if (isFullscreen) {
       return (
         <div className="fullscreen-overlay">
-          {customHeader || defaultHeader}
+          {defaultHeader}
           <div className="fullscreen-content">
             {children}
           </div>

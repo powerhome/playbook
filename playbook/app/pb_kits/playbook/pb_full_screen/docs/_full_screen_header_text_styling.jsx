@@ -4,7 +4,7 @@ import AdvancedTable from "../../pb_advanced_table/_advanced_table";
 import Button from "../../pb_button/_button";
 import MOCK_DATA from "../../pb_advanced_table/docs/advanced_table_mock_data.json";
 
-const FullScreenDefault = (props) => {
+const FullScreenHeaderTextStyling = (props) => {
 
   const columnDefinitions = [
     {
@@ -41,6 +41,7 @@ const FullScreenDefault = (props) => {
   return (
     <FullScreen
         headerText="Fullscreen Table"
+        headerTextStyling="body"
         trigger={({ onClick, isOpen }) => (
           <Button
               marginBottom="md"
@@ -60,4 +61,4 @@ const FullScreenDefault = (props) => {
   );
 };
 
-export default FullScreenDefault;
+export default FullScreenHeaderTextStyling;

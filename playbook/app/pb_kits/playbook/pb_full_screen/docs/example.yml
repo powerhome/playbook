@@ -6,5 +6,6 @@ examples:
   
   react:
   - full_screen_default: Default
-  - full_screen_table_and_filter: Table and Filter
+  - full_screen_header_text_styling: Header Text Styling
+  - full_screen_table_and_filter: Complex Example
   
