@@ -727,6 +727,13 @@ kits:
     subcomponents:
       - Draggable.Container
       - Draggable.Item
+  - name: full_screen
+    platforms: *1
+    description: "Full Screen component"
+    status: stable
+    icons_used: false
+    react_rendered: false
+    enhanced_element_used: true
 - category: message_text_patterns
   description: Components for displaying messages and highlighting content.
   components:

@@ -1,0 +1,22 @@
+{
+  "$schema": "https://playbook.powerapp.cloud/schemas/kit-schema.json",
+  "name": "FullScreen",
+  "description": "Full Screen component",
+  "platforms": [
+    "rails",
+    "react"
+  ],
+  "props": {
+  },
+  "globalProps": true,
+  "usage": {
+    "react": {
+      "import": "import { FullScreen } from 'playbook-ui'",
+      "example": "<FullScreen />"
+    },
+    "rails": {
+      "import": null,
+      "example": "<%= pb_rails(\"full_screen\") %>"
+    }
+  }
+}
