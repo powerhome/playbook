@@ -1,19 +1,19 @@
 examples:
   rails:
-  - dropdown_disabled_option: Disabled Option
-  - dropdown_custom_display_disabled_option: Custom Display Disabled Option
   - dropdown_default_rails: Default
   - dropdown_with_autocomplete: Autocomplete
   - dropdown_multi_select_rails: Multi Select
   - dropdown_multi_select_with_autocomplete: Multi Select with Autocomplete
   - dropdown_multi_select_display_rails: Multi Select with Form Pill Props
   - dropdown_subtle_variant: Subtle Variant
+  - dropdown_disabled_option: Disabled Option
   - dropdown_subcomponent_structure_rails: Subcomponent Structure
   - dropdown_with_autocomplete_with_subcomponents: Autocomplete with Subcomponent Structure
   - dropdown_with_label: With Label
   - dropdown_with_custom_options_rails: Custom Options
   - dropdown_multi_select_with_custom_options: Multi Select with Custom Options
   - dropdown_with_custom_display_rails: Custom Display
+  - dropdown_custom_display_disabled_option: Custom Display Disabled Option
   - dropdown_with_custom_trigger_rails: Custom Trigger
   - dropdown_with_search_rails: Custom Trigger Dropdown with Search
   - dropdown_with_custom_padding: Custom Option Padding
@@ -39,17 +39,18 @@ examples:
 
   react:
   - dropdown_disabled_option: Disabled Option
-  - dropdown_custom_display_disabled_option: Custom Display Disabled Option
   - dropdown_default: Default
   - dropdown_with_autocomplete: Autocomplete
   - dropdown_multi_select: Multi Select
   - dropdown_multi_select_with_autocomplete: Multi Select with Autocomplete
   - dropdown_multi_select_display: Multi Select with Form Pill Props
   - dropdown_subtle_variant: Subtle Variant
+  - dropdown_disabled_option: Disabled Option
   - dropdown_subcomponent_structure: Subcomponent Structure
   - dropdown_with_autocomplete_with_subcomponents: Autocomplete with Subcomponent Structure
   - dropdown_with_label: With Label
   - dropdown_with_custom_options: Custom Options
+  - dropdown_custom_display_disabled_option: Custom Display Disabled Option
   - dropdown_multi_select_with_custom_options: Multi Select with Custom Options
   - dropdown_with_custom_display: Custom Display
   - dropdown_with_custom_trigger: Custom Trigger

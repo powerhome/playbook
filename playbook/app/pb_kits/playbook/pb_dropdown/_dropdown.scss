@@ -10,6 +10,61 @@
 @import "./scss_partials/dropdown_animation";
 @import "dropdown_mixin";
 
+@mixin dropdown-disabled-typography($color) {
+  .pb_body_kit,
+  .pb_body_kit_default,
+  .pb_body_kit_light,
+  .pb_body_kit_lighter,
+  .pb_body_kit_link,
+  .pb_body_kit_success,
+  .pb_body_kit_error,
+  .pb_body_kit_neutral,
+  .pb_body_kit_positive,
+  .pb_body_kit_negative,
+  .pb_caption_kit,
+  .pb_caption_kit_xs,
+  .pb_caption_kit_sm,
+  .pb_caption_kit_md,
+  .pb_caption_kit_base,
+  .pb_caption_kit_lg,
+  .pb_caption_kit_xl,
+  .pb_title_kit,
+  .pb_detail_kit,
+  .pb_detail_kit_color_light,
+  .pb_detail_kit_color_default,
+  .pb_detail_kit_color_lighter,
+  .pb_detail_kit_color_link,
+  .pb_detail_kit_color_error,
+  .pb_detail_kit_color_success,
+  .pb_link_kit,
+  .pb_link_kit_underline,
+  a {
+    color: $color !important;
+  }
+
+
+  @each $caption-color, $caption-value in $pb_caption_colors {
+    .pb_caption_kit_xs_#{$caption-color},
+    .pb_caption_kit_sm_#{$caption-color},
+    .pb_caption_kit_md_#{$caption-color},
+    .pb_caption_kit_base_#{$caption-color},
+    .pb_caption_kit_lg_#{$caption-color},
+    .pb_caption_kit_xl_#{$caption-color} {
+      color: $color !important;
+    }
+  }
+  
+
+  @each $link-color, $link-value in $pb_link_colors {
+    .pb_link_kit_#{$link-color},
+    .pb_link_kit_#{$link-color}_underline,
+    .pb_link_kit_#{$link-color}_disabled,
+    .pb_link_kit_#{$link-color}_underline_disabled {
+      color: $color !important;
+    }
+  }
+}
+
 .pb_dropdown_default,
 .pb_dropdown_subtle,
 .pb_dropdown_quickpick,
@@ -149,15 +204,11 @@
         // Disabled state
         &.disabled {
           cursor: not-allowed;
-          background-color: $input_background_disabled;
+          // background-color: $input_background_disabled;
           color: $input_text_disabled;
           border-color: $input_border_disabled;
           pointer-events: none;
-          .pb_body_kit,
-          .pb_title_kit,
-          a {
-            color: $input_text_disabled !important;
-          }
+          @include dropdown-disabled-typography($input_text_disabled);
           &:hover,
           &:focus {
             background-color: $input_background_disabled;
@@ -168,9 +219,9 @@
       .dropdown_option_wrapper {
         width: 100%;
 
-        &.disabled {
-          opacity: 0.5;
-        }
+        // &.disabled {
+        //   opacity: 0.5;
+        // }
       }
     }
 
@@ -405,11 +456,7 @@
           color: $input_text_disabled_dark;
           border-color: $input_border_disabled_dark;
           pointer-events: none;
-          .pb_body_kit,
-          .pb_title_kit,
-          a {
-            color: $input_text_disabled_dark !important;
-          }
+          @include dropdown-disabled-typography($input_text_disabled_dark);
           &:hover,
           &:focus {
             background-color: $input_background_disabled_dark;
