@@ -38,7 +38,6 @@ examples:
   - dropdown_custom_event_type: Custom Event Type
 
   react:
-  - dropdown_disabled_option: Disabled Option
   - dropdown_default: Default
   - dropdown_with_autocomplete: Autocomplete
   - dropdown_multi_select: Multi Select
