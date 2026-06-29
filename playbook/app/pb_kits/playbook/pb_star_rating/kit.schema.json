@@ -136,7 +136,7 @@
       "platforms": [
         "rails"
       ],
-      "type": "string"
+      "type": "GenericObject"
     },
     "defaultValue": {
       "platforms": [

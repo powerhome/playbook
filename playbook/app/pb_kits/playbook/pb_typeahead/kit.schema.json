@@ -204,7 +204,7 @@
       "platforms": [
         "rails"
       ],
-      "type": "string"
+      "type": "GenericObject"
     },
     "isMulti": {
       "platforms": [
