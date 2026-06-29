@@ -21,6 +21,7 @@ type FullScreenViewProps = {
   contentPadding?: "none" | "xxs" | "xs" | "sm" | "md" | "lg" | "xl"
   headerText?: string
   headerTextStyling?: "title_4" | "body"
+  isFullscreen?: boolean
   onOpen?: () => void
   onClose?: () => void
   stickyHeader?: boolean
@@ -40,6 +41,7 @@ const FullScreenView = (props: FullScreenViewProps) => {
   id,
   headerText,
   headerTextStyling = "title_4",
+  isFullscreen: controlledIsFullscreen,
   onOpen,
   onClose,
   stickyHeader = true,
@@ -55,12 +57,24 @@ const FullScreenView = (props: FullScreenViewProps) => {
     "fullscreen-header-sticky": stickyHeader,
   })
   const contentClasses = classnames("fullscreen-content", `p_${contentPadding}`)
+  const isControlled = typeof controlledIsFullscreen === "boolean"
 
-  const { isFullscreen, toggle } = useFullscreen({
-    escToExit,
-    onEnter: onOpen,
-    onExit: onClose,
+  const internalFullscreen = useFullscreen({
+    escToExit: isControlled ? false : escToExit,
+    onEnter: isControlled ? undefined : onOpen,
+    onExit: isControlled ? undefined : onClose,
   })
+
+  const isFullscreen = isControlled ? controlledIsFullscreen : internalFullscreen.isFullscreen
+  const enter = isControlled ? onOpen : internalFullscreen.enter
+  const exit = isControlled ? onClose : internalFullscreen.exit
+  const toggle = () => {
+    if (isFullscreen) {
+      exit?.()
+    } else {
+      enter?.()
+    }
+  }
 
   const defaultHeader = (
     <div className={headerClasses}>

@@ -40,6 +40,12 @@
         "body"
       ]
     },
+    "isFullscreen": {
+      "type": "boolean",
+      "platforms": [
+        "react"
+      ]
+    },
     "onOpen": {
       "type": "function",
       "platforms": [

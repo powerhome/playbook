@@ -1,7 +1,7 @@
 import React from 'react'
 import { fireEvent, render, screen } from '../utilities/test-utils'
 
-import { FullScreen } from 'playbook-ui'
+import { FullScreen, useFullScreen } from 'playbook-ui'
 
 /* See these resources for more testing info:
   - https://github.com/testing-library/jest-dom#usage for useage and examples
@@ -79,4 +79,40 @@ test('contentPadding can be customized', () => {
   fireEvent.click(screen.getByText('Open'))
 
   expect(document.querySelector('.fullscreen-content')).toHaveClass('p_sm')
+})
+
+test('can be controlled by useFullScreen from an external trigger', () => {
+  const ExternalTriggerExample = () => {
+    const { isFullscreen, enter, exit } = useFullScreen()
+
+    return (
+      <>
+        <div data-testid="toolbar">
+          <button onClick={enter}>Open from toolbar</button>
+        </div>
+        <FullScreen
+            data={{ testid: 'default' }}
+            headerText="Fullscreen"
+            isFullscreen={isFullscreen}
+            onClose={exit}
+        >
+          <div>Content</div>
+        </FullScreen>
+      </>
+    )
+  }
+
+  render(<ExternalTriggerExample />)
+
+  expect(screen.getByTestId('toolbar')).toBeInTheDocument()
+  expect(document.querySelector('.fullscreen-overlay')).not.toBeInTheDocument()
+
+  fireEvent.click(screen.getByText('Open from toolbar'))
+
+  expect(document.querySelector('.fullscreen-overlay')).toBeInTheDocument()
+  expect(document.querySelector('.fullscreen-content')).toHaveTextContent('Content')
+
+  fireEvent.click(document.querySelector('.fullscreen-close-button'))
+
+  expect(document.querySelector('.fullscreen-overlay')).not.toBeInTheDocument()
 })

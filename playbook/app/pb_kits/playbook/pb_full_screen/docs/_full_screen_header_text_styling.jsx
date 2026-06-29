@@ -1,10 +1,12 @@
 import React from "react";
 import FullScreen from "../../pb_full_screen/_full_screen";
+import useFullScreen from "../../pb_full_screen/useFullScreen";
 import AdvancedTable from "../../pb_advanced_table/_advanced_table";
 import Button from "../../pb_button/_button";
 import MOCK_DATA from "../../pb_advanced_table/docs/advanced_table_mock_data.json";
 
 const FullScreenHeaderTextStyling = (props) => {
+  const { isFullscreen, enter, exit } = useFullScreen();
 
   const columnDefinitions = [
     {
@@ -39,25 +41,27 @@ const FullScreenHeaderTextStyling = (props) => {
   ];
 
   return (
-    <FullScreen
-        headerText="Fullscreen Table"
-        headerTextStyling="body"
-        trigger={({ onClick, isOpen }) => (
-          <Button
-              marginBottom="md"
-              onClick={onClick}
-              text={isOpen ? "Exit Fullscreen" : "Enter Fullscreen"}
-              {...props}
-          />
-        )}
-        {...props}
-    >
-          <AdvancedTable
-              columnDefinitions={columnDefinitions}
-              tableData={MOCK_DATA}
-              {...props}
-          />
-    </FullScreen>
+    <>
+      <Button
+          marginBottom="md"
+          onClick={enter}
+          text="Enter Fullscreen"
+          {...props}
+      />
+      <FullScreen
+          headerText="Fullscreen Table"
+          headerTextStyling="body"
+          isFullscreen={isFullscreen}
+          onClose={exit}
+          {...props}
+      >
+        <AdvancedTable
+            columnDefinitions={columnDefinitions}
+            tableData={MOCK_DATA}
+            {...props}
+        />
+      </FullScreen>
+    </>
   );
 };
 

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import FullScreen from "../../pb_full_screen/_full_screen";
+import useFullScreen from "../../pb_full_screen/useFullScreen";
 import AdvancedTable from "../../pb_advanced_table/_advanced_table";
 import Button from "../../pb_button/_button";
 import Filter from "../../pb_filter/_filter";
@@ -10,6 +11,7 @@ import Card from "../../pb_card/_card";
 import MOCK_DATA from "../../pb_advanced_table/docs/advanced_table_mock_data.json";
 
 const FullScreenTableAndFilter = (props) => {
+  const { isFullscreen, enter, exit } = useFullScreen();
   const [territory, setTerritory] = useState("");
 
   const columnDefinitions = [
@@ -45,76 +47,78 @@ const FullScreenTableAndFilter = (props) => {
   ];
 
   return (
-    <FullScreen
-        headerText="Fullscreen Table"
-        trigger={({ onClick, isOpen }) => (
-          <Button
-              marginBottom="md"
-              onClick={onClick}
-              text={isOpen ? "Exit Fullscreen" : "Enter Fullscreen"}
-              {...props}
-          />
-        )}
-        {...props}
-    >
-      <Card padding="none">
-        <Flex
-            align="stretch"
-            flexDirection="column"
-            gap="none"
-        >
-          <Filter
-              background={false}
-              double
-              maxHeight="50vh"
-              minWidth="xs"
-              popoverProps={{ width: "350px", appendTo: ".fullscreen-overlay" }}
-              results={50}
-              sortOptions={{
-                territory_id: "Territory ID",
-                first_name: "Name",
-                started_on: "Start Date",
-                department_name: "Department",
-                title_name: "Title",
-                branch_branch_name: "Branch",
-              }}
-              sortValue={[{ name: "started_on", dir: "asc" }]}
+    <>
+      <Button
+          marginBottom="md"
+          onClick={enter}
+          text="Enter Fullscreen"
+          {...props}
+      />
+      <FullScreen
+          headerText="Fullscreen Table"
+          isFullscreen={isFullscreen}
+          onClose={exit}
+          {...props}
+      >
+        <Card padding="none">
+          <Flex
+              align="stretch"
+              flexDirection="column"
+              gap="none"
           >
-            {({ closePopover }) => (
-              <>
-                <TextInput
-                    label="Territory ID"
-                    onChange={(event) => setTerritory(event.target.value)}
-                    value={territory}
-                />
-                <Flex spacing="between">
-                  <Button
-                      onClick={() => {
-                        alert(
-                          "No filtering functionality - just a pattern demo!",
-                        );
-                        closePopover();
-                      }}
-                      text="Filter"
+            <Filter
+                background={false}
+                double
+                maxHeight="50vh"
+                minWidth="xs"
+                popoverProps={{ width: "350px", appendTo: ".fullscreen-overlay" }}
+                results={50}
+                sortOptions={{
+                  territory_id: "Territory ID",
+                  first_name: "Name",
+                  started_on: "Start Date",
+                  department_name: "Department",
+                  title_name: "Title",
+                  branch_branch_name: "Branch",
+                }}
+                sortValue={[{ name: "started_on", dir: "asc" }]}
+            >
+              {({ closePopover }) => (
+                <>
+                  <TextInput
+                      label="Territory ID"
+                      onChange={(event) => setTerritory(event.target.value)}
+                      value={territory}
                   />
-                  <Button
-                      text="Defaults"
-                      variant="secondary"
-                  />
-                </Flex>
-              </>
-            )}
-          </Filter>
-          <SectionSeparator />
-          <AdvancedTable
-              columnDefinitions={columnDefinitions}
-              tableData={MOCK_DATA}
-              tableProps={{ container: false }}
-              {...props}
-          />
-        </Flex>
-      </Card>
-    </FullScreen>
+                  <Flex spacing="between">
+                    <Button
+                        onClick={() => {
+                          alert(
+                            "No filtering functionality - just a pattern demo!",
+                          );
+                          closePopover();
+                        }}
+                        text="Filter"
+                    />
+                    <Button
+                        text="Defaults"
+                        variant="secondary"
+                    />
+                  </Flex>
+                </>
+              )}
+            </Filter>
+            <SectionSeparator />
+            <AdvancedTable
+                columnDefinitions={columnDefinitions}
+                tableData={MOCK_DATA}
+                tableProps={{ container: false }}
+                {...props}
+            />
+          </Flex>
+        </Card>
+      </FullScreen>
+    </>
   );
 };
 

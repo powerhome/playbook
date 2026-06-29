@@ -2,10 +2,11 @@ import React from "react";
 import FullScreen from "../../pb_full_screen/_full_screen";
 import useFullScreen from "../../pb_full_screen/useFullScreen";
 import AdvancedTable from "../../pb_advanced_table/_advanced_table";
-import Button from "../../pb_button/_button";
+import Flex from "../../pb_flex/_flex";
 import MOCK_DATA from "../../pb_advanced_table/docs/advanced_table_mock_data.json";
+import CircleIconButton from "../../pb_circle_icon_button/_circle_icon_button";
 
-const FullScreenDefault = (props) => {
+const FullScreenCustomTrigger = (props) => {
   const { isFullscreen, enter, exit } = useFullScreen();
 
   const columnDefinitions = [
@@ -42,12 +43,15 @@ const FullScreenDefault = (props) => {
 
   return (
     <>
-      <Button
-          marginBottom="md"
-          onClick={enter}
-          text="Enter Fullscreen"
-          {...props}
-      />
+      <Flex justify="end">
+        <CircleIconButton
+            icon="expand"
+            marginBottom="md"
+            onClick={enter}
+            {...props}
+        />
+      </Flex>
+
       <FullScreen
           headerText="Fullscreen Table"
           isFullscreen={isFullscreen}
@@ -64,4 +68,4 @@ const FullScreenDefault = (props) => {
   );
 };
 
-export default FullScreenDefault;
+export default FullScreenCustomTrigger;
