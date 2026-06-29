@@ -3,3 +3,15 @@ Description:
 
 Example:
     rails g kit "button"
+    rails g kit "status banner" --category=alerts_and_dialogs --description="Status banner for page-level notices" --rails --react --props variant:enum:info,warning dismissed:boolean
+
+Prop format:
+    name:type
+    name:enum:value_one,value_two
+
+Generated files include:
+    app/pb_kits/playbook/pb_<kit>/
+    app/pb_kits/playbook/pb_<kit>/docs/
+    app/pb_kits/playbook/pb_<kit>/kit.schema.json
+    app/pb_kits/playbook/pb_<kit>/docs/_playground.json
+    playbook-website/config/menu.yml entry
