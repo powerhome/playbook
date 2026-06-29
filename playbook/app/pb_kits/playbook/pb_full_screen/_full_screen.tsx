@@ -3,7 +3,7 @@ import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps'
 
-import useFullscreen from './useFullScreen.ts'
+import useFullscreen from './useFullScreen'
 
 import Flex from '../pb_flex/_flex'
 import Icon from '../pb_icon/_icon'
