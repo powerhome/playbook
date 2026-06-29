@@ -1,5 +1,5 @@
 import React from 'react'
-import { render, screen } from '../utilities/test-utils'
+import { fireEvent, render, screen } from '../utilities/test-utils'
 
 import { FullScreen } from 'playbook-ui'
 
@@ -15,4 +15,68 @@ test('generated scaffold test - update me', () => {
 
   render(<FullScreen {...props} />)
     expect(screen.getByTestId('default')).toBeInTheDocument()
+})
+
+test('stickyHeader is true by default', () => {
+  render(
+    <FullScreen
+        data={{ testid: 'default' }}
+        headerText="Fullscreen"
+        trigger={({ onClick }) => <button onClick={onClick}>Open</button>}
+    >
+      <div>Content</div>
+    </FullScreen>
+  )
+
+  fireEvent.click(screen.getByText('Open'))
+
+  expect(document.querySelector('.fullscreen-header')).toHaveClass('fullscreen-header-sticky')
+})
+
+test('stickyHeader can be disabled', () => {
+  render(
+    <FullScreen
+        data={{ testid: 'default' }}
+        headerText="Fullscreen"
+        stickyHeader={false}
+        trigger={({ onClick }) => <button onClick={onClick}>Open</button>}
+    >
+      <div>Content</div>
+    </FullScreen>
+  )
+
+  fireEvent.click(screen.getByText('Open'))
+
+  expect(document.querySelector('.fullscreen-header')).not.toHaveClass('fullscreen-header-sticky')
+})
+
+test('contentPadding is lg by default', () => {
+  render(
+    <FullScreen
+        data={{ testid: 'default' }}
+        trigger={({ onClick }) => <button onClick={onClick}>Open</button>}
+    >
+      <div>Content</div>
+    </FullScreen>
+  )
+
+  fireEvent.click(screen.getByText('Open'))
+
+  expect(document.querySelector('.fullscreen-content')).toHaveClass('p_lg')
+})
+
+test('contentPadding can be customized', () => {
+  render(
+    <FullScreen
+        contentPadding="sm"
+        data={{ testid: 'default' }}
+        trigger={({ onClick }) => <button onClick={onClick}>Open</button>}
+    >
+      <div>Content</div>
+    </FullScreen>
+  )
+
+  fireEvent.click(screen.getByText('Open'))
+
+  expect(document.querySelector('.fullscreen-content')).toHaveClass('p_sm')
 })

@@ -7,6 +7,23 @@
     "rails"
   ],
   "props": {
+    "contentPadding": {
+      "type": "enum",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "values": [
+        "none",
+        "xxs",
+        "xs",
+        "sm",
+        "md",
+        "lg",
+        "xl"
+      ],
+      "default": "lg"
+    },
     "headerText": {
       "type": "string",
       "platforms": [
@@ -46,6 +63,14 @@
       "platforms": [
         "react"
       ]
+    },
+    "stickyHeader": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": true
     }
   },
   "globalProps": true,

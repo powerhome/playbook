@@ -1,3 +1,5 @@
 export { default as FullScreenDefault } from './_full_screen_default.jsx'
 export { default as FullScreenTableAndFilter } from './_full_screen_table_and_filter.jsx'
 export { default as FullScreenHeaderTextStyling } from './_full_screen_header_text_styling.jsx'
+export { default as FullScreenStickyHeader } from './_full_screen_sticky_header.jsx'
+export { default as FullScreenContentPadding } from './_full_screen_content_padding.jsx'

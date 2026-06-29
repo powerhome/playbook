@@ -1,5 +1,4 @@
 @import "../tokens/colors";
-@import "../tokens/spacing";
 @import "../tokens/positioning";
 
 .pb_full_screen_kit {
@@ -39,17 +38,19 @@
 .fullscreen-header {
   background-color: $white;
   box-sizing: border-box;
-  position: sticky;
-  top: 0;
   width: 100%;
   z-index: $z_10;
+}
+
+.fullscreen-header-sticky {
+  position: sticky;
+  top: 0;
 }
 
 .fullscreen-content {
   box-sizing: border-box;
   height: calc(100vh - 44px);
   overflow: auto;
-  padding: $space_lg;
 }
 
 // Dark mode support

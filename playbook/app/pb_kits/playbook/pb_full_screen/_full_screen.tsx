@@ -18,10 +18,12 @@ type FullScreenViewProps = {
   data?: { [key: string]: string },
   htmlOptions?: { [key: string]: string | number | boolean | (() => void) | ((arg?: Event) => void) },
   id?: string,
+  contentPadding?: "none" | "xxs" | "xs" | "sm" | "md" | "lg" | "xl"
   headerText?: string
   headerTextStyling?: "title_4" | "body"
   onOpen?: () => void
   onClose?: () => void
+  stickyHeader?: boolean
   trigger?: (props: { onClick: () => void; isOpen: boolean }) => React.ReactNode
   escToExit?: boolean
 
@@ -32,6 +34,7 @@ const FullScreenView = (props: FullScreenViewProps) => {
   aria = {},
   children,
   className,
+  contentPadding = "lg",
   data = {},
   htmlOptions = {},
   id,
@@ -39,6 +42,7 @@ const FullScreenView = (props: FullScreenViewProps) => {
   headerTextStyling = "title_4",
   onOpen,
   onClose,
+  stickyHeader = true,
   trigger,
   escToExit = true,
   } = props
@@ -47,6 +51,10 @@ const FullScreenView = (props: FullScreenViewProps) => {
   const dataProps = buildDataProps(data)
   const htmlProps = buildHtmlProps(htmlOptions)
   const classes = classnames(buildCss('pb_full_screen_kit'), globalProps(props), className)
+  const headerClasses = classnames("fullscreen-header", {
+    "fullscreen-header-sticky": stickyHeader,
+  })
+  const contentClasses = classnames("fullscreen-content", `p_${contentPadding}`)
 
   const { isFullscreen, toggle } = useFullscreen({
     escToExit,
@@ -55,7 +63,7 @@ const FullScreenView = (props: FullScreenViewProps) => {
   })
 
   const defaultHeader = (
-    <div className="fullscreen-header">
+    <div className={headerClasses}>
       <Flex
           align="center"
           justify="between"
@@ -99,7 +107,7 @@ const FullScreenView = (props: FullScreenViewProps) => {
       return (
         <div className="fullscreen-overlay">
           {defaultHeader}
-          <div className="fullscreen-content">
+          <div className={contentClasses}>
             {children}
           </div>
         </div>
