@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
 import { globalProps } from '../utilities/globalProps'
@@ -61,22 +61,55 @@ const FullScreenView = (props: FullScreenViewProps) => {
   })
   const isControlled = typeof controlledIsFullscreen === "boolean"
 
-  const internalFullscreen = useFullscreen({
-    escToExit: isControlled ? false : escToExit,
-    onEnter: isControlled ? undefined : onOpen,
-    onExit: isControlled ? undefined : onClose,
-  })
+  const [internalIsFullscreen, setInternalIsFullscreen, toggleInternalFullscreen] = useFullscreen(false)
 
-  const isFullscreen = isControlled ? controlledIsFullscreen : internalFullscreen.isFullscreen
-  const enter = isControlled ? onOpen : internalFullscreen.enter
-  const exit = isControlled ? onClose : internalFullscreen.exit
-  const toggle = () => {
-    if (isFullscreen) {
-      exit?.()
+  const isFullscreen = isControlled ? controlledIsFullscreen : internalIsFullscreen
+  const enter = () => {
+    if (!isControlled) {
+      setInternalIsFullscreen(true)
+      onOpen?.()
     } else {
-      enter?.()
+      onOpen?.()
     }
   }
+  const exit = () => {
+    if (!isControlled) {
+      setInternalIsFullscreen(false)
+      onClose?.()
+    } else {
+      onClose?.()
+    }
+  }
+  const toggle = () => {
+    if (isControlled) {
+      if (isFullscreen) {
+        onClose?.()
+      } else {
+        onOpen?.()
+      }
+    } else {
+      toggleInternalFullscreen()
+      if (isFullscreen) {
+        onClose?.()
+      } else {
+        onOpen?.()
+      }
+    }
+  }
+
+  useEffect(() => {
+    if (!escToExit || !isFullscreen) return
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        event.preventDefault()
+        exit()
+      }
+    }
+
+    document.addEventListener('keydown', handleKeyDown)
+    return () => document.removeEventListener('keydown', handleKeyDown)
+  }, [escToExit, isFullscreen, isControlled, onClose])
 
   const defaultHeader = (
     <div className={headerClasses}>

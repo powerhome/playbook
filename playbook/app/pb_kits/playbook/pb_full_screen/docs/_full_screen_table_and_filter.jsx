@@ -11,7 +11,7 @@ import Card from "../../pb_card/_card";
 import MOCK_DATA from "../../pb_advanced_table/docs/advanced_table_mock_data.json";
 
 const FullScreenTableAndFilter = (props) => {
-  const { isFullscreen, enter, exit } = useFullScreen();
+  const [isFullscreen, setIsFullscreen] = useFullScreen(false);
   const [territory, setTerritory] = useState("");
 
   const columnDefinitions = [
@@ -50,14 +50,14 @@ const FullScreenTableAndFilter = (props) => {
     <>
       <Button
           marginBottom="md"
-          onClick={enter}
+          onClick={() => setIsFullscreen(true)}
           text="Enter Fullscreen"
           {...props}
       />
       <FullScreen
           headerText="Fullscreen Table"
           isFullscreen={isFullscreen}
-          onClose={exit}
+          onClose={() => setIsFullscreen(false)}
           {...props}
       >
         <Card padding="none">

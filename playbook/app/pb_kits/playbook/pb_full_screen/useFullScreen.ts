@@ -1,63 +1,15 @@
-import { useState, useCallback, useEffect } from 'react'
+import { useState } from 'react'
 
-interface UseFullScreenOptions {
-  onEnter?: () => void
-  onExit?: () => void
-  escToExit?: boolean
-}
+const useFullScreen = (initial = false) => {
+  const [isFullscreen, setIsFullscreen] = useState(initial)
 
-interface UseFullScreenReturn {
-  isFullscreen: boolean
-  enter: () => void
-  exit: () => void
-  toggle: () => void
-}
+  const toggleFullScreen = () => setIsFullscreen((prev) => !prev)
 
-const useFullScreen = (options: UseFullScreenOptions = {}): UseFullScreenReturn => {
-  const { onEnter, onExit, escToExit = true } = options
-  const [isFullscreen, setIsFullscreen] = useState(false)
-
-  const enter = useCallback(() => {
-    setIsFullscreen(true)
-    onEnter?.()
-  }, [onEnter])
-
-  const exit = useCallback(() => {
-    setIsFullscreen(false)
-    onExit?.()
-  }, [onExit])
-
-  const toggle = useCallback(() => {
-    if (isFullscreen) {
-      exit()
-    } else {
-      enter()
-    }
-  }, [isFullscreen, enter, exit])
-
-  // ESC key handler
-  useEffect(() => {
-    if (!escToExit || !isFullscreen) return
-
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') {
-        event.preventDefault()
-        exit()
-      }
-    }
-    
-    document.addEventListener('keydown', handleKeyDown)
-    return () => {
-      document.removeEventListener('keydown', handleKeyDown)
-    }
-  }, [escToExit, isFullscreen, exit])
-
-  return {
+  return [
     isFullscreen,
-    enter,
-    exit,
-    toggle,
-  }
+    setIsFullscreen as any,
+    toggleFullScreen,
+  ]
 }
 
 export default useFullScreen

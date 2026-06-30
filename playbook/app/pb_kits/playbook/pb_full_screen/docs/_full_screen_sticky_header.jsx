@@ -6,7 +6,7 @@ import Button from "../../pb_button/_button";
 import MOCK_DATA from "../../pb_advanced_table/docs/advanced_table_mock_data.json";
 
 const FullScreenStickyHeader = (props) => {
-  const { isFullscreen, enter, exit } = useFullScreen();
+  const [isFullscreen, setIsFullscreen] = useFullScreen(false);
 
   const columnDefinitions = [
     {
@@ -44,14 +44,14 @@ const FullScreenStickyHeader = (props) => {
     <>
       <Button
           marginBottom="md"
-          onClick={enter}
+          onClick={() => setIsFullscreen(true)}
           text="Enter Fullscreen"
           {...props}
       />
       <FullScreen
           headerText="Fullscreen Table"
           isFullscreen={isFullscreen}
-          onClose={exit}
+          onClose={() => setIsFullscreen(false)}
           stickyHeader={false}
           {...props}
       >

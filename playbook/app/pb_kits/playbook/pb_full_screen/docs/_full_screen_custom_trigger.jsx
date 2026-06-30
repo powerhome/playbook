@@ -7,7 +7,7 @@ import MOCK_DATA from "../../pb_advanced_table/docs/advanced_table_mock_data.jso
 import CircleIconButton from "../../pb_circle_icon_button/_circle_icon_button";
 
 const FullScreenCustomTrigger = (props) => {
-  const { isFullscreen, enter, exit } = useFullScreen();
+  const [isFullscreen, setIsFullscreen] = useFullScreen(false);
 
   const columnDefinitions = [
     {
@@ -47,7 +47,7 @@ const FullScreenCustomTrigger = (props) => {
         <CircleIconButton
             icon="expand"
             marginBottom="md"
-            onClick={enter}
+            onClick={() => setIsFullscreen(true)}
             {...props}
         />
       </Flex>
@@ -55,7 +55,7 @@ const FullScreenCustomTrigger = (props) => {
       <FullScreen
           headerText="Fullscreen Table"
           isFullscreen={isFullscreen}
-          onClose={exit}
+          onClose={() => setIsFullscreen(false)}
           {...props}
       >
         <AdvancedTable

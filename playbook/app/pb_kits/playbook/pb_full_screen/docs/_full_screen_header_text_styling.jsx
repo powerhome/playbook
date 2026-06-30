@@ -6,7 +6,7 @@ import Button from "../../pb_button/_button";
 import MOCK_DATA from "../../pb_advanced_table/docs/advanced_table_mock_data.json";
 
 const FullScreenHeaderTextStyling = (props) => {
-  const { isFullscreen, enter, exit } = useFullScreen();
+  const [isFullscreen, setIsFullscreen] = useFullScreen(false);
 
   const columnDefinitions = [
     {
@@ -44,7 +44,7 @@ const FullScreenHeaderTextStyling = (props) => {
     <>
       <Button
           marginBottom="md"
-          onClick={enter}
+          onClick={() => setIsFullscreen(true)}
           text="Enter Fullscreen"
           {...props}
       />
@@ -52,7 +52,7 @@ const FullScreenHeaderTextStyling = (props) => {
           headerText="Fullscreen Table"
           headerTextStyling="body"
           isFullscreen={isFullscreen}
-          onClose={exit}
+          onClose={() => setIsFullscreen(false)}
           {...props}
       >
         <AdvancedTable
