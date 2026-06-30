@@ -1,0 +1,1 @@
+Use `contentPadding` to tune the spacing around fullscreen content. The default is `lg` for comfortable breathing room; choose a smaller value like `md` when the content is dense or already has its own container spacing.

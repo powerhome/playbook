@@ -1,61 +1,65 @@
 <%
 break_lines = lambda do |list, spaces = 2, separator = ","|
-  list.join("#{separator}\n#{" " * spaces}") + separator
+  list.any? ? list.join("#{separator}\n#{" " * spaces}") + separator : ""
 end
 
 type_name = "#{@kit_name_pascal}Props"
 
-props_types = @kit_props.map do |key, val|
-  prop_name = key == "classname" ? "className" : key.camelize(:lower)
-  prop_type = if key == "htmlOptions"
-  "{ [key: string]: string | number | boolean | (() => void) | ((arg?: Event) => void) }"
-            else
-              case val
-              when "enum", "one_of" then "'option_1' | 'option_2'"
-              when "boolean", "bool" then "boolean"
-              when "object", "obj" then "{ [key: string]: string }"
-              else "string"
+props_types = @kit_props.map do |prop|
+  prop_type = if prop[:react_name] == "children"
+                "React.ReactNode"
+              elsif prop[:react_name] == "htmlOptions"
+                "{ [key: string]: string | number | boolean | (() => void) | ((event: any) => void) | any }"
+              elsif prop[:react_name] == "aria" || prop[:react_name] == "data"
+                "{ [key: string]: string }"
+              else
+                case prop[:type]
+                when "enum"
+                  prop[:values].map { |value| "'#{value}'" }.join(" | ")
+                when "boolean" then "boolean"
+                when "number", "numeric" then "number"
+                when "array" then "any[]"
+                when "object" then "{ [key: string]: any }"
+                when "date" then "Date"
+                when "function" then "() => void"
+                else "string"
+                end
               end
-            end
 
-  "#{prop_name}?: #{prop_type}"
+  "#{prop[:react_name]}?: #{prop_type}"
 end
-puts props_types.inspect
 
-props_names = @kit_props.keys.map do |key|
-                  case key
-                  when "classname" || "className"
-                    "className" 
-                  when "aria"
-                    "aria = {}"
-                  when "data"
-                    "data = {}"
-                  when "htmlOptions"
-                     "htmlOptions = {}"
-                  else 
-                    key
-                  end
-              end
+props_names = @kit_props.map do |prop|
+  case prop[:react_name]
+  when "aria", "data", "htmlOptions"
+    "#{prop[:react_name]} = {}"
+  when "children"
+    prop[:react_name]
+  else
+    default = default_for(prop)
+    default.nil? ? prop[:react_name] : "#{prop[:react_name]} = #{default.inspect}"
+  end
+end
 
 %>
 import React from 'react'
 import classnames from 'classnames'
 import { buildAriaProps, buildCss, buildDataProps, buildHtmlProps } from '../utilities/props'
-import { globalProps } from '../utilities/globalProps'
+import { globalProps, GlobalProps } from '../utilities/globalProps'
 
 type <%= type_name %> = {
   <%= break_lines.call(props_types) %>
-}
+} & GlobalProps
 
-const <%= @kit_name_pascal %> = (props: <%= type_name %>) => {
+const <%= @kit_name_pascal %> = (props: <%= type_name %>): React.ReactElement => {
   const {
-    <%= break_lines.call(props_names) %>
+    <%= break_lines.call(props_names, 4) %>
   } = props
 
   const ariaProps = buildAriaProps(aria)
   const dataProps = buildDataProps(data)
   const htmlProps = buildHtmlProps(htmlOptions)
-  const classes = classnames(buildCss('pb_<%= @kit_name_underscore %>'), globalProps(props), className)
+  const classes = classnames(buildCss('pb_<%= @kit_name_underscore %>_kit'), globalProps(props), className)
 
   return (
     <div
@@ -65,7 +69,7 @@ const <%= @kit_name_pascal %> = (props: <%= type_name %>) => {
         className={classes}
         id={id}
     >
-    CONTENT HERE
+      {children}
     </div>
   )
 }

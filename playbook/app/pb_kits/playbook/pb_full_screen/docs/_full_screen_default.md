@@ -1,0 +1,1 @@
+Use the `trigger` prop for the simplest setup. The trigger render function receives the fullscreen state and toggle handler, so the control can open and close the overlay without managing separate state.

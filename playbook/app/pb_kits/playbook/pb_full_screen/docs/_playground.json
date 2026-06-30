@@ -1,0 +1,155 @@
+{
+  "template": "<FullScreen{{props}} />",
+  "propTargets": {},
+  "defaults": {
+    "contentPadding": "lg",
+    "escToExit": true,
+    "headerText": "Enrollment Review",
+    "headerTextStyling": "title_4",
+    "onClose": "() => console.log('Fullscreen closed')",
+    "onOpen": "() => console.log('Fullscreen opened')",
+    "stickyHeader": true
+  },
+  "groups": [
+    {
+      "name": "Header",
+      "props": [
+        "headerText",
+        "headerTextStyling",
+        "stickyHeader"
+      ]
+    },
+    {
+      "name": "Content",
+      "props": [
+        "contentPadding"
+      ]
+    },
+    {
+      "name": "Behavior",
+      "props": [
+        "escToExit"
+      ]
+    },
+    {
+      "name": "Callbacks",
+      "props": [
+        "trigger",
+        "onOpen",
+        "onClose"
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default",
+      "props": {
+        "contentPadding": "lg",
+        "escToExit": true,
+        "headerText": "Enrollment Review",
+        "headerTextStyling": "title_4",
+        "stickyHeader": true,
+        "trigger": "({ onClick, isOpen }) => (\n  <Button\n    marginBottom=\"md\"\n    onClick={onClick}\n  >\n    {isOpen ? \"Exit Fullscreen\" : \"Enter Fullscreen\"}\n  </Button>\n)"
+      }
+    },
+    {
+      "name": "Hook trigger",
+      "structureMode": "hook_trigger",
+      "props": {
+        "contentPadding": "lg",
+        "escToExit": true,
+        "headerText": "Enrollment Review",
+        "headerTextStyling": "title_4",
+        "stickyHeader": true
+      },
+      "children": "<Card padding=\"md\">\n  <Title size={4} text=\"Enrollment Review\" />\n  <Body marginTop=\"xs\" text=\"The hook lets the trigger live anywhere while FullScreen owns the overlay content.\" />\n</Card>"
+    },
+    {
+      "name": "Medium padding",
+      "props": {
+        "contentPadding": "md",
+        "headerText": "Medium Padding",
+        "stickyHeader": true
+      }
+    },
+    {
+      "name": "No padding",
+      "props": {
+        "contentPadding": "none",
+        "headerText": "Edge-to-edge Content",
+        "stickyHeader": true
+      }
+    },
+    {
+      "name": "Non-sticky header",
+      "props": {
+        "contentPadding": "lg",
+        "headerText": "Scrolling Header",
+        "stickyHeader": false
+      }
+    },
+    {
+      "name": "Body header",
+      "props": {
+        "headerText": "A quieter header treatment",
+        "headerTextStyling": "body",
+        "stickyHeader": true
+      }
+    }
+  ],
+  "conditionals": {},
+  "hints": {
+    "hook_trigger": {
+      "presetName": "Hook trigger",
+      "message": "Use the hook pattern when the trigger needs to live outside the FullScreen wrapper.",
+      "type": "info"
+    },
+    "content_padding": {
+      "when": {
+        "contentPadding": "none"
+      },
+      "message": "Use no padding when the fullscreen content already provides its own spacing or needs an edge-to-edge layout.",
+      "type": "info"
+    },
+    "sticky_header": {
+      "when": {
+        "stickyHeader": false
+      },
+      "message": "Turn off stickyHeader when the header should scroll away with the fullscreen content.",
+      "type": "info"
+    }
+  },
+  "children": {
+    "editable": true,
+    "default": "<Card padding=\"md\">\n  <Title size={4} text=\"Enrollment Review\" />\n  <Body marginTop=\"xs\" text=\"Open fullscreen to review a focused workspace with enough content to test header behavior and padding.\" />\n</Card>"
+  },
+  "structureModes": {
+    "default": "trigger_prop",
+    "modes": {
+      "trigger_prop": {
+        "label": "Trigger Prop",
+        "template": "<FullScreen{{props}}>\n  {{children}}\n</FullScreen>",
+        "children": "<Card padding=\"md\">\n  <Title size={4} text=\"Enrollment Review\" />\n  <Body marginTop=\"xs\" text=\"Open fullscreen to review a focused workspace with enough content to test header behavior and padding.\" />\n</Card>",
+        "props": {
+          "headerText": "Enrollment Review",
+          "trigger": "({ onClick, isOpen }) => (\n  <Button\n    marginBottom=\"md\"\n    onClick={onClick}\n  >\n    {isOpen ? \"Exit Fullscreen\" : \"Enter Fullscreen\"}\n  </Button>\n)"
+        }
+      },
+      "hook_trigger": {
+        "label": "Hook Trigger",
+        "template": "<FullScreen\n  isFullscreen={isFullscreen}\n  onClose={() => setIsFullscreen(false)}{{props}}\n>\n  {{children}}\n</FullScreen>",
+        "children": "<Card padding=\"md\">\n  <Title size={4} text=\"Enrollment Review\" />\n  <Body marginTop=\"xs\" text=\"The hook lets the trigger live anywhere while FullScreen owns the overlay content.\" />\n</Card>",
+        "imports": [
+          "useFullScreen"
+        ],
+        "props": {
+          "headerText": "Enrollment Review"
+        },
+        "wrapper": "const FullScreenPlaygroundExample = () => {\n  const [isFullscreen, setIsFullscreen, toggleFullScreen] = useFullScreen(false)\n\n  return (\n    <>\n      <Flex justify=\"end\">\n        <CircleIconButton\n          icon=\"expand\"\n          marginBottom=\"md\"\n          onClick={toggleFullScreen}\n        />\n      </Flex>\n      {{component}}\n    </>\n  )\n}\n\n<FullScreenPlaygroundExample />"
+      }
+    }
+  },
+  "hiddenProps": [
+    "isFullscreen"
+  ]
+}

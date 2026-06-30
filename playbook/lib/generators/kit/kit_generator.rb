@@ -1,12 +1,14 @@
 # frozen_string_literal: true
 
+require "json"
 require "yaml"
 
-# rubocop:disable Style/StringConcatenation
 class KitGenerator < Rails::Generators::NamedBase
   desc "This generator creates a new Playbook Kit"
   source_root File.expand_path("templates", __dir__)
   class_option :category, type: :string, default: "", desc: "Adds category name"
+  class_option :description, type: :string, default: "", desc: "Adds website description copy"
+  class_option :category_description, type: :string, default: "", desc: "Adds description copy when creating a new category"
   class_option :props, type: :array, default: []
   class_option :rails, type: :boolean, default: false, desc: "Creates the boilerplate files for Rails"
   class_option :react, type: :boolean, default: false, desc: "Creates the boilerplate files for React"
@@ -18,6 +20,20 @@ class KitGenerator < Rails::Generators::NamedBase
 
   REACT_EXAMPLES_PATH = "app/javascript/playbook-doc.js"
   REACT_INDEX_PATH = "app/javascript/kits.js"
+  MENU_PATH = "../playbook-website/config/menu.yml"
+  BASE_PROPS = %w[id classname data aria htmlOptions children].freeze
+  PLAYGROUND_CHILDREN_KITS = %w[
+    badge background body button caption card collapsible detail dialog flex link list message nav overlay pill popover title tooltip
+  ].freeze
+  PROP_TYPE_ALIASES = {
+    "bool" => "boolean",
+    "hash" => "object",
+    "hashprop" => "object",
+    "obj" => "object",
+    "integer" => "number",
+    "int" => "number",
+    "one_of" => "enum",
+  }.freeze
 
   def create_templates
     kit_name = name.strip.downcase
@@ -26,32 +42,25 @@ class KitGenerator < Rails::Generators::NamedBase
     @react_kit = all_kits ? true : options[:react]
     @swift_kit = all_kits ? true : options[:swift]
     @kit_status = options[:beta] ? "beta" : "stable"
-    @kit_name_uppercase = kit_name.upcase
-    @kit_name_lowercase = kit_name
-    @kit_name_capitalize = kit_name.capitalize
     @kit_name_underscore = kit_name.parameterize.underscore
-    @kit_name_pascal = kit_name.titleize.gsub(/\s+/, "")
-    @kit_category = options[:category]
-    @kit_category_capitalize = options[:category].capitalize
+    @kit_name_uppercase = @kit_name_underscore.upcase
+    @kit_name_lowercase = @kit_name_underscore
+    @kit_name_capitalize = @kit_name_underscore.humanize.titleize
+    @kit_name_pascal = @kit_name_underscore.camelize
+    @kit_description = options[:description].presence || "#{@kit_name_capitalize} component"
+    @kit_category = options[:category].to_s.strip
+    @kit_category_capitalize = @kit_category.humanize.titleize
 
     @icons_used = options[:icons_used]
     @react_rendered = options[:react_rendered]
     @enhanced_element_used = options[:enhanced_element_used]
 
-    kit_props = options[:props].concat(%w[id:string classname:string data:object aria:object htmlOptions:object])
-    @kit_props = kit_props.map { |hash| [hash.partition(":").first, hash.partition(":").last] }.to_h
-    @kit_props = @kit_props.sort.to_h
-    @unique_props = @kit_props.symbolize_keys.without(:id, :classname, :data, :aria)
-
-    @kit_class_init = []
-    @kit_props.each do |key, _val|
-      @kit_class_init.push("#{key.parameterize.underscore}: default_configuration".to_sym)
-    end
-
-    @kit_class_val = []
-    @kit_props.each do |key, _value|
-      @kit_class_val.push("self.configured_#{key.parameterize.underscore} = #{key.parameterize.underscore}")
-    end
+    @custom_props = parse_props(options[:props])
+    @kit_props = (BASE_PROPS.map { |prop| parse_prop("#{prop}:string") } + @custom_props)
+                 .uniq { |prop| prop[:react_name] }
+                 .sort_by { |prop| prop[:react_name] }
+    @unique_props = @custom_props.sort_by { |prop| prop[:react_name] }
+    @platform_list = platform_list
 
     full_kit_directory = "app/pb_kits/playbook/pb_#{@kit_name_underscore}"
 
@@ -68,36 +77,20 @@ class KitGenerator < Rails::Generators::NamedBase
         say_status  "No category given.",
                     "Proceeding to generate files.",
                     :yellow
+      elsif menu_category?(@kit_category)
+        say_status  "#{@kit_category_capitalize} matches an existing category.",
+                    "Proceeding to generate files.",
+                    :green
       else
-        file_path = "../playbook-website/config/menu.yml"
-        yaml_data = YAML.load_file(file_path, aliases: true)
-        existing_categories = yaml_data["kits"].map { |kit| kit["category"] } if yaml_data["kits"].is_a?(Array)
-        if existing_categories && !existing_categories.include?(options[:category])
-          say_status  "#{@kit_category_capitalize} does not match an existing category.",
-                      "Please choose another category or manually sort without using the category flag.",
-                      :red
-          exit 1
-        else
-          say_status  "#{@kit_category_capitalize} matches an existing category.",
-                      "Proceeding to generate files.",
-                      :green
-        end
+        say_status  "#{@kit_category_capitalize} does not match an existing category.",
+                    "Proceeding to generate files.",
+                    :yellow
       end
 
       # Generate SCSS files ==============================
       unless platforms == "swift_only"
         template "kit_scss.erb", "#{full_kit_directory}/_#{@kit_name_underscore}.scss"
-        open("app/entrypoints/playbook.scss", "a") do |f|
-          f.puts "\n@" + "import " + "\'" + "kits/pb_#{@kit_name_underscore}/#{@kit_name_underscore}" + "\';"
-        end
-        scss_file = "app/entrypoints/playbook.scss"
-
-        # Sort kit names alphabetically
-        lines = File.readlines(scss_file)
-        utilities_lines = lines.select { |line| line.include?("utilities") }
-        remaining_lines = lines.reject { |line| line.include?("utilities") }.sort
-        sorted_lines = remaining_lines + utilities_lines
-        File.open(scss_file, "w") { |f| f.puts sorted_lines.join }
+        add_scss_import
 
         say_status  "complete",
                     "#{@kit_name_capitalize} kit stylesheet successfully created and imported.",
@@ -124,14 +117,14 @@ class KitGenerator < Rails::Generators::NamedBase
 
         react_imports_page(
           path: REACT_EXAMPLES_PATH.to_s,
-          import_statement: "import * as #{@kit_name_pascal} from 'kits/pb_#{@kit_name_underscore}/docs'\n",
+          import_statement: "import * as #{@kit_name_pascal} from '../pb_kits/playbook/pb_#{@kit_name_underscore}/docs'\n",
           registry_statement: "  ...#{@kit_name_pascal},\n",
           import_area_indicator: "// KIT EXAMPLES\n"
         )
 
         react_export_page(
           path: REACT_INDEX_PATH.to_s,
-          export_statement: "export { default as #{@kit_name_pascal}} from '../pb_kits/playbook/pb_#{@kit_name_underscore}/_#{@kit_name_underscore}'\n",
+          export_statement: "export { default as #{@kit_name_pascal} } from '../pb_kits/playbook/pb_#{@kit_name_underscore}/_#{@kit_name_underscore}'\n",
           start_comment: "// vvv React Component JSX Imports from the React Kits vvv\n",
           end_comment: "// ^^^ React Component JSX Imports from the React Kits ^^^\n"
         )
@@ -146,57 +139,16 @@ class KitGenerator < Rails::Generators::NamedBase
 
       # Create kit example.yml
       template "kit_example_yml.erb", "#{full_kit_directory}/docs/example.yml"
+      create_file "#{full_kit_directory}/docs/_description.md", "#{@kit_description}\n"
+      create_file "#{full_kit_directory}/kit.schema.json", "#{JSON.pretty_generate(kit_schema)}\n" unless platforms == "swift_only"
+      create_file "#{full_kit_directory}/docs/_playground.json", "#{JSON.pretty_generate(playground_config)}\n" if @react_kit
 
-      `rubocop --safe-auto-correct #{full_kit_directory}`
+      run "rubocop -A #{full_kit_directory}", abort_on_failure: false if @rails_kit
 
-      # Add kit with category given to Playbook menu (sort to category section) =============
-      if !@kit_category.nil? && !@kit_category.empty?
-        file_path = "../playbook-website/config/menu.yml"
-        yaml_data = YAML.load_file(file_path, aliases: true)
-        yaml_data["kits"].each do |kit|
-          next unless kit["category"] == @kit_category
-
-          new_kit = {
-            "name" => @kit_name_underscore,
-            "platforms" => platforms,
-            "status" => @kit_status,
-            "icons_used" => @icons_used,
-            "react_rendered" => @react_rendered,
-            "enhanced_element_used" => @enhanced_element_used,
-          }
-          kit["components"] << new_kit
-          break
-        end
-
-        File.open(file_path, "w") do |f|
-          f.write(yaml_data.to_yaml)
-        end
-
-        say_status  "complete",
-                    "#{@kit_name_capitalize} kit added to Playbook menu under #{@kit_category_capitalize}.",
-                    :green
-      else
-        # Add kit without category given to Playbook menu (append to end) ====================
-        open("../playbook-website/config/menu.yml", "a") do |f|
-          f.puts "- category: #{@kit_name_underscore}"
-          f.puts "  components:"
-          f.puts "    - name: #{@kit_name_underscore}"
-          f.puts "      platforms: #{platforms}"
-          f.puts "      status: #{@kit_status}"
-          f.puts "      # platforms_status: { rails: stable, react: beta, swift: stable }  # Optional: Set status per platform"
-          f.puts "      icons_used: #{@icons_used}"
-          f.puts "      react_rendered: #{@react_rendered}"
-          f.puts "      enhanced_element_used: #{@enhanced_element_used}"
-        end
-
-        say_status  "complete",
-                    "#{@kit_name_capitalize} kit added to Playbook menu.",
-                    :green
-      end
+      add_kit_to_menu
     end
   end
 
-  # rubocop:enable Style/StringConcatenation
 private
 
   def platforms
@@ -214,6 +166,236 @@ private
       "rails_only"
     elsif @swift_kit
       "swift_only"
+    end
+  end
+
+  def platform_list
+    list = []
+    list << "rails" if @rails_kit
+    list << "react" if @react_kit
+    list << "swift" if @swift_kit
+    list
+  end
+
+  def parse_props(props)
+    Array(props).map { |raw_prop| parse_prop(raw_prop) }
+                .reject { |prop| BASE_PROPS.include?(prop[:raw_name]) || BASE_PROPS.include?(prop[:react_name]) }
+  end
+
+  def parse_prop(raw_prop)
+    raw_name, raw_type, raw_values = raw_prop.to_s.split(":", 3)
+    raw_name = raw_name.to_s.strip
+    type = normalize_type(raw_type)
+    values = raw_values.to_s.split(/[|,]/).map(&:strip).reject(&:empty?)
+    values = %w[option_1 option_2] if type == "enum" && values.empty?
+
+    {
+      raw_name: raw_name,
+      ruby_name: raw_name.underscore,
+      react_name: raw_name == "classname" ? "className" : raw_name.camelize(:lower),
+      type: type,
+      values: values,
+    }
+  end
+
+  def normalize_type(raw_type)
+    type = raw_type.to_s.strip.downcase
+    type = "string" if type.empty?
+    PROP_TYPE_ALIASES.fetch(type, type)
+  end
+
+  def add_scss_import
+    scss_file = "app/entrypoints/playbook.scss"
+    import_line = "@import 'kits/pb_#{@kit_name_underscore}/#{@kit_name_underscore}';\n"
+    lines = File.exist?(scss_file) ? File.readlines(scss_file) : []
+    return if lines.include?(import_line)
+
+    lines << import_line
+    utilities_lines = lines.select { |line| line.include?("utilities") }
+    remaining_lines = lines.reject { |line| line.include?("utilities") }.uniq.sort
+    File.write(scss_file, (remaining_lines + utilities_lines).join)
+  end
+
+  def menu_category?(category)
+    yaml_data = load_yaml_file(MENU_PATH)
+    yaml_data["kits"].is_a?(Array) && yaml_data["kits"].any? { |kit| kit["category"] == category }
+  end
+
+  def load_yaml_file(path)
+    YAML.load_file(path, aliases: true)
+  rescue ArgumentError
+    YAML.load_file(path)
+  end
+
+  def add_kit_to_menu
+    category = @kit_category.presence || @kit_name_underscore
+    menu = File.read(MENU_PATH)
+    block = menu_component_block
+
+    updated_menu = if menu_category?(category)
+                     insert_component_into_category(menu, category, block)
+                   else
+                     "#{menu.chomp}\n#{menu_category_block(category, block)}"
+                   end
+
+    File.write(MENU_PATH, updated_menu)
+
+    say_status  "complete",
+                "#{@kit_name_capitalize} kit added to Playbook menu under #{category.humanize.titleize}.",
+                :green
+  end
+
+  def insert_component_into_category(menu, category, block)
+    lines = menu.lines
+    category_index = lines.index { |line| line.match?(/\A- category: #{Regexp.escape(category)}\s*\z/) }
+    return "#{menu.chomp}\n#{menu_category_block(category, block)}" unless category_index
+
+    next_category_index = lines[(category_index + 1)..]&.index { |line| line.start_with?("- category: ") }
+    insert_index = next_category_index ? category_index + 1 + next_category_index : lines.length
+
+    lines.insert(insert_index, block)
+    lines.join
+  end
+
+  def menu_category_block(category, component_block)
+    description = options[:category_description].presence || "#{category.humanize.titleize} components."
+    [
+      "- category: #{category}",
+      "  description: #{description.to_json}",
+      "  components:",
+      component_block.chomp,
+      "",
+    ].join("\n")
+  end
+
+  def menu_component_block
+    [
+      "  - name: #{@kit_name_underscore}",
+      "    platforms:",
+      *@platform_list.map { |platform| "    - #{platform}" },
+      "    description: #{@kit_description.to_json}",
+      "    status: #{@kit_status}",
+      "    icons_used: #{@icons_used}",
+      "    react_rendered: #{@react_rendered}",
+      "    enhanced_element_used: #{@enhanced_element_used}",
+      "",
+    ].join("\n")
+  end
+
+  def kit_schema
+    schema = {
+      "$schema" => "https://playbook.powerapp.cloud/schemas/kit-schema.json",
+      "name" => @kit_name_pascal,
+      "description" => @kit_description,
+      "platforms" => @platform_list.reject { |platform| platform == "swift" },
+      "props" => schema_props,
+      "globalProps" => true,
+      "usage" => schema_usage,
+    }
+    schema["platforms"] = @platform_list if schema["platforms"].empty?
+    schema
+  end
+
+  def schema_props
+    @unique_props.to_h do |prop|
+      schema_prop = {
+        "type" => schema_type(prop),
+        "platforms" => @platform_list.reject { |platform| platform == "swift" },
+      }
+      schema_prop["values"] = prop[:values] if prop[:type] == "enum"
+      default = default_for(prop)
+      schema_prop["default"] = default unless default.nil?
+      [prop[:react_name], schema_prop]
+    end
+  end
+
+  def schema_type(prop)
+    case prop[:type]
+    when "boolean" then "boolean"
+    when "number", "numeric" then "number"
+    when "array" then "array"
+    when "object" then "GenericObject"
+    when "date" then "Date"
+    when "function" then "function"
+    when "enum" then "enum"
+    else "string"
+    end
+  end
+
+  def schema_usage
+    usage = {}
+    if @react_kit
+      usage["react"] = {
+        "import" => "import { #{@kit_name_pascal} } from 'playbook-ui'",
+        "example" => "<#{@kit_name_pascal}#{react_usage_props} />",
+      }
+    end
+    if @rails_kit
+      usage["rails"] = {
+        "import" => nil,
+        "example" => "<%= pb_rails(\"#{@kit_name_underscore}\"#{rails_usage_props}) %>",
+      }
+    end
+    usage
+  end
+
+  def react_usage_props
+    example_props = @unique_props.select { |prop| prop[:type] == "enum" }.first(2)
+    return "" if example_props.empty?
+
+    " #{example_props.map { |prop| "#{prop[:react_name]}=\"#{prop[:values].first}\"" }.join(' ')}"
+  end
+
+  def rails_usage_props
+    example_props = @unique_props.select { |prop| prop[:type] == "enum" }.first(2)
+    return "" if example_props.empty?
+
+    props = example_props.map { |prop| "#{prop[:ruby_name]}: \"#{prop[:values].first}\"" }.join(", ")
+    ", props: { #{props} }"
+  end
+
+  def playground_config
+    config = {
+      "template" => playground_template,
+      "propTargets" => {},
+      "defaults" => @unique_props.filter_map do |prop|
+        default = default_for(prop)
+        [prop[:react_name], default] unless default.nil?
+      end.to_h,
+    }
+
+    if playground_has_children?
+      config["children"] = {
+        "editable" => true,
+        "default" => "#{@kit_name_capitalize} content",
+      }
+    end
+
+    config["groups"] = [{ "name" => "Props", "props" => @unique_props.map { |prop| prop[:react_name] } }] if @unique_props.any?
+    default_preset = { "name" => "Default", "props" => {} }
+    default_preset["children"] = "#{@kit_name_capitalize} content" if playground_has_children?
+    config["presets"] = [default_preset]
+    config["conditionals"] = {}
+    config["hints"] = {}
+    config
+  end
+
+  def playground_template
+    if playground_has_children?
+      "<#{@kit_name_pascal}{{props}}>{{children}}</#{@kit_name_pascal}>"
+    else
+      "<#{@kit_name_pascal}{{props}} />"
+    end
+  end
+
+  def playground_has_children?
+    @react_kit || PLAYGROUND_CHILDREN_KITS.include?(@kit_name_underscore) || @unique_props.any? { |prop| prop[:react_name] == "children" }
+  end
+
+  def default_for(prop)
+    case prop[:type]
+    when "boolean" then false
+    when "enum" then prop[:values].first
     end
   end
 

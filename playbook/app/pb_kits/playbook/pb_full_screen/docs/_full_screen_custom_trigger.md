@@ -1,0 +1,1 @@
+Use `useFullScreen` when the trigger belongs somewhere else on the page, such as a toolbar or table action area. Pass the hook state to `isFullscreen`, open the overlay from your external control, and reset the state with `onClose`.
