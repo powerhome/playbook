@@ -1,0 +1,93 @@
+<%
+  options = [
+    {
+      label: "Jasper Furniss",
+      value: "jasperFurniss",
+      territory: "PHL",
+      title: "Lead UX Engineer",
+      id: "jasper-furniss",
+      status: "Offline"
+    },
+    {
+      label: "Ramon Ruiz",
+      value: "ramonRuiz",
+      territory: "PHL",
+      title: "Senior UX Designer",
+      id: "ramon-ruiz",
+      status: "Unavailable",
+      disabled: true
+    },
+    {
+      label: "Carlos Lima",
+      value: "carlosLima",
+      territory: "PHL",
+      title: "Nitro Developer",
+      id: "carlos-lima",
+      status: "Online"
+    },
+    {
+      label: "Courtney Long",
+      value: "courtneyLong",
+      territory: "PHL",
+      title: "Lead UX Designer",
+      id: "courtney-long",
+      status: "Online"
+    }
+  ]
+%>
+
+<%
+  custom_display = capture do
+    pb_rails("flex", props: { align: "center" }) do
+      concat(pb_rails("avatar", props: { name: "", size: "xs", id: "dropdown-avatar" }))
+      concat(pb_rails("body", props: { text: "", size: "xs", margin_x: "xs", id: "dropdown-avatar-name" }))
+      concat(pb_rails("badge", props: { text: "", id: "dropdown-avatar-status" }))
+    end
+  end
+%>
+
+<%= pb_rails("dropdown", props: { id: "user-dropdown-disabled-options", options: options }) do %>
+  <%= pb_rails("dropdown/dropdown_trigger", props: { placeholder: "Select a User", custom_display: custom_display }) %>
+  <%= pb_rails("dropdown/dropdown_container") do %>
+    <% options.each do |option| %>
+      <%= pb_rails("dropdown/dropdown_option", props: { option: option }) do %>
+        <%= pb_rails("flex", props: { align: "center", justify: "between" }) do %>
+          <%= pb_rails("flex/flex_item") do %>
+            <%= pb_rails("user", props: { name: option[:label], align: "left", avatar: true, orientation: "horizontal", territory: option[:territory], title: option[:title] }) %>
+          <% end %>
+          <%= pb_rails("flex/flex_item") do %>
+            <%= pb_rails("badge", props: { rounded: true, dark: true, text: option[:status], variant: option[:status] == "Offline" ? "neutral" : option[:status] == "Online" ? "success" : "warning" }) %>
+          <% end %>
+        <% end %>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>
+
+<script>
+  document.addEventListener("pb:dropdown:selected", (e) => {
+    if (e.target.id !== "user-dropdown-disabled-options") return;
+
+    const option = e.detail;
+    const dropdown = e.target;
+    const display = dropdown.querySelector("[data-dropdown-trigger-custom-display]");
+    if (!display) return;
+
+    const nameEl = display.querySelector("#dropdown-avatar-name");
+    if (nameEl) nameEl.textContent = option.label;
+
+    const avatarWrapper = display.querySelector("#dropdown-avatar .avatar_wrapper");
+    if (avatarWrapper) {
+      const initials = (option.label[0] + option.label.split(" ").pop()[0]).toUpperCase();
+      avatarWrapper.dataset.name = option.label;
+      avatarWrapper.setAttribute("data-initials", initials);
+    }
+
+    const badgeEl = display.querySelector("#dropdown-avatar-status");
+    const variant = option.status === "Online" ? "success" : option.status === "Offline" ? "neutral" : "warning";
+    if (badgeEl) {
+      badgeEl.querySelector("span").textContent = option.status;
+      badgeEl.className = `pb_badge_kit_${variant}`;
+    }
+  });
+</script>

@@ -238,6 +238,46 @@ test('generated custom option', () => {
   expect(customOption).toBeInTheDocument()
 })
 
+test('disabled custom option does not select and marks child wrapper disabled', () => {
+  const onSelect = jest.fn()
+  const disabledOptions = [
+    {
+      label: 'Enabled',
+      value: 'enabled',
+      id: 'enabled',
+    },
+    {
+      label: 'Disabled',
+      value: 'disabled',
+      id: 'disabled',
+      disabled: true,
+    },
+  ]
+
+  render(
+    <Dropdown
+        data={{ testid: testId }}
+        onSelect={onSelect}
+        options={disabledOptions}
+    >
+      {disabledOptions.map((option) => (
+        <Dropdown.Option key={option.id}
+            option={option}
+        >
+          <span>{option.label}</span>
+        </Dropdown.Option>
+      ))}
+    </Dropdown>
+  )
+
+  const disabledChild = screen.getByText('Disabled')
+  fireEvent.click(disabledChild)
+
+  expect(onSelect).not.toHaveBeenCalled()
+  expect(disabledChild.parentElement).toHaveClass('dropdown_option_wrapper', 'disabled')
+  expect(disabledChild.closest('[aria-disabled="true"]')).toBeInTheDocument()
+})
+
 test('generated custom Trigger', () => {
   render (
     <Dropdown
@@ -832,4 +872,60 @@ describe("quickpick Last Month range when current month is shorter than the prev
     expect(formatDate(startDate)).toBe(formatDate(DateTime.getPreviousMonthStartDate(now)))
     expect(formatDate(endDate)).toBe(formatDate(DateTime.getPreviousMonthEndDate(now)))
   })
+})
+
+test('disabled prop prevents dropdown from opening', () => {
+  render(
+    <Dropdown
+        data={{ testid: testId }}
+        disabled
+        options={options}
+    />
+  )
+
+  const kit = screen.getByTestId(testId)
+  expect(kit).toHaveClass('disabled')
+
+  const trigger = kit.querySelector('.dropdown_trigger_wrapper_select_only')
+  const container = kit.querySelector('.pb_dropdown_container')
+
+  fireEvent.click(trigger)
+
+  expect(container).toHaveClass('close')
+  expect(container).not.toHaveClass('open')
+})
+
+test('disabled prop prevents dropdown from opening with keyboard', () => {
+  render(
+    <Dropdown
+        data={{ testid: testId }}
+        disabled
+        options={options}
+    />
+  )
+
+  const kit = screen.getByTestId(testId)
+  const trigger = kit.querySelector('.dropdown_trigger_wrapper_select_only')
+  const container = kit.querySelector('.pb_dropdown_container')
+
+  fireEvent.keyDown(trigger, { key: 'Enter' })
+
+  expect(container).toHaveClass('close')
+  expect(container).not.toHaveClass('open')
+})
+
+test('disabled prop disables autocomplete input', () => {
+  render(
+    <Dropdown
+        autocomplete
+        data={{ testid: testId }}
+        disabled
+        options={options}
+    />
+  )
+
+  const kit = screen.getByTestId(testId)
+  const input = kit.querySelector('.dropdown_input')
+
+  expect(input).toBeDisabled()
 })

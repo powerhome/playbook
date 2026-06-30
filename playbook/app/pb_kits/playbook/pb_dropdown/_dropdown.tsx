@@ -93,6 +93,7 @@ type DropdownProps = {
     closeOnClick?: "outside" | "inside" | "any";
     constrainHeight?: boolean;
     customQuickPickDates?: CustomQuickPickDates;
+    disabled?: boolean;
     formPillProps?: GenericObject;
     dark?: boolean;
     data?: { [key: string]: string };
@@ -139,6 +140,7 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
         dark = false,
         data = {},
         defaultValue = {},
+        disabled = false,
         error,
         htmlOptions = {},
         id,
@@ -164,6 +166,7 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
     const separatorsClass = separators ? '' : 'separators_hidden'
     const classes = classnames(
         buildCss("pb_dropdown", variant, separatorsClass),
+        disabled && "disabled",
         globalProps(props),
         className
     );
@@ -174,7 +177,7 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
         : (options || []);
     // ----------------------------------------------------------
 
-    const [isDropDownClosed, setIsDropDownClosed, toggleDropdown] = useDropdown(isClosed);
+    const [isDropDownClosed, setIsDropDownClosed, toggleDropdown] = useDropdown(disabled ? true : isClosed);
 
     // Use a suffix for the trigger ID to avoid conflict with the outer div's id
     const sanitizeForId = (str: string) =>
@@ -228,6 +231,7 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
 
     const handleLabelClick = (e: React.MouseEvent) => {
       e.stopPropagation();
+      if (disabled) return;
       if (selectId) {
         const trigger = document.getElementById(selectId);
         if (trigger) trigger.focus();
@@ -269,8 +273,8 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
 
     // dropdown to toggle with external control
     useEffect(() => {
-        setIsDropDownClosed(isClosed)
-    }, [isClosed])
+        setIsDropDownClosed(disabled ? true : isClosed)
+    }, [disabled, isClosed])
 
     const blankSelectionOption: GenericObject = blankSelection ? [{ label: blankSelection, value: "" }] : [];
     const optionsWithBlankSelection = blankSelectionOption.concat(dropdownOptions);
@@ -330,12 +334,14 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
 
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        if (disabled) return;
         setFilterItem(e.target.value);
         setIsDropDownClosed(false);
     };
 
 
       const handleOptionClick = (clickedItem: GenericObject) => {
+                if (disabled) return;
                 const shouldCloseOnClick = closeOnClick === "any" || closeOnClick === "inside";
                 
                 if (multiSelect) {
@@ -378,11 +384,13 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
              };
 
     const handleWrapperClick = () => {
+        if (disabled) return;
         autocomplete && inputRef?.current?.focus();
         toggleDropdown();
     };
 
     const handleBackspace = () => {
+      if (disabled) return;
       if (multiSelect) {
         setSelected([]);
         onSelect && onSelect([]);
@@ -502,6 +510,7 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
                     blankSelection,
                     clearable,
                     dropdownContainerRef,
+                    disabled,
                     error,
                     errorId,
                     filterItem,
@@ -564,7 +573,7 @@ let Dropdown = (props: DropdownProps, ref: any): React.ReactElement | null => {
                             }
                         }, 0);
                     }}
-                    onFocus={() => setIsInputFocused(true)}
+                    onFocus={() => !disabled && setIsInputFocused(true)}
                     ref={dropdownRef}
                 >
                     {children ? (

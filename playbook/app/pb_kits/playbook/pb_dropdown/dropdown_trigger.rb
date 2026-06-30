@@ -11,6 +11,8 @@ module Playbook
       prop :custom_display
       prop :autocomplete, type: Playbook::Props::Boolean,
                           default: false
+      prop :disabled, type: Playbook::Props::Boolean,
+                      default: false
       prop :multi_select, type: Playbook::Props::Boolean,
                           default: false
       prop :select_id, type: Playbook::Props::String
