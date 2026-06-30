@@ -56,7 +56,9 @@ const FullScreenView = (props: FullScreenViewProps) => {
   const headerClasses = classnames("fullscreen-header", {
     "fullscreen-header-sticky": stickyHeader,
   })
-  const contentClasses = classnames("fullscreen-content", `p_${contentPadding}`)
+  const contentClasses = classnames("fullscreen-content", `p_${contentPadding}`, {
+    "fullscreen-content-sticky": stickyHeader,
+  })
   const isControlled = typeof controlledIsFullscreen === "boolean"
 
   const internalFullscreen = useFullscreen({

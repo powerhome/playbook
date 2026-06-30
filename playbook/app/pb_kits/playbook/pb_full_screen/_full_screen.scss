@@ -10,7 +10,7 @@
     cursor: pointer;
     display: flex;
     padding: 2px 0;
-    
+
     &:hover {
       color: $primary;
     }
@@ -49,10 +49,12 @@
 
 .fullscreen-content {
   box-sizing: border-box;
-  height: calc(100vh - 44px);
   overflow: auto;
 }
 
+.fullscreen-content-sticky {
+  height: calc(100vh - 44px);
+}
 // Dark mode support
 .dark {
   .pb_full_screen_view {

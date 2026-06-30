@@ -58,6 +58,14 @@
         "react"
       ]
     },
+    "stickyHeader": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": true
+    },
     "trigger": {
       "type": "function",
       "platforms": [
@@ -69,25 +77,17 @@
       "platforms": [
         "react"
       ]
-    },
-    "stickyHeader": {
-      "type": "boolean",
-      "platforms": [
-        "react",
-        "rails"
-      ],
-      "default": true
     }
   },
   "globalProps": true,
   "usage": {
     "react": {
       "import": "import { FullScreen } from 'playbook-ui'",
-      "example": "<FullScreen headerTextStyling=\"title_4\"></FullScreen>"
+      "example": "<FullScreen contentPadding=\"none\" headerTextStyling=\"title_4\"></FullScreen>"
     },
     "rails": {
       "import": null,
-      "example": "<%= pb_rails(\"full_screen\", props: { header_text_styling: \"title_4\" }) %>"
+      "example": "<%= pb_rails(\"full_screen\", props: { content_padding: \"none\", header_text_styling: \"title_4\" }) %>"
     }
   }
 }
