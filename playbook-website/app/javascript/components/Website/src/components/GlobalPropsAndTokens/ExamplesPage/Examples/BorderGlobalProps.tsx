@@ -26,7 +26,7 @@ const borderValues: { label: string; name: BorderValue; description: string }[] 
   { label: "Default", name: "default", description: "1px default" },
   { label: "Active", name: "active", description: "1px active" },
   { label: "Default Thick", name: "default_thick", description: "2px default" },
-  { label: "Active Thickn", name: "active_thick", description: "2px active" },
+  { label: "Active Thick", name: "active_thick", description: "2px active" },
   { label: "Default Thicker", name: "default_thicker", description: "4px default" },
   { label: "Active Thicker", name: "active_thicker", description: "4px active" },
 ];
