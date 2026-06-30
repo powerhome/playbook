@@ -10,8 +10,7 @@
     "contentPadding": {
       "type": "enum",
       "platforms": [
-        "react",
-        "rails"
+        "react"
       ],
       "values": [
         "none",
@@ -21,8 +20,7 @@
         "md",
         "lg",
         "xl"
-      ],
-      "default": "lg"
+      ]
     },
     "headerText": {
       "type": "string",
@@ -61,10 +59,8 @@
     "stickyHeader": {
       "type": "boolean",
       "platforms": [
-        "react",
-        "rails"
-      ],
-      "default": true
+        "react"
+      ]
     },
     "trigger": {
       "type": "function",
