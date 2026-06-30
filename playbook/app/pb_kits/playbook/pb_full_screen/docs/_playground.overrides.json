@@ -1,6 +1,32 @@
 {
-  "template": "<FullScreen{{props}} />",
-  "propTargets": {},
+  "children": {
+    "editable": true,
+    "default": "<Card padding=\"md\">\n  <Title size={4} text=\"Enrollment Review\" />\n  <Body marginTop=\"xs\" text=\"Open fullscreen to review a focused workspace with enough content to test header behavior and padding.\" />\n</Card>"
+  },
+  "structureModes": {
+    "default": "trigger_prop",
+    "modes": {
+      "trigger_prop": {
+        "label": "Trigger Prop",
+        "template": "<FullScreen{{props}}>\n  {{children}}\n</FullScreen>",
+        "children": "<Card padding=\"md\">\n  <Title size={4} text=\"Enrollment Review\" />\n  <Body marginTop=\"xs\" text=\"Open fullscreen to review a focused workspace with enough content to test header behavior and padding.\" />\n</Card>",
+        "props": {
+          "headerText": "Enrollment Review",
+          "trigger": "({ onClick, isOpen }) => (\n  <Button\n    marginBottom=\"md\"\n    onClick={onClick}\n  >\n    {isOpen ? \"Exit Fullscreen\" : \"Enter Fullscreen\"}\n  </Button>\n)"
+        }
+      },
+      "hook_trigger": {
+        "label": "Hook Trigger",
+        "template": "<FullScreen\n  isFullscreen={isFullscreen}\n  onClose={() => setIsFullscreen(false)}{{props}}\n>\n  {{children}}\n</FullScreen>",
+        "children": "<Card padding=\"md\">\n  <Title size={4} text=\"Enrollment Review\" />\n  <Body marginTop=\"xs\" text=\"The hook lets the trigger live anywhere while FullScreen owns the overlay content.\" />\n</Card>",
+        "imports": ["useFullScreen"],
+        "props": {
+          "headerText": "Enrollment Review"
+        },
+        "wrapper": "const FullScreenPlaygroundExample = () => {\n  const [isFullscreen, setIsFullscreen, toggleFullScreen] = useFullScreen(false)\n\n  return (\n    <>\n      <Flex justify=\"end\">\n        <CircleIconButton\n          icon=\"expand\"\n          marginBottom=\"md\"\n          onClick={toggleFullScreen}\n        />\n      </Flex>\n      {{component}}\n    </>\n  )\n}\n\n<FullScreenPlaygroundExample />"
+      }
+    }
+  },
   "defaults": {
     "contentPadding": "lg",
     "escToExit": true,
@@ -13,31 +39,19 @@
   "groups": [
     {
       "name": "Header",
-      "props": [
-        "headerText",
-        "headerTextStyling",
-        "stickyHeader"
-      ]
+      "props": ["headerText", "headerTextStyling", "stickyHeader"]
     },
     {
       "name": "Content",
-      "props": [
-        "contentPadding"
-      ]
+      "props": ["contentPadding"]
     },
     {
       "name": "Behavior",
-      "props": [
-        "escToExit"
-      ]
+      "props": ["escToExit"]
     },
     {
       "name": "Callbacks",
-      "props": [
-        "trigger",
-        "onOpen",
-        "onClose"
-      ]
+      "props": ["trigger", "onOpen", "onClose"]
     }
   ],
   "presets": [
@@ -119,37 +133,5 @@
       "type": "info"
     }
   },
-  "children": {
-    "editable": true,
-    "default": "<Card padding=\"md\">\n  <Title size={4} text=\"Enrollment Review\" />\n  <Body marginTop=\"xs\" text=\"Open fullscreen to review a focused workspace with enough content to test header behavior and padding.\" />\n</Card>"
-  },
-  "structureModes": {
-    "default": "trigger_prop",
-    "modes": {
-      "trigger_prop": {
-        "label": "Trigger Prop",
-        "template": "<FullScreen{{props}}>\n  {{children}}\n</FullScreen>",
-        "children": "<Card padding=\"md\">\n  <Title size={4} text=\"Enrollment Review\" />\n  <Body marginTop=\"xs\" text=\"Open fullscreen to review a focused workspace with enough content to test header behavior and padding.\" />\n</Card>",
-        "props": {
-          "headerText": "Enrollment Review",
-          "trigger": "({ onClick, isOpen }) => (\n  <Button\n    marginBottom=\"md\"\n    onClick={onClick}\n  >\n    {isOpen ? \"Exit Fullscreen\" : \"Enter Fullscreen\"}\n  </Button>\n)"
-        }
-      },
-      "hook_trigger": {
-        "label": "Hook Trigger",
-        "template": "<FullScreen\n  isFullscreen={isFullscreen}\n  onClose={() => setIsFullscreen(false)}{{props}}\n>\n  {{children}}\n</FullScreen>",
-        "children": "<Card padding=\"md\">\n  <Title size={4} text=\"Enrollment Review\" />\n  <Body marginTop=\"xs\" text=\"The hook lets the trigger live anywhere while FullScreen owns the overlay content.\" />\n</Card>",
-        "imports": [
-          "useFullScreen"
-        ],
-        "props": {
-          "headerText": "Enrollment Review"
-        },
-        "wrapper": "const FullScreenPlaygroundExample = () => {\n  const [isFullscreen, setIsFullscreen, toggleFullScreen] = useFullScreen(false)\n\n  return (\n    <>\n      <Flex justify=\"end\">\n        <CircleIconButton\n          icon=\"expand\"\n          marginBottom=\"md\"\n          onClick={toggleFullScreen}\n        />\n      </Flex>\n      {{component}}\n    </>\n  )\n}\n\n<FullScreenPlaygroundExample />"
-      }
-    }
-  },
-  "hiddenProps": [
-    "isFullscreen"
-  ]
+  "hiddenProps": ["isFullscreen"]
 }

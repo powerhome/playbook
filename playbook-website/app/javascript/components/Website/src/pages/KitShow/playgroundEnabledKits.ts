@@ -36,6 +36,7 @@ export const PLAYGROUND_ENABLED_KITS = [
   "flex",
   "form_group",
   "form_pill",
+  "full_screen",
   "hashtag",
   "highlight",
   "home_address_street",
