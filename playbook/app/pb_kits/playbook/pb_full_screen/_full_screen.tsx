@@ -138,8 +138,9 @@ const FullScreenView = (props: FullScreenViewProps) => {
               color="link"
               fixedWidth
               icon="close"
-              padding="xxs"
-              size="1x"
+              paddingX="xs"
+              paddingY="xxs"
+              size="lg"
           />
         </button>
       </Flex>
