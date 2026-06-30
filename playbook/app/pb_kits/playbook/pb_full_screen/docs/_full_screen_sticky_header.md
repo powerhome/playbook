@@ -1,1 +1,1 @@
-The fullscreen header is sticky by default. Set `stickyHeader` to `false` when the header should scroll with the fullscreen content.
+The fullscreen header stays sticky by default, keeping the title and close action visible while content scrolls. Set `stickyHeader` to `false` when the header should move with the rest of the fullscreen content.

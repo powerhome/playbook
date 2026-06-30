@@ -1,1 +1,1 @@
-Use Full Screen to expand important workflows into a focused overlay. Pass a `trigger` render function to define the control that opens and closes fullscreen mode.
+Use the `trigger` prop for the simplest setup. The trigger render function receives the fullscreen state and toggle handler, so the control can open and close the overlay without managing separate state.
