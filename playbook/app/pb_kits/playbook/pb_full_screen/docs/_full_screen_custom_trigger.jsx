@@ -6,40 +6,40 @@ import Flex from "../../pb_flex/_flex";
 import MOCK_DATA from "../../pb_advanced_table/docs/advanced_table_mock_data.json";
 import CircleIconButton from "../../pb_circle_icon_button/_circle_icon_button";
 
+const columnDefinitions = [
+  {
+    accessor: "year",
+    label: "Year",
+    cellAccessors: ["quarter", "month", "day"],
+  },
+  {
+    accessor: "newEnrollments",
+    label: "New Enrollments",
+  },
+  {
+    accessor: "scheduledMeetings",
+    label: "Scheduled Meetings",
+  },
+  {
+    accessor: "attendanceRate",
+    label: "Attendance Rate",
+  },
+  {
+    accessor: "completedClasses",
+    label: "Completed Classes",
+  },
+  {
+    accessor: "classCompletionRate",
+    label: "Class Completion Rate",
+  },
+  {
+    accessor: "graduatedStudents",
+    label: "Graduated Students",
+  },
+];
+
 const FullScreenCustomTrigger = (props) => {
   const [isFullscreen, setIsFullscreen] = useFullScreen(false);
-
-  const columnDefinitions = [
-    {
-      accessor: "year",
-      label: "Year",
-      cellAccessors: ["quarter", "month", "day"],
-    },
-    {
-      accessor: "newEnrollments",
-      label: "New Enrollments",
-    },
-    {
-      accessor: "scheduledMeetings",
-      label: "Scheduled Meetings",
-    },
-    {
-      accessor: "attendanceRate",
-      label: "Attendance Rate",
-    },
-    {
-      accessor: "completedClasses",
-      label: "Completed Classes",
-    },
-    {
-      accessor: "classCompletionRate",
-      label: "Class Completion Rate",
-    },
-    {
-      accessor: "graduatedStudents",
-      label: "Graduated Students",
-    },
-  ];
 
   return (
     <>

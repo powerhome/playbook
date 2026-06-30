@@ -5,46 +5,65 @@ import AdvancedTable from "../../pb_advanced_table/_advanced_table";
 import Button from "../../pb_button/_button";
 import Filter from "../../pb_filter/_filter";
 import TextInput from "../../pb_text_input/_text_input";
+import Dropdown from "../../pb_dropdown/_dropdown";
 import Flex from "../../pb_flex/_flex";
 import SectionSeparator from "../../pb_section_separator/_section_separator";
 import Card from "../../pb_card/_card";
 import MOCK_DATA from "../../pb_advanced_table/docs/advanced_table_mock_data.json";
 
+const dropdownOptions = [
+  {
+    label: "United States",
+    value: "unitedStates",
+    id: "us"
+  },
+  {
+    label: "Canada",
+    value: "canada",
+    id: "ca"
+  },
+  {
+    label: "Pakistan",
+    value: "pakistan",
+    id: "pk"
+  }
+];  
+
+const columnDefinitions = [
+  {
+    accessor: "year",
+    label: "Year",
+    cellAccessors: ["quarter", "month", "day"],
+  },
+  {
+    accessor: "newEnrollments",
+    label: "New Enrollments",
+  },
+  {
+    accessor: "scheduledMeetings",
+    label: "Scheduled Meetings",
+  },
+  {
+    accessor: "attendanceRate",
+    label: "Attendance Rate",
+  },
+  {
+    accessor: "completedClasses",
+    label: "Completed Classes",
+  },
+  {
+    accessor: "classCompletionRate",
+    label: "Class Completion Rate",
+  },
+  {
+    accessor: "graduatedStudents",
+    label: "Graduated Students",
+  },
+];
+
 const FullScreenTableAndFilter = (props) => {
   const [isFullscreen, setIsFullscreen] = useFullScreen(false);
   const [territory, setTerritory] = useState("");
-
-  const columnDefinitions = [
-    {
-      accessor: "year",
-      label: "Year",
-      cellAccessors: ["quarter", "month", "day"],
-    },
-    {
-      accessor: "newEnrollments",
-      label: "New Enrollments",
-    },
-    {
-      accessor: "scheduledMeetings",
-      label: "Scheduled Meetings",
-    },
-    {
-      accessor: "attendanceRate",
-      label: "Attendance Rate",
-    },
-    {
-      accessor: "completedClasses",
-      label: "Completed Classes",
-    },
-    {
-      accessor: "classCompletionRate",
-      label: "Class Completion Rate",
-    },
-    {
-      accessor: "graduatedStudents",
-      label: "Graduated Students",
-    },
-  ];
 
   return (
     <>
@@ -89,6 +108,11 @@ const FullScreenTableAndFilter = (props) => {
                       label="Territory ID"
                       onChange={(event) => setTerritory(event.target.value)}
                       value={territory}
+                  />
+                  <Dropdown
+                      label="Territory"
+                      marginBottom="sm"
+                      options={dropdownOptions}
                   />
                   <Flex spacing="between">
                     <Button
