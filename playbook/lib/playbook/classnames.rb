@@ -56,6 +56,7 @@ module Playbook
       append_classname(css, right_props)
       append_classname(css, bottom_props)
       append_classname(css, vertical_align_props)
+      append_classname(css, border_props)
 
       # Height utilities
       append_classname(css, height_props)

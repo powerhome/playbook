@@ -1,0 +1,262 @@
+@import "../tokens/colors";
+
+$pb-border-util-width: 1px;
+$pb-border-thick-width: 2px;
+$pb-border-thicker-width: 4px;
+
+// suffix is the map key → class .border_<key>
+$pb-border-variants: (
+  default: ($input_border_default, $input_border_default_dark, $pb-border-util-width, solid),
+  active: ($input_border_state, $input_border_state_dark, $pb-border-util-width, solid),
+  default_thick: ($input_border_default, $input_border_default_dark, $pb-border-thick-width, solid),
+  default_thicker: ($input_border_default, $input_border_default_dark, $pb-border-thicker-width, solid),
+  active_thick: ($input_border_state, $input_border_state_dark, $pb-border-thick-width, solid),
+  active_thicker: ($input_border_state, $input_border_state_dark, $pb-border-thicker-width, solid),
+);
+
+@mixin pb-border-variant-shorthand($light, $dark, $width, $style) {
+  border-width: $width;
+  border-style: $style;
+  border-color: $light;
+
+  .dark &,
+  &.dark {
+    border-color: $dark;
+  }
+}
+
+@mixin pb-border-variant-buttons($suffix, $light, $dark, $width, $style) {
+  .pb_button_kit.border_#{$suffix} {
+    @include pb-border-variant-shorthand($light, $dark, $width, $style);
+  }
+
+  .pb_button_kit.border_top_#{$suffix} {
+    border-top-width: $width;
+    border-top-style: $style;
+    border-top-color: $light;
+
+    .dark &,
+    &.dark {
+      border-top-color: $dark;
+    }
+  }
+
+  .pb_button_kit.border_bottom_#{$suffix} {
+    border-bottom-width: $width;
+    border-bottom-style: $style;
+    border-bottom-color: $light;
+
+    .dark &,
+    &.dark {
+      border-bottom-color: $dark;
+    }
+  }
+
+  .pb_button_kit.border_left_#{$suffix} {
+    border-left-width: $width;
+    border-left-style: $style;
+    border-left-color: $light;
+
+    .dark &,
+    &.dark {
+      border-left-color: $dark;
+    }
+  }
+
+  .pb_button_kit.border_right_#{$suffix} {
+    border-right-width: $width;
+    border-right-style: $style;
+    border-right-color: $light;
+
+    .dark &,
+    &.dark {
+      border-right-color: $dark;
+    }
+  }
+
+  .pb_button_kit.border_x_#{$suffix} {
+    border-left-width: $width;
+    border-right-width: $width;
+    border-left-style: $style;
+    border-right-style: $style;
+    border-left-color: $light;
+    border-right-color: $light;
+
+    .dark &,
+    &.dark {
+      border-left-color: $dark;
+      border-right-color: $dark;
+    }
+  }
+
+  .pb_button_kit.border_y_#{$suffix} {
+    border-top-width: $width;
+    border-bottom-width: $width;
+    border-top-style: $style;
+    border-bottom-style: $style;
+    border-top-color: $light;
+    border-bottom-color: $light;
+
+    .dark &,
+    &.dark {
+      border-top-color: $dark;
+      border-bottom-color: $dark;
+    }
+  }
+}
+
+@each $suffix, $cfg in $pb-border-variants {
+  $light: nth($cfg, 1);
+  $dark: nth($cfg, 2);
+  $width: nth($cfg, 3);
+  $bs: nth($cfg, 4);
+
+  .border_#{$suffix} {
+    @include pb-border-variant-shorthand($light, $dark, $width, $bs);
+  }
+
+  .border_top_#{$suffix} {
+    border-top-width: $width;
+    border-top-style: $bs;
+    border-top-color: $light;
+
+    .dark &,
+    &.dark {
+      border-top-color: $dark;
+    }
+  }
+
+  .border_bottom_#{$suffix} {
+    border-bottom-width: $width;
+    border-bottom-style: $bs;
+    border-bottom-color: $light;
+
+    .dark &,
+    &.dark {
+      border-bottom-color: $dark;
+    }
+  }
+
+  .border_left_#{$suffix} {
+    border-left-width: $width;
+    border-left-style: $bs;
+    border-left-color: $light;
+
+    .dark &,
+    &.dark {
+      border-left-color: $dark;
+    }
+  }
+
+  .border_right_#{$suffix} {
+    border-right-width: $width;
+    border-right-style: $bs;
+    border-right-color: $light;
+
+    .dark &,
+    &.dark {
+      border-right-color: $dark;
+    }
+  }
+
+  .border_x_#{$suffix} {
+    border-left-width: $width;
+    border-right-width: $width;
+    border-left-style: $bs;
+    border-right-style: $bs;
+    border-left-color: $light;
+    border-right-color: $light;
+
+    .dark &,
+    &.dark {
+      border-left-color: $dark;
+      border-right-color: $dark;
+    }
+  }
+
+  .border_y_#{$suffix} {
+    border-top-width: $width;
+    border-bottom-width: $width;
+    border-top-style: $bs;
+    border-bottom-style: $bs;
+    border-top-color: $light;
+    border-bottom-color: $light;
+
+    .dark &,
+    &.dark {
+      border-top-color: $dark;
+      border-bottom-color: $dark;
+    }
+  }
+
+  @include pb-border-variant-buttons($suffix, $light, $dark, $width, $bs);
+}
+
+.border_none {
+  border-top-width: 0;
+  border-right-width: 0;
+  border-bottom-width: 0;
+  border-left-width: 0;
+}
+
+.border_top_none {
+  border-top-width: 0;
+}
+
+.border_bottom_none {
+  border-bottom-width: 0;
+}
+
+.border_left_none {
+  border-left-width: 0;
+}
+
+.border_right_none {
+  border-right-width: 0;
+}
+
+.border_x_none {
+  border-left-width: 0;
+  border-right-width: 0;
+}
+
+.border_y_none {
+  border-top-width: 0;
+  border-bottom-width: 0;
+}
+
+// Specific kit overrides:
+// Buttons need additional css because pb_button_variant sets border-color transparent and base uses border-width 0.
+
+.pb_button_kit.border_none {
+  border-top-width: 0;
+  border-right-width: 0;
+  border-bottom-width: 0;
+  border-left-width: 0;
+}
+
+.pb_button_kit.border_top_none {
+  border-top-width: 0;
+}
+
+.pb_button_kit.border_bottom_none {
+  border-bottom-width: 0;
+}
+
+.pb_button_kit.border_left_none {
+  border-left-width: 0;
+}
+
+.pb_button_kit.border_right_none {
+  border-right-width: 0;
+}
+
+.pb_button_kit.border_x_none {
+  border-left-width: 0;
+  border-right-width: 0;
+}
+
+.pb_button_kit.border_y_none {
+  border-top-width: 0;
+  border-bottom-width: 0;
+}
