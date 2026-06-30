@@ -84,14 +84,14 @@ export const CustomCell = ({
           >
             {row.getIsExpanded() ? (
               <Icon cursor="pointer"
-                  htmlOptions={{ style: { width: "16.656px", height: "13.328px" } }}
+                  htmlOptions={{ width: "1.25em", height: "1em" }}
                   icon="circle-play"
                   rotation={90}
               />
             ) : (
               <Icon cursor="pointer"
-                  htmlOptions={{ style: { width: "16.656px", height: "13.328px" } }}
-                  icon="circle-play"    
+                  htmlOptions={{ width: "1.25em", height: "1em" }}
+                  icon="circle-play"
                />
             )}
           </button>
