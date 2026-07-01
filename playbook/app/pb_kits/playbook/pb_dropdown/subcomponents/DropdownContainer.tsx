@@ -1,5 +1,4 @@
 import React, { useContext } from "react";
-import { createPortal } from "react-dom";
 import classnames from "classnames";
 import {
   buildAriaProps,
@@ -10,7 +9,6 @@ import {
 import { globalProps, GlobalProps } from "../../utilities/globalProps";
 
 import DropdownContext from "../context";
-import { setFloatingOwnerAttribute } from "../../utilities/floatingPortalHosts";
 
 import List from "../../pb_list/_list";
 import ListItem from "../../pb_list/_list_item";
@@ -44,15 +42,11 @@ const DropdownContainer = (props: DropdownContainerProps) => {
 
   const {
     dropdownContainerRef,
-    error,
     filteredOptions,
     filterItem,
-    floatingOwnerId,
-    floatingShellClasses,
     handleChange,
     inputRef,
     isDropDownClosed,
-    portalHost,
     setFocusedOptionIndex,
   } = useContext(DropdownContext);
 
@@ -67,16 +61,15 @@ const DropdownContainer = (props: DropdownContainerProps) => {
     className
   );
 
-  const inner = (
+  return (
     <div {...ariaProps} 
         {...dataProps} 
         {...htmlProps}
         className={classes} 
-        data-pb-dropdown-portal={portalHost ? "true" : undefined}
         id={id}
         onMouseEnter={() => setFocusedOptionIndex(-1)}
         ref={dropdownContainerRef}
-        style={portalHost ? undefined : { position: "absolute"}}
+        style={{ position: "absolute"}}
     >
       {searchbar && (
         <TextInput dark={dark}
@@ -113,36 +106,6 @@ const DropdownContainer = (props: DropdownContainerProps) => {
         </List>
     </div>
   );
-
-  if (portalHost) {
-    if (isDropDownClosed) {
-      return null;
-    }
-    return createPortal(
-      <div
-          className={floatingShellClasses}
-          ref={(node) => setFloatingOwnerAttribute(node, floatingOwnerId)}
-      >
-        <div
-            className={classnames("dropdown_wrapper", error && "error")}
-            style={{
-              background: "transparent",
-              border: "none",
-              boxShadow: "none",
-              margin: 0,
-              minHeight: 0,
-              padding: 0,
-              position: "static",
-            }}
-        >
-          {inner}
-        </div>
-      </div>,
-      portalHost,
-    );
-  }
-
-  return inner;
 };
 
 export default DropdownContainer;
