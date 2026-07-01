@@ -36,9 +36,9 @@ require "playbook/max_height"
 require "playbook/border"
 
 module Playbook
-  include ActionView::Helpers
-
   class KitBase < ViewComponent::Base
+    include ActionView::Helpers
+
     include Playbook::PbKitHelper
     include Playbook::Props
     include Playbook::Classnames
