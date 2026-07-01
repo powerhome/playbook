@@ -56,7 +56,7 @@ const DialogHeader = (props: DialogHeaderProps): React.ReactElement => {
         {children}
         {closeable &&
           <CloseIcon
-              onClose={api?.onClose}
+              onClose={api.onClose}
           />
         }
         

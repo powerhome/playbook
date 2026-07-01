@@ -1,7 +1,6 @@
 import PbEnhancedElement from "../pb_enhanced_element";
 import { PbDropdownKeyboard } from "./keyboard_accessibility";
 import { setArrowVisibility, toggleVisibility } from "../utilities/domHelpers";
-import { subscribeFloatingKitReposition, positionDropdownPortalToWrapper } from "../utilities/floatingPortalHosts";
 
 const DROPDOWN_SELECTOR = "[data-pb-dropdown]";
 const TRIGGER_SELECTOR = "[data-dropdown-trigger]";
@@ -18,72 +17,6 @@ const SEARCH_BAR_SELECTOR = "[data-dropdown-search]";
 const CLEAR_ICON_SELECTOR = "[data-dropdown-clear-icon]";
 const LABEL_SELECTOR = '[data-dropdown="pb-dropdown-label"]';
 
-// Portal host + positioning (parity with utilities/floatingPortalHosts.ts + React Dropdown).
-const PB_DIALOG_FLOATING_ROOT = "[data-pb-dialog-floating-root]";
-const PB_FLOATING_OWNER_ATTR = "data-pb-floating-owner";
-
-function resolveFloatingOwnerId(fromElement) {
-  if (!fromElement) return null;
-  const marked = fromElement.closest(`[${PB_FLOATING_OWNER_ATTR}]`);
-  if (marked) return marked.getAttribute(PB_FLOATING_OWNER_ATTR);
-  const popoverEl = fromElement.closest(".pb_popover_tooltip");
-  if (popoverEl?.id) return popoverEl.id;
-  const dialogEl = fromElement.closest("dialog, .pb_dialog");
-  if (dialogEl?.id) return dialogEl.id;
-  return null;
-}
-
-const DIALOG_DIRECT_FLOATING_ROOT = `:scope > ${PB_DIALOG_FLOATING_ROOT}`;
-const POPOVER_FLOATING_ROOT = `:scope > .pb_popover_body > ${PB_DIALOG_FLOATING_ROOT}`;
-
-function resolveDialogFloatingPortalHost(fromElement) {
-  if (!fromElement) return null;
-  const dialogEl = fromElement.closest("dialog");
-  if (dialogEl) {
-    return dialogEl.querySelector(DIALOG_DIRECT_FLOATING_ROOT) || dialogEl;
-  }
-  const reactModalShell = fromElement.closest(".pb_dialog");
-  if (reactModalShell) {
-    return (
-      reactModalShell.querySelector(DIALOG_DIRECT_FLOATING_ROOT) ||
-      reactModalShell
-    );
-  }
-  const popoverEl = fromElement.closest(".pb_popover_tooltip");
-  if (popoverEl) {
-    return (
-      popoverEl.querySelector(POPOVER_FLOATING_ROOT) ||
-      popoverEl.querySelector(PB_DIALOG_FLOATING_ROOT) ||
-      popoverEl
-    );
-  }
-  return null;
-}
-
-function resolvePortaledKitHost(kitRoot, dialogCtxTarget) {
-  if (typeof document === "undefined") return null;
-  if (kitRoot && kitRoot.closest(".pb_popover_tooltip")) {
-    return document.body;
-  }
-  return (
-    resolveDialogFloatingPortalHost(kitRoot) || dialogCtxTarget || null
-  );
-}
-
-function clearDropdownPortalPanelStyles(panel) {
-  [
-    "position",
-    "left",
-    "top",
-    "right",
-    "bottom",
-    "width",
-    "z-index",
-    "margin",
-  ].forEach((prop) => {
-    panel.style.removeProperty(prop);
-  });
-}
 
 export default class PbDropdown extends PbEnhancedElement {
   static get selector() {
@@ -125,12 +58,6 @@ export default class PbDropdown extends PbEnhancedElement {
     };
   }
 
-  /** Options live under `[data-dropdown-container]`; use this when the menu is portaled to body. */
-  queryAllOptions() {
-    const root = this.target || this.element;
-    return root.querySelectorAll(OPTION_SELECTOR);
-  }
-
   selectedOptions = new Set();
   clearBtn = null;
 
@@ -138,19 +65,6 @@ export default class PbDropdown extends PbEnhancedElement {
     // Store instance on element for DatePicker sync
     this.element._pbDropdownInstance = this;
     this.cacheElements();
-
-    this.portalHost = null;
-    this.useMenuPortal = false;
-    this.floatingOwnerId = null;
-    this._floatingResolved = false;
-    this.portalShell = null;
-    this._portalParent = null;
-    this._portalNext = null;
-    this.boundApplyPortalPosition = () => {
-      if (this.target?.classList.contains("open")) {
-        this.applyPortalPosition();
-      }
-    };
 
     this.keyboardHandler = new PbDropdownKeyboard(this);
     this.isDisabled = this.element.dataset.pbDropdownDisabled === "true";
@@ -205,8 +119,6 @@ export default class PbDropdown extends PbEnhancedElement {
   }
 
   disconnect() {
-    this.unmountPortalMenu();
-
     // Clean up stored instance reference
     if (this.element._pbDropdownInstance === this) {
       delete this.element._pbDropdownInstance
@@ -390,20 +302,12 @@ export default class PbDropdown extends PbEnhancedElement {
           el.offsetHeight; // force reflow
           el.style.height = el.scrollHeight + "px";
         }
-        if (this.useMenuPortal) {
-          this.applyPortalPosition();
-        }
       });
     }
   }
 
   adjustDropdownPosition(container) {
     if (!container) return;
-
-    if (this.useMenuPortal) {
-      this.applyPortalPosition();
-      return;
-    }
 
     const wrapper = this.dropdownWrapper;
     if (!wrapper) return;
@@ -428,93 +332,11 @@ export default class PbDropdown extends PbEnhancedElement {
     }
   }
 
-  ensureFloatingPortalConfig() {
-    if (this._floatingResolved) return;
-    this.portalHost = resolvePortaledKitHost(this.element, null);
-    this.floatingOwnerId = resolveFloatingOwnerId(this.element);
-    this.useMenuPortal = Boolean(this.portalHost);
-    this._floatingResolved = true;
-  }
-
-  mountPortalMenu(container) {
-    if (!this.useMenuPortal || !this.portalHost) return;
-    if (container.dataset.pbDropdownPortaled === "true") return;
-
-    this._portalParent = container.parentNode;
-    this._portalNext = container.nextSibling;
-
-    const shell = document.createElement("div");
-    shell.className = `${this.element.className} pb_dropdown_floating_shell`.trim();
-    if (this.floatingOwnerId) {
-      shell.setAttribute(PB_FLOATING_OWNER_ATTR, this.floatingOwnerId);
-    }
-
-    const innerWrap = document.createElement("div");
-    const hasError = this.dropdownWrapper?.classList.contains("error");
-    innerWrap.className = hasError ? "dropdown_wrapper error" : "dropdown_wrapper";
-    Object.assign(innerWrap.style, {
-      background: "transparent",
-      border: "none",
-      boxShadow: "none",
-      margin: "0",
-      minHeight: "0",
-      padding: "0",
-      position: "static",
-    });
-
-    innerWrap.appendChild(container);
-    shell.appendChild(innerWrap);
-    this.portalHost.appendChild(shell);
-    this.portalShell = shell;
-    container.dataset.pbDropdownPortaled = "true";
-  }
-
-  unmountPortalMenu() {
-    if (this._unsubscribePortalReposition) {
-      this._unsubscribePortalReposition();
-      this._unsubscribePortalReposition = null;
-    }
-    if (this.boundApplyPortalPosition) {
-      window.removeEventListener("resize", this.boundApplyPortalPosition);
-    }
-    if (!this.target || this.target.dataset.pbDropdownPortaled !== "true") {
-      return;
-    }
-    delete this.target.dataset.pbDropdownPortaled;
-    clearDropdownPortalPanelStyles(this.target);
-
-    if (this._portalParent && this.target) {
-      if (this._portalNext && this._portalNext.parentNode === this._portalParent) {
-        this._portalParent.insertBefore(this.target, this._portalNext);
-      } else {
-        this._portalParent.appendChild(this.target);
-      }
-    }
-    this._portalParent = null;
-    this._portalNext = null;
-
-    if (this.portalShell) {
-      this.portalShell.remove();
-    }
-    this.portalShell = null;
-  }
-
-  applyPortalPosition() {
-    if (!this.useMenuPortal || !this.portalHost || !this.target || !this.dropdownWrapper) {
-      return;
-    }
-    positionDropdownPortalToWrapper({
-      panel: this.target,
-      wrapperViewportRect: this.dropdownWrapper.getBoundingClientRect(),
-      positionHost: this.portalHost,
-    });
-  }
-
   handleSearch(term = "") {
     if (this.isDisabled) return;
     const lcTerm = term.toLowerCase();
     let hasMatch = false;
-    this.queryAllOptions().forEach((opt) => {
+    this.element.querySelectorAll(OPTION_SELECTOR).forEach((opt) => {
       //make it so that if the option is selected, it will not show up in the search results
       if (
         this.isMultiSelect &&
@@ -542,7 +364,7 @@ export default class PbDropdown extends PbEnhancedElement {
   }
 
   showNoOptionsMessage() {
-    if (this.target?.querySelector(".dropdown_no_options")) return;
+    if (this.element.querySelector(".dropdown_no_options")) return;
 
     const noOptionElement = document.createElement("div");
     noOptionElement.className =
@@ -553,7 +375,7 @@ export default class PbDropdown extends PbEnhancedElement {
   }
 
   removeNoOptionsMessage() {
-    const existing = this.target?.querySelector(".dropdown_no_options");
+    const existing = this.element.querySelector(".dropdown_no_options");
     if (existing) {
       existing.remove();
     }
@@ -644,7 +466,7 @@ export default class PbDropdown extends PbEnhancedElement {
   setSelectionByOptionId(optionId) {
     if (this.isMultiSelect) return;
     const hiddenInput = this.baseInput;
-    const optionEls = Array.from(this.queryAllOptions());
+    const optionEls = Array.from(this.element.querySelectorAll(OPTION_SELECTOR));
     const selectedOption = optionEls.find((opt) => {
       try {
         return JSON.parse(opt.dataset.dropdownOptionLabel).id === optionId;
@@ -708,7 +530,7 @@ export default class PbDropdown extends PbEnhancedElement {
   // Set multi-select dropdown to the options with the given ids. Invalid ids are skipped.
   setSelectionByOptionIds(optionIds) {
     if (!this.isMultiSelect || !optionIds.length) return;
-    const optionEls = Array.from(this.queryAllOptions());
+    const optionEls = Array.from(this.element.querySelectorAll(OPTION_SELECTOR));
     this.selectedOptions.clear();
     optionEls.forEach((opt) => {
       opt.classList.remove("pb_dropdown_option_selected");
@@ -750,7 +572,7 @@ export default class PbDropdown extends PbEnhancedElement {
       return !clickInTrigger && !clickInContainer;
     } else {
       const triggerElement = this.trigger;
-      const containerElement = this.target;
+      const containerElement = this.element.querySelector(CONTAINER_SELECTOR);
 
       const isOutsideTrigger = triggerElement
         ? !triggerElement.contains(event.target)
@@ -772,7 +594,7 @@ export default class PbDropdown extends PbEnhancedElement {
       const hiddenInput = this.baseInput;
       detail = hiddenInput.value
         ? JSON.parse(
-            (this.target || this.element).querySelector(
+            this.element.querySelector(
               OPTION_SELECTOR +
                 `[data-dropdown-option-label*='"id":"${hiddenInput.value}"']`,
             ).dataset.dropdownOptionLabel,
@@ -888,14 +710,19 @@ export default class PbDropdown extends PbEnhancedElement {
       this.emitSelectionChange();
     }
 
+    const customTrigger = this.customTrigger;
     const shouldCloseOnOptionSelect =
       this.closeOnClick === "any" || this.closeOnClick === "inside";
-    if (shouldCloseOnOptionSelect && this.target.classList.contains("open")) {
+    if (
+      customTrigger &&
+      shouldCloseOnOptionSelect &&
+      this.target.classList.contains("open")
+    ) {
       this.hideElement(this.target);
       this.updateArrowDisplay(false);
     }
 
-    const options = this.queryAllOptions();
+    const options = this.element.querySelectorAll(OPTION_SELECTOR);
     if (this.isMultiSelect) {
       this.emitSelectionChange();
       Array.from(this.selectedOptions).map((option) => {
@@ -923,15 +750,9 @@ export default class PbDropdown extends PbEnhancedElement {
 
   showElement(elem) {
     if (this.isDisabled) return;
-    
-    this.ensureFloatingPortalConfig();
-    if (this.useMenuPortal) {
-      this.mountPortalMenu(elem);
-    }
-
     elem.classList.remove("close");
     elem.classList.add("open");
-
+    
     const shouldConstrain = elem.classList.contains("constrain_height");
     if (shouldConstrain) {
       // Calculate height respecting max-height constraint (18em)
@@ -943,30 +764,14 @@ export default class PbDropdown extends PbEnhancedElement {
     } else {
       elem.style.height = elem.scrollHeight + "px";
     }
-
-    if (this.useMenuPortal) {
-      this.applyPortalPosition();
-      window.removeEventListener("resize", this.boundApplyPortalPosition);
-      window.addEventListener("resize", this.boundApplyPortalPosition);
-      if (this._unsubscribePortalReposition) {
-        this._unsubscribePortalReposition();
-        this._unsubscribePortalReposition = null;
-      }
-      this._unsubscribePortalReposition = subscribeFloatingKitReposition(
-        this.boundApplyPortalPosition,
-      );
-      window.requestAnimationFrame(() => this.applyPortalPosition());
-    } else {
-      this.adjustDropdownPosition(elem);
-    }
+    
+    // Auto-position dropdown above if not enough space below
+    this.adjustDropdownPosition(elem);
   }
 
   hideElement(elem) {
     elem.style.height = elem.scrollHeight + "px";
     window.setTimeout(() => {
-      if (this.useMenuPortal) {
-        this.unmountPortalMenu();
-      }
       elem.classList.add("close");
       elem.classList.remove("open");
       this.resetFocus();
@@ -976,7 +781,7 @@ export default class PbDropdown extends PbEnhancedElement {
   resetFocus() {
     if (this.keyboardHandler) {
       this.keyboardHandler.focusedOptionIndex = -1;
-      const options = this.queryAllOptions();
+      const options = this.element.querySelectorAll(OPTION_SELECTOR);
       options.forEach((option) =>
         option.classList.remove("pb_dropdown_option_focused"),
       );
@@ -1049,7 +854,7 @@ export default class PbDropdown extends PbEnhancedElement {
   setDefaultValue() {
     const hiddenInput = this.baseInput;
     const optionEls = Array.from(
-      this.queryAllOptions(),
+      this.element.querySelectorAll(OPTION_SELECTOR),
     );
     const defaultValue = hiddenInput.dataset.defaultValue || "";
     if (!defaultValue) return;
@@ -1161,7 +966,7 @@ export default class PbDropdown extends PbEnhancedElement {
 
   resetDropdownValue() {
     const hiddenInput = this.baseInput;
-    const options = this.queryAllOptions();
+    const options = this.element.querySelectorAll(OPTION_SELECTOR);
     options.forEach((option) => {
       option.classList.remove("pb_dropdown_option_selected");
       option.style.display = "";
@@ -1250,7 +1055,7 @@ export default class PbDropdown extends PbEnhancedElement {
         const id = pill.dataset.pillId;
         this.selectedOptions.delete(option);
 
-        const optEl = (this.target || this.element).querySelector(
+        const optEl = this.element.querySelector(
           `${OPTION_SELECTOR}[data-dropdown-option-label*='"id":${JSON.stringify(
             id,
           )}']`,
@@ -1275,7 +1080,7 @@ export default class PbDropdown extends PbEnhancedElement {
     if (this.isDisabled) return;
     if (this.isMultiSelect) {
       this.selectedOptions.clear();
-      this.queryAllOptions().forEach((opt) => {
+      this.element.querySelectorAll(OPTION_SELECTOR).forEach((opt) => {
         opt.style.display = "";
       });
       if (this.target.classList.contains("open")) {
@@ -1401,7 +1206,7 @@ export default class PbDropdown extends PbEnhancedElement {
 
   handleBackspaceClear() {
     if (!this.isMultiSelect) {
-      this.queryAllOptions().forEach((opt) => {
+      this.element.querySelectorAll(OPTION_SELECTOR).forEach((opt) => {
         opt.classList.remove("pb_dropdown_option_selected");
         opt.style.display = "";
         this.adjustDropdownHeight();
@@ -1415,7 +1220,7 @@ export default class PbDropdown extends PbEnhancedElement {
         this.setTriggerElementText(placeholder.dataset.dropdownPlaceholder);
     }
     if (this.isMultiSelect) {
-      this.queryAllOptions().forEach((opt) => {
+      this.element.querySelectorAll(OPTION_SELECTOR).forEach((opt) => {
         const optValue = opt.dataset.dropdownOptionLabel;
         if (
           this.selectedOptions.size > 0 &&

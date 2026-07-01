@@ -180,12 +180,6 @@
       ],
       "default": false
     },
-    "styles": {
-      "type": "TypeaheadStylesConfig",
-      "platforms": [
-        "react"
-      ]
-    },
     "defaultOptions": {
       "platforms": [
         "rails"

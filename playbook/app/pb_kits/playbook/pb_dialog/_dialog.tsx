@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-handler-names */
 /* eslint-disable react/no-multi-comp */
 
-import React, { useState, useCallback } from "react";
+import React, { useState } from "react";
 import classnames from "classnames";
 import Modal from "react-modal";
 
@@ -16,8 +16,7 @@ import DialogBody from "./child_kits/_dialog_body";
 import Flex from "../pb_flex/_flex";
 import IconCircle from "../pb_icon_circle/_icon_circle";
 import Title from "../pb_title/_title";
-import { DialogContext, DialogContextValue } from "./_dialog_context";
-import { PB_FLOATING_OWNER_ATTR } from "../utilities/floatingPortalHosts";
+import { DialogContext } from "./_dialog_context";
 
 type DialogProps = {
   aria?: { [key: string]: string };
@@ -102,20 +101,12 @@ const Dialog = (props: DialogProps): React.ReactElement => {
   const [triggerOpened, setTriggerOpened] = useState(false),
     modalIsOpened = trigger ? triggerOpened : opened;
 
-  const [selectMenuPortalTarget, setSelectMenuPortalTarget] =
-    useState<HTMLElement | null>(null);
-
-  const floatingRootRefCallback = useCallback((node: HTMLElement | null) => {
-    setSelectMenuPortalTarget(node);
-  }, []);
-
-  const api: DialogContextValue = {
+  const api = {
     onClose: trigger
       ? function () {
           setTriggerOpened(false);
         }
       : onClose,
-    selectMenuPortalTarget,
   };
 
   if (trigger) {
@@ -196,7 +187,7 @@ const Dialog = (props: DialogProps): React.ReactElement => {
             shouldCloseOnOverlayClick={shouldCloseOnOverlayClick && !loading}
             style={{ content: dynamicInlineProps }}
         >
-          <div className="pb_dialog_scroll_region">
+          <>
             {title && !status ? <Dialog.Header closeable={closeable}>{title}</Dialog.Header> : null}
             {!status && text ? <Dialog.Body>{text}</Dialog.Body> : null}
             {status && (
@@ -247,14 +238,7 @@ const Dialog = (props: DialogProps): React.ReactElement => {
               </Dialog.Footer>
             ) : null}
             {children}
-          </div>
-          {/* No aria-hidden: portaled form inputs with dropdowns live here and must remain interactive. */}
-          <div
-              className="pb_dialog_floating_root"
-              data-pb-dialog-floating-root="true"
-              {...(id ? { [PB_FLOATING_OWNER_ATTR]: id } : {})}
-              ref={floatingRootRefCallback}
-          />
+          </>
         </Modal>
       </div>
     </DialogContext.Provider>
