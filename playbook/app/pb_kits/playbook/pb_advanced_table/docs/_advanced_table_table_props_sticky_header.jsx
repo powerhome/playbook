@@ -1,21 +1,13 @@
 import React from "react"
 import AdvancedTable from '../../pb_advanced_table/_advanced_table'
-
-const tableData = Array.from({ length: 15 }, (_, index) => ({
-  year: String(2020 + index),
-  newEnrollments: String(20 + index),
-  scheduledMeetings: String(10 + index),
-  attendanceRate: `${50 + index}%`,
-  completedClasses: String(3 + index),
-  classCompletionRate: `${30 + index}%`,
-  graduatedStudents: String(19 + index),
-}))
+import MOCK_DATA from "./advanced_table_mock_data.json"
 
 const AdvancedTableTablePropsStickyHeader = (props) => {
   const columnDefinitions = [
     {
       accessor: "year",
       label: "Year",
+      cellAccessors: ["quarter", "month", "day"],
     },
     {
       accessor: "newEnrollments",
@@ -44,18 +36,17 @@ const AdvancedTableTablePropsStickyHeader = (props) => {
   ]
 
   const tableProps = {
-    sticky: true
+    sticky: true,
   }
 
   return (
-    <div style={{ maxHeight: "320px", overflowY: "auto" }}>
-      <AdvancedTable
-          columnDefinitions={columnDefinitions}
-          tableData={tableData}
-          tableProps={tableProps}
-          {...props}
-      />
-    </div>
+    <AdvancedTable
+        columnDefinitions={columnDefinitions}
+        maxHeight="xs"
+        tableData={MOCK_DATA}
+        tableProps={tableProps}
+        {...props}
+    />
   )
 }
 

@@ -92,7 +92,7 @@
       "platforms": [
         "rails"
       ],
-      "type": "string"
+      "type": "GenericObject"
     }
   },
   "globalProps": true,

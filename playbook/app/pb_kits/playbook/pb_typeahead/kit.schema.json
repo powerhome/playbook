@@ -127,7 +127,7 @@
       ]
     },
     "optionsByContext": {
-      "type": "Record<string, Array<{label: string; value?: string}>>",
+      "type": "GenericObject",
       "platforms": [
         "react",
         "rails"
@@ -210,7 +210,7 @@
       "platforms": [
         "rails"
       ],
-      "type": "string"
+      "type": "GenericObject"
     },
     "isMulti": {
       "platforms": [

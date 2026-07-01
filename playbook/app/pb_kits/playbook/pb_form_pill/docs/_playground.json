@@ -4,33 +4,174 @@
   "defaults": {
     "textTransform": "none",
     "color": "primary",
-    "wrapped": false
+    "wrapped": false,
+    "text": "This is a tag",
+    "tabIndex": 0,
+    "onClick": "() => alert('Click!')"
   },
   "groups": [
     {
-      "name": "Props",
+      "name": "Content",
       "props": [
         "text",
         "name",
-        "onClick",
-        "avatar",
-        "avatarUrl",
+        "icon",
+        "avatarUrl"
+      ]
+    },
+    {
+      "name": "Appearance",
+      "props": [
+        "color",
         "size",
         "textTransform",
-        "color",
-        "tabIndex",
-        "icon",
-        "wrapped",
-        "closeProps"
+        "wrapped"
+      ]
+    },
+    {
+      "name": "Interaction",
+      "props": [
+        "tabIndex"
       ]
     }
   ],
   "presets": [
     {
-      "name": "Default",
-      "props": {}
+      "name": "Tag",
+      "props": {
+        "text": "this is a tag",
+        "name": "",
+        "icon": ""
+      }
+    },
+    {
+      "name": "Lowercase",
+      "props": {
+        "text": "THIS IS A TAG",
+        "textTransform": "lowercase",
+        "name": "",
+        "icon": ""
+      }
+    },
+    {
+      "name": "Icon and tag",
+      "props": {
+        "text": "icon and tag",
+        "icon": "badge-check",
+        "name": ""
+      }
+    },
+    {
+      "name": "User",
+      "props": {
+        "text": "",
+        "name": "Anna Black",
+        "icon": "",
+        "avatarUrl": ""
+      }
+    },
+    {
+      "name": "User with avatar",
+      "props": {
+        "text": "",
+        "name": "Anna Black",
+        "icon": "",
+        "avatarUrl": "https://randomuser.me/api/portraits/women/44.jpg"
+      }
+    },
+    {
+      "name": "Small user",
+      "props": {
+        "text": "",
+        "name": "Anna Black",
+        "icon": "",
+        "avatarUrl": "",
+        "size": "small"
+      }
+    },
+    {
+      "name": "Wrapped tag",
+      "props": {
+        "text": "form pill with a very long tag to show wrapped text",
+        "name": "",
+        "icon": "",
+        "wrapped": true
+      }
+    },
+    {
+      "name": "Wrapped user",
+      "props": {
+        "text": "",
+        "name": "Princess Amelia Mignonette Grimaldi Thermopolis Renaldo",
+        "icon": "",
+        "avatarUrl": "https://randomuser.me/api/portraits/women/44.jpg",
+        "wrapped": true
+      }
+    },
+    {
+      "name": "Success",
+      "props": {
+        "text": "Success",
+        "color": "success",
+        "name": "",
+        "icon": ""
+      }
     }
   ],
-  "conditionals": {},
-  "hints": {}
+  "conditionals": {
+    "avatarUrl": {
+      "requires": "name"
+    }
+  },
+  "hints": {
+    "close_button": {
+      "when": {},
+      "message": "The close icon calls onClick; wire it in app code to remove the pill from your form.",
+      "type": "info"
+    },
+    "wrapped_text": {
+      "when": {
+        "wrapped": true
+      },
+      "message": "Wrapped pills expand to multiple lines instead of truncating long labels.",
+      "type": "info"
+    },
+    "user_with_avatar": {
+      "when": {
+        "avatarUrl": "https://randomuser.me/api/portraits/women/44.jpg"
+      },
+      "message": "The avatar is displayed when the avatarUrl is set. Name is required for avatar display.",
+      "type": "info"
+    },
+    "user_without_avatar": {
+      "when": {
+        "avatarUrl": ""
+      },
+      "message": "The name is displayed when the avatarUrl is not set.",
+      "type": "info"
+    },
+    "lowercase": {
+      "when": {
+        "textTransform": "lowercase"
+      },
+      "message": "The text is displayed in lowercase when the textTransform is set to lowercase.",
+      "type": "info"
+    },
+    "success": {
+      "when": {
+        "color": "success"
+      },
+      "message": "The pill is displayed in success color when the color is set to success. See the color variants section for more information on colors available.",
+      "type": "info"
+    }
+  },
+  "children": {
+    "editable": false,
+    "default": ""
+  },
+  "hiddenProps": [
+    "onClick",
+    "closeProps",
+    "avatar"
+  ]
 }

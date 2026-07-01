@@ -8,6 +8,7 @@ import PbTextInput from 'kits/pb_text_input'
 import { PbCopyButton, addCopyEventListeners } from 'kits/pb_copy_button'
 import PbCollapsible from 'kits/pb_collapsible'
 import PbPopover from 'kits/pb_popover'
+import PbPassphrase from 'kits/pb_passphrase'
 import PbTooltip from 'kits/pb_tooltip'
 import PbFixedConfirmationToast from 'kits/pb_fixed_confirmation_toast'
 import PbTypeahead from 'kits/pb_typeahead'
@@ -38,6 +39,7 @@ const kits = [
   PbCopyButton,
   PbCollapsible,
   PbPopover,
+  PbPassphrase,
   PbTooltip,
   PbFixedConfirmationToast,
   PbTypeahead,

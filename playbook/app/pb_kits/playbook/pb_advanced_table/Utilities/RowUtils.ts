@@ -36,6 +36,23 @@ export const shouldShowLoadingIndicator = (
     (row.depth < cellAccessorsLength);
 }
 
+export const getRowStyle = (
+  rowStyling: GenericObject[] | undefined,
+  row: Row<GenericObject>
+) => {
+  const rowId = row.original?.id ?? row.id
+  if (rowId == null) return
+
+  return rowStyling?.find((style: GenericObject) => (
+    String(style?.rowId) === String(rowId)
+  ))
+}
+
+export const getFontWeight = (rowStyle?: GenericObject) => {
+  if (rowStyle?.fontWeight === "bold") return 700
+  if (rowStyle?.fontWeight === "regular") return 400
+}
+
 /**
  * Creates a virtual item style object for virtualized rows
  */

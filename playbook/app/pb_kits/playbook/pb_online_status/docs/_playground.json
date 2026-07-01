@@ -30,31 +30,10 @@
       }
     },
     {
-      "name": "Offline",
-      "props": {
-        "status": "offline",
-        "size": "md"
-      }
-    },
-    {
-      "name": "Away",
-      "props": {
-        "status": "away",
-        "size": "md"
-      }
-    },
-    {
-      "name": "Online · sm",
+      "name": "Size sm",
       "props": {
         "status": "online",
         "size": "sm"
-      }
-    },
-    {
-      "name": "Online · lg",
-      "props": {
-        "status": "online",
-        "size": "lg"
       }
     },
     {
@@ -67,5 +46,21 @@
     }
   ],
   "conditionals": {},
-  "hints": {}
+  "hints": {
+    "status": {
+      "when": {},
+      "message": "status controls the dot color; semantic statuses like online, offline, error, warning, success, info, primary, and neutral are supported.",
+      "type": "info"
+    },
+    "size_sm": {
+      "presetName": "Size sm",
+      "message": "size changes the rendered indicator diameter. Use sm, md, or lg.",
+      "type": "info"
+    },
+    "no_border": {
+      "presetName": "No border",
+      "message": "noBorder removes the white ring around the status indicator.",
+      "type": "info"
+    }
+  }
 }

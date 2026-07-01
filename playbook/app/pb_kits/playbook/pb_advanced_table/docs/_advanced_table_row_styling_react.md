@@ -3,5 +3,6 @@ The `rowStyling` prop can be used in conjunction with row ids to control certain
 - `backgroundColor` : use this to control the background color of the row
 - `fontColor`: use this to control font color for each row if needed, for example if using a darker background color.
 - `expandButtonColor`: use this to control the color of the expand icon if needed, for example if using a darker background color.
+- `fontWeight`: use this to control row font weight. Accepted values are `regular` (default appearance) and `bold`.
 
 **NOTE:** Each object within the `tableData` Array must contain a unique id in order to attach an id to all Rows for this to function.

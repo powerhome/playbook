@@ -230,7 +230,7 @@ module Playbook
 
       # Build inline style for sticky pinned row (matches React). Pass via html_options so the tr gets the attribute.
       def build_pinned_row_style(pinned_index, background: "white")
-        header_offset = "var(--advanced-table-header-height, 44px)"
+        header_offset = "calc(var(--advanced-table-header-height, 44px) + var(--advanced-table-action-bar-height, 0px))"
         row_offset = "calc(2.5em * #{pinned_index})"
         "position: sticky; top: calc(#{header_offset} + #{row_offset}); z-index: 3; background: #{background};"
       end

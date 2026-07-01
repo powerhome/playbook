@@ -1,0 +1,80 @@
+{
+  "defaults": {
+    "borderRadius": "sm",
+    "color": "default",
+    "gap": "xxs",
+    "height": "16px",
+    "stack": 1,
+    "width": "100%"
+  },
+  "groups": [
+    {
+      "name": "Shape",
+      "props": ["height", "width", "borderRadius"]
+    },
+    {
+      "name": "Stack",
+      "props": ["stack", "gap"]
+    },
+    {
+      "name": "Appearance",
+      "props": ["color", "dark"]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default",
+      "props": {
+        "height": "16px",
+        "width": "100%"
+      }
+    },
+    {
+      "name": "Stacked",
+      "props": {
+        "gap": "xs",
+        "stack": 4,
+        "width": "80%"
+      }
+    },
+    {
+      "name": "Avatar",
+      "props": {
+        "borderRadius": "rounded",
+        "height": "48px",
+        "width": "48px"
+      }
+    },
+    {
+      "name": "White",
+      "props": {
+        "color": "white",
+        "height": "24px",
+        "width": "60%"
+      }
+    }
+  ],
+  "conditionals": {},
+  "hints": {
+    "default": {
+      "presetName": "Default",
+      "message": "Default renders a single loading line using the standard skeleton color.",
+      "type": "info"
+    },
+    "stacked": {
+      "presetName": "Stacked",
+      "message": "Stacked repeats the skeleton item and separates rows with gap.",
+      "type": "info"
+    },
+    "avatar": {
+      "presetName": "Avatar",
+      "message": "Avatar uses equal height and width with rounded radius for circular loading placeholders.",
+      "type": "info"
+    },
+    "white": {
+      "presetName": "White",
+      "message": "White switches the skeleton color for darker or colored surfaces.",
+      "type": "info"
+    }
+  }
+}

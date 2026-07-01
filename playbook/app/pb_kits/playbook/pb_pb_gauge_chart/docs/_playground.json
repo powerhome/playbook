@@ -1,10 +1,23 @@
 {
   "template": "<PbGaugeChart{{props}} />",
   "propTargets": {},
-  "defaults": {},
+  "defaults": {
+    "options": {
+      "series": [
+        {
+          "data": [
+            {
+              "name": "Name",
+              "y": 45
+            }
+          ]
+        }
+      ]
+    }
+  },
   "groups": [
     {
-      "name": "Props",
+      "name": "Chart",
       "props": [
         "options"
       ]
@@ -13,9 +26,141 @@
   "presets": [
     {
       "name": "Default",
-      "props": {}
+      "props": {
+        "options": {
+          "series": [
+            {
+              "data": [
+                {
+                  "name": "Name",
+                  "y": 45
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "With Title",
+      "props": {
+        "options": {
+          "title": {
+            "text": "Data Usage"
+          },
+          "series": [
+            {
+              "data": [
+                {
+                  "name": "Data Used",
+                  "y": 32
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Custom Color",
+      "props": {
+        "options": {
+          "series": [
+            {
+              "data": [
+                {
+                  "name": "Name",
+                  "y": 67
+                }
+              ]
+            }
+          ],
+          "plotOptions": {
+            "solidgauge": {
+              "borderColor": "#00a4b4"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "Full Circle",
+      "props": {
+        "options": {
+          "title": {
+            "text": "Seating Capacity"
+          },
+          "series": [
+            {
+              "data": [
+                {
+                  "name": "Capacity",
+                  "y": 75
+                }
+              ]
+            }
+          ],
+          "pane": {
+            "startAngle": 0,
+            "endAngle": 360
+          }
+        }
+      }
+    },
+    {
+      "name": "Min Max",
+      "props": {
+        "options": {
+          "title": {
+            "text": "Completion"
+          },
+          "yAxis": {
+            "min": 0,
+            "max": 200
+          },
+          "series": [
+            {
+              "data": [
+                {
+                  "name": "Complete",
+                  "y": 145
+                }
+              ]
+            }
+          ]
+        }
+      }
     }
   ],
   "conditionals": {},
-  "hints": {}
+  "hints": {
+    "charts_import": {
+      "when": {},
+      "message": "Highcharts kits are imported from playbook-ui/charts so apps can load the chart bundle only when needed.",
+      "type": "info"
+    },
+    "title": {
+      "presetName": "With Title",
+      "message": "Gauge chart titles use options.title.text just like the other Highcharts wrappers.",
+      "type": "info"
+    },
+    "color": {
+      "presetName": "Custom Color",
+      "message": "Use options.plotOptions.solidgauge.borderColor to customize the gauge track color.",
+      "type": "info"
+    },
+    "full_circle": {
+      "presetName": "Full Circle",
+      "message": "Set options.pane.startAngle to 0 and endAngle to 360 for a full-circle gauge.",
+      "type": "info"
+    },
+    "min_max": {
+      "presetName": "Min Max",
+      "message": "Use options.yAxis.min and options.yAxis.max to change the gauge scale.",
+      "type": "info"
+    }
+  },
+  "externalImports": [
+    "import { PbGaugeChart } from 'playbook-ui/charts'"
+  ]
 }

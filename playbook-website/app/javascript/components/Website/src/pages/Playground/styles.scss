@@ -1,0 +1,254 @@
+@import "playbook-tokens/colors";
+@import "playbook-tokens/screen_sizes";
+@import "playbook-tokens/spacing";
+@import "../KitShow/Tabs/Playground/PlaygroundPreview.scss";
+@import "../KitShow/Tabs/Playground/components/playgroundPanelControls";
+
+.full-playground-sidebar,
+.full-playground-inspector {
+  .playground-panel-controls {
+    @include playground-panel-form-control-styles("playground-panel-dropdown");
+  }
+}
+
+.full-playground-shell {
+  box-sizing: border-box;
+  min-height: 100%;
+}
+
+.full-playground-heading,
+.full-playground-workbench {
+  width: 100%;
+}
+
+.full-playground-heading {
+  align-items: flex-start;
+
+  @include break_on($screen-md-min) {
+    align-items: flex-end;
+  }
+}
+
+.full-playground-workbench {
+  align-items: start;
+  display: grid;
+  gap: $space_md;
+  grid-template-columns: minmax(0, 1fr);
+  width: 100%;
+
+  @include break_on($screen-xl-min) {
+    // Sidebar + inspector size to content; demo takes all remaining space.
+    grid-template-columns: minmax(180px, 200px) minmax(0, 1fr) auto;
+  }
+}
+
+.full-playground-sidebar {
+  min-width: 0;
+}
+
+.full-playground-demo {
+  min-width: 0;
+  width: 100%;
+}
+
+.full-playground-inspector {
+  align-self: start;
+  justify-self: stretch;
+  max-width: 500px;
+  min-width: 0;
+  width: auto;
+
+  .props-panel {
+    max-width: 100%;
+  }
+
+  > .pb_card_kit,
+  > [class*="pb_card"] {
+    width: 100%;
+  }
+}
+
+.builder-field,
+.builder-prop-toggle,
+.builder-checkbox-row {
+  display: flex;
+  gap: $space_xs;
+}
+
+.builder-field {
+  flex-direction: column;
+  margin-bottom: $space_sm;
+}
+
+.builder-prop-row input[type="text"],
+.builder-prop-row input[type="number"],
+.builder-prop-row select,
+.builder-prop-row textarea {
+  border: 1px solid $border_light;
+  border-radius: 6px;
+  box-sizing: border-box;
+  font: inherit;
+  min-height: 36px;
+  padding: $space_xs;
+  width: 100%;
+}
+
+.builder-prop-row textarea {
+  min-height: 88px;
+  resize: vertical;
+}
+
+.builder-prop-group {
+  textarea {
+    width: 100%;
+    min-height: 30px;
+    font-family: monospace;
+    font-size: 12px;
+    padding: 8px;
+    border: 1px solid $border_light;
+    border-radius: 4px;
+    resize: vertical;
+  }
+
+  & + & {
+    border-top: 1px solid $border_light;
+    margin-top: $space_sm;
+    padding-top: $space_sm;
+  }
+}
+
+.builder-kit-button,
+.builder-instance {
+  border-radius: 6px;
+  cursor: pointer;
+  font: inherit;
+  text-align: left;
+}
+
+.builder-kit-button {
+  appearance: none;
+  background: $white;
+  border: 1px solid $border_light;
+  cursor: grab;
+  margin-bottom: $space_xxs;
+  padding: $space_xs;
+  width: 100%;
+
+  &:hover {
+    border-color: $primary;
+  }
+
+  &:active {
+    cursor: grabbing;
+  }
+
+  &.is-dragging {
+    border-color: $primary;
+    opacity: 0.65;
+  }
+}
+
+.builder-stage {
+  border: 1px dashed $border_light;
+  box-sizing: border-box;
+  max-width: 100%;
+  min-width: 0;
+  width: 100%;
+
+  &.is-drop-target {
+    border-color: $primary;
+    box-shadow: inset 0 0 0 1px $primary;
+  }
+}
+
+.builder-empty-canvas {
+  color: $text_lt_light;
+}
+
+.builder-instance {
+  cursor: pointer;
+  display: block;
+  min-width: 0;
+  outline: 1px solid transparent;
+  position: relative;
+  width: 100%;
+
+  &[draggable="true"] {
+    cursor: grab;
+  }
+
+  &[draggable="true"]:active {
+    cursor: grabbing;
+  }
+
+  &.is-dragging {
+    opacity: 0.55;
+  }
+
+  &.is-selected {
+    outline-color: $primary;
+    outline-offset: 2px;
+  }
+
+  &.is-drop-target {
+    outline-color: $primary;
+    outline-offset: 4px;
+  }
+
+  &.is-empty-container {
+    border: 1px dashed $border_light;
+    // min-height: 48px;
+  }
+}
+
+.builder-instance-render img {
+  -webkit-user-drag: none;
+}
+
+.builder-prop-row {
+  border: 1px solid $border_light;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: $space_xs;
+  padding: $space_sm;
+}
+
+.builder-prop-toggle,
+.builder-checkbox-row {
+  align-items: center;
+}
+
+.builder-drag-tooltip {
+  background: $text_lt_default;
+  border-radius: 6px;
+  color: $white;
+  display: none;
+  font-size: 12px;
+  left: 0;
+  line-height: 1;
+  padding: $space_xs;
+  pointer-events: none;
+  position: fixed;
+  top: 0;
+  transform: translate3d(0, 0, 0);
+  will-change: transform;
+  z-index: 10000;
+}
+
+.full-playground-code-panel {
+  min-width: 0;
+  width: 100%;
+
+  .pb_card_kit,
+  .pb--card,
+  [class*="pb_card"] {
+    max-width: 100%;
+    min-width: 0;
+  }
+
+  pre,
+  code {
+    max-width: 100%;
+  }
+}

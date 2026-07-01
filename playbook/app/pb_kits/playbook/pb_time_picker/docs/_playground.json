@@ -16,7 +16,6 @@
       "props": [
         "label",
         "name",
-        "value",
         "defaultTime"
       ]
     },
@@ -24,7 +23,8 @@
       "name": "Appearance",
       "props": [
         "timeFormat",
-        "showTimezone"
+        "showTimezone",
+        "dark"
       ]
     },
     {
@@ -37,14 +37,6 @@
         "maxTime",
         "error",
         "validationMessage"
-      ]
-    },
-    {
-      "name": "Advanced",
-      "props": [
-        "inputOptions",
-        "onChange",
-        "onClose"
       ]
     }
   ],
@@ -86,7 +78,7 @@
       }
     },
     {
-      "name": "Required field",
+      "name": "Required Field",
       "props": {
         "label": "Appointment",
         "name": "appointment_time",
@@ -94,26 +86,40 @@
         "requiredIndicator": true,
         "defaultTime": "10:00 AM"
       }
-    },
-    {
-      "name": "Disabled",
-      "props": {
-        "label": "Locked",
-        "name": "locked_time",
-        "disabled": true,
-        "defaultTime": "12:00 PM"
-      }
-    },
-    {
-      "name": "Error state",
-      "props": {
-        "label": "Invalid slot",
-        "name": "error_time",
-        "error": "Selected time is unavailable",
-        "defaultTime": "11:45 AM"
-      }
     }
   ],
   "conditionals": {},
-  "hints": {}
+  "hints": {
+    "default": {
+      "presetName": "Default",
+      "message": "Default uses defaultTime so the picker initializes with a value while remaining internally editable.",
+      "type": "info"
+    },
+    "twenty_four_hour": {
+      "presetName": "24-hour",
+      "message": "24-hour switches timeFormat to the 24hour display and input pattern.",
+      "type": "info"
+    },
+    "with_timezone": {
+      "presetName": "With timezone",
+      "message": "With timezone shows the timezone label next to the selected time.",
+      "type": "info"
+    },
+    "business_hours": {
+      "presetName": "Business hours",
+      "message": "Business hours combines minTime and maxTime to constrain available selections.",
+      "type": "info"
+    },
+    "required_field": {
+      "presetName": "Required Field",
+      "message": "Required Field combines required and requiredIndicator for validation-ready forms.",
+      "type": "info"
+    }
+  },
+  "hiddenProps": [
+    "inputOptions",
+    "onChange",
+    "onClose",
+    "value"
+  ]
 }

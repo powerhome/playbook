@@ -1,6 +1,8 @@
 import React, { useMemo } from "react";
 import { Body, Button, Caption, Card, Flex } from "playbook-ui";
 
+import { linkFormat } from "../../../../../../utilities/website_sidebar_helper";
+
 import {
   PlaygroundPreview,
   usePlaygroundState,
@@ -13,7 +15,6 @@ import {
   KitSchema,
   GlobalPropsSchema,
   PlaygroundConfig,
-  getPropSyncContextHint,
 } from "./Playground";
 
 interface Example {
@@ -40,6 +41,7 @@ export const PlaygroundTab: React.FC<PlaygroundTabProps> = ({
 }) => {
   const {
     propValues,
+    displayPropValues,
     children,
     activePresetIndex,
     activeStructureMode,
@@ -47,7 +49,9 @@ export const PlaygroundTab: React.FC<PlaygroundTabProps> = ({
     reactProps,
     globalProps,
     groupedProps,
+    groupedGlobalProps,
     propDisabledState,
+    propSyncHints,
     activeHints,
     hasModifiedProps,
     hasTemplate,
@@ -87,16 +91,6 @@ export const PlaygroundTab: React.FC<PlaygroundTabProps> = ({
   const hasStructureModes = availableStructureModes.length > 0;
   const hasDataPresets = availableDataPresets.length > 0;
 
-  const propSyncHints = useMemo(() => {
-    if (!playgroundConfig?.propSyncOnEnable) return {};
-    const out: Record<string, string> = {};
-    Object.keys(playgroundConfig.propSyncOnEnable).forEach((name) => {
-      const h = getPropSyncContextHint(name, playgroundConfig);
-      if (h) out[name] = h;
-    });
-    return out;
-  }, [playgroundConfig]);
-
   // Merge scopeVars with requiredProps values for the live preview
   const previewScope = useMemo(() => {
     const scope: Record<string, any> = {};
@@ -118,10 +112,14 @@ export const PlaygroundTab: React.FC<PlaygroundTabProps> = ({
     return scope;
   }, [playgroundConfig?.scopeVars, playgroundConfig?.requiredProps, propValues]);
 
+  const displayKitName = linkFormat(kitName);
+
   return (
-    <Flex width="100%" gap="lg">
+    <Flex alignItems="start" gap="lg" width="100%">
       {/* Left Panel - Preview and Code */}
       <Flex flexDirection="column" flex="1" minWidth="0">
+       <Card marginBottom="md" width="100%">
+        <Caption text={`${displayKitName} Setup`} />
         {hasPresets && (
           <PresetsBar
             presets={playgroundConfig!.presets!}
@@ -147,11 +145,17 @@ export const PlaygroundTab: React.FC<PlaygroundTabProps> = ({
         )}
 
         <HintsDisplay hints={activeHints} />
+        </Card>
 
         {/* Live Preview */}
-        <Card marginBottom="md" padding="none" width="100%">
+        <Card
+          className="playground-preview-card"
+          marginBottom="md"
+          padding="none"
+          width="100%"
+        >
           <Flex justify="between" align="center" margin="md">
-            <Caption text="Preview" color="lighter" />
+            <Caption text="Preview" />
             <Flex align="center" gap="sm">
               {!hasModifiedProps && defaultExample && !hasTemplate && (
                 <Caption text="Default example" color="lighter" />
@@ -183,13 +187,15 @@ export const PlaygroundTab: React.FC<PlaygroundTabProps> = ({
         children={children}
         onChildrenChange={setChildren}
         groupedProps={groupedProps}
-        propValues={propValues}
+        groupedGlobalProps={groupedGlobalProps}
+        propValues={displayPropValues}
         propDisabledState={propDisabledState}
         onPropChange={handlePropChange}
         globalProps={globalProps}
         showGlobalProps={Boolean(kitSchema.globalProps)}
         requiredPropNames={requiredPropNames}
         propSyncHints={propSyncHints}
+        playgroundConfig={playgroundConfig}
       />
     </Flex>
   );

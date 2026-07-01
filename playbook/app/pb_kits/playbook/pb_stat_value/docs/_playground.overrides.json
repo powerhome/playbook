@@ -1,8 +1,4 @@
 {
-  "defaults": {
-    "value": 1428,
-    "unit": "hrs"
-  },
   "groups": [
     { "name": "Content", "props": ["value", "unit"] }
   ],
@@ -14,9 +10,24 @@
   ],
   "conditionals": {},
   "hints": {
-    "unit_hint": {
-      "when": { "unit": true },
-      "message": "When a unit is set, it renders smaller than the value, with a space between.",
+    "default": {
+      "presetName": "Default",
+      "message": "Default pairs a numeric value with a compact unit label.",
+      "type": "info"
+    },
+    "value_only": {
+      "presetName": "Value only",
+      "message": "Value only renders the stat without the smaller unit text.",
+      "type": "info"
+    },
+    "formatted_string": {
+      "presetName": "Formatted string",
+      "message": "Formatted string accepts preformatted values when commas or labels are already prepared.",
+      "type": "info"
+    },
+    "zero_state": {
+      "presetName": "Zero state",
+      "message": "Zero state keeps the unit visible while showing an empty or reset metric.",
       "type": "info"
     }
   }

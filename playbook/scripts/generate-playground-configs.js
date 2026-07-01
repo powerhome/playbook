@@ -30,8 +30,9 @@ const KITS_DIR = path.join(__dirname, '../app/pb_kits/playbook');
  * Deep merge two objects. Arrays are replaced, not concatenated.
  */
 function deepMerge(base, override) {
-  if (!override) return base;
-  if (!base) return override;
+  if (override === undefined) return base;
+  if (base === undefined) return override;
+  if (override === null || base === null) return override;
   
   if (Array.isArray(override)) {
     return override;

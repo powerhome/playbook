@@ -47,11 +47,15 @@ export class PbDropdownKeyboard {
     // We only want to return the options that are visible
     const scope = this.dropdown.target || this.dropdownElement;
     return Array.from(scope.querySelectorAll(OPTION_SELECTOR)).filter(
-      (opt) => opt.style.display !== "none",
+      
+      (opt) => opt.style.display !== "none" && opt.dataset.dropdownOptionDisabled !== "true"
+    ,
     );
   }
 
   openDropdownIfClosed() {
+    if (this.dropdown.isDisabled) return;
+
     if (!this.dropdown.target.classList.contains("open")) {
       this.dropdown.showElement(this.dropdown.target);
       this.dropdown.updateArrowDisplay(true);
@@ -59,6 +63,8 @@ export class PbDropdownKeyboard {
   }
 
   handleKeyDown(event) {
+    if (this.dropdown.isDisabled) return;
+
     switch (event.key) {
       case "ArrowDown":
         event.preventDefault();
@@ -133,11 +139,15 @@ moveFocus(direction) {
 
 
   selectOption() {
+    if (this.dropdown.isDisabled) return;
+
     const scope = this.dropdown.target || this.dropdownElement;
     const allOptions = Array.from(scope.querySelectorAll(OPTION_SELECTOR));
     if (this.focusedOptionIndex < 0) return;
 
     const optionEl = allOptions[this.focusedOptionIndex];
+    if (optionEl.dataset.dropdownOptionDisabled === "true") return;
+
     this.dropdown.handleOptionClick({ target: optionEl });
     this.dropdown.toggleElement(this.dropdown.target);
     this.dropdown.updateClearButton();

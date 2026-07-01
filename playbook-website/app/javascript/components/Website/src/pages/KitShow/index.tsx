@@ -10,7 +10,8 @@ import { DocsTab } from "./Tabs/DocsTab";
 import { PropsTab } from "./Tabs/PropsTab";
 // import { BuildingBlocksTab } from "./Tabs/BuildingBlocksTab";
 // import { ReferencesTab } from "./Tabs/ReferencesTab";
-// import { PlaygroundTab } from "./Tabs/PlaygroundTab";
+import { PlaygroundTab } from "./Tabs/PlaygroundTab";
+import { PLAYGROUND_ENABLED_KITS } from "./playgroundEnabledKits";
 
 const KitShow = () => {
   const { name } = useParams();
@@ -22,9 +23,9 @@ const KitShow = () => {
     kit_sections,
     available_props,
     kits_with_status,
-    // kit_schema,
-    // global_props_schema,
-    // playground_config,
+    kit_schema, 
+    global_props_schema, 
+    playground_config,
   } = loaderData;
   const { darkMode, setDarkMode } = useDarkMode();
   const currentKit = loaderData.kit || name || "";
@@ -71,10 +72,12 @@ const KitShow = () => {
       : "Please avoid using. This component is deprecated and will be removed in future versions.";
   }, [kitStatus, kitPlatformSpecificStatus, platformLabel, currentKit]);
 
-  // Prepare example props for advanced_table examples
+  // Prepare example props for examples that use advanced_table mock datasets.
   const exampleProps = useMemo(() => {
-    const isAdvancedTable = currentKit === "advanced_table";
-    if (!isAdvancedTable) return {};
+    const usesAdvancedTableMockData = ["advanced_table", "full_screen"].includes(
+      currentKit,
+    );
+    if (!usesAdvancedTableMockData) return {};
 
     return {
       // Provide datasets to examples under expected variable names
@@ -86,48 +89,20 @@ const KitShow = () => {
       MOCK_DATA_INLINE_LOADING: loaderData.table_data_inline_loading || [],
       MOCK_DATA_INLINE_LOADING_EMPTY_CHILDREN: loaderData.table_data_inline_loading_empty_children || [],
     };
-  }, [loaderData]);
-
-  // TODO: Remove this allowlist once playground is ready for all kits
-  const PLAYGROUND_ENABLED_KITS = [
-    "advanced_table",
-    "avatar",
-    "background",
-    "badge",
-    "body",
-    "bread_crumbs",
-    "button",
-    "button_toolbar",
-    "caption",
-    "card",
-    "checkbox",
-    "circle_icon_button",
-    "collapsible",
-    "contact",
-    "copy_button",
-    "currency",
-    "dashboard_value",
-    "date",
-    "date_picker",
-    "date_range_inline",
-    "date_range_stacked",
-    "date_stacked",
-    "date_time",
-    "date_time_stacked",
-    "date_year_stacked",
-    "detail",
-    "dialog",
-    "distribution_bar",
-    "draggable",
-    "dropdown",
-    "empty_state",
-    "file_upload",
-  ];
+  }, [currentKit, loaderData]);
 
   const [activeTab, setActiveTab] = useState<string>("docs");
   const showPlayground = platform !== "rails" && PLAYGROUND_ENABLED_KITS.includes(currentKit);
   const displayTab =
     activeTab === "playground" && !showPlayground ? "docs" : activeTab;
+
+  const kitShowTitle = useMemo(() => {
+    const sectionSlug = name ?? "";
+    if (currentKit === "advanced_table" && sectionSlug) {
+      return `${linkFormat("advanced_table")} - ${linkFormat(sectionSlug)}`;
+    }
+    return linkFormat(sectionSlug || currentKit);
+  }, [currentKit, name]);
 
   const handleTabChange = (tab: string) => {
     if (tab === "playground") {
@@ -152,7 +127,7 @@ const KitShow = () => {
           {/* Title row with inline status badge */}
           <Flex orientation="row" alignItems="center" marginBottom={kit_description ? undefined : "md"}>
             <Title
-              text={`${linkFormat(name)}`}
+              text={kitShowTitle}
               size={1}
               dark={darkMode}
             />
@@ -224,15 +199,14 @@ const KitShow = () => {
               onClick={() => handleTabChange("props")}
               dark={darkMode}
             />
-            {/* TODO: Add playground back in when we have final designs */}
-            {/* {showPlayground && (
+            {showPlayground && (
               <NavItem
                 text="Playground"
                 active={displayTab === "playground"}
                 onClick={() => handleTabChange("playground")}
                 dark={darkMode}
               />
-            )} */}
+            )}
 
             {/* Building Blocks and References tabs, commented out until building blocks and references are implemented */}
             {/* <NavItem
@@ -253,8 +227,7 @@ const KitShow = () => {
       <div className="kit-show-wrapper">
         <Flex align="stretch" minWidth={0} orientation="column" marginBottom="lg" width="100%">
           {/* Playground Tab Content (React-only for now; hidden on Rails) */}
-          {/* TODO: Add playground back in when we have final designs */}
-          {/* {showPlayground && displayTab === "playground" && (
+           {showPlayground && displayTab === "playground" && (
             <PlaygroundTab
               kitSchema={kit_schema}
               globalPropsSchema={global_props_schema}
@@ -262,7 +235,7 @@ const KitShow = () => {
               defaultExample={examples?.[0]}
               playgroundConfig={playground_config}
             />
-          )} */}
+          )}
 
           {/* Docs Tab Content */}
           {displayTab === "docs" && (

@@ -1,5 +1,5 @@
-import React from "react";
-import { Pill, Caption, Card, Flex } from "playbook-ui";
+import React, { useMemo } from "react";
+import { PlaygroundPillSelector } from "./PlaygroundPillSelector";
 
 interface StructureMode {
   key: string;
@@ -17,25 +17,17 @@ export const StructureModeSelector: React.FC<StructureModeSelectorProps> = ({
   activeMode,
   onModeChange,
 }) => {
-  if (modes.length === 0) return null;
+  const options = useMemo(
+    () => modes.map((mode) => ({ key: mode.key, label: mode.label })),
+    [modes],
+  );
 
   return (
-    <Card marginBottom="md" padding="sm" width="100%">
-      <Flex alignItems="center" justifyContent="center" gap="sm" wrap>
-        <Caption text="Structure:" color="lighter" />
-        {modes.map((mode) => (
-          <div
-            key={mode.key}
-            onClick={() => onModeChange(mode.key)}
-            style={{ cursor: "pointer" }}
-          >
-            <Pill
-              text={mode.label}
-              variant={activeMode === mode.key ? "primary" : "neutral"}
-            />
-          </div>
-        ))}
-      </Flex>
-    </Card>
+    <PlaygroundPillSelector
+      activeKey={activeMode}
+      label="Structure"
+      onSelect={onModeChange}
+      options={options}
+    />
   );
 };

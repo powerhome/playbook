@@ -1,4 +1,8 @@
 {
+  "template": "<Timestamp timezone={timezone}{{props}} />",
+  "requiredProps": {
+    "timezone": "America/New_York"
+  },
   "groups": [
     {
       "name": "Content",
@@ -10,12 +14,13 @@
         "showCurrentYear",
         "showTimezone",
         "showUser",
-        "hideUpdated"
+        "hideUpdated",
+        "timezone"
       ]
     },
     {
       "name": "Appearance",
-      "props": ["variant", "align", "unstyled"]
+      "props": ["variant", "align", "unstyled", "dark"]
     }
   ],
   "presets": [
@@ -35,15 +40,7 @@
       }
     },
     {
-      "name": "Time only",
-      "props": {
-        "timestamp": "2026-04-09T15:30:00.000Z",
-        "text": "",
-        "showDate": false
-      }
-    },
-    {
-      "name": "With timezone",
+      "name": "With Timezone",
       "props": {
         "timestamp": "2026-04-09T15:30:00.000Z",
         "text": "",
@@ -67,18 +64,36 @@
         "variant": "updated",
         "showUser": true
       }
-    },
-    {
-      "name": "Centered",
-      "props": {
-        "timestamp": "2026-04-09T15:30:00.000Z",
-        "text": "",
-        "align": "center"
-      }
     }
   ],
   "conditionals": {
     "showUser": { "requires": "text" }
   },
-  "hints": {}
+  "hints": {
+    "default": {
+      "presetName": "Default",
+      "message": "Default renders timestamp text with both date and time.",
+      "type": "info"
+    },
+    "date_only": {
+      "presetName": "Date only",
+      "message": "Date only hides the time while keeping the date visible.",
+      "type": "info"
+    },
+    "with_timezone": {
+      "presetName": "With Timezone",
+      "message": "With Timezone shows the timezone label and uses a specific timezone.",
+      "type": "info"
+    },
+    "elapsed": {
+      "presetName": "Elapsed",
+      "message": "Elapsed switches variant to elapsed for relative time language.",
+      "type": "info"
+    },
+    "last_updated": {
+      "presetName": "Last updated",
+      "message": "Last updated uses the updated variant and showUser to include the user text.",
+      "type": "info"
+    }
+  }
 }

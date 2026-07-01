@@ -94,7 +94,7 @@
       ]
     },
     "onChange": {
-      "type": "ReactNode",
+      "type": "function",
       "platforms": [
         "react"
       ]
@@ -140,7 +140,7 @@
       "platforms": [
         "rails"
       ],
-      "type": "string"
+      "type": "GenericObject"
     },
     "onchange": {
       "platforms": [

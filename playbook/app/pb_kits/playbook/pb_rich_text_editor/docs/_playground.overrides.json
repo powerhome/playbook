@@ -1,0 +1,153 @@
+{
+  "structureModes": {
+    "default": "advanced",
+    "modes": {
+      "advanced": {
+        "label": "Advanced",
+        "template": "<RichTextEditor\n  advancedEditor={editor}{{props}}\n>\n  <EditorContent editor={editor} />\n</RichTextEditor>",
+        "children": "",
+        "wrapper": "const RichTextEditorPlayground = () => {\n  const editor = useEditor({\n    extensions: [StarterKit, TipTapLink],\n    content: 'Add your text here. You can format your text, add links, quotes, and bullets.',\n  })\n\n  if (!editor) return null\n\n  return {{component}}\n}\n\n<RichTextEditorPlayground />",
+        "externalImports": [
+          "import { useEditor, EditorContent } from '@tiptap/react'",
+          "import StarterKit from '@tiptap/starter-kit'",
+          "import TipTapLink from '@tiptap/extension-link'"
+        ]
+      }
+    }
+  },
+  "defaults": {
+    "advancedEditorToolbar": true,
+    "inputHeight": "md",
+    "inputMinHeight": "sm",
+    "label": "Description",
+    "maxWidth": "md",
+    "name": "description",
+    "requiredIndicator": false,
+    "simple": false
+  },
+  "hiddenProps": [
+    "advancedEditor",
+    "extensions",
+    "inputOptions",
+    "onChange",
+    "template",
+    "TrixEditor",
+    "trixInstance",
+    "value",
+    "placeholder"
+  ],
+  "groups": [
+    {
+      "name": "Content",
+      "props": ["label", "name"]
+    },
+    {
+      "name": "Toolbar",
+      "props": ["advancedEditorToolbar", "simple", "focus", "sticky"]
+    },
+    {
+      "name": "Sizing",
+      "props": ["inputHeight", "inputMinHeight", "maxWidth"]
+    },
+    {
+      "name": "State",
+      "props": ["requiredIndicator"]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default",
+      "structureMode": "advanced",
+      "props": {
+        "advancedEditorToolbar": true,
+        "label": "Description",
+        "name": "description"
+      }
+    },
+    {
+      "name": "Simple",
+      "structureMode": "advanced",
+      "props": {
+        "advancedEditorToolbar": true,
+        "label": "Notes",
+        "name": "notes",
+        "simple": true
+      }
+    },
+    {
+      "name": "Focus Toolbar",
+      "structureMode": "advanced",
+      "props": {
+        "advancedEditorToolbar": false,
+        "focus": true,
+        "label": "Focus editor"
+      }
+    },
+    {
+      "name": "Tall Editor",
+      "structureMode": "advanced",
+      "props": {
+        "inputHeight": "lg",
+        "inputMinHeight": "md",
+        "label": "Tall editor"
+      }
+    },
+    {
+      "name": "Required",
+      "structureMode": "advanced",
+      "props": {
+        "label": "Description",
+        "name": "description",
+        "requiredIndicator": true
+      }
+    },
+    {
+      "name": "Sticky",
+      "structureMode": "advanced",
+      "props": {
+        "label": "Sticky editor",
+        "sticky": true
+      }
+    }
+  ],
+  "conditionals": {
+    "advancedEditorToolbar": {
+      "structureMode": "advanced"
+    },
+    "inputHeight": {
+      "structureMode": "advanced"
+    },
+    "inputMinHeight": {
+      "structureMode": "advanced"
+    },
+    "sticky": {
+      "structureMode": "advanced"
+    }
+  },
+  "propSyncOnEnable": {
+    "advancedEditorToolbar": {
+      "structureMode": "advanced"
+    },
+    "inputHeight": {
+      "structureMode": "advanced"
+    },
+    "inputMinHeight": {
+      "structureMode": "advanced"
+    },
+    "sticky": {
+      "structureMode": "advanced"
+    }
+  },
+  "hints": {
+    "advanced": {
+      "presetName": "Default",
+      "message": "The Advanced structure wraps RichTextEditor with TipTap useEditor and EditorContent.",
+      "type": "info"
+    },
+    "focus": {
+      "when": { "focus": true },
+      "message": "Focus Toolbar shows the toolbar when the advanced editor receives focus.",
+      "type": "info"
+    }
+  }
+}

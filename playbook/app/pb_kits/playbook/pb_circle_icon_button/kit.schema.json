@@ -44,7 +44,7 @@
       "default": false
     },
     "onClick": {
-      "type": "ReactNode",
+      "type": "function",
       "platforms": [
         "react"
       ]
@@ -106,7 +106,7 @@
       "platforms": [
         "rails"
       ],
-      "type": "string"
+      "type": "GenericObject"
     }
   },
   "globalProps": true,

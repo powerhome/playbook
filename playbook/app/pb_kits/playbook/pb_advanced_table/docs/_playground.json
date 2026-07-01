@@ -28,7 +28,8 @@
         "rowId": "1",
         "backgroundColor": "#0056CF",
         "fontColor": "#FFFFFF",
-        "expandButtonColor": "#FFFFFF"
+        "expandButtonColor": "#FFFFFF",
+        "fontWeight": "bold"
       }
     ],
     "expandByDepth": [
@@ -231,11 +232,6 @@
     "onCustomSortClick": {
       "requires": {
         "customSort": true
-      }
-    },
-    "fullScreenControl": {
-      "requires": {
-        "allowFullScreen": true
       }
     },
     "enableSortingRemoval": {
@@ -2954,9 +2950,7 @@
   },
   "hiddenProps": [
     "sortControl",
-    "fullScreenControl",
     "expandedControl",
-    "allowFullScreen",
     "pagination",
     "paginationProps"
   ],

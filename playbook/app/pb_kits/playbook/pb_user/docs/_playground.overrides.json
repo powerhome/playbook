@@ -16,15 +16,16 @@
     },
     {
       "name": "Appearance",
-      "props": ["size", "orientation", "align", "nameStyle", "titleStyle", "bold", "avatarGrayscale"]
+      "props": ["size", "orientation", "align", "nameStyle", "titleStyle", "bold", "avatarGrayscale", "dark"]
     }
   ],
   "presets": [
     {
-      "name": "With avatar",
+      "name": "With Avatar",
       "props": {
         "name": "Anna Black",
         "title": "Engineer",
+        "subtitle": "Product team",
         "avatar": true,
         "avatarUrl": "https://randomuser.me/api/portraits/women/44.jpg",
         "size": "md",
@@ -32,7 +33,7 @@
       }
     },
     {
-      "name": "Text only",
+      "name": "Text Only",
       "props": {
         "name": "Anna Black",
         "title": "Engineer",
@@ -53,16 +54,6 @@
       }
     },
     {
-      "name": "Small",
-      "props": {
-        "name": "Anna Black",
-        "title": "Engineer",
-        "avatar": true,
-        "avatarUrl": "https://randomuser.me/api/portraits/women/44.jpg",
-        "size": "sm"
-      }
-    },
-    {
       "name": "Vertical",
       "props": {
         "name": "Anna Black",
@@ -74,7 +65,7 @@
       }
     },
     {
-      "name": "With territory",
+      "name": "With Territory",
       "props": {
         "name": "Anna Black",
         "territory": "West",
@@ -85,5 +76,31 @@
     }
   ],
   "conditionals": {},
-  "hints": {}
+  "hints": {
+    "with_avatar": {
+      "presetName": "With Avatar",
+      "message": "With Avatar shows the common horizontal user layout with avatar, title, and subtitle.",
+      "type": "info"
+    },
+    "text_only": {
+      "presetName": "Text Only",
+      "message": "Text Only turns avatar off for compact name-and-title displays.",
+      "type": "info"
+    },
+    "large": {
+      "presetName": "Large",
+      "message": "Large uses the lg size and subtitle for more prominent people rows.",
+      "type": "info"
+    },
+    "vertical": {
+      "presetName": "Vertical",
+      "message": "Vertical stacks the avatar and user details for profile-style layouts.",
+      "type": "info"
+    },
+    "with_territory": {
+      "presetName": "With Territory",
+      "message": "With Territory includes a territory label alongside the user identity.",
+      "type": "info"
+    }
+  }
 }

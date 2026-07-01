@@ -153,6 +153,7 @@ export default class PbDropdown extends PbEnhancedElement {
     };
 
     this.keyboardHandler = new PbDropdownKeyboard(this);
+    this.isDisabled = this.element.dataset.pbDropdownDisabled === "true";
     this.isMultiSelect = this.element.dataset.pbDropdownMultiSelect === "true";
     this.closeOnClick = this.element.dataset.pbDropdownCloseOnClick || "any";
     this.formPillProps = this.element.dataset.formPillProps
@@ -181,6 +182,7 @@ export default class PbDropdown extends PbEnhancedElement {
       this.clearBtn.addEventListener("click", this.clearBtnHandler);
     }
     this.updateClearButton();
+    this.applyDisabledState();
 
     // Listen for clear and select events from external source
     this.handleClearEventBound = this.handleClearEvent.bind(this);
@@ -281,10 +283,45 @@ export default class PbDropdown extends PbEnhancedElement {
     this.clearBtn.style.display = hasSelection ? "" : "none";
   }
 
+  applyDisabledState() {
+    if (!this.isDisabled) return;
+
+    const focusableSelector = [
+      "a[href]",
+      "button",
+      "input",
+      "select",
+      "textarea",
+      "[tabindex]",
+      "[contenteditable='true']",
+      CLEAR_ICON_SELECTOR,
+      DOWN_ARROW_SELECTOR,
+      UP_ARROW_SELECTOR,
+    ].join(",");
+
+    this.element.querySelectorAll(focusableSelector).forEach((element) => {
+      element.setAttribute("aria-disabled", "true");
+      element.setAttribute("tabindex", "-1");
+
+      if (element.matches("input, select, textarea, button")) {
+        element.setAttribute("disabled", "disabled");
+      }
+    });
+
+    this.element.querySelectorAll(`${CLEAR_ICON_SELECTOR}, ${DOWN_ARROW_SELECTOR}, ${UP_ARROW_SELECTOR}`).forEach((icon) => {
+      icon.setAttribute("aria-hidden", "true");
+      icon.setAttribute("focusable", "false");
+    });
+
+    this.hideElement(this.target);
+    this.updateArrowDisplay(false);
+  }
+
   bindEventListeners() {
     const customTrigger = this.customTrigger || this.element;
     this.customTriggerClickHandler = (e) => {
       const label = e.target.closest(LABEL_SELECTOR);
+      if (this.isDisabled) return;
       if (label && label.htmlFor) {
         const trigger = this.element.querySelector(
           `#${CSS.escape(label.htmlFor)}`,
@@ -474,6 +511,7 @@ export default class PbDropdown extends PbEnhancedElement {
   }
 
   handleSearch(term = "") {
+    if (this.isDisabled) return;
     const lcTerm = term.toLowerCase();
     let hasMatch = false;
     this.queryAllOptions().forEach((opt) => {
@@ -522,10 +560,13 @@ export default class PbDropdown extends PbEnhancedElement {
   }
 
   handleOptionClick(event) {
+    if (this.isDisabled) return;
     const option = event.target.closest(OPTION_SELECTOR);
     const hiddenInput = this.baseInput;
 
     if (option) {
+      if (option.dataset.dropdownOptionDisabled === "true") return;
+
       const value = option.dataset.dropdownOptionLabel;
       if (this.isMultiSelect) {
         const alreadySelected = this.selectedOptions.has(value);
@@ -567,6 +608,7 @@ export default class PbDropdown extends PbEnhancedElement {
   // ----- External events handling section -----
   // Handles pb:dropdown:clear - clear this dropdown when event.detail.dropdownId matches.
   handleClearEvent(event) {
+    if (this.isDisabled) return;
     const targetId = event.detail?.dropdownId;
     if (targetId && this.element.id === targetId) {
       this.clearSelection();
@@ -575,6 +617,7 @@ export default class PbDropdown extends PbEnhancedElement {
 
   // Handles custom_event_type events (e.g. turbo:submit-end) - clear when detail.dropdownId matches or is omitted.
   handleCustomClearEvent(event) {
+    if (this.isDisabled) return;
     const targetId = event.detail?.dropdownId;
     if (targetId == null || this.element.id === targetId) {
       this.clearSelection();
@@ -584,6 +627,7 @@ export default class PbDropdown extends PbEnhancedElement {
   // Handles pb:dropdown:select - set dropdown selection by option id(s).
   // Single: detail: { dropdownId, optionId }. Multi: detail: { dropdownId, optionIds: ['id1', 'id2'] }.
   handleSelectEvent(event) {
+    if (this.isDisabled) return;
     const targetId = event.detail?.dropdownId;
     if (!targetId || this.element.id !== targetId) return;
 
@@ -609,6 +653,7 @@ export default class PbDropdown extends PbEnhancedElement {
       }
     });
     if (!selectedOption) return;
+    if (selectedOption.dataset.dropdownOptionDisabled === "true") return;
 
     optionEls.forEach((opt) => opt.classList.remove("pb_dropdown_option_selected"));
     selectedOption.classList.add("pb_dropdown_option_selected");
@@ -679,6 +724,8 @@ export default class PbDropdown extends PbEnhancedElement {
         }
       });
       if (opt) {
+        if (opt.dataset.dropdownOptionDisabled === "true") return;
+
         const raw = opt.dataset.dropdownOptionLabel;
         this.selectedOptions.add(raw);
         opt.style.display = "none";
@@ -875,6 +922,8 @@ export default class PbDropdown extends PbEnhancedElement {
   }
 
   showElement(elem) {
+    if (this.isDisabled) return;
+    
     this.ensureFloatingPortalConfig();
     if (this.useMenuPortal) {
       this.mountPortalMenu(elem);
@@ -935,6 +984,7 @@ export default class PbDropdown extends PbEnhancedElement {
   }
 
   toggleElement(elem) {
+    if (this.isDisabled) return;
     const isOpen = toggleVisibility({
       isVisible: elem.classList.contains("open"),
       onHide: () => this.hideElement(elem),
@@ -1222,6 +1272,7 @@ export default class PbDropdown extends PbEnhancedElement {
   }
 
   clearSelection() {
+    if (this.isDisabled) return;
     if (this.isMultiSelect) {
       this.selectedOptions.clear();
       this.queryAllOptions().forEach((opt) => {

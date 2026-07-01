@@ -3,25 +3,86 @@
   "propTargets": {},
   "defaults": {
     "hideIcon": false,
-    "type": "inbound"
+    "type": "inbound",
+    "source": "Website lead"
   },
   "groups": [
     {
-      "name": "Props",
+      "name": "Content",
       "props": [
-        "hideIcon",
         "source",
         "type",
         "user"
+      ]
+    },
+    {
+      "name": "Appearance",
+      "props": [
+        "hideIcon"
       ]
     }
   ],
   "presets": [
     {
-      "name": "Default",
-      "props": {}
+      "name": "Inbound",
+      "props": {
+        "source": "Website lead",
+        "type": "inbound"
+      }
+    },
+    {
+      "name": "Referral",
+      "props": {
+        "source": "Partner referral",
+        "type": "referral",
+        "user": {
+          "name": "Ada Lovelace",
+          "userId": "42"
+        }
+      }
+    },
+    {
+      "name": "User",
+      "props": {
+        "source": "Created by",
+        "type": "user",
+        "user": {
+          "name": "Grace Hopper",
+          "userId": "12"
+        }
+      }
+    },
+    {
+      "name": "No Icon",
+      "props": {
+        "hideIcon": true,
+        "source": "Retail location",
+        "type": "retail"
+      }
     }
   ],
   "conditionals": {},
-  "hints": {}
+  "hints": {
+    "inbound": {
+      "presetName": "Inbound",
+      "message": "Inbound shows the default source icon and type label.",
+      "type": "info"
+    },
+    "referral": {
+      "presetName": "Referral",
+      "message": "Referral can use user data to render an avatar and referrer details.",
+      "type": "info"
+    },
+    "user": {
+      "presetName": "User",
+      "message": "User replaces the source type icon with the provided avatar data.",
+      "type": "info"
+    },
+    "no_icon": {
+      "presetName": "No Icon",
+      "message": "No Icon hides the leading source icon while keeping the text stack.",
+      "type": "info"
+    }
+  },
+  "hiddenProps": []
 }

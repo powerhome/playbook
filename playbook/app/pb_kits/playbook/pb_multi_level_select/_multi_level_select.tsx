@@ -781,7 +781,7 @@ const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>(
                 >
                   <Icon icon="chevron-down"
                       id={arrowDownElementId}
-                      size="xs"
+                      size="sm"
                   />
                 </div>
               ) : (
@@ -790,7 +790,7 @@ const MultiLevelSelect = forwardRef<HTMLInputElement, MultiLevelSelectProps>(
                 >
                   <Icon icon="chevron-up"
                       id={arrowUpElementId}
-                      size="xs"
+                      size="sm"
                   />
                 </div>
               )}

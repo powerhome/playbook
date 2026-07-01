@@ -73,9 +73,7 @@
   },
   "hiddenProps": [
     "sortControl",
-    "fullScreenControl",
     "expandedControl",
-    "allowFullScreen",
     "pagination",
     "paginationProps"
   ],
@@ -106,7 +104,7 @@
     "tableProps": {
       "container": false
     },
-    "rowStyling": [{ "rowId": "1", "backgroundColor": "#0056CF", "fontColor": "#FFFFFF", "expandButtonColor": "#FFFFFF" }],
+    "rowStyling": [{ "rowId": "1", "backgroundColor": "#0056CF", "fontColor": "#FFFFFF", "expandButtonColor": "#FFFFFF", "fontWeight": "bold" }],
     "expandByDepth": [
       {
         "depth": 0,
@@ -289,11 +287,6 @@
     "onCustomSortClick": {
       "requires": {
         "customSort": true
-      }
-    },
-    "fullScreenControl": {
-      "requires": {
-        "allowFullScreen": true
       }
     },
     "enableSortingRemoval": {

@@ -1,1 +1,3 @@
-<%%= pb_rails("<%= @kit_name_underscore %>") %>
+<%%= pb_rails("<%= @kit_name_underscore %>") do %>
+  <%= @kit_name_capitalize %> content
+<%% end %>

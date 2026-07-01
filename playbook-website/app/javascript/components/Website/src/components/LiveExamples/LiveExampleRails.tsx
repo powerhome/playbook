@@ -34,14 +34,15 @@ const REINITIALIZE_DELAY_MS = 200;
 
 const transformScriptForLiveExecution = (scriptContent: string): string => {
   // Rails examples are injected after the page has already loaded, so
-  // DOMContentLoaded callbacks need to run on a short timer instead.
-  const usesDOMContentLoaded = /DOMContentLoaded/.test(scriptContent);
+  // DOMContentLoaded/load callbacks need to run on a short timer instead.
+  const usesDeferredInit =
+    /DOMContentLoaded|addEventListener\s*\(\s*["']load["']/.test(scriptContent);
 
-  if (usesDOMContentLoaded) {
+  if (usesDeferredInit) {
     let transformed = scriptContent;
 
     transformed = transformed.replace(
-      /(window|document)\.addEventListener\s*\(\s*["']DOMContentLoaded["']\s*,\s*/g,
+      /(window|document)\.addEventListener\s*\(\s*["'](?:DOMContentLoaded|load)["']\s*,\s*/g,
       "setTimeout(",
     );
 

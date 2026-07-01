@@ -1,6 +1,10 @@
 {
-  "template": "<ProgressStep{{props}} />",
-  "propTargets": {},
+  "template": "<ProgressStep{{props}}>\n  {{children}}\n</ProgressStep>",
+  "propTargets": {
+    "progressStepItemStatus": "ProgressStepItem.props",
+    "progressStepItemIcon": "ProgressStepItem.props",
+    "progressStepItemClassName": "ProgressStepItem.props"
+  },
   "defaults": {
     "orientation": "horizontal",
     "icon": false,
@@ -10,22 +14,205 @@
   },
   "groups": [
     {
-      "name": "Props",
+      "name": "Layout",
       "props": [
-        "orientation",
-        "icon",
-        "showIcon",
+        "orientation"
+      ]
+    },
+    {
+      "name": "Appearance",
+      "props": [
         "variant",
-        "color"
+        "color",
+        "icon",
+        "dark"
+      ]
+    },
+    {
+      "name": "ProgressStepItem Props",
+      "props": [
+        "progressStepItemStatus",
+        "progressStepItemIcon",
+        "progressStepItemClassName"
       ]
     }
   ],
   "presets": [
     {
       "name": "Default",
-      "props": {}
+      "structureMode": "standard",
+      "props": {},
+      "children": "<ProgressStepItem status=\"complete\">Step 1</ProgressStepItem>\n<ProgressStepItem status=\"active\">Step 2</ProgressStepItem>\n<ProgressStepItem status=\"inactive\">Step 3</ProgressStepItem>"
+    },
+    {
+      "name": "With Icons",
+      "structureMode": "standard",
+      "props": {
+        "icon": true
+      },
+      "children": "<ProgressStepItem status=\"complete\">Step 1</ProgressStepItem>\n<ProgressStepItem status=\"complete\">Step 2</ProgressStepItem>\n<ProgressStepItem status=\"active\">Step 3</ProgressStepItem>\n<ProgressStepItem status=\"inactive\">Step 4</ProgressStepItem>"
+    },
+    {
+      "name": "Vertical",
+      "structureMode": "standard",
+      "props": {
+        "icon": true,
+        "orientation": "vertical"
+      },
+      "children": "<ProgressStepItem status=\"complete\">Account</ProgressStepItem>\n<ProgressStepItem status=\"active\">Profile</ProgressStepItem>\n<ProgressStepItem status=\"inactive\">Confirm</ProgressStepItem>"
+    },
+    {
+      "name": "Tracker",
+      "structureMode": "standard",
+      "props": {
+        "icon": true,
+        "variant": "tracker"
+      },
+      "children": "<ProgressStepItem status=\"complete\">Ordered</ProgressStepItem>\n<ProgressStepItem status=\"active\">Shipped</ProgressStepItem>\n<ProgressStepItem status=\"inactive\">Delivered</ProgressStepItem>"
+    },
+    {
+      "name": "Info Tracker",
+      "structureMode": "standard",
+      "props": {
+        "color": "info",
+        "icon": true,
+        "variant": "tracker"
+      },
+      "children": "<ProgressStepItem status=\"complete\">Queued</ProgressStepItem>\n<ProgressStepItem status=\"active\">Processing</ProgressStepItem>\n<ProgressStepItem status=\"inactive\">Complete</ProgressStepItem>"
+    },
+    {
+      "name": "Hidden Step",
+      "structureMode": "standard",
+      "props": {
+        "icon": true,
+        "variant": "tracker"
+      },
+      "children": "<ProgressStepItem status=\"complete\">Cart</ProgressStepItem>\n<ProgressStepItem status=\"hidden\" />\n<ProgressStepItem status=\"active\">Payment</ProgressStepItem>\n<ProgressStepItem status=\"inactive\">Review</ProgressStepItem>"
+    },
+    {
+      "name": "Custom Icon",
+      "structureMode": "progress_step_item_props",
+      "props": {
+        "icon": true,
+        "progressStepItemIcon": "exclamation-triangle",
+        "progressStepItemStatus": "active",
+        "variant": "tracker"
+      },
+      "children": "Review"
+    },
+    {
+      "name": "ProgressStepItem Active",
+      "structureMode": "progress_step_item_props",
+      "props": {
+        "icon": true,
+        "progressStepItemStatus": "active",
+        "variant": "tracker"
+      },
+      "children": "Current step"
     }
   ],
-  "conditionals": {},
-  "hints": {}
+  "conditionals": {
+    "color": {
+      "requires": {
+        "variant": "tracker"
+      }
+    }
+  },
+  "hints": {
+    "children": {
+      "message": "ProgressStep is composed from ProgressStepItem children; edit children to change labels, count, and statuses.",
+      "type": "info"
+    },
+    "tracker": {
+      "when": {
+        "variant": "tracker"
+      },
+      "message": "Tracker is a horizontal treatment; use ProgressStepItem statuses to control filled, current, inactive, and hidden steps.",
+      "type": "info"
+    },
+    "info_tracker": {
+      "when": {
+        "color": "info",
+        "variant": "tracker"
+      },
+      "message": "Info color only changes the tracker treatment.",
+      "type": "info"
+    },
+    "progress_step_item_props": {
+      "presetName": "Custom Icon",
+      "message": "Custom Icon routes ProgressStepItem Props controls into the first ProgressStepItem.",
+      "type": "info"
+    }
+  },
+  "structureModes": {
+    "default": "standard",
+    "modes": {
+      "standard": {
+        "label": "Steps",
+        "template": "<ProgressStep{{props}}>\n  {{children}}\n</ProgressStep>",
+        "children": "<ProgressStepItem status=\"complete\">Step 1</ProgressStepItem>\n<ProgressStepItem status=\"active\">Step 2</ProgressStepItem>\n<ProgressStepItem status=\"inactive\">Step 3</ProgressStepItem>"
+      },
+      "progress_step_item_props": {
+        "label": "ProgressStepItem Props",
+        "template": "<ProgressStep{{props}}>\n  <ProgressStepItem{{ProgressStepItem.props}}>\n    {{children}}\n  </ProgressStepItem>\n  <ProgressStepItem status=\"active\">Approve</ProgressStepItem>\n  <ProgressStepItem status=\"inactive\">Publish</ProgressStepItem>\n</ProgressStep>",
+        "children": "Review",
+        "props": {
+          "icon": true,
+          "progressStepItemStatus": "active",
+          "variant": "tracker"
+        }
+      }
+    }
+  },
+  "children": {
+    "editable": true,
+    "default": "<ProgressStepItem status=\"complete\">Step 1</ProgressStepItem>\n<ProgressStepItem status=\"active\">Step 2</ProgressStepItem>\n<ProgressStepItem status=\"inactive\">Step 3</ProgressStepItem>"
+  },
+  "customProps": {
+    "progressStepItemStatus": {
+      "type": "enum",
+      "platforms": [
+        "react"
+      ],
+      "values": [
+        "complete",
+        "active",
+        "inactive",
+        "hidden"
+      ],
+      "default": "complete"
+    },
+    "progressStepItemIcon": {
+      "type": "string",
+      "platforms": [
+        "react"
+      ],
+      "default": "check"
+    },
+    "progressStepItemClassName": {
+      "type": "string",
+      "platforms": [
+        "react"
+      ]
+    }
+  },
+  "propAliases": {
+    "progressStepItemStatus": "status",
+    "progressStepItemIcon": "icon",
+    "progressStepItemClassName": "className"
+  },
+  "hiddenProps": [
+    "showIcon"
+  ],
+  "propSyncOnEnable": {
+    "progressStepItemStatus": {
+      "structureMode": "progress_step_item_props"
+    },
+    "progressStepItemIcon": {
+      "structureMode": "progress_step_item_props"
+    },
+    "progressStepItemClassName": {
+      "structureMode": "progress_step_item_props"
+    }
+  }
 }

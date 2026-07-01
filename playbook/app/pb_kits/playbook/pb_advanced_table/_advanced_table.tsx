@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState, useCallback } from "react";
+import React, { useRef, useEffect } from "react";
 import classnames from "classnames";
 
 import { GenericObject } from "../types";
@@ -18,15 +18,7 @@ import TableActionBar from "./Components/TableActionBar";
 
 import { useTableState } from "./Hooks/useTableState";
 import { useTableActions } from "./Hooks/useTableActions";
-
-import Card from "../pb_card/_card"
-import Flex from "../pb_flex/_flex"
-import Icon from "../pb_icon/_icon"
-
-type FullscreenControls = {
-  toggleFullscreen: () => void;
-  isFullscreen: boolean;
-};
+import { updateStickyLayoutHeights, scheduleStickyActionBarHeightUpdate } from "./Utilities/StickyLayoutHelper";
 
 type AdvancedTableProps = {
   aria?: { [key: string]: string }
@@ -74,8 +66,6 @@ type AdvancedTableProps = {
   onRowSelectionChange?: (arg: RowSelectionState) => void
   onCustomSortClick?: (arg: GenericObject[]) => void
   virtualizedRows?: boolean
-  allowFullScreen?: boolean
-  fullScreenControl?: (controls: FullscreenControls) => void
 } & GlobalProps;
 
 /**
@@ -135,8 +125,6 @@ const AdvancedTable = (props: AdvancedTableProps) => {
     toggleExpansionIcon = "arrows-from-line",
     onRowSelectionChange,
     virtualizedRows = false,
-    allowFullScreen = false,
-    fullScreenControl,
   } = props;
 
   const noTableCardContainer = tableProps?.container === false;
@@ -214,68 +202,6 @@ const AdvancedTable = (props: AdvancedTableProps) => {
     );
   }, [fetchMoreOnBottomReached, fetchNextPage, isFetching, totalFetched, fullData.length]);
 
-  // Fullscreen
-  const [isFullscreen, setIsFullscreen] = useState(false)
-
-  const toggleFullscreen = useCallback(() => {
-    setIsFullscreen(prevState => !prevState)
-  }, [])
-
-  useEffect(() => {
-    if (allowFullScreen && fullScreenControl) {
-      fullScreenControl({
-        toggleFullscreen,
-        isFullscreen
-      })
-    }
-  }, [allowFullScreen, fullScreenControl, toggleFullscreen, isFullscreen])
-
-  const renderFullscreenHeader = () => {
-    if (!isFullscreen) return null
-
-    const defaultMinimizeIcon = (
-      <button
-          className="gray-icon fullscreen-icon"
-          onClick={toggleFullscreen}
-      >
-        <Icon
-            cursor="pointer"
-            fixedWidth
-            icon="arrow-down-left-and-arrow-up-right-to-center"
-            {...props}
-        />
-      </button>
-    )
-
-    return (
-      <Card
-          borderNone
-          borderRadius="none"
-          className="advanced-table-fullscreen-header"
-          {...props}
-      >
-          <Flex justify="end">
-            {defaultMinimizeIcon}
-          </Flex>
-      </Card>
-    )
-  }
-
-  useEffect(() => {
-    if (!allowFullScreen) return
-
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape' && isFullscreen) {
-        event.preventDefault()
-        toggleFullscreen()
-      }
-    }
-    document.addEventListener('keydown', handleKeyDown)
-    return () => {
-      document.removeEventListener('keydown', handleKeyDown)
-    }
-  }, [allowFullScreen, toggleFullscreen, isFullscreen])
-
   // Build CSS classes and props
   const ariaProps = buildAriaProps(aria);
   const dataProps = buildDataProps(data);
@@ -283,18 +209,44 @@ const AdvancedTable = (props: AdvancedTableProps) => {
 
   // Visibility flag for action bar
   const isActionBarVisible = (selectableRows && showActionsBar && selectedRowsLength > 0) || columnVisibilityControl;
+  const isStickyHeader = Boolean(tableProps?.sticky);
+
+  useEffect(() => {
+    if (!isStickyHeader || !tableWrapperRef.current) return;
+
+    const wrapper = tableWrapperRef.current;
+    const updateHeights = () => updateStickyLayoutHeights(wrapper);
+
+    updateHeights();
+    scheduleStickyActionBarHeightUpdate(wrapper);
+
+    const resizeObserver = new ResizeObserver(updateHeights);
+    resizeObserver.observe(wrapper);
+
+    const actionBar = wrapper.querySelector(".row-selection-actions-card");
+    if (actionBar) {
+      resizeObserver.observe(actionBar);
+    }
+
+    const table = wrapper.querySelector("table.pb_table");
+    const thead = table?.querySelector("thead");
+    if (thead) {
+      resizeObserver.observe(thead);
+    }
+
+    return () => resizeObserver.disconnect();
+  }, [isStickyHeader, isActionBarVisible, columnDefinitions, tableData]);
 
   const classes = classnames(
     buildCss("pb_advanced_table"),
     `advanced-table-responsive-${responsive}`,
     maxHeight ? `advanced-table-max-height-${maxHeight}` : '',
     {
-      'advanced-table-fullscreen': isFullscreen,
-      'advanced-table-allow-fullscreen': allowFullScreen,
       // Add the hidden-action-bar class when action bar functionality exists but is not visible
       'hidden-action-bar': (selectableRows || columnVisibilityControl) && !isActionBarVisible,
     },
     {'advanced-table-sticky-left-columns': stickyLeftColumn && stickyLeftColumn.length > 0},
+    { 'advanced-table-sticky-header': isStickyHeader },
     { 'advanced-table-no-table-container': noTableCardContainer },
     columnGroupBorderColor ? `column-group-border-${columnGroupBorderColor}` : '',
     scrollBarNone ? 'advanced-table-hide-scrollbar' : '',
@@ -358,7 +310,6 @@ const AdvancedTable = (props: AdvancedTableProps) => {
           ref={tableWrapperRef}
           style={tableWrapperStyle as React.CSSProperties}
       >
-        {renderFullscreenHeader()}
         <AdvancedTableProvider
             cascadeCollapse={cascadeCollapse}
             columnDefinitions={columnDefinitions}
@@ -375,7 +326,6 @@ const AdvancedTable = (props: AdvancedTableProps) => {
             hasAnySubRows={hasAnySubRows}
             inlineRowLoading={inlineRowLoading}
             isActionBarVisible={isActionBarVisible}
-            isFullscreen={isFullscreen}
             loading={loading}
             onCustomSortClick={onCustomSortClick}
             onExpandByDepthClick={onExpandByDepthClick}

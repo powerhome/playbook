@@ -407,6 +407,7 @@ RSpec.describe Playbook::PbAdvancedTable::TableBody do
         style = instance.build_pinned_row_style(0)
         expect(style).to include("position: sticky")
         expect(style).to include("var(--advanced-table-header-height, 44px)")
+        expect(style).to include("var(--advanced-table-action-bar-height, 0px)")
         expect(style).to include("2.5em * 0")
         expect(style).to include("z-index: 3")
         expect(style).to include("background: white")

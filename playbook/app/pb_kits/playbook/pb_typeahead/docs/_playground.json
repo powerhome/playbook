@@ -18,7 +18,9 @@
       "props": [
         "label",
         "name",
-        "options"
+        "options",
+        "inputDisplay",
+        "isMulti"
       ]
     },
     {
@@ -32,30 +34,31 @@
       ]
     },
     {
-      "name": "Appearance",
-      "props": [
-        "inputDisplay"
-      ]
-    },
-    {
-      "name": "Async & data",
+      "name": "Async & Data",
       "props": [
         "async",
-        "createable",
         "loadOptions",
         "getOptionLabel",
         "getOptionValue",
         "optionsByContext",
         "searchContextSelector",
-        "clearOnContextChange",
-        "preserveSearchInput"
+        "clearOnContextChange"
       ]
     },
     {
-      "name": "Advanced",
+      "name": "Behavior",
+      "props": [
+        "createable",
+        "preserveSearchInput",
+        "onChange"
+      ]
+    },
+    {
+      "name": "Appearance",
       "props": [
         "components",
-        "onChange"
+        "dark",
+        "marginBottom"
       ]
     }
   ],
@@ -64,6 +67,7 @@
       "name": "Basic list",
       "props": {
         "label": "Colors",
+        "name": "color",
         "options": [
           {
             "label": "Orange",
@@ -85,10 +89,12 @@
       }
     },
     {
-      "name": "Pills display",
+      "name": "Count display",
       "props": {
         "label": "Tags",
-        "inputDisplay": "pills",
+        "name": "tags",
+        "inputDisplay": "none",
+        "isMulti": true,
         "options": [
           {
             "label": "Design",
@@ -106,39 +112,15 @@
       }
     },
     {
-      "name": "Plain input",
-      "props": {
-        "label": "Team",
-        "inputDisplay": "none",
-        "options": [
-          {
-            "label": "North",
-            "value": "north"
-          },
-          {
-            "label": "South",
-            "value": "south"
-          }
-        ]
-      }
-    },
-    {
-      "name": "Disabled",
-      "props": {
-        "label": "Read only",
-        "disabled": true,
-        "options": [
-          {
-            "label": "Only option",
-            "value": "one"
-          }
-        ]
-      }
-    },
-    {
-      "name": "With error",
+      "name": "Required validation",
       "props": {
         "label": "Assignee",
+        "name": "assignee",
+        "required": true,
+        "requiredIndicator": true,
+        "validation": {
+          "message": "Choose an assignee."
+        },
         "error": "Selection is required.",
         "options": [
           {
@@ -153,10 +135,52 @@
       }
     },
     {
-      "name": "Creatable",
+      "name": "Async users",
+      "structureMode": "advanced",
+      "props": {
+        "async": true,
+        "label": "Users",
+        "name": "users",
+        "loadOptions": "playgroundTypeahead.loadOptions",
+        "getOptionLabel": "playgroundTypeahead.getOptionLabel",
+        "getOptionValue": "playgroundTypeahead.getOptionValue",
+        "options": []
+      }
+    },
+    {
+      "name": "Custom menu",
+      "structureMode": "advanced",
+      "props": {
+        "label": "Colors",
+        "name": "custom_menu",
+        "components": {
+          "__playgroundCode": "{ MenuList }"
+        },
+        "marginBottom": "none",
+        "options": [
+          {
+            "label": "Orange",
+            "value": "#FFA500"
+          },
+          {
+            "label": "Red",
+            "value": "#FF0000"
+          },
+          {
+            "label": "Green",
+            "value": "#00FF00"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Creatable handler",
       "props": {
         "label": "Add labels",
+        "name": "labels",
         "createable": true,
+        "preserveSearchInput": true,
+        "onChange": "(selected) => console.log(selected)",
         "options": [
           {
             "label": "Bug",
@@ -186,6 +210,14 @@
         "async": true
       }
     },
+    "requiredIndicator": {
+      "requires": "label"
+    },
+    "validation": {
+      "requires": {
+        "required": true
+      }
+    },
     "optionsByContext": {
       "requires": "searchContextSelector"
     },
@@ -194,12 +226,60 @@
     }
   },
   "hints": {
-    "async_options": {
-      "when": {
-        "async": true
-      },
-      "message": "Async mode expects loadOptions to return option objects with label and value.",
+    "basic_list": {
+      "presetName": "Basic list",
+      "message": "Basic list uses a local options array with label and value keys.",
       "type": "info"
+    },
+    "count_display": {
+      "presetName": "Count display",
+      "message": "Count display uses multi-select with inputDisplay set to none so selected values render as a count.",
+      "type": "info"
+    },
+    "required_validation": {
+      "presetName": "Required validation",
+      "message": "Required validation pairs required, requiredIndicator, validation, and error copy.",
+      "type": "info"
+    },
+    "async_users": {
+      "presetName": "Async users",
+      "message": "Async users demonstrates loadOptions plus custom option label/value resolvers.",
+      "type": "info"
+    },
+    "custom_menu": {
+      "presetName": "Custom menu",
+      "message": "Custom menu passes a components map to replace Typeahead.MenuList content.",
+      "type": "info"
+    },
+    "creatable_handler": {
+      "presetName": "Creatable handler",
+      "message": "Creatable handler shows custom option creation, preserved search input, and an onChange handler.",
+      "type": "info"
+    }
+  },
+  "customProps": {
+    "isMulti": {
+      "type": "boolean",
+      "platforms": [
+        "react"
+      ],
+      "default": false
+    }
+  },
+  "structureModes": {
+    "default": "standard",
+    "modes": {
+      "standard": {
+        "label": "Standard",
+        "template": "<Typeahead{{props}} />",
+        "children": ""
+      },
+      "advanced": {
+        "label": "Advanced setup",
+        "template": "<Typeahead{{props}} />",
+        "children": "",
+        "wrapper": "const playgroundTypeaheadOptions = [\n  { name: \"Ada Lovelace\", id: \"ada\" },\n  { name: \"Grace Hopper\", id: \"grace\" },\n  { name: \"Katherine Johnson\", id: \"katherine\" },\n  { name: \"Margaret Hamilton\", id: \"margaret\" },\n]\n\nconst playgroundTypeahead = {\n  loadOptions: (inputValue) => new Promise((resolve) => {\n    const search = inputValue.toLowerCase()\n    window.setTimeout(() => {\n      resolve(playgroundTypeaheadOptions.filter((option) => option.name.toLowerCase().includes(search)))\n    }, 250)\n  }),\n  getOptionLabel: (option) => option.name || option.label,\n  getOptionValue: (option) => String(option.id || option.value),\n}\n\nif (typeof window !== \"undefined\") {\n  window.playgroundTypeahead = playgroundTypeahead\n}\n\nconst MenuList = (props) => (\n  <Typeahead.MenuList\n      {...props}\n      footer={<Button margin=\"sm\" text=\"Custom footer\" />}\n  />\n)\n\nconst TypeaheadPlaygroundExample = () => (\n  {{component}}\n)\n\n<TypeaheadPlaygroundExample />"
+      }
     }
   }
 }

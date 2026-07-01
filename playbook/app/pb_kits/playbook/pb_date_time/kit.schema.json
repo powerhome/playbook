@@ -72,7 +72,7 @@
       "platforms": [
         "rails"
       ],
-      "type": "string"
+      "type": "Date"
     },
     "timezone": {
       "platforms": [

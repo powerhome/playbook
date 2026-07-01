@@ -39,7 +39,7 @@ interface UseTableStateProps {
   tableOptions?: GenericObject;
   onRowSelectionChange?: (arg: RowSelectionState) => void;
   columnVisibilityControl?: GenericObject;
-  rowStyling?: GenericObject;
+  rowStyling?: GenericObject[];
   inlineRowLoading?: boolean;
   sortParentOnly?: boolean;
 }
@@ -150,7 +150,7 @@ export function useTableState({
 
       return columnStructure;
     }) || [];
-  }, [columnHelper, onRowToggleClick, selectableRows]);
+  }, [columnHelper, onRowToggleClick, rowStyling, selectableRows]);
 
   const columns = useMemo(() => buildColumns(columnDefinitions), [buildColumns, columnDefinitions]);
 

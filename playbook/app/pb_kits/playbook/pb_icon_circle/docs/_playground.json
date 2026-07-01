@@ -3,25 +3,110 @@
   "propTargets": {},
   "defaults": {
     "size": "md",
-    "variant": "default"
+    "variant": "default",
+    "icon": "rocket",
+    "dark": false
   },
   "groups": [
     {
-      "name": "Props",
+      "name": "Content",
       "props": [
-        "dark",
-        "icon",
+        "icon"
+      ]
+    },
+    {
+      "name": "Appearance",
+      "props": [
         "size",
-        "variant"
+        "variant",
+        "dark"
       ]
     }
   ],
   "presets": [
     {
       "name": "Default",
-      "props": {}
+      "props": {
+        "icon": "rocket",
+        "size": "md",
+        "variant": "default"
+      }
+    },
+    {
+      "name": "Tiny",
+      "props": {
+        "icon": "rocket",
+        "size": "xxs",
+        "variant": "default"
+      }
+    },
+    {
+      "name": "Large",
+      "props": {
+        "icon": "rocket",
+        "size": "xl",
+        "variant": "default"
+      }
+    },
+    {
+      "name": "Royal",
+      "props": {
+        "icon": "crown",
+        "size": "md",
+        "variant": "royal"
+      }
+    },
+    {
+      "name": "Emoji",
+      "props": {
+        "icon": "😁",
+        "size": "md",
+        "variant": "orange"
+      }
     }
   ],
   "conditionals": {},
-  "hints": {}
+  "hints": {
+    "default": {
+      "presetName": "Default",
+      "message": "IconCircle renders an icon inside a circular colored background.",
+      "type": "info"
+    },
+    "tiny": {
+      "presetName": "Tiny",
+      "message": "Use the size prop to change the size of the circle and the nested icon.",
+      "type": "info"
+    },
+    "royal": {
+      "presetName": "Royal",
+      "message": "Use the variant prop to change the color of the circle.",
+      "type": "info"
+    },
+    "emoji": {
+      "presetName": "Emoji",
+      "message": "Use the icon prop to render an emoji as well.",
+      "type": "info"
+    }
+  },
+  "customProps": {
+    "variant": {
+      "type": "enum",
+      "platforms": [
+        "react"
+      ],
+      "values": [
+        "default",
+        "royal",
+        "blue",
+        "purple",
+        "teal",
+        "red",
+        "yellow",
+        "orange",
+        "green",
+        "lighter"
+      ],
+      "default": "default"
+    }
+  }
 }

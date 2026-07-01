@@ -1,0 +1,312 @@
+{
+  "structureModes": {
+    "default": "single",
+    "modes": {
+      "single": {
+        "label": "Single",
+        "template": "<Filter{{props}}>\n  {{children}}\n</Filter>",
+        "children": "{({ closePopover }) => (\n    <form>\n      <TextInput\n          label=\"Full Name\"\n          placeholder=\"Enter name\"\n      />\n      <Select\n          blankSelection=\"Select One...\"\n          label=\"Territory\"\n          name=\"location\"\n          options={[\n            { value: 'USA' },\n            { value: 'Canada' },\n            { value: 'Brazil' },\n            { value: 'Philippines' },\n          ]}\n      />\n      <Flex spacing=\"between\">\n        <Button\n            onClick={closePopover}\n            text=\"Apply\"\n        />\n        <Button\n            text=\"Clear\"\n            variant=\"secondary\"\n        />\n      </Flex>\n    </form>\n  )}",
+        "props": {
+          "double": false,
+          "variant": ""
+        }
+      },
+      "double": {
+        "label": "Double",
+        "template": "<Filter{{props}}>\n  {{children}}\n</Filter>",
+        "children": "{({ closePopover }) => (\n    <form>\n      <TextInput\n          label=\"Full Name\"\n          placeholder=\"Enter name\"\n      />\n      <Select\n          blankSelection=\"Select One...\"\n          label=\"Territory\"\n          name=\"location\"\n          options={[\n            { value: 'USA' },\n            { value: 'Canada' },\n            { value: 'Brazil' },\n            { value: 'Philippines' },\n          ]}\n      />\n      <Flex spacing=\"between\">\n        <Button\n            onClick={closePopover}\n            text=\"Apply\"\n        />\n        <Button\n            text=\"Clear\"\n            variant=\"secondary\"\n        />\n      </Flex>\n    </form>\n  )}",
+        "props": {
+          "double": true,
+          "variant": ""
+        }
+      },
+      "sort_only": {
+        "label": "Sort Only",
+        "template": "<Filter{{props}} />",
+        "children": "",
+        "props": {
+          "double": false,
+          "filters": {},
+          "results": null,
+          "variant": ""
+        }
+      },
+      "sidebar": {
+        "label": "Sidebar",
+        "template": "<Filter\n    isCollapsed={isCollapsed}\n    onCollapse={toggleCollapse}{{props}}\n>\n  <Filter.Section headerText=\"Full Name\">\n    <TextInput placeholder=\"Enter name\" />\n  </Filter.Section>\n  <SectionSeparator />\n  <Filter.Section\n      collapsed={isCollapsed}\n      collapsible\n      headerText=\"Territory\"\n  >\n    <Select\n        blankSelection=\"Select One...\"\n        name=\"location\"\n        options={[\n          { value: 'USA' },\n          { value: 'Canada' },\n          { value: 'Brazil' },\n          { value: 'Philippines' },\n        ]}\n    />\n  </Filter.Section>\n  <SectionSeparator />\n  <Filter.Section\n      collapsed={isCollapsed}\n      collapsible\n      headerText=\"Products\"\n  >\n    <Checkbox text=\"Doors\" marginBottom=\"sm\" />\n    <Checkbox text=\"Windows\" marginBottom=\"sm\" />\n    <Checkbox text=\"Siding\" />\n  </Filter.Section>\n</Filter>",
+        "children": "",
+        "imports": ["useCollapsible"],
+        "props": {
+          "double": false,
+          "variant": "sidebar",
+          "width": "xs"
+        },
+        "wrapper": "const FilterSidebarExample = () => {\n  const [isCollapsed, toggleCollapse] = useCollapsible(true)\n\n  return {{component}}\n}\n\n<FilterSidebarExample />"
+      }
+    }
+  },
+  "children": {
+    "editable": false,
+    "default": ""
+  },
+  "defaults": {
+    "background": true,
+    "double": false,
+    "filters": {
+      "Full Name": "John Wick",
+      "City": "San Francisco"
+    },
+    "isCollapsed": false,
+    "minWidth": "360px",
+    "onCollapse": "() => {}",
+    "onSortChange": "() => {}",
+    "placement": "bottom-start",
+    "popoverProps": {},
+    "results": 546,
+    "sortOptions": {
+      "popularity": "Popularity",
+      "manager_title": "Manager's Title",
+      "manager_name": "Manager's Name"
+    },
+    "sortValue": [
+      {
+        "name": "popularity",
+        "dir": "desc"
+      }
+    ]
+  },
+  "groups": [
+    {
+      "name": "Layout",
+      "props": [
+        "double",
+        "variant",
+        "background",
+        "results"
+      ]
+    },
+    {
+      "name": "Filter State",
+      "props": [
+        "filters"
+      ]
+    },
+    {
+      "name": "Sorting",
+      "props": [
+        "sortOptions",
+        "sortValue",
+        "onSortChange"
+      ]
+    },
+    {
+      "name": "Popover",
+      "props": [
+        "placement",
+        "minWidth",
+        "maxHeight",
+        "popoverProps"
+      ]
+    },
+    {
+      "name": "Sidebar",
+      "props": []
+    }
+  ],
+  "hiddenProps": [
+    "isCollapsed",
+    "onCollapse"
+  ],
+  "requiredCodeProps": [
+    "filters",
+    "results",
+    "sortOptions",
+    "sortValue",
+    "onSortChange"
+  ],
+  "presets": [
+    {
+      "name": "Single Filter",
+      "structureMode": "single",
+      "props": {
+        "filters": {
+          "Full Name": "John Wick"
+        },
+        "minWidth": "360px",
+        "onSortChange": "() => {}",
+        "results": 546,
+        "sortOptions": {
+          "popularity": "Popularity",
+          "manager_title": "Manager's Title",
+          "manager_name": "Manager's Name"
+        },
+        "sortValue": [
+          {
+            "name": "popularity",
+            "dir": "desc"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Double Filter",
+      "structureMode": "double",
+      "props": {
+        "filters": {
+          "Full Name": "John Wick",
+          "City": "San Francisco"
+        },
+        "minWidth": "375px",
+        "onSortChange": "() => {}",
+        "results": 1,
+        "sortOptions": {
+          "popularity": "Popularity",
+          "manager_title": "Manager's Title",
+          "manager_name": "Manager's Name"
+        },
+        "sortValue": [
+          {
+            "name": "popularity",
+            "dir": "desc"
+          }
+        ]
+      }
+    },
+    {
+      "name": "No Background",
+      "structureMode": "single",
+      "props": {
+        "background": false,
+        "filters": {
+          "Full Name": "John Wick",
+          "City": "Las Vegas"
+        },
+        "minWidth": "360px",
+        "onSortChange": "() => {}",
+        "results": 3,
+        "sortOptions": {
+          "popularity": "Popularity",
+          "manager_title": "Manager's Title",
+          "manager_name": "Manager's Name"
+        },
+        "sortValue": [
+          {
+            "name": "popularity",
+            "dir": "desc"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Filter Only",
+      "structureMode": "single",
+      "props": {
+        "filters": {
+          "Full Name": "John Wick"
+        },
+        "minWidth": "360px"
+      }
+    },
+    {
+      "name": "Sort Only",
+      "structureMode": "sort_only",
+      "props": {
+        "onSortChange": "() => {}",
+        "sortOptions": {
+          "popularity": "Popularity",
+          "manager_title": "Manager's Title",
+          "manager_name": "Manager's Name"
+        },
+        "sortValue": [
+          {
+            "name": "popularity",
+            "dir": "desc"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Constrained Popover",
+      "structureMode": "double",
+      "props": {
+        "filters": {
+          "Full Name": "John Wick",
+          "City": "San Francisco"
+        },
+        "maxHeight": "360px",
+        "minWidth": "360px",
+        "onSortChange": "() => {}",
+        "results": 1,
+        "sortOptions": {
+          "popularity": "Popularity",
+          "manager_title": "Manager's Title",
+          "manager_name": "Manager's Name"
+        },
+        "sortValue": [
+          {
+            "name": "popularity",
+            "dir": "desc"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Sidebar",
+      "structureMode": "sidebar",
+      "props": {
+        "onCollapse": "() => {}",
+        "results": 15,
+        "variant": "sidebar",
+        "width": "xs"
+      }
+    }
+  ],
+  "conditionals": {
+    "isCollapsed": {
+      "structureMode": "sidebar"
+    },
+    "onCollapse": {
+      "structureMode": "sidebar"
+    },
+    "maxHeight": {
+      "requires": "minWidth"
+    }
+  },
+  "hints": {
+    "single_filter": {
+      "presetName": "Single Filter",
+      "message": "Single Filter shows the compact layout with the filter trigger, active filters, result count, and sort menu in one row.",
+      "type": "info"
+    },
+    "double_filter": {
+      "presetName": "Double Filter",
+      "message": "Double Filter splits filter controls from the result count and sort controls, using a lower row for summary and sorting.",
+      "type": "info"
+    },
+    "no_background": {
+      "presetName": "No Background",
+      "message": "No Background renders the same filter controls without the Card wrapper.",
+      "type": "info"
+    },
+    "filter_only": {
+      "presetName": "Filter Only",
+      "message": "Filter Only keeps the filter trigger and selected filter display while omitting results and sorting props.",
+      "type": "info"
+    },
+    "sort_only": {
+      "presetName": "Sort Only",
+      "message": "Sort-only mode omits filter children and only renders the sort trigger.",
+      "type": "info"
+    },
+    "constrained_popover": {
+      "presetName": "Constrained Popover",
+      "message": "Constrained Popover demonstrates maxHeight and minWidth limits for larger filter forms inside the popover.",
+      "type": "info"
+    },
+    "sidebar": {
+      "presetName": "Sidebar",
+      "message": "Sidebar mode uses Filter.Section subcomponents and wrapper-managed collapse state so Expand All and Collapse All control every section.",
+      "type": "info"
+    }
+  }
+}

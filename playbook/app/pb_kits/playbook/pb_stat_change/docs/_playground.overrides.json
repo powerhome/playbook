@@ -15,14 +15,24 @@
   ],
   "conditionals": {},
   "hints": {
-    "value_required": {
-      "when": { "value": null },
-      "message": "Nothing renders until value is set—the component appends \"%\" after the value (do not include \"%\" in the value).",
+    "increase": {
+      "presetName": "Increase",
+      "message": "Increase shows positive change styling with the default upward direction icon.",
+      "type": "info"
+    },
+    "decrease": {
+      "presetName": "Decrease",
+      "message": "Decrease shows negative change styling with the default downward direction icon.",
+      "type": "info"
+    },
+    "neutral": {
+      "presetName": "Neutral",
+      "message": "Neutral keeps the percent value without positive or negative emphasis.",
       "type": "info"
     },
     "custom_icon": {
-      "when": { "icon": true },
-      "message": "Increase and decrease use arrow icons by default; set icon to override the arrow.",
+      "presetName": "Custom icon",
+      "message": "Custom icon replaces the default arrow with an explicit icon name.",
       "type": "info"
     }
   }

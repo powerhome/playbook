@@ -37,12 +37,24 @@ interface GenerateFromTemplateOptions {
   propValues: Record<string, PropValue>;
   propDefinitions: Record<string, PropDefinition>;
   propTargets?: Record<string, string>;
+  propAliases?: Record<string, string>;
   children?: string;
   childrenConfig?: PlaygroundChildrenConfig;
   includeImport?: boolean;
   customImports?: string[];
+  externalImports?: string[];
   wrapper?: string;
   requiredProps?: Record<string, any>;
+  statefulProps?: string[];
+}
+
+function templateUsesRequiredPropVariable(
+  template: string,
+  wrapper: string | undefined,
+  name: string
+): boolean {
+  const source = `${template}\n${wrapper ?? ""}`;
+  return new RegExp(`\\b${name.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}\\b`).test(source);
 }
 
 /** Unquoted key when valid JS identifier; otherwise JSON-stringify the key. */
@@ -50,8 +62,27 @@ function formatJsObjectKey(key: string): string {
   return /^[a-zA-Z_$][a-zA-Z0-9_$]*$/.test(key) ? key : JSON.stringify(key);
 }
 
+function getRawJsExpression(value: unknown): string | null {
+  if (
+    value !== null &&
+    typeof value === "object" &&
+    !Array.isArray(value) &&
+    typeof (value as Record<string, unknown>).__playgroundCode === "string"
+  ) {
+    const expression = (value as Record<string, string>).__playgroundCode.trim();
+    return expression.length > 0 ? expression : null;
+  }
+
+  return null;
+}
+
 /** Values inside JSX object literals / nested objects (not JSON.stringify for keys). */
 function formatJsExpressionValue(value: unknown): string {
+  const rawExpression = getRawJsExpression(value);
+  if (rawExpression) {
+    return rawExpression;
+  }
+
   if (value === null) {
     return "null";
   }
@@ -81,10 +112,44 @@ function formatJsExpressionValue(value: unknown): string {
   return JSON.stringify(value);
 }
 
+function getLocallyImportedNames(importStatements: string[]): Set<string> {
+  const importedNames = new Set<string>();
+
+  importStatements.forEach((statement) => {
+    const namedImportMatch = statement.match(/import\s*\{([^}]+)\}\s*from/);
+    if (namedImportMatch) {
+      namedImportMatch[1].split(",").forEach((item) => {
+        const parts = item.trim().split(/\s+as\s+/);
+        const localName = (parts[1] || parts[0] || "").trim();
+        if (localName) importedNames.add(localName);
+      });
+    }
+
+    const namespaceImportMatch = statement.match(
+      /import\s+\*\s+as\s+([A-Za-z_$][\w$]*)\s+from/
+    );
+    if (namespaceImportMatch) {
+      importedNames.add(namespaceImportMatch[1]);
+    }
+
+    const defaultImportMatch = statement.match(/import\s+([A-Za-z_$][\w$]*)\s+from/);
+    if (defaultImportMatch) {
+      importedNames.add(defaultImportMatch[1]);
+    }
+  });
+
+  return importedNames;
+}
+
 /**
  * JSX `name={{ default: true }}` style — avoids JSON `{"default":true}` quoted keys in snippets.
  */
 function formatJsxObjectProp(name: string, value: object): string {
+  const rawExpression = getRawJsExpression(value);
+  if (rawExpression) {
+    return `${name}={${rawExpression}}`;
+  }
+
   const o = value as Record<string, unknown>;
   const keys = Object.keys(o);
   if (keys.length === 0) {
@@ -106,6 +171,11 @@ const formatPropValue = (
   }
 
   const propType = String(definition.type ?? "any").toLowerCase();
+  const rawExpression = getRawJsExpression(value);
+  if (rawExpression) {
+    return `${name}={${rawExpression}}`;
+  }
+  const looksLikeFunction = typeof value === "string" && (value.includes("=>") || value.trim().startsWith("function"));
 
   // Handle arrays first (e.g., string[] or string | string[])
   if (Array.isArray(value)) {
@@ -164,6 +234,17 @@ const formatPropValue = (
     return `${name}={false}`;
   }
 
+  if (propType.includes("number") && typeof value === "number") {
+    return `${name}={${value}}`;
+  }
+
+  if (propType === "function" || propType.includes("=>") || looksLikeFunction) {
+    if (typeof value === "string" && value.trim()) {
+      return `${name}={${value}}`;
+    }
+    return null;
+  }
+
   if (propType === "string" || propType.includes("string")) {
     if (typeof value === "string" && value.trim()) {
       return `${name}="${value}"`;
@@ -173,16 +254,6 @@ const formatPropValue = (
 
   if (propType === "number") {
     return `${name}={${value}}`;
-  }
-
-  // Check if value looks like a function expression (contains => or is "function")
-  const looksLikeFunction = typeof value === "string" && (value.includes("=>") || value.trim().startsWith("function"));
-  
-  if (propType === "function" || propType.includes("=>") || looksLikeFunction) {
-    if (typeof value === "string" && value.trim()) {
-      return `${name}={${value}}`;
-    }
-    return null;
   }
 
   if (propType === "reactnode" || propType.includes("reactnode") || propType.includes("node")) {
@@ -349,28 +420,50 @@ export const generateFromTemplate = ({
   propValues,
   propDefinitions,
   propTargets = {},
+  propAliases = {},
   children,
   childrenConfig,
   includeImport = true,
   customImports = [],
+  externalImports = [],
   wrapper,
   requiredProps = {},
+  statefulProps = [],
 }: GenerateFromTemplateOptions): string => {
   // Group enabled props by their target marker
   const propsByTarget: Record<string, string[]> = {};
+  const requiredPropVariableNames = new Set(
+    Object.keys(requiredProps).filter((name) =>
+      templateUsesRequiredPropVariable(template, wrapper, name)
+    )
+  );
+  const statefulPropVariableNames = new Set(
+    statefulProps.filter((name) =>
+      templateUsesRequiredPropVariable(template, wrapper, name)
+    )
+  );
+  const templateVariableNames = new Set([
+    ...requiredPropVariableNames,
+    ...statefulPropVariableNames,
+  ]);
   
   Object.entries(propValues).forEach(([name, propValue]) => {
     if (!propValue.enabled) return;
     
-    // Skip required props - they're handled separately as variable definitions
-    if (requiredProps[name] !== undefined) return;
+    // Skip props only when the template/wrapper already references them as variables.
+    // Otherwise they should be emitted as ordinary JSX props in the copyable snippet.
+    if (templateVariableNames.has(name)) return;
     
     // Skip only when value matches kit schema default (not playground-only defaults)
     if (shouldSkipEmitWhenMatchesSchemaDefault(propDefinitions, name, propValue)) return;
     
     const definition = propDefinitions[name] || { type: "any", platforms: ["react"] as const };
     
-    const formatted = formatPropValue(name, propValue.value, definition);
+    const formatted = formatPropValue(
+      propAliases[name] ?? name,
+      propValue.value,
+      definition
+    );
     if (!formatted) return;
     
     // Determine which marker this prop belongs to
@@ -421,12 +514,19 @@ export const generateFromTemplate = ({
     result = wrapper.replace(/\{\{component\}\}/g, result);
   }
   
-  // Generate variable definitions for required props
+  // Generate variable definitions for required/stateful props
   let variableDefinitions = "";
-  if (Object.keys(requiredProps).length > 0) {
+  if (requiredPropVariableNames.size > 0) {
     Object.entries(requiredProps).forEach(([name, defaultValue]) => {
+      if (!requiredPropVariableNames.has(name)) return;
       // Use current value from propValues if available
       const currentValue = propValues[name]?.value ?? defaultValue;
+      variableDefinitions += `const ${name} = ${JSON.stringify(currentValue, null, 2)};\n\n`;
+    });
+  }
+  if (statefulPropVariableNames.size > 0) {
+    statefulPropVariableNames.forEach((name) => {
+      const currentValue = propValues[name]?.value;
       variableDefinitions += `const ${name} = ${JSON.stringify(currentValue, null, 2)};\n\n`;
     });
   }
@@ -435,7 +535,19 @@ export const generateFromTemplate = ({
   if (includeImport) {
     // Extract all component names from the template for the import
     const componentMatches = result.match(/<([A-Z][A-Za-z]*)/g) || [];
-    const components = [...new Set(componentMatches.map(m => m.slice(1)))];
+    const localComponents = new Set(
+      [
+        ...result.matchAll(/\bconst\s+([A-Z][A-Za-z0-9]*)\s*=/g),
+        ...result.matchAll(/\bfunction\s+([A-Z][A-Za-z0-9]*)\s*\(/g),
+      ].map((m) => m[1])
+    );
+    const externallyImportedNames = getLocallyImportedNames(externalImports);
+    const components = [
+      ...new Set(componentMatches.map((m) => m.slice(1))),
+    ].filter(
+      (component) =>
+        !localComponents.has(component) && !externallyImportedNames.has(component)
+    );
     // playbook-ui exports `Date`; alias matches docs / PlaygroundPreview (avoids shadowing global Date)
     const importItemsFromComponents = components.map((c) =>
       c === "FormattedDate" ? "Date as FormattedDate" : c
@@ -446,8 +558,10 @@ export const generateFromTemplate = ({
     if (customImports.length > 0) {
       importItems = [...importItems, ...customImports];
     }
-    const importStatement = `import { ${importItems.join(", ")} } from 'playbook-ui'\n\n`;
-    result = importStatement + variableDefinitions + result;
+    const externalImportStatement =
+      externalImports.length > 0 ? `${externalImports.join("\n")}\n` : "";
+    const importStatement = importItems.length > 0 ? `import { ${importItems.join(", ")} } from 'playbook-ui'\n\n` : "";
+    result = externalImportStatement + importStatement + variableDefinitions + result;
   } else {
     result = variableDefinitions + result;
   }
@@ -460,11 +574,14 @@ export const generateLiveFromTemplate = ({
   propValues,
   propDefinitions,
   propTargets = {},
+  propAliases = {},
   children,
   childrenConfig,
   customImports = [],
+  externalImports = [],
   wrapper,
   requiredProps: _requiredProps = {},
+  statefulProps = [],
 }: Omit<GenerateFromTemplateOptions, "includeImport">): string => {
   // Do NOT pass requiredProps here. PlaygroundPreview injects them as scope variables
   // (via previewScope → extraScope). Generating `const columnDefinitions = …` in the
@@ -476,32 +593,22 @@ export const generateLiveFromTemplate = ({
     propValues,
     propDefinitions,
     propTargets,
+    propAliases,
     children,
     childrenConfig,
     includeImport: false,
     customImports,
+    externalImports,
     wrapper,
     requiredProps: {},
+    statefulProps,
   });
 
   let body = code.trimEnd();
+  const trimmedBody = body.trimStart();
 
-  // Non-requiredProps preamble (e.g. wrapper const declarations) must stay outside render()
-  let jsxStart = body.search(/\r?\n<[A-Z]/);
-  if (jsxStart !== -1) {
-    jsxStart += body.slice(jsxStart).indexOf("<");
-  } else {
-    const trimmed = body.replace(/^\s+/, "");
-    if (/^<[A-Z]/.test(trimmed)) {
-      jsxStart = body.length - trimmed.length;
-    }
-  }
-  if (jsxStart >= 0) {
-    const preamble = body.slice(0, jsxStart).trimEnd();
-    const jsx = body.slice(jsxStart).trim();
-    if (preamble.length > 0 && jsx.length > 0 && jsx.startsWith("<")) {
-      return `${preamble}\n\nrender(${jsx})`;
-    }
+  if (trimmedBody.startsWith("<")) {
+    return `render(${trimmedBody})`;
   }
 
   // Wrapper strings sometimes end with <MyComponent /> for display/copy snippets; react-live
@@ -511,6 +618,21 @@ export const generateLiveFromTemplate = ({
   if (trailing) {
     body = body.slice(0, -trailing[0].length).trimEnd();
     return `${body}\nrender(<${trailing[1]} />)`;
+  }
+
+  // Non-requiredProps preamble (e.g. const data = [...]) must stay outside render().
+  let jsxStart = body.search(/\r?\n<[A-Z]/);
+  if (jsxStart !== -1) {
+    jsxStart += body.slice(jsxStart).indexOf("<");
+  } else {
+    jsxStart = -1;
+  }
+  if (jsxStart >= 0) {
+    const preamble = body.slice(0, jsxStart).trimEnd();
+    const jsx = body.slice(jsxStart).trim();
+    if (preamble.length > 0 && jsx.length > 0 && jsx.startsWith("<")) {
+      return `${preamble}\n\nrender(${jsx})`;
+    }
   }
 
   // Wrap in render() for react-live (noInline). Prefer the last `const Name = (` / `function Name(`

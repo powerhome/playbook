@@ -1,0 +1,180 @@
+{
+  "structureModes": {
+    "default": "maplibre",
+    "modes": {
+      "maplibre": {
+        "label": "MapLibre",
+        "template": "<Map{{props}}>\n  <div\n      ref={mapContainerRef}\n      style={mapContainerStyle}\n  />\n</Map>",
+        "props": {
+          "htmlOptions": {
+            "style": {
+              "height": "320px",
+              "position": "relative",
+              "width": "100%"
+            }
+          }
+        },
+        "imports": [
+          "mapTheme"
+        ],
+        "externalImports": [
+          "import React, { useEffect, useRef, useState } from 'react'",
+          "import maplibregl from 'maplibre-gl'"
+        ],
+        "wrapper": "const defaultPosition = [-75.379143, 39.831200]\nconst mapContainerStyle = {\n  position: 'absolute',\n  left: 0,\n  right: 0,\n  top: 0,\n  bottom: 0,\n}\n\nconst MapPlaygroundExample = () => {\n  const [mapInstance, setMapInstance] = useState(null)\n  const mapContainerRef = useRef(null)\n\n  const handleZoomIn = (map) => map?.zoomIn({ ...mapTheme.zoomConfig })\n  const handleZoomOut = (map) => map?.zoomOut({ ...mapTheme.zoomConfig })\n  const handleFlyTo = (map) => map?.flyTo({\n    center: defaultPosition,\n    ...mapTheme.flyToConfig,\n  })\n\n  useEffect(() => {\n    if (!mapContainerRef.current) return undefined\n\n    const map = new maplibregl.Map({\n      container: mapContainerRef.current,\n      center: defaultPosition,\n      ...mapTheme.mapConfig,\n    })\n\n    map.on('load', ({ target }) => {\n      new maplibregl.Marker({ color: mapTheme.marker })\n        .setLngLat(defaultPosition)\n        .setPopup(\n          new maplibregl.Popup({ closeButton: false }).setHTML(\n            '<h4 class=\"pb_title_kit pb_title_4\">Hello World!</h4>'\n          )\n        )\n        .addTo(target)\n\n      target.scrollZoom.disable()\n      target.addControl(new maplibregl.AttributionControl({ compact: true }))\n      setMapInstance(target)\n    })\n\n    return () => map.remove()\n  }, [])\n\n  return {{component}}\n}\n\n<MapPlaygroundExample />"
+      },
+      "custom_controls": {
+        "label": "Custom Controls",
+        "template": "<Map{{props}}>\n  <Map.Controls{{Controls.props}}>\n    <MapCustomButton\n        icon=\"home\"\n        onClick={() => console.log('home clicked')}\n    />\n    <MapCustomButton\n        icon=\"search\"\n        onClick={() => console.log('search clicked')}\n    />\n  </Map.Controls>\n  <div\n      ref={mapContainerRef}\n      style={mapContainerStyle}\n  />\n</Map>",
+        "props": {
+          "htmlOptions": {
+            "style": {
+              "height": "320px",
+              "position": "relative",
+              "width": "100%"
+            }
+          },
+          "zoomBtns": true,
+          "flyTo": true,
+          "zoomInClick": "() => handleZoomIn(mapInstance)",
+          "zoomOutClick": "() => handleZoomOut(mapInstance)",
+          "flyToClick": "() => handleFlyTo(mapInstance)"
+        },
+        "propTargets": {
+          "zoomBtns": "Controls.props",
+          "flyTo": "Controls.props",
+          "zoomInClick": "Controls.props",
+          "zoomOutClick": "Controls.props",
+          "flyToClick": "Controls.props"
+        },
+        "imports": [
+          "mapTheme"
+        ],
+        "externalImports": [
+          "import React, { useEffect, useRef, useState } from 'react'",
+          "import maplibregl from 'maplibre-gl'"
+        ],
+        "wrapper": "const defaultPosition = [-75.379143, 39.831200]\nconst mapContainerStyle = {\n  position: 'absolute',\n  left: 0,\n  right: 0,\n  top: 0,\n  bottom: 0,\n}\n\nconst MapPlaygroundExample = () => {\n  const [mapInstance, setMapInstance] = useState(null)\n  const mapContainerRef = useRef(null)\n\n  const handleZoomIn = (map) => map?.zoomIn({ ...mapTheme.zoomConfig })\n  const handleZoomOut = (map) => map?.zoomOut({ ...mapTheme.zoomConfig })\n  const handleFlyTo = (map) => map?.flyTo({\n    center: defaultPosition,\n    ...mapTheme.flyToConfig,\n  })\n\n  useEffect(() => {\n    if (!mapContainerRef.current) return undefined\n\n    const map = new maplibregl.Map({\n      container: mapContainerRef.current,\n      center: defaultPosition,\n      ...mapTheme.mapConfig,\n    })\n\n    map.on('load', ({ target }) => {\n      new maplibregl.Marker({ color: mapTheme.marker })\n        .setLngLat(defaultPosition)\n        .setPopup(\n          new maplibregl.Popup({ closeButton: false }).setHTML(\n            '<h4 class=\"pb_title_kit pb_title_4\">Hello World!</h4>'\n          )\n        )\n        .addTo(target)\n\n      target.scrollZoom.disable()\n      target.addControl(new maplibregl.AttributionControl({ compact: true }))\n      setMapInstance(target)\n    })\n\n    return () => map.remove()\n  }, [])\n\n  return {{component}}\n}\n\n<MapPlaygroundExample />"
+      }
+    }
+  },
+  "children": {
+    "editable": false,
+    "default": ""
+  },
+  "defaults": {
+    "zoomBtns": true,
+    "flyTo": false,
+    "zoomInClick": "() => handleZoomIn(mapInstance)",
+    "zoomOutClick": "() => handleZoomOut(mapInstance)",
+    "flyToClick": "() => handleFlyTo(mapInstance)",
+    "htmlOptions": {
+      "style": {
+        "height": "320px",
+        "position": "relative",
+        "width": "100%"
+      }
+    }
+  },
+  "groups": [
+    {
+      "name": "Controls",
+      "props": [
+        "zoomBtns",
+        "flyTo"
+      ]
+    },
+    {
+      "name": "Callbacks",
+      "props": [
+        "zoomInClick",
+        "zoomOutClick",
+        "flyToClick"
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Zoom Controls",
+      "structureMode": "maplibre",
+      "props": {
+        "zoomBtns": true,
+        "zoomInClick": "() => handleZoomIn(mapInstance)",
+        "zoomOutClick": "() => handleZoomOut(mapInstance)"
+      }
+    },
+    {
+      "name": "Zoom and Fly To",
+      "structureMode": "maplibre",
+      "props": {
+        "zoomBtns": true,
+        "flyTo": true,
+        "zoomInClick": "() => handleZoomIn(mapInstance)",
+        "zoomOutClick": "() => handleZoomOut(mapInstance)",
+        "flyToClick": "() => handleFlyTo(mapInstance)"
+      }
+    },
+    {
+      "name": "No Controls",
+      "structureMode": "maplibre",
+      "props": {
+        "zoomBtns": false,
+        "flyTo": false
+      }
+    },
+    {
+      "name": "Custom Buttons",
+      "structureMode": "custom_controls",
+      "props": {
+        "zoomBtns": true,
+        "flyTo": true,
+        "zoomInClick": "() => handleZoomIn(mapInstance)",
+        "zoomOutClick": "() => handleZoomOut(mapInstance)",
+        "flyToClick": "() => handleFlyTo(mapInstance)"
+      }
+    }
+  ],
+  "conditionals": {
+    "flyTo": {
+      "requires": "zoomBtns"
+    },
+    "zoomInClick": {
+      "requires": "zoomBtns"
+    },
+    "zoomOutClick": {
+      "requires": "zoomBtns"
+    },
+    "flyToClick": {
+      "requires": {
+        "flyTo": true
+      }
+    }
+  },
+  "hints": {
+    "maplibre_setup": {
+      "when": {},
+      "message": "Map uses MapLibre: import maplibregl from 'maplibre-gl', include the MapLibre CSS, use mapTheme, and give .pb_map a relative container with explicit height and width.",
+      "type": "info"
+    },
+    "zoom_controls": {
+      "presetName": "Zoom Controls",
+      "message": "zoomBtns renders Playbook Map.Controls and the callbacks call MapLibre zoomIn and zoomOut on the loaded map instance.",
+      "type": "info"
+    },
+    "zoom_and_fly_to": {
+      "presetName": "Zoom and Fly To",
+      "message": "flyTo adds the extra control button; flyToClick calls map.flyTo with the default marker position and mapTheme.flyToConfig.",
+      "type": "info"
+    },
+    "no_controls": {
+      "presetName": "No Controls",
+      "message": "With zoomBtns false, Map still wraps the MapLibre container but does not render Playbook map controls.",
+      "type": "info"
+    },
+    "custom_buttons": {
+      "presetName": "Custom Buttons",
+      "message": "Custom Buttons composes Map.Controls and MapCustomButton children; control props move onto Map.Controls in this structure.",
+      "type": "info"
+    }
+  }
+}
