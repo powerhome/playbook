@@ -89,7 +89,7 @@ export const CustomCell = ({
               />
             ) : (
               <Icon cursor="pointer"
-                  icon="circle-play"    
+                  icon="circle-play"
                />
             )}
           </button>
