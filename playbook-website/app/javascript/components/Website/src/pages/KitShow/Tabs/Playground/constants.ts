@@ -51,7 +51,14 @@ export const GLOBAL_PROP_GROUPS: Array<{ name: string; props: string[] }> = [
   },
   {
     name: "Height & Width",
-    props: ["height", "width", "minHeight", "maxHeight", "minWidth", "maxWidth"],
+    props: [
+      "height",
+      "width",
+      "minHeight",
+      "maxHeight",
+      "minWidth",
+      "maxWidth",
+    ],
   },
   {
     name: "Position",
@@ -73,7 +80,16 @@ export const GLOBAL_PROP_GROUPS: Array<{ name: string; props: string[] }> = [
   },
   {
     name: "Border",
-    props: ["borderRadius"],
+    props: [
+      "borderRadius",
+      "border",
+      "borderTop",
+      "borderBottom",
+      "borderLeft",
+      "borderRight",
+      "borderX",
+      "borderY",
+    ],
   },
   {
     name: "Shadows",

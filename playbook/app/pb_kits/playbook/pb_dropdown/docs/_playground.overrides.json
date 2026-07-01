@@ -4,22 +4,38 @@
     "modes": {
       "simple": {
         "label": "Simple",
-        "template": "<Dropdown{{props}} />",
+        "template": "<Dropdown options={options}{{props}} />",
         "children": ""
       },
       "subcomponents": {
         "label": "With Subcomponents",
-        "template": "<Dropdown{{props}}>\n  <Dropdown.Trigger />\n  <Dropdown.Container>\n    <Dropdown.Option option={({ label: 'United States', value: 'unitedStates', id: 'us' })} />\n    <Dropdown.Option option={({ label: 'Canada', value: 'canada', id: 'ca' })} />\n    <Dropdown.Option option={({ label: 'Pakistan', value: 'pakistan', id: 'pk' })} />\n  </Dropdown.Container>\n</Dropdown>",
-        "children": "",
-        "props": {
-          "options": [
-            { "label": "United States", "value": "unitedStates", "id": "us" },
-            { "label": "Canada", "value": "canada", "id": "ca" },
-            { "label": "Pakistan", "value": "pakistan", "id": "pk" }
-          ]
-        }
+        "template": "<Dropdown options={options}{{props}}>\n  <Dropdown.Trigger />\n  <Dropdown.Container>\n    {options.map((option) => (\n      <Dropdown.Option key={option.id} option={option} />\n    ))}\n  </Dropdown.Container>\n</Dropdown>",
+        "children": ""
       }
     }
+  },
+  "customProps": {
+    "options": {
+      "type": "array",
+      "platforms": ["react", "rails"],
+      "description": "Dropdown option data with label, value, id, and optional disabled state."
+    }
+  },
+  "requiredProps": {
+    "options": [
+      { "label": "United States", "value": "unitedStates", "id": "us" },
+      { "label": "Canada", "value": "canada", "id": "ca", "disabled": true },
+      { "label": "Pakistan", "value": "pakistan", "id": "pk" },
+      { "label": "Mexico", "value": "mexico", "id": "mx", "disabled": true },
+      { "label": "United Kingdom", "value": "unitedKingdom", "id": "gb" },
+      { "label": "India", "value": "india", "id": "in" },
+      { "label": "Australia", "value": "australia", "id": "au" },
+      { "label": "New Zealand", "value": "newZealand", "id": "nz" },
+      { "label": "Italy", "value": "italy", "id": "it" },
+      { "label": "Germany", "value": "germany", "id": "de" },
+      { "label": "Brazil", "value": "brazil", "id": "br" },
+      { "label": "Philippines", "value": "philippines", "id": "ph" }
+    ]
   },
   "defaults": {
     "autocomplete": false,
@@ -32,8 +48,17 @@
     "multiSelect": false,
     "options": [
       { "label": "United States", "value": "unitedStates", "id": "us" },
-      { "label": "Canada", "value": "canada", "id": "ca" },
-      { "label": "Pakistan", "value": "pakistan", "id": "pk" }
+      { "label": "Canada", "value": "canada", "id": "ca", "disabled": true },
+      { "label": "Pakistan", "value": "pakistan", "id": "pk" },
+      { "label": "Mexico", "value": "mexico", "id": "mx", "disabled": true },
+      { "label": "United Kingdom", "value": "unitedKingdom", "id": "gb" },
+      { "label": "India", "value": "india", "id": "in" },
+      { "label": "Australia", "value": "australia", "id": "au" },
+      { "label": "New Zealand", "value": "newZealand", "id": "nz" },
+      { "label": "Italy", "value": "italy", "id": "it" },
+      { "label": "Germany", "value": "germany", "id": "de" },
+      { "label": "Brazil", "value": "brazil", "id": "br" },
+      { "label": "Philippines", "value": "philippines", "id": "ph" }
     ],
     "placeholder": "Select a country",
     "requiredIndicator": false,
@@ -80,7 +105,8 @@
         "separators",
         "formPillProps",
         "activeStyle",
-        "dark"
+        "dark",
+        "disabled"
       ]
     },
     {
@@ -93,36 +119,28 @@
       "name": "Default trigger",
       "props": {
         "variant": "default",
-        "placeholder": "Select a country",
-        "options": [
-          { "label": "United States", "value": "unitedStates", "id": "us" },
-          { "label": "Canada", "value": "canada", "id": "ca" },
-          { "label": "Mexico", "value": "mexico", "id": "mx" }
-        ]
+        "placeholder": "Select a country"
       }
     },
     {
       "name": "With label",
       "props": {
         "label": "Select a Country",
-        "placeholder": "Choose a country",
-        "options": [
-          { "label": "United States", "value": "unitedStates", "id": "us" },
-          { "label": "Canada", "value": "canada", "id": "ca" },
-          { "label": "Pakistan", "value": "pakistan", "id": "pk" }
-        ]
+        "placeholder": "Choose a country"
+      }
+    },
+    {
+      "name": "Disabled options",
+      "props": {
+        "label": "Select a Country",
+        "placeholder": "Choose a country"
       }
     },
     {
       "name": "Subtle Variant",
       "props": {
         "variant": "subtle",
-        "separators": false,
-        "options": [
-          { "label": "Alpha", "value": "alpha", "id": "a" },
-          { "label": "Beta", "value": "beta", "id": "b" },
-          { "label": "Gamma", "value": "gamma", "id": "g" }
-        ]
+        "separators": false
       }
     },
     {
@@ -183,13 +201,7 @@
       "props": {
         "variant": "default",
         "multiSelect": true,
-        "placeholder": "Select regions",
-        "options": [
-          { "label": "North", "value": "north", "id": "n" },
-          { "label": "South", "value": "south", "id": "s" },
-          { "label": "East", "value": "east", "id": "e" },
-          { "label": "West", "value": "west", "id": "w" }
-        ]
+        "placeholder": "Select countries"
       }
     },
     {
@@ -202,16 +214,6 @@
         "defaultValue": [
           { "label": "United States", "value": "unitedStates" },
           { "label": "Italy", "value": "italy" }
-        ],
-        "options": [
-          { "label": "United States", "value": "unitedStates", "id": "us" },
-          { "label": "United Kingdom", "value": "unitedKingdom", "id": "gb" },
-          { "label": "Canada", "value": "canada", "id": "ca" },
-          { "label": "Pakistan", "value": "pakistan", "id": "pk" },
-          { "label": "India", "value": "india", "id": "in" },
-          { "label": "Australia", "value": "australia", "id": "au" },
-          { "label": "New Zealand", "value": "newZealand", "id": "nz" },
-          { "label": "Italy", "value": "italy", "id": "it" }
         ]
       }
     },
@@ -221,11 +223,7 @@
         "variant": "default",
         "label": "Required field",
         "placeholder": "Required field",
-        "error": "Please make a selection.",
-        "options": [
-          { "label": "Option A", "value": "a", "id": "a" },
-          { "label": "Option B", "value": "b", "id": "b" }
-        ]
+        "error": "Please make a selection."
       }
     },
     {
@@ -233,33 +231,14 @@
       "props": {
         "variant": "default",
         "autocomplete": true,
-        "placeholder": "Search…",
-        "options": [
-          { "label": "Apple", "value": "apple", "id": "1" },
-          { "label": "Apricot", "value": "apricot", "id": "2" },
-          { "label": "Banana", "value": "banana", "id": "3" }
-        ]
+        "placeholder": "Search..."
       }
     },
     {
       "name": "Constrained height",
       "props": {
         "label": "Choose an Option",
-        "constrainHeight": true,
-        "options": [
-          { "label": "Option 1", "value": "option_1", "id": "opt_1" },
-          { "label": "Option 2", "value": "option_2", "id": "opt_2" },
-          { "label": "Option 3", "value": "option_3", "id": "opt_3" },
-          { "label": "Option 4", "value": "option_4", "id": "opt_4" },
-          { "label": "Option 5", "value": "option_5", "id": "opt_5" },
-          { "label": "Option 6", "value": "option_6", "id": "opt_6" },
-          { "label": "Option 7", "value": "option_7", "id": "opt_7" },
-          { "label": "Option 8", "value": "option_8", "id": "opt_8" },
-          { "label": "Option 9", "value": "option_9", "id": "opt_9" },
-          { "label": "Option 10", "value": "option_10", "id": "opt_10" },
-          { "label": "Option 11", "value": "option_11", "id": "opt_11" },
-          { "label": "Option 12", "value": "option_12", "id": "opt_12" }
-        ]
+        "constrainHeight": true
       }
     }
   ],
@@ -300,6 +279,11 @@
     "constrained_height_info": {
       "presetName": "Constrained height",
       "message": "constrainHeight restricts the height of the dropdown menu and enables vertical scrolling when the content exceeds this height. This prevents long dropdown lists from rendering off-screen.",
+      "type": "info"
+    },
+    "disabled_options_info": {
+      "presetName": "Disabled options",
+      "message": "Set disabled: true on individual option objects to keep them visible while preventing selection.",
       "type": "info"
     },
     "subcomponent_structure_info": {
