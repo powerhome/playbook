@@ -123,10 +123,10 @@ module Playbook
         svg = doc.at_css("svg")
         return "" unless svg
 
+        svg.remove_attribute("height")
+        svg.remove_attribute("width")
         svg["class"] = %w[pb_custom_icon svg-inline--fa].concat([object.custom_icon_classname]).join(" ")
         svg["id"] = object.id
-        svg["height"] = "auto"
-        svg["width"] = "auto"
         svg["tabindex"] = object.tabindex
         fill_color = object.color || "currentColor"
 
