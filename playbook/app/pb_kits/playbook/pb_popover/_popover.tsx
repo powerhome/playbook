@@ -24,6 +24,7 @@ import { DialogContext, DialogContextValue } from "../pb_dialog/_dialog_context"
 import {
   PB_FLOATING_OWNER_ATTR,
   isPortaledFloatingKitInteraction,
+  resolveFullscreenOverlayForElement,
 } from "../utilities/floatingPortalHosts";
 
 type ModifiedGlobalProps = Omit<GlobalProps, 'minWidth' | 'maxHeight' | 'minHeight'>
@@ -72,17 +73,21 @@ const getAppendTarget = (
   appendTo: string | undefined,
   targetId: string
 ): HTMLElement => {
-  if (!appendTo || appendTo === "body") return document.body;
-
-  if (appendTo === "parent") {
-    const referenceWrapper = document.querySelector(`#reference-${targetId}`);
-    if (referenceWrapper?.parentElement) {
-      return referenceWrapper.parentElement;
+  if (appendTo && appendTo !== "body") {
+    if (appendTo === "parent") {
+      const referenceWrapper = document.querySelector(`#reference-${targetId}`);
+      if (referenceWrapper?.parentElement) {
+        return referenceWrapper.parentElement;
+      }
     }
+
+    const selectorMatch = document.querySelector(appendTo);
+    if (selectorMatch instanceof HTMLElement) return selectorMatch;
   }
 
-  const selectorMatch = document.querySelector(appendTo);
-  if (selectorMatch instanceof HTMLElement) return selectorMatch;
+  const referenceWrapper = document.querySelector(`#reference-${targetId}`);
+  const fullscreenOverlay = resolveFullscreenOverlayForElement(referenceWrapper);
+  if (fullscreenOverlay) return fullscreenOverlay;
 
   return document.body;
 };

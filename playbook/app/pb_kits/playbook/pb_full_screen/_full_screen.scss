@@ -26,6 +26,8 @@
 .fullscreen-overlay {
   background-color: $bg_light;
   box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
   height: 100vh;
   left: 0;
   overflow: auto;
@@ -55,6 +57,19 @@
 .fullscreen-content-sticky {
   height: calc(100vh - 44px);
 }
+
+.pb_fullscreen_floating_root {
+  flex: 0 0 auto;
+  min-height: 0;
+  pointer-events: none;
+  position: relative;
+  z-index: 1;
+}
+
+.pb_fullscreen_floating_root > * {
+  pointer-events: auto;
+}
+
 // Dark mode support
 .dark {
   .pb_full_screen_view {

@@ -115,6 +115,23 @@ test('headerTextStyling can render header text as body text', () => {
   expect(screen.getByText('Fullscreen Body')).toHaveClass('pb_body_kit')
 })
 
+test('fullscreen overlay exposes a floating root for portaled input menus', () => {
+  render(
+    <FullScreen
+        headerText="Fullscreen"
+        isFullscreen
+    >
+      <div>Content</div>
+    </FullScreen>
+  )
+
+  const overlay = document.querySelector('.fullscreen-overlay')
+  expect(overlay).toBeInTheDocument()
+  expect(
+    overlay?.querySelector('[data-pb-dialog-floating-root].pb_fullscreen_floating_root')
+  ).toBeInTheDocument()
+})
+
 test('isFullscreen opens fullscreen in controlled mode', () => {
   render(
     <FullScreen
