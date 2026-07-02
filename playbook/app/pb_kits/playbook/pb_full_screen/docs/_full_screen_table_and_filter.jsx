@@ -90,7 +90,7 @@ const FullScreenTableAndFilter = (props) => {
                 double
                 maxHeight="50vh"
                 minWidth="xs"
-                popoverProps={{ width: "350px", appendTo: ".fullscreen-overlay" }}
+                popoverProps={{ width: "350px" }}
                 results={50}
                 sortOptions={{
                   territory_id: "Territory ID",
