@@ -197,24 +197,45 @@ export function looksLikeRailsChildren(children?: string | null): boolean {
   return Boolean(children?.includes("pb_rails("));
 }
 
-function formatBodyJsxAsRails(children: string): string | null {
+export function parseJsxBodyChildren(
+  children?: string
+): { text?: string; dark: boolean } | null {
+  if (!children?.trim()) return null;
+
   const match = children.trim().match(/^<Body(\s+([^>]*))?\s*\/?>$/i);
   if (!match) return null;
 
   const attrs = match[2] ?? "";
-  const props: string[] = [];
   const textMatch = attrs.match(/text="([^"]*)"/);
-  if (textMatch?.[1]) {
-    props.push(`text: ${JSON.stringify(textMatch[1])}`);
-  }
-  if (/\bdark\b/.test(attrs)) {
-    props.push("dark: true");
-  }
 
-  const propsBlock = props.length > 0 ? `props: { ${props.join(", ")} }` : "";
-  return propsBlock
-    ? `<%= pb_rails("body", ${propsBlock}) %>`
-    : `<%= pb_rails("body") %>`;
+  return {
+    text: textMatch?.[1],
+    dark: /\bdark\b/.test(attrs),
+  };
+}
+
+export function formatBodyProps(body: { text?: string; dark: boolean }): string {
+  const props: string[] = [];
+  if (body.text) props.push(`text: ${JSON.stringify(body.text)}`);
+  if (body.dark) props.push("dark: true");
+  return props.length > 0 ? `{ ${props.join(", ")} }` : "{}";
+}
+
+function formatBodyJsxAsRails(children: string): string | null {
+  const body = parseJsxBodyChildren(children);
+  if (!body) return null;
+
+  const propsBlock = formatBodyProps(body);
+  return propsBlock === "{}"
+    ? `<%= pb_rails("body") %>`
+    : `<%= pb_rails("body", props: ${propsBlock}) %>`;
+}
+
+export function childrenToBlockLines(children: string, indent = "  "): string[] {
+  const trimmed = children.trim();
+  if (looksLikeRailsChildren(trimmed)) return railsChildrenToBlockLines(trimmed, indent);
+  if (looksLikeJsxChildren(trimmed)) return translateJsxChildrenToRails(trimmed, indent);
+  return [`${indent}${extractJsxText(trimmed)}`];
 }
 
 export function stripRailsChildrenIndent(children: string): string {

@@ -2,6 +2,16 @@
 
 module Playground
   class RailsRenderer
+    FLEX_ITEM_PROP_MAP = {
+      "flexItemFixedSize" => :fixed_size,
+      "flexItemGrow" => :grow,
+      "flexItemShrink" => :shrink,
+      "flexItemFlex" => :flex,
+      "flexItemOrder" => :order,
+      "flexItemAlignSelf" => :align_self,
+      "flexItemDisplayFlex" => :display_flex,
+    }.freeze
+
     def initialize(view_context:, kit_name:, props: {}, global_props: {}, children: nil, structure_mode: nil)
       @view_context = view_context
       @kit_name = kit_name.to_s
@@ -14,10 +24,7 @@ module Playground
     def render
       validate_kit!
 
-      merged_props = build_merged_props
-      html = render_kit(merged_props)
-
-      { html: html, error: nil }
+      { html: render_kit(build_merged_props), error: nil }
     rescue Playbook::Props::Error => e
       { html: nil, error: e.message }
     rescue => e
@@ -37,24 +44,18 @@ module Playground
 
     def render_kit(merged_props)
       case @kit_name
-      when "dialog"
-        render_dialog_preview(merged_props)
-      when "card"
-        render_card_preview(merged_props)
-      when "flex"
-        render_flex_preview(merged_props)
-      else
-        render_standard_kit(merged_props)
+      when "dialog" then render_dialog_preview(merged_props)
+      when "card" then render_card_preview(merged_props)
+      when "flex" then render_flex_preview(merged_props)
+      else render_pb_kit(@kit_name, merged_props)
       end
     end
 
-    def render_standard_kit(merged_props)
-      block_content = render_playground_block_content(merged_props)
-
+    def render_pb_kit(kit, props, block_content = nil)
       if block_content.present?
-        @view_context.pb_rails(@kit_name, props: merged_props) { block_content }
+        @view_context.pb_rails(kit, props: props) { block_content }
       else
-        @view_context.pb_rails(@kit_name, props: merged_props)
+        @view_context.pb_rails(kit, props: props)
       end
     end
 
@@ -62,12 +63,7 @@ module Playground
       html = if @structure_mode == "controlled_flex_item"
                render_controlled_flex_item_preview(merged_props)
              else
-               block_content = render_playground_block_content(merged_props)
-               if block_content.present?
-                 @view_context.pb_rails("flex", props: merged_props) { block_content }
-               else
-                 @view_context.pb_rails("flex", props: merged_props)
-               end
+               render_pb_kit("flex", merged_props, block_content(merged_props))
              end
 
       wrap_flex_doc_example(html)
@@ -78,46 +74,18 @@ module Playground
     end
 
     def render_controlled_flex_item_preview(merged_props)
-      flex_item_props = flex_item_props_from_payload
-      first_inner = render_playground_block_content(merged_props.except(:text)) ||
-                    playground_html_content(extract_jsx_text(@children))
+      first_inner = block_content(merged_props.except(:text)) ||
+                    JsxChildrenRenderer.extract_jsx_text(@children).to_s.html_safe
 
-      @view_context.pb_rails("flex", props: merged_props) do
-        first = @view_context.pb_rails("flex/flex_item", props: flex_item_props) do
-          first_inner.presence || ""
-        end
-        second = @view_context.pb_rails("flex/flex_item") { "2" }
-        third = @view_context.pb_rails("flex/flex_item") { "3" }
-
-        safe_join([first, second, third])
-      end
+      render_pb_kit("flex", merged_props, safe_join([
+                                                      render_pb_kit("flex/flex_item", flex_item_props_from_payload) { first_inner.presence || "" },
+                                                      render_pb_kit("flex/flex_item") { "2" },
+                                                      render_pb_kit("flex/flex_item") { "3" },
+                                                    ]))
     end
 
     def flex_item_props_from_payload
-      mapping = {
-        "flexItemFixedSize" => :fixed_size,
-        "flexItemGrow" => :grow,
-        "flexItemShrink" => :shrink,
-        "flexItemFlex" => :flex,
-        "flexItemOrder" => :order,
-        "flexItemAlignSelf" => :align_self,
-        "flexItemDisplayFlex" => :display_flex,
-      }
-
-      props = {}
-      mapping.each do |camel, snake|
-        value = @props[camel]
-        value = @props[camel_to_snake(camel)] if value.nil?
-        next if value.nil? || value == ""
-
-        props[snake] = value
-      end
-
-      props
-    end
-
-    def extract_jsx_text(content)
-      Playground::JsxChildrenRenderer.extract_jsx_text(content)
+      payload_props(FLEX_ITEM_PROP_MAP)
     end
 
     def render_card_preview(merged_props)
@@ -126,12 +94,7 @@ module Playground
 
       return render_compound_card_preview(props) if compound_card_preview?
 
-      block_content = render_playground_block_content(props)
-      if block_content.present?
-        @view_context.pb_rails("card", props: props) { block_content }
-      else
-        @view_context.pb_rails("card", props: props)
-      end
+      render_pb_kit("card", props, block_content(props))
     end
 
     def compound_card_preview?
@@ -144,29 +107,21 @@ module Playground
 
       header_props = card_header_props_from_payload
       header_props[:padding] ||= "sm"
+      body_content = block_content(card_props)
 
-      body_content = render_card_body_content(card_props)
-      include_footer = @structure_mode == "full"
+      render_pb_kit("card", card_props, safe_join([
+        render_pb_kit("card/card_header", header_props) { "Header title" },
+        render_pb_kit("card/card_body", { padding: "md" }) { body_content.presence || "" },
+        *compound_card_footer,
+      ].compact))
+    end
 
-      @view_context.pb_rails("card", props: card_props) do
-        header = @view_context.pb_rails("card/card_header", props: header_props) do
-          "Header title"
-        end
+    def compound_card_footer
+      return [] unless @structure_mode == "full"
 
-        body = @view_context.pb_rails("card/card_body", props: { padding: "md" }) do
-          body_content.presence || ""
-        end
-
-        parts = [header, body]
-        if include_footer
-          footer = @view_context.pb_rails("flex", props: { padding: "sm", justify: "end" }) do
-            @view_context.pb_rails("button", props: { text: "Action" })
-          end
-          parts << footer
-        end
-
-        safe_join(parts)
-      end
+      [render_pb_kit("flex", { padding: "sm", justify: "end" }) do
+        render_pb_kit("button", { text: "Action" })
+      end]
     end
 
     def card_header_props_from_payload
@@ -180,42 +135,19 @@ module Playground
       props
     end
 
-    def render_card_body_content(card_props)
-      jsx_body = parse_jsx_body_children(@children)
-      if jsx_body
-        return @view_context.pb_rails(
-          "body",
-          props: {
-            text: jsx_body[:text],
-            dark: jsx_body[:dark],
-          }.compact
-        )
-      end
-
-      block_children(card_props)
-    end
-
     def render_dialog_preview(merged_props)
       dialog_id = merged_props[:id] || "rails-playground-dialog"
       merged_props[:id] = dialog_id
       merged_props[:confirm_button_id] ||= "#{dialog_id}-confirm"
       merged_props[:cancel_button_id] ||= "#{dialog_id}-cancel"
 
-      button_html = @view_context.pb_rails(
-        "button",
-        props: {
-          text: "Open Dialog",
-          data: { "open-dialog": dialog_id },
-        }
-      )
-
-      dialog_html = if compound_dialog_preview?(merged_props)
-                      render_compound_dialog_preview(merged_props, dialog_id)
-                    else
-                      @view_context.pb_rails("dialog", props: merged_props)
-                    end
-
-      safe_join([button_html, dialog_html])
+      safe_join([
+                  render_pb_kit("button", {
+                                  text: "Open Dialog",
+                                  data: { "open-dialog": dialog_id },
+                                }),
+                  compound_dialog_preview?(merged_props) ? render_compound_dialog_preview(merged_props, dialog_id) : render_pb_kit("dialog", merged_props),
+                ])
     end
 
     def compound_dialog_preview?(merged_props)
@@ -227,96 +159,41 @@ module Playground
     def render_compound_dialog_preview(merged_props, dialog_id)
       simple_props = merged_props.except(:title, :text, :cancel_button, :confirm_button)
 
-      @view_context.pb_rails("dialog", props: simple_props) do
-        header = @view_context.pb_rails(
-          "dialog/dialog_header",
-          props: {
-            id: dialog_id,
-            title: "Header Title inside Dialog.Header",
-          }
-        )
+      render_pb_kit("dialog", simple_props, safe_join([
+                                                        render_pb_kit("dialog/dialog_header", {
+                                                                        id: dialog_id,
+                                                                        title: "Header Title inside Dialog.Header",
+                                                                      }),
+                                                        @children.present? ? render_pb_kit("dialog/dialog_body") { @children.to_s.html_safe } : render_pb_kit("dialog/dialog_body", { text: "" }),
+                                                        render_pb_kit("dialog/dialog_footer", {
+                                                                        cancel_button: "Cancel Button",
+                                                                        confirm_button: "Okay",
+                                                                        confirm_button_id: "#{dialog_id}-confirm",
+                                                                        cancel_button_id: "#{dialog_id}-cancel",
+                                                                        id: dialog_id,
+                                                                      }),
+                                                      ]))
+    end
 
-        body = if @children.present?
-                 @view_context.pb_rails("dialog/dialog_body") { playground_html_content(@children) }
-               else
-                 @view_context.pb_rails("dialog/dialog_body", props: { text: "" })
-               end
+    def block_content(merged_props)
+      children_renderer.render(@children, merged_props: merged_props)
+    end
 
-        footer = @view_context.pb_rails(
-          "dialog/dialog_footer",
-          props: {
-            cancel_button: "Cancel Button",
-            confirm_button: "Okay",
-            confirm_button_id: "#{dialog_id}-confirm",
-            cancel_button_id: "#{dialog_id}-cancel",
-            id: dialog_id,
-          }
-        )
+    def children_renderer
+      @children_renderer ||= ChildrenRenderer.new(view_context: @view_context)
+    end
 
-        safe_join([header, body, footer])
+    def payload_props(key_map)
+      key_map.each_with_object({}) do |(camel, snake), props|
+        value = @props[camel] || @props[camel_to_snake(camel)]
+        next if value.nil? || value == ""
+
+        props[snake] = value
       end
     end
 
     def safe_join(parts)
       parts.compact.join("\n").html_safe
-    end
-
-    def block_children(merged_props)
-      return nil if @children.blank?
-
-      # Prefer explicit content props over block children when both are present.
-      return nil if merged_props[:text].present?
-
-      playground_html_content(@children)
-    end
-
-    # Playground children mirror React: HTML in the children field should render, not display as text.
-    def playground_html_content(content)
-      return nil if content.blank?
-
-      content.to_s.html_safe
-    end
-
-    def render_playground_block_content(merged_props)
-      jsx_body = parse_jsx_body_children(@children)
-      if jsx_body
-        return @view_context.pb_rails(
-          "body",
-          props: {
-            text: jsx_body[:text],
-            dark: jsx_body[:dark],
-          }.compact
-        )
-      end
-
-      jsx_content = jsx_children_renderer.render(@children)
-      return jsx_content if jsx_content.present?
-
-      erb_content = erb_children_renderer.render(@children)
-      return erb_content if erb_content.present?
-
-      block_children(merged_props)
-    end
-
-    def jsx_children_renderer
-      @jsx_children_renderer ||= Playground::JsxChildrenRenderer.new(view_context: @view_context)
-    end
-
-    def erb_children_renderer
-      @erb_children_renderer ||= Playground::ErbChildrenRenderer.new(view_context: @view_context)
-    end
-
-    def parse_jsx_body_children(children)
-      return nil if children.blank?
-
-      match = children.strip.match(%r{\A<Body(\s+([^>]*))?\s*/?>\z}i)
-      return nil unless match
-
-      attrs = match[2].to_s
-      {
-        text: attrs[/text="([^"]*)"/, 1],
-        dark: attrs.match?(/\bdark\b/),
-      }
     end
 
     def build_merged_props

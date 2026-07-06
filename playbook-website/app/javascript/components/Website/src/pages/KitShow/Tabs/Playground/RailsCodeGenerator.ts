@@ -4,12 +4,13 @@ import {
 } from "./types";
 import { resolveSchemaDefaultForPlatform } from "./utils";
 import {
+  childrenToBlockLines,
   extractJsxText,
+  formatBodyProps,
   formatFlexItemPropsFromPanel,
   looksLikeJsxChildren,
   looksLikeRailsChildren,
-  railsChildrenToBlockLines,
-  translateJsxChildrenToRails,
+  parseJsxBodyChildren,
   wrapFlexOutput,
 } from "./jsxChildrenToRails";
 
@@ -152,31 +153,20 @@ const formatRailsPropValue = (
   return `${formatRailsPropName(name)}: ${formatRubyValue(value)}`;
 };
 
-function parseJsxBodyChildren(children?: string): { text?: string; dark: boolean } | null {
-  if (!children?.trim()) return null;
-
-  const match = children.trim().match(/^<Body(\s+([^>]*))?\s*\/?>$/i);
-  if (!match) return null;
-
-  const attrs = match[2] ?? "";
-  const textMatch = attrs.match(/text="([^"]*)"/);
-
-  return {
-    text: textMatch?.[1],
-    dark: /\bdark\b/.test(attrs),
-  };
+function buildPropsBlock(lines: string[]): string | null {
+  if (lines.length === 0) return null;
+  return `props: {\n${lines.join(",\n")}\n  }`;
 }
 
-function formatBodyProps(body: { text?: string; dark: boolean }): string {
-  const props: string[] = [];
-  if (body.text) {
-    props.push(`text: ${JSON.stringify(body.text)}`);
-  }
-  if (body.dark) {
-    props.push("dark: true");
-  }
-
-  return props.length > 0 ? `{ ${props.join(", ")} }` : "{}";
+function buildPbRailsBlock(
+  kitName: string,
+  propsBlock: string | null,
+  childLines: string[]
+): string {
+  const opener = propsBlock
+    ? `<%= pb_rails("${kitName}", ${propsBlock}) do %>`
+    : `<%= pb_rails("${kitName}") do %>`;
+  return [opener, ...childLines, `<% end %>`].join("\n");
 }
 
 interface GenerateRailsCodeOptions {
@@ -221,10 +211,7 @@ export const generateRailsCode = ({
     }
   });
 
-  const propsBlock =
-    enabledProps.length > 0
-      ? `props: {\n${enabledProps.join(",\n")}\n  }`
-      : null;
+  const propsBlock = buildPropsBlock(enabledProps);
 
   const textPropEnabled =
     propValues.text?.enabled && Boolean(propValues.text?.value);
@@ -260,6 +247,10 @@ export const generateRailsCode = ({
     return props;
   };
 
+  const dialogTrigger = `<%= pb_rails("button", props: { text: "Open Dialog", data: { "open-dialog": ${JSON.stringify(dialogId)} } }) %>`;
+  const dialogPropsBlock = () =>
+    buildPropsBlock(dialogPropsWithIds()) ?? `props: { id: ${JSON.stringify(dialogId)} }`;
+
   const cardPropsWithoutHeader = () =>
     enabledProps.filter(
       (line) =>
@@ -293,24 +284,9 @@ export const generateRailsCode = ({
     );
 
   if (kitName === "flex" && structureMode === "controlled_flex_item") {
-    const flexProps = flexPropsWithoutFlexItem();
-    const flexPropsBlock =
-      flexProps.length > 0
-        ? `props: {\n${flexProps.join(",\n")}\n  }`
-        : null;
-
-    const flexItemProps = formatFlexItemPropsFromPanel(propValues);
-    const flexItemPropsBlock =
-      flexItemProps.length > 0
-        ? `props: {\n${flexItemProps.join(",\n")}\n  }`
-        : null;
-
-    const innerChildren = children?.trim() || "1";
-    const innerLines = looksLikeRailsChildren(innerChildren)
-      ? railsChildrenToBlockLines(innerChildren, "    ")
-      : looksLikeJsxChildren(innerChildren)
-      ? translateJsxChildrenToRails(innerChildren, "    ")
-      : [`    ${extractJsxText(innerChildren)}`];
+    const flexPropsBlock = buildPropsBlock(flexPropsWithoutFlexItem());
+    const flexItemPropsBlock = buildPropsBlock(formatFlexItemPropsFromPanel(propValues));
+    const innerLines = childrenToBlockLines(children?.trim() || "1", "    ");
 
     const firstFlexItemLines = flexItemPropsBlock
       ? [`  <%= pb_rails("flex/flex_item", ${flexItemPropsBlock}) do %>`, ...innerLines, `  <% end %>`]
@@ -347,9 +323,7 @@ export const generateRailsCode = ({
     }
 
     const cardPropsBlock =
-      cardProps.length > 0
-        ? `props: {\n${cardProps.join(",\n")}\n  }`
-        : `props: { padding: "none" }`;
+      buildPropsBlock(cardProps) ?? `props: { padding: "none" }`;
 
     const headerPropsBlock = `props: {\n${formatCardHeaderProps().join(",\n")}\n  }`;
     const bodyContent = children?.trim() || "Body content here";
@@ -378,46 +352,32 @@ export const generateRailsCode = ({
     ].join("\n");
   }
 
-  if (kitName === "dialog" && structureMode === "subcomponents") {
-    const dialogProps = dialogPropsWithIds();
-    const dialogPropsBlock =
-      dialogProps.length > 0
-        ? `props: {\n${dialogProps.join(",\n")}\n  }`
-        : `props: { id: ${JSON.stringify(dialogId)} }`;
-
-    const bodyContent = children?.trim() || "Hello Body Text, Nice to meet ya.";
-
-    return [
-      `<%= pb_rails("button", props: { text: "Open Dialog", data: { "open-dialog": ${JSON.stringify(dialogId)} } }) %>`,
-      "",
-      `<%= pb_rails("dialog", ${dialogPropsBlock}) do %>`,
-      `  <%= pb_rails("dialog/dialog_header", props: { id: ${JSON.stringify(dialogId)}, title: "Header Title inside Dialog.Header" }) %>`,
-      `  <%= pb_rails("dialog/dialog_body") do %>`,
-      `    ${bodyContent}`,
-      `  <% end %>`,
-      `  <%= pb_rails("dialog/dialog_footer", props: {`,
-      `    cancel_button: "Cancel Button",`,
-      `    confirm_button: "Okay",`,
-      `    confirm_button_id: ${JSON.stringify(`${dialogId}-confirm`)},`,
-      `    cancel_button_id: ${JSON.stringify(`${dialogId}-cancel`)},`,
-      `    id: ${JSON.stringify(dialogId)},`,
-      `  }) %>`,
-      `<% end %>`,
-    ].join("\n");
-  }
-
   if (kitName === "dialog") {
-    const dialogProps = dialogPropsWithIds();
-    const dialogPropsBlock =
-      dialogProps.length > 0
-        ? `props: {\n${dialogProps.join(",\n")}\n  }`
-        : `props: { id: ${JSON.stringify(dialogId)} }`;
+    const propsBlock = dialogPropsBlock();
 
-    return [
-      `<%= pb_rails("button", props: { text: "Open Dialog", data: { "open-dialog": ${JSON.stringify(dialogId)} } }) %>`,
-      "",
-      `<%= pb_rails("dialog", ${dialogPropsBlock}) %>`,
-    ].join("\n");
+    if (structureMode === "subcomponents") {
+      const bodyContent = children?.trim() || "Hello Body Text, Nice to meet ya.";
+
+      return [
+        dialogTrigger,
+        "",
+        `<%= pb_rails("dialog", ${propsBlock}) do %>`,
+        `  <%= pb_rails("dialog/dialog_header", props: { id: ${JSON.stringify(dialogId)}, title: "Header Title inside Dialog.Header" }) %>`,
+        `  <%= pb_rails("dialog/dialog_body") do %>`,
+        `    ${bodyContent}`,
+        `  <% end %>`,
+        `  <%= pb_rails("dialog/dialog_footer", props: {`,
+        `    cancel_button: "Cancel Button",`,
+        `    confirm_button: "Okay",`,
+        `    confirm_button_id: ${JSON.stringify(`${dialogId}-confirm`)},`,
+        `    cancel_button_id: ${JSON.stringify(`${dialogId}-cancel`)},`,
+        `    id: ${JSON.stringify(dialogId)},`,
+        `  }) %>`,
+        `<% end %>`,
+      ].join("\n");
+    }
+
+    return [dialogTrigger, "", `<%= pb_rails("dialog", ${propsBlock}) %>`].join("\n");
   }
 
   if (jsxBody) {
@@ -426,76 +386,24 @@ export const generateRailsCode = ({
       blockProps.push("    dark: true");
     }
 
-    const blockPropsBlock =
-      blockProps.length > 0
-        ? `props: {\n${blockProps.join(",\n")}\n  }`
-        : null;
+    const blockPropsBlock = buildPropsBlock(blockProps);
     const bodyLine = `  <%= pb_rails("body", props: ${formatBodyProps(jsxBody)}) %>`;
 
-    if (blockPropsBlock) {
-      return wrapFlexOutput(
-        kitName,
-        `<%= pb_rails("${kitName}", ${blockPropsBlock}) do %>\n${bodyLine}\n<% end %>`
-      );
-    }
     return wrapFlexOutput(
       kitName,
-      `<%= pb_rails("${kitName}") do %>\n${bodyLine}\n<% end %>`
-    );
-  }
-
-  if (hasPlainChildren && looksLikeRailsChildren(children)) {
-    const childLines = railsChildrenToBlockLines(children!.trim(), "  ");
-    const blockProps =
-      kitName === "flex" ? flexPropsWithoutFlexItem() : enabledProps;
-    const blockPropsBlock =
-      blockProps.length > 0
-        ? `props: {\n${blockProps.join(",\n")}\n  }`
-        : null;
-
-    if (blockPropsBlock) {
-      return wrapFlexOutput(
-        kitName,
-        [`<%= pb_rails("${kitName}", ${blockPropsBlock}) do %>`, ...childLines, `<% end %>`].join("\n")
-      );
-    }
-    return wrapFlexOutput(
-      kitName,
-      [`<%= pb_rails("${kitName}") do %>`, ...childLines, `<% end %>`].join("\n")
-    );
-  }
-
-  if (hasPlainChildren && looksLikeJsxChildren(children)) {
-    const childLines = translateJsxChildrenToRails(children!.trim(), "  ");
-    const blockProps =
-      kitName === "flex" ? flexPropsWithoutFlexItem() : enabledProps;
-    const blockPropsBlock =
-      blockProps.length > 0
-        ? `props: {\n${blockProps.join(",\n")}\n  }`
-        : null;
-
-    if (blockPropsBlock) {
-      return wrapFlexOutput(
-        kitName,
-        [`<%= pb_rails("${kitName}", ${blockPropsBlock}) do %>`, ...childLines, `<% end %>`].join("\n")
-      );
-    }
-    return wrapFlexOutput(
-      kitName,
-      [`<%= pb_rails("${kitName}") do %>`, ...childLines, `<% end %>`].join("\n")
+      buildPbRailsBlock(kitName, blockPropsBlock, [bodyLine])
     );
   }
 
   if (hasPlainChildren) {
-    if (propsBlock) {
-      return wrapFlexOutput(
-        kitName,
-        `<%= pb_rails("${kitName}", ${propsBlock}) do %>\n  ${children}\n<% end %>`
-      );
-    }
+    const childLines = childrenToBlockLines(children!.trim(), "  ");
+    const blockProps =
+      kitName === "flex" ? flexPropsWithoutFlexItem() : enabledProps;
+    const blockPropsBlock = buildPropsBlock(blockProps);
+
     return wrapFlexOutput(
       kitName,
-      `<%= pb_rails("${kitName}") do %>\n  ${children}\n<% end %>`
+      buildPbRailsBlock(kitName, blockPropsBlock, childLines)
     );
   }
 

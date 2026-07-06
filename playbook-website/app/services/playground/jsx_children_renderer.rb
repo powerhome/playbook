@@ -103,10 +103,6 @@ module Playground
       nested = self.class.new(view_context: @view_context).render(content)
       return nested if nested.present?
 
-      extract_jsx_text(content)
-    end
-
-    def extract_jsx_text(content)
       self.class.extract_jsx_text(content)
     end
 
