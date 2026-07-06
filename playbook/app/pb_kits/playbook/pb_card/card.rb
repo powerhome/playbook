@@ -15,7 +15,7 @@ module Playbook
                            values: %w[xs sm md lg xl none rounded],
                            default: "md"
       prop :background, type: Playbook::Props::Enum,
-                        values: %w[white light dark product_1_background product_1_highlight product_2_background product_2_highlight product_3_background product_3_highlight product_4_background product_4_highlight product_5_background product_5_highlight product_6_background product_6_highlight product_7_background product_7_highlight product_8_background product_8_highlight product_9_background product_9_highlight product_10_background product_10_highlight windows siding doors solar roofing gutters insulation none success_subtle warning_subtle error_subtle info_subtle neutral_subtle],
+                        values: %w[white light dark product_1_background product_1_highlight product_2_background product_2_highlight product_3_background product_3_highlight product_4_background product_4_highlight product_5_background product_5_highlight product_6_background product_6_highlight product_7_background product_7_highlight product_8_background product_8_highlight product_9_background product_9_highlight product_10_background product_10_highlight product_11_background product_11_highlight windows siding doors solar roofing gutters insulation none success_subtle warning_subtle error_subtle info_subtle neutral_subtle],
                         default: "none"
       prop :drag_id, type: Playbook::Props::String
       prop :draggable_item, type: Playbook::Props::Boolean,

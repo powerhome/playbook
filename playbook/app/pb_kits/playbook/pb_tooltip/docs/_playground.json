@@ -31,7 +31,19 @@
       "name": "Appearance",
       "props": [
         "showTooltip",
-        "forceOpenTooltip"
+        "forceOpenTooltip",
+        "position"
+      ]
+    },
+    {
+      "name": "Sizing",
+      "props": [
+        "width",
+        "minWidth",
+        "maxWidth",
+        "height",
+        "minHeight",
+        "maxHeight"
       ]
     }
   ],
@@ -45,46 +57,53 @@
       "children": "Hover me"
     },
     {
-      "name": "Bottom",
+      "name": "With Icon",
       "props": {
-        "placement": "bottom",
-        "text": "Tooltip on bottom"
-      },
-      "children": "Hover me"
-    },
-    {
-      "name": "Left",
-      "props": {
-        "placement": "left",
-        "text": "Tooltip on the left"
-      },
-      "children": "Hover me"
-    },
-    {
-      "name": "Right",
-      "props": {
+        "icon": "info-circle",
         "placement": "right",
-        "text": "Tooltip on the right"
+        "text": "Tooltip with an icon"
       },
       "children": "Hover me"
     },
     {
-      "name": "Click to open",
+      "name": "Click to Open",
       "props": {
         "placement": "top",
         "useClickToOpen": true,
         "text": "Click toggles this tooltip"
       },
       "children": "Click me"
+    },
+    {
+      "name": "Forced Open",
+      "props": {
+        "forceOpenTooltip": true,
+        "placement": "bottom",
+        "text": "Forced open for demos"
+      },
+      "children": "Always visible"
     }
   ],
   "conditionals": {},
   "hints": {
+    "top": {
+      "presetName": "Top",
+      "message": "Top uses the default hover behavior with the tooltip above the trigger.",
+      "type": "info"
+    },
+    "with_icon": {
+      "presetName": "With Icon",
+      "message": "With Icon adds an icon inside the tooltip content.",
+      "type": "info"
+    },
     "click_to_open": {
-      "when": {
-        "useClickToOpen": true
-      },
+      "presetName": "Click to Open",
       "message": "When click to open is on, the tooltip toggles on click instead of hover.",
+      "type": "info"
+    },
+    "forced_open": {
+      "presetName": "Forced Open",
+      "message": "Forced Open keeps the tooltip visible, which is useful for demos and visual checks.",
       "type": "info"
     }
   }

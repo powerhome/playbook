@@ -1,0 +1,10 @@
+<% 
+  options = [
+    { label: 'United States', value: 'unitedStates', id: 'us' },
+    { label: 'Canada', value: 'canada', id: 'ca' },
+    { label: 'Pakistan', value: 'pakistan', id: 'pk' },
+  ]
+
+%>
+
+<%= pb_rails("dropdown", props: {id: "dropdown-disabled", disabled: true,label: "Default Dropdown", options: options}) %>

@@ -48,6 +48,10 @@ const rowStyling = [
     fontColor: colors.white,
     expandButtonColor: colors.white,
   },
+  {
+    rowId: "15",
+    fontWeight: "bold",
+  },
 ];
 
   return (

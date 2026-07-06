@@ -386,7 +386,8 @@ function parseTypeScript(filePath) {
 
 const RUBY_TYPE_MAP = {
   Boolean: 'boolean', Number: 'number', String: 'string',
-  Enum: 'enum', Hash: 'object', Array: 'array', HashArray: 'array',
+  Numeric: 'number', Date: 'Date',
+  Enum: 'enum', Hash: 'object', HashProp: 'GenericObject', Array: 'array', HashArray: 'array', NumberArray: 'array',
 };
 
 function parseRubyArray(str) {

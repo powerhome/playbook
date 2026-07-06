@@ -6,7 +6,7 @@ export class PbDropdownKeyboard {
     this.dropdown = dropdown;
     this.dropdownElement = dropdown.element;
     this.options = Array.from(
-      this.dropdownElement.querySelectorAll(OPTION_SELECTOR)
+      (dropdown.target || this.dropdownElement).querySelectorAll(OPTION_SELECTOR),
     );
     this.focusedOptionIndex = -1;
     this.searchInput = this.dropdownElement.querySelector(
@@ -45,12 +45,17 @@ export class PbDropdownKeyboard {
 
   getVisibleOptions() {
     // We only want to return the options that are visible
-    return Array.from(
-      this.dropdownElement.querySelectorAll(OPTION_SELECTOR)
-    ).filter((opt) => opt.style.display !== "none");
+    const scope = this.dropdown.target || this.dropdownElement;
+    return Array.from(scope.querySelectorAll(OPTION_SELECTOR)).filter(
+      
+      (opt) => opt.style.display !== "none" && opt.dataset.dropdownOptionDisabled !== "true"
+    ,
+    );
   }
 
   openDropdownIfClosed() {
+    if (this.dropdown.isDisabled) return;
+
     if (!this.dropdown.target.classList.contains("open")) {
       this.dropdown.showElement(this.dropdown.target);
       this.dropdown.updateArrowDisplay(true);
@@ -58,6 +63,8 @@ export class PbDropdownKeyboard {
   }
 
   handleKeyDown(event) {
+    if (this.dropdown.isDisabled) return;
+
     switch (event.key) {
       case "ArrowDown":
         event.preventDefault();
@@ -105,9 +112,8 @@ export class PbDropdownKeyboard {
   }
 
 moveFocus(direction) {
-    const allOptions = Array.from(
-      this.dropdownElement.querySelectorAll(OPTION_SELECTOR)
-    );
+    const scope = this.dropdown.target || this.dropdownElement;
+    const allOptions = Array.from(scope.querySelectorAll(OPTION_SELECTOR));
     const visible = this.getVisibleOptions();
     if (!visible.length) return;
 
@@ -133,12 +139,15 @@ moveFocus(direction) {
 
 
   selectOption() {
-    const allOptions = Array.from(
-      this.dropdownElement.querySelectorAll(OPTION_SELECTOR)
-    );
+    if (this.dropdown.isDisabled) return;
+
+    const scope = this.dropdown.target || this.dropdownElement;
+    const allOptions = Array.from(scope.querySelectorAll(OPTION_SELECTOR));
     if (this.focusedOptionIndex < 0) return;
 
     const optionEl = allOptions[this.focusedOptionIndex];
+    if (optionEl.dataset.dropdownOptionDisabled === "true") return;
+
     this.dropdown.handleOptionClick({ target: optionEl });
     this.dropdown.toggleElement(this.dropdown.target);
     this.dropdown.updateClearButton();

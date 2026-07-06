@@ -1,0 +1,1 @@
+Full Screen creates a focused overlay for workflows that need more room, such as tables, filters, dashboards, or review screens. It can manage its own trigger or be controlled with `useFullScreen` when the trigger needs to live elsewhere in the interface.

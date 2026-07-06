@@ -213,9 +213,13 @@ export class TypeRegistry {
  */
 export function parseTypeDefinitions(content, registry) {
   // Type aliases: type Foo = "a" | "b" | ...
-  const typeRegex = /(?:export\s+)?type\s+(\w+)\s*=\s*([^;{]+?)(?:;|\n|$)/g;
+  // Keep this separate from object-style type parsing so multiline unions resolve to every approved value.
+  const typeRegex = /(?:export\s+)?type\s+(\w+)\s*=\s*((?:(?!\n\s*(?:export\s+)?type\s+\w+\s*=).)+?)(?=\n\s*(?:export\s+)?type\s+\w+\s*=|\n\s*(?:export\s+)?const\s+\w+\s*=|$)/gs;
   for (const [, name, expr] of content.matchAll(typeRegex)) {
-    registry.register(name, expr.trim());
+    const normalized = expr.trim().replace(/;\s*$/, '');
+    if (!normalized.startsWith('{') && !normalized.includes('{')) {
+      registry.register(name, normalized);
+    }
   }
   
   // Const arrays: const Sizes = ["sm", "md"] as const

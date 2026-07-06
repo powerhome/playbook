@@ -19,7 +19,24 @@ import type { BuilderInstance, PlaygroundKit, PropDefinition } from "./types";
 const formatJsObjectKey = (key: string) =>
   /^[a-zA-Z_$][a-zA-Z0-9_$]*$/.test(key) ? key : JSON.stringify(key);
 
+const getRawJsExpression = (value: any): string | null => {
+  if (
+    value !== null &&
+    typeof value === "object" &&
+    !Array.isArray(value) &&
+    typeof value.__playgroundCode === "string"
+  ) {
+    const expression = value.__playgroundCode.trim();
+    return expression.length > 0 ? expression : null;
+  }
+
+  return null;
+};
+
 const formatCodeValue = (value: any, definition?: PropDefinition): string => {
+  const rawExpression = getRawJsExpression(value);
+  if (rawExpression) return rawExpression;
+
   const type = displayPropType(definition);
 
   if (type.includes("function") || type.includes("=>")) {
@@ -173,6 +190,14 @@ const getActiveWrapper = (instance: BuilderInstance, kit?: PlaygroundKit) => {
   return mode?.wrapper ?? kit?.playground_config?.wrapper;
 };
 
+const getActiveStatefulProps = (instance: BuilderInstance, kit?: PlaygroundKit) => {
+  const mode = getStructureModeConfig(kit, instance.structureMode);
+  return [
+    ...(kit?.playground_config?.statefulProps ?? []),
+    ...(mode?.statefulProps ?? []),
+  ];
+};
+
 export const getRuntimeScope = (
   instance: BuilderInstance,
   kit: PlaygroundKit | undefined,
@@ -224,6 +249,7 @@ export const getLivePreviewCode = (
     externalImports: getActiveExternalImports(instance, kit),
     wrapper: getActiveWrapper(instance, kit),
     requiredProps: getRequiredCodeProps(kit, instance),
+    statefulProps: getActiveStatefulProps(instance, kit),
   });
   const setupCode = context.setupSnippets.join("\n\n");
 
@@ -503,6 +529,7 @@ const renderInstanceCode = (
       externalImports: getActiveExternalImports(instance, kit),
       wrapper,
       requiredProps: isLivePreviewRender ? {} : requiredProps,
+      statefulProps: getActiveStatefulProps(instance, kit),
     });
 
     const split = splitSetupFromRenderableCode(rendered);

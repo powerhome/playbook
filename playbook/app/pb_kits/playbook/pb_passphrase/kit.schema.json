@@ -84,6 +84,19 @@
         "react",
         "rails"
       ]
+    },
+    "required": {
+      "platforms": [
+        "rails"
+      ],
+      "type": "boolean",
+      "default": false
+    },
+    "minLength": {
+      "platforms": [
+        "rails"
+      ],
+      "type": "number"
     }
   },
   "globalProps": true,

@@ -6,11 +6,15 @@
     },
     {
       "name": "State",
-      "props": ["disabled", "error", "required", "requiredIndicator"]
+      "props": ["disabled", "error", "required", "requiredIndicator", "onChange"]
     },
     {
       "name": "Appearance",
-      "props": ["inline", "resize", "rows", "emojiMask"]
+      "props": ["inline", "resize", "rows", "emojiMask", "maxCharacters", "characterCount"]
+    },
+    {
+      "name":"Options",
+      "props": ["inputOptions", "object", "method"]
     }
   ],
   "presets": [
@@ -58,5 +62,26 @@
   "conditionals": {
     "requiredIndicator": { "requires": "label" }
   },
-  "hints": {}
+  "hints": {
+    "default": {
+      "presetName": "Default",
+      "message": "Default shows a labeled multiline field with name, placeholder, and value.",
+      "type": "info"
+    },
+    "with_error": {
+      "presetName": "With Error",
+      "message": "With Error displays validation copy below the textarea while preserving the entered text.",
+      "type": "info"
+    },
+    "disabled": {
+      "presetName": "Disabled",
+      "message": "Disabled keeps existing text visible while preventing edits.",
+      "type": "info"
+    },
+    "required": {
+      "presetName": "Required",
+      "message": "Required combines required with requiredIndicator so the label communicates the requirement.",
+      "type": "info"
+    }
+  }
 }

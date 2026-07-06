@@ -14,16 +14,17 @@
       "props": [
         "date",
         "showTimezone",
-        "timeZone",
-        "showIcon"
+        "timeZone"
       ]
     },
     {
       "name": "Appearance",
       "props": [
+        "showIcon",
         "size",
         "align",
-        "unstyled"
+        "unstyled",
+        "dark"
       ]
     }
   ],
@@ -35,15 +36,7 @@
       }
     },
     {
-      "name": "Medium & centered",
-      "props": {
-        "date": "2026-04-09T15:30:00.000Z",
-        "size": "md",
-        "align": "center"
-      }
-    },
-    {
-      "name": "With clock icon",
+      "name": "With Icon",
       "props": {
         "date": "2026-04-09T09:15:00.000Z",
         "showIcon": true,
@@ -58,7 +51,7 @@
       }
     },
     {
-      "name": "Pacific time",
+      "name": "Pacific Time",
       "props": {
         "date": "2026-04-09T15:30:00.000Z",
         "timeZone": "America/Los_Angeles"
@@ -70,5 +63,26 @@
       "requires": "showTimezone"
     }
   },
-  "hints": {}
+  "hints": {
+    "default": {
+      "presetName": "Default",
+      "message": "Default renders a Date value with the kit's standard small time styling.",
+      "type": "info"
+    },
+    "with_icon": {
+      "presetName": "With Icon",
+      "message": "With Icon adds the clock icon and medium sizing for a more prominent timestamp.",
+      "type": "info"
+    },
+    "hide_timezone": {
+      "presetName": "Hide timezone label",
+      "message": "Hide timezone label passes showTimezone={false} while keeping the same time value.",
+      "type": "info"
+    },
+    "pacific_time": {
+      "presetName": "Pacific Time",
+      "message": "Pacific Time uses timeZone to render the same Date in a specific timezone.",
+      "type": "info"
+    }
+  }
 }

@@ -35,6 +35,14 @@ export type PlaygroundKit = {
       props: string[];
     }>;
     hiddenProps?: string[];
+    conditionals?: Record<
+      string,
+      {
+        requires?: string | Record<string, string>;
+        showWhen?: string | Record<string, string>;
+        structureMode?: string;
+      }
+    >;
     presets?: Array<{
       name: string;
       props?: Record<string, any>;
@@ -50,6 +58,7 @@ export type PlaygroundKit = {
     propTargets?: Record<string, string>;
     requiredProps?: Record<string, any>;
     requiredCodeProps?: string[];
+    statefulProps?: string[];
     structureModes?: {
       default?: string;
       modes?: Record<string, {
@@ -62,6 +71,7 @@ export type PlaygroundKit = {
         imports?: string[];
         externalImports?: string[];
         wrapper?: string;
+        statefulProps?: string[];
       }>;
     };
     template?: string;

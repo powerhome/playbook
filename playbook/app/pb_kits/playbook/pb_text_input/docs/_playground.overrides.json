@@ -1,4 +1,15 @@
 {
+  "template": "<TextInput{{props}} value={textInputValue} onChange={({ target }) => setTextInputValue(target.value)} />",
+  "wrapper": "const TextInputPlayground = () => {\n  const [textInputValue, setTextInputValue] = useState(value)\n\n  return {{component}}\n}\n\n<TextInputPlayground />",
+  "statefulProps": ["value"],
+  "externalImports": ["import React, { useState } from 'react'"],
+  "defaults": {
+    "addOn": {
+      "icon": "user",
+      "alignment": "left",
+      "border": true
+    }
+  },
   "groups": [
     {
       "name": "Content",
@@ -6,11 +17,11 @@
     },
     {
       "name": "State",
-      "props": ["disabled", "error", "required", "requiredIndicator"]
+      "props": ["disabled", "error", "required", "requiredIndicator", "onChange"]
     },
     {
       "name": "Appearance",
-      "props": ["inline", "type", "mask", "emojiMask", "autoComplete"]
+      "props": ["inline", "type", "mask", "emojiMask", "autoComplete", "addOn"]
     }
   ],
   "presets": [
@@ -58,5 +69,30 @@
   "conditionals": {
     "requiredIndicator": { "requires": "label" }
   },
-  "hints": {}
+  "hints": {
+    "controlled_state": {
+      "message": "TextInput is controlled when value is set, so the snippet uses useState and onChange to keep the field editable.",
+      "type": "info"
+    },
+    "default": {
+      "presetName": "Default",
+      "message": "Default shows the common labeled input setup with name, placeholder, and state-backed value.",
+      "type": "info"
+    },
+    "with_error": {
+      "presetName": "With Error",
+      "message": "With Error displays validation copy below the field while preserving the entered value.",
+      "type": "info"
+    },
+    "disabled": {
+      "presetName": "Disabled",
+      "message": "Disabled keeps the label and placeholder visible while preventing edits.",
+      "type": "info"
+    },
+    "required": {
+      "presetName": "Required",
+      "message": "Required combines required with requiredIndicator so the label communicates the requirement.",
+      "type": "info"
+    }
+  }
 }

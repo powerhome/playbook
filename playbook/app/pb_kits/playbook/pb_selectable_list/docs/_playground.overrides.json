@@ -1,33 +1,185 @@
 {
+  "structureModes": {
+    "default": "standard",
+    "modes": {
+      "standard": {
+        "label": "Standard",
+        "template": "<SelectableList{{props}}>\n  {{children}}\n</SelectableList>",
+        "children": "<SelectableList.Item label=\"Mild\" name=\"spice\" value=\"mild\" />\n<SelectableList.Item checked label=\"Medium\" name=\"spice\" value=\"medium\" />\n<SelectableList.Item label=\"Hot\" name=\"spice\" value=\"hot\" />"
+      },
+      "selectable_list_item_props": {
+        "label": "SelectableList.Item Props",
+        "template": "<SelectableList{{props}}>\n  <SelectableList.Item{{SelectableList.Item.props}} />\n  {{children}}\n</SelectableList>",
+        "children": "<SelectableList.Item label=\"Medium\" name=\"spice\" value=\"medium\" />\n<SelectableList.Item label=\"Hot\" name=\"spice\" value=\"hot\" />",
+        "props": {
+          "selectableListItemLabel": "Mild",
+          "selectableListItemName": "spice",
+          "selectableListItemValue": "mild"
+        }
+      }
+    }
+  },
+  "children": {
+    "editable": true,
+    "default": "<SelectableList.Item label=\"Mild\" name=\"spice\" value=\"mild\" />\n<SelectableList.Item checked label=\"Medium\" name=\"spice\" value=\"medium\" />\n<SelectableList.Item label=\"Hot\" name=\"spice\" value=\"hot\" />"
+  },
+  "customProps": {
+    "selectableListItemLabel": {
+      "type": "string",
+      "platforms": ["react"]
+    },
+    "selectableListItemText": {
+      "type": "string",
+      "platforms": ["react"]
+    },
+    "selectableListItemName": {
+      "type": "string",
+      "platforms": ["react"]
+    },
+    "selectableListItemValue": {
+      "type": "string",
+      "platforms": ["react"]
+    },
+    "selectableListItemChecked": {
+      "type": "boolean",
+      "platforms": ["react"],
+      "default": false
+    },
+    "selectableListItemDefaultChecked": {
+      "type": "boolean",
+      "platforms": ["react"],
+      "default": false
+    },
+    "selectableListItemDragId": {
+      "type": "string",
+      "platforms": ["react"]
+    },
+    "selectableListItemDragHandle": {
+      "type": "boolean",
+      "platforms": ["react"],
+      "default": true
+    },
+    "selectableListItemClassName": {
+      "type": "string",
+      "platforms": ["react"]
+    }
+  },
+  "propTargets": {
+    "selectableListItemLabel": "SelectableList.Item.props",
+    "selectableListItemText": "SelectableList.Item.props",
+    "selectableListItemName": "SelectableList.Item.props",
+    "selectableListItemValue": "SelectableList.Item.props",
+    "selectableListItemChecked": "SelectableList.Item.props",
+    "selectableListItemDefaultChecked": "SelectableList.Item.props",
+    "selectableListItemDragId": "SelectableList.Item.props",
+    "selectableListItemDragHandle": "SelectableList.Item.props",
+    "selectableListItemClassName": "SelectableList.Item.props"
+  },
+  "propAliases": {
+    "selectableListItemLabel": "label",
+    "selectableListItemText": "text",
+    "selectableListItemName": "name",
+    "selectableListItemValue": "value",
+    "selectableListItemChecked": "checked",
+    "selectableListItemDefaultChecked": "defaultChecked",
+    "selectableListItemDragId": "dragId",
+    "selectableListItemDragHandle": "dragHandle",
+    "selectableListItemClassName": "className"
+  },
+  "defaults": {
+    "enableDrag": false,
+    "variant": "checkbox"
+  },
   "groups": [
     {
-      "name": "State",
+      "name": "Selection",
       "props": ["variant"]
     },
     {
-      "name": "Behavior",
-      "props": ["enableDrag"]
+      "name": "SelectableList.Item Props",
+      "props": [
+        "selectableListItemLabel",
+        "selectableListItemText",
+        "selectableListItemName",
+        "selectableListItemValue",
+        "selectableListItemChecked",
+        "selectableListItemDefaultChecked",
+        "selectableListItemDragId",
+        "selectableListItemDragHandle",
+        "selectableListItemClassName"
+      ]
     }
   ],
+  "hiddenProps": ["enableDrag"],
   "presets": [
     {
       "name": "Checkbox list",
-      "props": { "variant": "checkbox", "enableDrag": false }
+      "structureMode": "standard",
+      "props": { "variant": "checkbox", "enableDrag": false },
+      "children": "<SelectableList.Item label=\"Mild\" name=\"spice\" value=\"mild\" />\n<SelectableList.Item checked label=\"Medium\" name=\"spice\" value=\"medium\" />\n<SelectableList.Item label=\"Hot\" name=\"spice\" value=\"hot\" />"
     },
     {
       "name": "Radio list",
-      "props": { "variant": "radio", "enableDrag": false }
+      "structureMode": "standard",
+      "props": { "variant": "radio", "enableDrag": false },
+      "children": "<SelectableList.Item label=\"Small\" name=\"size\" value=\"small\" />\n<SelectableList.Item defaultChecked label=\"Medium\" name=\"size\" value=\"medium\" />\n<SelectableList.Item label=\"Large\" name=\"size\" value=\"large\" />"
     },
     {
-      "name": "Checkbox + drag",
-      "props": { "variant": "checkbox", "enableDrag": true }
+      "name": "Item Props",
+      "structureMode": "selectable_list_item_props",
+      "props": {
+        "selectableListItemChecked": true,
+        "selectableListItemLabel": "Mild",
+        "selectableListItemName": "spice",
+        "selectableListItemValue": "mild",
+        "variant": "checkbox"
+      }
     }
   ],
   "conditionals": {},
+  "propSyncOnEnable": {
+    "selectableListItemLabel": {
+      "structureMode": "selectable_list_item_props"
+    },
+    "selectableListItemText": {
+      "structureMode": "selectable_list_item_props"
+    },
+    "selectableListItemName": {
+      "structureMode": "selectable_list_item_props"
+    },
+    "selectableListItemValue": {
+      "structureMode": "selectable_list_item_props"
+    },
+    "selectableListItemChecked": {
+      "structureMode": "selectable_list_item_props"
+    },
+    "selectableListItemDefaultChecked": {
+      "structureMode": "selectable_list_item_props"
+    },
+    "selectableListItemDragId": {
+      "structureMode": "selectable_list_item_props"
+    },
+    "selectableListItemDragHandle": {
+      "structureMode": "selectable_list_item_props"
+    },
+    "selectableListItemClassName": {
+      "structureMode": "selectable_list_item_props"
+    }
+  },
   "hints": {
-    "items_note": {
-      "when": {},
-      "message": "Add SelectableList.Item rows as children; enableDrag defers to List for reordering.",
+    "checkbox": {
+      "presetName": "Checkbox list",
+      "message": "Checkbox list uses SelectableList.Item children with independent checked state.",
+      "type": "info"
+    },
+    "radio": {
+      "presetName": "Radio list",
+      "message": "Radio list uses shared item names and defaultChecked for a single selected value.",
+      "type": "info"
+    },
+    "item_props": {
+      "presetName": "Item Props",
+      "message": "Item Props routes prefixed controls into the first SelectableList.Item.",
       "type": "info"
     }
   }

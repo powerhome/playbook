@@ -11,26 +11,43 @@
   ],
   "presets": [
     {
-      "name": "Million dollar · md",
+      "name": "Million Dollar",
       "props": { "badge": "million-dollar", "size": "md" }
     },
     {
-      "name": "Million dollar · sm",
+      "name": "Small",
       "props": { "badge": "million-dollar", "size": "sm" }
     },
     {
-      "name": "Million dollar · lg",
+      "name": "Large",
       "props": { "badge": "million-dollar", "size": "lg" }
     },
     {
-      "name": "Veteran · md",
+      "name": "Veteran",
       "props": { "badge": "veteran", "size": "md" }
-    },
-    {
-      "name": "Veteran · sm",
-      "props": { "badge": "veteran", "size": "sm" }
     }
   ],
   "conditionals": {},
-  "hints": {}
+  "hints": {
+    "million_dollar": {
+      "presetName": "Million Dollar",
+      "message": "Million Dollar uses the default badge artwork at medium size.",
+      "type": "info"
+    },
+    "small": {
+      "presetName": "Small",
+      "message": "Small shows the million-dollar badge at the compact sm size.",
+      "type": "info"
+    },
+    "large": {
+      "presetName": "Large",
+      "message": "Large shows the million-dollar badge at the prominent lg size.",
+      "type": "info"
+    },
+    "veteran": {
+      "presetName": "Veteran",
+      "message": "Veteran switches the badge artwork while keeping medium sizing.",
+      "type": "info"
+    }
+  }
 }

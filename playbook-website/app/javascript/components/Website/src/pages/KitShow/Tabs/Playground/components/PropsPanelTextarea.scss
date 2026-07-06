@@ -1,0 +1,35 @@
+@import "playbook-tokens/colors";
+@import "playbook-tokens/border_radius";
+
+.props-panel-textarea {
+  position: relative;
+  width: 100%;
+
+  textarea {
+    padding-right: 28px;
+  }
+
+  &__expand {
+    position: absolute;
+    right: 5px;
+    top: -2px;
+    z-index: 1;
+  }
+}
+
+.props-panel-textarea__dialog {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 420px;
+  font-family: monospace;
+  font-size: 13px;
+  line-height: 1.5;
+  padding: 12px;
+  border: 1px solid $border_light;
+  border-radius: $border_radius_sm;
+  resize: none;
+}
+
+.props-panel-textarea__example {
+  margin-bottom: 12px;
+}

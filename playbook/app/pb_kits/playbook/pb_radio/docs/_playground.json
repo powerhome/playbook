@@ -7,9 +7,10 @@
     "customChildren": false,
     "disabled": false,
     "error": false,
-    "name": "radio_name",
-    "value": "radio_text",
-    "text": "Radio Text"
+    "name": "shipping_method",
+    "value": "standard",
+    "text": "Standard shipping",
+    "label": "Standard shipping"
   },
   "groups": [
     {
@@ -33,13 +34,15 @@
       "name": "Appearance",
       "props": [
         "alignment",
-        "customChildren"
+        "customChildren",
+        "dark"
       ]
     }
   ],
   "presets": [
     {
       "name": "Default",
+      "structureMode": "standard",
       "props": {
         "label": "Standard shipping",
         "name": "shipping_method",
@@ -49,6 +52,7 @@
     },
     {
       "name": "With Error",
+      "structureMode": "standard",
       "props": {
         "label": "Express shipping",
         "name": "shipping_method",
@@ -59,6 +63,7 @@
     },
     {
       "name": "Disabled",
+      "structureMode": "standard",
       "props": {
         "label": "Overnight shipping",
         "name": "shipping_method",
@@ -68,7 +73,8 @@
       }
     },
     {
-      "name": "Required",
+      "name": "Checked",
+      "structureMode": "standard",
       "props": {
         "label": "Standard shipping",
         "name": "shipping_method",
@@ -76,8 +82,76 @@
         "text": "Standard shipping",
         "checked": true
       }
+    },
+    {
+      "name": "Vertical",
+      "structureMode": "standard",
+      "props": {
+        "alignment": "vertical",
+        "label": "Standard shipping",
+        "name": "shipping_method",
+        "text": "Standard shipping",
+        "value": "standard"
+      }
+    },
+    {
+      "name": "Custom Children",
+      "structureMode": "custom_children",
+      "props": {
+        "customChildren": true,
+        "label": "Custom option",
+        "name": "radio_group",
+        "value": "custom"
+      },
+      "children": "<Title text=\"Custom radio content\" />"
     }
   ],
   "conditionals": {},
-  "hints": {}
+  "hints": {
+    "custom_children": {
+      "presetName": "Custom Children",
+      "message": "Custom Children renders editable JSX next to the radio control.",
+      "type": "info"
+    },
+    "error": {
+      "when": {
+        "error": true
+      },
+      "message": "Error applies the negative radio state and label treatment.",
+      "type": "info"
+    }
+  },
+  "structureModes": {
+    "default": "standard",
+    "modes": {
+      "standard": {
+        "label": "Standard",
+        "template": "<Radio{{props}} />",
+        "children": ""
+      },
+      "custom_children": {
+        "label": "Custom Children",
+        "template": "<Radio{{props}}>\n  {{children}}\n</Radio>",
+        "children": "<Title text=\"Custom radio content\" />",
+        "props": {
+          "customChildren": true,
+          "label": "Custom option",
+          "name": "radio_group",
+          "value": "custom"
+        }
+      }
+    }
+  },
+  "children": {
+    "editable": true,
+    "default": "<Title text=\"Custom radio content\" />"
+  },
+  "hiddenProps": [
+    "onChange"
+  ],
+  "propSyncOnEnable": {
+    "customChildren": {
+      "structureMode": "custom_children"
+    }
+  }
 }

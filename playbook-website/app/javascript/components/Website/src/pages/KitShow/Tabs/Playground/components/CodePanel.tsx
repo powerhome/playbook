@@ -22,9 +22,9 @@ export const CodePanel: React.FC<CodePanelProps> = ({ code }) => {
   return (
     <Card padding="none" width="100%">
       <Flex justify="between" align="center" padding="sm">
-        <Caption text="Code" color="lighter" />
+        <Caption text="Code" />
           <Button
-            text={copyState ? "Copied!" : "Copy"}
+            text={copyState ? "Copied!" : "Copy Code"}
             variant="link"
             size="sm"
             icon="copy"
