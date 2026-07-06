@@ -196,7 +196,9 @@ export const DocsTab = ({ examples, exampleProps, sections }: DocsTabProps) => {
           )}
           {example.description && example.description !== "" && (
             <Body margin="md" dark={darkMode}>
-              <MarkdownContent>{example.description}</MarkdownContent>
+              <MarkdownContent dark={darkMode}>
+                {example.description}
+              </MarkdownContent>
             </Body>
           )}
           {/* Code Section */}
