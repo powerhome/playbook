@@ -47,7 +47,7 @@ module Playground
       when "dialog" then render_dialog_preview(merged_props)
       when "card" then render_card_preview(merged_props)
       when "flex" then render_flex_preview(merged_props)
-      else render_pb_kit(@kit_name, merged_props)
+      else render_pb_kit(@kit_name, merged_props, block_content(merged_props))
       end
     end
 
