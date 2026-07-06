@@ -51,9 +51,13 @@ module Playground
       end
     end
 
-    def render_pb_kit(kit, props, block_content = nil)
+    def render_pb_kit(kit, props = {}, block_content = nil, &block)
+      props = {} if props.nil?
+
       if block_content.present?
         @view_context.pb_rails(kit, props: props) { block_content }
+      elsif block_given?
+        @view_context.pb_rails(kit, props: props, &block)
       else
         @view_context.pb_rails(kit, props: props)
       end
