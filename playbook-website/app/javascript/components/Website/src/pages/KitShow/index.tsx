@@ -151,7 +151,9 @@ const KitShow = () => {
 
           {kit_description && kit_description !== "" && (
             <Body marginTop="sm" marginBottom="md" dark={darkMode}>
-              <MarkdownContent>{kit_description}</MarkdownContent>
+              <MarkdownContent dark={darkMode}>
+                {kit_description}
+              </MarkdownContent>
             </Body>
           )}
 

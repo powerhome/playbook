@@ -1,9 +1,16 @@
 import { useMemo, type ReactNode } from "react";
 import ReactMarkdown from "react-markdown";
+import { Pill } from "playbook-ui";
 
 type MarkdownContentProps = {
   children: string;
+  dark?: boolean;
 };
+
+const DISCLAIMER_PILL_PATTERN =
+  /<div class="pb_pill_kit_warning"><div class="pb_title_kit_size_4 pb_pill_text">([^<]*)<\/div><\/div>/gi;
+
+const DISCLAIMER_MARKER_PATTERN = /^\[\[pb-disclaimer-pill:(.+)\]\]$/;
 
 function htmlAttributeValue(attributes: string, name: string): string {
   const match = attributes.match(new RegExp(`${name}=["']([^"']*)["']`, "i"));
@@ -31,12 +38,14 @@ function normalizeImageTags(source: string): string {
 
 /**
  * react-markdown does not interpret raw HTML in the source string.
- * Kit/docs copy often mixes markdown with a few HTML tags, normalize those
- * to markdown so they render without extra plugins.
+ * Kit/docs copy often mixes markdown with a few HTML tags; normalize those
+ * to markdown (or block markers) so they render without extra plugins.
  */
 function normalizeHtmlInMarkdown(source: string): string {
   return (
     normalizeImageTags(source)
+      .replace(/<\/br\s*>/gi, "<br />")
+      .replace(DISCLAIMER_PILL_PATTERN, "\n\n[[pb-disclaimer-pill:$1]]\n\n")
       .replace(/<br\s*\/?>/gi, "  \n")
       .replace(/<\/p>\s*<p>/gi, "\n\n")
       .replace(/<p\b[^>]*>/gi, "")
@@ -133,7 +142,7 @@ function renderMarkdownTable(rows: string[], key: string): ReactNode {
 }
 
 function renderMarkdownBlocks(source: string): ReactNode[] {
-  const normalizedSource = normalizeImageTags(source);
+  const normalizedSource = normalizeHtmlInMarkdown(source);
   const lines = normalizedSource.split(/\r?\n/);
   const blocks: ReactNode[] = [];
   const textBuffer: string[] = [];
@@ -151,6 +160,21 @@ function renderMarkdownBlocks(source: string): ReactNode[] {
 
   while (index < lines.length) {
     const line = lines[index];
+    const disclaimerMatch = line.trim().match(DISCLAIMER_MARKER_PATTERN);
+
+    if (!insideFence && disclaimerMatch) {
+      flushText();
+      blocks.push(
+        <Pill
+          key={`pill-${blocks.length}`}
+          text={disclaimerMatch[1].trim() || "Disclaimer"}
+          variant="warning"
+          textTransform="none"
+        />,
+      );
+      index += 1;
+      continue;
+    }
 
     if (line.trim().startsWith("```")) {
       insideFence = !insideFence;
@@ -186,7 +210,9 @@ function renderMarkdownBlocks(source: string): ReactNode[] {
  * Markdown with common embedded HTML normalized to real markdown.
  * Content is expected to be authored/trusted (kit copy, internal docs).
  */
-export function MarkdownContent({ children }: MarkdownContentProps) {
+export function MarkdownContent({ children, dark = false }: MarkdownContentProps) {
   const blocks = useMemo(() => renderMarkdownBlocks(children), [children]);
-  return <>{blocks}</>;
+  const className = dark ? "markdown dark" : "markdown";
+
+  return <div className={className}>{blocks}</div>;
 }
