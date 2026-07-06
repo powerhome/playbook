@@ -1,5 +1,6 @@
 import React, { useLayoutEffect, useRef } from "react";
 import { Card } from "playbook-ui";
+import PbKitRegistry from "kits/pb_kit_registry";
 import { useDarkMode } from "../../contexts/DarkModeContext";
 
 type LiveExampleRailsProps = {
@@ -136,6 +137,19 @@ const removePortaledPopovers = (
   });
 };
 
+const closeOpenDialogs = (container: HTMLElement): void => {
+  container.querySelectorAll("dialog[open]").forEach((dialog) => {
+    if (typeof dialog.close === "function") {
+      dialog.close();
+    }
+  });
+};
+
+const reinitializeRailsKits = (container: HTMLElement): void => {
+  PbKitRegistry.rescan(container);
+  window.dispatchEvent(new Event("turbo:frame-load"));
+};
+
 const LiveExampleRails: React.FC<LiveExampleRailsProps> = ({ html }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const { darkMode } = useDarkMode();
@@ -185,6 +199,7 @@ const LiveExampleRails: React.FC<LiveExampleRailsProps> = ({ html }) => {
     // Returning from React to Rails can leave an older Rails tooltip in body.
     // Removing it prevents duplicate ids like filter-form... / filter-default.
     removePortaledPopovers(container, portaledTooltipIds);
+    closeOpenDialogs(container);
 
     const preventHashNavigation = (e: Event) => {
       const target = e.target as HTMLElement;
@@ -195,8 +210,17 @@ const LiveExampleRails: React.FC<LiveExampleRailsProps> = ({ html }) => {
     };
     container.addEventListener('click', preventHashNavigation);
 
-    // First pass wires up enhanced Rails kits such as Popover.
-    window.dispatchEvent(new Event("turbo:frame-load"));
+    // Wait for React's innerHTML swap to settle, then rescan so enhanced kits
+    // (e.g. dialog open triggers) bind to the new DOM nodes.
+    const initFrame = requestAnimationFrame(() => {
+      reinitializeRailsKits(container);
+
+      const turboTimeout = window.setTimeout(() => {
+        reinitializeRailsKits(container);
+      }, REINITIALIZE_DELAY_MS);
+
+      container.dataset.railsKitTurboTimeout = String(turboTimeout);
+    });
 
     // Then run the example's inline scripts, including date picker setup.
     const scriptTimeout = setTimeout(() => {
@@ -206,7 +230,12 @@ const LiveExampleRails: React.FC<LiveExampleRailsProps> = ({ html }) => {
           newScript.setAttribute(attr.name, attr.value);
         });
 
-        newScript.textContent = transformScriptForLiveExecution(content);
+        const wrappedContent = transformScriptForLiveExecution(content).trim();
+        const isolatedContent = wrappedContent.startsWith("(function")
+          ? wrappedContent
+          : `(function() {\n${wrappedContent}\n})();`;
+
+        newScript.textContent = isolatedContent;
 
         if (element.parentNode) {
           element.parentNode.replaceChild(newScript, element);
@@ -216,14 +245,15 @@ const LiveExampleRails: React.FC<LiveExampleRailsProps> = ({ html }) => {
       });
     }, EXECUTE_SCRIPT_DELAY_MS);
 
-    // One final pass catches any Rails kits inserted or moved by inline scripts.
-    const turboTimeout = setTimeout(() => {
-      window.dispatchEvent(new Event("turbo:frame-load"));
-    }, REINITIALIZE_DELAY_MS);
-
     return () => {
+      cancelAnimationFrame(initFrame);
+      const turboTimeoutId = container.dataset.railsKitTurboTimeout;
+      if (turboTimeoutId) {
+        window.clearTimeout(Number(turboTimeoutId));
+        delete container.dataset.railsKitTurboTimeout;
+      }
       clearTimeout(scriptTimeout);
-      clearTimeout(turboTimeout);
+      closeOpenDialogs(container);
       // Popovers and flatpickr calendars can own body-level DOM. Clean them
       // before the React tree drops this live example.
       destroyFlatpickrInstances(container);
