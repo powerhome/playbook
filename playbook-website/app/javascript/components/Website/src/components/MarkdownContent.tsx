@@ -45,6 +45,8 @@ function normalizeHtmlInMarkdown(source: string): string {
   return (
     normalizeImageTags(source)
       .replace(/<\/br\s*>/gi, "<br />")
+      // A <br> on its own line is intentional vertical space, not an inline break.
+      .replace(/^\s*<br\s*\/?>\s*$/gim, "\n\n")
       .replace(DISCLAIMER_PILL_PATTERN, "\n\n[[pb-disclaimer-pill:$1]]\n\n")
       .replace(/<br\s*\/?>/gi, "  \n")
       .replace(/<\/p>\s*<p>/gi, "\n\n")
@@ -167,6 +169,8 @@ function renderMarkdownBlocks(source: string): ReactNode[] {
       blocks.push(
         <Pill
           key={`pill-${blocks.length}`}
+          marginTop="sm"
+          marginBottom="sm"
           text={disclaimerMatch[1].trim() || "Disclaimer"}
           variant="warning"
           textTransform="none"
