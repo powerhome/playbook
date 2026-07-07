@@ -1,5 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 
+function getCsrfToken(): string {
+  return (
+    document.querySelector('meta[name="csrf-token"]')?.getAttribute("content") ??
+    ""
+  );
+}
+
 export interface RailsPreviewPayload {
   props: Record<string, unknown>;
   global_props: Record<string, unknown>;
@@ -51,6 +58,7 @@ export const useRailsPlaygroundPreview = ({
             headers: {
               "Content-Type": "application/json",
               Accept: "application/json",
+              "X-CSRF-Token": getCsrfToken(),
             },
             body: JSON.stringify(payload),
             signal: controller.signal,

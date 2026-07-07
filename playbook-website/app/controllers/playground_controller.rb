@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class PlaygroundController < ApplicationController
-  skip_before_action :verify_authenticity_token, only: [:preview]
-
   def preview
     kit_name = params[:name].to_s
     payload = preview_params
