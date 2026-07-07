@@ -49,6 +49,7 @@ export const useRailsPlaygroundPreview = ({
 
       setLoading(true);
       setError(null);
+      setHtml(null);
 
       try {
         const response = await fetch(
@@ -68,6 +69,7 @@ export const useRailsPlaygroundPreview = ({
         const data = await response.json();
 
         if (!response.ok) {
+          setHtml(null);
           setError(data.error || "Failed to render Rails preview");
           return;
         }
@@ -84,6 +86,7 @@ export const useRailsPlaygroundPreview = ({
             ? fetchError.message
             : "Failed to render Rails preview",
         );
+        setHtml(null);
       } finally {
         if (!controller.signal.aborted) {
           setLoading(false);
