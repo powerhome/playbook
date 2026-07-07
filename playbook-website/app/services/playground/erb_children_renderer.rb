@@ -32,7 +32,7 @@ module Playground
       return nil if segments.empty?
 
       html = segments.filter_map { |segment| render_segment(segment) }.join("\n")
-      html.presence&.html_safe
+      TrustedHtml.from_renderer(html.presence)
     end
 
     def erb_children?(children)
@@ -94,7 +94,7 @@ module Playground
       jsx = Playground::JsxChildrenRenderer.new(view_context: @view_context).render(content)
       return jsx if jsx.present?
 
-      content.to_s.html_safe
+      TrustedHtml.plain_text(content)
     end
 
     def parse_ruby_props_hash(hash_string)

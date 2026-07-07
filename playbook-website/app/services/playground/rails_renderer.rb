@@ -79,7 +79,7 @@ module Playground
 
     def render_controlled_flex_item_preview(merged_props)
       first_inner = block_content(merged_props.except(:text)) ||
-                    JsxChildrenRenderer.extract_jsx_text(@children).to_s.html_safe
+                    JsxChildrenRenderer.extract_jsx_text(@children).to_s
 
       render_pb_kit("flex", merged_props, safe_join([
                                                       render_pb_kit("flex/flex_item", flex_item_props_from_payload) { first_inner.presence || "" },
@@ -162,13 +162,14 @@ module Playground
 
     def render_compound_dialog_preview(merged_props, dialog_id)
       simple_props = merged_props.except(:title, :text, :cancel_button, :confirm_button)
+      body_content = block_content(simple_props)
 
       render_pb_kit("dialog", simple_props, safe_join([
                                                         render_pb_kit("dialog/dialog_header", {
                                                                         id: dialog_id,
                                                                         title: "Header Title inside Dialog.Header",
                                                                       }),
-                                                        @children.present? ? render_pb_kit("dialog/dialog_body") { @children.to_s.html_safe } : render_pb_kit("dialog/dialog_body", { text: "" }),
+                                                        body_content.present? ? render_pb_kit("dialog/dialog_body") { body_content } : render_pb_kit("dialog/dialog_body", { text: "" }),
                                                         render_pb_kit("dialog/dialog_footer", {
                                                                         cancel_button: "Cancel Button",
                                                                         confirm_button: "Okay",

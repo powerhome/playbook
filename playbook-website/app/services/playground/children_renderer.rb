@@ -21,7 +21,7 @@ module Playground
 
       return nil if merged_props[:text].present?
 
-      children.to_s.html_safe
+      TrustedHtml.plain_text(children)
     end
 
   private

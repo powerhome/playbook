@@ -64,7 +64,7 @@ RSpec.describe Playground::RailsRenderer do
       expect(result[:html]).to include("pb_caption_kit")
     end
 
-    it "renders HTML in block children instead of escaping it" do
+    it "escapes raw HTML in plain block children" do
       result = described_class.new(
         view_context: view_context,
         kit_name: "card",
@@ -74,8 +74,22 @@ RSpec.describe Playground::RailsRenderer do
       ).render
 
       expect(result[:error]).to be_nil
-      expect(result[:html]).to include("<b>test</b>")
-      expect(result[:html]).not_to include("&lt;b&gt;")
+      expect(result[:html]).to include("&lt;b&gt;test&lt;/b&gt;")
+      expect(result[:html]).not_to include("<b>test</b>")
+    end
+
+    it "does not treat script tags in plain children as executable HTML" do
+      result = described_class.new(
+        view_context: view_context,
+        kit_name: "card",
+        props: {},
+        children: '<script>alert("x")</script>',
+        structure_mode: "simple"
+      ).render
+
+      expect(result[:error]).to be_nil
+      expect(result[:html]).not_to include("<script>")
+      expect(result[:html]).to include("&lt;script&gt;")
     end
 
     it "renders compound card structure for header_body mode" do

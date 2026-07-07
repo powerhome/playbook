@@ -26,7 +26,7 @@ module Playground
       return nil if segments.empty?
 
       html = segments.filter_map { |segment| render_segment(segment) }.join("\n")
-      html.presence&.html_safe
+      TrustedHtml.from_renderer(html.presence)
     end
 
     def jsx_children?(children)
@@ -183,7 +183,7 @@ module Playground
     def playground_html_content(content)
       return nil if content.blank?
 
-      content.to_s.html_safe
+      TrustedHtml.plain_text(content)
     end
   end
 end
