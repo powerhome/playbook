@@ -2,7 +2,7 @@ import React, { useState } from "react"
 import AdvancedTable from '../_advanced_table'
 import MOCK_DATA_WITH_ID from "./advanced_table_mock_data_with_id.json"
 
-const AdvancedTableRowPinning = (props) => {
+const AdvancedTableRowPinningBoth = (props) => {
   const columnDefinitions = [
     {
       accessor: "year",
@@ -35,7 +35,7 @@ const AdvancedTableRowPinning = (props) => {
     },
   ]
 
-  const [pinnedRows, setPinnedRows] = useState({top: ["8"]})
+  const [pinnedRows, setPinnedRows] = useState({top: ["8"], bottom: ["1"]})
 
   return (
     <div>
@@ -54,4 +54,4 @@ const AdvancedTableRowPinning = (props) => {
   )
 }
 
-export default AdvancedTableRowPinning
+export default AdvancedTableRowPinningBoth
