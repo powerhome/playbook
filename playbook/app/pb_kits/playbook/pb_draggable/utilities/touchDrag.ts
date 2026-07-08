@@ -157,6 +157,8 @@ const runDragPointerMove = (
   dragId: string,
   container: string | undefined,
   handlers: TouchDragHandlers,
+  // Typeahead pointer-drag only. Regular Draggable/touch keeps simple elementFromPoint.
+  useEnhancedHorizontalTargeting = false,
 ) => {
   if (!state.dragging) {
     const deltaX = clientX - state.startX;
@@ -168,11 +170,27 @@ const runDragPointerMove = (
     handlers.onDragStart(dragId, container);
   }
 
-  const { targetDragId, targetContainer } = resolvePointerDragTarget(clientX, clientY, dragId);
+  let targetDragId: string | null;
+  let targetContainer: string | undefined;
 
-  if (!targetDragId || targetDragId === dragId) {
-    state.lastTargetDragId = null;
-  } else if (targetDragId !== state.lastTargetDragId) {
+  if (useEnhancedHorizontalTargeting) {
+    ({ targetDragId, targetContainer } = resolvePointerDragTarget(clientX, clientY, dragId));
+  } else {
+    const elementBelow = typeof document.elementFromPoint === 'function'
+      ? document.elementFromPoint(clientX, clientY)
+      : null;
+    targetDragId = getDragIdFromElement(elementBelow);
+    targetContainer = getContainerFromElement(elementBelow);
+  }
+
+  if (useEnhancedHorizontalTargeting) {
+    if (!targetDragId || targetDragId === dragId) {
+      state.lastTargetDragId = null;
+    } else if (targetDragId !== state.lastTargetDragId) {
+      state.lastTargetDragId = targetDragId;
+      handlers.onDragEnter(targetDragId, targetContainer ?? container);
+    }
+  } else if (targetDragId && targetDragId !== dragId && targetDragId !== state.lastTargetDragId) {
     state.lastTargetDragId = targetDragId;
     handlers.onDragEnter(targetDragId, targetContainer ?? container);
   }
@@ -337,7 +355,7 @@ export const bindMousePointerDrag = ({
   const handleMouseMove = (event: MouseEvent) => {
     if (!state.active) return;
 
-    if (runDragPointerMove(state, event.clientX, event.clientY, dragId, container, handlers)) {
+    if (runDragPointerMove(state, event.clientX, event.clientY, dragId, container, handlers, true)) {
       event.preventDefault();
     }
   };
