@@ -166,11 +166,6 @@ const DraggableItem = (props: DraggableItemProps) => {
 
   // Enhanced drag start handler that preserves dimensions
   const handleDragStartWithCustom = (e: React.DragEvent) => {
-    if (e.dataTransfer && dragId) {
-      e.dataTransfer.setData('text/plain', dragId)
-      e.dataTransfer.effectAllowed = 'move'
-    }
-
     if (dropZone !== 'ghost' && itemRef.current) {
       // Create a clone for the drag image
       const clone = itemRef.current.cloneNode(true) as HTMLElement;
