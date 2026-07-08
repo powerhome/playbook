@@ -1,0 +1,165 @@
+{
+  "template": "<Timeline{{props}}>\n  {{children}}\n</Timeline>",
+  "structureModes": {
+    "default": "standard",
+    "modes": {
+      "standard": {
+        "label": "Items",
+        "template": "<Timeline{{props}}>\n  {{children}}\n</Timeline>",
+        "children": "<Timeline.Item icon=\"file-alt\">Request received</Timeline.Item>\n<Timeline.Item icon=\"user\" lineStyle=\"dotted\">Assigned to reviewer</Timeline.Item>\n<Timeline.Item icon=\"check\">Approved</Timeline.Item>"
+      },
+      "timeline_item_props": {
+        "label": "Timeline.Item Props",
+        "template": "<Timeline{{props}}>\n  <Timeline.Item{{Timeline.Item.props}}>\n    {{children}}\n  </Timeline.Item>\n  <Timeline.Item icon=\"user\">Assigned to reviewer</Timeline.Item>\n  <Timeline.Item icon=\"check\">Approved</Timeline.Item>\n</Timeline>",
+        "children": "Request received",
+        "props": {
+          "timelineItemIcon": "file-alt",
+          "timelineItemIconColor": "royal",
+          "timelineItemLineStyle": "solid"
+        }
+      }
+    }
+  },
+  "children": {
+    "editable": true,
+    "default": "<Timeline.Item icon=\"file-alt\">Request received</Timeline.Item>\n<Timeline.Item icon=\"user\" lineStyle=\"dotted\">Assigned to reviewer</Timeline.Item>\n<Timeline.Item icon=\"check\">Approved</Timeline.Item>"
+  },
+  "customProps": {
+    "timelineItemDate": {
+      "type": "Date",
+      "platforms": ["react"]
+    },
+    "timelineItemIcon": {
+      "type": "string",
+      "platforms": ["react"]
+    },
+    "timelineItemIconColor": {
+      "type": "enum",
+      "platforms": ["react"],
+      "values": ["default", "royal", "blue", "purple", "teal", "red", "yellow", "green"]
+    },
+    "timelineItemLineStyle": {
+      "type": "enum",
+      "platforms": ["react"],
+      "values": ["solid", "dotted"]
+    },
+    "timelineItemShowCurrentYear": {
+      "type": "boolean",
+      "platforms": ["react"],
+      "default": false
+    },
+    "timelineItemClassName": {
+      "type": "string",
+      "platforms": ["react"]
+    }
+  },
+  "propTargets": {
+    "timelineItemDate": "Timeline.Item.props",
+    "timelineItemIcon": "Timeline.Item.props",
+    "timelineItemIconColor": "Timeline.Item.props",
+    "timelineItemLineStyle": "Timeline.Item.props",
+    "timelineItemShowCurrentYear": "Timeline.Item.props",
+    "timelineItemClassName": "Timeline.Item.props"
+  },
+  "propAliases": {
+    "timelineItemDate": "date",
+    "timelineItemIcon": "icon",
+    "timelineItemIconColor": "iconColor",
+    "timelineItemLineStyle": "lineStyle",
+    "timelineItemShowCurrentYear": "showCurrentYear",
+    "timelineItemClassName": "className"
+  },
+  "groups": [
+    {
+      "name": "Layout",
+      "props": ["orientation", "itemGap"]
+    },
+    {
+      "name": "Date",
+      "props": ["showDate"]
+    },
+    {
+      "name": "Timeline.Item Props",
+      "props": [
+        "timelineItemDate",
+        "timelineItemIcon",
+        "timelineItemIconColor",
+        "timelineItemLineStyle",
+        "timelineItemShowCurrentYear",
+        "timelineItemClassName"
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default",
+      "structureMode": "standard",
+      "props": {},
+      "children": "<Timeline.Item icon=\"file-alt\">Request received</Timeline.Item>\n<Timeline.Item icon=\"user\" lineStyle=\"dotted\">Assigned to reviewer</Timeline.Item>\n<Timeline.Item icon=\"check\">Approved</Timeline.Item>"
+    },
+    {
+      "name": "Vertical",
+      "structureMode": "standard",
+      "props": {
+        "orientation": "vertical"
+      },
+      "children": "<Timeline.Item icon=\"file-alt\">Request received</Timeline.Item>\n<Timeline.Item icon=\"user\">Assigned to reviewer</Timeline.Item>\n<Timeline.Item icon=\"check\">Approved</Timeline.Item>"
+    },
+    {
+      "name": "With Dates",
+      "structureMode": "standard",
+      "props": {
+        "showDate": true
+      },
+      "children": "<Timeline.Item date={new Date(\"2026-04-09T15:30:00.000Z\")} icon=\"file-alt\">Request received</Timeline.Item>\n<Timeline.Item date={new Date(\"2026-04-10T15:30:00.000Z\")} icon=\"user\">Assigned to reviewer</Timeline.Item>\n<Timeline.Item date={new Date(\"2026-04-11T15:30:00.000Z\")} icon=\"check\">Approved</Timeline.Item>"
+    },
+    {
+      "name": "Gapped",
+      "structureMode": "standard",
+      "props": {
+        "itemGap": "md",
+        "orientation": "vertical"
+      },
+      "children": "<Timeline.Item icon=\"calendar\">Scheduled</Timeline.Item>\n<Timeline.Item icon=\"truck\" lineStyle=\"dotted\">In progress</Timeline.Item>\n<Timeline.Item icon=\"home\">Complete</Timeline.Item>"
+    },
+    {
+      "name": "Item Props",
+      "structureMode": "timeline_item_props",
+      "props": {
+        "timelineItemIcon": "file-alt",
+        "timelineItemIconColor": "royal",
+        "timelineItemLineStyle": "dotted",
+        "timelineItemShowCurrentYear": true
+      },
+      "children": "Request received"
+    }
+  ],
+  "conditionals": {},
+  "hints": {
+    "default": {
+      "presetName": "Default",
+      "message": "Default renders a horizontal timeline with three timeline items.",
+      "type": "info"
+    },
+    "vertical": {
+      "presetName": "Vertical",
+      "message": "Vertical switches orientation for stacked process or activity views.",
+      "type": "info"
+    },
+    "with_dates": {
+      "presetName": "With Dates",
+      "message": "With Dates enables date styling and passes Date values to each Timeline.Item.",
+      "type": "info"
+    },
+    "gapped": {
+      "presetName": "Gapped",
+      "message": "Gapped combines vertical orientation with itemGap for more breathing room.",
+      "type": "info"
+    },
+    "item_props": {
+      "presetName": "Item Props",
+      "message": "Item Props routes controls into the first Timeline.Item so item-level props render explicitly.",
+      "type": "info"
+    }
+  }
+}

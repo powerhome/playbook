@@ -18,6 +18,8 @@ module Playbook
                              default: ""
       prop :custom_quick_pick_dates, type: Playbook::Props::HashProp,
                                      default: {}
+      prop :disabled, type: Playbook::Props::Boolean,
+                      default: false
       prop :variant, type: Playbook::Props::Enum,
                      values: %w[default subtle quickpick],
                      default: "default"
@@ -62,6 +64,7 @@ module Playbook
         Hash(prop(:data)).merge(
           pb_dropdown: true,
           pb_dropdown_multi_select: multi_select,
+          pb_dropdown_disabled: disabled,
           pb_dropdown_variant: variant,
           pb_dropdown_clearable: clearable,
           pb_dropdown_close_on_click: close_on_click,
@@ -75,7 +78,9 @@ module Playbook
       end
 
       def classname
-        generate_classname("pb_dropdown", variant, separators_class)
+        classes = generate_classname("pb_dropdown", variant, separators_class)
+        classes << " disabled" if disabled
+        classes
       end
 
       def select_id

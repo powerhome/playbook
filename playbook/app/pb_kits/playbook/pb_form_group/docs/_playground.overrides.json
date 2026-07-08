@@ -1,0 +1,91 @@
+{
+  "template": "<FormGroup{{props}}>\n{{children}}\n</FormGroup>",
+  "wrapper": "const FormGroupPlayground = () => {\n  const [formFields, setFormFields] = useState({\n    firstName: \"Jane\",\n    middleInitial: \"Q\",\n    lastName: \"Doe\",\n    search: \"\",\n    eventName: \"Planning session\",\n    animal: \"cat\"\n  })\n\n  const handleFieldChange = ({ target }) => {\n    setFormFields({ ...formFields, [target.name]: target.value })\n  }\n\n  const handleAnimalChange = ({ target }) => {\n    setFormFields({ ...formFields, animal: target.value })\n  }\n\n  return {{component}}\n}\n\n<FormGroupPlayground />",
+  "externalImports": ["import React, { useState } from 'react'"],
+  "children": {
+    "editable": true,
+    "default": "<TextInput\n    id=\"first-name\"\n    label=\"First Name\"\n    name=\"firstName\"\n    onChange={handleFieldChange}\n    placeholder=\"Enter first name\"\n    value={formFields.firstName}\n/>\n<TextInput\n    id=\"middle-initial\"\n    label=\"Middle Initial\"\n    name=\"middleInitial\"\n    onChange={handleFieldChange}\n    placeholder=\"Enter middle initial\"\n    value={formFields.middleInitial}\n/>\n<TextInput\n    id=\"last-name\"\n    label=\"Last Name\"\n    name=\"lastName\"\n    onChange={handleFieldChange}\n    placeholder=\"Enter last name\"\n    value={formFields.lastName}\n/>"
+  },
+  "groups": [
+    {
+      "name": "Layout",
+      "props": ["fullWidth"]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Text Inputs",
+      "props": {},
+      "children": "<TextInput\n    id=\"first-name\"\n    label=\"First Name\"\n    name=\"firstName\"\n    onChange={handleFieldChange}\n    placeholder=\"Enter first name\"\n    value={formFields.firstName}\n/>\n<TextInput\n    id=\"middle-initial\"\n    label=\"Middle Initial\"\n    name=\"middleInitial\"\n    onChange={handleFieldChange}\n    placeholder=\"Enter middle initial\"\n    value={formFields.middleInitial}\n/>\n<TextInput\n    id=\"last-name\"\n    label=\"Last Name\"\n    name=\"lastName\"\n    onChange={handleFieldChange}\n    placeholder=\"Enter last name\"\n    value={formFields.lastName}\n/>"
+    },
+    {
+      "name": "Full Width",
+      "props": {
+        "fullWidth": true
+      },
+      "children": "<TextInput\n    id=\"first-name-full-width\"\n    label=\"First Name\"\n    name=\"firstName\"\n    onChange={handleFieldChange}\n    placeholder=\"Enter first name\"\n    value={formFields.firstName}\n/>\n<TextInput\n    id=\"middle-initial-full-width\"\n    label=\"Middle Initial\"\n    name=\"middleInitial\"\n    onChange={handleFieldChange}\n    placeholder=\"Enter middle initial\"\n    value={formFields.middleInitial}\n/>\n<TextInput\n    id=\"last-name-full-width\"\n    label=\"Last Name\"\n    name=\"lastName\"\n    onChange={handleFieldChange}\n    placeholder=\"Enter last name\"\n    value={formFields.lastName}\n/>"
+    },
+    {
+      "name": "Search Button",
+      "props": {},
+      "children": "<TextInput\n    id=\"search-with-action\"\n    label=\"Search\"\n    name=\"search\"\n    onChange={handleFieldChange}\n    placeholder=\"Search\"\n    value={formFields.search}\n/>\n<Button\n    onClick={() => alert(\"Button clicked!\")}\n    text=\"Submit\"\n    variant=\"secondary\"\n/>"
+    },
+    {
+      "name": "Select",
+      "props": {},
+      "children": "<TextInput\n    id=\"artist-name\"\n    name=\"artistName\"\n    onChange={handleFieldChange}\n    placeholder=\"Enter Artist Name\"\n    value={formFields.artistName || \"\"}\n/>\n<Select\n    blankSelection=\"Genre\"\n    name=\"genre\"\n    options={[\n      { value: \"Country\" },\n      { value: \"Pop\" },\n      { value: \"Rock\" },\n      { value: \"Hip-Hop/Rap\" }\n    ]}\n/>"
+    },
+    {
+      "name": "Date Picker",
+      "props": {},
+      "children": "<TextInput\n    id=\"event-name\"\n    label=\"Event\"\n    name=\"eventName\"\n    onChange={handleFieldChange}\n    placeholder=\"Event Name\"\n    value={formFields.eventName}\n/>\n<DatePicker\n    label=\"Event Date\"\n    pickerId=\"form-group-event-date\"\n/>"
+    },
+    {
+      "name": "Typeahead Action",
+      "props": {},
+      "children": "<Typeahead\n    id=\"products\"\n    label=\"Products\"\n    options={[\n      { label: \"Windows\", value: \"windows\" },\n      { label: \"Roof\", value: \"roof\" },\n      { label: \"Siding\", value: \"siding\" },\n      { label: \"Doors\", value: \"doors\" }\n    ]}\n/>\n<Button\n    onClick={() => alert(\"Product added!\")}\n    text=\"Add\"\n    variant=\"secondary\"\n/>"
+    },
+    {
+      "name": "Selectable Cards",
+      "props": {},
+      "children": "<SelectableCard\n    checked={formFields.animal === \"cat\"}\n    inputId=\"cat-option\"\n    multi={false}\n    name=\"animal\"\n    onChange={handleAnimalChange}\n    value=\"cat\"\n>\n  Cat\n</SelectableCard>\n<SelectableCard\n    checked={formFields.animal === \"dog\"}\n    inputId=\"dog-option\"\n    multi={false}\n    name=\"animal\"\n    onChange={handleAnimalChange}\n    value=\"dog\"\n>\n  Dog\n</SelectableCard>"
+    }
+  ],
+  "hints": {
+    "text_inputs": {
+      "presetName": "Text Inputs",
+      "message": "Text Inputs uses state-backed child inputs so the playground fields stay editable.",
+      "type": "info"
+    },
+    "full_width": {
+      "presetName": "Full Width",
+      "message": "Full Width applies fullWidth to the FormGroup while leaving each child input editable.",
+      "type": "info"
+    },
+    "search_button": {
+      "presetName": "Search Button",
+      "message": "Search Button pairs a controlled text field with an action button in the same group.",
+      "type": "info"
+    },
+    "select": {
+      "presetName": "Select",
+      "message": "Select shows mixed children inside the group, with the options array kept directly in editable children.",
+      "type": "info"
+    },
+    "date_picker": {
+      "presetName": "Date Picker",
+      "message": "Date Picker combines a text input with a picker child, including the pickerId required by the kit.",
+      "type": "info"
+    },
+    "typeahead_action": {
+      "presetName": "Typeahead Action",
+      "message": "Typeahead Action mirrors the docs pattern of a searchable Typeahead plus an adjacent button.",
+      "type": "info"
+    },
+    "selectable_cards": {
+      "presetName": "Selectable Cards",
+      "message": "Selectable Cards keeps both card options in children so each option can be edited together.",
+      "type": "info"
+    }
+  }
+}

@@ -1,6 +1,15 @@
 @import "playbook-tokens/colors";
 @import "playbook-tokens/screen_sizes";
 @import "playbook-tokens/spacing";
+@import "../KitShow/Tabs/Playground/PlaygroundPreview.scss";
+@import "../KitShow/Tabs/Playground/components/playgroundPanelControls";
+
+.full-playground-sidebar,
+.full-playground-inspector {
+  .playground-panel-controls {
+    @include playground-panel-form-control-styles("playground-panel-dropdown");
+  }
+}
 
 .full-playground-shell {
   box-sizing: border-box;
@@ -28,7 +37,34 @@
   width: 100%;
 
   @include break_on($screen-xl-min) {
-    grid-template-columns: minmax(200px, 240px) minmax(0, 1fr) minmax(240px, 300px);
+    // Sidebar + inspector size to content; demo takes all remaining space.
+    grid-template-columns: minmax(180px, 200px) minmax(0, 1fr) auto;
+  }
+}
+
+.full-playground-sidebar {
+  min-width: 0;
+}
+
+.full-playground-demo {
+  min-width: 0;
+  width: 100%;
+}
+
+.full-playground-inspector {
+  align-self: start;
+  justify-self: stretch;
+  max-width: 500px;
+  min-width: 0;
+  width: auto;
+
+  .props-panel {
+    max-width: 100%;
+  }
+
+  > .pb_card_kit,
+  > [class*="pb_card"] {
+    width: 100%;
   }
 }
 
@@ -63,6 +99,17 @@
 }
 
 .builder-prop-group {
+  textarea {
+    width: 100%;
+    min-height: 30px;
+    font-family: monospace;
+    font-size: 12px;
+    padding: 8px;
+    border: 1px solid $border_light;
+    border-radius: 4px;
+    resize: vertical;
+  }
+
   & + & {
     border-top: 1px solid $border_light;
     margin-top: $space_sm;
@@ -103,6 +150,10 @@
 
 .builder-stage {
   border: 1px dashed $border_light;
+  box-sizing: border-box;
+  max-width: 100%;
+  min-width: 0;
+  width: 100%;
 
   &.is-drop-target {
     border-color: $primary;

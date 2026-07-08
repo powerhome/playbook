@@ -107,9 +107,10 @@ module Playbook
       end
 
       # Uses a regular table/table_cell component if there is no custom background color; if there is a cell_background_color uses a background component with tag "td"
-      def cell_component_info(column, index, bg_color, font_color)
+      def cell_component_info(column, index, bg_color, font_color, font_weight = nil)
         column_font_color = cell_font_color(column)
         effective_font_color = column_font_color || font_color
+        effective_font_weight = font_weight_value(font_weight)
 
         if has_custom_background_color?(column)
           custom_bg_color = cell_background_color(column)
@@ -119,11 +120,15 @@ module Playbook
             tag: "td",
             classname: td_classname(column, index),
           }
-          component_props[:html_options] = { style: { color: effective_font_color } } if effective_font_color.present?
+          style_hash = {}
+          style_hash[:color] = effective_font_color if effective_font_color.present?
+          style_hash[:"font-weight"] = effective_font_weight if effective_font_weight.present?
+          component_props[:html_options] = { style: style_hash } if style_hash.present?
         else
           component_name = "table/table_cell"
           style_hash = { "background-color": bg_color }
           style_hash[:color] = effective_font_color if effective_font_color.present?
+          style_hash[:"font-weight"] = effective_font_weight if effective_font_weight.present?
           component_props = {
             html_options: {
               style: style_hash,
@@ -213,6 +218,15 @@ module Playbook
           row.children
         elsif row.respond_to?(:[])
           row[:children] || row["children"]
+        end
+      end
+
+      def font_weight_value(font_weight)
+        case font_weight.to_s
+        when "bold"
+          "700"
+        when "regular"
+          "400"
         end
       end
 

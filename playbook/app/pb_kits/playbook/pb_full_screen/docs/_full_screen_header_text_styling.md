@@ -1,0 +1,1 @@
+Use `headerTextStyling` to match the header text to the weight of the fullscreen experience. The default `title_4` treatment works well for primary workflows, while `body` creates a quieter header for utility views.

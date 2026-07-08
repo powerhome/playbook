@@ -1,6 +1,6 @@
-import React from "react";
-import { Pill, Caption, Card, Flex } from "playbook-ui";
+import React, { useMemo } from "react";
 import { PlaygroundPreset } from "../types";
+import { PlaygroundPillSelector } from "./PlaygroundPillSelector";
 
 interface PresetsBarProps {
   presets: PlaygroundPreset[];
@@ -13,25 +13,24 @@ export const PresetsBar: React.FC<PresetsBarProps> = ({
   activePresetIndex,
   onPresetClick,
 }) => {
+  const options = useMemo(
+    () =>
+      presets.map((preset, index) => ({
+        key: String(index),
+        label: preset.name,
+      })),
+    [presets],
+  );
+
   if (!presets || presets.length === 0) return null;
 
   return (
-    <Card marginBottom="md" padding="sm" width="100%">
-      <Flex alignItems="center" justifyContent="center" gap="sm" wrap>
-        <Caption text="Presets:" color="lighter" />
-        {presets.map((preset, index) => (
-          <div
-            key={preset.name}
-            onClick={() => onPresetClick(index)}
-            style={{ cursor: "pointer" }}
-          >
-            <Pill
-              text={preset.name}
-              variant={activePresetIndex === index ? "primary" : "neutral"}
-            />
-          </div>
-        ))}
-      </Flex>
-    </Card>
+    <PlaygroundPillSelector
+      activeKey={activePresetIndex == null ? null : String(activePresetIndex)}
+      label="Presets"
+      marginTop="md"
+      onSelect={(key) => onPresetClick(Number(key))}
+      options={options}
+    />
   );
 };

@@ -1,0 +1,1 @@
+Full Screen can host composed workflows such as a filter paired with a data table. For popovers inside the overlay, set the popover append target to `.fullscreen-overlay` so menus render within the fullscreen layer.

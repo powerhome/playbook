@@ -4,16 +4,10 @@
     "fixedWidth": true,
     "fontStyle": "far"
   },
-  "customProps": {
-    "border": {
-      "type": "boolean",
-      "platforms": ["react"],
-      "default": false
-    }
-  },
   "hiddenProps": [
     "customIcon",
-    "fontStyle"
+    "fontStyle",
+    "border"
   ],
   "groups": [
     {
@@ -108,11 +102,6 @@
     "pulse_spinner": {
       "presetName": "Pulse Spinner",
       "message": "pulse uses the stepped pulse animation, which is commonly paired with spinning icons.",
-      "type": "info"
-    },
-    "bordered_pull": {
-      "presetName": "Bordered Pull",
-      "message": "border and pull can be combined for quote-style or floated icon treatments.",
       "type": "info"
     },
     "primary_check": {

@@ -2,7 +2,6 @@
   "template": "<Icon{{props}} />",
   "propTargets": {},
   "defaults": {
-    "border": false,
     "fixedWidth": true,
     "inverse": false,
     "listItem": false,
@@ -122,11 +121,6 @@
       "message": "pulse uses the stepped pulse animation, which is commonly paired with spinning icons.",
       "type": "info"
     },
-    "bordered_pull": {
-      "presetName": "Bordered Pull",
-      "message": "border and pull can be combined for quote-style or floated icon treatments.",
-      "type": "info"
-    },
     "primary_check": {
       "presetName": "Primary Check",
       "message": "Use the color prop to change the color of the icon.",
@@ -138,17 +132,9 @@
       "type": "info"
     }
   },
-  "customProps": {
-    "border": {
-      "type": "boolean",
-      "platforms": [
-        "react"
-      ],
-      "default": false
-    }
-  },
   "hiddenProps": [
     "customIcon",
-    "fontStyle"
+    "fontStyle",
+    "border"
   ]
 }

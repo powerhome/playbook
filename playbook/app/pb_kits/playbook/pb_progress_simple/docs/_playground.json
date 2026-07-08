@@ -4,7 +4,9 @@
   "defaults": {
     "align": "left",
     "muted": false,
-    "variant": "default"
+    "variant": "default",
+    "percent": "50",
+    "width": "100%"
   },
   "groups": [
     {
@@ -25,7 +27,9 @@
       "name": "Appearance",
       "props": [
         "variant",
-        "muted"
+        "muted",
+        "width",
+        "dark"
       ]
     }
   ],
@@ -37,21 +41,9 @@
       }
     },
     {
-      "name": "25%",
-      "props": {
-        "percent": "25"
-      }
-    },
-    {
       "name": "50%",
       "props": {
         "percent": "50"
-      }
-    },
-    {
-      "name": "75%",
-      "props": {
-        "percent": "75"
       }
     },
     {
@@ -61,17 +53,31 @@
       }
     },
     {
-      "name": "Positive 75%",
+      "name": "variant: positive",
       "props": {
         "percent": "75",
         "variant": "positive"
       }
     },
     {
-      "name": "Warning 50%",
+      "name": "Muted",
       "props": {
-        "percent": "50",
-        "variant": "warning"
+        "muted": true,
+        "percent": "50"
+      }
+    },
+    {
+      "name": "Value of Max",
+      "props": {
+        "value": 2,
+        "max": 10
+      }
+    },
+    {
+      "name": "Fixed Width",
+      "props": {
+        "percent": "40",
+        "width": "120px"
       }
     },
     {
@@ -83,5 +89,32 @@
     }
   ],
   "conditionals": {},
-  "hints": {}
+  "hints": {
+    "percent": {
+      "when": {
+        "percent": "50"
+      },
+      "message": "Percent accepts a number-like string and renders that width directly.",
+      "type": "info"
+    },
+    "value_max": {
+      "presetName": "Value of Max",
+      "message": "Use value with max when the progress should be calculated from a ratio.",
+      "type": "info"
+    },
+    "width": {
+      "when": {
+        "width": "120px"
+      },
+      "message": "Width controls the progress bar container; percent still controls the fill.",
+      "type": "info"
+    },
+    "variant: positive": {
+      "when": {
+        "variant": "positive"
+      },
+      "message": "Use the variant prop to set the color of the progress bar.",
+      "type": "info"
+    }
+  }
 }

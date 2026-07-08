@@ -180,6 +180,12 @@
       ],
       "default": false
     },
+    "styles": {
+      "type": "TypeaheadStylesConfig",
+      "platforms": [
+        "react"
+      ]
+    },
     "defaultOptions": {
       "platforms": [
         "rails"
@@ -204,7 +210,7 @@
       "platforms": [
         "rails"
       ],
-      "type": "string"
+      "type": "GenericObject"
     },
     "isMulti": {
       "platforms": [

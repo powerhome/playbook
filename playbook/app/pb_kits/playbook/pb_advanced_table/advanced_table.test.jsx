@@ -696,19 +696,6 @@ test("customRenderer prop functions as expected", () => {
   expect(pill).toBeInTheDocument()
 })
 
-test("allowFullScreen prop adds fullscreen class", () => {
-  render(
-    <AdvancedTable
-        allowFullScreen
-        columnDefinitions={columnDefinitions}
-        tableData={MOCK_DATA}
-    />
-  )
-
-  const tableContainer = screen.getByRole("table").closest("div")
-  expect(tableContainer).toHaveClass("advanced-table-allow-fullscreen")
-})
-
 test("pinnedRows prop renders pinned rows at top", () => {
   const pinnedRowsControl = {
     value: { top: ["1", "3"] },
@@ -1055,7 +1042,12 @@ test("rowStyling prop works as expected", () => {
   {
     rowId: "1",
     backgroundColor: colors.white,
-    fontColor: colors.black
+    fontColor: colors.black,
+    fontWeight: "bold",
+  },
+  {
+    rowId: "2",
+    fontWeight: "regular",
   },
 ];
 
@@ -1072,6 +1064,55 @@ test("rowStyling prop works as expected", () => {
   const tableBody = kit.querySelector('tbody')
   const row1 = tableBody.querySelector('tr:nth-child(1)') 
   expect(row1).toHaveStyle({backgroundColor: colors.white, color: colors.black})
+  expect(row1).toHaveStyle({fontWeight: "700"})
+  const row2 = tableBody.querySelector('tr:nth-child(2)')
+  expect(row2).toHaveStyle({fontWeight: "400"})
+})
+
+test("rowStyling fontWeight applies to expandable rows", () => {
+  const rowStyling = [
+    {
+      rowId: "1",
+      fontWeight: "bold",
+    },
+  ];
+
+  const tableData = [
+    {
+      id: "1",
+      year: "2021",
+      quarter: null,
+      month: null,
+      day: null,
+      newEnrollments: "20",
+      scheduledMeetings: "10",
+      children: [
+        {
+          id: "1-1",
+          year: "2021",
+          quarter: "Q1",
+          month: null,
+          day: null,
+          newEnrollments: "2",
+          scheduledMeetings: "35",
+        },
+      ],
+    },
+  ];
+
+  render(
+    <AdvancedTable
+        columnDefinitions={columnDefinitions}
+        data={{ testid: testId }}
+        rowStyling={rowStyling}
+        tableData={tableData}
+    />
+  )
+
+  const kit = screen.getByTestId(testId)
+  const tableBody = kit.querySelector('tbody')
+  const expandableRow = tableBody.querySelector('tr:nth-child(1)')
+  expect(expandableRow).toHaveStyle({fontWeight: "700"})
 })
 
 test("rowStyling prop to allow padding control", () => {

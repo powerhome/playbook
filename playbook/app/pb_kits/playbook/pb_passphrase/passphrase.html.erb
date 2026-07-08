@@ -1,1 +1,70 @@
-  <%= react_component('Passphrase', object.passphrase_options, class: object.classname, **combined_html_options) %>
+<%= pb_content_tag(:div) do %>
+  <label>
+    <%= pb_rails("flex", props: { align: "baseline", margin_bottom: show_label? ? "xs" : nil }.compact) do %>
+      <% if show_label? %>
+        <% if show_required_indicator? %>
+          <%= pb_rails("caption", props: { dark: object.dark, classname: "passphrase-label", color: "lighter" }) do %>
+            <%= object.display_label %> <span class="required_indicator">*</span>
+          <% end %>
+        <% else %>
+          <%= pb_rails("caption", props: {
+            dark: object.dark,
+            classname: "passphrase-label",
+            color: "lighter",
+            text: object.display_label,
+          }) %>
+        <% end %>
+      <% end %>
+
+      <% if object.show_tips? %>
+        <%= pb_rails("circle_icon_button", props: {
+          classname: object.tips_button_class,
+          dark: object.dark,
+          icon: "info-circle",
+          id: object.tips_trigger_id,
+          variant: "link",
+        }) %>
+        <%= pb_rails("popover", props: {
+          close_on_click: "outside",
+          position: "right",
+          trigger_element_id: object.tips_trigger_id,
+          tooltip_id: object.tips_tooltip_id,
+        }) do %>
+          <%= pb_rails("flex", props: { align: "center", orientation: "column" }) do %>
+            <%= pb_rails("caption", props: {
+              color: "lighter",
+              margin_bottom: "xs",
+              text: "Tips for a good passphrase",
+            }) %>
+            <div>
+              <% object.tips.each do |tip| %>
+                <%= pb_rails("flex", props: { align: "center", margin_bottom: "xs" }) do %>
+                  <%= pb_rails("icon", props: { icon: "shield-check", margin_right: "xs" }) %>
+                  <%= pb_rails("caption", props: { color: "lighter", size: "xs", text: tip }) %>
+                <% end %>
+              <% end %>
+            </div>
+          <% end %>
+        <% end %>
+      <% end %>
+    <% end %>
+
+    <div class="passphrase-text-input-wrapper">
+      <%= pb_rails("text_input", props: object.text_input_props) %>
+      <span
+        aria-label="Passphrase currently hidden. Click icon to reveal password"
+        aria-pressed="false"
+        class="show-passphrase-icon"
+        role="button"
+        tabindex="0"
+      >
+        <%= pb_rails("body", props: { classname: "passphrase-toggle-icon", color: "light", dark: object.dark }) do %>
+          <%= pb_rails("icon", props: { aria: { label: "eye icon" }, icon: "eye-slash" }) %>
+        <% end %>
+        <%= pb_rails("body", props: { classname: "passphrase-toggle-icon hide-icon", color: "light", dark: object.dark }) do %>
+          <%= pb_rails("icon", props: { aria: { label: "eye icon" }, icon: "eye" }) %>
+        <% end %>
+      </span>
+    </div>
+  </label>
+<% end %>

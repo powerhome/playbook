@@ -104,6 +104,20 @@ module Playbook
                       "truncate_#{value}"
                     when :group_hover
                       value ? "group_hover" : nil
+                    when :border
+                      Playbook::Border.border_class_for_prop(:border, value)
+                    when :border_top
+                      Playbook::Border.border_class_for_prop(:border_top, value)
+                    when :border_bottom
+                      Playbook::Border.border_class_for_prop(:border_bottom, value)
+                    when :border_left
+                      Playbook::Border.border_class_for_prop(:border_left, value)
+                    when :border_right
+                      Playbook::Border.border_class_for_prop(:border_right, value)
+                    when :border_x
+                      Playbook::Border.border_class_for_prop(:border_x, value)
+                    when :border_y
+                      Playbook::Border.border_class_for_prop(:border_y, value)
                     end
       end
 
@@ -118,6 +132,7 @@ module Playbook
         position vertical_alignment z_index line_height number_spacing
         border_radius text_size letter_spacing display cursor hover
         text_align overflow overflow_x overflow_y truncate group_hover
+        border border_top border_bottom border_left border_right border_x border_y
       ]
 
       props = {}

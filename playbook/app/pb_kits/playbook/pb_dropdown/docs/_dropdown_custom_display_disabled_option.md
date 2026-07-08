@@ -1,0 +1,1 @@
+To disable individual items in the `options`, include `disabled: true` within the object on the option that you want disabled. See the code snippet below for an example of how to do this.

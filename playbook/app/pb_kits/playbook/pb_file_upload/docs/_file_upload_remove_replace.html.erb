@@ -1,0 +1,66 @@
+<div id="file-upload-remove-replace">
+  <%= pb_rails("list", props: { id: "selected-files-list", margin_bottom: "sm" }) %>
+
+  <%= pb_rails("file_upload", props: {
+    id: "remove_replace",
+    input_options: { multiple: true },
+  }) %>
+</div>
+
+<template id="file-list-item-template">
+  <%= pb_rails("list/item") do %>
+    <%= pb_rails("flex", props: { align: "center", justify: "between", width: "100%" }) do %>
+      <%= pb_rails("body", props: { data: { file_name: true } }) %>
+      <%= pb_rails("circle_icon_button", props: {
+        icon: "times",
+        variant: "secondary",
+        input_options: { classname: "remove-file-button" },
+      }) %>
+    <% end %>
+  <% end %>
+</template>
+
+<%= javascript_tag defer: "defer" do %>
+  document.addEventListener("DOMContentLoaded", function () {
+    const fileInput = document.getElementById("upload-remove_replace")
+    const list = document.getElementById("selected-files-list")
+    const template = document.getElementById("file-list-item-template")
+    let files = []
+
+    if (!fileInput || !list || !template) return
+
+    function syncInput() {
+      const dataTransfer = new DataTransfer()
+      files.forEach((file) => dataTransfer.items.add(file))
+      fileInput.files = dataTransfer.files
+    }
+
+    function render() {
+      list.innerHTML = ""
+
+      files.forEach((file, index) => {
+        const clone = template.content.cloneNode(true)
+        const nameElement = clone.querySelector("[data-file-name]")
+        const removeButton = clone.querySelector(".remove-file-button")
+
+        nameElement.textContent = file.name
+        removeButton.addEventListener("click", function (event) {
+          event.preventDefault()
+          event.stopPropagation()
+          files = files.filter((_, fileIndex) => fileIndex !== index)
+          syncInput()
+          render()
+        })
+
+        list.appendChild(clone)
+      })
+    }
+
+    fileInput.addEventListener("change", function () {
+      const newFiles = Array.from(fileInput.files)
+      files = [...files, ...newFiles]
+      syncInput()
+      render()
+    })
+  })
+<% end %>

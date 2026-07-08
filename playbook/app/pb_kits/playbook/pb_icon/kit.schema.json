@@ -8,12 +8,10 @@
   ],
   "props": {
     "border": {
-      "type": "string",
+      "type": "boolean | BorderPropValue",
       "platforms": [
-        "react",
-        "rails"
-      ],
-      "default": false
+        "react"
+      ]
     },
     "color": {
       "type": "string",
