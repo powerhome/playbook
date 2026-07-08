@@ -94,6 +94,7 @@ const Header = ({
                 classname="desktop-kit-search-new"
                 id="desktop-kit-search"
                 kits={search_list}
+                platform={platform}
                 global_props_and_tokens={global_props_and_tokens}
                 onNavigate={(path) => navigate(path)}
                 marginBottom="none"
