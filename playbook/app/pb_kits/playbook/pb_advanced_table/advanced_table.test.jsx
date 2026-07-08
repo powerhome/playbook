@@ -696,7 +696,7 @@ test("customRenderer prop functions as expected", () => {
   expect(pill).toBeInTheDocument()
 })
 
-test("pinnedRows prop renders pinned rows at top", () => {
+test("pinnedRows prop renders top pinned rows at top", () => {
   const pinnedRowsControl = {
     value: { top: ["1", "3"] },
     onChange: jest.fn()
@@ -719,6 +719,31 @@ test("pinnedRows prop renders pinned rows at top", () => {
   const firstPinnedRow = pinnedRows[0]
   expect(firstPinnedRow).toHaveStyle("position: sticky")
   expect(firstPinnedRow).toHaveStyle("background-color: white")
+})
+
+test("pinnedRows prop renders bottom pinned rows at bottom", () => {
+  const pinnedRowsControl = {
+    value: { bottom: ["1", "3"] },
+    onChange: jest.fn()
+  }
+
+  render(
+    <AdvancedTable
+        columnDefinitions={columnDefinitions}
+        data={{ testid: testId }}
+        pinnedRows={pinnedRowsControl}
+        tableData={MOCK_DATA_WITH_ID}
+    />
+  )
+
+  const kit = screen.getByTestId(testId)
+  const pinnedRows = kit.querySelectorAll(".pinned-row-bottom")
+  
+  expect(pinnedRows).toHaveLength(2)
+  
+  const lastPinnedRow = pinnedRows[0]
+  expect(lastPinnedRow).toHaveStyle("position: sticky")
+  expect(lastPinnedRow).toHaveStyle("background-color: white")
 })
 
 test("columnStyling.headerAlignment aligns header as expected", () => {

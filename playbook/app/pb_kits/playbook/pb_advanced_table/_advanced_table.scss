@@ -747,6 +747,9 @@
   // Row Pinning - React uses inline style; Rails passes same style via html_options from table_body
   .pinned-row {
     box-shadow: 0 4px 10px 0 rgba($shadow, 0.16) !important;
+    &.pinned-row-bottom {
+      box-shadow: 0 -3px 8px 0 rgba($shadow, 0.1) !important;
+    }
   }
 
   // For Rails, we can't target the &:last-child since collapsed rows are display: none;

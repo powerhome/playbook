@@ -72,6 +72,7 @@ export function useTableState({
   const [localColumnVisibility, setLocalColumnVisibility] = useState({});
   const [localRowPinning, setLocalRowPinning] = useState<RowPinningState>({
     top: [],
+    bottom: [],
   });
   // Manage local state to preserve current page index when inlineRowLoading is enabled so it does not boot table to page 1
   // We can extend this for more usecases, but for now scoping it only for inlineRowLoading
@@ -235,22 +236,26 @@ export function useTableState({
   // Handle row pinning changes
     useEffect(() => {
     const topPins = pinnedRows?.value?.top ?? [];
-    if (topPins.length === 0) {
-      onRowPinningChange({ top: [] });
-      return;
-    }
+    const bottomPins = pinnedRows?.value?.bottom ?? [];
+    
     const rows = table.getRowModel().rows;
     const collectAllDescendantIds = (subs: Row<GenericObject>[]): string[] =>
       subs.flatMap(r => [r.id, ...collectAllDescendantIds(r.subRows)]);
-    const allPinned: string[] = [];
-    topPins.forEach(id => {
-      const parent = rows.find(r => r.id === id && r.depth === 0);
-      if (parent) {
-        allPinned.push(parent.id, ...collectAllDescendantIds(parent.subRows));
-      }
+    const expandPins = (ids: string[]): string[] => {
+      const allPinned: string[] = [];
+      ids.forEach(id => {
+        const parent = rows.find(r => r.id === id && r.depth === 0);
+        if (parent) {
+          allPinned.push(parent.id, ...collectAllDescendantIds(parent.subRows));
+        }
+      });
+      return allPinned;
+    };
+    onRowPinningChange({
+      top: expandPins(topPins),
+      bottom: expandPins(bottomPins),
     });
-    onRowPinningChange({ top: allPinned });
-  }, [table, pinnedRows?.value?.top?.join(',')]);
+  }, [table, pinnedRows?.value?.top?.join(','), pinnedRows?.value?.bottom?.join(',')]);
 
   // Set pagination state when pagination is enabled
   useEffect(() => {
