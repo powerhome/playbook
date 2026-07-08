@@ -4,6 +4,8 @@ import { Button, PbReactPopover } from "playbook-ui";
 import {
   resolveDialogFloatingPortalHost,
   resolvePortaledKitHost,
+  resolveFullscreenFloatingPortalHost,
+  kitRequiresPortaledFloatingUi,
   isPortaledFloatingKitInteraction,
   matchesPortaledMenuPointerDown,
   portaledFloatingOwnerMenusAtPoint,
@@ -378,6 +380,40 @@ describe("Popover portaled kit portal host", () => {
     document.body.appendChild(pop);
 
     expect(resolvePortaledKitHost(kit, null)).toBe(document.body);
+  });
+
+  test("resolvePortaledKitHost uses fullscreen floating root for popover inside fullscreen", () => {
+    const overlay = document.createElement("div");
+    overlay.className = "fullscreen-overlay";
+    const floating = document.createElement("div");
+    floating.className = "pb_fullscreen_floating_root";
+    floating.setAttribute("data-pb-dialog-floating-root", "true");
+    const pop = document.createElement("div");
+    pop.className = "pb_popover_tooltip show";
+    const kit = document.createElement("div");
+    pop.appendChild(kit);
+    overlay.appendChild(floating);
+    overlay.appendChild(pop);
+    document.body.appendChild(overlay);
+
+    expect(resolvePortaledKitHost(kit, null)).toBe(floating);
+  });
+
+  test("resolvePortaledKitHost uses fullscreen floating root outside popover", () => {
+    const overlay = document.createElement("div");
+    overlay.className = "fullscreen-overlay";
+    const floating = document.createElement("div");
+    floating.className = "pb_fullscreen_floating_root";
+    floating.setAttribute("data-pb-dialog-floating-root", "true");
+    const kit = document.createElement("div");
+    overlay.appendChild(document.createElement("div"));
+    overlay.appendChild(floating);
+    overlay.appendChild(kit);
+    document.body.appendChild(overlay);
+
+    expect(resolveFullscreenFloatingPortalHost(kit)).toBe(floating);
+    expect(resolvePortaledKitHost(kit, null)).toBe(floating);
+    expect(kitRequiresPortaledFloatingUi(kit)).toBe(true);
   });
 
   test("targetIsInsidePortaledFloatingKit is scoped to owner id", () => {
