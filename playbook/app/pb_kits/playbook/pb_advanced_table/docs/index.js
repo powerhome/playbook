@@ -53,3 +53,5 @@ export { default as AdvancedTableColumnStylingBackgroundMulti } from './_advance
 export { default as AdvancedTableColumnStylingBackgroundCustom } from './_advanced_table_column_styling_background_custom.jsx'
 export { default as AdvancedTableCascadeCollapse } from './_advanced_table_cascade_collapse.jsx'
 export { default as AdvancedTableSortParentOnly } from './_advanced_table_sort_parent_only.jsx'
+export { default as AdvancedTablePinnedRowsBottom } from './_advanced_table_pinned_rows_bottom.jsx'
+export { default as AdvancedTablePinnedRowsBoth } from './_advanced_table_pinned_rows_both.jsx'
