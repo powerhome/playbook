@@ -7,7 +7,7 @@ import { globalProps, GlobalProps } from "../utilities/globalProps";
 import Icon from "../pb_icon/_icon";
 import Image from "../pb_image/_image";
 import Collapsible from "../pb_collapsible/_collapsible";
-import { NavChildProps } from "./navTypes";
+import { NavChildProps, SpacingObject } from "./navTypes";
 import { Spacing } from "../types";
 
 type NavItemProps = {
@@ -35,7 +35,7 @@ type NavItemProps = {
   collapsibleTrail?: boolean;
   collapsed?: boolean;
   orientation?: "vertical" | "horizontal";
-  variant?: "normal" | "subtle";
+  variant?: "normal" | "subtle" | "bold";
   margin?: Spacing;
   marginBottom?: Spacing;
   marginTop?: Spacing;
@@ -44,6 +44,7 @@ type NavItemProps = {
   marginX?: Spacing;
   marginY?: Spacing;
   disabled?: boolean;
+  itemSpacing?: SpacingObject;
 } & GlobalProps;
 
 const NavItem = (props: NavItemProps) => {

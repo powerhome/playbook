@@ -397,6 +397,23 @@ export const getDefaultChildren = (componentName: string): string => {
   return childrenDefaults[name] ?? "";
 };
 
+export const injectPropsIntoComponentTags = (
+  children: string,
+  componentName: string,
+  propsString: string
+): string => {
+  const trimmedProps = propsString.trim();
+  if (!children || !trimmedProps) return children;
+
+  const tagRegex = new RegExp(`(<${componentName}\\b)([^>]*?)(\\/?>)`, "g");
+  return children.replace(tagRegex, (_match, openTag, existingProps, close) => {
+    const existing = existingProps.trim();
+    return existing
+      ? `${openTag} ${existing} ${trimmedProps}${close}`
+      : `${openTag} ${trimmedProps}${close}`;
+  });
+};
+
 export const needsChildren = (componentName: string): boolean => {
   const name = componentName.toLowerCase();
   const componentsWithChildren = [
@@ -429,7 +446,8 @@ export const generateFromTemplate = ({
   wrapper,
   requiredProps = {},
   statefulProps = [],
-}: GenerateFromTemplateOptions): string => {
+  structureMode = null,
+}: GenerateFromTemplateOptions & { structureMode?: string | null }): string => {
   // Group enabled props by their target marker
   const propsByTarget: Record<string, string[]> = {};
   const requiredPropVariableNames = new Set(
@@ -495,7 +513,23 @@ export const generateFromTemplate = ({
   markers.forEach((marker) => {
     if (marker === "children") {
       // Handle children marker - hide if a hideWhenPropSet prop is enabled
-      const childrenValue = shouldHideChildren ? "" : (children ?? childrenConfig?.default ?? "");
+      let childrenValue = shouldHideChildren ? "" : (children ?? childrenConfig?.default ?? "");
+      const injection = childrenConfig?.propInjection;
+      const injectionModes = injection?.structureModes;
+      const shouldInjectProps =
+        injection &&
+        !shouldHideChildren &&
+        (!injectionModes?.length || (structureMode && injectionModes.includes(structureMode)));
+
+      if (shouldInjectProps) {
+        const injectedProps = propsByTarget[injection.propTarget] || [];
+        childrenValue = injectPropsIntoComponentTags(
+          childrenValue,
+          injection.component,
+          injectedProps.join(" ")
+        );
+      }
+
       result = result.replace(/\{\{children\}\}/g, childrenValue);
     } else {
       const props = propsByTarget[marker] || [];
@@ -582,7 +616,8 @@ export const generateLiveFromTemplate = ({
   wrapper,
   requiredProps: _requiredProps = {},
   statefulProps = [],
-}: Omit<GenerateFromTemplateOptions, "includeImport">): string => {
+  structureMode = null,
+}: Omit<GenerateFromTemplateOptions, "includeImport"> & { structureMode?: string | null }): string => {
   // Do NOT pass requiredProps here. PlaygroundPreview injects them as scope variables
   // (via previewScope → extraScope). Generating `const columnDefinitions = …` in the
   // live code string would (a) duplicate the scope parameter name → SyntaxError in
@@ -602,6 +637,7 @@ export const generateLiveFromTemplate = ({
     wrapper,
     requiredProps: {},
     statefulProps,
+    structureMode,
   });
 
   let body = code.trimEnd();

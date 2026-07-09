@@ -250,6 +250,7 @@ export const getLivePreviewCode = (
     wrapper: getActiveWrapper(instance, kit),
     requiredProps: getRequiredCodeProps(kit, instance),
     statefulProps: getActiveStatefulProps(instance, kit),
+    structureMode: instance.structureMode,
   });
   const setupCode = context.setupSnippets.join("\n\n");
 
@@ -530,6 +531,7 @@ const renderInstanceCode = (
       wrapper,
       requiredProps: isLivePreviewRender ? {} : requiredProps,
       statefulProps: getActiveStatefulProps(instance, kit),
+      structureMode: instance.structureMode,
     });
 
     const split = splitSetupFromRenderableCode(rendered);
