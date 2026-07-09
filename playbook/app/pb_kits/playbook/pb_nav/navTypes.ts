@@ -19,7 +19,7 @@ export type SpacingObject = {
 
 export type NavChildProps = {
     orientation?: "vertical" | "horizontal";
-    variant?: "normal" | "subtle";
+    variant?: "normal" | "subtle" | "bold";
     itemSpacing?: SpacingObject
     disabled?: boolean
   };
