@@ -39,7 +39,12 @@
     "generate:global-props-metadata": "node scripts/generate-global-props-metadata.mjs",
     "generate:all-ai-metadata": "node scripts/generate-ai-metadata.mjs && node scripts/generate-global-props-metadata.mjs",
     "build:ai": "node scripts/build-ai-dist.mjs",
-    "build:ai:full": "yarn generate:all-ai-metadata && yarn build:ai"
+    "build:ai:full": "yarn generate:all-ai-metadata && yarn build:ai",
+    "figma:connect:parse:react": "figma connect parse --config figma.config.react.json",
+    "figma:connect:parse:rails": "figma connect parse --config figma.config.rails.json",
+    "figma:connect:publish:react": "figma connect publish --config figma.config.react.json",
+    "figma:connect:publish:rails": "figma connect publish --config figma.config.rails.json",
+    "figma:connect:publish": "yarn figma:connect:publish:react && yarn figma:connect:publish:rails"
   },
   "repository": {
     "type": "git",
@@ -67,6 +72,7 @@
     "intl-tel-input": "^24.7.0"
   },
   "devDependencies": {
+    "@figma/code-connect": "^1.4.9",
     "@actions/core": "1.10.0",
     "@actions/github": "6.0.0",
     "@babel/preset-env": "^7.12.1",
