@@ -10,7 +10,10 @@
     "required": false,
     "requiredIndicator": false,
     "clearOnContextChange": true,
-    "preserveSearchInput": false
+    "preserveSearchInput": false,
+    "enablePillReorder": false,
+    "showPillIndex": false,
+    "pillDragHandle": true
   },
   "groups": [
     {
@@ -58,7 +61,10 @@
       "props": [
         "components",
         "dark",
-        "marginBottom"
+        "marginBottom",
+        "enablePillReorder",
+        "showPillIndex",
+        "pillDragHandle"
       ]
     }
   ],
