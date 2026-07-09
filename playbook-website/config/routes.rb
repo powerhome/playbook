@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   get "kits/:name",                          to: "pages#application"
   get "kit_category/:category",              to: "pages#application"
   get "playground",                          to: "pages#application"
+  get "worldcup",                            to: "pages#application"
   get "icons",                               to: "pages#application"
   get "changelog/:variant",                  to: "pages#application"
   get "changelog",                           to: "pages#application"
