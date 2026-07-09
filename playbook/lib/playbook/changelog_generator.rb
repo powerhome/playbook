@@ -17,6 +17,7 @@ module Playbook
     CHANGELOG_PATH = File.expand_path("../../CHANGELOG.md", __dir__)
 
     OTHER_HEADER = "**Other:**"
+    RELEASE_IMAGE = "![release_image](https://github.com/user-attachments/assets/db119637-25e9-4157-9091-c5f7fdf034fc)"
 
     SECTIONS = [
       { header: "**New Kits:**", labels: ["new kit"] },
@@ -204,7 +205,7 @@ module Playbook
       lines << ""
       lines << "##### #{Date.today.strftime('%B %d, %Y')}"
       lines << ""
-      lines << "![Image Description](image_url)"
+      lines << RELEASE_IMAGE
       lines << ""
       lines << "Your feature description goes here."
       lines << ""
