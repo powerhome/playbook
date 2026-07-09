@@ -1,6 +1,7 @@
 import React, { useLayoutEffect, useRef } from "react";
 import { Card } from "playbook-ui";
 import PbKitRegistry from "kits/pb_kit_registry";
+import { mountComponents } from "../../../../../utilities/mountComponent";
 import { useDarkMode } from "../../contexts/DarkModeContext";
 
 type LiveExampleRailsProps = {
@@ -30,8 +31,7 @@ const RAILS_EXAMPLE_WRAPPER_STYLE: React.CSSProperties = {
   width: "100%",
 };
 
-const EXECUTE_SCRIPT_DELAY_MS = 100;
-const REINITIALIZE_DELAY_MS = 200;
+const DEFERRED_SCRIPT_FOLLOWUP_MS = 50;
 
 const transformScriptForLiveExecution = (scriptContent: string): string => {
   // Rails examples are injected after the page has already loaded, so
@@ -145,9 +145,45 @@ const closeOpenDialogs = (container: HTMLElement): void => {
   });
 };
 
+const scriptUsesDeferredInit = (scriptContent: string): boolean =>
+  /DOMContentLoaded|addEventListener\s*\(\s*["']load["']/.test(scriptContent);
+
+const executeInlineScripts = (
+  container: HTMLElement,
+  scripts: ScriptSnapshot[],
+): boolean => {
+  let needsDeferredFollowUp = false;
+
+  scripts.forEach(({ attributes, content, element }) => {
+    const newScript = document.createElement("script");
+    attributes.forEach((attr) => {
+      newScript.setAttribute(attr.name, attr.value);
+    });
+
+    const wrappedContent = transformScriptForLiveExecution(content).trim();
+    const isolatedContent = wrappedContent.startsWith("(function")
+      ? wrappedContent
+      : `(function() {\n${wrappedContent}\n})();`;
+
+    newScript.textContent = isolatedContent;
+
+    if (element.parentNode) {
+      element.parentNode.replaceChild(newScript, element);
+    } else {
+      container.appendChild(newScript);
+    }
+
+    if (scriptUsesDeferredInit(content)) {
+      needsDeferredFollowUp = true;
+    }
+  });
+
+  return needsDeferredFollowUp;
+};
+
 const reinitializeRailsKits = (container: HTMLElement): void => {
   PbKitRegistry.rescan(container);
-  window.dispatchEvent(new Event("turbo:frame-load"));
+  mountComponents(container);
 };
 
 const LiveExampleRails: React.FC<LiveExampleRailsProps> = ({ html }) => {
@@ -210,49 +246,28 @@ const LiveExampleRails: React.FC<LiveExampleRailsProps> = ({ html }) => {
     };
     container.addEventListener('click', preventHashNavigation);
 
-    // Wait for React's innerHTML swap to settle, then rescan so enhanced kits
-    // (e.g. dialog open triggers) bind to the new DOM nodes.
+    // Single init path: run inline scripts, then one scoped kit rescan.
     const initFrame = requestAnimationFrame(() => {
+      const needsDeferredFollowUp = executeInlineScripts(container, scriptsToExecute);
       reinitializeRailsKits(container);
 
-      const turboTimeout = window.setTimeout(() => {
+      if (!needsDeferredFollowUp) return;
+
+      // Scripts rewritten from DOMContentLoaded/load run on a short timer; rescan once after.
+      const deferredTimeout = window.setTimeout(() => {
         reinitializeRailsKits(container);
-      }, REINITIALIZE_DELAY_MS);
+      }, DEFERRED_SCRIPT_FOLLOWUP_MS);
 
-      container.dataset.railsKitTurboTimeout = String(turboTimeout);
+      container.dataset.railsKitDeferredTimeout = String(deferredTimeout);
     });
-
-    // Then run the example's inline scripts, including date picker setup.
-    const scriptTimeout = setTimeout(() => {
-      scriptsToExecute.forEach(({ attributes, content, element }) => {
-        const newScript = document.createElement("script");
-        attributes.forEach((attr) => {
-          newScript.setAttribute(attr.name, attr.value);
-        });
-
-        const wrappedContent = transformScriptForLiveExecution(content).trim();
-        const isolatedContent = wrappedContent.startsWith("(function")
-          ? wrappedContent
-          : `(function() {\n${wrappedContent}\n})();`;
-
-        newScript.textContent = isolatedContent;
-
-        if (element.parentNode) {
-          element.parentNode.replaceChild(newScript, element);
-        } else {
-          container.appendChild(newScript);
-        }
-      });
-    }, EXECUTE_SCRIPT_DELAY_MS);
 
     return () => {
       cancelAnimationFrame(initFrame);
-      const turboTimeoutId = container.dataset.railsKitTurboTimeout;
-      if (turboTimeoutId) {
-        window.clearTimeout(Number(turboTimeoutId));
-        delete container.dataset.railsKitTurboTimeout;
+      const deferredTimeoutId = container.dataset.railsKitDeferredTimeout;
+      if (deferredTimeoutId) {
+        window.clearTimeout(Number(deferredTimeoutId));
+        delete container.dataset.railsKitDeferredTimeout;
       }
-      clearTimeout(scriptTimeout);
       closeOpenDialogs(container);
       // Popovers and flatpickr calendars can own body-level DOM. Clean them
       // before the React tree drops this live example.
