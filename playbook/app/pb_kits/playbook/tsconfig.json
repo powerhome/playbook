@@ -1,0 +1,9 @@
+{
+  "extends": "../../../tsconfig.json",
+  "compilerOptions": {
+    "noEmit": true,
+    "strict": false,
+    "types": ["@figma/code-connect/figma-types"]
+  },
+  "include": ["**/docs/*.figma.ts"]
+}
