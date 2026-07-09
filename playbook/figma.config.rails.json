@@ -1,0 +1,9 @@
+{
+  "codeConnect": {
+    "include": ["app/pb_kits/playbook/**/docs/*.figma.ts"],
+    "parser": "html",
+    "label": "Rails",
+    "language": "ruby",
+    "interactiveSetupFigmaFileUrl": "https://www.figma.com/design/Zj4FIeaa9fyMn2LcuL15hG/Playbook-Design-System-Library"
+  }
+}

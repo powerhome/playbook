@@ -1,0 +1,16 @@
+{
+  "codeConnect": {
+    "include": [
+      "app/pb_kits/playbook/**/docs/*.figma.tsx",
+      "app/pb_kits/playbook/pb_*/_*.tsx"
+    ],
+    "exclude": ["**/*.figma.ts"],
+    "parser": "react",
+    "label": "React",
+    "language": "tsx",
+    "interactiveSetupFigmaFileUrl": "https://www.figma.com/design/Zj4FIeaa9fyMn2LcuL15hG/Playbook-Design-System-Library",
+    "importPaths": {
+      "app/pb_kits/playbook/pb_title/_title.tsx": "playbook-ui"
+    }
+  }
+}
