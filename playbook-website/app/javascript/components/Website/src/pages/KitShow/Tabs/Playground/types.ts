@@ -92,11 +92,19 @@ export const REACT_NODE_PRESETS: ReactNodePreset[] = [
   { label: "Custom JSX", value: "custom" },
 ];
 
+export interface PlaygroundChildrenPropInjection {
+  component: string;
+  propTarget: string;
+  /** When set, injection runs only in these structure mode keys (e.g. `"standard"`). */
+  structureModes?: string[];
+}
+
 export interface PlaygroundChildrenConfig {
   editable: boolean;
   default: string;
   marker?: string;
   hideWhenPropSet?: string[];
+  propInjection?: PlaygroundChildrenPropInjection;
 }
 
 export interface PropCondition {
