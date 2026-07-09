@@ -95,11 +95,20 @@ module Playbook
     def tag_date(version)
       [version, "v#{version}"].each do |tag|
         date = `git -C #{Shellwords.escape(git_root)} log -1 --format=%cI #{Shellwords.escape(tag)} 2>/dev/null`.strip
-        return Date.parse(date).iso8601 unless date.empty?
+        next if date.empty?
+
+        return sanitize_iso_date(Date.parse(date).iso8601)
       end
 
       warn "Could not resolve date for tag #{version}; using 30 days ago."
-      (Date.today - 30).iso8601
+      sanitize_iso_date((Date.today - 30).iso8601)
+    end
+
+    def sanitize_iso_date(value)
+      date = value.to_s.strip
+      abort "Invalid date for GitHub search: #{date.inspect}" unless date.match?(/\A\d{4}-\d{2}-\d{2}\z/)
+
+      date
     end
 
     def resolve_compare_tag(version, previous_version)
@@ -134,7 +143,8 @@ module Playbook
     end
 
     def fetch_merged_pulls_via_gh(since_date)
-      query = "repo:#{REPO} is:pr is:merged merged:>=#{since_date}"
+      safe_date = sanitize_iso_date(since_date)
+      query = "repo:#{REPO} is:pr is:merged merged:>=#{safe_date}"
       cmd = [
         "gh", "api", "search/issues",
         "--paginate",
@@ -160,12 +170,15 @@ module Playbook
     end
 
     def fetch_merged_pulls_via_api(since_date)
-      query = URI.encode_www_form_component("repo:#{REPO} is:pr is:merged merged:>=#{since_date}")
+      safe_date = sanitize_iso_date(since_date)
+      query = URI.encode_www_form_component("repo:#{REPO} is:pr is:merged merged:>=#{safe_date}")
       items = []
       page = 1
 
       loop do
         uri = URI("https://api.github.com/search/issues?q=#{query}&per_page=100&page=#{page}&sort=created&order=desc")
+        abort "Unexpected GitHub API host: #{uri.host}" unless uri.host == "api.github.com"
+
         body = JSON.parse(github_get(uri))
         batch = Array(body["items"])
         items.concat(batch)
