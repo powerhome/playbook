@@ -3,7 +3,6 @@
 require "date"
 require "json"
 require "net/http"
-require "open3"
 require "shellwords"
 require "uri"
 
@@ -67,12 +66,10 @@ module Playbook
 
     def ensure_github_auth!
       return if github_token
-      return if gh_authenticated?
 
       abort <<~MSG
         GitHub authentication required.
-          - Install/authenticate gh (`gh auth login`), or
-          - Set CHANGELOG_GITHUB_TOKEN, GH_TOKEN, or GITHUB_TOKEN
+        Set CHANGELOG_GITHUB_TOKEN, GH_TOKEN, or GITHUB_TOKEN
       MSG
     end
 
@@ -82,14 +79,6 @@ module Playbook
         return value unless value.empty?
       end
       nil
-    end
-
-    def gh_available?
-      system("which", "gh", out: File::NULL, err: File::NULL)
-    end
-
-    def gh_authenticated?
-      gh_available? && system("gh", "auth", "status", out: File::NULL, err: File::NULL)
     end
 
     def tag_date(version)
@@ -135,41 +124,6 @@ module Playbook
     end
 
     def fetch_merged_pulls(since_date)
-      if gh_authenticated?
-        fetch_merged_pulls_via_gh(since_date)
-      else
-        fetch_merged_pulls_via_api(since_date)
-      end
-    end
-
-    def fetch_merged_pulls_via_gh(since_date)
-      safe_date = sanitize_iso_date(since_date)
-      query = "repo:#{REPO} is:pr is:merged merged:>=#{safe_date}"
-      cmd = [
-        "gh", "api", "search/issues",
-        "--paginate",
-        "-f", "q=#{query}",
-        "-f", "per_page=100",
-        "--jq", ".items[] | {number, title, user: .user.login, labels: [.labels[].name], pull_request}"
-      ]
-
-      stdout, stderr, status = Open3.capture3(*cmd)
-      abort "gh search failed: #{stderr}" unless status.success?
-
-      stdout.split("\n").reject(&:empty?).filter_map do |line|
-        item = JSON.parse(line)
-        next unless item["pull_request"]
-
-        {
-          "number" => item["number"],
-          "title" => item["title"],
-          "user" => { "login" => item["user"] },
-          "labels" => Array(item["labels"]).map { |name| { "name" => name } },
-        }
-      end
-    end
-
-    def fetch_merged_pulls_via_api(since_date)
       safe_date = sanitize_iso_date(since_date)
       query = URI.encode_www_form_component("repo:#{REPO} is:pr is:merged merged:>=#{safe_date}")
       items = []
@@ -203,11 +157,10 @@ module Playbook
       request = Net::HTTP::Get.new(uri)
       request["Accept"] = "application/vnd.github+json"
       request["User-Agent"] = "playbook-changelog"
-      token = github_token
-      request["Authorization"] = "Bearer #{token}" if token
+      request["Authorization"] = "Bearer #{github_token}"
 
       response = http.request(request)
-      abort "GitHub API error #{response.code}: #{response.body}" unless response.is_a?(Net::HTTPSuccess)
+      abort "GitHub API error #{response.code}" unless response.is_a?(Net::HTTPSuccess)
 
       response.body
     end
