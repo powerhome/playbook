@@ -34,7 +34,6 @@ Need immersive layouts? We’ve got a new Full Screen kit. Need more styling con
 - Playbook Website: Markdown Styling Fixes [\#6356](https://github.com/powerhome/playbook/pull/6356) ([nidaqg](https://github.com/nidaqg))
 - Dropdown, Icon and Border Global Props for Playgrounds [\#6348](https://github.com/powerhome/playbook/pull/6348) ([nidaqg](https://github.com/nidaqg))
 - Corrected Typo on Border Global Props Page [\#6345](https://github.com/powerhome/playbook/pull/6345) ([ElisaShapiro](https://github.com/ElisaShapiro))
-- Add New Siding Color Tokens to Product Colors [\#6335](https://github.com/powerhome/playbook/pull/6335) ([ElisaShapiro](https://github.com/ElisaShapiro))
 - Playbook Website: Final Playground Work [\#6332](https://github.com/powerhome/playbook/pull/6332) ([nidaqg](https://github.com/nidaqg))
 - Playbook Website: Playgrounds [\#6325](https://github.com/powerhome/playbook/pull/6325) ([nidaqg](https://github.com/nidaqg))
 
