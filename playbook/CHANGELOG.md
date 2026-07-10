@@ -1,9 +1,9 @@
-# 16.11.0
-
+# 🪄 A Few New Tricks Up Our Sleeve
 ##### July 10, 2026
+
 ![release_image](https://github.com/user-attachments/assets/db119637-25e9-4157-9091-c5f7fdf034fc)
 
-Your feature description goes here.
+Need immersive layouts? We’ve got a new Full Screen kit. Need more styling control? Say hello to the global Border prop. Need to rearrange Typeahead selections? Just drag your pills into place 🎩
 
 [16.11.0](https://github.com/powerhome/playbook/tree/16.11.0) full list of changes:
 
@@ -18,9 +18,7 @@ Your feature description goes here.
 - Typeahead (multi-select) – Drag-and-drop Reordering Of Selected Pills [\#6352](https://github.com/powerhome/playbook/pull/6352) ([kangaree](https://github.com/kangaree))
 - Dialog/popover Portaling + Fullscreen [\#6351](https://github.com/powerhome/playbook/pull/6351) ([ElisaShapiro](https://github.com/ElisaShapiro))
 - And Dropdown Kit: Disable Individual Options and Disable Input [\#6337](https://github.com/powerhome/playbook/pull/6337) ([nickamantia](https://github.com/nickamantia))
-- Add Fontweight Support to Advanced Table Rowstyling [\#6327](https://github.com/powerhome/playbook/pull/6327) ([ElisaShapiro](https://github.com/ElisaShapiro))
 - Dialog/popover: Shared Portal Logic - Implemented for Kits With Dropdown Menus [\#6288](https://github.com/powerhome/playbook/pull/6288) ([ElisaShapiro](https://github.com/ElisaShapiro))
-- Rails-only Passphrase Kit [\#6237](https://github.com/powerhome/playbook/pull/6237) ([kangaree](https://github.com/kangaree))
 
 **Improvements:**
 
@@ -37,7 +35,6 @@ Your feature description goes here.
 - Dropdown, Icon and Border Global Props for Playgrounds [\#6348](https://github.com/powerhome/playbook/pull/6348) ([nidaqg](https://github.com/nidaqg))
 - Corrected Typo on Border Global Props Page [\#6345](https://github.com/powerhome/playbook/pull/6345) ([ElisaShapiro](https://github.com/ElisaShapiro))
 - Add New Siding Color Tokens to Product Colors [\#6335](https://github.com/powerhome/playbook/pull/6335) ([ElisaShapiro](https://github.com/ElisaShapiro))
-- Upgrades Playbook Icons [\#6333](https://github.com/powerhome/playbook/pull/6333) ([ElisaShapiro](https://github.com/ElisaShapiro))
 - Playbook Website: Final Playground Work [\#6332](https://github.com/powerhome/playbook/pull/6332) ([nidaqg](https://github.com/nidaqg))
 - Playbook Website: Playgrounds [\#6325](https://github.com/powerhome/playbook/pull/6325) ([nidaqg](https://github.com/nidaqg))
 
