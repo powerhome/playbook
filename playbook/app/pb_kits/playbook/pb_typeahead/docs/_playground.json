@@ -70,10 +70,36 @@
   ],
   "presets": [
     {
-      "name": "Basic list",
+      "name": "Default",
       "props": {
         "label": "Colors",
         "name": "color",
+        "options": [
+          {
+            "label": "Orange",
+            "value": "#FFA500"
+          },
+          {
+            "label": "Red",
+            "value": "#FF0000"
+          },
+          {
+            "label": "Green",
+            "value": "#00FF00"
+          },
+          {
+            "label": "Blue",
+            "value": "#0000FF"
+          }
+        ]
+      }
+    },
+    {
+      "name": "With Pills",
+      "props": {
+        "label": "With Pills",
+        "name": "with_pills",
+        "isMulti": true,
         "options": [
           {
             "label": "Orange",
@@ -229,12 +255,21 @@
     },
     "clearOnContextChange": {
       "requires": "searchContextSelector"
+    },
+    "enablePillReorder": {
+      "requires": "isMulti"
+    },
+    "showPillIndex": {
+      "requires": "isMulti"
+    },
+    "pillDragHandle": {
+      "requires": "isMulti"
     }
   },
   "hints": {
-    "basic_list": {
-      "presetName": "Basic list",
-      "message": "Basic list uses a local options array with label and value keys.",
+    "default": {
+      "presetName": "Default",
+      "message": "Default uses a local options array with label and value keys.",
       "type": "info"
     },
     "count_display": {
@@ -260,6 +295,11 @@
     "creatable_handler": {
       "presetName": "Creatable handler",
       "message": "Creatable handler shows custom option creation, preserved search input, and an onChange handler.",
+      "type": "info"
+    },
+    "with_pills": {
+      "presetName": "With Pills",
+      "message": "With Pills uses multi-select with pills so selected values render as pills.",
       "type": "info"
     }
   },
