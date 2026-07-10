@@ -43,7 +43,10 @@ clean:
 	docker compose down --rmi all --volumes
 
 changelog:
-	docker compose run web bundle exec github_changelog_generator
+	ruby -Iplaybook/lib -rplaybook/changelog_generator -e 'Playbook::ChangelogGenerator.run!'
+
+connect:
+	ruby -Iplaybook/lib -rplaybook/connect_message_generator -e 'Playbook::ConnectMessageGenerator.run!'
 
 time-to-live ?= 3h
 review_cluster = ${shell ./playbook-website/bin/deployer ./playbook-website/bin/cluster_for_review_stack pr$(pr)}
