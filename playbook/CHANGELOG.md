@@ -1,3 +1,53 @@
+# 16.11.0
+
+##### July 10, 2026
+![release_image](https://github.com/user-attachments/assets/db119637-25e9-4157-9091-c5f7fdf034fc)
+
+Your feature description goes here.
+
+[16.11.0](https://github.com/powerhome/playbook/tree/16.11.0) full list of changes:
+
+**New Kits:**
+
+- New Kit: Full Screen [\#6342](https://github.com/powerhome/playbook/pull/6342) ([nidaqg](https://github.com/nidaqg))
+- Border Global Prop [\#6319](https://github.com/powerhome/playbook/pull/6319) ([ElisaShapiro](https://github.com/ElisaShapiro))
+
+**Kit Enhancements:**
+
+- Advanced Table: Pin Row to Bottom - React [\#6358](https://github.com/powerhome/playbook/pull/6358) ([ElisaShapiro](https://github.com/ElisaShapiro))
+- Typeahead (multi-select) – Drag-and-drop Reordering Of Selected Pills [\#6352](https://github.com/powerhome/playbook/pull/6352) ([kangaree](https://github.com/kangaree))
+- Dialog/popover Portaling + Fullscreen [\#6351](https://github.com/powerhome/playbook/pull/6351) ([ElisaShapiro](https://github.com/ElisaShapiro))
+- And Dropdown Kit: Disable Individual Options and Disable Input [\#6337](https://github.com/powerhome/playbook/pull/6337) ([nickamantia](https://github.com/nickamantia))
+- Add Fontweight Support to Advanced Table Rowstyling [\#6327](https://github.com/powerhome/playbook/pull/6327) ([ElisaShapiro](https://github.com/ElisaShapiro))
+- Dialog/popover: Shared Portal Logic - Implemented for Kits With Dropdown Menus [\#6288](https://github.com/powerhome/playbook/pull/6288) ([ElisaShapiro](https://github.com/ElisaShapiro))
+- Rails-only Passphrase Kit [\#6237](https://github.com/powerhome/playbook/pull/6237) ([kangaree](https://github.com/kangaree))
+
+**Improvements:**
+
+- Playbook Website: Default Platform As Rails [\#6380](https://github.com/powerhome/playbook/pull/6380) ([nidaqg](https://github.com/nidaqg))
+- New Changelog Generator [\#6378](https://github.com/powerhome/playbook/pull/6378) ([nidaqg](https://github.com/nidaqg))
+- Nav Kit: Typing and Playground Fixes [\#6377](https://github.com/powerhome/playbook/pull/6377) ([nidaqg](https://github.com/nidaqg))
+- Add /worldcup Page [\#6376](https://github.com/powerhome/playbook/pull/6376) ([kangaree](https://github.com/kangaree))
+- Playbook Ci/cd - Bump Powerhome/ci-kubed to 10.4.0 [\#6371](https://github.com/powerhome/playbook/pull/6371) ([kangaree](https://github.com/kangaree))
+- Playbook Website: Rails/react Selection Does Not Persist When Searching for Kits [\#6370](https://github.com/powerhome/playbook/pull/6370) ([nickamantia](https://github.com/nickamantia))
+- Playbook Website: Make Beta Playground Visible [\#6365](https://github.com/powerhome/playbook/pull/6365) ([nidaqg](https://github.com/nidaqg))
+- Textarea Docs: Update Error Message With Raw Element Syntax [\#6364](https://github.com/powerhome/playbook/pull/6364) ([debborafernandess](https://github.com/debborafernandess))
+- File Upload: Doc for Managing Files After Upload [\#6357](https://github.com/powerhome/playbook/pull/6357) ([nidaqg](https://github.com/nidaqg))
+- Playbook Website: Markdown Styling Fixes [\#6356](https://github.com/powerhome/playbook/pull/6356) ([nidaqg](https://github.com/nidaqg))
+- Dropdown, Icon and Border Global Props for Playgrounds [\#6348](https://github.com/powerhome/playbook/pull/6348) ([nidaqg](https://github.com/nidaqg))
+- Corrected Typo on Border Global Props Page [\#6345](https://github.com/powerhome/playbook/pull/6345) ([ElisaShapiro](https://github.com/ElisaShapiro))
+- Add New Siding Color Tokens to Product Colors [\#6335](https://github.com/powerhome/playbook/pull/6335) ([ElisaShapiro](https://github.com/ElisaShapiro))
+- Upgrades Playbook Icons [\#6333](https://github.com/powerhome/playbook/pull/6333) ([ElisaShapiro](https://github.com/ElisaShapiro))
+- Playbook Website: Final Playground Work [\#6332](https://github.com/powerhome/playbook/pull/6332) ([nidaqg](https://github.com/nidaqg))
+- Playbook Website: Playgrounds [\#6325](https://github.com/powerhome/playbook/pull/6325) ([nidaqg](https://github.com/nidaqg))
+
+**Fixed Bugs:**
+
+- Rich Text Editor: Flatten 'focus' Variant Top Corners Under Toolbar [\#6372](https://github.com/powerhome/playbook/pull/6372) ([kangaree](https://github.com/kangaree))
+
+[Full Changelog](https://github.com/powerhome/playbook/compare/v16.11.0-rc.3...16.11.0)
+
+
 # 🌱 Passphrase: Another Step Toward React-Free Rails
 ##### June 26, 2026
 
