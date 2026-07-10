@@ -12,7 +12,7 @@ class PagesController < ApplicationController
   def application
     @kits = MENU["kits"]
     @dark = cookies[:dark_mode] == "true"
-    @type = params[:platform] || params[:type] || "react"
+    @type = params[:platform] || params[:type] || "rails"
     @kit = params[:name]
     @params = params
 
