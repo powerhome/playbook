@@ -80,7 +80,7 @@ function WebsiteContent() {
   const platform = useMemo(() => {
     const pathPlatform = normalizedPath.match(/\/(react|rails|swift)$/)?.[1];
     const queryPlatform = new URLSearchParams(location.search).get("type");
-    return pathPlatform || queryPlatform || type || "react";
+    return pathPlatform || queryPlatform || type || "rails";
   }, [normalizedPath, location.search, type]);
 
   const handlePlatformChange = (nextPlatform: string) => {
@@ -193,7 +193,7 @@ function WebsiteContent() {
             <Sidebar
               dark={darkMode}
               collapsed={desktopSidebarCollapsed}
-              type={platform || "react"}
+              type={platform || "rails"}
               category={category}
               kit={kit}
               kits_with_status={kits_with_status || kits}
