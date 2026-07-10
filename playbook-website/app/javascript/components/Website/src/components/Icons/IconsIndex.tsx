@@ -14,9 +14,10 @@ import {
   NavItem,
   SectionSeparator,
   Title,
-  SelectableCardIcon,
   TextInput,
 } from 'playbook-ui'
+
+import IconCard from './IconCard'
 
 type IconCategory = {
   label: string,
@@ -219,11 +220,9 @@ const IconsIndex = ({
                           .slice()
                           .sort((left, right) => left.name.localeCompare(right.name))
                           .map((icon) => (
-                            <SelectableCardIcon
-                              className="icon-card"
-                              icon={icon.name}
+                            <IconCard
+                              iconName={icon.name}
                               key={`${category}-${icon.name}`}
-                              titleText={icon.name}
                             />
                           ))}
                         </div>
