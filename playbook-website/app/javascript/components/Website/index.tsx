@@ -14,6 +14,12 @@ import { PlatformToggle } from "./src/components/PlatformToggle";
 import { useLoaderData, useLocation, useNavigate } from "react-router-dom";
 import { PlatformContext } from "./src/contexts/PlatformContext";
 import { DarkModeProvider, useDarkMode } from "./src/contexts/DarkModeContext";
+import {
+  DEFAULT_PLATFORM,
+  resolvePlatform,
+  syncStoredPlatformFromLocation,
+  writeStoredPlatform,
+} from "./src/helpers/platform";
 
 function WebsiteContent() {
   const {
@@ -77,13 +83,19 @@ function WebsiteContent() {
     "--website-header-height": `${headerHeight}px`,
   } as CSSProperties;
 
-  const platform = useMemo(() => {
-    const pathPlatform = normalizedPath.match(/\/(react|rails|swift)$/)?.[1];
-    const queryPlatform = new URLSearchParams(location.search).get("type");
-    return pathPlatform || queryPlatform || type || "rails";
-  }, [normalizedPath, location.search, type]);
+  const platform = useMemo(
+    () => resolvePlatform(normalizedPath, location.search, type),
+    [normalizedPath, location.search, type],
+  );
+
+  // Keep preference in sync when the URL explicitly sets a platform
+  useEffect(() => {
+    syncStoredPlatformFromLocation(normalizedPath, location.search);
+  }, [normalizedPath, location.search]);
 
   const handlePlatformChange = (nextPlatform: string) => {
+    writeStoredPlatform(nextPlatform);
+
     const isKitDetailRoute =
       /^\/kits\/advanced_table\/[^/]+\/(react|rails|swift)$/.test(
         normalizedPath,
@@ -193,7 +205,7 @@ function WebsiteContent() {
             <Sidebar
               dark={darkMode}
               collapsed={desktopSidebarCollapsed}
-              type={platform || "rails"}
+              type={platform || DEFAULT_PLATFORM}
               category={category}
               kit={kit}
               kits_with_status={kits_with_status || kits}
