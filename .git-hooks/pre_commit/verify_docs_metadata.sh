@@ -1,13 +1,25 @@
 #!/bin/bash
-# Overcommit pre-commit hook: keep docs metadata in sync with source.
+# Pre-commit hook (Husky): keep docs metadata in sync with source.
 #
-# Regenerates kit schemas, global props schema/values, and playground configs
-# in one pass, then fails if any generated files changed (so they can be staged).
+# When relevant kit/global-prop/playground files are staged, regenerates kit
+# schemas, global props schema/values, and playground configs in one pass,
+# then fails if any generated files changed (so they can be staged).
 
 set -euo pipefail
 
 ROOT_DIR="$(cd "$(dirname "$0")/../.." && pwd)"
 cd "$ROOT_DIR"
+
+# Only run when staged files can affect generated docs metadata.
+STAGED_FILES="$(git diff --cached --name-only)"
+if [ -z "$STAGED_FILES" ]; then
+  exit 0
+fi
+
+if ! echo "$STAGED_FILES" | grep -Eq \
+  'playbook/app/pb_kits/playbook/(pb_[^/]+/.+\.(tsx|ts|rb)|utilities/globalProps\.ts|types/[^/]+\.ts|tokens/_(spacing|screen_sizes)\.scss|pb_[^/]+/kit\.schema\.json|pb_[^/]+/docs/_playground\.overrides\.json)'; then
+  exit 0
+fi
 
 checksum() {
   if command -v md5sum >/dev/null 2>&1; then

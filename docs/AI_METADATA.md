@@ -204,9 +204,9 @@ AI metadata is built as part of the release process:
 
 ## Keeping Schemas in Sync
 
-### Overcommit Hook (Automatic)
+### Husky Pre-commit Hook (Automatic)
 
-The `VerifyDocsMetadata` pre-commit hook keeps generated docs metadata in sync. When you commit matching source files, it:
+The Husky pre-commit hook keeps generated docs metadata in sync. When you commit matching source files, it:
 
 1. Captures checksums of generated schema, playground, and global props values files
 2. Runs `yarn generate:docs-metadata`
@@ -214,8 +214,7 @@ The `VerifyDocsMetadata` pre-commit hook keeps generated docs metadata in sync. 
 4. **Fails if any generated files changed** (stage them and commit again)
 
 **Triggered by changes to:**
-- `playbook/app/pb_kits/playbook/pb_*/**/*.tsx` - React components (props)
-- `playbook/app/pb_kits/playbook/pb_*/**/*.rb` - Rails components (props)
+- `playbook/app/pb_kits/playbook/pb_*/**/*.{tsx,ts,rb}` - Kit sources
 - `playbook/app/pb_kits/playbook/utilities/globalProps.ts` - Global props
 - `playbook/app/pb_kits/playbook/types/*.ts` - Type definitions
 - `playbook/app/pb_kits/playbook/tokens/_spacing.scss` - Spacing tokens
@@ -236,7 +235,7 @@ Generated files were updated. Please stage them and commit again:
 ```
 
 **Hook files:**
-- `.overcommit.yml` - Hook configuration
+- `.husky/pre-commit` - Runs lint-staged + docs metadata verification
 - `.git-hooks/pre_commit/verify_docs_metadata.sh` - Verification script
 - `scripts/generate-docs-metadata.sh` - Shared generator used by setup, run, hook, and CI
 
@@ -310,6 +309,6 @@ Props marked with `responsive: true` accept either a single value or a breakpoin
 | `playbook/app/pb_kits/playbook/pb_*/kit.schema.json` | Individual kit schemas (generated) |
 | `playbook/app/pb_kits/playbook/utilities/global-props.schema.json` | Global props schema (generated) |
 | `playbook/dist/ai/*` | Distribution folder (built) |
-| `.overcommit.yml` | Overcommit hook configuration |
+| `.husky/pre-commit` | Runs lint-staged + docs metadata verification |
 | `.git-hooks/pre_commit/verify_docs_metadata.sh` | Pre-commit verification script |
 | `.github/workflows/docs-metadata.yml` | CI drift check for generated docs metadata |

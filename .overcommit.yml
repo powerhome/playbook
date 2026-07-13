@@ -33,7 +33,7 @@ PreCommit:
 
   VerifyDocsMetadata:
     enabled: true
-    description: 'Verify kit schemas, global props, and playground configs are in sync'
+    description: 'Verify kit schemas, global props, and playground configs are in sync (also run via Husky)'
     required_executable: 'bash'
     command: ['bash', '.git-hooks/pre_commit/verify_docs_metadata.sh']
     include:
