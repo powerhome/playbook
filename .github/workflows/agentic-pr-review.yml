@@ -1,16 +1,16 @@
 name: Agentic PR Review
 
 # Runs automatically on:
-#  - PR opened (including drafts) from org-member branches in this repo (not forks)
-#  - PR marked ready for review (draft -> ready) under the same constraints
+#  - PR opened (including drafts) from a branch in this repo (not forks)
+#  - PR marked ready for review (draft -> ready)
 #  - `agentic-review` label (re-)applied for a manual rerun on same-repo PRs
-#  - PR comment containing @playbook-pr-review from an org member
+#  - PR comment containing @playbook-pr-review from an org member / collaborator
 #
 # Never runs when the PR carries the `agentic-review-opt-out` label.
 #
-# This is a public repo. Unlike private repos, issue comments are open to anyone,
-# so comment-triggered runs require org membership. Fork PRs are excluded because
-# they cannot safely use repository secrets.
+# This is a public repo. Comment triggers require org membership (or collaborator).
+# Same-repo PRs already imply push access; author_association is NOT required for
+# pull_request events (it often reports CONTRIBUTOR even for org members).
 on:
   pull_request:
     types: [opened, ready_for_review, labeled]
@@ -29,32 +29,22 @@ jobs:
   agentic-review:
     name: PR Review
     if: |
-      !contains(github.event.pull_request.labels.*.name, 'agentic-review-opt-out') &&
-      !contains(github.event.issue.labels.*.name, 'agentic-review-opt-out') &&
       (
+        github.event_name == 'pull_request' &&
+        !contains(github.event.pull_request.labels.*.name, 'agentic-review-opt-out') &&
+        github.event.pull_request.head.repo.full_name == github.repository &&
         (
-          github.event_name == 'pull_request' &&
-          github.event.pull_request.head.repo.full_name == github.repository &&
-          (
-            (
-              (
-                github.event.action == 'opened' ||
-                github.event.action == 'ready_for_review'
-              ) &&
-              contains(fromJSON('["OWNER","MEMBER"]'), github.event.pull_request.author_association)
-            ) ||
-            (
-              github.event.action == 'labeled' &&
-              github.event.label.name == 'agentic-review'
-            )
-          )
-        ) ||
-        (
-          github.event_name == 'issue_comment' &&
-          github.event.issue.pull_request &&
-          contains(github.event.comment.body, '@playbook-pr-review') &&
-          contains(fromJSON('["OWNER","MEMBER"]'), github.event.comment.author_association)
+          github.event.action == 'opened' ||
+          github.event.action == 'ready_for_review' ||
+          (github.event.action == 'labeled' && github.event.label.name == 'agentic-review')
         )
+      ) ||
+      (
+        github.event_name == 'issue_comment' &&
+        github.event.issue.pull_request &&
+        !contains(github.event.issue.labels.*.name, 'agentic-review-opt-out') &&
+        contains(github.event.comment.body, '@playbook-pr-review') &&
+        contains(fromJSON('["OWNER","MEMBER","COLLABORATOR"]'), github.event.comment.author_association)
       )
     runs-on: ubuntu-latest
     steps:
