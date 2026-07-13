@@ -82,7 +82,7 @@ This updates:
 - `playbook-website/.../AvailableProps/globalPropsValues.ts`
 - `playbook/app/pb_kits/playbook/pb_*/docs/_playground.json`
 
-`setup.sh`, `run.sh`, the pre-commit hook, and CI all use this same command, so you usually only need to run it manually if you want to preview changes before committing.
+`setup.sh`, `run.sh`, and the pre-commit hook all use this same command, so you usually only need to run it manually if you want to preview changes before committing.
 
 ## 8. Final Checklist
 

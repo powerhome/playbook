@@ -237,7 +237,7 @@ Generated files were updated. Please stage them and commit again:
 **Hook files:**
 - `.husky/pre-commit` - Runs lint-staged + docs metadata verification
 - `.git-hooks/pre_commit/verify_docs_metadata.sh` - Verification script
-- `scripts/generate-docs-metadata.sh` - Shared generator used by setup, run, hook, and CI
+- `scripts/generate-docs-metadata.sh` - Shared generator used by setup, run, and the pre-commit hook
 
 ### Manual Updates
 
@@ -311,4 +311,3 @@ Props marked with `responsive: true` accept either a single value or a breakpoin
 | `playbook/dist/ai/*` | Distribution folder (built) |
 | `.husky/pre-commit` | Runs lint-staged + docs metadata verification |
 | `.git-hooks/pre_commit/verify_docs_metadata.sh` | Pre-commit verification script |
-| `.github/workflows/docs-metadata.yml` | CI drift check for generated docs metadata |

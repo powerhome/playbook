@@ -105,7 +105,7 @@ Replace `KitName` with the React component name, such as `Button`, `Overlay`, or
    - `playbook-website/app/javascript/components/Website/src/pages/KitShow/index.tsx`
 5. Validate generated examples when you add templates, wrappers, or complex children.
 
-Pre-commit and CI also regenerate docs metadata when schema or override files change, but running the command locally makes failures easier to understand.
+Pre-commit also regenerates docs metadata when schema or override files change, but running the command locally makes failures easier to understand.
 
 ## How Generation Works
 
