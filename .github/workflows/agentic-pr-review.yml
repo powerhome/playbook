@@ -1,0 +1,105 @@
+name: Agentic PR Review
+
+# Runs automatically on:
+#  - PR opened (including drafts) from org-member branches in this repo (not forks)
+#  - PR marked ready for review (draft -> ready) under the same constraints
+#  - `agentic-review` label (re-)applied for a manual rerun on same-repo PRs
+#  - PR comment containing @playbook-pr-review from an org member
+#
+# Never runs when the PR carries the `agentic-review-opt-out` label.
+#
+# This is a public repo. Unlike private repos, issue comments are open to anyone,
+# so comment-triggered runs require org membership. Fork PRs are excluded because
+# they cannot safely use repository secrets.
+on:
+  pull_request:
+    types: [opened, ready_for_review, labeled]
+  issue_comment:
+    types: [created]
+
+permissions:
+  contents: read
+  pull-requests: write
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.event.issue.number || github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  agentic-review:
+    name: PR Review
+    if: |
+      !contains(github.event.pull_request.labels.*.name, 'agentic-review-opt-out') &&
+      !contains(github.event.issue.labels.*.name, 'agentic-review-opt-out') &&
+      (
+        (
+          github.event_name == 'pull_request' &&
+          github.event.pull_request.head.repo.full_name == github.repository &&
+          (
+            (
+              (
+                github.event.action == 'opened' ||
+                github.event.action == 'ready_for_review'
+              ) &&
+              contains(fromJSON('["OWNER","MEMBER"]'), github.event.pull_request.author_association)
+            ) ||
+            (
+              github.event.action == 'labeled' &&
+              github.event.label.name == 'agentic-review'
+            )
+          )
+        ) ||
+        (
+          github.event_name == 'issue_comment' &&
+          github.event.issue.pull_request &&
+          contains(github.event.comment.body, '@playbook-pr-review') &&
+          contains(fromJSON('["OWNER","MEMBER"]'), github.event.comment.author_association)
+        )
+      )
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check eligibility
+        id: eligibility
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR_NUMBER: ${{ github.event.pull_request.number || github.event.issue.number }}
+        run: |
+          set -euo pipefail
+
+          if [[ "${PR_NUMBER}" == "" ]]; then
+            echo "skip=true" >> "${GITHUB_OUTPUT}"
+            echo "Skipping agentic review because no pull request number is available"
+            exit 0
+          fi
+
+          gh api \
+            -H "Accept: application/vnd.github+json" \
+            "repos/${GITHUB_REPOSITORY}/pulls/${PR_NUMBER}" \
+            > pr.json
+
+          pr_state="$(jq -r '.state' pr.json)"
+          if [[ "${pr_state}" != "open" ]]; then
+            echo "skip=true" >> "${GITHUB_OUTPUT}"
+            echo "Skipping agentic review because the PR is not open"
+            exit 0
+          fi
+
+          head_repo="$(jq -r '.head.repo.full_name' pr.json)"
+          if [[ "${head_repo}" != "${GITHUB_REPOSITORY}" ]]; then
+            echo "skip=true" >> "${GITHUB_OUTPUT}"
+            echo "Skipping agentic review because the PR comes from a fork"
+            exit 0
+          fi
+
+      - name: Run agentic PR review
+        timeout-minutes: 15
+        if: steps.eligibility.outputs.skip != 'true'
+        uses: powerhome/github-actions-workflows/agentic-pr-review@3f92012ed22b3c6f4cf2a1272d170fc01a5b75f4 # main
+        with:
+          app-id: ${{ secrets.AGENTIC_REVIEW_GITHUB_APP_ID }}
+          private-key: ${{ secrets.AGENTIC_REVIEW_GITHUB_APP_PRIVATE_KEY }}
+          provider: cursor
+          provider-api-key: ${{ secrets.AGENTIC_REVIEW_PROVIDER_API_KEY }}
+          pull-request-number: ${{ github.event.pull_request.number || github.event.issue.number }}
+          # Pass the full comment through so org members can steer a manual rerun.
+          additional-prompt: ${{ github.event_name == 'issue_comment' && github.event.comment.body || '' }}
