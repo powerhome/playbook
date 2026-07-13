@@ -4,6 +4,7 @@ require "date"
 require "json"
 require "net/http"
 require "shellwords"
+require "time"
 require "uri"
 
 require "playbook/version"
@@ -46,9 +47,10 @@ module Playbook
       abort "CHANGELOG.md already has a section for #{version}. Aborting." if existing.match?(version_link)
 
       ensure_github_auth!
-      since_date = tag_date(previous_version)
+      since_time = tag_time(previous_version)
       compare_from = resolve_compare_tag(version, previous_version)
-      pulls = fetch_merged_pulls(since_date)
+      already_listed = existing_pr_numbers(existing)
+      pulls = fetch_merged_pulls(since_time, already_listed)
 
       grouped = Hash.new { |hash, key| hash[key] = [] }
 
@@ -61,7 +63,7 @@ module Playbook
       section = build_release_section(version, compare_from, grouped)
       File.write(changelog_path, "#{section}\n\n#{existing.lstrip}")
       puts "Prepended #{version} release section to CHANGELOG.md"
-      puts "Edit the title, image, and description placeholders before publishing."
+      puts "Edit the title and description placeholders before publishing."
     end
 
     def ensure_github_auth!
@@ -81,16 +83,16 @@ module Playbook
       nil
     end
 
-    def tag_date(version)
+    def tag_time(version)
       [version, "v#{version}"].each do |tag|
-        date = `git -C #{Shellwords.escape(git_root)} log -1 --format=%cI #{Shellwords.escape(tag)} 2>/dev/null`.strip
-        next if date.empty?
+        timestamp = `git -C #{Shellwords.escape(git_root)} log -1 --format=%cI #{Shellwords.escape(tag)} 2>/dev/null`.strip
+        next if timestamp.empty?
 
-        return sanitize_iso_date(Date.parse(date).iso8601)
+        return Time.iso8601(timestamp)
       end
 
-      warn "Could not resolve date for tag #{version}; using 30 days ago."
-      sanitize_iso_date((Date.today - 30).iso8601)
+      warn "Could not resolve time for tag #{version}; using 30 days ago."
+      Time.now - (30 * 24 * 60 * 60)
     end
 
     def sanitize_iso_date(value)
@@ -98,6 +100,10 @@ module Playbook
       abort "Invalid date for GitHub search: #{date.inspect}" unless date.match?(/\A\d{4}-\d{2}-\d{2}\z/)
 
       date
+    end
+
+    def existing_pr_numbers(changelog_content)
+      changelog_content.scan(/\[\\?#(\d+)\]/).flatten.map(&:to_i).to_set
     end
 
     def resolve_compare_tag(version, previous_version)
@@ -123,8 +129,8 @@ module Playbook
       end
     end
 
-    def fetch_merged_pulls(since_date)
-      safe_date = sanitize_iso_date(since_date)
+    def fetch_merged_pulls(since_time, already_listed)
+      safe_date = sanitize_iso_date(since_time.utc.to_date.iso8601)
       query = URI.encode_www_form_component("repo:#{REPO} is:pr is:merged merged:>=#{safe_date}")
       items = []
       page = 1
@@ -141,9 +147,18 @@ module Playbook
         page += 1
       end
 
-      items.select { |item| item["pull_request"] }.map do |item|
+      items.select { |item| item["pull_request"] }.filter_map do |item|
+        number = item["number"].to_i
+        next if already_listed.include?(number)
+
+        closed_at = item["closed_at"].to_s
+        next if closed_at.empty?
+
+        merged_at = Time.iso8601(closed_at)
+        next if merged_at <= since_time
+
         {
-          "number" => item["number"],
+          "number" => number,
           "title" => item["title"],
           "user" => { "login" => item.dig("user", "login") },
           "labels" => Array(item["labels"]),
