@@ -49,7 +49,8 @@ module Playbook
       text.gsub!(/^\*\*Merged pull requests:\*\*.*?(?=^\*\*|$)/m, "")
       text.gsub!(/^!\[.*?\]\(.*?\)\s*$/, "")
       text.gsub!(/^\[Full Changelog\]\(.*?\)\s*$/, "")
-      text.gsub!(%r{^\[\d+\.\d+[^\]]*\]\(https://github\.com/.*?\)\s*full list of changes:\s*$}, "")
+      # Keep "version full list of changes:" without the GitHub tree link.
+      text.gsub!(%r{^\[(\d+\.\d+[^\]]*)\]\(https://github\.com/.*?\)\s*full list of changes:\s*$}, '\1 full list of changes:')
 
       SECTION_HEADERS.each do |markdown_header, emoji_header|
         text.gsub!(/^#{Regexp.escape(markdown_header)}$/, emoji_header)
