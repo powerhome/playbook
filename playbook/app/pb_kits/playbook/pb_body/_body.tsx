@@ -13,7 +13,7 @@ type BodyProps = {
   color?: 'default' | 'light' | 'lighter' | 'link' | 'error' | 'success',
   dark?: boolean,
   data?: {[key: string]: string},
-  highlightedText?: string[],
+  // highlightedText?: string[],
   highlighting?: boolean,
   htmlOptions?: {[key: string]: string | number | boolean | (() => void) | ((arg?: Event) => void)},
   id?: string,
@@ -31,7 +31,7 @@ const Body = (props: BodyProps): React.ReactElement => {
     className,
     color = '',
     data = {},
-    highlightedText = [],
+    // highlightedText = [],
     highlighting = false,
     htmlOptions = {},
     id = '',
@@ -61,7 +61,7 @@ const Body = (props: BodyProps): React.ReactElement => {
     >
       { highlighting && (
         <Highlight
-            highlightedText={highlightedText}
+            // highlightedText={highlightedText}
             text={text}
         >
           {children}
