@@ -10,7 +10,9 @@ name: Agentic PR Review
 #
 # This is a public repo. Comment triggers require org membership (or collaborator).
 # Same-repo PRs already imply push access; author_association is NOT required for
-# pull_request events (it often reports CONTRIBUTOR even for org members).
+# pull_request open/ready events (it often reports CONTRIBUTOR even for org members).
+# Bot-authored PRs (e.g. Dependabot) are skipped on auto open/ready to avoid quota burn;
+# label and @playbook-pr-review remain available as manual overrides.
 on:
   pull_request:
     types: [opened, ready_for_review, labeled]
@@ -34,9 +36,17 @@ jobs:
         !contains(github.event.pull_request.labels.*.name, 'agentic-review-opt-out') &&
         github.event.pull_request.head.repo.full_name == github.repository &&
         (
-          github.event.action == 'opened' ||
-          github.event.action == 'ready_for_review' ||
-          (github.event.action == 'labeled' && github.event.label.name == 'agentic-review')
+          (
+            (
+              github.event.action == 'opened' ||
+              github.event.action == 'ready_for_review'
+            ) &&
+            github.event.pull_request.user.type != 'Bot'
+          ) ||
+          (
+            github.event.action == 'labeled' &&
+            github.event.label.name == 'agentic-review'
+          )
         )
       ) ||
       (
