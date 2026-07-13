@@ -19,7 +19,7 @@ echo "Bundling source \n"
 echo "Bundling website \n"
 (cd playbook-website; bundle)
 
-echo "Generating AI metadata (kit schemas) \n"
+echo "Generating AI metadata (kit schemas + global props schemas) \n"
 (cd playbook; yarn generate:all-ai-metadata)
 
 echo "Generating global props values \n"
