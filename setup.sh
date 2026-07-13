@@ -19,17 +19,11 @@ echo "Bundling source \n"
 echo "Bundling website \n"
 (cd playbook-website; bundle)
 
-echo "Generating AI metadata (kit schemas + global props schemas) \n"
-(cd playbook; yarn generate:all-ai-metadata)
-
-echo "Generating global props values \n"
-(cd playbook-website; yarn generate:global-props-values)
-
 echo "Compiling webpack bundle \n"
 rm -rf playbook/dist
 (cd playbook; yarn release)
 
-echo "Generating playground configs \n"
-(cd playbook; yarn generate:playground-configs --overwrite)
+echo "Generating docs metadata (schemas, global props values, playgrounds) \n"
+yarn generate:docs-metadata
 
 echo "\nSetup complete!"

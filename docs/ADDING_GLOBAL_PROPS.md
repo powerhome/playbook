@@ -69,20 +69,20 @@ Add a Global Props page that demonstrates the prop in a Visual Guide and highlig
 
 ## 7. Regenerate Metadata
 
-Run metadata generation after changing global prop types.
+After changing global prop types, regenerate all docs metadata from the repo root:
 
 ```bash
-cd playbook
-yarn generate:global-props-metadata
-yarn generate:ai-metadata
+yarn generate:docs-metadata
 ```
 
 This updates:
 
 - `playbook/app/pb_kits/playbook/utilities/global-props.schema.json`
 - `playbook/app/pb_kits/playbook/pb_*/kit.schema.json`
+- `playbook-website/.../AvailableProps/globalPropsValues.ts`
+- `playbook/app/pb_kits/playbook/pb_*/docs/_playground.json`
 
-If website available-props values are generated from the schema, regenerate them from `playbook-website` as well.
+`setup.sh`, `run.sh`, the pre-commit hook, and CI all use this same command, so you usually only need to run it manually if you want to preview changes before committing.
 
 ## 8. Final Checklist
 

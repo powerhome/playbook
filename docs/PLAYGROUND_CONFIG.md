@@ -8,7 +8,13 @@ Do not hand-edit `docs/_playground.json` for normal kit work. That file is gener
 playbook/app/pb_kits/playbook/<kit>/docs/_playground.overrides.json
 ```
 
-Then regenerate:
+Then regenerate from the repo root (preferred):
+
+```bash
+yarn generate:docs-metadata
+```
+
+Or for a single kit:
 
 ```bash
 cd playbook
@@ -91,7 +97,7 @@ Replace `KitName` with the React component name, such as `Button`, `Overlay`, or
 ## Normal Workflow
 
 1. Create or edit `docs/_playground.overrides.json`.
-2. Run `yarn generate:playground-configs --kit=<kit_name> --overwrite` from `playbook/`.
+2. From the repo root, run `yarn generate:docs-metadata` (or regenerate one kit with `yarn generate:playground-configs --kit=<kit_name> --overwrite` from `playbook/`).
 3. Check both files:
    - `docs/_playground.overrides.json` is the source you maintain.
    - `docs/_playground.json` is the generated file the website reads.
@@ -99,7 +105,7 @@ Replace `KitName` with the React component name, such as `Button`, `Overlay`, or
    - `playbook-website/app/javascript/components/Website/src/pages/KitShow/index.tsx`
 5. Validate generated examples when you add templates, wrappers, or complex children.
 
-Pre-commit hooks also regenerate configs when schema or override files change, but running the command locally makes failures easier to understand.
+Pre-commit and CI also regenerate docs metadata when schema or override files change, but running the command locally makes failures easier to understand.
 
 ## How Generation Works
 
@@ -614,11 +620,14 @@ Do not put required data only in `defaults`. Defaults seed controls but may not 
 ## Manual Commands
 
 ```bash
-# Generate one kit
+# Preferred: regenerate schemas + global props values + all playgrounds
+yarn generate:docs-metadata
+
+# Generate one kit playground only
 cd playbook
 yarn generate:playground-configs --kit=<kit_name> --overwrite
 
-# Generate all kits
+# Generate all kit playgrounds only
 cd playbook
 yarn generate:playground-configs --overwrite
 
