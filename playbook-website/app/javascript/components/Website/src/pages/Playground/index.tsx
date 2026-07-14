@@ -5,6 +5,7 @@ import { Flex } from "playbook-ui";
 import type { PropValue } from "../KitShow/Tabs/Playground";
 import { PLAYGROUND_ENABLED_KITS } from "../KitShow/playgroundEnabledKits";
 import { generateCode } from "./codeGeneration";
+import { applyPromptModification } from "./PromtBuilderRecipes/modifiers";
 import { buildPromptPlanFromRecipes } from "./PromtBuilderRecipes";
 import { compilePromptPlan, getPromptPlanMode } from "./promptCompiler";
 import {
@@ -46,6 +47,22 @@ import { ROOT_TARGET_ID } from "./types";
 
 import "./styles.scss";
 
+type PlaygroundSnapshot = {
+  addTargetId: string;
+  instances: BuilderInstance[];
+  selectedId: string | null;
+};
+
+const MAX_PLAYGROUND_HISTORY = 20;
+
+const cloneInstances = (items: BuilderInstance[]): BuilderInstance[] =>
+  items.map((instance) => ({
+    ...instance,
+    children: cloneInstances(instance.children),
+    enabledProps: { ...instance.enabledProps },
+    props: { ...instance.props },
+  }));
+
 export default function Playground() {
   const { global_props_schema, playground_kits = [] } =
     useLoaderData() as PlaygroundLoaderData;
@@ -59,6 +76,7 @@ export default function Playground() {
   const [promptText, setPromptText] = useState("");
   const [promptStatus, setPromptStatus] = useState<string | null>(null);
   const [promptDiagnostics, setPromptDiagnostics] = useState<string[]>([]);
+  const [playgroundHistory, setPlaygroundHistory] = useState<PlaygroundSnapshot[]>([]);
   const [isPromptMinimized, setIsPromptMinimized] = useState(true);
   const dragSourceElementRef = useRef<HTMLElement | null>(null);
   const dragOverTargetRef = useRef<string | null>(null);
@@ -181,6 +199,18 @@ export default function Playground() {
   );
   const instanceCount = countInstances(instances);
 
+  const savePlaygroundSnapshot = () => {
+    const snapshot = {
+      addTargetId,
+      instances: cloneInstances(instances),
+      selectedId,
+    };
+
+    setPlaygroundHistory((current) =>
+      [...current, snapshot].slice(-MAX_PLAYGROUND_HISTORY),
+    );
+  };
+
   const updateInstance = (
     id: string,
     updater: (instance: BuilderInstance) => BuilderInstance,
@@ -200,6 +230,8 @@ export default function Playground() {
 
   const addKit = (kit: PlaygroundKit, targetId = activeAddTargetId) => {
     const nextInstance = createInstance(kit, global_props_schema?.props);
+
+    savePlaygroundSnapshot();
 
     if (targetId === ROOT_TARGET_ID) {
       setInstances((current) => [...current, nextInstance]);
@@ -332,6 +364,7 @@ export default function Playground() {
     const movedInstance = findInstance(instances, instanceId);
     const movedKit = movedInstance ? kitsByName[movedInstance.kitName] : undefined;
 
+    savePlaygroundSnapshot();
     setInstances((current) => moveInstanceToTarget(current, instanceId, targetId));
     setSelectedId(instanceId);
     if (acceptsChildren(movedKit)) setAddTargetId(instanceId);
@@ -340,6 +373,7 @@ export default function Playground() {
   const removeSelected = () => {
     if (!selectedInstance) return;
 
+    savePlaygroundSnapshot();
     setInstances((current) =>
       removeInstanceFromTree(current, selectedInstance.id),
     );
@@ -349,6 +383,7 @@ export default function Playground() {
 
   const moveSelected = (direction: -1 | 1) => {
     if (!selectedInstance) return;
+    savePlaygroundSnapshot();
     setInstances((current) =>
       moveInstanceInTree(current, selectedInstance.id, direction),
     );
@@ -357,6 +392,7 @@ export default function Playground() {
   const handleChildrenChange = (value: string) => {
     if (!selectedInstance) return;
 
+    savePlaygroundSnapshot();
     updateInstance(selectedInstance.id, (instance) => ({
       ...instance,
       configuredChildren: value,
@@ -369,6 +405,7 @@ export default function Playground() {
     const shouldSync =
       value.enabled && syncRule && shouldApplySyncValue(value.value);
 
+    savePlaygroundSnapshot();
     updateInstance(selectedInstance.id, (instance) => {
       const dataPresetKey = shouldSync
         ? (syncRule?.dataPreset ?? instance.dataPresetKey)
@@ -408,6 +445,26 @@ export default function Playground() {
 
     setPromptDiagnostics([]);
 
+    if (instances.length > 0) {
+      const modification = applyPromptModification(
+        prompt,
+        instances,
+        kitsByName,
+        global_props_schema?.props,
+      );
+
+      if (modification.handled) {
+        if (modification.instances !== instances) savePlaygroundSnapshot();
+        setInstances(modification.instances);
+        setPromptDiagnostics(modification.diagnostics);
+        setPromptStatus(
+          modification.summary || "No matching local edit recipe found.",
+        );
+        setIsPromptMinimized(false);
+        return;
+      }
+    }
+
     const recipeResult = buildPromptPlanFromRecipes(prompt, kitsByName);
     const compiledPlan = compilePromptPlan(
       recipeResult.plan,
@@ -426,6 +483,7 @@ export default function Playground() {
     }
 
     const mode = getPromptPlanMode(recipeResult.plan);
+    savePlaygroundSnapshot();
     setInstances((current) =>
       mode === "append"
         ? [...current, ...compiledPlan.instances]
@@ -440,10 +498,33 @@ export default function Playground() {
     setIsPromptMinimized(false);
   };
 
+  const handleRestorePreviousPlaygroundState = (showPromptStatus = false) => {
+    const previous = playgroundHistory[playgroundHistory.length - 1];
+    if (!previous) return;
+
+    setPlaygroundHistory((current) => current.slice(0, -1));
+    setInstances(cloneInstances(previous.instances));
+    setSelectedId(previous.selectedId);
+    setAddTargetId(previous.addTargetId);
+    setPromptDiagnostics([]);
+    if (showPromptStatus) {
+      setPromptStatus("Restored previous playground state.");
+      setIsPromptMinimized(false);
+    }
+  };
+
+  const handleClearPromptBuilder = () => {
+    setPromptText("");
+    setPromptStatus(null);
+    setPromptDiagnostics([]);
+  };
+
   const handleClearAll = () => {
     setInstances([]);
     setSelectedId(null);
     setAddTargetId(ROOT_TARGET_ID);
+    setPlaygroundHistory([]);
+    handleClearPromptBuilder();
   };
 
   const handleKitDragStart = (
@@ -505,6 +586,7 @@ export default function Playground() {
   const handleDataPresetChange = (dataPresetKey: string | null) => {
     if (!selectedInstance || !selectedKit) return;
 
+    savePlaygroundSnapshot();
     updateInstance(selectedInstance.id, (instance) => ({
       ...instance,
       dataPresetKey,
@@ -518,6 +600,7 @@ export default function Playground() {
   const handleStructureModeChange = (structureMode: string | null) => {
     if (!selectedInstance || !selectedKit) return;
 
+    savePlaygroundSnapshot();
     updateInstance(selectedInstance.id, (instance) => ({
       ...instance,
       structureMode,
@@ -543,8 +626,10 @@ export default function Playground() {
         width="100%"
     >
       <PlaygroundHeader
+          canRestorePreviousState={playgroundHistory.length > 0}
           kitCount={enabledPlaygroundKits.length}
           onClear={handleClearAll}
+          onRestorePreviousState={handleRestorePreviousPlaygroundState}
       />
 
       <div className="full-playground-workbench">
@@ -615,10 +700,13 @@ export default function Playground() {
       </div>
       <PlaygroundPromptBuilder
           diagnostics={promptDiagnostics}
+          hasPreviousIteration={playgroundHistory.length > 0}
           isMinimized={isPromptMinimized}
+          onClear={handleClearPromptBuilder}
           onMinimize={() => setIsPromptMinimized(true)}
           onOpen={() => setIsPromptMinimized(false)}
           onPromptTextChange={setPromptText}
+          onRestorePreviousIteration={() => handleRestorePreviousPlaygroundState(true)}
           onSubmit={handlePromptSubmit}
           promptText={promptText}
           status={promptStatus}

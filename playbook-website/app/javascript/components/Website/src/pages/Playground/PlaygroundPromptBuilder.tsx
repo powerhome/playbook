@@ -3,23 +3,29 @@ import { Body, Button, Caption, Card, Flex, Icon, Title } from "playbook-ui";
 
 type PlaygroundPromptBuilderProps = {
   diagnostics: string[];
+  hasPreviousIteration: boolean;
   isMinimized: boolean;
   promptText: string;
   status: string | null;
+  onClear: () => void;
   onMinimize: () => void;
   onOpen: () => void;
   onPromptTextChange: (value: string) => void;
+  onRestorePreviousIteration: () => void;
   onSubmit: () => void;
 };
 
 export const PlaygroundPromptBuilder = ({
   diagnostics,
+  hasPreviousIteration,
   isMinimized,
   promptText,
   status,
+  onClear,
   onMinimize,
   onOpen,
   onPromptTextChange,
+  onRestorePreviousIteration,
   onSubmit,
 }: PlaygroundPromptBuilderProps) => (
   <>
@@ -82,13 +88,39 @@ export const PlaygroundPromptBuilder = ({
             value={promptText}
         />
       </Flex>
-      <Button
-          disabled={!promptText.trim()}
-          fullWidth
-          icon="sparkles"
-          onClick={onSubmit}
-          text="Build"
-      />
+      <Flex gap="xs"
+          orientation="column"
+      >
+        <Flex width="100%">
+          <Button
+              disabled={!promptText.trim()}
+              fullWidth
+              icon="sparkles"
+              onClick={onSubmit}
+              text="Build"
+          />
+        </Flex>
+        <Flex gap="xs"
+            width="100%"
+        >
+          <Button
+              disabled={!hasPreviousIteration}
+              fullWidth
+              icon="undo"
+              onClick={onRestorePreviousIteration}
+              text="Undo"
+              variant="secondary"
+          />
+          <Button
+              disabled={!promptText.trim() && !status && diagnostics.length === 0}
+              fullWidth
+              icon="trash"
+              onClick={onClear}
+              text="Clear"
+              variant="secondary"
+          />
+        </Flex>
+      </Flex>
       {status && (
         <Body
             color="light"
