@@ -292,15 +292,6 @@ module Playbook
 
     private
 
-      # Loads the SVG markup that #render_svg inlines.
-      #
-      # `asset_path` is resolved by the kit itself from the configured on-disk
-      # icon index, so it is trusted and read directly. A `custom_icon` / `icon`
-      # value may originate from application input, so it is passed through an
-      # allow-listed reader that only reads a file inside the application/engine
-      # or fetches an http(s) URL. It never calls Kernel#open, so a value can
-      # never spawn a subprocess ("|command"), traverse outside the application,
-      # or open an unexpected scheme (file://, ftp://, ...).
       def svg_content
         return File.read(asset_path) if asset_path.present?
 
