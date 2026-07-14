@@ -1,21 +1,11 @@
 name: Agentic PR Review
 
-# Runs automatically on:
-#  - PR opened (including drafts) from a branch in this repo (not forks)
-#  - PR marked ready for review (draft -> ready)
-#  - `agentic-review` label (re-)applied for a manual rerun on same-repo PRs
-#  - PR comment containing @playbook-pr-review from an org member / collaborator
-#
-# Never runs when the PR carries the `agentic-review-opt-out` label.
-#
-# This is a public repo. Comment triggers require org membership (or collaborator).
-# Same-repo PRs already imply push access; author_association is NOT required for
-# pull_request open/ready events (it often reports CONTRIBUTOR even for org members).
-# Bot-authored PRs (e.g. Dependabot) are skipped on auto open/ready to avoid quota burn;
-# label and @playbook-pr-review remain available as manual overrides.
+# Manual triggers only:
+#  - `agentic-review` label applied by a powerhome org member (same-repo PRs)
+#  - PR comment containing @nitro-pr-review from a powerhome org member
 on:
   pull_request:
-    types: [opened, ready_for_review, labeled]
+    types: [labeled]
   issue_comment:
     types: [created]
 
@@ -33,33 +23,49 @@ jobs:
     if: |
       (
         github.event_name == 'pull_request' &&
-        !contains(github.event.pull_request.labels.*.name, 'agentic-review-opt-out') &&
-        github.event.pull_request.head.repo.full_name == github.repository &&
-        (
-          (
-            (
-              github.event.action == 'opened' ||
-              github.event.action == 'ready_for_review'
-            ) &&
-            github.event.pull_request.user.type != 'Bot'
-          ) ||
-          (
-            github.event.action == 'labeled' &&
-            github.event.label.name == 'agentic-review'
-          )
-        )
+        github.event.action == 'labeled' &&
+        github.event.label.name == 'agentic-review' &&
+        github.event.pull_request.head.repo.full_name == github.repository
       ) ||
       (
         github.event_name == 'issue_comment' &&
         github.event.issue.pull_request &&
-        !contains(github.event.issue.labels.*.name, 'agentic-review-opt-out') &&
-        contains(github.event.comment.body, '@playbook-pr-review') &&
-        contains(fromJSON('["OWNER","MEMBER","COLLABORATOR"]'), github.event.comment.author_association)
+        contains(github.event.comment.body, '@nitro-pr-review') &&
+        contains(fromJSON('["OWNER","MEMBER"]'), github.event.comment.author_association)
       )
     runs-on: ubuntu-latest
     steps:
+      - name: Create GitHub App token
+        id: app_token
+        if: github.event_name == 'pull_request'
+        uses: actions/create-github-app-token@fee1f7d63c2ff003460e3d139729b119787bc349 # v2.2.2
+        with:
+          app-id: ${{ secrets.AGENTIC_REVIEW_GITHUB_APP_ID }}
+          private-key: ${{ secrets.AGENTIC_REVIEW_GITHUB_APP_PRIVATE_KEY }}
+          owner: ${{ github.repository_owner }}
+
+      - name: Verify labeler is a powerhome org member
+        id: org_gate
+        if: github.event_name == 'pull_request'
+        env:
+          GH_TOKEN: ${{ steps.app_token.outputs.token }}
+        run: |
+          set -euo pipefail
+
+          http_code="$(
+            gh api -i "orgs/${GITHUB_REPOSITORY_OWNER}/members/${GITHUB_ACTOR}" \
+              2>/dev/null | head -n1 | awk '{print $2}'
+          )"
+
+          if [[ "${http_code}" != "204" ]]; then
+            echo "skip=true" >> "${GITHUB_OUTPUT}"
+            echo "Skipping agentic review: ${GITHUB_ACTOR} is not a visible ${GITHUB_REPOSITORY_OWNER} org member (HTTP ${http_code:-unknown})"
+            exit 0
+          fi
+
       - name: Check eligibility
         id: eligibility
+        if: steps.org_gate.outputs.skip != 'true'
         env:
           GH_TOKEN: ${{ github.token }}
           PR_NUMBER: ${{ github.event.pull_request.number || github.event.issue.number }}
@@ -93,7 +99,9 @@ jobs:
 
       - name: Run agentic PR review
         timeout-minutes: 15
-        if: steps.eligibility.outputs.skip != 'true'
+        if: |
+          steps.org_gate.outputs.skip != 'true' &&
+          steps.eligibility.outputs.skip != 'true'
         uses: powerhome/github-actions-workflows/agentic-pr-review@3f92012ed22b3c6f4cf2a1272d170fc01a5b75f4 # main
         with:
           app-id: ${{ secrets.AGENTIC_REVIEW_GITHUB_APP_ID }}
