@@ -3,10 +3,15 @@
     {
       "warning_type": "Unmaintained Dependency",
       "warning_code": 122,
-      "fingerprint": "21ab0fe00fdd5899ffc405cff75aadb91b805ee996a614f7e27b08a287e9062d",
-      "note": "Rails 7.2 dev dependency required for ViewComponent 4. General support until 2026-08-09."
+      "fingerprint": "98b26f60d776fd41ee6f088c833725145be9aac2d7c5b33780241c273622db42",
+      "check_name": "EOLRails",
+      "message": "Support for Rails 7.2.3 ends on 2026-08-09",
+      "file": "Gemfile.lock",
+      "line": 165,
+      "confidence": "Medium",
+      "note": "Dev lockfile Rails 7.2 pulled in for ViewComponent 4. Track upgrade off 7.2 around 2026-08-09 EOL."
     }
   ],
-  "updated": "2026-05-26 00:00:00 +0000",
+  "updated": "2026-07-14 00:00:00 +0000",
   "brakeman_version": "7.0.0"
 }
