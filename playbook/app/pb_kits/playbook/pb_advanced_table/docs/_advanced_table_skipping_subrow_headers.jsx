@@ -1,5 +1,5 @@
 import React from 'react';
-import AdvancedTable from '../pb_advanced_table.jsx';
+import AdvancedTable from '../../pb_advanced_table/_advanced_table'
 import MOCK_DATA from './_advanced_table_mock_data.js';
 
 
