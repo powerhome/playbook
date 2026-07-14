@@ -73,7 +73,7 @@ export default function Playground() {
   const [dragOverTargetId, setDragOverTargetId] = useState<string | null>(null);
   const [draggedKitName, setDraggedKitName] = useState<string | null>(null);
   const [draggingInstanceId, setDraggingInstanceId] = useState<string | null>(null);
-  const [promptText, setPromptText] = useState("");
+  const [promptClearSignal, setPromptClearSignal] = useState(0);
   const [promptStatus, setPromptStatus] = useState<string | null>(null);
   const [promptDiagnostics, setPromptDiagnostics] = useState<string[]>([]);
   const [playgroundHistory, setPlaygroundHistory] = useState<PlaygroundSnapshot[]>([]);
@@ -192,17 +192,15 @@ export default function Playground() {
     structureModeDropdownOptions.find(
       (option) => option.value === (selectedInstance?.structureMode ?? ""),
     ) ?? structureModeDropdownOptions[0];
-  const generatedCode = generateCode(
-    instances,
-    kitsByName,
-    global_props_schema?.props,
+  const generatedCode = useMemo(
+    () => generateCode(instances, kitsByName, global_props_schema?.props),
+    [global_props_schema?.props, instances, kitsByName],
   );
-  const generatedPreviewCode = generatePreviewCode(
-    instances,
-    kitsByName,
-    global_props_schema?.props,
+  const generatedPreviewCode = useMemo(
+    () => generatePreviewCode(instances, kitsByName, global_props_schema?.props),
+    [global_props_schema?.props, instances, kitsByName],
   );
-  const instanceCount = countInstances(instances);
+  const instanceCount = useMemo(() => countInstances(instances), [instances]);
 
   const savePlaygroundSnapshot = () => {
     const snapshot = {
@@ -444,8 +442,8 @@ export default function Playground() {
     });
   };
 
-  const handlePromptSubmit = () => {
-    const prompt = promptText.trim();
+  const handlePromptSubmit = (rawPrompt: string) => {
+    const prompt = rawPrompt.trim();
     if (!prompt) return;
 
     setPromptDiagnostics([]);
@@ -512,14 +510,14 @@ export default function Playground() {
     setSelectedId(previous.selectedId);
     setAddTargetId(previous.addTargetId);
     setPromptDiagnostics([]);
-    if (showPromptStatus) {
+    if (showPromptStatus === true) {
       setPromptStatus("Restored previous playground state.");
       setIsPromptMinimized(false);
     }
   };
 
   const handleClearPromptBuilder = () => {
-    setPromptText("");
+    setPromptClearSignal((current) => current + 1);
     setPromptStatus(null);
     setPromptDiagnostics([]);
   };
@@ -634,7 +632,7 @@ export default function Playground() {
           canRestorePreviousState={playgroundHistory.length > 0}
           kitCount={enabledPlaygroundKits.length}
           onClear={handleClearAll}
-          onRestorePreviousState={handleRestorePreviousPlaygroundState}
+          onRestorePreviousState={() => handleRestorePreviousPlaygroundState()}
       />
 
       <div className="full-playground-workbench">
@@ -705,16 +703,15 @@ export default function Playground() {
         />
       </div>
       <PlaygroundPromptBuilder
+          clearSignal={promptClearSignal}
           diagnostics={promptDiagnostics}
           hasPreviousIteration={playgroundHistory.length > 0}
           isMinimized={isPromptMinimized}
           onClear={handleClearPromptBuilder}
           onMinimize={() => setIsPromptMinimized(true)}
           onOpen={() => setIsPromptMinimized(false)}
-          onPromptTextChange={setPromptText}
           onRestorePreviousIteration={() => handleRestorePreviousPlaygroundState(true)}
           onSubmit={handlePromptSubmit}
-          promptText={promptText}
           status={promptStatus}
       />
       <div
