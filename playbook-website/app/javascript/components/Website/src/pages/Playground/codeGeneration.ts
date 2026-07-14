@@ -208,8 +208,10 @@ export const getRuntimeScope = (
   const ownScope = kit
     ? getTemplateVariableValues(kit, instance, propValues, requiredProps)
     : requiredProps;
+  const statefulPropNames = new Set(getActiveStatefulProps(instance, kit));
   const scope = Object.entries(ownScope).reduce<Record<string, any>>(
     (scopedValues, [name, value]) => {
+      if (statefulPropNames.has(name)) return scopedValues;
       scopedValues[name] = instance.props[name] ?? propValues[name]?.value ?? value;
       return scopedValues;
     },

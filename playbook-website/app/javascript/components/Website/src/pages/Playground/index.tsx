@@ -21,6 +21,8 @@ import { panelDropdownClassName } from "../KitShow/Tabs/Playground/playgroundPan
 import { PLAYGROUND_ENABLED_KITS } from "../KitShow/playgroundEnabledKits";
 import { BuilderPreviewItem } from "./BuilderPreviewItem";
 import { generateCode } from "./codeGeneration";
+import { buildPromptPlanFromRecipes } from "./PromtBuilderRecipes";
+import { compilePromptPlan, getPromptPlanMode } from "./promptCompiler";
 import {
   acceptsChildren,
   createInstance,
@@ -33,7 +35,8 @@ import {
   isRuntimeProp,
   shouldApplySyncValue,
 } from "./kitUtils";
-import { useBuilderPropsPanel, type BuilderPropsPanelState } from "./useBuilderPropsPanel";
+import { useBuilderPropsPanel } from "./useBuilderPropsPanel";
+import type { BuilderPropsPanelState } from "./useBuilderPropsPanel";
 import {
   buildInstanceOptions,
   buildTargetOptions,
@@ -64,6 +67,10 @@ export default function Playground() {
   const [dragOverTargetId, setDragOverTargetId] = useState<string | null>(null);
   const [draggedKitName, setDraggedKitName] = useState<string | null>(null);
   const [draggingInstanceId, setDraggingInstanceId] = useState<string | null>(null);
+  const [promptText, setPromptText] = useState("");
+  const [promptStatus, setPromptStatus] = useState<string | null>(null);
+  const [promptDiagnostics, setPromptDiagnostics] = useState<string[]>([]);
+  const [isPromptMinimized, setIsPromptMinimized] = useState(false);
   const dragSourceElementRef = useRef<HTMLElement | null>(null);
   const dragOverTargetRef = useRef<string | null>(null);
   const dragTooltipRef = useRef<HTMLDivElement | null>(null);
@@ -404,6 +411,44 @@ export default function Playground() {
         },
       };
     });
+  };
+
+  const handlePromptSubmit = () => {
+    const prompt = promptText.trim();
+    if (!prompt) return;
+
+    setPromptDiagnostics([]);
+
+    const recipeResult = buildPromptPlanFromRecipes(prompt, kitsByName);
+    const compiledPlan = compilePromptPlan(
+      recipeResult.plan,
+      kitsByName,
+      global_props_schema?.props,
+    );
+    const diagnostics = [
+      ...recipeResult.diagnostics,
+      ...compiledPlan.diagnostics,
+    ];
+
+    if (compiledPlan.instances.length === 0) {
+      setPromptDiagnostics(diagnostics);
+      setPromptStatus("No local recipe matched that prompt.");
+      return;
+    }
+
+    const mode = getPromptPlanMode(recipeResult.plan);
+    setInstances((current) =>
+      mode === "append"
+        ? [...current, ...compiledPlan.instances]
+        : compiledPlan.instances,
+    );
+    setSelectedId(compiledPlan.instances[0]?.id ?? null);
+    setAddTargetId(ROOT_TARGET_ID);
+    setPromptDiagnostics(diagnostics);
+    setPromptStatus(
+      recipeResult.plan.summary || "Built with local Playbook recipes.",
+    );
+    setIsPromptMinimized(false);
   };
 
   return (
@@ -843,6 +888,74 @@ export default function Playground() {
           )}
         </Flex>
       </div>
+      <button
+        aria-hidden={!isPromptMinimized}
+        aria-label="Open prompt builder"
+        className={`builder-prompt-fab ${
+          isPromptMinimized ? "is-visible" : "is-hidden"
+        }`}
+        onClick={() => setIsPromptMinimized(false)}
+        tabIndex={isPromptMinimized ? 0 : -1}
+        type="button"
+      >
+        <Icon icon="sparkles" />
+        <span className="builder-prompt-fab-tooltip" role="tooltip">
+          Prompt Builder
+        </span>
+      </button>
+      <Card
+        className={`builder-prompt-floating playground-panel-controls ${
+          isPromptMinimized ? "is-hidden" : "is-visible"
+        }`}
+        padding="md"
+      >
+        <Flex
+          align="center"
+          className="builder-prompt-header"
+          justify="between"
+        >
+          <Title size={4} text="Prompt Builder" />
+          <button
+            aria-label="Minimize prompt builder"
+            className="builder-prompt-icon-button"
+            onClick={() => setIsPromptMinimized(true)}
+            type="button"
+          >
+            <Icon icon="minus" />
+          </button>
+        </Flex>
+        <Flex className="builder-field" orientation="column">
+          <Caption color="lighter" text="Describe the screen" />
+          <textarea
+            className="builder-prompt-textarea"
+            onChange={(event) => setPromptText(event.target.value)}
+            placeholder="Example: Build a compact settings page with two cards, fields, toggles, and save/cancel actions."
+            tabIndex={isPromptMinimized ? -1 : 0}
+            value={promptText}
+          />
+        </Flex>
+        <Button
+          disabled={!promptText.trim()}
+          fullWidth
+          icon="sparkles"
+          onClick={handlePromptSubmit}
+          text="Build"
+        />
+        {promptStatus && (
+          <Body color="light" marginTop="sm" text={promptStatus} />
+        )}
+        {promptDiagnostics.length > 0 && (
+          <Flex marginTop="xs" orientation="column" gap="xxs">
+            {promptDiagnostics.slice(0, 4).map((diagnostic) => (
+              <Caption
+                color="lighter"
+                key={diagnostic}
+                text={diagnostic}
+              />
+            ))}
+          </Flex>
+        )}
+      </Card>
       <div
         aria-hidden
         className="builder-drag-tooltip"
