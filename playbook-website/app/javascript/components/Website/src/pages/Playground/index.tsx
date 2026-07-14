@@ -1,25 +1,9 @@
 import React, { useMemo, useRef, useState } from "react";
 import { useLoaderData } from "react-router-dom";
-import {
-  Background,
-  Badge,
-  Body,
-  Button,
-  Caption,
-  Card,
-  Dropdown,
-  Flex,
-  Icon,
-  TextInput,
-  Title,
-  Tooltip,
-} from "playbook-ui";
+import { Flex } from "playbook-ui";
 
-import { CodePanel, PropsPanel, ResponsivePreviewFrame } from "../KitShow/Tabs/Playground";
 import type { PropValue } from "../KitShow/Tabs/Playground";
-import { panelDropdownClassName } from "../KitShow/Tabs/Playground/playgroundPanelControls";
 import { PLAYGROUND_ENABLED_KITS } from "../KitShow/playgroundEnabledKits";
-import { BuilderPreviewItem } from "./BuilderPreviewItem";
 import { generateCode } from "./codeGeneration";
 import { buildPromptPlanFromRecipes } from "./PromtBuilderRecipes";
 import { compilePromptPlan, getPromptPlanMode } from "./promptCompiler";
@@ -48,6 +32,11 @@ import {
   removeInstanceFromTree,
   updateInstanceInTree,
 } from "./treeUtils";
+import { PlaygroundCanvas } from "./PlaygroundCanvas";
+import { PlaygroundHeader } from "./PlaygroundHeader";
+import { PlaygroundInspector } from "./PlaygroundInspector";
+import { PlaygroundPromptBuilder } from "./PlaygroundPromptBuilder";
+import { PlaygroundSidebar } from "./PlaygroundSidebar";
 import type {
   BuilderInstance,
   PlaygroundKit,
@@ -451,543 +440,193 @@ export default function Playground() {
     setIsPromptMinimized(false);
   };
 
+  const handleClearAll = () => {
+    setInstances([]);
+    setSelectedId(null);
+    setAddTargetId(ROOT_TARGET_ID);
+  };
+
+  const handleKitDragStart = (
+    kitName: string,
+    event: React.DragEvent<HTMLButtonElement>,
+  ) => {
+    event.dataTransfer.effectAllowed = "copy";
+    event.dataTransfer.setData("application/playbook-kit", kitName);
+    event.dataTransfer.setData("text/plain", kitName);
+    setDraggedKitName(kitName);
+    draggingInstanceIdRef.current = null;
+    setDraggingInstanceId(null);
+  };
+
+  const handleCanvasDragLeave = (event: React.DragEvent<HTMLElement>) => {
+    if (!event.currentTarget.contains(event.relatedTarget as Node | null)) {
+      handleDragOverTarget(null);
+    }
+  };
+
+  const handleCanvasDragOver = (event: React.DragEvent<HTMLElement>) => {
+    event.preventDefault();
+    event.dataTransfer.dropEffect = draggingInstanceIdRef.current
+      ? "move"
+      : "copy";
+    handleDragOverTarget(ROOT_TARGET_ID, "Main canvas", event);
+  };
+
+  const handleCanvasDrop = (event: React.DragEvent<HTMLElement>) => {
+    event.preventDefault();
+    const plainValue = event.dataTransfer.getData("text/plain");
+    const instanceId =
+      event.dataTransfer.getData("application/playbook-instance") ||
+      (draggingInstanceIdRef.current === plainValue
+        ? draggingInstanceIdRef.current
+        : "");
+    const kitName =
+      event.dataTransfer.getData("application/playbook-kit") ||
+      (instanceId ? "" : plainValue);
+
+    clearDragState();
+    if (instanceId) handleMoveInstance(instanceId, ROOT_TARGET_ID);
+    else if (kitName) handleDropKit(kitName, ROOT_TARGET_ID);
+  };
+
+  const handleDragStartInstance = (id: string) => {
+    draggingInstanceIdRef.current = id;
+    hoverDragTargetRef.current = null;
+    hideDragTooltip();
+    setDraggingInstanceId(id);
+    setDraggedKitName(null);
+  };
+
+  const handleSelectedInstanceChange = (id: string | null) => {
+    if (id) handleSelectInstance(id);
+    else setSelectedId(null);
+  };
+
+  const handleDataPresetChange = (dataPresetKey: string | null) => {
+    if (!selectedInstance || !selectedKit) return;
+
+    updateInstance(selectedInstance.id, (instance) => ({
+      ...instance,
+      dataPresetKey,
+      props: {
+        ...instance.props,
+        ...getRuntimeProps(selectedKit, dataPresetKey),
+      },
+    }));
+  };
+
+  const handleStructureModeChange = (structureMode: string | null) => {
+    if (!selectedInstance || !selectedKit) return;
+
+    updateInstance(selectedInstance.id, (instance) => ({
+      ...instance,
+      structureMode,
+      configuredChildren: getConfiguredChildren(
+        selectedKit,
+        structureMode,
+        null,
+      ),
+      props: {
+        ...instance.props,
+        ...getStructureModeProps(selectedKit, structureMode),
+      },
+    }));
+  };
+
   return (
     <Flex
-      className="full-playground-shell"
-      gap="md"
-      minHeight="100%"
-      orientation="column"
-      padding="md"
-      width="100%"
-    >
-      <Flex
-        className="full-playground-heading"
-        justify="between"
-        align="end"
+        className="full-playground-shell"
         gap="md"
+        minHeight="100%"
+        orientation="column"
+        padding="md"
         width="100%"
-      >
-        <Flex orientation="column" gap="xs">
-          <Caption
-            color="lighter"
-            text={`${enabledPlaygroundKits.length} configured playground kits`}
-          />
-          <Title size={1} text="Playground" />
-          <Body
-            color="light"
-            text="Build a UI by adding kits to the canvas, nesting kits inside children, and editing props. Copy the produced code snippet in the Code section to save and share your work."
-          />
-        </Flex>
-        <Button
-          icon="trash"
-          onClick={() => {
-            setInstances([]);
-            setSelectedId(null);
-            setAddTargetId(ROOT_TARGET_ID);
-          }}
-          text="Clear"
-          variant="secondary"
-        />
-      </Flex>
+    >
+      <PlaygroundHeader
+          kitCount={enabledPlaygroundKits.length}
+          onClear={handleClearAll}
+      />
 
       <div className="full-playground-workbench">
-        <Flex
-          className="full-playground-sidebar"
-          gap="md"
-          minWidth="0"
-          orientation="column"
-          width="100%"
-        >
-          <Card className="playground-panel-controls" padding="md" width="100%">
-            <Title marginBottom="sm" size={4} text="Add Kits" />
-            <Flex
-              className="builder-field"
-              gap="xs"
-              marginBottom="sm"
-              orientation="column"
-            >
-              <Flex align="center" gap="xs">
-                <Caption color="lighter" text="Where to add the kit" />
-                <Tooltip text="Once you add a kit that accepts children, you can add more kits inside it">
-                  <Icon icon="circle-info" size="xs" color="lighter" />
-                </Tooltip>
-              </Flex>
-              <Dropdown
-                className={panelDropdownClassName("playground-panel", true)}
-                clearable={false}
-                defaultValue={activeAddTargetOption}
-                id="playground-add-target-dropdown"
-                key={activeAddTargetId}
-                onSelect={(option: { value: string }): null => {
-                  setAddTargetId(option.value);
-                  return null;
-                }}
-                options={addTargetOptions}
-                placeholder="Main canvas"
-                width="100%"
-              />
-            </Flex>
-            <Flex
-              className={
-                searchQuery.trim()
-                  ? "playground-panel-control--filled"
-                  : undefined
-              }
-              orientation="column"
-              width="100%"
-            >
-              <TextInput
-                label="Search kits"
-                name="playgroundKitSearch"
-                onChange={(event: React.FormEvent<HTMLInputElement>) =>
-                  setSearchQuery((event.target as HTMLInputElement).value)
-                }
-                placeholder="Search configured kits"
-                value={searchQuery}
-              />
-            </Flex>
-            <Flex
-              className="builder-kit-list"
-              gap="xs"
-              maxHeight="520px"
-              orientation="column"
-              overflow="auto"
-              paddingRight="xxs"
-            >
-              {filteredKits.map((kit) => (
-                <button
-                  className={`builder-kit-button ${
-                    draggedKitName === kit.name ? "is-dragging" : ""
-                  }`}
-                  draggable
-                  key={kit.name}
-                  onDragEnd={clearDragState}
-                  onDragStart={(event) => {
-                    event.dataTransfer.effectAllowed = "copy";
-                    event.dataTransfer.setData(
-                      "application/playbook-kit",
-                      kit.name,
-                    );
-                    event.dataTransfer.setData("text/plain", kit.name);
-                    setDraggedKitName(kit.name);
-                    draggingInstanceIdRef.current = null;
-                    setDraggingInstanceId(null);
-                  }}
-                  onClick={() => addKit(kit)}
-                  type="button"
-                >
-                  <Flex align="center" gap="sm" width="100%">
-                    <Icon icon="plus" />
-                    <Caption color="lighter" text={formatKitName(kit.name)} />
-                  </Flex>
-                </button>
-              ))}
-            </Flex>
-          </Card>
-        </Flex>
-
-        <Flex
-          className="full-playground-demo"
-          gap="md"
-          minWidth="0"
-          orientation="column"
-          width="100%"
-        >
-          <Card
-            className="playground-preview-card"
-            padding="md"
-            width="100%"
-          >
-            <Flex justify="between" align="center" marginBottom="md">
-              <Title size={3} text="Demo" />
-              <Badge text={`${instanceCount} kits`} variant="primary" />
-            </Flex>
-            <ResponsivePreviewFrame showDragHint>
-              <Background
-                backgroundColor="light"
-                borderRadius="md"
-                className={`builder-stage playground-preview-container ${
-                  dragOverTargetId === ROOT_TARGET_ID ? "is-drop-target" : ""
-                }`}
-                display="flex"
-                flexDirection="column"
-                gap="sm"
-                htmlOptions={{
-                  onClick: () => setSelectedId(null),
-                  onDragLeave: (event: React.DragEvent<HTMLElement>) => {
-                    if (
-                      !event.currentTarget.contains(
-                        event.relatedTarget as Node | null,
-                      )
-                    ) {
-                      handleDragOverTarget(null);
-                    }
-                  },
-                  onDragOver: (event: React.DragEvent<HTMLElement>) => {
-                    event.preventDefault();
-                    event.dataTransfer.dropEffect = draggingInstanceIdRef.current
-                      ? "move"
-                      : "copy";
-                    handleDragOverTarget(ROOT_TARGET_ID, "Main canvas", event);
-                  },
-                  onDrop: (event: React.DragEvent<HTMLElement>) => {
-                    event.preventDefault();
-                    const plainValue = event.dataTransfer.getData("text/plain");
-                    const instanceId =
-                      event.dataTransfer.getData(
-                        "application/playbook-instance",
-                      ) ||
-                      (draggingInstanceIdRef.current === plainValue
-                        ? draggingInstanceIdRef.current
-                        : "");
-                    const kitName =
-                      event.dataTransfer.getData("application/playbook-kit") ||
-                      (instanceId ? "" : plainValue);
-
-                    clearDragState();
-                    if (instanceId) handleMoveInstance(instanceId, ROOT_TARGET_ID);
-                    else if (kitName) handleDropKit(kitName, ROOT_TARGET_ID);
-                  },
-                }}
-                maxWidth="100%"
-                minHeight="360px"
-                minWidth="0"
-                padding="sm"
-                width="100%"
-              >
-                {instances.length === 0 ? (
-                  <Flex
-                    align="center"
-                    className="builder-empty-canvas"
-                    flex={1}
-                    gap="xs"
-                    justify="center"
-                    minHeight="300px"
-                    orientation="column"
-                    padding="sm"
-                    textAlign="center"
-                    width="100%"
-                  >
-                    <Icon icon="plus" />
-                    <Body color="light" text="Add a kit to start composing." />
-                  </Flex>
-                ) : (
-                  instances.map((instance) => (
-                    <BuilderPreviewItem
-                      canDropIntoTarget={canDropIntoTarget}
-                      dragOverTargetId={dragOverTargetId}
-                      draggingInstanceId={draggingInstanceId}
-                      globalProps={global_props_schema?.props}
-                      instance={instance}
-                      isSelected={instance.id === selectedId}
-                      key={instance.id}
-                      kitsByName={kitsByName}
-                      onDragEndDrag={clearDragState}
-                      onDragOverTarget={handleDragOverTarget}
-                      onDragStartInstance={(id) => {
-                        draggingInstanceIdRef.current = id;
-                        hoverDragTargetRef.current = null;
-                        hideDragTooltip();
-                        setDraggingInstanceId(id);
-                        setDraggedKitName(null);
-                      }}
-                      onDragSourceChange={handleDragSourceChange}
-                      onHoverDragTarget={handleHoverDragTarget}
-                      onLeaveDragTarget={handleLeaveDragTarget}
-                      onDropKit={(kitName, targetId) => {
-                        clearDragState();
-                        handleDropKit(kitName, targetId);
-                      }}
-                      onMoveInstance={(instanceId, targetId) => {
-                        clearDragState();
-                        handleMoveInstance(instanceId, targetId);
-                      }}
-                      onSelect={handleSelectInstance}
-                      selectedId={selectedId}
-                    />
-                  ))
-                )}
-              </Background>
-            </ResponsivePreviewFrame>
-          </Card>
-
-          <Flex
-            className="full-playground-code-panel"
-            minWidth="0"
-            orientation="column"
-            width="100%"
-          >
-            <CodePanel code={generatedCode} />
-          </Flex>
-        </Flex>
-
-        <Flex
-          className="full-playground-inspector"
-          alignSelf="start"
-          gap="md"
-          justifySelf="stretch"
-          maxWidth="500px"
-          minWidth="0"
-          orientation="column"
-          width="auto"
-        >
-          <Card className="playground-panel-controls" padding="md">
-            <Title marginBottom="sm" size={4} text="Inspector" />
-            {instanceOptions.length > 0 && (
-              <Flex
-                className="builder-field"
-                gap="xs"
-                marginBottom="sm"
-                orientation="column"
-              >
-                <Caption text="Selected kit" />
-                <Dropdown
-                  className={panelDropdownClassName("playground-panel", !!selectedId)}
-                  clearable={false}
-                  defaultValue={activeSelectedInstanceOption}
-                  id="playground-selected-kit-dropdown"
-                  key={selectedId ?? "none"}
-                  onSelect={(option: { value: string } | null): null => {
-                    const id = option?.value ?? "";
-                    if (id) handleSelectInstance(id);
-                    else setSelectedId(null);
-                    return null;
-                  }}
-                  options={selectedInstanceOptions}
-                  placeholder="Choose a placed kit"
-                  width="100%"
-                />
-              </Flex>
-            )}
-
-            {!selectedInstance || !selectedKit ? (
-              <Body
-                color="light"
-                text={
-                  instanceOptions.length > 0
-                    ? "Choose a placed kit to edit props and order."
-                    : "Add a kit to start editing props and order."
-                }
-              />
-            ) : (
-              <Flex orientation="column" gap="sm" width="100%">
-                <Button
-                  icon="trash"
-                  onClick={removeSelected}
-                  text="Remove Selected Kit"
-                  variant="secondary"
-                  fullWidth
-                />
-                {acceptsChildren(selectedKit) && (
-                  <Button
-                    icon="plus"
-                    onClick={() => setAddTargetId(selectedInstance.id)}
-                    size="sm"
-                    text="Add kits inside this"
-                    variant="secondary"
-                  />
-                )}
-
-                {selectedDataPresetOptions.length > 0 && (
-                  <Flex
-                    className="builder-field"
-                    gap="xs"
-                    marginBottom="sm"
-                    orientation="column"
-                    width="100%"
-                  >
-                    <Caption text="Data" />
-                    <Dropdown
-                      className={panelDropdownClassName(
-                        "playground-panel",
-                        !!selectedInstance.dataPresetKey,
-                      )}
-                      clearable={false}
-                      defaultValue={activeDataPresetOption}
-                      id="playground-data-preset-dropdown"
-                      key={`${selectedInstance.id}-data-${selectedInstance.dataPresetKey ?? ""}`}
-                      onSelect={(option: { value: string } | null): null => {
-                        const dataPresetKey = option?.value || null;
-
-                        updateInstance(selectedInstance.id, (instance) => ({
-                          ...instance,
-                          dataPresetKey,
-                          props: {
-                            ...instance.props,
-                            ...getRuntimeProps(selectedKit, dataPresetKey),
-                          },
-                        }));
-                        return null;
-                      }}
-                      options={dataPresetDropdownOptions}
-                      width="100%"
-                    />
-                  </Flex>
-                )}
-
-                {selectedStructureModeOptions.length > 1 && (
-                  <Flex
-                    className="builder-field"
-                    gap="xs"
-                    marginBottom="sm"
-                    orientation="column"
-                    width="100%"
-                  >
-                    <Caption text="Structure" />
-                    <Dropdown
-                      className={panelDropdownClassName(
-                        "playground-panel",
-                        !!selectedInstance.structureMode,
-                      )}
-                      clearable={false}
-                      defaultValue={activeStructureModeOption}
-                      id="playground-structure-mode-dropdown"
-                      key={`${selectedInstance.id}-structure-${selectedInstance.structureMode ?? ""}`}
-                      onSelect={(option: { value: string } | null): null => {
-                        const structureMode = option?.value || null;
-
-                        updateInstance(selectedInstance.id, (instance) => ({
-                          ...instance,
-                          structureMode,
-                          configuredChildren: getConfiguredChildren(
-                            selectedKit,
-                            structureMode,
-                            null,
-                          ),
-                          props: {
-                            ...instance.props,
-                            ...getStructureModeProps(
-                              selectedKit,
-                              structureMode,
-                            ),
-                          },
-                        }));
-                        return null;
-                      }}
-                      options={structureModeDropdownOptions}
-                      width="100%"
-                    />
-                  </Flex>
-                )}
-
-                <Flex gap="xs">
-                  <Button
-                    icon="arrow-up"
-                    onClick={() => moveSelected(-1)}
-                    size="sm"
-                    text="Up"
-                    variant="secondary"
-                  />
-                  <Button
-                    icon="arrow-down"
-                    onClick={() => moveSelected(1)}
-                    size="sm"
-                    text="Down"
-                    variant="secondary"
-                  />
-                </Flex>
-              </Flex>
-            )}
-          </Card>
-
-          {selectedInstance && selectedKit && (
-            <PropsPanel
-              children={builderPropsPanel.children}
-              groupedGlobalProps={builderPropsPanel.groupedGlobalProps}
-              groupedProps={builderPropsPanel.groupedProps}
-              globalProps={builderPropsPanel.globalProps}
-              onChildrenChange={handleChildrenChange}
-              onPropChange={handlePropChange}
-              playgroundConfig={builderPropsPanel.playgroundConfig}
-              propDisabledState={builderPropsPanel.propDisabledState}
-              propSyncHints={builderPropsPanel.propSyncHints}
-              propValues={builderPropsPanel.displayPropValues}
-              requiredPropNames={builderPropsPanel.requiredPropNames}
-              showChildren={builderPropsPanel.showChildren}
-              showGlobalProps={builderPropsPanel.showGlobalProps}
-              totalProps={builderPropsPanel.totalProps}
-            />
-          )}
-        </Flex>
-      </div>
-      <button
-        aria-hidden={!isPromptMinimized}
-        aria-label="Open prompt builder"
-        className={`builder-prompt-fab ${
-          isPromptMinimized ? "is-visible" : "is-hidden"
-        }`}
-        onClick={() => setIsPromptMinimized(false)}
-        tabIndex={isPromptMinimized ? 0 : -1}
-        type="button"
-      >
-        <Icon icon="sparkles" />
-        <span className="builder-prompt-fab-tooltip" role="tooltip">
-          Prompt Builder
-        </span>
-      </button>
-      <Card
-        className={`builder-prompt-floating playground-panel-controls ${
-          isPromptMinimized ? "is-hidden" : "is-visible"
-        }`}
-        padding="md"
-      >
-        <Flex
-          align="center"
-          className="builder-prompt-header"
-          justify="between"
-          marginBottom="sm"
-        >
-          <Title size={4} text="Prompt Builder" />
-          <button
-            aria-label="Minimize prompt builder"
-            className="builder-prompt-icon-button"
-            onClick={() => setIsPromptMinimized(true)}
-            type="button"
-          >
-            <Icon icon="minus" />
-          </button>
-        </Flex>
-        <Flex
-          className="builder-field"
-          gap="xs"
-          marginBottom="sm"
-          orientation="column"
-        >
-          <Caption color="lighter" text="Describe the screen" />
-          <textarea
-            className="builder-prompt-textarea"
-            onChange={(event) => setPromptText(event.target.value)}
-            placeholder="Example: Build a compact settings page with two cards, fields, toggles, and save/cancel actions."
-            tabIndex={isPromptMinimized ? -1 : 0}
-            value={promptText}
-          />
-        </Flex>
-        <Button
-          disabled={!promptText.trim()}
-          fullWidth
-          icon="sparkles"
-          onClick={handlePromptSubmit}
-          text="Build"
+        <PlaygroundSidebar
+            activeAddTargetId={activeAddTargetId}
+            activeAddTargetOption={activeAddTargetOption}
+            addTargetOptions={addTargetOptions}
+            draggedKitName={draggedKitName}
+            filteredKits={filteredKits}
+            onAddKit={addKit}
+            onAddTargetChange={setAddTargetId}
+            onDragEnd={clearDragState}
+            onKitDragStart={handleKitDragStart}
+            onSearchQueryChange={setSearchQuery}
+            searchQuery={searchQuery}
         />
-        {promptStatus && (
-          <Body color="light" marginTop="sm" text={promptStatus} />
-        )}
-        {promptDiagnostics.length > 0 && (
-          <Flex marginTop="xs" orientation="column" gap="xxs">
-            {promptDiagnostics.slice(0, 4).map((diagnostic) => (
-              <Caption
-                color="lighter"
-                key={diagnostic}
-                text={diagnostic}
-              />
-            ))}
-          </Flex>
-        )}
-      </Card>
+
+        <PlaygroundCanvas
+            canDropIntoTarget={canDropIntoTarget}
+            dragOverTargetId={dragOverTargetId}
+            draggingInstanceId={draggingInstanceId}
+            generatedCode={generatedCode}
+            globalProps={global_props_schema?.props}
+            instanceCount={instanceCount}
+            instances={instances}
+            kitsByName={kitsByName}
+            onCanvasClick={() => setSelectedId(null)}
+            onCanvasDragLeave={handleCanvasDragLeave}
+            onCanvasDragOver={handleCanvasDragOver}
+            onCanvasDrop={handleCanvasDrop}
+            onDragEndDrag={clearDragState}
+            onDragOverTarget={handleDragOverTarget}
+            onDragSourceChange={handleDragSourceChange}
+            onDragStartInstance={handleDragStartInstance}
+            onDropKit={handleDropKit}
+            onHoverDragTarget={handleHoverDragTarget}
+            onLeaveDragTarget={handleLeaveDragTarget}
+            onMoveInstance={handleMoveInstance}
+            onSelect={handleSelectInstance}
+            selectedId={selectedId}
+        />
+
+        <PlaygroundInspector
+            activeDataPresetOption={activeDataPresetOption}
+            activeSelectedInstanceOption={activeSelectedInstanceOption}
+            activeStructureModeOption={activeStructureModeOption}
+            builderPropsPanel={builderPropsPanel}
+            dataPresetDropdownOptions={dataPresetDropdownOptions}
+            instanceOptionsCount={instanceOptions.length}
+            onAddInsideSelected={() => {
+            if (selectedInstance) setAddTargetId(selectedInstance.id);
+          }}
+            onChildrenChange={handleChildrenChange}
+            onDataPresetChange={handleDataPresetChange}
+            onMoveSelected={moveSelected}
+            onPropChange={handlePropChange}
+            onRemoveSelected={removeSelected}
+            onSelectedInstanceChange={handleSelectedInstanceChange}
+            onStructureModeChange={handleStructureModeChange}
+            selectedDataPresetOptionsCount={selectedDataPresetOptions.length}
+            selectedId={selectedId}
+            selectedInstance={selectedInstance}
+            selectedInstanceOptions={selectedInstanceOptions}
+            selectedKit={selectedKit}
+            selectedStructureModeOptionsCount={selectedStructureModeOptions.length}
+            structureModeDropdownOptions={structureModeDropdownOptions}
+        />
+      </div>
+      <PlaygroundPromptBuilder
+          diagnostics={promptDiagnostics}
+          isMinimized={isPromptMinimized}
+          onMinimize={() => setIsPromptMinimized(true)}
+          onOpen={() => setIsPromptMinimized(false)}
+          onPromptTextChange={setPromptText}
+          onSubmit={handlePromptSubmit}
+          promptText={promptText}
+          status={promptStatus}
+      />
       <div
-        aria-hidden
-        className="builder-drag-tooltip"
-        ref={dragTooltipRef}
+          aria-hidden
+          className="builder-drag-tooltip"
+          ref={dragTooltipRef}
       />
     </Flex>
   );
