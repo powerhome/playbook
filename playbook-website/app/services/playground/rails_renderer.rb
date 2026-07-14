@@ -79,7 +79,7 @@ module Playground
 
     def render_controlled_flex_item_preview(merged_props)
       first_inner = block_content(merged_props.except(:text)) ||
-                    JsxChildrenRenderer.extract_jsx_text(@children).to_s
+                    TrustedHtml.plain_text(JsxChildrenRenderer.extract_jsx_text(@children))
 
       render_pb_kit("flex", merged_props, safe_join([
                                                       render_pb_kit("flex/flex_item", flex_item_props_from_payload) { first_inner.presence || "" },

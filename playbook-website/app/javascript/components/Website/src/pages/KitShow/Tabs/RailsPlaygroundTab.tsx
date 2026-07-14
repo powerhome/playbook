@@ -166,7 +166,11 @@ export const RailsPlaygroundTab: React.FC<RailsPlaygroundTabProps> = ({
           )}
 
           {previewHtml ? (
-            <LiveExampleRails key={previewHtml} html={previewHtml} />
+            <LiveExampleRails
+              key={previewHtml}
+              executeScripts={false}
+              html={previewHtml}
+            />
           ) : (
             !error && (
               <Card margin="md" marginTop="none" padding="md">

@@ -92,6 +92,36 @@ RSpec.describe Playground::RailsRenderer do
       expect(result[:html]).to include("&lt;script&gt;")
     end
 
+    it "rejects non-allowlisted kits nested in ERB children" do
+      result = described_class.new(
+        view_context: view_context,
+        kit_name: "flex",
+        props: {},
+        children: '<%= pb_rails("advanced_table") %>',
+        structure_mode: "basic"
+      ).render
+
+      expect(result[:error]).to be_nil
+      # Disallowed kit is not rendered; children fall back to escaped plain text.
+      expect(result[:html].to_s).not_to include("pb_advanced_table")
+      expect(result[:html].to_s).to include("&lt;%=")
+      expect(result[:html].to_s).not_to include("<script>")
+    end
+
+    it "escapes raw HTML inside controlled flex item children" do
+      result = described_class.new(
+        view_context: view_context,
+        kit_name: "flex",
+        props: { "flexItemGrow" => true },
+        children: "{'<script>alert(1)</script>'}",
+        structure_mode: "controlled_flex_item"
+      ).render
+
+      expect(result[:error]).to be_nil
+      expect(result[:html]).not_to include("<script>")
+      expect(result[:html]).to include("&lt;script&gt;")
+    end
+
     it "renders compound card structure for header_body mode" do
       result = described_class.new(
         view_context: view_context,

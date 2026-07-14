@@ -79,6 +79,8 @@ module Playground
       props = segment[:props]
       content = segment[:content]
 
+      return nil unless Playground::RailsPlaygroundKits.allowed_child_kit?(kit)
+
       if content.present?
         inner = render_inner_content(content.strip)
         @view_context.pb_rails(kit, props: props) { inner.presence || "" }

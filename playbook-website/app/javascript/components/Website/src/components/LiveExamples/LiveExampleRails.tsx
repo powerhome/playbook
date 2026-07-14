@@ -6,6 +6,8 @@ import { useDarkMode } from "../../contexts/DarkModeContext";
 
 type LiveExampleRailsProps = {
   html: string;
+  /** When false, skip re-executing inline scripts (safer for user-driven playground HTML). */
+  executeScripts?: boolean;
 };
 
 type ScriptSnapshot = {
@@ -186,7 +188,10 @@ const reinitializeRailsKits = (container: HTMLElement): void => {
   mountComponents(container);
 };
 
-const LiveExampleRails: React.FC<LiveExampleRailsProps> = ({ html }) => {
+const LiveExampleRails: React.FC<LiveExampleRailsProps> = ({
+  html,
+  executeScripts = true,
+}) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const { darkMode } = useDarkMode();
 
@@ -221,16 +226,22 @@ const LiveExampleRails: React.FC<LiveExampleRailsProps> = ({ html }) => {
 
     // Keep a copy of inline scripts before Playbook popovers move their
     // tooltip content out of this live example and into document.body.
-    const scriptsToExecute: ScriptSnapshot[] = Array.from(
-      container.querySelectorAll("script"),
-    ).map((script) => ({
-      attributes: Array.from(script.attributes).map((attr) => ({
-        name: attr.name,
-        value: attr.value,
-      })),
-      content: script.textContent || "",
-      element: script,
-    }));
+    // Playground previews intentionally skip script execution — HTML there is
+    // user-driven and must not run arbitrary JS in the docs origin.
+    const scriptsToExecute: ScriptSnapshot[] = executeScripts
+      ? Array.from(container.querySelectorAll("script")).map((script) => ({
+          attributes: Array.from(script.attributes).map((attr) => ({
+            name: attr.name,
+            value: attr.value,
+          })),
+          content: script.textContent || "",
+          element: script,
+        }))
+      : [];
+
+    if (!executeScripts) {
+      container.querySelectorAll("script").forEach((script) => script.remove());
+    }
 
     // Returning from React to Rails can leave an older Rails tooltip in body.
     // Removing it prevents duplicate ids like filter-form... / filter-default.
@@ -275,7 +286,7 @@ const LiveExampleRails: React.FC<LiveExampleRailsProps> = ({ html }) => {
       removePortaledPopovers(container, portaledTooltipIds);
       container.removeEventListener('click', preventHashNavigation);
     };
-  }, [html]);
+  }, [html, executeScripts]);
 
   if (!html) return null;
 

@@ -3,8 +3,11 @@
 module Playground
   # Helpers for playground preview HTML safety.
   #
-  # Plain children from the props panel are user input — escape them.
-  # Output from pb_rails / structured children renderers is trusted kit HTML.
+  # Threat model (docs-site origin):
+  # - Children / props from the playground panel are user-controlled.
+  # - Plain user text must always be escaped.
+  # - Only allowlisted pb_rails kit output may be treated as trusted HTML.
+  # - RailsPlaygroundTab disables LiveExampleRails script re-execution.
   module TrustedHtml
     def self.plain_text(content)
       ERB::Util.html_escape(content.to_s)

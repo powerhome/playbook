@@ -103,13 +103,13 @@ module Playground
       nested = self.class.new(view_context: @view_context).render(content)
       return nested if nested.present?
 
-      self.class.extract_jsx_text(content)
+      TrustedHtml.plain_text(self.class.extract_jsx_text(content))
     end
 
     def render_component(name, props, block_content)
       kit = COMPONENT_KITS[name]
 
-      return render_kit(kit, props, block_content) if kit && poc_kit?(kit)
+      return render_kit(kit, props, block_content) if kit && allowed_child_kit?(kit)
 
       caption_fallback(name, props, block_content)
     end
@@ -128,12 +128,11 @@ module Playground
       text = props[:text] || block_content.to_s
       return nil if text.blank?
 
-      %(<div class="#{CAPTION_FALLBACK_CLASS}">#{ERB::Util.html_escape(text)}</div>).html_safe
+      %(<div class="#{CAPTION_FALLBACK_CLASS}">#{TrustedHtml.plain_text(text)}</div>).html_safe
     end
 
-    def poc_kit?(kit)
-      root = kit.to_s.split("/").first
-      Playground::RailsPlaygroundKits::POC_KITS.include?(root)
+    def allowed_child_kit?(kit)
+      Playground::RailsPlaygroundKits.allowed_child_kit?(kit)
     end
 
     def parse_jsx_attrs(attr_string)
