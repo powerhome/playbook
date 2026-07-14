@@ -1,0 +1,1 @@
+This code snippet demonstrates `pinnedRows` taking an array of row ids to both the `top` and `bottom` properties.

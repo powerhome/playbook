@@ -519,6 +519,7 @@ export const usePlaygroundState = ({
         wrapper: activeWrapper,
         requiredProps,
         statefulProps: activeStatefulProps,
+        structureMode: activeStructureMode,
       });
     }
     return generateCode({
@@ -545,6 +546,7 @@ export const usePlaygroundState = ({
         wrapper: activeWrapper,
         requiredProps,
         statefulProps: activeStatefulProps,
+        structureMode: activeStructureMode,
       });
     }
     return generateLiveCode({

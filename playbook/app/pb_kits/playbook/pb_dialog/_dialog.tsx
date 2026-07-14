@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-handler-names */
 /* eslint-disable react/no-multi-comp */
 
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useContext } from "react";
 import classnames from "classnames";
 import Modal from "react-modal";
 
@@ -17,7 +17,13 @@ import Flex from "../pb_flex/_flex";
 import IconCircle from "../pb_icon_circle/_icon_circle";
 import Title from "../pb_title/_title";
 import { DialogContext, DialogContextValue } from "./_dialog_context";
-import { PB_FLOATING_OWNER_ATTR } from "../utilities/floatingPortalHosts";
+import {
+  PB_FLOATING_OWNER_ATTR,
+  PB_MODAL_ABOVE_FULLSCREEN_Z_INDEX,
+  isPortaledFloatingKitInteraction,
+  resolveFullscreenOverlayForElement,
+} from "../utilities/floatingPortalHosts";
+import { FullScreenContext } from "../pb_full_screen/context/_full_screen_context";
 
 type DialogProps = {
   aria?: { [key: string]: string };
@@ -94,6 +100,15 @@ const Dialog = (props: DialogProps): React.ReactElement => {
   };
 
   const dynamicInlineProps = globalInlineProps(props); 
+
+  const { active: isInsideFullscreen } = useContext(FullScreenContext);
+
+  const modalStyles = {
+    overlay: isInsideFullscreen
+      ? { zIndex: PB_MODAL_ABOVE_FULLSCREEN_Z_INDEX }
+      : undefined,
+    content: dynamicInlineProps,
+  };
 
   const wrapperClasses = classnames(
     buildCss("pb_dialog_wrapper"),
@@ -194,7 +209,7 @@ const Dialog = (props: DialogProps): React.ReactElement => {
             overlayClassName={overlayClassNames}
             portalClassName={portalClassName}
             shouldCloseOnOverlayClick={shouldCloseOnOverlayClick && !loading}
-            style={{ content: dynamicInlineProps }}
+            style={modalStyles}
         >
           <div className="pb_dialog_scroll_region">
             {title && !status ? <Dialog.Header closeable={closeable}>{title}</Dialog.Header> : null}

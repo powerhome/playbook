@@ -162,20 +162,26 @@ export const RegularTableView = ({
   );
 
   // Row pinning
-  function PinnedRow({ row }: { row: Row<any> }) {
+  function PinnedRow({ row, position }: { row: Row<any>; position: 'top' | 'bottom' }) {
     const customRowStyle = getRowStyle(rowStyling, row);
+    const bottomRowsCount = table.getBottomRows().length;
+
     return (
       <tr
-          className={classnames(
-            `pinned-row`,
-          )}
+          className={classnames('pinned-row', {
+            'pinned-row-bottom': position === 'bottom',
+          })}
           style={{
             backgroundColor: customRowStyle?.backgroundColor ? customRowStyle?.backgroundColor : 'white',
             color: customRowStyle?.fontColor,
             position: 'sticky',
             top:
-              row.getIsPinned() === 'top'
-                  ? `${row.getPinnedIndex() * rowHeight + headerHeight + actionBarHeight}px`
+            position === 'top'
+                ? `${row.getPinnedIndex() * rowHeight + headerHeight + actionBarHeight}px`
+                : undefined,
+            bottom:
+              position === 'bottom'
+                  ? `${(bottomRowsCount - 1 - row.getPinnedIndex()) * rowHeight}px`
                   : undefined,
             zIndex: '3',
             fontWeight: getFontWeight(customRowStyle),
@@ -201,6 +207,7 @@ export const RegularTableView = ({
     <>
       {pinnedRows && table.getTopRows().map((row: Row<GenericObject>) => (
         <PinnedRow key={row.id}
+            position="top"
             row={row}
         />
       ))}
@@ -276,6 +283,12 @@ export const RegularTableView = ({
           </React.Fragment>
         );
       })}
+      {pinnedRows && table.getBottomRows().map((row: Row<GenericObject>) => (
+        <PinnedRow key={row.id}
+            position="bottom"
+            row={row}
+        />
+      ))}
     </>
   );
 }

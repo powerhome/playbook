@@ -8,6 +8,15 @@
 /** Prefer mounting here (sibling to scroll region) so menus are not clipped. */
 export const PB_DIALOG_FLOATING_ROOT_SELECTOR = "[data-pb-dialog-floating-root]"
 
+/** React Full Screen overlay shell (fixed viewport layer). */
+export const PB_FULLSCREEN_OVERLAY_SELECTOR = ".fullscreen-overlay"
+
+/** Matches `.fullscreen-overlay` in `_full_screen.scss` (`$z_max`). */
+export const PB_FULLSCREEN_OVERLAY_Z_INDEX = 999999
+
+/** Dialog / modal overlay when opened from content inside an active fullscreen layer. */
+export const PB_MODAL_ABOVE_FULLSCREEN_Z_INDEX = 1000000
+
 /** Scopes portaled menus to the Dialog / Filter popover that opened them (close-on-click). */
 export const PB_FLOATING_OWNER_ATTR = "data-pb-floating-owner"
 
@@ -46,6 +55,24 @@ export function resolveDialogFloatingPortalHost(
   return null
 }
 
+export function resolveFullscreenOverlayForElement(
+  element: Element | null | undefined,
+): HTMLElement | null {
+  const overlay = element?.closest(PB_FULLSCREEN_OVERLAY_SELECTOR)
+  return overlay instanceof HTMLElement ? overlay : null
+}
+
+export function resolveFullscreenFloatingPortalHost(
+  fromElement: Element | null | undefined,
+): HTMLElement | null {
+  const overlay = resolveFullscreenOverlayForElement(fromElement)
+  if (!overlay) return null
+
+  return (
+    overlay.querySelector<HTMLElement>(DIALOG_DIRECT_FLOATING_ROOT) ?? overlay
+  )
+}
+
 /**
  * Portal host for Typeahead `menuPortalTarget`, Dropdown / MultiLevelSelect portaled shells, etc.
  *
@@ -61,15 +88,22 @@ export function resolvePortaledKitHost(
   if (typeof document === "undefined") return null
 
   if (kitRoot?.closest(".pb_popover_tooltip")) {
+    const fullscreenHost = resolveFullscreenFloatingPortalHost(kitRoot)
+    if (fullscreenHost) {
+      return fullscreenHost
+    }
     return document.body
   }
 
   return (
-    resolveDialogFloatingPortalHost(kitRoot) ?? dialogCtxTarget ?? null
+    resolveDialogFloatingPortalHost(kitRoot) ??
+    resolveFullscreenFloatingPortalHost(kitRoot) ??
+    dialogCtxTarget ??
+    null
   )
 }
 
-/** True when the kit may need a portaled menu (dialog / filter popover). Cheap `closest` only to skip on plain forms */
+/** True when the kit may need a portaled menu (dialog / filter popover / fullscreen). Cheap `closest` only to skip on plain forms */
 export function kitRequiresPortaledFloatingUi(
   kitRoot: HTMLElement | null | undefined,
 ): boolean {
@@ -77,7 +111,8 @@ export function kitRequiresPortaledFloatingUi(
   return (
     kitRoot.closest(".pb_popover_tooltip") !== null ||
     kitRoot.closest("dialog") !== null ||
-    kitRoot.closest(".pb_dialog") !== null
+    kitRoot.closest(".pb_dialog") !== null ||
+    kitRoot.closest(PB_FULLSCREEN_OVERLAY_SELECTOR) !== null
   )
 }
 
