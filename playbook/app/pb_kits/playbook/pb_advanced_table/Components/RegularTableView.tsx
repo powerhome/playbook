@@ -206,6 +206,8 @@ export const RegularTableView = ({
       ))}
       {totalRows.map((row: Row<GenericObject>, rowIndex: number) => {
         const isFirstChildofSubrow = row.depth > 0 && row.index === 0;
+        const subRowHeaderText = subRowHeaders?.[row.depth - 1]?.trim();
+        const shouldRenderSubRowHeader = isFirstChildofSubrow && !!subRowHeaderText;
         const numberOfColumns = table.getAllFlatColumns().length;
         const isFirstRegularRow = rowIndex === 0 && !row.getIsPinned();
         const customRowStyle = getRowStyle(rowStyling, row);
@@ -216,7 +218,7 @@ export const RegularTableView = ({
 
         return (
           <React.Fragment key={`${row.index}-${row.id}-${row.depth}-row`}>
-            {isFirstChildofSubrow && subRowHeaders && (
+            {shouldRenderSubRowHeader && (
               <SubRowHeaderRow
                   collapsibleTrail={collapsibleTrail}
                   enableToggleExpansion={enableToggleExpansion}
