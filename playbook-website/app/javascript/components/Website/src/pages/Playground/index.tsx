@@ -70,7 +70,7 @@ export default function Playground() {
   const [promptText, setPromptText] = useState("");
   const [promptStatus, setPromptStatus] = useState<string | null>(null);
   const [promptDiagnostics, setPromptDiagnostics] = useState<string[]>([]);
-  const [isPromptMinimized, setIsPromptMinimized] = useState(false);
+  const [isPromptMinimized, setIsPromptMinimized] = useState(true);
   const dragSourceElementRef = useRef<HTMLElement | null>(null);
   const dragOverTargetRef = useRef<string | null>(null);
   const dragTooltipRef = useRef<HTMLDivElement | null>(null);
@@ -455,6 +455,7 @@ export default function Playground() {
     <Flex
       className="full-playground-shell"
       gap="md"
+      minHeight="100%"
       orientation="column"
       padding="md"
       width="100%"
@@ -464,6 +465,7 @@ export default function Playground() {
         justify="between"
         align="end"
         gap="md"
+        width="100%"
       >
         <Flex orientation="column" gap="xs">
           <Caption
@@ -492,13 +494,18 @@ export default function Playground() {
         <Flex
           className="full-playground-sidebar"
           gap="md"
-          htmlOptions={{ style: { minWidth: "0" } }}
+          minWidth="0"
           orientation="column"
           width="100%"
         >
           <Card className="playground-panel-controls" padding="md" width="100%">
             <Title marginBottom="sm" size={4} text="Add Kits" />
-            <Flex className="builder-field" orientation="column">
+            <Flex
+              className="builder-field"
+              gap="xs"
+              marginBottom="sm"
+              orientation="column"
+            >
               <Flex align="center" gap="xs">
                 <Caption color="lighter" text="Where to add the kit" />
                 <Tooltip text="Once you add a kit that accepts children, you can add more kits inside it">
@@ -542,7 +549,7 @@ export default function Playground() {
             <Flex
               className="builder-kit-list"
               gap="xs"
-              htmlOptions={{ style: { maxHeight: "520px" } }}
+              maxHeight="520px"
               orientation="column"
               overflow="auto"
               paddingRight="xxs"
@@ -641,10 +648,12 @@ export default function Playground() {
                     if (instanceId) handleMoveInstance(instanceId, ROOT_TARGET_ID);
                     else if (kitName) handleDropKit(kitName, ROOT_TARGET_ID);
                   },
-                  style: { minWidth: "0" },
                 }}
+                maxWidth="100%"
                 minHeight="360px"
+                minWidth="0"
                 padding="sm"
+                width="100%"
               >
                 {instances.length === 0 ? (
                   <Flex
@@ -714,14 +723,23 @@ export default function Playground() {
 
         <Flex
           className="full-playground-inspector"
+          alignSelf="start"
           gap="md"
+          justifySelf="stretch"
+          maxWidth="500px"
           minWidth="0"
           orientation="column"
+          width="auto"
         >
           <Card className="playground-panel-controls" padding="md">
             <Title marginBottom="sm" size={4} text="Inspector" />
             {instanceOptions.length > 0 && (
-              <Flex className="builder-field" orientation="column">
+              <Flex
+                className="builder-field"
+                gap="xs"
+                marginBottom="sm"
+                orientation="column"
+              >
                 <Caption text="Selected kit" />
                 <Dropdown
                   className={panelDropdownClassName("playground-panel", !!selectedId)}
@@ -773,6 +791,8 @@ export default function Playground() {
                 {selectedDataPresetOptions.length > 0 && (
                   <Flex
                     className="builder-field"
+                    gap="xs"
+                    marginBottom="sm"
                     orientation="column"
                     width="100%"
                   >
@@ -808,6 +828,8 @@ export default function Playground() {
                 {selectedStructureModeOptions.length > 1 && (
                   <Flex
                     className="builder-field"
+                    gap="xs"
+                    marginBottom="sm"
                     orientation="column"
                     width="100%"
                   >
@@ -913,6 +935,7 @@ export default function Playground() {
           align="center"
           className="builder-prompt-header"
           justify="between"
+          marginBottom="sm"
         >
           <Title size={4} text="Prompt Builder" />
           <button
@@ -924,7 +947,12 @@ export default function Playground() {
             <Icon icon="minus" />
           </button>
         </Flex>
-        <Flex className="builder-field" orientation="column">
+        <Flex
+          className="builder-field"
+          gap="xs"
+          marginBottom="sm"
+          orientation="column"
+        >
           <Caption color="lighter" text="Describe the screen" />
           <textarea
             className="builder-prompt-textarea"

@@ -13,12 +13,6 @@
 
 .full-playground-shell {
   box-sizing: border-box;
-  min-height: 100%;
-}
-
-.full-playground-heading,
-.full-playground-workbench {
-  width: 100%;
 }
 
 .full-playground-heading {
@@ -42,22 +36,7 @@
   }
 }
 
-.full-playground-sidebar {
-  min-width: 0;
-}
-
-.full-playground-demo {
-  min-width: 0;
-  width: 100%;
-}
-
 .full-playground-inspector {
-  align-self: start;
-  justify-self: stretch;
-  max-width: 500px;
-  min-width: 0;
-  width: auto;
-
   .props-panel {
     max-width: 100%;
   }
@@ -68,16 +47,10 @@
   }
 }
 
-.builder-field,
 .builder-prop-toggle,
 .builder-checkbox-row {
   display: flex;
   gap: $space_xs;
-}
-
-.builder-field {
-  flex-direction: column;
-  margin-bottom: $space_sm;
 }
 
 .builder-prompt-textarea {
@@ -117,10 +90,6 @@
   width: 360px;
   z-index: 9000;
 
-  .builder-field {
-    margin-bottom: $space_sm;
-  }
-
   &.is-visible {
     opacity: 1;
     transform: translateY(0) scale(1);
@@ -133,10 +102,6 @@
     transform: translateY($space_md) scale(0.96);
     visibility: hidden;
   }
-}
-
-.builder-prompt-header {
-  margin-bottom: $space_sm;
 }
 
 .builder-prompt-icon-button,
@@ -297,9 +262,6 @@
 .builder-stage {
   border: 1px dashed $border_light;
   box-sizing: border-box;
-  max-width: 100%;
-  min-width: 0;
-  width: 100%;
 
   &.is-drop-target {
     border-color: $primary;
@@ -383,9 +345,6 @@
 }
 
 .full-playground-code-panel {
-  min-width: 0;
-  width: 100%;
-
   .pb_card_kit,
   .pb--card,
   [class*="pb_card"] {
