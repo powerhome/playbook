@@ -52,15 +52,11 @@ jobs:
         run: |
           set -euo pipefail
 
-          http_code="$(
-            gh api -i "orgs/${GITHUB_REPOSITORY_OWNER}/members/${GITHUB_ACTOR}" \
-              2>/dev/null | head -n1 | awk '{print $2}'
-          )"
-
-          if [[ "${http_code}" != "204" ]]; then
+          if gh api "orgs/${GITHUB_REPOSITORY_OWNER}/members/${GITHUB_ACTOR}" --silent; then
+            echo "Confirmed ${GITHUB_ACTOR} is a ${GITHUB_REPOSITORY_OWNER} org member"
+          else
             echo "skip=true" >> "${GITHUB_OUTPUT}"
-            echo "Skipping agentic review: ${GITHUB_ACTOR} is not a visible ${GITHUB_REPOSITORY_OWNER} org member (HTTP ${http_code:-unknown})"
-            exit 0
+            echo "Skipping agentic review: ${GITHUB_ACTOR} is not a visible ${GITHUB_REPOSITORY_OWNER} org member"
           fi
 
       - name: Check eligibility
