@@ -31,8 +31,7 @@ module Playground
       segments = parse_segments(children.to_s)
       return nil if segments.empty?
 
-      html = segments.filter_map { |segment| render_segment(segment) }.join("\n")
-      TrustedHtml.from_renderer(html.presence)
+      TrustedHtml.safe_join(segments.filter_map { |segment| render_segment(segment) })
     end
 
     def erb_children?(children)

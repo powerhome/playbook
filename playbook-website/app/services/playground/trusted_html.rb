@@ -3,20 +3,28 @@
 module Playground
   # Helpers for playground preview HTML safety.
   #
-  # Threat model (docs-site origin):
-  # - Children / props from the playground panel are user-controlled.
-  # - Plain user text must always be escaped.
-  # - Only allowlisted pb_rails kit output may be treated as trusted HTML.
-  # - RailsPlaygroundTab disables LiveExampleRails script re-execution.
+  # Trust split:
+  # - Raw user / plain text → plain_text (escaped)
+  # - pb_rails kit output → already trusted SafeBuffers
+  # - Mixed segments → safe_join (escapes unsafe pieces, preserves trusted ones)
+  #
+  # RailsPlaygroundTab also disables LiveExampleRails script re-execution.
   module TrustedHtml
     def self.plain_text(content)
       ERB::Util.html_escape(content.to_s)
     end
 
-    def self.from_renderer(html)
-      return nil if html.blank?
+    # Same behavior as ActionView safe_join: escape non-safe parts, keep
+    # html_safe kit output as-is, then mark the assembled buffer safe.
+    def self.safe_join(parts, sep = "\n")
+      compact = Array(parts).flatten.compact
+      return nil if compact.empty?
 
-      html.to_s.html_safe
+      escaped_sep = ERB::Util.unwrapped_html_escape(sep)
+      compact
+        .map { |part| ERB::Util.unwrapped_html_escape(part) }
+        .join(escaped_sep)
+        .html_safe
     end
   end
 end

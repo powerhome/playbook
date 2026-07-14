@@ -25,8 +25,7 @@ module Playground
       segments = parse_segments(children.to_s.strip)
       return nil if segments.empty?
 
-      html = segments.filter_map { |segment| render_segment(segment) }.join("\n")
-      TrustedHtml.from_renderer(html.presence)
+      TrustedHtml.safe_join(segments.filter_map { |segment| render_segment(segment) })
     end
 
     def jsx_children?(children)

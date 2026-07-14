@@ -198,7 +198,7 @@ module Playground
     end
 
     def safe_join(parts)
-      parts.compact.join("\n").html_safe
+      TrustedHtml.safe_join(parts) || "".html_safe
     end
 
     def build_merged_props
