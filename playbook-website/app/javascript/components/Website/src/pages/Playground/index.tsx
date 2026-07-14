@@ -4,7 +4,7 @@ import { Flex } from "playbook-ui";
 
 import type { PropValue } from "../KitShow/Tabs/Playground";
 import { PLAYGROUND_ENABLED_KITS } from "../KitShow/playgroundEnabledKits";
-import { generateCode } from "./codeGeneration";
+import { generateCode, generatePreviewCode } from "./codeGeneration";
 import { applyPromptModification } from "./PromtBuilderRecipes/modifiers";
 import { buildPromptPlanFromRecipes } from "./PromtBuilderRecipes";
 import { compilePromptPlan, getPromptPlanMode } from "./promptCompiler";
@@ -193,6 +193,11 @@ export default function Playground() {
       (option) => option.value === (selectedInstance?.structureMode ?? ""),
     ) ?? structureModeDropdownOptions[0];
   const generatedCode = generateCode(
+    instances,
+    kitsByName,
+    global_props_schema?.props,
+  );
+  const generatedPreviewCode = generatePreviewCode(
     instances,
     kitsByName,
     global_props_schema?.props,
@@ -652,6 +657,7 @@ export default function Playground() {
             dragOverTargetId={dragOverTargetId}
             draggingInstanceId={draggingInstanceId}
             generatedCode={generatedCode}
+            generatedPreviewCode={generatedPreviewCode}
             globalProps={global_props_schema?.props}
             instanceCount={instanceCount}
             instances={instances}

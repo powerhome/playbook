@@ -23,6 +23,15 @@ The Prompt Builder should compose from these recipes, then let `promptCompiler.t
 
 Add new files in `recipes/` when a prompt describes a reusable screen pattern. Add aliases in `aliases.ts` when a prompt directly names a kit or common synonym.
 
+## Layout Spacing
+
+Recipes should add visible spacing with real kit/global props so the canvas, fullscreen preview, and copied code match.
+
+- Use `createScreen` for screen-level recipes so top-level kits get `marginBottom`.
+- Use `createCard` for normal card content so child kits get real `marginBottom`.
+- Use `createFlex` for stacked or inline groups so `gap` is generated as a prop.
+- Do not add recipe-only CSS spacing to the builder canvas.
+
 ## Table With Filter
 
 When building a table or advanced table with a filter:

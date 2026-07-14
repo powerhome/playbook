@@ -36,6 +36,40 @@
   }
 }
 
+.playground-fullscreen-host {
+  &:not(.is-open) {
+    .playground-fullscreen-layout {
+      display: none;
+    }
+  }
+}
+
+.playground-fullscreen-layout {
+  display: flex;
+  flex-direction: column;
+  gap: $space_md;
+  min-height: calc(100vh - 112px);
+}
+
+.playground-fullscreen-preview,
+.playground-fullscreen-code {
+  min-width: 0;
+}
+
+.playground-fullscreen-preview {
+  .playground-preview-container {
+    min-height: min(58vh, 640px);
+  }
+}
+
+.playground-fullscreen-code {
+  .pb_card_kit,
+  [class*="pb_card"] {
+    max-height: 34vh;
+    overflow: auto;
+  }
+}
+
 .full-playground-inspector {
   .props-panel {
     max-width: 100%;

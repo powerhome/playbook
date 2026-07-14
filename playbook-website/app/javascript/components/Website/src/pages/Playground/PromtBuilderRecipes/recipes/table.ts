@@ -2,6 +2,7 @@ import type { PromptBuilderPlanItem } from "../../promptCompiler";
 import {
   createBodyText,
   createKit,
+  createScreen,
   createTitle,
   getScreenTitleFromPrompt,
   promptIncludesAny,
@@ -16,10 +17,10 @@ const createTableWithFilterCard = (tableKitName: "advanced_table" | "table") =>
       : createKit("table", { container: false }),
   ]);
 
-export const buildTablePlan = (prompt: string): PromptBuilderPlanItem[] => [
+export const buildTablePlan = (prompt: string): PromptBuilderPlanItem[] => createScreen([
   createTitle(getScreenTitleFromPrompt(prompt)),
   createBodyText("Search, filter, and review records."),
   createTableWithFilterCard(
     promptIncludesAny(prompt, ["advanced"]) ? "advanced_table" : "table"
   ),
-];
+]);

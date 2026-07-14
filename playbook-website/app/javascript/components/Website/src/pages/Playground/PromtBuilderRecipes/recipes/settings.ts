@@ -5,12 +5,13 @@ import {
   createCard,
   createFlex,
   createKit,
+  createScreen,
   createTextInput,
   createTitle,
   getScreenTitleFromPrompt,
 } from "../utils";
 
-export const buildSettingsPlan = (prompt: string): PromptBuilderPlanItem[] => [
+export const buildSettingsPlan = (prompt: string): PromptBuilderPlanItem[] => createScreen([
   createTitle(getScreenTitleFromPrompt(prompt)),
   createBodyText("Manage account details, preferences, and notification settings."),
   createCard([
@@ -34,4 +35,4 @@ export const buildSettingsPlan = (prompt: string): PromptBuilderPlanItem[] => [
     createButton("Save Changes"),
     createButton("Cancel", "secondary"),
   ], "row"),
-];
+]);

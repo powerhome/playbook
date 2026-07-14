@@ -1,7 +1,13 @@
 import type { PromptBuilderPlanItem } from "../../promptCompiler";
-import { createCard, createKit, createTitle, getScreenTitleFromPrompt } from "../utils";
+import {
+  createCard,
+  createKit,
+  createScreen,
+  createTitle,
+  getScreenTitleFromPrompt,
+} from "../utils";
 
-export const buildProfilePlan = (prompt: string): PromptBuilderPlanItem[] => [
+export const buildProfilePlan = (prompt: string): PromptBuilderPlanItem[] => createScreen([
   createTitle(getScreenTitleFromPrompt(prompt)),
   createCard([
     createKit("user", { name: "Jordan Lee", title: "Product Manager" }),
@@ -16,4 +22,4 @@ export const buildProfilePlan = (prompt: string): PromptBuilderPlanItem[] => [
     createKit("label_value", { label: "Team", value: "Product" }),
     createKit("label_value", { label: "Status", value: "Active" }),
   ]),
-];
+]);

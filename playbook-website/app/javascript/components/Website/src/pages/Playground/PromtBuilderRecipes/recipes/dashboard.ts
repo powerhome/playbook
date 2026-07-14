@@ -4,12 +4,13 @@ import {
   createCard,
   createFlex,
   createKit,
+  createScreen,
   createTitle,
   getScreenTitleFromPrompt,
   promptIncludesAny,
 } from "../utils";
 
-export const buildDashboardPlan = (prompt: string): PromptBuilderPlanItem[] => [
+export const buildDashboardPlan = (prompt: string): PromptBuilderPlanItem[] => createScreen([
   createTitle(getScreenTitleFromPrompt(prompt)),
   createBodyText("Track key activity, trends, and recent records."),
   createFlex([
@@ -31,4 +32,4 @@ export const buildDashboardPlan = (prompt: string): PromptBuilderPlanItem[] => [
     createKit("filter"),
     createKit("advanced_table"),
   ]),
-];
+]);

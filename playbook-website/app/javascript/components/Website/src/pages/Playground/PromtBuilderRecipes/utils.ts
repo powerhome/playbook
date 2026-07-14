@@ -1,5 +1,12 @@
 import type { PromptBuilderPlanItem } from "../promptCompiler";
 
+export const RECIPE_SPACING = {
+  cardContent: "sm",
+  inline: "sm",
+  screenSection: "md",
+  stack: "md",
+} as const;
+
 export const normalizePrompt = (prompt: string) =>
   prompt
     .toLowerCase()
@@ -25,16 +32,50 @@ export const createKit = (
   children,
 });
 
+export const withGlobalProps = (
+  item: PromptBuilderPlanItem,
+  props: Record<string, unknown>
+): PromptBuilderPlanItem => ({
+  ...item,
+  props: {
+    ...(item.props ?? {}),
+    ...props,
+  },
+});
+
+export const withBottomSpacing = (
+  items: PromptBuilderPlanItem[],
+  marginBottom = RECIPE_SPACING.screenSection
+) =>
+  items.map((item, index) =>
+    index === items.length - 1 ? item : withGlobalProps(item, { marginBottom })
+  );
+
+export const createScreen = (items: PromptBuilderPlanItem[]) =>
+  withBottomSpacing(items, RECIPE_SPACING.screenSection);
+
 export const createTitle = (text: string, size = 2) =>
   createKit("title", { text, size });
 export const createBodyText = (text: string) =>
   createKit("body", { color: "light", text });
 export const createCard = (children: PromptBuilderPlanItem[]) =>
-  createKit("card", { background: "white", padding: "md" }, children);
+  createKit(
+    "card",
+    { background: "white", padding: "md" },
+    withBottomSpacing(children, RECIPE_SPACING.cardContent)
+  );
 export const createFlex = (
   children: PromptBuilderPlanItem[],
   orientation = "column"
-) => createKit("flex", { gap: "md", orientation }, children);
+) =>
+  createKit(
+    "flex",
+    {
+      gap: orientation === "row" ? RECIPE_SPACING.inline : RECIPE_SPACING.stack,
+      orientation,
+    },
+    children
+  );
 export const createButton = (text: string, variant = "primary") =>
   createKit("button", { text, variant });
 export const createTextInput = (label: string) =>

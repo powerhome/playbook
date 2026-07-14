@@ -216,6 +216,7 @@ const compilePlanItemToBuilderInstance = (
     const definition = propDefinitions[name];
 
     if (!definition && runtimeProps[name] === undefined) {
+      if (globalProps?.[name]) return;
       diagnostics.push(`Ignored unknown prop "${name}" on ${kit.label}.`);
       return;
     }

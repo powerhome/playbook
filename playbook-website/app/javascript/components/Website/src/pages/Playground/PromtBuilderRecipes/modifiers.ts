@@ -47,6 +47,9 @@ const KIT_ALIASES: KitAlias[] = [
 const PROP_ALIASES: Record<string, string[]> = {
   background: ["background"],
   container: ["container"],
+  gap: ["gap", "spacing", "space between"],
+  margin: ["margin"],
+  marginBottom: ["margin bottom", "bottom margin", "margin below"],
   padding: ["padding", "pad"],
 };
 

@@ -5,13 +5,14 @@ import {
   createCard,
   createFlex,
   createKit,
+  createScreen,
   createTextInput,
   createTitle,
   getFieldLabelsFromPrompt,
   getScreenTitleFromPrompt,
 } from "../utils";
 
-export const buildFormPlan = (prompt: string): PromptBuilderPlanItem[] => [
+export const buildFormPlan = (prompt: string): PromptBuilderPlanItem[] => createScreen([
   createTitle(getScreenTitleFromPrompt(prompt)),
   createBodyText("Capture the core details and submit when ready."),
   createCard([
@@ -32,4 +33,4 @@ export const buildFormPlan = (prompt: string): PromptBuilderPlanItem[] => [
     }),
   ]),
   createFlex([createButton("Submit"), createButton("Cancel", "secondary")], "row"),
-];
+]);
