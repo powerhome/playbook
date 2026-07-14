@@ -1,7 +1,7 @@
 name: Agentic PR Review
 
 # Manual triggers only:
-#  - `agentic-review` label applied by a powerhome org member (same-repo PRs)
+#  - `agentic-review` label on a same-repo PR (requires triage/write to apply labels)
 #  - PR comment containing @nitro-pr-review from a powerhome org member
 on:
   pull_request:
@@ -35,33 +35,8 @@ jobs:
       )
     runs-on: ubuntu-latest
     steps:
-      - name: Create GitHub App token
-        id: app_token
-        if: github.event_name == 'pull_request'
-        uses: actions/create-github-app-token@fee1f7d63c2ff003460e3d139729b119787bc349 # v2.2.2
-        with:
-          app-id: ${{ secrets.AGENTIC_REVIEW_GITHUB_APP_ID }}
-          private-key: ${{ secrets.AGENTIC_REVIEW_GITHUB_APP_PRIVATE_KEY }}
-          owner: ${{ github.repository_owner }}
-
-      - name: Verify labeler is a powerhome org member
-        id: org_gate
-        if: github.event_name == 'pull_request'
-        env:
-          GH_TOKEN: ${{ steps.app_token.outputs.token }}
-        run: |
-          set -euo pipefail
-
-          if gh api "orgs/${GITHUB_REPOSITORY_OWNER}/members/${GITHUB_ACTOR}" --silent; then
-            echo "Confirmed ${GITHUB_ACTOR} is a ${GITHUB_REPOSITORY_OWNER} org member"
-          else
-            echo "skip=true" >> "${GITHUB_OUTPUT}"
-            echo "Skipping agentic review: ${GITHUB_ACTOR} is not a visible ${GITHUB_REPOSITORY_OWNER} org member"
-          fi
-
       - name: Check eligibility
         id: eligibility
-        if: steps.org_gate.outputs.skip != 'true'
         env:
           GH_TOKEN: ${{ github.token }}
           PR_NUMBER: ${{ github.event.pull_request.number || github.event.issue.number }}
@@ -95,9 +70,7 @@ jobs:
 
       - name: Run agentic PR review
         timeout-minutes: 15
-        if: |
-          steps.org_gate.outputs.skip != 'true' &&
-          steps.eligibility.outputs.skip != 'true'
+        if: steps.eligibility.outputs.skip != 'true'
         uses: powerhome/github-actions-workflows/agentic-pr-review@3f92012ed22b3c6f4cf2a1272d170fc01a5b75f4 # main
         with:
           app-id: ${{ secrets.AGENTIC_REVIEW_GITHUB_APP_ID }}
