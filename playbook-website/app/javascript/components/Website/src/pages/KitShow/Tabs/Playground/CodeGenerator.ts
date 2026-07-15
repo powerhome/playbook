@@ -6,19 +6,21 @@ import {
 import { resolveSchemaDefault } from "./utils";
 
 /**
- * Omit emitting a prop when it matches the **schema** default only. Playground `defaults` in
- * `_playground.json` seed implicit UI state but are not necessarily the component’s runtime default
- * (e.g. Contact has no default for `contactType`); skipping against playground defaults would drop
- * required-looking props from the preview and break rendering.
+ * Omit emitting a prop when it matches the kit runtime default. By default this uses the schema
+ * default, but playground config can override mismatches without changing the public schema.
  */
-function shouldSkipEmitWhenMatchesSchemaDefault(
+function shouldSkipEmitWhenMatchesCodegenDefault(
   propDefinitions: Record<string, PropDefinition>,
+  codegenDefaultProps: Record<string, any>,
   name: string,
   propValue: PropValue
 ): boolean {
-  const schemaDefault = resolveSchemaDefault(propDefinitions[name]);
-  if (schemaDefault === undefined) return false;
-  if (propValue.value !== schemaDefault) return false;
+  const defaultValue =
+    codegenDefaultProps[name] !== undefined
+      ? codegenDefaultProps[name]
+      : resolveSchemaDefault(propDefinitions[name]);
+  if (defaultValue === undefined) return false;
+  if (propValue.value !== defaultValue) return false;
   const v = propValue.value;
   if (v !== null && typeof v === "object") return false;
   return true;
@@ -36,6 +38,7 @@ interface GenerateFromTemplateOptions {
   template: string;
   propValues: Record<string, PropValue>;
   propDefinitions: Record<string, PropDefinition>;
+  codegenDefaultProps?: Record<string, any>;
   propTargets?: Record<string, string>;
   propAliases?: Record<string, string>;
   children?: string;
@@ -436,6 +439,7 @@ export const generateFromTemplate = ({
   template,
   propValues,
   propDefinitions,
+  codegenDefaultProps = {},
   propTargets = {},
   propAliases = {},
   children,
@@ -472,8 +476,13 @@ export const generateFromTemplate = ({
     // Otherwise they should be emitted as ordinary JSX props in the copyable snippet.
     if (templateVariableNames.has(name)) return;
     
-    // Skip only when value matches kit schema default (not playground-only defaults)
-    if (shouldSkipEmitWhenMatchesSchemaDefault(propDefinitions, name, propValue)) return;
+    // Skip only when value matches the kit runtime default used by generated code.
+    if (shouldSkipEmitWhenMatchesCodegenDefault(
+      propDefinitions,
+      codegenDefaultProps,
+      name,
+      propValue
+    )) return;
     
     const definition = propDefinitions[name] || { type: "any", platforms: ["react"] as const };
     
@@ -607,6 +616,7 @@ export const generateLiveFromTemplate = ({
   template,
   propValues,
   propDefinitions,
+  codegenDefaultProps = {},
   propTargets = {},
   propAliases = {},
   children,
@@ -627,6 +637,7 @@ export const generateLiveFromTemplate = ({
     template,
     propValues,
     propDefinitions,
+    codegenDefaultProps,
     propTargets,
     propAliases,
     children,

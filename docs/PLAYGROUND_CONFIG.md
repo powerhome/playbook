@@ -123,6 +123,7 @@ The base layer can infer simple things like component name, schema defaults, and
 | `template` | JSX template. Use `{{props}}` where enabled props should be inserted and `{{children}}` where editable children should appear. |
 | `children` | Controls the Children editor. Use multiline JSX for kits like `Nav`, `Flex`, or `List`. Optional `propInjection` can merge targeted props into every matching child tag. |
 | `defaults` | Baseline values for controls. Defaults seed the UI but are not emitted until the prop is enabled, selected by a preset, required, or part of a structure mode. |
+| `codegenDefaultProps` | Runtime defaults used only to decide whether generated JSX can omit an enabled prop. Use this when schema/playground defaults differ from the React kit runtime default. |
 | `groups` | Sections in the props panel. Use camelCase prop names. Props not listed still appear under `Other` unless hidden. |
 | `presets` | Feature pills. Each preset can set `props`, `children`, `structureMode`, or `dataPreset`. |
 | `conditionals` | Disable controls until requirements are met. |
@@ -230,6 +231,19 @@ Use `defaults` to make controls start with useful values.
 Defaults are not the same thing as emitted props. They seed the UI as implicit values. If you need a prop to always appear in generated code, use `requiredProps`, a preset, or structure mode `props`.
 
 Object and array defaults prefill the JSON/JS-literal textareas when the prop is enabled.
+
+Use `codegenDefaultProps` when the kit schema default and React runtime default intentionally differ, and generated code should omit only the actual runtime default. This does not change the props panel value; it only changes the "can this enabled prop be left out of JSX?" decision.
+
+```json
+"defaults": {
+  "size": "md"
+},
+"codegenDefaultProps": {
+  "size": "sm"
+}
+```
+
+In this example, the control can still start from `md`, but selecting `md` emits `size="md"` because codegen knows the React kit would otherwise fall back to `sm`.
 
 ## Required Props
 
@@ -616,6 +630,10 @@ Do not add fake props to `kit.schema.json` just for the playground. Add them und
 ### If a kit needs required data, use `requiredProps`
 
 Do not put required data only in `defaults`. Defaults seed controls but may not emit required props. Put required render data in `requiredProps` and reference it from the template.
+
+### If the schema default differs from the React kit default, use `codegenDefaultProps`
+
+Do not change a kit default just to make the playground emit a prop. Add the real React runtime default to `codegenDefaultProps` in `docs/_playground.overrides.json`, then regenerate `_playground.json`.
 
 ## Manual Commands
 
