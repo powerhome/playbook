@@ -7,6 +7,8 @@ module Playbook
                        default: false
       prop :constrain_height, type: Playbook::Props::Boolean,
                               default: false
+      prop :disabled, type: Playbook::Props::Boolean,
+                      default: false
 
       def classname
         classes = %w[pb_dropdown_container close]

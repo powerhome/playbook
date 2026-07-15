@@ -1,47 +1,39 @@
 <% column_definitions = [
-    {
-      accessor: "year",
-      label: "Year",
-    },
-    {
-      accessor: "newEnrollments",
-      label: "New Enrollments",
-    },
-    {
-      accessor: "scheduledMeetings",
-      label: "Scheduled Meetings",
-    },
-    {
-      accessor: "attendanceRate",
-      label: "Attendance Rate",
-    },
-    {
-      accessor: "completedClasses",
-      label: "Completed Classes",
-    },
-    {
-      accessor: "classCompletionRate",
-      label: "Class Completion Rate",
-    },
-    {
-      accessor: "graduatedStudents",
-      label: "Graduated Students",
-    }
+  {
+    accessor: "year",
+    label: "Year",
+    cellAccessors: ["quarter", "month", "day"],
+  },
+  {
+    accessor: "newEnrollments",
+    label: "New Enrollments",
+  },
+  {
+    accessor: "scheduledMeetings",
+    label: "Scheduled Meetings",
+  },
+  {
+    accessor: "attendanceRate",
+    label: "Attendance Rate",
+  },
+  {
+    accessor: "completedClasses",
+    label: "Completed Classes",
+  },
+  {
+    accessor: "classCompletionRate",
+    label: "Class Completion Rate",
+  },
+  {
+    accessor: "graduatedStudents",
+    label: "Graduated Students",
+  },
 ] %>
 
-<% table_data = 15.times.map do |index|
-  {
-    year: (2020 + index).to_s,
-    id: (2020 + index).to_s,
-    newEnrollments: (20 + index).to_s,
-    scheduledMeetings: (10 + index).to_s,
-    attendanceRate: "#{50 + index}%",
-    completedClasses: (3 + index).to_s,
-    classCompletionRate: "#{30 + index}%",
-    graduatedStudents: (19 + index).to_s,
-  }
-end %>
-
-<div style="max-height: 320px; overflow-y: auto;">
-  <%= pb_rails("advanced_table", props: { id: "table_props_sticky_table", table_data: table_data, column_definitions: column_definitions, table_props: { sticky: true }}) %>
-</div>
+<%= pb_rails("advanced_table", props: {
+  id: "table_props_sticky_table",
+  table_data: @table_data,
+  column_definitions: column_definitions,
+  max_height: "xs",
+  table_props: { sticky: true },
+}) %>

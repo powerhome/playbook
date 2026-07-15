@@ -1,38 +1,128 @@
 {
-  "template": "<SelectableCardIcon{{props}} />",
+  "template": "<SelectableCardIcon checked={isChecked} onChange={handleChange}{{props}} />",
   "propTargets": {},
   "defaults": {
     "checked": false,
     "checkmark": false,
     "disabled": false,
-    "multi": true
+    "multi": true,
+    "bodyText": "Export",
+    "icon": "chart-line",
+    "inputId": "report_quarterly",
+    "name": "report_type",
+    "titleText": "Quarterly Report",
+    "value": "quarterly"
   },
   "groups": [
     {
-      "name": "Props",
+      "name": "Content",
       "props": [
-        "checked",
-        "checkmark",
-        "customIcon",
-        "dark",
-        "disabled",
-        "icon",
-        "inputId",
-        "multi",
-        "name",
         "titleText",
         "bodyText",
+        "icon",
+        "name",
         "value",
-        "onChange"
+        "inputId"
+      ]
+    },
+    {
+      "name": "State",
+      "props": [
+        "checked",
+        "disabled",
+        "multi"
+      ]
+    },
+    {
+      "name": "Appearance",
+      "props": [
+        "checkmark",
+        "dark"
       ]
     }
   ],
   "presets": [
     {
       "name": "Default",
-      "props": {}
+      "props": {
+        "bodyText": "Export",
+        "icon": "chart-line",
+        "inputId": "report_quarterly",
+        "name": "report_type",
+        "titleText": "Quarterly Report",
+        "value": "quarterly"
+      }
+    },
+    {
+      "name": "Selected",
+      "props": {
+        "bodyText": "Export",
+        "checked": true,
+        "icon": "chart-pie",
+        "inputId": "report_market_share",
+        "name": "report_type",
+        "titleText": "Market Share",
+        "value": "market_share"
+      }
+    },
+    {
+      "name": "Checkmark",
+      "props": {
+        "bodyText": "Includes checkmark indicator",
+        "checked": true,
+        "checkmark": true,
+        "icon": "hat-cowboy",
+        "inputId": "role_cowboy",
+        "name": "role",
+        "titleText": "Cowboy",
+        "value": "cowboy"
+      }
+    },
+    {
+      "name": "Radio (single)",
+      "props": {
+        "bodyText": "Single-select option",
+        "icon": "chart-bar",
+        "inputId": "report_summary",
+        "multi": false,
+        "name": "report_type",
+        "titleText": "Summary",
+        "value": "summary"
+      }
     }
   ],
   "conditionals": {},
-  "hints": {}
+  "hints": {
+    "default": {
+      "presetName": "Default",
+      "message": "Default combines a SelectableCard shell with an icon, title, supporting body text, and state-backed preview selection.",
+      "type": "info"
+    },
+    "selected": {
+      "presetName": "Selected",
+      "message": "Selected shows the checked card icon state while keeping the checkbox behavior.",
+      "type": "info"
+    },
+    "checkmark": {
+      "presetName": "Checkmark",
+      "message": "Checkmark adds the card-level check indicator in addition to the inner icon.",
+      "type": "info"
+    },
+    "radio": {
+      "presetName": "Radio (single)",
+      "message": "Radio (single) sets multi to false so the hidden input uses radio semantics.",
+      "type": "info"
+    }
+  },
+  "wrapper": "const SelectableCardIconPlayground = () => {\n  const [isChecked, setIsChecked] = useState(checked)\n  const handleChange = ({ target }) => setIsChecked(target.checked)\n\n  return {{component}}\n}\n\n<SelectableCardIconPlayground />",
+  "externalImports": [
+    "import React, { useState } from 'react'"
+  ],
+  "statefulProps": [
+    "checked"
+  ],
+  "hiddenProps": [
+    "customIcon",
+    "onChange"
+  ]
 }

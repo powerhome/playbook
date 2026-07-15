@@ -3,28 +3,89 @@
   "propTargets": {},
   "defaults": {
     "newWindow": false,
-    "type": "default"
+    "type": "project",
+    "text": "470297",
+    "url": "https://google.com",
+    "dark": false
   },
   "groups": [
     {
-      "name": "Props",
+      "name": "Content",
       "props": [
-        "dark",
-        "newWindow",
-        "rel",
-        "target",
         "text",
-        "type",
-        "url"
+        "type"
+      ]
+    },
+    {
+      "name": "Link",
+      "props": [
+        "url",
+        "target",
+        "newWindow",
+        "rel"
+      ]
+    },
+    {
+      "name": "Appearance",
+      "props": [
+        "dark"
       ]
     }
   ],
   "presets": [
     {
+      "name": "Project",
+      "props": {
+        "text": "470297",
+        "type": "project",
+        "url": "https://google.com"
+      }
+    },
+    {
+      "name": "Home",
+      "props": {
+        "text": "123456",
+        "type": "home",
+        "url": "https://google.com"
+      }
+    },
+    {
+      "name": "Appointment",
+      "props": {
+        "text": "456789",
+        "type": "appointment",
+        "url": "https://google.com"
+      }
+    },
+    {
       "name": "Default",
-      "props": {}
+      "props": {
+        "text": "654321",
+        "type": "default",
+        "url": "https://google.com"
+      }
+    },
+    {
+      "name": "New window",
+      "props": {
+        "text": "Open in a new window",
+        "type": "project",
+        "url": "https://google.com",
+        "target": "_blank"
+      }
     }
   ],
-  "conditionals": {},
-  "hints": {}
+  "conditionals": {
+    "target": {
+      "requires": "url"
+    },
+    "rel": {
+      "requires": "url"
+    }
+  },
+  "hints": {},
+  "children": {
+    "editable": false,
+    "default": ""
+  }
 }

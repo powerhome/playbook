@@ -32,10 +32,9 @@
   ],
   "presets": [
     {
-      "name": "Two · default",
+      "name": "Default",
       "props": {
         "variant": "default",
-        "size": "sm",
         "users": [
           {
             "name": "Anna Black",
@@ -49,23 +48,9 @@
       }
     },
     {
-      "name": "Single",
-      "props": {
-        "variant": "default",
-        "size": "md",
-        "users": [
-          {
-            "name": "Anna Black",
-            "imageUrl": "https://randomuser.me/api/portraits/women/44.jpg"
-          }
-        ]
-      }
-    },
-    {
       "name": "Initials only",
       "props": {
         "variant": "default",
-        "size": "sm",
         "users": [
           {
             "name": "Anna Black"
@@ -77,7 +62,7 @@
       }
     },
     {
-      "name": "Bubble · two",
+      "name": "Bubble",
       "props": {
         "variant": "bubble",
         "size": "md",
@@ -94,7 +79,7 @@
       }
     },
     {
-      "name": "Bubble · many",
+      "name": "Bubble (many users)",
       "props": {
         "variant": "bubble",
         "size": "lg",
@@ -119,9 +104,9 @@
       }
     },
     {
-      "name": "Default · xl",
+      "name": "Bubble (xl)",
       "props": {
-        "variant": "default",
+        "variant": "bubble",
         "size": "xl",
         "users": [
           {
@@ -141,5 +126,31 @@
     }
   ],
   "conditionals": {},
-  "hints": {}
+  "hints": {
+    "default": {
+      "presetName": "Default",
+      "message": "Default stacks two avatars in the standard non-bubble treatment.",
+      "type": "info"
+    },
+    "initials_only": {
+      "presetName": "Initials only",
+      "message": "Initials only omits imageUrl so each avatar is generated from the user name.",
+      "type": "info"
+    },
+    "bubble_two": {
+      "presetName": "Bubble",
+      "message": "Bubble switches to the bubble variant with two users.",
+      "type": "info"
+    },
+    "bubble_many": {
+      "presetName": "Bubble (many users)",
+      "message": "Bubble (many users) uses the bubble variant and shows the extra user count badge.",
+      "type": "info"
+    },
+    "bubble_xl": {
+      "presetName": "Bubble (xl)",
+      "message": "Use the size xl to increase the avatar size while preserving the bubble variant.",
+      "type": "info"
+    }
+  }
 }

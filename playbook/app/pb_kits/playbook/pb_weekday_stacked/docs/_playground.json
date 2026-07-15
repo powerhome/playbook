@@ -11,14 +11,15 @@
       "name": "Content",
       "props": [
         "date",
-        "variant",
-        "compact"
+        "variant"
       ]
     },
     {
       "name": "Appearance",
       "props": [
-        "align"
+        "compact",
+        "align",
+        "dark"
       ]
     }
   ],
@@ -44,7 +45,7 @@
       }
     },
     {
-      "name": "Compact weekday",
+      "name": "Compact",
       "props": {
         "date": "2026-04-09T12:00:00.000Z",
         "compact": true
@@ -60,5 +61,31 @@
     }
   ],
   "conditionals": {},
-  "hints": {}
+  "hints": {
+    "default": {
+      "presetName": "Default",
+      "message": "Default renders the weekday with the month-day variant.",
+      "type": "info"
+    },
+    "day_only": {
+      "presetName": "Day only",
+      "message": "Day only switches variant to show just the weekday.",
+      "type": "info"
+    },
+    "expanded": {
+      "presetName": "Expanded",
+      "message": "Expanded shows the fuller stacked date treatment.",
+      "type": "info"
+    },
+    "compact": {
+      "presetName": "Compact",
+      "message": "Compact tightens the month-day layout for denser views.",
+      "type": "info"
+    },
+    "centered": {
+      "presetName": "Centered",
+      "message": "Centered changes alignment while keeping the month-day variant.",
+      "type": "info"
+    }
+  }
 }

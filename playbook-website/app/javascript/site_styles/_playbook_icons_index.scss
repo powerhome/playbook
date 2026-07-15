@@ -123,7 +123,11 @@
         .pb_icon_kit {
           color: $text_lt_light;
         }
-      }
+        .pb_title_kit {
+            cursor: text;
+            user-select: text;
+        }
+    }
 
     .icon-grid {
         .layout_body {

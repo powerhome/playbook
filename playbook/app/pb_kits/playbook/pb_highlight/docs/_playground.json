@@ -1,10 +1,16 @@
 {
   "template": "<Highlight{{props}} />",
   "propTargets": {},
-  "defaults": {},
+  "defaults": {
+    "text": "Use Highlight to call attention to important words in a sentence.",
+    "highlightedText": [
+      "Highlight",
+      "important"
+    ]
+  },
   "groups": [
     {
-      "name": "Props",
+      "name": "Content",
       "props": [
         "text",
         "highlightedText"
@@ -14,9 +20,74 @@
   "presets": [
     {
       "name": "Default",
-      "props": {}
+      "props": {
+        "text": "Use Highlight to call attention to important words in a sentence.",
+        "highlightedText": [
+          "Highlight",
+          "important"
+        ]
+      }
+    },
+    {
+      "name": "Multiple Words",
+      "props": {
+        "text": "Search results can highlight owner, address, and status matches at the same time.",
+        "highlightedText": [
+          "owner",
+          "address",
+          "status"
+        ]
+      }
+    },
+    {
+      "name": "Phrase Match",
+      "props": {
+        "text": "The highlight kit can match a complete phrase inside longer text.",
+        "highlightedText": [
+          "complete phrase"
+        ]
+      }
+    },
+    {
+      "name": "Repeated Term",
+      "props": {
+        "text": "Highlight repeats highlight matches wherever highlight appears.",
+        "highlightedText": [
+          "highlight"
+        ]
+      }
+    },
+    {
+      "name": "No Match",
+      "props": {
+        "text": "This sentence renders without any highlighted text.",
+        "highlightedText": [
+          "missing"
+        ]
+      }
     }
   ],
   "conditionals": {},
-  "hints": {}
+  "hints": {
+    "default": {
+      "presetName": "Default",
+      "message": "Highlight uses the text prop as the source string and highlightedText as the list of search terms.",
+      "type": "info"
+    },
+    "multiple_words": {
+      "presetName": "Multiple Words",
+      "message": "Pass multiple strings in highlightedText to mark more than one term.",
+      "type": "info"
+    },
+    "phrase_match": {
+      "presetName": "Phrase Match",
+      "message": "A highlightedText entry can be a full phrase, not only a single word.",
+      "type": "info"
+    },
+    "no_match": {
+      "presetName": "No Match",
+      "message": "When no highlightedText entry matches, Highlight renders the original text without a mark.",
+      "type": "info"
+    }
+  }
 }

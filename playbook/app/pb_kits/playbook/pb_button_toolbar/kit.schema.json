@@ -8,7 +8,7 @@
   ],
   "props": {
     "onClick": {
-      "type": "ReactNode",
+      "type": "function",
       "platforms": [
         "react"
       ]

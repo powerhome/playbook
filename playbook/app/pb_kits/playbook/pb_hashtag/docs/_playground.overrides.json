@@ -1,0 +1,75 @@
+{
+  "children": {
+    "editable": false,
+    "default": ""
+  },
+  "defaults": {
+    "text": "470297",
+    "type": "project",
+    "url": "https://google.com",
+    "newWindow": false,
+    "dark": false
+  },
+  "groups": [
+    {
+      "name": "Content",
+      "props": ["text", "type"]
+    },
+    {
+      "name": "Link",
+      "props": ["url", "target", "newWindow", "rel"]
+    },
+    {
+      "name": "Appearance",
+      "props": ["dark"]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Project",
+      "props": {
+        "text": "470297",
+        "type": "project",
+        "url": "https://google.com"
+      }
+    },
+    {
+      "name": "Home",
+      "props": {
+        "text": "123456",
+        "type": "home",
+        "url": "https://google.com"
+      }
+    },
+    {
+      "name": "Appointment",
+      "props": {
+        "text": "456789",
+        "type": "appointment",
+        "url": "https://google.com"
+      }
+    },
+    {
+      "name": "Default",
+      "props": {
+        "text": "654321",
+        "type": "default",
+        "url": "https://google.com"
+      }
+    },
+    {
+      "name": "New window",
+      "props": {
+        "text": "Open in a new window",
+        "type": "project",
+        "url": "https://google.com",
+        "target": "_blank"
+      }
+    }
+  ],
+  "conditionals": {
+    "target": { "requires": "url" },
+    "rel": { "requires": "url" }
+  },
+  "hints": {}
+}

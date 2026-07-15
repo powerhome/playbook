@@ -3,6 +3,31 @@
 module Playbook
   module Pb<%= @kit_name_pascal %>
     class <%= @kit_name_pascal %> < ::Playbook::KitBase
+<% @unique_props.each do |prop| -%>
+<% ruby_type = case prop[:type]
+               when "boolean" then "Playbook::Props::Boolean"
+               when "number" then "Playbook::Props::Number"
+               when "numeric" then "Playbook::Props::Numeric"
+               when "array" then "Playbook::Props::Array"
+               when "object" then "Playbook::Props::HashProp"
+               when "date" then "Playbook::Props::Date"
+               when "enum" then "Playbook::Props::Enum"
+               else "Playbook::Props::String"
+               end -%>
+<% if prop[:type] == "enum" -%>
+      prop :<%= prop[:ruby_name] %>, type: <%= ruby_type %>,
+                            values: %w[<%= prop[:values].join(" ") %>],
+                            default: "<%= prop[:values].first %>"
+<% elsif default_for(prop).nil? -%>
+      prop :<%= prop[:ruby_name] %>, type: <%= ruby_type %>
+<% else -%>
+      prop :<%= prop[:ruby_name] %>, type: <%= ruby_type %>, default: <%= default_for(prop).inspect %>
+<% end -%>
+<% end -%>
+
+      def classname
+        generate_classname("pb_<%= @kit_name_underscore %>_kit")
+      end
     end
   end
 end

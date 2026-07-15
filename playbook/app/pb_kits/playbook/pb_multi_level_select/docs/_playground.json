@@ -14,48 +14,23 @@
     "placeholder": "Start typing...",
     "variant": "multi",
     "wrapped": false,
-    "treeData": [
-      {
-        "label": "Company",
-        "value": "company",
-        "id": "mls_co",
-        "expanded": true,
-        "children": [
-          {
-            "label": "Engineering",
-            "value": "engineering",
-            "id": "mls_eng",
-            "children": [
-              {
-                "label": "Frontend",
-                "value": "frontend",
-                "id": "mls_fe"
-              },
-              {
-                "label": "Backend",
-                "value": "backend",
-                "id": "mls_be"
-              }
-            ]
-          },
-          {
-            "label": "Sales",
-            "value": "sales",
-            "id": "mls_sales"
-          }
-        ]
-      }
-    ]
+    "selectedIds": [
+      "talent1",
+      "initiative1"
+    ],
+    "onSelect": "(selectedNodes) => console.log('Selected Items', selectedNodes)",
+    "onChange": "(event) => console.log('Filter changed', event.target.value)"
   },
   "groups": [
     {
       "name": "Content",
       "props": [
+        "treeData",
         "label",
         "name",
         "placeholder",
-        "treeData",
-        "selectedIds"
+        "selectedIds",
+        "inputName"
       ]
     },
     {
@@ -76,87 +51,361 @@
       ]
     },
     {
-      "name": "Selection behavior",
+      "name": "Selection Behavior",
       "props": [
         "returnAllSelected",
-        "showCheckedChildren",
-        "inputName"
+        "showCheckedChildren"
       ]
     },
     {
       "name": "Events",
       "props": [
-        "onChange",
-        "onSelect"
+        "onSelect",
+        "onChange"
       ]
     }
   ],
   "presets": [
     {
-      "name": "Multi (default)",
+      "name": "Multi",
+      "structureMode": "standard",
       "props": {
         "variant": "multi",
         "label": "Departments",
-        "placeholder": "Search teams…",
-        "inputDisplay": "pills"
+        "placeholder": "Search teams...",
+        "inputDisplay": "pills",
+        "onSelect": "(selectedNodes) => console.log('Selected Items', selectedNodes)"
       }
     },
     {
-      "name": "Single select",
+      "name": "Single Select",
+      "structureMode": "standard",
       "props": {
         "variant": "single",
         "label": "Pick one team",
-        "placeholder": "Choose…",
-        "inputDisplay": "pills"
+        "placeholder": "Choose...",
+        "inputDisplay": "pills",
+        "selectedIds": [
+          "talent1"
+        ],
+        "onSelect": "(selectedNode) => console.log('Selected Node', selectedNode)"
       }
     },
     {
-      "name": "Plain input (no pills)",
+      "name": "Selected IDs",
+      "structureMode": "standard",
+      "props": {
+        "variant": "multi",
+        "label": "Preselected teams",
+        "selectedIds": [
+          "talent1",
+          "initiative1",
+          "customer1"
+        ],
+        "onSelect": "(selectedNodes) => console.log('Selected Items', selectedNodes)"
+      }
+    },
+    {
+      "name": "Input Display None",
+      "structureMode": "standard",
       "props": {
         "variant": "multi",
         "label": "Teams",
-        "inputDisplay": "none"
+        "inputDisplay": "none",
+        "placeholder": "Search without pills..."
       }
     },
     {
-      "name": "Disabled",
-      "props": {
-        "variant": "multi",
-        "label": "Locked",
-        "disabled": true
-      }
-    },
-    {
-      "name": "With error",
-      "props": {
-        "variant": "multi",
-        "label": "Required field",
-        "error": "Choose at least one option."
-      }
-    },
-    {
-      "name": "Return all selected",
+      "name": "Return All Selected",
+      "structureMode": "standard",
       "props": {
         "variant": "multi",
         "label": "Include ancestors",
-        "returnAllSelected": true
+        "returnAllSelected": true,
+        "selectedIds": [
+          "people1"
+        ],
+        "onSelect": "(selectedNodes) => console.log('Selected Items with parent data', selectedNodes)"
       }
     },
     {
-      "name": "Hide checked in tree",
+      "name": "Hide Checked Children",
+      "structureMode": "standard",
       "props": {
         "variant": "multi",
-        "label": "Compact tree",
-        "showCheckedChildren": false
+        "label": "Compact selected list",
+        "showCheckedChildren": false,
+        "selectedIds": [
+          "talent1",
+          "initiative1",
+          "customer1"
+        ]
+      }
+    },
+    {
+      "name": "With Option Children",
+      "structureMode": "with_children",
+      "props": {
+        "variant": "multi",
+        "label": "Teams with status",
+        "selectedIds": [
+          "talent1"
+        ],
+        "onSelect": "(selectedNodes) => console.log('Selected Items', selectedNodes)"
+      }
+    },
+    {
+      "name": "Disabled Options",
+      "structureMode": "standard",
+      "props": {
+        "variant": "multi",
+        "label": "Departments with disabled options",
+        "returnAllSelected": true,
+        "onSelect": "(selectedNodes) => console.log('Selected Items', selectedNodes)",
+        "treeData": [
+          {
+            "label": "Power Home Remodeling",
+            "value": "powerHomeRemodeling",
+            "id": "powerhome1",
+            "expanded": true,
+            "children": [
+              {
+                "label": "People",
+                "value": "people",
+                "id": "people1",
+                "expanded": true,
+                "children": [
+                  {
+                    "label": "Talent Acquisition",
+                    "value": "talentAcquisition",
+                    "id": "talent1",
+                    "disabled": true
+                  },
+                  {
+                    "label": "Business Affairs",
+                    "value": "businessAffairs",
+                    "id": "business1",
+                    "children": [
+                      {
+                        "label": "Initiatives",
+                        "value": "initiatives",
+                        "id": "initiative1",
+                        "disabled": true
+                      },
+                      {
+                        "label": "Learning & Development",
+                        "value": "learningAndDevelopment",
+                        "id": "development1"
+                      }
+                    ]
+                  },
+                  {
+                    "label": "People Experience",
+                    "value": "peopleExperience",
+                    "id": "experience1"
+                  }
+                ]
+              },
+              {
+                "label": "Contact Center",
+                "value": "contactCenter",
+                "id": "contact1",
+                "children": [
+                  {
+                    "label": "Appointment Management",
+                    "value": "appointmentManagement",
+                    "id": "appointment1"
+                  },
+                  {
+                    "label": "Customer Service",
+                    "value": "customerService",
+                    "id": "customer1",
+                    "disabled": true
+                  },
+                  {
+                    "label": "Energy",
+                    "value": "energy",
+                    "id": "energy1"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "Disabled Input",
+      "structureMode": "standard",
+      "props": {
+        "variant": "multi",
+        "label": "Locked departments",
+        "disabled": true
       }
     }
   ],
-  "conditionals": {},
+  "conditionals": {
+    "requiredIndicator": {
+      "requires": "label"
+    }
+  },
   "hints": {
     "tree_data": {
       "when": {},
-      "message": "treeData is a nested list with id, label, value, and optional children; expand with expanded on nodes you want open by default.",
+      "message": "treeData is required. Each option needs an id, label, value, and can include children, expanded, disabled, or custom metadata for option children.",
+      "type": "info"
+    },
+    "multi": {
+      "presetName": "Multi",
+      "message": "Multi uses checkboxes and returns the selected nodes through onSelect. inputDisplay=\"pills\" shows selected items as pills in the input.",
+      "type": "info"
+    },
+    "single_select": {
+      "presetName": "Single Select",
+      "message": "Single Select uses radios and should receive at most one selectedIds value because only one node can be selected.",
+      "type": "info"
+    },
+    "selected_ids": {
+      "presetName": "Selected IDs",
+      "message": "selectedIds checks matching treeData node ids on load. In multi mode, multiple ids can be passed.",
+      "type": "info"
+    },
+    "input_display_none": {
+      "presetName": "Input Display None",
+      "message": "inputDisplay=\"none\" keeps selected pills out of the input while preserving filtering and selection behavior.",
+      "type": "info"
+    },
+    "return_all_selected": {
+      "presetName": "Return All Selected",
+      "message": "returnAllSelected changes the selected payload so parent and child selections can be returned together.",
+      "type": "info"
+    },
+    "hide_checked_children": {
+      "presetName": "Hide Checked Children",
+      "message": "showCheckedChildren={false} keeps checked child rows hidden under selected parents, which is useful for compact trees.",
+      "type": "info"
+    },
+    "with_option_children": {
+      "presetName": "With Option Children",
+      "message": "MultiLevelSelect.Options receives each item, so child content can use custom fields from treeData like status.",
+      "type": "info"
+    },
+    "disabled_options": {
+      "presetName": "Disabled Options",
+      "message": "Disabled options come from treeData nodes with disabled: true; those rows remain visible but cannot be selected.",
+      "type": "info"
+    },
+    "disabled_input": {
+      "presetName": "Disabled Input",
+      "message": "disabled locks the input and prevents opening or changing selections.",
       "type": "info"
     }
+  },
+  "structureModes": {
+    "default": "standard",
+    "modes": {
+      "standard": {
+        "label": "Standard",
+        "template": "<MultiLevelSelect\n  id=\"multi-level-select-playground\"\n  treeData={treeData}{{props}}\n/>"
+      },
+      "with_children": {
+        "label": "With Options Children",
+        "template": "<MultiLevelSelect\n  id=\"multi-level-select-with-children-playground\"\n  treeData={treeData}{{props}}\n>\n  <MultiLevelSelect.Options>\n    {(item) => (\n      <Badge\n          marginLeft=\"sm\"\n          text={item.status || 'available'}\n          variant={item.status === 'active' ? 'success' : 'warning'}\n      />\n    )}\n  </MultiLevelSelect.Options>\n</MultiLevelSelect>"
+      }
+    }
+  },
+  "children": {
+    "editable": false,
+    "default": ""
+  },
+  "customProps": {
+    "treeData": {
+      "type": "array",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "description": "Nested option data with id, label, value, and optional children."
+    }
+  },
+  "requiredProps": {
+    "treeData": [
+      {
+        "label": "Power Home Remodeling",
+        "value": "powerHomeRemodeling",
+        "id": "powerhome1",
+        "expanded": true,
+        "status": "active",
+        "children": [
+          {
+            "label": "People",
+            "value": "people",
+            "id": "people1",
+            "expanded": true,
+            "status": "active",
+            "children": [
+              {
+                "label": "Talent Acquisition",
+                "value": "talentAcquisition",
+                "id": "talent1",
+                "status": "active"
+              },
+              {
+                "label": "Business Affairs",
+                "value": "businessAffairs",
+                "id": "business1",
+                "status": "active",
+                "children": [
+                  {
+                    "label": "Initiatives",
+                    "value": "initiatives",
+                    "id": "initiative1",
+                    "status": "active"
+                  },
+                  {
+                    "label": "Learning & Development",
+                    "value": "learningAndDevelopment",
+                    "id": "development1",
+                    "status": "inactive"
+                  }
+                ]
+              },
+              {
+                "label": "People Experience",
+                "value": "peopleExperience",
+                "id": "experience1",
+                "status": "inactive"
+              }
+            ]
+          },
+          {
+            "label": "Contact Center",
+            "value": "contactCenter",
+            "id": "contact1",
+            "status": "inactive",
+            "children": [
+              {
+                "label": "Appointment Management",
+                "value": "appointmentManagement",
+                "id": "appointment1",
+                "status": "active"
+              },
+              {
+                "label": "Customer Service",
+                "value": "customerService",
+                "id": "customer1",
+                "status": "inactive"
+              },
+              {
+                "label": "Energy",
+                "value": "energy",
+                "id": "energy1",
+                "status": "active"
+              }
+            ]
+          }
+        ]
+      }
+    ]
   }
 }

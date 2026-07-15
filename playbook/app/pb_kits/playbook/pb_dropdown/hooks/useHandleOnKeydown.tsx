@@ -15,6 +15,28 @@ const {
   setIsDropDownClosed,
 }= useContext(DropdownContext)
 
+  // Helper function to find next non-disabled option
+  const findNextAvailableIndex = (currentIndex: number, direction: 'forward' | 'backward'): number => {
+    let nextIndex = currentIndex;
+    let attempts = 0;
+
+    while (attempts < filteredOptions.length) {
+      if (direction === 'forward') {
+        nextIndex = (nextIndex + 1) % filteredOptions.length;
+      } else {
+        nextIndex = (nextIndex - 1 + filteredOptions.length) % filteredOptions.length;
+      }
+
+      if (!filteredOptions[nextIndex]?.disabled) {
+        return nextIndex;
+      }
+      attempts++;
+    }
+
+    // If all options are disabled, return current index
+    return currentIndex;
+  };
+
   return (e: React.KeyboardEvent) => {
 
     if (e.key !== "Tab" && autocomplete && selected && selected.label) {
@@ -25,20 +47,18 @@ const {
     case "ArrowDown": {
       e.preventDefault();
       setIsDropDownClosed(false);
-      const nextIndex = (focusedOptionIndex + 1) % filteredOptions.length;
+      const nextIndex = findNextAvailableIndex(focusedOptionIndex, 'forward');
       setFocusedOptionIndex(nextIndex);
       break;
     }
     case "ArrowUp": {
       e.preventDefault();
-      const nextIndexUp =
-        (focusedOptionIndex - 1 + filteredOptions.length) %
-        filteredOptions.length;
+      const nextIndexUp = findNextAvailableIndex(focusedOptionIndex, 'backward');
       setFocusedOptionIndex(nextIndexUp);
       break;
     }
     case "Enter":
-      if (focusedOptionIndex !== -1) {
+      if (focusedOptionIndex !== -1 && !filteredOptions[focusedOptionIndex]?.disabled) {
         e.preventDefault();
         handleOptionClick(filteredOptions[focusedOptionIndex]);
         setFocusedOptionIndex(-1)

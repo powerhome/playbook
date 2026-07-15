@@ -1,0 +1,89 @@
+{
+  "$schema": "https://playbook.powerapp.cloud/schemas/kit-schema.json",
+  "name": "FullScreen",
+  "description": "FullScreen component",
+  "platforms": [
+    "react",
+    "rails"
+  ],
+  "props": {
+    "contentPadding": {
+      "type": "enum",
+      "platforms": [
+        "react"
+      ],
+      "values": [
+        "none",
+        "xxs",
+        "xs",
+        "sm",
+        "md",
+        "lg",
+        "xl"
+      ]
+    },
+    "headerText": {
+      "type": "string",
+      "platforms": [
+        "react"
+      ]
+    },
+    "headerTextStyling": {
+      "type": "enum",
+      "platforms": [
+        "react"
+      ],
+      "values": [
+        "title_4",
+        "body"
+      ]
+    },
+    "isFullscreen": {
+      "type": "boolean",
+      "platforms": [
+        "react"
+      ]
+    },
+    "onOpen": {
+      "type": "function",
+      "platforms": [
+        "react"
+      ]
+    },
+    "onClose": {
+      "type": "function",
+      "platforms": [
+        "react"
+      ]
+    },
+    "stickyHeader": {
+      "type": "boolean",
+      "platforms": [
+        "react"
+      ]
+    },
+    "trigger": {
+      "type": "function",
+      "platforms": [
+        "react"
+      ]
+    },
+    "escToExit": {
+      "type": "boolean",
+      "platforms": [
+        "react"
+      ]
+    }
+  },
+  "globalProps": true,
+  "usage": {
+    "react": {
+      "import": "import { FullScreen } from 'playbook-ui'",
+      "example": "<FullScreen contentPadding=\"none\" headerTextStyling=\"title_4\"></FullScreen>"
+    },
+    "rails": {
+      "import": null,
+      "example": "<%= pb_rails(\"full_screen\", props: { content_padding: \"none\", header_text_styling: \"title_4\" }) %>"
+    }
+  }
+}

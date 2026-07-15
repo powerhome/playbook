@@ -39,8 +39,8 @@ RSpec.describe Playbook::PbAdvancedTable::AdvancedTable do
 
   describe "#classname" do
     it "returns namespaced class name", :aggregate_failures do
-      expect(subject.new({}).classname).to eq "pb_advanced_table advanced-table-responsive-scroll advanced-table-max-height-auto   max_height_auto"
-      expect(subject.new(classname: "additional_class").classname).to eq "pb_advanced_table advanced-table-responsive-scroll advanced-table-max-height-auto   additional_class max_height_auto"
+      expect(subject.new({}).classname).to eq "pb_advanced_table advanced-table-responsive-scroll advanced-table-max-height-auto    max_height_auto"
+      expect(subject.new(classname: "additional_class").classname).to eq "pb_advanced_table advanced-table-responsive-scroll advanced-table-max-height-auto    additional_class max_height_auto"
     end
 
     context "responsive prop" do
@@ -138,6 +138,18 @@ RSpec.describe Playbook::PbAdvancedTable::AdvancedTable do
   describe "#is_action_bar_visible" do
     it "returns false by default" do
       expect(subject.new({}).is_action_bar_visible).to be false
+    end
+  end
+
+  describe "#sticky_header_class" do
+    it "returns advanced-table-sticky-header when table_props sticky is true" do
+      expect(subject.new(table_props: { sticky: true }).sticky_header_class).to eq "advanced-table-sticky-header"
+      expect(subject.new(table_props: { "sticky" => true }).sticky_header_class).to eq "advanced-table-sticky-header"
+    end
+
+    it "returns empty string when sticky is false or absent" do
+      expect(subject.new({}).sticky_header_class).to eq ""
+      expect(subject.new(table_props: { sticky: false }).sticky_header_class).to eq ""
     end
   end
 end

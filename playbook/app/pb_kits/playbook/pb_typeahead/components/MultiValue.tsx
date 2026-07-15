@@ -1,9 +1,8 @@
 import React from 'react'
 import { components } from 'react-select'
 
-import Badge from '../../pb_badge/_badge'
-import FormPill from '../../pb_form_pill/_form_pill'
 import { SelectValueType } from '../_typeahead'
+import PillRenderer from './PillRenderer'
 
 type Props = {
   data: SelectValueType,
@@ -13,107 +12,52 @@ type Props = {
   removeProps: any,
   selectProps: any,
   isFocused?: boolean,
+  index?: number,
 }
 
+const isPillReorderActive = (selectProps: Record<string, unknown>): boolean => {
+  return Boolean(
+    selectProps?.enablePillReorder
+    && selectProps?.isMulti
+    && selectProps?.inputDisplay === 'pills'
+  )
+}
 
 const MultiValue = (props: Props) => {
-  const { removeProps, isFocused } = props
-  const { imageUrl } = props.data
-  const { dark, multiKit, pillColor, truncate, wrapped, inputDisplay } = props.selectProps
-
-  // Extract label - use data.label or data.name if available, otherwise use empty string
-  const label = props.data.label || props.data.name || ''
+  const { removeProps, isFocused, index = 0 } = props
+  const { dark, multiKit, pillColor, truncate, wrapped, inputDisplay, showPillIndex, value } = props.selectProps
 
   // If inputDisplay is "none", don't render the pill/badge, just return null (the count handled in ValueContainer file)
   if (inputDisplay === 'none') {
     return null
   }
 
-  const formPillProps = {
-    marginRight: 'xs',
-    name: label,
-    avatarUrl: '',
-    dark,
+  // Pills are rendered in ValueContainer when drag reorder is enabled
+  if (isPillReorderActive(props.selectProps)) {
+    return null
   }
 
-  if (typeof imageUrl === 'string') formPillProps.avatarUrl = imageUrl
-
-  // Add className for focus state
-  const pillClassName = isFocused ? 'pb_form_pill_or_badge_focused' : ''
-
-  // Handle keyboard events on the pill itself to enable deletion when using tabIndex
-  const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
-    if (event.key === 'Backspace' || event.key === 'Delete') {
-      event.preventDefault()
-      event.stopPropagation()
-      // Trigger the remove action from react-select
-      if (removeProps && removeProps.onClick) {
-        removeProps.onClick(event as any)
-      }
-    }
-    // if arrow keys used, transfer focus to input so react-select can take over
-    else if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
-      const selectInput = event.currentTarget.closest('.pb_typeahead_kit')?.querySelector('input')
-      if (selectInput instanceof HTMLInputElement) {
-        selectInput.focus()
-      }
-    }
-  }
+  const totalCount = Array.isArray(value) ? value.length : 0
 
   return (
     <components.MultiValueContainer
         className="text_input_multivalue_container"
         {...props}
     >
-      {multiKit === 'badge' &&
-        <Badge
-            className={pillClassName}
-            closeProps={removeProps}
-            htmlOptions={{onKeyDown:handleKeyDown}}
-            marginRight="xs"
-            removeIcon
-            tabIndex={0}
-            text={label}
-            variant="primary"
-        />
-      }
-
-      {multiKit !== 'badge' && imageUrl &&
-        <FormPill
-            avatarUrl={imageUrl}
-            className={pillClassName}
-            closeProps={removeProps}
-            color={pillColor}
-            dark={dark}
-            htmlOptions={{onKeyDown:handleKeyDown}}
-            marginRight="xs"
-            name={label}
-            size={multiKit === 'smallPill' ? 'small' : ''}
-            tabIndex={0}
-            text=''
-            truncate={truncate}
-            wrapped={wrapped}
-            {...props}
-        />
-      }
-
-      {multiKit !== 'badge' && !imageUrl &&
-        <FormPill
-            className={pillClassName}
-            closeProps={removeProps}
-            color={pillColor}
-            dark={dark}
-            htmlOptions={{onKeyDown:handleKeyDown}}
-            marginRight="xs"
-            name=''
-            size={multiKit === 'smallPill' ? 'small' : ''}
-            tabIndex={0}
-            text={label}
-            truncate={truncate}
-            wrapped={wrapped}
-            {...props}
-        />
-      }
+      <PillRenderer
+          dark={dark}
+          data={props.data}
+          index={index}
+          isFocused={isFocused}
+          multiKit={multiKit}
+          pillColor={pillColor}
+          removeProps={removeProps}
+          selectProps={props.selectProps}
+          showPillIndex={showPillIndex}
+          totalCount={totalCount}
+          truncate={truncate}
+          wrapped={wrapped}
+      />
     </components.MultiValueContainer>
   )
 }

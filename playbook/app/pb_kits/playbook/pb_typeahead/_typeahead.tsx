@@ -1,5 +1,5 @@
-import React, {useState, useEffect, forwardRef, useRef} from "react"
-import Select from "react-select"
+import React, {useState, useEffect, useLayoutEffect, useMemo, useCallback, forwardRef, useRef, useContext} from "react"
+import Select, {components as selectComponents, mergeStyles} from "react-select"
 import AsyncSelect from "react-select/async"
 import CreateableSelect from "react-select/creatable"
 import AsyncCreateableSelect from "react-select/async-creatable"
@@ -22,7 +22,17 @@ import {
 import * as kitComponents from "./components"
 
 import {noop, buildDataProps, buildHtmlProps} from "../utilities/props"
+import {
+  PB_FLOATING_OWNER_ATTR,
+  kitRequiresPortaledFloatingUi,
+  resolveFloatingOwnerId,
+  resolvePortaledFloatingZIndex,
+  resolvePortaledKitHost,
+} from "../utilities/floatingPortalHosts"
+import {DialogContext} from "../pb_dialog/_dialog_context"
 import {GenericObject, Noop} from "../types"
+
+type TypeaheadStylesConfig = Parameters<typeof mergeStyles>[0]
 
 /**
  * @typedef {object} Props
@@ -82,6 +92,11 @@ type TypeaheadProps = {
   searchContextSelector?: string
   clearOnContextChange?: boolean
   preserveSearchInput?: boolean
+  enablePillReorder?: boolean
+  showPillIndex?: boolean
+  pillDragHandle?: boolean
+  // Passed through to react-select; merged when menu is portaled to `document.body`.
+  styles?: TypeaheadStylesConfig
 } & GlobalProps
 
 export type SelectValueType = {
@@ -129,6 +144,10 @@ const Typeahead = forwardRef<HTMLInputElement, TypeaheadProps>(
     validation,
     clearOnContextChange = false,
     preserveSearchInput = false, // Default to false to maintain backward compatibility
+    enablePillReorder = false,
+    showPillIndex = false,
+    pillDragHandle = true,
+    styles: stylesProp,
     ...props
   }: TypeaheadProps) => {
     // State to manage the input value when preserveSearchInput is true
@@ -197,6 +216,70 @@ const Typeahead = forwardRef<HTMLInputElement, TypeaheadProps>(
     // Create a ref to access React Select instance
     const selectRef = useRef<any>(null)
 
+    const dialogCtx = useContext(DialogContext)
+
+    const kitContainerRef = useRef<HTMLDivElement>(null)
+    const [menuPortalHost, setMenuPortalHost] = useState<HTMLElement | null>(
+      null,
+    )
+    const [floatingOwnerId, setFloatingOwnerId] = useState<string | null>(null)
+    const [menuIsOpen, setMenuIsOpen] = useState(false)
+
+    const resolveMenuPortalConfig = useCallback(() => {
+      const el = kitContainerRef.current
+      setFloatingOwnerId(resolveFloatingOwnerId(el))
+      setMenuPortalHost(
+        resolvePortaledKitHost(
+          el,
+          dialogCtx?.selectMenuPortalTarget ?? null,
+        ),
+      )
+    }, [dialogCtx?.selectMenuPortalTarget])
+
+    useLayoutEffect(() => {
+      if (!menuIsOpen) {
+        setFloatingOwnerId(null)
+        setMenuPortalHost(null)
+        return
+      }
+      resolveMenuPortalConfig()
+    }, [menuIsOpen, resolveMenuPortalConfig])
+
+    const MenuPortalWithOwner = useMemo(
+      () =>
+        function TypeaheadMenuPortal(
+          portalProps: React.ComponentProps<typeof selectComponents.MenuPortal>,
+        ) {
+          return (
+            <selectComponents.MenuPortal
+                {...portalProps}
+                innerProps={{
+                  ...portalProps.innerProps,
+                  ...(floatingOwnerId
+                    ? {[PB_FLOATING_OWNER_ATTR]: floatingOwnerId}
+                    : {}),
+                }}
+            />
+          )
+        },
+      [floatingOwnerId],
+    )
+
+    const mergedSelectStyles = useMemo(() => {
+      if (menuPortalHost !== document.body) return stylesProp
+      const zIndex = Number(resolvePortaledFloatingZIndex(document.body))
+      return mergeStyles(stylesProp ?? {}, {
+        menuPortal: (base: Record<string, unknown>) => ({
+          ...base,
+          zIndex,
+        }),
+        menu: (base: Record<string, unknown>) => ({
+          ...base,
+          zIndex,
+        }),
+      } as TypeaheadStylesConfig)
+    }, [menuPortalHost, stylesProp])
+
     // Helper function to flatten grouped options if custom groups are used
     const flattenOptions = (options: any[]): any[] => {
       if (!options) return []
@@ -209,8 +292,21 @@ const Typeahead = forwardRef<HTMLInputElement, TypeaheadProps>(
       }, [])
     }
 
+    const handleMenuClose = () => {
+      setMenuIsOpen(false)
+      setMenuPortalHost(null)
+      setFloatingOwnerId(null)
+      if (props.onMenuClose) {
+        props.onMenuClose()
+      }
+    }
+
     // Configure focus on selected option using React Select's API
     const handleMenuOpen = () => {
+      if (kitRequiresPortaledFloatingUi(kitContainerRef.current)) {
+        resolveMenuPortalConfig()
+        setMenuIsOpen(true)
+      }
       setTimeout(() => {
         let currentValue = props.value || props.defaultValue
 
@@ -372,6 +468,7 @@ const resolvedLoadOptions =
         Option,
         Placeholder,
         ValueContainer,
+        ...(menuPortalHost ? {MenuPortal: MenuPortalWithOwner} : {}),
         ...components,
       },
       loadOptions: wrappedLoadOptions,
@@ -399,10 +496,24 @@ const resolvedLoadOptions =
       ...(preserveSearchInput ? {inputValue} : {}),
       onInputChange: handleInputChange,
       onBlur: handleBlur,
-      onMenuOpen: handleMenuOpen,
       required,
       requiredIndicator: requiredIndicator,
       ...props,
+      onMenuClose: () => {
+        handleMenuClose()
+        props.onMenuClose?.()
+      },
+      onMenuOpen: () => {
+        handleMenuOpen()
+        props.onMenuOpen?.()
+      },
+      ...(menuPortalHost
+        ? {
+            menuPortalTarget: menuPortalHost,
+            menuPosition: "fixed" as const,
+          }
+        : {}),
+      styles: mergedSelectStyles,
     }
 
     const [contextValue, setContextValue] = useState("")
@@ -502,6 +613,14 @@ const resolvedLoadOptions =
         ? AsyncSelect
         : Select
 
+    const dispatchReorderEvent = (reorderedValues: SelectValueType[]) => {
+      const reorderEvent = new CustomEvent(
+        `pb-typeahead-kit-${selectProps.id}-result-option-reorder`,
+        {detail: reorderedValues},
+      )
+      document.dispatchEvent(reorderEvent)
+    }
+
     const handleOnChange = (
       _data: SelectValueType,
       {action, option, removedValue}: TagOnChangeValues,
@@ -553,7 +672,14 @@ const resolvedLoadOptions =
           setInputValue("")
         }
       }
+      if (action === "set-value" && Array.isArray(_data)) {
+        dispatchReorderEvent(_data)
+      }
     }
+
+    const isPillReorderEnabled = Boolean(
+      enablePillReorder && props.isMulti && inputDisplay === 'pills'
+    )
 
     const filteredProps: TypeaheadProps = {...props}
     delete filteredProps.truncate
@@ -579,6 +705,7 @@ const resolvedLoadOptions =
 
     return (
     <div
+        ref={kitContainerRef}
         {...dataProps}
         {...htmlProps}
         aria-busy={asyncLoading ? "true" : "false"}
@@ -586,12 +713,15 @@ const resolvedLoadOptions =
         data-pb-typeahead-loading={asyncLoading ? "true" : "false"}
     >
       <Tag
+          {...selectProps}
           classNamePrefix="typeahead-kit-select"
+          enablePillReorder={isPillReorderEnabled}
           error={errorDisplay}
           isDisabled={disabled}
           onChange={handleOnChange}
+          pillDragHandle={pillDragHandle}
           ref={selectRef}
-          {...selectProps}
+          showPillIndex={showPillIndex}
       />
     </div>
     )

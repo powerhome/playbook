@@ -53,7 +53,7 @@ kits:
   - name: row_interaction
     description: Select, expand, subrows, pinning; row highlights and bulk actions.
     parent: advanced_table
-    kit_section: ["Expanded Control", "Expand by Depth", "SubRow Headers", "Enable Toggle Expansion", "Cascade Collapse", "Pinned Rows", "Selectable Rows", "Selectable Rows (No Subrows)", "Selectable Rows (With Actions)", "Selectable Rows (No Actions Bar)"]
+    kit_section: ["Expanded Control", "Expand by Depth", "SubRow Headers", "Enable Toggle Expansion", "Cascade Collapse", "Pinned Rows (Top)", "Pinned Rows (Bottom)", "Pinned Rows (Both)", "Selectable Rows", "Selectable Rows (No Subrows)", "Selectable Rows (With Actions)", "Selectable Rows (No Actions Bar)"]
     platforms: *1
     status: stable
     icons_used: true
@@ -727,6 +727,13 @@ kits:
     subcomponents:
       - Draggable.Container
       - Draggable.Item
+  - name: full_screen
+    platforms: *1
+    description: "Full Screen component"
+    status: stable
+    icons_used: false
+    react_rendered: false
+    enhanced_element_used: true
 - category: message_text_patterns
   description: Components for displaying messages and highlighting content.
   components:

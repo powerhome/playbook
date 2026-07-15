@@ -17,6 +17,8 @@ import Changelog from './pages/Changelog'
 import GettingStarted from './pages/GettingStarted'
 import DesignGuidelines from './pages/DesignGuidelines'
 import GuidePage from './pages/GuidePage'
+import Playground from './pages/Playground'
+import WorldCup from './pages/WorldCup'
 import Color from './pages/DesignGuidelines/Color'
 import Spacing from './pages/DesignGuidelines/Spacing'
 import Typography from './pages/DesignGuidelines/Typography'
@@ -28,6 +30,7 @@ import {
   GuidesLoader,
   GuidePageLoader,
   IconsLoader,
+  PlaygroundLoader,
 } from './hooks/loaders'
 import GlobalPropsIndex from './components/GlobalPropsAndTokens/GlobalPropsIndex'
 import GlobalPropsExamples from './components/GlobalPropsAndTokens/ExamplesPage/GlobalPropsExamplesIndex'
@@ -120,6 +123,12 @@ const router = createBrowserRouter(
         loader={IconsLoader}
         path="icons"
       />
+      <Route
+        element={<Playground />}
+        loader={PlaygroundLoader}
+        path="playground"
+      />
+      <Route element={<WorldCup />} path="worldcup" />
       <Route
         element={<Changelog />}
         loader={ComponentsLoader}

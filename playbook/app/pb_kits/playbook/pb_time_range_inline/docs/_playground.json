@@ -9,24 +9,78 @@
   },
   "groups": [
     {
-      "name": "Props",
+      "name": "Content",
       "props": [
-        "alignment",
-        "size",
-        "dark",
-        "icon",
-        "timezone",
         "startTime",
-        "endTime"
+        "endTime",
+        "timezone"
+      ]
+    },
+    {
+      "name": "Appearance",
+      "props": [
+        "icon",
+        "size",
+        "alignment",
+        "dark"
       ]
     }
   ],
   "presets": [
     {
       "name": "Default",
-      "props": {}
+      "props": {
+        "startTime": "2026-04-09T15:30:00.000Z",
+        "endTime": "2026-04-09T17:00:00.000Z"
+      }
+    },
+    {
+      "name": "Compact",
+      "props": {
+        "startTime": "2026-04-09T15:30:00.000Z",
+        "endTime": "2026-04-09T17:00:00.000Z",
+        "size": "xs"
+      }
+    },
+    {
+      "name": "With Icon",
+      "props": {
+        "startTime": "2026-04-09T09:00:00.000Z",
+        "endTime": "2026-04-09T10:30:00.000Z",
+        "icon": true
+      }
+    },
+    {
+      "name": "Vertical Timezone",
+      "props": {
+        "startTime": "2026-04-09T20:00:00.000Z",
+        "endTime": "2026-04-09T21:30:00.000Z",
+        "alignment": "vertical",
+        "timezone": true
+      }
     }
   ],
   "conditionals": {},
-  "hints": {}
+  "hints": {
+    "default": {
+      "presetName": "Default",
+      "message": "Default renders a start and end Date as an inline time range.",
+      "type": "info"
+    },
+    "compact": {
+      "presetName": "Compact",
+      "message": "Compact switches size to xs for denser layouts.",
+      "type": "info"
+    },
+    "with_icon": {
+      "presetName": "With Icon",
+      "message": "With Icon adds the clock icon before the range.",
+      "type": "info"
+    },
+    "vertical_timezone": {
+      "presetName": "Vertical Timezone",
+      "message": "Vertical Timezone stacks the range and includes the timezone label.",
+      "type": "info"
+    }
+  }
 }

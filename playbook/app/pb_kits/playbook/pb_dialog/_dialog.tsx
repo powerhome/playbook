@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-handler-names */
 /* eslint-disable react/no-multi-comp */
 
-import React, { useState } from "react";
+import React, { useState, useCallback, useContext } from "react";
 import classnames from "classnames";
 import Modal from "react-modal";
 
@@ -16,7 +16,14 @@ import DialogBody from "./child_kits/_dialog_body";
 import Flex from "../pb_flex/_flex";
 import IconCircle from "../pb_icon_circle/_icon_circle";
 import Title from "../pb_title/_title";
-import { DialogContext } from "./_dialog_context";
+import { DialogContext, DialogContextValue } from "./_dialog_context";
+import {
+  PB_FLOATING_OWNER_ATTR,
+  PB_MODAL_ABOVE_FULLSCREEN_Z_INDEX,
+  isPortaledFloatingKitInteraction,
+  resolveFullscreenOverlayForElement,
+} from "../utilities/floatingPortalHosts";
+import { FullScreenContext } from "../pb_full_screen/context/_full_screen_context";
 
 type DialogProps = {
   aria?: { [key: string]: string };
@@ -94,6 +101,15 @@ const Dialog = (props: DialogProps): React.ReactElement => {
 
   const dynamicInlineProps = globalInlineProps(props); 
 
+  const { active: isInsideFullscreen } = useContext(FullScreenContext);
+
+  const modalStyles = {
+    overlay: isInsideFullscreen
+      ? { zIndex: PB_MODAL_ABOVE_FULLSCREEN_Z_INDEX }
+      : undefined,
+    content: dynamicInlineProps,
+  };
+
   const wrapperClasses = classnames(
     buildCss("pb_dialog_wrapper"),
   );
@@ -101,12 +117,20 @@ const Dialog = (props: DialogProps): React.ReactElement => {
   const [triggerOpened, setTriggerOpened] = useState(false),
     modalIsOpened = trigger ? triggerOpened : opened;
 
-  const api = {
+  const [selectMenuPortalTarget, setSelectMenuPortalTarget] =
+    useState<HTMLElement | null>(null);
+
+  const floatingRootRefCallback = useCallback((node: HTMLElement | null) => {
+    setSelectMenuPortalTarget(node);
+  }, []);
+
+  const api: DialogContextValue = {
     onClose: trigger
       ? function () {
           setTriggerOpened(false);
         }
       : onClose,
+    selectMenuPortalTarget,
   };
 
   if (trigger) {
@@ -185,9 +209,9 @@ const Dialog = (props: DialogProps): React.ReactElement => {
             overlayClassName={overlayClassNames}
             portalClassName={portalClassName}
             shouldCloseOnOverlayClick={shouldCloseOnOverlayClick && !loading}
-            style={{ content: dynamicInlineProps }}
+            style={modalStyles}
         >
-          <>
+          <div className="pb_dialog_scroll_region">
             {title && !status ? <Dialog.Header closeable={closeable}>{title}</Dialog.Header> : null}
             {!status && text ? <Dialog.Body>{text}</Dialog.Body> : null}
             {status && (
@@ -238,7 +262,14 @@ const Dialog = (props: DialogProps): React.ReactElement => {
               </Dialog.Footer>
             ) : null}
             {children}
-          </>
+          </div>
+          {/* No aria-hidden: portaled form inputs with dropdowns live here and must remain interactive. */}
+          <div
+              className="pb_dialog_floating_root"
+              data-pb-dialog-floating-root="true"
+              {...(id ? { [PB_FLOATING_OWNER_ATTR]: id } : {})}
+              ref={floatingRootRefCallback}
+          />
         </Modal>
       </div>
     </DialogContext.Provider>

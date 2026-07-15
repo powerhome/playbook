@@ -12,7 +12,8 @@
         data-cancel-button-id="<%= object.cancel_button_id %>"
     <% end %>
 >
-    <%= pb_content_tag(:dialog, role: "dialog", "aria-modal": "true", "aria-label": "Dialog") do %>
+    <%= pb_content_tag(:dialog, role: "dialog", id: object.id, "data-pb-floating-owner": object.id, "aria-modal": "true", "aria-label": "Dialog") do %>
+            <div class="pb_dialog_scroll_region">
             <% if object.status === "" && object.title %>
                 <%= pb_rails("dialog/dialog_header", props: { title: object.title, id: object.id, closeable: object.closeable }) %>
             <% end %>
@@ -44,5 +45,8 @@
             <% end %>
 
             <%= content %>
+            </div>
+            <%# No aria-hidden: portaled form inputs with dropdowns live here and must remain interactive. %>
+            <div class="pb_dialog_floating_root" data-pb-dialog-floating-root="true" data-pb-floating-owner="<%= object.id %>"></div>
     <% end %>
 </div>

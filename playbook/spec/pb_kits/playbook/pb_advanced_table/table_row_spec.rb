@@ -435,6 +435,43 @@ RSpec.describe Playbook::PbAdvancedTable::TableRow do
         expect(result[:props][:html_options][:style][:color]).to eq "red"
       end
     end
+
+    context "with row font weight" do
+      it "adds bold font weight to table cell styles" do
+        result = instance.cell_component_info({ accessor: "none" }, 0, nil, nil, "bold")
+        expect(result[:props][:html_options][:style][:"font-weight"]).to eq "700"
+      end
+
+      it "adds regular font weight to table cell styles" do
+        result = instance.cell_component_info({ accessor: "none" }, 0, nil, nil, "regular")
+        expect(result[:props][:html_options][:style][:"font-weight"]).to eq "400"
+      end
+
+      it "adds font weight alongside row font color" do
+        result = instance.cell_component_info({ accessor: "none" }, 0, nil, "red", "bold")
+        expect(result[:props][:html_options][:style][:color]).to eq "red"
+        expect(result[:props][:html_options][:style][:"font-weight"]).to eq "700"
+      end
+
+      it "adds font weight to background component styles" do
+        result = instance.cell_component_info({ accessor: "with_bg_only" }, 0, nil, nil, "bold")
+        expect(result[:name]).to eq "background"
+        expect(result[:props][:html_options][:style][:"font-weight"]).to eq "700"
+      end
+    end
+  end
+
+  describe "#font_weight_value" do
+    let(:instance) { subject.new(row: {}, depth: 0) }
+
+    it "maps supported font weight values", :aggregate_failures do
+      expect(instance.font_weight_value("bold")).to eq "700"
+      expect(instance.font_weight_value("regular")).to eq "400"
+    end
+
+    it "returns nil for unsupported values" do
+      expect(instance.font_weight_value("heavy")).to be_nil
+    end
   end
 
   describe "#show_expand_button?" do

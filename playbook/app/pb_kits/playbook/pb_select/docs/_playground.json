@@ -8,7 +8,29 @@
     "multiple": false,
     "required": false,
     "requiredIndicator": false,
-    "showArrow": false
+    "showArrow": false,
+    "blankSelection": "Select an option",
+    "label": "Country",
+    "name": "country",
+    "options": [
+      {
+        "value": "us",
+        "text": "United States"
+      },
+      {
+        "value": "ca",
+        "text": "Canada"
+      },
+      {
+        "value": "uk",
+        "text": "United Kingdom"
+      },
+      {
+        "value": "au",
+        "text": "Australia"
+      }
+    ],
+    "value": "us"
   },
   "groups": [
     {
@@ -18,8 +40,7 @@
         "name",
         "value",
         "options",
-        "blankSelection",
-        "includeBlank"
+        "blankSelection"
       ]
     },
     {
@@ -28,7 +49,8 @@
         "disabled",
         "error",
         "required",
-        "requiredIndicator"
+        "requiredIndicator",
+        "onChange"
       ]
     },
     {
@@ -93,36 +115,35 @@
       }
     },
     {
-      "name": "Disabled",
+      "name": "Multiple",
       "props": {
-        "label": "Role",
-        "name": "role",
-        "value": "member",
-        "disabled": true,
+        "label": "Teams",
+        "name": "teams",
+        "multiple": true,
         "options": [
           {
-            "value": "admin",
-            "text": "Admin"
+            "value": "eng",
+            "text": "Engineering"
           },
           {
-            "value": "member",
-            "text": "Member"
+            "value": "design",
+            "text": "Design"
           },
           {
-            "value": "guest",
-            "text": "Guest"
+            "value": "ops",
+            "text": "Operations"
           }
         ]
       }
     },
     {
-      "name": "Required",
+      "name": "Inline Compact",
       "props": {
         "label": "Priority",
         "name": "priority",
         "value": "medium",
-        "required": true,
-        "requiredIndicator": true,
+        "inline": true,
+        "compact": true,
         "options": [
           {
             "value": "low",
@@ -145,5 +166,30 @@
       "requires": "label"
     }
   },
-  "hints": {}
+  "hints": {
+    "default": {
+      "presetName": "Default",
+      "message": "Default shows a labeled select with a selected value and a simple options array.",
+      "type": "info"
+    },
+    "error": {
+      "presetName": "With Error",
+      "message": "With Error passes an error message and blank selection for validation states.",
+      "type": "info"
+    },
+    "multiple": {
+      "presetName": "Multiple",
+      "message": "Multiple switches the native select into multi-select mode using the same options shape.",
+      "type": "info"
+    },
+    "inline_compact": {
+      "presetName": "Inline Compact",
+      "message": "Inline Compact combines inline and compact for dense form layouts.",
+      "type": "info"
+    }
+  },
+  "hiddenProps": [
+    "inputOptions",
+    "includeBlank"
+  ]
 }

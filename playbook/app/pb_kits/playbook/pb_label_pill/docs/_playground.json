@@ -2,24 +2,86 @@
   "template": "<LabelPill{{props}} />",
   "propTargets": {},
   "defaults": {
-    "variant": "neutral"
+    "variant": "neutral",
+    "label": "Service Needed",
+    "pillValue": "76"
   },
   "groups": [
     {
-      "name": "Props",
+      "name": "Content",
       "props": [
         "label",
-        "pillValue",
+        "pillValue"
+      ]
+    },
+    {
+      "name": "Appearance",
+      "props": [
         "variant"
       ]
     }
   ],
   "presets": [
     {
-      "name": "Default",
-      "props": {}
+      "name": "Neutral",
+      "props": {
+        "label": "Service Needed",
+        "pillValue": "76",
+        "variant": "neutral"
+      }
+    },
+    {
+      "name": "Success",
+      "props": {
+        "label": "Waiting",
+        "pillValue": "69",
+        "variant": "success"
+      }
+    },
+    {
+      "name": "Error",
+      "props": {
+        "label": "In Service",
+        "pillValue": "28",
+        "variant": "error"
+      }
+    },
+    {
+      "name": "Warning",
+      "props": {
+        "label": "Fully Serviced",
+        "pillValue": "101",
+        "variant": "warning"
+      }
+    },
+    {
+      "name": "Info",
+      "props": {
+        "label": "Inbox",
+        "pillValue": "197",
+        "variant": "info"
+      }
+    },
+    {
+      "name": "Primary",
+      "props": {
+        "label": "Inbox",
+        "pillValue": "218",
+        "variant": "primary"
+      }
     }
   ],
   "conditionals": {},
-  "hints": {}
+  "hints": {
+    "neutral": {
+      "presetName": "Neutral",
+      "message": "LabelPill combines a Caption label with a Pill value.",
+      "type": "info"
+    },
+    "success": {
+      "presetName": "Success",
+      "message": "variant is passed to the nested Pill to control color treatment.",
+      "type": "info"
+    }
+  }
 }

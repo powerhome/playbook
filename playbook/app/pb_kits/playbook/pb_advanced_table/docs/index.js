@@ -23,7 +23,6 @@ export { default as AdvancedTableTablePropsStickyHeader } from './_advanced_tabl
 export { default as AdvancedTableColumnHeadersCustomCell } from './_advanced_table_column_headers_custom_cell.jsx'
 export { default as AdvancedTableColumnHeadersVerticalBorder } from './_advanced_table_column_headers_vertical_border.jsx'
 export { default as AdvancedTableInlineEditing } from './_advanced_table_inline_editing.jsx'
-export { default as AdvancedTableFullscreen } from './_advanced_table_fullscreen.jsx'
 export { default as AdvancedTableStickyColumns } from './_advanced_table_sticky_columns.jsx'
 export { default as AdvancedTableStickyHeader } from './_advanced_table_sticky_header.jsx'
 export { default as AdvancedTableStickyColumnsAndHeader } from './_advanced_table_sticky_columns_and_header.jsx'
@@ -54,3 +53,5 @@ export { default as AdvancedTableColumnStylingBackgroundMulti } from './_advance
 export { default as AdvancedTableColumnStylingBackgroundCustom } from './_advanced_table_column_styling_background_custom.jsx'
 export { default as AdvancedTableCascadeCollapse } from './_advanced_table_cascade_collapse.jsx'
 export { default as AdvancedTableSortParentOnly } from './_advanced_table_sort_parent_only.jsx'
+export { default as AdvancedTablePinnedRowsBottom } from './_advanced_table_pinned_rows_bottom.jsx'
+export { default as AdvancedTablePinnedRowsBoth } from './_advanced_table_pinned_rows_both.jsx'

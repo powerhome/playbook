@@ -1,0 +1,131 @@
+{
+  "defaults": {
+    "icon": "bars",
+    "size": "2x",
+    "variant": "default",
+    "htmlType": "button",
+    "newWindow": false
+  },
+  "customProps": {
+    "onClick": {
+      "type": "function",
+      "platforms": ["react"]
+    }
+  },
+  "groups": [
+    {
+      "name": "Content",
+      "props": [
+        "icon"
+      ]
+    },
+    {
+      "name": "Appearance",
+      "props": [
+        "variant",
+        "size"
+      ]
+    },
+    {
+      "name": "Action",
+      "props": [
+        "htmlType",
+        "onClick",
+        "link",
+        "target",
+        "newWindow"
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default",
+      "props": {
+        "icon": "bars",
+        "size": "2x",
+        "variant": "default"
+      }
+    },
+    {
+      "name": "Link Variant",
+      "props": {
+        "icon": "external-link-alt",
+        "size": "2x",
+        "variant": "link"
+      }
+    },
+    {
+      "name": "Small",
+      "props": {
+        "icon": "search",
+        "size": "sm",
+        "variant": "default"
+      }
+    },
+    {
+      "name": "Large",
+      "props": {
+        "icon": "plus",
+        "size": "lg",
+        "variant": "default"
+      }
+    },
+    {
+      "name": "Click Handler",
+      "props": {
+        "icon": "check",
+        "onClick": "() => alert('Clicked!')",
+        "size": "2x",
+        "variant": "default"
+      }
+    },
+    {
+      "name": "Linked Button",
+      "props": {
+        "icon": "arrow-up-right-from-square",
+        "link": "https://powerhrg.com/",
+        "newWindow": true,
+        "size": "2x",
+        "target": "_blank",
+        "variant": "default"
+      }
+    },
+    {
+      "name": "Submit",
+      "props": {
+        "htmlType": "submit",
+        "icon": "paper-plane",
+        "size": "2x",
+        "variant": "default"
+      }
+    }
+  ],
+  "conditionals": {},
+  "hints": {
+    "default": {
+      "presetName": "Default",
+      "message": "IconButton wraps a Button and renders the selected icon inside it.",
+      "type": "info"
+    },
+    "link_variant": {
+      "presetName": "Link Variant",
+      "message": "variant=\"link\" switches the icon button to the lighter link treatment.",
+      "type": "info"
+    },
+    "click_handler": {
+      "presetName": "Click Handler",
+      "message": "onClick is passed directly to the inner Button for interactive icon actions.",
+      "type": "info"
+    },
+    "linked_button": {
+      "presetName": "Linked Button",
+      "message": "Use link with target or newWindow when the icon button should navigate.",
+      "type": "info"
+    },
+    "submit": {
+      "presetName": "Submit",
+      "message": "htmlType controls the native button type for form use cases.",
+      "type": "info"
+    }
+  }
+}

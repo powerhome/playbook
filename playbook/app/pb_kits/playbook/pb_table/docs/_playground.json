@@ -18,40 +18,242 @@
   },
   "groups": [
     {
-      "name": "Props",
+      "name": "Layout",
       "props": [
-        "cardProps",
-        "collapse",
-        "container",
-        "dark",
-        "dataTable",
-        "disableHover",
-        "filterProps",
-        "filterContent",
-        "headerStyle",
-        "outerPadding",
-        "pagination",
-        "responsive",
-        "singleLine",
         "size",
+        "responsive",
+        "collapse",
+        "tag",
+        "container",
+        "outerPadding"
+      ]
+    },
+    {
+      "name": "Appearance",
+      "props": [
+        "striped",
+        "verticalBorder",
+        "singleLine",
+        "disableHover",
+        "headerStyle",
+        "dark",
+        "dataTable"
+      ]
+    },
+    {
+      "name": "Sticky Columns",
+      "props": [
         "sticky",
         "stickyLeftColumn",
-        "stickyRightColumn",
-        "striped",
-        "tag",
-        "title",
-        "titleProps",
+        "stickyRightColumn"
+      ]
+    },
+    {
+      "name": "Filter Variant",
+      "props": [
         "variant",
-        "verticalBorder"
+        "title",
+        "filterContent",
+        "filterProps",
+        "pagination",
+        "cardProps",
+        "titleProps"
       ]
     }
   ],
   "presets": [
     {
-      "name": "Default",
-      "props": {}
+      "name": "Subcomponents",
+      "structureMode": "subcomponents",
+      "props": {
+        "size": "sm",
+        "responsive": "collapse"
+      },
+      "children": "<Table.Head>\n  <Table.Row>\n    <Table.Header text=\"Territory ID\" />\n    <Table.Header text=\"Name\" />\n    <Table.Header text=\"Status\" />\n    <Table.Header text=\"Start Date\" textAlign=\"right\" />\n  </Table.Row>\n</Table.Head>\n<Table.Body>\n  <Table.Row>\n    <Table.Cell text=\"1001\" numberSpacing=\"tabular\" />\n    <Table.Cell text=\"Ada Lovelace\" />\n    <Table.Cell text=\"Active\" />\n    <Table.Cell text=\"Apr 9, 2026\" textAlign=\"right\" />\n  </Table.Row>\n  <Table.Row>\n    <Table.Cell text=\"1002\" numberSpacing=\"tabular\" />\n    <Table.Cell text=\"Grace Hopper\" />\n    <Table.Cell text=\"Pending\" />\n    <Table.Cell text=\"Apr 10, 2026\" textAlign=\"right\" />\n  </Table.Row>\n  <Table.Row>\n    <Table.Cell text=\"1003\" numberSpacing=\"tabular\" />\n    <Table.Cell text=\"Katherine Johnson\" />\n    <Table.Cell text=\"Active\" />\n    <Table.Cell text=\"Apr 11, 2026\" textAlign=\"right\" />\n  </Table.Row>\n</Table.Body>"
+    },
+    {
+      "name": "Wrapper",
+      "structureMode": "wrapper",
+      "props": {
+        "size": "md",
+        "striped": true,
+        "verticalBorder": true,
+        "outerPadding": "sm"
+      },
+      "children": "<Table.Head>\n  <Table.Row>\n    <Table.Header text=\"Territory ID\" />\n    <Table.Header text=\"Name\" />\n    <Table.Header text=\"Status\" />\n    <Table.Header text=\"Start Date\" textAlign=\"right\" />\n  </Table.Row>\n</Table.Head>\n<Table.Body>\n  <Table.Row>\n    <Table.Cell text=\"1001\" numberSpacing=\"tabular\" />\n    <Table.Cell text=\"Ada Lovelace\" />\n    <Table.Cell text=\"Active\" />\n    <Table.Cell text=\"Apr 9, 2026\" textAlign=\"right\" />\n  </Table.Row>\n  <Table.Row>\n    <Table.Cell text=\"1002\" numberSpacing=\"tabular\" />\n    <Table.Cell text=\"Grace Hopper\" />\n    <Table.Cell text=\"Pending\" />\n    <Table.Cell text=\"Apr 10, 2026\" textAlign=\"right\" />\n  </Table.Row>\n</Table.Body>"
+    },
+    {
+      "name": "Div Tags",
+      "structureMode": "subcomponents",
+      "props": {
+        "tag": "div",
+        "container": false
+      },
+      "children": "<Table.Head tag=\"div\">\n  <Table.Row tag=\"div\">\n    <Table.Header tag=\"div\" text=\"Territory ID\" />\n    <Table.Header tag=\"div\" text=\"Name\" />\n    <Table.Header tag=\"div\" text=\"Status\" />\n    <Table.Header tag=\"div\" text=\"Start Date\" textAlign=\"right\" />\n  </Table.Row>\n</Table.Head>\n<Table.Body tag=\"div\">\n  <Table.Row tag=\"div\">\n    <Table.Cell tag=\"div\" text=\"1001\" numberSpacing=\"tabular\" />\n    <Table.Cell tag=\"div\" text=\"Ada Lovelace\" />\n    <Table.Cell tag=\"div\" text=\"Active\" />\n    <Table.Cell tag=\"div\" text=\"Apr 9, 2026\" textAlign=\"right\" />\n  </Table.Row>\n  <Table.Row tag=\"div\">\n    <Table.Cell tag=\"div\" text=\"1002\" numberSpacing=\"tabular\" />\n    <Table.Cell tag=\"div\" text=\"Grace Hopper\" />\n    <Table.Cell tag=\"div\" text=\"Pending\" />\n    <Table.Cell tag=\"div\" text=\"Apr 10, 2026\" textAlign=\"right\" />\n  </Table.Row>\n</Table.Body>"
+    },
+    {
+      "name": "Sticky Columns",
+      "structureMode": "subcomponents",
+      "props": {
+        "responsive": "scroll",
+        "sticky": true,
+        "stickyLeftColumn": [
+          "territory"
+        ],
+        "stickyRightColumn": [
+          "started"
+        ]
+      },
+      "children": "<Table.Head>\n  <Table.Row>\n    <Table.Header data={{ \"sticky-id\": \"territory\" }} text=\"Territory ID\" />\n    <Table.Header text=\"Name\" />\n    <Table.Header text=\"Status\" />\n    <Table.Header data={{ \"sticky-id\": \"started\" }} text=\"Start Date\" textAlign=\"right\" />\n  </Table.Row>\n</Table.Head>\n<Table.Body>\n  <Table.Row>\n    <Table.Cell data={{ \"sticky-id\": \"territory\" }} text=\"1001\" numberSpacing=\"tabular\" />\n    <Table.Cell text=\"Ada Lovelace\" />\n    <Table.Cell text=\"Active\" />\n    <Table.Cell data={{ \"sticky-id\": \"started\" }} text=\"Apr 9, 2026\" textAlign=\"right\" />\n  </Table.Row>\n  <Table.Row>\n    <Table.Cell data={{ \"sticky-id\": \"territory\" }} text=\"1002\" numberSpacing=\"tabular\" />\n    <Table.Cell text=\"Grace Hopper\" />\n    <Table.Cell text=\"Pending\" />\n    <Table.Cell data={{ \"sticky-id\": \"started\" }} text=\"Apr 10, 2026\" textAlign=\"right\" />\n  </Table.Row>\n  <Table.Row>\n    <Table.Cell data={{ \"sticky-id\": \"territory\" }} text=\"1003\" numberSpacing=\"tabular\" />\n    <Table.Cell text=\"Katherine Johnson\" />\n    <Table.Cell text=\"Active\" />\n    <Table.Cell data={{ \"sticky-id\": \"started\" }} text=\"Apr 11, 2026\" textAlign=\"right\" />\n  </Table.Row>\n</Table.Body>"
+    },
+    {
+      "name": "Collapsible Rows",
+      "structureMode": "subcomponents",
+      "props": {
+        "size": "sm"
+      },
+      "children": "<Table.Head>\n  <Table.Row>\n    <Table.Header text=\"Project\" />\n    <Table.Header text=\"Owner\" />\n    <Table.Header text=\"Status\" />\n    <Table.Header text=\"\" />\n  </Table.Row>\n</Table.Head>\n<Table.Body>\n  <Table.Row\n      collapsible\n      collapsibleContent={<Card padding=\"sm\"><Body text=\"Launch plan details\" /></Card>}\n      sideHighlightColor=\"primary\"\n  >\n    <Table.Cell text=\"Launch plan\" />\n    <Table.Cell text=\"Ada Lovelace\" />\n    <Table.Cell text=\"Active\" />\n    <Table.Cell text=\"Details\" textAlign=\"right\" />\n  </Table.Row>\n  <Table.Row\n      collapsible\n      collapsibleContent={<Card padding=\"sm\"><Body text=\"Migration details\" /></Card>}\n      sideHighlightColor=\"info\"\n  >\n    <Table.Cell text=\"Migration\" />\n    <Table.Cell text=\"Grace Hopper\" />\n    <Table.Cell text=\"Pending\" />\n    <Table.Cell text=\"Details\" textAlign=\"right\" />\n  </Table.Row>\n</Table.Body>"
+    },
+    {
+      "name": "Floating Header",
+      "structureMode": "subcomponents",
+      "props": {
+        "headerStyle": "floating",
+        "disableHover": true
+      },
+      "children": "<Table.Head headerStyle=\"floating\">\n  <Table.Row headerStyle=\"floating\">\n    <Table.Header headerStyle=\"floating\" text=\"Territory ID\" />\n    <Table.Header headerStyle=\"floating\" text=\"Name\" />\n    <Table.Header headerStyle=\"floating\" text=\"Status\" />\n    <Table.Header headerStyle=\"floating\" text=\"Start Date\" textAlign=\"right\" />\n  </Table.Row>\n</Table.Head>\n<Table.Body>\n  <Table.Row>\n    <Table.Cell text=\"1001\" numberSpacing=\"tabular\" />\n    <Table.Cell text=\"Ada Lovelace\" />\n    <Table.Cell text=\"Active\" />\n    <Table.Cell text=\"Apr 9, 2026\" textAlign=\"right\" />\n  </Table.Row>\n  <Table.Row>\n    <Table.Cell text=\"1002\" numberSpacing=\"tabular\" />\n    <Table.Cell text=\"Grace Hopper\" />\n    <Table.Cell text=\"Pending\" />\n    <Table.Cell text=\"Apr 10, 2026\" textAlign=\"right\" />\n  </Table.Row>\n</Table.Body>"
+    },
+    {
+      "name": "With Filter",
+      "structureMode": "filter_wrapper",
+      "props": {
+        "variant": "withFilter",
+        "title": "Team Members",
+        "filterContent": "({ closePopover }) => (<><TextInput label=\"Territory ID\" /><Button onClick={closePopover} text=\"Apply\" /></>)",
+        "filterProps": {
+          "results": 24,
+          "sortOptions": {
+            "territory_id": "Territory ID",
+            "name": "Name",
+            "started_on": "Start Date"
+          },
+          "sortValue": [
+            {
+              "name": "started_on",
+              "dir": "asc"
+            }
+          ]
+        },
+        "pagination": "<Pagination current={1} marginLeft=\"lg\" paddingY=\"xs\" range={5} total={10} />",
+        "cardProps": {
+          "padding": "none"
+        },
+        "titleProps": {
+          "size": 3
+        }
+      },
+      "children": "<Table.Head>\n  <Table.Row>\n    <Table.Header text=\"Territory ID\" />\n    <Table.Header text=\"Name\" />\n    <Table.Header text=\"Title\" />\n    <Table.Header text=\"Start Date\" textAlign=\"right\" />\n  </Table.Row>\n</Table.Head>\n<Table.Body>\n  <Table.Row>\n    <Table.Cell text=\"1001\" numberSpacing=\"tabular\" />\n    <Table.Cell text=\"Ada Lovelace\" />\n    <Table.Cell text=\"Engineer\" />\n    <Table.Cell text=\"Apr 9, 2026\" textAlign=\"right\" />\n  </Table.Row>\n  <Table.Row>\n    <Table.Cell text=\"1002\" numberSpacing=\"tabular\" />\n    <Table.Cell text=\"Grace Hopper\" />\n    <Table.Cell text=\"Manager\" />\n    <Table.Cell text=\"Apr 10, 2026\" textAlign=\"right\" />\n  </Table.Row>\n</Table.Body>"
     }
   ],
-  "conditionals": {},
-  "hints": {}
+  "conditionals": {
+    "collapse": {
+      "requires": {
+        "responsive": "collapse"
+      }
+    },
+    "filterContent": {
+      "requires": {
+        "variant": "withFilter"
+      }
+    },
+    "filterProps": {
+      "requires": {
+        "variant": "withFilter"
+      }
+    },
+    "pagination": {
+      "requires": {
+        "variant": "withFilter"
+      }
+    },
+    "cardProps": {
+      "requires": {
+        "variant": "withFilter"
+      }
+    },
+    "titleProps": {
+      "requires": {
+        "variant": "withFilter"
+      }
+    }
+  },
+  "hints": {
+    "subcomponents": {
+      "presetName": "Subcomponents",
+      "message": "Subcomponents keeps the full table markup editable in children, including all rows and cells.",
+      "type": "info"
+    },
+    "wrapper": {
+      "presetName": "Wrapper",
+      "message": "Wrapper uses the same editable children area with wrapper-level table props.",
+      "type": "info"
+    },
+    "div_tags": {
+      "presetName": "Div Tags",
+      "message": "Div Tags switches the table and every subcomponent in children to tag=\"div\" together.",
+      "type": "info"
+    },
+    "sticky_columns": {
+      "presetName": "Sticky Columns",
+      "message": "Sticky Columns applies matching data-sticky-id values to the header and every row cell in the editable table.",
+      "type": "info"
+    },
+    "collapsible_rows": {
+      "presetName": "Collapsible Rows",
+      "message": "Collapsible Rows keeps collapsible row content in children so each row can be edited directly.",
+      "type": "info"
+    },
+    "floating_header": {
+      "presetName": "Floating Header",
+      "message": "Floating Header applies the floating header style in both table props and editable header children.",
+      "type": "info"
+    },
+    "with_filter": {
+      "presetName": "With Filter",
+      "message": "With Filter shows the withFilter wrapper while keeping all table children editable.",
+      "type": "info"
+    }
+  },
+  "structureModes": {
+    "default": "subcomponents",
+    "modes": {
+      "subcomponents": {
+        "label": "Subcomponents",
+        "template": "<Table{{props}}>\n{{children}}\n</Table>",
+        "children": "<Table.Head>\n  <Table.Row>\n    <Table.Header text=\"Territory ID\" />\n    <Table.Header text=\"Name\" />\n    <Table.Header text=\"Status\" />\n    <Table.Header text=\"Start Date\" textAlign=\"right\" />\n  </Table.Row>\n</Table.Head>\n<Table.Body>\n  <Table.Row>\n    <Table.Cell text=\"1001\" numberSpacing=\"tabular\" />\n    <Table.Cell text=\"Ada Lovelace\" />\n    <Table.Cell text=\"Active\" />\n    <Table.Cell text=\"Apr 9, 2026\" textAlign=\"right\" />\n  </Table.Row>\n  <Table.Row>\n    <Table.Cell text=\"1002\" numberSpacing=\"tabular\" />\n    <Table.Cell text=\"Grace Hopper\" />\n    <Table.Cell text=\"Pending\" />\n    <Table.Cell text=\"Apr 10, 2026\" textAlign=\"right\" />\n  </Table.Row>\n  <Table.Row>\n    <Table.Cell text=\"1003\" numberSpacing=\"tabular\" />\n    <Table.Cell text=\"Katherine Johnson\" />\n    <Table.Cell text=\"Active\" />\n    <Table.Cell text=\"Apr 11, 2026\" textAlign=\"right\" />\n  </Table.Row>\n</Table.Body>"
+      },
+      "wrapper": {
+        "label": "Wrapper",
+        "template": "<Table{{props}}>\n{{children}}\n</Table>",
+        "children": "<Table.Head>\n  <Table.Row>\n    <Table.Header text=\"Territory ID\" />\n    <Table.Header text=\"Name\" />\n    <Table.Header text=\"Status\" />\n    <Table.Header text=\"Start Date\" textAlign=\"right\" />\n  </Table.Row>\n</Table.Head>\n<Table.Body>\n  <Table.Row>\n    <Table.Cell text=\"1001\" numberSpacing=\"tabular\" />\n    <Table.Cell text=\"Ada Lovelace\" />\n    <Table.Cell text=\"Active\" />\n    <Table.Cell text=\"Apr 9, 2026\" textAlign=\"right\" />\n  </Table.Row>\n  <Table.Row>\n    <Table.Cell text=\"1002\" numberSpacing=\"tabular\" />\n    <Table.Cell text=\"Grace Hopper\" />\n    <Table.Cell text=\"Pending\" />\n    <Table.Cell text=\"Apr 10, 2026\" textAlign=\"right\" />\n  </Table.Row>\n</Table.Body>"
+      },
+      "filter_wrapper": {
+        "label": "Filter wrapper",
+        "template": "<Table{{props}}>\n{{children}}\n</Table>",
+        "children": "<Table.Head>\n  <Table.Row>\n    <Table.Header text=\"Territory ID\" />\n    <Table.Header text=\"Name\" />\n    <Table.Header text=\"Title\" />\n    <Table.Header text=\"Start Date\" textAlign=\"right\" />\n  </Table.Row>\n</Table.Head>\n<Table.Body>\n  <Table.Row>\n    <Table.Cell text=\"1001\" numberSpacing=\"tabular\" />\n    <Table.Cell text=\"Ada Lovelace\" />\n    <Table.Cell text=\"Engineer\" />\n    <Table.Cell text=\"Apr 9, 2026\" textAlign=\"right\" />\n  </Table.Row>\n  <Table.Row>\n    <Table.Cell text=\"1002\" numberSpacing=\"tabular\" />\n    <Table.Cell text=\"Grace Hopper\" />\n    <Table.Cell text=\"Manager\" />\n    <Table.Cell text=\"Apr 10, 2026\" textAlign=\"right\" />\n  </Table.Row>\n</Table.Body>"
+      }
+    }
+  },
+  "children": {
+    "editable": true,
+    "default": "<Table.Head>\n  <Table.Row>\n    <Table.Header text=\"Territory ID\" />\n    <Table.Header text=\"Name\" />\n    <Table.Header text=\"Status\" />\n    <Table.Header text=\"Start Date\" textAlign=\"right\" />\n  </Table.Row>\n</Table.Head>\n<Table.Body>\n  <Table.Row>\n    <Table.Cell text=\"1001\" numberSpacing=\"tabular\" />\n    <Table.Cell text=\"Ada Lovelace\" />\n    <Table.Cell text=\"Active\" />\n    <Table.Cell text=\"Apr 9, 2026\" textAlign=\"right\" />\n  </Table.Row>\n  <Table.Row>\n    <Table.Cell text=\"1002\" numberSpacing=\"tabular\" />\n    <Table.Cell text=\"Grace Hopper\" />\n    <Table.Cell text=\"Pending\" />\n    <Table.Cell text=\"Apr 10, 2026\" textAlign=\"right\" />\n  </Table.Row>\n</Table.Body>"
+  },
+  "customProps": {
+    "filterContent": {
+      "type": "function",
+      "platforms": [
+        "react"
+      ]
+    }
+  }
 }

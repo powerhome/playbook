@@ -1,5 +1,11 @@
-import { useEffect, useMemo, useRef, useState, type CSSProperties } from "react";
-import { Flex, Layout, SectionSeparator } from "playbook-ui";
+import {
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  type CSSProperties,
+} from "react";
+import { Flex, Icon, Layout, SectionSeparator, Body } from "playbook-ui";
 import Sidebar from "./src/layouts/Sidebar";
 import LayoutRight from "./src/layouts/LayoutRight";
 import Header from "./src/layouts/Header";
@@ -8,27 +14,34 @@ import { PlatformToggle } from "./src/components/PlatformToggle";
 import { useLoaderData, useLocation, useNavigate } from "react-router-dom";
 import { PlatformContext } from "./src/contexts/PlatformContext";
 import { DarkModeProvider, useDarkMode } from "./src/contexts/DarkModeContext";
+import {
+  DEFAULT_PLATFORM,
+  resolvePlatform,
+  syncStoredPlatformFromLocation,
+  writeStoredPlatform,
+} from "./src/helpers/platform";
 
 function WebsiteContent() {
-  const { 
-    kits, 
-    type, 
-    kit, 
-    kits_with_status, 
-    PBversion, 
-    search_list, 
-    getting_started, 
-    design_guidelines, 
-    icons, 
+  const {
+    kits,
+    type,
+    kit,
+    kits_with_status,
+    PBversion,
+    search_list,
+    getting_started,
+    design_guidelines,
+    icons,
     whats_new,
     category,
-    global_props_and_tokens
+    global_props_and_tokens,
   }: any = useLoaderData();
   const location = useLocation();
   const navigate = useNavigate();
   const { darkMode } = useDarkMode();
 
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
+  const [desktopSidebarCollapsed, setDesktopSidebarCollapsed] = useState(false);
   const [headerHeight, setHeaderHeight] = useState(89);
 
   // Close sidebar on route change
@@ -44,14 +57,18 @@ function WebsiteContent() {
     if (!headerElement) return;
 
     const measureHeader = () => {
-      const nextHeight = Math.round(headerElement.getBoundingClientRect().height);
+      const nextHeight = Math.round(
+        headerElement.getBoundingClientRect().height,
+      );
       setHeaderHeight(nextHeight || 89);
     };
 
     measureHeader();
 
     const observer =
-      typeof ResizeObserver !== "undefined" ? new ResizeObserver(measureHeader) : null;
+      typeof ResizeObserver !== "undefined"
+        ? new ResizeObserver(measureHeader)
+        : null;
 
     observer?.observe(headerElement);
     window.addEventListener("resize", measureHeader);
@@ -66,19 +83,29 @@ function WebsiteContent() {
     "--website-header-height": `${headerHeight}px`,
   } as CSSProperties;
 
-  const platform = useMemo(() => {
-    const pathPlatform = normalizedPath.match(/\/(react|rails|swift)$/)?.[1];
-    const queryPlatform = new URLSearchParams(location.search).get("type");
-    return pathPlatform || queryPlatform || type || "react";
-  }, [normalizedPath, location.search, type]);
+  const platform = useMemo(
+    () => resolvePlatform(normalizedPath, location.search, type),
+    [normalizedPath, location.search, type],
+  );
+
+  // Keep preference in sync when the URL explicitly sets a platform
+  useEffect(() => {
+    syncStoredPlatformFromLocation(normalizedPath, location.search);
+  }, [normalizedPath, location.search]);
 
   const handlePlatformChange = (nextPlatform: string) => {
+    writeStoredPlatform(nextPlatform);
+
     const isKitDetailRoute =
-      /^\/kits\/advanced_table\/[^/]+\/(react|rails|swift)$/.test(normalizedPath) ||
-      /^\/kits\/[^/]+\/(react|rails|swift)$/.test(normalizedPath);
+      /^\/kits\/advanced_table\/[^/]+\/(react|rails|swift)$/.test(
+        normalizedPath,
+      ) || /^\/kits\/[^/]+\/(react|rails|swift)$/.test(normalizedPath);
 
     if (isKitDetailRoute) {
-      const nextPath = normalizedPath.replace(/\/(react|rails|swift)$/, `/${nextPlatform}`);
+      const nextPath = normalizedPath.replace(
+        /\/(react|rails|swift)$/,
+        `/${nextPlatform}`,
+      );
       if (nextPath !== normalizedPath) {
         navigate(`${nextPath}${location.search}${location.hash}`);
       }
@@ -86,7 +113,8 @@ function WebsiteContent() {
     }
 
     const isCategoryOrKitsIndex =
-      normalizedPath === "/kits" || /^\/kit_category\/[^/]+$/.test(normalizedPath);
+      normalizedPath === "/kits" ||
+      /^\/kit_category\/[^/]+$/.test(normalizedPath);
 
     if (isCategoryOrKitsIndex) {
       const params = new URLSearchParams(location.search);
@@ -95,16 +123,19 @@ function WebsiteContent() {
     }
   };
 
-  const isKitShowPage = /^\/kits\/[^/]+\/(react|rails|swift)$/.test(normalizedPath) ||
+  const isKitShowPage =
+    /^\/kits\/[^/]+\/(react|rails|swift)$/.test(normalizedPath) ||
     /^\/kits\/advanced_table\/[^/]+\/(react|rails|swift)$/.test(normalizedPath);
   const isKitsPage = normalizedPath === "/kits";
   const isKitsCategoryPage = /^\/kit_category\/[^/]+$/.test(normalizedPath);
   const showPlatformToggle = isKitsPage || isKitsCategoryPage || isKitShowPage;
 
   return (
-    <PlatformContext.Provider value={{ platform, setPlatform: handlePlatformChange }}>
+    <PlatformContext.Provider
+      value={{ platform, setPlatform: handlePlatformChange }}
+    >
       <div
-        className={`pb--website-shell ${darkMode ? "dark" : ""}`.trim()}
+        className={`pb--website-shell ${darkMode ? "dark" : ""} ${desktopSidebarCollapsed ? "sidebar-collapsed" : ""}`.trim()}
         style={websiteStyle}
       >
         <MobileNav />
@@ -112,25 +143,41 @@ function WebsiteContent() {
           <Flex
             align="center"
             dark={darkMode}
-            display={{ xs: "flex", sm: "flex", md: "flex", lg: "none", xl: "none" }}
+            display={{
+              xs: "flex",
+              sm: "flex",
+              md: "flex",
+              lg: "none",
+              xl: "none",
+            }}
             paddingX="sm"
             paddingY="xs"
           >
-            <PlatformToggle platform={platform} setPlatform={handlePlatformChange} />
+            <PlatformToggle
+              platform={platform}
+              setPlatform={handlePlatformChange}
+            />
           </Flex>
         )}
         <SectionSeparator
           dark={darkMode}
-          display={{ xs: "block", sm: "block", md: "block", lg: "none", xl: "none" }}
+          display={{
+            xs: "block",
+            sm: "block",
+            md: "block",
+            lg: "none",
+            xl: "none",
+          }}
           width="100%"
         />
         <div ref={headerRef}>
-          <Header 
+          <Header
             PBversion={PBversion || "Latest"}
             search_list={search_list || []}
             global_props_and_tokens={global_props_and_tokens || []}
             platform={platform}
             setPlatform={handlePlatformChange}
+            sidebarCollapsed={desktopSidebarCollapsed}
           />
         </div>
         <Layout
@@ -138,7 +185,7 @@ function WebsiteContent() {
           collapse="lg"
           dark={darkMode}
         >
-          <MobileHamburger 
+          <MobileHamburger
             isOpen={mobileNavOpen}
             onToggle={() => setMobileNavOpen(!mobileNavOpen)}
           />
@@ -152,10 +199,13 @@ function WebsiteContent() {
               }}
             />
           )}
-          <Layout.Side className={`pb--page--sideNav ${darkMode ? 'dark' : ''} ${mobileNavOpen ? 'mobile-open' : ''}`.trim()}>
+          <Layout.Side
+            className={`pb--page--sideNav ${darkMode ? "dark" : ""} ${mobileNavOpen ? "mobile-open" : ""} ${desktopSidebarCollapsed ? "is-collapsed" : ""}`.trim()}
+          >
             <Sidebar
               dark={darkMode}
-              type={platform || "react"}
+              collapsed={desktopSidebarCollapsed}
+              type={platform || DEFAULT_PLATFORM}
               category={category}
               kit={kit}
               kits_with_status={kits_with_status || kits}
@@ -166,6 +216,30 @@ function WebsiteContent() {
               whats_new={whats_new || { pages: [] }}
               beta={true}
             />
+            <button
+              aria-label={
+                desktopSidebarCollapsed ? "Expand sidebar" : "Collapse sidebar"
+              }
+              className="pb--page--sideNav-toggle"
+              onClick={() =>
+                setDesktopSidebarCollapsed((collapsed) => !collapsed)
+              }
+              type="button"
+            >
+              <Icon
+                color="light"
+                icon={
+                  desktopSidebarCollapsed
+                    ? "angle-double-right"
+                    : "angle-double-left"
+                }
+              />
+              <Body
+                marginLeft="xs"
+                color="lighter"
+                text={desktopSidebarCollapsed ? "" : "Collapse sidebar"}
+              />
+            </button>
           </Layout.Side>
           {kits.length > 0 && <LayoutRight />}
         </Layout>

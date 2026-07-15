@@ -253,7 +253,7 @@ function parseTypeString(typeStr, imports = new Map()) {
   typeStr = typeStr.replace(/\s+/g, ' ').trim().replace(/;+\s*$/, '');
 
   // Object / record types (must run before `=>` — object shapes may contain callbacks)
-  if (typeStr.startsWith('{')) {
+  if (typeStr.startsWith('{') || typeStr.startsWith('Record<')) {
     return { type: 'GenericObject' };
   }
 
@@ -275,14 +275,19 @@ function parseTypeString(typeStr, imports = new Map()) {
 
   // Primitives
   if (['string', 'number', 'boolean'].includes(typeStr)) return { type: typeStr };
-  
-  // React types
-  if (/React|Node|Element/.test(typeStr)) return { type: 'ReactNode' };
-  
-  // Functions
-  if (typeStr.includes('=>') || typeStr.startsWith('(') || typeStr.includes('Handler')) {
+
+  // Functions (before React types — callbacks often use React.FormEvent, etc.)
+  if (
+    typeStr.includes('=>') ||
+    typeStr.startsWith('(') ||
+    typeStr.includes('Handler') ||
+    typeStr.includes('Callback')
+  ) {
     return { type: 'function' };
   }
+
+  // React types
+  if (/React|Node|Element/.test(typeStr)) return { type: 'ReactNode' };
   
   // Arrays
   if (typeStr.endsWith('[]') || typeStr.startsWith('Array')) return { type: 'array' };
@@ -381,7 +386,8 @@ function parseTypeScript(filePath) {
 
 const RUBY_TYPE_MAP = {
   Boolean: 'boolean', Number: 'number', String: 'string',
-  Enum: 'enum', Hash: 'object', Array: 'array', HashArray: 'array',
+  Numeric: 'number', Date: 'Date',
+  Enum: 'enum', Hash: 'object', HashProp: 'GenericObject', Array: 'array', HashArray: 'array', NumberArray: 'array',
 };
 
 function parseRubyArray(str) {

@@ -1,104 +1,213 @@
 {
-  "template": "<Popover{{props}}>{{children}}</Popover>",
+  "template": "<PbReactPopover\n      reference={popoverReference}\n      shouldClosePopover={handleShouldClosePopover}\n      show={showPopover}{{props}}\n  >\n    {{children}}\n  </PbReactPopover>",
   "propTargets": {},
   "defaults": {
     "appendTo": "body",
-    "closeOnClick": "none",
-    "offset": false,
+    "closeOnClick": "outside",
+    "offset": true,
     "show": false,
-    "shouldClosePopover": "noop"
+    "shouldClosePopover": "noop",
+    "placement": "top"
   },
   "children": {
     "editable": true,
-    "default": "Popover body"
+    "default": "I'm a popover. I can show content of any size."
   },
   "groups": [
     {
       "name": "Behavior",
       "props": [
         "placement",
-        "show",
         "closeOnClick",
-        "reference",
-        "shouldClosePopover"
+        "offset",
+        "appendTo"
       ]
     },
     {
-      "name": "Appearance",
+      "name": "Size and Layering",
       "props": [
-        "offset",
-        "appendTo"
+        "width",
+        "maxHeight",
+        "maxWidth",
+        "zIndex"
       ]
     }
   ],
   "presets": [
     {
-      "name": "Open — top",
+      "name": "Default",
       "props": {
-        "placement": "top",
-        "show": true
+        "closeOnClick": "outside",
+        "placement": "top"
       },
-      "children": "Popover on top"
+      "children": "I'm a popover. I can show content of any size."
     },
     {
-      "name": "Open — bottom",
+      "name": "Bottom",
       "props": {
-        "placement": "bottom",
-        "show": true
+        "closeOnClick": "outside",
+        "offset": true,
+        "placement": "bottom"
       },
       "children": "Popover on bottom"
     },
     {
-      "name": "Open — left",
+      "name": "Right",
       "props": {
-        "placement": "left",
-        "show": true
-      },
-      "children": "Popover on the left"
-    },
-    {
-      "name": "Open — right",
-      "props": {
-        "placement": "right",
-        "show": true
+        "closeOnClick": "outside",
+        "offset": true,
+        "placement": "right"
       },
       "children": "Popover on the right"
     },
     {
-      "name": "Closed",
+      "name": "Right Start",
       "props": {
-        "placement": "bottom",
-        "show": false
+        "closeOnClick": "outside",
+        "offset": true,
+        "placement": "right-start"
       },
-      "children": "Trigger content"
+      "children": "Popover aligned to the start of the right side"
     },
     {
-      "name": "With offset",
+      "name": "Right End",
       "props": {
-        "placement": "bottom",
-        "show": true,
-        "offset": true
+        "closeOnClick": "outside",
+        "offset": true,
+        "placement": "right-end"
       },
-      "children": "Extra spacing from the trigger"
+      "children": "Popover aligned to the end of the right side"
     },
     {
-      "name": "Close on outside click",
+      "name": "Actionable Content",
       "props": {
-        "placement": "bottom",
-        "show": true,
-        "closeOnClick": "outside"
+        "closeOnClick": "inside",
+        "offset": true,
+        "placement": "top"
       },
-      "children": "Click outside to dismiss"
+      "children": "<Body textAlign=\"center\">\n  <Button\n      onClick={() => alert('Example action')}\n      text=\"Learn More\"\n  />\n</Body>"
+    },
+    {
+      "name": "Scrollable",
+      "props": {
+        "closeOnClick": "any",
+        "maxHeight": "150px",
+        "maxWidth": "240px",
+        "offset": true,
+        "placement": "top"
+      },
+      "children": "<Flex orientation=\"column\">\n  <Body\n      marginBottom=\"sm\"\n      text=\"Long popover content can scroll when maxHeight is set. Keep the width constrained so the popover remains readable near the trigger.\"\n  />\n  <Title\n      size={4}\n      text=\"Scrollable content\"\n  />\n</Flex>"
+    },
+    {
+      "name": "Custom Z Index",
+      "props": {
+        "closeOnClick": "outside",
+        "offset": true,
+        "placement": "top",
+        "zIndex": 3
+      },
+      "children": "I have a custom z-index of 3"
+    },
+    {
+      "name": "Append To Parent",
+      "props": {
+        "appendTo": "parent",
+        "closeOnClick": "outside",
+        "offset": true,
+        "placement": "bottom"
+      },
+      "children": "This popover is appended to the trigger parent."
     }
   ],
   "conditionals": {},
   "hints": {
-    "show_popover": {
-      "when": {
-        "show": false
-      },
-      "message": "Set show to true in the playground to render the popover content.",
+    "reference": {
+      "when": {},
+      "message": "The playground wraps Popover with local state, a CircleIconButton reference, and shouldClosePopover so closeOnClick can update the open state.",
+      "type": "info"
+    },
+    "close_inside": {
+      "presetName": "Actionable Content",
+      "message": "closeOnClick inside closes the popover after a click inside its body, which works well for button-style popovers.",
+      "type": "info"
+    },
+    "list": {
+      "presetName": "List",
+      "message": "Popover children can be composed from other kits, such as List and ListItem.",
+      "type": "info"
+    },
+    "scrollable": {
+      "presetName": "Scrollable",
+      "message": "maxHeight and maxWidth constrain large popover content and enable overflow handling.",
+      "type": "info"
+    },
+    "z_index": {
+      "presetName": "Custom Z Index",
+      "message": "zIndex is useful when a popover must sit above nearby positioned content.",
+      "type": "info"
+    },
+    "append_to_parent": {
+      "presetName": "Append To Parent",
+      "message": "appendTo can be body, parent, or a selector. Use parent when the popover should stay inside the trigger's local stacking context.",
       "type": "info"
     }
-  }
+  },
+  "wrapper": "const PopoverPlayground = () => {\n  const [showPopover, setShowPopover] = useState(true)\n\n  const handleTogglePopover = () => {\n    setShowPopover((open) => !open)\n  }\n\n  const handleShouldClosePopover = (shouldClose) => {\n    setShowPopover(!shouldClose)\n  }\n\n  const popoverReference = (\n    <CircleIconButton\n        icon=\"info\"\n        onClick={handleTogglePopover}\n        variant=\"secondary\"\n    />\n  )\n\n  return (\n    <Flex\n        justify=\"center\"\n        minHeight=\"260px\"\n        orientation=\"row\"\n        vertical=\"center\"\n        width=\"100%\"\n    >\n      {{component}}\n    </Flex>\n  )\n}\n\n<PopoverPlayground />",
+  "externalImports": [
+    "import React, { useState } from 'react'"
+  ],
+  "customProps": {
+    "placement": {
+      "type": "enum",
+      "platforms": [
+        "react"
+      ],
+      "values": [
+        "top",
+        "top-start",
+        "top-end",
+        "bottom",
+        "bottom-start",
+        "bottom-end",
+        "left",
+        "left-start",
+        "left-end",
+        "right",
+        "right-start",
+        "right-end"
+      ]
+    },
+    "width": {
+      "type": "string",
+      "platforms": [
+        "react"
+      ],
+      "default": ""
+    },
+    "maxHeight": {
+      "type": "string",
+      "platforms": [
+        "react"
+      ],
+      "default": ""
+    },
+    "maxWidth": {
+      "type": "string",
+      "platforms": [
+        "react"
+      ],
+      "default": ""
+    },
+    "zIndex": {
+      "type": "number",
+      "platforms": [
+        "react"
+      ]
+    }
+  },
+  "hiddenProps": [
+    "reference",
+    "shouldClosePopover",
+    "show"
+  ]
 }

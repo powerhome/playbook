@@ -9,6 +9,9 @@
     }
 
     &.is_touch_active {
+      user-select: none;
+      -webkit-user-select: none;
+
       .pb_draggable_handle,
       .card_draggable_handle {
         color: $text_lt_default;

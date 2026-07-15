@@ -55,7 +55,7 @@ module ApplicationHelper
         _kit_category, components = kit.first
         components.each do |component|
           name_or_parent = component[:parent].presence || component[:name]
-          status_for_type = kit_status_for_platform(component, @type || "react")
+          status_for_type = kit_status_for_platform(component, @type || "rails")
           all_kits.push(name_or_parent) if status_for_type != "beta"
         end
       else
@@ -82,7 +82,7 @@ module ApplicationHelper
             end
     {
       label: label,
-      value: if @type == "react" || @type.nil?
+      value: if @type == "react"
                "/#{kit == 'advanced_table' ? 'kit_category' : 'kits'}/#{kit}#{kit == 'advanced_table' ? '?type=react' : '/react'}"
              elsif @type == "swift"
                "/#{kit == 'advanced_table' ? 'kit_category' : 'kits'}/#{kit}/swift"

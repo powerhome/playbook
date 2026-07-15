@@ -46,6 +46,7 @@ module Playbook
           max_height_classname,
           hide_scroll_bar_class,
           hidden_action_bar_class,
+          sticky_header_class,
         ]
         additional_classes << "column-group-border-#{column_group_border_color}" if column_group_border_color != "none"
         additional_classes << "advanced-table-no-table-container" if no_table_card_container?
@@ -73,6 +74,12 @@ module Playbook
       def hidden_action_bar_class
         # Add hidden-action-bar class when action bar functionality is enabled but not currently visible
         selectable_rows && !is_action_bar_visible ? "hidden-action-bar" : ""
+      end
+
+      def sticky_header_class
+        return "" unless table_props.is_a?(Hash)
+
+        table_props[:sticky] || table_props["sticky"] ? "advanced-table-sticky-header" : ""
       end
 
       def selected_rows

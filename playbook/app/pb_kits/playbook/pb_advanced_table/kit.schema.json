@@ -274,18 +274,6 @@
         "react"
       ]
     },
-    "allowFullScreen": {
-      "type": "boolean",
-      "platforms": [
-        "react"
-      ]
-    },
-    "fullScreenControl": {
-      "type": "function",
-      "platforms": [
-        "react"
-      ]
-    },
     "enableSorting": {
       "type": "boolean",
       "platforms": [

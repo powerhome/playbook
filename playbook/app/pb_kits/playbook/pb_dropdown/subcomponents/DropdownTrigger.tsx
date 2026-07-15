@@ -46,6 +46,7 @@ const DropdownTrigger = (props: DropdownTriggerProps) => {
     autocomplete,
     blankSelection,
     clearable,
+    disabled,
     error,
     errorId,
     filterItem,
@@ -113,6 +114,9 @@ const DropdownTrigger = (props: DropdownTriggerProps) => {
   const triggerAriaLabel = contextLabel
     ? (children ? contextLabel : `${contextLabel}, ${defaultDisplayPlaceholder}`)
     : undefined;
+  const disabledTriggerProps = disabled
+    ? { "aria-disabled": true, tabIndex: -1 }
+    : { tabIndex: 0 };
 
   return (
     <div {...ariaProps} 
@@ -128,11 +132,11 @@ const DropdownTrigger = (props: DropdownTriggerProps) => {
                 aria-invalid={!!error}
                 aria-label={triggerAriaLabel}
                 id={selectId}
-                onClick={() => toggleDropdown()}
-                onKeyDown= {handleKeyDown}
+                onClick={() => !disabled && toggleDropdown()}
+                onKeyDown= {(e) => !disabled && handleKeyDown(e)}
                 ref={inputWrapperRef}
                 style={{ display: "inline-block" }}
-                tabIndex= {0}
+                {...disabledTriggerProps}
             >
               {children}
             </div>
@@ -142,15 +146,16 @@ const DropdownTrigger = (props: DropdownTriggerProps) => {
                   align="center"
                   borderRadius="lg"
                   className={triggerWrapperClasses}
-                  cursor={`${autocomplete ? "text" : "pointer"}`}
+                  cursor={disabled ? "default" : `${autocomplete ? "text" : "pointer"}`}
                   htmlOptions={{
                     "aria-describedby": errorId,
+                    "aria-disabled": disabled,
                     "aria-invalid": !!error,
                     "aria-label": triggerAriaLabel,
                     id: selectId,
-                    onClick: () => handleWrapperClick(),
-                    onKeyDown: handleKeyDown,
-                    tabIndex: "0",
+                    onClick: () => !disabled && handleWrapperClick(),
+                    onKeyDown: (e: React.KeyboardEvent) => !disabled && handleKeyDown(e),
+                    tabIndex: disabled ? "-1" : "0",
                     ref:inputWrapperRef
                   }}
                   justify="between"
@@ -182,12 +187,14 @@ const DropdownTrigger = (props: DropdownTriggerProps) => {
                         {autocomplete && (
                           <input
                               className="dropdown_input"
+                              disabled={disabled}
                               onChange={handleChange}
                               onClick={(e) => {
                                 e.stopPropagation();// keep the wrapper’s handler from firing
+                                if (disabled) return;
                                 toggleDropdown();
                               }}
-                              onFocus={() => setIsInputFocused(true)}
+                              onFocus={() => !disabled && setIsInputFocused(true)}
                               onKeyDown={(e) => {
                                  handleKeyDown(e);
                                  e.stopPropagation(); //Fixes issue with keyboard accessibility
@@ -213,12 +220,14 @@ const DropdownTrigger = (props: DropdownTriggerProps) => {
                     {autocomplete && !multiSelect && (
                       <input
                           className="dropdown_input"
+                          disabled={disabled}
                           onChange={handleChange}
                           onClick={(e) => {
                             e.stopPropagation();// keep the wrapper’s handler from firing
+                            if (disabled) return;
                             toggleDropdown();
                           }}
-                          onFocus={() => setIsInputFocused(true)}
+                          onFocus={() => !disabled && setIsInputFocused(true)}
                           onKeyDown={handleKeyDown}
                           placeholder={
                             joinedLabels
@@ -239,16 +248,16 @@ const DropdownTrigger = (props: DropdownTriggerProps) => {
                       dark={dark}
                       display="flex"
                       htmlOptions={{
-                        onClick: (e: Event) => {e.stopPropagation();handleWrapperClick()}
+                        onClick: (e: Event) => {e.stopPropagation(); !disabled && handleWrapperClick()}
                       }}
                       key={`${isDropDownClosed ? "chevron-down" : "chevron-up"}`}
                   >
                     {(!blankSelection || selected?.value !== optionsWithBlankSelection?.[0]?.value) && (
                       <>
                         {clearable !== false && selectedArray.length > 0 && (
-                          <div onClick={(e)=>{e.stopPropagation();handleBackspace()}}>
+                          <div onClick={(e)=>{e.stopPropagation(); !disabled && handleBackspace()}}>
                             <Icon
-                                cursor="pointer"
+                                cursor={disabled ? "default" : "pointer"}
                                 dark={dark}
                                 icon="times"
                                 paddingRight="xs"
@@ -259,7 +268,7 @@ const DropdownTrigger = (props: DropdownTriggerProps) => {
                       </>
                     )}
                     <Icon
-                        cursor="pointer"
+                        cursor={disabled ? "default" : "pointer"}
                         dark={dark}
                         icon={`${isDropDownClosed ? "chevron-down" : "chevron-up"}`}
                         size="sm"

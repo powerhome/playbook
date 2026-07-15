@@ -1,0 +1,8 @@
+@import "playbook-tokens/spacing";
+
+.worldcup-page {
+  &__bracket {
+    overflow-x: auto;
+    padding: 0 $space_md $space_lg;
+  }
+}

@@ -2,25 +2,78 @@
   "template": "<Legend{{props}} />",
   "propTargets": {},
   "defaults": {
-    "color": "data_1"
+    "color": "data_1",
+    "text": "Revenue",
+    "dark": false
   },
   "groups": [
     {
-      "name": "Props",
+      "name": "Content",
+      "props": [
+        "text",
+        "prefixText"
+      ]
+    },
+    {
+      "name": "Appearance",
       "props": [
         "color",
-        "dark",
-        "prefixText",
-        "text"
+        "dark"
       ]
     }
   ],
   "presets": [
     {
       "name": "Default",
-      "props": {}
+      "props": {
+        "text": "Revenue",
+        "color": "data_1"
+      }
+    },
+    {
+      "name": "With Prefix",
+      "props": {
+        "prefixText": "2026",
+        "text": "Revenue",
+        "color": "data_2"
+      }
+    },
+    {
+      "name": "Product Color",
+      "props": {
+        "text": "Roofing",
+        "color": "product_5_background"
+      }
+    },
+    {
+      "name": "Custom Hex",
+      "props": {
+        "text": "Custom segment",
+        "color": "#7b61ff"
+      }
     }
   ],
   "conditionals": {},
-  "hints": {}
+  "hints": {
+    "default": {
+      "presetName": "Default",
+      "message": "Use the color, prefixText, and text props to render a legend.",
+      "type": "info"
+    },
+    "with_prefix": {
+      "presetName": "With Prefix",
+      "message": "Use the prefixText prop to emphasize the prefix text before the main legend text.",
+      "type": "info"
+    },
+    "custom_hex": {
+      "presetName": "Custom Hex",
+      "message": "Use the color prop to pass a hex color instead of a Playbook color class.",
+      "type": "info"
+    },
+    "product_color": {
+      "presetName": "Product Color",
+      "message": "Use the color prop to change the color of the legend.",
+      "type": "info"
+    }
+  }
 }

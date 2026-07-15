@@ -42,6 +42,7 @@ const DropdownOption = (props: DropdownOptionProps) => {
 
   const {
     activeStyle,
+    disabled,
     filteredOptions,
     filterItem,
     focusedOptionIndex,
@@ -60,13 +61,17 @@ const DropdownOption = (props: DropdownOptionProps) => {
    ? selected.some((item) => item.label === option?.label)
    : (selected as GenericObject)?.label === option?.label;
 
+
+  const isOptionDisabled = option?.disabled === true;
+  const isDisabled = disabled || isOptionDisabled;
+
   if (!isItemMatchingFilter(option) || (multiSelect && isSelected)) {
     return null;
   }
   const isFocused =
     focusedOptionIndex >= 0 &&
     filteredOptions[focusedOptionIndex].label === option?.label;
-  const focusedClass = isFocused && "focused";
+  const focusedClass = isFocused ? "focused" : "";
 
   const selectedClass = isSelected ? "selected" : "list";
 
@@ -87,10 +92,15 @@ const DropdownOption = (props: DropdownOptionProps) => {
       selectedClass,
       focusedClass,
     ),
+    isDisabled && "disabled",
     bgTokenClass, 
     fontTokenClass,
     globalProps(props),
     className
+  );
+  const optionWrapperClass = classnames(
+    "dropdown_option_wrapper",
+    isDisabled && "disabled"
   );
 
   return (
@@ -98,20 +108,21 @@ const DropdownOption = (props: DropdownOptionProps) => {
         {...ariaProps}
         {...dataProps}
         {...htmlProps}
+        aria-disabled={isDisabled}
         className={classes}
         id={id}
         key={key}
-        onClick= {() => handleOptionClick(option)}
+        onClick={isDisabled ? undefined : () => handleOptionClick(option)}
     >
       <ListItem
-          cursor="pointer"
+          cursor={disabled ? "default" : "pointer"}
           dark={dark}
           data-name={option?.value}
           key={option?.label}
           padding="none"
       >
           {children ? 
-          <div className="dropdown_option_wrapper">{children}</div> :
+          <div className={optionWrapperClass}>{children}</div> :
               <Body dark={dark} 
                   text={option?.label} 
               />

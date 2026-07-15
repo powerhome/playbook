@@ -100,6 +100,8 @@ export default class PbDraggable extends PbEnhancedElement {
   bindTouchDragForItem(item) {
     const handle = item.querySelector(DRAG_HANDLE_SELECTOR);
     const dragTarget = handle || item;
+    const isWithinThisDraggable = (element) =>
+      element && this.element.contains(element);
     const state = {
       active: false,
       dragging: false,
@@ -154,6 +156,8 @@ export default class PbDraggable extends PbEnhancedElement {
       event.preventDefault();
 
       const elementBelow = document.elementFromPoint(touch.clientX, touch.clientY);
+      if (!isWithinThisDraggable(elementBelow)) return;
+
       const targetItem = elementBelow?.closest(".pb_draggable_item");
       const targetDragId = getDragIdFromElement(elementBelow);
 
@@ -165,7 +169,7 @@ export default class PbDraggable extends PbEnhancedElement {
       const targetContainer = getContainerFromElement(elementBelow);
       if (targetContainer) {
         const containerElement = elementBelow.closest(DRAGGABLE_CONTAINER);
-        if (containerElement) {
+        if (containerElement && isWithinThisDraggable(containerElement)) {
           this.handleDragOver(pointerEventFromTouch(touch, containerElement));
         }
       }
@@ -175,10 +179,13 @@ export default class PbDraggable extends PbEnhancedElement {
       if (!state.active) return;
 
       if (state.dragging && touch) {
+        const sourceContainer = item.closest(DRAGGABLE_CONTAINER);
         const elementBelow = document.elementFromPoint(touch.clientX, touch.clientY);
-        const containerElement = elementBelow?.closest(DRAGGABLE_CONTAINER);
+        const containerElement = isWithinThisDraggable(elementBelow)
+          ? elementBelow?.closest(DRAGGABLE_CONTAINER)
+          : sourceContainer;
 
-        if (containerElement) {
+        if (containerElement && isWithinThisDraggable(containerElement)) {
           this.handleDrop(pointerEventFromTouch(touch, containerElement));
         }
 

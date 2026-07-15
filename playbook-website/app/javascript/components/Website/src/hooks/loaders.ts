@@ -103,3 +103,13 @@ export const IconsLoader = async () => {
   iconsCache = data;
   return data;
 };
+
+let playgroundCache: any = null;
+
+export const PlaygroundLoader = async () => {
+  if (playgroundCache) return playgroundCache;
+  const response = await fetch("/playground.json");
+  const data = await response.json();
+  playgroundCache = data;
+  return data;
+};

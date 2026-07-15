@@ -131,7 +131,7 @@
       ]
     },
     "inputOnChange": {
-      "type": "ReactNode",
+      "type": "function",
       "platforms": [
         "react"
       ]

@@ -1,33 +1,58 @@
 {
   "template": "<Nav{{props}}>{{children}}</Nav>",
-  "propTargets": {},
+  "propTargets": {
+    "text": "NavItem.props",
+    "active": "NavItem.props",
+    "disabled": "NavItem.props",
+    "iconLeft": "NavItem.props",
+    "iconRight": "NavItem.props",
+    "imageUrl": "NavItem.props",
+    "target": "NavItem.props",
+    "fontSize": "NavItem.props",
+    "fontWeight": "NavItem.props",
+    "collapsible": "NavItem.props",
+    "collapsed": "NavItem.props",
+    "collapsibleTrail": "NavItem.props",
+    "highlighted_border": "NavItem.props",
+    "margin": "NavItem.props",
+    "marginY": "NavItem.props",
+    "paddingY": "NavItem.props"
+  },
   "defaults": {
     "borderless": false,
     "extendedUnderline": false,
     "highlight": true,
     "orientation": "vertical",
     "link": "#",
-    "variant": "normal"
+    "variant": "normal",
+    "active": false,
+    "disabled": false,
+    "collapsible": false,
+    "collapsed": true,
+    "collapsibleTrail": false,
+    "highlighted_border": true
   },
   "children": {
     "editable": true,
-    "default": "Nav content"
+    "default": "<NavItem link=\"#\" text=\"Photos\" />\n<NavItem link=\"#\" text=\"Music\" />\n<NavItem active link=\"#\" text=\"Video\" />\n<NavItem link=\"#\" text=\"Files\" />",
+    "propInjection": {
+      "component": "NavItem",
+      "propTarget": "NavItem.props",
+      "structureModes": [
+        "standard"
+      ]
+    }
   },
   "groups": [
     {
-      "name": "Content",
+      "name": "Nav Content",
       "props": [
-        "title"
-      ]
-    },
-    {
-      "name": "Behavior",
-      "props": [
+        "title",
         "link"
       ]
     },
     {
-      "name": "Appearance",
+      "name": "Nav Appearance",
       "props": [
         "orientation",
         "variant",
@@ -36,13 +61,175 @@
         "extendedUnderline",
         "itemSpacing"
       ]
+    },
+    {
+      "name": "Nav Events",
+      "props": [
+        "onClick"
+      ]
+    },
+    {
+      "name": "NavItem Content",
+      "props": [
+        "text",
+        "iconLeft",
+        "iconRight",
+        "imageUrl",
+        "target"
+      ]
+    },
+    {
+      "name": "NavItem State",
+      "props": [
+        "active",
+        "disabled",
+        "highlighted_border"
+      ]
+    },
+    {
+      "name": "NavItem Typography",
+      "props": [
+        "fontSize",
+        "fontWeight"
+      ]
+    },
+    {
+      "name": "NavItem Collapsible",
+      "props": [
+        "collapsible",
+        "collapsed",
+        "collapsibleTrail"
+      ]
+    },
+    {
+      "name": "NavItem Spacing",
+      "props": [
+        "margin",
+        "marginY",
+        "paddingY"
+      ]
     }
   ],
   "presets": [
     {
-      "name": "Default",
-      "props": {},
-      "children": "Nav content"
+      "name": "Vertical",
+      "structureMode": "standard",
+      "props": {
+        "orientation": "vertical",
+        "title": "Menu",
+        "link": "#"
+      },
+      "children": "<NavItem link=\"#\" text=\"Photos\" />\n<NavItem link=\"#\" text=\"Music\" />\n<NavItem active link=\"#\" text=\"Video\" />\n<NavItem link=\"#\" text=\"Files\" />"
+    },
+    {
+      "name": "Horizontal",
+      "structureMode": "standard",
+      "props": {
+        "orientation": "horizontal",
+        "link": "#"
+      },
+      "children": "<NavItem link=\"#\" text=\"About\" />\n<NavItem active link=\"#\" text=\"Case Studies\" />\n<NavItem link=\"#\" text=\"Service\" />\n<NavItem link=\"#\" text=\"Contacts\" />"
+    },
+    {
+      "name": "Subtle",
+      "structureMode": "standard",
+      "props": {
+        "orientation": "vertical",
+        "variant": "subtle",
+        "title": "Browse"
+      },
+      "children": "<NavItem link=\"#\" text=\"Photos\" />\n<NavItem active link=\"#\" text=\"Music\" />\n<NavItem link=\"#\" text=\"Video\" />\n<NavItem link=\"#\" text=\"Files\" />"
+    },
+    {
+      "name": "Borderless",
+      "structureMode": "standard",
+      "props": {
+        "borderless": true,
+        "orientation": "vertical",
+        "title": "Menu"
+      },
+      "children": "<NavItem link=\"#\" text=\"Photos\" />\n<NavItem active link=\"#\" text=\"Music\" />\n<NavItem link=\"#\" text=\"Video\" />"
+    },
+    {
+      "name": "No Highlight",
+      "structureMode": "standard",
+      "props": {
+        "highlight": false,
+        "orientation": "vertical",
+        "title": "Menu"
+      },
+      "children": "<NavItem link=\"#\" text=\"Photos\" />\n<NavItem active link=\"#\" text=\"Music\" />\n<NavItem link=\"#\" text=\"Video\" />"
+    },
+    {
+      "name": "Extended Underline",
+      "structureMode": "standard",
+      "props": {
+        "extendedUnderline": true,
+        "orientation": "horizontal",
+        "variant": "normal"
+      },
+      "children": "<NavItem link=\"#\" text=\"About\" />\n<NavItem active link=\"#\" text=\"Case Studies\" />\n<NavItem link=\"#\" text=\"Service\" />\n<NavItem link=\"#\" text=\"Contacts\" />"
+    },
+    {
+      "name": "NavItem Icons",
+      "structureMode": "standard",
+      "props": {
+        "title": "Browse",
+        "active": true,
+        "iconLeft": "comments-alt",
+        "iconRight": "angle-down"
+      },
+      "children": "<NavItem link=\"#\" text=\"Messages\" />\n<NavItem link=\"#\" text=\"Music\" />\n<NavItem link=\"#\" text=\"Video\" />\n<NavItem link=\"#\" text=\"Files\" />"
+    },
+    {
+      "name": "NavItem Disabled",
+      "structureMode": "standard",
+      "props": {
+        "disabled": true
+      },
+      "children": "<NavItem link=\"#\" text=\"Disabled item\" />\n<NavItem link=\"#\" text=\"Music\" />\n<NavItem link=\"#\" text=\"Video\" />\n<NavItem link=\"#\" text=\"Files\" />"
+    },
+    {
+      "name": "NavItem Typography",
+      "structureMode": "standard",
+      "props": {
+        "fontSize": "small",
+        "fontWeight": "bolder"
+      },
+      "children": "<NavItem link=\"#\" text=\"Small bolder item\" />\n<NavItem link=\"#\" text=\"Music\" />\n<NavItem link=\"#\" text=\"Video\" />\n<NavItem link=\"#\" text=\"Files\" />"
+    },
+    {
+      "name": "NavItem Spacing",
+      "structureMode": "standard",
+      "props": {
+        "margin": "none",
+        "paddingY": "xxs"
+      },
+      "children": "<NavItem link=\"#\" text=\"Tight item\" />\n<NavItem link=\"#\" text=\"Music\" />\n<NavItem link=\"#\" text=\"Video\" />\n<NavItem link=\"#\" text=\"Files\" />"
+    },
+    {
+      "name": "Collapsible",
+      "structureMode": "collapsible",
+      "props": {
+        "active": true,
+        "collapsed": false,
+        "collapsible": true,
+        "iconLeft": "city",
+        "iconRight": "angle-down",
+        "text": "Overview"
+      }
+    },
+    {
+      "name": "Collapsible Trail",
+      "structureMode": "collapsible",
+      "props": {
+        "collapsible": true,
+        "collapsibleTrail": true,
+        "fontWeight": "bolder",
+        "iconLeft": "city",
+        "iconRight": "angle-down",
+        "text": "Overview"
+      }
     }
   ],
   "conditionals": {
@@ -51,15 +238,260 @@
         "orientation": "horizontal",
         "variant": "normal"
       }
+    },
+    "collapsed": {
+      "requires": "collapsible",
+      "structureMode": "collapsible"
+    },
+    "collapsibleTrail": {
+      "requires": "collapsible",
+      "structureMode": "collapsible"
     }
   },
   "hints": {
-    "extended_underline": {
-      "when": {
-        "orientation": "horizontal"
-      },
-      "message": "Extended underline applies to horizontal navigation in the normal variant.",
+    "vertical": {
+      "presetName": "Vertical",
+      "message": "Vertical Nav uses editable NavItem children and can include a title link above the item list.",
       "type": "info"
+    },
+    "horizontal": {
+      "presetName": "Horizontal",
+      "message": "Horizontal Nav keeps the same NavItem children but changes layout with orientation=\"horizontal\".",
+      "type": "info"
+    },
+    "subtle": {
+      "presetName": "Subtle",
+      "message": "variant=\"subtle\" changes the Nav visual treatment while Nav passes orientation and variant down to each NavItem.",
+      "type": "info"
+    },
+    "borderless": {
+      "presetName": "Borderless",
+      "message": "borderless removes item borders from the Nav list.",
+      "type": "info"
+    },
+    "no_highlight": {
+      "presetName": "No Highlight",
+      "message": "highlight={false} removes the active item highlight styling.",
+      "type": "info"
+    },
+    "extended_underline": {
+      "presetName": "Extended Underline",
+      "message": "extendedUnderline applies only when orientation=\"horizontal\" and variant=\"normal\".",
+      "type": "info"
+    },
+    "nav_item_icons": {
+      "presetName": "NavItem Icons",
+      "message": "NavItem iconLeft and iconRight add icons around the item text. Enabled NavItem props apply to every NavItem in children.",
+      "type": "info"
+    },
+    "nav_item_disabled": {
+      "presetName": "NavItem Disabled",
+      "message": "disabled makes NavItems non-interactive and removes link navigation.",
+      "type": "info"
+    },
+    "nav_item_typography": {
+      "presetName": "NavItem Typography",
+      "message": "NavItem fontSize and fontWeight control item label styling on every NavItem.",
+      "type": "info"
+    },
+    "nav_item_spacing": {
+      "presetName": "NavItem Spacing",
+      "message": "NavItem margin and paddingY props apply to every NavItem in the list.",
+      "type": "info"
+    },
+    "collapsible": {
+      "presetName": "Collapsible",
+      "message": "collapsible turns a NavItem into a parent item with nested NavItems inside Collapsible.Content.",
+      "type": "info"
+    },
+    "collapsible_trail": {
+      "presetName": "Collapsible Trail",
+      "message": "collapsibleTrail adds the nested trail styling for collapsible Nav groups.",
+      "type": "info"
+    }
+  },
+  "structureModes": {
+    "default": "standard",
+    "modes": {
+      "standard": {
+        "label": "Standard",
+        "template": "<Nav{{props}}>\n  {{children}}\n</Nav>",
+        "children": "<NavItem link=\"#\" text=\"Photos\" />\n<NavItem link=\"#\" text=\"Music\" />\n<NavItem active link=\"#\" text=\"Video\" />\n<NavItem link=\"#\" text=\"Files\" />"
+      },
+      "collapsible": {
+        "label": "Collapsible NavItem",
+        "template": "<Nav{{props}}>\n  <NavItem{{NavItem.props}}>\n    {{children}}\n  </NavItem>\n</Nav>",
+        "children": "<NavItem link=\"#\" text=\"City\" />\n<NavItem link=\"#\" text=\"People\" />\n<NavItem link=\"#\" text=\"Business\" />",
+        "props": {
+          "active": true,
+          "collapsed": false,
+          "collapsible": true,
+          "iconLeft": "city",
+          "iconRight": "angle-down",
+          "link": "#",
+          "text": "Overview"
+        },
+        "propTargets": {
+          "link": "NavItem.props"
+        }
+      }
+    }
+  },
+  "customProps": {
+    "text": {
+      "type": "string",
+      "platforms": [
+        "react"
+      ]
+    },
+    "active": {
+      "type": "boolean",
+      "platforms": [
+        "react"
+      ],
+      "default": false
+    },
+    "disabled": {
+      "type": "boolean",
+      "platforms": [
+        "react"
+      ],
+      "default": false
+    },
+    "iconLeft": {
+      "type": "string",
+      "platforms": [
+        "react"
+      ]
+    },
+    "iconRight": {
+      "type": "string",
+      "platforms": [
+        "react"
+      ]
+    },
+    "imageUrl": {
+      "type": "string",
+      "platforms": [
+        "react"
+      ]
+    },
+    "target": {
+      "type": "enum",
+      "platforms": [
+        "react"
+      ],
+      "values": [
+        "_blank",
+        "_self",
+        "_parent",
+        "_top"
+      ]
+    },
+    "fontSize": {
+      "type": "enum",
+      "platforms": [
+        "react"
+      ],
+      "values": [
+        "normal",
+        "small"
+      ]
+    },
+    "fontWeight": {
+      "type": "enum",
+      "platforms": [
+        "react"
+      ],
+      "values": [
+        "regular",
+        "bold",
+        "bolder"
+      ]
+    },
+    "collapsible": {
+      "type": "boolean",
+      "platforms": [
+        "react"
+      ],
+      "default": false
+    },
+    "collapsed": {
+      "type": "boolean",
+      "platforms": [
+        "react"
+      ],
+      "default": true
+    },
+    "collapsibleTrail": {
+      "type": "boolean",
+      "platforms": [
+        "react"
+      ],
+      "default": false
+    },
+    "highlighted_border": {
+      "type": "boolean",
+      "platforms": [
+        "react"
+      ],
+      "default": true
+    },
+    "margin": {
+      "type": "enum",
+      "platforms": [
+        "react"
+      ],
+      "values": [
+        "none",
+        "xxs",
+        "xs",
+        "sm",
+        "md",
+        "lg",
+        "xl"
+      ]
+    },
+    "marginY": {
+      "type": "enum",
+      "platforms": [
+        "react"
+      ],
+      "values": [
+        "none",
+        "xxs",
+        "xs",
+        "sm",
+        "md",
+        "lg",
+        "xl"
+      ]
+    },
+    "paddingY": {
+      "type": "enum",
+      "platforms": [
+        "react"
+      ],
+      "values": [
+        "none",
+        "xxs",
+        "xs",
+        "sm",
+        "md",
+        "lg",
+        "xl"
+      ]
+    }
+  },
+  "propSyncOnEnable": {
+    "collapsible": {
+      "structureMode": "collapsible"
+    },
+    "collapsed": {
+      "structureMode": "collapsible"
+    },
+    "collapsibleTrail": {
+      "structureMode": "collapsible"
     }
   }
 }

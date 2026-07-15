@@ -2,9 +2,11 @@
   "template": "<ProgressPills{{props}} />",
   "propTargets": {},
   "defaults": {
-    "active": 0,
+    "active": 2,
     "fullWidthPill": false,
-    "steps": 3
+    "steps": 4,
+    "title": "Checkout",
+    "value": "Payment"
   },
   "groups": [
     {
@@ -24,7 +26,8 @@
     {
       "name": "Appearance",
       "props": [
-        "fullWidthPill"
+        "fullWidthPill",
+        "dark"
       ]
     }
   ],
@@ -45,15 +48,6 @@
         "active": 2,
         "title": "Checkout",
         "value": "Payment"
-      }
-    },
-    {
-      "name": "Mid flow (5 steps)",
-      "props": {
-        "steps": 5,
-        "active": 3,
-        "title": "Onboarding",
-        "value": "Step 3 of 5"
       }
     },
     {
@@ -86,5 +80,24 @@
     }
   ],
   "conditionals": {},
-  "hints": {}
+  "hints": {
+    "status": {
+      "when": {
+        "title": "Checkout"
+      },
+      "message": "Title and value add the status label above the pill row.",
+      "type": "info"
+    },
+    "full_width": {
+      "when": {
+        "fullWidthPill": true
+      },
+      "message": "Full-width pills stretch each segment across the available row.",
+      "type": "info"
+    },
+    "active_range": {
+      "message": "Active is zero-based for an empty state and counts completed pills up to the steps total.",
+      "type": "info"
+    }
+  }
 }

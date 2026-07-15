@@ -1,0 +1,148 @@
+{
+  "template": "<Passphrase\n  onChange={(event) => setInput(event.target.value)}\n  value={input}{{props}}\n/>",
+  "wrapper": "const PassphrasePlayground = () => {\n  const [input, setInput] = useState('')\n\n  return {{component}}\n}\n\n<PassphrasePlayground />",
+  "externalImports": [
+    "import React, { useState } from 'react'"
+  ],
+  "hiddenProps": [
+    "onChange",
+    "value"
+  ],
+  "defaults": {
+    "confirmation": false,
+    "inputProps": {
+      "name": "passphrase"
+    },
+    "label": "Passphrase",
+    "requiredIndicator": false,
+    "showTipsBelow": "always",
+    "tips": [
+      "Use a longer phrase.",
+      "Avoid common words.",
+      "Mix in punctuation or numbers."
+    ],
+    "uncontrolled": false
+  },
+  "groups": [
+    {
+      "name": "Content",
+      "props": [
+        "label",
+        "tips",
+        "showTipsBelow"
+      ]
+    },
+    {
+      "name": "State",
+      "props": [
+        "confirmation",
+        "requiredIndicator",
+        "uncontrolled"
+      ]
+    },
+    {
+      "name": "Input",
+      "props": [
+        "inputProps"
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default",
+      "props": {
+        "label": "Passphrase"
+      }
+    },
+    {
+      "name": "Confirmation",
+      "props": {
+        "confirmation": true
+      }
+    },
+    {
+      "name": "Required",
+      "props": {
+        "label": "New passphrase",
+        "requiredIndicator": true
+      }
+    },
+    {
+      "name": "With Tips",
+      "props": {
+        "label": "Passphrase with tips",
+        "tips": [
+          "Use a longer phrase.",
+          "Avoid common words.",
+          "Mix in punctuation or numbers."
+        ]
+      }
+    },
+    {
+      "name": "Responsive Tips",
+      "props": {
+        "label": "Responsive tips",
+        "showTipsBelow": "md",
+        "tips": [
+          "Shown below at medium widths.",
+          "Shown in a popover above that breakpoint."
+        ]
+      }
+    },
+    {
+      "name": "Input Props",
+      "props": {
+        "inputProps": {
+          "id": "passphrase-input",
+          "name": "passphrase",
+          "placeholder": "Type a secure passphrase..."
+        },
+        "label": "Custom input props"
+      }
+    },
+    {
+      "name": "Uncontrolled",
+      "props": {
+        "label": "Uncontrolled passphrase",
+        "uncontrolled": true
+      }
+    }
+  ],
+  "conditionals": {
+    "requiredIndicator": {
+      "requires": "label"
+    }
+  },
+  "hints": {
+    "controlled": {
+      "when": {},
+      "message": "The playground wraps Passphrase with local state so typing updates value through an inline onChange handler.",
+      "type": "info"
+    },
+    "confirmation": {
+      "presetName": "Confirmation",
+      "message": "confirmation changes the default label to Confirm Passphrase and marks this field as the confirmation input.",
+      "type": "info"
+    },
+    "tips": {
+      "presetName": "With Tips",
+      "message": "tips renders the info icon and displays each string as guidance for the passphrase.",
+      "type": "info"
+    },
+    "responsive_tips": {
+      "presetName": "Responsive Tips",
+      "message": "showTipsBelow controls when tips move below the input instead of appearing in the popover.",
+      "type": "info"
+    },
+    "input_props": {
+      "presetName": "Input Props",
+      "message": "inputProps are passed through to the inner TextInput for id, name, placeholder, disabled, and similar input-level options.",
+      "type": "info"
+    },
+    "uncontrolled": {
+      "presetName": "Uncontrolled",
+      "message": "uncontrolled lets Passphrase manage the typed value internally instead of relying on the value prop.",
+      "type": "info"
+    }
+  }
+}

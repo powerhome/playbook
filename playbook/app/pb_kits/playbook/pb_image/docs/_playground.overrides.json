@@ -1,89 +1,164 @@
 {
+  "defaults": {
+    "url": "https://unsplash.it/500/400/?image=634",
+    "alt": "Misty forest",
+    "size": "md",
+    "transition": "fade",
+    "rounded": false
+  },
+  "customProps": {
+    "alt": {
+      "type": "string",
+      "platforms": ["react"]
+    },
+    "url": {
+      "type": "string",
+      "platforms": ["react"]
+    },
+    "size": {
+      "type": "enum",
+      "platforms": ["react"],
+      "values": [
+        "xs",
+        "sm",
+        "md",
+        "lg",
+        "xl"
+      ],
+      "default": "md"
+    },
+    "rounded": {
+      "type": "boolean",
+      "platforms": ["react"],
+      "default": false
+    },
+    "transition": {
+      "type": "enum",
+      "platforms": ["react"],
+      "values": [
+        "blur",
+        "fade",
+        "scale"
+      ],
+      "default": "fade"
+    },
+    "onError": {
+      "type": "function",
+      "platforms": ["react"]
+    }
+  },
   "groups": [
     {
       "name": "Content",
-      "props": ["url", "alt"]
+      "props": [
+        "url",
+        "alt"
+      ]
     },
     {
       "name": "Appearance",
-      "props": ["size", "rounded", "transition"]
+      "props": [
+        "size",
+        "rounded",
+        "transition"
+      ]
+    },
+    {
+      "name": "Events",
+      "props": [
+        "onError"
+      ]
     }
   ],
   "presets": [
     {
-      "name": "Sample photo",
+      "name": "Default",
       "props": {
-        "url": "https://unsplash.it/500/400",
-        "alt": "Sample image"
+        "url": "https://unsplash.it/500/400/?image=634",
+        "alt": "Misty forest",
+        "size": "md",
+        "transition": "fade"
       }
     },
     {
-      "name": "Small",
+      "name": "Extra Small",
       "props": {
-        "url": "https://unsplash.it/500/400",
-        "alt": "Small",
-        "size": "sm"
-      }
-    },
-    {
-      "name": "Medium",
-      "props": {
-        "url": "https://unsplash.it/500/400",
-        "alt": "Medium",
-        "size": "md"
-      }
-    },
-    {
-      "name": "Large",
-      "props": {
-        "url": "https://unsplash.it/500/400",
-        "alt": "Large",
-        "size": "lg"
+        "url": "https://unsplash.it/500/400/?image=634",
+        "alt": "Extra small misty forest",
+        "size": "xs",
+        "transition": "fade"
       }
     },
     {
       "name": "Rounded",
       "props": {
-        "url": "https://unsplash.it/500/400",
-        "alt": "Rounded",
+        "url": "https://unsplash.it/500/400/?image=634",
+        "alt": "Rounded misty forest",
         "rounded": true,
-        "size": "md"
+        "size": "md",
+        "transition": "fade"
       }
     },
     {
-      "name": "Blur transition",
+      "name": "Blur Transition",
       "props": {
-        "url": "https://unsplash.it/500/400",
-        "alt": "Blur",
-        "transition": "blur",
-        "size": "md"
+        "url": "https://unsplash.it/500/400/?image=634",
+        "alt": "Blur transition image",
+        "size": "md",
+        "transition": "blur"
       }
     },
     {
-      "name": "Scale transition",
+      "name": "Scale Transition",
       "props": {
-        "url": "https://unsplash.it/500/400",
-        "alt": "Scale",
-        "transition": "scale",
-        "size": "md"
+        "url": "https://unsplash.it/500/400/?image=634",
+        "alt": "Scale transition image",
+        "size": "md",
+        "transition": "scale"
       }
     },
     {
-      "name": "Fade transition",
+      "name": "Custom Error Handler",
       "props": {
-        "url": "https://unsplash.it/500/400",
-        "alt": "Fade",
-        "transition": "fade",
-        "size": "md"
+        "url": "https://example.invalid/missing-image.jpg",
+        "alt": "Broken image example",
+        "onError": "() => console.log('image failed to load')",
+        "size": "md",
+        "transition": "fade"
       }
     }
   ],
   "conditionals": {},
   "hints": {
-    "lazyload": {
-      "when": { "url": "https://unsplash.it/500/400" },
-      "message": "The kit uses lazyload classes; url is applied as src and data-src.",
+    "default": {
+      "presetName": "Default",
+      "message": "Use the url prop to pass the image URL.",
       "type": "info"
-    }
+    },
+    "rounded": {
+      "presetName": "Rounded",
+      "message": "rounded adds the rounded class while preserving the selected size.",
+      "type": "info"
+    },
+    "blur_transition": {
+      "presetName": "Blur Transition",
+      "message": "Use the transition prop to select the lazyload transition class: fade, blur, or scale.",
+      "type": "info"
+    },
+    "custom_error_handler": {
+      "presetName": "Custom Error Handler",
+      "message": "Use the onError prop to pass a function to handle the image error.",
+      "type": "info"
+    },
+    "Extra Small": {
+      "presetName": "Extra Small",
+      "message": "Use the size prop to change the size of the image.",
+      "type": "info"
+    },
+    "Rounded": {
+      "presetName": "Rounded",
+      "message": "Use the rounded prop to add rounded corners to the image.",
+      "type": "info"
   }
+}
 }

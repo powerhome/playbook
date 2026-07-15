@@ -4,6 +4,7 @@ import { useVirtualizer } from '@tanstack/react-virtual';
 import { Row } from "@tanstack/react-table";
 import { GenericObject } from "../../types";
 import { getRowHeightEstimate } from '../Utilities/TableContainerStyles';
+import { measureElementHeight } from '../Utilities/StickyLayoutHelper';
 
 const AdvancedTableContext = createContext<any>({});
 
@@ -30,8 +31,11 @@ export const AdvancedTableProvider = ({ children, ...props }: {
   
   const [headerHeight, setHeaderHeight] = useState(44);
   const [rowHeight, setRowHeight] = useState(38);
+  const [actionBarHeight, setActionBarHeight] = useState(0);
 
   const measureHeights = useCallback(() => {
+    const wrapper = (props.tableContainerRef?.current || tableContainerRef.current) as HTMLElement | null;
+
     if (headerRef.current) {
       const headerElement = headerRef.current as HTMLElement;
       const headerRect = headerElement.getBoundingClientRect();
@@ -45,7 +49,21 @@ export const AdvancedTableProvider = ({ children, ...props }: {
         setRowHeight(rowRect.height);
       }
     }
-  }, []);
+
+    if (wrapper) {
+      const actionBar = wrapper.querySelector(
+        ".row-selection-actions-card.is-visible, .row-selection-actions-card.show-action-card"
+      ) as HTMLElement | null;
+      const measuredActionBarHeight = actionBar
+        ? measureElementHeight(actionBar)
+        : 0;
+      setActionBarHeight(measuredActionBarHeight);
+      wrapper.style.setProperty(
+        "--advanced-table-action-bar-height",
+        `${measuredActionBarHeight}px`
+      );
+    }
+  }, [props.tableContainerRef]);
 
   useEffect(() => {
     const resizeObserver = new ResizeObserver(() => {
@@ -54,6 +72,12 @@ export const AdvancedTableProvider = ({ children, ...props }: {
 
     if (headerRef.current) {
       resizeObserver.observe(headerRef.current);
+    }
+
+    const wrapper = (props.tableContainerRef?.current || tableContainerRef.current) as HTMLElement | null;
+    const actionBar = wrapper?.querySelector(".row-selection-actions-card");
+    if (actionBar) {
+      resizeObserver.observe(actionBar);
     }
 
     if (sampleRowRef.current) {
@@ -72,7 +96,7 @@ export const AdvancedTableProvider = ({ children, ...props }: {
 
   useEffect(() => {
     measureHeights();
-  }, [table?.getRowModel().rows.length, headerGroupCount, measureHeights]);
+  }, [table?.getRowModel().rows.length, headerGroupCount, props.isActionBarVisible, measureHeights]);
 
 
   // Create a flattened data array that includes ALL components for virtualization
@@ -202,6 +226,7 @@ export const AdvancedTableProvider = ({ children, ...props }: {
     keepPinnedRows: props.keepPinnedRows,
     headerHeight,
     rowHeight,
+    actionBarHeight,
     headerRef,
     sampleRowRef,
     measureHeights,

@@ -1,8 +1,15 @@
 {
+  "defaults": {
+    "active": 2,
+    "fullWidthPill": false,
+    "steps": 4,
+    "title": "Checkout",
+    "value": "Payment"
+  },
   "groups": [
     { "name": "Content", "props": ["title", "value"] },
     { "name": "Behavior", "props": ["steps", "active"] },
-    { "name": "Appearance", "props": ["fullWidthPill"] }
+    { "name": "Appearance", "props": ["fullWidthPill", "dark"] }
   ],
   "presets": [
     {
@@ -12,10 +19,6 @@
     {
       "name": "Step 2 of 4",
       "props": { "steps": 4, "active": 2, "title": "Checkout", "value": "Payment" }
-    },
-    {
-      "name": "Mid flow (5 steps)",
-      "props": { "steps": 5, "active": 3, "title": "Onboarding", "value": "Step 3 of 5" }
     },
     {
       "name": "Complete",
@@ -47,5 +50,20 @@
     }
   ],
   "conditionals": {},
-  "hints": {}
+  "hints": {
+    "status": {
+      "when": { "title": "Checkout" },
+      "message": "Title and value add the status label above the pill row.",
+      "type": "info"
+    },
+    "full_width": {
+      "when": { "fullWidthPill": true },
+      "message": "Full-width pills stretch each segment across the available row.",
+      "type": "info"
+    },
+    "active_range": {
+      "message": "Active is zero-based for an empty state and counts completed pills up to the steps total.",
+      "type": "info"
+    }
+  }
 }

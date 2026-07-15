@@ -1,1 +1,1 @@
-You can add drag event listeners for `drag`, `dragend`, `dragenter`, `dragleave`, `dragover`, `dragstart`, and `drop`.
+You can add drag event listeners for desktop `drag`, `dragend`, `dragenter`, `dragleave`, `dragover`, `dragstart`, and `drop` or mobile `touch`, `touchend`, `touchcancel`,`touchleave`,  `touchmove`, `touchstart`

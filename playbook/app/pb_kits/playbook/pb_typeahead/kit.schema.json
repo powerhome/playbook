@@ -127,7 +127,7 @@
       ]
     },
     "optionsByContext": {
-      "type": "Record<string, Array<{label: string; value?: string}>>",
+      "type": "GenericObject",
       "platforms": [
         "react",
         "rails"
@@ -180,6 +180,36 @@
       ],
       "default": false
     },
+    "enablePillReorder": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "showPillIndex": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": false
+    },
+    "pillDragHandle": {
+      "type": "boolean",
+      "platforms": [
+        "react",
+        "rails"
+      ],
+      "default": true
+    },
+    "styles": {
+      "type": "TypeaheadStylesConfig",
+      "platforms": [
+        "react"
+      ]
+    },
     "defaultOptions": {
       "platforms": [
         "rails"
@@ -204,7 +234,7 @@
       "platforms": [
         "rails"
       ],
-      "type": "string"
+      "type": "GenericObject"
     },
     "isMulti": {
       "platforms": [

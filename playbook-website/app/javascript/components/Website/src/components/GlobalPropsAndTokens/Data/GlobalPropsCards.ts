@@ -191,15 +191,22 @@ export const GlobalPropsCards = [
   {
     title: "Group Hover",
     description:
-      "Enables hover effects on child elements when the parent element is hovered over.",
+    "Enables hover effects on child elements when the parent element is hovered over.",
     icon: "layer-group",
     link: "/global_props/group_hover",
   },
   {
     title: "Shadow",
     description:
-      "Applies depth effects using box shadows to elevate components visually and create visual hierarchy.",
+    "Applies depth effects using box shadows to elevate components visually and create visual hierarchy.",
     icon: "shadow",
     link: "/global_props/shadow",
+  },
+  {
+    title: "Border",
+    description:
+      "Applies specific border styles to all sides, individual sides, or horizontal and vertical axes.",
+    icon: "border-all",
+    link: "/global_props/border",
   }
 ];

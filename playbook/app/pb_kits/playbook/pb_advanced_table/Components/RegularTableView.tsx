@@ -6,7 +6,7 @@ import { GenericObject } from "../../types"
 import { isChrome } from "../Utilities/BrowserCheck"
 import { findColumnDefByAccessor } from "../Utilities/ColumnStylingHelper"
 import { playbookColumnLayoutStylesFromMeta } from "../Utilities/ColumnLayoutHelper"
-import { getRowColorClass, shouldShowLoadingIndicator } from "../Utilities/RowUtils"
+import { getFontWeight, getRowColorClass, getRowStyle, shouldShowLoadingIndicator } from "../Utilities/RowUtils"
 
 import LoadingInline from "../../pb_loading_inline/_loading_inline"
 import Checkbox from "../../pb_checkbox/_checkbox"
@@ -81,6 +81,7 @@ const TableCellRenderer = ({
         
         const paddingValue = colDef?.columnStyling?.cellPadding ?? customRowStyle?.cellPadding
         const paddingClass = paddingValue ? `p_${paddingValue}` : undefined
+        const fontWeight = getFontWeight(customRowStyle)
 
         return (
           <td
@@ -103,6 +104,7 @@ const TableCellRenderer = ({
                   : undefined,
                   backgroundColor: cellBackgroundColor || (i === 0 && customRowStyle?.backgroundColor),
                   color: cellFontColor || customRowStyle?.fontColor,
+                  fontWeight,
             }}
           >
             {collapsibleTrail && i === 0 && row.depth > 0 && renderCollapsibleTrail(row.depth)}
@@ -136,6 +138,7 @@ export const RegularTableView = ({
     pinnedRows,
     headerHeight,
     rowHeight,
+    actionBarHeight,
     rowStyling = [],
     sampleRowRef,
   } = useContext(AdvancedTableContext)
@@ -159,22 +162,29 @@ export const RegularTableView = ({
   );
 
   // Row pinning
-  function PinnedRow({ row }: { row: Row<any> }) {
-    const customRowStyle = rowStyling?.length > 0 && rowStyling?.find((s: GenericObject) => s?.rowId === row.id);
+  function PinnedRow({ row, position }: { row: Row<any>; position: 'top' | 'bottom' }) {
+    const customRowStyle = getRowStyle(rowStyling, row);
+    const bottomRowsCount = table.getBottomRows().length;
+
     return (
       <tr
-          className={classnames(
-            `pinned-row`,
-          )}
+          className={classnames('pinned-row', {
+            'pinned-row-bottom': position === 'bottom',
+          })}
           style={{
             backgroundColor: customRowStyle?.backgroundColor ? customRowStyle?.backgroundColor : 'white',
             color: customRowStyle?.fontColor,
             position: 'sticky',
             top:
-              row.getIsPinned() === 'top'
-                  ? `${row.getPinnedIndex() * rowHeight + headerHeight}px`
+            position === 'top'
+                ? `${row.getPinnedIndex() * rowHeight + headerHeight + actionBarHeight}px`
+                : undefined,
+            bottom:
+              position === 'bottom'
+                  ? `${(bottomRowsCount - 1 - row.getPinnedIndex()) * rowHeight}px`
                   : undefined,
-            zIndex: '3'
+            zIndex: '3',
+            fontWeight: getFontWeight(customRowStyle),
           }}
       >
         <TableCellRenderer
@@ -197,6 +207,7 @@ export const RegularTableView = ({
     <>
       {pinnedRows && table.getTopRows().map((row: Row<GenericObject>) => (
         <PinnedRow key={row.id}
+            position="top"
             row={row}
         />
       ))}
@@ -204,7 +215,7 @@ export const RegularTableView = ({
         const isFirstChildofSubrow = row.depth > 0 && row.index === 0;
         const numberOfColumns = table.getAllFlatColumns().length;
         const isFirstRegularRow = rowIndex === 0 && !row.getIsPinned();
-        const customRowStyle = rowStyling?.length > 0 && rowStyling?.find((s: GenericObject) => s?.rowId === row.id);
+        const customRowStyle = getRowStyle(rowStyling, row);
 
         // Use functions from RowUtils for consistent cell coloring
         const rowColor = getRowColorClass(row, inlineRowLoading || false);
@@ -227,7 +238,11 @@ export const RegularTableView = ({
                 className={`${rowColor} ${row.depth > 0 ? `depth-sub-row-${row.depth}` : ""}`}
                 id={`${row.index}-${row.id}-${row.depth}-row`}
                 ref={isFirstRegularRow ? sampleRowRef : null}
-                style={{backgroundColor: customRowStyle?.backgroundColor, color: customRowStyle?.fontColor}}
+                style={{
+                  backgroundColor: customRowStyle?.backgroundColor,
+                  color: customRowStyle?.fontColor,
+                  fontWeight: getFontWeight(customRowStyle),
+                }}
             >
               {/* Render custom checkbox column when we want selectableRows for non-expanding tables */}
               {selectableRows && !hasAnySubRows && (
@@ -266,6 +281,12 @@ export const RegularTableView = ({
           </React.Fragment>
         );
       })}
+      {pinnedRows && table.getBottomRows().map((row: Row<GenericObject>) => (
+        <PinnedRow key={row.id}
+            position="bottom"
+            row={row}
+        />
+      ))}
     </>
   );
 }

@@ -5,50 +5,208 @@
     "disabled": false,
     "error": "",
     "hiddenInputs": false,
-    "initialCountry": "",
-    "label": "",
-    "name": "",
+    "initialCountry": "us",
+    "label": "Phone Number",
+    "name": "phone_number",
     "required": false,
     "requiredIndicator": false,
     "value": "",
     "formatAsYouType": false,
     "strictMode": false,
     "countrySearch": false,
-    "showPlaceholder": false
+    "showPlaceholder": false,
+    "id": "phone-number-playground"
   },
   "groups": [
     {
-      "name": "Props",
+      "name": "Input",
       "props": [
-        "dark",
-        "disabled",
-        "error",
-        "hiddenInputs",
-        "initialCountry",
-        "isValid",
+        "id",
         "label",
         "name",
-        "onChange",
-        "onValidate",
+        "value",
+        "disabled",
+        "onChange"
+      ]
+    },
+    {
+      "name": "Country",
+      "props": [
+        "initialCountry",
+        "preferredCountries",
         "onlyCountries",
         "excludeCountries",
-        "preferredCountries",
+        "countrySearch"
+      ]
+    },
+    {
+      "name": "Validation",
+      "props": [
         "required",
         "requiredIndicator",
-        "value",
+        "error",
+        "strictMode"
+      ]
+    },
+    {
+      "name": "Formatting",
+      "props": [
         "formatAsYouType",
-        "strictMode",
-        "countrySearch",
-        "showPlaceholder"
+        "showPlaceholder",
+        "hiddenInputs"
       ]
     }
   ],
   "presets": [
     {
       "name": "Default",
-      "props": {}
+      "props": {
+        "id": "phone-number-default",
+        "initialCountry": "us",
+        "label": "Phone Number",
+        "name": "phone_number"
+      }
+    },
+    {
+      "name": "Initial Country",
+      "props": {
+        "id": "phone-number-initial-country",
+        "initialCountry": "br",
+        "label": "Brazil Phone Number",
+        "name": "brazil_phone_number"
+      }
+    },
+    {
+      "name": "Preferred Countries",
+      "props": {
+        "id": "phone-number-preferred",
+        "initialCountry": "us",
+        "label": "Preferred Countries",
+        "name": "preferred_phone_number",
+        "preferredCountries": [
+          "us",
+          "br",
+          "ph",
+          "gb"
+        ]
+      }
+    },
+    {
+      "name": "Only Countries",
+      "props": {
+        "id": "phone-number-only-countries",
+        "initialCountry": "us",
+        "label": "North America",
+        "name": "north_america_phone_number",
+        "onlyCountries": [
+          "us",
+          "ca",
+          "mx"
+        ]
+      }
+    },
+    {
+      "name": "Exclude Countries",
+      "props": {
+        "id": "phone-number-exclude-countries",
+        "excludeCountries": [
+          "cn",
+          "ru"
+        ],
+        "initialCountry": "us",
+        "label": "Filtered Countries",
+        "name": "filtered_phone_number"
+      }
+    },
+    {
+      "name": "Formatted",
+      "props": {
+        "id": "phone-number-formatted",
+        "formatAsYouType": true,
+        "initialCountry": "us",
+        "label": "Formatted Phone Number",
+        "name": "formatted_phone_number",
+        "showPlaceholder": true
+      }
+    },
+    {
+      "name": "Disabled",
+      "props": {
+        "id": "phone-number-disabled",
+        "disabled": true,
+        "initialCountry": "us",
+        "label": "Disabled Phone Number",
+        "name": "disabled_phone_number",
+        "value": "2155550100"
+      }
+    },
+    {
+      "name": "Country Search",
+      "props": {
+        "id": "phone-number-country-search",
+        "countrySearch": true,
+        "initialCountry": "us",
+        "label": "Country Search",
+        "name": "country_search_phone_number"
+      }
     }
   ],
-  "conditionals": {},
-  "hints": {}
+  "conditionals": {
+    "requiredIndicator": {
+      "requires": "required"
+    },
+    "hiddenInputs": {
+      "requires": "name"
+    }
+  },
+  "hints": {
+    "default": {
+      "when": {},
+      "message": "Default shows a phone number input.",
+      "type": "info"
+    },
+    "initial_country": {
+      "presetName": "Initial Country",
+      "message": "initialCountry accepts an ISO 3166-1 alpha-2 country code such as us, br, ph, or gb.",
+      "type": "info"
+    },
+    "preferred_countries": {
+      "presetName": "Preferred Countries",
+      "message": "preferredCountries moves those country codes to the top of the dropdown order.",
+      "type": "info"
+    },
+    "only_countries": {
+      "presetName": "Only Countries",
+      "message": "onlyCountries limits the dropdown to the listed country codes.",
+      "type": "info"
+    },
+    "exclude_countries": {
+      "presetName": "Exclude Countries",
+      "message": "excludeCountries removes the listed country codes from the dropdown.",
+      "type": "info"
+    },
+    "formatted": {
+      "presetName": "Formatted",
+      "message": "formatAsYouType formats the visible value as the user types; showPlaceholder asks intl-tel-input to provide an example number.",
+      "type": "info"
+    },
+    "country_search": {
+      "presetName": "Country Search",
+      "message": "countrySearch allows users to search for a specific Country within the dropdown. If the range of countries has been limited, only the selected countries will be searchable.",
+      "type": "info"
+    }
+  },
+  "customProps": {
+    "id": {
+      "type": "string",
+      "platforms": [
+        "react"
+      ],
+      "default": "phone-number-playground"
+    }
+  },
+  "hiddenProps": [
+    "isValid",
+    "onValidate"
+  ]
 }

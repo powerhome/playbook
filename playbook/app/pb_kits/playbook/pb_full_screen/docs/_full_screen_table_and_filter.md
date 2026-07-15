@@ -1,0 +1,1 @@
+Full Screen can host composed workflows such as a filter paired with a data table. Filter and sort popovers automatically append to the fullscreen overlay; dropdown menus inside them portal above the overlay via the shared floating UI stack.

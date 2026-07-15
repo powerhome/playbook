@@ -1,0 +1,154 @@
+{
+  "structureModes": {
+    "default": "standard",
+    "modes": {
+      "standard": {
+        "label": "Standard",
+        "template": "<Overlay{{props}}>\n  {{children}}\n</Overlay>"
+      },
+      "fullscreen": {
+        "label": "Fullscreen",
+        "template": "<>\n  <Button\n      onClick={() => setOpen(true)}\n      text=\"Open Fullscreen Overlay\"\n      variant=\"secondary\"\n  />\n  {open && (\n    <Overlay{{props}}>\n      {{children}}\n    </Overlay>\n  )}\n</>",
+        "wrapper": "const FullscreenOverlayExample = () => {\n  const [open, setOpen] = useState(true)\n  const handleClose = () => setOpen(false)\n\n  return {{component}}\n}\n\n<FullscreenOverlayExample />",
+        "externalImports": [
+          "import React, { useState } from 'react'"
+        ]
+      }
+    }
+  },
+  "children": {
+    "editable": true,
+    "default": "<Card padding=\"md\">\n  <Body text=\"Overlay content\" />\n</Card>"
+  },
+  "hiddenProps": [
+    "dynamic",
+    "position",
+    "size"
+  ],
+  "defaults": {
+    "color": "card_light",
+    "gradient": true,
+    "layout": {
+      "bottom": "full"
+    },
+    "opacity": "opacity_6",
+    "scrollBarNone": false,
+    "fullScreen": false
+  },
+  "groups": [
+    {
+      "name": "Appearance",
+      "props": [
+        "color",
+        "opacity",
+        "gradient"
+      ]
+    },
+    {
+      "name": "Layout",
+      "props": [
+        "layout",
+        "fullScreen",
+        "scrollBarNone"
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default",
+      "props": {
+        "color": "card_light",
+        "layout": {
+          "bottom": "full"
+        }
+      },
+      "children": "<Card padding=\"md\">\n  <Body text=\"Overlay content\" />\n</Card>"
+    },
+    {
+      "name": "Black Gradient",
+      "structureMode": "standard",
+      "props": {
+        "color": "black",
+        "opacity": "opacity_6",
+        "layout": {
+          "bottom": "full"
+        }
+      },
+      "children": "<Background\n    alt=\"Colorful abstract background\"\n    backgroundPosition=\"center\"\n    imageUrl=\"https://images.unsplash.com/photo-1528459801416-a9e53bbf4e17?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80\"\n    minHeight=\"320px\"\n    width=\"100%\"\n>\n  <Flex minHeight=\"320px\" orientation=\"column\" padding=\"lg\" vertical=\"center\">\n    <Title dark size={3} text=\"Gradient Overlay\" />\n    <Body color=\"light\" text=\"Full-width Background kit image with Overlay gradient.\" />\n  </Flex>\n</Background>"
+    },
+    {
+      "name": "No Gradient",
+      "structureMode": "standard",
+      "props": {
+        "color": "black",
+        "gradient": false,
+        "opacity": "opacity_4",
+        "layout": {
+          "bottom": "full"
+        }
+      },
+      "children": "<Background\n    alt=\"Colorful abstract background\"\n    backgroundPosition=\"center\"\n    imageUrl=\"https://images.unsplash.com/photo-1528459801416-a9e53bbf4e17?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80\"\n    minHeight=\"320px\"\n    width=\"100%\"\n>\n  <Flex minHeight=\"320px\" orientation=\"column\" padding=\"lg\" vertical=\"center\">\n    <Title dark size={3} text=\"Flat Overlay\" />\n    <Body color=\"light\" text=\"gradient={false} removes the fade treatment.\" />\n  </Flex>\n</Background>"
+    },
+    {
+      "name": "Horizontal",
+      "props": {
+        "color": "card_light",
+        "layout": {
+          "x": "xl"
+        }
+      },
+      "children": "<Flex columnGap=\"lg\" orientation=\"row\" overflowX=\"auto\">\n  <FlexItem fixedSize=\"160px\"><Card>{'Card 1'}</Card></FlexItem>\n  <FlexItem fixedSize=\"160px\"><Card>{'Card 2'}</Card></FlexItem>\n  <FlexItem fixedSize=\"160px\"><Card>{'Card 3'}</Card></FlexItem>\n  <FlexItem fixedSize=\"160px\"><Card>{'Card 4'}</Card></FlexItem>\n  <FlexItem fixedSize=\"160px\"><Card>{'Card 5'}</Card></FlexItem>\n  <FlexItem fixedSize=\"160px\"><Card>{'Card 6'}</Card></FlexItem>\n  <FlexItem fixedSize=\"160px\"><Card>{'Card 7'}</Card></FlexItem>\n  <FlexItem fixedSize=\"160px\"><Card>{'Card 8'}</Card></FlexItem>\n  <FlexItem fixedSize=\"160px\"><Card>{'Card 9'}</Card></FlexItem>\n  <FlexItem fixedSize=\"160px\"><Card>{'Card 10'}</Card></FlexItem>\n  <FlexItem fixedSize=\"160px\"><Card>{'Card 11'}</Card></FlexItem>\n  <FlexItem fixedSize=\"160px\"><Card>{'Card 12'}</Card></FlexItem>\n</Flex>"
+    },
+    {
+      "name": "Full Screen",
+      "structureMode": "fullscreen",
+      "props": {
+        "color": "bg_dark",
+        "fullScreen": true,
+        "gradient": false,
+        "opacity": "opacity_4"
+      },
+      "children": "<FixedConfirmationToast\n    closeable\n    horizontal=\"center\"\n    onClose={handleClose}\n    open={open}\n    status=\"tip\"\n    text=\"Fullscreen overlay content\"\n    vertical=\"top\"\n/>"
+    },
+    {
+      "name": "Hide Scrollbar",
+      "props": {
+        "color": "card_light",
+        "layout": {
+          "x": "xl"
+        },
+        "scrollBarNone": true
+      },
+      "children": "<Flex columnGap=\"lg\" orientation=\"row\" overflowX=\"auto\">\n  <FlexItem fixedSize=\"160px\"><Card>{'Card 1'}</Card></FlexItem>\n  <FlexItem fixedSize=\"160px\"><Card>{'Card 2'}</Card></FlexItem>\n  <FlexItem fixedSize=\"160px\"><Card>{'Card 3'}</Card></FlexItem>\n  <FlexItem fixedSize=\"160px\"><Card>{'Card 4'}</Card></FlexItem>\n  <FlexItem fixedSize=\"160px\"><Card>{'Card 5'}</Card></FlexItem>\n  <FlexItem fixedSize=\"160px\"><Card>{'Card 6'}</Card></FlexItem>\n  <FlexItem fixedSize=\"160px\"><Card>{'Card 7'}</Card></FlexItem>\n  <FlexItem fixedSize=\"160px\"><Card>{'Card 8'}</Card></FlexItem>\n  <FlexItem fixedSize=\"160px\"><Card>{'Card 9'}</Card></FlexItem>\n  <FlexItem fixedSize=\"160px\"><Card>{'Card 10'}</Card></FlexItem>\n  <FlexItem fixedSize=\"160px\"><Card>{'Card 11'}</Card></FlexItem>\n  <FlexItem fixedSize=\"160px\"><Card>{'Card 12'}</Card></FlexItem>\n</Flex>"
+    }
+  ],
+  "conditionals": {
+    "opacity": {
+      "requires": {
+        "gradient": false
+      }
+    }
+  },
+  "hints": {
+    "layout": {
+      "when": {},
+      "message": "layout controls overlay direction and size. Use keys like bottom, top, x, or y with token values like full, xl, or percentages.",
+      "type": "info"
+    },
+    "gradient": {
+      "presetName": "No Gradient",
+      "message": "gradient={false} removes the default gradient treatment and uses a flatter color overlay.",
+      "type": "info"
+    },
+    "fullscreen": {
+      "presetName": "Full Screen",
+      "message": "fullScreen changes the overlay to a fixed viewport layer; pair it with content that can close or explain the state.",
+      "type": "info"
+    },
+    "scrollbar": {
+      "presetName": "Hide Scrollbar",
+      "message": "scrollBarNone hides the scrollbar while preserving scrollable overflow content.",
+      "type": "info"
+    }
+  }
+}

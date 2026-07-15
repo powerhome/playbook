@@ -1,10 +1,103 @@
 {
   "template": "<PbLineGraph{{props}} />",
   "propTargets": {},
-  "defaults": {},
+  "defaults": {
+    "options": {
+      "series": [
+        {
+          "name": "Installation",
+          "data": [
+            43934,
+            52503,
+            57177,
+            69658,
+            97031,
+            119931,
+            137133,
+            154175
+          ]
+        },
+        {
+          "name": "Manufacturing",
+          "data": [
+            24916,
+            24064,
+            29742,
+            29851,
+            32490,
+            30282,
+            38121,
+            40434
+          ]
+        },
+        {
+          "name": "Sales & Distribution",
+          "data": [
+            11744,
+            17722,
+            16005,
+            19771,
+            20185,
+            24377,
+            32147,
+            39387
+          ]
+        },
+        {
+          "name": "Project Development",
+          "data": [
+            null,
+            null,
+            7988,
+            12169,
+            15112,
+            22452,
+            34400,
+            34227
+          ]
+        },
+        {
+          "name": "Other",
+          "data": [
+            12908,
+            5948,
+            8105,
+            11248,
+            8989,
+            11816,
+            18274,
+            18111
+          ]
+        }
+      ],
+      "title": {
+        "text": "Solar Employment Growth by Sector, 2010-2016"
+      },
+      "subtitle": {
+        "text": "Source: thesolarfoundation.com"
+      },
+      "xAxis": {
+        "categories": [
+          "Jan",
+          "Feb",
+          "Mar",
+          "Apr",
+          "May",
+          "Jun",
+          "Jul",
+          "Aug"
+        ]
+      },
+      "yAxis": {
+        "title": {
+          "text": "Number of Employees"
+        }
+      }
+    }
+  },
   "groups": [
     {
-      "name": "Props",
+      "name": "Chart",
       "props": [
         "options"
       ]
@@ -13,9 +106,304 @@
   "presets": [
     {
       "name": "Default",
-      "props": {}
+      "props": {
+        "options": {
+          "series": [
+            {
+              "name": "Installation",
+              "data": [
+                43934,
+                52503,
+                57177,
+                69658,
+                97031,
+                119931,
+                137133,
+                154175
+              ]
+            },
+            {
+              "name": "Manufacturing",
+              "data": [
+                24916,
+                24064,
+                29742,
+                29851,
+                32490,
+                30282,
+                38121,
+                40434
+              ]
+            },
+            {
+              "name": "Sales & Distribution",
+              "data": [
+                11744,
+                17722,
+                16005,
+                19771,
+                20185,
+                24377,
+                32147,
+                39387
+              ]
+            },
+            {
+              "name": "Project Development",
+              "data": [
+                null,
+                null,
+                7988,
+                12169,
+                15112,
+                22452,
+                34400,
+                34227
+              ]
+            },
+            {
+              "name": "Other",
+              "data": [
+                12908,
+                5948,
+                8105,
+                11248,
+                8989,
+                11816,
+                18274,
+                18111
+              ]
+            }
+          ],
+          "title": {
+            "text": "Solar Employment Growth by Sector, 2010-2016"
+          },
+          "subtitle": {
+            "text": "Source: thesolarfoundation.com"
+          },
+          "xAxis": {
+            "categories": [
+              "Jan",
+              "Feb",
+              "Mar",
+              "Apr",
+              "May",
+              "Jun",
+              "Jul",
+              "Aug"
+            ]
+          },
+          "yAxis": {
+            "title": {
+              "text": "Number of Employees"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "Legend",
+      "props": {
+        "options": {
+          "series": [
+            {
+              "name": "Number of Installations",
+              "data": [
+                43934,
+                52503,
+                57177,
+                69658,
+                97031,
+                119931,
+                137133,
+                154175
+              ]
+            }
+          ],
+          "title": {
+            "text": "Line Graph with Legend"
+          },
+          "xAxis": {
+            "categories": [
+              "Jan",
+              "Feb",
+              "Mar",
+              "Apr",
+              "May",
+              "Jun",
+              "Jul",
+              "Aug"
+            ]
+          },
+          "yAxis": {
+            "min": 0,
+            "title": {
+              "text": "Number of Employees"
+            }
+          },
+          "legend": {
+            "enabled": true
+          }
+        }
+      }
+    },
+    {
+      "name": "Custom Colors",
+      "props": {
+        "options": {
+          "title": {
+            "text": "Line Graph with Custom Data Colors"
+          },
+          "xAxis": {
+            "categories": [
+              "Jan",
+              "Feb",
+              "Mar",
+              "Apr",
+              "May",
+              "Jun",
+              "Jul",
+              "Aug"
+            ]
+          },
+          "yAxis": {
+            "min": 0,
+            "title": {
+              "text": "Number of Employees"
+            }
+          },
+          "series": [
+            {
+              "name": "Installation",
+              "data": [
+                43934,
+                52503,
+                57177,
+                69658,
+                97031,
+                119931,
+                137133,
+                154175
+              ]
+            },
+            {
+              "name": "Manufacturing",
+              "data": [
+                24916,
+                28064,
+                29742,
+                40851,
+                50590,
+                65282,
+                70121,
+                85434
+              ]
+            },
+            {
+              "name": "Sales & Distribution",
+              "data": [
+                11744,
+                17722,
+                16005,
+                19771,
+                25185,
+                28377,
+                36147,
+                43387
+              ]
+            }
+          ],
+          "colors": [
+            "#144075",
+            "#005a8b",
+            "#f9b115"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Tall",
+      "props": {
+        "options": {
+          "chart": {
+            "height": 500
+          },
+          "series": [
+            {
+              "name": "Installation",
+              "data": [
+                43934,
+                52503,
+                57177,
+                69658,
+                97031,
+                119931,
+                137133,
+                154175
+              ]
+            },
+            {
+              "name": "Manufacturing",
+              "data": [
+                24916,
+                24064,
+                29742,
+                29851,
+                32490,
+                30282,
+                38121,
+                40434
+              ]
+            }
+          ],
+          "title": {
+            "text": "Line Graph with Custom Height"
+          },
+          "xAxis": {
+            "categories": [
+              "Jan",
+              "Feb",
+              "Mar",
+              "Apr",
+              "May",
+              "Jun",
+              "Jul",
+              "Aug"
+            ]
+          },
+          "yAxis": {
+            "title": {
+              "text": "Number of Employees"
+            }
+          }
+        }
+      }
     }
   ],
   "conditionals": {},
-  "hints": {}
+  "hints": {
+    "charts_import": {
+      "when": {},
+      "message": "Highcharts kits are imported from playbook-ui/charts so apps can load the chart bundle only when needed.",
+      "type": "info"
+    },
+    "legend": {
+      "presetName": "Legend",
+      "message": "Line graph legends are controlled through options.legend.enabled.",
+      "type": "info"
+    },
+    "colors": {
+      "presetName": "Custom Colors",
+      "message": "Use options.colors to override the Highcharts series color palette.",
+      "type": "info"
+    },
+    "tall": {
+      "presetName": "Tall",
+      "message": "Set options.chart.height when a line graph needs more vertical space.",
+      "type": "info"
+    }
+  },
+  "externalImports": [
+    "import { PbLineGraph } from 'playbook-ui/charts'"
+  ]
 }

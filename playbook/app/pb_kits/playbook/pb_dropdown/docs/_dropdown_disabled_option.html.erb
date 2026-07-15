@@ -1,0 +1,10 @@
+<%
+  options = [
+    { label: "Available Option", value: "available", id: "available-option" },
+    { label: "Coming Soon", value: "coming-soon", id: "coming-soon", disabled: true },
+    { label: "Another Available", value: "another-available", id: "another-available" },
+    { label: "Locked Feature", value: "locked-feature", id: "locked-feature", disabled: true },
+  ]
+%>
+
+<%= pb_rails("dropdown", props: { label: "Disabled Options", options: options }) %>

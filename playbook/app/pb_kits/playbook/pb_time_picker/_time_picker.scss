@@ -478,3 +478,45 @@
     }
   }
 }
+
+.pb_time_picker_panel_portal,
+.pb_time_picker_floating_shell {
+  margin: 0;
+  padding: 0;
+  pointer-events: auto;
+  overflow: visible;
+
+  .pb_time_picker_container {
+    overflow: visible;
+    pointer-events: auto;
+    width: 314.2px;
+    min-width: 314.2px;
+
+    &.pb_time_picker_container_24hour {
+      width: 170.4px;
+      min-width: 170.4px;
+    }
+  }
+
+  .pb_time_selection {
+    max-height: none;
+    overflow: visible;
+    flex-wrap: nowrap;
+  }
+
+  .time_dropdown {
+    pointer-events: auto;
+  }
+}
+
+// Rails dialog / filter portal: shell is positioned via JS; keep it out of flex layout.
+.pb_time_picker_floating_shell {
+  pointer-events: none;
+
+  .pb_time_picker_container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin-top: 0;
+  }
+}

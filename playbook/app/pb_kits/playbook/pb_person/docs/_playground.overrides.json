@@ -1,7 +1,7 @@
 {
   "defaults": {
-    "firstName": "Anna",
-    "lastName": "Black"
+    "firstName": "Kyle",
+    "lastName": "Fadigan"
   },
   "groups": [
     {
@@ -11,18 +11,43 @@
   ],
   "presets": [
     {
-      "name": "Full name",
-      "props": { "firstName": "Anna", "lastName": "Black" }
+      "name": "Full Name",
+      "props": {
+        "firstName": "Kyle",
+        "lastName": "Fadigan"
+      }
     },
     {
-      "name": "First name only",
-      "props": { "firstName": "Anna", "lastName": "" }
+      "name": "First Name Only",
+      "props": {
+        "firstName": "Kyle",
+        "lastName": ""
+      }
     },
     {
-      "name": "Hyphenated last name",
-      "props": { "firstName": "Anna", "lastName": "Black-Smith" }
+      "name": "Last Name Only",
+      "props": {
+        "firstName": "",
+        "lastName": "Fadigan"
+      }
     }
   ],
   "conditionals": {},
-  "hints": {}
+  "hints": {
+    "full_name": {
+      "presetName": "Full Name",
+      "message": "Person joins firstName and lastName into the display name.",
+      "type": "info"
+    },
+    "first_name_only": {
+      "presetName": "First Name Only",
+      "message": "If lastName is blank, Person renders the available firstName without extra spacing.",
+      "type": "info"
+    },
+    "last_name_only": {
+      "presetName": "Last Name Only",
+      "message": "If firstName is blank, Person renders the available lastName without extra spacing.",
+      "type": "info"
+    }
+  }
 }
