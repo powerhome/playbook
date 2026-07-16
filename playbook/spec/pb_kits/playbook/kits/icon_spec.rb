@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require "tmpdir"
 require_relative "../../../../app/pb_kits/playbook/pb_icon/icon"
 
 RSpec.describe Playbook::PbIcon::Icon do
@@ -97,6 +98,64 @@ RSpec.describe Playbook::PbIcon::Icon do
       icon = "user"
 
       expect(subject.new(icon: icon).classname).not_to include "color_"
+    end
+  end
+
+  # A custom_icon / icon value can originate from application input, so the SVG
+  # source loader must never treat it as a shell command, a path outside the
+  # application, or a non-http scheme. See #svg_content / #read_svg_content.
+  describe "secure custom SVG loading" do
+    it "reads an SVG that lives inside an allowed root" do
+      svg_path = Playbook::Engine.root.join("app/pb_kits/playbook/utilities/icons/clock.svg").to_s
+
+      expect(subject.new(custom_icon: svg_path).send(:read_svg_content, svg_path)).to include("<svg")
+    end
+
+    it "never executes a shell command supplied as an icon source", :aggregate_failures do
+      Dir.mktmpdir do |dir|
+        sentinel = File.join(dir, "pb_icon_rce_sentinel")
+        payload = "|touch #{sentinel} #.svg"
+
+        result = subject.new(custom_icon: payload).send(:read_svg_content, payload)
+
+        expect(result).to eq("")
+        expect(File).not_to exist(sentinel)
+      end
+    end
+
+    it "refuses to read files outside the allowed roots (path traversal)" do
+      Dir.mktmpdir do |dir|
+        outside_svg = File.join(dir, "secret.svg")
+        File.write(outside_svg, "<svg>secret</svg>")
+
+        expect(subject.new(custom_icon: outside_svg).send(:read_svg_content, outside_svg)).to eq("")
+      end
+    end
+
+    it "reads an SVG from a mounted engine whose root is outside Rails.root" do
+      Dir.mktmpdir do |engine_dir|
+        engine_svg = File.join(engine_dir, "logo.svg")
+        File.write(engine_svg, "<svg>engine</svg>")
+        Class.new(Rails::Engine) { define_singleton_method(:root) { Pathname.new(engine_dir) } }
+
+        expect(subject.new(custom_icon: engine_svg).send(:read_svg_content, engine_svg)).to include("<svg")
+      end
+    end
+
+    it "refuses to read a non-svg file even when it lives inside an allowed root" do
+      Dir.mktmpdir do |engine_dir|
+        secret = File.join(engine_dir, "master.key")
+        File.write(secret, "fake_secret_key_base")
+        Class.new(Rails::Engine) { define_singleton_method(:root) { Pathname.new(engine_dir) } }
+
+        expect(subject.new(custom_icon: secret).send(:read_svg_content, secret)).to eq("")
+      end
+    end
+
+    it "refuses non-http url schemes", :aggregate_failures do
+      %w[file:///etc/passwd ftp://example.com/icon.svg].each do |source|
+        expect(subject.new(custom_icon: source).send(:read_svg_content, source)).to eq("")
+      end
     end
   end
 end
