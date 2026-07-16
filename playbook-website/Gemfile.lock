@@ -5,7 +5,7 @@ PATH
       actionpack (>= 5.2.4.5)
       actionview (>= 5.2.4.5)
       activesupport (>= 5.2.4.5)
-      view_component (= 2.83.0)
+      view_component (>= 2.83.0, < 5.0)
       vite_rails
 
 GEM
